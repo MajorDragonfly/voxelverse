@@ -12,11 +12,13 @@ var chunk_coordinates: Vector2i = Vector2i.ZERO
 
 @onready var terrain_mesh: MeshInstance3D = $TerrainMesh
 @onready var terrain_collision: CollisionShape3D = $TerrainCollision
+@onready var water_mesh: MeshInstance3D = $WaterMesh
 
 
 func _ready() -> void:
 	_position_chunk()
 	generate_terrain()
+	_create_water_surface()
 
 
 func get_chunk_width() -> float:
@@ -237,3 +239,41 @@ func _apply_terrain_material() -> void:
 	material.roughness = 1.0
 
 	terrain_mesh.material_override = material
+
+
+func _create_water_surface() -> void:
+	var plane_mesh := PlaneMesh.new()
+
+	plane_mesh.size = Vector2(
+		get_chunk_width(),
+		get_chunk_depth()
+	)
+
+	var water_material := StandardMaterial3D.new()
+
+	water_material.albedo_color = Color(
+		0.05,
+		0.30,
+		0.52,
+		0.62
+	)
+
+	water_material.transparency = (
+		BaseMaterial3D.TRANSPARENCY_ALPHA
+	)
+
+	water_material.roughness = 0.18
+	water_material.metallic = 0.0
+
+	water_mesh.mesh = plane_mesh
+	water_mesh.material_override = water_material
+
+	water_mesh.position = Vector3(
+		0.0,
+		WorldGenerator.get_sea_level() + 0.02,
+		0.0
+	)
+
+	water_mesh.cast_shadow = (
+		GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	)
