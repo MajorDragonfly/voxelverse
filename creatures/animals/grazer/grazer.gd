@@ -15,6 +15,10 @@ extends CharacterBody3D
 @export_range(1.0, 100.0, 1.0) var maximum_health: float = 5.0
 @export_range(0.1, 20.0, 0.1) var bite_damage: float = 1.0
 
+@export_category("Food")
+@export_range(1, 10, 1) var meat_portions: int = 3
+@export_range(1.0, 100.0, 1.0) var hunger_restore_per_portion: float = 25.0
+
 @export_category("Procedural Appearance")
 @export_range(0.15, 0.60, 0.05) var voxel_size: float = 0.25
 @export_range(3, 8, 1) var body_length_voxels: int = 5
@@ -47,8 +51,17 @@ const EYE_COLOR: Color = Color(
 	1.0
 )
 
+const CORPSE_TINT: Color = Color(
+	0.52,
+	0.40,
+	0.34,
+	1.0
+)
+
 
 var current_health: float
+var remaining_meat_portions: int
+var is_dead: bool = false
 
 var _random := RandomNumberGenerator.new()
 var _move_direction: Vector3 = Vector3.ZERO
@@ -62,6 +75,7 @@ var _initialized: bool = false
 
 func _ready() -> void:
 	current_health = maximum_health
+	remaining_meat_portions = meat_portions
 
 	call_deferred("_initialize_creature")
 
@@ -80,6 +94,10 @@ func _initialize_creature() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not _initialized:
+		return
+
+	if is_dead:
+		_process_corpse_physics(delta)
 		return
 
 	_decision_timer -= delta
@@ -116,8 +134,24 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func _process_corpse_physics(delta: float) -> void:
+	velocity.x = 0.0
+	velocity.z = 0.0
+
+	if is_on_floor():
+		velocity.y = -0.1
+	else:
+		velocity.y -= fall_acceleration * delta
+
+	move_and_slide()
+
+
 func interact(actor: Node) -> void:
 	if actor == null:
+		return
+
+	if is_dead:
+		_try_eat_corpse(actor)
 		return
 
 	if not actor.has_method("can_perform_action"):
@@ -142,10 +176,64 @@ func interact(actor: Node) -> void:
 	)
 
 
+func _try_eat_corpse(actor: Node) -> void:
+	if remaining_meat_portions <= 0:
+		queue_free()
+		return
+
+	if not actor.has_method("can_perform_action"):
+		return
+
+	var can_eat := bool(
+		actor.call(
+			"can_perform_action",
+			&"eat"
+		)
+	)
+
+	if not can_eat:
+		print(
+			"Grazer corpse interaction blocked. Missing ability: eat"
+		)
+		return
+
+	if not actor.has_method("restore_hunger"):
+		print("Actor cannot restore hunger.")
+		return
+
+	if actor.has_method("get_hunger_ratio"):
+		var hunger_ratio := float(
+			actor.call("get_hunger_ratio")
+		)
+
+		if hunger_ratio >= 0.999:
+			print("Player is not hungry.")
+			return
+
+	actor.call(
+		"restore_hunger",
+		hunger_restore_per_portion
+	)
+
+	remaining_meat_portions -= 1
+
+	print(
+		"Grazer meat eaten. Remaining portions: ",
+		remaining_meat_portions
+	)
+
+	if remaining_meat_portions <= 0:
+		print("Grazer carcass consumed.")
+		queue_free()
+
+
 func receive_hit(
 	damage: float,
 	attacker: Node = null
 ) -> void:
+	if is_dead:
+		return
+
 	if damage <= 0.0:
 		return
 
@@ -167,8 +255,24 @@ func receive_hit(
 
 
 func _die() -> void:
-	print("Grazer died.")
-	queue_free()
+	if is_dead:
+		return
+
+	is_dead = true
+	current_health = 0.0
+
+	_move_direction = Vector3.ZERO
+	_decision_timer = 0.0
+
+	velocity.x = 0.0
+	velocity.z = 0.0
+
+	_apply_corpse_material()
+
+	print(
+		"Grazer died. Meat portions available: ",
+		remaining_meat_portions
+	)
 
 
 func _flee_from(attacker: Node) -> void:
@@ -619,47 +723,13 @@ func _add_face(
 	normal: Vector3,
 	color: Color
 ) -> void:
-	_add_mesh_vertex(
-		surface_tool,
-		point_a,
-		normal,
-		color
-	)
+	_add_mesh_vertex(surface_tool, point_a, normal, color)
+	_add_mesh_vertex(surface_tool, point_b, normal, color)
+	_add_mesh_vertex(surface_tool, point_c, normal, color)
 
-	_add_mesh_vertex(
-		surface_tool,
-		point_b,
-		normal,
-		color
-	)
-
-	_add_mesh_vertex(
-		surface_tool,
-		point_c,
-		normal,
-		color
-	)
-
-	_add_mesh_vertex(
-		surface_tool,
-		point_a,
-		normal,
-		color
-	)
-
-	_add_mesh_vertex(
-		surface_tool,
-		point_c,
-		normal,
-		color
-	)
-
-	_add_mesh_vertex(
-		surface_tool,
-		point_d,
-		normal,
-		color
-	)
+	_add_mesh_vertex(surface_tool, point_a, normal, color)
+	_add_mesh_vertex(surface_tool, point_c, normal, color)
+	_add_mesh_vertex(surface_tool, point_d, normal, color)
 
 
 func _add_mesh_vertex(
@@ -677,6 +747,17 @@ func _apply_material() -> void:
 	var material := StandardMaterial3D.new()
 
 	material.albedo_color = Color.WHITE
+	material.vertex_color_use_as_albedo = true
+	material.roughness = 1.0
+	material.metallic = 0.0
+
+	body_mesh.material_override = material
+
+
+func _apply_corpse_material() -> void:
+	var material := StandardMaterial3D.new()
+
+	material.albedo_color = CORPSE_TINT
 	material.vertex_color_use_as_albedo = true
 	material.roughness = 1.0
 	material.metallic = 0.0
