@@ -10,8 +10,8 @@ const TERRAIN_CHUNK_SCENE: PackedScene = preload(
 @export_category("World Streaming")
 @export_range(0, 4, 1) var render_distance: int = 1
 
-# Der Player liegt in main.tscn direkt neben dem WorldManager.
 @export var player_path: NodePath = NodePath("../Player")
+
 
 var loaded_chunks: Dictionary = {}
 
@@ -19,6 +19,7 @@ var current_player_chunk: Vector2i = Vector2i.ZERO
 var chunk_width: float = 64.0
 var chunk_depth: float = 64.0
 var world_initialized: bool = false
+
 
 @onready var player: Node3D = (
 	get_node_or_null(player_path) as Node3D
@@ -35,7 +36,9 @@ func _ready() -> void:
 		set_process(false)
 		return
 
-	_read_chunk_dimensions()
+	if not _read_chunk_dimensions():
+		set_process(false)
+		return
 
 	current_player_chunk = _world_position_to_chunk(
 		player.global_position
@@ -72,29 +75,42 @@ func _process(_delta: float) -> void:
 	_refresh_loaded_chunks()
 
 
-func _read_chunk_dimensions() -> void:
-	var reference_chunk := (
-		TERRAIN_CHUNK_SCENE.instantiate()
-		as TerrainChunk
-	)
+func _read_chunk_dimensions() -> bool:
+	var reference_chunk = TERRAIN_CHUNK_SCENE.instantiate()
 
 	if reference_chunk == null:
 		push_error(
 			"Could not instantiate TerrainChunk scene."
 		)
-		return
+		return false
 
-	chunk_width = reference_chunk.get_chunk_width()
-	chunk_depth = reference_chunk.get_chunk_depth()
+	if (
+		not reference_chunk.has_method("get_chunk_width")
+		or not reference_chunk.has_method("get_chunk_depth")
+	):
+		push_error(
+			"TerrainChunk does not contain the required size methods."
+		)
+
+		reference_chunk.free()
+		return false
+
+	chunk_width = float(
+		reference_chunk.call("get_chunk_width")
+	)
+
+	chunk_depth = float(
+		reference_chunk.call("get_chunk_depth")
+	)
 
 	reference_chunk.free()
+
+	return true
 
 
 func _world_position_to_chunk(
 	world_position: Vector3
 ) -> Vector2i:
-	# Die Chunks sind um ihre Rasterposition zentriert.
-	# Chunk 0 reicht beispielsweise von -32 bis +32.
 	var chunk_x := int(
 		floor(
 			(
@@ -122,7 +138,6 @@ func _world_position_to_chunk(
 func _refresh_loaded_chunks() -> void:
 	var required_chunks: Dictionary = {}
 
-	# Alle Chunks innerhalb der Sichtweite erzeugen.
 	for offset_z in range(
 		-render_distance,
 		render_distance + 1
@@ -143,15 +158,13 @@ func _refresh_loaded_chunks() -> void:
 
 			_create_chunk(coordinates)
 
-	# Chunks außerhalb der Sichtweite vormerken.
-	var chunks_to_remove: Array = []
+	var chunks_to_remove: Array[Vector2i] = []
 
-	for coordinates in loaded_chunks.keys():
+	for coordinates: Vector2i in loaded_chunks.keys():
 		if not required_chunks.has(coordinates):
 			chunks_to_remove.append(coordinates)
 
-	# Entfernte Chunks löschen.
-	for coordinates in chunks_to_remove:
+	for coordinates: Vector2i in chunks_to_remove:
 		_remove_chunk(coordinates)
 
 
@@ -159,10 +172,7 @@ func _create_chunk(coordinates: Vector2i) -> void:
 	if loaded_chunks.has(coordinates):
 		return
 
-	var chunk := (
-		TERRAIN_CHUNK_SCENE.instantiate()
-		as TerrainChunk
-	)
+	var chunk = TERRAIN_CHUNK_SCENE.instantiate()
 
 	if chunk == null:
 		push_error(
@@ -170,9 +180,12 @@ func _create_chunk(coordinates: Vector2i) -> void:
 		)
 		return
 
-	# Muss vor add_child() gesetzt werden,
-	# weil der Chunk seine Koordinaten in _ready() benötigt.
-	chunk.chunk_coordinates = coordinates
+	# Die Koordinaten müssen vor add_child() gesetzt werden,
+	# weil der Chunk sie in seiner _ready()-Funktion verwendet.
+	chunk.set(
+		"chunk_coordinates",
+		coordinates
+	)
 
 	chunk.name = "TerrainChunk_%d_%d" % [
 		coordinates.x,
@@ -188,9 +201,7 @@ func _remove_chunk(coordinates: Vector2i) -> void:
 	if not loaded_chunks.has(coordinates):
 		return
 
-	var chunk: TerrainChunk = loaded_chunks.get(
-		coordinates
-	) as TerrainChunk
+	var chunk = loaded_chunks.get(coordinates)
 
 	if is_instance_valid(chunk):
 		chunk.queue_free()

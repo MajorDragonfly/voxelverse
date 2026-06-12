@@ -1,4 +1,3 @@
-class_name TerrainChunk
 extends StaticBody3D
 
 
