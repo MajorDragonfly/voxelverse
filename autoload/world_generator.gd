@@ -2,6 +2,8 @@ extends Node
 
 
 enum Biome {
+	OCEAN,
+	COAST,
 	GRASSLAND,
 	STEPPE,
 	WETLAND,
@@ -19,6 +21,11 @@ const TERRAIN_OCTAVES: int = 5
 const FLAT_SPAWN_RADIUS: float = 4.0
 const SPAWN_BLEND_DISTANCE: float = 8.0
 
+# Meer und Küsten.
+const SEA_LEVEL: float = -1.5
+const COAST_WIDTH: float = 1.0
+const DEEP_SEABED_DEPTH: float = 2.5
+
 # Großräumige Klimaverteilung.
 const TEMPERATURE_FREQUENCY: float = 0.004
 const MOISTURE_FREQUENCY: float = 0.005
@@ -35,6 +42,20 @@ const HOT_TEMPERATURE_MIN: float = 0.68
 const HOT_STEPPE_MOISTURE_MAX: float = 0.50
 
 # Vorläufige Biomfarben.
+const COLOR_OCEAN_FLOOR: Color = Color(
+	0.14,
+	0.24,
+	0.22,
+	1.0
+)
+
+const COLOR_COAST: Color = Color(
+	0.68,
+	0.60,
+	0.34,
+	1.0
+)
+
 const COLOR_GRASSLAND: Color = Color(
 	0.18,
 	0.48,
@@ -188,11 +209,32 @@ func get_moisture(
 	)
 
 
+func get_sea_level() -> float:
+	return SEA_LEVEL
+
+
+func is_below_sea_level(
+	world_x: float,
+	world_z: float
+) -> bool:
+	return get_terrain_height(
+		world_x,
+		world_z
+	) < SEA_LEVEL
+
+
 func get_biome(
 	world_x: float,
 	world_z: float,
 	terrain_height: float
 ) -> int:
+	# Meer und Küste haben Vorrang vor den Landbiomen.
+	if terrain_height < SEA_LEVEL:
+		return Biome.OCEAN
+
+	if terrain_height <= SEA_LEVEL + COAST_WIDTH:
+		return Biome.COAST
+
 	var temperature := _get_adjusted_temperature(
 		world_x,
 		world_z,
@@ -204,19 +246,15 @@ func get_biome(
 		world_z
 	)
 
-	# Höhe hat Vorrang vor den Klimawerten.
 	if terrain_height >= ROCKY_HEIGHT_MIN:
 		return Biome.ROCKY_HIGHLANDS
 
-	# Sehr kalte Gebiete.
 	if temperature <= COLD_TEMPERATURE_MAX:
 		return Biome.COLD_GRASSLAND
 
-	# Sehr feuchte Gebiete.
 	if moisture >= WETLAND_MOISTURE_MIN:
 		return Biome.WETLAND
 
-	# Trockene oder heiße Gebiete.
 	if (
 		moisture <= STEPPE_MOISTURE_MAX
 		or (
@@ -233,6 +271,12 @@ func get_biome_name(
 	biome: int
 ) -> String:
 	match biome:
+		Biome.OCEAN:
+			return "Ocean"
+
+		Biome.COAST:
+			return "Coast"
+
 		Biome.GRASSLAND:
 			return "Grassland"
 
@@ -257,6 +301,22 @@ func get_biome_color(
 	world_z: float,
 	terrain_height: float
 ) -> Color:
+	# Gelände unterhalb der Meereshöhe wird zum Meeresboden.
+	if terrain_height < SEA_LEVEL:
+		var depth_factor := clampf(
+			(
+				SEA_LEVEL
+				- terrain_height
+			) / DEEP_SEABED_DEPTH,
+			0.0,
+			1.0
+		)
+
+		return COLOR_COAST.lerp(
+			COLOR_OCEAN_FLOOR,
+			depth_factor
+		)
+
 	var temperature := _get_adjusted_temperature(
 		world_x,
 		world_z,
@@ -269,9 +329,6 @@ func get_biome_color(
 	)
 
 	var biome_color := COLOR_GRASSLAND
-
-	# Die sichtbare Färbung bleibt weich.
-	# Das logische Biom aus get_biome() ist dagegen eindeutig.
 
 	var dry_factor := (
 		1.0
@@ -323,6 +380,19 @@ func get_biome_color(
 		rock_factor
 	)
 
+	# Übergang von Sand zu normalem Land.
+	if terrain_height <= SEA_LEVEL + COAST_WIDTH:
+		var coast_factor := smoothstep(
+			SEA_LEVEL,
+			SEA_LEVEL + COAST_WIDTH,
+			terrain_height
+		)
+
+		return COLOR_COAST.lerp(
+			biome_color,
+			coast_factor
+		)
+
 	return biome_color
 
 
@@ -336,7 +406,6 @@ func _get_adjusted_temperature(
 		world_z
 	)
 
-	# Höhere Gebiete sind kälter.
 	temperature -= maxf(
 		terrain_height,
 		0.0
@@ -364,6 +433,11 @@ func _print_spawn_biome() -> void:
 	print(
 		"Spawn biome: ",
 		get_biome_name(spawn_biome)
+	)
+
+	print(
+		"Sea level: ",
+		SEA_LEVEL
 	)
 
 
