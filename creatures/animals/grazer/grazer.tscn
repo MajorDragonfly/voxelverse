@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bstqomb60abe7"]
+
+[ext_resource type="Script" uid="uid://ddqribjqkrg0h" path="res://creatures/animals/grazer/grazer.gd" id="1_btf05"]
+
+[node name="Grazer" type="CharacterBody3D" unique_id=1663504895]
+script = ExtResource("1_btf05")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="." unique_id=206946388]
+
+[node name="BodyCollision" type="CollisionShape3D" parent="." unique_id=1630800608]

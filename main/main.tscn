@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cflvob4gek5k0" path="res://creatures/player/player.tscn" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://d1vpfpfcqte7w" path="res://world/world_manager.tscn" id="2_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://bstqomb60abe7" path="res://creatures/animals/grazer/grazer.tscn" id="3_xwkvk"]
 
 [node name="Main" type="Node3D" unique_id=926892959]
 
@@ -12,3 +13,6 @@ transform = Transform3D(0.8660254, 0.43301272, -0.24999999, 0, 0.49999997, 0.866
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="WorldManager" parent="." unique_id=583502211 instance=ExtResource("2_pjrb6")]
+
+[node name="Grazer" parent="." unique_id=1663504895 instance=ExtResource("3_xwkvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
