@@ -73,6 +73,9 @@ const PHASE_ABILITIES: Dictionary = {
 # Jeder neue Durchlauf beginnt in der Kreaturenphase.
 var current_phase: int = Phase.CREATURE
 
+# Derselbe Seed erzeugt immer dieselbe Ausgangswelt.
+var world_seed: int = 12345
+
 
 func has_ability(ability: StringName) -> bool:
 	var available_abilities: Array = PHASE_ABILITIES.get(

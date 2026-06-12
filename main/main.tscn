@@ -1,28 +1,14 @@
 [gd_scene format=3 uid="uid://c87q8cyvxsccx"]
 
 [ext_resource type="PackedScene" uid="uid://cflvob4gek5k0" path="res://creatures/player/player.tscn" id="1_53q0u"]
-[ext_resource type="PackedScene" uid="uid://bnfy5o45ngga0" path="res://world/resources/trees/tree.tscn" id="2_pjrb6"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_4hihk"]
-size = Vector3(20, 0.5, 20)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_53q0u"]
-size = Vector3(20, 0.5, 20)
+[ext_resource type="PackedScene" uid="uid://dd0q32q5awvjd" path="res://world/resources/trees/terrain_chunk.tscn" id="2_pjrb6"]
 
 [node name="Main" type="Node3D" unique_id=926892959]
-
-[node name="Ground" type="StaticBody3D" parent="." unique_id=325688650]
-
-[node name="GroundMesh" type="MeshInstance3D" parent="Ground" unique_id=1831476768]
-mesh = SubResource("BoxMesh_4hihk")
-
-[node name="GroundCollision" type="CollisionShape3D" parent="Ground" unique_id=2092661506]
-shape = SubResource("BoxShape3D_53q0u")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1170712680]
 transform = Transform3D(0.8660254, 0.43301272, -0.24999999, 0, 0.49999997, 0.86602545, 0.5, -0.75, 0.43301266, 0, 0, 0)
 
 [node name="Player" parent="." unique_id=840536578 instance=ExtResource("1_53q0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="Tree" parent="." unique_id=45007494 instance=ExtResource("2_pjrb6")]
+[node name="TerrainChunk" parent="." unique_id=1870033249 instance=ExtResource("2_pjrb6")]
