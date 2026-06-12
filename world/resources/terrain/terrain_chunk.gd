@@ -9,14 +9,23 @@ const BERRY_BUSH_SCENE: PackedScene = preload(
 	"res://world/resources/plants/berry_bush.tscn"
 )
 
+const GRAZER_SCENE: PackedScene = preload(
+	"res://creatures/animals/grazer/grazer.tscn"
+)
+
+
 const TREE_ATTEMPTS_PER_CHUNK: int = 8
 const BUSH_ATTEMPTS_PER_CHUNK: int = 14
+const GRAZER_ATTEMPTS_PER_CHUNK: int = 4
 
 const OBJECT_EDGE_MARGIN: float = 3.0
 const SPAWN_CLEAR_RADIUS: float = 8.0
+
 const MINIMUM_OBJECT_DISTANCE: float = 2.0
+const MINIMUM_GRAZER_DISTANCE: float = 4.0
 
 const BUSH_SEED_OFFSET: int = 83_492_791
+const GRAZER_SEED_OFFSET: int = 147_298_431
 
 
 @export_category("Chunk Geometry")
@@ -310,6 +319,7 @@ func _generate_objects() -> void:
 
 	_generate_trees(placed_positions)
 	_generate_berry_bushes(placed_positions)
+	_generate_grazers(placed_positions)
 
 
 func _generate_trees(
@@ -317,8 +327,7 @@ func _generate_trees(
 ) -> void:
 	var random := RandomNumberGenerator.new()
 
-	# Diese Berechnung entspricht dem bisherigen Baum-Seed.
-	# Dadurch bleiben vorhandene Baumpositionen erhalten.
+	# Der bisherige Baum-Seed bleibt unverändert.
 	random.seed = _get_tree_chunk_seed()
 
 	var half_width := get_chunk_width() * 0.5
@@ -397,9 +406,10 @@ func _generate_berry_bushes(
 			local_z
 		)
 
-		if not _is_object_position_clear(
+		if not _is_position_clear(
 			local_position_2d,
-			placed_positions
+			placed_positions,
+			MINIMUM_OBJECT_DISTANCE
 		):
 			continue
 
@@ -430,6 +440,73 @@ func _generate_berry_bushes(
 			continue
 
 		if _create_berry_bush(
+			local_x,
+			local_z,
+			terrain_height,
+			random
+		):
+			placed_positions.append(local_position_2d)
+
+
+func _generate_grazers(
+	placed_positions: Array[Vector2]
+) -> void:
+	var random := RandomNumberGenerator.new()
+	random.seed = _get_grazer_chunk_seed()
+
+	var half_width := get_chunk_width() * 0.5
+	var half_depth := get_chunk_depth() * 0.5
+
+	for _attempt in range(GRAZER_ATTEMPTS_PER_CHUNK):
+		var local_x := random.randf_range(
+			-half_width + OBJECT_EDGE_MARGIN,
+			half_width - OBJECT_EDGE_MARGIN
+		)
+
+		var local_z := random.randf_range(
+			-half_depth + OBJECT_EDGE_MARGIN,
+			half_depth - OBJECT_EDGE_MARGIN
+		)
+
+		var local_position_2d := Vector2(
+			local_x,
+			local_z
+		)
+
+		if not _is_position_clear(
+			local_position_2d,
+			placed_positions,
+			MINIMUM_GRAZER_DISTANCE
+		):
+			continue
+
+		var world_position := _get_world_position_2d(
+			local_x,
+			local_z
+		)
+
+		if world_position.length() < SPAWN_CLEAR_RADIUS:
+			continue
+
+		var terrain_height := WorldGenerator.get_terrain_height(
+			world_position.x,
+			world_position.y
+		)
+
+		var biome := WorldGenerator.get_biome(
+			world_position.x,
+			world_position.y,
+			terrain_height
+		)
+
+		var spawn_probability := (
+			_get_grazer_spawn_probability(biome)
+		)
+
+		if random.randf() > spawn_probability:
+			continue
+
+		if _create_grazer(
 			local_x,
 			local_z,
 			terrain_height,
@@ -510,6 +587,43 @@ func _create_berry_bush(
 	return true
 
 
+func _create_grazer(
+	local_x: float,
+	local_z: float,
+	terrain_height: float,
+	random: RandomNumberGenerator
+) -> bool:
+	var grazer := GRAZER_SCENE.instantiate() as Node3D
+
+	if grazer == null:
+		push_error(
+			"Grazer scene could not be instantiated."
+		)
+		return false
+
+	objects.add_child(grazer)
+
+	grazer.position = Vector3(
+		local_x,
+		terrain_height + 0.05,
+		local_z
+	)
+
+	grazer.rotation.y = random.randf_range(
+		0.0,
+		TAU
+	)
+
+	var scale_factor := random.randf_range(
+		0.90,
+		1.10
+	)
+
+	grazer.scale = Vector3.ONE * scale_factor
+
+	return true
+
+
 func _get_tree_spawn_probability(
 	biome: int
 ) -> float:
@@ -547,14 +661,35 @@ func _get_bush_spawn_probability(
 			return 0.0
 
 
-func _is_object_position_clear(
+func _get_grazer_spawn_probability(
+	biome: int
+) -> float:
+	match biome:
+		WorldGenerator.Biome.GRASSLAND:
+			return 0.40
+
+		WorldGenerator.Biome.STEPPE:
+			return 0.30
+
+		WorldGenerator.Biome.WETLAND:
+			return 0.18
+
+		WorldGenerator.Biome.COLD_GRASSLAND:
+			return 0.12
+
+		_:
+			return 0.0
+
+
+func _is_position_clear(
 	candidate_position: Vector2,
-	placed_positions: Array[Vector2]
+	placed_positions: Array[Vector2],
+	minimum_distance: float
 ) -> bool:
 	for placed_position in placed_positions:
 		if (
 			candidate_position.distance_to(placed_position)
-			< MINIMUM_OBJECT_DISTANCE
+			< minimum_distance
 		):
 			return false
 
@@ -585,6 +720,13 @@ func _get_bush_chunk_seed() -> int:
 	return (
 		_get_tree_chunk_seed()
 		+ BUSH_SEED_OFFSET
+	)
+
+
+func _get_grazer_chunk_seed() -> int:
+	return (
+		_get_tree_chunk_seed()
+		+ GRAZER_SEED_OFFSET
 	)
 
 
