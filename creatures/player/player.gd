@@ -11,13 +11,22 @@ extends CharacterBody3D
 @export var minimum_camera_angle: float = -60.0
 @export var maximum_camera_angle: float = 35.0
 
+@export_category("Interaction")
+@export var interaction_range: float = 3.0
+
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var spring_arm: SpringArm3D = $CameraPivot/SpringArm3D
+@onready var interaction_ray: RayCast3D = (
+	$CameraPivot/SpringArm3D/Camera3D/InteractionRay
+)
 
 
 func _ready() -> void:
 	# Die Kamera soll nicht mit dem eigenen Player kollidieren.
 	spring_arm.add_excluded_object(get_rid())
+
+	# Der Interaktionsstrahl soll den eigenen Player ignorieren.
+	interaction_ray.add_exception(self)
 
 	# Maus für die Kamerasteuerung einfangen.
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -49,6 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if (
 			event.button_index == MOUSE_BUTTON_LEFT
 			and event.pressed
+			and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
 		):
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -90,4 +100,37 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y -= fall_acceleration * delta
 
+	if (
+		Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
+		and Input.is_action_just_pressed("primary_action")
+	):
+		_try_primary_action()
+
 	move_and_slide()
+
+
+func _try_primary_action() -> void:
+	interaction_ray.force_raycast_update()
+
+	if not interaction_ray.is_colliding():
+		return
+
+	var collision_point := interaction_ray.get_collision_point()
+	var distance_to_target := global_position.distance_to(
+		collision_point
+	)
+
+	if distance_to_target > interaction_range:
+		return
+
+	var collider := interaction_ray.get_collider()
+
+	if collider == null:
+		return
+
+	if collider.has_method("interact"):
+		collider.call("interact", self)
+
+
+func can_perform_action(action: StringName) -> bool:
+	return GameState.has_ability(action)

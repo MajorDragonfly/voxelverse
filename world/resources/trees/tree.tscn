@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bnfy5o45ngga0"]
 
+[ext_resource type="Script" uid="uid://bh2jx8olcmcwp" path="res://world/resources/trees/tree.gd" id="1_g8a04"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7dy5"]
 albedo_color = Color(0.47161734, 0.24787232, 0.06914915, 1)
 
@@ -17,6 +19,7 @@ size = Vector3(0.6, 3, 0.6)
 
 [node name="Tree" type="StaticBody3D" unique_id=45007494]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.25, 0)
+script = ExtResource("1_g8a04")
 
 [node name="TrunkMesh" type="MeshInstance3D" parent="." unique_id=44426230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

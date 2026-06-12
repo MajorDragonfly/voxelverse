@@ -23,3 +23,6 @@ spring_length = 6.0
 margin = 0.15
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=227106477]
+
+[node name="InteractionRay" type="RayCast3D" parent="CameraPivot/SpringArm3D/Camera3D" unique_id=1411619374]
+target_position = Vector3(0, 0, -10)
