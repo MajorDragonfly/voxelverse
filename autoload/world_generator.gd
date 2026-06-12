@@ -1,18 +1,54 @@
 extends Node
 
 
-# Diese Werte definieren aktuell die grundlegende Weltform.
-# Später werden sie durch Planetendaten und Weltprofile ersetzt.
-
+# Grundform des Geländes.
 const TERRAIN_FREQUENCY: float = 0.025
 const TERRAIN_HEIGHT_SCALE: float = 6.0
 const TERRAIN_OCTAVES: int = 5
 
+# Abgeflachter Startbereich.
 const FLAT_SPAWN_RADIUS: float = 4.0
 const SPAWN_BLEND_DISTANCE: float = 8.0
 
-const TEMPERATURE_FREQUENCY: float = 0.0035
-const MOISTURE_FREQUENCY: float = 0.0045
+# Großräumige Klimaverteilung.
+const TEMPERATURE_FREQUENCY: float = 0.004
+const MOISTURE_FREQUENCY: float = 0.005
+
+# Vorläufige Biomfarben.
+const COLOR_GRASSLAND: Color = Color(
+	0.18,
+	0.48,
+	0.12,
+	1.0
+)
+
+const COLOR_DRY: Color = Color(
+	0.58,
+	0.46,
+	0.20,
+	1.0
+)
+
+const COLOR_WET: Color = Color(
+	0.07,
+	0.30,
+	0.10,
+	1.0
+)
+
+const COLOR_COLD: Color = Color(
+	0.38,
+	0.52,
+	0.42,
+	1.0
+)
+
+const COLOR_ROCK: Color = Color(
+	0.34,
+	0.34,
+	0.32,
+	1.0
+)
 
 
 var _terrain_noise: FastNoiseLite
@@ -80,8 +116,6 @@ func get_terrain_height(
 		world_z
 	) * TERRAIN_HEIGHT_SCALE
 
-	# Nur um den Startpunkt der ersten Kreatur wird das Gelände
-	# sanft abgeflacht.
 	var distance_to_spawn := Vector2(
 		world_x,
 		world_z
@@ -107,8 +141,6 @@ func get_temperature(
 		world_z
 	)
 
-	# Noise liefert ungefähr -1 bis +1.
-	# Wir wandeln das in einen Wert von 0 bis 1 um.
 	return clampf(
 		(noise_value + 1.0) * 0.5,
 		0.0,
@@ -132,6 +164,92 @@ func get_moisture(
 		0.0,
 		1.0
 	)
+
+
+func get_biome_color(
+	world_x: float,
+	world_z: float,
+	terrain_height: float
+) -> Color:
+	var temperature := get_temperature(
+		world_x,
+		world_z
+	)
+
+	var moisture := get_moisture(
+		world_x,
+		world_z
+	)
+
+	# Höhere Gebiete sind vorläufig kälter.
+	temperature -= maxf(
+		terrain_height,
+		0.0
+	) * 0.035
+
+	temperature = clampf(
+		temperature,
+		0.0,
+		1.0
+	)
+
+	var biome_color := COLOR_GRASSLAND
+
+	# Trockene Gebiete.
+	var dry_factor := (
+		1.0
+		- smoothstep(
+			0.30,
+			0.50,
+			moisture
+		)
+	)
+
+	biome_color = biome_color.lerp(
+		COLOR_DRY,
+		dry_factor
+	)
+
+	# Feuchte Gebiete.
+	var wet_factor := smoothstep(
+		0.58,
+		0.76,
+		moisture
+	)
+
+	biome_color = biome_color.lerp(
+		COLOR_WET,
+		wet_factor
+	)
+
+	# Kalte Gebiete.
+	var cold_factor := (
+		1.0
+		- smoothstep(
+			0.28,
+			0.46,
+			temperature
+		)
+	)
+
+	biome_color = biome_color.lerp(
+		COLOR_COLD,
+		cold_factor
+	)
+
+	# Hohe Gebiete werden felsiger.
+	var rock_factor := smoothstep(
+		3.0,
+		5.5,
+		terrain_height
+	)
+
+	biome_color = biome_color.lerp(
+		COLOR_ROCK,
+		rock_factor
+	)
+
+	return biome_color
 
 
 func _ensure_initialized() -> void:
