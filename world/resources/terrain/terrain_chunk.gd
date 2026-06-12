@@ -1,6 +1,15 @@
 extends StaticBody3D
 
 
+const TREE_SCENE: PackedScene = preload(
+	"res://world/resources/trees/tree.tscn"
+)
+
+const TREE_ATTEMPTS_PER_CHUNK: int = 8
+const OBJECT_EDGE_MARGIN: float = 3.0
+const SPAWN_CLEAR_RADIUS: float = 8.0
+
+
 @export_category("Chunk Geometry")
 @export_range(9, 257, 1) var vertices_x: int = 65
 @export_range(9, 257, 1) var vertices_z: int = 65
@@ -13,12 +22,14 @@ var chunk_coordinates: Vector2i = Vector2i.ZERO
 @onready var terrain_mesh: MeshInstance3D = $TerrainMesh
 @onready var terrain_collision: CollisionShape3D = $TerrainCollision
 @onready var water_mesh: MeshInstance3D = $WaterMesh
+@onready var objects: Node3D = $Objects
 
 
 func _ready() -> void:
 	_position_chunk()
 	generate_terrain()
 	_create_water_surface()
+	_generate_objects()
 
 
 func get_chunk_width() -> float:
@@ -277,3 +288,131 @@ func _create_water_surface() -> void:
 	water_mesh.cast_shadow = (
 		GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	)
+
+
+func _generate_objects() -> void:
+	_clear_generated_objects()
+
+	var random := RandomNumberGenerator.new()
+	random.seed = _get_chunk_seed()
+
+	var half_width := get_chunk_width() * 0.5
+	var half_depth := get_chunk_depth() * 0.5
+
+	for attempt in range(TREE_ATTEMPTS_PER_CHUNK):
+		var local_x := random.randf_range(
+			-half_width + OBJECT_EDGE_MARGIN,
+			half_width - OBJECT_EDGE_MARGIN
+		)
+
+		var local_z := random.randf_range(
+			-half_depth + OBJECT_EDGE_MARGIN,
+			half_depth - OBJECT_EDGE_MARGIN
+		)
+
+		var world_x := (
+			float(chunk_coordinates.x) * get_chunk_width()
+			+ local_x
+		)
+
+		var world_z := (
+			float(chunk_coordinates.y) * get_chunk_depth()
+			+ local_z
+		)
+
+		# Der Startbereich bleibt zunächst frei.
+		var distance_to_spawn := Vector2(
+			world_x,
+			world_z
+		).length()
+
+		if distance_to_spawn < SPAWN_CLEAR_RADIUS:
+			continue
+
+		var terrain_height := WorldGenerator.get_terrain_height(
+			world_x,
+			world_z
+		)
+
+		var biome := WorldGenerator.get_biome(
+			world_x,
+			world_z,
+			terrain_height
+		)
+
+		var spawn_probability := (
+			_get_tree_spawn_probability(biome)
+		)
+
+		if random.randf() > spawn_probability:
+			continue
+
+		_create_tree(
+			local_x,
+			local_z,
+			terrain_height,
+			random
+		)
+
+
+func _create_tree(
+	local_x: float,
+	local_z: float,
+	terrain_height: float,
+	random: RandomNumberGenerator
+) -> void:
+	var tree := TREE_SCENE.instantiate() as Node3D
+
+	if tree == null:
+		push_error("Tree scene could not be instantiated.")
+		return
+
+	objects.add_child(tree)
+
+	tree.position = Vector3(
+		local_x,
+		terrain_height,
+		local_z
+	)
+
+	tree.rotation.y = random.randf_range(
+		0.0,
+		TAU
+	)
+
+	var scale_factor := random.randf_range(
+		0.85,
+		1.15
+	)
+
+	tree.scale = Vector3.ONE * scale_factor
+
+
+func _get_tree_spawn_probability(
+	biome: int
+) -> float:
+	match biome:
+		WorldGenerator.Biome.GRASSLAND:
+			return 0.55
+
+		WorldGenerator.Biome.WETLAND:
+			return 0.75
+
+		WorldGenerator.Biome.COLD_GRASSLAND:
+			return 0.25
+
+		_:
+			return 0.0
+
+
+func _get_chunk_seed() -> int:
+	return (
+		GameState.world_seed
+		+ chunk_coordinates.x * 73_856_093
+		+ chunk_coordinates.y * 19_349_663
+	)
+
+
+func _clear_generated_objects() -> void:
+	for child in objects.get_children():
+		child.queue_free()
