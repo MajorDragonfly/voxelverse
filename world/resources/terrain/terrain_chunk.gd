@@ -5,9 +5,18 @@ const TREE_SCENE: PackedScene = preload(
 	"res://world/resources/trees/tree.tscn"
 )
 
+const BERRY_BUSH_SCENE: PackedScene = preload(
+	"res://world/resources/plants/berry_bush.tscn"
+)
+
 const TREE_ATTEMPTS_PER_CHUNK: int = 8
+const BUSH_ATTEMPTS_PER_CHUNK: int = 14
+
 const OBJECT_EDGE_MARGIN: float = 3.0
 const SPAWN_CLEAR_RADIUS: float = 8.0
+const MINIMUM_OBJECT_DISTANCE: float = 2.0
+
+const BUSH_SEED_OFFSET: int = 83_492_791
 
 
 @export_category("Chunk Geometry")
@@ -165,6 +174,10 @@ func generate_terrain() -> void:
 
 	var generated_mesh: ArrayMesh = surface_tool.commit()
 
+	if generated_mesh == null:
+		push_error("Terrain mesh could not be generated.")
+		return
+
 	terrain_mesh.mesh = generated_mesh
 	terrain_collision.shape = (
 		generated_mesh.create_trimesh_shape()
@@ -293,13 +306,25 @@ func _create_water_surface() -> void:
 func _generate_objects() -> void:
 	_clear_generated_objects()
 
+	var placed_positions: Array[Vector2] = []
+
+	_generate_trees(placed_positions)
+	_generate_berry_bushes(placed_positions)
+
+
+func _generate_trees(
+	placed_positions: Array[Vector2]
+) -> void:
 	var random := RandomNumberGenerator.new()
-	random.seed = _get_chunk_seed()
+
+	# Diese Berechnung entspricht dem bisherigen Baum-Seed.
+	# Dadurch bleiben vorhandene Baumpositionen erhalten.
+	random.seed = _get_tree_chunk_seed()
 
 	var half_width := get_chunk_width() * 0.5
 	var half_depth := get_chunk_depth() * 0.5
 
-	for attempt in range(TREE_ATTEMPTS_PER_CHUNK):
+	for _attempt in range(TREE_ATTEMPTS_PER_CHUNK):
 		var local_x := random.randf_range(
 			-half_width + OBJECT_EDGE_MARGIN,
 			half_width - OBJECT_EDGE_MARGIN
@@ -310,33 +335,22 @@ func _generate_objects() -> void:
 			half_depth - OBJECT_EDGE_MARGIN
 		)
 
-		var world_x := (
-			float(chunk_coordinates.x) * get_chunk_width()
-			+ local_x
+		var world_position := _get_world_position_2d(
+			local_x,
+			local_z
 		)
 
-		var world_z := (
-			float(chunk_coordinates.y) * get_chunk_depth()
-			+ local_z
-		)
-
-		# Der Startbereich bleibt zunächst frei.
-		var distance_to_spawn := Vector2(
-			world_x,
-			world_z
-		).length()
-
-		if distance_to_spawn < SPAWN_CLEAR_RADIUS:
+		if world_position.length() < SPAWN_CLEAR_RADIUS:
 			continue
 
 		var terrain_height := WorldGenerator.get_terrain_height(
-			world_x,
-			world_z
+			world_position.x,
+			world_position.y
 		)
 
 		var biome := WorldGenerator.get_biome(
-			world_x,
-			world_z,
+			world_position.x,
+			world_position.y,
 			terrain_height
 		)
 
@@ -347,12 +361,81 @@ func _generate_objects() -> void:
 		if random.randf() > spawn_probability:
 			continue
 
-		_create_tree(
+		if _create_tree(
 			local_x,
 			local_z,
 			terrain_height,
 			random
+		):
+			placed_positions.append(
+				Vector2(local_x, local_z)
+			)
+
+
+func _generate_berry_bushes(
+	placed_positions: Array[Vector2]
+) -> void:
+	var random := RandomNumberGenerator.new()
+	random.seed = _get_bush_chunk_seed()
+
+	var half_width := get_chunk_width() * 0.5
+	var half_depth := get_chunk_depth() * 0.5
+
+	for _attempt in range(BUSH_ATTEMPTS_PER_CHUNK):
+		var local_x := random.randf_range(
+			-half_width + OBJECT_EDGE_MARGIN,
+			half_width - OBJECT_EDGE_MARGIN
 		)
+
+		var local_z := random.randf_range(
+			-half_depth + OBJECT_EDGE_MARGIN,
+			half_depth - OBJECT_EDGE_MARGIN
+		)
+
+		var local_position_2d := Vector2(
+			local_x,
+			local_z
+		)
+
+		if not _is_object_position_clear(
+			local_position_2d,
+			placed_positions
+		):
+			continue
+
+		var world_position := _get_world_position_2d(
+			local_x,
+			local_z
+		)
+
+		if world_position.length() < SPAWN_CLEAR_RADIUS:
+			continue
+
+		var terrain_height := WorldGenerator.get_terrain_height(
+			world_position.x,
+			world_position.y
+		)
+
+		var biome := WorldGenerator.get_biome(
+			world_position.x,
+			world_position.y,
+			terrain_height
+		)
+
+		var spawn_probability := (
+			_get_bush_spawn_probability(biome)
+		)
+
+		if random.randf() > spawn_probability:
+			continue
+
+		if _create_berry_bush(
+			local_x,
+			local_z,
+			terrain_height,
+			random
+		):
+			placed_positions.append(local_position_2d)
 
 
 func _create_tree(
@@ -360,12 +443,12 @@ func _create_tree(
 	local_z: float,
 	terrain_height: float,
 	random: RandomNumberGenerator
-) -> void:
+) -> bool:
 	var tree := TREE_SCENE.instantiate() as Node3D
 
 	if tree == null:
 		push_error("Tree scene could not be instantiated.")
-		return
+		return false
 
 	objects.add_child(tree)
 
@@ -387,6 +470,45 @@ func _create_tree(
 
 	tree.scale = Vector3.ONE * scale_factor
 
+	return true
+
+
+func _create_berry_bush(
+	local_x: float,
+	local_z: float,
+	terrain_height: float,
+	random: RandomNumberGenerator
+) -> bool:
+	var bush := BERRY_BUSH_SCENE.instantiate() as Node3D
+
+	if bush == null:
+		push_error(
+			"Berry bush scene could not be instantiated."
+		)
+		return false
+
+	objects.add_child(bush)
+
+	bush.position = Vector3(
+		local_x,
+		terrain_height,
+		local_z
+	)
+
+	bush.rotation.y = random.randf_range(
+		0.0,
+		TAU
+	)
+
+	var scale_factor := random.randf_range(
+		0.85,
+		1.15
+	)
+
+	bush.scale = Vector3.ONE * scale_factor
+
+	return true
+
 
 func _get_tree_spawn_probability(
 	biome: int
@@ -405,11 +527,64 @@ func _get_tree_spawn_probability(
 			return 0.0
 
 
-func _get_chunk_seed() -> int:
+func _get_bush_spawn_probability(
+	biome: int
+) -> float:
+	match biome:
+		WorldGenerator.Biome.GRASSLAND:
+			return 0.55
+
+		WorldGenerator.Biome.WETLAND:
+			return 0.80
+
+		WorldGenerator.Biome.COLD_GRASSLAND:
+			return 0.20
+
+		WorldGenerator.Biome.STEPPE:
+			return 0.08
+
+		_:
+			return 0.0
+
+
+func _is_object_position_clear(
+	candidate_position: Vector2,
+	placed_positions: Array[Vector2]
+) -> bool:
+	for placed_position in placed_positions:
+		if (
+			candidate_position.distance_to(placed_position)
+			< MINIMUM_OBJECT_DISTANCE
+		):
+			return false
+
+	return true
+
+
+func _get_world_position_2d(
+	local_x: float,
+	local_z: float
+) -> Vector2:
+	return Vector2(
+		float(chunk_coordinates.x) * get_chunk_width()
+			+ local_x,
+		float(chunk_coordinates.y) * get_chunk_depth()
+			+ local_z
+	)
+
+
+func _get_tree_chunk_seed() -> int:
 	return (
 		GameState.world_seed
 		+ chunk_coordinates.x * 73_856_093
 		+ chunk_coordinates.y * 19_349_663
+	)
+
+
+func _get_bush_chunk_seed() -> int:
+	return (
+		_get_tree_chunk_seed()
+		+ BUSH_SEED_OFFSET
 	)
 
 
