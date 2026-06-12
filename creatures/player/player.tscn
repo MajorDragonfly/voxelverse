@@ -26,3 +26,28 @@ margin = 0.15
 
 [node name="InteractionRay" type="RayCast3D" parent="CameraPivot/SpringArm3D/Camera3D" unique_id=1411619374]
 target_position = Vector3(0, 0, -10)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=311428190]
+
+[node name="StatusContainer" type="VBoxContainer" parent="HUD" unique_id=1417174377]
+custom_minimum_size = Vector2(24, 24)
+offset_right = 280.0
+offset_bottom = 24.0
+
+[node name="HealthLabel" type="Label" parent="HUD/StatusContainer" unique_id=1175530478]
+layout_mode = 2
+text = "Health"
+
+[node name="HealthBar" type="ProgressBar" parent="HUD/StatusContainer" unique_id=1965527718]
+custom_minimum_size = Vector2(280, 22)
+layout_mode = 2
+show_percentage = false
+
+[node name="HungerLabel" type="Label" parent="HUD/StatusContainer" unique_id=1945393086]
+layout_mode = 2
+text = "Hunger"
+
+[node name="HungerBar" type="ProgressBar" parent="HUD/StatusContainer" unique_id=1480393493]
+custom_minimum_size = Vector2(280, 22)
+layout_mode = 2
+show_percentage = false
