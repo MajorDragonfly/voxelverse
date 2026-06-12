@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dd0q32q5awvjd"]
 
-[ext_resource type="Script" uid="uid://binhy5f1mbskn" path="res://world/resources/trees/terrain_chunk.gd" id="1_fj3vv"]
+[ext_resource type="Script" uid="uid://binhy5f1mbskn" path="res://world/resources/terrain/terrain_chunk.gd" id="1_fj3vv"]
 
 [node name="TerrainChunk" type="StaticBody3D" unique_id=1870033249]
 script = ExtResource("1_fj3vv")
