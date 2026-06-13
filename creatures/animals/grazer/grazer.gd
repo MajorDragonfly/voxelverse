@@ -3,7 +3,11 @@ extends CharacterBody3D
 
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
+
 const BIOLOGICAL_SEX_SEED_OFFSET: int = 1_592_746_831
+const MAXIMUM_AGE_SEED_OFFSET: int = 2_147_483_647
+const INITIAL_AGE_SEED_OFFSET: int = 1_073_741_823
+
 const BERRY_BUSH_SCENE_PATH: String = (
 	"res://world/resources/plants/berry_bush.tscn"
 )
@@ -81,6 +85,18 @@ var thirsty_threshold_ratio: float = 0.65
 
 @export_range(0.0, 100.0, 0.1)
 var dehydration_damage_per_second: float = 0.75
+
+
+@export_category("Life Cycle")
+
+@export_range(10.0, 3600.0, 1.0)
+var minimum_maximum_age_seconds: float = 600.0
+
+@export_range(10.0, 3600.0, 1.0)
+var maximum_maximum_age_seconds: float = 900.0
+
+@export_range(0.0, 0.95, 0.05)
+var maximum_initial_age_ratio: float = 0.5
 
 
 @export_category("Food Search")
@@ -199,8 +215,11 @@ const CORPSE_TINT: Color = Color(
 var current_health: float
 var current_hunger: float
 var current_thirst: float
-var remaining_meat_portions: int
 
+var current_age_seconds: float = 0.0
+var maximum_age_seconds: float = 0.0
+
+var remaining_meat_portions: int
 var biological_sex: int = BiologicalSex.FEMALE
 
 var is_dead: bool = false
@@ -256,6 +275,8 @@ func _initialize_creature() -> void:
 	_random.seed = creature_seed
 
 	_assign_biological_sex(creature_seed)
+	_assign_life_cycle(creature_seed)
+
 	_generate_creature()
 	_choose_new_behavior()
 
@@ -264,6 +285,11 @@ func _initialize_creature() -> void:
 	print(
 		"Grazer initialized. Sex: ",
 		get_biological_sex_name(),
+		" | Age: ",
+		snappedf(current_age_seconds, 0.1),
+		" / ",
+		snappedf(maximum_age_seconds, 0.1),
+		" seconds",
 		" | Seed: ",
 		creature_seed,
 		" | Position: ",
@@ -287,6 +313,49 @@ func _assign_biological_sex(creature_seed: int) -> void:
 	)
 
 
+func _assign_life_cycle(creature_seed: int) -> void:
+	var lowest_maximum_age := minf(
+		minimum_maximum_age_seconds,
+		maximum_maximum_age_seconds
+	)
+
+	var highest_maximum_age := maxf(
+		minimum_maximum_age_seconds,
+		maximum_maximum_age_seconds
+	)
+
+	var maximum_age_random := RandomNumberGenerator.new()
+
+	maximum_age_random.seed = (
+		creature_seed
+		+ MAXIMUM_AGE_SEED_OFFSET
+	)
+
+	maximum_age_seconds = maximum_age_random.randf_range(
+		lowest_maximum_age,
+		highest_maximum_age
+	)
+
+	var initial_age_random := RandomNumberGenerator.new()
+
+	initial_age_random.seed = (
+		creature_seed
+		+ INITIAL_AGE_SEED_OFFSET
+	)
+
+	var clamped_initial_age_ratio := clampf(
+		maximum_initial_age_ratio,
+		0.0,
+		0.95
+	)
+
+	current_age_seconds = initial_age_random.randf_range(
+		0.0,
+		maximum_age_seconds
+		* clamped_initial_age_ratio
+	)
+
+
 func get_biological_sex() -> int:
 	return biological_sex
 
@@ -303,12 +372,37 @@ func get_biological_sex_name() -> String:
 			return "unknown"
 
 
+func get_age_seconds() -> float:
+	return current_age_seconds
+
+
+func get_maximum_age_seconds() -> float:
+	return maximum_age_seconds
+
+
+func get_age_ratio() -> float:
+	if maximum_age_seconds <= 0.0:
+		return 0.0
+
+	return clampf(
+		current_age_seconds
+		/ maximum_age_seconds,
+		0.0,
+		1.0
+	)
+
+
 func _physics_process(delta: float) -> void:
 	if not _initialized:
 		return
 
 	if is_dead:
 		_process_corpse_physics(delta)
+		return
+
+	_update_age(delta)
+
+	if is_dead:
 		return
 
 	_update_hunger(delta)
@@ -381,6 +475,27 @@ func _physics_process(delta: float) -> void:
 		)
 
 	move_and_slide()
+
+
+func _update_age(delta: float) -> void:
+	if maximum_age_seconds <= 0.0:
+		return
+
+	current_age_seconds = minf(
+		current_age_seconds + delta,
+		maximum_age_seconds
+	)
+
+	if current_age_seconds < maximum_age_seconds:
+		return
+
+	print(
+		"Grazer reached maximum age: ",
+		snappedf(current_age_seconds, 0.1),
+		" seconds."
+	)
+
+	_die()
 
 
 func _process_corpse_physics(delta: float) -> void:
