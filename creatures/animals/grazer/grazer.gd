@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
-
+const BIOLOGICAL_SEX_SEED_OFFSET: int = 1_592_746_831
 const BERRY_BUSH_SCENE_PATH: String = (
 	"res://world/resources/plants/berry_bush.tscn"
 )
@@ -17,63 +17,154 @@ enum BehaviorState {
 }
 
 
+enum BiologicalSex {
+	FEMALE,
+	MALE
+}
+
+
 @export_category("Movement")
-@export_range(0.1, 10.0, 0.1) var move_speed: float = 1.6
-@export_range(1.0, 20.0, 0.5) var rotation_speed: float = 5.0
-@export_range(1.0, 10.0, 0.5) var minimum_wander_time: float = 2.0
-@export_range(1.0, 15.0, 0.5) var maximum_wander_time: float = 5.0
-@export_range(0.0, 1.0, 0.05) var idle_probability: float = 0.25
-@export_range(1.0, 50.0, 0.5) var fall_acceleration: float = 20.0
-@export_range(0.25, 5.0, 0.25) var terrain_check_distance: float = 1.5
-@export_range(0.25, 3.0, 0.25) var maximum_step_height: float = 1.0
+
+@export_range(0.1, 10.0, 0.1)
+var move_speed: float = 1.6
+
+@export_range(1.0, 20.0, 0.5)
+var rotation_speed: float = 5.0
+
+@export_range(1.0, 10.0, 0.5)
+var minimum_wander_time: float = 2.0
+
+@export_range(1.0, 15.0, 0.5)
+var maximum_wander_time: float = 5.0
+
+@export_range(0.0, 1.0, 0.05)
+var idle_probability: float = 0.25
+
+@export_range(1.0, 50.0, 0.5)
+var fall_acceleration: float = 20.0
+
+@export_range(0.25, 5.0, 0.25)
+var terrain_check_distance: float = 1.5
+
+@export_range(0.25, 3.0, 0.25)
+var maximum_step_height: float = 1.0
+
 
 @export_category("Survival")
-@export_range(1.0, 100.0, 1.0) var maximum_health: float = 5.0
-@export_range(0.1, 20.0, 0.1) var bite_damage: float = 1.0
 
-@export_range(1.0, 1000.0, 1.0) var maximum_hunger: float = 100.0
-@export_range(0.0, 100.0, 0.1) var hunger_loss_per_second: float = 0.5
-@export_range(0.0, 1.0, 0.05) var hungry_threshold_ratio: float = 0.65
-@export_range(0.0, 100.0, 0.1) var starvation_damage_per_second: float = 0.5
+@export_range(1.0, 100.0, 1.0)
+var maximum_health: float = 5.0
 
-@export_range(1.0, 1000.0, 1.0) var maximum_thirst: float = 100.0
-@export_range(0.0, 100.0, 0.1) var thirst_loss_per_second: float = 0.8
-@export_range(0.0, 1.0, 0.05) var thirsty_threshold_ratio: float = 0.65
-@export_range(0.0, 100.0, 0.1) var dehydration_damage_per_second: float = 0.75
+@export_range(0.1, 20.0, 0.1)
+var bite_damage: float = 1.0
+
+@export_range(1.0, 1000.0, 1.0)
+var maximum_hunger: float = 100.0
+
+@export_range(0.0, 100.0, 0.1)
+var hunger_loss_per_second: float = 0.5
+
+@export_range(0.0, 1.0, 0.05)
+var hungry_threshold_ratio: float = 0.65
+
+@export_range(0.0, 100.0, 0.1)
+var starvation_damage_per_second: float = 0.5
+
+@export_range(1.0, 1000.0, 1.0)
+var maximum_thirst: float = 100.0
+
+@export_range(0.0, 100.0, 0.1)
+var thirst_loss_per_second: float = 0.8
+
+@export_range(0.0, 1.0, 0.05)
+var thirsty_threshold_ratio: float = 0.65
+
+@export_range(0.0, 100.0, 0.1)
+var dehydration_damage_per_second: float = 0.75
+
 
 @export_category("Food Search")
-@export_range(1.0, 100.0, 1.0) var food_search_radius: float = 18.0
-@export_range(0.1, 10.0, 0.1) var food_search_interval: float = 1.0
-@export_range(0.5, 5.0, 0.1) var food_reach_distance: float = 2.5
+
+@export_range(1.0, 100.0, 1.0)
+var food_search_radius: float = 18.0
+
+@export_range(0.1, 10.0, 0.1)
+var food_search_interval: float = 1.0
+
+@export_range(0.5, 5.0, 0.1)
+var food_reach_distance: float = 2.5
+
 
 @export_category("Water Search")
-@export_range(1.0, 100.0, 1.0) var water_search_radius: float = 32.0
-@export_range(0.1, 10.0, 0.1) var water_search_interval: float = 1.0
-@export_range(0.5, 5.0, 0.1) var water_reach_distance: float = 2.0
-@export_range(1.0, 100.0, 1.0) var water_drink_amount: float = 60.0
-@export_range(8, 64, 1) var water_search_samples: int = 24
-@export_range(1.0, 10.0, 0.5) var water_search_step: float = 2.0
-@export_range(0.5, 5.0, 0.25) var shoreline_check_distance: float = 2.0
+
+@export_range(1.0, 100.0, 1.0)
+var water_search_radius: float = 32.0
+
+@export_range(0.1, 10.0, 0.1)
+var water_search_interval: float = 1.0
+
+@export_range(0.5, 5.0, 0.1)
+var water_reach_distance: float = 2.0
+
+@export_range(1.0, 100.0, 1.0)
+var water_drink_amount: float = 60.0
+
+@export_range(8, 64, 1)
+var water_search_samples: int = 24
+
+@export_range(1.0, 10.0, 0.5)
+var water_search_step: float = 2.0
+
+@export_range(0.5, 5.0, 0.25)
+var shoreline_check_distance: float = 2.0
+
 
 @export_category("Perception")
-@export_range(1.0, 50.0, 0.5) var player_detection_radius: float = 10.0
-@export_range(0.05, 2.0, 0.05) var perception_interval: float = 0.25
-@export_range(0.5, 15.0, 0.5) var flee_duration: float = 4.0
-@export_range(1.0, 3.0, 0.1) var flee_speed_multiplier: float = 1.5
+
+@export_range(1.0, 50.0, 0.5)
+var player_detection_radius: float = 10.0
+
+@export_range(0.05, 2.0, 0.05)
+var perception_interval: float = 0.25
+
+@export_range(0.5, 15.0, 0.5)
+var flee_duration: float = 4.0
+
+@export_range(1.0, 3.0, 0.1)
+var flee_speed_multiplier: float = 1.5
+
 
 @export_category("Corpse Food")
-@export_range(1, 10, 1) var meat_portions: int = 3
-@export_range(1.0, 100.0, 1.0) var hunger_restore_per_portion: float = 25.0
+
+@export_range(1, 10, 1)
+var meat_portions: int = 3
+
+@export_range(1.0, 100.0, 1.0)
+var hunger_restore_per_portion: float = 25.0
+
 
 @export_category("Procedural Appearance")
-@export_range(0.15, 0.60, 0.05) var voxel_size: float = 0.25
-@export_range(3, 8, 1) var body_length_voxels: int = 5
-@export_range(2, 5, 1) var body_width_voxels: int = 3
-@export_range(2, 5, 1) var body_height_voxels: int = 3
-@export_range(2, 6, 1) var leg_height_voxels: int = 3
+
+@export_range(0.15, 0.60, 0.05)
+var voxel_size: float = 0.25
+
+@export_range(3, 8, 1)
+var body_length_voxels: int = 5
+
+@export_range(2, 5, 1)
+var body_width_voxels: int = 3
+
+@export_range(2, 5, 1)
+var body_height_voxels: int = 3
+
+@export_range(2, 6, 1)
+var leg_height_voxels: int = 3
+
 
 @export_category("Placement")
-@export var snap_to_terrain: bool = true
+
+@export
+var snap_to_terrain: bool = true
 
 
 const BODY_COLOR: Color = Color(
@@ -109,17 +200,19 @@ var current_health: float
 var current_hunger: float
 var current_thirst: float
 var remaining_meat_portions: int
+
+var biological_sex: int = BiologicalSex.FEMALE
+
 var is_dead: bool = false
 
 var _random := RandomNumberGenerator.new()
 
 var _move_direction: Vector3 = Vector3.ZERO
-var _decision_timer: float = 0.0
 
+var _decision_timer: float = 0.0
 var _food_search_timer: float = 0.0
 var _water_search_timer: float = 0.0
 var _perception_timer: float = 0.0
-
 var _starvation_damage_timer: float = 0.0
 var _dehydration_damage_timer: float = 0.0
 
@@ -136,11 +229,16 @@ var _threat_target: Node3D = null
 var _initialized: bool = false
 
 
-@onready var body_mesh: MeshInstance3D = $BodyMesh
-@onready var body_collision: CollisionShape3D = $BodyCollision
+@onready
+var body_mesh: MeshInstance3D = $BodyMesh
+
+@onready
+var body_collision: CollisionShape3D = $BodyCollision
 
 
 func _ready() -> void:
+	add_to_group(&"grazer")
+
 	current_health = maximum_health
 	current_hunger = maximum_hunger
 	current_thirst = maximum_thirst
@@ -153,12 +251,56 @@ func _initialize_creature() -> void:
 	if snap_to_terrain:
 		_snap_to_terrain()
 
-	_random.seed = _get_creature_seed()
+	var creature_seed := _get_creature_seed()
 
+	_random.seed = creature_seed
+
+	_assign_biological_sex(creature_seed)
 	_generate_creature()
 	_choose_new_behavior()
 
 	_initialized = true
+
+	print(
+		"Grazer initialized. Sex: ",
+		get_biological_sex_name(),
+		" | Seed: ",
+		creature_seed,
+		" | Position: ",
+		global_position,
+		" | In grazer group: ",
+		is_in_group(&"grazer")
+	)
+
+
+func _assign_biological_sex(creature_seed: int) -> void:
+	var sex_random := RandomNumberGenerator.new()
+
+	sex_random.seed = (
+		creature_seed
+		+ BIOLOGICAL_SEX_SEED_OFFSET
+	)
+
+	biological_sex = sex_random.randi_range(
+		BiologicalSex.FEMALE,
+		BiologicalSex.MALE
+	)
+
+
+func get_biological_sex() -> int:
+	return biological_sex
+
+
+func get_biological_sex_name() -> String:
+	match biological_sex:
+		BiologicalSex.FEMALE:
+			return "female"
+
+		BiologicalSex.MALE:
+			return "male"
+
+		_:
+			return "unknown"
 
 
 func _physics_process(delta: float) -> void:
@@ -186,15 +328,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		_update_target_selection(delta)
 
-		match _behavior_state:
-			BehaviorState.SEEKING_WATER:
-				_update_water_movement()
+	match _behavior_state:
+		BehaviorState.SEEKING_WATER:
+			_update_water_movement()
 
-			BehaviorState.SEEKING_FOOD:
-				_update_food_movement()
+		BehaviorState.SEEKING_FOOD:
+			_update_food_movement()
 
-			BehaviorState.WANDERING:
-				_update_wandering(delta)
+		BehaviorState.WANDERING:
+			_update_wandering(delta)
 
 	if (
 		_move_direction.length_squared() > 0.0
@@ -255,7 +397,9 @@ func _process_corpse_physics(delta: float) -> void:
 
 func _update_hunger(delta: float) -> void:
 	current_hunger = maxf(
-		current_hunger - hunger_loss_per_second * delta,
+		current_hunger
+		- hunger_loss_per_second
+		* delta,
 		0.0
 	)
 
@@ -269,7 +413,9 @@ func _update_hunger(delta: float) -> void:
 		_starvation_damage_timer
 		>= STARVATION_DAMAGE_INTERVAL
 	):
-		_starvation_damage_timer -= STARVATION_DAMAGE_INTERVAL
+		_starvation_damage_timer -= (
+			STARVATION_DAMAGE_INTERVAL
+		)
 
 		receive_hit(
 			starvation_damage_per_second
@@ -282,7 +428,9 @@ func _update_hunger(delta: float) -> void:
 
 func _update_thirst(delta: float) -> void:
 	current_thirst = maxf(
-		current_thirst - thirst_loss_per_second * delta,
+		current_thirst
+		- thirst_loss_per_second
+		* delta,
 		0.0
 	)
 
@@ -296,7 +444,9 @@ func _update_thirst(delta: float) -> void:
 		_dehydration_damage_timer
 		>= DEHYDRATION_DAMAGE_INTERVAL
 	):
-		_dehydration_damage_timer -= DEHYDRATION_DAMAGE_INTERVAL
+		_dehydration_damage_timer -= (
+			DEHYDRATION_DAMAGE_INTERVAL
+		)
 
 		receive_hit(
 			dehydration_damage_per_second
@@ -346,7 +496,8 @@ func _start_fleeing_from(threat: Node3D) -> void:
 		return
 
 	var was_already_fleeing := (
-		_behavior_state == BehaviorState.FLEEING
+		_behavior_state
+		== BehaviorState.FLEEING
 	)
 
 	_threat_target = threat
@@ -430,11 +581,13 @@ func _update_target_selection(delta: float) -> void:
 	var thirst_ratio := get_thirst_ratio()
 
 	var needs_food := (
-		hunger_ratio <= hungry_threshold_ratio
+		hunger_ratio
+		<= hungry_threshold_ratio
 	)
 
 	var needs_water := (
-		thirst_ratio <= thirsty_threshold_ratio
+		thirst_ratio
+		<= thirsty_threshold_ratio
 	)
 
 	if (
@@ -635,7 +788,10 @@ func _try_eat_food_target() -> void:
 	var hunger_before := current_hunger
 
 	if _food_target.has_method("interact"):
-		_food_target.call("interact", self)
+		_food_target.call(
+			"interact",
+			self
+		)
 
 	if current_hunger > hunger_before:
 		print(
@@ -670,6 +826,7 @@ func _drink_water() -> void:
 	)
 
 	_clear_water_target()
+
 	_water_search_timer = water_search_interval
 
 	_choose_new_behavior()
@@ -697,9 +854,7 @@ func _find_nearest_water_shore() -> bool:
 		var best_position := Vector3.ZERO
 		var best_distance_squared := INF
 
-		for sample_index in range(
-			water_search_samples
-		):
+		for sample_index in range(water_search_samples):
 			var angle := (
 				TAU
 				* float(sample_index)
@@ -715,7 +870,7 @@ func _find_nearest_water_shore() -> bool:
 			var candidate_position := (
 				global_position
 				+ search_direction
-					* search_distance
+				* search_distance
 			)
 
 			var candidate_height := (
@@ -725,13 +880,9 @@ func _find_nearest_water_shore() -> bool:
 				)
 			)
 
-			candidate_position.y = (
-				candidate_height + 0.05
-			)
+			candidate_position.y = candidate_height + 0.05
 
-			if not _is_shore_position(
-				candidate_position
-			):
+			if not _is_shore_position(candidate_position):
 				continue
 
 			var distance_squared := (
@@ -755,12 +906,8 @@ func _find_nearest_water_shore() -> bool:
 	return false
 
 
-func _is_shore_position(
-	position: Vector3
-) -> bool:
-	var sea_level := (
-		WorldGenerator.get_sea_level()
-	)
+func _is_shore_position(position: Vector3) -> bool:
+	var sea_level := WorldGenerator.get_sea_level()
 
 	var land_height := (
 		WorldGenerator.get_terrain_height(
@@ -775,8 +922,8 @@ func _is_shore_position(
 	for sample_index in range(8):
 		var angle := (
 			TAU
-				* float(sample_index)
-				/ 8.0
+			* float(sample_index)
+			/ 8.0
 		)
 
 		var check_direction := Vector3(
@@ -788,7 +935,7 @@ func _is_shore_position(
 		var water_check_position := (
 			position
 			+ check_direction
-				* shoreline_check_distance
+			* shoreline_check_distance
 		)
 
 		var nearby_height := (
@@ -852,9 +999,7 @@ func _find_nearest_berry_bush() -> Node3D:
 			if not food_available:
 				continue
 
-		var candidate_id := (
-			candidate_3d.get_instance_id()
-		)
+		var candidate_id := candidate_3d.get_instance_id()
 
 		if _ignored_food_targets.has(candidate_id):
 			continue
@@ -928,16 +1073,12 @@ func _is_water_target_valid() -> bool:
 		return false
 
 	if (
-		global_position.distance_to(
-			_water_target
-		)
+		global_position.distance_to(_water_target)
 		> water_search_radius * 1.5
 	):
 		return false
 
-	return _is_shore_position(
-		_water_target
-	)
+	return _is_shore_position(_water_target)
 
 
 func _clear_food_target() -> void:
@@ -961,6 +1102,7 @@ func _abandon_food_target(
 		] = true
 
 	_clear_food_target()
+
 	_food_search_timer = food_search_interval
 
 	_choose_new_behavior()
@@ -968,6 +1110,7 @@ func _abandon_food_target(
 
 func _abandon_water_target() -> void:
 	_clear_water_target()
+
 	_water_search_timer = water_search_interval
 
 	_choose_new_behavior()
@@ -1199,16 +1342,14 @@ func _choose_new_behavior() -> void:
 	_move_direction = Vector3.ZERO
 
 
-func _is_direction_safe(
-	direction: Vector3
-) -> bool:
+func _is_direction_safe(direction: Vector3) -> bool:
 	if direction.length_squared() <= 0.001:
 		return true
 
 	var check_position := (
 		global_position
 		+ direction.normalized()
-			* terrain_check_distance
+		* terrain_check_distance
 	)
 
 	var current_height := (
@@ -1244,29 +1385,32 @@ func _generate_creature() -> void:
 	var generated_length := maxi(
 		4,
 		body_length_voxels
-			+ _random.randi_range(-1, 1)
+		+ _random.randi_range(-1, 1)
 	)
 
 	var generated_width := maxi(
 		2,
 		body_width_voxels
-			+ _random.randi_range(-1, 1)
+		+ _random.randi_range(-1, 1)
 	)
 
 	var generated_height := maxi(
 		2,
 		body_height_voxels
-			+ _random.randi_range(-1, 1)
+		+ _random.randi_range(-1, 1)
 	)
 
 	var generated_leg_height := maxi(
 		2,
 		leg_height_voxels
-			+ _random.randi_range(-1, 1)
+		+ _random.randi_range(-1, 1)
 	)
 
 	var surface_tool := SurfaceTool.new()
-	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	surface_tool.begin(
+		Mesh.PRIMITIVE_TRIANGLES
+	)
 
 	_add_body(
 		surface_tool,
@@ -1334,17 +1478,22 @@ func _add_body(
 				var center := Vector3(
 					(
 						float(voxel_x)
-						- float(width - 1) * 0.5
-					) * voxel_size,
+						- float(width - 1)
+						* 0.5
+					)
+					* voxel_size,
 					(
 						float(leg_height)
 						+ float(voxel_y)
 						+ 0.5
-					) * voxel_size,
+					)
+					* voxel_size,
 					(
 						float(voxel_z)
-						- float(length - 1) * 0.5
-					) * voxel_size
+						- float(length - 1)
+						* 0.5
+					)
+					* voxel_size
 				)
 
 				var color := _vary_color(
@@ -1398,7 +1547,8 @@ func _add_legs(
 				(
 					float(voxel_y)
 					+ 0.5
-				) * voxel_size,
+				)
+				* voxel_size,
 				leg_position.y
 			)
 
@@ -1421,11 +1571,13 @@ func _add_head(
 ) -> void:
 	var head_center_y := (
 		float(leg_height)
-		+ float(height) * 0.72
+		+ float(height)
+		* 0.72
 	) * voxel_size
 
 	var head_center_z := (
-		-float(length) * 0.5
+		-float(length)
+		* 0.5
 		- 0.75
 	) * voxel_size
 
@@ -1436,13 +1588,14 @@ func _add_head(
 					(
 						float(voxel_x)
 						- 0.5
-					) * voxel_size,
+					)
+					* voxel_size,
 					head_center_y
-						+ float(voxel_y)
-							* voxel_size,
+					+ float(voxel_y)
+					* voxel_size,
 					head_center_z
-						- float(voxel_z)
-							* voxel_size
+					- float(voxel_z)
+					* voxel_size
 				)
 
 				_add_voxel(
@@ -1457,19 +1610,23 @@ func _add_head(
 
 	var eye_y := (
 		head_center_y
-		+ voxel_size * 0.75
+		+ voxel_size
+		* 0.75
 	)
 
 	var eye_z := (
 		head_center_z
-		- voxel_size * 1.05
+		- voxel_size
+		* 1.05
 	)
 
 	for side in [-1.0, 1.0]:
 		_add_voxel(
 			surface_tool,
 			Vector3(
-				side * voxel_size * 0.58,
+				side
+				* voxel_size
+				* 0.58,
 				eye_y,
 				eye_z
 			),
@@ -1486,11 +1643,13 @@ func _add_tail(
 ) -> void:
 	var tail_y := (
 		float(leg_height)
-		+ float(height) * 0.65
+		+ float(height)
+		* 0.65
 	) * voxel_size
 
 	var tail_z := (
-		float(length) * 0.5
+		float(length)
+		* 0.5
 		+ 0.5
 	) * voxel_size
 
@@ -1500,11 +1659,12 @@ func _add_tail(
 			Vector3(
 				0.0,
 				tail_y
-					- float(tail_part)
-						* voxel_size * 0.35,
+				- float(tail_part)
+				* voxel_size
+				* 0.35,
 				tail_z
-					+ float(tail_part)
-						* voxel_size
+				+ float(tail_part)
+				* voxel_size
 			),
 			voxel_size * 0.75,
 			_vary_color(
@@ -1737,15 +1897,20 @@ func _vary_color(
 
 func _get_creature_seed() -> int:
 	return (
-		GameState.world_seed * 59
+		GameState.world_seed
+		* 59
 		+ int(
 			round(
-				global_position.x * 100.0
+				global_position.x
+				* 100.0
 			)
-		) * 73_856_093
+		)
+		* 73_856_093
 		+ int(
 			round(
-				global_position.z * 100.0
+				global_position.z
+				* 100.0
 			)
-		) * 19_349_663
+		)
+		* 19_349_663
 	)
