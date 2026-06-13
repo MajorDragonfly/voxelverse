@@ -107,6 +107,13 @@ var minimum_reproduction_hunger_ratio: float = 0.75
 @export_range(0.0, 1.0, 0.05)
 var minimum_reproduction_thirst_ratio: float = 0.75
 
+@export_category("Mate Search")
+
+@export_range(1.0, 100.0, 1.0)
+var mate_search_radius: float = 30.0
+
+@export_range(0.1, 10.0, 0.1)
+var mate_search_interval: float = 1.0
 
 @export_category("Food Search")
 
@@ -118,7 +125,6 @@ var food_search_interval: float = 1.0
 
 @export_range(0.5, 5.0, 0.1)
 var food_reach_distance: float = 2.5
-
 
 @export_category("Water Search")
 
@@ -244,6 +250,7 @@ var _decision_timer: float = 0.0
 var _food_search_timer: float = 0.0
 var _water_search_timer: float = 0.0
 var _perception_timer: float = 0.0
+var _mate_search_timer: float = 0.0
 var _starvation_damage_timer: float = 0.0
 var _dehydration_damage_timer: float = 0.0
 
@@ -254,6 +261,9 @@ var _ignored_food_targets: Dictionary = {}
 
 var _water_target: Vector3 = Vector3.ZERO
 var _has_water_target: bool = false
+
+var _mate_target: Node3D = null
+var _reported_no_compatible_mate: bool = false
 
 var _threat_target: Node3D = null
 
@@ -462,6 +472,7 @@ func _physics_process(delta: float) -> void:
 
 	_update_life_cycle_states()
 	_update_perception(delta)
+	_update_mate_awareness(delta)
 
 	if _behavior_state == BehaviorState.FLEEING:
 		_update_fleeing(delta)
@@ -612,6 +623,187 @@ func _update_life_cycle_states(
 		snappedf(get_thirst_ratio(), 0.01)
 	)
 
+func _update_mate_awareness(delta: float) -> void:
+	if (
+		not _is_reproduction_ready
+		or _behavior_state == BehaviorState.FLEEING
+	):
+		_clear_mate_target()
+		_mate_search_timer = 0.0
+		_reported_no_compatible_mate = false
+		return
+
+	if _is_mate_target_valid():
+		return
+
+	_clear_mate_target()
+
+	_mate_search_timer = maxf(
+		_mate_search_timer - delta,
+		0.0
+	)
+
+	if _mate_search_timer > 0.0:
+		return
+
+	_mate_search_timer = maxf(
+		mate_search_interval,
+		0.1
+	)
+
+	var new_mate_target := (
+		_find_nearest_compatible_mate()
+	)
+
+	if new_mate_target == null:
+		if not _reported_no_compatible_mate:
+			print(
+				"Grazer found no compatible mate within ",
+				mate_search_radius,
+				" meters."
+			)
+
+			_reported_no_compatible_mate = true
+
+		return
+
+	_mate_target = new_mate_target
+	_reported_no_compatible_mate = false
+
+	print(
+		"Grazer found compatible mate. Self sex: ",
+		get_biological_sex_name(),
+		" | Mate sex: ",
+		String(
+			_mate_target.call(
+				"get_biological_sex_name"
+			)
+		),
+		" | Distance: ",
+		snappedf(
+			global_position.distance_to(
+				_mate_target.global_position
+			),
+			0.1
+		)
+	)
+
+
+func _find_nearest_compatible_mate() -> Node3D:
+	var nearest_mate: Node3D = null
+	var nearest_distance_squared: float = INF
+
+	var safe_search_radius := maxf(
+		mate_search_radius,
+		0.0
+	)
+
+	var search_radius_squared := (
+		safe_search_radius
+		* safe_search_radius
+	)
+
+	for grouped_node in get_tree().get_nodes_in_group(
+		&"grazer"
+	):
+		if grouped_node is not Node3D:
+			continue
+
+		var candidate := grouped_node as Node3D
+
+		if not _is_compatible_mate(candidate):
+			continue
+
+		var distance_squared := (
+			global_position.distance_squared_to(
+				candidate.global_position
+			)
+		)
+
+		if distance_squared > search_radius_squared:
+			continue
+
+		if distance_squared >= nearest_distance_squared:
+			continue
+
+		nearest_distance_squared = distance_squared
+		nearest_mate = candidate
+
+	return nearest_mate
+
+
+func _is_compatible_mate(candidate: Node) -> bool:
+	if candidate == null:
+		return false
+
+	if candidate == self:
+		return false
+
+	if not is_instance_valid(candidate):
+		return false
+
+	if not candidate.is_inside_tree():
+		return false
+
+	if not candidate.has_method(
+		"is_reproduction_ready"
+	):
+		return false
+
+	if not candidate.has_method(
+		"get_biological_sex"
+	):
+		return false
+
+	if not candidate.has_method(
+		"get_biological_sex_name"
+	):
+		return false
+
+	var candidate_is_ready := bool(
+		candidate.call(
+			"is_reproduction_ready"
+		)
+	)
+
+	if not candidate_is_ready:
+		return false
+
+	var candidate_sex := int(
+		candidate.call(
+			"get_biological_sex"
+		)
+	)
+
+	return candidate_sex != biological_sex
+
+
+func _is_mate_target_valid() -> bool:
+	if _mate_target == null:
+		return false
+
+	if not is_instance_valid(_mate_target):
+		return false
+
+	if not _is_compatible_mate(_mate_target):
+		return false
+
+	var safe_search_radius := maxf(
+		mate_search_radius,
+		0.0
+	)
+
+	return (
+		global_position.distance_squared_to(
+			_mate_target.global_position
+		)
+		<= safe_search_radius
+		* safe_search_radius
+	)
+
+
+func _clear_mate_target() -> void:
+	_mate_target = null
 
 func _process_corpse_physics(delta: float) -> void:
 	velocity.x = 0.0
@@ -1513,7 +1705,8 @@ func _die() -> void:
 	current_health = 0.0
 
 	_update_life_cycle_states()
-
+	
+	_clear_mate_target()
 	_clear_food_target()
 	_clear_water_target()
 
