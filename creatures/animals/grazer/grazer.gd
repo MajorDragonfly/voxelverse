@@ -98,6 +98,15 @@ var maximum_maximum_age_seconds: float = 900.0
 @export_range(0.0, 0.95, 0.05)
 var maximum_initial_age_ratio: float = 0.5
 
+@export_range(0.05, 0.95, 0.05)
+var sexual_maturity_age_ratio: float = 0.25
+
+@export_range(0.0, 1.0, 0.05)
+var minimum_reproduction_hunger_ratio: float = 0.75
+
+@export_range(0.0, 1.0, 0.05)
+var minimum_reproduction_thirst_ratio: float = 0.75
+
 
 @export_category("Food Search")
 
@@ -224,6 +233,9 @@ var biological_sex: int = BiologicalSex.FEMALE
 
 var is_dead: bool = false
 
+var _is_sexually_mature: bool = false
+var _is_reproduction_ready: bool = false
+
 var _random := RandomNumberGenerator.new()
 
 var _move_direction: Vector3 = Vector3.ZERO
@@ -276,6 +288,7 @@ func _initialize_creature() -> void:
 
 	_assign_biological_sex(creature_seed)
 	_assign_life_cycle(creature_seed)
+	_update_life_cycle_states(false)
 
 	_generate_creature()
 	_choose_new_behavior()
@@ -290,6 +303,16 @@ func _initialize_creature() -> void:
 		" / ",
 		snappedf(maximum_age_seconds, 0.1),
 		" seconds",
+		" | Maturity age: ",
+		snappedf(
+			get_sexual_maturity_age_seconds(),
+			0.1
+		),
+		" seconds",
+		" | Sexually mature: ",
+		is_sexually_mature(),
+		" | Reproduction ready: ",
+		is_reproduction_ready(),
 		" | Seed: ",
 		creature_seed,
 		" | Position: ",
@@ -392,6 +415,28 @@ func get_age_ratio() -> float:
 	)
 
 
+func get_sexual_maturity_age_seconds() -> float:
+	if maximum_age_seconds <= 0.0:
+		return 0.0
+
+	return (
+		maximum_age_seconds
+		* clampf(
+			sexual_maturity_age_ratio,
+			0.05,
+			0.95
+		)
+	)
+
+
+func is_sexually_mature() -> bool:
+	return _is_sexually_mature
+
+
+func is_reproduction_ready() -> bool:
+	return _is_reproduction_ready
+
+
 func _physics_process(delta: float) -> void:
 	if not _initialized:
 		return
@@ -415,6 +460,7 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
+	_update_life_cycle_states()
 	_update_perception(delta)
 
 	if _behavior_state == BehaviorState.FLEEING:
@@ -496,6 +542,75 @@ func _update_age(delta: float) -> void:
 	)
 
 	_die()
+
+
+func _update_life_cycle_states(
+	announce_changes: bool = true
+) -> void:
+	var new_sexual_maturity := (
+		not is_dead
+		and current_age_seconds
+		>= get_sexual_maturity_age_seconds()
+	)
+
+	if new_sexual_maturity != _is_sexually_mature:
+		_is_sexually_mature = new_sexual_maturity
+
+		if (
+			announce_changes
+			and _is_sexually_mature
+		):
+			print(
+				"Grazer reached sexual maturity. Age: ",
+				snappedf(current_age_seconds, 0.1),
+				" / ",
+				snappedf(
+					get_sexual_maturity_age_seconds(),
+					0.1
+				),
+				" seconds."
+			)
+
+	var new_reproduction_readiness := (
+		not is_dead
+		and _is_sexually_mature
+		and get_hunger_ratio()
+		>= clampf(
+			minimum_reproduction_hunger_ratio,
+			0.0,
+			1.0
+		)
+		and get_thirst_ratio()
+		>= clampf(
+			minimum_reproduction_thirst_ratio,
+			0.0,
+			1.0
+		)
+	)
+
+	if (
+		new_reproduction_readiness
+		== _is_reproduction_ready
+	):
+		return
+
+	_is_reproduction_ready = (
+		new_reproduction_readiness
+	)
+
+	if not announce_changes:
+		return
+
+	print(
+		"Grazer reproduction readiness changed: ",
+		_is_reproduction_ready,
+		" | Mature: ",
+		_is_sexually_mature,
+		" | Hunger ratio: ",
+		snappedf(get_hunger_ratio(), 0.01),
+		" | Thirst ratio: ",
+		snappedf(get_thirst_ratio(), 0.01)
+	)
 
 
 func _process_corpse_physics(delta: float) -> void:
@@ -1396,6 +1511,8 @@ func _die() -> void:
 
 	is_dead = true
 	current_health = 0.0
+
+	_update_life_cycle_states()
 
 	_clear_food_target()
 	_clear_water_target()
