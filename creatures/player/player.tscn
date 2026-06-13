@@ -51,3 +51,12 @@ text = "Hunger"
 custom_minimum_size = Vector2(280, 22)
 layout_mode = 2
 show_percentage = false
+
+[node name="ThirstLabel" type="Label" parent="HUD/StatusContainer" unique_id=216201653]
+layout_mode = 2
+text = "Durst"
+
+[node name="ThirstBar" type="ProgressBar" parent="HUD/StatusContainer" unique_id=1853331496]
+custom_minimum_size = Vector2(280, 22)
+layout_mode = 2
+show_percentage = false

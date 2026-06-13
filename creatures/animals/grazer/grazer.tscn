@@ -4,6 +4,8 @@
 
 [node name="Grazer" type="CharacterBody3D" unique_id=1663504895]
 script = ExtResource("1_btf05")
+hungry_threshold_ratio = 0.9
+thirst_loss_per_second = 5.0
 
 [node name="BodyMesh" type="MeshInstance3D" parent="." unique_id=206946388]
 

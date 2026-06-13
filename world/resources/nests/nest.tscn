@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cm26fs2gvsrep"]
+
+[ext_resource type="Script" uid="uid://6sprsfjhecxs" path="res://world/resources/nests/nest.gd" id="1_pmytf"]
+
+[node name="Nest" type="Node3D" unique_id=1293792252]
+script = ExtResource("1_pmytf")
+
+[node name="NestMesh" type="MeshInstance3D" parent="." unique_id=464130210]
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=1260015313]

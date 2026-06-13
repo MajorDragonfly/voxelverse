@@ -47,6 +47,8 @@ var is_depleted: bool = false
 
 
 func _ready() -> void:
+	add_to_group(&"berry_bush")
+
 	# Aufgeschoben, damit ein Chunk vorher Position, Drehung und
 	# Skalierung der Pflanze festlegen kann.
 	call_deferred("_initialize_bush")
@@ -57,6 +59,10 @@ func _initialize_bush() -> void:
 		_snap_to_terrain()
 
 	_generate_bush()
+
+
+func has_food_available() -> bool:
+	return not is_depleted
 
 
 func interact(actor: Node) -> void:
@@ -94,7 +100,7 @@ func interact(actor: Node) -> void:
 		)
 
 		if hunger_ratio >= 0.999:
-			print("Player is not hungry.")
+			print("Actor is not hungry.")
 			return
 
 	actor.call(
@@ -178,12 +184,15 @@ func _generate_bush() -> void:
 	var generated_mesh: ArrayMesh = surface_tool.commit()
 
 	if generated_mesh == null:
-		push_error("Procedural berry bush mesh could not be generated.")
+		push_error(
+			"Procedural berry bush mesh could not be generated."
+		)
 		return
 
 	bush_mesh.mesh = generated_mesh
 
 	_apply_material()
+
 	_create_collision(
 		generated_radius,
 		generated_height
