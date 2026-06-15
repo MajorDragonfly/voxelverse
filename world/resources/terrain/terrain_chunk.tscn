@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://dd0q32q5awvjd"]
 
 [ext_resource type="Script" uid="uid://binhy5f1mbskn" path="res://world/resources/terrain/terrain_chunk.gd" id="1_fj3vv"]
-[ext_resource type="Script" path="res://world/visuals/voxel/voxel_surface_styler.gd" id="2_styler"]
+[ext_resource type="Script" uid="uid://b703m5xueaa0q" path="res://world/visuals/voxel/voxel_surface_styler.gd" id="2_styler"]
 
 [node name="TerrainChunk" type="StaticBody3D" unique_id=1870033249]
 script = ExtResource("1_fj3vv")
 
 [node name="TerrainMesh" type="MeshInstance3D" parent="." unique_id=1378419624]
 script = ExtResource("2_styler")
-initial_delay_frames = 4
 
 [node name="TerrainCollision" type="CollisionShape3D" parent="." unique_id=907640669]
 

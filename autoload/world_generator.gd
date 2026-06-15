@@ -28,6 +28,16 @@ const TERRAIN_OCTAVES: int = 5
 # Fallback für den Fall, dass noch kein Profil existiert.
 const TERRAIN_VISUAL_STEP_HEIGHT: float = 0.5
 
+# Alle vom Weltprofil erzeugten Terrassenhöhen werden
+# für die feinere Voxeloptik auf ein Viertel reduziert.
+#
+# Beispiel:
+# 0.40 Meter Profilstufe -> 0.10 Meter sichtbare Stufe
+const TERRAIN_VISUAL_STEP_SCALE: float = 0.25
+
+# Schutz vor extrem kleinen oder ungültigen Stufen.
+const MINIMUM_VISUAL_STEP_HEIGHT: float = 0.05
+
 # Abstand für die Berechnung der Terrainsteigung.
 const TERRAIN_SLOPE_SAMPLE_DISTANCE: float = 1.0
 
@@ -346,7 +356,7 @@ func get_visual_terrain_height(
 
 	var step_height := maxf(
 		get_visual_step_height(),
-		0.05
+		MINIMUM_VISUAL_STEP_HEIGHT
 	)
 
 	return (
@@ -361,10 +371,20 @@ func get_visual_terrain_height(
 func get_visual_step_height() -> float:
 	_ensure_initialized()
 
-	if _visual_profile == null:
-		return TERRAIN_VISUAL_STEP_HEIGHT
+	var profile_step_height: float = (
+		TERRAIN_VISUAL_STEP_HEIGHT
+	)
 
-	return _visual_profile.terrace_step_height
+	if _visual_profile != null:
+		profile_step_height = (
+			_visual_profile.terrace_step_height
+		)
+
+	return maxf(
+		profile_step_height
+		* TERRAIN_VISUAL_STEP_SCALE,
+		MINIMUM_VISUAL_STEP_HEIGHT
+	)
 
 
 func get_terrain_slope(
@@ -728,6 +748,12 @@ func _print_visual_profile() -> void:
 		print(
 			"World visual profile: Default"
 		)
+
+		print(
+			"Visual terrain step height: ",
+			get_visual_step_height()
+		)
+
 		return
 
 	print(
@@ -744,8 +770,13 @@ func _print_visual_profile() -> void:
 	)
 
 	print(
-		"Visual terrain step height: ",
+		"Base terrain step height: ",
 		_visual_profile.terrace_step_height
+	)
+
+	print(
+		"Visual terrain step height: ",
+		get_visual_step_height()
 	)
 
 	print(

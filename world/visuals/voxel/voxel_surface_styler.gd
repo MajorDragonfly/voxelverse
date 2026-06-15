@@ -2,7 +2,7 @@ extends MeshInstance3D
 class_name VoxelSurfaceStyler
 
 
-const VOXEL_SURFACE_MATERIAL = preload(
+const VOXEL_SURFACE_MATERIAL: ShaderMaterial = preload(
 	"res://world/visuals/voxel/voxel_surface_material.tres"
 )
 
@@ -17,6 +17,21 @@ var keep_monitoring: bool = false
 
 @export_range(0.1, 5.0, 0.1)
 var monitoring_interval: float = 0.5
+
+
+@export_category("Pixel Texture")
+
+@export
+var use_pixel_texture: bool = false
+
+@export
+var voxel_texture: Texture2D
+
+@export_range(0.25, 16.0, 0.25)
+var texture_scale: float = 2.0
+
+@export_range(2, 8, 1)
+var palette_steps: int = 4
 
 
 var _voxel_material: ShaderMaterial = null
@@ -44,6 +59,8 @@ func _ready() -> void:
 
 		set_process(false)
 		return
+
+	_apply_texture_parameters()
 
 	set_process(true)
 
@@ -97,12 +114,6 @@ func _apply_voxel_surface_material() -> bool:
 
 	var source_tint: Color = Color.WHITE
 
-	# Der Grazer setzt beim Tod ein eigenes Material
-	# mit einer Leichenfärbung. Der Beerenbusch erzeugt
-	# beim Abernten ebenfalls sein Material erneut.
-	#
-	# Diese bereits gesetzte Färbung wird übernommen,
-	# bevor das gemeinsame Voxelmaterial aktiviert wird.
 	if material_override is StandardMaterial3D:
 		var source_material := (
 			material_override
@@ -113,11 +124,69 @@ func _apply_voxel_surface_material() -> bool:
 			source_material.albedo_color
 		)
 
+	elif material_override is ShaderMaterial:
+		var source_shader_material := (
+			material_override
+			as ShaderMaterial
+		)
+
+		var stored_tint: Variant = (
+			source_shader_material
+			.get_shader_parameter(
+				&"object_tint"
+			)
+		)
+
+		if stored_tint is Color:
+			source_tint = stored_tint
+
 	_voxel_material.set_shader_parameter(
 		&"object_tint",
 		source_tint
 	)
 
+	_apply_texture_parameters()
+
 	material_override = _voxel_material
 
 	return true
+
+
+func _apply_texture_parameters() -> void:
+	if _voxel_material == null:
+		return
+
+	var texture_is_available := (
+		use_pixel_texture
+		and voxel_texture != null
+	)
+
+	_voxel_material.set_shader_parameter(
+		&"use_pixel_texture",
+		texture_is_available
+	)
+
+	if voxel_texture != null:
+		_voxel_material.set_shader_parameter(
+			&"pixel_texture",
+			voxel_texture
+		)
+
+	_voxel_material.set_shader_parameter(
+		&"texture_scale",
+		maxf(
+			texture_scale,
+			0.25
+		)
+	)
+
+	_voxel_material.set_shader_parameter(
+		&"palette_steps",
+		float(
+			clampi(
+				palette_steps,
+				2,
+				8
+			)
+		)
+	)

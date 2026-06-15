@@ -1,6 +1,23 @@
 extends Node3D
 
 
+const VOXEL_SURFACE_MATERIAL: ShaderMaterial = preload(
+	"res://world/visuals/voxel/voxel_surface_material.tres"
+)
+
+const GRASS_TEXTURE: Texture2D = preload(
+	"res://world/visuals/voxel/textures/grass_01.png"
+)
+
+const STONE_TEXTURE: Texture2D = preload(
+	"res://world/visuals/voxel/textures/stone_01.png"
+)
+
+const RUIN_TEXTURE: Texture2D = preload(
+	"res://world/visuals/voxel/textures/ruin_stone_01.png"
+)
+
+
 const GRASS_SEED_OFFSET: int = 714_025_381
 const ROCK_SEED_OFFSET: int = 932_167_447
 const SPIRE_SEED_OFFSET: int = 481_597_231
@@ -55,10 +72,157 @@ var spawn_clear_radius: float = 14.0
 var chunk_edge_margin: float = 1.5
 
 
+@export_category("Pixel Materials")
+
+@export_range(2, 8, 1)
+var palette_steps: int = 4
+
+@export_range(0.25, 8.0, 0.25)
+var grass_texture_scale: float = 2.0
+
+@export_range(0.25, 8.0, 0.25)
+var stone_texture_scale: float = 0.85
+
+@export_range(0.25, 8.0, 0.25)
+var spire_texture_scale: float = 0.70
+
+@export_range(0.25, 8.0, 0.25)
+var ruin_texture_scale: float = 0.90
+
+@export_range(0.20, 1.00, 0.01)
+var grass_texture_darkness: float = 0.62
+
+@export_range(0.80, 1.50, 0.01)
+var grass_texture_brightness: float = 1.18
+
+@export_range(0.20, 1.00, 0.01)
+var stone_texture_darkness: float = 0.48
+
+@export_range(0.80, 1.50, 0.01)
+var stone_texture_brightness: float = 1.28
+
+@export_range(0.20, 1.00, 0.01)
+var ruin_texture_darkness: float = 0.52
+
+@export_range(0.80, 1.50, 0.01)
+var ruin_texture_brightness: float = 1.24
+
+
+var _grass_material: ShaderMaterial = null
+var _stone_material: ShaderMaterial = null
+var _spire_material: ShaderMaterial = null
+var _ruin_material: ShaderMaterial = null
+
+
 func _ready() -> void:
+	_initialize_pixel_materials()
+
 	call_deferred(
 		"_generate_scenic_dressing"
 	)
+
+
+func _initialize_pixel_materials() -> void:
+	_grass_material = _create_pixel_voxel_material(
+		GRASS_TEXTURE,
+		grass_texture_scale,
+		grass_texture_darkness,
+		grass_texture_brightness
+	)
+
+	_stone_material = _create_pixel_voxel_material(
+		STONE_TEXTURE,
+		stone_texture_scale,
+		stone_texture_darkness,
+		stone_texture_brightness
+	)
+
+	_spire_material = _create_pixel_voxel_material(
+		STONE_TEXTURE,
+		spire_texture_scale,
+		stone_texture_darkness,
+		stone_texture_brightness
+	)
+
+	_ruin_material = _create_pixel_voxel_material(
+		RUIN_TEXTURE,
+		ruin_texture_scale,
+		ruin_texture_darkness,
+		ruin_texture_brightness
+	)
+
+
+func _create_pixel_voxel_material(
+	texture: Texture2D,
+	texture_scale_value: float,
+	texture_darkness_value: float,
+	texture_brightness_value: float
+) -> ShaderMaterial:
+	var material := (
+		VOXEL_SURFACE_MATERIAL.duplicate()
+		as ShaderMaterial
+	)
+
+	if material == null:
+		push_error(
+			"Scenic pixel material could not be duplicated."
+		)
+		return null
+
+	material.set_shader_parameter(
+		&"object_tint",
+		Color.WHITE
+	)
+
+	material.set_shader_parameter(
+		&"use_pixel_texture",
+		texture != null
+	)
+
+	if texture != null:
+		material.set_shader_parameter(
+			&"pixel_texture",
+			texture
+		)
+
+	material.set_shader_parameter(
+		&"texture_scale",
+		maxf(
+			texture_scale_value,
+			0.25
+		)
+	)
+
+	material.set_shader_parameter(
+		&"palette_steps",
+		float(
+			clampi(
+				palette_steps,
+				2,
+				8
+			)
+		)
+	)
+
+	material.set_shader_parameter(
+		&"texture_darkness",
+		clampf(
+			texture_darkness_value,
+			0.20,
+			1.00
+		)
+	)
+
+	material.set_shader_parameter(
+		&"texture_brightness",
+		clampf(
+			texture_brightness_value,
+			0.80,
+			1.50
+		)
+	)
+
+	return material
 
 
 func _generate_scenic_dressing() -> void:
@@ -302,9 +466,7 @@ func _generate_grass(
 	if instance_transforms.is_empty():
 		return
 
-	var grass_multi_mesh: MultiMesh = (
-		MultiMesh.new()
-	)
+	var grass_multi_mesh := MultiMesh.new()
 
 	grass_multi_mesh.transform_format = (
 		MultiMesh.TRANSFORM_3D
@@ -334,9 +496,7 @@ func _generate_grass(
 			]
 		)
 
-	var grass_instance: MultiMeshInstance3D = (
-		MultiMeshInstance3D.new()
-	)
+	var grass_instance := MultiMeshInstance3D.new()
 
 	grass_instance.name = "GrassTufts"
 	grass_instance.multimesh = grass_multi_mesh
@@ -518,9 +678,7 @@ func _generate_rocks(
 	if instance_transforms.is_empty():
 		return
 
-	var rock_multi_mesh: MultiMesh = (
-		MultiMesh.new()
-	)
+	var rock_multi_mesh := MultiMesh.new()
 
 	rock_multi_mesh.transform_format = (
 		MultiMesh.TRANSFORM_3D
@@ -550,9 +708,7 @@ func _generate_rocks(
 			]
 		)
 
-	var rock_instance: MultiMeshInstance3D = (
-		MultiMeshInstance3D.new()
-	)
+	var rock_instance := MultiMeshInstance3D.new()
 
 	rock_instance.name = "ScatteredRocks"
 	rock_instance.multimesh = rock_multi_mesh
@@ -729,9 +885,7 @@ func _generate_spires(
 	if instance_transforms.is_empty():
 		return
 
-	var spire_multi_mesh: MultiMesh = (
-		MultiMesh.new()
-	)
+	var spire_multi_mesh := MultiMesh.new()
 
 	spire_multi_mesh.transform_format = (
 		MultiMesh.TRANSFORM_3D
@@ -761,9 +915,7 @@ func _generate_spires(
 			]
 		)
 
-	var spire_instance: MultiMeshInstance3D = (
-		MultiMeshInstance3D.new()
-	)
+	var spire_instance := MultiMeshInstance3D.new()
 
 	spire_instance.name = "RockSpires"
 	spire_instance.multimesh = spire_multi_mesh
@@ -900,9 +1052,7 @@ func _generate_ruin(
 			)
 		)
 
-		var ruin_instance: MeshInstance3D = (
-			MeshInstance3D.new()
-		)
+		var ruin_instance := MeshInstance3D.new()
 
 		ruin_instance.name = "AncientRuin"
 		ruin_instance.mesh = ruin_mesh
@@ -954,9 +1104,7 @@ func _create_chunk_random(
 		)
 	)
 
-	var random: RandomNumberGenerator = (
-		RandomNumberGenerator.new()
-	)
+	var random := RandomNumberGenerator.new()
 
 	random.seed = (
 		GameState.world_seed
@@ -1173,9 +1321,7 @@ func _vary_color(
 
 
 func _create_grass_mesh() -> ArrayMesh:
-	var surface_tool: SurfaceTool = (
-		SurfaceTool.new()
-	)
+	var surface_tool := SurfaceTool.new()
 
 	surface_tool.begin(
 		Mesh.PRIMITIVE_TRIANGLES
@@ -1232,26 +1378,23 @@ func _create_grass_mesh() -> ArrayMesh:
 		surface_tool.commit()
 	)
 
-	var grass_material: StandardMaterial3D = (
-		StandardMaterial3D.new()
-	)
+	if generated_mesh == null:
+		push_error(
+			"Grass mesh could not be generated."
+		)
+		return null
 
-	grass_material.albedo_color = Color.WHITE
-	grass_material.vertex_color_use_as_albedo = true
-	grass_material.roughness = 1.0
-
-	generated_mesh.surface_set_material(
-		0,
-		grass_material
-	)
+	if _grass_material != null:
+		generated_mesh.surface_set_material(
+			0,
+			_grass_material
+		)
 
 	return generated_mesh
 
 
 func _create_rock_mesh() -> ArrayMesh:
-	var surface_tool: SurfaceTool = (
-		SurfaceTool.new()
-	)
+	var surface_tool := SurfaceTool.new()
 
 	surface_tool.begin(
 		Mesh.PRIMITIVE_TRIANGLES
@@ -1308,26 +1451,23 @@ func _create_rock_mesh() -> ArrayMesh:
 		surface_tool.commit()
 	)
 
-	var rock_material: StandardMaterial3D = (
-		StandardMaterial3D.new()
-	)
+	if generated_mesh == null:
+		push_error(
+			"Rock mesh could not be generated."
+		)
+		return null
 
-	rock_material.albedo_color = Color.WHITE
-	rock_material.vertex_color_use_as_albedo = true
-	rock_material.roughness = 1.0
-
-	generated_mesh.surface_set_material(
-		0,
-		rock_material
-	)
+	if _stone_material != null:
+		generated_mesh.surface_set_material(
+			0,
+			_stone_material
+		)
 
 	return generated_mesh
 
 
 func _create_spire_mesh() -> ArrayMesh:
-	var surface_tool: SurfaceTool = (
-		SurfaceTool.new()
-	)
+	var surface_tool := SurfaceTool.new()
 
 	surface_tool.begin(
 		Mesh.PRIMITIVE_TRIANGLES
@@ -1414,18 +1554,17 @@ func _create_spire_mesh() -> ArrayMesh:
 		surface_tool.commit()
 	)
 
-	var spire_material: StandardMaterial3D = (
-		StandardMaterial3D.new()
-	)
+	if generated_mesh == null:
+		push_error(
+			"Rock spire mesh could not be generated."
+		)
+		return null
 
-	spire_material.albedo_color = Color.WHITE
-	spire_material.vertex_color_use_as_albedo = true
-	spire_material.roughness = 1.0
-
-	generated_mesh.surface_set_material(
-		0,
-		spire_material
-	)
+	if _spire_material != null:
+		generated_mesh.surface_set_material(
+			0,
+			_spire_material
+		)
 
 	return generated_mesh
 
@@ -1433,9 +1572,7 @@ func _create_spire_mesh() -> ArrayMesh:
 func _create_ruin_mesh(
 	random: RandomNumberGenerator
 ) -> ArrayMesh:
-	var surface_tool: SurfaceTool = (
-		SurfaceTool.new()
-	)
+	var surface_tool := SurfaceTool.new()
 
 	surface_tool.begin(
 		Mesh.PRIMITIVE_TRIANGLES
@@ -1589,18 +1726,17 @@ func _create_ruin_mesh(
 		surface_tool.commit()
 	)
 
-	var ruin_material: StandardMaterial3D = (
-		StandardMaterial3D.new()
-	)
+	if generated_mesh == null:
+		push_error(
+			"Ruin mesh could not be generated."
+		)
+		return null
 
-	ruin_material.albedo_color = Color.WHITE
-	ruin_material.vertex_color_use_as_albedo = true
-	ruin_material.roughness = 1.0
-
-	generated_mesh.surface_set_material(
-		0,
-		ruin_material
-	)
+	if _ruin_material != null:
+		generated_mesh.surface_set_material(
+			0,
+			_ruin_material
+		)
 
 	return generated_mesh
 
@@ -1611,7 +1747,9 @@ func _add_box(
 	box_size: Vector3,
 	box_color: Color
 ) -> void:
-	var half_size: Vector3 = box_size * 0.5
+	var half_size: Vector3 = (
+		box_size * 0.5
+	)
 
 	var left: float = (
 		box_center.x

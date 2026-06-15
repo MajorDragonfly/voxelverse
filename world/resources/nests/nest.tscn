@@ -1,10 +1,18 @@
 [gd_scene format=3 uid="uid://cm26fs2gvsrep"]
 
 [ext_resource type="Script" uid="uid://6sprsfjhecxs" path="res://world/resources/nests/nest.gd" id="1_pmytf"]
+[ext_resource type="Script" path="res://world/visuals/voxel/voxel_surface_styler.gd" id="2_styler"]
+[ext_resource type="Texture2D" path="res://world/visuals/voxel/textures/nest_fiber_01.png" id="3_nest_texture"]
 
 [node name="Nest" type="Node3D" unique_id=1293792252]
 script = ExtResource("1_pmytf")
 
 [node name="NestMesh" type="MeshInstance3D" parent="." unique_id=464130210]
+script = ExtResource("2_styler")
+initial_delay_frames = 4
+use_pixel_texture = true
+voxel_texture = ExtResource("3_nest_texture")
+texture_scale = 4.0
+palette_steps = 4
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=1260015313]
