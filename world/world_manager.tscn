@@ -4,3 +4,4 @@
 
 [node name="WorldManager" type="Node3D" unique_id=583502211]
 script = ExtResource("1_xf7qu")
+render_distance = 2

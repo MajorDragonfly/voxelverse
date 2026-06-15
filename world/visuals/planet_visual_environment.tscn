@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://world/visuals/planet_visual_environment.gd" id="1_visual"]
+
+[sub_resource type="Environment" id="Environment_placeholder"]
+
+[node name="PlanetVisualEnvironment" type="Node3D"]
+script = ExtResource("1_visual")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_placeholder")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
