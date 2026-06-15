@@ -5,9 +5,30 @@ const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
 
 const BIOLOGICAL_SEX_SEED_OFFSET: int = 1_592_746_831
-const MAXIMUM_AGE_SEED_OFFSET: int = 2_147_483_647
 const INITIAL_AGE_SEED_OFFSET: int = 1_073_741_823
 const NEWBORN_SEED_OFFSET: int = 982_451_653
+const GENETIC_PROFILE_SEED_OFFSET: int = 32_452_843
+const GENETIC_INHERITANCE_SEED_OFFSET: int = 49_979_687
+
+const MIN_BODY_LENGTH_GENE: float = 3.0
+const MAX_BODY_LENGTH_GENE: float = 8.0
+const MIN_BODY_WIDTH_GENE: float = 2.0
+const MAX_BODY_WIDTH_GENE: float = 5.0
+const MIN_BODY_HEIGHT_GENE: float = 2.0
+const MAX_BODY_HEIGHT_GENE: float = 5.0
+const MIN_LEG_HEIGHT_GENE: float = 2.0
+const MAX_LEG_HEIGHT_GENE: float = 6.0
+const MIN_MOVE_SPEED_GENE: float = 0.5
+const MAX_MOVE_SPEED_GENE: float = 5.0
+
+const GENE_BODY_LENGTH: StringName = &"body_length"
+const GENE_BODY_WIDTH: StringName = &"body_width"
+const GENE_BODY_HEIGHT: StringName = &"body_height"
+const GENE_LEG_HEIGHT: StringName = &"leg_height"
+const GENE_MOVE_SPEED: StringName = &"move_speed"
+const GENE_MAXIMUM_AGE: StringName = &"maximum_age"
+const GENE_GENERATION: StringName = &"generation"
+const GENE_MUTATIONS: StringName = &"mutations"
 
 const GRAZER_SCENE_PATH: String = (
 	"res://creatures/animals/grazer/grazer.tscn"
@@ -112,6 +133,21 @@ var minimum_reproduction_hunger_ratio: float = 0.75
 
 @export_range(0.0, 1.0, 0.05)
 var minimum_reproduction_thirst_ratio: float = 0.75
+
+
+@export_category("Genetics")
+
+@export_range(0.0, 0.5, 0.01)
+var founder_gene_variation_ratio: float = 0.18
+
+@export_range(0.0, 1.0, 0.01)
+var gene_mutation_chance: float = 0.12
+
+@export_range(0.0, 0.5, 0.01)
+var gene_mutation_strength_ratio: float = 0.08
+
+@export_range(0.0, 0.5, 0.01)
+var inheritance_minimum_parent_ratio: float = 0.35
 
 
 @export_category("Mate Search")
@@ -271,12 +307,17 @@ var _seed_override: int = 0
 var _has_seed_override: bool = false
 var _configured_as_newborn: bool = false
 
+var _genetic_profile: Dictionary = {}
+var _pending_inherited_genetic_profile: Dictionary = {}
+var _has_inherited_genetic_profile: bool = false
+
 var _is_sexually_mature: bool = false
 var _is_reproduction_ready: bool = false
 
 var _is_pregnant: bool = false
 var _pregnancy_timer: float = 0.0
 var _pregnancy_father_seed: int = 0
+var _pregnancy_father_genetic_profile: Dictionary = {}
 var _reproduction_cooldown_timer: float = 0.0
 var _birth_count: int = 0
 
@@ -338,6 +379,7 @@ func _initialize_creature() -> void:
 	_creature_seed = creature_seed
 	_random.seed = creature_seed
 
+	_initialize_genetic_profile(creature_seed)
 	_assign_biological_sex(creature_seed)
 	_assign_life_cycle(creature_seed)
 	_update_life_cycle_states(false)
@@ -348,35 +390,603 @@ func _initialize_creature() -> void:
 	_initialized = true
 
 	print(
-		"Grazer initialized. Sex: ",
+		"Grazer initialized. Seed: ",
+		_creature_seed,
+		" | Generation: ",
+		get_genetic_generation(),
+		" | Sex: ",
 		get_biological_sex_name(),
 		" | Age: ",
 		snappedf(current_age_seconds, 0.1),
 		" / ",
 		snappedf(maximum_age_seconds, 0.1),
 		" seconds",
-		" | Maturity age: ",
-		snappedf(
-			get_sexual_maturity_age_seconds(),
-			0.1
-		),
-		" seconds",
-		" | Sexually mature: ",
+		" | Mature: ",
 		is_sexually_mature(),
-		" | Reproduction ready: ",
+		" | Ready: ",
 		is_reproduction_ready(),
 		" | Newborn: ",
 		_configured_as_newborn,
-		" | Seed: ",
-		_creature_seed,
+		" | Genes: ",
+		get_genetic_profile_summary(),
+		" | Mutations: ",
+		get_genetic_mutation_summary(),
 		" | Position: ",
-		global_position,
-		" | In grazer group: ",
-		is_in_group(&"grazer")
+		global_position
 	)
 
 
-func _assign_biological_sex(creature_seed: int) -> void:
+func _initialize_genetic_profile(creature_seed: int) -> void:
+	if (
+		_has_inherited_genetic_profile
+		and not _pending_inherited_genetic_profile.is_empty()
+	):
+		_genetic_profile = _sanitize_genetic_profile(
+			_pending_inherited_genetic_profile
+		)
+	else:
+		_genetic_profile = _create_founder_genetic_profile(
+			creature_seed
+		)
+
+	_pending_inherited_genetic_profile.clear()
+	_has_inherited_genetic_profile = false
+
+
+func _create_founder_genetic_profile(
+	creature_seed: int
+) -> Dictionary:
+	var genetic_random := RandomNumberGenerator.new()
+
+	genetic_random.seed = (
+		creature_seed
+		+ GENETIC_PROFILE_SEED_OFFSET
+	)
+
+	var lowest_maximum_age := minf(
+		minimum_maximum_age_seconds,
+		maximum_maximum_age_seconds
+	)
+
+	var highest_maximum_age := maxf(
+		minimum_maximum_age_seconds,
+		maximum_maximum_age_seconds
+	)
+
+	var profile: Dictionary = {}
+
+	profile[GENE_BODY_LENGTH] = _create_founder_trait(
+		genetic_random,
+		float(body_length_voxels),
+		MIN_BODY_LENGTH_GENE,
+		MAX_BODY_LENGTH_GENE
+	)
+
+	profile[GENE_BODY_WIDTH] = _create_founder_trait(
+		genetic_random,
+		float(body_width_voxels),
+		MIN_BODY_WIDTH_GENE,
+		MAX_BODY_WIDTH_GENE
+	)
+
+	profile[GENE_BODY_HEIGHT] = _create_founder_trait(
+		genetic_random,
+		float(body_height_voxels),
+		MIN_BODY_HEIGHT_GENE,
+		MAX_BODY_HEIGHT_GENE
+	)
+
+	profile[GENE_LEG_HEIGHT] = _create_founder_trait(
+		genetic_random,
+		float(leg_height_voxels),
+		MIN_LEG_HEIGHT_GENE,
+		MAX_LEG_HEIGHT_GENE
+	)
+
+	profile[GENE_MOVE_SPEED] = _create_founder_trait(
+		genetic_random,
+		move_speed,
+		MIN_MOVE_SPEED_GENE,
+		MAX_MOVE_SPEED_GENE
+	)
+
+	profile[GENE_MAXIMUM_AGE] = genetic_random.randf_range(
+		lowest_maximum_age,
+		highest_maximum_age
+	)
+
+	profile[GENE_GENERATION] = 0
+	profile[GENE_MUTATIONS] = []
+
+	return profile
+
+
+func _create_founder_trait(
+	genetic_random: RandomNumberGenerator,
+	base_value: float,
+	minimum_value: float,
+	maximum_value: float
+) -> float:
+	var safe_variation_ratio := clampf(
+		founder_gene_variation_ratio,
+		0.0,
+		0.5
+	)
+
+	var variation_amount := maxf(
+		absf(base_value) * safe_variation_ratio,
+		(maximum_value - minimum_value) * 0.03
+	)
+
+	return clampf(
+		base_value
+		+ genetic_random.randf_range(
+			-variation_amount,
+			variation_amount
+		),
+		minimum_value,
+		maximum_value
+	)
+
+
+func _sanitize_genetic_profile(
+	source_profile: Dictionary
+) -> Dictionary:
+	var lowest_maximum_age := minf(
+		minimum_maximum_age_seconds,
+		maximum_maximum_age_seconds
+	)
+
+	var highest_maximum_age := maxf(
+		minimum_maximum_age_seconds,
+		maximum_maximum_age_seconds
+	)
+
+	var profile: Dictionary = {}
+
+	profile[GENE_BODY_LENGTH] = clampf(
+		_get_gene_value(
+			source_profile,
+			GENE_BODY_LENGTH,
+			float(body_length_voxels)
+		),
+		MIN_BODY_LENGTH_GENE,
+		MAX_BODY_LENGTH_GENE
+	)
+
+	profile[GENE_BODY_WIDTH] = clampf(
+		_get_gene_value(
+			source_profile,
+			GENE_BODY_WIDTH,
+			float(body_width_voxels)
+		),
+		MIN_BODY_WIDTH_GENE,
+		MAX_BODY_WIDTH_GENE
+	)
+
+	profile[GENE_BODY_HEIGHT] = clampf(
+		_get_gene_value(
+			source_profile,
+			GENE_BODY_HEIGHT,
+			float(body_height_voxels)
+		),
+		MIN_BODY_HEIGHT_GENE,
+		MAX_BODY_HEIGHT_GENE
+	)
+
+	profile[GENE_LEG_HEIGHT] = clampf(
+		_get_gene_value(
+			source_profile,
+			GENE_LEG_HEIGHT,
+			float(leg_height_voxels)
+		),
+		MIN_LEG_HEIGHT_GENE,
+		MAX_LEG_HEIGHT_GENE
+	)
+
+	profile[GENE_MOVE_SPEED] = clampf(
+		_get_gene_value(
+			source_profile,
+			GENE_MOVE_SPEED,
+			move_speed
+		),
+		MIN_MOVE_SPEED_GENE,
+		MAX_MOVE_SPEED_GENE
+	)
+
+	profile[GENE_MAXIMUM_AGE] = clampf(
+		_get_gene_value(
+			source_profile,
+			GENE_MAXIMUM_AGE,
+			lowest_maximum_age
+		),
+		lowest_maximum_age,
+		highest_maximum_age
+	)
+
+	profile[GENE_GENERATION] = maxi(
+		int(
+			source_profile.get(
+				GENE_GENERATION,
+				0
+			)
+		),
+		0
+	)
+
+	var source_mutations: Variant = source_profile.get(
+		GENE_MUTATIONS,
+		[]
+	)
+
+	if source_mutations is Array:
+		profile[GENE_MUTATIONS] = (
+			source_mutations as Array
+		).duplicate(true)
+	else:
+		profile[GENE_MUTATIONS] = []
+
+	return profile
+
+
+func _create_inherited_genetic_profile(
+	father_profile: Dictionary,
+	newborn_seed: int
+) -> Dictionary:
+	var inheritance_random := RandomNumberGenerator.new()
+
+	inheritance_random.seed = (
+		newborn_seed
+		+ GENETIC_INHERITANCE_SEED_OFFSET
+	)
+
+	var mutations: Array[String] = []
+
+	var lowest_maximum_age := minf(
+		minimum_maximum_age_seconds,
+		maximum_maximum_age_seconds
+	)
+
+	var highest_maximum_age := maxf(
+		minimum_maximum_age_seconds,
+		maximum_maximum_age_seconds
+	)
+
+	var profile: Dictionary = {}
+
+	profile[GENE_BODY_LENGTH] = _inherit_gene(
+		inheritance_random,
+		_get_gene_value(
+			_genetic_profile,
+			GENE_BODY_LENGTH,
+			float(body_length_voxels)
+		),
+		_get_gene_value(
+			father_profile,
+			GENE_BODY_LENGTH,
+			float(body_length_voxels)
+		),
+		MIN_BODY_LENGTH_GENE,
+		MAX_BODY_LENGTH_GENE,
+		"body_length",
+		mutations
+	)
+
+	profile[GENE_BODY_WIDTH] = _inherit_gene(
+		inheritance_random,
+		_get_gene_value(
+			_genetic_profile,
+			GENE_BODY_WIDTH,
+			float(body_width_voxels)
+		),
+		_get_gene_value(
+			father_profile,
+			GENE_BODY_WIDTH,
+			float(body_width_voxels)
+		),
+		MIN_BODY_WIDTH_GENE,
+		MAX_BODY_WIDTH_GENE,
+		"body_width",
+		mutations
+	)
+
+	profile[GENE_BODY_HEIGHT] = _inherit_gene(
+		inheritance_random,
+		_get_gene_value(
+			_genetic_profile,
+			GENE_BODY_HEIGHT,
+			float(body_height_voxels)
+		),
+		_get_gene_value(
+			father_profile,
+			GENE_BODY_HEIGHT,
+			float(body_height_voxels)
+		),
+		MIN_BODY_HEIGHT_GENE,
+		MAX_BODY_HEIGHT_GENE,
+		"body_height",
+		mutations
+	)
+
+	profile[GENE_LEG_HEIGHT] = _inherit_gene(
+		inheritance_random,
+		_get_gene_value(
+			_genetic_profile,
+			GENE_LEG_HEIGHT,
+			float(leg_height_voxels)
+		),
+		_get_gene_value(
+			father_profile,
+			GENE_LEG_HEIGHT,
+			float(leg_height_voxels)
+		),
+		MIN_LEG_HEIGHT_GENE,
+		MAX_LEG_HEIGHT_GENE,
+		"leg_height",
+		mutations
+	)
+
+	profile[GENE_MOVE_SPEED] = _inherit_gene(
+		inheritance_random,
+		_get_gene_value(
+			_genetic_profile,
+			GENE_MOVE_SPEED,
+			move_speed
+		),
+		_get_gene_value(
+			father_profile,
+			GENE_MOVE_SPEED,
+			move_speed
+		),
+		MIN_MOVE_SPEED_GENE,
+		MAX_MOVE_SPEED_GENE,
+		"move_speed",
+		mutations
+	)
+
+	profile[GENE_MAXIMUM_AGE] = _inherit_gene(
+		inheritance_random,
+		_get_gene_value(
+			_genetic_profile,
+			GENE_MAXIMUM_AGE,
+			lowest_maximum_age
+		),
+		_get_gene_value(
+			father_profile,
+			GENE_MAXIMUM_AGE,
+			lowest_maximum_age
+		),
+		lowest_maximum_age,
+		highest_maximum_age,
+		"maximum_age",
+		mutations
+	)
+
+	var mother_generation := int(
+		_genetic_profile.get(
+			GENE_GENERATION,
+			0
+		)
+	)
+
+	var father_generation := int(
+		father_profile.get(
+			GENE_GENERATION,
+			0
+		)
+	)
+
+	profile[GENE_GENERATION] = (
+		maxi(
+			mother_generation,
+			father_generation
+		)
+		+ 1
+	)
+
+	profile[GENE_MUTATIONS] = mutations
+
+	return profile
+
+
+func _inherit_gene(
+	inheritance_random: RandomNumberGenerator,
+	mother_value: float,
+	father_value: float,
+	minimum_value: float,
+	maximum_value: float,
+	mutation_name: String,
+	mutations: Array[String]
+) -> float:
+	var minimum_parent_ratio := clampf(
+		inheritance_minimum_parent_ratio,
+		0.0,
+		0.5
+	)
+
+	var father_influence := inheritance_random.randf_range(
+		minimum_parent_ratio,
+		1.0 - minimum_parent_ratio
+	)
+
+	var inherited_value := lerpf(
+		mother_value,
+		father_value,
+		father_influence
+	)
+
+	var safe_mutation_chance := clampf(
+		gene_mutation_chance,
+		0.0,
+		1.0
+	)
+
+	if inheritance_random.randf() < safe_mutation_chance:
+		var safe_mutation_strength := clampf(
+			gene_mutation_strength_ratio,
+			0.0,
+			0.5
+		)
+
+		var trait_range := maxf(
+			maximum_value - minimum_value,
+			0.0
+		)
+
+		var mutation_amount := (
+			trait_range
+			* safe_mutation_strength
+			* inheritance_random.randf_range(
+				-1.0,
+				1.0
+			)
+		)
+
+		inherited_value += mutation_amount
+		mutations.append(mutation_name)
+
+	return clampf(
+		inherited_value,
+		minimum_value,
+		maximum_value
+	)
+
+
+func _get_gene_value(
+	profile: Dictionary,
+	gene_name: StringName,
+	fallback_value: float
+) -> float:
+	if not profile.has(gene_name):
+		return fallback_value
+
+	return float(profile[gene_name])
+
+
+func get_genetic_profile() -> Dictionary:
+	return _genetic_profile.duplicate(true)
+
+
+func get_genetic_generation() -> int:
+	return int(
+		_genetic_profile.get(
+			GENE_GENERATION,
+			0
+		)
+	)
+
+
+func get_genetic_profile_summary() -> String:
+	return _format_genetic_profile(
+		_genetic_profile
+	)
+
+
+func _format_genetic_profile(
+	profile: Dictionary
+) -> String:
+	return (
+		"L="
+		+ str(
+			snappedf(
+				_get_gene_value(
+					profile,
+					GENE_BODY_LENGTH,
+					float(body_length_voxels)
+				),
+				0.01
+			)
+		)
+		+ ", W="
+		+ str(
+			snappedf(
+				_get_gene_value(
+					profile,
+					GENE_BODY_WIDTH,
+					float(body_width_voxels)
+				),
+				0.01
+			)
+		)
+		+ ", H="
+		+ str(
+			snappedf(
+				_get_gene_value(
+					profile,
+					GENE_BODY_HEIGHT,
+					float(body_height_voxels)
+				),
+				0.01
+			)
+		)
+		+ ", Legs="
+		+ str(
+			snappedf(
+				_get_gene_value(
+					profile,
+					GENE_LEG_HEIGHT,
+					float(leg_height_voxels)
+				),
+				0.01
+			)
+		)
+		+ ", Speed="
+		+ str(
+			snappedf(
+				_get_gene_value(
+					profile,
+					GENE_MOVE_SPEED,
+					move_speed
+				),
+				0.01
+			)
+		)
+		+ ", Lifespan="
+		+ str(
+			snappedf(
+				_get_gene_value(
+					profile,
+					GENE_MAXIMUM_AGE,
+					maximum_age_seconds
+				),
+				0.1
+			)
+		)
+	)
+
+
+func get_genetic_mutation_summary() -> String:
+	var mutations_value: Variant = _genetic_profile.get(
+		GENE_MUTATIONS,
+		[]
+	)
+
+	if mutations_value is not Array:
+		return "none"
+
+	var mutations := mutations_value as Array
+
+	if mutations.is_empty():
+		return "none"
+
+	var mutation_text := ""
+
+	for mutation_index in range(
+		mutations.size()
+	):
+		if mutation_index > 0:
+			mutation_text += ", "
+
+		mutation_text += str(
+			mutations[mutation_index]
+		)
+
+	return mutation_text
+
+
+func _assign_biological_sex(
+	creature_seed: int
+) -> void:
 	var sex_random := RandomNumberGenerator.new()
 
 	sex_random.seed = (
@@ -390,27 +1000,18 @@ func _assign_biological_sex(creature_seed: int) -> void:
 	)
 
 
-func _assign_life_cycle(creature_seed: int) -> void:
+func _assign_life_cycle(
+	creature_seed: int
+) -> void:
 	var lowest_maximum_age := minf(
 		minimum_maximum_age_seconds,
 		maximum_maximum_age_seconds
 	)
 
-	var highest_maximum_age := maxf(
-		minimum_maximum_age_seconds,
-		maximum_maximum_age_seconds
-	)
-
-	var maximum_age_random := RandomNumberGenerator.new()
-
-	maximum_age_random.seed = (
-		creature_seed
-		+ MAXIMUM_AGE_SEED_OFFSET
-	)
-
-	maximum_age_seconds = maximum_age_random.randf_range(
-		lowest_maximum_age,
-		highest_maximum_age
+	maximum_age_seconds = _get_gene_value(
+		_genetic_profile,
+		GENE_MAXIMUM_AGE,
+		lowest_maximum_age
 	)
 
 	if _configured_as_newborn:
@@ -507,7 +1108,10 @@ func get_creature_seed() -> int:
 	return _creature_seed
 
 
-func configure_as_newborn(newborn_seed: int) -> void:
+func configure_as_newborn(
+	newborn_seed: int,
+	inherited_genetic_profile: Dictionary = {}
+) -> void:
 	if _initialized:
 		push_warning(
 			"Grazer newborn configuration was attempted after initialization."
@@ -517,6 +1121,15 @@ func configure_as_newborn(newborn_seed: int) -> void:
 	_seed_override = newborn_seed
 	_has_seed_override = true
 	_configured_as_newborn = true
+
+	if not inherited_genetic_profile.is_empty():
+		_pending_inherited_genetic_profile = (
+			inherited_genetic_profile.duplicate(
+				true
+			)
+		)
+
+		_has_inherited_genetic_profile = true
 
 
 func apply_reproduction_cooldown() -> void:
@@ -529,7 +1142,9 @@ func apply_reproduction_cooldown() -> void:
 	_update_life_cycle_states()
 
 
-func try_start_pregnancy(partner: Node) -> bool:
+func try_start_pregnancy(
+	partner: Node
+) -> bool:
 	if is_dead:
 		return false
 
@@ -550,24 +1165,39 @@ func try_start_pregnancy(partner: Node) -> bool:
 	if not partner_3d.is_inside_tree():
 		return false
 
-	if not partner.has_method("get_biological_sex"):
+	if not partner.has_method(
+		"get_biological_sex"
+	):
 		return false
 
-	if not partner.has_method("get_creature_seed"):
+	if not partner.has_method(
+		"get_creature_seed"
+	):
 		return false
 
-	if not partner.has_method("is_reproduction_ready"):
+	if not partner.has_method(
+		"get_genetic_profile"
+	):
+		return false
+
+	if not partner.has_method(
+		"is_reproduction_ready"
+	):
 		return false
 
 	var partner_sex := int(
-		partner.call("get_biological_sex")
+		partner.call(
+			"get_biological_sex"
+		)
 	)
 
 	if partner_sex != BiologicalSex.MALE:
 		return false
 
 	var partner_is_ready := bool(
-		partner.call("is_reproduction_ready")
+		partner.call(
+			"is_reproduction_ready"
+		)
 	)
 
 	if not partner_is_ready:
@@ -596,7 +1226,9 @@ func try_start_pregnancy(partner: Node) -> bool:
 		>= safe_population_limit
 	):
 		print(
-			"Grazer pregnancy blocked by population limit: ",
+			"Grazer pregnancy blocked. Seed: ",
+			_creature_seed,
+			" | Population limit: ",
 			safe_population_limit
 		)
 
@@ -610,8 +1242,16 @@ func try_start_pregnancy(partner: Node) -> bool:
 	)
 
 	_pregnancy_father_seed = int(
-		partner.call("get_creature_seed")
+		partner.call(
+			"get_creature_seed"
+		)
 	)
+
+	_pregnancy_father_genetic_profile = (
+		partner.call(
+			"get_genetic_profile"
+		) as Dictionary
+	).duplicate(true)
 
 	_clear_mate_target()
 
@@ -626,6 +1266,12 @@ func try_start_pregnancy(partner: Node) -> bool:
 		_creature_seed,
 		" | Father seed: ",
 		_pregnancy_father_seed,
+		" | Mother genes: ",
+		get_genetic_profile_summary(),
+		" | Father genes: ",
+		_format_genetic_profile(
+			_pregnancy_father_genetic_profile
+		),
 		" | Gestation: ",
 		_pregnancy_timer,
 		" seconds."
@@ -682,7 +1328,9 @@ func _physics_process(delta: float) -> void:
 
 	if (
 		_move_direction.length_squared() > 0.0
-		and not _is_direction_safe(_move_direction)
+		and not _is_direction_safe(
+			_move_direction
+		)
 	):
 		match _behavior_state:
 			BehaviorState.SEEKING_FOOD:
@@ -700,20 +1348,39 @@ func _physics_process(delta: float) -> void:
 			_:
 				_choose_new_behavior()
 
-	var active_move_speed := move_speed
+	var active_move_speed := _get_gene_value(
+		_genetic_profile,
+		GENE_MOVE_SPEED,
+		move_speed
+	)
 
 	if _behavior_state == BehaviorState.FLEEING:
 		active_move_speed *= flee_speed_multiplier
-	elif _behavior_state == BehaviorState.SEEKING_MATE:
-		active_move_speed *= mate_move_speed_multiplier
+	elif (
+		_behavior_state
+		== BehaviorState.SEEKING_MATE
+	):
+		active_move_speed *= (
+			mate_move_speed_multiplier
+		)
 
-	velocity.x = _move_direction.x * active_move_speed
-	velocity.z = _move_direction.z * active_move_speed
+	velocity.x = (
+		_move_direction.x
+		* active_move_speed
+	)
+
+	velocity.z = (
+		_move_direction.z
+		* active_move_speed
+	)
 
 	if is_on_floor():
 		velocity.y = -0.1
 	else:
-		velocity.y -= fall_acceleration * delta
+		velocity.y -= (
+			fall_acceleration
+			* delta
+		)
 
 	if _move_direction.length_squared() > 0.0:
 		var target_rotation := atan2(
@@ -743,8 +1410,13 @@ func _update_age(delta: float) -> void:
 		return
 
 	print(
-		"Grazer reached maximum age: ",
-		snappedf(current_age_seconds, 0.1),
+		"Grazer reached maximum age. Seed: ",
+		_creature_seed,
+		" | Age: ",
+		snappedf(
+			current_age_seconds,
+			0.1
+		),
 		" seconds."
 	)
 
@@ -760,19 +1432,24 @@ func _update_life_cycle_states(
 		>= get_sexual_maturity_age_seconds()
 	)
 
-	if new_sexual_maturity != _is_sexually_mature:
-		_is_sexually_mature = new_sexual_maturity
+	if (
+		new_sexual_maturity
+		!= _is_sexually_mature
+	):
+		_is_sexually_mature = (
+			new_sexual_maturity
+		)
 
 		if (
 			announce_changes
 			and _is_sexually_mature
 		):
 			print(
-				"Grazer reached sexual maturity. Age: ",
-				snappedf(current_age_seconds, 0.1),
-				" / ",
+				"Grazer reached sexual maturity. Seed: ",
+				_creature_seed,
+				" | Age: ",
 				snappedf(
-					get_sexual_maturity_age_seconds(),
+					current_age_seconds,
 					0.1
 				),
 				" seconds."
@@ -782,7 +1459,8 @@ func _update_life_cycle_states(
 		not is_dead
 		and _is_sexually_mature
 		and not _is_pregnant
-		and _reproduction_cooldown_timer <= 0.0
+		and _reproduction_cooldown_timer
+		<= 0.0
 		and get_hunger_ratio()
 		>= clampf(
 			minimum_reproduction_hunger_ratio,
@@ -811,7 +1489,9 @@ func _update_life_cycle_states(
 		return
 
 	print(
-		"Grazer reproduction readiness changed: ",
+		"Grazer reproduction readiness changed. Seed: ",
+		_creature_seed,
+		" | Ready: ",
 		_is_reproduction_ready,
 		" | Mature: ",
 		_is_sexually_mature,
@@ -822,17 +1502,34 @@ func _update_life_cycle_states(
 			_reproduction_cooldown_timer,
 			0.1
 		),
-		" | Hunger ratio: ",
-		snappedf(get_hunger_ratio(), 0.01),
-		" | Thirst ratio: ",
-		snappedf(get_thirst_ratio(), 0.01)
+		" | Hunger: ",
+		snappedf(
+			get_hunger_ratio(),
+			0.01
+		),
+		" | Thirst: ",
+		snappedf(
+			get_thirst_ratio(),
+			0.01
+		)
 	)
 
 
-func _update_mate_awareness(delta: float) -> void:
+func _update_mate_awareness(
+	delta: float
+) -> void:
+	var survival_need_active := (
+		get_hunger_ratio()
+		<= hungry_threshold_ratio
+		or get_thirst_ratio()
+		<= thirsty_threshold_ratio
+	)
+
 	if (
 		not _is_reproduction_ready
-		or _behavior_state == BehaviorState.FLEEING
+		or _behavior_state
+		== BehaviorState.FLEEING
+		or survival_need_active
 	):
 		var was_seeking_mate := (
 			_behavior_state
@@ -854,7 +1551,10 @@ func _update_mate_awareness(delta: float) -> void:
 		return
 
 	if _is_mate_target_valid():
-		_behavior_state = BehaviorState.SEEKING_MATE
+		_behavior_state = (
+			BehaviorState.SEEKING_MATE
+		)
+
 		return
 
 	_clear_mate_target()
@@ -879,9 +1579,10 @@ func _update_mate_awareness(delta: float) -> void:
 	if new_mate_target == null:
 		if not _reported_no_compatible_mate:
 			print(
-				"Grazer found no compatible mate within ",
-				mate_search_radius,
-				" meters."
+				"Grazer found no compatible mate. Seed: ",
+				_creature_seed,
+				" | Radius: ",
+				mate_search_radius
 			)
 
 			_reported_no_compatible_mate = true
@@ -894,11 +1595,21 @@ func _update_mate_awareness(delta: float) -> void:
 	_clear_food_target()
 	_clear_water_target()
 
-	_behavior_state = BehaviorState.SEEKING_MATE
+	_behavior_state = (
+		BehaviorState.SEEKING_MATE
+	)
 
 	print(
-		"Grazer started seeking compatible mate. Self sex: ",
+		"Grazer started seeking compatible mate. Self seed: ",
+		_creature_seed,
+		" | Self sex: ",
 		get_biological_sex_name(),
+		" | Mate seed: ",
+		int(
+			_mate_target.call(
+				"get_creature_seed"
+			)
+		),
 		" | Mate sex: ",
 		String(
 			_mate_target.call(
@@ -935,9 +1646,13 @@ func _find_nearest_compatible_mate() -> Node3D:
 		if grouped_node is not Node3D:
 			continue
 
-		var candidate := grouped_node as Node3D
+		var candidate := (
+			grouped_node as Node3D
+		)
 
-		if not _is_compatible_mate(candidate):
+		if not _is_compatible_mate(
+			candidate
+		):
 			continue
 
 		var distance_squared := (
@@ -958,7 +1673,9 @@ func _find_nearest_compatible_mate() -> Node3D:
 	return nearest_mate
 
 
-func _is_compatible_mate(candidate: Node) -> bool:
+func _is_compatible_mate(
+	candidate: Node
+) -> bool:
 	if candidate == null:
 		return false
 
@@ -986,6 +1703,16 @@ func _is_compatible_mate(candidate: Node) -> bool:
 	):
 		return false
 
+	if not candidate.has_method(
+		"get_creature_seed"
+	):
+		return false
+
+	if not candidate.has_method(
+		"get_genetic_profile"
+	):
+		return false
+
 	var candidate_is_ready := bool(
 		candidate.call(
 			"is_reproduction_ready"
@@ -1008,10 +1735,14 @@ func _is_mate_target_valid() -> bool:
 	if _mate_target == null:
 		return false
 
-	if not is_instance_valid(_mate_target):
+	if not is_instance_valid(
+		_mate_target
+	):
 		return false
 
-	if not _is_compatible_mate(_mate_target):
+	if not _is_compatible_mate(
+		_mate_target
+	):
 		return false
 
 	var safe_search_radius := maxf(
@@ -1040,7 +1771,10 @@ func _abandon_mate_target() -> void:
 		0.1
 	)
 
-	if _behavior_state == BehaviorState.SEEKING_MATE:
+	if (
+		_behavior_state
+		== BehaviorState.SEEKING_MATE
+	):
 		_choose_new_behavior()
 
 
@@ -1056,14 +1790,19 @@ func _update_mate_movement() -> void:
 
 	target_offset.y = 0.0
 
-	var distance_to_mate := target_offset.length()
+	var distance_to_mate := (
+		target_offset.length()
+	)
 
 	var safe_mating_distance := maxf(
 		mating_distance,
 		0.5
 	)
 
-	if distance_to_mate <= safe_mating_distance:
+	if (
+		distance_to_mate
+		<= safe_mating_distance
+	):
 		_move_direction = Vector3.ZERO
 		velocity.x = 0.0
 		velocity.z = 0.0
@@ -1071,9 +1810,13 @@ func _update_mate_movement() -> void:
 		_try_mate_with_target()
 		return
 
-	var target_direction := target_offset.normalized()
+	var target_direction := (
+		target_offset.normalized()
+	)
 
-	if _is_direction_safe(target_direction):
+	if _is_direction_safe(
+		target_direction
+	):
 		_move_direction = target_direction
 	else:
 		_abandon_mate_target()
@@ -1085,11 +1828,19 @@ func _try_mate_with_target() -> void:
 		return
 
 	var partner := _mate_target
+	var partner_seed := int(
+		partner.call(
+			"get_creature_seed"
+		)
+	)
+
 	var pregnancy_started := false
 
 	if biological_sex == BiologicalSex.FEMALE:
-		pregnancy_started = try_start_pregnancy(
-			partner
+		pregnancy_started = (
+			try_start_pregnancy(
+				partner
+			)
 		)
 
 		if (
@@ -1120,20 +1871,30 @@ func _try_mate_with_target() -> void:
 		return
 
 	print(
-		"Grazer mating completed. Initiator sex: ",
+		"Grazer mating completed. Initiator seed: ",
+		_creature_seed,
+		" | Partner seed: ",
+		partner_seed,
+		" | Initiator sex: ",
 		get_biological_sex_name()
 	)
 
 	_clear_mate_target()
 
-	if _behavior_state != BehaviorState.FLEEING:
+	if (
+		_behavior_state
+		!= BehaviorState.FLEEING
+	):
 		_choose_new_behavior()
 
 
-func _update_reproduction(delta: float) -> void:
+func _update_reproduction(
+	delta: float
+) -> void:
 	if _reproduction_cooldown_timer > 0.0:
 		_reproduction_cooldown_timer = maxf(
-			_reproduction_cooldown_timer - delta,
+			_reproduction_cooldown_timer
+			- delta,
 			0.0
 		)
 
@@ -1184,13 +1945,22 @@ func _finish_pregnancy_and_give_birth() -> void:
 		_birth_count
 	)
 
+	var newborn_genetic_profile := (
+		_create_inherited_genetic_profile(
+			_pregnancy_father_genetic_profile,
+			newborn_seed
+		)
+	)
+
 	var birth_position := (
 		_find_newborn_spawn_position(
 			newborn_seed
 		)
 	)
 
-	var newborn_node := grazer_scene.instantiate()
+	var newborn_node := (
+		grazer_scene.instantiate()
+	)
 
 	if newborn_node is not Node3D:
 		push_error(
@@ -1216,15 +1986,21 @@ func _finish_pregnancy_and_give_birth() -> void:
 
 	newborn.call(
 		"configure_as_newborn",
-		newborn_seed
+		newborn_seed,
+		newborn_genetic_profile
 	)
 
 	scene_parent.add_child(newborn)
 	newborn.global_position = birth_position
 
+	var father_seed_for_output := (
+		_pregnancy_father_seed
+	)
+
 	_is_pregnant = false
 	_pregnancy_timer = 0.0
 	_pregnancy_father_seed = 0
+	_pregnancy_father_genetic_profile.clear()
 
 	_reproduction_cooldown_timer = maxf(
 		reproduction_cooldown_seconds,
@@ -1235,13 +2011,63 @@ func _finish_pregnancy_and_give_birth() -> void:
 	_update_life_cycle_states()
 
 	print(
-		"Grazer gave birth. Newborn seed: ",
+		"Grazer gave birth. Mother seed: ",
+		_creature_seed,
+		" | Father seed: ",
+		father_seed_for_output,
+		" | Newborn seed: ",
 		newborn_seed,
+		" | Generation: ",
+		int(
+			newborn_genetic_profile.get(
+				GENE_GENERATION,
+				0
+			)
+		),
+		" | Newborn genes: ",
+		_format_genetic_profile(
+			newborn_genetic_profile
+		),
+		" | Mutations: ",
+		_format_mutations(
+			newborn_genetic_profile
+		),
 		" | Birth number: ",
 		_birth_count,
 		" | Position: ",
 		birth_position
 	)
+
+
+func _format_mutations(
+	profile: Dictionary
+) -> String:
+	var mutations_value: Variant = profile.get(
+		GENE_MUTATIONS,
+		[]
+	)
+
+	if mutations_value is not Array:
+		return "none"
+
+	var mutations := mutations_value as Array
+
+	if mutations.is_empty():
+		return "none"
+
+	var mutation_text := ""
+
+	for mutation_index in range(
+		mutations.size()
+	):
+		if mutation_index > 0:
+			mutation_text += ", "
+
+		mutation_text += str(
+			mutations[mutation_index]
+		)
+
+	return mutation_text
 
 
 func _create_newborn_seed(
@@ -1268,7 +2094,9 @@ func _create_newborn_seed(
 func _find_newborn_spawn_position(
 	newborn_seed: int
 ) -> Vector3:
-	var spawn_random := RandomNumberGenerator.new()
+	var spawn_random := (
+		RandomNumberGenerator.new()
+	)
 
 	spawn_random.seed = (
 		newborn_seed
@@ -1365,11 +2193,15 @@ func _get_projected_grazer_population() -> int:
 	for grouped_node in get_tree().get_nodes_in_group(
 		&"grazer"
 	):
-		if not grouped_node.has_method("is_alive"):
+		if not grouped_node.has_method(
+			"is_alive"
+		):
 			continue
 
 		var grouped_grazer_is_alive := bool(
-			grouped_node.call("is_alive")
+			grouped_node.call(
+				"is_alive"
+			)
 		)
 
 		if not grouped_grazer_is_alive:
@@ -1378,9 +2210,13 @@ func _get_projected_grazer_population() -> int:
 		projected_population += 1
 
 		if (
-			grouped_node.has_method("is_pregnant")
+			grouped_node.has_method(
+				"is_pregnant"
+			)
 			and bool(
-				grouped_node.call("is_pregnant")
+				grouped_node.call(
+					"is_pregnant"
+				)
 			)
 		):
 			projected_population += 1
@@ -1388,14 +2224,19 @@ func _get_projected_grazer_population() -> int:
 	return projected_population
 
 
-func _process_corpse_physics(delta: float) -> void:
+func _process_corpse_physics(
+	delta: float
+) -> void:
 	velocity.x = 0.0
 	velocity.z = 0.0
 
 	if is_on_floor():
 		velocity.y = -0.1
 	else:
-		velocity.y -= fall_acceleration * delta
+		velocity.y -= (
+			fall_acceleration
+			* delta
+		)
 
 	move_and_slide()
 
@@ -1490,13 +2331,18 @@ func _update_perception(delta: float) -> void:
 		)
 	)
 
-	if player_distance_squared > detection_distance_squared:
+	if (
+		player_distance_squared
+		> detection_distance_squared
+	):
 		return
 
 	_start_fleeing_from(player)
 
 
-func _start_fleeing_from(threat: Node3D) -> void:
+func _start_fleeing_from(
+	threat: Node3D
+) -> void:
 	if threat == null:
 		return
 
@@ -1518,12 +2364,15 @@ func _start_fleeing_from(threat: Node3D) -> void:
 
 	if not was_already_fleeing:
 		print(
-			"Grazer detected player and started fleeing."
+			"Grazer detected player and started fleeing. Seed: ",
+			_creature_seed
 		)
 
 
 func _update_flee_direction() -> void:
-	if not is_instance_valid(_threat_target):
+	if not is_instance_valid(
+		_threat_target
+	):
 		_threat_target = null
 		_choose_new_behavior()
 		return
@@ -1547,7 +2396,9 @@ func _update_flee_direction() -> void:
 			cos(random_angle)
 		)
 	else:
-		base_direction = base_direction.normalized()
+		base_direction = (
+			base_direction.normalized()
+		)
 
 	var escape_angles: Array[float] = [
 		0.0,
@@ -1560,19 +2411,28 @@ func _update_flee_direction() -> void:
 	]
 
 	for escape_angle in escape_angles:
-		var candidate_direction := base_direction.rotated(
-			Vector3.UP,
-			escape_angle
-		).normalized()
+		var candidate_direction := (
+			base_direction.rotated(
+				Vector3.UP,
+				escape_angle
+			).normalized()
+		)
 
-		if _is_direction_safe(candidate_direction):
-			_move_direction = candidate_direction
+		if _is_direction_safe(
+			candidate_direction
+		):
+			_move_direction = (
+				candidate_direction
+			)
+
 			return
 
 	_move_direction = Vector3.ZERO
 
 
-func _update_target_selection(delta: float) -> void:
+func _update_target_selection(
+	delta: float
+) -> void:
 	_food_search_timer = maxf(
 		_food_search_timer - delta,
 		0.0
@@ -1583,7 +2443,10 @@ func _update_target_selection(delta: float) -> void:
 		0.0
 	)
 
-	if _behavior_state == BehaviorState.SEEKING_MATE:
+	if (
+		_behavior_state
+		== BehaviorState.SEEKING_MATE
+	):
 		if _is_mate_target_valid():
 			return
 
@@ -1603,7 +2466,8 @@ func _update_target_selection(delta: float) -> void:
 	)
 
 	if (
-		_behavior_state == BehaviorState.SEEKING_FOOD
+		_behavior_state
+		== BehaviorState.SEEKING_FOOD
 		and (
 			not needs_food
 			or not _is_food_target_valid()
@@ -1612,7 +2476,8 @@ func _update_target_selection(delta: float) -> void:
 		_clear_food_target()
 
 	if (
-		_behavior_state == BehaviorState.SEEKING_WATER
+		_behavior_state
+		== BehaviorState.SEEKING_WATER
 		and (
 			not needs_water
 			or not _is_water_target_valid()
@@ -1631,22 +2496,37 @@ func _update_target_selection(delta: float) -> void:
 	if water_has_priority:
 		if _prepare_water_target():
 			_clear_food_target()
-			_behavior_state = BehaviorState.SEEKING_WATER
+
+			_behavior_state = (
+				BehaviorState.SEEKING_WATER
+			)
+
 			return
 
 	if needs_food:
 		if _prepare_food_target():
 			_clear_water_target()
-			_behavior_state = BehaviorState.SEEKING_FOOD
+
+			_behavior_state = (
+				BehaviorState.SEEKING_FOOD
+			)
+
 			return
 
 	if needs_water:
 		if _prepare_water_target():
 			_clear_food_target()
-			_behavior_state = BehaviorState.SEEKING_WATER
+
+			_behavior_state = (
+				BehaviorState.SEEKING_WATER
+			)
+
 			return
 
-	if _behavior_state != BehaviorState.WANDERING:
+	if (
+		_behavior_state
+		!= BehaviorState.WANDERING
+	):
 		_choose_new_behavior()
 
 
@@ -1666,7 +2546,9 @@ func _prepare_food_target() -> bool:
 		return false
 
 	print(
-		"Grazer found berry bush at: ",
+		"Grazer found berry bush. Seed: ",
+		_creature_seed,
+		" | Position: ",
 		_food_target.global_position
 	)
 
@@ -1688,7 +2570,9 @@ func _prepare_water_target() -> bool:
 		return false
 
 	print(
-		"Grazer found water at: ",
+		"Grazer found water. Seed: ",
+		_creature_seed,
+		" | Position: ",
 		_water_target
 	)
 
@@ -1705,7 +2589,9 @@ func _update_wandering(delta: float) -> void:
 func _update_fleeing(delta: float) -> void:
 	_decision_timer -= delta
 
-	if is_instance_valid(_threat_target):
+	if is_instance_valid(
+		_threat_target
+	):
 		_update_flee_direction()
 
 	if _decision_timer > 0.0:
@@ -1727,14 +2613,19 @@ func _update_food_movement() -> void:
 
 	target_offset.y = 0.0
 
-	var distance_to_food := target_offset.length()
+	var distance_to_food := (
+		target_offset.length()
+	)
 
 	var effective_reach_distance := maxf(
 		food_reach_distance,
 		2.5
 	)
 
-	if distance_to_food <= effective_reach_distance:
+	if (
+		distance_to_food
+		<= effective_reach_distance
+	):
 		_move_direction = Vector3.ZERO
 		velocity.x = 0.0
 		velocity.z = 0.0
@@ -1742,13 +2633,20 @@ func _update_food_movement() -> void:
 		_try_eat_food_target()
 		return
 
-	if distance_to_food > food_search_radius * 1.5:
+	if (
+		distance_to_food
+		> food_search_radius * 1.5
+	):
 		_abandon_food_target(false)
 		return
 
-	var target_direction := target_offset.normalized()
+	var target_direction := (
+		target_offset.normalized()
+	)
 
-	if _is_direction_safe(target_direction):
+	if _is_direction_safe(
+		target_direction
+	):
 		_move_direction = target_direction
 	else:
 		_abandon_food_target(true)
@@ -1766,9 +2664,14 @@ func _update_water_movement() -> void:
 
 	target_offset.y = 0.0
 
-	var distance_to_water := target_offset.length()
+	var distance_to_water := (
+		target_offset.length()
+	)
 
-	if distance_to_water <= water_reach_distance:
+	if (
+		distance_to_water
+		<= water_reach_distance
+	):
 		_move_direction = Vector3.ZERO
 		velocity.x = 0.0
 		velocity.z = 0.0
@@ -1776,13 +2679,20 @@ func _update_water_movement() -> void:
 		_drink_water()
 		return
 
-	if distance_to_water > water_search_radius * 1.5:
+	if (
+		distance_to_water
+		> water_search_radius * 1.5
+	):
 		_abandon_water_target()
 		return
 
-	var target_direction := target_offset.normalized()
+	var target_direction := (
+		target_offset.normalized()
+	)
 
-	if _is_direction_safe(target_direction):
+	if _is_direction_safe(
+		target_direction
+	):
 		_move_direction = target_direction
 	else:
 		_abandon_water_target()
@@ -1807,7 +2717,9 @@ func _try_eat_food_target() -> void:
 
 	if current_hunger > hunger_before:
 		print(
-			"Grazer ate berries. Hunger: ",
+			"Grazer ate berries. Seed: ",
+			_creature_seed,
+			" | Hunger: ",
 			current_hunger,
 			" / ",
 			maximum_hunger
@@ -1831,7 +2743,9 @@ func _drink_water() -> void:
 	restore_thirst(water_drink_amount)
 
 	print(
-		"Grazer drank water. Thirst: ",
+		"Grazer drank water. Seed: ",
+		_creature_seed,
+		" | Thirst: ",
 		current_thirst,
 		" / ",
 		maximum_thirst
@@ -1866,7 +2780,9 @@ func _find_nearest_water_shore() -> bool:
 		var best_position := Vector3.ZERO
 		var best_distance_squared := INF
 
-		for sample_index in range(water_search_samples):
+		for sample_index in range(
+			water_search_samples
+		):
 			var angle := (
 				TAU
 				* float(sample_index)
@@ -1892,9 +2808,13 @@ func _find_nearest_water_shore() -> bool:
 				)
 			)
 
-			candidate_position.y = candidate_height + 0.05
+			candidate_position.y = (
+				candidate_height + 0.05
+			)
 
-			if not _is_shore_position(candidate_position):
+			if not _is_shore_position(
+				candidate_position
+			):
 				continue
 
 			var distance_squared := (
@@ -1903,7 +2823,10 @@ func _find_nearest_water_shore() -> bool:
 				)
 			)
 
-			if distance_squared >= best_distance_squared:
+			if (
+				distance_squared
+				>= best_distance_squared
+			):
 				continue
 
 			best_distance_squared = distance_squared
@@ -1918,8 +2841,12 @@ func _find_nearest_water_shore() -> bool:
 	return false
 
 
-func _is_shore_position(position: Vector3) -> bool:
-	var sea_level := WorldGenerator.get_sea_level()
+func _is_shore_position(
+	position: Vector3
+) -> bool:
+	var sea_level := (
+		WorldGenerator.get_sea_level()
+	)
 
 	var land_height := (
 		WorldGenerator.get_terrain_height(
@@ -1991,9 +2918,13 @@ func _find_nearest_berry_bush() -> Node3D:
 		if candidate is not Node3D:
 			continue
 
-		var candidate_3d := candidate as Node3D
+		var candidate_3d := (
+			candidate as Node3D
+		)
 
-		if not is_instance_valid(candidate_3d):
+		if not is_instance_valid(
+			candidate_3d
+		):
 			continue
 
 		if not candidate_3d.is_inside_tree():
@@ -2011,9 +2942,13 @@ func _find_nearest_berry_bush() -> Node3D:
 			if not food_available:
 				continue
 
-		var candidate_id := candidate_3d.get_instance_id()
+		var candidate_id := (
+			candidate_3d.get_instance_id()
+		)
 
-		if _ignored_food_targets.has(candidate_id):
+		if _ignored_food_targets.has(
+			candidate_id
+		):
 			continue
 
 		var distance_squared := (
@@ -2022,7 +2957,10 @@ func _find_nearest_berry_bush() -> Node3D:
 			)
 		)
 
-		if distance_squared >= nearest_distance_squared:
+		if (
+			distance_squared
+			>= nearest_distance_squared
+		):
 			continue
 
 		nearest_distance_squared = distance_squared
@@ -2049,25 +2987,34 @@ func _is_berry_bush(node: Node) -> bool:
 	if node.is_in_group("berry_bush"):
 		return true
 
-	if node.scene_file_path == BERRY_BUSH_SCENE_PATH:
+	if (
+		node.scene_file_path
+		== BERRY_BUSH_SCENE_PATH
+	):
 		return true
 
 	var node_name := String(node.name)
 
-	return node_name.begins_with("BerryBush")
+	return node_name.begins_with(
+		"BerryBush"
+	)
 
 
 func _is_food_target_valid() -> bool:
 	if _food_target == null:
 		return false
 
-	if not is_instance_valid(_food_target):
+	if not is_instance_valid(
+		_food_target
+	):
 		return false
 
 	if not _food_target.is_inside_tree():
 		return false
 
-	if _food_target.has_method("has_food_available"):
+	if _food_target.has_method(
+		"has_food_available"
+	):
 		var food_available := bool(
 			_food_target.call(
 				"has_food_available"
@@ -2085,12 +3032,16 @@ func _is_water_target_valid() -> bool:
 		return false
 
 	if (
-		global_position.distance_to(_water_target)
+		global_position.distance_to(
+			_water_target
+		)
 		> water_search_radius * 1.5
 	):
 		return false
 
-	return _is_shore_position(_water_target)
+	return _is_shore_position(
+		_water_target
+	)
 
 
 func _clear_food_target() -> void:
@@ -2136,7 +3087,9 @@ func interact(actor: Node) -> void:
 		_try_eat_corpse(actor)
 		return
 
-	if not actor.has_method("can_perform_action"):
+	if not actor.has_method(
+		"can_perform_action"
+	):
 		return
 
 	var can_bite := bool(
@@ -2150,6 +3103,7 @@ func interact(actor: Node) -> void:
 		print(
 			"Grazer interaction blocked. Missing ability: bite"
 		)
+
 		return
 
 	receive_hit(
@@ -2158,12 +3112,16 @@ func interact(actor: Node) -> void:
 	)
 
 
-func _try_eat_corpse(actor: Node) -> void:
+func _try_eat_corpse(
+	actor: Node
+) -> void:
 	if remaining_meat_portions <= 0:
 		queue_free()
 		return
 
-	if not actor.has_method("can_perform_action"):
+	if not actor.has_method(
+		"can_perform_action"
+	):
 		return
 
 	var can_eat := bool(
@@ -2177,19 +3135,32 @@ func _try_eat_corpse(actor: Node) -> void:
 		print(
 			"Grazer corpse interaction blocked. Missing ability: eat"
 		)
+
 		return
 
-	if not actor.has_method("restore_hunger"):
-		print("Actor cannot restore hunger.")
+	if not actor.has_method(
+		"restore_hunger"
+	):
+		print(
+			"Actor cannot restore hunger."
+		)
+
 		return
 
-	if actor.has_method("get_hunger_ratio"):
+	if actor.has_method(
+		"get_hunger_ratio"
+	):
 		var hunger_ratio := float(
-			actor.call("get_hunger_ratio")
+			actor.call(
+				"get_hunger_ratio"
+			)
 		)
 
 		if hunger_ratio >= 0.999:
-			print("Actor is not hungry.")
+			print(
+				"Actor is not hungry."
+			)
+
 			return
 
 	actor.call(
@@ -2200,12 +3171,18 @@ func _try_eat_corpse(actor: Node) -> void:
 	remaining_meat_portions -= 1
 
 	print(
-		"Grazer meat eaten. Remaining portions: ",
+		"Grazer meat eaten. Seed: ",
+		_creature_seed,
+		" | Remaining portions: ",
 		remaining_meat_portions
 	)
 
 	if remaining_meat_portions <= 0:
-		print("Grazer carcass consumed.")
+		print(
+			"Grazer carcass consumed. Seed: ",
+			_creature_seed
+		)
+
 		queue_free()
 
 
@@ -2249,14 +3226,20 @@ func get_hunger_ratio() -> float:
 	if maximum_hunger <= 0.0:
 		return 0.0
 
-	return current_hunger / maximum_hunger
+	return (
+		current_hunger
+		/ maximum_hunger
+	)
 
 
 func get_thirst_ratio() -> float:
 	if maximum_thirst <= 0.0:
 		return 0.0
 
-	return current_thirst / maximum_thirst
+	return (
+		current_thirst
+		/ maximum_thirst
+	)
 
 
 func receive_hit(
@@ -2275,7 +3258,9 @@ func receive_hit(
 	)
 
 	print(
-		"Grazer hit. Remaining health: ",
+		"Grazer hit. Seed: ",
+		_creature_seed,
+		" | Remaining health: ",
 		current_health
 	)
 
@@ -2297,6 +3282,7 @@ func _die() -> void:
 	_is_pregnant = false
 	_pregnancy_timer = 0.0
 	_pregnancy_father_seed = 0
+	_pregnancy_father_genetic_profile.clear()
 
 	_update_life_cycle_states()
 
@@ -2314,7 +3300,11 @@ func _die() -> void:
 	_apply_corpse_material()
 
 	print(
-		"Grazer died. Meat portions available: ",
+		"Grazer died. Seed: ",
+		_creature_seed,
+		" | Generation: ",
+		get_genetic_generation(),
+		" | Meat portions: ",
 		remaining_meat_portions
 	)
 
@@ -2354,14 +3344,18 @@ func _choose_new_behavior() -> void:
 			cos(angle)
 		).normalized()
 
-		if _is_direction_safe(candidate_direction):
+		if _is_direction_safe(
+			candidate_direction
+		):
 			_move_direction = candidate_direction
 			return
 
 	_move_direction = Vector3.ZERO
 
 
-func _is_direction_safe(direction: Vector3) -> bool:
+func _is_direction_safe(
+	direction: Vector3
+) -> bool:
 	if direction.length_squared() <= 0.001:
 		return true
 
@@ -2387,12 +3381,16 @@ func _is_direction_safe(direction: Vector3) -> bool:
 
 	if (
 		next_height
-		<= WorldGenerator.get_sea_level() + 0.20
+		<= WorldGenerator.get_sea_level()
+		+ 0.20
 	):
 		return false
 
 	if (
-		absf(next_height - current_height)
+		absf(
+			next_height
+			- current_height
+		)
 		> maximum_step_height
 	):
 		return false
@@ -2401,28 +3399,52 @@ func _is_direction_safe(direction: Vector3) -> bool:
 
 
 func _generate_creature() -> void:
-	var generated_length := maxi(
-		4,
-		body_length_voxels
-		+ _random.randi_range(-1, 1)
+	var generated_length := clampi(
+		roundi(
+			_get_gene_value(
+				_genetic_profile,
+				GENE_BODY_LENGTH,
+				float(body_length_voxels)
+			)
+		),
+		int(MIN_BODY_LENGTH_GENE),
+		int(MAX_BODY_LENGTH_GENE)
 	)
 
-	var generated_width := maxi(
-		2,
-		body_width_voxels
-		+ _random.randi_range(-1, 1)
+	var generated_width := clampi(
+		roundi(
+			_get_gene_value(
+				_genetic_profile,
+				GENE_BODY_WIDTH,
+				float(body_width_voxels)
+			)
+		),
+		int(MIN_BODY_WIDTH_GENE),
+		int(MAX_BODY_WIDTH_GENE)
 	)
 
-	var generated_height := maxi(
-		2,
-		body_height_voxels
-		+ _random.randi_range(-1, 1)
+	var generated_height := clampi(
+		roundi(
+			_get_gene_value(
+				_genetic_profile,
+				GENE_BODY_HEIGHT,
+				float(body_height_voxels)
+			)
+		),
+		int(MIN_BODY_HEIGHT_GENE),
+		int(MAX_BODY_HEIGHT_GENE)
 	)
 
-	var generated_leg_height := maxi(
-		2,
-		leg_height_voxels
-		+ _random.randi_range(-1, 1)
+	var generated_leg_height := clampi(
+		roundi(
+			_get_gene_value(
+				_genetic_profile,
+				GENE_LEG_HEIGHT,
+				float(leg_height_voxels)
+			)
+		),
+		int(MIN_LEG_HEIGHT_GENE),
+		int(MAX_LEG_HEIGHT_GENE)
 	)
 
 	var surface_tool := SurfaceTool.new()
@@ -2470,6 +3492,7 @@ func _generate_creature() -> void:
 		push_error(
 			"Grazer mesh could not be generated."
 		)
+
 		return
 
 	body_mesh.mesh = generated_mesh
@@ -2829,7 +3852,9 @@ func _add_mesh_vertex(
 ) -> void:
 	surface_tool.set_normal(normal)
 	surface_tool.set_color(color)
-	surface_tool.add_vertex(vertex_position)
+	surface_tool.add_vertex(
+		vertex_position
+	)
 
 
 func _apply_material() -> void:
