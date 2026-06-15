@@ -17,13 +17,11 @@ script = ExtResource("1_fj3vv")
 
 [node name="Visuals" type="Node" parent="." unique_id=1523847493]
 script = ExtResource("2_visuals")
-rock_color = Color(0.43, 0.28, 0.18, 1)
-rock_strata_color = Color(0.62, 0.39, 0.2, 1)
-wet_ground_color = Color(0.08, 0.15, 0.11, 1)
-macro_color_strength = 0.13
-strata_strength = 0.3
-snow_start_altitude = 12.0
-snow_end_altitude = 17.0
+enable_terrain_shader = false
+top_texture_scale = 0.25
+side_texture_scale = 0.25
+texture_darkness = 0.5
+texture_brightness = 1.1800000000000002
 
 [node name="ScenicDressing" type="Node3D" parent="." unique_id=1279601097]
 script = ExtResource("3_scenery")

@@ -621,12 +621,31 @@ func _add_mesh_vertex(
 	vertex_color: Color,
 	vertex_normal: Vector3
 ) -> void:
+	# Die Farbe bleibt als echte Vertexfarbe erhalten,
+	# damit das einfache Standardmaterial weiterhin funktioniert.
 	surface_tool.set_color(
 		vertex_color
 	)
 
 	surface_tool.set_normal(
 		vertex_normal
+	)
+
+	# Zusätzlich wird dieselbe Farbe verlustfrei in UV/UV2 gepackt.
+	# Dadurch ist der Terrainshader nicht mehr davon abhängig,
+	# ob Godot COLOR bei einem Material-Override korrekt übernimmt.
+	surface_tool.set_uv(
+		Vector2(
+			vertex_color.r,
+			vertex_color.g
+		)
+	)
+
+	surface_tool.set_uv2(
+		Vector2(
+			vertex_color.b,
+			vertex_color.a
+		)
 	)
 
 	surface_tool.add_vertex(

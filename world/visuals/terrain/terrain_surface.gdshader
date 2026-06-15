@@ -31,13 +31,13 @@ uniform float top_texture_scale : hint_range(
 	0.05,
 	4.0,
 	0.05
-) = 0.50;
+) = 0.25;
 
 uniform float side_texture_scale : hint_range(
 	0.05,
 	4.0,
 	0.05
-) = 0.50;
+) = 0.25;
 
 uniform float palette_steps : hint_range(
 	2.0,
@@ -49,13 +49,13 @@ uniform float texture_darkness : hint_range(
 	0.20,
 	1.00,
 	0.01
-) = 0.58;
+) = 0.50;
 
 uniform float texture_brightness : hint_range(
 	0.80,
 	1.50,
 	0.01
-) = 1.22;
+) = 1.18;
 
 
 uniform bool spherical_planet = false;
@@ -74,48 +74,16 @@ uniform float coast_width = 1.0;
 
 uniform float rocky_height = 4.5;
 
-
 uniform vec3 rock_color : source_color = vec3(
 	0.36,
 	0.27,
 	0.20
 );
 
-uniform vec3 rock_strata_color : source_color = vec3(
-	0.50,
-	0.35,
-	0.23
-);
-
-uniform vec3 wet_ground_color : source_color = vec3(
-	0.10,
-	0.17,
-	0.13
-);
-
-uniform vec3 snow_color : source_color = vec3(
-	0.72,
-	0.78,
-	0.79
-);
-
-
-uniform float rock_slope_start = 0.28;
-
-uniform float rock_slope_end = 0.62;
-
-uniform float macro_color_strength = 0.16;
-
-uniform float strata_strength = 0.18;
-
-uniform float snow_start_altitude = 4.8;
-
-uniform float snow_end_altitude = 6.5;
-
 
 varying vec3 world_position;
-
 varying vec3 world_normal;
+varying vec3 terrain_base_color;
 
 
 void vertex() {
@@ -130,6 +98,18 @@ void vertex() {
 	world_normal = normalize(
 		MODEL_NORMAL_MATRIX
 		* NORMAL
+	);
+
+	# Die prozedurale Terrainfarbe wird vom Mesher
+	# in UV und UV2 gespeichert:
+	#
+	# UV.x  = Rot
+	# UV.y  = Grün
+	# UV2.x = Blau
+	terrain_base_color = vec3(
+		UV.x,
+		UV.y,
+		UV2.x
 	);
 }
 
@@ -163,17 +143,26 @@ vec2 get_planar_uv(
 		absolute_normal.y >= absolute_normal.x
 		&& absolute_normal.y >= absolute_normal.z
 	) {
-		return position.xz * scale_value;
+		return (
+			position.xz
+			* scale_value
+		);
 	}
 
 	if (
 		absolute_normal.x
 		>= absolute_normal.z
 	) {
-		return position.zy * scale_value;
+		return (
+			position.zy
+			* scale_value
+		);
 	}
 
-	return position.xy * scale_value;
+	return (
+		position.xy
+		* scale_value
+	);
 }
 
 
@@ -201,26 +190,6 @@ float quantize_value(
 }
 
 
-vec3 quantize_color(
-	vec3 color_value
-) {
-	return vec3(
-		quantize_value(
-			color_value.r,
-			palette_steps
-		),
-		quantize_value(
-			color_value.g,
-			palette_steps
-		),
-		quantize_value(
-			color_value.b,
-			palette_steps
-		)
-	);
-}
-
-
 float get_texture_brightness(
 	vec3 texture_color
 ) {
@@ -233,11 +202,9 @@ float get_texture_brightness(
 		)
 	);
 
-	float quantized_value = (
-		quantize_value(
-			grayscale_value,
-			palette_steps
-		)
+	float quantized_value = quantize_value(
+		grayscale_value,
+		palette_steps
 	);
 
 	return mix(
@@ -248,22 +215,30 @@ float get_texture_brightness(
 }
 
 
-float get_side_brightness(
+float get_face_brightness(
 	vec3 normal_value
 ) {
+	if (normal_value.y > 0.50) {
+		return 1.06;
+	}
+
+	if (normal_value.y < -0.50) {
+		return 0.58;
+	}
+
 	if (normal_value.x > 0.50) {
-		return 0.92;
+		return 0.90;
 	}
 
 	if (normal_value.x < -0.50) {
-		return 0.76;
+		return 0.74;
 	}
 
 	if (normal_value.z > 0.50) {
-		return 0.85;
+		return 0.84;
 	}
 
-	return 0.70;
+	return 0.68;
 }
 
 
@@ -276,27 +251,42 @@ void fragment() {
 		world_position
 	);
 
-	bool horizontal_surface = (
-		abs(normal_value.y) > 0.50
+	bool top_surface = (
+		normal_value.y > 0.50
+	);
+
+	bool bottom_surface = (
+		normal_value.y < -0.50
+	);
+
+	bool side_surface = (
+		not top_surface
+		and not bottom_surface
+	);
+
+	float selected_scale = (
+		top_surface
+			? top_texture_scale
+			: side_texture_scale
 	);
 
 	vec2 pixel_uv = get_planar_uv(
 		world_position,
 		normal_value,
-		horizontal_surface
-			? top_texture_scale
-			: side_texture_scale
+		selected_scale
 	);
 
 	vec3 sampled_texture = vec3(
 		1.0
 	);
 
-	if (horizontal_surface) {
-		if (
+	if (top_surface) {
+		bool coast_surface = (
 			altitude
 			<= sea_level + coast_width
-		) {
+		);
+
+		if (coast_surface) {
 			sampled_texture = texture(
 				sand_texture,
 				pixel_uv
@@ -307,11 +297,13 @@ void fragment() {
 				pixel_uv
 			).rgb;
 		}
-	} else {
-		if (
+	} else if (side_surface) {
+		bool rocky_surface = (
 			altitude
 			>= rocky_height
-		) {
+		);
+
+		if (rocky_surface) {
 			sampled_texture = texture(
 				stone_texture,
 				pixel_uv
@@ -322,6 +314,11 @@ void fragment() {
 				pixel_uv
 			).rgb;
 		}
+	} else {
+		sampled_texture = texture(
+			dirt_texture,
+			pixel_uv
+		).rgb;
 	}
 
 	float pixel_brightness = (
@@ -330,36 +327,26 @@ void fragment() {
 		)
 	);
 
-	vec3 base_color = quantize_color(
-		COLOR.rgb
+	float face_brightness = (
+		get_face_brightness(
+			normal_value
+		)
+	);
+
+	vec3 base_color = clamp(
+		terrain_base_color,
+		vec3(0.0),
+		vec3(1.0)
 	);
 
 	if (
-		not horizontal_surface
-		&& altitude >= rocky_height
+		side_surface
+		and altitude >= rocky_height
 	) {
 		base_color = mix(
 			base_color,
-			quantize_color(
-				rock_color
-			),
-			0.20
-		);
-	}
-
-	float face_brightness = 1.0;
-
-	if (horizontal_surface) {
-		face_brightness = (
-			normal_value.y >= 0.0
-				? 1.06
-				: 0.62
-		);
-	} else {
-		face_brightness = (
-			get_side_brightness(
-				normal_value
-			)
+			rock_color,
+			0.22
 		);
 	}
 
@@ -370,9 +357,7 @@ void fragment() {
 	);
 
 	ALBEDO = clamp(
-		quantize_color(
-			final_color
-		),
+		final_color,
 		vec3(0.0),
 		vec3(1.0)
 	);
@@ -382,7 +367,8 @@ void fragment() {
 	SPECULAR = 0.0;
 
 	EMISSION = (
-		ALBEDO
-		* 0.035
+		base_color
+		* pixel_brightness
+		* 0.025
 	);
 }
