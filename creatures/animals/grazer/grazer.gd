@@ -7,6 +7,11 @@ const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
 const BIOLOGICAL_SEX_SEED_OFFSET: int = 1_592_746_831
 const MAXIMUM_AGE_SEED_OFFSET: int = 2_147_483_647
 const INITIAL_AGE_SEED_OFFSET: int = 1_073_741_823
+const NEWBORN_SEED_OFFSET: int = 982_451_653
+
+const GRAZER_SCENE_PATH: String = (
+	"res://creatures/animals/grazer/grazer.tscn"
+)
 
 const BERRY_BUSH_SCENE_PATH: String = (
 	"res://world/resources/plants/berry_bush.tscn"
@@ -17,6 +22,7 @@ enum BehaviorState {
 	WANDERING,
 	SEEKING_FOOD,
 	SEEKING_WATER,
+	SEEKING_MATE,
 	FLEEING
 }
 
@@ -107,6 +113,7 @@ var minimum_reproduction_hunger_ratio: float = 0.75
 @export_range(0.0, 1.0, 0.05)
 var minimum_reproduction_thirst_ratio: float = 0.75
 
+
 @export_category("Mate Search")
 
 @export_range(1.0, 100.0, 1.0)
@@ -114,6 +121,25 @@ var mate_search_radius: float = 30.0
 
 @export_range(0.1, 10.0, 0.1)
 var mate_search_interval: float = 1.0
+
+@export_range(0.5, 5.0, 0.1)
+var mating_distance: float = 2.5
+
+@export_range(1.0, 3.0, 0.1)
+var mate_move_speed_multiplier: float = 1.5
+
+@export_range(1.0, 600.0, 1.0)
+var gestation_duration_seconds: float = 20.0
+
+@export_range(1.0, 600.0, 1.0)
+var reproduction_cooldown_seconds: float = 45.0
+
+@export_range(2, 200, 1)
+var maximum_grazer_population: int = 40
+
+@export_range(0.5, 5.0, 0.25)
+var newborn_spawn_distance: float = 2.5
+
 
 @export_category("Food Search")
 
@@ -125,6 +151,7 @@ var food_search_interval: float = 1.0
 
 @export_range(0.5, 5.0, 0.1)
 var food_reach_distance: float = 2.5
+
 
 @export_category("Water Search")
 
@@ -239,8 +266,19 @@ var biological_sex: int = BiologicalSex.FEMALE
 
 var is_dead: bool = false
 
+var _creature_seed: int = 0
+var _seed_override: int = 0
+var _has_seed_override: bool = false
+var _configured_as_newborn: bool = false
+
 var _is_sexually_mature: bool = false
 var _is_reproduction_ready: bool = false
+
+var _is_pregnant: bool = false
+var _pregnancy_timer: float = 0.0
+var _pregnancy_father_seed: int = 0
+var _reproduction_cooldown_timer: float = 0.0
+var _birth_count: int = 0
 
 var _random := RandomNumberGenerator.new()
 
@@ -294,6 +332,10 @@ func _initialize_creature() -> void:
 
 	var creature_seed := _get_creature_seed()
 
+	if _has_seed_override:
+		creature_seed = _seed_override
+
+	_creature_seed = creature_seed
 	_random.seed = creature_seed
 
 	_assign_biological_sex(creature_seed)
@@ -323,8 +365,10 @@ func _initialize_creature() -> void:
 		is_sexually_mature(),
 		" | Reproduction ready: ",
 		is_reproduction_ready(),
+		" | Newborn: ",
+		_configured_as_newborn,
 		" | Seed: ",
-		creature_seed,
+		_creature_seed,
 		" | Position: ",
 		global_position,
 		" | In grazer group: ",
@@ -368,6 +412,10 @@ func _assign_life_cycle(creature_seed: int) -> void:
 		lowest_maximum_age,
 		highest_maximum_age
 	)
+
+	if _configured_as_newborn:
+		current_age_seconds = 0.0
+		return
 
 	var initial_age_random := RandomNumberGenerator.new()
 
@@ -447,6 +495,145 @@ func is_reproduction_ready() -> bool:
 	return _is_reproduction_ready
 
 
+func is_alive() -> bool:
+	return not is_dead
+
+
+func is_pregnant() -> bool:
+	return _is_pregnant
+
+
+func get_creature_seed() -> int:
+	return _creature_seed
+
+
+func configure_as_newborn(newborn_seed: int) -> void:
+	if _initialized:
+		push_warning(
+			"Grazer newborn configuration was attempted after initialization."
+		)
+		return
+
+	_seed_override = newborn_seed
+	_has_seed_override = true
+	_configured_as_newborn = true
+
+
+func apply_reproduction_cooldown() -> void:
+	_reproduction_cooldown_timer = maxf(
+		reproduction_cooldown_seconds,
+		0.0
+	)
+
+	_clear_mate_target()
+	_update_life_cycle_states()
+
+
+func try_start_pregnancy(partner: Node) -> bool:
+	if is_dead:
+		return false
+
+	if biological_sex != BiologicalSex.FEMALE:
+		return false
+
+	if _is_pregnant:
+		return false
+
+	if not _is_reproduction_ready:
+		return false
+
+	if partner is not Node3D:
+		return false
+
+	var partner_3d := partner as Node3D
+
+	if not partner_3d.is_inside_tree():
+		return false
+
+	if not partner.has_method("get_biological_sex"):
+		return false
+
+	if not partner.has_method("get_creature_seed"):
+		return false
+
+	if not partner.has_method("is_reproduction_ready"):
+		return false
+
+	var partner_sex := int(
+		partner.call("get_biological_sex")
+	)
+
+	if partner_sex != BiologicalSex.MALE:
+		return false
+
+	var partner_is_ready := bool(
+		partner.call("is_reproduction_ready")
+	)
+
+	if not partner_is_ready:
+		return false
+
+	var safe_mating_distance := maxf(
+		mating_distance,
+		0.5
+	)
+
+	if (
+		global_position.distance_to(
+			partner_3d.global_position
+		)
+		> safe_mating_distance + 0.5
+	):
+		return false
+
+	var safe_population_limit := maxi(
+		maximum_grazer_population,
+		2
+	)
+
+	if (
+		_get_projected_grazer_population()
+		>= safe_population_limit
+	):
+		print(
+			"Grazer pregnancy blocked by population limit: ",
+			safe_population_limit
+		)
+
+		return false
+
+	_is_pregnant = true
+
+	_pregnancy_timer = maxf(
+		gestation_duration_seconds,
+		0.1
+	)
+
+	_pregnancy_father_seed = int(
+		partner.call("get_creature_seed")
+	)
+
+	_clear_mate_target()
+
+	_move_direction = Vector3.ZERO
+	velocity.x = 0.0
+	velocity.z = 0.0
+
+	_update_life_cycle_states()
+
+	print(
+		"Grazer pregnancy started. Mother seed: ",
+		_creature_seed,
+		" | Father seed: ",
+		_pregnancy_father_seed,
+		" | Gestation: ",
+		_pregnancy_timer,
+		" seconds."
+	)
+
+	return true
+
+
 func _physics_process(delta: float) -> void:
 	if not _initialized:
 		return
@@ -470,6 +657,7 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
+	_update_reproduction(delta)
 	_update_life_cycle_states()
 	_update_perception(delta)
 	_update_mate_awareness(delta)
@@ -486,6 +674,9 @@ func _physics_process(delta: float) -> void:
 		BehaviorState.SEEKING_FOOD:
 			_update_food_movement()
 
+		BehaviorState.SEEKING_MATE:
+			_update_mate_movement()
+
 		BehaviorState.WANDERING:
 			_update_wandering(delta)
 
@@ -500,6 +691,9 @@ func _physics_process(delta: float) -> void:
 			BehaviorState.SEEKING_WATER:
 				_abandon_water_target()
 
+			BehaviorState.SEEKING_MATE:
+				_abandon_mate_target()
+
 			BehaviorState.FLEEING:
 				_update_flee_direction()
 
@@ -510,6 +704,8 @@ func _physics_process(delta: float) -> void:
 
 	if _behavior_state == BehaviorState.FLEEING:
 		active_move_speed *= flee_speed_multiplier
+	elif _behavior_state == BehaviorState.SEEKING_MATE:
+		active_move_speed *= mate_move_speed_multiplier
 
 	velocity.x = _move_direction.x * active_move_speed
 	velocity.z = _move_direction.z * active_move_speed
@@ -585,6 +781,8 @@ func _update_life_cycle_states(
 	var new_reproduction_readiness := (
 		not is_dead
 		and _is_sexually_mature
+		and not _is_pregnant
+		and _reproduction_cooldown_timer <= 0.0
 		and get_hunger_ratio()
 		>= clampf(
 			minimum_reproduction_hunger_ratio,
@@ -617,23 +815,46 @@ func _update_life_cycle_states(
 		_is_reproduction_ready,
 		" | Mature: ",
 		_is_sexually_mature,
+		" | Pregnant: ",
+		_is_pregnant,
+		" | Cooldown: ",
+		snappedf(
+			_reproduction_cooldown_timer,
+			0.1
+		),
 		" | Hunger ratio: ",
 		snappedf(get_hunger_ratio(), 0.01),
 		" | Thirst ratio: ",
 		snappedf(get_thirst_ratio(), 0.01)
 	)
 
+
 func _update_mate_awareness(delta: float) -> void:
 	if (
 		not _is_reproduction_ready
 		or _behavior_state == BehaviorState.FLEEING
 	):
+		var was_seeking_mate := (
+			_behavior_state
+			== BehaviorState.SEEKING_MATE
+		)
+
 		_clear_mate_target()
+
 		_mate_search_timer = 0.0
 		_reported_no_compatible_mate = false
+
+		if (
+			was_seeking_mate
+			and _behavior_state
+			!= BehaviorState.FLEEING
+		):
+			_choose_new_behavior()
+
 		return
 
 	if _is_mate_target_valid():
+		_behavior_state = BehaviorState.SEEKING_MATE
 		return
 
 	_clear_mate_target()
@@ -670,8 +891,13 @@ func _update_mate_awareness(delta: float) -> void:
 	_mate_target = new_mate_target
 	_reported_no_compatible_mate = false
 
+	_clear_food_target()
+	_clear_water_target()
+
+	_behavior_state = BehaviorState.SEEKING_MATE
+
 	print(
-		"Grazer found compatible mate. Self sex: ",
+		"Grazer started seeking compatible mate. Self sex: ",
 		get_biological_sex_name(),
 		" | Mate sex: ",
 		String(
@@ -805,6 +1031,363 @@ func _is_mate_target_valid() -> bool:
 func _clear_mate_target() -> void:
 	_mate_target = null
 
+
+func _abandon_mate_target() -> void:
+	_clear_mate_target()
+
+	_mate_search_timer = maxf(
+		mate_search_interval,
+		0.1
+	)
+
+	if _behavior_state == BehaviorState.SEEKING_MATE:
+		_choose_new_behavior()
+
+
+func _update_mate_movement() -> void:
+	if not _is_mate_target_valid():
+		_abandon_mate_target()
+		return
+
+	var target_offset := (
+		_mate_target.global_position
+		- global_position
+	)
+
+	target_offset.y = 0.0
+
+	var distance_to_mate := target_offset.length()
+
+	var safe_mating_distance := maxf(
+		mating_distance,
+		0.5
+	)
+
+	if distance_to_mate <= safe_mating_distance:
+		_move_direction = Vector3.ZERO
+		velocity.x = 0.0
+		velocity.z = 0.0
+
+		_try_mate_with_target()
+		return
+
+	var target_direction := target_offset.normalized()
+
+	if _is_direction_safe(target_direction):
+		_move_direction = target_direction
+	else:
+		_abandon_mate_target()
+
+
+func _try_mate_with_target() -> void:
+	if not _is_mate_target_valid():
+		_abandon_mate_target()
+		return
+
+	var partner := _mate_target
+	var pregnancy_started := false
+
+	if biological_sex == BiologicalSex.FEMALE:
+		pregnancy_started = try_start_pregnancy(
+			partner
+		)
+
+		if (
+			pregnancy_started
+			and partner.has_method(
+				"apply_reproduction_cooldown"
+			)
+		):
+			partner.call(
+				"apply_reproduction_cooldown"
+			)
+	else:
+		if partner.has_method(
+			"try_start_pregnancy"
+		):
+			pregnancy_started = bool(
+				partner.call(
+					"try_start_pregnancy",
+					self
+				)
+			)
+
+		if pregnancy_started:
+			apply_reproduction_cooldown()
+
+	if not pregnancy_started:
+		_abandon_mate_target()
+		return
+
+	print(
+		"Grazer mating completed. Initiator sex: ",
+		get_biological_sex_name()
+	)
+
+	_clear_mate_target()
+
+	if _behavior_state != BehaviorState.FLEEING:
+		_choose_new_behavior()
+
+
+func _update_reproduction(delta: float) -> void:
+	if _reproduction_cooldown_timer > 0.0:
+		_reproduction_cooldown_timer = maxf(
+			_reproduction_cooldown_timer - delta,
+			0.0
+		)
+
+	if not _is_pregnant:
+		return
+
+	_pregnancy_timer = maxf(
+		_pregnancy_timer - delta,
+		0.0
+	)
+
+	if _pregnancy_timer > 0.0:
+		return
+
+	_finish_pregnancy_and_give_birth()
+
+
+func _finish_pregnancy_and_give_birth() -> void:
+	if not _is_pregnant:
+		return
+
+	var grazer_scene := load(
+		GRAZER_SCENE_PATH
+	) as PackedScene
+
+	if grazer_scene == null:
+		push_error(
+			"Grazer scene could not be loaded for birth."
+		)
+
+		_pregnancy_timer = 1.0
+		return
+
+	var scene_parent := get_parent()
+
+	if scene_parent == null:
+		push_error(
+			"Grazer birth failed because the mother has no parent node."
+		)
+
+		_pregnancy_timer = 1.0
+		return
+
+	_birth_count += 1
+
+	var newborn_seed := _create_newborn_seed(
+		_pregnancy_father_seed,
+		_birth_count
+	)
+
+	var birth_position := (
+		_find_newborn_spawn_position(
+			newborn_seed
+		)
+	)
+
+	var newborn_node := grazer_scene.instantiate()
+
+	if newborn_node is not Node3D:
+		push_error(
+			"Instantiated grazer newborn is not a Node3D."
+		)
+
+		newborn_node.free()
+		_pregnancy_timer = 1.0
+		return
+
+	var newborn := newborn_node as Node3D
+
+	if not newborn.has_method(
+		"configure_as_newborn"
+	):
+		push_error(
+			"Grazer newborn is missing configure_as_newborn()."
+		)
+
+		newborn.free()
+		_pregnancy_timer = 1.0
+		return
+
+	newborn.call(
+		"configure_as_newborn",
+		newborn_seed
+	)
+
+	scene_parent.add_child(newborn)
+	newborn.global_position = birth_position
+
+	_is_pregnant = false
+	_pregnancy_timer = 0.0
+	_pregnancy_father_seed = 0
+
+	_reproduction_cooldown_timer = maxf(
+		reproduction_cooldown_seconds,
+		0.0
+	)
+
+	_clear_mate_target()
+	_update_life_cycle_states()
+
+	print(
+		"Grazer gave birth. Newborn seed: ",
+		newborn_seed,
+		" | Birth number: ",
+		_birth_count,
+		" | Position: ",
+		birth_position
+	)
+
+
+func _create_newborn_seed(
+	father_seed: int,
+	birth_number: int
+) -> int:
+	var newborn_seed := (
+		_creature_seed
+		* 31
+		+ father_seed
+		* 17
+		+ birth_number
+		* NEWBORN_SEED_OFFSET
+		+ GameState.world_seed
+		* 13
+	)
+
+	if newborn_seed == 0:
+		newborn_seed = NEWBORN_SEED_OFFSET
+
+	return newborn_seed
+
+
+func _find_newborn_spawn_position(
+	newborn_seed: int
+) -> Vector3:
+	var spawn_random := RandomNumberGenerator.new()
+
+	spawn_random.seed = (
+		newborn_seed
+		+ NEWBORN_SEED_OFFSET
+	)
+
+	var current_terrain_height := (
+		WorldGenerator.get_terrain_height(
+			global_position.x,
+			global_position.z
+		)
+	)
+
+	var minimum_distance := maxf(
+		0.75,
+		newborn_spawn_distance * 0.5
+	)
+
+	var maximum_distance := maxf(
+		minimum_distance + 0.1,
+		newborn_spawn_distance
+	)
+
+	for _attempt in range(12):
+		var angle := spawn_random.randf_range(
+			0.0,
+			TAU
+		)
+
+		var distance := spawn_random.randf_range(
+			minimum_distance,
+			maximum_distance
+		)
+
+		var candidate_position := (
+			global_position
+			+ Vector3(
+				sin(angle),
+				0.0,
+				cos(angle)
+			)
+			* distance
+		)
+
+		var candidate_height := (
+			WorldGenerator.get_terrain_height(
+				candidate_position.x,
+				candidate_position.z
+			)
+		)
+
+		if (
+			candidate_height
+			<= WorldGenerator.get_sea_level()
+			+ 0.20
+		):
+			continue
+
+		if (
+			absf(
+				candidate_height
+				- current_terrain_height
+			)
+			> maximum_step_height * 2.0
+		):
+			continue
+
+		candidate_position.y = (
+			candidate_height + 0.05
+		)
+
+		return candidate_position
+
+	var fallback_position := (
+		global_position
+		+ Vector3.RIGHT
+		* minimum_distance
+	)
+
+	fallback_position.y = (
+		WorldGenerator.get_terrain_height(
+			fallback_position.x,
+			fallback_position.z
+		)
+		+ 0.05
+	)
+
+	return fallback_position
+
+
+func _get_projected_grazer_population() -> int:
+	var projected_population := 0
+
+	for grouped_node in get_tree().get_nodes_in_group(
+		&"grazer"
+	):
+		if not grouped_node.has_method("is_alive"):
+			continue
+
+		var grouped_grazer_is_alive := bool(
+			grouped_node.call("is_alive")
+		)
+
+		if not grouped_grazer_is_alive:
+			continue
+
+		projected_population += 1
+
+		if (
+			grouped_node.has_method("is_pregnant")
+			and bool(
+				grouped_node.call("is_pregnant")
+			)
+		):
+			projected_population += 1
+
+	return projected_population
+
+
 func _process_corpse_physics(delta: float) -> void:
 	velocity.x = 0.0
 	velocity.z = 0.0
@@ -924,6 +1507,7 @@ func _start_fleeing_from(threat: Node3D) -> void:
 
 	_threat_target = threat
 
+	_clear_mate_target()
 	_clear_food_target()
 	_clear_water_target()
 
@@ -998,6 +1582,12 @@ func _update_target_selection(delta: float) -> void:
 		_water_search_timer - delta,
 		0.0
 	)
+
+	if _behavior_state == BehaviorState.SEEKING_MATE:
+		if _is_mate_target_valid():
+			return
+
+		_clear_mate_target()
 
 	var hunger_ratio := get_hunger_ratio()
 	var thirst_ratio := get_thirst_ratio()
@@ -1704,8 +2294,12 @@ func _die() -> void:
 	is_dead = true
 	current_health = 0.0
 
+	_is_pregnant = false
+	_pregnancy_timer = 0.0
+	_pregnancy_father_seed = 0
+
 	_update_life_cycle_states()
-	
+
 	_clear_mate_target()
 	_clear_food_target()
 	_clear_water_target()
