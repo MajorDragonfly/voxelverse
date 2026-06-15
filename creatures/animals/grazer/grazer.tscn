@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bstqomb60abe7"]
 
 [ext_resource type="Script" uid="uid://ddqribjqkrg0h" path="res://creatures/animals/grazer/grazer.gd" id="1_btf05"]
+[ext_resource type="Script" path="res://world/visuals/voxel/voxel_surface_styler.gd" id="2_styler"]
 
 [node name="Grazer" type="CharacterBody3D" unique_id=1663504895]
 script = ExtResource("1_btf05")
@@ -20,5 +21,9 @@ maximum_grazer_population = 30
 newborn_spawn_distance = 2.5
 
 [node name="BodyMesh" type="MeshInstance3D" parent="." unique_id=206946388]
+script = ExtResource("2_styler")
+initial_delay_frames = 4
+keep_monitoring = true
+monitoring_interval = 0.5
 
 [node name="BodyCollision" type="CollisionShape3D" parent="." unique_id=1630800608]
