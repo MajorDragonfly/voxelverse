@@ -1,6 +1,11 @@
 extends Node
 
 
+const WORLD_VISUAL_PROFILE_SCRIPT: Script = preload(
+	"res://world/visuals/world_visual_profile.gd"
+)
+
+
 enum Biome {
 	OCEAN,
 	COAST,
@@ -12,19 +17,18 @@ enum Biome {
 }
 
 
-# Grundform des Geländes.
+# Grundwerte des Terrains.
+#
+# Das WorldVisualProfile verändert diese Werte
+# reproduzierbar für jeden Welt-Seed.
 const TERRAIN_FREQUENCY: float = 0.025
 const TERRAIN_HEIGHT_SCALE: float = 6.0
 const TERRAIN_OCTAVES: int = 5
 
-# Visuelle Voxel-Terrassen.
-#
-# Die logische Noise-Höhe bleibt unverändert.
-# Nur die sichtbare Geometrie wird auf feste Höhenstufen gesetzt.
+# Fallback für den Fall, dass noch kein Profil existiert.
 const TERRAIN_VISUAL_STEP_HEIGHT: float = 0.5
 
-# Abstand, in dem benachbarte Höhen für die
-# Berechnung der sichtbaren Terrainsteigung geprüft werden.
+# Abstand für die Berechnung der Terrainsteigung.
 const TERRAIN_SLOPE_SAMPLE_DISTANCE: float = 1.0
 
 # Abgeflachter Startbereich.
@@ -43,7 +47,7 @@ const MOISTURE_FREQUENCY: float = 0.005
 # Höhenabhängige Abkühlung.
 const HEIGHT_TEMPERATURE_LOSS: float = 0.035
 
-# Grenzwerte für die logischen Biome.
+# Grenzwerte der logischen Biome.
 const ROCKY_HEIGHT_MIN: float = 4.5
 const COLD_TEMPERATURE_MAX: float = 0.32
 const STEPPE_MOISTURE_MAX: float = 0.36
@@ -51,7 +55,7 @@ const WETLAND_MOISTURE_MIN: float = 0.68
 const HOT_TEMPERATURE_MIN: float = 0.68
 const HOT_STEPPE_MOISTURE_MAX: float = 0.50
 
-# Vorläufige Biomfarben.
+# Fallback-Farben.
 const COLOR_OCEAN_FLOOR: Color = Color(
 	0.14,
 	0.24,
@@ -102,6 +106,8 @@ const COLOR_ROCK: Color = Color(
 )
 
 
+var _visual_profile
+
 var _terrain_noise: FastNoiseLite
 var _temperature_noise: FastNoiseLite
 var _moisture_noise: FastNoiseLite
@@ -114,6 +120,9 @@ func _ready() -> void:
 
 
 func rebuild() -> void:
+	_initialized = false
+
+	_create_visual_profile()
 	_create_terrain_noise()
 	_create_temperature_noise()
 	_create_moisture_noise()
@@ -125,14 +134,37 @@ func rebuild() -> void:
 		GameState.world_seed
 	)
 
+	_print_visual_profile()
 	_print_spawn_biome()
+
+
+func _create_visual_profile() -> void:
+	_visual_profile = (
+		WORLD_VISUAL_PROFILE_SCRIPT.new()
+	)
+
+	_visual_profile.generate_from_seed(
+		GameState.world_seed
+	)
 
 
 func _create_terrain_noise() -> void:
 	_terrain_noise = FastNoiseLite.new()
 
 	_terrain_noise.seed = GameState.world_seed
-	_terrain_noise.frequency = TERRAIN_FREQUENCY
+
+	var frequency_multiplier: float = 1.0
+
+	if _visual_profile != null:
+		frequency_multiplier = (
+			_visual_profile.terrain_frequency_multiplier
+		)
+
+	_terrain_noise.frequency = (
+		TERRAIN_FREQUENCY
+		* frequency_multiplier
+	)
+
 	_terrain_noise.fractal_octaves = TERRAIN_OCTAVES
 	_terrain_noise.fractal_gain = 0.5
 	_terrain_noise.fractal_lacunarity = 2.0
@@ -141,7 +173,11 @@ func _create_terrain_noise() -> void:
 func _create_temperature_noise() -> void:
 	_temperature_noise = FastNoiseLite.new()
 
-	_temperature_noise.seed = GameState.world_seed + 10_001
+	_temperature_noise.seed = (
+		GameState.world_seed
+		+ 10_001
+	)
+
 	_temperature_noise.frequency = TEMPERATURE_FREQUENCY
 	_temperature_noise.fractal_octaves = 3
 	_temperature_noise.fractal_gain = 0.5
@@ -151,11 +187,116 @@ func _create_temperature_noise() -> void:
 func _create_moisture_noise() -> void:
 	_moisture_noise = FastNoiseLite.new()
 
-	_moisture_noise.seed = GameState.world_seed + 20_002
+	_moisture_noise.seed = (
+		GameState.world_seed
+		+ 20_002
+	)
+
 	_moisture_noise.frequency = MOISTURE_FREQUENCY
 	_moisture_noise.fractal_octaves = 4
 	_moisture_noise.fractal_gain = 0.5
 	_moisture_noise.fractal_lacunarity = 2.0
+
+
+func get_visual_profile() -> Resource:
+	_ensure_initialized()
+
+	return _visual_profile as Resource
+
+
+func get_world_archetype_name() -> String:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return "Default"
+
+	return _visual_profile.archetype_name
+
+
+func get_terrain_height_multiplier() -> float:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return 1.0
+
+	return _visual_profile.terrain_height_multiplier
+
+
+func get_cliff_strength() -> float:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return 1.0
+
+	return _visual_profile.cliff_strength
+
+
+func get_grass_density_multiplier() -> float:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return 1.0
+
+	return _visual_profile.grass_density_multiplier
+
+
+func get_rock_density_multiplier() -> float:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return 1.0
+
+	return _visual_profile.rock_density_multiplier
+
+
+func get_tree_density_multiplier() -> float:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return 1.0
+
+	return _visual_profile.tree_density_multiplier
+
+
+func get_ruin_density_multiplier() -> float:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return 1.0
+
+	return _visual_profile.ruin_density_multiplier
+
+
+func get_world_fog_color() -> Color:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return Color(
+			0.65,
+			0.72,
+			0.76,
+			1.0
+		)
+
+	return _visual_profile.fog_color
+
+
+func get_world_fog_density_multiplier() -> float:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return 1.0
+
+	return _visual_profile.fog_density_multiplier
+
+
+func get_world_rock_color() -> Color:
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return COLOR_ROCK
+
+	return _visual_profile.color_rock
 
 
 func get_terrain_height(
@@ -164,10 +305,21 @@ func get_terrain_height(
 ) -> float:
 	_ensure_initialized()
 
-	var height := _terrain_noise.get_noise_2d(
-		world_x,
-		world_z
-	) * TERRAIN_HEIGHT_SCALE
+	var height_multiplier: float = 1.0
+
+	if _visual_profile != null:
+		height_multiplier = (
+			_visual_profile.terrain_height_multiplier
+		)
+
+	var height := (
+		_terrain_noise.get_noise_2d(
+			world_x,
+			world_z
+		)
+		* TERRAIN_HEIGHT_SCALE
+		* height_multiplier
+	)
 
 	var distance_to_spawn := Vector2(
 		world_x,
@@ -192,17 +344,27 @@ func get_visual_terrain_height(
 		world_z
 	)
 
+	var step_height := maxf(
+		get_visual_step_height(),
+		0.05
+	)
+
 	return (
 		roundf(
 			logical_height
-			/ TERRAIN_VISUAL_STEP_HEIGHT
+			/ step_height
 		)
-		* TERRAIN_VISUAL_STEP_HEIGHT
+		* step_height
 	)
 
 
 func get_visual_step_height() -> float:
-	return TERRAIN_VISUAL_STEP_HEIGHT
+	_ensure_initialized()
+
+	if _visual_profile == null:
+		return TERRAIN_VISUAL_STEP_HEIGHT
+
+	return _visual_profile.terrace_step_height
 
 
 func get_terrain_slope(
@@ -215,9 +377,6 @@ func get_terrain_slope(
 		0.01
 	)
 
-	# Für Dekorationen verwenden wir die sichtbaren,
-	# quantisierten Terrainhöhen. Dadurch passen Gras,
-	# Steine und spätere Objekte zur dargestellten Oberfläche.
 	var height_left := get_visual_terrain_height(
 		world_x - safe_sample_distance,
 		world_z
@@ -254,12 +413,6 @@ func get_terrain_slope(
 		* safe_sample_distance
 	)
 
-	# Rückgabewert ist die Steigung als Höhenänderung
-	# pro horizontalem Meter:
-	#
-	# 0.0 = vollständig flach
-	# 0.5 = 0,5 Meter Anstieg pro Meter
-	# 1.0 = ungefähr 45 Grad
 	return Vector2(
 		slope_x,
 		slope_z
@@ -340,7 +493,6 @@ func get_biome(
 	world_z: float,
 	terrain_height: float
 ) -> int:
-	# Meer und Küste haben Vorrang vor den Landbiomen.
 	if terrain_height < SEA_LEVEL:
 		return Biome.OCEAN
 
@@ -413,7 +565,45 @@ func get_biome_color(
 	world_z: float,
 	terrain_height: float
 ) -> Color:
-	# Gelände unterhalb der Meereshöhe wird zum Meeresboden.
+	_ensure_initialized()
+
+	var ocean_floor_color := COLOR_OCEAN_FLOOR
+	var coast_color := COLOR_COAST
+	var grassland_color := COLOR_GRASSLAND
+	var dry_color := COLOR_DRY
+	var wet_color := COLOR_WET
+	var cold_color := COLOR_COLD
+	var rock_color := COLOR_ROCK
+
+	if _visual_profile != null:
+		ocean_floor_color = (
+			_visual_profile.color_ocean_floor
+		)
+
+		coast_color = (
+			_visual_profile.color_coast
+		)
+
+		grassland_color = (
+			_visual_profile.color_grassland
+		)
+
+		dry_color = (
+			_visual_profile.color_dry
+		)
+
+		wet_color = (
+			_visual_profile.color_wet
+		)
+
+		cold_color = (
+			_visual_profile.color_cold
+		)
+
+		rock_color = (
+			_visual_profile.color_rock
+		)
+
 	if terrain_height < SEA_LEVEL:
 		var depth_factor := clampf(
 			(
@@ -425,8 +615,8 @@ func get_biome_color(
 			1.0
 		)
 
-		return COLOR_COAST.lerp(
-			COLOR_OCEAN_FLOOR,
+		return coast_color.lerp(
+			ocean_floor_color,
 			depth_factor
 		)
 
@@ -441,7 +631,7 @@ func get_biome_color(
 		world_z
 	)
 
-	var biome_color := COLOR_GRASSLAND
+	var biome_color := grassland_color
 
 	var dry_factor := (
 		1.0
@@ -453,7 +643,7 @@ func get_biome_color(
 	)
 
 	biome_color = biome_color.lerp(
-		COLOR_DRY,
+		dry_color,
 		dry_factor
 	)
 
@@ -464,7 +654,7 @@ func get_biome_color(
 	)
 
 	biome_color = biome_color.lerp(
-		COLOR_WET,
+		wet_color,
 		wet_factor
 	)
 
@@ -478,7 +668,7 @@ func get_biome_color(
 	)
 
 	biome_color = biome_color.lerp(
-		COLOR_COLD,
+		cold_color,
 		cold_factor
 	)
 
@@ -489,11 +679,10 @@ func get_biome_color(
 	)
 
 	biome_color = biome_color.lerp(
-		COLOR_ROCK,
+		rock_color,
 		rock_factor
 	)
 
-	# Übergang von Sand zu normalem Land.
 	if terrain_height <= SEA_LEVEL + COAST_WIDTH:
 		var coast_factor := smoothstep(
 			SEA_LEVEL,
@@ -501,7 +690,7 @@ func get_biome_color(
 			terrain_height
 		)
 
-		return COLOR_COAST.lerp(
+		return coast_color.lerp(
 			biome_color,
 			coast_factor
 		)
@@ -534,6 +723,55 @@ func _get_adjusted_temperature(
 	)
 
 
+func _print_visual_profile() -> void:
+	if _visual_profile == null:
+		print(
+			"World visual profile: Default"
+		)
+		return
+
+	print(
+		"World visual profile: ",
+		_visual_profile.archetype_name
+	)
+
+	print(
+		"Terrain height multiplier: ",
+		snappedf(
+			_visual_profile.terrain_height_multiplier,
+			0.01
+		)
+	)
+
+	print(
+		"Visual terrain step height: ",
+		_visual_profile.terrace_step_height
+	)
+
+	print(
+		"Scenery multipliers - grass: ",
+		snappedf(
+			_visual_profile.grass_density_multiplier,
+			0.01
+		),
+		", rock: ",
+		snappedf(
+			_visual_profile.rock_density_multiplier,
+			0.01
+		),
+		", tree: ",
+		snappedf(
+			_visual_profile.tree_density_multiplier,
+			0.01
+		),
+		", ruin: ",
+		snappedf(
+			_visual_profile.ruin_density_multiplier,
+			0.01
+		)
+	)
+
+
 func _print_spawn_biome() -> void:
 	var spawn_height := get_terrain_height(
 		0.0,
@@ -554,11 +792,6 @@ func _print_spawn_biome() -> void:
 	print(
 		"Sea level: ",
 		SEA_LEVEL
-	)
-
-	print(
-		"Visual terrain step height: ",
-		TERRAIN_VISUAL_STEP_HEIGHT
 	)
 
 

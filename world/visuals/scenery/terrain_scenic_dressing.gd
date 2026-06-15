@@ -73,7 +73,6 @@ func _generate_scenic_dressing() -> void:
 		push_error(
 			"Scenic dressing requires get_chunk_width()."
 		)
-
 		return
 
 	if not chunk_node.has_method(
@@ -82,7 +81,14 @@ func _generate_scenic_dressing() -> void:
 		push_error(
 			"Scenic dressing requires get_chunk_depth()."
 		)
+		return
 
+	if not chunk_node.has_method(
+		"get_surface_height_at_local_position"
+	):
+		push_error(
+			"Scenic dressing requires get_surface_height_at_local_position()."
+		)
 		return
 
 	var chunk_width: float = float(
@@ -127,14 +133,28 @@ func _generate_grass(
 	chunk_width: float,
 	chunk_depth: float
 ) -> void:
-	if grass_attempts_per_chunk <= 0:
+	var density_multiplier: float = (
+		WorldGenerator.get_grass_density_multiplier()
+	)
+
+	var effective_attempts: int = maxi(
+		0,
+		roundi(
+			float(grass_attempts_per_chunk)
+			* density_multiplier
+		)
+	)
+
+	if effective_attempts <= 0:
 		return
 
-	var random: RandomNumberGenerator = _create_chunk_random(
-		chunk_node,
-		chunk_width,
-		chunk_depth,
-		GRASS_SEED_OFFSET
+	var random: RandomNumberGenerator = (
+		_create_chunk_random(
+			chunk_node,
+			chunk_width,
+			chunk_depth,
+			GRASS_SEED_OFFSET
+		)
 	)
 
 	var instance_transforms: Array[Transform3D] = []
@@ -144,7 +164,7 @@ func _generate_grass(
 	var half_depth: float = chunk_depth * 0.5
 
 	for _attempt_index in range(
-		grass_attempts_per_chunk
+		effective_attempts
 	):
 		var local_x: float = random.randf_range(
 			-half_width + chunk_edge_margin,
@@ -172,7 +192,7 @@ func _generate_grass(
 		).length() < spawn_clear_radius:
 			continue
 
-		var terrain_height: float = (
+		var logical_height: float = (
 			WorldGenerator.get_terrain_height(
 				world_x,
 				world_z
@@ -180,16 +200,26 @@ func _generate_grass(
 		)
 
 		if (
-			terrain_height
+			logical_height
 			<= WorldGenerator.get_sea_level()
 			+ 0.25
 		):
 			continue
 
-		var biome: int = WorldGenerator.get_biome(
-			world_x,
-			world_z,
-			terrain_height
+		var surface_height: float = float(
+			chunk_node.call(
+				"get_surface_height_at_local_position",
+				local_x,
+				local_z
+			)
+		)
+
+		var biome: int = (
+			WorldGenerator.get_biome(
+				world_x,
+				world_z,
+				logical_height
+			)
 		)
 
 		if (
@@ -208,7 +238,10 @@ func _generate_grass(
 			)
 		)
 
-		if terrain_slope > maximum_grass_slope:
+		if (
+			terrain_slope
+			> maximum_grass_slope
+		):
 			continue
 
 		var angle: float = random.randf_range(
@@ -216,14 +249,18 @@ func _generate_grass(
 			TAU
 		)
 
-		var width_scale: float = random.randf_range(
-			0.70,
-			1.40
+		var width_scale: float = (
+			random.randf_range(
+				0.70,
+				1.40
+			)
 		)
 
-		var height_scale: float = random.randf_range(
-			0.65,
-			1.45
+		var height_scale: float = (
+			random.randf_range(
+				0.65,
+				1.45
+			)
 		)
 
 		var instance_basis: Basis = Basis(
@@ -231,11 +268,13 @@ func _generate_grass(
 			angle
 		)
 
-		instance_basis = instance_basis.scaled(
-			Vector3(
-				width_scale,
-				height_scale,
-				width_scale
+		instance_basis = (
+			instance_basis.scaled(
+				Vector3(
+					width_scale,
+					height_scale,
+					width_scale
+				)
 			)
 		)
 
@@ -244,7 +283,7 @@ func _generate_grass(
 				instance_basis,
 				Vector3(
 					local_x,
-					terrain_height + 0.02,
+					surface_height + 0.02,
 					local_z
 				)
 			)
@@ -253,6 +292,9 @@ func _generate_grass(
 		instance_colors.append(
 			_get_grass_color(
 				biome,
+				world_x,
+				world_z,
+				logical_height,
 				random
 			)
 		)
@@ -260,7 +302,9 @@ func _generate_grass(
 	if instance_transforms.is_empty():
 		return
 
-	var grass_multi_mesh: MultiMesh = MultiMesh.new()
+	var grass_multi_mesh: MultiMesh = (
+		MultiMesh.new()
+	)
 
 	grass_multi_mesh.transform_format = (
 		MultiMesh.TRANSFORM_3D
@@ -268,6 +312,7 @@ func _generate_grass(
 
 	grass_multi_mesh.use_colors = true
 	grass_multi_mesh.mesh = _create_grass_mesh()
+
 	grass_multi_mesh.instance_count = (
 		instance_transforms.size()
 	)
@@ -297,7 +342,8 @@ func _generate_grass(
 	grass_instance.multimesh = grass_multi_mesh
 
 	grass_instance.cast_shadow = (
-		GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		GeometryInstance3D
+		.SHADOW_CASTING_SETTING_OFF
 	)
 
 	grass_instance.visibility_range_end = maxf(
@@ -315,14 +361,28 @@ func _generate_rocks(
 	chunk_width: float,
 	chunk_depth: float
 ) -> void:
-	if rock_attempts_per_chunk <= 0:
+	var density_multiplier: float = (
+		WorldGenerator.get_rock_density_multiplier()
+	)
+
+	var effective_attempts: int = maxi(
+		0,
+		roundi(
+			float(rock_attempts_per_chunk)
+			* density_multiplier
+		)
+	)
+
+	if effective_attempts <= 0:
 		return
 
-	var random: RandomNumberGenerator = _create_chunk_random(
-		chunk_node,
-		chunk_width,
-		chunk_depth,
-		ROCK_SEED_OFFSET
+	var random: RandomNumberGenerator = (
+		_create_chunk_random(
+			chunk_node,
+			chunk_width,
+			chunk_depth,
+			ROCK_SEED_OFFSET
+		)
 	)
 
 	var instance_transforms: Array[Transform3D] = []
@@ -332,7 +392,7 @@ func _generate_rocks(
 	var half_depth: float = chunk_depth * 0.5
 
 	for _attempt_index in range(
-		rock_attempts_per_chunk
+		effective_attempts
 	):
 		var local_x: float = random.randf_range(
 			-half_width + chunk_edge_margin,
@@ -360,7 +420,7 @@ func _generate_rocks(
 		).length() < spawn_clear_radius:
 			continue
 
-		var terrain_height: float = (
+		var logical_height: float = (
 			WorldGenerator.get_terrain_height(
 				world_x,
 				world_z
@@ -368,16 +428,26 @@ func _generate_rocks(
 		)
 
 		if (
-			terrain_height
+			logical_height
 			<= WorldGenerator.get_sea_level()
 			+ 0.05
 		):
 			continue
 
-		var biome: int = WorldGenerator.get_biome(
-			world_x,
-			world_z,
-			terrain_height
+		var surface_height: float = float(
+			chunk_node.call(
+				"get_surface_height_at_local_position",
+				local_x,
+				local_z
+			)
+		)
+
+		var biome: int = (
+			WorldGenerator.get_biome(
+				world_x,
+				world_z,
+				logical_height
+			)
 		)
 
 		if (
@@ -388,14 +458,25 @@ func _generate_rocks(
 		):
 			continue
 
-		var horizontal_scale: float = random.randf_range(
-			0.55,
-			1.90
+		var horizontal_scale: float = (
+			random.randf_range(
+				0.55,
+				1.90
+			)
 		)
 
-		var vertical_scale: float = random.randf_range(
-			0.40,
-			1.25
+		var vertical_scale: float = (
+			random.randf_range(
+				0.40,
+				1.25
+			)
+		)
+
+		var depth_scale: float = (
+			random.randf_range(
+				0.60,
+				1.55
+			)
 		)
 
 		var instance_basis: Basis = Basis(
@@ -406,13 +487,12 @@ func _generate_rocks(
 			)
 		)
 
-		instance_basis = instance_basis.scaled(
-			Vector3(
-				horizontal_scale,
-				vertical_scale,
-				random.randf_range(
-					0.60,
-					1.55
+		instance_basis = (
+			instance_basis.scaled(
+				Vector3(
+					horizontal_scale,
+					vertical_scale,
+					depth_scale
 				)
 			)
 		)
@@ -422,7 +502,7 @@ func _generate_rocks(
 				instance_basis,
 				Vector3(
 					local_x,
-					terrain_height + 0.25,
+					surface_height + 0.02,
 					local_z
 				)
 			)
@@ -438,7 +518,9 @@ func _generate_rocks(
 	if instance_transforms.is_empty():
 		return
 
-	var rock_multi_mesh: MultiMesh = MultiMesh.new()
+	var rock_multi_mesh: MultiMesh = (
+		MultiMesh.new()
+	)
 
 	rock_multi_mesh.transform_format = (
 		MultiMesh.TRANSFORM_3D
@@ -446,6 +528,7 @@ func _generate_rocks(
 
 	rock_multi_mesh.use_colors = true
 	rock_multi_mesh.mesh = _create_rock_mesh()
+
 	rock_multi_mesh.instance_count = (
 		instance_transforms.size()
 	)
@@ -489,14 +572,35 @@ func _generate_spires(
 	chunk_width: float,
 	chunk_depth: float
 ) -> void:
-	if spire_attempts_per_chunk <= 0:
+	var density_multiplier: float = (
+		WorldGenerator.get_rock_density_multiplier()
+	)
+
+	var cliff_multiplier: float = clampf(
+		WorldGenerator.get_cliff_strength(),
+		0.50,
+		1.60
+	)
+
+	var effective_attempts: int = maxi(
+		0,
+		roundi(
+			float(spire_attempts_per_chunk)
+			* density_multiplier
+			* cliff_multiplier
+		)
+	)
+
+	if effective_attempts <= 0:
 		return
 
-	var random: RandomNumberGenerator = _create_chunk_random(
-		chunk_node,
-		chunk_width,
-		chunk_depth,
-		SPIRE_SEED_OFFSET
+	var random: RandomNumberGenerator = (
+		_create_chunk_random(
+			chunk_node,
+			chunk_width,
+			chunk_depth,
+			SPIRE_SEED_OFFSET
+		)
 	)
 
 	var instance_transforms: Array[Transform3D] = []
@@ -506,7 +610,7 @@ func _generate_spires(
 	var half_depth: float = chunk_depth * 0.5
 
 	for _attempt_index in range(
-		spire_attempts_per_chunk
+		effective_attempts
 	):
 		var local_x: float = random.randf_range(
 			-half_width + 4.0,
@@ -528,17 +632,40 @@ func _generate_spires(
 			+ local_z
 		)
 
-		var terrain_height: float = (
+		if Vector2(
+			world_x,
+			world_z
+		).length() < spawn_clear_radius:
+			continue
+
+		var logical_height: float = (
 			WorldGenerator.get_terrain_height(
 				world_x,
 				world_z
 			)
 		)
 
-		var biome: int = WorldGenerator.get_biome(
-			world_x,
-			world_z,
-			terrain_height
+		if (
+			logical_height
+			<= WorldGenerator.get_sea_level()
+			+ 0.30
+		):
+			continue
+
+		var surface_height: float = float(
+			chunk_node.call(
+				"get_surface_height_at_local_position",
+				local_x,
+				local_z
+			)
+		)
+
+		var biome: int = (
+			WorldGenerator.get_biome(
+				world_x,
+				world_z,
+				logical_height
+			)
 		)
 
 		if (
@@ -549,14 +676,18 @@ func _generate_spires(
 		):
 			continue
 
-		var horizontal_scale: float = random.randf_range(
-			0.75,
-			1.55
+		var horizontal_scale: float = (
+			random.randf_range(
+				0.75,
+				1.55
+			)
 		)
 
-		var vertical_scale: float = random.randf_range(
-			0.85,
-			2.10
+		var vertical_scale: float = (
+			random.randf_range(
+				0.85,
+				2.10
+			)
 		)
 
 		var instance_basis: Basis = Basis(
@@ -567,25 +698,22 @@ func _generate_spires(
 			)
 		)
 
-		instance_basis = instance_basis.scaled(
-			Vector3(
-				horizontal_scale,
-				vertical_scale,
-				horizontal_scale
+		instance_basis = (
+			instance_basis.scaled(
+				Vector3(
+					horizontal_scale,
+					vertical_scale,
+					horizontal_scale
+				)
 			)
 		)
-
-		var base_mesh_height: float = 3.4
 
 		instance_transforms.append(
 			Transform3D(
 				instance_basis,
 				Vector3(
 					local_x,
-					terrain_height
-						+ base_mesh_height
-						* vertical_scale
-						* 0.5,
+					surface_height + 0.02,
 					local_z
 				)
 			)
@@ -601,7 +729,9 @@ func _generate_spires(
 	if instance_transforms.is_empty():
 		return
 
-	var spire_multi_mesh: MultiMesh = MultiMesh.new()
+	var spire_multi_mesh: MultiMesh = (
+		MultiMesh.new()
+	)
 
 	spire_multi_mesh.transform_format = (
 		MultiMesh.TRANSFORM_3D
@@ -609,6 +739,7 @@ func _generate_spires(
 
 	spire_multi_mesh.use_colors = true
 	spire_multi_mesh.mesh = _create_spire_mesh()
+
 	spire_multi_mesh.instance_count = (
 		instance_transforms.size()
 	)
@@ -652,17 +783,33 @@ func _generate_ruin(
 	chunk_width: float,
 	chunk_depth: float
 ) -> void:
-	if ruin_chunk_chance <= 0.0:
-		return
-
-	var random: RandomNumberGenerator = _create_chunk_random(
-		chunk_node,
-		chunk_width,
-		chunk_depth,
-		RUIN_SEED_OFFSET
+	var density_multiplier: float = (
+		WorldGenerator.get_ruin_density_multiplier()
 	)
 
-	if random.randf() > ruin_chunk_chance:
+	var effective_chunk_chance: float = clampf(
+		ruin_chunk_chance
+		* density_multiplier,
+		0.0,
+		1.0
+	)
+
+	if effective_chunk_chance <= 0.0:
+		return
+
+	var random: RandomNumberGenerator = (
+		_create_chunk_random(
+			chunk_node,
+			chunk_width,
+			chunk_depth,
+			RUIN_SEED_OFFSET
+		)
+	)
+
+	if (
+		random.randf()
+		> effective_chunk_chance
+	):
 		return
 
 	var half_width: float = chunk_width * 0.5
@@ -689,13 +836,16 @@ func _generate_ruin(
 			+ local_z
 		)
 
-		if Vector2(
-			world_x,
-			world_z
-		).length() < spawn_clear_radius * 1.5:
+		if (
+			Vector2(
+				world_x,
+				world_z
+			).length()
+			< spawn_clear_radius * 1.5
+		):
 			continue
 
-		var terrain_height: float = (
+		var logical_height: float = (
 			WorldGenerator.get_terrain_height(
 				world_x,
 				world_z
@@ -703,16 +853,26 @@ func _generate_ruin(
 		)
 
 		if (
-			terrain_height
+			logical_height
 			<= WorldGenerator.get_sea_level()
 			+ 1.0
 		):
 			continue
 
-		var biome: int = WorldGenerator.get_biome(
-			world_x,
-			world_z,
-			terrain_height
+		var surface_height: float = float(
+			chunk_node.call(
+				"get_surface_height_at_local_position",
+				local_x,
+				local_z
+			)
+		)
+
+		var biome: int = (
+			WorldGenerator.get_biome(
+				world_x,
+				world_z,
+				logical_height
+			)
 		)
 
 		if not _biome_allows_ruins(
@@ -728,11 +888,16 @@ func _generate_ruin(
 			)
 		)
 
-		if terrain_slope > maximum_ruin_slope:
+		if (
+			terrain_slope
+			> maximum_ruin_slope
+		):
 			continue
 
-		var ruin_mesh: ArrayMesh = _create_ruin_mesh(
-			random
+		var ruin_mesh: ArrayMesh = (
+			_create_ruin_mesh(
+				random
+			)
 		)
 
 		var ruin_instance: MeshInstance3D = (
@@ -744,13 +909,15 @@ func _generate_ruin(
 
 		ruin_instance.position = Vector3(
 			local_x,
-			terrain_height + 0.02,
+			surface_height + 0.02,
 			local_z
 		)
 
-		ruin_instance.rotation.y = random.randf_range(
-			0.0,
-			TAU
+		ruin_instance.rotation.y = (
+			random.randf_range(
+				0.0,
+				TAU
+			)
 		)
 
 		ruin_instance.visibility_range_end = maxf(
@@ -871,56 +1038,70 @@ func _biome_allows_ruins(
 	biome: int
 ) -> bool:
 	return (
-		biome == WorldGenerator.Biome.GRASSLAND
-		or biome == WorldGenerator.Biome.STEPPE
-		or biome == WorldGenerator.Biome.COLD_GRASSLAND
-		or biome == WorldGenerator.Biome.ROCKY_HIGHLANDS
+		biome
+		== WorldGenerator.Biome.GRASSLAND
+		or biome
+		== WorldGenerator.Biome.STEPPE
+		or biome
+		== WorldGenerator.Biome.COLD_GRASSLAND
+		or biome
+		== WorldGenerator.Biome.ROCKY_HIGHLANDS
 	)
 
 
 func _get_grass_color(
 	biome: int,
+	world_x: float,
+	world_z: float,
+	terrain_height: float,
 	random: RandomNumberGenerator
 ) -> Color:
-	var base_color: Color
+	var base_color: Color = (
+		WorldGenerator.get_biome_color(
+			world_x,
+			world_z,
+			terrain_height
+		)
+	)
 
 	match biome:
 		WorldGenerator.Biome.WETLAND:
-			base_color = Color(
-				0.08,
-				0.36,
-				0.11,
-				1.0
+			base_color = base_color.lerp(
+				Color(
+					0.08,
+					0.30,
+					0.10,
+					1.0
+				),
+				0.35
 			)
 
 		WorldGenerator.Biome.STEPPE:
-			base_color = Color(
-				0.53,
-				0.46,
-				0.19,
-				1.0
+			base_color = base_color.lerp(
+				Color(
+					0.55,
+					0.44,
+					0.18,
+					1.0
+				),
+				0.30
 			)
 
 		WorldGenerator.Biome.COLD_GRASSLAND:
-			base_color = Color(
-				0.31,
-				0.45,
-				0.34,
-				1.0
-			)
-
-		_:
-			base_color = Color(
-				0.20,
-				0.48,
-				0.12,
-				1.0
+			base_color = base_color.lerp(
+				Color(
+					0.38,
+					0.48,
+					0.39,
+					1.0
+				),
+				0.30
 			)
 
 	return _vary_color(
 		base_color,
 		random,
-		0.12
+		0.10
 	)
 
 
@@ -928,21 +1109,36 @@ func _get_rock_color(
 	biome: int,
 	random: RandomNumberGenerator
 ) -> Color:
-	var base_color: Color
+	var base_color: Color = (
+		WorldGenerator.get_world_rock_color()
+	)
 
-	if biome == WorldGenerator.Biome.ROCKY_HIGHLANDS:
-		base_color = Color(
-			0.39,
-			0.31,
-			0.27,
-			1.0
+	if (
+		biome
+		== WorldGenerator.Biome.ROCKY_HIGHLANDS
+	):
+		base_color = base_color.lerp(
+			Color(
+				0.28,
+				0.27,
+				0.26,
+				1.0
+			),
+			0.18
 		)
-	else:
-		base_color = Color(
-			0.53,
-			0.34,
-			0.20,
-			1.0
+
+	elif (
+		biome
+		== WorldGenerator.Biome.STEPPE
+	):
+		base_color = base_color.lerp(
+			Color(
+				0.48,
+				0.31,
+				0.21,
+				1.0
+			),
+			0.15
 		)
 
 	return _vary_color(
@@ -957,9 +1153,11 @@ func _vary_color(
 	random: RandomNumberGenerator,
 	variation: float
 ) -> Color:
-	var variation_value: float = random.randf_range(
-		-variation,
-		variation
+	var variation_value: float = (
+		random.randf_range(
+			-variation,
+			variation
+		)
 	)
 
 	if variation_value >= 0.0:
@@ -975,79 +1173,58 @@ func _vary_color(
 
 
 func _create_grass_mesh() -> ArrayMesh:
-	var surface_tool: SurfaceTool = SurfaceTool.new()
+	var surface_tool: SurfaceTool = (
+		SurfaceTool.new()
+	)
 
 	surface_tool.begin(
 		Mesh.PRIMITIVE_TRIANGLES
 	)
 
-	var blade_width: float = 0.16
-	var blade_height: float = 0.75
+	_add_box(
+		surface_tool,
+		Vector3(
+			-0.20,
+			0.30,
+			0.00
+		),
+		Vector3(
+			0.18,
+			0.60,
+			0.18
+		),
+		Color.WHITE
+	)
 
-	for blade_index in range(3):
-		var blade_angle: float = (
-			float(blade_index)
-			* PI
-			/ 3.0
-		)
+	_add_box(
+		surface_tool,
+		Vector3(
+			0.02,
+			0.40,
+			0.08
+		),
+		Vector3(
+			0.20,
+			0.80,
+			0.20
+		),
+		Color.WHITE
+	)
 
-		var blade_right: Vector3 = Vector3(
-			cos(blade_angle),
-			0.0,
-			sin(blade_angle)
-		) * blade_width
-
-		var blade_forward: Vector3 = Vector3(
-			-sin(blade_angle),
-			0.0,
-			cos(blade_angle)
-		) * 0.04
-
-		var bottom_left: Vector3 = (
-			-blade_right
-			- blade_forward
-		)
-
-		var bottom_right: Vector3 = (
-			blade_right
-			- blade_forward
-		)
-
-		var top_left: Vector3 = (
-			-blade_right * 0.28
-			+ Vector3.UP * blade_height
-			+ blade_forward
-		)
-
-		var top_right: Vector3 = (
-			blade_right * 0.28
-			+ Vector3.UP * blade_height
-			+ blade_forward
-		)
-
-		surface_tool.add_vertex(
-			bottom_left
-		)
-
-		surface_tool.add_vertex(
-			bottom_right
-		)
-
-		surface_tool.add_vertex(
-			top_right
-		)
-
-		surface_tool.add_vertex(
-			bottom_left
-		)
-
-		surface_tool.add_vertex(
-			top_right
-		)
-
-		surface_tool.add_vertex(
-			top_left
-		)
+	_add_box(
+		surface_tool,
+		Vector3(
+			0.23,
+			0.27,
+			-0.05
+		),
+		Vector3(
+			0.16,
+			0.54,
+			0.16
+		),
+		Color.WHITE
+	)
 
 	surface_tool.generate_normals()
 
@@ -1063,10 +1240,6 @@ func _create_grass_mesh() -> ArrayMesh:
 	grass_material.vertex_color_use_as_albedo = true
 	grass_material.roughness = 1.0
 
-	grass_material.cull_mode = (
-		BaseMaterial3D.CULL_DISABLED
-	)
-
 	generated_mesh.surface_set_material(
 		0,
 		grass_material
@@ -1075,13 +1248,65 @@ func _create_grass_mesh() -> ArrayMesh:
 	return generated_mesh
 
 
-func _create_rock_mesh() -> SphereMesh:
-	var rock_mesh: SphereMesh = SphereMesh.new()
+func _create_rock_mesh() -> ArrayMesh:
+	var surface_tool: SurfaceTool = (
+		SurfaceTool.new()
+	)
 
-	rock_mesh.radius = 0.65
-	rock_mesh.height = 1.30
-	rock_mesh.radial_segments = 6
-	rock_mesh.rings = 4
+	surface_tool.begin(
+		Mesh.PRIMITIVE_TRIANGLES
+	)
+
+	_add_box(
+		surface_tool,
+		Vector3(
+			0.00,
+			0.28,
+			0.00
+		),
+		Vector3(
+			1.20,
+			0.56,
+			0.95
+		),
+		Color.WHITE
+	)
+
+	_add_box(
+		surface_tool,
+		Vector3(
+			-0.18,
+			0.64,
+			0.05
+		),
+		Vector3(
+			0.75,
+			0.42,
+			0.68
+		),
+		Color.WHITE
+	)
+
+	_add_box(
+		surface_tool,
+		Vector3(
+			0.28,
+			0.46,
+			-0.18
+		),
+		Vector3(
+			0.58,
+			0.46,
+			0.50
+		),
+		Color.WHITE
+	)
+
+	surface_tool.generate_normals()
+
+	var generated_mesh: ArrayMesh = (
+		surface_tool.commit()
+	)
 
 	var rock_material: StandardMaterial3D = (
 		StandardMaterial3D.new()
@@ -1091,19 +1316,103 @@ func _create_rock_mesh() -> SphereMesh:
 	rock_material.vertex_color_use_as_albedo = true
 	rock_material.roughness = 1.0
 
-	rock_mesh.material = rock_material
+	generated_mesh.surface_set_material(
+		0,
+		rock_material
+	)
 
-	return rock_mesh
+	return generated_mesh
 
 
-func _create_spire_mesh() -> CylinderMesh:
-	var spire_mesh: CylinderMesh = CylinderMesh.new()
+func _create_spire_mesh() -> ArrayMesh:
+	var surface_tool: SurfaceTool = (
+		SurfaceTool.new()
+	)
 
-	spire_mesh.top_radius = 0.32
-	spire_mesh.bottom_radius = 0.92
-	spire_mesh.height = 3.4
-	spire_mesh.radial_segments = 6
-	spire_mesh.rings = 2
+	surface_tool.begin(
+		Mesh.PRIMITIVE_TRIANGLES
+	)
+
+	_add_box(
+		surface_tool,
+		Vector3(
+			0.00,
+			0.45,
+			0.00
+		),
+		Vector3(
+			1.45,
+			0.90,
+			1.30
+		),
+		Color.WHITE
+	)
+
+	_add_box(
+		surface_tool,
+		Vector3(
+			-0.08,
+			1.25,
+			0.04
+		),
+		Vector3(
+			1.10,
+			0.85,
+			1.00
+		),
+		Color.WHITE
+	)
+
+	_add_box(
+		surface_tool,
+		Vector3(
+			0.06,
+			2.02,
+			-0.04
+		),
+		Vector3(
+			0.82,
+			0.78,
+			0.74
+		),
+		Color.WHITE
+	)
+
+	_add_box(
+		surface_tool,
+		Vector3(
+			-0.03,
+			2.70,
+			0.03
+		),
+		Vector3(
+			0.54,
+			0.68,
+			0.50
+		),
+		Color.WHITE
+	)
+
+	_add_box(
+		surface_tool,
+		Vector3(
+			0.02,
+			3.18,
+			-0.02
+		),
+		Vector3(
+			0.32,
+			0.34,
+			0.30
+		),
+		Color.WHITE
+	)
+
+	surface_tool.generate_normals()
+
+	var generated_mesh: ArrayMesh = (
+		surface_tool.commit()
+	)
 
 	var spire_material: StandardMaterial3D = (
 		StandardMaterial3D.new()
@@ -1113,32 +1422,51 @@ func _create_spire_mesh() -> CylinderMesh:
 	spire_material.vertex_color_use_as_albedo = true
 	spire_material.roughness = 1.0
 
-	spire_mesh.material = spire_material
+	generated_mesh.surface_set_material(
+		0,
+		spire_material
+	)
 
-	return spire_mesh
+	return generated_mesh
 
 
 func _create_ruin_mesh(
 	random: RandomNumberGenerator
 ) -> ArrayMesh:
-	var surface_tool: SurfaceTool = SurfaceTool.new()
+	var surface_tool: SurfaceTool = (
+		SurfaceTool.new()
+	)
 
 	surface_tool.begin(
 		Mesh.PRIMITIVE_TRIANGLES
 	)
 
-	var stone_color: Color = Color(
-		0.52,
-		0.47,
-		0.36,
-		1.0
+	var profile_rock_color: Color = (
+		WorldGenerator.get_world_rock_color()
 	)
 
-	var dark_stone_color: Color = Color(
-		0.36,
-		0.34,
-		0.29,
-		1.0
+	var stone_color: Color = (
+		profile_rock_color.lerp(
+			Color(
+				0.58,
+				0.51,
+				0.38,
+				1.0
+			),
+			0.42
+		)
+	)
+
+	var dark_stone_color: Color = (
+		profile_rock_color.lerp(
+			Color(
+				0.25,
+				0.24,
+				0.21,
+				1.0
+			),
+			0.30
+		)
 	)
 
 	_add_box(
@@ -1255,7 +1583,6 @@ func _create_ruin_mesh(
 		)
 	)
 
-	surface_tool.index()
 	surface_tool.generate_normals()
 
 	var generated_mesh: ArrayMesh = (
@@ -1286,12 +1613,35 @@ func _add_box(
 ) -> void:
 	var half_size: Vector3 = box_size * 0.5
 
-	var left: float = box_center.x - half_size.x
-	var right: float = box_center.x + half_size.x
-	var bottom: float = box_center.y - half_size.y
-	var top: float = box_center.y + half_size.y
-	var front: float = box_center.z - half_size.z
-	var back: float = box_center.z + half_size.z
+	var left: float = (
+		box_center.x
+		- half_size.x
+	)
+
+	var right: float = (
+		box_center.x
+		+ half_size.x
+	)
+
+	var bottom: float = (
+		box_center.y
+		- half_size.y
+	)
+
+	var top: float = (
+		box_center.y
+		+ half_size.y
+	)
+
+	var front: float = (
+		box_center.z
+		- half_size.z
+	)
+
+	var back: float = (
+		box_center.z
+		+ half_size.z
+	)
 
 	_add_face(
 		surface_tool,
@@ -1455,7 +1805,6 @@ func _add_face(
 	surface_tool.set_color(
 		face_color
 	)
-
 	surface_tool.add_vertex(
 		point_a
 	)
@@ -1463,7 +1812,6 @@ func _add_face(
 	surface_tool.set_color(
 		face_color
 	)
-
 	surface_tool.add_vertex(
 		point_b
 	)
@@ -1471,7 +1819,6 @@ func _add_face(
 	surface_tool.set_color(
 		face_color
 	)
-
 	surface_tool.add_vertex(
 		point_c
 	)
@@ -1479,7 +1826,6 @@ func _add_face(
 	surface_tool.set_color(
 		face_color
 	)
-
 	surface_tool.add_vertex(
 		point_a
 	)
@@ -1487,7 +1833,6 @@ func _add_face(
 	surface_tool.set_color(
 		face_color
 	)
-
 	surface_tool.add_vertex(
 		point_c
 	)
@@ -1495,7 +1840,6 @@ func _add_face(
 	surface_tool.set_color(
 		face_color
 	)
-
 	surface_tool.add_vertex(
 		point_d
 	)
