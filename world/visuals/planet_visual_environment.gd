@@ -179,11 +179,6 @@ func _create_environment_resources() -> void:
 		0.0
 	)
 
-	_environment.set_glow_level(
-		7,
-		0.0
-	)
-
 	world_environment.environment = _environment
 
 

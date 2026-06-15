@@ -2842,7 +2842,7 @@ func _find_nearest_water_shore() -> bool:
 
 
 func _is_shore_position(
-	position: Vector3
+	shore_position: Vector3
 ) -> bool:
 	var sea_level := (
 		WorldGenerator.get_sea_level()
@@ -2850,8 +2850,8 @@ func _is_shore_position(
 
 	var land_height := (
 		WorldGenerator.get_terrain_height(
-			position.x,
-			position.z
+			shore_position.x,
+			shore_position.z
 		)
 	)
 
@@ -2872,7 +2872,7 @@ func _is_shore_position(
 		)
 
 		var water_check_position := (
-			position
+			shore_position
 			+ check_direction
 			* shoreline_check_distance
 		)
