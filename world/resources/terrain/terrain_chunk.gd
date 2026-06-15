@@ -29,9 +29,15 @@ const GRAZER_SEED_OFFSET: int = 147_298_431
 
 
 @export_category("Chunk Geometry")
-@export_range(9, 257, 1) var vertices_x: int = 65
-@export_range(9, 257, 1) var vertices_z: int = 65
-@export_range(0.25, 5.0, 0.25) var cell_size: float = 1.0
+
+@export_range(9, 257, 1)
+var vertices_x: int = 65
+
+@export_range(9, 257, 1)
+var vertices_z: int = 65
+
+@export_range(0.25, 5.0, 0.25)
+var cell_size: float = 1.0
 
 
 var chunk_coordinates: Vector2i = Vector2i.ZERO
@@ -178,16 +184,21 @@ func generate_terrain() -> void:
 				color_01
 			)
 
-	surface_tool.index()
+	# Die Vertices werden absichtlich nicht indexiert.
+	# Dadurch teilen benachbarte Dreiecke keine Normalen
+	# und erhalten die gewünschte flache Schattierung.
 	surface_tool.generate_normals()
 
 	var generated_mesh: ArrayMesh = surface_tool.commit()
 
 	if generated_mesh == null:
-		push_error("Terrain mesh could not be generated.")
+		push_error(
+			"Terrain mesh could not be generated."
+		)
 		return
 
 	terrain_mesh.mesh = generated_mesh
+
 	terrain_collision.shape = (
 		generated_mesh.create_trimesh_shape()
 	)
@@ -211,6 +222,36 @@ func _create_vertex(
 		- half_depth
 	)
 
+	var terrain_height := _get_visual_height_for_grid_point(
+		grid_x,
+		grid_z,
+		half_width,
+		half_depth
+	)
+
+	return Vector3(
+		local_x,
+		terrain_height,
+		local_z
+	)
+
+
+func _get_visual_height_for_grid_point(
+	grid_x: int,
+	grid_z: int,
+	half_width: float,
+	half_depth: float
+) -> float:
+	var local_x := (
+		float(grid_x) * cell_size
+		- half_width
+	)
+
+	var local_z := (
+		float(grid_z) * cell_size
+		- half_depth
+	)
+
 	var world_x := (
 		float(chunk_coordinates.x) * get_chunk_width()
 		+ local_x
@@ -221,15 +262,101 @@ func _create_vertex(
 		+ local_z
 	)
 
-	var terrain_height := WorldGenerator.get_terrain_height(
+	return WorldGenerator.get_visual_terrain_height(
 		world_x,
 		world_z
 	)
 
-	return Vector3(
-		local_x,
-		terrain_height,
-		local_z
+
+func _get_visual_height_at_local_position(
+	local_x: float,
+	local_z: float
+) -> float:
+	var half_width := get_chunk_width() * 0.5
+	var half_depth := get_chunk_depth() * 0.5
+
+	var grid_position_x := clampf(
+		(local_x + half_width) / cell_size,
+		0.0,
+		float(vertices_x - 1)
+	)
+
+	var grid_position_z := clampf(
+		(local_z + half_depth) / cell_size,
+		0.0,
+		float(vertices_z - 1)
+	)
+
+	var grid_x := mini(
+		int(floor(grid_position_x)),
+		vertices_x - 2
+	)
+
+	var grid_z := mini(
+		int(floor(grid_position_z)),
+		vertices_z - 2
+	)
+
+	var interpolation_x := (
+		grid_position_x
+		- float(grid_x)
+	)
+
+	var interpolation_z := (
+		grid_position_z
+		- float(grid_z)
+	)
+
+	var height_00 := _get_visual_height_for_grid_point(
+		grid_x,
+		grid_z,
+		half_width,
+		half_depth
+	)
+
+	var height_01 := _get_visual_height_for_grid_point(
+		grid_x,
+		grid_z + 1,
+		half_width,
+		half_depth
+	)
+
+	var height_10 := _get_visual_height_for_grid_point(
+		grid_x + 1,
+		grid_z,
+		half_width,
+		half_depth
+	)
+
+	var height_11 := _get_visual_height_for_grid_point(
+		grid_x + 1,
+		grid_z + 1,
+		half_width,
+		half_depth
+	)
+
+	# Das Terrainmesh verwendet innerhalb jeder Zelle
+	# die Diagonale zwischen den Ecken 10 und 01.
+	if interpolation_x + interpolation_z <= 1.0:
+		return (
+			height_00
+			+ interpolation_x
+			* (height_10 - height_00)
+			+ interpolation_z
+			* (height_01 - height_00)
+		)
+
+	return (
+		height_10
+		* (1.0 - interpolation_z)
+		+ height_01
+		* (1.0 - interpolation_x)
+		+ height_11
+		* (
+			interpolation_x
+			+ interpolation_z
+			- 1.0
+		)
 	)
 
 
@@ -246,10 +373,17 @@ func _get_vertex_color(
 		+ local_position.z
 	)
 
+	# Farben und Biome verwenden weiterhin die unveränderte,
+	# logische Noise-Höhe.
+	var logical_height := WorldGenerator.get_terrain_height(
+		world_x,
+		world_z
+	)
+
 	return WorldGenerator.get_biome_color(
 		world_x,
 		world_z,
-		local_position.y
+		logical_height
 	)
 
 
@@ -270,6 +404,7 @@ func _apply_terrain_material() -> void:
 	material.albedo_color = Color.WHITE
 	material.vertex_color_use_as_albedo = true
 	material.roughness = 1.0
+	material.metallic = 0.0
 
 	terrain_mesh.material_override = material
 
@@ -352,15 +487,20 @@ func _generate_trees(
 		if world_position.length() < SPAWN_CLEAR_RADIUS:
 			continue
 
-		var terrain_height := WorldGenerator.get_terrain_height(
+		var logical_height := WorldGenerator.get_terrain_height(
 			world_position.x,
 			world_position.y
+		)
+
+		var visual_height := _get_visual_height_at_local_position(
+			local_x,
+			local_z
 		)
 
 		var biome := WorldGenerator.get_biome(
 			world_position.x,
 			world_position.y,
-			terrain_height
+			logical_height
 		)
 
 		var spawn_probability := (
@@ -373,11 +513,14 @@ func _generate_trees(
 		if _create_tree(
 			local_x,
 			local_z,
-			terrain_height,
+			visual_height,
 			random
 		):
 			placed_positions.append(
-				Vector2(local_x, local_z)
+				Vector2(
+					local_x,
+					local_z
+				)
 			)
 
 
@@ -385,6 +528,7 @@ func _generate_berry_bushes(
 	placed_positions: Array[Vector2]
 ) -> void:
 	var random := RandomNumberGenerator.new()
+
 	random.seed = _get_bush_chunk_seed()
 
 	var half_width := get_chunk_width() * 0.5
@@ -421,15 +565,20 @@ func _generate_berry_bushes(
 		if world_position.length() < SPAWN_CLEAR_RADIUS:
 			continue
 
-		var terrain_height := WorldGenerator.get_terrain_height(
+		var logical_height := WorldGenerator.get_terrain_height(
 			world_position.x,
 			world_position.y
+		)
+
+		var visual_height := _get_visual_height_at_local_position(
+			local_x,
+			local_z
 		)
 
 		var biome := WorldGenerator.get_biome(
 			world_position.x,
 			world_position.y,
-			terrain_height
+			logical_height
 		)
 
 		var spawn_probability := (
@@ -442,16 +591,19 @@ func _generate_berry_bushes(
 		if _create_berry_bush(
 			local_x,
 			local_z,
-			terrain_height,
+			visual_height,
 			random
 		):
-			placed_positions.append(local_position_2d)
+			placed_positions.append(
+				local_position_2d
+			)
 
 
 func _generate_grazers(
 	placed_positions: Array[Vector2]
 ) -> void:
 	var random := RandomNumberGenerator.new()
+
 	random.seed = _get_grazer_chunk_seed()
 
 	var half_width := get_chunk_width() * 0.5
@@ -488,15 +640,20 @@ func _generate_grazers(
 		if world_position.length() < SPAWN_CLEAR_RADIUS:
 			continue
 
-		var terrain_height := WorldGenerator.get_terrain_height(
+		var logical_height := WorldGenerator.get_terrain_height(
 			world_position.x,
 			world_position.y
+		)
+
+		var visual_height := _get_visual_height_at_local_position(
+			local_x,
+			local_z
 		)
 
 		var biome := WorldGenerator.get_biome(
 			world_position.x,
 			world_position.y,
-			terrain_height
+			logical_height
 		)
 
 		var spawn_probability := (
@@ -509,10 +666,12 @@ func _generate_grazers(
 		if _create_grazer(
 			local_x,
 			local_z,
-			terrain_height,
+			visual_height,
 			random
 		):
-			placed_positions.append(local_position_2d)
+			placed_positions.append(
+				local_position_2d
+			)
 
 
 func _create_tree(
@@ -524,7 +683,9 @@ func _create_tree(
 	var tree := TREE_SCENE.instantiate() as Node3D
 
 	if tree == null:
-		push_error("Tree scene could not be instantiated.")
+		push_error(
+			"Tree scene could not be instantiated."
+		)
 		return false
 
 	objects.add_child(tree)
@@ -688,7 +849,9 @@ func _is_position_clear(
 ) -> bool:
 	for placed_position in placed_positions:
 		if (
-			candidate_position.distance_to(placed_position)
+			candidate_position.distance_to(
+				placed_position
+			)
 			< minimum_distance
 		):
 			return false
@@ -702,9 +865,9 @@ func _get_world_position_2d(
 ) -> Vector2:
 	return Vector2(
 		float(chunk_coordinates.x) * get_chunk_width()
-			+ local_x,
+		+ local_x,
 		float(chunk_coordinates.y) * get_chunk_depth()
-			+ local_z
+		+ local_z
 	)
 
 
