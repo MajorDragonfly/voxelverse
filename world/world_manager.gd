@@ -2,27 +2,47 @@ class_name WorldManager
 extends Node3D
 
 
+# Alle Chunks verwenden jetzt dieselbe visuelle Szene.
+#
+# Diese Szene enthält:
+# - TerrainMesh
+# - TerrainCollision
+# - WaterMesh
+# - Objects
+# - Visuals
+# - ScenicDressing
 const TERRAIN_CHUNK_SCENE: PackedScene = preload(
-	"res://world/resources/terrain/terrain_chunk.tscn"
+	"res://world/visuals/terrain/terrain_chunk.tscn"
 )
 
 
 @export_category("World Streaming")
-@export_range(0, 4, 1) var render_distance: int = 1
 
-@export var player_path: NodePath = NodePath("../Player")
+@export_range(0, 4, 1)
+var render_distance: int = 1
+
+@export
+var player_path: NodePath = NodePath(
+	"../Player"
+)
 
 
 var loaded_chunks: Dictionary = {}
 
-var current_player_chunk: Vector2i = Vector2i.ZERO
+var current_player_chunk: Vector2i = (
+	Vector2i.ZERO
+)
+
 var chunk_width: float = 64.0
 var chunk_depth: float = 64.0
+
 var world_initialized: bool = false
 
 
 @onready var player: Node3D = (
-	get_node_or_null(player_path) as Node3D
+	get_node_or_null(
+		player_path
+	) as Node3D
 )
 
 
@@ -40,8 +60,10 @@ func _ready() -> void:
 		set_process(false)
 		return
 
-	current_player_chunk = _world_position_to_chunk(
-		player.global_position
+	current_player_chunk = (
+		_world_position_to_chunk(
+			player.global_position
+		)
 	)
 
 	_refresh_loaded_chunks()
@@ -54,15 +76,22 @@ func _ready() -> void:
 	)
 
 
-func _process(_delta: float) -> void:
+func _process(
+	_delta: float
+) -> void:
 	if not world_initialized:
 		return
 
-	var new_player_chunk := _world_position_to_chunk(
-		player.global_position
+	var new_player_chunk := (
+		_world_position_to_chunk(
+			player.global_position
+		)
 	)
 
-	if new_player_chunk == current_player_chunk:
+	if (
+		new_player_chunk
+		== current_player_chunk
+	):
 		return
 
 	current_player_chunk = new_player_chunk
@@ -76,17 +105,24 @@ func _process(_delta: float) -> void:
 
 
 func _read_chunk_dimensions() -> bool:
-	var reference_chunk = TERRAIN_CHUNK_SCENE.instantiate()
+	var reference_chunk := (
+		TERRAIN_CHUNK_SCENE.instantiate()
+	)
 
 	if reference_chunk == null:
 		push_error(
 			"Could not instantiate TerrainChunk scene."
 		)
+
 		return false
 
 	if (
-		not reference_chunk.has_method("get_chunk_width")
-		or not reference_chunk.has_method("get_chunk_depth")
+		not reference_chunk.has_method(
+			"get_chunk_width"
+		)
+		or not reference_chunk.has_method(
+			"get_chunk_depth"
+		)
 	):
 		push_error(
 			"TerrainChunk does not contain the required size methods."
@@ -96,11 +132,15 @@ func _read_chunk_dimensions() -> bool:
 		return false
 
 	chunk_width = float(
-		reference_chunk.call("get_chunk_width")
+		reference_chunk.call(
+			"get_chunk_width"
+		)
 	)
 
 	chunk_depth = float(
-		reference_chunk.call("get_chunk_depth")
+		reference_chunk.call(
+			"get_chunk_depth"
+		)
 	)
 
 	reference_chunk.free()
@@ -116,7 +156,8 @@ func _world_position_to_chunk(
 			(
 				world_position.x
 				+ chunk_width * 0.5
-			) / chunk_width
+			)
+			/ chunk_width
 		)
 	)
 
@@ -125,7 +166,8 @@ func _world_position_to_chunk(
 			(
 				world_position.z
 				+ chunk_depth * 0.5
-			) / chunk_depth
+			)
+			/ chunk_depth
 		)
 	)
 
@@ -154,56 +196,91 @@ func _refresh_loaded_chunks() -> void:
 				)
 			)
 
-			required_chunks[coordinates] = true
+			required_chunks[
+				coordinates
+			] = true
 
-			_create_chunk(coordinates)
+			_create_chunk(
+				coordinates
+			)
 
 	var chunks_to_remove: Array[Vector2i] = []
 
 	for coordinates: Vector2i in loaded_chunks.keys():
-		if not required_chunks.has(coordinates):
-			chunks_to_remove.append(coordinates)
+		if not required_chunks.has(
+			coordinates
+		):
+			chunks_to_remove.append(
+				coordinates
+			)
 
 	for coordinates: Vector2i in chunks_to_remove:
-		_remove_chunk(coordinates)
+		_remove_chunk(
+			coordinates
+		)
 
 
-func _create_chunk(coordinates: Vector2i) -> void:
-	if loaded_chunks.has(coordinates):
+func _create_chunk(
+	coordinates: Vector2i
+) -> void:
+	if loaded_chunks.has(
+		coordinates
+	):
 		return
 
-	var chunk = TERRAIN_CHUNK_SCENE.instantiate()
+	var chunk := (
+		TERRAIN_CHUNK_SCENE.instantiate()
+	)
 
 	if chunk == null:
 		push_error(
 			"TerrainChunk scene could not be instantiated."
 		)
+
 		return
 
-	# Die Koordinaten müssen vor add_child() gesetzt werden,
-	# weil der Chunk sie in seiner _ready()-Funktion verwendet.
+	# Die Koordinaten müssen vor add_child()
+	# gesetzt werden, weil der Chunk sie bereits
+	# in seiner _ready()-Funktion benötigt.
 	chunk.set(
 		"chunk_coordinates",
 		coordinates
 	)
 
-	chunk.name = "TerrainChunk_%d_%d" % [
-		coordinates.x,
-		coordinates.y,
-	]
+	chunk.name = (
+		"TerrainChunk_%d_%d"
+		% [
+			coordinates.x,
+			coordinates.y
+		]
+	)
 
-	add_child(chunk)
+	add_child(
+		chunk
+	)
 
-	loaded_chunks[coordinates] = chunk
+	loaded_chunks[
+		coordinates
+	] = chunk
 
 
-func _remove_chunk(coordinates: Vector2i) -> void:
-	if not loaded_chunks.has(coordinates):
+func _remove_chunk(
+	coordinates: Vector2i
+) -> void:
+	if not loaded_chunks.has(
+		coordinates
+	):
 		return
 
-	var chunk = loaded_chunks.get(coordinates)
+	var chunk = loaded_chunks.get(
+		coordinates
+	)
 
-	if is_instance_valid(chunk):
+	if is_instance_valid(
+		chunk
+	):
 		chunk.queue_free()
 
-	loaded_chunks.erase(coordinates)
+	loaded_chunks.erase(
+		coordinates
+	)

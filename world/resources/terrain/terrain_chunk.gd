@@ -124,8 +124,10 @@ func generate_terrain() -> void:
 				half_depth
 			)
 
-	surface_tool.generate_normals()
-
+	# Die Normalen werden pro Fläche explizit gesetzt.
+	# generate_normals() darf hier nicht mehr verwendet werden,
+	# da es die falsche Wicklungsrichtung der alten Oberseiten
+	# erneut übernehmen würde.
 	var generated_mesh: ArrayMesh = (
 		surface_tool.commit()
 	)
@@ -148,12 +150,6 @@ func generate_terrain() -> void:
 		)
 		return
 
-	# Concave-Trimeshes sind hohl und standardmäßig
-	# nur von der Seite ihrer Flächennormalen kollidierbar.
-	#
-	# Blockterrain benötigt eine zuverlässige Kollision
-	# von beiden Seiten, insbesondere beim Spawn und an
-	# senkrechten Stufenwänden.
 	generated_collision.backface_collision = true
 
 	terrain_collision.shape = generated_collision
@@ -222,7 +218,7 @@ func _add_block_column(
 		)
 	)
 
-	# Horizontale Oberseite der Blocksäule.
+	# Oberseite.
 	_add_quad(
 		surface_tool,
 		Vector3(
@@ -245,10 +241,10 @@ func _add_block_column(
 			top_height,
 			z0
 		),
-		top_color
+		top_color,
+		Vector3.UP
 	)
 
-	# Westliche Seitenwand.
 	var west_height: float = (
 		_get_column_height_by_index(
 			cell_x - 1,
@@ -279,10 +275,10 @@ func _add_block_column(
 				west_height,
 				z0
 			),
-			side_color
+			side_color,
+			Vector3.LEFT
 		)
 
-	# Östliche Seitenwand.
 	var east_height: float = (
 		_get_column_height_by_index(
 			cell_x + 1,
@@ -313,10 +309,10 @@ func _add_block_column(
 				east_height,
 				z1
 			),
-			side_color
+			side_color,
+			Vector3.RIGHT
 		)
 
-	# Nördliche Seitenwand.
 	var north_height: float = (
 		_get_column_height_by_index(
 			cell_x,
@@ -347,10 +343,10 @@ func _add_block_column(
 				north_height,
 				z0
 			),
-			side_color
+			side_color,
+			Vector3.FORWARD
 		)
 
-	# Südliche Seitenwand.
 	var south_height: float = (
 		_get_column_height_by_index(
 			cell_x,
@@ -381,7 +377,8 @@ func _add_block_column(
 				south_height,
 				z1
 			),
-			side_color
+			side_color,
+			Vector3.BACK
 		)
 
 
@@ -525,48 +522,115 @@ func _add_quad(
 	point_b: Vector3,
 	point_c: Vector3,
 	point_d: Vector3,
-	quad_color: Color
+	quad_color: Color,
+	face_normal: Vector3
+) -> void:
+	var safe_normal := face_normal.normalized()
+
+	# Godot verwendet für Vorderseiten eine Wicklung im
+	# Uhrzeigersinn. Das normale Kreuzprodukt beschreibt
+	# dagegen die gegen den Uhrzeigersinn gerichtete Seite.
+	# Deshalb wird die Reihenfolge automatisch umgedreht,
+	# sobald das Kreuzprodukt in Richtung der Außen-Normale zeigt.
+	var triangle_cross := (
+		(point_b - point_a).cross(
+			point_c - point_a
+		)
+	)
+
+	var reverse_winding := (
+		triangle_cross.dot(
+			safe_normal
+		)
+		> 0.0
+	)
+
+	if reverse_winding:
+		_add_triangle(
+			surface_tool,
+			point_a,
+			point_c,
+			point_b,
+			quad_color,
+			safe_normal
+		)
+
+		_add_triangle(
+			surface_tool,
+			point_a,
+			point_d,
+			point_c,
+			quad_color,
+			safe_normal
+		)
+
+		return
+
+	_add_triangle(
+		surface_tool,
+		point_a,
+		point_b,
+		point_c,
+		quad_color,
+		safe_normal
+	)
+
+	_add_triangle(
+		surface_tool,
+		point_a,
+		point_c,
+		point_d,
+		quad_color,
+		safe_normal
+	)
+
+
+func _add_triangle(
+	surface_tool: SurfaceTool,
+	point_a: Vector3,
+	point_b: Vector3,
+	point_c: Vector3,
+	triangle_color: Color,
+	triangle_normal: Vector3
+) -> void:
+	_add_mesh_vertex(
+		surface_tool,
+		point_a,
+		triangle_color,
+		triangle_normal
+	)
+
+	_add_mesh_vertex(
+		surface_tool,
+		point_b,
+		triangle_color,
+		triangle_normal
+	)
+
+	_add_mesh_vertex(
+		surface_tool,
+		point_c,
+		triangle_color,
+		triangle_normal
+	)
+
+
+func _add_mesh_vertex(
+	surface_tool: SurfaceTool,
+	vertex_position: Vector3,
+	vertex_color: Color,
+	vertex_normal: Vector3
 ) -> void:
 	surface_tool.set_color(
-		quad_color
-	)
-	surface_tool.add_vertex(
-		point_a
+		vertex_color
 	)
 
-	surface_tool.set_color(
-		quad_color
-	)
-	surface_tool.add_vertex(
-		point_b
+	surface_tool.set_normal(
+		vertex_normal
 	)
 
-	surface_tool.set_color(
-		quad_color
-	)
 	surface_tool.add_vertex(
-		point_c
-	)
-
-	surface_tool.set_color(
-		quad_color
-	)
-	surface_tool.add_vertex(
-		point_a
-	)
-
-	surface_tool.set_color(
-		quad_color
-	)
-	surface_tool.add_vertex(
-		point_c
-	)
-
-	surface_tool.set_color(
-		quad_color
-	)
-	surface_tool.add_vertex(
-		point_d
+		vertex_position
 	)
 
 
@@ -578,9 +642,8 @@ func _apply_terrain_material() -> void:
 	material.roughness = 1.0
 	material.metallic = 0.0
 
-	# Blockflächen sollen auf beiden Seiten sichtbar sein.
-	# Das verhindert außerdem unsichtbare Flächen während
-	# der weiteren Entwicklung des Block-Meshers.
+	# Darf während der Reparatur beidseitig bleiben.
+	# Nach erfolgreichem Test kann Culling wieder aktiviert werden.
 	material.cull_mode = (
 		BaseMaterial3D.CULL_DISABLED
 	)

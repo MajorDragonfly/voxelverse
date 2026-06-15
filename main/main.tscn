@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://d1vpfpfcqte7w" path="res://world/world_manager.tscn" id="2_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://cm26fs2gvsrep" path="res://world/resources/nests/nest.tscn" id="3_xwkvk"]
 [ext_resource type="PackedScene" path="res://world/visuals/planet_visual_environment.tscn" id="4_c651c"]
-[ext_resource type="PackedScene" uid="uid://dyhavywwdec27" path="res://world/visuals/terrain/terrain_chunk.tscn" id="5_3wy1v"]
 
 [node name="Main" type="Node3D" unique_id=926892959]
 
@@ -16,5 +15,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 [node name="Nest" parent="." unique_id=1293792252 instance=ExtResource("3_xwkvk")]
 
 [node name="PlanetVisualEnvironment" parent="." unique_id=166311708 instance=ExtResource("4_c651c")]
-
-[node name="TerrainChunk" parent="." unique_id=1870033249 instance=ExtResource("5_3wy1v")]
