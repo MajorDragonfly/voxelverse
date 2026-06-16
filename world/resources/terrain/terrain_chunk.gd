@@ -302,7 +302,7 @@ func _create_terrain_surface_material(
 
 	# Während dieses Reparaturschritts bleibt Culling wie bisher aus.
 	# Erst nach bestätigtem Test wird es separat geprüft.
-	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	material.cull_mode = BaseMaterial3D.CULL_BACK
 
 	return material
 
