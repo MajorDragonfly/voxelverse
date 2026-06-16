@@ -39,12 +39,14 @@ const SIDE_COLOR_DARKEN: float = 0.16
 const SIDE_ROCK_BLEND: float = 0.32
 
 # Feste Surface-Reihenfolge für Shaderless Terrain Materials V1.
-# Diese Indizes dürfen später nicht stillschweigend umsortiert werden.
+# Bestehende Indizes werden nicht umsortiert.
+# Neue Materialgruppen werden hinten angefügt.
 const SURFACE_GRASS_TOP: int = 0
 const SURFACE_SAND_TOP: int = 1
 const SURFACE_DIRT_SIDE: int = 2
 const SURFACE_STONE_SIDE: int = 3
-const TERRAIN_SURFACE_COUNT: int = 4
+const SURFACE_STONE_TOP: int = 4
+const TERRAIN_SURFACE_COUNT: int = 5
 
 # Hohe freiliegende Stufen erhalten bereits außerhalb des
 # ROCKY_HIGHLANDS-Bioms eine Steinseite.
@@ -149,7 +151,7 @@ func generate_terrain() -> void:
 
 	if generated_mesh.get_surface_count() != TERRAIN_SURFACE_COUNT:
 		push_error(
-			"Terrain mesh did not create all four material surfaces."
+			"Terrain mesh did not create all five material surfaces."
 		)
 		return
 
@@ -275,6 +277,8 @@ func _get_terrain_surface_name(surface_index: int) -> String:
 			return "DirtSide"
 		SURFACE_STONE_SIDE:
 			return "StoneSide"
+		SURFACE_STONE_TOP:
+			return "StoneTop"
 		_:
 			return "UnknownTerrainSurface"
 
@@ -314,6 +318,8 @@ func _get_terrain_surface_texture(
 		SURFACE_DIRT_SIDE:
 			return DIRT_TEXTURE
 		SURFACE_STONE_SIDE:
+			return STONE_TEXTURE
+		SURFACE_STONE_TOP:
 			return STONE_TEXTURE
 		_:
 			return GRASS_TEXTURE
@@ -511,6 +517,8 @@ func _get_top_surface_index(biome: int) -> int:
 	match biome:
 		WorldGenerator.Biome.OCEAN, WorldGenerator.Biome.COAST:
 			return SURFACE_SAND_TOP
+		WorldGenerator.Biome.ROCKY_HIGHLANDS:
+			return SURFACE_STONE_TOP
 		_:
 			return SURFACE_GRASS_TOP
 
