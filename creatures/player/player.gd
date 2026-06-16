@@ -3,6 +3,15 @@ extends CharacterBody3D
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
 const DEVELOPMENT_DEBUG_UPDATE_INTERVAL: float = 0.25
+const SIMULATION_SPEEDS: Array[float] = [
+	0.25,
+	0.5,
+	1.0,
+	2.0,
+	4.0,
+	8.0,
+	16.0,
+]
 
 
 @export_category("Movement")
@@ -51,6 +60,9 @@ var respawn_delay: float = 2.0
 
 @export_category("Development Debug")
 @export var show_development_debug_overlay: bool = true
+@export var enable_simulation_speed_controls: bool = true
+@export_range(0, 6, 1)
+var initial_simulation_speed_index: int = 2
 
 
 var current_health: float
@@ -63,6 +75,7 @@ var _dehydration_damage_timer: float = 0.0
 var _status_output_timer: float = 0.0
 var _development_debug_timer: float = 0.0
 var _development_debug_label: Label = null
+var _simulation_speed_index: int = 2
 
 
 @onready var camera_pivot: Node3D = $CameraPivot
@@ -108,6 +121,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	_initialize_hud()
+	_initialize_simulation_speed()
 	_initialize_development_debug_overlay()
 	_update_hud()
 	_update_development_debug_overlay(0.0, true)
@@ -134,6 +148,9 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _handle_development_debug_key(event):
+		return
+
 	if event is InputEventMouseMotion:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			camera_pivot.rotation.x -= (
@@ -424,14 +441,17 @@ func _update_development_debug_overlay(
 	var ecosystem_counts: Dictionary = _get_ecosystem_counts()
 
 	_development_debug_label.text = (
-		"World Seed: %s | Phase: %s\n"
+		"World Seed: %s | Phase: %s | Time: %sx\n"
 		+ "Biome: %s | Height: %s | Visual: %s | Sea: %s\n"
 		+ "Temp: %s | Moisture: %s | Pos X/Z: %s / %s | SpawnDist: %s\n"
-		+ "Grazers: %d alive / %d dead / %d total\n"
-		+ "Berry bushes: %d available / %d total"
+		+ "Grazers: %d alive / %d dead / %d total | F/M: %d/%d\n"
+		+ "Grazer states: %d mature | %d ready | %d pregnant | Gen max: %d | Gen>0: %d\n"
+		+ "Berry bushes: %d available / %d depleted / %d total\n"
+		+ "Debug keys: F6 slower | F7 normal | F8 faster | F9 hide"
 	) % [
 		_get_world_seed_text(),
 		_get_phase_text(),
+		_format_float(Engine.time_scale, 0.01),
 		biome_name,
 		_format_float(logical_height, 0.01),
 		_format_float(visual_height, 0.01),
@@ -444,7 +464,15 @@ func _update_development_debug_overlay(
 		ecosystem_counts.get("living_grazers", 0),
 		ecosystem_counts.get("dead_grazers", 0),
 		ecosystem_counts.get("total_grazers", 0),
+		ecosystem_counts.get("female_grazers", 0),
+		ecosystem_counts.get("male_grazers", 0),
+		ecosystem_counts.get("mature_grazers", 0),
+		ecosystem_counts.get("ready_grazers", 0),
+		ecosystem_counts.get("pregnant_grazers", 0),
+		ecosystem_counts.get("maximum_generation", 0),
+		ecosystem_counts.get("descendant_grazers", 0),
 		ecosystem_counts.get("available_berry_bushes", 0),
+		ecosystem_counts.get("depleted_berry_bushes", 0),
 		ecosystem_counts.get("total_berry_bushes", 0)
 	]
 
@@ -453,6 +481,13 @@ func _get_ecosystem_counts() -> Dictionary:
 	var living_grazers: int = 0
 	var dead_grazers: int = 0
 	var total_grazers: int = 0
+	var female_grazers: int = 0
+	var male_grazers: int = 0
+	var mature_grazers: int = 0
+	var ready_grazers: int = 0
+	var pregnant_grazers: int = 0
+	var maximum_generation: int = 0
+	var descendant_grazers: int = 0
 
 	for grazer in get_tree().get_nodes_in_group(&"grazer"):
 		if not is_instance_valid(grazer):
@@ -465,7 +500,49 @@ func _get_ecosystem_counts() -> Dictionary:
 		else:
 			living_grazers += 1
 
+		if grazer.has_method("get_biological_sex"):
+			var grazer_sex: int = int(
+				grazer.call("get_biological_sex")
+			)
+
+			if grazer_sex == 0:
+				female_grazers += 1
+			elif grazer_sex == 1:
+				male_grazers += 1
+
+		if (
+			grazer.has_method("is_sexually_mature")
+			and bool(grazer.call("is_sexually_mature"))
+		):
+			mature_grazers += 1
+
+		if (
+			grazer.has_method("is_reproduction_ready")
+			and bool(grazer.call("is_reproduction_ready"))
+		):
+			ready_grazers += 1
+
+		if (
+			grazer.has_method("is_pregnant")
+			and bool(grazer.call("is_pregnant"))
+		):
+			pregnant_grazers += 1
+
+		if grazer.has_method("get_genetic_generation"):
+			var generation: int = int(
+				grazer.call("get_genetic_generation")
+			)
+
+			maximum_generation = maxi(
+				maximum_generation,
+				generation
+			)
+
+			if generation > 0:
+				descendant_grazers += 1
+
 	var available_berry_bushes: int = 0
+	var depleted_berry_bushes: int = 0
 	var total_berry_bushes: int = 0
 
 	for berry_bush in get_tree().get_nodes_in_group(&"berry_bush"):
@@ -474,17 +551,39 @@ func _get_ecosystem_counts() -> Dictionary:
 
 		total_berry_bushes += 1
 
-		if berry_bush.has_method("has_available_food"):
-			if berry_bush.call("has_available_food"):
-				available_berry_bushes += 1
+		if _berry_bush_has_available_food(berry_bush):
+			available_berry_bushes += 1
+		else:
+			depleted_berry_bushes += 1
 
 	return {
 		"living_grazers": living_grazers,
 		"dead_grazers": dead_grazers,
 		"total_grazers": total_grazers,
+		"female_grazers": female_grazers,
+		"male_grazers": male_grazers,
+		"mature_grazers": mature_grazers,
+		"ready_grazers": ready_grazers,
+		"pregnant_grazers": pregnant_grazers,
+		"maximum_generation": maximum_generation,
+		"descendant_grazers": descendant_grazers,
 		"available_berry_bushes": available_berry_bushes,
+		"depleted_berry_bushes": depleted_berry_bushes,
 		"total_berry_bushes": total_berry_bushes,
 	}
+
+
+func _berry_bush_has_available_food(berry_bush: Node) -> bool:
+	if berry_bush.has_method("has_food_available"):
+		return bool(berry_bush.call("has_food_available"))
+
+	if berry_bush.has_method("has_available_food"):
+		return bool(berry_bush.call("has_available_food"))
+
+	if berry_bush.get("is_depleted") == true:
+		return false
+
+	return true
 
 
 func _get_world_seed_text() -> String:
@@ -503,6 +602,79 @@ func _get_phase_text() -> String:
 
 func _format_float(value: float, step: float) -> String:
 	return str(snappedf(value, step))
+
+
+func _initialize_simulation_speed() -> void:
+	_simulation_speed_index = clampi(
+		initial_simulation_speed_index,
+		0,
+		SIMULATION_SPEEDS.size() - 1
+	)
+	_apply_simulation_speed(false)
+
+
+func _handle_development_debug_key(event: InputEvent) -> bool:
+	if not enable_simulation_speed_controls:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	match key_event.keycode:
+		KEY_F6:
+			_decrease_simulation_speed()
+			return true
+		KEY_F7:
+			_set_simulation_speed_index(2)
+			return true
+		KEY_F8:
+			_increase_simulation_speed()
+			return true
+		KEY_F9:
+			_toggle_development_debug_overlay()
+			return true
+		_:
+			return false
+
+
+func _increase_simulation_speed() -> void:
+	_set_simulation_speed_index(_simulation_speed_index + 1)
+
+
+func _decrease_simulation_speed() -> void:
+	_set_simulation_speed_index(_simulation_speed_index - 1)
+
+
+func _set_simulation_speed_index(new_index: int) -> void:
+	_simulation_speed_index = clampi(
+		new_index,
+		0,
+		SIMULATION_SPEEDS.size() - 1
+	)
+	_apply_simulation_speed(true)
+
+
+func _apply_simulation_speed(announce_change: bool) -> void:
+	Engine.time_scale = SIMULATION_SPEEDS[_simulation_speed_index]
+
+	if announce_change:
+		print("Simulation speed changed to: ", Engine.time_scale, "x")
+
+	_update_development_debug_overlay(0.0, true)
+
+
+func _toggle_development_debug_overlay() -> void:
+	show_development_debug_overlay = not show_development_debug_overlay
+
+	if _development_debug_label != null:
+		_development_debug_label.visible = show_development_debug_overlay
+
+	print("Development debug overlay visible: ", show_development_debug_overlay)
 
 
 func _update_status_output(delta: float) -> void:

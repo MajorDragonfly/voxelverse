@@ -5,19 +5,26 @@
 
 [node name="Grazer" type="CharacterBody3D" unique_id=1663504895]
 script = ExtResource("1_btf05")
-hungry_threshold_ratio = 0.9
-thirst_loss_per_second = 0.8
-maximum_initial_age_ratio = 0.9
-sexual_maturity_age_ratio = 0.05
-minimum_reproduction_hunger_ratio = 0.5
-minimum_reproduction_thirst_ratio = 0.5
-mate_search_radius = 40.0
+hungry_threshold_ratio = 0.75
+food_search_radius = 26.0
+food_search_interval = 0.5
+thirsty_threshold_ratio = 0.7
+thirst_loss_per_second = 0.65
+water_search_radius = 42.0
+water_search_interval = 0.5
+minimum_maximum_age_seconds = 240.0
+maximum_maximum_age_seconds = 420.0
+maximum_initial_age_ratio = 0.35
+sexual_maturity_age_ratio = 0.12
+minimum_reproduction_hunger_ratio = 0.45
+minimum_reproduction_thirst_ratio = 0.45
+mate_search_radius = 48.0
 mate_search_interval = 0.5
 mating_distance = 2.5
 mate_move_speed_multiplier = 2.0
-gestation_duration_seconds = 10.0
-reproduction_cooldown_seconds = 15.0
-maximum_grazer_population = 30
+gestation_duration_seconds = 8.0
+reproduction_cooldown_seconds = 18.0
+maximum_grazer_population = 45
 newborn_spawn_distance = 2.5
 
 [node name="BodyMesh" type="MeshInstance3D" parent="." unique_id=206946388]
