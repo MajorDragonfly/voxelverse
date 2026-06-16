@@ -14,6 +14,102 @@ const SIMULATION_SPEEDS: Array[float] = [
 ]
 
 
+const CREATURE_PART_VOXEL_SIZE: float = 0.22
+
+const BODY_PARTS: Array[Dictionary] = [
+	{
+		"id": &"balanced_core",
+		"name": "Balanced Core",
+		"size": Vector3i(3, 4, 3),
+		"color": Color(0.38, 0.52, 0.76, 1.0),
+		"health_bonus": 0.0,
+		"speed_multiplier": 1.0,
+		"hunger_multiplier": 1.0,
+	},
+	{
+		"id": &"heavy_shell",
+		"name": "Heavy Shell",
+		"size": Vector3i(4, 4, 4),
+		"color": Color(0.44, 0.38, 0.30, 1.0),
+		"health_bonus": 40.0,
+		"speed_multiplier": 0.82,
+		"hunger_multiplier": 1.30,
+	},
+	{
+		"id": &"long_grazer_core",
+		"name": "Long Grazer Core",
+		"size": Vector3i(3, 3, 5),
+		"color": Color(0.48, 0.34, 0.18, 1.0),
+		"health_bonus": 15.0,
+		"speed_multiplier": 1.05,
+		"hunger_multiplier": 1.10,
+	},
+]
+
+const LEG_PARTS: Array[Dictionary] = [
+	{
+		"id": &"stubby_legs",
+		"name": "Stubby Legs",
+		"leg_count": 4,
+		"leg_height": 2,
+		"leg_thickness": 1,
+		"color": Color(0.23, 0.18, 0.14, 1.0),
+		"speed_multiplier": 0.80,
+		"jump_multiplier": 0.75,
+		"hunger_multiplier": 0.90,
+	},
+	{
+		"id": &"walker_legs",
+		"name": "Walker Legs",
+		"leg_count": 4,
+		"leg_height": 3,
+		"leg_thickness": 1,
+		"color": Color(0.28, 0.20, 0.14, 1.0),
+		"speed_multiplier": 1.0,
+		"jump_multiplier": 1.0,
+		"hunger_multiplier": 1.0,
+	},
+	{
+		"id": &"sprinter_legs",
+		"name": "Sprinter Legs",
+		"leg_count": 6,
+		"leg_height": 3,
+		"leg_thickness": 1,
+		"color": Color(0.20, 0.17, 0.13, 1.0),
+		"speed_multiplier": 1.28,
+		"jump_multiplier": 0.90,
+		"hunger_multiplier": 1.20,
+	},
+]
+
+const MOUTH_PARTS: Array[Dictionary] = [
+	{
+		"id": &"grazer_mouth",
+		"name": "Grazer Mouth",
+		"color": Color(0.18, 0.34, 0.15, 1.0),
+		"size": Vector3(0.44, 0.22, 0.22),
+		"hunger_multiplier": 0.90,
+		"food_style": "plants",
+	},
+	{
+		"id": &"broad_beak",
+		"name": "Broad Beak",
+		"color": Color(0.72, 0.55, 0.24, 1.0),
+		"size": Vector3(0.52, 0.18, 0.28),
+		"hunger_multiplier": 1.0,
+		"food_style": "mixed",
+	},
+	{
+		"id": &"predator_jaws",
+		"name": "Predator Jaws",
+		"color": Color(0.50, 0.16, 0.12, 1.0),
+		"size": Vector3(0.46, 0.28, 0.30),
+		"hunger_multiplier": 1.15,
+		"food_style": "meat",
+	},
+]
+
+
 @export_category("Movement")
 @export var move_speed: float = 5.0
 @export var jump_velocity: float = 6.0
@@ -64,6 +160,15 @@ var respawn_delay: float = 2.0
 @export_range(0, 6, 1)
 var initial_simulation_speed_index: int = 2
 
+@export_category("Creature Builder Prototype")
+@export var enable_creature_builder_debug_keys: bool = true
+@export_range(0, 2, 1)
+var starting_body_part_index: int = 0
+@export_range(0, 2, 1)
+var starting_leg_part_index: int = 1
+@export_range(0, 2, 1)
+var starting_mouth_part_index: int = 0
+
 
 var current_health: float
 var current_hunger: float
@@ -77,6 +182,19 @@ var _development_debug_timer: float = 0.0
 var _development_debug_label: Label = null
 var _simulation_speed_index: int = 2
 
+var _base_move_speed: float = 5.0
+var _base_jump_velocity: float = 6.0
+var _base_maximum_health: float = 100.0
+var _base_hunger_loss_per_second: float = 0.2
+
+var _body_part_index: int = 0
+var _leg_part_index: int = 1
+var _mouth_part_index: int = 0
+var _creature_visual_root: Node3D = null
+
+
+@onready var body_mesh: MeshInstance3D = $BodyMesh
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var spring_arm: SpringArm3D = $CameraPivot/SpringArm3D
@@ -106,6 +224,9 @@ var _simulation_speed_index: int = 2
 
 func _ready() -> void:
 	add_to_group(&"player")
+
+	_cache_base_creature_stats()
+	_initialize_creature_builder()
 
 	current_health = maximum_health
 	current_hunger = maximum_hunger
@@ -440,18 +561,29 @@ func _update_development_debug_overlay(
 
 	var ecosystem_counts: Dictionary = _get_ecosystem_counts()
 
+	var part_summary: Dictionary = _get_current_creature_part_summary()
+
 	_development_debug_label.text = (
 		"World Seed: %s | Phase: %s | Time: %sx\n"
+		+ "Parts: %s | %s | %s\n"
+		+ "Stats: Speed %s | Jump %s | Health %s | Hunger drain %s\n"
 		+ "Biome: %s | Height: %s | Visual: %s | Sea: %s\n"
 		+ "Temp: %s | Moisture: %s | Pos X/Z: %s / %s | SpawnDist: %s\n"
 		+ "Grazers: %d alive / %d dead / %d total | F/M: %d/%d\n"
-		+ "Grazer states: %d mature | %d ready | %d pregnant | Gen max: %d | Gen>0: %d\n"
+		+ "Grazer states: %d mature | %d ready | %d pregnant | Descendants: %d\n"
 		+ "Berry bushes: %d available / %d depleted / %d total\n"
-		+ "Debug keys: F6 slower | F7 normal | F8 faster | F9 hide"
+		+ "Keys: -/+ time | 0 normal | O overlay | B body | L legs | M mouth"
 	) % [
 		_get_world_seed_text(),
 		_get_phase_text(),
 		_format_float(Engine.time_scale, 0.01),
+		part_summary.get("body", "Unknown Body"),
+		part_summary.get("legs", "Unknown Legs"),
+		part_summary.get("mouth", "Unknown Mouth"),
+		_format_float(move_speed, 0.01),
+		_format_float(jump_velocity, 0.01),
+		_format_float(maximum_health, 0.1),
+		_format_float(hunger_loss_per_second, 0.01),
 		biome_name,
 		_format_float(logical_height, 0.01),
 		_format_float(visual_height, 0.01),
@@ -469,7 +601,6 @@ func _update_development_debug_overlay(
 		ecosystem_counts.get("mature_grazers", 0),
 		ecosystem_counts.get("ready_grazers", 0),
 		ecosystem_counts.get("pregnant_grazers", 0),
-		ecosystem_counts.get("maximum_generation", 0),
 		ecosystem_counts.get("descendant_grazers", 0),
 		ecosystem_counts.get("available_berry_bushes", 0),
 		ecosystem_counts.get("depleted_berry_bushes", 0),
@@ -604,6 +735,334 @@ func _format_float(value: float, step: float) -> String:
 	return str(snappedf(value, step))
 
 
+func _cache_base_creature_stats() -> void:
+	_base_move_speed = move_speed
+	_base_jump_velocity = jump_velocity
+	_base_maximum_health = maximum_health
+	_base_hunger_loss_per_second = hunger_loss_per_second
+
+
+func _initialize_creature_builder() -> void:
+	_body_part_index = clampi(
+		starting_body_part_index,
+		0,
+		BODY_PARTS.size() - 1
+	)
+	_leg_part_index = clampi(
+		starting_leg_part_index,
+		0,
+		LEG_PARTS.size() - 1
+	)
+	_mouth_part_index = clampi(
+		starting_mouth_part_index,
+		0,
+		MOUTH_PARTS.size() - 1
+	)
+
+	if body_mesh != null:
+		body_mesh.visible = false
+
+	_creature_visual_root = Node3D.new()
+	_creature_visual_root.name = "CreaturePartVisuals"
+	add_child(_creature_visual_root)
+
+	_apply_creature_part_blueprint(false)
+
+
+func _apply_creature_part_blueprint(
+	preserve_current_values: bool = true
+) -> void:
+	var health_ratio: float = 1.0
+	var hunger_ratio: float = 1.0
+	var thirst_ratio: float = 1.0
+
+	if preserve_current_values:
+		health_ratio = get_health_ratio()
+		hunger_ratio = get_hunger_ratio()
+		thirst_ratio = get_thirst_ratio()
+
+	var body_part: Dictionary = BODY_PARTS[_body_part_index]
+	var leg_part: Dictionary = LEG_PARTS[_leg_part_index]
+	var mouth_part: Dictionary = MOUTH_PARTS[_mouth_part_index]
+
+	var body_speed_multiplier: float = float(
+		body_part.get("speed_multiplier", 1.0)
+	)
+	var leg_speed_multiplier: float = float(
+		leg_part.get("speed_multiplier", 1.0)
+	)
+	var leg_jump_multiplier: float = float(
+		leg_part.get("jump_multiplier", 1.0)
+	)
+	var body_hunger_multiplier: float = float(
+		body_part.get("hunger_multiplier", 1.0)
+	)
+	var leg_hunger_multiplier: float = float(
+		leg_part.get("hunger_multiplier", 1.0)
+	)
+	var mouth_hunger_multiplier: float = float(
+		mouth_part.get("hunger_multiplier", 1.0)
+	)
+	var health_bonus: float = float(
+		body_part.get("health_bonus", 0.0)
+	)
+
+	move_speed = (
+		_base_move_speed
+		* body_speed_multiplier
+		* leg_speed_multiplier
+	)
+	jump_velocity = _base_jump_velocity * leg_jump_multiplier
+	maximum_health = _base_maximum_health + health_bonus
+	hunger_loss_per_second = (
+		_base_hunger_loss_per_second
+		* body_hunger_multiplier
+		* leg_hunger_multiplier
+		* mouth_hunger_multiplier
+	)
+
+	if preserve_current_values:
+		current_health = clampf(
+			maximum_health * health_ratio,
+			0.0,
+			maximum_health
+		)
+		current_hunger = clampf(
+			maximum_hunger * hunger_ratio,
+			0.0,
+			maximum_hunger
+		)
+		current_thirst = clampf(
+			maximum_thirst * thirst_ratio,
+			0.0,
+			maximum_thirst
+		)
+
+	_rebuild_creature_part_visuals()
+	_update_hud()
+	_update_development_debug_overlay(0.0, true)
+
+	print(
+		"Creature parts changed: ",
+		body_part.get("name", "Unknown Body"),
+		" | ",
+		leg_part.get("name", "Unknown Legs"),
+		" | ",
+		mouth_part.get("name", "Unknown Mouth")
+	)
+
+
+func _rebuild_creature_part_visuals() -> void:
+	if _creature_visual_root == null:
+		return
+
+	for child in _creature_visual_root.get_children():
+		child.queue_free()
+
+	var body_part: Dictionary = BODY_PARTS[_body_part_index]
+	var leg_part: Dictionary = LEG_PARTS[_leg_part_index]
+	var mouth_part: Dictionary = MOUTH_PARTS[_mouth_part_index]
+
+	var body_size: Vector3i = body_part.get(
+		"size",
+		Vector3i(3, 4, 3)
+	)
+	var leg_height_voxels: int = int(
+		leg_part.get("leg_height", 3)
+	)
+	var leg_thickness_voxels: int = int(
+		leg_part.get("leg_thickness", 1)
+	)
+
+	var voxel: float = CREATURE_PART_VOXEL_SIZE
+	var body_dimensions := Vector3(
+		float(body_size.x) * voxel,
+		float(body_size.y) * voxel,
+		float(body_size.z) * voxel
+	)
+	var leg_height: float = float(leg_height_voxels) * voxel
+	var body_center_y: float = leg_height + body_dimensions.y * 0.5
+
+	_add_visual_box(
+		"BodyCore",
+		Vector3(0.0, body_center_y, 0.0),
+		body_dimensions,
+		body_part.get("color", Color.WHITE)
+	)
+
+	_add_leg_visuals(
+		body_size,
+		leg_part,
+		body_center_y,
+		body_dimensions
+	)
+
+	_add_mouth_visual(
+		body_size,
+		mouth_part,
+		body_center_y,
+		body_dimensions
+	)
+
+	_add_eye_visuals(
+		body_size,
+		body_center_y,
+		body_dimensions
+	)
+
+
+func _add_leg_visuals(
+	body_size: Vector3i,
+	leg_part: Dictionary,
+	body_center_y: float,
+	body_dimensions: Vector3
+) -> void:
+	var leg_count: int = int(leg_part.get("leg_count", 4))
+	var leg_height_voxels: int = int(leg_part.get("leg_height", 3))
+	var leg_thickness_voxels: int = int(
+		leg_part.get("leg_thickness", 1)
+	)
+	var voxel: float = CREATURE_PART_VOXEL_SIZE
+	var leg_dimensions := Vector3(
+		float(leg_thickness_voxels) * voxel,
+		float(leg_height_voxels) * voxel,
+		float(leg_thickness_voxels) * voxel
+	)
+	var leg_y: float = leg_dimensions.y * 0.5
+	var x_offset: float = maxf(
+		body_dimensions.x * 0.35,
+		voxel * 0.75
+	)
+	var z_front: float = -body_dimensions.z * 0.28
+	var z_back: float = body_dimensions.z * 0.28
+
+	var leg_positions: Array[Vector3] = [
+		Vector3(-x_offset, leg_y, z_front),
+		Vector3(x_offset, leg_y, z_front),
+		Vector3(-x_offset, leg_y, z_back),
+		Vector3(x_offset, leg_y, z_back),
+	]
+
+	if leg_count >= 6:
+		leg_positions.append(Vector3(-x_offset, leg_y, 0.0))
+		leg_positions.append(Vector3(x_offset, leg_y, 0.0))
+
+	for leg_index in range(mini(leg_count, leg_positions.size())):
+		_add_visual_box(
+			"Leg%d" % leg_index,
+			leg_positions[leg_index],
+			leg_dimensions,
+			leg_part.get("color", Color.WHITE)
+		)
+
+
+func _add_mouth_visual(
+	body_size: Vector3i,
+	mouth_part: Dictionary,
+	body_center_y: float,
+	body_dimensions: Vector3
+) -> void:
+	var mouth_size: Vector3 = mouth_part.get(
+		"size",
+		Vector3(0.44, 0.22, 0.22)
+	)
+	var mouth_position := Vector3(
+		0.0,
+		body_center_y + body_dimensions.y * 0.10,
+		-body_dimensions.z * 0.5 - mouth_size.z * 0.5
+	)
+
+	_add_visual_box(
+		"MouthPart",
+		mouth_position,
+		mouth_size,
+		mouth_part.get("color", Color.WHITE)
+	)
+
+
+func _add_eye_visuals(
+	body_size: Vector3i,
+	body_center_y: float,
+	body_dimensions: Vector3
+) -> void:
+	var eye_size := Vector3(0.07, 0.07, 0.04)
+	var eye_y: float = body_center_y + body_dimensions.y * 0.23
+	var eye_z: float = -body_dimensions.z * 0.5 - 0.025
+	var eye_x: float = body_dimensions.x * 0.22
+
+	_add_visual_box(
+		"LeftEye",
+		Vector3(-eye_x, eye_y, eye_z),
+		eye_size,
+		Color(0.03, 0.03, 0.025, 1.0)
+	)
+	_add_visual_box(
+		"RightEye",
+		Vector3(eye_x, eye_y, eye_z),
+		eye_size,
+		Color(0.03, 0.03, 0.025, 1.0)
+	)
+
+
+func _add_visual_box(
+	box_name: String,
+	local_position: Vector3,
+	box_size: Vector3,
+	box_color: Color
+) -> void:
+	if _creature_visual_root == null:
+		return
+
+	var mesh_instance := MeshInstance3D.new()
+	mesh_instance.name = box_name
+
+	var box_mesh := BoxMesh.new()
+	box_mesh.size = box_size
+	mesh_instance.mesh = box_mesh
+	mesh_instance.position = local_position
+
+	var material := StandardMaterial3D.new()
+	material.albedo_color = box_color
+	material.roughness = 1.0
+	material.metallic = 0.0
+	material.cull_mode = BaseMaterial3D.CULL_BACK
+	mesh_instance.material_override = material
+
+	_creature_visual_root.add_child(mesh_instance)
+
+
+func _cycle_body_part() -> void:
+	if not enable_creature_builder_debug_keys:
+		return
+
+	_body_part_index = (_body_part_index + 1) % BODY_PARTS.size()
+	_apply_creature_part_blueprint()
+
+
+func _cycle_leg_part() -> void:
+	if not enable_creature_builder_debug_keys:
+		return
+
+	_leg_part_index = (_leg_part_index + 1) % LEG_PARTS.size()
+	_apply_creature_part_blueprint()
+
+
+func _cycle_mouth_part() -> void:
+	if not enable_creature_builder_debug_keys:
+		return
+
+	_mouth_part_index = (_mouth_part_index + 1) % MOUTH_PARTS.size()
+	_apply_creature_part_blueprint()
+
+
+func _get_current_creature_part_summary() -> Dictionary:
+	return {
+		"body": str(BODY_PARTS[_body_part_index].get("name", "Body")),
+		"legs": str(LEG_PARTS[_leg_part_index].get("name", "Legs")),
+		"mouth": str(MOUTH_PARTS[_mouth_part_index].get("name", "Mouth")),
+	}
+
+
 func _initialize_simulation_speed() -> void:
 	_simulation_speed_index = clampi(
 		initial_simulation_speed_index,
@@ -614,9 +1073,6 @@ func _initialize_simulation_speed() -> void:
 
 
 func _handle_development_debug_key(event: InputEvent) -> bool:
-	if not enable_simulation_speed_controls:
-		return false
-
 	if not (event is InputEventKey):
 		return false
 
@@ -626,31 +1082,49 @@ func _handle_development_debug_key(event: InputEvent) -> bool:
 		return false
 
 	match key_event.keycode:
-		KEY_F6:
+		KEY_MINUS, KEY_KP_SUBTRACT:
 			_decrease_simulation_speed()
 			return true
-		KEY_F7:
-			_set_simulation_speed_index(2)
-			return true
-		KEY_F8:
+		KEY_EQUAL, KEY_KP_ADD:
 			_increase_simulation_speed()
 			return true
-		KEY_F9:
+		KEY_0, KEY_KP_0:
+			_set_simulation_speed_index(2)
+			return true
+		KEY_O:
 			_toggle_development_debug_overlay()
+			return true
+		KEY_B:
+			_cycle_body_part()
+			return true
+		KEY_L:
+			_cycle_leg_part()
+			return true
+		KEY_M:
+			_cycle_mouth_part()
 			return true
 		_:
 			return false
 
 
 func _increase_simulation_speed() -> void:
+	if not enable_simulation_speed_controls:
+		return
+
 	_set_simulation_speed_index(_simulation_speed_index + 1)
 
 
 func _decrease_simulation_speed() -> void:
+	if not enable_simulation_speed_controls:
+		return
+
 	_set_simulation_speed_index(_simulation_speed_index - 1)
 
 
 func _set_simulation_speed_index(new_index: int) -> void:
+	if not enable_simulation_speed_controls:
+		return
+
 	_simulation_speed_index = clampi(
 		new_index,
 		0,
