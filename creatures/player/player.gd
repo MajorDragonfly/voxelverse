@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
-
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
+const DEVELOPMENT_DEBUG_UPDATE_INTERVAL: float = 0.25
 
 
 @export_category("Movement")
@@ -19,20 +19,38 @@ const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
 @export var interaction_range: float = 3.0
 
 @export_category("Survival")
-@export_range(1.0, 1000.0, 1.0) var maximum_health: float = 100.0
-@export_range(1.0, 1000.0, 1.0) var maximum_hunger: float = 100.0
-@export_range(1.0, 1000.0, 1.0) var maximum_thirst: float = 100.0
+@export_range(1.0, 1000.0, 1.0)
+var maximum_health: float = 100.0
 
-@export_range(0.0, 100.0, 0.1) var hunger_loss_per_second: float = 0.2
-@export_range(0.0, 100.0, 0.1) var thirst_loss_per_second: float = 0.3
+@export_range(1.0, 1000.0, 1.0)
+var maximum_hunger: float = 100.0
 
-@export_range(1.0, 100.0, 1.0) var water_drink_amount: float = 35.0
+@export_range(1.0, 1000.0, 1.0)
+var maximum_thirst: float = 100.0
 
-@export_range(0.0, 100.0, 0.1) var starvation_damage_per_second: float = 5.0
-@export_range(0.0, 100.0, 0.1) var dehydration_damage_per_second: float = 7.0
+@export_range(0.0, 100.0, 0.1)
+var hunger_loss_per_second: float = 0.2
 
-@export_range(0.5, 30.0, 0.5) var status_output_interval: float = 2.0
-@export_range(0.0, 30.0, 0.5) var respawn_delay: float = 2.0
+@export_range(0.0, 100.0, 0.1)
+var thirst_loss_per_second: float = 0.3
+
+@export_range(1.0, 100.0, 1.0)
+var water_drink_amount: float = 35.0
+
+@export_range(0.0, 100.0, 0.1)
+var starvation_damage_per_second: float = 5.0
+
+@export_range(0.0, 100.0, 0.1)
+var dehydration_damage_per_second: float = 7.0
+
+@export_range(0.5, 30.0, 0.5)
+var status_output_interval: float = 2.0
+
+@export_range(0.0, 30.0, 0.5)
+var respawn_delay: float = 2.0
+
+@export_category("Development Debug")
+@export var show_development_debug_overlay: bool = true
 
 
 var current_health: float
@@ -43,6 +61,8 @@ var is_dead: bool = false
 var _starvation_damage_timer: float = 0.0
 var _dehydration_damage_timer: float = 0.0
 var _status_output_timer: float = 0.0
+var _development_debug_timer: float = 0.0
+var _development_debug_label: Label = null
 
 
 @onready var camera_pivot: Node3D = $CameraPivot
@@ -54,23 +74,18 @@ var _status_output_timer: float = 0.0
 @onready var health_label: Label = (
 	$HUD/StatusContainer/HealthLabel
 )
-
 @onready var health_bar: ProgressBar = (
 	$HUD/StatusContainer/HealthBar
 )
-
 @onready var hunger_label: Label = (
 	$HUD/StatusContainer/HungerLabel
 )
-
 @onready var hunger_bar: ProgressBar = (
 	$HUD/StatusContainer/HungerBar
 )
-
 @onready var thirst_label: Label = (
 	$HUD/StatusContainer/ThirstLabel
 )
-
 @onready var thirst_bar: ProgressBar = (
 	$HUD/StatusContainer/ThirstBar
 )
@@ -93,7 +108,9 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	_initialize_hud()
+	_initialize_development_debug_overlay()
 	_update_hud()
+	_update_development_debug_overlay(0.0, true)
 	_print_status()
 
 
@@ -113,6 +130,7 @@ func _process(delta: float) -> void:
 
 	_update_hud()
 	_update_status_output(delta)
+	_update_development_debug_overlay(delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -121,7 +139,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			camera_pivot.rotation.x -= (
 				event.screen_relative.y * mouse_sensitivity
 			)
-
 			camera_pivot.rotation.y -= (
 				event.screen_relative.x * mouse_sensitivity
 			)
@@ -220,7 +237,9 @@ func _update_hunger(delta: float) -> void:
 		_starvation_damage_timer
 		>= STARVATION_DAMAGE_INTERVAL
 	):
-		_starvation_damage_timer -= STARVATION_DAMAGE_INTERVAL
+		_starvation_damage_timer -= (
+			STARVATION_DAMAGE_INTERVAL
+		)
 
 		receive_damage(
 			starvation_damage_per_second
@@ -247,7 +266,9 @@ func _update_thirst(delta: float) -> void:
 		_dehydration_damage_timer
 		>= DEHYDRATION_DAMAGE_INTERVAL
 	):
-		_dehydration_damage_timer -= DEHYDRATION_DAMAGE_INTERVAL
+		_dehydration_damage_timer -= (
+			DEHYDRATION_DAMAGE_INTERVAL
+		)
 
 		receive_damage(
 			dehydration_damage_per_second
@@ -271,6 +292,46 @@ func _initialize_hud() -> void:
 	health_bar.show_percentage = false
 	hunger_bar.show_percentage = false
 	thirst_bar.show_percentage = false
+
+
+func _initialize_development_debug_overlay() -> void:
+	if not show_development_debug_overlay:
+		return
+
+	var hud := get_node_or_null("HUD") as CanvasLayer
+
+	if hud == null:
+		push_error(
+			"Development debug overlay could not be created: "
+			+ "HUD was not found."
+		)
+		return
+
+	_development_debug_label = Label.new()
+	_development_debug_label.name = "DevelopmentDebugLabel"
+	_development_debug_label.position = Vector2(8.0, 238.0)
+	_development_debug_label.custom_minimum_size = (
+		Vector2(660.0, 190.0)
+	)
+	_development_debug_label.text = "Development Debug"
+	_development_debug_label.add_theme_color_override(
+		"font_color",
+		Color.WHITE
+	)
+	_development_debug_label.add_theme_color_override(
+		"font_shadow_color",
+		Color.BLACK
+	)
+	_development_debug_label.add_theme_constant_override(
+		"shadow_offset_x",
+		2
+	)
+	_development_debug_label.add_theme_constant_override(
+		"shadow_offset_y",
+		2
+	)
+
+	hud.add_child(_development_debug_label)
 
 
 func _update_hud() -> void:
@@ -308,6 +369,142 @@ func _update_hud() -> void:
 	)
 
 
+func _update_development_debug_overlay(
+	delta: float,
+	force_update: bool = false
+) -> void:
+	if _development_debug_label == null:
+		return
+
+	if not show_development_debug_overlay:
+		_development_debug_label.visible = false
+		return
+
+	_development_debug_label.visible = true
+	_development_debug_timer += delta
+
+	if (
+		not force_update
+		and _development_debug_timer < DEVELOPMENT_DEBUG_UPDATE_INTERVAL
+	):
+		return
+
+	_development_debug_timer = 0.0
+
+	var world_x: float = global_position.x
+	var world_z: float = global_position.z
+	var logical_height: float = WorldGenerator.get_terrain_height(
+		world_x,
+		world_z
+	)
+	var visual_height: float = WorldGenerator.get_visual_terrain_height(
+		world_x,
+		world_z
+	)
+	var biome: int = WorldGenerator.get_biome(
+		world_x,
+		world_z,
+		logical_height
+	)
+	var biome_name: String = WorldGenerator.get_biome_name(biome)
+	var temperature: float = WorldGenerator.get_temperature(
+		world_x,
+		world_z
+	)
+	var moisture: float = WorldGenerator.get_moisture(
+		world_x,
+		world_z
+	)
+	var sea_level: float = WorldGenerator.get_sea_level()
+	var distance_to_spawn: float = Vector2(
+		world_x,
+		world_z
+	).length()
+
+	var ecosystem_counts: Dictionary = _get_ecosystem_counts()
+
+	_development_debug_label.text = (
+		"World Seed: %s | Phase: %s\n"
+		+ "Biome: %s | Height: %s | Visual: %s | Sea: %s\n"
+		+ "Temp: %s | Moisture: %s | Pos X/Z: %s / %s | SpawnDist: %s\n"
+		+ "Grazers: %d alive / %d dead / %d total\n"
+		+ "Berry bushes: %d available / %d total"
+	) % [
+		_get_world_seed_text(),
+		_get_phase_text(),
+		biome_name,
+		_format_float(logical_height, 0.01),
+		_format_float(visual_height, 0.01),
+		_format_float(sea_level, 0.01),
+		_format_float(temperature, 0.01),
+		_format_float(moisture, 0.01),
+		_format_float(world_x, 0.1),
+		_format_float(world_z, 0.1),
+		_format_float(distance_to_spawn, 0.1),
+		ecosystem_counts.get("living_grazers", 0),
+		ecosystem_counts.get("dead_grazers", 0),
+		ecosystem_counts.get("total_grazers", 0),
+		ecosystem_counts.get("available_berry_bushes", 0),
+		ecosystem_counts.get("total_berry_bushes", 0)
+	]
+
+
+func _get_ecosystem_counts() -> Dictionary:
+	var living_grazers: int = 0
+	var dead_grazers: int = 0
+	var total_grazers: int = 0
+
+	for grazer in get_tree().get_nodes_in_group(&"grazer"):
+		if not is_instance_valid(grazer):
+			continue
+
+		total_grazers += 1
+
+		if grazer.get("is_dead") == true:
+			dead_grazers += 1
+		else:
+			living_grazers += 1
+
+	var available_berry_bushes: int = 0
+	var total_berry_bushes: int = 0
+
+	for berry_bush in get_tree().get_nodes_in_group(&"berry_bush"):
+		if not is_instance_valid(berry_bush):
+			continue
+
+		total_berry_bushes += 1
+
+		if berry_bush.has_method("has_available_food"):
+			if berry_bush.call("has_available_food"):
+				available_berry_bushes += 1
+
+	return {
+		"living_grazers": living_grazers,
+		"dead_grazers": dead_grazers,
+		"total_grazers": total_grazers,
+		"available_berry_bushes": available_berry_bushes,
+		"total_berry_bushes": total_berry_bushes,
+	}
+
+
+func _get_world_seed_text() -> String:
+	if GameState.has_method("get_world_seed"):
+		return str(GameState.call("get_world_seed"))
+
+	return str(GameState.world_seed)
+
+
+func _get_phase_text() -> String:
+	if GameState.has_method("get_phase_name"):
+		return str(GameState.call("get_phase_name"))
+
+	return "Unknown"
+
+
+func _format_float(value: float, step: float) -> String:
+	return str(snappedf(value, step))
+
+
 func _update_status_output(delta: float) -> void:
 	_status_output_timer += delta
 
@@ -325,7 +522,6 @@ func _try_primary_action() -> void:
 		return
 
 	var collision_point := interaction_ray.get_collision_point()
-
 	var distance_to_target := global_position.distance_to(
 		collision_point
 	)
@@ -361,7 +557,6 @@ func _try_drink_water() -> void:
 		return
 
 	restore_thirst(water_drink_amount)
-
 	print(
 		"Player drank water: ",
 		water_drink_amount
@@ -434,7 +629,6 @@ func restore_hunger(amount: float) -> void:
 		current_hunger + amount,
 		maximum_hunger
 	)
-
 	_starvation_damage_timer = 0.0
 
 	_update_hud()
@@ -460,7 +654,6 @@ func restore_thirst(amount: float) -> void:
 		current_thirst + amount,
 		maximum_thirst
 	)
-
 	_dehydration_damage_timer = 0.0
 
 	_update_hud()
@@ -553,10 +746,11 @@ func _respawn_at_nest() -> void:
 	_starvation_damage_timer = 0.0
 	_dehydration_damage_timer = 0.0
 	_status_output_timer = 0.0
-
+	_development_debug_timer = 0.0
 	is_dead = false
 
 	_update_hud()
+	_update_development_debug_overlay(0.0, true)
 	_print_status()
 
 	print(
