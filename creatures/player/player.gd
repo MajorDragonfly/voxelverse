@@ -109,6 +109,201 @@ const MOUTH_PARTS: Array[Dictionary] = [
 	},
 ]
 
+const EYE_PARTS: Array[Dictionary] = [
+	{
+		"id": &"small_black_eyes",
+		"name": "Small Black Eyes",
+		"color": Color(0.03, 0.03, 0.025, 1.0),
+		"size": Vector3(0.07, 0.07, 0.04),
+		"sight_bonus": 0.0,
+		"complexity": 4.0,
+	},
+	{
+		"id": &"wide_forager_eyes",
+		"name": "Wide Forager Eyes",
+		"color": Color(0.06, 0.09, 0.05, 1.0),
+		"size": Vector3(0.10, 0.09, 0.045),
+		"sight_bonus": 0.12,
+		"complexity": 6.0,
+	},
+	{
+		"id": &"stalk_eyes",
+		"name": "Stalk Eyes",
+		"color": Color(0.02, 0.025, 0.02, 1.0),
+		"size": Vector3(0.08, 0.11, 0.045),
+		"sight_bonus": 0.20,
+		"complexity": 8.0,
+	},
+]
+
+
+const ARM_PARTS: Array[Dictionary] = [
+	{
+		"id": &"no_arms",
+		"name": "No Arms",
+		"color": Color(0.0, 0.0, 0.0, 0.0),
+		"size": Vector3.ZERO,
+		"speed_multiplier": 1.0,
+		"hunger_multiplier": 1.0,
+		"complexity": 0.0,
+	},
+	{
+		"id": &"grasping_arms",
+		"name": "Grasping Arms",
+		"color": Color(0.32, 0.24, 0.17, 1.0),
+		"upper_size": Vector3(0.16, 0.42, 0.16),
+		"hand_size": Vector3(0.22, 0.16, 0.20),
+		"speed_multiplier": 0.96,
+		"hunger_multiplier": 1.10,
+		"complexity": 12.0,
+	},
+	{
+		"id": &"climber_arms",
+		"name": "Climber Arms",
+		"color": Color(0.22, 0.18, 0.13, 1.0),
+		"upper_size": Vector3(0.18, 0.50, 0.18),
+		"hand_size": Vector3(0.26, 0.18, 0.22),
+		"speed_multiplier": 0.92,
+		"hunger_multiplier": 1.16,
+		"complexity": 16.0,
+	},
+]
+
+const TAIL_PARTS: Array[Dictionary] = [
+	{
+		"id": &"no_tail",
+		"name": "No Tail",
+		"color": Color(0.0, 0.0, 0.0, 0.0),
+		"size": Vector3.ZERO,
+		"speed_multiplier": 1.0,
+		"jump_multiplier": 1.0,
+		"hunger_multiplier": 1.0,
+		"complexity": 0.0,
+	},
+	{
+		"id": &"balance_tail",
+		"name": "Balance Tail",
+		"color": Color(0.30, 0.22, 0.15, 1.0),
+		"size": Vector3(0.24, 0.22, 0.72),
+		"speed_multiplier": 1.04,
+		"jump_multiplier": 1.08,
+		"hunger_multiplier": 1.06,
+		"complexity": 9.0,
+	},
+	{
+		"id": &"club_tail",
+		"name": "Club Tail",
+		"color": Color(0.27, 0.21, 0.17, 1.0),
+		"size": Vector3(0.28, 0.26, 0.82),
+		"club_size": Vector3(0.40, 0.34, 0.34),
+		"speed_multiplier": 0.94,
+		"jump_multiplier": 0.96,
+		"hunger_multiplier": 1.12,
+		"complexity": 14.0,
+	},
+]
+
+const HORN_PARTS: Array[Dictionary] = [
+	{
+		"id": &"no_horns",
+		"name": "No Horns",
+		"color": Color(0.0, 0.0, 0.0, 0.0),
+		"size": Vector3.ZERO,
+		"health_bonus": 0.0,
+		"hunger_multiplier": 1.0,
+		"complexity": 0.0,
+	},
+	{
+		"id": &"small_horns",
+		"name": "Small Horns",
+		"color": Color(0.78, 0.72, 0.55, 1.0),
+		"size": Vector3(0.12, 0.26, 0.12),
+		"health_bonus": 5.0,
+		"hunger_multiplier": 1.04,
+		"complexity": 8.0,
+	},
+	{
+		"id": &"crest_horns",
+		"name": "Crest Horns",
+		"color": Color(0.72, 0.64, 0.42, 1.0),
+		"size": Vector3(0.14, 0.34, 0.14),
+		"health_bonus": 10.0,
+		"hunger_multiplier": 1.08,
+		"complexity": 12.0,
+	},
+]
+
+const PAINT_PARTS: Array[Dictionary] = [
+	{
+		"id": &"plain_skin",
+		"name": "Plain Skin",
+		"tint": Color.WHITE,
+		"pattern": "none",
+		"pattern_color": Color.WHITE,
+		"complexity": 0.0,
+	},
+	{
+		"id": &"forest_spots",
+		"name": "Forest Spots",
+		"tint": Color(0.88, 1.0, 0.82, 1.0),
+		"pattern": "spots",
+		"pattern_color": Color(0.12, 0.32, 0.09, 1.0),
+		"complexity": 6.0,
+	},
+	{
+		"id": &"sand_stripes",
+		"name": "Sand Stripes",
+		"tint": Color(1.0, 0.92, 0.70, 1.0),
+		"pattern": "stripes",
+		"pattern_color": Color(0.48, 0.35, 0.18, 1.0),
+		"complexity": 7.0,
+	},
+	{
+		"id": &"warning_marks",
+		"name": "Warning Marks",
+		"tint": Color(1.0, 0.92, 0.86, 1.0),
+		"pattern": "marks",
+		"pattern_color": Color(0.75, 0.08, 0.05, 1.0),
+		"complexity": 9.0,
+	},
+]
+
+const BUILDER_SLOT_BODY: int = 0
+const BUILDER_SLOT_LEGS: int = 1
+const BUILDER_SLOT_MOUTH: int = 2
+const BUILDER_SLOT_EYES: int = 3
+const BUILDER_SLOT_ARMS: int = 4
+const BUILDER_SLOT_TAIL: int = 5
+const BUILDER_SLOT_HORNS: int = 6
+const BUILDER_SLOT_PAINT: int = 7
+
+const BUILDER_SLOT_NAMES: Array[String] = [
+	"Body",
+	"Legs",
+	"Mouth",
+	"Eyes",
+	"Arms",
+	"Tail",
+	"Horns",
+	"Paint",
+]
+
+const BUILDER_PART_SCALE_STEP: float = 0.10
+const BUILDER_PART_MOVE_STEP: float = 0.06
+const BUILDER_PART_ROTATE_STEP: float = 15.0
+const BODY_SHAPE_STEP: float = 0.10
+
+const MIN_BODY_SHAPE_SCALE: float = 0.65
+const MAX_BODY_SHAPE_SCALE: float = 1.70
+const MIN_PART_SCALE: float = 0.55
+const MAX_PART_SCALE: float = 1.85
+const MIN_LEG_SPREAD_SCALE: float = 0.55
+const MAX_LEG_SPREAD_SCALE: float = 1.65
+
+const MAX_CREATURE_COMPLEXITY: float = 120.0
+const CREATURE_BUILD_SAVE_PATH: String = "user://player_creature_build.json"
+
+
 
 @export_category("Movement")
 @export var move_speed: float = 5.0
@@ -168,6 +363,16 @@ var starting_body_part_index: int = 0
 var starting_leg_part_index: int = 1
 @export_range(0, 2, 1)
 var starting_mouth_part_index: int = 0
+@export_range(0, 2, 1)
+var starting_eye_part_index: int = 0
+@export_range(0, 2, 1)
+var starting_arm_part_index: int = 0
+@export_range(0, 2, 1)
+var starting_tail_part_index: int = 0
+@export_range(0, 2, 1)
+var starting_horn_part_index: int = 0
+@export_range(0, 3, 1)
+var starting_paint_part_index: int = 0
 
 
 var current_health: float
@@ -190,6 +395,48 @@ var _base_hunger_loss_per_second: float = 0.2
 var _body_part_index: int = 0
 var _leg_part_index: int = 1
 var _mouth_part_index: int = 0
+var _eye_part_index: int = 0
+var _arm_part_index: int = 0
+var _tail_part_index: int = 0
+var _horn_part_index: int = 0
+var _paint_part_index: int = 0
+
+var _builder_mode_enabled: bool = false
+var _builder_slot_index: int = BUILDER_SLOT_BODY
+
+var _body_width_scale: float = 1.0
+var _body_height_scale: float = 1.0
+var _body_length_scale: float = 1.0
+
+var _leg_scale: float = 1.0
+var _leg_spread_scale: float = 1.0
+var _leg_position_offset_z: float = 0.0
+
+var _mouth_scale: float = 1.0
+var _mouth_position_offset: Vector3 = Vector3.ZERO
+var _mouth_rotation_y: float = 0.0
+
+var _eye_scale: float = 1.0
+var _eye_position_offset: Vector3 = Vector3.ZERO
+var _eye_spread_scale: float = 1.0
+var _eye_rotation_y: float = 0.0
+
+var _arm_scale: float = 1.0
+var _arm_position_offset: Vector3 = Vector3.ZERO
+var _arm_spread_scale: float = 1.0
+var _arm_rotation_y: float = 0.0
+
+var _tail_scale: float = 1.0
+var _tail_position_offset: Vector3 = Vector3.ZERO
+var _tail_rotation_y: float = 0.0
+
+var _horn_scale: float = 1.0
+var _horn_position_offset: Vector3 = Vector3.ZERO
+var _horn_spread_scale: float = 1.0
+var _horn_rotation_y: float = 0.0
+
+var _paint_intensity: float = 1.0
+
 var _creature_visual_root: Node3D = null
 
 
@@ -269,6 +516,9 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _handle_creature_builder_key(event):
+		return
+
 	if _handle_development_debug_key(event):
 		return
 
@@ -449,7 +699,7 @@ func _initialize_development_debug_overlay() -> void:
 	_development_debug_label.name = "DevelopmentDebugLabel"
 	_development_debug_label.position = Vector2(8.0, 238.0)
 	_development_debug_label.custom_minimum_size = (
-		Vector2(660.0, 190.0)
+		Vector2(760.0, 230.0)
 	)
 	_development_debug_label.text = "Development Debug"
 	_development_debug_label.add_theme_color_override(
@@ -560,26 +810,40 @@ func _update_development_debug_overlay(
 	).length()
 
 	var ecosystem_counts: Dictionary = _get_ecosystem_counts()
-
 	var part_summary: Dictionary = _get_current_creature_part_summary()
+	var builder_state: String = "ON" if _builder_mode_enabled else "OFF"
 
 	_development_debug_label.text = (
 		"World Seed: %s | Phase: %s | Time: %sx\n"
-		+ "Parts: %s | %s | %s\n"
+		+ "Builder: %s | Slot: %s | Part: %s | Complexity: %s / %s\n"
+		+ "Body Shape: %s | Transform: %s\n"
+		+ "Core: %s | Legs: %s | Mouth: %s | Eyes: %s\n"
+		+ "Arms: %s | Tail: %s | Horns: %s | Paint: %s\n"
 		+ "Stats: Speed %s | Jump %s | Health %s | Hunger drain %s\n"
 		+ "Biome: %s | Height: %s | Visual: %s | Sea: %s\n"
 		+ "Temp: %s | Moisture: %s | Pos X/Z: %s / %s | SpawnDist: %s\n"
-		+ "Grazers: %d alive / %d dead / %d total | F/M: %d/%d\n"
-		+ "Grazer states: %d mature | %d ready | %d pregnant | Descendants: %d\n"
-		+ "Berry bushes: %d available / %d depleted / %d total\n"
-		+ "Keys: -/+ time | 0 normal | O overlay | B body | L legs | M mouth"
+		+ "Grazers: %d alive / %d dead / %d total | Bushes: %d available / %d depleted / %d total\n"
+		+ "Keys: C builder | Tab slot | Q/E part | ,/. scale | Arrows move/shape | PgUp/PgDn height | R rotate | X reset\n"
+		+ "Save: Ctrl+S | Load: Ctrl+L | Reset build: Ctrl+R | Quick: B/L/M/N/I/T/H/P"
 	) % [
 		_get_world_seed_text(),
 		_get_phase_text(),
 		_format_float(Engine.time_scale, 0.01),
+		builder_state,
+		part_summary.get("selected_slot", "Body"),
+		part_summary.get("selected_part", "Unknown"),
+		_format_float(float(part_summary.get("complexity", 0.0)), 0.1),
+		_format_float(MAX_CREATURE_COMPLEXITY, 0.1),
+		part_summary.get("body_shape", "-"),
+		part_summary.get("selected_transform", "-"),
 		part_summary.get("body", "Unknown Body"),
 		part_summary.get("legs", "Unknown Legs"),
 		part_summary.get("mouth", "Unknown Mouth"),
+		part_summary.get("eyes", "Unknown Eyes"),
+		part_summary.get("arms", "Unknown Arms"),
+		part_summary.get("tail", "Unknown Tail"),
+		part_summary.get("horns", "Unknown Horns"),
+		part_summary.get("paint", "Unknown Paint"),
 		_format_float(move_speed, 0.01),
 		_format_float(jump_velocity, 0.01),
 		_format_float(maximum_health, 0.1),
@@ -596,12 +860,6 @@ func _update_development_debug_overlay(
 		ecosystem_counts.get("living_grazers", 0),
 		ecosystem_counts.get("dead_grazers", 0),
 		ecosystem_counts.get("total_grazers", 0),
-		ecosystem_counts.get("female_grazers", 0),
-		ecosystem_counts.get("male_grazers", 0),
-		ecosystem_counts.get("mature_grazers", 0),
-		ecosystem_counts.get("ready_grazers", 0),
-		ecosystem_counts.get("pregnant_grazers", 0),
-		ecosystem_counts.get("descendant_grazers", 0),
 		ecosystem_counts.get("available_berry_bushes", 0),
 		ecosystem_counts.get("depleted_berry_bushes", 0),
 		ecosystem_counts.get("total_berry_bushes", 0)
@@ -758,6 +1016,31 @@ func _initialize_creature_builder() -> void:
 		0,
 		MOUTH_PARTS.size() - 1
 	)
+	_eye_part_index = clampi(
+		starting_eye_part_index,
+		0,
+		EYE_PARTS.size() - 1
+	)
+	_arm_part_index = clampi(
+		starting_arm_part_index,
+		0,
+		ARM_PARTS.size() - 1
+	)
+	_tail_part_index = clampi(
+		starting_tail_part_index,
+		0,
+		TAIL_PARTS.size() - 1
+	)
+	_horn_part_index = clampi(
+		starting_horn_part_index,
+		0,
+		HORN_PARTS.size() - 1
+	)
+	_paint_part_index = clampi(
+		starting_paint_part_index,
+		0,
+		PAINT_PARTS.size() - 1
+	)
 
 	if body_mesh != null:
 		body_mesh.visible = false
@@ -784,6 +1067,9 @@ func _apply_creature_part_blueprint(
 	var body_part: Dictionary = BODY_PARTS[_body_part_index]
 	var leg_part: Dictionary = LEG_PARTS[_leg_part_index]
 	var mouth_part: Dictionary = MOUTH_PARTS[_mouth_part_index]
+	var arm_part: Dictionary = ARM_PARTS[_arm_part_index]
+	var tail_part: Dictionary = TAIL_PARTS[_tail_part_index]
+	var horn_part: Dictionary = HORN_PARTS[_horn_part_index]
 
 	var body_speed_multiplier: float = float(
 		body_part.get("speed_multiplier", 1.0)
@@ -791,9 +1077,20 @@ func _apply_creature_part_blueprint(
 	var leg_speed_multiplier: float = float(
 		leg_part.get("speed_multiplier", 1.0)
 	)
+	var arm_speed_multiplier: float = float(
+		arm_part.get("speed_multiplier", 1.0)
+	)
+	var tail_speed_multiplier: float = float(
+		tail_part.get("speed_multiplier", 1.0)
+	)
+
 	var leg_jump_multiplier: float = float(
 		leg_part.get("jump_multiplier", 1.0)
 	)
+	var tail_jump_multiplier: float = float(
+		tail_part.get("jump_multiplier", 1.0)
+	)
+
 	var body_hunger_multiplier: float = float(
 		body_part.get("hunger_multiplier", 1.0)
 	)
@@ -803,22 +1100,106 @@ func _apply_creature_part_blueprint(
 	var mouth_hunger_multiplier: float = float(
 		mouth_part.get("hunger_multiplier", 1.0)
 	)
-	var health_bonus: float = float(
-		body_part.get("health_bonus", 0.0)
+	var arm_hunger_multiplier: float = float(
+		arm_part.get("hunger_multiplier", 1.0)
+	)
+	var tail_hunger_multiplier: float = float(
+		tail_part.get("hunger_multiplier", 1.0)
+	)
+	var horn_hunger_multiplier: float = float(
+		horn_part.get("hunger_multiplier", 1.0)
+	)
+
+	var health_bonus: float = (
+		float(body_part.get("health_bonus", 0.0))
+		+ float(horn_part.get("health_bonus", 0.0))
+	)
+
+	var body_volume_multiplier: float = (
+		_body_width_scale
+		* _body_height_scale
+		* _body_length_scale
+	)
+	var body_shape_speed_multiplier: float = clampf(
+		1.12 - (body_volume_multiplier - 1.0) * 0.18,
+		0.65,
+		1.35
+	)
+	var body_shape_hunger_multiplier: float = clampf(
+		0.75 + body_volume_multiplier * 0.25,
+		0.75,
+		1.55
+	)
+	var body_shape_health_bonus: float = maxf(
+		0.0,
+		(body_volume_multiplier - 1.0) * 45.0
+	)
+
+	var leg_shape_speed_multiplier: float = clampf(
+		0.72 + _leg_scale * 0.28,
+		0.65,
+		1.30
+	)
+	var leg_shape_jump_multiplier: float = clampf(
+		0.72 + _leg_scale * 0.28,
+		0.65,
+		1.35
+	)
+	var leg_shape_hunger_multiplier: float = clampf(
+		0.82 + _leg_scale * 0.18,
+		0.78,
+		1.25
+	)
+
+	var mouth_shape_hunger_multiplier: float = clampf(
+		0.92 + (_mouth_scale - 1.0) * 0.10,
+		0.85,
+		1.20
+	)
+	var arm_shape_hunger_multiplier: float = clampf(
+		0.94 + (_arm_scale - 1.0) * 0.12,
+		0.90,
+		1.22
+	)
+	var tail_shape_hunger_multiplier: float = clampf(
+		0.96 + (_tail_scale - 1.0) * 0.10,
+		0.92,
+		1.20
 	)
 
 	move_speed = (
 		_base_move_speed
 		* body_speed_multiplier
 		* leg_speed_multiplier
+		* arm_speed_multiplier
+		* tail_speed_multiplier
+		* body_shape_speed_multiplier
+		* leg_shape_speed_multiplier
 	)
-	jump_velocity = _base_jump_velocity * leg_jump_multiplier
-	maximum_health = _base_maximum_health + health_bonus
+	jump_velocity = (
+		_base_jump_velocity
+		* leg_jump_multiplier
+		* tail_jump_multiplier
+		* leg_shape_jump_multiplier
+	)
+	maximum_health = (
+		_base_maximum_health
+		+ health_bonus
+		+ body_shape_health_bonus
+	)
 	hunger_loss_per_second = (
 		_base_hunger_loss_per_second
 		* body_hunger_multiplier
 		* leg_hunger_multiplier
 		* mouth_hunger_multiplier
+		* arm_hunger_multiplier
+		* tail_hunger_multiplier
+		* horn_hunger_multiplier
+		* body_shape_hunger_multiplier
+		* leg_shape_hunger_multiplier
+		* mouth_shape_hunger_multiplier
+		* arm_shape_hunger_multiplier
+		* tail_shape_hunger_multiplier
 	)
 
 	if preserve_current_values:
@@ -843,12 +1224,14 @@ func _apply_creature_part_blueprint(
 	_update_development_debug_overlay(0.0, true)
 
 	print(
-		"Creature parts changed: ",
-		body_part.get("name", "Unknown Body"),
+		"Creature builder updated: ",
+		_get_selected_builder_slot_name(),
 		" | ",
-		leg_part.get("name", "Unknown Legs"),
-		" | ",
-		mouth_part.get("name", "Unknown Mouth")
+		_get_selected_builder_part_name(),
+		" | Complexity: ",
+		_format_float(_get_creature_complexity(), 0.1),
+		" / ",
+		MAX_CREATURE_COMPLEXITY
 	)
 
 
@@ -870,24 +1253,26 @@ func _rebuild_creature_part_visuals() -> void:
 	var leg_height_voxels: int = int(
 		leg_part.get("leg_height", 3)
 	)
-	var leg_thickness_voxels: int = int(
-		leg_part.get("leg_thickness", 1)
-	)
 
 	var voxel: float = CREATURE_PART_VOXEL_SIZE
 	var body_dimensions := Vector3(
-		float(body_size.x) * voxel,
-		float(body_size.y) * voxel,
-		float(body_size.z) * voxel
+		float(body_size.x) * voxel * _body_width_scale,
+		float(body_size.y) * voxel * _body_height_scale,
+		float(body_size.z) * voxel * _body_length_scale
 	)
-	var leg_height: float = float(leg_height_voxels) * voxel
+	var leg_height: float = float(leg_height_voxels) * voxel * _leg_scale
 	var body_center_y: float = leg_height + body_dimensions.y * 0.5
 
 	_add_visual_box(
 		"BodyCore",
 		Vector3(0.0, body_center_y, 0.0),
 		body_dimensions,
-		body_part.get("color", Color.WHITE)
+		_get_tinted_body_color(body_part)
+	)
+
+	_add_paint_visuals(
+		body_center_y,
+		body_dimensions
 	)
 
 	_add_leg_visuals(
@@ -910,6 +1295,21 @@ func _rebuild_creature_part_visuals() -> void:
 		body_dimensions
 	)
 
+	_add_arm_visuals(
+		body_center_y,
+		body_dimensions
+	)
+
+	_add_tail_visual(
+		body_center_y,
+		body_dimensions
+	)
+
+	_add_horn_visuals(
+		body_center_y,
+		body_dimensions
+	)
+
 
 func _add_leg_visuals(
 	body_size: Vector3i,
@@ -924,17 +1324,23 @@ func _add_leg_visuals(
 	)
 	var voxel: float = CREATURE_PART_VOXEL_SIZE
 	var leg_dimensions := Vector3(
-		float(leg_thickness_voxels) * voxel,
-		float(leg_height_voxels) * voxel,
-		float(leg_thickness_voxels) * voxel
+		float(leg_thickness_voxels) * voxel * _leg_scale,
+		float(leg_height_voxels) * voxel * _leg_scale,
+		float(leg_thickness_voxels) * voxel * _leg_scale
 	)
 	var leg_y: float = leg_dimensions.y * 0.5
 	var x_offset: float = maxf(
-		body_dimensions.x * 0.35,
+		body_dimensions.x * 0.35 * _leg_spread_scale,
 		voxel * 0.75
 	)
-	var z_front: float = -body_dimensions.z * 0.28
-	var z_back: float = body_dimensions.z * 0.28
+	var z_front: float = (
+		-body_dimensions.z * 0.28
+		+ _leg_position_offset_z
+	)
+	var z_back: float = (
+		body_dimensions.z * 0.28
+		+ _leg_position_offset_z
+	)
 
 	var leg_positions: Array[Vector3] = [
 		Vector3(-x_offset, leg_y, z_front),
@@ -944,8 +1350,12 @@ func _add_leg_visuals(
 	]
 
 	if leg_count >= 6:
-		leg_positions.append(Vector3(-x_offset, leg_y, 0.0))
-		leg_positions.append(Vector3(x_offset, leg_y, 0.0))
+		leg_positions.append(
+			Vector3(-x_offset, leg_y, _leg_position_offset_z)
+		)
+		leg_positions.append(
+			Vector3(x_offset, leg_y, _leg_position_offset_z)
+		)
 
 	for leg_index in range(mini(leg_count, leg_positions.size())):
 		_add_visual_box(
@@ -966,17 +1376,21 @@ func _add_mouth_visual(
 		"size",
 		Vector3(0.44, 0.22, 0.22)
 	)
+	mouth_size *= _mouth_scale
+
 	var mouth_position := Vector3(
 		0.0,
 		body_center_y + body_dimensions.y * 0.10,
 		-body_dimensions.z * 0.5 - mouth_size.z * 0.5
 	)
+	mouth_position += _mouth_position_offset
 
 	_add_visual_box(
 		"MouthPart",
 		mouth_position,
 		mouth_size,
-		mouth_part.get("color", Color.WHITE)
+		mouth_part.get("color", Color.WHITE),
+		Vector3(0.0, _mouth_rotation_y, 0.0)
 	)
 
 
@@ -985,22 +1399,320 @@ func _add_eye_visuals(
 	body_center_y: float,
 	body_dimensions: Vector3
 ) -> void:
-	var eye_size := Vector3(0.07, 0.07, 0.04)
-	var eye_y: float = body_center_y + body_dimensions.y * 0.23
-	var eye_z: float = -body_dimensions.z * 0.5 - 0.025
-	var eye_x: float = body_dimensions.x * 0.22
+	var eye_part: Dictionary = EYE_PARTS[_eye_part_index]
+	var eye_size: Vector3 = eye_part.get(
+		"size",
+		Vector3(0.07, 0.07, 0.04)
+	)
+	eye_size *= _eye_scale
+
+	var eye_y: float = (
+		body_center_y
+		+ body_dimensions.y * 0.23
+		+ _eye_position_offset.y
+	)
+	var eye_z: float = (
+		-body_dimensions.z * 0.5
+		- 0.025
+		+ _eye_position_offset.z
+	)
+	var eye_x: float = (
+		body_dimensions.x
+		* 0.22
+		* _eye_spread_scale
+		+ _eye_position_offset.x
+	)
 
 	_add_visual_box(
 		"LeftEye",
 		Vector3(-eye_x, eye_y, eye_z),
 		eye_size,
-		Color(0.03, 0.03, 0.025, 1.0)
+		eye_part.get("color", Color.WHITE),
+		Vector3(0.0, -_eye_rotation_y, 0.0)
 	)
 	_add_visual_box(
 		"RightEye",
 		Vector3(eye_x, eye_y, eye_z),
 		eye_size,
-		Color(0.03, 0.03, 0.025, 1.0)
+		eye_part.get("color", Color.WHITE),
+		Vector3(0.0, _eye_rotation_y, 0.0)
+	)
+
+
+func _add_arm_visuals(
+	body_center_y: float,
+	body_dimensions: Vector3
+) -> void:
+	var arm_part: Dictionary = ARM_PARTS[_arm_part_index]
+
+	if str(arm_part.get("id", &"no_arms")) == "no_arms":
+		return
+
+	var upper_size: Vector3 = arm_part.get(
+		"upper_size",
+		Vector3(0.16, 0.42, 0.16)
+	)
+	var hand_size: Vector3 = arm_part.get(
+		"hand_size",
+		Vector3(0.22, 0.16, 0.20)
+	)
+	upper_size *= _arm_scale
+	hand_size *= _arm_scale
+
+	var arm_y: float = (
+		body_center_y
+		+ body_dimensions.y * 0.02
+		+ _arm_position_offset.y
+	)
+	var arm_z: float = (
+		-body_dimensions.z * 0.08
+		+ _arm_position_offset.z
+	)
+	var arm_x: float = (
+		body_dimensions.x * 0.56 * _arm_spread_scale
+		+ _arm_position_offset.x
+	)
+
+	var hand_drop: float = upper_size.y * 0.55
+
+	_add_visual_box(
+		"LeftArm",
+		Vector3(-arm_x, arm_y, arm_z),
+		upper_size,
+		arm_part.get("color", Color.WHITE),
+		Vector3(0.0, -_arm_rotation_y, 0.0)
+	)
+	_add_visual_box(
+		"RightArm",
+		Vector3(arm_x, arm_y, arm_z),
+		upper_size,
+		arm_part.get("color", Color.WHITE),
+		Vector3(0.0, _arm_rotation_y, 0.0)
+	)
+	_add_visual_box(
+		"LeftHand",
+		Vector3(-arm_x, arm_y - hand_drop, arm_z - hand_size.z * 0.3),
+		hand_size,
+		arm_part.get("color", Color.WHITE)
+	)
+	_add_visual_box(
+		"RightHand",
+		Vector3(arm_x, arm_y - hand_drop, arm_z - hand_size.z * 0.3),
+		hand_size,
+		arm_part.get("color", Color.WHITE)
+	)
+
+
+func _add_tail_visual(
+	body_center_y: float,
+	body_dimensions: Vector3
+) -> void:
+	var tail_part: Dictionary = TAIL_PARTS[_tail_part_index]
+
+	if str(tail_part.get("id", &"no_tail")) == "no_tail":
+		return
+
+	var tail_size: Vector3 = tail_part.get(
+		"size",
+		Vector3(0.24, 0.22, 0.72)
+	)
+	tail_size *= _tail_scale
+
+	var tail_position := Vector3(
+		0.0,
+		body_center_y - body_dimensions.y * 0.08,
+		body_dimensions.z * 0.5 + tail_size.z * 0.5
+	)
+	tail_position += _tail_position_offset
+
+	_add_visual_box(
+		"TailPart",
+		tail_position,
+		tail_size,
+		tail_part.get("color", Color.WHITE),
+		Vector3(0.0, _tail_rotation_y, 0.0)
+	)
+
+	if tail_part.has("club_size"):
+		var club_size: Vector3 = tail_part.get(
+			"club_size",
+			Vector3(0.35, 0.32, 0.32)
+		)
+		club_size *= _tail_scale
+
+		var club_position := Vector3(
+			tail_position.x,
+			tail_position.y,
+			tail_position.z + tail_size.z * 0.5
+		)
+
+		_add_visual_box(
+			"TailClub",
+			club_position,
+			club_size,
+			tail_part.get("color", Color.WHITE),
+			Vector3(0.0, _tail_rotation_y, 0.0)
+		)
+
+
+func _add_horn_visuals(
+	body_center_y: float,
+	body_dimensions: Vector3
+) -> void:
+	var horn_part: Dictionary = HORN_PARTS[_horn_part_index]
+
+	if str(horn_part.get("id", &"no_horns")) == "no_horns":
+		return
+
+	var horn_size: Vector3 = horn_part.get(
+		"size",
+		Vector3(0.12, 0.26, 0.12)
+	)
+	horn_size *= _horn_scale
+
+	var horn_y: float = (
+		body_center_y
+		+ body_dimensions.y * 0.54
+		+ horn_size.y * 0.5
+		+ _horn_position_offset.y
+	)
+	var horn_z: float = (
+		-body_dimensions.z * 0.26
+		+ _horn_position_offset.z
+	)
+	var horn_x: float = (
+		body_dimensions.x * 0.24 * _horn_spread_scale
+		+ _horn_position_offset.x
+	)
+
+	_add_visual_box(
+		"LeftHorn",
+		Vector3(-horn_x, horn_y, horn_z),
+		horn_size,
+		horn_part.get("color", Color.WHITE),
+		Vector3(0.0, -_horn_rotation_y, 0.0)
+	)
+	_add_visual_box(
+		"RightHorn",
+		Vector3(horn_x, horn_y, horn_z),
+		horn_size,
+		horn_part.get("color", Color.WHITE),
+		Vector3(0.0, _horn_rotation_y, 0.0)
+	)
+
+
+func _add_paint_visuals(
+	body_center_y: float,
+	body_dimensions: Vector3
+) -> void:
+	var paint_part: Dictionary = PAINT_PARTS[_paint_part_index]
+	var pattern: String = str(paint_part.get("pattern", "none"))
+
+	if pattern == "none":
+		return
+
+	var color: Color = paint_part.get(
+		"pattern_color",
+		Color.WHITE
+	)
+	color = color.lerp(Color.WHITE, 1.0 - _paint_intensity)
+
+	if pattern == "spots":
+		_add_paint_spots(body_center_y, body_dimensions, color)
+		return
+
+	if pattern == "stripes":
+		_add_paint_stripes(body_center_y, body_dimensions, color)
+		return
+
+	if pattern == "marks":
+		_add_paint_warning_marks(body_center_y, body_dimensions, color)
+
+
+func _add_paint_spots(
+	body_center_y: float,
+	body_dimensions: Vector3,
+	paint_color: Color
+) -> void:
+	var spot_size := Vector3(
+		body_dimensions.x * 0.18,
+		0.018,
+		body_dimensions.z * 0.16
+	)
+
+	var spot_y: float = body_center_y + body_dimensions.y * 0.51
+
+	var positions: Array[Vector3] = [
+		Vector3(-body_dimensions.x * 0.22, spot_y, -body_dimensions.z * 0.18),
+		Vector3(body_dimensions.x * 0.20, spot_y, body_dimensions.z * 0.05),
+		Vector3(0.0, spot_y, body_dimensions.z * 0.26),
+	]
+
+	for spot_index in range(positions.size()):
+		_add_visual_box(
+			"PaintSpot%d" % spot_index,
+			positions[spot_index],
+			spot_size,
+			paint_color
+		)
+
+
+func _add_paint_stripes(
+	body_center_y: float,
+	body_dimensions: Vector3,
+	paint_color: Color
+) -> void:
+	var stripe_y: float = body_center_y + body_dimensions.y * 0.515
+
+	for stripe_index in range(3):
+		var z_offset: float = (
+			-body_dimensions.z * 0.28
+			+ float(stripe_index) * body_dimensions.z * 0.28
+		)
+
+		_add_visual_box(
+			"PaintStripe%d" % stripe_index,
+			Vector3(0.0, stripe_y, z_offset),
+			Vector3(body_dimensions.x * 0.92, 0.016, body_dimensions.z * 0.08),
+			paint_color
+		)
+
+
+func _add_paint_warning_marks(
+	body_center_y: float,
+	body_dimensions: Vector3,
+	paint_color: Color
+) -> void:
+	var mark_y: float = body_center_y + body_dimensions.y * 0.52
+
+	_add_visual_box(
+		"WarningMarkFront",
+		Vector3(0.0, mark_y, -body_dimensions.z * 0.35),
+		Vector3(body_dimensions.x * 0.55, 0.018, body_dimensions.z * 0.10),
+		paint_color
+	)
+	_add_visual_box(
+		"WarningMarkBack",
+		Vector3(0.0, mark_y, body_dimensions.z * 0.20),
+		Vector3(body_dimensions.x * 0.40, 0.018, body_dimensions.z * 0.10),
+		paint_color
+	)
+
+
+func _get_tinted_body_color(body_part: Dictionary) -> Color:
+	var base_color: Color = body_part.get("color", Color.WHITE)
+	var paint_part: Dictionary = PAINT_PARTS[_paint_part_index]
+	var tint: Color = paint_part.get("tint", Color.WHITE)
+	var tinted_color := Color(
+		base_color.r * tint.r,
+		base_color.g * tint.g,
+		base_color.b * tint.b,
+		base_color.a
+	)
+
+	return base_color.lerp(
+		tinted_color,
+		clampf(_paint_intensity, 0.0, 1.0)
 	)
 
 
@@ -1008,7 +1720,8 @@ func _add_visual_box(
 	box_name: String,
 	local_position: Vector3,
 	box_size: Vector3,
-	box_color: Color
+	box_color: Color,
+	local_rotation: Vector3 = Vector3.ZERO
 ) -> void:
 	if _creature_visual_root == null:
 		return
@@ -1020,6 +1733,7 @@ func _add_visual_box(
 	box_mesh.size = box_size
 	mesh_instance.mesh = box_mesh
 	mesh_instance.position = local_position
+	mesh_instance.rotation = local_rotation
 
 	var material := StandardMaterial3D.new()
 	material.albedo_color = box_color
@@ -1055,12 +1769,239 @@ func _cycle_mouth_part() -> void:
 	_apply_creature_part_blueprint()
 
 
+func _cycle_eye_part() -> void:
+	if not enable_creature_builder_debug_keys:
+		return
+
+	_eye_part_index = (_eye_part_index + 1) % EYE_PARTS.size()
+	_apply_creature_part_blueprint()
+
+
+func _cycle_arm_part() -> void:
+	if not enable_creature_builder_debug_keys:
+		return
+
+	_arm_part_index = (_arm_part_index + 1) % ARM_PARTS.size()
+	_apply_creature_part_blueprint()
+
+
+func _cycle_tail_part() -> void:
+	if not enable_creature_builder_debug_keys:
+		return
+
+	_tail_part_index = (_tail_part_index + 1) % TAIL_PARTS.size()
+	_apply_creature_part_blueprint()
+
+
+func _cycle_horn_part() -> void:
+	if not enable_creature_builder_debug_keys:
+		return
+
+	_horn_part_index = (_horn_part_index + 1) % HORN_PARTS.size()
+	_apply_creature_part_blueprint()
+
+
+func _cycle_paint_part() -> void:
+	if not enable_creature_builder_debug_keys:
+		return
+
+	_paint_part_index = (_paint_part_index + 1) % PAINT_PARTS.size()
+	_apply_creature_part_blueprint()
+
+
 func _get_current_creature_part_summary() -> Dictionary:
 	return {
 		"body": str(BODY_PARTS[_body_part_index].get("name", "Body")),
 		"legs": str(LEG_PARTS[_leg_part_index].get("name", "Legs")),
 		"mouth": str(MOUTH_PARTS[_mouth_part_index].get("name", "Mouth")),
+		"eyes": str(EYE_PARTS[_eye_part_index].get("name", "Eyes")),
+		"arms": str(ARM_PARTS[_arm_part_index].get("name", "Arms")),
+		"tail": str(TAIL_PARTS[_tail_part_index].get("name", "Tail")),
+		"horns": str(HORN_PARTS[_horn_part_index].get("name", "Horns")),
+		"paint": str(PAINT_PARTS[_paint_part_index].get("name", "Paint")),
+		"selected_slot": _get_selected_builder_slot_name(),
+		"selected_part": _get_selected_builder_part_name(),
+		"complexity": _get_creature_complexity(),
+		"complexity_ratio": _get_creature_complexity_ratio(),
+		"body_shape": _get_body_shape_text(),
+		"selected_transform": _get_selected_builder_transform_text(),
 	}
+
+
+func _get_selected_builder_slot_name() -> String:
+	return BUILDER_SLOT_NAMES[
+		clampi(
+			_builder_slot_index,
+			0,
+			BUILDER_SLOT_NAMES.size() - 1
+		)
+	]
+
+
+func _get_selected_builder_part_name() -> String:
+	match _builder_slot_index:
+		BUILDER_SLOT_BODY:
+			return str(BODY_PARTS[_body_part_index].get("name", "Body"))
+		BUILDER_SLOT_LEGS:
+			return str(LEG_PARTS[_leg_part_index].get("name", "Legs"))
+		BUILDER_SLOT_MOUTH:
+			return str(MOUTH_PARTS[_mouth_part_index].get("name", "Mouth"))
+		BUILDER_SLOT_EYES:
+			return str(EYE_PARTS[_eye_part_index].get("name", "Eyes"))
+		BUILDER_SLOT_ARMS:
+			return str(ARM_PARTS[_arm_part_index].get("name", "Arms"))
+		BUILDER_SLOT_TAIL:
+			return str(TAIL_PARTS[_tail_part_index].get("name", "Tail"))
+		BUILDER_SLOT_HORNS:
+			return str(HORN_PARTS[_horn_part_index].get("name", "Horns"))
+		BUILDER_SLOT_PAINT:
+			return str(PAINT_PARTS[_paint_part_index].get("name", "Paint"))
+		_:
+			return "Unknown Part"
+
+
+func _get_body_shape_text() -> String:
+	return (
+		"W %s / H %s / L %s"
+	) % [
+		_format_float(_body_width_scale, 0.01),
+		_format_float(_body_height_scale, 0.01),
+		_format_float(_body_length_scale, 0.01),
+	]
+
+
+func _get_selected_builder_transform_text() -> String:
+	match _builder_slot_index:
+		BUILDER_SLOT_BODY:
+			return _get_body_shape_text()
+		BUILDER_SLOT_LEGS:
+			return (
+				"Scale %s / Spread %s / Z %s"
+			) % [
+				_format_float(_leg_scale, 0.01),
+				_format_float(_leg_spread_scale, 0.01),
+				_format_float(_leg_position_offset_z, 0.01),
+			]
+		BUILDER_SLOT_MOUTH:
+			return _format_part_transform(
+				_mouth_scale,
+				_mouth_position_offset,
+				_mouth_rotation_y
+			)
+		BUILDER_SLOT_EYES:
+			return (
+				"Scale %s / Pos %s,%s,%s / Spread %s / Rot %s"
+			) % [
+				_format_float(_eye_scale, 0.01),
+				_format_float(_eye_position_offset.x, 0.01),
+				_format_float(_eye_position_offset.y, 0.01),
+				_format_float(_eye_position_offset.z, 0.01),
+				_format_float(_eye_spread_scale, 0.01),
+				_format_float(rad_to_deg(_eye_rotation_y), 1.0),
+			]
+		BUILDER_SLOT_ARMS:
+			return (
+				"Scale %s / Pos %s,%s,%s / Spread %s / Rot %s"
+			) % [
+				_format_float(_arm_scale, 0.01),
+				_format_float(_arm_position_offset.x, 0.01),
+				_format_float(_arm_position_offset.y, 0.01),
+				_format_float(_arm_position_offset.z, 0.01),
+				_format_float(_arm_spread_scale, 0.01),
+				_format_float(rad_to_deg(_arm_rotation_y), 1.0),
+			]
+		BUILDER_SLOT_TAIL:
+			return _format_part_transform(
+				_tail_scale,
+				_tail_position_offset,
+				_tail_rotation_y
+			)
+		BUILDER_SLOT_HORNS:
+			return (
+				"Scale %s / Pos %s,%s,%s / Spread %s / Rot %s"
+			) % [
+				_format_float(_horn_scale, 0.01),
+				_format_float(_horn_position_offset.x, 0.01),
+				_format_float(_horn_position_offset.y, 0.01),
+				_format_float(_horn_position_offset.z, 0.01),
+				_format_float(_horn_spread_scale, 0.01),
+				_format_float(rad_to_deg(_horn_rotation_y), 1.0),
+			]
+		BUILDER_SLOT_PAINT:
+			return (
+				"Intensity %s"
+			) % [
+				_format_float(_paint_intensity, 0.01),
+			]
+		_:
+			return "-"
+
+
+func _format_part_transform(
+	part_scale: float,
+	position_offset: Vector3,
+	rotation_y: float
+) -> String:
+	return (
+		"Scale %s / Pos %s,%s,%s / Rot %s"
+	) % [
+		_format_float(part_scale, 0.01),
+		_format_float(position_offset.x, 0.01),
+		_format_float(position_offset.y, 0.01),
+		_format_float(position_offset.z, 0.01),
+		_format_float(rad_to_deg(rotation_y), 1.0),
+	]
+
+
+func _get_creature_complexity() -> float:
+	var leg_part: Dictionary = LEG_PARTS[_leg_part_index]
+	var leg_count: int = int(leg_part.get("leg_count", 4))
+	var eye_part: Dictionary = EYE_PARTS[_eye_part_index]
+	var arm_part: Dictionary = ARM_PARTS[_arm_part_index]
+	var tail_part: Dictionary = TAIL_PARTS[_tail_part_index]
+	var horn_part: Dictionary = HORN_PARTS[_horn_part_index]
+	var paint_part: Dictionary = PAINT_PARTS[_paint_part_index]
+
+	var body_volume: float = (
+		_body_width_scale
+		* _body_height_scale
+		* _body_length_scale
+	)
+
+	var complexity: float = 0.0
+	complexity += 18.0 * body_volume
+	complexity += float(leg_count) * 5.0 * _leg_scale
+	complexity += 8.0 * _mouth_scale
+	complexity += float(eye_part.get("complexity", 4.0)) * _eye_scale
+	complexity += float(arm_part.get("complexity", 0.0)) * _arm_scale
+	complexity += float(tail_part.get("complexity", 0.0)) * _tail_scale
+	complexity += float(horn_part.get("complexity", 0.0)) * _horn_scale
+	complexity += float(paint_part.get("complexity", 0.0)) * _paint_intensity
+	complexity += absf(_mouth_position_offset.length()) * 10.0
+	complexity += absf(_eye_position_offset.length()) * 10.0
+	complexity += absf(_arm_position_offset.length()) * 10.0
+	complexity += absf(_tail_position_offset.length()) * 10.0
+	complexity += absf(_horn_position_offset.length()) * 10.0
+	complexity += absf(_leg_position_offset_z) * 8.0
+	complexity += absf(_leg_spread_scale - 1.0) * 8.0
+	complexity += absf(_eye_spread_scale - 1.0) * 5.0
+	complexity += absf(_arm_spread_scale - 1.0) * 5.0
+	complexity += absf(_horn_spread_scale - 1.0) * 5.0
+	complexity += absf(_mouth_rotation_y) * 2.0
+	complexity += absf(_eye_rotation_y) * 2.0
+	complexity += absf(_arm_rotation_y) * 2.0
+	complexity += absf(_tail_rotation_y) * 2.0
+	complexity += absf(_horn_rotation_y) * 2.0
+
+	return complexity
+
+
+func _get_creature_complexity_ratio() -> float:
+	return clampf(
+		_get_creature_complexity() / MAX_CREATURE_COMPLEXITY,
+		0.0,
+		1.0
+	)
 
 
 func _initialize_simulation_speed() -> void:
@@ -1070,6 +2011,709 @@ func _initialize_simulation_speed() -> void:
 		SIMULATION_SPEEDS.size() - 1
 	)
 	_apply_simulation_speed(false)
+
+
+func _handle_creature_builder_key(event: InputEvent) -> bool:
+	if not enable_creature_builder_debug_keys:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.keycode == KEY_C:
+		_toggle_creature_builder_mode()
+		return true
+
+	if not _builder_mode_enabled:
+		return false
+
+	if key_event.ctrl_pressed and key_event.keycode == KEY_S:
+		_save_creature_build_to_disk()
+		return true
+
+	if key_event.ctrl_pressed and key_event.keycode == KEY_L:
+		_load_creature_build_from_disk()
+		return true
+
+	if key_event.ctrl_pressed and key_event.keycode == KEY_R:
+		_reset_entire_creature_build()
+		return true
+
+	match key_event.keycode:
+		KEY_TAB:
+			_cycle_builder_slot()
+			return true
+		KEY_Q:
+			_change_builder_variant(-1)
+			return true
+		KEY_E:
+			_change_builder_variant(1)
+			return true
+		KEY_COMMA, KEY_KP_SUBTRACT:
+			_scale_selected_builder_part(-1.0)
+			return true
+		KEY_PERIOD, KEY_KP_ADD:
+			_scale_selected_builder_part(1.0)
+			return true
+		KEY_LEFT:
+			_move_selected_builder_part(Vector3(-1.0, 0.0, 0.0))
+			return true
+		KEY_RIGHT:
+			_move_selected_builder_part(Vector3(1.0, 0.0, 0.0))
+			return true
+		KEY_UP:
+			_move_selected_builder_part(Vector3(0.0, 0.0, -1.0))
+			return true
+		KEY_DOWN:
+			_move_selected_builder_part(Vector3(0.0, 0.0, 1.0))
+			return true
+		KEY_PAGEUP:
+			_move_selected_builder_part(Vector3(0.0, 1.0, 0.0))
+			return true
+		KEY_PAGEDOWN:
+			_move_selected_builder_part(Vector3(0.0, -1.0, 0.0))
+			return true
+		KEY_R:
+			_rotate_selected_builder_part(1.0)
+			return true
+		KEY_X:
+			_reset_selected_builder_slot()
+			return true
+		_:
+			return false
+
+
+func _toggle_creature_builder_mode() -> void:
+	_builder_mode_enabled = not _builder_mode_enabled
+
+	print(
+		"Creature builder mode: ",
+		"ON" if _builder_mode_enabled else "OFF"
+	)
+
+	_update_development_debug_overlay(0.0, true)
+
+
+func _cycle_builder_slot() -> void:
+	_builder_slot_index = (
+		_builder_slot_index + 1
+	) % BUILDER_SLOT_NAMES.size()
+
+	print(
+		"Selected builder slot: ",
+		_get_selected_builder_slot_name(),
+		" | ",
+		_get_selected_builder_part_name()
+	)
+
+	_update_development_debug_overlay(0.0, true)
+
+
+func _change_builder_variant(direction: int) -> void:
+	match _builder_slot_index:
+		BUILDER_SLOT_BODY:
+			_body_part_index = posmod(
+				_body_part_index + direction,
+				BODY_PARTS.size()
+			)
+		BUILDER_SLOT_LEGS:
+			_leg_part_index = posmod(
+				_leg_part_index + direction,
+				LEG_PARTS.size()
+			)
+		BUILDER_SLOT_MOUTH:
+			_mouth_part_index = posmod(
+				_mouth_part_index + direction,
+				MOUTH_PARTS.size()
+			)
+		BUILDER_SLOT_EYES:
+			_eye_part_index = posmod(
+				_eye_part_index + direction,
+				EYE_PARTS.size()
+			)
+		BUILDER_SLOT_ARMS:
+			_arm_part_index = posmod(
+				_arm_part_index + direction,
+				ARM_PARTS.size()
+			)
+		BUILDER_SLOT_TAIL:
+			_tail_part_index = posmod(
+				_tail_part_index + direction,
+				TAIL_PARTS.size()
+			)
+		BUILDER_SLOT_HORNS:
+			_horn_part_index = posmod(
+				_horn_part_index + direction,
+				HORN_PARTS.size()
+			)
+		BUILDER_SLOT_PAINT:
+			_paint_part_index = posmod(
+				_paint_part_index + direction,
+				PAINT_PARTS.size()
+			)
+
+	_apply_creature_part_blueprint()
+
+
+func _scale_selected_builder_part(direction: float) -> void:
+	var scale_delta: float = BUILDER_PART_SCALE_STEP * direction
+
+	match _builder_slot_index:
+		BUILDER_SLOT_BODY:
+			_body_width_scale = clampf(
+				_body_width_scale + BODY_SHAPE_STEP * direction,
+				MIN_BODY_SHAPE_SCALE,
+				MAX_BODY_SHAPE_SCALE
+			)
+			_body_height_scale = clampf(
+				_body_height_scale + BODY_SHAPE_STEP * direction,
+				MIN_BODY_SHAPE_SCALE,
+				MAX_BODY_SHAPE_SCALE
+			)
+			_body_length_scale = clampf(
+				_body_length_scale + BODY_SHAPE_STEP * direction,
+				MIN_BODY_SHAPE_SCALE,
+				MAX_BODY_SHAPE_SCALE
+			)
+		BUILDER_SLOT_LEGS:
+			_leg_scale = clampf(
+				_leg_scale + scale_delta,
+				MIN_PART_SCALE,
+				MAX_PART_SCALE
+			)
+		BUILDER_SLOT_MOUTH:
+			_mouth_scale = clampf(
+				_mouth_scale + scale_delta,
+				MIN_PART_SCALE,
+				MAX_PART_SCALE
+			)
+		BUILDER_SLOT_EYES:
+			_eye_scale = clampf(
+				_eye_scale + scale_delta,
+				MIN_PART_SCALE,
+				MAX_PART_SCALE
+			)
+		BUILDER_SLOT_ARMS:
+			_arm_scale = clampf(
+				_arm_scale + scale_delta,
+				MIN_PART_SCALE,
+				MAX_PART_SCALE
+			)
+		BUILDER_SLOT_TAIL:
+			_tail_scale = clampf(
+				_tail_scale + scale_delta,
+				MIN_PART_SCALE,
+				MAX_PART_SCALE
+			)
+		BUILDER_SLOT_HORNS:
+			_horn_scale = clampf(
+				_horn_scale + scale_delta,
+				MIN_PART_SCALE,
+				MAX_PART_SCALE
+			)
+		BUILDER_SLOT_PAINT:
+			_paint_intensity = clampf(
+				_paint_intensity + scale_delta,
+				0.0,
+				1.0
+			)
+
+	_apply_creature_part_blueprint()
+
+
+func _move_selected_builder_part(direction: Vector3) -> void:
+	var move_delta: Vector3 = direction * BUILDER_PART_MOVE_STEP
+
+	match _builder_slot_index:
+		BUILDER_SLOT_BODY:
+			_body_width_scale = clampf(
+				_body_width_scale + direction.x * BODY_SHAPE_STEP,
+				MIN_BODY_SHAPE_SCALE,
+				MAX_BODY_SHAPE_SCALE
+			)
+			_body_length_scale = clampf(
+				_body_length_scale + -direction.z * BODY_SHAPE_STEP,
+				MIN_BODY_SHAPE_SCALE,
+				MAX_BODY_SHAPE_SCALE
+			)
+			_body_height_scale = clampf(
+				_body_height_scale + direction.y * BODY_SHAPE_STEP,
+				MIN_BODY_SHAPE_SCALE,
+				MAX_BODY_SHAPE_SCALE
+			)
+		BUILDER_SLOT_LEGS:
+			_leg_spread_scale = clampf(
+				_leg_spread_scale + direction.x * BODY_SHAPE_STEP,
+				MIN_LEG_SPREAD_SCALE,
+				MAX_LEG_SPREAD_SCALE
+			)
+			_leg_position_offset_z = clampf(
+				_leg_position_offset_z + move_delta.z,
+				-0.45,
+				0.45
+			)
+		BUILDER_SLOT_MOUTH:
+			_mouth_position_offset = _clamp_part_offset(
+				_mouth_position_offset + move_delta,
+				Vector3(0.45, 0.45, 0.45),
+				Vector3(0.45, 0.35, 0.30)
+			)
+		BUILDER_SLOT_EYES:
+			_eye_position_offset = _clamp_part_offset(
+				_eye_position_offset + move_delta,
+				Vector3(0.30, 0.30, 0.45),
+				Vector3(0.30, 0.45, 0.30)
+			)
+		BUILDER_SLOT_ARMS:
+			_arm_position_offset = _clamp_part_offset(
+				_arm_position_offset + move_delta,
+				Vector3(0.35, 0.35, 0.45),
+				Vector3(0.35, 0.45, 0.45)
+			)
+			_arm_spread_scale = clampf(
+				_arm_spread_scale + direction.x * BODY_SHAPE_STEP,
+				MIN_LEG_SPREAD_SCALE,
+				MAX_LEG_SPREAD_SCALE
+			)
+		BUILDER_SLOT_TAIL:
+			_tail_position_offset = _clamp_part_offset(
+				_tail_position_offset + move_delta,
+				Vector3(0.35, 0.35, 0.30),
+				Vector3(0.35, 0.40, 0.55)
+			)
+		BUILDER_SLOT_HORNS:
+			_horn_position_offset = _clamp_part_offset(
+				_horn_position_offset + move_delta,
+				Vector3(0.30, 0.25, 0.35),
+				Vector3(0.30, 0.45, 0.30)
+			)
+			_horn_spread_scale = clampf(
+				_horn_spread_scale + direction.x * BODY_SHAPE_STEP,
+				MIN_LEG_SPREAD_SCALE,
+				MAX_LEG_SPREAD_SCALE
+			)
+		BUILDER_SLOT_PAINT:
+			_paint_intensity = clampf(
+				_paint_intensity + direction.y * BODY_SHAPE_STEP,
+				0.0,
+				1.0
+			)
+
+	_apply_creature_part_blueprint()
+
+
+func _clamp_part_offset(
+	value: Vector3,
+	negative_limits: Vector3,
+	positive_limits: Vector3
+) -> Vector3:
+	return Vector3(
+		clampf(value.x, -negative_limits.x, positive_limits.x),
+		clampf(value.y, -negative_limits.y, positive_limits.y),
+		clampf(value.z, -negative_limits.z, positive_limits.z)
+	)
+
+
+func _rotate_selected_builder_part(direction: float) -> void:
+	var rotation_delta: float = deg_to_rad(
+		BUILDER_PART_ROTATE_STEP * direction
+	)
+
+	match _builder_slot_index:
+		BUILDER_SLOT_MOUTH:
+			_mouth_rotation_y = wrapf(
+				_mouth_rotation_y + rotation_delta,
+				-PI,
+				PI
+			)
+		BUILDER_SLOT_EYES:
+			_eye_rotation_y = wrapf(
+				_eye_rotation_y + rotation_delta,
+				-PI,
+				PI
+			)
+		BUILDER_SLOT_ARMS:
+			_arm_rotation_y = wrapf(
+				_arm_rotation_y + rotation_delta,
+				-PI,
+				PI
+			)
+		BUILDER_SLOT_TAIL:
+			_tail_rotation_y = wrapf(
+				_tail_rotation_y + rotation_delta,
+				-PI,
+				PI
+			)
+		BUILDER_SLOT_HORNS:
+			_horn_rotation_y = wrapf(
+				_horn_rotation_y + rotation_delta,
+				-PI,
+				PI
+			)
+		BUILDER_SLOT_LEGS:
+			_leg_spread_scale = clampf(
+				_leg_spread_scale + BODY_SHAPE_STEP * direction,
+				MIN_LEG_SPREAD_SCALE,
+				MAX_LEG_SPREAD_SCALE
+			)
+		BUILDER_SLOT_BODY:
+			_body_height_scale = clampf(
+				_body_height_scale + BODY_SHAPE_STEP * direction,
+				MIN_BODY_SHAPE_SCALE,
+				MAX_BODY_SHAPE_SCALE
+			)
+
+	_apply_creature_part_blueprint()
+
+
+func _reset_selected_builder_slot() -> void:
+	match _builder_slot_index:
+		BUILDER_SLOT_BODY:
+			_body_width_scale = 1.0
+			_body_height_scale = 1.0
+			_body_length_scale = 1.0
+		BUILDER_SLOT_LEGS:
+			_leg_scale = 1.0
+			_leg_spread_scale = 1.0
+			_leg_position_offset_z = 0.0
+		BUILDER_SLOT_MOUTH:
+			_mouth_scale = 1.0
+			_mouth_position_offset = Vector3.ZERO
+			_mouth_rotation_y = 0.0
+		BUILDER_SLOT_EYES:
+			_eye_scale = 1.0
+			_eye_position_offset = Vector3.ZERO
+			_eye_spread_scale = 1.0
+			_eye_rotation_y = 0.0
+		BUILDER_SLOT_ARMS:
+			_arm_scale = 1.0
+			_arm_position_offset = Vector3.ZERO
+			_arm_spread_scale = 1.0
+			_arm_rotation_y = 0.0
+		BUILDER_SLOT_TAIL:
+			_tail_scale = 1.0
+			_tail_position_offset = Vector3.ZERO
+			_tail_rotation_y = 0.0
+		BUILDER_SLOT_HORNS:
+			_horn_scale = 1.0
+			_horn_position_offset = Vector3.ZERO
+			_horn_spread_scale = 1.0
+			_horn_rotation_y = 0.0
+		BUILDER_SLOT_PAINT:
+			_paint_intensity = 1.0
+
+	_apply_creature_part_blueprint()
+
+
+func _reset_entire_creature_build() -> void:
+	_body_part_index = clampi(starting_body_part_index, 0, BODY_PARTS.size() - 1)
+	_leg_part_index = clampi(starting_leg_part_index, 0, LEG_PARTS.size() - 1)
+	_mouth_part_index = clampi(starting_mouth_part_index, 0, MOUTH_PARTS.size() - 1)
+	_eye_part_index = clampi(starting_eye_part_index, 0, EYE_PARTS.size() - 1)
+	_arm_part_index = clampi(starting_arm_part_index, 0, ARM_PARTS.size() - 1)
+	_tail_part_index = clampi(starting_tail_part_index, 0, TAIL_PARTS.size() - 1)
+	_horn_part_index = clampi(starting_horn_part_index, 0, HORN_PARTS.size() - 1)
+	_paint_part_index = clampi(starting_paint_part_index, 0, PAINT_PARTS.size() - 1)
+
+	_body_width_scale = 1.0
+	_body_height_scale = 1.0
+	_body_length_scale = 1.0
+	_leg_scale = 1.0
+	_leg_spread_scale = 1.0
+	_leg_position_offset_z = 0.0
+	_mouth_scale = 1.0
+	_mouth_position_offset = Vector3.ZERO
+	_mouth_rotation_y = 0.0
+	_eye_scale = 1.0
+	_eye_position_offset = Vector3.ZERO
+	_eye_spread_scale = 1.0
+	_eye_rotation_y = 0.0
+	_arm_scale = 1.0
+	_arm_position_offset = Vector3.ZERO
+	_arm_spread_scale = 1.0
+	_arm_rotation_y = 0.0
+	_tail_scale = 1.0
+	_tail_position_offset = Vector3.ZERO
+	_tail_rotation_y = 0.0
+	_horn_scale = 1.0
+	_horn_position_offset = Vector3.ZERO
+	_horn_spread_scale = 1.0
+	_horn_rotation_y = 0.0
+	_paint_intensity = 1.0
+
+	_apply_creature_part_blueprint()
+	print("Creature build reset.")
+
+
+func _save_creature_build_to_disk() -> void:
+	var save_file := FileAccess.open(
+		CREATURE_BUILD_SAVE_PATH,
+		FileAccess.WRITE
+	)
+
+	if save_file == null:
+		push_error(
+			"Could not save creature build. Error: %s"
+			% FileAccess.get_open_error()
+		)
+		return
+
+	save_file.store_string(
+		JSON.stringify(
+			_get_creature_build_dictionary(),
+			"\t"
+		)
+	)
+
+	print(
+		"Creature build saved: ",
+		CREATURE_BUILD_SAVE_PATH
+	)
+
+
+func _load_creature_build_from_disk() -> void:
+	if not FileAccess.file_exists(CREATURE_BUILD_SAVE_PATH):
+		push_warning(
+			"No creature build save found: "
+			+ CREATURE_BUILD_SAVE_PATH
+		)
+		return
+
+	var save_file := FileAccess.open(
+		CREATURE_BUILD_SAVE_PATH,
+		FileAccess.READ
+	)
+
+	if save_file == null:
+		push_error(
+			"Could not load creature build. Error: %s"
+			% FileAccess.get_open_error()
+		)
+		return
+
+	var parser := JSON.new()
+	var parse_error: Error = parser.parse(save_file.get_as_text())
+
+	if parse_error != OK:
+		push_error(
+			"Creature build save is not valid JSON. Error: %s"
+			% parse_error
+		)
+		return
+
+	if not (parser.data is Dictionary):
+		push_error("Creature build save is not a dictionary.")
+		return
+
+	_apply_creature_build_dictionary(parser.data)
+	_apply_creature_part_blueprint()
+
+	print(
+		"Creature build loaded: ",
+		CREATURE_BUILD_SAVE_PATH
+	)
+
+
+func _get_creature_build_dictionary() -> Dictionary:
+	return {
+		"version": 1,
+		"parts": {
+			"body": _body_part_index,
+			"legs": _leg_part_index,
+			"mouth": _mouth_part_index,
+			"eyes": _eye_part_index,
+			"arms": _arm_part_index,
+			"tail": _tail_part_index,
+			"horns": _horn_part_index,
+			"paint": _paint_part_index,
+		},
+		"shape": {
+			"body_width": _body_width_scale,
+			"body_height": _body_height_scale,
+			"body_length": _body_length_scale,
+			"leg_scale": _leg_scale,
+			"leg_spread": _leg_spread_scale,
+			"leg_z": _leg_position_offset_z,
+			"paint_intensity": _paint_intensity,
+		},
+		"transforms": {
+			"mouth": _pack_part_transform(
+				_mouth_scale,
+				_mouth_position_offset,
+				_mouth_rotation_y,
+				1.0
+			),
+			"eyes": _pack_part_transform(
+				_eye_scale,
+				_eye_position_offset,
+				_eye_rotation_y,
+				_eye_spread_scale
+			),
+			"arms": _pack_part_transform(
+				_arm_scale,
+				_arm_position_offset,
+				_arm_rotation_y,
+				_arm_spread_scale
+			),
+			"tail": _pack_part_transform(
+				_tail_scale,
+				_tail_position_offset,
+				_tail_rotation_y,
+				1.0
+			),
+			"horns": _pack_part_transform(
+				_horn_scale,
+				_horn_position_offset,
+				_horn_rotation_y,
+				_horn_spread_scale
+			),
+		},
+	}
+
+
+func _apply_creature_build_dictionary(build_data: Dictionary) -> void:
+	var parts: Dictionary = build_data.get("parts", {})
+	var shape: Dictionary = build_data.get("shape", {})
+	var transforms: Dictionary = build_data.get("transforms", {})
+
+	_body_part_index = _get_safe_int(parts, "body", _body_part_index, BODY_PARTS.size())
+	_leg_part_index = _get_safe_int(parts, "legs", _leg_part_index, LEG_PARTS.size())
+	_mouth_part_index = _get_safe_int(parts, "mouth", _mouth_part_index, MOUTH_PARTS.size())
+	_eye_part_index = _get_safe_int(parts, "eyes", _eye_part_index, EYE_PARTS.size())
+	_arm_part_index = _get_safe_int(parts, "arms", _arm_part_index, ARM_PARTS.size())
+	_tail_part_index = _get_safe_int(parts, "tail", _tail_part_index, TAIL_PARTS.size())
+	_horn_part_index = _get_safe_int(parts, "horns", _horn_part_index, HORN_PARTS.size())
+	_paint_part_index = _get_safe_int(parts, "paint", _paint_part_index, PAINT_PARTS.size())
+
+	_body_width_scale = _get_safe_float(shape, "body_width", _body_width_scale, MIN_BODY_SHAPE_SCALE, MAX_BODY_SHAPE_SCALE)
+	_body_height_scale = _get_safe_float(shape, "body_height", _body_height_scale, MIN_BODY_SHAPE_SCALE, MAX_BODY_SHAPE_SCALE)
+	_body_length_scale = _get_safe_float(shape, "body_length", _body_length_scale, MIN_BODY_SHAPE_SCALE, MAX_BODY_SHAPE_SCALE)
+	_leg_scale = _get_safe_float(shape, "leg_scale", _leg_scale, MIN_PART_SCALE, MAX_PART_SCALE)
+	_leg_spread_scale = _get_safe_float(shape, "leg_spread", _leg_spread_scale, MIN_LEG_SPREAD_SCALE, MAX_LEG_SPREAD_SCALE)
+	_leg_position_offset_z = _get_safe_float(shape, "leg_z", _leg_position_offset_z, -0.45, 0.45)
+	_paint_intensity = _get_safe_float(shape, "paint_intensity", _paint_intensity, 0.0, 1.0)
+
+	_unpack_part_transform(transforms.get("mouth", {}), "mouth")
+	_unpack_part_transform(transforms.get("eyes", {}), "eyes")
+	_unpack_part_transform(transforms.get("arms", {}), "arms")
+	_unpack_part_transform(transforms.get("tail", {}), "tail")
+	_unpack_part_transform(transforms.get("horns", {}), "horns")
+
+
+func _pack_part_transform(
+	part_scale: float,
+	position_offset: Vector3,
+	rotation_y: float,
+	spread: float
+) -> Dictionary:
+	return {
+		"scale": part_scale,
+		"position": {
+			"x": position_offset.x,
+			"y": position_offset.y,
+			"z": position_offset.z,
+		},
+		"rotation_y": rotation_y,
+		"spread": spread,
+	}
+
+
+func _unpack_part_transform(
+	transform_data: Variant,
+	slot_name: String
+) -> void:
+	if not (transform_data is Dictionary):
+		return
+
+	var transform_dictionary: Dictionary = transform_data
+	var packed_position: Dictionary = transform_dictionary.get(
+		"position",
+		{}
+	)
+
+	var part_scale: float = _get_safe_float(
+		transform_dictionary,
+		"scale",
+		1.0,
+		MIN_PART_SCALE,
+		MAX_PART_SCALE
+	)
+	var rotation_y: float = _get_safe_float(
+		transform_dictionary,
+		"rotation_y",
+		0.0,
+		-PI,
+		PI
+	)
+	var spread: float = _get_safe_float(
+		transform_dictionary,
+		"spread",
+		1.0,
+		MIN_LEG_SPREAD_SCALE,
+		MAX_LEG_SPREAD_SCALE
+	)
+	var position := Vector3(
+		_get_safe_float(packed_position, "x", 0.0, -0.55, 0.55),
+		_get_safe_float(packed_position, "y", 0.0, -0.45, 0.55),
+		_get_safe_float(packed_position, "z", 0.0, -0.55, 0.55)
+	)
+
+	match slot_name:
+		"mouth":
+			_mouth_scale = part_scale
+			_mouth_rotation_y = rotation_y
+			_mouth_position_offset = position
+		"eyes":
+			_eye_scale = part_scale
+			_eye_rotation_y = rotation_y
+			_eye_spread_scale = spread
+			_eye_position_offset = position
+		"arms":
+			_arm_scale = part_scale
+			_arm_rotation_y = rotation_y
+			_arm_spread_scale = spread
+			_arm_position_offset = position
+		"tail":
+			_tail_scale = part_scale
+			_tail_rotation_y = rotation_y
+			_tail_position_offset = position
+		"horns":
+			_horn_scale = part_scale
+			_horn_rotation_y = rotation_y
+			_horn_spread_scale = spread
+			_horn_position_offset = position
+
+
+func _get_safe_int(
+	data: Dictionary,
+	key: String,
+	fallback: int,
+	array_size: int
+) -> int:
+	return clampi(
+		int(data.get(key, fallback)),
+		0,
+		maxi(array_size - 1, 0)
+	)
+
+
+func _get_safe_float(
+	data: Dictionary,
+	key: String,
+	fallback: float,
+	minimum: float,
+	maximum: float
+) -> float:
+	return clampf(
+		float(data.get(key, fallback)),
+		minimum,
+		maximum
+	)
 
 
 func _handle_development_debug_key(event: InputEvent) -> bool:
@@ -1102,6 +2746,21 @@ func _handle_development_debug_key(event: InputEvent) -> bool:
 			return true
 		KEY_M:
 			_cycle_mouth_part()
+			return true
+		KEY_N:
+			_cycle_eye_part()
+			return true
+		KEY_I:
+			_cycle_arm_part()
+			return true
+		KEY_T:
+			_cycle_tail_part()
+			return true
+		KEY_H:
+			_cycle_horn_part()
+			return true
+		KEY_P:
+			_cycle_paint_part()
 			return true
 		_:
 			return false
