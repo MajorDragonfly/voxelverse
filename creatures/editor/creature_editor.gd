@@ -13,6 +13,12 @@ const ROTATE_STEP: float = 7.5
 const BODY_SHAPE_STEP: float = 0.08
 const CAMERA_ROTATE_SPEED: float = 0.006
 const CAMERA_ZOOM_STEP: float = 0.45
+const PREVIEW_MOUSE_TURN_SPEED: float = 0.012
+const PREVIEW_KEY_TURN_STEP: float = 15.0
+const MOUSE_PART_MOVE_STEP: float = 0.0045
+const MOUSE_PART_VERTICAL_STEP: float = 0.008
+const MOUSE_PART_ROTATE_STEP: float = 0.65
+const MOUSE_PART_SCALE_STEP: float = 0.06
 
 
 var blueprint: Dictionary = {}
@@ -21,6 +27,7 @@ var selected_part_index: int = -1
 
 var _camera_pivot: Node3D
 var _camera: Camera3D
+var _preview_pivot: Node3D
 var _preview: Node3D
 
 var _ui_root: Control
@@ -36,8 +43,12 @@ var _help_label: Label
 var _complexity_bar: ProgressBar
 var _creature_name_edit: LineEdit
 var _mirror_button: Button
+var _symmetry_button: Button
 
-var _is_rotating_camera: bool = false
+var _symmetry_enabled: bool = true
+var _is_turning_creature: bool = false
+var _is_dragging_part: bool = false
+var _is_rotating_part_with_mouse: bool = false
 
 
 func _ready() -> void:
@@ -50,7 +61,7 @@ func _ready() -> void:
 	_refresh_all()
 
 	print(
-		"Creature Editor Foundation V1 ready. Save path: ",
+		"Creature Editor V3 ready. Save path: ",
 		SAVE_PATH
 	)
 
@@ -162,10 +173,14 @@ func _build_editor_room() -> void:
 	_camera_pivot.add_child(_camera)
 	_camera.look_at(Vector3(0.0, 0.3, 0.0), Vector3.UP)
 
+	_preview_pivot = Node3D.new()
+	_preview_pivot.name = "PreviewTurntable"
+	add_child(_preview_pivot)
+
 	_preview = Node3D.new()
 	_preview.name = "CreaturePreview"
 	_preview.set_script(PreviewScript)
-	add_child(_preview)
+	_preview_pivot.add_child(_preview)
 
 
 func _create_grid_line(
@@ -212,7 +227,7 @@ func _build_left_panel() -> void:
 	_left_panel.anchor_bottom = 1.0
 	_left_panel.offset_left = 12.0
 	_left_panel.offset_top = 12.0
-	_left_panel.offset_right = 354.0
+	_left_panel.offset_right = 306.0
 	_left_panel.offset_bottom = -78.0
 	_ui_root.add_child(_left_panel)
 
@@ -228,7 +243,7 @@ func _build_left_panel() -> void:
 
 	_category_grid = GridContainer.new()
 	_category_grid.name = "CategoryGrid"
-	_category_grid.columns = 4
+	_category_grid.columns = 3
 	content.add_child(_category_grid)
 
 	var separator := HSeparator.new()
@@ -237,8 +252,10 @@ func _build_left_panel() -> void:
 	_help_label = Label.new()
 	_help_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_help_label.text = (
-		"Click a part to place it. "
-		+ "RMB drag rotates preview. Mouse wheel zooms."
+		"Empty LMB drag = turn creature. "
+		+ "Click part = select. "
+		+ "LMB drag part = move. "
+		+ "RMB drag = rotate. Wheel = scale."
 	)
 	content.add_child(_help_label)
 
@@ -249,7 +266,7 @@ func _build_left_panel() -> void:
 
 	_part_grid = GridContainer.new()
 	_part_grid.name = "PartGrid"
-	_part_grid.columns = 2
+	_part_grid.columns = 1
 	_part_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(_part_grid)
 
@@ -261,7 +278,7 @@ func _build_right_panel() -> void:
 	_right_panel.anchor_top = 0.0
 	_right_panel.anchor_right = 1.0
 	_right_panel.anchor_bottom = 1.0
-	_right_panel.offset_left = -344.0
+	_right_panel.offset_left = -318.0
 	_right_panel.offset_top = 12.0
 	_right_panel.offset_right = -12.0
 	_right_panel.offset_bottom = -78.0
@@ -281,7 +298,7 @@ func _build_right_panel() -> void:
 	_complexity_bar.min_value = 0.0
 	_complexity_bar.max_value = float(Blueprint.COMPLEXITY_LIMIT)
 	_complexity_bar.show_percentage = false
-	_complexity_bar.custom_minimum_size = Vector2(280.0, 20.0)
+	_complexity_bar.custom_minimum_size = Vector2(250.0, 18.0)
 	content.add_child(_complexity_bar)
 
 	_stats_label = Label.new()
@@ -320,6 +337,18 @@ func _build_right_panel() -> void:
 	_add_tool_button(scale_rotate_grid, "Rot -", Callable(self, "_rotate_negative"))
 	_add_tool_button(scale_rotate_grid, "Rot +", Callable(self, "_rotate_positive"))
 
+	var view_title := Label.new()
+	view_title.text = "VIEW / SYMMETRY"
+	view_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	content.add_child(view_title)
+
+	var view_grid := GridContainer.new()
+	view_grid.columns = 2
+	content.add_child(view_grid)
+
+	_add_tool_button(view_grid, "Turn ◀", Callable(self, "_turn_creature_left"))
+	_add_tool_button(view_grid, "Turn ▶", Callable(self, "_turn_creature_right"))
+
 	var selection_grid := GridContainer.new()
 	selection_grid.columns = 2
 	content.add_child(selection_grid)
@@ -330,9 +359,14 @@ func _build_right_panel() -> void:
 	_add_tool_button(selection_grid, "Delete", Callable(self, "_delete_selected_part"))
 
 	_mirror_button = Button.new()
-	_mirror_button.text = "Mirror: -"
+	_mirror_button.text = "Part Mirror: -"
 	_mirror_button.pressed.connect(_toggle_selected_mirror)
 	content.add_child(_mirror_button)
+
+	_symmetry_button = Button.new()
+	_symmetry_button.text = "Y-Axis Symmetry (X mirror): ON"
+	_symmetry_button.pressed.connect(_toggle_global_symmetry)
+	content.add_child(_symmetry_button)
 
 	var reset_button := Button.new()
 	reset_button.text = "Reset Selected Transform"
@@ -394,9 +428,9 @@ func _build_top_label() -> void:
 	_title_label.anchor_top = 0.0
 	_title_label.anchor_right = 1.0
 	_title_label.anchor_bottom = 0.0
-	_title_label.offset_left = 370.0
+	_title_label.offset_left = 320.0
 	_title_label.offset_top = 12.0
-	_title_label.offset_right = -360.0
+	_title_label.offset_right = -330.0
 	_title_label.offset_bottom = 52.0
 	_title_label.text = "VOXELVERSE CREATURE EDITOR"
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -482,7 +516,9 @@ func _refresh_stats_panel() -> void:
 		+ "Plant Diet: %.2f\n"
 		+ "Meat Diet: %.2f\n"
 		+ "Swim: %.2f\n"
-		+ "Hunger Drain: %.3f"
+		+ "Hunger Drain: %.3f\n\n"
+		+ "Preview Rotation Y: %.1f°\n"
+		+ "Y-Axis Symmetry (X mirror): %s"
 	) % [
 		complexity,
 		Blueprint.COMPLEXITY_LIMIT,
@@ -498,10 +534,13 @@ func _refresh_stats_panel() -> void:
 		float(stats.get("diet_meat", 0.0)),
 		float(stats.get("swim", 0.0)),
 		float(stats.get("hunger_drain", 0.0)),
+		_get_preview_y_rotation(),
+		str(_symmetry_enabled),
 	]
 
 	_selection_label.text = _get_selection_text()
 	_update_mirror_button()
+	_update_symmetry_button()
 
 
 func _get_selection_text() -> String:
@@ -591,13 +630,22 @@ func _update_mirror_button() -> void:
 	)
 
 	if placement.is_empty():
-		_mirror_button.text = "Mirror: -"
+		_mirror_button.text = "Part Mirror: -"
 		_mirror_button.disabled = true
 		return
 
 	_mirror_button.disabled = false
-	_mirror_button.text = "Mirror: %s" % str(
+	_mirror_button.text = "Part Mirror: %s" % str(
 		bool(placement.get("mirrored", false))
+	)
+
+
+func _update_symmetry_button() -> void:
+	if _symmetry_button == null:
+		return
+
+	_symmetry_button.text = "Y-Axis Symmetry (X mirror): %s" % (
+		"ON" if _symmetry_enabled else "OFF"
 	)
 
 
@@ -646,6 +694,7 @@ func _on_part_button_pressed(part_id: String) -> void:
 
 	if new_index >= 0:
 		selected_part_index = new_index
+		_apply_global_symmetry_to_new_part(new_index)
 
 	_refresh_all()
 
@@ -660,28 +709,85 @@ func _on_name_submitted(new_text: String) -> void:
 
 
 func _handle_mouse_button(event: InputEventMouseButton) -> void:
+	if event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			_handle_left_mouse_pressed(event.position)
+		else:
+			_is_dragging_part = false
+			_is_turning_creature = false
+
+		return
+
 	if event.button_index == MOUSE_BUTTON_RIGHT:
-		_is_rotating_camera = event.pressed
+		if event.pressed:
+			_handle_right_mouse_pressed(event.position)
+		else:
+			_is_rotating_part_with_mouse = false
+			_is_turning_creature = false
+
 		return
 
 	if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
-		_zoom_camera(-CAMERA_ZOOM_STEP)
+		if _can_mouse_transform_part(event.position):
+			_scale_selected_part_from_mouse(MOUSE_PART_SCALE_STEP)
+		else:
+			_zoom_camera(-CAMERA_ZOOM_STEP)
+
 		return
 
 	if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-		_zoom_camera(CAMERA_ZOOM_STEP)
+		if _can_mouse_transform_part(event.position):
+			_scale_selected_part_from_mouse(-MOUSE_PART_SCALE_STEP)
+		else:
+			_zoom_camera(CAMERA_ZOOM_STEP)
+
 		return
+
+
+func _handle_left_mouse_pressed(screen_position: Vector2) -> void:
+	if _is_pointer_over_editor_panel(screen_position):
+		return
+
+	var picked_index: int = _pick_part_at_screen_position(screen_position)
+
+	if picked_index >= 0:
+		_select_part_by_index(picked_index)
+		_is_dragging_part = true
+		return
+
+	_is_turning_creature = true
+
+
+func _handle_right_mouse_pressed(screen_position: Vector2) -> void:
+	if _is_pointer_over_editor_panel(screen_position):
+		return
+
+	var picked_index: int = _pick_part_at_screen_position(screen_position)
+
+	if picked_index >= 0:
+		_select_part_by_index(picked_index)
+		_is_rotating_part_with_mouse = true
+		return
+
+	if selected_part_index >= 0:
+		_is_rotating_part_with_mouse = true
+		return
+
+	_is_turning_creature = true
 
 
 func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
-	if not _is_rotating_camera:
+	if _is_dragging_part:
+		_drag_selected_part_from_mouse(event)
 		return
 
-	_camera_pivot.rotate_y(-event.relative.x * CAMERA_ROTATE_SPEED)
-	_camera_pivot.rotate_object_local(
-		Vector3.RIGHT,
-		-event.relative.y * CAMERA_ROTATE_SPEED
-	)
+	if _is_rotating_part_with_mouse:
+		_rotate_selected_part_from_mouse(event)
+		return
+
+	if _is_turning_creature:
+		_turn_creature_from_mouse(event)
+		return
 
 
 func _handle_key(event: InputEventKey) -> void:
@@ -698,6 +804,9 @@ func _handle_key(event: InputEventKey) -> void:
 				return
 			KEY_R:
 				_reset_blueprint()
+				return
+			KEY_D:
+				_duplicate_selected_part()
 				return
 			_:
 				pass
@@ -732,12 +841,16 @@ func _handle_key(event: InputEventKey) -> void:
 			_move_y_negative()
 		KEY_R:
 			_rotate_positive()
-		KEY_D:
-			_duplicate_selected_part()
 		KEY_X:
 			_reset_selected_transform()
 		KEY_M:
 			_toggle_selected_mirror()
+		KEY_Y:
+			_toggle_global_symmetry()
+		KEY_A:
+			_turn_creature_left()
+		KEY_D:
+			_turn_creature_right()
 		_:
 			pass
 
@@ -1062,6 +1175,240 @@ func _apply_paint_delta(scale_delta: float) -> void:
 	)
 
 	_refresh_all()
+
+
+func _apply_global_symmetry_to_new_part(part_index: int) -> void:
+	var placement: Dictionary = Blueprint.get_part_placement(
+		blueprint,
+		part_index
+	)
+
+	if placement.is_empty():
+		return
+
+	var category_id: String = str(placement.get("category", ""))
+
+	if not _supports_y_axis_symmetry(category_id):
+		return
+
+	Blueprint.set_part_mirrored(
+		blueprint,
+		part_index,
+		_symmetry_enabled
+	)
+
+
+func _supports_y_axis_symmetry(category_id: String) -> bool:
+	return (
+		category_id == PartLibrary.CATEGORY_EYES
+		or category_id == PartLibrary.CATEGORY_LEGS
+		or category_id == PartLibrary.CATEGORY_ARMS
+		or category_id == PartLibrary.CATEGORY_HORNS
+		or category_id == PartLibrary.CATEGORY_PLATES
+		or category_id == PartLibrary.CATEGORY_SPIKES
+		or category_id == PartLibrary.CATEGORY_DECOR
+	)
+
+
+func _toggle_global_symmetry() -> void:
+	_symmetry_enabled = not _symmetry_enabled
+	_update_symmetry_button()
+
+	print("Creature editor Y-axis symmetry: ", _symmetry_enabled)
+
+
+func _turn_creature_left() -> void:
+	_rotate_preview_y(PREVIEW_KEY_TURN_STEP)
+
+
+func _turn_creature_right() -> void:
+	_rotate_preview_y(-PREVIEW_KEY_TURN_STEP)
+
+
+func _turn_creature_from_mouse(event: InputEventMouseMotion) -> void:
+	_rotate_preview_y(-event.relative.x * rad_to_deg(PREVIEW_MOUSE_TURN_SPEED))
+
+	if Input.is_key_pressed(KEY_SHIFT):
+		_rotate_preview_x(-event.relative.y * rad_to_deg(PREVIEW_MOUSE_TURN_SPEED * 0.45))
+
+
+func _rotate_preview_y(rotation_degrees_delta: float) -> void:
+	if _preview_pivot == null:
+		return
+
+	_preview_pivot.rotation_degrees.y = wrapf(
+		_preview_pivot.rotation_degrees.y + rotation_degrees_delta,
+		-180.0,
+		180.0
+	)
+
+	_refresh_stats_panel()
+
+
+func _rotate_preview_x(rotation_degrees_delta: float) -> void:
+	if _preview_pivot == null:
+		return
+
+	_preview_pivot.rotation_degrees.x = clampf(
+		_preview_pivot.rotation_degrees.x + rotation_degrees_delta,
+		-35.0,
+		35.0
+	)
+
+	_refresh_stats_panel()
+
+
+func _get_preview_y_rotation() -> float:
+	if _preview_pivot == null:
+		return 0.0
+
+	return snappedf(_preview_pivot.rotation_degrees.y, 0.1)
+
+
+func _can_mouse_transform_part(screen_position: Vector2) -> bool:
+	return (
+		selected_part_index >= 0
+		and not _is_pointer_over_editor_panel(screen_position)
+	)
+
+
+func _drag_selected_part_from_mouse(event: InputEventMouseMotion) -> void:
+	if selected_part_index < 0:
+		return
+
+	var position_delta := Vector3.ZERO
+
+	if Input.is_key_pressed(KEY_SHIFT):
+		position_delta = Vector3(
+			0.0,
+			-event.relative.y * MOUSE_PART_VERTICAL_STEP,
+			0.0
+		)
+	else:
+		var camera_right := _camera.global_transform.basis.x
+		var camera_forward := -_camera.global_transform.basis.z
+
+		camera_right.y = 0.0
+		camera_forward.y = 0.0
+
+		if camera_right.length_squared() > 0.0:
+			camera_right = camera_right.normalized()
+
+		if camera_forward.length_squared() > 0.0:
+			camera_forward = camera_forward.normalized()
+
+		position_delta = (
+			camera_right * event.relative.x
+			+ camera_forward * -event.relative.y
+		) * MOUSE_PART_MOVE_STEP
+
+	Blueprint.nudge_part(
+		blueprint,
+		selected_part_index,
+		position_delta
+	)
+
+	_refresh_preview()
+	_refresh_stats_panel()
+
+
+func _rotate_selected_part_from_mouse(event: InputEventMouseMotion) -> void:
+	if selected_part_index < 0:
+		return
+
+	var rotation_delta := Vector3.ZERO
+
+	if Input.is_key_pressed(KEY_SHIFT):
+		rotation_delta.x = -event.relative.y * MOUSE_PART_ROTATE_STEP
+	elif Input.is_key_pressed(KEY_CTRL):
+		rotation_delta.z = event.relative.x * MOUSE_PART_ROTATE_STEP
+	else:
+		rotation_delta.y = event.relative.x * MOUSE_PART_ROTATE_STEP
+
+	Blueprint.rotate_part(
+		blueprint,
+		selected_part_index,
+		rotation_delta
+	)
+
+	_refresh_preview()
+	_refresh_stats_panel()
+
+
+func _scale_selected_part_from_mouse(scale_delta: float) -> void:
+	if selected_part_index < 0:
+		return
+
+	Blueprint.scale_part(
+		blueprint,
+		selected_part_index,
+		scale_delta
+	)
+
+	_refresh_preview()
+	_refresh_stats_panel()
+
+
+func _pick_part_at_screen_position(screen_position: Vector2) -> int:
+	if _camera == null:
+		return -1
+
+	var ray_origin: Vector3 = _camera.project_ray_origin(screen_position)
+	var ray_direction: Vector3 = _camera.project_ray_normal(screen_position)
+	var ray_end: Vector3 = ray_origin + ray_direction * 100.0
+
+	var query := PhysicsRayQueryParameters3D.create(
+		ray_origin,
+		ray_end
+	)
+	query.collide_with_bodies = true
+	query.collide_with_areas = false
+
+	var result: Dictionary = get_world_3d().direct_space_state.intersect_ray(
+		query
+	)
+
+	if result.is_empty():
+		return -1
+
+	var collider: Object = result.get("collider", null) as Object
+
+	if collider == null:
+		return -1
+
+	if not collider.has_meta("creature_part_index"):
+		return -1
+
+	return int(collider.get_meta("creature_part_index"))
+
+
+func _select_part_by_index(part_index: int) -> void:
+	var placement: Dictionary = Blueprint.get_part_placement(
+		blueprint,
+		part_index
+	)
+
+	if placement.is_empty():
+		return
+
+	selected_part_index = part_index
+	current_category = str(placement.get("category", current_category))
+	_refresh_all()
+
+
+func _is_pointer_over_editor_panel(screen_position: Vector2) -> bool:
+	for panel in [
+		_left_panel,
+		_right_panel,
+		_bottom_panel,
+	]:
+		if panel == null:
+			continue
+
+		if panel.get_global_rect().has_point(screen_position):
+			return true
+
+	return false
 
 
 func _save_blueprint() -> void:
