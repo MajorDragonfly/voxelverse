@@ -1,6 +1,7 @@
 extends RefCounted
 
 const SEGMENT_COUNT: int = 7
+const SAVE_VERSION: int = 2
 
 const MIN_WIDTH_SCALE: float = 0.55
 const MAX_WIDTH_SCALE: float = 1.65
@@ -10,6 +11,9 @@ const MAX_HEIGHT_SCALE: float = 1.65
 
 const MIN_Y_OFFSET: float = -0.90
 const MAX_Y_OFFSET: float = 0.90
+
+const MIN_BODY_LENGTH_SCALE: float = 0.55
+const MAX_BODY_LENGTH_SCALE: float = 2.25
 
 const SAVE_PATH: String = (
 	"user://creature_editor_spine_v4.json"
@@ -47,6 +51,18 @@ static func ensure_profile(
 		)
 
 	body["spine"] = cleaned
+
+	body["spine_length_scale"] = clampf(
+		float(
+			body.get(
+				"spine_length_scale",
+				1.0
+			)
+		),
+		MIN_BODY_LENGTH_SCALE,
+		MAX_BODY_LENGTH_SCALE
+	)
+
 	blueprint["body"] = body
 
 
@@ -130,17 +146,32 @@ static func adjust_segment(
 	)
 
 	segment["width_scale"] = (
-		float(segment.get("width_scale", 1.0))
+		float(
+			segment.get(
+				"width_scale",
+				1.0
+			)
+		)
 		+ width_delta
 	)
 
 	segment["height_scale"] = (
-		float(segment.get("height_scale", 1.0))
+		float(
+			segment.get(
+				"height_scale",
+				1.0
+			)
+		)
 		+ height_delta
 	)
 
 	segment["y_offset"] = (
-		float(segment.get("y_offset", 0.0))
+		float(
+			segment.get(
+				"y_offset",
+				0.0
+			)
+		)
 		+ y_delta
 	)
 
@@ -166,11 +197,68 @@ static func reset_segment(
 	)
 
 
+static func get_body_length_scale(
+	blueprint: Dictionary
+) -> float:
+	ensure_profile(blueprint)
+
+	var body: Dictionary = blueprint.get("body", {})
+
+	return clampf(
+		float(
+			body.get(
+				"spine_length_scale",
+				1.0
+			)
+		),
+		MIN_BODY_LENGTH_SCALE,
+		MAX_BODY_LENGTH_SCALE
+	)
+
+
+static func set_body_length_scale(
+	blueprint: Dictionary,
+	new_length_scale: float
+) -> void:
+	var body: Dictionary = blueprint.get("body", {})
+
+	body["spine_length_scale"] = clampf(
+		new_length_scale,
+		MIN_BODY_LENGTH_SCALE,
+		MAX_BODY_LENGTH_SCALE
+	)
+
+	blueprint["body"] = body
+
+
+static func adjust_body_length(
+	blueprint: Dictionary,
+	length_delta: float
+) -> void:
+	set_body_length_scale(
+		blueprint,
+		get_body_length_scale(blueprint)
+		+ length_delta
+	)
+
+
+static func reset_body_length(
+	blueprint: Dictionary
+) -> void:
+	set_body_length_scale(
+		blueprint,
+		1.0
+	)
+
+
 static func reset_all(
 	blueprint: Dictionary
 ) -> void:
 	var body: Dictionary = blueprint.get("body", {})
+
 	body["spine"] = create_default()
+	body["spine_length_scale"] = 1.0
+
 	blueprint["body"] = body
 
 
@@ -218,18 +306,48 @@ static func sample(
 
 	return {
 		"width_scale": lerpf(
-			float(left.get("width_scale", 1.0)),
-			float(right.get("width_scale", 1.0)),
+			float(
+				left.get(
+					"width_scale",
+					1.0
+				)
+			),
+			float(
+				right.get(
+					"width_scale",
+					1.0
+				)
+			),
 			blend
 		),
 		"height_scale": lerpf(
-			float(left.get("height_scale", 1.0)),
-			float(right.get("height_scale", 1.0)),
+			float(
+				left.get(
+					"height_scale",
+					1.0
+				)
+			),
+			float(
+				right.get(
+					"height_scale",
+					1.0
+				)
+			),
 			blend
 		),
 		"y_offset": lerpf(
-			float(left.get("y_offset", 0.0)),
-			float(right.get("y_offset", 0.0)),
+			float(
+				left.get(
+					"y_offset",
+					0.0
+				)
+			),
+			float(
+				right.get(
+					"y_offset",
+					0.0
+				)
+			),
 			blend
 		),
 	}
@@ -250,9 +368,15 @@ static func save_profile(
 		return FileAccess.get_open_error()
 
 	var save_data: Dictionary = {
-		"version": 1,
+		"version": SAVE_VERSION,
 		"creature_name": str(
-			blueprint.get("name", "New Creature")
+			blueprint.get(
+				"name",
+				"New Creature"
+			)
+		),
+		"body_length_scale": get_body_length_scale(
+			blueprint
 		),
 		"spine": get_segments(
 			blueprint
@@ -290,7 +414,9 @@ static func load_profile(
 	var json_text: String = file.get_as_text()
 	file.close()
 
-	var parsed: Variant = JSON.parse_string(json_text)
+	var parsed: Variant = JSON.parse_string(
+		json_text
+	)
 
 	if not (parsed is Dictionary):
 		ensure_profile(blueprint)
@@ -306,7 +432,15 @@ static func load_profile(
 		return false
 
 	var body: Dictionary = blueprint.get("body", {})
+
 	body["spine"] = spine_value
+	body["spine_length_scale"] = float(
+		parsed.get(
+			"body_length_scale",
+			1.0
+		)
+	)
+
 	blueprint["body"] = body
 
 	ensure_profile(blueprint)

@@ -14,6 +14,10 @@ const SpineProfile = preload(
 
 const HANDLE_COLLISION_LAYER: int = 1 << 5
 
+const BODY_VOXEL_TARGET_SIZE: float = 0.105
+const BODY_VOXEL_OVERLAP_XY: float = 1.045
+const BODY_VOXEL_OVERLAP_Z: float = 1.12
+
 var selected_body_segment: int = -1
 var show_spine_handles: bool = false
 
@@ -55,6 +59,12 @@ func _create_body() -> void:
 		blueprint
 	)
 
+	var body_length_scale: float = (
+		SpineProfile.get_body_length_scale(
+			blueprint
+		)
+	)
+
 	var base_color: Color = _get_body_color(
 		body_part,
 		paint_part
@@ -65,11 +75,12 @@ func _create_body() -> void:
 	)
 
 	shape *= body_scale
+	shape.z *= body_length_scale
 
 	var segment_count: int = clampi(
-		roundi(shape.z * 9.5),
-		18,
-		34
+		roundi(shape.z * 10.5),
+		14,
+		64
 	)
 
 	var segment_length: float = (
@@ -148,20 +159,14 @@ func _create_body() -> void:
 		slice_root.position.y = center_y
 		body_root.add_child(slice_root)
 
-		var is_end_cap: bool = (
-			segment_index <= 1
-			or segment_index >= segment_count - 2
-		)
-
-		_create_v4_body_slice(
+		_create_seamless_body_slice(
 			slice_root,
 			segment_index,
 			z_position,
 			width,
 			height,
 			segment_length,
-			base_color,
-			is_end_cap
+			base_color
 		)
 
 		_create_profile_ridge(
@@ -196,57 +201,43 @@ func _create_body() -> void:
 		)
 
 
-func _create_v4_body_slice(
+func _create_seamless_body_slice(
 	slice_root: Node3D,
 	segment_index: int,
 	z_position: float,
 	width: float,
 	height: float,
 	segment_length: float,
-	base_color: Color,
-	is_end_cap: bool
+	base_color: Color
 ) -> void:
-	if not is_end_cap:
-		_create_solid_body_core(
-			slice_root,
-			segment_index,
-			z_position,
-			width,
-			height,
-			segment_length,
-			base_color
-		)
-
-		_create_body_slice_voxels(
-			slice_root,
-			segment_index,
-			z_position,
-			width,
-			height,
-			segment_length,
-			base_color
-		)
-
-		return
-
-	var target_voxel_size: float = 0.115
-
 	var columns_x: int = clampi(
-		ceili(width / target_voxel_size),
+		ceili(
+			width / BODY_VOXEL_TARGET_SIZE
+		),
 		6,
-		14
+		20
 	)
 
 	var rows_y: int = clampi(
-		ceili(height / target_voxel_size),
+		ceili(
+			height / BODY_VOXEL_TARGET_SIZE
+		),
 		5,
-		12
+		18
+	)
+
+	var cell_width: float = (
+		width / float(columns_x)
+	)
+
+	var cell_height: float = (
+		height / float(rows_y)
 	)
 
 	var voxel_size := Vector3(
-		width / float(columns_x),
-		height / float(rows_y),
-		segment_length * 0.94
+		cell_width * BODY_VOXEL_OVERLAP_XY,
+		cell_height * BODY_VOXEL_OVERLAP_XY,
+		segment_length * BODY_VOXEL_OVERLAP_Z
 	)
 
 	for y_index in range(rows_y):
@@ -265,47 +256,51 @@ func _create_v4_body_slice(
 				- 1.0
 			)
 
-			var distance: float = (
+			var ellipse_distance: float = (
 				normalized_x * normalized_x
 				+ normalized_y * normalized_y
 			)
 
-			if distance > 1.0:
+			if ellipse_distance > 1.04:
 				continue
 
 			var x_position: float = (
 				-float(columns_x) * 0.5
 				+ float(x_index)
 				+ 0.5
-			) * voxel_size.x
+			) * cell_width
 
 			var y_position: float = (
 				-float(rows_y) * 0.5
 				+ float(y_index)
 				+ 0.5
-			) * voxel_size.y
+			) * cell_height
+
+			var color_index: int = (
+				segment_index
+				+ x_index * 2
+				+ y_index * 3
+			) % 5
 
 			var color_variation: float = (
-				float(
-					(
-						segment_index
-						+ x_index
-						+ y_index
-					)
-					% 4
-				)
-				* 0.025
+				float(color_index)
+				* 0.012
 			)
 
-			var voxel_color: Color = (
-				base_color.lightened(
+			var voxel_color: Color = base_color
+
+			if color_index % 2 == 0:
+				voxel_color = base_color.lightened(
 					color_variation
 				)
-			)
+			else:
+				voxel_color = base_color.darkened(
+					color_variation * 0.55
+				)
 
 			_create_box(
 				slice_root,
-				"BodyCapV4_%02d_%02d_%02d" % [
+				"BodyVoxelV4_%02d_%02d_%02d" % [
 					segment_index,
 					x_index,
 					y_index,
@@ -315,58 +310,10 @@ func _create_v4_body_slice(
 					y_position,
 					z_position
 				),
-				voxel_size * 0.96,
+				voxel_size,
 				voxel_color,
 				false
 			)
-
-
-func _create_solid_body_core(
-	slice_root: Node3D,
-	segment_index: int,
-	z_position: float,
-	width: float,
-	height: float,
-	segment_length: float,
-	base_color: Color
-) -> void:
-	var core_color: Color = base_color.darkened(0.015)
-
-	_create_box(
-		slice_root,
-		"BodyCoreHorizontalV4_%02d"
-		% segment_index,
-		Vector3(
-			0.0,
-			0.0,
-			z_position
-		),
-		Vector3(
-			width * 0.82,
-			height * 0.56,
-			segment_length * 0.96
-		),
-		core_color,
-		false
-	)
-
-	_create_box(
-		slice_root,
-		"BodyCoreVerticalV4_%02d"
-		% segment_index,
-		Vector3(
-			0.0,
-			0.0,
-			z_position
-		),
-		Vector3(
-			width * 0.56,
-			height * 0.82,
-			segment_length * 0.96
-		),
-		core_color,
-		false
-	)
 
 
 func _create_profile_ridge(
@@ -394,7 +341,7 @@ func _create_profile_ridge(
 		Vector3(
 			maxf(width * 0.13, 0.055),
 			0.052,
-			segment_length * 0.72
+			segment_length * 1.02
 		),
 		accent_color.darkened(0.28),
 		false
@@ -454,7 +401,7 @@ func _create_profile_pattern_marker(
 					Vector3(
 						0.045,
 						height * 0.48,
-						segment_length * 0.78
+						segment_length * 1.04
 					),
 					pattern_color,
 					false
@@ -481,7 +428,7 @@ func _create_profile_pattern_marker(
 				Vector3(
 					0.09,
 					0.09,
-					segment_length * 0.72
+					segment_length * 1.04
 				),
 				pattern_color,
 				false
@@ -503,7 +450,7 @@ func _create_profile_pattern_marker(
 				Vector3(
 					width * 0.38,
 					0.045,
-					segment_length * 0.82
+					segment_length * 1.04
 				),
 				pattern_color,
 				false
@@ -512,7 +459,8 @@ func _create_profile_pattern_marker(
 		"crystal":
 			var quarter: int = maxi(
 				floori(
-					float(segment_count) / 4.0
+					float(segment_count)
+					/ 4.0
 				),
 				1
 			)
@@ -600,7 +548,9 @@ func _create_spine_handles(
 			+ height * 0.54
 		)
 
-		var handle_y: float = body_top + 0.19
+		var handle_y: float = (
+			body_top + 0.19
+		)
 
 		_create_box(
 			body_root,
@@ -699,13 +649,24 @@ func _create_spine_handles(
 func _create_all_parts() -> void:
 	SpineProfile.ensure_profile(blueprint)
 
-	var body_shape: Vector3 = (
+	var base_body_shape: Vector3 = (
 		BaseBlueprint.get_body_shape(blueprint)
 		* BaseBlueprint.get_body_scale(blueprint)
 	)
 
 	var body_scale: float = (
 		BaseBlueprint.get_body_scale(blueprint)
+	)
+
+	var body_length_scale: float = (
+		SpineProfile.get_body_length_scale(
+			blueprint
+		)
+	)
+
+	var displayed_body_length: float = (
+		base_body_shape.z
+		* body_length_scale
 	)
 
 	var parts: Array = blueprint.get(
@@ -740,9 +701,11 @@ func _create_all_parts() -> void:
 
 		var normalized_position: float = 0.5
 
-		if body_shape.z > 0.001:
+		if base_body_shape.z > 0.001:
 			normalized_position = clampf(
-				position.z / body_shape.z + 0.5,
+				position.z
+					/ base_body_shape.z
+					+ 0.5,
 				0.0,
 				1.0
 			)
@@ -775,6 +738,8 @@ func _create_all_parts() -> void:
 				)
 			)
 		)
+
+		position.z *= body_length_scale
 
 		display_placement["position"] = position
 
@@ -824,7 +789,7 @@ func _create_all_parts() -> void:
 
 		var sample_length: float = maxf(
 			(after_t - before_t)
-			* body_shape.z,
+				* displayed_body_length,
 			0.001
 		)
 

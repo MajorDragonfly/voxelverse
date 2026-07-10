@@ -19,10 +19,12 @@ const BASE_SAVE_PATH: String = (
 const MOUSE_WIDTH_SPEED: float = 0.004
 const MOUSE_HEIGHT_SPEED: float = 0.004
 const MOUSE_CURVE_SPEED: float = 0.006
+const MOUSE_LENGTH_SPEED: float = 0.004
 
 const KEY_WIDTH_STEP: float = 0.05
 const KEY_HEIGHT_STEP: float = 0.05
 const KEY_CURVE_STEP: float = 0.05
+const KEY_LENGTH_STEP: float = 0.05
 
 const HANDLE_CLICK_RADIUS: float = 42.0
 
@@ -49,11 +51,15 @@ func _ready() -> void:
 			+ "Drag left/right = width.\n"
 			+ "Drag up/down = body curve.\n"
 			+ "Shift + drag up/down = height.\n"
+			+ "Ctrl + drag left/right = body length.\n"
 			+ "Mouse wheel = width.\n"
 			+ "Shift + wheel = height.\n"
+			+ "Ctrl + wheel = body length.\n"
 			+ "Arrow keys = width / curve.\n"
 			+ "PageUp/PageDown = height.\n"
-			+ "X = reset selected segment.\n\n"
+			+ "Home/End = shorter / longer.\n"
+			+ "X = reset selected segment.\n"
+			+ "Shift + X = reset body length.\n\n"
 			+ "PART MODE:\n"
 			+ "Click part = select.\n"
 			+ "LMB drag = move.\n"
@@ -65,11 +71,13 @@ func _ready() -> void:
 
 	print(
 		"Creature Editor V4 ready. "
-		+ "Editable spine segments enabled."
+		+ "Editable spine and body length enabled."
 	)
 
 
-func _input(event: InputEvent) -> void:
+func _input(
+	event: InputEvent
+) -> void:
 	if _try_handle_spine_input(event):
 		get_viewport().set_input_as_handled()
 
@@ -133,13 +141,21 @@ func _refresh_stats_panel() -> void:
 		)
 	)
 
+	var body_length_scale: float = (
+		SpineProfile.get_body_length_scale(
+			blueprint
+		)
+	)
+
 	_selection_label.text = (
 		"Selected: Body Segment %d / %d\n"
 		+ "Width: %d%%\n"
 		+ "Height: %d%%\n"
-		+ "Curve offset: %.2f\n\n"
+		+ "Curve offset: %.2f\n"
+		+ "Body length: %d%%\n\n"
 		+ "Drag the yellow handle.\n"
-		+ "Press X to reset this segment."
+		+ "Ctrl + drag changes body length.\n"
+		+ "X resets this segment."
 	) % [
 		selected_body_segment + 1,
 		SpineProfile.SEGMENT_COUNT,
@@ -167,6 +183,9 @@ func _refresh_stats_panel() -> void:
 				0.0
 			)
 		),
+		roundi(
+			body_length_scale * 100.0
+		),
 	]
 
 
@@ -174,13 +193,19 @@ func _try_handle_spine_input(
 	event: InputEvent
 ) -> bool:
 	if event is InputEventMouseButton:
-		return _handle_spine_mouse_button(event)
+		return _handle_spine_mouse_button(
+			event
+		)
 
 	if event is InputEventMouseMotion:
-		return _handle_spine_mouse_motion(event)
+		return _handle_spine_mouse_motion(
+			event
+		)
 
 	if event is InputEventKey:
-		return _handle_spine_key(event)
+		return _handle_spine_key(
+			event
+		)
 
 	return false
 
@@ -196,7 +221,9 @@ func _handle_spine_mouse_button(
 
 			return false
 
-		if _is_pointer_over_v4_ui(event.position):
+		if _is_pointer_over_v4_ui(
+			event.position
+		):
 			return false
 
 		var picked_segment: int = (
@@ -231,15 +258,24 @@ func _handle_spine_mouse_button(
 		event.button_index
 		== MOUSE_BUTTON_WHEEL_UP
 	):
-		if event.shift_pressed:
+		if event.ctrl_pressed:
+			_apply_spine_delta(
+				0.0,
+				0.0,
+				0.0,
+				KEY_LENGTH_STEP
+			)
+		elif event.shift_pressed:
 			_apply_spine_delta(
 				0.0,
 				KEY_HEIGHT_STEP,
+				0.0,
 				0.0
 			)
 		else:
 			_apply_spine_delta(
 				KEY_WIDTH_STEP,
+				0.0,
 				0.0,
 				0.0
 			)
@@ -250,15 +286,24 @@ func _handle_spine_mouse_button(
 		event.button_index
 		== MOUSE_BUTTON_WHEEL_DOWN
 	):
-		if event.shift_pressed:
+		if event.ctrl_pressed:
+			_apply_spine_delta(
+				0.0,
+				0.0,
+				0.0,
+				-KEY_LENGTH_STEP
+			)
+		elif event.shift_pressed:
 			_apply_spine_delta(
 				0.0,
 				-KEY_HEIGHT_STEP,
+				0.0,
 				0.0
 			)
 		else:
 			_apply_spine_delta(
 				-KEY_WIDTH_STEP,
+				0.0,
 				0.0,
 				0.0
 			)
@@ -277,20 +322,32 @@ func _handle_spine_mouse_motion(
 	):
 		return false
 
-	var width_delta: float = (
-		event.relative.x
-		* MOUSE_WIDTH_SPEED
-	)
-
+	var width_delta: float = 0.0
 	var height_delta: float = 0.0
 	var curve_delta: float = 0.0
+	var length_delta: float = 0.0
 
-	if event.shift_pressed:
+	if event.ctrl_pressed:
+		length_delta = (
+			event.relative.x
+			* MOUSE_LENGTH_SPEED
+		)
+	elif event.shift_pressed:
+		width_delta = (
+			event.relative.x
+			* MOUSE_WIDTH_SPEED
+		)
+
 		height_delta = (
 			-event.relative.y
 			* MOUSE_HEIGHT_SPEED
 		)
 	else:
+		width_delta = (
+			event.relative.x
+			* MOUSE_WIDTH_SPEED
+		)
+
 		curve_delta = (
 			-event.relative.y
 			* MOUSE_CURVE_SPEED
@@ -299,7 +356,8 @@ func _handle_spine_mouse_motion(
 	_apply_spine_delta(
 		width_delta,
 		height_delta,
-		curve_delta
+		curve_delta,
+		length_delta
 	)
 
 	return true
@@ -325,6 +383,7 @@ func _handle_spine_key(
 			_apply_spine_delta(
 				-KEY_WIDTH_STEP,
 				0.0,
+				0.0,
 				0.0
 			)
 			return true
@@ -332,6 +391,7 @@ func _handle_spine_key(
 		KEY_RIGHT:
 			_apply_spine_delta(
 				KEY_WIDTH_STEP,
+				0.0,
 				0.0,
 				0.0
 			)
@@ -341,7 +401,8 @@ func _handle_spine_key(
 			_apply_spine_delta(
 				0.0,
 				0.0,
-				KEY_CURVE_STEP
+				KEY_CURVE_STEP,
+				0.0
 			)
 			return true
 
@@ -349,7 +410,8 @@ func _handle_spine_key(
 			_apply_spine_delta(
 				0.0,
 				0.0,
-				-KEY_CURVE_STEP
+				-KEY_CURVE_STEP,
+				0.0
 			)
 			return true
 
@@ -357,6 +419,7 @@ func _handle_spine_key(
 			_apply_spine_delta(
 				0.0,
 				KEY_HEIGHT_STEP,
+				0.0,
 				0.0
 			)
 			return true
@@ -365,15 +428,39 @@ func _handle_spine_key(
 			_apply_spine_delta(
 				0.0,
 				-KEY_HEIGHT_STEP,
+				0.0,
 				0.0
 			)
 			return true
 
-		KEY_X:
-			SpineProfile.reset_segment(
-				blueprint,
-				selected_body_segment
+		KEY_HOME:
+			_apply_spine_delta(
+				0.0,
+				0.0,
+				0.0,
+				-KEY_LENGTH_STEP
 			)
+			return true
+
+		KEY_END:
+			_apply_spine_delta(
+				0.0,
+				0.0,
+				0.0,
+				KEY_LENGTH_STEP
+			)
+			return true
+
+		KEY_X:
+			if event.shift_pressed:
+				SpineProfile.reset_body_length(
+					blueprint
+				)
+			else:
+				SpineProfile.reset_segment(
+					blueprint,
+					selected_body_segment
+				)
 
 			_refresh_preview()
 			_refresh_stats_panel()
@@ -422,18 +509,30 @@ func _clear_spine_selection(
 func _apply_spine_delta(
 	width_delta: float,
 	height_delta: float,
-	curve_delta: float
+	curve_delta: float,
+	length_delta: float
 ) -> void:
 	if selected_body_segment < 0:
 		return
 
-	SpineProfile.adjust_segment(
-		blueprint,
-		selected_body_segment,
-		width_delta,
-		height_delta,
-		curve_delta
-	)
+	if (
+		not is_zero_approx(width_delta)
+		or not is_zero_approx(height_delta)
+		or not is_zero_approx(curve_delta)
+	):
+		SpineProfile.adjust_segment(
+			blueprint,
+			selected_body_segment,
+			width_delta,
+			height_delta,
+			curve_delta
+		)
+
+	if not is_zero_approx(length_delta):
+		SpineProfile.adjust_body_length(
+			blueprint,
+			length_delta
+		)
 
 	_refresh_preview()
 	_refresh_stats_panel()
