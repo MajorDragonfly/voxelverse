@@ -31,11 +31,13 @@ static func create_system(system_seed: int) -> Dictionary:
 	var planet_count: int = random.randi_range(3, 6)
 	var planets: Array = []
 	for planet_index in range(planet_count):
-		var planet_seed: int = absi(
-			safe_seed
-			+ (planet_index + 1) * 83_492_791
-			+ random.randi_range(1, 2_000_000_000)
-		)
+		var planet_seed: int = safe_seed
+		if planet_index > 0:
+			planet_seed = absi(
+				safe_seed
+				+ (planet_index + 1) * 83_492_791
+				+ random.randi_range(1, 2_000_000_000)
+			)
 		planet_seed = maxi(planet_seed, 1)
 		var profile: Dictionary = PlanetProfile.create(planet_seed)
 		var planet_class: String = PLANET_CLASSES[
@@ -104,9 +106,10 @@ static func _planet_name(system_seed: int, planet_index: int) -> String:
 		"vora",
 		"xis",
 	]
+	var divided_seed: int = floori(float(system_seed) / 19.0)
 	return "%s%s %s" % [
 		syllables_a[posmod(system_seed + planet_index * 11, syllables_a.size())],
-		syllables_b[posmod(system_seed / 19 + planet_index * 7, syllables_b.size())],
+		syllables_b[posmod(divided_seed + planet_index * 7, syllables_b.size())],
 		_roman_numeral(planet_index + 1),
 	]
 
