@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cn3lphpcrkgub" path="res://creatures/player/player.gd" id="1_gurkq"]
 [ext_resource type="Script" path="res://creatures/runtime/creature_runtime_visual.gd" id="2_runtime"]
+[ext_resource type="Script" path="res://creatures/runtime/procedural_locomotion_animator.gd" id="3_locomotion"]
+[ext_resource type="Script" path="res://ui/hud_presentation.gd" id="4_hud"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_triqp"]
 
@@ -19,14 +21,21 @@ shape = SubResource("CapsuleShape3D_gurkq")
 [node name="CreatureRuntimeVisual" type="Node3D" parent="."]
 script = ExtResource("2_runtime")
 
+[node name="ProceduralLocomotionAnimator" type="Node" parent="."]
+script = ExtResource("3_locomotion")
+
+[node name="HUDPresentation" type="Node" parent="."]
+script = ExtResource("4_hud")
+
 [node name="CameraPivot" type="Node3D" parent="." unique_id=850860063]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.4, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=94137464]
-spring_length = 6.0
-margin = 0.15
+spring_length = 6.5
+margin = 0.18
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=227106477]
+fov = 68.0
 
 [node name="InteractionRay" type="RayCast3D" parent="CameraPivot/SpringArm3D/Camera3D" unique_id=1411619374]
 target_position = Vector3(0, 0, -10)
