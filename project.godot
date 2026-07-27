@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameState="*uid://qxsg1brssjh8"
+GameState="*res://autoload/game_state.gd"
 WorldGenerator="*res://world/generation/world_generator_v2.gd"
 DisplaySettings="*res://core/display_settings.gd"
 

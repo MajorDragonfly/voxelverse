@@ -31,9 +31,10 @@ jobs:
         run: |
           set -euo pipefail
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --editor --path . --quit-after 4 \
+          "$GODOT" --headless --path . --import \
             2>&1 | tee /tmp/godot-import.log
-          ! grep -E "SCRIPT ERROR|Parse Error|Failed loading resource" \
+          ! grep -E \
+            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
             /tmp/godot-import.log
 
       - name: Run Creature V5 smoke test
@@ -53,12 +54,22 @@ jobs:
             --script res://tests/world_evolution_v2_ci_test.gd \
             > /tmp/world-evolution-test.log 2>&1
           TEST_STATUS=$?
+
           if [ "$TEST_STATUS" -eq 124 ]; then
             echo "World Evolution V2 smoke test timed out after 90 seconds." \
               >> /tmp/world-evolution-test.log
           fi
-          grep -E "World Evolution|World sample|World test stage|ERROR|SCRIPT ERROR|Parse Error|failed|outside|invalid|lacks|fewer|seed|timed out" \
+
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
+            /tmp/world-evolution-test.log; then
+            TEST_STATUS=1
+          fi
+
+          grep -E \
+            "World Evolution|World sample|World test stage|ERROR|SCRIPT ERROR|Parse Error|failed|outside|invalid|lacks|fewer|seed|timed out" \
             /tmp/world-evolution-test.log || cat /tmp/world-evolution-test.log
+
           exit "$TEST_STATUS"
 
       - name: Upload world validation diagnostics
