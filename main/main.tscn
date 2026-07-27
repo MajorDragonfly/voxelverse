@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cflvob4gek5k0" path="res://creatures/player/player.tscn" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://d1vpfpfcqte7w" path="res://world/world_manager.tscn" id="2_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://cm26fs2gvsrep" path="res://world/resources/nests/nest.tscn" id="3_xwkvk"]
-[ext_resource type="Script" path="res://world/visuals/world_presentation_director.gd" id="5_presentation"]
-[ext_resource type="Script" path="res://world/fauna/fauna_streamer_v5.gd" id="6_fauna"]
+[ext_resource type="Script" path="res://world/visuals/world_presentation_director_v6.gd" id="5_presentation"]
+[ext_resource type="Script" path="res://world/fauna/fauna_streamer_v6.gd" id="6_fauna"]
 [ext_resource type="PackedScene" path="res://world/visuals/planet_visual_environment.tscn" id="4_c651c"]
 
 [node name="Main" type="Node3D" unique_id=926892959]
@@ -16,16 +16,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="Nest" parent="." unique_id=1293792252 instance=ExtResource("3_xwkvk")]
 
-[node name="FaunaStreamerV5" type="Node3D" parent="."]
+[node name="FaunaStreamerV6" type="Node3D" parent="."]
 script = ExtResource("6_fauna")
-target_population = 10
-maximum_population = 14
-spawn_interval = 0.65
-minimum_spawn_radius = 20.0
-maximum_spawn_radius = 56.0
-despawn_radius = 94.0
+target_population = 8
+maximum_population = 12
+spawn_interval = 0.85
+minimum_spawn_radius = 14.0
+maximum_spawn_radius = 28.0
+despawn_radius = 76.0
+species_region_size = 256.0
 
 [node name="PlanetVisualEnvironment" parent="." unique_id=166311708 instance=ExtResource("4_c651c")]
 
-[node name="WorldPresentationDirector" type="Node3D" parent="."]
+[node name="WorldPresentationDirectorV6" type="Node3D" parent="."]
 script = ExtResource("5_presentation")
