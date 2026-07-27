@@ -103,13 +103,14 @@ func _spawn_one_grazer() -> void:
 		grazer.set("thirst_loss_per_second", 0.04)
 		grazer.set("maximum_grazer_population", maximum_population)
 		grazer.set("snap_to_terrain", true)
+
+		add_child(grazer)
 		grazer.global_position = Vector3(
 			world_x,
 			WorldGenerator.get_visual_terrain_height(world_x, world_z) + 1.2,
 			world_z
 		)
 		grazer.add_to_group(&"streamed_fauna")
-		add_child(grazer)
 		_active_fauna.append(grazer)
 		return
 
