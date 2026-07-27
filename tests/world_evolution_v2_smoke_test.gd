@@ -1,5 +1,9 @@
 extends SceneTree
 
+const GeneratorScript = preload(
+	"res://world/generation/world_generator_v2.gd"
+)
+
 const PRIMARY_TEST_SEED: int = 424_242
 const SECONDARY_TEST_SEED: int = 515_151
 const SAMPLE_MIN: int = -2400
@@ -7,9 +11,13 @@ const SAMPLE_MAX: int = 2400
 const SAMPLE_STEP: int = 200
 
 var _failures: Array[String] = []
+var _generator: Node
 
 
 func _initialize() -> void:
+	_generator = GeneratorScript.new()
+	root.add_child(_generator)
+
 	_run_world_generator_checks()
 	_run_scene_resource_checks()
 
@@ -25,7 +33,7 @@ func _initialize() -> void:
 
 
 func _run_world_generator_checks() -> void:
-	WorldGenerator.set_seed_override(PRIMARY_TEST_SEED)
+	_generator.set_seed_override(PRIMARY_TEST_SEED)
 	var first_samples: Array[float] = []
 	var biome_counts: Dictionary = {}
 	var minimum_height: float = INF
@@ -33,7 +41,7 @@ func _run_world_generator_checks() -> void:
 
 	for world_z in range(SAMPLE_MIN, SAMPLE_MAX + 1, SAMPLE_STEP):
 		for world_x in range(SAMPLE_MIN, SAMPLE_MAX + 1, SAMPLE_STEP):
-			var sample: Dictionary = WorldGenerator.sample_world(
+			var sample: Dictionary = _generator.sample_world(
 				float(world_x),
 				float(world_z)
 			)
@@ -62,8 +70,8 @@ func _run_world_generator_checks() -> void:
 				"Visual terrain height is not aligned to half-voxel terraces."
 			)
 			_expect(
-				biome >= WorldGenerator.Biome.OCEAN
-				and biome <= WorldGenerator.Biome.RIVER,
+				biome >= GeneratorScript.Biome.OCEAN
+				and biome <= GeneratorScript.Biome.RIVER,
 				"World generator returned an invalid biome index."
 			)
 			_expect(
@@ -110,12 +118,12 @@ func _run_world_generator_checks() -> void:
 		"The sampled world produced fewer than five distinct biomes."
 	)
 
-	WorldGenerator.set_seed_override(PRIMARY_TEST_SEED)
+	_generator.set_seed_override(PRIMARY_TEST_SEED)
 	var repeated_index: int = 0
 
 	for world_z in range(SAMPLE_MIN, SAMPLE_MAX + 1, SAMPLE_STEP):
 		for world_x in range(SAMPLE_MIN, SAMPLE_MAX + 1, SAMPLE_STEP):
-			var repeated_height: float = WorldGenerator.get_terrain_height(
+			var repeated_height: float = _generator.get_terrain_height(
 				float(world_x),
 				float(world_z)
 			)
@@ -125,13 +133,13 @@ func _run_world_generator_checks() -> void:
 			)
 			repeated_index += 1
 
-	WorldGenerator.set_seed_override(SECONDARY_TEST_SEED)
+	_generator.set_seed_override(SECONDARY_TEST_SEED)
 	var changed_samples: int = 0
 	var comparison_index: int = 0
 
 	for world_z in range(SAMPLE_MIN, SAMPLE_MAX + 1, SAMPLE_STEP):
 		for world_x in range(SAMPLE_MIN, SAMPLE_MAX + 1, SAMPLE_STEP):
-			var changed_height: float = WorldGenerator.get_terrain_height(
+			var changed_height: float = _generator.get_terrain_height(
 				float(world_x),
 				float(world_z)
 			)
