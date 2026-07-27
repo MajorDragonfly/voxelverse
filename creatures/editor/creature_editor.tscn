@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chl2f7o43nlup"]
 
-[ext_resource type="Script" path="res://creatures/editor/creature_editor_v5.gd" id="1_creature_editor"]
+[ext_resource type="Script" path="res://creatures/editor/creature_editor_v5_hotfix.gd" id="1_creature_editor"]
 
 [node name="CreatureEditor" type="Node3D" unique_id=1870309716]
 script = ExtResource("1_creature_editor")
