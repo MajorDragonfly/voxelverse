@@ -74,11 +74,11 @@ func _queue_far_proxy_build() -> void:
 	local_z_values.resize(rows)
 
 	for column in range(columns):
-		var cell_index: int = mini(column * stride, cells_x)
-		local_x_values[column] = float(cell_index) * cell_size - half_width
+		var sample_cell_x: int = mini(column * stride, cells_x)
+		local_x_values[column] = float(sample_cell_x) * cell_size - half_width
 	for row in range(rows):
-		var cell_index: int = mini(row * stride, cells_z)
-		local_z_values[row] = float(cell_index) * cell_size - half_depth
+		var sample_cell_z: int = mini(row * stride, cells_z)
+		local_z_values[row] = float(sample_cell_z) * cell_size - half_depth
 
 	var heights := PackedFloat32Array()
 	var colors := PackedColorArray()
