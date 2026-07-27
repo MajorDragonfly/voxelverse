@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dyhavywwdec27"]
 
 [ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v7.gd" id="1_terrain"]
-[ext_resource type="Script" path="res://world/visuals/terrain/terrain_chunk_visuals_v7.gd" id="2_visuals"]
+[ext_resource type="Script" path="res://world/visuals/terrain/terrain_chunk_visuals_v7_runtime.gd" id="2_visuals"]
 [ext_resource type="Script" path="res://world/visuals/scenery/procedural_ecosystem_v6.gd" id="3_ecosystem"]
 [ext_resource type="Script" path="res://world/streaming/chunk_lod_controller_v7.gd" id="4_lod"]
 
