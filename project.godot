@@ -4,7 +4,7 @@
 ;
 ; Format:
 ;   [section] ; section goes between []
-;   param=value ; assign values to parameters
+;   param=value
 
 config_version=5
 
@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*res://autoload/game_state.gd"
-WorldGenerator="*res://world/generation/world_generator_v4.gd"
+WorldGenerator="*res://world/generation/world_generator_v6.gd"
 DisplaySettings="*res://core/display_settings.gd"
 
 [display]
