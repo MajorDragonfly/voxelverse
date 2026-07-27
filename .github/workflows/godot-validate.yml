@@ -47,7 +47,12 @@ jobs:
       - name: Run World Evolution V2 smoke test
         shell: bash
         run: |
-          set -euo pipefail
+          set +e
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
           "$GODOT" --headless --path . \
-            --script res://tests/world_evolution_v2_smoke_test.gd
+            --script res://tests/world_evolution_v2_smoke_test.gd \
+            > /tmp/world-evolution-test.log 2>&1
+          TEST_STATUS=$?
+          grep -E "World Evolution|World sample|ERROR|SCRIPT ERROR|Parse Error|failed|outside|invalid|lacks|fewer|seed" \
+            /tmp/world-evolution-test.log || cat /tmp/world-evolution-test.log
+          exit "$TEST_STATUS"
