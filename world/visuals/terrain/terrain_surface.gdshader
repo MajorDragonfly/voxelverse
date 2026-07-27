@@ -16,6 +16,14 @@ uniform float palette_steps : hint_range(2.0, 12.0, 1.0) = 8.0;
 uniform float texture_darkness : hint_range(0.20, 1.00, 0.01) = 0.82;
 uniform float texture_brightness : hint_range(0.80, 1.50, 0.01) = 1.08;
 
+// The former micro-voxel layer was a second mesh floating above the terrain.
+// V7 produces the same 0.125-unit pixel rhythm directly in this material.
+uniform float micro_tile_size : hint_range(0.03125, 0.50, 0.03125) = 0.125;
+uniform float near_detail_end : hint_range(8.0, 128.0, 1.0) = 44.0;
+uniform float mid_detail_end : hint_range(16.0, 192.0, 1.0) = 82.0;
+uniform float micro_detail_strength : hint_range(0.0, 0.35, 0.01) = 0.13;
+uniform float mid_detail_strength : hint_range(0.0, 0.20, 0.01) = 0.055;
+
 uniform bool spherical_planet = false;
 uniform vec3 planet_center = vec3(0.0);
 uniform float planet_radius = 10000.0;
@@ -76,6 +84,39 @@ float quantize_value(float value, float steps) {
 }
 
 
+float stable_hash(vec2 grid_position) {
+	vec2 p = fract(grid_position * vec2(0.1031, 0.1030));
+	p += dot(p, p.yx + 33.33);
+	return fract((p.x + p.y) * p.x);
+}
+
+
+float get_layered_pixel_multiplier(bool top_surface) {
+	if (!top_surface) {
+		return 1.0;
+	}
+	float camera_distance = length(CAMERA_POSITION_WORLD - world_position);
+	float near_fade = 1.0 - smoothstep(
+		max(near_detail_end - 10.0, 0.0),
+		near_detail_end,
+		camera_distance
+	);
+	float mid_fade = 1.0 - smoothstep(
+		max(mid_detail_end - 18.0, near_detail_end),
+		mid_detail_end,
+		camera_distance
+	);
+	float safe_tile_size = max(micro_tile_size, 0.001);
+	vec2 micro_cell = floor(world_position.xz / safe_tile_size);
+	vec2 mid_cell = floor(world_position.xz / (safe_tile_size * 4.0));
+	float micro_value = (stable_hash(micro_cell) - 0.5) * 2.0;
+	float mid_value = (stable_hash(mid_cell + vec2(73.0, 29.0)) - 0.5) * 2.0;
+	float micro_detail = micro_value * micro_detail_strength * near_fade;
+	float mid_detail = mid_value * mid_detail_strength * mid_fade;
+	return clamp(1.0 + micro_detail + mid_detail, 0.72, 1.28);
+}
+
+
 void fragment() {
 	vec3 normal_value = normalize(world_normal);
 	float altitude = get_altitude(world_position);
@@ -106,6 +147,7 @@ void fragment() {
 		texture_brightness,
 		texture_value
 	);
+	pixel_brightness *= get_layered_pixel_multiplier(top_surface);
 
 	vec3 base_color = clamp(vertex_base_color, vec3(0.0), vec3(1.0));
 	float slope = 1.0 - abs(normal_value.y);
@@ -127,11 +169,17 @@ void fragment() {
 		strata * strata_strength * rock_weight
 	);
 
-	// Real scene lighting supplies direction and shadows. This only keeps vertical
-	// faces readable, instead of multiplying them by a nearly black fake light.
-	float surface_readability = mix(0.86, 1.0, smoothstep(0.0, 0.65, normal_value.y));
-	ALBEDO = clamp(base_color * pixel_brightness * surface_readability, vec3(0.0), vec3(1.0));
+	float surface_readability = mix(
+		0.88,
+		1.0,
+		smoothstep(0.0, 0.65, normal_value.y)
+	);
+	ALBEDO = clamp(
+		base_color * pixel_brightness * surface_readability,
+		vec3(0.0),
+		vec3(1.0)
+	);
 	ROUGHNESS = 0.96;
 	METALLIC = 0.0;
-	SPECULAR = 0.06;
+	SPECULAR = 0.05;
 }
