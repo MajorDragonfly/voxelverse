@@ -13,8 +13,8 @@ uniform sampler2D stone_texture : source_color, filter_nearest, repeat_enable;
 uniform float top_texture_scale : hint_range(0.05, 4.0, 0.05) = 0.75;
 uniform float side_texture_scale : hint_range(0.05, 4.0, 0.05) = 0.70;
 uniform float palette_steps : hint_range(2.0, 12.0, 1.0) = 8.0;
-uniform float texture_darkness : hint_range(0.20, 1.00, 0.01) = 0.42;
-uniform float texture_brightness : hint_range(0.80, 1.50, 0.01) = 1.06;
+uniform float texture_darkness : hint_range(0.20, 1.00, 0.01) = 0.82;
+uniform float texture_brightness : hint_range(0.80, 1.50, 0.01) = 1.08;
 
 uniform bool spherical_planet = false;
 uniform vec3 planet_center = vec3(0.0);
@@ -29,9 +29,9 @@ uniform vec3 snow_color : source_color = vec3(0.78, 0.84, 0.83);
 uniform float rock_slope_start = 0.28;
 uniform float rock_slope_end = 0.62;
 uniform float macro_color_strength = 0.16;
-uniform float strata_strength = 0.18;
-uniform float snow_start_altitude = 10.2;
-uniform float snow_end_altitude = 14.2;
+uniform float strata_strength = 0.10;
+uniform float snow_start_altitude = 10.8;
+uniform float snow_end_altitude = 14.3;
 
 varying vec3 world_position;
 varying vec3 world_normal;
@@ -41,10 +41,6 @@ varying vec3 vertex_base_color;
 void vertex() {
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	world_normal = normalize(MODEL_NORMAL_MATRIX * NORMAL);
-
-	// Terrain colors are authored by the procedural mesher as vertex colors.
-	// Earlier shaders incorrectly read UV coordinates as RGB, which washed the
-	// entire world to pale texture values.
 	vertex_base_color = COLOR.rgb;
 }
 
@@ -57,16 +53,9 @@ float get_altitude(vec3 position_value) {
 }
 
 
-vec2 get_planar_uv(
-	vec3 position_value,
-	vec3 normal_value,
-	float scale_value
-) {
+vec2 get_planar_uv(vec3 position_value, vec3 normal_value, float scale_value) {
 	vec3 absolute_normal = abs(normal_value);
-	if (
-		absolute_normal.y >= absolute_normal.x
-		&& absolute_normal.y >= absolute_normal.z
-	) {
+	if (absolute_normal.y >= absolute_normal.x && absolute_normal.y >= absolute_normal.z) {
 		return position_value.xz * scale_value;
 	}
 	if (absolute_normal.x >= absolute_normal.z) {
@@ -76,31 +65,14 @@ vec2 get_planar_uv(
 }
 
 
-float quantize_value(float value, float steps) {
-	float safe_steps = max(steps - 1.0, 1.0);
-	return floor(clamp(value, 0.0, 1.0) * safe_steps + 0.5) / safe_steps;
-}
-
-
 float texture_luminance(vec3 color_value) {
 	return dot(color_value, vec3(0.299, 0.587, 0.114));
 }
 
 
-float face_light(vec3 normal_value) {
-	if (normal_value.y > 0.50) {
-		return 1.05;
-	}
-	if (normal_value.x > 0.50) {
-		return 0.92;
-	}
-	if (normal_value.x < -0.50) {
-		return 0.80;
-	}
-	if (normal_value.z > 0.50) {
-		return 0.87;
-	}
-	return 0.74;
+float quantize_value(float value, float steps) {
+	float safe_steps = max(steps - 1.0, 1.0);
+	return floor(clamp(value, 0.0, 1.0) * safe_steps + 0.5) / safe_steps;
 }
 
 
@@ -118,29 +90,27 @@ void fragment() {
 		sampled_texture = coast_surface
 			? texture(sand_texture, pixel_uv).rgb
 			: texture(grass_texture, pixel_uv).rgb;
-	} else if (side_surface) {
+	} else {
 		bool rocky_surface = altitude >= rocky_height;
 		sampled_texture = rocky_surface
 			? texture(stone_texture, pixel_uv).rgb
 			: texture(dirt_texture, pixel_uv).rgb;
-	} else {
-		sampled_texture = texture(dirt_texture, pixel_uv).rgb;
 	}
 
-	float quantized_luminance = quantize_value(
+	float texture_value = quantize_value(
 		texture_luminance(sampled_texture),
 		palette_steps
 	);
 	float pixel_brightness = mix(
-		texture_darkness,
+		max(texture_darkness, 0.78),
 		texture_brightness,
-		quantized_luminance
+		texture_value
 	);
 
 	vec3 base_color = clamp(vertex_base_color, vec3(0.0), vec3(1.0));
 	float slope = 1.0 - abs(normal_value.y);
 	float rock_weight = smoothstep(rock_slope_start, rock_slope_end, slope);
-	rock_weight *= side_surface ? 0.72 : 0.30;
+	rock_weight *= side_surface ? 0.58 : 0.22;
 	base_color = mix(base_color, rock_color, rock_weight);
 
 	float snow_weight = smoothstep(
@@ -148,18 +118,20 @@ void fragment() {
 		snow_end_altitude,
 		altitude
 	);
-	base_color = mix(base_color, snow_color, snow_weight * 0.82);
+	base_color = mix(base_color, snow_color, snow_weight * 0.78);
 
-	float strata = step(0.56, fract(altitude * 0.72));
+	float strata = step(0.64, fract(altitude * 0.68));
 	base_color = mix(
 		base_color,
 		rock_strata_color,
 		strata * strata_strength * rock_weight
 	);
 
-	vec3 final_color = base_color * pixel_brightness * face_light(normal_value);
-	ALBEDO = clamp(final_color, vec3(0.0), vec3(1.0));
+	// Real scene lighting supplies direction and shadows. This only keeps vertical
+	// faces readable, instead of multiplying them by a nearly black fake light.
+	float surface_readability = mix(0.86, 1.0, smoothstep(0.0, 0.65, normal_value.y));
+	ALBEDO = clamp(base_color * pixel_brightness * surface_readability, vec3(0.0), vec3(1.0));
 	ROUGHNESS = 0.96;
 	METALLIC = 0.0;
-	SPECULAR = 0.08;
+	SPECULAR = 0.06;
 }
