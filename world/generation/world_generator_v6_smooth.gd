@@ -43,40 +43,40 @@ func get_terrain_height(world_x: float, world_z: float) -> float:
 	var erosion_scale: float = float(_planet_profile.get("erosion_scale", 1.0))
 
 	var regional_relief_strength: float = (
-		weights.x * 0.48
-		+ weights.y * 1.05
-		+ weights.z * 1.48
-		+ weights.w * 1.86
+		weights.x * 0.50
+		+ weights.y * 1.10
+		+ weights.z * 1.58
+		+ weights.w * 1.98
 	)
 	var terrain_height: float = SEA_LEVEL - 3.35
-	terrain_height += land_mass * 6.15
+	terrain_height += land_mass * 6.55
 	terrain_height += (
 		broad_relief
 		* regional_relief_strength
 		* relief_scale
 		* land_mass
 	)
-	terrain_height += weights.z * land_mass * 0.82 * relief_scale
+	terrain_height += weights.z * land_mass * 0.95 * relief_scale
 	terrain_height += (
 		weights.w
 		* land_mass
 		* ridge
-		* 6.6
+		* 7.10
 		* mountain_scale
 	)
 	terrain_height -= (
 		weights.w
 		* land_mass
 		* smoothstep(0.58, 0.90, valley_sample)
-		* 1.55
+		* 1.62
 		* erosion_scale
 	)
 
 	var river_strength: float = get_river_strength(world_x, world_z)
-	terrain_height -= river_strength * land_mass * lerpf(0.85, 2.15, weights.w)
+	terrain_height -= river_strength * land_mass * lerpf(0.90, 2.30, weights.w)
 
 	var lake_strength: float = get_lake_strength(world_x, world_z)
-	var lake_target: float = SEA_LEVEL - lerpf(0.30, 1.05, lake_strength)
+	var lake_target: float = SEA_LEVEL - lerpf(0.30, 1.08, lake_strength)
 	terrain_height = lerpf(terrain_height, lake_target, lake_strength * 0.82)
 
 	var micro_relief: float = _micro_relief_noise.get_noise_2d(world_x, world_z)
