@@ -31,7 +31,7 @@ jobs:
         run: |
           set -euo pipefail
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --editor --path . --quit-after 15 \
+          "$GODOT" --headless --path . --import \
             2>&1 | tee /tmp/godot-import.log
           ! grep -E \
             "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
