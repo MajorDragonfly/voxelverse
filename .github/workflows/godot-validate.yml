@@ -10,7 +10,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
 
     steps:
       - name: Check out repository
@@ -31,7 +31,7 @@ jobs:
         run: |
           set -euo pipefail
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --editor --path . --quit-after 3 \
+          "$GODOT" --headless --editor --path . --quit-after 4 \
             2>&1 | tee /tmp/godot-import.log
           ! grep -E "SCRIPT ERROR|Parse Error|Failed loading resource" \
             /tmp/godot-import.log
@@ -43,3 +43,29 @@ jobs:
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
           "$GODOT" --headless --path . \
             --script res://tests/creature_v5_smoke_test.gd
+
+      - name: Run World Evolution V2 smoke test
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          timeout 90s "$GODOT" --headless --path . \
+            --script res://tests/world_evolution_v2_ci_test.gd \
+            > /tmp/world-evolution-test.log 2>&1
+          TEST_STATUS=$?
+          if [ "$TEST_STATUS" -eq 124 ]; then
+            echo "World Evolution V2 smoke test timed out after 90 seconds." \
+              >> /tmp/world-evolution-test.log
+          fi
+          grep -E "World Evolution|World sample|World test stage|ERROR|SCRIPT ERROR|Parse Error|failed|outside|invalid|lacks|fewer|seed|timed out" \
+            /tmp/world-evolution-test.log || cat /tmp/world-evolution-test.log
+          exit "$TEST_STATUS"
+
+      - name: Upload world validation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: world-evolution-diagnostics
+          path: /tmp/world-evolution-test.log
+          if-no-files-found: warn
+          retention-days: 3

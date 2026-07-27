@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://dyhavywwdec27"]
 
-[ext_resource type="Script" uid="uid://binhy5f1mbskn" path="res://world/resources/terrain/terrain_chunk.gd" id="1_fj3vv"]
+[ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v2.gd" id="1_fj3vv"]
 [ext_resource type="Script" uid="uid://cyk0jajpwlxdp" path="res://world/visuals/terrain/terrain_chunk_visuals.gd" id="2_visuals"]
-[ext_resource type="Script" uid="uid://c2bvee35okr1c" path="res://world/visuals/scenery/terrain_scenic_dressing.gd" id="3_scenery"]
+[ext_resource type="Script" path="res://world/visuals/scenery/terrain_scenic_dressing_v2.gd" id="3_scenery"]
+[ext_resource type="Script" path="res://world/visuals/scenery/procedural_biome_assets.gd" id="4_biome_assets"]
 
 [node name="TerrainChunk" type="StaticBody3D" unique_id=1870033249]
 script = ExtResource("1_fj3vv")
@@ -17,14 +18,28 @@ script = ExtResource("1_fj3vv")
 
 [node name="Visuals" type="Node" parent="." unique_id=1523847493]
 script = ExtResource("2_visuals")
-enable_terrain_shader = false
-top_texture_scale = 0.25
-side_texture_scale = 0.25
-texture_darkness = 0.5
-texture_brightness = 1.1800000000000002
+enable_terrain_shader = true
+enable_water_shader = true
+terrain_palette_steps = 5
+top_texture_scale = 0.34
+side_texture_scale = 0.31
+texture_darkness = 0.54
+texture_brightness = 1.17
+water_subdivisions = 24
+wave_height = 0.10
+wave_speed = 0.62
+secondary_wave_height = 0.035
+secondary_wave_speed = 1.05
+water_roughness = 0.15
 
 [node name="ScenicDressing" type="Node3D" parent="." unique_id=1279601097]
 script = ExtResource("3_scenery")
+grass_attempts_per_chunk = 150
+rock_attempts_per_chunk = 28
+spire_attempts_per_chunk = 4
 grass_texture_scale = 1.0
 grass_texture_darkness = 0.45
 grass_texture_brightness = 1.3
+
+[node name="ProceduralBiomeAssets" type="Node3D" parent="."]
+script = ExtResource("4_biome_assets")

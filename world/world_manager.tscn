@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://d1vpfpfcqte7w"]
 
-[ext_resource type="Script" uid="uid://bls5l08ffucwx" path="res://world/world_manager.gd" id="1_xf7qu"]
+[ext_resource type="Script" path="res://world/world_manager_v2.gd" id="1_xf7qu"]
 
 [node name="WorldManager" type="Node3D" unique_id=583502211]
 script = ExtResource("1_xf7qu")
 render_distance = 2
+chunks_generated_per_frame = 1
+unload_hysteresis_chunks = 1
