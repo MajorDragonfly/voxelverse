@@ -89,6 +89,18 @@ func _run_world_generator_checks() -> void:
 			first_samples.append(height)
 			biome_counts[biome] = int(biome_counts.get(biome, 0)) + 1
 
+	print(
+		"World sample seed %d: height %.3f..%.3f, range %.3f, biomes %d, samples %d"
+		% [
+			PRIMARY_TEST_SEED,
+			minimum_height,
+			maximum_height,
+			maximum_height - minimum_height,
+			biome_counts.size(),
+			first_samples.size(),
+		]
+	)
+
 	_expect(
 		maximum_height - minimum_height >= 8.0,
 		"The sampled world lacks sufficient elevation diversity."
@@ -127,6 +139,11 @@ func _run_world_generator_checks() -> void:
 				changed_samples += 1
 			comparison_index += 1
 
+	print(
+		"World sample seed comparison: %d of %d terrain samples changed"
+		% [changed_samples, first_samples.size()]
+	)
+
 	_expect(
 		changed_samples > first_samples.size() / 3,
 		"Changing the seed did not materially change the world layout."
@@ -150,7 +167,9 @@ func _run_scene_resource_checks() -> void:
 	for script_path in [
 		"res://world/generation/world_generator_v2.gd",
 		"res://world/world_manager_v2.gd",
+		"res://world/resources/terrain/terrain_chunk_v2.gd",
 		"res://world/visuals/scenery/procedural_biome_assets.gd",
+		"res://world/visuals/scenery/terrain_scenic_dressing_v2.gd",
 		"res://world/visuals/world_presentation_director.gd",
 		"res://creatures/runtime/procedural_locomotion_animator.gd",
 		"res://core/display_settings.gd",
