@@ -1,6 +1,8 @@
 extends SceneTree
 
 const TEST_SEED: int = 606_606
+const COARSE_STEP: float = 8.0
+const FINE_STEP: float = 0.25
 
 var _generator: Node
 var _failures: Array[String] = []
@@ -32,22 +34,79 @@ func _test_planet_profile() -> void:
 
 func _test_continuous_region_height() -> void:
 	_generator.call("set_seed_override", TEST_SEED)
-	var maximum_adjacent_jump: float = 0.0
+	var maximum_coarse_jump: float = 0.0
+	var maximum_fine_jump: float = 0.0
+	var maximum_region_weight_delta: float = 0.0
+
 	for world_z in [-768.0, -256.0, 0.0, 256.0, 768.0]:
+		var previous_x: float = -1200.0
 		var previous_height: float = float(
-			_generator.call("get_terrain_height", -1200.0, world_z)
+			_generator.call("get_terrain_height", previous_x, world_z)
 		)
-		for world_x in range(-1192, 1201, 8):
+		var previous_profile: Dictionary = _generator.call(
+			"get_region_profile",
+			previous_x,
+			world_z
+		)
+		var previous_weights: Vector4 = previous_profile.get(
+			"weights",
+			Vector4(1.0, 0.0, 0.0, 0.0)
+		)
+
+		for world_x_value in range(-1192, 1201, 8):
+			var world_x: float = float(world_x_value)
 			var height: float = float(
-				_generator.call("get_terrain_height", float(world_x), world_z)
+				_generator.call("get_terrain_height", world_x, world_z)
 			)
-			maximum_adjacent_jump = maxf(
-				maximum_adjacent_jump,
-				absf(height - previous_height)
+			var coarse_jump: float = absf(height - previous_height)
+			maximum_coarse_jump = maxf(maximum_coarse_jump, coarse_jump)
+
+			var profile: Dictionary = _generator.call(
+				"get_region_profile",
+				world_x,
+				world_z
 			)
+			var weights: Vector4 = profile.get(
+				"weights",
+				Vector4(1.0, 0.0, 0.0, 0.0)
+			)
+			maximum_region_weight_delta = maxf(
+				maximum_region_weight_delta,
+				(weights - previous_weights).length()
+			)
+
+			# A mountain or cliff may change several metres over eight world units.
+			# A formula seam instead produces a large jump at sub-unit spacing.
+			if coarse_jump > 1.5:
+				var fine_previous: float = previous_height
+				var fine_x: float = previous_x + FINE_STEP
+				while fine_x <= world_x + 0.001:
+					var fine_height: float = float(
+						_generator.call("get_terrain_height", fine_x, world_z)
+					)
+					maximum_fine_jump = maxf(
+						maximum_fine_jump,
+						absf(fine_height - fine_previous)
+					)
+					fine_previous = fine_height
+					fine_x += FINE_STEP
+
+			previous_x = world_x
 			previous_height = height
-	print("World Runtime V6 maximum adjacent logical-height jump: ", maximum_adjacent_jump)
-	_expect(maximum_adjacent_jump < 4.5, "Continuous region field contains an extreme height seam.")
+			previous_weights = weights
+
+	print(
+		"World Runtime V6 continuity: coarse %.3f, fine %.3f, weight delta %.3f"
+		% [maximum_coarse_jump, maximum_fine_jump, maximum_region_weight_delta]
+	)
+	_expect(
+		maximum_fine_jump < 1.20,
+		"Continuous region field contains a sub-unit height seam."
+	)
+	_expect(
+		maximum_region_weight_delta < 0.18,
+		"Region blend weights change too abruptly."
+	)
 
 
 func _test_species_catalogue_seeds() -> void:
