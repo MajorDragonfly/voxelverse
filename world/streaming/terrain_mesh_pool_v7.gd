@@ -34,7 +34,6 @@ static func get_far_material() -> StandardMaterial3D:
 		_far_material.vertex_color_use_as_albedo = true
 		_far_material.roughness = 0.98
 		_far_material.metallic = 0.0
-		_far_material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 		_far_material.cull_mode = BaseMaterial3D.CULL_BACK
 	return _far_material
 
