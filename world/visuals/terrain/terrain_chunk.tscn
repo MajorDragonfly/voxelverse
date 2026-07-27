@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v4.gd" id="1_terrain"]
 [ext_resource type="Script" uid="uid://cyk0jajpwlxdp" path="res://world/visuals/terrain/terrain_chunk_visuals.gd" id="2_visuals"]
-[ext_resource type="Script" path="res://world/visuals/scenery/procedural_ecosystem_v4.gd" id="3_ecosystem"]
-[ext_resource type="Script" path="res://world/visuals/terrain/micro_voxel_surface_v5.gd" id="4_micro_surface"]
+[ext_resource type="Script" path="res://world/visuals/scenery/procedural_ecosystem_v6.gd" id="3_ecosystem"]
+[ext_resource type="Script" path="res://world/visuals/terrain/micro_voxel_surface_v6.gd" id="4_micro_surface"]
+[ext_resource type="Script" path="res://world/streaming/chunk_lod_controller_v6.gd" id="5_lod"]
 
 [node name="TerrainChunk" type="StaticBody3D" unique_id=1870033249]
 script = ExtResource("1_terrain")
@@ -22,28 +23,37 @@ script = ExtResource("2_visuals")
 enable_terrain_shader = true
 enable_water_shader = true
 terrain_palette_steps = 8
-top_texture_scale = 0.75
-side_texture_scale = 0.70
-texture_darkness = 0.42
-texture_brightness = 1.06
-water_subdivisions = 16
-wave_height = 0.06
-wave_speed = 0.44
-secondary_wave_height = 0.02
-secondary_wave_speed = 0.78
-water_roughness = 0.24
+top_texture_scale = 0.88
+side_texture_scale = 0.82
+texture_darkness = 0.84
+texture_brightness = 1.07
+water_subdivisions = 24
+wave_height = 0.045
+wave_speed = 0.40
+secondary_wave_height = 0.016
+secondary_wave_speed = 0.72
+water_roughness = 0.16
 
-[node name="ProceduralEcosystemV4" type="Node3D" parent="."]
+[node name="ProceduralEcosystemV6" type="Node3D" parent="."]
 script = ExtResource("3_ecosystem")
-tree_attempts = 26
-rock_attempts = 12
-ground_attempts = 44
-tree_visibility_distance = 150.0
-detail_visibility_distance = 82.0
+tree_attempts = 34
+rock_attempts = 14
+ground_attempts = 34
+tree_visibility_distance = 142.0
+detail_visibility_distance = 78.0
+forest_density_multiplier = 1.45
+cliff_attempts = 10
+plant_field_attempts = 46
 
-[node name="MicroVoxelSurfaceV5" type="Node3D" parent="."]
+[node name="MicroVoxelSurfaceV6" type="Node3D" parent="."]
 script = ExtResource("4_micro_surface")
-build_distance = 52.0
-release_distance = 72.0
-instances_per_frame = 256
-surface_lift = 0.012
+build_distance = 44.0
+release_distance = 62.0
+instances_per_frame = 384
+surface_lift = 0.018
+
+[node name="ChunkLODControllerV6" type="Node" parent="."]
+script = ExtResource("5_lod")
+near_distance = 42.0
+mid_distance = 74.0
+update_interval = 0.4

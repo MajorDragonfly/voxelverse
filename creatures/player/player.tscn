@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cflvob4gek5k0"]
 
-[ext_resource type="Script" uid="uid://cn3lphpcrkgub" path="res://creatures/player/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://creatures/player/player_v6.gd" id="1_player"]
 [ext_resource type="Script" path="res://creatures/runtime/creature_runtime_visual.gd" id="2_runtime"]
 [ext_resource type="Script" path="res://creatures/runtime/procedural_locomotion_animator_v2.gd" id="3_locomotion"]
 [ext_resource type="Script" path="res://creatures/runtime/creature_heading_controller.gd" id="4_heading"]
@@ -19,6 +19,8 @@ script = ExtResource("1_player")
 show_development_debug_overlay = false
 enable_simulation_speed_controls = false
 enable_creature_builder_debug_keys = false
+maximum_step_height = 0.58
+step_floor_probe = 0.10
 
 [node name="BodyMesh" type="MeshInstance3D" parent="." unique_id=442709546]
 visible = false

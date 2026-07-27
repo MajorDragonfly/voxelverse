@@ -34,8 +34,32 @@ jobs:
           "$GODOT" --headless --path . --import \
             2>&1 | tee /tmp/godot-import.log
           ! grep -E \
-            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
+            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
             /tmp/godot-import.log
+
+      - name: Run main scene runtime smoke test
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          timeout 45s "$GODOT" --headless --path . --quit-after 240 \
+            > /tmp/main-runtime-test.log 2>&1
+          TEST_STATUS=$?
+
+          if [ "$TEST_STATUS" -eq 124 ]; then
+            echo "Main runtime smoke test timed out after 45 seconds." \
+              >> /tmp/main-runtime-test.log
+            TEST_STATUS=1
+          fi
+
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
+            /tmp/main-runtime-test.log; then
+            TEST_STATUS=1
+          fi
+
+          cat /tmp/main-runtime-test.log
+          exit "$TEST_STATUS"
 
       - name: Run Creature V5 smoke test
         shell: bash
@@ -72,11 +96,38 @@ jobs:
 
           exit "$TEST_STATUS"
 
+      - name: Run World Runtime V6 architecture test
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          timeout 90s "$GODOT" --headless --path . \
+            --script res://tests/world_runtime_v6_test.gd \
+            > /tmp/world-runtime-v6-test.log 2>&1
+          TEST_STATUS=$?
+
+          if [ "$TEST_STATUS" -eq 124 ]; then
+            echo "World Runtime V6 test timed out after 90 seconds." \
+              >> /tmp/world-runtime-v6-test.log
+          fi
+
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
+            /tmp/world-runtime-v6-test.log; then
+            TEST_STATUS=1
+          fi
+
+          cat /tmp/world-runtime-v6-test.log
+          exit "$TEST_STATUS"
+
       - name: Upload world validation diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: world-evolution-diagnostics
-          path: /tmp/world-evolution-test.log
+          path: |
+            /tmp/main-runtime-test.log
+            /tmp/world-evolution-test.log
+            /tmp/world-runtime-v6-test.log
           if-no-files-found: warn
           retention-days: 3
