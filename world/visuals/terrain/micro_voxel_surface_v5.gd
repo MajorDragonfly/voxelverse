@@ -130,7 +130,7 @@ func _build_next_batch() -> void:
 
 func _build_instance(instance_index: int) -> void:
 	var cell_x: int = instance_index % _cells_x
-	var cell_z: int = instance_index / _cells_x
+	var cell_z: int = int(instance_index / _cells_x)
 	var local_x: float = (
 		float(cell_x) * _cell_size
 		- _half_width
@@ -179,7 +179,8 @@ func _build_instance(instance_index: int) -> void:
 		world_z,
 		logical_height
 	)
-	var variation: float = float((hash_value / 7) % 9 - 4) * 0.012
+	var variation_index: int = int(hash_value / 7) % 9 - 4
+	var variation: float = float(variation_index) * 0.012
 	var detail_color := Color(
 		clampf(base_color.r + variation, 0.0, 1.0),
 		clampf(base_color.g + variation, 0.0, 1.0),
@@ -200,7 +201,10 @@ func _release_surface() -> void:
 
 
 func _stable_hash(cell_x: int, cell_z: int) -> int:
-	var chunk_coordinates: Vector2i = _chunk.get("chunk_coordinates")
+	var chunk_coordinates := Vector2i.ZERO
+	var coordinate_value: Variant = _chunk.get("chunk_coordinates")
+	if coordinate_value is Vector2i:
+		chunk_coordinates = coordinate_value
 	var value: int = (
 		cell_x * 73_856_093
 		+ cell_z * 19_349_663
@@ -271,7 +275,8 @@ static func _append_quad(
 	d: Vector3,
 	normal: Vector3
 ) -> void:
-	for vertex in [a, b, c, a, c, d]:
+	var vertices: Array[Vector3] = [a, b, c, a, c, d]
+	for vertex in vertices:
 		surface.set_color(Color.WHITE)
 		surface.set_normal(normal)
 		surface.add_vertex(vertex)
