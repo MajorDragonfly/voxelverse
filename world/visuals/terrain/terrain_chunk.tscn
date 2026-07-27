@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://dyhavywwdec27"]
 
-[ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v3.gd" id="1_terrain"]
+[ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v4.gd" id="1_terrain"]
 [ext_resource type="Script" uid="uid://cyk0jajpwlxdp" path="res://world/visuals/terrain/terrain_chunk_visuals.gd" id="2_visuals"]
-[ext_resource type="Script" path="res://world/visuals/scenery/procedural_ecosystem_v3.gd" id="3_ecosystem"]
+[ext_resource type="Script" path="res://world/visuals/scenery/procedural_ecosystem_v4.gd" id="3_ecosystem"]
 
 [node name="TerrainChunk" type="StaticBody3D" unique_id=1870033249]
 script = ExtResource("1_terrain")
+cell_size = 0.5
 
 [node name="TerrainMesh" type="MeshInstance3D" parent="." unique_id=1378419624]
 
@@ -19,22 +20,22 @@ script = ExtResource("1_terrain")
 script = ExtResource("2_visuals")
 enable_terrain_shader = true
 enable_water_shader = true
-terrain_palette_steps = 7
-top_texture_scale = 0.24
-side_texture_scale = 0.22
-texture_darkness = 0.64
-texture_brightness = 1.12
-water_subdivisions = 32
-wave_height = 0.075
-wave_speed = 0.46
-secondary_wave_height = 0.025
-secondary_wave_speed = 0.82
-water_roughness = 0.22
+terrain_palette_steps = 8
+top_texture_scale = 0.75
+side_texture_scale = 0.70
+texture_darkness = 0.42
+texture_brightness = 1.06
+water_subdivisions = 16
+wave_height = 0.06
+wave_speed = 0.44
+secondary_wave_height = 0.02
+secondary_wave_speed = 0.78
+water_roughness = 0.24
 
-[node name="ProceduralEcosystemV3" type="Node3D" parent="."]
+[node name="ProceduralEcosystemV4" type="Node3D" parent="."]
 script = ExtResource("3_ecosystem")
-canopy_attempts = 30
-rock_attempts = 24
-ground_cluster_attempts = 38
-tree_visibility_distance = 230.0
-detail_visibility_distance = 110.0
+tree_attempts = 16
+rock_attempts = 10
+ground_attempts = 18
+tree_visibility_distance = 150.0
+detail_visibility_distance = 82.0

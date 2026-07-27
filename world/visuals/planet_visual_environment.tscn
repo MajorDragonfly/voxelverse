@@ -6,16 +6,18 @@
 
 [node name="PlanetVisualEnvironment" type="Node3D"]
 script = ExtResource("1_visual")
-sun_elevation_degrees = 43.0
+enable_debug_mode_keys = false
+sun_elevation_degrees = 46.0
 sun_azimuth_degrees = -38.0
-surface_sun_energy = 1.34
-surface_shadow_distance = 240.0
-surface_fog_begin = 88.0
-surface_fog_end = 265.0
-surface_fog_strength = 0.70
-enable_surface_volumetric_fog = true
-surface_volumetric_fog_density = 0.0018
-surface_volumetric_fog_length = 220.0
+surface_sun_energy = 1.10
+surface_sun_color = Color(1, 0.92, 0.80, 1)
+surface_shadow_distance = 180.0
+surface_fog_begin = 72.0
+surface_fog_end = 225.0
+surface_fog_strength = 0.44
+enable_surface_volumetric_fog = false
+surface_volumetric_fog_density = 0.0008
+surface_volumetric_fog_length = 180.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_placeholder")
