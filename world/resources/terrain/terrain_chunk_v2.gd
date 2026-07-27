@@ -2,18 +2,22 @@ extends "res://world/resources/terrain/terrain_chunk.gd"
 
 
 func _get_top_surface_index(biome: int) -> int:
-	match biome:
+	if biome in [
 		WorldGenerator.Biome.OCEAN,
 		WorldGenerator.Biome.COAST,
 		WorldGenerator.Biome.LAKE,
-		WorldGenerator.Biome.DESERT:
-			return SURFACE_SAND_TOP
+		WorldGenerator.Biome.DESERT,
+	]:
+		return SURFACE_SAND_TOP
+
+	if biome in [
 		WorldGenerator.Biome.ROCKY_HIGHLANDS,
 		WorldGenerator.Biome.ALPINE,
-		WorldGenerator.Biome.SNOW:
-			return SURFACE_STONE_TOP
-		_:
-			return SURFACE_GRASS_TOP
+		WorldGenerator.Biome.SNOW,
+	]:
+		return SURFACE_STONE_TOP
+
+	return SURFACE_GRASS_TOP
 
 
 func _get_side_surface_index(
