@@ -10,7 +10,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
 
     steps:
       - name: Check out repository
@@ -31,7 +31,7 @@ jobs:
         run: |
           set -euo pipefail
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --editor --path . --quit-after 3 \
+          "$GODOT" --headless --editor --path . --quit-after 4 \
             2>&1 | tee /tmp/godot-import.log
           ! grep -E "SCRIPT ERROR|Parse Error|Failed loading resource" \
             /tmp/godot-import.log
@@ -43,3 +43,11 @@ jobs:
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
           "$GODOT" --headless --path . \
             --script res://tests/creature_v5_smoke_test.gd
+
+      - name: Run World Evolution V2 smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          "$GODOT" --headless --path . \
+            --script res://tests/world_evolution_v2_smoke_test.gd
