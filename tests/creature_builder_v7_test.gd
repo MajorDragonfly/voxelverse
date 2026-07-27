@@ -77,9 +77,9 @@ func _test_save_roundtrip() -> void:
 func _test_surface_sockets() -> void:
 	var blueprint: Dictionary = AssemblyV7.create_default()
 	Anatomy.ensure_anchors(blueprint, true)
-	var part_index: int = Blueprint.add_part(blueprint, "horns_short")
+	var part_index: int = Blueprint.add_part(blueprint, "horns_small")
 	if part_index < 0:
-		part_index = Blueprint.add_part(blueprint, "decor_crystal")
+		part_index = Blueprint.add_part(blueprint, "decor_crystals")
 	_expect(part_index >= 0, "No test part could be added for socket validation.")
 	if part_index < 0:
 		return
