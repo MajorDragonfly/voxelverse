@@ -51,7 +51,8 @@ func _get_rock_probability(biome: int) -> float:
 			return 0.28
 		WorldGenerator.Biome.GRASSLAND:
 			return 0.18
-		WorldGenerator.Biome.WETLAND,
+		WorldGenerator.Biome.WETLAND:
+			return 0.08
 		WorldGenerator.Biome.SWAMP:
 			return 0.08
 		_:
@@ -104,7 +105,8 @@ func _get_grass_color(
 			base_color = base_color.lerp(Color(0.11, 0.34, 0.15, 1.0), 0.24)
 		WorldGenerator.Biome.SWAMP:
 			base_color = base_color.lerp(Color(0.10, 0.26, 0.16, 1.0), 0.40)
-		WorldGenerator.Biome.WETLAND,
+		WorldGenerator.Biome.WETLAND:
+			base_color = base_color.lerp(Color(0.08, 0.30, 0.10, 1.0), 0.32)
 		WorldGenerator.Biome.RIVER:
 			base_color = base_color.lerp(Color(0.08, 0.30, 0.10, 1.0), 0.32)
 		WorldGenerator.Biome.SAVANNA:
@@ -123,15 +125,18 @@ func _get_rock_color(
 ) -> Color:
 	var base_color: Color = WorldGenerator.get_world_rock_color()
 
-	match biome:
+	if biome in [
 		WorldGenerator.Biome.ROCKY_HIGHLANDS,
 		WorldGenerator.Biome.ALPINE,
-		WorldGenerator.Biome.SNOW:
-			base_color = base_color.lerp(Color(0.28, 0.29, 0.30, 1.0), 0.22)
-		WorldGenerator.Biome.DESERT:
-			base_color = base_color.lerp(Color(0.52, 0.37, 0.23, 1.0), 0.28)
+		WorldGenerator.Biome.SNOW,
+	]:
+		base_color = base_color.lerp(Color(0.28, 0.29, 0.30, 1.0), 0.22)
+	elif biome == WorldGenerator.Biome.DESERT:
+		base_color = base_color.lerp(Color(0.52, 0.37, 0.23, 1.0), 0.28)
+	elif biome in [
 		WorldGenerator.Biome.STEPPE,
-		WorldGenerator.Biome.SAVANNA:
-			base_color = base_color.lerp(Color(0.48, 0.31, 0.21, 1.0), 0.15)
+		WorldGenerator.Biome.SAVANNA,
+	]:
+		base_color = base_color.lerp(Color(0.48, 0.31, 0.21, 1.0), 0.15)
 
 	return _vary_color(base_color, random, 0.10)
