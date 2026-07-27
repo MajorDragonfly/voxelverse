@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cflvob4gek5k0"]
 
 [ext_resource type="Script" uid="uid://cn3lphpcrkgub" path="res://creatures/player/player.gd" id="1_gurkq"]
+[ext_resource type="Script" path="res://creatures/runtime/creature_runtime_visual.gd" id="2_runtime"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_triqp"]
 
@@ -14,6 +15,9 @@ mesh = SubResource("CapsuleMesh_triqp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2098556476]
 shape = SubResource("CapsuleShape3D_gurkq")
+
+[node name="CreatureRuntimeVisual" type="Node3D" parent="."]
+script = ExtResource("2_runtime")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=850860063]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.4, 0)
