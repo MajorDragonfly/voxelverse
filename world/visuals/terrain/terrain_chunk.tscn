@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v2.gd" id="1_fj3vv"]
 [ext_resource type="Script" uid="uid://cyk0jajpwlxdp" path="res://world/visuals/terrain/terrain_chunk_visuals.gd" id="2_visuals"]
-[ext_resource type="Script" uid="uid://c2bvee35okr1c" path="res://world/visuals/scenery/terrain_scenic_dressing.gd" id="3_scenery"]
+[ext_resource type="Script" path="res://world/visuals/scenery/terrain_scenic_dressing_v2.gd" id="3_scenery"]
 [ext_resource type="Script" path="res://world/visuals/scenery/procedural_biome_assets.gd" id="4_biome_assets"]
 
 [node name="TerrainChunk" type="StaticBody3D" unique_id=1870033249]
