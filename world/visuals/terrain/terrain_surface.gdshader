@@ -44,12 +44,14 @@ uniform float snow_end_altitude = 14.3;
 varying vec3 world_position;
 varying vec3 world_normal;
 varying vec3 vertex_base_color;
+varying float camera_distance_v7;
 
 
 void vertex() {
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	world_normal = normalize(MODEL_NORMAL_MATRIX * NORMAL);
 	vertex_base_color = COLOR.rgb;
+	camera_distance_v7 = distance(INV_VIEW_MATRIX[3].xyz, world_position);
 }
 
 
@@ -95,16 +97,15 @@ float get_layered_pixel_multiplier(bool top_surface) {
 	if (!top_surface) {
 		return 1.0;
 	}
-	float camera_distance = length(CAMERA_POSITION_WORLD - world_position);
 	float near_fade = 1.0 - smoothstep(
 		max(near_detail_end - 10.0, 0.0),
 		near_detail_end,
-		camera_distance
+		camera_distance_v7
 	);
 	float mid_fade = 1.0 - smoothstep(
 		max(mid_detail_end - 18.0, near_detail_end),
 		mid_detail_end,
-		camera_distance
+		camera_distance_v7
 	);
 	float safe_tile_size = max(micro_tile_size, 0.001);
 	vec2 micro_cell = floor(world_position.xz / safe_tile_size);
