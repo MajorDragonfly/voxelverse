@@ -37,6 +37,30 @@ jobs:
             "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
             /tmp/godot-import.log
 
+      - name: Run main scene runtime smoke test
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          timeout 45s "$GODOT" --headless --path . --quit-after 240 \
+            > /tmp/main-runtime-test.log 2>&1
+          TEST_STATUS=$?
+
+          if [ "$TEST_STATUS" -eq 124 ]; then
+            echo "Main runtime smoke test timed out after 45 seconds." \
+              >> /tmp/main-runtime-test.log
+            TEST_STATUS=1
+          fi
+
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
+            /tmp/main-runtime-test.log; then
+            TEST_STATUS=1
+          fi
+
+          cat /tmp/main-runtime-test.log
+          exit "$TEST_STATUS"
+
       - name: Run Creature V5 smoke test
         shell: bash
         run: |
@@ -102,6 +126,7 @@ jobs:
         with:
           name: world-evolution-diagnostics
           path: |
+            /tmp/main-runtime-test.log
             /tmp/world-evolution-test.log
             /tmp/world-runtime-v6-test.log
           if-no-files-found: warn
