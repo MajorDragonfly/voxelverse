@@ -11,9 +11,9 @@ const LONGITUDINAL_OVERLAP_MIN: float = 0.10
 const LONGITUDINAL_OVERLAP_MAX: float = 0.20
 
 
-# Schema 3 aligns longitudinal parts by their actual voxel bounds. Resetting a
-# root to +/- half body length is insufficient because mouths and tails have
-# different local origins and depths.
+# Schema 3 aligns longitudinal parts by their actual voxel bounds. V7 stores
+# this technical migration version under assembly instead of generation so the
+# active creature model contains no genetics-related metadata.
 static func normalize(
 	blueprint: Dictionary,
 	force_rebind: bool = false
@@ -27,9 +27,13 @@ static func normalize(
 	)
 	body_shape.z *= SpineProfile.get_body_length_scale(blueprint)
 
+	var assembly: Dictionary = blueprint.get("assembly", {})
+	var uses_assembly_schema: bool = int(assembly.get("schema", 0)) >= 7
 	var generation: Dictionary = blueprint.get("generation", {})
 	var source_schema_version: int = int(
-		generation.get("attachment_schema_version", 0)
+		assembly.get("attachment_schema_version", 0)
+		if uses_assembly_schema
+		else generation.get("attachment_schema_version", 0)
 	)
 	var migrate_connections: bool = (
 		source_schema_version < ATTACHMENT_SCHEMA_VERSION
@@ -68,8 +72,13 @@ static func normalize(
 		changed = _repair_longitudinal_connections(blueprint, body_shape) or changed
 
 	if migrate_connections:
-		generation["attachment_schema_version"] = ATTACHMENT_SCHEMA_VERSION
-		blueprint["generation"] = generation
+		if uses_assembly_schema:
+			assembly["attachment_schema_version"] = ATTACHMENT_SCHEMA_VERSION
+			blueprint["assembly"] = assembly
+			blueprint.erase("generation")
+		else:
+			generation["attachment_schema_version"] = ATTACHMENT_SCHEMA_VERSION
+			blueprint["generation"] = generation
 		changed = true
 
 	Anatomy.rebind_all_parts(blueprint)

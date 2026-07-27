@@ -71,17 +71,19 @@ const PHASE_ABILITIES: Dictionary = {
 # Jeder neue Durchlauf beginnt in der Kreaturenphase.
 var current_phase: int = Phase.CREATURE
 
-# V1: Standardmäßig erzeugt jeder Programmstart eine neue Welt.
-# Für reproduzierbare Tests kann use_random_world_seed auf false
-# gesetzt und fixed_world_seed angepasst werden.
+# Standardmäßig erzeugt jeder Programmstart ein neues deterministisches System.
+# Für reproduzierbare Tests kann use_random_world_seed auf false gesetzt werden.
 var use_random_world_seed: bool = true
 var fixed_world_seed: int = 12345
 
-# Der aktive Seed wird von WorldGenerator, Terrain, Biomen,
-# Objekten und Kreaturen als reproduzierbare Grundlage genutzt.
+# world_seed beschreibt immer den aktuell besuchten Planeten. system_seed bleibt
+# beim Wechsel zwischen Planeten stabil und reproduziert den gesamten Katalog.
 var world_seed: int = 12345
+var system_seed: int = 12345
+var current_planet_index: int = 0
 
 var _world_seed_initialized: bool = false
+var _system_seed_initialized: bool = false
 
 
 func _enter_tree() -> void:
@@ -93,27 +95,30 @@ func initialize_world_seed(
 	use_provided_seed: bool = false
 ) -> void:
 	if use_provided_seed:
-		set_world_seed(optional_seed, false)
+		var provided_seed: int = _sanitize_world_seed(optional_seed)
+		_set_system_seed_for_new_run(provided_seed)
+		set_world_seed(provided_seed, false)
 		return
-
 	if use_random_world_seed:
 		var random := RandomNumberGenerator.new()
 		random.randomize()
-
-		set_world_seed(
-			random.randi_range(
-				RANDOM_WORLD_SEED_MIN,
-				RANDOM_WORLD_SEED_MAX
-			),
-			false
+		var random_seed: int = random.randi_range(
+			RANDOM_WORLD_SEED_MIN,
+			RANDOM_WORLD_SEED_MAX
 		)
+		_set_system_seed_for_new_run(random_seed)
+		set_world_seed(random_seed, false)
 		return
-
-	set_world_seed(fixed_world_seed, false)
+	var fixed_seed: int = _sanitize_world_seed(fixed_world_seed)
+	_set_system_seed_for_new_run(fixed_seed)
+	set_world_seed(fixed_seed, false)
 
 
 func start_new_random_world() -> void:
 	use_random_world_seed = true
+	_world_seed_initialized = false
+	_system_seed_initialized = false
+	current_planet_index = 0
 	initialize_world_seed()
 	_rebuild_world_generator_if_available()
 
@@ -121,6 +126,9 @@ func start_new_random_world() -> void:
 func start_world_with_seed(new_world_seed: int) -> void:
 	use_random_world_seed = false
 	fixed_world_seed = _sanitize_world_seed(new_world_seed)
+	_world_seed_initialized = false
+	_system_seed_initialized = false
+	current_planet_index = 0
 	initialize_world_seed(fixed_world_seed, true)
 	_rebuild_world_generator_if_available()
 
@@ -131,18 +139,46 @@ func set_world_seed(
 ) -> void:
 	world_seed = _sanitize_world_seed(new_world_seed)
 	_world_seed_initialized = true
-
+	if not _system_seed_initialized:
+		system_seed = world_seed
+		_system_seed_initialized = true
 	print("GameState world seed: ", world_seed)
-
 	if rebuild_generator:
 		_rebuild_world_generator_if_available()
+
+
+func activate_planet(
+	new_system_seed: int,
+	planet_index: int,
+	planet_seed: int
+) -> void:
+	system_seed = _sanitize_world_seed(new_system_seed)
+	_system_seed_initialized = true
+	current_planet_index = maxi(planet_index, 0)
+	set_world_seed(planet_seed, false)
+	_rebuild_world_generator_if_available()
+	print(
+		"Activated planet %d in system %d with world seed %d"
+		% [current_planet_index, system_seed, world_seed]
+	)
 
 
 func get_world_seed() -> int:
 	if not _world_seed_initialized:
 		initialize_world_seed()
-
 	return world_seed
+
+
+func get_system_seed() -> int:
+	if not _system_seed_initialized:
+		get_world_seed()
+		system_seed = world_seed
+		_system_seed_initialized = true
+	return system_seed
+
+
+func get_current_planet_index() -> int:
+	return maxi(current_planet_index, 0)
 
 
 func has_ability(ability: StringName) -> bool:
@@ -150,7 +186,6 @@ func has_ability(ability: StringName) -> bool:
 		current_phase,
 		[]
 	)
-
 	return ability in available_abilities
 
 
@@ -158,9 +193,7 @@ func set_phase(new_phase: int) -> void:
 	if not PHASE_ABILITIES.has(new_phase):
 		push_warning("Unknown game phase: %s" % new_phase)
 		return
-
 	current_phase = new_phase
-
 	print("Game phase changed to: ", get_phase_name())
 
 
@@ -182,6 +215,12 @@ func get_phase_name() -> String:
 			return "Unknown"
 
 
+func _set_system_seed_for_new_run(new_seed: int) -> void:
+	system_seed = _sanitize_world_seed(new_seed)
+	_system_seed_initialized = true
+	current_planet_index = 0
+
+
 func _sanitize_world_seed(new_world_seed: int) -> int:
 	return clampi(
 		new_world_seed,
@@ -192,11 +231,10 @@ func _sanitize_world_seed(new_world_seed: int) -> int:
 
 func _rebuild_world_generator_if_available() -> void:
 	var world_generator := get_node_or_null("/root/WorldGenerator")
-
 	if world_generator == null:
 		return
-
-	if not world_generator.has_method("rebuild"):
+	if world_generator.has_method("set_world_seed"):
+		world_generator.call_deferred("set_world_seed", world_seed)
 		return
-
-	world_generator.call_deferred("rebuild")
+	if world_generator.has_method("rebuild"):
+		world_generator.call_deferred("rebuild")
