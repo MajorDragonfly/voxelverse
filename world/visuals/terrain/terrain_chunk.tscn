@@ -1,16 +1,21 @@
 [gd_scene format=3 uid="uid://dyhavywwdec27"]
 
-[ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v4.gd" id="1_terrain"]
-[ext_resource type="Script" uid="uid://cyk0jajpwlxdp" path="res://world/visuals/terrain/terrain_chunk_visuals.gd" id="2_visuals"]
+[ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v7.gd" id="1_terrain"]
+[ext_resource type="Script" path="res://world/visuals/terrain/terrain_chunk_visuals_v7.gd" id="2_visuals"]
 [ext_resource type="Script" path="res://world/visuals/scenery/procedural_ecosystem_v6.gd" id="3_ecosystem"]
-[ext_resource type="Script" path="res://world/visuals/terrain/micro_voxel_surface_v6.gd" id="4_micro_surface"]
-[ext_resource type="Script" path="res://world/streaming/chunk_lod_controller_v6.gd" id="5_lod"]
+[ext_resource type="Script" path="res://world/streaming/chunk_lod_controller_v7.gd" id="4_lod"]
 
 [node name="TerrainChunk" type="StaticBody3D" unique_id=1870033249]
 script = ExtResource("1_terrain")
 cell_size = 0.5
+far_sample_stride = 4
+enable_far_proxy = true
 
 [node name="TerrainMesh" type="MeshInstance3D" parent="." unique_id=1378419624]
+
+[node name="FarTerrainMesh" type="MeshInstance3D" parent="."]
+visible = false
+cast_shadow = 0
 
 [node name="TerrainCollision" type="CollisionShape3D" parent="." unique_id=907640669]
 
@@ -27,12 +32,20 @@ top_texture_scale = 0.88
 side_texture_scale = 0.82
 texture_darkness = 0.84
 texture_brightness = 1.07
-water_subdivisions = 24
+water_subdivisions = 32
 wave_height = 0.045
 wave_speed = 0.40
 secondary_wave_height = 0.016
 secondary_wave_speed = 0.72
 water_roughness = 0.16
+micro_tile_size = 0.125
+near_detail_end = 44.0
+mid_detail_end = 82.0
+micro_detail_strength = 0.13
+mid_detail_strength = 0.055
+foam_distance = 0.90
+depth_fade_distance = 4.5
+refraction_strength = 0.025
 
 [node name="ProceduralEcosystemV6" type="Node3D" parent="."]
 script = ExtResource("3_ecosystem")
@@ -45,15 +58,8 @@ forest_density_multiplier = 1.45
 cliff_attempts = 10
 plant_field_attempts = 46
 
-[node name="MicroVoxelSurfaceV6" type="Node3D" parent="."]
-script = ExtResource("4_micro_surface")
-build_distance = 44.0
-release_distance = 62.0
-instances_per_frame = 384
-surface_lift = 0.018
-
-[node name="ChunkLODControllerV6" type="Node" parent="."]
-script = ExtResource("5_lod")
+[node name="ChunkLODControllerV7" type="Node" parent="."]
+script = ExtResource("4_lod")
 near_distance = 42.0
-mid_distance = 74.0
-update_interval = 0.4
+mid_distance = 78.0
+update_interval = 0.35
