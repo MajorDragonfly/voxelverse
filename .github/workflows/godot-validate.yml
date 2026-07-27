@@ -10,7 +10,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 14
 
     steps:
       - name: Check out repository
@@ -42,12 +42,12 @@ jobs:
         run: |
           set +e
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          timeout 45s "$GODOT" --headless --path . --quit-after 240 \
+          timeout 55s "$GODOT" --headless --path . --quit-after 300 \
             > /tmp/main-runtime-test.log 2>&1
           TEST_STATUS=$?
 
           if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "Main runtime smoke test timed out after 45 seconds." \
+            echo "Main runtime smoke test timed out after 55 seconds." \
               >> /tmp/main-runtime-test.log
             TEST_STATUS=1
           fi
@@ -61,7 +61,7 @@ jobs:
           cat /tmp/main-runtime-test.log
           exit "$TEST_STATUS"
 
-      - name: Run Creature V5 smoke test
+      - name: Run Creature V5 compatibility test
         shell: bash
         run: |
           set -euo pipefail
@@ -69,7 +69,16 @@ jobs:
           "$GODOT" --headless --path . \
             --script res://tests/creature_v5_smoke_test.gd
 
-      - name: Run World Evolution V2 smoke test
+      - name: Run Creature Builder V7 test
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          "$GODOT" --headless --path . \
+            --script res://tests/creature_builder_v7_test.gd \
+            2>&1 | tee /tmp/creature-builder-v7-test.log
+
+      - name: Run World Evolution V2 compatibility test
         shell: bash
         run: |
           set +e
@@ -96,7 +105,7 @@ jobs:
 
           exit "$TEST_STATUS"
 
-      - name: Run World Runtime V6 architecture test
+      - name: Run World Runtime V6 compatibility test
         shell: bash
         run: |
           set +e
@@ -120,14 +129,25 @@ jobs:
           cat /tmp/world-runtime-v6-test.log
           exit "$TEST_STATUS"
 
-      - name: Upload world validation diagnostics
+      - name: Run Layered World V7 test
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          "$GODOT" --headless --path . \
+            --script res://tests/world_layered_v7_test.gd \
+            2>&1 | tee /tmp/world-layered-v7-test.log
+
+      - name: Upload validation diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: world-evolution-diagnostics
+          name: voxelverse-validation-diagnostics
           path: |
             /tmp/main-runtime-test.log
+            /tmp/creature-builder-v7-test.log
             /tmp/world-evolution-test.log
             /tmp/world-runtime-v6-test.log
+            /tmp/world-layered-v7-test.log
           if-no-files-found: warn
           retention-days: 3
