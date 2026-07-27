@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://world/resources/terrain/terrain_chunk_v4.gd" id="1_terrain"]
 [ext_resource type="Script" uid="uid://cyk0jajpwlxdp" path="res://world/visuals/terrain/terrain_chunk_visuals.gd" id="2_visuals"]
 [ext_resource type="Script" path="res://world/visuals/scenery/procedural_ecosystem_v4.gd" id="3_ecosystem"]
+[ext_resource type="Script" path="res://world/visuals/terrain/micro_voxel_surface_v5.gd" id="4_micro_surface"]
 
 [node name="TerrainChunk" type="StaticBody3D" unique_id=1870033249]
 script = ExtResource("1_terrain")
@@ -34,8 +35,15 @@ water_roughness = 0.24
 
 [node name="ProceduralEcosystemV4" type="Node3D" parent="."]
 script = ExtResource("3_ecosystem")
-tree_attempts = 16
-rock_attempts = 10
-ground_attempts = 18
+tree_attempts = 26
+rock_attempts = 12
+ground_attempts = 44
 tree_visibility_distance = 150.0
 detail_visibility_distance = 82.0
+
+[node name="MicroVoxelSurfaceV5" type="Node3D" parent="."]
+script = ExtResource("4_micro_surface")
+build_distance = 52.0
+release_distance = 72.0
+instances_per_frame = 256
+surface_lift = 0.012

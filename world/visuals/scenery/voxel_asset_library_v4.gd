@@ -2,8 +2,10 @@ extends RefCounted
 class_name VoxelAssetLibraryV4
 
 # Shared meshes are generated once and reused by every chunk. Each object is a
-# small cluster of cuboids rather than one large primitive, producing a finer
-# voxel silhouette without adding one Node per micro block.
+# cluster of small cuboids rather than one large primitive. Back-face culling is
+# disabled for this generated library because the compact SurfaceTool box
+# assembly intentionally prioritizes a stable closed silhouette from every
+# camera angle over per-face winding assumptions.
 
 static var _shared_material: StandardMaterial3D
 static var _trunk_mesh: ArrayMesh
@@ -15,11 +17,14 @@ static var _ground_cluster_mesh: ArrayMesh
 static func get_trunk_mesh() -> ArrayMesh:
 	if _trunk_mesh == null:
 		_trunk_mesh = _build_boxes([
-			{"center": Vector3(0.0, -0.40, 0.0), "size": Vector3(0.42, 0.22, 0.42)},
-			{"center": Vector3(0.0, -0.18, 0.0), "size": Vector3(0.38, 0.22, 0.38)},
-			{"center": Vector3(0.02, 0.04, -0.01), "size": Vector3(0.34, 0.22, 0.34)},
-			{"center": Vector3(-0.02, 0.26, 0.01), "size": Vector3(0.30, 0.22, 0.30)},
-			{"center": Vector3(0.0, 0.45, 0.0), "size": Vector3(0.26, 0.16, 0.26)},
+			{"center": Vector3(0.00, -0.43, 0.00), "size": Vector3(0.42, 0.18, 0.42)},
+			{"center": Vector3(0.01, -0.25, 0.00), "size": Vector3(0.38, 0.18, 0.38)},
+			{"center": Vector3(-0.01, -0.07, 0.01), "size": Vector3(0.34, 0.18, 0.34)},
+			{"center": Vector3(0.02, 0.11, -0.01), "size": Vector3(0.31, 0.18, 0.31)},
+			{"center": Vector3(-0.01, 0.29, 0.01), "size": Vector3(0.28, 0.18, 0.28)},
+			{"center": Vector3(0.00, 0.45, 0.00), "size": Vector3(0.25, 0.14, 0.25)},
+			{"center": Vector3(0.18, 0.23, 0.00), "size": Vector3(0.30, 0.11, 0.11)},
+			{"center": Vector3(-0.15, 0.35, -0.08), "size": Vector3(0.25, 0.10, 0.10)},
 		])
 	return _trunk_mesh
 
@@ -27,14 +32,24 @@ static func get_trunk_mesh() -> ArrayMesh:
 static func get_crown_mesh() -> ArrayMesh:
 	if _crown_mesh == null:
 		_crown_mesh = _build_boxes([
-			{"center": Vector3(0.0, 0.0, 0.0), "size": Vector3(0.56, 0.42, 0.56)},
-			{"center": Vector3(0.42, -0.02, 0.0), "size": Vector3(0.34, 0.34, 0.38)},
-			{"center": Vector3(-0.42, 0.02, 0.0), "size": Vector3(0.34, 0.38, 0.38)},
-			{"center": Vector3(0.0, 0.04, 0.42), "size": Vector3(0.38, 0.36, 0.34)},
-			{"center": Vector3(0.0, -0.02, -0.42), "size": Vector3(0.38, 0.34, 0.34)},
-			{"center": Vector3(0.25, 0.26, 0.22), "size": Vector3(0.30, 0.28, 0.30)},
-			{"center": Vector3(-0.22, 0.30, -0.18), "size": Vector3(0.32, 0.30, 0.32)},
-			{"center": Vector3(0.0, -0.24, 0.18), "size": Vector3(0.32, 0.24, 0.32)},
+			{"center": Vector3(0.00, 0.00, 0.00), "size": Vector3(0.42, 0.34, 0.42)},
+			{"center": Vector3(0.34, 0.00, 0.00), "size": Vector3(0.30, 0.30, 0.32)},
+			{"center": Vector3(-0.34, 0.02, 0.00), "size": Vector3(0.30, 0.32, 0.32)},
+			{"center": Vector3(0.00, 0.02, 0.34), "size": Vector3(0.32, 0.31, 0.30)},
+			{"center": Vector3(0.00, -0.01, -0.34), "size": Vector3(0.32, 0.30, 0.30)},
+			{"center": Vector3(0.27, 0.21, 0.23), "size": Vector3(0.28, 0.27, 0.28)},
+			{"center": Vector3(-0.25, 0.24, 0.22), "size": Vector3(0.29, 0.28, 0.28)},
+			{"center": Vector3(0.23, 0.25, -0.24), "size": Vector3(0.28, 0.29, 0.28)},
+			{"center": Vector3(-0.23, 0.27, -0.22), "size": Vector3(0.30, 0.29, 0.30)},
+			{"center": Vector3(0.00, 0.38, 0.00), "size": Vector3(0.34, 0.25, 0.34)},
+			{"center": Vector3(0.48, 0.13, 0.17), "size": Vector3(0.24, 0.24, 0.24)},
+			{"center": Vector3(-0.47, 0.14, -0.15), "size": Vector3(0.24, 0.24, 0.24)},
+			{"center": Vector3(0.17, 0.12, 0.48), "size": Vector3(0.24, 0.24, 0.24)},
+			{"center": Vector3(-0.15, 0.10, -0.48), "size": Vector3(0.24, 0.24, 0.24)},
+			{"center": Vector3(0.28, -0.20, 0.20), "size": Vector3(0.25, 0.22, 0.25)},
+			{"center": Vector3(-0.27, -0.18, 0.19), "size": Vector3(0.25, 0.22, 0.25)},
+			{"center": Vector3(0.22, -0.19, -0.27), "size": Vector3(0.25, 0.22, 0.25)},
+			{"center": Vector3(-0.21, -0.20, -0.25), "size": Vector3(0.25, 0.22, 0.25)},
 		])
 	return _crown_mesh
 
@@ -42,10 +57,12 @@ static func get_crown_mesh() -> ArrayMesh:
 static func get_rock_mesh() -> ArrayMesh:
 	if _rock_mesh == null:
 		_rock_mesh = _build_boxes([
-			{"center": Vector3(0.0, -0.14, 0.0), "size": Vector3(0.58, 0.28, 0.50)},
-			{"center": Vector3(-0.22, 0.10, 0.02), "size": Vector3(0.30, 0.26, 0.34)},
-			{"center": Vector3(0.20, 0.08, -0.10), "size": Vector3(0.34, 0.22, 0.28)},
+			{"center": Vector3(0.00, -0.15, 0.00), "size": Vector3(0.58, 0.26, 0.50)},
+			{"center": Vector3(-0.23, 0.05, 0.02), "size": Vector3(0.30, 0.25, 0.34)},
+			{"center": Vector3(0.21, 0.04, -0.10), "size": Vector3(0.34, 0.23, 0.28)},
 			{"center": Vector3(0.04, 0.22, 0.12), "size": Vector3(0.24, 0.20, 0.24)},
+			{"center": Vector3(-0.10, 0.16, -0.19), "size": Vector3(0.22, 0.17, 0.20)},
+			{"center": Vector3(0.30, -0.08, 0.18), "size": Vector3(0.20, 0.18, 0.20)},
 		])
 	return _rock_mesh
 
@@ -53,12 +70,14 @@ static func get_rock_mesh() -> ArrayMesh:
 static func get_ground_cluster_mesh() -> ArrayMesh:
 	if _ground_cluster_mesh == null:
 		_ground_cluster_mesh = _build_boxes([
-			{"center": Vector3(-0.28, -0.16, -0.16), "size": Vector3(0.12, 0.32, 0.12)},
-			{"center": Vector3(-0.10, -0.06, 0.12), "size": Vector3(0.10, 0.52, 0.10)},
-			{"center": Vector3(0.08, -0.12, -0.08), "size": Vector3(0.12, 0.40, 0.12)},
-			{"center": Vector3(0.26, -0.04, 0.14), "size": Vector3(0.10, 0.56, 0.10)},
-			{"center": Vector3(0.34, -0.18, -0.22), "size": Vector3(0.11, 0.28, 0.11)},
-			{"center": Vector3(-0.34, -0.20, 0.24), "size": Vector3(0.10, 0.24, 0.10)},
+			{"center": Vector3(-0.30, -0.16, -0.16), "size": Vector3(0.10, 0.32, 0.10)},
+			{"center": Vector3(-0.14, -0.06, 0.12), "size": Vector3(0.09, 0.52, 0.09)},
+			{"center": Vector3(0.03, -0.12, -0.08), "size": Vector3(0.10, 0.40, 0.10)},
+			{"center": Vector3(0.21, -0.04, 0.14), "size": Vector3(0.09, 0.56, 0.09)},
+			{"center": Vector3(0.36, -0.18, -0.22), "size": Vector3(0.10, 0.28, 0.10)},
+			{"center": Vector3(-0.39, -0.20, 0.24), "size": Vector3(0.09, 0.24, 0.09)},
+			{"center": Vector3(0.42, -0.12, 0.03), "size": Vector3(0.08, 0.40, 0.08)},
+			{"center": Vector3(-0.03, -0.22, 0.34), "size": Vector3(0.09, 0.20, 0.09)},
 		])
 	return _ground_cluster_mesh
 
@@ -68,9 +87,9 @@ static func get_material() -> StandardMaterial3D:
 		_shared_material = StandardMaterial3D.new()
 		_shared_material.albedo_color = Color.WHITE
 		_shared_material.vertex_color_use_as_albedo = true
-		_shared_material.roughness = 0.92
+		_shared_material.roughness = 0.90
 		_shared_material.metallic = 0.0
-		_shared_material.cull_mode = BaseMaterial3D.CULL_BACK
+		_shared_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	return _shared_material
 
 

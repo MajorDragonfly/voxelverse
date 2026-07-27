@@ -1,19 +1,21 @@
 extends Node3D
 
 @export_category("Atmosphere")
-@export_range(0, 160, 1)
-var cloud_voxel_count: int = 72
+@export_range(24, 320, 1)
+var cloud_voxel_count: int = 168
 
 @export_range(10.0, 120.0, 1.0)
-var cloud_altitude: float = 34.0
+var cloud_altitude: float = 42.0
 
 @export_range(50.0, 800.0, 10.0)
-var cloud_field_radius: float = 310.0
+var cloud_field_radius: float = 300.0
 
 @export var wind_direction: Vector2 = Vector2(0.72, 0.36)
 
 @export_range(0.0, 10.0, 0.05)
-var wind_speed: float = 0.85
+var wind_speed: float = 0.62
+
+const CLOUD_LOBES_PER_CLUSTER: int = 7
 
 var _player: Node3D
 var _cloud_layer: MultiMeshInstance3D
@@ -67,7 +69,7 @@ func _initialize_presentation() -> void:
 
 func _tune_environment() -> void:
 	var environment_controller: Node = get_tree().get_first_node_in_group(
-		"planet_visual_environment"
+		&"planet_visual_environment"
 	)
 	if environment_controller == null:
 		return
@@ -80,22 +82,22 @@ func _tune_environment() -> void:
 
 	var environment: Environment = world_environment.environment
 	environment.tonemap_mode = Environment.TONE_MAPPER_AGX
-	environment.tonemap_exposure = 1.03
-	environment.tonemap_agx_contrast = 1.24
+	environment.tonemap_exposure = 1.0
+	environment.tonemap_agx_contrast = 1.30
 	environment.adjustment_enabled = true
-	environment.adjustment_brightness = 1.01
-	environment.adjustment_contrast = 1.08
-	environment.adjustment_saturation = 1.10
+	environment.adjustment_brightness = 1.0
+	environment.adjustment_contrast = 1.12
+	environment.adjustment_saturation = 1.18
 	environment.ssao_enabled = true
-	environment.ssao_intensity = 1.55
-	environment.ssao_power = 1.25
-	environment.ssao_radius = 2.1
+	environment.ssao_intensity = 1.65
+	environment.ssao_power = 1.30
+	environment.ssao_radius = 1.7
 	environment.glow_enabled = true
-	environment.glow_intensity = 0.10
-	environment.glow_bloom = 0.055
+	environment.glow_intensity = 0.07
+	environment.glow_bloom = 0.035
 	environment.fog_enabled = true
-	environment.fog_light_color = Color(0.63, 0.72, 0.76, 1.0)
-	environment.fog_sky_affect = 0.72
+	environment.fog_light_color = Color(0.68, 0.79, 0.88, 1.0)
+	environment.fog_sky_affect = 0.34
 
 
 func _create_voxel_cloud_layer() -> void:
@@ -114,37 +116,66 @@ func _create_voxel_cloud_layer() -> void:
 	cloud_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	cloud_mesh.material = cloud_material
 
+	var transforms: Array[Transform3D] = []
+	var colors: Array[Color] = []
+	var cluster_count: int = maxi(
+		ceili(float(cloud_voxel_count) / float(CLOUD_LOBES_PER_CLUSTER)),
+		1
+	)
+
+	for _cluster_index in range(cluster_count):
+		var angle: float = random.randf_range(0.0, TAU)
+		var distance: float = sqrt(random.randf()) * cloud_field_radius
+		var cluster_center := Vector3(
+			cos(angle) * distance,
+			random.randf_range(-4.0, 7.0),
+			sin(angle) * distance
+		)
+		var cluster_width: float = random.randf_range(13.0, 28.0)
+		var cluster_depth: float = random.randf_range(7.0, 17.0)
+		var lobe_count: int = random.randi_range(5, CLOUD_LOBES_PER_CLUSTER + 2)
+
+		for lobe_index in range(lobe_count):
+			if transforms.size() >= cloud_voxel_count:
+				break
+
+			var normalized_index: float = (
+				float(lobe_index) / maxf(float(lobe_count - 1), 1.0)
+			)
+			var lobe_offset := Vector3(
+				random.randf_range(-cluster_width * 0.44, cluster_width * 0.44),
+				random.randf_range(-1.4, 1.8) + sin(normalized_index * PI) * 1.1,
+				random.randf_range(-cluster_depth * 0.42, cluster_depth * 0.42)
+			)
+			var width: float = random.randf_range(3.8, 8.8)
+			var height: float = random.randf_range(1.0, 2.8)
+			var depth: float = random.randf_range(3.0, 7.5)
+			var basis := Basis(
+				Vector3.UP,
+				random.randf_range(-0.32, 0.32)
+			).scaled(Vector3(width, height, depth))
+			transforms.append(Transform3D(basis, cluster_center + lobe_offset))
+
+			var brightness: float = random.randf_range(0.86, 1.0)
+			var alpha: float = random.randf_range(0.30, 0.52)
+			colors.append(
+				Color(
+					brightness,
+					brightness,
+					minf(brightness * 1.035, 1.0),
+					alpha
+				)
+			)
+
 	var cloud_multimesh := MultiMesh.new()
 	cloud_multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	cloud_multimesh.use_colors = true
 	cloud_multimesh.mesh = cloud_mesh
-	cloud_multimesh.instance_count = cloud_voxel_count
+	cloud_multimesh.instance_count = transforms.size()
 
-	for index in range(cloud_voxel_count):
-		var angle: float = random.randf_range(0.0, TAU)
-		var distance: float = sqrt(random.randf()) * cloud_field_radius
-		var width: float = random.randf_range(12.0, 38.0)
-		var height: float = random.randf_range(1.2, 4.8)
-		var depth: float = random.randf_range(5.0, 18.0)
-		var basis := Basis(Vector3.UP, random.randf_range(-0.18, 0.18)).scaled(
-			Vector3(width, height, depth)
-		)
-		var transform := Transform3D(
-			basis,
-			Vector3(
-				cos(angle) * distance,
-				random.randf_range(-5.0, 7.0),
-				sin(angle) * distance
-			)
-		)
-		var brightness: float = random.randf_range(0.72, 1.0)
-		var alpha: float = random.randf_range(0.10, 0.26)
-
-		cloud_multimesh.set_instance_transform(index, transform)
-		cloud_multimesh.set_instance_color(
-			index,
-			Color(brightness, brightness, brightness * 1.03, alpha)
-		)
+	for index in range(transforms.size()):
+		cloud_multimesh.set_instance_transform(index, transforms[index])
+		cloud_multimesh.set_instance_color(index, colors[index])
 
 	_cloud_layer = MultiMeshInstance3D.new()
 	_cloud_layer.name = "ProceduralVoxelClouds"

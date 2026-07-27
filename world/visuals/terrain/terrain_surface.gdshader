@@ -2,373 +2,164 @@ shader_type spatial;
 
 render_mode
 	depth_draw_opaque,
-	cull_disabled,
+	cull_back,
 	diffuse_lambert;
 
+uniform sampler2D grass_texture : source_color, filter_nearest, repeat_enable;
+uniform sampler2D dirt_texture : source_color, filter_nearest, repeat_enable;
+uniform sampler2D sand_texture : source_color, filter_nearest, repeat_enable;
+uniform sampler2D stone_texture : source_color, filter_nearest, repeat_enable;
 
-uniform sampler2D grass_texture :
-	source_color,
-	filter_nearest,
-	repeat_enable;
-
-uniform sampler2D dirt_texture :
-	source_color,
-	filter_nearest,
-	repeat_enable;
-
-uniform sampler2D sand_texture :
-	source_color,
-	filter_nearest,
-	repeat_enable;
-
-uniform sampler2D stone_texture :
-	source_color,
-	filter_nearest,
-	repeat_enable;
-
-
-uniform float top_texture_scale : hint_range(
-	0.05,
-	4.0,
-	0.05
-) = 0.25;
-
-uniform float side_texture_scale : hint_range(
-	0.05,
-	4.0,
-	0.05
-) = 0.25;
-
-uniform float palette_steps : hint_range(
-	2.0,
-	8.0,
-	1.0
-) = 4.0;
-
-uniform float texture_darkness : hint_range(
-	0.20,
-	1.00,
-	0.01
-) = 0.50;
-
-uniform float texture_brightness : hint_range(
-	0.80,
-	1.50,
-	0.01
-) = 1.18;
-
+uniform float top_texture_scale : hint_range(0.05, 4.0, 0.05) = 0.75;
+uniform float side_texture_scale : hint_range(0.05, 4.0, 0.05) = 0.70;
+uniform float palette_steps : hint_range(2.0, 12.0, 1.0) = 8.0;
+uniform float texture_darkness : hint_range(0.20, 1.00, 0.01) = 0.42;
+uniform float texture_brightness : hint_range(0.80, 1.50, 0.01) = 1.06;
 
 uniform bool spherical_planet = false;
-
-uniform vec3 planet_center = vec3(
-	0.0,
-	0.0,
-	0.0
-);
-
+uniform vec3 planet_center = vec3(0.0);
 uniform float planet_radius = 10000.0;
-
 uniform float sea_level = -1.5;
-
 uniform float coast_width = 1.0;
-
 uniform float rocky_height = 4.5;
-
-uniform vec3 rock_color : source_color = vec3(
-	0.36,
-	0.27,
-	0.20
-);
-
+uniform vec3 rock_color : source_color = vec3(0.36, 0.38, 0.39);
+uniform vec3 rock_strata_color : source_color = vec3(0.46, 0.36, 0.28);
+uniform vec3 wet_ground_color : source_color = vec3(0.10, 0.24, 0.17);
+uniform vec3 snow_color : source_color = vec3(0.78, 0.84, 0.83);
+uniform float rock_slope_start = 0.28;
+uniform float rock_slope_end = 0.62;
+uniform float macro_color_strength = 0.16;
+uniform float strata_strength = 0.18;
+uniform float snow_start_altitude = 10.2;
+uniform float snow_end_altitude = 14.2;
 
 varying vec3 world_position;
 varying vec3 world_normal;
-varying vec3 terrain_base_color;
+varying vec3 vertex_base_color;
 
 
 void vertex() {
-	world_position = (
-		MODEL_MATRIX
-		* vec4(
-			VERTEX,
-			1.0
-		)
-	).xyz;
+	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	world_normal = normalize(MODEL_NORMAL_MATRIX * NORMAL);
 
-	world_normal = normalize(
-		MODEL_NORMAL_MATRIX
-		* NORMAL
-	);
-
-	# Die prozedurale Terrainfarbe wird vom Mesher
-	# in UV und UV2 gespeichert:
-	#
-	# UV.x  = Rot
-	# UV.y  = Grün
-	# UV2.x = Blau
-	terrain_base_color = vec3(
-		UV.x,
-		UV.y,
-		UV2.x
-	);
+	// Terrain colors are authored by the procedural mesher as vertex colors.
+	// Earlier shaders incorrectly read UV coordinates as RGB, which washed the
+	// entire world to pale texture values.
+	vertex_base_color = COLOR.rgb;
 }
 
 
-float get_altitude(
-	vec3 position
-) {
+float get_altitude(vec3 position_value) {
 	if (spherical_planet) {
-		return (
-			length(
-				position - planet_center
-			)
-			- planet_radius
-		);
+		return length(position_value - planet_center) - planet_radius;
 	}
-
-	return position.y;
+	return position_value.y;
 }
 
 
 vec2 get_planar_uv(
-	vec3 position,
+	vec3 position_value,
 	vec3 normal_value,
 	float scale_value
 ) {
-	vec3 absolute_normal = abs(
-		normal_value
-	);
-
+	vec3 absolute_normal = abs(normal_value);
 	if (
 		absolute_normal.y >= absolute_normal.x
 		&& absolute_normal.y >= absolute_normal.z
 	) {
-		return (
-			position.xz
-			* scale_value
-		);
+		return position_value.xz * scale_value;
 	}
-
-	if (
-		absolute_normal.x
-		>= absolute_normal.z
-	) {
-		return (
-			position.zy
-			* scale_value
-		);
+	if (absolute_normal.x >= absolute_normal.z) {
+		return position_value.zy * scale_value;
 	}
-
-	return (
-		position.xy
-		* scale_value
-	);
+	return position_value.xy * scale_value;
 }
 
 
-float quantize_value(
-	float value,
-	float step_count
-) {
-	float safe_step_count = max(
-		step_count - 1.0,
-		1.0
-	);
-
-	return (
-		floor(
-			clamp(
-				value,
-				0.0,
-				1.0
-			)
-			* safe_step_count
-			+ 0.5
-		)
-		/ safe_step_count
-	);
+float quantize_value(float value, float steps) {
+	float safe_steps = max(steps - 1.0, 1.0);
+	return floor(clamp(value, 0.0, 1.0) * safe_steps + 0.5) / safe_steps;
 }
 
 
-float get_texture_brightness(
-	vec3 texture_color
-) {
-	float grayscale_value = dot(
-		texture_color,
-		vec3(
-			0.299,
-			0.587,
-			0.114
-		)
-	);
-
-	float quantized_value = quantize_value(
-		grayscale_value,
-		palette_steps
-	);
-
-	return mix(
-		texture_darkness,
-		texture_brightness,
-		quantized_value
-	);
+float texture_luminance(vec3 color_value) {
+	return dot(color_value, vec3(0.299, 0.587, 0.114));
 }
 
 
-float get_face_brightness(
-	vec3 normal_value
-) {
+float face_light(vec3 normal_value) {
 	if (normal_value.y > 0.50) {
-		return 1.06;
+		return 1.05;
 	}
-
-	if (normal_value.y < -0.50) {
-		return 0.58;
-	}
-
 	if (normal_value.x > 0.50) {
-		return 0.90;
+		return 0.92;
 	}
-
 	if (normal_value.x < -0.50) {
-		return 0.74;
+		return 0.80;
 	}
-
 	if (normal_value.z > 0.50) {
-		return 0.84;
+		return 0.87;
 	}
-
-	return 0.68;
+	return 0.74;
 }
 
 
 void fragment() {
-	vec3 normal_value = normalize(
-		world_normal
-	);
+	vec3 normal_value = normalize(world_normal);
+	float altitude = get_altitude(world_position);
+	bool top_surface = normal_value.y > 0.50;
+	bool side_surface = abs(normal_value.y) <= 0.50;
+	float selected_scale = top_surface ? top_texture_scale : side_texture_scale;
+	vec2 pixel_uv = get_planar_uv(world_position, normal_value, selected_scale);
 
-	float altitude = get_altitude(
-		world_position
-	);
-
-	bool top_surface = (
-		normal_value.y > 0.50
-	);
-
-	bool bottom_surface = (
-		normal_value.y < -0.50
-	);
-
-	bool side_surface = (
-		not top_surface
-		and not bottom_surface
-	);
-
-	float selected_scale = (
-		top_surface
-			? top_texture_scale
-			: side_texture_scale
-	);
-
-	vec2 pixel_uv = get_planar_uv(
-		world_position,
-		normal_value,
-		selected_scale
-	);
-
-	vec3 sampled_texture = vec3(
-		1.0
-	);
-
+	vec3 sampled_texture;
 	if (top_surface) {
-		bool coast_surface = (
-			altitude
-			<= sea_level + coast_width
-		);
-
-		if (coast_surface) {
-			sampled_texture = texture(
-				sand_texture,
-				pixel_uv
-			).rgb;
-		} else {
-			sampled_texture = texture(
-				grass_texture,
-				pixel_uv
-			).rgb;
-		}
+		bool coast_surface = altitude <= sea_level + coast_width;
+		sampled_texture = coast_surface
+			? texture(sand_texture, pixel_uv).rgb
+			: texture(grass_texture, pixel_uv).rgb;
 	} else if (side_surface) {
-		bool rocky_surface = (
-			altitude
-			>= rocky_height
-		);
-
-		if (rocky_surface) {
-			sampled_texture = texture(
-				stone_texture,
-				pixel_uv
-			).rgb;
-		} else {
-			sampled_texture = texture(
-				dirt_texture,
-				pixel_uv
-			).rgb;
-		}
+		bool rocky_surface = altitude >= rocky_height;
+		sampled_texture = rocky_surface
+			? texture(stone_texture, pixel_uv).rgb
+			: texture(dirt_texture, pixel_uv).rgb;
 	} else {
-		sampled_texture = texture(
-			dirt_texture,
-			pixel_uv
-		).rgb;
+		sampled_texture = texture(dirt_texture, pixel_uv).rgb;
 	}
 
-	float pixel_brightness = (
-		get_texture_brightness(
-			sampled_texture
-		)
+	float quantized_luminance = quantize_value(
+		texture_luminance(sampled_texture),
+		palette_steps
+	);
+	float pixel_brightness = mix(
+		texture_darkness,
+		texture_brightness,
+		quantized_luminance
 	);
 
-	float face_brightness = (
-		get_face_brightness(
-			normal_value
-		)
+	vec3 base_color = clamp(vertex_base_color, vec3(0.0), vec3(1.0));
+	float slope = 1.0 - abs(normal_value.y);
+	float rock_weight = smoothstep(rock_slope_start, rock_slope_end, slope);
+	rock_weight *= side_surface ? 0.72 : 0.30;
+	base_color = mix(base_color, rock_color, rock_weight);
+
+	float snow_weight = smoothstep(
+		snow_start_altitude,
+		snow_end_altitude,
+		altitude
+	);
+	base_color = mix(base_color, snow_color, snow_weight * 0.82);
+
+	float strata = step(0.56, fract(altitude * 0.72));
+	base_color = mix(
+		base_color,
+		rock_strata_color,
+		strata * strata_strength * rock_weight
 	);
 
-	vec3 base_color = clamp(
-		terrain_base_color,
-		vec3(0.0),
-		vec3(1.0)
-	);
-
-	if (
-		side_surface
-		and altitude >= rocky_height
-	) {
-		base_color = mix(
-			base_color,
-			rock_color,
-			0.22
-		);
-	}
-
-	vec3 final_color = (
-		base_color
-		* pixel_brightness
-		* face_brightness
-	);
-
-	ALBEDO = clamp(
-		final_color,
-		vec3(0.0),
-		vec3(1.0)
-	);
-
-	ROUGHNESS = 1.0;
+	vec3 final_color = base_color * pixel_brightness * face_light(normal_value);
+	ALBEDO = clamp(final_color, vec3(0.0), vec3(1.0));
+	ROUGHNESS = 0.96;
 	METALLIC = 0.0;
-	SPECULAR = 0.0;
-
-	EMISSION = (
-		base_color
-		* pixel_brightness
-		* 0.025
-	);
+	SPECULAR = 0.08;
 }
