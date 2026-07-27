@@ -129,21 +129,23 @@ static func _set_random_spine(
 	for index in range(segments.size()):
 		var t: float = float(index) / maxf(float(segments.size() - 1), 1.0)
 		var center_weight: float = 1.0 - absf(t - 0.5) * 1.25
-		segments[index]["width_scale"] = clampf(
+		var segment: Dictionary = segments[index]
+		segment["width_scale"] = clampf(
 			random.randf_range(0.82, 1.18) * lerpf(0.88, 1.12, center_weight),
 			SpineProfile.MIN_WIDTH_SCALE,
 			SpineProfile.MAX_WIDTH_SCALE
 		)
-		segments[index]["height_scale"] = clampf(
+		segment["height_scale"] = clampf(
 			random.randf_range(0.84, 1.16),
 			SpineProfile.MIN_HEIGHT_SCALE,
 			SpineProfile.MAX_HEIGHT_SCALE
 		)
-		segments[index]["y_offset"] = clampf(
+		segment["y_offset"] = clampf(
 			sin(t * TAU + phase) * curve_strength,
 			SpineProfile.MIN_Y_OFFSET,
 			SpineProfile.MAX_Y_OFFSET
 		)
+		segments[index] = segment
 	var body: Dictionary = blueprint.get("body", {})
 	body["spine"] = segments
 	body["spine_length_scale"] = clampf(
@@ -216,8 +218,9 @@ static func _create_species_name(species_seed: int, role: String) -> String:
 		"poda",
 		"saur",
 	]
+	var divided_seed: int = floori(float(species_seed) / 17.0)
 	return "%s%s · %s" % [
 		prefixes[posmod(species_seed, prefixes.size())],
-		suffixes[posmod(species_seed / 17, suffixes.size())],
+		suffixes[posmod(divided_seed, suffixes.size())],
 		role.capitalize(),
 	]
