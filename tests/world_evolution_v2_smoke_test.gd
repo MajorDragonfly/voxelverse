@@ -15,10 +15,12 @@ var _generator: Node
 
 
 func _initialize() -> void:
+	print("World test stage: initialize generator")
 	_generator = GeneratorScript.new()
 	root.add_child(_generator)
 
 	_run_world_generator_checks()
+	print("World test stage: load scene resources")
 	_run_scene_resource_checks()
 
 	if _failures.is_empty():
@@ -33,11 +35,13 @@ func _initialize() -> void:
 
 
 func _run_world_generator_checks() -> void:
+	print("World test stage: sample primary seed")
 	_generator.set_seed_override(PRIMARY_TEST_SEED)
 	var first_samples: Array[float] = []
 	var biome_counts: Dictionary = {}
 	var minimum_height: float = INF
 	var maximum_height: float = -INF
+	var sampled_rows: int = 0
 
 	for world_z in range(SAMPLE_MIN, SAMPLE_MAX + 1, SAMPLE_STEP):
 		for world_x in range(SAMPLE_MIN, SAMPLE_MAX + 1, SAMPLE_STEP):
@@ -97,6 +101,9 @@ func _run_world_generator_checks() -> void:
 			first_samples.append(height)
 			biome_counts[biome] = int(biome_counts.get(biome, 0)) + 1
 
+		sampled_rows += 1
+		print("World test stage: sampled primary row %d" % sampled_rows)
+
 	print(
 		"World sample seed %d: height %.3f..%.3f, range %.3f, biomes %d, samples %d"
 		% [
@@ -118,6 +125,7 @@ func _run_world_generator_checks() -> void:
 		"The sampled world produced fewer than five distinct biomes."
 	)
 
+	print("World test stage: verify deterministic repeat")
 	_generator.set_seed_override(PRIMARY_TEST_SEED)
 	var repeated_index: int = 0
 
@@ -133,6 +141,7 @@ func _run_world_generator_checks() -> void:
 			)
 			repeated_index += 1
 
+	print("World test stage: compare secondary seed")
 	_generator.set_seed_override(SECONDARY_TEST_SEED)
 	var changed_samples: int = 0
 	var comparison_index: int = 0
