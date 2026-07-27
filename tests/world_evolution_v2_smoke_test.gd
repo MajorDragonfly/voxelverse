@@ -6,9 +6,9 @@ const GeneratorScript = preload(
 
 const PRIMARY_TEST_SEED: int = 424_242
 const SECONDARY_TEST_SEED: int = 515_151
-const SAMPLE_MIN: int = -2400
-const SAMPLE_MAX: int = 2400
-const SAMPLE_STEP: int = 200
+const SAMPLE_MIN: int = -3600
+const SAMPLE_MAX: int = 3600
+const SAMPLE_STEP: int = 600
 
 var _failures: Array[String] = []
 var _generator: Node
