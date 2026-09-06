@@ -82,10 +82,44 @@ func get_runtime_summary(world_position: Vector3) -> Dictionary:
 		"coordinates": coordinates,
 		"plant_biomass": float(state.get("plant_biomass", 0.0)),
 		"water_availability": float(state.get("water_availability", 0.0)),
+		"carcass_biomass": float(state.get("carcass_biomass", 0.0)),
 		"total_population": total_population,
 		"predator_population": predator_population,
 		"species_count": state.get("species", []).size(),
 	}
+
+
+func register_carcass_addition(
+	coordinates: Vector2i,
+	amount: float
+) -> void:
+	if amount <= 0.0:
+		return
+	_ensure_region(coordinates)
+	var state: Dictionary = _region_states.get(coordinates, {})
+	state["carcass_biomass"] = clampf(
+		float(state.get("carcass_biomass", 0.0)) + amount,
+		0.0,
+		1.0
+	)
+	state["last_touched_tick"] = _simulation_tick
+	_region_states[coordinates] = state
+
+
+func register_carcass_consumption(
+	coordinates: Vector2i,
+	amount: float
+) -> void:
+	if amount <= 0.0:
+		return
+	_ensure_region(coordinates)
+	var state: Dictionary = _region_states.get(coordinates, {})
+	state["carcass_biomass"] = maxf(
+		float(state.get("carcass_biomass", 0.0)) - amount,
+		0.0
+	)
+	state["last_touched_tick"] = _simulation_tick
+	_region_states[coordinates] = state
 
 
 func _register_current_region_discovery() -> void:
