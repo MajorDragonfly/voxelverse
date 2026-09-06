@@ -18,21 +18,34 @@ const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 @export_range(0.1, 1.0, 0.05) var visual_scale_min: float = 0.42
 @export_range(0.1, 1.2, 0.05) var visual_scale_max: float = 0.72
 @export_range(0.1, 0.8, 0.05) var maximum_step_height: float = 0.42
+
 @export_category("Behaviour")
 @export_range(0.5, 4.0, 0.1) var predator_attack_distance: float = 1.55
 @export_range(0.2, 5.0, 0.1) var predator_attack_cooldown: float = 1.35
 @export_range(0.0, 50.0, 0.5) var predator_attack_damage: float = 7.0
+@export_range(1.0, 12.0, 0.5) var threat_memory_seconds: float = 6.0
+
+@export_category("Combat / Carcass")
+@export_range(0.1, 2.0, 0.05) var health_stat_multiplier: float = 0.58
+@export_range(5.0, 100.0, 1.0) var carcass_bite_nutrition: float = 18.0
 
 var blueprint: Dictionary = {}
 var ecological_role: String = "forager"
+var maximum_health: float = 40.0
+var current_health: float = 40.0
+var is_dead: bool = false
+var carcass_food_remaining: float = 0.0
+
 var _visual_root: Node3D
 var _preview: Node3D
 var _player: Node3D
+var _threat: Node3D
 var _random := RandomNumberGenerator.new()
 var _wander_direction := Vector3.ZERO
 var _decision_timer: float = 0.0
 var _move_speed: float = 1.7
 var _attack_timer: float = 0.0
+var _threat_timer: float = 0.0
 
 
 func configure(
@@ -92,6 +105,12 @@ func _build_species() -> void:
 		0.9,
 		4.4
 	)
+	maximum_health = clampf(
+		float(stats.get("health", 75.0)) * health_stat_multiplier,
+		20.0,
+		180.0
+	)
+	current_health = maximum_health
 	match ecological_role:
 		"predator": _move_speed *= 1.15
 		"grazer": _move_speed *= 0.90
@@ -101,6 +120,10 @@ func _build_species() -> void:
 
 func _physics_process(delta: float) -> void:
 	_attack_timer = maxf(_attack_timer - delta, 0.0)
+	_threat_timer = maxf(_threat_timer - delta, 0.0)
+	if is_dead:
+		_process_carcass(delta)
+		return
 	_decision_timer -= delta
 	if _decision_timer <= 0.0:
 		_choose_wander_state()
@@ -134,9 +157,41 @@ func _physics_process(delta: float) -> void:
 func interact(actor: Node) -> void:
 	if actor == null:
 		return
+	if is_dead:
+		_try_feed_actor_from_carcass(actor)
+		return
 	if actor.has_method("can_perform_action"):
 		if not bool(actor.call("can_perform_action", &"socialize")):
 			return
+	_register_discovery(actor)
+
+
+func receive_creature_attack(damage: float, attacker: Node = null) -> void:
+	if is_dead or damage <= 0.0:
+		return
+	if attacker != null:
+		_register_discovery(attacker)
+		_threat = attacker as Node3D
+		_threat_timer = threat_memory_seconds
+	current_health = maxf(current_health - damage, 0.0)
+	if attacker != null:
+		_show_actor_message(
+			attacker,
+			"Bite hit · %d damage · %d/%d health" % [
+				roundi(damage),
+				roundi(current_health),
+				roundi(maximum_health),
+			]
+		)
+	if current_health <= 0.0:
+		_die(attacker)
+
+
+func get_health_ratio() -> float:
+	return current_health / maxf(maximum_health, 0.001)
+
+
+func _register_discovery(actor: Node) -> void:
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression == null or not progression.has_method("register_species_discovery"):
 		return
@@ -147,7 +202,9 @@ func interact(actor: Node) -> void:
 		WorldGenerator.get_world_seed()
 	)
 	var species_data: Dictionary = blueprint.get("species", {})
-	var species_name: String = str(species_data.get("display_name", blueprint.get("name", "Unknown Species")))
+	var species_name: String = str(
+		species_data.get("display_name", blueprint.get("name", "Unknown Species"))
+	)
 	if bool(result.get("is_new", false)):
 		var message: String = "Discovered %s" % species_name
 		var unlocked_part: String = str(result.get("unlocked_part", ""))
@@ -156,12 +213,27 @@ func interact(actor: Node) -> void:
 			message += " · unlocked %s" % str(definition.get("name", unlocked_part))
 		_show_actor_message(actor, message)
 	else:
-		_show_actor_message(actor, "%s · %s" % [species_name, ecological_role.capitalize()])
+		_show_actor_message(
+			actor,
+			"%s · %s" % [species_name, ecological_role.capitalize()]
+		)
 
 
 func _update_role_direction() -> void:
 	if _player == null or not is_instance_valid(_player):
 		_player = get_tree().get_first_node_in_group(&"player") as Node3D
+	if _threat_timer > 0.0 and _threat != null and is_instance_valid(_threat):
+		var threat_delta: Vector3 = _threat.global_position - global_position
+		threat_delta.y = 0.0
+		if threat_delta.length_squared() > 0.01:
+			if ecological_role == "predator":
+				_wander_direction = threat_delta.normalized()
+				if threat_delta.length() <= predator_attack_distance:
+					_try_predator_attack(_threat)
+			else:
+				_wander_direction = -threat_delta.normalized()
+		return
+	if _player == null or not is_instance_valid(_player):
 		return
 	var to_player: Vector3 = _player.global_position - global_position
 	to_player.y = 0.0
@@ -171,19 +243,91 @@ func _update_role_direction() -> void:
 	if ecological_role == "predator" and distance < 13.0:
 		_wander_direction = to_player.normalized()
 		if distance <= predator_attack_distance:
-			_try_predator_attack()
+			_try_predator_attack(_player)
 	elif ecological_role in ["grazer", "forager"] and distance < 6.0:
 		_wander_direction = -to_player.normalized()
 
 
-func _try_predator_attack() -> void:
-	if _attack_timer > 0.0 or _player == null:
+func _try_predator_attack(target: Node) -> void:
+	if _attack_timer > 0.0 or target == null:
 		return
-	if not _player.has_method("receive_damage"):
+	if not target.has_method("receive_damage"):
 		return
 	_attack_timer = predator_attack_cooldown
-	_player.call("receive_damage", predator_attack_damage)
-	_show_actor_message(_player, "A predator hit you for %d." % roundi(predator_attack_damage))
+	target.call("receive_damage", predator_attack_damage)
+	_show_actor_message(
+		target,
+		"A predator hit you for %d." % roundi(predator_attack_damage)
+	)
+
+
+func _die(killer: Node = null) -> void:
+	if is_dead:
+		return
+	is_dead = true
+	current_health = 0.0
+	velocity = Vector3.ZERO
+	carcass_food_remaining = clampf(maximum_health * 0.55, 20.0, 90.0)
+	_wander_direction = Vector3.ZERO
+	_register_ecology_death()
+	if killer != null:
+		_show_actor_message(killer, "Creature defeated · carcass can be eaten.")
+
+
+func _process_carcass(delta: float) -> void:
+	velocity.x = 0.0
+	velocity.z = 0.0
+	if is_on_floor():
+		velocity.y = 0.0
+	else:
+		velocity.y -= gravity_strength * delta
+	move_and_slide()
+	if _visual_root != null:
+		_visual_root.rotation.z = lerp_angle(
+			_visual_root.rotation.z,
+			deg_to_rad(72.0),
+			clampf(delta * 3.5, 0.0, 1.0)
+		)
+
+
+func _try_feed_actor_from_carcass(actor: Node) -> void:
+	if carcass_food_remaining <= 0.01:
+		queue_free()
+		return
+	if not actor.has_method("consume_food"):
+		return
+	var serving: float = minf(carcass_bite_nutrition, carcass_food_remaining)
+	var consumed: bool = bool(actor.call("consume_food", "meat", serving))
+	if not consumed:
+		return
+	carcass_food_remaining = maxf(carcass_food_remaining - serving, 0.0)
+	if carcass_food_remaining <= 0.01:
+		_show_actor_message(actor, "Carcass consumed.")
+		queue_free()
+	else:
+		_show_actor_message(
+			actor,
+			"Carcass remaining: %d" % roundi(carcass_food_remaining)
+		)
+
+
+func _register_ecology_death() -> void:
+	var simulation := get_tree().get_first_node_in_group(&"region_background_simulation")
+	if simulation == null:
+		return
+	if simulation.has_method("register_wildlife_loss"):
+		simulation.call(
+			"register_wildlife_loss",
+			region_coordinates,
+			species_seed,
+			1.0
+		)
+	if simulation.has_method("register_carcass_addition"):
+		simulation.call(
+			"register_carcass_addition",
+			region_coordinates,
+			clampf(carcass_food_remaining / 160.0, 0.02, 0.35)
+		)
 
 
 func _choose_wander_state() -> void:
@@ -225,7 +369,7 @@ func _attempt_step_up(delta: float) -> bool:
 
 
 func _show_actor_message(actor: Node, message: String) -> void:
-	if actor.has_method("show_gameplay_message"):
+	if actor != null and actor.has_method("show_gameplay_message"):
 		actor.call("show_gameplay_message", message)
 
 
