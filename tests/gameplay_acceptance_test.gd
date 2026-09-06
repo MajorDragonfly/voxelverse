@@ -36,6 +36,7 @@ func _test_player_creature_interaction() -> void:
 
 	_expect(player.has_method("perform_bite_on_target"), "Player has no real bite targeting API.")
 	_expect(player.has_method("get_nearby_wildlife"), "Player has no inspection proximity API.")
+	_expect(player.has_method("toggle_inspection_mode"), "Player has no inspection toggle API.")
 	var ray := player.get_node_or_null(
 		"CameraPivot/SpringArm3D/Camera3D/InteractionRay"
 	) as RayCast3D
@@ -66,14 +67,11 @@ func _test_player_creature_interaction() -> void:
 	if nearby_value is Array:
 		_expect(wildlife in nearby_value, "Nearby creature is missing from inspection query.")
 
-	var inspection_event := InputEventKey.new()
-	inspection_event.pressed = true
-	inspection_event.keycode = KEY_E
-	inspection_event.physical_keycode = KEY_E
-	player.call("_unhandled_input", inspection_event)
+	var inspection_enabled: bool = bool(player.call("toggle_inspection_mode"))
+	_expect(inspection_enabled, "Inspection mode did not enable through gameplay API.")
 	_expect(
 		bool(player.call("is_inspection_mode_enabled")),
-		"E did not enable creature inspection mode."
+		"Inspection mode state was not retained."
 	)
 
 	if is_instance_valid(wildlife):
