@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://creatures/runtime/creature_heading_controller.gd" id="4_heading"]
 [ext_resource type="Script" path="res://ui/hud_presentation_v4.gd" id="5_hud"]
 [ext_resource type="Script" path="res://ui/progression_hud.gd" id="6_progression"]
+[ext_resource type="Script" path="res://ui/context_action_hud.gd" id="7_context"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.42
@@ -42,6 +43,9 @@ script = ExtResource("5_hud")
 
 [node name="ProgressionHUD" type="Node" parent="."]
 script = ExtResource("6_progression")
+
+[node name="ContextActionHUD" type="Node" parent="."]
+script = ExtResource("7_context")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=850860063]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.7, 0)
