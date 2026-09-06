@@ -1,5 +1,9 @@
 extends Node
 
+signal phase_changed(new_phase: int)
+signal world_seed_changed(new_seed: int)
+signal planet_changed(system_seed: int, planet_index: int, planet_seed: int)
+
 
 enum Phase {
 	CREATURE,
@@ -13,71 +17,20 @@ enum Phase {
 
 const RANDOM_WORLD_SEED_MIN: int = 1
 const RANDOM_WORLD_SEED_MAX: int = 2_147_483_647
+const STATE_SCHEMA: int = 2
 
 const PHASE_ABILITIES: Dictionary = {
-	Phase.CREATURE: [
-		&"bite",
-		&"eat",
-		&"drink",
-		&"socialize",
-		&"mate",
-	],
-	Phase.TRIBE: [
-		&"bite",
-		&"eat",
-		&"drink",
-		&"socialize",
-		&"mate",
-		&"gather",
-		&"chop",
-		&"mine",
-		&"build",
-	],
-	Phase.ANCIENT_MEDIEVAL: [
-		&"gather",
-		&"chop",
-		&"mine",
-		&"build",
-		&"farm",
-		&"trade",
-	],
-	Phase.NATION: [
-		&"gather",
-		&"chop",
-		&"mine",
-		&"build",
-		&"farm",
-		&"trade",
-		&"industrialize",
-	],
-	Phase.SPACE: [
-		&"build",
-		&"trade",
-		&"industrialize",
-		&"colonize",
-		&"terraform",
-	],
-	Phase.MULTIVERSE: [
-		&"build",
-		&"trade",
-		&"industrialize",
-		&"colonize",
-		&"terraform",
-		&"travel_multiverse",
-	],
+	Phase.CREATURE: [&"bite", &"eat", &"drink", &"socialize", &"mate"],
+	Phase.TRIBE: [&"bite", &"eat", &"drink", &"socialize", &"mate", &"gather", &"chop", &"mine", &"build"],
+	Phase.ANCIENT_MEDIEVAL: [&"gather", &"chop", &"mine", &"build", &"farm", &"trade"],
+	Phase.NATION: [&"gather", &"chop", &"mine", &"build", &"farm", &"trade", &"industrialize"],
+	Phase.SPACE: [&"build", &"trade", &"industrialize", &"colonize", &"terraform"],
+	Phase.MULTIVERSE: [&"build", &"trade", &"industrialize", &"colonize", &"terraform", &"travel_multiverse"],
 }
 
-
-# Jeder neue Durchlauf beginnt in der Kreaturenphase.
 var current_phase: int = Phase.CREATURE
-
-# Standardmäßig erzeugt jeder Programmstart ein neues deterministisches System.
-# Für reproduzierbare Tests kann use_random_world_seed auf false gesetzt werden.
 var use_random_world_seed: bool = true
 var fixed_world_seed: int = 12345
-
-# world_seed beschreibt immer den aktuell besuchten Planeten. system_seed bleibt
-# beim Wechsel zwischen Planeten stabil und reproduziert den gesamten Katalog.
 var world_seed: int = 12345
 var system_seed: int = 12345
 var current_planet_index: int = 0
@@ -118,9 +71,13 @@ func start_new_random_world() -> void:
 	use_random_world_seed = true
 	_world_seed_initialized = false
 	_system_seed_initialized = false
+	current_phase = Phase.CREATURE
 	current_planet_index = 0
 	initialize_world_seed()
 	_rebuild_world_generator_if_available()
+	var progression := get_node_or_null("/root/ProgressionService")
+	if progression != null and progression.has_method("reset_for_new_game"):
+		progression.call("reset_for_new_game")
 
 
 func start_world_with_seed(new_world_seed: int) -> void:
@@ -128,6 +85,7 @@ func start_world_with_seed(new_world_seed: int) -> void:
 	fixed_world_seed = _sanitize_world_seed(new_world_seed)
 	_world_seed_initialized = false
 	_system_seed_initialized = false
+	current_phase = Phase.CREATURE
 	current_planet_index = 0
 	initialize_world_seed(fixed_world_seed, true)
 	_rebuild_world_generator_if_available()
@@ -142,9 +100,9 @@ func set_world_seed(
 	if not _system_seed_initialized:
 		system_seed = world_seed
 		_system_seed_initialized = true
-	print("GameState world seed: ", world_seed)
 	if rebuild_generator:
 		_rebuild_world_generator_if_available()
+	world_seed_changed.emit(world_seed)
 
 
 func activate_planet(
@@ -157,10 +115,7 @@ func activate_planet(
 	current_planet_index = maxi(planet_index, 0)
 	set_world_seed(planet_seed, false)
 	_rebuild_world_generator_if_available()
-	print(
-		"Activated planet %d in system %d with world seed %d"
-		% [current_planet_index, system_seed, world_seed]
-	)
+	planet_changed.emit(system_seed, current_planet_index, world_seed)
 
 
 func get_world_seed() -> int:
@@ -182,10 +137,7 @@ func get_current_planet_index() -> int:
 
 
 func has_ability(ability: StringName) -> bool:
-	var available_abilities: Array = PHASE_ABILITIES.get(
-		current_phase,
-		[]
-	)
+	var available_abilities: Array = PHASE_ABILITIES.get(current_phase, [])
 	return ability in available_abilities
 
 
@@ -193,26 +145,56 @@ func set_phase(new_phase: int) -> void:
 	if not PHASE_ABILITIES.has(new_phase):
 		push_warning("Unknown game phase: %s" % new_phase)
 		return
+	if current_phase == new_phase:
+		return
 	current_phase = new_phase
-	print("Game phase changed to: ", get_phase_name())
+	phase_changed.emit(current_phase)
 
 
 func get_phase_name() -> String:
 	match current_phase:
-		Phase.CREATURE:
-			return "Creature"
-		Phase.TRIBE:
-			return "Tribe"
-		Phase.ANCIENT_MEDIEVAL:
-			return "Ancient / Medieval"
-		Phase.NATION:
-			return "Nation"
-		Phase.SPACE:
-			return "Space"
-		Phase.MULTIVERSE:
-			return "Multiverse"
-		_:
-			return "Unknown"
+		Phase.CREATURE: return "Creature"
+		Phase.TRIBE: return "Tribe"
+		Phase.ANCIENT_MEDIEVAL: return "Ancient / Medieval"
+		Phase.NATION: return "Nation"
+		Phase.SPACE: return "Space"
+		Phase.MULTIVERSE: return "Multiverse"
+		_: return "Unknown"
+
+
+func export_state() -> Dictionary:
+	return {
+		"schema": STATE_SCHEMA,
+		"phase": current_phase,
+		"system_seed": get_system_seed(),
+		"world_seed": get_world_seed(),
+		"planet_index": get_current_planet_index(),
+	}
+
+
+func import_state(data: Dictionary, rebuild_generator: bool = true) -> void:
+	var imported_system_seed: int = _sanitize_world_seed(
+		int(data.get("system_seed", data.get("world_seed", 12345)))
+	)
+	var imported_world_seed: int = _sanitize_world_seed(
+		int(data.get("world_seed", imported_system_seed))
+	)
+	var imported_phase: int = int(data.get("phase", Phase.CREATURE))
+	if not PHASE_ABILITIES.has(imported_phase):
+		imported_phase = Phase.CREATURE
+	use_random_world_seed = false
+	fixed_world_seed = imported_system_seed
+	system_seed = imported_system_seed
+	world_seed = imported_world_seed
+	current_planet_index = maxi(int(data.get("planet_index", 0)), 0)
+	current_phase = imported_phase
+	_system_seed_initialized = true
+	_world_seed_initialized = true
+	if rebuild_generator:
+		_rebuild_world_generator_if_available()
+	world_seed_changed.emit(world_seed)
+	phase_changed.emit(current_phase)
+	planet_changed.emit(system_seed, current_planet_index, world_seed)
 
 
 func _set_system_seed_for_new_run(new_seed: int) -> void:
