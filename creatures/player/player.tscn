@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://creatures/player/player_controller.gd" id="1_player"]
 [ext_resource type="Script" path="res://creatures/runtime/creature_runtime_visual.gd" id="2_runtime"]
-[ext_resource type="Script" path="res://creatures/runtime/procedural_locomotion_animator_v2.gd" id="3_locomotion"]
+[ext_resource type="Script" path="res://creatures/runtime/adaptive_locomotion_animator.gd" id="3_locomotion"]
 [ext_resource type="Script" path="res://creatures/runtime/creature_heading_controller.gd" id="4_heading"]
 [ext_resource type="Script" path="res://ui/hud_presentation_v4.gd" id="5_hud"]
 [ext_resource type="Script" path="res://ui/progression_hud.gd" id="6_progression"]
@@ -31,7 +31,7 @@ shape = SubResource("CapsuleShape3D_player")
 [node name="CreatureRuntimeVisual" type="Node3D" parent="."]
 script = ExtResource("2_runtime")
 
-[node name="ProceduralLocomotionAnimator" type="Node" parent="."]
+[node name="AdaptiveLocomotionAnimator" type="Node" parent="."]
 script = ExtResource("3_locomotion")
 
 [node name="CreatureHeadingController" type="Node" parent="."]
