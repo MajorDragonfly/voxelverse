@@ -1,5 +1,4 @@
 extends Node
-class_name ProgressionService
 
 signal part_unlocked(part_id: String, reason: String)
 signal species_discovered(species_key: String, species_name: String)
@@ -187,10 +186,7 @@ func _unlock_species_part(species_seed: int, blueprint: Dictionary) -> String:
 	var parts: Array = blueprint.get("parts", [])
 	for placement_value in parts:
 		if placement_value is Dictionary:
-			_append_candidate(
-				candidates,
-				str(placement_value.get("part_id", ""))
-			)
+			_append_candidate(candidates, str(placement_value.get("part_id", "")))
 	var paint: Dictionary = blueprint.get("paint", {})
 	_append_candidate(candidates, str(paint.get("part_id", "")))
 	candidates.sort()
