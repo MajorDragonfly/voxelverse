@@ -4,6 +4,7 @@ class_name PlayerController
 signal died
 signal respawned
 signal gameplay_message(text: String)
+signal creature_attacked(target: Node, damage: float)
 
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
@@ -22,6 +23,14 @@ const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
 
 @export_category("Interaction")
 @export var interaction_range: float = 3.2
+@export_range(0.2, 3.0, 0.05) var bite_cooldown: float = 0.68
+@export_range(0.5, 20.0, 0.5) var bite_damage_scale: float = 8.0
+
+@export_category("Creature Stats")
+@export_range(0.0, 100.0, 0.1) var attack_power: float = 1.0
+@export_range(0.0, 100.0, 0.1) var defense_rating: float = 1.0
+@export_range(0.0, 100.0, 0.1) var diet_plant: float = 0.0
+@export_range(0.0, 100.0, 0.1) var diet_meat: float = 0.0
 
 @export_category("Survival")
 @export_range(1.0, 1000.0, 1.0) var maximum_health: float = 100.0
@@ -41,6 +50,7 @@ var is_dead: bool = false
 
 var _starvation_damage_timer: float = 0.0
 var _dehydration_damage_timer: float = 0.0
+var _bite_cooldown_timer: float = 0.0
 var _message_label: Label
 var _message_timer: float = 0.0
 
@@ -76,6 +86,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	_bite_cooldown_timer = maxf(_bite_cooldown_timer - delta, 0.0)
 	if not is_dead:
 		_update_survival(delta)
 	_update_message(delta)
@@ -128,11 +139,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y -= fall_acceleration * delta
 
-	if (
-		Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
-		and Input.is_action_just_pressed("primary_action")
-	):
-		_try_primary_action()
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		if Input.is_action_just_pressed("primary_action"):
+			_try_primary_action()
+		if Input.is_action_just_pressed("bite_action"):
+			_try_bite_action()
 	if grounded_before_move and velocity.y <= 0.0:
 		_attempt_step_up(delta)
 	move_and_slide()
@@ -211,6 +222,30 @@ func _try_primary_action() -> void:
 		collider.call("interact", self)
 
 
+func _try_bite_action() -> void:
+	if _bite_cooldown_timer > 0.0:
+		return
+	if not can_perform_action(&"bite"):
+		show_gameplay_message("Bite is not available in this phase.")
+		return
+	interaction_ray.force_raycast_update()
+	if not interaction_ray.is_colliding():
+		show_gameplay_message("Nothing in bite range.", 1.2)
+		return
+	var collision_point: Vector3 = interaction_ray.get_collision_point()
+	if global_position.distance_to(collision_point) > interaction_range:
+		show_gameplay_message("Target is too far away.", 1.2)
+		return
+	var collider := interaction_ray.get_collider() as Node
+	if collider == null or not collider.has_method("receive_creature_attack"):
+		show_gameplay_message("That cannot be bitten.", 1.2)
+		return
+	_bite_cooldown_timer = bite_cooldown
+	var damage: float = clampf(attack_power * bite_damage_scale, 2.0, 80.0)
+	collider.call("receive_creature_attack", damage, self)
+	creature_attacked.emit(collider, damage)
+
+
 func _try_drink_water() -> void:
 	if not can_perform_action(&"drink"):
 		show_gameplay_message("You cannot drink yet.")
@@ -229,7 +264,9 @@ func can_perform_action(action: StringName) -> bool:
 func receive_damage(damage: float) -> void:
 	if is_dead or damage <= 0.0:
 		return
-	current_health = maxf(current_health - damage, 0.0)
+	var mitigation: float = 1.0 + maxf(defense_rating, 0.0) * 0.12
+	var effective_damage: float = maxf(damage / mitigation, damage * 0.25)
+	current_health = maxf(current_health - effective_damage, 0.0)
 	_update_hud()
 	if current_health <= 0.0:
 		_die()
@@ -256,6 +293,34 @@ func restore_thirst(amount: float) -> void:
 	current_thirst = minf(current_thirst + amount, maximum_thirst)
 	_dehydration_damage_timer = 0.0
 	_update_hud()
+
+
+func consume_food(food_type: String, base_nutrition: float) -> bool:
+	if is_dead or base_nutrition <= 0.0:
+		return false
+	var affinity: float = get_diet_affinity(food_type)
+	if affinity <= 0.05:
+		show_gameplay_message("Your mouth cannot digest this food well.")
+		return false
+	if current_hunger >= maximum_hunger - 0.01:
+		show_gameplay_message("Not hungry.")
+		return false
+	var efficiency: float = clampf(0.35 + affinity * 0.25, 0.35, 1.25)
+	var nutrition: float = base_nutrition * efficiency
+	restore_hunger(nutrition)
+	if affinity >= 2.0:
+		heal(base_nutrition * 0.04)
+	show_gameplay_message(
+		"Ate %s food · +%d hunger" % [food_type, roundi(nutrition)]
+	)
+	return true
+
+
+func get_diet_affinity(food_type: String) -> float:
+	match food_type:
+		"plant": return maxf(diet_plant, 0.0)
+		"meat": return maxf(diet_meat, 0.0)
+		_: return 0.0
 
 
 func get_health_ratio() -> float:
