@@ -73,7 +73,6 @@ func _build_runtime_preview() -> void:
 	if is_instance_valid(_preview):
 		_preview.queue_free()
 	_preview = RuntimePreview.new()
-	# The locomotion animator binds to this stable path.
 	_preview.name = "BlueprintCreatureVisual"
 	_preview.position = Vector3(0.0, runtime_visual_height, 0.0)
 	_preview.scale = Vector3.ONE * runtime_visual_scale
@@ -110,6 +109,10 @@ func _apply_stats_to_player() -> void:
 	player.set("jump_velocity", clampf(float(stats.get("jump", 6.0)), 3.0, 9.0))
 	player.set("maximum_health", new_maximum_health)
 	player.set("current_health", new_maximum_health * health_ratio)
+	player.set("attack_power", maxf(float(stats.get("attack", 1.0)), 0.1))
+	player.set("defense_rating", maxf(float(stats.get("defense", 1.0)), 0.0))
+	player.set("diet_plant", maxf(float(stats.get("diet_plant", 0.0)), 0.0))
+	player.set("diet_meat", maxf(float(stats.get("diet_meat", 0.0)), 0.0))
 	player.set(
 		"hunger_loss_per_second",
 		clampf(float(stats.get("hunger_drain", 0.20)), 0.03, 2.0)
