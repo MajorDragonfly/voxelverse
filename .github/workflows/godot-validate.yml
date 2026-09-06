@@ -10,7 +10,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 16
+    timeout-minutes: 18
 
     steps:
       - name: Check out repository
@@ -166,6 +166,27 @@ jobs:
           cat /tmp/meta-runtime-test.log
           exit "$TEST_STATUS"
 
+      - name: Run gameplay acceptance test
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          timeout 75s "$GODOT" --headless --path . \
+            --script res://tests/gameplay_acceptance_test.gd \
+            > /tmp/gameplay-acceptance-test.log 2>&1
+          TEST_STATUS=$?
+          if [ "$TEST_STATUS" -eq 124 ]; then
+            echo "Gameplay acceptance test timed out." >> /tmp/gameplay-acceptance-test.log
+            TEST_STATUS=1
+          fi
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
+            /tmp/gameplay-acceptance-test.log; then
+            TEST_STATUS=1
+          fi
+          cat /tmp/gameplay-acceptance-test.log
+          exit "$TEST_STATUS"
+
       - name: Upload validation diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -179,5 +200,6 @@ jobs:
             /tmp/world-continuity-test.log
             /tmp/world-layered-test.log
             /tmp/meta-runtime-test.log
+            /tmp/gameplay-acceptance-test.log
           if-no-files-found: warn
           retention-days: 3
