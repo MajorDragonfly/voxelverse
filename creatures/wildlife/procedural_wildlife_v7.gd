@@ -7,6 +7,7 @@ const RuntimePreview = preload(
 	"res://creatures/runtime/creature_runtime_preview.gd"
 )
 const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
+const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 
 @export var species_seed: int = 1
 @export var individual_seed: int = 1
@@ -17,6 +18,10 @@ const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
 @export_range(0.1, 1.0, 0.05) var visual_scale_min: float = 0.42
 @export_range(0.1, 1.2, 0.05) var visual_scale_max: float = 0.72
 @export_range(0.1, 0.8, 0.05) var maximum_step_height: float = 0.42
+@export_category("Behaviour")
+@export_range(0.5, 4.0, 0.1) var predator_attack_distance: float = 1.55
+@export_range(0.2, 5.0, 0.1) var predator_attack_cooldown: float = 1.35
+@export_range(0.0, 50.0, 0.5) var predator_attack_damage: float = 7.0
 
 var blueprint: Dictionary = {}
 var ecological_role: String = "forager"
@@ -27,6 +32,7 @@ var _random := RandomNumberGenerator.new()
 var _wander_direction := Vector3.ZERO
 var _decision_timer: float = 0.0
 var _move_speed: float = 1.7
+var _attack_timer: float = 0.0
 
 
 func configure(
@@ -61,7 +67,6 @@ func _build_species() -> void:
 	)
 	ecological_role = SpeciesFactory.get_role(blueprint)
 	add_to_group(StringName("wildlife_%s" % ecological_role))
-
 	_visual_root = Node3D.new()
 	_visual_root.name = "SpeciesVisual"
 	add_child(_visual_root)
@@ -81,7 +86,6 @@ func _build_species() -> void:
 	else:
 		_preview.call("set_blueprint", blueprint)
 	_disable_collisions(_preview)
-
 	var stats: Dictionary = Blueprint.calculate_stats(blueprint)
 	_move_speed = clampf(
 		base_move_speed + float(stats.get("speed", 5.0)) * 0.17,
@@ -89,17 +93,14 @@ func _build_species() -> void:
 		4.4
 	)
 	match ecological_role:
-		"predator":
-			_move_speed *= 1.15
-		"grazer":
-			_move_speed *= 0.90
-		"climber":
-			maximum_step_height = 0.56
-		"swimmer":
-			_move_speed *= 1.05
+		"predator": _move_speed *= 1.15
+		"grazer": _move_speed *= 0.90
+		"climber": maximum_step_height = 0.56
+		"swimmer": _move_speed *= 1.05
 
 
 func _physics_process(delta: float) -> void:
+	_attack_timer = maxf(_attack_timer - delta, 0.0)
 	_decision_timer -= delta
 	if _decision_timer <= 0.0:
 		_choose_wander_state()
@@ -130,6 +131,34 @@ func _physics_process(delta: float) -> void:
 		)
 
 
+func interact(actor: Node) -> void:
+	if actor == null:
+		return
+	if actor.has_method("can_perform_action"):
+		if not bool(actor.call("can_perform_action", &"socialize")):
+			return
+	var progression := get_node_or_null("/root/ProgressionService")
+	if progression == null or not progression.has_method("register_species_discovery"):
+		return
+	var result: Dictionary = progression.call(
+		"register_species_discovery",
+		species_seed,
+		blueprint,
+		WorldGenerator.get_world_seed()
+	)
+	var species_data: Dictionary = blueprint.get("species", {})
+	var species_name: String = str(species_data.get("display_name", blueprint.get("name", "Unknown Species")))
+	if bool(result.get("is_new", false)):
+		var message: String = "Discovered %s" % species_name
+		var unlocked_part: String = str(result.get("unlocked_part", ""))
+		if not unlocked_part.is_empty():
+			var definition: Dictionary = PartLibrary.get_part(unlocked_part)
+			message += " · unlocked %s" % str(definition.get("name", unlocked_part))
+		_show_actor_message(actor, message)
+	else:
+		_show_actor_message(actor, "%s · %s" % [species_name, ecological_role.capitalize()])
+
+
 func _update_role_direction() -> void:
 	if _player == null or not is_instance_valid(_player):
 		_player = get_tree().get_first_node_in_group(&"player") as Node3D
@@ -141,8 +170,20 @@ func _update_role_direction() -> void:
 		return
 	if ecological_role == "predator" and distance < 13.0:
 		_wander_direction = to_player.normalized()
+		if distance <= predator_attack_distance:
+			_try_predator_attack()
 	elif ecological_role in ["grazer", "forager"] and distance < 6.0:
 		_wander_direction = -to_player.normalized()
+
+
+func _try_predator_attack() -> void:
+	if _attack_timer > 0.0 or _player == null:
+		return
+	if not _player.has_method("receive_damage"):
+		return
+	_attack_timer = predator_attack_cooldown
+	_player.call("receive_damage", predator_attack_damage)
+	_show_actor_message(_player, "A predator hit you for %d." % roundi(predator_attack_damage))
 
 
 func _choose_wander_state() -> void:
@@ -173,9 +214,7 @@ func _attempt_step_up(delta: float) -> bool:
 	var raised_transform: Transform3D = original_transform.translated(up_motion)
 	if test_move(raised_transform, horizontal_motion):
 		return false
-	var forward_transform: Transform3D = raised_transform.translated(
-		horizontal_motion
-	)
+	var forward_transform: Transform3D = raised_transform.translated(horizontal_motion)
 	if not test_move(
 		forward_transform,
 		Vector3.DOWN * (maximum_step_height + 0.10)
@@ -183,6 +222,11 @@ func _attempt_step_up(delta: float) -> bool:
 		return false
 	global_transform = raised_transform
 	return true
+
+
+func _show_actor_message(actor: Node, message: String) -> void:
+	if actor.has_method("show_gameplay_message"):
+		actor.call("show_gameplay_message", message)
 
 
 func _disable_collisions(root: Node) -> void:
