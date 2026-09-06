@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cm26fs2gvsrep" path="res://world/resources/nests/nest.tscn" id="3_xwkvk"]
 [ext_resource type="PackedScene" path="res://world/visuals/planet_visual_environment.tscn" id="4_c651c"]
 [ext_resource type="Script" path="res://world/visuals/world_presentation_director_v6.gd" id="5_presentation"]
-[ext_resource type="Script" path="res://world/simulation/region_background_simulation_v7.gd" id="6_simulation"]
+[ext_resource type="Script" path="res://world/simulation/region_ecology_simulation.gd" id="6_simulation"]
 [ext_resource type="Script" path="res://world/fauna/fauna_streamer_v7.gd" id="7_fauna"]
 [ext_resource type="Script" path="res://world/space/star_system_runtime_v7.gd" id="8_system"]
 
@@ -18,7 +18,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="Nest" parent="." unique_id=1293792252 instance=ExtResource("3_xwkvk")]
 
-[node name="RegionBackgroundSimulationV7" type="Node" parent="."]
+[node name="RegionEcologySimulation" type="Node" parent="."]
 script = ExtResource("6_simulation")
 tick_interval = 4.0
 simulated_hours_per_tick = 0.25
@@ -44,4 +44,4 @@ script = ExtResource("5_presentation")
 [node name="StarSystemRuntimeV7" type="Node" parent="."]
 script = ExtResource("8_system")
 enable_planet_cycle_debug_key = true
-show_planet_runtime_label = true
+show_planet_runtime_label = false
