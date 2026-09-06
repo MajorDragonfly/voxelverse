@@ -93,7 +93,10 @@ func _test_planet_cycle_runtime() -> void:
 	_expect(runtime_script != null, "Star-system runtime could not load.")
 	if runtime_script == null:
 		return
-	var runtime := runtime_script.new()
+	var runtime: Node = runtime_script.new() as Node
+	_expect(runtime != null, "Star-system runtime could not instantiate.")
+	if runtime == null:
+		return
 	runtime.set("reload_scene_on_planet_change", false)
 	root.add_child(runtime)
 	await process_frame
