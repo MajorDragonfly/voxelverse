@@ -30,7 +30,6 @@ var _camera: Camera3D
 
 var _phase: float = 0.0
 var _movement_blend: float = 0.0
-var _binding_timer: float = 0.0
 var _bound_preview_id: int = 0
 var _base_preview_position: Vector3 = Vector3.ZERO
 var _base_body_rotation: Vector3 = Vector3.ZERO
@@ -54,11 +53,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_binding_timer -= delta
-	if _binding_timer <= 0.0:
-		_binding_timer = 0.45
-		_validate_or_rebind()
-	if _preview == null or not is_instance_valid(_preview):
+	# The procedural preview can rebuild its child hierarchy without replacing
+	# the preview node itself. Validate the complete binding every frame before
+	# touching stored leg/knee/foot references.
+	if not _validate_or_rebind():
 		return
 
 	var horizontal_speed: float = Vector2(_player.velocity.x, _player.velocity.z).length()
@@ -89,25 +87,65 @@ func get_gait_debug_state() -> Dictionary:
 	}
 
 
-func _validate_or_rebind() -> void:
+func _validate_or_rebind() -> bool:
+	if _player == null or not is_instance_valid(_player):
+		return false
 	var expected := _player.get_node_or_null(
 		"CreatureRuntimeVisual/BlueprintCreatureVisual"
 	) as Node3D
 	if expected == null:
-		return
-	if expected.get_instance_id() != _bound_preview_id:
+		_clear_binding()
+		return false
+
+	var needs_rebind: bool = (
+		_preview == null
+		or not is_instance_valid(_preview)
+		or expected.get_instance_id() != _bound_preview_id
+	)
+	if not needs_rebind and _body_root != null and not is_instance_valid(_body_root):
+		needs_rebind = true
+	if not needs_rebind and not _leg_records_are_valid():
+		needs_rebind = true
+
+	if needs_rebind:
 		_bind_runtime_visual()
-		return
-	if _body_root != null and not is_instance_valid(_body_root):
-		_bind_runtime_visual()
+	return _preview != null and is_instance_valid(_preview)
+
+
+func _clear_binding() -> void:
+	_preview = null
+	_body_root = null
+	_body_slices.clear()
+	_part_roots.clear()
+	_leg_records.clear()
+	_bound_preview_id = 0
+
+
+func _leg_records_are_valid() -> bool:
+	for record in _leg_records:
+		var root_value: Variant = record.get("root")
+		if root_value != null and not is_instance_valid(root_value):
+			return false
+		var knee_value: Variant = record.get("knee")
+		if knee_value != null and not is_instance_valid(knee_value):
+			return false
+		var foot_value: Variant = record.get("foot")
+		if foot_value != null and not is_instance_valid(foot_value):
+			return false
+	return true
 
 
 func _bind_runtime_visual() -> void:
+	if _player == null or not is_instance_valid(_player):
+		_clear_binding()
+		return
 	var candidate := _player.get_node_or_null(
 		"CreatureRuntimeVisual/BlueprintCreatureVisual"
 	) as Node3D
 	if candidate == null:
+		_clear_binding()
 		return
+
 	_preview = candidate
 	_bound_preview_id = candidate.get_instance_id()
 	_base_preview_position = _preview.position
@@ -140,7 +178,7 @@ func _bind_runtime_visual() -> void:
 func _build_leg_records() -> void:
 	var legs: Array[Node3D] = []
 	for part_root in _part_roots:
-		if str(part_root.get_meta("creature_part_category", "")) == "legs":
+		if is_instance_valid(part_root) and str(part_root.get_meta("creature_part_category", "")) == "legs":
 			legs.append(part_root)
 	legs.sort_custom(func(a: Node3D, b: Node3D) -> bool:
 		if not is_equal_approx(a.position.z, b.position.z):
@@ -151,6 +189,8 @@ func _build_leg_records() -> void:
 	var positive_rank: int = 0
 	var negative_rank: int = 0
 	for leg in legs:
+		if not is_instance_valid(leg):
+			continue
 		var side: float = float(leg.get_meta("creature_part_side", 1.0))
 		var longitudinal_rank: int = positive_rank
 		var side_bit: int = 0
@@ -169,6 +209,8 @@ func _build_leg_records() -> void:
 
 
 func _create_runtime_leg_rig(leg: Node3D) -> Dictionary:
+	_remove_existing_runtime_leg_rig(leg)
+
 	var meshes: Array[MeshInstance3D] = []
 	var minimum_y: float = INF
 	var maximum_y: float = -INF
@@ -228,12 +270,25 @@ func _create_runtime_leg_rig(leg: Node3D) -> Dictionary:
 	}
 
 
+func _remove_existing_runtime_leg_rig(leg: Node3D) -> void:
+	for child in leg.get_children():
+		var rig := child as Node3D
+		if rig == null or not bool(rig.get_meta("adaptive_runtime_rig", false)):
+			continue
+		for rig_child in rig.get_children():
+			if rig_child is MeshInstance3D:
+				rig_child.reparent(leg, true)
+		rig.queue_free()
+
+
 func _store_base_transform(node: Node3D) -> void:
 	node.set_meta("adaptive_base_position", node.position)
 	node.set_meta("adaptive_base_rotation", node.rotation)
 
 
 func _animate_body(delta: float) -> void:
+	if _preview == null or not is_instance_valid(_preview):
+		return
 	var idle_breath: float = sin(_phase * 0.55) * 0.015
 	var step_bob: float = absf(sin(_phase * 2.0)) * body_bob_strength * _movement_blend
 	var target_position: Vector3 = _base_preview_position
@@ -257,7 +312,7 @@ func _animate_body(delta: float) -> void:
 
 
 func _animate_spine() -> void:
-	if _body_root != null:
+	if _body_root != null and is_instance_valid(_body_root):
 		var body_yaw: float = sin(_phase) * deg_to_rad(spine_wave_degrees) * _movement_blend
 		_body_root.rotation = _base_body_rotation + Vector3(0.0, body_yaw * 0.28, 0.0)
 	var count: int = _body_slices.size()
@@ -303,8 +358,8 @@ func _animate_non_leg_parts() -> void:
 
 func _animate_adaptive_legs() -> void:
 	for record in _leg_records:
-		var leg := record.get("root") as Node3D
-		if leg == null or not is_instance_valid(leg):
+		var leg: Node3D = _get_valid_node3d(record, "root")
+		if leg == null:
 			continue
 		var base_rotation: Vector3 = record.get("base_rotation", leg.rotation)
 		var base_position: Vector3 = record.get("base_position", leg.position)
@@ -319,17 +374,23 @@ func _animate_adaptive_legs() -> void:
 		record["lift"] = lift
 		record["wave"] = wave
 
-		var knee := record.get("knee") as Node3D
-		if knee != null and is_instance_valid(knee):
+		var knee: Node3D = _get_valid_node3d(record, "knee")
+		if knee != null:
 			var knee_base: Vector3 = record.get("knee_base_rotation", knee.rotation)
 			var knee_target: Vector3 = knee_base
-			knee_target.x += deg_to_rad(knee_bend_degrees) * (0.18 * _movement_blend + lift * 0.82)
+			knee_target.x += deg_to_rad(knee_bend_degrees) * (
+				0.18 * _movement_blend + lift * 0.82
+			)
 			knee.rotation = knee_target
 
 
 func _solve_ground_contact(delta: float) -> void:
 	if _leg_records.is_empty() or not _player.is_on_floor():
-		_grounding_offset = move_toward(_grounding_offset, 0.0, delta * ground_follow_speed * 0.25)
+		_grounding_offset = move_toward(
+			_grounding_offset,
+			0.0,
+			delta * ground_follow_speed * 0.25
+		)
 		return
 	var world := _player.get_world_3d()
 	if world == null:
@@ -337,8 +398,8 @@ func _solve_ground_contact(delta: float) -> void:
 	var space_state: PhysicsDirectSpaceState3D = world.direct_space_state
 	var offsets: Array[float] = []
 	for record in _leg_records:
-		var foot := record.get("foot") as Node3D
-		if foot == null or not is_instance_valid(foot):
+		var foot: Node3D = _get_valid_node3d(record, "foot")
+		if foot == null:
 			continue
 		var lift: float = float(record.get("lift", 0.0))
 		if lift > 0.42:
@@ -355,11 +416,20 @@ func _solve_ground_contact(delta: float) -> void:
 		var hit_position: Vector3 = hit.get("position", foot_position)
 		offsets.append(hit_position.y - foot_position.y)
 	if offsets.is_empty():
-		_grounding_offset = move_toward(_grounding_offset, 0.0, delta * ground_follow_speed * 0.25)
+		_grounding_offset = move_toward(
+			_grounding_offset,
+			0.0,
+			delta * ground_follow_speed * 0.25
+		)
 		return
 	offsets.sort()
-	var median: float = offsets[offsets.size() / 2]
-	var desired: float = clampf(median, -maximum_visual_ground_offset, maximum_visual_ground_offset)
+	var median_index: int = floori(float(offsets.size()) * 0.5)
+	var median: float = offsets[median_index]
+	var desired: float = clampf(
+		median,
+		-maximum_visual_ground_offset,
+		maximum_visual_ground_offset
+	)
 	_grounding_offset = lerpf(
 		_grounding_offset,
 		desired,
@@ -367,8 +437,23 @@ func _solve_ground_contact(delta: float) -> void:
 	)
 
 
+func _get_valid_node3d(record: Dictionary, key: String) -> Node3D:
+	var value: Variant = record.get(key)
+	if value == null:
+		return null
+	# Important: never use `record.get(key) as Node3D` directly. A Dictionary
+	# may still contain a reference to a freed Object for one frame after the
+	# procedural visual hierarchy was rebuilt; casting that freed Variant is a
+	# runtime error in Godot.
+	if not is_instance_valid(value):
+		return null
+	if not (value is Node3D):
+		return null
+	return value as Node3D
+
+
 func _animate_camera(delta: float) -> void:
-	if _camera_pivot != null:
+	if _camera_pivot != null and is_instance_valid(_camera_pivot):
 		var target_position: Vector3 = _base_camera_position
 		target_position.y += sin(_phase * 2.0) * camera_bob_strength * 0.06 * _movement_blend
 		target_position.x += cos(_phase) * camera_bob_strength * 0.025 * _movement_blend
@@ -376,6 +461,10 @@ func _animate_camera(delta: float) -> void:
 			target_position,
 			clampf(delta * 8.0, 0.0, 1.0)
 		)
-	if _camera != null:
+	if _camera != null and is_instance_valid(_camera):
 		var target_fov: float = _base_camera_fov + _movement_blend * movement_fov_bonus
-		_camera.fov = lerpf(_camera.fov, target_fov, clampf(delta * 4.0, 0.0, 1.0))
+		_camera.fov = lerpf(
+			_camera.fov,
+			target_fov,
+			clampf(delta * 4.0, 0.0, 1.0)
+		)
