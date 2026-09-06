@@ -1,9 +1,12 @@
 extends "res://world/resources/terrain/terrain_chunk_v7.gd"
 
 @export_category("Fast Terrain V8")
-@export_range(1, 8, 1) var color_sample_stride: int = 2
+@export_range(1, 8, 1) var color_sample_stride: int = 4
 
 var _fast_color_cache: Dictionary = {}
+var _fast_height_grid := PackedFloat32Array()
+var _fast_height_width: int = 0
+var _fast_height_depth: int = 0
 
 
 func generate_terrain() -> void:
@@ -78,6 +81,35 @@ func generate_terrain() -> void:
 	_apply_fast_heightmap_collision(cells_x, cells_z)
 
 
+func _build_local_height_cache() -> void:
+	var cells_x: int = _get_cells_x()
+	var cells_z: int = _get_cells_z()
+	_fast_height_width = cells_x + 2
+	_fast_height_depth = cells_z + 2
+	_fast_height_grid.resize(_fast_height_width * _fast_height_depth)
+	for cell_z in range(-1, cells_z + 1):
+		for cell_x in range(-1, cells_x + 1):
+			var world_center: Vector2 = _get_cell_center_world_position_by_index(cell_x, cell_z)
+			var grid_index: int = (cell_z + 1) * _fast_height_width + (cell_x + 1)
+			_fast_height_grid[grid_index] = WorldGenerator.get_visual_terrain_height(
+				world_center.x,
+				world_center.y
+			)
+
+
+func _get_column_height_by_index(cell_x: int, cell_z: int) -> float:
+	var grid_x: int = cell_x + 1
+	var grid_z: int = cell_z + 1
+	if (
+		grid_x >= 0 and grid_x < _fast_height_width
+		and grid_z >= 0 and grid_z < _fast_height_depth
+		and not _fast_height_grid.is_empty()
+	):
+		return _fast_height_grid[grid_z * _fast_height_width + grid_x]
+	var world_center: Vector2 = _get_cell_center_world_position_by_index(cell_x, cell_z)
+	return WorldGenerator.get_visual_terrain_height(world_center.x, world_center.y)
+
+
 func _append_quad(
 	vertices: PackedVector3Array,
 	normals: PackedVector3Array,
@@ -102,8 +134,8 @@ func _append_quad(
 
 func _get_fast_cell_color(cell_x: int, cell_z: int) -> Color:
 	var stride: int = maxi(color_sample_stride, 1)
-	var sample_x: int = clampi((cell_x / stride) * stride, 0, _get_cells_x() - 1)
-	var sample_z: int = clampi((cell_z / stride) * stride, 0, _get_cells_z() - 1)
+	var sample_x: int = clampi(floori(float(cell_x) / float(stride)) * stride, 0, _get_cells_x() - 1)
+	var sample_z: int = clampi(floori(float(cell_z) / float(stride)) * stride, 0, _get_cells_z() - 1)
 	var key := Vector2i(sample_x, sample_z)
 	if _fast_color_cache.has(key):
 		return _fast_color_cache[key]
