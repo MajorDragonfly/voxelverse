@@ -4,13 +4,20 @@ extends Node3D
 const TERRAIN_CHUNK_SCENE: PackedScene = preload(
 	"res://world/visuals/terrain/terrain_chunk.tscn"
 )
+const AdventureSpawnSelector = preload(
+	"res://world/generation/adventure_spawn_selector.gd"
+)
 
 @export_category("World Streaming")
-@export_range(0, 6, 1) var render_distance: int = 1
+@export_range(0, 6, 1) var render_distance: int = 2
 @export_range(1, 4, 1) var chunk_create_budget_per_tick: int = 1
-@export_range(0.02, 0.50, 0.01) var chunk_build_interval: float = 0.08
+@export_range(0.02, 0.50, 0.01) var chunk_build_interval: float = 0.11
 @export_range(0, 3, 1) var unload_hysteresis: int = 1
 @export var player_path: NodePath = NodePath("../Player")
+
+@export_category("Adventure Spawn")
+@export var choose_scenic_spawn_for_default_start: bool = true
+@export_range(60.0, 400.0, 10.0) var scenic_spawn_search_radius: float = 220.0
 
 var loaded_chunks: Dictionary = {}
 var current_player_chunk: Vector2i = Vector2i.ZERO
@@ -31,13 +38,26 @@ func _ready() -> void:
 		push_error("WorldManager could not find Player at path: %s" % player_path)
 		set_process(false)
 		return
+	set_process(false)
+	call_deferred("_initialize_streaming")
+
+
+func _initialize_streaming() -> void:
+	# Give SaveGameService two idle frames to restore a persisted player before
+	# selecting a new scenic spawn and before expensive terrain is generated.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not is_inside_tree() or player == null or not is_instance_valid(player):
+		return
+	_maybe_choose_adventure_spawn()
 	if not _read_chunk_dimensions():
-		set_process(false)
 		return
 	current_player_chunk = _world_position_to_chunk(player.global_position)
 	_create_chunk(current_player_chunk)
 	_plan_streaming()
 	world_initialized = true
+	_stream_build_timer = chunk_build_interval
+	set_process(true)
 
 
 func _process(delta: float) -> void:
@@ -66,7 +86,25 @@ func get_current_player_chunk() -> Vector2i:
 
 
 func refresh_streaming() -> void:
-	_plan_streaming()
+	if world_initialized:
+		_plan_streaming()
+
+
+func _maybe_choose_adventure_spawn() -> void:
+	if not choose_scenic_spawn_for_default_start:
+		return
+	var default_start := Vector3(0.0, 3.0, 0.0)
+	if player.global_position.distance_to(default_start) > 0.75:
+		return
+	var generator := get_node_or_null("/root/WorldGenerator")
+	if generator == null:
+		return
+	var spawn_position: Vector3 = AdventureSpawnSelector.find_spawn(
+		generator,
+		Vector2.ZERO,
+		scenic_spawn_search_radius
+	)
+	player.global_position = spawn_position
 
 
 func _read_chunk_dimensions() -> bool:
@@ -129,8 +167,14 @@ func _is_chunk_higher_priority(a: Vector2i, b: Vector2i) -> bool:
 	var travel := Vector2(velocity_3d.x, velocity_3d.z)
 	if travel.length_squared() > 0.10:
 		travel = travel.normalized()
-		var score_a: float = Vector2(delta_a.x, delta_a.y).normalized().dot(travel)
-		var score_b: float = Vector2(delta_b.x, delta_b.y).normalized().dot(travel)
+		var direction_a := Vector2(delta_a.x, delta_a.y)
+		var direction_b := Vector2(delta_b.x, delta_b.y)
+		var score_a: float = 0.0
+		var score_b: float = 0.0
+		if direction_a.length_squared() > 0.0:
+			score_a = direction_a.normalized().dot(travel)
+		if direction_b.length_squared() > 0.0:
+			score_b = direction_b.normalized().dot(travel)
 		if not is_equal_approx(score_a, score_b):
 			return score_a > score_b
 	var manhattan_a: int = absi(delta_a.x) + absi(delta_a.y)
