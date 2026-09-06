@@ -10,7 +10,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 14
+    timeout-minutes: 16
 
     steps:
       - name: Check out repository
@@ -31,8 +31,7 @@ jobs:
         run: |
           set -euo pipefail
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --path . --import \
-            2>&1 | tee /tmp/godot-import.log
+          "$GODOT" --headless --path . --import 2>&1 | tee /tmp/godot-import.log
           ! grep -E \
             "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
             /tmp/godot-import.log
@@ -45,23 +44,19 @@ jobs:
           timeout 55s "$GODOT" --headless --path . --quit-after 300 \
             > /tmp/main-runtime-test.log 2>&1
           TEST_STATUS=$?
-
           if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "Main runtime smoke test timed out after 55 seconds." \
-              >> /tmp/main-runtime-test.log
+            echo "Main runtime smoke test timed out after 55 seconds." >> /tmp/main-runtime-test.log
             TEST_STATUS=1
           fi
-
           if grep -E \
             "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
             /tmp/main-runtime-test.log; then
             TEST_STATUS=1
           fi
-
           cat /tmp/main-runtime-test.log
           exit "$TEST_STATUS"
 
-      - name: Run Creature V5 compatibility test
+      - name: Run legacy creature migration test
         shell: bash
         run: |
           set -euo pipefail
@@ -69,99 +64,107 @@ jobs:
           "$GODOT" --headless --path . \
             --script res://tests/creature_v5_smoke_test.gd
 
-      - name: Run Creature Builder V7 data test
+      - name: Run Creature Builder data test
         shell: bash
         run: |
           set -euo pipefail
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
           "$GODOT" --headless --path . \
             --script res://tests/creature_builder_v7_test.gd \
-            2>&1 | tee /tmp/creature-builder-v7-test.log
+            2>&1 | tee /tmp/creature-builder-test.log
 
-      - name: Run Creature Builder V7 scene test
+      - name: Run Creature Builder scene test
         shell: bash
         run: |
           set +e
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
           timeout 45s "$GODOT" --headless --path . \
             --script res://tests/creature_editor_v7_runtime_test.gd \
-            > /tmp/creature-editor-v7-runtime-test.log 2>&1
+            > /tmp/creature-editor-runtime-test.log 2>&1
           TEST_STATUS=$?
-
           if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "Creature Builder V7 scene test timed out." \
-              >> /tmp/creature-editor-v7-runtime-test.log
+            echo "Creature Builder scene test timed out." >> /tmp/creature-editor-runtime-test.log
             TEST_STATUS=1
           fi
-
           if grep -E \
             "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource" \
-            /tmp/creature-editor-v7-runtime-test.log; then
+            /tmp/creature-editor-runtime-test.log; then
             TEST_STATUS=1
           fi
-
-          cat /tmp/creature-editor-v7-runtime-test.log
+          cat /tmp/creature-editor-runtime-test.log
           exit "$TEST_STATUS"
 
-      - name: Run World Evolution V2 compatibility test
+      - name: Run procedural world diversity test
         shell: bash
         run: |
           set +e
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
           timeout 90s "$GODOT" --headless --path . \
             --script res://tests/world_evolution_v2_ci_test.gd \
-            > /tmp/world-evolution-test.log 2>&1
+            > /tmp/world-diversity-test.log 2>&1
           TEST_STATUS=$?
-
           if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "World Evolution V2 smoke test timed out after 90 seconds." \
-              >> /tmp/world-evolution-test.log
-          fi
-
-          if grep -E \
-            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
-            /tmp/world-evolution-test.log; then
+            echo "Procedural world diversity test timed out." >> /tmp/world-diversity-test.log
             TEST_STATUS=1
           fi
-
-          grep -E \
-            "World Evolution|World sample|World test stage|ERROR|SCRIPT ERROR|Parse Error|failed|outside|invalid|lacks|fewer|seed|timed out" \
-            /tmp/world-evolution-test.log || cat /tmp/world-evolution-test.log
-
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
+            /tmp/world-diversity-test.log; then
+            TEST_STATUS=1
+          fi
+          cat /tmp/world-diversity-test.log
           exit "$TEST_STATUS"
 
-      - name: Run World Runtime V6 compatibility test
+      - name: Run active world continuity test
         shell: bash
         run: |
           set +e
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
           timeout 90s "$GODOT" --headless --path . \
-            --script res://tests/world_runtime_v6_test.gd \
-            > /tmp/world-runtime-v6-test.log 2>&1
+            --script res://tests/world_runtime_continuity_test.gd \
+            > /tmp/world-continuity-test.log 2>&1
           TEST_STATUS=$?
-
           if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "World Runtime V6 test timed out after 90 seconds." \
-              >> /tmp/world-runtime-v6-test.log
-          fi
-
-          if grep -E \
-            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
-            /tmp/world-runtime-v6-test.log; then
+            echo "World runtime continuity test timed out." >> /tmp/world-continuity-test.log
             TEST_STATUS=1
           fi
-
-          cat /tmp/world-runtime-v6-test.log
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
+            /tmp/world-continuity-test.log; then
+            TEST_STATUS=1
+          fi
+          cat /tmp/world-continuity-test.log
           exit "$TEST_STATUS"
 
-      - name: Run Layered World V7 test
+      - name: Run Layered World terrain test
         shell: bash
         run: |
           set -euo pipefail
           GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
           "$GODOT" --headless --path . \
             --script res://tests/world_layered_v7_test.gd \
-            2>&1 | tee /tmp/world-layered-v7-test.log
+            2>&1 | tee /tmp/world-layered-test.log
+
+      - name: Run meta runtime test
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          timeout 60s "$GODOT" --headless --path . \
+            --script res://tests/meta_runtime_test.gd \
+            > /tmp/meta-runtime-test.log 2>&1
+          TEST_STATUS=$?
+          if [ "$TEST_STATUS" -eq 124 ]; then
+            echo "Meta runtime test timed out." >> /tmp/meta-runtime-test.log
+            TEST_STATUS=1
+          fi
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
+            /tmp/meta-runtime-test.log; then
+            TEST_STATUS=1
+          fi
+          cat /tmp/meta-runtime-test.log
+          exit "$TEST_STATUS"
 
       - name: Upload validation diagnostics
         if: always()
@@ -170,10 +173,11 @@ jobs:
           name: voxelverse-validation-diagnostics
           path: |
             /tmp/main-runtime-test.log
-            /tmp/creature-builder-v7-test.log
-            /tmp/creature-editor-v7-runtime-test.log
-            /tmp/world-evolution-test.log
-            /tmp/world-runtime-v6-test.log
-            /tmp/world-layered-v7-test.log
+            /tmp/creature-builder-test.log
+            /tmp/creature-editor-runtime-test.log
+            /tmp/world-diversity-test.log
+            /tmp/world-continuity-test.log
+            /tmp/world-layered-test.log
+            /tmp/meta-runtime-test.log
           if-no-files-found: warn
           retention-days: 3
