@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://cflvob4gek5k0"]
 
-[ext_resource type="Script" path="res://creatures/player/player_controller.gd" id="1_player"]
+[ext_resource type="Script" path="res://creatures/player/player_controller_v2.gd" id="1_player"]
 [ext_resource type="Script" path="res://creatures/runtime/creature_runtime_visual.gd" id="2_runtime"]
-[ext_resource type="Script" path="res://creatures/runtime/adaptive_locomotion_animator.gd" id="3_locomotion"]
+[ext_resource type="Script" path="res://creatures/runtime/adaptive_locomotion_animator_v2.gd" id="3_locomotion"]
 [ext_resource type="Script" path="res://creatures/runtime/creature_heading_controller.gd" id="4_heading"]
 [ext_resource type="Script" path="res://ui/hud_presentation_v4.gd" id="5_hud"]
 [ext_resource type="Script" path="res://ui/progression_hud.gd" id="6_progression"]
 [ext_resource type="Script" path="res://ui/context_action_hud.gd" id="7_context"]
+[ext_resource type="Script" path="res://ui/target_health_hud.gd" id="8_target_health"]
+[ext_resource type="Script" path="res://ui/creature_inspection_hud.gd" id="9_inspection"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.42
@@ -20,6 +22,7 @@ height = 1.65
 script = ExtResource("1_player")
 maximum_step_height = 0.58
 step_floor_probe = 0.10
+inspection_radius = 20.0
 
 [node name="BodyMesh" type="MeshInstance3D" parent="." unique_id=442709546]
 visible = false
@@ -47,6 +50,14 @@ script = ExtResource("6_progression")
 [node name="ContextActionHUD" type="Node" parent="."]
 script = ExtResource("7_context")
 
+[node name="TargetHealthHUD" type="Node" parent="."]
+script = ExtResource("8_target_health")
+linger_time = 5.0
+
+[node name="CreatureInspectionHUD" type="Node" parent="."]
+script = ExtResource("9_inspection")
+maximum_listed_creatures = 6
+
 [node name="CameraPivot" type="Node3D" parent="." unique_id=850860063]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.7, 0)
 
@@ -59,6 +70,8 @@ fov = 66.0
 
 [node name="InteractionRay" type="RayCast3D" parent="CameraPivot/SpringArm3D/Camera3D" unique_id=1411619374]
 target_position = Vector3(0, 0, -3.2)
+collision_mask = 5
+collide_with_areas = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=311428190]
 
