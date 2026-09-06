@@ -30,7 +30,7 @@ func _run() -> void:
 	save_service.set("autosave_enabled", false)
 	_test_game_state_roundtrip(game_state)
 	_test_progression(progression)
-	_test_region_persistence()
+	await _test_region_persistence()
 	await _test_clean_player_runtime()
 	_test_save_service(save_service)
 	_test_removed_legacy_resources()
@@ -93,6 +93,12 @@ func _test_region_persistence() -> void:
 	_expect(not initial.is_empty(), "Region ecology did not create deterministic state.")
 	var exported: Dictionary = simulation.call("export_state")
 	simulation.call("register_plant_consumption", coordinates, 0.25)
+	simulation.call("register_carcass_addition", coordinates, 0.20)
+	var changed: Dictionary = simulation.call("get_region_state", coordinates)
+	_expect(
+		float(changed.get("carcass_biomass", 0.0)) >= float(initial.get("carcass_biomass", 0.0)),
+		"Carcass biomass did not react to a wildlife death."
+	)
 	simulation.call("import_state", exported)
 	var restored: Dictionary = simulation.call("get_region_state", coordinates)
 	_expect(
@@ -113,14 +119,48 @@ func _test_clean_player_runtime() -> void:
 		return
 	var player := scene.instantiate()
 	root.add_child(player)
-	for _frame in range(4):
+	for _frame in range(5):
 		await process_frame
 	_expect(player.has_method("export_runtime_state"), "Player has no runtime save API.")
 	_expect(player.has_method("receive_damage"), "Player has no survival damage API.")
+	_expect(player.has_method("consume_food"), "Player has no diet-driven feeding API.")
 	_expect(not player.has_method("_toggle_creature_builder_mode"), "Legacy in-game creature builder is still active.")
+	_expect(InputMap.has_action("bite_action"), "Creature bite action is not registered.")
 	var runtime_visual := player.get_node_or_null("CreatureRuntimeVisual/BlueprintCreatureVisual")
 	_expect(runtime_visual != null, "Runtime creature visual did not bind to locomotion path.")
+	var animator := player.get_node_or_null("AdaptiveLocomotionAnimator")
+	_expect(animator != null, "Adaptive locomotion animator is not active.")
+	if animator != null:
+		_expect(animator.has_method("get_gait_debug_state"), "Adaptive locomotion has no diagnostics API.")
+
+	await _test_wildlife_combat(player)
 	player.queue_free()
+	await process_frame
+
+
+func _test_wildlife_combat(player: Node) -> void:
+	var wildlife_scene := load("res://creatures/wildlife/procedural_wildlife_v7.tscn") as PackedScene
+	_expect(wildlife_scene != null, "Modular wildlife scene could not load.")
+	if wildlife_scene == null:
+		return
+	var wildlife := wildlife_scene.instantiate()
+	wildlife.call("configure", 991_771, 441_552, Vector2i.ZERO, "grazer")
+	root.add_child(wildlife)
+	for _frame in range(3):
+		await process_frame
+	_expect(wildlife.has_method("receive_creature_attack"), "Wildlife has no creature combat API.")
+	var maximum_health: float = float(wildlife.get("maximum_health"))
+	wildlife.call("receive_creature_attack", maximum_health + 10.0, player)
+	_expect(bool(wildlife.get("is_dead")), "Lethal creature attack did not create a carcass.")
+	var carcass_before: float = float(wildlife.get("carcass_food_remaining"))
+	_expect(carcass_before > 0.0, "Dead wildlife has no edible carcass resource.")
+	player.set("diet_meat", 2.0)
+	player.set("current_hunger", 40.0)
+	wildlife.call("interact", player)
+	var carcass_after: float = float(wildlife.get("carcass_food_remaining"))
+	_expect(carcass_after < carcass_before, "Meat-compatible player could not consume carcass food.")
+	if is_instance_valid(wildlife):
+		wildlife.queue_free()
 	await process_frame
 
 
