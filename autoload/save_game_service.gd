@@ -1,5 +1,4 @@
 extends Node
-class_name SaveGameService
 
 signal game_saved(path: String)
 signal game_loaded(path: String)
@@ -15,6 +14,7 @@ var save_path: String = DEFAULT_SAVE_PATH
 var _autosave_timer: float = 0.0
 var _pending_player_state: Dictionary = {}
 var _pending_region_state: Dictionary = {}
+var _last_player_state: Dictionary = {}
 var _regions_by_world: Dictionary = {}
 var _loaded_once: bool = false
 
@@ -53,12 +53,13 @@ func load_if_present() -> bool:
 func save_now(custom_path: String = "") -> bool:
 	var target_path: String = save_path if custom_path.is_empty() else custom_path
 	_capture_current_region_state()
+	var player_state: Dictionary = _export_player_state()
 	var save_data: Dictionary = {
 		"schema": SAVE_SCHEMA,
 		"saved_unix_time": int(Time.get_unix_time_from_system()),
 		"game_state": _export_node_state("/root/GameState"),
 		"progression": _export_node_state("/root/ProgressionService"),
-		"player": _export_player_state(),
+		"player": player_state,
 		"regions_by_world": _regions_by_world.duplicate(true),
 	}
 	var temporary_path: String = target_path + ".tmp"
@@ -107,7 +108,8 @@ func load_now(custom_path: String = "") -> bool:
 	if progression != null and progression.has_method("import_state"):
 		progression.call("import_state", _dict(data.get("progression", {})))
 	_regions_by_world = _dict(data.get("regions_by_world", {}))
-	_pending_player_state = _dict(data.get("player", {}))
+	_last_player_state = _dict(data.get("player", {}))
+	_pending_player_state = _last_player_state.duplicate(true)
 	_pending_region_state = _get_saved_region_state_for_current_world()
 	_apply_pending_runtime_state()
 	game_loaded.emit(target_path)
@@ -115,6 +117,10 @@ func load_now(custom_path: String = "") -> bool:
 
 
 func clear_save() -> bool:
+	_last_player_state.clear()
+	_regions_by_world.clear()
+	_pending_player_state.clear()
+	_pending_region_state.clear()
 	if not FileAccess.file_exists(save_path):
 		return true
 	return DirAccess.remove_absolute(save_path) == OK
@@ -125,10 +131,16 @@ func prepare_planet_transition() -> void:
 	save_now()
 	_pending_player_state.clear()
 	_pending_region_state.clear()
+	_last_player_state.clear()
 
 
 func queue_current_world_restore() -> void:
 	_pending_region_state = _get_saved_region_state_for_current_world()
+	_autosave_timer = 2.0
+
+
+func schedule_autosave(delay: float = 2.0) -> void:
+	_autosave_timer = clampf(delay, 0.1, autosave_interval)
 
 
 func _capture_current_region_state() -> void:
@@ -154,6 +166,7 @@ func _apply_pending_runtime_state() -> void:
 		var player := get_tree().get_first_node_in_group(&"player")
 		if player != null and player.has_method("import_runtime_state"):
 			player.call("import_runtime_state", _pending_player_state)
+			_last_player_state = _pending_player_state.duplicate(true)
 			_pending_player_state.clear()
 
 
@@ -161,8 +174,8 @@ func _export_player_state() -> Dictionary:
 	var player := get_tree().get_first_node_in_group(&"player")
 	if player != null and player.has_method("export_runtime_state"):
 		var value: Variant = player.call("export_runtime_state")
-		return _dict(value)
-	return {}
+		_last_player_state = _dict(value)
+	return _last_player_state.duplicate(true)
 
 
 func _export_node_state(path: String) -> Dictionary:
