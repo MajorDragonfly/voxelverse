@@ -1,5 +1,7 @@
 extends Node
 
+const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
+
 var _player: Node3D
 var _hud: CanvasLayer
 var _progress_label: Label
@@ -57,11 +59,11 @@ func _install() -> void:
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null:
 		if progression.has_signal("part_unlocked"):
-			progression.part_unlocked.connect(_on_part_unlocked)
+			progression.connect("part_unlocked", Callable(self, "_on_part_unlocked"))
 		if progression.has_signal("species_discovered"):
-			progression.species_discovered.connect(_on_species_discovered)
+			progression.connect("species_discovered", Callable(self, "_on_species_discovered"))
 		if progression.has_signal("discovery_points_changed"):
-			progression.discovery_points_changed.connect(_on_points_changed)
+			progression.connect("discovery_points_changed", Callable(self, "_on_points_changed"))
 	_refresh_summary()
 
 
@@ -80,7 +82,6 @@ func _refresh_summary() -> void:
 
 
 func _on_part_unlocked(part_id: String, _reason: String) -> void:
-	var PartLibrary = load("res://creatures/editor/creature_part_library.gd")
 	var definition: Dictionary = PartLibrary.get_part(part_id)
 	var display_name: String = str(definition.get("name", part_id))
 	_show_notification("NEW CREATURE PART · %s" % display_name)
