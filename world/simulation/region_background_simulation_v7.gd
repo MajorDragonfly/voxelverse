@@ -152,7 +152,7 @@ func _ensure_region(coordinates: Vector2i) -> void:
 		_region_states[coordinates] = existing
 		return
 	var generator: Node = _get_world_generator()
-	var world_seed: int = _get_runtime_world_seed(generator)
+	var world_seed: int = _get_simulation_world_seed(generator)
 	var random := RandomNumberGenerator.new()
 	random.seed = (
 		world_seed
@@ -326,7 +326,7 @@ func _get_world_generator() -> Node:
 	return get_node_or_null("/root/WorldGenerator")
 
 
-func _get_runtime_world_seed(generator: Node = null) -> int:
+func _get_simulation_world_seed(generator: Node = null) -> int:
 	var source: Node = generator if generator != null else _get_world_generator()
 	if source != null and source.has_method("get_world_seed"):
 		return int(source.call("get_world_seed"))
