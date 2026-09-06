@@ -27,15 +27,16 @@ func export_state() -> Dictionary:
 		}
 	return {
 		"schema": PERSISTENCE_SCHEMA,
-		"world_seed": WorldGenerator.get_world_seed(),
+		"world_seed": _get_runtime_world_seed(),
 		"simulation_tick": _simulation_tick,
 		"regions": serialized_regions,
 	}
 
 
 func import_state(data: Dictionary) -> void:
-	var saved_world_seed: int = int(data.get("world_seed", WorldGenerator.get_world_seed()))
-	if saved_world_seed != WorldGenerator.get_world_seed():
+	var runtime_world_seed: int = _get_runtime_world_seed()
+	var saved_world_seed: int = int(data.get("world_seed", runtime_world_seed))
+	if saved_world_seed != runtime_world_seed:
 		return
 	var regions_value: Variant = data.get("regions", {})
 	if not (regions_value is Dictionary):
@@ -96,7 +97,24 @@ func _register_current_region_discovery() -> void:
 	_last_discovered_region = coordinates
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null and progression.has_method("register_region_discovery"):
-		progression.call("register_region_discovery", coordinates, WorldGenerator.get_world_seed())
+		progression.call(
+			"register_region_discovery",
+			coordinates,
+			_get_runtime_world_seed()
+		)
+
+
+func _get_runtime_world_seed() -> int:
+	var generator := get_node_or_null("/root/WorldGenerator")
+	if generator != null:
+		if generator.has_method("get_world_seed"):
+			return int(generator.call("get_world_seed"))
+		if generator.has_method("get_seed_override"):
+			return int(generator.call("get_seed_override"))
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state != null and game_state.has_method("get_world_seed"):
+		return int(game_state.call("get_world_seed"))
+	return 1
 
 
 func _serialize_species(entries_value: Variant) -> Array:
