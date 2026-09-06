@@ -28,6 +28,8 @@ func _test_planet_profile() -> void:
 	_expect(int(first.get("planet_seed", 0)) == TEST_SEED, "Planet profile seed mismatch.")
 	_expect(first.get("planet_name", "") == repeated.get("planet_name", ""), "Planet name was not deterministic.")
 	_expect(int(first.get("fauna_species_count", 0)) >= 3, "Planet species catalogue is too small.")
+	_expect(str(first.get("terrain_archetype", "")).length() > 0, "Adventure terrain archetype is missing.")
+	_expect(float(first.get("snow_start_altitude", 0.0)) >= 14.0, "Planet snow line is implausibly low.")
 
 
 func _test_continuous_region_height() -> void:
@@ -64,11 +66,13 @@ func _test_species_catalogue_seeds() -> void:
 
 func _test_active_runtime_resources() -> void:
 	for path in [
-		"res://world/generation/world_generator_v6_smooth.gd",
+		"res://world/generation/world_generator_adventure.gd",
+		"res://world/generation/planet_profile_v8.gd",
+		"res://world/resources/terrain/terrain_chunk_v8.gd",
 		"res://world/visuals/terrain/terrain_chunk.tscn",
 		"res://world/simulation/region_ecology_simulation.gd",
 		"res://world/fauna/fauna_streamer_v7.gd",
-		"res://creatures/player/player_controller.gd",
+		"res://creatures/player/player_controller_v2.gd",
 		"res://creatures/player/player.tscn",
 		"res://main/main.tscn",
 	]:
