@@ -17,8 +17,10 @@ var chunk_width: float = 64.0
 var chunk_depth: float = 64.0
 var world_initialized: bool = false
 
-var _required_chunks: Dictionary = {}
-var _pending_chunks: Array[Vector2i] = []
+# Keep these names unique because old compatibility managers still inherit from
+# WorldManager and retain their own historical queue fields.
+var _stream_required_chunks: Dictionary = {}
+var _stream_pending_chunks: Array[Vector2i] = []
 
 @onready var player: Node3D = get_node_or_null(player_path) as Node3D
 
@@ -33,7 +35,6 @@ func _ready() -> void:
 		set_process(false)
 		return
 	current_player_chunk = _world_position_to_chunk(player.global_position)
-	# The standing chunk is created immediately so the player always has ground.
 	_create_chunk(current_player_chunk)
 	_plan_streaming()
 	world_initialized = true
@@ -54,7 +55,7 @@ func get_loaded_chunk_count() -> int:
 
 
 func get_pending_chunk_count() -> int:
-	return _pending_chunks.size()
+	return _stream_pending_chunks.size()
 
 
 func get_current_player_chunk() -> Vector2i:
@@ -90,24 +91,24 @@ func _world_position_to_chunk(world_position: Vector3) -> Vector2i:
 
 
 func _plan_streaming() -> void:
-	_required_chunks.clear()
+	_stream_required_chunks.clear()
 	var candidates: Array[Vector2i] = []
 	for offset_z in range(-render_distance, render_distance + 1):
 		for offset_x in range(-render_distance, render_distance + 1):
 			var coordinates := current_player_chunk + Vector2i(offset_x, offset_z)
-			_required_chunks[coordinates] = true
+			_stream_required_chunks[coordinates] = true
 			if not loaded_chunks.has(coordinates):
 				candidates.append(coordinates)
 	candidates.sort_custom(_is_chunk_higher_priority)
-	_pending_chunks = candidates
+	_stream_pending_chunks = candidates
 	_unload_distant_chunks()
 
 
 func _drain_chunk_queue() -> void:
 	var remaining_budget: int = maxi(chunk_create_budget_per_frame, 1)
-	while remaining_budget > 0 and not _pending_chunks.is_empty():
-		var coordinates: Vector2i = _pending_chunks.pop_front()
-		if _required_chunks.has(coordinates) and not loaded_chunks.has(coordinates):
+	while remaining_budget > 0 and not _stream_pending_chunks.is_empty():
+		var coordinates: Vector2i = _stream_pending_chunks.pop_front()
+		if _stream_required_chunks.has(coordinates) and not loaded_chunks.has(coordinates):
 			_create_chunk(coordinates)
 			remaining_budget -= 1
 
