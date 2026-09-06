@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 GameState="*res://autoload/game_state.gd"
 WorldGenerator="*res://world/generation/world_generator_v6_smooth.gd"
 DisplaySettings="*res://core/display_settings.gd"
+ProgressionService="*res://autoload/progression_service.gd"
+SaveGameService="*res://autoload/save_game_service.gd"
 
 [display]
 
