@@ -10,7 +10,7 @@ script = ExtResource("1_terrain")
 cell_size = 0.5
 far_sample_stride = 5
 enable_far_proxy = true
-color_sample_stride = 4
+color_sample_stride = 2
 
 [node name="TerrainMesh" type="MeshInstance3D" parent="." unique_id=1378419624]
 
@@ -29,38 +29,38 @@ script = ExtResource("2_visuals")
 enable_terrain_shader = true
 enable_water_shader = true
 terrain_palette_steps = 8
-top_texture_scale = 0.92
-side_texture_scale = 0.86
-texture_darkness = 0.88
-texture_brightness = 1.06
-water_subdivisions = 16
-wave_height = 0.045
-wave_speed = 0.40
-secondary_wave_height = 0.016
-secondary_wave_speed = 0.72
-water_roughness = 0.16
+top_texture_scale = 0.90
+side_texture_scale = 0.84
+texture_darkness = 0.91
+texture_brightness = 1.07
+water_subdivisions = 20
+wave_height = 0.042
+wave_speed = 0.38
+secondary_wave_height = 0.014
+secondary_wave_speed = 0.68
+water_roughness = 0.18
 micro_tile_size = 0.125
-near_detail_end = 46.0
-mid_detail_end = 86.0
-micro_detail_strength = 0.11
-mid_detail_strength = 0.045
-foam_distance = 0.90
-depth_fade_distance = 4.5
-refraction_strength = 0.020
+near_detail_end = 48.0
+mid_detail_end = 90.0
+micro_detail_strength = 0.095
+mid_detail_strength = 0.040
+foam_distance = 0.85
+depth_fade_distance = 4.8
+refraction_strength = 0.018
 
 [node name="ProceduralEcosystemV6" type="Node3D" parent="."]
 script = ExtResource("3_ecosystem")
-tree_attempts = 30
-rock_attempts = 12
-ground_attempts = 28
-tree_visibility_distance = 150.0
-detail_visibility_distance = 76.0
-forest_density_multiplier = 1.42
-cliff_attempts = 9
-plant_field_attempts = 38
+tree_attempts = 38
+rock_attempts = 15
+ground_attempts = 40
+tree_visibility_distance = 154.0
+detail_visibility_distance = 80.0
+forest_density_multiplier = 1.58
+cliff_attempts = 12
+plant_field_attempts = 52
 
 [node name="ChunkLODControllerV7" type="Node" parent="."]
 script = ExtResource("4_lod")
-near_distance = 44.0
-mid_distance = 82.0
+near_distance = 46.0
+mid_distance = 86.0
 update_interval = 0.40
