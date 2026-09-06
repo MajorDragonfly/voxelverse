@@ -6,7 +6,7 @@ const PlanetCatalog = preload(
 )
 
 @export var enable_planet_cycle_debug_key: bool = true
-@export var show_planet_runtime_label: bool = true
+@export var show_planet_runtime_label: bool = false
 
 var system: Dictionary = {}
 var active_planet: Dictionary = {}
@@ -55,6 +55,9 @@ func activate_planet(planet_index: int) -> void:
 	var planet: Dictionary = PlanetCatalog.get_planet(system, planet_index)
 	if planet.is_empty():
 		return
+	var save_service := get_node_or_null("/root/SaveGameService")
+	if save_service != null and save_service.has_method("prepare_planet_transition"):
+		save_service.call("prepare_planet_transition")
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state != null and game_state.has_method("activate_planet"):
 		game_state.call(
@@ -67,6 +70,8 @@ func activate_planet(planet_index: int) -> void:
 		WorldGenerator.set_world_seed(int(planet.get("planet_seed", 1)))
 	active_planet = planet
 	_update_runtime_label()
+	if save_service != null and save_service.has_method("queue_current_world_restore"):
+		save_service.call("queue_current_world_restore")
 	get_tree().reload_current_scene()
 
 
@@ -87,10 +92,12 @@ func _create_runtime_label() -> void:
 		return
 	_runtime_label = Label.new()
 	_runtime_label.name = "PlanetRuntimeV7Label"
-	_runtime_label.offset_left = 18.0
-	_runtime_label.offset_top = 160.0
-	_runtime_label.offset_right = 450.0
-	_runtime_label.offset_bottom = 220.0
+	_runtime_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	_runtime_label.offset_left = -480.0
+	_runtime_label.offset_top = 18.0
+	_runtime_label.offset_right = -18.0
+	_runtime_label.offset_bottom = 76.0
+	_runtime_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_runtime_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(_runtime_label)
 
@@ -99,7 +106,7 @@ func _update_runtime_label() -> void:
 	if _runtime_label == null:
 		return
 	_runtime_label.text = (
-		"System %s · Planet %s · %s\nF8: travel to next generated planet"
+		"System %s · Planet %s · %s"
 		% [
 			str(system.get("system_name", "Unknown System")),
 			str(active_planet.get("name", "Unknown Planet")),
