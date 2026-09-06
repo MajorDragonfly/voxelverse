@@ -28,11 +28,11 @@ maximum_cached_regions = 96
 
 [node name="FaunaStreamerV7" type="Node3D" parent="."]
 script = ExtResource("7_fauna")
-target_population = 9
-maximum_population = 14
-spawn_interval = 0.80
-minimum_spawn_radius = 14.0
-maximum_spawn_radius = 31.0
+target_population = 11
+maximum_population = 16
+spawn_interval = 0.62
+minimum_spawn_radius = 9.0
+maximum_spawn_radius = 26.0
 despawn_radius = 82.0
 species_region_size = 256.0
 
@@ -44,4 +44,5 @@ script = ExtResource("5_presentation")
 [node name="StarSystemRuntimeV7" type="Node" parent="."]
 script = ExtResource("8_system")
 enable_planet_cycle_debug_key = true
-show_planet_runtime_label = false
+show_planet_runtime_label = true
+reload_scene_on_planet_change = true
