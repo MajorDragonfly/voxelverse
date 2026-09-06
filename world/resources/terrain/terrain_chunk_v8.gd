@@ -7,6 +7,10 @@ var _fast_color_cache: Dictionary = {}
 var _fast_height_grid := PackedFloat32Array()
 var _fast_height_width: int = 0
 var _fast_height_depth: int = 0
+var _build_vertices := PackedVector3Array()
+var _build_normals := PackedVector3Array()
+var _build_colors := PackedColorArray()
+var _build_uvs := PackedVector2Array()
 
 
 func generate_terrain() -> void:
@@ -14,12 +18,12 @@ func generate_terrain() -> void:
 	terrain_mesh.material_override = null
 	terrain_collision.shape = null
 	_fast_color_cache.clear()
+	_build_vertices.clear()
+	_build_normals.clear()
+	_build_colors.clear()
+	_build_uvs.clear()
 	_build_local_height_cache()
 
-	var vertices := PackedVector3Array()
-	var normals := PackedVector3Array()
-	var colors := PackedColorArray()
-	var uvs := PackedVector2Array()
 	var cells_x: int = _get_cells_x()
 	var cells_z: int = _get_cells_z()
 	var half_width: float = get_chunk_width() * 0.5
@@ -33,8 +37,7 @@ func generate_terrain() -> void:
 			var z1: float = z0 + cell_size
 			var height: float = _get_column_height_by_index(cell_x, cell_z)
 			var top_color: Color = _get_fast_cell_color(cell_x, cell_z)
-			_append_quad(
-				vertices, normals, colors, uvs,
+			_append_build_quad(
 				Vector3(x0, height, z0),
 				Vector3(x0, height, z1),
 				Vector3(x1, height, z1),
@@ -45,35 +48,35 @@ func generate_terrain() -> void:
 			var side_color: Color = top_color.darkened(0.16)
 			var west: float = _get_column_height_by_index(cell_x - 1, cell_z)
 			if height > west + 0.001:
-				_append_quad(vertices, normals, colors, uvs,
+				_append_build_quad(
 					Vector3(x0, west, z1), Vector3(x0, height, z1),
 					Vector3(x0, height, z0), Vector3(x0, west, z0),
 					Vector3.LEFT, side_color)
 			var east: float = _get_column_height_by_index(cell_x + 1, cell_z)
 			if height > east + 0.001:
-				_append_quad(vertices, normals, colors, uvs,
+				_append_build_quad(
 					Vector3(x1, east, z0), Vector3(x1, height, z0),
 					Vector3(x1, height, z1), Vector3(x1, east, z1),
 					Vector3.RIGHT, side_color)
 			var north: float = _get_column_height_by_index(cell_x, cell_z - 1)
 			if height > north + 0.001:
-				_append_quad(vertices, normals, colors, uvs,
+				_append_build_quad(
 					Vector3(x1, north, z0), Vector3(x1, height, z0),
 					Vector3(x0, height, z0), Vector3(x0, north, z0),
 					Vector3.FORWARD, side_color)
 			var south: float = _get_column_height_by_index(cell_x, cell_z + 1)
 			if height > south + 0.001:
-				_append_quad(vertices, normals, colors, uvs,
+				_append_build_quad(
 					Vector3(x0, south, z1), Vector3(x0, height, z1),
 					Vector3(x1, height, z1), Vector3(x1, south, z1),
 					Vector3.BACK, side_color)
 
 	var arrays: Array = []
 	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_NORMAL] = normals
-	arrays[Mesh.ARRAY_COLOR] = colors
-	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_VERTEX] = _build_vertices
+	arrays[Mesh.ARRAY_NORMAL] = _build_normals
+	arrays[Mesh.ARRAY_COLOR] = _build_colors
+	arrays[Mesh.ARRAY_TEX_UV] = _build_uvs
 	var generated_mesh := ArrayMesh.new()
 	generated_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	generated_mesh.surface_set_name(0, "VoxelTerrainV8")
@@ -110,11 +113,7 @@ func _get_column_height_by_index(cell_x: int, cell_z: int) -> float:
 	return WorldGenerator.get_visual_terrain_height(world_center.x, world_center.y)
 
 
-func _append_quad(
-	vertices: PackedVector3Array,
-	normals: PackedVector3Array,
-	colors: PackedColorArray,
-	uvs: PackedVector2Array,
+func _append_build_quad(
 	a: Vector3,
 	b: Vector3,
 	c: Vector3,
@@ -122,11 +121,11 @@ func _append_quad(
 	normal: Vector3,
 	color: Color
 ) -> void:
-	vertices.append_array(PackedVector3Array([a, b, c, a, c, d]))
+	_build_vertices.append_array(PackedVector3Array([a, b, c, a, c, d]))
 	for _index in range(6):
-		normals.append(normal)
-		colors.append(color)
-	uvs.append_array(PackedVector2Array([
+		_build_normals.append(normal)
+		_build_colors.append(color)
+	_build_uvs.append_array(PackedVector2Array([
 		Vector2(0.0, 0.0), Vector2(0.0, 1.0), Vector2(1.0, 1.0),
 		Vector2(0.0, 0.0), Vector2(1.0, 1.0), Vector2(1.0, 0.0),
 	]))
@@ -134,8 +133,16 @@ func _append_quad(
 
 func _get_fast_cell_color(cell_x: int, cell_z: int) -> Color:
 	var stride: int = maxi(color_sample_stride, 1)
-	var sample_x: int = clampi(floori(float(cell_x) / float(stride)) * stride, 0, _get_cells_x() - 1)
-	var sample_z: int = clampi(floori(float(cell_z) / float(stride)) * stride, 0, _get_cells_z() - 1)
+	var sample_x: int = clampi(
+		floori(float(cell_x) / float(stride)) * stride,
+		0,
+		_get_cells_x() - 1
+	)
+	var sample_z: int = clampi(
+		floori(float(cell_z) / float(stride)) * stride,
+		0,
+		_get_cells_z() - 1
+	)
 	var key := Vector2i(sample_x, sample_z)
 	if _fast_color_cache.has(key):
 		return _fast_color_cache[key]
