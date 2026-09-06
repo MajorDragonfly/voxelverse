@@ -1,3 +1,11 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Editor recovery / temporary scene files
+*.tmp
+*.tscn*.tmp
+
+# OS noise
+.DS_Store
+Thumbs.db
