@@ -39,13 +39,18 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	super._unhandled_input(event)
 	if _is_inspection_toggle_event(event):
-		inspection_mode_enabled = not inspection_mode_enabled
-		inspection_mode_changed.emit(inspection_mode_enabled)
-		show_gameplay_message(
-			"Inspection mode enabled" if inspection_mode_enabled else "Inspection mode disabled",
-			1.4
-		)
+		toggle_inspection_mode()
 		get_viewport().set_input_as_handled()
+
+
+func toggle_inspection_mode() -> bool:
+	inspection_mode_enabled = not inspection_mode_enabled
+	inspection_mode_changed.emit(inspection_mode_enabled)
+	show_gameplay_message(
+		"Inspection mode enabled" if inspection_mode_enabled else "Inspection mode disabled",
+		1.4
+	)
+	return inspection_mode_enabled
 
 
 func _try_primary_action() -> void:
