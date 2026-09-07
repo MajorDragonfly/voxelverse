@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*res://autoload/game_state.gd"
-WorldGenerator="*res://world/generation/world_generator_adventure.gd"
+WorldGenerator="*res://world/generation/world_generator_planetary_v9.gd"
 DisplaySettings="*res://core/display_settings.gd"
 ProgressionService="*res://autoload/progression_service.gd"
 SaveGameService="*res://autoload/save_game_service.gd"
