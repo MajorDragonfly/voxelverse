@@ -5,8 +5,10 @@ const History = preload("res://assembly/core/modular_assembly_history.gd")
 const MeshBuilder = preload("res://assembly/runtime/modular_voxel_mesh_builder.gd")
 const BuildingParts = preload("res://civilization/buildings/building_part_library.gd")
 const BuildingBlueprint = preload("res://civilization/buildings/building_blueprint.gd")
+const BuildingRegistry = preload("res://civilization/buildings/building_design_registry.gd")
 const CreatureBlueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const CreatureAdapter = preload("res://assembly/adapters/creature_assembly_adapter.gd")
+const CreatureHistory = preload("res://creatures/editor/creature_builder_history_v7.gd")
 
 const TEST_PATH: String = "user://building_builder_framework_test.json"
 
@@ -22,6 +24,8 @@ func _run() -> void:
 	_test_building_blueprint()
 	_test_merged_mesh()
 	_test_creature_adapter()
+	_test_design_registry()
+	_test_shared_creature_history()
 	await _test_builder_scene()
 	_cleanup()
 	_finish()
@@ -101,6 +105,29 @@ func _test_creature_adapter() -> void:
 	_expect(adapted.get("metadata", {}) is Dictionary, "Creature adapter has no migration metadata.")
 
 
+func _test_design_registry() -> void:
+	var set: Dictionary = BuildingRegistry.create_city_design_set(424_242)
+	for type_name in BuildingBlueprint.BUILDING_TYPES:
+		_expect(set.has(type_name), "City design set is missing '%s'." % type_name)
+		var design_value: Variant = set.get(type_name)
+		_expect(design_value is Dictionary, "City registry did not return a building blueprint.")
+		if design_value is Dictionary:
+			_expect(
+				BuildingBlueprint.get_building_type(design_value) == type_name,
+				"City registry returned wrong design type for '%s'." % type_name
+			)
+
+
+func _test_shared_creature_history() -> void:
+	var history := CreatureHistory.new()
+	var creature: Dictionary = CreatureBlueprint.create_default()
+	history.push_state(creature, "Creature shared history")
+	creature["name"] = "Changed"
+	var restored: Dictionary = history.undo(creature)
+	_expect(not restored.is_empty(), "Creature shared assembly history failed to undo.")
+	_expect(str(restored.get("name", "")) != "Changed", "Creature history did not restore prior state.")
+
+
 func _test_builder_scene() -> void:
 	var scene := load("res://civilization/buildings/building_builder.tscn") as PackedScene
 	_expect(scene != null, "Building Builder scene failed to load.")
@@ -114,6 +141,8 @@ func _test_builder_scene() -> void:
 	_expect(preview != null, "Building Builder preview was not created.")
 	var ui := builder.get_node_or_null("BuildingBuilderUI")
 	_expect(ui != null, "Building Builder UI was not created.")
+	var back_button := builder.get_node_or_null("BuildingBuilderUI/BackToWorld")
+	_expect(back_button != null, "Building Builder navigation button was not installed.")
 	var builder_blueprint: Variant = builder.get("blueprint")
 	_expect(
 		builder_blueprint is Dictionary
