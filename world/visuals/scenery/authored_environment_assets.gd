@@ -3,47 +3,42 @@ extends RefCounted
 const Catalog = preload("res://assets/catalog/asset_catalog.gd")
 const Slots = preload("res://assets/catalog/planet_material_slots.gd")
 const PaletteShader = preload("res://assets/catalog/planet_foliage.gdshader")
-const AssetLoadJob = preload("res://world/streaming/environment_asset_load_job.gd")
 
 static var _meshes: Dictionary = {}
 static var _bindings: Dictionary = {}
 static var _materials: Dictionary = {}
 static var _planet_seed: int = -1
 static var _requests: Dictionary = {}
+static var _load_frame: int = -1
 
 
 static func prepare_lods(asset_id: String, geometry_variant: int) -> bool:
 	var entry: Dictionary = Catalog.get_asset(asset_id)
 	var lods: Dictionary = entry.get("geometry_variants", {}).get(str(geometry_variant), entry.get("lod", {}))
+	var frame: int = Engine.get_process_frames()
 	for tier: String in ["near", "mid", "far"]:
 		var path: String = str(lods.get(tier, ""))
 		if path.is_empty() or _meshes.has(path) or not ResourceLoader.exists(path):
 			continue
 		if not _requests.has(path):
-			var job := AssetLoadJob.new()
-			job.path = path
-			var task_id: int = WorkerThreadPool.add_task(job.run, false, "Environment %s" % path.get_file())
-			_requests[path] = {"job": job, "task_id": task_id}
-		if not WorkerThreadPool.is_task_completed(int(_requests[path]["task_id"])):
+			_requests[path] = frame
 			return false
-		_claim_request(path)
+		if frame <= int(_requests[path]) or _load_frame == frame:
+			return false
+		# Imported scenes allocate renderer resources. Keep those allocations on
+		# the main thread, with one cold resource per frame across every chunk.
+		_load_frame = frame
+		var scene := load(path) as PackedScene
+		_cache_scene_mesh(path, scene)
+		_requests.erase(path)
+		return false
 	return true
 
 
-static func _claim_request(path: String) -> Mesh:
-	var request: Dictionary = _requests[path]
-	# Completion of the entire owned task includes ResourceLoader's cleanup,
-	# not only its published THREAD_LOAD_LOADED status.
-	WorkerThreadPool.wait_for_task_completion(int(request["task_id"]))
-	_requests.erase(path)
-	var scene: PackedScene = request["job"].scene
-	return _cache_scene_mesh(path, scene)
-
-
 static func finish_pending_loads() -> void:
-	# World teardown joins every owned load before engine resource pools stop.
-	for path: String in _requests.keys():
-		_claim_request(path)
+	# Loads are atomic main-thread steps; pending entries have not started and
+	# can be cancelled without spawning work while a world is being torn down.
+	_requests.clear()
 
 
 static func _cache_scene_mesh(path: String, scene: PackedScene) -> Mesh:
@@ -78,13 +73,9 @@ static func resolve_mesh(entry: Dictionary, tier: int, geometry_variant: int = 0
 			continue
 		if _meshes.has(path):
 			return _meshes[path]
-		# A synchronous fallback must claim an existing job instead of racing it.
-		if _requests.has(path):
-			var pending_mesh: Mesh = _claim_request(path)
-			if pending_mesh != null:
-				return pending_mesh
 		var scene := load(path) as PackedScene
 		var mesh: Mesh = _cache_scene_mesh(path, scene)
+		_requests.erase(path)
 		if mesh != null:
 			return mesh
 	return null

@@ -43,6 +43,7 @@ def main():
                 name = f"shutdown_{seed}_{stage}"
                 commands.append((name, ["--verbose", "--script", "res://tools/main_shutdown_probe.gd",
                                         "--", str(seed), stage], 120))
+        commands.append(("streaming_cpu", ["--script", "res://tools/benchmark_streaming.gd"], 120))
     results = []
     for name, command, timeout in commands:
         started = time.monotonic()
@@ -65,7 +66,7 @@ def main():
                   "seconds": round(time.monotonic() - started, 3)}
         results.append(result)
         print(json.dumps(result), flush=True)
-        if failed:
+        if failed or name == "streaming_cpu":
             print(log[-12000:], flush=True)
         if name == "import" and failed:
             break
