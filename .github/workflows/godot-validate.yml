@@ -2,204 +2,32 @@ name: Godot validation
 
 on:
   push:
-    branches:
-      - main
-      - "agent/**"
+    branches: [main, "agent/**"]
   pull_request:
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 18
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Download Godot 4.6.3
         shell: bash
         run: |
           set -euo pipefail
-          curl -L --fail --retry 3 \
-            -o /tmp/godot.zip \
+          curl -L --fail --retry 3 -o /tmp/godot.zip \
             https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
           unzip -q /tmp/godot.zip -d /tmp/godot
           chmod +x /tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-
-      - name: Import project and detect parser errors
-        shell: bash
-        run: |
-          set -euo pipefail
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --path . --import 2>&1 | tee /tmp/godot-import.log
-          ! grep -E \
-            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
-            /tmp/godot-import.log
-
-      - name: Run main scene runtime smoke test
-        shell: bash
-        run: |
-          set +e
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          timeout 55s "$GODOT" --headless --path . --quit-after 300 \
-            > /tmp/main-runtime-test.log 2>&1
-          TEST_STATUS=$?
-          if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "Main runtime smoke test timed out after 55 seconds." >> /tmp/main-runtime-test.log
-            TEST_STATUS=1
-          fi
-          if grep -E \
-            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
-            /tmp/main-runtime-test.log; then
-            TEST_STATUS=1
-          fi
-          cat /tmp/main-runtime-test.log
-          exit "$TEST_STATUS"
-
-      - name: Run legacy creature migration test
-        shell: bash
-        run: |
-          set -euo pipefail
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --path . \
-            --script res://tests/creature_v5_smoke_test.gd
-
-      - name: Run Creature Builder data test
-        shell: bash
-        run: |
-          set -euo pipefail
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --path . \
-            --script res://tests/creature_builder_v7_test.gd \
-            2>&1 | tee /tmp/creature-builder-test.log
-
-      - name: Run Creature Builder scene test
-        shell: bash
-        run: |
-          set +e
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          timeout 45s "$GODOT" --headless --path . \
-            --script res://tests/creature_editor_v7_runtime_test.gd \
-            > /tmp/creature-editor-runtime-test.log 2>&1
-          TEST_STATUS=$?
-          if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "Creature Builder scene test timed out." >> /tmp/creature-editor-runtime-test.log
-            TEST_STATUS=1
-          fi
-          if grep -E \
-            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource" \
-            /tmp/creature-editor-runtime-test.log; then
-            TEST_STATUS=1
-          fi
-          cat /tmp/creature-editor-runtime-test.log
-          exit "$TEST_STATUS"
-
-      - name: Run procedural world diversity test
-        shell: bash
-        run: |
-          set +e
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          timeout 90s "$GODOT" --headless --path . \
-            --script res://tests/world_evolution_v2_ci_test.gd \
-            > /tmp/world-diversity-test.log 2>&1
-          TEST_STATUS=$?
-          if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "Procedural world diversity test timed out." >> /tmp/world-diversity-test.log
-            TEST_STATUS=1
-          fi
-          if grep -E \
-            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
-            /tmp/world-diversity-test.log; then
-            TEST_STATUS=1
-          fi
-          cat /tmp/world-diversity-test.log
-          exit "$TEST_STATUS"
-
-      - name: Run active world continuity test
-        shell: bash
-        run: |
-          set +e
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          timeout 90s "$GODOT" --headless --path . \
-            --script res://tests/world_runtime_continuity_test.gd \
-            > /tmp/world-continuity-test.log 2>&1
-          TEST_STATUS=$?
-          if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "World runtime continuity test timed out." >> /tmp/world-continuity-test.log
-            TEST_STATUS=1
-          fi
-          if grep -E \
-            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
-            /tmp/world-continuity-test.log; then
-            TEST_STATUS=1
-          fi
-          cat /tmp/world-continuity-test.log
-          exit "$TEST_STATUS"
-
-      - name: Run Layered World terrain test
-        shell: bash
-        run: |
-          set -euo pipefail
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          "$GODOT" --headless --path . \
-            --script res://tests/world_layered_v7_test.gd \
-            2>&1 | tee /tmp/world-layered-test.log
-
-      - name: Run meta runtime test
-        shell: bash
-        run: |
-          set +e
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          timeout 60s "$GODOT" --headless --path . \
-            --script res://tests/meta_runtime_test.gd \
-            > /tmp/meta-runtime-test.log 2>&1
-          TEST_STATUS=$?
-          if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "Meta runtime test timed out." >> /tmp/meta-runtime-test.log
-            TEST_STATUS=1
-          fi
-          if grep -E \
-            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
-            /tmp/meta-runtime-test.log; then
-            TEST_STATUS=1
-          fi
-          cat /tmp/meta-runtime-test.log
-          exit "$TEST_STATUS"
-
-      - name: Run gameplay acceptance test
-        shell: bash
-        run: |
-          set +e
-          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
-          timeout 75s "$GODOT" --headless --path . \
-            --script res://tests/gameplay_acceptance_test.gd \
-            > /tmp/gameplay-acceptance-test.log 2>&1
-          TEST_STATUS=$?
-          if [ "$TEST_STATUS" -eq 124 ]; then
-            echo "Gameplay acceptance test timed out." >> /tmp/gameplay-acceptance-test.log
-            TEST_STATUS=1
-          fi
-          if grep -E \
-            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
-            /tmp/gameplay-acceptance-test.log; then
-            TEST_STATUS=1
-          fi
-          cat /tmp/gameplay-acceptance-test.log
-          exit "$TEST_STATUS"
-
-      - name: Upload validation diagnostics
+      - name: Import and run real runtime acceptance checks
+        run: >-
+          python3 tools/validate_godot.py
+          --godot /tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          --output /tmp/validation-validate
+      - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: voxelverse-validation-diagnostics
-          path: |
-            /tmp/main-runtime-test.log
-            /tmp/creature-builder-test.log
-            /tmp/creature-editor-runtime-test.log
-            /tmp/world-diversity-test.log
-            /tmp/world-continuity-test.log
-            /tmp/world-layered-test.log
-            /tmp/meta-runtime-test.log
-            /tmp/gameplay-acceptance-test.log
-          if-no-files-found: warn
-          retention-days: 3
+          name: voxelverse-validate-${{ github.event_name }}
+          path: /tmp/validation-validate
+          retention-days: 7

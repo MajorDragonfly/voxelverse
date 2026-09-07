@@ -7,6 +7,7 @@ extends Node
 @export_range(16.0, 96.0, 1.0) var near_distance: float = 42.0
 @export_range(32.0, 192.0, 1.0) var mid_distance: float = 78.0
 @export_range(0.1, 2.0, 0.1) var update_interval: float = 0.35
+@export_range(0.0, 12.0, 0.5) var hysteresis: float = 4.0
 
 var _chunk: Node3D
 var _player: Node3D
@@ -40,11 +41,7 @@ func _update_lod() -> void:
 	var distance: float = _chunk.global_position.distance_to(
 		_player.global_position
 	)
-	var tier: int = 2
-	if distance <= near_distance:
-		tier = 0
-	elif distance <= mid_distance:
-		tier = 1
+	var tier: int = _select_tier(distance)
 	if tier == _current_tier:
 		return
 	_current_tier = tier
@@ -59,3 +56,14 @@ func _update_lod() -> void:
 	if water != null:
 		water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		water.visibility_range_end = mid_distance * 2.75
+
+
+func _select_tier(distance: float) -> int:
+	var near_edge: float = near_distance + (hysteresis if _current_tier == 0 else -hysteresis)
+	var far_edge: float = mid_distance + (-hysteresis if _current_tier == 2 else hysteresis)
+	if _current_tier < 0:
+		near_edge = near_distance
+		far_edge = mid_distance
+	if distance <= near_edge:
+		return 0
+	return 1 if distance <= far_edge else 2

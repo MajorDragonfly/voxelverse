@@ -85,6 +85,11 @@ static func create(seed_value: int) -> Dictionary:
 	profile["atmosphere"] = atmosphere
 	profile["biome_recipe"] = biome_recipe
 	profile["rare_traits"] = rare_traits
+	profile["landscape"] = {
+		"continental_bias": random.randf_range(-0.075, 0.075),
+		"island_mix": random.randf_range(0.05, 0.42),
+		"surface_grammar": "landmark_cells_256m",
+	}
 	profile["planet_signature"] = _create_signature(
 		seed_value,
 		flora_id,
@@ -173,41 +178,30 @@ static func _create_material_slots(
 	var foliage_shadow: Color = foliage_base.darkened(0.34)
 	var foliage_deep: Color = foliage_base.darkened(0.56)
 
-	var bark_hue: float = wrapf(flora_hue + random.randf_range(0.08, 0.28), 0.0, 1.0)
+	# Companion hues are curated by family. Natural worlds retain blue water,
+	# warm bark and mineral grey; exotic families deliberately separate shrubs.
+	var companions: Dictionary = {
+		"verdant": [0.31, 0.27, 0.085, 0.075, 0.54, 0.13],
+		"autumn": [0.12, 0.125, 0.065, 0.055, 0.53, 0.96],
+		"gold": [0.08, 0.13, 0.070, 0.070, 0.52, 0.02],
+		"violet": [0.49, 0.58, 0.670, 0.640, 0.50, 0.94],
+		"cyan": [0.70, 0.47, 0.610, 0.650, 0.58, 0.12],
+		"coral": [0.46, 0.055, 0.020, 0.035, 0.48, 0.13],
+		"crimson": [0.12, 0.050, 0.960, 0.650, 0.57, 0.07],
+		"pale": [0.57, 0.19, 0.090, 0.560, 0.51, 0.72],
+		"indigo": [0.80, 0.60, 0.680, 0.600, 0.46, 0.14],
+	}
+	var hues: Array = companions.get(flora_id, companions["verdant"])
+	var hue_jitter: float = random.randf_range(-0.012, 0.012)
+	var shrub_base := Color.from_hsv(wrapf(float(hues[0]) + hue_jitter, 0.0, 1.0), saturation * 0.85, 0.60)
+	var ground_base := Color.from_hsv(wrapf(float(hues[1]) + hue_jitter, 0.0, 1.0), saturation * 0.70, 0.48)
+	var bark_base := Color.from_hsv(float(hues[2]), 0.40, random.randf_range(0.24, 0.36))
+	var ground_dry := Color.from_hsv(float(hues[1]) - 0.04, 0.40, 0.65)
 	if exotic_factor < 0.25:
-		bark_hue = random.randf_range(0.045, 0.105)
-	var bark_base := Color.from_hsv(
-		bark_hue,
-		random.randf_range(0.22, 0.52),
-		random.randf_range(0.30, 0.52),
-		1.0
-	)
-	var ground_base: Color = foliage_base.lerp(
-		Color.from_hsv(wrapf(flora_hue + 0.045, 0.0, 1.0), 0.48, 0.48, 1.0),
-		0.56
-	)
-	var dry_hue: float = wrapf(flora_hue - 0.17 + random.randf_range(-0.04, 0.04), 0.0, 1.0)
-	var ground_dry := Color.from_hsv(
-		dry_hue,
-		random.randf_range(0.34, 0.64),
-		random.randf_range(0.56, 0.76),
-		1.0
-	)
-	var rock_hue: float = wrapf(flora_hue + random.randf_range(0.20, 0.46), 0.0, 1.0)
-	var rock_base := Color.from_hsv(
-		rock_hue,
-		random.randf_range(0.06, 0.26 + exotic_factor * 0.12),
-		random.randf_range(0.34, 0.58),
-		1.0
-	)
-	var water_hue: float = wrapf(flora_hue + random.randf_range(0.18, 0.43), 0.0, 1.0)
-	var water_deep := Color.from_hsv(
-		water_hue,
-		random.randf_range(0.60, 0.90),
-		random.randf_range(0.34, 0.58),
-		1.0
-	)
-	var flower_hue: float = wrapf(flora_hue + random.randf_range(0.22, 0.56), 0.0, 1.0)
+		ground_dry = Color.from_hsv(0.105, 0.50, 0.68)
+	var rock_base := Color.from_hsv(float(hues[3]), 0.12 + exotic_factor * 0.32, random.randf_range(0.38, 0.54))
+	var water_deep := Color.from_hsv(float(hues[4]), 0.80, random.randf_range(0.38, 0.52))
+	var flower_hue: float = float(hues[5])
 	return {
 		"foliage_highlight": foliage_highlight,
 		"foliage_base": foliage_base,
@@ -218,6 +212,11 @@ static func _create_material_slots(
 		"bark_shadow": bark_base.darkened(0.38),
 		"ground_base": ground_base,
 		"ground_shadow": ground_base.darkened(0.30),
+		"ground_highlight": ground_base.lightened(0.16),
+		"soil_base": bark_base.lerp(rock_base, 0.30),
+		"shrub_base": shrub_base,
+		"shrub_highlight": shrub_base.lightened(0.20),
+		"shrub_shadow": shrub_base.darkened(0.32),
 		"ground_dry": ground_dry,
 		"flower_primary": Color.from_hsv(flower_hue, 0.72, 0.90, 1.0),
 		"flower_accent": Color.from_hsv(wrapf(flower_hue + 0.10, 0.0, 1.0), 0.64, 0.96, 1.0),
@@ -244,6 +243,7 @@ static func _create_atmosphere(
 		"sky_horizon": horizon,
 		"fog_color": horizon.lerp(Color(0.72, 0.76, 0.82, 1.0), 0.28),
 		"fog_density_scale": random.randf_range(0.68, 1.42),
+		"sun_color": Color(1.0, 0.96, 0.88).lerp(horizon.lightened(0.60), exotic_factor * 0.30),
 		"sun_energy_scale": random.randf_range(0.82, 1.22),
 		"ambient_scale": random.randf_range(0.82, 1.18),
 		"cloud_density": random.randf_range(0.20, 0.74),
@@ -300,14 +300,14 @@ static func _create_signature(
 	terrain_archetype: String,
 	rare_traits: Array[String]
 ) -> String:
-	var trait: String = "PRIME"
+	var signature_trait: String = "PRIME"
 	if not rare_traits.is_empty():
-		trait = rare_traits[0].to_upper()
+		signature_trait = rare_traits[0].to_upper()
 	var terrain: String = terrain_archetype.to_upper().replace(" ", "_")
 	return "%s-%s-%s-%04X" % [
 		flora_id.to_upper(),
 		terrain,
-		trait,
+		signature_trait,
 		absi(seed_value) & 0xFFFF,
 	]
 

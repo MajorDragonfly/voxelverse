@@ -1,0 +1,121 @@
+{
+	"godot": "4.6.3-stable (official)",
+	"samples": [
+		{
+			"chunk": [
+				0,
+				0
+			],
+			"create_ms": 3.099,
+			"ecology": {
+				"attempts": 499,
+				"batches": 14,
+				"complete": true,
+				"instances": 63,
+				"max_batch_usec": 4014,
+				"max_placement_usec": 2827,
+				"max_resource_usec": 4429,
+				"max_step_usec": 4429,
+				"nodes": 14
+			},
+			"upload_ms": 9.565
+		},
+		{
+			"chunk": [
+				1,
+				0
+			],
+			"create_ms": 0.188,
+			"ecology": {
+				"attempts": 499,
+				"batches": 20,
+				"complete": true,
+				"instances": 97,
+				"max_batch_usec": 4014,
+				"max_placement_usec": 3468,
+				"max_resource_usec": 4429,
+				"max_step_usec": 4429,
+				"nodes": 20
+			},
+			"upload_ms": 7.314
+		},
+		{
+			"chunk": [
+				2,
+				0
+			],
+			"create_ms": 0.172,
+			"ecology": {
+				"attempts": 499,
+				"batches": 19,
+				"complete": true,
+				"instances": 159,
+				"max_batch_usec": 4014,
+				"max_placement_usec": 4830,
+				"max_resource_usec": 4429,
+				"max_step_usec": 4830,
+				"nodes": 19
+			},
+			"upload_ms": 5.718
+		},
+		{
+			"chunk": [
+				1,
+				-1
+			],
+			"create_ms": 0.19,
+			"ecology": {
+				"attempts": 499,
+				"batches": 20,
+				"complete": true,
+				"instances": 128,
+				"max_batch_usec": 4014,
+				"max_placement_usec": 4830,
+				"max_resource_usec": 4429,
+				"max_step_usec": 4830,
+				"nodes": 20
+			},
+			"upload_ms": 5.534
+		},
+		{
+			"chunk": [
+				2,
+				-1
+			],
+			"create_ms": 0.217,
+			"ecology": {
+				"attempts": 499,
+				"batches": 21,
+				"complete": true,
+				"instances": 142,
+				"max_batch_usec": 4014,
+				"max_placement_usec": 6059,
+				"max_resource_usec": 4429,
+				"max_step_usec": 6059,
+				"nodes": 21
+			},
+			"upload_ms": 6.393
+		},
+		{
+			"chunk": [
+				1,
+				0
+			],
+			"create_ms": 0.205,
+			"ecology": {
+				"attempts": 499,
+				"batches": 20,
+				"complete": true,
+				"instances": 97,
+				"max_batch_usec": 4014,
+				"max_placement_usec": 6059,
+				"max_resource_usec": 4429,
+				"max_step_usec": 6059,
+				"nodes": 20
+			},
+			"upload_ms": 9.673
+		}
+	],
+	"scope": "Headless CPU: main-thread creation, mesh/collision upload, staged vegetation. No GPU measurement.",
+	"seed": 424242
+}

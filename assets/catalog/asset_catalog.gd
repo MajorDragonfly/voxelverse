@@ -116,6 +116,17 @@ static func validate_asset_entry(
 				"Asset '%s' %s scene is missing: %s"
 				% [asset_id, tier_name.capitalize(), path]
 			)
+	var variants: Variant = entry.get("geometry_variants", {})
+	if not variants is Dictionary:
+		result.append("Asset '%s' has invalid geometry_variants." % asset_id)
+	else:
+		for variant: String in variants:
+			if not variants[variant] is Dictionary:
+				result.append("Asset '%s' has invalid variant %s." % [asset_id, variant])
+				continue
+			# Validate through the same contract without recursively carrying variants.
+			result.append_array(validate_asset_entry({"asset_id": asset_id + "/" + variant,
+				"kind": kind, "lod": variants[variant]}, check_resources))
 	return result
 
 

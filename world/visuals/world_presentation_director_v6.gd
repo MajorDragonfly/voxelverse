@@ -23,6 +23,9 @@ func _initialize_presentation() -> void:
 		240
 	)
 	cloud_altitude = lerpf(46.0, 34.0, haze)
+	var atmosphere: Dictionary = profile.get("atmosphere", {})
+	if not atmosphere.is_empty():
+		cloud_voxel_count = roundi(lerpf(96.0, 240.0, float(atmosphere.get("cloud_density", 0.5))))
 	cloud_field_radius = 330.0
 	wind_speed = lerpf(0.46, 0.86, haze)
 	super._initialize_presentation()
@@ -130,3 +133,5 @@ func _tune_environment() -> void:
 		sun.shadow_bias = 0.10
 		sun.shadow_normal_bias = 1.42
 		sun.shadow_blur = 1.35
+	if environment_controller.has_method("apply_profile_atmosphere"):
+		environment_controller.call("apply_profile_atmosphere")

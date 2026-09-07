@@ -9,6 +9,7 @@ const BIOME_KEYS: Array[String] = [
 	"wetland",
 	"grassland",
 	"steppe",
+	"desert",
 	"savanna",
 	"forest",
 	"dense_forest",
@@ -200,7 +201,7 @@ static func _architectures_for_biome(
 static func _variants_for_biome(biome_key: String) -> Array[String]:
 	match biome_key:
 		"forest":
-			return ["open_forest", "mixed_forest", "moss_forest", "fern_forest"]
+			return ["sparse_woodland", "ancient_grove", "moss_forest", "fern_forest", "autumn_grove"]
 		"dense_forest":
 			return ["ancient_grove", "deep_forest", "giant_tree_field", "shadow_grove"]
 		"grassland":
@@ -226,3 +227,76 @@ static func _unique_strings(values: Array[String]) -> Array[String]:
 		if not result.has(value):
 			result.append(value)
 	return result
+
+
+static func variant_weights(biome_key: String, profile: Dictionary, world_x: float, world_z: float) -> Dictionary:
+	# Bilinear interpolation of seeded patches gives continuous ecological
+	# transitions at both positive and negative 96 m cell boundaries.
+	var cell := Vector2(world_x, world_z) / 96.0
+	var base := Vector2(floorf(cell.x), floorf(cell.y))
+	var fraction: Vector2 = cell - base
+	fraction = Vector2(smoothstep(0.0, 1.0, fraction.x), smoothstep(0.0, 1.0, fraction.y))
+	var result: Dictionary = {}
+	for z in range(2):
+		for x in range(2):
+			var weight: float = (fraction.x if x else 1.0 - fraction.x) * (fraction.y if z else 1.0 - fraction.y)
+			var variant: String = choose_local_variant(biome_key, profile, (base.x + x) * 96.0, (base.y + z) * 96.0)
+			result[variant] = float(result.get(variant, 0.0)) + weight
+	return result
+
+
+static func blend_composition(weights: Dictionary, profile: Dictionary, world_x: float, world_z: float) -> Dictionary:
+	var result: Dictionary = {"tree_density": 0.0, "shrub_density": 0.0, "ground_density": 0.0, "rock_density": 0.0, "hero_asset_chance": 0.0,
+		"biome_weights": weights.duplicate(), "variant_weights": {},
+		"families": {}, "fauna_weights": {"grazer": 0.0, "forager": 0.0, "predator": 0.0},
+		"water_style": {"still": 0.0, "flowing": 0.0, "coastal": 0.0},
+		"atmosphere": {"mist": 0.0}, "landmarks": {"ancient_grove": 0.0, "rock_spire": 0.0},
+		"surface_slots": {"ground_base": 1.0}}
+	for biome_key: String in weights:
+		var weight: float = float(weights[biome_key])
+		if weight <= 0.00001:
+			continue
+		var rules: Dictionary = get_biome_rules(biome_key, profile)
+		var patches: Dictionary = variant_weights(biome_key, profile, world_x, world_z)
+		var forest: bool = biome_key in ["forest", "dense_forest", "wetland"]
+		var alpine: bool = biome_key in ["alpine", "rocky_highlands"]
+		var aquatic: bool = biome_key in ["ocean", "river", "lake"]
+		var fern_bias: float = 0.0
+		var tree_scale: float = 1.0
+		for variant: String in patches:
+			var patch_weight: float = float(patches[variant])
+			result["variant_weights"][variant] = float(result["variant_weights"].get(variant, 0.0)) + weight * patch_weight
+			if variant in ["fern_forest", "moss_forest", "moss_wetland"]:
+				fern_bias += patch_weight * 0.55
+			if variant == "sparse_woodland":
+				tree_scale -= patch_weight * 0.42
+			if variant in ["ancient_grove", "giant_tree_field"]:
+				tree_scale += patch_weight * 0.15
+		for density: String in ["tree_density", "shrub_density", "ground_density", "rock_density", "hero_asset_chance"]:
+			var value: float = float(rules.get(density, 0.0))
+			if density == "tree_density":
+				value *= tree_scale
+			result[density] += value * weight
+		var tree_density: float = float(rules["tree_density"]) * tree_scale
+		var pine_share: float = 0.88 if alpine else (0.24 if forest else 0.38)
+		_add_family(result, "ancient_oak_v2", weight * tree_density * (1.0 - pine_share))
+		_add_family(result, "tall_pine_v2", weight * tree_density * pine_share)
+		_add_family(result, "dense_bush_v2", weight * float(rules["shrub_density"]))
+		_add_family(result, "fern_cluster_v2", weight * float(rules["ground_density"]) * ((0.65 + fern_bias) if forest else 0.08))
+		_add_family(result, "flower_cluster_v2", weight * float(rules["ground_density"]) * (0.12 if forest else 0.45))
+		_add_family(result, "grass_tuft_v2", weight * float(rules["ground_density"]) * (0.45 if forest else 0.85))
+		_add_family(result, "layered_rock_v2", weight * float(rules["rock_density"]))
+		result["fauna_weights"]["grazer"] += weight * (0.0 if aquatic else (0.28 if forest else 0.65))
+		result["fauna_weights"]["forager"] += weight * (0.0 if aquatic else (0.54 if forest else 0.25))
+		result["fauna_weights"]["predator"] += weight * (0.0 if aquatic else (0.18 if forest else 0.10))
+		result["water_style"]["flowing"] += weight if biome_key == "river" else 0.0
+		result["water_style"]["still"] += weight if biome_key in ["lake", "wetland"] else 0.0
+		result["water_style"]["coastal"] += weight if biome_key in ["coast", "ocean"] else 0.0
+		result["atmosphere"]["mist"] += weight * (0.8 if biome_key == "wetland" else (0.4 if forest else 0.1))
+		result["landmarks"]["ancient_grove"] += weight * (0.7 if forest else 0.05)
+		result["landmarks"]["rock_spire"] += weight * (0.8 if alpine else 0.12)
+	return result
+
+
+static func _add_family(result: Dictionary, family: String, weight: float) -> void:
+	result["families"][family] = float(result["families"].get(family, 0.0)) + weight

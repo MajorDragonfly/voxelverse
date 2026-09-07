@@ -1,5 +1,24 @@
 extends "res://world/visuals/planet_visual_environment.gd"
 
+var _biome_timer: float = 0.0
+var _biome_mist: float = 0.1
+var _base_fog_density: float = 0.20
+var _view_player: Node3D
+
+
+func _process(delta: float) -> void:
+	if _current_visual_mode != VisualMode.SURFACE:
+		return
+	_biome_timer -= delta
+	if _biome_timer <= 0.0:
+		_biome_timer = 0.75
+		if not is_instance_valid(_view_player):
+			_view_player = get_tree().get_first_node_in_group(&"player") as Node3D
+		if _view_player != null:
+			var position: Vector3 = _view_player.global_position
+			var composition: Dictionary = WorldGenerator.get_biome_composition(position.x, position.z)
+			_biome_mist = float(composition.get("atmosphere", {}).get("mist", 0.1))
+	_environment.fog_density = lerpf(_environment.fog_density, _base_fog_density * (1.0 + _biome_mist * 0.28), 1.0 - exp(-delta * 0.65))
 
 func _ready() -> void:
 	super._ready()
@@ -51,3 +70,18 @@ func _apply_planet_identity() -> void:
 	sun.shadow_normal_bias = 1.55
 	sun.shadow_blur = 1.35
 	sun.directional_shadow_max_distance = 165.0
+	apply_profile_atmosphere()
+
+
+func apply_profile_atmosphere() -> void:
+	var atmosphere: Dictionary = WorldGenerator.get_planet_profile().get("atmosphere", {})
+	if atmosphere.is_empty():
+		return
+	_sky_material.sky_top_color = atmosphere["sky_top"]
+	_sky_material.sky_horizon_color = atmosphere["sky_horizon"]
+	_environment.fog_light_color = atmosphere["fog_color"]
+	_base_fog_density = 0.20 * float(atmosphere["fog_density_scale"])
+	_environment.fog_density = _base_fog_density
+	_environment.ambient_light_energy = 0.84 * float(atmosphere["ambient_scale"])
+	sun.light_color = atmosphere.get("sun_color", Color(1.0, 0.96, 0.88))
+	sun.light_energy = float(atmosphere["sun_energy_scale"])

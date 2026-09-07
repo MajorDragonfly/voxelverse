@@ -67,7 +67,8 @@ func get_species_entries(coordinates: Vector2i) -> Array:
 
 func choose_species(
 	coordinates: Vector2i,
-	selection_value: float
+	selection_value: float,
+	role_weights: Dictionary = {}
 ) -> Dictionary:
 	var entries: Array = get_species_entries(coordinates)
 	if entries.is_empty():
@@ -75,10 +76,7 @@ func choose_species(
 	var total_population: float = 0.0
 	for entry_value in entries:
 		if entry_value is Dictionary:
-			total_population += maxf(
-				float(entry_value.get("population", 0.0)),
-				0.0
-			)
+			total_population += _selection_weight(entry_value, role_weights)
 	if total_population <= 0.001:
 		return entries[0].duplicate(true)
 	var target: float = clampf(selection_value, 0.0, 0.99999)
@@ -88,10 +86,19 @@ func choose_species(
 		if not (entry_value is Dictionary):
 			continue
 		var entry: Dictionary = entry_value
-		accumulated += maxf(float(entry.get("population", 0.0)), 0.0)
+		accumulated += _selection_weight(entry, role_weights)
 		if target <= accumulated:
 			return entry.duplicate(true)
 	return entries.back().duplicate(true)
+
+
+func _selection_weight(entry: Dictionary, role_weights: Dictionary) -> float:
+	var population: float = maxf(float(entry.get("population", 0.0)), 0.0)
+	# Weight visible representatives; persisted regional populations are intact.
+	var role: String = str(entry.get("role", "forager"))
+	if role in ["climber", "scavenger"]:
+		role = "forager"
+	return population * maxf(float(role_weights.get(role, 1.0)), 0.0)
 
 
 func register_wildlife_loss(

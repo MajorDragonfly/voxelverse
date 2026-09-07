@@ -223,3 +223,14 @@ The procedural biome system will create most visible variation through scale, ro
 8. Mid/Far are supplied for dense or large assets when needed.
 9. Asset can be replaced without changing its `asset_id`.
 10. The related gameplay `part_id` remains stable.
+
+
+## Integrated benchmark V2
+
+The first seven semantic environment families now ship in the existing
+`temperate_forest_v1` manifest. See [the production architecture](PRODUCTION_ARCHITECTURE.md)
+and [source editing/export instructions](source/blockbench/environment/benchmark_v2/README.md).
+Each family has three structural variants and authored Near/Mid/Far meshes. The
+runtime uses shared meshes, a UV-slot palette shader and staged MultiMesh batches.
+The original pipeline prototypes remain historical authoring experiments; the
+active environment placement uses the new benchmark manifest entries.

@@ -9,3 +9,7 @@
 # OS noise
 .DS_Store
 Thumbs.db
+
+# Python art/export tooling
+__pycache__/
+*.pyc

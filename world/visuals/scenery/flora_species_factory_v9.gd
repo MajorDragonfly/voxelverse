@@ -37,12 +37,19 @@ static func create_species_variant(
 				random.randi_range(0, architecture_options.size() - 1)
 			]
 		)
+	if "pine" in family_id:
+		architecture = "conifer"
+	elif "oak" in family_id:
+		architecture = "ancient_massive"
 	var height_base: float = float(morphology.get("height_scale", 1.0))
 	var width_base: float = float(morphology.get("width_scale", 1.0))
 	var asymmetry: float = float(morphology.get("asymmetry", 0.2))
 	var palette_shift: float = random.randf_range(-0.035, 0.035)
 	return {
-		"species_id": "%s_%s_%02d" % [family_id, biome_key, species_index],
+		"species_id": "%d_%s_%s_%02d" % [planet_seed, family_id, biome_key, species_index],
+		"species_seed": random.seed,
+		"geometry_variant": posmod(species_index, 3),
+		"age": random.randf_range(0.35, 1.0),
 		"family_id": family_id,
 		"biome_key": biome_key,
 		"architecture": architecture,
@@ -99,8 +106,8 @@ static func create_species_set(
 	variants_per_family: int = 3
 ) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
-	var species_index: int = 0
 	for family_id in family_ids:
+		var species_index: int = 0
 		for _variant in range(maxi(variants_per_family, 1)):
 			result.append(
 				create_species_variant(
@@ -130,14 +137,16 @@ static func create_instance_variation(
 		else 1.0
 	)
 	return {
-		"uniform_scale": random.randf_range(0.84, 1.18) * hero_scale,
-		"height_multiplier": random.randf_range(0.90, 1.12),
-		"width_multiplier": random.randf_range(0.88, 1.14),
+		"uniform_scale": random.randf_range(0.92, 1.08) * hero_scale,
+		"height_multiplier": random.randf_range(0.96, 1.04),
+		"width_multiplier": random.randf_range(0.96, 1.04),
 		"rotation_y": random.randf_range(0.0, 360.0),
 		"lean_degrees": random.randf_range(-4.0, 4.0)
 		* (1.0 + float(species.get("asymmetry", 0.0))),
 		"crown_density_multiplier": random.randf_range(0.88, 1.12),
 		"is_hero": hero_scale > 1.0,
+		"health": random.randf_range(0.82, 1.0),
+		"age": random.randf_range(0.3, 1.0),
 	}
 
 
@@ -148,7 +157,7 @@ static func _shift_material_palette(
 	var result: Dictionary = {}
 	for key in materials.keys():
 		var value: Variant = materials[key]
-		if value is Color:
+		if value is Color and (str(key).begins_with("foliage_") or str(key).begins_with("shrub_") or str(key).begins_with("flower_")):
 			var color: Color = value
 			result[key] = Color.from_hsv(
 				wrapf(color.h + hue_shift, 0.0, 1.0),

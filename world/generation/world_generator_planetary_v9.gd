@@ -2,12 +2,57 @@ extends "res://world/generation/world_generator_adventure.gd"
 
 const ProfileV9 = preload("res://world/generation/planet_profile_v9.gd")
 const BiomeGrammar = preload("res://world/generation/biome_grammar_v9.gd")
+const Landmarks = preload("res://world/generation/landmark_grammar.gd")
+const ScenicSpawn = preload("res://world/generation/adventure_spawn_selector.gd")
+var _landmark_cells: Dictionary = {}
+var _spawn_cache: Dictionary = {}
 
 
 func _configure_v6(seed_value: int) -> void:
 	super._configure_v6(seed_value)
 	_planet_profile = ProfileV9.create(seed_value)
 	_height_cache.clear()
+	_landmark_cells.clear()
+	_spawn_cache.clear()
+
+
+func get_scenic_spawn(search_radius: float = 220.0) -> Vector3:
+	_ensure_v6_state()
+	if not _spawn_cache.has(search_radius):
+		_spawn_cache[search_radius] = ScenicSpawn.find_spawn(self, Vector2.ZERO, search_radius)
+	return _spawn_cache[search_radius]
+
+
+func get_continentality(world_x: float, world_z: float) -> float:
+	var base: float = super.get_continentality(world_x, world_z)
+	var landscape: Dictionary = _planet_profile.get("landscape", {})
+	var island_mix: float = float(landscape.get("island_mix", 0.0))
+	var islands: float = _normalized_v6(_island_noise, world_x * 2.8, world_z * 2.8)
+	return clampf(lerpf(base, islands, island_mix) + float(landscape.get("continental_bias", 0.0)), 0.0, 1.0)
+
+
+func get_landmarks_near(world_x: float, world_z: float) -> Array[Dictionary]:
+	_ensure_v6_state()
+	var cell := Vector2i(floori(world_x / Landmarks.CELL_SIZE), floori(world_z / Landmarks.CELL_SIZE))
+	var result: Array[Dictionary] = []
+	for z in range(-1, 2):
+		for x in range(-1, 2):
+			var key := cell + Vector2i(x, z)
+			if not _landmark_cells.has(key):
+				if _landmark_cells.size() >= 256:
+					_landmark_cells.clear()
+				_landmark_cells[key] = Landmarks.create_cell(int(_planet_profile["planet_seed"]), key, _planet_profile)
+			var landmark: Dictionary = _landmark_cells[key]
+			if not landmark.is_empty():
+				result.append(landmark)
+	return result
+
+
+func get_landscape_height_offset(world_x: float, world_z: float) -> float:
+	var total: float = 0.0
+	for landmark: Dictionary in get_landmarks_near(world_x, world_z):
+		total += Landmarks.height_offset(landmark, Vector2(world_x, world_z))
+	return total
 
 
 func get_biome(
@@ -102,6 +147,8 @@ func get_biome_key(
 			return "steppe"
 		Biome.SAVANNA:
 			return "savanna"
+		Biome.DESERT:
+			return "desert"
 		Biome.FOREST:
 			return "forest"
 		Biome.DENSE_FOREST:
@@ -128,80 +175,89 @@ func get_biome_variant(
 	)
 
 
-func get_biome_composition(
-	world_x: float,
-	world_z: float,
-	terrain_height: float = -9999.0
-) -> Dictionary:
-	return BiomeGrammar.get_biome_rules(
-		get_biome_key(world_x, world_z, terrain_height),
-		_planet_profile
-	)
+func get_biome_composition(world_x: float, world_z: float, terrain_height: float = -9999.0) -> Dictionary:
+	var weights: Dictionary = get_biome_weights(world_x, world_z, terrain_height)
+	return BiomeGrammar.blend_composition(weights, _planet_profile, world_x, world_z)
 
 
-func get_biome_color(
-	world_x: float,
-	world_z: float,
-	terrain_height: float = -9999.0
-) -> Color:
+func get_temperature(world_x: float, world_z: float, terrain_height: float = -9999.0) -> float:
 	_ensure_v6_state()
 	if terrain_height < -9000.0:
 		terrain_height = get_terrain_height(world_x, world_z)
-	var slots: Dictionary = _planet_profile.get("material_slots", {})
-	var ground: Color = slots.get("ground_base", Color(0.30, 0.54, 0.28, 1.0))
-	var ground_shadow: Color = slots.get("ground_shadow", ground.darkened(0.28))
-	var dry: Color = slots.get("ground_dry", Color(0.64, 0.50, 0.24, 1.0))
-	var coast: Color = slots.get("coast", Color(0.72, 0.61, 0.39, 1.0))
-	var rock: Color = slots.get("rock_base", Color(0.37, 0.38, 0.39, 1.0))
-	var rock_light: Color = slots.get("rock_light", rock.lightened(0.15))
-	var foliage_shadow: Color = slots.get("foliage_shadow", Color(0.12, 0.36, 0.18, 1.0))
-	var water_deep: Color = slots.get("water_deep", Color(0.04, 0.35, 0.44, 1.0))
-	var water_shallow: Color = slots.get("water_shallow", water_deep.lightened(0.20))
-	var snow: Color = _planet_profile.get("palette", {}).get(
-		"snow",
-		Color(0.86, 0.90, 0.91, 1.0)
-	)
-	var biome: int = get_biome(world_x, world_z, terrain_height)
-	var ecology: float = get_ecology_density(world_x, world_z, terrain_height)
-	var palette_field: float = _normalized_v6(_palette_noise, world_x, world_z)
-	var local_variation: float = clampf(
-		(_micro_relief_noise.get_noise_2d(world_x * 1.7, world_z * 1.7) + 1.0) * 0.5,
-		0.0,
-		1.0
-	)
+	return clampf(_normalized_v6(_temperature_noise, world_x, world_z) + float(_planet_profile.get("climate", {}).get("temperature_bias", 0.0)) * 0.34 - maxf(terrain_height - 3.0, 0.0) * 0.014, 0.0, 1.0)
 
-	match biome:
-		Biome.OCEAN:
-			var depth: float = clampf(
-				(get_sea_level() - terrain_height) / 9.0,
-				0.0,
-				1.0
-			)
-			return water_shallow.lerp(water_deep.darkened(0.22), depth)
-		Biome.COAST:
-			return coast.lerp(ground, ecology * 0.18)
-		Biome.LAKE, Biome.RIVER:
-			return water_shallow.lerp(water_deep, 0.36)
-		Biome.WETLAND:
-			return ground.lerp(foliage_shadow, 0.42).lightened(0.04)
-		Biome.DESERT:
-			return dry.lightened(0.06).lerp(rock_light, palette_field * 0.12)
-		Biome.SAVANNA:
-			return dry.lerp(ground, 0.28 + ecology * 0.22)
-		Biome.STEPPE:
-			return ground.lerp(dry, 0.46)
-		Biome.FOREST:
-			return ground.lerp(foliage_shadow, 0.32)
-		Biome.DENSE_FOREST:
-			return ground_shadow.lerp(foliage_shadow, 0.48)
-		Biome.ROCKY_HIGHLANDS:
-			return rock.lerp(ground_shadow, ecology * 0.16)
-		Biome.ALPINE:
-			return rock_light.lerp(ground, 0.22).lerp(snow, 0.18)
-		Biome.SNOW:
-			return snow.lerp(rock_light, 0.08 + local_variation * 0.08)
-		_:
-			return ground.lerp(
-				ground.lightened(0.10),
-				local_variation * 0.22
-			)
+
+func get_moisture(world_x: float, world_z: float, _terrain_height: float = -9999.0) -> float:
+	_ensure_v6_state()
+	return clampf(_normalized_v6(_moisture_noise, world_x, world_z) + float(_planet_profile.get("climate", {}).get("moisture_bias", 0.0)) * 0.34, 0.0, 1.0)
+
+
+func get_biome_weights(world_x: float, world_z: float, terrain_height: float = -9999.0) -> Dictionary:
+	_ensure_v6_state()
+	if terrain_height < -9000.0:
+		terrain_height = get_terrain_height(world_x, world_z)
+	var sea: float = get_sea_level()
+	var recipe: Dictionary = _planet_profile.get("biome_recipe", {})
+	var width: float = float(recipe.get("transition_width", 0.14))
+	var ecology: float = get_ecology_density(world_x, world_z, terrain_height)
+	var dry: float = clampf(_normalized_v6(_palette_noise, world_x, world_z) + float(recipe.get("dryness_bias", 0.0)) - ecology * 0.18, 0.0, 1.0)
+	var forest: float = float(recipe.get("forest_threshold", 0.56))
+	var dense: float = float(recipe.get("dense_forest_threshold", 0.79))
+	var snow: float = float(_planet_profile.get("snow_start_altitude", 20.0)) + float(recipe.get("alpine_bias", 0.0))
+	var weights: Dictionary = {"grassland": 1.0}
+	_blend_weight(weights, "steppe", smoothstep(0.57 - width, 0.57 + width, dry))
+	_blend_weight(weights, "savanna", smoothstep(0.68 - width, 0.68 + width, dry) * (1.0 - smoothstep(0.45, 0.65, ecology)))
+	_blend_weight(weights, "desert", smoothstep(0.83 - width, 0.83 + width, dry) * (1.0 - smoothstep(0.28, 0.48, ecology)))
+	_blend_weight(weights, "forest", smoothstep(forest - width, forest + width, ecology))
+	_blend_weight(weights, "dense_forest", smoothstep(dense - width, dense + width, ecology))
+	var river: float = get_river_strength(world_x, world_z)
+	var lake: float = get_lake_strength(world_x, world_z)
+	var wet: float = smoothstep(0.48, 0.78, maxf(river, lake)) * (1.0 - smoothstep(2.0, 5.0, terrain_height))
+	_blend_weight(weights, "wetland", wet * smoothstep(0.3, 0.65, ecology))
+	var rugged: float = float(get_region_profile(world_x, world_z).get("ruggedness", 0.0))
+	_blend_weight(weights, "rocky_highlands", smoothstep(0.45, 0.78, rugged) * smoothstep(4.0, 10.0, terrain_height))
+	_blend_weight(weights, "alpine", smoothstep(snow - 6.0, snow - 1.0, terrain_height))
+	_blend_weight(weights, "snow", smoothstep(snow, snow + 4.0, terrain_height))
+	_blend_weight(weights, "river", smoothstep(0.60, 0.87, river) * (1.0 - smoothstep(5.0, 8.0, terrain_height)))
+	_blend_weight(weights, "lake", smoothstep(0.58, 0.88, lake) * (1.0 - smoothstep(sea + 0.7, sea + 2.2, terrain_height)))
+	_blend_weight(weights, "coast", 1.0 - smoothstep(sea + 0.25, sea + 1.5, terrain_height))
+	_blend_weight(weights, "ocean", 1.0 - smoothstep(sea - 0.85, sea - 0.15, terrain_height))
+	return weights
+
+
+func _blend_weight(weights: Dictionary, key: String, amount: float) -> void:
+	for old_key in weights:
+		weights[old_key] = float(weights[old_key]) * (1.0 - amount)
+	weights[key] = float(weights.get(key, 0.0)) + amount
+
+
+func sample_world(world_x: float, world_z: float) -> Dictionary:
+	var result: Dictionary = super.sample_world(world_x, world_z)
+	result["temperature"] = get_temperature(world_x, world_z, result["height"])
+	result["moisture"] = get_moisture(world_x, world_z, result["height"])
+	return result
+
+
+func get_biome_color(world_x: float, world_z: float, terrain_height: float = -9999.0) -> Color:
+	# A continuous palette field is shared by terrain and ecological composition.
+	# Never switch terrain colors using the categorical inspection biome ID.
+	var weights: Dictionary = get_biome_weights(world_x, world_z, terrain_height)
+	var slots: Dictionary = _planet_profile["material_slots"]
+	var ground: Color = slots["ground_base"]
+	var dry: Color = slots["ground_dry"]
+	var rock: Color = slots["rock_base"]
+	var colors: Dictionary = {
+		"grassland": ground, "steppe": ground.lerp(dry, 0.46),
+		"savanna": ground.lerp(dry, 0.68), "desert": dry,
+		"forest": ground.lerp(slots["foliage_shadow"], 0.30),
+		"dense_forest": ground.lerp(slots["foliage_shadow"], 0.46),
+		"wetland": ground.darkened(0.12), "rocky_highlands": rock,
+		"alpine": rock.lightened(0.15), "snow": _planet_profile["palette"]["snow"],
+		"river": ground.lerp(slots["coast"], 0.35).darkened(0.10), "lake": slots["coast"],
+		"coast": slots["coast"], "ocean": slots["water_deep"],
+	}
+	var color := Color(0.0, 0.0, 0.0, 0.0)
+	for key in weights:
+		color += (colors[key] as Color) * float(weights[key])
+	color.a = 1.0
+	return color

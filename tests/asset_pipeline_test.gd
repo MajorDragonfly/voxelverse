@@ -24,7 +24,7 @@ func _test_catalog_discovery() -> void:
 	)
 	_expect(
 		Catalog.get_errors().is_empty(),
-		"Asset catalog reported manifest errors: %s" % Catalog.get_errors()
+		"Asset catalog reported manifest errors: %s" % [Catalog.get_errors()]
 	)
 
 

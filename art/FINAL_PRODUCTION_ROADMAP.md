@@ -39,7 +39,7 @@ A planet is therefore not a recolored map. It has a coherent visual fingerprint.
 
 ## Phase A - Final foundation
 
-Status: **active**
+Status: **integrated; regression and runtime acceptance enabled in CI**
 
 Deliverables:
 
@@ -68,6 +68,11 @@ Deliverables:
    - authored source remains outside Godot import through `art/source/.gdignore`.
 
 ## Phase B - Art benchmark V2
+
+Status: **seven source models and 63 runtime LOD exports delivered; visual approval pending**.
+See [production architecture and limits](PRODUCTION_ARCHITECTURE.md) and the
+[production pass report](PRODUCTION_PASS_REPORT.md). CPU geometry previews and
+real generator palette comparisons are in `art/review/benchmark_v2/`.
 
 Build six production-quality reference families before mass production:
 

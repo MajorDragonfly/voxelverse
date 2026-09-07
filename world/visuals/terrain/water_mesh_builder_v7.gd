@@ -58,12 +58,7 @@ static func build(
 				column_ratio
 			)
 			var index: int = row * columns + column
-			var world_x: float = chunk.global_position.x + local_x
-			var world_z: float = chunk.global_position.z + local_z
-			var terrain_height: float = WorldGenerator.get_terrain_height(
-				world_x,
-				world_z
-			)
+			var terrain_height: float = float(chunk.call("get_surface_height_at_local_position", local_x, local_z))
 			var actual_depth: float = maxf(water_height - terrain_height, 0.0)
 			var depth_weight: float = smoothstep(
 				0.0,

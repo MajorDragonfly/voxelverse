@@ -1,6 +1,8 @@
 class_name WorldManager
 extends Node3D
 
+const AuthoredAssets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
+
 const TERRAIN_CHUNK_SCENE: PackedScene = preload(
 	"res://world/visuals/terrain/terrain_chunk.tscn"
 )
@@ -13,6 +15,7 @@ const AdventureSpawnSelector = preload(
 @export_range(1, 4, 1) var chunk_create_budget_per_tick: int = 1
 @export_range(0.02, 0.50, 0.01) var chunk_build_interval: float = 0.11
 @export_range(0, 3, 1) var unload_hysteresis: int = 1
+@export_range(1, 4, 1) var maximum_concurrent_terrain_jobs: int = 2
 @export var player_path: NodePath = NodePath("../Player")
 
 @export_category("Adventure Spawn")
@@ -53,7 +56,18 @@ func _initialize_streaming() -> void:
 	if not _read_chunk_dimensions():
 		return
 	current_player_chunk = _world_position_to_chunk(player.global_position)
+	var physics_was_enabled: bool = player.is_physics_processing()
+	player.set_physics_process(false)
 	_create_chunk(current_player_chunk)
+	var spawn_chunk: Node = loaded_chunks.get(current_player_chunk)
+	if spawn_chunk != null and not bool(spawn_chunk.get("generation_complete")):
+		await spawn_chunk.terrain_ready
+	if not is_inside_tree() or not is_instance_valid(player):
+		return
+	var ground: float = WorldGenerator.get_visual_terrain_height(player.global_position.x, player.global_position.z)
+	if player.global_position.y < ground + 0.65:
+		player.global_position.y = ground + 2.2
+	player.set_physics_process(physics_was_enabled)
 	_plan_streaming()
 	world_initialized = true
 	_stream_build_timer = chunk_build_interval
@@ -99,11 +113,11 @@ func _maybe_choose_adventure_spawn() -> void:
 	var generator := get_node_or_null("/root/WorldGenerator")
 	if generator == null:
 		return
-	var spawn_position: Vector3 = AdventureSpawnSelector.find_spawn(
-		generator,
-		Vector2.ZERO,
-		scenic_spawn_search_radius
-	)
+	var spawn_position: Vector3
+	if generator.has_method("get_scenic_spawn"):
+		spawn_position = generator.call("get_scenic_spawn", scenic_spawn_search_radius)
+	else:
+		spawn_position = AdventureSpawnSelector.find_spawn(generator, Vector2.ZERO, scenic_spawn_search_radius)
 	player.global_position = spawn_position
 
 
@@ -147,6 +161,11 @@ func _plan_streaming() -> void:
 
 func _drain_chunk_queue() -> void:
 	var remaining_budget: int = maxi(chunk_create_budget_per_tick, 1)
+	var running_jobs: int = 0
+	for chunk: Node in loaded_chunks.values():
+		if not bool(chunk.get("generation_complete")):
+			running_jobs += 1
+	remaining_budget = mini(remaining_budget, maxi(maximum_concurrent_terrain_jobs - running_jobs, 0))
 	while remaining_budget > 0 and not _stream_pending_chunks.is_empty():
 		var coordinates: Vector2i = _stream_pending_chunks.pop_front()
 		if _stream_required_chunks.has(coordinates) and not loaded_chunks.has(coordinates):
@@ -215,3 +234,7 @@ func _remove_chunk(coordinates: Vector2i) -> void:
 	if is_instance_valid(chunk):
 		chunk.queue_free()
 	loaded_chunks.erase(coordinates)
+
+
+func _exit_tree() -> void:
+	AuthoredAssets.finish_pending_loads()

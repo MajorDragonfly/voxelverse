@@ -1,103 +1,95 @@
 extends "res://world/resources/terrain/terrain_chunk_v7.gd"
 
+const TerrainBuildJob = preload("res://world/streaming/terrain_build_job.gd")
+signal terrain_ready
+
 @export_category("Fast Terrain V8")
 @export_range(1, 8, 1) var color_sample_stride: int = 4
+@export var threaded_generation: bool = true
 
 var _fast_color_cache: Dictionary = {}
 var _fast_height_grid := PackedFloat32Array()
 var _fast_height_width: int = 0
 var _fast_height_depth: int = 0
-var _build_vertices := PackedVector3Array()
-var _build_normals := PackedVector3Array()
-var _build_colors := PackedColorArray()
-var _build_uvs := PackedVector2Array()
+var _terrain_job: RefCounted
+var _terrain_task_id: int = -1
+var generation_complete: bool = false
+var upload_ms: float = 0.0
+static var _upload_frame: int = -1
+
+
+func _ready() -> void:
+	_position_chunk()
+	far_terrain_mesh.visible = false
+	far_terrain_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	generate_terrain()
 
 
 func generate_terrain() -> void:
-	terrain_mesh.mesh = null
-	terrain_mesh.material_override = null
-	terrain_collision.shape = null
-	_fast_color_cache.clear()
-	_build_vertices.clear()
-	_build_normals.clear()
-	_build_colors.clear()
-	_build_uvs.clear()
-	_build_local_height_cache()
-
-	var cells_x: int = _get_cells_x()
-	var cells_z: int = _get_cells_z()
-	var half_width: float = get_chunk_width() * 0.5
-	var half_depth: float = get_chunk_depth() * 0.5
-
-	for cell_z in range(cells_z):
-		for cell_x in range(cells_x):
-			var x0: float = float(cell_x) * cell_size - half_width
-			var x1: float = x0 + cell_size
-			var z0: float = float(cell_z) * cell_size - half_depth
-			var z1: float = z0 + cell_size
-			var height: float = _get_column_height_by_index(cell_x, cell_z)
-			var top_color: Color = _get_fast_cell_color(cell_x, cell_z)
-			_append_build_quad(
-				Vector3(x0, height, z0),
-				Vector3(x0, height, z1),
-				Vector3(x1, height, z1),
-				Vector3(x1, height, z0),
-				Vector3.UP,
-				top_color
-			)
-			var side_color: Color = top_color.darkened(0.16)
-			var west: float = _get_column_height_by_index(cell_x - 1, cell_z)
-			if height > west + 0.001:
-				_append_build_quad(
-					Vector3(x0, west, z1), Vector3(x0, height, z1),
-					Vector3(x0, height, z0), Vector3(x0, west, z0),
-					Vector3.LEFT, side_color)
-			var east: float = _get_column_height_by_index(cell_x + 1, cell_z)
-			if height > east + 0.001:
-				_append_build_quad(
-					Vector3(x1, east, z0), Vector3(x1, height, z0),
-					Vector3(x1, height, z1), Vector3(x1, east, z1),
-					Vector3.RIGHT, side_color)
-			var north: float = _get_column_height_by_index(cell_x, cell_z - 1)
-			if height > north + 0.001:
-				_append_build_quad(
-					Vector3(x1, north, z0), Vector3(x1, height, z0),
-					Vector3(x0, height, z0), Vector3(x0, north, z0),
-					Vector3.FORWARD, side_color)
-			var south: float = _get_column_height_by_index(cell_x, cell_z + 1)
-			if height > south + 0.001:
-				_append_build_quad(
-					Vector3(x0, south, z1), Vector3(x0, height, z1),
-					Vector3(x1, height, z1), Vector3(x1, south, z1),
-					Vector3.BACK, side_color)
-
-	var arrays: Array = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = _build_vertices
-	arrays[Mesh.ARRAY_NORMAL] = _build_normals
-	arrays[Mesh.ARRAY_COLOR] = _build_colors
-	arrays[Mesh.ARRAY_TEX_UV] = _build_uvs
-	var generated_mesh := ArrayMesh.new()
-	generated_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	generated_mesh.surface_set_name(0, "VoxelTerrainV8")
-	terrain_mesh.mesh = generated_mesh
-	_apply_fast_heightmap_collision(cells_x, cells_z)
+	if _terrain_task_id >= 0:
+		return
+	generation_complete = false
+	_terrain_job = TerrainBuildJob.new()
+	_terrain_job.generator_script = WorldGenerator.get_script()
+	_terrain_job.world_seed = WorldGenerator.get_world_seed()
+	_terrain_job.chunk_origin = Vector2(position.x, position.z)
+	_terrain_job.cell_size = cell_size
+	_terrain_job.cells_x = _get_cells_x()
+	_terrain_job.cells_z = _get_cells_z()
+	_terrain_job.color_sample_stride = color_sample_stride
+	_terrain_job.far_stride = far_sample_stride
+	if threaded_generation:
+		_terrain_task_id = WorkerThreadPool.add_task(_terrain_job.run, false, "Surface %s" % chunk_coordinates)
+	else:
+		_terrain_job.run()
+		_finish_terrain()
 
 
-func _build_local_height_cache() -> void:
-	var cells_x: int = _get_cells_x()
-	var cells_z: int = _get_cells_z()
-	_fast_height_width = cells_x + 2
-	_fast_height_depth = cells_z + 2
-	_fast_height_grid.resize(_fast_height_width * _fast_height_depth)
-	for cell_z in range(-1, cells_z + 1):
-		for cell_x in range(-1, cells_x + 1):
-			var world_center: Vector2 = _get_cell_center_world_position_by_index(cell_x, cell_z)
-			var grid_index: int = (cell_z + 1) * _fast_height_width + (cell_x + 1)
-			_fast_height_grid[grid_index] = WorldGenerator.get_visual_terrain_height(
-				world_center.x,
-				world_center.y
-			)
+func _process(delta: float) -> void:
+	if _terrain_task_id >= 0 and WorkerThreadPool.is_task_completed(_terrain_task_id) and _upload_frame != Engine.get_process_frames():
+		# Completed workers may arrive together. Commit at most one chunk's
+		# mesh/collision payload on the main thread during a frame.
+		_upload_frame = Engine.get_process_frames()
+		WorkerThreadPool.wait_for_task_completion(_terrain_task_id)
+		_terrain_task_id = -1
+		_finish_terrain()
+	super._process(delta)
+
+
+func _exit_tree() -> void:
+	if _terrain_task_id >= 0:
+		WorkerThreadPool.wait_for_task_completion(_terrain_task_id)
+		_terrain_task_id = -1
+	_terrain_job = null
+	super._exit_tree()
+
+
+func _finish_terrain() -> void:
+	var started: int = Time.get_ticks_usec()
+	var result: Dictionary = _terrain_job.result
+	_terrain_job = null
+	_fast_height_grid = result["heights"]
+	_fast_height_width = int(result["width"])
+	_fast_height_depth = int(result["depth"])
+	_fast_color_cache = result["colors"]
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, result["arrays"])
+	mesh.surface_set_name(0, "VoxelTerrainV8")
+	terrain_mesh.mesh = mesh
+	_apply_fast_heightmap_collision(_get_cells_x(), _get_cells_z())
+	_create_water_surface()
+	# Legacy decorative object generation is disabled in V3. Do not run its
+	# obsolete attempts now that all environment placement is instanced.
+	generation_complete = true
+	if enable_far_proxy:
+		_far_mesh_resource = MeshPool.acquire_mesh()
+		_far_mesh_resource.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, result["far_arrays"])
+		_far_mesh_resource.surface_set_material(0, MeshPool.get_far_material())
+		far_terrain_mesh.mesh = _far_mesh_resource
+		_far_mesh_ready = true
+		_apply_lod_visibility()
+	upload_ms = (Time.get_ticks_usec() - started) / 1000.0
+	terrain_ready.emit()
 
 
 func _get_column_height_by_index(cell_x: int, cell_z: int) -> float:
@@ -111,46 +103,6 @@ func _get_column_height_by_index(cell_x: int, cell_z: int) -> float:
 		return _fast_height_grid[grid_z * _fast_height_width + grid_x]
 	var world_center: Vector2 = _get_cell_center_world_position_by_index(cell_x, cell_z)
 	return WorldGenerator.get_visual_terrain_height(world_center.x, world_center.y)
-
-
-func _append_build_quad(
-	a: Vector3,
-	b: Vector3,
-	c: Vector3,
-	d: Vector3,
-	normal: Vector3,
-	color: Color
-) -> void:
-	_build_vertices.append_array(PackedVector3Array([a, b, c, a, c, d]))
-	for _index in range(6):
-		_build_normals.append(normal)
-		_build_colors.append(color)
-	_build_uvs.append_array(PackedVector2Array([
-		Vector2(0.0, 0.0), Vector2(0.0, 1.0), Vector2(1.0, 1.0),
-		Vector2(0.0, 0.0), Vector2(1.0, 1.0), Vector2(1.0, 0.0),
-	]))
-
-
-func _get_fast_cell_color(cell_x: int, cell_z: int) -> Color:
-	var stride: int = maxi(color_sample_stride, 1)
-	var sample_x: int = clampi(
-		floori(float(cell_x) / float(stride)) * stride,
-		0,
-		_get_cells_x() - 1
-	)
-	var sample_z: int = clampi(
-		floori(float(cell_z) / float(stride)) * stride,
-		0,
-		_get_cells_z() - 1
-	)
-	var key := Vector2i(sample_x, sample_z)
-	if _fast_color_cache.has(key):
-		return _fast_color_cache[key]
-	var world_center: Vector2 = _get_cell_center_world_position_by_index(sample_x, sample_z)
-	var height: float = _get_column_height_by_index(sample_x, sample_z)
-	var color: Color = WorldGenerator.get_biome_color(world_center.x, world_center.y, height)
-	_fast_color_cache[key] = color
-	return color
 
 
 func _apply_fast_heightmap_collision(cells_x: int, cells_z: int) -> void:

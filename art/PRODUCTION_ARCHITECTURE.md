@@ -1,0 +1,109 @@
+# Planet diversity and environment production
+
+The active generator remains an extension of the Adventure generator. V9 adds
+composable palette, climate, ecology and surface-formation fields; it does not
+replace creature, building, save or assembly contracts. No new version ladder or
+underground generation was introduced.
+
+## Palette contract
+
+`assets/catalog/planet_material_slots.gd` owns an append-only list of 23 slots.
+The exported mesh has one surface. Each face stores `(slot_index + 0.5) / 32` in
+UV.x and `0.5` in UV.y. A nearest-filtered 32 × 1 palette texture supplies the
+planet/species colors. Adding a slot must preserve all existing indices.
+
+The shared `planet_foliage.gdshader` resolves these slots; MultiMesh custom data
+carries bounded individual shade and wind phase. Meshes are shared across planets.
+Materials are shared per species on the current planet. This avoids duplicating
+geometry for a palette and avoids one material surface/draw per semantic slot.
+Vertex colors remain available to other asset pipelines. UV-slot encoding is an
+explicit manifest capability, not a global reinterpretation of all GLB assets.
+
+Curated companion hues keep foliage, shrubs, bark, soil, minerals and water in
+separate roles. For example, seed 23757 uses violet crowns, turquoise shrubs,
+dark indigo bark and blue minerals. Seed 15838 is verdant; seed 63352 is autumnal.
+Terrain strata/wet surfaces, water, sky, horizon, mist and sunlight consume the
+same profile. Local biome mist interpolates gradually around the player.
+
+## Ecology and surface grammar
+
+Categorical biome IDs remain available for inspection and gameplay. Rendering
+and placement use normalized continuous weights, including desert. Local variants
+blend seeded 96 m patches with smooth interpolation at negative and positive cell
+boundaries. Forest composition changes tree, fern, flower and shrub density.
+Alpine regions favor conifers and rocks. Fauna weights select visible regional
+representatives without rewriting persisted populations.
+
+Landscape formations live in seeded 256 m cells: curved ridges, flat-topped mesas,
+basins, rock spires, grove hills and coastal teeth. Compact-support functions
+join without seams; existing mountains, canyons, lakes and islands remain in the
+Adventure terrain stack. The terrain height cache evaluates canonical centimetre
+coordinates, so its results do not depend on which nearby point was queried first.
+
+Scenic spawn evaluates 84 safe candidates, then terrain viewsheds for the best
+eight. Twelve rays sample 15–150 m; an angular horizon rejects occluded water and
+relief. Landmark visibility uses additional intervening height samples. Searches
+expand when the starting area is water. This is a terrain approximation: trees
+and buildings are not included in visibility testing.
+
+## Family → species → individual
+
+Seven authored benchmark families each supply three structural variants and three
+semantic LODs. Species are deterministic by planet seed, biome key, family and
+species index. They select a structural variant, bounded height/breadth and a
+related leaf palette. Individuals add modest scale, yaw, lean, age/health shade
+and occasional giant-tree scale. Species ordering does not depend on family-list
+ordering. Save-facing asset IDs and existing assembly schemas are preserved.
+
+The current runtime uses three compiled structures per family. Arbitrary branch
+count, trunk twist, taper and canopy-layer recipes are an authoring/compiler
+extension point; they are not all synthesized into new topology at runtime.
+Do not describe the current seven-family pack as unlimited alien morphology.
+Additional architecture families should follow visual approval of this benchmark.
+
+## Streaming and lifecycle
+
+Terrain workers own private, detached generators with explicit seed overrides.
+They return value arrays for Near and Far terrain and collision heights. They
+never touch the shared WorldGenerator, scene tree or RenderingServer. The main
+thread commits at most one completed chunk per frame; the manager caps concurrent
+terrain jobs at two. The first spawn collider is ready before player physics
+resumes. Every terrain task is joined when its chunk exits.
+
+Vegetation uses a cancellable `_process` state machine, with a shared 1.8 ms
+budget checked between bounded placement/resource/batch steps. This is a scheduling
+target, not a hard upper bound on any individual allocation or OS scheduling delay.
+The state owns its RNG and dictionaries; no suspended generation coroutine can
+strand them during planet reload or engine shutdown.
+
+Authored resources load through `ResourceLoader.load_threaded_request`; callers
+poll across frames and retrieve only completed requests. Requests are deduplicated,
+all LODs are prepared before a batch appears, and world teardown joins outstanding
+loads. Each chunk contains at most 21 MultiMesh nodes, not a node hierarchy per
+plant. Explicit conservative AABBs include individual transforms and wind margin.
+LOD switching reuses meshes and has distance hysteresis. Small plants disappear at
+Far; trees/rocks/shrubs retain mass. Shadows are enabled only for Near trees.
+
+The benchmark geometry is decorative and has no individual colliders. Terrain
+retains a 65 × 65 heightmap collider per chunk. Cluster-level distant rendering
+and collision for selected hero trunks remain future work; the existing terrain
+streaming radius has not been replaced by a planetary horizon renderer.
+
+## Validation and export
+
+Run `python3 tools/validate_godot.py --godot /path/to/Godot_4.6.3`.
+It isolates test saves, imposes timeouts and fails on logged engine/script errors
+even when Godot returns zero. CI imports the project, checks source/GLB round trips,
+runs every `tests/*.gd` entry point and starts the actual main scene. Tests cover
+96 profiles, loaded meshes and UV slots, missing-LOD fallback, worker parity,
+actual staged MultiMesh placement, terrain/water resources and A → B → A scene
+reloads. Existing builder, combat, persistence and assembly tests remain enabled.
+
+Packed exports must include `assets/packs/**/manifest.json` through the export
+preset's non-resource include filter and retain the catalog-referenced runtime
+GLBs. Source `.bbmodel` files and review PNGs are excluded by their `.gdignore`.
+A distributable export/GPU acceptance run is a separate gate from headless import.
+
+Technical basis: [Godot MultiMesh](https://docs.godotengine.org/en/stable/classes/class_multimesh.html),
+[background loading](https://docs.godotengine.org/en/stable/tutorials/io/background_loading.html),
+[Blockbench model format](https://www.blockbench.net/wiki/docs/bbmodel/).

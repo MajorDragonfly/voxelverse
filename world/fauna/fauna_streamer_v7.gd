@@ -87,7 +87,8 @@ func _spawn_one_creature() -> void:
 		)
 		var species_entry: Dictionary = _choose_species_entry(
 			region_coordinates,
-			random.randf()
+			random.randf(),
+			WorldGenerator.get_biome_composition(world_x, world_z, height).get("fauna_weights", {})
 		)
 		if species_entry.is_empty():
 			continue
@@ -130,13 +131,15 @@ func _spawn_one_creature() -> void:
 
 func _choose_species_entry(
 	region_coordinates: Vector2i,
-	selection_value: float
+	selection_value: float,
+	role_weights: Dictionary = {}
 ) -> Dictionary:
 	if _simulation != null and _simulation.has_method("choose_species"):
 		var selected_value: Variant = _simulation.call(
 			"choose_species",
 			region_coordinates,
-			selection_value
+			selection_value,
+			role_weights
 		)
 		if selected_value is Dictionary:
 			return selected_value

@@ -270,6 +270,10 @@ func _apply_visuals_when_ready() -> void:
 
 	if chunk == null:
 		return
+	if chunk.has_signal("terrain_ready") and not bool(chunk.get("generation_complete")):
+		await chunk.terrain_ready
+		if not is_inside_tree():
+			return
 
 	var terrain_mesh := (
 		chunk.get_node_or_null(

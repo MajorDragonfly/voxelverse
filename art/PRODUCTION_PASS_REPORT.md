@@ -1,0 +1,103 @@
+# Planet Diversity / Biome / Art Production Pass
+
+Date: 2026-09-07. Branch: `agent/meta-runtime-v8`. PR #9 remains open and unmerged.
+Started from remote head `3689a9cbb0782567ec7ab67dbf7941d5d91caccd` after inspecting
+the PR and failed V9 workflow. The base/main branch was not modified.
+
+## Delivered
+
+- Fixed the reserved `trait` identifier in the V9 signature builder and removed
+  the generator's dependency on compile-time autoload initialization order.
+  V9 was activated only after its candidate project passed import, all tests and
+  the real main scene. It remains the active generator in `project.godot`.
+- Integrated 23 semantic material slots, curated natural/exotic companion colors,
+  planet/species palette textures, atmosphere and water (preserving water opacity).
+- Added continuous biome composition, five forest variants, family placement,
+  fauna selection weights, local mist and deterministic family/species/individual
+  variation. Existing asset IDs, saves and modular assembly interfaces stay valid.
+- Added surface landmark grammar and a bounded scenic terrain viewshed. Search
+  expands beyond ocean starting areas. Canonical height-cache samples remove
+  query-order dependence. No cave/underground work was added.
+- Delivered seven editable benchmark sources and 63 one-surface GLBs: three
+  structural variants × three authored LODs. Added a source exporter and a
+  byte-identical source/GLB round-trip gate. Source and review trees are ignored
+  by Godot import.
+- Moved Near/Far terrain generation to owned worker jobs, bounded concurrent jobs
+  and main-thread uploads, and staged vegetation/resources across frames.
+  Removed the prototype vegetation inheritance from the active placement path.
+  Explicit generation states and joined worker/resource loads fix shutdown leaks.
+
+## Art inventory
+
+Triangle counts for default structural variant (all variants are validated):
+
+| Asset ID | Near | Mid | Far |
+|---|---:|---:|---:|
+| ancient_oak_v2 | 28524 | 5810 | 1448 |
+| tall_pine_v2 | 18324 | 3748 | 792 |
+| dense_bush_v2 | 7256 | 1238 | 326 |
+| fern_cluster_v2 | 9260 | 3136 | 1414 |
+| flower_cluster_v2 | 6692 | 1914 | 242 |
+| layered_rock_v2 | 1804 | 482 | 112 |
+| grass_tuft_v2 | 2824 | 694 | 146 |
+
+Sources: `art/source/blockbench/environment/benchmark_v2/`.
+Runtime: `assets/packs/temperate_forest_v1/environment/benchmark_v2/`.
+Review: `art/review/benchmark_v2/benchmark_lineup.png`, `lod_comparison.png` and
+`planet_palette_comparison.png`. These show actual GLB geometry in CPU previews.
+They are not screenshots of Godot's rendered world.
+
+## Validation evidence
+
+Godot `4.6.3.stable.official.7d41c59c4`: clean import; source round trip; all 14
+GDScript test entry points; actual main scene for 300 frames. The complete local
+run passed with no engine errors or leak warnings. Evidence is recorded in
+`art/review/benchmark_v2/validation_results.json`; CI uses the same strict runner.
+
+Runtime coverage includes Creature Builder data/editor, legacy creature migration,
+bite/combat and inspection, persistence/progression, modular assembly/building
+contracts, terrain continuity, planet catalog and real A → B → A scene reloads.
+New checks exercise all 63 imported meshes, UV slots, palette upload, missing LOD
+fallback, worker/synchronous data parity, actual terrain/water/MultiMesh nodes,
+LOD swaps, deterministic chunk reload and cancellation releasing generation state.
+
+Across 96 seeds: **50 natural and 46 exotic palettes**, six surface-formation
+kinds and five forest variants. Every tested seed provided a dry, walkable spawn.
+Seed examples: verdant `15838`, autumn `63352`, violet `23757`.
+
+## CPU performance evidence
+
+Same comparison seed `424242`, chunks `(0,0)`, `(1,0)`, `(2,0)`: the original V9
+candidate blocked main-thread chunk creation for **201 / 182 / 171 ms**. The final
+worker path measured **3.10 / 0.19 / 0.17 ms** for creation plus **9.57 / 7.31 /
+5.72 ms** for mesh/collision upload. Only one upload is committed per frame.
+
+A populated seed-7919 chunk produces **241 instances in 15 MultiMesh nodes**;
+the scene caps batches at 21 per chunk. Six cold/warm CPU samples are recorded
+in `streaming_cpu_measurements.json`. After background asset loading, the largest
+measured resource step was 4.43 ms; placement peaked at 6.06 ms. The shared 1.8 ms
+budget is checked between steps and is not a hard frame-time guarantee. These
+shared-host headless timings establish where the work moved; GPU draw time,
+shader compilation hitches and target-PC FPS are not measured here.
+
+## Open production gates and next step
+
+1. Visually approve the seven `.bbmodel` files listed in the source README in
+   Blockbench, then in Godot with real lighting/shadows/wind. Check fern connections,
+   ground contact, repeated silhouettes and every LOD transition. Art is delivered
+   for review, not declared finally approved.
+2. Profile GPU/CPU frame times on the target PC in a dense biome. Tune plant LOD
+   distances and add distant cluster/HLOD representation before extending the
+   streaming radius. Benchmark props are decorative; selected hero-tree collision
+   remains a separate task.
+3. The current family compiler supplies three structures per family. Arbitrary
+   branch count/twist/taper recipes, additional alien architectures, functional
+   natural arches, distant horizon streaming and downhill river networks remain
+   future production work. Existing rivers/lakes remain procedural height fields.
+4. Make and validate a distributable export with catalog manifests included. This
+   pass validates the editor/headless runtime, not a shipping executable.
+
+Next: approve the benchmark and capture one dense verdant scene plus one violet
+scene on target hardware, then expand approved families and distant landscape
+composition using the measured budgets. Architecture details and source/export
+commands are in [PRODUCTION_ARCHITECTURE.md](PRODUCTION_ARCHITECTURE.md).

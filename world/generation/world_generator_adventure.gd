@@ -45,6 +45,10 @@ func get_terrain_height(world_x: float, world_z: float) -> float:
 	var cache_key := Vector2i(roundi(world_x * 100.0), roundi(world_z * 100.0))
 	if _height_cache.has(cache_key):
 		return float(_height_cache[cache_key])
+	# Evaluate the canonical centimetre represented by the cache key. Otherwise
+	# nearby first queries make later height results depend on streaming order.
+	world_x = float(cache_key.x) / 100.0
+	world_z = float(cache_key.y) / 100.0
 
 	var warp_strength: float = 88.0
 	var warp_x: float = _warp_noise.get_noise_2d(world_x, world_z) * warp_strength
@@ -122,12 +126,17 @@ func get_terrain_height(world_x: float, world_z: float) -> float:
 	terrain_height = lerpf(terrain_height, lake_target, lake_strength * 0.88)
 
 	var micro: float = _micro_relief_noise.get_noise_2d(world_x, world_z)
+	terrain_height += get_landscape_height_offset(world_x, world_z) * smoothstep(SEA_LEVEL - 0.5, SEA_LEVEL + 2.5, terrain_height)
 	terrain_height += micro * 0.10 * land_mass
 	terrain_height = clampf(terrain_height, ADVENTURE_MIN_HEIGHT, ADVENTURE_MAX_HEIGHT)
 	if _height_cache.size() >= HEIGHT_CACHE_LIMIT:
 		_height_cache.clear()
 	_height_cache[cache_key] = terrain_height
 	return terrain_height
+
+
+func get_landscape_height_offset(_world_x: float, _world_z: float) -> float:
+	return 0.0
 
 
 func get_visual_terrain_height(world_x: float, world_z: float) -> float:

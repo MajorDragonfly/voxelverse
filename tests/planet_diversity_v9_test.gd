@@ -3,6 +3,7 @@ extends SceneTree
 const PlanetProfile = preload("res://world/generation/planet_profile_v9.gd")
 const BiomeGrammar = preload("res://world/generation/biome_grammar_v9.gd")
 const FloraFactory = preload("res://world/visuals/scenery/flora_species_factory_v9.gd")
+const Generator = preload("res://world/generation/world_generator_planetary_v9.gd")
 
 var _failures: Array[String] = []
 
@@ -12,7 +13,27 @@ func _initialize() -> void:
 	_test_planet_population_diversity()
 	_test_biome_grammar()
 	_test_flora_species_variation()
+	_test_generator_runtime()
 	_finish()
+
+
+func _test_generator_runtime() -> void:
+	var generator := Generator.new()
+	var snapshots: Array[Dictionary] = []
+	for seed_value in [483_927, 771_221, 483_927]:
+		generator.set_seed_override(seed_value)
+		var profile: Dictionary = generator.get_planet_profile()
+		var samples: Array[Dictionary] = []
+		for point in [Vector2.ZERO, Vector2(194.5, -384.0), Vector2(-712.0, 821.5)]:
+			var height: float = generator.get_terrain_height(point.x, point.y)
+			var composition: Dictionary = generator.get_biome_composition(point.x, point.y, height)
+			_expect(is_finite(height), "Runtime terrain returned non-finite height.")
+			_expect(not composition.is_empty(), "Runtime biome composition is empty.")
+			samples.append({"height": height, "color": generator.get_biome_color(point.x, point.y, height), "composition": composition})
+		snapshots.append({"profile": profile, "samples": samples})
+	_expect(snapshots[0] == snapshots[2], "A-B-A seed transition did not restore complete profile/terrain/composition.")
+	_expect(snapshots[0]["samples"] != snapshots[1]["samples"], "Different seeds produce identical runtime samples.")
+	generator.free()
 
 
 func _test_profile_determinism() -> void:

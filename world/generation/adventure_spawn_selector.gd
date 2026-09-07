@@ -26,6 +26,7 @@ static func find_spawn(
 	var best_height: float = sea_level + 2.0
 	var best_score: float = -INF
 	var radius_limit: float = maxf(search_radius, 40.0)
+	var candidates: Array[Dictionary] = []
 
 	for index in range(SAMPLE_COUNT):
 		var ring_ratio: float = sqrt(float(index + 1) / float(SAMPLE_COUNT))
@@ -80,11 +81,19 @@ static func find_spawn(
 			var lake: float = float(generator.call("get_lake_strength", world_x, world_z))
 			score += clampf(lake, 0.0, 1.0) * 0.24
 
+		candidates.append({"point": Vector2(world_x, world_z), "height": height, "score": score})
+
+	if candidates.is_empty() and radius_limit < 3520.0:
+		return find_spawn(generator, center, radius_limit * 2.0)
+	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return float(a["score"]) > float(b["score"]))
+	for candidate: Dictionary in candidates.slice(0, mini(8, candidates.size())):
+		var point: Vector2 = candidate["point"]
+		var view: Dictionary = evaluate_view(generator, point, float(candidate["height"]))
+		var score: float = float(candidate["score"]) + float(view["score"])
 		if score > best_score:
 			best_score = score
-			best_point = Vector2(world_x, world_z)
-			best_height = height
-
+			best_point = point
+			best_height = float(candidate["height"])
 	var visual_height: float = best_height
 	if generator.has_method("get_visual_terrain_height"):
 		visual_height = float(generator.call(
@@ -93,3 +102,52 @@ static func find_spawn(
 			best_point.y
 		))
 	return Vector3(best_point.x, visual_height + 2.2, best_point.y)
+
+
+static func evaluate_view(generator: Node, point: Vector2, surface_height: float) -> Dictionary:
+	# An angular horizon on each ray rejects features hidden by nearer ground.
+	# This is a bounded terrain viewshed, not a GPU occlusion query through trees.
+	var eye_height: float = surface_height + 1.65
+	var sea: float = float(generator.call("get_sea_level"))
+	var visible_water: int = 0
+	var visible_relief: float = 0.0
+	var forest_edges: int = 0
+	var visible_landmarks: int = 0
+	for ray in range(12):
+		var angle: float = float(ray) * TAU / 12.0
+		var direction := Vector2(cos(angle), sin(angle))
+		var horizon: float = -INF
+		var previous_ecology: float = -1.0
+		for distance: float in [15.0, 30.0, 60.0, 100.0, 150.0]:
+			var probe: Vector2 = point + direction * distance
+			var height: float = float(generator.call("get_terrain_height", probe.x, probe.y))
+			var slope: float = (height - eye_height) / distance
+			var visible: bool = slope >= horizon - 0.008
+			if visible and distance >= 30.0:
+				visible_relief = maxf(visible_relief, absf(height - surface_height))
+				if height <= sea + 0.08:
+					visible_water += 1
+				if generator.has_method("get_ecology_density"):
+					var ecology: float = float(generator.call("get_ecology_density", probe.x, probe.y, height))
+					if previous_ecology >= 0.0 and absf(ecology - previous_ecology) > 0.18:
+						forest_edges += 1
+					previous_ecology = ecology
+			horizon = maxf(horizon, slope)
+	if generator.has_method("get_landmarks_near"):
+		for landmark: Dictionary in generator.call("get_landmarks_near", point.x, point.y):
+			var target: Vector2 = landmark["center"]
+			var distance: float = point.distance_to(target)
+			if distance < 30.0 or distance > 150.0:
+				continue
+			var height: float = float(generator.call("get_terrain_height", target.x, target.y))
+			var blocked: bool = false
+			for step in range(1, 6):
+				var fraction: float = step / 6.0
+				var probe: Vector2 = point.lerp(target, fraction)
+				var blocker: float = float(generator.call("get_terrain_height", probe.x, probe.y))
+				if blocker > lerpf(eye_height, height + 1.0, fraction):
+					blocked = true
+			if not blocked:
+				visible_landmarks += 1
+	return {"score": minf(visible_relief / 10.0, 1.5) + minf(visible_water * 0.13, 0.7) + minf(forest_edges * 0.10, 0.35) + minf(visible_landmarks * 0.35, 0.7),
+		"relief": visible_relief, "water_samples": visible_water, "forest_edges": forest_edges, "landmarks": visible_landmarks}
