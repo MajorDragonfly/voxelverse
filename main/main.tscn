@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://world/simulation/region_ecology_simulation.gd" id="6_simulation"]
 [ext_resource type="Script" path="res://world/fauna/fauna_streamer_v7.gd" id="7_fauna"]
 [ext_resource type="Script" path="res://world/space/star_system_runtime_v7.gd" id="8_system"]
+[ext_resource type="Script" path="res://core/development_tools.gd" id="9_dev"]
 
 [node name="Main" type="Node3D" unique_id=926892959]
 
@@ -46,3 +47,6 @@ script = ExtResource("8_system")
 enable_planet_cycle_debug_key = true
 show_planet_runtime_label = true
 reload_scene_on_planet_change = true
+
+[node name="DevelopmentTools" type="Node" parent="."]
+script = ExtResource("9_dev")
