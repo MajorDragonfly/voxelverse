@@ -1,12 +1,12 @@
 extends "res://world/generation/world_generator_adventure.gd"
 
-const PlanetProfile = preload("res://world/generation/planet_profile_v9.gd")
+const ProfileV9 = preload("res://world/generation/planet_profile_v9.gd")
 const BiomeGrammar = preload("res://world/generation/biome_grammar_v9.gd")
 
 
 func _configure_v6(seed_value: int) -> void:
 	super._configure_v6(seed_value)
-	_planet_profile = PlanetProfile.create(seed_value)
+	_planet_profile = ProfileV9.create(seed_value)
 	_height_cache.clear()
 
 
