@@ -1,8 +1,8 @@
 extends Node3D
 class_name BuildingRuntimeVisual
 
-const MeshBuilder = preload(
-	"res://assembly/runtime/modular_voxel_mesh_builder.gd"
+const AssetAssembler = preload(
+	"res://assembly/runtime/modular_asset_assembler.gd"
 )
 const Parts = preload(
 	"res://civilization/buildings/building_part_library.gd"
@@ -16,7 +16,7 @@ const Blueprint = preload(
 
 var building_blueprint: Dictionary = {}
 var selected_part_index: int = -1
-var _mesh_instance: MeshInstance3D
+var _assembler: Node3D
 var _static_body: StaticBody3D
 var _collision_shape: CollisionShape3D
 
@@ -47,33 +47,40 @@ func set_selected_part(index: int) -> void:
 
 func rebuild() -> void:
 	_ensure_nodes()
-	var mesh: ArrayMesh = MeshBuilder.build_mesh(
+	_assembler.call(
+		"configure",
 		building_blueprint,
 		Parts.get_all_parts(),
 		selected_part_index
 	)
-	_mesh_instance.mesh = mesh
-	_mesh_instance.cast_shadow = (
-		GeometryInstance3D.SHADOW_CASTING_SETTING_ON
-		if cast_shadow
-		else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	)
-	_rebuild_collision(mesh)
+	_apply_shadow_mode(_assembler)
+	_rebuild_collision()
 
 
 func get_combined_aabb() -> AABB:
-	if _mesh_instance == null or _mesh_instance.mesh == null:
-		return AABB()
-	return _mesh_instance.mesh.get_aabb()
+	var result := AABB()
+	var initialized: bool = false
+	for mesh_instance in _find_mesh_instances(_assembler):
+		if mesh_instance.mesh == null:
+			continue
+		var local_aabb: AABB = mesh_instance.mesh.get_aabb()
+		var relative_transform: Transform3D = global_transform.affine_inverse() * mesh_instance.global_transform
+		var transformed: AABB = relative_transform * local_aabb
+		if not initialized:
+			result = transformed
+			initialized = true
+		else:
+			result = result.merge(transformed)
+	return result
 
 
 func _ensure_nodes() -> void:
-	if _mesh_instance == null:
-		_mesh_instance = get_node_or_null("AssemblyMesh") as MeshInstance3D
-	if _mesh_instance == null:
-		_mesh_instance = MeshInstance3D.new()
-		_mesh_instance.name = "AssemblyMesh"
-		add_child(_mesh_instance)
+	if _assembler == null:
+		_assembler = get_node_or_null("AssetAssembler") as Node3D
+	if _assembler == null:
+		_assembler = AssetAssembler.new()
+		_assembler.name = "AssetAssembler"
+		add_child(_assembler)
 	if not build_collision:
 		return
 	if _static_body == null:
@@ -90,14 +97,42 @@ func _ensure_nodes() -> void:
 		_static_body.add_child(_collision_shape)
 
 
-func _rebuild_collision(mesh: ArrayMesh) -> void:
+func _rebuild_collision() -> void:
 	if not build_collision:
 		if _static_body != null:
-			_static_body.visible = false
+			_static_body.process_mode = Node.PROCESS_MODE_DISABLED
 		return
 	_ensure_nodes()
-	_static_body.visible = true
-	if mesh == null or mesh.get_surface_count() == 0:
+	_static_body.process_mode = Node.PROCESS_MODE_INHERIT
+	var aabb: AABB = get_combined_aabb()
+	if aabb.size.length_squared() <= 0.0001:
 		_collision_shape.shape = null
 		return
-	_collision_shape.shape = mesh.create_trimesh_shape()
+	var box := BoxShape3D.new()
+	box.size = Vector3(
+		maxf(aabb.size.x, 0.1),
+		maxf(aabb.size.y, 0.1),
+		maxf(aabb.size.z, 0.1)
+	)
+	_collision_shape.position = aabb.get_center()
+	_collision_shape.shape = box
+
+
+func _apply_shadow_mode(root: Node) -> void:
+	for child in root.get_children():
+		if child is GeometryInstance3D:
+			(child as GeometryInstance3D).cast_shadow = (
+				GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+				if cast_shadow
+				else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			)
+		_apply_shadow_mode(child)
+
+
+func _find_mesh_instances(root: Node) -> Array[MeshInstance3D]:
+	var result: Array[MeshInstance3D] = []
+	for child in root.get_children():
+		if child is MeshInstance3D:
+			result.append(child as MeshInstance3D)
+		result.append_array(_find_mesh_instances(child))
+	return result
