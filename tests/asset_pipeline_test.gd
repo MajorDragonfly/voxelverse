@@ -82,16 +82,16 @@ func _test_asset_transform() -> void:
 		}
 	}
 	var transform: Dictionary = Resolver.get_asset_transform(definition)
+	var position_value: Variant = transform.get("position", Vector3.ZERO)
+	var scale_value: Variant = transform.get("scale", Vector3.ONE)
 	_expect(
-		(transform.get("position", Vector3.ZERO) as Vector3).is_equal_approx(
-			Vector3(0.0, 0.25, -0.5)
-		),
+		position_value is Vector3
+		and position_value.is_equal_approx(Vector3(0.0, 0.25, -0.5)),
 		"Authored asset position correction failed."
 	)
 	_expect(
-		(transform.get("scale", Vector3.ONE) as Vector3).is_equal_approx(
-			Vector3(0.5, 0.5, 0.5)
-		),
+		scale_value is Vector3
+		and scale_value.is_equal_approx(Vector3(0.5, 0.5, 0.5)),
 		"Authored asset scale correction failed."
 	)
 
