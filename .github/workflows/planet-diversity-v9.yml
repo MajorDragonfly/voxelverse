@@ -1,0 +1,69 @@
+name: Planet diversity V9
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+
+jobs:
+  diversity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download Godot 4.6.3
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 \
+            -o /tmp/godot.zip \
+            https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          chmod +x /tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+
+      - name: Import project
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          "$GODOT" --headless --path . --import 2>&1 | tee /tmp/planet-v9-import.log
+          ! grep -E \
+            "SCRIPT ERROR|Parse Error|Failed to load script|Failed loading resource|Failed to instantiate an autoload|Shader compilation failed" \
+            /tmp/planet-v9-import.log
+
+      - name: Run Planet Diversity V9 acceptance test
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          timeout 60s "$GODOT" --headless --path . \
+            --script res://tests/planet_diversity_v9_test.gd \
+            > /tmp/planet-diversity-v9.log 2>&1
+          TEST_STATUS=$?
+          if [ "$TEST_STATUS" -eq 124 ]; then
+            echo "Planet Diversity V9 test timed out." >> /tmp/planet-diversity-v9.log
+            TEST_STATUS=1
+          fi
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource|Failed to instantiate an autoload" \
+            /tmp/planet-diversity-v9.log; then
+            TEST_STATUS=1
+          fi
+          cat /tmp/planet-diversity-v9.log
+          exit "$TEST_STATUS"
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: planet-diversity-v9-diagnostics
+          path: |
+            /tmp/planet-v9-import.log
+            /tmp/planet-diversity-v9.log
+          if-no-files-found: warn
+          retention-days: 3
