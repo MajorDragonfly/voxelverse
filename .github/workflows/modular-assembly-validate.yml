@@ -57,6 +57,27 @@ jobs:
           cat /tmp/modular-assembly-test.log
           exit "$TEST_STATUS"
 
+      - name: Run authored Asset Pipeline test
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          timeout 45s "$GODOT" --headless --path . \
+            --script res://tests/asset_pipeline_test.gd \
+            > /tmp/asset-pipeline-test.log 2>&1
+          TEST_STATUS=$?
+          if [ "$TEST_STATUS" -eq 124 ]; then
+            echo "Asset Pipeline test timed out." >> /tmp/asset-pipeline-test.log
+            TEST_STATUS=1
+          fi
+          if grep -E \
+            "SCRIPT ERROR|Parse Error|Invalid call|Invalid access|Failed to load script|Failed loading resource" \
+            /tmp/asset-pipeline-test.log; then
+            TEST_STATUS=1
+          fi
+          cat /tmp/asset-pipeline-test.log
+          exit "$TEST_STATUS"
+
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -65,5 +86,6 @@ jobs:
           path: |
             /tmp/assembly-import.log
             /tmp/modular-assembly-test.log
+            /tmp/asset-pipeline-test.log
           if-no-files-found: warn
           retention-days: 3
