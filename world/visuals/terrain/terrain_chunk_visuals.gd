@@ -260,20 +260,36 @@ var _application_attempts: int = 0
 
 
 func _ready() -> void:
-	call_deferred(
-		"_apply_visuals_when_ready"
-	)
+	set_process(false)
+	call_deferred("_apply_visuals_when_ready")
+
+
+func _process(_delta: float) -> void:
+	set_process(false)
+	_apply_visuals_when_ready()
+
+
+func _exit_tree() -> void:
+	# Cancel the ordinary signal connection when the chunk unloads. Awaiting a
+	# never-emitted terrain_ready signal could strand GDScript function states.
+	var chunk: Node = get_parent()
+	if chunk != null and chunk.has_signal("terrain_ready"):
+		if chunk.is_connected("terrain_ready", _apply_visuals_when_ready):
+			chunk.disconnect("terrain_ready", _apply_visuals_when_ready)
+	set_process(false)
 
 
 func _apply_visuals_when_ready() -> void:
+	if not is_inside_tree():
+		return
 	var chunk: Node = get_parent()
 
 	if chunk == null:
 		return
 	if chunk.has_signal("terrain_ready") and not bool(chunk.get("generation_complete")):
-		await chunk.terrain_ready
-		if not is_inside_tree():
-			return
+		if not chunk.is_connected("terrain_ready", _apply_visuals_when_ready):
+			chunk.connect("terrain_ready", _apply_visuals_when_ready, CONNECT_ONE_SHOT)
+		return
 
 	var terrain_mesh := (
 		chunk.get_node_or_null(
@@ -310,11 +326,7 @@ func _apply_visuals_when_ready() -> void:
 			)
 			return
 
-		await get_tree().process_frame
-
-		call_deferred(
-			"_apply_visuals_when_ready"
-		)
+		set_process(true)
 		return
 
 	if enable_terrain_shader:
