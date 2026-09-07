@@ -35,11 +35,9 @@ static func resolve_scene_path(
 
 static func get_asset_transform(definition: Dictionary) -> Dictionary:
 	var transform_value: Variant = definition.get("asset_transform", {})
-	var transform: Dictionary = (
-		transform_value.duplicate(true)
-		if transform_value is Dictionary
-		else {}
-	)
+	var transform: Dictionary = {}
+	if transform_value is Dictionary:
+		transform = transform_value.duplicate(true)
 	return {
 		"position": _as_vector3(transform.get("position", Vector3.ZERO), Vector3.ZERO),
 		"rotation": _as_vector3(transform.get("rotation", Vector3.ZERO), Vector3.ZERO),
@@ -52,10 +50,10 @@ static func validate_definition(definition: Dictionary) -> Array[String]:
 	var asset_id: String = str(definition.get("asset_id", "")).strip_edges()
 	var scene_path: String = str(definition.get("scene_path", "")).strip_edges()
 	var lod_value: Variant = definition.get("lod_scenes", {})
-	var has_lod_scenes: bool = (
-		lod_value is Dictionary
-		and not str((lod_value as Dictionary).get("near", "")).strip_edges().is_empty()
-	)
+	var lod: Dictionary = {}
+	if lod_value is Dictionary:
+		lod = lod_value
+	var has_lod_scenes: bool = not str(lod.get("near", "")).strip_edges().is_empty()
 	if asset_id.is_empty() and scene_path.is_empty() and not has_lod_scenes:
 		return result
 	if not asset_id.is_empty() and not Catalog.has_asset(asset_id):
