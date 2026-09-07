@@ -1,6 +1,10 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://civilization/buildings/building_builder.gd" id="1_builder"]
+[ext_resource type="Script" path="res://civilization/buildings/building_builder_navigation.gd" id="2_navigation"]
 
 [node name="BuildingBuilder" type="Node3D"]
 script = ExtResource("1_builder")
+
+[node name="Navigation" type="Node" parent="."]
+script = ExtResource("2_navigation")
