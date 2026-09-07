@@ -4,10 +4,14 @@ class_name ModularAssetAssembler
 const MeshBuilder = preload(
 	"res://assembly/runtime/modular_voxel_mesh_builder.gd"
 )
+const AssetResolver = preload(
+	"res://assembly/runtime/modular_asset_resolver.gd"
+)
 
 var blueprint: Dictionary = {}
 var part_definitions: Dictionary = {}
 var selected_part_index: int = -1
+var lod_tier: int = 0
 
 var _primitive_mesh: MeshInstance3D
 var _external_root: Node3D
@@ -21,11 +25,22 @@ func _ready() -> void:
 func configure(
 	new_blueprint: Dictionary,
 	new_part_definitions: Dictionary,
-	selected_index: int = -1
+	selected_index: int = -1,
+	new_lod_tier: int = 0
 ) -> void:
 	blueprint = new_blueprint.duplicate(true)
 	part_definitions = new_part_definitions.duplicate(true)
 	selected_part_index = selected_index
+	lod_tier = clampi(new_lod_tier, 0, 2)
+	if is_inside_tree():
+		rebuild()
+
+
+func set_lod_tier(new_lod_tier: int) -> void:
+	var clamped: int = clampi(new_lod_tier, 0, 2)
+	if clamped == lod_tier:
+		return
+	lod_tier = clamped
 	if is_inside_tree():
 		rebuild()
 
@@ -47,7 +62,10 @@ func rebuild() -> void:
 			str(placement.get("part_id", "")),
 			{}
 		)
-		var scene_path: String = str(definition.get("scene_path", ""))
+		var scene_path: String = AssetResolver.resolve_scene_path(
+			definition,
+			lod_tier
+		)
 		if scene_path.is_empty() or not ResourceLoader.exists(scene_path):
 			continue
 		var packed := load(scene_path) as PackedScene
@@ -56,9 +74,18 @@ func rebuild() -> void:
 		var instance := packed.instantiate() as Node3D
 		if instance == null:
 			continue
-		instance.name = "Part_%d_%s" % [index, str(placement.get("part_id", "part"))]
-		_apply_transform(instance, placement)
-		_external_root.add_child(instance)
+
+		var part_root := Node3D.new()
+		part_root.name = "Part_%d_%s" % [
+			index,
+			str(placement.get("part_id", "part")),
+		]
+		_apply_placement_transform(part_root, placement)
+		_external_root.add_child(part_root)
+
+		instance.name = "AuthoredAsset"
+		_apply_asset_transform(instance, definition)
+		part_root.add_child(instance)
 
 
 func _filter_primitive_definitions() -> Dictionary:
@@ -76,16 +103,50 @@ func _filter_primitive_definitions() -> Dictionary:
 			definition.get("voxels", []) is Array
 			and not definition.get("voxels", []).is_empty()
 		)
-		var scene_path: String = str(definition.get("scene_path", ""))
-		if has_geometry or has_voxels or scene_path.is_empty():
+		if not has_geometry and not has_voxels:
+			continue
+		var authored_path: String = AssetResolver.resolve_scene_path(
+			definition,
+			lod_tier
+		)
+		var authored_available: bool = (
+			not authored_path.is_empty()
+			and ResourceLoader.exists(authored_path)
+		)
+		# Primitive geometry is the development/failure fallback. As soon as a
+		# registered authored asset exists it replaces the prototype without
+		# changing part_id or any saved player blueprint.
+		if not authored_available:
 			result[part_id] = definition
 	return result
 
 
-func _apply_transform(instance: Node3D, placement: Dictionary) -> void:
-	instance.position = _as_vector3(placement.get("position", Vector3.ZERO), Vector3.ZERO)
-	instance.rotation_degrees = _as_vector3(placement.get("rotation", Vector3.ZERO), Vector3.ZERO)
-	instance.scale = _as_vector3(placement.get("scale", Vector3.ONE), Vector3.ONE)
+func _apply_placement_transform(
+	root: Node3D,
+	placement: Dictionary
+) -> void:
+	root.position = _as_vector3(
+		placement.get("position", Vector3.ZERO),
+		Vector3.ZERO
+	)
+	root.rotation_degrees = _as_vector3(
+		placement.get("rotation", Vector3.ZERO),
+		Vector3.ZERO
+	)
+	root.scale = _as_vector3(
+		placement.get("scale", Vector3.ONE),
+		Vector3.ONE
+	)
+
+
+func _apply_asset_transform(
+	instance: Node3D,
+	definition: Dictionary
+) -> void:
+	var correction: Dictionary = AssetResolver.get_asset_transform(definition)
+	instance.position = correction.get("position", Vector3.ZERO)
+	instance.rotation_degrees = correction.get("rotation", Vector3.ZERO)
+	instance.scale = correction.get("scale", Vector3.ONE)
 
 
 func _ensure_nodes() -> void:
