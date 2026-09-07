@@ -74,13 +74,28 @@ Vegetation uses a cancellable `_process` state machine, with a shared 1.8 ms
 budget checked between bounded placement/resource/batch steps. This is a scheduling
 target, not a hard upper bound on any individual allocation or OS scheduling delay.
 The state owns its RNG and dictionaries; no suspended generation coroutine can
-strand them during planet reload or engine shutdown.
+strand them during planet reload or engine shutdown. Terrain material readiness
+uses a one-shot signal connection disconnected at tree exit; legacy retries run
+through node processing. Pending terrain callbacks hold no coroutine state.
 
-Authored resources load through `ResourceLoader.load_threaded_request`; callers
-poll across frames and retrieve only completed requests. Requests are deduplicated,
-all LODs are prepared before a batch appears, and world teardown joins outstanding
-loads. Each chunk contains at most 21 MultiMesh nodes, not a node hierarchy per
-plant. Explicit conservative AABBs include individual transforms and wind margin.
+Authored resources enter a shared queue. At most one uncached imported scene is
+loaded and reduced to its shared mesh on the main thread per frame, across all
+chunks. Requests are deduplicated and all LODs are prepared before a batch appears.
+Queued, unstarted loads are cancelled at world teardown; no resource work starts
+during teardown. Meshes remain cached for subsequent chunks and planets.
+
+Resource creation stays on the main thread because the Godot 4.6.3 shutdown
+probes exposed zero-reference loader tokens/mesh RIDs with status-polled threaded
+loading, and concurrent texture-allocation errors with owned background loads.
+The latter allocator is not thread-safe in the
+[4.6.3 dummy renderer](https://github.com/godotengine/godot/blob/4.6.3-stable/servers/rendering/dummy/storage/texture_storage.h).
+Terrain generation continues on data-only workers. Cold resource parsing/upload
+is an indivisible step which can exceed the shared 1.8 ms scheduling target, so
+the full CI job records actual cold/warm streaming timings after the shutdown
+probes. A hard latency cap would require an additional predecoded mesh format or
+a loading-stage warmup; asset density remains governed by biome composition.
+
+Each chunk contains at most 21 MultiMesh nodes, not a node hierarchy per plant. Explicit conservative AABBs include individual transforms and wind margin.
 LOD switching reuses meshes and has distance hysteresis. Small plants disappear at
 Far; trees/rocks/shrubs retain mass. Shadows are enabled only for Near trees.
 
@@ -98,6 +113,10 @@ runs every `tests/*.gd` entry point and starts the actual main scene. Tests cove
 96 profiles, loaded meshes and UV slots, missing-LOD fallback, worker parity,
 actual staged MultiMesh placement, terrain/water resources and A → B → A scene
 reloads. Existing builder, combat, persistence and assembly tests remain enabled.
+The full runner also probes actual main shutdown during terrain work, placement,
+pending resource loads and completed vegetation on three fixed palette seeds.
+Each case starts a separate process with cold asset caches. These catch teardown
+leaks that a short frame-count-only smoke test can miss.
 
 Packed exports must include `assets/packs/**/manifest.json` through the export
 preset's non-resource include filter and retain the catalog-referenced runtime

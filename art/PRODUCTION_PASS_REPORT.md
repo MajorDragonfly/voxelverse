@@ -25,7 +25,8 @@ the PR and failed V9 workflow. The base/main branch was not modified.
 - Moved Near/Far terrain generation to owned worker jobs, bounded concurrent jobs
   and main-thread uploads, and staged vegetation/resources across frames.
   Removed the prototype vegetation inheritance from the active placement path.
-  Explicit generation states and joined worker/resource loads fix shutdown leaks.
+  Explicit generation states, cancellable terrain callbacks and main-thread
+  resource creation address the reproduced shutdown leaks.
 
 ## Art inventory
 
@@ -54,6 +55,27 @@ GDScript test entry points; actual main scene for 300 frames. The complete local
 run passed with no engine errors or leak warnings. Evidence is recorded in
 `art/review/benchmark_v2/validation_results.json`; CI uses the same strict runner.
 
+The CI runner also quits the real main scene after 45/150/300 frames and runs
+12 separate cold-process shutdown cases: terrain work, plant placement, pending
+resource loads and completed vegetation, each on verdant/autumn/violet seeds.
+The expanded full job has **32 checks**, including a cold/warm streaming benchmark,
+with strict error and ObjectDB leak detection. Full logs are uploaded as workflow artifacts.
+All six push/PR workflow runs for runtime commit
+`247997c9bc81e3fc9ad530f0c9dc5e3ca203dce0` passed, including every shutdown case.
+[Full CI run](https://github.com/MajorDragonfly/voxelverse/actions/runs/34155137475).
+The 32 results and final CPU samples are preserved in
+`art/review/benchmark_v2/ci_validation_results.json`.
+
+These stage-specific cases reproduced an intermittent exit warning missed by
+the original 300-frame smoke run. Terrain visuals still awaited a signal on
+chunks that could unload before emitting it. They now use one-shot callbacks
+disconnected at tree exit and process-based retries. The remaining zero-reference
+resource/mesh warnings, followed by texture allocation errors under owned worker
+loads, led to main-thread resource creation: a shared queue admits one uncached
+scene per frame. Terrain computation remains on data-only workers. Pending asset
+loads are cancelled on teardown. The regression probes remain in CI; errors are
+not ignored and failed jobs are not retried into success.
+
 Runtime coverage includes Creature Builder data/editor, legacy creature migration,
 bite/combat and inspection, persistence/progression, modular assembly/building
 contracts, terrain continuity, planet catalog and real A → B → A scene reloads.
@@ -73,12 +95,18 @@ worker path measured **3.10 / 0.19 / 0.17 ms** for creation plus **9.57 / 7.31 /
 5.72 ms** for mesh/collision upload. Only one upload is committed per frame.
 
 A populated seed-7919 chunk produces **241 instances in 15 MultiMesh nodes**;
-the scene caps batches at 21 per chunk. Six cold/warm CPU samples are recorded
-in `streaming_cpu_measurements.json`. After background asset loading, the largest
-measured resource step was 4.43 ms; placement peaked at 6.06 ms. The shared 1.8 ms
-budget is checked between steps and is not a hard frame-time guarantee. These
-shared-host headless timings establish where the work moved; GPU draw time,
-shader compilation hitches and target-PC FPS are not measured here.
+the scene caps batches at 21 per chunk. After the final resource-lifetime change,
+six cold/warm samples in the green CI run measured **0.09–0.52 ms** chunk creation,
+**3.59–4.35 ms** mesh/collision upload, **5.50 ms** maximum resource step and
+**0.46 ms** maximum placement step. The actual CPU benchmark is part of the full
+CI job and its samples are in `ci_validation_results.json`.
+
+Only one uncached scene resource is created per frame across all chunks. The shared
+1.8 ms budget is checked between steps and is not a hard frame-time guarantee.
+Earlier local samples remain in `streaming_cpu_measurements.json`; absolute times
+from local and CI hosts are not directly comparable. These headless measurements
+identify CPU costs. GPU draw time, shader compilation hitches and target-PC FPS
+still require target-hardware testing.
 
 ## Open production gates and next step
 
