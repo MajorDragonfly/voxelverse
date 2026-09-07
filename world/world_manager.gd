@@ -52,6 +52,7 @@ func _initialize_streaming() -> void:
 	await get_tree().process_frame
 	if not is_inside_tree() or player == null or not is_instance_valid(player):
 		return
+	print("Surface streaming seed: ", WorldGenerator.get_world_seed())
 	_maybe_choose_adventure_spawn()
 	if not _read_chunk_dimensions():
 		return
