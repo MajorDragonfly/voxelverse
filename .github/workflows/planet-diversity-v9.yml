@@ -26,6 +26,25 @@ jobs:
           unzip -q /tmp/godot.zip -d /tmp/godot
           chmod +x /tmp/godot/Godot_v4.6.3-stable_linux.x86_64
 
+      - name: Check V9 scripts directly
+        shell: bash
+        run: |
+          set +e
+          GODOT=/tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          "$GODOT" --headless --path . --check-only \
+            --script res://world/generation/planet_profile_v9.gd \
+            > /tmp/planet-profile-v9-check.log 2>&1
+          PROFILE_STATUS=$?
+          cat /tmp/planet-profile-v9-check.log
+          "$GODOT" --headless --path . --check-only \
+            --script res://world/generation/world_generator_planetary_v9.gd \
+            > /tmp/world-generator-v9-check.log 2>&1
+          GENERATOR_STATUS=$?
+          cat /tmp/world-generator-v9-check.log
+          if [ "$PROFILE_STATUS" -ne 0 ] || [ "$GENERATOR_STATUS" -ne 0 ]; then
+            exit 1
+          fi
+
       - name: Import project
         shell: bash
         run: |
@@ -63,6 +82,8 @@ jobs:
         with:
           name: planet-diversity-v9-diagnostics
           path: |
+            /tmp/planet-profile-v9-check.log
+            /tmp/world-generator-v9-check.log
             /tmp/planet-v9-import.log
             /tmp/planet-diversity-v9.log
           if-no-files-found: warn
