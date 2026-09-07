@@ -36,6 +36,13 @@ def main():
         for frames in [45, 150, 300]:
             name = "main" if frames == 300 else f"main_shutdown_{frames}"
             commands.append((name, ["--verbose", "--quit-after", str(frames)], 120))
+        # Stop the real scene at resource-owning stages, not only arbitrary frames.
+        # Separate processes keep the resource cache cold for every case.
+        for seed in [15838, 63352, 23757]:
+            for stage in ["terrain", "placement", "resources", "complete"]:
+                name = f"shutdown_{seed}_{stage}"
+                commands.append((name, ["--verbose", "--script", "res://tools/main_shutdown_probe.gd",
+                                        "--", str(seed), stage], 120))
     results = []
     for name, command, timeout in commands:
         started = time.monotonic()
