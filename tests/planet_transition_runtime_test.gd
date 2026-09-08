@@ -46,9 +46,12 @@ func _wait_for_world(previous_scene_id: int = 0) -> void:
 		if current_scene == null or current_scene.get_instance_id() == previous_scene_id:
 			continue
 		var manager: Node = current_scene.get_node_or_null("WorldManager")
-		if manager == null or not bool(manager.get("world_initialized")):
+		if manager == null:
 			continue
 		var player: Node3D = current_scene.get_node("Player")
+		if not bool(manager.get("world_initialized")):
+			_expect(not player.is_physics_processing(), "Player physics ran before save restore/scenic spawn/collider readiness.")
+			continue
 		_expect(player.global_position.is_finite(), "Player position became non-finite on transition.")
 		var chunks: Dictionary = manager.get("loaded_chunks")
 		_expect(not chunks.is_empty(), "Reloaded world has no terrain.")

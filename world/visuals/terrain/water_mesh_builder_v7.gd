@@ -81,7 +81,7 @@ static func build(
 			var b: int = (row + 1) * columns + column
 			var c: int = (row + 1) * columns + column + 1
 			var d: int = row * columns + column + 1
-			indices.append_array(PackedInt32Array([a, b, c, a, c, d]))
+			indices.append_array(PackedInt32Array([a, c, b, a, d, c]))
 
 	var arrays: Array = []
 	arrays.resize(Mesh.ARRAY_MAX)

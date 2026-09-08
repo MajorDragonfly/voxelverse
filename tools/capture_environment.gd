@@ -143,6 +143,7 @@ func _assets() -> void:
 func _world() -> void:
 	change_scene_to_file("res://main/main.tscn")
 	var started: int = Time.get_ticks_usec()
+	var last_diagnostic: int = started
 	var setup_frames: Array[float] = []
 	var ready: bool = false
 	for frame in range(100000):
@@ -155,6 +156,15 @@ func _world() -> void:
 			continue
 		_scene = current_scene
 		var manager: Node = _scene.get_node("WorldManager")
+		# A stationary review player must survive long software-renderer setup.
+		# Wildlife still runs its normal movement/animation; combat has its own
+		# gameplay gate and must not relocate this camera via a nest respawn.
+		_scene.get_node("Player").set_process(false)
+		for creature: Node in _scene.get_node("FaunaStreamerV7").get_children():
+			creature.set("predator_attack_damage", 0.0)
+		if Time.get_ticks_usec() - last_diagnostic > 5_000_000:
+			print("Capture streaming ", JSON.stringify(_streaming_state(manager)))
+			last_diagnostic = Time.get_ticks_usec()
 		if not bool(manager.get("world_initialized")):
 			continue
 		_scene.get_node("Player").set_physics_process(false)
@@ -167,6 +177,8 @@ func _world() -> void:
 				break
 		if ready:
 			break
+	if is_instance_valid(_scene):
+		_report["streaming_state"] = _streaming_state(_scene.get_node("WorldManager"))
 	if not ready:
 		_failures.append("World streaming did not finish for capture.")
 		return
@@ -187,8 +199,27 @@ func _world() -> void:
 	var chunks: Dictionary = _scene.get_node("WorldManager").get("loaded_chunks")
 	for chunk: Node in chunks.values():
 		total_instances += int(chunk.get_node("ProceduralEcosystemV6").get("instance_count"))
+	var expected_spawn: Vector3 = root.get_node("WorldGenerator").call("get_scenic_spawn")
+	if Vector2(player.position.x, player.position.z).distance_to(Vector2(expected_spawn.x, expected_spawn.z)) > 0.1:
+		_failures.append("Review player left the deterministic scenic spawn.")
+	if chunks.size() != 25 or (int(_config["seed"]) in [15838, 23757] and total_instances < 1000):
+		_failures.append("Dense world review did not exercise its populated 25-chunk fixture.")
 	await _capture("world", {"chunks": chunks.size(), "instances": total_instances,
 		"spawn": [player.position.x, player.position.y, player.position.z]})
+
+
+func _streaming_state(manager: Node) -> Dictionary:
+	var states: Array[Dictionary] = []
+	for chunk: Node in manager.get("loaded_chunks").values():
+		var ecology: Node = chunk.get_node("ProceduralEcosystemV6")
+		states.append({"chunk": str(chunk.get("chunk_coordinates")),
+			"terrain_ready": chunk.get("generation_complete"), "phase": ecology.get("_phase"),
+			"processing": ecology.is_processing(), "lod": ecology.get("_lod_tier"),
+			"published": ecology.get("_publish_index"), "stats": ecology.call("get_generation_stats")})
+	return {"world_initialized": manager.get("world_initialized"),
+		"pending_chunks": manager.call("get_pending_chunk_count"), "chunks": states,
+		"player_position": str(_scene.get_node("Player").position),
+		"player_dead": _scene.get_node("Player").get("is_dead")}
 
 
 func _cluster() -> void:

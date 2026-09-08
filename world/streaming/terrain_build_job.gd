@@ -125,11 +125,17 @@ func _append_build_quad(
 	normal: Vector3,
 	color: Color
 ) -> void:
-	_build_vertices.append_array(PackedVector3Array([a, b, c, a, c, d]))
+	# Match the original terrain builder: callers have different winding on
+	# different axes, while Godot requires clockwise outward front faces.
+	var reverse: bool = (b - a).cross(c - a).dot(normal) > 0.0
+	_build_vertices.append_array(PackedVector3Array([a, c, b, a, d, c] if reverse else [a, b, c, a, c, d]))
 	for _index in range(6):
 		_build_normals.append(normal)
 		_build_colors.append(color)
 	_build_uvs.append_array(PackedVector2Array([
+		Vector2(0.0, 0.0), Vector2(1.0, 1.0), Vector2(0.0, 1.0),
+		Vector2(0.0, 0.0), Vector2(1.0, 0.0), Vector2(1.0, 1.0),
+	] if reverse else [
 		Vector2(0.0, 0.0), Vector2(0.0, 1.0), Vector2(1.0, 1.0),
 		Vector2(0.0, 0.0), Vector2(1.0, 1.0), Vector2(1.0, 0.0),
 	]))

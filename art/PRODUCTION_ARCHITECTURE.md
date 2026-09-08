@@ -70,6 +70,17 @@ thread commits at most one completed chunk per frame; the manager caps concurren
 terrain jobs at two. The first spawn collider is ready before player physics
 resumes. Every terrain task is joined when its chunk exits.
 
+Player physics is frozen in WorldManager's `_ready()`, before the two save-restore
+frames. Otherwise a slow rendered frame can move the default player before scenic
+spawn selection. Its previous physics state is restored after the spawn collider.
+
+Near worker quads, Far proxy indices and water indices use Godot's clockwise
+front-face convention. The worker rewrite had lost the older terrain builder's
+winding correction, hiding top surfaces with back-face culling. Production tests
+now compare triangle winding with outward normals for the actual generated arrays.
+The real-driver screenshots caught this defect that parser/mesh-existence tests
+could not. See [ArrayMesh winding](https://docs.godotengine.org/en/4.6/classes/class_arraymesh.html).
+
 Vegetation uses a cancellable `_process` state machine, with a shared 1.8 ms
 budget checked between bounded placement/resource/batch steps. This is a scheduling
 target, not a hard upper bound on any individual allocation or OS scheduling delay.

@@ -94,6 +94,8 @@ func _test_terrain_worker() -> void:
 		await process_frame
 	WorkerThreadPool.wait_for_task_completion(task)
 	_expect(reference.result == threaded.result, "Worker and synchronous terrain arrays/caches differ.")
+	_verify_front_faces(threaded.result["arrays"], "Near terrain")
+	_verify_front_faces(threaded.result["far_arrays"], "Far terrain")
 	var generator := Generator.new()
 	generator.set_seed_override(7919)
 	var heights: PackedFloat32Array = threaded.result["heights"]
@@ -102,6 +104,22 @@ func _test_terrain_worker() -> void:
 			var point := Vector2(64, -32) + Vector2((x - 0.5) * 0.5 - 4.0, (z - 0.5) * 0.5 - 4.0)
 			_expect(heights[z * 18 + x] == generator.get_visual_terrain_height(point.x, point.y), "Worker height cache differs from active generator sampling.")
 	generator.free()
+
+func _verify_front_faces(arrays: Array, label: String) -> void:
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX] != null else PackedInt32Array()
+	var count: int = indices.size() if not indices.is_empty() else vertices.size()
+	var wrong: int = 0
+	for offset in range(0, count, 3):
+		var a: int = indices[offset] if not indices.is_empty() else offset
+		var b: int = indices[offset + 1] if not indices.is_empty() else offset + 1
+		var c: int = indices[offset + 2] if not indices.is_empty() else offset + 2
+		var cross: Vector3 = (vertices[b] - vertices[a]).cross(vertices[c] - vertices[a])
+		# Godot's clockwise front face points against the right-hand cross.
+		if cross.dot(normals[a] + normals[b] + normals[c]) >= 0.0:
+			wrong += 1
+	_expect(wrong == 0, "%s has %d inward or degenerate triangles." % [label, wrong])
 
 func _test_chunk_instances() -> void:
 	var generator: Node = root.get_node("WorldGenerator")
@@ -147,6 +165,7 @@ func _test_chunk_instances() -> void:
 		var collision: HeightMapShape3D = chunk.get_node("TerrainCollision").shape
 		_expect(collision != null and collision.map_data.size() == 65 * 65, "Terrain lost its bounded heightmap collider.")
 		var water: ShaderMaterial = chunk.get_node("WaterMesh").material_override
+		_verify_front_faces(chunk.get_node("WaterMesh").mesh.surface_get_arrays(0), "Water surface")
 		var expected_water: Color = generator.call("get_planet_profile")["material_slots"]["water_deep"]
 		expected_water.a = chunk.get_node("Visuals").deep_water_color.a
 		_expect(water != null and water.get_shader_parameter("deep_color") == expected_water, "Water is not using the active planet palette and renderer opacity.")

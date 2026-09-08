@@ -31,6 +31,7 @@ var world_initialized: bool = false
 var _stream_required_chunks: Dictionary = {}
 var _stream_pending_chunks: Array[Vector2i] = []
 var _stream_build_timer: float = 0.0
+var _initial_player_physics: bool = true
 
 @onready var player: Node3D = get_node_or_null(player_path) as Node3D
 
@@ -41,6 +42,10 @@ func _ready() -> void:
 		push_error("WorldManager could not find Player at path: %s" % player_path)
 		set_process(false)
 		return
+	# Freeze before the restore frames: a slow first rendered frame must not
+	# move the default spawn enough to be mistaken for a restored save.
+	_initial_player_physics = player.is_physics_processing()
+	player.set_physics_process(false)
 	set_process(false)
 	call_deferred("_initialize_streaming")
 
@@ -57,8 +62,6 @@ func _initialize_streaming() -> void:
 	if not _read_chunk_dimensions():
 		return
 	current_player_chunk = _world_position_to_chunk(player.global_position)
-	var physics_was_enabled: bool = player.is_physics_processing()
-	player.set_physics_process(false)
 	_create_chunk(current_player_chunk)
 	var spawn_chunk: Node = loaded_chunks.get(current_player_chunk)
 	if spawn_chunk != null and not bool(spawn_chunk.get("generation_complete")):
@@ -68,7 +71,7 @@ func _initialize_streaming() -> void:
 	var ground: float = WorldGenerator.get_visual_terrain_height(player.global_position.x, player.global_position.z)
 	if player.global_position.y < ground + 0.65:
 		player.global_position.y = ground + 2.2
-	player.set_physics_process(physics_was_enabled)
+	player.set_physics_process(_initial_player_physics)
 	_plan_streaming()
 	world_initialized = true
 	_stream_build_timer = chunk_build_interval

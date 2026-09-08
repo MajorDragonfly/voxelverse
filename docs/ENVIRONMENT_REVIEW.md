@@ -35,6 +35,13 @@ median/p95/p99/max for wall-frame time, render CPU/GPU time and draw counts.
 Render CPU time includes viewport rendering plus frame setup, not every gameplay
 subsystem. GPU timings with unavailable timestamp queries are identified explicitly.
 
+The world case holds the player at the actual scenic spawn, disables that review
+player's survival updates and sets spawned predators' attack damage to zero.
+Wildlife movement/animation and chunk generation remain active. This prevents a
+long capture from measuring a respawned, empty area. The two dense reference seeds
+must contain at least 1,000 vegetation instances across 25 chunks. Streaming-stage
+diagnostics are retained on success and failure; gameplay/combat use separate tests.
+
 The cluster/creature comparisons also require fewer recorded draw calls and a
 mean RGB difference no greater than 0.004 (normalized 0–1) from the unbatched image.
 This allows small raster/shadow rounding differences while catching palette or
