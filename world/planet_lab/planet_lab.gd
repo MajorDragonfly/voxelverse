@@ -19,6 +19,8 @@ var sky := Node3D.new()
 var space_camera := Camera3D.new()
 var space_bodies: Dictionary = {}
 var sky_bodies: Dictionary = {}
+var body_labels: Dictionary = {}
+var orbit_lines: Dictionary = {}
 var meshes: Dictionary = {}
 var lights: Dictionary = {}
 var landing_marker: MeshInstance3D
@@ -98,6 +100,8 @@ func _build_system_view() -> void:
 		light.queue_free()
 	space_bodies.clear()
 	sky_bodies.clear()
+	body_labels.clear()
+	orbit_lines.clear()
 	lights.clear()
 	for id: String in system.bodies:
 		var body: Dictionary = system.bodies[id]
@@ -117,12 +121,26 @@ func _build_system_view() -> void:
 		space_bodies[id] = node
 		var label := Label3D.new()
 		label.text = body.name
-		label.font_size = 40
-		label.pixel_size = 1.2
-		label.position.y = body.radius + 100.0
+		label.font_size = 48
+		label.pixel_size = 8.0
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		label.no_depth_test = true
-		node.add_child(label)
+		space.add_child(label)
+		body_labels[id] = label
+		if body.orbit_radius > 0.0:
+			var orbit := MeshInstance3D.new()
+			var path := ImmediateMesh.new()
+			var path_material := StandardMaterial3D.new()
+			path_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			path_material.albedo_color = Color("304153")
+			path.surface_begin(Mesh.PRIMITIVE_LINE_STRIP, path_material)
+			for step in range(129):
+				var angle: float = step * TAU / 128.0
+				path.surface_add_vertex(Vector3(cos(angle), 0, sin(angle)) * float(body.orbit_radius))
+			path.surface_end()
+			orbit.mesh = path
+			space.add_child(orbit)
+			orbit_lines[id] = orbit
 		var sky_node := _body_visual(body, meshes[id])
 		sky.add_child(sky_node)
 		sky_bodies[id] = sky_node
@@ -229,6 +247,8 @@ func set_view(mode: String) -> void:
 	else:
 		space_camera.make_current()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	space_camera.projection = Camera3D.PROJECTION_ORTHOGONAL if mode == "system" else Camera3D.PROJECTION_PERSPECTIVE
+	space_camera.size = 190.0
 	_update_views()
 
 
@@ -261,10 +281,16 @@ func _update_views() -> void:
 		var body_rotation: Basis = system.rotation_at(id)
 		space_bodies[id].position = system.position_at(id) - (body_position if view_mode == "orbit" else Vector3.ZERO)
 		space_bodies[id].basis = body_rotation
-		# Labels are for the system overview; a selected planet fills the orbit view.
-		for child in space_bodies[id].get_children():
-			if child is Label3D:
-				child.visible = view_mode == "system"
+		# System-map symbols are enlarged; their orbit centers/positions remain
+		# physical. Orbit view always uses the real common radius and terrain.
+		var symbol_radius: float = 550.0 if body.kind == "planet" else 250.0
+		space_bodies[id].scale = Vector3.ONE * (maxf(1.0, symbol_radius / float(body.radius)) if view_mode == "system" else 1.0)
+		body_labels[id].visible = view_mode == "system" and id != "m1:vesper"
+		body_labels[id].text = "Solis + Vesper" if id == "m1:sol" and system.binary else body.name
+		body_labels[id].position = space_bodies[id].position + Vector3(0, 200, symbol_radius + 240.0)
+		if orbit_lines.has(id):
+			orbit_lines[id].visible = view_mode == "system"
+			orbit_lines[id].position = system.position_at(body.parent_id) if not str(body.parent_id).is_empty() else Vector3.ZERO
 		sky_bodies[id].visible = id != body_id
 		if id == body_id:
 			continue
@@ -290,8 +316,22 @@ func _update_views() -> void:
 		space_camera.position = world_up * distance + rotation * walker.forward * distance * 0.2
 		space_camera.look_at(Vector3.ZERO, rotation * walker.forward)
 	elif view_mode == "system":
-		space_camera.position = Vector3(0.0, 160.0, 190.0)
-		space_camera.look_at(Vector3.ZERO)
+		var minimum := Vector3(INF, 0, INF)
+		var maximum := Vector3(-INF, 0, -INF)
+		for id: String in system.bodies:
+			var p: Vector3 = system.position_at(id) * 0.01
+			minimum.x = minf(minimum.x, p.x)
+			minimum.z = minf(minimum.z, p.z)
+			maximum.x = maxf(maximum.x, p.x)
+			maximum.z = maxf(maximum.z, p.z)
+		var center: Vector3 = (minimum + maximum) * 0.5
+		# Keep body centers in the free strip between the two HUD panels.
+		space_camera.size = maxf(190.0, (maximum.z - minimum.z + 20.0) / 0.40)
+		space_camera.size = maxf(space_camera.size, maximum.x - minimum.x + 40.0)
+		space_camera.position = center + Vector3(0.0, 180.0, 0.01)
+		space_camera.look_at(center, Vector3.FORWARD)
+		for label in body_labels.values():
+			label.pixel_size = 8.0 * space_camera.size / 190.0
 
 
 func snapshot() -> Dictionary:
@@ -459,6 +499,7 @@ func _panel() -> StyleBoxFlat:
 func _button(parent: Node, text: String, action: Callable) -> void:
 	var button := Button.new()
 	button.text = text
+	button.focus_mode = Control.FOCUS_NONE
 	button.custom_minimum_size.y = 36
 	button.add_theme_font_size_override("font_size", 15)
 	button.pressed.connect(action)

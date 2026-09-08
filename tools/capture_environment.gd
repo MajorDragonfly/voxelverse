@@ -668,7 +668,7 @@ func _capture(label: String, details: Dictionary) -> void:
 		"rendered_primitives": _distribution(primitives)})
 	if label.begins_with("m1_") or label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
 		var preview: Image = image.duplicate()
-		preview.resize(480, 270, Image.INTERPOLATE_LANCZOS)
+		preview.resize(960 if label.begins_with("m1_") else 480, 540 if label.begins_with("m1_") else 270, Image.INTERPOLATE_LANCZOS)
 		print("REVIEW_PREVIEW ", str(_config["seed"]), " ", label, " ", Marshalls.raw_to_base64(preview.save_jpg_to_buffer(0.76)))
 	if label.begins_with("terrain_transition_"):
 		_comparison_images[label] = image

@@ -119,8 +119,9 @@ func _circumnavigate() -> void:
 		frames += 1
 		var location: Dictionary = lab.walker.location()
 		var d: Vector3 = Cube.vector(Cube.direction(location.face, location.u, location.v))
-		angle += atan2(previous.cross(d).length(), clampf(previous.dot(d), -1.0, 1.0))
-		previous = d
+		var projected: Vector3 = d.slide(lab.walker.orbit_axis).normalized()
+		angle += atan2(previous.cross(projected).dot(lab.walker.orbit_axis), clampf(previous.dot(projected), -1.0, 1.0))
+		previous = projected
 		north = north or d.y > 0.999
 		south = south or d.y < -0.999
 		contacts += int(lab.walker.is_on_floor())

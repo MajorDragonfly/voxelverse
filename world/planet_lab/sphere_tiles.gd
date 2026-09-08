@@ -5,6 +5,7 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Surface = preload("res://world/space/planet_surface.gd")
 const GRID: int = 4
 const SUBDIVISIONS: int = 16
+const FAR_SUBDIVISIONS: int = 8
 const MAX_NEAR: int = 24
 const COLLISION_EDGE_GUARD: float = 0.0005
 var surface: RefCounted
@@ -59,7 +60,7 @@ func build_mesh(tile: Dictionary, detailed: bool) -> ArrayMesh:
 	var normals := PackedVector3Array()
 	var colors := PackedColorArray()
 	var indices := PackedInt32Array()
-	# Both LODs retain the exact same perimeter. Far tiles use 4x4 cell fans;
+	# Both LODs retain the exact same perimeter. Far tiles use 8x8 cell fans;
 	# near tiles use a 16x16 grid. There are no T-junctions or skirts.
 	if detailed:
 		for y in range(SUBDIVISIONS + 1):
@@ -71,17 +72,17 @@ func build_mesh(tile: Dictionary, detailed: bool) -> ArrayMesh:
 				indices.append_array([a, a + SUBDIVISIONS + 1, a + 1,
 					a + 1, a + SUBDIVISIONS + 1, a + SUBDIVISIONS + 2])
 	else:
-		for cy in range(4):
-			for cx in range(4):
+		for cy in range(FAR_SUBDIVISIONS):
+			for cx in range(FAR_SUBDIVISIONS):
 				var center: int = vertices.size()
-				_add_vertex(tile, (cx + 0.5) / 4.0, (cy + 0.5) / 4.0, vertices, normals, colors)
+				_add_vertex(tile, (cx + 0.5) / FAR_SUBDIVISIONS, (cy + 0.5) / FAR_SUBDIVISIONS, vertices, normals, colors)
 				for edge in range(4):
-					var boundary: bool = [cy == 0, cx == 3, cy == 3, cx == 0][edge]
-					var steps: int = 4 if boundary else 1
+					var boundary: bool = [cy == 0, cx == FAR_SUBDIVISIONS - 1, cy == FAR_SUBDIVISIONS - 1, cx == 0][edge]
+					var steps: int = SUBDIVISIONS / FAR_SUBDIVISIONS if boundary else 1
 					for step in range(steps):
 						var t: float = float(step) / steps
 						var xy: Vector2 = [Vector2(t, 0), Vector2(1, t), Vector2(1 - t, 1), Vector2(0, 1 - t)][edge]
-						_add_vertex(tile, (cx + xy.x) / 4.0, (cy + xy.y) / 4.0, vertices, normals, colors)
+						_add_vertex(tile, (cx + xy.x) / FAR_SUBDIVISIONS, (cy + xy.y) / FAR_SUBDIVISIONS, vertices, normals, colors)
 				var count: int = vertices.size() - center - 1
 				for i in range(count):
 					indices.append_array([center, center + 1 + (i + 1) % count, center + 1 + i])

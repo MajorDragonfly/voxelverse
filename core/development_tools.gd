@@ -7,22 +7,23 @@ const PLANET_LAB_SCENE: String = "res://world/planet_lab/planet_lab.tscn"
 func _ready() -> void:
 	# Official release templates reject scene-path overrides. This uses the
 	# same saved transition as F4, including in a packaged acceptance run.
-	if "--planet-lab" in OS.get_cmdline_user_args():
+	if "--planet-lab" in OS.get_cmdline_user_args() and not get_tree().has_meta("planet_lab_boot_consumed"):
+		get_tree().set_meta("planet_lab_boot_consumed", true)
 		call_deferred("_open_planet_lab")
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F4:
-		_open_planet_lab()
 		get_viewport().set_input_as_handled()
+		_open_planet_lab()
 		return
 	if not OS.is_debug_build():
 		return
 	if not (event is InputEventKey) or not event.pressed or event.echo:
 		return
 	if event.ctrl_pressed and event.keycode == KEY_B:
-		_open_building_builder()
 		get_viewport().set_input_as_handled()
+		_open_building_builder()
 
 
 func _open_building_builder() -> void:

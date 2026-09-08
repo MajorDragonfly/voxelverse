@@ -77,7 +77,9 @@ func _physics_process(delta: float) -> void:
 	up_direction = Cube.vector(Cube.direction(address_value.face, address_value.u, address_value.v))
 	forward = -Cube.frame(up_direction, forward).z
 	if automatic:
-		forward = orbit_axis.cross(up_direction).normalized()
+		# Steer back onto the selected great-circle plane after lateral slope
+		# deflection. This changes input heading, never position or gravity.
+		forward = (orbit_axis.cross(up_direction) - orbit_axis.slide(up_direction) * up_direction.dot(orbit_axis) * 16.0).normalized()
 		move_input = Vector2(0.0, 1.0)
 	else:
 		move_input = Vector2(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)),

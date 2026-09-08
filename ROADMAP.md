@@ -2,7 +2,7 @@
 
 Stand: 8. September 2026 · M0-Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354` · visuelle Ausgangsbasis: `b1f1ef9c2c14a27269505da1d086091a0884563f`
 
-Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfolge der nächsten Arbeiten. Es ist die zentrale Projektplanung. Die älteren Berichte unter `art/` dokumentieren einzelne Arbeitsstände; ihre Phasen A–F sind keine Spielphasen. M0 ist inzwischen als Grundlagenpaket umgesetzt und technisch geprüft; Einzelheiten und Grenzen stehen in den [Kampagnenverträgen](docs/CAMPAIGN_CONTRACTS.md).
+Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfolge der nächsten Arbeiten. Es ist die zentrale Projektplanung. Die älteren Berichte unter `art/` dokumentieren einzelne Arbeitsstände; ihre Phasen A–F sind keine Spielphasen. M0 ist als Grundlagenpaket technisch geprüft. M1 ist als separates Planetenlabor implementiert; Nachweise und Integrationsgrenzen stehen im [M1-Bericht](docs/PLANET_M1.md). Die Abschlussprüfung von M1 läuft noch. M0-Verträge: [Kampagne](docs/CAMPAIGN_CONTRACTS.md).
 
 ## Ziel und verbindliche Anforderungen
 
@@ -25,10 +25,10 @@ Voxelverse ist ein Einzelspielerspiel mit selbst gestalteter Spezies und der Ent
 | Bereich | Im geprüften Code vorhanden | Was noch fehlt | Einstieg im Code |
 |---|---|---|---|
 | Spielphasen | Bestehendes Enum; vorbereiteter, gespeicherter und wiederaufnehmbarer Debug-Phasenübergang; normaler Übergang bis zur tatsächlichen Spielschleife gesperrt | Spielschleifen nach der Kreaturenphase, echte Übergangsbedingungen, Steuerungswechsel und Übernahme der Gesellschaft | [GameState](autoload/game_state.gd) |
-| Sternsystem | Deterministischer Katalog mit 3–6 Planeten, Namen, Seeds und einfachen Orbit-/Schwerkraftwerten; einzelne Sternwerte | Hierarchische Himmelskörper, Radien, Monde, mehrere Sterne, Bewegung und verbindliche astronomische Darstellung | [PlanetCatalog](world/generation/planet_catalog_v7.gd) |
+| Sternsystem | Gemeinsame V9-Profilquelle; M1-Labor mit zwei Planeten, Mond, Ein-/Doppelstern, Rotation und Kreisbahnen aus einer Uhr | Produktive Kampagnenanbindung, weitere Konfigurationen und Inhalte | [PlanetCatalog](world/generation/planet_catalog_v7.gd), [CelestialSystem](world/space/celestial_system.gd) |
 | Planetenwechsel | Taste P lädt die Szene mit anderem Planetenseed; regionale Ökologie wird beim Wiederbesuch übernommen | Raumflug, Landung, globaler Oberflächenort, Reise- und Kolonieregeln | [StarSystemRuntime](world/space/star_system_runtime_v7.gd) |
-| Planetengeometrie | Gestreamtes Terrain auf einer X/Z-Ebene; Voxelberge, Wasser und lokale Kollision | Endliche Kugeltopologie, Oberflächennähte, lokale Schwerkraftrichtung, globale Kontinente und konsistente Orbitansicht | [WorldGenerator](world/generation/world_generator_planetary_v9.gd), [TerrainBuildJob](world/streaming/terrain_build_job.gd) |
-| Himmel | Sonne und Atmosphärenprofile, auch Darstellungsmodi für Orbit/Weltraum | Himmelskörper aus dem Sternsystem, Tageslauf und Licht aus derselben Zeit-/Positionsquelle | [PlanetVisualEnvironment](world/visuals/planet_visual_environment.gd) |
+| Planetengeometrie | Bestand auf X/Z-Ebene; zusätzlich M1-Cube-Sphere mit gemeinsamen Nah-/Fernkanten, radialer Physik, globalem Höhen-/Klimafeld und Ozean | Hierarchische Unterteilung großer Planeten, produktive Landschaft/Flora/Fauna auf Kugel, spätere explizite Migration | [WorldGenerator](world/generation/world_generator_planetary_v9.gd), [SphereTiles](world/planet_lab/sphere_tiles.gd) |
+| Himmel | Bestandshimmel; im M1-Labor Himmelskörper, Licht, Tageslauf und Systemkarte aus derselben Zeit-/Positionsquelle | Visuelle Atmosphärenausarbeitung und Übernahme in die Kampagne | [PlanetVisualEnvironment](world/visuals/planet_visual_environment.gd), [PlanetLab](world/planet_lab/planet_lab.gd) |
 | Kreaturen | Körper/Wirbelsäule, Anbauteile, Oberflächenbindung, Symmetrie, Undo/Redo, gespeicherte Entwürfe, Animation und mehrere angewendete Körperwerte | Bedienungs- und Formüberarbeitung, robuste Bewegung verschiedener Körperformen, vollständig wirksame Fähigkeiten | [Aktiver Editor](creatures/editor/creature_editor_runtime.gd), [Assembly V7](creatures/editor/creature_assembly_blueprint_v7.gd), [Runtime](creatures/runtime/creature_runtime_visual.gd) |
 | Tierwelt | Einzeltiere wandern, fliehen und greifen an; regionale Populationen, Pflanzen-/Aasvorräte und abstrakte Räuber-Beute-Berechnung | Sichtbare Herden, Nahrungssuche und Jagd zwischen Tieren; zuverlässige Navigation über Lebensräume | [Wildlife](creatures/wildlife/procedural_wildlife_v7.gd), [RegionEcology](world/simulation/region_ecology_simulation.gd) |
 | Fortschritt | Arten-/Regionenentdeckung, Insight, Körperteilfreischaltungen; typisierte Kampagnenereignisse und persistente Sequenzprüfung gegen Wiederholung | Verhaltenspunkte, Skilltree, Phasenvermächtnis, getrennte Technikforschung, gesellschaftlicher Ruf | [ProgressionService](autoload/progression_service.gd) |
@@ -39,11 +39,11 @@ Voxelverse ist ein Einzelspielerspiel mit selbst gestalteter Spezies und der Ent
 
 Konkrete Altlasten und Stand nach M0:
 
-- Der Planetenkatalog erzeugt Profile über V8, der aktive Landschaftsgenerator über V9. Katalog, Oberfläche und spätere Orbitansicht brauchen eine gemeinsame, versionierte Datenquelle.
+- **In M1 umgesetzt:** Katalog und aktiver Generator verwenden dieselbe versionierte V9-Profilquelle. Alte Seedfolgen einschließlich der bereits bestehenden Seedbegrenzung sind gegen M0-Referenzen geprüft.
 - Einige Planeteneigenschaften sind bisher nur Daten: vorhandene `surface_gravity`- oder Orbitwerte beweisen keine entsprechende Physik.
 - **In M0 erledigt:** Kreaturenbaupläne verwalten keine zweite Kampagnenphase mehr. Die Phase liegt ausschließlich in `GameState`; alte Enum-Werte bleiben erhalten.
 - Phasen-Fähigkeitsnamen wie `socialize`, `colonize` oder `terraform` sind keine implementierten Interaktionen. M0 sperrt den normalen Phasenübergang bis zur jeweiligen Spielschleife. Echte Voraussetzungen/Freischaltungen folgen weiterhin in M4/M5.
-- **In M0 vorbereitet:** Körperbezogene IDs und gespeicherte Ebenenadressen ergänzen die alten Seed-/X/Z-Schlüssel. M1 muss die Kugeladresse und Körperhierarchie ergänzen; M0 verändert bestehende Landschaften nicht.
+- **In M0/M1 vorbereitet:** Körperbezogene IDs und Ebenenadressen bleiben erhalten. Das separate M1-Labor ergänzt Kugeladressen, Tangentenorientierung und Körperhierarchie; bestehende Kampagnenlandschaften werden nicht umgeschrieben.
 - **In M0 erledigt:** Kampagne und Entwürfe werden gemeinsam gesichert. Der neue Schreibweg ersetzt die Zieldatei nach geprüftem temporärem Schreiben, ohne sie vorher zu löschen; gemeinsame Backups und Wiederaufnahme sind geprüft.
 
 ## Architekturentscheidungen vor dem großen Ausbau
@@ -144,12 +144,12 @@ Dies sind Designvorschläge für Voxelverse, keine Behauptung über konkrete Spo
 
 ## Reihenfolge und Abnahmekriterien
 
-**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
+**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1: Technikprototyp implementiert, Abschlussprüfung läuft. M2–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
 
 | ID | Arbeitspaket | Voraussetzung | Fertig, wenn … |
 |---|---|---|---|
 | M0 | **Technisch geprüft:** Kampagnenverträge, IDs, gemeinsame Sicherung, Phasen-/Ereignismodell | Ausgangsstand `e1b0b7f` | Migration mit Kreatur, zwei Gebäuden, Entdeckungen und zwei Planeten; separater Prozessneustart; Ereigniswiederholung und unterbrochener Debug-Übergang geprüft. Commit `3f7f2252e3cbce868920dcf7c86beb3b47d17354`; manueller Spieltest offen |
-| M1 | Kugelplanet- und Sternsystemprototyp | M0 | Ein kleiner Planet lässt sich umrunden; Nähte, lokale Schwerkraft, Wasser und Orbit-Ortsgleichheit sind geprüft; ein Mond und danach zwei Sonnen kommen aus denselben Systemdaten |
+| M1 | **Technikprototyp implementiert:** Kugelplanet und Sternsystemlabor | M0 | Polare Umrundung mit echter Physik, Kantenstrahlen, begrenztes Streaming, radialer Ozean, Orbit/Rückkehr und Neustart bereits geprüft; finale Bildprüfung läuft. [Nachweise/Grenzen](docs/PLANET_M1.md) |
 | M2 | Verhaltensfortschritt und gemeinsame Editorverträge | M0, Koordinatenentscheidung aus M1 | Echte bzw. im Test ausgelöste Ereignisse vergeben einmal Punkte; Knoten wirken einmal; Blaupausen besitzen stabile Identität und Revision; Import/Undo/Redo bleiben erhalten |
 | M3 | Kreaturen und Kreatureneditor überarbeiten | M2; Laufzeit auf M1-Grundlage | Repräsentative Körperformen lassen sich verständlich gestalten und bewegen; Vorschau und Spiel stimmen überein; erste Körperfähigkeiten funktionieren |
 | M4 | Lebendige Tierwelt und vollständiger Kreaturen-Spielablauf | M1–M3 | Herde, Nahrungssuche, Räuber-Beute, Befreunden, Entdeckungsbuch und kleiner Skilltree bilden einen spielbaren Ablauf; sozialer und aggressiver Fortschritt funktionieren |
@@ -174,7 +174,7 @@ M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reif
 
 **Rest bewusst in späteren Paketen:** echter Skilltree M2/M4, persistente Einzeltiere/Ressourcen M4, Bevölkerung und produktiver Phasenwechsel M5. Die Normalprüfung von Phasenvoraussetzungen sperrt unfertige Phasen. Die bisherige Ebenenadresse ist kein Kugelnachweis. Die Uhr steuert Kampagnenzeit/Ökologie; ein globales Geschwindigkeitsmenü ist noch nicht vorhanden.
 
-### M1 – begrenzter Techniknachweis statt fertiger Weltraumphase
+### M1 – Technikprototyp implementiert, Abschlussprüfung läuft
 
 1. Systemkatalog auf gemeinsame versionierte Himmelskörperprofile umstellen, V8/V9-Doppelquelle auflösen. Alten Seed→Planet-Bezug erhalten.
 2. Oberflächenadresse, globale/lokale Umrechnung und gemeinsamen Terrain-/Wasser-/Normalenzugriff bauen; bisherigen Generator über Adapter anschließen.
@@ -182,6 +182,8 @@ M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reif
 4. Globale Höhen-/Klimaquelle und Gewässerkontinuität demonstrieren. Nahterrain und Orbitansicht teilen dieselben Küsten und Landmarken; beide besitzen unterschiedliche Detailstufen.
 5. Planet, Mond und Sonne in einer Systemansicht anzeigen; Bodenhimmel aus denselben Daten. Dann denselben Test mit zwei Sonnen, Tag-/Nachtwechsel und gespeicherter Zeit durchführen.
 6. Kontrollierten Wechsel Oberfläche → Orbit → derselbe Ort demonstrieren. Ein Lade-/Kameraübergang ist für den Techniktest zulässig; ob später vollständig nahtlos geflogen wird, ist eine gesonderte Umfangsentscheidung.
+
+**Implementiert:** F4 öffnet das eigenständig gespeicherte Labor mit Haven (256 m), Ember (160 m) und Lune (64 m), gemeinsamen V9-Profilen, sechs geschlossenen Kugelflächen, höchstens 24 Nahkacheln, radialer Bewegung und gemeinsamem Himmel/Orbit/System. Die bisherige Welt bleibt im Modus `legacy_plane_v9`. Koordinaten bei Erdradius sind rechnerisch geprüft; erdgroßes Terrain ist noch kein Laufzeitnachweis. Die konkrete M1-Entscheidung für M2 ist eine körperfeste Cube-Sphere-Adresse mit lokalem Ursprung; große Kugeln benötigen weitere Kachelunterteilung.
 
 **Abnahme:** Keine sicht-/begehbaren Nahtlöcher, kein Wechsel in eine andere Landschaft beim Landen, kein Verlust des gespeicherten Orts, keine ungebundene Zunahme geladener Kacheln. Abweichungsgrenzen für Höhe/Ort, Planetengrößen und Messszene vor dem Test festhalten. M1 darf erst als abgeschlossen gelten, wenn der verwendete Kugelansatz funktioniert; eine gezeichnete Planetenkugel allein reicht nicht.
 

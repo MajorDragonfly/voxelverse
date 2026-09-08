@@ -14,10 +14,10 @@ func _init(descriptor: Dictionary) -> void:
 	terrain = Profile.terrain_profile(int(body.seed))
 	continents.seed = int(body.seed)
 	continents.frequency = 1.8
-	continents.fractal_octaves = 3
+	continents.fractal_octaves = 2
 	detail.seed = int(body.seed) + 733
-	detail.frequency = 7.0
-	detail.fractal_octaves = 2
+	detail.frequency = 4.0
+	detail.fractal_octaves = 1
 
 
 func height_at(d: Vector3) -> float:

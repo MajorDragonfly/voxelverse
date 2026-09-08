@@ -8,6 +8,7 @@ Eigenständige Szene `res://world/planet_lab/planet_lab.tscn`; bestehende Kampag
 - 6 Würfelflächen × 4 × 4 Kacheln = 96 feste Fernkacheln pro aktivem Körper; höchstens 24 nahe Kollisionskacheln.
 - Gemeinsame Kanten: höchstens 1 mm geometrische Abweichung. Die Fernansicht behält sämtliche Randstützpunkte der Nahkacheln.
 - Speichern/Laden und Orbit/Rückkehr: höchstens 2 cm Ortsabweichung, gleiche Körper-ID und Höhenquelle.
+- Ergänzende Fern-LOD-Prüfung: maximal 2 m Höhenfehler an allen Dreiecksmittelpunkten auf Haven; Randpunkte bleiben identisch.
 - Koordinaten-Stresstest bei 6.371.000 m Radius: höchstens 1 mm Umrechnungsfehler für lokale Positionen innerhalb 128 m. Das ist kein Leistungsnachweis für erdgroßes Terrain.
 - Physikprobe: tatsächliche Kapselbewegung über Kachel-/Flächenkanten und Pole, mindestens eine vollständige Umrundung; kein Durchfallen, kein unbegrenztes Kachelwachstum.
 
@@ -23,7 +24,7 @@ Das Labor hat eine eigene atomare Sicherung. Es migriert keinen Kampagnenstand. 
 
 F4 öffnet das Labor aus der Hauptszene nach erfolgreicher Kampagnensicherung. Alternativ die Laborszene direkt starten. WASD/Maus und Leertaste steuern die Kreatur, Tab Oberfläche/Orbit, M den Körper, B die Sternkonfiguration, T die Systemzeit (0/1/4/20). F5/F9 sichern/laden `planet_lab_m1.json`. Die Oberfläche bleibt beim Orbitwechsel körperfest; die Systemzeit darf weiterlaufen.
 
-Die sechs Würfelflächen bilden eine normalisierte Cube-Sphere. Nahe Kacheln besitzen 16×16 Rasterzellen mit Dreieckskollision. Ferne Kacheln verwenden 4×4 Zellen mit Dreiecksfächern und behalten alle feinen Randstützpunkte. Ein Kachelwechsel verändert damit keine gemeinsame Kante. Höhe, Feuchte, Temperatur, Bodenfarbe und radiale Ozeanhöhe stammen aus derselben richtungsabhängigen 3-D-Quelle. Die Orbitdarstellung verwendet diese Fernkacheln, keine andere Planetentextur.
+Die sechs Würfelflächen bilden eine normalisierte Cube-Sphere. Nahe Kacheln besitzen 16×16 Rasterzellen mit Dreieckskollision. Ferne Kacheln verwenden 8×8 Zellen mit Dreiecksfächern und behalten alle feinen Randstützpunkte (288 statt 512 Dreiecke pro Kachel). Ein Kachelwechsel verändert damit keine gemeinsame Kante. Höhe, Feuchte, Temperatur, Bodenfarbe und radiale Ozeanhöhe stammen aus derselben richtungsabhängigen 3-D-Quelle. Die Orbitdarstellung verwendet diese Fernkacheln, keine andere Planetentextur.
 
 Unabhängige Float32-Kacheltransformationen unterscheiden sich an einzelnen gemeinsamen Punkten um wenige Mikrometer. Die Kollisionsränder überlappen deshalb um **0,5 mm**. Das beseitigt Fehltreffer exakt auf einer Kante, liegt innerhalb der 1-mm-Geometriegrenze und ändert keine sichtbaren Vertices. Beim Gehen ersetzt eine Kapsel den alten Heightmap-Ansatz; Schwerkraft, Auftrieb, Boden-Snap und Kreaturenwurzel richten sich radial aus.
 
@@ -51,7 +52,7 @@ Der lokale Ursprung verschiebt sich nach 64 m Bewegung. Nur der aktive Körper b
 - `tools/validate_export.py`: unveränderter nativer Hauptstart, eigener nativer Laborstart und Vertragstest gegen das exportierte PCK.
 - `tools/profile_environment.py --cases planet_lab --seeds 12345`: sieben echte Renderaufnahmen (Oberfläche, Orbit, System, Doppelsternsystem, Doppelsternhimmel, Nacht, Mond) in Forward+ und Compatibility. Die vorhandene Render-CI führt diese Fälle vor den bisherigen Umgebungsprüfungen aus.
 
-Die fokussierte Physikprobe erreichte 6,2853 rad mit 2.076 Bodenkontakten in 2.083 Frames und acht Ursprungswechseln. Der sichtbare maximale Kantenfehler liegt bei 0,000004136 m. Abschlusszahlen des Gesamt- und Renderlaufs werden nach deren Auswertung ergänzt.
+Die fokussierte Physikprobe erreichte 6,2836 rad mit 2.028 Bodenkontakten in 2.070 Frames und sieben Ursprungswechseln. Der sichtbare maximale Kantenfehler liegt bei 0,000005055 m. Die ergänzende Fern-LOD-Prüfung misst maximal 1,467347 m Höhenfehler an den Dreiecksmittelpunkten. Abschlusszahlen des Gesamt- und Renderlaufs werden nach deren Auswertung ergänzt.
 
 ## Bewusste Grenzen
 

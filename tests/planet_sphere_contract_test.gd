@@ -11,6 +11,7 @@ const Save = preload("res://world/planet_lab/planet_lab_save.gd")
 var failures: Array[String] = []
 var max_precision_error: float = 0.0
 var max_seam_error: float = 0.0
+var max_far_height_error: float = 0.0
 
 
 func _initialize() -> void:
@@ -27,6 +28,7 @@ func _run() -> void:
 	await process_frame
 	if failures.is_empty():
 		print("M1 contracts passed; maximum Earth-radius local error %.9f m; mesh seam error %.9f m." % [max_precision_error, max_seam_error])
+		print("M1 far LOD maximum triangle-centroid height error: %.6f m." % max_far_height_error)
 		quit(0)
 	else:
 		for failure in failures:
@@ -108,6 +110,12 @@ func _surface_edges() -> void:
 	var perimeter: Dictionary = {}
 	for tile: Dictionary in tiles.tiles:
 		var far_vertices: PackedVector3Array = tile.far.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+		var far_indices: PackedInt32Array = tile.far.surface_get_arrays(0)[Mesh.ARRAY_INDEX]
+		for triangle in range(0, far_indices.size(), 3):
+			var centroid: Vector3 = (far_vertices[far_indices[triangle]] + far_vertices[far_indices[triangle + 1]] + far_vertices[far_indices[triangle + 2]]) / 3.0
+			var p: Vector3 = Cube.vector(Cube.global_position(centroid, tile.anchor))
+			var error: float = absf(p.length() - 256.0 - surface.height_at(p.normalized()))
+			max_far_height_error = maxf(max_far_height_error, error)
 		var near_mesh: ArrayMesh = tiles.build_mesh(tile, true)
 		var near_vertices: PackedVector3Array = near_mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
 		for perimeter_index in range(64):
@@ -130,6 +138,7 @@ func _surface_edges() -> void:
 	for entry: Dictionary in perimeter.values():
 		_expect(entry.count >= 2, "Mesh perimeter has an unmatched edge vertex.")
 	_expect(max_seam_error < 0.001, "Mesh seam exceeds 1 mm.")
+	_expect(max_far_height_error <= 2.0, "Orbit terrain height error %.6f m exceeds 2 m at triangle centroids." % max_far_height_error)
 	tiles.free()
 
 

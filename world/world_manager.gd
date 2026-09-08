@@ -61,6 +61,8 @@ func _initialize_streaming() -> void:
 	# Give SaveGameService two idle frames to restore a persisted player before
 	# selecting a new scenic spawn and before expensive terrain is generated.
 	await get_tree().process_frame
+	if not is_inside_tree():
+		return
 	await get_tree().process_frame
 	if not is_inside_tree() or player == null or not is_instance_valid(player):
 		return
