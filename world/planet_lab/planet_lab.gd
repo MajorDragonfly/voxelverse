@@ -327,6 +327,10 @@ func _update_views() -> void:
 		body_labels[id].position = space_bodies[id].position + Vector3(0, 200, maxf(symbol_radius, body.radius) + 2500.0)
 		if body.kind == "moon":
 			body_labels[id].position.z -= maxf(18000.0, space_camera.size / SPACE_SCALE * 0.08)
+		elif body.kind == "star":
+			# Keep the two diameters separate from each other and nearby planets.
+			var label_offset: float = -0.07 if id == "m1:vesper" else 0.045
+			body_labels[id].position.z += space_camera.size / SPACE_SCALE * label_offset
 		if orbit_lines.has(id):
 			orbit_lines[id].visible = view_mode == "system"
 			orbit_lines[id].position = system.position_at(body.parent_id) if not str(body.parent_id).is_empty() else Vector3.ZERO
