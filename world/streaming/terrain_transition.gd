@@ -2,8 +2,8 @@ extends RefCounted
 
 # Nested, world-aligned column fields. Sample column centres, never interpolate
 # a ramp between corners: distant mountains must keep their voxel silhouette.
-const HORIZON_STEP: float = 4.0
-const PROXY_STEP: float = 2.0
+const HORIZON_STEP: float = 2.0
+const PROXY_STEP: float = 1.0
 const DURATION: float = 0.65
 
 static func height_at(generator: Node, point: Vector2, step: float, cache: Dictionary) -> float:

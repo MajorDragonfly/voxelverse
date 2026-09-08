@@ -10,7 +10,9 @@ Der aktuelle Prototyp enthält Kreaturensteuerung und Überleben, Entdeckungen/K
 
 `project.godot` mit Godot 4.6.3 öffnen und die Hauptszene `main/main.tscn` starten. Windows-/Linux-Exporte und ihre Prüfung sind in [DESKTOP_EXPORT.md](docs/DESKTOP_EXPORT.md) beschrieben.
 
-**M1 ausprobieren:** Im Spiel **F4** drücken oder `world/planet_lab/planet_lab.tscn` direkt starten. WASD/Maus bewegen die Kreatur; Tab wechselt zwischen Oberfläche und Orbit, M zum nächsten Körper, B zwischen einer und zwei Sonnen und T durch die Zeitstufen. F5/F9 sichern/laden Ort und Systemzeit. Das Labor benutzt eine eigene Sicherung; der vorhandene Kampagnenstand bleibt auf seiner bisherigen Landschaft. [Technik, Prüfkriterien und Grenzen](docs/PLANET_M1.md).
+**Einstellungen und Pause:** **Esc** oder **F8** öffnet das mit Maus bedienbare Menü. Bildschirmmodus, Fensterauflösung, Oberflächengröße und VSync lassen sich übernehmen und speichern. „Zurück zum Spiel“ stellt den vorherigen Mausmodus wieder her; „Speichern & beenden“ beendet erst nach erfolgreicher Sicherung.
+
+**M1 ausprobieren:** Im Spiel **F4** drücken oder im Esc-Menü **„Planetenlabor öffnen“** wählen. WASD/Maus bewegen die Kreatur; Tab wechselt zwischen Oberfläche und Orbit, M zum nächsten Körper, B zwischen einer und zwei Sonnen und T durch die Zeitstufen. **„Aster · 8 km“** öffnet den größeren Testplaneten mit adaptivem Gelände. F5/F9 sichern/laden Ort und Systemzeit. Das Labor benutzt eine eigene Sicherung; der vorhandene Kampagnenstand bleibt auf seiner bisherigen Landschaft. [M1-Grundlagen](docs/PLANET_M1.md) · [Ausbau, Bedienung und Grenzen](docs/PLANET_LOD_AND_MENU.md).
 
 - [Kreatureneditor](creatures/editor/README.md)
 - [Kreatur im Spiel](creatures/runtime/README.md)

@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "date": "2026-09-08",
+  "branch": "agent/planet-lod-menu",
+  "base_commit": "6e5c6d2d1db0de40d676c4ea85efb02c3cb5d4ae",
+  "scope": "8.192 km Aster, adaptive terrain/water, paused settings input, release F4 entry, 2 m legacy horizon",
+  "adaptive_runtime": {
+    "contacts": 563,
+    "cross_face_probes": 2652,
+    "cube_faces": 2,
+    "maximum_clearance_m": 1.56840248095068,
+    "maximum_initial_publish_ms": 23.216,
+    "maximum_layout_tiles": 672,
+    "maximum_mesh_upload_ms": 17.534,
+    "maximum_publish_ms": 19.969,
+    "maximum_seam_m": 7.62147246859968e-05,
+    "maximum_water_seam_m": 7.99348563305102e-05,
+    "maximum_worker_ms": 2521.789,
+    "p95_mesh_upload_ms": 1.334,
+    "peak_resident_terrain_meshes": 504,
+    "peak_tiles": 462,
+    "physics_edge_rays": 748,
+    "publishes": 26,
+    "rebases": 4,
+    "seam_probes": 29172,
+    "walk_m": 245.443690270185
+  },
+  "bounds": {
+    "visible_terrain_tiles": 768,
+    "collision_tiles": 24,
+    "prepared_and_live_terrain_tiles": 1536,
+    "terrain_triangles_per_tile": 512,
+    "steady_mesh_uploads_per_frame": 2,
+    "soft_upload_budget_ms": 4,
+    "seam_tolerance_m": 0.001
+  },
+  "focused_checks": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.283
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.46
+      },
+      {
+        "name": "water_continuity_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 26.297
+      },
+      {
+        "name": "environment_playtest_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 18.943
+      },
+      {
+        "name": "menu_input_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 14.597
+      }
+    ]
+  },
+  "regression_resolution": "The initial finer horizon missed the existing water publication deadline. Two sampling workers and a shared 4 m interpolated colour field resolve this; the existing water timeout is unchanged.",
+  "native_and_graphical_evidence": "See branch workflow runs and the associated draft pull request.",
+  "limitations": [
+    "No target-PC FPS claim; individual uploads/publishes can exceed the soft budget.",
+    "First placement is a synchronous load; spatial detail boundaries are stitched, temporal split/merge geomorphing is still open.",
+    "Legacy campaign, fauna, progression and social gameplay are not migrated."
+  ]
+}

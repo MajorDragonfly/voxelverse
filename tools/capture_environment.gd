@@ -633,6 +633,15 @@ func _planet_lab() -> void:
 	_scene._open_body("m1:lune")
 	_scene.walker.enabled = false
 	await _capture("m1_moon", _scene.snapshot())
+	_scene._open_body("m1:aster")
+	_scene.walker.enabled = false
+	await _capture("m1_aster_surface", _scene.snapshot())
+	_scene.set_view("orbit")
+	await _capture("m1_aster_orbit", _scene.snapshot())
+	var settings := root.get_node("DisplaySettings")
+	settings._toggle_settings_menu()
+	await _capture("m1_settings", {"paused": paused, "clickable": settings._vsync_option.can_process()})
+	settings.close_menu()
 
 
 func _capture(label: String, details: Dictionary) -> void:

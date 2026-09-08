@@ -185,6 +185,10 @@ M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reif
 
 **Implementiert:** F4 öffnet das eigenständig gespeicherte Labor mit Haven (256 m), Ember (160 m) und Lune (64 m), gemeinsamen V9-Profilen, sechs geschlossenen Kugelflächen, höchstens 24 Nahkacheln, radialer Bewegung und gemeinsamem Himmel/Orbit/System. Die bisherige Welt bleibt im Modus `legacy_plane_v9`. Koordinaten bei Erdradius sind rechnerisch geprüft; erdgroßes Terrain ist noch kein Laufzeitnachweis. Die konkrete M1-Entscheidung für M2 ist eine körperfeste Cube-Sphere-Adresse mit lokalem Ursprung; große Kugeln benötigen weitere Kachelunterteilung.
 
+**M1-Ausbau, eigener Branch `agent/planet-lod-menu`:** Aster ergänzt einen Planeten mit 4.096 m Radius, hierarchischer Unterteilung und Terrain-/Wasserübergängen. Die Hierarchie bleibt vollständig geschlossen, enthält höchstens 768 sichtbare Geländekacheln und 24 Kollisionskacheln. Ein Hintergrundauftrag berechnet die nächste Unterteilung; die alte Oberfläche bleibt bis zur vollständigen Veröffentlichung erhalten. Zusätzlich werden die fernen Voxelstufen der bisherigen Welt feiner und Esc/F8-Menü sowie F4-/Menüeinstieg im nativen Export geprüft. [Umsetzung und Nachweise](docs/PLANET_LOD_AND_MENU.md).
+
+**Spieltest-Rückmeldung von Lars:** Der bisherige Spielstand sieht besser aus; die entfernte Berglandschaft braucht weitere Verbesserung. F4 funktionierte in seiner EXE nicht, und das F8-Menü nahm keine Linksklicks an. Das ist eine positive Teilrückmeldung zur bisherigen Welt, noch keine manuelle Abnahme des Planetenlabors oder sämtlicher M0-Kriterien.
+
 **Abnahme:** Keine sicht-/begehbaren Nahtlöcher, kein Wechsel in eine andere Landschaft beim Landen, kein Verlust des gespeicherten Orts, keine ungebundene Zunahme geladener Kacheln. Abweichungsgrenzen für Höhe/Ort, Planetengrößen und Messszene vor dem Test festhalten. M1 darf erst als abgeschlossen gelten, wenn der verwendete Kugelansatz funktioniert; eine gezeichnete Planetenkugel allein reicht nicht.
 
 ### M3–M6 – zuerst ein vollständiger Spielablauf
@@ -248,4 +252,6 @@ Leistungsziel vorläufig: flüssige 60 FPS auf einem noch konkret zu dokumentier
 
 Letzter dokumentierter visueller Ausgangsstand: [Voxel-/Wassertiefenbericht](art/VOXEL_STYLE_DEPTH_REPORT.md). Die M0-Prüfungen sind separat in den [Kampagnenverträgen](docs/CAMPAIGN_CONTRACTS.md) dokumentiert; sie ersetzen keinen neuen visuellen Spieltest durch Lars.
 
-**Nächster Arbeitsauftrag:** Den begrenzten M1-Planetenprototyp auf den M0-Verträgen umsetzen und prüfen. Zuerst gemeinsame versionierte Körperprofile und Kugelkoordinaten, dann begehbare Testgeometrie; bestehende Spielstände bleiben auf `legacy_plane_v9`. Anschließend M2/M3 und die vorgeschlagene lebendige Tierwelt M4. So gehen die Planeten- und Kampagnengrundlagen den Systemen voraus, die sonst auf falschen Orts- oder Speichermodellen aufbauen würden.
+**Parallele Arbeit:** Lars hat einen zweiten Chat mit dem Sozialsystem beauftragt. Dieser Branch bearbeitet Planetengelände, Detailstufen, Kollisionen und das Einstellungsmenü. Kampagnen-, Fortschritts-, Spielerinteraktions- und Speichervertragsdateien werden hier nicht umgebaut. Beide Arbeiten bleiben auf getrennten Branches; vor der Integration werden gemeinsame UI-, Prüf- und Dokumentationsänderungen abgeglichen.
+
+**Nächster Arbeitsauftrag nach dieser Lieferung:** Aster, Menü und fernes Gelände auf Lars' Ziel-PC spielen und Leistung beurteilen. Für die produktive Kugelwelt fehlen weiterhin Weltobjekt-/Faunaanbindung und eine geplante Kampagnenmigration; M2-Editorverträge und anschließend M3/M4 bauen auf der bestehenden Koordinatenentscheidung auf. Der Sozialsystem-Fortschritt wird anhand der Ergebnisse des parallelen Chats eingetragen.

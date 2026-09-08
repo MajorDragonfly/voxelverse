@@ -145,7 +145,7 @@ func _surface_edges() -> void:
 func _system_clock() -> void:
 	for binary in [false, true]:
 		var system := System.new(binary)
-		_expect(system.bodies.size() == (5 if binary else 4), "System fixture body count changed.")
+		_expect(system.bodies.size() == (6 if binary else 5), "System fixture body count changed.")
 		for t in range(0, 240, 5):
 			system.elapsed = float(t)
 			var here: Vector3 = Vector3.RIGHT * 256.0

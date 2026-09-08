@@ -158,7 +158,7 @@ func _create_shortcut_hint() -> void:
 	hint.offset_top = -44.0
 	hint.offset_right = -18.0
 	hint.offset_bottom = -16.0
-	hint.text = "F2 Creature Lab  ·  F8 Display  ·  F10 Mode  ·  F11 Fullscreen"
+	hint.text = "Esc Einstellungen  ·  F2 Kreatureneditor  ·  F4 Planetenlabor  ·  F11 Vollbild"
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hint.add_theme_font_size_override("font_size", 13)

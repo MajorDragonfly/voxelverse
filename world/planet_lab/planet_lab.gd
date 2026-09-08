@@ -4,6 +4,7 @@ class_name PlanetLab
 const System = preload("res://world/space/celestial_system.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Tiles = preload("res://world/planet_lab/sphere_tiles.gd")
+const AdaptiveTiles = preload("res://world/planet_lab/adaptive_sphere_tiles.gd")
 const Walker = preload("res://world/planet_lab/radial_walker.gd")
 const LabSave = preload("res://world/planet_lab/planet_lab_save.gd")
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
@@ -201,13 +202,14 @@ func _open_body(id: String, saved: Dictionary = {}) -> void:
 		remove_child(terrain)
 		terrain.queue_free()
 	body_id = id
-	terrain = Tiles.new()
+	terrain = AdaptiveTiles.new() if system.bodies[id].get("adaptive_tiles", false) else Tiles.new()
 	add_child(terrain)
 	terrain.configure(system.bodies[id])
 	walker = Walker.new()
 	walker.terrain = terrain
 	walker.creature_design = creature_design.duplicate(true)
 	add_child(walker)
+	walker.camera.far = maxf(1800.0, float(system.bodies[id].radius) * 2.0)
 	var location: Dictionary = _coastal_spawn()
 	var heading: Vector3 = Vector3.FORWARD
 	if not saved.is_empty():
@@ -265,7 +267,10 @@ func _process(delta: float) -> void:
 	details.text = "%s  ·  %s  ·  Radius %d m\n%02d:%02d  ·  Zeit ×%.0f  ·  %d / %d Nahkacheln  ·  %d Ursprungswechsel" % [
 		"Zwei Sonnen" if system.binary else "Eine Sonne", "Tag" if daylight > 0.0 else "Nacht", system.bodies[body_id].radius,
 		int(system.elapsed) / 60, int(system.elapsed) % 60, time_speed, terrain.active.size(), Tiles.MAX_NEAR, terrain.rebases]
-	help.text = "WASD  Bewegen     Maus  Umsehen     Leertaste  Springen     Esc  Maus lösen\nTab  Orbit / Landen     M  Nächster Körper     B  Zwei Sonnen     T  Zeit     F5 / F9  Sichern / Laden"
+	if terrain is AdaptiveSphereTiles:
+		details.text += "\n%d Kacheln · Detailstufen %d–%d · %s" % [terrain.tiles.size(), 2, terrain.layout.max_level,
+			"Gelände wird berechnet" if terrain.pending_count() < 0 else "%d Kacheln vorbereitet" % terrain.pending_count()]
+	help.text = "WASD  Bewegen     Maus  Umsehen     Leertaste  Springen     Esc  Einstellungen\nTab  Orbit / Landen     M  Nächster Körper     B  Zwei Sonnen     T  Zeit     F5 / F9  Sichern / Laden"
 
 
 func _update_views() -> void:
@@ -288,7 +293,7 @@ func _update_views() -> void:
 		space_bodies[id].scale = Vector3.ONE * (maxf(1.0, symbol_radius / float(body.radius)) if view_mode == "system" else 1.0)
 		body_labels[id].visible = view_mode == "system" and id != "m1:vesper"
 		body_labels[id].text = "Solis + Vesper" if id == "m1:sol" and system.binary else body.name
-		body_labels[id].position = space_bodies[id].position + Vector3(0, 200, symbol_radius + 240.0)
+		body_labels[id].position = space_bodies[id].position + Vector3(0, 200, maxf(symbol_radius, body.radius) + 240.0)
 		if orbit_lines.has(id):
 			orbit_lines[id].visible = view_mode == "system"
 			orbit_lines[id].position = system.position_at(body.parent_id) if not str(body.parent_id).is_empty() else Vector3.ZERO
@@ -472,6 +477,7 @@ func _build_ui() -> void:
 	_button(buttons, "Orbit", func(): set_view("orbit"))
 	_button(buttons, "Sternsystem", func(): set_view("system"))
 	_button(buttons, "Körper wechseln", next_body)
+	_button(buttons, "Aster · 8 km", func(): _open_body("m1:aster"))
 	_button(buttons, "Sonnen wechseln", toggle_binary)
 	_button(buttons, "Zeit", cycle_time)
 	_button(buttons, "Sichern", save_lab)

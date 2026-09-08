@@ -74,9 +74,9 @@ func _verify_columns(arrays: Array, origin: Vector2, generator: Node, proxy: boo
 			var expected: float = _endpoint(generator, point, 2 if proxy and endpoint == 0 else endpoint)
 			for corner in range(4):
 				_expect(is_equal_approx(_level(vertices, targets, i + corner, endpoint), expected), "A block top slopes or samples the wrong LOD column.")
-	_expect(tops == (256 if proxy else 4096), "Terrain changed its fixed column count.")
+	_expect(tops == (1024 if proxy else 4096), "Terrain changed its fixed column count.")
 	if proxy:
-		_expect(vertices.size() <= 5120, "Voxel proxy exceeds five indexed quads per column.")
+		_expect(vertices.size() <= 20480, "Voxel proxy exceeds five indexed quads per column.")
 
 func _wall_covers(arrays: Array, origin: Vector2, point: Vector2, endpoint: int, low: float, high: float) -> bool:
 	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
