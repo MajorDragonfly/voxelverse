@@ -1,5 +1,11 @@
 # Voxelverse Final Production Roadmap
 
+> Scope note, 8 September 2026: this is the environment/art production plan.
+> The authoritative whole-game sequence, actual phase readiness, spherical planets,
+> star systems, editors and behaviour progression are in [ROADMAP.md](../ROADMAP.md).
+> Phases A–F below are production work packages, not playable game phases.
+> Historical status entries below must be read with the later implementation reports.
+
 ## North-star target
 
 Voxelverse combines:

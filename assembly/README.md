@@ -1,5 +1,9 @@
 # Voxelverse Modular Assembly Framework
 
+For the whole-game implementation order and editor acceptance criteria, see
+[ROADMAP.md](../ROADMAP.md). Creature and building editors exist; vehicle and
+spaceship editors remain planned consumers of this framework.
+
 The long-term rule is simple: procedural worlds provide opportunities, while the player designs the identity of their species and civilization.
 
 The same assembly concepts are shared by:

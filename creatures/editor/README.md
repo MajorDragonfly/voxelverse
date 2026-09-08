@@ -1,4 +1,12 @@
-# Creature Editor V3 – Interaction Polish und High Detail Voxels
+# Kreatureneditor – Einstieg und historisches Bedienkonzept
+
+Standhinweis vom 8. September 2026: Die aktive Szene lädt
+`creature_editor_runtime.gd` auf Basis des V7-Editors. Wirbelsäulenbearbeitung,
+Anatomieanker, Oberflächenbindung, Symmetrie und Undo/Redo sind bereits vorhanden.
+Der Runtime-Editor verbindet den Teilekatalog mit den Entdeckungsfreischaltungen.
+Die geplante Überarbeitung und ihre Abnahme stehen in [ROADMAP.md](../../ROADMAP.md).
+Die V3-Beschreibung unten dokumentiert die frühere Bedienbasis, nicht den gesamten
+heutigen Funktionsumfang.
 
 Diese Dateien gehören in:
 
@@ -57,6 +65,7 @@ res://creatures/editor/creature_editor.tscn
 
 ## Nächster Schritt
 
-V4 soll echte Körper-/Wirbelsäulen-Handles bekommen:
-einzelne Body-Segmente anklicken, dicker/dünner machen, hochziehen,
-runterziehen und die Körperkurve verändern.
+Die bereits vorhandene Körper-/Wirbelsäulenbearbeitung wird gemäß M3 der zentralen
+Roadmap verständlicher und robuster gemacht. Dazu gehören passende Anatomie,
+Animation und tatsächlich wirksame Fähigkeiten für verschiedene Körperformen.
+Vorher werden die dort beschriebenen Kampagnen- und Planetenverträge geprüft.
