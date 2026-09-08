@@ -55,6 +55,7 @@ static func create_species(
 	if random.randf() < 0.46:
 		_add_random_part(blueprint, PartLibrary.CATEGORY_DECOR, random, false)
 
+	AssemblyV7.Ids.ensure_design(blueprint, "species-v7:%d:%s" % [species_seed, role])
 	AssemblyV7.normalize(blueprint)
 	var assembly: Dictionary = blueprint.get("assembly", {})
 	assembly["revision"] = 0

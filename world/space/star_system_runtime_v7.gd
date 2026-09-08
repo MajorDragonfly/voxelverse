@@ -79,7 +79,9 @@ func activate_planet(planet_index: int) -> void:
 
 	var save_service := get_node_or_null("/root/SaveGameService")
 	if save_service != null and save_service.has_method("prepare_planet_transition"):
-		save_service.call("prepare_planet_transition")
+		if not bool(save_service.call("prepare_planet_transition")):
+			_transition_in_progress = false
+			return
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state != null and game_state.has_method("activate_planet"):
 		game_state.call(

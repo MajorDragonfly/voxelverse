@@ -45,8 +45,8 @@ func _test_default_assembly() -> void:
 	var blueprint: Dictionary = AssemblyV7.create_default()
 	_expect(not blueprint.is_empty(), "Default V7 assembly is empty.")
 	_expect(
-		str(blueprint.get("progression", {}).get("phase", "")) == "creature",
-		"Creature progression phase is missing."
+		not blueprint.get("progression", {}).has("phase"),
+		"Creature blueprint must not own the campaign phase."
 	)
 	_expect(
 		int(blueprint.get("assembly", {}).get("schema", 0)) == 7,

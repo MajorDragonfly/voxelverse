@@ -3,6 +3,7 @@ extends Node
 signal phase_changed(new_phase: int)
 signal world_seed_changed(new_seed: int)
 signal planet_changed(system_seed: int, planet_index: int, planet_seed: int)
+signal campaign_event(event: Dictionary)
 
 
 enum Phase {
@@ -17,7 +18,10 @@ enum Phase {
 
 const RANDOM_WORLD_SEED_MIN: int = 1
 const RANDOM_WORLD_SEED_MAX: int = 2_147_483_647
-const STATE_SCHEMA: int = 2
+const STATE_SCHEMA: int = 3
+const Campaign = preload("res://core/campaign/campaign_state.gd")
+const GameEvent = preload("res://core/campaign/game_event.gd")
+
 
 const PHASE_ABILITIES: Dictionary = {
 	Phase.CREATURE: [&"bite", &"eat", &"drink", &"socialize", &"mate"],
@@ -28,6 +32,7 @@ const PHASE_ABILITIES: Dictionary = {
 	Phase.MULTIVERSE: [&"build", &"trade", &"industrialize", &"colonize", &"terraform", &"travel_multiverse"],
 }
 
+var campaign := Campaign.new()
 var current_phase: int = Phase.CREATURE
 var use_random_world_seed: bool = true
 var fixed_world_seed: int = 12345
@@ -40,7 +45,46 @@ var _system_seed_initialized: bool = false
 
 
 func _enter_tree() -> void:
+	campaign.reset()
 	initialize_world_seed()
+
+
+func _process(delta: float) -> void:
+	# No offline catch-up or campaign time spent in editors. SceneTree pause
+	# stops this node; speed applies to campaign simulation, not player physics.
+	var player := get_tree().get_first_node_in_group(&"player")
+	if player != null and player.is_physics_processing():
+		campaign.data["elapsed_seconds"] = float(campaign.data["elapsed_seconds"]) + simulation_delta(delta)
+
+
+func simulation_delta(delta: float) -> float:
+	return maxf(delta, 0.0) * float(campaign.data.get("time_scale", 1.0))
+
+
+func set_simulation_speed(speed: float) -> bool:
+	if speed not in [0.0, 1.0, 2.0, 4.0]:
+		return false
+	campaign.data["time_scale"] = speed
+	return true
+
+
+func get_current_body() -> Dictionary:
+	return campaign.body_for_seed(get_world_seed(), get_system_seed())
+
+
+func record_campaign_event(event: GameEvent) -> bool:
+	if not campaign.accept_event(event, current_phase):
+		return false
+	campaign_event.emit(event.to_dict())
+	return true
+
+
+func get_phase_transition_blockers(new_phase: int) -> Array[String]:
+	if new_phase != current_phase + 1 or not PHASE_ABILITIES.has(new_phase):
+		return ["Only the next supported phase can be entered."]
+	# M5 installs real requirements and a society handoff. Enum/ability labels
+	# alone must never unlock an unfinished game phase.
+	return ["The gameplay and handoff for this phase are not implemented yet."]
 
 
 func initialize_world_seed(
@@ -74,10 +118,8 @@ func start_new_random_world() -> void:
 	current_phase = Phase.CREATURE
 	current_planet_index = 0
 	initialize_world_seed()
+	_reset_campaign_for_new_game()
 	_rebuild_world_generator_if_available()
-	var progression := get_node_or_null("/root/ProgressionService")
-	if progression != null and progression.has_method("reset_for_new_game"):
-		progression.call("reset_for_new_game")
 
 
 func start_world_with_seed(new_world_seed: int) -> void:
@@ -88,6 +130,7 @@ func start_world_with_seed(new_world_seed: int) -> void:
 	current_phase = Phase.CREATURE
 	current_planet_index = 0
 	initialize_world_seed(fixed_world_seed, true)
+	_reset_campaign_for_new_game()
 	_rebuild_world_generator_if_available()
 
 
@@ -142,6 +185,11 @@ func has_ability(ability: StringName) -> bool:
 
 
 func set_phase(new_phase: int) -> void:
+	# Backward compatible debug API. Normal progression uses SaveGameService.
+	debug_set_phase(new_phase)
+
+
+func debug_set_phase(new_phase: int) -> void:
 	if not PHASE_ABILITIES.has(new_phase):
 		push_warning("Unknown game phase: %s" % new_phase)
 		return
@@ -169,6 +217,8 @@ func export_state() -> Dictionary:
 		"system_seed": get_system_seed(),
 		"world_seed": get_world_seed(),
 		"planet_index": get_current_planet_index(),
+		"body_id": get_current_body()["id"],
+		"campaign": campaign.export_state(),
 	}
 
 
@@ -182,6 +232,8 @@ func import_state(data: Dictionary, rebuild_generator: bool = true) -> void:
 	var imported_phase: int = int(data.get("phase", Phase.CREATURE))
 	if not PHASE_ABILITIES.has(imported_phase):
 		imported_phase = Phase.CREATURE
+	if data.get("campaign", {}) is Dictionary and not data.get("campaign", {}).is_empty():
+		campaign.import_state(data["campaign"])
 	use_random_world_seed = false
 	fixed_world_seed = imported_system_seed
 	system_seed = imported_system_seed
@@ -195,6 +247,16 @@ func import_state(data: Dictionary, rebuild_generator: bool = true) -> void:
 	world_seed_changed.emit(world_seed)
 	phase_changed.emit(current_phase)
 	planet_changed.emit(system_seed, current_planet_index, world_seed)
+
+
+func _reset_campaign_for_new_game() -> void:
+	campaign.reset()
+	var progression := get_node_or_null("/root/ProgressionService")
+	if progression != null:
+		progression.call("reset_for_new_game")
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves != null:
+		saves.call("reset_runtime_for_new_game")
 
 
 func _set_system_seed_for_new_run(new_seed: int) -> void:

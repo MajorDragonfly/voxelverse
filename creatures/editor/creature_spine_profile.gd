@@ -1,5 +1,7 @@
 extends RefCounted
 
+const Store = preload("res://core/persistence/design_store.gd")
+
 const SEGMENT_COUNT: int = 7
 const SAVE_VERSION: int = 2
 
@@ -398,25 +400,11 @@ static func load_profile(
 	blueprint: Dictionary,
 	save_path: String = SAVE_PATH
 ) -> bool:
-	if not FileAccess.file_exists(save_path):
+	if Store.read_text(save_path).is_empty():
 		ensure_profile(blueprint)
 		return false
 
-	var file := FileAccess.open(
-		save_path,
-		FileAccess.READ
-	)
-
-	if file == null:
-		ensure_profile(blueprint)
-		return false
-
-	var json_text: String = file.get_as_text()
-	file.close()
-
-	var parsed: Variant = JSON.parse_string(
-		json_text
-	)
+	var parsed: Variant = JSON.parse_string(Store.read_text(save_path))
 
 	if not (parsed is Dictionary):
 		ensure_profile(blueprint)

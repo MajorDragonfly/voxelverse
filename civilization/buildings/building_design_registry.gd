@@ -38,6 +38,7 @@ static func choose_design(
 	if designs.is_empty():
 		var fallback: Dictionary = Blueprint.create_default()
 		Blueprint.set_building_type(fallback, type_name)
+		fallback["design_id"] = Blueprint.Ids.scoped("design", "building-prototype-v1", type_name)
 		fallback["name"] = "%s Prototype" % type_name.capitalize()
 		return fallback
 	var index: int = posmod(selection_seed, designs.size())
@@ -52,6 +53,7 @@ static func instantiate_design(
 	visual.name = "Building_%s" % _safe_node_name(str(design.get("name", "Design")))
 	visual.set("build_collision", with_collision)
 	visual.set_blueprint(design)
+	visual.set_meta("design_ref", {"design_id": design.get("design_id", ""), "revision": int(design.get("revision", 0))})
 	return visual
 
 

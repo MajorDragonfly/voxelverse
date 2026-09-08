@@ -9,10 +9,15 @@ const RuntimeBlueprint = preload(
 
 
 func _ready() -> void:
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves != null:
+		saves.call("load_if_present")
 	super._ready()
 	_merge_current_creature_parts_into_progression()
 	_sync_progression_into_blueprint()
 	_refresh_all()
+	if not blueprint.get("compatibility_warnings", []).is_empty():
+		_set_builder_status("\n".join(blueprint["compatibility_warnings"]))
 
 
 func _refresh_part_palette() -> void:
@@ -56,7 +61,8 @@ func _save_blueprint() -> void:
 	super._save_blueprint()
 	var save_service := get_node_or_null("/root/SaveGameService")
 	if save_service != null and save_service.has_method("save_now"):
-		save_service.call("save_now")
+		if not bool(save_service.call("save_now")):
+			_set_builder_status("Design written, but the campaign snapshot could not be saved.")
 
 
 func _refresh_stats_panel() -> void:
@@ -98,7 +104,7 @@ func _sync_progression_into_blueprint() -> void:
 	if progression.has_method("get_unlocked_part_ids"):
 		progression_data["unlocked_parts"] = progression.call("get_unlocked_part_ids")
 	progression_data["discoveries"] = []
-	progression_data["phase"] = "creature"
+	progression_data.erase("phase")
 	blueprint["progression"] = progression_data
 
 
@@ -117,3 +123,9 @@ func _get_current_creature_part_ids() -> Array[String]:
 func _append_unique(values: Array[String], value: String) -> void:
 	if not value.is_empty() and not values.has(value):
 		values.append(value)
+
+
+func _load_blueprint() -> void:
+	super._load_blueprint()
+	if not blueprint.get("compatibility_warnings", []).is_empty():
+		_set_builder_status("\n".join(blueprint["compatibility_warnings"]))

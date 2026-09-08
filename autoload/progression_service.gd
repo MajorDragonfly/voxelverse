@@ -7,7 +7,9 @@ signal discovery_points_changed(points: int)
 
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 
-const SAVE_SCHEMA: int = 1
+const GameEvent = preload("res://core/campaign/game_event.gd")
+
+const SAVE_SCHEMA: int = 2
 const SPECIES_DISCOVERY_POINTS: int = 3
 const REGION_DISCOVERY_POINTS: int = 1
 
@@ -93,6 +95,8 @@ func register_species_discovery(
 		"name": species_name,
 		"role": str(species_data.get("ecological_role", "unknown")),
 	}
+	_annotate_discovery(discovered_species[species_key], false)
+	_emit_discovery_event(str(discovered_species[species_key].get("id", species_key)))
 	_add_discovery_points(SPECIES_DISCOVERY_POINTS)
 	var unlocked_part: String = _unlock_species_part(species_seed, blueprint)
 	species_discovered.emit(species_key, species_name)
@@ -123,6 +127,8 @@ func register_region_discovery(
 		"x": coordinates.x,
 		"z": coordinates.y,
 	}
+	_annotate_discovery(discovered_regions[region_key], true)
+	_emit_discovery_event(str(discovered_regions[region_key].get("id", region_key)))
 	_add_discovery_points(REGION_DISCOVERY_POINTS)
 	region_discovered.emit(region_key)
 	return true
@@ -143,7 +149,11 @@ func import_state(data: Dictionary) -> void:
 	unlocked_parts = _as_dictionary(data.get("unlocked_parts", {}))
 	discovered_species = _as_dictionary(data.get("discovered_species", {}))
 	discovered_regions = _as_dictionary(data.get("discovered_regions", {}))
-	_remove_invalid_part_unlocks()
+	for entry in discovered_species.values():
+		_annotate_discovery(entry, false)
+	for entry in discovered_regions.values():
+		_annotate_discovery(entry, true)
+	# Retain unlock IDs for unavailable parts so restored content is not lost.
 	_ensure_starter_parts()
 	discovery_points_changed.emit(discovery_points)
 
@@ -231,3 +241,21 @@ func _as_dictionary(value: Variant) -> Dictionary:
 	if value is Dictionary:
 		return value.duplicate(true)
 	return {}
+
+
+func _annotate_discovery(entry: Dictionary, is_region: bool) -> void:
+	var state := get_node_or_null("/root/GameState")
+	if state == null:
+		return
+	var campaign = state.get("campaign")
+	var body: Dictionary = campaign.body_for_seed(int(entry.get("world_seed", 1)), int(state.call("get_system_seed")))
+	entry["body_id"] = body["id"]
+	if not entry.has("id"):
+		entry["id"] = campaign.region_id(body["id"], Vector2i(int(entry.get("x", 0)), int(entry.get("z", 0)))) if is_region else campaign.species_id(body["id"], int(entry.get("species_seed", 1)))
+
+
+func _emit_discovery_event(target_id: String) -> void:
+	var state := get_node_or_null("/root/GameState")
+	if state != null:
+		var event = state.get("campaign").next_event(GameEvent.Kind.DISCOVERY, target_id, int(state.get("current_phase")), "discovered")
+		state.call("record_campaign_event", event)

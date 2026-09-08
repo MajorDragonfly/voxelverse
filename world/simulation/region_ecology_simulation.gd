@@ -7,7 +7,11 @@ var _last_discovered_region: Vector2i = Vector2i(2_147_483_647, 2_147_483_647)
 
 
 func _process(delta: float) -> void:
-	super._process(delta)
+	var game_state := get_node_or_null("/root/GameState")
+	var simulation_delta: float = float(game_state.call("simulation_delta", delta)) if game_state != null else delta
+	if simulation_delta <= 0.0:
+		return
+	super._process(simulation_delta)
 	_register_current_region_discovery()
 
 

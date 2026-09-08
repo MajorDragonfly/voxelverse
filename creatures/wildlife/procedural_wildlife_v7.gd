@@ -30,6 +30,7 @@ const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 @export_range(5.0, 100.0, 1.0) var carcass_bite_nutrition: float = 18.0
 
 var blueprint: Dictionary = {}
+var _campaign_identity: Dictionary = {}
 var ecological_role: String = "forager"
 var maximum_health: float = 40.0
 var current_health: float = 40.0
@@ -69,6 +70,7 @@ func _ready() -> void:
 	_random.seed = individual_seed * 97_409 + species_seed
 	_player = get_tree().get_first_node_in_group(&"player") as Node3D
 	_build_species()
+	_campaign_identity = _create_campaign_identity()
 	_choose_wander_state()
 
 
@@ -381,3 +383,19 @@ func _disable_collisions(root: Node) -> void:
 		collision_object.input_ray_pickable = false
 	for child in root.get_children():
 		_disable_collisions(child)
+
+
+func get_campaign_identity() -> Dictionary:
+	return _campaign_identity.duplicate(true)
+
+
+func _create_campaign_identity() -> Dictionary:
+	var state := get_node_or_null("/root/GameState")
+	if state == null:
+		return {}
+	var campaign = state.get("campaign")
+	var body: Dictionary = state.call("get_current_body")
+	var region: String = campaign.region_id(body["id"], region_coordinates)
+	return {"object_id": campaign.object_id(region, "wildlife:%d:%d" % [species_seed, individual_seed]),
+		"species_id": campaign.species_id(body["id"], species_seed), "body_id": body["id"], "region_id": region,
+		"design_ref": {"design_id": blueprint.get("design_id", ""), "revision": 0}}

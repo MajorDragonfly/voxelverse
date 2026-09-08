@@ -4,6 +4,10 @@ class_name BuildingBlueprint
 const Assembly = preload("res://assembly/core/modular_assembly.gd")
 const Parts = preload("res://civilization/buildings/building_part_library.gd")
 
+const Compatibility = preload("res://core/persistence/design_compatibility.gd")
+const Ids = preload("res://core/campaign/campaign_ids.gd")
+const Store = preload("res://core/persistence/design_store.gd")
+
 const SAVE_VERSION: int = 1
 const DESIGN_DIR: String = "user://building_designs"
 const AUTOSAVE_PATH: String = "user://building_builder_autosave.json"
@@ -36,8 +40,10 @@ static func create_default() -> Dictionary:
 
 
 static func normalize(blueprint: Dictionary) -> Dictionary:
+	Ids.ensure_design(blueprint)
 	Assembly.normalize(blueprint, "building")
 	blueprint["assembly_type"] = "building"
+	Compatibility.resolve_building(blueprint)
 	var building: Dictionary = blueprint.get("building", {})
 	building["schema"] = SAVE_VERSION
 	var type_name: String = str(building.get("type", "residential"))
@@ -119,24 +125,17 @@ static func save_to_file(
 		Assembly.increment_revision(blueprint)
 	var data: Dictionary = Assembly.serialize(blueprint)
 	data["building"] = blueprint.get("building", {}).duplicate(true)
-	var file := FileAccess.open(path, FileAccess.WRITE)
-	if file == null:
-		return FileAccess.get_open_error()
-	file.store_string(JSON.stringify(data, "\t"))
-	file.close()
-	return OK
+	return Store.write(path, data)
 
 
 static func load_from_file(path: String) -> Dictionary:
-	if not FileAccess.file_exists(path):
+	var text: String = Store.read_text(path)
+	if text.is_empty():
 		return {}
-	var file := FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		return {}
-	var parsed: Variant = JSON.parse_string(file.get_as_text())
-	file.close()
+	var parsed: Variant = JSON.parse_string(text)
 	if not (parsed is Dictionary):
 		return {}
+	Ids.ensure_design(parsed, path)
 	var blueprint: Dictionary = Assembly.deserialize(parsed)
 	blueprint["building"] = parsed.get("building", {}).duplicate(true)
 	normalize(blueprint)
@@ -145,20 +144,7 @@ static func load_from_file(path: String) -> Dictionary:
 
 static func list_designs() -> Array[String]:
 	_ensure_design_directory()
-	var result: Array[String] = []
-	var absolute_path: String = ProjectSettings.globalize_path(DESIGN_DIR)
-	var directory := DirAccess.open(absolute_path)
-	if directory == null:
-		return result
-	directory.list_dir_begin()
-	var filename: String = directory.get_next()
-	while not filename.is_empty():
-		if not directory.current_is_dir() and filename.ends_with(".json"):
-			result.append(filename)
-		filename = directory.get_next()
-	directory.list_dir_end()
-	result.sort()
-	return result
+	return Store.list_buildings()
 
 
 static func get_design_path(filename: String) -> String:

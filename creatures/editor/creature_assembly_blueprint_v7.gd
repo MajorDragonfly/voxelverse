@@ -11,6 +11,10 @@ const SpineProfile = preload(
 	"res://creatures/editor/creature_spine_profile.gd"
 )
 
+const Compatibility = preload("res://core/persistence/design_compatibility.gd")
+const Ids = preload("res://core/campaign/campaign_ids.gd")
+const Store = preload("res://core/persistence/design_store.gd")
+
 const SAVE_VERSION: int = 7
 const SAVE_PATH: String = "user://creature_assembly_v7.json"
 const LEGACY_V5_PATH: String = "user://creature_editor_blueprint_v5.json"
@@ -40,7 +44,9 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 		blueprint = BaseBlueprint.create_default()
 	for field_name in REMOVED_GENETIC_FIELDS:
 		blueprint.erase(field_name)
+	Ids.ensure_design(blueprint)
 	SpineProfile.ensure_profile(blueprint)
+	Compatibility.resolve_creature(blueprint)
 
 	var assembly: Dictionary = blueprint.get("assembly", {})
 	assembly["schema"] = SAVE_VERSION
@@ -58,7 +64,7 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 	blueprint["assembly"] = assembly
 
 	var progression: Dictionary = blueprint.get("progression", {})
-	progression["phase"] = "creature"
+	progression.erase("phase") # Campaign phase belongs exclusively to GameState.
 	progression["unlocked_parts"] = progression.get(
 		"unlocked_parts",
 		[]
@@ -120,6 +126,7 @@ static func save_to_file(
 	normalize(blueprint)
 	var serialized: Dictionary = BaseBlueprint._serialize_blueprint(blueprint)
 	serialized["version"] = SAVE_VERSION
+	serialized["design_id"] = blueprint["design_id"]
 	serialized["assembly"] = blueprint.get("assembly", {}).duplicate(true)
 	serialized["progression"] = blueprint.get(
 		"progression",
@@ -182,29 +189,23 @@ static func save_to_file(
 
 	for field_name in REMOVED_GENETIC_FIELDS:
 		serialized.erase(field_name)
-	var file := FileAccess.open(save_path, FileAccess.WRITE)
-	if file == null:
-		return FileAccess.get_open_error()
-	file.store_string(JSON.stringify(serialized, "\t"))
-	file.close()
-	return OK
+	return Store.write(save_path, serialized)
 
 
 static func load_from_file(
 	save_path: String = SAVE_PATH
 ) -> Dictionary:
-	if not FileAccess.file_exists(save_path):
+	var text: String = Store.read_text(save_path)
+	if text.is_empty():
 		return {}
-	var file := FileAccess.open(save_path, FileAccess.READ)
-	if file == null:
-		return {}
-	var parsed: Variant = JSON.parse_string(file.get_as_text())
-	file.close()
+	var parsed: Variant = JSON.parse_string(text)
 	if not (parsed is Dictionary):
 		push_warning("Creature assembly save is not a dictionary: %s" % save_path)
 		return {}
 
 	var blueprint: Dictionary = BaseBlueprint._deserialize_blueprint(parsed)
+	blueprint["design_id"] = str(parsed.get("design_id", ""))
+	Ids.ensure_design(blueprint, save_path)
 	var body_data: Dictionary = parsed.get("body", {})
 	var body: Dictionary = blueprint.get("body", {})
 	body["spine"] = _deserialize_spine(body_data.get("spine", []))
@@ -277,6 +278,7 @@ static func load_best_available() -> Dictionary:
 			SpineProfile.load_profile(blueprint)
 	if blueprint.is_empty():
 		return create_default()
+	Ids.ensure_design(blueprint, LEGACY_V5_PATH if not Store.read_text(LEGACY_V5_PATH).is_empty() else LEGACY_BASE_PATH)
 	normalize(blueprint)
 	return blueprint
 

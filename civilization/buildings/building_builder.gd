@@ -39,11 +39,15 @@ var _design_option: OptionButton
 
 
 func _ready() -> void:
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves != null:
+		saves.call("load_if_present")
 	blueprint = Blueprint.load_autosave()
 	Blueprint.normalize(blueprint)
 	_build_world()
 	_build_ui()
 	_refresh_all()
+	_show_compatibility_warnings()
 
 
 func _process(_delta: float) -> void:
@@ -535,12 +539,18 @@ func _save_design() -> void:
 	if path.is_empty():
 		_set_status("Could not save building design.")
 		return
+	if not _commit_campaign():
+		_set_status("Design written, but the campaign snapshot could not be saved.")
+		return
 	_set_status("Saved design: %s" % path.get_file())
 	_refresh_all()
 
 
 func _save_autosave() -> void:
 	var error: Error = Blueprint.save_autosave(blueprint)
+	if error == OK and not _commit_campaign():
+		_set_status("Design written, but the campaign snapshot could not be saved.")
+		return
 	_set_status("Autosave written." if error == OK else "Autosave failed: %s" % error)
 
 
@@ -559,6 +569,7 @@ func _load_selected_design() -> void:
 	_name_edit.text = str(blueprint.get("name", "Building"))
 	_set_status("Loaded %s." % filename)
 	_refresh_all()
+	_show_compatibility_warnings()
 
 
 func _on_name_changed(new_text: String) -> void:
@@ -622,3 +633,13 @@ func _clear_children(root: Node) -> void:
 func _set_status(text_value: String) -> void:
 	if _status_label != null:
 		_status_label.text = text_value
+
+
+func _show_compatibility_warnings() -> void:
+	if not blueprint.get("compatibility_warnings", []).is_empty():
+		_set_status("\n".join(blueprint["compatibility_warnings"]))
+
+
+func _commit_campaign() -> bool:
+	var saves := get_node_or_null("/root/SaveGameService")
+	return saves == null or bool(saves.call("save_now"))

@@ -183,6 +183,7 @@ static func serialize(blueprint: Dictionary) -> Dictionary:
 		serialized_parts.append({
 			"uid": str(part.get("uid", "")),
 			"part_id": str(part.get("part_id", "")),
+			"missing_part_id": str(part.get("missing_part_id", "")),
 			"position": _serialize_vector3(_as_vector3(part.get("position", Vector3.ZERO))),
 			"rotation": _serialize_vector3(_as_vector3(part.get("rotation", Vector3.ZERO))),
 			"scale": _serialize_vector3(_as_vector3(part.get("scale", Vector3.ONE))),
