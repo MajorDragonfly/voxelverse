@@ -46,6 +46,22 @@ func _run() -> void:
 	preview.set_motion("edit")
 	_expect(JSON.stringify(loaded) == before, "Motion preview mutated the design.")
 	preview.free()
+	for pair_count: int in [2, 3]:
+		var many: Dictionary = Assembly.create_default()
+		for index in range(pair_count - 1):
+			Assembly.BaseBlueprint.add_part(many, "legs_walker")
+		Anatomy.reset_all_anchors(many)
+		var walker := Preview.new()
+		root.add_child(walker)
+		walker.set_editor_state(many, -1, -1, false)
+		walker.set_motion("walk")
+		_expect(walker._motion._legs.size() == pair_count * 2, "Multi-legged gait lost a mirrored limb.")
+		walker._motion.sample("walk", 0.15)
+		var foot: Node3D = walker._motion._legs[0]["foot"]
+		var first: Vector3 = foot.global_position
+		walker._motion.sample("walk", 0.60)
+		_expect(foot.global_position.is_finite() and not foot.global_position.is_equal_approx(first), "Four/six-legged gait did not move its foot.")
+		walker.free()
 	var scene: PackedScene = load("res://creatures/editor/creature_editor.tscn")
 	var editor: Node = scene.instantiate()
 	root.add_child(editor)
@@ -111,13 +127,19 @@ func _geometry_count(node: Node) -> int:
 
 
 func _click(position: Vector2) -> void:
+	var motion := InputEventMouseMotion.new()
+	motion.position = position
+	root.push_input(motion, true)
 	for pressed: bool in [true, false]:
 		var event := InputEventMouseButton.new()
 		event.position = position
 		event.global_position = position
 		event.button_index = MOUSE_BUTTON_LEFT
 		event.pressed = pressed
-		Input.parse_input_event(event)
+		event.button_mask = MOUSE_BUTTON_MASK_LEFT if pressed else 0
+		# Coordinates come from the logical viewport, which can be scaled by
+		# DisplaySettings. Mark them local instead of applying scaling twice.
+		root.push_input(event, true)
 		await process_frame
 
 

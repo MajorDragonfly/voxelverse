@@ -330,6 +330,7 @@ func _creature() -> void:
 	_camera.look_at(Vector3(0, 0.2, 0))
 	for batched: bool in [false, true]:
 		var preview: Node3D = preview_script.new()
+		preview.set("sculpted_surface", false) # Preserve the original voxel parity gate.
 		preview.set("batch_runtime_boxes", batched)
 		preview.set("blueprint", blueprint.duplicate(true))
 		var started: int = Time.get_ticks_usec()
@@ -339,6 +340,19 @@ func _creature() -> void:
 		await _capture("creature_batched" if batched else "creature_individual", details)
 		preview.queue_free()
 		await process_frame
+	var sculpted: Node3D = preview_script.new()
+	sculpted.set("blueprint", blueprint.duplicate(true))
+	var started: int = Time.get_ticks_usec()
+	_scene.add_child(sculpted)
+	var details: Dictionary = _render_inventory(sculpted)
+	details["build_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+	_camera.position = Vector3(4.0, 2.8, -5.0)
+	_camera.look_at(Vector3(0, 0.2, 0))
+	await _capture("creature_sculpted", details)
+	if int(details["mesh_nodes"]) > 120:
+		_failures.append("Sculpted reference creature exceeded its 120-mesh budget.")
+	sculpted.queue_free()
+	await process_frame
 
 
 func _water_continuity() -> void:
