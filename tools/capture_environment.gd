@@ -472,9 +472,10 @@ func _hydrology() -> void:
 	_camera.position = target + Vector3(lateral.x * 105.0, 145.0, lateral.y * 105.0)
 	_camera.look_at(target)
 	await _capture("hydrology_overview", details)
-	var shore: Vector2 = center + lateral * (float(lake["radius"]) + 17.0)
-	_camera.position = Vector3(shore.x, maxf(float(lake["level"]) + 8.0, generator.get_terrain_height(shore.x, shore.y) + 6.0), shore.y)
-	_camera.look_at(Vector3(center.x, float(lake["level"]), center.y))
+	var shore_target := Vector3(center.x, float(lake["level"]) + 0.03, center.y)
+	_camera.position = _lake_shore_camera(generator, center, float(lake["radius"]), shore_target.y)
+	_camera.look_at(shore_target)
+	details["shore_camera"] = str(_camera.position)
 	await _capture("hydrology_shore", details)
 	# Freeze unrelated animation and use the live terrain materials/coverage.
 	# The image gate must see a real intermediate shape, not only a timer value.
@@ -515,6 +516,23 @@ func _hydrology() -> void:
 	print("HYDROLOGY_RENDER ", JSON.stringify({"seed": _config["seed"], "lake": details, "transition_rgb_changes": [first_change, second_change]}))
 	for label: String in ["terrain_transition_0", "terrain_transition_50", "terrain_transition_100"]:
 		_comparison_images.erase(label)
+
+
+func _lake_shore_camera(generator: Node, center: Vector2, radius: float, level: float) -> Vector3:
+	# A spring basin may sit behind a high rim. Camera-ground clearance alone
+	# does not make its water visible; check the entire ray to the lake centre.
+	var best := Vector3(center.x, INF, center.y)
+	for i in range(16):
+		var shore: Vector2 = center + Vector2.from_angle(TAU * i / 16.0) * (radius + 17.0)
+		var height: float = maxf(level + 8.0, generator.get_terrain_height(shore.x, shore.y) + 6.0)
+		for step in range(1, 32):
+			var fraction: float = step / 32.0
+			var point: Vector2 = shore.lerp(center, fraction)
+			var blocker: float = generator.get_visual_terrain_height(point.x, point.y) + 2.0
+			height = maxf(height, (blocker - level * fraction) / (1.0 - fraction))
+		if height < best.y:
+			best = Vector3(shore.x, height, shore.y)
+	return best
 
 
 func _render_inventory(node: Node) -> Dictionary:
