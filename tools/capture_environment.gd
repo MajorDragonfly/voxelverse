@@ -491,7 +491,8 @@ func _underwater() -> void:
 	plane.size = Vector2(220, 220)
 	water.mesh = plane
 	water.position.y = sea + 0.03
-	water.material_override = preload("res://world/visuals/terrain/water_mesh_builder_v7.gd").make_material(root.get_node("WorldGenerator").get_planet_profile(), {})
+	var builder: Script = load("res://world/visuals/terrain/water_mesh_builder_v7.gd")
+	water.material_override = builder.make_material(root.get_node("WorldGenerator").get_planet_profile(), {})
 	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	_scene.add_child(water)
 	var checker := Shader.new()
