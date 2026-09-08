@@ -369,6 +369,12 @@ func _reconfigure_legacy_buttons() -> void:
 	pass
 
 
+func _clear_control_children(parent: Control) -> void:
+	for child in parent.get_children():
+		parent.remove_child(child)
+		child.queue_free()
+
+
 func _set_mode(mode: String) -> void:
 	_end_gesture()
 	_studio_mode = mode
@@ -804,7 +810,7 @@ func _on_name_changed(value: String) -> void:
 	if str(blueprint.get("name", "")) == value:
 		return
 	_record_before_edit("Kreatur benennen")
-	Blueprint.set_name(blueprint, value)
+	blueprint["name"] = value.strip_edges()
 
 
 func _save_migrated_assembly_without_revision() -> void:
@@ -813,7 +819,9 @@ func _save_migrated_assembly_without_revision() -> void:
 
 func _save_blueprint() -> void:
 	_last_save_ok = false
-	Blueprint.set_name(blueprint, _creature_name_edit.text)
+	blueprint["name"] = _creature_name_edit.text.strip_edges()
+	if str(blueprint["name"]).is_empty():
+		blueprint["name"] = "Neue Kreatur"
 	var candidate: Dictionary = blueprint.duplicate(true)
 	AssemblyV7.normalize(candidate)
 	AnatomyV7.rebind_all_parts(candidate)
