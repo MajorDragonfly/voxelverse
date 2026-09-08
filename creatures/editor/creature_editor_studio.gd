@@ -797,15 +797,33 @@ func _place_on_hit(index: int, hit: Dictionary) -> void:
 func _move_part_to_cursor(position: Vector2) -> void:
 	if _is_pointer_over_editor_panel(position):
 		return
-	var hit: Dictionary = _surface_hit(position)
-	if hit.is_empty():
-		return
-	_record_before_edit("Teil verschieben")
 	if AssemblyV7.is_snap_to_surface(blueprint):
+		var hit: Dictionary = _surface_hit(position)
+		if hit.is_empty():
+			return
+		_record_before_edit("Teil verschieben")
 		_place_on_hit(selected_part_index, hit)
 	else:
 		var part: Dictionary = blueprint["parts"][selected_part_index]
-		part["position"] = hit["position"] + hit["normal"] * 0.15
+		var current: Vector3 = Blueprint._as_vector3(part.get("position", Vector3.ZERO))
+		var normal: Vector3 = _camera.global_basis.z
+		var origin: Vector3 = _camera.project_ray_origin(position)
+		var direction: Vector3 = _camera.project_ray_normal(position)
+		var denominator: float = normal.dot(direction)
+		if absf(denominator) < 0.0001:
+			return
+		var distance: float = normal.dot(_preview.to_global(current) - origin) / denominator
+		var desired: Vector3 = _preview.to_local(origin + direction * distance)
+		if bool(part.get("mirrored", false)):
+			desired.x = absf(desired.x)
+		var anchor: Vector3 = AnatomyV7.get_anchor_position(blueprint, part)
+		var shape: Vector3 = Blueprint.get_body_shape(blueprint) * Blueprint.get_body_scale(blueprint)
+		shape.z *= SpineProfile.get_body_length_scale(blueprint)
+		var limit: Vector3 = AttachmentNormalizerV7._get_maximum_offset(str(part.get("category", "")), shape)
+		var offset: Vector3 = (desired - anchor).clamp(-limit, limit)
+		offset = offset.limit_length(limit.length() * 0.70)
+		_record_before_edit("Teil frei verschieben")
+		part["position"] = anchor + offset
 		AnatomyV7.capture_manual_offset(blueprint, selected_part_index)
 	_refresh_preview()
 	_refresh_stats_panel()

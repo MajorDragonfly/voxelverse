@@ -108,6 +108,16 @@ func _run() -> void:
 	_expect(editor.get("blueprint")["parts"].size() == count + 1, "Dropping a discovered part on the body failed.")
 	if editor.get("blueprint")["parts"].size() == count + 1:
 		_expect(bool(editor.get("blueprint")["parts"][-1]["mirrored"]), "A new paired part ignored symmetry.")
+		editor.call("_toggle_surface_snap")
+		var moving_part: Dictionary = editor.get("blueprint")["parts"][-1]
+		var previous: Vector3 = moving_part["position"]
+		editor.call("_move_part_to_cursor", body_point + Vector2(25, -90))
+		_expect(not moving_part["position"].is_equal_approx(previous), "Turning off snapping did not allow manual movement.")
+		var manual: Vector3 = moving_part["manual_offset"]
+		Assembly.save_to_file(editor.get("blueprint"), "user://studio_free_part.json")
+		var restored: Dictionary = Assembly.load_from_file("user://studio_free_part.json")
+		editor.AttachmentNormalizerV7.normalize(restored)
+		_expect(Assembly.BaseBlueprint._as_vector3(restored["parts"][-1]["manual_offset"]).is_equal_approx(manual), "Free part placement did not survive normalization and reload.")
 	var design_before_preview: String = JSON.stringify(editor.get("blueprint"))
 	editor.call("_set_mode", "test")
 	editor.call("_choose_motion", "run")
