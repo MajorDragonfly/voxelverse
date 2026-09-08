@@ -30,28 +30,3 @@ func _apply_terrain_material(terrain_mesh: MeshInstance3D) -> void:
 	material.set_shader_parameter(&"rock_slope_start", 0.22)
 	material.set_shader_parameter(&"rock_slope_end", 0.58)
 	material.set_shader_parameter(&"strata_strength", 0.14)
-
-
-func _apply_water_material(chunk: Node, water_mesh: MeshInstance3D) -> void:
-	super._apply_water_material(chunk, water_mesh)
-	var material := water_mesh.material_override as ShaderMaterial
-	if material == null:
-		return
-	var profile: Dictionary = WorldGenerator.get_planet_profile()
-	var slots: Dictionary = profile.get("material_slots", {})
-	var deep: Color = slots.get("water_deep", deep_water_color)
-	var shallow: Color = slots.get("water_shallow", shallow_water_color)
-	# Palette RGB describes pigment; preserve the water renderer's opacity.
-	deep.a = deep_water_color.a
-	shallow.a = shallow_water_color.a
-	material.set_shader_parameter("deep_color", deep)
-	material.set_shader_parameter("shallow_color", shallow)
-	var atmosphere: Dictionary = profile.get("atmosphere", {})
-	var horizon: Color = atmosphere.get("sky_horizon", Color(0.7, 0.8, 0.9))
-	material.set_shader_parameter("reflection_tint", Vector3(horizon.r, horizon.g, horizon.b))
-	var stillness: float = 0.0
-	if WorldGenerator.has_method("get_biome_composition"):
-		var composition: Dictionary = WorldGenerator.call("get_biome_composition", chunk.global_position.x, chunk.global_position.z)
-		stillness = float(composition.get("water_style", {}).get("still", 0.0))
-	material.set_shader_parameter("wave_height", wave_height * lerpf(1.0, 0.25, stillness))
-	material.set_shader_parameter("wave_speed", wave_speed * lerpf(1.0, 0.4, stillness))

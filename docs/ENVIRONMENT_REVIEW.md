@@ -20,7 +20,7 @@ working graphical session is required. `--renderer gl_compatibility` explicitly
 tests Compatibility. Unexpected renderer fallback fails the run.
 
 Options include `--size 1920 1080`, `--seeds 15838 23757` and
-`--cases world assets species cluster creature`. The default resolution is 1280 × 720.
+`--cases world assets species cluster creature water`. The default resolution is 1280 × 720.
 
 | Case | Captures and measurements |
 |---|---|
@@ -29,6 +29,7 @@ Options include `--size 1920 1080`, `--seeds 15838 23757` and
 | species | Three Near structural variants side by side for oak, pine, bush and rock |
 | cluster | Identical Far vegetation before/after clustering, with unchanged camera, placements and palette |
 | creature | Identical generated grazer before/after runtime voxel batching, preserving its articulated roots |
+| water | Shared surface, fully clipped local fallback, partial overlap and an intentionally doubled-water negative control; fixed shader time in a review-only copy |
 
 Each directory contains PNGs, `capture.json` and the engine log. The combined
 `results.json` records adapter/API, renderer, resolution, sample count and
@@ -50,6 +51,14 @@ mean RGB difference no greater than 0.004 (normalized 0–1) from the unbatched 
 This allows small raster/shadow rounding differences while catching palette or
 geometry corruption. Script errors, shader failures and resource-leak warnings
 fail the run.
+
+The water fixture uses an unchanged bed and camera with fixed shader time. Full
+and partial fallback clipping must stay within 0.004 mean RGB difference from the
+single surface. The deliberately overlapping control must differ by at least
+0.001, so a broken or insensitive image gate cannot silently pass. These images
+test surface ownership, while the world/shore captures retain animated gameplay
+water. Mesh-edge and teleport/teardown tests run separately in
+`tests/water_continuity_test.gd`.
 
 ## CI scope
 

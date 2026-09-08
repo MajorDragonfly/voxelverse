@@ -1,8 +1,8 @@
 shader_type spatial;
 render_mode blend_mix, cull_disabled, diffuse_burley, specular_schlick_ggx;
 
-uniform vec4 deep_color : source_color = vec4(0.015, 0.14, 0.25, 0.84);
-uniform vec4 shallow_color : source_color = vec4(0.035, 0.36, 0.46, 0.62);
+uniform vec4 deep_color : source_color = vec4(0.015, 0.14, 0.25, 0.82);
+uniform vec4 shallow_color : source_color = vec4(0.035, 0.36, 0.46, 0.68);
 uniform vec3 reflection_tint : source_color = vec3(0.55, 0.78, 0.88);
 uniform vec4 foam_color : source_color = vec4(0.70, 0.90, 0.92, 1.0);
 uniform float wave_height = 0.042;
@@ -14,15 +14,15 @@ uniform float secondary_wave_scale = 0.31;
 uniform float water_roughness = 0.18;
 uniform float water_specular = 0.78;
 uniform float refraction_strength = 0.018;
+uniform float depth_fade_distance = 4.8;
+uniform float foam_distance = 0.85;
 uniform sampler2D scene_depth : hint_depth_texture, repeat_disable, filter_nearest;
 uniform sampler2D scene_color : hint_screen_texture, repeat_disable, filter_linear;
-uniform bool clip_loaded_chunks = false;
-uniform sampler2D coverage : filter_nearest, repeat_disable;
-uniform vec2 coverage_origin = vec2(0.0);
-uniform vec2 chunk_size = vec2(32.0);
+uniform bool clip_shared_surface = false;
+uniform vec4 shared_surface_bounds = vec4(0.0);
 varying vec3 world_position;
 varying vec3 world_wave_normal;
-varying vec2 water_data;
+varying float wave_amplitude;
 
 float scene_distance(vec2 uv, mat4 inverse_projection) {
 	float depth = texture(scene_depth, uv).r;
@@ -40,35 +40,35 @@ void vertex() {
 	float phase_a = dot(original.xz, vec2(wave_scale, wave_scale * 0.72)) + TIME * wave_speed;
 	float phase_b = dot(original.xz, vec2(-secondary_wave_scale * 0.43, secondary_wave_scale)) + TIME * secondary_wave_speed;
 	// World coordinates keep displacement and ripples continuous across chunks.
-	VERTEX.y += sin(phase_a) * wave_height + sin(phase_b) * secondary_wave_height;
+	wave_amplitude = mix(1.0, 0.25, clamp(COLOR.b, 0.0, 1.0));
+	VERTEX.y += (sin(phase_a) * wave_height + sin(phase_b) * secondary_wave_height) * wave_amplitude;
 	float dx = cos(phase_a) * wave_height * wave_scale - cos(phase_b) * secondary_wave_height * secondary_wave_scale * 0.43;
 	float dz = cos(phase_a) * wave_height * wave_scale * 0.72 + cos(phase_b) * secondary_wave_height * secondary_wave_scale;
-	world_wave_normal = normalize(vec3(-dx, 1.0, -dz));
+	world_wave_normal = normalize(vec3(-dx * wave_amplitude, 1.0, -dz * wave_amplitude));
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	water_data = COLOR.rg;
 }
 
 void fragment() {
-	if (clip_loaded_chunks) {
-		vec2 uv = (floor((world_position.xz + chunk_size * 0.5) / chunk_size) - coverage_origin + 0.5) / 16.0;
-		if (all(greaterThanEqual(uv, vec2(0.0))) && all(lessThan(uv, vec2(1.0))) && texture(coverage, uv).r > 0.5) { discard; }
+	if (clip_shared_surface) {
+		if (all(greaterThanEqual(world_position.xz, shared_surface_bounds.xy)) && all(lessThan(world_position.xz, shared_surface_bounds.zw))) { discard; }
 	}
 	float ripple_a = cos(dot(world_position.xz, vec2(1.7, 0.9)) + TIME * 1.1);
 	float ripple_b = cos(dot(world_position.xz, vec2(-0.8, 2.5)) - TIME * 0.8);
-	vec3 ripple_normal = normalize(world_wave_normal + vec3(ripple_a * 0.055, 0.0, ripple_b * 0.045));
+	vec3 ripple_normal = normalize(world_wave_normal + vec3(ripple_a * 0.055, 0.0, ripple_b * 0.045) * wave_amplitude);
 	vec3 view_normal = normalize((VIEW_MATRIX * vec4(ripple_normal, 0.0)).xyz);
 	NORMAL = view_normal;
 	float surface_distance = -VERTEX.z;
 	float thickness = max(scene_distance(SCREEN_UV, INV_PROJECTION_MATRIX) - surface_distance, 0.0);
-	float absorption = 1.0 - exp(-thickness * 0.32);
-	float depth_weight = max(absorption, water_data.r * 0.55);
+	// The same rendered bed drives absorption on the whole surface. Per-tile
+	// vertex depth estimates produced a visible colour grid at LOD handoff.
+	float depth_weight = 1.0 - exp(-thickness * 1.536 / max(depth_fade_distance, 0.001));
 	float fresnel = pow(1.0 - clamp(dot(view_normal, VIEW), 0.0, 1.0), 4.0);
 	vec2 offset = view_normal.xy * refraction_strength * smoothstep(0.0, 1.5, thickness);
 	vec2 refracted_uv = clamp(SCREEN_UV + offset, vec2(0.001), vec2(0.999));
 	// Refuse foreground samples so banks and creatures never smear into water.
 	if (scene_distance(refracted_uv, INV_PROJECTION_MATRIX) < surface_distance) { refracted_uv = SCREEN_UV; }
 	vec3 refracted = texture(scene_color, refracted_uv).rgb;
-	float edge = 1.0 - smoothstep(0.03, 0.75, thickness);
+	float edge = 1.0 - smoothstep(0.03, max(foam_distance, 0.05), thickness);
 	float surf = sin(thickness * 15.0 - TIME * 1.3 + sin(world_position.x * 1.1 + world_position.z * 0.7));
 	float foam = edge * smoothstep(-0.35, 0.5, surf) * 0.80;
 	vec3 pigment = mix(shallow_color.rgb, deep_color.rgb, depth_weight);

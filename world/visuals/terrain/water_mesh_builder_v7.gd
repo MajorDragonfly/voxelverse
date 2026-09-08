@@ -4,6 +4,7 @@ class_name WaterMeshBuilderV7
 const OCEAN_SHADER: Shader = preload(
 	"res://world/visuals/terrain/ocean_surface.gdshader"
 )
+const Style = preload("res://world/visuals/terrain/water_surface_style.gd")
 
 
 static func build(
@@ -23,15 +24,8 @@ static func build(
 	var subdivisions: int = maxi(int(settings.get("subdivisions", 24)), 4)
 	var columns: int = subdivisions + 1
 	var rows: int = subdivisions + 1
-	var depth_fade_distance: float = maxf(
-		float(settings.get("depth_fade_distance", 4.5)),
-		0.001
-	)
-	var foam_distance: float = maxf(
-		float(settings.get("foam_distance", 0.90)),
-		0.05
-	)
 	var water_height: float = WorldGenerator.get_sea_level() + 0.03
+	var style_cache: Dictionary = {}
 
 	var vertices := PackedVector3Array()
 	var normals := PackedVector3Array()
@@ -58,22 +52,11 @@ static func build(
 				column_ratio
 			)
 			var index: int = row * columns + column
-			var terrain_height: float = float(chunk.call("get_surface_height_at_local_position", local_x, local_z))
-			var actual_depth: float = maxf(water_height - terrain_height, 0.0)
-			var depth_weight: float = smoothstep(
-				0.0,
-				depth_fade_distance,
-				actual_depth
-			)
-			var foam_weight: float = 1.0 - smoothstep(
-				0.04,
-				foam_distance,
-				actual_depth
-			)
+			var point := Vector2(chunk.global_position.x + local_x, chunk.global_position.z + local_z)
 			vertices[index] = Vector3(local_x, 0.0, local_z)
 			normals[index] = Vector3.UP
 			uvs[index] = Vector2(column_ratio, row_ratio)
-			colors[index] = Color(depth_weight, foam_weight, 0.0, 1.0)
+			colors[index] = Color(0.0, 0.0, Style.sample_stillness(WorldGenerator, point, style_cache), 1.0)
 
 	for row in range(rows - 1):
 		for column in range(columns - 1):
@@ -93,6 +76,15 @@ static func build(
 	var array_mesh := ArrayMesh.new()
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
+	water_mesh.mesh = array_mesh
+	water_mesh.material_override = make_material(WorldGenerator.get_planet_profile(), settings)
+	water_mesh.position = Vector3(0.0, water_height, 0.0)
+	water_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	water_mesh.extra_cull_margin = displacement_margin(settings)
+	set_shared_coverage(chunk, chunk.get_meta(&"shared_water_bounds", Rect2()))
+
+
+static func make_material(profile: Dictionary, settings: Dictionary) -> ShaderMaterial:
 	var material := ShaderMaterial.new()
 	material.shader = OCEAN_SHADER
 	for parameter_name in [
@@ -109,20 +101,39 @@ static func build(
 		"water_roughness",
 		"water_specular",
 		"refraction_strength",
+		"foam_distance",
+		"depth_fade_distance",
 	]:
 		if settings.has(parameter_name):
 			material.set_shader_parameter(
 				StringName(parameter_name),
 				settings[parameter_name]
 			)
+	var slots: Dictionary = profile.get("material_slots", {})
+	for name: String in ["deep", "shallow"]:
+		var parameter: String = name + "_color"
+		var fallback: Color = settings.get(parameter, material.get_shader_parameter(parameter))
+		var pigment: Color = slots.get("water_" + name, fallback)
+		pigment.a = fallback.a
+		material.set_shader_parameter(parameter, pigment)
+	var horizon: Color = profile.get("atmosphere", {}).get("sky_horizon", Color(0.55, 0.78, 0.88))
+	material.set_shader_parameter("reflection_tint", Vector3(horizon.r, horizon.g, horizon.b))
 	material.render_priority = 1
-	water_mesh.mesh = array_mesh
-	water_mesh.material_override = material
-	water_mesh.position = Vector3(0.0, water_height, 0.0)
-	water_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	water_mesh.extra_cull_margin = (
-		maxf(
-			float(settings.get("wave_height", 0.05)),
-			float(settings.get("secondary_wave_height", 0.02))
-		) * 4.0 + 1.0
-	)
+	return material
+
+
+static func displacement_margin(settings: Dictionary) -> float:
+	return absf(float(settings.get("wave_height", 0.042))) + absf(float(settings.get("secondary_wave_height", 0.014))) + 1.0
+
+
+static func set_shared_coverage(chunk: Node3D, bounds: Rect2) -> void:
+	chunk.set_meta(&"shared_water_bounds", bounds)
+	var water: MeshInstance3D = chunk.get_node("WaterMesh")
+	var size := Vector2(chunk.get_chunk_width(), chunk.get_chunk_depth())
+	var own_bounds := Rect2(Vector2(chunk.chunk_coordinates) * size - size * 0.5, size)
+	water.visible = not bounds.has_area() or not bounds.encloses(own_bounds)
+	# A teleport can leave a chunk only partially under the previous surface.
+	# Clip the intersection, retain the rest until the replacement is published.
+	if water.material_override is ShaderMaterial:
+		water.material_override.set_shader_parameter("clip_shared_surface", bounds.has_area())
+		water.material_override.set_shader_parameter("shared_surface_bounds", Vector4(bounds.position.x, bounds.position.y, bounds.end.x, bounds.end.y))

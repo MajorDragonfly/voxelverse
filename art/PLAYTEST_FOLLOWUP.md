@@ -1,5 +1,7 @@
 # Player-feedback pass — collision, streaming and readable landscapes
 
+Follow-on work: [continuous water and horizon recentering](WATER_CONTINUITY_REPORT.md).
+
 Based on PR #9 head `9eb22b7d49b45e30e4c6fe30b004a8f1f3d86339`, fetched before editing.
 The development branch remains `agent/meta-runtime-v8`. PR #9 stays unmerged.
 

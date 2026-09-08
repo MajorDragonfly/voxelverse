@@ -3,11 +3,12 @@ extends Node3D
 const HorizonJob = preload("res://world/streaming/landscape_horizon_job.gd")
 const Budget = preload("res://world/streaming/environment_generation_budget.gd")
 const LandShader = preload("res://world/visuals/terrain/landscape_horizon.gdshader")
-const WaterShader = preload("res://world/visuals/terrain/ocean_surface.gdshader")
+const WaterBuilder = preload("res://world/visuals/terrain/water_mesh_builder_v7.gd")
 var generation_complete: bool = false
 var _task: int = -1
 var _job: RefCounted
 var _center := Vector2(INF, INF)
+var published_center := Vector2(INF, INF)
 var _manager: Node3D
 var _land: MeshInstance3D
 var _water: MeshInstance3D
@@ -28,21 +29,11 @@ func _ready() -> void:
 	var land_material := ShaderMaterial.new()
 	land_material.shader = LandShader
 	_land.material_override = land_material
-	var water_material := ShaderMaterial.new()
-	water_material.shader = WaterShader
-	water_material.set_shader_parameter("clip_loaded_chunks", true)
+	var reference: Node = _manager.loaded_chunks.values()[0]
+	var settings: Dictionary = reference.get_node("Visuals").get_water_settings()
 	var profile: Dictionary = WorldGenerator.get_planet_profile()
-	var slots: Dictionary = profile["material_slots"]
-	var deep: Color = slots["water_deep"]
-	var shallow: Color = slots["water_shallow"]
-	deep.a = 0.84
-	shallow.a = 0.62
-	water_material.set_shader_parameter("deep_color", deep)
-	water_material.set_shader_parameter("shallow_color", shallow)
-	var horizon: Color = profile["atmosphere"]["sky_horizon"]
-	water_material.set_shader_parameter("reflection_tint", Vector3(horizon.r, horizon.g, horizon.b))
-	water_material.render_priority = 1
-	_water.material_override = water_material
+	_water.material_override = WaterBuilder.make_material(profile, settings)
+	_water.extra_cull_margin = WaterBuilder.displacement_margin(settings)
 
 func _process(delta: float) -> void:
 	if not _manager.world_initialized:
@@ -52,7 +43,7 @@ func _process(delta: float) -> void:
 		_timer = 0.15
 		_update_coverage()
 	var player: Vector3 = _manager.player.global_position
-	var target := Vector2(snappedf(player.x, 64.0), snappedf(player.z, 64.0))
+	var target: Vector2 = recenter_target(Vector2(player.x, player.z), _center)
 	if _task < 0 and target != _center:
 		_center = target
 		_job = HorizonJob.new()
@@ -70,6 +61,11 @@ func _process(delta: float) -> void:
 		water.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _job.result["water"])
 		_land.mesh = land
 		_water.mesh = water
+		published_center = _job.center
+		# Publish meshes and transfer ownership before the next rendered frame.
+		# Keep old water while the worker runs; chunks outside its bounds retain
+		# their fallback, including during long teleports and partial overlap.
+		_manager.set_shared_water_bounds(Rect2(published_center - Vector2.ONE * HorizonJob.RADIUS, Vector2.ONE * HorizonJob.RADIUS * 2.0))
 		_job = null
 		generation_complete = true
 		Budget.record(started, "terrain")
@@ -89,13 +85,23 @@ func _update_coverage() -> void:
 	elif data != _coverage_bytes:
 		_coverage.update(image)
 	_coverage_bytes = data
-	for node: MeshInstance3D in [_land, _water]:
-		node.material_override.set_shader_parameter("coverage", _coverage)
-		node.material_override.set_shader_parameter("coverage_origin", Vector2(origin))
-		node.material_override.set_shader_parameter("chunk_size", Vector2(_manager.chunk_width, _manager.chunk_depth))
+	_land.material_override.set_shader_parameter("coverage", _coverage)
+	_land.material_override.set_shader_parameter("coverage_origin", Vector2(origin))
+	_land.material_override.set_shader_parameter("chunk_size", Vector2(_manager.chunk_width, _manager.chunk_depth))
+
+static func recenter_target(player_xz: Vector2, center: Vector2) -> Vector2:
+	# A player pacing across a 64 m rounding boundary used to rebuild on every
+	# crossing. Retain 32 m of fine water beyond this 96 m movement threshold.
+	if center.is_finite():
+		var movement: Vector2 = (player_xz - center).abs()
+		if maxf(movement.x, movement.y) <= 96.0:
+			return center
+	return Vector2(snappedf(player_xz.x, 64.0), snappedf(player_xz.y, 64.0))
 
 func _exit_tree() -> void:
 	if _task >= 0:
 		WorkerThreadPool.wait_for_task_completion(_task)
 		_task = -1
 	_job = null
+	if is_instance_valid(_manager) and _manager.is_inside_tree() and not _manager.is_queued_for_deletion():
+		_manager.set_shared_water_bounds(Rect2())

@@ -1,0 +1,361 @@
+{
+	"godot": "4.6.3-stable (official)",
+	"samples": [
+		{
+			"chunk": [
+				0,
+				0
+			],
+			"create_ms": 0.832,
+			"ecology": {
+				"attempts": 499,
+				"batches": 15,
+				"cluster_complete": false,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 0,
+				"cluster_instances": 0,
+				"cluster_nodes": 0,
+				"cluster_ready": false,
+				"cluster_vertices": 0,
+				"complete": true,
+				"instances": 72,
+				"max_batch_usec": 790,
+				"max_cluster_step_usec": 0,
+				"max_cluster_upload_usec": 0,
+				"max_placement_usec": 0,
+				"max_resource_usec": 5523,
+				"max_step_usec": 5523,
+				"nodes": 15,
+				"obstacle_shapes": 23,
+				"placement_worker_usec": 90171,
+				"visible_batches": 15
+			},
+			"far": {
+				"attempts": 499,
+				"batches": 15,
+				"cluster_complete": true,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 24720,
+				"cluster_instances": 23,
+				"cluster_nodes": 2,
+				"cluster_ready": true,
+				"cluster_vertices": 16480,
+				"complete": true,
+				"instances": 72,
+				"max_batch_usec": 790,
+				"max_cluster_step_usec": 197,
+				"max_cluster_upload_usec": 884,
+				"max_placement_usec": 0,
+				"max_resource_usec": 5523,
+				"max_step_usec": 5523,
+				"nodes": 17,
+				"obstacle_shapes": 23,
+				"placement_worker_usec": 90171,
+				"visible_batches": 2
+			},
+			"far_build_wall_ms": 13.779,
+			"upload_ms": 4.658
+		},
+		{
+			"chunk": [
+				1,
+				0
+			],
+			"create_ms": 0.109,
+			"ecology": {
+				"attempts": 499,
+				"batches": 18,
+				"cluster_complete": false,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 0,
+				"cluster_instances": 0,
+				"cluster_nodes": 0,
+				"cluster_ready": false,
+				"cluster_vertices": 0,
+				"complete": true,
+				"instances": 104,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 197,
+				"max_cluster_upload_usec": 884,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 18,
+				"obstacle_shapes": 29,
+				"placement_worker_usec": 102980,
+				"visible_batches": 18
+			},
+			"far": {
+				"attempts": 499,
+				"batches": 18,
+				"cluster_complete": true,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 41520,
+				"cluster_instances": 29,
+				"cluster_nodes": 2,
+				"cluster_ready": true,
+				"cluster_vertices": 27680,
+				"complete": true,
+				"instances": 104,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 267,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 20,
+				"obstacle_shapes": 29,
+				"placement_worker_usec": 102980,
+				"visible_batches": 2
+			},
+			"far_build_wall_ms": 27.526,
+			"upload_ms": 3.934
+		},
+		{
+			"chunk": [
+				2,
+				0
+			],
+			"create_ms": 0.151,
+			"ecology": {
+				"attempts": 499,
+				"batches": 16,
+				"cluster_complete": false,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 0,
+				"cluster_instances": 0,
+				"cluster_nodes": 0,
+				"cluster_ready": false,
+				"cluster_vertices": 0,
+				"complete": true,
+				"instances": 125,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 267,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 16,
+				"obstacle_shapes": 14,
+				"placement_worker_usec": 122890,
+				"visible_batches": 16
+			},
+			"far": {
+				"attempts": 499,
+				"batches": 16,
+				"cluster_complete": true,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 21726,
+				"cluster_instances": 14,
+				"cluster_nodes": 2,
+				"cluster_ready": true,
+				"cluster_vertices": 14484,
+				"complete": true,
+				"instances": 125,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 467,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 18,
+				"obstacle_shapes": 14,
+				"placement_worker_usec": 122890,
+				"visible_batches": 2
+			},
+			"far_build_wall_ms": 20.551,
+			"upload_ms": 3.87
+		},
+		{
+			"chunk": [
+				2,
+				0
+			],
+			"create_ms": 0.113,
+			"ecology": {
+				"attempts": 499,
+				"batches": 16,
+				"cluster_complete": false,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 0,
+				"cluster_instances": 0,
+				"cluster_nodes": 0,
+				"cluster_ready": false,
+				"cluster_vertices": 0,
+				"complete": true,
+				"instances": 125,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 467,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 16,
+				"obstacle_shapes": 14,
+				"placement_worker_usec": 124193,
+				"visible_batches": 16
+			},
+			"far": {
+				"attempts": 499,
+				"batches": 16,
+				"cluster_complete": true,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 21726,
+				"cluster_instances": 14,
+				"cluster_nodes": 2,
+				"cluster_ready": true,
+				"cluster_vertices": 14484,
+				"complete": true,
+				"instances": 125,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 467,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 18,
+				"obstacle_shapes": 14,
+				"placement_worker_usec": 124193,
+				"visible_batches": 2
+			},
+			"far_build_wall_ms": 20.766,
+			"upload_ms": 3.739
+		},
+		{
+			"chunk": [
+				3,
+				0
+			],
+			"create_ms": 0.119,
+			"ecology": {
+				"attempts": 499,
+				"batches": 20,
+				"cluster_complete": false,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 0,
+				"cluster_instances": 0,
+				"cluster_nodes": 0,
+				"cluster_ready": false,
+				"cluster_vertices": 0,
+				"complete": true,
+				"instances": 136,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 467,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 20,
+				"obstacle_shapes": 26,
+				"placement_worker_usec": 117187,
+				"visible_batches": 20
+			},
+			"far": {
+				"attempts": 499,
+				"batches": 20,
+				"cluster_complete": true,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 30870,
+				"cluster_instances": 26,
+				"cluster_nodes": 2,
+				"cluster_ready": true,
+				"cluster_vertices": 20580,
+				"complete": true,
+				"instances": 136,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 467,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 22,
+				"obstacle_shapes": 26,
+				"placement_worker_usec": 117187,
+				"visible_batches": 2
+			},
+			"far_build_wall_ms": 20.773,
+			"upload_ms": 3.668
+		},
+		{
+			"chunk": [
+				2,
+				1
+			],
+			"create_ms": 0.111,
+			"ecology": {
+				"attempts": 499,
+				"batches": 19,
+				"cluster_complete": false,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 0,
+				"cluster_instances": 0,
+				"cluster_nodes": 0,
+				"cluster_ready": false,
+				"cluster_vertices": 0,
+				"complete": true,
+				"instances": 141,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 467,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 19,
+				"obstacle_shapes": 30,
+				"placement_worker_usec": 111500,
+				"visible_batches": 19
+			},
+			"far": {
+				"attempts": 499,
+				"batches": 19,
+				"cluster_complete": true,
+				"cluster_fallbacks": {
+
+				},
+				"cluster_indices": 45288,
+				"cluster_instances": 30,
+				"cluster_nodes": 2,
+				"cluster_ready": true,
+				"cluster_vertices": 30192,
+				"complete": true,
+				"instances": 141,
+				"max_batch_usec": 1237,
+				"max_cluster_step_usec": 467,
+				"max_cluster_upload_usec": 1404,
+				"max_placement_usec": 0,
+				"max_resource_usec": 10068,
+				"max_step_usec": 10068,
+				"nodes": 21,
+				"obstacle_shapes": 30,
+				"placement_worker_usec": 111500,
+				"visible_batches": 2
+			},
+			"far_build_wall_ms": 34.413,
+			"upload_ms": 3.575
+		}
+	],
+	"scope": "Headless CPU: main-thread creation, mesh/collision upload, staged vegetation. No GPU measurement.",
+	"seed": 424242
+}

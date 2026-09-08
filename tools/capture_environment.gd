@@ -14,6 +14,13 @@ var _samples: Array[Dictionary] = []
 var _failures: Array[String] = []
 var _comparison_images: Dictionary = {}
 
+class WaterReviewChunk extends Node3D:
+	var chunk_coordinates := Vector2i.ZERO
+	func get_chunk_width() -> float:
+		return 32.0
+	func get_chunk_depth() -> float:
+		return 32.0
+
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -60,6 +67,8 @@ func _run() -> void:
 			await _cluster()
 		"creature":
 			await _creature()
+		"water":
+			await _water_continuity()
 		_:
 			_failures.append("Unknown review case.")
 	RenderingServer.render_loop_enabled = true
@@ -327,6 +336,84 @@ func _creature() -> void:
 		await process_frame
 
 
+func _water_continuity() -> void:
+	# Controlled, actual GPU rendering of full and partial shared-water overlap.
+	# Freeze shader time in a review-only copy; production shaders are unchanged.
+	_scene = Node3D.new()
+	root.add_child(_scene)
+	current_scene = _scene
+	var environment := WorldEnvironment.new()
+	environment.environment = Environment.new()
+	environment.environment.background_mode = Environment.BG_COLOR
+	environment.environment.background_color = Color(0.32, 0.42, 0.48)
+	environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	environment.environment.ambient_light_color = Color.WHITE
+	environment.environment.ambient_light_energy = 0.7
+	_scene.add_child(environment)
+	var light := DirectionalLight3D.new()
+	light.rotation_degrees = Vector3(-55, -35, 0)
+	_scene.add_child(light)
+	var generator: Node = root.get_node("WorldGenerator")
+	var sea: float = generator.get_sea_level()
+	var bed := MeshInstance3D.new()
+	var bed_mesh := PlaneMesh.new()
+	bed_mesh.size = Vector2(100, 100)
+	bed.mesh = bed_mesh
+	bed.position.y = sea - 1.7
+	bed.rotation_degrees.x = 5.0
+	var bed_material := StandardMaterial3D.new()
+	bed_material.albedo_color = Color(0.43, 0.39, 0.30)
+	bed.material_override = bed_material
+	_scene.add_child(bed)
+	_camera = Camera3D.new()
+	_scene.add_child(_camera)
+	_camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+	_camera.size = 14.0
+	_camera.position = Vector3(0, sea + 30, 5)
+	_camera.look_at(Vector3(0, sea, 0))
+	_camera.make_current()
+	var surface: Script = load("res://world/streaming/world_water_mesh_job.gd")
+	var builder: Script = load("res://world/visuals/terrain/water_mesh_builder_v7.gd")
+	var reference: Node = load("res://world/visuals/terrain/terrain_chunk.tscn").instantiate()
+	var settings: Dictionary = reference.get_node("Visuals").get_water_settings()
+	reference.free()
+	var material: ShaderMaterial = builder.make_material(generator.get_planet_profile(), settings)
+	var frozen := Shader.new()
+	frozen.code = material.shader.code.replace("TIME", "7.0")
+	material.shader = frozen
+	var shared := MeshInstance3D.new()
+	var shared_mesh := ArrayMesh.new()
+	shared_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface.build(generator, Vector2.ZERO, 384.0))
+	shared.mesh = shared_mesh
+	shared.material_override = material
+	_scene.add_child(shared)
+	var chunk := WaterReviewChunk.new()
+	_scene.add_child(chunk)
+	var fallback := MeshInstance3D.new()
+	fallback.name = "WaterMesh"
+	chunk.add_child(fallback)
+	# Use the real local builder, including its 20 subdivisions / 1.6 m spacing.
+	builder.build(chunk, fallback, settings)
+	var fallback_material: ShaderMaterial = fallback.material_override
+	fallback_material.shader = frozen
+	fallback.visible = false
+	var details: Dictionary = {"shader_time": 7.0, "shared_vertices": 37249, "partial_boundary_x": 0.0}
+	await _capture("water_shared_reference", details)
+	fallback.visible = true
+	fallback_material.set_shader_parameter("clip_shared_surface", true)
+	fallback_material.set_shader_parameter("shared_surface_bounds", Vector4(-384, -384, 384, 384))
+	await _capture("water_clipped_fallback", details)
+	material.set_shader_parameter("clip_shared_surface", true)
+	material.set_shader_parameter("shared_surface_bounds", Vector4(-384, -384, 0, 384))
+	fallback_material.set_shader_parameter("shared_surface_bounds", Vector4(0, -384, 384, 384))
+	await _capture("water_partial_overlap", details)
+	# Negative control: the image gate must detect doubled transparent water.
+	material.set_shader_parameter("clip_shared_surface", false)
+	fallback_material.set_shader_parameter("clip_shared_surface", false)
+	await _capture("water_overlap_control", details)
+	_comparison_images.erase("water_shared_reference")
+
+
 func _render_inventory(node: Node) -> Dictionary:
 	var counts: Dictionary = {"mesh_nodes": 0, "multimesh_nodes": 0, "instances": 0}
 	if node is MeshInstance3D:
@@ -379,8 +466,16 @@ func _capture(label: String, details: Dictionary) -> void:
 		"render_cpu_ms": _distribution(cpu), "render_gpu_ms": _distribution(gpu),
 		"gpu_timestamps_available": gpu.max() > 0.0, "draw_calls": _distribution(calls),
 		"rendered_primitives": _distribution(primitives)})
-	if label in ["far_batches", "creature_individual"]:
+	if label in ["far_batches", "creature_individual", "water_shared_reference"]:
 		_comparison_images[label] = image
+	elif label in ["water_clipped_fallback", "water_partial_overlap", "water_overlap_control"]:
+		var error: float = _mean_rgb_difference(_comparison_images["water_shared_reference"], image)
+		_samples[-1]["mean_rgb_error_from_reference"] = error
+		if label == "water_overlap_control":
+			if error < 0.001:
+				_failures.append("Water parity gate failed to detect its overlapping-surface negative control.")
+		elif error > 0.004:
+			_failures.append("Shared water has a gap or double blend in %s: mean RGB error %.6f" % [label, error])
 	elif label in ["far_cluster", "creature_batched"]:
 		var before_label: String = "far_batches" if label == "far_cluster" else "creature_individual"
 		var before: Image = _comparison_images[before_label]
@@ -399,6 +494,17 @@ func _capture(label: String, details: Dictionary) -> void:
 			_failures.append("Rendered batching did not reduce draw calls for " + label)
 		_comparison_images.erase(before_label)
 	print("Captured ", label, " draws=", calls[-1])
+
+
+func _mean_rgb_difference(first: Image, second: Image) -> float:
+	first.convert(Image.FORMAT_RGB8)
+	second.convert(Image.FORMAT_RGB8)
+	var before: PackedByteArray = first.get_data()
+	var after: PackedByteArray = second.get_data()
+	var error_sum: int = 0
+	for index in range(before.size()):
+		error_sum += absi(int(before[index]) - int(after[index]))
+	return float(error_sum) / float(before.size()) / 255.0
 
 
 func _distribution(values: Array[float]) -> Dictionary:

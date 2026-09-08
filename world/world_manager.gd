@@ -2,6 +2,7 @@ class_name WorldManager
 extends Node3D
 
 const Horizon = preload("res://world/visuals/terrain/landscape_horizon.gd")
+const WaterBuilder = preload("res://world/visuals/terrain/water_mesh_builder_v7.gd")
 
 const AuthoredAssets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
 
@@ -36,6 +37,7 @@ var _stream_build_timer: float = 0.0
 var _initial_player_physics: bool = true
 var _priority_timer: float = 0.0
 var _travel := Vector2.ZERO
+var shared_water_bounds := Rect2()
 
 @onready var player: Node3D = get_node_or_null(player_path) as Node3D
 
@@ -116,6 +118,12 @@ func get_current_player_chunk() -> Vector2i:
 func refresh_streaming() -> void:
 	if world_initialized:
 		_plan_streaming()
+
+
+func set_shared_water_bounds(bounds: Rect2) -> void:
+	shared_water_bounds = bounds
+	for chunk: Node3D in loaded_chunks.values():
+		WaterBuilder.set_shared_coverage(chunk, bounds)
 
 
 func _maybe_choose_adventure_spawn() -> void:
@@ -251,6 +259,9 @@ func _create_chunk(coordinates: Vector2i) -> void:
 		return
 	chunk.set("chunk_coordinates", coordinates)
 	chunk.name = "TerrainChunk_%d_%d" % [coordinates.x, coordinates.y]
+	# Store coverage before generation/visual callbacks, even for synchronous
+	# chunks. Local meshes remain available for surface teardown and teleports.
+	WaterBuilder.set_shared_coverage(chunk, shared_water_bounds)
 	add_child(chunk)
 	loaded_chunks[coordinates] = chunk
 

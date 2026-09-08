@@ -1,0 +1,6 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Planet visual mode changed to: Surface
+Planet visual environment initialized in mode: Surface
+Surface streaming seed: 23757
+PACED_STREAMING {"all_25_ms":8079.437,"first_assets_ms":1302.679,"instances":3336,"scope":"Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.","seed":23757,"terrain_ms":1069.468}
