@@ -160,11 +160,12 @@ func _assets() -> void:
 func _world() -> void:
 	change_scene_to_file("res://main/main.tscn")
 	var started: int = Time.get_ticks_usec()
+	var setup_limit: int = _setup_limit_usec()
 	var last_diagnostic: int = started
 	var setup_frames: Array[float] = []
 	var ready: bool = false
 	for frame in range(100000):
-		if Time.get_ticks_usec() - started > 120_000_000:
+		if Time.get_ticks_usec() - started > setup_limit:
 			break
 		var previous: int = Time.get_ticks_usec()
 		await process_frame
@@ -449,8 +450,9 @@ func _hydrology() -> void:
 	manager.choose_scenic_spawn_for_default_start = false
 	_scene.add_child(manager)
 	var started: int = Time.get_ticks_usec()
+	var setup_limit: int = _setup_limit_usec()
 	var ready: bool = false
-	while Time.get_ticks_usec() - started < 120_000_000:
+	while Time.get_ticks_usec() - started < setup_limit:
 		await process_frame
 		if not manager.world_initialized or manager.get_pending_chunk_count() > 0:
 			continue
@@ -462,6 +464,7 @@ func _hydrology() -> void:
 	if not ready:
 		_failures.append("Hydrology world did not finish streaming.")
 		return
+	_report["setup_ms"] = (Time.get_ticks_usec() - started) / 1000.0
 	var horizon: Node3D = manager.get_node("LandscapeHorizon")
 	var details: Dictionary = {"source": str(route["source"]), "outlet": str(route["sink"]),
 		"lake_center": str(center), "lake_level": lake["level"], "sea_level": generator.get_sea_level(),
@@ -533,6 +536,15 @@ func _lake_shore_camera(generator: Node, center: Vector2, radius: float, level: 
 		if height < best.y:
 			best = Vector3(shore.x, height, shore.y)
 	return best
+
+
+func _setup_limit_usec() -> int:
+	# llvmpipe's Forward+ resource creation can exceed two minutes for a full
+	# forest fixture, even while publication continues. Fast setup is explicitly
+	# outside the gameplay frame measurements; retain a bounded watchdog here.
+	var seconds: int = 240 if bool(_report["software_renderer"]) and bool(_config.get("fast_setup", false)) else 120
+	_report["setup_limit_seconds"] = seconds
+	return seconds * 1_000_000
 
 
 func _render_inventory(node: Node) -> Dictionary:

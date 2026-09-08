@@ -71,6 +71,8 @@ def main():
                 summary["captures"].append({"directory": directory.name, **result})
                 print(json.dumps({"case": case, "seed": seed, "adapter": result["adapter"],
                                   "software_renderer": result["software_renderer"],
+                                  "setup_ms": result.get("setup_ms"),
+                                  "setup_limit_seconds": result.get("setup_limit_seconds"),
                                   "samples": len(result["samples"]), "passed": True}), flush=True)
     except (OSError, RuntimeError, ValueError, KeyError) as error:
         summary["passed"] = False

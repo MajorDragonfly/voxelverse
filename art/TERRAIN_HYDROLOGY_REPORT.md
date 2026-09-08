@@ -24,6 +24,8 @@ This is a deterministic terrain-generation model, not a fluid simulation. Region
 
 Publication and final graphical results are recorded in PR #9 after the runs complete. Software-renderer functional checks do not establish performance on the target Windows PC.
 
+Two Forward+ software-renderer attempts reached the previous 120-second setup watchdog while still publishing the second forest fixture. Fast setup now has a 240-second bound on software renderers and reports both elapsed setup time and its limit. Normal setup retains its 120-second bound; the runtime generation budgets and image acceptance assertions are unchanged. Shore review cameras also check the complete viewing ray so a basin rim cannot hide the water being inspected.
+
 ## Places to inspect
 
 Seed 15838, world X/Z and absolute water height (sea = 0):
