@@ -4,6 +4,8 @@
 
 Lars' Spieltest bestätigte eine verbesserte bisherige Welt, aber weiter zu grobe entfernte Berge, einen nicht funktionierenden F4-Einstieg in seiner EXE und ein nicht klickbares F8-Menü. Diese Lieferung erweitert die Planetentechnik parallel zum Sozialsystem im anderen Chat.
 
+**Nachfolgender Ausbau:** Der neue Stand auf `agent/underwater-voxel-planets` ergänzt die Unterwasseransicht, größere kleine Himmelskörper und radiale Voxelstufen. Die hier dokumentierten Radien, Meshbudgets und Prüfergebnisse bleiben der historische Stand von `6916cab`; aktuelle Angaben stehen in [Unterwasseransicht und Voxelplaneten](UNDERWATER_VOXEL_PLANETS.md).
+
 ## Benutzung
 
 - **Esc / F8:** pausiertes Einstellungsmenü. Bildschirmmodus, Fensterauflösung, UI-Größe und VSync übernehmen und speichern. Zurück stellt den zuvor sichtbaren oder eingefangenen Mauszeiger wieder her. Speichern & beenden beendet das Spiel erst nach erfolgreicher Sicherung.
