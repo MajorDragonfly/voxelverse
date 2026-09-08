@@ -65,6 +65,13 @@ removed. The active V7 editor/wildlife and V5 blueprint migration remain intact.
 job uploads its build ZIP/checksum and retains diagnostics for 14 days. These are
 development artifacts, not a GitHub Release. PR #9 remains unmerged.
 
+The first accepted native Linux/Windows run is
+[34188063652](https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063652),
+with 10 checks passing per platform on commit `dc50d56d23155eb1636af45ca6ce6df9a8da175c`.
+See [export_validation_evidence.json](export_validation_evidence.json) for exact
+check results and artifact links. Its artifact digests identify GitHub's outer
+download archives; each contains the build ZIP and its own `SHA256SUMS.txt`.
+
 Headless export checks do not certify visuals, shader appearance, driver support
 or target-PC frame times. Blockbench review and a dense verdant/exotic scene on
 real target hardware remain the next visual/performance gates.

@@ -108,6 +108,23 @@ from local and CI hosts are not directly comparable. These headless measurements
 identify CPU costs. GPU draw time, shader compilation hitches and target-PC FPS
 still require target-hardware testing.
 
+## Desktop export acceptance
+
+Commit `dc50d56d23155eb1636af45ca6ce6df9a8da175c` passed all eight push/PR
+workflow runs, including **10 export checks each on native Windows and Linux**.
+The existing full Godot suite remains green with **32 checks**.
+[Export run and downloadable builds](https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063652).
+Exact job results, artifact digests and expiry dates are recorded in
+[export_validation_evidence.json](../docs/export_validation_evidence.json).
+
+The release executable receives a main-scene smoke check outside the repository.
+Instrumented gameplay, all 63 meshes, three palettes, persistence and A-B-A planet
+transitions use the **unchanged release PCK** with the same-version editor,
+because official release templates disable external test-script overrides.
+Builds include catalog manifests and engine notices; art sources and test tools
+are excluded. Headless checks do not certify GPU or visual quality. See
+[DESKTOP_EXPORT.md](../docs/DESKTOP_EXPORT.md) for build commands and test scope.
+
 ## Open production gates and next step
 
 1. Visually approve the seven `.bbmodel` files listed in the source README in
@@ -122,13 +139,6 @@ still require target-hardware testing.
    branch count/twist/taper recipes, additional alien architectures, functional
    natural arches, distant horizon streaming and downhill river networks remain
    future production work. Existing rivers/lakes remain procedural height fields.
-4. Desktop export validation now creates isolated Linux/Windows release packages
-   with catalog manifests included. The native release executable receives a
-   main-scene smoke check; instrumented gameplay, all 63 meshes, three palettes,
-   persistence and planet-transition checks use the identical release PCK with
-   the same-version editor. This does not certify GPU or visual quality. Build
-   instructions and the precise acceptance scope are in
-   [DESKTOP_EXPORT.md](../docs/DESKTOP_EXPORT.md).
 
 Next: approve the benchmark and capture one dense verdant scene plus one violet
 scene on target hardware, then expand approved families and distant landscape
