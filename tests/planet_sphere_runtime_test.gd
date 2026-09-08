@@ -50,6 +50,14 @@ func _run() -> void:
 		var direction: Vector3 = lab.system.sky_direction(lab.body_id, id,
 			Cube.vector(Cube.cartesian(lab.walker.location(), 256.0)))
 		_expect(lab.lights[id].basis.z.dot(direction) > 0.99999, "Sunlight does not follow the visible star.")
+	for time in [0.0, 120.0]:
+		lab.system.elapsed = time
+		lab._update_views()
+		for id: String in lab.lights:
+			var direction: Vector3 = lab.system.sky_direction(lab.body_id, id,
+				Cube.vector(Cube.cartesian(lab.walker.location(), 256.0)))
+			if direction.dot(lab.walker.up_direction) < -0.04:
+				_expect(lab.lights[id].light_energy == 0.0, "A sun below the horizon lights the surface from inside the planet.")
 	lab.system.elapsed = 117.25
 	_expect(lab.save_lab(), "Lab save failed.")
 	var output: Array = []
@@ -101,6 +109,7 @@ func _circumnavigate() -> void:
 	# Same streaming/controller, 64 m moon: complete polar route at ordinary
 	# fixed physics cadence, with real move_and_slide contact (no teleports).
 	lab._open_body("m1:lune")
+	_expect(lab.environment.background_color == Color("050913"), "Airless moon incorrectly uses an atmospheric sky.")
 	lab.walker.speed = 12.0
 	var start: Dictionary = Cube.address(lab.body_id, 0, 0.0, 0.0)
 	start.height = lab.terrain.surface.sample(start).height + 1.1

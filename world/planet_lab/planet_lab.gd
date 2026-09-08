@@ -173,6 +173,7 @@ func _body_visual(body: Dictionary, mesh: Mesh) -> Node3D:
 		material.albedo_color = Color("ffdc9b") if body.id == "m1:sol" else Color("b8dcff")
 	else:
 		material.vertex_color_use_as_albedo = true
+		material.vertex_color_is_srgb = true
 		material.roughness = 0.95
 	node.material_override = material
 	if body.kind == "planet":
@@ -301,10 +302,17 @@ func _update_views() -> void:
 		if lights.has(id):
 			var direction: Vector3 = delta_position.normalized() if view_mode == "surface" else (system.position_at(id) - body_position).normalized()
 			lights[id].basis = Basis.looking_at(-direction, Vector3.UP if absf(direction.y) < 0.95 else Vector3.RIGHT)
+			# A finite shadow map cannot represent the far side of the whole
+			# planet. Its horizon must block a sun below the local surface too.
+			var horizon: float = smoothstep(-0.03, 0.04, up.dot(delta_position.normalized())) if view_mode == "surface" else 1.0
+			lights[id].light_energy = (1.6 if id == "m1:sol" else 0.8) * horizon
 			illumination += maxf(0.0, up.dot(delta_position.normalized()))
 	if view_mode == "surface":
 		environment.background_color = Color("080e20").lerp(Color("6fa9c1"), clampf(illumination * 1.7, 0.0, 1.0))
 		environment.ambient_light_energy = lerpf(0.12, 0.55, clampf(illumination, 0.0, 1.0))
+		if system.bodies[body_id].atmosphere == "none":
+			environment.background_color = Color("050913")
+			environment.ambient_light_energy = 0.12
 	else:
 		environment.background_color = Color("080c18")
 		environment.ambient_light_energy = 0.25
@@ -312,7 +320,7 @@ func _update_views() -> void:
 	landing_marker.position = (rotation * (local_point + up * 4.0)) + (Vector3.ZERO if view_mode == "orbit" else body_position)
 	landing_marker.visible = view_mode == "orbit"
 	if view_mode == "orbit":
-		var distance: float = float(system.bodies[body_id].radius) * 0.035
+		var distance: float = float(system.bodies[body_id].radius) * 0.053
 		space_camera.position = world_up * distance + rotation * walker.forward * distance * 0.2
 		space_camera.look_at(Vector3.ZERO, rotation * walker.forward)
 	elif view_mode == "system":

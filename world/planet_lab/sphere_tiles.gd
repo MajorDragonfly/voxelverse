@@ -22,6 +22,7 @@ func configure(descriptor: Dictionary) -> void:
 	surface = Surface.new(descriptor)
 	material = StandardMaterial3D.new()
 	material.vertex_color_use_as_albedo = true
+	material.vertex_color_is_srgb = true
 	material.roughness = 0.95
 	for face in range(6):
 		for y in range(GRID):
