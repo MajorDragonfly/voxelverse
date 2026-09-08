@@ -144,13 +144,13 @@ Dies sind Designvorschläge für Voxelverse, keine Behauptung über konkrete Spo
 
 ## Reihenfolge und Abnahmekriterien
 
-**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1: begrenzter Technikprototyp geprüft. M2–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
+**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1: begrenzter Technikprototyp geprüft. M2A: separat technisch geprüft; M2B und M3–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
 
 | ID | Arbeitspaket | Voraussetzung | Fertig, wenn … |
 |---|---|---|---|
 | M0 | **Technisch geprüft:** Kampagnenverträge, IDs, gemeinsame Sicherung, Phasen-/Ereignismodell | Ausgangsstand `e1b0b7f` | Migration mit Kreatur, zwei Gebäuden, Entdeckungen und zwei Planeten; separater Prozessneustart; Ereigniswiederholung und unterbrochener Debug-Übergang geprüft. Commit `3f7f2252e3cbce868920dcf7c86beb3b47d17354`; manueller Spieltest offen |
 | M1 | **Technikprototyp geprüft:** Kugelplanet und Sternsystemlabor | M0 | Polare Umrundung mit echter Physik, Kantenstrahlen, begrenztes Streaming, radialer Ozean, Orbit/Rückkehr und Prozessneustart bestanden. 49 Gesamtprüfungen, native Exporte und sieben Renderfälle in zwei Grafikmodi. Manueller Spieltest und produktive große Planeten offen. [Nachweise/Grenzen](docs/PLANET_M1.md) |
-| M2 | Verhaltensfortschritt und gemeinsame Editorverträge | M0, Koordinatenentscheidung aus M1 | Echte bzw. im Test ausgelöste Ereignisse vergeben einmal Punkte; Knoten wirken einmal; Blaupausen besitzen stabile Identität und Revision; Import/Undo/Redo bleiben erhalten |
+| M2 | **M2A separat technisch geprüft:** Verhaltensfortschritt; gemeinsame Editorverträge als M2B offen | M0, Koordinatenentscheidung aus M1 | M2A: Punkte, sechs Knoten, begrenzte Belohnungshistorie, einmalige Effekte und Schema-4-Sicherung; 50/50 Projektprüfungen bestanden. M2B: Blaupausen besitzen stabile Identität und Revision; Import/Undo/Redo bleiben erhalten. [Aufteilung und Nachweise](docs/BEHAVIOR_M2A.md) |
 | M3 | Kreaturen und Kreatureneditor überarbeiten | M2; Laufzeit auf M1-Grundlage | Repräsentative Körperformen lassen sich verständlich gestalten und bewegen; Vorschau und Spiel stimmen überein; erste Körperfähigkeiten funktionieren |
 | M4 | Lebendige Tierwelt und vollständiger Kreaturen-Spielablauf | M1–M3 | Herde, Nahrungssuche, Räuber-Beute, Befreunden, Entdeckungsbuch und kleiner Skilltree bilden einen spielbaren Ablauf; sozialer und aggressiver Fortschritt funktionieren |
 | M5 | Erster echter Wechsel Kreatur → Stamm | M4 | Aus derselben Spezies am bekannten Ort wird eine kleine steuerbare Gruppe mit einer nutzbaren Behausung; Vermächtnis, Besitz und Beziehungen bleiben nach Laden erhalten |
@@ -161,6 +161,8 @@ Dies sind Designvorschläge für Voxelverse, keine Behauptung über konkrete Spo
 | M10 | Umfang, Balancing und Veröffentlichung | Funktionierender Ablauf bis M9 | Die ganze Kampagne ist wiederholt durchspielbar; Inhalte, Bedienung, Ton, Lernhilfen, Speichern und Leistung erfüllen festgelegte Abnahmen |
 
 M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reift. Größere neue Welt-, Navigations- oder Stadtfunktionen warten auf den Koordinatennachweis. Wir bauen zunächst ein einziges gutes Beispiel pro System und verbreitern es danach. Alle Phasen werden nicht gleichzeitig als halbfertige Baustellen begonnen.
+
+**Parallele Zuständigkeit:** `agent/m2-behavior-skilltree` übernimmt M2A (Verhaltenspunkte, Skilltree-Regeln, Effekte und Speicherung), ausgehend von `555f9ef`. Vor weiterer M2-Arbeit den zugehörigen Pull Request gegen `agent/meta-runtime-v8` prüfen und integrieren. M2B umfasst die noch offenen Editorverträge; die Bedienoberfläche und echte Verhaltensaktionen folgen mit M3/M4. M2A allein schließt M2 nicht ab.
 
 ### M0 – technisch geprüft, manueller Spieltest offen
 

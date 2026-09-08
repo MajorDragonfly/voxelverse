@@ -4,12 +4,17 @@ signal part_unlocked(part_id: String, reason: String)
 signal species_discovered(species_key: String, species_name: String)
 signal region_discovered(region_key: String)
 signal discovery_points_changed(points: int)
+signal behavior_changed
+signal behavior_rewarded(receipt: Dictionary)
+signal behavior_node_purchased(node_id: String)
 
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 
 const GameEvent = preload("res://core/campaign/game_event.gd")
+const Behavior = preload("res://core/progression/behavior_progression.gd")
+const BehaviorRules = preload("res://core/progression/behavior_catalog.gd")
 
-const SAVE_SCHEMA: int = 2
+const SAVE_SCHEMA: int = 3
 const SPECIES_DISCOVERY_POINTS: int = 3
 const REGION_DISCOVERY_POINTS: int = 1
 
@@ -17,6 +22,8 @@ var discovery_points: int = 0
 var unlocked_parts: Dictionary = {}
 var discovered_species: Dictionary = {}
 var discovered_regions: Dictionary = {}
+var _behavior := Behavior.new()
+var _behavior_purchase_active: bool = false
 
 
 func _ready() -> void:
@@ -28,8 +35,10 @@ func reset_for_new_game() -> void:
 	unlocked_parts.clear()
 	discovered_species.clear()
 	discovered_regions.clear()
+	_behavior.reset()
 	_ensure_starter_parts()
 	discovery_points_changed.emit(discovery_points)
+	behavior_changed.emit()
 
 
 func is_part_unlocked(part_id: String) -> bool:
@@ -141,10 +150,18 @@ func export_state() -> Dictionary:
 		"unlocked_parts": unlocked_parts.duplicate(true),
 		"discovered_species": discovered_species.duplicate(true),
 		"discovered_regions": discovered_regions.duplicate(true),
+		"behavior": _behavior.export_state(),
 	}
 
 
-func import_state(data: Dictionary) -> void:
+func import_state(data: Dictionary) -> bool:
+	if not validate_state(data).is_empty():
+		return false
+	if data.has("behavior"):
+		_behavior.import_state(data["behavior"])
+	else:
+		# Discovery-only saves migrate without inventing past behavior rewards.
+		_behavior.reset()
 	discovery_points = maxi(int(data.get("discovery_points", 0)), 0)
 	unlocked_parts = _as_dictionary(data.get("unlocked_parts", {}))
 	discovered_species = _as_dictionary(data.get("discovered_species", {}))
@@ -156,6 +173,80 @@ func import_state(data: Dictionary) -> void:
 	# Retain unlock IDs for unavailable parts so restored content is not lost.
 	_ensure_starter_parts()
 	discovery_points_changed.emit(discovery_points)
+	behavior_changed.emit()
+	return true
+
+
+static func validate_state(data: Dictionary) -> String:
+	if not BehaviorRules.is_integer(data.get("schema", 1), 1, SAVE_SCHEMA):
+		return "Unsupported progression schema."
+	if data.has("behavior"):
+		return Behavior.validate_state(data["behavior"])
+	if int(data.get("schema", 1)) >= SAVE_SCHEMA:
+		return "Missing behavior progression."
+	return ""
+
+
+static func has_unsupported_contract(data: Variant) -> bool:
+	if not data is Dictionary:
+		return false
+	return BehaviorRules.is_newer_version(data.get("schema", 1), SAVE_SCHEMA) or Behavior.has_unsupported_contract(data.get("behavior", {}))
+
+
+func apply_campaign_event(event: GameEvent) -> Dictionary:
+	var state := get_node_or_null("/root/GameState")
+	if state == null:
+		return {"ok": false, "reason": "missing_campaign"}
+	var campaign = state.get("campaign")
+	var recent: Array = campaign.data["recent_events"]
+	if recent.is_empty() or recent.back() != event.to_dict():
+		return {"ok": false, "reason": "event_not_accepted"}
+	var receipt: Dictionary = _behavior.apply_event(event, campaign.data["id"],
+		campaign.data["player_object_id"], int(state.get("current_phase")))
+	if receipt["ok"]:
+		# Both the campaign cursor and the complete reward ledger are now updated.
+		var saves := get_node_or_null("/root/SaveGameService")
+		if saves != null:
+			saves.call("schedule_autosave")
+		behavior_changed.emit()
+		behavior_rewarded.emit(receipt.duplicate(true))
+	return receipt
+
+
+func get_behavior_wallet(phase: int) -> Dictionary:
+	return _behavior.wallet(phase)
+
+
+func get_behavior_nodes(phase: int) -> Array[Dictionary]:
+	var state := get_node_or_null("/root/GameState")
+	return _behavior.nodes_for_phase(phase, int(state.get("current_phase")) if state != null else 0)
+
+
+func get_behavior_effect(effect_id: String, phase: int, body_value: float = 1.0, technology_bonus: float = 0.0) -> Dictionary:
+	return _behavior.calculate_effect(effect_id, phase, body_value, technology_bonus)
+
+
+func purchase_behavior_node(node_id: String) -> Dictionary:
+	if _behavior_purchase_active:
+		return {"ok": false, "reason": "purchase_in_progress"}
+	var state := get_node_or_null("/root/GameState")
+	var saves := get_node_or_null("/root/SaveGameService")
+	if state == null or saves == null:
+		return {"ok": false, "reason": "missing_campaign_services"}
+	var before: Dictionary = _behavior.export_state()
+	var result: Dictionary = _behavior.purchase(node_id, int(state.get("current_phase")))
+	if not result["ok"]:
+		return result
+	_behavior_purchase_active = true
+	var saved: bool = bool(saves.call("save_now"))
+	if not saved:
+		_behavior.import_state(before)
+	_behavior_purchase_active = false
+	if not saved:
+		return {"ok": false, "reason": "save_failed"}
+	behavior_changed.emit()
+	behavior_node_purchased.emit(node_id)
+	return result
 
 
 func get_discovered_species_count() -> int:

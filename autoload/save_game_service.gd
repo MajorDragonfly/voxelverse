@@ -4,12 +4,13 @@ signal game_saved(path: String)
 signal game_loaded(path: String)
 signal save_failed(message: String)
 
-const SAVE_SCHEMA: int = 3
+const SAVE_SCHEMA: int = 4
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Designs = preload("res://core/persistence/design_store.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
+const Progression = preload("res://autoload/progression_service.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 
 @export_range(5.0, 300.0, 5.0) var autosave_interval: float = 45.0
@@ -111,11 +112,15 @@ func load_now(custom_path: String = "") -> bool:
 	# Never silently downgrade a valid future schema to an old backup.
 	if _has_unsupported_contract(data):
 		_write_blocked = true
-		_report_failure("Unsupported save, campaign or generator version.")
+		_report_failure("Unsupported save, campaign, progression or generator version.")
 		return false
 	if not _validate_save(data).is_empty():
 		source_path = target_path + ".bak"
 		data = _read_save(source_path)
+		if _has_unsupported_contract(data):
+			_write_blocked = true
+			_report_failure("Unsupported backup contract; saving remains blocked.")
+			return false
 	if not _validate_save(data).is_empty():
 		_write_blocked = true
 		_report_failure("No valid campaign snapshot or backup: " + target_path)
@@ -123,29 +128,19 @@ func load_now(custom_path: String = "") -> bool:
 	last_migration_report.clear()
 	var schema: int = int(data["schema"])
 	if schema < SAVE_SCHEMA:
-		# Preserve the exact legacy campaign and ALL editor bytes together before
-		# importing anything. Migration never rewrites the old editor files.
-		var files: Dictionary = _capture_disk_designs()
-		var backup: Dictionary = {"legacy_save_text": FileAccess.get_file_as_string(source_path), "design_files": files}
-		var backup_path: String = target_path + ".schema%d.backup.json" % schema
-		if not FileAccess.file_exists(backup_path):
-			if Atomic.write(backup_path, backup, false) != OK:
-				_report_failure("Migration backup failed; original state was not changed.")
-				_write_blocked = true
-				return false
-		elif _read_save(backup_path) != backup:
-			# Another imported legacy file must not silently reuse an unrelated backup.
-			backup_path = target_path + "." + JSON.stringify(backup).sha256_text().left(16) + ".migration-backup.json"
-			if not FileAccess.file_exists(backup_path) and Atomic.write(backup_path, backup, false) != OK:
-				_report_failure("Migration backup failed; original state was not changed.")
-				_write_blocked = true
-				return false
-		var model := Campaign.new()
-		model.reset(Ids.scoped("campaign", "legacy-save", str(backup["legacy_save_text"])))
-		data["game_state"]["campaign"] = model.export_state()
-		_upgrade_design_ids(files)
-		data["design_files"] = files
-		last_migration_report.append("Schema %d -> 3; legacy V9 plane retained; campaign and editor originals backed up." % schema)
+		# Schema 3 already owns campaign identity and the authoritative editor bytes.
+		var files: Dictionary = _capture_disk_designs() if schema < 3 else _dict(data["design_files"])
+		if not _backup_migration(target_path, source_path, schema, files):
+			return false
+		if schema < 3:
+			var model := Campaign.new()
+			model.reset(Ids.scoped("campaign", "legacy-save", FileAccess.get_file_as_string(source_path)))
+			data["game_state"]["campaign"] = model.export_state()
+			_upgrade_design_ids(files)
+			data["design_files"] = files
+		else:
+			last_migration_report.assign(data.get("migration_report", []))
+		last_migration_report.append("Schema %d -> 4; campaign, location and designs retained; behavior wallets initialized without retroactive rewards." % schema)
 	else:
 		last_migration_report.assign(data.get("migration_report", []))
 	if source_path != target_path:
@@ -171,6 +166,18 @@ func load_now(custom_path: String = "") -> bool:
 	return true
 
 
+func _backup_migration(target_path: String, source_path: String, schema: int, files: Dictionary) -> bool:
+	var backup: Dictionary = {"legacy_save_text": FileAccess.get_file_as_string(source_path), "design_files": files}
+	var backup_path: String = target_path + ".schema%d.backup.json" % schema
+	if FileAccess.file_exists(backup_path) and _read_save(backup_path) != backup:
+		backup_path = target_path + "." + JSON.stringify(backup).sha256_text().left(16) + ".migration-backup.json"
+	if not FileAccess.file_exists(backup_path) and Atomic.write(backup_path, backup, false) != OK:
+		_report_failure("Migration backup failed; original state was not changed.")
+		_write_blocked = true
+		return false
+	return true
+
+
 func _read_save(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
 		return {}
@@ -184,6 +191,11 @@ func _validate_save(data: Dictionary) -> String:
 	for field in ["game_state", "progression", "player"]:
 		if not data.get(field) is Dictionary:
 			return "Invalid save section: " + field
+	var progression_problem: String = Progression.validate_state(data["progression"])
+	if not progression_problem.is_empty():
+		return progression_problem
+	if schema >= 4 and int(data["progression"].get("schema", 0)) != Progression.SAVE_SCHEMA:
+		return "Schema 4 requires complete behavior progression."
 	var state: Dictionary = data["game_state"]
 	if int(state.get("world_seed", 0)) <= 0 or int(state.get("phase", -1)) not in range(6):
 		return "Invalid world seed or phase."
@@ -445,6 +457,8 @@ func _report_failure(message: String) -> void:
 
 func _has_unsupported_contract(data: Dictionary) -> bool:
 	if int(data.get("schema", 0)) > SAVE_SCHEMA:
+		return true
+	if Progression.has_unsupported_contract(data.get("progression", {})):
 		return true
 	var imported_state: Variant = data.get("game_state", {})
 	if not imported_state is Dictionary:

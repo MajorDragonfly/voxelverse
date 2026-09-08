@@ -10,6 +10,9 @@ var target_id: String = ""
 var phase: int = 0
 var sequence: int = 0
 var outcome: String = ""
+## Optional M2 completion evidence; older events remain valid but earn no points.
+var encounter_id: String = ""
+var behavior_context: Dictionary = {}
 
 
 func is_valid() -> bool:
@@ -27,4 +30,5 @@ func channel() -> String:
 
 func to_dict() -> Dictionary:
 	return {"kind": kind, "campaign_id": campaign_id, "source_id": source_id,
-		"target_id": target_id, "phase": phase, "sequence": sequence, "outcome": outcome}
+		"target_id": target_id, "phase": phase, "sequence": sequence, "outcome": outcome,
+		"encounter_id": encounter_id, "behavior_context": behavior_context.duplicate(true)}

@@ -119,7 +119,7 @@ func _legacy_migration() -> void:
 	var snapshot: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(TEST_SAVE))
 	_expect(snapshot["player"]["surface_address"]["position"] == [23.5, 8.0, -71.0], "Legacy position moved during migration.")
 	_expect(snapshot["player"]["surface_address"]["mode"] == "legacy_plane_v9", "Old save was converted to a new surface.")
-	_expect(int(Atomic.parse_dictionary(FileAccess.get_file_as_string(TEST_SAVE + ".bak")).get("schema", 0)) == 3, "First migration backup omitted the joint design snapshot.")
+	_expect(int(Atomic.parse_dictionary(FileAccess.get_file_as_string(TEST_SAVE + ".bak")).get("schema", 0)) == saves.SAVE_SCHEMA, "First migration backup omitted the joint design snapshot.")
 	var identities: Dictionary = snapshot["game_state"]["campaign"].duplicate(true)
 	# Missing/torn editor files cannot split the loaded campaign snapshot.
 	DirAccess.remove_absolute(Creature.SAVE_PATH)
