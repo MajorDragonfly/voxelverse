@@ -111,15 +111,31 @@ func _verify_front_faces(arrays: Array, label: String) -> void:
 	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX] != null else PackedInt32Array()
 	var count: int = indices.size() if not indices.is_empty() else vertices.size()
 	var wrong: int = 0
+	var targets: PackedVector2Array = arrays[Mesh.ARRAY_TEX_UV2] if arrays[Mesh.ARRAY_TEX_UV2] != null else PackedVector2Array()
 	for offset in range(0, count, 3):
 		var a: int = indices[offset] if not indices.is_empty() else offset
 		var b: int = indices[offset + 1] if not indices.is_empty() else offset + 1
 		var c: int = indices[offset + 2] if not indices.is_empty() else offset + 2
-		var cross: Vector3 = (vertices[b] - vertices[a]).cross(vertices[c] - vertices[a])
-		# Godot's clockwise front face points against the right-hand cross.
-		if cross.dot(normals[a] + normals[b] + normals[c]) >= 0.0:
+		var has_area: bool = false
+		for endpoint in range(1 if targets.is_empty() else 3):
+			var va: Vector3 = vertices[a]
+			var vb: Vector3 = vertices[b]
+			var vc: Vector3 = vertices[c]
+			if endpoint > 0:
+				va.y = targets[a][endpoint - 1]
+				vb.y = targets[b][endpoint - 1]
+				vc.y = targets[c][endpoint - 1]
+			var cross: Vector3 = (vb - va).cross(vc - va)
+			if cross.length_squared() < 0.00000001:
+				continue
+			has_area = true
+			# A riser may start collapsed, but must have outward winding at
+			# every non-degenerate endpoint and become a real wall in a LOD.
+			if cross.dot(normals[a] + normals[b] + normals[c]) >= 0.0:
+				wrong += 1
+		if not has_area:
 			wrong += 1
-	_expect(wrong == 0, "%s has %d inward or degenerate triangles." % [label, wrong])
+	_expect(wrong == 0, "%s has %d inward or permanently degenerate triangles." % [label, wrong])
 
 func _test_chunk_instances() -> void:
 	var generator: Node = root.get_node("WorldGenerator")

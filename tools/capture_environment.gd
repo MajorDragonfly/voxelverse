@@ -415,6 +415,46 @@ func _water_continuity() -> void:
 	fallback_material.set_shader_parameter("clip_shared_surface", false)
 	await _capture("water_overlap_control", details)
 	_comparison_images.erase("water_shared_reference")
+	# Equal checker beds at known vertical depths isolate the material from
+	# terrain colour, perspective and lighting. The deep floor must disappear.
+	fallback.visible = false
+	bed.visible = false
+	_camera.position = Vector3(0, sea + 30, 0.001)
+	_camera.look_at(Vector3(0, sea, 0))
+	var checker := Shader.new()
+	checker.code = "shader_type spatial; render_mode unshaded; varying vec2 p; void vertex(){p=(MODEL_MATRIX*vec4(VERTEX,1.0)).xz;} void fragment(){float v=mod(floor(p.x*2.0)+floor(p.y*2.0),2.0); ALBEDO=vec3(mix(0.22,0.82,v));}"
+	var checker_material := ShaderMaterial.new()
+	checker_material.shader = checker
+	for i in range(3):
+		var patch := MeshInstance3D.new()
+		var plane := PlaneMesh.new()
+		plane.size = Vector2(4, 18)
+		patch.mesh = plane
+		patch.material_override = checker_material
+		patch.position = Vector3((i - 1) * 4, sea - [0.3, 2.0, 8.0][i], 0)
+		_scene.add_child(patch)
+	shared.visible = false
+	await _capture("water_depth_bare", {"depths_m": [0.3, 2.0, 8.0]})
+	var bare: Image = root.get_texture().get_image()
+	shared.visible = true
+	await _capture("water_depth_steps", {"depths_m": [0.3, 2.0, 8.0]})
+	var covered: Image = root.get_texture().get_image()
+	var contrast_ratios: Array[float] = []
+	for i in range(3):
+		var sum: float = 0.0
+		var weight: float = 0.0
+		for z in range(-3, 4):
+			for x in range(-2, 3):
+				var point := Vector3((i - 1) * 4 + x * 0.5 + 0.12, sea, z * 0.5 + 0.12)
+				var first := Vector2i(_camera.unproject_position(point))
+				var second := Vector2i(_camera.unproject_position(point + Vector3(0.5, 0, 0)))
+				sum += absf(covered.get_pixelv(first).get_luminance() - covered.get_pixelv(second).get_luminance())
+				weight += absf(bare.get_pixelv(first).get_luminance() - bare.get_pixelv(second).get_luminance())
+		contrast_ratios.append(sum / maxf(weight, 0.001))
+	if contrast_ratios[0] < 0.08 or contrast_ratios[2] > 0.06 or contrast_ratios[0] < contrast_ratios[2] + 0.08:
+		_failures.append("Water depth does not retain a visible shallow bed and obscure the deep bed.")
+	_report["water_depth_contrast"] = contrast_ratios
+	print("WATER_DEPTH_RENDER ", JSON.stringify({"seed": _config["seed"], "bed_contrast_ratio": contrast_ratios}))
 
 
 func _hydrology() -> void:
@@ -599,7 +639,7 @@ func _capture(label: String, details: Dictionary) -> void:
 		"render_cpu_ms": _distribution(cpu), "render_gpu_ms": _distribution(gpu),
 		"gpu_timestamps_available": gpu.max() > 0.0, "draw_calls": _distribution(calls),
 		"rendered_primitives": _distribution(primitives)})
-	if label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50"]:
+	if label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
 		var preview: Image = image.duplicate()
 		preview.resize(480, 270, Image.INTERPOLATE_LANCZOS)
 		print("REVIEW_PREVIEW ", str(_config["seed"]), " ", label, " ", Marshalls.raw_to_base64(preview.save_jpg_to_buffer(0.76)))

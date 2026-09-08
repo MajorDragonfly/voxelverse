@@ -47,6 +47,7 @@ var current_health: float = 100.0
 var current_hunger: float = 100.0
 var current_thirst: float = 100.0
 var is_dead: bool = false
+var is_swimming: bool = false
 
 var _starvation_damage_timer: float = 0.0
 var _dehydration_damage_timer: float = 0.0
@@ -132,7 +133,11 @@ func _physics_process(delta: float) -> void:
 	velocity.z = direction.z * move_speed
 
 	var grounded_before_move: bool = is_on_floor()
-	if grounded_before_move:
+	_update_water_movement(delta)
+	if is_swimming:
+		velocity.x *= 0.62
+		velocity.z *= 0.62
+	elif grounded_before_move:
 		velocity.y = 0.0
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_velocity
@@ -144,11 +149,27 @@ func _physics_process(delta: float) -> void:
 			_try_primary_action()
 		if Input.is_action_just_pressed("bite_action"):
 			_try_bite_action()
-	if grounded_before_move and velocity.y <= 0.0:
+	if grounded_before_move and velocity.y <= 0.0 and not is_swimming:
 		_attempt_step_up(delta)
 	move_and_slide()
-	if is_on_floor():
+	if is_on_floor() and not is_swimming:
 		apply_floor_snap()
+
+
+func _update_water_movement(delta: float) -> void:
+	var water: float = WorldGenerator.get_water_level(global_position.x, global_position.z)
+	var depth: float = water - WorldGenerator.get_terrain_height(global_position.x, global_position.z)
+	var immersion: float = water - global_position.y
+	is_swimming = depth > 1.1 and immersion > (0.15 if is_swimming else 0.45)
+	floor_snap_length = 0.0 if is_swimming else maximum_step_height + 0.12
+	if not is_swimming:
+		return
+	# Damped buoyancy works at elevated lakes as well as sea level. Keep normal
+	# collision so shore steps, rocks and buildings still block the creature.
+	var acceleration: float = clampf((immersion - 0.65) * 12.0 - velocity.y * 5.0, -fall_acceleration, fall_acceleration)
+	velocity.y = clampf(velocity.y + acceleration * delta, -3.5, 3.5)
+	if Input.is_action_just_pressed("jump"):
+		velocity.y = 3.5
 
 
 func _attempt_step_up(delta: float) -> bool:
@@ -208,6 +229,9 @@ func _update_survival(delta: float) -> void:
 
 
 func _try_primary_action() -> void:
+	if is_swimming:
+		_try_drink_water()
+		return
 	interaction_ray.force_raycast_update()
 	if not interaction_ray.is_colliding():
 		return

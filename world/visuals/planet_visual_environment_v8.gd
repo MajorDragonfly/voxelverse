@@ -79,6 +79,10 @@ func apply_profile_atmosphere() -> void:
 		return
 	_sky_material.sky_top_color = atmosphere["sky_top"]
 	_sky_material.sky_horizon_color = atmosphere["sky_horizon"]
+	# The finite landscape must meet atmospheric haze, not a black ground-sky
+	# strip just below the sea horizon.
+	_sky_material.ground_horizon_color = atmosphere["sky_horizon"]
+	_sky_material.ground_bottom_color = (atmosphere["sky_horizon"] as Color).darkened(0.16)
 	_environment.fog_light_color = atmosphere["fog_color"]
 	_base_fog_density = 0.20 * float(atmosphere["fog_density_scale"])
 	_environment.fog_density = _base_fog_density

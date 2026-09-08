@@ -116,6 +116,22 @@ func _streaming_checks() -> void:
 		var mesh: Mesh = horizon.get_node("DistantLand").mesh
 		_expect(mesh.get_aabb().size.x >= 768.0 and mesh.get_aabb().size.z >= 768.0, "Distant landscape does not extend beyond active chunks.")
 		_expect(mesh.get_aabb().size.y > 15.0, "Distant terrain lost its mountain silhouette.")
+		var arrays: Array = mesh.surface_get_arrays(0)
+		var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+		var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+		var slopes: int = 0
+		var tops: int = 0
+		for i in range(0, vertices.size(), 4):
+			# ArrayMesh packs normals; allow its octahedral decoding error.
+			if normals[i].y > 0.999:
+				tops += 1
+				for corner in range(1, 4):
+					slopes += int(vertices[i].y != vertices[i + corner].y)
+			else:
+				slopes += int(absf(absf(normals[i].x) + absf(normals[i].z) - 1.0) > 0.001 or absf(normals[i].y) > 0.001)
+		_expect(slopes == 0 and tops == 192 * 192, "Actual distant mountain mesh is still smooth/sloped instead of block columns.")
+		_expect(vertices.size() <= 192 * 192 * 20, "Distant voxel terrain exceeds its fixed five-quad column budget.")
+		print("Distant voxel geometry ", JSON.stringify({"columns": tops, "vertices": vertices.size(), "triangles": (arrays[Mesh.ARRAY_INDEX] as PackedInt32Array).size() / 3}))
 		horizon._update_coverage()
 		# The dummy renderer ignores ImageTexture.update(). Count the exact upload
 		# payload here; actual Vulkan/GL captures exercise the sampled mask.

@@ -68,6 +68,10 @@ func _try_primary_action() -> void:
 		wildlife_target.call("interact", self)
 		return
 
+	if is_swimming:
+		_try_drink_water()
+		return
+
 	interaction_ray.force_raycast_update()
 	if not interaction_ray.is_colliding():
 		return

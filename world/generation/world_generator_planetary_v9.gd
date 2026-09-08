@@ -5,6 +5,7 @@ const BiomeGrammar = preload("res://world/generation/biome_grammar_v9.gd")
 const Landmarks = preload("res://world/generation/landmark_grammar.gd")
 const ScenicSpawn = preload("res://world/generation/adventure_spawn_selector.gd")
 const Drainage = preload("res://world/generation/drainage_network.gd")
+const Bathymetry = preload("res://world/generation/ocean_bathymetry.gd")
 var _drainage_regions: Dictionary = {}
 var _drainage_samples: Dictionary = {}
 var _drained_heights: Dictionary = {}
@@ -28,7 +29,7 @@ func _configure_v6(seed_value: int) -> void:
 func get_base_terrain_height(world_x: float, world_z: float) -> float:
 	# Routing reads the uncarved landscape; querying final heights here would
 	# recurse back into routing and make the result depend on chunk order.
-	return super.get_terrain_height(world_x, world_z)
+	return Bathymetry.deepen(super.get_terrain_height(world_x, world_z), get_sea_level())
 
 
 func get_drainage_region(cell: Vector2i) -> Dictionary:

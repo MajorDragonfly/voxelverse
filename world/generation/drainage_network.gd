@@ -121,7 +121,8 @@ static func sample(route: Dictionary, point: Vector2) -> Dictionary:
 	var distance: float = Vector2(across, end_distance).length() - float(route["width"])
 	var kind: String = "river"
 	var level: float = level_at(route, u)
-	var depth: float = 1.35
+	var depth: float = 2.4 + float(route["width"]) * 0.13
+	var basin_width: float = float(route["width"])
 	for lake: Dictionary in route["lakes"]:
 		var lake_delta: Vector2 = point - (lake["center"] as Vector2)
 		var lake_distance: float = Vector2(lake_delta.dot(route["direction"]), lake_delta.dot(route["lateral"]) * 1.20).length() - float(lake["radius"])
@@ -129,10 +130,11 @@ static func sample(route: Dictionary, point: Vector2) -> Dictionary:
 			distance = lake_distance
 			level = lake["level"]
 			kind = "lake"
-			depth = 2.8
+			depth = clampf(float(lake["radius"]) * 0.46, 5.5, 11.0)
+			basin_width = float(lake["radius"]) * 0.85
 	if distance >= BANK_WIDTH:
 		return {}
-	return {"kind": kind, "level": level, "distance": distance, "depth": depth,
+	return {"kind": kind, "level": level, "distance": distance, "depth": depth, "basin_width": basin_width,
 		"sea": route["sea"], "flow": (route["direction"] as Vector2) if kind == "river" else Vector2.ZERO}
 
 static func surface(info: Dictionary, sea: float) -> float:
@@ -145,7 +147,11 @@ static func carve(base: float, info: Dictionary) -> float:
 		return base
 	var distance: float = info["distance"]
 	var level: float = info["level"]
-	var channel: float = level - float(info["depth"]) * smoothstep(0.0, 4.0, -distance)
+	# A wading shelf leads into the actual bowl/channel, rather than making the
+	# entire lake one shallow tray. This height also drives collision and depth.
+	var shelf: float = 0.9 * smoothstep(0.0, 2.0, -distance)
+	var basin: float = smoothstep(1.5, maxf(float(info["basin_width"]), 2.5), -distance)
+	var channel: float = level - shelf - (float(info["depth"]) - 0.9) * basin
 	# A gently raised bank contains elevated water even where the underlying
 	# noise has a small depression. Both bed and water return to the old fields.
 	if distance > 0.0:

@@ -93,6 +93,10 @@ func _update_context() -> void:
 			Color(0.92, 0.96, 0.94, 0.82)
 		)
 
+	if bool(_player.get("is_swimming")):
+		_label.text = "Swimming · LMB drink · Space rise"
+		_label.visible = true
+		return
 	_ray.force_raycast_update()
 	if not _ray.is_colliding():
 		_label.visible = false

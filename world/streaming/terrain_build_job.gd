@@ -1,9 +1,8 @@
 extends RefCounted
 
-const FarMeshJob = preload("res://world/streaming/terrain_far_mesh_job_v7.gd")
+const Surface = preload("res://world/streaming/voxel_surface_builder.gd")
 const Transition = preload("res://world/streaming/terrain_transition.gd")
 var far_stride: int = 4
-
 var generator_script: Script
 var world_seed: int
 var chunk_origin: Vector2
@@ -13,97 +12,46 @@ var cells_z: int
 var color_sample_stride: int
 var result: Dictionary = {}
 var _generator: Node
-
 var _fast_color_cache: Dictionary = {}
 var _fast_height_grid := PackedFloat32Array()
 var _fast_height_width: int = 0
 var _fast_height_depth: int = 0
-var _build_vertices := PackedVector3Array()
-var _build_normals := PackedVector3Array()
-var _build_colors := PackedColorArray()
-var _build_uvs := PackedVector2Array()
-var _build_targets := PackedVector2Array()
-var _transition_targets: Dictionary = {}
 var _horizon_heights: Dictionary = {}
 var _proxy_heights: Dictionary = {}
 var _render_min: float = INF
 var _render_max: float = -INF
 
-
 func run() -> void:
 	_generator = generator_script.new()
 	_generator.set_seed_override(world_seed)
-	_fast_color_cache.clear()
-	_build_vertices.clear()
-	_build_normals.clear()
-	_build_colors.clear()
-	_build_uvs.clear()
-	_build_targets.clear()
-	_transition_targets.clear()
-	_horizon_heights.clear()
-	_proxy_heights.clear()
-	_render_min = INF
-	_render_max = -INF
 	_build_local_height_cache()
-
-	var half_width: float = get_chunk_width() * 0.5
-	var half_depth: float = get_chunk_depth() * 0.5
-
-	for cell_z in range(cells_z):
-		for cell_x in range(cells_x):
-			var x0: float = float(cell_x) * cell_size - half_width
-			var x1: float = x0 + cell_size
-			var z0: float = float(cell_z) * cell_size - half_depth
-			var z1: float = z0 + cell_size
-			var height: float = _get_column_height_by_index(cell_x, cell_z)
-			var top_color: Color = _get_fast_cell_color(cell_x, cell_z)
-			_append_build_quad(
-				Vector3(x0, height, z0),
-				Vector3(x0, height, z1),
-				Vector3(x1, height, z1),
-				Vector3(x1, height, z0),
-				Vector3.UP,
-				top_color
-			)
-			var side_color: Color = top_color.darkened(0.16)
-			var west: float = _get_column_height_by_index(cell_x - 1, cell_z)
-			if height > west + 0.001:
-				_append_build_quad(
-					Vector3(x0, west, z1), Vector3(x0, height, z1),
-					Vector3(x0, height, z0), Vector3(x0, west, z0),
-					Vector3.LEFT, side_color)
-			var east: float = _get_column_height_by_index(cell_x + 1, cell_z)
-			if height > east + 0.001:
-				_append_build_quad(
-					Vector3(x1, east, z0), Vector3(x1, height, z0),
-					Vector3(x1, height, z1), Vector3(x1, east, z1),
-					Vector3.RIGHT, side_color)
-			var north: float = _get_column_height_by_index(cell_x, cell_z - 1)
-			if height > north + 0.001:
-				_append_build_quad(
-					Vector3(x1, north, z0), Vector3(x1, height, z0),
-					Vector3(x0, height, z0), Vector3(x0, north, z0),
-					Vector3.FORWARD, side_color)
-			var south: float = _get_column_height_by_index(cell_x, cell_z + 1)
-			if height > south + 0.001:
-				_append_build_quad(
-					Vector3(x0, south, z1), Vector3(x0, height, z1),
-					Vector3(x1, height, z1), Vector3(x1, south, z1),
-					Vector3.BACK, side_color)
-
-	var arrays: Array = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = _build_vertices
-	arrays[Mesh.ARRAY_NORMAL] = _build_normals
-	arrays[Mesh.ARRAY_COLOR] = _build_colors
-	arrays[Mesh.ARRAY_TEX_UV] = _build_uvs
-	arrays[Mesh.ARRAY_TEX_UV2] = _build_targets
+	var arrays: Array = _column_arrays(cell_size, true)
 	result = {"arrays": arrays, "heights": _fast_height_grid, "width": _fast_height_width, "depth": _fast_height_depth, "colors": _fast_color_cache}
-	result["far_arrays"] = _build_far_arrays()
-	result["render_bounds"] = AABB(Vector3(-half_width, _render_min, -half_depth), Vector3(half_width * 2.0, _render_max - _render_min, half_depth * 2.0))
+	result["far_arrays"] = _column_arrays(Transition.PROXY_STEP, false)
+	result["render_bounds"] = AABB(Vector3(-get_chunk_width() * 0.5, _render_min, -get_chunk_depth() * 0.5), Vector3(get_chunk_width(), _render_max - _render_min, get_chunk_depth()))
 	_generator.free()
 	_generator = null
 
+func _column_arrays(step: float, detailed: bool) -> Array:
+	var size := Vector2(get_chunk_width(), get_chunk_depth())
+	var columns: int = roundi(size.x / step)
+	var rows: int = roundi(size.y / step)
+	var heights := PackedVector3Array()
+	var colors := PackedColorArray()
+	for z in range(-1, rows + 1):
+		for x in range(-1, columns + 1):
+			var point: Vector2 = chunk_origin + Vector2(x + 0.5, z + 0.5) * step - size * 0.5
+			var proxy: float = Transition.height_at(_generator, point, Transition.PROXY_STEP, _proxy_heights)
+			var height: float = _get_column_height_by_index(x, z) if detailed else proxy
+			var horizon: float = Transition.height_at(_generator, point, Transition.HORIZON_STEP, _horizon_heights)
+			heights.append(Vector3(height, horizon, proxy))
+			var color := Color.WHITE
+			if x >= 0 and z >= 0 and x < columns and z < rows:
+				color = _get_fast_cell_color(x, z) if detailed else _generator.get_biome_color(point.x, point.y, height)
+			colors.append(color)
+			_render_min = minf(_render_min, minf(height, minf(horizon, proxy)))
+			_render_max = maxf(_render_max, maxf(height, maxf(horizon, proxy)))
+	return Surface.new().build(size, step, heights, colors)
 
 func _build_local_height_cache() -> void:
 	_fast_height_width = cells_x + 2
@@ -130,39 +78,6 @@ func _get_column_height_by_index(cell_x: int, cell_z: int) -> float:
 		return _fast_height_grid[grid_z * _fast_height_width + grid_x]
 	var world_center: Vector2 = _get_cell_center_world_position_by_index(cell_x, cell_z)
 	return _generator.get_visual_terrain_height(world_center.x, world_center.y)
-
-
-func _append_build_quad(
-	a: Vector3,
-	b: Vector3,
-	c: Vector3,
-	d: Vector3,
-	normal: Vector3,
-	color: Color
-) -> void:
-	# Match the original terrain builder: callers have different winding on
-	# different axes, while Godot requires clockwise outward front faces.
-	var reverse: bool = (b - a).cross(c - a).dot(normal) > 0.0
-	var face := PackedVector3Array([a, c, b, a, d, c] if reverse else [a, b, c, a, c, d])
-	_build_vertices.append_array(face)
-	for vertex: Vector3 in face:
-		var point: Vector2 = chunk_origin + Vector2(vertex.x, vertex.z)
-		if not _transition_targets.has(point):
-			_transition_targets[point] = Vector2(Transition.height_at(_generator, point, Transition.HORIZON_STEP, _horizon_heights), Transition.height_at(_generator, point, Transition.PROXY_STEP, _proxy_heights))
-		var target: Vector2 = _transition_targets[point]
-		_render_min = minf(_render_min, minf(vertex.y, minf(target.x, target.y)))
-		_render_max = maxf(_render_max, maxf(vertex.y, maxf(target.x, target.y)))
-		_build_targets.append(target)
-	for _index in range(6):
-		_build_normals.append(normal)
-		_build_colors.append(color)
-	_build_uvs.append_array(PackedVector2Array([
-		Vector2(0.0, 0.0), Vector2(1.0, 1.0), Vector2(0.0, 1.0),
-		Vector2(0.0, 0.0), Vector2(1.0, 0.0), Vector2(1.0, 1.0),
-	] if reverse else [
-		Vector2(0.0, 0.0), Vector2(0.0, 1.0), Vector2(1.0, 1.0),
-		Vector2(0.0, 0.0), Vector2(1.0, 1.0), Vector2(1.0, 0.0),
-	]))
 
 
 func _get_fast_cell_color(cell_x: int, cell_z: int) -> Color:
@@ -196,31 +111,3 @@ func get_chunk_depth() -> float:
 
 func _get_cell_center_world_position_by_index(x: int, z: int) -> Vector2:
 	return chunk_origin + Vector2((x + 0.5) * cell_size - get_chunk_width() * 0.5, (z + 0.5) * cell_size - get_chunk_depth() * 0.5)
-
-
-func _build_far_arrays() -> Array:
-	# A nested world-aligned grid has identical samples on both sides of a
-	# chunk boundary. Sampling a column centre for a corner offset this by .25 m.
-	var columns: int = roundi(get_chunk_width() / Transition.PROXY_STEP) + 1
-	var rows: int = roundi(get_chunk_depth() / Transition.PROXY_STEP) + 1
-	var xs := PackedFloat32Array()
-	var zs := PackedFloat32Array()
-	var heights := PackedFloat32Array()
-	var colors := PackedColorArray()
-	var targets := PackedVector2Array()
-	for x in range(columns):
-		xs.append(x * Transition.PROXY_STEP - get_chunk_width() * 0.5)
-	for z in range(rows):
-		zs.append(z * Transition.PROXY_STEP - get_chunk_depth() * 0.5)
-	for z in range(rows):
-		for x in range(columns):
-			var point: Vector2 = chunk_origin + Vector2(xs[x], zs[z])
-			var height: float = Transition.height_at(_generator, point, Transition.PROXY_STEP, _proxy_heights)
-			heights.append(height)
-			colors.append(_generator.get_biome_color(point.x, point.y, height))
-			targets.append(Vector2(Transition.height_at(_generator, point, Transition.HORIZON_STEP, _horizon_heights), height))
-	var job := FarMeshJob.new({"columns": columns, "rows": rows, "local_x_values": xs, "local_z_values": zs, "heights": heights, "colors": colors})
-	job.run()
-	var arrays: Array = job.get_result()["arrays"]
-	arrays[Mesh.ARRAY_TEX_UV2] = targets
-	return arrays

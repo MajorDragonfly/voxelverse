@@ -1,0 +1,6 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Surface streaming seed: 15838
+Distant voxel geometry {"columns":36864,"triangles":170994,"vertices":341988}
+Directional streaming measurements [{"direction":[1,0],"lead_metres":37.1236343383789,"seconds":1.838375},{"direction":[-1,0],"lead_metres":47.93701171875,"seconds":0.010529},{"direction":[0,1],"lead_metres":41.4283294677734,"seconds":1.220108},{"direction":[0,-1],"lead_metres":47.9476699829102,"seconds":0.008754}]
+Playtest regression checks: compound obstacle physics, four travel directions, horizon coverage and cancellation.
