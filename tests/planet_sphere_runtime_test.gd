@@ -17,6 +17,7 @@ func _run() -> void:
 	root.add_child(lab)
 	lab.time_speed = 0.0
 	if "--seam-only" in OS.get_cmdline_user_args():
+		_small_moon_fixture()
 		lab._open_body("m1:lune")
 		await _seam_rays()
 		for failure in failures:
@@ -29,7 +30,7 @@ func _run() -> void:
 		lab.walker.enabled = false
 		var saved: Dictionary = Save.read()
 		var matches: bool = lab.system.elapsed == saved.elapsed and lab.system.binary == saved.binary \
-			and _distance(saved.location, lab.walker.location(), 256.0) < 0.02
+			and _distance(saved.location, lab.walker.location(), float(lab.system.bodies["m1:haven"].radius)) < 0.02
 		lab.queue_free()
 		await process_frame
 		quit(0 if matches else 1)
@@ -43,19 +44,19 @@ func _run() -> void:
 		lab.set_view(mode)
 		lab.walker.enabled = false
 		await process_frame
-		_expect(_distance(start.location, lab.walker.location(), 256.0) < 0.02, "Orbit return moved the player.")
+		_expect(_distance(start.location, lab.walker.location(), float(lab.system.bodies["m1:haven"].radius)) < 0.02, "Orbit return moved the player.")
 	lab.toggle_binary()
 	lab._update_views()
 	for id: String in lab.lights:
 		var direction: Vector3 = lab.system.sky_direction(lab.body_id, id,
-			Cube.vector(Cube.cartesian(lab.walker.location(), 256.0)))
+			Cube.vector(Cube.cartesian(lab.walker.location(), float(lab.system.bodies["m1:haven"].radius))))
 		_expect(lab.lights[id].basis.z.dot(direction) > 0.99999, "Sunlight does not follow the visible star.")
 	for time in [0.0, 120.0]:
 		lab.system.elapsed = time
 		lab._update_views()
 		for id: String in lab.lights:
 			var direction: Vector3 = lab.system.sky_direction(lab.body_id, id,
-				Cube.vector(Cube.cartesian(lab.walker.location(), 256.0)))
+				Cube.vector(Cube.cartesian(lab.walker.location(), float(lab.system.bodies["m1:haven"].radius))))
 			if direction.dot(lab.walker.up_direction) < -0.04:
 				_expect(lab.lights[id].light_energy == 0.0, "A sun below the horizon lights the surface from inside the planet.")
 	lab.system.elapsed = 117.25
@@ -69,7 +70,7 @@ func _run() -> void:
 	lab.load_lab()
 	lab.walker.enabled = false
 	_expect(lab.body_id == "m1:haven" and lab.system.binary and lab.system.elapsed == 117.25, "Load lost body, binary system or clock.")
-	_expect(_distance(start.location, lab.walker.location(), 256.0) < 0.02, "Load moved surface location.")
+	_expect(_distance(start.location, lab.walker.location(), float(lab.system.bodies["m1:haven"].radius)) < 0.02, "Load moved surface location.")
 	_expect(str(lab.walker.preview.blueprint.get("design_id", "")) == design, "Creature design changed on landing.")
 	await _water()
 	await _circumnavigate()
@@ -105,7 +106,16 @@ func _water() -> void:
 	_expect(absf(lab.walker.location().height - 0.6) < 0.15, "Ocean surface height is inconsistent with buoyancy.")
 
 
+func _small_moon_fixture() -> void:
+	lab.system.bodies["m1:lune"].radius = 64.0
+	lab.system.bodies["m1:lune"].terrain_revision = 1
+	lab.system.bodies["m1:lune"].adaptive_tiles = false
+
+
 func _circumnavigate() -> void:
+	# Preserve the bounded original polar-loop regression fixture, alongside
+	# the production-size voxel traversal in adaptive_planet_test.
+	_small_moon_fixture()
 	# Same streaming/controller, 64 m moon: complete polar route at ordinary
 	# fixed physics cadence, with real move_and_slide contact (no teleports).
 	lab._open_body("m1:lune")

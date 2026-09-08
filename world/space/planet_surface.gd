@@ -7,6 +7,7 @@ var body: Dictionary
 var terrain: Dictionary
 var continents := FastNoiseLite.new()
 var detail := FastNoiseLite.new()
+var local_relief := FastNoiseLite.new()
 
 
 func _init(descriptor: Dictionary) -> void:
@@ -18,6 +19,9 @@ func _init(descriptor: Dictionary) -> void:
 	detail.seed = int(body.seed) + 733
 	detail.frequency = 4.0
 	detail.fractal_octaves = 1
+	local_relief.seed = int(body.seed) + 1973
+	local_relief.frequency = 1.0 / 48.0
+	local_relief.fractal_octaves = 2
 
 
 func height_at(d: Vector3) -> float:
@@ -25,7 +29,10 @@ func height_at(d: Vector3) -> float:
 	var broad: float = continents.get_noise_3dv(d)
 	var small: float = detail.get_noise_3dv(d)
 	var amplitude: float = minf(float(body.radius) * 0.065, 80.0)
-	return (broad * 1.8 + small * 0.18 + 0.12) * amplitude
+	var height: float = (broad * 1.8 + small * 0.18 + 0.12) * amplitude
+	if body.get("terrain_revision", 1) >= 2:
+		height += local_relief.get_noise_3dv(d * float(body.radius)) * 4.0
+	return height
 
 
 func sample(location: Dictionary) -> Dictionary:

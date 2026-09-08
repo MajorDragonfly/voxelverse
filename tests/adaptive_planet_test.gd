@@ -71,6 +71,8 @@ func _mesh_seams(body: Dictionary, layout: RefCounted) -> void:
 				if not built.has(entry.id):
 					entry["anchor"] = surface.point(entry.face, entry.uv.x + entry.width * 0.5, entry.uv.y + entry.width * 0.5)
 					built[entry.id] = Patch.build(entry, surface)
+					if float(entry.width) * body.radius / Patch.CELLS <= 8.0:
+						_check_columns(built[entry.id].mesh, entry, body)
 			var vertices: PackedVector3Array = built[tile.id].mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
 			var other_vertices: PackedVector3Array = built[neighbor.id].mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
 			for step in range(17):
@@ -93,6 +95,33 @@ func _mesh_seams(body: Dictionary, layout: RefCounted) -> void:
 	_expect(maximum_water_error < 0.001, "Adaptive ocean has a gap at a detail boundary.")
 	_expect(cross_face > 100 and probes > 1000, "Seam test did not cover actual cube-face boundaries.")
 	measurements.merge({"seam_probes": probes, "cross_face_probes": cross_face, "maximum_seam_m": maximum_error, "maximum_water_seam_m": maximum_water_error})
+
+
+func _check_columns(mesh: ArrayMesh, tile: Dictionary, body: Dictionary) -> void:
+	var arrays: Array = mesh.surface_get_arrays(0)
+	var points: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+	_expect(points.size() > 289 and points.size() <= 3233, "Near planet patch has no real voxel geometry or exceeds its column budget.")
+	var referenced: Dictionary = {}
+	for i: int in indices:
+		_expect(i >= 289, "Voxel patch renders a second smooth base underneath its columns.")
+		referenced[points[i]] = true
+	for edge in range(4):
+		for step in range(17):
+			_expect(referenced.has(points[Patch.edge_index(edge, step)]), "Canonical seam vertex is absent from the actual drawn voxel surface.")
+	var tops: int = 0
+	var walls: int = 0
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	for triangle in range(0, indices.size(), 6):
+		var i: int = indices[triangle]
+		var up: Vector3 = Cube.vector(Cube.global_position(points[i], tile.anchor)).normalized()
+		if normals[i].dot(up) > 0.98:
+			tops += 1
+		if absf(normals[i].dot(up)) < 0.05:
+			walls += 1
+	_expect(tops >= 196, "Voxel column tops lost their flat radial faces.")
+	measurements["voxel_patches"] = int(measurements.get("voxel_patches", 0)) + 1
+	measurements["voxel_walls"] = int(measurements.get("voxel_walls", 0)) + walls
 
 
 func _edge_vertex(vertices: PackedVector3Array, uv: Vector2) -> Vector3:

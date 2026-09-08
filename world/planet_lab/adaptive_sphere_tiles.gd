@@ -36,6 +36,7 @@ func configure(descriptor: Dictionary) -> void:
 	ocean_material = StandardMaterial3D.new()
 	ocean_material.albedo_color = Color("247c9d")
 	ocean_material.roughness = 0.9
+	ocean_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	# Water uses the same adaptive curved patches as land. A fixed low-poly
 	# SphereMesh would sink metres below the buoyancy surface on a large body.
 
@@ -192,6 +193,29 @@ func _update_collisions(direction: Vector3) -> void:
 
 func pending_count() -> int:
 	return _pending.size() if _task < 0 else -1
+
+
+func _collision_shape(mesh: ArrayMesh) -> ConcavePolygonShape3D:
+	var arrays: Array = mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX].duplicate()
+	if vertices.size() <= 289:
+		return super._collision_shape(mesh)
+	# Voxel tops duplicate their perimeter vertices for flat normals. Expand
+	# those actual rendered boundary copies by the same sub-mm seam guard.
+	var boundary: Dictionary = {}
+	for edge in range(4):
+		for step in range(17):
+			boundary[vertices[PatchMesh.edge_index(edge, step)]] = true
+	for i in range(289, vertices.size()):
+		if boundary.has(vertices[i]):
+			vertices[i] += vertices[i].normalized() * COLLISION_EDGE_GUARD
+	var faces := PackedVector3Array()
+	for index: int in arrays[Mesh.ARRAY_INDEX]:
+		faces.append(vertices[index])
+	var shape := ConcavePolygonShape3D.new()
+	shape.backface_collision = true
+	shape.set_faces(faces)
+	return shape
 
 
 func _exit_tree() -> void:

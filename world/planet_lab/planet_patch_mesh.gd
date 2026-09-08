@@ -1,6 +1,7 @@
 extends RefCounted
 
 const Cube = preload("res://world/space/cube_sphere.gd")
+const Voxels = preload("res://world/planet_lab/voxel_patch_builder.gd")
 const CELLS: int = 16
 const STRIDE: int = CELLS + 1
 
@@ -52,6 +53,8 @@ static func build_arrays(tile: Dictionary, surface: RefCounted) -> Dictionary:
 	arrays[Mesh.ARRAY_COLOR] = colors
 	arrays[Mesh.ARRAY_INDEX] = indices
 	var land: Array = arrays.duplicate()
+	if surface.body.get("terrain_revision", 1) >= 2 and float(tile.width) * float(surface.body.radius) / CELLS <= Voxels.MAX_CELL_WIDTH:
+		land = Voxels.new().build(tile, surface, land)
 	var water: Array = []
 	if has_water and surface.body.kind == "planet":
 		arrays[Mesh.ARRAY_VERTEX] = ocean

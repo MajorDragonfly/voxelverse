@@ -4,6 +4,7 @@ var _biome_timer: float = 0.0
 var _biome_mist: float = 0.1
 var _base_fog_density: float = 0.20
 var _view_player: Node3D
+var underwater: UnderwaterView
 
 
 func _process(delta: float) -> void:
@@ -23,6 +24,22 @@ func _process(delta: float) -> void:
 func _ready() -> void:
 	super._ready()
 	_apply_planet_identity()
+	underwater = preload("res://world/visuals/underwater_view.gd").new()
+	underwater.name = "UnderwaterView"
+	underwater.sample_water = _sample_camera_water
+	add_child(underwater)
+
+
+func _sample_camera_water(point: Vector3) -> Dictionary:
+	if _current_visual_mode != VisualMode.SURFACE:
+		return {}
+	var water: float = WorldGenerator.get_water_level(point.x, point.z)
+	# Do the expensive bed query only when the eye actually enters water.
+	if point.y >= water:
+		return {}
+	var bed: float = WorldGenerator.get_terrain_height(point.x, point.z)
+	var pigment: Color = WorldGenerator.get_planet_profile().get("material_slots", {}).get("water_deep", Color("12546a"))
+	return {"water": water > bed + 0.15, "depth": water - point.y, "color": pigment}
 
 
 func _apply_planet_identity() -> void:

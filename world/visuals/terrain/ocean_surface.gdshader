@@ -70,6 +70,19 @@ void fragment() {
 	float beat = floor(TIME * 2.0) * 0.5;
 	vec2 drift_tile = floor((world_position.xz - water_flow * beat * 0.7) * 2.0);
 	float glint = step(0.88, tile_hash(drift_tile + vec2(floor(beat * 0.4)))) * 0.035 * detail;
+	// The depth buffer viewed from BELOW contains sky/trees, not the seabed.
+	// Give the underside its own closed material instead of deriving foam and
+	// alpha from those unrelated surfaces (the old checkerboard ceiling).
+	if (CAMERA_POSITION_WORLD.y < world_position.y) {
+		float facing = clamp(abs(dot(normalize(VIEW), normalize((VIEW_MATRIX * vec4(0.0, -1.0, 0.0, 0.0)).xyz))), 0.0, 1.0);
+		ALBEDO = mix(deep_color.rgb, shallow_color.rgb, 0.35 + facing * 0.3) * (1.0 + patch * 0.25);
+		EMISSION = shallow_color.rgb * 0.12 * facing;
+		NORMAL = normalize((VIEW_MATRIX * vec4(0.0, -1.0, 0.0, 0.0)).xyz);
+		ROUGHNESS = 0.9;
+		SPECULAR = 0.0;
+		METALLIC = 0.0;
+		ALPHA = 1.0;
+	} else {
 
 	vec3 bed_view = scene_position(SCREEN_UV, INV_PROJECTION_MATRIX);
 	vec3 bed_world = (INV_VIEW_MATRIX * vec4(bed_view, 1.0)).xyz;
@@ -89,4 +102,5 @@ void fragment() {
 	SPECULAR = water_specular;
 	METALLIC = 0.0;
 	ALPHA = clamp(mix(shallow_color.a, deep_color.a, smoothstep(0.1, 3.5, thickness)) + foam * 0.2, 0.0, 1.0);
+	}
 }

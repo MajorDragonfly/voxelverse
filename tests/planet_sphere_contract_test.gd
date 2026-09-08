@@ -105,8 +105,14 @@ func _surface_edges() -> void:
 				if seen.has(key):
 					_expect(sample == seen[key], "Height/water/normal/climate disagree across cube faces.")
 				seen[key] = sample
+	# Retain the original 256 m smooth-sphere regression fixture; production
+	# voxel meshes and the largest current body use adaptive_planet_test.
+	var baseline: Dictionary = system.bodies["m1:haven"].duplicate(true)
+	baseline.radius = 256.0
+	baseline.terrain_revision = 1
+	surface = Surface.new(baseline)
 	var tiles := Tiles.new()
-	tiles.configure(system.bodies["m1:haven"])
+	tiles.configure(baseline)
 	var perimeter: Dictionary = {}
 	for tile: Dictionary in tiles.tiles:
 		var far_vertices: PackedVector3Array = tile.far.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]

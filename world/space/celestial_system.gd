@@ -6,20 +6,26 @@ var bodies: Dictionary = {}
 var elapsed: float = 0.0
 var binary: bool = false
 const LANDABLE: Array[String] = ["m1:haven", "m1:ember", "m1:lune", "m1:aster"]
+const TERRAIN_REVISION: int = 2
+const PREVIOUS_RADII: Dictionary = {"m1:haven": 256.0, "m1:ember": 160.0, "m1:lune": 64.0, "m1:aster": 4096.0}
 
 
 func _init(two_stars: bool = false) -> void:
 	binary = two_stars
-	_add("m1:sol", "Solis", "star", 9, 120.0, "", 0.0, 600.0, 0.0)
+	# Compressed gameplay scale, in metres. Stars exceed every planet; moon
+	# and binary-star orbits leave physical clearance in every phase.
+	_add("m1:sol", "Solis", "star", 9, 16384.0, "", 0.0, 600.0, 0.0)
 	if binary:
-		bodies["m1:sol"].orbit_radius = 200.0
+		bodies["m1:sol"].orbit_radius = 30000.0
 		bodies["m1:sol"].orbit_period = 100.0
-		_add("m1:vesper", "Vesper", "star", 17, 80.0, "", 330.0, 100.0, PI)
-	_add("m1:haven", "Haven", "planet", 12345, 256.0, "m1:sol", 6000.0, 1400.0, 0.1)
-	_add("m1:ember", "Ember", "planet", 98765, 160.0, "m1:sol", 11000.0, 2300.0, 2.2)
-	_add("m1:lune", "Lune", "moon", 31415, 64.0, "m1:haven", 950.0, 180.0, 1.1)
-	_add("m1:aster", "Aster", "planet", 15838, 4096.0, "m1:sol", 35000.0, 5100.0, 3.5)
-	bodies["m1:aster"]["adaptive_tiles"] = true
+		_add("m1:vesper", "Vesper", "star", 17, 10240.0, "", 48000.0, 100.0, PI)
+	_add("m1:haven", "Haven", "planet", 12345, 2048.0, "m1:sol", 120000.0, 1400.0, 0.1)
+	_add("m1:ember", "Ember", "planet", 98765, 1536.0, "m1:sol", 240000.0, 2300.0, 2.2)
+	_add("m1:lune", "Lune", "moon", 31415, 512.0, "m1:haven", 12000.0, 180.0, 1.1)
+	_add("m1:aster", "Aster", "planet", 15838, 4096.0, "m1:sol", 420000.0, 5100.0, 3.5)
+	for id: String in LANDABLE:
+		bodies[id]["adaptive_tiles"] = true
+		bodies[id]["terrain_revision"] = TERRAIN_REVISION
 	if binary:
 		# Empty parent denotes the common, stationary barycentric reference frame.
 		bodies["m1:haven"].parent_id = ""

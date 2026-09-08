@@ -99,13 +99,36 @@ func _physics_process(delta: float) -> void:
 	jump_requested = false
 	velocity = desired + up_direction * vertical
 	var old_position: Vector3 = position
+	if is_on_floor() and vertical <= 0.0 and not swimming:
+		_attempt_step_up(desired * delta)
 	move_and_slide()
+	if vertical <= 0.0 and not swimming:
+		apply_floor_snap()
 	traveled += position.distance_to(old_position)
 	if position.length() > 64.0:
 		var point: Array = Cube.global_position(position, terrain.origin)
 		terrain.rebase(point)
 		position = Vector3.ZERO
 	_update_camera()
+
+
+func _attempt_step_up(motion: Vector3) -> void:
+	# Probe the real column collider in the current radial frame. No height
+	# teleport: a low ceiling or missing floor must reject the step.
+	if motion.length_squared() < 0.00001 or not test_move(global_transform, motion):
+		return
+	var rise: Vector3 = up_direction * 0.62
+	if test_move(global_transform, rise):
+		return
+	var raised: Transform3D = global_transform.translated(rise)
+	if test_move(raised, motion):
+		return
+	var landing := KinematicCollision3D.new()
+	if not test_move(raised.translated(motion), -up_direction * 0.85, landing):
+		return
+	if landing.get_normal().dot(up_direction) < cos(floor_max_angle):
+		return
+	global_transform = raised
 
 
 func turn(relative: Vector2) -> void:

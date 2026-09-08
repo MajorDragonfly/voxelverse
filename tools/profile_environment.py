@@ -18,7 +18,7 @@ def main():
     parser.add_argument("--godot", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility"], default="forward_plus")
-    parser.add_argument("--cases", nargs="+", choices=["world", "assets", "species", "cluster", "creature", "water", "hydrology", "planet_lab"], default=["world", "assets", "species", "cluster", "creature", "water", "hydrology"])
+    parser.add_argument("--cases", nargs="+", choices=["world", "assets", "species", "cluster", "creature", "water", "hydrology", "planet_lab", "underwater"], default=["world", "assets", "species", "cluster", "creature", "water", "hydrology"])
     parser.add_argument("--seeds", nargs="+", type=int, default=[15838, 23757])
     parser.add_argument("--size", nargs=2, type=int, default=[1280, 720], metavar=("WIDTH", "HEIGHT"))
     parser.add_argument("--frames", type=int, default=240)

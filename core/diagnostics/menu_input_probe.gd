@@ -16,6 +16,7 @@ func _run() -> void:
 	get_node("/root/SaveGameService").autosave_enabled = false
 	for frame in range(4):
 		await tree.process_frame
+	await _probe_underwater_camera()
 	var old_mouse: int = Input.mouse_mode
 	_key(KEY_ESCAPE)
 	await tree.process_frame
@@ -77,8 +78,46 @@ func _run() -> void:
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():
-		print("MENU_INPUT_PASSED: Esc, F8, actual paused GUI clicks, saved VSync, mouse restoration, physical F4, menu-to-lab round trip and adaptive Aster save/load.")
+		print("MENU_INPUT_PASSED: underwater camera/air restoration, Esc, F8, actual paused GUI clicks, saved VSync, mouse restoration, physical F4, menu-to-lab round trip and voxel Aster save/load.")
 	tree.quit(0 if failures.is_empty() else 1)
+
+
+func _probe_underwater_camera() -> void:
+	var tree := get_tree()
+	var effect: Node = tree.get_first_node_in_group(&"underwater_view")
+	_expect(effect != null, "Packaged main scene has no underwater effect.")
+	if effect == null:
+		return
+	var generator := get_node("/root/WorldGenerator")
+	var spawn: Vector3 = generator.get_scenic_spawn()
+	var dive := Vector3.ZERO
+	var found: bool = false
+	for z in range(-6, 7):
+		for x in range(-6, 7):
+			var point: Vector3 = spawn + Vector3(x * 32, 0, z * 32)
+			var level: float = generator.get_water_level(point.x, point.z)
+			if generator.get_terrain_height(point.x, point.z) < level - 3.0:
+				dive = Vector3(point.x, level - 1.0, point.z)
+				found = true
+				break
+		if found:
+			break
+	_expect(found, "Native input fixture has no water for its camera check.")
+	if not found:
+		return
+	var previous: Camera3D = get_viewport().get_camera_3d()
+	var camera := Camera3D.new()
+	tree.current_scene.add_child(camera)
+	camera.position = dive
+	camera.make_current()
+	effect.update_view()
+	_expect(effect.submerged and camera.environment != null and camera.environment.fog_depth_end < 40.0, "Native eye did not enter the actual world's water.")
+	camera.position.y += 2.0
+	effect.update_view()
+	_expect(not effect.submerged and camera.environment == null, "Native camera kept its water atmosphere on surfacing.")
+	previous.make_current()
+	camera.queue_free()
+	await tree.process_frame
 
 
 func _key(code: Key, physical_only: bool = false) -> void:

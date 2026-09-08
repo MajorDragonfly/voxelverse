@@ -37,6 +37,8 @@ var _ready_complete: bool = false
 var _save_read_only: bool = false
 var creature_design: Dictionary = {}
 var leave_without_saving: Button
+var underwater: UnderwaterView
+const SPACE_SCALE: float = 0.001
 
 
 func _ready() -> void:
@@ -52,8 +54,11 @@ func _ready() -> void:
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	world_environment.environment = environment
 	add_child(world_environment)
+	underwater = preload("res://world/visuals/underwater_view.gd").new()
+	underwater.sample_water = _sample_camera_water
+	add_child(underwater)
 	add_child(space)
-	space.scale = Vector3.ONE * 0.01
+	space.scale = Vector3.ONE * SPACE_SCALE
 	add_child(sky)
 	add_child(space_camera)
 	space_camera.far = 1000.0
@@ -157,8 +162,8 @@ func _build_system_view() -> void:
 			lights[id] = light
 	landing_marker = MeshInstance3D.new()
 	var pin := SphereMesh.new()
-	pin.radius = 3.0
-	pin.height = 6.0
+	pin.radius = 16.0
+	pin.height = 32.0
 	landing_marker.mesh = pin
 	var pin_material := StandardMaterial3D.new()
 	pin_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -216,9 +221,33 @@ func _open_body(id: String, saved: Dictionary = {}) -> void:
 	var heading: Vector3 = Vector3.FORWARD
 	if not saved.is_empty():
 		location = saved.location
+		if int(saved.get("terrain_revision", 1)) < System.TERRAIN_REVISION:
+			location = _migrate_location(location)
 		heading = Cube.vector(saved.forward)
 	walker.place(location, heading)
 	set_view("surface")
+
+
+func _migrate_location(location: Dictionary) -> Dictionary:
+	var migrated: Dictionary = location.duplicate(true)
+	var old_body: Dictionary = system.bodies[body_id].duplicate(true)
+	old_body.radius = System.PREVIOUS_RADII[body_id]
+	old_body.terrain_revision = 1
+	var previous := preload("res://world/space/planet_surface.gd").new(old_body)
+	var old_height: float = previous.sample(location).height
+	var new_height: float = terrain.surface.sample(location).height
+	if not (old_height < 0.0 and new_height < 0.0 and system.bodies[body_id].kind == "planet" and location.height > old_height + 1.5):
+		migrated.height = new_height + maxf(float(location.height) - old_height, 1.05)
+	return migrated
+
+
+func _sample_camera_water(point: Vector3) -> Dictionary:
+	if view_mode != "surface" or not is_instance_valid(terrain) or system.bodies[body_id].kind != "planet":
+		return {}
+	var address: Dictionary = Cube.from_cartesian(body_id, Cube.global_position(point, terrain.origin), system.bodies[body_id].radius)
+	if address.height >= 0.0:
+		return {}
+	return {"water": terrain.surface.sample(address).water, "depth": -float(address.height), "color": Color("12546a")}
 
 
 func _coastal_spawn() -> Dictionary:
@@ -266,8 +295,8 @@ func _process(delta: float) -> void:
 	var up: Vector3 = Cube.vector(Cube.direction(address_value.face, address_value.u, address_value.v))
 	var daylight: float = up.dot(system.sky_direction(body_id, "m1:sol"))
 	headline.text = "%s  /  %s" % [system.bodies[body_id].name, {"surface": "Oberfläche", "orbit": "Orbit", "system": "Sternsystem"}[view_mode]]
-	details.text = "%s  ·  %s  ·  Radius %d m\n%02d:%02d  ·  Zeit ×%.0f  ·  %d / %d Nahkacheln  ·  %d Ursprungswechsel" % [
-		"Zwei Sonnen" if system.binary else "Eine Sonne", "Tag" if daylight > 0.0 else "Nacht", system.bodies[body_id].radius,
+	details.text = "%s  ·  %s  ·  Durchmesser %.2f km\n%02d:%02d  ·  Zeit ×%.0f  ·  %d / %d Nahkacheln  ·  %d Ursprungswechsel" % [
+		"Zwei Sonnen" if system.binary else "Eine Sonne", "Tag" if daylight > 0.0 else "Nacht", float(system.bodies[body_id].radius) * 0.002,
 		int(system.elapsed) / 60, int(system.elapsed) % 60, time_speed, terrain.active.size(), Tiles.MAX_NEAR, terrain.rebases]
 	if terrain is AdaptiveSphereTiles:
 		details.text += "\n%d Kacheln · Detailstufen %d–%d · %s" % [terrain.tiles.size(), 2, terrain.layout.max_level,
@@ -291,11 +320,13 @@ func _update_views() -> void:
 		space_bodies[id].basis = body_rotation
 		# System-map symbols are enlarged; their orbit centers/positions remain
 		# physical. Orbit view always uses the real common radius and terrain.
-		var symbol_radius: float = 550.0 if body.kind == "planet" else 250.0
+		var symbol_radius: float = 2600.0 if body.kind == "planet" else (1000.0 if body.kind == "moon" else float(body.radius))
 		space_bodies[id].scale = Vector3.ONE * (maxf(1.0, symbol_radius / float(body.radius)) if view_mode == "system" else 1.0)
-		body_labels[id].visible = view_mode == "system" and id != "m1:vesper"
-		body_labels[id].text = "Solis + Vesper" if id == "m1:sol" and system.binary else body.name
-		body_labels[id].position = space_bodies[id].position + Vector3(0, 200, maxf(symbol_radius, body.radius) + 240.0)
+		body_labels[id].visible = view_mode == "system"
+		body_labels[id].text = "%s · %.1f km" % [body.name, float(body.radius) * 0.002]
+		body_labels[id].position = space_bodies[id].position + Vector3(0, 200, maxf(symbol_radius, body.radius) + 2500.0)
+		if body.kind == "moon":
+			body_labels[id].position.z -= maxf(18000.0, space_camera.size / SPACE_SCALE * 0.08)
 		if orbit_lines.has(id):
 			orbit_lines[id].visible = view_mode == "system"
 			orbit_lines[id].position = system.position_at(body.parent_id) if not str(body.parent_id).is_empty() else Vector3.ZERO
@@ -327,14 +358,14 @@ func _update_views() -> void:
 	landing_marker.position = (rotation * (local_point + up * 4.0)) + (Vector3.ZERO if view_mode == "orbit" else body_position)
 	landing_marker.visible = view_mode == "orbit"
 	if view_mode == "orbit":
-		var distance: float = float(system.bodies[body_id].radius) * 0.053
+		var distance: float = float(system.bodies[body_id].radius) * SPACE_SCALE * 5.3
 		space_camera.position = world_up * distance + rotation * walker.forward * distance * 0.2
 		space_camera.look_at(Vector3.ZERO, rotation * walker.forward)
 	elif view_mode == "system":
 		var minimum := Vector3(INF, 0, INF)
 		var maximum := Vector3(-INF, 0, -INF)
 		for id: String in system.bodies:
-			var p: Vector3 = system.position_at(id) * 0.01
+			var p: Vector3 = system.position_at(id) * SPACE_SCALE
 			minimum.x = minf(minimum.x, p.x)
 			minimum.z = minf(minimum.z, p.z)
 			maximum.x = maxf(maximum.x, p.x)
@@ -346,11 +377,11 @@ func _update_views() -> void:
 		space_camera.position = center + Vector3(0.0, 180.0, 0.01)
 		space_camera.look_at(center, Vector3.FORWARD)
 		for label in body_labels.values():
-			label.pixel_size = 8.0 * space_camera.size / 190.0
+			label.pixel_size = 80.0 * space_camera.size / 190.0
 
 
 func snapshot() -> Dictionary:
-	return {"schema": 1, "surface_version": Cube.MODE, "body_id": body_id, "location": walker.location(),
+	return {"schema": 2, "terrain_revision": System.TERRAIN_REVISION, "surface_version": Cube.MODE, "body_id": body_id, "location": walker.location(),
 		"forward": [walker.forward.x, walker.forward.y, walker.forward.z], "elapsed": system.elapsed, "binary": system.binary}
 
 

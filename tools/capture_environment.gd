@@ -69,6 +69,8 @@ func _run() -> void:
 			await _creature()
 		"water":
 			await _water_continuity()
+		"underwater":
+			await _underwater()
 		"hydrology":
 			await _hydrology()
 		"planet_lab":
@@ -235,6 +237,8 @@ func _capture_landscape_views(spawn: Vector3) -> void:
 	var peak := spawn
 	var water := spawn
 	var water_distance: float = INF
+	var dive := spawn
+	var dive_distance: float = INF
 	var sea: float = generator.get_sea_level()
 	for z in range(-20, 21):
 		for x in range(-20, 21):
@@ -243,6 +247,9 @@ func _capture_landscape_views(spawn: Vector3) -> void:
 			if point.y > peak.y:
 				peak = point
 			var distance: float = Vector2(point.x - spawn.x, point.z - spawn.z).length()
+			if point.y < sea - 3.0 and distance < dive_distance:
+				dive_distance = distance
+				dive = point
 			if point.y < sea - 0.35 and distance < water_distance:
 				water_distance = distance
 				water = point
@@ -261,6 +268,17 @@ func _capture_landscape_views(spawn: Vector3) -> void:
 		await _capture("shore_water", {"camera": [_camera.position.x, _camera.position.y, _camera.position.z], "water_target": [water.x, sea, water.z]})
 	else:
 		_failures.append("Water review seed no longer supplies a nearby visible shore.")
+	if dive_distance < 128.0:
+		_camera.global_position = Vector3(dive.x, sea - 1.2, dive.z)
+		var toward_sea: Vector3 = Vector3(dive.x - spawn.x, 0, dive.z - spawn.z).normalized()
+		_camera.look_at(_camera.global_position + toward_sea * 12.0 - Vector3.UP * 0.5)
+		await _capture("world_underwater", {"camera_depth_m": 1.2, "bed_depth_m": sea - dive.y})
+		_camera.look_at(_camera.global_position + toward_sea * 8.0 + Vector3.UP * 5.0)
+		await _capture("world_underwater_up", {"camera_depth_m": 1.2})
+		if _camera.environment == null or not _camera.environment.fog_enabled or _camera.environment.fog_depth_end > 40.0:
+			_failures.append("Actual world camera did not activate underwater visibility.")
+	else:
+		_failures.append("Water review seed lacks a loaded dive location.")
 
 
 func _streaming_state(manager: Node) -> Dictionary:
@@ -459,6 +477,87 @@ func _water_continuity() -> void:
 	print("WATER_DEPTH_RENDER ", JSON.stringify({"seed": _config["seed"], "bed_contrast_ratio": contrast_ratios}))
 
 
+func _underwater() -> void:
+	_fixture()
+	var sea: float = 12.0
+	var atmosphere: Node = _scene.get_child(0)
+	var water_view: Node = atmosphere.underwater
+	water_view.sample_water = func(_point: Vector3): return {}
+	_camera.fov = 70.0
+	_camera.position = Vector3(0, sea - 2.0, 0)
+	_camera.rotation = Vector3.ZERO
+	var water := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(220, 220)
+	water.mesh = plane
+	water.position.y = sea + 0.03
+	water.material_override = preload("res://world/visuals/terrain/water_mesh_builder_v7.gd").make_material(root.get_node("WorldGenerator").get_planet_profile(), {})
+	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_scene.add_child(water)
+	var checker := Shader.new()
+	checker.code = "shader_type spatial; render_mode unshaded; void fragment(){ ALBEDO=vec3(UV.x<0.5?0.12:0.9); }"
+	var material := ShaderMaterial.new()
+	material.shader = checker
+	var distances: Array[float] = [5.0, 18.0, 45.0]
+	var probes: Array[Vector3] = []
+	for i in range(3):
+		var distance: float = distances[i]
+		var panel := MeshInstance3D.new()
+		var quad := QuadMesh.new()
+		quad.size = Vector2.ONE * distance * 0.22
+		panel.mesh = quad
+		panel.material_override = material
+		panel.position = Vector3((i - 1) * distance * 0.55, sea - 2.0, -distance)
+		_scene.add_child(panel)
+		probes.append(panel.position)
+	await _capture("underwater_air_control", {"distances_m": distances})
+	var bare: Image = root.get_texture().get_image()
+	water_view.sample_water = func(point: Vector3): return {"water": true, "depth": sea - point.y, "color": Color("12546a")}
+	water_view.update_view()
+	await _capture("underwater_shallow", {"depth_m": 2, "distances_m": distances})
+	var wet: Image = root.get_texture().get_image()
+	var ratios: Array[float] = []
+	for i in range(3):
+		var a := Vector2i(_camera.unproject_position(probes[i] - Vector3.RIGHT * distances[i] * 0.05))
+		var b := Vector2i(_camera.unproject_position(probes[i] + Vector3.RIGHT * distances[i] * 0.05))
+		var reference: float = absf(bare.get_pixelv(a).get_luminance() - bare.get_pixelv(b).get_luminance())
+		var remaining: float = absf(wet.get_pixelv(a).get_luminance() - wet.get_pixelv(b).get_luminance())
+		ratios.append(remaining / maxf(reference, 0.001))
+	if ratios[0] < 0.15 or ratios[2] > 0.04 or ratios[0] <= ratios[1] or ratios[1] <= ratios[2]:
+		_failures.append("Underwater distance haze failed to preserve near objects and obscure distant objects: %s" % str(ratios))
+	_report["underwater_contrast_ratio"] = ratios
+	_camera.position.y = sea - 18.0
+	water_view.update_view()
+	await _capture("underwater_deep", {"depth_m": 18, "visibility_m": _camera.environment.fog_depth_end})
+	_camera.position.y = sea - 2.0
+	_camera.look_at(_camera.position + Vector3(0.1, 1.0, -0.2), Vector3.FORWARD)
+	water_view.update_view()
+	await _capture("underwater_ceiling", {"depth_m": 2})
+	var ceiling: Image = root.get_texture().get_image()
+	var sky_object := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = Vector3(200, 4, 200)
+	sky_object.mesh = box
+	var white := StandardMaterial3D.new()
+	white.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	white.albedo_color = Color.WHITE
+	sky_object.material_override = white
+	sky_object.position.y = sea + 8.0
+	_scene.add_child(sky_object)
+	await _capture("underwater_ceiling_sky_control", {"opaque_sky_object_above_water": true})
+	var leak: float = _mean_rgb_difference(ceiling, root.get_texture().get_image())
+	_report["underwater_sky_leak_rgb"] = leak
+	if leak > 0.004:
+		_failures.append("Above-water geometry leaks through the water underside: %.6f" % leak)
+	sky_object.hide()
+	_camera.position = Vector3(0, sea + 4, 8)
+	_camera.look_at(Vector3(0, sea, -8))
+	water_view.update_view()
+	await _capture("underwater_surfaced", {"camera_environment_restored": _camera.environment == null})
+	if water_view.submerged or _camera.environment != null:
+		_failures.append("Surfacing did not restore the air environment.")
+
+
 func _hydrology() -> void:
 	_fixture()
 	var generator: Node = root.get_node("WorldGenerator")
@@ -633,6 +732,9 @@ func _planet_lab() -> void:
 	_scene._open_body("m1:lune")
 	_scene.walker.enabled = false
 	await _capture("m1_moon", _scene.snapshot())
+	_scene._open_body("m1:ember")
+	_scene.walker.enabled = false
+	await _capture("m1_ember", _scene.snapshot())
 	_scene._open_body("m1:aster")
 	_scene.walker.enabled = false
 	await _capture("m1_aster_surface", _scene.snapshot())
@@ -675,7 +777,7 @@ func _capture(label: String, details: Dictionary) -> void:
 		"render_cpu_ms": _distribution(cpu), "render_gpu_ms": _distribution(gpu),
 		"gpu_timestamps_available": gpu.max() > 0.0, "draw_calls": _distribution(calls),
 		"rendered_primitives": _distribution(primitives)})
-	if label.begins_with("m1_") or label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
+	if label.begins_with("m1_") or label.begins_with("underwater_") or label.begins_with("world_underwater") or label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
 		var preview: Image = image.duplicate()
 		preview.resize(960 if label.begins_with("m1_") else 480, 540 if label.begins_with("m1_") else 270, Image.INTERPOLATE_LANCZOS)
 		print("REVIEW_PREVIEW ", str(_config["seed"]), " ", label, " ", Marshalls.raw_to_base64(preview.save_jpg_to_buffer(0.76)))

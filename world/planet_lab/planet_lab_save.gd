@@ -8,7 +8,9 @@ const PATH: String = "user://planet_lab_m1.json"
 
 
 static func valid(data: Dictionary) -> bool:
-	if data.get("schema") != 1 or data.get("surface_version") != Cube.MODE:
+	if (data.get("schema") != 1 and data.get("schema") != 2) or data.get("surface_version") != Cube.MODE:
+		return false
+	if data.get("schema") == 2 and data.get("terrain_revision") != System.TERRAIN_REVISION:
 		return false
 	if not data.get("binary") is bool or data.get("body_id") not in System.LANDABLE:
 		return false
@@ -47,4 +49,4 @@ static func read(path: String = PATH) -> Dictionary:
 
 
 static func _incompatible(data: Dictionary) -> bool:
-	return not data.is_empty() and (data.get("schema", 1) != 1 or data.get("surface_version", Cube.MODE) != Cube.MODE)
+	return not data.is_empty() and ((data.get("schema", 1) != 1 and data.get("schema", 1) != 2) or data.get("surface_version", Cube.MODE) != Cube.MODE or int(data.get("terrain_revision", 1)) > System.TERRAIN_REVISION)
