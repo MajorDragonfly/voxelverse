@@ -81,6 +81,25 @@ func _run() -> void:
 			var fb: Dictionary = Grammar.blend_composition({"forest": 1.0}, profile, edge + 0.01, 47.0)
 			_expect(absf(float(fa["tree_density"]) - float(fb["tree_density"])) < 0.005, "Hard forest variant density seam.")
 			_expect(absf(generator.get_landscape_height_offset(edge - 0.01, 47.0) - generator.get_landscape_height_offset(edge + 0.01, 47.0)) < 0.06, "Landmark cell seam.")
+	var dry_open: int = 0
+	var dry_forested: int = 0
+	for seed_value in [7919, 15838, 23757, 31676, 39595, 47514]:
+		generator.set_seed_override(seed_value)
+		var spawn: Vector3 = generator.get_scenic_spawn()
+		var low: float = INF
+		var high: float = -INF
+		for z in range(-8, 9):
+			for x in range(-8, 9):
+				var point := Vector2(spawn.x + x * 24.0, spawn.z + z * 24.0)
+				var height: float = generator.get_terrain_height(point.x, point.y)
+				low = minf(low, height)
+				high = maxf(high, height)
+				if height > generator.get_sea_level() + 0.5:
+					var composition: Dictionary = generator.get_biome_composition(point.x, point.y, height)
+					dry_open += int(float(composition["tree_density"]) < 0.18)
+					dry_forested += int(float(composition["tree_density"]) > 0.65)
+		_expect(high - low > 22.0, "Representative planet lacks walk-scale landscape relief: %d." % seed_value)
+	_expect(dry_open > 200 and dry_forested > 50, "Planet surfaces lost their meadow/forest composition contrast.")
 	generator.free()
 	_expect(natural > 15 and exotic > 15, "Missing natural or exotic palette population.")
 	_expect(landscape_kinds.size() >= 5, "Landscape grammar lost formation diversity.")

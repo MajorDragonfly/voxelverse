@@ -1,6 +1,8 @@
 class_name WorldManager
 extends Node3D
 
+const Horizon = preload("res://world/visuals/terrain/landscape_horizon.gd")
+
 const AuthoredAssets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
 
 const TERRAIN_CHUNK_SCENE: PackedScene = preload(
@@ -32,11 +34,14 @@ var _stream_required_chunks: Dictionary = {}
 var _stream_pending_chunks: Array[Vector2i] = []
 var _stream_build_timer: float = 0.0
 var _initial_player_physics: bool = true
+var _priority_timer: float = 0.0
+var _travel := Vector2.ZERO
 
 @onready var player: Node3D = get_node_or_null(player_path) as Node3D
 
 
 func _ready() -> void:
+	process_priority = -10000
 	add_to_group(&"world_manager")
 	if player == null:
 		push_error("WorldManager could not find Player at path: %s" % player_path)
@@ -74,6 +79,9 @@ func _initialize_streaming() -> void:
 	player.set_physics_process(_initial_player_physics)
 	_plan_streaming()
 	world_initialized = true
+	var horizon := Horizon.new()
+	horizon.name = "LandscapeHorizon"
+	add_child(horizon)
 	_stream_build_timer = chunk_build_interval
 	set_process(true)
 
@@ -82,8 +90,10 @@ func _process(delta: float) -> void:
 	if not world_initialized:
 		return
 	var new_player_chunk: Vector2i = _world_position_to_chunk(player.global_position)
-	if new_player_chunk != current_player_chunk:
+	_priority_timer -= delta
+	if new_player_chunk != current_player_chunk or _priority_timer <= 0.0:
 		current_player_chunk = new_player_chunk
+		_priority_timer = 0.15
 		_plan_streaming()
 	_stream_build_timer -= delta
 	if _stream_build_timer <= 0.0:
@@ -151,6 +161,10 @@ func _world_position_to_chunk(world_position: Vector3) -> Vector2i:
 
 func _plan_streaming() -> void:
 	_stream_required_chunks.clear()
+	_travel = Vector2.ZERO
+	if player is CharacterBody3D:
+		_travel = Vector2(player.velocity.x, player.velocity.z)
+
 	var candidates: Array[Vector2i] = []
 	for offset_z in range(-render_distance, render_distance + 1):
 		for offset_x in range(-render_distance, render_distance + 1):
@@ -158,8 +172,26 @@ func _plan_streaming() -> void:
 			_stream_required_chunks[coordinates] = true
 			if not loaded_chunks.has(coordinates):
 				candidates.append(coordinates)
+	# One extra strip in the direction of travel, while retaining the complete
+	# surrounding square. Turning reprioritizes within 150 ms, before crossing.
+	if _travel.length_squared() > 0.1 and render_distance > 0:
+		var direction := Vector2i(signi(roundi(_travel.x)), signi(roundi(_travel.y)))
+		var future := current_player_chunk + direction
+		for z in range(-render_distance, render_distance + 1):
+			for x in range(-render_distance, render_distance + 1):
+				var key := future + Vector2i(x, z)
+				if not _stream_required_chunks.has(key):
+					_stream_required_chunks[key] = true
+					if not loaded_chunks.has(key):
+						candidates.append(key)
 	candidates.sort_custom(_is_chunk_higher_priority)
 	_stream_pending_chunks = candidates
+	var active: Array = loaded_chunks.keys()
+	active.sort_custom(_is_chunk_higher_priority)
+	for index in range(active.size()):
+		var chunk: Node = loaded_chunks[active[index]]
+		chunk.process_priority = -9000 + index
+		chunk.get_node("ProceduralEcosystemV6").process_priority = -8000 + index
 	_unload_distant_chunks()
 
 
@@ -178,31 +210,23 @@ func _drain_chunk_queue() -> void:
 
 
 func _is_chunk_higher_priority(a: Vector2i, b: Vector2i) -> bool:
-	var delta_a: Vector2i = a - current_player_chunk
-	var delta_b: Vector2i = b - current_player_chunk
-	var chebyshev_a: int = maxi(absi(delta_a.x), absi(delta_a.y))
-	var chebyshev_b: int = maxi(absi(delta_b.x), absi(delta_b.y))
-	if chebyshev_a != chebyshev_b:
-		return chebyshev_a < chebyshev_b
-	var velocity_3d: Vector3 = Vector3.ZERO
-	if player is CharacterBody3D:
-		velocity_3d = (player as CharacterBody3D).velocity
-	var travel := Vector2(velocity_3d.x, velocity_3d.z)
-	if travel.length_squared() > 0.10:
-		travel = travel.normalized()
-		var direction_a := Vector2(delta_a.x, delta_a.y)
-		var direction_b := Vector2(delta_b.x, delta_b.y)
-		var score_a: float = 0.0
-		var score_b: float = 0.0
-		if direction_a.length_squared() > 0.0:
-			score_a = direction_a.normalized().dot(travel)
-		if direction_b.length_squared() > 0.0:
-			score_b = direction_b.normalized().dot(travel)
-		if not is_equal_approx(score_a, score_b):
-			return score_a > score_b
-	var manhattan_a: int = absi(delta_a.x) + absi(delta_a.y)
-	var manhattan_b: int = absi(delta_b.x) + absi(delta_b.y)
-	return manhattan_a < manhattan_b
+	var score_a: float = _chunk_priority(a)
+	var score_b: float = _chunk_priority(b)
+	if not is_equal_approx(score_a, score_b):
+		return score_a < score_b
+	return a.y < b.y if a.y != b.y else a.x < b.x
+
+
+func _chunk_priority(coordinates: Vector2i) -> float:
+	var point := Vector2(player.global_position.x, player.global_position.z)
+	var center := Vector2(coordinates.x * chunk_width, coordinates.y * chunk_depth)
+	var edge: Vector2 = (center - point).abs() - Vector2(chunk_width, chunk_depth) * 0.5
+	var distance: float = Vector2(maxf(edge.x, 0.0), maxf(edge.y, 0.0)).length()
+	# Immediate collision neighbours take precedence over any distant lookahead.
+	if distance < 12.0:
+		return distance - 1000.0
+	var predicted: Vector2 = point + _travel.limit_length(10.0) * 3.0
+	return distance * 0.35 + center.distance_to(predicted) * 0.65
 
 
 func _unload_distant_chunks() -> void:
@@ -212,7 +236,7 @@ func _unload_distant_chunks() -> void:
 		var coordinates: Vector2i = coordinates_value
 		var delta: Vector2i = coordinates - current_player_chunk
 		var distance: int = maxi(absi(delta.x), absi(delta.y))
-		if distance > keep_distance:
+		if distance > keep_distance and not _stream_required_chunks.has(coordinates):
 			chunks_to_remove.append(coordinates)
 	for coordinates in chunks_to_remove:
 		_remove_chunk(coordinates)

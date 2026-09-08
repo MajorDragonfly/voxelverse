@@ -57,7 +57,7 @@ static func find_spawn(
 				world_z,
 				height
 			))
-			score += ecology * 0.55
+			score += (1.0 - smoothstep(0.28, 0.65, ecology)) * 1.15
 
 		if generator.has_method("get_region_profile"):
 			var region_value: Variant = generator.call("get_region_profile", world_x, world_z)
@@ -86,7 +86,7 @@ static func find_spawn(
 	if candidates.is_empty() and radius_limit < 3520.0:
 		return find_spawn(generator, center, radius_limit * 2.0)
 	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return float(a["score"]) > float(b["score"]))
-	for candidate: Dictionary in candidates.slice(0, mini(8, candidates.size())):
+	for candidate: Dictionary in candidates.slice(0, mini(12, candidates.size())):
 		var point: Vector2 = candidate["point"]
 		var view: Dictionary = evaluate_view(generator, point, float(candidate["height"]))
 		var score: float = float(candidate["score"]) + float(view["score"])
@@ -118,7 +118,7 @@ static func evaluate_view(generator: Node, point: Vector2, surface_height: float
 		var direction := Vector2(cos(angle), sin(angle))
 		var horizon: float = -INF
 		var previous_ecology: float = -1.0
-		for distance: float in [15.0, 30.0, 60.0, 100.0, 150.0]:
+		for distance: float in [15.0, 30.0, 60.0, 100.0, 150.0, 240.0, 360.0]:
 			var probe: Vector2 = point + direction * distance
 			var height: float = float(generator.call("get_terrain_height", probe.x, probe.y))
 			var slope: float = (height - eye_height) / distance
@@ -132,12 +132,15 @@ static func evaluate_view(generator: Node, point: Vector2, surface_height: float
 					if previous_ecology >= 0.0 and absf(ecology - previous_ecology) > 0.18:
 						forest_edges += 1
 					previous_ecology = ecology
-			horizon = maxf(horizon, slope)
+			var canopy: float = 0.0
+			if distance <= 60.0 and generator.has_method("get_ecology_density"):
+				canopy = smoothstep(0.35, 0.70, float(generator.call("get_ecology_density", probe.x, probe.y, height))) * 6.0
+			horizon = maxf(horizon, (height + canopy - eye_height) / distance)
 	if generator.has_method("get_landmarks_near"):
 		for landmark: Dictionary in generator.call("get_landmarks_near", point.x, point.y):
 			var target: Vector2 = landmark["center"]
 			var distance: float = point.distance_to(target)
-			if distance < 30.0 or distance > 150.0:
+			if distance < 30.0 or distance > 360.0:
 				continue
 			var height: float = float(generator.call("get_terrain_height", target.x, target.y))
 			var blocked: bool = false

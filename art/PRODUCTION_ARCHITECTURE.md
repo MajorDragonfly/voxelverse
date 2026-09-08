@@ -34,17 +34,20 @@ boundaries. Forest composition changes tree, fern, flower and shrub density.
 Alpine regions favor conifers and rocks. Fauna weights select visible regional
 representatives without rewriting persisted populations.
 
-Landscape formations live in seeded 256 m cells: curved ridges, flat-topped mesas,
+Landscape formations live in seeded 192 m cells: curved ridges, flat-topped mesas,
 basins, rock spires, grove hills and coastal teeth. Compact-support functions
 join without seams; existing mountains, canyons, lakes and islands remain in the
 Adventure terrain stack. The terrain height cache evaluates canonical centimetre
 coordinates, so its results do not depend on which nearby point was queried first.
 
 Scenic spawn evaluates 84 safe candidates, then terrain viewsheds for the best
-eight. Twelve rays sample 15–150 m; an angular horizon rejects occluded water and
+twelve. Twelve rays sample 15–360 m; an angular horizon rejects occluded water and
 relief. Landmark visibility uses additional intervening height samples. Searches
-expand when the starting area is water. This is a terrain approximation: trees
-and buildings are not included in visibility testing.
+expand when the starting area is water. Nearby ecology estimates canopy occlusion; buildings are not included. Spawn
+selection prefers meadow/forest edges, with 9 m tree clearance and 3.5 m woody
+obstacle clearance. A continuous 125 m canopy field adds walk-scale openings.
+Ridges reach 32–58 m before composition; total terrain remains bounded to -9–96 m.
+See the [playtest follow-up](PLAYTEST_FOLLOWUP.md) for sampled relief.
 
 ## Family → species → individual
 
@@ -124,11 +127,36 @@ original Far MultiMeshes. Groups become visible atomically and cached clusters
 are reused across LOD changes. Leaving Far pauses construction; chunk teardown
 releases partial arrays without suspended coroutines. The maximum is 23 geometry
 nodes per chunk. This trades bounded, duplicated Far geometry for fewer draws;
-it is not an increase in the streaming radius or a planetary horizon renderer.
+the separate horizon renderer covers distant surface destinations.
 
-The benchmark geometry is decorative and has no individual colliders. Terrain
-retains a 65 × 65 heightmap collider per chunk. Collision for selected hero trunks
-remains future work.
+Terrain retains its 65 × 65 heightmap collider. Each populated chunk additionally
+owns one compound `EnvironmentObstacles` StaticBody3D under `Objects`. Manifest
+recipes define trunk/shrub capsules and rock hulls, including variant-specific
+hulls. Shape owners are not nodes; dimensions include individual scale while body
+transforms remain orthonormal. Grass, flowers and ferns remain traversable.
+Collision is published with its visible batch and survives visual LOD changes.
+See [Godot shape owners](https://docs.godotengine.org/en/4.6/classes/class_collisionobject3d.html).
+
+Environment placement now runs in at most two owned CPU jobs, using private
+seeded generators and the chunk's immutable surface grid. Resource loading,
+MultiMesh uploads and physics remain on the main thread. Jobs are joined on exit.
+Streaming priorities update every 150 ms from horizontal distance and predicted
+travel, including an extra leading strip. The full surrounding square remains
+required. Terrain uploads and environment processing follow the same priority;
+altitude no longer incorrectly chooses a distant vegetation LOD.
+
+A separate CPU horizon job samples the same terrain/biome functions over a 768 m
+square at 8 m spacing. Two mesh nodes display distant land and water, without
+vegetation or collision. The old horizon stays visible until its successor is
+ready after 64 m movement. A 16 × 16 nearest-filtered coverage texture excludes
+finished terrain chunks. This is a bounded surface preview, not extra gameplay
+chunks. Its triangle spacing and the transitions still require target-PC review.
+
+Water uses world-space waves and fragment ripples, depth absorption, moving
+intersection foam, Fresnel sky tint and guarded screen refraction. Foreground
+samples are rejected. Depth reconstruction handles Vulkan and OpenGL NDC ranges
+explicitly, following [Godot's depth reconstruction](https://docs.godotengine.org/en/4.6/tutorials/shaders/advanced_postprocessing.html).
+The shared shader also covers distant water; planets retain their semantic slots.
 
 ## Runtime creature geometry
 

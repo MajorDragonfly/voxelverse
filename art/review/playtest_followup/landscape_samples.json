@@ -1,0 +1,128 @@
+{
+  "before": [
+    {
+      "dense": 0,
+      "max_height": 9.23406149949046,
+      "min_height": -3.1463286894299,
+      "open": 231,
+      "samples": 289,
+      "seed": 7919,
+      "spawn": "(181.678, 6.95, 15.80562)",
+      "style": "Alpine Crown"
+    },
+    {
+      "dense": 12,
+      "max_height": 4.74285002902015,
+      "min_height": -4.35218354501262,
+      "open": 164,
+      "samples": 289,
+      "seed": 15838,
+      "spawn": "(186.29, 3.95, 23.35923)",
+      "style": "Ancient Basin"
+    },
+    {
+      "dense": 86,
+      "max_height": 9.78905517106226,
+      "min_height": -4.48120893990882,
+      "open": 107,
+      "samples": 289,
+      "seed": 23757,
+      "spawn": "(-103.949, 4.2, -164.5985)",
+      "style": "Archipelago"
+    },
+    {
+      "dense": 0,
+      "max_height": 16.8987946895509,
+      "min_height": -6.11016018993332,
+      "open": 270,
+      "samples": 289,
+      "seed": 31676,
+      "spawn": "(95.57142, 4.95, -50.83118)",
+      "style": "Mesa World"
+    },
+    {
+      "dense": 0,
+      "max_height": 6.97779391304562,
+      "min_height": -3.19377303521929,
+      "open": 127,
+      "samples": 289,
+      "seed": 39595,
+      "spawn": "(-90.39793, 5.7, -7.044072)",
+      "style": "Broken Highlands"
+    },
+    {
+      "dense": 84,
+      "max_height": 17.8094396849098,
+      "min_height": -4.4,
+      "open": 139,
+      "samples": 289,
+      "seed": 47514,
+      "spawn": "(-118.2334, 5.45, -275.1152)",
+      "style": "Verdant Frontier"
+    }
+  ],
+  "after": [
+    {
+      "dense": 6,
+      "max_height": 51.3145618946977,
+      "min_height": -4.95426196128764,
+      "open": 218,
+      "samples": 289,
+      "seed": 7919,
+      "spawn": "(-80.33821, 6.2, 25.19161)",
+      "style": "Alpine Crown"
+    },
+    {
+      "dense": 19,
+      "max_height": 35.1356539611394,
+      "min_height": -5.09353629476679,
+      "open": 167,
+      "samples": 289,
+      "seed": 15838,
+      "spawn": "(68.8528, 4.2, -109.6899)",
+      "style": "Ancient Basin"
+    },
+    {
+      "dense": 51,
+      "max_height": 22.1053717587994,
+      "min_height": -4.44549312862786,
+      "open": 138,
+      "samples": 289,
+      "seed": 23757,
+      "spawn": "(-103.949, 4.2, -164.5985)",
+      "style": "Archipelago"
+    },
+    {
+      "dense": 0,
+      "max_height": 37.5241540788804,
+      "min_height": -5.85343717809703,
+      "open": 256,
+      "samples": 289,
+      "seed": 31676,
+      "spawn": "(105.5418, 6.2, 53.43052)",
+      "style": "Mesa World"
+    },
+    {
+      "dense": 0,
+      "max_height": 42.9932097814758,
+      "min_height": -3.21100361211216,
+      "open": 184,
+      "samples": 289,
+      "seed": 39595,
+      "spawn": "(-82.63833, 5.2, -45.07807)",
+      "style": "Broken Highlands"
+    },
+    {
+      "dense": 67,
+      "max_height": 41.3778159820921,
+      "min_height": -2.76372505858374,
+      "open": 140,
+      "samples": 289,
+      "seed": 47514,
+      "spawn": "(23.14476, 6.45, -338.4616)",
+      "style": "Verdant Frontier"
+    }
+  ],
+  "scope": "Six seeds; 17x17 grid at 24 m spacing centered on each version's deterministic scenic spawn. Open/dense counts include water; dry composition is separately tested in CI.",
+  "before_commit": "9eb22b7d49b45e30e4c6fe30b004a8f1f3d86339"
+}

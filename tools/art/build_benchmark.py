@@ -84,6 +84,31 @@ class Voxels:
 
 
 def oak(vox, rng, tier, variant):
+    if variant in (1,2):
+        # Open umbrella crown versus young forked column: different branching
+        # architectures, not scaled copies of the ancient broad oak.
+        umbrella = variant == 1
+        h = 4.5 if umbrella else 7.2
+        trunk = [(0,.08,0),(-.14,1.1,.08),(.22,2.25,0),(.32,h*.60,.1)]
+        vox.path(trunk,[.42,.32,.24,.13],'bark_base')
+        for i in range(5):
+            a=i*math.tau/5
+            vox.path([(0,.3,0),(math.cos(a)*1.2,.04,math.sin(a)*1.2)],[.20,.04],'bark_shadow')
+        count=7 if umbrella else 5
+        for i in range(count):
+            a=i*2.39996
+            reach=rng.uniform(2.2,3.1) if umbrella else rng.uniform(.8,1.65)
+            tip=(math.cos(a)*reach,h+rng.uniform(-.3,.4),math.sin(a)*reach)
+            elbow=(tip[0]*.48,h*.76,tip[2]*.48)
+            vox.path([trunk[-2],elbow,tip],[.20,.12,.035],'bark_base')
+            radii=(1.4,.48,1.15) if umbrella else (.80,1.1,.72)
+            vox.leaf_lobe(rng,tip,radii,detail=tier==0)
+            if tier<2:
+                split=(tip[0]+.45,tip[1]+.35,tip[2]-.28)
+                vox.path([elbow,split],[.08,.028],'bark_highlight')
+                vox.leaf_lobe(rng,split,tuple(v*.55 for v in radii),detail=tier==0)
+        vox.leaf_lobe(rng,(.25,h+.1,.1),(1.2,.5,1.0) if umbrella else (.85,1.2,.8),detail=tier==0)
+        return
     lean = .38 + variant*.14
     trunk=[(0,.08,0),(-.12,1.25,.04),(.12,2.5,-.06),(lean,3.5,.12),(lean+.14,4.7,.05),(.18,5.8,-.08)]
     vox.path(trunk,[.65,.49,.38,.29,.21,.08],'bark_base')
@@ -116,13 +141,24 @@ def oak(vox, rng, tier, variant):
 
 
 def pine(vox,rng,tier,variant):
-    height=10.6+variant*.4
+    if variant == 2:
+        # Wind-shaped highland conifer, with a strongly one-sided branch fan.
+        trunk=[(0,.05,0),(.2,1.5,0),(.6,3.2,0),(1.0,5.0,.12),(1.35,6.8,.2)]
+        vox.path(trunk,[.32,.25,.18,.12,.035],'bark_base')
+        for i in range(7):
+            y=2.1+i*.63
+            tip=(1.3+rng.uniform(.45,1.6),y+.2,(-1 if i%2 else 1)*rng.uniform(.35,1.0))
+            vox.path([(.4,y-.15,0),tip],[.12,.03],'bark_shadow')
+            vox.leaf_lobe(rng,tip,(.85,.3,.65),detail=tier==0)
+        vox.leaf_lobe(rng,trunk[-1],(.35,.6,.35),detail=tier==0)
+        return
+    height=10.6 if variant == 0 else 8.6
     vox.path([(0,.06,0),(.12,4,-.04),(-.12,height*.72,.12),(.0,height,0)],[.38,.23,.12,.04],'bark_base')
     for i in range(5):
         a=i*1.256+.2
         vox.path([(0,.3,0),(math.cos(a)*1.0,.04,math.sin(a)*1.0)],[.18,.035],'bark_shadow')
-    for layer in range(8):
-        y=3.0+layer*.91
+    for layer in range(8 if variant == 0 else 5):
+        y=3.0+layer*(.91 if variant == 0 else 1.05)
         span=(height-y)*.30
         branches=5
         for b in range(branches):
@@ -137,9 +173,11 @@ def pine(vox,rng,tier,variant):
 
 
 def bush(vox,rng,tier,variant):
-    for i in range(8):
+    for i in range(8 if variant != 1 else 5):
         a=i*2.4
         c=(math.cos(a)*rng.uniform(.3,.8),rng.uniform(.52,1.05),math.sin(a)*rng.uniform(.32,.76))
+        if variant==1: c=(c[0]*.5,c[1]*1.8,c[2]*.5)
+        if variant==2: c=(c[0]*1.55,c[1]*.65,c[2]*1.55)
         vox.path([(0,.03,0),(c[0]*.5,.35,c[2]*.5),c],[.10,.065,.03],'bark_shadow')
         vox.leaf_lobe(rng,c,(rng.uniform(.42,.65),rng.uniform(.34,.56),rng.uniform(.4,.63)),family='shrub',detail=tier==0)
 
@@ -185,6 +223,22 @@ def flowers(vox,rng,tier,variant):
 
 def rock(vox,rng,tier,variant):
     # A fractured, offset geological mass with oblique cut planes, not boxes.
+    if variant in (1,2):
+        if variant==1:
+            vox.ellipsoid((-.15,1.7,0),(.7,2.0,.66),'rock_base',.11)
+            vox.ellipsoid((.38,.8,.22),(.58,1.1,.68),'rock_dark',.14)
+            for key in list(vox.cells):
+                x,y,z=[(v+.5)*vox.step for v in key]
+                if x+y*.19>.66 or -z+y*.15>.88:
+                    del vox.cells[key]
+                elif int((y+x*.23)/.42)%4==0:
+                    vox.cells[key]=SLOT['rock_light']
+        else:
+            for c,rad in [((-.5,.6,.1),(1.0,.85,.8)),((.65,.42,-.2),(.85,.55,.7)),((.3,.16,.8),(.4,.28,.4))]:
+                vox.ellipsoid(c,rad,'rock_base',.17)
+            for key in vox.cells:
+                if (key[1]+1)*vox.step>1.1: vox.cells[key]=SLOT['rock_light']
+        return
     step=vox.step
     for ix in range(-math.ceil(2.0/step),math.ceil(2.0/step)):
         for iy in range(math.ceil(2.0/step)):
@@ -315,7 +369,7 @@ def main():
     metrics_path=RUNTIME/'benchmark_metrics.json'
     if metrics_path.exists(): metrics=json.loads(metrics_path.read_text())
     for family in args.families:
-        all_lods={};stats=[]
+        all_lods={};stats=[];sources={}
         small=family in ['fern_cluster_v2','flower_cluster_v2','grass_tuft_v2']
         for variant in range(args.variants):
             lods={}
@@ -327,16 +381,20 @@ def main():
                 suffix='' if variant==0 else f'_species{variant}'
                 name=family+suffix+'_'+label
                 path=RUNTIME/(name+'.glb'); info=write_glb(path,faces,name)
-                if tier==0 and variant==0: info['source_cuboids']=write_bbmodel(SOURCE/(family+'.bbmodel'),vox,family)
+                if tier==0:
+                    source_name=family+suffix
+                    source_path=SOURCE/(source_name+'.bbmodel')
+                    info['source_cuboids']=write_bbmodel(source_path,vox,source_name)
+                    sources[str(variant)]=str(source_path.relative_to(ROOT))
                 info.update(lod=label,variant=variant,voxel_size=step,filled_voxels=len(vox.cells));stats.append(info)
                 lods[label]='res://'+str(path.relative_to(ROOT))
                 print(f'{name}: {info["triangles"]} triangles, {len(vox.cells)} voxels',flush=True)
             all_lods[str(variant)]=lods
         kind='environment_tree' if family in FAMILIES[:2] else ('environment_rock' if family=='layered_rock_v2' else 'environment_plant')
         entries[family]={'asset_id':family,'kind':kind,'family':family.removesuffix('_v2'),'source':str((SOURCE/(family+'.bbmodel')).relative_to(ROOT)),
-                         'lod':all_lods['0'],'geometry_variants':all_lods,'palette_encoding':'uv_slot_v1','palette_slots':SLOTS,
+                         'lod':all_lods['0'],'geometry_variants':all_lods,'variant_sources':sources,'palette_encoding':'uv_slot_v1','palette_slots':SLOTS,
                          'tags':['benchmark','original','semantic_palette','instanced'], 'morphology':{'variants':args.variants,'height_range':[.8,1.3],'width_range':[.85,1.2]},
-                         'collision':'none'}
+                         'collision':entries.get(family, {}).get('collision', 'none')}
         metrics[family]=stats
     manifest['assets']=[entries[k] for k in sorted(entries)]
     (PACK/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

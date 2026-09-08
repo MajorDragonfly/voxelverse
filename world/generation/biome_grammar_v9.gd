@@ -295,6 +295,7 @@ static func blend_composition(weights: Dictionary, profile: Dictionary, world_x:
 		result["atmosphere"]["mist"] += weight * (0.8 if biome_key == "wetland" else (0.4 if forest else 0.1))
 		result["landmarks"]["ancient_grove"] += weight * (0.7 if forest else 0.05)
 		result["landmarks"]["rock_spire"] += weight * (0.8 if alpine else 0.12)
+	result["openness"] = 1.0 - smoothstep(0.12, 0.75, float(result["tree_density"]))
 	return result
 
 

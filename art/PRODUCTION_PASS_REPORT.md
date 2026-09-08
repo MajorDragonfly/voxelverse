@@ -1,3 +1,6 @@
+> Latest player-feedback pass: [PLAYTEST_FOLLOWUP.md](PLAYTEST_FOLLOWUP.md).
+> The earlier milestones and measurements below are historical.
+
 # Planet Diversity / Biome / Art Production Pass
 
 ## Continuation: actual rendering and bounded HLOD — 2026-09-08

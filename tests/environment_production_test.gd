@@ -181,13 +181,13 @@ func _test_cancel_generation() -> void:
 	var ecosystem: Node = chunk.get_node("ProceduralEcosystemV6")
 	for frame in range(1800):
 		await process_frame
-		if ecosystem.get("_random") != null:
+		if ecosystem.get("_placement_job") != null:
 			break
-	_expect(ecosystem.get("_random") != null, "Cancellation fixture did not reach active staged generation.")
-	var random_ref: WeakRef = weakref(ecosystem.get("_random"))
+	_expect(ecosystem.get("_placement_job") != null, "Cancellation fixture did not reach active staged generation.")
+	var random_ref: WeakRef = weakref(ecosystem.get("_placement_job"))
 	chunk.free()
 	await process_frame
-	_expect(random_ref == null or random_ref.get_ref() == null, "Cancelled vegetation generation leaked its RNG.")
+	_expect(random_ref == null or random_ref.get_ref() == null, "Cancelled vegetation generation leaked its placement job.")
 	Assets.finish_pending_loads()
 
 func _test_fauna_weights() -> void:

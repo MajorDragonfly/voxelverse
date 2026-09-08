@@ -3,7 +3,7 @@
 
 The source remains untouched. Rotated/off-grid cubes fail explicitly: apply the
 rotation to the voxel sculpture first. Use separately authored sources for LODs.
---check verifies that all seven delivered Near GLBs match their .bbmodel source.
+--check verifies all registered Near GLBs against their .bbmodel sources.
 """
 import argparse
 import hashlib
@@ -65,12 +65,15 @@ def main():
             for asset in manifest['assets']:
                 if 'benchmark' not in asset.get('tags', []):
                     continue
-                runtime = ROOT / asset['lod']['near'].removeprefix('res://')
-                rebuilt = Path(directory) / runtime.name
-                export(ROOT / asset['source'], rebuilt, runtime.stem)
-                if hashlib.sha256(rebuilt.read_bytes()).digest() != hashlib.sha256(runtime.read_bytes()).digest():
-                    raise ValueError(f'{asset["asset_id"]}: source/GLB mismatch; re-export the edited source')
-                count += 1
+                sources = asset.get('variant_sources', {'0': asset['source']})
+                variants = asset.get('geometry_variants', {'0': asset['lod']})
+                for variant, source in sources.items():
+                    runtime = ROOT / variants[variant]['near'].removeprefix('res://')
+                    rebuilt = Path(directory) / runtime.name
+                    export(ROOT / source, rebuilt, runtime.stem)
+                    if hashlib.sha256(rebuilt.read_bytes()).digest() != hashlib.sha256(runtime.read_bytes()).digest():
+                        raise ValueError(f'{asset["asset_id"]}/{variant}: source/GLB mismatch; re-export the edited source')
+                    count += 1
         if count < 7:
             raise ValueError('Missing benchmark source/runtime pairs')
         print(f'Art source round-trip passed: {count} byte-identical Near GLBs')

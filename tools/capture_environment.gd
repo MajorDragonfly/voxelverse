@@ -54,7 +54,7 @@ func _run() -> void:
 	match str(_config["case"]):
 		"world":
 			await _world()
-		"assets":
+		"assets", "species":
 			await _assets()
 		"cluster":
 			await _cluster()
@@ -99,7 +99,10 @@ func _fixture() -> void:
 func _assets() -> void:
 	_fixture()
 	var profile: Dictionary = root.get_node("WorldGenerator").call("get_planet_profile")
+	var species_review: bool = _config["case"] == "species"
 	for family: String in FAMILIES:
+		if species_review and family not in ["ancient_oak_v2", "tall_pine_v2", "dense_bush_v2", "layered_rock_v2"]:
+			continue
 		var group := Node3D.new()
 		_scene.add_child(group)
 		var species: Dictionary = Flora.create_species_variant(profile, "forest", family, 0)
@@ -107,11 +110,13 @@ func _assets() -> void:
 		var bounds: AABB = near_mesh.get_aabb()
 		var spacing: float = maxf(bounds.size.x, bounds.size.z) * 1.25
 		for tier in range(3):
+			if species_review:
+				species = Flora.create_species_variant(profile, "forest", family, tier)
 			var node := MultiMeshInstance3D.new()
 			var mm := MultiMesh.new()
 			mm.transform_format = MultiMesh.TRANSFORM_3D
 			mm.use_custom_data = true
-			mm.mesh = Assets.get_mesh(family, tier, int(species["geometry_variant"]))
+			mm.mesh = Assets.get_mesh(family, 0 if species_review else tier, int(species["geometry_variant"]))
 			mm.instance_count = 1
 			mm.set_instance_transform(0, Transform3D(Basis.IDENTITY, Vector3((tier - 1) * spacing, 0, 0)))
 			mm.set_instance_custom_data(0, Color(1, 0, 0, 1))
@@ -135,7 +140,8 @@ func _assets() -> void:
 		_camera.position = target + Vector3(0, distance * 0.24, distance)
 		_camera.look_at(target)
 		await _capture(family, {"asset_id": family, "geometry_variant": species["geometry_variant"],
-			"tiers_left_to_right": ["Near", "Mid", "Far"]})
+			"tiers_left_to_right": ["Near", "Near", "Near"] if species_review else ["Near", "Mid", "Far"],
+			"variants_left_to_right": [0, 1, 2] if species_review else [0, 0, 0]})
 		group.queue_free()
 		await process_frame
 
@@ -170,7 +176,7 @@ func _world() -> void:
 		_scene.get_node("Player").set_physics_process(false)
 		if int(manager.call("get_pending_chunk_count")) != 0:
 			continue
-		ready = true
+		ready = bool(manager.get_node("LandscapeHorizon").generation_complete)
 		for chunk: Node in manager.get("loaded_chunks").values():
 			if not bool(chunk.get_node("ProceduralEcosystemV6").get("generation_complete")) or chunk.get_node("ProceduralEcosystemV6").is_processing():
 				ready = false
@@ -202,10 +208,45 @@ func _world() -> void:
 	var expected_spawn: Vector3 = root.get_node("WorldGenerator").call("get_scenic_spawn")
 	if Vector2(player.position.x, player.position.z).distance_to(Vector2(expected_spawn.x, expected_spawn.z)) > 0.1:
 		_failures.append("Review player left the deterministic scenic spawn.")
-	if chunks.size() != 25 or (int(_config["seed"]) in [15838, 23757] and total_instances < 1000):
-		_failures.append("Dense world review did not exercise its populated 25-chunk fixture.")
+	if chunks.size() != 25 or total_instances < 500:
+		_failures.append("World review did not exercise a populated 25-chunk meadow/forest fixture.")
 	await _capture("world", {"chunks": chunks.size(), "instances": total_instances,
 		"spawn": [player.position.x, player.position.y, player.position.z]})
+
+	await _capture_landscape_views(player.global_position)
+
+
+func _capture_landscape_views(spawn: Vector3) -> void:
+	var generator: Node = root.get_node("WorldGenerator")
+	var peak := spawn
+	var water := spawn
+	var water_distance: float = INF
+	var sea: float = generator.get_sea_level()
+	for z in range(-20, 21):
+		for x in range(-20, 21):
+			var point := spawn + Vector3(x * 16.0, 0, z * 16.0)
+			point.y = generator.get_visual_terrain_height(point.x, point.z)
+			if point.y > peak.y:
+				peak = point
+			var distance: float = Vector2(point.x - spawn.x, point.z - spawn.z).length()
+			if point.y < sea - 0.35 and distance < water_distance:
+				water_distance = distance
+				water = point
+	_camera.global_position = spawn + Vector3(0, 3.5, 0)
+	_camera.look_at(peak)
+	await _capture("landscape", {"target": [peak.x, peak.y, peak.z], "surface_height": peak.y})
+	if water_distance < 120.0:
+		var shore: Vector3 = spawn
+		for step in range(20):
+			var point: Vector3 = spawn.lerp(water, step / 20.0)
+			point.y = generator.get_visual_terrain_height(point.x, point.z)
+			if point.y > sea + 0.2:
+				shore = point
+		_camera.global_position = shore + Vector3(0, 2.6, 0)
+		_camera.look_at(Vector3(water.x, sea + 0.05, water.z))
+		await _capture("shore_water", {"camera": [_camera.position.x, _camera.position.y, _camera.position.z], "water_target": [water.x, sea, water.z]})
+	else:
+		_failures.append("Water review seed no longer supplies a nearby visible shore.")
 
 
 func _streaming_state(manager: Node) -> Dictionary:

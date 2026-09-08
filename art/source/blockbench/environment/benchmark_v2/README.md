@@ -50,3 +50,22 @@ Running it again overwrites the corresponding source sculptures: commit artist
 edits first and use the source exporter for subsequent manual changes. Its
 `--families` option limits regeneration to specified families. Structural variants
 are generated from the same family construction rules, not arbitrary vertex noise.
+
+## Player-feedback structures
+
+The original seven family IDs and variant 0 sculptures remain. The four woody/rock
+families now also deliver editable `_species1.bbmodel` and `_species2.bbmodel`
+sources, with matching authored Near/Mid/Far GLBs:
+
+| Family | Species 1 | Species 2 |
+|---|---|---|
+| ancient_oak_v2 | Low umbrella crown with exposed forks | Slender young forked crown |
+| tall_pine_v2 | Open tiered conifer | One-sided wind-shaped conifer |
+| dense_bush_v2 | Upright woody shrub | Low spreading shrub |
+| layered_rock_v2 | Fractured upright blade | Low irregular boulder group |
+
+Open e.g. `ancient_oak_v2_species1.bbmodel` and
+`ancient_oak_v2_species2.bbmodel`; use the same suffixes for the other rows.
+`variant_sources` registers these eight additional source/runtime pairs. The source
+round-trip check now verifies all 15 registered Near sculptures. Use the render
+review's `species` case to compare all three structures in actual Godot lighting.

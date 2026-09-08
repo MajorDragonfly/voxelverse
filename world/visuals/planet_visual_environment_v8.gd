@@ -55,7 +55,7 @@ func _apply_planet_identity() -> void:
 	_environment.glow_bloom = 0.025
 	_environment.fog_density = clampf(haze, 0.12, 0.45)
 	_environment.fog_depth_begin = 105.0
-	_environment.fog_depth_end = 300.0
+	_environment.fog_depth_end = 440.0
 	_environment.fog_depth_curve = 1.18
 	_environment.fog_light_color = _sky_material.sky_horizon_color
 	_environment.fog_sun_scatter = 0.16

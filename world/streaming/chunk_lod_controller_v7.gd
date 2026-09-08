@@ -38,9 +38,8 @@ func _bind_and_update() -> void:
 func _update_lod() -> void:
 	if _chunk == null or _player == null:
 		return
-	var distance: float = _chunk.global_position.distance_to(
-		_player.global_position
-	)
+	var offset: Vector3 = _chunk.global_position - _player.global_position
+	var distance: float = Vector2(offset.x, offset.z).length()
 	var tier: int = _select_tier(distance)
 	if tier == _current_tier:
 		return

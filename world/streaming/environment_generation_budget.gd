@@ -47,3 +47,18 @@ static func record(started: int, phase: String = "placement") -> void:
 		pass # Account for the budget; terrain keeps its own upload measurement.
 	else:
 		max_placement_usec = maxi(max_placement_usec, elapsed)
+
+
+static var _placement_jobs: int = 0
+static var peak_placement_jobs: int = 0
+
+static func claim_placement_job() -> bool:
+	if _placement_jobs >= 2:
+		return false
+	_placement_jobs += 1
+	peak_placement_jobs = maxi(peak_placement_jobs, _placement_jobs)
+	return true
+
+static func release_placement_job() -> void:
+	_placement_jobs -= 1
+	assert(_placement_jobs >= 0)

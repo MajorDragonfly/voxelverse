@@ -1,7 +1,8 @@
 extends Node3D
 
 const AuthoredAssets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
-const FloraFactory = preload("res://world/visuals/scenery/flora_species_factory_v9.gd")
+const PlacementJob = preload("res://world/streaming/environment_placement_job.gd")
+const Obstacles = preload("res://world/visuals/scenery/environment_obstacles.gd")
 const WorkBudget = preload("res://world/streaming/environment_generation_budget.gd")
 const ClusterBuilder = preload("res://world/visuals/scenery/environment_cluster_builder.gd")
 const Slots = preload("res://assets/catalog/planet_material_slots.gd")
@@ -29,8 +30,6 @@ var placement_attempt_count: int = 0
 var instance_count: int = 0
 var _lod_tier: int = 0
 var _batches: Dictionary = {}
-var _tree_points: Array[Vector2] = []
-var _spawn_clear_center := Vector2.ZERO
 
 
 # Explicit staged state owns every resource. Cancelling/unloading a chunk cannot
@@ -40,10 +39,11 @@ var _chunk: Node3D
 var _width: float
 var _depth: float
 var _profile: Dictionary = {}
-var _random: RandomNumberGenerator
+var _placement_job: RefCounted
+var _placement_task: int = -1
+var _placement_usec: int = 0
+var _obstacles: StaticBody3D
 var _recipes: Array[Dictionary] = []
-var _recipe_index: int = 0
-var _attempt_index: int = 0
 var _publish_keys: Array[String] = []
 var _publish_index: int = 0
 var _cluster_started: bool = false
@@ -66,24 +66,22 @@ func _process(_delta: float) -> void:
 		_process_clusters()
 		return
 	if _phase == 0:
-		if not bool(_chunk.get("generation_complete")):
+		if not bool(_chunk.get("generation_complete")) or not WorkBudget.claim_placement_job():
 			return
 		_begin_generation()
 	if _phase == 1:
-		while not WorkBudget.exhausted():
-			if _recipe_index >= _recipes.size():
-				_phase = 2
-				_publish_keys.assign(_batches.keys())
-				break
-			var recipe: Dictionary = _recipes[_recipe_index]
-			if _attempt_index >= int(recipe["attempts"]):
-				_recipe_index += 1
-				_attempt_index = 0
-				continue
-			var started: int = Time.get_ticks_usec()
-			_place_attempt(_chunk, _width, _depth, _random, _profile, recipe, _attempt_index)
-			WorkBudget.record(started)
-			_attempt_index += 1
+		if not WorkerThreadPool.is_task_completed(_placement_task):
+			return
+		WorkerThreadPool.wait_for_task_completion(_placement_task)
+		_placement_task = -1
+		WorkBudget.release_placement_job()
+		_batches = _placement_job.result["batches"]
+		placement_attempt_count = int(_placement_job.result["attempts"])
+		instance_count = int(_placement_job.result["instances"])
+		_placement_usec = _placement_job.elapsed_usec
+		_placement_job = null
+		_publish_keys.assign(_batches.keys())
+		_phase = 2
 	if _phase == 2:
 		while _publish_index < _publish_keys.size() and not WorkBudget.exhausted():
 			var key: String = _publish_keys[_publish_index]
@@ -101,7 +99,6 @@ func _process(_delta: float) -> void:
 			_apply_lod()
 			_phase = 3
 			generation_complete = true
-			_random = null
 			_profile.clear()
 			_recipes.clear()
 			set_process(false)
@@ -113,9 +110,7 @@ func _begin_generation() -> void:
 	_width = float(_chunk.call("get_chunk_width"))
 	_depth = float(_chunk.call("get_chunk_depth"))
 	_profile = WorldGenerator.get_planet_profile()
-	_random = _chunk_random(_chunk, _width, _depth)
 	var spawn: Vector3 = WorldGenerator.get_scenic_spawn()
-	_spawn_clear_center = Vector2(spawn.x, spawn.z)
 	_recipes = [
 		{"group": "tree", "attempts": roundi(tree_attempts * forest_density_multiplier), "families": ["ancient_oak_v2", "tall_pine_v2"], "chance": 0.70, "slope": 0.52},
 		{"group": "shrub", "attempts": plant_field_attempts, "families": ["dense_bush_v2"], "chance": 0.74, "slope": 0.65},
@@ -124,62 +119,20 @@ func _begin_generation() -> void:
 		{"group": "flower", "attempts": ground_attempts * 2, "families": ["flower_cluster_v2"], "chance": 0.70, "slope": 0.65},
 		{"group": "grass", "attempts": ground_attempts * 5, "families": ["grass_tuft_v2"], "chance": 1.00, "slope": 0.70},
 	]
+	_placement_job = PlacementJob.new()
+	_placement_job.generator_script = WorldGenerator.get_script()
+	_placement_job.world_seed = WorldGenerator.get_world_seed()
+	_placement_job.chunk_origin = Vector2(_chunk.global_position.x, _chunk.global_position.z)
+	_placement_job.width = _width
+	_placement_job.depth = _depth
+	_placement_job.cell_size = _chunk.cell_size
+	_placement_job.heights = _chunk._fast_height_grid
+	_placement_job.height_width = _chunk._fast_height_width
+	_placement_job.height_depth = _chunk._fast_height_depth
+	_placement_job.spawn_clear_center = Vector2(spawn.x, spawn.z)
+	_placement_job.recipes = _recipes
 	_phase = 1
-
-
-func _place_attempt(chunk: Node3D, width: float, depth: float, random: RandomNumberGenerator, profile: Dictionary, recipe: Dictionary, attempt: int) -> void:
-	placement_attempt_count += 1
-	var point: Dictionary = _sample_point(chunk, width, depth, random, float(recipe["slope"]))
-	if point.is_empty():
-		return
-	var wx: float = float(point["world_x"])
-	var wz: float = float(point["world_z"])
-	var tree: bool = recipe["group"] == "tree"
-	if tree and Vector2(wx, wz).distance_to(_spawn_clear_center) < 3.5:
-		return
-	var composition: Dictionary = WorldGenerator.get_biome_composition(wx, wz, point["logical_height"])
-	var families: Dictionary = composition.get("families", {})
-	var options: Array = recipe["families"]
-	var total: float = 0.0
-	for family: String in options:
-		total += float(families.get(family, 0.0))
-	if random.randf() >= minf(total * float(recipe["chance"]), 0.98):
-		return
-	if tree:
-		for existing: Vector2 in _tree_points:
-			if existing.distance_squared_to(Vector2(wx, wz)) < 10.2:
-				return
-	var roll: float = random.randf() * total
-	var selected: String = str(options[0])
-	for family: String in options:
-		selected = family
-		roll -= float(families.get(family, 0.0))
-		if roll <= 0.0:
-			break
-	var species_index: int = random.randi_range(0, 2)
-	var key: String = "%s_%d" % [selected, species_index]
-	if not _batches.has(key):
-		var species: Dictionary = FloraFactory.create_species_variant(profile, "forest" if tree else "grassland", selected, species_index)
-		_batches[key] = {"asset_id": selected, "species": species, "transforms": [], "custom": [], "tree": tree, "node": null}
-	var batch: Dictionary = _batches[key]
-	var species: Dictionary = batch["species"]
-	var individual: Dictionary = FloraFactory.create_instance_variation(species, random.randi() + attempt)
-	var scale_value: float = float(individual["uniform_scale"])
-	var height: float = clampf(float(species["height_scale"]), 0.78, 1.42) * float(individual["height_multiplier"])
-	var breadth: float = clampf(float(species["width_scale"]), 0.82, 1.28) * float(individual["width_multiplier"])
-	if not tree:
-		height = lerpf(1.0, height, 0.35)
-		breadth = lerpf(1.0, breadth, 0.35)
-		scale_value = clampf(scale_value, 0.82, 1.18)
-	var basis := Basis(Vector3.UP, deg_to_rad(float(individual["rotation_y"])))
-	basis = basis.rotated(basis.z.normalized(), deg_to_rad(float(individual["lean_degrees"])) * (0.55 if tree else 1.0))
-	basis = basis.scaled(Vector3(breadth, height, breadth) * scale_value)
-	var transform := Transform3D(basis, Vector3(point["local_x"], float(point["surface_height"]) - 0.035, point["local_z"]))
-	batch["transforms"].append(transform)
-	batch["custom"].append(Color(lerpf(0.95, 1.03, float(individual["health"])), random.randf(), float(individual["age"]), 1.0))
-	if tree:
-		_tree_points.append(Vector2(wx, wz))
-	instance_count += 1
+	_placement_task = WorkerThreadPool.add_task(_placement_job.run, false, "Environment %s" % _chunk.name)
 
 
 func _publish_batch(key: String, batch: Dictionary, profile: Dictionary) -> void:
@@ -208,6 +161,14 @@ func _publish_batch(key: String, batch: Dictionary, profile: Dictionary) -> void
 	node.visibility_range_end = tree_visibility_distance if bool(batch["tree"]) else detail_visibility_distance
 	add_child(node)
 	batch["node"] = node
+	if Obstacles.has_collision(str(batch["asset_id"])):
+		if _obstacles == null:
+			_obstacles = Obstacles.new()
+			_obstacles.name = "EnvironmentObstacles"
+			_chunk.get_node("Objects").add_child(_obstacles)
+		_obstacles.add_batch(batch)
+	_apply_lod()
+
 
 
 func set_lod_tier(tier: int) -> void:
@@ -314,6 +275,7 @@ func get_generation_stats() -> Dictionary:
 		if child is GeometryInstance3D and child.visible:
 			visible_batches += 1
 	return {"complete": generation_complete, "attempts": placement_attempt_count, "instances": instance_count,
+		"placement_worker_usec": _placement_usec, "obstacle_shapes": _obstacles.shape_count if _obstacles != null else 0,
 		"batches": _batches.size(), "nodes": get_child_count(), "visible_batches": visible_batches,
 		"cluster_complete": _cluster_started and _cluster_builders.is_empty(),
 		"cluster_ready": _cluster_started and _cluster_builders.is_empty() and _cluster_fallbacks.is_empty(),
@@ -335,69 +297,10 @@ func _is_valid_chunk(chunk: Node3D) -> bool:
 	)
 
 
-func _sample_point(
-	chunk: Node3D,
-	width: float,
-	depth: float,
-	random: RandomNumberGenerator,
-	maximum_slope: float
-) -> Dictionary:
-	var margin: float = minf(1.5, width * 0.18)
-	var local_x: float = random.randf_range(-width * 0.5 + margin, width * 0.5 - margin)
-	var local_z: float = random.randf_range(-depth * 0.5 + margin, depth * 0.5 - margin)
-	var world_x: float = chunk.global_position.x + local_x
-	var world_z: float = chunk.global_position.z + local_z
 
-	var logical_height: float = WorldGenerator.get_terrain_height(world_x, world_z)
-	if logical_height <= WorldGenerator.get_sea_level() + 0.25:
-		return {}
-
-	var surface_height: float = float(chunk.call(
-		"get_surface_height_at_local_position",
-		local_x,
-		local_z
-	))
-	var sample_offset: float = 0.75
-	var east_height: float = float(chunk.call(
-		"get_surface_height_at_local_position",
-		local_x + sample_offset,
-		local_z
-	))
-	var north_height: float = float(chunk.call(
-		"get_surface_height_at_local_position",
-		local_x,
-		local_z + sample_offset
-	))
-	var local_slope: float = maxf(
-		absf(east_height - surface_height),
-		absf(north_height - surface_height)
-	) / sample_offset
-	if local_slope > maximum_slope:
-		return {}
-
-	return {
-		"local_x": local_x,
-		"local_z": local_z,
-		"world_x": world_x,
-		"world_z": world_z,
-		"logical_height": logical_height,
-		"surface_height": surface_height,
-
-	}
-
-
-func _chunk_random(
-	chunk: Node3D,
-	width: float,
-	depth: float
-) -> RandomNumberGenerator:
-	var random := RandomNumberGenerator.new()
-	var chunk_x: int = roundi(chunk.global_position.x / maxf(width, 0.01))
-	var chunk_z: int = roundi(chunk.global_position.z / maxf(depth, 0.01))
-	random.seed = (
-		WorldGenerator.get_world_seed()
-		+ chunk_x * 73_856_093
-		+ chunk_z * 19_349_663
-		+ SEED_OFFSET
-	)
-	return random
+func _exit_tree() -> void:
+	if _placement_task >= 0:
+		WorkerThreadPool.wait_for_task_completion(_placement_task)
+		_placement_task = -1
+		WorkBudget.release_placement_job()
+	_placement_job = null

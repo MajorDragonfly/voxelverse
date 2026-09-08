@@ -6,11 +6,13 @@ const Landmarks = preload("res://world/generation/landmark_grammar.gd")
 const ScenicSpawn = preload("res://world/generation/adventure_spawn_selector.gd")
 var _landmark_cells: Dictionary = {}
 var _spawn_cache: Dictionary = {}
+var _canopy_noise := FastNoiseLite.new()
 
 
 func _configure_v6(seed_value: int) -> void:
 	super._configure_v6(seed_value)
 	_planet_profile = ProfileV9.create(seed_value)
+	_setup_adventure_noise(_canopy_noise, seed_value + 117_331, 0.008, FastNoiseLite.FRACTAL_FBM, 2, 8.0)
 	_height_cache.clear()
 	_landmark_cells.clear()
 	_spawn_cache.clear()
@@ -53,6 +55,14 @@ func get_landscape_height_offset(world_x: float, world_z: float) -> float:
 	for landmark: Dictionary in get_landmarks_near(world_x, world_z):
 		total += Landmarks.height_offset(landmark, Vector2(world_x, world_z))
 	return total
+
+
+func get_ecology_density(world_x: float, world_z: float, terrain_height: float = -9999.0) -> float:
+	var base: float = super.get_ecology_density(world_x, world_z, terrain_height)
+	# Walk-scale canopy patches complement continental climate. A meadow retains
+	# abundant ground cover; only the woody canopy recedes through soft edges.
+	var cover: float = smoothstep(0.34, 0.65, _normalized_v6(_canopy_noise, world_x, world_z))
+	return clampf(lerpf(base * 0.12, base * 1.20, cover), 0.0, 1.0)
 
 
 func get_biome(

@@ -3,7 +3,7 @@ extends "res://world/generation/world_generator_v6_smooth.gd"
 const AdventureProfile = preload("res://world/generation/planet_profile_v8.gd")
 
 const ADVENTURE_MIN_HEIGHT: float = -9.0
-const ADVENTURE_MAX_HEIGHT: float = 32.0
+const ADVENTURE_MAX_HEIGHT: float = 96.0
 const ADVENTURE_VISUAL_STEP: float = 0.25
 
 var _mountain_presence_noise := FastNoiseLite.new()
@@ -126,7 +126,7 @@ func get_terrain_height(world_x: float, world_z: float) -> float:
 	terrain_height = lerpf(terrain_height, lake_target, lake_strength * 0.88)
 
 	var micro: float = _micro_relief_noise.get_noise_2d(world_x, world_z)
-	terrain_height += get_landscape_height_offset(world_x, world_z) * smoothstep(SEA_LEVEL - 0.5, SEA_LEVEL + 2.5, terrain_height)
+	terrain_height += get_landscape_height_offset(world_x, world_z) * smoothstep(SEA_LEVEL - 6.0, SEA_LEVEL + 2.5, terrain_height)
 	terrain_height += micro * 0.10 * land_mass
 	terrain_height = clampf(terrain_height, ADVENTURE_MIN_HEIGHT, ADVENTURE_MAX_HEIGHT)
 	if _height_cache.size() >= HEIGHT_CACHE_LIMIT:

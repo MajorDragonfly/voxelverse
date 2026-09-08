@@ -56,7 +56,7 @@ func _process(_delta: float) -> bool:
 			"terrain":
 				reached = not bool(chunk.get("generation_complete"))
 			"placement":
-				reached = int(ecology.get("_phase")) == 1 and int(ecology.get("placement_attempt_count")) > 0
+				reached = int(ecology.get("_phase")) == 1 and int(ecology.get("_placement_task")) >= 0
 			"resources":
 				reached = int(ecology.get("_phase")) == 2 and not AuthoredAssets._requests.is_empty()
 			"complete":

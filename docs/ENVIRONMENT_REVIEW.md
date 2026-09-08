@@ -20,12 +20,13 @@ working graphical session is required. `--renderer gl_compatibility` explicitly
 tests Compatibility. Unexpected renderer fallback fails the run.
 
 Options include `--size 1920 1080`, `--seeds 15838 23757` and
-`--cases world assets cluster creature`. The default resolution is 1280 × 720.
+`--cases world assets species cluster creature`. The default resolution is 1280 × 720.
 
 | Case | Captures and measurements |
 |---|---|
-| world | Real main scene, 25 fully populated chunks, fixed scenic camera, runtime atmosphere/water/wildlife; initial streaming and settled frame distributions |
+| world | Real main scene, 25 fully populated chunks, scenic, mountain and shore cameras, distant horizon, runtime atmosphere/water/wildlife; initial streaming and settled frame distributions |
 | assets | All seven imported families with Near, Mid and Far from left to right; consistent framing and planet palette |
+| species | Three Near structural variants side by side for oak, pine, bush and rock |
 | cluster | Identical Far vegetation before/after clustering, with unchanged camera, placements and palette |
 | creature | Identical generated grazer before/after runtime voxel batching, preserving its articulated roots |
 
@@ -38,8 +39,10 @@ subsystem. GPU timings with unavailable timestamp queries are identified explici
 The world case holds the player at the actual scenic spawn, disables that review
 player's survival updates and sets spawned predators' attack damage to zero.
 Wildlife movement/animation and chunk generation remain active. This prevents a
-long capture from measuring a respawned, empty area. The two dense reference seeds
-must contain at least 1,000 vegetation instances across 25 chunks. Streaming-stage
+long capture from measuring a respawned, empty area. The two reference seeds
+must contain at least 500 vegetation instances across 25 chunks; both now mix
+meadows with forests. The headless landscape gate separately requires open and
+forested dry samples, plus relief on six representative planets. Streaming-stage
 diagnostics are retained on success and failure; gameplay/combat use separate tests.
 
 The cluster/creature comparisons also require fewer recorded draw calls and a
