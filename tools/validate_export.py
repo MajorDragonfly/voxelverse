@@ -15,7 +15,7 @@ import zipfile
 from validate_godot import ERROR
 
 PACKAGED_TESTS = ["creature_builder_v7_test", "modular_assembly_framework_test",
-                  "gameplay_acceptance_test", "meta_runtime_test"]
+                  "gameplay_acceptance_test", "meta_runtime_test", "planet_sphere_contract_test"]
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
 
@@ -94,6 +94,10 @@ def main():
             # No project.godot, source paths or project --path are supplied here.
             run("packaged_main", [str(executable), "--headless", "--verbose", "--quit-after", "300"],
                 package, isolated_env(root / "main-userdata"))
+            run("packaged_planet_lab", [str(executable), "--headless", "--quit-after", "60", "--", "--planet-lab"],
+                package, isolated_env(root / "lab-userdata"))
+            if "PLANET_LAB_READY" not in (logs / "packaged_planet_lab.log").read_text():
+                raise RuntimeError("Native executable did not enter the planet lab through the gameplay transition.")
             # Official 4.6.3 release templates disable --script. Keep that intact:
             # use the editor to instrument the exact release PCK, after starting
             # the untouched release executable above. Neither sees source files.
@@ -126,6 +130,7 @@ def main():
                 "Voxelverse development build\n\n"
                 f"Start {executable_name} with its .pck and any adjacent libraries kept together.\n"
                 "Controls: WASD move, Space jump, E inspect, right mouse/Q bite, P next planet.\n"
+                "F4 opens the M1 Planet Lab; Tab switches surface/orbit, M changes body, B toggles binary stars.\n"
                 "This build passed headless release acceptance. Visual/GPU acceptance is still pending.\n",
                 encoding="utf-8")
             archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"

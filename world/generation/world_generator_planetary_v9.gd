@@ -1,6 +1,6 @@
 extends "res://world/generation/world_generator_adventure.gd"
 
-const ProfileV9 = preload("res://world/generation/planet_profile_v9.gd")
+const BodyProfile = preload("res://world/space/celestial_body_profile.gd")
 const BiomeGrammar = preload("res://world/generation/biome_grammar_v9.gd")
 const Landmarks = preload("res://world/generation/landmark_grammar.gd")
 const ScenicSpawn = preload("res://world/generation/adventure_spawn_selector.gd")
@@ -16,7 +16,7 @@ var _canopy_noise := FastNoiseLite.new()
 
 func _configure_v6(seed_value: int) -> void:
 	super._configure_v6(seed_value)
-	_planet_profile = ProfileV9.create(seed_value)
+	_planet_profile = BodyProfile.terrain_profile(seed_value)
 	_setup_adventure_noise(_canopy_noise, seed_value + 117_331, 0.008, FastNoiseLite.FRACTAL_FBM, 2, 8.0)
 	_height_cache.clear()
 	_landmark_cells.clear()

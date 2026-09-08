@@ -71,6 +71,8 @@ func _run() -> void:
 			await _water_continuity()
 		"hydrology":
 			await _hydrology()
+		"planet_lab":
+			await _planet_lab()
 		_:
 			_failures.append("Unknown review case.")
 	RenderingServer.render_loop_enabled = true
@@ -608,6 +610,31 @@ func _hide_ui(node: Node) -> void:
 		_hide_ui(child)
 
 
+func _planet_lab() -> void:
+	_scene = load("res://world/planet_lab/planet_lab.tscn").instantiate()
+	root.add_child(_scene)
+	current_scene = _scene
+	_scene.time_speed = 0.0
+	for frame in range(45):
+		await physics_frame
+	_scene.walker.enabled = false
+	await _capture("m1_surface", _scene.snapshot())
+	_scene.set_view("orbit")
+	await _capture("m1_orbit", _scene.snapshot())
+	_scene.set_view("system")
+	await _capture("m1_system", _scene.snapshot())
+	_scene.toggle_binary()
+	await _capture("m1_binary_system", _scene.snapshot())
+	_scene.set_view("surface")
+	_scene.walker.enabled = false
+	await _capture("m1_binary_surface", _scene.snapshot())
+	_scene.system.elapsed += 120.0
+	await _capture("m1_night", _scene.snapshot())
+	_scene._open_body("m1:lune")
+	_scene.walker.enabled = false
+	await _capture("m1_moon", _scene.snapshot())
+
+
 func _capture(label: String, details: Dictionary) -> void:
 	RenderingServer.render_loop_enabled = true
 	for warmup in range(int(_config.get("warmup", 20))):
@@ -639,7 +666,7 @@ func _capture(label: String, details: Dictionary) -> void:
 		"render_cpu_ms": _distribution(cpu), "render_gpu_ms": _distribution(gpu),
 		"gpu_timestamps_available": gpu.max() > 0.0, "draw_calls": _distribution(calls),
 		"rendered_primitives": _distribution(primitives)})
-	if label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
+	if label.begins_with("m1_") or label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
 		var preview: Image = image.duplicate()
 		preview.resize(480, 270, Image.INTERPOLATE_LANCZOS)
 		print("REVIEW_PREVIEW ", str(_config["seed"]), " ", label, " ", Marshalls.raw_to_base64(preview.save_jpg_to_buffer(0.76)))

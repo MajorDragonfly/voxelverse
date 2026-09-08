@@ -2,7 +2,7 @@ extends RefCounted
 class_name PlanetCatalogV7
 
 const PlanetProfile = preload(
-	"res://world/generation/planet_profile_v8.gd"
+	"res://world/space/celestial_body_profile.gd"
 )
 
 const PLANET_CLASSES: Array[String] = [
@@ -39,7 +39,7 @@ static func create_system(system_seed: int) -> Dictionary:
 				+ random.randi_range(1, 2_000_000_000)
 			)
 		planet_seed = maxi(planet_seed, 1)
-		var profile: Dictionary = PlanetProfile.create(planet_seed)
+		var profile: Dictionary = PlanetProfile.terrain_profile(planet_seed)
 		var fallback_class: String = PLANET_CLASSES[
 			posmod(planet_seed + planet_index, PLANET_CLASSES.size())
 		]
@@ -47,6 +47,9 @@ static func create_system(system_seed: int) -> Dictionary:
 		planets.append({
 			"index": planet_index,
 			"planet_seed": planet_seed,
+			"effective_seed": clampi(planet_seed, 1, 2_147_483_647),
+			"body_profile": PlanetProfile.create("legacy:%d:%d" % [safe_seed, planet_seed],
+				"planet", planet_seed, 0.0, "legacy:%d:star" % safe_seed, "legacy_plane_v9"),
 			"name": _planet_name(safe_seed, planet_index),
 			"planet_class": archetype,
 			"orbit_radius": 0.72 + float(planet_index) * random.randf_range(0.42, 0.78),
