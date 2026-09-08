@@ -549,6 +549,26 @@ func _underwater() -> void:
 	_scene.add_child(sky_object)
 	await _capture("underwater_ceiling_sky_control", {"opaque_sky_object_above_water": true})
 	var leak: float = _mean_rgb_difference(ceiling, root.get_texture().get_image())
+	var original_material: Material = water.material_override
+	var diagnostic := ShaderMaterial.new()
+	var diagnostic_shader := Shader.new()
+	diagnostic_shader.code = (original_material as ShaderMaterial).shader.code.replace("ALPHA = 1.0;", "ALPHA = 1.0; ALBEDO = vec3(1.0, 0.0, 0.0); EMISSION = vec3(1.0, 0.0, 0.0);")
+	diagnostic.shader = diagnostic_shader
+	water.material_override = diagnostic
+	await _capture("underwater_debug_branch", {})
+	diagnostic_shader = Shader.new()
+	diagnostic_shader.code = diagnostic.shader.code.replace("if (CAMERA_POSITION_WORLD.y < world_position.y)", "if (true)")
+	diagnostic.shader = diagnostic_shader
+	await _capture("underwater_debug_forced", {})
+	diagnostic_shader = Shader.new()
+	diagnostic_shader.code = "shader_type spatial; render_mode unshaded, cull_disabled; void fragment(){ALBEDO=vec3(1.0,0.0,0.0); ALPHA=1.0;}"
+	diagnostic.shader = diagnostic_shader
+	await _capture("underwater_debug_minimal_alpha", {})
+	diagnostic_shader = Shader.new()
+	diagnostic_shader.code = "shader_type spatial; render_mode unshaded, cull_disabled; void fragment(){ALBEDO=vec3(0.0,1.0,0.0);}"
+	diagnostic.shader = diagnostic_shader
+	await _capture("underwater_debug_opaque", {})
+	water.material_override = original_material
 	_report["underwater_sky_leak_rgb"] = leak
 	if leak > 0.004:
 		_failures.append("Above-water geometry leaks through the water underside: %.6f" % leak)
