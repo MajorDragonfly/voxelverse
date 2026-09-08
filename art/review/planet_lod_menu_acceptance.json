@@ -13,8 +13,8 @@
     "maximum_layout_tiles": 672,
     "maximum_mesh_upload_ms": 17.534,
     "maximum_publish_ms": 19.969,
-    "maximum_seam_m": 0.0000762147246859968,
-    "maximum_water_seam_m": 0.0000799348563305102,
+    "maximum_seam_m": 7.62147246859968e-05,
+    "maximum_water_seam_m": 7.99348563305102e-05,
     "maximum_worker_ms": 2521.789,
     "p95_mesh_upload_ms": 1.334,
     "peak_resident_terrain_meshes": 504,
@@ -70,7 +70,7 @@
     ]
   },
   "regression_resolution": "The initial finer horizon missed the existing water publication deadline. Two sampling workers and a shared 4 m interpolated colour field resolve this; the existing water timeout is unchanged.",
-  "native_and_graphical_evidence": "Native executables and complete Compatibility render suite passed on the code_commit above; Forward+ M1 capture passed and the remaining environment run is tracked separately.",
+  "native_and_graphical_evidence": "Native executables and complete Compatibility and Forward+ render suites passed on the code_commit above; both renderers produced 68 successful captures.",
   "limitations": [
     "No target-PC FPS claim; individual uploads/publishes can exceed the soft budget.",
     "First placement is a synchronous load; spatial detail boundaries are stitched, temporal split/merge geomorphing is still open.",
@@ -586,7 +586,13 @@
       "forward_plus": {
         "m1_step_passed": true,
         "m1_captures": 10,
-        "full_environment_status": "in_progress_at_documentation"
+        "full_environment_status": "completed",
+        "passed": true,
+        "captures": 68,
+        "reviewed": [
+          "Aster surface",
+          "legacy mountains seed 15838"
+        ]
       }
     }
   },
