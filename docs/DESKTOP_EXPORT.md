@@ -72,6 +72,14 @@ See [export_validation_evidence.json](export_validation_evidence.json) for exact
 check results and artifact links. Its artifact digests identify GitHub's outer
 download archives; each contains the build ZIP and its own `SHA256SUMS.txt`.
 
+The rendering/HLOD continuation is accepted on runtime commit
+`3ae819fb480a964ff476cda51a45006d65e32775`: both native export jobs again pass
+10 checks in [34192635639](https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635639).
+Updated archive digests and results are in
+[runtime render evidence](../art/review/runtime_render/evidence.json).
+The separate full runtime suite now has 40 checks, and actual Forward+/Compatibility
+software-rendering gates supplement the headless export tests.
+
 Headless export checks do not certify visuals, shader appearance, driver support
 or target-PC frame times. Blockbench review and a dense verdant/exotic scene on
 real target hardware remain the next visual/performance gates.

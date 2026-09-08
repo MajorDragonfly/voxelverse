@@ -1,5 +1,56 @@
 # Planet Diversity / Biome / Art Production Pass
 
+## Continuation: actual rendering and bounded HLOD — 2026-09-08
+
+Continued from remote `8a7266d2802ead98ac5adea9bed6d6f8f4d7162e` on the same
+development branch. Runtime commit `3ae819fb480a964ff476cda51a45006d65e32775`
+passed **all ten push/PR workflow runs**: 40 full runtime checks, native Windows
+and Linux exports with 10 checks each, and actual Forward+/Compatibility renders.
+PR #9 remains draft, open and unmerged; main was not modified.
+
+- Added repeatable real-driver world/asset captures and frame/draw distributions,
+  with isolated saves and explicit software-renderer/target-hardware scope.
+  The two reference worlds contain 25 chunks and **2,274 / 3,093 vegetation
+  instances**. All seven families are captured in both palettes at all three LODs.
+- Added lazy Far vegetation clusters: at most two extra mesh nodes per chunk,
+  incremental construction, shared terrain/cluster upload admission, semantic
+  palette atlas, preserved Far geometry and immediate Near/Mid return. Capacity
+  fallback retains original vegetation. No streaming-radius or density reduction.
+- Batched rigid runtime creature voxels per existing animated root. The two
+  fixtures drop from **933 / 2,182 geometry nodes to 158 each**. Editor selection,
+  attachment roots, saves and adaptive knee articulation retain their contracts.
+- Real screenshots exposed inward-facing terrain tops. Restored the legacy
+  builder's clockwise front-face correction in the worker path and corrected Far
+  and water indices. Tests now validate actual triangle orientation against normals.
+- Froze player physics before save-restore/scenic-spawn setup. Review-only combat
+  suppression and dense-world/spawn assertions prevent a long software capture
+  from silently recording an empty area after the player respawns at the nest.
+
+Controlled Forward+ viewport counters: Far fixtures **14 → 5 / 13 → 5** draws;
+creatures **933 → 158 / 2,182 → 158**. Each A/B pair retains its primitive count.
+All image comparisons pass; maximum normalized mean RGB error is below 0.000718.
+These are measured draw-count reductions, not target-PC FPS claims.
+
+The six CI CPU samples record cluster uploads up to **3.265 ms**, incremental
+cluster steps up to **0.698 ms**, and one explicit tree-capacity fallback. The
+shared 1.8 ms budget remains an admission target. Cold software-Vulkan world setup
+took about **59 / 65 seconds**; neither those times nor four-frame software samples
+certify gameplay frame-time stability. Target-PC profiling is still required.
+
+[Render review with 24 preserved Forward+ PNGs and terrain before/after](review/runtime_render/README.md),
+[machine-readable evidence](review/runtime_render/evidence.json),
+[full runtime CI](https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635647),
+[native desktop builds](https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635639),
+[actual render CI](https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635631).
+Run the target-PC review using [ENVIRONMENT_REVIEW.md](../docs/ENVIRONMENT_REVIEW.md).
+
+Next production work: review the benchmark in motion, measure the target PC, then
+improve sightlines through nearby vegetation at scenic spawns. The captured worlds
+show dense foreground canopies, while the current scenic viewshed only considers
+terrain. Expand approved silhouettes and landmark composition after that review.
+
+## Initial production pass and earlier acceptance
+
 Date: 2026-09-07. Branch: `agent/meta-runtime-v8`. PR #9 remains open and unmerged.
 Started from remote head `3689a9cbb0782567ec7ab67dbf7941d5d91caccd` after inspecting
 the PR and failed V9 workflow. The base/main branch was not modified.
@@ -132,7 +183,7 @@ are excluded. Headless checks do not certify GPU or visual quality. See
    ground contact, repeated silhouettes and every LOD transition. Art is delivered
    for review, not declared finally approved.
 2. Profile GPU/CPU frame times on the target PC in a dense biome. Tune plant LOD
-   distances and add distant cluster/HLOD representation before extending the
+   distances and the new bounded HLOD/capacity fallback before extending the
    streaming radius. Benchmark props are decorative; selected hero-tree collision
    remains a separate task.
 3. The current family compiler supplies three structures per family. Arbitrary

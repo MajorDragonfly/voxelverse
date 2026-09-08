@@ -1,0 +1,117 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "platform": "windows",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.266
+    },
+    {
+      "name": "release_export",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.687
+    },
+    {
+      "name": "packaged_main",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.063
+    },
+    {
+      "name": "packaged_creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.579
+    },
+    {
+      "name": "packaged_modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.281
+    },
+    {
+      "name": "packaged_gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.219
+    },
+    {
+      "name": "packaged_meta_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.672
+    },
+    {
+      "name": "packaged_planet_15838",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.203
+    },
+    {
+      "name": "packaged_planet_63352",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.954
+    },
+    {
+      "name": "packaged_planet_23757",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.953
+    }
+  ],
+  "probes": [
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "D:/a/_temp/godot-export-toolchain/editor/Godot_v4.6.3-stable_win64.exe",
+      "failures": [],
+      "flora_color_family": "verdant",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 166,
+      "loaded_meshes": 63,
+      "passed": true,
+      "planet_transition": "A-B-A",
+      "platform": "Windows",
+      "save_round_trip": true,
+      "seed": 15838,
+      "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-8u1qgbfk/seed-15838/appdata/Godot/app_userdata/Voxelverse"
+    },
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "D:/a/_temp/godot-export-toolchain/editor/Godot_v4.6.3-stable_win64.exe",
+      "failures": [],
+      "flora_color_family": "autumn",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 164,
+      "loaded_meshes": 63,
+      "passed": true,
+      "platform": "Windows",
+      "save_round_trip": true,
+      "seed": 63352,
+      "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-8u1qgbfk/seed-63352/appdata/Godot/app_userdata/Voxelverse"
+    },
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "D:/a/_temp/godot-export-toolchain/editor/Godot_v4.6.3-stable_win64.exe",
+      "failures": [],
+      "flora_color_family": "violet",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 164,
+      "loaded_meshes": 63,
+      "passed": true,
+      "platform": "Windows",
+      "save_round_trip": true,
+      "seed": 23757,
+      "user_data_dir": "C:/Users/runneradmin/AppData/Local/Temp/voxelverse-export-8u1qgbfk/seed-23757/appdata/Godot/app_userdata/Voxelverse"
+    }
+  ],
+  "archive": {
+    "name": "voxelverse-windows-x86_64.zip",
+    "bytes": 40973348,
+    "sha256": "31c6545e35f5edda912d44ee85d53dd4d6411231b9ffe8a414f24a1aca0c1259"
+  },
+  "passed": true
+}
