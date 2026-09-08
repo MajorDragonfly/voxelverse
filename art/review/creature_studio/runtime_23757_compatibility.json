@@ -1,0 +1,146 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+	"case": "creature",
+	"failures": [],
+	"fast_setup": true,
+	"godot": "4.6.3-stable (official)",
+	"passed": true,
+	"renderer": "gl_compatibility",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"details": {
+				"build_ms": 52.673,
+				"instances": 0,
+				"mesh_nodes": 2173,
+				"multimesh_nodes": 0
+			},
+			"draw_calls": {
+				"max": 8173.0,
+				"median": 8173.0,
+				"p95": 8173.0,
+				"p99": 8173.0
+			},
+			"frame_ms": {
+				"max": 87.497,
+				"median": 85.016,
+				"p95": 87.497,
+				"p99": 87.497
+			},
+			"frames": 4,
+			"gpu_timestamps_available": true,
+			"image": "creature_individual.png",
+			"label": "creature_individual",
+			"render_cpu_ms": {
+				"max": 1778.85694238281,
+				"median": 87.1810003662109,
+				"p95": 1778.85694238281,
+				"p99": 1778.85694238281
+			},
+			"render_gpu_ms": {
+				"max": 1775.4150390625,
+				"median": 86.9489974975586,
+				"p95": 1775.4150390625,
+				"p99": 1775.4150390625
+			},
+			"rendered_primitives": {
+				"max": 26076.0,
+				"median": 26076.0,
+				"p95": 26076.0,
+				"p99": 26076.0
+			}
+		},
+		{
+			"details": {
+				"build_ms": 17.513,
+				"instances": 2057,
+				"mesh_nodes": 116,
+				"multimesh_nodes": 42
+			},
+			"draw_calls": {
+				"max": 574.0,
+				"median": 574.0,
+				"p95": 574.0,
+				"p99": 574.0
+			},
+			"frame_ms": {
+				"max": 64.22,
+				"median": 64.096,
+				"p95": 64.22,
+				"p99": 64.22
+			},
+			"frames": 4,
+			"gpu_timestamps_available": true,
+			"image": "creature_batched.png",
+			"label": "creature_batched",
+			"mean_rgb_error_from_reference": 0.00000966019123698862,
+			"render_cpu_ms": {
+				"max": 724.658986816406,
+				"median": 85.7469984130859,
+				"p95": 724.658986816406,
+				"p99": 724.658986816406
+			},
+			"render_gpu_ms": {
+				"max": 724.622985839844,
+				"median": 85.5749969482422,
+				"p95": 724.622985839844,
+				"p99": 724.622985839844
+			},
+			"rendered_primitives": {
+				"max": 26076.0,
+				"median": 26076.0,
+				"p95": 26076.0,
+				"p99": 26076.0
+			}
+		},
+		{
+			"details": {
+				"build_ms": 14.936,
+				"instances": 0,
+				"mesh_nodes": 33,
+				"multimesh_nodes": 0
+			},
+			"draw_calls": {
+				"max": 99.0,
+				"median": 99.0,
+				"p95": 99.0,
+				"p99": 99.0
+			},
+			"frame_ms": {
+				"max": 49.417,
+				"median": 48.186,
+				"p95": 49.417,
+				"p99": 49.417
+			},
+			"frames": 4,
+			"gpu_timestamps_available": true,
+			"image": "creature_sculpted.png",
+			"label": "creature_sculpted",
+			"render_cpu_ms": {
+				"max": 1152.66000097656,
+				"median": 62.2099991149902,
+				"p95": 1152.66000097656,
+				"p99": 1152.66000097656
+			},
+			"render_gpu_ms": {
+				"max": 1152.64599609375,
+				"median": 62.1500015258789,
+				"p95": 1152.64599609375,
+				"p99": 1152.64599609375
+			},
+			"rendered_primitives": {
+				"max": 11280.0,
+				"median": 11280.0,
+				"p95": 11280.0,
+				"p99": 11280.0
+			}
+		}
+	],
+	"seed": 23757.0,
+	"software_renderer": true,
+	"target_hardware_acceptance": false
+}
