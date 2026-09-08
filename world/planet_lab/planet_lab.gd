@@ -9,6 +9,8 @@ const Walker = preload("res://world/planet_lab/radial_walker.gd")
 const LabSave = preload("res://world/planet_lab/planet_lab_save.gd")
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const MAIN_SCENE: String = "res://main/main.tscn"
+const PRIMARY_LIGHT_ENERGY: float = 1.0
+const SECONDARY_LIGHT_ENERGY: float = 0.45
 var system: RefCounted = System.new()
 var body_id: String = "m1:haven"
 var terrain: Node3D
@@ -148,7 +150,7 @@ func _build_system_view() -> void:
 		if body.kind == "star":
 			var light := DirectionalLight3D.new()
 			light.light_color = Color("ffe2b2") if id == "m1:sol" else Color("b8d6ff")
-			light.light_energy = 1.6 if id == "m1:sol" else 0.8
+			light.light_energy = PRIMARY_LIGHT_ENERGY if id == "m1:sol" else SECONDARY_LIGHT_ENERGY
 			light.shadow_enabled = true
 			light.directional_shadow_max_distance = 130.0
 			add_child(light)
@@ -310,11 +312,11 @@ func _update_views() -> void:
 			# A finite shadow map cannot represent the far side of the whole
 			# planet. Its horizon must block a sun below the local surface too.
 			var horizon: float = smoothstep(-0.03, 0.04, up.dot(delta_position.normalized())) if view_mode == "surface" else 1.0
-			lights[id].light_energy = (1.6 if id == "m1:sol" else 0.8) * horizon
+			lights[id].light_energy = (PRIMARY_LIGHT_ENERGY if id == "m1:sol" else SECONDARY_LIGHT_ENERGY) * horizon
 			illumination += maxf(0.0, up.dot(delta_position.normalized()))
 	if view_mode == "surface":
 		environment.background_color = Color("080e20").lerp(Color("6fa9c1"), clampf(illumination * 1.7, 0.0, 1.0))
-		environment.ambient_light_energy = lerpf(0.12, 0.55, clampf(illumination, 0.0, 1.0))
+		environment.ambient_light_energy = lerpf(0.12, 0.35, clampf(illumination, 0.0, 1.0))
 		if system.bodies[body_id].atmosphere == "none":
 			environment.background_color = Color("050913")
 			environment.ambient_light_energy = 0.12
