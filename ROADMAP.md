@@ -1,8 +1,8 @@
 # Voxelverse – Entwicklungsroadmap
 
-Stand: 8. September 2026 · geprüfter Spielstand: `b1f1ef9c2c14a27269505da1d086091a0884563f`
+Stand: 8. September 2026 · M0-Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354` · visuelle Ausgangsbasis: `b1f1ef9c2c14a27269505da1d086091a0884563f`
 
-Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfolge der nächsten Arbeiten. Es ist die zentrale Projektplanung. Die älteren Berichte unter `art/` dokumentieren einzelne Arbeitsstände; ihre Phasen A–F sind keine Spielphasen. Diese Roadmap ändert zunächst Dokumentation, keine Spielfunktionen.
+Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfolge der nächsten Arbeiten. Es ist die zentrale Projektplanung. Die älteren Berichte unter `art/` dokumentieren einzelne Arbeitsstände; ihre Phasen A–F sind keine Spielphasen. M0 ist inzwischen als Grundlagenpaket umgesetzt und technisch geprüft; Einzelheiten und Grenzen stehen in den [Kampagnenverträgen](docs/CAMPAIGN_CONTRACTS.md).
 
 ## Ziel und verbindliche Anforderungen
 
@@ -24,27 +24,27 @@ Voxelverse ist ein Einzelspielerspiel mit selbst gestalteter Spezies und der Ent
 
 | Bereich | Im geprüften Code vorhanden | Was noch fehlt | Einstieg im Code |
 |---|---|---|---|
-| Spielphasen | Enum für Creature, Tribe, Ancient/Medieval, Nation, Space, Multiverse; Namen, Fähigkeitstabellen und gespeicherte Phase | Spielschleifen nach der Kreaturenphase, Übergangsbedingungen, Steuerungswechsel und Übernahme der Gesellschaft | [GameState](autoload/game_state.gd) |
+| Spielphasen | Bestehendes Enum; vorbereiteter, gespeicherter und wiederaufnehmbarer Debug-Phasenübergang; normaler Übergang bis zur tatsächlichen Spielschleife gesperrt | Spielschleifen nach der Kreaturenphase, echte Übergangsbedingungen, Steuerungswechsel und Übernahme der Gesellschaft | [GameState](autoload/game_state.gd) |
 | Sternsystem | Deterministischer Katalog mit 3–6 Planeten, Namen, Seeds und einfachen Orbit-/Schwerkraftwerten; einzelne Sternwerte | Hierarchische Himmelskörper, Radien, Monde, mehrere Sterne, Bewegung und verbindliche astronomische Darstellung | [PlanetCatalog](world/generation/planet_catalog_v7.gd) |
 | Planetenwechsel | Taste P lädt die Szene mit anderem Planetenseed; regionale Ökologie wird beim Wiederbesuch übernommen | Raumflug, Landung, globaler Oberflächenort, Reise- und Kolonieregeln | [StarSystemRuntime](world/space/star_system_runtime_v7.gd) |
 | Planetengeometrie | Gestreamtes Terrain auf einer X/Z-Ebene; Voxelberge, Wasser und lokale Kollision | Endliche Kugeltopologie, Oberflächennähte, lokale Schwerkraftrichtung, globale Kontinente und konsistente Orbitansicht | [WorldGenerator](world/generation/world_generator_planetary_v9.gd), [TerrainBuildJob](world/streaming/terrain_build_job.gd) |
 | Himmel | Sonne und Atmosphärenprofile, auch Darstellungsmodi für Orbit/Weltraum | Himmelskörper aus dem Sternsystem, Tageslauf und Licht aus derselben Zeit-/Positionsquelle | [PlanetVisualEnvironment](world/visuals/planet_visual_environment.gd) |
 | Kreaturen | Körper/Wirbelsäule, Anbauteile, Oberflächenbindung, Symmetrie, Undo/Redo, gespeicherte Entwürfe, Animation und mehrere angewendete Körperwerte | Bedienungs- und Formüberarbeitung, robuste Bewegung verschiedener Körperformen, vollständig wirksame Fähigkeiten | [Aktiver Editor](creatures/editor/creature_editor_runtime.gd), [Assembly V7](creatures/editor/creature_assembly_blueprint_v7.gd), [Runtime](creatures/runtime/creature_runtime_visual.gd) |
 | Tierwelt | Einzeltiere wandern, fliehen und greifen an; regionale Populationen, Pflanzen-/Aasvorräte und abstrakte Räuber-Beute-Berechnung | Sichtbare Herden, Nahrungssuche und Jagd zwischen Tieren; zuverlässige Navigation über Lebensräume | [Wildlife](creatures/wildlife/procedural_wildlife_v7.gd), [RegionEcology](world/simulation/region_ecology_simulation.gd) |
-| Fortschritt | Arten-/Regionenentdeckung, Insight, Körperteilfreischaltungen und Speicherung | Verhaltenspunkte, Skilltree, Phasenvermächtnis, getrennte Technikforschung, gesellschaftlicher Ruf | [ProgressionService](autoload/progression_service.gd) |
+| Fortschritt | Arten-/Regionenentdeckung, Insight, Körperteilfreischaltungen; typisierte Kampagnenereignisse und persistente Sequenzprüfung gegen Wiederholung | Verhaltenspunkte, Skilltree, Phasenvermächtnis, getrennte Technikforschung, gesellschaftlicher Ruf | [ProgressionService](autoload/progression_service.gd) |
 | Gebäude | Eigenständiger modularer Editor, mehrere gespeicherte Designs, Gebäudekategorien und berechnete Werte | Platzierung mit Spielkosten, begehbare Zugänge, Wirtschaft, Bewohner und Siedlungsbetrieb | [Building Builder](civilization/buildings/building_builder.gd), [Design Registry](civilization/buildings/building_design_registry.gd) |
 | Fahrzeuge/Raumschiffe | Allgemeines Bauplanformat als Grundlage | Eigene Teile, Editoren, Bewegungs-/Antriebssysteme, Besatzung, Einsatz im Spiel | [Modular Assembly](assembly/README.md) |
-| Speicherung | Schema-Versionen, temporäres Schreiben, aktuelle Spieler-/Phasen-/Fortschrittsdaten und Ökologie nach Weltseed | Dauerhafte Objektidentitäten, Körperkoordinaten, Gesellschaft/Wirtschaft/Skilltree, sichere Migration und zusammenhängende Sicherung aller Entwürfe | [SaveGameService](autoload/save_game_service.gd) |
+| Speicherung | Schema 3 mit gemeinsamer Kampagnen-/Entwurfssicherung, Backups und Migration; Kampagnen-/Körper-/Regions-/Spezies-/Fraktions-/Objekt-/Entwurfs-IDs; kompatible Ebenenadresse | Kugelkoordinaten, individuelle Weltobjektzustände, Bevölkerung/Wirtschaft/Skilltree und spätere Generator-Migrationen | [SaveGameService](autoload/save_game_service.gd) |
 | Skalierung | Chunk-Budgets, gestaffelte Darstellung, MultiMesh, regionale Ökologie und begrenzte Tierzahl | Siedlungs-/Reichssimulation, globale Navigation, mehrere Maßstäbe und messbare Budgets auf dem Ziel-PC | [Produktionsarchitektur](art/PRODUCTION_ARCHITECTURE.md) |
 
-Konkrete Altlasten für die nächsten Schnittstellenarbeiten:
+Konkrete Altlasten und Stand nach M0:
 
 - Der Planetenkatalog erzeugt Profile über V8, der aktive Landschaftsgenerator über V9. Katalog, Oberfläche und spätere Orbitansicht brauchen eine gemeinsame, versionierte Datenquelle.
 - Einige Planeteneigenschaften sind bisher nur Daten: vorhandene `surface_gravity`- oder Orbitwerte beweisen keine entsprechende Physik.
-- Kreaturenbaupläne setzen ihren eingebetteten Fortschrittsbereich aktuell auf `creature`. Die spätere Kampagnenphase darf dadurch nicht zurückgesetzt oder zum zweiten Mal verwaltet werden.
-- Phasen-Fähigkeitsnamen wie `socialize`, `colonize` oder `terraform` sind keine implementierten Interaktionen. Die derzeitige Liste muss vor weiteren Phasen durch klar geregelte Freischaltungen ergänzt werden.
-- Ökologie und Entdeckungen identifizieren Welten bislang weitgehend über Seeds und X/Z-Zellen. Das reicht nicht als dauerhafte Adresse eines Ortes auf einem Mond oder eines Reiches über mehrere Systeme.
-- Der aktuelle Save schreibt temporär, entfernt dann die alte Datei und benennt die neue um. Das ist noch keine durchgängige, gegen Abbruch abgesicherte Transaktion über Kampagne und getrennte Editor-Dateien.
+- **In M0 erledigt:** Kreaturenbaupläne verwalten keine zweite Kampagnenphase mehr. Die Phase liegt ausschließlich in `GameState`; alte Enum-Werte bleiben erhalten.
+- Phasen-Fähigkeitsnamen wie `socialize`, `colonize` oder `terraform` sind keine implementierten Interaktionen. M0 sperrt den normalen Phasenübergang bis zur jeweiligen Spielschleife. Echte Voraussetzungen/Freischaltungen folgen weiterhin in M4/M5.
+- **In M0 vorbereitet:** Körperbezogene IDs und gespeicherte Ebenenadressen ergänzen die alten Seed-/X/Z-Schlüssel. M1 muss die Kugeladresse und Körperhierarchie ergänzen; M0 verändert bestehende Landschaften nicht.
+- **In M0 erledigt:** Kampagne und Entwürfe werden gemeinsam gesichert. Der neue Schreibweg ersetzt die Zieldatei nach geprüftem temporärem Schreiben, ohne sie vorher zu löschen; gemeinsame Backups und Wiederaufnahme sind geprüft.
 
 ## Architekturentscheidungen vor dem großen Ausbau
 
@@ -144,11 +144,11 @@ Dies sind Designvorschläge für Voxelverse, keine Behauptung über konkrete Spo
 
 ## Reihenfolge und Abnahmekriterien
 
-Alle Meilensteine M0–M10 sind zum Dokumentdatum **geplant**, nicht umgesetzt. Der vorhandene spielbare Stand oben ist die Ausgangsbasis. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
+**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
 
 | ID | Arbeitspaket | Voraussetzung | Fertig, wenn … |
 |---|---|---|---|
-| M0 | Kampagnenverträge, IDs, Speichern, Phasen-/Ereignismodell | Aktueller Stand | Ein alter Stand lässt sich ohne Verlust von Entwürfen/Entdeckungen laden; neue IDs und Ereignisse überstehen Speichern/Laden; Phasenwechsel sind kontrollierbar |
+| M0 | **Technisch geprüft:** Kampagnenverträge, IDs, gemeinsame Sicherung, Phasen-/Ereignismodell | Ausgangsstand `e1b0b7f` | Migration mit Kreatur, zwei Gebäuden, Entdeckungen und zwei Planeten; separater Prozessneustart; Ereigniswiederholung und unterbrochener Debug-Übergang geprüft. Commit `3f7f2252e3cbce868920dcf7c86beb3b47d17354`; manueller Spieltest offen |
 | M1 | Kugelplanet- und Sternsystemprototyp | M0 | Ein kleiner Planet lässt sich umrunden; Nähte, lokale Schwerkraft, Wasser und Orbit-Ortsgleichheit sind geprüft; ein Mond und danach zwei Sonnen kommen aus denselben Systemdaten |
 | M2 | Verhaltensfortschritt und gemeinsame Editorverträge | M0, Koordinatenentscheidung aus M1 | Echte bzw. im Test ausgelöste Ereignisse vergeben einmal Punkte; Knoten wirken einmal; Blaupausen besitzen stabile Identität und Revision; Import/Undo/Redo bleiben erhalten |
 | M3 | Kreaturen und Kreatureneditor überarbeiten | M2; Laufzeit auf M1-Grundlage | Repräsentative Körperformen lassen sich verständlich gestalten und bewegen; Vorschau und Spiel stimmen überein; erste Körperfähigkeiten funktionieren |
@@ -162,7 +162,7 @@ Alle Meilensteine M0–M10 sind zum Dokumentdatum **geplant**, nicht umgesetzt. 
 
 M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reift. Größere neue Welt-, Navigations- oder Stadtfunktionen warten auf den Koordinatennachweis. Wir bauen zunächst ein einziges gutes Beispiel pro System und verbreitern es danach. Alle Phasen werden nicht gleichzeitig als halbfertige Baustellen begonnen.
 
-### M0 – unmittelbar nächste technische Arbeit
+### M0 – technisch geprüft, manueller Spieltest offen
 
 1. Stabile IDs für Kampagne, Körper, Region, Spezies, Fraktion, Objekt und Entwurf einführen; Seed und Anzeigename bleiben separate Felder.
 2. Speicherbesitz klären: Kampagne besitzt Gesellschaft/Fortschritt, Registry die Entwürfe, Weltregionen die Instanzen. Keine zweite Kampagnenphase im Kreatureneditor. Bauplanrevisionen werden von gespeicherten Instanzen gezielt referenziert.
@@ -170,7 +170,9 @@ M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reif
 4. Phasenverwaltung um Voraussetzungen, Übergabedaten, sicheren Abschluss und Wiederaufnahme ergänzen. Bestehende Enum-Werte in alten Saves nicht umnummerieren. Debug-Phasenwechsel bleiben getrennt vom normalen Fortschritt.
 5. Kleine typisierte Spielereignisse für Entdeckung, Interaktion, Konfliktergebnis und Phasenwechsel einführen. Ereignismodell anhand des kleinen Skilltrees prüfen, keine allgemeine Großarchitektur bauen.
 
-**Abnahme:** Migration eines aktuellen Beispielsaves mit Kreatur, zwei Gebäudedesigns, Entdeckungen und zwei besuchten Planeten; identische IDs nach Neustart; ein Ereignis wird nach Wiederholung nicht doppelt belohnt; unterbrochener Übergang lässt sich wiederaufnehmen. Nur Funktionen als bestanden markieren, die tatsächlich ausgeführt wurden.
+**Technische Abnahme ausgeführt:** Schema-2-Beispiel mit Kreatur, zwei Gebäuden, Entdeckungen und zwei besuchten Planeten; identische IDs und Revisionen in einem zweiten Godot-Prozess; wiederholte Entdeckung ohne zweite Insight-Belohnung; Ereignisse nach Wiederholung abgelehnt; unterbrochener Debug-Übergang wird einmal abgeschlossen. Dazu Schreibfehler, beschädigter Hauptstand, gemeinsame Wiederherstellung ohne lose Editor-Dateien und Schutz unbekannter Versionen. Vollständiger bestehender Prüflauf und Linux-Export erfolgreich. Nachweis: `tests/campaign_foundation_test.gd` und [Kampagnenverträge](docs/CAMPAIGN_CONTRACTS.md).
+
+**Rest bewusst in späteren Paketen:** echter Skilltree M2/M4, persistente Einzeltiere/Ressourcen M4, Bevölkerung und produktiver Phasenwechsel M5. Die Normalprüfung von Phasenvoraussetzungen sperrt unfertige Phasen. Die bisherige Ebenenadresse ist kein Kugelnachweis. Die Uhr steuert Kampagnenzeit/Ökologie; ein globales Geschwindigkeitsmenü ist noch nicht vorhanden.
 
 ### M1 – begrenzter Techniknachweis statt fertiger Weltraumphase
 
@@ -242,6 +244,6 @@ Die vorhandenen Prüfungen zu Editor, Assembly, Speichern, Planetenwechsel, Wass
 
 Leistungsziel vorläufig: flüssige 60 FPS auf einem noch konkret zu dokumentierenden Ziel-PC bei festgelegter Auflösung/Qualität. Dies ist ein Ziel, kein gemessener Ist-Wert. Pro Messszene werden aktive Tiere/Einheiten, Regionen, Draw Calls, Speicher, Framezeiten und Speicher-/Ladezeiten erfasst. Vor M6 wird eine größere Siedlung, vor M8 eine globale Kampagne und vor M9 ein Körperwechsel geprüft. Software-Renderer-CI ersetzt diese Ziel-PC-Messung nicht.
 
-Aktuell letzter validierter Spielstand: [Voxel-/Wassertiefenbericht](art/VOXEL_STYLE_DEPTH_REPORT.md). Die dortige Validierung gehört zum oben genannten Ausgangscommit, nicht zu bereits umgesetzten Roadmap-Meilensteinen.
+Letzter dokumentierter visueller Ausgangsstand: [Voxel-/Wassertiefenbericht](art/VOXEL_STYLE_DEPTH_REPORT.md). Die M0-Prüfungen sind separat in den [Kampagnenverträgen](docs/CAMPAIGN_CONTRACTS.md) dokumentiert; sie ersetzen keinen neuen visuellen Spieltest durch Lars.
 
-**Nächster Arbeitsauftrag:** M0 umsetzen und danach den begrenzten M1-Planetenprototyp prüfen. Anschließend M2/M3 und die vorgeschlagene lebendige Tierwelt M4. So gehen die Planeten- und Kampagnengrundlagen den Systemen voraus, die sonst auf falschen Orts- oder Speichermodellen aufbauen würden.
+**Nächster Arbeitsauftrag:** Den begrenzten M1-Planetenprototyp auf den M0-Verträgen umsetzen und prüfen. Zuerst gemeinsame versionierte Körperprofile und Kugelkoordinaten, dann begehbare Testgeometrie; bestehende Spielstände bleiben auf `legacy_plane_v9`. Anschließend M2/M3 und die vorgeschlagene lebendige Tierwelt M4. So gehen die Planeten- und Kampagnengrundlagen den Systemen voraus, die sonst auf falschen Orts- oder Speichermodellen aufbauen würden.
