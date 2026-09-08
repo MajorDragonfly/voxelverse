@@ -1,8 +1,8 @@
 # Voxelverse – Entwicklungsroadmap
 
-Stand: 8. September 2026 · M0-Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354` · visuelle Ausgangsbasis: `b1f1ef9c2c14a27269505da1d086091a0884563f`
+Stand: 8. September 2026 · M1-Technikprototyp: `555f9efa2a16d8dde6fbf121157671ef944b2f83` · M0-Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354` · visuelle Ausgangsbasis: `b1f1ef9c2c14a27269505da1d086091a0884563f`
 
-Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfolge der nächsten Arbeiten. Es ist die zentrale Projektplanung. Die älteren Berichte unter `art/` dokumentieren einzelne Arbeitsstände; ihre Phasen A–F sind keine Spielphasen. M0 ist als Grundlagenpaket technisch geprüft. M1 ist als separates Planetenlabor implementiert; Nachweise und Integrationsgrenzen stehen im [M1-Bericht](docs/PLANET_M1.md). Die Abschlussprüfung von M1 läuft noch. M0-Verträge: [Kampagne](docs/CAMPAIGN_CONTRACTS.md).
+Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfolge der nächsten Arbeiten. Es ist die zentrale Projektplanung. Die älteren Berichte unter `art/` dokumentieren einzelne Arbeitsstände; ihre Phasen A–F sind keine Spielphasen. M0 ist als Grundlagenpaket technisch geprüft. M1 ist als separates Planetenlabor implementiert und technisch geprüft; Nachweise und Integrationsgrenzen stehen im [M1-Bericht](docs/PLANET_M1.md). Lars' manueller Spieltest und die Produktionsintegration bleiben offen. M0-Verträge: [Kampagne](docs/CAMPAIGN_CONTRACTS.md).
 
 ## Ziel und verbindliche Anforderungen
 
@@ -62,7 +62,7 @@ Sichtbarer Himmel, Beleuchtung, Systemkarte und Orbitansicht lesen dieselben Him
 
 ### 2. Echte Kugeloberfläche früh beweisen
 
-**Prototypvorschlag:** sechs verbundene Oberflächenbereiche einer Kugel mit unterteilbaren Kacheln; lokal bleibt eine kleine, präzise Simulationsumgebung um Spieler oder Kamera. Die endgültige Kachelprojektion wird in M1 geprüft und dann entschieden.
+**In M1 erprobt:** sechs verbundene Cube-Sphere-Flächen mit begrenzten Nahkacheln; lokal bleibt eine kleine, präzise Simulationsumgebung um Spieler oder Kamera. Körperfeste Adressen und der lokale Ursprung sind als Vertrag für M2 bestätigt. Große Spielplaneten benötigen zusätzlich hierarchische Kachelunterteilung.
 
 Speicherorte enthalten Himmelskörper-ID und eine kanonische Oberflächenadresse samt Höhe und Orientierung. Lokale `Vector3`-Positionen entstehen daraus nur für Darstellung und Physik. Ein verschiebbarer lokaler Ursprung verhindert, dass Planeten-/Systementfernungen in dieselben kleinen Physikkoordinaten gepresst werden. Globale Routen und Entfernungen verwenden das Oberflächenmodell, keine X/Z-Abkürzungen durch die Kugel.
 
@@ -144,12 +144,12 @@ Dies sind Designvorschläge für Voxelverse, keine Behauptung über konkrete Spo
 
 ## Reihenfolge und Abnahmekriterien
 
-**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1: Technikprototyp implementiert, Abschlussprüfung läuft. M2–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
+**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1: begrenzter Technikprototyp geprüft. M2–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
 
 | ID | Arbeitspaket | Voraussetzung | Fertig, wenn … |
 |---|---|---|---|
 | M0 | **Technisch geprüft:** Kampagnenverträge, IDs, gemeinsame Sicherung, Phasen-/Ereignismodell | Ausgangsstand `e1b0b7f` | Migration mit Kreatur, zwei Gebäuden, Entdeckungen und zwei Planeten; separater Prozessneustart; Ereigniswiederholung und unterbrochener Debug-Übergang geprüft. Commit `3f7f2252e3cbce868920dcf7c86beb3b47d17354`; manueller Spieltest offen |
-| M1 | **Technikprototyp implementiert:** Kugelplanet und Sternsystemlabor | M0 | Polare Umrundung mit echter Physik, Kantenstrahlen, begrenztes Streaming, radialer Ozean, Orbit/Rückkehr und Neustart bereits geprüft; finale Bildprüfung läuft. [Nachweise/Grenzen](docs/PLANET_M1.md) |
+| M1 | **Technikprototyp geprüft:** Kugelplanet und Sternsystemlabor | M0 | Polare Umrundung mit echter Physik, Kantenstrahlen, begrenztes Streaming, radialer Ozean, Orbit/Rückkehr und Prozessneustart bestanden. 49 Gesamtprüfungen, native Exporte und sieben Renderfälle in zwei Grafikmodi. Manueller Spieltest und produktive große Planeten offen. [Nachweise/Grenzen](docs/PLANET_M1.md) |
 | M2 | Verhaltensfortschritt und gemeinsame Editorverträge | M0, Koordinatenentscheidung aus M1 | Echte bzw. im Test ausgelöste Ereignisse vergeben einmal Punkte; Knoten wirken einmal; Blaupausen besitzen stabile Identität und Revision; Import/Undo/Redo bleiben erhalten |
 | M3 | Kreaturen und Kreatureneditor überarbeiten | M2; Laufzeit auf M1-Grundlage | Repräsentative Körperformen lassen sich verständlich gestalten und bewegen; Vorschau und Spiel stimmen überein; erste Körperfähigkeiten funktionieren |
 | M4 | Lebendige Tierwelt und vollständiger Kreaturen-Spielablauf | M1–M3 | Herde, Nahrungssuche, Räuber-Beute, Befreunden, Entdeckungsbuch und kleiner Skilltree bilden einen spielbaren Ablauf; sozialer und aggressiver Fortschritt funktionieren |
@@ -174,7 +174,7 @@ M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reif
 
 **Rest bewusst in späteren Paketen:** echter Skilltree M2/M4, persistente Einzeltiere/Ressourcen M4, Bevölkerung und produktiver Phasenwechsel M5. Die Normalprüfung von Phasenvoraussetzungen sperrt unfertige Phasen. Die bisherige Ebenenadresse ist kein Kugelnachweis. Die Uhr steuert Kampagnenzeit/Ökologie; ein globales Geschwindigkeitsmenü ist noch nicht vorhanden.
 
-### M1 – Technikprototyp implementiert, Abschlussprüfung läuft
+### M1 – begrenzter Technikprototyp geprüft
 
 1. Systemkatalog auf gemeinsame versionierte Himmelskörperprofile umstellen, V8/V9-Doppelquelle auflösen. Alten Seed→Planet-Bezug erhalten.
 2. Oberflächenadresse, globale/lokale Umrechnung und gemeinsamen Terrain-/Wasser-/Normalenzugriff bauen; bisherigen Generator über Adapter anschließen.

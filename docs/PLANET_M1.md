@@ -1,5 +1,7 @@
 # M1 – Kugel- und Sternsystemlabor
 
+Stand: 8. September 2026 · Technikprototyp geprüft · Code: `555f9efa2a16d8dde6fbf121157671ef944b2f83` · Lars' manueller Spieltest offen.
+
 ## Vorab festgelegte Grenzen
 
 Eigenständige Szene `res://world/planet_lab/planet_lab.tscn`; bestehende Kampagnen bleiben `legacy_plane_v9`.
@@ -52,8 +54,20 @@ Der lokale Ursprung verschiebt sich nach 64 m Bewegung. Nur der aktive Körper b
 - `tools/validate_export.py`: unveränderter nativer Hauptstart, eigener nativer Laborstart und Vertragstest gegen das exportierte PCK.
 - `tools/profile_environment.py --cases planet_lab --seeds 12345`: sieben echte Renderaufnahmen (Oberfläche, Orbit, System, Doppelsternsystem, Doppelsternhimmel, Nacht, Mond) in Forward+ und Compatibility. Die vorhandene Render-CI führt diese Fälle vor den bisherigen Umgebungsprüfungen aus.
 
-Die fokussierte Physikprobe erreichte 6,2836 rad mit 2.028 Bodenkontakten in 2.070 Frames und sieben Ursprungswechseln. Der sichtbare maximale Kantenfehler liegt bei 0,000005055 m. Die ergänzende Fern-LOD-Prüfung misst maximal 1,467347 m Höhenfehler an den Dreiecksmittelpunkten. Abschlusszahlen des Gesamt- und Renderlaufs werden nach deren Auswertung ergänzt.
+Die fokussierte Physikprobe erreichte 6,2836 rad mit 2.028 Bodenkontakten in 2.070 Frames und sieben Ursprungswechseln. Der sichtbare maximale Kantenfehler liegt bei 0,000005055 m. Die ergänzende Fern-LOD-Prüfung misst maximal 1,467347 m Höhenfehler an den Dreiecksmittelpunkten. Der vollständige lokale Prüflauf ist mit **49/49** Prüfungen grün; der Linux-Export mit **11/11** Prüfungen. Nach der letzten Bildkorrektur wurde der komplette M1-Laufzeitfall erneut bestanden. Die aktuelle Fassung besteht auch die Godot-CI sowie die nativen Windows- und Linux-Exportjobs. Der frühzeitige Einstieg vor Abschluss des alten Terrainstarts ist zusätzlich abgesichert.
 
 ## Bewusste Grenzen
 
 Das ist die M1-Technikszene, keine fertige Weltraumphase und keine Umstellung der Kampagne. Planetare Fluss-/Seeeinzugsgebiete, produktive Flora/Fauna, blockweise abbaubares Kugelterrain, freier Raumflug und hierarchische Planetengrößen-LOD sind noch offen. Die globale Wasserprobe demonstriert einen zusammenhängenden Ozean. Manuell zu prüfen bleiben Laufgefühl/Kamera mit Lars' Entwurf und Leistung auf seinem Ziel-PC.
+
+
+## Renderabnahme und Übergabe
+
+Die sieben M1-Fälle wurden mit echten Draw Calls in **Forward+ und Compatibility** erfolgreich aufgenommen. Die Compatibility-Bilder der Codefassung `555f9ef` wurden gesichtet: geschlossene Orbitansicht mit freier Sicht auf den ganzen Planeten, begehbare Oberfläche ohne erkennbare offene Kanten, beschriftete Ein-/Doppelsternkarte, dunkle Nacht ohne Licht von unterhalb des Horizonts und atmosphärenloser Mond mit sichtbarem Mutterplaneten. Der Himmel ist eine einfache Technikdarstellung; Flora und Art-Direction des Hauptspiels wurden nicht auf die Kugel portiert.
+
+- [Messprotokoll](../art/review/m1_acceptance.json)
+- [Godot-CI der Codefassung](https://github.com/MajorDragonfly/voxelverse/actions/runs/34247249789)
+- [Windows-/Linux-Exporte](https://github.com/MajorDragonfly/voxelverse/actions/runs/34247249854)
+- [Renderlauf und M1-Bildartefakte](https://github.com/MajorDragonfly/voxelverse/actions/runs/34247249886) – beide M1-Schritte erfolgreich; der umfangreiche bestehende Forward+-Umgebungslauf kann anschließend noch weiterlaufen.
+
+Die Koordinatenentscheidung für M2 ist damit getroffen: kanonische körperfeste Cube-Sphere-Adresse, skalare globale Koordinaten, Tangentenorientierung und kleiner lokaler Ursprung. Das ersetzt keine Produktionsabnahme erdgroßer Landschaften. Vor der Kampagnenumstellung braucht es hierarchische Unterteilung, Weltobjekt-/Faunaanbindung und eine ausdrücklich geplante Migration.
