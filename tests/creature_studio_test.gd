@@ -53,6 +53,13 @@ func _run() -> void:
 		await process_frame
 	_expect(editor.find_child("CreatureCanvas", true, false) != null, "Workshop input canvas missing.")
 	_expect(editor.find_child("Card_body_balanced_core", true, false) != null, "Visual part palette missing.")
+	# Route actual GUI events through the viewport, including a control over
+	# the 3D canvas. Calling a handler directly would miss mouse-filter bugs.
+	var part_tab: Control = editor.get("_mode_buttons")["parts"]
+	await _click(part_tab.get_global_rect().get_center())
+	_expect(str(editor.get("_studio_mode")) == "parts", "The Parts tab is not clickable through the GUI.")
+	await _click(editor.get("_mode_buttons")["body"].get_global_rect().get_center())
+	_expect(str(editor.get("_studio_mode")) == "body", "The Body tab is not clickable through the GUI.")
 	editor.call("_apply_body_preset", "grazer")
 	var shaped: Dictionary = editor.get("blueprint").duplicate(true)
 	_expect(float(shaped["body"]["spine_length_scale"]) > 1.3, "Long-neck preset did not shape the body.")
@@ -72,6 +79,15 @@ func _run() -> void:
 	editor.call("_set_mode", "parts")
 	editor.call("drop_part", "eyes_beady", Vector2(2, 2))
 	_expect(editor.get("blueprint")["parts"].size() == count, "Dropping outside the body created a part.")
+	var camera: Camera3D = editor.get("_camera")
+	var visual: Node3D = editor.get("_preview")
+	var section: Dictionary = Surface.section(editor.get("blueprint"), 0.5)
+	var body_point: Vector2 = camera.unproject_position(visual.to_global(section["center"]))
+	_expect(bool(editor.call("can_drop_part", "eyes_beady", body_point)), "A visible body cannot receive parts.")
+	editor.call("drop_part", "eyes_beady", body_point)
+	_expect(editor.get("blueprint")["parts"].size() == count + 1, "Dropping a discovered part on the body failed.")
+	if editor.get("blueprint")["parts"].size() == count + 1:
+		_expect(bool(editor.get("blueprint")["parts"][-1]["mirrored"]), "A new paired part ignored symmetry.")
 	var design_before_preview: String = JSON.stringify(editor.get("blueprint"))
 	editor.call("_set_mode", "test")
 	editor.call("_choose_motion", "run")
@@ -92,6 +108,17 @@ func _geometry_count(node: Node) -> int:
 	for child in node.get_children():
 		count += _geometry_count(child)
 	return count
+
+
+func _click(position: Vector2) -> void:
+	for pressed: bool in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.position = position
+		event.global_position = position
+		event.button_index = MOUSE_BUTTON_LEFT
+		event.pressed = pressed
+		Input.parse_input_event(event)
+		await process_frame
 
 
 func _expect(condition: bool, message: String) -> void:

@@ -53,6 +53,8 @@ func _draw() -> void:
 		var point: Vector2 = center + (piece["point"] - bounds.get_center()) * factor
 		var extent: Vector2 = piece["extent"] * factor
 		var color: Color = piece["color"]
+		if category == "eyes" and color.get_luminance() < 0.12:
+			color = Color("f7eedb")
 		if disabled:
 			color = color.darkened(0.55)
 		draw_set_transform(point, 0.0, extent * 0.5)

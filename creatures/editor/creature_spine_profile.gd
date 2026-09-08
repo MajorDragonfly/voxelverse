@@ -293,58 +293,40 @@ static func sample(
 			left_index = index
 	var right_index: int = left_index + 1
 	var blend: float = inverse_lerp(float(segments[left_index]["t"]), float(segments[right_index]["t"]), safe_position)
-	blend = smoothstep(0.0, 1.0, blend)
+	var result: Dictionary = {}
+	var interval: float = float(segments[right_index]["t"]) - float(segments[left_index]["t"])
+	for field: String in ["width_scale", "height_scale", "y_offset"]:
+		var left: float = float(segments[left_index][field])
+		var right: float = float(segments[right_index][field])
+		var slope_left: float = _knot_slope(segments, left_index, field) * interval
+		var slope_right: float = _knot_slope(segments, right_index, field) * interval
+		var u2: float = blend * blend
+		var u3: float = u2 * blend
+		result[field] = clampf((2.0 * u3 - 3.0 * u2 + 1.0) * left
+			+ (u3 - 2.0 * u2 + blend) * slope_left
+			+ (-2.0 * u3 + 3.0 * u2) * right
+			+ (u3 - u2) * slope_right, minf(left, right), maxf(left, right))
+	return result
 
-	var left: Dictionary = segments[left_index]
-	var right: Dictionary = segments[right_index]
 
-	return {
-		"width_scale": lerpf(
-			float(
-				left.get(
-					"width_scale",
-					1.0
-				)
-			),
-			float(
-				right.get(
-					"width_scale",
-					1.0
-				)
-			),
-			blend
-		),
-		"height_scale": lerpf(
-			float(
-				left.get(
-					"height_scale",
-					1.0
-				)
-			),
-			float(
-				right.get(
-					"height_scale",
-					1.0
-				)
-			),
-			blend
-		),
-		"y_offset": lerpf(
-			float(
-				left.get(
-					"y_offset",
-					0.0
-				)
-			),
-			float(
-				right.get(
-					"y_offset",
-					0.0
-				)
-			),
-			blend
-		),
-	}
+static func _knot_slope(segments: Array, index: int, field: String) -> float:
+	var before: int = maxi(0, index - 1)
+	var after: int = mini(SEGMENT_COUNT - 1, index + 1)
+	var h0: float = maxf(float(segments[index]["t"]) - float(segments[before]["t"]), MIN_KNOT_GAP)
+	var h1: float = maxf(float(segments[after]["t"]) - float(segments[index]["t"]), MIN_KNOT_GAP)
+	var d0: float = (float(segments[index][field]) - float(segments[before][field])) / h0
+	var d1: float = (float(segments[after][field]) - float(segments[index][field])) / h1
+	if index == 0:
+		return d1
+	if index == SEGMENT_COUNT - 1:
+		return d0
+	if d0 * d1 <= 0.0:
+		return 0.0
+	# Monotone cubic interpolation keeps tangents continuous without negative
+	# radii or overshoot when adjacent handles are dragged close together.
+	var w0: float = 2.0 * h1 + h0
+	var w1: float = h1 + 2.0 * h0
+	return (w0 + w1) / (w0 / d0 + w1 / d1)
 
 
 static func save_profile(

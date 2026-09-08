@@ -51,27 +51,28 @@ func _build_editor_room() -> void:
 	var environment := Environment.new()
 	environment.background_mode = Environment.BG_COLOR
 	environment.background_color = Color("112c37")
+	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("c0d8df")
-	environment.ambient_light_energy = 0.48
+	environment.ambient_light_energy = 0.36
 	world.environment = environment
 	add_child(world)
 	var key := DirectionalLight3D.new()
 	key.rotation_degrees = Vector3(-42, -28, 0)
 	key.light_color = Color("fff1da")
-	key.light_energy = 1.25
+	key.light_energy = 0.85
 	key.shadow_enabled = true
 	add_child(key)
 	var fill := OmniLight3D.new()
 	fill.position = Vector3(-3, 2, 3)
 	fill.light_color = Color("a3e8dd")
-	fill.light_energy = 1.1
+	fill.light_energy = 0.40
 	fill.omni_range = 9
 	add_child(fill)
 	var rim := OmniLight3D.new()
 	rim.position = Vector3(2, 3, -3)
 	rim.light_color = Color("f3ddb7")
-	rim.light_energy = 1.5
+	rim.light_energy = 0.55
 	rim.omni_range = 9
 	add_child(rim)
 	var platform := MeshInstance3D.new()
@@ -86,6 +87,7 @@ func _build_editor_room() -> void:
 	platform.material_override = Surface.material(Color("28414a"))
 	add_child(platform)
 	var ring := MeshInstance3D.new()
+	ring.name = "PlinthRim"
 	var torus := TorusMesh.new()
 	torus.inner_radius = 2.40
 	torus.outer_radius = 2.43
@@ -312,6 +314,9 @@ func _build_inspector() -> void:
 
 
 func _color_picker(label: String, field: String) -> ColorPickerButton:
+	var column := VBoxContainer.new()
+	_inspector.add_child(column)
+	_label(column, label, 13)
 	var picker := ColorPickerButton.new()
 	picker.text = label
 	picker.edit_alpha = false
@@ -319,7 +324,7 @@ func _color_picker(label: String, field: String) -> ColorPickerButton:
 	picker.popup_closed.connect(_end_gesture)
 	picker.pressed.connect(_begin_gesture)
 	picker.color_changed.connect(_change_color.bind(field))
-	_inspector.add_child(picker)
+	column.add_child(picker)
 	return picker
 
 
@@ -433,6 +438,7 @@ func _refresh_preview() -> void:
 	AnatomyV7.rebind_all_parts(blueprint)
 	_preview.call("set_editor_state", blueprint, selected_part_index, selected_body_segment, _studio_mode == "body")
 	_preview.call("set_motion", _motion_choice if _studio_mode == "test" else "edit")
+	_update_plinth()
 
 
 func _refresh_stats_panel() -> void:
@@ -448,8 +454,8 @@ func _refresh_stats_panel() -> void:
 		slider.get_parent().visible = _studio_mode == "body"
 		slider.editable = selected_body_segment >= 0 or field == "length"
 		slider.value = SpineProfile.get_body_length_scale(blueprint) if field == "length" else float(segment.get(field, 1.0))
-	_base_picker.visible = _studio_mode == "paint"
-	_accent_picker.visible = _studio_mode == "paint"
+	_base_picker.get_parent().visible = _studio_mode == "paint"
+	_accent_picker.get_parent().visible = _studio_mode == "paint"
 	var palette: Array[Color] = Surface.colors(blueprint)
 	_base_picker.color = palette[0]
 	_accent_picker.color = palette[1]
@@ -535,6 +541,7 @@ func _change_shape(value: float, field: String) -> void:
 	if _syncing_ui or (selected_body_segment < 0 and field != "length"):
 		return
 	_record_before_edit("Körper formen")
+	_prepare_surface_anchors()
 	if field == "length":
 		SpineProfile.set_body_length_scale(blueprint, value)
 	else:
@@ -582,6 +589,7 @@ func _apply_body_preset(preset: String) -> void:
 			heights = [0.9, 1.25, 1.6, 1.8, 1.6, 1.2, 0.7]
 			curves = [0.0, 0.0, 0.05, 0.1, 0.05, 0.0, 0.0]
 			length = 0.8
+	_prepare_surface_anchors()
 	SpineProfile.reset_all(blueprint)
 	for index in range(7):
 		SpineProfile.set_segment(blueprint, index, {"width_scale": widths[index], "height_scale": heights[index], "y_offset": curves[index]})
@@ -666,6 +674,7 @@ func handle_canvas_input(event: InputEvent) -> void:
 				_change_shape(SpineProfile.get_body_length_scale(blueprint) + step, "length")
 			elif _studio_mode == "body" and selected_body_segment >= 0:
 				_record_before_edit("Körperradius")
+				_prepare_surface_anchors()
 				SpineProfile.adjust_segment(blueprint, selected_body_segment, step, step if not event.shift_pressed else 0.0, 0.0)
 				_refresh_preview()
 				_refresh_stats_panel()
@@ -691,6 +700,7 @@ func handle_canvas_input(event: InputEvent) -> void:
 
 func _drag_body_point(event: InputEventMouseMotion) -> void:
 	_record_before_edit("Körperpunkt ziehen")
+	_prepare_surface_anchors()
 	var depth: float = _camera.global_position.distance_to(_preview.global_position)
 	var pixel_scale: float = 2.0 * depth * tan(deg_to_rad(_camera.fov * 0.5)) / get_viewport().get_visible_rect().size.y
 	var world_delta: Vector3 = (_camera.global_basis.x * event.relative.x - _camera.global_basis.y * event.relative.y) * pixel_scale
@@ -862,3 +872,74 @@ func _frame_creature() -> void:
 	var available: float = maxf(0.25, (get_viewport().get_visible_rect().size.x - 660.0) / get_viewport().get_visible_rect().size.x)
 	_camera.position = Vector3(0, 1.3, clampf(radius / tan(deg_to_rad(_camera.fov * 0.5)) / sqrt(available), 5.6, 18.0))
 	_camera.look_at(Vector3(0, 0.05, 0))
+
+
+func _prepare_surface_anchors() -> void:
+	var assembly: Dictionary = blueprint.get("assembly", {})
+	if int(assembly.get("sculpt_surface_bindings", 0)) == 1:
+		return
+	var length: float = Blueprint.get_body_shape(blueprint).z * Blueprint.get_body_scale(blueprint) * SpineProfile.get_body_length_scale(blueprint)
+	for part: Dictionary in blueprint.get("parts", []):
+		if str(part.get("category", "")) in ["mouth", "tail"]:
+			continue
+		var point: Vector3 = Blueprint._as_vector3(part.get("position", Vector3.ZERO))
+		var t: float = clampf(point.z / maxf(length, 0.01) + 0.5, 0.035, 0.965)
+		var cross: Dictionary = Surface.section(blueprint, t)
+		var radius: Vector2 = cross["radius"]
+		var direction := Vector2(point.x / radius.x, (point.y - cross["center"].y) / radius.y).normalized()
+		if direction.length_squared() < 0.01:
+			direction = Vector2.UP
+		var cap: float = sqrt(maxf(0.0001, 1.0 - pow(absf(t * 2.0 - 1.0), 18.0)))
+		part["anchor_t"] = t
+		part["anchor_side"] = direction.x * cap / 1.04
+		part["anchor_vertical"] = direction.y * cap / 1.10
+		part["anchor_surface_offset"] = Vector3.ZERO
+		part["manual_offset"] = Vector3.ZERO
+		part["anchor_locked"] = true
+	assembly["sculpt_surface_bindings"] = 1
+	blueprint["assembly"] = assembly
+	AnatomyV7.rebind_all_parts(blueprint)
+
+
+func _geometry_bounds(node: Node3D, transform: Transform3D = Transform3D.IDENTITY) -> AABB:
+	var result := AABB()
+	var initialized: bool = false
+	for child in node.get_children():
+		if not (child is Node3D) or child is CollisionObject3D:
+			continue
+		var local: Transform3D = transform * child.transform
+		if child is MeshInstance3D and child.mesh != null:
+			var bounds: AABB = local * child.mesh.get_aabb()
+			result = result.merge(bounds) if initialized else bounds
+			initialized = true
+		else:
+			var bounds: AABB = _geometry_bounds(child, local)
+			if bounds.has_volume():
+				result = result.merge(bounds) if initialized else bounds
+				initialized = true
+	return result
+
+
+func _update_plinth() -> void:
+	var plinth: Node3D = get_node_or_null("SculptingPlinth")
+	var rim: Node3D = get_node_or_null("PlinthRim")
+	if plinth == null or rim == null:
+		return
+	var bounds: AABB = _geometry_bounds(_preview)
+	if bounds.has_volume():
+		plinth.position.y = bounds.position.y - 0.10
+		rim.position.y = bounds.position.y - 0.005
+
+
+func _reset_blueprint() -> void:
+	super._reset_blueprint()
+	_set_mode("body")
+	_frame_creature()
+	_set_builder_status("Neue Kreatur · Deinen vorherigen Entwurf erhältst du mit Strg+Z zurück.")
+
+
+func _load_blueprint() -> void:
+	super._load_blueprint()
+	_set_mode("body")
+	_frame_creature()
+	_set_builder_status("Gespeicherte Kreatur geladen · Strg+Z stellt deine vorherige Bearbeitung wieder her.")

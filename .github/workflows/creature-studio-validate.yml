@@ -40,7 +40,7 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: "1"
           XDG_DATA_HOME: /tmp/creature-studio-user
         run: |
-          xvfb-run -a -s '-screen 0 1600x900x24' /tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64 --path . --rendering-method gl_compatibility --script res://tools/capture_creature_studio.gd -- /tmp/creature-studio-review
+          xvfb-run -a -s '-screen 0 1600x900x24' /tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64 --path . --rendering-method gl_compatibility --audio-driver Dummy --script res://tools/capture_creature_studio.gd -- /tmp/creature-studio-review
       - uses: actions/upload-artifact@v4
         if: always()
         with:
