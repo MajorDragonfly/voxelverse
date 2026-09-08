@@ -119,7 +119,10 @@ static func make_material(profile: Dictionary, settings: Dictionary) -> ShaderMa
 	var slots: Dictionary = profile.get("material_slots", {})
 	for name: String in ["deep", "shallow"]:
 		var parameter: String = name + "_color"
-		var fallback: Color = settings.get(parameter, material.get_shader_parameter(parameter))
+		# Shader uniform defaults may be unavailable until its first render.
+		# Keep creation deterministic, including headless/empty-settings callers.
+		var default_color := Color(0.015, 0.14, 0.25, 1.0) if name == "deep" else Color(0.035, 0.36, 0.46, 0.66)
+		var fallback: Color = settings.get(parameter, default_color)
 		var pigment: Color = slots.get("water_" + name, fallback)
 		pigment.a = fallback.a
 		material.set_shader_parameter(parameter, pigment)
