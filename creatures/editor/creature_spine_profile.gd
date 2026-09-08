@@ -5,17 +5,19 @@ const Store = preload("res://core/persistence/design_store.gd")
 const SEGMENT_COUNT: int = 7
 const SAVE_VERSION: int = 2
 
-const MIN_WIDTH_SCALE: float = 0.55
-const MAX_WIDTH_SCALE: float = 1.65
+const MIN_WIDTH_SCALE: float = 0.22
+const MAX_WIDTH_SCALE: float = 2.60
 
-const MIN_HEIGHT_SCALE: float = 0.55
-const MAX_HEIGHT_SCALE: float = 1.65
+const MIN_HEIGHT_SCALE: float = 0.22
+const MAX_HEIGHT_SCALE: float = 2.60
 
-const MIN_Y_OFFSET: float = -0.90
-const MAX_Y_OFFSET: float = 0.90
+const MIN_Y_OFFSET: float = -1.80
+const MAX_Y_OFFSET: float = 1.80
 
-const MIN_BODY_LENGTH_SCALE: float = 0.55
-const MAX_BODY_LENGTH_SCALE: float = 2.25
+const MIN_BODY_LENGTH_SCALE: float = 0.45
+const MAX_BODY_LENGTH_SCALE: float = 3.0
+
+const MIN_KNOT_GAP: float = 0.035
 
 const SAVE_PATH: String = (
 	"user://creature_editor_spine_v4.json"
@@ -25,8 +27,9 @@ const SAVE_PATH: String = (
 static func create_default() -> Array:
 	var segments: Array = []
 
-	for _index in range(SEGMENT_COUNT):
+	for index in range(SEGMENT_COUNT):
 		segments.append({
+			"t": float(index) / float(SEGMENT_COUNT - 1),
 			"width_scale": 1.0,
 			"height_scale": 1.0,
 			"y_offset": 0.0,
@@ -48,9 +51,16 @@ static func ensure_profile(
 		if source is Array and index < source.size():
 			value = source[index]
 
-		cleaned.append(
-			_sanitize_segment(value)
-		)
+		var segment: Dictionary = _sanitize_segment(value)
+		var fallback: float = float(index) / float(SEGMENT_COUNT - 1)
+		var knot: float = float(segment.get("t", fallback))
+		if not is_finite(knot):
+			knot = fallback
+		var low: float = 0.0 if index == 0 else float(cleaned[index - 1]["t"]) + MIN_KNOT_GAP
+		segment["t"] = clampf(knot, low, 1.0 - float(SEGMENT_COUNT - 1 - index) * MIN_KNOT_GAP)
+		if index == 0 or index == SEGMENT_COUNT - 1:
+			segment["t"] = fallback
+		cleaned.append(segment)
 
 	body["spine"] = cleaned
 
@@ -126,13 +136,14 @@ static func set_segment(
 
 	var segments: Array = get_segments(blueprint)
 
-	segments[segment_index] = _sanitize_segment(
-		segment
-	)
+	if not segment.has("t"):
+		segment["t"] = segments[segment_index].get("t", float(segment_index) / 6.0)
+	segments[segment_index] = _sanitize_segment(segment)
 
 	var body: Dictionary = blueprint.get("body", {})
 	body["spine"] = segments
 	blueprint["body"] = body
+	ensure_profile(blueprint)
 
 
 static func adjust_segment(
@@ -276,32 +287,13 @@ static func sample(
 		1.0
 	)
 
-	var scaled_position: float = (
-		safe_position
-		* float(SEGMENT_COUNT - 1)
-	)
-
-	var left_index: int = clampi(
-		floori(scaled_position),
-		0,
-		SEGMENT_COUNT - 1
-	)
-
-	var right_index: int = mini(
-		left_index + 1,
-		SEGMENT_COUNT - 1
-	)
-
-	var blend: float = (
-		scaled_position
-		- float(left_index)
-	)
-
-	blend = smoothstep(
-		0.0,
-		1.0,
-		blend
-	)
+	var left_index: int = 0
+	for index in range(SEGMENT_COUNT - 1):
+		if safe_position >= float(segments[index]["t"]):
+			left_index = index
+	var right_index: int = left_index + 1
+	var blend: float = inverse_lerp(float(segments[left_index]["t"]), float(segments[right_index]["t"]), safe_position)
+	blend = smoothstep(0.0, 1.0, blend)
 
 	var left: Dictionary = segments[left_index]
 	var right: Dictionary = segments[right_index]
@@ -435,43 +427,30 @@ static func load_profile(
 	return true
 
 
-static func _sanitize_segment(
-	value: Variant
-) -> Dictionary:
-	var source: Dictionary = {}
+static func _sanitize_segment(value: Variant) -> Dictionary:
+	var source: Dictionary = value if value is Dictionary else {}
+	var result: Dictionary = {}
+	for key in ["width_scale", "height_scale", "y_offset"]:
+		var fallback: float = 0.0 if key == "y_offset" else 1.0
+		var number: float = float(source.get(key, fallback))
+		if not is_finite(number):
+			number = fallback
+		var low: float = MIN_Y_OFFSET if key == "y_offset" else MIN_WIDTH_SCALE
+		var high: float = MAX_Y_OFFSET if key == "y_offset" else MAX_WIDTH_SCALE
+		result[key] = clampf(number, low, high)
+	if source.has("t"):
+		result["t"] = source["t"]
+	return result
 
-	if value is Dictionary:
-		source = value
 
-	return {
-		"width_scale": clampf(
-			float(
-				source.get(
-					"width_scale",
-					1.0
-				)
-			),
-			MIN_WIDTH_SCALE,
-			MAX_WIDTH_SCALE
-		),
-		"height_scale": clampf(
-			float(
-				source.get(
-					"height_scale",
-					1.0
-				)
-			),
-			MIN_HEIGHT_SCALE,
-			MAX_HEIGHT_SCALE
-		),
-		"y_offset": clampf(
-			float(
-				source.get(
-					"y_offset",
-					0.0
-				)
-			),
-			MIN_Y_OFFSET,
-			MAX_Y_OFFSET
-		),
-	}
+static func move_knot(blueprint: Dictionary, index: int, t_delta: float, y_delta: float) -> void:
+	if index < 0 or index >= SEGMENT_COUNT:
+		return
+	var segments: Array = get_segments(blueprint)
+	var segment: Dictionary = segments[index].duplicate(true)
+	if index > 0 and index < SEGMENT_COUNT - 1:
+		segment["t"] = clampf(float(segment["t"]) + t_delta,
+			float(segments[index - 1]["t"]) + MIN_KNOT_GAP,
+			float(segments[index + 1]["t"]) - MIN_KNOT_GAP)
+	segment["y_offset"] = float(segment["y_offset"]) + y_delta
+	set_segment(blueprint, index, segment)

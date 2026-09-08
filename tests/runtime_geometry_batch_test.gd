@@ -18,6 +18,7 @@ func _run() -> void:
 		var counts: Array[int] = []
 		for batched: bool in [false, true]:
 			var preview := Preview.new()
+			preview.sculpted_surface = false # Retain the legacy voxel backend regression.
 			preview.batch_runtime_boxes = batched
 			preview.blueprint = blueprint.duplicate(true)
 			root.add_child(preview)

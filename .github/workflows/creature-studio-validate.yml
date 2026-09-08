@@ -1,0 +1,51 @@
+name: Creature studio validation
+
+on:
+  push:
+    branches: ["agent/creature-editor-spore"]
+  pull_request:
+    paths: ["creatures/**", "tests/creature_studio_test.gd", "tools/capture_creature_studio.gd"]
+
+concurrency:
+  group: creature-studio-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  studio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Godot and software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+          python - <<'PY'
+          import importlib.util, pathlib, zipfile
+          spec = importlib.util.spec_from_file_location('install', 'tools/install_godot.py')
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          folder = pathlib.Path('/tmp/creature-godot')
+          folder.mkdir(exist_ok=True)
+          archive = module.download_verified(folder, module.ASSETS['linux'])
+          with zipfile.ZipFile(archive) as bundle:
+              bundle.extractall(folder)
+          (folder / 'Godot_v4.6.3-stable_linux.x86_64').chmod(0o755)
+          PY
+      - name: Import and exercise editor contracts
+        run: |
+          python tools/validate_godot.py --godot /tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64 --tests creature_studio_test creature_editor_v7_runtime_test creature_builder_v7_test runtime_geometry_batch_test --skip-main --output /tmp/creature-studio-checks
+      - name: Render the real workshop
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          XDG_DATA_HOME: /tmp/creature-studio-user
+        run: |
+          xvfb-run -a -s '-screen 0 1600x900x24' /tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64 --path . --rendering-method gl_compatibility --script res://tools/capture_creature_studio.gd -- /tmp/creature-studio-review
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: creature-studio-review-${{ github.event_name }}
+          path: |
+            /tmp/creature-studio-checks
+            /tmp/creature-studio-review
+          retention-days: 14

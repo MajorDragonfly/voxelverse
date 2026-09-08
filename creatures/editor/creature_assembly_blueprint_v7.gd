@@ -139,6 +139,7 @@ static func save_to_file(
 		blueprint
 	)
 	serialized["body"] = body
+	serialized["appearance"] = blueprint.get("appearance", {}).duplicate(true)
 
 	var serialized_parts: Array = serialized.get("parts", [])
 	var source_parts: Array = blueprint.get("parts", [])
@@ -215,6 +216,7 @@ static func load_from_file(
 		SpineProfile.MAX_BODY_LENGTH_SCALE
 	)
 	blueprint["body"] = body
+	blueprint["appearance"] = parsed.get("appearance", {}).duplicate(true) if parsed.get("appearance", {}) is Dictionary else {}
 	blueprint["assembly"] = parsed.get("assembly", {}).duplicate(true)
 	blueprint["progression"] = parsed.get(
 		"progression",
@@ -290,6 +292,7 @@ static func _serialize_spine(segments: Array) -> Array:
 		if segment_value is Dictionary:
 			segment = segment_value
 		serialized.append({
+			"t": float(segment.get("t", float(serialized.size()) / 6.0)),
 			"width_scale": float(segment.get("width_scale", 1.0)),
 			"height_scale": float(segment.get("height_scale", 1.0)),
 			"y_offset": float(segment.get("y_offset", 0.0)),
@@ -306,6 +309,7 @@ static func _deserialize_spine(value: Variant) -> Array:
 		if index < value.size() and value[index] is Dictionary:
 			source = value[index]
 		segments.append({
+			"t": float(source.get("t", float(index) / 6.0)),
 			"width_scale": clampf(
 				float(source.get("width_scale", 1.0)),
 				SpineProfile.MIN_WIDTH_SCALE,

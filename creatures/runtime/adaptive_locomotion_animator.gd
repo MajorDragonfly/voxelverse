@@ -312,6 +312,12 @@ func _animate_body(delta: float) -> void:
 
 
 func _animate_spine() -> void:
+	if _preview != null and bool(_preview.get("sculpted_surface")):
+		# A continuous skin and its surface attachments share the preview motion.
+		# Rotating only the skin would detach eyes and limbs from their sockets.
+		if is_instance_valid(_body_root):
+			_body_root.rotation = _base_body_rotation
+		return
 	if _body_root != null and is_instance_valid(_body_root):
 		var body_yaw: float = sin(_phase) * deg_to_rad(spine_wave_degrees) * _movement_blend
 		_body_root.rotation = _base_body_rotation + Vector3(0.0, body_yaw * 0.28, 0.0)

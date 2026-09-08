@@ -100,6 +100,7 @@ func _build_species() -> void:
 		_preview.call("set_editor_state", blueprint, -1, -1, false)
 	else:
 		_preview.call("set_blueprint", blueprint)
+	_preview.call("set_motion", "idle")
 	_disable_collisions(_preview)
 	var stats: Dictionary = Blueprint.calculate_stats(blueprint)
 	_move_speed = clampf(
@@ -124,6 +125,8 @@ func _physics_process(delta: float) -> void:
 	_attack_timer = maxf(_attack_timer - delta, 0.0)
 	_threat_timer = maxf(_threat_timer - delta, 0.0)
 	if is_dead:
+		if _preview != null and str(_preview.get("motion_mode")) != "edit":
+			_preview.call("set_motion", "edit")
 		_process_carcass(delta)
 		return
 	_decision_timer -= delta
@@ -140,6 +143,9 @@ func _physics_process(delta: float) -> void:
 	if grounded_before_move:
 		_attempt_step_up(delta)
 	move_and_slide()
+	var pose: String = "walk" if Vector2(velocity.x, velocity.z).length() > 0.15 else "idle"
+	if _preview != null and str(_preview.get("motion_mode")) != pose:
+		_preview.call("set_motion", pose)
 	if is_on_floor():
 		apply_floor_snap()
 	if _visual_root != null and _wander_direction.length_squared() > 0.01:

@@ -1,4 +1,4 @@
-extends "res://creatures/editor/creature_editor_v7.gd"
+extends "res://creatures/editor/creature_editor_studio.gd"
 
 const RuntimePartLibrary = preload(
 	"res://creatures/editor/creature_part_library.gd"
@@ -21,31 +21,7 @@ func _ready() -> void:
 
 
 func _refresh_part_palette() -> void:
-	_clear_control_children(_part_grid)
-	var parts: Array = RuntimePartLibrary.get_parts_for_category(current_category)
-	var progression := get_node_or_null("/root/ProgressionService")
-	for part_value in parts:
-		if not (part_value is Dictionary):
-			continue
-		var part: Dictionary = part_value
-		var part_id: String = str(part.get("id", ""))
-		var unlocked: bool = true
-		if progression != null and progression.has_method("is_part_unlocked"):
-			unlocked = bool(progression.call("is_part_unlocked", part_id))
-		var button := Button.new()
-		button.custom_minimum_size = Vector2(148.0, 92.0)
-		button.text = _get_palette_button_text(part)
-		if not unlocked:
-			button.text = "LOCKED\n%s" % str(part.get("name", "Unknown"))
-			button.tooltip_text = "Discover creatures to unlock this part."
-			button.disabled = true
-		else:
-			button.tooltip_text = str(part.get("description", ""))
-			button.pressed.connect(
-				Callable(self, "_on_part_button_pressed").bind(part_id)
-			)
-		_part_grid.add_child(button)
-
+	super._refresh_part_palette()
 
 func _on_part_button_pressed(part_id: String) -> void:
 	var progression := get_node_or_null("/root/ProgressionService")
@@ -60,29 +36,14 @@ func _save_blueprint() -> void:
 	_sync_progression_into_blueprint()
 	super._save_blueprint()
 	var save_service := get_node_or_null("/root/SaveGameService")
-	if save_service != null and save_service.has_method("save_now"):
+	if _last_save_ok and save_service != null and save_service.has_method("save_now"):
 		if not bool(save_service.call("save_now")):
-			_set_builder_status("Design written, but the campaign snapshot could not be saved.")
+			_last_save_ok = false
+			_set_builder_status("Kreatur gespeichert; Spielstand konnte nicht gespeichert werden. Bitte erneut versuchen.")
 
 
 func _refresh_stats_panel() -> void:
 	super._refresh_stats_panel()
-	if _stats_label == null:
-		return
-	var progression := get_node_or_null("/root/ProgressionService")
-	if progression == null:
-		return
-	_stats_label.text += (
-		"\n\nDISCOVERY\n"
-		+ "Insight: %d\n"
-		+ "Known species: %d\n"
-		+ "Unlocked parts: %d"
-	) % [
-		int(progression.get("discovery_points")),
-		int(progression.call("get_discovered_species_count")),
-		int(progression.call("get_unlocked_count")),
-	]
-
 
 func _merge_current_creature_parts_into_progression() -> void:
 	var progression := get_node_or_null("/root/ProgressionService")

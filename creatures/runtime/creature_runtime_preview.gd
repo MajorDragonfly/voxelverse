@@ -5,6 +5,14 @@ const RUNTIME_VOXEL_TARGET_SIZE: float = 0.16
 const RUNTIME_VOXEL_OVERLAP_XY: float = 1.04
 const RUNTIME_VOXEL_OVERLAP_Z: float = 1.10
 const InstanceBuffer = preload("res://core/multimesh_buffer.gd")
+const SculptSurface = preload("res://creatures/editor/creature_sculpt_surface.gd")
+const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
+const Motion = preload("res://creatures/runtime/creature_sculpt_motion.gd")
+
+var sculpted_surface: bool = true
+var motion_mode: String = "edit"
+var _motion := Motion.new()
+var _motion_time: float = 0.0
 
 # Runtime-only batching preserves body-slice and attachment roots. Leg meshes
 # remain individual because the adaptive animator reparents them into knee rigs.
@@ -15,6 +23,7 @@ static var _shared_box_material: StandardMaterial3D
 
 
 func rebuild() -> void:
+	_motion.reset()
 	_pending_boxes.clear()
 	super.rebuild()
 	for parent: Node3D in _pending_boxes:
@@ -51,6 +60,107 @@ func rebuild() -> void:
 		node.material_override = _shared_box_material
 		parent.add_child(node)
 	_pending_boxes.clear()
+	if motion_mode != "edit":
+		_motion.bind(self)
+	set_process(motion_mode != "edit")
+
+
+func set_motion(mode: String) -> void:
+	_motion.reset()
+	motion_mode = mode if mode in ["edit", "idle", "walk", "run"] else "edit"
+	_motion_time = 0.0
+	if motion_mode != "edit":
+		_motion.bind(self)
+	set_process(motion_mode != "edit")
+
+
+func _process(delta: float) -> void:
+	_motion_time += delta
+	_motion.sample(motion_mode, _motion_time)
+
+
+func _create_body() -> void:
+	if not sculpted_surface:
+		super._create_body()
+		return
+	var root := Node3D.new()
+	root.name = "BodyV4"
+	add_child(root)
+	var skin := MeshInstance3D.new()
+	skin.name = "SculptedSkin"
+	skin.mesh = SculptSurface.build_skin(blueprint)
+	skin.material_override = SculptSurface.material(Color.WHITE, true)
+	root.add_child(skin)
+	if show_spine_handles:
+		for index in range(SpineProfile.SEGMENT_COUNT):
+			var segment: Dictionary = SpineProfile.get_segment(blueprint, index)
+			var section: Dictionary = SculptSurface.section(blueprint, float(segment["t"]))
+			var handle := StaticBody3D.new()
+			handle.name = "SpineHandleV4_%d" % index
+			handle.set_meta("creature_spine_index", index)
+			handle.collision_layer = HANDLE_COLLISION_LAYER
+			handle.collision_mask = 0
+			handle.position = section["center"] + Vector3.UP * (section["radius"].y + 0.13)
+			root.add_child(handle)
+			var color := Color("fff1bd") if index == selected_body_segment else Color("8ae3ce")
+			var sphere := SculptSurface.ellipsoid(handle, "Handle", Vector3.ZERO, Vector3.ONE * 0.13, color)
+			sphere.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			sphere.material_override.no_depth_test = true
+			var collision := CollisionShape3D.new()
+			var shape := SphereShape3D.new()
+			shape.radius = 0.10
+			collision.shape = shape
+			handle.add_child(collision)
+
+
+func _create_all_parts() -> void:
+	if not sculpted_surface:
+		super._create_all_parts()
+		return
+	Anatomy.ensure_anchors(blueprint, true)
+	Anatomy.rebind_all_parts(blueprint)
+	var parts: Array = blueprint.get("parts", [])
+	for index in range(parts.size()):
+		if parts[index] is Dictionary:
+			# Anchor positions already include spine width, height and length.
+			# V4's extra display transform applied those factors a second time.
+			_create_part_instance(parts[index], index)
+
+
+func _create_detail_box(parent: Node3D, box_name: String, local_position: Vector3,
+	box_size: Vector3, box_color: Color, is_highlighted: bool) -> void:
+	if sculpted_surface:
+		SculptSurface.make_part_piece(parent, box_name, local_position, box_size, box_color, blueprint)
+	else:
+		super._create_detail_box(parent, box_name, local_position, box_size, box_color, is_highlighted)
+
+
+func _get_part_color(color: Color, is_selected: bool) -> Color:
+	return color if sculpted_surface else super._get_part_color(color, is_selected)
+
+
+func _create_selection_marker(part_root: Node3D) -> void:
+	if not sculpted_surface:
+		super._create_selection_marker(part_root)
+		return
+	var marker := MeshInstance3D.new()
+	marker.name = "SelectionRing"
+	var ring := TorusMesh.new()
+	ring.inner_radius = 0.15
+	ring.outer_radius = 0.17
+	ring.rings = 24
+	ring.ring_segments = 8
+	marker.mesh = ring
+	marker.material_override = SculptSurface.material(Color("9affd9"))
+	marker.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	marker.material_override.no_depth_test = true
+	part_root.add_child(marker)
+
+
+func _clear_preview() -> void:
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
 
 
 func _create_box(parent: Node3D, box_name: String, local_position: Vector3,
