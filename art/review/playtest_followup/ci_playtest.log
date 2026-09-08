@@ -1,0 +1,5 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Surface streaming seed: 15838
+Directional streaming measurements [{"direction":[1,0],"lead_metres":43.002082824707,"seconds":0.833001},{"direction":[-1,0],"lead_metres":47.9521484375,"seconds":0.007989},{"direction":[0,1],"lead_metres":42.7513198852539,"seconds":0.8748},{"direction":[0,-1],"lead_metres":47.9528732299805,"seconds":0.007875}]
+Playtest regression checks: compound obstacle physics, four travel directions, horizon coverage and cancellation.

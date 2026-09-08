@@ -1,0 +1,20 @@
+{
+  "runtime_commit": "defb38d1f6226635464d9cb89ad5ab3c148b1eac",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "review": "Unedited actual Godot viewport PNGs. The separate tall-pine camera-framing fix is not represented by these captures.",
+  "render_run": 34197542246,
+  "validation_run": 34197542263,
+  "export_run": 34197542223,
+  "artifacts": [
+    {
+      "id": 10044552094,
+      "renderer": "gl_compatibility",
+      "sha256": "8dbbf56f2d9818f3c68af3cfc8748270a64f0962873a84ffd2f32b36dc11fdbf"
+    },
+    {
+      "id": 10044686236,
+      "renderer": "forward_plus",
+      "sha256": "f18f7ecda07b8e68f7564a7bd656d107e7884691ac26d3455b63c2684735f3c1"
+    }
+  ]
+}

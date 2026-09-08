@@ -61,10 +61,33 @@ gate. Raw results are in [playtest_followup](review/playtest_followup/).
 
 ## Render and delivery gate
 
-The extended real-renderer CI captures the main view, distant relief, nearby water,
-all authored LODs and three species silhouettes, plus the existing exact HLOD and
-creature comparisons. Forward+ and Compatibility results will be recorded here
-after the branch run. Local headless shader import does not certify water pixels.
+All ten push/PR workflow runs passed for runtime commit
+`defb38d1f6226635464d9cb89ad5ab3c148b1eac`. Native Windows and Linux exports each
+passed ten checks. The [render run](https://github.com/MajorDragonfly/voxelverse/actions/runs/34197542246)
+produced **36 actual viewport PNGs per renderer**: scenic/mountain/shore views,
+authored LODs, three-species comparisons and HLOD/creature A/B checks. Both
+Forward+ and Compatibility passed shader, draw-count and image-parity gates.
+Eighteen unedited selected captures and all measurements are preserved in the
+[review folder](review/playtest_followup/README.md). The tall-pine comparison
+camera was subsequently widened in the offline capture tool; runtime is unchanged.
+
+A second CPU measurement used the real main scene at a fixed 60 process frames/s
+and a stationary review player. Survival and predator damage were disabled only
+for measurement; normal streaming remained active. Each case used a cold process:
+
+| Seed | First assets before → after | All 25 chunks before → after | Instances before → after |
+|---|---:|---:|---:|
+| 15838 | 2.81 → 1.36 s | 27.35 → 7.91 s | 2,274 → 838 |
+| 23757 | 3.00 → 1.35 s | 30.71 → 7.31 s | 3,093 → 3,336 |
+
+These compare the delivered starting experiences, not identical terrain or asset
+workloads. The second planet improves despite more placed instances; the first
+now has more open coast and meadow. Horizon completion, GPU rendering and HLOD
+settling are not part of the "all 25" timestamp. Reproduce with
+`tools/benchmark_streaming_cadence.gd -- 15838` or `-- 23757` using Godot's
+`--headless --script` entry point. Raw logs and source commits are recorded in
+`review/playtest_followup/streaming_cadence.json`. Software-renderer capture setup
+is measured separately and is not a target-PC loading-time guarantee.
 
 ## Next useful playtest
 

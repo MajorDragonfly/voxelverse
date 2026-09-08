@@ -136,7 +136,7 @@ func _assets() -> void:
 		var target := Vector3(0, bounds.size.y * 0.45, 0)
 		var half_fov: float = tan(deg_to_rad(_camera.fov * 0.5))
 		var aspect: float = float(root.size.x) / float(root.size.y)
-		var distance: float = maxf((spacing * 2.0 + bounds.size.x) / (2.0 * half_fov * aspect), bounds.size.y / (2.0 * half_fov)) * 1.25
+		var distance: float = maxf((spacing * 2.0 + bounds.size.x) / (2.0 * half_fov * aspect), bounds.size.y / (2.0 * half_fov)) * (1.55 if family == "tall_pine_v2" else 1.25)
 		_camera.position = target + Vector3(0, distance * 0.24, distance)
 		_camera.look_at(target)
 		await _capture(family, {"asset_id": family, "geometry_variant": species["geometry_variant"],
