@@ -25,6 +25,7 @@ var _gesture: bool = false
 var _gesture_recorded: bool = false
 var _last_save_ok: bool = false
 var _saved_fingerprint: String = ""
+var _saved_revisions: Dictionary = {}
 var _orbiting: bool = false
 var _drag_spine: int = -1
 var _drag_part: bool = false
@@ -41,6 +42,7 @@ func _ready() -> void:
 	current_category = "body"
 	_preview_pivot.rotation_degrees.y = 145.0
 	_saved_fingerprint = _fingerprint()
+	_saved_revisions[str(blueprint.get("design_id", ""))] = AssemblyV7.get_revision(blueprint)
 	_set_mode("body")
 	_set_builder_status("Deine Kreatur. Deine Form.")
 	call_deferred("_frame_creature")
@@ -835,12 +837,17 @@ func _save_blueprint() -> void:
 	var candidate: Dictionary = blueprint.duplicate(true)
 	AssemblyV7.normalize(candidate)
 	AnatomyV7.rebind_all_parts(candidate)
+	var design_id: String = str(candidate.get("design_id", ""))
+	# Undo restores geometry and appearance, but must never reuse a revision
+	# already written for this design earlier in the same editing session.
+	candidate["assembly"]["revision"] = maxi(AssemblyV7.get_revision(candidate), int(_saved_revisions.get(design_id, 0)))
 	AssemblyV7.increment_revision(candidate)
 	var result: Error = AssemblyV7.save_to_file(candidate)
 	if result != OK:
 		_set_builder_status("Speichern fehlgeschlagen. Dein Entwurf bleibt hier geöffnet.")
 		return
 	blueprint = candidate
+	_saved_revisions[design_id] = AssemblyV7.get_revision(candidate)
 	_last_save_ok = true
 	_saved_fingerprint = _fingerprint()
 	# The canonical V7 design is authoritative. Keep undo history after save.
@@ -940,6 +947,8 @@ func _reset_blueprint() -> void:
 
 func _load_blueprint() -> void:
 	super._load_blueprint()
+	var design_id: String = str(blueprint.get("design_id", ""))
+	_saved_revisions[design_id] = maxi(AssemblyV7.get_revision(blueprint), int(_saved_revisions.get(design_id, 0)))
 	_set_mode("body")
 	_frame_creature()
 	_set_builder_status("Gespeicherte Kreatur geladen · Strg+Z stellt deine vorherige Bearbeitung wieder her.")
