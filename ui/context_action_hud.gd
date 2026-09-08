@@ -105,14 +105,14 @@ func _update_context() -> void:
 		_label.visible = true
 		return
 	var generator := get_node_or_null("/root/WorldGenerator")
-	if generator != null and generator.has_method("is_below_sea_level"):
+	if generator != null and generator.has_method("is_water_at"):
 		var interaction_range: float = 3.2
 		var range_value: Variant = _player.get("interaction_range")
 		if range_value != null:
 			interaction_range = float(range_value)
 		if (
 			_player.global_position.distance_to(point) <= interaction_range
-			and bool(generator.call("is_below_sea_level", point.x, point.z))
+			and bool(generator.call("is_water_at", point.x, point.z))
 		):
 			_label.text = "Water · LMB drink"
 			_label.visible = true

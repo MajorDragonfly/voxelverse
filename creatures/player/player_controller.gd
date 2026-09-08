@@ -214,7 +214,7 @@ func _try_primary_action() -> void:
 	var collision_point: Vector3 = interaction_ray.get_collision_point()
 	if global_position.distance_to(collision_point) > interaction_range:
 		return
-	if WorldGenerator.is_below_sea_level(collision_point.x, collision_point.z):
+	if WorldGenerator.is_water_at(collision_point.x, collision_point.z):
 		_try_drink_water()
 		return
 	var collider: Object = interaction_ray.get_collider()

@@ -120,8 +120,8 @@ func _streaming_checks() -> void:
 		# The dummy renderer ignores ImageTexture.update(). Count the exact upload
 		# payload here; actual Vulkan/GL captures exercise the sampled mask.
 		var covered: int = 0
-		for byte: int in horizon._coverage_bytes:
-			covered += int(byte > 0)
+		for index in range(1, horizon._coverage_bytes.size(), 3):
+			covered += int(horizon._coverage_bytes[index] > 0)
 		var ready_chunks: int = 0
 		for chunk: Node in manager.loaded_chunks.values():
 			ready_chunks += int(chunk.generation_complete)

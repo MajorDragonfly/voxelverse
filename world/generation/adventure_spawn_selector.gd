@@ -35,7 +35,8 @@ static func find_spawn(
 		var world_x: float = center.x + cos(angle) * radius
 		var world_z: float = center.y + sin(angle) * radius
 		var height: float = float(generator.call("get_terrain_height", world_x, world_z))
-		if height < sea_level + 0.85:
+		var water_level: float = float(generator.call("get_water_level", world_x, world_z)) if generator.has_method("get_water_level") else sea_level
+		if height < water_level + 0.85:
 			continue
 		var slope: float = 0.0
 		if generator.has_method("get_terrain_slope"):
@@ -125,7 +126,8 @@ static func evaluate_view(generator: Node, point: Vector2, surface_height: float
 			var visible: bool = slope >= horizon - 0.008
 			if visible and distance >= 30.0:
 				visible_relief = maxf(visible_relief, absf(height - surface_height))
-				if height <= sea + 0.08:
+				var local_water: float = float(generator.call("get_water_level", probe.x, probe.y)) if generator.has_method("get_water_level") else sea
+				if height <= local_water + 0.08:
 					visible_water += 1
 				if generator.has_method("get_ecology_density"):
 					var ecology: float = float(generator.call("get_ecology_density", probe.x, probe.y, height))

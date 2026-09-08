@@ -4,6 +4,10 @@ const ProfileV9 = preload("res://world/generation/planet_profile_v9.gd")
 const BiomeGrammar = preload("res://world/generation/biome_grammar_v9.gd")
 const Landmarks = preload("res://world/generation/landmark_grammar.gd")
 const ScenicSpawn = preload("res://world/generation/adventure_spawn_selector.gd")
+const Drainage = preload("res://world/generation/drainage_network.gd")
+var _drainage_regions: Dictionary = {}
+var _drainage_samples: Dictionary = {}
+var _drained_heights: Dictionary = {}
 var _landmark_cells: Dictionary = {}
 var _spawn_cache: Dictionary = {}
 var _canopy_noise := FastNoiseLite.new()
@@ -16,6 +20,55 @@ func _configure_v6(seed_value: int) -> void:
 	_height_cache.clear()
 	_landmark_cells.clear()
 	_spawn_cache.clear()
+	_drainage_regions.clear()
+	_drainage_samples.clear()
+	_drained_heights.clear()
+
+
+func get_base_terrain_height(world_x: float, world_z: float) -> float:
+	# Routing reads the uncarved landscape; querying final heights here would
+	# recurse back into routing and make the result depend on chunk order.
+	return super.get_terrain_height(world_x, world_z)
+
+
+func get_drainage_region(cell: Vector2i) -> Dictionary:
+	_ensure_v6_state()
+	if not _drainage_regions.has(cell):
+		if _drainage_regions.size() >= 64:
+			_drainage_regions.clear()
+		_drainage_regions[cell] = Drainage.create(self, cell)
+	return _drainage_regions[cell]
+
+
+func get_water_info(world_x: float, world_z: float) -> Dictionary:
+	_ensure_v6_state()
+	var key := Vector2i(roundi(world_x * 100.0), roundi(world_z * 100.0))
+	if not _drainage_samples.has(key):
+		if _drainage_samples.size() >= HEIGHT_CACHE_LIMIT:
+			_drainage_samples.clear()
+		var point: Vector2 = Vector2(key) / 100.0
+		var cell := Vector2i(floori(point.x / Drainage.REGION_SIZE), floori(point.y / Drainage.REGION_SIZE))
+		_drainage_samples[key] = Drainage.sample(get_drainage_region(cell), point)
+	return _drainage_samples[key]
+
+
+func get_terrain_height(world_x: float, world_z: float) -> float:
+	_ensure_v6_state()
+	var key := Vector2i(roundi(world_x * 100.0), roundi(world_z * 100.0))
+	if not _drained_heights.has(key):
+		if _drained_heights.size() >= HEIGHT_CACHE_LIMIT:
+			_drained_heights.clear()
+		var base: float = get_base_terrain_height(world_x, world_z)
+		_drained_heights[key] = Drainage.carve(base, get_water_info(world_x, world_z))
+	return float(_drained_heights[key])
+
+
+func get_water_level(world_x: float, world_z: float) -> float:
+	return Drainage.surface(get_water_info(world_x, world_z), get_sea_level())
+
+
+func is_water_at(world_x: float, world_z: float) -> bool:
+	return get_terrain_height(world_x, world_z) < get_water_level(world_x, world_z) - 0.08
 
 
 func get_scenic_spawn(search_radius: float = 220.0) -> Vector3:
@@ -95,14 +148,13 @@ func get_biome(
 	) + alpine_bias
 	var temperature: float = float(climate.get("temperature_bias", 0.0))
 
+	var water: Dictionary = get_water_info(world_x, world_z)
+	if not water.is_empty() and float(water["distance"]) < 1.5 and float(water["level"]) > sea_level + 0.5:
+		return Biome.LAKE if water["kind"] == "lake" else Biome.RIVER
 	if terrain_height < sea_level - 0.45:
 		return Biome.OCEAN
 	if terrain_height < sea_level + 0.55:
 		return Biome.COAST
-	if lake > 0.68 and terrain_height < sea_level + 1.65:
-		return Biome.LAKE
-	if river > 0.70 and terrain_height < 8.0:
-		return Biome.RIVER
 	if terrain_height >= snow_start + 3.0:
 		return Biome.SNOW
 	if terrain_height >= snow_start - 4.0:
@@ -228,10 +280,13 @@ func get_biome_weights(world_x: float, world_z: float, terrain_height: float = -
 	_blend_weight(weights, "rocky_highlands", smoothstep(0.45, 0.78, rugged) * smoothstep(4.0, 10.0, terrain_height))
 	_blend_weight(weights, "alpine", smoothstep(snow - 6.0, snow - 1.0, terrain_height))
 	_blend_weight(weights, "snow", smoothstep(snow, snow + 4.0, terrain_height))
-	_blend_weight(weights, "river", smoothstep(0.60, 0.87, river) * (1.0 - smoothstep(5.0, 8.0, terrain_height)))
-	_blend_weight(weights, "lake", smoothstep(0.58, 0.88, lake) * (1.0 - smoothstep(sea + 0.7, sea + 2.2, terrain_height)))
 	_blend_weight(weights, "coast", 1.0 - smoothstep(sea + 0.25, sea + 1.5, terrain_height))
 	_blend_weight(weights, "ocean", 1.0 - smoothstep(sea - 0.85, sea - 0.15, terrain_height))
+	var water: Dictionary = get_water_info(world_x, world_z)
+	if not water.is_empty() and float(water["level"]) > sea + 0.5:
+		var shore: float = 1.0 - smoothstep(0.0, Drainage.BANK_WIDTH, float(water["distance"]))
+		_blend_weight(weights, "wetland", shore * 0.5)
+		_blend_weight(weights, str(water["kind"]), 1.0 - smoothstep(-1.0, 3.0, float(water["distance"])))
 	return weights
 
 
@@ -245,6 +300,9 @@ func sample_world(world_x: float, world_z: float) -> Dictionary:
 	var result: Dictionary = super.sample_world(world_x, world_z)
 	result["temperature"] = get_temperature(world_x, world_z, result["height"])
 	result["moisture"] = get_moisture(world_x, world_z, result["height"])
+	result["water_level"] = get_water_level(world_x, world_z)
+	result["water_depth"] = maxf(0.0, float(result["water_level"]) - float(result["height"]))
+	result["water_body"] = str(get_water_info(world_x, world_z).get("kind", "ocean" if float(result["water_depth"]) > 0.0 else "none"))
 	return result
 
 

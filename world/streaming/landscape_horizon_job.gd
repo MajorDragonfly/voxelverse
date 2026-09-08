@@ -23,7 +23,7 @@ func run() -> void:
 		for x in range(side):
 			var point: Vector2 = center + Vector2(x * STEP - RADIUS, z * STEP - RADIUS)
 			var height: float = generator.get_visual_terrain_height(point.x, point.y)
-			vertices.append(Vector3(point.x, height - 0.12, point.y))
+			vertices.append(Vector3(point.x, height, point.y))
 			colors.append(generator.get_biome_color(point.x, point.y, height))
 	for z in range(side):
 		for x in range(side):

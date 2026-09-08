@@ -9,7 +9,7 @@ void vertex() {
 }
 void fragment() {
 	vec2 uv = (floor((world_xz + chunk_size * 0.5) / chunk_size) - coverage_origin + 0.5) / 16.0;
-	if (all(greaterThanEqual(uv, vec2(0.0))) && all(lessThan(uv, vec2(1.0))) && texture(coverage, uv).r > 0.5) { discard; }
+	if (all(greaterThanEqual(uv, vec2(0.0))) && all(lessThan(uv, vec2(1.0))) && texture(coverage, uv).g > 0.5) { discard; }
 	ALBEDO = COLOR.rgb;
 	ROUGHNESS = 0.98;
 }

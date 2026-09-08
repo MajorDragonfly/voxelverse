@@ -244,7 +244,9 @@ func _unload_distant_chunks() -> void:
 		var coordinates: Vector2i = coordinates_value
 		var delta: Vector2i = coordinates - current_player_chunk
 		var distance: int = maxi(absi(delta.x), absi(delta.y))
-		if distance > keep_distance and not _stream_required_chunks.has(coordinates):
+		var chunk: Node3D = loaded_chunks[coordinates]
+		chunk.terrain_retiring = distance > keep_distance and not _stream_required_chunks.has(coordinates)
+		if chunk.terrain_retiring and chunk.terrain_presence <= 0.0:
 			chunks_to_remove.append(coordinates)
 	for coordinates in chunks_to_remove:
 		_remove_chunk(coordinates)

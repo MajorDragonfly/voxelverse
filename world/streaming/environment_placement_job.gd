@@ -49,7 +49,7 @@ func _sample_point(random: RandomNumberGenerator, maximum_slope: float) -> Dicti
 	var wx: float = chunk_origin.x + x
 	var wz: float = chunk_origin.y + z
 	var logical: float = _generator.get_terrain_height(wx, wz)
-	if logical <= _generator.get_sea_level() + 0.25:
+	if logical <= _generator.get_water_level(wx, wz) + 0.25:
 		return {}
 	var surface: float = _surface_height(x, z)
 	var slope: float = maxf(absf(_surface_height(x + 0.75, z) - surface), absf(_surface_height(x, z + 0.75) - surface)) / 0.75

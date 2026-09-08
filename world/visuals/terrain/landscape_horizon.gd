@@ -14,7 +14,6 @@ var _land: MeshInstance3D
 var _water: MeshInstance3D
 var _coverage: ImageTexture
 var _coverage_bytes := PackedByteArray()
-var _timer: float = 0.0
 
 func _ready() -> void:
 	_manager = get_parent()
@@ -35,13 +34,10 @@ func _ready() -> void:
 	_water.material_override = WaterBuilder.make_material(profile, settings)
 	_water.extra_cull_margin = WaterBuilder.displacement_margin(settings)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not _manager.world_initialized:
 		return
-	_timer -= delta
-	if _timer <= 0.0:
-		_timer = 0.15
-		_update_coverage()
+	_update_coverage()
 	var player: Vector3 = _manager.player.global_position
 	var target: Vector2 = recenter_target(Vector2(player.x, player.z), _center)
 	if _task < 0 and target != _center:
@@ -68,17 +64,19 @@ func _process(delta: float) -> void:
 		_manager.set_shared_water_bounds(Rect2(published_center - Vector2.ONE * HorizonJob.RADIUS, Vector2.ONE * HorizonJob.RADIUS * 2.0))
 		_job = null
 		generation_complete = true
+		_update_coverage()
 		Budget.record(started, "terrain")
 
 func _update_coverage() -> void:
 	var origin: Vector2i = _manager.current_player_chunk - Vector2i(8, 8)
-	var image := Image.create(16, 16, false, Image.FORMAT_R8)
+	var image := Image.create(16, 16, false, Image.FORMAT_RGB8)
 	image.fill(Color.BLACK)
 	for key: Vector2i in _manager.loaded_chunks:
 		var index: Vector2i = key - origin
 		if index.x >= 0 and index.y >= 0 and index.x < 16 and index.y < 16:
 			if bool(_manager.loaded_chunks[key].generation_complete):
-				image.set_pixel(index.x, index.y, Color.WHITE)
+				var chunk: Node3D = _manager.loaded_chunks[key]
+				image.set_pixel(index.x, index.y, Color(float(chunk.terrain_presence), 1.0, float(chunk._terrain_lod_blend)))
 	var data: PackedByteArray = image.get_data()
 	if _coverage == null:
 		_coverage = ImageTexture.create_from_image(image)
@@ -88,6 +86,18 @@ func _update_coverage() -> void:
 	_land.material_override.set_shader_parameter("coverage", _coverage)
 	_land.material_override.set_shader_parameter("coverage_origin", Vector2(origin))
 	_land.material_override.set_shader_parameter("chunk_size", Vector2(_manager.chunk_width, _manager.chunk_depth))
+	for chunk: Node3D in _manager.loaded_chunks.values():
+		for name: String in ["TerrainMesh", "FarTerrainMesh"]:
+			var material := chunk.get_node(name).material_override as ShaderMaterial
+			if material == null:
+				continue
+			if material.get_meta("coverage_origin", Vector2i(999999, 999999)) != origin or material.get_meta("coverage_active", false) != generation_complete:
+				material.set_shader_parameter("terrain_coverage", _coverage)
+				material.set_shader_parameter("terrain_coverage_origin", Vector2(origin))
+				material.set_shader_parameter("terrain_chunk_size", Vector2(_manager.chunk_width, _manager.chunk_depth))
+				material.set_shader_parameter("terrain_coverage_enabled", generation_complete)
+				material.set_meta("coverage_origin", origin)
+				material.set_meta("coverage_active", generation_complete)
 
 static func recenter_target(player_xz: Vector2, center: Vector2) -> Vector2:
 	# A player pacing across a 64 m rounding boundary used to rebuild on every
@@ -105,3 +115,9 @@ func _exit_tree() -> void:
 	_job = null
 	if is_instance_valid(_manager) and _manager.is_inside_tree() and not _manager.is_queued_for_deletion():
 		_manager.set_shared_water_bounds(Rect2())
+		for chunk: Node3D in _manager.loaded_chunks.values():
+			for name: String in ["TerrainMesh", "FarTerrainMesh"]:
+				var material := chunk.get_node(name).material_override as ShaderMaterial
+				if material != null:
+					material.set_shader_parameter("terrain_coverage_enabled", false)
+					material.remove_meta("coverage_origin")

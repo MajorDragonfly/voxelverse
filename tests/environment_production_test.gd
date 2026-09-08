@@ -161,6 +161,8 @@ func _test_chunk_instances() -> void:
 		ecosystem.call("set_lod_tier", 0)
 		_expect(first.multimesh.mesh == near, "Returning to Near does not reuse its mesh.")
 		chunk.call("set_lod_tier", 2)
+		# The detailed mesh now morphs before the proxy takes ownership.
+		chunk._process(0.7)
 		_expect(chunk.get_node("FarTerrainMesh").visible and not chunk.get_node("TerrainMesh").visible, "Terrain Far proxy is not active.")
 		var collision: HeightMapShape3D = chunk.get_node("TerrainCollision").shape
 		_expect(collision != null and collision.map_data.size() == 65 * 65, "Terrain lost its bounded heightmap collider.")

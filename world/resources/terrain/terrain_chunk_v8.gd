@@ -16,6 +16,10 @@ var _terrain_job: RefCounted
 var _terrain_task_id: int = -1
 var generation_complete: bool = false
 var upload_ms: float = 0.0
+var terrain_presence: float = 0.0
+var terrain_retiring: bool = false
+var _terrain_lod_blend: float = 0.0
+const Transition = preload("res://world/streaming/terrain_transition.gd")
 
 
 func _ready() -> void:
@@ -46,6 +50,10 @@ func generate_terrain() -> void:
 
 
 func _process(delta: float) -> void:
+	if generation_complete:
+		terrain_presence = move_toward(terrain_presence, 0.0 if terrain_retiring else 1.0, delta / Transition.DURATION)
+		_terrain_lod_blend = move_toward(_terrain_lod_blend, 1.0 if _lod_tier >= 2 and _far_mesh_ready else 0.0, delta / Transition.DURATION)
+		_apply_lod_visibility()
 	if _terrain_task_id >= 0 and WorkerThreadPool.is_task_completed(_terrain_task_id) and EnvironmentBudget.claim_mesh_upload():
 		# Completed workers may arrive together. Commit at most one chunk's
 		# mesh/collision payload on the main thread during a frame.
@@ -75,6 +83,7 @@ func _finish_terrain() -> void:
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, result["arrays"])
 	mesh.surface_set_name(0, "VoxelTerrainV8")
 	terrain_mesh.mesh = mesh
+	terrain_mesh.custom_aabb = result["render_bounds"]
 	_apply_fast_heightmap_collision(_get_cells_x(), _get_cells_z())
 	_create_water_surface()
 	# Legacy decorative object generation is disabled in V3. Do not run its
@@ -121,3 +130,16 @@ func _apply_fast_heightmap_collision(cells_x: int, cells_z: int) -> void:
 	terrain_collision.position = Vector3(cell_size * 0.5, 0.0, cell_size * 0.5)
 	terrain_collision.scale = Vector3(cell_size, 1.0, cell_size)
 	terrain_collision.disabled = false
+
+
+func _apply_lod_visibility() -> void:
+	if terrain_mesh == null or far_terrain_mesh == null:
+		return
+	# Keep the detailed mesh until it exactly reaches the proxy's triangles.
+	# The reverse switch starts at that same shape and then restores the blocks.
+	var proxy: bool = _far_mesh_ready and _terrain_lod_blend >= 1.0
+	terrain_mesh.visible = not proxy
+	far_terrain_mesh.visible = proxy
+	var material := terrain_mesh.material_override as ShaderMaterial
+	if material != null:
+		material.set_shader_parameter("terrain_lod_blend", _terrain_lod_blend)

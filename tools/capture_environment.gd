@@ -69,6 +69,8 @@ func _run() -> void:
 			await _creature()
 		"water":
 			await _water_continuity()
+		"hydrology":
+			await _hydrology()
 		_:
 			_failures.append("Unknown review case.")
 	RenderingServer.render_loop_enabled = true
@@ -392,7 +394,7 @@ func _water_continuity() -> void:
 	var fallback := MeshInstance3D.new()
 	fallback.name = "WaterMesh"
 	chunk.add_child(fallback)
-	# Use the real local builder, including its 20 subdivisions / 1.6 m spacing.
+	# Use the real local builder, including inspector-to-nested-grid rounding.
 	builder.build(chunk, fallback, settings)
 	var fallback_material: ShaderMaterial = fallback.material_override
 	fallback_material.shader = frozen
@@ -412,6 +414,107 @@ func _water_continuity() -> void:
 	fallback_material.set_shader_parameter("clip_shared_surface", false)
 	await _capture("water_overlap_control", details)
 	_comparison_images.erase("water_shared_reference")
+
+
+func _hydrology() -> void:
+	_fixture()
+	var generator: Node = root.get_node("WorldGenerator")
+	var drainage: Script = load("res://world/generation/drainage_network.gd")
+	var spawn: Vector3 = generator.get_scenic_spawn()
+	var region := Vector2i(floori(spawn.x / 384.0), floori(spawn.z / 384.0))
+	var route: Dictionary = {}
+	var lake: Dictionary = {}
+	var closest: float = INF
+	for z in range(-2, 3):
+		for x in range(-2, 3):
+			var candidate: Dictionary = generator.get_drainage_region(region + Vector2i(x, z))
+			if candidate.is_empty():
+				continue
+			for body: Dictionary in candidate["lakes"]:
+				var distance: float = (body["center"] as Vector2).distance_squared_to(Vector2(spawn.x, spawn.z))
+				if float(body["level"]) > generator.get_sea_level() + 2.0 and distance < closest:
+					closest = distance
+					route = candidate
+					lake = body
+	if lake.is_empty():
+		_failures.append("Hydrology capture did not find an elevated lake and connected river.")
+		return
+	var center: Vector2 = lake["center"]
+	var player := CharacterBody3D.new()
+	player.name = "Player"
+	player.position = Vector3(center.x, float(lake["level"]) + 4.0, center.y)
+	player.add_to_group(&"player")
+	_scene.add_child(player)
+	var manager: Node3D = load("res://world/world_manager.tscn").instantiate()
+	manager.choose_scenic_spawn_for_default_start = false
+	_scene.add_child(manager)
+	var started: int = Time.get_ticks_usec()
+	var ready: bool = false
+	while Time.get_ticks_usec() - started < 120_000_000:
+		await process_frame
+		if not manager.world_initialized or manager.get_pending_chunk_count() > 0:
+			continue
+		ready = manager.get_node("LandscapeHorizon").generation_complete
+		for chunk: Node3D in manager.loaded_chunks.values():
+			ready = ready and chunk.generation_complete and chunk.get_node("ProceduralEcosystemV6").generation_complete and chunk.terrain_presence >= 1.0
+		if ready:
+			break
+	if not ready:
+		_failures.append("Hydrology world did not finish streaming.")
+		return
+	var horizon: Node3D = manager.get_node("LandscapeHorizon")
+	var details: Dictionary = {"source": str(route["source"]), "outlet": str(route["sink"]),
+		"lake_center": str(center), "lake_level": lake["level"], "sea_level": generator.get_sea_level(),
+		"river_length": route["length"], "chunks": manager.loaded_chunks.size()}
+	var middle: Vector2 = drainage.center_at(route, 0.45)
+	var target := Vector3(middle.x, float(lake["level"]) * 0.5, middle.y)
+	var lateral: Vector2 = route["lateral"]
+	_camera.position = target + Vector3(lateral.x * 105.0, 145.0, lateral.y * 105.0)
+	_camera.look_at(target)
+	await _capture("hydrology_overview", details)
+	var shore: Vector2 = center + lateral * (float(lake["radius"]) + 17.0)
+	_camera.position = Vector3(shore.x, maxf(float(lake["level"]) + 8.0, generator.get_terrain_height(shore.x, shore.y) + 6.0), shore.y)
+	_camera.look_at(Vector3(center.x, float(lake["level"]), center.y))
+	await _capture("hydrology_shore", details)
+	# Freeze unrelated animation and use the live terrain materials/coverage.
+	# The image gate must see a real intermediate shape, not only a timer value.
+	manager.set_process(false)
+	horizon.set_process(false)
+	for chunk: Node3D in manager.loaded_chunks.values():
+		chunk.set_process(false)
+		chunk.get_node("ChunkLODControllerV7").set_process(false)
+		chunk.get_node("ProceduralEcosystemV6").visible = false
+		chunk._terrain_lod_blend = 0.0
+		chunk._apply_lod_visibility()
+		var local_water: MeshInstance3D = chunk.get_node("WaterMesh")
+		if local_water.material_override is ShaderMaterial:
+			var frozen := Shader.new()
+			frozen.code = local_water.material_override.shader.code.replace("TIME", "7.0")
+			local_water.material_override.shader = frozen
+	var shared: MeshInstance3D = horizon.get_node("DistantWater")
+	var frozen_water := Shader.new()
+	frozen_water.code = shared.material_override.shader.code.replace("TIME", "7.0")
+	shared.material_override.shader = frozen_water
+	var selected: Node3D = manager.loaded_chunks[manager.current_player_chunk]
+	var ground: float = generator.get_terrain_height(selected.position.x, selected.position.z)
+	target = Vector3(selected.position.x, ground, selected.position.z)
+	_camera.position = target + Vector3(36, 40, 44)
+	_camera.look_at(target)
+	for amount: float in [0.0, 0.5, 1.0]:
+		selected.terrain_presence = amount
+		horizon._update_coverage()
+		await _capture("terrain_transition_%d" % roundi(amount * 100.0), {"presence": amount, "chunk": str(selected.chunk_coordinates), "decorations_hidden": true})
+	var initial: Image = _comparison_images["terrain_transition_0"]
+	var halfway: Image = _comparison_images["terrain_transition_50"]
+	var final_image: Image = _comparison_images["terrain_transition_100"]
+	var first_change: float = _mean_rgb_difference(initial, halfway)
+	var second_change: float = _mean_rgb_difference(halfway, final_image)
+	if first_change < 0.0005 or second_change < 0.0005:
+		_failures.append("GPU terrain transition has no distinct intermediate geometry.")
+	_report["terrain_transition_rgb_changes"] = [first_change, second_change]
+	print("HYDROLOGY_RENDER ", JSON.stringify({"seed": _config["seed"], "lake": details, "transition_rgb_changes": [first_change, second_change]}))
+	for label: String in ["terrain_transition_0", "terrain_transition_50", "terrain_transition_100"]:
+		_comparison_images.erase(label)
 
 
 func _render_inventory(node: Node) -> Dictionary:
@@ -466,6 +569,12 @@ func _capture(label: String, details: Dictionary) -> void:
 		"render_cpu_ms": _distribution(cpu), "render_gpu_ms": _distribution(gpu),
 		"gpu_timestamps_available": gpu.max() > 0.0, "draw_calls": _distribution(calls),
 		"rendered_primitives": _distribution(primitives)})
+	if label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50"]:
+		var preview: Image = image.duplicate()
+		preview.resize(480, 270, Image.INTERPOLATE_LANCZOS)
+		print("REVIEW_PREVIEW ", str(_config["seed"]), " ", label, " ", Marshalls.raw_to_base64(preview.save_jpg_to_buffer(0.76)))
+	if label.begins_with("terrain_transition_"):
+		_comparison_images[label] = image
 	if label in ["far_batches", "creature_individual", "water_shared_reference"]:
 		_comparison_images[label] = image
 	elif label in ["water_clipped_fallback", "water_partial_overlap", "water_overlap_control"]:

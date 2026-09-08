@@ -30,3 +30,9 @@ func _apply_terrain_material(terrain_mesh: MeshInstance3D) -> void:
 	material.set_shader_parameter(&"rock_slope_start", 0.22)
 	material.set_shader_parameter(&"rock_slope_end", 0.58)
 	material.set_shader_parameter(&"strata_strength", 0.14)
+
+	var far := get_parent().get_node_or_null("FarTerrainMesh") as MeshInstance3D
+	if far != null:
+		var far_material := material.duplicate() as ShaderMaterial
+		far_material.set_shader_parameter("terrain_is_proxy", true)
+		far.material_override = far_material

@@ -18,7 +18,7 @@ def main():
     parser.add_argument("--godot", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility"], default="forward_plus")
-    parser.add_argument("--cases", nargs="+", choices=["world", "assets", "species", "cluster", "creature", "water"], default=["world", "assets", "species", "cluster", "creature", "water"])
+    parser.add_argument("--cases", nargs="+", choices=["world", "assets", "species", "cluster", "creature", "water", "hydrology"], default=["world", "assets", "species", "cluster", "creature", "water", "hydrology"])
     parser.add_argument("--seeds", nargs="+", type=int, default=[15838, 23757])
     parser.add_argument("--size", nargs=2, type=int, default=[1280, 720], metavar=("WIDTH", "HEIGHT"))
     parser.add_argument("--frames", type=int, default=240)
@@ -62,6 +62,9 @@ def main():
                 if code != 0 or ERROR.search(log):
                     print(log[-12000:], file=sys.stderr)
                     raise RuntimeError(f"Render capture failed: {case}/{seed}")
+                for line in log.splitlines():
+                    if line.startswith("REVIEW_PREVIEW ") or line.startswith("HYDROLOGY_RENDER "):
+                        print(line, flush=True)
                 result = json.loads((directory / "capture.json").read_text(encoding="utf-8"))
                 if not result["passed"] or result["renderer"] != args.renderer:
                     raise RuntimeError(f"Capture used an unexpected renderer or failed: {case}/{seed}")

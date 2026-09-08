@@ -19,14 +19,14 @@ static func build(generator: Node, center: Vector2, radius: float) -> Array:
 	normals.resize(side * side)
 	normals.fill(Vector3.UP)
 	colors.resize(side * side)
-	var sea: float = generator.get_sea_level() + 0.03
 	var style_cache: Dictionary = {}
 	for z in range(side):
 		for x in range(side):
 			var point: Vector2 = center + Vector2(axis[x], axis[z])
 			var index: int = z * side + x
-			vertices[index] = Vector3(point.x, sea, point.y)
-			colors[index] = Color(0.0, 0.0, Style.sample_stillness(generator, point, style_cache), 1.0)
+			var level: float = generator.get_water_level(point.x, point.y) if generator.has_method("get_water_level") else generator.get_sea_level()
+			vertices[index] = Vector3(point.x, level + 0.03, point.y)
+			colors[index] = Style.vertex_color(generator, point, style_cache)
 			if x < side - 1 and z < side - 1:
 				indices.append_array(PackedInt32Array([index, index + side + 1, index + side, index, index + 1, index + side + 1]))
 	var arrays: Array = []

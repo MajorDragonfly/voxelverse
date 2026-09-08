@@ -68,7 +68,7 @@ func _spawn_one_creature() -> void:
 		var world_x: float = _player.global_position.x + cos(angle) * radius
 		var world_z: float = _player.global_position.z + sin(angle) * radius
 		var height: float = WorldGenerator.get_terrain_height(world_x, world_z)
-		if height <= WorldGenerator.get_sea_level() + 0.45:
+		if height <= WorldGenerator.get_water_level(world_x, world_z) + 0.45:
 			continue
 		if WorldGenerator.get_terrain_slope(world_x, world_z, 0.75) > 0.50:
 			continue

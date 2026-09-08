@@ -19,10 +19,12 @@ uniform float foam_distance = 0.85;
 uniform sampler2D scene_depth : hint_depth_texture, repeat_disable, filter_nearest;
 uniform sampler2D scene_color : hint_screen_texture, repeat_disable, filter_linear;
 uniform bool clip_shared_surface = false;
+uniform bool join_shared_surface = false;
 uniform vec4 shared_surface_bounds = vec4(0.0);
 varying vec3 world_position;
 varying vec3 world_wave_normal;
 varying float wave_amplitude;
+varying vec2 water_flow;
 
 float scene_distance(vec2 uv, mat4 inverse_projection) {
 	float depth = texture(scene_depth, uv).r;
@@ -36,7 +38,12 @@ float scene_distance(vec2 uv, mat4 inverse_projection) {
 }
 
 void vertex() {
+	water_flow = COLOR.rg * 2.0 - 1.0;
 	vec3 original = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	if (join_shared_surface) {
+		vec2 gap = max(max(shared_surface_bounds.xy - original.xz, original.xz - shared_surface_bounds.zw), vec2(0.0));
+		VERTEX.y = mix(VERTEX.y, UV2.x, 1.0 - smoothstep(0.0, 8.0, length(gap)));
+	}
 	float phase_a = dot(original.xz, vec2(wave_scale, wave_scale * 0.72)) + TIME * wave_speed;
 	float phase_b = dot(original.xz, vec2(-secondary_wave_scale * 0.43, secondary_wave_scale)) + TIME * secondary_wave_speed;
 	// World coordinates keep displacement and ripples continuous across chunks.
@@ -52,8 +59,9 @@ void fragment() {
 	if (clip_shared_surface) {
 		if (all(greaterThanEqual(world_position.xz, shared_surface_bounds.xy)) && all(lessThan(world_position.xz, shared_surface_bounds.zw))) { discard; }
 	}
-	float ripple_a = cos(dot(world_position.xz, vec2(1.7, 0.9)) + TIME * 1.1);
-	float ripple_b = cos(dot(world_position.xz, vec2(-0.8, 2.5)) - TIME * 0.8);
+	vec2 ripple_point = world_position.xz - water_flow * TIME * 0.85;
+	float ripple_a = cos(dot(ripple_point, vec2(1.7, 0.9)) + TIME * 1.1);
+	float ripple_b = cos(dot(ripple_point, vec2(-0.8, 2.5)) - TIME * 0.8);
 	vec3 ripple_normal = normalize(world_wave_normal + vec3(ripple_a * 0.055, 0.0, ripple_b * 0.045) * wave_amplitude);
 	vec3 view_normal = normalize((VIEW_MATRIX * vec4(ripple_normal, 0.0)).xyz);
 	NORMAL = view_normal;

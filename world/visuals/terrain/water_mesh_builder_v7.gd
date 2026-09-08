@@ -21,11 +21,14 @@ static func build(
 
 	var chunk_width: float = float(chunk.call("get_chunk_width"))
 	var chunk_depth: float = float(chunk.call("get_chunk_depth"))
-	var subdivisions: int = maxi(int(settings.get("subdivisions", 24)), 4)
+	# Nested subdivisions preserve the common 2 m water triangles, even with
+	# an inspector value such as 20. Finer wave vertices stay on that surface.
+	var subdivisions: int = maxi(16, int(nearest_po2(clampi(int(settings.get("subdivisions", 24)), 4, 64))))
 	var columns: int = subdivisions + 1
 	var rows: int = subdivisions + 1
 	var water_height: float = WorldGenerator.get_sea_level() + 0.03
 	var style_cache: Dictionary = {}
+	var height_cache: Dictionary = {}
 
 	var vertices := PackedVector3Array()
 	var normals := PackedVector3Array()
@@ -53,10 +56,11 @@ static func build(
 			)
 			var index: int = row * columns + column
 			var point := Vector2(chunk.global_position.x + local_x, chunk.global_position.z + local_z)
-			vertices[index] = Vector3(local_x, 0.0, local_z)
+			var level: float = Style.height_at(WorldGenerator, point, Vector2(2, 2), height_cache)
+			vertices[index] = Vector3(local_x, level + 0.03 - water_height, local_z)
 			normals[index] = Vector3.UP
 			uvs[index] = Vector2(column_ratio, row_ratio)
-			colors[index] = Color(0.0, 0.0, Style.sample_stillness(WorldGenerator, point, style_cache), 1.0)
+			colors[index] = Style.vertex_color(WorldGenerator, point, style_cache)
 
 	for row in range(rows - 1):
 		for column in range(columns - 1):
@@ -81,6 +85,9 @@ static func build(
 	water_mesh.position = Vector3(0.0, water_height, 0.0)
 	water_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	water_mesh.extra_cull_margin = displacement_margin(settings)
+	water_mesh.set_meta("wave_margin", water_mesh.extra_cull_margin)
+	if water_mesh.has_meta("joined_bounds"):
+		water_mesh.remove_meta("joined_bounds")
 	set_shared_coverage(chunk, chunk.get_meta(&"shared_water_bounds", Rect2()))
 
 
@@ -135,5 +142,30 @@ static func set_shared_coverage(chunk: Node3D, bounds: Rect2) -> void:
 	# A teleport can leave a chunk only partially under the previous surface.
 	# Clip the intersection, retain the rest until the replacement is published.
 	if water.material_override is ShaderMaterial:
+		var join: bool = water.visible and bounds.has_area() and bounds.grow(8.0).intersects(own_bounds)
+		water.material_override.set_shader_parameter("join_shared_surface", join)
+		if join and water.mesh != null:
+			_align_shared_edge(chunk, water, bounds)
 		water.material_override.set_shader_parameter("clip_shared_surface", bounds.has_area())
 		water.material_override.set_shader_parameter("shared_surface_bounds", Vector4(bounds.position.x, bounds.position.y, bounds.end.x, bounds.end.y))
+
+
+static func _align_shared_edge(chunk: Node3D, water: MeshInstance3D, bounds: Rect2) -> void:
+	if water.get_meta("joined_bounds", Rect2()) == bounds:
+		return
+	var arrays: Array = water.mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var targets := PackedVector2Array()
+	var cache: Dictionary = {}
+	var margin: float = 0.0
+	for vertex: Vector3 in vertices:
+		var point := Vector2(chunk.position.x + vertex.x, chunk.position.z + vertex.z)
+		var height: float = Style.height_at(WorldGenerator, point, Style.shared_step(point, bounds.get_center()), cache) + 0.03 - water.position.y
+		targets.append(Vector2(height, 0.0))
+		margin = maxf(margin, absf(height - vertex.y))
+	arrays[Mesh.ARRAY_TEX_UV2] = targets
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	water.mesh = mesh
+	water.extra_cull_margin = margin + float(water.get_meta("wave_margin", 1.1))
+	water.set_meta("joined_bounds", bounds)
