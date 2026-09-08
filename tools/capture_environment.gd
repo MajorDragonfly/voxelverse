@@ -543,6 +543,8 @@ func _underwater() -> void:
 	white.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	white.albedo_color = Color.WHITE
 	sky_object.material_override = white
+	# Isolate visibility through the underside from legitimate sun shadows.
+	sky_object.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	sky_object.position.y = sea + 8.0
 	_scene.add_child(sky_object)
 	await _capture("underwater_ceiling_sky_control", {"opaque_sky_object_above_water": true})
