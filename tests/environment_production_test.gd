@@ -130,10 +130,11 @@ func _test_chunk_instances() -> void:
 		for node: Node in ecosystem.get_children():
 			_expect(node is MultiMeshInstance3D and node.get_child_count() == 0, "Vegetation contains complex per-instance nodes.")
 			var mm: MultiMesh = node.multimesh
-			var transforms: Array = []
-			for index in range(mm.instance_count):
-				transforms.append([mm.get_instance_transform(index), mm.get_instance_custom_data(index)])
-			snapshot[str(node.name)] = transforms
+			# Individual getters are no-ops in Godot's dummy renderer. Inspect the
+			# actual bulk buffer used by both real rendering drivers instead.
+			var buffer: PackedFloat32Array = mm.buffer
+			_expect(buffer.size() == mm.instance_count * 16, "Vegetation uploaded an incomplete instance buffer.")
+			snapshot[str(node.name)] = buffer
 		snapshots.append(snapshot)
 		var first: MultiMeshInstance3D = ecosystem.get_child(0)
 		var near: Mesh = first.multimesh.mesh

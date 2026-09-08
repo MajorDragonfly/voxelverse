@@ -4,6 +4,64 @@ class_name CreatureRuntimePreview
 const RUNTIME_VOXEL_TARGET_SIZE: float = 0.16
 const RUNTIME_VOXEL_OVERLAP_XY: float = 1.04
 const RUNTIME_VOXEL_OVERLAP_Z: float = 1.10
+const InstanceBuffer = preload("res://core/multimesh_buffer.gd")
+
+# Runtime-only batching preserves body-slice and attachment roots. Leg meshes
+# remain individual because the adaptive animator reparents them into knee rigs.
+var batch_runtime_boxes: bool = true
+var _pending_boxes: Dictionary = {}
+static var _shared_box: BoxMesh
+static var _shared_box_material: StandardMaterial3D
+
+
+func rebuild() -> void:
+	_pending_boxes.clear()
+	super.rebuild()
+	for parent: Node3D in _pending_boxes:
+		var boxes: Array = _pending_boxes[parent]
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.use_colors = true
+		if _shared_box == null:
+			_shared_box = BoxMesh.new()
+			_shared_box.size = Vector3.ONE
+		mm.mesh = _shared_box
+		mm.instance_count = boxes.size()
+		var bounds: AABB
+		var transforms: Array[Transform3D] = []
+		var colors: Array[Color] = []
+		for index in range(boxes.size()):
+			var box: Dictionary = boxes[index]
+			var transform := Transform3D(Basis.from_scale(box["size"]), box["position"])
+			transforms.append(transform)
+			colors.append(box["color"])
+			var box_bounds: AABB = transform * _shared_box.get_aabb()
+			bounds = box_bounds if index == 0 else bounds.merge(box_bounds)
+		mm.custom_aabb = bounds
+		mm.buffer = InstanceBuffer.pack(transforms, colors)
+		var node := MultiMeshInstance3D.new()
+		node.name = "RuntimeVoxelBatch"
+		node.multimesh = mm
+		if _shared_box_material == null:
+			_shared_box_material = StandardMaterial3D.new()
+			_shared_box_material.vertex_color_use_as_albedo = true
+			_shared_box_material.vertex_color_is_srgb = true
+			_shared_box_material.roughness = 1.0
+			_shared_box_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		node.material_override = _shared_box_material
+		parent.add_child(node)
+	_pending_boxes.clear()
+
+
+func _create_box(parent: Node3D, box_name: String, local_position: Vector3,
+	box_size: Vector3, box_color: Color, is_highlighted: bool) -> MeshInstance3D:
+	if not batch_runtime_boxes or is_highlighted or str(parent.get_meta("creature_part_category", "")) == "legs":
+		return super._create_box(parent, box_name, local_position, box_size, box_color, is_highlighted)
+	if not _pending_boxes.has(parent):
+		_pending_boxes[parent] = []
+	_pending_boxes[parent].append({"position": local_position, "size": box_size, "color": box_color})
+	# The inherited body/attachment builders do not retain individual box nodes.
+	return null
 
 
 func _create_seamless_body_slice(

@@ -39,7 +39,7 @@ def main():
         # Stop the real scene at resource-owning stages, not only arbitrary frames.
         # Separate processes keep the resource cache cold for every case.
         for seed in [15838, 63352, 23757]:
-            for stage in ["terrain", "placement", "resources", "complete"]:
+            for stage in ["terrain", "placement", "resources", "complete", "cluster_build", "cluster_complete"]:
                 name = f"shutdown_{seed}_{stage}"
                 commands.append((name, ["--verbose", "--script", "res://tools/main_shutdown_probe.gd",
                                         "--", str(seed), stage], 120))

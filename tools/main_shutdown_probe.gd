@@ -15,8 +15,8 @@ func _initialize() -> void:
 
 func _start() -> void:
 	var arguments: PackedStringArray = OS.get_cmdline_user_args()
-	if arguments.size() != 2 or not arguments[0].is_valid_int() or arguments[1] not in ["terrain", "placement", "resources", "complete"]:
-		push_error("Expected main shutdown probe arguments: <seed> <terrain|placement|resources|complete>")
+	if arguments.size() != 2 or not arguments[0].is_valid_int() or arguments[1] not in ["terrain", "placement", "resources", "complete", "cluster_build", "cluster_complete"]:
+		push_error("Expected main shutdown probe arguments: <seed> <terrain|placement|resources|complete|cluster_build|cluster_complete>")
 		quit(1)
 		return
 	_seed_value = int(arguments[0])
@@ -38,7 +38,7 @@ func _process(_delta: float) -> bool:
 	if not _started or _finished:
 		return false
 	_frames += 1
-	if _frames > 3600:
+	if _frames > (12000 if _stage.begins_with("cluster_") else 3600):
 		push_error("Main never reached shutdown stage %s for seed %d." % [_stage, _seed_value])
 		_finished = true
 		quit(1)
@@ -61,6 +61,10 @@ func _process(_delta: float) -> bool:
 				reached = int(ecology.get("_phase")) == 2 and not AuthoredAssets._requests.is_empty()
 			"complete":
 				reached = bool(ecology.get("generation_complete")) and ecology.get_child_count() > 0
+			"cluster_build":
+				reached = not (ecology.get("_cluster_builders") as Dictionary).is_empty()
+			"cluster_complete":
+				reached = int(ecology.call("get_generation_stats")["cluster_nodes"]) > 0
 		if reached:
 			var generator: Node = root.get_node("WorldGenerator")
 			if int(generator.call("get_world_seed")) != _seed_value:

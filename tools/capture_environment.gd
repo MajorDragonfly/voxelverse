@@ -12,6 +12,7 @@ var _scene: Node3D
 var _camera: Camera3D
 var _samples: Array[Dictionary] = []
 var _failures: Array[String] = []
+var _comparison_images: Dictionary = {}
 
 
 func _initialize() -> void:
@@ -57,6 +58,8 @@ func _run() -> void:
 			await _assets()
 		"cluster":
 			await _cluster()
+		"creature":
+			await _creature()
 		_:
 			_failures.append("Unknown review case.")
 	RenderingServer.render_loop_enabled = true
@@ -126,7 +129,9 @@ func _assets() -> void:
 		ground.position.y = -0.035
 		group.add_child(ground)
 		var target := Vector3(0, bounds.size.y * 0.45, 0)
-		var distance: float = maxf(spacing * 3.3, bounds.size.y * 2.0)
+		var half_fov: float = tan(deg_to_rad(_camera.fov * 0.5))
+		var aspect: float = float(root.size.x) / float(root.size.y)
+		var distance: float = maxf((spacing * 2.0 + bounds.size.x) / (2.0 * half_fov * aspect), bounds.size.y / (2.0 * half_fov)) * 1.25
 		_camera.position = target + Vector3(0, distance * 0.24, distance)
 		_camera.look_at(target)
 		await _capture(family, {"asset_id": family, "geometry_variant": species["geometry_variant"],
@@ -140,7 +145,9 @@ func _world() -> void:
 	var started: int = Time.get_ticks_usec()
 	var setup_frames: Array[float] = []
 	var ready: bool = false
-	for frame in range(10000):
+	for frame in range(100000):
+		if Time.get_ticks_usec() - started > 120_000_000:
+			break
 		var previous: int = Time.get_ticks_usec()
 		await process_frame
 		setup_frames.append((Time.get_ticks_usec() - previous) / 1000.0)
@@ -155,7 +162,7 @@ func _world() -> void:
 			continue
 		ready = true
 		for chunk: Node in manager.get("loaded_chunks").values():
-			if not bool(chunk.get_node("ProceduralEcosystemV6").get("generation_complete")):
+			if not bool(chunk.get_node("ProceduralEcosystemV6").get("generation_complete")) or chunk.get_node("ProceduralEcosystemV6").is_processing():
 				ready = false
 				break
 		if ready:
@@ -221,9 +228,45 @@ func _cluster() -> void:
 		ecosystem.call("set_cluster_enabled", true)
 		for frame in range(6000):
 			await process_frame
-			if bool(ecosystem.call("get_generation_stats").get("cluster_ready", false)):
+			if bool(ecosystem.call("get_generation_stats").get("cluster_complete", false)):
 				break
+		if not bool(ecosystem.call("get_generation_stats")["cluster_ready"]):
+			_failures.append("Cluster review fixture failed to create its HLOD.")
 		await _capture("far_cluster", ecosystem.call("get_generation_stats"))
+
+
+func _creature() -> void:
+	_fixture()
+	var factory: Script = load("res://creatures/wildlife/species_assembly_factory_v7.gd")
+	var blueprint: Dictionary = factory.create_species(int(_config["seed"]), Vector2i.ZERO, "grazer")
+	var preview_script: Script = load("res://creatures/runtime/creature_runtime_preview.gd")
+	_camera.position = Vector3(4.0, 2.8, 5.0)
+	_camera.look_at(Vector3(0, 0.2, 0))
+	for batched: bool in [false, true]:
+		var preview: Node3D = preview_script.new()
+		preview.set("batch_runtime_boxes", batched)
+		preview.set("blueprint", blueprint.duplicate(true))
+		var started: int = Time.get_ticks_usec()
+		_scene.add_child(preview)
+		var details: Dictionary = _render_inventory(preview)
+		details["build_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+		await _capture("creature_batched" if batched else "creature_individual", details)
+		preview.queue_free()
+		await process_frame
+
+
+func _render_inventory(node: Node) -> Dictionary:
+	var counts: Dictionary = {"mesh_nodes": 0, "multimesh_nodes": 0, "instances": 0}
+	if node is MeshInstance3D:
+		counts["mesh_nodes"] += 1
+	elif node is MultiMeshInstance3D:
+		counts["multimesh_nodes"] += 1
+		counts["instances"] += node.multimesh.instance_count
+	for child: Node in node.get_children():
+		var child_counts: Dictionary = _render_inventory(child)
+		for key: String in counts:
+			counts[key] += int(child_counts[key])
+	return counts
 
 
 func _hide_ui(node: Node) -> void:
@@ -264,6 +307,25 @@ func _capture(label: String, details: Dictionary) -> void:
 		"render_cpu_ms": _distribution(cpu), "render_gpu_ms": _distribution(gpu),
 		"gpu_timestamps_available": gpu.max() > 0.0, "draw_calls": _distribution(calls),
 		"rendered_primitives": _distribution(primitives)})
+	if label in ["far_batches", "creature_individual"]:
+		_comparison_images[label] = image
+	elif label in ["far_cluster", "creature_batched"]:
+		var before_label: String = "far_batches" if label == "far_cluster" else "creature_individual"
+		var before: Image = _comparison_images[before_label]
+		before.convert(Image.FORMAT_RGB8)
+		image.convert(Image.FORMAT_RGB8)
+		var before_data: PackedByteArray = before.get_data()
+		var after_data: PackedByteArray = image.get_data()
+		var error_sum: int = 0
+		for index in range(before_data.size()):
+			error_sum += absi(int(before_data[index]) - int(after_data[index]))
+		var error: float = float(error_sum) / float(before_data.size()) / 255.0
+		_samples[-1]["mean_rgb_error_from_reference"] = error
+		if error > 0.004:
+			_failures.append("Rendered geometry/color parity failed for %s: mean RGB error %.6f" % [label, error])
+		if float(_samples[-1]["draw_calls"]["median"]) >= float(_samples[-2]["draw_calls"]["median"]):
+			_failures.append("Rendered batching did not reduce draw calls for " + label)
+		_comparison_images.erase(before_label)
 	print("Captured ", label, " draws=", calls[-1])
 
 

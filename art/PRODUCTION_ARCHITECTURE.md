@@ -95,14 +95,43 @@ the full CI job records actual cold/warm streaming timings after the shutdown
 probes. A hard latency cap would require an additional predecoded mesh format or
 a loading-stage warmup; asset density remains governed by biome composition.
 
-Each chunk contains at most 21 MultiMesh nodes, not a node hierarchy per plant. Explicit conservative AABBs include individual transforms and wind margin.
+Each chunk contains at most 21 MultiMesh nodes. Explicit conservative AABBs include individual transforms and wind margin.
 LOD switching reuses meshes and has distance hysteresis. Small plants disappear at
 Far; trees/rocks/shrubs retain mass. Shadows are enabled only for Near trees.
 
+Far chunks lazily compile two additional ArrayMesh groups: trees and low vegetation
+(shrubs/rocks), keeping their separate visibility distances. The compiler transforms
+the existing Far mesh vertices/normals and preserves semantic UV slots, species
+palette rows and individual shade; it does not remove instances or simplify the
+silhouette. A 32-column palette atlas supplies all species in a group. Tiny foliage
+wind is omitted at Far. Near/Mid MultiMeshes remain available for immediate return.
+
+Cluster construction advances in 256-vertex steps under the same 1.8 ms budget.
+Terrain and clusters share one mesh-commit admission per frame. Each group has a
+65,536-vertex/196,608-index cap; invalid input or capacity exhaustion retains the
+original Far MultiMeshes. Groups become visible atomically and cached clusters
+are reused across LOD changes. Leaving Far pauses construction; chunk teardown
+releases partial arrays without suspended coroutines. The maximum is 23 geometry
+nodes per chunk. This trades bounded, duplicated Far geometry for fewer draws;
+it is not an increase in the streaming radius or a planetary horizon renderer.
+
 The benchmark geometry is decorative and has no individual colliders. Terrain
-retains a 65 × 65 heightmap collider per chunk. Cluster-level distant rendering
-and collision for selected hero trunks remain future work; the existing terrain
-streaming radius has not been replaced by a planetary horizon renderer.
+retains a 65 × 65 heightmap collider per chunk. Collision for selected hero trunks
+remains future work.
+
+## Runtime creature geometry
+
+Actual rendered-world counters exposed thousands of individual voxel boxes in
+runtime creature previews. Rigid boxes now share one unit BoxMesh/vertex-color
+material and one MultiMesh per existing animated body slice or attachment root.
+The editor preview, blueprint/save format, attachment metadata and animation roots
+remain unchanged. Leg boxes remain individual because the adaptive animator
+reparents them into knee rigs; parity tests exercise that real reparenting and motion.
+
+Vegetation and creature batches upload one packed instance buffer. Tests inspect
+these exact transforms/colors rather than individual instance getters, which are
+no-ops in Godot 4.6.3's dummy renderer. Real-driver image and draw-count comparisons
+provide an additional gate; see [ENVIRONMENT_REVIEW.md](../docs/ENVIRONMENT_REVIEW.md).
 
 ## Validation and export
 
@@ -114,7 +143,9 @@ runs every `tests/*.gd` entry point and starts the actual main scene. Tests cove
 actual staged MultiMesh placement, terrain/water resources and A → B → A scene
 reloads. Existing builder, combat, persistence and assembly tests remain enabled.
 The full runner also probes actual main shutdown during terrain work, placement,
-pending resource loads and completed vegetation on three fixed palette seeds.
+pending resource loads, completed vegetation, partial HLOD and published HLOD on
+three fixed palette seeds. Together with runtime cluster/buffer parity tests,
+main-scene probes and the CPU benchmark, the full runner now has 40 checks.
 Each case starts a separate process with cold asset caches. These catch teardown
 leaks that a short frame-count-only smoke test can miss.
 

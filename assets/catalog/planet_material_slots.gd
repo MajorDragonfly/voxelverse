@@ -26,8 +26,13 @@ static func validate(slots: Dictionary) -> Array[String]:
 
 
 static func create_texture(slots: Dictionary) -> ImageTexture:
-	var image := Image.create(TEXTURE_WIDTH, 1, false, Image.FORMAT_RGBA8)
+	return create_atlas([slots])
+
+
+static func create_atlas(palettes: Array[Dictionary]) -> ImageTexture:
+	var image := Image.create(TEXTURE_WIDTH, maxi(palettes.size(), 1), false, Image.FORMAT_RGBA8)
 	image.fill(Color.MAGENTA)
-	for index in range(NAMES.size()):
-		image.set_pixel(index, 0, slots.get(NAMES[index], Color.MAGENTA))
+	for row in range(palettes.size()):
+		for index in range(NAMES.size()):
+			image.set_pixel(index, row, palettes[row].get(NAMES[index], Color.MAGENTA))
 	return ImageTexture.create_from_image(image)

@@ -29,6 +29,19 @@ func _run() -> void:
 			return
 		var sample: Dictionary = {"chunk": [coords.x, coords.y], "create_ms": create_ms,
 			"upload_ms": chunk.get("upload_ms"), "ecology": ecology.call("get_generation_stats")}
+		started = Time.get_ticks_usec()
+		ecology.call("set_lod_tier", 2)
+		for frame in range(6000):
+			await process_frame
+			if bool(ecology.call("get_generation_stats")["cluster_complete"]):
+				break
+		var far_stats: Dictionary = ecology.call("get_generation_stats")
+		if not bool(far_stats["cluster_complete"]):
+			push_error("Far cluster benchmark did not complete.")
+			quit(1)
+			return
+		sample["far_build_wall_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+		sample["far"] = far_stats
 		measurements.append(sample)
 		print(JSON.stringify(sample))
 		chunk.queue_free()

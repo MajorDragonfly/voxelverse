@@ -35,12 +35,12 @@ jobs:
       - name: Import project
         run: |
           python tools/validate_godot.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --tests environment_production_test --skip-main --output "${{ runner.temp }}/render-import"
-      - name: Render actual world, assets and Far vegetation
+      - name: Render world, assets, Far clusters and creature comparisons
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
-          VK_ICD_FILENAMES: /usr/share/vulkan/icd.d/lvp_icd.x86_64.json
         run: |
-          xvfb-run -a -s '-screen 0 640x360x24' python tools/profile_environment.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/environment-review" --size 640 360 --frames 4 --warmup 4 --fast-setup
+          export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
+          xvfb-run -a -s '-screen 0 960x540x24' python tools/profile_environment.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/environment-review" --size 960 540 --frames 4 --warmup 4 --fast-setup
       - name: Upload rendered review and measurements
         if: always()
         uses: actions/upload-artifact@v4

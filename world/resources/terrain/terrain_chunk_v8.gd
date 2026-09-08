@@ -1,6 +1,7 @@
 extends "res://world/resources/terrain/terrain_chunk_v7.gd"
 
 const TerrainBuildJob = preload("res://world/streaming/terrain_build_job.gd")
+const EnvironmentBudget = preload("res://world/streaming/environment_generation_budget.gd")
 signal terrain_ready
 
 @export_category("Fast Terrain V8")
@@ -15,7 +16,6 @@ var _terrain_job: RefCounted
 var _terrain_task_id: int = -1
 var generation_complete: bool = false
 var upload_ms: float = 0.0
-static var _upload_frame: int = -1
 
 
 func _ready() -> void:
@@ -46,10 +46,9 @@ func generate_terrain() -> void:
 
 
 func _process(delta: float) -> void:
-	if _terrain_task_id >= 0 and WorkerThreadPool.is_task_completed(_terrain_task_id) and _upload_frame != Engine.get_process_frames():
+	if _terrain_task_id >= 0 and WorkerThreadPool.is_task_completed(_terrain_task_id) and EnvironmentBudget.claim_mesh_upload():
 		# Completed workers may arrive together. Commit at most one chunk's
 		# mesh/collision payload on the main thread during a frame.
-		_upload_frame = Engine.get_process_frames()
 		WorkerThreadPool.wait_for_task_completion(_terrain_task_id)
 		_terrain_task_id = -1
 		_finish_terrain()
@@ -89,6 +88,7 @@ func _finish_terrain() -> void:
 		_far_mesh_ready = true
 		_apply_lod_visibility()
 	upload_ms = (Time.get_ticks_usec() - started) / 1000.0
+	EnvironmentBudget.record(started, "terrain")
 	terrain_ready.emit()
 
 
