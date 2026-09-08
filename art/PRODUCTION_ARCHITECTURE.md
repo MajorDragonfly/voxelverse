@@ -121,7 +121,9 @@ leaks that a short frame-count-only smoke test can miss.
 Packed exports must include `assets/packs/**/manifest.json` through the export
 preset's non-resource include filter and retain the catalog-referenced runtime
 GLBs. Source `.bbmodel` files and review PNGs are excluded by their `.gdignore`.
-A distributable export/GPU acceptance run is a separate gate from headless import.
+Desktop release exports now have presets and a separate native-platform CI gate;
+see [DESKTOP_EXPORT.md](../docs/DESKTOP_EXPORT.md) for the executable/PCK checks and
+their precise limits. GPU acceptance remains separate from headless validation.
 
 Technical basis: [Godot MultiMesh](https://docs.godotengine.org/en/stable/classes/class_multimesh.html),
 [background loading](https://docs.godotengine.org/en/stable/tutorials/io/background_loading.html),

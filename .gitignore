@@ -13,3 +13,7 @@ Thumbs.db
 # Python art/export tooling
 __pycache__/
 *.pyc
+
+# Reproducible desktop exports and downloaded engine toolchains
+/builds/
+/godot-toolchain/

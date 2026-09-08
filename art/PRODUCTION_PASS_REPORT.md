@@ -122,8 +122,13 @@ still require target-hardware testing.
    branch count/twist/taper recipes, additional alien architectures, functional
    natural arches, distant horizon streaming and downhill river networks remain
    future production work. Existing rivers/lakes remain procedural height fields.
-4. Make and validate a distributable export with catalog manifests included. This
-   pass validates the editor/headless runtime, not a shipping executable.
+4. Desktop export validation now creates isolated Linux/Windows release packages
+   with catalog manifests included. The native release executable receives a
+   main-scene smoke check; instrumented gameplay, all 63 meshes, three palettes,
+   persistence and planet-transition checks use the identical release PCK with
+   the same-version editor. This does not certify GPU or visual quality. Build
+   instructions and the precise acceptance scope are in
+   [DESKTOP_EXPORT.md](../docs/DESKTOP_EXPORT.md).
 
 Next: approve the benchmark and capture one dense verdant scene plus one violet
 scene on target hardware, then expand approved families and distant landscape
