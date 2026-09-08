@@ -1,6 +1,6 @@
 # M1-Ausbau: adaptives Planetengelände und Spielmenü
 
-8. September 2026 · Branch `agent/planet-lod-menu` · Ausgangspunkt `6e5c6d2`.
+8. September 2026 · **technisch geprüft** · Code `6916cabc49d6aac546c0e600d735e087e9789b9f` · Branch `agent/planet-lod-menu` · Ausgangspunkt `6e5c6d2`.
 
 Lars' Spieltest bestätigte eine verbesserte bisherige Welt, aber weiter zu grobe entfernte Berge, einen nicht funktionierenden F4-Einstieg in seiner EXE und ein nicht klickbares F8-Menü. Diese Lieferung erweitert die Planetentechnik parallel zum Sozialsystem im anderen Chat.
 
@@ -49,10 +49,16 @@ Die erste Umsetzung überschritt die vorhandene Frist der Wasserprüfung. Der Ho
 
 Die maschinenlesbaren lokalen Messwerte und Prüfergebnisse stehen in `art/review/planet_lod_menu_acceptance.json`. Die zugehörige Pull Request dokumentiert zusätzlich native Build- und Rendernachweise.
 
+**Abnahme der Codefassung `6916cab`:** Der vollständige [Godot-CI-Lauf](https://github.com/MajorDragonfly/voxelverse/actions/runs/34254347167) besteht **51/51 Prüfungen**. Die nativen [Windows-/Linux-Exportprüfungen](https://github.com/MajorDragonfly/voxelverse/actions/runs/34254347129) bestehen jeweils **13/13**, einschließlich tatsächlicher GUI-Klicks, F4, Labor-Button und Aster-Sicherung. Die [Renderprüfung](https://github.com/MajorDragonfly/voxelverse/actions/runs/34254347158) besteht in Compatibility vollständig mit **68 Aufnahmen**; die zehn M1-Fälle sind auch in Forward+ erfolgreich, dessen umfangreicher übriger Umgebungslauf bei der Dokumentation noch läuft. Die neuen Compatibility-Bilder wurden gesichtet: bedienbares, vollständig sichtbares Menü, geschlossene Aster-Kugel, erhaltene Terrain-/Wasserränder und reduzierte Überstrahlung im Doppelsternlicht. Die neue Hauptwelt zeigt feinere Voxelstufen an den Bergen. Die Beleuchtung wurde auf 1,0/0,45 Sonnenenergie und maximal 0,35 Tages-Umgebungslicht im Labor abgestimmt.
+
+**Testpakete:** [Windows](https://github.com/MajorDragonfly/voxelverse/actions/runs/34254347129/artifacts/10067336538) · [Linux](https://github.com/MajorDragonfly/voxelverse/actions/runs/34254347129/artifacts/10067313761). Vollständig entpacken und EXE sowie zugehörige PCK im selben Ordner belassen. [Draft PR #11](https://github.com/MajorDragonfly/voxelverse/pull/11) bleibt zur getrennten Integration offen.
+
 Lokaler Aster-Nachweis: 29.172 Terrainrandproben einschließlich 2.652 Proben an Würfelflächenkanten; maximale Abweichung 0,0763 mm am Boden und 0,0800 mm am Wasser. Die Laufprobe legte 245,44 m zurück, wechselte die Würfelfläche und verschob viermal den Ursprung. 748 physische Randstrahlen trafen Gelände. Die Auswahlprüfung über Flächen, Kanten und Ecken erreichte maximal 672 Kacheln; im Lauf waren es höchstens 462 sichtbare und zusammen 504 sichtbare/vorbereitete Geländemeshes. Die Upload-Zeit lag im 95. Perzentil bei 1,334 ms, mit einzelnen Ausreißern bis 17,534 ms; die größte laufende Veröffentlichung brauchte 19,969 ms. Diese CPU-Messwerte sind keine FPS-Zusage.
 
 ## Parallelität und Rest
 
 Dieser Branch ändert keine Dateien in `autoload/`, keine soziale Interaktionslogik und keine Registry-/Kampagnenschemas. Die einzige bestehende Spieler-HUD-Änderung ist der sichtbare Hinweis auf Esc und F4 in `ui/hud_presentation.gd`. Bei der späteren Integration sind gemeinsame Änderungen an HUD, Tests und Roadmap abzugleichen.
+
+Der aktuelle Vergleich mit dem parallelen Sozialsystem in PR #10 zeigt nur `ROADMAP.md` als gemeinsam geänderten Pfad. Die größere Systemübersicht braucht noch Feinschliff bei der engen Beschriftung von Haven/Lune; die separate Mondreise bleibt über M erreichbar.
 
 Lars' nächster Spieltest sollte das Klicken im Menü, Vollbildwechsel, F4/den Labor-Button, Aster beim Laufen und Orbit/Rückkehr sowie die entfernten Berge im Hauptspiel umfassen. Weiter offen bleiben Ziel-PC-Leistung, zeitliches planetarisches Geomorphing, produktive Weltobjekte/Fauna, Kampagnenmigration und der Ausbau der Kreaturen aus M2/M3.
