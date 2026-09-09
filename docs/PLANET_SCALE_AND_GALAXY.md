@@ -2,7 +2,7 @@
 
 9. September 2026 · Anforderung von Lars · **Anforderungsstand vor M1b.**
 
-**Fortschritt:** Der [M1b-Referenzbetrieb](REAL_SCALE_PLANETS.md) setzt die Größenprüfung inzwischen bis 12.742 km Durchmesser um. Die folgende Bestandsanalyse dokumentiert den Ausgangspunkt `94b4dd3`; Galaxiekatalog und Galaxiereisen bleiben kommende Arbeit. Die Architektur- und Abnahmeanforderungen gelten weiter.
+**Fortschritt:** Der [M1b-Referenzbetrieb](REAL_SCALE_PLANETS.md) setzt die Größenprüfung inzwischen bis 12.742 km Durchmesser um. [M1c](GALAXY_CATALOG_AND_DISTANCE.md) ergänzt inzwischen versionierte Galaxieadressen, reproduzierbare Systeme, begrenzte Caches und gespeicherte Notizen. Die folgende Bestandsanalyse dokumentiert den Ausgangspunkt `94b4dd3`; Galaxiekarte und Galaxiereisen bleiben kommende Arbeit. Die Architektur- und Abnahmeanforderungen gelten weiter.
 
 Lars stellt klar: Die späteren Planeten sollen Originalgrößen besitzen; die Weltraumphase soll eine ganze Galaxie mit bereisbaren Sternsystemen darstellen. Die bisher in der Roadmap vorgeschlagenen komprimierten Spielgrößen werden als Produktionsziel ersetzt. Die Körper mit 1–8 km Durchmesser bleiben schnelle Testfälle. Sie belegen weder erdgroßes Gelände noch eine funktionierende Galaxie.
 

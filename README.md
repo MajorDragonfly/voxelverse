@@ -6,6 +6,8 @@ Ein Spore-inspiriertes Einzelspielerspiel in Voxelgrafik: eine eigene Kreatur ge
 
 Der aktuelle Prototyp enthält Kreaturensteuerung und Überleben, Entdeckungen/Körperteilfreischaltungen, gestreamte Landschaften, einfache regionale Ökologie, Planetenwechsel per Debug-Taste sowie Kreaturen- und Gebäudeeditor. Das separate M1/M1b-Planetenlabor ergänzt begehbare Kugeloberflächen bis 12.742 km Durchmesser, ein kleines Testsystem, Doppelsterne und Orbit-/Systemansichten. Spätere spielbare Phasen und der Verhaltens-Skilltree sind geplant.
 
+M1c ergänzt einen reproduzierbaren Galaxiekatalog: Sektoren und Sternsysteme abfragen, reale Körpergrößen ansehen sowie eigene Namen, Entdeckungen und Notizen speichern. Die Hauptwelt erhält zusammenhängende Baum-Fernmodelle, eine begrenzte Waldvorschau und gemeinsame Nah-/Fernfarben des Geländes. [M1c und Fernlandschaft: Umsetzung und Testpakete](docs/GALAXY_CATALOG_AND_DISTANCE.md).
+
 ## Projekt starten
 
 `project.godot` mit Godot 4.6.3 öffnen und die Hauptszene `main/main.tscn` starten. Windows-/Linux-Exporte und ihre Prüfung sind in [DESKTOP_EXPORT.md](docs/DESKTOP_EXPORT.md) beschrieben.
@@ -16,7 +18,7 @@ Der aktuelle Prototyp enthält Kreaturensteuerung und Überleben, Entdeckungen/K
 
 **Grafik-Spieltest:** Unter Wasser begrenzt eine eigene Kameraatmosphäre die Sicht; die Wasserunterseite verdeckt Himmel und Wolken. Im Labor besitzen die vier kleinen Testkörper und die drei realgroßen Referenzen adaptive Voxelstufen. Die Durchmesser der kleinen Testkörper sind Lune 1,024 km, Ember 3,072 km, Haven 4,096 km und Aster 8,192 km; alte Labor-Orte werden an die neue Geländeoberfläche angepasst.
 
-**Weiteres Skalierungsziel:** Reale Planetengrößen und eine bereisbare Galaxie. Als nächstes werden der erdgroße Referenzkörper im Spielbetrieb sowie Galaxieadressen und ein reproduzierbarer Systemkatalog entwickelt. [Zielmaßstab und offene Nachweise](docs/PLANET_SCALE_AND_GALAXY.md).
+**M1c ausprobieren:** Im Planetenlabor **„Galaxiekatalog“** anklicken. Zentrum, Innenarm und Außenrand zeigen verschiedene Sektoren; eigene Sektorkoordinaten sind ebenfalls möglich. Ein System auswählen, Name/Notiz bearbeiten und speichern. Esc führt zum Planeten zurück. Die Einträge bleiben nach Neustart erhalten. Die Referenzgalaxie hat 100.000 Lichtjahre Durchmesser; die Ansicht zeigt ihren Datenkatalog. Galaxiekarte, Systemreisen und Kampagnenintegration folgen in späteren Arbeitspaketen. [Zielmaßstab und offene Nachweise](docs/PLANET_SCALE_AND_GALAXY.md).
 
 - [Kreatureneditor](creatures/editor/README.md)
 - [Kreatur im Spiel](creatures/runtime/README.md)
