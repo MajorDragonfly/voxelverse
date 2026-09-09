@@ -145,6 +145,21 @@ func _run() -> void:
 	observations["home_gap_m"] = tribe.anchor().distance_to(d2.animals[animal_id].global_position)
 	_expect(float(observations["home_gap_m"]) < 1.6 and float(observations["home_travel_m"]) > 3.0, "Held animal did not return to real home area")
 	_expect(saves.save_now(), "Save held animal before process restart")
+	# Copying branches the campaign ID while preserving owned animal identity and stock.
+	var source_bytes: String = FileAccess.get_file_as_string(campaign_save)
+	var source_save: Dictionary = Atomic.parse_dictionary(source_bytes)
+	var copy_path: String = saves._write_slot_copy(source_save, "D2 integration copy", "copy")
+	_expect(not copy_path.is_empty(), "Owned animal prevents creating a campaign copy")
+	if not copy_path.is_empty():
+		_expect(saves.load_now(copy_path), "Copied animal campaign does not load")
+		await _frames(12)
+		_expect(state.campaign.data["id"] != source_save["game_state"]["campaign"]["id"] and animal_id in tribe.husbandry.candidates(), "Copy lost the D2/D3 owner connection")
+		var copied_registry: Dictionary = tribe.body()[AnimalSave.FIELD]["registry"]
+		var original_registry: Dictionary = source_save["game_state"]["campaign"]["bodies"]["15838"][AnimalSave.FIELD]["registry"]
+		_expect(copied_registry["campaign_id"] == state.campaign.data["id"] and copied_registry["animals"][animal_id]["owner_faction_id"] == original_registry["animals"][animal_id]["owner_faction_id"], "Copy changed animal ownership or retained the old campaign scope")
+		_expect(FileAccess.get_file_as_string(campaign_save) == source_bytes, "Campaign copy modified its source")
+		_expect(saves.load_now(campaign_save), "Cannot return from the copied campaign")
+		await _frames(12)
 	var proof: Dictionary = {"id": animal_id, "identity": source_identity, "body": source_body, "members": members_before,
 		"record": d2.controller.record(animal_id), "food": tribe.village()["stock"]["food"]}
 	_expect(Atomic.write(proof_path, proof, false) == OK, "Cannot save restart assertions")

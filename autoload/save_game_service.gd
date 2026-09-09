@@ -395,6 +395,9 @@ func _write_slot_copy(source: Dictionary, title: String, kind: String) -> String
 	for event: Dictionary in campaign["recent_events"]:
 		if str(event.get("campaign_id", "")) == old_identity:
 			event["campaign_id"] = campaign["id"]
+	for body: Dictionary in campaign["bodies"].values():
+		if body.has(Animals.FIELD):
+			body[Animals.FIELD]["registry"]["campaign_id"] = campaign["id"]
 	if data["progression"].get("tribal", {}).get("campaign_id", "") == old_identity:
 		data["progression"]["tribal"]["campaign_id"] = campaign["id"]
 	data.erase("slot_history")
