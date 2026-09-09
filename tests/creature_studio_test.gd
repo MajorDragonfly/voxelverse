@@ -180,7 +180,9 @@ func _check_cubic_faces(mesh: ArrayMesh) -> void:
 		var grid: Vector3 = vertices[index] / step
 		aligned = aligned and grid.distance_to(grid.round()) < 0.0001
 		var normal: Vector3 = normals[index]
-		flat = flat and is_equal_approx(normal.abs().x + normal.abs().y + normal.abs().z, 1.0) and normal == normal.round()
+		# Godot packs normals into octahedral 16-bit values. Reading the mesh
+		# back introduces tiny off-axis errors even for exact unit-axis input.
+		flat = flat and normal.round().length_squared() == 1.0 and normal.distance_to(normal.round()) < 0.0001
 		flat = flat and colors[index].is_equal_approx(colors[index - index % 4])
 	for index in range(0, indices.size(), 3):
 		var a: int = indices[index]
