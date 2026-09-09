@@ -32,9 +32,9 @@ Diese Übersicht beruht auf Lars' aktueller Aufteilung und veröffentlichten Rep
 
 Vorgesehene eigene Dateien: `ui/behavior_skill_tree.gd`, bei Bedarf eine eigene Szene sowie `tests/behavior_skill_tree_test.gd`. `ui/progression_hud.gd` ist der zu prüfende Anschluss; im geprüften Stand der PRs #12 und #13 wird diese Datei nicht verändert. Eine vollständige Integrationsprüfung einschließlich PR #11 und künftiger Commits steht noch aus.
 
-## Anschließend: Entdeckungsbuch
+## Ebenfalls umgesetzt: Entdeckungsbuch
 
-Vorhandene Arten- und Regionsentdeckungen lesbar durchsuchen und zugehörige Freischaltungen anzeigen. Nur tatsächlich gespeicherte Daten verwenden; unbekannte Lebensräume, Eigenschaften oder Beziehungen nicht erfinden. Zusätzliche dauerhafte Datenfelder erst mit der Speichergrundlage abstimmen.
+Vorhandene Arten- und Regionsentdeckungen sind durchsuchbar; Körperteilfreischaltungen werden als eigene Kategorie angezeigt. Die bisher nicht gespeicherte Zuordnung Art → Teil wird nicht erfunden. Das Buch zeigt höchstens 30 Einträge pro Seite und benötigt keine neuen dauerhaften Datenfelder.
 
 ## Grenzen und Zusammenführung
 
@@ -46,4 +46,6 @@ Vor Integration die aktuellen Branchköpfe und Dateiunterschiede erneut prüfen,
 
 ## Status
 
-Arbeitszweig und Zuständigkeit eingerichtet. Die Repository-Grundlage und veröffentlichten Dateiumfänge wurden geprüft. **In dieser Einrichtung wurden noch keine Gameplay- oder UI-Dateien geändert.** Der nächste Umsetzungsschritt ist die Skilltree-Oberfläche gemäß obigem Paket. Für diese reine Dokumentationsänderung ist kein neuer Spieltest erforderlich.
+**Technisch und grafisch geprüft, manueller Spieltest offen.** Skilltree, HUD-Anschluss und Entdeckungsbuch sind auf Codecommit `7a1d1ba35b7340bdb4e505a0b1b360e93928196f` umgesetzt. [Bedienung, Nachweise und Grenzen](PLAYER_PROGRESSION_UI.md). Die Tests gegen exportierte Spieldaten sind in `tools/validate_export.py` ergänzt; bei Integration dessen Testliste und README mit dem Planetenbranch gemeinsam erhalten.
+
+Die tatsächlichen Punktequellen und Gameplay-Boni bleiben das nächste fachliche Paket. Der Stand wird über [PR #14](https://github.com/MajorDragonfly/voxelverse/pull/14) bereitgestellt; die beiden anderen Arbeitsbranches und `main` wurden nicht verändert.
