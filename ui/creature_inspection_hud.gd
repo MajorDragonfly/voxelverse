@@ -122,6 +122,8 @@ func _show_target(target: Node) -> void:
 		return
 
 	var data: Dictionary = target.call("get_inspection_data")
+	if not data.is_empty() and _player.has_signal("guidance_action"):
+		_player.emit_signal("guidance_action", "inspect", 1.0)
 	var distance: float = 0.0
 	if target is Node3D and _player is Node3D:
 		distance = (

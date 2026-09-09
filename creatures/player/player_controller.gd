@@ -5,6 +5,7 @@ signal died
 signal respawned
 signal gameplay_message(text: String)
 signal creature_attacked(target: Node, damage: float)
+signal guidance_action(action: String, value: float)
 
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
@@ -95,6 +96,7 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		var previous_rotation: Vector3 = camera_pivot.rotation
 		var settings := get_node_or_null("/root/DisplaySettings")
 		var motion: Vector2 = event.screen_relative * mouse_sensitivity
 		if settings != null and settings.has_method("camera_motion"):
@@ -106,6 +108,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			deg_to_rad(minimum_camera_angle),
 			deg_to_rad(maximum_camera_angle)
 		)
+		guidance_action.emit("look", camera_pivot.rotation.distance_to(previous_rotation))
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if event is InputEventMouseButton:
@@ -137,6 +140,8 @@ func _physics_process(delta: float) -> void:
 	velocity.z = direction.z * move_speed
 
 	var grounded_before_move: bool = is_on_floor()
+	var position_before_move: Vector3 = global_position
+	var jumped: bool = false
 	_update_water_movement(delta)
 	if is_swimming:
 		velocity.x *= 0.62
@@ -145,6 +150,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0.0
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_velocity
+			jumped = true
 	else:
 		velocity.y -= fall_acceleration * delta
 
@@ -156,6 +162,11 @@ func _physics_process(delta: float) -> void:
 	if grounded_before_move and velocity.y <= 0.0 and not is_swimming:
 		_attempt_step_up(delta)
 	move_and_slide()
+	var traveled: Vector3 = global_position - position_before_move
+	if input_vector.length_squared() > 0.0:
+		guidance_action.emit("move", Vector2(traveled.x, traveled.z).length())
+	if jumped and traveled.y > 0.001 and velocity.y > 0.0:
+		guidance_action.emit("jump", 1.0)
 	if is_on_floor() and not is_swimming:
 		apply_floor_snap()
 

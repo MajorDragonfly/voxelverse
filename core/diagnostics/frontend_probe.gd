@@ -77,6 +77,7 @@ func _run() -> void:
 		motion.relative = Vector2(8, 4)
 		get_viewport().push_input(motion, true)
 		_expect(is_equal_approx(player.camera_pivot.rotation.y - old_rotation.y, -8.0 * player.mouse_sensitivity * 1.5) and is_equal_approx(player.camera_pivot.rotation.x - old_rotation.x, 4.0 * player.mouse_sensitivity * 1.5), "Player camera did not use the saved sensitivity/inversion: %s -> %s; mouse mode %d." % [old_rotation, player.camera_pivot.rotation, Input.mouse_mode])
+	await _exercise_first_steps(player)
 	_expect(saves.save_now(), "In-game save failed.")
 	await _frames(2)
 	_expect(flow.get_node("SaveFeedback").visible and flow.get_node("SaveFeedback")._label.text.contains("Gespeichert"), "In-game save confirmation was not visible.")
@@ -154,8 +155,117 @@ func _run() -> void:
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():
-		print("FRONTEND_PASSED: title, no idle save, actual settings clicks, seed validation, loading, pause nesting, save status, failed save retention, world teardown, campaign isolation, thumbnails, rename, independent copies, selected history recovery, reload and backup/version handling.")
+		print("FRONTEND_PASSED: title, settings, seed validation, loading, first-steps actions/help/skip/restart, pause nesting, save status, failed save retention, world teardown, campaign isolation, thumbnails, rename, independent copies, selected history recovery, reload and backup/version handling.")
 	tree.quit(0 if failures.is_empty() else 1)
+
+func _exercise_first_steps(player: Node) -> void:
+	var flow: Node = get_node("/root/SessionFlow")
+	var saves: Node = get_node("/root/SaveGameService")
+	var guide: Node = flow.get_node("FirstSteps")
+	_expect(guide.visible and saves.guidance.current_step() == "look", "Fresh adventure did not show the first-steps card.")
+	_expect(guide.hint("move").contains("Pfeil ↑"), "Guide did not display the remapped movement key.")
+	_expect(guide.hint("inspect").contains("R"), "Guide did not display the remapped inspection key.")
+	await _capture("first_steps")
+	_key(KEY_ESCAPE)
+	await _frames(2)
+	_click(flow._overlay.find_child("PauseFirstSteps", true, false))
+	await _frames(2)
+	var paused_progress: Dictionary = saves.guidance.export_state()
+	player.guidance_action.emit("move", 50.0)
+	_expect(not guide.visible and saves.guidance.export_state() == paused_progress, "Paused play advanced or showed the guide.")
+	await _capture("first_steps_help")
+	_click(flow._overlay.find_child("SkipFirstSteps", true, false))
+	await _frames(2)
+	_expect(not flow.pause_open and not guide.visible and bool(saves.guidance.data.skipped), "Skip did not resume and hide the introduction.")
+	await _restart_first_steps(flow)
+	_expect(guide.visible and saves.guidance.completed_count() == 0, "Restart did not reset only the introduction.")
+	var home_position: Vector3 = player.global_position
+	var home_camera: Vector3 = player.camera_pivot.rotation
+	# An invisible physics fixture makes movement/jump acceptance independent
+	# of terrain streaming and the procedural shoreline around the spawn.
+	var ground := StaticBody3D.new()
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(20, 1, 20)
+	shape.shape = box
+	ground.add_child(shape)
+	get_tree().current_scene.add_child(ground)
+	var water: float = get_node("/root/WorldGenerator").get_water_level(home_position.x, home_position.z)
+	ground.global_position = Vector3(home_position.x, maxf(home_position.y + 1.0, water + 4.0), home_position.z)
+	player.global_position = ground.global_position + Vector3(0, 1.5, 0)
+	player.velocity = Vector3.ZERO
+	if DisplayServer.get_name() != "headless":
+		var motion := InputEventMouseMotion.new()
+		motion.screen_relative = Vector2(190, 0)
+		motion.relative = motion.screen_relative
+		get_viewport().push_input(motion, true)
+		_expect(saves.guidance.done("look"), "Actual camera movement did not complete looking around.")
+	for frame in range(240):
+		if player.is_on_floor():
+			break
+		await get_tree().physics_frame
+	_expect(saves.guidance.amount("move") == 0.0 and not saves.guidance.done("jump"), "Falling/landing completed walking or jumping.")
+	_hold_key(KEY_UP, true)
+	for frame in range(120):
+		await get_tree().physics_frame
+		if saves.guidance.done("move"):
+			break
+	_hold_key(KEY_UP, false)
+	_expect(saves.guidance.done("move"), "Real movement on the remapped key did not complete walking.")
+	for frame in range(180):
+		if player.is_on_floor():
+			break
+		await get_tree().physics_frame
+	await _frames(2)
+	await _capture("first_steps_jump")
+	_hold_key(KEY_SPACE, true)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	_hold_key(KEY_SPACE, false)
+	_expect(saves.guidance.done("jump"), "A real grounded jump did not complete the jump task.")
+	var radius: float = player.inspection_radius
+	player.inspection_radius = 0.01
+	_key(KEY_R)
+	await _frames(2)
+	_expect(not saves.guidance.done("inspect"), "Opening an empty inspection completed the creature task.")
+	player.inspection_radius = radius
+	# Use an actual spawned creature with its real inspection data; position
+	# it nearby so acceptance does not depend on procedural spawn direction.
+	var creature: Node3D
+	for frame in range(180):
+		creature = get_tree().get_first_node_in_group(&"wildlife") as Node3D
+		if creature != null:
+			break
+		await get_tree().physics_frame
+	if creature != null:
+		creature.global_position = player.global_position + Vector3(1.5, 0, 0)
+	await _frames(3)
+	_expect(saves.guidance.done("inspect"), "Displaying real nearby creature data did not complete inspection.")
+	ground.queue_free()
+	player.global_position = home_position
+	player.velocity = Vector3.ZERO
+	player.camera_pivot.rotation = home_camera
+	await _frames(2)
+	if DisplayServer.get_name() != "headless":
+		_expect(saves.guidance.completed_count() == 4 and guide.visible, "All four actions did not show the completion message.")
+	await _capture("first_steps_complete")
+	_key(KEY_R)
+	await _restart_first_steps(flow)
+
+func _restart_first_steps(flow: Node) -> void:
+	_key(KEY_ESCAPE)
+	await _frames(2)
+	_click(flow._overlay.find_child("PauseFirstSteps", true, false))
+	await _frames(2)
+	_click(flow._overlay.find_child("RestartFirstSteps", true, false))
+	await _frames(2)
+
+func _hold_key(code: Key, pressed: bool) -> void:
+	var event := InputEventKey.new()
+	event.keycode = code
+	event.physical_keycode = code
+	event.pressed = pressed
+	Input.parse_input_event(event)
 
 func _exercise_save_browser(original: String) -> void:
 	var tree := get_tree()

@@ -27,6 +27,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().scene_changed.connect(_scene_changed)
 	add_child.call_deferred(preload("res://ui/frontend/save_feedback.gd").new())
+	add_child.call_deferred(preload("res://ui/frontend/first_steps.gd").new())
 
 func enter_frontend() -> void:
 	managed = true
@@ -178,6 +179,7 @@ func _show_pause() -> void:
 	Style.button(_content, "Spiel speichern", _save, "SaveGame")
 	Style.button(_content, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "PauseSettings")
 	Style.button(_content, "Steuerung", _show_help, "PauseControls")
+	Style.button(_content, "Erste Schritte", _show_first_steps, "PauseFirstSteps")
 	Style.button(_content, "Speichern & zum Hauptmenü", return_to_title, "ReturnToTitle")
 	Style.button(_content, "Speichern & beenden", request_quit, "QuitGame")
 	_message = Style.paragraph(_content, "", 18)
@@ -187,6 +189,12 @@ func _show_help() -> void:
 	_prepare_overlay()
 	Style.label(_content, "STEUERUNG", 32, Style.ACCENT)
 	Style.paragraph(_content, controls_text(), 22)
+	var back := Style.button(_content, "Zurück zur Pause", _show_pause, "BackToPause")
+	back.grab_focus()
+
+func _show_first_steps() -> void:
+	_prepare_overlay()
+	get_node("FirstSteps").build_help(_content)
 	var back := Style.button(_content, "Zurück zur Pause", _show_pause, "BackToPause")
 	back.grab_focus()
 

@@ -39,6 +39,7 @@ var _slot_preview: Dictionary = {}
 var _slot_origin: Dictionary = {}
 var _save_reason: String = "manual"
 var last_saved_unix_time: int = 0
+var guidance := preload("res://core/onboarding_progress.gd").new()
 
 
 func _ready() -> void:
@@ -102,6 +103,7 @@ func save_now(custom_path: String = "") -> bool:
 		"migration_report": last_migration_report.duplicate(),
 		"slot_preview": _slot_preview.duplicate(true) if int(_slot_preview.get("world_seed", 0)) == _get_world_seed() else {},
 		"slot_origin": _slot_origin.duplicate(true),
+		"onboarding": guidance.export_state(),
 	}
 	_annotate_world_state(save_data)
 	var problem: String = _validate_save(save_data)
@@ -185,6 +187,7 @@ func load_now(custom_path: String = "") -> bool:
 	slot_name = str(data.get("slot_name", "Bisheriges Abenteuer"))
 	_slot_preview = _dict(data.get("slot_preview", {}))
 	_slot_origin = _dict(data.get("slot_origin", {}))
+	guidance.import_state(data.get("onboarding"))
 	last_saved_unix_time = int(data.get("saved_unix_time", 0))
 	_design_snapshot_active = true
 	_write_blocked = false
@@ -409,6 +412,7 @@ func create_slot(title: String, seed_value: int = 0) -> String:
 	_design_snapshot_active = true
 	_design_files.clear()
 	slot_name = title.strip_edges().left(48)
+	guidance.reset(true)
 	if slot_name.is_empty():
 		slot_name = "Mein Abenteuer"
 	save_path = path
@@ -635,6 +639,7 @@ func reset_runtime_for_new_game() -> void:
 	_slot_preview.clear()
 	_slot_origin.clear()
 	last_saved_unix_time = 0
+	guidance.reset()
 
 
 func clear_save() -> bool:
