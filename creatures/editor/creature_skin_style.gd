@@ -11,7 +11,6 @@ const PALETTES: Array[Dictionary] = [
 	{"name": "Dämmerung", "base_color": "987bb4", "accent_color": "413d6e", "belly_color": "dcc5d1", "eye_color": "8ed2ac", "horn_color": "ece4d4"},
 	{"name": "Polar", "base_color": "d4e4dd", "accent_color": "667e90", "belly_color": "f2ead8", "eye_color": "4eadd0", "horn_color": "424956"},
 ]
-static var _textures: Dictionary = {}
 
 
 static func normalize(blueprint: Dictionary) -> void:
@@ -43,9 +42,12 @@ static func apply(material: StandardMaterial3D, blueprint: Dictionary) -> void:
 
 
 static func texture(kind: String, strength: float) -> ImageTexture:
-	var key: String = "%s:%.2f" % [kind, strength]
-	if _textures.has(key):
-		return _textures[key]
+	strength = snappedf(clampf(strength, 0.0, 1.0), 0.05)
+	# Native resource-cache entries live only as long as a material uses them.
+	# A static script dictionary retains this script during resource-only loads.
+	var path: String = "res://creatures/generated/skin_%s_%02d.tres" % [kind, roundi(strength * 20.0)]
+	if ResourceLoader.has_cached(path):
+		return ResourceLoader.load(path) as ImageTexture
 	var image := Image.create(64, 64, false, Image.FORMAT_RGB8)
 	for y in range(64):
 		for x in range(64):
@@ -66,7 +68,5 @@ static func texture(kind: String, strength: float) -> ImageTexture:
 					mark = 0.50 if y % 16 < 2 or posmod(x + (y / 16) * 8, 16) < 1 else 0.05 * grain
 			image.set_pixel(x, y, Color.WHITE.darkened(mark * strength))
 	var result: ImageTexture = ImageTexture.create_from_image(image)
-	if _textures.size() >= 32:
-		_textures.clear()
-	_textures[key] = result
+	result.take_over_path(path)
 	return result

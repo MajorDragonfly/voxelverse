@@ -137,6 +137,13 @@ func _check_stance(pairs: int) -> void:
 
 
 func _check_skin_and_storage() -> void:
+	var first: ImageTexture = SkinStyle.texture("scales", 0.5)
+	var second: ImageTexture = SkinStyle.texture("scales", 0.5)
+	_expect(first == second, "Identical skin tiles were uploaded twice.")
+	var reference: WeakRef = weakref(first)
+	first = null
+	second = null
+	_expect(reference.get_ref() == null, "Unused skin texture remained resident after its owners were freed.")
 	var blueprint: Dictionary = Assembly.create_default()
 	var vertices: PackedVector3Array = Surface.build_skin(blueprint).surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
 	var stats: Dictionary = Blueprint.calculate_stats(blueprint)
