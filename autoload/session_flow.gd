@@ -1,5 +1,6 @@
 extends Node
 
+const Text = preload("res://core/localization/ui_text.gd")
 signal menu_error(message: String)
 signal world_started
 
@@ -22,10 +23,12 @@ var _loading_scene: bool = false
 var _player: Node
 var _player_mode: int = Node.PROCESS_MODE_INHERIT
 var _resume_focus: Control
+var _help_label: Label
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().scene_changed.connect(_scene_changed)
+	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
 	var args := OS.get_cmdline_user_args()
 	if "--runtime-exit-frames" in args:
 		var index: int = args.find("--runtime-exit-frames")
@@ -179,7 +182,8 @@ func _show_pause() -> void:
 	_prepare_overlay()
 	Style.label(_content, "VOXELVERSE", 37, Style.ACCENT)
 	Style.label(_content, "Eine kurze Pause.", 26)
-	Style.paragraph(_content, get_node("/root/SaveGameService").slot_name, 19)
+	var slot_label := Style.paragraph(_content, get_node("/root/SaveGameService").slot_name, 19)
+	slot_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_resume_focus = Style.button(_content, "Weiterspielen", resume, "ResumeGame", true)
 	Style.button(_content, "Spiel speichern", _save, "SaveGame")
 	Style.button(_content, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "PauseSettings")
@@ -193,7 +197,7 @@ func _show_pause() -> void:
 func _show_help() -> void:
 	_prepare_overlay()
 	Style.label(_content, "STEUERUNG", 32, Style.ACCENT)
-	Style.paragraph(_content, controls_text(), 22)
+	_help_label = Style.paragraph(_content, controls_text(), 22)
 	var back := Style.button(_content, "Zurück zur Pause", _show_pause, "BackToPause")
 	back.grab_focus()
 
@@ -311,11 +315,15 @@ func _prepare_overlay() -> void:
 
 func controls_text() -> String:
 	var preferences = preload("res://core/input_preferences.gd")
-	return "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen" % [
+	return Text.text("%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen") % [
 		preferences.binding_label("move_forward"), preferences.binding_label("move_back"),
 		preferences.binding_label("move_left"), preferences.binding_label("move_right"),
 		preferences.binding_label("jump"), preferences.binding_label("inspection_mode"),
 		preferences.binding_label("primary_action"), preferences.binding_label("bite_action")]
+
+func _language_changed(_locale: String) -> void:
+	if is_instance_valid(_help_label):
+		_help_label.text = controls_text()
 
 
 func _smoke_exit(frames: int) -> void:
