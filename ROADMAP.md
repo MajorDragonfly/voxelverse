@@ -2,16 +2,19 @@
 
 Stand: 9. September 2026 · Zusammenführung der sieben Arbeitsstränge. Die konkreten Quellstände stehen in [Integrationsquellen](docs/integration-sources-2026-09-09.json), gemeinsame Prüfungen und Grenzen im [Integrationsbericht](docs/INTEGRATION_2026-09-09.md). Ältere Berichte beschreiben ihre damaligen Einzelstände; diese Roadmap ist die aktuelle Planung. Ein vorhandener Prototyp zählt nicht als abgeschlossene Spielphase.
 
+**Planungsergänzung vom 9. September 2026:** Eier liefernde Nutztiere und ein vollständiger Überarbeitungspass des Körperteilkatalogs mit einzeln kombinierbaren Tierformen sind aufgenommen. Die konkreten To-dos, Abhängigkeiten und Abnahmekriterien stehen im [Ideen- und Aufgabenbacklog](docs/FEATURE_BACKLOG.md). Alle neuen Punkte sind **geplant**; die Ergänzung verändert keine bisherigen Implementierungs- oder Testnachweise.
+
 ## Verbindliches Zielbild
 
 **Kreatur → Stammeszeitalter → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum.** Dieselbe selbst gestaltete Spezies entwickelt sich durch die gesamte Kampagne. Das Spiel orientiert sich funktional an Spore und behält seine feine Voxeloptik.
 
 - **Nur die eigene Spezies steigt zur gesellschaftlichen Entwicklung auf.** Ein Phasenwechsel betrifft die Spielerzivilisation, nicht sämtliche Arten des Planeten. Wildarten werden weder durch Zeitablauf noch durch Zähmung zu Stämmen, Menschenersatz oder Kulturfraktionen. Verschiedene spätere Stämme/Reiche können zur eigenen Spezies gehören; Spezies und Fraktion sind getrennte Identitäten. Automatisch aufsteigende fremde Spezies sind kein Ziel dieser Roadmap.
 - **Jeder Epochenwechsel wird ausdrücklich bestätigt.** Für den ersten Wechsel lautet die Aktion „Jetzt ins Stammeszeitalter fortschreiten“. Danach wird die Gruppe gesteuert. Nestgefährten bleiben davor Teil der Kreaturenphase. Öffnen eines Menüs oder Erreichen eines Punktestands darf keinen Wechsel auslösen.
-- **Ab dem Stammeszeitalter werden andere Tierarten zähmbar.** Jeder Planet mit einer geeigneten Tierwelt stellt verlässlich Milchtiere, Zug-/Reittiere und hundeartige Begleiter bereit. Die Arten sehen pro Planet unterschiedlich aus und tragen ihre Eignung bereits in den Generatordaten. Lebenslose Körper, Sterne und Gasriesen bekommen keine künstliche Landtierpopulation; die Garantie gilt für belebte Spielplaneten.
+- **Ab dem Stammeszeitalter werden andere Tierarten zähmbar.** Jeder Planet mit einer geeigneten Tierwelt stellt verlässlich Milchtiere, eierlegende Nutztiere, Zug-/Reittiere und hundeartige Begleiter bereit. Die Arten sehen pro Planet unterschiedlich aus und tragen ihre Eignung bereits in den Generatordaten. Lebenslose Körper, Sterne und Gasriesen bekommen keine künstliche Landtierpopulation; die Garantie gilt für belebte Spielplaneten.
 - Die eigene Spezies, ihre ID, Entwürfe, Bewohner, Heimat, Besitz, Entdeckungen, gezähmten Tiere und Entscheidungen bleiben über Stamm, Mittelalter und Neuzeit erhalten. Kulturelle/technische Entwicklung ersetzt keinen Genom- oder Mutationssimulator. Umbauten der Kreatur nach dem Aufstieg benötigen später eine ausdrückliche Spielregel.
 - Planeten sind kugelförmige Körper in realen Größen ihrer Körperklasse. Terra mit 12.742 km Durchmesser ist die große technische Referenz. Kleine Laborkörper bleiben schnelle Prüffälle. Nahterrain und Orbit verwenden dieselbe Weltquelle.
 - Eine darstellbare und bereisbare Galaxie mit reproduzierbaren Sternsystemen, Planeten, Monden sowie Ein-/Doppelsternen bleibt Ziel der Weltraumphase. Katalog und Laborbesuche sind dafür Grundlagen, noch kein Raumflug.
+- Der Kreatureneditor erhält einen erweiterbaren Baukasten erkennbarer, einzeln wählbarer Körperteile nach realen Tieren. Alle bestehenden Teile werden auf Überarbeitung oder kompatiblen Ersatz geprüft; Mund-/Kopfformen, Hände/Greifer und Füße bilden die erste Lieferung. Unterschiedliche Tierformen bleiben frei kombinierbar, soweit ihre Anschlüsse passen; alte Entwürfe und Freischaltungen bleiben erhalten.
 - Kreaturen-, Gebäude-, Fahrzeug- und Schiffeditor teilen ein Bauplanfundament und erhalten jeweils passende Regeln. Verhalten verdient getrennte soziale/aggressive Punkte; Technikforschung und Tierhaltung werden nicht ausschließlich durch Kampf freigeschaltet.
 - Alte Spielstände und Entwürfe bleiben geschützt. Keine ungefragte Neugenerierung alter Landschaften oder Tierarten; Änderungen erhalten Versionen, Migration und Rückfallmöglichkeit.
 
@@ -23,7 +26,7 @@ Die folgenden Pakete sind im gemeinsamen Quellstand enthalten. „Enthalten“ e
 |---|---|---|
 | Welt, Wasser, Landschaft | Voxelterrain, Flora-LOD/Fernwald, Kollisionen, Flüsse/Seen mit örtlichem Wasserspiegel, Schwimmgrundlage, Unterwasseransicht | Ziel-PC-Framezeiten, Nachladespitzen, echte Flora/Fauna auf Kugelterrain |
 | Planeten und Galaxie | Adaptive Kugeln bis Erdgröße, radiale Physik, begrenztes Streaming, Detailüberblendung, Ein-/Doppelsterne; Katalogbesuche und gespeicherte Orte | Produktive Kampagnenanbindung, Karte, Raumflug, Kolonien; Labor und Kampagne sind weiterhin getrennte Oberflächenmodi |
-| Kreaturenwerkstatt | Feiner Voxelbau, Körper-/Gelenkgriffe, Drehung und Größe, Symmetrie/Mittelachse, Hände/Füße, Hautmuster/Farben, Bewegungstest | Extreme Körperformen, freie Gelenkketten, Wasser-/Flugbewegung, vollständige funktionale Anatomie |
+| Kreaturenwerkstatt | Feiner Voxelbau, Körper-/Gelenkgriffe, Drehung und Größe, Symmetrie/Mittelachse, Hände/Füße, Hautmuster/Farben, Bewegungstest | Überarbeitung aller Körperteile mit einzeln wählbaren Tierformen (M3-TEILE), extreme Körperformen, freie Gelenkketten, Wasser-/Flugbewegung, vollständige funktionale Anatomie |
 | Entwicklung | Soziale/aggressive Kreaturenpunkte, sechs Knoten, wirkende Kreaturenboni, phasengetrennte Ansichten, Entwicklungspfad und Vermächtnis | Verdienste/Knoten der Stammesphase, Verteidigung bei echtem Gruppenkampf, späterer Technikbaum |
 | Sozialspiel | Befreunden, Helfen, Kampf, gespeicherte Beziehungen, Schutz vor doppelten Belohnungen und künstlichen Heilungskreisläufen | Rekrutierung/Zähmung klar trennen; soziale Kontakte ersetzen keinen erforderlichen Artenscan |
 | Tierwelt | Sichtkontakt, Warnung, begrenzte Verfolgung, Flucht, Herdenabstand, Hindernis-/Klippenprüfung; gespeicherter Hunger und Durst, Beeren- und sichere Ufersuche | Jagd zwischen Wildtieren, globale Navigation, aktive Ökologie nach Stammesbeginn, feste planetare Tierrollen |
@@ -44,7 +47,7 @@ Universum → Galaxie → Sektor → System → Himmelskörper → Oberflächenr
 
 Die bisherige Kampagne bleibt `legacy_plane_v9`, bis ein eigener Migrations-/Neuweltablauf geprüft ist. Fauna, Häuser, Audio, Reiter und Pflüge dürfen beim Kugelausbau nicht dauerhaft Welt-Y als „oben“ voraussetzen. Ein begrenzter Weltadapter muss das gemeinsam lösen. Die gesamte alte Ebene lässt sich nicht verlustfrei auf einen endlichen Planeten übertragen; dafür wird kein stilles Versprechen gegeben.
 
-Nahe Objekte verwenden Physik/Animation, entfernte Gruppen vereinfachte Zustände, entfernte Regionen Vorräte/Populationen. Es gibt genau einen zuständigen Simulationsbesitzer; sichtbare Jagd, Milchproduktion oder Transport werden nicht noch einmal abstrakt abgerechnet. Die Zahl aktiver Objekte bleibt begrenzt. Kampagnenzeit zählt bei Pause und geschlossenem Spiel nicht weiter, sofern später keine ausdrückliche Offline-Regel beschlossen wird.
+Nahe Objekte verwenden Physik/Animation, entfernte Gruppen vereinfachte Zustände, entfernte Regionen Vorräte/Populationen. Es gibt genau einen zuständigen Simulationsbesitzer; sichtbare Jagd, Milch-/Eierproduktion oder Transport werden nicht noch einmal abstrakt abgerechnet. Die Zahl aktiver Objekte bleibt begrenzt. Kampagnenzeit zählt bei Pause und geschlossenem Spiel nicht weiter, sofern später keine ausdrückliche Offline-Regel beschlossen wird.
 
 ### Phasenwechsel und eigene Spezies
 
@@ -54,7 +57,7 @@ Voraussetzungen prüfen → Folgen anzeigen → bestätigen → vollständigen Z
 
 ### Punkte, Technik und Belohnungen
 
-Punkte kommen aus abgeschlossenen, identifizierbaren Spielereignissen. Käufe, Vermächtnis und Wirkungen bleiben nach Laden einmalig. Alte Kreaturenpunkte bleiben im Kreaturenbaum, Stammespunkte im Stammesbaum. Wiederholtes Füttern/Melken/Pflügen darf keine endlose Sozialpunktmaschine werden. Neue gesellschaftliche Meilensteine und echte Kooperation sind bessere Punktequellen als einzelne Produktionsklicks. Körperwerte, Ausrüstung, Technik und Vermächtnis werden begrenzt und nachvollziehbar kombiniert.
+Punkte kommen aus abgeschlossenen, identifizierbaren Spielereignissen. Käufe, Vermächtnis und Wirkungen bleiben nach Laden einmalig. Alte Kreaturenpunkte bleiben im Kreaturenbaum, Stammespunkte im Stammesbaum. Wiederholtes Füttern/Melken/Eiersammeln/Pflügen darf keine endlose Sozialpunktmaschine werden. Neue gesellschaftliche Meilensteine und echte Kooperation sind bessere Punktequellen als einzelne Produktionsklicks. Körperwerte, Ausrüstung, Technik und Vermächtnis werden begrenzt und nachvollziehbar kombiniert.
 
 ## Neu: planetare Tierrollen und Zähmung
 
@@ -63,16 +66,19 @@ Punkte kommen aus abgeschlossenen, identifizierbaren Spielereignissen. Käufe, V
 | Rolle | Mindestfunktion | Erforderliche Artmerkmale | Spielbarer Nachweis |
 |---|---|---|---|
 | Milchtier | Regelmäßig Milch als nutzbare Nahrung liefern | `milk`, zähmbar, Nahrung/Wasser, Produktionsintervall und -menge, geeigneter Körperplan | Tier zähmen, halten und versorgen; Milch zum Lager bringen; Pause/Laden erzeugt keine Doppelernte |
+| Eierlieferndes Nutztier | Regelmäßig sammelbare Eier als Nahrung liefern | Geplante Rolle `eggs`, zähmbar, Nahrung/Wasser, Legestelle, Produktionsintervall/-menge; endgültige Feldnamen und Einheiten durch D1-EIER | Tier zähmen und versorgen → Eier an Legestelle erzeugen → sammeln → zum gemeinsamen Lager transportieren → verbrauchen; Pause/Laden/Nachladen erzeugen keine Doppelernte |
 | Zugtier | Mit Geschirr/Pflug einen Acker bearbeiten | `draught`, Zugkraft, Ausdauer, Größe, Bodenbewegung, Geschirr-Anbindung | Tier und Arbeitsgerät gemeinsam zum Feld führen; tatsächlich gepflügte Fläche verbessert Landwirtschaft |
 | Reittier | Bewohner auf dem Rücken tragen und bewegen | `riding`, Traglast, Reittempo, Ausdauer, passender Rücken-/Sattelsitz | Auf-/Absteigen, verständliche Reitersteuerung, sichere Bewegung/Kollision, Laden ohne verschwundenen Reiter |
 | Hundeartiger Begleiter | Folgen, Warten, Heimkehren und später Wachen/Hüten | `companion`, Lernfähigkeit, Bindung, Wahrnehmung, Sozialverträglichkeit | Ein gezähmtes Individuum folgt zuverlässig, bleibt zu Hause und erhält seine Befehle über einen Neustart |
 
-Mindestens **drei unterschiedliche geeignete Arten je belebtem Spielplaneten**: eine Milchtierart, eine robuste Zug-/Reittierart und eine hundeartige Begleiterart. Zug- und Reitfähigkeit können bei derselben Art liegen; zusätzliche Spezialisten sind möglich. Vier Fähigkeiten sind nicht vier zwingend getrennte Arten. Ein Artprofil kann mehrere passende Rollen tragen, aber nicht jedes Tier bekommt alle Fähigkeiten.
+Das erweiterte Planungsziel umfasst mindestens **vier unterschiedliche geeignete Arten je belebtem Spielplaneten**: eine Milchtierart, eine eierliefernde Nutztierart, eine robuste Zug-/Reittierart und eine hundeartige Begleiterart. Die vierte Art ist die Einordnung des neuen Eierwunschs in die bestehende Planetengarantie. Zug- und Reitfähigkeit können bei derselben Art liegen; zusätzliche Spezialisten sind möglich. Fünf Fähigkeiten verlangen nicht fünf getrennte Arten. Ein Artprofil kann mehrere passende Rollen tragen, aber nicht jedes Tier bekommt alle Fähigkeiten.
+
+Der laufende D1-Grundvertrag mit drei Pflichtarten bleibt als eigene Lieferung prüfbar. **D1-EIER** erweitert ihn anschließend versioniert; vorhandene Arten-IDs, Tiere, Kataloge und Spielstände werden nicht neu ausgewürfelt. Eine alte Drei-Arten-Prüfung belegt noch nicht das erweiterte Vier-Arten-Ziel.
 
 ### Datenvertrag vor der Umsetzung
 
 1. Versionierter, deterministischer Artenkatalog pro Himmelskörper. Dieselbe Körper-ID, Generatorversion und Seedfolge ergeben dieselben Arten samt Rollen, unabhängig von Besuchsreihenfolge oder Chunk-Neuladen. Bestehende Kataloge werden gespeichert/migriert und nicht bei jedem Start neu ausgewürfelt.
-2. Geplante Rollenfelder: `domestication.roles`, `tameable`, `temperament`, `trainability`, `diet`, `water_need`, `strength`, `stamina`, `carry_capacity`, `milk_yield`, `milk_interval` sowie geeignete Reit-/Geschirr-Anschlüsse. Exakte Einheiten und Grenzen legt das Datenpaket D1 fest. Ökologischer Typ wie Pflanzenfresser bleibt von der Nutzungsrolle getrennt.
+2. Geplante Rollenfelder: `domestication.roles`, `tameable`, `temperament`, `trainability`, `diet`, `water_need`, `strength`, `stamina`, `carry_capacity`, `milk_yield`, `milk_interval` sowie geeignete Reit-/Geschirr-Anschlüsse. Exakte Einheiten und Grenzen legt das Datenpaket D1 fest. D1-EIER ergänzt die Eierrolle und Produktionsdaten in einer abgestimmten Vertragsrevision; Feldnamen, Intervalle, Mengen und Legestellenanforderungen sind bis dahin Planungsdaten. Ökologischer Typ wie Pflanzenfresser bleibt von der Nutzungsrolle getrennt.
 3. Planetare Garantie plus Habitatbezug: Ein Katalogeintrag allein genügt nicht. Mindestens eine Population jeder Pflichtrolle lebt in einem erreichbaren geeigneten Lebensraum. Spawnbegrenzung, Wiederbesuch, Wasser/Nahrung und Erhalt nach Jagd müssen einbezogen werden. Kein wissenschaftlicher Auftrag verlangt eine am Ort unmögliche Art.
 4. Individueller Haltungszustand: `object_id`, `species_id`, Körper/Ort, Besitzerfraktion, Vertrauen/Zähmfortschritt, Gesundheit, Hunger/Durst, Auftrag, Ausrüstung und produzierte/transportierte Ressourcen. Art-Eignung ist nicht dasselbe wie bereits gezähmt sein. Das Entdeckungsbuch zeigt zunächst Eignung; eigene Haltung zeigt das konkrete Tier.
 5. Zähmung beginnt erst in Phase 1 und prüft sichere Reichweite, Sicht, passende Nahrung, Kosten und Eignung. Unterbrechung, Flucht, Misserfolg, Tod und voller Stall/Bestand haben definierte Folgen. Nach Laden wird fortgesetzt; Befreunden in Phase 0 kann einen Vorteil geben, erzeugt jedoch noch kein Arbeitstier.
@@ -89,12 +95,15 @@ Mindestens **drei unterschiedliche geeignete Arten je belebtem Spielplaneten**: 
 | M1d | **Offen:** spielbare Kugelkampagne | M1b/M1c, gemeinsamer Oberflächenadapter | Spieler, Flora, Fauna, Haus, Wasser und Audio auf derselben radialen Oberfläche; Wiederbesuch; expliziter Altstandschutz |
 | M2A | Verhaltenspunkte, Käufe und Vermächtnis vorhanden | M0 | Erfolgreiche Aktionen geben einmal Punkte, Effekte wirken; gemischte Spielweisen bleiben erreichbar |
 | M2B | **Teilweise:** gemeinsame Editor-/Anatomieverträge | M1-Adressen, vorhandene Kreaturenwerkstatt | Stabile Revisionen, Anschlussdaten, Vorschau/Laufzeit; neue Rollen können Körperfähigkeiten auslesen |
-| M3 | Kreaturenwerkstatt ausgebaut | M2B | Zwei-/Vierbeiner und mehrere Beinpaare belastbar; Extremformen, Fußkontakt, Wasser/Flug bleiben weitere Arbeit |
+| M3 | Kreaturenwerkstatt ausgebaut; neuer Katalogpass offen | M2B | Zwei-/Vierbeiner und mehrere Beinpaare belastbar; Extremformen, Fußkontakt, Wasser/Flug bleiben weitere Arbeit |
+| M3-TEILE | **Geplant:** alle Körperteile prüfen und überarbeiten/kompatibel ersetzen; zuerst Mund-/Kopfformen, Hände/Greifer und Tierfüße | M2B-Anschlüsse, vorhandener Teilekatalog, gemeinsame Designvorgabe | Einzeloptionen und Kombinationen aus dem [Backlog](docs/FEATURE_BACKLOG.md) in Vorschau/Laufzeit erkennbar; Symmetrie, Drehung, Fußkontakt und alte Entwürfe erhalten |
 | M4 | Kreaturenspiel mit Scan, Forschung, Sozialspiel und Bedürfnis-KI vorhanden | M2/M3 | Zusammenhängender Ablauf; offene Tierjagd/Navigation/Ökologie und Tod/Erholung ergänzen |
 | M5 | Bestätigter Stammesbeginn und erster Dorfablauf vorhanden | Heimatgruppe, begehbarer Ort | Gleiche Spezies und drei Bewohner, sichere Übergabe, Transport/Werkzeug/Hütten/Garten; Speichern und Neustart |
-| D1 | **Neu, zuerst:** Art-Eignung und planetare Rollenverteilung | Stabile Spezies-/Körper-IDs | Milch-, Zug-/Reit- und Begleiterart deterministisch vorhanden und erreichbar; alte Arten behalten Identität |
+| D1 | **Neu, zuerst:** Art-Eignung und planetare Rollenverteilung; Grundvertrag für drei Arten | Stabile Spezies-/Körper-IDs | Milch-, Zug-/Reit- und Begleiterart deterministisch vorhanden und erreichbar; alte Arten behalten Identität |
+| D1-EIER | **Geplant:** Eierrolle als Erweiterung der planetaren Garantie | Geprüfter D1-Grundvertrag und versionierte Katalogmigration | Vierte geeignete Art deterministisch und erreichbar; bestehende Arten/Individuen bleiben erhalten; Mehr-Seed-/Neustartprüfung |
 | D2 | **Neu:** ein Tier zähmen und dauerhaft befehlen | D1, M5 | Eignung/Kosten/Phase prüfen; Tier folgt/wartet/kehrt zurück; Unterbrechung, Tod, Laden und Besitz geprüft |
 | D3 | **Neu:** Milch und dauerhafte Tierhaltung | D2, gemeinsame Dorfvorräte | Betreuung → Produktion → Transport → Verbrauch, keine Doppelernte; Futter/Wasser/Haltungskosten wirken |
+| D3-EIER | **Geplant:** Eier sammeln, transportieren und als Nahrung nutzen | D1-EIER, D2, gemeinsame D3-Haltungs-/Produktionsbasis und Dorfaufträge | Versorgung → Legestelle → Sammelauftrag → Lager → Verbrauch; genau ein Produktionsbesitzer, Save/Load und unterbrochener Transport ohne Verlust/Dopplung |
 | D4 | **Neu:** Reiten und Pflügen | D2, M2B, Feld-/Routenmodell | Passender Reitsitz, sichere Auf-/Abstiege; Zugtier mit Pflug bearbeitet reale Felder, Arbeitsfortschritt speicherbar |
 | M6 | **Teilweise:** tragfähiges Stammesdorf | M5, D1–D4 schrittweise | Erneuerbare Versorgung, Wasser, weitere Rohstoffe, Berufe, Wachstum, frei gebaute Häuser, Tiere und Nachbargruppen |
 | M7 | **Geplant:** Antike/Mittelalter | Belastbares M6 | Landwirtschaft, Handwerk, Lager/Transport/Handel, Wege und mehrere Siedlungen; eigene Spezies bleibt Träger aller Fraktionen; bestätigter Wechsel |
@@ -102,7 +111,7 @@ Mindestens **drei unterschiedliche geeignete Arten je belebtem Spielplaneten**: 
 | M9 | **Geplant:** Weltraum | M8, M1b/M1c/M1d | Start → Reise → Landung → versorgte Kolonie → Rückkehr, dann System-/Sektorreise und Galaxiekarte; begrenztes Streaming |
 | M10 | **Geplant:** Inhalt, Balancing und Veröffentlichung | Wiederholt spielbare Epochenkette | Verständlicher Einstieg, Niederlage/Erholung, Langzeitstände, Bedienbarkeit, Leistung und Ton auf Zielgerät abgenommen |
 
-D1–D4 sind Teil des Stammesausbaus, keine zusätzlichen Spielzeitalter. Die Weltraumphase bleibt Ziel; sie wird nicht parallel zu einer noch unvollständigen Dorfwirtschaft als halbfertige Spielschleife begonnen.
+D1–D4 einschließlich D1-EIER/D3-EIER sind Teil des Stammesausbaus, keine zusätzlichen Spielzeitalter. M3-TEILE gehört zur Kreaturenphase und wird auf den vorhandenen M2B-Anschlüssen aufgebaut; die Erstlieferung setzt weder Mittelalter noch Reiten/Pflügen voraus. Eierproduktion folgt der gemeinsamen Haltungsbasis und wartet nicht auf den vollständigen neuen Körperteilkatalog. Die Weltraumphase bleibt Ziel; sie wird nicht parallel zu einer noch unvollständigen Dorfwirtschaft als halbfertige Spielschleife begonnen.
 
 ## Fehlende Querschnittspunkte
 
@@ -112,7 +121,7 @@ D1–D4 sind Teil des Stammesausbaus, keine zusätzlichen Spielzeitalter. Die We
 | Fauna im Stammeszeitalter | Bedürfnis-/KI-Logik ist derzeit vielfach auf Phase 0 begrenzt; aktive Tiere für Phase 1 freigeben, ohne alte Spielerangriffe auf nur einen Bewohner zu reaktivieren | Vor D2 |
 | Gruppenkampf | Alle Gruppenmitglieder als gültige Ziele, Gesundheit/Tod/Abwehr und eindeutige Besitzregeln | Vor Verteidigungsvermächtnis/Nachbarkonflikten |
 | Tierverlust/Bestand | Ersatz, Fortpflanzung oder begrenzte Bestandserholung; keine softlocks durch Ausrottung einer Pflichtrolle | D1/D3, vor Langzeitkampagne |
-| Nahrungsketten | Gemeinsame Vorräte statt paralleler Doppelverbraucher; Jagen/Fressen/Abstraktion einmal abrechnen | M4/M6 |
+| Nahrungsketten | Gemeinsame Vorräte statt paralleler Doppelverbraucher; Jagen/Fressen/Milch/Eier/Abstraktion einmal abrechnen; Eierproduktion und Fortpflanzung getrennt führen | M4/M6, D3-EIER |
 | Navigation | Wege um neue Hindernisse wieder aufnehmen; geladene Grenzen, Wasser, Reiterhöhe und Pflugbreite berücksichtigen | M6/D4 |
 | Bauen | Editorentwurf mit Revision, Kosten, Baustelle, Eingang, Kollision und freiem Bauplatz verbinden | M6 |
 | Bevölkerung | Wohnraum, Versorgung, neue Bewohner/Arbeitskräfte, Namen und Rollen, ohne Neustart aus sichtbaren Nodes abzuleiten | M6 |
