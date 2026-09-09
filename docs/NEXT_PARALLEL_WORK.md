@@ -4,11 +4,33 @@ Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge er
 
 **Zuerst lesen:** [ROADMAP.md](../ROADMAP.md), [SPHERICAL_CAMPAIGN_MIGRATION.md](SPHERICAL_CAMPAIGN_MIGRATION.md), [VOXELVERSE_DESIGN.md](VOXELVERSE_DESIGN.md). Der vollständige Kugelumzug hat Vorrang vor neuen Epochen. Die belebte Kugelszene bleibt bis zur tatsächlichen Kampagnenintegration ein eigener Bereich.
 
+## Architekturprüfung: Aufträge vor dem Start konkret wählen
+
+Ergänzung vom 9. September 2026 auf geprüftem `main` `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7`: [Architekturbefunde](ARCHITECTURE_SCALABILITY_AUDIT.md) und [30 ausführbare Teilaufträge](ARCHITECTURE_BACKLOG.md) sind die zusätzliche Arbeitsgrundlage. Die folgenden fünf Stränge bleiben zuständig; ARCH-IDs zerlegen ihre Arbeit und sind keine konkurrierenden Neuentwicklungen. Vor Arbeitsbeginn aktuellen gemeinsamen Commit und gelieferte Pakete abgleichen. M1f ist in einem anderen Arbeitsstand bereits in Bearbeitung; dieses Audit bewertet ausschließlich veröffentlichten Code und startet diesen Auftrag nicht erneut.
+
+| Strang | Erster sinnvoller begrenzter Auftrag | Danach / Abhängigkeit |
+|---|---|---|
+| Integration / Datenkern | ARCH-01, dann ARCH-03: Datenbesitzer und Körperzugriff bündeln | ARCH-04/06/07; entwickelte Kopiermigration ARCH-12 erst mit fertigen Verbrauchern |
+| Kreaturen auf Kugeln | Laufendes M1f gegen ARCH-08 abgleichen | ARCH-09 nach gemeinsamem Ortsvertrag; Langzeitregister ARCH-14 nach Regionsspeicher |
+| Dorf auf Kugeln | ARCH-10: lokale Navigation/Fundamente radial | ARCH-11 mit ARCH-09; Controllerregeln ARCH-15 innerhalb derselben Zuständigkeit |
+| Leistung / dauerhafte Welt | ARCH-02: Messroute und Budgetinventar | ARCH-05 mit Oberflächenbesitzer; ARCH-13 mit Save-Besitzer; ARCH-16/17/18 nach ihren Vertragsabhängigkeiten |
+| UI / Inhalt / Verträge | ARCH-25 als ein klar begrenzter DE/EN-Bildschirm; ARCH-23 separat im Editorstrang | Eier über ARCH-20/21/22, Teile über ARCH-24; gemeinsame Kataloge nicht gleichzeitig unabhängig ändern |
+
+**Jetzt direkt verwendbarer Auftrag für den Datenkern:**
+
+„Übernimm ARCH-01 und anschließend nur ARCH-03 aus `docs/ARCHITECTURE_BACKLOG.md` am aktuellen gemeinsamen Voxelverse-main. Erfasse zuerst Datenbesitzer und Erweiterungsverträge. Bündele danach Körperzugriffe hinter dem vorhandenen Kampagnenmodell; Lesezugriff, Anlage und veränderbaren Zustand ausdrücklich trennen. Bestehende Speicherformate und IDs erhalten. Keine neue Save-Struktur, keine Seed-Neuvergabe und keine fremden unfertigen Änderungen übernehmen. Liefere genau diese Fassade mit Neu-/Altstandsnachweis und Übergabe für ARCH-04.“
+
+**Parallel verwendbarer Messauftrag:**
+
+„Übernimm ARCH-02. Messe den tatsächlichen gemeinsamen Stand mit reproduzierbarer Route und 1/10/100 Körpern für Speicherproben. Erfasse Frame-/Uploadzeiten, Queues, aktive Objekte und Speicherentwicklung. 1080p60 auf Gaming-PC ist das vorläufige Ziel; unbekannte Zielhardware und nicht messbare GPU-Werte offen kennzeichnen. Keine Grenzen ohne Messung erhöhen. Liefere Zahlen und konkrete Anschlussaufgaben für ARCH-13/17.“
+
+Gemeinsame Dateien und Kataloge erhalten pro Runde einen Integrationsbesitzer. Die vollständigen Abhängigkeiten, Abnahmen und Übergaberegeln stehen beim jeweiligen ARCH-Auftrag. Größere Funktionspakete beginnen erst nach ihrem benötigten Vertrag, können aber vorbereitende Daten-/Modellarbeiten unabhängig liefern.
+
 ## 1. Gemeinsame Grundlage – erweiterten Umzug abschließen
 
 **Bereits eingebaut:** Save 8/Kampagne 2, `surface_context.gd`, der gemeinsame Kugelstart, radiale Spielerorte, Karten, frühe Kopiermigration mit Quellarchiv und Rückweg. [WORK_M1E_CAMPAIGN.md](WORK_M1E_CAMPAIGN.md) ist der aktuelle Anschlussvertrag. Keine zweite Kampagne oder Speicherdienststruktur anlegen. Noch offen sind die Zielzuordnung und Laufzeitanbindung vorhandener Regions-, Heimat-, Pflichtarten-, Dorf- und Tierhaltungsdaten; ihre Sperren dürfen erst nach entsprechendem Erhaltungsnachweis entfallen.
 
-„Vervollständige M1e auf dem bestehenden Vertrag: Verwende Cube-Sphere-Adressen und den bestehenden radialen Oberflächenadapter als Kampagnenkontext. Implementiere einen versionierten Start-/Lade-/Speicherweg für neue Kugelkampagnen. Erhalte den bisherigen Flachwelt-Lader und baue eine atomare Kopiermigration mit Manifest für vorhandene persistente Orte, Bewohner, Tiere, Vorräte und Fortschritt. Kein stilles Umdeuten alter XYZ-Werte, keine Neugenerierung bestehender Spezies. Liefere Vertrag, Implementierung, Schreibfehler-/Zukunftsversionstests und einen frischen Prozess als Nachweis. Änderungen an GameState und SaveGameService gehören zu diesem gemeinsamen Paket.“
+„Vervollständige den noch offenen Teil von M1e gemäß ARCH-03/04/06/07/12. Der Start-/Lade-/Speicherweg und die frühe Kopiermigration existieren bereits. Bündele zuerst Körperzugriffe und sichere eindeutige Körperidentität, dann die versionierten Fachorte. Erweitere das vorhandene Manifest und den Kopierweg nach Fertigstellung der M1f-/M1g-Verbraucher auf tatsächlich entwickelte Stände mit Orten, Bewohnern, Tieren, Vorräten und laufender Fracht. Erhalte den bisherigen Flachwelt-Lader; kein stilles Umdeuten alter XYZ-Werte, keine Neugenerierung bestehender Spezies. Liefere Schreibfehler-/Zukunftsversionstests und einen frischen Prozess als Nachweis. Änderungen an GameState und SaveGameService gehören zu diesem gemeinsamen Paket.“
 
 ## 2. Kreaturenphase auf der Kugel
 
@@ -30,4 +52,4 @@ Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge er
 
 Alle Folgearbeiten starten vom veröffentlichten gemeinsamen Commit. Ein Fachpaket liefert exakten Commit, Vertragsversionen, veränderte Dateien, Tests und offene Grenzen. Die Integration prüft gegenseitige Abhängigkeiten erneut; Einzelbranch-Nachweise gelten nicht automatisch für den Gesamtstand. Gemeinsame Verträge und Roadmap werden durch die Integration gepflegt. Keine fremden unfertigen Arbeitsstände übernehmen.
 
-Nach M1e können unabhängige Verbraucher an denselben veröffentlichten Vertrag anschließen. Der volle Neue-Spiel-Umschalter (M1i) kommt erst nach der Abnahmekette im Migrationsauftrag. D4, Mittelalter, Neuzeit und Raumfahrt folgen auf dieser Grundlage.
+Nach der bereits vorhandenen M1e-Grundlage können unabhängige Verbraucher an denselben veröffentlichten Vertrag anschließen. Der volle Neue-Spiel-Umschalter (M1i/ARCH-19) kommt erst nach der Abnahmekette im Migrationsauftrag. D4, Mittelalter, Neuzeit und Raumfahrt folgen auf dieser Grundlage. Kurze Oberfläche-/Orbitübergänge sind zulässig; entfernte eigene Siedlungen sollen während laufender Kampagnenzeit vereinfacht weiterarbeiten, nicht während Pause oder geschlossener Anwendung. Diese bestätigten Entscheidungen gehören zu ARCH-16/18/30.
