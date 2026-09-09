@@ -19,7 +19,9 @@ const Behavior = preload("res://core/progression/behavior_progression.gd")
 const BehaviorRules = preload("res://core/progression/behavior_catalog.gd")
 const Encounters = preload("res://core/progression/creature_encounters.gd")
 
-const SAVE_SCHEMA: int = 4
+const Tribal = preload("res://core/progression/tribal_progression.gd")
+const Civilization = preload("res://core/progression/civilization_contract.gd")
+const SAVE_SCHEMA: int = 5
 const SPECIES_DISCOVERY_POINTS: int = 3
 const REGION_DISCOVERY_POINTS: int = 1
 
@@ -28,6 +30,8 @@ var unlocked_parts: Dictionary = {}
 var discovered_species: Dictionary = {}
 var discovered_regions: Dictionary = {}
 var _behavior := Behavior.new()
+var _tribal := Tribal.new()
+var _last_tribal_tick: int = -1
 var _behavior_purchase_active: bool = false
 var _encounters := Encounters.new()
 var _encounter_commit_active: bool = false
@@ -45,6 +49,7 @@ func reset_for_new_game() -> void:
 	discovered_species.clear()
 	discovered_regions.clear()
 	_behavior.reset()
+	_tribal.reset()
 	_encounters.entries.clear()
 	_research = Research.defaults()
 	_ensure_starter_parts()
@@ -192,6 +197,7 @@ func export_state() -> Dictionary:
 		"discovered_species": discovered_species.duplicate(true),
 		"discovered_regions": discovered_regions.duplicate(true),
 		"behavior": _behavior.export_state(),
+		"tribal": _tribal.export_state(),
 		"creature_encounters": _encounters.export_state(),
 		"research": _research.duplicate(true),
 	}
@@ -200,6 +206,7 @@ func export_state() -> Dictionary:
 func import_state(data: Dictionary) -> bool:
 	if not validate_state(data).is_empty():
 		return false
+	_tribal.import_state(data.get("tribal", Tribal.defaults()))
 	_encounters.entries.clear()
 	if data.has("creature_encounters"):
 		_encounters.import_state(data["creature_encounters"])
@@ -233,6 +240,12 @@ func import_state(data: Dictionary) -> bool:
 static func validate_state(data: Dictionary) -> String:
 	if not BehaviorRules.is_integer(data.get("schema", 1), 1, SAVE_SCHEMA):
 		return "Unsupported progression schema."
+	if data.has("tribal"):
+		var problem: String = Tribal.validate(data["tribal"])
+		if not problem.is_empty():
+			return problem
+	elif int(data.get("schema", 1)) >= 5:
+		return "Missing tribal progression."
 	if data.has("research"):
 		var problem: String = Research.validate(data["research"])
 		if not problem.is_empty():
@@ -253,7 +266,7 @@ static func validate_state(data: Dictionary) -> String:
 static func has_unsupported_contract(data: Variant) -> bool:
 	if not data is Dictionary:
 		return false
-	return BehaviorRules.is_newer_version(data.get("schema", 1), SAVE_SCHEMA) or Behavior.has_unsupported_contract(data.get("behavior", {})) or Encounters.has_unsupported_contract(data.get("creature_encounters", {})) or Research.has_unsupported_contract(data.get("research", {}))
+	return Tribal.has_unsupported_contract(data.get("tribal", {})) or BehaviorRules.is_newer_version(data.get("schema", 1), SAVE_SCHEMA) or Behavior.has_unsupported_contract(data.get("behavior", {})) or Encounters.has_unsupported_contract(data.get("creature_encounters", {})) or Research.has_unsupported_contract(data.get("research", {}))
 
 
 func get_research_settings() -> Dictionary:
@@ -332,26 +345,33 @@ func apply_campaign_event(event: GameEvent) -> Dictionary:
 
 
 func get_behavior_wallet(phase: int) -> Dictionary:
-	return _behavior.wallet(phase)
+	return _tribal.wallet() if phase == 1 else _behavior.wallet(phase)
 
 
 func get_behavior_nodes(phase: int) -> Array[Dictionary]:
 	var state := get_node_or_null("/root/GameState")
-	return _behavior.nodes_for_phase(phase, int(state.get("current_phase")) if state != null else 0)
+	var current: int = int(state.get("current_phase")) if state != null else 0
+	return _tribal.nodes(current) if phase == 1 else _behavior.nodes_for_phase(phase, current)
 
 
 func get_behavior_effect(effect_id: String, phase: int, body_value: float = 1.0, technology_bonus: float = 0.0) -> Dictionary:
-	return _behavior.calculate_effect(effect_id, phase, body_value, technology_bonus)
+	var result: Dictionary = _behavior.calculate_effect(effect_id, phase, body_value, technology_bonus)
+	var bonus: float = _tribal.effect_bonus(effect_id, phase)
+	if result.get("ok", false) and bonus > 0.0:
+		result["unclamped_value"] += bonus
+		result["value"] = clampf(float(result["unclamped_value"]), 0.5, 2.0)
+		result["contributions"].append({"node_id": "tribe.social", "amount": bonus, "legacy": false})
+	return result
 
 
 func get_phase_progression_preview(phase: int) -> Dictionary:
 	var result: Dictionary = preload("res://core/progression/phase_progression_plan.gd").phase(phase)
 	if result.is_empty():
 		return result
-	result["wallet"] = _behavior.wallet(phase)
+	result["wallet"] = get_behavior_wallet(phase)
 	result["legacy"] = {}
 	for effect_id in ["group_cooperation", "group_defense"]:
-		result["legacy"][effect_id] = _behavior.calculate_effect(effect_id, phase)
+		result["legacy"][effect_id] = get_behavior_effect(effect_id, phase)
 	return result
 
 
@@ -370,7 +390,61 @@ func get_development_path() -> Dictionary:
 		result["transition"] = {"implemented": true, "available": int(state.current_phase) == 0 and blockers.is_empty(),
 			"message": "Dein Stamm ist aktiv. Du führst die Gruppe und baust euer Dorf." if int(state.current_phase) == 1 else str(blockers[0]) if not blockers.is_empty() else "Deine Gruppe ist bereit. Öffne in der Welt Stammeszeitalter … und bestätige dort den Wechsel. Sichere Arbeitsplätze werden vor der Bestätigung geprüft."}
 		result["stages"][2]["status"] = "Aktuelle Phase" if int(state.current_phase) == 1 else "Spielbarer Einstieg · bewusster Wechsel"
+	result["tribal_goals"] = _tribal.goals()
+	result["tribal_wallet"] = _tribal.wallet()
+	result["epochs"] = []
+	for target: int in [2, 3]:
+		result["epochs"].append(Civilization.describe(state.campaign.data, str(int(state.world_seed)), int(state.current_phase), target, get_tribal_economy_progress()))
+	result["factions"] = "Unter Dorf → Nachbarn findest du eine Fraktion deiner Spezies mit eigenem Lager. Gemeinsame Hilfslieferungen verbessern eure Beziehung. Fremde Wildarten bleiben Tiere; Zähmung macht sie nicht zu Bürgern."
 	return result
+
+
+## Called only by the live village controller around an arrived resident's work.
+## Update synchronously before any autosave/observer; both states share a snapshot.
+func record_tribal_work(before: Dictionary, actor_id: String, producer: Node) -> void:
+	var state := get_node("/root/GameState")
+	var controller := get_tree().get_first_node_in_group(&"tribe_controller")
+	if controller == null or producer != controller or int(state.current_phase) != 1 or not controller.is_active() or is_behavior_transaction_active():
+		return
+	var result: Dictionary = _tribal.observe(before, controller.village(), actor_id, controller.body(), state.campaign.data, int(state.current_phase))
+	_publish_tribal_result(result)
+
+
+func record_tribal_tick(delta: float, producer: Node) -> void:
+	var state := get_node("/root/GameState")
+	var controller := get_tree().get_first_node_in_group(&"tribe_controller")
+	var frame: int = Engine.get_physics_frames()
+	if producer != controller or controller == null or not controller.is_active() or is_behavior_transaction_active() or frame == _last_tribal_tick:
+		return
+	_last_tribal_tick = frame
+	var result: Dictionary = _tribal.observe_supply(controller.village(), controller.body(), state.campaign.data, int(state.current_phase), delta)
+	# Regular snapshots already include the live clock. Rescheduling each frame
+	# would keep postponing the autosave forever while the village is healthy.
+	if not result["rewards"].is_empty():
+		_publish_tribal_result(result)
+
+
+func get_tribal_economy_progress() -> Dictionary:
+	var state := get_node("/root/GameState")
+	var village: Dictionary = state.campaign.data.get("bodies", {}).get(str(int(state.world_seed)), {}).get("tribe", {})
+	return _tribal.economy_progress(village)
+
+func record_neighbor_help(before: Dictionary, producer: Node) -> void:
+	var state := get_node("/root/GameState")
+	var controller := get_tree().get_first_node_in_group(&"tribe_controller")
+	if controller == null or controller != producer or not controller.is_active() or is_behavior_transaction_active():
+		return
+	_publish_tribal_result(_tribal.observe_neighbor(before, controller.body().get("tribal_neighbor", {}), controller.village(), state.campaign.data, int(state.current_phase)))
+
+
+func _publish_tribal_result(result: Dictionary) -> void:
+	if not result["changed"]:
+		return
+	get_node("/root/SaveGameService").schedule_autosave(1.0)
+	if not result["rewards"].is_empty():
+		behavior_changed.emit()
+		for receipt: Dictionary in result["rewards"]:
+			behavior_rewarded.emit(receipt.duplicate(true))
 
 
 func purchase_behavior_node(node_id: String) -> Dictionary:
@@ -380,14 +454,15 @@ func purchase_behavior_node(node_id: String) -> Dictionary:
 	var saves := get_node_or_null("/root/SaveGameService")
 	if state == null or saves == null:
 		return {"ok": false, "reason": "missing_campaign_services"}
-	var before: Dictionary = _behavior.export_state()
-	var result: Dictionary = _behavior.purchase(node_id, int(state.get("current_phase")))
+	var model: RefCounted = _tribal if Tribal.NODES.has(node_id) else _behavior
+	var before: Dictionary = model.export_state()
+	var result: Dictionary = model.purchase(node_id, int(state.get("current_phase")))
 	if not result["ok"]:
 		return result
 	_behavior_purchase_active = true
 	var saved: bool = bool(saves.call("save_now"))
 	if not saved:
-		_behavior.import_state(before)
+		model.import_state(before)
 	_behavior_purchase_active = false
 	if not saved:
 		return {"ok": false, "reason": "save_failed"}

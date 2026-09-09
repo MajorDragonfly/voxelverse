@@ -51,7 +51,7 @@ func _run() -> void:
 	await _key(KEY_K)
 	_expect(ui.visible and paused, "K did not open and pause the game.")
 	_expect(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Opening did not release the mouse.")
-	_expect(ui._cards.size() == 6, "Not all six backend nodes are visible.")
+	_expect(ui._cards.values().filter(func(card: Dictionary) -> bool: return card["button"].is_visible_in_tree()).size() == 6, "Not all six creature nodes are visible in the creature view.")
 	_expect(ui._purchase.disabled, "Empty wallet permits a purchase.")
 	await _screenshot("skilltree_empty.png")
 	var time_before: float = state.campaign.data["elapsed_seconds"]

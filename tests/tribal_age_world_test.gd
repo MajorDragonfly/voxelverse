@@ -103,6 +103,7 @@ func _run() -> void:
 		_expect(int(tribe.village()["stock"]["wood"]) >= 6, "Workers cannot deliver wood over real terrain: " + str(tribe.village()["members"]) + " " + tribe.status)
 		for actor: CharacterBody3D in tribe.actors.values():
 			_expect(actor.visible and actor.is_on_floor(), "Resident lost real terrain floor or visibility.")
+		await _extension(tribe)
 		var args: PackedStringArray = OS.get_cmdline_user_args()
 		if "--economy" in args:
 			await _economy_world(tribe)
@@ -166,6 +167,9 @@ func _restart_check(saves: Node, state: Node) -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		failures.append(message)
+
+func _extension(_tribe: Node) -> void:
+	pass
 
 func _finish() -> void:
 	print(JSON.stringify({"test": "tribal_age_world", "passed": failures.is_empty(), "failures": failures}))

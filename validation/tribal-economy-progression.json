@@ -1,0 +1,183 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.923
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.84
+    },
+    {
+      "name": "tribal_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.622
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.9
+    },
+    {
+      "name": "tribal_age_supply_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 29.356
+    },
+    {
+      "name": "behavior_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.461
+    },
+    {
+      "name": "behavior_skill_tree_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.695
+    },
+    {
+      "name": "development_path_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.483
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.719
+    },
+    {
+      "name": "tribal_economy_progress_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.619
+    },
+    {
+      "name": "tribal_economy_progress_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 96.037
+    },
+    {
+      "name": "tribal_progression_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.561
+    }
+  ],
+  "implementation_commit": "d502f314baac7445464225b6c599263787373e73",
+  "m6_source_commits": [
+    "9d30a0c31bc5da066580a2b58db6be782f899f41",
+    "d083dfd"
+  ],
+  "date": "2026-09-09",
+  "world_evidence": {
+    "delivered": 51.0,
+    "drinks": 16.0,
+    "grown": 13.0,
+    "meals": 16.0,
+    "produced": {
+      "fiber": 10.0,
+      "stone": 10.0,
+      "water": 36.0,
+      "wood": 11.0
+    },
+    "progression": {
+      "economy": {
+        "professions": {
+          "completed": 2,
+          "met": true,
+          "text": "Versorger 3/3, Holzarbeiter 3/3, Steinmetz 2/3, Fasersammler 2/3"
+        },
+        "supply": {
+          "met": true,
+          "seconds": 180.0,
+          "text": "180/180 Spielsekunden · gegessen 3/3 · getrunken 3/3 · Nahrung 12/12 · Wasser 12/6"
+        }
+      },
+      "receipts": {
+        "delivery_cursor": 51.0,
+        "drink_cursor": 16.0,
+        "drunk": {
+          "object_3844fa993d6f44532fa5308d0c3fb009": true,
+          "object_a4b5733b6770e3458abfd83b42bd8399": true,
+          "object_b501ed755b75ab7c083d62ceb7487b8c": true
+        },
+        "fed": {
+          "object_3844fa993d6f44532fa5308d0c3fb009": true,
+          "object_a4b5733b6770e3458abfd83b42bd8399": true,
+          "object_b501ed755b75ab7c083d62ceb7487b8c": true
+        },
+        "healthy_seconds": 180.0,
+        "jobs": {
+          "forester": {
+            "units": 3.0,
+            "workers": {
+              "object_b501ed755b75ab7c083d62ceb7487b8c": true
+            }
+          },
+          "mason": {
+            "units": 2.0,
+            "workers": {
+              "object_3844fa993d6f44532fa5308d0c3fb009": true
+            }
+          },
+          "provider": {
+            "units": 3.0,
+            "workers": {
+              "object_3844fa993d6f44532fa5308d0c3fb009": true,
+              "object_a4b5733b6770e3458abfd83b42bd8399": true,
+              "object_b501ed755b75ab7c083d62ceb7487b8c": true
+            }
+          },
+          "weaver": {
+            "units": 2.0,
+            "workers": {
+              "object_a4b5733b6770e3458abfd83b42bd8399": true
+            }
+          }
+        },
+        "meal_cursor": 16.0,
+        "pending": {},
+        "schema": 1.0
+      },
+      "wallet": {
+        "available": {
+          "aggression": 0,
+          "social": 13
+        },
+        "earned": {
+          "aggression": 0,
+          "social": 13
+        },
+        "earning_cap": 24,
+        "spent": {
+          "aggression": 0,
+          "social": 0
+        }
+      }
+    },
+    "stock": {
+      "fiber": 2.0,
+      "food": 12.0,
+      "milk": 0.0,
+      "stone": 8.0,
+      "water": 12.0,
+      "wood": 1.0
+    }
+  },
+  "limits": [
+    "Headless real GUI, movement and work; no new raster screenshots or Windows performance claim.",
+    "Existing M6 screenshots are the original source package evidence.",
+    "Tribal selection fixture uses the existing collapse button so the economy HUD does not intercept world clicks."
+  ]
+}

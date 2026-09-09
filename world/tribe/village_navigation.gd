@@ -5,37 +5,50 @@ const Housing = preload("res://world/tribe/village_housing.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 var shelters: Array = []
 const RADIUS: int = 12
+var _radius: int = RADIUS
+var _samples: int = RADIUS
+var _spacing: float = 1.0
 var graph := AStar3D.new()
 var origin := Vector3.ZERO
 var home: Node
 var _radius: int = RADIUS
 
-func rebuild(controller: Node, anchor: Vector3, data: Dictionary = {}, radius: int = RADIUS) -> void:
+func rebuild(controller: Node, anchor: Vector3, data: Dictionary = {}, extent: int = RADIUS) -> void:
 	shelters = Housing.obstacles(data)
 	home = controller
 	origin = anchor
-	_radius = clampi(radius, RADIUS, 20)
+	_radius = clampi(extent, RADIUS, 20)
+	_spacing = 0.5 if _radius > RADIUS else 1.0
+	_samples = roundi(float(_radius) / _spacing)
 	graph.clear()
-	for z in range(-_radius, _radius + 1):
-		for x in range(-_radius, _radius + 1):
-			if _occupied(anchor + Vector3(x, 0, z)):
+	for z in range(-_samples, _samples + 1):
+		for x in range(-_samples, _samples + 1):
+			if _occupied(anchor + Vector3(x * _spacing, 0, z * _spacing)):
 				continue
-			var ray := PhysicsRayQueryParameters3D.create(anchor + Vector3(x, 4, z), anchor + Vector3(x, -4, z), 1)
+			var ray := PhysicsRayQueryParameters3D.create(anchor + Vector3(x * _spacing, 4, z * _spacing), anchor + Vector3(x * _spacing, -4, z * _spacing), 1)
 			ray.exclude = [home.player.get_rid()]
 			var hit: Dictionary = home.player.get_world_3d().direct_space_state.intersect_ray(ray)
 			if hit.is_empty() or hit["normal"].dot(Vector3.UP) < 0.9 or not home._dry(hit["position"]):
 				continue
 			var position: Vector3 = hit["position"] + Vector3.UP * 0.06
+			# Leave clearance inside the neighbor resident's saved 22 m boundary.
+			if _radius > RADIUS and position.distance_to(anchor) > 21.0:
+				continue
 			if not home._clear_space(position + Vector3.UP * 0.72):
 				continue
 			graph.add_point(_id(x, z), position)
-	for z in range(-_radius, _radius + 1):
-		for x in range(-_radius, _radius + 1):
+	for z in range(-_samples, _samples + 1):
+		for x in range(-_samples, _samples + 1):
 			var id: int = _id(x, z)
 			if not graph.has_point(id):
 				continue
-			for offset: Vector2i in [Vector2i(1, 0), Vector2i(0, 1)]:
-				if x + offset.x > _radius or z + offset.y > _radius:
+			var offsets: Array[Vector2i] = [Vector2i(1, 0), Vector2i(0, 1)]
+			if _spacing < 1.0:
+				# Keep the original one-metre stair edges as well. A capsule
+				# cannot stand halfway beside a riser, but can step across it.
+				offsets.append_array([Vector2i(2, 0), Vector2i(0, 2)])
+			for offset: Vector2i in offsets:
+				if x + offset.x > _samples or z + offset.y > _samples:
 					continue
 				var other: int = _id(x + offset.x, z + offset.y)
 				# Loaded voxel treads can differ by 0.50000... m after collision
@@ -53,7 +66,7 @@ func rebuild(controller: Node, anchor: Vector3, data: Dictionary = {}, radius: i
 						graph.connect_points(id, other)
 
 func _id(x: int, z: int) -> int:
-	return (z + _radius) * (_radius * 2 + 1) + x + _radius
+	return (z + _samples) * (_samples * 2 + 1) + x + _samples
 
 func route(from: Vector3, to: Vector3) -> PackedVector3Array:
 	if graph.get_point_count() == 0:
@@ -113,12 +126,12 @@ func sites() -> Dictionary:
 			result[kind] = [best.x, best.y, best.z]
 	return result
 
-func free_workplace(position: Vector3, data: Dictionary, kind: String) -> bool:
-	if not position.is_finite() or position.distance_to(origin) > 16.0 or position.distance_to(origin) < 3.0 or route(origin, position).is_empty():
+func free_workplace(position: Vector3, data: Dictionary, kind: String, maximum_distance: float = 16.0, floor_tolerance: float = 0.45) -> bool:
+	if not position.is_finite() or position.distance_to(origin) > maximum_distance or position.distance_to(origin) < 3.0 or route(origin, position).is_empty():
 		return false
 	for corner: Vector3 in [Vector3(-1, 0, -1), Vector3(1, 0, -1), Vector3(-1, 0, 1), Vector3(1, 0, 1)]:
 		var floor_point: Vector3 = snap(position + corner)
-		if floor_point.distance_to(position + corner) > 0.45 or route(position, floor_point).is_empty():
+		if floor_point.distance_to(position + corner) > minf(floor_tolerance, 0.75) or route(position, floor_point).is_empty():
 			return false
 	for shelter: Dictionary in Housing.obstacles(data) + data.get("husbandry", {}).get("pens", []):
 		if position.distance_to(Home.vector(shelter["position"])) < 4.0 or position.distance_to(Home.vector(shelter["entrance"])) < 2.5:

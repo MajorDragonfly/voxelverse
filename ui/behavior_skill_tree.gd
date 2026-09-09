@@ -2,7 +2,7 @@ extends CanvasLayer
 
 const Style = preload("res://ui/progression_style.gd")
 const Development = preload("res://ui/development_path_panel.gd")
-const PHASES: Array[String] = ["Kreatur", "Stamm", "Antike / Mittelalter", "Weltmacht", "Weltraum", "Multiversum"]
+const PHASES: Array[String] = ["Kreatur", "Stamm", "Antike / Mittelalter", "Neuzeit / Weltmacht", "Weltraum", "Multiversum"]
 
 var player: Node
 var _panel: Control
@@ -28,6 +28,7 @@ var _journal_tab: Button
 var _phase_preview: Label
 var _phase_choice: OptionButton
 var _view_phase: int = 0
+var _phase_selection: Dictionary = {0: "creature.social.approach", 1: "tribe.social.teamwork"}
 var _tree_heading: Label
 var _wallet_context: Label
 var _availability: Label
@@ -71,7 +72,7 @@ func open_panel() -> bool:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	visible = true
 	_message.text = ""
-	refresh()
+	_select_phase(clampi(int(get_node("/root/GameState").current_phase), 0, PHASES.size() - 1))
 	_refresh_journal()
 	_development.refresh()
 	_tree_tab.grab_focus()
@@ -185,7 +186,7 @@ func _build() -> void:
 	_phase_choice.custom_minimum_size.y = 46
 	_phase_choice.add_theme_font_size_override("font_size", 18)
 	for index in range(PHASES.size()):
-		_phase_choice.add_item(PHASES[index] + (" · spielbar" if index == 0 else " · geplant"), index)
+		_phase_choice.add_item(PHASES[index] + (" · spielbar" if index <= 1 else " · geplant"), index)
 	_phase_choice.item_selected.connect(_select_phase)
 	pages.add_child(_phase_choice)
 	_body = BoxContainer.new()
@@ -249,7 +250,7 @@ func _build_branch(track: String) -> void:
 	info.add_child(balance)
 	_wallet_labels[track] = balance
 	var progression := get_node("/root/ProgressionService")
-	for definition: Dictionary in progression.call("get_behavior_nodes", 0):
+	for definition: Dictionary in progression.get_behavior_nodes(0) + progression.get_behavior_nodes(1):
 		if definition["track"] != track:
 			continue
 		var id: String = definition["id"]
@@ -268,9 +269,9 @@ func _build_branch(track: String) -> void:
 		labels.add_child(Style.label(str(definition["name"]), 23, color))
 		var state_label := Style.label("", 17)
 		labels.add_child(state_label)
-		labels.add_child(Style.label("Vermächtnis ab Stamm" if not definition["legacy"].is_empty() else "Kreaturenphase", 15, Style.MUTED))
+		labels.add_child(Style.label("Vermächtnis ab Stamm" if not definition["legacy"].is_empty() else "Stammesphase" if int(definition["phase"]) == 1 else "Kreaturenphase", 15, Style.MUTED))
 		card.pressed.connect(_select.bind(id))
-		_cards[id] = {"button": card, "status": state_label}
+		_cards[id] = {"button": card, "status": state_label, "phase": definition["phase"]}
 	var planned := Style.label("", 18, Style.MUTED)
 	planned.visible = false
 	column.add_child(planned)
@@ -284,20 +285,23 @@ func refresh() -> void:
 	_refresh_view_label()
 	var wallet: Dictionary = progression.call("get_behavior_wallet", _view_phase)
 	var preview: Dictionary = progression.get_phase_progression_preview(_view_phase)
-	_tree_heading.text = "Dein Weg bleibt offen" if _view_phase == 0 else PHASES[_view_phase] + " · dein zukünftiger Weg"
+	_tree_heading.text = "Dein Weg bleibt offen" if _view_phase == 0 else "Dein Stamm · gemeinsame Erfolge" if _view_phase == 1 else PHASES[_view_phase] + " · dein zukünftiger Weg"
 	_wallet_context.text = "Sozial und aggressiv lassen sich kombinieren. Angezeigt werden ausschließlich die Punkte der Phase %s." % PHASES[_view_phase]
 	if _view_phase > 0:
 		_wallet_context.text += " Kreaturenpunkte bleiben im Kreaturenbaum ausgebbar."
 	_availability.visible = _view_phase == 0
-	_details.get_parent().visible = _view_phase == 0
+	_details.get_parent().visible = _view_phase <= 1
 	for card in _cards.values():
-		card["button"].visible = _view_phase == 0
+		card["button"].visible = int(card["phase"]) == _view_phase
 	for track: String in _wallet_labels:
 		_wallet_labels[track].text = "%d Punkte verfügbar\n%d verdient · %d ausgegeben" % [int(wallet["available"][track]), int(wallet["earned"][track]), int(wallet["spent"][track])]
 		_planned_earning[track].visible = _view_phase > 0
 		_planned_earning[track].text = "Geplante Punktequellen\n" + str(preview[track]) + "\n\nFähigkeiten und Käufe folgen mit den spielbaren Handlungen dieser Phase."
+	if _view_phase == 1:
+		_planned_earning["social"].text = "Stammespunkte aus Gemeinschaftserfolgen\nJeder Meilenstein zählt einmal pro Kampagne. Die einzelnen Ziele stehen im Entwicklungspfad."
+		_planned_earning["aggression"].text = "Gruppenverteidigung und Stammeskonflikte folgen noch. Dafür werden derzeit keine Punkte oder Kampfboni angeboten."
 	_nodes.clear()
-	for definition: Dictionary in progression.call("get_behavior_nodes", 0):
+	for definition: Dictionary in progression.call("get_behavior_nodes", _view_phase):
 		var id: String = definition["id"]
 		_nodes[id] = definition
 		if not _cards.has(id):
@@ -313,6 +317,7 @@ func refresh() -> void:
 
 func _select(id: String) -> void:
 	_selected = id
+	_phase_selection[_view_phase] = id
 	_message.text = ""
 	refresh()
 
@@ -333,15 +338,17 @@ func _update_details() -> void:
 	_effect.text = "Vermächtnis · für Stamm und spätere Phasen vorbereitet" if legacy else "Kreaturenbonus · endet mit der Kreaturenphase"
 	if definition["purchased"]:
 		_effect.text += "\nGekauft · " + ("ab Stamm vorgesehen" if legacy and phase == 0 else "in dieser Phase vorgesehen · Gruppenmechanik noch offen" if legacy else "jetzt im Spiel aktiv" if phase == 0 else "Kreaturenphase bereits verlassen")
+	if _view_phase == 1:
+		_effect.text = "Stammesbonus · wirkt auf tatsächliche Dorfaufgaben" + ("\nGekauft · aktiv" if definition["purchased"] and phase == 1 else "")
 	var status: Dictionary = definition["purchase_status"]
-	_purchase.disabled = not status["ok"] or _purchase_active or _view_phase != 0
+	_purchase.disabled = not status["ok"] or _purchase_active or _view_phase > 1
 	_purchase.text = "Freigeschaltet" if definition["purchased"] else "Freischalten · %d %s" % [int(definition["cost"]), "Sozialpunkte" if definition["track"] == "social" else "Aggressionspunkte"]
 	if not status["ok"] and not definition["purchased"]:
 		_requirements.text += "\n" + _reason(str(status.get("reason", "")))
 
 
 func _buy_selected() -> void:
-	if _purchase_active or not visible or _view_phase != 0 or not _body.visible:
+	if _purchase_active or not visible or _view_phase > 1 or not _body.visible:
 		return
 	_purchase_active = true
 	_purchase.disabled = true
@@ -375,7 +382,7 @@ func _refresh_phase_preview() -> void:
 	_phase_preview.text = ("Aktueller Spielablauf" if data["implemented"] else "Planung · noch keine spielbare Phase") + " · " + str(data["scope"])
 	_phase_preview.text += "\n%s\n%s\n%s" % [data["control"], " → ".join(data["loop"]), data["next"]]
 	if index > 0:
-		_phase_preview.text += "\nGekauftes Vermächtnis für diese Phase: Koordination +%d %% · Verteidigung +%d %%" % [roundi((float(data["legacy"]["group_cooperation"]["value"]) - 1.0) * 100.0), roundi((float(data["legacy"]["group_defense"]["value"]) - 1.0) * 100.0)]
+		_phase_preview.text += "\nGekaufte Gruppenboni für diese Phase: Koordination +%d %% · Verteidigung +%d %%" % [roundi((float(data["legacy"]["group_cooperation"]["value"]) - 1.0) * 100.0), roundi((float(data["legacy"]["group_defense"]["value"]) - 1.0) * 100.0)]
 		_phase_preview.text += "\nKoordination wirkt auf Dorfaufgaben. Verteidigung folgt mit Stammeskämpfen."
 		_phase_preview.text += "\nJede Phase verdient eigene Punkte. Kreaturenpunkte bleiben ihrem Baum zugeordnet."
 
@@ -384,6 +391,7 @@ func _select_phase(index: int) -> void:
 	if index not in range(PHASES.size()):
 		return
 	_view_phase = index
+	_selected = _phase_selection.get(index, "")
 	_phase_choice.select(index)
 	_message.text = ""
 	refresh()

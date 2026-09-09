@@ -15,6 +15,8 @@ const Companion = preload("res://world/home_group/home_companion.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const TribePanel = preload("res://ui/tribe/tribe_panel.gd")
 const Visuals = preload("res://world/tribe/village_visuals.gd")
+const NeighborRuntime = preload("res://world/tribe/neighbors/neighbor_runtime.gd")
+var neighbors: Node3D
 
 var home: Node
 var player: CharacterBody3D
@@ -55,6 +57,9 @@ func _ready() -> void:
 	home = get_parent().get_node("HomeGroup")
 	_state = get_node("/root/GameState")
 	_saves = get_node("/root/SaveGameService")
+	neighbors = NeighborRuntime.new()
+	neighbors.controller = self
+	add_child(neighbors)
 	panel = TribePanel.new()
 	panel.controller = self
 	add_child(panel)
@@ -83,7 +88,7 @@ func _process(delta: float) -> void:
 		_focus += pan * delta * 10.0
 		var offset: Vector3 = _focus - anchor()
 		offset.y = 0
-		_focus = anchor() + offset.limit_length(10.0)
+		_focus = anchor() + offset.limit_length(NeighborRuntime.Model.SITE_RADIUS if body().has("tribal_neighbor") else 10.0)
 		_update_camera()
 	_timer -= delta
 	if _timer <= 0:
@@ -176,11 +181,11 @@ func _activate() -> void:
 	# Wait for terrain collision and the home controller's reference to the player.
 	if home.player == null or not home.has_ground(HomeState.vector(village()["anchor"])):
 		return
-	navigation.rebuild(home, HomeState.vector(village()["anchor"]))
+	navigation.rebuild(home, HomeState.vector(village()["anchor"]), NeighborRuntime.Model.NAV_EXTENT if body().has("tribal_neighbor") else Navigation.RADIUS)
 	if navigation.graph.get_point_count() == 0:
 		return
 	Model.upgrade(village())
-	navigation.rebuild(home, HomeState.vector(village()["anchor"]), village())
+	navigation.rebuild(home, HomeState.vector(village()["anchor"]), village(), navigation_extent())
 	# The home controller refreshes on a slower tick. Install the visible nest
 	# with this runtime, so a cold start cannot briefly expose the default home.
 	get_parent().global_position = HomeState.vector(village()["anchor"])
@@ -222,6 +227,7 @@ func _activate() -> void:
 	get_parent().get_parent().add_child(_shelters)
 	_shelters.sync(village(), actors)
 	_active = true
+	neighbors.refresh()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	status = "Wähle Bewohner und erteile gemeinsame oder einzelne Aufträge."
 	panel.refresh()
@@ -237,6 +243,7 @@ func _deactivate() -> void:
 	if not _active:
 		return
 	_active = false
+	neighbors.clear_runtime()
 	for actor: Node in actors.values():
 		if is_instance_valid(actor) and actor != player:
 			actor.queue_free()
@@ -373,9 +380,9 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 			return false
 		if data["project"].is_empty():
 			if order in Economy.STATIONS.keys() + Housing.BUILDS:
-				navigation.rebuild(home, anchor(), village())
+				navigation.rebuild(home, anchor(), village(), navigation_extent())
 				var snapped: Vector3 = navigation.snap(destination)
-				if snapped.distance_to(destination) > 1.8 or not (navigation.free_shelter(snapped, data, order) if order in Housing.BUILDS else navigation.free_workplace(snapped, data, order)):
+				if snapped.distance_to(destination) > 1.8 or neighbors.occupies(snapped) or not (navigation.free_shelter(snapped, data, order) if order in Housing.BUILDS else navigation.free_workplace(snapped, data, order)):
 					status = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
 					return false
 				destination = snapped
@@ -432,7 +439,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 	if success:
 		placement = ""
 		_visuals.rebuild(village())
-		navigation.rebuild(home, anchor(), village())
+		navigation.rebuild(home, anchor(), village(), navigation_extent())
 	panel.refresh()
 	return success
 
@@ -450,10 +457,11 @@ func _physics_process(delta: float) -> void:
 	if _route_retry <= 0:
 		_route_retry = 2.0
 		var blocked: bool = false
+		blocked = neighbors.has_blocked()
 		for member: Dictionary in village()["members"]:
 			blocked = blocked or bool(member["blocked"])
 		if blocked:
-			navigation.rebuild(home, anchor(), village())
+			navigation.rebuild(home, anchor(), village(), navigation_extent())
 			_routes.clear()
 			_goals.clear()
 	for member: Dictionary in village()["members"]:
@@ -499,7 +507,10 @@ func _physics_process(delta: float) -> void:
 			target = HomeState.vector(village()["project"]["position"])
 		elif order == "move":
 			target = HomeState.vector(member["destination"])
-		if order != "wait" and (member["cargo"] != "" or order != "move"):
+		var neighbor_target: Vector3 = neighbors.target(member)
+		if neighbor_target.is_finite():
+			target = neighbor_target
+		if order != "wait" and (neighbor_target.is_finite() or member["cargo"] != "" or order != "move"):
 			var index: int = village()["members"].find(member)
 			target = _construction_workplace(target, index) if construction else _workplace(target, index)
 		var arrived: bool = _walk(actor, str(member["id"]), target, delta, minf(float(member["hunger"]), float(member["hydration"])))
@@ -512,6 +523,8 @@ func _physics_process(delta: float) -> void:
 	_shelters.clear_entrances(actors)
 	husbandry.tick(simulation_delta)
 	_grow_residents(simulation_delta)
+	neighbors.tick(delta, simulation_delta)
+	get_node("/root/ProgressionService").record_tribal_tick(simulation_delta, self)
 
 func _construction_workplace(entrance: Vector3, index: int) -> Vector3:
 	var target: Vector3 = navigation.snap(entrance + Vector3(index % 3 - 1, 0, index / 3))
@@ -525,9 +538,11 @@ func _workplace(center: Vector3, index: int) -> Vector3:
 		return target
 	return center
 
-func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: float, hunger: float) -> bool:
+func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: float, hunger: float, record: Dictionary = {}) -> bool:
+	if record.is_empty():
+		record = member_record(identity)
 	if not home.has_ground(actor.global_position):
-		member_record(identity)["blocked"] = true
+		record["blocked"] = true
 		status = "Ein Bewohner wartet auf geladenen Boden."
 		return false
 	var offset: Vector3 = target - actor.global_position
@@ -556,7 +571,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 			status = "Weg blockiert · der Auftrag bleibt erhalten; neue Wege werden geprüft."
 		elif direction != Vector3.ZERO and status.begins_with("Weg blockiert"):
 			status = "Die Bewohner setzen ihre Aufträge fort."
-	member_record(identity)["blocked"] = not arrived and direction == Vector3.ZERO
+	record["blocked"] = not arrived and direction == Vector3.ZERO
 	var speed: float = 3.8 * (0.6 if hunger < 20.0 else 1.0)
 	actor.velocity.x = direction.x * speed
 	actor.velocity.z = direction.z * speed
@@ -573,7 +588,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 	if not arrived and direction != Vector3.ZERO and moved.length() < speed * delta * 0.1:
 		_stalls[identity] = float(_stalls.get(identity, 0.0)) + delta
 		if float(_stalls[identity]) >= 0.75:
-			member_record(identity)["blocked"] = true
+			record["blocked"] = true
 	else:
 		_stalls[identity] = 0.0
 	if actor.is_on_floor():
@@ -588,6 +603,12 @@ func _effective_order(member: Dictionary) -> String:
 	return str(village()["project"].get("kind", "build")) if member["order"] == "build" else str(member["order"])
 
 func _work(member: Dictionary, delta: float) -> void:
+	var before: Dictionary = village().duplicate(true)
+	if not neighbors.work(member):
+		_perform_work(member, delta)
+	get_node("/root/ProgressionService").record_tribal_work(before, str(member["id"]), self)
+
+func _perform_work(member: Dictionary, delta: float) -> void:
 	var data: Dictionary = village()
 	var order: String = _effective_order(member)
 	if order == "wait":
@@ -694,7 +715,7 @@ func _work(member: Dictionary, delta: float) -> void:
 			var completed_id: String = str(project.get("id", Model.Ids.scoped("workplace", data["id"], order)))
 			data["project"] = {}
 			_shelters.sync(data, actors)
-			navigation.rebuild(home, anchor(), data)
+			navigation.rebuild(home, anchor(), data, navigation_extent())
 			_routes.clear()
 			_goals.clear()
 			for worker: Dictionary in data["members"]:
@@ -784,7 +805,7 @@ func _save_economy(before: Dictionary) -> bool:
 
 func _work_rate(member: Dictionary) -> float:
 	var progression: Node = get_node("/root/ProgressionService")
-	var legacy: Dictionary = progression.get_development_path()["legacy"]["group_cooperation"]
+	var legacy: Dictionary = progression.get_behavior_effect("group_cooperation", 1)
 	return float(legacy["value"]) * (0.5 if minf(float(member["hunger"]), float(member["hydration"])) < 20.0 else 1.0)
 
 func _changed() -> void:
@@ -858,3 +879,8 @@ func _grow_residents(delta: float) -> void:
 	status = "%s gehört jetzt zu deinem Stamm. Wähle einen Beruf oder Auftrag." % member["name"]
 	community_event.emit(&"resident_added", {"member_id": member["id"], "tribe_id": village()["id"], "population": village()["members"].size()})
 	panel.refresh()
+
+func navigation_extent() -> int:
+	if is_instance_valid(domestication) and domestication._ready_runtime:
+		return 20
+	return NeighborRuntime.Model.NAV_EXTENT if body().has("tribal_neighbor") else Navigation.RADIUS

@@ -2,7 +2,7 @@
 
 Stand: 9. September 2026. Fachbranch `agent/m6-village-economy`, Ausgangscommit `3a3e027` auf dem zusammengeführten `main`. Keine anderen Fachstände übernommen. `ROADMAP.md` bleibt gemäß gemeinsamer Zuständigkeit beim Integrationschat.
 
-Veröffentlichung: Lars hat am 9. September 2026 die Veröffentlichung des fertigen Branches `agent/m6-village-economy` im öffentlichen Repository `MajorDragonfly/voxelverse` bestätigt. Die Übernahme in `main` bleibt Aufgabe der gemeinsamen Integration.
+Veröffentlichungsstand: lokal committet; noch nicht zu GitHub übertragen. Die automatische Freigabeprüfung verlangt eine ausdrückliche Erlaubnis zur Veröffentlichung dieses neuen Fachbranches.
 
 Implementierungscommit: `9d30a0c31bc5da066580a2b58db6be782f899f41`. Dieser Bericht und die Bildnachweise folgen als eigener Dokumentationscommit.
 

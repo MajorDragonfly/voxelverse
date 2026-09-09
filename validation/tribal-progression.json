@@ -1,0 +1,50 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "tribal_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.639
+    },
+    {
+      "name": "tribal_progression_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 39.945
+    },
+    {
+      "name": "tribal_age_supply_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 29.049
+    },
+    {
+      "name": "behavior_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.572
+    },
+    {
+      "name": "behavior_skill_tree_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.789
+    },
+    {
+      "name": "development_path_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.623
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.844
+    }
+  ],
+  "base_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "isolation": "Non-portable Godot executable; fresh XDG_DATA_HOME per test.",
+  "visual_review": "Headless GUI clicks and 800x900 horizontal bounds passed. Raster capture unavailable: local X11 listener could not start. Manual Windows review pending."
+}
