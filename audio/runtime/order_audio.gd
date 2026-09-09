@@ -11,6 +11,7 @@ var _sources: Array[Node] = []
 var _receipts: Dictionary = {}
 var _last_feedback := -1000
 var _clock := 0.0
+var _last_rejection := -1000
 
 
 func play_result(order: StringName, command_id: String, accepted: bool) -> bool:
@@ -18,16 +19,20 @@ func play_result(order: StringName, command_id: String, accepted: bool) -> bool:
 		return false
 	if _receipts.has(command_id):
 		return false
+	# Consume even suppressed receipts: a delayed duplicate must never sound later.
+	if _receipts.size() >= MAX_RECEIPTS:
+		_receipts.erase(_receipts.keys()[0])
+	_receipts[command_id] = true
 	var now := Time.get_ticks_msec()
-	if now - _last_feedback < 180:
+	# A rejected command immediately following success must remain audible.
+	if now - (_last_feedback if accepted else _last_rejection) < 180:
 		return false
 	var kind: StringName = ORDERS[order] if accepted else &"reject"
 	if not get_parent().play_ui(StringName("order_" + String(kind))):
 		return false
-	if _receipts.size() >= MAX_RECEIPTS:
-		_receipts.erase(_receipts.keys()[0])
-	_receipts[command_id] = true
 	_last_feedback = now
+	if not accepted:
+		_last_rejection = now
 	feedback_played.emit(order, command_id, accepted)
 	return true
 
@@ -66,6 +71,7 @@ func reset_scene() -> void:
 	_sources.clear()
 	_receipts.clear()
 	_last_feedback = -1000
+	_last_rejection = -1000
 	_clock = 0.0
 
 

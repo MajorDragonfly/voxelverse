@@ -294,6 +294,7 @@ func screen_command(position: Vector2) -> void:
 	var hit: Dictionary = player.get_world_3d().direct_space_state.intersect_ray(ray)
 	if hit.is_empty():
 		status = "Hier ist kein geladener Boden."
+		_resolve_order("move", false)
 		return
 	var target: Vector3 = hit["position"]
 	for kind: String in Model.KINDS:
@@ -304,12 +305,23 @@ func screen_command(position: Vector2) -> void:
 
 func issue_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 	var success: bool = _commit_order(order, destination)
-	_order_sequence += 1
-	order_resolved.emit(StringName(order), "%d:%d" % [get_instance_id(), _order_sequence], success)
+	_resolve_order(order, success)
 	return success
 
+func _resolve_order(order: String, success: bool) -> void:
+	_order_sequence += 1
+	order_resolved.emit(StringName(order), "%d:%d" % [get_instance_id(), _order_sequence], success)
+	panel.refresh()
+
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
-	if not is_active() or selected.is_empty() or order not in Model.ORDERS:
+	if not is_active():
+		status = "Die Gruppe kann gerade keine Befehle annehmen."
+		return false
+	if selected.is_empty():
+		status = "Wähle zuerst mindestens einen Bewohner aus."
+		return false
+	if order not in Model.ORDERS:
+		status = "Dieser Gruppenbefehl ist noch nicht verfügbar."
 		return false
 	var before: Dictionary = village().duplicate(true)
 	var data: Dictionary = village()

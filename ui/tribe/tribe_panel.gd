@@ -25,6 +25,8 @@ var _drag_start := Vector2.ZERO
 var _dragging: bool = false
 var _scale_factor: float = 1.0
 var _resident_ids: Array = []
+var _feedback: VBoxContainer
+var _orders_scroll: ScrollContainer
 
 func _ready() -> void:
 	layer = 40
@@ -47,6 +49,16 @@ func _build() -> void:
 	var column := Style.column(_hud, 7)
 	_stock = Style.label("", 22, Style.SOCIAL)
 	column.add_child(_stock)
+	_feedback = preload("res://ui/frontend/group_feedback.gd").new()
+	_feedback.controller = controller
+	column.add_child(_feedback)
+	_message = _feedback.result
+	_orders_scroll = ScrollContainer.new()
+	_orders_scroll.name = "GroupOrdersScroll"
+	_orders_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_orders_scroll.follow_focus = true
+	column.add_child(_orders_scroll)
+	column = Style.column(_orders_scroll, 7)
 	_goal = Style.label("", 17)
 	column.add_child(_goal)
 	_supply = Style.label("", 16, Style.MUTED)
@@ -68,8 +80,6 @@ func _build() -> void:
 		_buttons[order] = button
 	_buttons["supply"].tooltip_text = "Dauerauftrag: Nahrung ernten und einlagern, bis zwölf Portionen vorrätig oder unterwegs sind. Danach am Dorfplatz warten und bei Bedarf weiterarbeiten."
 	_buttons["garden"].tooltip_text = "Benötigt ein Steinwerkzeug. Baut die Wurzelfundstelle zum Garten aus. Alle 20 Spielsekunden wächst eine Wurzel nach, bis dort acht bereitliegen."
-	_message = Style.label("", 16, Style.MUTED)
-	column.add_child(_message)
 	column.add_child(Style.label("Linksklick / Rahmen: auswählen · Umschalt: Auswahl ändern · Rechtsklick: laufen oder sammeln · WASD: Kamera · Mausrad: Zoom · Leertaste: Pause", 15, Style.MUTED))
 	_shade = ColorRect.new()
 	_shade.color = Color(0.015, 0.025, 0.035, 0.78)
@@ -110,6 +120,7 @@ func _layout() -> void:
 	viewport_size /= _scale_factor
 	entry.position = Vector2(viewport_size.x - 282, 76)
 	entry.size = Vector2(260, 46)
+	_orders_scroll.custom_minimum_size.y = minf(260.0, viewport_size.y * 0.36)
 	_hud.size = Vector2(viewport_size.x - 36, 0)
 	_place_hud()
 	_shade.size = viewport_size
@@ -168,7 +179,7 @@ func refresh() -> void:
 	if entry == null:
 		return
 	entry.visible = not confirmation_open and not get_tree().paused and int(get_node("/root/GameState").current_phase) == 0 and is_instance_valid(controller.player)
-	_hud.visible = controller._active
+	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
 	if not controller._active:
 		return
 	var data: Dictionary = controller.village()
@@ -201,11 +212,11 @@ func refresh() -> void:
 			button.name = "Resident_" + str(member["id"])
 			button.pressed.connect(func() -> void: controller.select_member(member["id"], Input.is_key_pressed(KEY_SHIFT)))
 			_residents.add_child(button)
-	for i in range(3):
+	for i in range(data["members"].size()):
 		var member: Dictionary = data["members"][i]
 		var button: Button = _residents.get_child(i)
 		var orders: Dictionary = {"wait": "wartet", "move": "unterwegs", "wood": "sammelt Holz", "stone": "sammelt Stein", "food": "sammelt Nahrung", "tool": "stellt Werkzeug her", "hut": "baut Hütte", "garden": "legt Garten an", "supply": "sichert Nahrung", "feed": "isst"}
-		var activity: String = orders[member["order"]]
+		var activity: String = orders.get(member["order"], "Auftrag: " + str(member["order"]))
 		if member["order"] == "supply" and controller._food_reserve_ready():
 			activity = "Vorrat bereit · bleibt zuständig"
 		elif member["order"] in ["supply", "food"] and int(data["garden"]) == 1 and int(data["deposits"]["food"]["remaining"]) == 0:
@@ -216,8 +227,16 @@ func refresh() -> void:
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
-	_message.text = ("PAUSE · Leertaste zum Fortsetzen. " if get_tree().paused else "") + controller.status
+	_feedback.refresh()
 	_layout()
+
+func _process(_delta: float) -> void:
+	# Other modals own their pause. Never draw/capture input above the shared book.
+	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
+	if get_tree().paused and not _owns_pause:
+		_dragging = false
+		_selection.hide()
+
 
 func _input(event: InputEvent) -> void:
 	if _dragging:
