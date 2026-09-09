@@ -1,0 +1,5 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Creature Editor V3 ready. Save path: user://creature_editor_blueprint.json
+Creature Editor V4 ready. Editable spine and body length enabled.
+Creature studio test passed: cubic exposed faces, voxel picking, knot constraints, persistence, identities, skin/anchors, motion, undo/redo and safe drops. Geometry nodes: 21

@@ -1,19 +1,19 @@
 # Kreaturen-Werkstatt M3A
 
-Stand: 8. September 2026. Eigener Branch `agent/creature-editor-spore`, Draft PR #12 auf PR #10. Die Implementierung übernimmt Lars’ neue Priorität: Kreaturen und Editor sollen sich beim Gestalten deutlich stärker an Spore orientieren. Voxelverse behält eigene Formen, Teile und Oberfläche.
+Stand: 8. September 2026. Eigener Branch `agent/creature-editor-spore`, Draft PR #12 auf PR #10. Die Implementierung übernimmt Lars’ neue Priorität: Kreaturen und Editor sollen sich beim Gestalten deutlich stärker an Spore orientieren. Voxelverse behält eigene Formen, Teile und Oberfläche. Am 9. September wurde die Darstellung auf Lars’ Wunsch wieder konsequent auf kleine Voxel abgestimmt; die direkte Formung bleibt bestehen. [Voxel-Überarbeitung](CREATURE_VOXEL_STYLE.md).
 
 ## Was sich ändert
 
 - Vier Arbeitsbereiche: **Formen, Teile, Farbe, Testen**. Die Kreatur steht groß auf einer drehbaren Arbeitsfläche; Fähigkeiten, Kosten und angebaute Teile bleiben sichtbar.
-- Sieben Körperpunkte lassen sich in der Körperkurve verschieben. Innere Punkte ändern auch ihren Abstand; die Endpunkte strecken den Körper. Monotone kubische Interpolation hält die Oberfläche zwischen den Punkten glatt, ohne negative Radien oder überschießende Kurven. Punktabstand und Werte bleiben begrenzt.
+- Sieben Körperpunkte lassen sich in der Körperkurve verschieben. Innere Punkte ändern auch ihren Abstand; die Endpunkte strecken den Körper. Monotone kubische Interpolation hält die zugrunde liegende Körperkurve zwischen den Punkten gleichmäßig, ohne negative Radien oder überschießende Kurven; die sichtbare Oberfläche bleibt aus klaren Würfelflächen aufgebaut. Punktabstand und Werte bleiben begrenzt.
 - Das Mausrad verändert den Radius; getrennte Breiten-/Höhenregler erlauben weitere Formen. Aufrecht, Langhals, Kriecher und Kugelbauch ändern nur den Körper und erhalten Anbauteile und Identitäten.
 - Native Teilekarten werden aus dem vorhandenen Katalog gezeichnet. Entdeckte Teile lassen sich auf den Körper ziehen oder per Klick anbauen. Ein abgebrochener Drag oder ein Drop außerhalb des Körpers erzeugt kein Teil. Bestehende Freischaltungen und Komplexitätskosten bleiben wirksam.
 - Symmetrie, Andocken, Skalieren, Drehen, Duplizieren und Löschen bleiben verfügbar. Oberflächenanker werden beim Formen mitgeführt; die bisherige doppelte Verformung bereits gebundener Teile entfällt.
 - Haut- und Musterfarbe werden im V7-Entwurf gespeichert. Vorhandene Muster bleiben an ihre Freischaltung gebunden.
 - Stehen/Atmen, Gehen und Laufen können direkt getestet werden. Die Vorschau verändert keine Entwurfsdaten. Zwei-, vier- und sechsbeinige Testkörper verwenden dieselbe Kniekonstruktion wie die adaptive Spielanimation.
-- Eine geschlossene Körperoberfläche und rundere Augen, Mäuler, Gliedmaßen und Schmuckteile werden von Editor, Spieler und erzeugten Wildtieren gemeinsam verwendet. Der Spieler behält die adaptive Geländeanimation und die vorhandene Angriffsanimation. Wildtiere erhalten sichtbare Schrittbewegung; tote Tiere stoppen diese.
+- Eine geschlossene Voxeloberfläche und aus kleinen Würfeln aufgebaute Augen, Mäuler, Gliedmaßen und Schmuckteile werden von Editor, Spieler und erzeugten Wildtieren gemeinsam verwendet. Der Spieler behält die adaptive Geländeanimation und die vorhandene Angriffsanimation. Wildtiere erhalten sichtbare Schrittbewegung; tote Tiere stoppen diese.
 
-![Kreaturen-Werkstatt mit Langhals und Teileauswahl](../art/review/creature_studio/grazer_parts.png)
+![Kreaturen-Werkstatt mit Langhals und Teileauswahl](../art/review/creature_voxel_studio/grazer_parts.png)
 
 ## Bedienung
 
@@ -49,7 +49,7 @@ Eine reine Git-Integrationsprobe gegen PR #11 (`0ad98d9`) führt die Codedateien
 
 ## Prüfung
 
-Code `09ee6d4`: **51/51 Projektprüfungen**, **6/6 gezielte Werkstattprüfungen** und **12/12 Exportprüfungen je Windows/Linux** bestanden. Die vollständige Umgebungsrenderprüfung ist in **Forward+ und Compatibility** erfolgreich. Die Werkstatt wurde in 1600×900 gerendert und visuell geprüft. Der Standardkörper benötigt 21 Geometrie-Nodes; die zwei Wildtier-Referenzen 40 und 33. CPU-Software-Rendering ist kein Leistungsnachweis für Lars’ Ziel-PC. [Maschinenlesbare Nachweise](../validation/creature-studio.json).
+Historische Prüfung der ersten Werkstatt vor der Voxel-Überarbeitung, Code `09ee6d4`: **51/51 Projektprüfungen**, **6/6 gezielte Werkstattprüfungen** und **12/12 Exportprüfungen je Windows/Linux** bestanden. Die vollständige Umgebungsrenderprüfung ist in **Forward+ und Compatibility** erfolgreich. Die Werkstatt wurde in 1600×900 gerendert und visuell geprüft. Der Standardkörper benötigt 21 Geometrie-Nodes; die zwei Wildtier-Referenzen 40 und 33. CPU-Software-Rendering ist kein Leistungsnachweis für Lars’ Ziel-PC. [Maschinenlesbare Nachweise](../validation/creature-studio.json).
 
 `tests/creature_studio_test.gd` prüft echte GUI-Klicks durch den skalierten Viewport, gültige/ungültige Drops, Symmetrie, Punktabstände, Speichern/Laden, Farben, Identitäten, anatomische Positionen, zwei-/vier-/sechsbeinige Bewegungsproben und Undo/Redo einschließlich Speichern. Bestehende Kreaturen-, Kampagnen-, Wildtier-, Speicher- und Exportprüfungen bleiben Teil der Projektprüfung.
 
