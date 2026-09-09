@@ -10,6 +10,7 @@ const Species = preload("res://creatures/wildlife/species_assembly_factory_v7.gd
 const MAX_PATCHES: int = 25
 const MAX_ANIMALS: int = 4
 const MAX_RECORDS: int = 256
+var domestic: RefCounted
 var adapter: RefCounted
 var player: CharacterBody3D
 var spawn: Dictionary
@@ -148,7 +149,11 @@ func _publish(data: Dictionary) -> void:
 
 
 func _update_animals() -> void:
+	if domestic != null:
+		domestic.update(self)
+		if domestic.built_this_update: return
 	for id in animals.keys():
+		if domestic != null and domestic.owns(id): continue
 		var animal: CharacterBody3D = animals[id]
 		animal.enabled = not paused
 		if animal.position.distance_to(player.position) > 105.0 or not wanted.has(id.trim_suffix(":animal")):
@@ -197,6 +202,9 @@ func _update_animals() -> void:
 
 
 func _capture_animal(id: String) -> void:
+	if domestic != null and domestic.owns(id):
+		domestic.capture_one(self, id)
+		return
 	var animal: CharacterBody3D = animals[id]
 	animal_records[id].merge({"location": adapter.location(animal), "forward": [animal.forward.x, animal.forward.y, animal.forward.z],
 		"velocity": [animal.velocity.x, animal.velocity.y, animal.velocity.z], "traveled": animal.traveled, "returning": animal.returning}, true)
@@ -216,6 +224,7 @@ func instance_count() -> int:
 
 
 func close() -> void:
+	if domestic != null: domestic.close(self)
 	if _task >= 0:
 		WorkerThreadPool.wait_for_task_completion(_task)
 		_task = -1

@@ -40,7 +40,12 @@ func _run() -> void:
 		expected_file.close()
 		_expect(not world.ecosystem.animals.is_empty(), "Restart did not instantiate saved fauna")
 		for id: String in world.ecosystem.animals:
-			_expect(expected.has(id) and world.ecosystem.animals[id].design == expected[id], "Restart changed native anatomy, color or attachment types")
+			var animal: Node = world.ecosystem.animals[id]
+			# D1 uses the existing JSON scalar contract; Vector3/Color remain exact.
+			var same: bool = expected.has(id) and animal.design == expected[id]
+			if expected.has(id) and world.ecosystem.domestic != null and world.ecosystem.domestic.owns(id):
+				same = preload("res://tests/fixtures/domestic_native_comparison.gd").native_equal(animal.design, expected[id])
+			_expect(same, "Restart changed native anatomy, color or attachment types")
 		await _finish(world)
 		return
 	_expect(world.terrain.surface is Surface and world.terrain.surface.body.radius == 6371000.0, "Living surface not used on Earth-sized terrain")

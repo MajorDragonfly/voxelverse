@@ -3,6 +3,7 @@ const Contract = preload("res://world/fauna/domestication/domestication_contract
 const Generator = preload("res://world/fauna/domestication/domestic_species_generator.gd")
 const BodyEvidence = preload("res://world/fauna/domestication/domestic_body_evidence.gd")
 const Recovery = preload("res://world/fauna/domestication/domestic_habitat_recovery.gd")
+const Surface = preload("res://world/fauna/domestication/domestic_surface_contract.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const REPLACEMENT_SECONDS: float = 300.0
 
@@ -18,8 +19,6 @@ static func ensure(state: Node) -> Dictionary:
 		return body["fauna_catalog"] if validate(body["fauna_catalog"], body).is_empty() else {}
 	if not eligible(body):
 		return {}
-	var catalog := {"schema": Contract.SCHEMA, "generator_version": Contract.GENERATOR_VERSION,
-		"body_id": body["id"], "seed": body["seed"], "species": [], "habitats": [], "habitat_status": "pending"}
 	var used: Dictionary = {}
 	for entry in state.get_node("/root/ProgressionService").discovered_species.values():
 		if int(entry.get("world_seed", -1)) == int(body["seed"]):
@@ -27,14 +26,30 @@ static func ensure(state: Node) -> Dictionary:
 	for entry in state.get_node("/root/ProgressionService").export_state().get("creature_encounters", {}).get("entries", {}).values():
 		if entry is Dictionary and entry.get("body_id") == body["id"] and entry.get("habitat") is Dictionary:
 			used[int(entry["habitat"]["species_seed"])] = true
+	var catalog: Dictionary = create(body, used)
+	body["fauna_catalog"] = catalog
+	state.get_node("/root/SaveGameService").schedule_autosave()
+	return catalog
+
+## Shared pure creation; callers must preserve an existing catalog verbatim.
+static func create(body: Dictionary, used_seeds: Dictionary = {}) -> Dictionary:
+	var used: Dictionary = used_seeds.duplicate()
+	var catalog := {"schema": Contract.SCHEMA, "generator_version": Contract.GENERATOR_VERSION,
+		"body_id": body["id"], "seed": body["seed"], "species": [], "habitats": [], "habitat_status": "pending"}
 	for group in Contract.GROUPS:
 		var seed_value: int = 4_000_000_000_000 + int((str(int(body["seed"])) + ":" + str(body["id"]) + ":" + Contract.GENERATOR_VERSION + ":" + group).sha256_text().left(10).hex_to_int())
 		while used.has(seed_value):
 			seed_value += 1
 		used[seed_value] = true
 		catalog["species"].append(Generator.create(body, group, seed_value))
-	body["fauna_catalog"] = catalog
-	state.get_node("/root/SaveGameService").schedule_autosave()
+	return catalog
+
+static func create_surface(body: Dictionary, anchor: Dictionary, used_seeds: Dictionary = {}) -> Dictionary:
+	if not Surface.eligible(body) or not Surface.location(anchor, str(body.id)): return {}
+	var catalog: Dictionary = create(body, used_seeds)
+	catalog.schema = Surface.SCHEMA
+	catalog.surface = {"schema": 1, "mode": Surface.Cube.MODE, "generation": Surface.GENERATION,
+		"radius": body.radius, "terrain_revision": body.terrain_revision, "anchor": Surface.canonical(anchor)}
 	return catalog
 
 static func species_for(catalog: Dictionary, species_id: String) -> Dictionary:
@@ -52,8 +67,9 @@ static func cell_key(habitat: Dictionary) -> String:
 static func has_unsupported(value: Variant) -> bool:
 	if not value is Dictionary:
 		return false
-	if not Contract.integer(value.get("schema"), 1, 1) or value.get("generator_version") != Contract.GENERATOR_VERSION:
+	if not Contract.integer(value.get("schema"), 1, Surface.SCHEMA) or value.get("generator_version") != Contract.GENERATOR_VERSION:
 		return true
+	if value.get("schema") == Surface.SCHEMA and Surface.unsupported(value): return true
 	if value.has("habitat_recovery") and Recovery.unsupported(value["habitat_recovery"]): return true
 	if not value.get("species") is Array: return false
 	for entry in value.get("species", []):
@@ -98,6 +114,7 @@ static func validate(value: Variant, body: Dictionary) -> String:
 		if not problem.is_empty(): return problem
 		groups.append(entry["group"])
 		identities.append(entry["id"])
+	if value["schema"] == Surface.SCHEMA: return Surface.validate(value, body, identities)
 	var keys: Array = []
 	var represented: Array = []
 	for habitat in value["habitats"]:

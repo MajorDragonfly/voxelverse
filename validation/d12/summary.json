@@ -1,0 +1,99 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "platform": "Linux headless",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.467,
+      "evidence": "import.log"
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.643,
+      "evidence": "art_sources.log"
+    },
+    {
+      "name": "domestication_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.823,
+      "evidence": "domestication_contract_test.log"
+    },
+    {
+      "name": "domestic_fauna_catalog_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 27.081,
+      "evidence": "domestic_fauna_catalog_test.log"
+    },
+    {
+      "name": "domestic_surface_catalog_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.718,
+      "evidence": "domestic_surface_catalog_test.log"
+    },
+    {
+      "name": "living_planet_entry_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 32.084,
+      "evidence": "living_planet_entry_test.log"
+    },
+    {
+      "name": "surface_adapter_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.988,
+      "evidence": "surface_adapter_contract_test.log"
+    },
+    {
+      "name": "domestic_surface_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 33.683,
+      "evidence": "domestic_surface_runtime_test.log"
+    },
+    {
+      "name": "living_planet_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.088,
+      "evidence": "living_planet_test.log"
+    },
+    {
+      "process": "write",
+      "passed": true,
+      "exit_code": 0,
+      "name": "legacy-restart-write",
+      "evidence": "legacy-restart-write.log"
+    },
+    {
+      "process": "read",
+      "passed": true,
+      "exit_code": 0,
+      "name": "legacy-restart-read",
+      "evidence": "legacy-restart-read.log"
+    },
+    {
+      "process": "write",
+      "passed": true,
+      "exit_code": 0,
+      "name": "spherical-restart-write",
+      "evidence": "spherical-restart-write.log"
+    },
+    {
+      "process": "read",
+      "passed": true,
+      "exit_code": 0,
+      "name": "spherical-restart-read",
+      "evidence": "spherical-restart-read.log"
+    }
+  ],
+  "passed": true,
+  "graphics": "Not run: local X display could not start; native Windows untested."
+}

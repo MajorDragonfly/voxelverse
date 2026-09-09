@@ -1,0 +1,237 @@
+{
+  "cases": [
+    {
+      "body": "test:50000.0:0",
+      "habitats": 3,
+      "ids": [
+        "object_1317ff265a02822b84a58b0574aa4924",
+        "object_a5fad86bcb9ed8c8c4899c37f538b44a",
+        "object_ce540253c85edab1a542f7a5309abc38"
+      ],
+      "nodes": 36,
+      "radius": 50000.0
+    },
+    {
+      "body": "test:50000.0:1",
+      "habitats": 3,
+      "ids": [
+        "object_1d23b3212b0a82510ee63e4bb67c06f0",
+        "object_ae9fd2cb9abc29533446f4faef338b94",
+        "object_644c9ddb0df0c2647e7e54b52fd82e60"
+      ],
+      "nodes": 36,
+      "radius": 50000.0
+    },
+    {
+      "body": "test:50000.0:2",
+      "habitats": 3,
+      "ids": [
+        "object_934648fa77511a36274bc0c3b2830329",
+        "object_643817015f16f8260b467234608000a2",
+        "object_5c73eb8da8af990d52a65708e99f7228"
+      ],
+      "nodes": 36,
+      "radius": 50000.0
+    },
+    {
+      "body": "test:50000.0:3",
+      "habitats": 3,
+      "ids": [
+        "object_064b0f9339bc00b95fd527dc422cc278",
+        "object_8d9ad8af4b1326d28ad065e396b70781",
+        "object_4f99a7be22ce63424f3aefaa76edce9b"
+      ],
+      "nodes": 36,
+      "radius": 50000.0
+    },
+    {
+      "body": "test:50000.0:4",
+      "habitats": 3,
+      "ids": [
+        "object_dc1a045ee7848a3d00ab413ebd6020c9",
+        "object_6fccdd52006df25293215d5cc58a9b85",
+        "object_60d73a0d012607da536b2deee45f2c35"
+      ],
+      "nodes": 36,
+      "radius": 50000.0
+    },
+    {
+      "body": "test:50000.0:5",
+      "habitats": 3,
+      "ids": [
+        "object_f4a797079d8224e66ad5695d2d919012",
+        "object_d73b1b6cedb30f642eeb3c1fa6707cc9",
+        "object_b2308f4ca12e29c4fda50cb5710c3429"
+      ],
+      "nodes": 36,
+      "radius": 50000.0
+    },
+    {
+      "body": "test:500000.0:0",
+      "habitats": 3,
+      "ids": [
+        "object_f8c6c1d14a2a62641807e36b3a684315",
+        "object_a51cf061d8e4f2b4d64ecb6ed530e4e5",
+        "object_aac21cd79a3027afbdbf9500be7188ab"
+      ],
+      "nodes": 35,
+      "radius": 500000.0
+    },
+    {
+      "body": "test:500000.0:1",
+      "habitats": 3,
+      "ids": [
+        "object_a062ba2f9396ae915974eab4832c9267",
+        "object_1dc7c9f3571d27cc1e7e51ccd888ea77",
+        "object_6647f21e18bd3701c76e7e3b294f3a6b"
+      ],
+      "nodes": 36,
+      "radius": 500000.0
+    },
+    {
+      "body": "test:500000.0:2",
+      "habitats": 3,
+      "ids": [
+        "object_33402d8e38f1acc86acb908ab12579a4",
+        "object_0c53a38af929e681455b0b2918d3ca7c",
+        "object_e578018dfa24f4574cea2d22b5242ea4"
+      ],
+      "nodes": 31,
+      "radius": 500000.0
+    },
+    {
+      "body": "test:500000.0:3",
+      "habitats": 3,
+      "ids": [
+        "object_0c7bf7e53dddc11e965914a6e54b3e9e",
+        "object_7b18b824c1a26f43ed7796e2466ae3d6",
+        "object_eb8b11b294c53c0c0ef33dee468fa3c9"
+      ],
+      "nodes": 36,
+      "radius": 500000.0
+    },
+    {
+      "body": "test:500000.0:4",
+      "habitats": 3,
+      "ids": [
+        "object_5a378a9d081b1a4351364b5d4697f45c",
+        "object_065071607a061825ad45c0e9d4d6ce71",
+        "object_124eebf020275db5422b2060208afba6"
+      ],
+      "nodes": 35,
+      "radius": 500000.0
+    },
+    {
+      "body": "test:500000.0:5",
+      "habitats": 3,
+      "ids": [
+        "object_6e7179e775d6a6a846450820caea2164",
+        "object_96fb35437fb3c80e30035028a5f02fbf",
+        "object_f1993e788dff2110680a2fe092825c4a"
+      ],
+      "nodes": 36,
+      "radius": 500000.0
+    },
+    {
+      "body": "test:6371000.0:0",
+      "habitats": 3,
+      "ids": [
+        "object_b8954ad23aca15e4de592fd4f7ae9934",
+        "object_47a736f916affdf022a40af60465a0a7",
+        "object_4a8964fbc415406f360adbb4ed95f985"
+      ],
+      "nodes": 35,
+      "radius": 6371000.0
+    },
+    {
+      "body": "test:6371000.0:1",
+      "habitats": 3,
+      "ids": [
+        "object_008a1425335d56948a35ba599c680ee1",
+        "object_99ffefcdcdc327c4fadbf67086bb6fba",
+        "object_1d47ef8b1a7a3fb541dc031672d0a3d1"
+      ],
+      "nodes": 36,
+      "radius": 6371000.0
+    },
+    {
+      "body": "test:6371000.0:2",
+      "habitats": 3,
+      "ids": [
+        "object_7c94c36436688b68b5fa2601568fde43",
+        "object_fb889975a134110ddb53ae90b4028cb2",
+        "object_18e75061d987080b042b23fc002340c2"
+      ],
+      "nodes": 31,
+      "radius": 6371000.0
+    },
+    {
+      "body": "test:6371000.0:3",
+      "habitats": 3,
+      "ids": [
+        "object_e63469e9768bb54e28cf07f9f2201897",
+        "object_e428f1c42f65489691248a852b14aa8d",
+        "object_c9c2e159cb612af3e971a6d04b850b3c"
+      ],
+      "nodes": 36,
+      "radius": 6371000.0
+    },
+    {
+      "body": "test:6371000.0:4",
+      "habitats": 3,
+      "ids": [
+        "object_2bce51030ef2e89d6f758977287a2ce3",
+        "object_fa8fec78c1459b4bb2a97fd21f2a1c74",
+        "object_88d6b8e82dfed9a28f4ac4c22ad69b83"
+      ],
+      "nodes": 35,
+      "radius": 6371000.0
+    },
+    {
+      "body": "test:6371000.0:5",
+      "habitats": 3,
+      "ids": [
+        "object_f14e2425550b67465481789ab74fea40",
+        "object_09d50bc0aa86140b39aef36a272f5917",
+        "object_1d62dd77cc0ebc77b56d8ecb9366c0db"
+      ],
+      "nodes": 36,
+      "radius": 6371000.0
+    },
+    {
+      "body": "m1b:terra",
+      "habitats": 3,
+      "ids": [
+        "object_a94d6fafcc96015e8ea7b683e36e3750",
+        "object_b614760384817a7f169577acbbd008e1",
+        "object_ac9f1067b8ee06bb3edcd32679b01777"
+      ],
+      "nodes": 36,
+      "radius": 6371000.0
+    },
+    {
+      "body": "m1b:100",
+      "habitats": 3,
+      "ids": [
+        "object_f6e0878355dbeff3179107df244c3209",
+        "object_79f42c8b4c07d4dc69a2d00253b3a1ac",
+        "object_0c7c70d788c4109adec6b2a78708ad56"
+      ],
+      "nodes": 36,
+      "radius": 50000.0
+    },
+    {
+      "body": "m1b:1000",
+      "habitats": 3,
+      "ids": [
+        "object_9330ff50e138a117022d7a9cc179f6ac",
+        "object_0e06380b2dec86d4d55387f16b37ff2c",
+        "object_5ad223d81b6a7d8fcbbcc55b282233a1"
+      ],
+      "nodes": 36,
+      "radius": 500000.0
+    }
+  ],
+  "failures": [],
+  "test": "domestic_surface_catalog"
+}

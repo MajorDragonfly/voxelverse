@@ -3,6 +3,7 @@ extends "res://world/planet_lab/surface_adapter_lab.gd"
 const LivingSurface = preload("res://world/surface/living_planet_surface.gd")
 const LivingStore = preload("res://world/surface/living_planet_store.gd")
 const Ecosystem = preload("res://world/surface/surface_ecosystem.gd")
+const Domestic = preload("res://world/fauna/domestication/domestic_surface_runtime.gd")
 const BIOME_NAMES: Dictionary = {"grassland": "Wiese", "savanna": "Savanne", "desert": "Wüste",
 	"forest": "Wald", "dense_forest": "Dichter Wald", "rocky_highlands": "Felsiges Hochland",
 	"alpine": "Gebirge", "snow": "Schneeland", "coast": "Küste", "ocean": "Meer"}
@@ -15,6 +16,8 @@ func _init() -> void:
 	save_backend = LivingStore
 	for id in System.REAL_LANDABLE:
 		system.bodies[id]["surface_generation"] = LivingSurface.GENERATION
+		system.bodies[id]["surface_mode"] = Cube.MODE
+		system.bodies[id]["inhabited"] = true
 
 
 func _build_view() -> void:
@@ -74,6 +77,8 @@ func stream_objects() -> void:
 		ecosystem.spawn = records[body_id].spawn.duplicate(true)
 		ecosystem.animal_records = records[body_id].get("fauna", {}).duplicate(true)
 		ecosystem.paused = paused
+		ecosystem.domestic = Domestic.new()
+		ecosystem.domestic.configure(system.bodies[body_id], records[body_id], terrain.surface)
 		add_child(ecosystem)
 
 
@@ -104,6 +109,7 @@ func return_to_marker() -> void:
 
 func snapshot() -> Dictionary:
 	var data: Dictionary = super.snapshot()
+	data.schema = 2
 	data.surface_generation = LivingSurface.GENERATION
 	data.fauna_codec = "godot_native_v1"
 	return data
@@ -113,6 +119,7 @@ func set_paused(value: bool) -> void:
 	super.set_paused(value)
 	if is_instance_valid(ecosystem):
 		ecosystem.paused = value
+		if ecosystem.domestic != null: ecosystem.domestic.set_paused(value)
 		for animal: Node in ecosystem.animals.values():
 			animal.enabled = not value
 
