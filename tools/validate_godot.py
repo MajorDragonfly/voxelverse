@@ -56,7 +56,8 @@ def validate(args):
                 name = f"shutdown_{seed}_{stage}"
                 commands.append((name, ["--verbose", "--script", "res://tools/main_shutdown_probe.gd",
                                         "--", str(seed), stage], 120))
-        commands.append(("streaming_cpu", ["--script", "res://tools/benchmark_streaming.gd"], 120))
+        commands.append(("streaming_cpu", ["--script", "res://tools/benchmark_streaming.gd", "--",
+                                           "--report", str(args.output / "streaming_cpu_measurements.json")], 120))
     results = []
     for name, command, timeout in commands:
         started = time.monotonic()

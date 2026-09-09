@@ -1,0 +1,47 @@
+name: Performance route diagnostics
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "tools/profile_performance.py"
+      - "tools/performance_route_probe.gd"
+      - "tools/validation_support.py"
+      - "tools/benchmark_streaming.gd"
+      - "tools/validate_godot.py"
+      - "tools/install_godot.py"
+      - "tests/tooling/**"
+      - ".github/actions/setup-godot-editor/**"
+      - ".github/workflows/performance-profile.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Verify tooling and import sources
+        run: |
+          python -m unittest discover -s tests/tooling -p '*_test.py' -v
+          python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --skip-main --tests --output "$RUNNER_TEMP/performance-import"
+      - name: Measure three world visits and streaming routes
+        run: >-
+          python tools/profile_performance.py
+          --godot "${{ steps.engine.outputs.godot }}"
+          --cycles 3 --renderer headless
+          --output "${{ runner.temp }}/performance-route"
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-route-${{ github.event_name }}
+          path: |
+            ${{ runner.temp }}/performance-route
+            ${{ runner.temp }}/performance-import
+          retention-days: 7

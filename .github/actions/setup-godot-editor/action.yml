@@ -1,0 +1,28 @@
+name: Verified Godot editor
+description: Cache the pinned Linux editor archive and verify it on every installation.
+outputs:
+  godot:
+    description: Absolute editor executable path
+    value: ${{ steps.install.outputs.godot }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - uses: actions/cache@v4
+      with:
+        path: ${{ runner.temp }}/godot-editor-toolchain/*.zip
+        key: godot-editor-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tools/install_godot.py') }}
+    - name: Verify and install editor only
+      id: install
+      shell: bash
+      run: |
+        python tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only
+        python - <<'PY'
+        import json, os
+        from pathlib import Path
+        metadata = json.loads((Path(os.environ['RUNNER_TEMP']) / 'godot-editor-toolchain/editor-toolchain.json').read_text())
+        with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+            output.write('godot=' + metadata['editor'] + '\n')
+        PY
