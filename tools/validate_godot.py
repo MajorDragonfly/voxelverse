@@ -10,7 +10,10 @@ import sys
 import tempfile
 import time
 
-from validation_support import isolated_env, validation_editor
+if __package__:
+    from .validation_support import isolated_env, validation_editor
+else:
+    from validation_support import isolated_env, validation_editor
 
 # These acceptance flows include real 300-second production or 90-second growth
 # plus transport and restart. Keep short checks bounded independently.

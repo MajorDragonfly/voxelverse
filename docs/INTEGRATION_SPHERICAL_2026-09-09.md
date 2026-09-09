@@ -52,6 +52,8 @@ python3 tools/validate_domestic_fauna.py --godot "$GODOT_BIN" --probe d12 --outp
 
 Diese Aufrufe schließen zusätzlich Import- bzw. Einstiegskontrollen ein; ihre Gesamtzahl kann deshalb über den oben genannten Einzeltests liegen. Die Paketprobe trennt native Tests ausdrücklich von instrumentierten Prüfungen mit dem Editor und dem Release-PCK.
 
+Die anschließende GitHub-Prüfung deckte zusätzlich einen Importfehler in der Prüfinfrastruktur auf: Drei grafische Körper-/Sattelprüfungen importieren `tools.validate_godot` als Modul, während der Hilfsimport bislang nur beim direkten Skriptstart funktionierte. Der Import unterstützt jetzt beide Aufrufarten; die Fehlererkennung und eigentlichen Spielprüfungen bleiben erhalten. Die aktuellen Remote-Ergebnisse sind im [Integrations-PR #41](https://github.com/MajorDragonfly/voxelverse/pull/41) nachvollziehbar.
+
 ## Veröffentlichung
 
 Der Nutzer hat die Veröffentlichung im öffentlichen Repository `MajorDragonfly/voxelverse` und die anschließende Übernahme nach `main` ausdrücklich freigegeben. Die ursprüngliche Ablehnung der automatischen Freigabeprüfung gehört zum vorherigen Prüfstand; der entsprechende Eintrag im Ergebnisnachweis dokumentiert diesen Zeitpunkt.
