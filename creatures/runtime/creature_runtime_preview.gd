@@ -8,11 +8,15 @@ const InstanceBuffer = preload("res://core/multimesh_buffer.gd")
 const SculptSurface = preload("res://creatures/editor/creature_sculpt_surface.gd")
 const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
 const Motion = preload("res://creatures/runtime/creature_sculpt_motion.gd")
+const PartGeometry = preload("res://creatures/editor/creature_part_geometry.gd")
+const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
 
 # Kept for compatibility: true selects the editable, cubic surface; false
 # selects the original independently batched slice renderer.
 var sculpted_surface: bool = true
 var motion_mode: String = "edit"
+var show_center_axis: bool = false
+var editing_terminal: bool = false
 var _motion := Motion.new()
 var _motion_time: float = 0.0
 
@@ -91,8 +95,10 @@ func _create_body() -> void:
 	var skin := MeshInstance3D.new()
 	skin.name = "SculptedSkin"
 	skin.mesh = SculptSurface.build_skin(blueprint)
-	skin.material_override = SculptSurface.material(Color.WHITE, true)
+	skin.material_override = SculptSurface.material(Color.WHITE, true, blueprint)
 	root.add_child(skin)
+	if show_center_axis:
+		_create_center_axis(root)
 	if show_spine_handles:
 		for index in range(SpineProfile.SEGMENT_COUNT):
 			var segment: Dictionary = SpineProfile.get_segment(blueprint, index)
@@ -133,6 +139,88 @@ func _create_all_parts() -> void:
 			# Anchor positions already include spine width, height and length.
 			# V4's extra display transform applied those factors a second time.
 			_create_part_instance(parts[index], index)
+	var body: MeshInstance3D = get_node("BodyV4/SculptedSkin")
+	LimbRig.level_legs(self, body.mesh.get_aabb().position.y)
+	for child in get_children():
+		if child is Node3D and child.has_meta("creature_part_index"):
+			var box: AABB = LimbRig.bounds(child)
+			_setup_part_root_collider(child, [{"position": box.get_center(), "size": box.size}], 1.0)
+
+
+func _create_part_instance(placement: Dictionary, part_index: int) -> void:
+	var data: Dictionary = placement.duplicate(true)
+	var point: Vector3 = Blueprint._as_vector3(data.get("position", Vector3.ZERO))
+	if sculpted_surface and (bool(data.get("center_locked", false)) or absf(point.x) < 0.005):
+		data["mirrored"] = false
+		if bool(data.get("center_locked", false)):
+			point.x = 0.0
+			data["position"] = point
+	super._create_part_instance(data, part_index)
+
+
+func _create_single_part_side(placement: Dictionary, definition: Dictionary, category: String, index: int, side: float, point: Vector3, angles: Vector3, size: float, selected: bool) -> void:
+	if not sculpted_surface:
+		super._create_single_part_side(placement, definition, category, index, side, point, angles, size, selected)
+		return
+	var root := Node3D.new()
+	root.name = "%s_%s_%d" % [category, str(placement.get("uid", "part")), int(side)]
+	root.position = point
+	# Reflection across X changes yaw and roll signs, including asymmetric
+	# fingers, side spikes and antler branches inside the mirrored root.
+	root.rotation_degrees = angles * Vector3(1, side, side)
+	root.scale = Vector3.ONE * size
+	root.set_meta("creature_part_index", index)
+	root.set_meta("creature_part_category", category)
+	root.set_meta("creature_part_side", side)
+	root.set_meta("creature_part_id", str(definition["id"]))
+	add_child(root)
+	PartGeometry.build(root, definition, placement, blueprint)
+	if selected:
+		var target: Node3D = root
+		if editing_terminal and root.has_meta("sculpt_limb_rig"):
+			target = root.get_meta("sculpt_limb_rig")["socket"]
+		_create_selection_marker(target)
+		for axis in range(3):
+			var end := Vector3.ZERO
+			end[axis] = 0.42 / maxf(size, 0.25)
+			var line: MeshInstance3D = SculptSurface.bone(target, "LocalAxis%d" % axis, Vector3.ZERO, end, 0.012 / maxf(size, 0.25), [Color("ef7d79"), Color("aee4aa"), Color("83beef")][axis])
+			line.set_meta("editor_guide", true)
+			line.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			line.material_override.no_depth_test = true
+			line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+
+
+func center_socket(index: int) -> Dictionary:
+	var t: float = lerpf(0.04, 0.96, float(index) / 6.0)
+	var cross: Dictionary = SculptSurface.section(blueprint, t)
+	var skin: MeshInstance3D = get_node("BodyV4/SculptedSkin")
+	var origin: Vector3 = cross["center"] + Vector3.UP * (cross["radius"].y + 0.25)
+	var hit: Dictionary = SculptSurface.Voxels.raycast(skin.mesh, origin, Vector3.DOWN)
+	if hit.is_empty():
+		return {"position": origin - Vector3.UP * 0.25, "t": t, "center": true}
+	hit["t"] = t
+	hit["center"] = true
+	return hit
+
+
+func _create_center_axis(parent: Node3D) -> void:
+	var axis := Node3D.new()
+	axis.name = "CenterAxis"
+	axis.set_meta("editor_guide", true)
+	parent.add_child(axis)
+	var previous := Vector3.ZERO
+	for index in range(7):
+		var point: Vector3 = center_socket(index)["position"] + Vector3.UP * 0.025
+		var dot: MeshInstance3D = SculptSurface.ellipsoid(axis, "CenterSocket%d" % index, point, Vector3.ONE * 0.075, Color("f4d98e"))
+		dot.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		dot.material_override.no_depth_test = true
+		dot.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		if index > 0:
+			var line: MeshInstance3D = SculptSurface.bone(axis, "CenterLine%d" % index, previous, point, 0.014, Color("f4d98e"))
+			line.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			line.material_override.no_depth_test = true
+			line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		previous = point
 
 
 func _create_detail_box(parent: Node3D, box_name: String, local_position: Vector3,
@@ -153,6 +241,7 @@ func _create_selection_marker(part_root: Node3D) -> void:
 		return
 	var marker := MeshInstance3D.new()
 	marker.name = "SelectionRing"
+	marker.set_meta("editor_guide", true)
 	var frame: Dictionary = {}
 	for x in range(-5, 5):
 		for z in range(-5, 5):

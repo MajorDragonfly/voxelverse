@@ -14,6 +14,7 @@ const SpineProfile = preload(
 const Compatibility = preload("res://core/persistence/design_compatibility.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Store = preload("res://core/persistence/design_store.gd")
+const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 
 const SAVE_VERSION: int = 7
 const SAVE_PATH: String = "user://creature_assembly_v7.json"
@@ -47,6 +48,18 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 	Ids.ensure_design(blueprint)
 	SpineProfile.ensure_profile(blueprint)
 	Compatibility.resolve_creature(blueprint)
+	SkinStyle.normalize(blueprint)
+	for part: Dictionary in blueprint.get("parts", []):
+		part["shape_scale"] = BaseBlueprint.get_part_shape(part)
+		part["end_shape_scale"] = BaseBlueprint.get_part_shape(part, "end_shape_scale")
+		part["end_scale"] = clampf(float(part.get("end_scale", 1.0)), 0.4, 2.0)
+		var end_id: String = str(part.get("end_part_id", ""))
+		var end: Dictionary = BaseBlueprint.PartLibrary.get_part(end_id)
+		var expected: String = "feet" if str(part.get("category", "")) == "legs" else ("hands" if str(part.get("category", "")) == "arms" else "")
+		if not end_id.is_empty() and (expected.is_empty() or end.is_empty() or str(end.get("category", "")) != expected):
+			part["end_part_id"] = ""
+		if bool(part.get("center_locked", false)):
+			part["mirrored"] = false
 
 	var assembly: Dictionary = blueprint.get("assembly", {})
 	assembly["schema"] = SAVE_VERSION

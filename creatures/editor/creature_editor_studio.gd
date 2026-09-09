@@ -6,7 +6,8 @@ const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
 const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
 const PartCard = preload("res://creatures/editor/creature_part_card.gd")
 const Canvas = preload("res://creatures/editor/creature_editor_canvas.gd")
-const CATEGORY_NAMES: Dictionary = {"body": "Körper", "mouth": "Mäuler", "eyes": "Augen", "legs": "Beine", "arms": "Arme", "tail": "Schwänze", "horns": "Hörner", "plates": "Panzer", "spikes": "Stacheln", "decor": "Details", "paint": "Muster"}
+const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
+const CATEGORY_NAMES: Dictionary = {"body": "Körper", "mouth": "Mäuler", "eyes": "Augen", "legs": "Beine", "arms": "Arme", "feet": "Füße", "hands": "Hände", "tail": "Schwänze", "horns": "Hörner", "plates": "Panzer", "spikes": "Stacheln", "decor": "Details", "paint": "Muster"}
 const MINT := Color("a6ebcc")
 const INK := Color("0d202b")
 
@@ -33,6 +34,17 @@ var _drag_part: bool = false
 var _drag_side: float = 1.0
 var _motion_choice: String = "idle"
 var _last_mode_category: String = "eyes"
+var _part_fields: Dictionary = {}
+var _part_controls: VBoxContainer
+var _part_target: OptionButton
+var _editing_terminal: bool = false
+var _placement_buttons: Dictionary = {}
+var _paint_controls: VBoxContainer
+var _skin_choice: OptionButton
+var _paint_fields: Dictionary = {}
+var _extra_pickers: Dictionary = {}
+var _color_target: OptionButton
+var _active_color_field: String = "base_color"
 
 
 func _ready() -> void:
@@ -276,6 +288,12 @@ func _build_inspector() -> void:
 	_complexity_bar.custom_minimum_size.y = 8
 	_inspector.add_child(_complexity_bar)
 	_stats_label = _label(_inspector, "", 15)
+	_label(_inspector, "ANGEBAUTE TEILE", 12).name = "AttachedPartsTitle"
+	_part_list = ItemList.new()
+	_part_list.name = "AttachedParts"
+	_part_list.custom_minimum_size = Vector2(0, 125)
+	_part_list.item_selected.connect(_select_part_by_index)
+	_inspector.add_child(_part_list)
 	_selection_label = _label(_inspector, "Körperpunkt wählen", 18)
 	_selection_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	for field in [["width_scale", "Breite", 0.22, 2.6], ["height_scale", "Höhe", 0.22, 2.6], ["y_offset", "Krümmung", -1.8, 1.8], ["length", "Körperlänge", 0.45, 3.0]]:
@@ -292,8 +310,11 @@ func _build_inspector() -> void:
 		slider.value_changed.connect(_change_shape.bind(field[0]))
 		container.add_child(slider)
 		_sliders[field[0]] = slider
+	_build_paint_controls()
 	_base_picker = _color_picker("Hautfarbe", "base_color")
 	_accent_picker = _color_picker("Musterfarbe", "accent_color")
+	for entry in [["belly_color", "Bauchfarbe"], ["eye_color", "Irisfarbe"], ["horn_color", "Hörner & Krallen"]]:
+		_extra_pickers[entry[0]] = _color_picker(entry[1], entry[0])
 	var part_actions := HBoxContainer.new()
 	part_actions.name = "PartActions"
 	_inspector.add_child(part_actions)
@@ -302,16 +323,11 @@ func _build_inspector() -> void:
 	var transforms := HBoxContainer.new()
 	transforms.name = "PartTransforms"
 	_inspector.add_child(transforms)
-	_button(transforms, "−", _scale_down)
-	_button(transforms, "+", _scale_up)
-	_button(transforms, "↶", _rotate_negative)
-	_button(transforms, "↷", _rotate_positive)
-	_label(_inspector, "ANGEBAUTE TEILE", 12)
-	_part_list = ItemList.new()
-	_part_list.name = "AttachedParts"
-	_part_list.custom_minimum_size = Vector2(0, 166)
-	_part_list.item_selected.connect(_select_part_by_index)
-	_inspector.add_child(_part_list)
+	_button(transforms, "−", _scale_down).name = "PartSmaller"
+	_button(transforms, "+", _scale_up).name = "PartLarger"
+	_button(transforms, "↶", _rotate_negative).name = "PartRotateLeft"
+	_button(transforms, "↷", _rotate_positive).name = "PartRotateRight"
+	_build_part_controls()
 	_button(_inspector, "Ansicht einpassen  ·  F", _frame_creature)
 
 
@@ -320,6 +336,7 @@ func _color_picker(label: String, field: String) -> ColorPickerButton:
 	_inspector.add_child(column)
 	_label(column, label, 13)
 	var picker := ColorPickerButton.new()
+	picker.name = "Color_" + field
 	picker.text = label
 	picker.edit_alpha = false
 	picker.custom_minimum_size.y = 42
@@ -328,6 +345,404 @@ func _color_picker(label: String, field: String) -> ColorPickerButton:
 	picker.color_changed.connect(_change_color.bind(field))
 	column.add_child(picker)
 	return picker
+
+
+func _build_part_controls() -> void:
+	_part_controls = VBoxContainer.new()
+	_part_controls.name = "PartSettings"
+	_part_controls.add_theme_constant_override("separation", 8)
+	_inspector.add_child(_part_controls)
+	_part_target = OptionButton.new()
+	_part_target.name = "TransformTarget"
+	_part_target.add_item("Ganze Gliedmaße")
+	_part_target.add_item("Fuß / Hand")
+	_part_target.item_selected.connect(_choose_transform_target)
+	_part_controls.add_child(_part_target)
+	var placement_row := HBoxContainer.new()
+	placement_row.name = "PlacementModes"
+	_part_controls.add_child(placement_row)
+	for entry in [["single", "Einzeln"], ["paired", "Paar"], ["center", "Mitte"]]:
+		var button := _button(placement_row, entry[1], _set_placement_mode.bind(entry[0]))
+		button.name = "Placement_" + str(entry[0])
+		button.toggle_mode = true
+		button.add_theme_font_size_override("font_size", 12)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_placement_buttons[entry[0]] = button
+	var grid := GridContainer.new()
+	grid.columns = 4
+	grid.add_theme_constant_override("h_separation", 3)
+	_part_controls.add_child(grid)
+	_label(grid, "", 12)
+	for axis in ["X", "Y", "Z"]:
+		_label(grid, axis, 12)
+	for field in ["position", "rotation", "shape"]:
+		_label(grid, {"position": "Ort", "rotation": "Drehen", "shape": "Form"}[field], 12)
+		for axis in range(3):
+			var spin := SpinBox.new()
+			spin.name = "Part_%s_%d" % [field, axis]
+			spin.min_value = 0.4 if field == "shape" else (-180.0 if field == "rotation" else -10.0)
+			spin.max_value = 2.5 if field == "shape" else (180.0 if field == "rotation" else 10.0)
+			spin.step = 0.05 if field == "shape" else (1.0 if field == "rotation" else 0.02)
+			spin.custom_minimum_size.x = 60
+			spin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			spin.get_line_edit().add_theme_font_size_override("font_size", 12)
+			spin.get_line_edit().focus_entered.connect(_begin_gesture)
+			spin.get_line_edit().focus_exited.connect(_end_gesture)
+			spin.value_changed.connect(_change_part_field.bind(field, axis))
+			spin.tooltip_text = ["X: seitlich / Breite", "Y: Höhe / Länge", "Z: vor und zurück / Tiefe"][axis] + (" · Grad" if field == "rotation" else "")
+			grid.add_child(spin)
+			_part_fields["%s_%d" % [field, axis]] = spin
+	_label(_part_controls, "Gesamtgröße", 12)
+	var size := HSlider.new()
+	size.name = "PartSize"
+	size.min_value = 0.25
+	size.max_value = 3.0
+	size.step = 0.05
+	size.custom_minimum_size.y = 28
+	size.drag_started.connect(_begin_gesture)
+	size.drag_ended.connect(func(_changed: bool) -> void: _end_gesture())
+	size.value_changed.connect(_change_part_field.bind("scale", 0))
+	_part_controls.add_child(size)
+	_part_fields["scale"] = size
+	_button(_part_controls, "Drehung & Form zurücksetzen", _reset_part_shape).add_theme_font_size_override("font_size", 12)
+	_button(_part_controls, "Standard-Fuß / -Hand", _remove_terminal).name = "DefaultTerminal"
+
+
+func _build_paint_controls() -> void:
+	_paint_controls = VBoxContainer.new()
+	_paint_controls.name = "SkinSettings"
+	_paint_controls.add_theme_constant_override("separation", 8)
+	_inspector.add_child(_paint_controls)
+	_label(_paint_controls, "Hauttyp · nur Oberfläche", 13)
+	_skin_choice = OptionButton.new()
+	_skin_choice.name = "SkinType"
+	for name: String in SkinStyle.TYPES.values():
+		_skin_choice.add_item(name)
+	_skin_choice.item_selected.connect(_choose_skin_type)
+	_paint_controls.add_child(_skin_choice)
+	for entry in [["skin_strength", "Strukturstärke", 0.0, 1.0], ["skin_scale", "Feinheit der Struktur", 0.4, 2.5], ["pattern_strength", "Musterstärke", 0.0, 1.0]]:
+		_label(_paint_controls, entry[1], 12)
+		var slider := HSlider.new()
+		slider.name = str(entry[0])
+		slider.min_value = entry[2]
+		slider.max_value = entry[3]
+		slider.step = 0.05
+		slider.custom_minimum_size.y = 25
+		slider.drag_started.connect(_begin_gesture)
+		slider.drag_ended.connect(func(_changed: bool) -> void: _end_gesture())
+		slider.value_changed.connect(_change_skin_value.bind(entry[0]))
+		_paint_controls.add_child(slider)
+		_paint_fields[entry[0]] = slider
+	_color_target = OptionButton.new()
+	_color_target.name = "SwatchTarget"
+	for name in ["Farbfelder → Haut", "Farbfelder → Muster", "Farbfelder → Bauch", "Farbfelder → Iris", "Farbfelder → Hörner"]:
+		_color_target.add_item(name)
+	_color_target.item_selected.connect(func(index: int) -> void: _active_color_field = ["base_color", "accent_color", "belly_color", "eye_color", "horn_color"][index])
+	_paint_controls.add_child(_color_target)
+	var grid := GridContainer.new()
+	grid.columns = 6
+	_paint_controls.add_child(grid)
+	for hex: String in SkinStyle.SWATCHES:
+		var swatch := Button.new()
+		swatch.name = "Swatch_" + hex
+		swatch.custom_minimum_size = Vector2(32, 26)
+		swatch.tooltip_text = "#" + hex
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color(hex)
+		style.set_border_width_all(1)
+		style.border_color = Color(hex).lightened(0.22)
+		swatch.add_theme_stylebox_override("normal", style)
+		swatch.add_theme_stylebox_override("hover", style)
+		swatch.pressed.connect(_use_swatch.bind(hex))
+		grid.add_child(swatch)
+
+
+func _refresh_design_controls() -> void:
+	if _part_controls == null or _paint_controls == null:
+		return
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	_part_controls.visible = _studio_mode == "parts" and not part.is_empty()
+	_paint_controls.visible = _studio_mode == "paint"
+	var appearance: Dictionary = blueprint.get("appearance", {})
+	_skin_choice.select(maxi(0, SkinStyle.TYPES.keys().find(str(appearance.get("skin_type", "smooth")))))
+	for field: String in _paint_fields:
+		_paint_fields[field].set_value_no_signal(Blueprint.get_paint_intensity(blueprint) if field == "pattern_strength" else float(appearance.get(field, 0.65 if field == "skin_strength" else 1.0)))
+	if part.is_empty():
+		return
+	var limb: bool = str(part.get("category", "")) in ["legs", "arms"]
+	_editing_terminal = _editing_terminal and limb
+	_part_target.visible = limb
+	_part_target.set_item_text(1, "Fuß bearbeiten" if str(part.get("category", "")) == "legs" else "Hand bearbeiten")
+	_part_target.select(1 if _editing_terminal else 0)
+	_part_controls.get_node("DefaultTerminal").visible = limb and _editing_terminal
+	_part_controls.get_node("PlacementModes").visible = not _editing_terminal
+	var mode: String = "center" if bool(part.get("center_locked", false)) else ("paired" if bool(part.get("mirrored", false)) else "single")
+	for key: String in _placement_buttons:
+		_placement_buttons[key].set_pressed_no_signal(key == mode)
+	for field in ["position", "rotation", "shape"]:
+		var value: Vector3 = Blueprint.get_part_shape(part, "end_shape_scale" if _editing_terminal else "shape_scale") if field == "shape" else Blueprint._as_vector3(part.get(("end_" if _editing_terminal and field == "rotation" else "") + field, Vector3.ZERO))
+		for axis in range(3):
+			var spin: SpinBox = _part_fields["%s_%d" % [field, axis]]
+			spin.editable = not (_editing_terminal and field == "position")
+			spin.set_value_no_signal(wrapf(value[axis], -180.0, 180.0) if field == "rotation" else value[axis])
+	var size: HSlider = _part_fields["scale"]
+	size.min_value = 0.4 if _editing_terminal else 0.25
+	size.max_value = 2.0 if _editing_terminal else 3.0
+	size.set_value_no_signal(float(part.get("end_scale" if _editing_terminal else "scale", 1.0)))
+
+
+func _change_part_field(value: float, field: String, axis: int) -> void:
+	if _syncing_ui or selected_part_index < 0 or _studio_mode != "parts":
+		return
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	if part.is_empty() or (_editing_terminal and field == "position"):
+		return
+	_record_before_edit("Endstück einstellen" if _editing_terminal else "Teil einstellen")
+	if field == "scale":
+		part["end_scale" if _editing_terminal else "scale"] = clampf(value, 0.4 if _editing_terminal else 0.25, 2.0 if _editing_terminal else 3.0)
+	elif field == "shape":
+		var key: String = "end_shape_scale" if _editing_terminal else "shape_scale"
+		var shape: Vector3 = Blueprint.get_part_shape(part, key)
+		shape[axis] = clampf(value, 0.4, 2.5)
+		part[key] = shape
+	elif field == "rotation":
+		var key: String = "end_rotation" if _editing_terminal else "rotation"
+		var angles: Vector3 = Blueprint._as_vector3(part.get(key, Vector3.ZERO))
+		angles[axis] = wrapf(value, -180, 180)
+		part[key] = angles
+	else:
+		var point: Vector3 = Blueprint._as_vector3(part.get("position", Vector3.ZERO))
+		point[axis] = value
+		if bool(part.get("center_locked", false)):
+			point.x = 0
+		elif bool(part.get("mirrored", false)):
+			point.x = absf(point.x)
+		if AssemblyV7.is_snap_to_surface(blueprint):
+			_snap_to_shape(selected_part_index, point)
+		else:
+			var anchor: Vector3 = AnatomyV7.get_anchor_position(blueprint, part)
+			var body_shape: Vector3 = Blueprint.get_body_shape(blueprint) * Blueprint.get_body_scale(blueprint)
+			body_shape.z *= SpineProfile.get_body_length_scale(blueprint)
+			var limit: Vector3 = AttachmentNormalizerV7._get_maximum_offset(str(part["category"]), body_shape)
+			part["position"] = anchor + (point - anchor).clamp(-limit, limit).limit_length(limit.length() * 0.70)
+			AnatomyV7.capture_manual_offset(blueprint, selected_part_index)
+	_refresh_preview()
+	_refresh_stats_panel()
+
+
+func _snap_to_shape(index: int, desired: Vector3) -> void:
+	var length: float = Blueprint.get_body_shape(blueprint).z * Blueprint.get_body_scale(blueprint) * SpineProfile.get_body_length_scale(blueprint)
+	var t: float = clampf(desired.z / length + 0.5, 0.025, 0.975)
+	var cross: Dictionary = Surface.section(blueprint, t)
+	var direction: Vector3 = (desired - cross["center"]).normalized()
+	if direction.length_squared() < 0.01:
+		direction = Vector3.UP
+	var skin: MeshInstance3D = _preview.get_node("BodyV4/SculptedSkin")
+	var hit: Dictionary = Voxels.raycast(skin.mesh, cross["center"] + direction * maxf(cross["radius"].x, cross["radius"].y) * 3.0, -direction)
+	if not hit.is_empty():
+		hit["t"] = t
+		_place_on_hit(index, hit)
+
+
+func _choose_transform_target(index: int) -> void:
+	_end_gesture()
+	_editing_terminal = index == 1
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	current_category = ("feet" if str(part.get("category", "")) == "legs" else "hands") if _editing_terminal else str(part.get("category", "eyes"))
+	_last_mode_category = current_category
+	_refresh_all()
+
+
+func _set_placement_mode(mode: String) -> void:
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	if part.is_empty():
+		return
+	_record_before_edit("Befestigung ändern", true)
+	part["center_locked"] = mode == "center"
+	part["mirrored"] = mode == "paired"
+	var point: Vector3 = Blueprint._as_vector3(part.get("position", Vector3.ZERO))
+	if mode == "center":
+		point.x = 0.0
+		var cross: Dictionary = Surface.section(blueprint, float(part.get("anchor_t", 0.5)))
+		point.y = cross["center"].y + cross["radius"].y * (-1 if float(part.get("anchor_vertical", 1.0)) < 0 else 1)
+	elif mode == "paired" and absf(point.x) < 0.05:
+		point.x = Blueprint.get_body_shape(blueprint).x * 0.25
+	part["manual_offset"] = Vector3.ZERO
+	_snap_to_shape(selected_part_index, point)
+	_refresh_all()
+	_set_builder_status("Mittellinie: sieben feste Andockpunkte." if mode == "center" else ("Linke und rechte Seite werden gemeinsam bearbeitet." if mode == "paired" else "Einzelnes Teil bearbeiten."))
+
+
+func _toggle_builder_symmetry() -> void:
+	var enabled: bool = not AssemblyV7.is_symmetry_enabled(blueprint)
+	if selected_part_index >= 0:
+		_set_placement_mode("paired" if enabled else "single")
+	else:
+		_record_before_edit("Symmetrie ändern", true)
+	AssemblyV7.set_symmetry_enabled(blueprint, enabled)
+	_symmetry_enabled = enabled
+	_refresh_all()
+
+
+func _scale_up() -> void:
+	_step_part_field("scale", 0.10)
+
+
+func _scale_down() -> void:
+	_step_part_field("scale", -0.10)
+
+
+func _rotate_positive() -> void:
+	_step_part_field("rotation", 15.0)
+
+
+func _rotate_negative() -> void:
+	_step_part_field("rotation", -15.0)
+
+
+func _step_part_field(field: String, delta: float) -> void:
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	if part.is_empty():
+		return
+	var key: String = ("end_" if _editing_terminal else "") + field
+	var current: float = float(part.get(key, 1.0)) if field == "scale" else Blueprint._as_vector3(part.get(key, Vector3.ZERO)).y
+	_change_part_field(current + delta, field, 1)
+
+
+func _scale_selected_part_from_mouse(delta: float) -> void:
+	_step_part_field("scale", delta)
+
+
+func _reset_part_shape() -> void:
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	if part.is_empty():
+		return
+	_record_before_edit("Teilform zurücksetzen", true)
+	var prefix: String = "end_" if _editing_terminal else ""
+	part[prefix + "rotation"] = Vector3.ZERO
+	part[prefix + "scale"] = 1.0
+	part[prefix + "shape_scale"] = Vector3.ONE
+	_refresh_all()
+
+
+func _accepts_terminal(index: int, id: String) -> bool:
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, index)
+	return str(part.get("category", "")) == ("legs" if id.begins_with("feet_") else "arms")
+
+
+func _set_terminal(id: String) -> void:
+	if not _accepts_terminal(selected_part_index, id) or PartLibrary.get_part(id).is_empty():
+		_set_builder_status("Wähle zuerst das gewünschte Bein." if id.begins_with("feet_") else "Wähle zuerst den gewünschten Arm.")
+		return
+	var candidate: Dictionary = blueprint.duplicate(true)
+	candidate["parts"][selected_part_index]["end_part_id"] = id
+	if Blueprint.calculate_complexity(candidate) > Blueprint.COMPLEXITY_LIMIT:
+		_set_builder_status("Nicht genug Formpunkte für dieses Endstück.")
+		return
+	_record_before_edit("Fuß oder Hand anbauen", true)
+	blueprint = candidate
+	_editing_terminal = true
+	_refresh_all()
+	_set_builder_status("Endstück angebaut · Größe, Form und Drehung rechts einstellen.")
+
+
+func _remove_terminal() -> void:
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	if part.is_empty():
+		return
+	_record_before_edit("Standard-Endstück", true)
+	part["end_part_id"] = ""
+	part["end_scale"] = 1.0
+	part["end_shape_scale"] = Vector3.ONE
+	part["end_rotation"] = Vector3.ZERO
+	_refresh_all()
+
+
+func _duplicate_selected_part() -> void:
+	var candidate: Dictionary = blueprint.duplicate(true)
+	var index: int = Blueprint.duplicate_part(candidate, selected_part_index)
+	if index < 0:
+		return
+	if Blueprint.calculate_complexity(candidate) > Blueprint.COMPLEXITY_LIMIT:
+		_set_builder_status("Nicht genug Formpunkte für eine Kopie.")
+		return
+	_record_before_edit("Teil kopieren", true)
+	blueprint = candidate
+	selected_part_index = index
+	var part: Dictionary = blueprint["parts"][index]
+	part["anchor_t"] = clampf(float(part.get("anchor_t", 0.5)) + 0.08, 0.025, 0.975)
+	AnatomyV7.rebind_part(blueprint, index)
+	_refresh_all()
+
+
+func _on_part_button_pressed(id: String) -> void:
+	if PartLibrary.is_terminal(id):
+		_set_terminal(id)
+		return
+	var progression := get_node_or_null("/root/ProgressionService")
+	if progression != null and not bool(progression.call("is_part_unlocked", id)):
+		_set_builder_status("Dieses Teil wird durch Entdecken freigeschaltet.")
+		return
+	if _studio_mode in ["body", "paint"]:
+		super._on_part_button_pressed(id)
+		return
+	var candidate: Dictionary = blueprint.duplicate(true)
+	var index: int = Blueprint.add_part(candidate, id)
+	if index < 0 or Blueprint.calculate_complexity(candidate) > Blueprint.COMPLEXITY_LIMIT:
+		_set_builder_status("Nicht genug Formpunkte. Entferne zuerst ein Teil.")
+		return
+	_record_before_edit("Teil anbauen", true)
+	blueprint = candidate
+	selected_part_index = index
+	_editing_terminal = false
+	AnatomyV7.ensure_anchors(blueprint, false)
+	AnatomyV7.reset_part_anchor(blueprint, index)
+	SurfaceSocketsV7.apply_symmetry(blueprint, index, AssemblyV7.is_symmetry_enabled(blueprint))
+	var part: Dictionary = blueprint["parts"][index]
+	if str(part["category"]) not in ["mouth", "tail"]:
+		_snap_to_shape(index, part["position"])
+	_refresh_all()
+	_set_builder_status("Teil ausgewählt · Rechts: Drehen X/Y/Z, Form und Größe · Goldene Punkte: Mittellinie.")
+
+
+func _choose_skin_type(index: int) -> void:
+	if _syncing_ui:
+		return
+	_record_before_edit("Hauttyp ändern", true)
+	var appearance: Dictionary = blueprint.get("appearance", {})
+	appearance["skin_type"] = SkinStyle.TYPES.keys()[index]
+	blueprint["appearance"] = appearance
+	_refresh_preview()
+	_refresh_stats_panel()
+
+
+func _change_skin_value(value: float, field: String) -> void:
+	if _syncing_ui:
+		return
+	_record_before_edit("Hautstruktur einstellen")
+	if field == "pattern_strength":
+		Blueprint.set_paint_intensity(blueprint, value)
+	else:
+		var appearance: Dictionary = blueprint.get("appearance", {})
+		appearance[field] = value
+		blueprint["appearance"] = appearance
+	_refresh_preview()
+
+
+func _apply_color_palette(index: int) -> void:
+	_record_before_edit("Farbpalette ändern", true)
+	var appearance: Dictionary = blueprint.get("appearance", {})
+	for key: String in SkinStyle.PALETTES[index]:
+		if key != "name":
+			appearance[key] = SkinStyle.PALETTES[index][key]
+	blueprint["appearance"] = appearance
+	_refresh_preview()
+	_refresh_stats_panel()
+
+
+func _use_swatch(hex: String) -> void:
+	_change_color(Color(hex), _active_color_field)
+	_refresh_stats_panel()
 
 
 func _build_footer() -> void:
@@ -387,6 +802,7 @@ func _set_mode(mode: String) -> void:
 	_studio_mode = mode
 	selected_body_segment = -1
 	selected_part_index = -1
+	_editing_terminal = false
 	current_category = _last_mode_category if mode == "parts" else ("paint" if mode == "paint" else "body")
 	for key: String in _mode_buttons:
 		_mode_buttons[key].set_pressed_no_signal(key == mode)
@@ -400,7 +816,7 @@ func _refresh_category_buttons() -> void:
 	_category_grid.visible = _studio_mode == "parts"
 	if _studio_mode != "parts":
 		return
-	for category in ["mouth", "eyes", "legs", "arms", "tail", "horns", "plates", "spikes", "decor"]:
+	for category in ["mouth", "eyes", "legs", "arms", "feet", "hands", "tail", "horns", "plates", "spikes", "decor"]:
 		var button := _button(_category_grid, CATEGORY_NAMES[category], _on_category_button_pressed.bind(category))
 		button.add_theme_font_size_override("font_size", 12)
 		button.custom_minimum_size = Vector2(78, 34)
@@ -424,11 +840,18 @@ func _refresh_part_palette() -> void:
 	for part: Dictionary in PartLibrary.get_parts_for_category(current_category):
 		var card := PartCard.new()
 		var progression := get_node_or_null("/root/ProgressionService")
-		var available: bool = progression == null or bool(progression.call("is_part_unlocked", str(part["id"])))
+		var available: bool = PartLibrary.is_terminal(str(part["id"])) or progression == null or bool(progression.call("is_part_unlocked", str(part["id"])))
 		card.configure(part, current_category, available)
 		card.name = "Card_" + str(part["id"])
 		card.pressed.connect(_on_part_button_pressed.bind(str(part["id"])))
 		_part_grid.add_child(card)
+	if _studio_mode == "parts" and current_category in ["feet", "hands"]:
+		_help_label.text = "Wähle ein Bein oder einen Arm.\nEndstück anklicken oder auf die Gliedmaße ziehen.\nGröße und Drehung rechts einstellen."
+	if _studio_mode == "paint":
+		_help_label.text = "Hauttyp, Muster und fünf Farben kombinieren. Hauttypen ändern nur die Oberfläche."
+		for index in range(SkinStyle.PALETTES.size()):
+			var palette: Dictionary = SkinStyle.PALETTES[index]
+			_button(_part_grid, str(palette["name"]), _apply_color_palette.bind(index)).name = "ColorPalette%d" % index
 	if _studio_mode == "body":
 		for entry in [["upright", "Aufrecht"], ["grazer", "Langhals"], ["crawler", "Kriecher"], ["round", "Kugelbauch"]]:
 			_button(_part_grid, entry[1], _apply_body_preset.bind(entry[0])).tooltip_text = "Nur den Körper umformen. Deine Teile bleiben erhalten. Rückgängig mit Strg+Z."
@@ -438,6 +861,8 @@ func _refresh_preview() -> void:
 	if not is_instance_valid(_preview):
 		return
 	AnatomyV7.rebind_all_parts(blueprint)
+	_preview.set("show_center_axis", _studio_mode == "parts")
+	_preview.set("editing_terminal", _editing_terminal)
 	_preview.call("set_editor_state", blueprint, selected_part_index, selected_body_segment, _studio_mode == "body")
 	_preview.call("set_motion", _motion_choice if _studio_mode == "test" else "edit")
 	_update_plinth()
@@ -461,17 +886,26 @@ func _refresh_stats_panel() -> void:
 	var palette: Array[Color] = Surface.colors(blueprint)
 	_base_picker.color = palette[0]
 	_accent_picker.color = palette[1]
+	for key: String in _extra_pickers:
+		var picker: ColorPickerButton = _extra_pickers[key]
+		picker.get_parent().visible = _studio_mode == "paint"
+		picker.color = SkinStyle.color(blueprint, key, palette[0].lightened(0.26) if key == "belly_color" else (palette[1].lightened(0.15) if key == "eye_color" else Color("e3d5b0")))
+	_refresh_design_controls()
+	_part_list.visible = _studio_mode != "paint"
+	_inspector.get_node("AttachedPartsTitle").visible = _studio_mode != "paint"
 	_selection_label.text = "Punkt %d / 7" % (selected_body_segment + 1) if selected_body_segment >= 0 else "Körperpunkt wählen"
 	if _studio_mode != "body":
 		_selection_label.text = "Teil auswählen" if _studio_mode == "parts" else ("Deine Farbpalette" if _studio_mode == "paint" else "Bewegungsvorschau")
-	if selected_part_index >= 0:
+	if selected_part_index >= 0 and _studio_mode == "parts":
 		var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
-		_selection_label.text = str(PartLibrary.get_part(str(part.get("part_id", ""))).get("name", "Teil")) + "\nGröße  %.2f" % float(part.get("scale", 1.0))
+		var id: String = str(part.get("end_part_id" if _editing_terminal else "part_id", ""))
+		_selection_label.text = str(PartLibrary.get_part(id).get("name", "Fuß" if str(part.get("category", "")) == "legs" else "Hand"))
 	_inspector.get_node("PartActions").visible = _studio_mode == "parts"
 	_inspector.get_node("PartTransforms").visible = _studio_mode == "parts"
 	_part_list.clear()
 	for part: Dictionary in blueprint.get("parts", []):
 		_part_list.add_item(("↔  " if bool(part.get("mirrored", false)) else "•  ") + str(PartLibrary.get_part(str(part.get("part_id", ""))).get("name", "Teil")))
+		_part_list.set_item_tooltip(_part_list.item_count - 1, str(PartLibrary.get_part(str(part.get("end_part_id", ""))).get("name", "")))
 	if selected_part_index >= 0 and selected_part_index < _part_list.item_count:
 		_part_list.select(selected_part_index)
 	_syncing_ui = false
@@ -503,7 +937,9 @@ func _select_part_by_index(index: int) -> void:
 	var placement: Dictionary = Blueprint.get_part_placement(blueprint, index)
 	if placement.is_empty():
 		return
-	_set_mode("parts")
+	if _studio_mode != "parts":
+		_set_mode("parts")
+	_editing_terminal = false
 	selected_part_index = index
 	current_category = str(placement.get("category", "eyes"))
 	_last_mode_category = current_category
@@ -661,7 +1097,8 @@ func handle_canvas_input(event: InputEvent) -> void:
 			if _studio_mode == "parts":
 				var picked: int = _pick_part_at_screen_position(position)
 				if picked >= 0:
-					_select_part_by_index(picked)
+					if picked != selected_part_index:
+						_select_part_by_index(picked)
 					var hit: Dictionary = _surface_hit(position)
 					_drag_side = signf(hit["position"].x) if not hit.is_empty() and absf(hit["position"].x) > 0.01 else 1.0
 					_begin_gesture()
@@ -693,10 +1130,14 @@ func handle_canvas_input(event: InputEvent) -> void:
 		elif _drag_part and selected_part_index >= 0:
 			if event.alt_pressed:
 				_record_before_edit("Teil drehen")
-				Blueprint.rotate_part(blueprint, selected_part_index, Vector3(-event.relative.y, event.relative.x, 0.0) * 0.6)
+				var part: Dictionary = blueprint["parts"][selected_part_index]
+				var key: String = "end_rotation" if _editing_terminal else "rotation"
+				var angles: Vector3 = Blueprint._as_vector3(part.get(key, Vector3.ZERO))
+				angles += Vector3(-event.relative.y, event.relative.x * _drag_side, 0.0) * 0.6
+				part[key] = Vector3(wrapf(angles.x, -180, 180), wrapf(angles.y, -180, 180), wrapf(angles.z, -180, 180))
 				_refresh_preview()
 				_refresh_stats_panel()
-			else:
+			elif not _editing_terminal:
 				_move_part_to_cursor(event.position + _canvas.global_position)
 
 
@@ -719,6 +1160,12 @@ func _drag_body_point(event: InputEventMouseMotion) -> void:
 
 
 func _surface_hit(screen_position: Vector2) -> Dictionary:
+	if _studio_mode == "parts":
+		for index in range(7):
+			var socket: Dictionary = _preview.call("center_socket", index)
+			var screen: Vector2 = _camera.unproject_position(_preview.to_global(socket["position"] + Vector3.UP * 0.025))
+			if screen.distance_to(screen_position) <= 14.0:
+				return socket
 	var origin: Vector3 = _preview.to_local(_camera.project_ray_origin(screen_position))
 	var direction: Vector3 = (_preview.global_basis.inverse() * _camera.project_ray_normal(screen_position)).normalized()
 	var length: float = Blueprint.get_body_shape(blueprint).z * Blueprint.get_body_scale(blueprint) * SpineProfile.get_body_length_scale(blueprint)
@@ -735,26 +1182,34 @@ func can_drop_part(part_id: String, screen_position: Vector2) -> bool:
 	if _studio_mode != "parts" or _is_pointer_over_editor_panel(screen_position):
 		return false
 	var progression := get_node_or_null("/root/ProgressionService")
-	if progression != null and not bool(progression.call("is_part_unlocked", part_id)):
+	if not PartLibrary.is_terminal(part_id) and progression != null and not bool(progression.call("is_part_unlocked", part_id)):
 		return false
 	var definition: Dictionary = PartLibrary.get_part(part_id)
 	if definition.is_empty() or not definition.has("voxels"):
 		return false
+	if PartLibrary.is_terminal(part_id):
+		var index: int = _pick_part_at_screen_position(screen_position)
+		return _accepts_terminal(index, part_id)
 	return not _surface_hit(screen_position).is_empty()
 
 
 func drop_part(part_id: String, screen_position: Vector2) -> void:
 	if not can_drop_part(part_id, screen_position):
 		return
+	if PartLibrary.is_terminal(part_id):
+		selected_part_index = _pick_part_at_screen_position(screen_position)
+		_set_terminal(part_id)
+		return
 	var hit: Dictionary = _surface_hit(screen_position)
 	var candidate: Dictionary = blueprint.duplicate(true)
 	var index: int = Blueprint.add_part(candidate, part_id)
-	if index < 0:
+	if index < 0 or Blueprint.calculate_complexity(candidate) > Blueprint.COMPLEXITY_LIMIT:
 		_set_builder_status("Zu viele Formpunkte. Entferne zuerst ein Teil.")
 		return
 	_record_before_edit("Teil anbauen", true)
 	blueprint = candidate
 	selected_part_index = index
+	_editing_terminal = false
 	SurfaceSocketsV7.apply_symmetry(blueprint, index, AssemblyV7.is_symmetry_enabled(blueprint))
 	AnatomyV7.ensure_anchors(blueprint, true)
 	_place_on_hit(index, hit)
@@ -768,6 +1223,11 @@ func _place_on_hit(index: int, hit: Dictionary) -> void:
 	var point: Vector3 = hit["position"]
 	var cross: Dictionary = Surface.section(blueprint, float(hit["t"]))
 	var radius: Vector2 = cross["radius"]
+	if bool(hit.get("center", false)):
+		part["center_locked"] = true
+		part["mirrored"] = false
+	if bool(part.get("center_locked", false)):
+		point.x = 0.0
 	part["anchor_t"] = hit["t"]
 	part["anchor_side"] = clampf(point.x / maxf(radius.x * 1.04, 0.01), -1.0, 1.0)
 	part["anchor_vertical"] = clampf((point.y - cross["center"].y) / maxf(radius.y * 1.10, 0.01), -1.0, 1.0)
@@ -917,7 +1377,7 @@ func _geometry_bounds(node: Node3D, transform: Transform3D = Transform3D.IDENTIT
 	var result := AABB()
 	var initialized: bool = false
 	for child in node.get_children():
-		if not (child is Node3D) or child is CollisionObject3D:
+		if not (child is Node3D) or child is CollisionObject3D or child.get_meta("editor_guide", false):
 			continue
 		var local: Transform3D = transform * child.transform
 		if child is MeshInstance3D and child.mesh != null:
@@ -939,8 +1399,9 @@ func _update_plinth() -> void:
 		return
 	var bounds: AABB = _geometry_bounds(_preview)
 	if bounds.has_volume():
-		plinth.position.y = bounds.position.y - 0.025
-		rim.position.y = bounds.position.y - 0.010
+		var ground: float = float(_preview.get_meta("ground_y", bounds.position.y))
+		plinth.position.y = ground
+		rim.position.y = ground + 0.015
 
 
 func _reset_blueprint() -> void:

@@ -107,6 +107,9 @@ static func primitive(size: Vector3, kind: String = "ellipsoid") -> ArrayMesh:
 				var cell := Vector3i(x, y, z)
 				var point: Vector3 = (Vector3(cell) + Vector3.ONE * 0.5) * step
 				var distance: float = (point / radius).length_squared()
+				if kind == "diamond":
+					var normalized: Vector3 = (point / radius).abs()
+					distance = normalized.x + normalized.y + normalized.z
 				if kind == "capsule":
 					var half_line: float = maxf(0.0, radius.y - radius.x)
 					var closest := Vector3(0, clampf(point.y, -half_line, half_line), 0)

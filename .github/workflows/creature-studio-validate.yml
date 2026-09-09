@@ -34,7 +34,7 @@ jobs:
           PY
       - name: Import and exercise editor contracts
         run: |
-          python tools/validate_godot.py --godot /tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64 --tests creature_studio_test creature_editor_v7_runtime_test creature_builder_v7_test runtime_geometry_batch_test --skip-main --output /tmp/creature-studio-checks
+          python tools/validate_godot.py --godot /tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64 --tests creature_studio_test creature_parts_studio_test creature_editor_v7_runtime_test creature_builder_v7_test runtime_geometry_batch_test --skip-main --output /tmp/creature-studio-checks
       - name: Render the real workshop
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"

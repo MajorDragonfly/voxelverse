@@ -26,13 +26,15 @@ def main():
         command = [args.godot, "--path", str(project), "--rendering-method", args.renderer,
                    "--audio-driver", "Dummy", "--script", "res://tools/capture_creature_studio.gd",
                    "--", str(output)]
-        run = subprocess.run(command, env=environment, capture_output=True, text=True, timeout=120)
+        run = subprocess.run(command, env=environment, capture_output=True, text=True, timeout=180)
     log = run.stdout + run.stderr
     (output / "render.log").write_text(log)
     if run.returncode or ERROR.search(log):
         raise RuntimeError(log[-10000:])
     images = []
-    for name in ["round_body", "grazer_parts", "upright_paint", "crawler_test"]:
+    names = ["round_body", "grazer_parts", "upright_paint", "crawler_test",
+             "spike_symmetry", "hand_controls", "four_leg_feet", "scales_surface", "fur_surface"]
+    for name in names:
         path = output / f"{name}.png"
         data = path.read_bytes()
         if data[:8] != b"\x89PNG\r\n\x1a\n":
@@ -42,7 +44,7 @@ def main():
             raise RuntimeError(f"Unexpected review resolution: {width}x{height}")
         images.append({"file": path.name, "width": width, "height": height,
                        "sha256": hashlib.sha256(data).hexdigest()})
-    if len({image["sha256"] for image in images}) != 4:
+    if len({image["sha256"] for image in images}) != len(names):
         raise RuntimeError("Workshop modes produced duplicate screenshots.")
     result = {"renderer": args.renderer, "screenshots": images, "runtime_errors": 0}
     (output / "review.json").write_text(json.dumps(result, indent=2) + "\n")

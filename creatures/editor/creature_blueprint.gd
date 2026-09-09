@@ -283,6 +283,11 @@ static func nudge_part(
 	set_part_placement(blueprint, part_index, placement)
 
 
+static func get_part_shape(placement: Dictionary, field: String = "shape_scale") -> Vector3:
+	var value: Vector3 = _as_vector3(placement.get(field, Vector3.ONE))
+	return value.clamp(Vector3.ONE * 0.4, Vector3.ONE * 2.5) if value.is_finite() else Vector3.ONE
+
+
 static func rotate_part(
 	blueprint: Dictionary,
 	part_index: int,
@@ -397,6 +402,7 @@ static func calculate_complexity(blueprint: Dictionary) -> int:
 			str(placement.get("part_id", ""))
 		)
 		complexity += int(part_definition.get("complexity", 0))
+		complexity += int(PartLibrary.get_part(str(placement.get("end_part_id", ""))).get("complexity", 0))
 
 	return complexity
 
@@ -503,6 +509,12 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 			),
 			"scale": float(placement.get("scale", 1.0)),
 			"mirrored": bool(placement.get("mirrored", false)),
+			"shape_scale": _serialize_vector3(get_part_shape(placement)),
+			"center_locked": bool(placement.get("center_locked", false)),
+			"end_part_id": str(placement.get("end_part_id", "")),
+			"end_scale": float(placement.get("end_scale", 1.0)),
+			"end_shape_scale": _serialize_vector3(get_part_shape(placement, "end_shape_scale")),
+			"end_rotation": _serialize_vector3(_as_vector3(placement.get("end_rotation", Vector3.ZERO))),
 		})
 
 	return {
@@ -575,6 +587,12 @@ static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 			),
 			"scale": clampf(float(item.get("scale", 1.0)), 0.25, 3.0),
 			"mirrored": bool(item.get("mirrored", false)),
+			"shape_scale": _deserialize_vector3(item.get("shape_scale", [1.0, 1.0, 1.0]), Vector3.ONE),
+			"center_locked": bool(item.get("center_locked", false)),
+			"end_part_id": str(item.get("end_part_id", "")),
+			"end_scale": clampf(float(item.get("end_scale", 1.0)), 0.4, 2.0),
+			"end_shape_scale": _deserialize_vector3(item.get("end_shape_scale", [1.0, 1.0, 1.0]), Vector3.ONE),
+			"end_rotation": _deserialize_vector3(item.get("end_rotation", [0.0, 0.0, 0.0]), Vector3.ZERO),
 		}
 
 		if placement["part_id"] == "":

@@ -3,6 +3,7 @@ extends RefCounted
 ## use the adaptive terrain-contact animator; both use the same knee builder.
 
 const Animator = preload("res://creatures/runtime/adaptive_locomotion_animator.gd")
+const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
 var _preview: Node3D
 var _base_position := Vector3.ZERO
 var _parts: Array[Dictionary] = []
@@ -43,6 +44,8 @@ func reset() -> void:
 	for leg in _legs:
 		if is_instance_valid(leg.get("knee")):
 			leg["knee"].rotation = leg.get("knee_base_rotation", Vector3.ZERO)
+		if bool(leg.get("sculpt_rig", false)) and is_instance_valid(leg.get("root")):
+			LimbRig.pose(leg, _preview.to_global(leg["rest_ankle_preview"]))
 
 
 func sample(mode: String, time: float) -> void:
@@ -70,6 +73,16 @@ func sample(mode: String, time: float) -> void:
 		if not is_instance_valid(leg["root"]):
 			continue
 		var stride: float = phase + float(leg["phase"])
+		if bool(leg.get("sculpt_rig", false)):
+			var target: Vector3 = leg["rest_ankle_preview"]
+			target.z += cos(stride) * (0.24 if mode == "run" else 0.14) * moving
+			target.y += maxf(0.0, sin(stride)) * (0.17 if mode == "run" else 0.12) * moving
+			var parent: Node3D = _preview.get_parent() as Node3D
+			var bob: Vector3 = _preview.position - _base_position
+			if parent != null:
+				bob = parent.global_basis * bob
+			LimbRig.pose(leg, _preview.to_global(target) - bob)
+			continue
 		leg["root"].rotation.x += cos(stride) * (0.50 if mode == "run" else 0.32) * moving
 		if is_instance_valid(leg.get("knee")):
 			leg["knee"].rotation = leg.get("knee_base_rotation", Vector3.ZERO)

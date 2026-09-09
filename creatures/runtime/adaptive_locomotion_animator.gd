@@ -1,5 +1,6 @@
 extends Node
 class_name AdaptiveLocomotionAnimator
+const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
 
 @export_category("Adaptive Gait")
 @export_range(0.0, 55.0, 0.5) var stride_degrees: float = 27.0
@@ -209,6 +210,8 @@ func _build_leg_records() -> void:
 
 
 func _create_runtime_leg_rig(leg: Node3D) -> Dictionary:
+	if leg.has_meta("sculpt_limb_rig"):
+		return leg.get_meta("sculpt_limb_rig")
 	_remove_existing_runtime_leg_rig(leg)
 
 	var meshes: Array[MeshInstance3D] = []
@@ -373,6 +376,16 @@ func _animate_adaptive_legs() -> void:
 		var wave: float = sin(gait_phase)
 		var stride: float = cos(gait_phase)
 		var lift: float = pow(maxf(wave, 0.0), 1.35) * _movement_blend
+		if bool(record.get("sculpt_rig", false)):
+			leg.rotation = base_rotation
+			leg.position = base_position
+			record["lift"] = lift
+			record["wave"] = wave
+			var point: Vector3 = record["rest_ankle_preview"]
+			point.z += stride * 0.20 * _movement_blend
+			point.y += lift * 0.15
+			LimbRig.pose(record, _preview.to_global(point))
+			continue
 		var target_rotation: Vector3 = base_rotation
 		target_rotation.x += deg_to_rad(stride_degrees) * stride * _movement_blend
 		leg.rotation = target_rotation
@@ -420,6 +433,12 @@ func _solve_ground_contact(delta: float) -> void:
 		if hit.is_empty():
 			continue
 		var hit_position: Vector3 = hit.get("position", foot_position)
+		if bool(record.get("sculpt_rig", false)):
+			var socket: Node3D = record["socket"]
+			var target: Vector3 = socket.global_position
+			target.y += hit_position.y - foot_position.y + lift * 0.15 * _preview.global_basis.y.length()
+			LimbRig.pose(record, target)
+			continue
 		offsets.append(hit_position.y - foot_position.y)
 	if offsets.is_empty():
 		_grounding_offset = move_toward(

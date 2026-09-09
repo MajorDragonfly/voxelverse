@@ -13,6 +13,8 @@ const CATEGORY_PLATES: String = "plates"
 const CATEGORY_SPIKES: String = "spikes"
 const CATEGORY_DECOR: String = "decor"
 const CATEGORY_PAINT: String = "paint"
+const CATEGORY_FEET: String = "feet"
+const CATEGORY_HANDS: String = "hands"
 
 
 static func get_categories() -> Array:
@@ -229,6 +231,8 @@ static func get_paint_parts() -> Array:
 
 
 static func get_parts_for_category(category_id: String) -> Array:
+	if category_id in [CATEGORY_FEET, CATEGORY_HANDS]:
+		return get_terminal_parts().filter(func(part: Dictionary) -> bool: return part["category"] == category_id)
 	if category_id == CATEGORY_BODY:
 		return get_body_parts()
 
@@ -246,6 +250,9 @@ static func get_parts_for_category(category_id: String) -> Array:
 
 
 static func get_part(part_id: String) -> Dictionary:
+	for part: Dictionary in get_terminal_parts():
+		if part["id"] == part_id:
+			return part.duplicate(true)
 	for body_part in get_body_parts():
 		if body_part.get("id", "") == part_id:
 			return body_part.duplicate(true)
@@ -311,7 +318,23 @@ static func is_default_mirrored(category_id: String) -> bool:
 		or category_id == CATEGORY_LEGS
 		or category_id == CATEGORY_ARMS
 		or category_id == CATEGORY_HORNS
+		or category_id == CATEGORY_SPIKES
 	)
+
+
+static func get_terminal_parts() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for entry in [["feet_pads", "Ballenfüße", "feet"], ["feet_claws", "Krallenfüße", "feet"], ["feet_hooves", "Spalthufe", "feet"], ["feet_webbed", "Schwimmfüße", "feet"], ["hands_grasp", "Greifhände", "hands"], ["hands_claws", "Krallenhände", "hands"], ["hands_pincers", "Scherenhände", "hands"]]:
+		var is_foot: bool = entry[2] == "feet"
+		var voxels: Array = [_voxel(Vector3(0, 0, -0.04), Vector3(0.28, 0.12 if is_foot else 0.22, 0.32 if is_foot else 0.14), Color("8fb39b"))]
+		for index in range(3):
+			voxels.append(_voxel(Vector3(float(index - 1) * 0.105, -0.02 if is_foot else -0.16, -0.18 if is_foot else -0.03), Vector3(0.065, 0.07 if is_foot else 0.18, 0.13 if is_foot else 0.07), Color("d6c7a4")))
+		result.append({"id": entry[0], "name": entry[1], "category": entry[2], "description": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.", "complexity": 2, "default_scale": 1.0, "stats": {}, "voxels": voxels})
+	return result
+
+
+static func is_terminal(part_id: String) -> bool:
+	return part_id.begins_with("feet_") or part_id.begins_with("hands_")
 
 
 static func _get_placeable_parts() -> Array:

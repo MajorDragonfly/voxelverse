@@ -81,6 +81,8 @@ func _build_runtime_preview() -> void:
 		_preview.call("set_editor_state", blueprint, -1, -1, false)
 	else:
 		_preview.call("set_blueprint", blueprint)
+	if _preview.has_meta("ground_y"):
+		_preview.position.y = -float(_preview.get_meta("ground_y")) * runtime_visual_scale + 0.015
 
 
 func _disable_preview_collisions(root: Node) -> void:

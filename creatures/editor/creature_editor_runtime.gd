@@ -25,7 +25,7 @@ func _refresh_part_palette() -> void:
 
 func _on_part_button_pressed(part_id: String) -> void:
 	var progression := get_node_or_null("/root/ProgressionService")
-	if progression != null and progression.has_method("is_part_unlocked"):
+	if not RuntimePartLibrary.is_terminal(part_id) and progression != null and progression.has_method("is_part_unlocked"):
 		if not bool(progression.call("is_part_unlocked", part_id)):
 			_set_builder_status("This part has not been discovered yet.")
 			return
