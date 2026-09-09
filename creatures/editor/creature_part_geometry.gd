@@ -112,9 +112,11 @@ static func _limb(root: Node3D, id: String, placement: Dictionary, blueprint: Di
 	length *= shape.y
 	var width: float = (0.22 if id == "legs_stubby" else 0.15) * shape.x
 	var ankle := Vector3((0.36 if id == "legs_spider" else 0.0) * shape.x * float(root.get_meta("creature_part_side", 1.0)), -length, -0.055 * shape.z)
+	var layout: Dictionary = preload("res://creatures/editor/creature_joint_profile.gd").layout(ankle, id, placement.get("joint", {}), float(root.get_meta("creature_part_side", 1.0)))
+	ankle = layout["ankle"]
 	var knee := Node3D.new()
 	knee.name = "RuntimeKneePivot"
-	knee.position = ankle * 0.5 + Vector3(0, 0, length * 0.20)
+	knee.position = layout["knee"]
 	root.add_child(knee)
 	var skin: Color = Surface.colors(blueprint)[0]
 	var upper: MeshInstance3D = Surface.bone(root, "UpperLimb", Vector3.ZERO, knee.position, width, skin)
@@ -135,6 +137,7 @@ static func _limb(root: Node3D, id: String, placement: Dictionary, blueprint: Di
 	_terminal(socket, default_end if end_id.is_empty() else end_id, skin, SkinStyle.color(blueprint, "horn_color", Color("d7cba9")))
 	var rotation: Vector3 = Blueprint._as_vector3(placement.get("end_rotation", Vector3.ZERO)) * Vector3(1, float(root.get_meta("creature_part_side", 1.0)), float(root.get_meta("creature_part_side", 1.0)))
 	Rig.configure(root, upper, lower, knee, joint, socket, width, rotation * PI / 180.0)
+	root.set_meta("joint_reference_length", layout["reference_length"])
 
 
 static func _terminal(root: Node3D, id: String, skin: Color, horn: Color) -> void:

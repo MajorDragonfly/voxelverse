@@ -50,6 +50,7 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 	Compatibility.resolve_creature(blueprint)
 	SkinStyle.normalize(blueprint)
 	for part: Dictionary in blueprint.get("parts", []):
+		part["joint"] = BaseBlueprint.JointProfile.read(part.get("joint", {}))
 		part["shape_scale"] = BaseBlueprint.get_part_shape(part)
 		part["end_shape_scale"] = BaseBlueprint.get_part_shape(part, "end_shape_scale")
 		part["end_scale"] = clampf(float(part.get("end_scale", 1.0)), 0.4, 2.0)

@@ -1,6 +1,7 @@
 extends Node
 class_name AdaptiveLocomotionAnimator
 const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
+const Gait = preload("res://creatures/runtime/creature_gait_profile.gd")
 
 @export_category("Adaptive Gait")
 @export_range(0.0, 55.0, 0.5) var stride_degrees: float = 27.0
@@ -37,6 +38,8 @@ var _base_body_rotation: Vector3 = Vector3.ZERO
 var _base_camera_position: Vector3 = Vector3.ZERO
 var _base_camera_fov: float = 66.0
 var _grounding_offset: float = 0.0
+var _gait_profile: Dictionary = {}
+var _terrain_pitch: float = 0.0
 
 
 func _ready() -> void:
@@ -64,7 +67,7 @@ func _physics_process(delta: float) -> void:
 	var maximum_speed: float = maxf(float(_player.get("move_speed")), 0.1)
 	var target_blend: float = clampf(horizontal_speed / maximum_speed, 0.0, 1.0)
 	_movement_blend = move_toward(_movement_blend, target_blend, delta * 5.5)
-	var cadence: float = lerpf(1.1, maximum_cadence, _movement_blend)
+	var cadence: float = lerpf(1.1, minf(maximum_cadence, float(_gait_profile.get("cadence", maximum_cadence)) * 1.65), _movement_blend)
 	_phase = fmod(_phase + delta * cadence, TAU)
 
 	_animate_body(delta)
@@ -174,6 +177,8 @@ func _bind_runtime_visual() -> void:
 		_part_roots.append(part_root)
 
 	_build_leg_records()
+	_gait_profile = Gait.build(_leg_records)
+	_terrain_pitch = 0.0
 
 
 func _build_leg_records() -> void:
@@ -201,7 +206,7 @@ func _build_leg_records() -> void:
 			negative_rank += 1
 		else:
 			positive_rank += 1
-		var gait_phase: float = PI * float((longitudinal_rank + side_bit) % 2)
+		var gait_phase: float = Gait.phase_offset(legs.size(), longitudinal_rank, side)
 		var rig: Dictionary = _create_runtime_leg_rig(leg)
 		rig["phase_offset"] = gait_phase
 		rig["side"] = side
@@ -296,6 +301,7 @@ func _animate_body(delta: float) -> void:
 	var step_bob: float = absf(sin(_phase * 2.0)) * body_bob_strength * _movement_blend
 	var target_position: Vector3 = _base_preview_position
 	target_position.y += idle_breath + step_bob + _grounding_offset
+	target_position.x += sin(_phase) * float(_gait_profile.get("sway", 0.02)) * _movement_blend
 	_preview.position = _preview.position.lerp(
 		target_position,
 		clampf(delta * 14.0, 0.0, 1.0)
@@ -304,7 +310,7 @@ func _animate_body(delta: float) -> void:
 	var horizontal_velocity := Vector3(_player.velocity.x, 0.0, _player.velocity.z)
 	var local_velocity: Vector3 = _player.global_basis.inverse() * horizontal_velocity
 	var target_rotation := Vector3(
-		deg_to_rad(-local_velocity.z * 0.55),
+		deg_to_rad(-local_velocity.z * 0.55) + _terrain_pitch,
 		_preview.rotation.y,
 		deg_to_rad(-local_velocity.x * 0.85)
 	)
@@ -379,12 +385,14 @@ func _animate_adaptive_legs() -> void:
 		if bool(record.get("sculpt_rig", false)):
 			leg.rotation = base_rotation
 			leg.position = base_position
-			record["lift"] = lift
-			record["wave"] = wave
-			var point: Vector3 = record["rest_ankle_preview"]
-			point.z += stride * 0.20 * _movement_blend
-			point.y += lift * 0.15
-			LimbRig.pose(record, _preview.to_global(point))
+			var settings: Dictionary = Gait.parameters(_gait_profile, _movement_blend > 0.75)
+			var step: Dictionary = Gait.sample(settings, gait_phase, _movement_blend)
+			record["lift"] = step["lift"]
+			record["swing"] = step["swing"]
+			record["step_height"] = float(settings["lift"]) * _preview.global_basis.y.length()
+			var point: Vector3 = record["rest_contact_preview"] + step["offset"]
+			var frame: Transform3D = _ground_frame()
+			LimbRig.plant(record, frame * point, frame.basis.y.normalized(), frame.basis)
 			continue
 		var target_rotation: Vector3 = base_rotation
 		target_rotation.x += deg_to_rad(stride_degrees) * stride * _movement_blend
@@ -405,6 +413,9 @@ func _animate_adaptive_legs() -> void:
 
 func _solve_ground_contact(delta: float) -> void:
 	if _leg_records.is_empty() or not _player.is_on_floor():
+		for record in _leg_records:
+			record.erase("planted_world")
+		_terrain_pitch = move_toward(_terrain_pitch, 0.0, delta)
 		_grounding_offset = move_toward(
 			_grounding_offset,
 			0.0,
@@ -416,12 +427,14 @@ func _solve_ground_contact(delta: float) -> void:
 		return
 	var space_state: PhysicsDirectSpaceState3D = world.direct_space_state
 	var offsets: Array[float] = []
+	var support_normals := Vector3.ZERO
+	var support_count: int = 0
 	for record in _leg_records:
 		var foot: Node3D = _get_valid_node3d(record, "foot")
 		if foot == null:
 			continue
 		var lift: float = float(record.get("lift", 0.0))
-		if lift > 0.42:
+		if lift > 0.42 and not bool(record.get("sculpt_rig", false)):
 			continue
 		var foot_position: Vector3 = foot.global_position
 		var query := PhysicsRayQueryParameters3D.create(
@@ -429,15 +442,34 @@ func _solve_ground_contact(delta: float) -> void:
 			foot_position + Vector3.DOWN * ground_probe_down
 		)
 		query.exclude = [_player.get_rid()]
+		query.collision_mask = _player.collision_mask
 		var hit: Dictionary = space_state.intersect_ray(query)
 		if hit.is_empty():
 			continue
 		var hit_position: Vector3 = hit.get("position", foot_position)
 		if bool(record.get("sculpt_rig", false)):
-			var socket: Node3D = record["socket"]
-			var target: Vector3 = socket.global_position
-			target.y += hit_position.y - foot_position.y + lift * 0.15 * _preview.global_basis.y.length()
-			LimbRig.pose(record, target)
+			var frame: Transform3D = _ground_frame()
+			var swing: bool = bool(record.get("swing", false))
+			if swing:
+				record.erase("planted_world")
+			else:
+				var planted: Vector3 = record.get("planted_world", hit_position)
+				var distance := Vector2(planted.x - hit_position.x, planted.z - hit_position.z)
+				if distance.length() > maxf(0.3, float(_gait_profile.get("stride", 0.2)) * 2.5 * frame.basis.y.length()):
+					planted = hit_position
+				record["planted_world"] = planted
+				query.from = planted + Vector3.UP * ground_probe_up
+				query.to = planted + Vector3.DOWN * ground_probe_down
+				var planted_hit: Dictionary = space_state.intersect_ray(query)
+				if not planted_hit.is_empty():
+					hit_position = planted_hit["position"]
+					hit = planted_hit
+			var normal: Vector3 = hit.get("normal", Vector3.UP)
+			LimbRig.plant(record, hit_position + Vector3.UP * lift * float(record.get("step_height", 0.15)), normal, frame.basis)
+			var rest: Vector3 = frame * record["rest_contact_preview"]
+			offsets.append(hit_position.y - rest.y)
+			support_normals += normal
+			support_count += 1
 			continue
 		offsets.append(hit_position.y - foot_position.y)
 	if offsets.is_empty():
@@ -460,6 +492,15 @@ func _solve_ground_contact(delta: float) -> void:
 		desired,
 		clampf(delta * ground_follow_speed, 0.0, 1.0)
 	)
+	if support_count > 0:
+		var local_normal: Vector3 = _player.global_basis.inverse() * support_normals.normalized()
+		_terrain_pitch = lerpf(_terrain_pitch, clampf(atan2(local_normal.z, local_normal.y), -0.32, 0.32), clampf(delta * 6.0, 0, 1))
+
+
+func _ground_frame() -> Transform3D:
+	var parent: Node3D = _preview.get_parent_node_3d()
+	var local := Transform3D(Basis.from_euler(Vector3(0, _preview.rotation.y, 0)).scaled(_preview.scale), _base_preview_position)
+	return parent.global_transform * local if parent != null else local
 
 
 func _get_valid_node3d(record: Dictionary, key: String) -> Node3D:

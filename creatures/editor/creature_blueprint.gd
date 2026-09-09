@@ -3,6 +3,7 @@ extends RefCounted
 class_name CreatureBlueprint
 
 const Store = preload("res://core/persistence/design_store.gd")
+const JointProfile = preload("res://creatures/editor/creature_joint_profile.gd")
 
 
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
@@ -515,6 +516,7 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 			"end_scale": float(placement.get("end_scale", 1.0)),
 			"end_shape_scale": _serialize_vector3(get_part_shape(placement, "end_shape_scale")),
 			"end_rotation": _serialize_vector3(_as_vector3(placement.get("end_rotation", Vector3.ZERO))),
+			"joint": JointProfile.encode(placement.get("joint", {})),
 		})
 
 	return {
@@ -593,6 +595,7 @@ static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 			"end_scale": clampf(float(item.get("end_scale", 1.0)), 0.4, 2.0),
 			"end_shape_scale": _deserialize_vector3(item.get("end_shape_scale", [1.0, 1.0, 1.0]), Vector3.ONE),
 			"end_rotation": _deserialize_vector3(item.get("end_rotation", [0.0, 0.0, 0.0]), Vector3.ZERO),
+			"joint": JointProfile.read(item.get("joint", {})),
 		}
 
 		if placement["part_id"] == "":

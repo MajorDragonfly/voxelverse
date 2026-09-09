@@ -37,6 +37,13 @@ static func configure(root: Node3D, upper: MeshInstance3D, lower: MeshInstance3D
 		"base_rotation": root.rotation, "base_position": root.position, "knee_base_rotation": Vector3.ZERO,
 		"rest_ankle": ankle, "rest_ankle_preview": root.transform * ankle, "sole_offset": offset,
 		"foot_basis": foot_basis, "width": width, "sculpt_rig": true}
+	record["authored_upper_length"] = maxf(knee.position.length(), 0.025)
+	record["authored_lower_length"] = maxf(ankle.distance_to(knee.position), 0.025)
+	var axis: Vector3 = ankle.normalized()
+	var pole: Vector3 = knee.position - axis * knee.position.dot(axis)
+	if pole.length_squared() < 0.000001:
+		pole = Vector3.FORWARD if str(root.get_meta("creature_part_id", "")) in ["legs_sprinter", "legs_hoof"] else Vector3.BACK
+	record["pole"] = pole.normalized()
 	root.set_meta("sculpt_limb_rig", record)
 	remesh(record, ankle)
 
@@ -44,12 +51,12 @@ static func configure(root: Node3D, upper: MeshInstance3D, lower: MeshInstance3D
 static func remesh(record: Dictionary, ankle: Vector3) -> void:
 	var knee: Node3D = record["knee"]
 	var root: Node3D = record["root"]
-	var bend: Vector3 = Vector3(0, 0, maxf(ankle.length() * 0.22, 0.07))
-	if str(root.get_meta("creature_part_id", "")) in ["legs_sprinter", "legs_hoof"]:
-		bend.z *= -1.0
-	knee.position = ankle * 0.5 + bend
-	var upper_length: float = knee.position.length()
-	var lower_length: float = ankle.distance_to(knee.position)
+	var upper_length: float = record["authored_upper_length"]
+	var lower_length: float = record["authored_lower_length"]
+	var stretch: float = _reach_scale(ankle.length(), upper_length, lower_length)
+	upper_length *= stretch
+	lower_length *= stretch
+	knee.position = _knee_point(ankle, upper_length, lower_length, record["pole"])
 	var width: float = record["width"]
 	var upper: MeshInstance3D = record["upper"]
 	var lower: MeshInstance3D = record["lower"]
@@ -57,13 +64,13 @@ static func remesh(record: Dictionary, ankle: Vector3) -> void:
 	lower.mesh = Surface.Voxels.primitive(Vector3(width * 0.82, lower_length + width * 0.82, width * 0.82), "capsule")
 	record["upper_length"] = upper_length
 	record["lower_length"] = lower_length
-	record["pole"] = bend.normalized()
 	record["rest_ankle"] = ankle
 	record["rest_ankle_preview"] = root.transform * ankle
 	_set_bone(upper, Vector3.ZERO, knee.position, 1.0)
 	_set_bone(lower, Vector3.ZERO, ankle - knee.position, 1.0)
 	record["joint"].position = knee.position
 	record["socket"].position = ankle - knee.position
+	record["rest_contact_preview"] = root.transform * (ankle + record["socket"].basis * record["foot"].position)
 
 
 static func level_legs(preview: Node3D, body_bottom: float) -> float:
@@ -96,16 +103,10 @@ static func pose(record: Dictionary, ankle_world: Vector3) -> void:
 	var second: float = record["lower_length"]
 	# Small reach changes (breathing, terrain) preserve the contact rather
 	# than lifting an entire leg. Large authoring changes rebuild the mesh.
-	var stretch: float = maxf(1.0, distance / maxf(first + second - 0.001, 0.001))
+	var stretch: float = _reach_scale(distance, first, second)
 	first *= stretch
 	second *= stretch
-	var axis: Vector3 = ankle / distance
-	var pole: Vector3 = record["pole"]
-	var bend: Vector3 = (pole - axis * pole.dot(axis)).normalized()
-	if bend.length_squared() < 0.01:
-		bend = axis.cross(Vector3.RIGHT).normalized()
-	var along: float = clampf((first * first - second * second + distance * distance) / (2.0 * distance), 0.0, first)
-	var knee_position: Vector3 = axis * along + bend * sqrt(maxf(0.0, first * first - along * along))
+	var knee_position: Vector3 = _knee_point(ankle, first, second, record["pole"])
 	var knee: Node3D = record["knee"]
 	knee.position = knee_position
 	knee.rotation = Vector3.ZERO
@@ -115,6 +116,39 @@ static func pose(record: Dictionary, ankle_world: Vector3) -> void:
 	var socket: Node3D = record["socket"]
 	socket.position = ankle - knee_position
 	socket.basis = root.global_basis.inverse() * preview.global_basis * record["foot_basis"] * Basis.from_scale(Vector3.ONE * root.scale.x)
+
+
+static func plant(record: Dictionary, contact_world: Vector3, normal_world: Vector3, frame_basis: Basis) -> void:
+	var root: Node3D = record["root"]
+	if not is_instance_valid(root) or not root.is_inside_tree():
+		return
+	var up: Vector3 = frame_basis.y.normalized()
+	var normal: Vector3 = normal_world.normalized()
+	if normal.length_squared() < 0.1:
+		normal = up
+	var alignment := Basis(Quaternion(up, normal))
+	var end_basis: Basis = alignment * frame_basis * record["foot_basis"] * Basis.from_scale(Vector3.ONE * root.scale.x)
+	var foot: Node3D = record["foot"]
+	pose(record, contact_world - end_basis * foot.position)
+	var socket: Node3D = record["socket"]
+	socket.basis = socket.get_parent_node_3d().global_basis.inverse() * end_basis
+
+
+static func _reach_scale(distance: float, first: float, second: float) -> float:
+	var scale: float = maxf(1.0, distance / maxf(first + second - 0.001, 0.001))
+	if distance < absf(first - second) + 0.001:
+		scale = maxf(0.001, distance / (absf(first - second) + 0.001))
+	return scale
+
+
+static func _knee_point(ankle: Vector3, first: float, second: float, pole: Vector3) -> Vector3:
+	var distance: float = maxf(ankle.length(), 0.001)
+	var axis: Vector3 = ankle / distance
+	var bend: Vector3 = pole - axis * pole.dot(axis)
+	if bend.length_squared() < 0.000001:
+		bend = axis.cross(Vector3.RIGHT if absf(axis.x) < 0.9 else Vector3.UP)
+	var along: float = clampf((first * first - second * second + distance * distance) / (2.0 * distance), -first, first)
+	return axis * along + bend.normalized() * sqrt(maxf(0.0, first * first - along * along))
 
 
 static func _set_bone(mesh: MeshInstance3D, start: Vector3, end: Vector3, stretch: float) -> void:

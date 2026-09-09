@@ -33,7 +33,8 @@ def main():
         raise RuntimeError(log[-10000:])
     images = []
     names = ["round_body", "grazer_parts", "upright_paint", "crawler_test",
-             "spike_symmetry", "hand_controls", "four_leg_feet", "scales_surface", "fur_surface"]
+             "spike_symmetry", "hand_controls", "four_leg_feet", "scales_surface", "fur_surface",
+             "rotate_handles", "joint_controls", "slope_walk", "steps_run"]
     for name in names:
         path = output / f"{name}.png"
         data = path.read_bytes()

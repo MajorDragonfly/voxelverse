@@ -44,6 +44,7 @@ func _capture() -> void:
 	metrics.store_string(JSON.stringify({"presets": detail_metrics, "timing": "synchronous editor shape changes, warm part cache; excludes rendering"}, "\t") + "\n")
 	metrics.close()
 	await _capture_parts(editor, output)
+	await _capture_joints(editor, output)
 	editor.free()
 	await process_frame
 	print("Creature studio rendered review saved to ", output)
@@ -93,6 +94,33 @@ func _capture_parts(editor: Node, output: String) -> void:
 	editor.call("_choose_skin_type", 2)
 	editor.call("_apply_color_palette", 4)
 	await _shot(output, "fur_surface")
+
+
+func _capture_joints(editor: Node, output: String) -> void:
+	editor.call("_set_mode", "parts")
+	editor.call("_select_part_by_index", 2)
+	editor.call("_choose_transform_target", 0)
+	editor.call("_choose_tool", "rotate")
+	editor.call("_frame_creature")
+	await _shot(output, "rotate_handles")
+	editor.call("_choose_tool", "joint")
+	editor.call("_change_joint_field", 140.0, "upper", -1)
+	editor.call("_change_joint_field", 85.0, "lower", -1)
+	editor.call("_change_joint_field", 22.0, "offset", 2)
+	var scroll: ScrollContainer = editor.get("_inspector").get_parent()
+	scroll.ensure_control_visible(editor.find_child("JointSettings", true, false))
+	await _shot(output, "joint_controls")
+	editor.call("_set_mode", "test")
+	for entry in [["slope", "walk"], ["steps", "run"]]:
+		editor.call("_choose_course", entry[0])
+		editor.call("_choose_motion", entry[1])
+		editor.call("_toggle_course_pause")
+		var preview: Node3D = editor.get("_preview")
+		var motion: RefCounted = preview.get("_motion")
+		var settings: Dictionary = motion.Gait.parameters(motion.get("_profile"), entry[1] == "run")
+		var duration: float = editor.get("_course").call("duration", settings["speed"])
+		motion.call("sample", entry[1], duration * 0.5)
+		await _shot(output, "%s_%s" % entry)
 
 
 func _shot(output: String, name: String) -> void:

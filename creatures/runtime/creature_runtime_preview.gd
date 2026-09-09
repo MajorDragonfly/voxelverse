@@ -15,6 +15,7 @@ const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
 # selects the original independently batched slice renderer.
 var sculpted_surface: bool = true
 var motion_mode: String = "edit"
+var motion_speed_scale: float = 1.0
 var show_center_axis: bool = false
 var editing_terminal: bool = false
 var _motion := Motion.new()
@@ -81,7 +82,7 @@ func set_motion(mode: String) -> void:
 
 
 func _process(delta: float) -> void:
-	_motion_time += delta
+	_motion_time += delta * motion_speed_scale
 	_motion.sample(motion_mode, _motion_time)
 
 
