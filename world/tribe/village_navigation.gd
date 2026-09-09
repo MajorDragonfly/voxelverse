@@ -1,19 +1,25 @@
 extends RefCounted
 ## Small ground-tested graph for the initial village. Never navigates unloaded
 ## chunks or crosses water/steep ledges. Runtime-only; orders survive rebuilding.
+const Housing = preload("res://world/tribe/village_housing.gd")
+const Home = preload("res://world/home_group/home_group_state.gd")
+var shelters: Array = []
 const RADIUS: int = 12
 var graph := AStar3D.new()
 var origin := Vector3.ZERO
 var home: Node
 var _radius: int = RADIUS
 
-func rebuild(controller: Node, anchor: Vector3, radius: int = RADIUS) -> void:
+func rebuild(controller: Node, anchor: Vector3, data: Dictionary = {}, radius: int = RADIUS) -> void:
+	shelters = Housing.obstacles(data)
 	home = controller
 	origin = anchor
 	_radius = clampi(radius, RADIUS, 20)
 	graph.clear()
 	for z in range(-_radius, _radius + 1):
 		for x in range(-_radius, _radius + 1):
+			if _occupied(anchor + Vector3(x, 0, z)):
+				continue
 			var ray := PhysicsRayQueryParameters3D.create(anchor + Vector3(x, 4, z), anchor + Vector3(x, -4, z), 1)
 			ray.exclude = [home.player.get_rid()]
 			var hit: Dictionary = home.player.get_world_3d().direct_space_state.intersect_ray(ray)
@@ -52,11 +58,23 @@ func _id(x: int, z: int) -> int:
 func route(from: Vector3, to: Vector3) -> PackedVector3Array:
 	if graph.get_point_count() == 0:
 		return PackedVector3Array()
+	if _occupied(to):
+		return PackedVector3Array()
+	var prefix := PackedVector3Array()
+	for shelter: Dictionary in shelters:
+		if Housing.contains(shelter, from):
+			# Legacy decorative huts could contain a saved resident. Leave by the door.
+			from = Home.vector(shelter["entrance"])
+			prefix.append(from)
 	var first: int = graph.get_closest_point(from)
 	var last: int = graph.get_closest_point(to)
 	if graph.get_point_position(first).distance_to(from) > 1.8 or graph.get_point_position(last).distance_to(to) > 1.8:
 		return PackedVector3Array()
-	return graph.get_point_path(first, last)
+	var path: PackedVector3Array = graph.get_point_path(first, last)
+	if path.is_empty():
+		return path
+	prefix.append_array(path)
+	return prefix
 
 func snap(position: Vector3) -> Vector3:
 	return graph.get_point_position(graph.get_closest_point(position)) if graph.get_point_count() > 0 else Vector3.INF
@@ -94,3 +112,72 @@ func sites() -> Dictionary:
 		else:
 			result[kind] = [best.x, best.y, best.z]
 	return result
+
+func free_workplace(position: Vector3, data: Dictionary, kind: String) -> bool:
+	if not position.is_finite() or position.distance_to(origin) > 16.0 or position.distance_to(origin) < 3.0 or route(origin, position).is_empty():
+		return false
+	for corner: Vector3 in [Vector3(-1, 0, -1), Vector3(1, 0, -1), Vector3(-1, 0, 1), Vector3(1, 0, 1)]:
+		var floor_point: Vector3 = snap(position + corner)
+		if floor_point.distance_to(position + corner) > 0.45 or route(position, floor_point).is_empty():
+			return false
+	for shelter: Dictionary in Housing.obstacles(data) + data.get("husbandry", {}).get("pens", []):
+		if position.distance_to(Home.vector(shelter["position"])) < 4.0 or position.distance_to(Home.vector(shelter["entrance"])) < 2.5:
+			return false
+	for resource: String in data["deposits"]:
+		# Upgrading an old source in place is allowed; other sources keep room.
+		if resource == {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}.get(kind):
+			continue
+		var site: Array = data["deposits"][resource]["position"]
+		if position.distance_to(Vector3(site[0], site[1], site[2])) < 3.0:
+			return false
+	return true
+
+func _occupied(position: Vector3) -> bool:
+	for shelter: Dictionary in shelters:
+		if Housing.contains(shelter, position):
+			return true
+	return false
+
+func free_shelter(position: Vector3, data: Dictionary, kind: String) -> bool:
+	if not free_workplace(position, data, kind):
+		return false
+	var candidate: Dictionary = Housing.site(data, kind, Home.vector_array(position), data["housing"]["homes"].size())
+	var entrance: Vector3 = Home.vector(candidate["entrance"])
+	if snap(entrance).distance_to(entrance) > 0.45:
+		return false
+	for member: Dictionary in data["members"]:
+		if Housing.contains(candidate, Home.vector(member["position"])):
+			return false
+	# Reserve the full footprint before charging. It must not sever any route
+	# from a resident, existing source, entrance or accepted D3 pickup to storage.
+	var disabled: Array[int] = []
+	for id: int in graph.get_point_ids():
+		if Housing.contains(candidate, graph.get_point_position(id)) and not graph.is_point_disabled(id):
+			graph.set_point_disabled(id, true)
+			disabled.append(id)
+	shelters.append(candidate)
+	var points: Array[Vector3] = [entrance]
+	for member: Dictionary in data["members"]:
+		points.append(Home.vector(member["position"]))
+		if member["order"] == "move" or member["paused_order"] == "move":
+			points.append(Home.vector(member["destination"]))
+	for deposit: Dictionary in data["deposits"].values():
+		points.append(Home.vector(deposit["position"]))
+	for shelter: Dictionary in data["housing"]["homes"]:
+		points.append(Home.vector(shelter["entrance"]))
+	for p: Dictionary in data.get("husbandry", {}).get("pens", []):
+		points.append(Home.vector(p["position"]))
+		points.append(Home.vector(p["entrance"]))
+	for record: Dictionary in data.get("husbandry", {}).get("records", {}).values():
+		if int(record["pending_milk"]) > 0:
+			points.append(Home.vector(record["pickup"]))
+	for batch: Dictionary in data["economy"]["incoming"]:
+		points.append(Home.vector(batch["position"]))
+	var clear: bool = true
+	for point: Vector3 in points:
+		if route(origin, point).is_empty():
+			clear = false
+	for id: int in disabled:
+		graph.set_point_disabled(id, false)
+	shelters.pop_back()
+	return clear

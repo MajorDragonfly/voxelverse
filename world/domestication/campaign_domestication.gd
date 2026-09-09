@@ -69,7 +69,7 @@ func _activate() -> void:
 	_ready_runtime = true
 	# Animals stand outside the original 12 m work grid. Expand only the
 	# loaded collision graph, keeping all member positions inside the 22 m save contract.
-	tribe.navigation.rebuild(tribe.home, tribe.anchor(), 20)
+	tribe.navigation.rebuild(tribe.home, tribe.anchor(), tribe.village(), 20)
 	for id: String in controller.registry["animals"]:
 		_spawn(id)
 	controls.refresh()
