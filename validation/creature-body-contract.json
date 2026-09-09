@@ -1,0 +1,110 @@
+{
+  "base_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.825
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.796
+    },
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.801
+    },
+    {
+      "name": "creature_joint_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.792
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.74
+    },
+    {
+      "name": "creature_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.673
+    },
+    {
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.992
+    },
+    {
+      "name": "creature_editor_v7_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.457
+    },
+    {
+      "name": "runtime_geometry_batch_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.991
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.898
+    },
+    {
+      "name": "discovery_journal_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.142
+    }
+  ],
+  "final_body_check": [
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.354
+    }
+  ],
+  "measurements": [
+    {
+      "legs": 2,
+      "max_attachment_error": 0.0,
+      "max_penetration": 0.000270441174507141,
+      "max_rest_gap": 3.47346067428589e-05,
+      "max_rest_stretch": 1.0,
+      "minimum_support": 1
+    },
+    {
+      "legs": 4,
+      "max_attachment_error": 0.0,
+      "max_penetration": 0.000269457697868347,
+      "max_rest_gap": 9.67532396316528e-05,
+      "max_rest_stretch": 1.0,
+      "minimum_support": 2
+    },
+    {
+      "legs": 6,
+      "max_attachment_error": 0.0,
+      "max_penetration": 0.000315293669700623,
+      "max_rest_gap": 0.000234022736549377,
+      "max_rest_stretch": 1.48968433280319,
+      "minimum_support": 3
+    }
+  ],
+  "numeric_tolerance": 0.002,
+  "units": "design_units",
+  "fresh_process_reload": true,
+  "local_renderer": "Unavailable: X11/Wayland display could not be created. See dedicated CI workflow for render acceptance."
+}
