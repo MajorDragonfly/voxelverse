@@ -34,25 +34,34 @@ static func phase_offset(count: int, rank: int, side: float) -> float:
 
 
 static func parameters(profile: Dictionary, running: bool) -> Dictionary:
+	return blended_parameters(profile, 1.0 if running else 0.0)
+
+
+static func blended_parameters(profile: Dictionary, run_blend: float) -> Dictionary:
+	var run: float = clampf(run_blend, 0.0, 1.0)
 	var count: int = int(profile.get("count", 2))
-	var duty: float = (0.56 if running else 0.72) if count == 4 else (0.56 if running else 0.66)
-	var stride: float = float(profile.get("stride", 0.2)) * (1.35 if running else 1.0)
-	var cadence: float = float(profile.get("cadence", 4.6)) * (1.65 if running else 1.0)
-	return {"duty": duty, "stride": stride, "cadence": cadence,
-		"lift": float(profile.get("lift", 0.12)) * (1.25 if running else 1.0),
+	var duty: float = lerpf(0.72 if count == 4 else 0.66, 0.56, run)
+	var stride: float = float(profile.get("stride", 0.2)) * lerpf(1.0, 1.35, run)
+	var cadence: float = float(profile.get("cadence", 4.6)) * lerpf(1.0, 1.65, run)
+	return {"duty": duty, "stride": stride, "cadence": cadence, "run_blend": run,
+		"lift": float(profile.get("lift", 0.12)) * lerpf(1.0, 1.25, run),
 		"speed": 2.0 * stride * cadence / (TAU * duty)}
 
 
 static func sample(parameters_value: Dictionary, phase: float, blend: float = 1.0) -> Dictionary:
 	var u: float = fposmod(phase / TAU, 1.0)
 	var duty: float = parameters_value["duty"]
-	var swing: bool = u >= duty and blend > 0.001
+	var swing: bool = u >= duty
 	var travel: float
 	var lift: float = 0.0
 	if swing:
 		var t: float = (u - duty) / (1.0 - duty)
-		travel = lerpf(1.0, -1.0, smoothstep(0, 1, t))
-		lift = sin(PI * t)
+		# Match the stance velocity at both ends of the swing. The small
+		# follow-through replaces the instantaneous reversal of the old curve.
+		var tangent: float = 2.0 * (1.0 - duty) / duty
+		travel = 1.0 + tangent * t - (6.0 + 3.0 * tangent) * t * t + (4.0 + 2.0 * tangent) * t * t * t
+		# Zero vertical velocity on lift-off and landing.
+		lift = pow(sin(PI * t), 2.0)
 	else:
 		travel = lerpf(-1.0, 1.0, u / duty)
 	return {"u": u, "swing": swing, "lift": lift * blend,

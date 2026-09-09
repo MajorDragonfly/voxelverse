@@ -86,6 +86,7 @@ func _physics_process(delta: float) -> void:
 	Space.orient(self)
 	if Steering.ground(self, global_position).is_empty():
 		velocity = Vector3.ZERO
+		_preview.set_locomotion_speed(0.0, float(source["speed"]))
 		status = "Wartet auf geladenen Boden"
 		return
 	var target: Vector3 = global_position
@@ -133,9 +134,10 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor(): Space.step(self, direction * speed * delta, STEP, 0.15)
 	move_and_slide()
 	if is_on_floor(): apply_floor_snap()
-	if direction != Vector3.ZERO: _visual_root.rotation.y = lerp_angle(_visual_root.rotation.y, atan2(-(global_basis.inverse() * direction).x, -(global_basis.inverse() * direction).z), minf(1, delta * 7))
+	if direction != Vector3.ZERO: _visual_root.rotation.y = lerp_angle(_visual_root.rotation.y, atan2(-(global_basis.inverse() * direction).x, -(global_basis.inverse() * direction).z), 1.0 - exp(-7.0 * delta))
 	var motion_mode: String = "walk" if direction != Vector3.ZERO else "idle"
 	if _preview.motion_mode != motion_mode: _preview.set_motion(motion_mode)
+	_preview.set_locomotion_speed(velocity.slide(up_direction).length(), speed)
 	runtime.controller.record_position(object_id, Space.encode(self, global_position))
 	runtime.sources[object_id]["heading"] = _visual_root.rotation.y
 

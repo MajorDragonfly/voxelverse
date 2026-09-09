@@ -345,7 +345,9 @@ func _refresh_preview() -> void:
 func _choose_motion(mode: String) -> void:
 	_course_paused = false
 	super._choose_motion(mode)
+	_preview.set_process(true)
 	if _course != null and _course_choice != "flat":
+		_preview.set("_motion_time", 0.0)
 		_preview.get("_motion").call("set_course", _course)
 		_preview.get("_motion").call("sample", mode, 0.0)
 
@@ -366,6 +368,7 @@ func _toggle_course_pause() -> void:
 
 
 func _restart_course() -> void:
+	_preview.call("set_motion", "edit")
 	_choose_motion(_motion_choice)
 
 

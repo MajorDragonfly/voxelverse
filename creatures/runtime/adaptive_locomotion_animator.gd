@@ -31,6 +31,7 @@ var _camera_pivot: Node3D
 var _camera: Camera3D
 
 var _phase: float = 0.0
+var _idle_time: float = 0.0
 var _movement_blend: float = 0.0
 var _bound_preview_id: int = 0
 var _base_preview_position: Vector3 = Vector3.ZERO
@@ -66,9 +67,10 @@ func _physics_process(delta: float) -> void:
 	var horizontal_speed: float = _player.velocity.slide(_player.up_direction).length()
 	var maximum_speed: float = maxf(float(_player.get("move_speed")), 0.1)
 	var target_blend: float = clampf(horizontal_speed / maximum_speed, 0.0, 1.0)
-	_movement_blend = move_toward(_movement_blend, target_blend, delta * 5.5)
-	var cadence: float = lerpf(1.1, minf(maximum_cadence, float(_gait_profile.get("cadence", maximum_cadence)) * 1.65), _movement_blend)
+	_movement_blend = lerpf(_movement_blend, target_blend, 1.0 - exp(-8.0 * delta))
+	var cadence: float = minf(maximum_cadence, float(_gait_settings()["cadence"])) * _movement_blend
 	_phase = fmod(_phase + delta * cadence, TAU)
+	_idle_time += delta
 
 	_animate_body(delta)
 	_animate_spine()
@@ -297,18 +299,18 @@ func _store_base_transform(node: Node3D) -> void:
 func _animate_body(delta: float) -> void:
 	if _preview == null or not is_instance_valid(_preview):
 		return
-	var idle_breath: float = sin(_phase * 0.55) * 0.015
-	var step_bob: float = absf(sin(_phase * 2.0)) * body_bob_strength * _movement_blend
+	var idle_breath: float = sin(_idle_time * 2.0) * 0.012
+	var step_bob: float = (0.5 - 0.5 * cos(_phase * 2.0)) * minf(body_bob_strength, float(_gait_profile.get("bob", body_bob_strength))) * _movement_blend
 	var target_position: Vector3 = _base_preview_position
 	target_position.y += idle_breath + step_bob + _grounding_offset
 	target_position.x += sin(_phase) * float(_gait_profile.get("sway", 0.02)) * _movement_blend
 	_preview.position = _preview.position.lerp(
 		target_position,
-		clampf(delta * 14.0, 0.0, 1.0)
+		1.0 - exp(-14.0 * delta)
 	)
 
-	var horizontal_velocity := Vector3(_player.velocity.x, 0.0, _player.velocity.z)
-	var local_velocity: Vector3 = _player.global_basis.inverse() * horizontal_velocity
+	var horizontal_velocity: Vector3 = _player.velocity.slide(_player.up_direction)
+	var local_velocity: Vector3 = _motion_basis().inverse() * horizontal_velocity
 	var target_rotation := Vector3(
 		deg_to_rad(-local_velocity.z * 0.55) + _terrain_pitch,
 		_preview.rotation.y,
@@ -316,8 +318,8 @@ func _animate_body(delta: float) -> void:
 	)
 	if not _player.is_on_floor():
 		target_rotation.x += deg_to_rad(-5.0 if _player.velocity.dot(_player.up_direction) > 0.0 else 6.0)
-	_preview.rotation.x = lerp_angle(_preview.rotation.x, target_rotation.x, clampf(delta * 6.0, 0.0, 1.0))
-	_preview.rotation.z = lerp_angle(_preview.rotation.z, target_rotation.z, clampf(delta * 6.0, 0.0, 1.0))
+	_preview.rotation.x = lerp_angle(_preview.rotation.x, target_rotation.x, 1.0 - exp(-6.0 * delta))
+	_preview.rotation.z = lerp_angle(_preview.rotation.z, target_rotation.z, 1.0 - exp(-6.0 * delta))
 
 
 func _animate_spine() -> void:
@@ -360,18 +362,23 @@ func _animate_non_leg_parts() -> void:
 			"arms":
 				target_rotation.x -= deg_to_rad(stride_degrees * 0.60) * sin(_phase + (0.0 if side >= 0.0 else PI)) * _movement_blend
 			"tail":
-				target_rotation.y += deg_to_rad(tail_swing_degrees) * sin(_phase * 0.82) * lerpf(0.42, 1.0, _movement_blend)
-				target_rotation.x += deg_to_rad(3.5) * sin(_phase * 0.55)
+				target_rotation.y += deg_to_rad(tail_swing_degrees) * (sin(_idle_time * 2.5) * 0.35 + sin(_phase - 0.5) * _movement_blend * 0.65)
+				target_rotation.x += deg_to_rad(3.5) * sin(_idle_time * 1.4)
 			"mouth", "eyes", "horns":
-				target_rotation.x += deg_to_rad(1.8) * sin(_phase * 0.62)
-				target_position.y += sin(_phase * 0.55) * 0.010
+				target_rotation.x += deg_to_rad(1.8) * sin(_idle_time * 1.8)
+				target_position.y += sin(_idle_time * 2.0) * 0.010
 			"plates", "spikes", "decor":
-				target_rotation.z += deg_to_rad(1.1) * sin(_phase * 0.48 + (0.0 if side >= 0.0 else PI))
+				target_rotation.z += deg_to_rad(1.1) * sin(_idle_time * 1.2 + (0.0 if side >= 0.0 else PI))
 		part_root.position = target_position
 		part_root.rotation = target_rotation
 
 
+func _gait_settings() -> Dictionary:
+	return Gait.blended_parameters(_gait_profile, smoothstep(0.45, 1.0, _movement_blend))
+
+
 func _animate_adaptive_legs() -> void:
+	var settings: Dictionary = _gait_settings()
 	for record in _leg_records:
 		var leg: Node3D = _get_valid_node3d(record, "root")
 		if leg == null:
@@ -385,10 +392,10 @@ func _animate_adaptive_legs() -> void:
 		if bool(record.get("sculpt_rig", false)):
 			leg.rotation = base_rotation
 			leg.position = base_position
-			var settings: Dictionary = Gait.parameters(_gait_profile, _movement_blend > 0.75)
 			var step: Dictionary = Gait.sample(settings, gait_phase, _movement_blend)
 			record["lift"] = step["lift"]
 			record["swing"] = step["swing"]
+			record["swing_progress"] = clampf((float(step["u"]) - float(settings["duty"])) / (1.0 - float(settings["duty"])), 0, 1)
 			record["step_height"] = float(settings["lift"]) * _preview.global_basis.y.length()
 			var point: Vector3 = record["rest_contact_preview"] + step["offset"]
 			var frame: Transform3D = _ground_frame()
@@ -415,6 +422,7 @@ func _solve_ground_contact(delta: float) -> void:
 	if _leg_records.is_empty() or not _player.is_on_floor():
 		for record in _leg_records:
 			record.erase("planted_world")
+			record.erase("swing_offset")
 		_terrain_pitch = move_toward(_terrain_pitch, 0.0, delta)
 		_grounding_offset = move_toward(
 			_grounding_offset,
@@ -446,18 +454,27 @@ func _solve_ground_contact(delta: float) -> void:
 		query.collision_mask = _player.collision_mask
 		var hit: Dictionary = space_state.intersect_ray(query)
 		if hit.is_empty():
+			record.erase("planted_world")
+			record.erase("swing_offset")
 			continue
 		var hit_position: Vector3 = hit.get("position", foot_position)
 		if bool(record.get("sculpt_rig", false)):
 			var frame: Transform3D = _ground_frame()
 			var swing: bool = bool(record.get("swing", false))
 			if swing:
+				# Release from the actual planted contact, not the unrelated
+				# nominal stride position, then catch up during the swing.
+				if record.has("planted_world"):
+					record["swing_offset"] = record["planted_world"] - hit_position
 				record.erase("planted_world")
+				var release: float = 1.0 - smoothstep(0, 1, float(record.get("swing_progress", 1.0)))
+				hit_position += Vector3(record.get("swing_offset", Vector3.ZERO)) * release
 			else:
+				record.erase("swing_offset")
 				var planted: Vector3 = record.get("planted_world", hit_position)
 				var distance: Vector3 = (planted - hit_position).slide(up)
 				if distance.length() > maxf(0.3, float(_gait_profile.get("stride", 0.2)) * 2.5 * frame.basis.y.length()):
-					planted = hit_position
+					planted = planted.lerp(hit_position, 1.0 - exp(-ground_follow_speed * delta))
 				record["planted_world"] = planted
 				query.from = planted + up * ground_probe_up
 				query.to = planted - up * ground_probe_down
@@ -491,11 +508,11 @@ func _solve_ground_contact(delta: float) -> void:
 	_grounding_offset = lerpf(
 		_grounding_offset,
 		desired,
-		clampf(delta * ground_follow_speed, 0.0, 1.0)
+		1.0 - exp(-ground_follow_speed * delta)
 	)
 	if support_count > 0:
-		var local_normal: Vector3 = _player.global_basis.inverse() * support_normals.normalized()
-		_terrain_pitch = lerpf(_terrain_pitch, clampf(atan2(local_normal.z, local_normal.y), -0.32, 0.32), clampf(delta * 6.0, 0, 1))
+		var local_normal_visual: Vector3 = _motion_basis().inverse() * support_normals.normalized()
+		_terrain_pitch = lerpf(_terrain_pitch, clampf(atan2(local_normal_visual.z, local_normal_visual.y), -0.32, 0.32), 1.0 - exp(-6.0 * delta))
 
 
 func surface_origin_shifted(shift: Vector3) -> void:
@@ -506,6 +523,11 @@ func _ground_frame() -> Transform3D:
 	var parent: Node3D = _preview.get_parent_node_3d()
 	var local := Transform3D(Basis.from_euler(Vector3(0, _preview.rotation.y, 0)).scaled(_preview.scale), _base_preview_position)
 	return parent.global_transform * local if parent != null else local
+
+
+func _motion_basis() -> Basis:
+	var parent: Node3D = _preview.get_parent_node_3d()
+	return parent.global_basis if parent != null else _player.global_basis
 
 
 func _get_valid_node3d(record: Dictionary, key: String) -> Node3D:
@@ -530,12 +552,12 @@ func _animate_camera(delta: float) -> void:
 		target_position.x += cos(_phase) * camera_bob_strength * 0.025 * _movement_blend
 		_camera_pivot.position = _camera_pivot.position.lerp(
 			target_position,
-			clampf(delta * 8.0, 0.0, 1.0)
+			1.0 - exp(-8.0 * delta)
 		)
 	if _camera != null and is_instance_valid(_camera):
 		var target_fov: float = _base_camera_fov + _movement_blend * movement_fov_bonus
 		_camera.fov = lerpf(
 			_camera.fov,
 			target_fov,
-			clampf(delta * 4.0, 0.0, 1.0)
+			1.0 - exp(-4.0 * delta)
 		)

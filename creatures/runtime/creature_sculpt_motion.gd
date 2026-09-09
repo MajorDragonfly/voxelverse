@@ -11,6 +11,9 @@ var _legs: Array[Dictionary] = []
 var _profile: Dictionary = {}
 var _course: Node3D
 var course_finished: bool = false
+var _live_phase: float = 0.0
+var _live_blend: float = 0.0
+var _live_run: float = 0.0
 
 
 func bind(preview: Node3D) -> void:
@@ -19,6 +22,9 @@ func bind(preview: Node3D) -> void:
 	_base_rotation = preview.rotation
 	_parts.clear()
 	_legs.clear()
+	_live_phase = 0.0
+	_live_blend = 0.0
+	_live_run = 0.0
 	for child in preview.get_children():
 		if child is Node3D and child.has_meta("creature_part_category"):
 			_parts.append({"node": child, "position": child.position, "rotation": child.rotation})
@@ -69,11 +75,30 @@ func reset() -> void:
 
 
 func sample(mode: String, time: float) -> void:
+	# Deterministic random-access sampling for fitting evidence and courses.
+	var settings: Dictionary = Gait.parameters(_profile, mode == "run")
+	_pose(time, 1.0 if mode in ["walk", "run"] else 0.0, settings, time * float(settings["cadence"]))
+
+
+func advance(mode: String, time: float, delta: float, speed_ratio: float = -1.0) -> void:
+	# Live actors keep one clock and one rig across all locomotion modes.
+	# Courses retain their explicit, restartable measurement timeline.
+	if is_instance_valid(_course) and str(_course.get("kind")) != "flat":
+		sample(mode, time)
+		return
+	var target: float = 1.0 if mode in ["walk", "run"] else 0.0
+	if speed_ratio >= 0.0:
+		target = clampf(speed_ratio, 0.0, 1.0)
+	_live_blend = lerpf(_live_blend, target, 1.0 - exp(-8.0 * delta))
+	_live_run = lerpf(_live_run, 1.0 if mode == "run" else 0.0, 1.0 - exp(-6.0 * delta))
+	var settings: Dictionary = Gait.blended_parameters(_profile, _live_run)
+	_live_phase += delta * float(settings["cadence"]) * _live_blend
+	_pose(time, _live_blend, settings, _live_phase)
+
+
+func _pose(time: float, moving: float, settings: Dictionary, phase: float) -> void:
 	if not is_instance_valid(_preview):
 		return
-	var moving: float = 1.0 if mode in ["walk", "run"] else 0.0
-	var settings: Dictionary = Gait.parameters(_profile, mode == "run")
-	var phase: float = time * float(settings["cadence"])
 	var training: bool = is_instance_valid(_course) and str(_course.get("kind")) != "flat"
 	var route := Vector3.ZERO
 	var floor_rise: float = 0.0
@@ -96,7 +121,7 @@ func sample(mode: String, time: float) -> void:
 	var parent: Node3D = _preview.get_parent() as Node3D
 	var parent_frame: Transform3D = parent.global_transform if parent != null else Transform3D.IDENTITY
 	var world_reference: Transform3D = parent_frame * reference
-	_preview.position = reference.origin + Vector3(sin(phase) * float(_profile.get("sway", 0.02)) * moving, sin(time * 2.0) * 0.012 + absf(sin(phase)) * float(_profile.get("bob", 0.02)) * moving, 0)
+	_preview.position = reference.origin + Vector3(sin(phase) * float(_profile.get("sway", 0.02)) * moving, sin(time * 2.0) * 0.012 + (0.5 - 0.5 * cos(phase * 2.0)) * float(_profile.get("bob", 0.02)) * moving, 0)
 	_preview.rotation = _base_rotation + Vector3(terrain_pitch, 0, sin(phase) * 0.018 * moving)
 	for part in _parts:
 		var node: Node3D = part["node"]
@@ -127,7 +152,7 @@ func sample(mode: String, time: float) -> void:
 				normal_world = (parent_frame.basis * foot["normal"]).normalized()
 			LimbRig.plant(leg, contact_world, normal_world, world_reference.basis)
 			continue
-		leg["root"].rotation.x += cos(stride) * (0.50 if mode == "run" else 0.32) * moving
+		leg["root"].rotation.x += cos(stride) * lerpf(0.32, 0.50, float(settings["run_blend"])) * moving
 		if is_instance_valid(leg.get("knee")):
 			leg["knee"].rotation = leg.get("knee_base_rotation", Vector3.ZERO)
 			leg["knee"].rotation.x += maxf(0.0, sin(stride)) * 0.55 * moving
