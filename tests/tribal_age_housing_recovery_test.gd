@@ -40,8 +40,9 @@ func _run() -> void:
 	tribe.select_member(identity)
 	_expect(tribe.issue_order("move", tribe.anchor()), "Migrated resident could not leave through the entrance.")
 	var previous: Vector3 = tribe.actors[identity].global_position
+	# Inspect each physics tick; one rendered frame may contain several catch-up ticks.
 	for frame in range(500):
-		await _frames(1)
+		await physics_frame
 		var current: Vector3 = tribe.actors[identity].global_position
 		_expect(current.distance_to(previous) < 0.8, "Resident teleported during collision recovery.")
 		previous = current
