@@ -163,6 +163,11 @@ func _journal_checks() -> void:
 	for index in range(70):
 		progression.discovered_species.erase("page_%d" % index)
 	journal.refresh()
+	progression.reset_for_new_game()
+	_expect(journal._records.is_empty(), "New game left old discoveries visible in the journal.")
+	_expect(saves.load_now(), "Could not restore journal fixture after reset.")
+	progression.discovered_species["ui_fixture"] = {"name": "Kieselrücken", "role": "grazer", "world_seed": 15838}
+	journal.refresh()
 	await _click(ui._tree_tab)
 
 

@@ -19,7 +19,7 @@ var _records: Array[Dictionary] = []
 func _ready() -> void:
 	add_theme_constant_override("separation", 16)
 	add_child(Style.label("Deine Entdeckungen", 28))
-	add_child(Style.label("Arten, besuchte Regionen und freigeschaltete Körperteile aus deiner Kampagne. Körperteile werden separat geführt; eine Zuordnung zu einzelnen Arten ist bisher nicht gespeichert.", 17, Style.MUTED))
+	add_child(Style.label("Entdeckte Arten, besuchte Regionen und deine freigeschalteten Körperteile.", 17, Style.MUTED))
 	var filters := HBoxContainer.new()
 	filters.add_theme_constant_override("separation", 14)
 	add_child(filters)

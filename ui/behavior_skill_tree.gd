@@ -40,6 +40,7 @@ func _ready() -> void:
 	visible = false
 	var progression := get_node("/root/ProgressionService")
 	progression.behavior_changed.connect(refresh)
+	progression.discovery_points_changed.connect(func(_points: int) -> void: _refresh_journal())
 	progression.species_discovered.connect(func(_key: String, _title_text: String) -> void: _refresh_journal())
 	progression.region_discovered.connect(func(_key: String) -> void: _refresh_journal())
 	progression.part_unlocked.connect(func(_id: String, _reason: String) -> void: _refresh_journal())
@@ -125,7 +126,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 func _build() -> void:
 	var backdrop := ColorRect.new()
 	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	backdrop.color = Color(0.025, 0.042, 0.057, 0.97)
+	backdrop.color = Color(0.025, 0.042, 0.057, 1.0)
 	backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(backdrop)
 	_panel = MarginContainer.new()
