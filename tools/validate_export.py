@@ -88,15 +88,15 @@ def main():
             # No project.godot, source paths or project --path are supplied here.
             run("packaged_main", [str(executable), "--headless", "--verbose", "--", "--runtime-exit-frames", "300"],
                 package, isolated_env(root / "main-userdata"))
-            run("packaged_planet_lab", [str(executable), "--headless", "--", "--planet-lab", "--runtime-exit-frames", "600"],
+            run("packaged_planet_lab", [str(executable), "--headless", "--verbose", "--", "--planet-lab", "--runtime-exit-frames", "600"],
                 package, isolated_env(root / "lab-userdata"))
             if "PLANET_LAB_READY" not in (logs / "packaged_planet_lab.log").read_text():
                 raise RuntimeError("Native executable did not enter the planet lab through the gameplay transition.")
-            run("packaged_menu_input", [str(executable), "--headless", "--", "--input-smoke"],
+            run("packaged_menu_input", [str(executable), "--headless", "--verbose", "--", "--input-smoke"],
                 package, isolated_env(root / "menu-userdata"))
             if "MENU_INPUT_PASSED" not in (logs / "packaged_menu_input.log").read_text():
                 raise RuntimeError("Native executable did not pass the actual menu-click/F4 acceptance.")
-            run("packaged_frontend", [str(executable), "--headless", "--", "--frontend-smoke"],
+            run("packaged_frontend", [str(executable), "--headless", "--verbose", "--", "--frontend-smoke"],
                 package, isolated_env(root / "frontend-userdata"))
             if "FRONTEND_PASSED" not in (logs / "packaged_frontend.log").read_text():
                 raise RuntimeError("Native executable did not pass title/pause/save-slot acceptance.")

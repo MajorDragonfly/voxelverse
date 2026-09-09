@@ -1,0 +1,9 @@
+Loading resource: res://.godot/imported/nest_fiber_01.png-eceb852WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+ERROR: 1 resources still in use at exit.
+MENU_INPUT_PASSED: underwater optics, Esc/F8, actual GUI clicks, VSync, mouse restoration, physical F4, lab round trip, real Terra, Galaxy notes/modal Escape, catalog Visit and precise saved return.
+Leaked instance: AudioStreamOggVorbis:9223372102990562963 - Reference count: 1
+Leaked instance: OggPacketSequence:9223372102504023704 - Reference count: 3
+Leaked instance: AudioStreamPlaybackOggVorbis:9223372113543432394 - Reference count: 1
+Leaked instance: OggPacketSequencePlayback:9223372113560209611 - Reference count: 1
+Hint: Leaked instances typically happen when nodes are removed from the scene tree (with `remove_child()`) but not freed (with `free()` or `queue_free()`).
+Resource still in use: res://audio/assets/music/menu.ogg::OggPacketSequence_blkk0 (OggPacketSequence)
