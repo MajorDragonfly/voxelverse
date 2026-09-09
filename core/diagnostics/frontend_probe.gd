@@ -41,7 +41,18 @@ func _run() -> void:
 	_click(tree.current_scene.find_child("Begin", true, false))
 	await _frames(2)
 	_expect(not flow.loading and tree.current_scene._status.text.contains("Welt-Seed"), "Invalid seed started or produced no feedback.")
-	tree.current_scene.find_child("WorldSeed", true, false).text = "15838"
+	var seed_input: LineEdit = tree.current_scene.find_child("WorldSeed", true, false)
+	seed_input.select_all()
+	for character in "15838":
+		var typed := InputEventKey.new()
+		typed.unicode = character.unicode_at(0)
+		typed.pressed = true
+		get_viewport().push_input(typed, true)
+		typed = typed.duplicate()
+		typed.pressed = false
+		get_viewport().push_input(typed, true)
+	await _frames(2)
+	_expect(seed_input.text == "15838" and tree.current_scene._status.text.is_empty(), "Corrected seed kept stale validation feedback.")
 	await _capture("new_game")
 	_click(tree.current_scene.find_child("Begin", true, false))
 	await flow.world_started

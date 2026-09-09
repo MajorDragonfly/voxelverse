@@ -45,8 +45,17 @@ Geprüfter Implementierungskommit: `dc98cb3`.
 
 - **51/51** Projekt-/Laufzeitprüfungen bestanden, einschließlich des neuen Menüablaufs, der bestehenden M2A-Fortschrittsverträge, Editoren, Planetentransitionen und gestuftem Weltabbau. Import und Asset-Quellenprüfung waren in diesem abschließenden Lauf ausgelassen; der vorherige Exportlauf hat den Import bereits fehlerfrei abgeschlossen.
 - **13/13** Prüfungen des nativen Linux-Releasepakets bestanden. Darunter der unveränderte Programmeinstieg, tatsächliche Menü-/F4-Eingaben und der vollständige neue Spielstandablauf im Releaseprogramm.
-- Windows-EXE und PCK wurden mit Godot 4.6.3 erfolgreich exportiert. Sie wurden hier nicht unter Windows gestartet.
-- Eine echte grafische Sichtprüfung ist noch offen. Die lokale Umgebung konnte keinen Grafikserver starten; die vorbereitete Renderaktion benötigt einen veröffentlichten Branch. Headless-Eingabetests sind kein Ersatz für eine Bildabnahme.
+- Windows-EXE und PCK wurden mit Godot 4.6.3 erfolgreich exportiert. Die anschließende [Desktop-CI am veröffentlichten Stand `977aea4`](https://github.com/MajorDragonfly/voxelverse/actions/runs/34319148262) hat die nativen Windows- und Linux-Releaseprogramme erfolgreich gestartet und geprüft. Der folgende Korrekturstand erhält einen eigenen CI-Lauf.
+- Die echte grafische Sichtprüfung mit Godot 4.6.3, OpenGL-Kompatibilitätsrenderer und Mesa llvmpipe bei 1600 × 900 ist abgeschlossen. Alle fünf Ansichten wurden geprüft; Titel, neues Spiel, Pause, Einstellungen und Spielstände liegen als PNG neben den JSON-Nachweisen. Der vollständige Ablauf endete mit `FRONTEND_PASSED`, ohne Scriptfehler, Enginefehler oder gemeldete Objektlecks. Der Test provoziert bewusst einen Speicherfehler und prüft, dass die Welt dabei erhalten bleibt.
 - Der öffentliche Push wurde zunächst durch die automatische Freigabe abgelehnt. Lars hat anschließend ausdrücklich zugestimmt, `agent/game-menus` öffentlich hochzuladen und einen Entwurfs-PR anzulegen. `main` wird nicht gemergt; die Veröffentlichung und die ausstehenden CI-Abnahmen erfolgen auf dem separaten Menü-Branch.
 
-Die JSON-Nachweise liegen unter `art/review/frontend/`.
+Die JSON-Nachweise und Spielaufnahmen liegen unter `art/review/frontend/`.
+
+## Korrekturen nach der Bildprüfung
+
+- Der verzögerte LOD-Aufruf prüft vor dem Zugriff, ob sein Chunk noch im Szenenbaum liegt. Ein schneller Wechsel zum Titel kann den Chunk bereits vorher entfernen. Ein gezielter Regressionstest reproduziert genau diesen Ablauf; Menü- und Terraintransitionstest bestehen nach der Korrektur.
+- Der fokussierte Hauptbutton verwendet dunkle Schrift auf dem hellgrünen Hintergrund.
+- Eine bearbeitete Seed-Eingabe entfernt die vorherige Validierungsmeldung. Die Diagnose prüft das mit tatsächlichen Tastatureingaben im Viewport.
+- Die CI-Bildaufnahme benutzt den Dummy-Audiotreiber, weil der Render-Runner kein Audiogerät besitzt.
+
+Veröffentlichung: [Entwurfs-PR #16](https://github.com/MajorDragonfly/voxelverse/pull/16), Zielbranch `agent/m2-behavior-skilltree`.

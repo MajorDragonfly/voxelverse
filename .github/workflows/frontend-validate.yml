@@ -44,7 +44,7 @@ jobs:
           mkdir -p "$VOXELVERSE_CAPTURE_DIR"
           GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
           "$GODOT" --headless --path . --import > "$VOXELVERSE_CAPTURE_DIR/import.log" 2>&1
-          xvfb-run -a -s '-screen 0 1600x900x24' timeout 480 "$GODOT" --path . --rendering-method gl_compatibility -- --frontend-smoke --frontend-capture > "$VOXELVERSE_CAPTURE_DIR/frontend.log" 2>&1
+          xvfb-run -a -s '-screen 0 1600x900x24' timeout 480 "$GODOT" --path . --rendering-method gl_compatibility --audio-driver Dummy -- --frontend-smoke --frontend-capture > "$VOXELVERSE_CAPTURE_DIR/frontend.log" 2>&1
           python - <<'PY'
           import os,re
           from pathlib import Path

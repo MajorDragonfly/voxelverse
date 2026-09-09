@@ -126,6 +126,7 @@ func _show_new() -> void:
 	_seed_input.placeholder_text = "Leer lassen für eine zufällige Welt"
 	_seed_input.max_length = 10
 	_seed_input.custom_minimum_size.y = 54
+	_seed_input.text_changed.connect(func(_text: String): _status.text = "")
 	_body.add_child(_seed_input)
 	Style.button(_body, "Abenteuer beginnen", _begin, "Begin", true)
 	Style.button(_body, "Zurück", _show_home, "Back")

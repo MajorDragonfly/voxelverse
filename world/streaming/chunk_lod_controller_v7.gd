@@ -31,12 +31,16 @@ func _process(delta: float) -> void:
 
 
 func _bind_and_update() -> void:
+	# A menu transition can detach a just-created chunk before this deferred
+	# callback runs. The departing world no longer owns a player or SceneTree.
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	_player = get_tree().get_first_node_in_group(&"player") as Node3D
 	_update_lod()
 
 
 func _update_lod() -> void:
-	if _chunk == null or _player == null:
+	if not is_instance_valid(_chunk) or not is_instance_valid(_player) or not _chunk.is_inside_tree() or not _player.is_inside_tree():
 		return
 	var offset: Vector3 = _chunk.global_position - _player.global_position
 	var distance: float = Vector2(offset.x, offset.z).length()

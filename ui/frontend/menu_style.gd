@@ -64,6 +64,7 @@ static func button(parent: Node, text: String, action: Callable, id: String = ""
 	if primary:
 		node.add_theme_stylebox_override("normal", box(ACCENT, ACCENT))
 		node.add_theme_color_override("font_color", INK)
+		node.add_theme_color_override("font_focus_color", INK)
 	node.pressed.connect(action)
 	parent.add_child(node)
 	return node
