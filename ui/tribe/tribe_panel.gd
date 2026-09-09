@@ -102,7 +102,7 @@ func _layout() -> void:
 	_scale_factor = viewport_size.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
 	viewport_size /= _scale_factor
-	entry.position = Vector2(viewport_size.x - 282, 18)
+	entry.position = Vector2(viewport_size.x - 282, 76)
 	entry.size = Vector2(260, 46)
 	_hud.size = Vector2(viewport_size.x - 36, 0)
 	_place_hud()
