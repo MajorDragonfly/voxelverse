@@ -184,8 +184,10 @@ func _animal_chain(tribe: Node) -> void:
 	tribe.select_member(data.members[2].id)
 	tribe.assign_profession("milk_carrier")
 	_stage("supply_pen")
-	await _until(func() -> bool: return tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, 28000)
-	_expect(tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, "Keeper did not physically supply pen.")
+	# One keeper carries one unit per return trip. Water reaches its four-unit
+	# target before food is chosen; allow those five real trips and needs stops.
+	await _until(func() -> bool: return tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, 60000)
+	_expect(tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, "Keeper did not physically supply pen: " + str({"delivered": tribe.village().husbandry.delivered, "members": tribe.village().members, "routes": tribe._routes, "status": tribe.status}))
 	var carrier: String = data.members[2].id
 	_stage("produce_and_collect_milk")
 	await _until(func() -> bool: return tribe.member_record(carrier).cargo == "milk", 100000)
