@@ -21,7 +21,7 @@ const Encounters = preload("res://core/progression/creature_encounters.gd")
 
 const Tribal = preload("res://core/progression/tribal_progression.gd")
 const Civilization = preload("res://core/progression/civilization_contract.gd")
-const SAVE_SCHEMA: int = 5
+const SAVE_SCHEMA: int = 6
 const SPECIES_DISCOVERY_POINTS: int = 3
 const REGION_DISCOVERY_POINTS: int = 1
 
@@ -102,7 +102,8 @@ func register_species_discovery(
 ) -> Dictionary:
 	if world_seed <= 0:
 		world_seed = _get_world_seed()
-	var species_key: String = "%d:%d" % [world_seed, species_seed]
+	var species_key: String = species_discovery_key(species_seed, world_seed)
+	if species_key.is_empty(): return {"is_new": false, "species_key": "", "points_awarded": 0, "unlocked_part": ""}
 	if discovered_species.has(species_key):
 		_record_journal_observation(discovered_species[species_key], blueprint, world_seed)
 		return {
@@ -144,7 +145,7 @@ func register_species_discovery(
 func has_species_scan(species_seed: int, world_seed: int = 0) -> bool:
 	if world_seed <= 0:
 		world_seed = _get_world_seed()
-	var entry: Dictionary = _as_dictionary(discovered_species.get("%d:%d" % [world_seed, species_seed], {}))
+	var entry: Dictionary = _as_dictionary(discovered_species.get(species_discovery_key(species_seed, world_seed), {}))
 	var scan: Dictionary = _as_dictionary(entry.get("scan", {}))
 	return int(scan.get("version", 0)) == 1 and bool(scan.get("complete", false))
 
@@ -155,6 +156,7 @@ func register_species_scan(species_seed: int, blueprint: Dictionary, world_seed:
 	if world_seed <= 0:
 		world_seed = _get_world_seed()
 	var result: Dictionary = register_species_discovery(species_seed, blueprint, world_seed)
+	if str(result.get("species_key", "")).is_empty(): return {}
 	var entry: Dictionary = discovered_species[result.species_key]
 	if not has_species_scan(species_seed, world_seed):
 		entry["scan"] = {"version": 1, "complete": true}
@@ -170,11 +172,11 @@ func register_region_discovery(
 ) -> bool:
 	if world_seed <= 0:
 		world_seed = _get_world_seed()
-	var region_key: String = "%d:%d:%d" % [
-		world_seed,
-		coordinates.x,
-		coordinates.y,
-	]
+	var body: Dictionary = _discovery_body(world_seed)
+	if body.is_empty(): return false
+	var region_key: String = get_node("/root/GameState").campaign.region_id(body.id, coordinates)
+	var legacy_key: String = "%d:%d:%d" % [world_seed, coordinates.x, coordinates.y]
+	if discovered_regions.get(legacy_key, {}).get("body_id") == body.id: region_key = legacy_key
 	if discovered_regions.has(region_key):
 		return false
 	discovered_regions[region_key] = {
@@ -206,6 +208,13 @@ func export_state() -> Dictionary:
 func import_state(data: Dictionary) -> bool:
 	if not validate_state(data).is_empty():
 		return false
+	var imported_species: Dictionary = _as_dictionary(data.get("discovered_species", {}))
+	var imported_regions: Dictionary = _as_dictionary(data.get("discovered_regions", {}))
+	for entry: Dictionary in imported_species.values():
+		if not _annotate_discovery(entry, false): return false
+		if not entry.has("scan"): entry.scan = {"version": 1, "complete": true, "legacy": true}
+	for entry: Dictionary in imported_regions.values():
+		if not _annotate_discovery(entry, true): return false
 	_tribal.import_state(data.get("tribal", Tribal.defaults()))
 	_encounters.entries.clear()
 	if data.has("creature_encounters"):
@@ -217,18 +226,10 @@ func import_state(data: Dictionary) -> bool:
 		_behavior.reset()
 	discovery_points = maxi(int(data.get("discovery_points", 0)), 0)
 	unlocked_parts = _as_dictionary(data.get("unlocked_parts", {}))
-	discovered_species = _as_dictionary(data.get("discovered_species", {}))
-	discovered_regions = _as_dictionary(data.get("discovered_regions", {}))
+	discovered_species = imported_species
+	discovered_regions = imported_regions
 	_research = _as_dictionary(data.get("research", Research.defaults()))
 	_research["version"] = Research.VERSION
-	for entry in discovered_species.values():
-		_annotate_discovery(entry, false)
-		# Earlier releases already awarded these discoveries. Keep them known;
-		# new entries carry an explicit incomplete scan until scanning finishes.
-		if not entry.has("scan"):
-			entry["scan"] = {"version": 1, "complete": true, "legacy": true}
-	for entry in discovered_regions.values():
-		_annotate_discovery(entry, true)
 	# Retain unlock IDs for unavailable parts so restored content is not lost.
 	_ensure_starter_parts()
 	discovery_points_changed.emit(discovery_points)
@@ -382,7 +383,7 @@ func get_development_path() -> Dictionary:
 	var controller := get_tree().get_first_node_in_group(&"home_group_controller")
 	var runtime_available: bool = controller != null and controller.has_method("can_use_panel") and bool(controller.call("can_use_panel"))
 	var result: Dictionary = preload("res://core/progression/development_path.gd").describe(
-		state.campaign.data, str(int(state.world_seed)), int(state.current_phase), runtime_available)
+		state.campaign.data, str(state.active_body_id), int(state.current_phase), runtime_available)
 	result["legacy"] = get_phase_progression_preview(1)["legacy"]
 	var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
 	if tribe != null:
@@ -394,7 +395,7 @@ func get_development_path() -> Dictionary:
 	result["tribal_wallet"] = _tribal.wallet()
 	result["epochs"] = []
 	for target: int in [2, 3]:
-		result["epochs"].append(Civilization.describe(state.campaign.data, str(int(state.world_seed)), int(state.current_phase), target, get_tribal_economy_progress()))
+		result["epochs"].append(Civilization.describe(state.campaign.data, str(state.active_body_id), int(state.current_phase), target, get_tribal_economy_progress()))
 	result["factions"] = "Unter Dorf → Nachbarn findest du eine Fraktion deiner Spezies mit eigenem Lager. Gemeinsame Hilfslieferungen verbessern eure Beziehung. Fremde Wildarten bleiben Tiere; Zähmung macht sie nicht zu Bürgern."
 	return result
 
@@ -423,10 +424,21 @@ func record_tribal_tick(delta: float, producer: Node) -> void:
 	if not result["rewards"].is_empty():
 		_publish_tribal_result(result)
 
+func record_far_work(before: Dictionary, actor_id: String, body: Dictionary, delta: float, producer: Node) -> void:
+	var state: Node = get_node("/root/GameState")
+	if producer != state or state.active_body_id == body.get("id") or body.get("village_simulation", {}).get("owner") != "far" or is_behavior_transaction_active(): return
+	if actor_id == body.get("tribal_neighbor", {}).get("id"):
+		_publish_tribal_result(_tribal.observe_neighbor(before, body.tribal_neighbor, body.tribe, state.campaign.data, int(state.current_phase)))
+		return
+	var result: Dictionary = _tribal.observe_supply(body.tribe, body, state.campaign.data, int(state.current_phase), delta) if actor_id.is_empty() else _tribal.observe(before, body.tribe, actor_id, body, state.campaign.data, int(state.current_phase))
+	# Supply clocks are already saved by the normal checkpoint cadence.
+	# Rescheduling them every far slice would postpone autosave indefinitely.
+	if not actor_id.is_empty() or not result.rewards.is_empty(): _publish_tribal_result(result)
+
 
 func get_tribal_economy_progress() -> Dictionary:
 	var state := get_node("/root/GameState")
-	var village: Dictionary = state.campaign.data.get("bodies", {}).get(str(int(state.world_seed)), {}).get("tribe", {})
+	var village: Dictionary = state.get_current_body_record().get("tribe", {})
 	return _tribal.economy_progress(village)
 
 func record_neighbor_help(before: Dictionary, producer: Node) -> void:
@@ -678,15 +690,35 @@ func _as_dictionary(value: Variant) -> Dictionary:
 	return {}
 
 
-func _annotate_discovery(entry: Dictionary, is_region: bool) -> void:
+func _discovery_body(world_seed: int, body_id: String = "") -> Dictionary:
+	var state := get_node_or_null("/root/GameState")
+	if state == null: return {}
+	if not body_id.is_empty(): return state.campaign.body_record(body_id)
+	if int(state.world_seed) == world_seed: return state.get_current_body_record()
+	return state.campaign.body_record(state.campaign.find_body_id(world_seed, state.active_system_id))
+
+
+func species_discovery_key(species_seed: int, world_seed: int = 0) -> String:
+	if world_seed <= 0: world_seed = _get_world_seed()
+	var body: Dictionary = _discovery_body(world_seed)
+	if body.is_empty(): return ""
+	var legacy_key: String = "%d:%d" % [world_seed, species_seed]
+	# Preserve old book keys and unlock references, but only for their owner.
+	if discovered_species.get(legacy_key, {}).get("body_id") == body.id: return legacy_key
+	return get_node("/root/GameState").campaign.species_id(body.id, species_seed)
+
+
+func _annotate_discovery(entry: Dictionary, is_region: bool) -> bool:
 	var state := get_node_or_null("/root/GameState")
 	if state == null:
-		return
+		return false
 	var campaign = state.get("campaign")
-	var body: Dictionary = campaign.body_for_seed(int(entry.get("world_seed", 1)), int(state.call("get_system_seed")))
+	var body: Dictionary = _discovery_body(int(entry.get("world_seed", 1)), str(entry.get("body_id", "")))
+	if body.is_empty() or body.seed != entry.get("world_seed"): return false
 	entry["body_id"] = body["id"]
 	if not entry.has("id"):
 		entry["id"] = campaign.region_id(body["id"], Vector2i(int(entry.get("x", 0)), int(entry.get("z", 0)))) if is_region else campaign.species_id(body["id"], int(entry.get("species_seed", 1)))
+	return true
 
 
 func _emit_discovery_event(target_id: String) -> void:

@@ -1,4 +1,5 @@
 extends Node
+const Registry = preload("res://core/campaign/body_registry.gd")
 const Surface = preload("res://core/campaign/surface_context.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
@@ -125,10 +126,10 @@ func _restart() -> void:
 	_expect(saves._design_files == expected.saved.design_files, "Restart changed design revisions.")
 	_expect(state.campaign.data.id == expected.saved.game_state.campaign.id, "Restart changed campaign identity.")
 	var actual_map: Dictionary = state.get_current_body().exploration_atlas
-	var expected_map: Dictionary = expected.saved.game_state.campaign.bodies[str(state.get_world_seed())].exploration_atlas
+	var expected_map: Dictionary = Registry.active(expected.saved.game_state).exploration_atlas
 	if Migration.fingerprint(actual_map) != Migration.fingerprint(expected_map):
 		print("MAP_RESTART_DIFFERENCE ", JSON.stringify({"actual": actual_map, "expected": expected_map,
-			"disk": saves._read_save(expected.target).game_state.campaign.bodies[str(state.get_world_seed())].exploration_atlas}))
+			"disk": Registry.active(saves._read_save(expected.target).game_state).exploration_atlas}))
 		_expect(false, "Restart changed visited map cells.")
 	_expect(FileAccess.get_file_as_string(expected.source).sha256_text() == expected.source_hash, "Restart modified original source.")
 	_expect(saves.save_now(), "Fresh-process save failed.")

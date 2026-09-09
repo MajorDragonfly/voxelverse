@@ -55,7 +55,7 @@ func _run() -> void:
 	tribe.panel.open_confirmation()
 	_expect(not tribe.panel.confirm.disabled, "Tribal confirmation blocked")
 	tribe.panel._confirm()
-	await _frames(25)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	_expect(tribe.is_active() and d2.is_active(), "D2 did not attach to the confirmed real tribe")
 	if not d2.is_active():
 		await _done()
@@ -80,6 +80,7 @@ func _run() -> void:
 	_expect(not d2.offer(animal_id)["ok"], "Failed first adoption was accepted")
 	_expect(not tribe.body().has(AnimalSave.FIELD) and d2.animals.is_empty() and tribe.village()["stock"]["food"] == 12, "Failed adoption changed body, actors or food")
 	saves.save_path = campaign_save
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	var tabs: TabBar = tribe.panel._tabs.get_tab_bar()
 	var tab_index: int = d2.controls.get_index()
 	await _world_click(tabs.get_global_transform_with_canvas() * tabs.get_tab_rect(tab_index).get_center(), MOUSE_BUTTON_LEFT)
@@ -105,7 +106,7 @@ func _run() -> void:
 	var saved_partial: float = d2.controller.record(animal_id)["pending"]["elapsed"]
 	_expect(saves.save_now(), "Save partial campaign offering")
 	_expect(saves.load_now(), "Load partial campaign offering")
-	await _frames(4)
+	await _until(func(): return tribe._active and not tribe.navigation.pending and d2.is_active(), 1200)
 	_expect(d2.controller.record(animal_id)["pending"]["elapsed"] >= saved_partial, "Partial campaign offering lost progress")
 	await _until(func(): return d2.controller.record(animal_id)["pending"].is_empty(), 150)
 	var gain: float = TamingPolicy.evaluate(d2.resolve_suitability(source_identity["species_id"]), "plant")["trust_gain"]
@@ -126,11 +127,11 @@ func _run() -> void:
 	var before: Vector3 = d2.animals[animal_id].global_position
 	_expect(tribe.issue_order("move", Vector3(8, 100.06, 4)), "Cannot move real handler")
 	await _frames(160)
-	observations["follow_m"] = before.distance_to(d2.animals[animal_id].global_position)
-	# D1 fixes the animal's speed; let the real handler finish its route before
+		# D1 fixes the animal's speed; let the real handler finish its route before
 	# checking the final following distance, rather than requiring it to catch a moving equal-speed target.
 	await _until(func(): return tribe.member_record(members_before[0])["order"] == "wait", 300)
 	await _frames(40)
+	observations["follow_m"] = before.distance_to(d2.animals[animal_id].global_position)
 	observations["follow_gap_m"] = player.global_position.distance_to(d2.animals[animal_id].global_position)
 	_expect(float(observations["follow_m"]) > 3 and float(observations["follow_gap_m"]) < 2.0, "Held animal did not follow the real moving member")
 	_expect(d2.issue_command(animal_id, "wait")["ok"], "Cannot wait")
@@ -152,14 +153,14 @@ func _run() -> void:
 	_expect(not copy_path.is_empty(), "Owned animal prevents creating a campaign copy")
 	if not copy_path.is_empty():
 		_expect(saves.load_now(copy_path), "Copied animal campaign does not load")
-		await _frames(12)
+		await _until(func(): return tribe._active and not tribe.navigation.pending and d2.is_active(), 1200)
 		_expect(state.campaign.data["id"] != source_save["game_state"]["campaign"]["id"] and animal_id in tribe.husbandry.candidates(), "Copy lost the D2/D3 owner connection")
 		var copied_registry: Dictionary = tribe.body()[AnimalSave.FIELD]["registry"]
-		var original_registry: Dictionary = source_save["game_state"]["campaign"]["bodies"]["15838"][AnimalSave.FIELD]["registry"]
+		var original_registry: Dictionary = Registry.active(source_save.game_state)[AnimalSave.FIELD]["registry"]
 		_expect(copied_registry["campaign_id"] == state.campaign.data["id"] and copied_registry["animals"][animal_id]["owner_faction_id"] == original_registry["animals"][animal_id]["owner_faction_id"], "Copy changed animal ownership or retained the old campaign scope")
 		_expect(FileAccess.get_file_as_string(campaign_save) == source_bytes, "Campaign copy modified its source")
 		_expect(saves.load_now(campaign_save), "Cannot return from the copied campaign")
-		await _frames(12)
+		await _until(func(): return tribe._active and not tribe.navigation.pending and d2.is_active(), 1200)
 	var proof: Dictionary = {"id": animal_id, "identity": source_identity, "body": source_body, "members": members_before,
 		"record": d2.controller.record(animal_id), "food": tribe.village()["stock"]["food"]}
 	_expect(Atomic.write(proof_path, proof, false) == OK, "Cannot save restart assertions")
@@ -169,7 +170,7 @@ func _run() -> void:
 	# Validate invalid future animal payload before fallback to a valid backup.
 	var snapshot: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(campaign_save))
 	var future: Dictionary = snapshot.duplicate(true)
-	future["game_state"]["campaign"]["bodies"]["15838"][AnimalSave.FIELD]["schema"] = 99
+	Registry.active(future.game_state)[AnimalSave.FIELD]["schema"] = 99
 	Atomic.write("user://d2-campaign-future.json", future, false)
 	Atomic.write("user://d2-campaign-future.json.bak", snapshot, false)
 	_expect(not saves.load_now("user://d2-campaign-future.json") and not saves.save_now("user://d2-campaign-future.json"), "Future animal schema was downgraded or overwritten")
@@ -183,7 +184,7 @@ func _restart() -> void:
 	_build_fixture()
 	tribe = scene.get_node("Nest/Tribe")
 	d2 = tribe.get_node("Domestication")
-	await _frames(25)
+	await _until(func(): return tribe._active and not tribe.navigation.pending and d2.is_active(), 1200)
 	_expect(d2.is_active() and d2.animals.has(animal_id), "Fresh process did not recreate held individual")
 	_expect(animal_id in tribe.husbandry.candidates(), "Fresh process did not reconnect D3 to the loaded D2 animal")
 	if not d2.animals.has(animal_id):
@@ -205,7 +206,7 @@ func _restart() -> void:
 	saves.save_path = campaign_save
 	_expect(d2.damage_animal(animal_id, 100), "Cannot persist death")
 	_expect(saves.load_now(), "Cannot reload dead individual")
-	await _frames(8)
+	await _until(func(): return tribe._active and not tribe.navigation.pending and d2.is_active(), 1200)
 	_expect(d2.controller.record(animal_id)["status"] == "dead" and d2.animals[animal_id].is_dead, "Dead individual revived")
 	_expect(root.get_node("ProgressionService").get_saved_creature_encounter(animal_id)["dead"], "Fauna lifecycle lost D2 tombstone")
 	_expect(not d2.issue_command(animal_id, "home")["ok"], "Dead individual accepted command")

@@ -13,8 +13,7 @@ static func eligible(body: Dictionary) -> bool:
 	return str(body.get("kind", "planet")) in ["planet", "moon"] and bool(body.get("inhabited", body.get("surface_mode") == "legacy_plane_v9")) and body.get("surface_mode") == "legacy_plane_v9"
 
 static func ensure(state: Node) -> Dictionary:
-	var body_copy: Dictionary = state.get_current_body()
-	var body: Dictionary = state.campaign.data["bodies"][str(int(body_copy["seed"]))]
+	var body: Dictionary = state.get_current_body_record()
 	if body.has("fauna_catalog"):
 		var context: Dictionary = preload("res://core/campaign/surface_context.gd").descriptor(body) if body.get("surface_mode") == Surface.Cube.MODE else body
 		return body["fauna_catalog"] if validate(body["fauna_catalog"], context).is_empty() else {}
@@ -22,7 +21,7 @@ static func ensure(state: Node) -> Dictionary:
 		return {}
 	var used: Dictionary = {}
 	for entry in state.get_node("/root/ProgressionService").discovered_species.values():
-		if int(entry.get("world_seed", -1)) == int(body["seed"]):
+		if entry.get("body_id") == body["id"]:
 			used[int(entry.get("species_seed", 0))] = true
 	for entry in state.get_node("/root/ProgressionService").export_state().get("creature_encounters", {}).get("entries", {}).values():
 		if entry is Dictionary and entry.get("body_id") == body["id"] and entry.get("habitat") is Dictionary:

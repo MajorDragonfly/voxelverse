@@ -5,10 +5,7 @@ const SCHEMA: int = 1
 const LIMIT: int = 32768
 
 static func body(state: Node, expected_id: String = "") -> Dictionary:
-	var key: String = str(int(state.get_world_seed()))
-	if not state.campaign.data["bodies"].has(key):
-		state.get_current_body()
-	var record: Dictionary = state.campaign.data["bodies"][key]
+	var record: Dictionary = state.get_current_body_record()
 	if not expected_id.is_empty() and record.get("id") != expected_id:
 		return {}
 	return record

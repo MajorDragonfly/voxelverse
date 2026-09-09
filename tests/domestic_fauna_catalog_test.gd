@@ -15,6 +15,8 @@ func run() -> void:
 	for seed_value in [1, 2, 3, 10, 42, 100, 555, 1337, 15838, 63352, 23757, 99991, 87654321, 2147483647] + range(1000, 1064):
 		state.start_world_with_seed(seed_value)
 		state.campaign.reset("d1-fixed-test")
+		state.active_system_id = ""
+		state.set_world_seed(state.world_seed, false)
 		var body: Dictionary = state.get_current_body()
 		var old_seed: int = generator.get_species_seed(0, 0, 0)
 		var old_id: String = state.campaign.species_id(body["id"], old_seed)
@@ -22,7 +24,7 @@ func run() -> void:
 		var catalog: Dictionary = Catalog.ensure(state)
 		check(Catalog.validate(catalog, body).is_empty(), "Catalog validation: " + Catalog.validate(catalog, body))
 		var signature: String = JSON.stringify(catalog)
-		state.campaign.data["bodies"][str(seed_value)].erase("fauna_catalog")
+		state.get_current_body_record().erase("fauna_catalog")
 		var repeated: Dictionary = Catalog.ensure(state)
 		check(JSON.stringify(repeated) == signature, "Nondeterministic catalog: %d" % seed_value)
 		check(generator.get_species_seed(0, 0, 0) == old_seed and state.campaign.species_id(body["id"], old_seed) == old_id, "Changed legacy identity")

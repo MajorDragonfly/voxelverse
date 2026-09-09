@@ -1,4 +1,5 @@
 extends SceneTree
+const Registry = preload("res://core/campaign/body_registry.gd")
 const Catalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const Evidence = preload("res://world/fauna/domestication/domestic_body_evidence.gd")
 const Recovery = preload("res://world/fauna/domestication/domestic_habitat_recovery.gd")
@@ -15,6 +16,8 @@ func run() -> void:
 	if mode == "write":
 		state.start_world_with_seed(15838)
 		state.campaign.reset("d11-cold-restart")
+		state.active_system_id = ""
+		state.set_world_seed(state.world_seed, false)
 		var expected: Dictionary = {"catalogs": {}}
 		for seed_value in [15838, 63352, 23757]:
 			state.activate_planet(15838, 0, seed_value)
@@ -61,7 +64,7 @@ func run() -> void:
 		var snapshot: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(saves.save_path))
 		for kind in ["evidence_schema", "evidence_policy", "body_schema", "rest_schema", "attachment_schema", "recovery_schema", "recovery_algorithm"]:
 			var future: Dictionary = snapshot.duplicate(true)
-			var catalog: Dictionary = future["game_state"]["campaign"]["bodies"]["15838"]["fauna_catalog"]
+			var catalog: Dictionary = Registry.active(future.game_state)["fauna_catalog"]
 			var evidence: Dictionary = catalog["species"][0]["body_evidence"]
 			match kind:
 				"evidence_schema": evidence["schema"] = 99

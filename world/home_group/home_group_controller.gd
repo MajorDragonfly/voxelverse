@@ -66,11 +66,7 @@ func can_use_panel() -> bool:
 	return _ready_for_world and is_instance_valid(player) and not bool(player.get("is_dead")) and int(_state.current_phase) == 0
 
 func _body_record() -> Dictionary:
-	# The record was already returned by reference; a deep copy solely for its
-	# seed would repeatedly copy the complete exploration ledger.
-	var key: String = str(_state.get_world_seed())
-	if not _state.campaign.data["bodies"].has(key): _state.get_current_body_record()
-	return _state.campaign.data["bodies"][key]
+	return _state.get_current_body_record()
 
 func group_state() -> Dictionary:
 	var value: Variant = _body_record().get("home_group", {})

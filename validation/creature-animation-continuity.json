@@ -1,0 +1,173 @@
+{
+  "base_commit": "ca02572c199b1fe4b70174ac027359eaf2c588da",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.75
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.765
+    },
+    {
+      "name": "creature_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.726
+    },
+    {
+      "name": "creature_joint_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.469
+    },
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.521
+    },
+    {
+      "name": "creature_animation_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.164
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.722
+    },
+    {
+      "name": "creature_body_fit_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.105
+    },
+    {
+      "name": "creature_seat_fit_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.329
+    },
+    {
+      "name": "spherical_creature_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 39.628
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.786
+    },
+    {
+      "name": "domestication_campaign_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 34.521
+    },
+    {
+      "name": "home_group_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.087
+    }
+  ],
+  "motion_measurements": [
+    {
+      "fps": 30,
+      "max_foot_delta": 0.0904563218355179,
+      "pairs": 1,
+      "switch_delta": 0.0
+    },
+    {
+      "fps": 60,
+      "max_foot_delta": 0.0454801395535469,
+      "pairs": 1,
+      "switch_delta": 0.0
+    },
+    {
+      "fps": 144,
+      "max_foot_delta": 0.0189719218760729,
+      "pairs": 1,
+      "switch_delta": 0.0
+    },
+    {
+      "fps": 30,
+      "max_foot_delta": 0.101817697286606,
+      "pairs": 2,
+      "switch_delta": 0.0
+    },
+    {
+      "fps": 60,
+      "max_foot_delta": 0.0512377135455608,
+      "pairs": 2,
+      "switch_delta": 0.0
+    },
+    {
+      "fps": 144,
+      "max_foot_delta": 0.0213757306337357,
+      "pairs": 2,
+      "switch_delta": 0.0
+    },
+    {
+      "fps": 30,
+      "max_foot_delta": 0.101811863481998,
+      "pairs": 3,
+      "switch_delta": 0.0
+    },
+    {
+      "fps": 60,
+      "max_foot_delta": 0.0512347221374512,
+      "pairs": 3,
+      "switch_delta": 0.0
+    },
+    {
+      "fps": 144,
+      "max_foot_delta": 0.0213745478540659,
+      "pairs": 3,
+      "switch_delta": 0.0
+    },
+    {
+      "max_ground_foot_delta": 0.096019983291626,
+      "maximum": {
+        "frame": 37,
+        "from": "(0.353336, -0.0, -0.691032)",
+        "grounded": true,
+        "leg": 1,
+        "phase": 1.08642346094865,
+        "swing": false,
+        "to": "(0.353336, 0.0, -0.787052)"
+      },
+      "radial_angles": "(0.0, 0.0, 0.0)"
+    },
+    {
+      "max_ground_foot_delta": 0.0960209965705872,
+      "maximum": {
+        "frame": 37,
+        "from": "(0.353337, -0.0, -0.691033)",
+        "grounded": true,
+        "leg": 1,
+        "phase": 1.08642938824367,
+        "swing": false,
+        "to": "(0.353337, 0.0, -0.787054)"
+      },
+      "radial_angles": "(0.4, 0.0, 1.2)"
+    }
+  ],
+  "render": {
+    "frames": 210,
+    "fps": 30,
+    "renderer": "gl_compatibility",
+    "device": "Mesa llvmpipe (software)",
+    "passed": true
+  }
+}

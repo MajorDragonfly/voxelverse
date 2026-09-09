@@ -15,7 +15,7 @@ import zipfile
 from validate_godot import ERROR
 from validation_support import isolated_env
 
-PACKAGED_TESTS = ['creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test']
+PACKAGED_TESTS = ['body_identity_test', 'far_simulation_test', 'village_navigation_budget_test', 'campaign_scaling_test', 'creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test']
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
 
@@ -107,6 +107,7 @@ def main():
             for name, flag, marker, timeout in [
                 ("spherical_creature", "--sphere-creature-smoke", "SPHERICAL_CREATURE_PASSED", 180),
                 ("spherical_gameplay", "--sphere-gameplay-smoke", "SPHERICAL_GAMEPLAY_PASSED", 600),
+                ("body_travel", "--body-travel-smoke", "BODY_TRAVEL_PASSED", 420),
             ]:
                 run(f"packaged_{name}", [str(executable), "--headless", "--verbose", "--", flag],
                     package, isolated_env(root / f"{name}-userdata"), timeout=timeout)
@@ -130,6 +131,8 @@ def main():
                 probe = qa / f"{name}.gd"
                 shutil.copy2(args.project / "tests" / f"{name}.gd", probe)
                 probe_args = ["--script", str(probe)]
+                if name in ["body_identity_test", "far_simulation_test"]:
+                    probe_args += ["--", "--restart-pack", str(executable.with_suffix(".pck"))]
                 if name == "research_goals_test":
                     # Godot consumes --main-pack before exposing runtime args.
                     # Pass the exact PCK to the independent reload process too.

@@ -17,7 +17,7 @@ else:
 
 # These acceptance flows include real 300-second production or 90-second growth
 # plus transport and restart. Keep short checks bounded independently.
-LONG_TESTS = {"spherical_gameplay_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+LONG_TESTS = {"body_travel_test", "spherical_gameplay_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
@@ -71,19 +71,23 @@ def validate(args):
     results = []
     for name, command, timeout in commands:
         started = time.monotonic()
+        log_path = args.output / f"{name.replace(chr(47), chr(95))}.log"
         with tempfile.TemporaryDirectory(prefix="voxelverse-test-") as userdata:
             env = isolated_env(Path(userdata))
             try:
                 argv = ([sys.executable, str(args.project / "tools/art/export_benchmark_source.py"), "--check"]
                         if name == "art_sources" else [args.godot, "--headless", "--verbose", "--path", str(args.project), *command])
-                process = subprocess.run(argv,
-                                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                         text=True, encoding="utf-8", errors="replace", env=env, timeout=timeout)
-                log, status = process.stdout, process.returncode
-            except subprocess.TimeoutExpired as exc:
-                log = (exc.stdout or b"").decode(errors="replace") + "\nERROR: validation timed out\n"
+                # Long travel/restart probes expose progress while they run;
+                # strict validation still inspects the complete final log.
+                with log_path.open("wb") as stream:
+                    process = subprocess.run(argv, stdout=stream, stderr=subprocess.STDOUT,
+                                             env=env, timeout=timeout)
+                status = process.returncode
+            except subprocess.TimeoutExpired:
+                with log_path.open("ab") as stream:
+                    stream.write(b"\nERROR: validation timed out\n")
                 status = 124
-        (args.output / f"{name.replace(chr(47), chr(95))}.log").write_text(log, encoding="utf-8")
+        log = log_path.read_text(encoding="utf-8", errors="replace")
         failed = status != 0 or ERROR.search(log) is not None
         result = {"name": name, "passed": not failed, "exit_code": status,
                   "seconds": round(time.monotonic() - started, 3)}

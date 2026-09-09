@@ -6,6 +6,7 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Atlas = preload("res://core/map/exploration_atlas.gd")
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Places = preload("res://core/campaign/spherical_place_migration.gd")
+const Registry = preload("res://core/campaign/body_registry.gd")
 const SCHEMA: int = 1
 const MAX_SOURCE_BYTES: int = 16 * 1024 * 1024
 
@@ -20,7 +21,7 @@ static func blockers(source: Dictionary) -> Array[String]:
 		if not design is Dictionary or design.get("version") != Blueprint.SAVE_VERSION:
 			result.append("Der aktuelle Kreaturenentwurf hat ein unbekanntes Format und bleibt unverändert.")
 	if int(state.phase) not in [0, 1]: result.append("Für dieses Zeitalter fehlt noch eine vollständige Kugellaufzeit.")
-	if int(state.phase) == 1 and not campaign.bodies.get(str(int(state.world_seed)), {}).has("tribe"): result.append("M1g: Stammesphase ohne gespeichertes Dorf.")
+	if int(state.phase) == 1 and not Registry.active(state).has("tribe"): result.append("M1g: Stammesphase ohne gespeichertes Dorf.")
 	if not campaign.pending_transition.is_empty(): result.append("Ein Phasenwechsel ist noch nicht abgeschlossen.")
 	for body: Dictionary in campaign.bodies.values():
 		var id: String = str(body.id)
@@ -31,12 +32,13 @@ static func blockers(source: Dictionary) -> Array[String]:
 			if field not in ["id", "system_id", "seed", "generator_version", "surface_mode", "exploration_atlas",
 					"home_group", "tribe", "tribal_neighbor", "domesticated_animals", "fauna_catalog", "wildlife_foraging", "wildlife_drinking", "legacy_population"]:
 				result.append(id + "/" + str(field) + ": unbekannte Körperdaten; Übernahme muss ausdrücklich geprüft werden.")
-	for key in source.get("regions_by_world", {}):
-		var record: Variant = source.regions_by_world[key]
+	for key in source.get(Registry.regions_field(source), {}):
+		var record: Variant = source[Registry.regions_field(source)][key]
 		if not record is Dictionary or (not record.is_empty() and (record.get("schema") != 1 or not record.get("regions") is Dictionary)):
 			result.append("Regionen von Welt " + str(key) + ": unbekannter regionaler Vertrag.")
 		elif not record.is_empty():
-			var problem: String = preload("res://world/surface/campaign_ecology_state.gd").legacy_problem(record, int(key))
+			var seed_value: int = int(Registry.by_id(campaign, str(key)).get("seed", 0)) if int(source.schema) >= Registry.SAVE_SCHEMA else int(key)
+			var problem: String = preload("res://world/surface/campaign_ecology_state.gd").legacy_problem(record, seed_value)
 			if not problem.is_empty(): result.append(str(key) + ": " + problem)
 	if source.player.has("position") and not Surface.vector(source.player.position, 1.0e7):
 		result.append("Der alte Spielerort ist ungültig.")
@@ -52,6 +54,8 @@ static func plan(source: Dictionary, source_text: String, source_path: String) -
 	if not errors.is_empty(): return {"ok": false, "blockers": errors}
 	var data: Dictionary = source.duplicate(true)
 	var campaign: Dictionary = data.game_state.campaign
+	var active_id: String = str(Registry.active(data.game_state).get("id", ""))
+	var regions_field: String = Registry.regions_field(data)
 	var mappings: Array = []
 	var player_address: Dictionary = {}
 	for key in campaign.bodies.keys():
@@ -60,20 +64,20 @@ static func plan(source: Dictionary, source_text: String, source_path: String) -
 		if body.is_empty():
 			return {"ok": false, "blockers": [str(old.id) + ": kein trockener, hinreichend ebener Zielbereich im begrenzten Suchbudget."]}
 		var converter := Places.new()
-		var active_player: Dictionary = source.player if str(key) == str(int(data.game_state.world_seed)) else {}
+		var active_player: Dictionary = source.player if old.id == active_id else {}
 		var converted: Dictionary = converter.convert(old, body, active_player,
-			source.progression.get("creature_encounters", {}).get("entries", {}), source.regions_by_world.get(key, {}))
+			source.progression.get("creature_encounters", {}).get("entries", {}), source.get(regions_field, {}).get(key, {}))
 		if not converted.ok: return {"ok": false, "blockers": converted.errors}
 		body = converted.body
 		if not active_player.is_empty(): player_address = converted.player
-		if body.has("surface_ecology"): data.regions_by_world.erase(key)
+		if body.has("surface_ecology"): data[regions_field].erase(key)
 		if body.has("exploration_atlas"):
 			body.legacy_exploration_atlas = body.exploration_atlas
 		body.exploration_atlas = Atlas.create(body.id, Cube.MODE, body.surface_context.radius)
 		campaign.bodies[key] = body
 		mappings.append({"body_id": body.id, "source_mode": Surface.LEGACY, "target_mode": Cube.MODE,
 			"target_spawn": body.surface_context.spawn.duplicate(true), "target_context_sha256": fingerprint(body.surface_context), "regions": converted.regions, "places": converted.places})
-	var active: Dictionary = campaign.bodies.get(str(int(data.game_state.world_seed)), {})
+	var active: Dictionary = Registry.active(data.game_state)
 	if active.is_empty(): return {"ok": false, "blockers": ["Der aktive Körper fehlt im Quellstand."]}
 	var player: Dictionary = data.player
 	var address: Dictionary = player_address if not player_address.is_empty() else active.surface_context.spawn
@@ -84,9 +88,9 @@ static func plan(source: Dictionary, source_text: String, source_path: String) -
 		"surface_velocity": [0.0, 0.0, 0.0], "surface_pitch": clampf(float(player.get("camera_pitch", -0.18)), -0.85, 0.5)}, true)
 	# Old XYZ/camera/needs remain intact as source evidence. The new runtime
 	# consumes surface_address only. No species, object, award or design is made.
-	campaign.schema = 2
+	campaign.schema = maxi(2, int(campaign.schema))
 	campaign.surface_policy = Cube.MODE
-	data.schema = 8
+	data.schema = maxi(8, int(data.schema))
 	var manifest := {"schema": SCHEMA, "algorithm": "campaign_places_copy_v2",
 		"source_path": source_path, "source_sha256": source_text.sha256_text(),
 		"source_schema": source.schema, "source_campaign_schema": source.game_state.campaign.schema,
@@ -136,7 +140,7 @@ static func _nonspatial(value: Variant, field: String = "") -> Variant:
 	return value
 
 static func regional_inventory(source: Dictionary) -> Dictionary:
-	var result: Dictionary = source.get("regions_by_world", {}).duplicate(true)
+	var result: Dictionary = source.get(Registry.regions_field(source), {}).duplicate(true)
 	for key in source.game_state.campaign.bodies:
 		var body: Dictionary = source.game_state.campaign.bodies[key]
 		if body.has("surface_ecology"): result[key] = body.surface_ecology.legacy_state.duplicate(true)
@@ -158,7 +162,7 @@ static func validate(manifest: Variant) -> String:
 	var source: Variant = JSON.parse_string(manifest.source_text)
 	if not source is Dictionary or not source.get("game_state") is Dictionary or not source.game_state.get("campaign") is Dictionary:
 		return "Quellarchiv ist nicht lesbar."
-	for key in ["progression", "design_files", "regions_by_world", "player"]:
+	for key in ["progression", "design_files", Registry.regions_field(source), "player"]:
 		if not source.get(key) is Dictionary: return "Ungültiger Quellabschnitt: " + key
 	var campaign: Dictionary = source.game_state.campaign
 	for key in ["bodies", "event_cursors", "completed_transitions"]:

@@ -24,7 +24,7 @@ func _run() -> void:
 	var design: Dictionary = Blueprint.create_default()
 	design.name = "Meine unveränderte Art"
 	_expect(Blueprint.save_to_file(design) == OK, "Could not save authored design.")
-	var body: Dictionary = state.campaign.data.bodies[str(state.get_world_seed())]
+	var body: Dictionary = state.get_current_body_record()
 	var atlas := Atlas.new()
 	atlas.bind(Atlas.create(body.id, Surface.LEGACY))
 	atlas.reveal({"body_id": body.id, "mode": Surface.LEGACY, "position": [123.25, 10.0, -71.0]})
@@ -37,6 +37,17 @@ func _run() -> void:
 	var data: Dictionary = saves._read_save(source)
 	# Exercise the actual previous released format, not just new planar saves.
 	data.schema = 7
+	data.game_state.schema = 3
+	data.game_state.erase("system_id")
+	var legacy_bodies: Dictionary = {}
+	for saved_body: Dictionary in data.game_state.campaign.bodies.values():
+		legacy_bodies[str(int(saved_body.seed))] = saved_body
+	data.game_state.campaign.bodies = legacy_bodies
+	data.game_state.campaign.erase("body_lookup")
+	data.regions_by_world = {}
+	for record: Dictionary in data.regions_by_body.values():
+		data.regions_by_world[str(int(record.world_seed))] = record
+	data.erase("regions_by_body")
 	data.game_state.campaign.schema = 1
 	data.game_state.campaign.erase("surface_policy")
 	data.game_state.campaign.erase("surface_migration")

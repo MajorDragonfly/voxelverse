@@ -55,7 +55,7 @@ func update_exploration(allow_paused: bool = false) -> void:
 		key = value.address.body_id
 	else:
 		var state := get_node("/root/GameState")
-		records = state.campaign.data.bodies[str(state.get_world_seed())]
+		records = state.get_current_body_record()
 		key = "exploration_atlas"
 	if not records.has(key):
 		if is_instance_valid(lab) and records.size() >= 256:

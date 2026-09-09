@@ -138,7 +138,8 @@ func _run() -> void:
 			if capture_on_demand: RenderingServer.render_loop_enabled = false
 		var ids: Array = tribe.actors.keys()
 		_expect(saves.save_now() and saves.load_now(), "Generated tribal world cannot save/load.")
-		for frame in range(45):
+		for frame in range(1200):
+			if tribe._active and not tribe.navigation.pending: break
 			await physics_frame
 			await process_frame
 		_expect(tribe.is_active() and tribe.actors.keys() == ids and not player.is_physics_processing(), "Main reload did not restore the same commanded group.")

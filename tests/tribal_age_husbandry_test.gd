@@ -33,7 +33,7 @@ func _run() -> void:
 	await _frames(20)
 	await _click(tribe.panel.entry)
 	await _click(tribe.panel.confirm)
-	await _until(func() -> bool: return lab.ready_for_work and tribe.is_active(), 100)
+	await _until(func() -> bool: return lab.ready_for_work and tribe.is_active() and not tribe.navigation.pending, 1200)
 	_expect(lab.ready_for_work and tribe.is_active(), "Lab village entry failed: " + lab.banner.text + " / " + saves.last_error)
 	if not tribe.is_active() or not lab.ready_for_work:
 		await _cleanup()
@@ -66,6 +66,7 @@ func _run() -> void:
 		_finish()
 		return
 	pen_id = tribe.village()["husbandry"]["pens"][0]["id"]
+	await _until(func(): return not tribe.navigation.pending, 1200)
 	_expect(Model.Housing.beds(tribe.village()) == 0 and tribe.actors.size() == 3, "Pen created housing or a new resident.")
 	var before: Dictionary = tribe.village().duplicate(true)
 	tribe.husbandry.source.registry = Callable()
@@ -177,10 +178,10 @@ func _saved_roundtrip(label: String) -> void:
 	_expect(JSON.parse_string(JSON.stringify(tribe.village())) == saved, "Pause changed " + label)
 	_expect(saves.save_now() and saves.load_now(), "Save/Load failed: " + label + " / " + saves.last_error)
 	_expect(tribe.village() == saved, "Load changed " + label)
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 
 func _restart_check() -> void:
-	await _until(func() -> bool: return tribe.is_active() and lab.ready_for_work, 100)
+	await _until(func() -> bool: return tribe.is_active() and lab.ready_for_work and not tribe.navigation.pending, 1200)
 	evidence = JSON.parse_string(FileAccess.get_file_as_string("user://d3-village-lab/evidence.json"))
 	pen_id = evidence["pen_id"]
 	_expect(_pen()["animal_id"] == Lab.ANIMAL and _record()["cycles"] == evidence["cycles"] and tribe.village()["economy"]["milk_received"] == evidence["milk_received"] and tribe.actors.size() == 3, "Cold restart changed animal, production or population.")

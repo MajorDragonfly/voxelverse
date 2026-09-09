@@ -25,6 +25,9 @@ func _ready() -> void:
 	_show_home()
 	_flow.menu_error.connect(_show_error)
 	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
+	if "--body-travel-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("body_travel_consumed"):
+		get_tree().set_meta("body_travel_consumed", true)
+		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/body_travel_probe.gd").new())
 	if "--sphere-gameplay-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("sphere_gameplay_consumed"):
 		get_tree().set_meta("sphere_gameplay_consumed", true)
 		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/spherical_gameplay_probe.gd").new())

@@ -26,14 +26,14 @@ static func known_places(player: Node3D, tree: SceneTree, snapshot: Dictionary) 
 	if snapshot.address.mode == Source.Cube.MODE:
 		return tree.current_scene.known_map_places() if tree.current_scene.has_method("known_map_places") else result
 	var state := tree.root.get_node("GameState")
-	var body: Dictionary = state.campaign.data.bodies[str(state.get_world_seed())]
+	var body: Dictionary = state.get_current_body_record()
 	var species_id: String = state.campaign.data.player_species_id
 	for nest: Node3D in tree.get_nodes_in_group(&"player_nest"):
 		if not is_instance_valid(nest): continue
 		var address: Dictionary = Surface.plane_address(body.id, nest.global_position)
 		var id: String = Ids.scoped("place", body.id, "player_nest:%d:%d" % [roundi(nest.global_position.x), roundi(nest.global_position.z)])
 		result.append(_place(id, "Eigenes Nest", "nest", species_id, "", true, address))
-	var home: Dictionary = state.campaign.data.bodies[str(state.get_world_seed())].get("home_group", {})
+	var home: Dictionary = state.get_current_body_record().get("home_group", {})
 	if home.get("body_id") == body.id and Home.valid_position(home.get("anchor")):
 		result.append(_place(str(home.id), "Heimat deiner Spezies", "home", species_id, "", true, Surface.plane_address(body.id, Home.vector(home.anchor))))
 	var progression := tree.root.get_node("ProgressionService")
@@ -49,7 +49,7 @@ static func known_places(player: Node3D, tree: SceneTree, snapshot: Dictionary) 
 		var random := RandomNumberGenerator.new()
 		random.seed = int((str(state.get_world_seed()) + ":" + entry.habitat.cell).sha256_text().left(8).hex_to_int())
 		var point := Vector3((int(cell[0]) + random.randf_range(0.3, 0.7)) * 12.0, 0, (int(cell[1]) + random.randf_range(0.3, 0.7)) * 12.0)
-		var observed: Dictionary = progression.discovered_species.get("%d:%d" % [state.get_world_seed(), int(entry.habitat.species_seed)], {})
+		var observed: Dictionary = progression.discovered_species.get(progression.species_discovery_key(int(entry.habitat.species_seed)), {})
 		var name: String = str(observed.get("name", "Befreundete Kreatur")).left(180)
 		result.append(_place(entry.object_id + ":habitat", name + " · Lebensraum", "friend_habitat", entry.species_id, entry.object_id, false, Surface.plane_address(body.id, point)))
 	# Future real nest providers must supply a body-owned species/object identity.

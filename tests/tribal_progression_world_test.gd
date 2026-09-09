@@ -111,7 +111,7 @@ func _check_progression() -> void:
 	await super._capture("07_medieval_requirements")
 	root.size = Vector2i(1280, 800)
 	skills.close_panel()
-	await _frames(8)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 
 func _finish() -> void:
 	print(JSON.stringify({"test": "tribal_progression_world", "passed": failures.is_empty(), "failures": failures}))

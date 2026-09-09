@@ -30,7 +30,7 @@ var storage_error: String = ""
 
 func body() -> Dictionary:
 	var state := get_node("/root/GameState")
-	return state.campaign.data.bodies[str(state.get_world_seed())]
+	return state.get_current_body_record()
 
 func _ready() -> void:
 	var record: Dictionary = body()

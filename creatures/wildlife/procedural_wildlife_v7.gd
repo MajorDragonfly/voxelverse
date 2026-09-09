@@ -182,6 +182,8 @@ func _physics_process(delta: float) -> void:
 	var pose: String = "walk" if velocity.slide(up_direction).length() > 0.15 else "idle"
 	if _preview != null and str(_preview.get("motion_mode")) != pose:
 		_preview.call("set_motion", pose)
+	if _preview != null:
+		_preview.call("set_locomotion_speed", velocity.slide(up_direction).length(), _move_speed)
 	if is_on_floor():
 		apply_floor_snap()
 	if _visual_root != null and _wander_direction.length_squared() > 0.01:
@@ -190,7 +192,7 @@ func _physics_process(delta: float) -> void:
 		_visual_root.rotation.y = lerp_angle(
 			_visual_root.rotation.y,
 			target_yaw,
-			clampf(delta * 4.5, 0.0, 1.0)
+			1.0 - exp(-4.5 * delta)
 		)
 	if get_slide_collision_count() > 0 and is_on_floor():
 		_wander_direction = _wander_direction.rotated(

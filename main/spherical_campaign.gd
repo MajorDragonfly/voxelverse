@@ -101,7 +101,7 @@ func _process(_delta: float) -> void:
 func map_snapshot() -> Dictionary:
 	if not world_initialized or not is_instance_valid(player) or get_node("/root/SessionFlow").loading: return {}
 	var state := get_node("/root/GameState")
-	var body: Dictionary = state.campaign.data.bodies[str(state.get_world_seed())]
+	var body: Dictionary = state.get_current_body_record()
 	var tribe: Node = get_node("Nest/Tribe")
 	var in_tribe: bool = tribe.is_active()
 	var focus: Vector3 = tribe.map_focus() if in_tribe else player.global_position
@@ -128,7 +128,7 @@ func map_snapshot() -> Dictionary:
 
 func known_map_places() -> Array[Dictionary]:
 	var state := get_node("/root/GameState")
-	var body: Dictionary = state.campaign.data.bodies[str(state.get_world_seed())]
+	var body: Dictionary = state.get_current_body_record()
 	var Source = preload("res://ui/world_map/world_map_source.gd")
 	var places: Array[Dictionary] = []
 	var home: Dictionary = body.get("home_group", {})

@@ -2,16 +2,18 @@
 
 Stand: 9. September 2026. Integration auf `agent/spherical-gameplay-migration-2026-09-09`, einschließlich des Architektur-Audits aus `main` `7e402506f5944e1ac457673395f94627c7d314d5`. Dieser Stand führt M1f, den lokalen M1g-Ablauf und erste M1h-Anschlüsse zusammen. Die vollständige M1i-Abnahme und der reguläre Kugelstart bleiben offen.
 
+Die anschließende Skalierungsrunde auf Basis von `main` `ca02572c199b1fe4b70174ac027359eaf2c588da` ist in [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md) dokumentiert. Die untenstehenden ursprünglichen Laufberichte bleiben als Historie erhalten.
+
 ## Gemeinsame Datenbesitzer und Anschlüsse
 
 | Bestand | Autoritativer Besitzer und Format | Laufzeit / Zugriff |
 |---|---|---|
-| Kampagne, Körper, Entwürfe | GameState / CampaignState; Save 8, Kampagne 2 | Ein SaveGameService mit gemeinsamem Commit. `get_current_body_record()` liefert den gemeinsamen aktuellen Datensatz; `get_current_body()` bleibt eine Kopie. Der alte Seedindex ist noch vorhanden. |
+| Kampagne, Körper, Entwürfe | GameState / CampaignState; Save 9, Kampagne 3 | Ein SaveGameService mit gemeinsamem Commit. `get_current_body_record()` liefert den gemeinsamen aktuellen Datensatz; `get_current_body()` bleibt eine Kopie. Unveränderliche Körper-IDs besitzen die Datensätze; der Seedindex benötigt Systemkontext. |
 | Oberflächenorte | `surface_context`, Cube-Sphere-Adresse mit Körper-ID; Oberflächenformat 1 | `gameplay_space.gd` vermittelt lokale Physik, Richtung, Wasser, Abtastung und Bindung an den Ursprung. Globale Meter bleiben Doubles bis nach Ursprungssubtraktion. |
 | Heimat / Dorf / Nachbar | Heimat 2, Stamm 6, Nachbar 3 für Kugelorte | Dieselben Controller, Bewohner-IDs, Bauwerke, Aufträge und Wirtschaftsbelege. Planare Heimat 1 / Stamm bis 5 / Nachbar bis 2 bleiben gesondert lesbar. |
 | D1 / D2 / D3 | Vorhandener Artenkatalog und D2-Registry; D3 liest denselben Besitz | Der Kampagnenhost erzeugt echte D1-Körper. Zähmung übernimmt deren ursprüngliche ID und eingefrorenen Entwurf. Fremde Tiere werden keine Bürger. Entwurfsrevision 0 ist wie im vorhandenen D1/D2-Vertrag gültig. |
 | Wildtiere, Pflanzen, Bedürfnisse, Begegnungen | Regionaler Kampagnenbestand 2 mit `sha256_trie_v1`-Manifest | Ein `campaign_population`-Host, gemeinsame Foraging-/Drinking-/Progression-Dienste, keine parallele Labortier-Simulation. Individuen- und Nahrungsindizes verweisen auf dieselben regionalen Datensätze. |
-| Ökologie | Regionale gespeicherte Aggregate | Vorhandene Ökologiegleichungen, höchstens zwei Regionsaufgaben pro Frame. Unbeladene individuelle Zustände bleiben derzeit eingefroren; entfernte Siedlungsproduktion ist noch nicht implementiert. |
+| Ökologie | Regionale gespeicherte Aggregate | Vorhandene Ökologiegleichungen, höchstens zwei Regionsaufgaben pro Frame. Unbeladene Wildtierzustände bleiben eingefroren; die ergänzte Dorf-Fernsimulation besitzt einen eigenen Cursor in derselben Kampagnenzeit. |
 | Wasser / Audio | Dieselbe versionierte Oberflächenquelle | Neue Körper verwenden `living_planet_v2`, Terrainrevision 4, mit Süßwasserbecken. V1/Revision 3 bleibt unverändert lesbar. Wassergeometrie, Trinken, Unterwasseransicht und Audio teilen die Wasserhöhe. |
 
 Die gemeinsame Szene verwendet `player.tscn`, normalen Kreatureneditor, Scanner, Bedürfnisse, Nest, Heimatgruppe und Dorf. Tierregister und bestätigte Aktionsrückmeldungen sind an denselben D2-Kampagnencontroller gebunden; das gemeinsame Entdeckungsbuch zeigt ursprüngliche Tier-IDs und Kugelorte als Breite/Länge/Höhe. Eigenständige Labore bleiben Diagnosebereiche. Jeder gebundene physische Root wird bei einer Ursprungskorrektur genau einmal versetzt; lokale Routenziele und Fußkontakt-Caches werden mitgeführt.
@@ -48,9 +50,9 @@ Die abschließende Stabilisierung stoppt und entfernt Tierlaut-Emitter bereits v
 
 - M1g: fehlerfreie CI-Wiederholung einschließlich Tierbuch, normaler Tier-Rückmeldung und aller Plattformen am finalen Stand; reale historische Dörfer einschließlich ungünstiger Fundamente und Zielkapazität weiter prüfen.
 - M1f/M1h: längere tatsächliche Reise, Flächenkante auf kleinem Körper, Körperwechsel/Rückkehr und vollständige Verbrauchs-/Todes-/Wissensbilanz im Kampagnenhost.
-- ARCH-03/04: stabile Körper-ID als primärer Lookup; gleiche Weltseeds in verschiedenen Systemen dürfen keine Körper zusammenlegen. Der neue direkte aktuelle Datensatz beseitigt tiefe Kopien im Hotpath, ersetzt diese Migration aber nicht.
+- ARCH-03/04: inzwischen geliefert; Details und Migrationsnachweise in [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md).
 - ARCH-13/14: segmentierte Karten-/Fortschrittsregister und sichere Bereinigung unreferenzierter Regionsdateien unter Berücksichtigung sämtlicher Historien/Kopien. Der derzeitige Store löscht keine historischen Blobs.
-- ARCH-15/16: entfernte eigene Siedlungen während aktiver Spielzeit vereinfacht weiterbetreiben, mit eindeutiger Übergabe von Auftrag, Ladung, Reservierung und Zeitcursor. Pause, Editorpause und geschlossene Anwendung erzeugen keine Produktion. Der aktuelle lokale Ablauf beweist diese Fernübergabe noch nicht.
+- ARCH-15/16/18: gemeinsamer Arbeitskern, Fernsimulation und sichere Körperreise inzwischen ergänzt; Umfang und verbleibende Abnahmen in [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md).
 - ARCH-10/17: teure Navigations-/Fundamentaufbereitung zeitlich aufteilen, lange Messroute und CPU-/GPU-/RAM-/VRAM-Budgets dokumentieren.
 - M1i/ARCH-19: finalen gemeinsamen Commit und native Linux-/Windows-Pakete prüfen; anschließend Darstellung und Bedienung auf definierter Zielhardware abnehmen. Erst dann den regulären Neue-Spiel-Start umstellen. 1080p60 bleibt ein Entwicklungsziel.
 

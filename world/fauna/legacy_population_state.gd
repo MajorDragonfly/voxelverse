@@ -7,7 +7,7 @@ const LIMIT: int = 32768
 
 static func capture(actor: Node3D) -> void:
 	var state: Node = actor.get_node("/root/GameState")
-	var body: Dictionary = state.campaign.data.bodies[str(state.get_world_seed())]
+	var body: Dictionary = state.get_current_body_record()
 	if body.surface_mode != "legacy_plane_v9": return
 	if not body.has("legacy_population"): body.legacy_population = {"schema": 1, "body_id": body.id, "animals": {}}
 	var ledger: Dictionary = body.legacy_population

@@ -69,9 +69,9 @@ func _run() -> void:
 	flow.return_to_title()
 	await tree.scene_changed
 	await _open(path, true)
-	_expect(Migration.fingerprint(state.get_current_body().tribe) == Migration.fingerprint(checkpoint.game_state.campaign.bodies["15838"].tribe), "Restart changed resident orders or cargo.")
+	_expect(Migration.fingerprint(state.get_current_body().tribe) == Migration.fingerprint(Registry.active(checkpoint.game_state).tribe), "Restart changed resident orders or cargo.")
 	flow.resume()
-	await _until(func() -> bool: return tree.current_scene.get_node("Nest/Tribe").is_active(), 15000)
+	await _until(func() -> bool: return tree.current_scene.get_node("Nest/Tribe").is_active(), 45000)
 	tribe = tree.current_scene.get_node("Nest/Tribe")
 	_expect(tribe.is_active() and tribe.member_record(ids[0]).cargo == cargo, "Restart lost loaded carrier.")
 	tribe.select_member(ids[0])
@@ -162,6 +162,7 @@ func _animal_chain(tribe: Node) -> void:
 	await _until(func() -> bool: return not tribe.village().husbandry.pens.is_empty(), 45000)
 	_expect(not tribe.village().husbandry.pens.is_empty(), "Pen material transport/construction failed: " + str({"status": tribe.status, "project": tribe.village().project, "members": tribe.village().members, "routes": tribe._routes, "goals": tribe._goals}))
 	if tribe.village().husbandry.pens.is_empty(): return
+	await _until(func() -> bool: return not tribe.navigation.pending, 45000)
 	tribe.issue_order("wait")
 	tribe.select_member(handler)
 	_expect(runtime.issue_command(id, "follow").ok, "Animal did not accept follow.")
@@ -226,7 +227,7 @@ func _animal_chain(tribe: Node) -> void:
 	if not _expect_world(): return
 	tribe = tree.current_scene.get_node("Nest/Tribe")
 	flow.resume()
-	await _until(func() -> bool: return tribe.is_active(), 15000)
+	await _until(func() -> bool: return tribe.is_active(), 45000)
 	tribe.select_member(carrier)
 	_expect(tribe.member_record(carrier).cargo == "milk", "Reload lost real milk cargo.")
 	tribe.issue_order("resume")
@@ -244,7 +245,7 @@ func _restart_gameplay() -> void:
 	await _open(expected.target, true)
 	if not _expect_world(): return
 	var body: Dictionary = state.get_current_body_record()
-	var previous: Dictionary = expected.saved.game_state.campaign.bodies["15838"]
+	var previous: Dictionary = Registry.active(expected.saved.game_state)
 	for field in ["home_group", "tribe", "domesticated_animals", "tribal_neighbor", "surface_population"]:
 		_expect(Migration.fingerprint(body[field]) == Migration.fingerprint(previous[field]), "Fresh process changed milk checkpoint: " + field)
 	_expect(state.campaign.data.elapsed_seconds == expected.saved.game_state.campaign.elapsed_seconds, "Closed application advanced campaign time.")

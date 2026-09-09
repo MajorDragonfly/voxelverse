@@ -1,4 +1,5 @@
 extends SceneTree
+const Registry = preload("res://core/campaign/body_registry.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
 const SAVE: String = "user://tribal_age_test.json"
 class ReadyWorld:
@@ -65,7 +66,7 @@ func _run() -> void:
 	await _frames(3)
 	await _click(tribe.panel.entry)
 	await _click(tribe.panel.confirm)
-	await _frames(15)
+	await _until(func() -> bool: return tribe.is_active(), 600)
 	_expect(state.current_phase == 1 and tribe.is_active(), "Confirmation did not activate the playable tribe: " + saves.last_error)
 	if not tribe.is_active():
 		await _cleanup()
@@ -135,7 +136,7 @@ func _run() -> void:
 	await _click(tribe.panel._buttons["wood"])
 	var at_save: Dictionary = tribe.village().duplicate(true)
 	_expect(saves.save_now() and saves.load_now(), "Could not reload a running delivery.")
-	await _frames(8)
+	await _until(func() -> bool: return tribe.is_active(), 600)
 	_expect(tribe.actors.size() == 3 and int(tribe.village()["deposits"]["wood"]["remaining"]) <= int(at_save["deposits"]["wood"]["remaining"]), "Reload duplicated residents or restored harvested wood.")
 	await _until(func() -> bool: return int(tribe.village()["stock"]["wood"]) >= 15, 1900)
 	_expect(int(tribe.village()["stock"]["wood"]) >= 15, "Workers failed to carry wood home: " + str(tribe.village()["members"]))
@@ -172,7 +173,7 @@ func _run() -> void:
 	var committed: String = FileAccess.get_file_as_string(SAVE)
 	# A future extension is never silently replaced by the older backup.
 	var future: Dictionary = JSON.parse_string(committed)
-	future["game_state"]["campaign"]["bodies"][str(state.get_world_seed())]["tribe"]["schema"] = Model.SCHEMA + 1
+	Registry.active(future.game_state)["tribe"]["schema"] = Model.SCHEMA + 1
 	var output: FileAccess = FileAccess.open(SAVE, FileAccess.WRITE)
 	output.store_string(JSON.stringify(future))
 	output.close()
@@ -190,7 +191,7 @@ func _run() -> void:
 	await _frames(20)
 	await _click(tribe.panel.entry)
 	await _click(tribe.panel.confirm)
-	await _frames(15)
+	await _until(func() -> bool: return tribe.is_active(), 600)
 	if tribe.is_active():
 		await _click(tribe.panel._residents.get_child(1))
 		_expect(tribe.selected == [str(tribe.village()["members"][1]["id"])], "New campaign's resident buttons still select the former campaign's IDs.")

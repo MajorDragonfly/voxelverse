@@ -11,6 +11,8 @@ func _run() -> void:
 	saves.save_path = "user://d2-world.json"
 	state.start_world_with_seed(23757)
 	state.campaign.reset("campaign_d2_world_validation")
+	state.active_system_id = ""
+	state.set_world_seed(state.world_seed, false)
 	await process_frame
 	change_scene_to_file("res://main/main.tscn")
 	await scene_changed
@@ -107,7 +109,9 @@ func _run() -> void:
 	tribe.panel.open_confirmation()
 	_expect(not tribe.panel.confirm.disabled, "Real village cannot confirm tribal age: " + tribe.panel._detail.text)
 	tribe.panel._confirm()
-	await _frames(30)
+	for frame in range(1200):
+		if tribe._active and not tribe.navigation.pending and d2.is_active(): break
+		await _frames(1)
 	_expect(d2.is_active(), "D2 did not activate on real terrain")
 	if not d2.is_active():
 		await _done()
@@ -176,7 +180,9 @@ func _run() -> void:
 	metrics["food_spent"] = food_start - int(tribe.village()["stock"]["food"])
 	_expect(float(metrics["home_gap_m"]) < 1.7 and float(metrics["home_travel_m"]) > 5.0, "Animal cannot return to home area on actual terrain")
 	_expect(saves.save_now() and saves.load_now(), "Main world save/load failed")
-	await _frames(120)
+	for frame in range(1200):
+		if tribe._active and not tribe.navigation.pending and d2.is_active(): break
+		await _frames(1)
 	var count: int = 0
 	for node: Node in get_nodes_in_group(&"wildlife"):
 		if node.get_campaign_identity()["object_id"] == identity["object_id"]: count += 1

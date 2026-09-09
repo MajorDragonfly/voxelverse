@@ -86,7 +86,7 @@ func _run() -> void:
 	var points: int = progression.discovery_points
 	for frame in range(26):
 		scanner._physics_process(0.1)
-	var key := "%d:%d" % [state.get_world_seed(), second.species_seed]
+	var key: String = progression.species_discovery_key(second.species_seed)
 	_expect(scanner.known and progression.get_discovered_species_count() == 1, "Full aimed scan did not discover the species.")
 	_expect(progression.discovery_points == points + progression.SPECIES_DISCOVERY_POINTS, "Scan reward was missing or duplicated.")
 	var entry: Dictionary = progression.discovered_species.get(key, {})

@@ -13,63 +13,119 @@ var graph := AStar3D.new()
 var origin := Vector3.ZERO
 var home: Node
 
-func rebuild(controller: Node, anchor: Vector3, data: Dictionary = {}, extent: int = RADIUS) -> void:
+const MAX_CELLS_PER_SLICE: int = 128
+const SLICE_USECS: int = 2000
+var pending: bool = false
+var generation: int = 0
+var completed_generation: int = -1
+var last_slice_cells: int = 0
+var _cursor: int = 0
+var _phase: int = 0
+var _body_id: String = ""
+
+func begin(controller: Node, anchor: Vector3, data: Dictionary = {}, extent: int = RADIUS) -> int:
+	cancel()
 	shelters = Housing.obstacles(data)
 	home = controller
 	origin = anchor
 	_radius = clampi(extent, RADIUS, 20)
 	_spacing = 0.5 if _radius > RADIUS else 1.0
 	_samples = roundi(float(_radius) / _spacing)
+	var state: Node = home.get_node_or_null("/root/GameState")
+	_body_id = state.active_body_id if state != null else ""
+	pending = true
+	return generation
+
+func cancel() -> void:
+	generation += 1
+	pending = false
+	_cursor = 0
+	_phase = 0
 	graph.clear()
-	for z in range(-_samples, _samples + 1):
-		for x in range(-_samples, _samples + 1):
-			if _occupied(Space.offset(home, anchor, Vector3(x * _spacing, 0, z * _spacing))):
+
+func advance(max_cells: int = MAX_CELLS_PER_SLICE, usecs: int = SLICE_USECS) -> bool:
+	last_slice_cells = 0
+	if not pending: return completed_generation == generation
+	if not is_instance_valid(home) or not is_instance_valid(home.player):
+		cancel()
+		return false
+	var state: Node = home.get_node_or_null("/root/GameState")
+	if state != null and state.active_body_id != _body_id:
+		cancel()
+		return false
+	var started: int = Time.get_ticks_usec()
+	var width: int = _samples * 2 + 1
+	while pending and last_slice_cells < clampi(max_cells, 1, MAX_CELLS_PER_SLICE):
+		var x: int = _cursor % width - _samples
+		var z: int = _cursor / width - _samples
+		if _phase == 0: _sample_point(x, z)
+		else: _connect_point(x, z)
+		_cursor += 1
+		last_slice_cells += 1
+		if _cursor == width * width:
+			_cursor = 0
+			_phase += 1
+			if _phase == 2:
+				pending = false
+				completed_generation = generation
+		if Time.get_ticks_usec() - started >= maxi(1, usecs): break
+	return not pending
+
+## Explicit synchronous adapter for preflight/contract tools. Scene ticks call
+## begin/advance and cannot consume a partially built or stale graph.
+func rebuild(controller: Node, anchor: Vector3, data: Dictionary = {}, extent: int = RADIUS) -> void:
+	begin(controller, anchor, data, extent)
+	while pending: advance()
+
+func _sample_point(x: int, z: int) -> void:
+	if _occupied(Space.offset(home, origin, Vector3(x * _spacing, 0, z * _spacing))):
+		return
+	var ray := PhysicsRayQueryParameters3D.create(Space.offset(home, origin, Vector3(x * _spacing, 4, z * _spacing)), Space.offset(home, origin, Vector3(x * _spacing, -4, z * _spacing)), 1)
+	ray.exclude = [home.player.get_rid()]
+	var hit: Dictionary = home.player.get_world_3d().direct_space_state.intersect_ray(ray)
+	if hit.is_empty() or hit["normal"].dot(Space.up(home, hit["position"])) < 0.9 or not home._dry(hit["position"]):
+		return
+	var position: Vector3 = hit["position"] + Space.up(home, hit["position"]) * 0.06
+	# Leave clearance inside the neighbor resident's saved 22 m boundary.
+	if _radius > RADIUS and position.distance_to(origin) > 21.0:
+		return
+	if not home._clear_space(position + Space.up(home, position) * 0.72):
+		return
+	graph.add_point(_id(x, z), position)
+
+func _connect_point(x: int, z: int) -> void:
+	var id: int = _id(x, z)
+	if not graph.has_point(id):
+		return
+	var offsets: Array[Vector2i] = [Vector2i(1, 0), Vector2i(0, 1)]
+	if _spacing < 1.0:
+		# Keep the original one-metre stair edges as well. A capsule
+		# cannot stand halfway beside a riser, but can step across it.
+		offsets.append_array([Vector2i(2, 0), Vector2i(0, 2)])
+	for offset: Vector2i in offsets:
+		if x + offset.x > _samples or z + offset.y > _samples:
+			continue
+		var other: int = _id(x + offset.x, z + offset.y)
+		# Loaded voxel treads can differ by 0.50000... m after collision
+		# interpolation. Preserve half-metre links within the 0.55 m step budget.
+		if graph.has_point(other) and absf((graph.get_point_position(id) - graph.get_point_position(other)).dot(Space.up(home, origin))) <= 0.52:
+			# Midpoint clearance catches tree trunks between grid samples.
+			var middle: Vector3 = graph.get_point_position(id).lerp(graph.get_point_position(other), 0.5)
+			var floor_hit: Dictionary = home._floor_hit(middle)
+			if floor_hit.is_empty():
 				continue
-			var ray := PhysicsRayQueryParameters3D.create(Space.offset(home, anchor, Vector3(x * _spacing, 4, z * _spacing)), Space.offset(home, anchor, Vector3(x * _spacing, -4, z * _spacing)), 1)
-			ray.exclude = [home.player.get_rid()]
-			var hit: Dictionary = home.player.get_world_3d().direct_space_state.intersect_ray(ray)
-			if hit.is_empty() or hit["normal"].dot(Space.up(home, hit["position"])) < 0.9 or not home._dry(hit["position"]):
-				continue
-			var position: Vector3 = hit["position"] + Space.up(home, hit["position"]) * 0.06
-			# Leave clearance inside the neighbor resident's saved 22 m boundary.
-			if _radius > RADIUS and position.distance_to(anchor) > 21.0:
-				continue
-			if not home._clear_space(position + Space.up(home, position) * 0.72):
-				continue
-			graph.add_point(_id(x, z), position)
-	for z in range(-_samples, _samples + 1):
-		for x in range(-_samples, _samples + 1):
-			var id: int = _id(x, z)
-			if not graph.has_point(id):
-				continue
-			var offsets: Array[Vector2i] = [Vector2i(1, 0), Vector2i(0, 1)]
-			if _spacing < 1.0:
-				# Keep the original one-metre stair edges as well. A capsule
-				# cannot stand halfway beside a riser, but can step across it.
-				offsets.append_array([Vector2i(2, 0), Vector2i(0, 2)])
-			for offset: Vector2i in offsets:
-				if x + offset.x > _samples or z + offset.y > _samples:
-					continue
-				var other: int = _id(x + offset.x, z + offset.y)
-				# Loaded voxel treads can differ by 0.50000... m after collision
-				# interpolation. Preserve half-metre links within the 0.55 m step budget.
-				if graph.has_point(other) and absf((graph.get_point_position(id) - graph.get_point_position(other)).dot(Space.up(home, origin))) <= 0.52:
-					# Midpoint clearance catches tree trunks between grid samples.
-					var middle: Vector3 = graph.get_point_position(id).lerp(graph.get_point_position(other), 0.5)
-					var floor_hit: Dictionary = home._floor_hit(middle)
-					if floor_hit.is_empty():
-						continue
-					# Stairs are discontinuous. The averaged endpoint height can
-					# put a standing capsule inside the higher tread; use its real floor.
-					var floor_position: Vector3 = floor_hit["position"]
-					if absf((floor_position - graph.get_point_position(id)).dot(Space.up(home, floor_position))) <= 0.56 and absf((floor_position - graph.get_point_position(other)).dot(Space.up(home, floor_position))) <= 0.56 and home._clear_space(floor_position + Space.up(home, floor_position) * 0.78):
-						graph.connect_points(id, other)
+			# Stairs are discontinuous. The averaged endpoint height can
+			# put a standing capsule inside the higher tread; use its real floor.
+			var floor_position: Vector3 = floor_hit["position"]
+			if absf((floor_position - graph.get_point_position(id)).dot(Space.up(home, floor_position))) <= 0.56 and absf((floor_position - graph.get_point_position(other)).dot(Space.up(home, floor_position))) <= 0.56 and home._clear_space(floor_position + Space.up(home, floor_position) * 0.78):
+				graph.connect_points(id, other)
+
 
 func _id(x: int, z: int) -> int:
 	return (z + _samples) * (_samples * 2 + 1) + x + _samples
 
 func route(from: Vector3, to: Vector3) -> PackedVector3Array:
-	if graph.get_point_count() == 0:
+	if pending or graph.get_point_count() == 0:
 		return PackedVector3Array()
 	if _occupied(to):
 		return PackedVector3Array()
@@ -90,7 +146,7 @@ func route(from: Vector3, to: Vector3) -> PackedVector3Array:
 	return prefix
 
 func snap(position: Vector3) -> Vector3:
-	return graph.get_point_position(graph.get_closest_point(position)) if graph.get_point_count() > 0 else Vector3.INF
+	return graph.get_point_position(graph.get_closest_point(position)) if not pending and graph.get_point_count() > 0 else Vector3.INF
 
 func sites() -> Dictionary:
 	var result: Dictionary = {"huts": []}

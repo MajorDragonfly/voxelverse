@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	_visual_root.rotation.y = lerp_angle(
 		_visual_root.rotation.y,
 		_target_yaw,
-		clampf(turn_speed * delta, 0.0, 1.0)
+		1.0 - exp(-turn_speed * delta)
 	)
 
 

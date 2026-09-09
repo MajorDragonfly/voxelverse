@@ -19,9 +19,7 @@ static func campaign_snapshot(player: Node3D, tree: SceneTree) -> Dictionary:
 	if not player.is_physics_processing() and not in_tribe: return {}
 	var manager: Node = tree.current_scene.get_node_or_null("WorldManager") if tree.current_scene != null else null
 	if manager != null and not bool(manager.get("world_initialized")): return {}
-	var body_key: String = str(state.get_world_seed())
-	if not state.campaign.data["bodies"].has(body_key): state.get_current_body()
-	var body: Dictionary = state.campaign.data["bodies"][body_key]
+	var body: Dictionary = state.get_current_body_record()
 	if body.get("surface_mode") == Cube.MODE and tree.current_scene.has_method("map_snapshot"):
 		return tree.current_scene.map_snapshot()
 	if str(body.get("surface_mode", "")) != "legacy_plane_v9": return {}

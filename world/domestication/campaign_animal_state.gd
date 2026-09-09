@@ -12,7 +12,7 @@ static func create(campaign: Dictionary, body: Dictionary) -> Dictionary:
 	return {"schema": SCHEMA, "registry": registry, "sources": {}}
 
 static func lookup(state: Node, object_id: String) -> Dictionary:
-	var body: Dictionary = state.campaign.data["bodies"].get(str(state.get_world_seed()), {})
+	var body: Dictionary = state.get_current_body_record()
 	return body.get(FIELD, {}).get("registry", {}).get("animals", {}).get(object_id, {})
 
 static func source_from(actor: Node3D) -> Dictionary:
