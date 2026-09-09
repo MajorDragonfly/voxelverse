@@ -1,0 +1,151 @@
+{
+  "body_attachments": {
+    "schema": 1,
+    "sockets": {
+      "harness.left": {
+        "enabled": true,
+        "offset": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "t": 0.32
+      },
+      "harness.right": {
+        "enabled": true,
+        "offset": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "t": 0.32
+      },
+      "saddle.primary": {
+        "enabled": true,
+        "offset": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "t": 0.52
+      }
+    }
+  },
+  "contract": {
+    "attachment_schema": 1,
+    "attachment_source": "saved",
+    "authored_leg_count": 2,
+    "body_bounds": {
+      "position": [
+        -0.563490927219391,
+        -0.281745463609695,
+        -0.691557049751282
+      ],
+      "size": [
+        1.12698185443878,
+        0.537877678871155,
+        1.38311409950256
+      ]
+    },
+    "design_id": "design_f9e0702041f60d406e6005c8d4fa7057",
+    "errors": [],
+    "forward": "-Z",
+    "frame": "BodyV4",
+    "requires_runtime_contact_check": true,
+    "schema": 1,
+    "sockets": {
+      "harness.left": {
+        "basis_x": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "basis_y": [
+          0.0,
+          0.986082077026367,
+          0.166259154677391
+        ],
+        "basis_z": [
+          0.0,
+          -0.166259154677391,
+          0.986082077026367
+        ],
+        "position": [
+          -0.592763125896454,
+          0.0131707200780511,
+          -0.252568185329437
+        ]
+      },
+      "harness.right": {
+        "basis_x": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "basis_y": [
+          0.0,
+          0.986082077026367,
+          0.166259154677391
+        ],
+        "basis_z": [
+          0.0,
+          -0.166259154677391,
+          0.986082077026367
+        ],
+        "position": [
+          0.592763125896454,
+          0.0131707200780511,
+          -0.252568185329437
+        ]
+      },
+      "saddle.primary": {
+        "basis_x": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "basis_y": [
+          0.0,
+          0.995992004871368,
+          0.0894427374005318
+        ],
+        "basis_z": [
+          0.0,
+          -0.0894427374005318,
+          0.995992004871368
+        ],
+        "position": [
+          0.0,
+          0.208564698696136,
+          0.0280631296336651
+        ]
+      }
+    },
+    "suitability_owner": "D1",
+    "units": "design_units",
+    "up": "+Y"
+  },
+  "fixture": {
+    "region": [
+      1,
+      -2
+    ],
+    "role": "grazer",
+    "species_seed": 12
+  }
+}

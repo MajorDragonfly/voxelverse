@@ -15,6 +15,7 @@ const Compatibility = preload("res://core/persistence/design_compatibility.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Store = preload("res://core/persistence/design_store.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
+const BodyAttachments = preload("res://assembly/core/creature_body_attachments.gd")
 
 const SAVE_VERSION: int = 7
 const SAVE_PATH: String = "user://creature_assembly_v7.json"
@@ -86,6 +87,7 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 	progression["discoveries"] = progression.get("discoveries", [])
 	blueprint["progression"] = progression
 	blueprint["version"] = SAVE_VERSION
+	BodyAttachments.ensure(blueprint)
 	return blueprint
 
 

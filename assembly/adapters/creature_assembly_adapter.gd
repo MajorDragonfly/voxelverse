@@ -3,6 +3,7 @@ class_name CreatureAssemblyAdapter
 
 const Assembly = preload("res://assembly/core/modular_assembly.gd")
 const CreatureBlueprint = preload("res://creatures/editor/creature_blueprint.gd")
+const BodyAttachments = preload("res://assembly/core/creature_body_attachments.gd")
 
 
 static func to_modular_blueprint(creature: Dictionary) -> Dictionary:
@@ -18,6 +19,7 @@ static func to_modular_blueprint(creature: Dictionary) -> Dictionary:
 		"body_part_id": CreatureBlueprint.get_body_part_id(creature),
 		"paint_part_id": CreatureBlueprint.get_paint_part_id(creature),
 		"adapter_only": true,
+		"body_attachments": BodyAttachments.read(creature),
 	}
 	var parts: Array = creature.get("parts", [])
 	for placement_value in parts:
