@@ -121,6 +121,21 @@ func _run() -> void:
 	var original_registry: Dictionary = d2.registry.duplicate(true)
 	d2.registry["schema"] = 2
 	await _frames(2)
+	_expect(journal._rows.is_empty() and journal._description.text.contains("nicht gelesen"), "Planar positions accepted as spherical D2 registry")
+	var animal_state = preload("res://world/domestication/animal_state.gd")
+	var spherical: Dictionary = original_registry.duplicate(true)
+	spherical.schema = animal_state.SCHEMA
+	for record: Dictionary in spherical.animals.values():
+		record.surface_mode = animal_state.Home.Cube.MODE
+		for field in ["position", "home", "wait_position"]:
+			var point: Dictionary = animal_state.Home.Cube.address(record.body_id, 0, 0.25, 0.5, 12.0)
+			point.radius = 6371000.0
+			record[field] = point
+	d2.registry = spherical
+	journal.refresh_owned_animals()
+	_expect(journal._rows.size() == 1 and journal._rows[0].location.contains("Breite") and journal._rows[0].order.contains("Höhe"), "Shared animal book did not project canonical spherical positions")
+	d2.registry.schema = animal_state.SCHEMA + 1
+	await _frames(2)
 	_expect(journal._rows.is_empty() and journal._description.text.contains("nicht gelesen"), "Future D2 schema interpreted as current")
 	d2.registry = original_registry
 	await _frames(2)

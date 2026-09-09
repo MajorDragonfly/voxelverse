@@ -198,8 +198,9 @@ func _sense() -> void:
 		if _cooldown > 0.0:
 			_intent = "rest"
 		elif _flat_distance(global_position, _anchor) > territory_radius + 8.0:
-			_intent = "return"
-			_goal = _anchor
+			# Keep returning until home is reached. Merely changing the intent
+			# lets the next sensing tick resume wandering at the territory edge.
+			_begin_return()
 		elif ecological_role in ["grazer", "forager", "climber"]:
 			var center := Vector3.ZERO
 			var count: int = 0

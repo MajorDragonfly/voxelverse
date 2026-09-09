@@ -202,8 +202,12 @@ func _activate() -> void:
 	get_parent().global_position = Space.resolve(self, village()["anchor"])
 	_campaign_id = str(_state.campaign.data["id"])
 	_world_seed = _state.get_world_seed()
-	_player_processing = {"process": player.is_processing(), "physics": player.is_physics_processing(), "input": player.is_processing_input(), "unhandled": player.is_processing_unhandled_input(), "collision_layer": player.collision_layer}
+	_player_processing = {"process": player.is_processing(), "physics": player.is_physics_processing(), "input": player.is_processing_input(), "unhandled": player.is_processing_unhandled_input(), "collision_layer": player.collision_layer, "collision_mask": player.collision_mask}
 	player.collision_layer = 0
+	# The player is now a resident on the same navigation graph as companions.
+	# Use their terrain/obstacle mask; a waiting animal must not pin only this
+	# one carrier to a route which every other resident can traverse.
+	player.collision_mask = 1 | 2
 	player.set_process(false)
 	player.set_physics_process(false)
 	player.set_process_input(false)
@@ -280,6 +284,7 @@ func _deactivate() -> void:
 			if indicator != null:
 				indicator.queue_free()
 		player.collision_layer = int(_player_processing.get("collision_layer", 1))
+		player.collision_mask = int(_player_processing.get("collision_mask", 5))
 		player.set_process(_player_processing.get("process", true))
 		player.set_physics_process(_player_processing.get("physics", true))
 		player.set_process_input(_player_processing.get("input", true))

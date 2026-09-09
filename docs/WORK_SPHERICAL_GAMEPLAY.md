@@ -14,7 +14,7 @@ Stand: 9. September 2026. Integration auf `agent/spherical-gameplay-migration-20
 | Ökologie | Regionale gespeicherte Aggregate | Vorhandene Ökologiegleichungen, höchstens zwei Regionsaufgaben pro Frame. Unbeladene individuelle Zustände bleiben derzeit eingefroren; entfernte Siedlungsproduktion ist noch nicht implementiert. |
 | Wasser / Audio | Dieselbe versionierte Oberflächenquelle | Neue Körper verwenden `living_planet_v2`, Terrainrevision 4, mit Süßwasserbecken. V1/Revision 3 bleibt unverändert lesbar. Wassergeometrie, Trinken, Unterwasseransicht und Audio teilen die Wasserhöhe. |
 
-Die gemeinsame Szene verwendet `player.tscn`, normalen Kreatureneditor, Scanner, Bedürfnisse, Nest, Heimatgruppe und Dorf. Eigenständige Labore bleiben Diagnosebereiche. Jeder gebundene physische Root wird bei einer Ursprungskorrektur genau einmal versetzt; lokale Routenziele und Fußkontakt-Caches werden mitgeführt.
+Die gemeinsame Szene verwendet `player.tscn`, normalen Kreatureneditor, Scanner, Bedürfnisse, Nest, Heimatgruppe und Dorf. Tierregister und bestätigte Aktionsrückmeldungen sind an denselben D2-Kampagnencontroller gebunden; das gemeinsame Entdeckungsbuch zeigt ursprüngliche Tier-IDs und Kugelorte als Breite/Länge/Höhe. Eigenständige Labore bleiben Diagnosebereiche. Jeder gebundene physische Root wird bei einer Ursprungskorrektur genau einmal versetzt; lokale Routenziele und Fußkontakt-Caches werden mitgeführt.
 
 ## Regionsspeicherung und Kopiermigration
 
@@ -28,7 +28,7 @@ Die Kopiermigration `campaign_places_copy_v2` inventarisiert Heimat, Dorf, Nachb
 
 ## Erneut ausgeführte Prüfungen
 
-Die Ergebnisse werden während dieser Integrationsrunde ergänzt. Ein bestandener Teiltest ersetzt weder die Gesamtprüfung des finalen Commits noch die Ziel-PC-Abnahme.
+Die Ergebnisse werden während dieser Integrationsrunde ergänzt; die abschließenden CI-Ergebnisse und der veröffentlichte Commit werden in [PR #45](https://github.com/MajorDragonfly/voxelverse/pull/45) festgehalten. Ein bestandener Teiltest ersetzt weder die Gesamtprüfung des finalen Commits noch die Ziel-PC-Abnahme.
 
 | Prüfung | Bisheriger Nachweis |
 |---|---|
@@ -36,15 +36,15 @@ Die Ergebnisse werden während dieser Integrationsrunde ergänzt. Ein bestandene
 | `spherical_developed_migration_test` | Entwickelter Vertragsstand mit ursprünglicher Heimat, drei Bewohnern, Hütte, Nachbar, besessenem D1-Milchtier, Tierplatz, Teilzyklus, ausstehender Milch, pausierter Holzfracht und Ökologie; Inventarvergleich, reale Aktivierung und frischer Godot-Prozess bestanden. Die Quelle ist ein aufgebauter Vertragsstand, kein Nachweis für jeden historischen Spielstand. |
 | `spherical_campaign_runtime_test` | Normaler Start/Kopierweg, ursprünglicher Entwurf, echte Bewegung, Ursprungskorrektur, Karte, Bedürfnisse, Pause, Speichern, frischer Prozess und Rückkehr zum Menü bestanden. |
 | `spherical_creature_test` | Tatsächlicher Kamerascan mit einmaliger Belohnung; normaler F2-Editor und Rückkehr mit gleicher Kampagne/Heimat; erreichbares Süßwasser, Unterwassertiefe und radiales Audio bestanden. |
-| `spherical_gameplay_test` | Zusammenhängender realer Ablauf mit Heimat → Stamm → Holzfracht/Laden → Nachbar → D1-Zähmung → Tierplatz → Pflege → Milchtransport einmal bestanden. Die erweiterte Kette mit blockierter Milchfracht und separatem Neustart erreichte ebenfalls das Lager; die strenge Logprüfung fand dabei einen Scanner-Audio-Zugriff nach Szenenabbau. Ein Lebenszyklusschutz ist ergänzt; die endgültige gemeinsame Wiederholungsprüfung steht aus. |
+| `spherical_gameplay_test` | Zusammenhängender realer Ablauf mit Heimat → Stamm → Holzfracht/Laden → Nachbar → D1-Zähmung → Tierplatz → Pflege → Milchtransport einmal bestanden. Die erweiterte Kette mit blockierter Milchfracht und separatem Neustart erreichte ebenfalls das Lager; die strenge Logprüfung fand dabei einen Scanner-Audio-Zugriff nach Szenenabbau. Der ergänzte Lebenszyklusschutz bestand die strenge vollständige Kette im nativen Linux-Paket. Die CI fand anschließend eine zu früh beendete Revierrückkehr und einen gelegentlich stockenden Bauweg; Rückkehr bis zum Heimatpunkt und einheitliche Terrain-/Hinderniskollision für alle Dorfbewohner sind korrigiert. Die abschließende CI-Wiederholung einschließlich Tierbuchanschluss steht aus. |
 | `surface_scale_contract_test` | Kleine Kugel, Terra und obere begehbare Radiusgrenze erreichen den erforderlichen Bodendetailgrad innerhalb des Blattbudgets; zu große Körper bleiben geschützt statt endlos zu laden. |
 | Gemeinsame Regression | Heimat, Stamm, Wirtschafts-/Wachstums-/Haltungsverträge, D2, D1-Oberflächenkatalog, KI, Foraging, Drinking, Unterwasser und Audio geprüft. Zwei Erwartungen auf die bisher höchste planare Version wurden ausdrücklich von den neuen Kugelformaten getrennt. |
 
-Das erste native Linux-Paket bestand 29 Export-/Paketprüfungen außerhalb des Quellprojekts, einschließlich Kugelstart, Migration und frischem Prozess. Die danach ergänzte erweiterte Milchprüfung und Grafikaufnahmen werden zusätzlich in der gemeinsamen CI ausgeführt. Lokale Grafikaufnahme war durch einen nicht verfügbaren X-Server-Socket blockiert; keine Grafikabnahme oder Ziel-PC-Leistung daraus ableiten.
+Das erste native Linux-Paket bestand 29 Export-/Paketprüfungen außerhalb des Quellprojekts, einschließlich Kugelstart, Migration und frischem Prozess. Der veröffentlichte Erststand `c3e92e2d5a082f67c0e873c1d936d5d177852b0a` bestand anschließend 32 native Linux-Prüfungen einschließlich erweiterter Milchfracht/Neustart. Alle sechs Grafikjobs für Planeten, Umgebung und gemeinsame Kugelkampagne bestanden mit Forward+ und Compatibility. Die Grafikartefakte sind im [CI-Lauf](https://github.com/MajorDragonfly/voxelverse/actions/runs/34392459316) hinterlegt; ihr Download in diese Arbeitsumgebung scheiterte mit HTTP 403, deshalb wurden die Bilder hier nicht visuell abgenommen. Lokale Grafikaufnahme war durch einen nicht verfügbaren X-Server-Socket blockiert. Keine Ziel-PC-Leistung aus diesen Prüfungen ableiten.
 
 ## Verbleibende Abnahmen und Architekturaufgaben
 
-- M1g: fehlerfreie Wiederholung der erweiterten Milchfrachtprüfung am finalen Stand; reale historische Dörfer einschließlich ungünstiger Fundamente und Zielkapazität weiter prüfen.
+- M1g: fehlerfreie CI-Wiederholung einschließlich Tierbuch, normaler Tier-Rückmeldung und aller Plattformen am finalen Stand; reale historische Dörfer einschließlich ungünstiger Fundamente und Zielkapazität weiter prüfen.
 - M1f/M1h: längere tatsächliche Reise, Flächenkante auf kleinem Körper, Körperwechsel/Rückkehr und vollständige Verbrauchs-/Todes-/Wissensbilanz im Kampagnenhost.
 - ARCH-03/04: stabile Körper-ID als primärer Lookup; gleiche Weltseeds in verschiedenen Systemen dürfen keine Körper zusammenlegen. Der neue direkte aktuelle Datensatz beseitigt tiefe Kopien im Hotpath, ersetzt diese Migration aber nicht.
 - ARCH-13/14: segmentierte Karten-/Fortschrittsregister und sichere Bereinigung unreferenzierter Regionsdateien unter Berücksichtigung sämtlicher Historien/Kopien. Der derzeitige Store löscht keine historischen Blobs.

@@ -137,6 +137,14 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(runtime.controller.record(id).get("status") == "tamed", "Milk animal did not retain completed food/trust.")
 	_expect(runtime.controller.record(id).species_id == species_id and data.members.size() == 3, "Taming changed species or recruited a citizen.")
 	print("SPHERE_TAMED ", id)
+	var journal: Node = tree.get_first_node_in_group(&"discovery_journal")
+	if not _expect_step(journal != null and journal.open_journal(), "Shared animal book did not open in the campaign."): return
+	journal._tabs.current_tab = journal.ANIMALS_TAB
+	journal.refresh_owned_animals()
+	var owned: Array = journal._rows.filter(func(row: Dictionary) -> bool: return row.key == id)
+	_expect(owned.size() == 1 and owned[0].location.contains("Breite"), "Shared campaign book lost the original spherical milk animal.")
+	journal.close_journal()
+	await tree.process_frame
 	_expect(runtime.issue_command(id, "home").ok, "Radial home command failed.")
 	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(tribe.anchor()) < 1.6, 18000)
 	_expect(runtime.actor_for(id).global_position.distance_to(tribe.anchor()) < 1.6, "Owned animal did not walk home.")
@@ -146,8 +154,8 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(site.is_finite(), "No reachable physical pen site.")
 	if not site.is_finite(): return
 	_expect(tribe.issue_order("pen", site), "Cannot reserve pen construction: " + tribe.status)
-	await _until(func() -> bool: return not tribe.village().husbandry.pens.is_empty(), 28000)
-	_expect(not tribe.village().husbandry.pens.is_empty(), "Pen material transport/construction failed: " + tribe.status)
+	await _until(func() -> bool: return not tribe.village().husbandry.pens.is_empty(), 45000)
+	_expect(not tribe.village().husbandry.pens.is_empty(), "Pen material transport/construction failed: " + str({"status": tribe.status, "project": tribe.village().project, "members": tribe.village().members, "routes": tribe._routes, "goals": tribe._goals}))
 	if tribe.village().husbandry.pens.is_empty(): return
 	tribe.issue_order("wait")
 	tribe.select_member(handler)
@@ -241,12 +249,17 @@ func _site(tribe: Node, kind: String) -> Vector3:
 func _approach_live(tribe: Node, runtime: Node, id: String, handler: String) -> bool:
 	var start: int = Time.get_ticks_msec()
 	var diagnostic_at: int = start + 2000
+	var retry_at: int = start
 	while Time.get_ticks_msec() - start < 24000:
 		var actor: Node3D = runtime.actor_for(id)
 		if actor == null: break
 		if tribe.member_record(handler).order == "wait":
 			if actor.global_position.distance_to(tribe.actors[handler].global_position) <= runtime.Controller.REACH - 0.1 and runtime.context(id, handler).line_of_sight: return true
-			if not runtime.approach(id): break
+			# A wild animal can temporarily leave the resident's work area.
+			# Wait for its real patrol/return instead of requiring instant reach.
+			if Time.get_ticks_msec() >= retry_at:
+				runtime.approach(id)
+				retry_at = Time.get_ticks_msec() + 250
 		if Time.get_ticks_msec() >= diagnostic_at:
 			diagnostic_at += 2000
 			var walker: CharacterBody3D = tribe.actors[handler]

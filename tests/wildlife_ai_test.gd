@@ -48,6 +48,7 @@ func _run() -> void:
 	var before_progression: Dictionary = root.get_node("ProgressionService").export_state().duplicate(true)
 	await _perception_and_combat()
 	await _herd_and_social()
+	await _territory_return()
 	await _escape_and_ground()
 	_expect(root.get_node("ProgressionService").export_state() == before_progression, "Ambient AI manufactured discoveries, rewards or relationship changes.")
 	scene.queue_free()
@@ -157,6 +158,21 @@ func _herd_and_social() -> void:
 	_expect(first.get_ai_debug_state()["intent"] == "flee", "Wild animal did not resume danger response after social control ended.")
 	first.queue_free()
 	second.queue_free()
+	await _frames(3)
+
+func _territory_return() -> void:
+	player.position = Vector3(30, 100.05, 30)
+	var grazer: CharacterBody3D = _animal("grazer", Vector3(15.5, 100.05, 0), 813)
+	grazer._anchor = Vector3(0, 100.05, 0)
+	grazer._anchor_ready = true
+	grazer.territory_radius = 6.0
+	grazer._ambient_heading = Vector3.RIGHT
+	grazer._decision_timer = 100.0
+	await _frames(20)
+	_expect(grazer.get_ai_debug_state().returning, "Grazer did not retain its territory return.")
+	await _frames(420)
+	_expect(grazer.global_position.distance_to(grazer._anchor) < 1.8, "Grazer resumed wandering at the boundary instead of walking home: " + str(grazer.global_position))
+	grazer.queue_free()
 	await _frames(3)
 
 func _escape_and_ground() -> void:

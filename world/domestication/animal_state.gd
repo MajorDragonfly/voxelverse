@@ -37,7 +37,7 @@ static func validate(value: Variant) -> String:
 		var a: Variant = animals[key]
 		if not a is Dictionary or a.get("object_id") != key or not identity(key) or not identity(a.get("species_id")) or a.get("body_id") != value["body_id"]:
 			return "Ungültige Tieridentität."
-		if a.get("surface_mode") not in ["legacy_plane_v9", Home.Cube.MODE] or (a.surface_mode == Home.Cube.MODE and value.schema != SCHEMA):
+		if a.get("surface_mode") not in ["legacy_plane_v9", Home.Cube.MODE] or ((a.surface_mode == Home.Cube.MODE) != (value.schema == SCHEMA)):
 			return "Unbekannter Ortsvertrag des Tiers."
 		var design: Variant = a.get("design_ref")
 		if not design is Dictionary or not identity(design.get("id")) or not integer(design.get("revision"), 0, 1000000000):
