@@ -23,7 +23,17 @@ func _capture(label: String) -> void:
 	if label == "04_tool":
 		_expect(earned == 6, "Real transports and jointly completed tool did not earn six points: %d" % earned)
 	if label == "05_village":
-		_expect(earned == 14, "Shared stock, tool, shelter and meals did not earn fourteen points: %d" % earned)
+		# Housing transport takes longer than the old decorative huts. Automatic
+		# meals can make the base scenario's total reach three before EVERY citizen
+		# has eaten. Earn the community goal through actual additional deliveries.
+		if not progression.export_state()["tribal"]["awards"].has("shared_meals"):
+			tribe.select_all()
+			_expect(tribe.issue_order("food"), "Cannot gather shared meal supplies")
+			await _until(func() -> bool: return int(tribe.village()["stock"]["food"]) >= 3, 700)
+			_expect(tribe.issue_order("feed"), "Cannot feed the whole group")
+			await _until(func() -> bool: return progression.export_state()["tribal"]["awards"].has("shared_meals"), 700)
+			earned = int(progression.get_behavior_wallet(1)["earned"]["social"])
+		_expect(earned == 14, "Shared stock, tool, shelter and meals did not earn fourteen points: %d; evidence=%s" % [earned, str(progression.export_state()["tribal"])])
 		await _check_progression()
 	await super._capture(label)
 
