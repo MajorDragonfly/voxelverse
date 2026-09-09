@@ -104,6 +104,8 @@ func _run() -> void:
 		for actor: CharacterBody3D in tribe.actors.values():
 			_expect(actor.visible and actor.is_on_floor(), "Resident lost real terrain floor or visibility.")
 		var args: PackedStringArray = OS.get_cmdline_user_args()
+		if "--economy" in args:
+			await _economy_world(tribe)
 		if "--capture" in args:
 			var directory: String = args[args.find("--capture") + 1]
 			DirAccess.make_dir_recursive_absolute(directory)
@@ -148,6 +150,8 @@ func _restart_check(saves: Node, state: Node) -> void:
 		for member: Dictionary in expected["members"]:
 			_expect(tribe.actors.has(member["id"]), "Fresh process changed a resident identity.")
 		_expect(int(tribe.village()["deposits"]["wood"]["remaining"]) <= int(expected["deposits"]["wood"]["remaining"]), "Fresh process regenerated gathered resources.")
+		if "--economy" in OS.get_cmdline_user_args():
+			_expect(tribe.village()["economy"]["stations"] == expected["economy"]["stations"] and int(tribe.village()["stock"]["water"]) >= int(expected["stock"]["water"]), "Fresh process lost the well or delivered water.")
 		_expect(not tribe.player.is_physics_processing() and tribe.camera.current, "Fresh process restored creature input instead of group control.")
 	paused = false
 	current_scene.queue_free()
@@ -162,3 +166,43 @@ func _expect(condition: bool, message: String) -> void:
 func _finish() -> void:
 	print(JSON.stringify({"test": "tribal_age_world", "passed": failures.is_empty(), "failures": failures}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+func _economy_world(tribe: Node) -> void:
+	print("M6: constructing a well on generated terrain")
+	tribe.select_all()
+	_expect(tribe.issue_order("stone"), "Cannot gather real stone for the well.")
+	for frame in range(1800):
+		await physics_frame
+		await process_frame
+		if int(tribe.village()["stock"]["stone"]) >= 4:
+			break
+	_expect(tribe.issue_order("tool"), "Cannot pay for tool from actual deliveries.")
+	for frame in range(1200):
+		await physics_frame
+		await process_frame
+		if int(tribe.village()["tools"]) == 1:
+			break
+	tribe.navigation.rebuild(tribe.home, tribe.anchor())
+	var candidate := Vector3.INF
+	for identity: int in tribe.navigation.graph.get_point_ids():
+		var point: Vector3 = tribe.navigation.graph.get_point_position(identity)
+		if tribe.navigation.free_workplace(point, tribe.village(), "well") and (not candidate.is_finite() or point.distance_to(tribe.anchor()) < candidate.distance_to(tribe.anchor())):
+			candidate = point
+	_expect(candidate.is_finite(), "No additional reachable workplace on generated terrain.")
+	if not candidate.is_finite():
+		return
+	_expect(tribe.issue_order("well", candidate), "Generated well placement failed: " + tribe.status)
+	for frame in range(1500):
+		await physics_frame
+		await process_frame
+		if tribe.village()["economy"]["stations"].has("well"):
+			break
+	_expect(tribe.village()["economy"]["stations"].has("well"), "Workers did not build the well on generated terrain.")
+	_expect(tribe.issue_order("water"), "Cannot gather actual well water.")
+	for frame in range(1500):
+		await physics_frame
+		await process_frame
+		if int(tribe.village()["stock"]["water"]) >= 2:
+			break
+	_expect(int(tribe.village()["stock"]["water"]) >= 2, "Water never reached the warehouse on generated terrain.")
+	print("M6: generated workplace ", candidate, " water delivered ", tribe.village()["stock"]["water"])

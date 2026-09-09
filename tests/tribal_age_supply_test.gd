@@ -41,14 +41,19 @@ func _run() -> void:
 	for member: Dictionary in data["members"]:
 		member["hunger"] = 85.0
 	data["schema"] = 1
-	for key in ["garden", "growth", "grown"]:
+	for key in ["garden", "growth", "grown", "economy"]:
 		data.erase(key)
+	for kind in ["water", "fiber"]:
+		data["deposits"].erase(kind)
+	for member: Dictionary in data["members"]:
+		for key in ["hydration", "profession", "paused_order", "task", "blocked"]:
+			member.erase(key)
 	# Compare with the actual JSON representation, including its float precision.
 	var originals: Array = JSON.parse_string(JSON.stringify(data["members"]))
 	_expect(saves.save_now(), "Legacy fixture could not save.")
 	var legacy_bytes: String = FileAccess.get_file_as_string(SAVE)
 	_expect(saves.load_now(), "Schema-1 village did not load.")
-	_expect(tribe.village()["members"] == originals and int(tribe.village()["schema"]) == Model.SCHEMA, "Migration changed residents or orders: expected=%s actual=%s" % [originals, tribe.village()["members"]])
+	_expect(originals.all(func(m: Dictionary) -> bool: return m.keys().all(func(key: String) -> bool: return tribe.member_record(m["id"])[key] == m[key])) and int(tribe.village()["schema"]) == Model.SCHEMA, "Migration changed residents or orders: expected=%s actual=%s" % [originals, tribe.village()["members"]])
 	_expect(FileAccess.get_file_as_string(SAVE) == legacy_bytes, "Read migration overwrote the previous save.")
 	_expect(int(tribe.village()["garden"]) == 0 and int(tribe.village()["grown"]) == 0 and int(tribe.village()["stock"]["food"]) == 11, "Migration granted a garden or changed the food stock.")
 	await _frames(15)

@@ -199,7 +199,7 @@ func load_now(custom_path: String = "") -> bool:
 		last_migration_report.append("Recovered the previous complete snapshot from .bak.")
 	for saved_body: Dictionary in data["game_state"]["campaign"].get("bodies", {}).values():
 		if saved_body.has("tribe") and Tribe.upgrade(saved_body["tribe"]):
-			last_migration_report.append("Tribe 1 -> 2; residents, orders, cargo and stock retained. Garden must be built in play.")
+			last_migration_report.append("Tribe -> 3; residents, orders, cargo and stock retained. Garden and renewable workplaces must be built in play.")
 	_design_files = _dict(data.get("design_files", {}))
 	slot_name = str(data.get("slot_name", "Bisheriges Abenteuer"))
 	_slot_preview = _dict(data.get("slot_preview", {}))
@@ -391,6 +391,8 @@ func _write_slot_copy(source: Dictionary, title: String, kind: String) -> String
 	for event: Dictionary in campaign["recent_events"]:
 		if str(event.get("campaign_id", "")) == old_identity:
 			event["campaign_id"] = campaign["id"]
+	if data["progression"].get("tribal", {}).get("campaign_id", "") == old_identity:
+		data["progression"]["tribal"]["campaign_id"] = campaign["id"]
 	data.erase("slot_history")
 	data["slot_origin"] = {"kind": kind, "campaign_id": old_identity,
 		"saved_unix_time": int(source.get("saved_unix_time", 0))}
@@ -491,7 +493,7 @@ func _validate_save(data: Dictionary) -> String:
 		return progression_problem
 	if schema >= 4 and int(data["progression"].get("schema", 0)) < 3:
 		return "Schema 4 requires complete behavior progression."
-	if schema >= 5 and int(data["progression"].get("schema", 0)) != Progression.SAVE_SCHEMA:
+	if schema >= 5 and int(data["progression"].get("schema", 0)) < 4:
 		return "Schema 5 requires persistent creature encounters."
 	var runtime: Variant = data["player"].get("behavior_runtime", {})
 	if not runtime is Dictionary:
@@ -510,6 +512,10 @@ func _validate_save(data: Dictionary) -> String:
 	var campaign: Variant = state.get("campaign")
 	if not campaign is Dictionary or str(campaign.get("id", "")).is_empty() or int(campaign.get("schema", 0)) != Campaign.SCHEMA:
 		return "Invalid campaign identity or version."
+	var tribal: Dictionary = data["progression"].get("tribal", {})
+	if not str(tribal.get("campaign_id", "")).is_empty():
+		if tribal["campaign_id"] != campaign.get("id") or tribal["species_id"] != campaign.get("player_species_id") or tribal["faction_id"] != campaign.get("player_faction_id"):
+			return "Stammesfortschritt gehört zu einer anderen Kampagne, Spezies oder Fraktion."
 	for field in ["bodies", "event_cursors", "design_refs", "pending_transition", "completed_transitions"]:
 		if not campaign.get(field) is Dictionary:
 			return "Invalid campaign section: " + field

@@ -93,6 +93,11 @@ func get_phase_transition_blockers(new_phase: int) -> Array[String]:
 		var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
 		if tribe != null:
 			return tribe.blockers()
+	if new_phase in [2, 3]:
+		var epoch: Dictionary = preload("res://core/progression/civilization_contract.gd").describe(campaign.data, str(world_seed), current_phase, new_phase)
+		var reasons: Array[String] = []
+		reasons.assign(epoch["blockers"])
+		return reasons
 	# Later phases still require their own playable loop and explicit handoff.
 	return ["The gameplay and handoff for this phase are not implemented yet."]
 

@@ -90,3 +90,22 @@ func sites() -> Dictionary:
 		else:
 			result[kind] = [best.x, best.y, best.z]
 	return result
+
+func free_workplace(position: Vector3, data: Dictionary, kind: String) -> bool:
+	if not position.is_finite() or position.distance_to(origin) > 16.0 or position.distance_to(origin) < 3.0 or route(origin, position).is_empty():
+		return false
+	for corner: Vector3 in [Vector3(-1, 0, -1), Vector3(1, 0, -1), Vector3(-1, 0, 1), Vector3(1, 0, 1)]:
+		var floor_point: Vector3 = snap(position + corner)
+		if floor_point.distance_to(position + corner) > 0.45 or route(position, floor_point).is_empty():
+			return false
+	for site: Array in data["sites"]:
+		if position.distance_to(Vector3(site[0], site[1], site[2])) < 3.0:
+			return false
+	for resource: String in data["deposits"]:
+		# Upgrading an old source in place is allowed; other sources keep room.
+		if resource == {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}.get(kind):
+			continue
+		var site: Array = data["deposits"][resource]["position"]
+		if position.distance_to(Vector3(site[0], site[1], site[2])) < 3.0:
+			return false
+	return true

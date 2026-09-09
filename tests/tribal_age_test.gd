@@ -96,6 +96,10 @@ func _run() -> void:
 	await _frames(3)
 	_expect(not paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing tribal journal restored creature mouse capture.")
 	await _capture("02_group")
+	# M6's expanded economy controls can cover the companions. Use its real
+	# collapse button before clicking/dragging in the world, like the player.
+	await _click(tribe.panel._collapse)
+	await _frames(3)
 	var identity: String = str(tribe.village()["members"][0]["id"])
 	var screen_point: Vector2 = tribe.camera.unproject_position(player.global_position + Vector3.UP)
 	await _world_click(screen_point, MOUSE_BUTTON_LEFT)
@@ -117,6 +121,8 @@ func _run() -> void:
 	_expect(player.global_position.distance_to(before) > 1.5 and player.is_on_floor(), "Original creature did not walk under group command.")
 	_expect(tribe.village()["members"][1]["order"] == "wait", "Individual move commanded other residents.")
 	tribe.select_all()
+	await _click(tribe.panel._collapse)
+	await _frames(3)
 	await _click(tribe.panel._buttons["wood"])
 	await _until(func() -> bool: return _has_cargo(), 350)
 	_expect(_has_cargo(), "Gatherers did not pick up material at a real deposit.")
