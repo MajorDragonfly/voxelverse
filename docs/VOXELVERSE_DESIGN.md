@@ -1,7 +1,7 @@
 # Voxelverse – verbindliche Designvorgabe
 
-**Version 1.0 · 9. September 2026**  
-**Geltung:** Alle neuen und überarbeiteten sichtbaren Spielelemente, insbesondere Entdeckungsbuch, Entwicklungsbuch, Skills, HUD, Menüs, Editoren und spätere Verwaltungsansichten.  
+**Version 1.0 · 9. September 2026**
+**Geltung:** Alle neuen und überarbeiteten sichtbaren Spielelemente, insbesondere Entdeckungsbuch, Entwicklungsbuch, Skills, HUD, Menüs, Editoren und spätere Verwaltungsansichten.
 **Leitgedanke:** Eine lebendige Voxelwelt mit einer ruhigen, klaren Oberfläche. Gleiche Informationen sehen überall gleich aus und lassen sich überall gleich bedienen.
 
 Diese Datei beschreibt die verbindliche **Sollgestaltung** im Auftrag von Lars. Sie dokumentiert keine bereits erfolgte Umgestaltung des Spiels. Die bestehenden Farben, Stat-Symbole und Datenanschlüsse werden als Grundlage verwendet. Neue Festlegungen und noch fehlende Bausteine sind unten erkennbar getrennt.
