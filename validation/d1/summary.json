@@ -1,0 +1,127 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "base_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "contract_commit": "11a9dbebd73487f09deaf8fecf9a0385dd3f6417",
+  "checks": [
+    {
+      "name": "domestication_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.195,
+      "source_run": "d1-final-data2"
+    },
+    {
+      "name": "domestic_fauna_catalog_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 27.306,
+      "source_run": "d1-final-data2"
+    },
+    {
+      "name": "domestic_fauna_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.348,
+      "source_run": "d1-runtime-verified"
+    },
+    {
+      "name": "wildlife_ai_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 16.616,
+      "source_run": "d1-regressions"
+    },
+    {
+      "name": "wildlife_ai_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.762,
+      "source_run": "d1-regressions"
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.573,
+      "source_run": "d1-regressions"
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.713,
+      "source_run": "d1-regressions"
+    },
+    {
+      "name": "discovery_journal_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.051,
+      "source_run": "d1-regressions"
+    },
+    {
+      "name": "world_runtime_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.453,
+      "source_run": "d1-regressions"
+    },
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.163,
+      "source_run": "d1-import-runtime-final"
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.97,
+      "source_run": "d1-import-runtime-final"
+    }
+  ],
+  "cold_restart": [
+    {
+      "process": "write",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "process": "read",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "planets": 78,
+  "mandatory_species": 234,
+  "habitats": 932,
+  "runtime": [
+    {
+      "bodies": [
+        {
+          "group": "milk",
+          "legs": 4,
+          "position": "(62.2263, 0.296032, -94.86546)",
+          "speed": 2.8
+        },
+        {
+          "group": "companion",
+          "legs": 4,
+          "position": "(76.80612, 3.237245, -92.33147)",
+          "speed": 3.8
+        },
+        {
+          "group": "work",
+          "legs": 4,
+          "position": "(76.16133, 2.643823, -88.38542)",
+          "speed": 2.8
+        }
+      ],
+      "failures": [],
+      "food_sources": 3,
+      "test": "domestic_fauna_runtime"
+    }
+  ],
+  "scope": "Headless Linux. Terrain routes and live collision/spawn; no native Windows or visual acceptance. Water distances do not certify a drinkable bank."
+}
