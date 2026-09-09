@@ -1,0 +1,97 @@
+{
+  "base_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux shared container; headless Jolt physics. Timing is diagnostic, not target-PC certification.",
+  "runtime": {
+    "creature_tree_final_distance_m": 1.43780303001404,
+    "creature_tree_hits": 76,
+    "creature_walk_m": 2.21346665616147,
+    "faces": 2,
+    "floor_contacts": 595,
+    "initial_load_ms": 3106.671,
+    "max_object_build_ms": 173.235,
+    "max_rebase_error_m": 5.39491747986176e-06,
+    "max_upload_ms": 20.3,
+    "max_worker_ms": 2764.1,
+    "peak_resident_meshes": 1219,
+    "peak_tiles": 684,
+    "physics_frames": 595,
+    "player_creature_hits": 73,
+    "player_tree_hits": 115,
+    "protected_files": 3,
+    "publishes": 7,
+    "rebases": 4,
+    "restart_exit": 0,
+    "tree_return_error_m": 3.60887497663498e-08,
+    "unloads": 2,
+    "waiting_frames": 0,
+    "walk_m": 180.278465799987
+  },
+  "coordinate_contract": {
+    "max_error_m": 2.41706720771617e-06,
+    "objects_per_case": 3,
+    "passed": true,
+    "radial_cases": 18
+  },
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.27
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.511
+    },
+    {
+      "name": "surface_adapter_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.807
+    },
+    {
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.561
+    },
+    {
+      "name": "galaxy_visits_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.482
+    },
+    {
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.783
+    },
+    {
+      "name": "surface_adapter_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 37.61
+    },
+    {
+      "name": "surface_adapter_entry_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.542
+    }
+  ],
+  "visual": {
+    "renderer": "gl_compatibility",
+    "device": "Mesa llvmpipe software renderer",
+    "resolution": [
+      1280,
+      720
+    ],
+    "player_on_floor": true,
+    "creature_on_floor": true,
+    "attached_objects": 3
+  }
+}
