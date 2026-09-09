@@ -70,9 +70,11 @@ func _run() -> void:
 	flow.toggle_pause()
 	var before: Dictionary = state.export_state()
 	var original_path: String = saves.save_path
+	var before_autosave: bool = saves.autosave_enabled
 	saves.save_path = "user://missing-travel-parent/blocked.json"
 	_expect(not await flow.travel_to_planet(23757, 0, 15838, b), "Failed departure write reported success.")
 	_expect(Migration.fingerprint(state.export_state()) == Migration.fingerprint(before) and state.active_body_id == a, "Failed departure changed ownership or live state.")
+	_expect(saves.autosave_enabled == before_autosave, "Failed departure disabled later automatic checkpoints.")
 	saves.save_path = original_path
 	_expect(not await flow.travel_to_planet(23757, 0, 15838, "missing-body"), "Unknown destination was invented.")
 	await _until(func() -> bool: return not flow.loading, 150000)

@@ -102,6 +102,7 @@ func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body
 	managed = true
 	var saves: Node = get_node("/root/SaveGameService")
 	var previous_mode: int = scene.process_mode
+	var previous_autosave: bool = saves.autosave_enabled
 	_show_loading("Abreise und Dorfwege werden gesichert …")
 	get_tree().paused = false
 	scene.process_mode = Node.PROCESS_MODE_DISABLED
@@ -109,6 +110,7 @@ func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body
 	var controller: Node = get_tree().get_first_node_in_group(&"tribe_controller")
 	if not await saves.prepare_body_departure(controller):
 		scene.process_mode = previous_mode
+		saves.autosave_enabled = previous_autosave
 		loading = false
 		pause_open = true
 		get_tree().paused = true
