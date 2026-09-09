@@ -3,7 +3,8 @@ extends RefCounted
 const Rules = preload("res://core/progression/behavior_catalog.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
-const SCHEMA: int = 2
+const SCHEMA: int = 3
+const LEGACY_SCHEMA: int = 2
 const COST: Dictionary = {"food": 6, "wood": 4}
 const BUILD_SECONDS: float = 12.0
 const NAV_EXTENT: int = 18
@@ -13,18 +14,18 @@ const MEMBER_RADIUS: float = 22.0
 static func faction_id(campaign: Dictionary, body_id: String) -> String:
 	return Ids.scoped("faction", campaign["player_species_id"], body_id + ":neighbor:0")
 
-static func create(campaign: Dictionary, village: Dictionary, center: Vector3, places: Array[Vector3], foundation: Array = []) -> Dictionary:
+static func create(campaign: Dictionary, village: Dictionary, center: Variant, places: Array, foundation: Array = []) -> Dictionary:
 	var id: String = faction_id(campaign, village["body_id"])
 	var people: Array[Dictionary] = []
 	for index in range(2):
 		people.append({"id": Ids.scoped("object", id, "resident:" + str(index)), "name": "Nachbar " + str(index + 1),
-			"position": Home.vector_array(places[index]), "workplace": Home.vector_array(places[index]), "blocked": false, "walk": 0})
+			"position": Home.place(places[index]), "workplace": Home.place(places[index]), "blocked": false, "walk": 0})
 	if foundation.is_empty():
 		for corner: Vector3 in [Vector3(-1,0,-1), Vector3(1,0,-1), Vector3(-1,0,1), Vector3(1,0,1)]:
-			foundation.append(Home.vector_array(center + corner))
-	return {"schema": SCHEMA, "id": id, "species_id": campaign["player_species_id"], "body_id": village["body_id"],
+			foundation.append(Home.offset_place(Home.place(center), corner))
+	return {"schema": SCHEMA if center is Dictionary else LEGACY_SCHEMA, "id": id, "species_id": campaign["player_species_id"], "body_id": village["body_id"],
 		"village_id": village["id"], "name": "Uferbund", "phase": 1, "technology": {"shelter": 0}, "relation": "neutral",
-		"anchor": Home.vector_array(center), "foundation": foundation.duplicate(true), "members": people, "stock": {"food": 0, "wood": 0},
+		"anchor": Home.place(center), "foundation": foundation.duplicate(true), "members": people, "stock": {"food": 0, "wood": 0},
 		"aid": {"id": Ids.scoped("agreement", id, "first_shelter"), "status": "offered", "received": {"food": 0, "wood": 0},
 			"withdrawn": {"food": 0, "wood": 0}, "returned": {"food": 0, "wood": 0}, "carriers": {}, "shipments": {}, "build_seconds": 0.0, "builders": {}}}
 
@@ -44,7 +45,7 @@ static func begin(data: Dictionary, village: Dictionary, selected: Array) -> Str
 		if member.is_empty() or not member["cargo"].is_empty() or data["aid"]["shipments"].has(id):
 			return "Ausgewählte Bewohner müssen ihre laufende Fracht oder Hilfslieferung zuerst beenden."
 	data["aid"]["status"] = "active"
-	data["schema"] = SCHEMA
+	data["schema"] = SCHEMA if data.anchor is Dictionary else LEGACY_SCHEMA
 	for id: String in selected:
 		var member: Dictionary = resident(village, id)
 		member["order"] = "move"
@@ -61,7 +62,7 @@ static func resident(village: Dictionary, id: String) -> Dictionary:
 			return member
 	return {}
 
-static func target(data: Dictionary, village: Dictionary, member: Dictionary) -> Vector3:
+static func target(data: Dictionary, village: Dictionary, member: Dictionary) -> Variant:
 	var shipment: Dictionary = data["aid"]["shipments"].get(member["id"], {})
 	if shipment.is_empty() or member["order"] == "wait":
 		return Vector3.INF
@@ -74,7 +75,8 @@ static func target(data: Dictionary, village: Dictionary, member: Dictionary) ->
 		shipment["leg"] = "return"
 	if member["stage"] in ["meal", "drink"] and member["cargo"].is_empty():
 		return Vector3.INF
-	return Home.vector(data["anchor"] if shipment["leg"] == "deliver" else village["anchor"])
+	var result: Variant = data["anchor"] if shipment["leg"] == "deliver" else village["anchor"]
+	return Home.vector(result) if result is Array else result
 
 ## Called only after the shared movement controller reached the selected target.
 static func work(data: Dictionary, village: Dictionary, member: Dictionary) -> bool:
@@ -82,8 +84,8 @@ static func work(data: Dictionary, village: Dictionary, member: Dictionary) -> b
 	var shipment: Dictionary = aid["shipments"].get(member["id"], {})
 	if shipment.is_empty() or member["order"] == "wait" or (member["stage"] in ["meal", "drink"] and member["cargo"].is_empty()):
 		return false
-	var point: Vector3 = Home.vector(data["anchor"] if shipment["leg"] == "deliver" else village["anchor"])
-	if Home.vector(member["position"]).distance_to(point) > 2.9:
+	var point: Variant = data["anchor"] if shipment["leg"] == "deliver" else village["anchor"]
+	if Home.distance(member["position"], point) > 2.9:
 		return true
 	var kind: String = shipment["resource"]
 	if not kind.is_empty():
@@ -130,7 +132,7 @@ static func build(data: Dictionary, member_id: String, delta: float) -> bool:
 	if aid["status"] != "building" or not is_finite(delta) or delta <= 0.0:
 		return false
 	var builder: Dictionary = resident(data, member_id)
-	if builder.is_empty() or Home.vector(builder["position"]).distance_to(Home.vector(builder["workplace"])) > 0.75:
+	if builder.is_empty() or Home.distance(builder["position"], builder["workplace"]) > 0.75:
 		return false
 	aid["build_seconds"] = minf(BUILD_SECONDS, float(aid["build_seconds"]) + delta * 0.5)
 	aid["builders"][member_id] = true
@@ -148,11 +150,13 @@ static func progress(data: Dictionary) -> Dictionary:
 	return {"met": aid["status"] == "completed", "text": "%s · Nahrung %d/6 · Holz %d/4 · Mitwirkende %d · Unterkunft %d %%" % [data["name"], aid["received"]["food"], aid["received"]["wood"], aid["carriers"].size(), roundi(float(aid["build_seconds"]) / BUILD_SECONDS * 100)]}
 
 static func has_unsupported_contract(data: Variant) -> bool:
-	return data is Dictionary and Rules.is_newer_version(data.get("schema"), SCHEMA)
+	return data is Dictionary and (Rules.is_newer_version(data.get("schema"), SCHEMA) or (data.get("schema") == SCHEMA and not data.get("anchor") is Dictionary))
 
 static func validate(data: Variant, village: Dictionary, campaign: Dictionary) -> String:
 	if not data is Dictionary or not Rules.is_integer(data.get("schema"), 1, SCHEMA) or village.is_empty():
 		return "Nicht unterstütztes Nachbarlager."
+	if village.anchor is Dictionary and data.schema != SCHEMA: return "Radiales Nachbarlager benötigt Format 3."
+	if data.schema == SCHEMA and not village.anchor is Dictionary: return "Radiales Nachbarlager benötigt einen Kugelheimatort."
 	var id: String = faction_id(campaign, village["body_id"])
 	if data.get("id") != id or data.get("species_id") != campaign["player_species_id"] or data.get("id") == campaign["player_faction_id"] or data.get("body_id") != village["body_id"] or data.get("village_id") != village["id"] or data.get("phase") != 1 or data.get("name") != "Uferbund":
 		return "Nachbarfraktion und eigene Spezies stimmen nicht überein."
@@ -163,7 +167,7 @@ static func validate(data: Variant, village: Dictionary, campaign: Dictionary) -
 	var corners: Array[Vector3] = [Vector3(-1,0,-1), Vector3(1,0,-1), Vector3(-1,0,1), Vector3(1,0,1)]
 	for index in range(4):
 		var point: Variant = data["foundation"][index]
-		if not _point(point, village["anchor"]) or Home.vector(point).distance_to(Home.vector(data["anchor"]) + corners[index]) > 0.75:
+		if not _point(point, village["anchor"]) or Home.distance(point, Home.offset_place(data["anchor"], corners[index])) > 0.75:
 			return "Nachbarunterkunft ohne passende Bodenauflagen."
 	var neighbors: Dictionary = {}
 	for index in range(2):
@@ -227,10 +231,5 @@ static func _number(value: Variant, low: float, high: float) -> bool:
 static func _received_all(aid: Dictionary) -> bool:
 	return int(aid["received"]["food"]) == 6 and int(aid["received"]["wood"]) == 4
 
-static func _point(value: Variant, anchor: Array, limit: float = MEMBER_RADIUS) -> bool:
-	if not value is Array or value.size() != 3:
-		return false
-	for component: Variant in value:
-		if not _number(component, -1e7, 1e7):
-			return false
-	return Home.vector(value).distance_to(Home.vector(anchor)) <= limit
+static func _point(value: Variant, anchor: Variant, limit: float = MEMBER_RADIUS) -> bool:
+	return Home.local_place(value, anchor, limit)

@@ -7,7 +7,9 @@ const FIELD: String = "domesticated_animals"
 const CAPACITY: int = 6
 
 static func create(campaign: Dictionary, body: Dictionary) -> Dictionary:
-	return {"schema": SCHEMA, "registry": State.empty_registry(campaign["id"], body["id"]), "sources": {}}
+	var registry: Dictionary = State.empty_registry(campaign["id"], body["id"])
+	if body.surface_mode == State.Home.Cube.MODE: registry.schema = State.SCHEMA
+	return {"schema": SCHEMA, "registry": registry, "sources": {}}
 
 static func lookup(state: Node, object_id: String) -> Dictionary:
 	var body: Dictionary = state.campaign.data["bodies"].get(str(state.get_world_seed()), {})
@@ -78,6 +80,7 @@ static func validate_body(body: Dictionary, campaign: Dictionary) -> String:
 static func unsupported(body: Dictionary) -> bool:
 	if not body.get(FIELD) is Dictionary: return false
 	var value: Dictionary = body[FIELD]
+	if value.get("registry") is Dictionary and value.registry.get("schema") == State.SCHEMA and body.get("surface_mode") != State.Home.Cube.MODE: return true
 	return not State.integer(value.get("schema"), 1, SCHEMA) or (value.get("registry") is Dictionary and not State.integer(value["registry"].get("schema"), 1, State.SCHEMA))
 
 static func snapshot_value(value: Variant, depth: int = 0) -> bool:

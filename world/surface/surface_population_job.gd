@@ -12,6 +12,10 @@ var body: Dictionary
 var cell: Dictionary
 var result: Dictionary = {}
 var elapsed_usec: int = 0
+var surface: RefCounted
+
+func prepare() -> void:
+	surface = Factory.create(body)
 
 
 static func level_for(radius: float) -> int:
@@ -37,7 +41,7 @@ static func nearby(body_value: Dictionary, address: Dictionary) -> Dictionary:
 
 func run() -> void:
 	var started: int = Time.get_ticks_usec()
-	var surface: RefCounted = Factory.create(body)
+	if surface == null: surface = Factory.create(body) # Synchronous tooling.
 	var u: float = -1.0 + cell.x * cell.step
 	var v: float = -1.0 + cell.y * cell.step
 	var center: Dictionary = Cube.address(body.id, cell.face, u + cell.step * 0.5, v + cell.step * 0.5)
@@ -62,7 +66,7 @@ func run() -> void:
 				u + random.randf_range(0.05, 0.95) * cell.step, v + random.randf_range(0.05, 0.95) * cell.step)
 			var sample: Dictionary = surface.sample(address)
 			var up: Vector3 = Cube.vector(Cube.direction(address.face, address.u, address.v))
-			if sample.height < 0.6 or sample.normal.dot(up) < 0.87:
+			if sample.water or sample.height < sample.water_level + 0.6 or sample.normal.dot(up) < 0.87:
 				continue
 			address.height = snappedf(sample.height, 0.5) - 0.1
 			var position: Vector3 = Cube.local_position(Cube.cartesian(address, body.radius), anchor)

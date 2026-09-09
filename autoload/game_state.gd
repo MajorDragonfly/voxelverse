@@ -59,6 +59,8 @@ func _process(delta: float) -> void:
 
 
 func simulation_delta(delta: float) -> float:
+	var flow := get_node_or_null("/root/SessionFlow")
+	if flow != null and flow.loading: return 0.0
 	return maxf(delta, 0.0) * float(campaign.data.get("time_scale", 1.0))
 
 
@@ -71,6 +73,16 @@ func set_simulation_speed(speed: float) -> bool:
 
 func get_current_body() -> Dictionary:
 	return campaign.body_for_seed(get_world_seed(), get_system_seed())
+
+
+## Runtime services share the campaign's current record. Snapshot callers keep
+## using get_current_body(); physics must not deep-copy all frozen fauna bodies.
+func get_current_body_record() -> Dictionary:
+	campaign.ensure_initialized()
+	var key: String = str(get_world_seed())
+	if not campaign.data.bodies.has(key):
+		campaign.body_for_seed(get_world_seed(), get_system_seed())
+	return campaign.data.bodies.get(key, {})
 
 
 func campaign_scene() -> String:

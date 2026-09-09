@@ -159,7 +159,7 @@ func _run() -> void:
 	var prior: Dictionary = tribe.village().duplicate(true)
 	_expect(tribe.receive_milk(receipt) and tribe.village() == prior, "Receipt retry duplicated milk.")
 	_expect(saves.save_now(), "Final D3 snapshot did not save: " + saves.last_error)
-	evidence = {"schema": Model.SCHEMA, "animal_id": Lab.ANIMAL, "pen_id": pen_id, "cycles": _record()["cycles"], "milk_received": tribe.village()["economy"]["milk_received"], "stock": tribe.village()["stock"].duplicate(), "care": tribe.village()["husbandry"].duplicate(true)}
+	evidence = {"schema": tribe.village()["schema"], "animal_id": Lab.ANIMAL, "pen_id": pen_id, "cycles": _record()["cycles"], "milk_received": tribe.village()["economy"]["milk_received"], "stock": tribe.village()["stock"].duplicate(), "care": tribe.village()["husbandry"].duplicate(true)}
 	var evidence_file := FileAccess.open("user://d3-village-lab/evidence.json", FileAccess.WRITE)
 	evidence_file.store_string(JSON.stringify(evidence, "\t"))
 	evidence_file.close()

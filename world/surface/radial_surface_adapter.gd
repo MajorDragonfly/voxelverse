@@ -1,8 +1,10 @@
 extends RefCounted
 
 ## M1d's bounded surface contract. Never turn absolute metre positions into
-## Vector3 before subtracting the origin. Nodes must be unscaled root siblings.
+## Vector3 before subtracting the origin. Bind a root once, never both an
+## ancestor and its descendants; registered roots must have unscaled parents.
 const Cube = preload("res://world/space/cube_sphere.gd")
+signal origin_shifted(shift: Vector3)
 var terrain: Node3D
 var attached: Dictionary = {}
 var max_rebase_error_m: float = 0.0
@@ -25,7 +27,7 @@ func to_local(address: Dictionary) -> Vector3:
 
 func location(node: Node3D) -> Dictionary:
 	return Cube.from_cartesian(terrain.surface.body.id,
-		Cube.global_position(node.position, terrain.origin), terrain.surface.body.radius)
+		Cube.global_position(node.global_position, terrain.origin), terrain.surface.body.radius)
 
 
 func up_at(address: Dictionary) -> Vector3:
@@ -53,8 +55,8 @@ func bind(id: String, node: Node3D, address: Dictionary, forward: Vector3 = Vect
 
 
 func place(node: Node3D, address: Dictionary, forward: Vector3 = Vector3.FORWARD) -> void:
-	node.position = to_local(address)
-	node.basis = frame_at(address, forward)
+	node.global_position = to_local(address)
+	node.global_basis = frame_at(address, forward)
 	if node is CharacterBody3D:
 		node.up_direction = up_at(address)
 
@@ -89,10 +91,14 @@ func attempt_step(body: CharacterBody3D, motion: Vector3) -> void:
 
 func _on_origin_changed(previous: Array, current: Array) -> void:
 	for node: Node3D in attached.values():
-		var point: Array = Cube.global_position(node.position, previous)
-		node.position = Cube.local_position(point, current)
-		var after: Array = Cube.global_position(node.position, current)
+		var point: Array = Cube.global_position(node.global_position, previous)
+		node.global_position = Cube.local_position(point, current)
+		if node.has_method("surface_origin_shifted"):
+			node.surface_origin_shifted(Cube.local_position(previous, current))
+		var after: Array = Cube.global_position(node.global_position, current)
 		max_rebase_error_m = maxf(max_rebase_error_m, Cube.local_position(after, point).length())
+
+	origin_shifted.emit(Cube.local_position(previous, current))
 
 
 func close() -> void:

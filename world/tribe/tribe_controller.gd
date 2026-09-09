@@ -10,6 +10,7 @@ const Shelters = preload("res://world/tribe/village_shelters.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
 const Navigation = preload("res://world/tribe/village_navigation.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
 const HomeState = preload("res://world/home_group/home_group_state.gd")
 const Companion = preload("res://world/home_group/home_companion.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
@@ -55,6 +56,8 @@ var _stalls: Dictionary = {}
 signal community_event(kind: StringName, details: Dictionary)
 
 func _ready() -> void:
+	var surface: RefCounted = Space.adapter(self)
+	if surface != null: surface.origin_shifted.connect(surface_origin_shifted)
 	husbandry.controller = self
 	home = get_parent().get_node("HomeGroup")
 	_state = get_node("/root/GameState")
@@ -74,6 +77,8 @@ func _ready() -> void:
 	add_child(domestication)
 
 func _process(delta: float) -> void:
+	var flow := get_node_or_null("/root/SessionFlow")
+	if flow != null and flow.loading: return
 	if not is_instance_valid(player):
 		player = get_tree().get_first_node_in_group(&"player") as CharacterBody3D
 	if player == null:
@@ -87,9 +92,9 @@ func _process(delta: float) -> void:
 		_activate()
 	if is_active():
 		var pan := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), 0, float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
-		_focus += pan * delta * 10.0
+		_focus += Space.frame(self, anchor()) * pan * delta * 10.0
 		var offset: Vector3 = _focus - anchor()
-		offset.y = 0
+		offset = offset.slide(Space.up(self, anchor()))
 		_focus = anchor() + offset.limit_length(NeighborRuntime.Model.SITE_RADIUS if body().has("tribal_neighbor") else 10.0)
 		_update_camera()
 	_timer -= delta
@@ -113,7 +118,7 @@ func body() -> Dictionary:
 	var key: String = str(_state.get_world_seed())
 	# This accessor already returns the authoritative record. Avoid deep-copying
 	# its growing exploration ledger just to ensure that the body exists.
-	if not _state.campaign.data["bodies"].has(key): _state.get_current_body()
+	if not _state.campaign.data["bodies"].has(key): _state.get_current_body_record()
 	return _state.campaign.data["bodies"][key]
 
 func village() -> Dictionary:
@@ -121,10 +126,11 @@ func village() -> Dictionary:
 	return value if value is Dictionary else {}
 
 func anchor() -> Vector3:
-	return HomeState.vector(village()["anchor"])
+	return Space.resolve(self, village()["anchor"])
 
 func is_active() -> bool:
-	return _active and not _transaction and not get_tree().paused and int(_state.current_phase) == 1 and _campaign_id == str(_state.campaign.data["id"])
+	var flow := get_node_or_null("/root/SessionFlow")
+	return _active and not _transaction and not get_tree().paused and (flow == null or not flow.loading) and int(_state.current_phase) == 1 and _campaign_id == str(_state.campaign.data["id"])
 
 func blockers() -> Array[String]:
 	if int(_state.current_phase) != 0:
@@ -140,7 +146,7 @@ func blockers() -> Array[String]:
 	if player.global_position.distance_to(home.home_position()) > 5.0:
 		return ["Kehre zum Heimatplatz zurück, um mit deiner Gruppe fortzuschreiten."]
 	for member: Dictionary in group["members"]:
-		if not home.actors.has(member["id"]) or HomeState.vector(member["position"]).distance_to(home.home_position()) > 6.0:
+		if not home.actors.has(member["id"]) or Space.resolve(self, member["position"]).distance_to(home.home_position()) > 6.0:
 			return ["Rufe beide Gefährten mit N → Heimkehren zum Heimatplatz."]
 	if not _state.campaign.data["pending_transition"].is_empty() or _transaction:
 		return ["Ein anderer Übergang wird noch abgeschlossen."]
@@ -184,20 +190,24 @@ func _activate() -> void:
 		status = problem
 		return
 	# Wait for terrain collision and the home controller's reference to the player.
-	if home.player == null or not home.has_ground(HomeState.vector(village()["anchor"])):
+	if home.player == null or not home.has_ground(Space.resolve(self, village()["anchor"])):
 		return
-	navigation.rebuild(home, HomeState.vector(village()["anchor"]), village(), navigation_extent())
+	navigation.rebuild(home, Space.resolve(self, village()["anchor"]), village(), navigation_extent())
 	if navigation.graph.get_point_count() == 0:
 		return
 	Model.upgrade(village())
-	navigation.rebuild(home, HomeState.vector(village()["anchor"]), village(), navigation_extent())
+	navigation.rebuild(home, Space.resolve(self, village()["anchor"]), village(), navigation_extent())
 	# The home controller refreshes on a slower tick. Install the visible nest
 	# with this runtime, so a cold start cannot briefly expose the default home.
-	get_parent().global_position = HomeState.vector(village()["anchor"])
+	get_parent().global_position = Space.resolve(self, village()["anchor"])
 	_campaign_id = str(_state.campaign.data["id"])
 	_world_seed = _state.get_world_seed()
-	_player_processing = {"process": player.is_processing(), "physics": player.is_physics_processing(), "input": player.is_processing_input(), "unhandled": player.is_processing_unhandled_input(), "collision_layer": player.collision_layer}
+	_player_processing = {"process": player.is_processing(), "physics": player.is_physics_processing(), "input": player.is_processing_input(), "unhandled": player.is_processing_unhandled_input(), "collision_layer": player.collision_layer, "collision_mask": player.collision_mask}
 	player.collision_layer = 0
+	# The player is now a resident on the same navigation graph as companions.
+	# Use their terrain/obstacle mask; a waiting animal must not pin only this
+	# one carrier to a route which every other resident can traverse.
+	player.collision_mask = 1 | 2
 	player.set_process(false)
 	player.set_physics_process(false)
 	player.set_process_input(false)
@@ -214,7 +224,7 @@ func _activate() -> void:
 			get_parent().get_parent().add_child(actor)
 			actor.setup(self, member, blueprint, i)
 			actor.set_physics_process(false)
-		actor.global_position = HomeState.vector(member["position"])
+		actor.global_position = Space.resolve(self, member["position"])
 		actor.velocity = Vector3.ZERO
 		actors[member["id"]] = actor
 		selected.append(str(member["id"]))
@@ -251,6 +261,7 @@ func _deactivate() -> void:
 	neighbors.clear_runtime()
 	for actor: Node in actors.values():
 		if is_instance_valid(actor) and actor != player:
+			Space.untrack(actor)
 			actor.queue_free()
 	actors.clear()
 	selected.clear()
@@ -259,10 +270,13 @@ func _deactivate() -> void:
 	placement = ""
 	_stalls.clear()
 	if is_instance_valid(camera):
+		Space.untrack(camera)
 		camera.queue_free()
 	if is_instance_valid(_visuals):
+		Space.untrack(_visuals)
 		_visuals.queue_free()
 	if is_instance_valid(_shelters):
+		Space.untrack(_shelters)
 		_shelters.queue_free()
 	if is_instance_valid(player):
 		for child_name: String in ["TribeSelection", "TribeCargo"]:
@@ -270,6 +284,7 @@ func _deactivate() -> void:
 			if indicator != null:
 				indicator.queue_free()
 		player.collision_layer = int(_player_processing.get("collision_layer", 1))
+		player.collision_mask = int(_player_processing.get("collision_mask", 5))
 		player.set_process(_player_processing.get("process", true))
 		player.set_physics_process(_player_processing.get("physics", true))
 		player.set_process_input(_player_processing.get("input", true))
@@ -284,8 +299,8 @@ func _deactivate() -> void:
 func _update_camera() -> void:
 	camera.size = _zoom
 	camera.v_offset = -_zoom * 0.16
-	camera.global_position = _focus + Vector3(0, 22, 17)
-	camera.look_at(_focus)
+	camera.global_position = Space.offset(self, _focus, Vector3(0, 22, 17))
+	camera.look_at(_focus, Space.up(self, _focus))
 
 func zoom(amount: float) -> void:
 	_zoom = clampf(_zoom + amount, 16.0, 40.0)
@@ -319,7 +334,7 @@ func screen_select(rect: Rect2, additive: bool) -> void:
 		selected.clear()
 	for identity: String in actors:
 		var actor: Node3D = actors[identity]
-		if not camera.is_position_behind(actor.global_position) and rect.has_point(camera.unproject_position(actor.global_position + Vector3.UP)) and identity not in selected:
+		if not camera.is_position_behind(actor.global_position) and rect.has_point(camera.unproject_position(actor.global_position + Space.up(self, actor.global_position))) and identity not in selected:
 			selected.append(identity)
 	panel.refresh()
 
@@ -340,7 +355,7 @@ func screen_command(position: Vector2) -> void:
 	for kind: String in village()["deposits"]:
 		if kind in ["water", "fiber"] and not village()["economy"]["stations"].has("well" if kind == "water" else "fiberbed"):
 			continue
-		if target.distance_to(HomeState.vector(village()["deposits"][kind]["position"])) < 1.8:
+		if target.distance_to(Space.resolve(self, village()["deposits"][kind]["position"])) < 1.8:
 			issue_order(kind)
 			return
 	issue_order("move", target)
@@ -356,7 +371,7 @@ func issue_order(order: String, destination: Vector3 = Vector3.ZERO, movement_li
 			_resolve_order(order, false)
 			return false
 		if not village()["project"].is_empty() and village()["project"]["kind"] == order:
-			destination = HomeState.vector(village()["project"]["position"])
+			destination = Space.resolve(self, village()["project"]["position"])
 		else:
 			placement = order
 			status = "Rechtsklick auf einen freien Bauplatz · Esc bricht die Platzierung ab."
@@ -417,13 +432,13 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 			data["project"] = {"kind": order, "progress": 0.0}
 			if order in Housing.BUILDS:
 				var index: int = data["husbandry"]["pens"].size() if order == "pen" else data["housing"]["homes"].size()
-				data["project"].merge(Housing.site(data, order, HomeState.vector_array(destination), index))
+				data["project"].merge(Housing.site(data, order, Space.encode(self, destination), index))
 				data["project"]["materials"] = costs[order].duplicate()
 				data["project"]["delivered_materials"] = {}
 				for kind: String in costs[order]:
 					data["project"]["delivered_materials"][kind] = 0
 			elif order in Economy.STATIONS:
-				data["project"]["position"] = HomeState.vector_array(destination)
+				data["project"]["position"] = Space.encode(self, destination)
 	for identity: String in selected:
 		var member: Dictionary = member_record(identity)
 		var next: String = order
@@ -445,7 +460,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 		# Changing tasks never discards a carried unit of material.
 		member["stage"] = "return" if member["cargo"] != "" else "outbound"
 		if order == "move":
-			member["destination"] = HomeState.vector_array(_workplace(destination, selected.find(identity)) if selected.size() > 1 else destination)
+			member["destination"] = Space.encode(self, _workplace(destination, selected.find(identity)) if selected.size() > 1 else destination)
 	_transaction = true
 	var success: bool = _saves.save_now()
 	if not success:
@@ -499,7 +514,7 @@ func _physics_process(delta: float) -> void:
 		var target: Vector3 = actor.global_position
 		var construction: bool = false
 		if member["construction_id"] != "" and order != "wait":
-			target = HomeState.vector(village()["project"]["entrance"])
+			target = Space.resolve(self, village()["project"]["entrance"])
 			construction = true
 		elif member["care_pen_id"] != "" and order != "wait":
 			target = husbandry.cargo_target(member)
@@ -510,21 +525,21 @@ func _physics_process(delta: float) -> void:
 			target = anchor()
 		elif order == "milk":
 			var incoming: Array = village()["economy"]["incoming"]
-			target = HomeState.vector(incoming[0]["position"]) if not incoming.is_empty() and not Economy.at_target(village(), member, "milk") else anchor()
+			target = Space.resolve(self, incoming[0]["position"]) if not incoming.is_empty() and not Economy.at_target(village(), member, "milk") else anchor()
 		elif order in Economy.RESOURCES or order in ["supply", "provision"]:
 			var kind: String = Economy.gather_kind(village(), member)
-			target = HomeState.vector(village()["deposits"][kind]["position"]) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
+			target = Space.resolve(self, village()["deposits"][kind]["position"]) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
 		elif order in ["feed", "drink", "tool", "build", "tend"]:
 			target = anchor()
 		elif order in Housing.BUILDS and village()["project"].get("kind") == order:
 			construction = not Housing.pending(village()["project"])
-			target = HomeState.vector(village()["project"]["entrance"]) if construction else anchor()
+			target = Space.resolve(self, village()["project"]["entrance"]) if construction else anchor()
 		elif order == "garden":
-			target = HomeState.vector(village()["deposits"]["food"]["position"])
+			target = Space.resolve(self, village()["deposits"]["food"]["position"])
 		elif order in Economy.STATIONS and not village()["project"].is_empty():
-			target = HomeState.vector(village()["project"]["position"])
+			target = Space.resolve(self, village()["project"]["position"])
 		elif order == "move":
-			target = HomeState.vector(member["destination"])
+			target = Space.resolve(self, member["destination"])
 		var neighbor_target: Vector3 = neighbors.target(member)
 		if neighbor_target.is_finite():
 			target = neighbor_target
@@ -532,7 +547,7 @@ func _physics_process(delta: float) -> void:
 			var index: int = village()["members"].find(member)
 			target = _construction_workplace(target, index) if construction else _workplace(target, index)
 		var arrived: bool = _walk(actor, str(member["id"]), target, delta, minf(float(member["hunger"]), float(member["hydration"])))
-		member["position"] = HomeState.vector_array(actor.global_position)
+		member["position"] = Space.encode(self, actor.global_position)
 		if actor == player:
 			player.current_hunger = float(member["hunger"])
 		if arrived:
@@ -545,13 +560,13 @@ func _physics_process(delta: float) -> void:
 	get_node("/root/ProgressionService").record_tribal_tick(simulation_delta, self)
 
 func _construction_workplace(entrance: Vector3, index: int) -> Vector3:
-	var target: Vector3 = navigation.snap(entrance + Vector3(index % 3 - 1, 0, index / 3))
+	var target: Vector3 = navigation.snap(Space.offset(self, entrance, Vector3(index % 3 - 1, 0, index / 3)))
 	return target if target.distance_to(entrance) < 2.5 and not navigation.route(entrance, target).is_empty() else entrance
 
 func _workplace(center: Vector3, index: int) -> Vector3:
 	# Give residents separate work positions, keeping them visible/selectable.
 	var offsets: Array[Vector3] = [Vector3(-1.5, 0, 1), Vector3(1.5, 0, 1), Vector3(0, 0, -1.6), Vector3(-1.5, 0, -1), Vector3(1.5, 0, -1), Vector3(0, 0, 2)]
-	var target: Vector3 = navigation.snap(center + offsets[index % offsets.size()])
+	var target: Vector3 = navigation.snap(Space.offset(self, center, offsets[index % offsets.size()]))
 	if target.is_finite() and target.distance_to(center) < 2.8 and not navigation.route(center, target).is_empty():
 		return target
 	return center
@@ -563,8 +578,8 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 		record["blocked"] = true
 		status = "Ein Bewohner wartet auf geladenen Boden."
 		return false
-	var offset: Vector3 = target - actor.global_position
-	offset.y = 0
+	Space.orient(actor)
+	var offset: Vector3 = (target - actor.global_position).slide(actor.up_direction)
 	var arrived: bool = offset.length() < MOVEMENT_ARRIVAL_RADIUS
 	var direction := Vector3.ZERO
 	var lookahead: float = 1.2
@@ -575,7 +590,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 		var route: PackedVector3Array = _routes.get(identity, PackedVector3Array())
 		while not route.is_empty():
 			var next_offset: Vector3 = route[0] - actor.global_position
-			next_offset.y = 0
+			next_offset = next_offset.slide(actor.up_direction)
 			if next_offset.length() > 0.25:
 				direction = next_offset.normalized()
 				# Stop the probe at the next waypoint; looking past a turn can
@@ -591,18 +606,12 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 			status = "Die Bewohner setzen ihre Aufträge fort."
 	record["blocked"] = not arrived and direction == Vector3.ZERO
 	var speed: float = 3.8 * (0.6 if hunger < 20.0 else 1.0)
-	actor.velocity.x = direction.x * speed
-	actor.velocity.z = direction.z * speed
-	actor.velocity.y = -0.5 if actor.is_on_floor() else maxf(-12.0, actor.velocity.y - 20.0 * delta)
-	var motion: Vector3 = direction * speed * delta
-	if actor.is_on_floor() and direction != Vector3.ZERO and actor.test_move(actor.global_transform, motion):
-		var raised: Transform3D = actor.global_transform.translated(Vector3.UP * 0.55)
-		if not actor.test_move(actor.global_transform, Vector3.UP * 0.55) and not actor.test_move(raised, motion) and actor.test_move(raised.translated(motion), Vector3.DOWN * 0.7):
-			actor.global_transform = raised
+	actor.velocity = direction * speed + actor.up_direction * (-0.5 if actor.is_on_floor() else maxf(-12.0, actor.velocity.dot(actor.up_direction) - 20.0 * delta))
+	if actor.is_on_floor(): Space.step(actor, direction * speed * delta, 0.55, 0.15)
 	var before_motion: Vector3 = actor.global_position
 	actor.move_and_slide()
 	var moved: Vector3 = actor.global_position - before_motion
-	moved.y = 0
+	moved = moved.slide(actor.up_direction)
 	if not arrived and direction != Vector3.ZERO and moved.length() < speed * delta * 0.1:
 		_stalls[identity] = float(_stalls.get(identity, 0.0)) + delta
 		if float(_stalls[identity]) >= 0.75:
@@ -614,7 +623,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 	if direction != Vector3.ZERO:
 		var visual: Node3D = actor.get_node_or_null("CreatureRuntimeVisual")
 		if visual != null:
-			visual.rotation.y = lerp_angle(visual.rotation.y, atan2(-direction.x, -direction.z), minf(delta * 7.0, 1.0))
+			visual.rotation.y = lerp_angle(visual.rotation.y, atan2(-(actor.global_basis.inverse() * direction).x, -(actor.global_basis.inverse() * direction).z), minf(delta * 7.0, 1.0))
 	return arrived
 
 func _effective_order(member: Dictionary) -> String:
@@ -633,7 +642,7 @@ func _perform_work(member: Dictionary, delta: float) -> void:
 		return
 	if member["construction_id"] != "":
 		var project: Dictionary = data["project"]
-		if HomeState.vector(member["position"]).distance_to(HomeState.vector(project["entrance"])) <= 3.0:
+		if Space.resolve(self, member["position"]).distance_to(Space.resolve(self, project["entrance"])) <= 3.0:
 			project["delivered_materials"][member["cargo"]] += 1
 			member["cargo"] = ""
 			member["construction_id"] = ""
@@ -667,7 +676,7 @@ func _perform_work(member: Dictionary, delta: float) -> void:
 		if incoming.is_empty() or Economy.at_target(data, member, "milk"):
 			return
 		# A batch may change while another carrier is walking. Recheck arrival.
-		if HomeState.vector(member["position"]).distance_to(HomeState.vector(incoming[0]["position"])) > 3.0:
+		if Space.resolve(self, member["position"]).distance_to(Space.resolve(self, incoming[0]["position"])) > 3.0:
 			return
 		incoming[0]["remaining"] -= 1
 		if int(incoming[0]["remaining"]) == 0:
@@ -682,7 +691,7 @@ func _perform_work(member: Dictionary, delta: float) -> void:
 		var deposit: Dictionary = data["deposits"][kind]
 		if int(deposit["remaining"]) == 0:
 			return # Keep ownership of work across empty sources and full stores.
-		if HomeState.vector(member["position"]).distance_to(HomeState.vector(deposit["position"])) > 3.0:
+		if Space.resolve(self, member["position"]).distance_to(Space.resolve(self, deposit["position"])) > 3.0:
 			return
 		member["work"] = minf(4.0, float(member["work"]) + delta * _work_rate(member))
 		if float(member["work"]) >= 3.0:
@@ -703,7 +712,7 @@ func _perform_work(member: Dictionary, delta: float) -> void:
 			return
 		if order in Housing.BUILDS:
 			if Housing.pending(project):
-				if HomeState.vector(member["position"]).distance_to(anchor()) <= 3.0:
+				if Space.resolve(self, member["position"]).distance_to(anchor()) <= 3.0:
 					for kind: String in project["materials"]:
 						if int(project["materials"][kind]) > 0:
 							project["materials"][kind] -= 1
@@ -713,7 +722,7 @@ func _perform_work(member: Dictionary, delta: float) -> void:
 							_changed()
 							break
 				return
-			if not Housing.supplied(project) or HomeState.vector(member["position"]).distance_to(HomeState.vector(project["entrance"])) > 3.0:
+			if not Housing.supplied(project) or Space.resolve(self, member["position"]).distance_to(Space.resolve(self, project["entrance"])) > 3.0:
 				return
 		project["progress"] = minf(20.0, float(project["progress"]) + delta * _work_rate(member))
 		if float(project["progress"]) >= float(Model.WORK.get(order, 15.0)):
@@ -799,7 +808,7 @@ func receive_milk(batch: Dictionary) -> bool:
 	# now blocked or the milk has already been consumed.
 	if problem.is_empty() and village() == before:
 		return true
-	if problem.is_empty() and navigation.route(anchor(), HomeState.vector(batch["position"])).is_empty():
+	if problem.is_empty() and navigation.route(anchor(), Space.resolve(self, batch["position"])).is_empty():
 		problem = "Die Milchabholstelle ist nicht erreichbar."
 	if not problem.is_empty():
 		body()["tribe"] = before
@@ -868,9 +877,9 @@ func _grow_residents(delta: float) -> void:
 		return
 	var location := Vector3.INF
 	for shelter: Dictionary in village()["housing"]["homes"]:
-		var entrance: Vector3 = HomeState.vector(shelter["entrance"])
+		var entrance: Vector3 = Space.resolve(self, shelter["entrance"])
 		var candidate: Vector3 = navigation.snap(entrance)
-		if candidate.distance_to(entrance) > 0.45 or navigation.route(anchor(), candidate).is_empty() or not home._clear_space(candidate + Vector3.UP * 0.78):
+		if candidate.distance_to(entrance) > 0.45 or navigation.route(anchor(), candidate).is_empty() or not home._clear_space(candidate + Space.up(self, candidate) * 0.78):
 			continue
 		var occupied: bool = false
 		for actor: Node3D in actors.values():
@@ -882,7 +891,7 @@ func _grow_residents(delta: float) -> void:
 		status = "Dorfwachstum wartet auf einen freien, erreichbaren Eingang."
 		return
 	var before: Dictionary = village().duplicate(true)
-	var member: Dictionary = Housing.add_resident(village(), location)
+	var member: Dictionary = Housing.add_resident(village(), Space.encode(self, location))
 	if not _save_economy(before):
 		_growth_retry = 5.0
 		return
@@ -905,3 +914,14 @@ func navigation_extent() -> int:
 
 func map_focus() -> Vector3:
 	return _focus
+
+func surface_origin_shifted(shift: Vector3) -> void:
+	_focus += shift
+	navigation.surface_origin_shifted(shift)
+	for id in _goals: _goals[id] += shift
+	for id in _routes:
+		var route: PackedVector3Array = _routes[id]
+		for i in range(route.size()): route[i] += shift
+		_routes[id] = route
+	if is_instance_valid(camera): camera.global_position += shift
+	if is_instance_valid(domestication): domestication.surface_origin_shifted(shift)

@@ -16,7 +16,8 @@ static func ensure(state: Node) -> Dictionary:
 	var body_copy: Dictionary = state.get_current_body()
 	var body: Dictionary = state.campaign.data["bodies"][str(int(body_copy["seed"]))]
 	if body.has("fauna_catalog"):
-		return body["fauna_catalog"] if validate(body["fauna_catalog"], body).is_empty() else {}
+		var context: Dictionary = preload("res://core/campaign/surface_context.gd").descriptor(body) if body.get("surface_mode") == Surface.Cube.MODE else body
+		return body["fauna_catalog"] if validate(body["fauna_catalog"], context).is_empty() else {}
 	if not eligible(body):
 		return {}
 	var used: Dictionary = {}
@@ -48,7 +49,7 @@ static func create_surface(body: Dictionary, anchor: Dictionary, used_seeds: Dic
 	if not Surface.eligible(body) or not Surface.location(anchor, str(body.id)): return {}
 	var catalog: Dictionary = create(body, used_seeds)
 	catalog.schema = Surface.SCHEMA
-	catalog.surface = {"schema": 1, "mode": Surface.Cube.MODE, "generation": Surface.GENERATION,
+	catalog.surface = {"schema": 1, "mode": Surface.Cube.MODE, "generation": body.surface_generation,
 		"radius": body.radius, "terrain_revision": body.terrain_revision, "anchor": Surface.canonical(anchor)}
 	return catalog
 
@@ -67,9 +68,9 @@ static func cell_key(habitat: Dictionary) -> String:
 static func has_unsupported(value: Variant) -> bool:
 	if not value is Dictionary:
 		return false
-	if not Contract.integer(value.get("schema"), 1, Surface.SCHEMA) or value.get("generator_version") != Contract.GENERATOR_VERSION:
+	if not Contract.integer(value.get("schema"), 1, Surface.MIGRATED_SCHEMA) or value.get("generator_version") != Contract.GENERATOR_VERSION:
 		return true
-	if value.get("schema") == Surface.SCHEMA and Surface.unsupported(value): return true
+	if value.get("schema", 0) >= Surface.SCHEMA and Surface.unsupported(value): return true
 	if value.has("habitat_recovery") and Recovery.unsupported(value["habitat_recovery"]): return true
 	if not value.get("species") is Array: return false
 	for entry in value.get("species", []):
@@ -114,7 +115,17 @@ static func validate(value: Variant, body: Dictionary) -> String:
 		if not problem.is_empty(): return problem
 		groups.append(entry["group"])
 		identities.append(entry["id"])
-	if value["schema"] == Surface.SCHEMA: return Surface.validate(value, body, identities)
+	if value["schema"] >= Surface.SCHEMA:
+		if value["schema"] == Surface.MIGRATED_SCHEMA:
+			var archive: Variant = value.get("migration_source")
+			if not archive is Dictionary or archive.get("schema") != 1 or not archive.get("catalog") is Dictionary or archive.catalog.get("schema") != 1 or archive.catalog.has("migration_source"): return "Invalid migrated catalog archive."
+			var old_body: Dictionary = {"id": body.id, "seed": body.seed, "surface_mode": "legacy_plane_v9"}
+			var original_problem: String = validate(archive.catalog, old_body)
+			if not original_problem.is_empty(): return original_problem
+			for entry: Dictionary in value.species:
+				var old_entry: Dictionary = species_for(archive.catalog, entry.id)
+				if old_entry.is_empty() or BodyEvidence.fingerprint(entry) != BodyEvidence.fingerprint(old_entry): return "Migrated species body was replaced."
+		return Surface.validate(value, body, identities)
 	var keys: Array = []
 	var represented: Array = []
 	for habitat in value["habitats"]:

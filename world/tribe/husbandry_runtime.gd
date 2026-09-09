@@ -2,6 +2,7 @@ extends RefCounted
 ## Read-only D1/D2 bridge and village-owned transport/production transactions.
 const Source = preload("res://world/tribe/husbandry_source.gd")
 const H = preload("res://world/tribe/village_husbandry.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 var controller: Node
 var source := Source.new()
@@ -31,9 +32,9 @@ func attendance(p: Dictionary, identity: String = "") -> Dictionary:
 	if not record.is_empty() and not H.matches(record, animal, result["recipe"]):
 		return {"error": "Art oder Körper des Milchtieres hat sich geändert."}
 	var actor: Node3D = result["actor"]
-	if animal["order"] not in ["wait", "home"] or actor.global_position.distance_to(Home.vector(p["position"])) > 1.8:
+	if animal["order"] not in ["wait", "home"] or actor.global_position.distance_to(Space.resolve(controller, p["position"])) > 1.8:
 		return {"error": "Das Tier muss am Tierplatz bleiben."}
-	if not controller.home.has_ground(actor.global_position) or not controller.home._dry(actor.global_position) or controller.navigation.route(controller.anchor(), Home.vector(p["entrance"])).is_empty():
+	if not controller.home.has_ground(actor.global_position) or not controller.home._dry(actor.global_position) or controller.navigation.route(controller.anchor(), Space.resolve(controller, p["entrance"])).is_empty():
 		return {"error": "Tierplatz oder Zugang ist momentan nicht erreichbar."}
 	return result
 
@@ -69,10 +70,10 @@ func release(pen_id: String) -> bool:
 
 func cargo_target(member: Dictionary) -> Vector3:
 	var p: Dictionary = H.pen(controller.village(), member["care_pen_id"])
-	return Home.vector(p["entrance"]) if not p.is_empty() and attendance(p)["error"].is_empty() else controller.anchor()
+	return Space.resolve(controller, p["entrance"]) if not p.is_empty() and attendance(p)["error"].is_empty() else controller.anchor()
 
 func pickup(member: Dictionary) -> void:
-	if Home.vector(member["position"]).distance_to(controller.anchor()) > 3.0:
+	if Space.resolve(controller, member["position"]).distance_to(controller.anchor()) > 3.0:
 		return
 	var data: Dictionary = controller.village()
 	for p: Dictionary in data["husbandry"]["pens"]:
@@ -89,7 +90,7 @@ func pickup(member: Dictionary) -> void:
 
 func deliver(member: Dictionary) -> void:
 	var target: Vector3 = cargo_target(member)
-	if Home.vector(member["position"]).distance_to(target) > 3.0:
+	if Space.resolve(controller, member["position"]).distance_to(target) > 3.0:
 		return
 	var data: Dictionary = controller.village()
 	var kind: String = member["cargo"]
@@ -122,7 +123,7 @@ func tick(delta: float) -> void:
 	for identity: String in data["husbandry"]["records"]:
 		var record: Dictionary = data["husbandry"]["records"][identity]
 		# Already produced milk survives disappearance of its source animal.
-		if int(record["pending_milk"]) > 0 and not controller.navigation.route(controller.anchor(), Home.vector(record["pickup"])).is_empty():
+		if int(record["pending_milk"]) > 0 and not controller.navigation.route(controller.anchor(), Space.resolve(controller, record["pickup"])).is_empty():
 			durable = H.offer(data, identity) or durable
 	if durable and not controller._save_economy(before):
 		retry = 5.0

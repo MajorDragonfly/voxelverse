@@ -25,6 +25,12 @@ func _ready() -> void:
 	_show_home()
 	_flow.menu_error.connect(_show_error)
 	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
+	if "--sphere-gameplay-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("sphere_gameplay_consumed"):
+		get_tree().set_meta("sphere_gameplay_consumed", true)
+		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/spherical_gameplay_probe.gd").new())
+	if "--sphere-creature-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("sphere_creature_consumed"):
+		get_tree().set_meta("sphere_creature_consumed", true)
+		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/spherical_creature_probe.gd").new())
 	if "--sphere-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("sphere_smoke_consumed"):
 		get_tree().set_meta("sphere_smoke_consumed", true)
 		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/spherical_campaign_probe.gd").new())
@@ -148,7 +154,7 @@ func _show_new() -> void:
 	_sphere_choice.name = "SphericalCampaignChoice"
 	_sphere_choice.text = "Kugelwelt ausprobieren"
 	_body.add_child(_sphere_choice)
-	Style.paragraph(_body, "Auf der Kugel funktionieren derzeit Bewegung, Karte und Speichern. Nahrung, Begegnungen und Siedlungen sind noch nicht angebunden.", 17)
+	Style.paragraph(_body, "Auf der Kugel kannst du deine Kreatur gestalten, Arten entdecken, eine Heimat gründen und einen Stamm mit Tierhaltung aufbauen. Der Weltumzug befindet sich noch in der gemeinsamen Erprobung.", 17)
 	Style.button(_body, "Abenteuer beginnen", _begin, "Begin", true)
 	Style.button(_body, "Zurück", _show_home, "Back")
 	_title_input.grab_focus()

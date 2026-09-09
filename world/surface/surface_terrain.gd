@@ -8,7 +8,7 @@ var presentation: RefCounted
 func configure(descriptor: Dictionary) -> void:
 	super.configure(descriptor)
 	surface = preload("res://world/surface/planet_surface_factory.gd").create(descriptor)
-	if descriptor.get("surface_generation") == "living_planet_v1":
+	if descriptor.get("surface_generation") in ["living_planet_v1", "living_planet_v2"]:
 		presentation = preload("res://world/surface/visuals/living_surface_materials.gd").new()
 		presentation.setup(self)
 

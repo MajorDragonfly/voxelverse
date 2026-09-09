@@ -2,6 +2,10 @@
 
 Stand: 9. September 2026 · M1e-Kampagnengrundlage nach der zweiten Integrationsrunde. Maßgeblich sind jetzt [Runde 2](docs/INTEGRATION_SPHERICAL_2026-09-09.md) und der [Kugelumzug](docs/SPHERICAL_CAMPAIGN_MIGRATION.md). Die folgende ältere Quellenliste dokumentiert Runde 1. Die konkreten Quellstände stehen in [Integrationsquellen](docs/integration-sources-2026-09-09.json), gemeinsame Prüfungen und Grenzen im [Integrationsbericht](docs/INTEGRATION_2026-09-09.md). Ältere Berichte beschreiben ihre damaligen Einzelstände; diese Roadmap ist die aktuelle Planung. Ein vorhandener Prototyp zählt nicht als abgeschlossene Spielphase.
 
+## Laufende Kugelintegration
+
+Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickeltem Kopierumzug und regionalem Population-Speicher ist im Integrationszweig umgesetzt und wird am gemeinsamen Stand abgenommen. [WORK_SPHERICAL_GAMEPLAY.md](docs/WORK_SPHERICAL_GAMEPLAY.md) ergänzt die untenstehenden bisherigen Meilensteinstände mit den aktuellen Nachweisen. Fernproduktion, Körper-ID-Migration, lange Reise und vollständige M1i-/Ziel-PC-Abnahme bleiben offen; die reguläre Startwahl wird erst danach umgestellt.
+
 ## Architekturprüfung und nächste verbindliche Arbeitsschritte
 
 **Ergebnis vom 9. September 2026:** Die Basis bleibt verwendbar; ein kompletter Neustart ist nicht begründet. Zusätzliche Inhalte können vorhandene Dienste nutzen. Mehrere Siedlungen, lange Reisen und neue Epochen benötigen jedoch gezielte Arbeiten an Körperidentitäten, Ortsanschlüssen, Regionsspeicherung, Simulationsübergaben und Produktionsverträgen. „Immer neue Funktionen ohne Umbau anhängen“ ist im heutigen Stand keine belastbare Zusage.

@@ -4,7 +4,9 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Values = preload("res://world/fauna/domestication/domestication_contract.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const SCHEMA: int = 2
+const MIGRATED_SCHEMA: int = 3
 const GENERATION: String = "living_planet_v1"
+const GENERATIONS: Array[String] = [GENERATION, "living_planet_v2"]
 const ALGORITHM: String = "domestic_surface_search_v1"
 const MAX_NODES: int = 4096
 const MAX_PATH: int = 512
@@ -15,11 +17,12 @@ const DIRECTIONS: Array[Vector2i] = [Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1
 
 static func eligible(body: Dictionary) -> bool:
 	return body.get("kind") in ["planet", "moon"] and body.get("inhabited") == true \
-		and body.get("surface_mode") == Cube.MODE and body.get("surface_generation") == GENERATION
+		and body.get("surface_mode") == Cube.MODE and body.get("surface_generation") in GENERATIONS
 
 static func unsupported(catalog: Dictionary) -> bool:
 	var surface: Variant = catalog.get("surface")
-	if not surface is Dictionary or surface.get("schema") != 1 or surface.get("mode") != Cube.MODE or surface.get("generation") != GENERATION: return true
+	if not surface is Dictionary or surface.get("schema") != 1 or surface.get("mode") != Cube.MODE or surface.get("generation") not in GENERATIONS: return true
+	if catalog.has("migration_source") and (not catalog.migration_source is Dictionary or catalog.migration_source.get("schema") != 1 or not catalog.migration_source.get("catalog") is Dictionary or catalog.migration_source.catalog.get("schema") != 1): return true
 	var search: Variant = catalog.get("surface_search")
 	return search != null and (not search is Dictionary or search.get("schema") != 1 or search.get("algorithm") != ALGORITHM)
 
@@ -49,10 +52,16 @@ static func distance(a: Dictionary, b: Dictionary, radius: float) -> float:
 	return Cube.local_position(Cube.cartesian(a, radius), Cube.cartesian(b, radius)).length()
 
 static func validate(catalog: Dictionary, body: Dictionary, identities: Array) -> String:
+	var migrated: bool = catalog.schema == MIGRATED_SCHEMA
+	var originals: Dictionary = {}
+	if migrated:
+		var archive: Variant = catalog.get("migration_source")
+		if not archive is Dictionary or archive.get("schema") != 1 or not archive.get("catalog") is Dictionary or archive.catalog.get("schema") != 1: return "Invalid original habitat catalog."
+		for h: Dictionary in archive.catalog.get("habitats", []): originals[h.key] = h
 	var id: String = body.id
 	var surface: Dictionary = catalog.surface
-	if body.get("surface_mode") != Cube.MODE or body.get("surface_generation") != GENERATION \
-		or not Values.number(surface.get("radius"), 1000.0, 1e9) or surface.radius != body.get("radius") \
+	if body.get("surface_mode") != Cube.MODE or body.get("surface_generation") not in GENERATIONS or surface.generation != body.surface_generation \
+		or not Values.number(surface.get("radius"), 1000.0, 1e10) or surface.radius != body.get("radius") \
 		or not Values.integer(surface.get("terrain_revision"), 1, 100000) or surface.terrain_revision != body.get("terrain_revision") \
 		or not location(surface.get("anchor"), id): return "Invalid spherical surface identity."
 	if catalog.has("habitat_recovery"): return "Legacy recovery cannot describe spherical habitats."
@@ -60,18 +69,18 @@ static func validate(catalog: Dictionary, body: Dictionary, identities: Array) -
 	var represented: Array = []
 	for habitat in catalog.habitats:
 		if not habitat is Dictionary or habitat.get("species_id") not in identities or not habitat.get("key") is String \
-			or not habitat.key.begins_with("surface1:") or habitat.key in keys: return "Invalid spherical habitat identity."
+			or (not habitat.key.begins_with("surface1:") and not originals.has(habitat.key)) or habitat.key in keys: return "Invalid spherical habitat identity."
 		if not location(habitat.get("position"), id) or not location(habitat.get("food_position"), id) \
-			or not habitat.get("path") is Array or habitat.path.size() < 2 or habitat.path.size() > MAX_PATH: return "Invalid spherical habitat route."
+			or not habitat.get("path") is Array or habitat.path.size() < 2 or habitat.path.size() > (2048 if migrated else MAX_PATH): return "Invalid spherical habitat route."
 		if habitat.path[0] != surface.anchor or habitat.path[-1] != habitat.position: return "Spherical route endpoints disagree."
 		var previous: Dictionary = habitat.path[0]
 		for point in habitat.path:
 			if not location(point, id) or distance(previous, point, surface.radius) > 8.0: return "Invalid spherical route edge."
 			previous = point
-		if distance(surface.anchor, habitat.position, surface.radius) > RADIUS + 1.0 \
+		if distance(surface.anchor, habitat.position, surface.radius) > (4096.0 if migrated else RADIUS + 1.0) \
 			or distance(habitat.position, habitat.food_position, surface.radius) > 10.0: return "Spherical habitat exceeds search bounds."
 		if habitat.has("spawn_position") and (not location(habitat.spawn_position, id) or distance(habitat.position, habitat.spawn_position, surface.radius) > 8.0): return "Invalid spherical spawn position."
-		if habitat.get("region_id") != region_id(id, habitat.position) or not Values.integer(habitat.get("generation"), 0, 1000000000) \
+		if habitat.get("region_id") != (originals[habitat.key].region_id if originals.has(habitat.key) else region_id(id, habitat.position)) or not Values.integer(habitat.get("generation"), 0, 1000000000) \
 			or not Values.number(habitat.get("replacement_at"), 0, 1e15): return "Invalid spherical habitat lifecycle."
 		if habitat.get("travel_mode") != "walk" or habitat.get("food") != "plant" or habitat.get("water_supply") != "requires_transport" \
 			or habitat.get("freshwater_distance") != -1: return "Unsupported spherical habitat resources."

@@ -28,6 +28,7 @@ var _active_fauna: Array[Node3D] = []
 
 
 func _ready() -> void:
+	get_node("/root/SaveGameService").save_started.connect(_capture_origins)
 	get_node("/root/SaveGameService").game_loaded.connect(func(_path: String) -> void: domestic_fauna.reset(self))
 	call_deferred("_bind_runtime_services")
 
@@ -154,7 +155,12 @@ func _spawn_one_creature() -> void:
 			world_z
 		)
 		_active_fauna.append(creature)
+		preload("res://world/fauna/legacy_population_state.gd").capture(creature)
 		return
+
+func _capture_origins(_path: String) -> void:
+	for actor in _active_fauna:
+		if is_instance_valid(actor): preload("res://world/fauna/legacy_population_state.gd").capture(actor)
 
 
 func _has_active_identity(object_id: String) -> bool:
@@ -247,6 +253,7 @@ func _prune_fauna() -> void:
 		if fauna == null or not is_instance_valid(fauna) or fauna.is_queued_for_deletion():
 			continue
 		if fauna.global_position.distance_to(_player.global_position) > despawn_radius:
+			preload("res://world/fauna/legacy_population_state.gd").capture(fauna)
 			fauna.queue_free()
 			continue
 		retained.append(fauna)
@@ -260,6 +267,7 @@ func _enforce_population_limit() -> void:
 	while _active_fauna.size() > maximum_population:
 		var fauna: Node3D = _active_fauna.pop_front()
 		if is_instance_valid(fauna):
+			preload("res://world/fauna/legacy_population_state.gd").capture(fauna)
 			fauna.queue_free()
 
 

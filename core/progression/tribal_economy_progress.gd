@@ -8,7 +8,7 @@ const JOBS: Dictionary = {"provider": ["food", "water"], "forester": ["wood"], "
 const SOURCES: Dictionary = {"water": "well", "wood": "forester", "stone": "quarry", "fiber": "fiberbed"}
 
 static func supported(village: Dictionary) -> bool:
-	return Rules.is_integer(village.get("schema"), 3, 5) and village.get("economy") is Dictionary and int(village["economy"].get("schema", 0)) == 1
+	return Rules.is_integer(village.get("schema"), 3, 6) and village.get("economy") is Dictionary and int(village["economy"].get("schema", 0)) == 1
 
 static func create(village: Dictionary) -> Dictionary:
 	return {"schema": SCHEMA, "delivery_cursor": int(village["delivered"]), "meal_cursor": int(village["meals"]),

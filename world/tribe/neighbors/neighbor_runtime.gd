@@ -1,5 +1,6 @@
 extends Node3D
 const Model = preload("res://world/tribe/neighbors/neighbor_state.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Companion = preload("res://world/home_group/home_companion.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
@@ -11,6 +12,7 @@ var _appearance: String = ""
 
 func clear_runtime() -> void:
 	for child: Node in get_children():
+		if child is Node3D: Space.untrack(child)
 		remove_child(child)
 		child.queue_free()
 	actors.clear()
@@ -33,28 +35,36 @@ func refresh() -> void:
 			actor.setup(controller, member, blueprint, actors.size() + 10)
 			actor.set_physics_process(false)
 			actor._label.hide()
-			actor.global_position = Home.vector(member["position"])
+			actor.global_position = Space.resolve(self, member["position"])
 			actors[member["id"]] = actor
 	var signature: String = str(data()["stock"]) + str(data()["technology"])
 	if signature == _appearance:
 		return
 	_appearance = signature
 	if is_instance_valid(props):
+		Space.untrack(props)
 		remove_child(props)
 		props.queue_free()
 	props = Props.new()
 	add_child(props)
-	var center: Vector3 = Home.vector(data()["anchor"])
+	var display: Dictionary = data()
+	if Space.adapter(self) != null:
+		props.global_position = Space.resolve(self, data().anchor)
+		props.global_basis = Space.frame(self, props.global_position)
+		Space.track(props, str(data().id) + ":props")
+		display = Space.visual_data(props, data())
+	else: props.global_transform = Transform3D.IDENTITY
+	var center: Vector3 = Home.vector(display.anchor)
 	props._box(center + Vector3(0, 0.12, 0), Vector3(2.5, 0.24, 2.5), Color("765130"))
 	# The amber banner identifies another faction; the body blueprint stays yours.
 	props._box(center + Vector3(1.4, 1.4, 0), Vector3(0.12, 2.8, 0.12), Color("785031"))
 	props._box(center + Vector3(1.8, 2.3, 0), Vector3(0.75, 0.55, 0.12), Color("d9b878"))
 	if int(data()["technology"]["shelter"]) == 1:
 		var raised: Vector3 = center
-		for ground: Array in data()["foundation"]:
+		for ground: Array in display["foundation"]:
 			raised.y = maxf(raised.y, float(ground[1]))
 		props._box(raised + Vector3(0, 0.1, 0), Vector3(2.2, 0.2, 2.2), Color("785031"))
-		for ground: Array in data()["foundation"]:
+		for ground: Array in display["foundation"]:
 			var floor_point: Vector3 = Home.vector(ground)
 			var height: float = raised.y - floor_point.y + 0.2
 			props._box(floor_point + Vector3(0, height * 0.5, 0), Vector3(0.24, height, 0.24), Color("785031"))
@@ -81,10 +91,10 @@ func contact() -> bool:
 		if distance < 6.0 or distance >= nearest or not controller.navigation.free_workplace(candidate, controller.village(), "neighbor", Model.SITE_RADIUS, 0.75):
 			continue
 		var project: Dictionary = controller.village()["project"]
-		if project.has("position") and candidate.distance_to(Home.vector(project["position"])) < 3.5:
+		if project.has("position") and candidate.distance_to(Space.resolve(self, project["position"])) < 3.5:
 			continue
-		var first: Vector3 = controller.navigation.snap(candidate + Vector3(-1, 0, 1))
-		var second: Vector3 = controller.navigation.snap(candidate + Vector3(1, 0, 1))
+		var first: Vector3 = controller.navigation.snap(Space.offset(self, candidate, Vector3(-1, 0, 1)))
+		var second: Vector3 = controller.navigation.snap(Space.offset(self, candidate, Vector3(1, 0, 1)))
 		if first.distance_to(second) < 1.0 or first.distance_to(candidate) > 2.0 or second.distance_to(candidate) > 2.0:
 			continue
 		center = candidate
@@ -95,8 +105,8 @@ func contact() -> bool:
 		controller.status = "Kein sicher erreichbarer Lagerplatz in der geladenen Umgebung frei. Suche nach einer Änderung der Umgebung erneut."
 		return false
 	for corner: Vector3 in [Vector3(-1,0,-1), Vector3(1,0,-1), Vector3(-1,0,1), Vector3(1,0,1)]:
-		foundation.append(Home.vector_array(controller.navigation.snap(center + corner)))
-	controller.body()["tribal_neighbor"] = Model.create(controller._state.campaign.data, controller.village(), center, places, foundation)
+		foundation.append(Space.encode(self, controller.navigation.snap(Space.offset(self, center, corner))))
+	controller.body()["tribal_neighbor"] = Model.create(controller._state.campaign.data, controller.village(), Space.encode(self, center), places.map(func(p: Vector3) -> Variant: return Space.encode(self, p)), foundation)
 	controller._transaction = true
 	var saved: bool = controller._saves.save_now()
 	controller._transaction = false
@@ -113,7 +123,7 @@ func start_aid() -> bool:
 	if not controller.is_active() or data().is_empty():
 		return false
 	for id: String in controller.selected:
-		if controller.navigation.route(controller.actors[id].global_position, controller.anchor()).is_empty() or controller.navigation.route(controller.anchor(), Home.vector(data()["anchor"])).is_empty():
+		if controller.navigation.route(controller.actors[id].global_position, controller.anchor()).is_empty() or controller.navigation.route(controller.anchor(), Space.resolve(self, data()["anchor"])).is_empty():
 			controller.status = "Der Weg zum eigenen oder zum Nachbarlager ist blockiert."
 			return false
 	var previous: Dictionary = data().duplicate(true)
@@ -134,7 +144,7 @@ func start_aid() -> bool:
 	return saved
 
 func target(member: Dictionary) -> Vector3:
-	return Model.target(data(), controller.village(), member) if not data().is_empty() else Vector3.INF
+	return Space.resolve(self, Model.target(data(), controller.village(), member)) if not data().is_empty() else Vector3.INF
 
 func work(member: Dictionary) -> bool:
 	if data().is_empty():
@@ -152,12 +162,12 @@ func tick(delta: float, simulation_delta: float) -> void:
 		return
 	var before: Dictionary = data().duplicate(true)
 	for member: Dictionary in data()["members"]:
-		var goal: Vector3 = Home.vector(member["workplace"])
+		var goal: Vector3 = Space.resolve(self, member["workplace"])
 		if data()["aid"]["status"] != "building" and int(member["walk"]) == 1:
-			goal = controller.navigation.snap(goal + Vector3(0, 0, -2))
+			goal = controller.navigation.snap(Space.offset(self, goal, Vector3(0, 0, -2)))
 		var actor: CharacterBody3D = actors[member["id"]]
 		var arrived: bool = controller._walk(actor, member["id"], goal, delta, 100.0, member)
-		member["position"] = Home.vector_array(actor.global_position)
+		member["position"] = Space.encode(self, actor.global_position)
 		if arrived:
 			if data()["aid"]["status"] == "building":
 				Model.build(data(), member["id"], simulation_delta)
@@ -173,9 +183,9 @@ func has_blocked() -> bool:
 	return not data().is_empty() and data()["members"].any(func(member: Dictionary) -> bool: return member["blocked"])
 
 func occupies(point: Vector3) -> bool:
-	return not data().is_empty() and point.distance_to(Home.vector(data()["anchor"])) < 3.5
+	return not data().is_empty() and point.distance_to(Space.resolve(self, data()["anchor"])) < 3.5
 
 func focus(own: bool = false) -> void:
 	if controller.is_active() and (own or not data().is_empty()):
-		controller._focus = controller.anchor() if own else Home.vector(data()["anchor"])
+		controller._focus = controller.anchor() if own else Space.resolve(self, data()["anchor"])
 		controller._update_camera()

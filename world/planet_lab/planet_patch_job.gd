@@ -48,6 +48,7 @@ func advance(blocking: bool = false) -> bool:
 		for index in range(worker_count):
 			var batch := Batch.new()
 			batch.body = body.duplicate(true)
+			batch.prepare()
 			for tile_index in range(index, missing.size(), worker_count):
 				batch.tiles.append(missing[tile_index])
 			_batches.append(batch)

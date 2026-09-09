@@ -77,7 +77,7 @@ func read(query: String = "", life_filter: String = "living") -> Dictionary:
 	return {"available": true, "rows": rows, "message": "Deinem Stamm gehören hier noch keine Tiere. Befreundete Wildtiere und begonnene Zähmungen zählen noch nicht dazu." if owned_count == 0 else "Keine passenden Tiere. Ändere die Suche oder den Filter."}
 
 static func scope_error(registry: Dictionary, context: Dictionary, validator: Script) -> String:
-	if validator == null or not validator.has_method("validate") or registry.get("schema") != 1 or validator.get("SCHEMA") != 1 or not validator.call("validate", registry).is_empty():
+	if validator == null or not validator.has_method("validate") or not validator.call("validate", registry).is_empty():
 		return "Dieser Tierbestand kann derzeit nicht gelesen werden."
 	if not context.get("faction_id") is String or context["faction_id"].is_empty() or context.get("campaign_id") != registry["campaign_id"] or context.get("body_id") != registry["body_id"]:
 		return "Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar."
@@ -103,7 +103,10 @@ func _name(kind: String, id: String, fallback: String) -> String:
 	var value: Variant = _names.call(kind, id) if _names.is_valid() else null
 	return value.strip_edges() if value is String and not value.strip_edges().is_empty() else fallback
 
-func _point(point: Array) -> String:
+func _point(point: Variant) -> String:
+	if point is Dictionary:
+		var direction: Array = preload("res://world/space/cube_sphere.gd").direction(point.face, point.u, point.v)
+		return "Breite %s° · Länge %s° · Höhe %s m" % [String.num(rad_to_deg(asin(clampf(direction[1], -1.0, 1.0))), 5).replace(".", ","), String.num(rad_to_deg(atan2(direction[2], direction[0])), 5).replace(".", ","), number(point.height)]
 	return "X %s · Y %s · Z %s m" % [number(point[0]), number(point[1]), number(point[2])]
 
 static func number(value: Variant) -> String:

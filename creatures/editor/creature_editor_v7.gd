@@ -476,7 +476,11 @@ func _load_blueprint() -> void:
 
 func _play_test_placeholder() -> void:
 	_save_blueprint()
-	var change_error: Error = get_tree().change_scene_to_file(MAIN_SCENE_PATH)
+	var change_error: Error
+	if get_node("/root/GameState").campaign_scene() == "res://main/spherical_campaign.tscn":
+		change_error = get_node("/root/SessionFlow").return_from_editor()
+	else:
+		change_error = get_tree().change_scene_to_file(MAIN_SCENE_PATH)
 	if change_error != OK:
 		push_error("Could not open main scene: %s" % change_error)
 		_set_builder_status("Could not open the world: %s" % change_error)

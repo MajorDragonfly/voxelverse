@@ -48,6 +48,8 @@ func _run() -> void:
 	# Move through real physics, wait for streamed collision, then rebase twice
 	# without converting Earth-scale positions into float32 world transforms.
 	var before: Dictionary = player.location()
+	var initial_needs: Dictionary = player.export_runtime_state()
+	_expect(is_equal_approx(initial_needs.health_ratio, 0.7) and initial_needs.behavior_runtime.stamina >= 31.0, "Shared player lost imported survival values.")
 	Input.action_press("move_forward")
 	var started: int = Time.get_ticks_msec()
 	while Time.get_ticks_msec() - started < 2200:
@@ -64,11 +66,13 @@ func _run() -> void:
 	flow.toggle_pause()
 	var paused_time: float = state.campaign.data.elapsed_seconds
 	var paused_location: Dictionary = player.location()
+	var paused_needs: Dictionary = player.export_runtime_state()
 	for i in range(12): await tree.process_frame
 	_expect(state.campaign.data.elapsed_seconds == paused_time and player.location() == paused_location, "Pause advanced campaign/player.")
+	_expect(player.export_runtime_state() == paused_needs, "Pause advanced survival or stamina.")
 	_expect(saves.save_now(), "Sphere pause save failed: " + saves.last_error)
 	var checkpoint: Dictionary = saves._read_save(target)
-	_expect(checkpoint.player.health_ratio == 0.7 and checkpoint.player.behavior_runtime.stamina == 31.0, "Unconnected needs/stamina were reset.")
+	_expect(is_equal_approx(checkpoint.player.health_ratio, 0.7) and checkpoint.player.hunger_ratio < initial_needs.hunger_ratio and checkpoint.player.thirst_ratio < initial_needs.thirst_ratio and checkpoint.player.behavior_runtime.stamina > initial_needs.behavior_runtime.stamina, "Shared survival/recovery did not advance during active play.")
 	_expect(checkpoint.player.surface_address != before, "Movement did not persist its canonical location.")
 	var expected := {"target": target, "source": source, "source_hash": text.sha256_text(), "saved": checkpoint}
 	_expect(Atomic.write("user://sphere_campaign_restart.json", expected, false) == OK, "Restart evidence write failed.")
@@ -96,7 +100,8 @@ func _run() -> void:
 	if _expect_world():
 		_expect(saves.save_path != target and state.campaign.data.id != checkpoint.game_state.campaign.id, "Opt-in reused migrated campaign.")
 		_expect(saves._design_files.size() == 1 and Blueprint.load_best_available().design_id != design.design_id, "Opt-in did not freeze its own distinct default design.")
-		_expect(tree.root.get_node("AudioManager").director._player == null, "Planar audio sampled a radial floating origin.")
+		_expect(tree.root.get_node("AudioManager").director._player == tree.current_scene.player, "Shared audio did not bind the radial player.")
+		_expect(tree.root.get_node("AudioManager").director.sample_at(tree.current_scene.player.global_position).has("water_point"), "Audio lacks body-bound water coordinates.")
 		flow.toggle_pause()
 		flow.return_to_title()
 		await tree.scene_changed
@@ -111,6 +116,9 @@ func _restart() -> void:
 	var player: CharacterBody3D = tree.current_scene.player
 	var restored: Dictionary = player.export_runtime_state()
 	var old: Dictionary = expected.saved.player
+	for field in ["health_ratio", "hunger_ratio", "thirst_ratio"]:
+		_expect(is_equal_approx(float(restored[field]), float(old[field])), "Fresh process changed survival: " + field)
+	_expect(Migration.fingerprint(restored.behavior_runtime) == Migration.fingerprint(old.behavior_runtime), "Fresh process changed stamina.")
 	_expect(Cube.local_position(Cube.cartesian(restored.surface_address, Surface.DEFAULT_RADIUS), Cube.cartesian(old.surface_address, Surface.DEFAULT_RADIUS)).length() < 0.002, "Fresh process relocated player.")
 	_expect(Cube.vector(restored.surface_velocity).distance_to(Cube.vector(old.surface_velocity)) < 0.001, "Fresh process discarded in-flight velocity.")
 	_expect(Migration.fingerprint(tree.root.get_node("ProgressionService").export_state()) == Migration.fingerprint(expected.saved.progression), "Restart changed progression.")

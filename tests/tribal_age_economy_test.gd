@@ -61,7 +61,7 @@ func _run() -> void:
 	paused = false
 	await _frames(15)
 	data = tribe.village()
-	_expect(int(data["schema"]) == Model.SCHEMA and data["economy"]["stations"].is_empty() and int(data["stock"]["water"]) == 0, "Migration granted water or workstations.")
+	_expect(int(data["schema"]) == Model.LEGACY_SCHEMA and data["economy"]["stations"].is_empty() and int(data["stock"]["water"]) == 0, "Migration granted water or workstations.")
 	_expect(data["members"].map(func(m: Dictionary) -> String: return m["id"]) == ids and FileAccess.get_file_as_string(SAVE) == bytes, "Migration replaced residents or rewrote old bytes.")
 	# Keep this three-worker economy probe at three beds. Population growth has
 	# a separate integration test; the legacy migration above retains both huts.

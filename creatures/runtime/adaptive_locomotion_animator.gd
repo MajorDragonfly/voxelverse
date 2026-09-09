@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	if not _validate_or_rebind():
 		return
 
-	var horizontal_speed: float = Vector2(_player.velocity.x, _player.velocity.z).length()
+	var horizontal_speed: float = _player.velocity.slide(_player.up_direction).length()
 	var maximum_speed: float = maxf(float(_player.get("move_speed")), 0.1)
 	var target_blend: float = clampf(horizontal_speed / maximum_speed, 0.0, 1.0)
 	_movement_blend = move_toward(_movement_blend, target_blend, delta * 5.5)
@@ -315,7 +315,7 @@ func _animate_body(delta: float) -> void:
 		deg_to_rad(-local_velocity.x * 0.85)
 	)
 	if not _player.is_on_floor():
-		target_rotation.x += deg_to_rad(-5.0 if _player.velocity.y > 0.0 else 6.0)
+		target_rotation.x += deg_to_rad(-5.0 if _player.velocity.dot(_player.up_direction) > 0.0 else 6.0)
 	_preview.rotation.x = lerp_angle(_preview.rotation.x, target_rotation.x, clampf(delta * 6.0, 0.0, 1.0))
 	_preview.rotation.z = lerp_angle(_preview.rotation.z, target_rotation.z, clampf(delta * 6.0, 0.0, 1.0))
 
@@ -429,6 +429,7 @@ func _solve_ground_contact(delta: float) -> void:
 	var offsets: Array[float] = []
 	var support_normals := Vector3.ZERO
 	var support_count: int = 0
+	var up: Vector3 = _player.up_direction
 	for record in _leg_records:
 		var foot: Node3D = _get_valid_node3d(record, "foot")
 		if foot == null:
@@ -438,8 +439,8 @@ func _solve_ground_contact(delta: float) -> void:
 			continue
 		var foot_position: Vector3 = foot.global_position
 		var query := PhysicsRayQueryParameters3D.create(
-			foot_position + Vector3.UP * ground_probe_up,
-			foot_position + Vector3.DOWN * ground_probe_down
+			foot_position + up * ground_probe_up,
+			foot_position - up * ground_probe_down
 		)
 		query.exclude = [_player.get_rid()]
 		query.collision_mask = _player.collision_mask
@@ -454,24 +455,24 @@ func _solve_ground_contact(delta: float) -> void:
 				record.erase("planted_world")
 			else:
 				var planted: Vector3 = record.get("planted_world", hit_position)
-				var distance := Vector2(planted.x - hit_position.x, planted.z - hit_position.z)
+				var distance: Vector3 = (planted - hit_position).slide(up)
 				if distance.length() > maxf(0.3, float(_gait_profile.get("stride", 0.2)) * 2.5 * frame.basis.y.length()):
 					planted = hit_position
 				record["planted_world"] = planted
-				query.from = planted + Vector3.UP * ground_probe_up
-				query.to = planted + Vector3.DOWN * ground_probe_down
+				query.from = planted + up * ground_probe_up
+				query.to = planted - up * ground_probe_down
 				var planted_hit: Dictionary = space_state.intersect_ray(query)
 				if not planted_hit.is_empty():
 					hit_position = planted_hit["position"]
 					hit = planted_hit
-			var normal: Vector3 = hit.get("normal", Vector3.UP)
-			LimbRig.plant(record, hit_position + Vector3.UP * lift * float(record.get("step_height", 0.15)), normal, frame.basis)
+			var normal: Vector3 = hit.get("normal", up)
+			LimbRig.plant(record, hit_position + up * lift * float(record.get("step_height", 0.15)), normal, frame.basis)
 			var rest: Vector3 = frame * record["rest_contact_preview"]
-			offsets.append(hit_position.y - rest.y)
+			offsets.append((hit_position - rest).dot(up))
 			support_normals += normal
 			support_count += 1
 			continue
-		offsets.append(hit_position.y - foot_position.y)
+		offsets.append((hit_position - foot_position).dot(up))
 	if offsets.is_empty():
 		_grounding_offset = move_toward(
 			_grounding_offset,
@@ -496,6 +497,10 @@ func _solve_ground_contact(delta: float) -> void:
 		var local_normal: Vector3 = _player.global_basis.inverse() * support_normals.normalized()
 		_terrain_pitch = lerpf(_terrain_pitch, clampf(atan2(local_normal.z, local_normal.y), -0.32, 0.32), clampf(delta * 6.0, 0, 1))
 
+
+func surface_origin_shifted(shift: Vector3) -> void:
+	for record in _leg_records:
+		if record.has("planted_world"): record.planted_world += shift
 
 func _ground_frame() -> Transform3D:
 	var parent: Node3D = _preview.get_parent_node_3d()

@@ -476,11 +476,23 @@ func is_behavior_transaction_active() -> bool:
 
 
 func get_creature_encounter(identity: Dictionary, role: String, individual_seed: int) -> Dictionary:
+	var saved: Dictionary = get_saved_creature_encounter(str(identity.get("object_id", "")))
+	if not saved.is_empty(): return saved
 	return _encounters.get_entry(identity, role, individual_seed)
 
 
 func get_saved_creature_encounter(object_id: String) -> Dictionary:
+	var population: Node = get_tree().get_first_node_in_group(&"campaign_surface_population")
+	if population != null:
+		var entry: Dictionary = population.saved_encounter(object_id)
+		if not entry.is_empty(): return entry
 	return _encounters.entries.get(object_id, {}).duplicate(true)
+
+func _put_encounter(entry: Dictionary) -> bool:
+	if not Encounters.validate_entry(entry).is_empty(): return false
+	var population: Node = get_tree().get_first_node_in_group(&"campaign_surface_population")
+	if population != null and not population.storage.record(str(entry.object_id)).is_empty(): return population.store_encounter(str(entry.object_id), entry)
+	return _encounters.put(entry)
 
 
 ## Phase-1 compatibility for the existing fauna lifecycle. Health only:
@@ -490,12 +502,17 @@ func store_fauna_health(identity: String, ratio: float, dead: bool, food: float)
 	if int(state.current_phase) != 1 or is_behavior_transaction_active() or not is_finite(ratio) or ratio < 0 or ratio > 1 or not is_finite(food) or food < 0 or food > 1000 or dead != (ratio == 0.0):
 		return false
 	var entry: Dictionary = get_saved_creature_encounter(identity)
-	if entry.is_empty() or entry.get("body_id") != state.get_current_body()["id"]:
+	if entry.is_empty():
+		var population: Node = get_tree().get_first_node_in_group(&"campaign_surface_population")
+		if population != null:
+			var record: Dictionary = population.storage.record(identity)
+			if not record.is_empty(): entry = _encounters.get_entry(record.identity, record.role, int(record.individual_seed))
+	if entry.is_empty() or entry.get("body_id") != state.get_current_body_record()["id"]:
 		return false
 	entry["health_ratio"] = ratio
 	entry["dead"] = dead
 	entry["carcass_food"] = food
-	if not _encounters.put(entry): return false
+	if not _put_encounter(entry): return false
 	get_node("/root/SaveGameService").schedule_autosave()
 	return true
 
@@ -506,11 +523,11 @@ func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcom
 		return {"ok": false, "reason": "transaction_in_progress"}
 	var state := get_node("/root/GameState")
 	var saves := get_node("/root/SaveGameService")
-	if int(state.current_phase) != 0 or entry.get("body_id") != state.get_current_body()["id"]:
+	if int(state.current_phase) != 0 or entry.get("body_id") != state.get_current_body_record()["id"]:
 		return {"ok": false, "reason": "wrong_phase_or_body"}
 	var key: String = str(entry.get("object_id", ""))
-	var before_entry: Dictionary = _encounters.entries.get(key, {}).duplicate(true)
-	if not _encounters.put(entry):
+	var before_entry: Dictionary = get_saved_creature_encounter(key)
+	if not _put_encounter(entry):
 		return {"ok": false, "reason": "invalid_or_full_encounter"}
 	if not immediate and outcome.is_empty():
 		saves.schedule_autosave()
@@ -548,6 +565,10 @@ func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcom
 
 
 func _restore_encounter_entry(key: String, before: Dictionary) -> void:
+	var population: Node = get_tree().get_first_node_in_group(&"campaign_surface_population")
+	if population != null and not population.storage.record(key).is_empty():
+		population.store_encounter(key, before)
+		return
 	if before.is_empty():
 		_encounters.entries.erase(key)
 	else:

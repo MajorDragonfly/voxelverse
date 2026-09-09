@@ -9,6 +9,7 @@ signal guidance_action(action: String, value: float)
 
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
+const Space = preload("res://world/surface/gameplay_space.gd")
 
 @export_category("Movement")
 @export var move_speed: float = 5.0
@@ -121,6 +122,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	Space.orient(self)
 	if is_dead:
 		_process_dead_movement(delta)
 		return
@@ -131,94 +133,74 @@ func _physics_process(delta: float) -> void:
 		"move_back"
 	)
 	var camera_forward := -camera_pivot.global_transform.basis.z
-	camera_forward.y = 0.0
+	camera_forward = camera_forward.slide(up_direction)
 	camera_forward = camera_forward.normalized()
 	var camera_right := camera_pivot.global_transform.basis.x
-	camera_right.y = 0.0
+	camera_right = camera_right.slide(up_direction)
 	camera_right = camera_right.normalized()
 	var direction: Vector3 = camera_right * input_vector.x + camera_forward * -input_vector.y
 	if direction.length_squared() > 0.0:
 		direction = direction.normalized()
-	velocity.x = direction.x * move_speed
-	velocity.z = direction.z * move_speed
+	var desired: Vector3 = direction * move_speed
+	if not Space.ground_ready(self, global_position + desired * delta * 2.0): desired = Vector3.ZERO
+	velocity = desired + up_direction * velocity.dot(up_direction)
 
 	var grounded_before_move: bool = is_on_floor()
 	var position_before_move: Vector3 = global_position
 	var jumped: bool = false
 	_update_water_movement(delta)
 	if is_swimming:
-		velocity.x *= 0.62
-		velocity.z *= 0.62
+		velocity = velocity.slide(up_direction) * 0.62 + up_direction * velocity.dot(up_direction)
 	elif grounded_before_move:
-		velocity.y = 0.0
+		velocity = velocity.slide(up_direction)
 		if Input.is_action_just_pressed("jump"):
-			velocity.y = jump_velocity
+			velocity += up_direction * jump_velocity
 			jumped = true
 	else:
-		velocity.y -= fall_acceleration * delta
+		velocity -= up_direction * fall_acceleration * delta
 
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if Input.is_action_just_pressed("primary_action"):
 			_try_primary_action()
 		if Input.is_action_just_pressed("bite_action"):
 			_try_bite_action()
-	if grounded_before_move and velocity.y <= 0.0 and not is_swimming:
+	if grounded_before_move and velocity.dot(up_direction) <= 0.0 and not is_swimming:
 		_attempt_step_up(delta)
 	move_and_slide()
 	var traveled: Vector3 = global_position - position_before_move
 	if input_vector.length_squared() > 0.0:
-		guidance_action.emit("move", Vector2(traveled.x, traveled.z).length())
-	if jumped and traveled.y > 0.001 and velocity.y > 0.0:
+		guidance_action.emit("move", traveled.slide(up_direction).length())
+	if jumped and traveled.dot(up_direction) > 0.001 and velocity.dot(up_direction) > 0.0:
 		guidance_action.emit("jump", 1.0)
 	if is_on_floor() and not is_swimming:
 		apply_floor_snap()
 
 
 func _update_water_movement(delta: float) -> void:
-	var water: float = WorldGenerator.get_water_level(global_position.x, global_position.z)
-	var depth: float = water - WorldGenerator.get_terrain_height(global_position.x, global_position.z)
-	var immersion: float = water - global_position.y
+	var surface: Dictionary = Space.sample(self, global_position)
+	var water: float = surface.water_level
+	var depth: float = water - float(surface.height)
+	var immersion: float = water - float(surface.altitude)
 	is_swimming = depth > 1.1 and immersion > (0.15 if is_swimming else 0.45)
 	floor_snap_length = 0.0 if is_swimming else maximum_step_height + 0.12
 	if not is_swimming:
 		return
 	# Damped buoyancy works at elevated lakes as well as sea level. Keep normal
 	# collision so shore steps, rocks and buildings still block the creature.
-	var acceleration: float = clampf((immersion - 0.65) * 12.0 - velocity.y * 5.0, -fall_acceleration, fall_acceleration)
-	velocity.y = clampf(velocity.y + acceleration * delta, -3.5, 3.5)
+	var vertical: float = velocity.dot(up_direction)
+	var acceleration: float = clampf((immersion - 0.65) * 12.0 - vertical * 5.0, -fall_acceleration, fall_acceleration)
+	vertical = clampf(vertical + acceleration * delta, -3.5, 3.5)
 	if Input.is_action_just_pressed("jump"):
-		velocity.y = 3.5
+		vertical = 3.5
+	velocity = velocity.slide(up_direction) + up_direction * vertical
 
 
 func _attempt_step_up(delta: float) -> bool:
-	var horizontal_velocity := Vector3(velocity.x, 0.0, velocity.z)
-	if horizontal_velocity.length_squared() < 0.01:
-		return false
-	var horizontal_motion: Vector3 = horizontal_velocity * delta
-	var original_transform: Transform3D = global_transform
-	if not test_move(original_transform, horizontal_motion):
-		return false
-	var up_motion := Vector3.UP * maximum_step_height
-	if test_move(original_transform, up_motion):
-		return false
-	var raised_transform: Transform3D = original_transform.translated(up_motion)
-	if test_move(raised_transform, horizontal_motion):
-		return false
-	var forward_transform: Transform3D = raised_transform.translated(horizontal_motion)
-	var ground_probe := Vector3.DOWN * (maximum_step_height + step_floor_probe)
-	if not test_move(forward_transform, ground_probe):
-		return false
-	global_transform = raised_transform
-	return true
+	return Space.step(self, velocity.slide(up_direction) * delta, maximum_step_height, step_floor_probe)
 
 
 func _process_dead_movement(delta: float) -> void:
-	velocity.x = 0.0
-	velocity.z = 0.0
-	if is_on_floor():
-		velocity.y = 0.0
-	else:
-		velocity.y -= fall_acceleration * delta
+	velocity = up_direction * (0.0 if is_on_floor() else velocity.dot(up_direction) - fall_acceleration * delta)
 	move_and_slide()
 
 
@@ -245,6 +227,11 @@ func _update_survival(delta: float) -> void:
 		_dehydration_damage_timer = 0.0
 	_update_hud()
 
+func surface_origin_shifted(shift: Vector3) -> void:
+	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
+	if animator != null and animator.has_method("surface_origin_shifted"):
+		animator.surface_origin_shifted(shift)
+
 
 func _try_primary_action() -> void:
 	if is_swimming:
@@ -256,8 +243,8 @@ func _try_primary_action() -> void:
 	var collision_point: Vector3 = interaction_ray.get_collision_point()
 	if global_position.distance_to(collision_point) > interaction_range:
 		return
-	if WorldGenerator.is_water_at(collision_point.x, collision_point.z):
-		_try_drink_water()
+	if Space.sample(self, collision_point).water:
+		_try_drink_water(collision_point)
 		return
 	var collider: Object = interaction_ray.get_collider()
 	if collider != null and collider.has_method("interact"):
@@ -288,7 +275,13 @@ func _try_bite_action() -> void:
 	creature_attacked.emit(collider, damage)
 
 
-func _try_drink_water() -> void:
+func _try_drink_water(point: Vector3 = Vector3.INF) -> void:
+	if Space.adapter(self) != null:
+		if not point.is_finite(): point = global_position
+		var source: Dictionary = get_tree().current_scene.get_node("Water").freshwater_at(point)
+		if source.is_empty() or global_position.distance_to(source.point) > interaction_range or not Space.ground_ready(self, source.point):
+			show_gameplay_message("Zum Trinken brauchst du erreichbares Süßwasser.")
+			return
 	if not can_perform_action(&"drink"):
 		show_gameplay_message("You cannot drink yet.")
 		return

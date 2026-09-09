@@ -1,5 +1,6 @@
 extends Node
 ## Host adapter for the existing tribe, SaveGameService and live D1 fauna.
+const Space = preload("res://world/surface/gameplay_space.gd")
 const State = preload("res://world/domestication/animal_state.gd")
 const Saved = preload("res://world/domestication/campaign_animal_state.gd")
 const Controller = preload("res://world/domestication/domestication_controller.gd")
@@ -23,6 +24,9 @@ var _timer: float = 0
 var _policy: RefCounted
 var _routes: Dictionary = {}
 var _goals: Dictionary = {}
+var feedback: Node
+var _journal: CanvasLayer
+var _feedback_request: int = 0
 
 func _ready() -> void:
 	tribe = get_parent()
@@ -39,13 +43,17 @@ func _ready() -> void:
 	controls.runtime = self
 	tribe.panel.add_extension(controls)
 	tribe.husbandry.configure(current_registry, resolve_suitability, actor_for)
+	feedback = preload("res://ui/frontend/animal_action_feedback.gd").new()
+	add_child(feedback)
+	feedback.feedback_changed.connect(func(text: String, _severity: String):
+		if not text.is_empty(): status = text)
 
 func current_registry() -> Dictionary:
 	# D3 reads the same live D2 registry that the shared save flushes.
 	return controller.registry if _ready_runtime else {}
 
 func _process(delta: float) -> void:
-	if _ready_runtime and (_campaign != _state.campaign.data["id"] or _body != _state.get_current_body()["id"]):
+	if _ready_runtime and (_campaign != _state.campaign.data["id"] or _body != _state.get_current_body_record()["id"]):
 		_invalidate(null)
 	if not _ready_runtime and tribe.is_active(): _activate()
 	if not is_active(): return
@@ -54,7 +62,7 @@ func _process(delta: float) -> void:
 		if not a["pending"].is_empty():
 			var handler_id: String = a["pending"]["actor_id"]
 			var result: Dictionary = controller.advance_offer(id, minf(_state.simulation_delta(delta), 0.25), context(id, handler_id))
-			if not result["ok"] or str(result["code"]).begins_with("interrupted:"): _show(result)
+			if not result["ok"] or str(result["code"]).begins_with("interrupted:"): _show(result, id)
 	_timer -= delta
 	if _timer <= 0:
 		_timer = 0.25
@@ -77,13 +85,20 @@ func _activate() -> void:
 	tribe.navigation.rebuild(tribe.home, tribe.anchor(), tribe.village(), 20)
 	for id: String in controller.registry["animals"]:
 		_spawn(id)
+	_journal = get_tree().get_first_node_in_group(&"discovery_journal") as CanvasLayer
+	if is_instance_valid(_journal): _journal.bind_owned_animals(controller, _presentation_context, _presentation_name)
+	feedback.bind_source(controller, _presentation_context, _presentation_name)
 	controls.refresh()
 
 func _invalidate(_value: Variant) -> void:
 	_ready_runtime = false
+	if is_instance_valid(_journal) and _journal.is_inside_tree(): _journal.unbind_owned_animals()
+	_journal = null
+	if is_instance_valid(feedback): feedback.unbind()
 	for actor: Node in animals.values():
 		if is_instance_valid(actor):
 			actor.set_physics_process(false)
+			Space.untrack(actor)
 			actor.queue_free()
 	animals.clear()
 	sources.clear()
@@ -133,32 +148,32 @@ func context(id: String, handler_id: String) -> Dictionary:
 	var handler: Node3D = handler_actor(handler_id)
 	var target: Node3D = actor_for(id)
 	var campaign: Dictionary = _state.campaign.data
-	return {"campaign_id": campaign["id"], "body_id": _state.get_current_body()["id"], "phase": _state.current_phase,
+	return {"campaign_id": campaign["id"], "body_id": _state.get_current_body_record()["id"], "phase": _state.current_phase,
 		"player_species_id": campaign["player_species_id"], "faction_id": campaign["player_faction_id"],
 		"actor_id": handler_id, "actor_alive": handler != null, "paused": not is_active(),
 		"handler_available": tribe.member_record(handler_id).get("order") == "wait" and tribe.member_record(handler_id).get("cargo") == "",
-		"actor_position": handler.global_position if handler != null else Vector3.INF, "home": tribe.anchor(),
+		"actor_position": Space.encode(self, handler.global_position) if handler != null else Vector3.INF, "home": Space.encode(self, tribe.anchor()),
 		"capacity": Saved.CAPACITY, "stock": tribe.village()["stock"].duplicate(),
 		"line_of_sight": handler != null and target != null and Steering.clear_sight(handler, target),
 		"threatened": frightened(id) or (target != null and not animals.has(id) and float(target.get("_threat_timer")) > 0.0)}
 
 func offer(id: String) -> Dictionary:
-	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"})
+	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"}, id)
 	var handler_id: String = chosen_handler()
 	var member: Dictionary = tribe.member_record(handler_id)
-	if member.is_empty(): return _show({"ok": false, "code": "choose_one_handler"})
-	if member["order"] != "wait" or member["cargo"] != "": return _show({"ok": false, "code": "handler_busy"})
+	if member.is_empty(): return _show({"ok": false, "code": "choose_one_handler"}, id)
+	if member["order"] != "wait" or member["cargo"] != "": return _show({"ok": false, "code": "handler_busy"}, id)
 	var target: Node3D = actor_for(id)
-	if target == null: return _show({"ok": false, "code": "unknown_animal"})
+	if target == null: return _show({"ok": false, "code": "unknown_animal"}, id)
 	var fresh: bool = not controller.registry["animals"].has(id)
 	var before_registry: Dictionary = controller.registry.duplicate(true)
 	if fresh:
 		var identity: Dictionary = target.get_campaign_identity()
 		var source: Dictionary = Saved.source_from(target)
-		if source["blueprint"].get("design_id", "") == "": return _show({"ok": false, "code": "unsuitable"})
+		if source["blueprint"].get("design_id", "") == "": return _show({"ok": false, "code": "unsuitable"}, id)
 		sources[id] = source
 		var record: Dictionary = State.individual(id, identity["species_id"], identity["body_id"],
-			{"id": source["blueprint"]["design_id"], "revision": int(identity.get("design_ref", {}).get("revision", 0))}, target.global_position)
+			{"id": source["blueprint"]["design_id"], "revision": int(identity.get("design_ref", {}).get("revision", 0))}, Space.encode(self, target.global_position))
 		record["health"] = target.get_health_ratio() * 100.0
 		if target.is_dead: record["status"] = "dead"
 		controller.registry["animals"][id] = record
@@ -168,47 +183,51 @@ func offer(id: String) -> Dictionary:
 		else:
 			controller.registry = before_registry
 			sources.erase(id)
-	return _show(result)
+	return _show(result, id)
 
 func approach(id: String) -> bool:
 	if not is_active() or chosen_handler().is_empty():
-		_show({"ok": false, "code": "choose_one_handler"})
+		_show({"ok": false, "code": "choose_one_handler"}, id)
 		return false
 	var actor: Node3D = actor_for(id)
 	if actor == null: return false
 	var handler: Node3D = handler_actor(chosen_handler())
 	if handler == null:
-		_show({"ok": false, "code": "choose_one_handler"})
+		_show({"ok": false, "code": "choose_one_handler"}, id)
 		return false
 	var best := Vector3.INF
-	var length: float = INF
-	# A resident stops within the shared movement arrival radius. Reserve that
-	# distance as well as a small animal-motion margin so arrival is in reach.
+	# Walk into feeding reach, allowing the animal to keep wandering while the
+	# resident travels. Stopping at the outer edge repeatedly lets it escape.
+	# Keep reachable edge cells as a fallback for animals outside the work grid.
 	var approach_radius: float = Controller.REACH - tribe.MOVEMENT_ARRIVAL_RADIUS - 0.25
+	var candidates: Array[Dictionary] = []
 	for point_id: int in tribe.navigation.graph.get_point_ids():
 		var point: Vector3 = tribe.navigation.graph.get_point_position(point_id)
-		if point.distance_to(actor.global_position) > approach_radius or point.distance_to(tribe.anchor()) > 20: continue
-		var route: PackedVector3Array = tribe.navigation.route(handler.global_position, point)
-		if route.is_empty(): continue
-		if point.distance_to(handler.global_position) < length:
-			best = point
-			length = point.distance_to(handler.global_position)
+		var distance: float = point.distance_to(actor.global_position)
+		if distance > approach_radius or point.distance_to(tribe.anchor()) > 20: continue
+		candidates.append({"point": point, "score": maxf(0.0, distance - 1.6) * 1000.0 + point.distance_to(handler.global_position)})
+	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.score < b.score)
+	for candidate: Dictionary in candidates:
+		if not tribe.navigation.route(handler.global_position, candidate.point).is_empty():
+			best = candidate.point
+			break
 	if not best.is_finite():
 		status = "Das Tier liegt außerhalb der erreichbaren Dorfumgebung."
 		return false
 	return tribe.issue_order("move", best, 20.0)
 
 func issue_command(id: String, order: String) -> Dictionary:
-	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"})
-	return _show(controller.command(id, order, context(id, chosen_handler())))
+	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"}, id)
+	return _show(controller.command(id, order, context(id, chosen_handler())), id)
 
 func cancel(id: String) -> Dictionary:
-	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"})
-	return _show(controller.interrupt_offer(id))
+	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"}, id)
+	return _show(controller.interrupt_offer(id), id)
 
 func abandon(id: String) -> Dictionary:
-	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"})
-	return _show(controller.abandon_claim(id, context(id, chosen_handler())))
+	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"}, id)
+	return _show(controller.abandon_claim(id, context(id, chosen_handler())), id)
+
 
 func damage_animal(id: String, amount: float) -> bool:
 	if not is_active() or not sources.has(id): return false
@@ -235,7 +254,7 @@ func heading(actor: Node3D, target: Vector3) -> Vector3:
 		_goals[id] = target
 	var route: PackedVector3Array = _routes.get(id, PackedVector3Array())
 	while not route.is_empty():
-		var offset := Vector3(route[0].x - actor.global_position.x, 0, route[0].z - actor.global_position.z)
+		var offset: Vector3 = (route[0] - actor.global_position).slide(Space.up(self, actor.global_position))
 		if offset.length() > 0.25:
 			# Do not probe beyond a turn or the final waypoint into the next wall.
 			actor.steer_distance = minf(1.1, offset.length())
@@ -243,7 +262,7 @@ func heading(actor: Node3D, target: Vector3) -> Vector3:
 			return offset.normalized()
 		route.remove_at(0)
 	_routes[id] = route
-	var final_offset := Vector3(target.x - actor.global_position.x, 0, target.z - actor.global_position.z)
+	var final_offset: Vector3 = (target - actor.global_position).slide(Space.up(self, actor.global_position))
 	actor.steer_distance = minf(1.1, final_offset.length())
 	return final_offset.normalized()
 
@@ -255,18 +274,20 @@ func _spawn(id: String) -> void:
 		if parent != null and parent.get("_active_fauna") is Array: parent._active_fauna.erase(actor)
 		actor.set_physics_process(false)
 		actor.remove_from_group(&"wildlife")
+		Space.untrack(actor)
 		actor.queue_free()
 	var creature = Animal.new()
 	creature.setup(self, controller.record(id), sources[id])
 	add_child(creature)
-	creature.global_position = State.vector(controller.record(id)["position"])
+	creature.global_position = Space.resolve(self, controller.record(id)["position"])
+	Space.track(creature, id)
 	animals[id] = creature
 
 func _flush(_path: String) -> void:
-	if not _ready_runtime or _committing or _campaign != _state.campaign.data["id"] or _body != _state.get_current_body()["id"]: return
+	if not _ready_runtime or _committing or _campaign != _state.campaign.data["id"] or _body != _state.get_current_body_record()["id"]: return
 	if controller.registry["animals"].is_empty(): return
 	for id: String in animals:
-		if is_instance_valid(animals[id]): controller.record_position(id, animals[id].global_position)
+		if is_instance_valid(animals[id]): controller.record_position(id, Space.encode(self, animals[id].global_position))
 	tribe.body()[Saved.FIELD] = {"schema": Saved.SCHEMA, "registry": controller.registry.duplicate(true), "sources": sources.duplicate(true)}
 
 func _persist(registry: Dictionary, cost: Dictionary) -> bool:
@@ -304,7 +325,22 @@ func _changed(id: String, code: String) -> void:
 	_saves.schedule_autosave(2.0)
 	_show({"ok": true, "code": code})
 
-func _show(result: Dictionary) -> Dictionary:
+func _presentation_context() -> Dictionary:
+	if not _ready_runtime: return {}
+	return {"campaign_id": _campaign, "body_id": _body, "faction_id": _state.campaign.data.player_faction_id}
+
+func _presentation_name(kind: String, id: String) -> String:
+	if kind == "animal": return str(sources.get(id, {}).get("name", ""))
+	if kind == "handler": return str(tribe.member_record(id).get("name", ""))
+	if kind == "species":
+		for source: Dictionary in sources.values():
+			if source.identity.species_id == id: return str(source.blueprint.get("name", ""))
+	return ""
+
+func _show(result: Dictionary, object_id: String = "") -> Dictionary:
+	if not object_id.is_empty() and is_instance_valid(feedback):
+		_feedback_request += 1
+		feedback.report_result(object_id, result, "campaign-%d" % _feedback_request)
 	var texts: Dictionary = {"tribal_age_required": "Tierhaltung ist erst im aktiven Stammeszeitalter möglich.", "choose_one_handler": "Wähle genau einen Stammesbewohner als Betreuer.", "handler_busy": "Der Betreuer muss ohne Ladung warten. Lass ihn seine Lieferung abschließen und halte ihn an.",
 		"unknown_animal": "Das Tier ist nicht in der geladenen Dorfumgebung.", "unsuitable": "Diese Art besitzt keine geprüfte Zähmeignung.", "wrong_food": "Im Dorf fehlt passendes Futter für diese Art.", "insufficient_food": "Lagere zuerst weitere Wurzeln als Nahrung ein.",
 		"out_of_range": "Der Betreuer muss höchstens 4,5 m vom Tier entfernt stehen.", "no_line_of_sight": "Der Betreuer braucht freien Sichtkontakt zum Tier.", "fleeing": "Das Tier ist noch verängstigt.", "capacity_full": "Alle sechs Tierplätze sind belegt oder reserviert.",
@@ -313,3 +349,10 @@ func _show(result: Dictionary) -> Dictionary:
 		"not_owner": "Du kannst nur eigene gezähmte Tiere befehligen.", "already_tamed": "Das Tier ist bereits gezähmt.", "already_offering": "Es läuft bereits eine Futtergabe.", "no_offer": "Keine laufende Futtergabe.", "not_claimant": "Keine eigene begonnene Zähmung.", "claim_abandoned": "Zähmung aufgegeben. Der Platz ist wieder frei.", "paused": "Spiel pausiert."}
 	status = texts.get(result["code"], "Futtergabe unterbrochen; die unfertige Gabe kostet keine Nahrung." if str(result["code"]).begins_with("interrupted:") else str(result["code"]))
 	return result
+
+func surface_origin_shifted(shift: Vector3) -> void:
+	for id in _goals: _goals[id] += shift
+	for id in _routes:
+		var route: PackedVector3Array = _routes[id]
+		for i in range(route.size()): route[i] += shift
+		_routes[id] = route

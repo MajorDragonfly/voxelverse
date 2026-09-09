@@ -17,7 +17,7 @@ else:
 
 # These acceptance flows include real 300-second production or 90-second growth
 # plus transport and restart. Keep short checks bounded independently.
-LONG_TESTS = {"tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+LONG_TESTS = {"spherical_gameplay_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
@@ -50,7 +50,10 @@ def validate(args):
     if not args.skip_import:
         commands.append(("art_sources", [], 120))
     # SceneTree tests load gameplay scenes after autoloads exist, like the game.
-    commands += [(name, ["--script", f"res://tests/{name}.gd"], 420 if name in LONG_TESTS else 120) for name in tests]
+    # The full sphere chain includes several cold terrain loads and a native
+    # child restart; successful Windows runs already take about 395 seconds.
+    commands += [(name, ["--script", f"res://tests/{name}.gd"],
+                  600 if name == "spherical_gameplay_test" else 420 if name in LONG_TESTS else 120) for name in tests]
     if not args.skip_main:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:

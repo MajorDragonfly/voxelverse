@@ -108,6 +108,9 @@ func _save_snapshot(custom_path: String = "") -> bool:
 		return false
 	var target_path: String = save_path if custom_path.is_empty() else custom_path
 	save_started.emit(target_path)
+	if _write_blocked:
+		_report_failure("Die Regionssicherung ist fehlgeschlagen. Der bisherige Spielstand bleibt erhalten.")
+		return false
 	_capture_current_region_state()
 	var files: Dictionary = Designs.capture()
 	_upgrade_design_ids(files)
@@ -650,10 +653,26 @@ func _validate_save(data: Dictionary) -> String:
 		if body.has("home_group"):
 			var home_problem: String = Home.validate(body.home_group, str(body.id), str(campaign.player_species_id))
 			if not home_problem.is_empty(): return home_problem
+		for extension in {"legacy_population": preload("res://world/fauna/legacy_population_state.gd"), "wildlife_foraging": preload("res://world/resources/plants/foraging_state.gd"), "wildlife_drinking": preload("res://creatures/ai/drinking_state.gd")}:
+			if not body.has(extension): continue
+			var validators := {"legacy_population": preload("res://world/fauna/legacy_population_state.gd"), "wildlife_foraging": preload("res://world/resources/plants/foraging_state.gd"), "wildlife_drinking": preload("res://creatures/ai/drinking_state.gd")}
+			var problem: String = validators[extension].validate(body[extension], str(body.id))
+			if not problem.is_empty(): return problem
+		if body.has("surface_ecology"):
+			if body.surface_mode != Surface.Cube.MODE: return "Radiale Ökologie ohne Kugelkontext."
+			var ecology_problem: String = preload("res://world/surface/campaign_ecology_state.gd").validate(body.surface_ecology, body)
+			if not ecology_problem.is_empty(): return ecology_problem
 		if body.has("fauna_catalog"):
-			var fauna_problem: String = FaunaCatalog.validate(body["fauna_catalog"], body)
+			var fauna_problem: String = FaunaCatalog.validate(body["fauna_catalog"], Surface.descriptor(body) if body.surface_mode == Surface.Cube.MODE else body)
 			if not fauna_problem.is_empty():
 				return fauna_problem
+		if body.has("surface_population"):
+			if body.surface_mode != Surface.Cube.MODE: return "Kugelbestand benötigt einen Kugelkontext."
+			var population_problem: String = preload("res://world/surface/campaign_population_state.gd").validate(body.surface_population, Surface.descriptor(body))
+			if not population_problem.is_empty(): return population_problem
+			if body.surface_population.schema == 2:
+				var storage := preload("res://core/persistence/region_store.gd").new()
+				if not storage.open(body.surface_population.storage): return storage.last_error
 		var animal_problem: String = Animals.validate_body(body, campaign)
 		if not animal_problem.is_empty():
 			return animal_problem
@@ -679,7 +698,7 @@ func _validate_save(data: Dictionary) -> String:
 				matched = Migration.fingerprint(body.get("surface_context", {})) == mapping.target_context_sha256
 		if not matched: return "Migrated body differs from its verified surface mapping."
 	if active.get("surface_mode") == Surface.Cube.MODE:
-		if int(state.phase) != 0 or not campaign.pending_transition.is_empty(): return "Radial phase handoff is not available yet."
+		if int(state.phase) not in [0, 1]: return "Für dieses radiale Zeitalter fehlt die Laufzeit."
 		var player_problem: String = Surface.player_problem(data.player, active)
 		if not player_problem.is_empty(): return player_problem
 		for field in ["object_id", "species_id", "faction_id"]:
@@ -1002,7 +1021,7 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	if campaign.has("surface_policy") and campaign.surface_policy not in [Surface.LEGACY, Surface.Cube.MODE]: return true
 	if campaign.get("surface_migration") is Dictionary and not campaign.surface_migration.is_empty() and campaign.surface_migration.get("schema") != Migration.SCHEMA: return true
 	if campaign.get("surface_migration") is Dictionary and not campaign.surface_migration.is_empty():
-		if campaign.surface_migration.get("algorithm") != "early_campaign_copy_v1": return true
+		if campaign.surface_migration.get("algorithm") not in ["early_campaign_copy_v1", "campaign_places_copy_v2"]: return true
 		var archive: Variant = campaign.surface_migration.get("source_text")
 		if archive is String and archive.to_utf8_buffer().size() <= Migration.MAX_SOURCE_BYTES:
 			var source: Dictionary = Atomic.parse_dictionary(archive)
@@ -1012,8 +1031,19 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	var bodies: Variant = campaign.get("bodies", {})
 	if bodies is Dictionary:
 		for body in bodies.values():
+			if body is Dictionary:
+				for extension in ["legacy_population", "wildlife_foraging", "wildlife_drinking", "surface_ecology"]:
+					if body.get(extension) is Dictionary and body[extension].get("schema") != 1: return true
 			if body is Dictionary and Surface.unsupported(body): return true
-			if body is Dictionary and body.get("home_group") is Dictionary and body.home_group.get("schema") != Home.SCHEMA: return true
+			if body is Dictionary and body.get("home_group") is Dictionary and body.home_group.get("schema") != 1 and body.home_group.get("schema") != Home.SCHEMA: return true
+			if body is Dictionary and body.get("home_group") is Dictionary and body.home_group.get("schema") == Home.SCHEMA and body.home_group.get("surface_mode") != Home.Cube.MODE: return true
+			if body is Dictionary and body.get("surface_population") is Dictionary:
+				if body.surface_population.get("schema") != 1 and body.surface_population.get("schema") != 2: return true
+				if body.surface_population.get("storage") is Dictionary and (body.surface_population.storage.get("schema") != 1 or body.surface_population.storage.get("format") != preload("res://core/persistence/region_store.gd").FORMAT): return true
+				if body.surface_population.get("schema") == 2 and body.surface_population.get("storage") is Dictionary:
+					var region_store := preload("res://core/persistence/region_store.gd").new()
+					region_store.open(body.surface_population.storage)
+					if region_store.unsupported: return true
 			if body is Dictionary and Exploration.newer(body.get("legacy_exploration_atlas")): return true
 			if body is Dictionary and Animals.unsupported(body):
 				return true
@@ -1024,6 +1054,7 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 			if body is Dictionary and Exploration.newer(body.get("exploration_atlas")): return true
 			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
 				return true
+			if body is Dictionary and body.get("tribe") is Dictionary and body.tribe.get("schema") == Tribe.SCHEMA and not body.tribe.get("anchor") is Dictionary: return true
 			if body is Dictionary and body.has("generator_version") and body["generator_version"] != Campaign.GENERATOR_VERSION:
 				return true
 	return false

@@ -71,6 +71,7 @@ func _tick(delta: float) -> void:
 		_job = Job.new()
 		_job.body = adapter.terrain.surface.body.duplicate(true)
 		_job.cell = wanted[id].duplicate(true)
+		_job.prepare()
 		_task = WorkerThreadPool.add_task(_job.run, false, "Radial flora placement")
 		break
 
@@ -117,6 +118,7 @@ func _publish(data: Dictionary) -> void:
 	root.basis = Basis.IDENTITY
 	root.collision_layer = 2
 	data.instances = 0
+	var exclusions: Array[Dictionary] = _campaign_exclusions()
 	for batch: Dictionary in data.batches:
 		var transforms: Array[Transform3D] = []
 		var colors: Array[Color] = []
@@ -124,6 +126,10 @@ func _publish(data: Dictionary) -> void:
 			var transform: Transform3D = batch.transforms[index]
 			if (root.position + transform.origin).distance_to(adapter.to_local(spawn)) < 8.0:
 				continue
+			var reserved: bool = false
+			for place: Dictionary in exclusions:
+				if (root.position + transform.origin).distance_to(place.point) < place.radius: reserved = true; break
+			if reserved: continue
 			transforms.append(transform)
 			colors.append(batch.custom[index])
 		batch.transforms = transforms
@@ -147,6 +153,20 @@ func _publish(data: Dictionary) -> void:
 	loaded += 1
 	peak_instances = maxi(peak_instances, instance_count())
 	max_publish_ms = maxf(max_publish_ms, (Time.get_ticks_usec() - started) / 1000.0)
+
+func _campaign_exclusions() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if preload("res://world/surface/gameplay_space.gd").adapter(self) == null: return result
+	var body: Dictionary = get_node("/root/GameState").get_current_body_record()
+	if body.has("home_group"): result.append({"point": adapter.to_local(body.home_group.anchor), "radius": 4.0})
+	var village: Dictionary = body.get("tribe", {})
+	var structures: Array = village.get("housing", {}).get("homes", []).duplicate()
+	structures.append_array(village.get("husbandry", {}).get("pens", []))
+	structures.append_array(village.get("economy", {}).get("stations", {}).values())
+	if village.get("project", {}).has("position"): structures.append(village.project)
+	for object: Dictionary in structures: result.append({"point": adapter.to_local(object.position), "radius": 3.0})
+	if body.has("tribal_neighbor"): result.append({"point": adapter.to_local(body.tribal_neighbor.anchor), "radius": 4.0})
+	return result
 
 
 func _update_animals() -> void:

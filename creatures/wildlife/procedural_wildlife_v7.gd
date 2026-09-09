@@ -10,6 +10,9 @@ const RuntimePreview = preload(
 )
 const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
+var supplied_identity: Dictionary = {}
+var frozen_blueprint: Dictionary = {}
 
 @export var species_seed: int = 1
 @export var individual_seed: int = 1
@@ -77,6 +80,7 @@ func _ready() -> void:
 	floor_constant_speed = true
 	_random.seed = individual_seed * 97_409 + species_seed
 	_player = get_tree().get_first_node_in_group(&"player") as Node3D
+	Space.orient(self)
 	if not catalog_species.is_empty():
 		var collider := get_node("CollisionShape3D") as CollisionShape3D
 		var shape := CapsuleShape3D.new()
@@ -94,7 +98,9 @@ func _ready() -> void:
 
 
 func _build_species() -> void:
-	if catalog_species.is_empty():
+	if not frozen_blueprint.is_empty():
+		blueprint = frozen_blueprint.duplicate(true)
+	elif catalog_species.is_empty():
 		blueprint = SpeciesFactory.create_species(species_seed, region_coordinates, requested_role)
 	else:
 		blueprint = preload("res://world/fauna/domestication/domestication_contract.gd").decode(catalog_species["blueprint"])
@@ -151,6 +157,7 @@ func _build_species() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	Space.orient(self)
 	_attack_timer = maxf(_attack_timer - delta, 0.0)
 	_threat_timer = maxf(_threat_timer - delta, 0.0)
 	if is_dead:
@@ -162,23 +169,24 @@ func _physics_process(delta: float) -> void:
 	if _decision_timer <= 0.0:
 		_choose_wander_state()
 	_update_role_direction()
-	velocity.x = _wander_direction.x * _move_speed
-	velocity.z = _wander_direction.z * _move_speed
+	var desired: Vector3 = _wander_direction.slide(up_direction) * _move_speed
+	velocity = desired + up_direction * velocity.dot(up_direction)
 	var grounded_before_move: bool = is_on_floor()
 	if grounded_before_move:
-		velocity.y = 0.0
+		velocity = desired
 	else:
-		velocity.y -= gravity_strength * delta
+		velocity -= up_direction * gravity_strength * delta
 	if grounded_before_move:
 		_attempt_step_up(delta)
 	move_and_slide()
-	var pose: String = "walk" if Vector2(velocity.x, velocity.z).length() > 0.15 else "idle"
+	var pose: String = "walk" if velocity.slide(up_direction).length() > 0.15 else "idle"
 	if _preview != null and str(_preview.get("motion_mode")) != pose:
 		_preview.call("set_motion", pose)
 	if is_on_floor():
 		apply_floor_snap()
 	if _visual_root != null and _wander_direction.length_squared() > 0.01:
-		var target_yaw: float = atan2(-_wander_direction.x, -_wander_direction.z)
+		var local_direction: Vector3 = global_basis.inverse() * _wander_direction
+		var target_yaw: float = atan2(-local_direction.x, -local_direction.z)
 		_visual_root.rotation.y = lerp_angle(
 			_visual_root.rotation.y,
 			target_yaw,
@@ -186,7 +194,7 @@ func _physics_process(delta: float) -> void:
 		)
 	if get_slide_collision_count() > 0 and is_on_floor():
 		_wander_direction = _wander_direction.rotated(
-			Vector3.UP,
+			up_direction,
 			_random.randf_range(0.7, 2.2)
 		)
 
@@ -240,7 +248,7 @@ func _update_role_direction() -> void:
 		_player = get_tree().get_first_node_in_group(&"player") as Node3D
 	if _threat_timer > 0.0 and _threat != null and is_instance_valid(_threat):
 		var threat_delta: Vector3 = _threat.global_position - global_position
-		threat_delta.y = 0.0
+		threat_delta = threat_delta.slide(up_direction)
 		if threat_delta.length_squared() > 0.01:
 			if ecological_role == "predator":
 				_wander_direction = threat_delta.normalized()
@@ -252,7 +260,7 @@ func _update_role_direction() -> void:
 	if _player == null or not is_instance_valid(_player):
 		return
 	var to_player: Vector3 = _player.global_position - global_position
-	to_player.y = 0.0
+	to_player = to_player.slide(up_direction)
 	var distance: float = to_player.length()
 	if distance <= 0.01:
 		return
@@ -293,12 +301,7 @@ func _die(killer: Node = null) -> void:
 
 
 func _process_carcass(delta: float) -> void:
-	velocity.x = 0.0
-	velocity.z = 0.0
-	if is_on_floor():
-		velocity.y = 0.0
-	else:
-		velocity.y -= gravity_strength * delta
+	velocity = up_direction * (0.0 if is_on_floor() else velocity.dot(up_direction) - gravity_strength * delta)
 	move_and_slide()
 	if _visual_root != null:
 		_visual_root.rotation.z = lerp_angle(
@@ -340,6 +343,10 @@ func _try_feed_actor_from_carcass(actor: Node) -> void:
 
 
 func _register_ecology_death() -> void:
+	var radial_ecology: Node = get_tree().get_first_node_in_group(&"campaign_surface_ecology")
+	if radial_ecology != null:
+		radial_ecology.died(global_position, species_seed, carcass_food_remaining)
+		return
 	var simulation := get_tree().get_first_node_in_group(&"region_background_simulation")
 	if simulation == null:
 		return
@@ -369,31 +376,11 @@ func _choose_wander_state() -> void:
 		_wander_direction = Vector3.ZERO
 		return
 	var angle: float = _random.randf_range(0.0, TAU)
-	_wander_direction = Vector3(cos(angle), 0.0, sin(angle)).normalized()
+	_wander_direction = global_basis * Vector3(cos(angle), 0.0, sin(angle))
 
 
 func _attempt_step_up(delta: float) -> bool:
-	var horizontal_velocity := Vector3(velocity.x, 0.0, velocity.z)
-	if horizontal_velocity.length_squared() < 0.01:
-		return false
-	var horizontal_motion: Vector3 = horizontal_velocity * delta
-	var original_transform: Transform3D = global_transform
-	if not test_move(original_transform, horizontal_motion):
-		return false
-	var up_motion := Vector3.UP * maximum_step_height
-	if test_move(original_transform, up_motion):
-		return false
-	var raised_transform: Transform3D = original_transform.translated(up_motion)
-	if test_move(raised_transform, horizontal_motion):
-		return false
-	var forward_transform: Transform3D = raised_transform.translated(horizontal_motion)
-	if not test_move(
-		forward_transform,
-		Vector3.DOWN * (maximum_step_height + 0.10)
-	):
-		return false
-	global_transform = raised_transform
-	return true
+	return Space.step(self, velocity.slide(up_direction) * delta, maximum_step_height, 0.10)
 
 
 func _show_actor_message(actor: Node, message: String) -> void:
@@ -416,6 +403,7 @@ func get_campaign_identity() -> Dictionary:
 
 
 func _create_campaign_identity() -> Dictionary:
+	if not supplied_identity.is_empty(): return supplied_identity.duplicate(true)
 	var state := get_node_or_null("/root/GameState")
 	if state == null:
 		return {}

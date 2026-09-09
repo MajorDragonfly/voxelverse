@@ -17,6 +17,7 @@ func _ready() -> void:
 	_player.inspection_mode_changed.connect(func(_enabled: bool): reset())
 
 func active() -> bool:
+	if not is_inside_tree() or is_queued_for_deletion(): return false
 	var flow := get_node_or_null("/root/SessionFlow")
 	return is_instance_valid(_player) and _player.is_physics_processing() and _player.inspection_mode_enabled and not _player.is_dead and not get_tree().paused and (flow == null or not flow.loading) and (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED or DisplayServer.get_name() == "headless")
 

@@ -98,7 +98,7 @@ func _run() -> void:
 	neighbor["schema"] = 1
 	_expect(Neighbor.validate(neighbor, data, campaign.data).is_empty(), "Legacy neighbor cannot load alongside growth.")
 	var carriers: Array = [0, 3, 4, 5].map(func(i: int) -> String: return data["members"][i]["id"])
-	_expect(Neighbor.begin(neighbor, data, carriers).is_empty() and neighbor["schema"] == Neighbor.SCHEMA and Neighbor.validate(neighbor, data, campaign.data).is_empty(), "Grown village cannot save four actual aid carriers.")
+	_expect(Neighbor.begin(neighbor, data, carriers).is_empty() and neighbor["schema"] == Neighbor.LEGACY_SCHEMA and Neighbor.validate(neighbor, data, campaign.data).is_empty(), "Grown village cannot save four actual aid carriers.")
 	var old_neighbor: Dictionary = neighbor.duplicate(true)
 	old_neighbor["schema"] = 1
 	_expect(not Neighbor.validate(old_neighbor, data, campaign.data).is_empty(), "Four carriers silently changed the legacy contract.")

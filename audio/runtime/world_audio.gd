@@ -1,4 +1,5 @@
 extends Node
+const Space = preload("res://world/surface/gameplay_space.gd")
 ## Read-only adapter for the existing player and generator. No movement changes.
 ## Future local-planet/hydrology code can supply sample_provider(position).
 
@@ -95,7 +96,7 @@ func _physics_process(delta: float) -> void:
 		# The current automatic sampler interprets XYZ as planar coordinates.
 		# Radial campaigns must supply their hydrology/audio adapter (M1h);
 		# never sample an unrelated plane at the floating origin.
-		if candidate != null and candidate.get_meta("surface_mode", "legacy_plane_v9") != "legacy_plane_v9" and not sample_provider.is_valid():
+		if candidate != null and candidate.get_meta("surface_mode", "legacy_plane_v9") != "legacy_plane_v9" and Space.adapter(self) == null and not sample_provider.is_valid():
 			reset_tracking()
 			_bind_clock = 0.5
 			return
@@ -123,8 +124,8 @@ func _physics_process(delta: float) -> void:
 		_sample_clock = 0.35
 		_update_environment()
 	_settle = maxf(0.0, _settle - delta)
-	var wet := bool(_sample.get("water_present", false)) and position.y < float(_sample.get("water_height", -INF)) - 0.04
-	var depth := float(_sample.get("water_height", position.y)) - position.y if wet else 0.0
+	var wet := bool(_sample.get("water_present", false)) and _depth(_sample, position) > 0.04
+	var depth := _depth(_sample, position) if wet else 0.0
 	var alive: bool = _player.get("is_dead") != true
 	if alive and _settle <= 0.0:
 		if wet != _last_wet:
@@ -188,6 +189,8 @@ static func surface_for_biome(biome: String) -> String:
 func sample_at(position: Vector3) -> Dictionary:
 	if sample_provider.is_valid():
 		return sample_provider.call(position)
+	if Space.adapter(self) != null:
+		return get_tree().current_scene.get_node("Water").audio_sample(position)
 	var generator := get_node_or_null("/root/WorldGenerator")
 	if generator == null or not generator.has_method("get_terrain_height"):
 		return {}
@@ -205,9 +208,8 @@ func _update_environment() -> void:
 	if camera != null:
 		listener_position = camera.global_position
 	var listener_sample := sample_at(listener_position)
-	var water_height := float(listener_sample.get("water_height", -INF))
 	var threshold := 0.06 if _underwater else -0.06
-	_underwater = bool(listener_sample.get("water_present", false)) and listener_position.y < water_height + threshold
+	_underwater = bool(listener_sample.get("water_present", false)) and _depth(listener_sample, listener_position) > -threshold
 	_audio.set_underwater(_underwater)
 	var environment := get_tree().get_first_node_in_group(&"planet_visual_environment")
 	var on_surface := true
@@ -226,11 +228,12 @@ func _update_environment() -> void:
 	for radius in [0.0, 7.0, 18.0, 30.0]:
 		for direction in 8 if radius > 0.0 else 1:
 			var angle := float(direction) * TAU / 8.0
-			var point: Vector3 = listener_position + Vector3(cos(angle), 0, sin(angle)) * float(radius)
+			var point: Vector3 = Space.offset(self, listener_position, Vector3(cos(angle), 0, sin(angle)) * float(radius))
 			var probe := sample_at(point)
 			if not bool(probe.get("water_present", false)):
 				continue
-			point.y = float(probe["water_height"])
+			if probe.has("water_point"): point = probe.water_point
+			else: point.y = float(probe["water_height"])
 			var distance: float = point.distance_to(listener_position)
 			if distance < nearest:
 				nearest = distance
@@ -238,6 +241,17 @@ func _update_environment() -> void:
 	if nearest < 40.0:
 		_shore.global_position = nearest_position
 		_shore_target = 0.75
+
+func _depth(sample: Dictionary, point: Vector3) -> float:
+	if sample.has("water_point"): return (sample.water_point - point).dot(sample.up)
+	return float(sample.get("water_height", -INF)) - point.y
+
+func surface_origin_shifted(shift: Vector3) -> void:
+	_last_position += shift
+	_shore.global_position += shift
+	if _sample.has("water_point"): _sample.water_point += shift
+	for voice: AudioStreamPlayer3D in _audio._voices:
+		if voice.playing: voice.global_position += shift
 
 
 func _process(delta: float) -> void:

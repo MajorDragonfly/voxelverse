@@ -1341,7 +1341,11 @@ func _play_test_placeholder() -> void:
 	_save_blueprint()
 	if not _last_save_ok:
 		return
-	var result: Error = get_tree().change_scene_to_file(MAIN_SCENE_PATH)
+	var result: Error
+	if get_node("/root/GameState").campaign_scene() == "res://main/spherical_campaign.tscn":
+		result = get_node("/root/SessionFlow").return_from_editor()
+	else:
+		result = get_tree().change_scene_to_file(MAIN_SCENE_PATH)
 	if result != OK:
 		_set_builder_status("Die Welt konnte nicht geöffnet werden. Dein Entwurf ist gespeichert.")
 

@@ -2,9 +2,16 @@ extends Node3D
 ## Repo-native voxel props. Deposits are village salvage/forage patches, separate
 ## from wildlife feeding and its bush stock. Housing has a separate stable owner.
 const Economy = preload("res://world/tribe/village_economy.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 
 func rebuild(data: Dictionary) -> void:
+	if Space.adapter(self) != null:
+		global_position = Space.resolve(self, data.anchor)
+		global_basis = Space.frame(self, global_position)
+		Space.track(self, str(data.id) + ":props")
+		data = Space.visual_data(self, data)
+
 	for child: Node in get_children():
 		remove_child(child)
 		child.queue_free()
@@ -100,7 +107,7 @@ func _box(location: Vector3, size: Vector3, color: Color) -> void:
 	material.roughness = 0.95
 	visual.material_override = material
 	add_child(visual)
-	visual.global_position = location
+	visual.position = location
 
 func _label(location: Vector3, text: String, color: Color) -> void:
 	var label := Label3D.new()
@@ -110,4 +117,4 @@ func _label(location: Vector3, text: String, color: Color) -> void:
 	label.modulate = color
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(label)
-	label.global_position = location
+	label.position = location

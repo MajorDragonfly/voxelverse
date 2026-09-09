@@ -7,23 +7,24 @@ const Factory = preload("res://world/surface/planet_surface_factory.gd")
 const Atlas = preload("res://core/map/exploration_atlas.gd")
 const SCHEMA: int = 1
 const LEGACY: String = "legacy_plane_v9"
-const GENERATION: String = "living_planet_v1"
+const GENERATION: String = "living_planet_v2"
 const DEFAULT_RADIUS: float = 6371000.0
+const MAX_WALKABLE_RADIUS: float = 100000000.0
 const SCENE: String = "res://main/spherical_campaign.tscn"
 
 static func descriptor(body: Dictionary) -> Dictionary:
 	var context: Dictionary = body.surface_context
 	var result: Dictionary = Profile.create(body.id, "planet", int(body.seed), float(context.radius))
 	result.merge({"surface_generation": context.generation, "terrain_revision": context.terrain_revision,
-		"gravity": context.gravity, "adaptive": true}, true)
+		"gravity": context.gravity, "adaptive": true, "inhabited": true}, true)
 	return result
 
 static func create(body: Dictionary, radius: float = DEFAULT_RADIUS) -> Dictionary:
-	if not number(radius, 50000.0, 1.0e10): return {}
+	if not number(radius, 50000.0, MAX_WALKABLE_RADIUS): return {}
 	var result: Dictionary = body.duplicate(true)
 	result.surface_mode = Cube.MODE
 	result.surface_context = {"schema": SCHEMA, "mode": Cube.MODE, "generation": GENERATION,
-		"terrain_revision": 3, "radius": radius, "gravity": 9.81, "spawn": {}}
+		"terrain_revision": 4, "radius": radius, "gravity": 9.81, "spawn": {}}
 	var surface: RefCounted = Factory.create(descriptor(result))
 	# Bounded deterministic search over all six faces, independent of reference
 	# lab IDs/seeds. The candidate and its entire landing footprint must be dry.
@@ -56,10 +57,13 @@ static func landing_problem(surface: RefCounted, address: Dictionary) -> String:
 static func unsupported(body: Dictionary) -> bool:
 	if body.get("surface_mode") not in [LEGACY, Cube.MODE]: return true
 	var value: Variant = body.get("surface_context")
+	if value is Dictionary and number(value.get("radius"), MAX_WALKABLE_RADIUS + 1.0, 1.0e10): return true
 	return value is Dictionary and (value.get("schema") != SCHEMA or value.get("mode") != Cube.MODE or
-		value.get("generation") != GENERATION or value.get("terrain_revision") != 3)
+		(value.get("generation") != GENERATION or value.get("terrain_revision") != 4) and
+		(value.get("generation") != "living_planet_v1" or value.get("terrain_revision") != 3))
 
 static func validate(body: Dictionary) -> String:
+	if body.get("surface_context") is Dictionary and number(body.surface_context.get("radius"), MAX_WALKABLE_RADIUS + 1.0, 1.0e10): return "Dieser Körper ist für die derzeitige Bodenkollision zu groß; seine Daten bleiben unverändert."
 	if unsupported(body): return "Unbekannter Oberflächenvertrag; Spielstand bleibt geschützt."
 	if body.surface_mode == LEGACY:
 		return "Flachwelt mit widersprüchlichem Kugelkontext." if body.has("surface_context") else ""
@@ -67,16 +71,32 @@ static func validate(body: Dictionary) -> String:
 	if not value is Dictionary: return "Kugelwelt ohne Oberflächenkontext."
 	if not body.get("id") is String or body.id.is_empty() or not number(body.get("seed"), 1.0, 2147483647.0) or float(body.seed) != floor(float(body.seed)):
 		return "Ungültige Körperidentität oder Seed."
-	for field in ["home_group", "tribe", "tribal_neighbor", "domesticated_animals", "fauna_catalog"]:
-		if body.has(field): return "Noch nicht angebundene Ortsdaten auf der Kugel: " + field
-	if not number(value.get("radius"), 50000.0, 1.0e10) or not number(value.get("gravity"), 0.1, 100.0):
+	if not number(value.get("radius"), 50000.0, MAX_WALKABLE_RADIUS) or not number(value.get("gravity"), 0.1, 100.0):
 		return "Ungültiger Radius oder ungültige Schwerkraft."
 	if not location(value.get("spawn"), str(body.get("id", ""))): return "Ungültiger Startort auf der Kugel."
+	if body.has("home_group") and body.home_group.get("surface_mode") != Cube.MODE: return "Heimatgruppe besitzt noch planare Orte."
+	var place_problem: String = validate_places(body, str(body.id), float(value.radius))
+	if not place_problem.is_empty(): return place_problem
 	if body.has("legacy_exploration_atlas"):
 		var old: Variant = body.legacy_exploration_atlas
 		var problem: String = Atlas.validate(old, str(body.id))
 		if not problem.is_empty(): return problem
 		if old.mode != LEGACY: return "Das Kartenarchiv muss eine alte Flächenkarte enthalten."
+	return ""
+
+static func validate_places(value: Variant, body_id: String, radius: float, depth: int = 0) -> String:
+	if depth > 32: return "Zu tief verschachtelte Ortsdaten."
+	if value is Dictionary:
+		if value.get("mode") == Cube.MODE and value.has("face"):
+			if not location(value, body_id): return "Ungültiger oder körperfremder Ort."
+			if value.has("radius") and (not number(value.radius, 50000.0, 1.0e10) or float(value.radius) != radius): return "Ortsmaßstab stimmt nicht mit dem Körper überein."
+		for child in value.values():
+			var problem: String = validate_places(child, body_id, radius, depth + 1)
+			if not problem.is_empty(): return problem
+	elif value is Array:
+		for child in value:
+			var problem: String = validate_places(child, body_id, radius, depth + 1)
+			if not problem.is_empty(): return problem
 	return ""
 
 static func location(value: Variant, body_id: String) -> bool:
