@@ -4,7 +4,8 @@ extends Node
 signal feedback_played(order: StringName, command_id: String, accepted: bool)
 const ORDERS := {&"move": &"move", &"gather": &"gather", &"wood": &"gather",
 	&"stone": &"gather", &"food": &"gather", &"attack": &"attack",
-	&"build": &"build", &"tool": &"build", &"hut": &"build", &"wait": &"wait", &"feed": &"feed", &"garden": &"build", &"supply": &"gather"}
+	&"build": &"build", &"tool": &"build", &"hut": &"build", &"wait": &"wait", &"feed": &"feed", &"garden": &"build", &"supply": &"gather",
+	&"follow": &"move", &"home": &"move", &"tame": &"tame"}
 const MAX_RECEIPTS := 256
 var automatic_binding := true
 var _sources: Array[Node] = []

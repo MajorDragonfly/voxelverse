@@ -54,10 +54,9 @@ func read(query: String = "", life_filter: String = "living") -> Dictionary:
 		return _unavailable("Dein Tierbestand ist hier noch nicht verfügbar.")
 	var context := _read_context()
 	var registry := _registry(source)
-	if registry.get("schema") != 1 or _validator.get("SCHEMA") != 1 or not _validator.call("validate", registry).is_empty():
-		return _unavailable("Dieser Tierbestand kann derzeit nicht gelesen werden.")
-	if not context.get("faction_id") is String or context["faction_id"].is_empty() or context.get("campaign_id") != registry["campaign_id"] or context.get("body_id") != registry["body_id"]:
-		return _unavailable("Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar.")
+	var error := scope_error(registry, context, _validator)
+	if not error.is_empty():
+		return _unavailable(error)
 	var rows: Array[Dictionary] = []
 	var owned_count := 0
 	for animal: Dictionary in source.call("owned_animals", context["faction_id"], true):
@@ -77,6 +76,13 @@ func read(query: String = "", life_filter: String = "living") -> Dictionary:
 		return a["key"] < b["key"] if compared == 0 else compared < 0)
 	return {"available": true, "rows": rows, "message": "Deinem Stamm gehören hier noch keine Tiere. Befreundete Wildtiere und begonnene Zähmungen zählen noch nicht dazu." if owned_count == 0 else "Keine passenden Tiere. Ändere die Suche oder den Filter."}
 
+static func scope_error(registry: Dictionary, context: Dictionary, validator: Script) -> String:
+	if validator == null or not validator.has_method("validate") or registry.get("schema") != 1 or validator.get("SCHEMA") != 1 or not validator.call("validate", registry).is_empty():
+		return "Dieser Tierbestand kann derzeit nicht gelesen werden."
+	if not context.get("faction_id") is String or context["faction_id"].is_empty() or context.get("campaign_id") != registry["campaign_id"] or context.get("body_id") != registry["body_id"]:
+		return "Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar."
+	return ""
+
 func _row(animal: Dictionary) -> Dictionary:
 	var id: String = animal["object_id"]
 	var dead: bool = animal["status"] == "dead"
@@ -89,7 +95,7 @@ func _row(animal: Dictionary) -> Dictionary:
 	return {"key": id, "name": _name("animal", id, "Unbenanntes Tier · " + id),
 		"species": _name("species", animal["species_id"], "Name nicht bekannt · " + animal["species_id"]),
 		"owner": _name("faction", animal["owner_faction_id"], "Dein Stamm"),
-		"trust": "%s / 100" % _number(animal["trust"]),
+		"trust": "%s / 100" % number(animal["trust"]),
 		"status": "Verstorben" if dead else "Gezähmt", "dead": dead, "order": order,
 		"location": "%s · %s" % [_name("body", animal["body_id"], "Aktuelle Welt"), _point(animal["position"])]}
 
@@ -98,9 +104,9 @@ func _name(kind: String, id: String, fallback: String) -> String:
 	return value.strip_edges() if value is String and not value.strip_edges().is_empty() else fallback
 
 func _point(point: Array) -> String:
-	return "X %s · Y %s · Z %s m" % [_number(point[0]), _number(point[1]), _number(point[2])]
+	return "X %s · Y %s · Z %s m" % [number(point[0]), number(point[1]), number(point[2])]
 
-func _number(value: Variant) -> String:
+static func number(value: Variant) -> String:
 	return String.num(float(value), 1).trim_suffix(".0").replace(".", ",")
 
 func _read_context() -> Dictionary:
