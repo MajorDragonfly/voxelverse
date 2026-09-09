@@ -106,5 +106,32 @@
   "numeric_tolerance": 0.002,
   "units": "design_units",
   "fresh_process_reload": true,
-  "local_renderer": "Unavailable: X11/Wayland display could not be created. See dedicated CI workflow for render acceptance."
+  "local_renderer": "Unavailable: X11/Wayland display could not be created. See dedicated CI workflow for render acceptance.",
+  "implementation_commit": "dba2660586171cd4c2d1e8c0af5acf9f64b2f135",
+  "ci": {
+    "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34345073333",
+    "result": "success",
+    "renderers": [
+      "gl_compatibility",
+      "forward_plus"
+    ],
+    "capture_names": [
+      "body_fittings",
+      "fittings_slope",
+      "six_leg_fittings"
+    ],
+    "artifact_id": 10101366184,
+    "artifact_sha256": "a6f325dcc4f8aaf7c7df309f895f339d5340e23f394a1ff06eb166aedc4fe119",
+    "visual_inspection": "Automated renderer/log checks passed; PNG download unavailable in this session (HTTP 403). No manual pixel review claimed."
+  },
+  "preexisting_export_issue": {
+    "ci_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34345073322",
+    "check": "packaged_menu_input",
+    "functional_marker": "MENU_INPUT_PASSED",
+    "resource": "res://audio/assets/music/menu.ogg::OggPacketSequence_blkk0",
+    "baseline_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+    "baseline_reproduction": "First isolated run passed; second isolated run reproduced the same audio leak. Branch run also reproduced it.",
+    "command": "godot --headless --verbose --path . -- --input-smoke",
+    "action": "No shared audio/shutdown files modified; handoff to audio/integration owner."
+  }
 }
