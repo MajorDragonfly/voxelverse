@@ -1,0 +1,109 @@
+{
+  "date": "2026-09-09",
+  "branch": "agent/d3-village-husbandry",
+  "base_commit": "09b3b4621930bbe8008c6deca893beaabf5b7d1a",
+  "engine": "Godot 4.6.3",
+  "passed": true,
+  "checks": [
+    {
+      "name": "tribal_age_economy_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.86
+    },
+    {
+      "name": "tribal_age_growth_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.53
+    },
+    {
+      "name": "tribal_age_housing_recovery_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.13
+    },
+    {
+      "name": "tribal_age_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 48.54
+    },
+    {
+      "name": "tribal_age_supply_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 33.74
+    },
+    {
+      "name": "tribal_age_economy_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 98.66
+    },
+    {
+      "name": "growth",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 150.42
+    },
+    {
+      "name": "growth_restart",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.54
+    },
+    {
+      "name": "world",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 123.72
+    },
+    {
+      "name": "restart",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.99
+    },
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.53
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.52
+    },
+    {
+      "name": "husbandry",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 126.94
+    },
+    {
+      "name": "husbandry_restart",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.94
+    },
+    {
+      "name": "render_restart",
+      "passed": true,
+      "exit_code": 0,
+      "resolutions": [
+        [
+          1280,
+          800
+        ],
+        [
+          800,
+          900
+        ]
+      ],
+      "renderer": "OpenGL / Mesa llvmpipe"
+    }
+  ]
+}

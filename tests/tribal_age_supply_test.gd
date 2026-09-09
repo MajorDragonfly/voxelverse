@@ -142,12 +142,10 @@ func _run() -> void:
 	edge["grown"] = 100
 	_expect(not Model.validate(edge, tribe.body(), state.campaign.data).is_empty(), "Cargo reservations can overflow the store.")
 	_expect(Model.validate(tribe.village(), tribe.body(), state.campaign.data).is_empty() and saves.save_now(), "Renewable economy cannot be saved.")
-	# Narrow desktop screenshot exercises wrapping with the new actions.
+	# Every action must be reachable on its tab through the actual scroll container.
 	root.size = Vector2i(800, 900)
 	await _frames(8)
-	for button: Button in tribe.panel._buttons.values():
-		var rect: Rect2 = button.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, button.size)
-		_expect(root.get_visible_rect().encloses(rect), "Supply action is outside the narrow window: %s rect=%s viewport=%s" % [button.name, rect, root.get_visible_rect()])
+	await _check_scrolled_actions()
 	await _capture("10_supply_narrow")
 	await _cleanup()
 	_finish()

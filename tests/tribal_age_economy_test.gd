@@ -225,13 +225,11 @@ func _run() -> void:
 	evidence = {"delivered": tribe.village()["delivered"], "meals": tribe.village()["meals"], "drinks": tribe.village()["economy"]["drinks"], "produced": tribe.village()["economy"]["produced"], "grown": tribe.village()["grown"], "stock": tribe.village()["stock"].duplicate()}
 	for size: Vector2i in [Vector2i(1280, 720), Vector2i(800, 900)]:
 		root.size = size
-		for tab in range(2):
+		await _frames(10)
+		await _check_scrolled_actions()
+		for tab in range(3):
 			tribe.panel._tabs.current_tab = tab
-			await _frames(10)
-			for button: Button in tribe.panel._buttons.values():
-				if button.is_visible_in_tree():
-					var rect: Rect2 = button.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, button.size)
-					_expect(root.get_visible_rect().encloses(rect), "Economy UI outside viewport: " + str(button.name))
+			await _frames(3)
 			await _capture("04_ui_%d_%d_%d" % [size.x, size.y, tab])
 	tribe.panel._collapse.pressed.emit()
 	await _frames(5)

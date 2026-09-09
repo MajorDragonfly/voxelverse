@@ -3,6 +3,8 @@ extends Node
 signal order_resolved(order: StringName, command_id: String, accepted: bool)
 var _order_sequence: int = 0
 
+const Husbandry = preload("res://world/tribe/village_husbandry.gd")
+const HusbandryRuntime = preload("res://world/tribe/husbandry_runtime.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
 const Shelters = preload("res://world/tribe/village_shelters.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
@@ -21,6 +23,7 @@ var camera: Camera3D
 var actors: Dictionary = {}
 var selected: Array[String] = []
 var navigation := Navigation.new()
+var husbandry := HusbandryRuntime.new()
 var status: String = ""
 var _state: Node
 var _saves: Node
@@ -48,6 +51,7 @@ var _stalls: Dictionary = {}
 signal community_event(kind: StringName, details: Dictionary)
 
 func _ready() -> void:
+	husbandry.controller = self
 	home = get_parent().get_node("HomeGroup")
 	_state = get_node("/root/GameState")
 	_saves = get_node("/root/SaveGameService")
@@ -326,7 +330,7 @@ func screen_command(position: Vector2) -> void:
 	issue_order("move", target)
 
 func issue_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
-	if order in Economy.STATIONS.keys() + Housing.KINDS and destination == Vector3.ZERO and is_active():
+	if order in Economy.STATIONS.keys() + Housing.BUILDS and destination == Vector3.ZERO and is_active():
 		if not village()["project"].is_empty() and village()["project"]["kind"] == order:
 			destination = HomeState.vector(village()["project"]["position"])
 		else:
@@ -355,7 +359,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 				return false
 	var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
 	if order in costs:
-		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or data["economy"]["stations"].has(order):
+		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or (order == "pen" and data["husbandry"]["pens"].size() >= Husbandry.MAX_PENS) or data["economy"]["stations"].has(order):
 			status = "Dieser Ausbau ist bereits abgeschlossen."
 			return false
 		if order != "tool" and int(data["tools"]) == 0:
@@ -365,10 +369,10 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 			status = "Schließe zuerst die laufende Arbeit ab."
 			return false
 		if data["project"].is_empty():
-			if order in Economy.STATIONS.keys() + Housing.KINDS:
+			if order in Economy.STATIONS.keys() + Housing.BUILDS:
 				navigation.rebuild(home, anchor(), village())
 				var snapped: Vector3 = navigation.snap(destination)
-				if snapped.distance_to(destination) > 1.8 or not (navigation.free_shelter(snapped, data, order) if order in Housing.KINDS else navigation.free_workplace(snapped, data, order)):
+				if snapped.distance_to(destination) > 1.8 or not (navigation.free_shelter(snapped, data, order) if order in Housing.BUILDS else navigation.free_workplace(snapped, data, order)):
 					status = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
 					return false
 				destination = snapped
@@ -383,8 +387,9 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 			for kind: String in costs[order]:
 				data["stock"][kind] -= costs[order][kind]
 			data["project"] = {"kind": order, "progress": 0.0}
-			if order in Housing.KINDS:
-				data["project"].merge(Housing.site(data, order, HomeState.vector_array(destination), data["housing"]["homes"].size()))
+			if order in Housing.BUILDS:
+				var index: int = data["husbandry"]["pens"].size() if order == "pen" else data["housing"]["homes"].size()
+				data["project"].merge(Housing.site(data, order, HomeState.vector_array(destination), index))
 				data["project"]["materials"] = costs[order].duplicate()
 				data["project"]["delivered_materials"] = {}
 				for kind: String in costs[order]:
@@ -467,6 +472,9 @@ func _physics_process(delta: float) -> void:
 		if member["construction_id"] != "" and order != "wait":
 			target = HomeState.vector(village()["project"]["entrance"])
 			construction = true
+		elif member["care_pen_id"] != "" and order != "wait":
+			target = husbandry.cargo_target(member)
+			construction = target.distance_to(anchor()) > 0.1
 		elif member["cargo"] != "" and order != "wait":
 			target = anchor()
 		elif member["stage"] in ["meal", "drink"]:
@@ -477,9 +485,9 @@ func _physics_process(delta: float) -> void:
 		elif order in Economy.RESOURCES or order in ["supply", "provision"]:
 			var kind: String = Economy.gather_kind(village(), member)
 			target = HomeState.vector(village()["deposits"][kind]["position"]) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
-		elif order in ["feed", "drink", "tool", "build"]:
+		elif order in ["feed", "drink", "tool", "build", "tend"]:
 			target = anchor()
-		elif order in Housing.KINDS and village()["project"].get("kind") == order:
+		elif order in Housing.BUILDS and village()["project"].get("kind") == order:
 			construction = not Housing.pending(village()["project"])
 			target = HomeState.vector(village()["project"]["entrance"]) if construction else anchor()
 		elif order == "garden":
@@ -499,6 +507,7 @@ func _physics_process(delta: float) -> void:
 			_work(member, simulation_delta)
 	_update_selection()
 	_shelters.clear_entrances(actors)
+	husbandry.tick(simulation_delta)
 	_grow_residents(simulation_delta)
 
 func _construction_workplace(entrance: Vector3, index: int) -> Vector3:
@@ -589,6 +598,9 @@ func _work(member: Dictionary, delta: float) -> void:
 			member["stage"] = "outbound"
 			_changed()
 		return
+	if member["care_pen_id"] != "":
+		husbandry.deliver(member)
+		return
 	if member["cargo"] != "":
 		var kind: String = member["cargo"]
 		data["stock"][kind] += 1
@@ -606,7 +618,9 @@ func _work(member: Dictionary, delta: float) -> void:
 		member["stage"] = "outbound"
 		_changed()
 		return
-	if order == "milk":
+	if order == "tend":
+		husbandry.pickup(member)
+	elif order == "milk":
 		var incoming: Array = data["economy"]["incoming"]
 		if incoming.is_empty() or Economy.at_target(data, member, "milk"):
 			return
@@ -645,7 +659,7 @@ func _work(member: Dictionary, delta: float) -> void:
 			if member["order"] != "build":
 				member["order"] = "wait"
 			return
-		if order in Housing.KINDS:
+		if order in Housing.BUILDS:
 			if Housing.pending(project):
 				if HomeState.vector(member["position"]).distance_to(anchor()) <= 3.0:
 					for kind: String in project["materials"]:
@@ -665,6 +679,10 @@ func _work(member: Dictionary, delta: float) -> void:
 				data["housing"]["homes"].append(Housing.site(data, order, project["position"], data["housing"]["homes"].size()))
 				if order == "hut":
 					data["huts"] += 1
+			elif order == "pen":
+				var p: Dictionary = Housing.site(data, order, project["position"], data["husbandry"]["pens"].size())
+				p.merge({"animal_id": "", "food": 0.0, "water": 0.0})
+				data["husbandry"]["pens"].append(p)
 			elif order in Economy.STATIONS:
 				data["economy"]["stations"][order] = {"id": Model.Ids.scoped("workplace", data["id"], order), "position": project["position"].duplicate()}
 				data["deposits"][Economy.STATIONS[order]]["position"] = project["position"].duplicate()

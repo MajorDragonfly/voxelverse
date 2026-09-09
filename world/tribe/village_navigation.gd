@@ -116,7 +116,7 @@ func free_workplace(position: Vector3, data: Dictionary, kind: String) -> bool:
 		var floor_point: Vector3 = snap(position + corner)
 		if floor_point.distance_to(position + corner) > 0.45 or route(position, floor_point).is_empty():
 			return false
-	for shelter: Dictionary in Housing.obstacles(data):
+	for shelter: Dictionary in Housing.obstacles(data) + data.get("husbandry", {}).get("pens", []):
 		if position.distance_to(Home.vector(shelter["position"])) < 4.0 or position.distance_to(Home.vector(shelter["entrance"])) < 2.5:
 			return false
 	for resource: String in data["deposits"]:
@@ -161,6 +161,12 @@ func free_shelter(position: Vector3, data: Dictionary, kind: String) -> bool:
 		points.append(Home.vector(deposit["position"]))
 	for shelter: Dictionary in data["housing"]["homes"]:
 		points.append(Home.vector(shelter["entrance"]))
+	for p: Dictionary in data.get("husbandry", {}).get("pens", []):
+		points.append(Home.vector(p["position"]))
+		points.append(Home.vector(p["entrance"]))
+	for record: Dictionary in data.get("husbandry", {}).get("records", {}).values():
+		if int(record["pending_milk"]) > 0:
+			points.append(Home.vector(record["pickup"]))
 	for batch: Dictionary in data["economy"]["incoming"]:
 		points.append(Home.vector(batch["position"]))
 	var clear: bool = true

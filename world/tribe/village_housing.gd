@@ -4,7 +4,8 @@ const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const KINDS: Array[String] = ["hut", "tent"]
-const COSTS: Dictionary = {"hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}}
+const BUILDS: Array[String] = ["hut", "tent", "pen"]
+const COSTS: Dictionary = {"hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}, "pen": {"wood": 4, "fiber": 2}}
 const BEDS: Dictionary = {"hut": 2, "tent": 1}
 const MAX_RESIDENTS: int = 6
 const MAX_HOMES: int = 6
@@ -14,7 +15,7 @@ static func resident_id(data: Dictionary, index: int) -> String:
 	return Ids.scoped("resident", data["id"], str(index))
 
 static func site(data: Dictionary, kind: String, position: Array, index: int) -> Dictionary:
-	return {"id": Ids.scoped("shelter", data["id"], str(index)), "kind": kind,
+	return {"id": Ids.scoped("pen" if kind == "pen" else "shelter", data["id"], str(index)), "kind": kind,
 		"position": position.duplicate(), "entrance": Home.vector_array(Home.vector(position) + Vector3(0, 0, 2))}
 
 static func install(data: Dictionary) -> void:
@@ -38,7 +39,7 @@ static func beds(data: Dictionary) -> int:
 
 static func obstacles(data: Dictionary) -> Array:
 	var result: Array = data.get("housing", {}).get("homes", []).duplicate()
-	if data.get("project", {}).get("kind", "") in KINDS and data["project"].has("entrance"):
+	if data.get("project", {}).get("kind", "") in BUILDS and data["project"].has("entrance"):
 		result.append(data["project"])
 	return result
 
@@ -91,6 +92,8 @@ static func add_resident(data: Dictionary, position: Vector3) -> Dictionary:
 		"species_id": data["species_id"], "faction_id": data["faction_id"], "position": Home.vector_array(position),
 		"destination": Home.vector_array(position), "order": "wait", "stage": "outbound", "work": 0.0,
 		"cargo": "", "hunger": 75.0, "hydration": 100.0, "profession": "none", "paused_order": "", "task": "", "blocked": false, "construction_id": ""}
+	if int(data["schema"]) >= 5:
+		member["care_pen_id"] = ""
 	data["members"].append(member)
 	data["stock"]["food"] -= 2
 	data["stock"]["water"] -= 2
@@ -104,8 +107,10 @@ static func validate(data: Dictionary) -> String:
 	var huts: int = 0
 	var all_sites: Array = h["homes"].duplicate()
 	var project: Dictionary = data["project"]
-	var building: bool = project.get("kind", "") in KINDS
-	if building:
+	var building: bool = project.get("kind", "") in BUILDS
+	if building and not Economy.text_id(project.get("id")):
+		return "Der Baustelle fehlt ihre Kennung."
+	if project.get("kind", "") in KINDS:
 		if all_sites.size() >= MAX_HOMES or int(data["tools"]) != 1:
 			return "Für diese Unterkunft fehlt Werkzeug oder Bauplatz."
 		all_sites.append(project)

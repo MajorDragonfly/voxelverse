@@ -8,9 +8,9 @@ const STATIONS: Dictionary = {"well": "water", "forester": "wood", "quarry": "st
 const COSTS: Dictionary = {"well": {"wood": 3, "stone": 2}, "forester": {"wood": 4, "stone": 1}, "quarry": {"wood": 4, "stone": 2}, "fiberbed": {"wood": 2, "stone": 1}}
 const INTERVALS: Dictionary = {"water": 5.0, "wood": 12.0, "stone": 15.0, "fiber": 12.0}
 const TITLES: Dictionary = {"water": "Wasser", "wood": "Holz", "stone": "Stein", "fiber": "Fasern", "food": "Nahrung", "milk": "Milch"}
-const JOBS: Dictionary = {"none": "Ohne Beruf", "provider": "Versorger", "forester": "Holzarbeiter", "mason": "Steinmetz", "weaver": "Fasersammler", "builder": "Baumeister", "milk_carrier": "Milchträger"}
-const JOB_ORDER: Dictionary = {"none": "wait", "provider": "provision", "forester": "wood", "mason": "stone", "weaver": "fiber", "builder": "build", "milk_carrier": "milk"}
-const ORDERS: Array[String] = ["water", "fiber", "milk", "drink", "provision", "build", "well", "forester", "quarry", "fiberbed"]
+const JOBS: Dictionary = {"none": "Ohne Beruf", "provider": "Versorger", "forester": "Holzarbeiter", "mason": "Steinmetz", "weaver": "Fasersammler", "builder": "Baumeister", "milk_carrier": "Milchträger", "keeper": "Tierpfleger"}
+const JOB_ORDER: Dictionary = {"none": "wait", "provider": "provision", "forester": "wood", "mason": "stone", "weaver": "fiber", "builder": "build", "milk_carrier": "milk", "keeper": "tend"}
+const ORDERS: Array[String] = ["water", "fiber", "milk", "drink", "provision", "build", "well", "forester", "quarry", "fiberbed", "tend"]
 const TARGETS: Dictionary = {"food": 12, "water": 12, "wood": 16, "stone": 16, "fiber": 12, "milk": 12}
 const CAPACITY: int = 8
 const CARE_THRESHOLD: float = 55.0
@@ -148,7 +148,7 @@ static func validate(data: Dictionary) -> String:
 		if not built and (float(e["clocks"][kind]) != 0 or int(e["produced"][kind]) != 0):
 			return "Rohstoffe entstehen erst nach dem Arbeitsplatzbau."
 	for member: Dictionary in data["members"]:
-		if not number(member.get("hydration"), 0, 100) or member.get("profession") not in JOBS or not member.get("paused_order") is String or (member["paused_order"] != "" and member["paused_order"] not in (["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "feed", "garden", "supply"] + ORDERS)) or member.get("task") not in ["", "water", "food"] or not member.get("blocked") is bool:
+		if not number(member.get("hydration"), 0, 100) or member.get("profession") not in JOBS or not member.get("paused_order") is String or (member["paused_order"] != "" and member["paused_order"] not in (["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "pen", "feed", "garden", "supply"] + ORDERS)) or member.get("task") not in ["", "water", "food"] or not member.get("blocked") is bool:
 			return "Ungültiger Beruf oder unterbrochener Auftrag."
 		if member["paused_order"] != "" and member["order"] != "wait":
 			return "Unterbrochener Auftrag wird bereits ausgeführt."

@@ -342,3 +342,16 @@ func _expect(condition: bool, message: String) -> void:
 func _finish() -> void:
 	print(JSON.stringify({"test": "tribal_age", "passed": failures.is_empty(), "failures": failures}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+func _check_scrolled_actions() -> void:
+	for button: Button in tribe.panel._buttons.values():
+		tribe.panel._tabs.current_tab = button.get_parent().get_parent().get_index()
+		await _frames(3)
+		if not button.is_visible_in_tree():
+			continue # Milk pickup appears only when a delivery exists.
+		tribe.panel._scroll.ensure_control_visible(button)
+		await _frames(3)
+		var rect: Rect2 = button.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, button.size)
+		var scroll_rect: Rect2 = tribe.panel._scroll.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, tribe.panel._scroll.size)
+		# Integer scrolling and canvas scaling can round an edge by less than one viewport pixel.
+		_expect(button.is_visible_in_tree() and root.get_visible_rect().encloses(rect) and scroll_rect.grow(1.0).encloses(rect), "Action outside viewport or clipped: %s rect=%s scroll=%s" % [button.name, rect, scroll_rect])

@@ -16,15 +16,23 @@ def main():
     parser.add_argument("--project", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, default=Path(tempfile.gettempdir()) / "voxelverse-m6-checks")
     parser.add_argument("--skip-import", action="store_true")
+    parser.add_argument("--only", nargs="+", help="Run named checks (restart checks need their preceding save-group check).")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     checks = [] if args.skip_import else [("import", ["--import"], "import")]
     checks += [(name, ["--script", "res://tests/" + name + ".gd"], name) for name in
-               ["tribal_age_economy_contract_test", "tribal_age_growth_contract_test", "tribal_age_housing_recovery_test", "tribal_age_test", "tribal_age_supply_test", "tribal_age_economy_test"]]
+               ["tribal_age_economy_contract_test", "tribal_age_growth_contract_test", "tribal_age_husbandry_contract_test", "tribal_age_housing_recovery_test", "tribal_age_test", "tribal_age_supply_test", "tribal_age_economy_test"]]
+    checks += [("husbandry", ["--script", "res://tests/tribal_age_husbandry_test.gd"], "husbandry"),
+               ("husbandry_restart", ["--script", "res://tests/tribal_age_husbandry_test.gd", "--", "--restart-check"], "husbandry")]
     checks += [("growth", ["--script", "res://tests/tribal_age_growth_test.gd"], "growth"),
                ("growth_restart", ["--script", "res://tests/tribal_age_growth_test.gd", "--", "--restart-check"], "growth")]
     checks += [("world", ["--script", "res://tests/tribal_age_world_test.gd", "--", "--economy", "--housing"], "world"),
                ("restart", ["--script", "res://tests/tribal_age_world_test.gd", "--", "--restart-check", "--economy", "--housing"], "world")]
+    if args.only:
+        unknown = set(args.only) - {name for name, _, _ in checks}
+        if unknown:
+            parser.error("Unknown check(s): " + ", ".join(sorted(unknown)))
+        checks = [check for check in checks if check[0] in args.only]
     results = []
     with tempfile.TemporaryDirectory(prefix="voxelverse-m6-") as scratch:
         for name, argv, save_group in checks:

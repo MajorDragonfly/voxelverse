@@ -50,7 +50,7 @@ func rebuild(data: Dictionary) -> void:
 		var site: Vector3 = Home.vector(batch["position"])
 		_box(site + Vector3(0, 0.4, 0), Vector3(0.5, 0.8, 0.5), Color("f4f0dd"))
 		_label(site + Vector3(0, 2.5, 0), "Milch zur Abholung · %d" % batch["remaining"], Color("f4f0dd"))
-	if data["project"].get("kind") in ["hut", "tent"]:
+	if data["project"].get("kind") in ["hut", "tent", "pen"]:
 		var project: Dictionary = data["project"]
 		var location: Vector3 = Home.vector(project["position"])
 		for x in [-1, 1]:
@@ -62,7 +62,19 @@ func rebuild(data: Dictionary) -> void:
 		for kind: String in project["delivered_materials"]:
 			delivered += int(project["delivered_materials"][kind])
 			required += int(preload("res://world/tribe/village_housing.gd").COSTS[project["kind"]][kind])
-		_label(location + Vector3(0, 2.8, 0), "%s im Bau · Material %d / %d" % ["Hütte" if project["kind"] == "hut" else "Zelt", delivered, required], Color("edd5a8"))
+		_label(location + Vector3(0, 2.8, 0), "%s im Bau · Material %d / %d" % [{"hut": "Hütte", "tent": "Zelt", "pen": "Tierplatz"}[project["kind"]], delivered, required], Color("edd5a8"))
+	for p: Dictionary in data.get("husbandry", {}).get("pens", []):
+		var location: Vector3 = Home.vector(p["position"])
+		# Open care place: posts mark capacity, no invisible enclosure or animal motion.
+		for x in [-1, 1]:
+			_box(location + Vector3(x, 0.5, -1), Vector3(0.16, 1, 0.16), Color("95643e"))
+		for side in [-1, 1]:
+			_box(location + Vector3(side * 0.85, 0.2, 0.5), Vector3(0.45, 0.4, 1.1), Color("765130"))
+			var kind: String = "water" if side == 1 else "food"
+			if float(p[kind]) > 0:
+				_box(location + Vector3(side * 0.85, 0.4, 0.5), Vector3(0.32, 0.06, 0.9), Color("60bde8") if side == 1 else Color("b8bf67"))
+		_box(Home.vector(p["entrance"]) + Vector3(0, 0.03, 0), Vector3(1.3, 0.06, 0.7), Color("c9b080"))
+		_label(location + Vector3(0, 3, 0), "Tierplatz · %s" % ("frei" if p["animal_id"] == "" else "belegt"), Color("ead19a"))
 	if int(data["tools"]) == 1:
 		_box(center + Vector3(0, 0.6, -1.3), Vector3(0.18, 0.7, 0.18), Color("b08451"))
 		_box(center + Vector3(0.14, 0.9, -1.3), Vector3(0.5, 0.3, 0.22), Color("b2c0c2"))

@@ -35,6 +35,13 @@ var _hud_content: VBoxContainer
 var _scroll: ScrollContainer
 var _collapse: Button
 var _collapsed: bool = false
+var _husbandry_page: VBoxContainer
+var _pens: OptionButton
+var _animals: OptionButton
+var _animal_ids: Array[String] = []
+var _care_status: Label
+var _bind_animal: Button
+var _release_animal: Button
 
 func _ready() -> void:
 	layer = 40
@@ -85,6 +92,7 @@ func _build() -> void:
 	_residents = HFlowContainer.new()
 	column.add_child(_residents)
 	_tabs = TabContainer.new()
+	_tabs.use_hidden_tabs_for_min_size = false
 	column.add_child(_tabs)
 	_orders_page = VBoxContainer.new()
 	_orders_page.name = "Aufträge"
@@ -135,6 +143,7 @@ func _build() -> void:
 	professions.add_child(back)
 	back.pressed.connect(func() -> void: controller.issue_order("profession"))
 	_work_page.add_child(Style.label("Versorger halten Nahrung und Wasser bereit. Baumeister helfen an der laufenden Baustelle. Manuelle Befehle ändern den Beruf nicht.", 15, Style.MUTED))
+	_build_husbandry()
 	_message = Style.label("", 16, Style.MUTED)
 	_hud.get_child(0).add_child(_message)
 	column.add_child(Style.label("Linksklick / Rahmen: auswählen · Umschalt: Auswahl ändern · Rechtsklick: laufen oder sammeln · WASD: Kamera · Mausrad: Zoom · Leertaste: Pause", 15, Style.MUTED))
@@ -245,6 +254,8 @@ func refresh() -> void:
 	var data: Dictionary = controller.village()
 	if data.is_empty():
 		return
+	_goal.visible = _tabs.current_tab != 2
+	_supply.visible = _tabs.current_tab != 2
 	var stock: Dictionary = data["stock"]
 	_stock.text = "STAMM · Holz %d · Stein %d · Nahrung %d · Wasser %d · Fasern %d · Milch %d   |   Bewohner %d / 6 · Schlafplätze %d" % [stock["wood"], stock["stone"], stock["food"], stock["water"], stock["fiber"], stock["milk"], data["members"].size(), Housing.beds(data)]
 	_supply.text = "Lager: je 48 Einheiten. Arbeitende Bewohner essen und trinken selbstständig; ihr Auftrag bleibt erhalten."
@@ -257,7 +268,7 @@ func refresh() -> void:
 		_goal.text = "Material bereit · Weise Bewohner an, das erste Steinwerkzeug herzustellen."
 	if not data["project"].is_empty():
 		var kind: String = data["project"]["kind"]
-		_goal.text = "%s · %d %% · Weitere Bewohner können mitarbeiten." % [{"tool": "Werkzeugherstellung", "hut": "Hüttenbau", "tent": "Zeltbau", "garden": "Gartenbau", "well": "Brunnenbau", "forester": "Forstplatz", "quarry": "Steinbruch", "fiberbed": "Faserbeet"}[kind], int(float(data["project"]["progress"]) / float(Model.WORK.get(kind, 15.0)) * 100)]
+		_goal.text = "%s · %d %% · Weitere Bewohner können mitarbeiten." % [{"tool": "Werkzeugherstellung", "hut": "Hüttenbau", "tent": "Zeltbau", "pen": "Tierplatzbau", "garden": "Gartenbau", "well": "Brunnenbau", "forester": "Forstplatz", "quarry": "Steinbruch", "fiberbed": "Faserbeet"}[kind], int(float(data["project"]["progress"]) / float(Model.WORK.get(kind, 15.0)) * 100)]
 	elif Housing.beds(data) >= data["members"].size():
 		if int(data["garden"]) == 0:
 			_goal.text = "Dein Dorf steht · Lege einen Wurzelgarten für dauerhafte Nahrung an."
@@ -290,7 +301,7 @@ func refresh() -> void:
 	for i in range(data["members"].size()):
 		var member: Dictionary = data["members"][i]
 		var button: Button = _residents.get_child(i)
-		var orders: Dictionary = {"wait": "wartet", "move": "unterwegs", "wood": "sammelt Holz", "stone": "sammelt Stein", "food": "sammelt Nahrung", "tool": "stellt Werkzeug her", "hut": "baut Hütte", "tent": "baut Zelt", "garden": "legt Garten an", "supply": "sichert Nahrung", "feed": "isst", "water": "holt Wasser", "fiber": "sammelt Fasern", "milk": "holt Milch", "drink": "trinkt", "provision": "sichert Nahrung und Wasser", "build": "bereit für Bauarbeiten", "well": "baut Brunnen", "forester": "baut Forstplatz", "quarry": "baut Steinbruch", "fiberbed": "legt Faserbeet an"}
+		var orders: Dictionary = {"wait": "wartet", "move": "unterwegs", "wood": "sammelt Holz", "stone": "sammelt Stein", "food": "sammelt Nahrung", "tool": "stellt Werkzeug her", "hut": "baut Hütte", "tent": "baut Zelt", "pen": "baut Tierplatz", "tend": "versorgt Tiere", "garden": "legt Garten an", "supply": "sichert Nahrung", "feed": "isst", "water": "holt Wasser", "fiber": "sammelt Fasern", "milk": "holt Milch", "drink": "trinkt", "provision": "sichert Nahrung und Wasser", "build": "bereit für Bauarbeiten", "well": "baut Brunnen", "forester": "baut Forstplatz", "quarry": "baut Steinbruch", "fiberbed": "legt Faserbeet an"}
 		var activity: String = orders[member["order"]]
 		if member["order"] == "supply" and controller._food_reserve_ready():
 			activity = "Vorrat bereit · bleibt zuständig"
@@ -323,6 +334,7 @@ func refresh() -> void:
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
 	_buttons["milk"].visible = not data["economy"]["receipts"].is_empty()
+	_refresh_husbandry(data)
 	_message.text = ("PAUSE · Leertaste zum Fortsetzen. " if get_tree().paused else "") + controller.status
 	_layout()
 
@@ -385,3 +397,60 @@ func _finish_selection(event: InputEventMouseButton) -> void:
 func _exit_tree() -> void:
 	if _owns_pause:
 		get_tree().paused = false
+
+func _build_husbandry() -> void:
+	_husbandry_page = VBoxContainer.new()
+	_husbandry_page.name = "Tierhaltung"
+	_tabs.add_child(_husbandry_page)
+	var commands := HFlowContainer.new()
+	_husbandry_page.add_child(commands)
+	for order: String in ["pen", "tend"]:
+		var button := Style.button("Tierplatz setzen · 4 Holz / 2 Fasern" if order == "pen" else "Tiere versorgen")
+		button.name = "Order_" + order
+		commands.add_child(button)
+		button.pressed.connect(func() -> void: controller.issue_order(order))
+		_buttons[order] = button
+	var keeper := Style.button("Tierpfleger zuweisen")
+	keeper.name = "AssignKeeper"
+	commands.add_child(keeper)
+	keeper.pressed.connect(func() -> void: controller.assign_profession("keeper"))
+	_care_status = Style.label("", 16)
+	_husbandry_page.add_child(_care_status)
+	_husbandry_page.add_child(Style.label("Je ein Milchtier pro Platz. Tierpfleger füllen Tröge aus dem Lager; Milchträger holen Milch.", 15, Style.MUTED))
+	var choices := HFlowContainer.new()
+	_husbandry_page.add_child(choices)
+	_pens = OptionButton.new()
+	choices.add_child(_pens)
+	_animals = OptionButton.new()
+	choices.add_child(_animals)
+	_bind_animal = Style.button("Tier zuordnen")
+	choices.add_child(_bind_animal)
+	_bind_animal.pressed.connect(func() -> void:
+		if _pens.selected >= 0 and _animals.selected >= 0:
+			controller.husbandry.assign(controller.village()["husbandry"]["pens"][_pens.selected]["id"], _animal_ids[_animals.selected])
+		refresh())
+	_release_animal = Style.button("Zuordnung lösen")
+	choices.add_child(_release_animal)
+	_release_animal.pressed.connect(func() -> void:
+		if _pens.selected >= 0:
+			controller.husbandry.release(controller.village()["husbandry"]["pens"][_pens.selected]["id"])
+		refresh())
+
+func _refresh_husbandry(data: Dictionary) -> void:
+	var pens: Array = data["husbandry"]["pens"]
+	if _pens.item_count != pens.size():
+		_pens.clear()
+		for i in range(pens.size()):
+			_pens.add_item("Tierplatz %d" % (i + 1))
+	var animals: Array[String] = controller.husbandry.candidates()
+	if animals != _animal_ids:
+		var selected_id: String = _animal_ids[_animals.selected] if _animals.selected >= 0 else ""
+		_animal_ids = animals
+		_animals.clear()
+		for identity: String in animals:
+			_animals.add_item("Milchtier · " + identity.right(12))
+		if selected_id in animals:
+			_animals.select(animals.find(selected_id))
+	_bind_animal.disabled = get_tree().paused or _pens.selected < 0 or _animals.selected < 0
+	_release_animal.disabled = get_tree().paused or _pens.selected < 0 or pens[_pens.selected]["animal_id"] == ""
+	_care_status.text = "Baue einen Tierplatz auf trockenem, frei erreichbarem Boden." if pens.is_empty() else controller.husbandry.description(pens[_pens.selected])

@@ -5,11 +5,12 @@ const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
-const SCHEMA: int = 4
+const Husbandry = preload("res://world/tribe/village_husbandry.gd")
+const SCHEMA: int = 5
 const KINDS: Array[String] = ["wood", "stone", "food"]
-const ORDERS: Array[String] = ["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "feed", "garden", "supply"]
-const COSTS: Dictionary = {"tool": {"wood": 3, "stone": 2}, "hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}, "garden": {"wood": 4, "stone": 1}}
-const WORK: Dictionary = {"tool": 10.0, "hut": 20.0, "tent": 15.0, "garden": 15.0}
+const ORDERS: Array[String] = ["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "pen", "feed", "garden", "supply"]
+const COSTS: Dictionary = {"tool": {"wood": 3, "stone": 2}, "hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}, "pen": {"wood": 4, "fiber": 2}, "garden": {"wood": 4, "stone": 1}}
+const WORK: Dictionary = {"tool": 10.0, "hut": 20.0, "tent": 15.0, "pen": 15.0, "garden": 15.0}
 const STORAGE: int = 48
 const FOOD_TARGET: int = 12
 const GROW_SECONDS: float = 20.0
@@ -34,6 +35,7 @@ static func create(home: Dictionary, campaign: Dictionary, player: Dictionary, s
 		"garden": 0, "growth": 0.0, "grown": 0}
 	Economy.install(data)
 	Housing.install(data)
+	Husbandry.install(data)
 	return data
 
 static func upgrade(data: Dictionary) -> bool:
@@ -45,7 +47,9 @@ static func upgrade(data: Dictionary) -> bool:
 		data.merge({"garden": 0, "growth": 0.0, "grown": 0}, true)
 	if old < 3:
 		Economy.install(data)
-	Housing.install(data)
+	if old < 4:
+		Housing.install(data)
+	Husbandry.install(data)
 	data["schema"] = SCHEMA
 	return true
 
@@ -107,6 +111,8 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 			return "Ungültiger Auftrag oder Zustand eines Bewohners."
 		if not growing and member["order"] == "tent":
 			return "Zelte benötigen Stammesformat 4."
+		if int(value["schema"]) < 5 and (member["order"] in ["pen", "tend"] or member.get("paused_order", "") in ["pen", "tend"] or member.get("profession", "") == "keeper"):
+			return "Tierpflege benötigt Stammesformat 5."
 		if not renewable and (member["order"] in ["garden", "supply"] or member["stage"] == "meal"):
 			return "Versorgungsauftrag benötigt Stammesformat 2."
 		if member["stage"] in ["meal", "drink"] and (member["cargo"] != "" or member["order"] in ["wait", "feed"]):
@@ -139,7 +145,7 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 	if not project is Dictionary:
 		return "Ungültige Baustelle."
 	if not project.is_empty():
-		if project.get("kind") not in (["tool", "hut", "garden", "tent"] + Economy.STATIONS.keys() if growing else ["tool", "hut", "garden"] + Economy.STATIONS.keys() if expanded else ["tool", "hut", "garden"]) or not number(project.get("progress"), 0, 20):
+		if project.get("kind") not in (["tool", "hut", "garden", "tent", "pen"] + Economy.STATIONS.keys() if int(value["schema"]) >= 5 else ["tool", "hut", "garden", "tent"] + Economy.STATIONS.keys() if growing else ["tool", "hut", "garden"] + Economy.STATIONS.keys() if expanded else ["tool", "hut", "garden"]) or not number(project.get("progress"), 0, 20):
 			return "Ungültiger Baufortschritt."
 		if (project["kind"] == "tool" and int(value["tools"]) != 0) or (project["kind"] == "hut" and (int(value["tools"]) != 1 or (not growing and int(value["huts"]) >= 2))):
 			return "Baustelle ist bereits abgeschlossen oder ohne Werkzeug."
@@ -153,7 +159,11 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 		if not problem.is_empty():
 			return problem
 	if growing:
-		return Housing.validate(value)
+		var problem: String = Housing.validate(value)
+		if not problem.is_empty():
+			return problem
+	if int(value["schema"]) >= 5:
+		return Husbandry.validate(value)
 	return ""
 
 static func number(value: Variant, low: float, high: float) -> bool:
