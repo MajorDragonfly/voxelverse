@@ -45,6 +45,10 @@ Erschöpfte Suche meldet `unavailable`; sie erfindet keine Erreichbarkeit.
 Meerwasser gilt ausdrücklich nicht als Süßwasser. Bis zum Ressourcenanschluss
 bleibt `water_supply = requires_transport`, `freshwater_distance = -1`.
 Der Katalog enthält Eignung, keinen Besitz und keine Milchproduktion.
+Optionales `habitat.food_state` enthält Schema 1, `remaining` (0–30) und
+`regrow_remaining` (0–180 aktive Sekunden). Die vorhandene Futterpflanze
+verwendet diese körperfeste Sicherung statt flacher Kampagnenkoordinaten.
+Pausierte/entladene Pflanzen simulieren keine Regeneration.
 
 ## Laufzeit und Sicherung
 

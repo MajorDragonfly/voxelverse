@@ -4,13 +4,19 @@ const Base = preload("res://world/surface/surface_lab_store.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const GENERATION: String = "living_planet_v1"
+const Domestic = preload("res://world/fauna/domestication/domestic_surface_store.gd")
 const PATH: String = "user://living_planet_v1.json"
 
 
 static func valid(data: Dictionary) -> bool:
-	if data.get("surface_generation") != GENERATION or data.get("fauna_codec") != "godot_native_v1" or not Base.valid(data):
+	if not Domestic.Contract.Values.integer(data.get("schema"), 1, 2): return false
+	var legacy_header: Dictionary = data.duplicate()
+	legacy_header.schema = 1
+	if data.get("surface_generation") != GENERATION or data.get("fauna_codec") != "godot_native_v1" or not Base.valid(legacy_header):
 		return false
+	var system := Base.System.new(false, true)
 	for id: String in data.bodies:
+		if not Domestic.valid(data.bodies[id], system.bodies[id], int(data.schema)): return false
 		var fauna: Variant = data.bodies[id].get("fauna")
 		if not fauna is Dictionary or fauna.size() > 256:
 			return false
