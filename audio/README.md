@@ -10,7 +10,7 @@ Keine Übernahme unfertiger Arbeiten anderer Chats. Einzige geänderte Bestandsd
 - F7 öffnet die Audioeinstellungen; F7/Escape schließt sie. Änderungen werden gespeichert.
 - `audio/audio_playground.tscn` im Editor öffnen und F6 drücken: alle Klänge anhören,
   Richtung/Entfernung vergleichen, Umgebungsloops und Unterwasserfilter testen.
-- Die 29 eigenen, synthetisierten Dateien sind spielbare Prototyp-Klänge.
+- Die 65 eigenen, synthetisierten Dateien sind spielbare Prototyp-Klänge.
   Ihr Klangcharakter braucht noch einen Hörtest auf dem Zielgerät.
 
 ## Verhalten
@@ -54,7 +54,7 @@ AudioManager.register_sound(&"creature_contact", [my_imported_audio_stream])
 ```
 
 Die Parameter für `play_world` sind Ereignis, Position, Pegel in dB, Tonhöhe,
-Quell-ID. Unbekannte Ereignisse, Pause, volle Stimmenbelegung oder Wiederholung
+Quell-ID. Unbekannte Ereignisse, Pause, ein voller Pool ohne verdrängbare Stimme oder Wiederholung
 innerhalb von 80 ms je Quelle/Ereignis ergeben false. Die Zuordnung lässt sich
 über `register_sound` austauschen, ohne Spielcode zu verändern.
 
@@ -62,9 +62,8 @@ Ereignisse: `step_grass`, `step_sand`, `step_stone`, `step_snow`, `step_wood`,
 `step_water`, `jump`, `land`, `splash`, `swim`, `ui_confirm`, `ui_back`, `discovery`,
 `wind_loop`, `foliage_loop`, `water_loop`, `underwater_loop`.
 
-Entdeckungstöne sind vorhanden; der Fortschritts-Chat muss sie an erfolgreiche
-Entdeckungen anschließen. Individuelle Kreaturenstimmen und ein Soundtrack sind
-noch nicht Teil dieses ersten Pakets. Der Musikkanal ist dafür vorbereitet.
+Kreaturenstimmen und optionale Erfolgsereignisse sind im zweiten Paket enthalten
+(siehe unten). Ein Soundtrack ist noch nicht enthalten; der Musikkanal ist vorbereitet.
 
 ## Welt und spätere Planeten
 
@@ -98,3 +97,69 @@ godot --headless --path . --script res://tests/audio/audio_runtime_test.gd
 Tests bitte mit eigenem Benutzerverzeichnis ausführen: Sie prüfen bewusst das
 Speichern und Zurücksetzen der Audioeinstellungen. Die neue Audio-CI setzt dafür
 XDG_DATA_HOME. Die anderen Arbeitszweige und main werden nicht zusammengeführt.
+
+
+## Ausbau: Kreaturenstimmen und Ereignisse
+
+36 zusätzliche, eigene nichtsprachliche Laute: heller Ruf, Kehllaut und raues
+Knurren, jeweils Kontakt/Warnung/Angriff/Verletzung/Tod/freundliche Antwort mit
+zwei Varianten. Ein stabiles Artenprofil und die aktuelle Körpergröße bestimmen
+die Tonhöhe. Der Profilgenerator verwendet einen eigenen Zufallsgenerator und
+verändert die Zufallsfolge von Welt oder Verhalten nicht.
+
+Der AudioManager ergänzt vorhandene Knoten der Gruppen `wildlife`, `grazer` und
+`player` um ein Kind `_VoxelverseAudio`. Es werden weder Lebenspunkte noch KI,
+Beziehungen, Bewegung oder gespeicherte Blueprints verändert. Automatische
+Wildtierrufe sind zeitlich versetzt und leise. Maximal 64 Kreaturen werden verfolgt;
+48 m Entfernung und die Weltraumansicht unterdrücken unhörbare Stimmen. Entfernte
+Knoten werden aus der Verfolgung entfernt, ihre Stimmen beendet.
+
+Lebensverlust wird über vorhandene `health_changed(current, maximum)`-Signale
+oder einen lesenden Vergleich der Gesundheit erkannt. Heilung und Änderungen der
+maximalen Gesundheit gelten nicht als Treffer. `creature_defeated(creature)` und
+`died()` werden zusammen mit dem Gesundheitszustand gegen doppelte Todeslaute
+gesichert. `respawned()` setzt das Stimmleben zurück. Ein vorhandenes Signal
+`creature_attacked(target, damage)` löst einen Angriffslaut aus.
+
+Warnung und freundliche Reaktion entstehen nur durch ein echtes externes
+Ereignis; die Audioanbindung errät weder Aggression noch Freundschaft aus Nähe.
+Der Verhaltens-/Sozial-Chat kann nach einem erfolgreichen Ereignis aufrufen:
+
+```gdscript
+AudioManager.play_creature(&"warn", creature)
+AudioManager.play_creature(&"friend", creature)
+AudioManager.play_creature(&"attack", creature)
+```
+
+Alternativ kann die Kreatur `signal audio_event(event: StringName)` anbieten und
+`audio_event.emit(&"warn")` auslösen. Ereignisse: `contact`, `warn`, `attack`,
+`hurt`, `death`, `friend`. `audio_disabled = true` als Knotenmetadatum deaktiviert
+die Stimme. `audio_body_size` überschreibt die aus Blueprint/Skalierung gelesene
+Größe. Die Spielerfigur ruft nicht automatisch in regelmäßigen Abständen.
+
+Die Stimmen verwenden denselben begrenzten Pool. Wichtige Reaktionen können
+niedriger priorisierte Rufe verdrängen; Schritte können beiläufige Rufe verdrängen.
+`play_world` hat dafür einen optionalen letzten Parameter `priority` (0–2,
+Standard 1). Kreaturenruf=0, Bewegung=1, Reaktion=2. Wiederholte Warnungen und
+freundliche Antworten sind zusätzlich gedrosselt.
+
+Falls `ProgressionService` vorhanden ist, werden die bereits geprüften
+Signalverträge `species_discovered(key, display_name)` und
+`behavior_node_purchased(node_id)` automatisch angeschlossen. Der Service wird
+nicht mitgeliefert oder aus einem anderen Arbeitszweig übernommen. Das Basisspiel
+hat diese Anschlüsse möglicherweise noch nicht; die Anbindung bleibt dann still.
+Ein vorhandenes Angriffs-/Gesundheitssignal wird genutzt, keine private KI-Variable.
+
+Die Hörtest-Szene enthält jetzt Art-/Größenauswahl und sechs Reaktionsschaltflächen.
+Die Klänge sind weiterhin Prototypen; die finale Klangqualität benötigt einen
+Hörtest. Kein eigener Warn-/Sozialzustand wird durch das Audiopaket eingeführt.
+
+Zusätzlicher Test:
+
+```sh
+godot --headless --path . --script res://tests/audio/creature_audio_test.gd
+```
+
+Er prüft deterministische Artenstimmen, Größenunterschiede, automatische Rufe,
+echte Signale, Verletzung/Heilung/Statänderung, Todesduplikate, Wiederbelebung,
+Distanz, Pause, Stimmenpriorität, Bereinigung und optionale Entdeckungsanbindung.

@@ -3,6 +3,7 @@ extends Node
 
 signal settings_changed(channel: StringName, volume: float)
 signal sound_played(event: StringName, position: Vector3)
+signal creature_sound_played(source_id: int, event: StringName, pitch: float, family: String)
 
 const CONFIG_PATH := "user://audio_settings.cfg"
 const CHANNELS := {&"master": &"VV Master", &"music": &"VV Music",
@@ -13,10 +14,12 @@ const LIBRARY_PATH := "res://audio/runtime/sound_library.gd"
 const DIRECTOR = preload("res://audio/runtime/world_audio.gd")
 const PANEL = preload("res://audio/ui/audio_settings.gd")
 const MAX_WORLD_VOICES := 16
+const CREATURES = preload("res://audio/runtime/creature_audio_registry.gd")
 
 var fallback_shortcut_enabled := true
 var volumes: Dictionary = DEFAULTS.duplicate()
 var director: Node
+var creatures: Node
 var _streams: Dictionary = {}
 var _last_variant: Dictionary = {}
 var _last_time: Dictionary = {}
@@ -42,6 +45,9 @@ func _ready() -> void:
 	var library: Script = load(LIBRARY_PATH)
 	for event in library.SOUNDS:
 		_streams[event] = library.SOUNDS[event]
+	var creature_library: Script = load("res://audio/runtime/creature_sound_library.gd")
+	for event in creature_library.SOUNDS:
+		_streams[event] = creature_library.SOUNDS[event]
 	for index in MAX_WORLD_VOICES:
 		var voice := AudioStreamPlayer3D.new()
 		voice.name = "WorldVoice%d" % index
@@ -61,6 +67,10 @@ func _ready() -> void:
 	director.name = "WorldAudio"
 	director.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(director)
+	creatures = CREATURES.new()
+	creatures.name = "CreatureAudio"
+	creatures.process_mode = Node.PROCESS_MODE_PAUSABLE
+	add_child(creatures)
 	get_tree().scene_changed.connect(_scene_changed)
 
 
@@ -173,7 +183,7 @@ func _choose(event: StringName) -> AudioStream:
 
 
 func play_world(event: StringName, position: Vector3, gain_db: float = 0.0,
-		pitch: float = 1.0, source_id: int = 0) -> bool:
+		pitch: float = 1.0, source_id: int = 0, priority: int = 1) -> bool:
 	if get_tree().paused or not position.is_finite():
 		return false
 	var key := "%s:%d" % [event, source_id]
@@ -183,21 +193,46 @@ func play_world(event: StringName, position: Vector3, gain_db: float = 0.0,
 	var stream := _choose(event)
 	if stream == null:
 		return false
+	var selected: AudioStreamPlayer3D
+	var lowest_priority := clampi(priority, 0, 2)
 	for voice in _voices:
-		if voice.playing:
-			continue
-		voice.stream = stream
-		voice.global_position = position
-		voice.volume_db = clampf(gain_db, -40.0, 3.0) if is_finite(gain_db) else 0.0
-		voice.pitch_scale = clampf(pitch, 0.5, 2.0) if is_finite(pitch) else 1.0
-		voice.play()
-		# Bound bookkeeping even when streamed creatures have new instance IDs.
-		if _last_time.size() > 512:
-			_last_time.clear()
-		_last_time[key] = now
-		sound_played.emit(event, position)
-		return true
-	return false
+		if not voice.playing:
+			selected = voice
+			break
+		var voice_priority := int(voice.get_meta(&"audio_priority", 1))
+		if voice_priority < lowest_priority:
+			selected = voice
+			lowest_priority = voice_priority
+	if selected == null:
+		return false
+	selected.stop()
+	selected.stream = stream
+	selected.global_position = position
+	selected.volume_db = clampf(gain_db, -40.0, 3.0) if is_finite(gain_db) else 0.0
+	selected.pitch_scale = clampf(pitch, 0.5, 2.0) if is_finite(pitch) else 1.0
+	selected.set_meta(&"audio_priority", clampi(priority, 0, 2))
+	selected.set_meta(&"audio_source_id", source_id)
+	selected.play()
+	if _last_time.size() > 512:
+		_last_time.clear()
+	_last_time[key] = now
+	sound_played.emit(event, position)
+	return true
+
+
+func play_creature(event: StringName, source: Node3D) -> bool:
+	return creatures.emit_for(source, event)
+
+
+func stop_source(source_id: int) -> void:
+	for voice in _voices:
+		if int(voice.get_meta(&"audio_source_id", -1)) == source_id:
+			voice.stop()
+
+
+func stop_ui() -> void:
+	for voice in _ui_voices:
+		voice.stop()
 
 
 func play_ui(event: StringName = &"ui_confirm") -> bool:
@@ -222,6 +257,7 @@ func stop_world() -> void:
 func _scene_changed() -> void:
 	stop_world()
 	director.reset_tracking()
+	creatures.clear()
 	if is_instance_valid(_panel):
 		close_settings()
 
@@ -267,5 +303,7 @@ func close_settings() -> void:
 
 
 func _exit_tree() -> void:
+	stop_world()
+	stop_ui()
 	if _save_pending:
 		save_settings()

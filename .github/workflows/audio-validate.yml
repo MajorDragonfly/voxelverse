@@ -30,6 +30,11 @@ jobs:
           set -o pipefail
           timeout 70s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/audio_runtime_test.gd 2>&1 | tee /tmp/audio-runtime.log
           ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-runtime.log
+      - name: Run creature voices and event integration tests
+        run: |
+          set -o pipefail
+          timeout 70s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/creature_audio_test.gd 2>&1 | tee /tmp/audio-creatures.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-creatures.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:

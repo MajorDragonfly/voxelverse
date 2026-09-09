@@ -6,11 +6,15 @@ var _loop: AudioStreamPlayer
 var _position := Vector3(0, 0, -5)
 var _status: Label
 var _underwater := false
+const VOICE_PROFILE = preload("res://audio/runtime/creature_voice_profile.gd")
+var _voice_role := "forager"
+var _voice_size := 1.0
 
 
 func _ready() -> void:
 	_audio = get_node("/root/AudioManager")
 	_audio.director.automatic_tracking = false
+	_audio.creatures.automatic_tracking = false
 	_audio.director.reset_tracking()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var camera := Camera3D.new()
@@ -80,6 +84,47 @@ func _ready() -> void:
 		_audio.set_underwater(_underwater)
 		_status.text = "Unterwasserfilter: " + ("an" if _underwater else "aus"))
 	button(actions, "Lautstärke · F7", func(): _audio.open_settings())
+	var voice_title := Label.new()
+	voice_title.text = "KREATURENSTIMMEN · Art und Größe vergleichen"
+	rows.add_child(voice_title)
+	var voice_options := HBoxContainer.new()
+	voice_options.add_theme_constant_override("separation", 16)
+	rows.add_child(voice_options)
+	var role := OptionButton.new()
+	role.add_item("Heller Ruf")
+	role.add_item("Kehllaut")
+	role.add_item("Raues Knurren")
+	role.custom_minimum_size.x = 230
+	role.item_selected.connect(func(index: int): _voice_role = ["forager", "grazer", "predator"][index])
+	voice_options.add_child(role)
+	var size_label := Label.new()
+	size_label.text = "Größe: 1,0"
+	size_label.custom_minimum_size.x = 110
+	voice_options.add_child(size_label)
+	var size_slider := HSlider.new()
+	size_slider.min_value = 0.35
+	size_slider.max_value = 3.0
+	size_slider.step = 0.05
+	size_slider.value = 1.0
+	size_slider.custom_minimum_size = Vector2(260, 36)
+	size_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	size_slider.value_changed.connect(func(value: float):
+		_voice_size = value
+		size_label.text = "Größe: %.2f" % value)
+	voice_options.add_child(size_slider)
+	var reactions := GridContainer.new()
+	reactions.columns = 3
+	reactions.add_theme_constant_override("h_separation", 12)
+	reactions.add_theme_constant_override("v_separation", 12)
+	rows.add_child(reactions)
+	for item in [["Kontakt", "contact"], ["Warnung", "warn"], ["Angriff", "attack"],
+		["Verletzung", "hurt"], ["Tod", "death"], ["Freundliche Antwort", "friend"]]:
+		var event := StringName(item[1])
+		button(reactions, item[0], func():
+			var profile := VOICE_PROFILE.build(42, _voice_role, _voice_size)
+			var key := StringName("creature_%s_%s" % [profile["family"], event])
+			_audio.play_world(key, _position, -5.0, float(profile["pitch"]), 777, 2)
+			_status.text = "Kreatur: %s · Tonhöhe %.2f" % [event, profile["pitch"]])
 	_status = Label.new()
 	_status.text = "Bereit · Eigene Prototyp-Klänge für Voxelverse"
 	rows.add_child(_status)
@@ -98,3 +143,4 @@ func _exit_tree() -> void:
 	if is_instance_valid(_audio):
 		_audio.set_underwater(false)
 		_audio.director.automatic_tracking = true
+		_audio.creatures.automatic_tracking = true
