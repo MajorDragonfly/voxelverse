@@ -150,7 +150,12 @@ func run() -> void:
 		check(next != previous, "Footstep variant must not immediately repeat")
 		previous = next
 	wet = false
-	await frames(110)
+	# A sample refresh plus the 1.5 s fade can exceed 110 physics frames.
+	# Wait for the observable state, with a bounded three-second deadline.
+	for index in 180:
+		await frames(1)
+		if audio.director._shore_target == 0.0 and not audio.director._shore.playing:
+			break
 	check(not audio.director._shore.playing, "Dry world has no water loop")
 	player.queue_free()
 	await frames(40)
