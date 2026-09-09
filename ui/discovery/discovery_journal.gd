@@ -8,6 +8,9 @@ const Comparison = preload("res://ui/discovery/species_comparison.gd")
 const PREFS_PATH := "user://discovery_journal_ui.cfg"
 const PAGE_SIZE: int = 100
 const Suitability = preload("res://ui/discovery/animal_suitability.gd")
+const OwnedReader = preload("res://ui/discovery/owned_animal_reader.gd")
+const OwnedRegister = preload("res://ui/discovery/owned_animal_register.gd")
+const ANIMALS_TAB := 5
 
 var is_open: bool = false
 var player: Node
@@ -60,6 +63,8 @@ var _browser: VBoxContainer
 var _heading: BoxContainer
 var _tools_row: BoxContainer
 var _scale_factor: float = 1.0
+var _owned_reader = OwnedReader.new()
+var _owned_register: VBoxContainer
 
 
 func _ready() -> void:
@@ -72,6 +77,7 @@ func _ready() -> void:
 		_hint_enabled = bool(prefs.get_value("journal", "show_hint", true))
 	_animal_contract = Suitability.contract()
 	_build()
+	_owned_reader.changed.connect(refresh_owned_animals)
 	get_viewport().size_changed.connect(_layout)
 	_layout()
 	if _progression != null:
@@ -85,12 +91,15 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	_owned_reader.unbind()
 	if _owns_pause and get_tree() != null:
 		get_tree().paused = false
 		Input.mouse_mode = _previous_mouse
 
 
 func _process(delta: float) -> void:
+	if is_open and _tabs.current_tab == ANIMALS_TAB:
+		_owned_reader.check_context()
 	_hud.visible = not is_open and not get_tree().paused and (player == null or player.is_physics_processing())
 	_hint_timer -= delta
 	if _hint_timer <= 0.0 and not is_open:
@@ -184,6 +193,26 @@ func refresh() -> void:
 	_apply_filters()
 
 
+func bind_owned_animals(source: Object, context: Callable, names: Callable = Callable()) -> bool:
+	# Called by the D2 host after configure; no autoload, inferred IDs or lab save.
+	var bound: bool = _owned_reader.bind_source(source, context, names)
+	refresh_owned_animals()
+	return bound
+
+
+func unbind_owned_animals() -> void:
+	_owned_reader.unbind()
+	refresh_owned_animals()
+
+
+func refresh_owned_animals() -> void:
+	# Also called by the host after a successful load into the same controller.
+	if is_open and _tabs.current_tab == ANIMALS_TAB:
+		var scroll: int = _detail_scroll.scroll_vertical
+		_apply_filters()
+		_detail_scroll.set_deferred("scroll_vertical", scroll)
+
+
 func _build() -> void:
 	_surface = Control.new()
 	_surface.name = "JournalSurface"
@@ -220,7 +249,7 @@ func _build() -> void:
 	layout.add_child(_summary)
 	_tabs = TabBar.new()
 	_tabs.name = "JournalTabs"
-	for tab in ["Arten", "Körperteile", "Regionen", "Nächste Schritte", "Forschungsziele"]:
+	for tab in ["Arten", "Körperteile", "Regionen", "Nächste Schritte", "Forschungsziele", "Eigene Tiere"]:
 		_tabs.add_tab(tab)
 	_tabs.tab_changed.connect(_on_tab_changed)
 	_tabs.clip_tabs = true
@@ -294,6 +323,10 @@ func _build() -> void:
 	_title = _label("", 26)
 	_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_title)
+	_owned_register = OwnedRegister.new()
+	_owned_register.name = "OwnedAnimalRegister"
+	_detail.add_child(_owned_register)
+	_owned_register.hide()
 	_roles_toggle = _button("Tierrollen ansehen", func() -> void: _animal_roles.visible = not _animal_roles.visible)
 	_roles_toggle.name = "ToggleAnimalSuitability"
 	_roles_toggle.hide()
@@ -361,6 +394,7 @@ func _layout() -> void:
 	extent /= _scale_factor
 	_surface.size = extent
 	_preview.custom_minimum_size.y = 110 if extent.y <= 600 else 230
+	_title.add_theme_font_size_override("font_size", 20 if _tabs.current_tab == ANIMALS_TAB and extent.y <= 600 else 26)
 	var narrow := extent.x < 960
 	_summary.visible = extent.y >= 600
 	_panel.get_child(0).add_theme_constant_override("separation", 6 if narrow else 12)
@@ -432,6 +466,7 @@ func _build_hud() -> void:
 
 func _on_tab_changed(_index: int) -> void:
 	_compact_tabs.select(_index)
+	_layout()
 	_comparison_mode = false
 	_page = 0
 	_selected_key = ""
@@ -443,6 +478,15 @@ func _on_tab_changed(_index: int) -> void:
 
 func _populate_filter() -> void:
 	_filter.clear()
+	if _tabs.current_tab == ANIMALS_TAB:
+		for item in [["Lebende Tiere", "living"], ["Verstorbene Tiere", "dead"], ["Alle eigenen Tiere", "all"]]:
+			_filter.add_item(item[0])
+			_filter.set_item_metadata(_filter.item_count - 1, item[1])
+		_filter.select(0)
+		_filter.show()
+		_status.hide()
+		_search.placeholder_text = "Tier, Art oder Auftrag suchen …"
+		return
 	_filter.add_item("Alle Lebensweisen / Tierrollen" if _tabs.current_tab == 0 else "Alle Kategorien")
 	_filter.set_item_metadata(0, "")
 	var labels: Dictionary = Records.ROLES if _tabs.current_tab == 0 else Records.CATEGORIES
@@ -468,6 +512,7 @@ func _apply_filters() -> void:
 	_search.get_parent().visible = not guide_mode
 	_list.get_parent().visible = not guide_mode
 	_guide.visible = guide_mode
+	_owned_register.hide()
 	_parts_label.text = ""
 	_animal_roles.hide()
 	_roles_toggle.hide()
@@ -483,11 +528,15 @@ func _apply_filters() -> void:
 		_guide.text = "BEOBACHTEN\nÖffne mit E den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Es zeigt deine gespeicherten Entdeckungen und lässt sich mit Esc wieder schließen."
 		return
 	var filter_value: String = str(_filter.get_item_metadata(_filter.selected)) if _filter.selected >= 0 else ""
+	var animals: Dictionary = {}
 	match _tabs.current_tab:
 		0: _rows = _species_rows(_search.text, filter_value)
 		1: _rows = Records.part_rows(_state, _search.text, filter_value, _status.selected)
 		2: _rows = Records.region_rows(_state, _search.text)
 		4: _rows = Research.rows(_state, _search.text)
+		ANIMALS_TAB:
+			animals = _owned_reader.read(_search.text, filter_value)
+			_rows.assign(animals["rows"])
 	_page = clampi(_page, 0, maxi((_rows.size() - 1) / PAGE_SIZE, 0))
 	_list.clear()
 	var selected_index: int = 0
@@ -499,6 +548,8 @@ func _apply_filters() -> void:
 			if row.get("wished", false): label += " · gemerkt"
 		elif _tabs.current_tab == 4:
 			label = ("✓  " if row["complete"] else "○  ") + label
+		elif _tabs.current_tab == ANIMALS_TAB and row["dead"]:
+			label += " · verstorben"
 		_list.add_item(label)
 		_list.set_item_tooltip(_list.item_count - 1, label + " · " + str(row.get("location", row.get("source", ""))))
 		if str(row.get("key", row.get("id", ""))) == _selected_key:
@@ -508,6 +559,10 @@ func _apply_filters() -> void:
 	_next_page.disabled = (_page + 1) * PAGE_SIZE >= _rows.size()
 	if _rows.is_empty():
 		_selected_key = ""
+		if _tabs.current_tab == ANIMALS_TAB:
+			_title.text = "Eigene Tiere"
+			_description.text = animals["message"]
+			return
 		_title.text = "Noch keine Arten entdeckt" if _tabs.current_tab == 0 and Records.as_dictionary(_state.get("discovered_species", {})).is_empty() else "Keine passenden Einträge"
 		_description.text = "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier." if _title.text == "Noch keine Arten entdeckt" else "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
 		if _tabs.current_tab == 1 and _status.selected == 3 and _search.text.is_empty():
@@ -535,7 +590,12 @@ func _select_entry(index: int) -> void:
 	_goal_progress.hide()
 	_preview.call("clear")
 	_preview.hide()
-	if _tabs.current_tab == 0:
+	_owned_register.hide()
+	if _tabs.current_tab == ANIMALS_TAB:
+		_description.hide()
+		_owned_register.show()
+		_owned_register.present(row)
+	elif _tabs.current_tab == 0:
 		var profile: Dictionary = Suitability.read(row, _animal_contract)
 		_animal_roles.text = Suitability.describe(profile)
 		var role_names := PackedStringArray()
