@@ -1,6 +1,8 @@
 # Auftrag 6 – Nachweise aus der fertigen Dorfwirtschaft
 
 Stand: 9. September 2026. Branch `agent/tribal-progression`.
+Historische Abnahme dieses Pakets. Die anschließende aktive Nachbarfraktion steht
+in `WORK_TRIBAL_NEIGHBORS.md` auf einem separaten Folgebranch.
 Gemeinsame Basis: `3a3e0272375e556f3ff65b7370582af79a9d48b5`.
 
 ## Umfang und Herkunft

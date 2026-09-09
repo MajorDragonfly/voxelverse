@@ -1,7 +1,8 @@
 extends RefCounted
 ## Versioned planning + hard runtime gates. Saved points/flags are never releases.
 const Ids = preload("res://core/campaign/campaign_ids.gd")
-const VERSION: int = 2
+const Neighbor = preload("res://world/tribe/neighbors/neighbor_state.gd")
+const VERSION: int = 3
 const PHASES: Dictionary = {
 	2: {"name": "Antike / Mittelalter", "action": "Jetzt ins Mittelalter fortschreiten", "implemented": false,
 		"requirements": [
@@ -10,7 +11,7 @@ const PHASES: Dictionary = {
 			["farming", "Ein angelegter Wurzelgarten mit tatsächlich nachgewachsener Nahrung", true],
 			["supply", "Alle Bewohner 180 Spielsekunden mit erneuerbarer Nahrung und Wasser versorgen; jeder hat gegessen und getrunken; am Ende mindestens 12 Nahrung und 6 Wasser im Lager", true],
 			["professions", "Mindestens zwei Bewohner erledigen in zwei Berufen jeweils drei erneuerbare Arbeits- und Lieferzyklen", true],
-			["neighbors", "Mit einer Nachbarfraktion der eigenen Spezies eine Hilfs-/Handelslieferung erfüllen ODER das Dorf in einem abgeschlossenen Gruppenkonflikt verteidigen", false],
+			["neighbors", "Mit mindestens zwei Bewohnern 6 Nahrung und 4 Holz an eine Nachbarfraktion deiner Spezies liefern und deren Unterkunft fertigstellen lassen; später alternativ das Dorf in einem abgeschlossenen Gruppenkonflikt verteidigen", true],
 			["runtime", "Spielbares Mittelalter mit Siedlungsverwaltung, Handwerk, Wegen und Handel sowie geprüftem Speichern/Laden", false],
 		]},
 	3: {"name": "Neuzeit / Weltmacht", "action": "Jetzt in die Neuzeit fortschreiten", "implemented": false,
@@ -35,6 +36,8 @@ static func describe(campaign: Dictionary, body_key: String, current_phase: int,
 		"farming": owned and int(village.get("garden", 0)) >= 1 and int(village.get("grown", 0)) >= 1}
 	for goal: String in ["supply", "professions"]:
 		facts[goal] = owned and bool(economy_progress.get(goal, {}).get("met", false))
+	var neighbor: Dictionary = campaign.get("bodies", {}).get(body_key, {}).get("tribal_neighbor", {})
+	facts["neighbors"] = owned and not neighbor.is_empty() and Neighbor.validate(neighbor, village, campaign).is_empty() and Neighbor.progress(neighbor)["met"]
 	var requirements: Array[Dictionary] = []
 	for requirement: Array in rules["requirements"]:
 		requirements.append({"id": requirement[0], "text": str(requirement[1]) + ("\n" + str(economy_progress[requirement[0]]["text"]) if economy_progress.has(requirement[0]) else ""), "supported": requirement[2],

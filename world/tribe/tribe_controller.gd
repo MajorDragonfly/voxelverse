@@ -11,6 +11,8 @@ const Companion = preload("res://world/home_group/home_companion.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const TribePanel = preload("res://ui/tribe/tribe_panel.gd")
 const Visuals = preload("res://world/tribe/village_visuals.gd")
+const NeighborRuntime = preload("res://world/tribe/neighbors/neighbor_runtime.gd")
+var neighbors: Node3D
 
 var home: Node
 var player: CharacterBody3D
@@ -47,6 +49,9 @@ func _ready() -> void:
 	home = get_parent().get_node("HomeGroup")
 	_state = get_node("/root/GameState")
 	_saves = get_node("/root/SaveGameService")
+	neighbors = NeighborRuntime.new()
+	neighbors.controller = self
+	add_child(neighbors)
 	panel = TribePanel.new()
 	panel.controller = self
 	add_child(panel)
@@ -72,7 +77,7 @@ func _process(delta: float) -> void:
 		_focus += pan * delta * 10.0
 		var offset: Vector3 = _focus - anchor()
 		offset.y = 0
-		_focus = anchor() + offset.limit_length(10.0)
+		_focus = anchor() + offset.limit_length(NeighborRuntime.Model.SITE_RADIUS if body().has("tribal_neighbor") else 10.0)
 		_update_camera()
 	_timer -= delta
 	if _timer <= 0:
@@ -165,7 +170,7 @@ func _activate() -> void:
 	# Wait for terrain collision and the home controller's reference to the player.
 	if home.player == null or not home.has_ground(HomeState.vector(village()["anchor"])):
 		return
-	navigation.rebuild(home, HomeState.vector(village()["anchor"]))
+	navigation.rebuild(home, HomeState.vector(village()["anchor"]), NeighborRuntime.Model.NAV_EXTENT if body().has("tribal_neighbor") else Navigation.RADIUS)
 	if navigation.graph.get_point_count() == 0:
 		return
 	Model.upgrade(village())
@@ -207,6 +212,7 @@ func _activate() -> void:
 	get_parent().get_parent().add_child(_visuals)
 	_visuals.rebuild(village())
 	_active = true
+	neighbors.refresh()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	status = "Wähle Bewohner und erteile gemeinsame oder einzelne Aufträge."
 	panel.refresh()
@@ -222,6 +228,7 @@ func _deactivate() -> void:
 	if not _active:
 		return
 	_active = false
+	neighbors.clear_runtime()
 	for actor: Node in actors.values():
 		if is_instance_valid(actor) and actor != player:
 			actor.queue_free()
@@ -356,9 +363,9 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 			return false
 		if data["project"].is_empty():
 			if order in Economy.STATIONS:
-				navigation.rebuild(home, anchor())
+				navigation.rebuild(home, anchor(), NeighborRuntime.Model.NAV_EXTENT if body().has("tribal_neighbor") else Navigation.RADIUS)
 				var snapped: Vector3 = navigation.snap(destination)
-				if snapped.distance_to(destination) > 1.8 or not navigation.free_workplace(snapped, data, order):
+				if snapped.distance_to(destination) > 1.8 or neighbors.occupies(snapped) or not navigation.free_workplace(snapped, data, order):
 					status = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
 					return false
 				destination = snapped
@@ -425,10 +432,11 @@ func _physics_process(delta: float) -> void:
 	if _route_retry <= 0:
 		_route_retry = 2.0
 		var blocked: bool = false
+		blocked = neighbors.has_blocked()
 		for member: Dictionary in village()["members"]:
 			blocked = blocked or bool(member["blocked"])
 		if blocked:
-			navigation.rebuild(home, anchor())
+			navigation.rebuild(home, anchor(), NeighborRuntime.Model.NAV_EXTENT if body().has("tribal_neighbor") else Navigation.RADIUS)
 			_routes.clear()
 			_goals.clear()
 	for member: Dictionary in village()["members"]:
@@ -466,7 +474,10 @@ func _physics_process(delta: float) -> void:
 			target = HomeState.vector(village()["project"]["position"])
 		elif order == "move":
 			target = HomeState.vector(member["destination"])
-		if order != "wait" and (member["cargo"] != "" or order != "move"):
+		var neighbor_target: Vector3 = neighbors.target(member)
+		if neighbor_target.is_finite():
+			target = neighbor_target
+		if order != "wait" and (neighbor_target.is_finite() or member["cargo"] != "" or order != "move"):
 			target = _workplace(target, village()["members"].find(member))
 		var arrived: bool = _walk(actor, str(member["id"]), target, delta, minf(float(member["hunger"]), float(member["hydration"])))
 		member["position"] = HomeState.vector_array(actor.global_position)
@@ -475,6 +486,7 @@ func _physics_process(delta: float) -> void:
 		if arrived:
 			_work(member, simulation_delta)
 	_update_selection()
+	neighbors.tick(delta, simulation_delta)
 	get_node("/root/ProgressionService").record_tribal_tick(simulation_delta, self)
 
 func _workplace(center: Vector3, index: int) -> Vector3:
@@ -485,9 +497,11 @@ func _workplace(center: Vector3, index: int) -> Vector3:
 		return target
 	return center
 
-func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: float, hunger: float) -> bool:
+func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: float, hunger: float, record: Dictionary = {}) -> bool:
+	if record.is_empty():
+		record = member_record(identity)
 	if not home.has_ground(actor.global_position):
-		member_record(identity)["blocked"] = true
+		record["blocked"] = true
 		status = "Ein Bewohner wartet auf geladenen Boden."
 		return false
 	var offset: Vector3 = target - actor.global_position
@@ -516,7 +530,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 			status = "Weg blockiert · der Auftrag bleibt erhalten; neue Wege werden geprüft."
 		elif direction != Vector3.ZERO and status.begins_with("Weg blockiert"):
 			status = "Die Bewohner setzen ihre Aufträge fort."
-	member_record(identity)["blocked"] = not arrived and direction == Vector3.ZERO
+	record["blocked"] = not arrived and direction == Vector3.ZERO
 	var speed: float = 3.8 * (0.6 if hunger < 20.0 else 1.0)
 	actor.velocity.x = direction.x * speed
 	actor.velocity.z = direction.z * speed
@@ -533,7 +547,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 	if not arrived and direction != Vector3.ZERO and moved.length() < speed * delta * 0.1:
 		_stalls[identity] = float(_stalls.get(identity, 0.0)) + delta
 		if float(_stalls[identity]) >= 0.75:
-			member_record(identity)["blocked"] = true
+			record["blocked"] = true
 	else:
 		_stalls[identity] = 0.0
 	if actor.is_on_floor():
@@ -549,7 +563,8 @@ func _effective_order(member: Dictionary) -> String:
 
 func _work(member: Dictionary, delta: float) -> void:
 	var before: Dictionary = village().duplicate(true)
-	_perform_work(member, delta)
+	if not neighbors.work(member):
+		_perform_work(member, delta)
 	get_node("/root/ProgressionService").record_tribal_work(before, str(member["id"]), self)
 
 func _perform_work(member: Dictionary, delta: float) -> void:

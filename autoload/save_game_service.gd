@@ -1,4 +1,5 @@
 extends Node
+const Neighbor = preload("res://world/tribe/neighbors/neighbor_state.gd")
 
 signal game_saved(path: String)
 signal game_loaded(path: String)
@@ -526,6 +527,21 @@ func _validate_save(data: Dictionary) -> String:
 			var tribe_problem: String = Tribe.validate(body["tribe"], body, campaign)
 			if not tribe_problem.is_empty():
 				return tribe_problem
+		if body.has("tribal_neighbor"):
+			if int(tribal.get("schema", 0)) < 3:
+				return "Nachbarlager benötigt Stammesfortschrittformat 3."
+			var neighbor_problem: String = Neighbor.validate(body["tribal_neighbor"], body.get("tribe", {}), campaign)
+			if not neighbor_problem.is_empty():
+				return neighbor_problem
+	var aid_award: Dictionary = tribal.get("awards", {}).get("neighbor_help", {})
+	if not aid_award.is_empty():
+		var found: bool = false
+		for body: Dictionary in campaign["bodies"].values():
+			var neighbor: Dictionary = body.get("tribal_neighbor", {})
+			if neighbor.get("id") == aid_award["neighbor_id"] and neighbor.get("village_id") == aid_award["village_id"] and neighbor.get("aid", {}).get("id") == aid_award["agreement_id"] and Neighbor.progress(neighbor)["met"]:
+				found = true
+		if not found:
+			return "Stammesverdienst ohne erfüllte Nachbarhilfe."
 	if not campaign.get("recent_events") is Array or campaign["recent_events"].size() > 32:
 		return "Invalid event history."
 	for field in ["player_species_id", "player_faction_id", "player_object_id"]:
@@ -829,6 +845,8 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	var bodies: Variant = campaign.get("bodies", {})
 	if bodies is Dictionary:
 		for body in bodies.values():
+			if body is Dictionary and Neighbor.has_unsupported_contract(body.get("tribal_neighbor")):
+				return true
 			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
 				return true
 			if body is Dictionary and body.has("generator_version") and body["generator_version"] != Campaign.GENERATOR_VERSION:

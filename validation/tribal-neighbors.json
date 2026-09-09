@@ -1,0 +1,166 @@
+{
+  "date": "2026-09-09",
+  "branch": "agent/tribal-neighbors",
+  "implementation_commit": "0b94bba2772c62a35c04e4ad5efd366ee8360a99",
+  "base_commit": "dbec2781db269bba04ded93e8729573de15b31cc",
+  "remote_parent_commit": "ff841110690a6a98d1d37b22bbdab541c9207d66",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "passed": true,
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.019
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.674
+    },
+    {
+      "name": "tribal_neighbors_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.521
+    },
+    {
+      "name": "tribal_neighbors_generated_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 43.513
+    },
+    {
+      "name": "tribal_neighbors_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 15.386
+    },
+    {
+      "name": "tribal_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.617
+    },
+    {
+      "name": "tribal_economy_progress_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.618
+    },
+    {
+      "name": "tribal_progression_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.331
+    },
+    {
+      "name": "tribal_economy_progress_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 93.955
+    },
+    {
+      "name": "behavior_skill_tree_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.126
+    },
+    {
+      "name": "development_path_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.495
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.814
+    }
+  ],
+  "evidence": {
+    "tribal_neighbors_generated": {
+      "builders": {
+        "object_1fba53172d275a3a15851dade959fc09": true,
+        "object_73645a238a3e811f78acdebb1f7591b9": true
+      },
+      "neighbor": [
+        62.8527984619141,
+        1.31005334854126,
+        -111.68985748291
+      ],
+      "received": {
+        "food": 6.0,
+        "wood": 4.0
+      },
+      "status": "completed",
+      "village": [
+        68.8527984619141,
+        2.02000045776367,
+        -111.68985748291
+      ]
+    },
+    "tribal_neighbors_world": {
+      "aid": {
+        "build_seconds": 12.0,
+        "builders": {
+          "object_1872d0f1f8ef24b4c4f11fa08ddf9341": true,
+          "object_55f204c63f27953b4eee76026a85b852": true
+        },
+        "carriers": {
+          "object_290ecd54ed1ca853df3a64bc37719ae9": 3.0,
+          "object_70e28487f0d4c363250fd577868e7052": 3.0,
+          "object_85a421abfa507a2ffb1a4ca6f43a2558": 4.0
+        },
+        "id": "agreement_79ccd82f6335754d317e101f77f6cc4d",
+        "received": {
+          "food": 6.0,
+          "wood": 4.0
+        },
+        "returned": {
+          "food": 1.0,
+          "wood": 0.0
+        },
+        "shipments": {},
+        "status": "completed",
+        "withdrawn": {
+          "food": 7.0,
+          "wood": 4.0
+        }
+      },
+      "neighbor_stock": {
+        "food": 6.0,
+        "wood": 0.0
+      },
+      "wallet": {
+        "available": {
+          "aggression": 0,
+          "social": 3
+        },
+        "earned": {
+          "aggression": 0,
+          "social": 3
+        },
+        "earning_cap": 27,
+        "spent": {
+          "aggression": 0,
+          "social": 0
+        }
+      }
+    }
+  },
+  "environment": "Headless Godot; separate XDG_DATA_HOME per test; nonportable executable; real physics and GUI input.",
+  "resolved_findings": [
+    "Generated terrain needed half-metre standing points combined with the original ground-checked one-metre stair edges. Final generated-world test gathers, carries, builds and reloads successfully.",
+    "Footprint uses four saved reachable ground samples with a visible raised foundation; nearest valid camp is within 6 to 16 metres."
+  ],
+  "limitations": [
+    "No Windows visual acceptance or target-PC performance claim.",
+    "One finite aid agreement and two neighbor residents; no full neighbor economy, trade loop or group warfare.",
+    "Contact remains unavailable where loaded terrain has no safe reachable camp footprint.",
+    "Foreign-animal preservation uses an unchanged saved fixture; no claim of integrated D2/D3 gameplay.",
+    "Medieval and modern runtimes remain unavailable and cannot unlock through points."
+  ]
+}

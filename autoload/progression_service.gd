@@ -395,7 +395,7 @@ func get_development_path() -> Dictionary:
 	result["epochs"] = []
 	for target: int in [2, 3]:
 		result["epochs"].append(Civilization.describe(state.campaign.data, str(int(state.world_seed)), int(state.current_phase), target, get_tribal_economy_progress()))
-	result["factions"] = "Nachbarstämme sind eigene Fraktionen deiner Spezies mit eigener Technik und Epoche. Ihre Spielabläufe folgen noch. Fremde Wildarten bleiben Tiere; Zähmung macht sie nicht zu Bürgern."
+	result["factions"] = "Unter Dorf → Nachbarn findest du eine Fraktion deiner Spezies mit eigenem Lager. Gemeinsame Hilfslieferungen verbessern eure Beziehung. Fremde Wildarten bleiben Tiere; Zähmung macht sie nicht zu Bürgern."
 	return result
 
 
@@ -428,6 +428,13 @@ func get_tribal_economy_progress() -> Dictionary:
 	var state := get_node("/root/GameState")
 	var village: Dictionary = state.campaign.data.get("bodies", {}).get(str(int(state.world_seed)), {}).get("tribe", {})
 	return _tribal.economy_progress(village)
+
+func record_neighbor_help(before: Dictionary, producer: Node) -> void:
+	var state := get_node("/root/GameState")
+	var controller := get_tree().get_first_node_in_group(&"tribe_controller")
+	if controller == null or controller != producer or not controller.is_active() or is_behavior_transaction_active():
+		return
+	_publish_tribal_result(_tribal.observe_neighbor(before, controller.body().get("tribal_neighbor", {}), controller.village(), state.campaign.data, int(state.current_phase)))
 
 
 func _publish_tribal_result(result: Dictionary) -> void:

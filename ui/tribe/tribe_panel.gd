@@ -2,6 +2,8 @@ extends CanvasLayer
 const Style = preload("res://ui/progression_style.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
+const Neighbors = preload("res://ui/tribe/neighbor_panel.gd")
+var _neighbors: VBoxContainer
 
 var controller: Node
 var confirmation_open: bool = false
@@ -86,6 +88,10 @@ func _build() -> void:
 	_work_page = VBoxContainer.new()
 	_work_page.name = "Arbeitsplätze & Berufe"
 	_tabs.add_child(_work_page)
+	_neighbors = Neighbors.new()
+	_neighbors.controller = controller
+	_neighbors.name = "Nachbarn"
+	_tabs.add_child(_neighbors)
 	var orders := HFlowContainer.new()
 	_orders_page.add_child(orders)
 	var all := Style.button("Alle auswählen")
@@ -302,6 +308,7 @@ func refresh() -> void:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
 	_buttons["milk"].visible = not data["economy"]["receipts"].is_empty()
 	_message.text = ("PAUSE · Leertaste zum Fortsetzen. " if get_tree().paused else "") + controller.status
+	_neighbors.refresh()
 	_layout()
 
 func _input(event: InputEvent) -> void:

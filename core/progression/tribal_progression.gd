@@ -1,12 +1,14 @@
 extends RefCounted
-## Contract 2: synchronous observations of completed village work, never commands.
+## Contract 3: synchronous observations of completed village work, never commands.
 ## The save owns both this bounded evidence ledger and the village it describes.
 const Rules = preload("res://core/progression/behavior_catalog.gd")
 const Tribe = preload("res://world/tribe/tribe_state.gd")
 const EconomyProgress = preload("res://core/progression/tribal_economy_progress.gd")
-const SCHEMA: int = 2
+const Neighbor = preload("res://world/tribe/neighbors/neighbor_state.gd")
+const SCHEMA: int = 3
 const COUNTERS: Array[String] = ["delivered", "meals", "tools", "huts", "garden"]
 const MILESTONES: Dictionary = {
+	"neighbor_help": {"name": "Gute Nachbarn", "description": "Mindestens zwei Bewohner liefern gemeinsam 6 Nahrung und 4 Holz an eine Nachbarfraktion deiner Spezies. Deren Bewohner stellen die Unterkunft fertig.", "points": 3},
 	"sustained_supply": {"name": "Dauerhaft versorgt", "description": "180 Spielsekunden gesicherte Versorgung mit erneuerbarer Nahrung und Wasser, echten Mahlzeiten/Trinkvorgängen aller Bewohner und Vorräten von 12 Nahrung sowie 6 Wasser.", "points": 3},
 	"working_professions": {"name": "Verlässliche Berufe", "description": "Mindestens zwei Bewohner erledigen in zwei verschiedenen Berufen jeweils drei erneuerbare Arbeits- und Lieferzyklen.", "points": 3},
 	"shared_stock": {"name": "Gemeinsame Vorräte", "description": "Mindestens zwei Bewohner bringen zusammen acht Rohstoffe ins Lager.", "points": 3},
@@ -50,7 +52,7 @@ func wallet() -> Dictionary:
 	for id: String in data["purchases"]:
 		spent += int(NODES[id]["cost"])
 	return {"earned": {"social": earned, "aggression": 0}, "spent": {"social": spent, "aggression": 0},
-		"available": {"social": earned - spent, "aggression": 0}, "earning_cap": 24}
+		"available": {"social": earned - spent, "aggression": 0}, "earning_cap": 27}
 
 func can_purchase(id: String, phase: int) -> Dictionary:
 	if not NODES.has(id):
@@ -198,6 +200,17 @@ func economy_progress(village: Dictionary) -> Dictionary:
 	var entry: Dictionary = data["villages"].get(village.get("id", ""), {})
 	return EconomyProgress.progress(entry.get("economy", {}), village)
 
+func observe_neighbor(before: Dictionary, after: Dictionary, village: Dictionary, campaign: Dictionary, phase: int) -> Dictionary:
+	var result: Dictionary = {"changed": false, "rewards": []}
+	if phase != 1 or not matches_campaign(campaign) or data["awards"].has("neighbor_help") or not data["villages"].has(village.get("id")):
+		return result
+	if not Neighbor.validate(before, village, campaign).is_empty() or not Neighbor.validate(after, village, campaign).is_empty() or before["aid"]["status"] != "building" or after["aid"]["status"] != "completed" or before["aid"]["id"] != after["aid"]["id"]:
+		return result
+	data["awards"]["neighbor_help"] = {"village_id": village["id"], "neighbor_id": after["id"], "agreement_id": after["aid"]["id"]}
+	result["changed"] = true
+	result["rewards"].append({"ok": true, "phase": 1, "track": "social", "amount": 3, "outcome": "neighbor_help", "available": wallet()["available"]["social"]})
+	return result
+
 static func _food(village: Dictionary) -> int:
 	return int(village["stock"].get("food", 0)) + int(village["stock"].get("milk", 0))
 
@@ -274,6 +287,8 @@ static func validate(value: Variant) -> String:
 		if id in ["sustained_supply", "working_professions"]:
 			if int(value["schema"]) < 2 or value["villages"][award["village_id"]].get("economy", {}).is_empty():
 				return "Wirtschaftserfolg ohne Nachweis."
+		if id == "neighbor_help" and (int(value["schema"]) < 3 or not award.get("neighbor_id") is String or not award.get("agreement_id") is String or award["neighbor_id"].is_empty() or award["agreement_id"].is_empty()):
+			return "Nachbarhilfe ohne Fraktion und Vereinbarung."
 		earned += int(MILESTONES[id]["points"])
 	var spent: int = 0
 	for id: Variant in value["purchases"]:

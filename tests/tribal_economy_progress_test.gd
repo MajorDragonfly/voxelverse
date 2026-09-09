@@ -93,7 +93,7 @@ func _run() -> void:
 	legacy["awards"].erase("sustained_supply")
 	legacy["villages"][village["id"]].erase("economy")
 	_expect(model.import_state(legacy), "Tribal schema 1 cannot migrate")
-	_expect(model.export_state()["schema"] == 2 and _evidence().is_empty() and model.export_state()["awards"] == legacy["awards"], "Migration lost points or invented economic work")
+	_expect(model.export_state()["schema"] == Tribal.SCHEMA and _evidence().is_empty() and model.export_state()["awards"] == legacy["awards"], "Migration lost points or invented economic work")
 	print(JSON.stringify({"test": "tribal_economy_progress", "passed": failures.is_empty(), "failures": failures}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
 

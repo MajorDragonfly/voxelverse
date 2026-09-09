@@ -1,8 +1,10 @@
-# Stammesfortschritt und Epochenvertrag – Version 2
+# Stammesfortschritt und Epochenvertrag – Version 3
 
 Auftrag 6, gemeinsame Basis `3a3e0272375e556f3ff65b7370582af79a9d48b5`.
 Version 2 verbindet den abgeschlossenen M6-Stand
 `9d30a0c31bc5da066580a2b58db6be782f899f41` mit dem Stammesfortschritt.
+Version 3 ergänzt die erste aktive Nachbarfraktion samt echter Hilfslieferung.
+Details: `TRIBAL_NEIGHBOR_CONTRACT.md`.
 Implementierung: `core/progression/tribal_progression.gd` und
 `core/progression/civilization_contract.gd`. Diese Regeln sind kein neuer
 Artenkatalog und keine zweite Zähmungs- oder Dorfsimulation.
@@ -72,9 +74,10 @@ Autosaves; reguläre Snapshots speichern ihn zusammen mit der Dorfwirtschaft.
 | `shared_meals` | Mindestens drei Nahrung von mindestens zwei Trägern; danach essen alle drei ursprünglichen Bewohner aus dem Lager | 4 |
 | `sustained_supply` | Das oben definierte ununterbrochene Versorgungsfenster ist erfüllt | 3 |
 | `working_professions` | Zwei verschiedene unterstützte Berufe mit jeweils drei vollständigen erneuerbaren Arbeits-/Lieferzyklen; mindestens zwei tatsächlich beteiligte Bewohner | 3 |
+| `neighbor_help` | Mindestens zwei eigene Träger liefern 6 Nahrung und 4 Holz; beide Nachbarbewohner stellen daraus ihre Unterkunft fertig | 3 |
 
 Jeder Meilenstein wird genau einmal **pro Kampagne** vergeben, auch bei mehreren
-Dörfern/Planeten. Höchstverdienst derzeit 24 soziale Stammespunkte. Ein späterer
+Dörfern/Planeten. Höchstverdienst derzeit 27 soziale Stammespunkte. Ein späterer
 Versorgungsausfall widerruft keinen früheren Verdienst, setzt aber die aktuelle
 Versorgungsvoraussetzung im Entwicklungspfad zurück. Aggressive
 Stammespunkte bleiben null, bis eine wirkliche Gruppenkampf-Spielschleife ihren
@@ -90,7 +93,7 @@ Kreaturenpunkte und deren sechs vorhandene Käufe bleiben unverändert erhalten.
 ## Speicherung und Wiederaufnahme
 
 Das äußere Speicherformat bleibt 6, `progression.schema` steigt von 4 auf **5**.
-`progression.tribal.schema` ist **2**, das neue `villages[id].economy.schema`
+`progression.tribal.schema` ist **3**, `villages[id].economy.schema`
 ist **1**. Verhaltensformat/-regeln bleiben beide 1, Dorfzustand ist durch M6
 **3** mit `economy.schema = 1`, Epochen-IDs bleiben 0–5.
 
@@ -105,8 +108,9 @@ separate, voneinander abweichende Kontostandzähler werden nicht gespeichert.
   Punkte. Bei einer teilweise fertigen alten Baustelle zählen nur neue Beiträge.
 - Der erste neue Arbeitsnachweis beginnt bei den tatsächlichen aktuellen
   Arbeitszählern. Alte Starts, Menüaufrufe und Neuinitialisierung zahlen nicht aus.
-- Stammesformat 1 wird verlustfrei auf 2 angehoben. Seine Erfolge, Käufe und
-  laufenden Baubeiträge bleiben erhalten; neue Wirtschaftsbeweise beginnen leer.
+- Stammesformat 1/2 wird verlustfrei auf 3 angehoben. Seine Erfolge, Käufe und
+  laufenden Baubeiträge bleiben erhalten; fehlende Wirtschaftsbeweise beginnen leer,
+  vorhandene Wirtschaftsbeweise bleiben unverändert. Nachbarhilfe wird nie erfunden.
   Der begrenzte Nachweis speichert Liefer-/Ess-/Trinkzähler, Frachtzuordnung,
   abgeschlossene Berufszyklen mit Beteiligten sowie Zeit und Verbrauch im
   laufenden Versorgungsfenster. Auch eine neuere verschachtelte Version wird vor
@@ -127,14 +131,16 @@ separate, voneinander abweichende Kontostandzähler werden nicht gespeichert.
 `neighbor_plan(campaign, body_id, slot)` liefert für Slot 0–15 eine deterministische
 **Planung**, ohne sie in die Kampagne zu schreiben oder Bewohner zu erzeugen:
 `id` (Fraktion), `species_id`, `body_id`, `phase`, eigener `technology`-Stand,
-`relation`, `status: planned`, `contract: 2`.
+`relation`, `status: planned`, `contract: 3`.
 
 Nachbar und Spieler haben dieselbe `player_species_id`, aber unterschiedliche
 Fraktions-IDs. `validate_faction` lehnt eine fremde Art ab. Spätere Übergänge
 ändern nur die jeweilige Fraktion, niemals automatisch jede Art oder Fraktion
-des Planeten. Geplante neutrale Nachbarn können eigene Versorgung, Aufträge,
-Abkommen und abgegrenzte Konflikte erhalten. Das ist noch keine aktive
-Nachbarstammes-KI. Gezüchtete/gezähmte Wildtiere behalten Tier-ID, eigene Art,
+des Planeten. Slot 0 ist über die ausdrückliche Kontaktsuche nun als örtliches
+Nachbarlager mit zwei Bewohnern, eigener Unterkunft und endlichem Hilfsauftrag
+spielbar. Der reine Planungsaufruf selbst erzeugt weiterhin keine Weltobjekte.
+Weitere Versorgung, Abkommen und Konflikte folgen später.
+Gezüchtete/gezähmte Wildtiere behalten Tier-ID, eigene Art,
 Besitzerfraktion und Bindung; sie gehören nicht zur Bürgerliste.
 
 ## Spielbare Epochenvoraussetzungen
@@ -153,8 +159,10 @@ Für **Antike/Mittelalter (ID 2)**:
 3. Mindestens zwei Bewohner beteiligen sich an zwei Berufen mit jeweils drei
    vollständigen Arbeits-/Lieferzyklen an erneuerbaren Arbeitsplätzen. Der
    Entwicklungspfad zeigt die tatsächlich beobachteten Zähler je Beruf.
-4. Eine Hilfs-/Handelslieferung an einen Nachbarstamm derselben Spezies abschließen
-   **oder** das eigene Dorf in einem abgegrenzten Gruppenkonflikt verteidigen.
+4. Die gemeinsame Hilfslieferung mit sechs Nahrung und vier Holz an den Nachbarstamm
+   derselben Spezies abschließen, dessen Bewohner die Unterkunft fertigstellen.
+   Dieser Teil ist spielbar. Ein abgeschlossener Gruppenkonflikt bleibt als
+   spätere Alternative geplant; er erhält keinen Ersatznachweis aus Punkten.
 5. Ein spielbarer Zielmodus mit Siedlungsverwaltung, Handwerk, Wegen, Handel und
    geprüfter Zustandsübernahme existiert tatsächlich.
 
