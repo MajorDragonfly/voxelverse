@@ -87,7 +87,9 @@ func _test_blockers(data: Dictionary) -> void:
 	var body: Dictionary = campaign.bodies.values()[0]
 	body.home_group = Home.create(body.id, campaign.player_species_id, Vector3.ZERO)
 	_expect(saves._validate_save(home).is_empty(), "Valid home fixture rejected before preflight.")
-	_expect(str(Migration.blockers(home)).contains("home_group"), "Home members could be silently discarded.")
+	_expect(Migration.blockers(home).is_empty(), "Supported home was blocked before location checking.")
+	var converted: Dictionary = Migration.plan(home, JSON.stringify(home), "user://home.json")
+	_expect(converted.ok and converted.data.game_state.campaign.bodies.values()[0].home_group.members[0].id == body.home_group.members[0].id, "Home migration discarded its original member.")
 	body.home_group.schema = 999
 	_expect(saves._has_unsupported_contract(home), "Future home version not protected.")
 	var unknown: Dictionary = data.duplicate(true)

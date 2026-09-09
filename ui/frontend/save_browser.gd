@@ -221,8 +221,8 @@ func _preview_migration() -> void:
 		return
 	_clear_children(_details)
 	Style.label(_details, "KUGELKOPIE PRÜFEN", 25)
-	Style.paragraph(_details, "Diese Kopie übernimmt Identitäten, Entwürfe und Fortschritt. Der Spieler erhält einen geprüften Startplatz. Alte Karten bleiben im Quellarchiv; die neue Kugelkarte beginnt unerforscht.")
-	Style.paragraph(_details, "Auf der Kugel funktionieren derzeit Bewegung, Karte und Speichern. Nahrung, Begegnungen und Siedlungen folgen.")
+	Style.paragraph(_details, "Die geprüfte Kopie übernimmt Entwürfe, Fortschritt, Heimat, Bewohner, Tierbesitz, Vorräte und laufende Lieferungen. Bekannte Orte erhalten neue Plätze auf der Kugel. Die ursprüngliche Landschaft und ihre Karten bleiben im Quellarchiv erhalten.")
+	Style.paragraph(_details, "Kreaturenphase, Stamm und Tierhaltung verwenden dieselbe Kampagne. Der Weltumzug befindet sich noch in der gemeinsamen Erprobung; das Original bleibt verfügbar.")
 	var manifest: Dictionary = preview.manifest
 	Style.paragraph(_details, "Körper: %d · Entwurfsdateien: %d\nQuell-Hash: %s\nManifest: %s\nOriginal und vollständiges Quellarchiv bleiben erhalten." % [
 		manifest.inventory.body_count, preview.data.design_files.size(), str(manifest.source_sha256).left(16), str(manifest.id).left(16)], 17)

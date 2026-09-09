@@ -1,17 +1,18 @@
 extends RefCounted
 ## D2 owns individuals only. Species suitability belongs exclusively to D1.
-const SCHEMA: int = 1
+const Home = preload("res://world/home_group/home_group_state.gd")
+const SCHEMA: int = 2
 const ORDERS: Array[String] = ["wait", "follow", "home"]
 const STATES: Array[String] = ["wild", "taming", "tamed", "dead"]
 const OFFER_SECONDS: float = 2.0
 const MAX_ANIMALS: int = 256
 
 static func empty_registry(campaign_id: String, body_id: String) -> Dictionary:
-	return {"schema": SCHEMA, "campaign_id": campaign_id, "body_id": body_id, "animals": {}}
+	return {"schema": 1, "campaign_id": campaign_id, "body_id": body_id, "animals": {}}
 
-static func individual(object_id: String, species_id: String, body_id: String, design_ref: Dictionary, position: Vector3) -> Dictionary:
+static func individual(object_id: String, species_id: String, body_id: String, design_ref: Dictionary, position: Variant) -> Dictionary:
 	return {"object_id": object_id, "species_id": species_id, "body_id": body_id,
-		"design_ref": design_ref.duplicate(true), "surface_mode": "legacy_plane_v9",
+		"design_ref": design_ref.duplicate(true), "surface_mode": Home.Cube.MODE if position is Dictionary else "legacy_plane_v9",
 		"position": point_array(position), "home": point_array(position), "wait_position": point_array(position),
 		"owner_faction_id": "", "claim_faction_id": "", "status": "wild", "trust": 0.0,
 		"health": 100.0, "hunger": 0.0, "thirst": 0.0, "order": "wait", "handler_id": "",
@@ -25,7 +26,7 @@ static func occupied(registry: Dictionary, faction_id: String) -> int:
 	return count
 
 static func validate(value: Variant) -> String:
-	if not value is Dictionary or not integer(value.get("schema"), SCHEMA, SCHEMA):
+	if not value is Dictionary or not integer(value.get("schema"), 1, SCHEMA):
 		return "Nicht unterstütztes D2-Tierformat."
 	if not identity(value.get("campaign_id")) or not identity(value.get("body_id")):
 		return "Kampagnen- oder Körperidentität fehlt."
@@ -36,13 +37,13 @@ static func validate(value: Variant) -> String:
 		var a: Variant = animals[key]
 		if not a is Dictionary or a.get("object_id") != key or not identity(key) or not identity(a.get("species_id")) or a.get("body_id") != value["body_id"]:
 			return "Ungültige Tieridentität."
-		if a.get("surface_mode") != "legacy_plane_v9":
-			return "D2-Prüfszene unterstützt nur den ausdrücklich benannten Ebenenadapter."
+		if a.get("surface_mode") not in ["legacy_plane_v9", Home.Cube.MODE] or (a.surface_mode == Home.Cube.MODE and value.schema != SCHEMA):
+			return "Unbekannter Ortsvertrag des Tiers."
 		var design: Variant = a.get("design_ref")
 		if not design is Dictionary or not identity(design.get("id")) or not integer(design.get("revision"), 0, 1000000000):
 			return "Ungültiger Körperentwurfsbezug."
 		for field in ["position", "home", "wait_position"]:
-			if not point(a.get(field)):
+			if not Home.place_valid(a.get(field), a.surface_mode, a.body_id):
 				return "Ungültiger Tierort."
 		for field in ["owner_faction_id", "claim_faction_id", "handler_id"]:
 			if not a.get(field) is String or a[field].length() > 160:
@@ -89,8 +90,8 @@ static func integer(value: Variant, low: int, high: int) -> bool:
 static func point(value: Variant) -> bool:
 	return value is Array and value.size() == 3 and number(value[0], -1.0e7, 1.0e7) and number(value[1], -1.0e7, 1.0e7) and number(value[2], -1.0e7, 1.0e7)
 
-static func point_array(value: Vector3) -> Array:
-	return [value.x, value.y, value.z]
+static func point_array(value: Variant) -> Variant:
+	return Home.place(value)
 
 static func vector(value: Array) -> Vector3:
 	return Vector3(float(value[0]), float(value[1]), float(value[2]))

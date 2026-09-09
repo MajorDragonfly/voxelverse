@@ -217,11 +217,10 @@ func _ensure_region(coordinates: Vector2i) -> void:
 	}
 
 
-func _simulate_region(
-	coordinates: Vector2i,
-	hours: float
-) -> void:
-	var state: Dictionary = _region_states.get(coordinates, {})
+func _simulate_region(coordinates: Vector2i, hours: float) -> void:
+	advance_state(_region_states.get(coordinates, {}), hours)
+
+static func advance_state(state: Dictionary, hours: float) -> void:
 	if state.is_empty():
 		return
 	var plant_biomass: float = clampf(
@@ -307,7 +306,6 @@ func _simulate_region(
 	state["plant_biomass"] = plant_biomass
 	state["carcass_biomass"] = carcass
 	state["species"] = entries
-	_region_states[coordinates] = state
 
 
 func _trim_cache() -> void:

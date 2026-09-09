@@ -58,6 +58,7 @@ func _choose_wander_state() -> void:
 	_ambient_heading = _wander_direction
 
 func _physics_process(delta: float) -> void:
+	Space.orient(self)
 	if not _anchor_ready:
 		# Streamers configure/add the scene before assigning its world position.
 		_anchor = global_position
@@ -148,10 +149,10 @@ func _sense() -> void:
 			_separation += (global_position - node.global_position).normalized() * (1.0 - distance / 1.8)
 		elif distance <= 0.01:
 			var angle: float = float(posmod(individual_seed, 31)) / 31.0 * TAU
-			_separation += Vector3(cos(angle), 0.0, sin(angle))
+			_separation += global_basis * Vector3(cos(angle), 0.0, sin(angle))
 		if neighbors.size() >= NEIGHBOR_LIMIT:
 			break
-	_separation.y = 0.0
+	_separation = _separation.slide(up_direction)
 	_separation = _separation.limit_length(1.0)
 	var perceived: Node3D = null
 	if _threat_timer > 0.0 and is_instance_valid(_threat) and not (_ignore_player and _threat.is_in_group(&"player")):
@@ -240,18 +241,18 @@ func _desired_heading() -> Vector3:
 		delta = _goal - global_position
 		if _flat_distance(global_position, _goal) < 1.3:
 			return Vector3.ZERO
-	delta.y = 0.0
+	delta = delta.slide(up_direction)
 	return delta.normalized()
 
 func can_perceive(target: Node3D, radius: float) -> bool:
 	if not is_instance_valid(target) or not target.is_inside_tree():
 		return false
 	var delta: Vector3 = target.global_position - global_position
-	if delta.length() > radius or absf(delta.y) > 3.5:
+	if delta.length() > radius or absf(delta.dot(up_direction)) > 3.5:
 		return false
 	var forward: Vector3 = -_visual_root.global_basis.z
-	forward.y = 0.0
-	delta.y = 0.0
+	forward = forward.slide(up_direction)
+	delta = delta.slide(up_direction)
 	# Very near movement is noticed in all directions; distant targets need
 	# to be within a broad forward field of view and unobstructed sight.
 	if delta.length() > 2.4 and forward.normalized().dot(delta.normalized()) < -0.25:
@@ -284,8 +285,14 @@ func get_inspection_data() -> Dictionary:
 	data["ai_description"] = LABELS.get(ai_state, ai_state)
 	return data
 
-static func _flat_distance(a: Vector3, b: Vector3) -> float:
-	return Vector2(a.x - b.x, a.z - b.z).length()
+func _flat_distance(a: Vector3, b: Vector3) -> float:
+	return (a - b).slide(up_direction).length()
+
+func surface_origin_shifted(shift: Vector3) -> void:
+	_anchor += shift
+	_last_seen += shift
+	_goal += shift
+	_progress_position += shift
 
 func _player_caution_range() -> float:
 	if catalog_species.is_empty(): return 6.0

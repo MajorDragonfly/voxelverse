@@ -28,6 +28,8 @@ static func ledger(state: Node, body_id: String) -> Dictionary:
 	return value
 
 static func animal(state: Node, body_id: String, object_id: String, initial: float) -> Dictionary:
+	var population: Node = state.get_tree().get_first_node_in_group(&"campaign_surface_population")
+	if population != null and population.body().id == body_id: return population.needs(object_id, "foraging", initial)
 	var data: Dictionary = ledger(state, body_id)
 	if data.is_empty() or object_id.is_empty():
 		return {}
@@ -42,6 +44,8 @@ static func animal(state: Node, body_id: String, object_id: String, initial: flo
 	return entry
 
 static func plant(state: Node, body_id: String, key: String, capacity: float) -> Dictionary:
+	var population: Node = state.get_tree().get_first_node_in_group(&"campaign_surface_population")
+	if population != null and population.body().id == body_id: return population.needs(key, "food", capacity)
 	var data: Dictionary = ledger(state, body_id)
 	if data.is_empty():
 		return {}
@@ -57,3 +61,15 @@ static func plant(state: Node, body_id: String, key: String, capacity: float) ->
 
 static func number(value: Variant, minimum: float, maximum: float) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and float(value) >= minimum and float(value) <= maximum
+
+static func validate(value: Variant, body_id: String) -> String:
+	if not value is Dictionary or value.get("schema") != SCHEMA or value.get("body_id") != body_id: return "Ungültiger Nahrungsbestand."
+	for section in ["animals", "plants"]:
+		if not value.get(section) is Dictionary or value[section].size() > LIMIT: return "Ungültiges Nahrungsinventar."
+		for id in value[section]:
+			var item: Variant = value[section][id]
+			if not id is String or id.is_empty() or not item is Dictionary: return "Ungültige Nahrungsidentität."
+			if section == "animals":
+				if not number(item.get("satiety"), 0, 100) or not item.get("seeking") is bool: return "Ungültige Sättigung."
+			elif not number(item.get("remaining"), 0, 1000) or not number(item.get("regrow_at"), 0, 1e12): return "Ungültiger Nahrungsvorrat."
+	return ""

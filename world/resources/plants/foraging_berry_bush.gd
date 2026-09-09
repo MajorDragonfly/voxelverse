@@ -4,6 +4,8 @@ extends "res://world/resources/plants/berry_bush.gd"
 const ForagingState = preload("res://world/resources/plants/foraging_state.gd")
 const Steering = preload("res://creatures/ai/wildlife_steering.gd")
 const REGROW_SECONDS: float = 180.0
+const Space = preload("res://world/surface/gameplay_space.gd")
+var persistent_food_key: String = ""
 
 var _body_id: String = ""
 var _food_key: String = ""
@@ -19,7 +21,7 @@ func _initialize_bush() -> void:
 	if not is_inside_tree() or is_queued_for_deletion():
 		return
 	_body_id = str(ForagingState.body(GameState)["id"])
-	_food_key = "berry:%d:%d" % [roundi(global_position.x * 100.0), roundi(global_position.z * 100.0)]
+	_food_key = persistent_food_key if not persistent_food_key.is_empty() else "berry:%d:%d" % [roundi(global_position.x * 100.0), roundi(global_position.z * 100.0)]
 	_initialized = true
 	var entry: Dictionary = _entry()
 	is_depleted = entry.is_empty() or float(entry["remaining"]) <= 0.0
@@ -68,7 +70,7 @@ func feeding_distance() -> float:
 func can_feed(actor: Node) -> bool:
 	if not actor is CharacterBody3D or not actor.is_inside_tree() or not _initialized:
 		return false
-	if absf(actor.global_position.y - global_position.y) > 1.25 or actor.global_position.distance_to(global_position) > feeding_distance():
+	if absf((actor.global_position - global_position).dot(Space.up(self, global_position))) > 1.25 or actor.global_position.distance_to(global_position) > feeding_distance():
 		return false
 	return not Steering.ground(actor, actor.global_position).is_empty() and Steering.clear_sight(actor, self)
 
@@ -82,6 +84,8 @@ func consume_food(actor: Node, amount: float) -> float:
 	entry["remaining"] = float(entry["remaining"]) - eaten
 	if eaten > 0.0:
 		entry["regrow_at"] = float(GameState.campaign.data["elapsed_seconds"]) + REGROW_SECONDS
+		var ecology: Node = get_tree().get_first_node_in_group(&"campaign_surface_ecology")
+		if ecology != null: ecology.consumed_plant(global_position, eaten)
 	_sync_visual()
 	return eaten
 

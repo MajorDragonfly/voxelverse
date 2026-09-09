@@ -4,6 +4,10 @@ Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge er
 
 **Zuerst lesen:** [ROADMAP.md](../ROADMAP.md), [SPHERICAL_CAMPAIGN_MIGRATION.md](SPHERICAL_CAMPAIGN_MIGRATION.md), [VOXELVERSE_DESIGN.md](VOXELVERSE_DESIGN.md). Der vollständige Kugelumzug hat Vorrang vor neuen Epochen. Die belebte Kugelszene bleibt bis zur tatsächlichen Kampagnenintegration ein eigener Bereich.
 
+## Aktueller gemeinsamer Arbeitsstand
+
+M1f, lokale M1g-Verbraucher, entwickelte Kopiermigration und regionaler Population-Speicher werden in einem Integrationszweig zusammengeführt. Vor weiterer Arbeit [WORK_SPHERICAL_GAMEPLAY.md](WORK_SPHERICAL_GAMEPLAY.md) lesen: Dort stehen die tatsächlichen Datenbesitzer, Versionsgrenzen, ausgeführten Tests und verbleibenden Abnahmen. Die folgenden ursprünglichen Aufträge bezeichnen den Gesamtumfang; bereits gelieferte Anschlüsse nicht nochmals unabhängig implementieren. ARCH-03/04, Fernproduktion aus ARCH-16 und der reguläre Start aus ARCH-19 bleiben offen.
+
 ## Architekturprüfung: Aufträge vor dem Start konkret wählen
 
 Ergänzung vom 9. September 2026 auf geprüftem `main` `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7`: [Architekturbefunde](ARCHITECTURE_SCALABILITY_AUDIT.md) und [30 ausführbare Teilaufträge](ARCHITECTURE_BACKLOG.md) sind die zusätzliche Arbeitsgrundlage. Die folgenden fünf Stränge bleiben zuständig; ARCH-IDs zerlegen ihre Arbeit und sind keine konkurrierenden Neuentwicklungen. Vor Arbeitsbeginn aktuellen gemeinsamen Commit und gelieferte Pakete abgleichen. M1f ist in einem anderen Arbeitsstand bereits in Bearbeitung; dieses Audit bewertet ausschließlich veröffentlichten Code und startet diesen Auftrag nicht erneut.

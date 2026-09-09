@@ -162,7 +162,7 @@ func _run() -> void:
 	var expected: FileAccess = FileAccess.open("user://growth-expected.json", FileAccess.WRITE)
 	expected.store_string(JSON.stringify(final_state))
 	expected.close()
-	evidence = {"population": tribe.actors.size(), "beds": Housing.beds(tribe.village()), "homes": tribe.village()["housing"]["homes"].size(), "deliveries": tribe.village()["delivered"], "stock": tribe.village()["stock"].duplicate(), "original_ids_retained": true, "schema": Model.SCHEMA}
+	evidence = {"population": tribe.actors.size(), "beds": Housing.beds(tribe.village()), "homes": tribe.village()["housing"]["homes"].size(), "deliveries": tribe.village()["delivered"], "stock": tribe.village()["stock"].duplicate(), "original_ids_retained": true, "schema": tribe.village()["schema"]}
 	await _capture_growth()
 	print(JSON.stringify({"test": "tribal_age_growth", "passed": failures.is_empty(), "failures": failures, "evidence": evidence}))
 	await _cleanup()

@@ -33,7 +33,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	var save_service := get_node_or_null("/root/SaveGameService")
 	if save_service != null and save_service.has_method("save_now"):
-		save_service.call("save_now")
+		if not save_service.call("save_now"): return
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_viewport().set_input_as_handled()
 	var change_error: Error = get_tree().change_scene_to_file(CREATURE_EDITOR_SCENE)

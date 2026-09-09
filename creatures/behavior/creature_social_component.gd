@@ -4,6 +4,7 @@ const FRIEND_RANGE: float = 6.0
 const TRUST_PER_SECOND: float = 12.5
 const HELP_COST: float = 12.0
 const HELP_HEALTH: float = 0.30
+const Space = preload("res://world/surface/gameplay_space.gd")
 
 var creature: CharacterBody3D
 var attention_remaining: float = 0.0
@@ -46,8 +47,8 @@ func can_reach(actor: Node, reach: float = FRIEND_RANGE) -> bool:
 		return false
 	if not actor.has_method("_has_clear_line_of_sight"):
 		return false
-	return actor._has_clear_line_of_sight(creature, actor.global_position + Vector3.UP * 0.7,
-		creature.global_position + Vector3.UP * 0.7)
+	return actor._has_clear_line_of_sight(creature, actor.global_position + Space.up(actor, actor.global_position) * 0.7,
+		creature.global_position + Space.up(creature, creature.global_position) * 0.7)
 
 
 func befriend(actor: Node, delta: float) -> Dictionary:

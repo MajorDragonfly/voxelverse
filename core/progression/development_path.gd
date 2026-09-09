@@ -46,24 +46,11 @@ static func read_home(campaign: Dictionary, body_key: String) -> Dictionary:
 	var home: Variant = body["home_group"]
 	if not home is Dictionary:
 		return _invalid()
-	if not Rules.is_integer(home.get("schema"), 1, 1):
+	var Home = preload("res://world/home_group/home_group_state.gd")
+	if not Rules.is_integer(home.get("schema"), 1, Home.SCHEMA) or (home.get("schema") == Home.SCHEMA and home.get("surface_mode") != Home.Cube.MODE):
 		return {"status": "unsupported", "member_count": 0, "message": "Diese gespeicherte Gruppenversion kann hier noch nicht angezeigt werden. Ihre Daten bleiben erhalten."}
-	var body_id: String = str(body.get("id", ""))
-	var species_id: String = str(campaign.get("player_species_id", ""))
-	if body_id.is_empty() or species_id.is_empty() or home.get("body_id") != body_id or home.get("species_id") != species_id or home.get("surface_mode") != "legacy_plane_v9" or body.get("surface_mode") != "legacy_plane_v9":
-		return _invalid()
-	var group_id: String = Ids.scoped("group", body_id, species_id + ":home")
-	if home.get("id") != group_id or not _position(home.get("anchor")):
-		return _invalid()
-	var members: Variant = home.get("members")
-	if not members is Array or members.size() != 2:
-		return _invalid()
-	for index in range(members.size()):
-		var member: Variant = members[index]
-		if not member is Dictionary or member.get("id") != Ids.scoped("object", group_id, str(index)) or member.get("order") not in ["follow", "wait", "home"]:
-			return _invalid()
-		if not member.get("name") is String or member["name"].is_empty() or member["name"].length() > 32 or not _position(member.get("position")):
-			return _invalid()
+	if home.get("surface_mode") != body.get("surface_mode") or not Home.validate(home, str(body.get("id", "")), str(campaign.get("player_species_id", ""))).is_empty(): return _invalid()
+	var members: Array = home.members
 	# The view exposes summaries, never mutable references to live member records.
 	return {"status": "saved", "member_count": members.size(), "message": "%d eigene Gefährten und ein Heimatplatz sind gespeichert." % members.size()}
 

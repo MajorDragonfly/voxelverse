@@ -4,6 +4,10 @@ Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984
 
 **Alle ARCH-Aufgaben sind geplant, keine davon ist durch dieses Dokument implementiert oder abgenommen.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Vor Arbeitsbeginn den aktuellen veröffentlichten Stand vergleichen: Bereits durch einen Fachchat gelieferte Arbeit mit Commit und Nachweis zuordnen, nicht nochmals implementieren. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
 
+## Zuordnung der laufenden Implementierung
+
+[WORK_SPHERICAL_GAMEPLAY.md](WORK_SPHERICAL_GAMEPLAY.md) liefert inzwischen konkrete Anschlüsse und Teilnachweise für ARCH-01, 05, 06, 08–14. Die Aufgaben werden hier erst nach ihrer jeweils vollständigen Abnahme als erledigt markiert. Besonders ARCH-03/04 (Körper-ID), ARCH-16 (weiterarbeitende ferne Orte) und ARCH-19 (regulärer Kugelstart) bleiben offen. Das ursprüngliche Audit bezog sich auf den oben angegebenen älteren Commit.
+
 ## Beschlossene Leitplanken
 
 - Lars hat in dieser Architekturprüfung bestätigt: **kurze Übergänge zwischen Oberfläche und Orbit sind zulässig**. Start, Landung und beide Schiffstypen bleiben spielbare Ziele; lückenloser Boden-Orbit-Flug ist keine Pflicht.

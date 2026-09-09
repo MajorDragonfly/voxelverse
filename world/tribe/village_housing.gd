@@ -14,9 +14,9 @@ const GROW_SECONDS: float = 90.0
 static func resident_id(data: Dictionary, index: int) -> String:
 	return Ids.scoped("resident", data["id"], str(index))
 
-static func site(data: Dictionary, kind: String, position: Array, index: int) -> Dictionary:
+static func site(data: Dictionary, kind: String, position: Variant, index: int) -> Dictionary:
 	return {"id": Ids.scoped("pen" if kind == "pen" else "shelter", data["id"], str(index)), "kind": kind,
-		"position": position.duplicate(), "entrance": Home.vector_array(Home.vector(position) + Vector3(0, 0, 2))}
+		"position": position.duplicate(), "entrance": Home.offset_place(position, Vector3(0, 0, 2))}
 
 static func install(data: Dictionary) -> void:
 	data["housing"] = {"schema": 1, "homes": [], "clock": 0.0}
@@ -43,8 +43,8 @@ static func obstacles(data: Dictionary) -> Array:
 		result.append(data["project"])
 	return result
 
-static func contains(shelter: Dictionary, position: Vector3, margin: float = 0.55) -> bool:
-	var offset: Vector3 = position - Home.vector(shelter["position"])
+static func contains(shelter: Dictionary, position: Variant, margin: float = 0.55) -> bool:
+	var offset: Vector3 = Home.local_offset(shelter["position"], Home.place(position))
 	return absf(offset.x) < 1.05 + margin and absf(offset.z) < 1.05 + margin
 
 static func pending(project: Dictionary) -> bool:
@@ -84,13 +84,13 @@ static func tick(data: Dictionary, delta: float) -> bool:
 	data["housing"]["clock"] = minf(GROW_SECONDS, float(data["housing"]["clock"]) + delta)
 	return float(data["housing"]["clock"]) >= GROW_SECONDS
 
-static func add_resident(data: Dictionary, position: Vector3) -> Dictionary:
-	if not growth_blocker(data).is_empty() or float(data["housing"]["clock"]) < GROW_SECONDS or not position.is_finite() or not Economy.local_point(Home.vector_array(position), data["anchor"]):
+static func add_resident(data: Dictionary, position: Variant) -> Dictionary:
+	if not growth_blocker(data).is_empty() or float(data["housing"]["clock"]) < GROW_SECONDS or not Economy.local_point(Home.place(position), data["anchor"]):
 		return {}
 	var index: int = data["members"].size()
 	var member: Dictionary = {"id": resident_id(data, index), "name": "Dorfbewohner %d" % (index + 1),
-		"species_id": data["species_id"], "faction_id": data["faction_id"], "position": Home.vector_array(position),
-		"destination": Home.vector_array(position), "order": "wait", "stage": "outbound", "work": 0.0,
+		"species_id": data["species_id"], "faction_id": data["faction_id"], "position": Home.place(position),
+		"destination": Home.place(position), "order": "wait", "stage": "outbound", "work": 0.0,
 		"cargo": "", "hunger": 75.0, "hydration": 100.0, "profession": "none", "paused_order": "", "task": "", "blocked": false, "construction_id": ""}
 	if int(data["schema"]) >= 5:
 		member["care_pen_id"] = ""
@@ -118,7 +118,7 @@ static func validate(data: Dictionary) -> String:
 		var shelter: Variant = all_sites[i]
 		if not shelter is Dictionary or not shelter.get("kind") is String or shelter["kind"] not in KINDS or shelter.get("id") != Ids.scoped("shelter", data["id"], str(i)) or not Economy.local_point(shelter.get("position"), data["anchor"]) or not Economy.local_point(shelter.get("entrance"), data["anchor"]):
 			return "Ungültige Unterkunft."
-		if Home.vector(shelter["entrance"]).distance_to(Home.vector(shelter["position"]) + Vector3(0, 0, 2)) > 0.01:
+		if Home.distance(shelter["entrance"], Home.offset_place(shelter["position"], Vector3(0, 0, 2))) > 0.01:
 			return "Ungültiger Gebäudeeingang."
 		if i < h["homes"].size():
 			huts += 1 if shelter["kind"] == "hut" else 0

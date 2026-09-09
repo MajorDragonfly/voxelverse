@@ -7,7 +7,9 @@ const FIELD: String = "domesticated_animals"
 const CAPACITY: int = 6
 
 static func create(campaign: Dictionary, body: Dictionary) -> Dictionary:
-	return {"schema": SCHEMA, "registry": State.empty_registry(campaign["id"], body["id"]), "sources": {}}
+	var registry: Dictionary = State.empty_registry(campaign["id"], body["id"])
+	if body.surface_mode == State.Home.Cube.MODE: registry.schema = State.SCHEMA
+	return {"schema": SCHEMA, "registry": registry, "sources": {}}
 
 static func lookup(state: Node, object_id: String) -> Dictionary:
 	var body: Dictionary = state.campaign.data["bodies"].get(str(state.get_world_seed()), {})

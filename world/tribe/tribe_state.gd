@@ -6,7 +6,8 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
 const Husbandry = preload("res://world/tribe/village_husbandry.gd")
-const SCHEMA: int = 5
+const SCHEMA: int = 6
+const LEGACY_SCHEMA: int = 5
 const KINDS: Array[String] = ["wood", "stone", "food"]
 const ORDERS: Array[String] = ["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "pen", "feed", "garden", "supply"]
 const COSTS: Dictionary = {"tool": {"wood": 3, "stone": 2}, "hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}, "pen": {"wood": 4, "fiber": 2}, "garden": {"wood": 4, "stone": 1}}
@@ -18,7 +19,7 @@ const GARDEN_CAPACITY: int = 8
 
 static func create(home: Dictionary, campaign: Dictionary, player: Dictionary, sites: Dictionary) -> Dictionary:
 	var members: Array = []
-	var originals: Array = [{"id": campaign["player_object_id"], "name": "Deine Kreatur", "position": player["position"]}]
+	var originals: Array = [{"id": campaign["player_object_id"], "name": "Deine Kreatur", "position": player.get("surface_address", player.get("position"))}]
 	originals.append_array(home["members"])
 	for original: Dictionary in originals:
 		members.append({"id": original["id"], "name": original["name"], "position": original["position"].duplicate(),
@@ -27,7 +28,7 @@ static func create(home: Dictionary, campaign: Dictionary, player: Dictionary, s
 	var deposits: Dictionary = {}
 	for kind: String in KINDS:
 		deposits[kind] = {"id": Ids.scoped("resource", home["id"], kind), "position": sites[kind].duplicate(), "remaining": 48}
-	var data: Dictionary = {"schema": SCHEMA, "id": Ids.scoped("tribe", home["id"], "settled"), "home_group_id": home["id"],
+	var data: Dictionary = {"schema": SCHEMA if home.anchor is Dictionary else LEGACY_SCHEMA, "id": Ids.scoped("tribe", home["id"], "settled"), "home_group_id": home["id"],
 		"body_id": home["body_id"], "species_id": home["species_id"], "faction_id": campaign["player_faction_id"],
 		"anchor": home["anchor"].duplicate(), "members": members, "deposits": deposits,
 		"stock": {"wood": 0, "stone": 0, "food": 0}, "tools": 0, "huts": 0,
@@ -41,7 +42,8 @@ static func create(home: Dictionary, campaign: Dictionary, player: Dictionary, s
 static func upgrade(data: Dictionary) -> bool:
 	# Validation precedes migration; never refill old deposits or replace IDs.
 	var old: int = int(data.get("schema", 0))
-	if old < 1 or old >= SCHEMA:
+	var target: int = SCHEMA if data.get("anchor") is Dictionary else LEGACY_SCHEMA
+	if old < 1 or old >= target:
 		return false
 	if old == 1:
 		data.merge({"garden": 0, "growth": 0.0, "grown": 0}, true)
@@ -49,8 +51,8 @@ static func upgrade(data: Dictionary) -> bool:
 		Economy.install(data)
 	if old < 4:
 		Housing.install(data)
-	Husbandry.install(data)
-	data["schema"] = SCHEMA
+	if old < 5: Husbandry.install(data)
+	data["schema"] = target
 	return true
 
 static func cargo_count(data: Dictionary, kind: String) -> int:
@@ -80,6 +82,8 @@ static func grow(data: Dictionary, delta: float) -> bool:
 static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> String:
 	if not value is Dictionary or not integer(value.get("schema"), 1, SCHEMA):
 		return "Nicht unterstützter Stammesstand."
+	if body.get("surface_mode") == Home.Cube.MODE and value.schema != SCHEMA: return "Radiales Dorf benötigt Stammesformat 6."
+	if value.schema == SCHEMA and body.get("surface_mode") != Home.Cube.MODE: return "Stammesformat 6 benötigt einen Kugelkörper."
 	var growing: bool = int(value["schema"]) >= 4
 	var expanded: bool = int(value["schema"]) >= 3
 	var renewable: bool = int(value["schema"]) >= 2
@@ -173,12 +177,7 @@ static func integer(value: Variant, low: int, high: int) -> bool:
 	return number(value, low, high) and float(value) == floorf(float(value))
 
 static func point(value: Variant) -> bool:
-	if not value is Array or value.size() != 3:
-		return false
-	for component: Variant in value:
-		if not number(component, -1.0e7, 1.0e7):
-			return false
-	return true
+	return Home.place_valid(value, Home.Cube.MODE, str(value.get("body_id", ""))) if value is Dictionary else Home.valid_position(value)
 
-static func local_point(value: Variant, anchor: Array) -> bool:
-	return point(value) and Home.vector(value).distance_to(Home.vector(anchor)) <= 22.0
+static func local_point(value: Variant, anchor: Variant) -> bool:
+	return Home.local_place(value, anchor)

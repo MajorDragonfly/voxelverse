@@ -135,7 +135,7 @@ static func validate(data: Dictionary) -> String:
 		var p: Variant = h["pens"][i]
 		if not p is Dictionary or p.get("id") != Ids.scoped("pen", data["id"], str(i)) or not E.local_point(p.get("position"), data["anchor"]) or not E.local_point(p.get("entrance"), data["anchor"]) or not p.get("animal_id") is String or int(data["tools"]) != 1:
 			return "Ungültiger Tierplatz."
-		if Home.vector(p["entrance"]).distance_to(Home.vector(p["position"]) + Vector3(0, 0, 2)) > 0.01:
+		if Home.distance(p["entrance"], Home.offset_place(p["position"], Vector3(0, 0, 2))) > 0.01:
 			return "Ungültiger Zugang zum Tierplatz."
 		if p["animal_id"] != "":
 			if not h["records"].has(p["animal_id"]) or p["animal_id"] in occupied:
@@ -165,7 +165,7 @@ static func validate(data: Dictionary) -> String:
 	var required_water: float = 0.0
 	for identity: Variant in h["records"]:
 		var r: Variant = h["records"][identity]
-		if not E.text_id(identity) or not r is Dictionary or not E.text_id(r.get("species_id")) or r["species_id"] == data["species_id"] or not r.get("design_ref") is Dictionary or not E.text_id(r["design_ref"].get("id")) or not E.integer(r["design_ref"].get("revision"), 1, 1000000000) or not r.get("recipe") is Dictionary or not E.local_point(r.get("pickup"), data["anchor"]):
+		if not E.text_id(identity) or not r is Dictionary or not E.text_id(r.get("species_id")) or r["species_id"] == data["species_id"] or not r.get("design_ref") is Dictionary or not E.text_id(r["design_ref"].get("id")) or not E.integer(r["design_ref"].get("revision"), 0, 1000000000) or not r.get("recipe") is Dictionary or not E.local_point(r.get("pickup"), data["anchor"]):
 			return "Ungültiger Milchproduktionsnachweis."
 		var recipe: Dictionary = r["recipe"]
 		if not E.number(recipe.get("milk_yield"), 0, 100) or float(recipe["milk_yield"]) <= 0 or not E.number(recipe.get("milk_interval"), 1, 86400) or not E.number(recipe.get("water_need"), 0, 100) or float(recipe["water_need"]) <= 0 or not E.number(r.get("clock"), 0, recipe["milk_interval"]):
@@ -188,6 +188,6 @@ static func validate(data: Dictionary) -> String:
 		return "Milch entstand ohne passende Futter- und Wasserversorgung."
 	if data["project"].get("kind", "") == "pen":
 		var p: Dictionary = data["project"]
-		if h["pens"].size() >= MAX_PENS or int(data["tools"]) != 1 or p.get("id") != Ids.scoped("pen", data["id"], str(h["pens"].size())) or not E.local_point(p.get("position"), data["anchor"]) or not E.local_point(p.get("entrance"), data["anchor"]) or Home.vector(p["entrance"]).distance_to(Home.vector(p["position"]) + Vector3(0, 0, 2)) > 0.01:
+		if h["pens"].size() >= MAX_PENS or int(data["tools"]) != 1 or p.get("id") != Ids.scoped("pen", data["id"], str(h["pens"].size())) or not E.local_point(p.get("position"), data["anchor"]) or not E.local_point(p.get("entrance"), data["anchor"]) or Home.distance(p["entrance"], Home.offset_place(p["position"], Vector3(0, 0, 2))) > 0.01:
 			return "Ungültige Tierplatzbaustelle."
 	return ""

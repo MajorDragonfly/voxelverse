@@ -121,8 +121,8 @@ func damage(object_id: String, amount: float) -> Dictionary:
 		a.merge({"status": "wild", "claim_faction_id": ""}, true)
 	return _replace(a, {}, "died" if a["health"] == 0.0 else "hurt")
 
-func record_position(object_id: String, position: Vector3) -> void:
-	if registry["animals"].has(object_id) and State.point(State.point_array(position)):
+func record_position(object_id: String, position: Variant) -> void:
+	if registry["animals"].has(object_id) and State.Home.place_valid(State.point_array(position), registry.animals[object_id].surface_mode, registry.body_id):
 		registry["animals"][object_id]["position"] = State.point_array(position)
 
 func checkpoint() -> bool:
@@ -146,8 +146,8 @@ func _offer_error(a: Dictionary, food: String, c: Dictionary) -> String:
 	if a["claim_faction_id"] not in ["", c["faction_id"]]: return "claimed_by_other"
 	if not State.integer(c.get("capacity"), 1, State.MAX_ANIMALS): return "invalid_capacity"
 	if a["claim_faction_id"].is_empty() and State.occupied(registry, c["faction_id"]) >= int(c["capacity"]): return "capacity_full"
-	if not c.get("actor_position") is Vector3 or not c.get("home") is Vector3 or not State.point(State.point_array(c["actor_position"])) or not State.point(State.point_array(c["home"])): return "invalid_position"
-	if c["actor_position"].distance_to(State.vector(a["position"])) > REACH: return "out_of_range"
+	if not State.Home.place_valid(State.point_array(c.get("actor_position")), a.surface_mode, a.body_id) or not State.Home.place_valid(State.point_array(c.get("home")), a.surface_mode, a.body_id): return "invalid_position"
+	if State.Home.distance(State.point_array(c["actor_position"]), a["position"]) > REACH: return "out_of_range"
 	if not c.get("line_of_sight", false): return "no_line_of_sight"
 	if c.get("threatened", false): return "fleeing"
 	if not suitability.is_valid(): return "d1_unavailable"

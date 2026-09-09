@@ -41,6 +41,8 @@ func _ready() -> void:
 
 
 func _active() -> bool:
+	var flow := get_node_or_null("/root/SessionFlow")
+	if flow != null and flow.loading: return false
 	return not get_tree().paused and is_instance_valid(player) and not player.is_dead and player.is_physics_processing() and player.is_processing() and get_node("/root/GameState").current_phase == 0
 
 

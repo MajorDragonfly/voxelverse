@@ -19,7 +19,7 @@ func read(data: Dictionary, campaign_id: String, identity: String) -> Dictionary
 	if not D1.validate(traits).is_empty() or "milk" not in traits["roles"] or "plant" not in traits["diet"]:
 		return {"error": "Dieses Tier eignet sich nicht für die Milchhaltung mit Pflanzenfutter."}
 	var body: Variant = actor.call(identity)
-	if not body is Node3D or not is_instance_valid(body) or not body.is_inside_tree() or not body.is_visible_in_tree() or body.global_position.distance_to(D2.vector(animal["position"])) > 0.5:
+	if not body is Node3D or not is_instance_valid(body) or not body.is_inside_tree() or not body.is_visible_in_tree() or body.global_position.distance_to(preload("res://world/surface/gameplay_space.gd").resolve(body, animal["position"])) > 0.5:
 		return {"error": "Das Tier muss in der geladenen Dorfumgebung sein."}
 	return {"error": "", "animal": animal.duplicate(true), "actor": body,
 		"recipe": {"milk_yield": float(traits["milk_yield"]), "milk_interval": float(traits["milk_interval"]), "water_need": float(traits["water_need"])}}

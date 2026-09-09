@@ -23,12 +23,13 @@ static func build_arrays(tile: Dictionary, surface: RefCounted) -> Dictionary:
 			var precise: Array = Cube.direction(tile.face, uv.x, uv.y)
 			var d: Vector3 = Cube.vector(precise)
 			var height: float = surface.height_precise(precise)
+			var water_level: float = surface.water_level_precise(precise) if surface.has_method("water_level_precise") else 0.0
 			# Reuse the double direction and subtract the anchor before float conversion.
-			ocean.append(local_point(precise, surface.body.radius, tile.anchor))
+			ocean.append(local_point(precise, surface.body.radius + water_level, tile.anchor))
 			vertices.append(local_point(precise, surface.body.radius + height, tile.anchor))
 			normals.append(d if surface.body.get("terrain_revision", 1) >= 3 else surface.normal_at(d))
 			colors.append(surface.color_at(d, height))
-			has_water = has_water or height < 1.0
+			has_water = has_water or height < water_level + 1.0
 	if surface.body.get("terrain_revision", 1) >= 3:
 		# Derive render normals from already sampled local geometry. Repeating
 		# three full double-noise queries for each vertex delayed nearby tiles.

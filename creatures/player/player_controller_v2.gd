@@ -78,8 +78,8 @@ func _try_primary_action() -> void:
 	var collision_point: Vector3 = interaction_ray.get_collision_point()
 	if global_position.distance_to(collision_point) > interaction_range:
 		return
-	if WorldGenerator.is_water_at(collision_point.x, collision_point.z):
-		_try_drink_water()
+	if Space.sample(self, collision_point).water:
+		_try_drink_water(collision_point)
 		return
 	var target: Node = _resolve_interaction_target(interaction_ray.get_collider())
 	if target != null and target.has_method("interact"):
@@ -120,7 +120,7 @@ func perform_bite_on_target(target: Node) -> bool:
 		)
 		if distance > bite_reach + 0.35:
 			return false
-		if not _has_clear_line_of_sight(target, global_position + Vector3.UP * 0.7, target.global_position + Vector3.UP * 0.7):
+		if not _has_clear_line_of_sight(target, global_position + up_direction * 0.7, target.global_position + Space.up(self, target.global_position) * 0.7):
 			return false
 	if _bite_cooldown_timer > 0.0:
 		return false
@@ -223,11 +223,11 @@ func _find_wildlife_target(
 	cone_degrees: float,
 	require_line_of_sight: bool
 ) -> Node:
-	var origin: Vector3 = global_position + Vector3.UP * target_center_height
+	var origin: Vector3 = global_position + up_direction * target_center_height
 	var forward: Vector3 = -global_transform.basis.z
 	if _gameplay_camera != null:
 		forward = -_gameplay_camera.global_transform.basis.z
-	forward.y *= 0.35
+	forward = forward.slide(up_direction) + up_direction * forward.dot(up_direction) * 0.35
 	if forward.length_squared() < 0.001:
 		forward = -global_transform.basis.z
 	forward = forward.normalized()
@@ -242,7 +242,7 @@ func _find_wildlife_target(
 		if creature == null or not is_instance_valid(creature):
 			continue
 		var target_position: Vector3 = (
-			creature.global_position + Vector3.UP * target_center_height
+			creature.global_position + Space.up(self, creature.global_position) * target_center_height
 		)
 		var delta: Vector3 = target_position - origin
 		var distance: float = delta.length()

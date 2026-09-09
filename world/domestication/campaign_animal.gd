@@ -1,5 +1,6 @@
 extends CharacterBody3D
 ## An adopted individual uses its frozen D1 body, never the species generator.
+const Space = preload("res://world/surface/gameplay_space.gd")
 const State = preload("res://world/domestication/animal_state.gd")
 const D1 = preload("res://world/fauna/domestication/domestication_contract.gd")
 const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
@@ -34,9 +35,9 @@ func setup(host: Node, record: Dictionary, appearance: Dictionary) -> void:
 	individual_seed = int(source["individual_seed"])
 	ecological_role = source["role"]
 	maximum_health = source["maximum_health"]
-	position = State.vector(record["position"])
+	position = Space.resolve(host, record["position"])
 	collision_layer = 4
-	collision_mask = 1
+	collision_mask = 1 | 2
 	floor_snap_length = 0.6
 	_side = -1.0 if posmod(individual_seed, 2) == 0 else 1.0
 	var shape := CollisionShape3D.new()
@@ -82,6 +83,7 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		status = "Verstorben"
 		return
+	Space.orient(self)
 	if Steering.ground(self, global_position).is_empty():
 		velocity = Vector3.ZERO
 		status = "Wartet auf geladenen Boden"
@@ -93,7 +95,7 @@ func _physics_process(delta: float) -> void:
 	status = "Wartet"
 	if fear:
 		desired = global_position - _fear_origin
-		if desired.length_squared() < 0.1: desired = Vector3(_side, 0, 1)
+		if desired.length_squared() < 0.1: desired = global_basis * Vector3(_side, 0, 1)
 		status = "Flieht"
 	elif not record["pending"].is_empty():
 		status = "Nimmt Futter an"
@@ -105,39 +107,36 @@ func _physics_process(delta: float) -> void:
 				status = "Folgt / bei dir"
 			else: status = "Betreuer nicht verfügbar"
 		elif record["order"] == "home":
-			target = State.vector(record["home"])
+			target = Space.resolve(self, record["home"])
 			status = "Kehrt heim / am Heimatplatz"
 		else:
-			target = State.vector(record["wait_position"])
-		var offset := Vector3(target.x - global_position.x, 0, target.z - global_position.z)
+			target = Space.resolve(self, record["wait_position"])
+		var offset: Vector3 = (target - global_position).slide(up_direction)
 		# Arrival is the small home area around the shared village anchor.
 		var reach: float = 1.6 if record["order"] == "follow" else HOME_REACH if record["order"] == "home" else 0.5
 		if offset.length() > reach:
 			desired = runtime.heading(self, target)
 	else:
 		status = "Wild / Zähmung begonnen"
-		var home: Vector3 = State.vector(record["home"])
+		var home: Vector3 = Space.resolve(self, record["home"])
 		if global_position.distance_to(home) > 8.0: desired = home - global_position
 		else:
 			var cycle: float = fmod(runtime.simulation_time() + float(posmod(individual_seed, 7)), 12.0)
 			if cycle < 3:
 				var angle: float = float(posmod(individual_seed, 53)) + floorf(runtime.simulation_time() / 12.0) * 1.9
-				desired = Vector3(cos(angle), 0, sin(angle))
-	desired.y = 0
+				desired = global_basis * Vector3(cos(angle), 0, sin(angle))
+	desired = desired.slide(up_direction)
 	var direction: Vector3 = Steering.choose(self, desired, STEP, _side, steer_distance)
 	if desired != Vector3.ZERO and direction == Vector3.ZERO: status = "Weg blockiert"
 	var speed: float = float(source["speed"])
-	velocity = Vector3(direction.x * speed, -0.5 if is_on_floor() else maxf(-15, velocity.y - 20 * delta), direction.z * speed)
-	var motion: Vector3 = direction * speed * delta
-	if is_on_floor() and direction != Vector3.ZERO and test_move(global_transform, motion):
-		var raised: Transform3D = global_transform.translated(Vector3.UP * STEP)
-		if not test_move(global_transform, Vector3.UP * STEP) and not test_move(raised, motion) and test_move(raised.translated(motion), Vector3.DOWN * (STEP + 0.15)): global_transform = raised
+	velocity = direction * speed + up_direction * (-0.5 if is_on_floor() else maxf(-15, velocity.dot(up_direction) - 20 * delta))
+	if is_on_floor(): Space.step(self, direction * speed * delta, STEP, 0.15)
 	move_and_slide()
 	if is_on_floor(): apply_floor_snap()
-	if direction != Vector3.ZERO: _visual_root.rotation.y = lerp_angle(_visual_root.rotation.y, atan2(-direction.x, -direction.z), minf(1, delta * 7))
+	if direction != Vector3.ZERO: _visual_root.rotation.y = lerp_angle(_visual_root.rotation.y, atan2(-(global_basis.inverse() * direction).x, -(global_basis.inverse() * direction).z), minf(1, delta * 7))
 	var motion_mode: String = "walk" if direction != Vector3.ZERO else "idle"
 	if _preview.motion_mode != motion_mode: _preview.set_motion(motion_mode)
-	runtime.controller.record_position(object_id, global_position)
+	runtime.controller.record_position(object_id, Space.encode(self, global_position))
 	runtime.sources[object_id]["heading"] = _visual_root.rotation.y
 
 func receive_creature_attack(damage: float, attacker: Node = null) -> void:
@@ -161,3 +160,6 @@ func _disable_collisions(node: Node) -> void:
 		node.collision_layer = 0
 		node.collision_mask = 0
 	for child: Node in node.get_children(): _disable_collisions(child)
+
+func surface_origin_shifted(shift: Vector3) -> void:
+	_fear_origin += shift

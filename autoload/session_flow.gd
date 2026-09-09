@@ -81,6 +81,17 @@ func load_game(path: String) -> void:
 		return
 	await _request_world()
 
+func return_from_editor() -> Error:
+	var scene := get_tree().current_scene
+	if loading or scene == null or not scene.scene_file_path.begins_with("res://creatures/editor/"):
+		return ERR_BUSY
+	var saves := get_node("/root/SaveGameService")
+	if not saves.save_now(): return ERR_CANT_CREATE
+	saves.queue_current_world_restore()
+	_show_loading("Deine Kreatur kehrt in die Kampagne zurück …")
+	_request_world()
+	return OK
+
 func _request_world() -> void:
 	# GameState defers its generator rebuild. Finish it before scene _ready.
 	await get_tree().process_frame

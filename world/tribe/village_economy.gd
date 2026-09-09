@@ -181,10 +181,5 @@ static func integer(value: Variant, low: int, high: int) -> bool:
 static func text_id(value: Variant) -> bool:
 	return value is String and not value.is_empty() and value.length() <= 200
 
-static func local_point(value: Variant, anchor: Array) -> bool:
-	if not value is Array or value.size() != 3:
-		return false
-	for component: Variant in value:
-		if not number(component, -1e7, 1e7):
-			return false
-	return Home.vector(value).distance_to(Home.vector(anchor)) <= 22.0
+static func local_point(value: Variant, anchor: Variant) -> bool:
+	return Home.local_place(value, anchor)

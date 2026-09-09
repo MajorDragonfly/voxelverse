@@ -1,11 +1,17 @@
 extends Node3D
 ## Stable fixed models and matching walls. Rebuilt only when homes change.
 const Housing = preload("res://world/tribe/village_housing.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 var _signature: String = ""
 var _waiting_clear: Dictionary = {}
 
 func sync(data: Dictionary, actors: Dictionary) -> void:
+	if Space.adapter(self) != null:
+		global_position = Space.resolve(self, data.anchor)
+		global_basis = Space.frame(self, global_position)
+		Space.track(self, str(data.id) + ":buildings")
+
 	var signature: String = JSON.stringify(data["housing"]["homes"])
 	if signature == _signature:
 		return
@@ -20,7 +26,8 @@ func sync(data: Dictionary, actors: Dictionary) -> void:
 		building.collision_layer = 1
 		building.collision_mask = 0
 		add_child(building)
-		building.global_position = Home.vector(shelter["position"])
+		building.global_position = Space.resolve(self, shelter["position"])
+		building.global_basis = Space.frame(self, building.global_position)
 		# Older decorative huts could contain a resident or overlap its capsule.
 		# Keep that exact saved position; enable walls once the resident walks out.
 		if _occupied(shelter, actors):
@@ -56,7 +63,7 @@ func clear_entrances(actors: Dictionary) -> void:
 
 func _occupied(shelter: Dictionary, actors: Dictionary) -> bool:
 	for actor: Node3D in actors.values():
-		if Housing.contains(shelter, actor.global_position):
+		if Housing.contains(shelter, Space.encode(self, actor.global_position)):
 			return true
 	return false
 

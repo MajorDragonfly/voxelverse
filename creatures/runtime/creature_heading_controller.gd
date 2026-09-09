@@ -24,11 +24,7 @@ func _physics_process(delta: float) -> void:
 		if _visual_root == null:
 			return
 
-	var horizontal_velocity := Vector3(
-		_player.velocity.x,
-		0.0,
-		_player.velocity.z
-	)
+	var horizontal_velocity: Vector3 = _player.global_basis.inverse() * _player.velocity.slide(_player.up_direction)
 	if horizontal_velocity.length() < minimum_turn_speed:
 		return
 

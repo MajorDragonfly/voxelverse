@@ -4,6 +4,7 @@ const State = preload("res://world/home_group/home_group_state.gd")
 const Companion = preload("res://world/home_group/home_companion.gd")
 const GroupPanel = preload("res://ui/home_group/home_group_panel.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
 
 var player: Node3D
 var panel: CanvasLayer
@@ -68,7 +69,7 @@ func _body_record() -> Dictionary:
 	# The record was already returned by reference; a deep copy solely for its
 	# seed would repeatedly copy the complete exploration ledger.
 	var key: String = str(_state.get_world_seed())
-	if not _state.campaign.data["bodies"].has(key): _state.get_current_body()
+	if not _state.campaign.data["bodies"].has(key): _state.get_current_body_record()
 	return _state.campaign.data["bodies"][key]
 
 func group_state() -> Dictionary:
@@ -83,7 +84,7 @@ func member_record(identity: String) -> Dictionary:
 
 func home_position() -> Vector3:
 	var group: Dictionary = group_state()
-	return State.vector(group["anchor"]) if group.has("anchor") else _nest.global_position
+	return Space.resolve(self, group["anchor"]) if group.has("anchor") else _nest.global_position
 
 func _validate_group() -> String:
 	var body: Dictionary = _body_record()
@@ -97,7 +98,8 @@ func _refresh_runtime() -> void:
 	if not problem.is_empty() or group_state().is_empty():
 		return
 	var group: Dictionary = group_state()
-	_nest.global_position = State.vector(group["anchor"])
+	_nest.global_position = Space.resolve(self, group["anchor"])
+	Space.orient(_nest)
 	if int(_state.current_phase) != 0:
 		return
 	var blueprint: Dictionary = Assembly.load_best_available()
@@ -115,6 +117,7 @@ func _refresh_runtime() -> void:
 func _clear_actors() -> void:
 	for actor in actors.values():
 		if is_instance_valid(actor):
+			Space.untrack(actor)
 			actor.set_physics_process(false)
 			actor.queue_free()
 	actors.clear()
@@ -144,7 +147,7 @@ func record_position(identity: String, position: Vector3) -> void:
 		return
 	var member: Dictionary = member_record(identity)
 	if not member.is_empty():
-		member["position"] = State.vector_array(position)
+		member["position"] = Space.encode(self, position)
 
 func establish_home() -> Dictionary:
 	if not can_use_panel() or _transaction:
@@ -154,28 +157,32 @@ func establish_home() -> Dictionary:
 		return {"ok": false, "message": problem}
 	var location: Vector3 = player.global_position
 	var hit: Dictionary = _floor_hit(location)
-	if hit.is_empty() or hit["normal"].dot(Vector3.UP) < 0.9:
+	var up: Vector3 = Space.up(self, location)
+	if hit.is_empty() or hit["normal"].dot(up) < 0.9:
 		return {"ok": false, "message": "Wähle festen, möglichst ebenen Boden."}
-	location.y = float(hit["position"].y) + 0.02
+	location = Vector3(hit["position"]) + up * 0.02
 	if not _dry(location):
 		return {"ok": false, "message": "Der Heimatplatz muss auf trockenem Boden liegen."}
 	# Check the full footprint and initial resident positions, not only the
 	# centre ray; refuse ledges, water and obstructed spawn points.
 	for offset in [Vector3(2.5, 0, 2.5), Vector3(-2.5, 0, 2.5), Vector3(0, 0, -2.0), Vector3(2.0, 0, 0), Vector3(-2.0, 0, 0)]:
-		var sample: Dictionary = _floor_hit(location + offset)
-		if sample.is_empty() or absf(float(sample["position"].y) - location.y) > 0.45 or sample["normal"].dot(Vector3.UP) < 0.9 or not _dry(sample["position"]):
+		var sample: Dictionary = _floor_hit(Space.offset(self, location, offset))
+		if sample.is_empty() or absf((Vector3(sample["position"]) - location).dot(up)) > 0.45 or sample["normal"].dot(up) < 0.9 or not _dry(sample["position"]):
 			return {"ok": false, "message": "Hier ist zu wenig ebene, trockene Fläche für die Gruppe."}
-		if not _clear_space(Vector3(sample["position"]) + Vector3.UP * 0.8):
+		if not _clear_space(Vector3(sample["position"]) + up * 0.8):
 			return {"ok": false, "message": "Bäume oder andere Hindernisse versperren den Heimatplatz."}
 	var candidate: Dictionary = group_state().duplicate(true)
 	if candidate.is_empty():
-		candidate = State.create(str(_body_record()["id"]), str(_state.campaign.data["player_species_id"]), location)
+		candidate = State.create(str(_body_record()["id"]), str(_state.campaign.data["player_species_id"]), Vector3.ZERO)
+		candidate.surface_mode = _body_record().surface_mode
+		if candidate.surface_mode == State.Cube.MODE: candidate.schema = State.SCHEMA
+		candidate.anchor = Space.encode(self, location)
 		for member in candidate["members"]:
-			var point: Vector3 = State.vector(member["position"])
-			point.y = float(_floor_hit(point)["position"].y) + 0.08
-			member["position"] = State.vector_array(point)
+			var point: Vector3 = Space.offset(self, location, State.vector(member["position"]))
+			point = Vector3(_floor_hit(point)["position"]) + up * 0.08
+			member["position"] = Space.encode(self, point)
 	else:
-		candidate["anchor"] = State.vector_array(location)
+		candidate["anchor"] = Space.encode(self, location)
 	var result: Dictionary = _commit(candidate)
 	if result["ok"]:
 		_refresh_runtime()
@@ -218,7 +225,9 @@ func _commit(candidate: Dictionary) -> Dictionary:
 func _floor_hit(position: Vector3) -> Dictionary:
 	if not is_inside_tree() or _nest.get_world_3d() == null:
 		return {}
-	var ray := PhysicsRayQueryParameters3D.create(position + Vector3.UP * 1.2, position + Vector3.DOWN * 2.4, 1)
+	if not Space.ground_ready(self, position): return {}
+	var up: Vector3 = Space.up(self, position)
+	var ray := PhysicsRayQueryParameters3D.create(position + up * 1.2, position - up * 2.4, 1)
 	ray.exclude = [player.get_rid()] if player is CollisionObject3D else []
 	return _nest.get_world_3d().direct_space_state.intersect_ray(ray)
 
@@ -226,7 +235,7 @@ func has_ground(position: Vector3) -> bool:
 	return not _floor_hit(position).is_empty()
 
 func _dry(position: Vector3) -> bool:
-	return float(_generator.get_water_level(position.x, position.z)) < position.y - 0.2
+	return Space.dry(self, position, 0.2)
 
 func _clear_space(position: Vector3) -> bool:
 	var shape := CapsuleShape3D.new()
@@ -234,18 +243,18 @@ func _clear_space(position: Vector3) -> bool:
 	shape.height = 1.35
 	var query := PhysicsShapeQueryParameters3D.new()
 	query.shape = shape
-	query.transform.origin = position
-	query.collision_mask = 1
+	query.transform = Transform3D(Space.frame(self, position), position)
+	query.collision_mask = 1 | 2
 	query.exclude = [player.get_rid()] if player is CollisionObject3D else []
 	return _nest.get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty()
 
 func safe_step(actor: CharacterBody3D, direction: Vector3, distance: float = 1.2) -> bool:
 	var next: Vector3 = actor.global_position + direction * distance
 	var hit: Dictionary = _floor_hit(next)
-	if hit.is_empty() or hit["normal"].dot(Vector3.UP) < 0.7 or not _dry(hit["position"]):
+	if hit.is_empty() or hit["normal"].dot(actor.up_direction) < 0.7 or not _dry(hit["position"]):
 		return false
-	var difference: float = float(hit["position"].y) - actor.global_position.y
+	var difference: float = (Vector3(hit["position"]) - actor.global_position).dot(actor.up_direction)
 	if difference > 0.58 or difference < -0.85:
 		return false
-	var raised: Transform3D = actor.global_transform.translated(Vector3.UP * 0.56)
+	var raised: Transform3D = actor.global_transform.translated(actor.up_direction * 0.56)
 	return not actor.test_move(raised, direction * distance)

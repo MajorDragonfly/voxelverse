@@ -25,7 +25,7 @@ var _water_rest: float = 0.0
 
 func _ready() -> void:
 	if water_provider == null:
-		water_provider = get_node("/root/WorldGenerator")
+		water_provider = get_tree().current_scene.get_node("Water") if Space.adapter(self) != null else get_node("/root/WorldGenerator")
 	super._ready()
 	_load_drinking("")
 	get_node("/root/SaveGameService").game_loaded.connect(_load_drinking)
@@ -145,7 +145,7 @@ func _desired_heading() -> Vector3:
 		return Vector3.ZERO
 	if _intent == "seek_water":
 		var direction: Vector3 = _goal - global_position
-		direction.y = 0.0
+		direction = direction.slide(up_direction)
 		return direction.normalized() if direction.length() > 0.35 else Vector3.ZERO
 	return super._desired_heading()
 
@@ -154,6 +154,12 @@ func _refresh_label() -> void:
 	if ai_state in ["seek_water", "drink"]:
 		_label.text = "Trinkt" if ai_state == "drink" else "Sucht Wasser"
 		_label.modulate = Color(0.65, 0.87, 1.0)
+
+func surface_origin_shifted(shift: Vector3) -> void:
+	super.surface_origin_shifted(shift)
+	_water_origin += shift
+	for field in ["bank", "water"]:
+		if _water_source.has(field): _water_source[field] += shift
 
 func get_ai_debug_state() -> Dictionary:
 	var data: Dictionary = super.get_ai_debug_state()
