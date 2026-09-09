@@ -1,0 +1,711 @@
+{
+  "schema": 1,
+  "enabled": true,
+  "pack_id": "temperate_forest_v1",
+  "display_name": "Temperate Forest V1",
+  "description": "First authored environment pack for the Voxelverse Lay-of-the-Land/Hytale visual target.",
+  "assets": [
+    {
+      "asset_id": "ancient_oak_v2",
+      "kind": "environment_tree",
+      "family": "ancient_oak",
+      "source": "art/source/blockbench/environment/benchmark_v2/ancient_oak_v2.bbmodel",
+      "lod": {
+        "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_near.glb",
+        "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_mid.glb",
+        "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_far.glb"
+      },
+      "geometry_variants": {
+        "0": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_far.glb"
+        },
+        "1": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_far.glb"
+        },
+        "2": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_far.glb"
+        }
+      },
+      "variant_sources": {
+        "0": "art/source/blockbench/environment/benchmark_v2/ancient_oak_v2.bbmodel",
+        "1": "art/source/blockbench/environment/benchmark_v2/ancient_oak_v2_species1.bbmodel",
+        "2": "art/source/blockbench/environment/benchmark_v2/ancient_oak_v2_species2.bbmodel"
+      },
+      "palette_encoding": "uv_slot_v1",
+      "palette_slots": [
+        "foliage_highlight",
+        "foliage_base",
+        "foliage_shadow",
+        "foliage_deep",
+        "bark_highlight",
+        "bark_base",
+        "bark_shadow",
+        "ground_base",
+        "ground_shadow",
+        "ground_dry",
+        "flower_primary",
+        "flower_accent",
+        "rock_light",
+        "rock_base",
+        "rock_dark",
+        "coast",
+        "water_shallow",
+        "water_deep",
+        "ground_highlight",
+        "soil_base",
+        "shrub_base",
+        "shrub_highlight",
+        "shrub_shadow"
+      ],
+      "tags": [
+        "benchmark",
+        "original",
+        "semantic_palette",
+        "instanced"
+      ],
+      "morphology": {
+        "variants": 3,
+        "height_range": [
+          0.8,
+          1.3
+        ],
+        "width_range": [
+          0.85,
+          1.2
+        ]
+      },
+      "collision": {
+        "type": "capsule",
+        "height": 3.4,
+        "radius": 0.46
+      }
+    },
+    {
+      "asset_id": "dense_bush_v2",
+      "kind": "environment_plant",
+      "family": "dense_bush",
+      "source": "art/source/blockbench/environment/benchmark_v2/dense_bush_v2.bbmodel",
+      "lod": {
+        "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_near.glb",
+        "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_mid.glb",
+        "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_far.glb"
+      },
+      "geometry_variants": {
+        "0": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_far.glb"
+        },
+        "1": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_far.glb"
+        },
+        "2": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_far.glb"
+        }
+      },
+      "variant_sources": {
+        "0": "art/source/blockbench/environment/benchmark_v2/dense_bush_v2.bbmodel",
+        "1": "art/source/blockbench/environment/benchmark_v2/dense_bush_v2_species1.bbmodel",
+        "2": "art/source/blockbench/environment/benchmark_v2/dense_bush_v2_species2.bbmodel"
+      },
+      "palette_encoding": "uv_slot_v1",
+      "palette_slots": [
+        "foliage_highlight",
+        "foliage_base",
+        "foliage_shadow",
+        "foliage_deep",
+        "bark_highlight",
+        "bark_base",
+        "bark_shadow",
+        "ground_base",
+        "ground_shadow",
+        "ground_dry",
+        "flower_primary",
+        "flower_accent",
+        "rock_light",
+        "rock_base",
+        "rock_dark",
+        "coast",
+        "water_shallow",
+        "water_deep",
+        "ground_highlight",
+        "soil_base",
+        "shrub_base",
+        "shrub_highlight",
+        "shrub_shadow"
+      ],
+      "tags": [
+        "benchmark",
+        "original",
+        "semantic_palette",
+        "instanced"
+      ],
+      "morphology": {
+        "variants": 3,
+        "height_range": [
+          0.8,
+          1.3
+        ],
+        "width_range": [
+          0.85,
+          1.2
+        ]
+      },
+      "collision": {
+        "type": "capsule",
+        "height": 1.05,
+        "radius": 0.5
+      }
+    },
+    {
+      "asset_id": "fern_cluster_v2",
+      "kind": "environment_plant",
+      "family": "fern_cluster",
+      "source": "art/source/blockbench/environment/benchmark_v2/fern_cluster_v2.bbmodel",
+      "lod": {
+        "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_near.glb",
+        "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_mid.glb",
+        "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_far.glb"
+      },
+      "geometry_variants": {
+        "0": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_far.glb"
+        },
+        "1": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_far.glb"
+        },
+        "2": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_far.glb"
+        }
+      },
+      "palette_encoding": "uv_slot_v1",
+      "palette_slots": [
+        "foliage_highlight",
+        "foliage_base",
+        "foliage_shadow",
+        "foliage_deep",
+        "bark_highlight",
+        "bark_base",
+        "bark_shadow",
+        "ground_base",
+        "ground_shadow",
+        "ground_dry",
+        "flower_primary",
+        "flower_accent",
+        "rock_light",
+        "rock_base",
+        "rock_dark",
+        "coast",
+        "water_shallow",
+        "water_deep",
+        "ground_highlight",
+        "soil_base",
+        "shrub_base",
+        "shrub_highlight",
+        "shrub_shadow"
+      ],
+      "tags": [
+        "benchmark",
+        "original",
+        "semantic_palette",
+        "instanced"
+      ],
+      "morphology": {
+        "variants": 3,
+        "height_range": [
+          0.8,
+          1.3
+        ],
+        "width_range": [
+          0.85,
+          1.2
+        ]
+      },
+      "collision": "none"
+    },
+    {
+      "asset_id": "flower_cluster_v2",
+      "kind": "environment_plant",
+      "family": "flower_cluster",
+      "source": "art/source/blockbench/environment/benchmark_v2/flower_cluster_v2.bbmodel",
+      "lod": {
+        "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_near.glb",
+        "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_mid.glb",
+        "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_far.glb"
+      },
+      "geometry_variants": {
+        "0": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_far.glb"
+        },
+        "1": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_far.glb"
+        },
+        "2": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_far.glb"
+        }
+      },
+      "palette_encoding": "uv_slot_v1",
+      "palette_slots": [
+        "foliage_highlight",
+        "foliage_base",
+        "foliage_shadow",
+        "foliage_deep",
+        "bark_highlight",
+        "bark_base",
+        "bark_shadow",
+        "ground_base",
+        "ground_shadow",
+        "ground_dry",
+        "flower_primary",
+        "flower_accent",
+        "rock_light",
+        "rock_base",
+        "rock_dark",
+        "coast",
+        "water_shallow",
+        "water_deep",
+        "ground_highlight",
+        "soil_base",
+        "shrub_base",
+        "shrub_highlight",
+        "shrub_shadow"
+      ],
+      "tags": [
+        "benchmark",
+        "original",
+        "semantic_palette",
+        "instanced"
+      ],
+      "morphology": {
+        "variants": 3,
+        "height_range": [
+          0.8,
+          1.3
+        ],
+        "width_range": [
+          0.85,
+          1.2
+        ]
+      },
+      "collision": "none"
+    },
+    {
+      "asset_id": "grass_tuft_v2",
+      "kind": "environment_plant",
+      "family": "grass_tuft",
+      "source": "art/source/blockbench/environment/benchmark_v2/grass_tuft_v2.bbmodel",
+      "lod": {
+        "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_near.glb",
+        "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_mid.glb",
+        "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_far.glb"
+      },
+      "geometry_variants": {
+        "0": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_far.glb"
+        },
+        "1": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_far.glb"
+        },
+        "2": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_far.glb"
+        }
+      },
+      "palette_encoding": "uv_slot_v1",
+      "palette_slots": [
+        "foliage_highlight",
+        "foliage_base",
+        "foliage_shadow",
+        "foliage_deep",
+        "bark_highlight",
+        "bark_base",
+        "bark_shadow",
+        "ground_base",
+        "ground_shadow",
+        "ground_dry",
+        "flower_primary",
+        "flower_accent",
+        "rock_light",
+        "rock_base",
+        "rock_dark",
+        "coast",
+        "water_shallow",
+        "water_deep",
+        "ground_highlight",
+        "soil_base",
+        "shrub_base",
+        "shrub_highlight",
+        "shrub_shadow"
+      ],
+      "tags": [
+        "benchmark",
+        "original",
+        "semantic_palette",
+        "instanced"
+      ],
+      "morphology": {
+        "variants": 3,
+        "height_range": [
+          0.8,
+          1.3
+        ],
+        "width_range": [
+          0.85,
+          1.2
+        ]
+      },
+      "collision": "none"
+    },
+    {
+      "asset_id": "layered_rock_v2",
+      "kind": "environment_rock",
+      "family": "layered_rock",
+      "source": "art/source/blockbench/environment/benchmark_v2/layered_rock_v2.bbmodel",
+      "lod": {
+        "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_near.glb",
+        "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_mid.glb",
+        "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_far.glb"
+      },
+      "geometry_variants": {
+        "0": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_far.glb"
+        },
+        "1": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_far.glb"
+        },
+        "2": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_far.glb"
+        }
+      },
+      "variant_sources": {
+        "0": "art/source/blockbench/environment/benchmark_v2/layered_rock_v2.bbmodel",
+        "1": "art/source/blockbench/environment/benchmark_v2/layered_rock_v2_species1.bbmodel",
+        "2": "art/source/blockbench/environment/benchmark_v2/layered_rock_v2_species2.bbmodel"
+      },
+      "palette_encoding": "uv_slot_v1",
+      "palette_slots": [
+        "foliage_highlight",
+        "foliage_base",
+        "foliage_shadow",
+        "foliage_deep",
+        "bark_highlight",
+        "bark_base",
+        "bark_shadow",
+        "ground_base",
+        "ground_shadow",
+        "ground_dry",
+        "flower_primary",
+        "flower_accent",
+        "rock_light",
+        "rock_base",
+        "rock_dark",
+        "coast",
+        "water_shallow",
+        "water_deep",
+        "ground_highlight",
+        "soil_base",
+        "shrub_base",
+        "shrub_highlight",
+        "shrub_shadow"
+      ],
+      "tags": [
+        "benchmark",
+        "original",
+        "semantic_palette",
+        "instanced"
+      ],
+      "morphology": {
+        "variants": 3,
+        "height_range": [
+          0.8,
+          1.3
+        ],
+        "width_range": [
+          0.85,
+          1.2
+        ]
+      },
+      "collision": {
+        "type": "convex",
+        "points": [
+          [
+            -1.5,
+            0.02,
+            -0.65
+          ],
+          [
+            0.9,
+            0.02,
+            -1.0
+          ],
+          [
+            1.5,
+            0.02,
+            0.4
+          ],
+          [
+            -0.7,
+            0.02,
+            1.0
+          ],
+          [
+            -1.2,
+            0.9,
+            -0.7
+          ],
+          [
+            0.65,
+            0.9,
+            -0.8
+          ],
+          [
+            1.1,
+            0.9,
+            0.65
+          ],
+          [
+            -0.8,
+            0.9,
+            0.8
+          ],
+          [
+            -0.85,
+            1.6,
+            -0.45
+          ],
+          [
+            0.25,
+            1.6,
+            -0.55
+          ],
+          [
+            0.35,
+            1.6,
+            0.45
+          ],
+          [
+            -0.85,
+            1.6,
+            0.5
+          ]
+        ],
+        "variants": {
+          "1": {
+            "type": "convex",
+            "points": [
+              [
+                -0.7,
+                0.02,
+                -0.5
+              ],
+              [
+                0.65,
+                0.02,
+                -0.5
+              ],
+              [
+                0.7,
+                0.02,
+                0.7
+              ],
+              [
+                -0.65,
+                0.02,
+                0.5
+              ],
+              [
+                -0.6,
+                2.4,
+                -0.35
+              ],
+              [
+                0.18,
+                2.4,
+                -0.35
+              ],
+              [
+                0.18,
+                2.4,
+                0.35
+              ],
+              [
+                -0.5,
+                2.4,
+                0.4
+              ],
+              [
+                -0.25,
+                3.25,
+                -0.2
+              ],
+              [
+                0,
+                3.25,
+                0.15
+              ]
+            ]
+          },
+          "2": {
+            "type": "convex",
+            "points": [
+              [
+                -1.25,
+                0.02,
+                -0.6
+              ],
+              [
+                1.25,
+                0.02,
+                -0.65
+              ],
+              [
+                1.2,
+                0.02,
+                0.5
+              ],
+              [
+                -1.1,
+                0.02,
+                0.65
+              ],
+              [
+                -0.95,
+                1.0,
+                -0.4
+              ],
+              [
+                0.2,
+                1.0,
+                -0.4
+              ],
+              [
+                0.3,
+                1.0,
+                0.6
+              ],
+              [
+                -0.95,
+                1.0,
+                0.5
+              ]
+            ]
+          }
+        }
+      }
+    },
+    {
+      "asset_id": "tall_pine_v2",
+      "kind": "environment_tree",
+      "family": "tall_pine",
+      "source": "art/source/blockbench/environment/benchmark_v2/tall_pine_v2.bbmodel",
+      "lod": {
+        "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_near.glb",
+        "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_mid.glb",
+        "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_far.glb"
+      },
+      "geometry_variants": {
+        "0": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_far.glb"
+        },
+        "1": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_far.glb"
+        },
+        "2": {
+          "near": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_near.glb",
+          "mid": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_mid.glb",
+          "far": "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_far.glb"
+        }
+      },
+      "variant_sources": {
+        "0": "art/source/blockbench/environment/benchmark_v2/tall_pine_v2.bbmodel",
+        "1": "art/source/blockbench/environment/benchmark_v2/tall_pine_v2_species1.bbmodel",
+        "2": "art/source/blockbench/environment/benchmark_v2/tall_pine_v2_species2.bbmodel"
+      },
+      "palette_encoding": "uv_slot_v1",
+      "palette_slots": [
+        "foliage_highlight",
+        "foliage_base",
+        "foliage_shadow",
+        "foliage_deep",
+        "bark_highlight",
+        "bark_base",
+        "bark_shadow",
+        "ground_base",
+        "ground_shadow",
+        "ground_dry",
+        "flower_primary",
+        "flower_accent",
+        "rock_light",
+        "rock_base",
+        "rock_dark",
+        "coast",
+        "water_shallow",
+        "water_deep",
+        "ground_highlight",
+        "soil_base",
+        "shrub_base",
+        "shrub_highlight",
+        "shrub_shadow"
+      ],
+      "tags": [
+        "benchmark",
+        "original",
+        "semantic_palette",
+        "instanced"
+      ],
+      "morphology": {
+        "variants": 3,
+        "height_range": [
+          0.8,
+          1.3
+        ],
+        "width_range": [
+          0.85,
+          1.2
+        ]
+      },
+      "collision": {
+        "type": "capsule",
+        "height": 5.2,
+        "radius": 0.27
+      }
+    }
+  ]
+}

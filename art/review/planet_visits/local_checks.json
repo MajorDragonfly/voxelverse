@@ -1,0 +1,47 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "large_planet_lab_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.542
+    },
+    {
+      "name": "large_planet_geometry_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 32.026
+    },
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.369
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.768
+    },
+    {
+      "name": "planet_streaming_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.649
+    },
+    {
+      "name": "large_planet_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 43.348
+    },
+    {
+      "name": "galaxy_visits_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.729
+    }
+  ]
+}

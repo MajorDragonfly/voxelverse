@@ -1,0 +1,251 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.579
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.657
+    },
+    {
+      "name": "asset_pipeline_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.393
+    },
+    {
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.734
+    },
+    {
+      "name": "creature_editor_v7_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.007
+    },
+    {
+      "name": "creature_v5_smoke_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.097
+    },
+    {
+      "name": "environment_cluster_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.126
+    },
+    {
+      "name": "environment_playtest_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.118
+    },
+    {
+      "name": "environment_production_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.123
+    },
+    {
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.978
+    },
+    {
+      "name": "meta_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.997
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.134
+    },
+    {
+      "name": "planet_diversity_v9_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.367
+    },
+    {
+      "name": "planet_generation_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.056
+    },
+    {
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.21
+    },
+    {
+      "name": "runtime_geometry_batch_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.983
+    },
+    {
+      "name": "world_evolution_v2_ci_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.487
+    },
+    {
+      "name": "world_layered_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.157
+    },
+    {
+      "name": "world_runtime_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.1
+    },
+    {
+      "name": "main_shutdown_45",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.422
+    },
+    {
+      "name": "main_shutdown_150",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.234
+    },
+    {
+      "name": "main",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.542
+    },
+    {
+      "name": "shutdown_15838_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.481
+    },
+    {
+      "name": "shutdown_15838_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.264
+    },
+    {
+      "name": "shutdown_15838_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.662
+    },
+    {
+      "name": "shutdown_15838_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.605
+    },
+    {
+      "name": "shutdown_15838_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.696
+    },
+    {
+      "name": "shutdown_15838_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.045
+    },
+    {
+      "name": "shutdown_63352_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.385
+    },
+    {
+      "name": "shutdown_63352_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.126
+    },
+    {
+      "name": "shutdown_63352_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.309
+    },
+    {
+      "name": "shutdown_63352_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.213
+    },
+    {
+      "name": "shutdown_63352_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.671
+    },
+    {
+      "name": "shutdown_63352_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.286
+    },
+    {
+      "name": "shutdown_23757_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.479
+    },
+    {
+      "name": "shutdown_23757_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.187
+    },
+    {
+      "name": "shutdown_23757_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.518
+    },
+    {
+      "name": "shutdown_23757_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.201
+    },
+    {
+      "name": "shutdown_23757_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.203
+    },
+    {
+      "name": "shutdown_23757_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.04
+    },
+    {
+      "name": "streaming_cpu",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.524
+    }
+  ]
+}

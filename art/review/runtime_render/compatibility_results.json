@@ -1,0 +1,2766 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "captures": [
+    {
+      "directory": "world_15838",
+      "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+      "case": "world",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "chunks": 25,
+            "instances": 2274,
+            "spawn": [
+              186.289993286133,
+              3.94444441795349,
+              23.3592262268066
+            ]
+          },
+          "draw_calls": {
+            "max": 2657.0,
+            "median": 2657.0,
+            "p95": 2657.0,
+            "p99": 2657.0
+          },
+          "frame_ms": {
+            "max": 1417.073,
+            "median": 1394.457,
+            "p95": 1417.073,
+            "p99": 1417.073
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "world.png",
+          "label": "world",
+          "render_cpu_ms": {
+            "max": 5779.151765625,
+            "median": 1513.96397558594,
+            "p95": 5779.151765625,
+            "p99": 5779.151765625
+          },
+          "render_gpu_ms": {
+            "max": 5775.3291015625,
+            "median": 1512.87097167969,
+            "p95": 5775.3291015625,
+            "p99": 5775.3291015625
+          },
+          "rendered_primitives": {
+            "max": 4627482.0,
+            "median": 4627482.0,
+            "p95": 4627482.0,
+            "p99": 4627482.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "setup_frame_ms": {
+        "max": 58.923,
+        "median": 0.385,
+        "p95": 2.519,
+        "p99": 3.83
+      },
+      "setup_ms": 5078.387,
+      "software_renderer": true,
+      "streaming_state": {
+        "chunks": [
+          {
+            "chunk": "(6, 1)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 166,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 20,
+              "visible_batches": 20
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, 2)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 120,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 19,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, 0)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 171,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 19,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, 1)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 17,
+            "stats": {
+              "attempts": 499,
+              "batches": 17,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 72,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 17,
+              "visible_batches": 17
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, 1)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 168,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 20,
+              "visible_batches": 20
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, 2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 98,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, 0)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 150,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 19,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, 0)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 17,
+            "stats": {
+              "attempts": 499,
+              "batches": 17,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 181,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 17,
+              "visible_batches": 17
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, 2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 0,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, 3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 0,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(6, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 21,
+            "stats": {
+              "attempts": 499,
+              "batches": 21,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 168,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 21,
+              "visible_batches": 21
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, 1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 0,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(8, 1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 162,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, 3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 0,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(8, 2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 101,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, 2)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 0,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(8, 0)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 140,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 19,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, 0)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 3,
+            "stats": {
+              "attempts": 499,
+              "batches": 3,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 3,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 3,
+              "visible_batches": 3
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, 3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 0,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(7, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 148,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(5, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 157,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 20,
+              "visible_batches": 20
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(8, 3)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 75078,
+              "cluster_instances": 32,
+              "cluster_nodes": 2,
+              "cluster_ready": true,
+              "cluster_vertices": 50052,
+              "complete": true,
+              "instances": 130,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 22,
+              "visible_batches": 2
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, 3)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 0,
+            "stats": {
+              "attempts": 499,
+              "batches": 0,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": true,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 0,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 0,
+              "visible_batches": 0
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(8, -1)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 36792,
+              "cluster_instances": 20,
+              "cluster_nodes": 2,
+              "cluster_ready": true,
+              "cluster_vertices": 24528,
+              "complete": true,
+              "instances": 132,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 20,
+              "visible_batches": 2
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(4, -1)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 6,
+            "stats": {
+              "attempts": 499,
+              "batches": 6,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 7,
+              "max_batch_usec": 615,
+              "max_cluster_step_usec": 459,
+              "max_cluster_upload_usec": 3135,
+              "max_placement_usec": 595,
+              "max_resource_usec": 6580,
+              "max_step_usec": 6580,
+              "nodes": 6,
+              "visible_batches": 6
+            },
+            "terrain_ready": true
+          }
+        ],
+        "pending_chunks": 0,
+        "player_dead": false,
+        "player_position": "(186.29, 3.944444, 23.35923)",
+        "world_initialized": true
+      },
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "assets_15838",
+      "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+      "case": "assets",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "asset_id": "ancient_oak_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 18.0,
+            "median": 18.0,
+            "p95": 18.0,
+            "p99": 18.0
+          },
+          "frame_ms": {
+            "max": 85.665,
+            "median": 82.262,
+            "p95": 85.665,
+            "p99": 85.665
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "ancient_oak_v2.png",
+          "label": "ancient_oak_v2",
+          "render_cpu_ms": {
+            "max": 2231.7179609375,
+            "median": 85.6479993896484,
+            "p95": 2231.7179609375,
+            "p99": 2231.7179609375
+          },
+          "render_gpu_ms": {
+            "max": 2229.7041015625,
+            "median": 85.620002746582,
+            "p95": 2229.7041015625,
+            "p99": 2229.7041015625
+          },
+          "rendered_primitives": {
+            "max": 35784.0,
+            "median": 35784.0,
+            "p95": 35784.0,
+            "p99": 35784.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "tall_pine_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 81.82,
+            "median": 77.214,
+            "p95": 81.82,
+            "p99": 81.82
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "tall_pine_v2.png",
+          "label": "tall_pine_v2",
+          "render_cpu_ms": {
+            "max": 96.7179990844727,
+            "median": 79.6479999389648,
+            "p95": 96.7179990844727,
+            "p99": 96.7179990844727
+          },
+          "render_gpu_ms": {
+            "max": 96.6729965209961,
+            "median": 79.6380004882812,
+            "p95": 96.6729965209961,
+            "p99": 96.6729965209961
+          },
+          "rendered_primitives": {
+            "max": 22866.0,
+            "median": 22866.0,
+            "p95": 22866.0,
+            "p99": 22866.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "dense_bush_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 67.793,
+            "median": 62.908,
+            "p95": 67.793,
+            "p99": 67.793
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "dense_bush_v2.png",
+          "label": "dense_bush_v2",
+          "render_cpu_ms": {
+            "max": 82.6809970703125,
+            "median": 74.3159986572266,
+            "p95": 82.6809970703125,
+            "p99": 82.6809970703125
+          },
+          "render_gpu_ms": {
+            "max": 82.6589965820312,
+            "median": 74.2839965820312,
+            "p95": 82.6589965820312,
+            "p99": 82.6589965820312
+          },
+          "rendered_primitives": {
+            "max": 8822.0,
+            "median": 8822.0,
+            "p95": 8822.0,
+            "p99": 8822.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "fern_cluster_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 64.707,
+            "median": 63.998,
+            "p95": 64.707,
+            "p99": 64.707
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "fern_cluster_v2.png",
+          "label": "fern_cluster_v2",
+          "render_cpu_ms": {
+            "max": 80.7990009155273,
+            "median": 64.9679990844727,
+            "p95": 80.7990009155273,
+            "p99": 80.7990009155273
+          },
+          "render_gpu_ms": {
+            "max": 80.75,
+            "median": 64.9509963989258,
+            "p95": 80.75,
+            "p99": 80.75
+          },
+          "rendered_primitives": {
+            "max": 13812.0,
+            "median": 13812.0,
+            "p95": 13812.0,
+            "p99": 13812.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "flower_cluster_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 63.111,
+            "median": 63.023,
+            "p95": 63.111,
+            "p99": 63.111
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "flower_cluster_v2.png",
+          "label": "flower_cluster_v2",
+          "render_cpu_ms": {
+            "max": 80.3609968261719,
+            "median": 62.5140016174316,
+            "p95": 80.3609968261719,
+            "p99": 80.3609968261719
+          },
+          "render_gpu_ms": {
+            "max": 80.3529968261719,
+            "median": 62.4819984436035,
+            "p95": 80.3529968261719,
+            "p99": 80.3529968261719
+          },
+          "rendered_primitives": {
+            "max": 8850.0,
+            "median": 8850.0,
+            "p95": 8850.0,
+            "p99": 8850.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "layered_rock_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 59.09,
+            "median": 59.079,
+            "p95": 59.09,
+            "p99": 59.09
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "layered_rock_v2.png",
+          "label": "layered_rock_v2",
+          "render_cpu_ms": {
+            "max": 76.6529966430664,
+            "median": 60.6790008850098,
+            "p95": 76.6529966430664,
+            "p99": 76.6529966430664
+          },
+          "render_gpu_ms": {
+            "max": 76.6070022583008,
+            "median": 60.6570014953613,
+            "p95": 76.6070022583008,
+            "p99": 76.6070022583008
+          },
+          "rendered_primitives": {
+            "max": 2400.0,
+            "median": 2400.0,
+            "p95": 2400.0,
+            "p99": 2400.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "grass_tuft_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 58.755,
+            "median": 58.741,
+            "p95": 58.755,
+            "p99": 58.755
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "grass_tuft_v2.png",
+          "label": "grass_tuft_v2",
+          "render_cpu_ms": {
+            "max": 75.9279981689453,
+            "median": 57.0150005187988,
+            "p95": 75.9279981689453,
+            "p99": 75.9279981689453
+          },
+          "render_gpu_ms": {
+            "max": 75.9059982299805,
+            "median": 57.0279998779297,
+            "p95": 75.9059982299805,
+            "p99": 75.9059982299805
+          },
+          "rendered_primitives": {
+            "max": 3666.0,
+            "median": 3666.0,
+            "p95": 3666.0,
+            "p99": 3666.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "cluster_15838",
+      "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+      "case": "cluster",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "attempts": 499,
+            "batches": 20,
+            "cluster_complete": false,
+            "cluster_fallbacks": {},
+            "cluster_indices": 0,
+            "cluster_instances": 0,
+            "cluster_nodes": 0,
+            "cluster_ready": false,
+            "cluster_vertices": 0,
+            "complete": true,
+            "instances": 166,
+            "max_batch_usec": 648,
+            "max_cluster_step_usec": 0,
+            "max_cluster_upload_usec": 0,
+            "max_placement_usec": 411,
+            "max_resource_usec": 6437,
+            "max_step_usec": 6437,
+            "nodes": 20,
+            "visible_batches": 11
+          },
+          "draw_calls": {
+            "max": 13.0,
+            "median": 13.0,
+            "p95": 13.0,
+            "p99": 13.0
+          },
+          "frame_ms": {
+            "max": 65.883,
+            "median": 64.244,
+            "p95": 65.883,
+            "p99": 65.883
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "far_batches.png",
+          "label": "far_batches",
+          "render_cpu_ms": {
+            "max": 2738.46090429688,
+            "median": 66.1529971923828,
+            "p95": 2738.46090429688,
+            "p99": 2738.46090429688
+          },
+          "render_gpu_ms": {
+            "max": 2736.65893554688,
+            "median": 66.1350021362305,
+            "p95": 2736.65893554688,
+            "p99": 2736.65893554688
+          },
+          "rendered_primitives": {
+            "max": 36646.0,
+            "median": 36646.0,
+            "p95": 36646.0,
+            "p99": 36646.0
+          }
+        },
+        {
+          "details": {
+            "attempts": 499,
+            "batches": 20,
+            "cluster_complete": true,
+            "cluster_fallbacks": {},
+            "cluster_indices": 106524,
+            "cluster_instances": 53,
+            "cluster_nodes": 2,
+            "cluster_ready": true,
+            "cluster_vertices": 71016,
+            "complete": true,
+            "instances": 166,
+            "max_batch_usec": 648,
+            "max_cluster_step_usec": 180,
+            "max_cluster_upload_usec": 2633,
+            "max_placement_usec": 411,
+            "max_resource_usec": 6437,
+            "max_step_usec": 6437,
+            "nodes": 22,
+            "visible_batches": 2
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 62.24,
+            "median": 61.504,
+            "p95": 62.24,
+            "p99": 62.24
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "far_cluster.png",
+          "label": "far_cluster",
+          "mean_rgb_error_from_reference": 0.000308127572016461,
+          "render_cpu_ms": {
+            "max": 61.2210018005371,
+            "median": 61.2020002441406,
+            "p95": 61.2210018005371,
+            "p99": 61.2210018005371
+          },
+          "render_gpu_ms": {
+            "max": 61.1889991760254,
+            "median": 61.1650009155273,
+            "p95": 61.1889991760254,
+            "p99": 61.1889991760254
+          },
+          "rendered_primitives": {
+            "max": 36646.0,
+            "median": 36646.0,
+            "p95": 36646.0,
+            "p99": 36646.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "creature_15838",
+      "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+      "case": "creature",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "build_ms": 19.523,
+            "instances": 0,
+            "mesh_nodes": 933,
+            "multimesh_nodes": 0
+          },
+          "draw_calls": {
+            "max": 3529.0,
+            "median": 3529.0,
+            "p95": 3529.0,
+            "p99": 3529.0
+          },
+          "frame_ms": {
+            "max": 67.457,
+            "median": 63.69,
+            "p95": 67.457,
+            "p99": 67.457
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_individual.png",
+          "label": "creature_individual",
+          "render_cpu_ms": {
+            "max": 1643.24302246094,
+            "median": 64.5409982910156,
+            "p95": 1643.24302246094,
+            "p99": 1643.24302246094
+          },
+          "render_gpu_ms": {
+            "max": 1640.88903808594,
+            "median": 64.4440002441406,
+            "p95": 1640.88903808594,
+            "p99": 1640.88903808594
+          },
+          "rendered_primitives": {
+            "max": 11196.0,
+            "median": 11196.0,
+            "p95": 11196.0,
+            "p99": 11196.0
+          }
+        },
+        {
+          "details": {
+            "build_ms": 12.026,
+            "instances": 813,
+            "mesh_nodes": 120,
+            "multimesh_nodes": 38
+          },
+          "draw_calls": {
+            "max": 627.0,
+            "median": 627.0,
+            "p95": 627.0,
+            "p99": 627.0
+          },
+          "frame_ms": {
+            "max": 54.775,
+            "median": 53.119,
+            "p95": 54.775,
+            "p99": 54.775
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_batched.png",
+          "label": "creature_batched",
+          "mean_rgb_error_from_reference": 6.01145808117486e-06,
+          "render_cpu_ms": {
+            "max": 733.198020996094,
+            "median": 64.3540034179688,
+            "p95": 733.198020996094,
+            "p99": 733.198020996094
+          },
+          "render_gpu_ms": {
+            "max": 733.161010742188,
+            "median": 64.2939987182617,
+            "p95": 733.161010742188,
+            "p99": 733.161010742188
+          },
+          "rendered_primitives": {
+            "max": 11196.0,
+            "median": 11196.0,
+            "p95": 11196.0,
+            "p99": 11196.0
+          }
+        }
+      ],
+      "seed": 15838.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "world_23757",
+      "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+      "case": "world",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "chunks": 25,
+            "instances": 3093,
+            "spawn": [
+              -103.948951721191,
+              4.19999980926514,
+              -164.598510742188
+            ]
+          },
+          "draw_calls": {
+            "max": 2430.0,
+            "median": 2371.0,
+            "p95": 2430.0,
+            "p99": 2430.0
+          },
+          "frame_ms": {
+            "max": 1666.178,
+            "median": 1662.505,
+            "p95": 1666.178,
+            "p99": 1666.178
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "world.png",
+          "label": "world",
+          "render_cpu_ms": {
+            "max": 6047.79085546875,
+            "median": 1735.55295996094,
+            "p95": 6047.79085546875,
+            "p99": 6047.79085546875
+          },
+          "render_gpu_ms": {
+            "max": 6045.34716796875,
+            "median": 1734.47802734375,
+            "p95": 6045.34716796875,
+            "p99": 6045.34716796875
+          },
+          "rendered_primitives": {
+            "max": 5696600.0,
+            "median": 5695928.0,
+            "p95": 5696600.0,
+            "p99": 5696600.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "setup_frame_ms": {
+        "max": 58.72,
+        "median": 0.385,
+        "p95": 2.548,
+        "p99": 3.97
+      },
+      "setup_ms": 5542.162,
+      "software_renderer": true,
+      "streaming_state": {
+        "chunks": [
+          {
+            "chunk": "(-3, -5)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 164,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-3, -4)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 137,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 20,
+              "visible_batches": 20
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-3, -6)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 139,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-4, -5)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 168,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 20,
+              "visible_batches": 20
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-2, -5)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 113,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-2, -4)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 15,
+            "stats": {
+              "attempts": 499,
+              "batches": 15,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 71,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 15,
+              "visible_batches": 15
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-4, -6)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 17,
+            "stats": {
+              "attempts": 499,
+              "batches": 17,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 150,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 17,
+              "visible_batches": 17
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-2, -6)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 17,
+            "stats": {
+              "attempts": 499,
+              "batches": 17,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 77,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 17,
+              "visible_batches": 17
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-4, -4)",
+            "lod": 0,
+            "phase": 3,
+            "processing": false,
+            "published": 21,
+            "stats": {
+              "attempts": 499,
+              "batches": 21,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 163,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 21,
+              "visible_batches": 21
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-3, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 68,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-3, -7)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 156,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 20,
+              "visible_batches": 20
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-5, -5)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 21,
+            "stats": {
+              "attempts": 499,
+              "batches": 21,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 155,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 21,
+              "visible_batches": 21
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-1, -5)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 116,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-4, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 16,
+            "stats": {
+              "attempts": 499,
+              "batches": 16,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 83,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 16,
+              "visible_batches": 16
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-1, -4)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 137,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-5, -4)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 114,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 20,
+              "visible_batches": 20
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-1, -6)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 21,
+            "stats": {
+              "attempts": 499,
+              "batches": 21,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 160,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 21,
+              "visible_batches": 21
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-5, -6)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 110,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-2, -3)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 7,
+            "stats": {
+              "attempts": 499,
+              "batches": 7,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 16,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 7,
+              "visible_batches": 7
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-2, -7)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 133,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 19,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-4, -7)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 19,
+            "stats": {
+              "attempts": 499,
+              "batches": 19,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 152,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 19,
+              "visible_batches": 19
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-1, -3)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 21,
+            "stats": {
+              "attempts": 499,
+              "batches": 21,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 100482,
+              "cluster_instances": 53,
+              "cluster_nodes": 2,
+              "cluster_ready": true,
+              "cluster_vertices": 66988,
+              "complete": true,
+              "instances": 143,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 23,
+              "visible_batches": 2
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-5, -3)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 63408,
+              "cluster_instances": 32,
+              "cluster_nodes": 2,
+              "cluster_ready": true,
+              "cluster_vertices": 42272,
+              "complete": true,
+              "instances": 88,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 20,
+              "visible_batches": 2
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-1, -7)",
+            "lod": 2,
+            "phase": 3,
+            "processing": false,
+            "published": 20,
+            "stats": {
+              "attempts": 499,
+              "batches": 20,
+              "cluster_complete": true,
+              "cluster_fallbacks": {},
+              "cluster_indices": 92118,
+              "cluster_instances": 48,
+              "cluster_nodes": 2,
+              "cluster_ready": true,
+              "cluster_vertices": 61412,
+              "complete": true,
+              "instances": 151,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 22,
+              "visible_batches": 2
+            },
+            "terrain_ready": true
+          },
+          {
+            "chunk": "(-5, -7)",
+            "lod": 1,
+            "phase": 3,
+            "processing": false,
+            "published": 18,
+            "stats": {
+              "attempts": 499,
+              "batches": 18,
+              "cluster_complete": false,
+              "cluster_fallbacks": {},
+              "cluster_indices": 0,
+              "cluster_instances": 0,
+              "cluster_nodes": 0,
+              "cluster_ready": false,
+              "cluster_vertices": 0,
+              "complete": true,
+              "instances": 129,
+              "max_batch_usec": 648,
+              "max_cluster_step_usec": 614,
+              "max_cluster_upload_usec": 3912,
+              "max_placement_usec": 558,
+              "max_resource_usec": 7373,
+              "max_step_usec": 7373,
+              "nodes": 18,
+              "visible_batches": 18
+            },
+            "terrain_ready": true
+          }
+        ],
+        "pending_chunks": 0,
+        "player_dead": false,
+        "player_position": "(-103.949, 4.2, -164.5985)",
+        "world_initialized": true
+      },
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "assets_23757",
+      "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+      "case": "assets",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "asset_id": "ancient_oak_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 18.0,
+            "median": 18.0,
+            "p95": 18.0,
+            "p99": 18.0
+          },
+          "frame_ms": {
+            "max": 85.637,
+            "median": 85.12,
+            "p95": 85.637,
+            "p99": 85.637
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "ancient_oak_v2.png",
+          "label": "ancient_oak_v2",
+          "render_cpu_ms": {
+            "max": 2228.89496289062,
+            "median": 91.9800001220703,
+            "p95": 2228.89496289062,
+            "p99": 2228.89496289062
+          },
+          "render_gpu_ms": {
+            "max": 2227.01489257812,
+            "median": 91.9309997558594,
+            "p95": 2227.01489257812,
+            "p99": 2227.01489257812
+          },
+          "rendered_primitives": {
+            "max": 35784.0,
+            "median": 35784.0,
+            "p95": 35784.0,
+            "p99": 35784.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "tall_pine_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 82.186,
+            "median": 81.592,
+            "p95": 82.186,
+            "p99": 82.186
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "tall_pine_v2.png",
+          "label": "tall_pine_v2",
+          "render_cpu_ms": {
+            "max": 99.0399971313477,
+            "median": 83.3230024414062,
+            "p95": 99.0399971313477,
+            "p99": 99.0399971313477
+          },
+          "render_gpu_ms": {
+            "max": 99.0149993896484,
+            "median": 83.2959976196289,
+            "p95": 99.0149993896484,
+            "p99": 99.0149993896484
+          },
+          "rendered_primitives": {
+            "max": 22866.0,
+            "median": 22866.0,
+            "p95": 22866.0,
+            "p99": 22866.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "dense_bush_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 66.537,
+            "median": 65.126,
+            "p95": 66.537,
+            "p99": 66.537
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "dense_bush_v2.png",
+          "label": "dense_bush_v2",
+          "render_cpu_ms": {
+            "max": 80.7410017089844,
+            "median": 78.9169965820312,
+            "p95": 80.7410017089844,
+            "p99": 80.7410017089844
+          },
+          "render_gpu_ms": {
+            "max": 80.6999969482422,
+            "median": 78.9020004272461,
+            "p95": 80.6999969482422,
+            "p99": 80.6999969482422
+          },
+          "rendered_primitives": {
+            "max": 8822.0,
+            "median": 8822.0,
+            "p95": 8822.0,
+            "p99": 8822.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "fern_cluster_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 67.496,
+            "median": 67.34,
+            "p95": 67.496,
+            "p99": 67.496
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "fern_cluster_v2.png",
+          "label": "fern_cluster_v2",
+          "render_cpu_ms": {
+            "max": 81.4650007324219,
+            "median": 64.0139967041016,
+            "p95": 81.4650007324219,
+            "p99": 81.4650007324219
+          },
+          "render_gpu_ms": {
+            "max": 81.4229965209961,
+            "median": 64.0179977416992,
+            "p95": 81.4229965209961,
+            "p99": 81.4229965209961
+          },
+          "rendered_primitives": {
+            "max": 13812.0,
+            "median": 13812.0,
+            "p95": 13812.0,
+            "p99": 13812.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "flower_cluster_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 64.008,
+            "median": 62.394,
+            "p95": 64.008,
+            "p99": 64.008
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "flower_cluster_v2.png",
+          "label": "flower_cluster_v2",
+          "render_cpu_ms": {
+            "max": 81.3859983520508,
+            "median": 65.3009992675781,
+            "p95": 81.3859983520508,
+            "p99": 81.3859983520508
+          },
+          "render_gpu_ms": {
+            "max": 81.3430023193359,
+            "median": 65.3119964599609,
+            "p95": 81.3430023193359,
+            "p99": 81.3430023193359
+          },
+          "rendered_primitives": {
+            "max": 8850.0,
+            "median": 8850.0,
+            "p95": 8850.0,
+            "p99": 8850.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "layered_rock_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 59.15,
+            "median": 57.815,
+            "p95": 59.15,
+            "p99": 59.15
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "layered_rock_v2.png",
+          "label": "layered_rock_v2",
+          "render_cpu_ms": {
+            "max": 74.6010023193359,
+            "median": 59.741001159668,
+            "p95": 74.6010023193359,
+            "p99": 74.6010023193359
+          },
+          "render_gpu_ms": {
+            "max": 74.5699996948242,
+            "median": 59.7060012817383,
+            "p95": 74.5699996948242,
+            "p99": 74.5699996948242
+          },
+          "rendered_primitives": {
+            "max": 2400.0,
+            "median": 2400.0,
+            "p95": 2400.0,
+            "p99": 2400.0
+          }
+        },
+        {
+          "details": {
+            "asset_id": "grass_tuft_v2",
+            "geometry_variant": 0,
+            "tiers_left_to_right": [
+              "Near",
+              "Mid",
+              "Far"
+            ]
+          },
+          "draw_calls": {
+            "max": 20.0,
+            "median": 20.0,
+            "p95": 20.0,
+            "p99": 20.0
+          },
+          "frame_ms": {
+            "max": 58.351,
+            "median": 57.828,
+            "p95": 58.351,
+            "p99": 58.351
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "grass_tuft_v2.png",
+          "label": "grass_tuft_v2",
+          "render_cpu_ms": {
+            "max": 73.329998046875,
+            "median": 56.1950002746582,
+            "p95": 73.329998046875,
+            "p99": 73.329998046875
+          },
+          "render_gpu_ms": {
+            "max": 73.2939987182617,
+            "median": 56.1720008850098,
+            "p95": 73.2939987182617,
+            "p99": 73.2939987182617
+          },
+          "rendered_primitives": {
+            "max": 3666.0,
+            "median": 3666.0,
+            "p95": 3666.0,
+            "p99": 3666.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "cluster_23757",
+      "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+      "case": "cluster",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "attempts": 499,
+            "batches": 18,
+            "cluster_complete": false,
+            "cluster_fallbacks": {},
+            "cluster_indices": 0,
+            "cluster_instances": 0,
+            "cluster_nodes": 0,
+            "cluster_ready": false,
+            "cluster_vertices": 0,
+            "complete": true,
+            "instances": 164,
+            "max_batch_usec": 576,
+            "max_cluster_step_usec": 0,
+            "max_cluster_upload_usec": 0,
+            "max_placement_usec": 339,
+            "max_resource_usec": 6810,
+            "max_step_usec": 6810,
+            "nodes": 18,
+            "visible_batches": 10
+          },
+          "draw_calls": {
+            "max": 12.0,
+            "median": 12.0,
+            "p95": 12.0,
+            "p99": 12.0
+          },
+          "frame_ms": {
+            "max": 66.149,
+            "median": 64.197,
+            "p95": 66.149,
+            "p99": 66.149
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "far_batches.png",
+          "label": "far_batches",
+          "render_cpu_ms": {
+            "max": 2654.44410546875,
+            "median": 65.8219964599609,
+            "p95": 2654.44410546875,
+            "p99": 2654.44410546875
+          },
+          "render_gpu_ms": {
+            "max": 2652.65405273438,
+            "median": 65.8239974975586,
+            "p95": 2652.65405273438,
+            "p99": 2652.65405273438
+          },
+          "rendered_primitives": {
+            "max": 35126.0,
+            "median": 35126.0,
+            "p95": 35126.0,
+            "p99": 35126.0
+          }
+        },
+        {
+          "details": {
+            "attempts": 499,
+            "batches": 18,
+            "cluster_complete": true,
+            "cluster_fallbacks": {},
+            "cluster_indices": 101964,
+            "cluster_instances": 45,
+            "cluster_nodes": 2,
+            "cluster_ready": true,
+            "cluster_vertices": 67976,
+            "complete": true,
+            "instances": 164,
+            "max_batch_usec": 576,
+            "max_cluster_step_usec": 150,
+            "max_cluster_upload_usec": 2783,
+            "max_placement_usec": 339,
+            "max_resource_usec": 6810,
+            "max_step_usec": 6810,
+            "nodes": 20,
+            "visible_batches": 2
+          },
+          "draw_calls": {
+            "max": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "p99": 4.0
+          },
+          "frame_ms": {
+            "max": 62.248,
+            "median": 61.712,
+            "p95": 62.248,
+            "p99": 62.248
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "far_cluster.png",
+          "label": "far_cluster",
+          "mean_rgb_error_from_reference": 0.000477338517711611,
+          "render_cpu_ms": {
+            "max": 58.0189983215332,
+            "median": 57.8710006103516,
+            "p95": 58.0189983215332,
+            "p99": 58.0189983215332
+          },
+          "render_gpu_ms": {
+            "max": 57.9850006103516,
+            "median": 57.8569984436035,
+            "p95": 57.9850006103516,
+            "p99": 57.9850006103516
+          },
+          "rendered_primitives": {
+            "max": 35126.0,
+            "median": 35126.0,
+            "p95": 35126.0,
+            "p99": 35126.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    },
+    {
+      "directory": "creature_23757",
+      "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "adapter_api": "4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2",
+      "case": "creature",
+      "failures": [],
+      "fast_setup": true,
+      "godot": "4.6.3-stable (official)",
+      "passed": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        960,
+        540
+      ],
+      "samples": [
+        {
+          "details": {
+            "build_ms": 46.21,
+            "instances": 0,
+            "mesh_nodes": 2182,
+            "multimesh_nodes": 0
+          },
+          "draw_calls": {
+            "max": 8208.0,
+            "median": 8208.0,
+            "p95": 8208.0,
+            "p99": 8208.0
+          },
+          "frame_ms": {
+            "max": 93.025,
+            "median": 89.606,
+            "p95": 93.025,
+            "p99": 93.025
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_individual.png",
+          "label": "creature_individual",
+          "render_cpu_ms": {
+            "max": 1592.55698730469,
+            "median": 94.7219969482422,
+            "p95": 1592.55698730469,
+            "p99": 1592.55698730469
+          },
+          "render_gpu_ms": {
+            "max": 1589.30297851562,
+            "median": 94.4729995727539,
+            "p95": 1589.30297851562,
+            "p99": 1589.30297851562
+          },
+          "rendered_primitives": {
+            "max": 26184.0,
+            "median": 26184.0,
+            "p95": 26184.0,
+            "p99": 26184.0
+          }
+        },
+        {
+          "details": {
+            "build_ms": 15.219,
+            "instances": 2066,
+            "mesh_nodes": 116,
+            "multimesh_nodes": 42
+          },
+          "draw_calls": {
+            "max": 575.0,
+            "median": 575.0,
+            "p95": 575.0,
+            "p99": 575.0
+          },
+          "frame_ms": {
+            "max": 61.624,
+            "median": 61.619,
+            "p95": 61.624,
+            "p99": 61.624
+          },
+          "frames": 4,
+          "gpu_timestamps_available": true,
+          "image": "creature_batched.png",
+          "label": "creature_batched",
+          "mean_rgb_error_from_reference": 9.83165900104898e-06,
+          "render_cpu_ms": {
+            "max": 667.446020996094,
+            "median": 91.0790024414062,
+            "p95": 667.446020996094,
+            "p99": 667.446020996094
+          },
+          "render_gpu_ms": {
+            "max": 667.392028808594,
+            "median": 90.8779983520508,
+            "p95": 667.392028808594,
+            "p99": 667.392028808594
+          },
+          "rendered_primitives": {
+            "max": 26184.0,
+            "median": 26184.0,
+            "p95": 26184.0,
+            "p99": 26184.0
+          }
+        }
+      ],
+      "seed": 23757.0,
+      "software_renderer": true,
+      "target_hardware_acceptance": false
+    }
+  ],
+  "passed": true
+}

@@ -7,6 +7,7 @@ extends Node
 @export_range(16.0, 96.0, 1.0) var near_distance: float = 42.0
 @export_range(32.0, 192.0, 1.0) var mid_distance: float = 78.0
 @export_range(0.1, 2.0, 0.1) var update_interval: float = 0.35
+@export_range(0.0, 12.0, 0.5) var hysteresis: float = 4.0
 
 var _chunk: Node3D
 var _player: Node3D
@@ -30,21 +31,20 @@ func _process(delta: float) -> void:
 
 
 func _bind_and_update() -> void:
+	# A menu transition can detach a just-created chunk before this deferred
+	# callback runs. The departing world no longer owns a player or SceneTree.
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	_player = get_tree().get_first_node_in_group(&"player") as Node3D
 	_update_lod()
 
 
 func _update_lod() -> void:
-	if _chunk == null or _player == null:
+	if not is_instance_valid(_chunk) or not is_instance_valid(_player) or not _chunk.is_inside_tree() or not _player.is_inside_tree():
 		return
-	var distance: float = _chunk.global_position.distance_to(
-		_player.global_position
-	)
-	var tier: int = 2
-	if distance <= near_distance:
-		tier = 0
-	elif distance <= mid_distance:
-		tier = 1
+	var offset: Vector3 = _chunk.global_position - _player.global_position
+	var distance: float = Vector2(offset.x, offset.z).length()
+	var tier: int = _select_tier(distance)
 	if tier == _current_tier:
 		return
 	_current_tier = tier
@@ -59,3 +59,14 @@ func _update_lod() -> void:
 	if water != null:
 		water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		water.visibility_range_end = mid_distance * 2.75
+
+
+func _select_tier(distance: float) -> int:
+	var near_edge: float = near_distance + (hysteresis if _current_tier == 0 else -hysteresis)
+	var far_edge: float = mid_distance + (-hysteresis if _current_tier == 2 else hysteresis)
+	if _current_tier < 0:
+		near_edge = near_distance
+		far_edge = mid_distance
+	if distance <= near_edge:
+		return 0
+	return 1 if distance <= far_edge else 2

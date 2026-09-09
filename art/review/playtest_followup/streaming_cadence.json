@@ -1,0 +1,44 @@
+{
+  "before_commit": "9eb22b7d49b45e30e4c6fe30b004a8f1f3d86339",
+  "after_runtime_commit": "defb38d1f6226635464d9cb89ad5ab3c148b1eac",
+  "cadence_fps": 60,
+  "gpu_measured": false,
+  "samples": [
+    {
+      "all_25_ms": 27352.447,
+      "first_assets_ms": 2812.325,
+      "instances": 2274,
+      "scope": "Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.",
+      "seed": 15838,
+      "terrain_ms": 922.82,
+      "version": "before"
+    },
+    {
+      "all_25_ms": 30714.595,
+      "first_assets_ms": 2999.125,
+      "instances": 3093,
+      "scope": "Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.",
+      "seed": 23757,
+      "terrain_ms": 1254.936,
+      "version": "before"
+    },
+    {
+      "all_25_ms": 7907.076,
+      "first_assets_ms": 1358.855,
+      "instances": 838,
+      "scope": "Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.",
+      "seed": 15838,
+      "terrain_ms": 1163.825,
+      "version": "after"
+    },
+    {
+      "all_25_ms": 7308.978,
+      "first_assets_ms": 1353.972,
+      "instances": 3336,
+      "scope": "Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.",
+      "seed": 23757,
+      "terrain_ms": 1103.996,
+      "version": "after"
+    }
+  ]
+}

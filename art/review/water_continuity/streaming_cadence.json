@@ -1,0 +1,42 @@
+{
+  "scope": "One cold process per seed/version on the same host, sequential. Headless CPU measurement, not target GPU FPS. Same spawn and instance counts are required.",
+  "before_commit": "378574bc52fa7dbd2badc2fbededf3a15508b60d",
+  "measurements": [
+    {
+      "all_25_ms": 6559.505,
+      "first_assets_ms": 1514.377,
+      "instances": 838,
+      "scope": "Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.",
+      "seed": 15838,
+      "terrain_ms": 1331.133,
+      "stage": "before"
+    },
+    {
+      "all_25_ms": 7212.808,
+      "first_assets_ms": 1496.353,
+      "instances": 838,
+      "scope": "Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.",
+      "seed": 15838,
+      "terrain_ms": 1296.8,
+      "stage": "after"
+    },
+    {
+      "all_25_ms": 8308.318,
+      "first_assets_ms": 1558.9,
+      "instances": 3336,
+      "scope": "Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.",
+      "seed": 23757,
+      "terrain_ms": 1294.282,
+      "stage": "before"
+    },
+    {
+      "all_25_ms": 8079.437,
+      "first_assets_ms": 1302.679,
+      "instances": 3336,
+      "scope": "Main scene paced at 60 process frames/s, headless CPU only, cold process, stationary review player. Terrain and vegetation changes alter the workload.",
+      "seed": 23757,
+      "terrain_ms": 1069.468,
+      "stage": "after"
+    }
+  ]
+}

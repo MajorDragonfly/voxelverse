@@ -1,0 +1,1961 @@
+{
+  "runtime_commit": "94b4dd3e4755e1617e4ce200173449d82e12c223",
+  "branch": "agent/underwater-voxel-planets",
+  "base_commit": "0ad98d93aa10b42a55e18dde0a2180c1d3155b1f",
+  "status": "automated_and_visual_review_passed_target_pc_pending",
+  "local_checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.827
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.013
+    },
+    {
+      "name": "adaptive_planet_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.511
+    },
+    {
+      "name": "asset_pipeline_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.356
+    },
+    {
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.994
+    },
+    {
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.723
+    },
+    {
+      "name": "creature_editor_v7_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.903
+    },
+    {
+      "name": "creature_v5_smoke_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.002
+    },
+    {
+      "name": "drainage_network_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.756
+    },
+    {
+      "name": "environment_cluster_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.217
+    },
+    {
+      "name": "environment_playtest_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.472
+    },
+    {
+      "name": "environment_production_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.673
+    },
+    {
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.812
+    },
+    {
+      "name": "menu_input_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.578
+    },
+    {
+      "name": "meta_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.722
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.527
+    },
+    {
+      "name": "planet_diversity_v9_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.341
+    },
+    {
+      "name": "planet_generation_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.385
+    },
+    {
+      "name": "planet_scale_migration_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.648
+    },
+    {
+      "name": "planet_sphere_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.275
+    },
+    {
+      "name": "planet_sphere_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 52.997
+    },
+    {
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.563
+    },
+    {
+      "name": "runtime_geometry_batch_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.528
+    },
+    {
+      "name": "terrain_transition_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.923
+    },
+    {
+      "name": "underwater_view_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.346
+    },
+    {
+      "name": "water_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.818
+    },
+    {
+      "name": "water_depth_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.615
+    },
+    {
+      "name": "world_evolution_v2_ci_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.753
+    },
+    {
+      "name": "world_layered_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.811
+    },
+    {
+      "name": "world_runtime_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.088
+    },
+    {
+      "name": "planet_lab_entry",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.097
+    },
+    {
+      "name": "main_shutdown_45",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.283
+    },
+    {
+      "name": "main_shutdown_150",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.882
+    },
+    {
+      "name": "main",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.249
+    },
+    {
+      "name": "shutdown_15838_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.29
+    },
+    {
+      "name": "shutdown_15838_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.873
+    },
+    {
+      "name": "shutdown_15838_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.399
+    },
+    {
+      "name": "shutdown_15838_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.05
+    },
+    {
+      "name": "shutdown_15838_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.463
+    },
+    {
+      "name": "shutdown_15838_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.556
+    },
+    {
+      "name": "shutdown_63352_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.28
+    },
+    {
+      "name": "shutdown_63352_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.488
+    },
+    {
+      "name": "shutdown_63352_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.208
+    },
+    {
+      "name": "shutdown_63352_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.014
+    },
+    {
+      "name": "shutdown_63352_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.653
+    },
+    {
+      "name": "shutdown_63352_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.446
+    },
+    {
+      "name": "shutdown_23757_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.276
+    },
+    {
+      "name": "shutdown_23757_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.204
+    },
+    {
+      "name": "shutdown_23757_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.391
+    },
+    {
+      "name": "shutdown_23757_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.329
+    },
+    {
+      "name": "shutdown_23757_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.903
+    },
+    {
+      "name": "shutdown_23757_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.448
+    },
+    {
+      "name": "streaming_cpu",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.159
+    }
+  ],
+  "adaptive_metrics": {
+    "contacts": 599,
+    "cross_face_probes": 2652,
+    "cube_faces": 2,
+    "maximum_clearance_m": 1.06628559319816,
+    "maximum_initial_publish_ms": 30.58,
+    "maximum_layout_tiles": 672,
+    "maximum_mesh_upload_ms": 4.971,
+    "maximum_publish_ms": 5.859,
+    "maximum_seam_m": 7.71703125792556e-05,
+    "maximum_water_seam_m": 7.6534939580597e-05,
+    "maximum_worker_ms": 2976.925,
+    "p95_mesh_upload_ms": 0.973,
+    "peak_resident_terrain_meshes": 490,
+    "peak_tiles": 462,
+    "physics_edge_rays": 748,
+    "publishes": 26,
+    "rebases": 4,
+    "seam_probes": 29172,
+    "voxel_patches": 232,
+    "voxel_walls": 50171,
+    "walk_m": 246.385885536671
+  },
+  "diameter_metres": {
+    "solis": 32768,
+    "vesper": 20480,
+    "haven": 4096,
+    "ember": 3072,
+    "lune": 1024,
+    "aster": 8192
+  },
+  "limits": {
+    "max_live_tiles": 768,
+    "max_prepared_and_live_terrain_meshes": 1536,
+    "max_near_colliders": 24,
+    "voxel_step_m": 0.5,
+    "max_near_patch_triangles": 1472,
+    "max_near_patch_vertices": 3233,
+    "max_uploads_per_frame": 2,
+    "soft_upload_budget_ms": 4
+  },
+  "manual_target_pc_acceptance": false,
+  "social_pr": 10,
+  "shared_changed_paths": [
+    "ROADMAP.md"
+  ],
+  "ci": {
+    "full_run": 34276508009,
+    "render_run": 34276508012,
+    "export_run": 34276507996,
+    "windows": {
+      "passed": true,
+      "checks": 13,
+      "artifact_id": 10076001378,
+      "sha256": "1e8d11b1ae42216170b7c25a214767755782f33897b6c22ef30e17af5a761166",
+      "results": [
+        {
+          "exit_code": 0,
+          "name": "import",
+          "passed": true,
+          "seconds": 8.719
+        },
+        {
+          "exit_code": 0,
+          "name": "release_export",
+          "passed": true,
+          "seconds": 5.718
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_main",
+          "passed": true,
+          "seconds": 12.922
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_lab",
+          "passed": true,
+          "seconds": 6.125
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_menu_input",
+          "passed": true,
+          "seconds": 18.75
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_creature_builder_v7_test",
+          "passed": true,
+          "seconds": 0.656
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_modular_assembly_framework_test",
+          "passed": true,
+          "seconds": 0.656
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_gameplay_acceptance_test",
+          "passed": true,
+          "seconds": 0.843
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_meta_runtime_test",
+          "passed": true,
+          "seconds": 0.844
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_sphere_contract_test",
+          "passed": true,
+          "seconds": 1.875
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_15838",
+          "passed": true,
+          "seconds": 42
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_63352",
+          "passed": true,
+          "seconds": 14.594
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_23757",
+          "passed": true,
+          "seconds": 15.704
+        }
+      ]
+    },
+    "linux": {
+      "passed": true,
+      "checks": 13,
+      "artifact_id": 10075982103,
+      "sha256": "297c64aca297af4ea2bd898c8661ee930940578edcb33c0b85486b8dd2cf1b90",
+      "results": [
+        {
+          "exit_code": 0,
+          "name": "import",
+          "passed": true,
+          "seconds": 4.854
+        },
+        {
+          "exit_code": 0,
+          "name": "release_export",
+          "passed": true,
+          "seconds": 4.467
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_main",
+          "passed": true,
+          "seconds": 10.937
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_lab",
+          "passed": true,
+          "seconds": 4.985
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_menu_input",
+          "passed": true,
+          "seconds": 15.316
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_creature_builder_v7_test",
+          "passed": true,
+          "seconds": 0.543
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_modular_assembly_framework_test",
+          "passed": true,
+          "seconds": 0.438
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_gameplay_acceptance_test",
+          "passed": true,
+          "seconds": 0.717
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_meta_runtime_test",
+          "passed": true,
+          "seconds": 0.636
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_sphere_contract_test",
+          "passed": true,
+          "seconds": 1.471
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_15838",
+          "passed": true,
+          "seconds": 33.643
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_63352",
+          "passed": true,
+          "seconds": 11.602
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_23757",
+          "passed": true,
+          "seconds": 12.718
+        }
+      ]
+    },
+    "gl_compatibility": {
+      "passed": true,
+      "captures": 79,
+      "cases": [
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "underwater",
+          "passed": true,
+          "samples": 6,
+          "seed": 12345,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "planet_lab",
+          "passed": true,
+          "samples": 11,
+          "seed": 12345,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "world",
+          "passed": true,
+          "samples": 5,
+          "seed": 15838,
+          "setup_limit_seconds": 240,
+          "setup_ms": 24901.775,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "assets",
+          "passed": true,
+          "samples": 7,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "species",
+          "passed": true,
+          "samples": 4,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "cluster",
+          "passed": true,
+          "samples": 2,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "creature",
+          "passed": true,
+          "samples": 2,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "water",
+          "passed": true,
+          "samples": 6,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "hydrology",
+          "passed": true,
+          "samples": 5,
+          "seed": 15838,
+          "setup_limit_seconds": 240,
+          "setup_ms": 30208.467,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "world",
+          "passed": true,
+          "samples": 5,
+          "seed": 23757,
+          "setup_limit_seconds": 240,
+          "setup_ms": 27540.09,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "assets",
+          "passed": true,
+          "samples": 7,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "species",
+          "passed": true,
+          "samples": 4,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "cluster",
+          "passed": true,
+          "samples": 2,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "creature",
+          "passed": true,
+          "samples": 2,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "water",
+          "passed": true,
+          "samples": 6,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "hydrology",
+          "passed": true,
+          "samples": 5,
+          "seed": 23757,
+          "setup_limit_seconds": 240,
+          "setup_ms": 31443.081,
+          "software_renderer": true
+        }
+      ]
+    },
+    "system_map_visually_reviewed": true,
+    "full_passed": true,
+    "full_checks": 53,
+    "full_results": [
+      {
+        "exit_code": 0,
+        "name": "import",
+        "passed": true,
+        "seconds": 7.053
+      },
+      {
+        "exit_code": 0,
+        "name": "art_sources",
+        "passed": true,
+        "seconds": 1.297
+      },
+      {
+        "exit_code": 0,
+        "name": "adaptive_planet_test",
+        "passed": true,
+        "seconds": 20.524
+      },
+      {
+        "exit_code": 0,
+        "name": "asset_pipeline_test",
+        "passed": true,
+        "seconds": 0.344
+      },
+      {
+        "exit_code": 0,
+        "name": "campaign_foundation_test",
+        "passed": true,
+        "seconds": 0.997
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_builder_v7_test",
+        "passed": true,
+        "seconds": 0.623
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_editor_v7_runtime_test",
+        "passed": true,
+        "seconds": 1.002
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_v5_smoke_test",
+        "passed": true,
+        "seconds": 0.997
+      },
+      {
+        "exit_code": 0,
+        "name": "drainage_network_test",
+        "passed": true,
+        "seconds": 2.022
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_cluster_test",
+        "passed": true,
+        "seconds": 2.767
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_playtest_test",
+        "passed": true,
+        "seconds": 19.318
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_production_test",
+        "passed": true,
+        "seconds": 3.049
+      },
+      {
+        "exit_code": 0,
+        "name": "gameplay_acceptance_test",
+        "passed": true,
+        "seconds": 0.812
+      },
+      {
+        "exit_code": 0,
+        "name": "menu_input_test",
+        "passed": true,
+        "seconds": 17.747
+      },
+      {
+        "exit_code": 0,
+        "name": "meta_runtime_test",
+        "passed": true,
+        "seconds": 0.716
+      },
+      {
+        "exit_code": 0,
+        "name": "modular_assembly_framework_test",
+        "passed": true,
+        "seconds": 0.529
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_diversity_v9_test",
+        "passed": true,
+        "seconds": 0.344
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_generation_acceptance_test",
+        "passed": true,
+        "seconds": 7.969
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_scale_migration_test",
+        "passed": true,
+        "seconds": 20.724
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_sphere_contract_test",
+        "passed": true,
+        "seconds": 1.463
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_sphere_runtime_test",
+        "passed": true,
+        "seconds": 56.424
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_transition_runtime_test",
+        "passed": true,
+        "seconds": 32.426
+      },
+      {
+        "exit_code": 0,
+        "name": "runtime_geometry_batch_test",
+        "passed": true,
+        "seconds": 0.533
+      },
+      {
+        "exit_code": 0,
+        "name": "terrain_transition_test",
+        "passed": true,
+        "seconds": 2.3
+      },
+      {
+        "exit_code": 0,
+        "name": "underwater_view_test",
+        "passed": true,
+        "seconds": 0.347
+      },
+      {
+        "exit_code": 0,
+        "name": "water_continuity_test",
+        "passed": true,
+        "seconds": 24.251
+      },
+      {
+        "exit_code": 0,
+        "name": "water_depth_test",
+        "passed": true,
+        "seconds": 3.786
+      },
+      {
+        "exit_code": 0,
+        "name": "world_evolution_v2_ci_test",
+        "passed": true,
+        "seconds": 1.739
+      },
+      {
+        "exit_code": 0,
+        "name": "world_layered_v7_test",
+        "passed": true,
+        "seconds": 0.903
+      },
+      {
+        "exit_code": 0,
+        "name": "world_runtime_continuity_test",
+        "passed": true,
+        "seconds": 1.275
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_lab_entry",
+        "passed": true,
+        "seconds": 6.02
+      },
+      {
+        "exit_code": 0,
+        "name": "main_shutdown_45",
+        "passed": true,
+        "seconds": 1.465
+      },
+      {
+        "exit_code": 0,
+        "name": "main_shutdown_150",
+        "passed": true,
+        "seconds": 12.067
+      },
+      {
+        "exit_code": 0,
+        "name": "main",
+        "passed": true,
+        "seconds": 12.439
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_terrain",
+        "passed": true,
+        "seconds": 1.369
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_placement",
+        "passed": true,
+        "seconds": 11.416
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_resources",
+        "passed": true,
+        "seconds": 11.414
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_complete",
+        "passed": true,
+        "seconds": 12.067
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_cluster_build",
+        "passed": true,
+        "seconds": 22.018
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_cluster_complete",
+        "passed": true,
+        "seconds": 22.02
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_terrain",
+        "passed": true,
+        "seconds": 1.465
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_placement",
+        "passed": true,
+        "seconds": 11.508
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_resources",
+        "passed": true,
+        "seconds": 11.602
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_complete",
+        "passed": true,
+        "seconds": 12.438
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_cluster_build",
+        "passed": true,
+        "seconds": 22.299
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_cluster_complete",
+        "passed": true,
+        "seconds": 22.204
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_terrain",
+        "passed": true,
+        "seconds": 1.462
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_placement",
+        "passed": true,
+        "seconds": 12.065
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_resources",
+        "passed": true,
+        "seconds": 12.531
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_complete",
+        "passed": true,
+        "seconds": 12.998
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_cluster_build",
+        "passed": true,
+        "seconds": 24.529
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_cluster_complete",
+        "passed": true,
+        "seconds": 24.344
+      },
+      {
+        "exit_code": 0,
+        "name": "streaming_cpu",
+        "passed": true,
+        "seconds": 4.812
+      }
+    ],
+    "forward_plus": {
+      "passed": true,
+      "captures": 79,
+      "cases": [
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "underwater",
+          "passed": true,
+          "samples": 6,
+          "seed": 12345,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "planet_lab",
+          "passed": true,
+          "samples": 11,
+          "seed": 12345,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "world",
+          "passed": true,
+          "samples": 5,
+          "seed": 15838,
+          "setup_limit_seconds": 240,
+          "setup_ms": 55023.86,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "assets",
+          "passed": true,
+          "samples": 7,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "species",
+          "passed": true,
+          "samples": 4,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "cluster",
+          "passed": true,
+          "samples": 2,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "creature",
+          "passed": true,
+          "samples": 2,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "water",
+          "passed": true,
+          "samples": 6,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "hydrology",
+          "passed": true,
+          "samples": 5,
+          "seed": 15838,
+          "setup_limit_seconds": 240,
+          "setup_ms": 31935.842,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "world",
+          "passed": true,
+          "samples": 5,
+          "seed": 23757,
+          "setup_limit_seconds": 240,
+          "setup_ms": 61754.692,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "assets",
+          "passed": true,
+          "samples": 7,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "species",
+          "passed": true,
+          "samples": 4,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "cluster",
+          "passed": true,
+          "samples": 2,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "creature",
+          "passed": true,
+          "samples": 2,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "water",
+          "passed": true,
+          "samples": 6,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "hydrology",
+          "passed": true,
+          "samples": 5,
+          "seed": 23757,
+          "setup_limit_seconds": 240,
+          "setup_ms": 26025.774,
+          "software_renderer": true
+        }
+      ]
+    },
+    "render_passed": true,
+    "captures_per_renderer": 79
+  },
+  "core_ci_checks": [
+    {
+      "exit_code": 0,
+      "name": "import",
+      "passed": true,
+      "seconds": 13.931
+    },
+    {
+      "exit_code": 0,
+      "name": "art_sources",
+      "passed": true,
+      "seconds": 1.092
+    },
+    {
+      "exit_code": 0,
+      "name": "adaptive_planet_test",
+      "passed": true,
+      "seconds": 17.731
+    },
+    {
+      "exit_code": 0,
+      "name": "asset_pipeline_test",
+      "passed": true,
+      "seconds": 0.343
+    },
+    {
+      "exit_code": 0,
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "seconds": 0.899
+    },
+    {
+      "exit_code": 0,
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "seconds": 0.525
+    },
+    {
+      "exit_code": 0,
+      "name": "creature_editor_v7_runtime_test",
+      "passed": true,
+      "seconds": 0.811
+    },
+    {
+      "exit_code": 0,
+      "name": "creature_v5_smoke_test",
+      "passed": true,
+      "seconds": 0.899
+    },
+    {
+      "exit_code": 0,
+      "name": "drainage_network_test",
+      "passed": true,
+      "seconds": 1.549
+    },
+    {
+      "exit_code": 0,
+      "name": "environment_cluster_test",
+      "passed": true,
+      "seconds": 2.111
+    },
+    {
+      "exit_code": 0,
+      "name": "environment_playtest_test",
+      "passed": true,
+      "seconds": 13.454
+    },
+    {
+      "exit_code": 0,
+      "name": "environment_production_test",
+      "passed": true,
+      "seconds": 2.482
+    },
+    {
+      "exit_code": 0,
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "seconds": 0.62
+    },
+    {
+      "exit_code": 0,
+      "name": "menu_input_test",
+      "passed": true,
+      "seconds": 13.557
+    },
+    {
+      "exit_code": 0,
+      "name": "meta_runtime_test",
+      "passed": true,
+      "seconds": 0.621
+    },
+    {
+      "exit_code": 0,
+      "name": "modular_assembly_framework_test",
+      "passed": true,
+      "seconds": 0.528
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_diversity_v9_test",
+      "passed": true,
+      "seconds": 0.341
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_generation_acceptance_test",
+      "passed": true,
+      "seconds": 5.734
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_scale_migration_test",
+      "passed": true,
+      "seconds": 15.794
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_sphere_contract_test",
+      "passed": true,
+      "seconds": 1.181
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_sphere_runtime_test",
+      "passed": true,
+      "seconds": 51.213
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "seconds": 22.856
+    },
+    {
+      "exit_code": 0,
+      "name": "runtime_geometry_batch_test",
+      "passed": true,
+      "seconds": 0.528
+    },
+    {
+      "exit_code": 0,
+      "name": "terrain_transition_test",
+      "passed": true,
+      "seconds": 1.736
+    },
+    {
+      "exit_code": 0,
+      "name": "underwater_view_test",
+      "passed": true,
+      "seconds": 0.341
+    },
+    {
+      "exit_code": 0,
+      "name": "water_continuity_test",
+      "passed": true,
+      "seconds": 16.993
+    },
+    {
+      "exit_code": 0,
+      "name": "water_depth_test",
+      "passed": true,
+      "seconds": 3.503
+    },
+    {
+      "exit_code": 0,
+      "name": "world_evolution_v2_ci_test",
+      "passed": true,
+      "seconds": 1.463
+    },
+    {
+      "exit_code": 0,
+      "name": "world_layered_v7_test",
+      "passed": true,
+      "seconds": 0.811
+    },
+    {
+      "exit_code": 0,
+      "name": "world_runtime_continuity_test",
+      "passed": true,
+      "seconds": 1.09
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_lab_entry",
+      "passed": true,
+      "seconds": 4.812
+    },
+    {
+      "exit_code": 0,
+      "name": "main_shutdown_45",
+      "passed": true,
+      "seconds": 8.344
+    },
+    {
+      "exit_code": 0,
+      "name": "main_shutdown_150",
+      "passed": true,
+      "seconds": 8.812
+    },
+    {
+      "exit_code": 0,
+      "name": "main",
+      "passed": true,
+      "seconds": 8.813
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_terrain",
+      "passed": true,
+      "seconds": 1.18
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_placement",
+      "passed": true,
+      "seconds": 8.158
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_resources",
+      "passed": true,
+      "seconds": 8.16
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_complete",
+      "passed": true,
+      "seconds": 8.716
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_cluster_build",
+      "passed": true,
+      "seconds": 15.688
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_cluster_complete",
+      "passed": true,
+      "seconds": 15.599
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_terrain",
+      "passed": true,
+      "seconds": 1.179
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_placement",
+      "passed": true,
+      "seconds": 8.249
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_resources",
+      "passed": true,
+      "seconds": 8.251
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_complete",
+      "passed": true,
+      "seconds": 8.807
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_cluster_build",
+      "passed": true,
+      "seconds": 15.97
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_cluster_complete",
+      "passed": true,
+      "seconds": 15.78
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_terrain",
+      "passed": true,
+      "seconds": 1.181
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_placement",
+      "passed": true,
+      "seconds": 8.718
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_resources",
+      "passed": true,
+      "seconds": 8.811
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_complete",
+      "passed": true,
+      "seconds": 9.273
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_cluster_build",
+      "passed": true,
+      "seconds": 16.988
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_cluster_complete",
+      "passed": true,
+      "seconds": 17.083
+    },
+    {
+      "exit_code": 0,
+      "name": "streaming_cpu",
+      "passed": true,
+      "seconds": 3.69
+    }
+  ],
+  "core_render_results": {
+    "gl_compatibility": {
+      "passed": true,
+      "captures": 79,
+      "cases": [
+        {
+          "case": "underwater",
+          "seed": 12345,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 6,
+          "passed": true
+        },
+        {
+          "case": "planet_lab",
+          "seed": 12345,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 11,
+          "passed": true
+        },
+        {
+          "case": "world",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 22564.192,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        },
+        {
+          "case": "assets",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 7,
+          "passed": true
+        },
+        {
+          "case": "species",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 4,
+          "passed": true
+        },
+        {
+          "case": "cluster",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "creature",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "water",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 6,
+          "passed": true
+        },
+        {
+          "case": "hydrology",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 27148.394,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        },
+        {
+          "case": "world",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 24936.502,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        },
+        {
+          "case": "assets",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 7,
+          "passed": true
+        },
+        {
+          "case": "species",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 4,
+          "passed": true
+        },
+        {
+          "case": "cluster",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "creature",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "water",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 6,
+          "passed": true
+        },
+        {
+          "case": "hydrology",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 27684.908,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        }
+      ]
+    },
+    "forward_plus": {
+      "passed": true,
+      "captures": 79,
+      "cases": [
+        {
+          "case": "underwater",
+          "seed": 12345,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 6,
+          "passed": true
+        },
+        {
+          "case": "planet_lab",
+          "seed": 12345,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 11,
+          "passed": true
+        },
+        {
+          "case": "world",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 44115.306,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        },
+        {
+          "case": "assets",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 7,
+          "passed": true
+        },
+        {
+          "case": "species",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 4,
+          "passed": true
+        },
+        {
+          "case": "cluster",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "creature",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "water",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 6,
+          "passed": true
+        },
+        {
+          "case": "hydrology",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 27269.345,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        },
+        {
+          "case": "world",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 50975.715,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        },
+        {
+          "case": "assets",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 7,
+          "passed": true
+        },
+        {
+          "case": "species",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 4,
+          "passed": true
+        },
+        {
+          "case": "cluster",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "creature",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "water",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 6,
+          "passed": true
+        },
+        {
+          "case": "hydrology",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 22323.02,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "screenshots": [
+    {
+      "path": "art/review/underwater_voxel/world_underwater.jpg",
+      "renderer": "forward_plus",
+      "seed": 15838,
+      "capture": "world_underwater",
+      "source_commit": "f730b63d923f3b7c84fc1a515668b07f088bddb1"
+    },
+    {
+      "path": "art/review/underwater_voxel/haven_surface.jpg",
+      "renderer": "gl_compatibility",
+      "seed": 12345,
+      "capture": "m1_surface",
+      "source_commit": "f730b63d923f3b7c84fc1a515668b07f088bddb1"
+    },
+    {
+      "path": "art/review/underwater_voxel/aster_orbit.jpg",
+      "renderer": "gl_compatibility",
+      "seed": 12345,
+      "capture": "m1_aster_orbit",
+      "source_commit": "f730b63d923f3b7c84fc1a515668b07f088bddb1"
+    },
+    {
+      "path": "art/review/underwater_voxel/binary_system.jpg",
+      "renderer": "gl_compatibility",
+      "seed": 12345,
+      "capture": "m1_binary_system",
+      "source_commit": "94b4dd3e4755e1617e4ce200173449d82e12c223"
+    }
+  ],
+  "parallel_creature_pr": 12,
+  "parallel_creature_shared_paths": [
+    "tools/capture_environment.gd"
+  ],
+  "parallel_creature_capture_merge": {
+    "commit": "09ee6d4cb078f69bc54f03d5befe4e62d6ad2357",
+    "common_base": "6e5c6d2d1db0de40d676c4ea85efb02c3cb5d4ae",
+    "text_merge_clean": true,
+    "combined_runtime_tested": false
+  },
+  "core_runtime_commit": "f730b63d923f3b7c84fc1a515668b07f088bddb1",
+  "core_ci": {
+    "full_run": 34275117748,
+    "render_run": 34275117737,
+    "export_run": 34275117762,
+    "windows": {
+      "passed": true,
+      "checks": 13,
+      "artifact_id": 10075489609
+    },
+    "linux": {
+      "passed": true,
+      "checks": 13,
+      "artifact_id": 10075461307
+    },
+    "focused_render": {
+      "compatibility_passed": true,
+      "forward_plus_passed": true,
+      "underwater_captures_per_renderer": 6,
+      "planet_captures_per_renderer": 11
+    },
+    "full_passed": true,
+    "full_checks": 53,
+    "render_passed": true,
+    "captures_per_renderer": 79
+  },
+  "local_full_scope": "Development run completed 2026-09-08T20:15:50Z, before the final material defaults and label fixes. The final runtime commit was fully revalidated by the recorded GitHub CI run.",
+  "local_material_checks": [
+    {
+      "name": "water_depth_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.89
+    },
+    {
+      "name": "water_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.99
+    }
+  ],
+  "local_final_lab_checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.846
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.162
+    },
+    {
+      "name": "planet_scale_migration_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.833
+    }
+  ]
+}

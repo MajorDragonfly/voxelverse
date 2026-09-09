@@ -1,0 +1,74 @@
+name: Discovery journal validation
+
+on:
+  push:
+    branches: ["agent/discovery-journal"]
+  pull_request:
+    paths:
+      - "core/discovery/**"
+      - "ui/discovery/**"
+      - "ui/behavior_skill_tree.gd"
+      - "ui/progression_hud.gd"
+      - "tests/behavior_skill_tree_test.gd"
+      - "tests/discovery_journal_test.gd"
+      - "tests/research_goals_test.gd"
+      - "tests/species_comparison_test.gd"
+      - "autoload/progression_service.gd"
+      - ".github/workflows/journal-validate.yml"
+
+concurrency:
+  group: journal-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  journal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/godot-export-toolchain
+          key: godot-4.6.3-desktop-v1-${{ runner.os }}
+      - name: Install renderer and verified Godot
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+          python tools/install_godot.py --directory "${{ runner.temp }}/godot-export-toolchain" --platform linux
+      - name: Validate persistence and GUI input
+        run: >-
+          python tools/validate_godot.py
+          --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --tests discovery_journal_test research_goals_test species_comparison_test behavior_skill_tree_test behavior_progression_test campaign_foundation_test
+          --skip-main --output "${{ runner.temp }}/journal-validation"
+      - name: Render journal and exercise real GUI input
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          XDG_DATA_HOME: ${{ runner.temp }}/journal-render-saves
+        shell: bash
+        run: |
+          set -o pipefail
+          export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
+          xvfb-run -a -s '-screen 0 1280x720x24' "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --path . --rendering-method ${{ matrix.renderer }} --audio-driver Dummy --script res://tests/discovery_journal_test.gd -- --journal-capture 2>&1 | tee "${{ runner.temp }}/journal-validation/render.log"
+          python -c 'from pathlib import Path; text = Path("${{ runner.temp }}/journal-validation/render.log").read_text(); assert "SCRIPT ERROR" not in text and "ERROR:" not in text and "ObjectDB instances leaked" not in text, text'
+          xvfb-run -a -s '-screen 0 1280x720x24' "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --path . --rendering-method ${{ matrix.renderer }} --audio-driver Dummy --script res://tests/research_goals_test.gd -- --research-capture 2>&1 | tee "${{ runner.temp }}/journal-validation/research-render.log"
+          python -c 'from pathlib import Path; text = Path("${{ runner.temp }}/journal-validation/research-render.log").read_text(); assert "RESEARCH_GOALS_TEST" in text and "SCRIPT ERROR" not in text and "ERROR:" not in text and "ObjectDB instances leaked" not in text, text'
+          xvfb-run -a -s '-screen 0 1280x720x24' "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --path . --rendering-method ${{ matrix.renderer }} --audio-driver Dummy --script res://tests/species_comparison_test.gd -- --comparison-capture 2>&1 | tee "${{ runner.temp }}/journal-validation/comparison-render.log"
+          python -c 'from pathlib import Path; text = Path("${{ runner.temp }}/journal-validation/comparison-render.log").read_text(); assert "SPECIES_COMPARISON_TEST" in text and "SCRIPT ERROR" not in text and "ERROR:" not in text and "ObjectDB instances leaked" not in text, text'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: discovery-journal-${{ matrix.renderer }}-${{ github.event_name }}
+          path: |
+            art/review/discovery_journal
+            art/review/research_goals
+            art/review/species_comparison
+            ${{ runner.temp }}/journal-validation
+          retention-days: 14

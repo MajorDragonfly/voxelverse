@@ -183,6 +183,10 @@ static func rebind_part(
 		get_anchor_position(blueprint, placement)
 		+ manual_offset
 	)
+	if bool(placement.get("center_locked", false)):
+		placement["position"].x = 0.0
+		manual_offset.x = 0.0
+		placement["manual_offset"] = manual_offset
 	parts[part_index] = placement
 	blueprint["parts"] = parts
 
@@ -261,6 +265,8 @@ static func get_anchor_position(
 		center_y + anchor_vertical * height * 0.55,
 		-body_shape.z * 0.5 + anchor_t * body_shape.z
 	)
+	if bool(placement.get("center_locked", false)):
+		position.x = 0.0
 
 	position += Blueprint._as_vector3(
 		placement.get(
@@ -330,7 +336,7 @@ static func _apply_default_anchor_fields(
 
 		PartLibrary.CATEGORY_SPIKES:
 			placement["anchor_t"] = lerpf(0.16, 0.86, distribution)
-			placement["anchor_side"] = 0.0
+			placement["anchor_side"] = 0.42 if bool(placement.get("mirrored", false)) else 0.0
 			placement["anchor_vertical"] = 0.62
 			placement["anchor_surface_offset"] = Vector3.ZERO
 

@@ -1,0 +1,121 @@
+{
+  "date": "2026-09-09",
+  "repository": "MajorDragonfly/voxelverse",
+  "base": "c9be789b9d1b1effa9e3b30a653c739feb392b25",
+  "sources": [
+    {
+      "pr": 9,
+      "branch": "agent/meta-runtime-v8",
+      "commit": "6e5c6d2d1db0de40d676c4ea85efb02c3cb5d4ae",
+      "title": "Meta Runtime: persistence, progression and clean player architecture"
+    },
+    {
+      "pr": 10,
+      "branch": "agent/m2-behavior-skilltree",
+      "commit": "f01532416674cc2202aca1a6a99c45cd91d559e0",
+      "title": "M2A: Verhaltenspunkte, Skilltree und sichere Speicherung"
+    },
+    {
+      "pr": 11,
+      "branch": "agent/planet-lod-menu",
+      "commit": "0ad98d93aa10b42a55e18dde0a2180c1d3155b1f",
+      "title": "M1-Ausbau: adaptiver Planet, feinere Berge und klickbares Spielmenü"
+    },
+    {
+      "pr": 12,
+      "branch": "agent/creature-editor-spore",
+      "commit": "21696481423579e1b98f28b2ab15ce4c4fd149fe",
+      "title": "Feine Voxel-Kreaturenwerkstatt: Körperteile, Gelenkgriffe und Bewegungstest"
+    },
+    {
+      "pr": 13,
+      "branch": "agent/underwater-voxel-planets",
+      "commit": "4b14d116c216ad90781b9a50c6115659ae23b964",
+      "title": "Unterwasseransicht, Voxelplaneten und abgestimmte Körpergrößen"
+    },
+    {
+      "pr": 14,
+      "branch": "agent/player-progression-ui",
+      "commit": "60f61e018e61a98824846d2bb020a0d6c1c18cb9",
+      "title": "Spielerfortschritt: Skilltree, sichere Käufe und Entdeckungsbuch"
+    },
+    {
+      "pr": 15,
+      "branch": "agent/planet-real-scale",
+      "commit": "b870bb6ac7129225d811205a05cf88516a1996b5",
+      "title": "M1b: reale Voxelplaneten bis Erdgröße mit geprüftem Desktop-Build"
+    },
+    {
+      "pr": 16,
+      "branch": "agent/game-menus",
+      "commit": "6a502e80d612811790e16bdeb141c16ed6cb7caf",
+      "title": "Voxelverse: Spieleinstieg, Menüs, Spielstände und Kreaturenscans"
+    },
+    {
+      "pr": 17,
+      "branch": "agent/creature-behavior-gameplay",
+      "commit": "15479d8b2b0f5e78e483b806dede879eceda50e3",
+      "title": "Spielbare Sozial-/Konfliktbelohnungen, Skilltree-Boni und Phasenvorschau"
+    },
+    {
+      "pr": 18,
+      "branch": "agent/audio-foundation",
+      "commit": "9bdbe2e27d5faa72e7d40b1eeabb22b454680236",
+      "title": "Audio: Sounds, Musik, Scanner und Komfortoptionen"
+    },
+    {
+      "pr": 19,
+      "branch": "agent/discovery-journal",
+      "commit": "5e026624fa822dacff61c032eaaa1d2e4eba5f1e",
+      "title": "Entdeckungsbuch: Artenvergleich mit Wertsymbolen, Forschungsziele und Merkliste"
+    },
+    {
+      "pr": 20,
+      "branch": "agent/home-group",
+      "commit": "6ca5e484ea93870d4aab62bb0dec746846d00d0a",
+      "title": "Heimat und Nestgruppe: dauerhafte Begleiter mit Folgen, Warten und Heimkehren"
+    },
+    {
+      "pr": 21,
+      "branch": "agent/wildlife-ai",
+      "commit": "ccf49369713d2dc2dd3a152daa4072db4ff9fd1c",
+      "title": "Wildtier-KI: Sichtkontakt, Flucht, Herdenabstand und sichere lokale Bewegung"
+    },
+    {
+      "pr": 22,
+      "branch": "agent/galaxy-catalog",
+      "commit": "63fb400c4dec5a8a3490f1a5e6e5fa9e283ece72",
+      "title": "M1c: Galaxiekatalog und durchgehende Fernlandschaft"
+    },
+    {
+      "pr": 23,
+      "branch": "agent/species-development-path",
+      "commit": "1ac88eb2e1b90a307cb821048d2be46f1a8ac2dc",
+      "title": "Skilltree: eigene Phasenansichten und Entwicklung von Nestgruppe zu Stamm"
+    },
+    {
+      "pr": 24,
+      "branch": "agent/wildlife-foraging",
+      "commit": "d3b485d93968cb187b3fa616413e73bb292d36f9",
+      "title": "Wildtiere: gespeicherter Hunger, Nahrungssuche und gemeinsame Beerenvorräte"
+    },
+    {
+      "pr": 25,
+      "branch": "agent/tribal-age",
+      "commit": "bb2c237ab3fed52c5fff17beae9faf9a42f3594e",
+      "title": "Bestätigter Stammesbeginn: Gruppensteuerung, Dorf und erneuerbare Versorgung"
+    },
+    {
+      "pr": 26,
+      "branch": "agent/wildlife-drinking",
+      "commit": "b8c26960d9115a5466e6e531b4d94cb31e90a8dd",
+      "title": "Wildtierdurst: sichere Ufersuche, Trinken und gespeicherte Wasserversorgung"
+    },
+    {
+      "pr": 27,
+      "branch": "agent/planet-streaming-visits",
+      "commit": "1832ce4be564625e5d4a2ed9c657f5b195e492cc",
+      "title": "M1b/M1c: Planetenstreaming und gespeicherte Katalogbesuche"
+    }
+  ]
+}

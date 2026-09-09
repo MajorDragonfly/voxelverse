@@ -1,0 +1,36 @@
+{
+  "renderer": "gl_compatibility",
+  "screenshots": [
+    {
+      "file": "round_body.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "4a4180472c9318285b21f5125706150a9be4d14bc5efd7b4592b8c3f1d06e83e"
+    },
+    {
+      "file": "grazer_parts.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "04a5c674c5fb567d0158df2a37909027378400d6f08957ad72ec142895878827"
+    },
+    {
+      "file": "upright_paint.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "1fa9b8756087377e55da873817bd4f463eade95506211ac3d6a6d05879f6b804"
+    },
+    {
+      "file": "crawler_test.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "5890dcde6c18e6f23c88e18e7d1c26a1aa41b38208e5f0b4d0f602a86482b7bb"
+    }
+  ],
+  "runtime_errors": 0,
+  "source_commit": "f5c0a61555b7cf101b725d0216be44a8fa6d90f1",
+  "workflow_run": 34314073462,
+  "visually_reviewed": true,
+  "style": "fine_cubic_voxels",
+  "baseline": "art/review/creature_voxel_studio",
+  "native_godot_captures": true
+}

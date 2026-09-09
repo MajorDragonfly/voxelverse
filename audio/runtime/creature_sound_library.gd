@@ -1,0 +1,21 @@
+extends RefCounted
+const SOUNDS := {
+	&"creature_chirp_contact": [preload("res://audio/assets/creatures/chirp_contact_0.wav"), preload("res://audio/assets/creatures/chirp_contact_1.wav")],
+	&"creature_chirp_warn": [preload("res://audio/assets/creatures/chirp_warn_0.wav"), preload("res://audio/assets/creatures/chirp_warn_1.wav")],
+	&"creature_chirp_attack": [preload("res://audio/assets/creatures/chirp_attack_0.wav"), preload("res://audio/assets/creatures/chirp_attack_1.wav")],
+	&"creature_chirp_hurt": [preload("res://audio/assets/creatures/chirp_hurt_0.wav"), preload("res://audio/assets/creatures/chirp_hurt_1.wav")],
+	&"creature_chirp_death": [preload("res://audio/assets/creatures/chirp_death_0.wav"), preload("res://audio/assets/creatures/chirp_death_1.wav")],
+	&"creature_chirp_friend": [preload("res://audio/assets/creatures/chirp_friend_0.wav"), preload("res://audio/assets/creatures/chirp_friend_1.wav")],
+	&"creature_throat_contact": [preload("res://audio/assets/creatures/throat_contact_0.wav"), preload("res://audio/assets/creatures/throat_contact_1.wav")],
+	&"creature_throat_warn": [preload("res://audio/assets/creatures/throat_warn_0.wav"), preload("res://audio/assets/creatures/throat_warn_1.wav")],
+	&"creature_throat_attack": [preload("res://audio/assets/creatures/throat_attack_0.wav"), preload("res://audio/assets/creatures/throat_attack_1.wav")],
+	&"creature_throat_hurt": [preload("res://audio/assets/creatures/throat_hurt_0.wav"), preload("res://audio/assets/creatures/throat_hurt_1.wav")],
+	&"creature_throat_death": [preload("res://audio/assets/creatures/throat_death_0.wav"), preload("res://audio/assets/creatures/throat_death_1.wav")],
+	&"creature_throat_friend": [preload("res://audio/assets/creatures/throat_friend_0.wav"), preload("res://audio/assets/creatures/throat_friend_1.wav")],
+	&"creature_rasp_contact": [preload("res://audio/assets/creatures/rasp_contact_0.wav"), preload("res://audio/assets/creatures/rasp_contact_1.wav")],
+	&"creature_rasp_warn": [preload("res://audio/assets/creatures/rasp_warn_0.wav"), preload("res://audio/assets/creatures/rasp_warn_1.wav")],
+	&"creature_rasp_attack": [preload("res://audio/assets/creatures/rasp_attack_0.wav"), preload("res://audio/assets/creatures/rasp_attack_1.wav")],
+	&"creature_rasp_hurt": [preload("res://audio/assets/creatures/rasp_hurt_0.wav"), preload("res://audio/assets/creatures/rasp_hurt_1.wav")],
+	&"creature_rasp_death": [preload("res://audio/assets/creatures/rasp_death_0.wav"), preload("res://audio/assets/creatures/rasp_death_1.wav")],
+	&"creature_rasp_friend": [preload("res://audio/assets/creatures/rasp_friend_0.wav"), preload("res://audio/assets/creatures/rasp_friend_1.wav")],
+}

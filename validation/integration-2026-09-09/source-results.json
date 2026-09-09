@@ -1,0 +1,646 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "coverage": "Initial combined run plus audio discovery and targeted corrected reruns; not a single all-green initial run. Runtime-only final change makes audio shutdown wall-clock based; rechecked in packaged tests.",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.612,
+      "run": "isolated"
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.634,
+      "run": "isolated"
+    },
+    {
+      "name": "adaptive_planet_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.996,
+      "run": "isolated"
+    },
+    {
+      "name": "asset_pipeline_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.519,
+      "run": "isolated"
+    },
+    {
+      "name": "behavior_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.265,
+      "run": "isolated"
+    },
+    {
+      "name": "behavior_skill_tree_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.512,
+      "run": "fixes"
+    },
+    {
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.543,
+      "run": "isolated"
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.791,
+      "run": "isolated"
+    },
+    {
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.895,
+      "run": "isolated"
+    },
+    {
+      "name": "creature_editor_v7_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.927,
+      "run": "isolated"
+    },
+    {
+      "name": "creature_joint_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.324,
+      "run": "isolated"
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.274,
+      "run": "isolated"
+    },
+    {
+      "name": "creature_scan_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.642,
+      "run": "isolated"
+    },
+    {
+      "name": "creature_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.473,
+      "run": "isolated"
+    },
+    {
+      "name": "creature_v5_smoke_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.449,
+      "run": "isolated"
+    },
+    {
+      "name": "development_path_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.383,
+      "run": "isolated"
+    },
+    {
+      "name": "discovery_journal_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.848,
+      "run": "isolated"
+    },
+    {
+      "name": "distant_forest_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.827,
+      "run": "isolated"
+    },
+    {
+      "name": "drainage_network_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.589,
+      "run": "isolated"
+    },
+    {
+      "name": "environment_cluster_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.482,
+      "run": "isolated"
+    },
+    {
+      "name": "environment_playtest_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.081,
+      "run": "isolated"
+    },
+    {
+      "name": "environment_production_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.049,
+      "run": "isolated"
+    },
+    {
+      "name": "frontend_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.26,
+      "run": "isolated"
+    },
+    {
+      "name": "galaxy_catalog_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.642,
+      "run": "isolated"
+    },
+    {
+      "name": "galaxy_visits_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.932,
+      "run": "isolated"
+    },
+    {
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.458,
+      "run": "isolated"
+    },
+    {
+      "name": "home_group_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.884,
+      "run": "isolated"
+    },
+    {
+      "name": "home_group_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.798,
+      "run": "isolated"
+    },
+    {
+      "name": "input_preferences_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.845,
+      "run": "isolated"
+    },
+    {
+      "name": "large_planet_geometry_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 31.746,
+      "run": "isolated"
+    },
+    {
+      "name": "large_planet_lab_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.387,
+      "run": "isolated"
+    },
+    {
+      "name": "large_planet_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 47.147,
+      "run": "isolated"
+    },
+    {
+      "name": "menu_input_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 24.95,
+      "run": "isolated"
+    },
+    {
+      "name": "meta_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.235,
+      "run": "isolated"
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.894,
+      "run": "isolated"
+    },
+    {
+      "name": "onboarding_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.519,
+      "run": "isolated"
+    },
+    {
+      "name": "planet_diversity_v9_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.525,
+      "run": "isolated"
+    },
+    {
+      "name": "planet_generation_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.201,
+      "run": "isolated"
+    },
+    {
+      "name": "planet_scale_migration_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.245,
+      "run": "isolated"
+    },
+    {
+      "name": "planet_sphere_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.546,
+      "run": "isolated"
+    },
+    {
+      "name": "planet_sphere_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 45.535,
+      "run": "isolated"
+    },
+    {
+      "name": "planet_streaming_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.646,
+      "run": "isolated"
+    },
+    {
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 20.746,
+      "run": "isolated"
+    },
+    {
+      "name": "research_goals_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.384,
+      "run": "isolated"
+    },
+    {
+      "name": "runtime_geometry_batch_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.89,
+      "run": "isolated"
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.627,
+      "run": "isolated"
+    },
+    {
+      "name": "species_comparison_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.166,
+      "run": "isolated"
+    },
+    {
+      "name": "terrain_transition_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.201,
+      "run": "isolated"
+    },
+    {
+      "name": "tribal_age_supply_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.795,
+      "run": "fixes"
+    },
+    {
+      "name": "tribal_age_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 37.276,
+      "run": "isolated"
+    },
+    {
+      "name": "tribal_age_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 32.853,
+      "run": "isolated"
+    },
+    {
+      "name": "underwater_view_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.719,
+      "run": "isolated"
+    },
+    {
+      "name": "water_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.641,
+      "run": "isolated"
+    },
+    {
+      "name": "water_depth_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.661,
+      "run": "isolated"
+    },
+    {
+      "name": "wildlife_ai_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 16.57,
+      "run": "fixes"
+    },
+    {
+      "name": "wildlife_ai_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.322,
+      "run": "isolated"
+    },
+    {
+      "name": "wildlife_drinking_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.55,
+      "run": "fixes"
+    },
+    {
+      "name": "wildlife_drinking_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.213,
+      "run": "isolated"
+    },
+    {
+      "name": "wildlife_foraging_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.776,
+      "run": "fixes"
+    },
+    {
+      "name": "wildlife_foraging_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.777,
+      "run": "isolated"
+    },
+    {
+      "name": "world_evolution_v2_ci_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.921,
+      "run": "isolated"
+    },
+    {
+      "name": "world_layered_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.17,
+      "run": "isolated"
+    },
+    {
+      "name": "world_runtime_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.55,
+      "run": "isolated"
+    },
+    {
+      "name": "planet_lab_entry",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.643,
+      "run": "runtime-final"
+    },
+    {
+      "name": "main_shutdown_45",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.797,
+      "run": "runtime-final"
+    },
+    {
+      "name": "main_shutdown_150",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.287,
+      "run": "runtime-final"
+    },
+    {
+      "name": "main",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.289,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_15838_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.734,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_15838_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.439,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_15838_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.126,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_15838_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.181,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_15838_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.348,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_15838_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.166,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_63352_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.418,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_63352_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.549,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_63352_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.243,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_63352_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.229,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_63352_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.077,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_63352_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.003,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_23757_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.338,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_23757_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.64,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_23757_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.914,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_23757_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.24,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_23757_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.234,
+      "run": "runtime-final"
+    },
+    {
+      "name": "shutdown_23757_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.63,
+      "run": "runtime-final"
+    },
+    {
+      "name": "streaming_cpu",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.548,
+      "run": "runtime-final"
+    },
+    {
+      "name": "audio/audio_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.092,
+      "run": "audio"
+    },
+    {
+      "name": "audio/creature_audio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.216,
+      "run": "fixes"
+    },
+    {
+      "name": "audio/music_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.764,
+      "run": "audio"
+    },
+    {
+      "name": "audio/audio_expansion_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 31.995,
+      "run": "audio"
+    },
+    {
+      "name": "audio/interface_audio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.828,
+      "run": "fixes"
+    }
+  ],
+  "passed": true,
+  "checks_count": 91,
+  "test_scripts_count": 66
+}

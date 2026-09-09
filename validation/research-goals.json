@@ -1,0 +1,229 @@
+{
+  "date": "2026-09-09",
+  "runtime_commit_local": "325a55aef06121fd4cbb1a46bf02eb107fbd6968",
+  "base_published_commit": "73583c0419aa625dbae32af619f11e0ae112ccb4",
+  "pull_request": 19,
+  "feature_contract": {
+    "goals": 5,
+    "pinned_targets": 1,
+    "wishlist_limit": 32,
+    "progress_source": "Existing discovered_species, discovered_regions and unlocked_parts",
+    "saved_choices": "Optional progression.research version 1",
+    "write_behavior": "Immediate whole-campaign save; rollback on failure",
+    "extra_rewards": false
+  },
+  "functional": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "research_goals_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.646
+      },
+      {
+        "name": "discovery_journal_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.734
+      },
+      {
+        "name": "behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.846
+      },
+      {
+        "name": "behavior_progression_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.015
+      },
+      {
+        "name": "campaign_foundation_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.2
+      },
+      {
+        "name": "meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.708
+      }
+    ]
+  },
+  "import_and_sources": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.797
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.226
+    }
+  ],
+  "linux_export": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "platform": "linux",
+    "checks": [
+      {
+        "name": "release_export",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.428
+      },
+      {
+        "name": "packaged_main",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.867
+      },
+      {
+        "name": "packaged_planet_lab",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.464
+      },
+      {
+        "name": "packaged_creature_builder_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.428
+      },
+      {
+        "name": "packaged_modular_assembly_framework_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.426
+      },
+      {
+        "name": "packaged_gameplay_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.61
+      },
+      {
+        "name": "packaged_meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.823
+      },
+      {
+        "name": "packaged_planet_sphere_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.31
+      },
+      {
+        "name": "packaged_behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.76
+      },
+      {
+        "name": "packaged_research_goals_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.545
+      },
+      {
+        "name": "packaged_planet_15838",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 10.39
+      },
+      {
+        "name": "packaged_planet_63352",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.962
+      },
+      {
+        "name": "packaged_planet_23757",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.057
+      }
+    ],
+    "probes": [
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "failures": [],
+        "flora_color_family": "verdant",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 80,
+        "loaded_meshes": 63,
+        "passed": true,
+        "planet_transition": "A-B-A",
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 15838,
+        "user_data_dir": "/tmp/voxelverse-export-o2d2718d/seed-15838/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "failures": [],
+        "flora_color_family": "autumn",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 19,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 63352,
+        "user_data_dir": "/tmp/voxelverse-export-o2d2718d/seed-63352/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "failures": [],
+        "flora_color_family": "violet",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 130,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 23757,
+        "user_data_dir": "/tmp/voxelverse-export-o2d2718d/seed-23757/xdg_data_home/godot/app_userdata/Voxelverse"
+      }
+    ],
+    "archive": {
+      "name": "voxelverse-linux-x86_64.zip",
+      "bytes": 31342216,
+      "sha256": "1670163c3ae518c90fd32230882485125e2880133196a6a4bab4fd1445b25f5a"
+    },
+    "passed": true
+  },
+  "graphics": {
+    "renderer": "gl_compatibility",
+    "device": "Mesa llvmpipe",
+    "research_passed": true,
+    "research_captures": [
+      "goals.png",
+      "pinned.png",
+      "wishlist.png",
+      "compact.png"
+    ],
+    "journal_regression_passed": true,
+    "journal_captures": [
+      "species.png",
+      "parts.png",
+      "regions.png",
+      "guide.png",
+      "compact.png"
+    ],
+    "visual_review": "All four research captures inspected; prior journal layouts retained"
+  },
+  "open_checks": [
+    "Current research commit Windows and Forward+ CI",
+    "Manual target-PC playtest"
+  ]
+}

@@ -102,9 +102,17 @@ static func apply_symmetry(
 		PartLibrary.CATEGORY_LEGS,
 		PartLibrary.CATEGORY_ARMS,
 		PartLibrary.CATEGORY_HORNS,
+		PartLibrary.CATEGORY_SPIKES,
+		PartLibrary.CATEGORY_PLATES,
 		PartLibrary.CATEGORY_DECOR,
 	]
 	placement["mirrored"] = enabled and supports_pair
+	if enabled and supports_pair:
+		placement["center_locked"] = false
+		if absf(float(placement.get("anchor_side", 0.0))) < 0.02:
+			placement["anchor_side"] = 0.42
+			placement["manual_offset"] = Vector3.ZERO
+			Anatomy.rebind_part(blueprint, part_index)
 	parts[part_index] = placement
 	blueprint["parts"] = parts
 	return supports_pair

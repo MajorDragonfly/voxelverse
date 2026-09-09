@@ -1,0 +1,5 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Shared water geometry: 37249 vertices, 73728 triangles; interior open edges 0
+Surface streaming seed: 15838
+Water continuity: closed interior mesh edges, world style, settings, atomic ownership, partial overlap, teleport, teardown and recenter hysteresis.

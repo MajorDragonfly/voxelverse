@@ -1,0 +1,282 @@
+{
+  "code_commit": "7a1d1ba35b7340bdb4e505a0b1b360e93928196f",
+  "godot": "4.6.3",
+  "local_functional": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.636
+      },
+      {
+        "name": "behavior_progression_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.705
+      }
+    ]
+  },
+  "gui": {
+    "passed": true,
+    "renderer": "gl_compatibility",
+    "exit_code": 0,
+    "captures": [
+      {
+        "file": "skilltree_empty.png",
+        "dimensions": [
+          1600,
+          900
+        ],
+        "passed": true
+      },
+      {
+        "file": "skilltree_available.png",
+        "dimensions": [
+          1600,
+          900
+        ],
+        "passed": true
+      },
+      {
+        "file": "skilltree_1600x900.png",
+        "dimensions": [
+          1600,
+          900
+        ],
+        "passed": true
+      },
+      {
+        "file": "skilltree_1280x720.png",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "passed": true
+      },
+      {
+        "file": "skilltree_800x900.png",
+        "dimensions": [
+          800,
+          900
+        ],
+        "passed": true
+      },
+      {
+        "file": "journal.png",
+        "dimensions": [
+          1600,
+          900
+        ],
+        "passed": true
+      }
+    ]
+  },
+  "gui_run": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34318068001",
+  "integration": {
+    "creature_commit": "e17f40c6e06fc83d8ca7d9dbc710df4273c05d02",
+    "planet_commit": "59b232897baf6d88f87eb7a437c527c31429d7dd",
+    "checks": {
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "checks": [
+        {
+          "name": "import",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 5.188
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.924
+        },
+        {
+          "name": "behavior_skill_tree_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.824
+        },
+        {
+          "name": "behavior_progression_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.703
+        },
+        {
+          "name": "menu_input_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 17.848
+        },
+        {
+          "name": "creature_studio_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.921
+        },
+        {
+          "name": "campaign_foundation_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.993
+        },
+        {
+          "name": "meta_runtime_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.797
+        }
+      ]
+    },
+    "final_checks": {
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "checks": [
+        {
+          "name": "behavior_skill_tree_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.95
+        },
+        {
+          "name": "menu_input_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 18.318
+        }
+      ]
+    }
+  },
+  "local_linux_export": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "platform": "linux",
+    "checks": [
+      {
+        "name": "release_export",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.999
+      },
+      {
+        "name": "packaged_main",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.768
+      },
+      {
+        "name": "packaged_planet_lab",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.556
+      },
+      {
+        "name": "packaged_creature_builder_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.447
+      },
+      {
+        "name": "packaged_modular_assembly_framework_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.43
+      },
+      {
+        "name": "packaged_gameplay_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.615
+      },
+      {
+        "name": "packaged_meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.523
+      },
+      {
+        "name": "packaged_planet_sphere_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.188
+      },
+      {
+        "name": "packaged_behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.551
+      },
+      {
+        "name": "packaged_planet_15838",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 11.442
+      },
+      {
+        "name": "packaged_planet_63352",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.251
+      },
+      {
+        "name": "packaged_planet_23757",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.727
+      }
+    ],
+    "probes": [
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "verdant",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 80,
+        "loaded_meshes": 63,
+        "passed": true,
+        "planet_transition": "A-B-A",
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 15838,
+        "user_data_dir": "/tmp/voxelverse-export-79csafgx/seed-15838/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "autumn",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 19,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 63352,
+        "user_data_dir": "/tmp/voxelverse-export-79csafgx/seed-63352/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "violet",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 130,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 23757,
+        "user_data_dir": "/tmp/voxelverse-export-79csafgx/seed-23757/xdg_data_home/godot/app_userdata/Voxelverse"
+      }
+    ],
+    "archive": {
+      "name": "voxelverse-linux-x86_64.zip",
+      "bytes": 31303026,
+      "sha256": "aa2d081b38675338e1729a251ceb94f5a400420571f4f1921661be8383bda2e1"
+    },
+    "passed": true
+  },
+  "desktop_ci_run": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34318068005",
+  "scope": "UI package; rewards and effect consumers remain unconnected. Native release startup plus editor instrumentation of the release PCK. Graphical UI on Linux Compatibility. No target-PC performance claim."
+}

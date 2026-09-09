@@ -1,0 +1,225 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "platform": "linux",
+  "checks": [
+    {
+      "name": "release_export",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.808
+    },
+    {
+      "name": "packaged_main",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.807
+    },
+    {
+      "name": "packaged_planet_lab",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.908
+    },
+    {
+      "name": "packaged_menu_input",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.41
+    },
+    {
+      "name": "packaged_frontend",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 16.535
+    },
+    {
+      "name": "packaged_creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.718
+    },
+    {
+      "name": "packaged_modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.711
+    },
+    {
+      "name": "packaged_gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.374
+    },
+    {
+      "name": "packaged_meta_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.195
+    },
+    {
+      "name": "packaged_planet_sphere_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.359
+    },
+    {
+      "name": "packaged_behavior_skill_tree_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.126
+    },
+    {
+      "name": "packaged_creature_behavior_gameplay_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.845
+    },
+    {
+      "name": "packaged_development_path_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.31
+    },
+    {
+      "name": "packaged_tribal_age_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.107
+    },
+    {
+      "name": "packaged_tribal_age_supply_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.536
+    },
+    {
+      "name": "packaged_tribal_age_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 31.995
+    },
+    {
+      "name": "packaged_tribal_cold_restart",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.823
+    },
+    {
+      "name": "packaged_creature_parts_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.778
+    },
+    {
+      "name": "packaged_creature_joint_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.319
+    },
+    {
+      "name": "packaged_research_goals_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.117
+    },
+    {
+      "name": "packaged_species_comparison_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.298
+    },
+    {
+      "name": "packaged_input_preferences_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.436
+    },
+    {
+      "name": "packaged_save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.534
+    },
+    {
+      "name": "packaged_onboarding_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.428
+    },
+    {
+      "name": "packaged_creature_scan_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.365
+    },
+    {
+      "name": "packaged_planet_15838",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.863
+    },
+    {
+      "name": "packaged_planet_63352",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.409
+    },
+    {
+      "name": "packaged_planet_23757",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.047
+    }
+  ],
+  "probes": [
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "/tmp/voxelverse-export-zdbsjcbq/instrument/Godot_v4.6.3-stable_linux.x86_64",
+      "failures": [],
+      "flora_color_family": "verdant",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 80,
+      "loaded_meshes": 63,
+      "passed": true,
+      "planet_transition": "A-B-A",
+      "platform": "Linux",
+      "save_round_trip": true,
+      "seed": 15838,
+      "user_data_dir": "/tmp/voxelverse-export-zdbsjcbq/seed-15838/xdg_data_home/godot/app_userdata/Voxelverse"
+    },
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "/tmp/voxelverse-export-zdbsjcbq/instrument/Godot_v4.6.3-stable_linux.x86_64",
+      "failures": [],
+      "flora_color_family": "autumn",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 19,
+      "loaded_meshes": 63,
+      "passed": true,
+      "platform": "Linux",
+      "save_round_trip": true,
+      "seed": 63352,
+      "user_data_dir": "/tmp/voxelverse-export-zdbsjcbq/seed-63352/xdg_data_home/godot/app_userdata/Voxelverse"
+    },
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "/tmp/voxelverse-export-zdbsjcbq/instrument/Godot_v4.6.3-stable_linux.x86_64",
+      "failures": [],
+      "flora_color_family": "violet",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 130,
+      "loaded_meshes": 63,
+      "passed": true,
+      "platform": "Linux",
+      "save_round_trip": true,
+      "seed": 23757,
+      "user_data_dir": "/tmp/voxelverse-export-zdbsjcbq/seed-23757/xdg_data_home/godot/app_userdata/Voxelverse"
+    }
+  ],
+  "archive": {
+    "name": "voxelverse-linux-x86_64.zip",
+    "bytes": 33775926,
+    "sha256": "063492f2cf2c928b6e313eb74bdf38e5c470c3cd11054446feedcea6fa7101bf"
+  },
+  "passed": true
+}

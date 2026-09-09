@@ -1,0 +1,1224 @@
+{
+  "baseline_commit": "63fb400c4dec5a8a3490f1a5e6e5fa9e283ece72",
+  "measured_commit": "5cd690cdf117905c81932ce375c5885d6aeef5e3",
+  "matching_streaming_commit": "3062ad4f9a48c74de481d6b44baf9bfc7a28617b",
+  "method": "Three sequential alternating baseline/current runs; same 167m cube-boundary route at desired 24m/s with actual Godot physics. No simultaneous benchmark runs. Wait seconds = waiting_frames / 60. Each run keeps all existing physics and budget assertions.",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "reported_cpu_count": 9,
+  "cpu_quota": "800000 100000",
+  "target_hardware_acceptance": false,
+  "command": "python3 tools/validate_godot.py --godot <Godot 4.6.3> --tests large_planet_runtime_test --skip-import --skip-main --output <isolated output directory>",
+  "source_sha256": {
+    "world/planet_lab/adaptive_sphere_tiles.gd": "671b97d208a4196fac4133ff0c17b8c8bb15b0c4c38520fe04fcce851164d533",
+    "world/planet_lab/planet_patch_job.gd": "83533f00a635acbf1c2bb9ad63cb03267398dac0f70e65c8f9e63cdd598fba02",
+    "world/planet_lab/planet_mesh_batch.gd": "f485f406b7ebe86a88e55bbc012e65f63d6c31302b7700c1cfe80459c3846c0e",
+    "world/planet_lab/planet_patch_mesh.gd": "f06faee86165a142897d9039091a01545a43b7c24683510e8448281cbbbd971e",
+    "world/planet_lab/planet_transition.gdshaderinc": "3ff414b1fb3c45d4e3e6111e46e57556f790af4f0817d8557a6135e1c2125cf6",
+    "world/planet_lab/radial_walker.gd": "2a7cfa51b318af07d355204fa208a1fe990106cf781f838de2ee3822140ed009",
+    "tests/large_planet_runtime_test.gd": "fac3c1a538a08ccc6be8abf391a33decb11338732674d895cbe5405525aab376"
+  },
+  "summary": {
+    "m1b:terra": {
+      "baseline": {
+        "waiting_frames": {
+          "median": 320,
+          "min": 317,
+          "max": 352
+        },
+        "terrain_ready_ms": {
+          "median": 4396.218,
+          "min": 4315.085,
+          "max": 4566.269
+        },
+        "max_publish_ms": {
+          "median": 25.034,
+          "min": 21.822,
+          "max": 27.289
+        },
+        "max_upload_ms": {
+          "median": 2.37,
+          "min": 1.854,
+          "max": 2.384
+        },
+        "max_worker_ms": {
+          "median": 4333.973,
+          "min": 4276.835,
+          "max": 4465.195
+        },
+        "peak_resident_terrain_meshes": {
+          "median": 1000,
+          "min": 1000,
+          "max": 1028
+        }
+      },
+      "current": {
+        "waiting_frames": {
+          "median": 178,
+          "min": 150,
+          "max": 261
+        },
+        "terrain_ready_ms": {
+          "median": 2491.366,
+          "min": 2476.264,
+          "max": 2913.66
+        },
+        "max_publish_ms": {
+          "median": 12.709,
+          "min": 12.207,
+          "max": 12.983
+        },
+        "max_upload_ms": {
+          "median": 3.965,
+          "min": 3.297,
+          "max": 7.858
+        },
+        "max_worker_ms": {
+          "median": 2789.5,
+          "min": 2597.25,
+          "max": 3130.781
+        },
+        "peak_resident_terrain_meshes": {
+          "median": 1172,
+          "min": 1172,
+          "max": 1182
+        }
+      }
+    },
+    "m1b:100": {
+      "baseline": {
+        "waiting_frames": {
+          "median": 126,
+          "min": 121,
+          "max": 128
+        },
+        "terrain_ready_ms": {
+          "median": 3189.087,
+          "min": 2936.939,
+          "max": 3396.872
+        },
+        "max_publish_ms": {
+          "median": 28.842,
+          "min": 19.134,
+          "max": 34.968
+        },
+        "max_upload_ms": {
+          "median": 1.78,
+          "min": 1.261,
+          "max": 27.053
+        },
+        "max_worker_ms": {
+          "median": 3065.653,
+          "min": 2890.672,
+          "max": 3310.319
+        },
+        "peak_resident_terrain_meshes": {
+          "median": 578,
+          "min": 578,
+          "max": 578
+        }
+      },
+      "current": {
+        "waiting_frames": {
+          "median": 26,
+          "min": 0,
+          "max": 68
+        },
+        "terrain_ready_ms": {
+          "median": 1641.839,
+          "min": 1580.707,
+          "max": 1665.192
+        },
+        "max_publish_ms": {
+          "median": 10.968,
+          "min": 10.428,
+          "max": 20.155
+        },
+        "max_upload_ms": {
+          "median": 2.254,
+          "min": 1.942,
+          "max": 42.701
+        },
+        "max_worker_ms": {
+          "median": 1526.12,
+          "min": 1517.939,
+          "max": 1826.953
+        },
+        "peak_resident_terrain_meshes": {
+          "median": 779,
+          "min": 779,
+          "max": 779
+        }
+      }
+    },
+    "m1b:1000": {
+      "baseline": {
+        "waiting_frames": {
+          "median": 113,
+          "min": 104,
+          "max": 127
+        },
+        "terrain_ready_ms": {
+          "median": 3398.04,
+          "min": 3192.308,
+          "max": 3486.157
+        },
+        "max_publish_ms": {
+          "median": 19.372,
+          "min": 18.49,
+          "max": 30.314
+        },
+        "max_upload_ms": {
+          "median": 1.907,
+          "min": 0.694,
+          "max": 17.327
+        },
+        "max_worker_ms": {
+          "median": 3333.931,
+          "min": 3137.667,
+          "max": 3375.016
+        },
+        "peak_resident_terrain_meshes": {
+          "median": 710,
+          "min": 710,
+          "max": 710
+        }
+      },
+      "current": {
+        "waiting_frames": {
+          "median": 10,
+          "min": 7,
+          "max": 105
+        },
+        "terrain_ready_ms": {
+          "median": 2343.55,
+          "min": 2292.725,
+          "max": 2363.978
+        },
+        "max_publish_ms": {
+          "median": 12.505,
+          "min": 12.376,
+          "max": 15.193
+        },
+        "max_upload_ms": {
+          "median": 19.033,
+          "min": 2.865,
+          "max": 51.815
+        },
+        "max_worker_ms": {
+          "median": 2228.587,
+          "min": 2102.197,
+          "max": 2300.569
+        },
+        "peak_resident_terrain_meshes": {
+          "median": 893,
+          "min": 887,
+          "max": 910
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "variant": "baseline",
+      "repeat": 1,
+      "body": "m1b:terra",
+      "contacts": 769,
+      "faces": 2,
+      "frames": 770,
+      "initial_publish_ms": 19.996,
+      "jobs": [
+        {
+          "tiles": 489,
+          "uploads": 489,
+          "worker_ms": 4239.328
+        },
+        {
+          "tiles": 579,
+          "uploads": 262,
+          "worker_ms": 2700.646
+        },
+        {
+          "tiles": 513,
+          "uploads": 449,
+          "worker_ms": 4333.973
+        },
+        {
+          "tiles": 495,
+          "uploads": 14,
+          "worker_ms": 624.515
+        },
+        {
+          "tiles": 519,
+          "uploads": 42,
+          "worker_ms": 1074.531
+        }
+      ],
+      "max_publish_ms": 25.034,
+      "max_upload_ms": 2.384,
+      "max_worker_ms": 4333.973,
+      "maximum_cell_width_m": 3.03792953491211,
+      "minimum_clearance_m": 1.00030125440298,
+      "peak_engine_static_bytes": 98551172,
+      "peak_resident_terrain_meshes": 1028,
+      "peak_tiles": 579,
+      "publish_deferrals": 0,
+      "publishes": 5,
+      "rays": 1952,
+      "rebases": 3,
+      "simulated_seconds": 12.8333333333333,
+      "terrain_ready_ms": 4315.085,
+      "waiting_frames": 352,
+      "walk_m": 167.119948506355
+    },
+    {
+      "variant": "baseline",
+      "repeat": 1,
+      "body": "m1b:100",
+      "contacts": 545,
+      "faces": 2,
+      "frames": 546,
+      "initial_publish_ms": 17.802,
+      "jobs": [
+        {
+          "tiles": 321,
+          "uploads": 321,
+          "worker_ms": 2890.672
+        },
+        {
+          "tiles": 369,
+          "uploads": 164,
+          "worker_ms": 1670.952
+        },
+        {
+          "tiles": 369,
+          "uploads": 209,
+          "worker_ms": 2205.948
+        },
+        {
+          "tiles": 345,
+          "uploads": 154,
+          "worker_ms": 1942.889
+        }
+      ],
+      "max_publish_ms": 34.968,
+      "max_upload_ms": 27.053,
+      "max_worker_ms": 2890.672,
+      "maximum_cell_width_m": 3.0517578125,
+      "minimum_clearance_m": 1.00015985416701,
+      "peak_engine_static_bytes": 89372724,
+      "peak_resident_terrain_meshes": 578,
+      "peak_tiles": 369,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1420,
+      "rebases": 3,
+      "simulated_seconds": 9.1,
+      "terrain_ready_ms": 2936.939,
+      "waiting_frames": 128,
+      "walk_m": 167.359359145164
+    },
+    {
+      "variant": "baseline",
+      "repeat": 1,
+      "body": "m1b:1000",
+      "contacts": 522,
+      "faces": 2,
+      "frames": 523,
+      "initial_publish_ms": 19.253,
+      "jobs": [
+        {
+          "tiles": 375,
+          "uploads": 375,
+          "worker_ms": 3137.667
+        },
+        {
+          "tiles": 459,
+          "uploads": 192,
+          "worker_ms": 1870.89
+        },
+        {
+          "tiles": 459,
+          "uploads": 251,
+          "worker_ms": 2487.294
+        },
+        {
+          "tiles": 393,
+          "uploads": 140,
+          "worker_ms": 1610.686
+        }
+      ],
+      "max_publish_ms": 18.49,
+      "max_upload_ms": 0.694,
+      "max_worker_ms": 3137.667,
+      "maximum_cell_width_m": 3.814697265625,
+      "minimum_clearance_m": 0.999741657362165,
+      "peak_engine_static_bytes": 93636980,
+      "peak_resident_terrain_meshes": 710,
+      "peak_tiles": 459,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1341,
+      "rebases": 3,
+      "simulated_seconds": 8.71666666666667,
+      "terrain_ready_ms": 3192.308,
+      "waiting_frames": 104,
+      "walk_m": 167.276494294405
+    },
+    {
+      "variant": "current",
+      "repeat": 1,
+      "body": "m1b:terra",
+      "cache_hits": 0,
+      "contacts": 595,
+      "faces": 2,
+      "frames": 596,
+      "initial_publish_ms": 10.707,
+      "jobs": [
+        {
+          "mesh_ms": 1926.831,
+          "selection_ms": 434.093,
+          "tiles": 489,
+          "uploads": 489,
+          "worker_ms": 2361.019,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 990.685,
+          "selection_ms": 494.81,
+          "tiles": 579,
+          "uploads": 262,
+          "worker_ms": 1492.827,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 2157.016,
+          "selection_ms": 436.339,
+          "tiles": 489,
+          "uploads": 421,
+          "worker_ms": 2597.25,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 606.199,
+          "selection_ms": 433.838,
+          "tiles": 495,
+          "uploads": 66,
+          "worker_ms": 1046.608,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 7.2,
+      "max_publish_ms": 12.207,
+      "max_upload_ms": 7.858,
+      "max_worker_ms": 2597.25,
+      "maximum_cell_width_m": 3.03792953491211,
+      "minimum_clearance_m": 1.00030125440298,
+      "peak_engine_static_bytes": 101455491,
+      "peak_resident_terrain_meshes": 1172,
+      "peak_tiles": 579,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1499,
+      "rebases": 3,
+      "simulated_seconds": 9.93333333333333,
+      "terrain_ready_ms": 2476.264,
+      "waiting_frames": 178,
+      "walk_m": 167.121817916632
+    },
+    {
+      "variant": "current",
+      "repeat": 1,
+      "body": "m1b:100",
+      "cache_hits": 0,
+      "contacts": 417,
+      "faces": 2,
+      "frames": 418,
+      "initial_publish_ms": 9.492,
+      "jobs": [
+        {
+          "mesh_ms": 1385.043,
+          "selection_ms": 140.979,
+          "tiles": 321,
+          "uploads": 321,
+          "worker_ms": 1526.12,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 884.03,
+          "selection_ms": 155.736,
+          "tiles": 369,
+          "uploads": 164,
+          "worker_ms": 1041.828,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 945.436,
+          "selection_ms": 154.134,
+          "tiles": 369,
+          "uploads": 209,
+          "worker_ms": 1103.208,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 949.789,
+          "selection_ms": 138.253,
+          "tiles": 327,
+          "uploads": 154,
+          "worker_ms": 1093.661,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 1.018,
+      "max_publish_ms": 10.968,
+      "max_upload_ms": 2.254,
+      "max_worker_ms": 1526.12,
+      "maximum_cell_width_m": 3.0517578125,
+      "minimum_clearance_m": 1.00015958903469,
+      "peak_engine_static_bytes": 98109323,
+      "peak_resident_terrain_meshes": 779,
+      "peak_tiles": 369,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1048,
+      "rebases": 3,
+      "simulated_seconds": 6.96666666666667,
+      "terrain_ready_ms": 1580.707,
+      "waiting_frames": 0,
+      "walk_m": 167.360657662153
+    },
+    {
+      "variant": "current",
+      "repeat": 1,
+      "body": "m1b:1000",
+      "cache_hits": 0,
+      "contacts": 428,
+      "faces": 2,
+      "frames": 429,
+      "initial_publish_ms": 10.265,
+      "jobs": [
+        {
+          "mesh_ms": 2091.116,
+          "selection_ms": 209.369,
+          "tiles": 375,
+          "uploads": 375,
+          "worker_ms": 2300.569,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 992.98,
+          "selection_ms": 254.801,
+          "tiles": 441,
+          "uploads": 212,
+          "worker_ms": 1254.814,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1041.953,
+          "selection_ms": 268.176,
+          "tiles": 459,
+          "uploads": 247,
+          "worker_ms": 1316.968,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1421.432,
+          "selection_ms": 247.111,
+          "tiles": 399,
+          "uploads": 178,
+          "worker_ms": 1669.745,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 0.592,
+      "max_publish_ms": 12.376,
+      "max_upload_ms": 2.865,
+      "max_worker_ms": 2300.569,
+      "maximum_cell_width_m": 3.814697265625,
+      "minimum_clearance_m": 0.99974978669286,
+      "peak_engine_static_bytes": 101477035,
+      "peak_resident_terrain_meshes": 887,
+      "peak_tiles": 459,
+      "publish_deferrals": 0,
+      "publishes": 3,
+      "rays": 1117,
+      "rebases": 3,
+      "simulated_seconds": 7.15,
+      "terrain_ready_ms": 2363.978,
+      "waiting_frames": 10,
+      "walk_m": 167.234116405249
+    },
+    {
+      "variant": "baseline",
+      "repeat": 2,
+      "body": "m1b:terra",
+      "contacts": 737,
+      "faces": 2,
+      "frames": 738,
+      "initial_publish_ms": 29.928,
+      "jobs": [
+        {
+          "tiles": 489,
+          "uploads": 489,
+          "worker_ms": 4276.835
+        },
+        {
+          "tiles": 579,
+          "uploads": 262,
+          "worker_ms": 2663.849
+        },
+        {
+          "tiles": 489,
+          "uploads": 421,
+          "worker_ms": 3932.062
+        },
+        {
+          "tiles": 495,
+          "uploads": 66,
+          "worker_ms": 1476.845
+        }
+      ],
+      "max_publish_ms": 27.289,
+      "max_upload_ms": 2.37,
+      "max_worker_ms": 4276.835,
+      "maximum_cell_width_m": 3.03792953491211,
+      "minimum_clearance_m": 1.00030125440298,
+      "peak_engine_static_bytes": 96037064,
+      "peak_resident_terrain_meshes": 1000,
+      "peak_tiles": 579,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1871,
+      "rebases": 3,
+      "simulated_seconds": 12.3,
+      "terrain_ready_ms": 4396.218,
+      "waiting_frames": 320,
+      "walk_m": 167.119941949844
+    },
+    {
+      "variant": "baseline",
+      "repeat": 2,
+      "body": "m1b:100",
+      "contacts": 543,
+      "faces": 2,
+      "frames": 544,
+      "initial_publish_ms": 26.194,
+      "jobs": [
+        {
+          "tiles": 321,
+          "uploads": 321,
+          "worker_ms": 3065.653
+        },
+        {
+          "tiles": 369,
+          "uploads": 164,
+          "worker_ms": 1752.396
+        },
+        {
+          "tiles": 369,
+          "uploads": 209,
+          "worker_ms": 2154.918
+        },
+        {
+          "tiles": 345,
+          "uploads": 154,
+          "worker_ms": 2043.621
+        }
+      ],
+      "max_publish_ms": 28.842,
+      "max_upload_ms": 1.78,
+      "max_worker_ms": 3065.653,
+      "maximum_cell_width_m": 3.0517578125,
+      "minimum_clearance_m": 1.00015985416701,
+      "peak_engine_static_bytes": 89376244,
+      "peak_resident_terrain_meshes": 578,
+      "peak_tiles": 369,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1420,
+      "rebases": 3,
+      "simulated_seconds": 9.06666666666667,
+      "terrain_ready_ms": 3189.087,
+      "waiting_frames": 126,
+      "walk_m": 167.359372586012
+    },
+    {
+      "variant": "baseline",
+      "repeat": 2,
+      "body": "m1b:1000",
+      "contacts": 545,
+      "faces": 2,
+      "frames": 546,
+      "initial_publish_ms": 22.69,
+      "jobs": [
+        {
+          "tiles": 375,
+          "uploads": 375,
+          "worker_ms": 3333.931
+        },
+        {
+          "tiles": 459,
+          "uploads": 192,
+          "worker_ms": 2016.637
+        },
+        {
+          "tiles": 459,
+          "uploads": 251,
+          "worker_ms": 2570.627
+        },
+        {
+          "tiles": 393,
+          "uploads": 140,
+          "worker_ms": 1584.93
+        }
+      ],
+      "max_publish_ms": 30.314,
+      "max_upload_ms": 17.327,
+      "max_worker_ms": 3333.931,
+      "maximum_cell_width_m": 3.814697265625,
+      "minimum_clearance_m": 0.999741657362165,
+      "peak_engine_static_bytes": 93646860,
+      "peak_resident_terrain_meshes": 710,
+      "peak_tiles": 459,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1418,
+      "rebases": 3,
+      "simulated_seconds": 9.1,
+      "terrain_ready_ms": 3398.04,
+      "waiting_frames": 127,
+      "walk_m": 167.277491003275
+    },
+    {
+      "variant": "current",
+      "repeat": 2,
+      "body": "m1b:terra",
+      "cache_hits": 0,
+      "contacts": 678,
+      "faces": 2,
+      "frames": 679,
+      "initial_publish_ms": 12.19,
+      "jobs": [
+        {
+          "mesh_ms": 1974.49,
+          "selection_ms": 427.573,
+          "tiles": 489,
+          "uploads": 489,
+          "worker_ms": 2402.112,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1705.452,
+          "selection_ms": 558.141,
+          "tiles": 579,
+          "uploads": 262,
+          "worker_ms": 2266.791,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 2702.347,
+          "selection_ms": 425.517,
+          "tiles": 495,
+          "uploads": 431,
+          "worker_ms": 3130.781,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 2.222,
+          "selection_ms": 447.676,
+          "tiles": 495,
+          "uploads": 0,
+          "worker_ms": 465.294,
+          "workers": 0
+        },
+        {
+          "mesh_ms": 2.087,
+          "selection_ms": 480.138,
+          "tiles": 495,
+          "uploads": 0,
+          "worker_ms": 485.259,
+          "workers": 0
+        },
+        {
+          "mesh_ms": 339.967,
+          "selection_ms": 515.393,
+          "tiles": 519,
+          "uploads": 42,
+          "worker_ms": 861.644,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 3.051,
+      "max_publish_ms": 12.709,
+      "max_upload_ms": 3.965,
+      "max_worker_ms": 3130.781,
+      "maximum_cell_width_m": 3.03792953491211,
+      "minimum_clearance_m": 1.00030125440298,
+      "peak_engine_static_bytes": 102590183,
+      "peak_resident_terrain_meshes": 1182,
+      "peak_tiles": 579,
+      "publish_deferrals": 0,
+      "publishes": 6,
+      "rays": 1720,
+      "rebases": 3,
+      "simulated_seconds": 11.3166666666667,
+      "terrain_ready_ms": 2491.366,
+      "waiting_frames": 261,
+      "walk_m": 167.119948506355
+    },
+    {
+      "variant": "current",
+      "repeat": 2,
+      "body": "m1b:100",
+      "cache_hits": 0,
+      "contacts": 485,
+      "faces": 2,
+      "frames": 486,
+      "initial_publish_ms": 11.204,
+      "jobs": [
+        {
+          "mesh_ms": 1471.672,
+          "selection_ms": 134.475,
+          "tiles": 321,
+          "uploads": 321,
+          "worker_ms": 1606.241,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1151.775,
+          "selection_ms": 161.604,
+          "tiles": 369,
+          "uploads": 164,
+          "worker_ms": 1313.685,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1599.84,
+          "selection_ms": 221.665,
+          "tiles": 387,
+          "uploads": 227,
+          "worker_ms": 1826.953,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 840.733,
+          "selection_ms": 140.083,
+          "tiles": 327,
+          "uploads": 136,
+          "worker_ms": 983.315,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 8.016,
+      "max_publish_ms": 20.155,
+      "max_upload_ms": 42.701,
+      "max_worker_ms": 1826.953,
+      "maximum_cell_width_m": 3.0517578125,
+      "minimum_clearance_m": 1.00021566181101,
+      "peak_engine_static_bytes": 97787835,
+      "peak_resident_terrain_meshes": 779,
+      "peak_tiles": 387,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1264,
+      "rebases": 3,
+      "simulated_seconds": 8.1,
+      "terrain_ready_ms": 1665.192,
+      "waiting_frames": 68,
+      "walk_m": 167.360120981932
+    },
+    {
+      "variant": "current",
+      "repeat": 2,
+      "body": "m1b:1000",
+      "cache_hits": 0,
+      "contacts": 523,
+      "faces": 2,
+      "frames": 524,
+      "initial_publish_ms": 11.693,
+      "jobs": [
+        {
+          "mesh_ms": 1759.672,
+          "selection_ms": 341.13,
+          "tiles": 375,
+          "uploads": 375,
+          "worker_ms": 2102.197,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1313.747,
+          "selection_ms": 318.713,
+          "tiles": 441,
+          "uploads": 212,
+          "worker_ms": 1633.573,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1740.521,
+          "selection_ms": 217.401,
+          "tiles": 375,
+          "uploads": 323,
+          "worker_ms": 1960.225,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 636.081,
+          "selection_ms": 274.92,
+          "tiles": 399,
+          "uploads": 84,
+          "worker_ms": 918.458,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 29.845,
+      "max_publish_ms": 15.193,
+      "max_upload_ms": 51.815,
+      "max_worker_ms": 2102.197,
+      "maximum_cell_width_m": 3.814697265625,
+      "minimum_clearance_m": 0.999741657362165,
+      "peak_engine_static_bytes": 101076151,
+      "peak_resident_terrain_meshes": 910,
+      "peak_tiles": 441,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1342,
+      "rebases": 3,
+      "simulated_seconds": 8.73333333333333,
+      "terrain_ready_ms": 2343.55,
+      "waiting_frames": 105,
+      "walk_m": 167.318127036095
+    },
+    {
+      "variant": "baseline",
+      "repeat": 3,
+      "body": "m1b:terra",
+      "contacts": 734,
+      "faces": 2,
+      "frames": 735,
+      "initial_publish_ms": 26.73,
+      "jobs": [
+        {
+          "tiles": 489,
+          "uploads": 489,
+          "worker_ms": 4465.195
+        },
+        {
+          "tiles": 579,
+          "uploads": 262,
+          "worker_ms": 2692.389
+        },
+        {
+          "tiles": 489,
+          "uploads": 421,
+          "worker_ms": 3873.871
+        },
+        {
+          "tiles": 495,
+          "uploads": 66,
+          "worker_ms": 1452.654
+        }
+      ],
+      "max_publish_ms": 21.822,
+      "max_upload_ms": 1.854,
+      "max_worker_ms": 4465.195,
+      "maximum_cell_width_m": 3.03792953491211,
+      "minimum_clearance_m": 1.00030125440298,
+      "peak_engine_static_bytes": 96033632,
+      "peak_resident_terrain_meshes": 1000,
+      "peak_tiles": 579,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1867,
+      "rebases": 3,
+      "simulated_seconds": 12.25,
+      "terrain_ready_ms": 4566.269,
+      "waiting_frames": 317,
+      "walk_m": 167.119941949844
+    },
+    {
+      "variant": "baseline",
+      "repeat": 3,
+      "body": "m1b:100",
+      "contacts": 538,
+      "faces": 2,
+      "frames": 539,
+      "initial_publish_ms": 27.653,
+      "jobs": [
+        {
+          "tiles": 321,
+          "uploads": 321,
+          "worker_ms": 3310.319
+        },
+        {
+          "tiles": 369,
+          "uploads": 164,
+          "worker_ms": 1708.045
+        },
+        {
+          "tiles": 369,
+          "uploads": 209,
+          "worker_ms": 2240.418
+        },
+        {
+          "tiles": 345,
+          "uploads": 154,
+          "worker_ms": 1950.675
+        }
+      ],
+      "max_publish_ms": 19.134,
+      "max_upload_ms": 1.261,
+      "max_worker_ms": 3310.319,
+      "maximum_cell_width_m": 3.0517578125,
+      "minimum_clearance_m": 1.00015985416701,
+      "peak_engine_static_bytes": 89371888,
+      "peak_resident_terrain_meshes": 578,
+      "peak_tiles": 369,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1346,
+      "rebases": 3,
+      "simulated_seconds": 8.98333333333333,
+      "terrain_ready_ms": 3396.872,
+      "waiting_frames": 121,
+      "walk_m": 167.359372586012
+    },
+    {
+      "variant": "baseline",
+      "repeat": 3,
+      "body": "m1b:1000",
+      "contacts": 531,
+      "faces": 2,
+      "frames": 532,
+      "initial_publish_ms": 26.12,
+      "jobs": [
+        {
+          "tiles": 375,
+          "uploads": 375,
+          "worker_ms": 3375.016
+        },
+        {
+          "tiles": 459,
+          "uploads": 192,
+          "worker_ms": 1903.243
+        },
+        {
+          "tiles": 459,
+          "uploads": 251,
+          "worker_ms": 2621.527
+        },
+        {
+          "tiles": 393,
+          "uploads": 140,
+          "worker_ms": 1554.041
+        }
+      ],
+      "max_publish_ms": 19.372,
+      "max_upload_ms": 1.907,
+      "max_worker_ms": 3375.016,
+      "maximum_cell_width_m": 3.814697265625,
+      "minimum_clearance_m": 0.999741657362165,
+      "peak_engine_static_bytes": 93637068,
+      "peak_resident_terrain_meshes": 710,
+      "peak_tiles": 459,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1343,
+      "rebases": 3,
+      "simulated_seconds": 8.86666666666667,
+      "terrain_ready_ms": 3486.157,
+      "waiting_frames": 113,
+      "walk_m": 167.277005016804
+    },
+    {
+      "variant": "current",
+      "repeat": 3,
+      "body": "m1b:terra",
+      "cache_hits": 0,
+      "contacts": 567,
+      "faces": 2,
+      "frames": 568,
+      "initial_publish_ms": 11.216,
+      "jobs": [
+        {
+          "mesh_ms": 2349.334,
+          "selection_ms": 440.116,
+          "tiles": 489,
+          "uploads": 489,
+          "worker_ms": 2789.5,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1050.023,
+          "selection_ms": 533.054,
+          "tiles": 579,
+          "uploads": 262,
+          "worker_ms": 1584.273,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1579.897,
+          "selection_ms": 459.91,
+          "tiles": 489,
+          "uploads": 421,
+          "worker_ms": 2040.815,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 730.0,
+          "selection_ms": 449.008,
+          "tiles": 495,
+          "uploads": 66,
+          "worker_ms": 1183.971,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 627.231,
+          "selection_ms": 430.53,
+          "tiles": 495,
+          "uploads": 86,
+          "worker_ms": 1061.33,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 7.335,
+      "max_publish_ms": 12.983,
+      "max_upload_ms": 3.297,
+      "max_worker_ms": 2789.5,
+      "maximum_cell_width_m": 3.03792953491211,
+      "minimum_clearance_m": 1.00030125440298,
+      "peak_engine_static_bytes": 101452003,
+      "peak_resident_terrain_meshes": 1172,
+      "peak_tiles": 579,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1412,
+      "rebases": 3,
+      "simulated_seconds": 9.46666666666667,
+      "terrain_ready_ms": 2913.66,
+      "waiting_frames": 150,
+      "walk_m": 167.119021505117
+    },
+    {
+      "variant": "current",
+      "repeat": 3,
+      "body": "m1b:100",
+      "cache_hits": 0,
+      "contacts": 443,
+      "faces": 2,
+      "frames": 444,
+      "initial_publish_ms": 10.205,
+      "jobs": [
+        {
+          "mesh_ms": 1376.538,
+          "selection_ms": 141.258,
+          "tiles": 321,
+          "uploads": 321,
+          "worker_ms": 1517.939,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 780.391,
+          "selection_ms": 157.208,
+          "tiles": 369,
+          "uploads": 164,
+          "worker_ms": 938.13,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1302.609,
+          "selection_ms": 163.041,
+          "tiles": 369,
+          "uploads": 209,
+          "worker_ms": 1469.251,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1361.465,
+          "selection_ms": 148.076,
+          "tiles": 327,
+          "uploads": 154,
+          "worker_ms": 1512.184,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 20.505,
+      "max_publish_ms": 10.428,
+      "max_upload_ms": 1.942,
+      "max_worker_ms": 1517.939,
+      "maximum_cell_width_m": 3.0517578125,
+      "minimum_clearance_m": 1.00015432660047,
+      "peak_engine_static_bytes": 98242559,
+      "peak_resident_terrain_meshes": 779,
+      "peak_tiles": 369,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1119,
+      "rebases": 3,
+      "simulated_seconds": 7.4,
+      "terrain_ready_ms": 1641.839,
+      "waiting_frames": 26,
+      "walk_m": 167.360480755568
+    },
+    {
+      "variant": "current",
+      "repeat": 3,
+      "body": "m1b:1000",
+      "cache_hits": 0,
+      "contacts": 425,
+      "faces": 2,
+      "frames": 426,
+      "initial_publish_ms": 10.374,
+      "jobs": [
+        {
+          "mesh_ms": 1994.857,
+          "selection_ms": 233.671,
+          "tiles": 375,
+          "uploads": 375,
+          "worker_ms": 2228.587,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 890.841,
+          "selection_ms": 243.07,
+          "tiles": 441,
+          "uploads": 212,
+          "worker_ms": 1138.271,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1089.304,
+          "selection_ms": 274.842,
+          "tiles": 459,
+          "uploads": 247,
+          "worker_ms": 1371.724,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1325.183,
+          "selection_ms": 264.684,
+          "tiles": 399,
+          "uploads": 178,
+          "worker_ms": 1593.246,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 17.604,
+      "max_publish_ms": 12.505,
+      "max_upload_ms": 19.033,
+      "max_worker_ms": 2228.587,
+      "maximum_cell_width_m": 3.814697265625,
+      "minimum_clearance_m": 0.999752521146036,
+      "peak_engine_static_bytes": 101470475,
+      "peak_resident_terrain_meshes": 893,
+      "peak_tiles": 459,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1117,
+      "rebases": 3,
+      "simulated_seconds": 7.1,
+      "terrain_ready_ms": 2292.725,
+      "waiting_frames": 7,
+      "walk_m": 167.234243839979
+    }
+  ]
+}

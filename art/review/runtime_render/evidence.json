@@ -1,0 +1,179 @@
+{
+  "date": "2026-09-08",
+  "repository": "MajorDragonfly/voxelverse",
+  "branch": "agent/meta-runtime-v8",
+  "pull_request": 9,
+  "start_head": "8a7266d2802ead98ac5adea9bed6d6f8f4d7162e",
+  "source_commit": "3ae819fb480a964ff476cda51a45006d65e32775",
+  "source_tree": "504996a1819ef8649ce8f96b18b0f21976d8937e",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "scope": "40 headless runtime checks; native Windows/Linux export acceptance; actual software-driver rendering of two dense worlds, seven-family LOD lineups and geometry/color A/B pairs. No target-hardware performance or final art approval.",
+  "target_hardware_acceptance": false,
+  "human_art_approval": false,
+  "workflow_runs": [
+    {
+      "id": 34192638557,
+      "name": "Modular assembly validation",
+      "event": "pull_request",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192638557"
+    },
+    {
+      "id": 34192638514,
+      "name": "Planet diversity V9",
+      "event": "pull_request",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192638514"
+    },
+    {
+      "id": 34192638579,
+      "name": "Desktop export validation",
+      "event": "pull_request",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192638579"
+    },
+    {
+      "id": 34192638538,
+      "name": "Godot validation",
+      "event": "pull_request",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192638538"
+    },
+    {
+      "id": 34192638526,
+      "name": "Environment render validation",
+      "event": "pull_request",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192638526"
+    },
+    {
+      "id": 34192635674,
+      "name": "Modular assembly validation",
+      "event": "push",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635674"
+    },
+    {
+      "id": 34192635626,
+      "name": "Planet diversity V9",
+      "event": "push",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635626"
+    },
+    {
+      "id": 34192635639,
+      "name": "Desktop export validation",
+      "event": "push",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635639"
+    },
+    {
+      "id": 34192635647,
+      "name": "Godot validation",
+      "event": "push",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635647"
+    },
+    {
+      "id": 34192635631,
+      "name": "Environment render validation",
+      "event": "push",
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34192635631"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 10042779700,
+      "name": "voxelverse-validate-push",
+      "digest": "sha256:552b836720bd6da7e76fc05368701ac71b459eec169e4848a48770e17e090eed",
+      "bytes": 88704,
+      "expires_at": "2026-09-15T05:59:35Z",
+      "run_id": 34192635647,
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775"
+    },
+    {
+      "id": 10042761150,
+      "name": "export-diagnostics-windows-push",
+      "digest": "sha256:a1f9da0d652bccb6e03a30bef13120949b55787a0c5292eee6d6c1839d0664a9",
+      "bytes": 22749,
+      "expires_at": "2026-09-22T05:58:44Z",
+      "run_id": 34192635639,
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775"
+    },
+    {
+      "id": 10042760849,
+      "name": "voxelverse-windows-push",
+      "digest": "sha256:e68ae5a2ea23d01e5ca809ce299685cad1f97971b71d8b7c847b1f5b1cf475fe",
+      "bytes": 40825673,
+      "expires_at": "2026-09-22T05:58:42Z",
+      "run_id": 34192635639,
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775"
+    },
+    {
+      "id": 10042752100,
+      "name": "export-diagnostics-linux-push",
+      "digest": "sha256:3c9fb6da1cc82cae86ce5bbe92c30c6a830b063130b475a664d50b300bc10028",
+      "bytes": 22563,
+      "expires_at": "2026-09-22T05:58:19Z",
+      "run_id": 34192635639,
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775"
+    },
+    {
+      "id": 10042751825,
+      "name": "voxelverse-linux-push",
+      "digest": "sha256:aa54c8ac67c5c41e4e7fd3af4231e4583552c37805d1825a9f01b317f570bc24",
+      "bytes": 32097067,
+      "expires_at": "2026-09-22T05:58:17Z",
+      "run_id": 34192635639,
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775"
+    },
+    {
+      "id": 10042868392,
+      "name": "environment-review-forward_plus-push",
+      "digest": "sha256:863f5e11cf16bcf12e41b47631c616b4149d300503bdd66076e5f16ff3a532a6",
+      "bytes": 3947031,
+      "expires_at": "2026-09-22T06:03:31Z",
+      "run_id": 34192635631,
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775"
+    },
+    {
+      "id": 10042785131,
+      "name": "environment-review-gl_compatibility-push",
+      "digest": "sha256:49db4c9c194a6748e6ce3757173c59173788fa372d26ef2dccf5e2bffb9374dc",
+      "bytes": 4076254,
+      "expires_at": "2026-09-22T05:59:50Z",
+      "run_id": 34192635631,
+      "head_sha": "3ae819fb480a964ff476cda51a45006d65e32775"
+    }
+  ],
+  "terrain_before_image": {
+    "source_commit": "6c24ce7c988edff7dc51256ebe345b50dc7751e0",
+    "run_id": 34191832257,
+    "artifact_id": 10042520333,
+    "artifact_digest": "sha256:8753b03b87ae5ea540ae6e747251dc72c1dad88f436f53781d5912fc94ab1a2f",
+    "path_in_artifact": "environment-review/world_15838/world.png",
+    "repository_path": "terrain_before_gl.png"
+  },
+  "render_metrics": {
+    "resolution": [
+      960,
+      540
+    ],
+    "measured_frames": 4,
+    "warmup_frames": 4,
+    "fast_setup": true,
+    "software_renderer": true,
+    "mean_rgb_error_limit": 0.004
+  }
+}

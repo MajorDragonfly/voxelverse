@@ -1,0 +1,17 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "frontend_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.347
+    },
+    {
+      "name": "terrain_transition_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.727
+    }
+  ]
+}

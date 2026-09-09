@@ -67,7 +67,8 @@ func get_species_entries(coordinates: Vector2i) -> Array:
 
 func choose_species(
 	coordinates: Vector2i,
-	selection_value: float
+	selection_value: float,
+	role_weights: Dictionary = {}
 ) -> Dictionary:
 	var entries: Array = get_species_entries(coordinates)
 	if entries.is_empty():
@@ -75,10 +76,7 @@ func choose_species(
 	var total_population: float = 0.0
 	for entry_value in entries:
 		if entry_value is Dictionary:
-			total_population += maxf(
-				float(entry_value.get("population", 0.0)),
-				0.0
-			)
+			total_population += _selection_weight(entry_value, role_weights)
 	if total_population <= 0.001:
 		return entries[0].duplicate(true)
 	var target: float = clampf(selection_value, 0.0, 0.99999)
@@ -88,10 +86,19 @@ func choose_species(
 		if not (entry_value is Dictionary):
 			continue
 		var entry: Dictionary = entry_value
-		accumulated += maxf(float(entry.get("population", 0.0)), 0.0)
+		accumulated += _selection_weight(entry, role_weights)
 		if target <= accumulated:
 			return entry.duplicate(true)
 	return entries.back().duplicate(true)
+
+
+func _selection_weight(entry: Dictionary, role_weights: Dictionary) -> float:
+	var population: float = maxf(float(entry.get("population", 0.0)), 0.0)
+	# Weight visible representatives; persisted regional populations are intact.
+	var role: String = str(entry.get("role", "forager"))
+	if role in ["climber", "scavenger"]:
+		role = "forager"
+	return population * maxf(float(role_weights.get(role, 1.0)), 0.0)
 
 
 func register_wildlife_loss(
@@ -137,6 +144,8 @@ func _bind_player() -> void:
 
 
 func _ensure_active_regions() -> void:
+	if _player == null or not is_instance_valid(_player):
+		return
 	var center: Vector2i = get_region_coordinates(_player.global_position)
 	for offset_z in range(-active_region_radius, active_region_radius + 1):
 		for offset_x in range(-active_region_radius, active_region_radius + 1):
@@ -149,32 +158,36 @@ func _ensure_region(coordinates: Vector2i) -> void:
 		existing["last_touched_tick"] = _simulation_tick
 		_region_states[coordinates] = existing
 		return
+	var generator: Node = _get_world_generator()
+	var world_seed: int = _get_simulation_world_seed(generator)
 	var random := RandomNumberGenerator.new()
 	random.seed = (
-		WorldGenerator.get_world_seed()
+		world_seed
 		+ coordinates.x * 73_856_093
 		+ coordinates.y * 19_349_663
 		+ 2_147_483
 	)
 	var species_count: int = 6
-	if WorldGenerator.has_method("get_planet_profile"):
-		var planet_profile: Dictionary = WorldGenerator.get_planet_profile()
-		species_count = clampi(
-			int(planet_profile.get("fauna_species_count", 6)),
-			3,
-			10
-		)
+	if generator != null and generator.has_method("get_planet_profile"):
+		var planet_profile_value: Variant = generator.call("get_planet_profile")
+		if planet_profile_value is Dictionary:
+			var planet_profile: Dictionary = planet_profile_value
+			species_count = clampi(
+				int(planet_profile.get("fauna_species_count", 6)),
+				3,
+				10
+			)
 	var species_entries: Array = []
 	for slot in range(species_count):
 		var species_seed: int = absi(
-			WorldGenerator.get_world_seed()
+			world_seed
 			+ coordinates.x * 73_856_093
 			+ coordinates.y * 19_349_663
 			+ slot * 83_492_791
 		)
-		if WorldGenerator.has_method("get_species_seed"):
+		if generator != null and generator.has_method("get_species_seed"):
 			species_seed = int(
-				WorldGenerator.call(
+				generator.call(
 					"get_species_seed",
 					coordinates.x,
 					coordinates.y,
@@ -314,3 +327,17 @@ func _trim_cache() -> void:
 	while _region_states.size() > maximum_cached_regions and not entries.is_empty():
 		var oldest: Dictionary = entries.pop_front()
 		_region_states.erase(oldest.get("coordinates", Vector2i.ZERO))
+
+
+func _get_world_generator() -> Node:
+	return get_node_or_null("/root/WorldGenerator")
+
+
+func _get_simulation_world_seed(generator: Node = null) -> int:
+	var source: Node = generator if generator != null else _get_world_generator()
+	if source != null and source.has_method("get_world_seed"):
+		return int(source.call("get_world_seed"))
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state != null and game_state.has_method("get_world_seed"):
+		return int(game_state.call("get_world_seed"))
+	return 1

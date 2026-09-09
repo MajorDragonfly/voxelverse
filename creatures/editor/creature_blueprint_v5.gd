@@ -1,5 +1,8 @@
 extends RefCounted
+
 class_name CreatureBlueprintV5
+
+const Store = preload("res://core/persistence/design_store.gd")
 
 const BaseBlueprint = preload(
 	"res://creatures/editor/creature_blueprint.gd"
@@ -129,16 +132,10 @@ static func save_to_file(
 static func load_from_file(
 	save_path: String = SAVE_PATH
 ) -> Dictionary:
-	if not FileAccess.file_exists(save_path):
+	if Store.read_text(save_path).is_empty():
 		return {}
 
-	var file := FileAccess.open(save_path, FileAccess.READ)
-
-	if file == null:
-		return {}
-
-	var parsed: Variant = JSON.parse_string(file.get_as_text())
-	file.close()
+	var parsed: Variant = JSON.parse_string(Store.read_text(save_path))
 
 	if not (parsed is Dictionary):
 		push_warning("Creature V5 save is not a dictionary: %s" % save_path)

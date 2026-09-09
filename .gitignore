@@ -1,3 +1,19 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Editor recovery / temporary scene files
+*.tmp
+*.tscn*.tmp
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Python art/export tooling
+__pycache__/
+*.pyc
+
+# Reproducible desktop exports and downloaded engine toolchains
+/builds/
+/godot-toolchain/
