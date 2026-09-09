@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameState="*res://autoload/game_state.gd"
 WorldGenerator="*res://world/generation/world_generator_v6_smooth.gd"
 DisplaySettings="*res://core/display_settings.gd"
+AudioManager="*res://audio/runtime/audio_manager.gd"
 
 [display]
 
