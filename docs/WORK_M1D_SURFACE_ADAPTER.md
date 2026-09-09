@@ -6,7 +6,8 @@ Stand: 9. September 2026. Auftrag 1 aus `docs/NEXT_PARALLEL_WORK.md`.
 - Eigener Branch: `agent/m1d-surface-adapter`.
 - Implementierung, Prüfungen und Messartefakte: **`318fd8bff3fefef9990d52c3c83048bf0d7df9f8`**. Dieser Bericht wird in einem anschließenden Dokumentationscommit ergänzt.
 - Abgeschlossen: erster überprüfbarer M1d-Teilauftrag. **M1d als vollständige Kugelkampagne bleibt offen.** Kein Merge nach `main`, kein fremder Fachbranch übernommen. `ROADMAP.md` und `NEXT_PARALLEL_WORK.md` bleiben beim Integrationschat.
-- Veröffentlichungsstatus: lokal committed. Die automatische Freigabeprüfung hat den GitHub-Push wegen fehlender ausdrücklicher Freigabe für diesen neuen öffentlichen Upload abgelehnt. Die überprüfte frühere Zustimmung betraf den Integrationsstand. Veröffentlichung dieses Fachbranches und ein Übergabe-PR stehen bis zur erneuten Uploadfreigabe aus.
+- Veröffentlichungsstatus: nach erneuter ausdrücklicher Freigabe veröffentlicht als `97e9e91a0b5babd10d303df97bfa719224f72300`, [Draft-PR #31](https://github.com/MajorDragonfly/voxelverse/pull/31). Der Quellbaum stimmt mit dem lokal geprüften Stand überein. Kein Merge nach `main`.
+- Anschließender Nutzerauftrag „Planeten wie das bisherige Flachland / Spore“: Die inzwischen ebenfalls veröffentlichte belebte Kugellandschaft erweitert dieses erste Paket. Änderungen, Messwerte und verbleibende Grenzen stehen in [WORK_M1D_LIVING_PLANET.md](WORK_M1D_LIVING_PLANET.md). Die folgenden Angaben dokumentieren weiterhin den **ersten** begrenzten Adapterabschluss.
 
 ## Ausprobieren
 
