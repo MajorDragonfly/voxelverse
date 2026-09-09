@@ -29,4 +29,14 @@ Das abwärtskompatible V7-Format ergänzt je Teil `joint.upper`, `joint.lower` u
 
 `tests/creature_joint_studio_test.gd` prüft native Mausgesten, Rückgängig und Abbrechen, Endstückdrehung, gespeicherte Gelenke, Spiegelung, unterschiedliche Beinreichweiten und Bewegungen mit zwei, vier und sechs Beinen. Die Teststrecke wird zusätzlich mit echten Physikstrahlen gegen bekannte Rampen- und Stufenhöhen geprüft. Derselbe Test läuft auch im Windows- und Linux-Release-Paket.
 
-Die Bildprüfung ergänzt vier native Aufnahmen: Drehringe, Gelenkregler, Gehen auf der Steigung und Laufen auf den Stufen. Die bestätigten Ergebnisse werden nach der Prüfung in `validation/creature-joint-studio.json` dokumentiert.
+Die Bildprüfung ergänzt vier native Aufnahmen: Drehringe, Gelenkregler, Gehen auf der Steigung und Laufen auf den Stufen. Insgesamt wurden 13 Aufnahmen in 1600×900 fehlerfrei erzeugt und visuell geprüft.
+
+Geprüfter Code: `f7a1c9d0103b9290a0c6a2b5726a1f6dab32cf18` mit Godot 4.6.3. Die [vollständige Projektprüfung](https://github.com/MajorDragonfly/voxelverse/actions/runs/34328389469) besteht mit 53/53, die [Werkstattprüfung](https://github.com/MajorDragonfly/voxelverse/actions/runs/34328389419) mit 8/8 und die [Windows-/Linux-Exporte](https://github.com/MajorDragonfly/voxelverse/actions/runs/34328389468) jeweils mit 14/14 Prüfungen. Die native Gelenkprüfung läuft auch in beiden exportierten Release-Paketen. Synchrone Körperänderungen benötigen bei den vier Vorlagen im Median 38,9–64,2 ms auf diesem CI-Rechner, ohne Rendering; dies ist keine Messung der Bildrate auf dem Ziel-PC. [Rohmessungen](../art/review/creature_joint_studio/detail_metrics.json), [vollständige Prüfnachweise und Rendererstatus](../validation/creature-joint-studio.json).
+
+[Windows-Testbuild herunterladen](https://github.com/MajorDragonfly/voxelverse/actions/runs/34328389468/artifacts/10094762892). Die Änderungen bleiben im separaten Draft PR #12 auf PR #10; sie sind noch nicht in `main` integriert.
+
+![Direkte Drehringe](../art/review/creature_joint_studio/rotate_handles.png)
+
+![Einstellbare Gelenke](../art/review/creature_joint_studio/joint_controls.png)
+
+![Bewegungsprobe auf Stufen](../art/review/creature_joint_studio/steps_run.png)

@@ -2,6 +2,8 @@
 
 Dieses Paket erweitert die Kreaturen-Werkstatt in Draft PR #12 auf `agent/creature-editor-spore`. Die feine Voxeloberfläche bleibt gemeinsam für Editor, Spieler und Wildtiere erhalten. Die Arbeiten anderer Branches werden damit nicht zusammengeführt.
 
+Die anschließende Erweiterung mit direkten Griffen, einstellbaren Gelenken und einer Bewegungsstrecke ist in [Direkte Griffe, Gelenke und Bewegungstest](CREATURE_JOINT_STUDIO.md) beschrieben. Die Nachweise weiter unten dokumentieren den ursprünglichen Teile-Stand.
+
 ## Gestalten
 
 Alle 29 vorhandenen Anbauteile haben eigene feinere Formen: Mäuler mit getrennten Kiefern, Nasenöffnungen und Zähnen; Augen mit Iris, Pupille und Lid; gegliederte Arme und Beine; Schwanzvarianten; verzweigte Geweihe; gerichtete Seitenstacheln; Panzersegmente sowie Federn und Kristalle. Die bekannten Teile-IDs und ihre Fähigkeiten bleiben erhalten.

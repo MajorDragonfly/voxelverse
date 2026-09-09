@@ -1,0 +1,84 @@
+{
+  "renderer": "gl_compatibility",
+  "screenshots": [
+    {
+      "file": "round_body.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "a3cff7efe5fe40d7337dbadab0848b01e2f458a58de46d391a7beb7a934be194"
+    },
+    {
+      "file": "grazer_parts.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "24516aa8e03ea4ab58fd9d89c3606904ab3394d1d307e67c860ece751680922c"
+    },
+    {
+      "file": "upright_paint.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "3e8132c4de75e580198e1c028a700df11e7b2e7a8fba4bfdc40db44a18aed0d2"
+    },
+    {
+      "file": "crawler_test.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "7ebeee22eb5757bb88dbd4cc3f1ff59246b070a766244da8bb51ce8c98d0de46"
+    },
+    {
+      "file": "spike_symmetry.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "f6c86300811376c824c17314ff09733e308659ac0da7eca13eb7c67f2ad931a5"
+    },
+    {
+      "file": "hand_controls.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "1983031ff409502d7ad706edd0b0ae76388a7e7ebf5a2e06a20bc8ad7a0bbb40"
+    },
+    {
+      "file": "four_leg_feet.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "47c7015414ed08b423e18ba2c32e31090c5bc568deb104eaee44b0c2bbc1d7e2"
+    },
+    {
+      "file": "scales_surface.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "95c7bcf9d802fb803d5afe02cdfbb08476ffe6c736c38d41e37bbe0c18583db6"
+    },
+    {
+      "file": "fur_surface.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "3fdbbcd000b9eabbcd991568352024d71904e52a43e359519387d7079b59ba0e"
+    },
+    {
+      "file": "rotate_handles.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "652f6332d2e5de7be917b494359c014d2e89bda846264ccb1fc7cb5e6056de04"
+    },
+    {
+      "file": "joint_controls.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "1e30278b1413b46acbde72cbf88be65097b1c31b07ef169a31cac50a10218027"
+    },
+    {
+      "file": "slope_walk.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "ae90914102129d0e9691393dbdccb3f0127c3d0d1d65b8f704d6e24c5c57cce7"
+    },
+    {
+      "file": "steps_run.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "e7f334b6d5ccaa82f25e9c936d79f5524e5de37f33e5ff3edd22804c8da2eaae"
+    }
+  ],
+  "runtime_errors": 0
+}
