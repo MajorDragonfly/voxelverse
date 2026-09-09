@@ -1,8 +1,8 @@
 # Voxelverse – gemeinsame Entwicklungsroadmap
 
-Stand: 9. September 2026 · Zusammenführung der sieben Arbeitsstränge. Die konkreten Quellstände stehen in [Integrationsquellen](docs/integration-sources-2026-09-09.json), gemeinsame Prüfungen und Grenzen im [Integrationsbericht](docs/INTEGRATION_2026-09-09.md). Ältere Berichte beschreiben ihre damaligen Einzelstände; diese Roadmap ist die aktuelle Planung. Ein vorhandener Prototyp zählt nicht als abgeschlossene Spielphase.
+Stand: 9. September 2026 · M1e-Kampagnengrundlage nach der zweiten Integrationsrunde. Maßgeblich sind jetzt [Runde 2](docs/INTEGRATION_SPHERICAL_2026-09-09.md) und der [Kugelumzug](docs/SPHERICAL_CAMPAIGN_MIGRATION.md). Die folgende ältere Quellenliste dokumentiert Runde 1. Die konkreten Quellstände stehen in [Integrationsquellen](docs/integration-sources-2026-09-09.json), gemeinsame Prüfungen und Grenzen im [Integrationsbericht](docs/INTEGRATION_2026-09-09.md). Ältere Berichte beschreiben ihre damaligen Einzelstände; diese Roadmap ist die aktuelle Planung. Ein vorhandener Prototyp zählt nicht als abgeschlossene Spielphase.
 
-**Planungsergänzung vom 9. September 2026:** Eier liefernde Nutztiere und ein vollständiger Überarbeitungspass des Körperteilkatalogs mit einzeln kombinierbaren Tierformen sind aufgenommen. Die konkreten To-dos, Abhängigkeiten und Abnahmekriterien stehen im [Ideen- und Aufgabenbacklog](docs/FEATURE_BACKLOG.md). Alle neuen Punkte sind **geplant**; die Ergänzung verändert keine bisherigen Implementierungs- oder Testnachweise.
+**Planungsergänzungen vom 9. September 2026:** Eier liefernde Nutztiere, der erweiterte Körperteil-Baukasten und die Weltraumphase mit modularem Expeditionsschiff/Beibooten sind aufgenommen. Konkrete To-dos und Abnahmen stehen im [Ideen- und Aufgabenbacklog](docs/FEATURE_BACKLOG.md), [Körperteilkatalog](docs/CREATURE_PARTS_CATALOG_PLAN.md) und [Expeditionsplan](docs/SPACE_EXPEDITION_PLAN.md). Alle Ergänzungen sind **geplant**; die nachfolgend dokumentierten Integrations- und Teststände bleiben davon getrennt.
 
 ## Verbindliches Zielbild
 
@@ -14,28 +14,33 @@ Stand: 9. September 2026 · Zusammenführung der sieben Arbeitsstränge. Die kon
 - Die eigene Spezies, ihre ID, Entwürfe, Bewohner, Heimat, Besitz, Entdeckungen, gezähmten Tiere und Entscheidungen bleiben über Stamm, Mittelalter und Neuzeit erhalten. Kulturelle/technische Entwicklung ersetzt keinen Genom- oder Mutationssimulator. Umbauten der Kreatur nach dem Aufstieg benötigen später eine ausdrückliche Spielregel.
 - Planeten sind kugelförmige Körper in realen Größen ihrer Körperklasse. Terra mit 12.742 km Durchmesser ist die große technische Referenz. Kleine Laborkörper bleiben schnelle Prüffälle. Nahterrain und Orbit verwenden dieselbe Weltquelle.
 - Eine darstellbare und bereisbare Galaxie mit reproduzierbaren Sternsystemen, Planeten, Monden sowie Ein-/Doppelsternen bleibt Ziel der Weltraumphase. Katalog und Laborbesuche sind dafür Grundlagen, noch kein Raumflug.
+- Kern der Weltraumphase ist ein großes, selbst gestaltetes und ausgerüstetes Expeditionsschiff als mobile Basis. Kleinere eigene Schiffe übernehmen planetaren Anflug, Landung, Ausstieg und Untersuchung. Forschung und wirtschaftlicher Fortschritt ermöglichen größere Rümpfe, mehr Ausrüstung, Waffen, Lagerraum und zusätzliche Bordschiffe; beide Schiffsebenen sind direkt steuerbar und dauerhaft gespeichert. Details: [SPACE_EXPEDITION_PLAN.md](docs/SPACE_EXPEDITION_PLAN.md).
 - Der Kreatureneditor erhält einen erweiterbaren Baukasten erkennbarer, einzeln wählbarer Körperteile nach realen Tieren. Alle bestehenden Teile werden auf Überarbeitung oder kompatiblen Ersatz geprüft; Mund-/Kopfformen, Hände/Greifer und Füße bilden die erste Lieferung. Der [Katalogplan](docs/CREATURE_PARTS_CATALOG_PLAN.md) konkretisiert weitere Körper-/Sinnesformen, Flügel, Flossen, Tentakel, Schwänze, Schutzteile und Hautmuster in fünf Unteraufgaben; besondere Bewegung erfordert jeweils ein geprüftes Spielsystem. Unterschiedliche Tierformen bleiben frei kombinierbar, soweit ihre Anschlüsse passen; alte Entwürfe und Freischaltungen bleiben erhalten.
 - Kreaturen-, Gebäude-, Fahrzeug- und Schiffeditor teilen ein Bauplanfundament und erhalten jeweils passende Regeln. Verhalten verdient getrennte soziale/aggressive Punkte; Technikforschung und Tierhaltung werden nicht ausschließlich durch Kampf freigeschaltet.
 - Alte Spielstände und Entwürfe bleiben geschützt. Keine ungefragte Neugenerierung alter Landschaften oder Tierarten; Änderungen erhalten Versionen, Migration und Rückfallmöglichkeit.
+
+## Vorrang: vollständiger Umzug auf Kugelwelten
+
+Neue Weltentwicklung verwendet die vorhandene Cube-Sphere-Oberfläche, stabile Körper-/Objektadressen und begrenztes Streaming. Die Ebene bleibt ausschließlich kompatibler Kampagnenbetrieb bis zur geprüften Übergabe. **Die vollständige Kugelkampagne ist noch nicht umgesetzt.** Der gemeinsame Kugelstart, Save 8/Kampagne 2, radiale Spielerorte, gemeinsame Karten und eine geprüfte Kopiermigration für frühe Stände sind jetzt angebunden. Bestehende regionale Änderungen, Heimatgruppen, Pflichtartenkataloge und Siedlungen benötigen noch ihre Zieladapter und werden beim Umzug ausdrücklich gesperrt. Details: [M1e-Vertrag und Grenzen](docs/WORK_M1E_CAMPAIGN.md). Das Planetenlabor wird nicht durch Umbenennen oder einen Menüwechsel zur Kampagne. Der [Migrationsauftrag](docs/SPHERICAL_CAMPAIGN_MIGRATION.md) definiert Reihenfolge, Besitzer und Abschaltkriterien. Für sichtbare Elemente gilt die gemeinsame [Designvorgabe](docs/VOXELVERSE_DESIGN.md).
 
 ## Gemeinsamer Ist-Stand
 
 Die folgenden Pakete sind im gemeinsamen Quellstand enthalten. „Enthalten“ ersetzt weder den gemeinsamen Prüfbericht noch Lars’ Spieltest.
 
-| Bereich | Vorhanden | Verbleibende Arbeit |
+| Bereich | Zusammengeführt | Noch offen |
 |---|---|---|
-| Welt, Wasser, Landschaft | Voxelterrain, Flora-LOD/Fernwald, Kollisionen, Flüsse/Seen mit örtlichem Wasserspiegel, Schwimmgrundlage, Unterwasseransicht | Ziel-PC-Framezeiten, Nachladespitzen, echte Flora/Fauna auf Kugelterrain |
-| Planeten und Galaxie | Adaptive Kugeln bis Erdgröße, radiale Physik, begrenztes Streaming, Detailüberblendung, Ein-/Doppelsterne; Katalogbesuche und gespeicherte Orte | Produktive Kampagnenanbindung, Karte, Raumflug, Kolonien; Labor und Kampagne sind weiterhin getrennte Oberflächenmodi |
-| Kreaturenwerkstatt | Feiner Voxelbau, Körper-/Gelenkgriffe, Drehung und Größe, Symmetrie/Mittelachse, Hände/Füße, Hautmuster/Farben, Bewegungstest | Überarbeitung aller Körperteile mit einzeln wählbaren Tierformen (M3-TEILE), extreme Körperformen, freie Gelenkketten, Wasser-/Flugbewegung, vollständige funktionale Anatomie |
-| Entwicklung | Soziale/aggressive Kreaturenpunkte, sechs Knoten, wirkende Kreaturenboni, phasengetrennte Ansichten, Entwicklungspfad und Vermächtnis | Verdienste/Knoten der Stammesphase, Verteidigung bei echtem Gruppenkampf, späterer Technikbaum |
-| Sozialspiel | Befreunden, Helfen, Kampf, gespeicherte Beziehungen, Schutz vor doppelten Belohnungen und künstlichen Heilungskreisläufen | Rekrutierung/Zähmung klar trennen; soziale Kontakte ersetzen keinen erforderlichen Artenscan |
-| Tierwelt | Sichtkontakt, Warnung, begrenzte Verfolgung, Flucht, Herdenabstand, Hindernis-/Klippenprüfung; gespeicherter Hunger und Durst, Beeren- und sichere Ufersuche | Jagd zwischen Wildtieren, globale Navigation, aktive Ökologie nach Stammesbeginn, feste planetare Tierrollen |
-| Entdeckungsbuch | Ein gemeinsames Buch für J und Skilltree; Fadenkreuzscan mit Fortschrittskreis; bekannte Arten zeigen Werte; Vorschau, Vergleich mit Symbolen, Forschungsziele, Merkliste | Tierrollen und Zähmeignung anzeigen, regionale Forschungsaufträge erst nach gesicherter Spawn-/Habitatgarantie |
-| Einstieg und Menüs | Startmenü, Pausenmenü, Spielstandplätze/Verlauf, erste Schritte, Tastenbelegung, Einstellungen | Bedienung nach Phasenwechsel, UI bei kleinen Auflösungen, Ziel-PC-Abnahme |
-| Heimat und Stamm | Heimatplatz, zwei eigene Gefährten, Folgen/Warten/Heimkehr; bestätigter Wechsel mit denselben drei Bewohnern; Gruppenwahl/-befehle, Transport, Steinwerkzeug, zwei Hütten, Hunger, Wurzelgarten, Versorgungsauftrag | Weitere Rohstoffe/Wasser, Wachstum, Berufe, freie Bauplätze, Zähmung, Nachbargruppen und Konflikte |
-| Audio | 87 Effekt-/Umgebungs-/Kreaturen-/Interfaceklänge und drei Musikstücke, Lautstärkekanäle, Scanner, räumliche Stimmen, Schallverdeckung, Komfortoptionen | Klangabnahme unter Windows, Stammes-/Epochenmusik, radiale Weltanbindung; Prototypklänge sind noch kein finaler Soundtrack |
-| Gebäude und Fahrzeuge | Modularer Gebäudeeditor und gemeinsames Bauplanformat; erster fester Hüttenbau im Dorf | Eigene Entwürfe mit Baukosten frei platzieren, Zugänge/Wege, Transportmittel und eigene Fahrzeug-/Schiffeditoren |
-| Speicherung | Gemeinsames Speicherschema 6, Fortschritt 4, Stammeszustand 2; Spielstandplätze, Verlauf, Forschung, Beziehungen, Nahrung/Durst, bestätigte atomare Übergabe | Versionierter Tierrollen-/Haltungszustand, Mehrsiedlungswirtschaft, spätere Epochenmigration, Kugelkampagne |
+| Kugelwelt | M1d-Oberflächenadapter, Erdgröße, belebtes Gelände, radiale Flora-/Faunakollision, überarbeiteter Boden und Wasser, Wiederbesuch | Vollständige Kampagne, Dorf, lokale Flüsse/Seen und räumliches Audio auf Kugeln |
+| Arten | D1, D1.1 Körpernachweise/Habitaterholung, D1.2 Pflichtarten auf Kugeln; bestehende IDs erhalten | Größere Suchräume und populationsbasierte Fernsimulation; begrenzte Habitatsuche bleibt begrenzt |
+| Tierhaltung | D2 mit echten Betreuern und gemeinsamem Save; D3 Tierplätze/Pflege/Milchtransport; lesender D2→D3-Anschluss | Radiale Tierhaltung; Reiten/Pflügen D4; geplante Eierrolle/-produktion D1-EIER/D3-EIER |
+| Dorf | Erneuerbare Quellen/Wasser, Berufe, gespeicherte Aufträge, feste Hütten/Zelte und Wachstum bis sechs Bewohner | Kugelorte, regionale Navigation, weitere Siedlungen; Gebäudeeditor erst Mittelalter |
+| Fortschritt | Eigene Stammespunkte aus realen Arbeiten/Versorgung, eigene Nachbarfraktion mit Hilfstransport | Vollständige Folgeepochen bleiben gesperrt; kein Aufstieg fremder Tiere |
+| Kreaturen | B1 Anschlüsse, B2 Passprüfung/Korrekturen, B3 Sattelauflage/Reitermaße und Bewegungsnachweise | Echte Reitsteuerung, Lastsimulation, Ziel-PC-Abnahme; geplanter Körperteilkatalog M3-TEILE |
+| Oberfläche | Ein Buch mit D1-Eignung/D2-Tierregister, Körperteilvorschauen/Silhouetten, überarbeitete Skills/HUD, Gruppen-/Tierfeedback | Gemeinsame visuelle Ziel-PC-Abnahme; vollständige Übersetzung der Spielinhalte |
+| Karten | Phasenskalierte Minimap, große Karte mit dauerhafter Erkundung, eigene/befreundete bekannte Orte; gleiche Karten auch im belebten Kugelbereich | Produktionskampagne auf Kugeln, später Galaxiennavigation |
+| Sprache | Zentraler Dienst für Deutsch/Englisch, 221 Vorlagen, gespeicherte Menüauswahl | HUD/Buch/Dorf/Editor vollständig übersetzen; L1 ist keine Vollübersetzung |
+| Wartung/Audio | Entfernte unreferenzierte Prototypen, isolierte Prüfungen, Streamingdiagnose, frühe Audiofreigabe und reale Mixerfrist | Windows-Gesamtpaket, Ziel-PC-Framezeiten; keine FPS-Zusage |
+| Speicherung | Gemeinsames Save 8/Kampagne 2, körperfeste Kugelorte, atomare Kopie früher Stände mit Manifest und Quellarchiv; alte Verträge bleiben lesbar | Zielzuordnung und Übernahme besiedelter/veränderter Regionen, Gefährten, Pflichtarten und Wirtschaft |
+
 
 `Antike/Mittelalter` und `Neuzeit/Weltmacht` verwenden zunächst die bestehenden Phasen-IDs 2 und 3; gespeicherte Enum-Werte werden nicht umnummeriert. `MULTIVERSE` bleibt nur kompatibler Altwert, ohne spielbaren Kernumfang. Ein HUD-Phasentext ist keine Freigabe dieser Epochen.
 
@@ -61,7 +66,7 @@ Punkte kommen aus abgeschlossenen, identifizierbaren Spielereignissen. Käufe, V
 
 ## Neu: planetare Tierrollen und Zähmung
 
-**Status: verbindlich geplant; die Rollen-/Zähmungsspielschleife ist noch nicht implementiert.** Vorhandenes Befreunden und Heimgefährten sind nicht mit Tierhaltung gleichzusetzen.
+**Status: D1–D3 sind zusammengeführt; die Kampagne auf der Ebene und der begrenzte Kugelbereich bleiben getrennte Laufzeiten.** Vorhandenes Befreunden und Heimgefährten sind nicht mit Tierhaltung gleichzusetzen.
 
 | Rolle | Mindestfunktion | Erforderliche Artmerkmale | Spielbarer Nachweis |
 |---|---|---|---|
@@ -73,7 +78,7 @@ Punkte kommen aus abgeschlossenen, identifizierbaren Spielereignissen. Käufe, V
 
 Das erweiterte Planungsziel umfasst mindestens **vier unterschiedliche geeignete Arten je belebtem Spielplaneten**: eine Milchtierart, eine eierliefernde Nutztierart, eine robuste Zug-/Reittierart und eine hundeartige Begleiterart. Die vierte Art ist die Einordnung des neuen Eierwunschs in die bestehende Planetengarantie. Zug- und Reitfähigkeit können bei derselben Art liegen; zusätzliche Spezialisten sind möglich. Fünf Fähigkeiten verlangen nicht fünf getrennte Arten. Ein Artprofil kann mehrere passende Rollen tragen, aber nicht jedes Tier bekommt alle Fähigkeiten.
 
-Der laufende D1-Grundvertrag mit drei Pflichtarten bleibt als eigene Lieferung prüfbar. **D1-EIER** erweitert ihn anschließend versioniert; vorhandene Arten-IDs, Tiere, Kataloge und Spielstände werden nicht neu ausgewürfelt. Eine alte Drei-Arten-Prüfung belegt noch nicht das erweiterte Vier-Arten-Ziel.
+Der zusammengeführte D1-Grundvertrag mit drei Pflichtarten bleibt als eigene Lieferung dokumentiert. **D1-EIER** erweitert ihn versioniert; vorhandene Arten-IDs, Tiere, Kataloge und Spielstände werden nicht neu ausgewürfelt. Eine Drei-Arten-Prüfung belegt noch nicht das geplante Vier-Arten-Ziel.
 
 ### Datenvertrag vor der Umsetzung
 
@@ -86,39 +91,62 @@ Der laufende D1-Grundvertrag mit drei Pflichtarten bleibt als eigene Lieferung p
 7. Tierhaltung ist ein Ressourcenablauf mit Futter/Wasser, Haltungskapazität, Betreuung, Produktion und Transport. Vermehrung/Bestandserholung, Tierverlust und Ersatz werden vor langfristiger Wirtschaft ergänzt. Dafür ist kein Genommodell notwendig.
 8. Bestände und Tierbindungen überstehen Mittelalter/Neuzeit. Verbesserte Geschirre, Pflüge, Zuchtwahl als Spielbonus und später Maschinen erweitern/ersetzen Tätigkeiten; bestehende Tiere werden nicht beim Epochenwechsel gelöscht.
 
+## Bedienoberfläche – Ergänzung aus dem Spieltest vom 9. September 2026
+
+- **Visuelle Überarbeitung als eigenes Paket:** Entdeckungs- und Entwicklungsbuch mit klarer Auswahl/Detailansicht, echten Körperteilvorschauen und Silhouetten bei gesperrten Teilen/Fähigkeiten; kompakte Überlebensanzeige oben links. Übergabe und Prüflimits: [WORK_UI_VISUAL_REFRESH.md](docs/WORK_UI_VISUAL_REFRESH.md). Das Paket ist in der zweiten Integrationsrunde übernommen.
+- **Minimap als geprüftes Fachpaket:** unten rechts, gemeinsames Gelände-/Wasserraster, Blickrichtung, Heimat und eigene Gruppenmitglieder. Der bestätigte Phasenwechsel erweitert den Maßstab automatisch; manuell +/− und Rückkehr zum Phasenmaßstab. Körpergebundene Projektion für V9 und Kugelplaneten, Save/Load sowie getrennte Dorfbedienung bei 1280 × 720 und 800 × 600 geprüft. Details und Grenzen: [WORK_MINIMAP.md](docs/WORK_MINIMAP.md). In der zweiten Integrationsrunde samt dauerhafter Weltkarte übernommen. Offen bleiben gespeicherte Wegpunkte, eigene gezähmte Tiere aus D2 und später passende Orbit-/Systemkarten; unbekannte Arten und Rohstoffe werden nicht verraten.
+- **Abnahme auf dem Ziel-PC:** Lesbarkeit der Bücher und Silhouetten, neue Beerenstrauchform, E als einziger Art-/Wertezugriff und passende Drehrichtung im Editor. Die lokale automatische Funktionsprüfung ersetzt die optische Abnahme nicht.
+
+## Weltraumphase – mobile Expeditionsbasis
+
+Das erste Expeditionsschiff ist bereits deutlich größer als sein Landungs-/Erkundungsschiff. Die Basis bleibt beim Planeten im Weltraum, während der Spieler mit einem konkreten Beiboot landet, aussteigt und die Oberfläche untersucht. Schiffwechsel sind Kontroll-/Ortswechsel innerhalb derselben Kampagne und Epoche.
+
+Rumpfteile, Brücke/Cockpit, Antrieb, Energie, Lager, Hangars, Forschung, Waffen und Schutz verwenden das gemeinsame Bauplanfundament. Forschung und Ressourcen schalten größere Baubereiche und Ausrüstung frei; der tatsächliche Umbau erhält Identität, Fracht und Bordschiffe. Hangarkapazität berücksichtigt auch die Abmessungen der Schiffe.
+
+Schiffe, angedockte Beiboote, Fracht und Proben besitzen eindeutige Eigentümer und Orte. Andocken, Umladen und Umbau werden atomar gespeichert. Detailansicht, Hangarinhalte und entfernte Systeme verwenden begrenzte Darstellung/Simulation. Der erste komplette Expeditionsablauf kommt vor umfangreicher Flotte, Sektorreisen und Kolonien; Bewaffnung ist kein zwingendes Tor für friedlichen Fortschritt.
+
+Die sechs Unterpakete, Modulgruppen, Fortschrittsstufen und Abnahmen stehen im [Expeditionsplan](docs/SPACE_EXPEDITION_PLAN.md). Diese Ergänzung plant die spätere Phase und startet keine konkurrierende Weltraumimplementierung während des Kugelumzugs.
+
 ## Meilensteine mit tatsächlichem Status
 
 | ID | Status und nächstes Ergebnis | Voraussetzung | Abnahme |
 |---|---|---|---|
 | M0 | Gemeinsame Grundlage integriert und automatisch geprüft; Veröffentlichung und Übernahme nach main von Lars freigegeben | Bisherige Basis | Alle sieben Stränge mit denselben Spielständen, keine verlorenen IDs, doppelte Boni oder getrennten Buchinstanzen; manueller Windows-Spieltest bleibt offen |
 | M1/M1b/M1c | Planetenlabor, reale Größen, Streaming und Katalogbesuche vorhanden | M0 | Technische Kugel-/Ortsprüfung erhalten; Ziel-PC-Framezeiten und Besuch/Laden abnehmen |
-| M1d | **Offen:** spielbare Kugelkampagne | M1b/M1c, gemeinsamer Oberflächenadapter | Spieler, Flora, Fauna, Haus, Wasser und Audio auf derselben radialen Oberfläche; Wiederbesuch; expliziter Altstandschutz |
+| M1d | **Teilweise:** belebte Kugelwelt, Boden/Wasser und D1.2; volle Kugelkampagne offen | M1b/M1c, gemeinsamer Oberflächenadapter | Spieler, Flora, Fauna, Haus, Wasser und Audio auf derselben radialen Oberfläche; Wiederbesuch; expliziter Altstandschutz |
+| M1e | **Grundlage umgesetzt; erweiterter Umzug offen:** gemeinsamer Kugelstart, versionierte Orte, frühe Kopiermigration, Rückweg und Neustart | M1d und Integration | [Vertrag, Nachweise und verbleibende Migrationsfälle](docs/WORK_M1E_CAMPAIGN.md); vollständige Ortsübernahme mit M1f/M1g weiterführen |
 | M2A | Verhaltenspunkte, Käufe und Vermächtnis vorhanden | M0 | Erfolgreiche Aktionen geben einmal Punkte, Effekte wirken; gemischte Spielweisen bleiben erreichbar |
-| M2B | **Teilweise:** gemeinsame Editor-/Anatomieverträge | M1-Adressen, vorhandene Kreaturenwerkstatt | Stabile Revisionen, Anschlussdaten, Vorschau/Laufzeit; neue Rollen können Körperfähigkeiten auslesen |
-| M3 | Kreaturenwerkstatt ausgebaut; neuer Katalogpass offen | M2B | Zwei-/Vierbeiner und mehrere Beinpaare belastbar; Extremformen, Fußkontakt, Wasser/Flug bleiben weitere Arbeit |
+| M2B | B1/B2/B3 zusammengeführt; gemeinsame Editor-/Anatomieverträge | M1-Adressen, vorhandene Kreaturenwerkstatt | Stabile Revisionen, Anschlussdaten, Vorschau/Laufzeit; neue Rollen können Körperfähigkeiten auslesen |
+| M3 | Kreaturenwerkstatt ausgebaut | M2B | Zwei-/Vierbeiner und mehrere Beinpaare belastbar; Extremformen, Fußkontakt, Wasser/Flug bleiben weitere Arbeit |
 | M3-TEILE | **Geplant:** alle Körperteile prüfen und überarbeiten/kompatibel ersetzen; zuerst Mund-/Kopfformen, Hände/Greifer und Tierfüße | M2B-Anschlüsse, vorhandener Teilekatalog, gemeinsame Designvorgabe | Einzeloptionen und Kombinationen aus dem [Backlog](docs/FEATURE_BACKLOG.md) in Vorschau/Laufzeit erkennbar; Symmetrie, Drehung, Fußkontakt und alte Entwürfe erhalten |
 | M4 | Kreaturenspiel mit Scan, Forschung, Sozialspiel und Bedürfnis-KI vorhanden | M2/M3 | Zusammenhängender Ablauf; offene Tierjagd/Navigation/Ökologie und Tod/Erholung ergänzen |
 | M5 | Bestätigter Stammesbeginn und erster Dorfablauf vorhanden | Heimatgruppe, begehbarer Ort | Gleiche Spezies und drei Bewohner, sichere Übergabe, Transport/Werkzeug/Hütten/Garten; Speichern und Neustart |
-| D1 | **Neu, zuerst:** Art-Eignung und planetare Rollenverteilung; Grundvertrag für drei Arten | Stabile Spezies-/Körper-IDs | Milch-, Zug-/Reit- und Begleiterart deterministisch vorhanden und erreichbar; alte Arten behalten Identität |
+| D1 | D1/D1.1/D1.2 zusammengeführt: Art-Eignung, Körpernachweise und begrenzte planare/radiale Habitate | Stabile Spezies-/Körper-IDs | Milch-, Zug-/Reit- und Begleiterart deterministisch vorhanden und erreichbar; alte Arten behalten Identität |
 | D1-EIER | **Geplant:** Eierrolle als Erweiterung der planetaren Garantie | Geprüfter D1-Grundvertrag und versionierte Katalogmigration | Vierte geeignete Art deterministisch und erreichbar; bestehende Arten/Individuen bleiben erhalten; Mehr-Seed-/Neustartprüfung |
-| D2 | **Neu:** ein Tier zähmen und dauerhaft befehlen | D1, M5 | Eignung/Kosten/Phase prüfen; Tier folgt/wartet/kehrt zurück; Unterbrechung, Tod, Laden und Besitz geprüft |
-| D3 | **Neu:** Milch und dauerhafte Tierhaltung | D2, gemeinsame Dorfvorräte | Betreuung → Produktion → Transport → Verbrauch, keine Doppelernte; Futter/Wasser/Haltungskosten wirken |
+| D2 | Kampagnenzähmung und dauerhafte Befehle zusammengeführt; radialer Host offen | D1, M5 | Eignung/Kosten/Phase prüfen; Tier folgt/wartet/kehrt zurück; Unterbrechung, Tod, Laden und Besitz geprüft |
+| D3 | Tierpflege, Milch und Transport zusammengeführt; produktiver D2-Leseanschluss ergänzt | D2, gemeinsame Dorfvorräte | Betreuung → Produktion → Transport → Verbrauch, keine Doppelernte; Futter/Wasser/Haltungskosten wirken |
 | D3-EIER | **Geplant:** Eier sammeln, transportieren und als Nahrung nutzen | D1-EIER, D2, gemeinsame D3-Haltungs-/Produktionsbasis und Dorfaufträge | Versorgung → Legestelle → Sammelauftrag → Lager → Verbrauch; genau ein Produktionsbesitzer, Save/Load und unterbrochener Transport ohne Verlust/Dopplung |
 | D4 | **Neu:** Reiten und Pflügen | D2, M2B, Feld-/Routenmodell | Passender Reitsitz, sichere Auf-/Abstiege; Zugtier mit Pflug bearbeitet reale Felder, Arbeitsfortschritt speicherbar |
-| M6 | **Teilweise:** tragfähiges Stammesdorf | M5, D1–D4 schrittweise | Erneuerbare Versorgung, Wasser, weitere Rohstoffe, Berufe, Wachstum, frei gebaute Häuser, Tiere und Nachbargruppen |
+| M6 | Erneuerbare Wirtschaft, Berufe, Hütten/Zelte, sechs Bewohner, Tierhaltung und erste Nachbarhilfe; radiale Migration offen | M5, D1–D4 schrittweise | Erneuerbare Versorgung, Wasser, weitere Rohstoffe, Berufe, Wachstum, frei gebaute Häuser, Tiere und Nachbargruppen |
 | M7 | **Geplant:** Antike/Mittelalter | Belastbares M6 | Landwirtschaft, Handwerk, Lager/Transport/Handel, Wege und mehrere Siedlungen; eigene Spezies bleibt Träger aller Fraktionen; bestätigter Wechsel |
 | M8 | **Geplant:** Neuzeit/Weltmacht | M7, globale Orte/Simulation | Industrie/Energie, Ressourcenketten, Staaten, Diplomatie/Armeen, globale Karte; Tiere/Bestände werden übernommen; bestätigter Wechsel |
-| M9 | **Geplant:** Weltraum | M8, M1b/M1c/M1d | Start → Reise → Landung → versorgte Kolonie → Rückkehr, dann System-/Sektorreise und Galaxiekarte; begrenztes Streaming |
+| M9 | **Geplant:** Weltraum mit modularer Expeditionsbasis und Beibooten | M8, vollständige Kugelkampagne auf M1b/M1c/M1d und Folgeadaptern | Großes Schiff steuern → Beiboot abdocken → Planetenanflug/Landung/Ausstieg → untersuchen → zurückkehren/andocken → Schiff ausbauen; danach weitere Systeme und versorgte Kolonien |
+| M9.1 | **Geplant:** Schiffvertrag und erster modularer Editor für Expeditionsschiff/Beiboot | Bauplanfundament, Weltadressen, M8-Wirtschaft | Zwei eigene Entwürfe mit wirkenden Modulen, Größen-/Kapazitätsprüfung, Hangareignung und Save/Load |
+| M9.2 | **Geplant:** vollständige erste Expedition in einem System | M9.1, Flug/Kollision/Übergaben, Kugelkampagne | Beide Schiffe direkt steuern; abdocken, landen, aussteigen, untersuchen und zur mobilen Basis zurückkehren |
+| M9.3 | **Geplant:** Forschung, Proben und planetare Untersuchung | M9.2, vorhandene Entdeckungs-/Kartendienste | Erkenntnisse erhalten, Proben transportieren und einmalig auswerten |
+| M9.4 | **Geplant:** größere Rümpfe, Ausstattung und Fracht-/Modulkapazität | M9.3, Technologie, Ressourcen, Bau-/Leistungsbudget | Größeren Baubereich erschließen und tatsächlich umbauen; Schiffe/Fracht bleiben erhalten |
+| M9.5 | **Geplant:** weitere Bordschiffe, Hangars und Bewaffnung | M9.2/M9.4, Flottenzustand, passende Kampf-/KI-Grundlage | Individuelle Bordschiffe verwalten, Hangarbelegung/Rückkehr prüfen und bewaffnete Ausrüstung spielbar machen |
+| M9.6 | **Geplant:** System-/Sektorreise, Galaxienkarte und versorgte Kolonien | M9.2–M9.4, Galaxiekatalog, begrenzte Fernsimulation, Siedlungswirtschaft | Zu weiterem System reisen, Expedition/Kolonie versorgen und zu erhaltener Heimat zurückkehren |
 | M10 | **Geplant:** Inhalt, Balancing und Veröffentlichung | Wiederholt spielbare Epochenkette | Verständlicher Einstieg, Niederlage/Erholung, Langzeitstände, Bedienbarkeit, Leistung und Ton auf Zielgerät abgenommen |
 
-D1–D4 einschließlich D1-EIER/D3-EIER sind Teil des Stammesausbaus, keine zusätzlichen Spielzeitalter. M3-TEILE gehört zur Kreaturenphase und wird auf den vorhandenen M2B-Anschlüssen aufgebaut; die Erstlieferung setzt weder Mittelalter noch Reiten/Pflügen voraus. Eierproduktion folgt der gemeinsamen Haltungsbasis und wartet nicht auf den vollständigen neuen Körperteilkatalog. Die Weltraumphase bleibt Ziel; sie wird nicht parallel zu einer noch unvollständigen Dorfwirtschaft als halbfertige Spielschleife begonnen.
+D1–D4 einschließlich D1-EIER/D3-EIER sind Teil des Stammesausbaus, keine zusätzlichen Spielzeitalter. M3-TEILE gehört zur Kreaturenphase und baut auf den gemeinsamen M2B-Anschlüssen auf; die Erstlieferung setzt weder Mittelalter noch Reiten/Pflügen voraus. Eierproduktion wartet nicht auf den vollständigen neuen Körperteilkatalog. M9.1–M9.6 konkretisieren die Weltraumphase; Daten-/Editoranschlüsse können früh berücksichtigt werden, die Spielschleife folgt nach M8 und vollständiger Kugelkampagne. Die Weltraumphase bleibt Ziel; sie wird nicht parallel zu einer noch unvollständigen Dorfwirtschaft als halbfertige Spielschleife begonnen.
 
 ## Fehlende Querschnittspunkte
 
 | Thema | Nächste konkrete Aufgabe | Zeitpunkt |
 |---|---|---|
 | Gemeinsame Basis | Automatische Integrationstests und Windows-Testpaket vorhanden; Windows-Spieltest durchführen; jede neue Arbeit vom gleichen zusammengeführten main beginnen | Jetzt |
-| Fauna im Stammeszeitalter | Bedürfnis-/KI-Logik ist derzeit vielfach auf Phase 0 begrenzt; aktive Tiere für Phase 1 freigeben, ohne alte Spielerangriffe auf nur einen Bewohner zu reaktivieren | Vor D2 |
+| Fauna im Stammeszeitalter | D2 aktiviert Bedürfnis-/KI-Logik in Phase 1 und erhält die Angriffssperre; diese Trennung auf Kugeln übernehmen | Kugel-D2 |
 | Gruppenkampf | Alle Gruppenmitglieder als gültige Ziele, Gesundheit/Tod/Abwehr und eindeutige Besitzregeln | Vor Verteidigungsvermächtnis/Nachbarkonflikten |
 | Tierverlust/Bestand | Ersatz, Fortpflanzung oder begrenzte Bestandserholung; keine softlocks durch Ausrottung einer Pflichtrolle | D1/D3, vor Langzeitkampagne |
 | Nahrungsketten | Gemeinsame Vorräte statt paralleler Doppelverbraucher; Jagen/Fressen/Milch/Eier/Abstraktion einmal abrechnen; Eierproduktion und Fortpflanzung getrennt führen | M4/M6, D3-EIER |
@@ -136,6 +164,6 @@ D1–D4 einschließlich D1-EIER/D3-EIER sind Teil des Stammesausbaus, keine zus�
 
 ## Nächste parallele Arbeitsrunde
 
-Die sieben abgegrenzten Aufträge stehen in [NEXT_PARALLEL_WORK.md](docs/NEXT_PARALLEL_WORK.md). Alle Chats starten vom selben integrierten Stand. Der Datenvertrag D1 kommt vor produktiven D2–D4-Anschlüssen; daran abhängige Chats können ihre eigene Oberfläche/Bewegungsprobe vorbereiten und übernehmen erst den fertig geprüften Vertrag. Kein Chat führt fremde unfertige Branches zusammen.
+Die priorisierten Umzugsaufträge stehen in [NEXT_PARALLEL_WORK.md](docs/NEXT_PARALLEL_WORK.md). Alle Chats starten vom selben integrierten Stand. D1–D3 sind bereits übernommen. Zuerst wird M1e als gemeinsamer Orts-/Kampagnenvertrag abgeschlossen; danach folgen Kreaturenphase, Dorf/Tierhaltung und Fernsimulation auf derselben Kugelgrundlage. Kein Chat führt fremde unfertige Branches zusammen.
 
 Roadmap und gemeinsame Kerndateien haben pro Runde genau einen Integrationsverantwortlichen. Jeder Fachchat liefert einen eigenen Branch, exakten Commit, geänderte Dateien, Ergebnisse und Restgrenzen in seinem Übergabebericht. Erst danach folgt eine erneute gemeinsame Abnahme. Empfehlungen zum Ziel-PC gelten als offene Messung; bisherige Software-Renderer-Nachweise sind keine belegten 60 FPS auf Lars’ Rechner.

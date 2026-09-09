@@ -518,3 +518,50 @@ fehlende Updates, Gruppen-IDs, Ablehnung, entfernte Controller/Services, Ladeere
 strenge Einstellungswerte, Speichern/Laden, F7-Abgleich, Fenster-Fokussignale und
 aufgezeichnete Kompressorwirkung. Die native Windows-Fokusausgabe und der subjektive
 Hörtest bleiben für das Zielgerät offen.
+
+## D2-Tieraktionen
+
+`ui/frontend/animal_action_feedback.gd` verbindet bestätigte D2-Ereignisse und
+zurückgegebene Ablehnungen mit dem vorhandenen Meldungsbereich und Klangkanal.
+Pro aktivem Host eine Instanz verwenden, nachdem D2 erfolgreich konfiguriert wurde:
+
+```gdscript
+var feedback = preload("res://ui/frontend/animal_action_feedback.gd").new()
+add_child(feedback)
+feedback.feedback_changed.connect(update_existing_action_message)
+feedback.bind_source(controller, current_animal_scope, resolve_animal_label)
+
+# Der Host liefert weiterhin echten Kontext; D2 prüft und speichert die Aktion.
+var result: Dictionary = controller.command(object_id, "follow", runtime_context)
+feedback.report_result(object_id, result, request_id)
+
+# Nach erfolgreichem Laden in denselben Controller:
+feedback.clear_after_load()
+# Beim Hostwechsel bzw. vor der Freigabe:
+feedback.unbind()
+```
+
+`current_animal_scope()` und der optionale Namensresolver entsprechen den Callbacks
+des Tierbuchs: aktuelle `campaign_id`, `body_id`, `faction_id`; Namen für `animal`,
+`species`, `faction`, `handler`, `body`. `feedback_changed(text, severity)` liefert
+`info`, `success` oder `error`. Der Host verwendet seine vorhandenen Textelemente.
+
+`report_result()` verarbeitet ausschließlich Fehler. Sein Rückgabewert sagt, ob eine
+Meldung angenommen wurde, nicht ob die Tieraktion erfolgreich war. Erfolgsrückgaben
+werden ignoriert, da D2 bereits `animal_changed` gesendet hat. Die Host-`request_id`
+ist 1–64 Zeichen lang, identifiziert genau einen Aufruf und wird bei wiederholter
+Weitergabe desselben Ergebnisses beibehalten. Der Cache umfasst höchstens 256 IDs.
+Auch Fehler aus laufenden Futtergaben sind direkt nach dem echten `advance_offer()`
+weiterzuleiten. Nach Laden keine früheren Rückgaben als frische Aktion melden.
+
+Bezahltes Füttern verwendet `order_feed`, Folgen/Heimkehr `order_move`, Warten
+`order_wait`, Ablehnungen `order_reject`. `order_tame` referenziert die bestehende
+`discovery.wav` als Meilensteinklang, ohne neue Punkte oder Dateien. Die vorhandene
+Befehls-API besitzt weiterhin Stimmen-/Ratenbegrenzung und Priorität unmittelbarer
+Ablehnungen. Binden, Laden und Buchöffnen bleiben still; Pause erzeugt keine
+nachgeholten Tierklänge. Kontextwechsel und Abmeldung entfernen alte Meldungen.
+
+Prüfung mit dem unveränderten D2-Paket und genauer Integrationsstand:
+[`docs/WORK_INTERFACE_AUDIO.md`](../docs/WORK_INTERFACE_AUDIO.md).
+Die normale Kampagne benötigt weiterhin den produktiven D2-Host; bis dahin ist
+`tests/fixtures/animal_feedback_d2_preview.tscn` die klar markierte gemeinsame Prüfansicht.

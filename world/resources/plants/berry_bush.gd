@@ -55,6 +55,9 @@ func _ready() -> void:
 
 
 func _initialize_bush() -> void:
+	# A scene/chunk can leave the tree before this deferred callback runs.
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	if snap_to_terrain:
 		_snap_to_terrain()
 
@@ -122,308 +125,68 @@ func _harvest_berries() -> void:
 
 
 func _generate_bush() -> void:
+	# Stable outer form and collision even after harvesting or reloading. Small
+	# voxel lobes, shaded lower leaves and exposed berry clusters replace the
+	# old solid ellipsoid. Shared food identity/stock is untouched.
 	var random := RandomNumberGenerator.new()
 	random.seed = _get_visual_seed()
-
-	var generated_radius := maxi(
-		2,
-		bush_radius_voxels
-			+ random.randi_range(-1, 1)
-	)
-
-	var generated_height := maxi(
-		2,
-		bush_height_voxels
-			+ random.randi_range(-1, 1)
-	)
-
-	var minimum_count := mini(
-		minimum_berries,
-		maximum_berries
-	)
-
-	var maximum_count := maxi(
-		minimum_berries,
-		maximum_berries
-	)
-
-	var generated_berry_count := random.randi_range(
-		minimum_count,
-		maximum_count
-	)
-
-	var surface_tool := SurfaceTool.new()
-	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-
-	_add_stems(
-		surface_tool,
-		random,
-		generated_height
-	)
-
-	var berry_candidates: Array[Vector3] = []
-
-	_add_foliage(
-		surface_tool,
-		random,
-		generated_radius,
-		generated_height,
-		berry_candidates
-	)
-
-	if not is_depleted:
-		_add_berries(
-			surface_tool,
-			random,
-			generated_berry_count,
-			berry_candidates
-		)
-
-	surface_tool.index()
-
-	var generated_mesh: ArrayMesh = surface_tool.commit()
-
-	if generated_mesh == null:
-		push_error(
-			"Procedural berry bush mesh could not be generated."
-		)
-		return
-
-	bush_mesh.mesh = generated_mesh
-
+	var radius: int = maxi(2, bush_radius_voxels + random.randi_range(-1, 1))
+	var height: int = maxi(2, bush_height_voxels + random.randi_range(-1, 1))
+	var berry_count: int = random.randi_range(mini(minimum_berries, maximum_berries), maxi(minimum_berries, maximum_berries))
+	var span: float = float(radius) * voxel_size
+	var tall: float = float(height) * voxel_size
+	var cell: float = voxel_size * 0.48
+	var leaves: Dictionary = {}
+	var surface := SurfaceTool.new()
+	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	# Five offset crowns create an irregular shrub with openings at ground level.
+	for branch in range(5):
+		var angle: float = float(branch) * TAU / 5.0 + random.randf_range(-0.24, 0.24)
+		var center := Vector3(cos(angle) * span * 0.43, tall * random.randf_range(0.45, 0.68), sin(angle) * span * 0.43)
+		var lobe := Vector3(span * random.randf_range(0.43, 0.61), tall * random.randf_range(0.29, 0.43), span * random.randf_range(0.43, 0.61))
+		for step in range(7):
+			var point: Vector3 = Vector3(0, cell * 0.5, 0).lerp(center, float(step) / 6.0)
+			_add_voxel(surface, point, cell * 0.7, Color("705037").lightened(float(step) * 0.012))
+		var origin := Vector3i((center / cell).round())
+		var reach := Vector3i((lobe / cell).ceil())
+		for x in range(-reach.x, reach.x + 1):
+			for y in range(-reach.y, reach.y + 1):
+				for z in range(-reach.z, reach.z + 1):
+					var key := origin + Vector3i(x, y, z)
+					var p := Vector3(key) * cell
+					var distance: float = ((p - center) / lobe).length_squared()
+					if distance > 1.0 or p.y < cell * 1.5: continue
+					if distance > 0.76 and random.randf() < foliage_gap_probability * 1.5: continue
+					var sunlight: float = clampf(p.y / maxf(tall, 0.1), 0.0, 1.0)
+					leaves[key] = Color("294c36").lerp(Color("709455"), sunlight * 0.85 + random.randf_range(-0.08, 0.08))
+	var candidates: Array[Vector3] = []
+	var directions := [Vector3i.RIGHT, Vector3i.LEFT, Vector3i.UP, Vector3i.DOWN, Vector3i(0, 0, 1), Vector3i(0, 0, -1)]
+	for key: Vector3i in leaves:
+		var exposed: bool = false
+		for direction in directions:
+			if not leaves.has(key + direction):
+				exposed = true
+				break
+		if not exposed: continue
+		var p := Vector3(key) * cell
+		_add_voxel(surface, p, cell, leaves[key])
+		var outward := Vector3(p.x, 0, p.z).normalized()
+		if p.y > tall * 0.32 and not leaves.has(key + Vector3i((outward * 1.5).round())):
+			candidates.append(p + outward * cell * 0.75)
+	# Consume exactly the same RNG path for full and empty bushes.
+	for index in range(mini(berry_count, candidates.size())):
+		var selected: int = random.randi_range(0, candidates.size() - 1)
+		var point: Vector3 = candidates[selected]
+		candidates.remove_at(selected)
+		var berry_color: Color = Color("b8445b").lightened(random.randf_range(-0.12, 0.1))
+		if is_depleted: continue
+		for offset in [Vector3.ZERO, Vector3(cell * 0.5, -cell * 0.5, 0), Vector3(-cell * 0.45, -cell * 0.45, 0)]:
+			_add_voxel(surface, point + offset, cell * 0.74, berry_color)
+		_add_voxel(surface, point + Vector3(-cell * 0.16, cell * 0.22, -cell * 0.30), cell * 0.23, Color("ed99a2"))
+	surface.index()
+	bush_mesh.mesh = surface.commit()
 	_apply_material()
-
-	_create_collision(
-		generated_radius,
-		generated_height
-	)
-
-
-func _add_stems(
-	surface_tool: SurfaceTool,
-	random: RandomNumberGenerator,
-	generated_height: int
-) -> void:
-	var stem_height := maxi(
-		2,
-		generated_height - 1
-	)
-
-	for voxel_y in range(stem_height):
-		var center := Vector3(
-			0.0,
-			(
-				float(voxel_y)
-				+ 0.5
-			) * voxel_size,
-			0.0
-		)
-
-		var stem_color := _vary_color(
-			STEM_COLOR,
-			random,
-			0.10
-		)
-
-		_add_voxel(
-			surface_tool,
-			center,
-			voxel_size,
-			stem_color
-		)
-
-	# Zwei kleine seitliche Äste.
-	var branch_height := (
-		float(stem_height)
-		* voxel_size
-		* 0.55
-	)
-
-	for direction in [
-		Vector3.LEFT,
-		Vector3.RIGHT
-	]:
-		var branch_center := Vector3(
-			direction.x * voxel_size,
-			branch_height,
-			0.0
-		)
-
-		var branch_color := _vary_color(
-			STEM_COLOR,
-			random,
-			0.10
-		)
-
-		_add_voxel(
-			surface_tool,
-			branch_center,
-			voxel_size,
-			branch_color
-		)
-
-
-func _add_foliage(
-	surface_tool: SurfaceTool,
-	random: RandomNumberGenerator,
-	generated_radius: int,
-	generated_height: int,
-	berry_candidates: Array[Vector3]
-) -> void:
-	var vertical_center := (
-		float(generated_height - 1)
-		* 0.5
-	)
-
-	var vertical_radius := (
-		float(generated_height)
-		* 0.5
-		+ 0.35
-	)
-
-	for voxel_y in range(generated_height):
-		for voxel_x in range(
-			-generated_radius,
-			generated_radius + 1
-		):
-			for voxel_z in range(
-				-generated_radius,
-				generated_radius + 1
-			):
-				var normalized_x := (
-					float(voxel_x)
-					/ (
-						float(generated_radius)
-						+ 0.35
-					)
-				)
-
-				var normalized_y := (
-					(
-						float(voxel_y)
-						- vertical_center
-					)
-					/ vertical_radius
-				)
-
-				var normalized_z := (
-					float(voxel_z)
-					/ (
-						float(generated_radius)
-						+ 0.35
-					)
-				)
-
-				var distance_squared := (
-					normalized_x * normalized_x
-					+ normalized_y * normalized_y
-					+ normalized_z * normalized_z
-				)
-
-				if distance_squared > 1.0:
-					continue
-
-				var is_core := (
-					absi(voxel_x) <= 1
-					and absi(voxel_z) <= 1
-				)
-
-				if (
-					not is_core
-					and random.randf()
-						< foliage_gap_probability
-				):
-					continue
-
-				var center := Vector3(
-					float(voxel_x) * voxel_size,
-					(
-						float(voxel_y)
-						+ 0.5
-					) * voxel_size,
-					float(voxel_z) * voxel_size
-				)
-
-				var foliage_color := _vary_color(
-					FOLIAGE_COLOR,
-					random,
-					0.16
-				)
-
-				_add_voxel(
-					surface_tool,
-					center,
-					voxel_size,
-					foliage_color
-				)
-
-				# Nur äußere und nicht zu tief liegende Blätter
-				# kommen als Beerenposition infrage.
-				if (
-					distance_squared >= 0.50
-					and float(voxel_y)
-						>= vertical_center * 0.45
-				):
-					var outward_direction := Vector3(
-						normalized_x,
-						normalized_y,
-						normalized_z
-					).normalized()
-
-					var berry_position := (
-						center
-						+ outward_direction
-							* voxel_size
-							* 0.58
-					)
-
-					berry_candidates.append(
-						berry_position
-					)
-
-
-func _add_berries(
-	surface_tool: SurfaceTool,
-	random: RandomNumberGenerator,
-	generated_berry_count: int,
-	berry_candidates: Array[Vector3]
-) -> void:
-	if berry_candidates.is_empty():
-		return
-
-	var available_candidates := berry_candidates.duplicate()
-
-	var berries_to_create := mini(
-		generated_berry_count,
-		available_candidates.size()
-	)
-
-	for berry_index in range(berries_to_create):
-		var candidate_index := random.randi_range(
-			0,
-			available_candidates.size() - 1
-		)
-
-		var berry_position: Vector3 = (
-			available_candidates[candidate_index]
-		)
-
-		available_candidates.remove_at(
-			candidate_index
-		)
-
-		var berry_color := _vary_color(
-			BERRY_COLOR,
-			random,
-			0.10
-		)
-
-		_add_voxel(
-			surface_tool,
-			berry_position,
-			voxel_size * 0.65,
-			berry_color
-		)
+	_create_collision(radius, height)
 
 
 func _add_voxel(

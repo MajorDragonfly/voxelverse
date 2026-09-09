@@ -1,0 +1,105 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "base": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "dependencies": {
+    "D1": "17b23f568dabbec9f3903217238650f0c9178d04",
+    "B1": "004d5a62b4010b147a1975ccafa604bada7c5295"
+  },
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.375
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.922
+    },
+    {
+      "name": "domestication_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.715
+    },
+    {
+      "name": "domestic_fauna_catalog_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.19
+    },
+    {
+      "name": "domestic_fauna_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.522
+    },
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.974
+    },
+    {
+      "name": "discovery_journal_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.43
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.134
+    },
+    {
+      "name": "domestic_body_evidence_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 26.363
+    },
+    {
+      "name": "domestic_habitat_recovery_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.21
+    },
+    {
+      "name": "domestic_habitat_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.105
+    },
+    {
+      "name": "d1_restart_write",
+      "process": "write",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "d1_restart_read",
+      "process": "read",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "d11_restart_write",
+      "process": "write",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "d11_restart_read",
+      "process": "read",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "all_passed": true,
+  "seed_count": 78,
+  "body_count": 234,
+  "original_d1_habitats": 932,
+  "platform": "Linux headless; target Windows and graphical acceptance remain open"
+}

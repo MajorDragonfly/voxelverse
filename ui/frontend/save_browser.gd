@@ -1,5 +1,6 @@
 extends Control
 
+const Text = preload("res://core/localization/ui_text.gd")
 signal back_requested
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Dates = preload("res://ui/frontend/main_menu.gd")
@@ -20,6 +21,7 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	theme = Style.theme()
 	_saves = get_node("/root/SaveGameService")
+	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
 	var background := ColorRect.new()
 	background.color = Style.INK
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -101,10 +103,11 @@ func refresh(preferred_path: String = "") -> void:
 		text_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(text_column)
 		var label := Style.label(text_column, str(slot.name), 21)
+		label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		label.custom_minimum_size.x = 220
-		Style.label(text_column, Dates._phase(int(slot.phase)) + " · %d Min." % int(float(slot.seconds) / 60.0), 17, Style.MUTED)
-		Style.label(text_column, "Planet %d" % (int(slot.planet_index) + 1) if slot.valid else "Wiederherstellung prüfen", 17, Style.ACCENT)
+		Style.label(text_column, Dates._phase(int(slot.phase)) + Text.text(" · %d Min.") % int(float(slot.seconds) / 60.0), 17, Style.MUTED)
+		Style.label(text_column, Text.text("Planet %d") % (int(slot.planet_index) + 1) if slot.valid else "Wiederherstellung prüfen", 17, Style.ACCENT)
 		_ignore_mouse(margin)
 	if _slots.is_empty():
 		Style.paragraph(_list, "Dein erstes Abenteuer beginnt mit „Neues Spiel“.")
@@ -132,13 +135,15 @@ func select_slot(path: String) -> void:
 	summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	overview.add_child(summary)
 	var heading := Style.label(summary, str(slot.name), 27)
+	heading.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	heading.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	var text: String = "Planet %d · Welt-Seed %d\n%s · %d Min. gespielt\nGespeichert: %s" % [
-		int(slot.planet_index) + 1, int(slot.seed), Dates._phase(int(slot.phase)), int(float(slot.seconds) / 60.0), _date(int(slot.saved_time))]
+	var text: String = Text.format_text("SAVE_OVERVIEW", {
+		"planet": int(slot.planet_index) + 1, "seed": int(slot.seed), "phase": Dates._phase(int(slot.phase)),
+		"minutes": int(float(slot.seconds) / 60.0), "time": _date(int(slot.saved_time))})
 	if not slot.valid:
 		text = str(slot.problem)
 	elif slot.recovered:
-		text += "\nDie letzte Sicherung ist verfügbar."
+		text += Text.text("\nDie letzte Sicherung ist verfügbar.")
 	Style.paragraph(summary, text, 19)
 	var load_button := Style.button(_details, "Abenteuer laden", func(): get_node("/root/SessionFlow").load_game(selected_path), "LoadAdventure", true)
 	load_button.disabled = not slot.valid
@@ -157,11 +162,21 @@ func select_slot(path: String) -> void:
 	rename.disabled = not slot.valid
 	var copy := Style.button(_details, "Spielstand kopieren", _copy, "CopySlot")
 	copy.disabled = not slot.valid or int(slot.schema) < 3
+	Style.paragraph(_details, "Kugelwelt" if slot.surface_mode == "cube_sphere_m1_v1" else "Bisherige Flachwelt", 17)
+	if slot.valid and slot.surface_mode == "legacy_plane_v9":
+		Style.button(_details, "Kugelumzug prüfen", _preview_migration, "PreviewSphereMigration")
+	if slot.valid and slot.has_migration_archive:
+		Style.button(_details, "Flachwelt aus Umzugsarchiv kopieren", func() -> void:
+			var restored: String = _saves.restore_spherical_source(selected_path)
+			if restored.is_empty(): _status.text = _saves.last_error
+			else:
+				refresh(restored)
+				_status.text = "Flachwelt mit den ursprünglichen Karten als eigene Kopie wiederhergestellt.", "RestoreMigrationSource")
 	if slot.valid and int(slot.schema) < 3:
 		Style.paragraph(_details, "Diesen älteren Stand einmal laden und speichern, um auch seine Entwürfe kopieren zu können.", 17)
 	_details.add_child(HSeparator.new())
 	_entries = _saves.list_slot_history(selected_path)
-	Style.label(_details, "SICHERUNGEN · %d" % _entries.size(), 21, Style.ACCENT)
+	Style.label(_details, Text.plural("SAVE_BACKUPS", "SAVE_BACKUPS_PLURAL", _entries.size()), 21, Style.ACCENT)
 	Style.paragraph(_details, "Bis zu acht frühere Speicherstände. Eine Wiederherstellung legt ein neues Abenteuer an.", 17)
 	_history = OptionButton.new()
 	_history.name = "HistoryChoice"
@@ -169,9 +184,9 @@ func select_slot(path: String) -> void:
 	_history.custom_minimum_size.y = 48
 	_details.add_child(_history)
 	for entry: Dictionary in _entries:
-		var label: String = "%s · %d Min. · %s" % [_date(int(entry.saved_time)), int(float(entry.seconds) / 60.0), _reason(str(entry.reason))]
+		var label: String = Text.format_text("SAVE_HISTORY_ENTRY", {"time": _date(int(entry.saved_time)), "minutes": int(float(entry.seconds) / 60.0), "reason": _reason(str(entry.reason))})
 		if not entry.can_copy:
-			label += " · nicht ladbar"
+			label += Text.text(" · nicht ladbar")
 		_history.add_item(label)
 	_history.disabled = _entries.is_empty()
 	_history.visible = not _entries.is_empty()
@@ -192,6 +207,32 @@ func _select_history(index: int) -> void:
 	_history_preview.add_child(_preview(entry.preview, 135))
 	if not entry.valid:
 		Style.paragraph(_history_preview, str(entry.problem), 17)
+
+func _preview_migration() -> void:
+	var source: String = selected_path
+	var preview: Dictionary = _saves.preview_spherical_migration(source)
+	if not preview.ok:
+		_clear_children(_details)
+		Style.label(_details, "UMZUG NOCH NICHT MÖGLICH", 25)
+		for problem in preview.blockers:
+			Style.paragraph(_details, str(problem), 18)
+		Style.button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "BackFromMigrationBlockers")
+		_status.text = "Die Quelle bleibt vollständig erhalten und kann weiter als Flachwelt geladen werden."
+		return
+	_clear_children(_details)
+	Style.label(_details, "KUGELKOPIE PRÜFEN", 25)
+	Style.paragraph(_details, "Diese Kopie übernimmt Identitäten, Entwürfe und Fortschritt. Der Spieler erhält einen geprüften Startplatz. Alte Karten bleiben im Quellarchiv; die neue Kugelkarte beginnt unerforscht.")
+	Style.paragraph(_details, "Auf der Kugel funktionieren derzeit Bewegung, Karte und Speichern. Nahrung, Begegnungen und Siedlungen folgen.")
+	var manifest: Dictionary = preview.manifest
+	Style.paragraph(_details, "Körper: %d · Entwurfsdateien: %d\nQuell-Hash: %s\nManifest: %s\nOriginal und vollständiges Quellarchiv bleiben erhalten." % [
+		manifest.inventory.body_count, preview.data.design_files.size(), str(manifest.source_sha256).left(16), str(manifest.id).left(16)], 17)
+	Style.button(_details, "Geprüfte Kugelkopie anlegen", func() -> void:
+		var target: String = _saves.migrate_slot_to_sphere(source, manifest.source_sha256)
+		if target.is_empty(): _status.text = _saves.last_error
+		else:
+			refresh(target)
+			_status.text = "Kugelkopie geschrieben, zurückgelesen und geprüft. Das Original ist weiterhin verfügbar.", "CommitSphereMigration", true)
+	Style.button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "CancelSphereMigration")
 
 func _rename() -> void:
 	var renamed: bool = _saves.rename_slot(selected_path, _name_input.text)
@@ -252,10 +293,18 @@ static func _ignore_mouse(control: Control) -> void:
 		_ignore_mouse(child)
 
 static func _date(unix_time: int) -> String:
-	if unix_time <= 0:
-		return "Unbekannter Zeitpunkt"
-	var date: Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
-	return "%02d.%02d. %02d:%02d:%02d UTC" % [date.day, date.month, date.hour, date.minute, date.second]
+	return Text.date_time(unix_time, true)
 
 static func _reason(reason: String) -> String:
-	return {"automatic": "Auto", "manual": "Speichern", "rename": "Vor Umbenennen", "backup": "Letzte Sicherung"}.get(reason, "Sicherung")
+	return Text.text({"automatic": "Auto", "manual": "Speichern", "rename": "Vor Umbenennen", "backup": "Letzte Sicherung"}.get(reason, "Sicherung"))
+
+func _language_changed(_locale: String) -> void:
+	# Preserve an unsaved rename and the selected backup while rebuilding dates.
+	var draft: String = _name_input.text if is_instance_valid(_name_input) else ""
+	var history_index: int = _history.selected if is_instance_valid(_history) else -1
+	refresh(selected_path)
+	if is_instance_valid(_name_input):
+		_name_input.text = draft
+	if is_instance_valid(_history) and history_index >= 0 and history_index < _history.item_count:
+		_history.select(history_index)
+		_select_history(history_index)

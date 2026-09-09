@@ -1,0 +1,156 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "living_planet_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 27.016
+    },
+    {
+      "name": "living_planet_entry_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 31.899
+    },
+    {
+      "name": "surface_adapter_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.828
+    },
+    {
+      "name": "surface_adapter_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 35.888
+    },
+    {
+      "name": "surface_adapter_entry_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.011
+    },
+    {
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.453
+    },
+    {
+      "name": "galaxy_visits_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.158
+    },
+    {
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.716
+    },
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.019
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.839
+    }
+  ],
+  "base_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "branch": "agent/m1d-surface-adapter",
+  "surface_generation": "living_planet_v1",
+  "measurements": {
+    "animal_count": 1,
+    "asset_families": [
+      "ancient_oak_v2",
+      "tall_pine_v2",
+      "dense_bush_v2",
+      "layered_rock_v2",
+      "grass_tuft_v2",
+      "fern_cluster_v2",
+      "flower_cluster_v2"
+    ],
+    "biomes": [
+      "ocean",
+      "savanna",
+      "rocky_highlands",
+      "alpine",
+      "grassland",
+      "coast",
+      "dense_forest",
+      "forest",
+      "desert",
+      "snow"
+    ],
+    "camera_water_crossing": true,
+    "collision_shapes": 173,
+    "contacts": 180,
+    "initial_instances": 599,
+    "initial_load_ms": 5418.337,
+    "initial_patches": 24,
+    "max_animal_build_ms": 119.197,
+    "max_ecosystem_frame_work_ms": 125.41,
+    "max_flora_publish_ms": 1.815,
+    "max_flora_worker_ms": 6.678,
+    "max_height_m": 235.251571471764,
+    "min_height_m": -100.443366968968,
+    "moving_animals": 1,
+    "patch_loads": 50,
+    "patch_unloads": 25,
+    "radial_obstacle_hits": 160,
+    "restart_exit": 0,
+    "swimming_height_m": 0.599999998696148,
+    "walk_m": 24.0006721168756
+  },
+  "graphical_measurements": {
+    "animal_count": 4,
+    "asset_families": [
+      "ancient_oak_v2",
+      "tall_pine_v2",
+      "dense_bush_v2",
+      "layered_rock_v2",
+      "grass_tuft_v2",
+      "fern_cluster_v2",
+      "flower_cluster_v2"
+    ],
+    "biomes": [
+      "ocean",
+      "savanna",
+      "rocky_highlands",
+      "alpine",
+      "grassland",
+      "coast",
+      "dense_forest",
+      "forest",
+      "desert",
+      "snow"
+    ],
+    "collision_shapes": 175,
+    "initial_instances": 594,
+    "initial_load_ms": 5743.748,
+    "initial_patches": 24,
+    "max_height_m": 235.251571471764,
+    "min_height_m": -100.443366968968,
+    "moving_animals": 4
+  },
+  "renderer": "Godot 4.6.3 Compatibility, Mesa llvmpipe; 1280x720; Linux container",
+  "limits": {
+    "terrain_collision_tiles": 24,
+    "resident_terrain_meshes": 1536,
+    "flora_patches": 25,
+    "generated_animals_active": 4,
+    "fauna_records_per_body": 256
+  },
+  "notes": [
+    "One additional fixed M1d tree and creature remain at the start marker.",
+    "Time measurements on a shared CPU, not a target-PC frame-rate certification.",
+    "Landscape arrival uses explicit 210 m relocation; reported walking is actual physics travel.",
+    "Fauna blueprints round-trip through typed JSON and are rebuilt in a fresh process."
+  ]
+}

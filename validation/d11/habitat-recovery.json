@@ -1,0 +1,57 @@
+{
+  "failures": [],
+  "measurements": [
+    {
+      "fixture": "bent_channel",
+      "position": [
+        56.0,
+        1.0278639793396,
+        64.0
+      ],
+      "steps": 116
+    },
+    {
+      "fixture": "bent_channel",
+      "position": [
+        64.0,
+        1.5,
+        64.0
+      ],
+      "steps": 120
+    },
+    {
+      "fixture": "bent_channel",
+      "position": [
+        72.0,
+        1.0278639793396,
+        64.0
+      ],
+      "steps": 124
+    },
+    {
+      "habitats": 3,
+      "nodes": 89,
+      "seed": 15838,
+      "status": "ready"
+    },
+    {
+      "habitats": 3,
+      "nodes": 14,
+      "seed": 63352,
+      "status": "ready"
+    },
+    {
+      "habitats": 3,
+      "nodes": 70,
+      "seed": 23757,
+      "status": "ready"
+    },
+    {
+      "habitats": 3,
+      "nodes": 39,
+      "seed": 1060,
+      "status": "ready"
+    }
+  ],
+  "test": "domestic_habitat_recovery"
+}

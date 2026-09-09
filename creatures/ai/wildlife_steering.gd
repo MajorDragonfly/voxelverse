@@ -38,7 +38,7 @@ static func safe_direction(actor: CharacterBody3D, direction: Vector3, step_heig
 	var raised: Transform3D = actor.global_transform.translated(rise)
 	return not actor.test_move(actor.global_transform, rise) and not actor.test_move(raised, motion) and actor.test_move(raised.translated(motion), Vector3.DOWN * (step_height + 0.12))
 
-static func choose(actor: CharacterBody3D, desired: Vector3, step_height: float, side: float) -> Vector3:
+static func choose(actor: CharacterBody3D, desired: Vector3, step_height: float, side: float, distance: float = 1.1) -> Vector3:
 	if desired.length_squared() < 0.001:
 		return Vector3.ZERO
 	var forward: Vector3 = desired.normalized()
@@ -46,6 +46,6 @@ static func choose(actor: CharacterBody3D, desired: Vector3, step_height: float,
 	# while following the edge of a tree or short wall.
 	for angle in [0.0, side * 0.40, side * 0.80, side * 1.20, side * 1.60, -side * 0.80, -side * 1.20, -side * 1.60]:
 		var direction: Vector3 = forward.rotated(Vector3.UP, angle)
-		if safe_direction(actor, direction, step_height):
+		if safe_direction(actor, direction, step_height, distance):
 			return direction
 	return Vector3.ZERO

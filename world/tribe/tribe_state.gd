@@ -3,11 +3,14 @@ extends RefCounted
 ## Orders and cargo live in the same save snapshot as stock and construction.
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
-const SCHEMA: int = 2
+const Economy = preload("res://world/tribe/village_economy.gd")
+const Housing = preload("res://world/tribe/village_housing.gd")
+const Husbandry = preload("res://world/tribe/village_husbandry.gd")
+const SCHEMA: int = 5
 const KINDS: Array[String] = ["wood", "stone", "food"]
-const ORDERS: Array[String] = ["wait", "move", "wood", "stone", "food", "tool", "hut", "feed", "garden", "supply"]
-const COSTS: Dictionary = {"tool": {"wood": 3, "stone": 2}, "hut": {"wood": 6, "stone": 3}, "garden": {"wood": 4, "stone": 1}}
-const WORK: Dictionary = {"tool": 10.0, "hut": 20.0, "garden": 15.0}
+const ORDERS: Array[String] = ["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "pen", "feed", "garden", "supply"]
+const COSTS: Dictionary = {"tool": {"wood": 3, "stone": 2}, "hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}, "pen": {"wood": 4, "fiber": 2}, "garden": {"wood": 4, "stone": 1}}
+const WORK: Dictionary = {"tool": 10.0, "hut": 20.0, "tent": 15.0, "pen": 15.0, "garden": 15.0}
 const STORAGE: int = 48
 const FOOD_TARGET: int = 12
 const GROW_SECONDS: float = 20.0
@@ -24,25 +27,36 @@ static func create(home: Dictionary, campaign: Dictionary, player: Dictionary, s
 	var deposits: Dictionary = {}
 	for kind: String in KINDS:
 		deposits[kind] = {"id": Ids.scoped("resource", home["id"], kind), "position": sites[kind].duplicate(), "remaining": 48}
-	return {"schema": SCHEMA, "id": Ids.scoped("tribe", home["id"], "settled"), "home_group_id": home["id"],
+	var data: Dictionary = {"schema": SCHEMA, "id": Ids.scoped("tribe", home["id"], "settled"), "home_group_id": home["id"],
 		"body_id": home["body_id"], "species_id": home["species_id"], "faction_id": campaign["player_faction_id"],
 		"anchor": home["anchor"].duplicate(), "members": members, "deposits": deposits,
 		"stock": {"wood": 0, "stone": 0, "food": 0}, "tools": 0, "huts": 0,
 		"sites": sites["huts"].duplicate(true), "project": {}, "delivered": 0, "meals": 0,
 		"garden": 0, "growth": 0.0, "grown": 0}
+	Economy.install(data)
+	Housing.install(data)
+	Husbandry.install(data)
+	return data
 
 static func upgrade(data: Dictionary) -> bool:
-	# Call only after validation. Old jobs, cargo and all finite stock stay intact.
-	if int(data.get("schema", 0)) != 1:
+	# Validation precedes migration; never refill old deposits or replace IDs.
+	var old: int = int(data.get("schema", 0))
+	if old < 1 or old >= SCHEMA:
 		return false
-	data.merge({"garden": 0, "growth": 0.0, "grown": 0}, true)
+	if old == 1:
+		data.merge({"garden": 0, "growth": 0.0, "grown": 0}, true)
+	if old < 3:
+		Economy.install(data)
+	if old < 4:
+		Housing.install(data)
+	Husbandry.install(data)
 	data["schema"] = SCHEMA
 	return true
 
 static func cargo_count(data: Dictionary, kind: String) -> int:
 	var count: int = 0
 	for member: Dictionary in data["members"]:
-		count += 1 if member["cargo"] == kind else 0
+		count += 1 if member["cargo"] == kind and member.get("construction_id", "") == "" else 0
 	return count
 
 static func available_storage(data: Dictionary, kind: String) -> int:
@@ -66,7 +80,12 @@ static func grow(data: Dictionary, delta: float) -> bool:
 static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> String:
 	if not value is Dictionary or not integer(value.get("schema"), 1, SCHEMA):
 		return "Nicht unterstützter Stammesstand."
+	var growing: bool = int(value["schema"]) >= 4
+	var expanded: bool = int(value["schema"]) >= 3
 	var renewable: bool = int(value["schema"]) >= 2
+	if expanded:
+		if not value.get("economy") is Dictionary or not value["economy"].get("produced") is Dictionary or not value["economy"].get("stations") is Dictionary:
+			return "Ungültiger Wirtschaftsvertrag."
 	if renewable and (not integer(value.get("garden"), 0, 1) or not number(value.get("growth"), 0, GROW_SECONDS) or not integer(value.get("grown"), 0, 1000000000)):
 		return "Ungültiger Gartenstand."
 	if renewable and int(value["garden"]) == 0 and (float(value["growth"]) != 0 or int(value["grown"]) != 0):
@@ -79,18 +98,24 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 	if value.get("anchor") != home["anchor"] or not point(value.get("anchor")):
 		return "Ungültiger Dorfplatz."
 	var members: Variant = value.get("members")
-	if not members is Array or members.size() != 3:
+	if not members is Array or members.size() < 3 or members.size() > (Housing.MAX_RESIDENTS if growing else 3):
 		return "Der Stamm benötigt seine drei ursprünglichen Mitglieder."
 	var ids: Array = [campaign["player_object_id"], home["members"][0]["id"], home["members"][1]["id"]]
-	for i in range(3):
+	for i in range(3, members.size()):
+		ids.append(Housing.resident_id(value, i))
+	for i in range(members.size()):
 		var member: Variant = members[i]
 		if not member is Dictionary or member.get("id") != ids[i] or not member.get("name") is String or member["name"].is_empty() or member["name"].length() > 32:
 			return "Ungültiges Stammesmitglied."
-		if not local_point(member.get("position"), value["anchor"]) or not local_point(member.get("destination"), value["anchor"]) or member.get("order") not in ORDERS or member.get("stage") not in ["outbound", "return", "meal"] or member.get("cargo") not in ["", "wood", "stone", "food"] or not number(member.get("work"), 0, 4) or not number(member.get("hunger"), 0, 100):
+		if not local_point(member.get("position"), value["anchor"]) or not local_point(member.get("destination"), value["anchor"]) or member.get("order") not in (ORDERS + Economy.ORDERS if expanded else ORDERS) or member.get("stage") not in (["outbound", "return", "meal", "drink"] if expanded else ["outbound", "return", "meal"]) or member.get("cargo") not in ([""] + Economy.RESOURCES if expanded else ["", "wood", "stone", "food"]) or not number(member.get("work"), 0, 4) or not number(member.get("hunger"), 0, 100):
 			return "Ungültiger Auftrag oder Zustand eines Bewohners."
+		if not growing and member["order"] == "tent":
+			return "Zelte benötigen Stammesformat 4."
+		if int(value["schema"]) < 5 and (member["order"] in ["pen", "tend"] or member.get("paused_order", "") in ["pen", "tend"] or member.get("profession", "") == "keeper"):
+			return "Tierpflege benötigt Stammesformat 5."
 		if not renewable and (member["order"] in ["garden", "supply"] or member["stage"] == "meal"):
 			return "Versorgungsauftrag benötigt Stammesformat 2."
-		if member["stage"] == "meal" and (member["cargo"] != "" or member["order"] in ["wait", "feed"]):
+		if member["stage"] in ["meal", "drink"] and (member["cargo"] != "" or member["order"] in ["wait", "feed"]):
 			return "Ungültige Essenspause."
 	if not value.get("deposits") is Dictionary or not value.get("stock") is Dictionary:
 		return "Ungültige Dorfvorräte."
@@ -102,12 +127,14 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 		for member: Dictionary in members:
 			carried += 1 if member["cargo"] == kind else 0
 		var produced: int = int(value.get("grown", 0)) if kind == "food" and renewable else 0
-		if int(deposit["remaining"]) + int(value["stock"][kind]) + carried > 48 + produced or int(value["stock"][kind]) + carried > STORAGE:
+		if expanded and kind in ["wood", "stone"]:
+			produced = int(value.get("economy", {}).get("produced", {}).get(kind, 0))
+		if int(deposit["remaining"]) + int(value["stock"][kind]) + carried > 48 + produced or int(value["stock"][kind]) + cargo_count(value, kind) > STORAGE:
 			return "Material wurde vervielfacht."
 	for key in ["tools", "huts", "delivered", "meals"]:
 		if not integer(value.get(key), 0, 1000000000 if renewable else 144):
 			return "Ungültiger Dorffortschritt."
-	if int(value["tools"]) > 1 or int(value["huts"]) > 2 or not value.get("sites") is Array or value["sites"].size() != 2:
+	if int(value["tools"]) > 1 or int(value["huts"]) > (Housing.MAX_HOMES if growing else 2) or not value.get("sites") is Array or value["sites"].size() != 2:
 		return "Ungültige Dorfgebäude."
 	if renewable and int(value["garden"]) == 1 and int(value["tools"]) != 1:
 		return "Ein Wurzelgarten benötigt ein Steinwerkzeug."
@@ -118,12 +145,25 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 	if not project is Dictionary:
 		return "Ungültige Baustelle."
 	if not project.is_empty():
-		if project.get("kind") not in ["tool", "hut", "garden"] or not number(project.get("progress"), 0, 20):
+		if project.get("kind") not in (["tool", "hut", "garden", "tent", "pen"] + Economy.STATIONS.keys() if int(value["schema"]) >= 5 else ["tool", "hut", "garden", "tent"] + Economy.STATIONS.keys() if growing else ["tool", "hut", "garden"] + Economy.STATIONS.keys() if expanded else ["tool", "hut", "garden"]) or not number(project.get("progress"), 0, 20):
 			return "Ungültiger Baufortschritt."
-		if (project["kind"] == "tool" and int(value["tools"]) != 0) or (project["kind"] == "hut" and (int(value["tools"]) != 1 or int(value["huts"]) >= 2)):
+		if (project["kind"] == "tool" and int(value["tools"]) != 0) or (project["kind"] == "hut" and (int(value["tools"]) != 1 or (not growing and int(value["huts"]) >= 2))):
 			return "Baustelle ist bereits abgeschlossen oder ohne Werkzeug."
 		if project["kind"] == "garden" and (not renewable or int(value["tools"]) != 1 or int(value["garden"]) != 0):
 			return "Ungültiger Gartenbau."
+		if expanded and project["kind"] in Economy.STATIONS:
+			if int(value["tools"]) != 1 or not local_point(project.get("position"), value["anchor"]) or value.get("economy", {}).get("stations", {}).has(project["kind"]):
+				return "Ungültige Arbeitsplatzbaustelle."
+	if expanded:
+		var problem: String = Economy.validate(value)
+		if not problem.is_empty():
+			return problem
+	if growing:
+		var problem: String = Housing.validate(value)
+		if not problem.is_empty():
+			return problem
+	if int(value["schema"]) >= 5:
+		return Husbandry.validate(value)
 	return ""
 
 static func number(value: Variant, low: float, high: float) -> bool:

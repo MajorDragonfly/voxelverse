@@ -1,0 +1,13 @@
+{
+  "archive_bytes": 1327725010,
+  "expanded_bytes_excluded": 490841100,
+  "historical_ci_compressed_cache_bytes": 1518418665,
+  "cached_patterns": [
+    "*.zip",
+    "*.tpz"
+  ],
+  "triggers_preserved": true,
+  "matrix_preserved": true,
+  "acceptance_commands_preserved": true,
+  "actionlint_passed": true
+}

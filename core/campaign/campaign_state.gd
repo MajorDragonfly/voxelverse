@@ -3,7 +3,8 @@ class_name CampaignState
 
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
-const SCHEMA: int = 1
+const SCHEMA: int = 2
+const Surface = preload("res://core/campaign/surface_context.gd")
 const GENERATOR_VERSION: String = "planetary_v9"
 const SURFACE_MODE: String = "legacy_plane_v9"
 
@@ -20,6 +21,7 @@ func reset(identity: String = "") -> void:
 		"bodies": {}, "design_refs": {}, "event_cursors": {}, "recent_events": [],
 		"elapsed_seconds": 0.0, "time_scale": 1.0, "pending_transition": {},
 		"completed_transitions": {},
+		"surface_policy": SURFACE_MODE, "surface_migration": {},
 	}
 
 
@@ -39,6 +41,7 @@ func import_state(value: Dictionary) -> void:
 		if value.has(key):
 			data[key] = value[key]
 	data = data.duplicate(true)
+	data["schema"] = SCHEMA
 
 
 func body_for_seed(world_seed: int, system_seed: int) -> Dictionary:
@@ -50,6 +53,12 @@ func body_for_seed(world_seed: int, system_seed: int) -> Dictionary:
 		var system_id: String = Ids.scoped("system", data["id"], str(system_seed))
 		bodies[key] = {"id": Ids.scoped("body", system_id, key), "system_id": system_id,
 			"seed": world_seed, "generator_version": GENERATOR_VERSION, "surface_mode": SURFACE_MODE}
+		if data.get("surface_policy", SURFACE_MODE) == Surface.Cube.MODE:
+			var spherical: Dictionary = Surface.create(bodies[key])
+			if spherical.is_empty():
+				bodies.erase(key)
+				return {}
+			bodies[key] = spherical
 	return bodies[key].duplicate(true)
 
 

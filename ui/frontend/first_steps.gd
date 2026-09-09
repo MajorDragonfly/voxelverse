@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+const Text = preload("res://core/localization/ui_text.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Keys = preload("res://core/input_preferences.gd")
 const Progress = preload("res://core/onboarding_progress.gd")
@@ -60,7 +61,7 @@ func _process(delta: float) -> void:
 	visible = not step.is_empty() or _completion_timer > 0.0
 	if not visible:
 		return
-	_heading.text = "ERSTE SCHRITTE · %d / 4" % progress.completed_count()
+	_heading.text = Text.text("ERSTE SCHRITTE · %d / 4") % progress.completed_count()
 	_title.text = TITLES[step] if not step.is_empty() else "Bereit für dein Abenteuer"
 	_hint.text = hint(step) if not step.is_empty() else "Die Grundlagen sitzen. Erkunde deine Welt in deinem Tempo. Die Hilfe bleibt im Pausemenü erreichbar."
 	_bar.value = 100.0 * progress.amount(step) / float(Progress.GOALS[step]) if not step.is_empty() else 100.0
@@ -74,7 +75,7 @@ func _bind_player(player: Node) -> void:
 		player.guidance_action.connect(_record_action)
 
 func _in_game() -> bool:
-	return _flow.can_pause() and _saves.session_active and not get_tree().paused and is_instance_valid(_player) and not bool(_player.get("is_dead")) and int(get_node("/root/GameState").current_phase) == 0
+	return _flow.can_pause() and _saves.session_active and not get_tree().paused and is_instance_valid(_player) and _player.has_signal("guidance_action") and not bool(_player.get("is_dead")) and int(get_node("/root/GameState").current_phase) == 0
 
 func _record_action(action: String, value: float) -> void:
 	if not _in_game():
@@ -92,13 +93,13 @@ func hint(step: String) -> String:
 		"look":
 			return "Bewege die Maus und schau dich in deiner Welt um."
 		"move":
-			return "%s / %s / %s / %s · Lege ein paar Meter zurück." % [Keys.binding_label("move_forward"), Keys.binding_label("move_left"), Keys.binding_label("move_back"), Keys.binding_label("move_right")]
+			return Text.text("%s / %s / %s / %s · Lege ein paar Meter zurück.") % [Keys.binding_label("move_forward"), Keys.binding_label("move_left"), Keys.binding_label("move_back"), Keys.binding_label("move_right")]
 		"jump":
-			return "%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf; für diese Aufgabe suche festen Boden." % Keys.binding_label("jump")
+			return Text.text("%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf; für diese Aufgabe suche festen Boden.") % Keys.binding_label("jump")
 		"inspect":
 			if is_instance_valid(_player) and bool(_player.get("inspection_mode_enabled")):
 				return "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort."
-			return "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch." % Keys.binding_label("inspection_mode")
+			return Text.text("%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch.") % Keys.binding_label("inspection_mode")
 	return ""
 
 func build_help(parent: VBoxContainer) -> void:
@@ -112,14 +113,14 @@ func build_help(parent: VBoxContainer) -> void:
 	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(list)
 	for step in Progress.STEPS:
-		Style.label(list, ("✓ " if _saves.guidance.done(step) else "○ ") + TITLES[step], 22)
+		Style.label(list, ("✓ " if _saves.guidance.done(step) else "○ ") + Text.text(TITLES[step]), 22)
 		Style.paragraph(list, hint(step), 18)
 	var supported: bool = _saves.guidance.supported()
-	var message: String = "%d / 4 erledigt. Der Fortschritt gehört zu diesem Abenteuer." % _saves.guidance.completed_count()
+	var message: String = Text.text("%d / 4 erledigt. Der Fortschritt gehört zu diesem Abenteuer.") % _saves.guidance.completed_count()
 	if not supported:
 		message = "Diese Einführung wurde mit einer neueren Spielversion gespeichert. Die Hilfe kannst du weiterhin nachlesen."
 	elif bool(_saves.guidance.data.skipped):
-		message += " Die Einführung ist ausgeschaltet."
+		message += Text.text(" Die Einführung ist ausgeschaltet.")
 	Style.paragraph(parent, message, 18)
 	var restart_button := Style.button(parent, "Einführung neu starten" if _saves.guidance.completed_count() > 0 else "Einführung starten", restart, "RestartFirstSteps")
 	restart_button.disabled = not supported or int(get_node("/root/GameState").current_phase) != 0

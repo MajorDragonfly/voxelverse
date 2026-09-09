@@ -1,0 +1,23 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "audio/runtime_shutdown_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.992
+    },
+    {
+      "name": "audio/audio_shutdown_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.175
+    },
+    {
+      "name": "audio/audio_scene_lifecycle_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.897
+    }
+  ]
+}

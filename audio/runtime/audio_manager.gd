@@ -473,12 +473,20 @@ func close_settings() -> void:
 	play_ui(&"ui_back")
 
 
-func _exit_tree() -> void:
+func prepare_shutdown() -> void:
+	# Stop streams while their players still belong to the live tree. Child
+	# exit notifications pause playback before the parent's _exit_tree runs.
 	if is_instance_valid(scans):
 		scans.reset_playback()
 	if is_instance_valid(music):
 		music.stop_immediately()
+	if is_instance_valid(director):
+		director.reset_tracking()
 	stop_world()
 	stop_ui()
 	if _save_pending:
 		save_settings()
+
+
+func _exit_tree() -> void:
+	prepare_shutdown()

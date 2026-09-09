@@ -1,0 +1,65 @@
+name: Creature body fit
+on:
+  push:
+    branches: ["agent/creature-body-fit"]
+  pull_request:
+    paths:
+      - "assembly/**"
+      - "creatures/**"
+      - "tests/creature_body_fit_test.gd"
+      - "tools/capture_creature_body_fit.gd"
+      - ".github/workflows/creature-body-fit.yml"
+concurrency:
+  group: body-fit-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  body-fit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Godot and software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+          python - <<'PY'
+          import importlib.util, pathlib, zipfile
+          spec = importlib.util.spec_from_file_location('install', 'tools/install_godot.py')
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          folder = pathlib.Path('/tmp/body-godot')
+          folder.mkdir(exist_ok=True)
+          archive = module.download_verified(folder, module.ASSETS['linux'])
+          with zipfile.ZipFile(archive) as bundle:
+              bundle.extractall(folder)
+          (folder / 'Godot_v4.6.3-stable_linux.x86_64').chmod(0o755)
+          PY
+      - name: Check body contract and existing foot contacts
+        run: |
+          python tools/validate_godot.py --godot /tmp/body-godot/Godot_v4.6.3-stable_linux.x86_64 --tests creature_body_fit_test creature_body_contract_test creature_joint_studio_test creature_parts_studio_test runtime_geometry_batch_test --skip-main --output /tmp/body-review/checks
+      - name: Capture real workshop with both renderers
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          XDG_DATA_HOME: /tmp/body-review-user
+        run: |
+          xvfb-run -a -s '-screen 0 1600x900x24' python - <<'PY'
+          import os, pathlib, subprocess
+          from tools.validate_godot import ERROR
+          for renderer in ['gl_compatibility', 'forward_plus']:
+              folder = pathlib.Path('/tmp/body-review') / renderer
+              folder.mkdir(parents=True, exist_ok=True)
+              command = ['/tmp/body-godot/Godot_v4.6.3-stable_linux.x86_64', '--path', '.', '--rendering-method', renderer,
+                         '--audio-driver', 'Dummy', '--script', 'res://tools/capture_creature_body_fit.gd', '--', str(folder)]
+              run = subprocess.run(command, capture_output=True, text=True, timeout=180)
+              log = run.stdout + run.stderr
+              (folder / 'render.log').write_text(log)
+              print(log)
+              assert run.returncode == 0 and not ERROR.search(log) and 'CREATURE_BODY_FIT_CAPTURE_PASSED' in log
+              assert all((folder / (name + '.png')).is_file() for name in ['fit_findings', 'fit_corrected', 'fit_small_window', 'fit_motion_sample'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: creature-body-fit-${{ github.event_name }}
+          path: /tmp/body-review
+          retention-days: 14

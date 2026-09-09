@@ -1,0 +1,127 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "living_surface_materials_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.409
+    },
+    {
+      "name": "living_planet_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.567
+    },
+    {
+      "name": "living_planet_entry_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 27.002
+    },
+    {
+      "name": "surface_adapter_entry_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.026
+    },
+    {
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.134
+    },
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.291
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.935
+    }
+  ],
+  "earlier_regressions": [
+    {
+      "name": "surface_adapter_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 37.781
+    },
+    {
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.547
+    }
+  ],
+  "material_metrics": {
+    "base_mesh_ms": 514.77,
+    "depth_enrichment_ms": 4.589,
+    "max_depth_error_m": 7.84296584299682e-06,
+    "max_pattern_shift_m": 1.52587890625e-05,
+    "patches": 18,
+    "water_vertices": 5202
+  },
+  "runtime_metrics": {
+    "animal_count": 3,
+    "asset_families": [
+      "ancient_oak_v2",
+      "tall_pine_v2",
+      "dense_bush_v2",
+      "layered_rock_v2",
+      "grass_tuft_v2",
+      "fern_cluster_v2",
+      "flower_cluster_v2"
+    ],
+    "biomes": [
+      "ocean",
+      "savanna",
+      "rocky_highlands",
+      "alpine",
+      "grassland",
+      "coast",
+      "dense_forest",
+      "forest",
+      "desert",
+      "snow"
+    ],
+    "camera_water_crossing": true,
+    "collision_shapes": 175,
+    "contacts": 180,
+    "initial_instances": 594,
+    "initial_load_ms": 6482.805,
+    "initial_patches": 24,
+    "max_animal_build_ms": 154.21,
+    "max_ecosystem_frame_work_ms": 164.436,
+    "max_flora_publish_ms": 1.606,
+    "max_flora_worker_ms": 14.186,
+    "max_height_m": 235.251571471764,
+    "min_height_m": -100.443366968968,
+    "moving_animals": 3,
+    "patch_loads": 50,
+    "patch_unloads": 25,
+    "radial_obstacle_hits": 160,
+    "restart_exit": 0,
+    "swimming_height_m": 0.599999998696148,
+    "walk_m": 23.9755933433771
+  },
+  "visual": {
+    "renderer": "Compatibility / Mesa llvmpipe",
+    "size": [
+      1280,
+      720
+    ],
+    "water_animation_pixels_changed": 101624,
+    "foreground_pixels_changed": 0,
+    "maximum_channel_difference": 26,
+    "graphics_passed": true,
+    "forward_plus_passed": false,
+    "forward_plus_blocker": "Vulkan driver unavailable: required extension VK_KHR_surface not found. Engine fell back to Compatibility; not counted as Forward+ acceptance."
+  },
+  "start_commit": "593de30cff6db98a95ed4dd13a6e12497b4799ae",
+  "flat_world_removed": false
+}

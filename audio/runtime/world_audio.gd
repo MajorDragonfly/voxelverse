@@ -81,13 +81,25 @@ func reset_tracking() -> void:
 func _physics_process(delta: float) -> void:
 	if not automatic_tracking:
 		return
+	# Scene changes detach the old player before freeing it. A valid cached
+	# reference cannot be used for transforms or physics in that interval.
+	if is_instance_valid(_player) and (not _player.is_inside_tree() or _player.is_queued_for_deletion()):
+		reset_tracking()
+		return
 	if not is_instance_valid(_player):
 		_bind_clock -= delta
 		if _bind_clock > 0.0:
 			return
 		_bind_clock = 0.25
 		var candidate := get_tree().get_first_node_in_group(&"player") as CharacterBody3D
-		if candidate == null:
+		# The current automatic sampler interprets XYZ as planar coordinates.
+		# Radial campaigns must supply their hydrology/audio adapter (M1h);
+		# never sample an unrelated plane at the floating origin.
+		if candidate != null and candidate.get_meta("surface_mode", "legacy_plane_v9") != "legacy_plane_v9" and not sample_provider.is_valid():
+			reset_tracking()
+			_bind_clock = 0.5
+			return
+		if candidate == null or candidate.is_queued_for_deletion():
 			reset_tracking()
 			_bind_clock = 0.25
 			return

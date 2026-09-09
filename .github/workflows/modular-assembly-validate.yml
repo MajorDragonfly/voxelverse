@@ -5,24 +5,23 @@ on:
     branches: [main, "agent/**"]
   pull_request:
 
+# Keep branch checks and PR merge checks independent; replace only older runs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   assembly:
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
-      - name: Download Godot 4.6.3
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -L --fail --retry 3 -o /tmp/godot.zip \
-            https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
-          unzip -q /tmp/godot.zip -d /tmp/godot
-          chmod +x /tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
       - name: Import and run real runtime acceptance checks
         run: >-
           python3 tools/validate_godot.py
-          --godot /tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+          --godot "${{ steps.engine.outputs.godot }}"
           --output /tmp/validation-assembly --tests modular_assembly_framework_test asset_pipeline_test --skip-main
       - name: Upload diagnostics
         if: always()

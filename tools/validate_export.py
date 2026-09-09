@@ -13,19 +13,11 @@ import time
 import zipfile
 
 from validate_godot import ERROR
+from validation_support import isolated_env
 
 PACKAGED_TESTS = ['creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test']
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
-
-
-def isolated_env(directory):
-    env = os.environ.copy()
-    for variable in ["XDG_DATA_HOME", "XDG_CONFIG_HOME", "XDG_CACHE_HOME", "APPDATA", "LOCALAPPDATA"]:
-        path = directory / variable.lower()
-        path.mkdir(parents=True, exist_ok=True)
-        env[variable] = str(path)
-    return env
 
 
 def main():
@@ -96,18 +88,22 @@ def main():
             # No project.godot, source paths or project --path are supplied here.
             run("packaged_main", [str(executable), "--headless", "--verbose", "--", "--runtime-exit-frames", "300"],
                 package, isolated_env(root / "main-userdata"))
-            run("packaged_planet_lab", [str(executable), "--headless", "--", "--planet-lab", "--runtime-exit-frames", "600"],
+            run("packaged_planet_lab", [str(executable), "--headless", "--verbose", "--", "--planet-lab", "--runtime-exit-frames", "600"],
                 package, isolated_env(root / "lab-userdata"))
             if "PLANET_LAB_READY" not in (logs / "packaged_planet_lab.log").read_text():
                 raise RuntimeError("Native executable did not enter the planet lab through the gameplay transition.")
-            run("packaged_menu_input", [str(executable), "--headless", "--", "--input-smoke"],
+            run("packaged_menu_input", [str(executable), "--headless", "--verbose", "--", "--input-smoke"],
                 package, isolated_env(root / "menu-userdata"))
             if "MENU_INPUT_PASSED" not in (logs / "packaged_menu_input.log").read_text():
                 raise RuntimeError("Native executable did not pass the actual menu-click/F4 acceptance.")
-            run("packaged_frontend", [str(executable), "--headless", "--", "--frontend-smoke"],
+            run("packaged_frontend", [str(executable), "--headless", "--verbose", "--", "--frontend-smoke"],
                 package, isolated_env(root / "frontend-userdata"))
             if "FRONTEND_PASSED" not in (logs / "packaged_frontend.log").read_text():
                 raise RuntimeError("Native executable did not pass title/pause/save-slot acceptance.")
+            run("packaged_spherical_campaign", [str(executable), "--headless", "--verbose", "--", "--sphere-smoke"],
+                package, isolated_env(root / "sphere-userdata"))
+            if "SPHERICAL_CAMPAIGN_RUNTIME_PASSED" not in (logs / "packaged_spherical_campaign.log").read_text():
+                raise RuntimeError("Native executable did not pass spherical migration/new-game/fresh-process acceptance.")
             # Official 4.6.3 release templates disable --script. Keep that intact:
             # use the editor to instrument the exact release PCK, after starting
             # the untouched release executable above. Neither sees source files.

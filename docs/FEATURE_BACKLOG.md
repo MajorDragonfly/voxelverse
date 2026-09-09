@@ -16,8 +16,9 @@ Stand: 9. September 2026. Ergänzt die [gemeinsame Roadmap](../ROADMAP.md) um ne
 | D1-EIER | Eine geeignete, erreichbare Eierlieferanten-Art je belebtem Spielplaneten | Artenkatalog; entdeckbar in der Kreaturenphase, nutzbar ab Stamm | Nach geprüftem D1-Grundvertrag; vor D3-EIER | Geplant |
 | D3-EIER | Versorgung, Eierlegen, Sammeln, Transport und Nahrung aus eigenen Tieren | Tierhaltung und Dorfwirtschaft, D3/M6 | Nach D1-EIER, D2 und gemeinsamer D3-Haltungsbasis | Geplant |
 | M3-TEILE | Alle Körperteile überarbeiten oder kompatibel ersetzen; erkennbare Einzelteile realer Tiere frei kombinieren | Kreatureneditor, M2B/M3 | Bestandsprüfung und Anschlussregeln zuerst; danach Modellpakete und UI | Geplant |
+| M9-EXPEDITION | Modulares Expeditionsschiff, kleinere Landungsschiffe, Planetenuntersuchung und wachsender Schiffsausbau | Weltraumphase, M9.1–M9.6 | Nach M8 und vollständiger Kugelkampagne; Daten-/Editoranschlüsse früh vorbereiten | Geplant |
 
-Die Reihenfolge ist technisch begründet. Der Kugelwelt-Umzug bleibt ein eigenes grundlegendes Paket. Datenkatalog und Modelle können unabhängig davon vorbereitet werden; finale Platzierung, Bodenkontakt, Legestellen und Transporte müssen die gemeinsame radiale Oberfläche nutzen.
+Die Reihenfolge ist technisch begründet. Der Kugelwelt-Umzug bleibt ein eigenes grundlegendes Paket. M9-EXPEDITION ist eine spätere Weltraumplanung; die laufenden Umzugsarbeiten behalten Vorrang. Datenkatalog und Modelle können unabhängig davon vorbereitet werden; finale Platzierung, Bodenkontakt, Legestellen und Transporte müssen die gemeinsame radiale Oberfläche nutzen.
 
 ## D1-EIER – Eierliefernde Nutztiere im Artenkatalog
 
@@ -99,6 +100,23 @@ Ein Rüssel wird im Editor bei Mund/Kopf auffindbar, erhält aber eine passende 
 - [ ] Vorschau-, Modell- und Laufzeitkosten für viele Kreaturen berücksichtigen; kleine Teile benötigen keine unbegrenzt teure Geometrie.
 
 **Abnahme:** Rüssel, Schnauze, Oktopusmund, Pfote/Tatze, Krallen und Krebsschere sind einzeln auffindbar und visuell unterscheidbar. Mehrere unterschiedliche Tierfußformen lassen sich anbringen. Eine Kreatur kombiniert Teile verschiedener Vorbilder und behält Bearbeitung, Spiegelung, Bodenstand und Darstellung nach Save/Load. Alle alten Teile wurden mit einer nachvollziehbaren Entscheidung erfasst; Altentwürfe und Freischaltungen bleiben nutzbar. Technische Abnahme und Lars' visuelle Bewertung werden getrennt dokumentiert.
+
+## M9-EXPEDITION – Mobile Basis, Beiboote und wachsender Schiffsausbau
+
+**Nutzerwunsch:** Ein großes selbst gestaltetes und ausgerüstetes Expeditionsschiff im Größen-/Spielgefühl eines Sternzerstörers bereist den Weltraum. Kleinere Schiffe übernehmen Landung, Ausstieg und Untersuchung der Planeten. Fortschritt in der Weltraumphase ermöglicht größere Expeditionsschiffe, Waffen, Lagerraum, zusätzliche Bordschiffe und weitere Module.
+
+**Einordnung:** Konkretisierung des vorhandenen M9, nach der vollständigen Kugelkampagne und M8. Der [Expeditionsplan](SPACE_EXPEDITION_PLAN.md) ist die gemeinsame Detailquelle für Rollen, Module, Fortschritt, Zustandsübergaben und die Unterpakete M9.1–M9.6.
+
+- [ ] Gemeinsames Bauplanfundament für beide Schiffsebenen erweitern: Rumpfmodule, Cockpit/Brücke, Antriebe, Energie, Fracht, Hangar und passende Ausrüstung.
+- [ ] Bereits den Einstieg mit großem Expeditionsschiff plus einem kleinen Landungs-/Erkundungsschiff planen; beide direkt steuerbar und individuell gespeichert.
+- [ ] Vollständigen Ablauf liefern: Reise → Hangar/Abdocken → planetarer Anflug → Landung/Ausstieg → Untersuchung → Rückflug/Andocken.
+- [ ] Vorhandene Körperadressen, radiale Oberfläche, Karten, Arten und Entdeckungen verwenden; physische Proben tatsächlich transportieren.
+- [ ] Größere Baubereiche, Lager-/Modulkapazität und neue Ausrüstung über Forschung, Ressourcen und tatsächlichen Umbau freischalten.
+- [ ] Zusätzliche eigene Bordschiffe, passende Hangarbelegung und später wirkende Bewaffnung als klar abgegrenzte Erweiterungen liefern.
+- [ ] Schiffwechsel, Fracht, Umbau, Pause/Neustart, Verlust-/Ersatzfälle und Nah-/Fernsimulation ohne Duplikate oder verlorene Zustände prüfen.
+- [ ] Bestehendes Ziel System-/Sektorreise, Galaxienkarte und versorgte Kolonien auf den vollständigen Expeditionsablauf aufbauen.
+
+**Abnahme:** Ein selbst gestaltetes Expeditionsschiff bringt ein individuelles Beiboot zu einem echten Kugelplaneten. Der Spieler fliegt hinunter, landet, steigt aus, untersucht die Umgebung und kehrt zur Basis zurück. Forschung erlaubt einen ersten wirksamen Schiffsausbau. Alle Schiffe, Güter, Entdeckungen und Orte überstehen Speichern/Neustart. Waffenfortschritt ist kein zwingendes Tor für friedliche Forschung oder Kolonisation.
 
 ## Umsetzung und Übergabe
 

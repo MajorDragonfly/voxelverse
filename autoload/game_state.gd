@@ -73,6 +73,10 @@ func get_current_body() -> Dictionary:
 	return campaign.body_for_seed(get_world_seed(), get_system_seed())
 
 
+func campaign_scene() -> String:
+	return Campaign.Surface.SCENE if get_current_body().get("surface_mode") == Campaign.Surface.Cube.MODE else "res://main/main.tscn"
+
+
 func record_campaign_event(event: GameEvent) -> bool:
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null and progression.is_behavior_transaction_active():
@@ -93,6 +97,11 @@ func get_phase_transition_blockers(new_phase: int) -> Array[String]:
 		var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
 		if tribe != null:
 			return tribe.blockers()
+	if new_phase in [2, 3]:
+		var epoch: Dictionary = preload("res://core/progression/civilization_contract.gd").describe(campaign.data, str(world_seed), current_phase, new_phase)
+		var reasons: Array[String] = []
+		reasons.assign(epoch["blockers"])
+		return reasons
 	# Later phases still require their own playable loop and explicit handoff.
 	return ["The gameplay and handoff for this phase are not implemented yet."]
 

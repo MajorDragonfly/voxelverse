@@ -39,7 +39,7 @@ func _load_needs(_path: String) -> void:
 
 func _physics_process(delta: float) -> void:
 	var dt: float = GameState.simulation_delta(delta)
-	var active: bool = not is_dead and GameState.current_phase == 0 and dt > 0.0 and not _needs.is_empty() and not ForagingState.body(GameState, str(_campaign_identity.get("body_id", ""))).is_empty() and not Steering.ground(self, global_position).is_empty()
+	var active: bool = not is_dead and GameState.current_phase in [0, 1] and dt > 0.0 and not _needs.is_empty() and not ForagingState.body(GameState, str(_campaign_identity.get("body_id", ""))).is_empty() and not Steering.ground(self, global_position).is_empty()
 	if active:
 		_foraging_clock += dt
 		_meal_rest = maxf(0.0, _meal_rest - dt)

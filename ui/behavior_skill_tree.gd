@@ -1,8 +1,9 @@
 extends CanvasLayer
 
+const Symbols = preload("res://ui/catalog/development_symbols.gd")
 const Style = preload("res://ui/progression_style.gd")
 const Development = preload("res://ui/development_path_panel.gd")
-const PHASES: Array[String] = ["Kreatur", "Stamm", "Antike / Mittelalter", "Weltmacht", "Weltraum", "Multiversum"]
+const PHASES: Array[String] = ["Kreatur", "Stamm", "Antike / Mittelalter", "Neuzeit / Weltmacht", "Weltraum", "Multiversum"]
 
 var player: Node
 var _panel: Control
@@ -28,6 +29,7 @@ var _journal_tab: Button
 var _phase_preview: Label
 var _phase_choice: OptionButton
 var _view_phase: int = 0
+var _phase_selection: Dictionary = {0: "creature.social.approach", 1: "tribe.social.teamwork"}
 var _tree_heading: Label
 var _wallet_context: Label
 var _availability: Label
@@ -39,6 +41,7 @@ var _previous_focus: WeakRef
 var _owns_pause: bool = false
 var _closing: bool = false
 var _purchase_active: bool = false
+var _detail_icon: TextureRect
 
 
 func _ready() -> void:
@@ -71,7 +74,7 @@ func open_panel() -> bool:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	visible = true
 	_message.text = ""
-	refresh()
+	_select_phase(clampi(int(get_node("/root/GameState").current_phase), 0, PHASES.size() - 1))
 	_refresh_journal()
 	_development.refresh()
 	_tree_tab.grab_focus()
@@ -146,12 +149,12 @@ func _build() -> void:
 	for side in ["left", "right", "top", "bottom"]:
 		_panel.add_theme_constant_override("margin_" + side, 32)
 	add_child(_panel)
-	var content := Style.column(_panel, 16)
+	var content := Style.column(_panel, 10)
 	var header := HBoxContainer.new()
 	content.add_child(header)
 	var heading := Style.column(header, 2)
 	heading.add_child(Style.label("VOXELVERSE  /  DEINE SPEZIES", 15, Style.SOCIAL))
-	heading.add_child(Style.label("Entwicklung", 38))
+	heading.add_child(Style.label("Entwicklungsbuch", 32))
 	_close = Style.button("Schließen · Esc")
 	_close.name = "Close"
 	_close.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -162,7 +165,7 @@ func _build() -> void:
 	var tabs := HBoxContainer.new()
 	tabs.add_theme_constant_override("separation", 12)
 	content.add_child(tabs)
-	_tree_tab = Style.button("Skilltree")
+	_tree_tab = Style.button("Fähigkeiten")
 	_tree_tab.name = "SkilltreeTab"
 	_tree_tab.pressed.connect(func() -> void: _show_tab(false))
 	tabs.add_child(_tree_tab)
@@ -185,16 +188,16 @@ func _build() -> void:
 	_phase_choice.custom_minimum_size.y = 46
 	_phase_choice.add_theme_font_size_override("font_size", 18)
 	for index in range(PHASES.size()):
-		_phase_choice.add_item(PHASES[index] + (" · spielbar" if index == 0 else " · geplant"), index)
+		_phase_choice.add_item(PHASES[index] + (" · spielbar" if index <= 1 else " · geplant"), index)
 	_phase_choice.item_selected.connect(_select_phase)
 	pages.add_child(_phase_choice)
 	_body = BoxContainer.new()
 	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_body.add_theme_constant_override("separation", 24)
 	pages.add_child(_body)
-	var tree_area := Style.column(_body, 16)
+	var tree_area := Style.column(_body, 10)
 	tree_area.size_flags_stretch_ratio = 2.0
-	_tree_heading = Style.label("Dein Weg bleibt offen", 28)
+	_tree_heading = Style.label("Deine Fähigkeiten", 24)
 	tree_area.add_child(_tree_heading)
 	_wallet_context = Style.label("", 18, Style.MUTED)
 	tree_area.add_child(_wallet_context)
@@ -203,8 +206,9 @@ func _build() -> void:
 	tree_area.add_child(_branches)
 	for track in ["social", "aggression"]:
 		_build_branch(track)
-	_availability = Style.label("F halten: Befreunden · H: Verletzte versorgen · Beißen: Jagd oder feindlichen Konflikt abschließen. Eine Kreatur gibt höchstens einmal Punkte; jeder Ast hat ein Verdienstlimit von 24 Punkten. Offenheit, Zusammenhalt, Jagdinstinkt und Ausdauer wirken im Spiel.", 17, Style.MUTED)
+	_availability = Style.label("Punkte verdienen: Befreunden und Helfen · Jagen und Konflikte abschließen.\nSilhouette = noch nicht freigeschaltet. Wähle ein Symbol für Wirkung und Voraussetzungen.", 17, Style.MUTED)
 	_availability.name = "GameplayAvailability"
+	_availability.add_theme_font_size_override("font_size", 14)
 	tree_area.add_child(_availability)
 	_phase_preview = Style.label("", 17, Style.MUTED)
 	_phase_preview.name = "PhasePreview"
@@ -214,9 +218,11 @@ func _build() -> void:
 	detail_panel.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	detail_panel.add_theme_stylebox_override("panel", Style.box())
 	_body.add_child(detail_panel)
-	_details = Style.column(detail_panel, 18)
-	_details.add_child(Style.label("AUSGEWÄHLTER KNOTEN", 14, Style.MUTED))
-	_title = Style.label("", 29)
+	_details = Style.column(detail_panel, 12)
+	_detail_icon = Symbols.view("social", false, 94)
+	_details.add_child(_detail_icon)
+	_details.add_child(Style.label("FÄHIGKEIT", 13, Style.MUTED))
+	_title = Style.label("", 25)
 	_details.add_child(_title)
 	_description = Style.label("")
 	_details.add_child(_description)
@@ -249,13 +255,13 @@ func _build_branch(track: String) -> void:
 	info.add_child(balance)
 	_wallet_labels[track] = balance
 	var progression := get_node("/root/ProgressionService")
-	for definition: Dictionary in progression.call("get_behavior_nodes", 0):
+	for definition: Dictionary in progression.get_behavior_nodes(0) + progression.get_behavior_nodes(1):
 		if definition["track"] != track:
 			continue
 		var id: String = definition["id"]
 		var card := Style.button("", color)
 		card.name = id.replace(".", "_")
-		card.custom_minimum_size.y = 118
+		card.custom_minimum_size.y = 94
 		column.add_child(card)
 		var margin := MarginContainer.new()
 		margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -263,14 +269,20 @@ func _build_branch(track: String) -> void:
 		for side in ["left", "right", "top", "bottom"]:
 			margin.add_theme_constant_override("margin_" + side, 14)
 		card.add_child(margin)
-		var labels := Style.column(margin, 5)
+		var row := HBoxContainer.new()
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_theme_constant_override("separation", 10)
+		margin.add_child(row)
+		var icon := Symbols.view(id.get_slice(".", 2), false, 56)
+		row.add_child(icon)
+		var labels := Style.column(row, 3)
 		labels.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		labels.add_child(Style.label(str(definition["name"]), 23, color))
+		labels.add_child(Style.label(str(definition["name"]), 19, color))
 		var state_label := Style.label("", 17)
 		labels.add_child(state_label)
-		labels.add_child(Style.label("Vermächtnis ab Stamm" if not definition["legacy"].is_empty() else "Kreaturenphase", 15, Style.MUTED))
+		labels.add_child(Style.label("Vermächtnis ab Stamm" if not definition["legacy"].is_empty() else "Stammesphase" if int(definition["phase"]) == 1 else "Kreaturenphase", 15, Style.MUTED))
 		card.pressed.connect(_select.bind(id))
-		_cards[id] = {"button": card, "status": state_label}
+		_cards[id] = {"button": card, "status": state_label, "phase": definition["phase"], "icon": icon}
 	var planned := Style.label("", 18, Style.MUTED)
 	planned.visible = false
 	column.add_child(planned)
@@ -284,35 +296,41 @@ func refresh() -> void:
 	_refresh_view_label()
 	var wallet: Dictionary = progression.call("get_behavior_wallet", _view_phase)
 	var preview: Dictionary = progression.get_phase_progression_preview(_view_phase)
-	_tree_heading.text = "Dein Weg bleibt offen" if _view_phase == 0 else PHASES[_view_phase] + " · dein zukünftiger Weg"
+	_tree_heading.text = "Dein Weg bleibt offen" if _view_phase == 0 else "Dein Stamm · gemeinsame Erfolge" if _view_phase == 1 else PHASES[_view_phase] + " · dein zukünftiger Weg"
 	_wallet_context.text = "Sozial und aggressiv lassen sich kombinieren. Angezeigt werden ausschließlich die Punkte der Phase %s." % PHASES[_view_phase]
 	if _view_phase > 0:
 		_wallet_context.text += " Kreaturenpunkte bleiben im Kreaturenbaum ausgebbar."
 	_availability.visible = _view_phase == 0
-	_details.get_parent().visible = _view_phase == 0
+	_details.get_parent().visible = _view_phase <= 1
 	for card in _cards.values():
-		card["button"].visible = _view_phase == 0
+		card["button"].visible = int(card["phase"]) == _view_phase
 	for track: String in _wallet_labels:
-		_wallet_labels[track].text = "%d Punkte verfügbar\n%d verdient · %d ausgegeben" % [int(wallet["available"][track]), int(wallet["earned"][track]), int(wallet["spent"][track])]
+		_wallet_labels[track].text = "%d Punkte verfügbar\n%d verdient · %d eingesetzt" % [int(wallet["available"][track]), int(wallet["earned"][track]), int(wallet["spent"][track])]
 		_planned_earning[track].visible = _view_phase > 0
 		_planned_earning[track].text = "Geplante Punktequellen\n" + str(preview[track]) + "\n\nFähigkeiten und Käufe folgen mit den spielbaren Handlungen dieser Phase."
+	if _view_phase == 1:
+		_planned_earning["social"].text = "Stammespunkte aus Gemeinschaftserfolgen\nJeder Meilenstein zählt einmal pro Kampagne. Die einzelnen Ziele stehen im Entwicklungspfad."
+		_planned_earning["aggression"].text = "Gruppenverteidigung und Stammeskonflikte folgen noch. Dafür werden derzeit keine Punkte oder Kampfboni angeboten."
 	_nodes.clear()
-	for definition: Dictionary in progression.call("get_behavior_nodes", 0):
+	for definition: Dictionary in progression.call("get_behavior_nodes", _view_phase):
 		var id: String = definition["id"]
 		_nodes[id] = definition
 		if not _cards.has(id):
 			continue
 		var status: Dictionary = definition["purchase_status"]
+		_cards[id]["icon"].texture = Symbols.texture(id.get_slice(".", 2), bool(definition["purchased"]))
 		_cards[id]["status"].text = "Freigeschaltet" if definition["purchased"] else "%d Punkte · %s" % [int(definition["cost"]), "Verfügbar" if status["ok"] else "Gesperrt"]
 		var color: Color = Style.SOCIAL if definition["track"] == "social" else Style.AGGRESSION
 		_cards[id]["button"].add_theme_stylebox_override("normal", Style.box(Color("2b4149") if id == _selected else Style.PANEL, color if id == _selected else Color("40535c"), 12))
 	_update_details()
 	_refresh_phase_preview()
+	_phase_preview.visible = _view_phase > 0
 	_development.refresh()
 
 
 func _select(id: String) -> void:
 	_selected = id
+	_phase_selection[_view_phase] = id
 	_message.text = ""
 	refresh()
 
@@ -322,6 +340,7 @@ func _update_details() -> void:
 	if definition.is_empty():
 		_purchase.disabled = true
 		return
+	_detail_icon.texture = Symbols.texture(_selected.get_slice(".", 2), bool(definition["purchased"]))
 	_title.text = definition["name"]
 	_description.text = str(definition["description"])
 	var names: PackedStringArray = []
@@ -333,15 +352,17 @@ func _update_details() -> void:
 	_effect.text = "Vermächtnis · für Stamm und spätere Phasen vorbereitet" if legacy else "Kreaturenbonus · endet mit der Kreaturenphase"
 	if definition["purchased"]:
 		_effect.text += "\nGekauft · " + ("ab Stamm vorgesehen" if legacy and phase == 0 else "in dieser Phase vorgesehen · Gruppenmechanik noch offen" if legacy else "jetzt im Spiel aktiv" if phase == 0 else "Kreaturenphase bereits verlassen")
+	if _view_phase == 1:
+		_effect.text = "Stammesbonus · wirkt auf tatsächliche Dorfaufgaben" + ("\nGekauft · aktiv" if definition["purchased"] and phase == 1 else "")
 	var status: Dictionary = definition["purchase_status"]
-	_purchase.disabled = not status["ok"] or _purchase_active or _view_phase != 0
+	_purchase.disabled = not status["ok"] or _purchase_active or _view_phase > 1
 	_purchase.text = "Freigeschaltet" if definition["purchased"] else "Freischalten · %d %s" % [int(definition["cost"]), "Sozialpunkte" if definition["track"] == "social" else "Aggressionspunkte"]
 	if not status["ok"] and not definition["purchased"]:
 		_requirements.text += "\n" + _reason(str(status.get("reason", "")))
 
 
 func _buy_selected() -> void:
-	if _purchase_active or not visible or _view_phase != 0 or not _body.visible:
+	if _purchase_active or not visible or _view_phase > 1 or not _body.visible:
 		return
 	_purchase_active = true
 	_purchase.disabled = true
@@ -375,7 +396,7 @@ func _refresh_phase_preview() -> void:
 	_phase_preview.text = ("Aktueller Spielablauf" if data["implemented"] else "Planung · noch keine spielbare Phase") + " · " + str(data["scope"])
 	_phase_preview.text += "\n%s\n%s\n%s" % [data["control"], " → ".join(data["loop"]), data["next"]]
 	if index > 0:
-		_phase_preview.text += "\nGekauftes Vermächtnis für diese Phase: Koordination +%d %% · Verteidigung +%d %%" % [roundi((float(data["legacy"]["group_cooperation"]["value"]) - 1.0) * 100.0), roundi((float(data["legacy"]["group_defense"]["value"]) - 1.0) * 100.0)]
+		_phase_preview.text += "\nGekaufte Gruppenboni für diese Phase: Koordination +%d %% · Verteidigung +%d %%" % [roundi((float(data["legacy"]["group_cooperation"]["value"]) - 1.0) * 100.0), roundi((float(data["legacy"]["group_defense"]["value"]) - 1.0) * 100.0)]
 		_phase_preview.text += "\nKoordination wirkt auf Dorfaufgaben. Verteidigung folgt mit Stammeskämpfen."
 		_phase_preview.text += "\nJede Phase verdient eigene Punkte. Kreaturenpunkte bleiben ihrem Baum zugeordnet."
 
@@ -384,6 +405,7 @@ func _select_phase(index: int) -> void:
 	if index not in range(PHASES.size()):
 		return
 	_view_phase = index
+	_selected = _phase_selection.get(index, "")
 	_phase_choice.select(index)
 	_message.text = ""
 	refresh()
@@ -441,5 +463,5 @@ func _open_journal() -> void:
 
 func _layout() -> void:
 	var width: float = get_viewport().get_visible_rect().size.x
-	_body.vertical = width < 1050
+	_body.vertical = width < 1000
 	_branches.vertical = width < 620

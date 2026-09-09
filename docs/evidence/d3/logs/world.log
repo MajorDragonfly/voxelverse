@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Planet visual mode changed to: Surface
+Planet visual environment initialized in mode: Surface
+Surface streaming seed: 15838
+Generated starting point (68.8528, 2.005208, -109.6899)
+Village site search completed: { "ok": true, "message": "Heimatplatz gespeichert. Deine beiden Gefährten gehören dauerhaft zu dieser Nestgruppe." }
+Opening tribal confirmation
+Tribal group active; gathering on real terrain
+M6: constructing a well on generated terrain
+M6: generated workplace (68.8528, 2.06, -108.6899) water delivered 2
+M6 growth: generated hut (68.8528, 2.309877, -115.6899) and continued deliveries 3
+{"failures":[],"passed":true,"test":"tribal_age_world"}

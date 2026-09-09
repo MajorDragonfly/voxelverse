@@ -95,7 +95,12 @@ func _run() -> void:
 	journal.close_journal()
 	await _frames(3)
 	_expect(not paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing tribal journal restored creature mouse capture.")
+	await _check_minimap()
 	await _capture("02_group")
+	# M6's expanded economy controls can cover the companions. Use its real
+	# collapse button before clicking/dragging in the world, like the player.
+	await _click(tribe.panel._collapse)
+	await _frames(3)
 	var identity: String = str(tribe.village()["members"][0]["id"])
 	var screen_point: Vector2 = tribe.camera.unproject_position(player.global_position + Vector3.UP)
 	await _world_click(screen_point, MOUSE_BUTTON_LEFT)
@@ -116,7 +121,9 @@ func _run() -> void:
 	await _frames(65)
 	_expect(player.global_position.distance_to(before) > 1.5 and player.is_on_floor(), "Original creature did not walk under group command.")
 	_expect(tribe.village()["members"][1]["order"] == "wait", "Individual move commanded other residents.")
+	await _click(tribe.panel._collapse)
 	tribe.select_all()
+	await _frames(3)
 	await _click(tribe.panel._buttons["wood"])
 	await _until(func() -> bool: return _has_cargo(), 350)
 	_expect(_has_cargo(), "Gatherers did not pick up material at a real deposit.")
@@ -144,13 +151,15 @@ func _run() -> void:
 	_expect(int(tribe.village()["tools"]) == 1, "Workers did not craft the actual tool.")
 	await _capture("04_tool")
 	await _click(tribe.panel._buttons["hut"])
-	await _until(func() -> bool: return int(tribe.village()["huts"]) == 1, 550)
+	await _world_click(tribe.camera.unproject_position(Vector3(5, 100.06, 5)), MOUSE_BUTTON_RIGHT)
+	await _until(func() -> bool: return int(tribe.village()["huts"]) == 1, 1600)
 	_expect(int(tribe.village()["huts"]) == 1, "Workers did not finish the first shelter.")
 	await _click(tribe.panel._buttons["feed"])
 	await _until(func() -> bool: return int(tribe.village()["meals"]) >= 3, 350)
 	_expect(int(tribe.village()["meals"]) >= 3, "Feeding did not consume village food.")
 	await _click(tribe.panel._buttons["hut"])
-	await _until(func() -> bool: return int(tribe.village()["huts"]) == 2, 650)
+	await _world_click(tribe.camera.unproject_position(Vector3(9, 100.06, 1)), MOUSE_BUTTON_RIGHT)
+	await _until(func() -> bool: return int(tribe.village()["huts"]) == 2, 1600)
 	_expect(int(tribe.village()["huts"]) == 2, "The village could not expand to four sleeping places.")
 	await _capture("05_village")
 	_expect(Model.validate(tribe.village(), tribe.body(), state.campaign.data).is_empty(), "Village economy produced invalid state.")
@@ -189,6 +198,60 @@ func _run() -> void:
 		_expect(false, "Second campaign cannot enter its own tribe.")
 	await _cleanup()
 	_finish()
+
+func _check_minimap() -> void:
+	var map := get_first_node_in_group(&"minimap_hud")
+	_expect(map != null, "Tribe has no shared minimap.")
+	if map == null: return
+	map._update_snapshot()
+	_expect(map.visible and map.phase == 1 and map.range_m == 160.0, "Real confirmed transition did not widen the map.")
+	_expect(map._map.group_view and map._map.markers.size() == 4, "Tribe map lost home or one of its three residents.")
+	var atlas: CanvasLayer = map.atlas_window
+	atlas.tracker.update_exploration()
+	var fog: Dictionary = atlas.tracker.atlas.data.duplicate(true)
+	var original_focus: Vector3 = tribe.map_focus()
+	tribe._focus += Vector3(200, 0, 200)
+	atlas.tracker.update_exploration()
+	_expect(atlas.tracker.atlas.data == fog, "Panning the tribal camera revealed unvisited ground.")
+	tribe._focus = original_focus
+	_expect(atlas.open_map() and paused, "Active tribe cannot open the shared world map.")
+	_key(KEY_SPACE)
+	_expect(paused and atlas.is_open, "Tribal pause key released the atlas pause.")
+	_key(KEY_ESCAPE)
+	await _frames(3)
+	_expect(not paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing the tribal atlas restored the wrong controls.")
+
+	var original_size: Vector2i = root.size
+	for dimensions in [Vector2i(1280, 720), Vector2i(800, 600)]:
+		root.size = dimensions
+		await _frames(5)
+		map._layout()
+		tribe.panel._layout()
+		await _frames(2)
+		var map_rect := _physical_rect(map._panel)
+		var commands := _physical_rect(tribe.panel._hud)
+		var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
+		_expect(screen.encloses(map_rect), "Tribal map escaped screen: " + str(dimensions))
+		_expect(screen.encloses(commands), "Tribal commands escaped screen: " + str(dimensions) + " " + str(commands))
+		_expect(not map_rect.intersects(commands), "Tribal orders cover the minimap: " + str(dimensions))
+		tribe.panel._hud_scroll.ensure_control_visible(tribe.panel._buttons["wait"])
+		await _frames(2)
+		_expect(commands.has_point(_physical_rect(tribe.panel._buttons["wait"]).get_center()), "Last tribal order cannot be reached by scrolling.")
+	root.size = original_size
+	await _frames(5)
+	var selected: Array = tribe.selected.duplicate()
+	var orders: Array = tribe.village()["members"].duplicate(true)
+	var point: Vector2 = map._map.get_global_transform_with_canvas() * (map._map.size * 0.5)
+	await _world_click(point, MOUSE_BUTTON_LEFT)
+	await _world_click(point, MOUSE_BUTTON_RIGHT)
+	_expect(tribe.selected == selected, "Map click changed world selection.")
+	for index in range(orders.size()):
+		_expect(orders[index]["order"] == tribe.village()["members"][index]["order"], "Map click issued a world order.")
+
+func _physical_rect(control: Control) -> Rect2:
+	var canvas: Transform2D = control.get_global_transform_with_canvas()
+	var factor: float = float(root.size.x) / root.get_visible_rect().size.x
+	return Rect2(canvas.origin * factor, control.size * canvas.get_scale() * factor)
 
 func _world_click(position: Vector2, button: int, shift: bool = false) -> void:
 	for pressed_value in [true, false]:
@@ -295,9 +358,14 @@ func _key(code: int) -> void:
 	root.push_input(event, true)
 
 func _click(button: Button) -> void:
+	if tribe != null and tribe.panel._scroll.is_ancestor_of(button):
+		tribe.panel._scroll.ensure_control_visible(button)
+		await _frames(3)
 	_expect(button != null and button.is_visible_in_tree(), "Required button is absent: " + (str(button.name) if button != null else "null"))
 	if button == null:
 		return
+	if tribe != null and tribe.panel._hud_scroll.is_ancestor_of(button):
+		tribe.panel._hud_scroll.ensure_control_visible(button)
 	await process_frame
 	var event := InputEventMouseButton.new()
 	event.position = button.get_global_transform_with_canvas() * (button.size * 0.5)
@@ -315,6 +383,7 @@ func _frames(count: int) -> void:
 		await process_frame
 
 func _capture(label: String) -> void:
+	print("TRIBAL_STAGE: " + label)
 	if capture_dir.is_empty():
 		return
 	await process_frame
@@ -331,7 +400,23 @@ func _cleanup() -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		failures.append(message)
+		printerr("TRIBAL_CHECK_FAILED: " + message)
 
 func _finish() -> void:
 	print(JSON.stringify({"test": "tribal_age", "passed": failures.is_empty(), "failures": failures}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+func _check_scrolled_actions() -> void:
+	for button: Button in tribe.panel._buttons.values():
+		tribe.panel._tabs.current_tab = button.get_parent().get_parent().get_index()
+		var show_context: bool = tribe.panel._tabs.current_tab != 2
+		_expect(tribe.panel._goal.visible == show_context and tribe.panel._supply.visible == show_context, "Tab context waits for a simulation tick and can shift a scrolled action")
+		await _frames(3)
+		if not button.is_visible_in_tree():
+			continue # Milk pickup appears only when a delivery exists.
+		tribe.panel._scroll.ensure_control_visible(button)
+		await _frames(3)
+		var rect: Rect2 = button.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, button.size)
+		var scroll_rect: Rect2 = tribe.panel._scroll.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, tribe.panel._scroll.size)
+		# Integer scrolling and canvas scaling can round an edge by less than one viewport pixel.
+		_expect(button.is_visible_in_tree() and root.get_visible_rect().encloses(rect) and scroll_rect.grow(1.0).encloses(rect), "Action outside viewport or clipped: %s rect=%s scroll=%s" % [button.name, rect, scroll_rect])

@@ -15,6 +15,9 @@ func _ready() -> void:
 	get_node("/root/SaveGameService").game_loaded.connect(_on_loaded)
 
 func _initialize_bush() -> void:
+	# Never register food at an invalid world position after a scene switch.
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	_body_id = str(ForagingState.body(GameState)["id"])
 	_food_key = "berry:%d:%d" % [roundi(global_position.x * 100.0), roundi(global_position.z * 100.0)]
 	_initialized = true

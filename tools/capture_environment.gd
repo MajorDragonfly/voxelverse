@@ -915,6 +915,12 @@ func _planet_transition_review() -> void:
 	var terrain: Node = _scene.terrain
 	terrain.set_process(false)
 	_scene.set_process(false)
+	# Raster work in the shared minimap continues independently of the scene.
+	# Keep that overlay identical while comparing only terrain covering sets.
+	var minimap_processing: Dictionary = {}
+	for minimap: Node in get_nodes_in_group(&"minimap_hud"):
+		minimap_processing[minimap] = minimap.is_processing()
+		minimap.set_process(false)
 	_scene.walker.preview.hide()
 	var up: Vector3 = _scene.walker.up_direction
 	var review_camera := Camera3D.new()
@@ -933,6 +939,8 @@ func _planet_transition_review() -> void:
 		await process_frame
 	if terrain._retired.is_empty():
 		_failures.append("LOD review never produced a changing covering set.")
+		for minimap: Node in minimap_processing:
+			minimap.set_process(minimap_processing[minimap])
 		return
 	for phase in [0.0, 0.5, 1.0]:
 		terrain._set_phase(phase)
@@ -961,6 +969,8 @@ func _planet_transition_review() -> void:
 	terrain._finish_transition()
 	terrain.set_process(true)
 	_scene.set_process(true)
+	for minimap: Node in minimap_processing:
+		minimap.set_process(minimap_processing[minimap])
 	_scene.walker.camera.make_current()
 	review_camera.queue_free()
 

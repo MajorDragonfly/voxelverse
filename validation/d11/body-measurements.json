@@ -1,0 +1,2114 @@
+{
+  "bodies": 234,
+  "failures": [],
+  "measurements": [
+    {
+      "check_usec": 165532,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 94651,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 91427,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 118978,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 2,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 94293,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 2,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 79744,
+      "errors": [],
+      "gap": 1.04308128356934e-07,
+      "group": "companion",
+      "legs": 4,
+      "seed": 2,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 142725,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 3,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 108199,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 3,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 91011,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 3,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95408,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 10,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 94811,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 10,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 66886,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 10,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 150966,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 42,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96452,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 42,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 82627,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 42,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 122176,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 100,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 94740,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 100,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 87663,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 100,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 109599,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 555,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 134534,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 555,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 73100,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 555,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 116205,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1337,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96601,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1337,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 74500,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1337,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 139124,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 15838,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 128027,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 15838,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 72101,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 15838,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 107845,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 63352,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 164413,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 63352,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 79960,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 63352,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 124553,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 23757,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 102585,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 23757,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 120513,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 23757,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 130045,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 99991,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 163129,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 99991,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 129428,
+      "errors": [],
+      "gap": 1.04308128356934e-07,
+      "group": "companion",
+      "legs": 4,
+      "seed": 99991,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 159339,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 87654321,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 114358,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 87654321,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 81163,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 87654321,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 119127,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 2147483647,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 90067,
+      "errors": [],
+      "gap": 1.63912773132324e-07,
+      "group": "work",
+      "legs": 4,
+      "seed": 2147483647,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 74499,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 2147483647,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 98648,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1000,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 84488,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1000,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 75519,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1000,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 107993,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1001,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 101402,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1001,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 86710,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1001,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 106423,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1002,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 92710,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1002,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 72477,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1002,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96106,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1003,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 85075,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1003,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 66329,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1003,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 121572,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1004,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 98416,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1004,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 73921,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1004,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95155,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1005,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 91610,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1005,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 65989,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1005,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 87006,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1006,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 93275,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1006,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 70553,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1006,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 92144,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1007,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 85873,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1007,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 72115,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1007,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 114503,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1008,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 89140,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1008,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 62973,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1008,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95002,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1009,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 102432,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1009,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 67405,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1009,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 82743,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1010,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 97017,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1010,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 67339,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1010,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 85810,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1011,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 91058,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1011,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 69493,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1011,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 97221,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1012,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 99432,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1012,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 68301,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1012,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 91031,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1013,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96635,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1013,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 74428,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1013,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 97629,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1014,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 107809,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1014,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 71142,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1014,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 97334,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1015,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 88186,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1015,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 68411,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1015,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 88855,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1016,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95231,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1016,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 70060,
+      "errors": [],
+      "gap": 1.04308128356934e-07,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1016,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 100110,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1017,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 100799,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1017,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 71288,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1017,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 107649,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1018,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95240,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1018,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 73649,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1018,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 100466,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1019,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 97041,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1019,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 67708,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1019,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 103616,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1020,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 107410,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1020,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 71916,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1020,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 89051,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1021,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 108604,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1021,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 92304,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1021,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 114423,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1022,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 130849,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1022,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 86172,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1022,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 116016,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1023,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 93934,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1023,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 79908,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1023,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 88258,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1024,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 101216,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1024,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 67248,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1024,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 88835,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1025,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 86660,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1025,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 74154,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1025,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96207,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1026,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 89127,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1026,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 68240,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1026,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96619,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1027,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 87960,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1027,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 66715,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1027,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 98181,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1028,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96448,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1028,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 77954,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1028,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 98272,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1029,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 100041,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1029,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 80605,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1029,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 108628,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1030,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 98479,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1030,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 78035,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1030,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 94601,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1031,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 80714,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1031,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 72629,
+      "errors": [],
+      "gap": 1.04308128356934e-07,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1031,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 88806,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1032,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 81289,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1032,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 69557,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1032,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 106423,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1033,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 88824,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1033,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 64268,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1033,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 102030,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1034,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 84832,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1034,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 71038,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1034,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 84052,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1035,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 101255,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1035,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 63745,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1035,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96417,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1036,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 93532,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1036,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 69368,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1036,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 97567,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1037,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 115431,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1037,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 72401,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1037,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 109307,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1038,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 108624,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1038,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 65650,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1038,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 98036,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1039,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 102881,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1039,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 65207,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1039,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 83822,
+      "errors": [],
+      "gap": 1.63912773132324e-07,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1040,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 92709,
+      "errors": [],
+      "gap": 1.63912773132324e-07,
+      "group": "work",
+      "legs": 4,
+      "seed": 1040,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 68541,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1040,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 88224,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1041,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 86761,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1041,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 68734,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1041,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 84955,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1042,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 101547,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1042,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 73224,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1042,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 82817,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1043,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 99398,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1043,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 90863,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1043,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 87675,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1044,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 92408,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1044,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 70118,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1044,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 125695,
+      "errors": [],
+      "gap": 1.63912773132324e-07,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1045,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 183881,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1045,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 85356,
+      "errors": [],
+      "gap": 1.04308128356934e-07,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1045,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95452,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1046,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 81992,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1046,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 65865,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1046,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96878,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1047,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95409,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1047,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 68616,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1047,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 91737,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1048,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 101236,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1048,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 72320,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1048,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 109207,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1049,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95348,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1049,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 68901,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1049,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 102882,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1050,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 99895,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1050,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 68651,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1050,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 101865,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1051,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 103916,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1051,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 69124,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1051,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 101879,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1052,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 109554,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1052,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 65353,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1052,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 92200,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1053,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 83923,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1053,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 62495,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1053,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 100219,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1054,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 93275,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1054,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 66176,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1054,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 103979,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1055,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 101358,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1055,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 82211,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1055,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 108743,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1056,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 94715,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1056,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 75827,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1056,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 97214,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1057,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 88857,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1057,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 66343,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1057,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 111850,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1058,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 77156,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1058,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 69693,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1058,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 103231,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1059,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 89737,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1059,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 62015,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1059,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 106434,
+      "errors": [],
+      "gap": 1.63912773132324e-07,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1060,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 95062,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1060,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 66842,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1060,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 103499,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1061,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 99304,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1061,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 62931,
+      "errors": [],
+      "gap": 1.49011611938477e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1061,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 99908,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1062,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 96997,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1062,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 64006,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1062,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 99221,
+      "errors": [],
+      "gap": 7.45058059692383e-08,
+      "group": "milk",
+      "legs": 4,
+      "seed": 1063,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 99545,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "work",
+      "legs": 4,
+      "seed": 1063,
+      "stretch": 1.0
+    },
+    {
+      "check_usec": 66683,
+      "errors": [],
+      "gap": 4.4703483581543e-08,
+      "group": "companion",
+      "legs": 4,
+      "seed": 1063,
+      "stretch": 1.0
+    }
+  ],
+  "seeds": 78,
+  "test": "domestic_body_evidence"
+}

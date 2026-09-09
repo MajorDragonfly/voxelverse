@@ -1,0 +1,1123 @@
+{
+  "schema": 1,
+  "locales": {
+    "de": {
+      "name": "Deutsch",
+      "plural_forms": "nplurals=2; plural=(n != 1);"
+    },
+    "en": {
+      "name": "English",
+      "plural_forms": "nplurals=2; plural=(n != 1);"
+    }
+  },
+  "messages": [
+    {
+      "key": "LANGUAGE_TAB",
+      "de": "Sprache",
+      "en": "Language"
+    },
+    {
+      "key": "LANGUAGE_TITLE",
+      "de": "Sprache wählen",
+      "en": "Choose your language"
+    },
+    {
+      "key": "LANGUAGE_AUTO",
+      "de": "Systemsprache",
+      "en": "System language"
+    },
+    {
+      "key": "LANGUAGE_HINT",
+      "de": "Deutsch und Englisch sind verfügbar. Mit „Übernehmen & speichern“ wechseln die angeschlossenen Menüs sofort. Einige Spieltexte werden noch übersetzt.",
+      "en": "German and English are available. Use “Apply & save” to update the connected menus immediately. Some game text is still being translated."
+    },
+    {
+      "key": "LANGUAGE_SAVE_FAILED",
+      "de": "Die Sprache konnte nicht gespeichert werden. Die bisherige Sprache bleibt aktiv.",
+      "en": "The language could not be saved. Your previous language remains active."
+    },
+    {
+      "key": "LANGUAGE_NEWER_SETTINGS",
+      "de": "Diese Sprachdatei hat eine unbekannte Version und wird nicht überschrieben. Die Systemsprache wird verwendet.",
+      "en": "These language settings use an unknown version and will not be overwritten. The system language is used."
+    },
+    {
+      "key": "LANGUAGE_INVALID_SETTINGS",
+      "de": "Die Sprachdatei ist ungültig. Die Systemsprache wird verwendet.",
+      "en": "The language settings are invalid. The system language is used."
+    },
+    {
+      "key": "TIME_UNKNOWN",
+      "de": "Unbekannter Zeitpunkt",
+      "en": "Unknown time"
+    },
+    {
+      "key": "SAVE_OVERVIEW",
+      "de": "Planet {planet} · Welt-Seed {seed}\n{phase} · {minutes} Min. gespielt\nGespeichert: {time}",
+      "en": "Planet {planet} · World seed {seed}\n{phase} · {minutes} min played\nSaved: {time}"
+    },
+    {
+      "key": "SAVE_BACKUPS",
+      "de": "{count} Sicherung",
+      "en": "{count} backup",
+      "plural_key": "SAVE_BACKUPS_PLURAL",
+      "de_plural": "{count} Sicherungen",
+      "en_plural": "{count} backups"
+    },
+    {
+      "key": "SAVE_HISTORY_ENTRY",
+      "de": "{time} · {minutes} Min. · {reason}",
+      "en": "{time} · {minutes} min · {reason}"
+    },
+    {
+      "key": "BIND_PROMPT",
+      "de": "Taste für „{action}“ drücken. Esc bricht ab; Rücktaste entfernt diese Belegung.",
+      "en": "Press a key for “{action}”. Esc cancels; Backspace removes this binding."
+    },
+    {
+      "key": "BIND_CONFLICT",
+      "de": "{key} ist bereits mit „{action}“ belegt.",
+      "en": "{key} is already assigned to “{action}”."
+    },
+    {
+      "key": "BIND_REQUIRED",
+      "de": "„{action}“ braucht mindestens eine Taste.",
+      "en": "“{action}” needs at least one key."
+    },
+    {
+      "key": "DEINE SPEZIES. DEINE WELT.",
+      "de": "DEINE SPEZIES. DEINE WELT.",
+      "en": "YOUR SPECIES. YOUR WORLD."
+    },
+    {
+      "key": "EIN KLEINER ANFANG. EIN GROSSES UNIVERSUM.",
+      "de": "EIN KLEINER ANFANG. EIN GROSSES UNIVERSUM.",
+      "en": "A SMALL BEGINNING. A VAST UNIVERSE."
+    },
+    {
+      "key": "Entdecke Welten. Gestalte Leben.",
+      "de": "Entdecke Welten. Gestalte Leben.",
+      "en": "Discover worlds. Shape life."
+    },
+    {
+      "key": "ENTWICKLUNGSVERSION    /    KREATURENPHASE",
+      "de": "ENTWICKLUNGSVERSION    /    KREATURENPHASE",
+      "en": "DEVELOPMENT BUILD    /    CREATURE STAGE"
+    },
+    {
+      "key": "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen",
+      "de": "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen",
+      "en": "Tab  Select    ·    Enter  Confirm    ·    F8  Settings"
+    },
+    {
+      "key": "Fortsetzen",
+      "de": "Fortsetzen",
+      "en": "Continue"
+    },
+    {
+      "key": "Neues Spiel",
+      "de": "Neues Spiel",
+      "en": "New game"
+    },
+    {
+      "key": "Spielstände",
+      "de": "Spielstände",
+      "en": "Saved games"
+    },
+    {
+      "key": "Einstellungen",
+      "de": "Einstellungen",
+      "en": "Settings"
+    },
+    {
+      "key": "Steuerung",
+      "de": "Steuerung",
+      "en": "Controls"
+    },
+    {
+      "key": "Beenden",
+      "de": "Beenden",
+      "en": "Quit"
+    },
+    {
+      "key": "DEIN ABENTEUER",
+      "de": "DEIN ABENTEUER",
+      "en": "YOUR ADVENTURE"
+    },
+    {
+      "key": "Du beginnst in der Kreaturenphase. Dein Fortschritt erhält einen eigenen Spielstand.",
+      "de": "Du beginnst in der Kreaturenphase. Dein Fortschritt erhält einen eigenen Spielstand.",
+      "en": "You begin in the creature stage. Your progress has its own saved game."
+    },
+    {
+      "key": "Name",
+      "de": "Name",
+      "en": "Name"
+    },
+    {
+      "key": "Mein Abenteuer",
+      "de": "Mein Abenteuer",
+      "en": "My adventure"
+    },
+    {
+      "key": "Welt-Seed · optional",
+      "de": "Welt-Seed · optional",
+      "en": "World seed · optional"
+    },
+    {
+      "key": "Leer lassen für eine zufällige Welt",
+      "de": "Leer lassen für eine zufällige Welt",
+      "en": "Leave blank for a random world"
+    },
+    {
+      "key": "Abenteuer beginnen",
+      "de": "Abenteuer beginnen",
+      "en": "Begin adventure"
+    },
+    {
+      "key": "Zurück",
+      "de": "Zurück",
+      "en": "Back"
+    },
+    {
+      "key": "Bitte einen Welt-Seed von 1 bis 2147483647 eingeben oder das Feld leer lassen.",
+      "de": "Bitte einen Welt-Seed von 1 bis 2147483647 eingeben oder das Feld leer lassen.",
+      "en": "Enter a world seed from 1 to 2147483647, or leave the field blank."
+    },
+    {
+      "key": "Älterer Spielstand",
+      "de": "Älterer Spielstand",
+      "en": "Older saved game"
+    },
+    {
+      "key": "Kreatur",
+      "de": "Kreatur",
+      "en": "Creature"
+    },
+    {
+      "key": "Stamm",
+      "de": "Stamm",
+      "en": "Tribe"
+    },
+    {
+      "key": "Antike / Mittelalter",
+      "de": "Antike / Mittelalter",
+      "en": "Antiquity / Middle Ages"
+    },
+    {
+      "key": "Weltmacht",
+      "de": "Weltmacht",
+      "en": "Global power"
+    },
+    {
+      "key": "Weltraum",
+      "de": "Weltraum",
+      "en": "Space"
+    },
+    {
+      "key": "Multiversum",
+      "de": "Multiversum",
+      "en": "Multiverse"
+    },
+    {
+      "key": "STEUERUNG",
+      "de": "STEUERUNG",
+      "en": "CONTROLS"
+    },
+    {
+      "key": "Mausempfindlichkeit",
+      "de": "Mausempfindlichkeit",
+      "en": "Mouse sensitivity"
+    },
+    {
+      "key": "Kamera vertikal umkehren",
+      "de": "Kamera vertikal umkehren",
+      "en": "Invert vertical camera"
+    },
+    {
+      "key": "Maximale Bildrate",
+      "de": "Maximale Bildrate",
+      "en": "Maximum frame rate"
+    },
+    {
+      "key": "Unbegrenzt",
+      "de": "Unbegrenzt",
+      "en": "Unlimited"
+    },
+    {
+      "key": "VSync kann die Bildrate zusätzlich begrenzen.",
+      "de": "VSync kann die Bildrate zusätzlich begrenzen.",
+      "en": "VSync may further limit the frame rate."
+    },
+    {
+      "key": "SPIELTASTEN · HAUPT- UND ZWEITBELEGUNG",
+      "de": "SPIELTASTEN · HAUPT- UND ZWEITBELEGUNG",
+      "en": "GAME CONTROLS · PRIMARY AND SECONDARY BINDINGS"
+    },
+    {
+      "key": "Steuerung auf Standard zurücksetzen",
+      "de": "Steuerung auf Standard zurücksetzen",
+      "en": "Reset controls to defaults"
+    },
+    {
+      "key": "Belegung anklicken, dann eine Taste drücken. Änderungen mit „Übernehmen & speichern“ sichern.",
+      "de": "Belegung anklicken, dann eine Taste drücken. Änderungen mit „Übernehmen & speichern“ sichern.",
+      "en": "Click a binding, then press a key. Save changes with “Apply & save”."
+    },
+    {
+      "key": "Bitte eine einzelne Taste ohne Strg, Alt oder Umschalt drücken.",
+      "de": "Bitte eine einzelne Taste ohne Strg, Alt oder Umschalt drücken.",
+      "en": "Press a single key without Ctrl, Alt or Shift."
+    },
+    {
+      "key": " Andere Taste wählen oder Esc drücken.",
+      "de": " Andere Taste wählen oder Esc drücken.",
+      "en": " Choose another key or press Esc."
+    },
+    {
+      "key": "Belegung vorgemerkt. Mit „Übernehmen & speichern“ aktivieren.",
+      "de": "Belegung vorgemerkt. Mit „Übernehmen & speichern“ aktivieren.",
+      "en": "Binding selected. Use “Apply & save” to activate it."
+    },
+    {
+      "key": "Tastenauswahl abgebrochen.",
+      "de": "Tastenauswahl abgebrochen.",
+      "en": "Key selection cancelled."
+    },
+    {
+      "key": "Änderungen vorgemerkt. Mit „Übernehmen & speichern“ aktivieren.",
+      "de": "Änderungen vorgemerkt. Mit „Übernehmen & speichern“ aktivieren.",
+      "en": "Changes selected. Use “Apply & save” to activate them."
+    },
+    {
+      "key": "Bitte zuerst die Tastenauswahl beenden.",
+      "de": "Bitte zuerst die Tastenauswahl beenden.",
+      "en": "Finish selecting a key first."
+    },
+    {
+      "key": "Standardwerte vorgemerkt. Mit „Übernehmen & speichern“ aktivieren.",
+      "de": "Standardwerte vorgemerkt. Mit „Übernehmen & speichern“ aktivieren.",
+      "en": "Defaults selected. Use “Apply & save” to activate them."
+    },
+    {
+      "key": "Taste drücken …",
+      "de": "Taste drücken …",
+      "en": "Press a key …"
+    },
+    {
+      "key": "Zurück zum Startmenü",
+      "de": "Zurück zum Startmenü",
+      "en": "Back to the main menu"
+    },
+    {
+      "key": "DEINE ABENTEUER",
+      "de": "DEINE ABENTEUER",
+      "en": "YOUR ADVENTURES"
+    },
+    {
+      "key": " · %d Min.",
+      "de": " · %d Min.",
+      "en": " · %d min"
+    },
+    {
+      "key": "Planet %d",
+      "de": "Planet %d",
+      "en": "Planet %d"
+    },
+    {
+      "key": "Wiederherstellung prüfen",
+      "de": "Wiederherstellung prüfen",
+      "en": "Check recovery options"
+    },
+    {
+      "key": "Dein erstes Abenteuer beginnt mit „Neues Spiel“.",
+      "de": "Dein erstes Abenteuer beginnt mit „Neues Spiel“.",
+      "en": "Your first adventure begins with “New game”."
+    },
+    {
+      "key": "\nDie letzte Sicherung ist verfügbar.",
+      "de": "\nDie letzte Sicherung ist verfügbar.",
+      "en": "\nThe latest backup is available."
+    },
+    {
+      "key": "Abenteuer laden",
+      "de": "Abenteuer laden",
+      "en": "Load adventure"
+    },
+    {
+      "key": "Name des Abenteuers",
+      "de": "Name des Abenteuers",
+      "en": "Adventure name"
+    },
+    {
+      "key": "Umbenennen",
+      "de": "Umbenennen",
+      "en": "Rename"
+    },
+    {
+      "key": "Spielstand kopieren",
+      "de": "Spielstand kopieren",
+      "en": "Copy saved game"
+    },
+    {
+      "key": "Diesen älteren Stand einmal laden und speichern, um auch seine Entwürfe kopieren zu können.",
+      "de": "Diesen älteren Stand einmal laden und speichern, um auch seine Entwürfe kopieren zu können.",
+      "en": "Load and save this older game once to include its designs when copying it."
+    },
+    {
+      "key": "Bis zu acht frühere Speicherstände. Eine Wiederherstellung legt ein neues Abenteuer an.",
+      "de": "Bis zu acht frühere Speicherstände. Eine Wiederherstellung legt ein neues Abenteuer an.",
+      "en": "Up to eight previous saves. Restoring creates a new adventure."
+    },
+    {
+      "key": " · nicht ladbar",
+      "de": " · nicht ladbar",
+      "en": " · cannot be loaded"
+    },
+    {
+      "key": "Sicherung als Kopie wiederherstellen",
+      "de": "Sicherung als Kopie wiederherstellen",
+      "en": "Restore backup as a copy"
+    },
+    {
+      "key": "Nach dem nächsten Speichern erscheint hier dein vorheriger Stand.",
+      "de": "Nach dem nächsten Speichern erscheint hier dein vorheriger Stand.",
+      "en": "Your previous save will appear here after you save again."
+    },
+    {
+      "key": "Abenteuer umbenannt.",
+      "de": "Abenteuer umbenannt.",
+      "en": "Adventure renamed."
+    },
+    {
+      "key": "Kopie angelegt. Wähle „Abenteuer laden“, um sie weiterzuspielen.",
+      "de": "Kopie angelegt. Wähle „Abenteuer laden“, um sie weiterzuspielen.",
+      "en": "Copy created. Select “Load adventure” to continue playing it."
+    },
+    {
+      "key": "Sicherung als neues Abenteuer wiederhergestellt. Der bisherige Stand bleibt erhalten.",
+      "de": "Sicherung als neues Abenteuer wiederhergestellt. Der bisherige Stand bleibt erhalten.",
+      "en": "Backup restored as a new adventure. The previous saved game is preserved."
+    },
+    {
+      "key": "Das Vorschaubild entsteht beim Spielen.",
+      "de": "Das Vorschaubild entsteht beim Spielen.",
+      "en": "A preview image will be created while you play."
+    },
+    {
+      "key": "Unbekannter Zeitpunkt",
+      "de": "Unbekannter Zeitpunkt",
+      "en": "Unknown time"
+    },
+    {
+      "key": "Auto",
+      "de": "Auto",
+      "en": "Auto"
+    },
+    {
+      "key": "Speichern",
+      "de": "Speichern",
+      "en": "Save"
+    },
+    {
+      "key": "Vor Umbenennen",
+      "de": "Vor Umbenennen",
+      "en": "Before renaming"
+    },
+    {
+      "key": "Letzte Sicherung",
+      "de": "Letzte Sicherung",
+      "en": "Latest backup"
+    },
+    {
+      "key": "Sicherung",
+      "de": "Sicherung",
+      "en": "Backup"
+    },
+    {
+      "key": "Wird gespeichert …",
+      "de": "Wird gespeichert …",
+      "en": "Saving …"
+    },
+    {
+      "key": "✓ Gespeichert",
+      "de": "✓ Gespeichert",
+      "en": "✓ Saved"
+    },
+    {
+      "key": "Speichern fehlgeschlagen",
+      "de": "Speichern fehlgeschlagen",
+      "en": "Save failed"
+    },
+    {
+      "key": "Schau dich um",
+      "de": "Schau dich um",
+      "en": "Look around"
+    },
+    {
+      "key": "Erkunde deine Umgebung",
+      "de": "Erkunde deine Umgebung",
+      "en": "Explore your surroundings"
+    },
+    {
+      "key": "Mach einen Sprung",
+      "de": "Mach einen Sprung",
+      "en": "Try jumping"
+    },
+    {
+      "key": "Scanne eine Kreatur",
+      "de": "Scanne eine Kreatur",
+      "en": "Scan a creature"
+    },
+    {
+      "key": "ERSTE SCHRITTE",
+      "de": "ERSTE SCHRITTE",
+      "en": "FIRST STEPS"
+    },
+    {
+      "key": "Esc → Erste Schritte: Hilfe oder überspringen",
+      "de": "Esc → Erste Schritte: Hilfe oder überspringen",
+      "en": "Esc → First steps: help or skip"
+    },
+    {
+      "key": "ERSTE SCHRITTE · %d / 4",
+      "de": "ERSTE SCHRITTE · %d / 4",
+      "en": "FIRST STEPS · %d / 4"
+    },
+    {
+      "key": "Bereit für dein Abenteuer",
+      "de": "Bereit für dein Abenteuer",
+      "en": "Ready for your adventure"
+    },
+    {
+      "key": "Die Grundlagen sitzen. Erkunde deine Welt in deinem Tempo. Die Hilfe bleibt im Pausemenü erreichbar.",
+      "de": "Die Grundlagen sitzen. Erkunde deine Welt in deinem Tempo. Die Hilfe bleibt im Pausemenü erreichbar.",
+      "en": "You know the basics. Explore your world at your own pace. Help remains available in the pause menu."
+    },
+    {
+      "key": "Bewege die Maus und schau dich in deiner Welt um.",
+      "de": "Bewege die Maus und schau dich in deiner Welt um.",
+      "en": "Move the mouse to look around your world."
+    },
+    {
+      "key": "%s / %s / %s / %s · Lege ein paar Meter zurück.",
+      "de": "%s / %s / %s / %s · Lege ein paar Meter zurück.",
+      "en": "%s / %s / %s / %s · Walk a few metres."
+    },
+    {
+      "key": "%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf; für diese Aufgabe suche festen Boden.",
+      "de": "%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf; für diese Aufgabe suche festen Boden.",
+      "en": "%s · Jump from the ground. The same key lets you rise in water; find solid ground for this task."
+    },
+    {
+      "key": "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort.",
+      "de": "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort.",
+      "en": "Keep a creature in the crosshair until the circle fills. Known species are recognised immediately."
+    },
+    {
+      "key": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch.",
+      "de": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch.",
+      "en": "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with J."
+    },
+    {
+      "key": "Die Grundlagen werden beim Spielen erkannt. Du kannst sie in beliebiger Reihenfolge ausprobieren.",
+      "de": "Die Grundlagen werden beim Spielen erkannt. Du kannst sie in beliebiger Reihenfolge ausprobieren.",
+      "en": "The game tracks the basics as you play. Try them in any order."
+    },
+    {
+      "key": "%d / 4 erledigt. Der Fortschritt gehört zu diesem Abenteuer.",
+      "de": "%d / 4 erledigt. Der Fortschritt gehört zu diesem Abenteuer.",
+      "en": "%d / 4 completed. Progress belongs to this adventure."
+    },
+    {
+      "key": "Diese Einführung wurde mit einer neueren Spielversion gespeichert. Die Hilfe kannst du weiterhin nachlesen.",
+      "de": "Diese Einführung wurde mit einer neueren Spielversion gespeichert. Die Hilfe kannst du weiterhin nachlesen.",
+      "en": "This introduction was saved with a newer game version. You can still read the help."
+    },
+    {
+      "key": " Die Einführung ist ausgeschaltet.",
+      "de": " Die Einführung ist ausgeschaltet.",
+      "en": " The introduction is disabled."
+    },
+    {
+      "key": "Einführung neu starten",
+      "de": "Einführung neu starten",
+      "en": "Restart introduction"
+    },
+    {
+      "key": "Einführung starten",
+      "de": "Einführung starten",
+      "en": "Start introduction"
+    },
+    {
+      "key": "Einführung überspringen",
+      "de": "Einführung überspringen",
+      "en": "Skip introduction"
+    },
+    {
+      "key": "VOXELVERSE · EINSTELLUNGEN",
+      "de": "VOXELVERSE · EINSTELLUNGEN",
+      "en": "VOXELVERSE · SETTINGS"
+    },
+    {
+      "key": "Esc / F8 Menü · F11 Vollbild",
+      "de": "Esc / F8 Menü · F11 Vollbild",
+      "en": "Esc / F8 Menu · F11 Fullscreen"
+    },
+    {
+      "key": "Anzeige",
+      "de": "Anzeige",
+      "en": "Display"
+    },
+    {
+      "key": "Bildschirmmodus",
+      "de": "Bildschirmmodus",
+      "en": "Display mode"
+    },
+    {
+      "key": "Fenster",
+      "de": "Fenster",
+      "en": "Windowed"
+    },
+    {
+      "key": "Randloses Vollbild",
+      "de": "Randloses Vollbild",
+      "en": "Borderless fullscreen"
+    },
+    {
+      "key": "Exklusives Vollbild",
+      "de": "Exklusives Vollbild",
+      "en": "Exclusive fullscreen"
+    },
+    {
+      "key": "Fensterauflösung",
+      "de": "Fensterauflösung",
+      "en": "Window resolution"
+    },
+    {
+      "key": "Oberflächengröße",
+      "de": "Oberflächengröße",
+      "en": "Interface scale"
+    },
+    {
+      "key": "VSync – Bildrisse vermeiden",
+      "de": "VSync – Bildrisse vermeiden",
+      "en": "VSync – prevent screen tearing"
+    },
+    {
+      "key": "Planetenlabor öffnen  ·  F4",
+      "de": "Planetenlabor öffnen  ·  F4",
+      "en": "Open planet lab  ·  F4"
+    },
+    {
+      "key": "Ton und Musik …",
+      "de": "Ton und Musik …",
+      "en": "Sound and music …"
+    },
+    {
+      "key": "Übernehmen & speichern",
+      "de": "Übernehmen & speichern",
+      "en": "Apply & save"
+    },
+    {
+      "key": "Speichern & beenden",
+      "de": "Speichern & beenden",
+      "en": "Save & quit"
+    },
+    {
+      "key": "Einstellungen übernommen und gespeichert.",
+      "de": "Einstellungen übernommen und gespeichert.",
+      "en": "Settings applied and saved."
+    },
+    {
+      "key": "Steuerung gespeichert. Anzeige übernommen; Speichern der Anzeige fehlgeschlagen.",
+      "de": "Steuerung gespeichert. Anzeige übernommen; Speichern der Anzeige fehlgeschlagen.",
+      "en": "Controls saved. Display settings applied, but could not be saved."
+    },
+    {
+      "key": "Änderungen mit „Übernehmen & speichern“ aktivieren. Zurück verwirft ungespeicherte Änderungen.",
+      "de": "Änderungen mit „Übernehmen & speichern“ aktivieren. Zurück verwirft ungespeicherte Änderungen.",
+      "en": "Use “Apply & save” to activate changes. Back discards unsaved changes."
+    },
+    {
+      "key": "Planetenlabor nicht geöffnet: Spielstand konnte nicht gesichert oder Szene nicht geladen werden.",
+      "de": "Planetenlabor nicht geöffnet: Spielstand konnte nicht gesichert oder Szene nicht geladen werden.",
+      "en": "Planet lab could not open: the game could not be saved or the scene could not be loaded."
+    },
+    {
+      "key": "Speichern fehlgeschlagen. Das Spiel bleibt geöffnet.",
+      "de": "Speichern fehlgeschlagen. Das Spiel bleibt geöffnet.",
+      "en": "Save failed. The game will stay open."
+    },
+    {
+      "key": "Vorwärts",
+      "de": "Vorwärts",
+      "en": "Forward"
+    },
+    {
+      "key": "Rückwärts",
+      "de": "Rückwärts",
+      "en": "Backward"
+    },
+    {
+      "key": "Nach links",
+      "de": "Nach links",
+      "en": "Move left"
+    },
+    {
+      "key": "Nach rechts",
+      "de": "Nach rechts",
+      "en": "Move right"
+    },
+    {
+      "key": "Springen / aufsteigen",
+      "de": "Springen / aufsteigen",
+      "en": "Jump / rise"
+    },
+    {
+      "key": "Interagieren",
+      "de": "Interagieren",
+      "en": "Interact"
+    },
+    {
+      "key": "Beißen",
+      "de": "Beißen",
+      "en": "Bite"
+    },
+    {
+      "key": "Untersuchen",
+      "de": "Untersuchen",
+      "en": "Inspect"
+    },
+    {
+      "key": "Linksklick",
+      "de": "Linksklick",
+      "en": "Left click"
+    },
+    {
+      "key": "Rechtsklick",
+      "de": "Rechtsklick",
+      "en": "Right click"
+    },
+    {
+      "key": "Mittelklick",
+      "de": "Mittelklick",
+      "en": "Middle click"
+    },
+    {
+      "key": "Maustaste 4",
+      "de": "Maustaste 4",
+      "en": "Mouse button 4"
+    },
+    {
+      "key": "Maustaste 5",
+      "de": "Maustaste 5",
+      "en": "Mouse button 5"
+    },
+    {
+      "key": "Leertaste",
+      "de": "Leertaste",
+      "en": "Space"
+    },
+    {
+      "key": "Pfeil ↑",
+      "de": "Pfeil ↑",
+      "en": "Up arrow"
+    },
+    {
+      "key": "Pfeil ↓",
+      "de": "Pfeil ↓",
+      "en": "Down arrow"
+    },
+    {
+      "key": "Pfeil ←",
+      "de": "Pfeil ←",
+      "en": "Left arrow"
+    },
+    {
+      "key": "Pfeil →",
+      "de": "Pfeil →",
+      "en": "Right arrow"
+    },
+    {
+      "key": "J ist für das Entdeckungsbuch reserviert.",
+      "de": "J ist für das Entdeckungsbuch reserviert.",
+      "en": "J is reserved for the discovery journal."
+    },
+    {
+      "key": "K ist für den Skilltree reserviert.",
+      "de": "K ist für den Skilltree reserviert.",
+      "en": "K is reserved for the skill tree."
+    },
+    {
+      "key": "Diese Taste bleibt für Menüs und Spieloberflächen reserviert.",
+      "de": "Diese Taste bleibt für Menüs und Spieloberflächen reserviert.",
+      "en": "This key is reserved for menus and game interfaces."
+    },
+    {
+      "key": "Bitte eine Buchstaben-, Zahlen-, Pfeil- oder Maustaste wählen.",
+      "de": "Bitte eine Buchstaben-, Zahlen-, Pfeil- oder Maustaste wählen.",
+      "en": "Choose a letter, number, arrow key or mouse button."
+    },
+    {
+      "key": "Unvollständige Tastenbelegung.",
+      "de": "Unvollständige Tastenbelegung.",
+      "en": "Incomplete key bindings."
+    },
+    {
+      "key": "Ungültige Tastenbelegung.",
+      "de": "Ungültige Tastenbelegung.",
+      "en": "Invalid key bindings."
+    },
+    {
+      "key": "Steuerungsdatei nicht lesbar; Standardwerte sind aktiv.",
+      "de": "Steuerungsdatei nicht lesbar; Standardwerte sind aktiv.",
+      "en": "Control settings could not be read; defaults are active."
+    },
+    {
+      "key": "Ungültige Tastenbelegung; Standardtasten sind aktiv.",
+      "de": "Ungültige Tastenbelegung; Standardtasten sind aktiv.",
+      "en": "Invalid key bindings; default keys are active."
+    },
+    {
+      "key": "Ungültige Kamera- oder Bildrateneinstellung.",
+      "de": "Ungültige Kamera- oder Bildrateneinstellung.",
+      "en": "Invalid camera or frame rate setting."
+    },
+    {
+      "key": "Steuerung konnte nicht gespeichert werden. Die bisherigen Werte bleiben aktiv.",
+      "de": "Steuerung konnte nicht gespeichert werden. Die bisherigen Werte bleiben aktiv.",
+      "en": "Controls could not be saved. Previous settings remain active."
+    },
+    {
+      "key": "Dein Abenteuer wird vorbereitet …",
+      "de": "Dein Abenteuer wird vorbereitet …",
+      "en": "Preparing your adventure …"
+    },
+    {
+      "key": "Neues Spiel konnte nicht gespeichert werden. ",
+      "de": "Neues Spiel konnte nicht gespeichert werden. ",
+      "en": "The new game could not be saved. "
+    },
+    {
+      "key": "Spielstand wird geladen …",
+      "de": "Spielstand wird geladen …",
+      "en": "Loading saved game …"
+    },
+    {
+      "key": "Laden fehlgeschlagen. ",
+      "de": "Laden fehlgeschlagen. ",
+      "en": "Loading failed. "
+    },
+    {
+      "key": "Welt wird geladen …",
+      "de": "Welt wird geladen …",
+      "en": "Loading world …"
+    },
+    {
+      "key": "Die Spielwelt konnte nicht geladen werden: ",
+      "de": "Die Spielwelt konnte nicht geladen werden: ",
+      "en": "The game world could not be loaded: "
+    },
+    {
+      "key": "Die Spielwelt konnte nicht gelesen werden. Dein Spielstand bleibt erhalten.",
+      "de": "Die Spielwelt konnte nicht gelesen werden. Dein Spielstand bleibt erhalten.",
+      "en": "The game world could not be read. Your saved game is preserved."
+    },
+    {
+      "key": "Die Spielwelt ist nicht verfügbar.",
+      "de": "Die Spielwelt ist nicht verfügbar.",
+      "en": "The game world is unavailable."
+    },
+    {
+      "key": "Gelände am Startpunkt wird aufgebaut …",
+      "de": "Gelände am Startpunkt wird aufgebaut …",
+      "en": "Building terrain at the starting point …"
+    },
+    {
+      "key": "Die Spielwelt konnte nicht geöffnet werden: ",
+      "de": "Die Spielwelt konnte nicht geöffnet werden: ",
+      "en": "The game world could not be opened: "
+    },
+    {
+      "key": "Der Startpunkt konnte nicht aufgebaut werden. Dein Spielstand bleibt erhalten.",
+      "de": "Der Startpunkt konnte nicht aufgebaut werden. Dein Spielstand bleibt erhalten.",
+      "en": "The starting point could not be built. Your saved game is preserved."
+    },
+    {
+      "key": "Eine kurze Pause.",
+      "de": "Eine kurze Pause.",
+      "en": "A short break."
+    },
+    {
+      "key": "Weiterspielen",
+      "de": "Weiterspielen",
+      "en": "Resume game"
+    },
+    {
+      "key": "Spiel speichern",
+      "de": "Spiel speichern",
+      "en": "Save game"
+    },
+    {
+      "key": "Erste Schritte",
+      "de": "Erste Schritte",
+      "en": "First steps"
+    },
+    {
+      "key": "Speichern & zum Hauptmenü",
+      "de": "Speichern & zum Hauptmenü",
+      "en": "Save & return to main menu"
+    },
+    {
+      "key": "Zurück zur Pause",
+      "de": "Zurück zur Pause",
+      "en": "Back to pause menu"
+    },
+    {
+      "key": "Spielstand gespeichert.",
+      "de": "Spielstand gespeichert.",
+      "en": "Game saved."
+    },
+    {
+      "key": "Speichern fehlgeschlagen. Dein Spiel bleibt geöffnet.",
+      "de": "Speichern fehlgeschlagen. Dein Spiel bleibt geöffnet.",
+      "en": "Save failed. Your game will stay open."
+    },
+    {
+      "key": "Das Hauptmenü konnte nicht geöffnet werden.",
+      "de": "Das Hauptmenü konnte nicht geöffnet werden.",
+      "en": "The main menu could not be opened."
+    },
+    {
+      "key": "Bitte den Entwurf im Editor speichern und zum Spiel zurückkehren.",
+      "de": "Bitte den Entwurf im Editor speichern und zum Spiel zurückkehren.",
+      "en": "Save your design in the editor and return to the game."
+    },
+    {
+      "key": "Deine Welt entsteht Schritt für Schritt.\nMit Esc erreichst du im Spiel jederzeit das Pausemenü.",
+      "de": "Deine Welt entsteht Schritt für Schritt.\nMit Esc erreichst du im Spiel jederzeit das Pausemenü.",
+      "en": "Your world takes shape step by step.\nPress Esc during play to open the pause menu."
+    },
+    {
+      "key": "Gesamtlautstärke",
+      "de": "Gesamtlautstärke",
+      "en": "Master volume"
+    },
+    {
+      "key": "Musik",
+      "de": "Musik",
+      "en": "Music"
+    },
+    {
+      "key": "Umgebung",
+      "de": "Umgebung",
+      "en": "Ambience"
+    },
+    {
+      "key": "Spieleffekte",
+      "de": "Spieleffekte",
+      "en": "Game effects"
+    },
+    {
+      "key": "Menügeräusche",
+      "de": "Menügeräusche",
+      "en": "Interface sounds"
+    },
+    {
+      "key": "VOXELVERSE · AUDIO",
+      "de": "VOXELVERSE · AUDIO",
+      "en": "VOXELVERSE · AUDIO"
+    },
+    {
+      "key": "Lautstärke wird automatisch gespeichert.",
+      "de": "Lautstärke wird automatisch gespeichert.",
+      "en": "Volume is saved automatically."
+    },
+    {
+      "key": "Nachtmodus · große Lautstärkeunterschiede verringern",
+      "de": "Nachtmodus · große Lautstärkeunterschiede verringern",
+      "en": "Night mode · reduce large volume differences"
+    },
+    {
+      "key": "Stumm, wenn das Spielfenster im Hintergrund ist",
+      "de": "Stumm, wenn das Spielfenster im Hintergrund ist",
+      "en": "Mute when the game window is in the background"
+    },
+    {
+      "key": "Testton",
+      "de": "Testton",
+      "en": "Test sound"
+    },
+    {
+      "key": "Standardwerte",
+      "de": "Standardwerte",
+      "en": "Defaults"
+    },
+    {
+      "key": "Zurück · F7 / Esc",
+      "de": "Zurück · F7 / Esc",
+      "en": "Back · F7 / Esc"
+    },
+    {
+      "key": "Entdeckungsbuch",
+      "de": "Entdeckungsbuch",
+      "en": "Discovery journal"
+    },
+    {
+      "key": "Entwicklung",
+      "de": "Entwicklung",
+      "en": "Development"
+    },
+    {
+      "key": "Kreatureneditor",
+      "de": "Kreatureneditor",
+      "en": "Creature editor"
+    },
+    {
+      "key": "Freischalten",
+      "de": "Freischalten",
+      "en": "Unlock"
+    },
+    {
+      "key": "Voraussetzungen",
+      "de": "Voraussetzungen",
+      "en": "Requirements"
+    },
+    {
+      "key": "Auf Merkliste setzen",
+      "de": "Auf Merkliste setzen",
+      "en": "Add to watchlist"
+    },
+    {
+      "key": "Angriff",
+      "de": "Angriff",
+      "en": "Attack"
+    },
+    {
+      "key": "Verteidigung",
+      "de": "Verteidigung",
+      "en": "Defence"
+    },
+    {
+      "key": "Lebenskraft",
+      "de": "Lebenskraft",
+      "en": "Vitality"
+    },
+    {
+      "key": "Tempo",
+      "de": "Tempo",
+      "en": "Speed"
+    },
+    {
+      "key": "Sprungkraft",
+      "de": "Sprungkraft",
+      "en": "Jump strength"
+    },
+    {
+      "key": "Schwimmen",
+      "de": "Schwimmen",
+      "en": "Swimming"
+    },
+    {
+      "key": "Wahrnehmung",
+      "de": "Wahrnehmung",
+      "en": "Perception"
+    },
+    {
+      "key": "Greifkraft",
+      "de": "Greifkraft",
+      "en": "Grip strength"
+    },
+    {
+      "key": "Pflanzenkost",
+      "de": "Pflanzenkost",
+      "en": "Plant diet"
+    },
+    {
+      "key": "Fleischkost",
+      "de": "Fleischkost",
+      "en": "Meat diet"
+    },
+    {
+      "key": "Flugwert",
+      "de": "Flugwert",
+      "en": "Flight ability"
+    },
+    {
+      "key": "Nahrungsbedarf",
+      "de": "Nahrungsbedarf",
+      "en": "Food consumption"
+    },
+    {
+      "key": "Gesundheit",
+      "de": "Gesundheit",
+      "en": "Health"
+    },
+    {
+      "key": "Nahrung",
+      "de": "Nahrung",
+      "en": "Food"
+    },
+    {
+      "key": "Wasser",
+      "de": "Wasser",
+      "en": "Water"
+    },
+    {
+      "key": "Holz",
+      "de": "Holz",
+      "en": "Wood"
+    },
+    {
+      "key": "Stein",
+      "de": "Stein",
+      "en": "Stone"
+    },
+    {
+      "key": "Milch",
+      "de": "Milch",
+      "en": "Milk"
+    },
+    {
+      "key": "Sozialpunkte",
+      "de": "Sozialpunkte",
+      "en": "Social points"
+    },
+    {
+      "key": "Aggressionspunkte",
+      "de": "Aggressionspunkte",
+      "en": "Aggression points"
+    },
+    {
+      "key": "Stammespunkte",
+      "de": "Stammespunkte",
+      "en": "Tribal points"
+    },
+    {
+      "key": "Unbekannt",
+      "de": "Unbekannt",
+      "en": "Unknown"
+    },
+    {
+      "key": "Gesperrt",
+      "de": "Gesperrt",
+      "en": "Locked"
+    },
+    {
+      "key": "Freigeschaltet",
+      "de": "Freigeschaltet",
+      "en": "Unlocked"
+    },
+    {
+      "key": "Entdeckt",
+      "de": "Entdeckt",
+      "en": "Discovered"
+    },
+    {
+      "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen",
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature in crosshair\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
+    }
+  ]
+}
