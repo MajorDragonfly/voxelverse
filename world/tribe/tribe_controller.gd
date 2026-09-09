@@ -160,6 +160,9 @@ func _activate() -> void:
 	navigation.rebuild(home, HomeState.vector(village()["anchor"]))
 	if navigation.graph.get_point_count() == 0:
 		return
+	# The home controller refreshes on a slower tick. Install the visible nest
+	# with this runtime, so a cold start cannot briefly expose the default home.
+	get_parent().global_position = HomeState.vector(village()["anchor"])
 	_campaign_id = str(_state.campaign.data["id"])
 	_world_seed = _state.get_world_seed()
 	_player_processing = {"process": player.is_processing(), "physics": player.is_physics_processing(), "input": player.is_processing_input(), "unhandled": player.is_processing_unhandled_input(), "collision_layer": player.collision_layer}

@@ -132,6 +132,9 @@ func _restart_check(saves: Node, state: Node) -> void:
 	change_scene_to_file("res://main/main.tscn")
 	await scene_changed
 	var tribe: Node = current_scene.get_node("Nest/Tribe")
+	# Force the home controller's slower refresh to occur after tribal activation.
+	tribe.home.player = current_scene.get_node("Player")
+	tribe.home._timer = 10.0
 	for frame in range(1800):
 		await physics_frame
 		await process_frame
