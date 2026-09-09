@@ -85,8 +85,10 @@ func _physics_process(delta: float) -> void:
 		move_input = Vector2(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)),
 			float(Input.is_physical_key_pressed(KEY_W)) - float(Input.is_physical_key_pressed(KEY_S))).limit_length()
 	basis = Cube.frame(up_direction, forward)
-	terrain.stream_at(up_direction)
 	var desired: Vector3 = (basis.x * move_input.x + forward * move_input.y) * speed
+	if terrain is AdaptiveSphereTiles:
+		terrain.lookahead_direction = (up_direction + desired * 1.5 / float(terrain.surface.body.radius)).normalized()
+	terrain.stream_at(up_direction)
 	var vertical: float = velocity.dot(up_direction)
 	var sample: Dictionary = terrain.surface.sample(address_value)
 	swimming = sample.water and address_value.height < 1.0

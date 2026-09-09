@@ -135,7 +135,8 @@ def main():
                 f"Start {executable_name} with its .pck and any adjacent libraries kept together.\n"
                 "Controls: WASD move, Space jump, E inspect, right mouse/Q bite, P next planet.\n"
                 "Esc / F8: settings and pause. F4 or the menu button opens the Planet Lab.\n"
-                "Planet Lab: Tab surface/orbit, M next body, B binary stars. Aster is the 8 km adaptive planet.\n"
+                "Planet Lab: choose Terra (12,742 km), then M for Neris (100 km) / Orin (1,000 km).\n"
+                "Tab: surface/orbit; B: binary stars; F5/F9: save/load. Aster returns to the small test system.\n"
                 "This build passed headless release acceptance. Visual/GPU acceptance is still pending.\n",
                 encoding="utf-8")
             archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"

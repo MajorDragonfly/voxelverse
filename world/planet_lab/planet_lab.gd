@@ -5,6 +5,7 @@ const System = preload("res://world/space/celestial_system.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Tiles = preload("res://world/planet_lab/sphere_tiles.gd")
 const AdaptiveTiles = preload("res://world/planet_lab/adaptive_sphere_tiles.gd")
+const OrbitMesh = preload("res://world/planet_lab/planet_orbit_mesh.gd")
 const Walker = preload("res://world/planet_lab/radial_walker.gd")
 const LabSave = preload("res://world/planet_lab/planet_lab_save.gd")
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
@@ -39,6 +40,8 @@ var creature_design: Dictionary = {}
 var leave_without_saving: Button
 var underwater: UnderwaterView
 const SPACE_SCALE: float = 0.001
+var _space_scale: float = SPACE_SCALE
+var _opening_large: bool = false
 
 
 func _ready() -> void:
@@ -58,7 +61,7 @@ func _ready() -> void:
 	underwater.sample_water = _sample_camera_water
 	add_child(underwater)
 	add_child(space)
-	space.scale = Vector3.ONE * SPACE_SCALE
+	space.scale = Vector3.ONE
 	add_child(sky)
 	add_child(space_camera)
 	space_camera.far = 1000.0
@@ -67,7 +70,7 @@ func _ready() -> void:
 	_build_ui()
 	var saved: Dictionary = LabSave.read()
 	if not saved.is_empty():
-		system = System.new(saved.binary)
+		system = System.new(saved.binary, saved.get("scale_mode", "test") == "real")
 		system.elapsed = saved.elapsed
 		body_id = saved.body_id
 	elif FileAccess.file_exists(LabSave.PATH) or FileAccess.file_exists(LabSave.PATH + ".bak"):
@@ -116,14 +119,11 @@ func _build_system_view() -> void:
 		if not meshes.has(id):
 			if body.kind == "star":
 				var star := SphereMesh.new()
-				star.radius = body.radius
-				star.height = body.radius * 2.0
-				meshes[id] = star
+				star.radius = 1.0
+				star.height = 2.0
+				meshes[id] = {"land": star}
 			else:
-				var builder := Tiles.new()
-				builder.configure(body)
-				meshes[id] = builder.orbital_mesh()
-				builder.free()
+				meshes[id] = OrbitMesh.build(body)
 		var node := _body_visual(body, meshes[id])
 		space.add_child(node)
 		space_bodies[id] = node
@@ -144,7 +144,7 @@ func _build_system_view() -> void:
 			path.surface_begin(Mesh.PRIMITIVE_LINE_STRIP, path_material)
 			for step in range(129):
 				var angle: float = step * TAU / 128.0
-				path.surface_add_vertex(Vector3(cos(angle), 0, sin(angle)) * float(body.orbit_radius))
+				path.surface_add_vertex(Vector3(cos(angle), 0, sin(angle)))
 			path.surface_end()
 			orbit.mesh = path
 			space.add_child(orbit)
@@ -172,9 +172,9 @@ func _build_system_view() -> void:
 	space.add_child(landing_marker)
 
 
-func _body_visual(body: Dictionary, mesh: Mesh) -> Node3D:
+func _body_visual(body: Dictionary, model: Dictionary) -> Node3D:
 	var node := MeshInstance3D.new()
-	node.mesh = mesh
+	node.mesh = model.land
 	var material := StandardMaterial3D.new()
 	if body.kind == "star":
 		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -186,12 +186,7 @@ func _body_visual(body: Dictionary, mesh: Mesh) -> Node3D:
 	node.material_override = material
 	if body.kind == "planet":
 		var ocean := MeshInstance3D.new()
-		var sphere := SphereMesh.new()
-		sphere.radius = body.radius
-		sphere.height = body.radius * 2.0
-		sphere.radial_segments = 128
-		sphere.rings = 64
-		ocean.mesh = sphere
+		ocean.mesh = model.water
 		var water_material := StandardMaterial3D.new()
 		water_material.albedo_color = Color("247c9d")
 		water_material.roughness = 0.26
@@ -202,6 +197,12 @@ func _body_visual(body: Dictionary, mesh: Mesh) -> Node3D:
 
 
 func _open_body(id: String, saved: Dictionary = {}) -> void:
+	var full_size: bool = id in System.REAL_LANDABLE
+	if full_size != system.real_scale:
+		var time: float = system.elapsed
+		system = System.new(system.binary, full_size)
+		system.elapsed = time
+		_build_system_view()
 	if is_instance_valid(walker):
 		remove_child(walker)
 		walker.queue_free()
@@ -216,7 +217,8 @@ func _open_body(id: String, saved: Dictionary = {}) -> void:
 	walker.terrain = terrain
 	walker.creature_design = creature_design.duplicate(true)
 	add_child(walker)
-	walker.camera.far = maxf(1800.0, float(system.bodies[id].radius) * 2.0)
+	walker.camera.far = 50000.0 if system.real_scale else maxf(1800.0, float(system.bodies[id].radius) * 2.0)
+	walker.camera.near = 0.2 if system.real_scale else 0.05
 	var location: Dictionary = _coastal_spawn()
 	var heading: Vector3 = Vector3.FORWARD
 	if not saved.is_empty():
@@ -258,9 +260,9 @@ func _coastal_spawn() -> Dictionary:
 			for x in range(-4, 5):
 				var candidate: Dictionary = Cube.address(body_id, face, x * 0.2, y * 0.2)
 				var d: Vector3 = Cube.vector(Cube.direction(face, candidate.u, candidate.v))
-				var h: float = terrain.surface.height_at(d)
+				var h: float = terrain.surface.height_precise(Cube.direction(face, candidate.u, candidate.v))
 				var day: float = d.dot(system.sky_direction(body_id, "m1:sol"))
-				var cost: float = absf(h - 2.8) + maxf(0.2 - day, 0.0) * 30.0 + absf(d.y)
+				var cost: float = absf(h - 2.8) + maxf(0.2 - day, 0.0) * (10000.0 if system.real_scale else 30.0) + absf(d.y)
 				if cost < score:
 					score = cost
 					best = candidate
@@ -299,53 +301,60 @@ func _process(delta: float) -> void:
 		"Zwei Sonnen" if system.binary else "Eine Sonne", "Tag" if daylight > 0.0 else "Nacht", float(system.bodies[body_id].radius) * 0.002,
 		int(system.elapsed) / 60, int(system.elapsed) % 60, time_speed, terrain.active.size(), Tiles.MAX_NEAR, terrain.rebases]
 	if terrain is AdaptiveSphereTiles:
-		details.text += "\n%d Kacheln · Detailstufen %d–%d · %s" % [terrain.tiles.size(), 2, terrain.layout.max_level,
+		details.text += "\n%d Kacheln · Detailstufen %d–%d · %s" % [terrain.tiles.size(), 0, terrain.layout.max_level,
 			"Gelände wird berechnet" if terrain.pending_count() < 0 else "%d Kacheln vorbereitet" % terrain.pending_count()]
+	if view_mode == "system" and system.real_scale:
+		details.text += "\nKartenansicht mit vergrößerten Körpersymbolen"
 	help.text = "WASD  Bewegen     Maus  Umsehen     Leertaste  Springen     Esc  Einstellungen\nTab  Orbit / Landen     M  Nächster Körper     B  Zwei Sonnen     T  Zeit     F5 / F9  Sichern / Laden"
 
 
 func _update_views() -> void:
 	if not is_instance_valid(walker):
 		return
-	var body_position: Vector3 = system.position_at(body_id)
+	var body_position: Array = system.position_precise(body_id)
 	var rotation: Basis = system.rotation_at(body_id)
 	var address_value: Dictionary = walker.location()
 	var local_point: Vector3 = Cube.vector(Cube.cartesian(address_value, system.bodies[body_id].radius))
-	var up: Vector3 = local_point.normalized()
+	var up: Vector3 = Cube.vector(Cube.direction(address_value.face, address_value.u, address_value.v))
+	var origin: Array = body_position if view_mode == "orbit" else [0.0, 0.0, 0.0]
+	_space_scale = SPACE_SCALE
+	if system.real_scale:
+		_space_scale = 8.0 / float(system.bodies[body_id].radius) if view_mode == "orbit" else 300.0 / 240000000000.0
 	var illumination: float = 0.0
+	var minimum := Vector3(INF, 0, INF)
+	var maximum := Vector3(-INF, 0, -INF)
 	for id: String in system.bodies:
 		var body: Dictionary = system.bodies[id]
-		var body_rotation: Basis = system.rotation_at(id)
-		space_bodies[id].position = system.position_at(id) - (body_position if view_mode == "orbit" else Vector3.ZERO)
-		space_bodies[id].basis = body_rotation
-		# System-map symbols are enlarged; their orbit centers/positions remain
-		# physical. Orbit view always uses the real common radius and terrain.
-		var symbol_radius: float = 2600.0 if body.kind == "planet" else (1000.0 if body.kind == "moon" else float(body.radius))
-		space_bodies[id].scale = Vector3.ONE * (maxf(1.0, symbol_radius / float(body.radius)) if view_mode == "system" else 1.0)
+		var p: Vector3 = Cube.scaled_offset(system.position_precise(id), origin, _space_scale)
+		space_bodies[id].position = p
+		space_bodies[id].basis = system.rotation_at(id)
+		var real_radius: float = float(body.radius) * _space_scale
+		var symbol_radius: float = real_radius
+		if view_mode == "system":
+			symbol_radius = maxf(real_radius, 4.0 if body.kind == "star" else (1.5 if body.kind == "planet" else 0.7))
+		space_bodies[id].scale = Vector3.ONE * symbol_radius
+		minimum.x = minf(minimum.x, p.x)
+		minimum.z = minf(minimum.z, p.z)
+		maximum.x = maxf(maximum.x, p.x)
+		maximum.z = maxf(maximum.z, p.z)
 		body_labels[id].visible = view_mode == "system"
 		body_labels[id].text = "%s · %.1f km" % [body.name, float(body.radius) * 0.002]
-		body_labels[id].position = space_bodies[id].position + Vector3(0, 200, maxf(symbol_radius, body.radius) + 2500.0)
-		if body.kind == "moon":
-			body_labels[id].position.z -= maxf(18000.0, space_camera.size / SPACE_SCALE * 0.08)
-		elif body.kind == "star":
-			# Keep the two diameters separate from each other and nearby planets.
-			var label_offset: float = -0.07 if id == "m1:vesper" else 0.045
-			body_labels[id].position.z += space_camera.size / SPACE_SCALE * label_offset
+		body_labels[id].position = p + Vector3(0, 0.2, symbol_radius + 2.5)
 		if orbit_lines.has(id):
 			orbit_lines[id].visible = view_mode == "system"
-			orbit_lines[id].position = system.position_at(body.parent_id) if not str(body.parent_id).is_empty() else Vector3.ZERO
+			var parent: Array = system.position_precise(body.parent_id) if not str(body.parent_id).is_empty() else [0.0, 0.0, 0.0]
+			orbit_lines[id].position = Cube.scaled_offset(parent, origin, _space_scale)
+			orbit_lines[id].scale = Vector3.ONE * float(body.orbit_radius) * _space_scale
 		sky_bodies[id].visible = id != body_id
 		if id == body_id:
 			continue
-		var delta_position: Vector3 = rotation.inverse() * (system.position_at(id) - body_position) - local_point
+		var delta_position: Vector3 = rotation.inverse() * Cube.scaled_offset(system.position_precise(id), body_position, 1.0) - local_point
 		sky_bodies[id].position = walker.position + delta_position.normalized() * 900.0
-		sky_bodies[id].basis = rotation.inverse() * body_rotation
-		sky_bodies[id].scale = Vector3.ONE * (900.0 / delta_position.length())
+		sky_bodies[id].basis = rotation.inverse() * system.rotation_at(id)
+		sky_bodies[id].scale = Vector3.ONE * (float(body.radius) * 900.0 / delta_position.length())
 		if lights.has(id):
-			var direction: Vector3 = delta_position.normalized() if view_mode == "surface" else (system.position_at(id) - body_position).normalized()
+			var direction: Vector3 = delta_position.normalized() if view_mode == "surface" else Cube.scaled_offset(system.position_precise(id), body_position, 1.0).normalized()
 			lights[id].basis = Basis.looking_at(-direction, Vector3.UP if absf(direction.y) < 0.95 else Vector3.RIGHT)
-			# A finite shadow map cannot represent the far side of the whole
-			# planet. Its horizon must block a sun below the local surface too.
 			var horizon: float = smoothstep(-0.03, 0.04, up.dot(delta_position.normalized())) if view_mode == "surface" else 1.0
 			lights[id].light_energy = (PRIMARY_LIGHT_ENERGY if id == "m1:sol" else SECONDARY_LIGHT_ENERGY) * horizon
 			illumination += maxf(0.0, up.dot(delta_position.normalized()))
@@ -358,34 +367,39 @@ func _update_views() -> void:
 	else:
 		environment.background_color = Color("080c18")
 		environment.ambient_light_energy = 0.25
+	environment.fog_enabled = system.real_scale and view_mode == "surface"
+	if environment.fog_enabled:
+		environment.fog_mode = Environment.FOG_MODE_DEPTH
+		environment.fog_light_color = environment.background_color
+		environment.fog_depth_begin = 1200.0
+		environment.fog_depth_end = 25000.0
+		environment.fog_sky_affect = 0.0
 	var world_up: Vector3 = rotation * up
-	landing_marker.position = (rotation * (local_point + up * 4.0)) + (Vector3.ZERO if view_mode == "orbit" else body_position)
+	landing_marker.position = (rotation * (local_point + up * 4.0)) * _space_scale
+	landing_marker.scale = Vector3.ONE * maxf(float(system.bodies[body_id].radius) * _space_scale * 0.003 / 16.0, 0.0001)
 	landing_marker.visible = view_mode == "orbit"
 	if view_mode == "orbit":
-		var distance: float = float(system.bodies[body_id].radius) * SPACE_SCALE * 5.3
+		var distance: float = float(system.bodies[body_id].radius) * _space_scale * 5.3
 		space_camera.position = world_up * distance + rotation * walker.forward * distance * 0.2
 		space_camera.look_at(Vector3.ZERO, rotation * walker.forward)
 	elif view_mode == "system":
-		var minimum := Vector3(INF, 0, INF)
-		var maximum := Vector3(-INF, 0, -INF)
-		for id: String in system.bodies:
-			var p: Vector3 = system.position_at(id) * SPACE_SCALE
-			minimum.x = minf(minimum.x, p.x)
-			minimum.z = minf(minimum.z, p.z)
-			maximum.x = maxf(maximum.x, p.x)
-			maximum.z = maxf(maximum.z, p.z)
 		var center: Vector3 = (minimum + maximum) * 0.5
-		# Keep body centers in the free strip between the two HUD panels.
 		space_camera.size = maxf(190.0, (maximum.z - minimum.z + 20.0) / 0.40)
 		space_camera.size = maxf(space_camera.size, maximum.x - minimum.x + 40.0)
 		space_camera.position = center + Vector3(0.0, 180.0, 0.01)
 		space_camera.look_at(center, Vector3.FORWARD)
-		for label in body_labels.values():
-			label.pixel_size = 80.0 * space_camera.size / 190.0
+		for id: String in body_labels:
+			var label: Label3D = body_labels[id]
+			label.pixel_size = 0.08 * space_camera.size / 190.0
+			var body: Dictionary = system.bodies[id]
+			if not str(body.parent_id).is_empty() and system.bodies[body.parent_id].kind == "planet":
+				label.position.z -= space_camera.size * 0.08
+			elif body.kind == "star":
+				label.position.z += space_camera.size * (-0.07 if id == "m1:vesper" else 0.045)
 
 
 func snapshot() -> Dictionary:
-	return {"schema": 2, "terrain_revision": System.TERRAIN_REVISION, "surface_version": Cube.MODE, "body_id": body_id, "location": walker.location(),
+	return {"schema": 3 if system.real_scale else 2, "scale_mode": "real" if system.real_scale else "test", "terrain_revision": 3 if system.real_scale else System.TERRAIN_REVISION, "surface_version": Cube.MODE, "body_id": body_id, "location": walker.location(),
 		"forward": [walker.forward.x, walker.forward.y, walker.forward.z], "elapsed": system.elapsed, "binary": system.binary}
 
 
@@ -404,7 +418,7 @@ func load_lab() -> void:
 		status.text = "Keine gültige Laborsicherung gefunden."
 		return
 	_save_read_only = false
-	system = System.new(saved.binary)
+	system = System.new(saved.binary, saved.get("scale_mode", "test") == "real")
 	system.elapsed = saved.elapsed
 	_build_system_view()
 	_open_body(saved.body_id, saved)
@@ -413,15 +427,15 @@ func load_lab() -> void:
 
 func toggle_binary() -> void:
 	var elapsed: float = system.elapsed
-	system = System.new(not system.binary)
+	system = System.new(not system.binary, system.real_scale)
 	system.elapsed = elapsed
 	_build_system_view()
 	_update_views()
 
 
 func next_body() -> void:
-	var index: int = System.LANDABLE.find(body_id)
-	_open_body(System.LANDABLE[(index + 1) % System.LANDABLE.size()])
+	var index: int = system.landable_ids().find(body_id)
+	_open_body(system.landable_ids()[(index + 1) % system.landable_ids().size()])
 	status.text = "Technikreise: %s. Tab öffnet den Orbit." % system.bodies[body_id].name
 
 
@@ -514,6 +528,8 @@ func _build_ui() -> void:
 	_button(buttons, "Orbit", func(): set_view("orbit"))
 	_button(buttons, "Sternsystem", func(): set_view("system"))
 	_button(buttons, "Körper wechseln", next_body)
+	var large_button: Button = _button(buttons, "Terra · 12.742 km", _open_large_reference)
+	large_button.name = "OpenTerra"
 	_button(buttons, "Aster · 8 km", func(): _open_body("m1:aster"))
 	_button(buttons, "Sonnen wechseln", toggle_binary)
 	_button(buttons, "Zeit", cycle_time)
@@ -547,7 +563,19 @@ func _panel() -> StyleBoxFlat:
 	return style
 
 
-func _button(parent: Node, text: String, action: Callable) -> void:
+func _open_large_reference() -> void:
+	if _opening_large:
+		return
+	_opening_large = true
+	status.text = "Terra wird geladen …"
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_open_body("m1b:terra")
+	_opening_large = false
+	status.text = "Originalgröße: 12.742 km Durchmesser."
+
+
+func _button(parent: Node, text: String, action: Callable) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.focus_mode = Control.FOCUS_NONE
@@ -555,3 +583,4 @@ func _button(parent: Node, text: String, action: Callable) -> void:
 	button.add_theme_font_size_override("font_size", 15)
 	button.pressed.connect(action)
 	parent.add_child(button)
+	return button

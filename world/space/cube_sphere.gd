@@ -71,6 +71,16 @@ static func vector(p: Array) -> Vector3:
 	return Vector3(p[0], p[1], p[2])
 
 
+static func scaled_offset(p: Array, origin: Array, scale_value: float) -> Vector3:
+	return Vector3((float(p[0]) - origin[0]) * scale_value,
+		(float(p[1]) - origin[1]) * scale_value, (float(p[2]) - origin[2]) * scale_value)
+
+
+static func normalized(p: Array) -> Array:
+	var length: float = sqrt(float(p[0]) * p[0] + float(p[1]) * p[1] + float(p[2]) * p[2])
+	return [p[0] / length, p[1] / length, p[2] / length]
+
+
 static func frame(up: Vector3, forward: Vector3 = Vector3.FORWARD) -> Basis:
 	var tangent: Vector3 = forward.slide(up).normalized()
 	if tangent.length_squared() < 0.5:

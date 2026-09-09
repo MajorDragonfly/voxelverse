@@ -75,6 +75,8 @@ func _run() -> void:
 			await _hydrology()
 		"planet_lab":
 			await _planet_lab()
+		"large_planet":
+			await _large_planet()
 		_:
 			_failures.append("Unknown review case.")
 	RenderingServer.render_loop_enabled = true
@@ -750,6 +752,65 @@ func _planet_lab() -> void:
 	settings.close_menu()
 
 
+func _large_planet() -> void:
+	_scene = load("res://world/planet_lab/planet_lab.tscn").instantiate()
+	root.add_child(_scene)
+	current_scene = _scene
+	_scene.time_speed = 0.0
+	_scene._open_body("m1b:terra")
+	for frame in range(45):
+		await physics_frame
+	_scene.walker.enabled = false
+	await _capture("m1b_terra_surface", _scene.snapshot())
+	_scene.set_view("orbit")
+	await _capture("m1b_terra_orbit", _scene.snapshot())
+	_scene.set_view("system")
+	await _capture("m1b_system", _scene.snapshot())
+	_scene.toggle_binary()
+	await _capture("m1b_binary_system", _scene.snapshot())
+	_scene.toggle_binary()
+	_scene.set_view("surface")
+	_scene.walker.enabled = false
+	var cube = preload("res://world/space/cube_sphere.gd")
+	var water: Dictionary = {}
+	var closest: float = INF
+	for face in range(6):
+		for y in range(-4, 5):
+			for x in range(-4, 5):
+				var candidate: Dictionary = cube.address("m1b:terra", face, x * 0.2, y * 0.2, -2.0)
+				var h: float = _scene.terrain.surface.sample(candidate).height
+				if h < -4.0 and absf(h + 8.0) < closest:
+					closest = absf(h + 8.0)
+					water = candidate
+	if water.is_empty():
+		_failures.append("No Earth ocean capture location.")
+	else:
+		_scene.walker.place(water)
+		_scene.walker.enabled = false
+		var camera := Camera3D.new()
+		_scene.add_child(camera)
+		var up: Vector3 = _scene.walker.up_direction
+		var forward: Vector3 = _scene.walker.forward
+		camera.look_at_from_position(Vector3.ZERO, forward * 10.0 - up * 2.0, up)
+		camera.make_current()
+		_scene.underwater.update_view()
+		await _capture("m1b_terra_underwater", {"depth_m": 2.0, "bed_depth_m": -_scene.terrain.surface.sample(water).height})
+		camera.look_at_from_position(Vector3.ZERO, forward + up * 5.0, up)
+		await _capture("m1b_terra_underwater_up", {"depth_m": 2.0})
+		if not _scene.underwater.submerged:
+			_failures.append("The Earth capture did not activate radial underwater optics.")
+		_scene.walker.camera.make_current()
+		camera.queue_free()
+	for id in ["m1b:100", "m1b:1000"]:
+		_scene._open_body(id)
+		for frame in range(45):
+			await physics_frame
+		_scene.walker.enabled = false
+		await _capture("m1b_%s_surface" % id.get_slice(":", 1), _scene.snapshot())
+		_scene.set_view("orbit")
+		await _capture("m1b_%s_orbit" % id.get_slice(":", 1), _scene.snapshot())
+
+
 func _capture(label: String, details: Dictionary) -> void:
 	RenderingServer.render_loop_enabled = true
 	for warmup in range(int(_config.get("warmup", 20))):
@@ -781,9 +842,10 @@ func _capture(label: String, details: Dictionary) -> void:
 		"render_cpu_ms": _distribution(cpu), "render_gpu_ms": _distribution(gpu),
 		"gpu_timestamps_available": gpu.max() > 0.0, "draw_calls": _distribution(calls),
 		"rendered_primitives": _distribution(primitives)})
-	if label.begins_with("m1_") or label.begins_with("underwater_") or label.begins_with("world_underwater") or label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
+	var planet_review: bool = label.begins_with("m1_") or label.begins_with("m1b_")
+	if planet_review or label.begins_with("underwater_") or label.begins_with("world_underwater") or label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
 		var preview: Image = image.duplicate()
-		preview.resize(960 if label.begins_with("m1_") else 480, 540 if label.begins_with("m1_") else 270, Image.INTERPOLATE_LANCZOS)
+		preview.resize(960 if planet_review else 480, 540 if planet_review else 270, Image.INTERPOLATE_LANCZOS)
 		print("REVIEW_PREVIEW ", str(_config["seed"]), " ", label, " ", Marshalls.raw_to_base64(preview.save_jpg_to_buffer(0.76)))
 	if label.begins_with("terrain_transition_"):
 		_comparison_images[label] = image

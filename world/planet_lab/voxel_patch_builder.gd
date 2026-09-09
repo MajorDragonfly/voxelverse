@@ -27,8 +27,9 @@ func build(tile: Dictionary, surface: RefCounted, seam_arrays: Array) -> Array:
 	for y in range(CELLS):
 		for x in range(CELLS):
 			var center: Vector2 = tile.uv + Vector2(x + 0.5, y + 0.5) * (float(tile.width) / CELLS)
-			var direction: Vector3 = Cube.vector(Cube.direction(tile.face, center.x, center.y))
-			var height: float = snappedf(surface.height_at(direction), HEIGHT_STEP)
+			var precise: Array = Cube.direction(tile.face, center.x, center.y)
+			var direction: Vector3 = Cube.vector(precise)
+			var height: float = snappedf(surface.height_precise(precise), HEIGHT_STEP)
 			var pigment: Color = surface.color_at(direction, height)
 			var hash_value: int = absi((tile.x * CELLS + x) * 73856093 ^ (tile.y * CELLS + y) * 19349663 ^ tile.face * 83492791)
 			pigment = pigment.darkened(float(hash_value % 5) * 0.012)

@@ -8,15 +8,18 @@ const PATH: String = "user://planet_lab_m1.json"
 
 
 static func valid(data: Dictionary) -> bool:
-	if (data.get("schema") != 1 and data.get("schema") != 2) or data.get("surface_version") != Cube.MODE:
+	if (data.get("schema") != 1 and data.get("schema") != 2 and data.get("schema") != 3) or data.get("surface_version") != Cube.MODE:
 		return false
 	if data.get("schema") == 2 and data.get("terrain_revision") != System.TERRAIN_REVISION:
 		return false
-	if not data.get("binary") is bool or data.get("body_id") not in System.LANDABLE:
+	if data.get("schema") == 3 and (data.get("terrain_revision") != 3 or data.get("scale_mode") != "real"):
+		return false
+	var ids: Array[String] = System.REAL_LANDABLE if data.get("schema") == 3 else System.LANDABLE
+	if not data.get("binary") is bool or data.get("body_id") not in ids:
 		return false
 	if not Cube.valid(data.get("location"), data.body_id):
 		return false
-	if absf(float(data.location.height)) > 1000.0:
+	if absf(float(data.location.height)) > (20000.0 if data.get("schema") == 3 else 1000.0):
 		return false
 	if not (data.get("elapsed") is float or data.get("elapsed") is int) or not is_finite(float(data.elapsed)) or data.elapsed < 0.0:
 		return false
@@ -49,4 +52,9 @@ static func read(path: String = PATH) -> Dictionary:
 
 
 static func _incompatible(data: Dictionary) -> bool:
-	return not data.is_empty() and ((data.get("schema", 1) != 1 and data.get("schema", 1) != 2) or data.get("surface_version", Cube.MODE) != Cube.MODE or int(data.get("terrain_revision", 1)) > System.TERRAIN_REVISION)
+	if data.is_empty():
+		return false
+	var schema: int = int(data.get("schema", 1))
+	return schema not in [1, 2, 3] or data.get("surface_version", Cube.MODE) != Cube.MODE \
+		or int(data.get("terrain_revision", 1)) > (3 if schema == 3 else System.TERRAIN_REVISION) \
+		or (schema == 3 and data.get("scale_mode", "real") != "real")

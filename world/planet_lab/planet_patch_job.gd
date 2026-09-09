@@ -14,7 +14,7 @@ func run() -> void:
 	var started: int = Time.get_ticks_usec()
 	var layout := Layout.new(body.radius)
 	var surface := Surface.new(body)
-	result = layout.choose(direction)
+	result = layout.choose(direction, previous_masks)
 	for tile: Dictionary in result.values():
 		if previous_masks.get(tile.id, -1) == tile.mask:
 			continue

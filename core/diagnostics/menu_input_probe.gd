@@ -75,10 +75,28 @@ func _run() -> void:
 	lab.walker.enabled = false
 	_expect(lab.body_id == "m1:aster" and absf(float(lab.walker.location().u) - float(address.u)) < 0.000001,
 		"Large-planet load did not restore the selected body and address.")
+	await tree.process_frame
+	_click(lab.find_child("OpenTerra", true, false))
+	for frame in range(8):
+		await tree.process_frame
+		if lab.body_id == "m1b:terra":
+			break
+	lab.walker.enabled = false
+	_expect(lab.body_id == "m1b:terra" and lab.system.bodies[lab.body_id].radius == 6371000.0,
+		"The packaged Terra button did not open a physically Earth-sized planet.")
+	_expect(lab.terrain.layout.max_level == 19 and lab.terrain.active.size() == 24,
+		"The packaged Earth did not retain local voxel detail and collision.")
+	_expect(lab.save_lab() and lab.snapshot().schema == 3, "The packaged Earth save failed.")
+	address = lab.walker.location()
+	lab.load_lab()
+	lab.walker.enabled = false
+	var cube = preload("res://world/space/cube_sphere.gd")
+	_expect(lab.body_id == "m1b:terra" and cube.local_position(cube.cartesian(address, 6371000.0),
+		cube.cartesian(lab.walker.location(), 6371000.0)).length() < 0.001, "The packaged Earth save lost millimetre location precision.")
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():
-		print("MENU_INPUT_PASSED: underwater camera/air restoration, Esc, F8, actual paused GUI clicks, saved VSync, mouse restoration, physical F4, menu-to-lab round trip and voxel Aster save/load.")
+		print("MENU_INPUT_PASSED: underwater camera/air restoration, Esc, F8, actual paused GUI clicks, saved VSync, mouse restoration, physical F4, menu-to-lab round trip, Aster and real Terra button/collision/save/load.")
 	tree.quit(0 if failures.is_empty() else 1)
 
 

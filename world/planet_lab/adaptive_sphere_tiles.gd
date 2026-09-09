@@ -24,6 +24,8 @@ var max_worker_usec: int = 0
 var max_publish_usec: int = 0
 var max_initial_publish_usec: int = 0
 var upload_samples: Array[float] = []
+var lookahead_direction: Vector3 = Vector3.ZERO
+var job_samples: Array[Dictionary] = []
 
 
 func configure(descriptor: Dictionary) -> void:
@@ -44,7 +46,7 @@ func configure(descriptor: Dictionary) -> void:
 func stream_at(direction: Vector3, force: bool = false) -> void:
 	_requested_direction = direction
 	if force or (_task < 0 and _pending.is_empty() and direction.distance_to(_last_direction) * float(surface.body.radius) >= 8.0):
-		_request(direction)
+		_request(direction if force or lookahead_direction == Vector3.ZERO else lookahead_direction)
 	if force:
 		_collect_job()
 		while not _pending.is_empty():
@@ -75,6 +77,8 @@ func _collect_job() -> void:
 	_task = -1
 	_staging = _job.result
 	max_worker_usec = maxi(max_worker_usec, _job.duration_usec)
+	if job_samples.size() < 256:
+		job_samples.append({"worker_ms": _job.duration_usec / 1000.0, "tiles": _staging.size()})
 	_job = null
 	for id: String in _staging:
 		var tile: Dictionary = _staging[id]
@@ -82,7 +86,9 @@ func _collect_job() -> void:
 			_staging[id] = leaves[id]
 		else:
 			_pending.append(id)
-	_pending.sort_custom(func(a: String, b: String): return _staging[a].direction.dot(_last_direction) < _staging[b].direction.dot(_last_direction))
+	_pending.sort_custom(func(a: String, b: String): return _staging[a].direction.distance_squared_to(_last_direction) > _staging[b].direction.distance_squared_to(_last_direction))
+	if not job_samples.is_empty():
+		job_samples[-1]["uploads"] = _pending.size()
 	if _pending.is_empty():
 		_publish()
 
@@ -173,7 +179,9 @@ func _update_collisions(direction: Vector3) -> void:
 		return
 	_collision_direction = direction
 	var sorted: Array = leaves.keys()
-	sorted.sort_custom(func(a: String, b: String): return leaves[a].direction.dot(direction) > leaves[b].direction.dot(direction))
+	# Dot products round to 1 for thousands of distinct nearby points at Earth
+	# radius. Subtract first so ordering retains their small angular distances.
+	sorted.sort_custom(func(a: String, b: String): return leaves[a].direction.distance_squared_to(direction) < leaves[b].direction.distance_squared_to(direction))
 	var wanted: Array = sorted.slice(0, MAX_NEAR)
 	for id: String in active.keys():
 		if id not in wanted:
@@ -200,18 +208,17 @@ func _collision_shape(mesh: ArrayMesh) -> ConcavePolygonShape3D:
 	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX].duplicate()
 	if vertices.size() <= 289:
 		return super._collision_shape(mesh)
-	# Voxel tops duplicate their perimeter vertices for flat normals. Expand
-	# those actual rendered boundary copies by the same sub-mm seam guard.
-	var boundary: Dictionary = {}
-	for edge in range(4):
-		for step in range(17):
-			boundary[vertices[PatchMesh.edge_index(edge, step)]] = true
-	for i in range(289, vertices.size()):
-		if boundary.has(vertices[i]):
-			vertices[i] += vertices[i].normalized() * COLLISION_EDGE_GUARD
+	# Flat voxel faces duplicate vertices. Exact rays can miss their internal
+	# joins after independent float transforms as well as outer tile seams.
+	# Overlap each physical triangle by at most half a millimetre in its own
+	# plane; visual geometry and the radial ground height remain unchanged.
 	var faces := PackedVector3Array()
-	for index: int in arrays[Mesh.ARRAY_INDEX]:
-		faces.append(vertices[index])
+	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+	for i in range(0, indices.size(), 3):
+		var center: Vector3 = (vertices[indices[i]] + vertices[indices[i + 1]] + vertices[indices[i + 2]]) / 3.0
+		for corner in range(3):
+			var point: Vector3 = vertices[indices[i + corner]]
+			faces.append(point + (point - center).normalized() * COLLISION_EDGE_GUARD)
 	var shape := ConcavePolygonShape3D.new()
 	shape.backface_collision = true
 	shape.set_faces(faces)

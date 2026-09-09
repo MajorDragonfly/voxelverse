@@ -21,14 +21,23 @@ static func build_arrays(tile: Dictionary, surface: RefCounted) -> Dictionary:
 		for x in range(STRIDE):
 			var uv: Vector2 = tile.uv + Vector2(x, y) * (float(tile.width) / CELLS)
 			var address: Dictionary = Cube.address(surface.body.id, tile.face, uv.x, uv.y)
-			var d: Vector3 = Cube.vector(Cube.direction(tile.face, uv.x, uv.y))
-			var height: float = surface.height_at(d)
+			var precise: Array = Cube.direction(tile.face, uv.x, uv.y)
+			var d: Vector3 = Cube.vector(precise)
+			var height: float = surface.height_precise(precise)
 			ocean.append(Cube.local_position(Cube.cartesian(address, surface.body.radius), tile.anchor))
 			address.height = height
 			vertices.append(Cube.local_position(Cube.cartesian(address, surface.body.radius), tile.anchor))
-			normals.append(surface.normal_at(d))
+			normals.append(d if surface.body.get("terrain_revision", 1) >= 3 else surface.normal_at(d))
 			colors.append(surface.color_at(d, height))
 			has_water = has_water or height < 1.0
+	if surface.body.get("terrain_revision", 1) >= 3:
+		# Derive render normals from already sampled local geometry. Repeating
+		# three full double-noise queries for each vertex delayed nearby tiles.
+		for y in range(STRIDE):
+			for x in range(STRIDE):
+				var dx: Vector3 = vertices[y * STRIDE + mini(x + 1, CELLS)] - vertices[y * STRIDE + maxi(x - 1, 0)]
+				var dz: Vector3 = vertices[mini(y + 1, CELLS) * STRIDE + x] - vertices[maxi(y - 1, 0) * STRIDE + x]
+				normals[y * STRIDE + x] = dz.cross(dx).normalized()
 	# Fine boundary vertices collapse onto the coarse neighbor's actual straight
 	# segments. Even samples are shared exactly, including across cube faces.
 	for edge in range(4):

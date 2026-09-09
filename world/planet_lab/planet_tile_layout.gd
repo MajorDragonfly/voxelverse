@@ -2,16 +2,17 @@ extends RefCounted
 class_name PlanetTileLayout
 
 const Cube = preload("res://world/space/cube_sphere.gd")
-const ROOT_LEVEL: int = 2
+const ROOT_LEVEL: int = 0
 const MAX_LEAVES: int = 768
 const TARGET_WIDTH: float = 32.0
+const NEAR_RADIUS_METERS: float = 64.0
 var radius: float
 var max_level: int
 
 
 func _init(body_radius: float) -> void:
 	radius = body_radius
-	max_level = clampi(ceili(log(radius * 2.0 / TARGET_WIDTH) / log(2.0)), ROOT_LEVEL, 16)
+	max_level = clampi(ceili(log(radius * 2.0 / TARGET_WIDTH) / log(2.0)), ROOT_LEVEL, 24)
 
 
 static func key(face: int, level: int, x: int, y: int) -> String:
@@ -25,28 +26,52 @@ static func patch(face: int, level: int, x: int, y: int) -> Dictionary:
 		"direction": Cube.vector(Cube.direction(face, -1.0 + (x + 0.5) * width, -1.0 + (y + 0.5) * width))}
 
 
-func choose(direction: Vector3) -> Dictionary:
+func choose(direction: Vector3, previous_masks: Dictionary = {}) -> Dictionary:
+	var retained: Dictionary = {}
+	for id: String in previous_masks:
+		var parts: PackedStringArray = id.split("/")
+		var level: int = int(parts[1])
+		for ancestor in range(level):
+			retained[key(int(parts[0]), ancestor, int(parts[2]) >> (level - ancestor), int(parts[3]) >> (level - ancestor))] = true
 	# Bound memory independently of planet size. If necessary reduce the finest
 	# depth, never truncate a covering set or return an unbalanced hierarchy.
 	for depth in range(max_level, ROOT_LEVEL - 1, -1):
-		var leaves: Dictionary = {}
-		for face in range(6):
-			for y in range(1 << ROOT_LEVEL):
-				for x in range(1 << ROOT_LEVEL):
-					_select(patch(face, ROOT_LEVEL, x, y), direction, depth, leaves)
-		_balance(leaves)
-		if leaves.size() <= MAX_LEAVES:
-			for tile: Dictionary in leaves.values():
-				tile["mask"] = edge_mask(tile, leaves)
-			return leaves
+		for history: Dictionary in ([{}] if retained.is_empty() else [retained, {}]):
+			var leaves: Dictionary = {}
+			for face in range(6):
+				var focus: Array = _project_focus(face, direction)
+				_select(patch(face, ROOT_LEVEL, 0, 0), focus, depth, leaves, history)
+			_balance(leaves)
+			if leaves.size() <= MAX_LEAVES:
+				for tile: Dictionary in leaves.values():
+					tile["mask"] = edge_mask(tile, leaves)
+				return leaves
 	return {}
 
 
-func _select(tile: Dictionary, direction: Vector3, depth: int, leaves: Dictionary) -> void:
-	var distance: float = tile.direction.distance_to(direction) * radius
-	if tile.level < depth and distance < float(tile.width) * radius * 1.65:
+func _project_focus(face: int, d: Vector3) -> Array:
+	# Face-space distance keeps distant hierarchy decisions stable when the
+	# observer moves metres on a world thousands of kilometres across.
+	match face:
+		0: return [-float(d.z) / d.x, float(d.y) / d.x] if d.x > 0.0 else [INF, INF]
+		1: return [float(d.z) / -d.x, float(d.y) / -d.x] if d.x < 0.0 else [INF, INF]
+		2: return [float(d.x) / d.y, -float(d.z) / d.y] if d.y > 0.0 else [INF, INF]
+		3: return [float(d.x) / -d.y, float(d.z) / -d.y] if d.y < 0.0 else [INF, INF]
+		4: return [float(d.x) / d.z, float(d.y) / d.z] if d.z > 0.0 else [INF, INF]
+		_: return [-float(d.x) / -d.z, float(d.y) / -d.z] if d.z < 0.0 else [INF, INF]
+
+
+func _select(tile: Dictionary, focus: Array, depth: int, leaves: Dictionary, retained: Dictionary) -> void:
+	var distance: float = maxf(absf(float(tile.uv.x) + tile.width * 0.5 - focus[0]),
+		absf(float(tile.uv.y) + tile.width * 0.5 - focus[1]))
+	var reach: float = maxf(float(tile.width) * 0.8, float(tile.width) * 0.5 + NEAR_RADIUS_METERS / radius)
+	# Keep existing subdivisions longer than the threshold that creates them.
+	# Otherwise crossing a face can discard and rebuild hundreds of far tiles.
+	if retained.has(tile.id):
+		reach *= 1.35
+	if tile.level < depth and distance < reach:
 		for child: Dictionary in children(tile):
-			_select(child, direction, depth, leaves)
+			_select(child, focus, depth, leaves, retained)
 	else:
 		leaves[tile.id] = tile
 
@@ -73,14 +98,25 @@ func find_at(face: int, u: float, v: float, leaves: Dictionary) -> Dictionary:
 
 func neighbor(tile: Dictionary, edge: int, t: float, leaves: Dictionary) -> Dictionary:
 	var epsilon: float = float(tile.width) * 0.0001
-	var uv: Vector2 = tile.uv
+	# The outside-edge offset is smaller than a Vector2 float's precision at
+	# Earth scale. Keep both coordinates scalar doubles until face lookup.
+	var u: float = tile.uv.x
+	var v: float = tile.uv.y
 	var width: float = tile.width
 	match edge:
-		0: uv += Vector2(t * width, -epsilon)
-		1: uv += Vector2(width + epsilon, t * width)
-		2: uv += Vector2(t * width, width + epsilon)
-		3: uv += Vector2(-epsilon, t * width)
-	return find_at(tile.face, uv.x, uv.y, leaves)
+		0:
+			u += t * width
+			v -= epsilon
+		1:
+			u += width + epsilon
+			v += t * width
+		2:
+			u += t * width
+			v += width + epsilon
+		3:
+			u -= epsilon
+			v += t * width
+	return find_at(tile.face, u, v, leaves)
 
 
 func _balance(leaves: Dictionary) -> void:
