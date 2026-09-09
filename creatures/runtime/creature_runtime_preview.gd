@@ -94,7 +94,7 @@ func _rebuild_body_sockets() -> void:
 		marker.transform = resolved["sockets"][id]
 		mounts.add_child(marker)
 		if show_body_attachments:
-			BodyGuides.install(marker, id, Blueprint.get_body_scale(blueprint))
+			BodyGuides.install(marker, id, Blueprint.get_body_scale(blueprint), BodyGuides.Shapes.Rider.read(blueprint))
 
 
 func body_socket(id: String) -> Dictionary:

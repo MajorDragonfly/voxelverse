@@ -1,5 +1,7 @@
 # Körpervertrag B1 für Artenkatalog und spätere Ausrüstung
 
+Ergänzung B2: [Geometrische Passprüfung und gezielte Korrekturen](CREATURE_BODY_FIT_CONTRACT.md). Die gespeicherten B1-Anschlüsse behalten ihr Schema.
+
 Auftrag 2 · 9. September 2026 · gemeinsame Basis `3a3e0272375e556f3ff65b7370582af79a9d48b5`.
 
 Dieser Vertrag liefert Körpergeometrie, gespeicherte Anschlüsse und messbaren Fußkontakt. **D1 besitzt weiterhin das Spezies-Eignungsmodell.** Ein vorhandener Sattelpunkt bedeutet weder „reitbar“ noch „zähmbar“. Milch, Zugkraft, Traglast, Ausdauer, Tierbesitz und Wirtschaft werden hier nicht eingeführt.

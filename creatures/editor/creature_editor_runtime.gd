@@ -1,4 +1,4 @@
-extends "res://creatures/editor/creature_editor_attachment_studio.gd"
+extends "res://creatures/editor/creature_editor_seat_studio.gd"
 
 const RuntimePartLibrary = preload(
 	"res://creatures/editor/creature_part_library.gd"

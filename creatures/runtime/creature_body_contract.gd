@@ -81,7 +81,8 @@ static func inspect_rest(preview: Node3D) -> Dictionary:
 		max_gap = maxf(max_gap, gap)
 		max_stretch = maxf(max_stretch, float(rig["upper_length"]) / float(rig["authored_upper_length"]))
 		feet.append({"part_uid": str(child.get_meta("creature_part_uid", "")), "side": child.get_meta("creature_part_side", 1.0),
-			"position": _array(point), "gap": gap})
+			"position": _array(point), "gap": gap,
+			"rest_stretch": float(rig["upper_length"]) / float(rig["authored_upper_length"])})
 	return {"schema": SCHEMA, "pose": "rest_only", "leg_count": feet.size(), "feet": feet,
 		"max_contact_error": max_gap, "max_rest_stretch": max_stretch,
 		"all_feet_on_plane": not feet.is_empty() and max_gap <= 0.002}

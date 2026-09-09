@@ -1,0 +1,281 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "base": "004d5a62b4010b147a1975ccafa604bada7c5295",
+  "evidence": {
+    "2_legs": {
+      "cells_tested": 200,
+      "collisions_before": 4,
+      "stretched_legs": 0
+    },
+    "4_legs": {
+      "cells_tested": 200,
+      "collisions_before": 4,
+      "stretched_legs": 0
+    },
+    "6_legs": {
+      "cells_tested": 200,
+      "collisions_before": 4,
+      "stretched_legs": 4
+    },
+    "all_corrected_rest": {
+      "all_feet_on_plane": true,
+      "feet": [
+        {
+          "gap": 1.34110450744629e-07,
+          "part_uid": "part_0005",
+          "position": [
+            0.555113077163696,
+            -1.30327343940735,
+            -0.574093461036682
+          ],
+          "rest_stretch": 1.0,
+          "side": 1.0
+        },
+        {
+          "gap": 1.34110450744629e-07,
+          "part_uid": "part_0005",
+          "position": [
+            -0.555113136768341,
+            -1.30327343940735,
+            -0.574093580245972
+          ],
+          "rest_stretch": 1.0,
+          "side": -1.0
+        },
+        {
+          "gap": 1.04308128356934e-07,
+          "part_uid": "part_0006",
+          "position": [
+            0.586405456066132,
+            -1.30327367782593,
+            -0.0393794924020767
+          ],
+          "rest_stretch": 1.0,
+          "side": 1.0
+        },
+        {
+          "gap": 1.04308128356934e-07,
+          "part_uid": "part_0006",
+          "position": [
+            -0.586405515670776,
+            -1.30327367782593,
+            -0.0393795073032379
+          ],
+          "rest_stretch": 1.0,
+          "side": -1.0
+        },
+        {
+          "gap": 1.49011611938477e-08,
+          "part_uid": "part_0007",
+          "position": [
+            1.09773242473602,
+            -1.30327355861664,
+            0.709808707237244
+          ],
+          "rest_stretch": 1.0,
+          "side": 1.0
+        },
+        {
+          "gap": 1.49011611938477e-08,
+          "part_uid": "part_0007",
+          "position": [
+            -1.09773242473602,
+            -1.30327355861664,
+            0.709808707237244
+          ],
+          "rest_stretch": 1.0,
+          "side": -1.0
+        }
+      ],
+      "leg_count": 6,
+      "max_contact_error": 1.34110450744629e-07,
+      "max_rest_stretch": 1.0,
+      "pose": "rest_only",
+      "schema": 1
+    },
+    "corrected_rest": {
+      "all_feet_on_plane": true,
+      "feet": [
+        {
+          "gap": 1.34110450744629e-07,
+          "part_uid": "part_0005",
+          "position": [
+            0.555113077163696,
+            -1.30327343940735,
+            -0.574093461036682
+          ],
+          "rest_stretch": 1.0,
+          "side": 1.0
+        },
+        {
+          "gap": 1.34110450744629e-07,
+          "part_uid": "part_0005",
+          "position": [
+            -0.555113136768341,
+            -1.30327343940735,
+            -0.574093580245972
+          ],
+          "rest_stretch": 1.0,
+          "side": -1.0
+        },
+        {
+          "gap": 1.04308128356934e-07,
+          "part_uid": "part_0006",
+          "position": [
+            0.518362998962402,
+            -1.30327367782593,
+            -0.0463229715824127
+          ],
+          "rest_stretch": 1.48968433280319,
+          "side": 1.0
+        },
+        {
+          "gap": 1.04308128356934e-07,
+          "part_uid": "part_0006",
+          "position": [
+            -0.518362998962402,
+            -1.30327367782593,
+            -0.0463230311870575
+          ],
+          "rest_stretch": 1.48968433280319,
+          "side": -1.0
+        },
+        {
+          "gap": 1.49011611938477e-08,
+          "part_uid": "part_0007",
+          "position": [
+            1.09773242473602,
+            -1.30327355861664,
+            0.709808707237244
+          ],
+          "rest_stretch": 1.0,
+          "side": 1.0
+        },
+        {
+          "gap": 1.49011611938477e-08,
+          "part_uid": "part_0007",
+          "position": [
+            -1.09773242473602,
+            -1.30327355861664,
+            0.709808707237244
+          ],
+          "rest_stretch": 1.0,
+          "side": -1.0
+        }
+      ],
+      "leg_count": 6,
+      "max_contact_error": 1.34110450744629e-07,
+      "max_rest_stretch": 1.48968433280319,
+      "pose": "rest_only",
+      "schema": 1
+    },
+    "reference_report": {
+      "cells_tested": 200,
+      "checked_sockets": [
+        "saddle.primary",
+        "harness.left",
+        "harness.right"
+      ],
+      "collisions": [
+        {
+          "category": "body",
+          "part_uid": "body",
+          "position": [
+            -0.284999996423721,
+            0.402499943971634,
+            -0.0524999983608723
+          ],
+          "shape_id": "RiderLegLeft",
+          "side": 0.0,
+          "socket_id": "saddle.primary"
+        },
+        {
+          "category": "body",
+          "part_uid": "body",
+          "position": [
+            0.194999992847443,
+            0.402499943971634,
+            -0.0524999983608723
+          ],
+          "shape_id": "RiderLegRight",
+          "side": 0.0,
+          "socket_id": "saddle.primary"
+        },
+        {
+          "category": "body",
+          "part_uid": "body",
+          "position": [
+            -0.652500152587891,
+            -0.00501083582639694,
+            -0.158211275935173
+          ],
+          "shape_id": "Trace",
+          "side": 0.0,
+          "socket_id": "harness.left"
+        },
+        {
+          "category": "body",
+          "part_uid": "body",
+          "position": [
+            0.652500152587891,
+            -0.00501083582639694,
+            -0.158211275935173
+          ],
+          "shape_id": "Trace",
+          "side": 0.0,
+          "socket_id": "harness.right"
+        }
+      ],
+      "complete": true,
+      "errors": [],
+      "frame": "preview_local",
+      "pose": "rest",
+      "profile": "workshop_reference_v1",
+      "rest_stretch_notice": 1.2,
+      "schema": 1,
+      "stretched_legs": [
+        {
+          "part_uid": "part_0005",
+          "position": [
+            0.347911208868027,
+            -0.279239386320114,
+            -0.524999976158142
+          ],
+          "side": 1.0,
+          "stretch": 1.47765997239171
+        },
+        {
+          "part_uid": "part_0005",
+          "position": [
+            -0.347911208868027,
+            -0.279239386320114,
+            -0.524999976158142
+          ],
+          "side": -1.0,
+          "stretch": 1.47765997239171
+        },
+        {
+          "part_uid": "part_0006",
+          "position": [
+            0.391311645507812,
+            -0.296289563179016,
+            -0.0209999997168779
+          ],
+          "side": 1.0,
+          "stretch": 1.48968433280319
+        },
+        {
+          "part_uid": "part_0006",
+          "position": [
+            -0.391311645507812,
+            -0.296289563179016,
+            -0.0209999997168779
+          ],
+          "side": -1.0,
+          "stretch": 1.48968433280319
+        }
+      ],
+      "suitability_owner": "D1"
+    }
+  }
+}
