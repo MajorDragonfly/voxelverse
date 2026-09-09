@@ -1,125 +1,132 @@
 # Auftrag 4 – D2 Zähmung
 
-Stand: 9. September 2026.
+Stand: 9. September 2026. **D2 ist im Fachbranch an die spielbare Kampagne
+angeschlossen und geprüft.** Die ursprüngliche isolierte Prüfszene bleibt
+für Grenzfälle erhalten. D1s inzwischen abgeschlossene Generator-/Spawnlieferung
+ist gezielt übernommen; fremde unfertige Wirtschaft-/UI-Arbeit ist nicht enthalten.
 
-**Ergebnis: D2-Prüfszene und überprüfter D1-Adapter fertig. Die vollständige
-Kampagnenintegration bleibt offen.** Zu Beginn fehlte D1. Während der Arbeit
-wurde sein separat versionierter Datenvertrag verfügbar und gezielt geprüft.
-Die noch laufende Generator-/Spawnarbeit und eine produktive Freigabe der
-Fauna in Phase 1 wurden nicht übernommen.
-
-## Stand und Branch
+## Stand und Integration
 
 - Gemeinsame Ausgangsbasis: `3a3e0272375e556f3ff65b7370582af79a9d48b5`.
-- Fachbranch: `agent/d2-domestication`.
-- Veröffentlichter Implementierungscommit:
-  `75abefa2a15e7b6dffaafb840e3199489c3cc296`.
-- Exakt gleicher lokal geprüfter Dateibaum:
-  `8c3c0e22fb87f3fe0fb9f00f53b4b094a2cbc424`
-  (lokaler Implementierungscommit `a287520b268511a4936b5ec6831696dc1e402427`).
-- Unverändert übernommener D1-Teilvertrag:
-  `bb43b61482ab129b72a66b5299a6bfec80a1e128`,
-  lokal als `0a815b9` übernommen. Bei Integration nach D1 dessen identische
-  fünf Vertragsdateien berücksichtigen; keine zweite Eignungsimplementierung.
-- Kein Merge nach main; ROADMAP.md bleibt beim Integrationschat.
+- Fachbranch: `agent/d2-domestication`, [PR 30](https://github.com/MajorDragonfly/voxelverse/pull/30).
+- Veröffentlichter Code-Commit: `bd259aabde2553f7d952e912197d6f4cee6d2cea`.
+- Geprüfter Dateibaum: `73bedbdb26ef76334c8029ef9d1ef93e63a38144`
+  (lokaler Code-Commit `af697d353c1f88f823d6176f40698ba16e74bc80`).
+  Der nachfolgende Dokumentationscommit ergänzt nur Übergabe und Nachweise.
+- D1-Vertrag: `bb43b61482ab129b72a66b5299a6bfec80a1e128`.
+- Fertiger D1-Code: lokal `08fde2a4d496de2d4538508be5b77016fa7cd1c0`,
+  veröffentlicht `96c61f49213b9906b45b07e7ff3f5d3bb6d1d682`; zugehöriger
+  abgeschlossener Übergabebericht übernommen. Seine ursprünglichen Hashes
+  unter `validation/d1/` beschreiben D1s eigene Lieferung.
+- Kein automatischer Merge nach main. ROADMAP.md bleibt beim Integrationschat.
+  Die gemeinsamen Anschlüsse und Schema 7 müssen bei M6/UI-Integration
+  zusammengeführt werden; identische D1-Dateien nur einmal übernehmen.
 
-## Spielbarer Ablauf im Labor
+## Spielbarer Ablauf
 
-1. In Godot 4.6.3 `world/domestication/lab/domestication_lab.tscn` öffnen und
-   mit F6 starten, alternativ:
+1. Eine Kampagne starten/laden, einen geeigneten Heimatplatz mit Nestgruppe
+   anlegen und den Wechsel ins Stammeszeitalter ausdrücklich bestätigen.
+2. Nahrung im Dorf einlagern. Genau einen lebenden Bewohner ohne Ladung
+   auswählen; nach abgeschlossener Lieferung anhalten.
+3. Im bestehenden Stammes-HUD „Tierhaltung“ öffnen, ein geeignetes fremdes
+   Tier auswählen und „Zum Tier“ ausführen. Der Betreuer braucht einen
+   begehbaren Weg in der geladenen Dorfumgebung.
+4. „Füttern / Zähmen“: zwei aktive Sekunden innerhalb 4,5 m mit freier Sicht.
+   Jede abgeschlossene Gabe kostet genau eine eingelagerte Nahrungseinheit.
+   D1-Lernfähigkeit bestimmt den Gewinn; ein Begleiter benötigt vier Gaben.
+5. Erst bei 100 Vertrauen gehört dieses Individuum dem Stamm. „Folgen“,
+   „Warten“ und „Heimkehr“ schreiben den konkreten Auftrag sofort gemeinsam
+   mit dem Tier. Befreunden allein erzeugt keinen Besitzer und keinen Bürger.
+6. Speichern und neu starten: gleiches Tier mit ursprünglicher ID, fremder
+   Art, eingefrorenem Körper, Besitzer, Vertrauen, Position und Auftrag.
+   Tod bleibt gespeichert; das Tier wird nicht als Wildtier verdoppelt.
 
-   `godot --path . res://world/domestication/lab/domestication_lab.tscn`
+Sechs lebende Tiere einschließlich begonnener Zähmungen sind möglich.
+Unbezahlte abgebrochene Gaben verbrauchen keine Nahrung. Bereits erworbenes
+Vertrauen bleibt bei einer Unterbrechung bestehen; „Zähmung aufgeben“ gibt den
+reservierten Platz ohne Futtererstattung frei. Speicherversagen bestätigt weder
+Auftrag noch Vertrauen/Besitz und zieht keine Nahrung ab.
 
-2. Die Szene startet in der Stammesphase. Mit WASD/Pfeiltasten den blauen
-   Betreuer zum fremden Tier führen. Viermal „Futter anbieten“, jeweils zwei
-   Sekunden in Sicht und höchstens 4,5 m entfernt bleiben.
-3. Pro abgeschlossener Gabe sinkt der Vorrat um eine Wurzel und steigt
-   Vertrauen um 25. Erst bei 100 erhält das konkrete Tier den Besitzer.
-4. Folgen, Warten und Heimkehr ausführen. Der graue Fels blockiert Sicht und
-   Bewegung; der gelbe Platz ist die gespeicherte Heimat.
-5. Speichern, Szene schließen und erneut öffnen. ID, fremde Art, Körperbezug,
-   Ort, Besitzer, Vertrauen, Auftrag und Vorräte bleiben erhalten.
-6. Die Prüfschalter zeigen die Grenzen: Phase 0, falsches Futter, Befreunden,
-   Flucht, Abbruch, Schaden/Tod. „Prüfstand zurücksetzen“ betrifft nur das Labor.
+## Dateien und gemeinsame Anschlüsse
 
-Die Szene speichert unter `user://d2_lab/snapshot.json`, mit .bak und
-geprüfter temporärer Datei. Für isolierte Läufe kann nach `--` ein
-`--d2-save <Datei>` übergeben werden. Die reguläre Kampagne wird nicht
-geschrieben; auch ihr Schließ-Autosave ist in dieser Szene deaktiviert.
+Der Daten- und API-Vertrag steht in [D2_DATA_CONTRACT.md](D2_DATA_CONTRACT.md).
 
-## Verträge und geänderte Dateien
+| Bereich | Änderung |
+|---|---|
+| `world/domestication/animal_state.gd`, `domestication_controller.gd`, `d1_taming_policy.gd` | Individueller Zustand, geprüfte D1-Eignung, atomare Zähmung/Befehle; originale D1-Körperrevision 0 zulässig |
+| `campaign_animal_state.gd` | Optionale Body-Hülle mit validiertem Register und eingefrorenen Körpern/Herkunftsidentitäten |
+| `campaign_domestication.gd` | Anschluss an echten Stamm, Betreuer, Sicht/Kollision, Vorräte, SaveGameService und Lebenszyklus |
+| `campaign_animal.gd` | Ursprünglicher D1-Körper, eigener Zustandsbesitzer, tatsächliche Bewegung und Tod |
+| `domestication_controls.gd`, `ui/tribe/tribe_panel.gd` | Umschaltbarer Arbeitsbereich im vorhandenen HUD, gemeinsame Auswahl/Pause |
+| `world/tribe/tribe_controller.gd`, `village_navigation.gd` | D2-Kind und begrenzter Annäherungsanschluss; geprüfter Wegbereich 20 m, D2-Ziele höchstens 20 m, normale Ziele weiterhin 18 m; vorhandene 22-m-Speichervalidierung bleibt erhalten |
+| `autoload/save_game_service.gd` | **Globales Schema 6 → 7**, D1- und D2-Body-Prüfungen, Schutz neuerer Daten; keine neue Kampagnendatei |
+| `autoload/progression_service.gd`, Sozialkomponente | Getrennte Gesundheit-/Tod-Spiegelung in Phase 1 ohne Beziehung, Belohnungen oder Sozialpunkte |
+| Wildtierbasis, KI, Nahrung/Trinken und Pflanzenstreamer | Gezielte Phase-1-Aktivität; alte Einzelspielerangriffe bleiben gesperrt |
+| `world/fauna/fauna_streamer_v7.gd` | Gespeicherte D2-IDs vor dem Spawnen reservieren, einschließlich toter Tiere |
+| `creatures/ai/wildlife_steering.gd` | Optional begrenzte Vorausprüfung bis zum nächsten Tier-Wegpunkt, vorhandene Wildtier-Aufrufe unverändert |
+| `core/runtime_shutdown.gd` | Tatsächlich 150 ms Mixer-Freigabezeit auch bei beschleunigten Testframes; verhindert nachgewiesene Audio-Restressourcen |
+| Tests und D2-Workflow | Gemeinsamer Save, Bedienung, Neustart, generiertes Gelände und bestehende Stammes-/Faunaschleifen |
 
-Der vollständige Vertrag steht in [D2_DATA_CONTRACT.md](D2_DATA_CONTRACT.md).
-Neue Produktionsbausteine innerhalb des D2-Pakets:
-
-- `world/domestication/animal_state.gd`: Version 1, Validierung und stabile
-  individuelle Identität, eigener Besitz ohne Bürgerstatus.
-- `world/domestication/domestication_controller.gd`: Zähmung, Kostenübergabe,
-  Vertrauen, Unterbrechung, Befehle, Tod, Registerkopien und bestätigte Ereignisse.
-- `world/domestication/d1_taming_policy.gd`: Lesender Adapter auf D1 Vertrag 1.
-- `world/domestication/lab/`: begrenzte Physikszene, Testkörper, eigenes
-  Prüfstandspeichern und Bedienung; nicht als Kampagnen-Autoload einbauen.
-- Drei neue Tests: `domestication_state_test.gd`,
-  `domestication_lab_test.gd`, `domestication_d1_adapter_test.gd`.
-- Unveränderter D1-Vertrag mit Dokumentation und `domestication_contract_test.gd`.
-
-Keine Änderungen an autoload/, project.godot, Stamm, Wildtierbasis,
-Begegnungsdatenbank, Kreatureneditor oder Kampagnenspeicherschema.
-Keine automatische Art-/Objektneugenerierung und keine Bürgerrekrutierung.
+`body.domesticated_animals` verwendet Hüllenschema 1 und Registerschema 1.
+Schema 7 verhindert, dass ein alter Build denselben Tierstand ohne D2-Reservierung
+weiterspeichert. Altstände ohne Hülle erzeugen weder Tiere noch neue Bürger.
+Vorhandene Körper/Arten werden nicht erneut generiert. Bei Integration nach D1
+beide optionalen Body-Validatoren im SaveGameService erhalten.
 
 ## Nachweise
 
-Godot `4.6.3.stable.official.7d41c59c4`; alle vier abschließenden Läufe
-erfolgreich, ohne Scriptfehler oder Objektlecks:
+Godot `4.6.3.stable.official.7d41c59c4`, headless. Alle 17 abschließenden Gates (15 Tests plus Import und Assetquellen) bestehen.
+Der maschinenlesbare Bericht enthält die abschließenden Ergebnisse und Messungen; fehlgeschlagene
+Entwicklungszwischenstände werden nicht als bestandene Abnahme gezählt.
 
-| Prüfung | Ergebnis |
-|---|---|
-| D1-Vertrag | Eignung der drei Rollen, Grenzen, neue Versionen, Körperdaten-Rundlauf |
-| D2-D1-Adapter | 17 Prüfungen: echte D1-Nahrung/Lernfähigkeit, fehlende/ungeeignete Arten, keine Mutation |
-| D2-Zustand | 73 Prüfungen plus zweiter Godot-Prozess: Identitäten, Kosten, Besitzer, Aufträge, Reservierung, Tod, Abbruch, Speicherfehler |
-| D2-Szene | 21 Prüfungen: echte Physik, Sicht, Füttern/Pause, Folgen/Warten/Heimkehr, Laden/Tod, unveränderte Kampagne |
+- D1-Vertrag, D1-Adapter (17), D2-Zustand (73 plus separater Prozess) und
+  isolierte D2-Physikszene (21) bestanden.
+- D1-Katalog mit 78 Seeds / 234 Arten sowie echte D1-Laufzeitprüfung bestanden.
+- Kampagnenprüfung: 41 Prüfungen plus echter neuer Godot-Prozess. Vorhandene
+  Freundschaft bleibt unabhängig; ursprünglicher Körper und dessen Revision
+  bleiben gleich. Teilgabe setzt nach Laden fort; vier Gaben kosten vier
+  reale Dorfnahrung. Echte HUD-Klicks, Bürgeridentitäten, Folgen/Warten/Heimkehr,
+  Schreibfehler, neuere Schemata, Tod und Wiederherstellung sind geprüft.
+- Hauptszene auf generiertem Gelände, Seed 23757: ursprüngliche D1-Spawninstanz,
+  tatsächlicher Dorfplatz und Stammeswechsel, Nahrung sammeln/transportieren,
+  lebenden Betreuer zum erreichbaren Tier führen, zähmen und heimkehren;
+  nach Laden genau eine Instanz derselben ID. Phase-1-Nahrungs-/Wasseruhren
+  laufen. HUD-Grenzen bei 1280 × 800 und 1280 × 720 geprüft.
+- Bestehende Stammesbedienung und Versorgung, Wildtier-KI, Nahrung/Trinken,
+  Speicherplätze und Kampagnenmigration bestanden.
 
-Der Neustarttest lädt eine Gabe bei 0,75 Sekunden und 25 Vertrauen, setzt
-ohne doppelte Kosten fort und erreicht Besitz mit genau vier verbrauchten
-Wurzeln. Er prüft danach gespeicherte Befehle/Besitzer. Weitere Prüfungen
-decken unvollständige .tmp-Dateien, beschädigte Hauptdatei, gültige Sicherung,
-neuere Schemata und echte Schreibfehler ab.
+Die Weltprüfung maß 22,435 m tatsächliche Heimkehr und 1,423 m Restabstand
+zum Dorfplatz; das Milchtier kostete genau sechs eingelagerte Nahrungseinheiten.
+[Weltprotokoll](../validation/d2/domestication_world_test.log),
+[Kampagnenprotokoll](../validation/d2/domestication_campaign_test.log) und
+[Quell-Hashes](../validation/d2/source-sha256.json) sind abgelegt.
 
-| Physikmessung | Wert |
-|---|---:|
-| Weg bis zum Betreuer | 5,777 m |
-| Restabstand beim Folgen | 1,596 m |
-| Drift bei Warten | 0,000 m |
-| Ortsänderung bei Heimkehr | 14,241 m |
-| Restabstand am Heimatplatz | 0,355 m |
-| Hindernis durchquert | nein |
+Die Weltprüfung hält die ursprüngliche D1-Spawninstanz während Dorfplatzsuche,
+Nahrungsvorbereitung und Annäherung des Betreuers still, um einen wandernden
+Testaufbau zu vermeiden. Vor der Futtergabe läuft ihre echte Phase-1-KI wieder;
+andere Tiere laufen bereits während der Nahrungssammlung. Weder die Art,
+der Tierkörper, dessen Platzierung noch Dorfnahrung werden dort erfunden.
+Die Kampagnenprüfung auf der Ebene ergänzt gezielte Fehlerfälle und Neustart.
 
-Maschinenlesbarer Bericht: [validation/d2.json](validation/d2.json).
-Reproduktion:
+Reproduktion der neuen Kampagnenabnahme:
 
 ```sh
-python tools/validate_godot.py --godot <Godot-4.6.3> --skip-main --tests domestication_contract_test domestication_d1_adapter_test domestication_state_test domestication_lab_test --output <Pruefordner>
+python tools/validate_godot.py --godot <Godot-4.6.3> --skip-main --tests domestication_contract_test domestication_d1_adapter_test domestication_state_test domestication_lab_test domestication_campaign_test domestication_world_test tribal_age_test save_slots_test campaign_foundation_test --output <Pruefordner>
 ```
 
-## Grenzen und nächste Integration
+Die isolierte Szene bleibt über
+`godot --path . res://world/domestication/lab/domestication_lab.tscn`
+startbar und schreibt ausschließlich `user://d2_lab/snapshot.json`.
 
-- Die vollständig generierten D1-Arten/Vorkommen sind noch nicht angebunden.
-  Der Vierbeiner ist ein klar benannter Testkörper mit D1-Beispieleignung.
-- Aktive Stammesfauna fehlt in der gemeinsamen Basis teilweise: Wildtier-KI,
-  Nahrung, Trinken und soziale Schadensspeicherung haben Phase-0-Grenzen.
-  Diese Lieferung entfernt sie nicht pauschal und reaktiviert keine alten
-  Spielerangriffe auf einen Gruppen-Cursor.
-- Der Integrationschat muss dieselbe Wildtier-object_id an D2 übergeben,
-  alte/wilde Zustandsbesitzer und erneutes Spawnen dieser ID sperren und
-  Tierregister sowie tatsächliche Stammesvorräte gemeinsam speichern.
-- Ein realer Stammesbewohner muss als Betreuer dienen. Der Laborbetreuer
-  dient nur dem kontrollierten Bewegungsnachweis.
-- Hunger/Durst sind reservierte Zustandsfelder; Versorgung, Milch,
-  Fortpflanzung, Reiten und Pflügen gehören zu D3/D4.
-- Navigation ist ausschließlich für die begrenzte Laborebene geprüft.
-  Die Kugeloberfläche benötigt ihren eigenen Adapter.
-- Grafische manuelle Abnahme unter Windows ist noch offen. Die Prüfungen
-  liefen headless; es wird kein fertiger Windows-Spielbuild behauptet.
+## Grenzen
 
-Für die Roadmap: D2 **vorbereitet und geprüft**, produktive D2-Abnahme erst
-nach D1-Spawnanschluss, freigegebener Phase-1-Fauna und gemeinsamem Save/Load.
+- Zielbereich ist die geladene Dorfumgebung auf `legacy_plane_v9`. Unbekannter
+  Boden und blockierte Wege führen zum Warten; keine Teleportation. Ein fernes
+  oder wegwanderndes Tier muss erneut erreichbar werden. Kein Nachweis für
+  beliebige Gelände-/Dorfkombinationen oder die Kugeloberfläche.
+- Aktuell spielbare Stammesphase 1; spätere Epochen brauchen eigene Adapter.
+- M6s noch nicht integrierte Wirtschaftslieferung ist nicht vorausgesetzt.
+  D3 besitzt laufende Versorgung, Wasser, Milch und Transport; D4 Reiten/Pflügen.
+  Hunger/Durst gehaltener Tiere bleiben dafür reserviert.
+- Die grafische manuelle Windows-Abnahme bleibt offen. Kein neuer Windows-
+  Spielbuild oder bereits zusammengeführtes main wird behauptet.

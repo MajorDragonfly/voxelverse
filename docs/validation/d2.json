@@ -1,11 +1,38 @@
 {
   "godot": "4.6.3.stable.official.7d41c59c4",
+  "implementation_commit": "bd259aabde2553f7d952e912197d6f4cee6d2cea",
+  "local_implementation_commit": "af697d353c1f88f823d6176f40698ba16e74bc80",
+  "tree": "73bedbdb26ef76334c8029ef9d1ef93e63a38144",
+  "base_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "d1_contract_commit": "bb43b61482ab129b72a66b5299a6bfec80a1e128",
+  "d1_implementation_commit": "96c61f49213b9906b45b07e7ff3f5d3bb6d1d682",
+  "scope": "campaign_d2_with_completed_d1_and_isolated_lab",
+  "production_campaign_enabled": true,
+  "save_schema": 7,
+  "animal_envelope_schema": 1,
+  "animal_registry_schema": 1,
+  "manual_visual_qa": "pending_windows",
+  "world_seed": 23757,
+  "world_fixture_scope": "Real main scene, real generated D1 specimen and terrain. Specimen is held still during village/food/approach preparation; actual phase-1 AI resumes before feeding. No body, position or stock is synthesized.",
+  "fresh_process_scope": "Actual campaign adapter/tribe with frozen D1 body on controlled terrain; identity, owner, trust, commands, body revision, stock, position and death restored in a separate Godot process.",
   "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.294
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.134
+    },
     {
       "name": "domestication_contract_test",
       "passed": true,
       "exit_code": 0,
-      "seconds": 0.539,
+      "seconds": 0.623,
       "details": {
         "failures": [],
         "test": "domestication_contract"
@@ -15,7 +42,7 @@
       "name": "domestication_d1_adapter_test",
       "passed": true,
       "exit_code": 0,
-      "seconds": 0.521,
+      "seconds": 0.619,
       "details": {
         "checks": 17,
         "failures": []
@@ -25,7 +52,7 @@
       "name": "domestication_state_test",
       "passed": true,
       "exit_code": 0,
-      "seconds": 1.232,
+      "seconds": 1.364,
       "details": {
         "checks": 73,
         "failures": []
@@ -35,7 +62,7 @@
       "name": "domestication_lab_test",
       "passed": true,
       "exit_code": 0,
-      "seconds": 21.186,
+      "seconds": 21.294,
       "details": {
         "checks": 21,
         "failures": [],
@@ -47,13 +74,180 @@
           "wait_drift_m": 0.0
         }
       }
+    },
+    {
+      "name": "domestic_fauna_catalog_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.417,
+      "details": {
+        "failures": [],
+        "seeds": 78,
+        "test": "domestic_fauna_catalog"
+      }
+    },
+    {
+      "name": "domestic_fauna_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.379,
+      "details": {
+        "bodies": [
+          {
+            "group": "work",
+            "legs": 4,
+            "position": "(79.35183, 2.74243, -93.4532)",
+            "speed": 2.8
+          },
+          {
+            "group": "milk",
+            "legs": 4,
+            "position": "(67.43653, 1.400137, -93.06584)",
+            "speed": 2.8
+          },
+          {
+            "group": "companion",
+            "legs": 4,
+            "position": "(77.05256, 3.000239, -90.84541)",
+            "speed": 3.8
+          }
+        ],
+        "failures": [],
+        "food_sources": 3,
+        "test": "domestic_fauna_runtime"
+      }
+    },
+    {
+      "name": "tribal_age_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.8,
+      "details": {
+        "failures": [],
+        "passed": true,
+        "test": "tribal_age"
+      }
+    },
+    {
+      "name": "tribal_age_supply_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 29.111,
+      "details": {
+        "failures": [],
+        "passed": true,
+        "test": "tribal_age_supply"
+      }
+    },
+    {
+      "name": "wildlife_ai_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.153,
+      "details": {
+        "failures": [],
+        "passed": true,
+        "test": "wildlife_ai"
+      }
+    },
+    {
+      "name": "wildlife_foraging_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 20.118,
+      "details": {
+        "failures": [],
+        "passed": true,
+        "test": "wildlife_foraging"
+      }
+    },
+    {
+      "name": "wildlife_drinking_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 39.069,
+      "details": {
+        "failures": [],
+        "passed": true,
+        "test": "wildlife_drinking"
+      }
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.814
+    },
+    {
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.964
+    },
+    {
+      "name": "domestication_campaign_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.985,
+      "details": {
+        "checks": 41,
+        "failures": [],
+        "measurements": {
+          "follow_gap_m": 1.57142996788025,
+          "follow_m": 3.71897983551025,
+          "home_gap_m": 1.46935713291168,
+          "home_travel_m": 6.81601524353027
+        },
+        "test": "domestication_campaign"
+      }
+    },
+    {
+      "name": "domestication_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 52.288,
+      "details": {
+        "failures": [],
+        "measurements": {
+          "adopted_source": {
+            "body_id": "body_59127cb82cccc26c70c53ffe14af1fea",
+            "design_ref": {
+              "design_id": "design_0d9136b0f299e846f2cb334deb40bdef",
+              "revision": 0
+            },
+            "habitat_cell": "d1:18:0",
+            "object_id": "object_64e84e44cf747893ac12ae11d91eb1c7",
+            "region_id": "region_cd110d863173593b66bbdf50c7b7e1e7",
+            "species_id": "species_270292936f21c9e1f7c9ed9ecc937522",
+            "species_seed": 4847231462336
+          },
+          "animal_home_position": "(127.6568, 2.765878, -63.06817)",
+          "animal_status": "Kehrt heim / am Heimatplatz",
+          "food_spent": 6,
+          "home_gap_m": 1.42264795303345,
+          "home_position": "(128.6915, 2.77, -62.0918)",
+          "home_travel_m": 22.4347286224365,
+          "site_search": {
+            "ground": 2,
+            "last_rejection": "{ \"ok\": true, \"message\": \"Heimatplatz gespeichert. Deine beiden Gefährten gehören dauerhaft zu dieser Nestgruppe.\" }",
+            "navigation": 2
+          },
+          "source": {
+            "body_id": "body_59127cb82cccc26c70c53ffe14af1fea",
+            "design_ref": {
+              "design_id": "design_0d9136b0f299e846f2cb334deb40bdef",
+              "revision": 0
+            },
+            "habitat_cell": "d1:18:0",
+            "object_id": "object_64e84e44cf747893ac12ae11d91eb1c7",
+            "region_id": "region_cd110d863173593b66bbdf50c7b7e1e7",
+            "species_id": "species_270292936f21c9e1f7c9ed9ecc937522",
+            "species_seed": 4847231462336
+          },
+          "source_position": "(144.6915, 2.00051, -47.0918)"
+        },
+        "test": "domestication_world"
+      }
     }
-  ],
-  "implementation_commit": "75abefa2a15e7b6dffaafb840e3199489c3cc296",
-  "tree": "8c3c0e22fb87f3fe0fb9f00f53b4b094a2cbc424",
-  "base_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
-  "d1_contract_commit": "bb43b61482ab129b72a66b5299a6bfec80a1e128",
-  "scope": "standalone_d2_lab_and_d1_adapter",
-  "production_campaign_enabled": false,
-  "manual_visual_qa": "pending"
+  ]
 }
