@@ -4,13 +4,14 @@ signal game_saved(path: String)
 signal game_loaded(path: String)
 signal save_failed(message: String)
 
-const SAVE_SCHEMA: int = 5
+const SAVE_SCHEMA: int = 6
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Designs = preload("res://core/persistence/design_store.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const Progression = preload("res://autoload/progression_service.gd")
+const Tribe = preload("res://world/tribe/tribe_state.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 
 @export_range(5.0, 300.0, 5.0) var autosave_interval: float = 45.0
@@ -28,6 +29,8 @@ var _design_files: Dictionary = {}
 var _write_blocked: bool = false
 var last_migration_report: Array[String] = []
 var last_error: String = ""
+var _saving: bool = false
+var _transition_busy: bool = false
 
 
 func _ready() -> void:
@@ -62,6 +65,15 @@ func load_if_present() -> bool:
 
 
 func save_now(custom_path: String = "") -> bool:
+	if _saving:
+		return false
+	_saving = true
+	var result: bool = _save_snapshot(custom_path)
+	_saving = false
+	return result
+
+
+func _save_snapshot(custom_path: String = "") -> bool:
 	if _write_blocked:
 		_report_failure("Saving is blocked after an unreadable or newer save. Load a compatible save first.")
 		return false
@@ -106,6 +118,8 @@ func save_now(custom_path: String = "") -> bool:
 
 
 func load_now(custom_path: String = "") -> bool:
+	if _transition_busy or _saving:
+		return false
 	var target_path: String = save_path if custom_path.is_empty() else custom_path
 	var source_path: String = target_path
 	var data: Dictionary = _read_save(source_path)
@@ -140,7 +154,7 @@ func load_now(custom_path: String = "") -> bool:
 			data["design_files"] = files
 		else:
 			last_migration_report.assign(data.get("migration_report", []))
-		last_migration_report.append("Schema %d -> 5; campaign, location, designs and existing behavior retained; missing encounters initialized without retroactive rewards." % schema)
+		last_migration_report.append("Schema %d -> 6; campaign, location, designs, behavior and encounters retained; no tribe created without confirmation." % schema)
 	else:
 		last_migration_report.assign(data.get("migration_report", []))
 	if source_path != target_path:
@@ -221,6 +235,10 @@ func _validate_save(data: Dictionary) -> String:
 	for body in campaign["bodies"].values():
 		if not body is Dictionary or body.get("generator_version") != Campaign.GENERATOR_VERSION or body.get("surface_mode") != Campaign.SURFACE_MODE:
 			return "Unsupported body generator/surface version."
+		if body.has("tribe"):
+			var tribe_problem: String = Tribe.validate(body["tribe"], body, campaign)
+			if not tribe_problem.is_empty():
+				return tribe_problem
 	if not campaign.get("recent_events") is Array or campaign["recent_events"].size() > 32:
 		return "Invalid event history."
 	for field in ["player_species_id", "player_faction_id", "player_object_id"]:
@@ -305,15 +323,53 @@ func _annotate_world_state(data: Dictionary) -> void:
 	data["game_state"] = state.call("export_state")
 
 
-func request_phase_transition(new_phase: int) -> bool:
-	var blockers: Array = get_node("/root/GameState").call("get_phase_transition_blockers", new_phase)
+func is_phase_transition_active() -> bool:
+	return _transition_busy
+
+
+func request_phase_transition(new_phase: int, confirmation_token: String = "") -> bool:
+	if _transition_busy or _saving:
+		return false
+	var state: Node = get_node("/root/GameState")
+	var blockers: Array = state.get_phase_transition_blockers(new_phase)
 	if not blockers.is_empty():
 		_report_failure(str(blockers[0]))
 		return false
-	return false # Real society handoff is implemented in M5, never inferred here.
+	var runtime: Node = get_tree().get_first_node_in_group(&"tribe_controller")
+	var handoff: Dictionary = runtime.confirmed_handoff(confirmation_token) if runtime != null else {}
+	if new_phase != 1 or handoff.is_empty():
+		_report_failure("Bestätige den Wechsel im Fenster für das Stammeszeitalter erneut.")
+		return false
+	var campaign = state.campaign
+	var transition_id: String = Ids.scoped("transition", campaign.data["id"], "0:1")
+	if campaign.data["completed_transitions"].has(transition_id):
+		return false
+	var before: Dictionary = campaign.export_state()
+	_transition_busy = true
+	var body_key: String = str(state.get_world_seed())
+	campaign.data["bodies"][body_key]["tribe"] = handoff
+	state.current_phase = 1
+	var event = campaign.next_event(GameEvent.Kind.PHASE_TRANSITION, campaign.data["player_faction_id"], 1, "completed")
+	campaign.accept_event(event, 1)
+	campaign.data["completed_transitions"][transition_id] = {"id": transition_id, "from": 0, "to": 1,
+		"confirmed": true, "tribe_id": handoff["id"], "body_id": handoff["body_id"]}
+	# One atomic replacement owns both the phase and the full village. A crash
+	# can load only the old creature snapshot or this complete tribal snapshot.
+	var saved: bool = save_now()
+	if not saved:
+		state.current_phase = 0
+		campaign.import_state(before)
+	_transition_busy = false
+	if not saved:
+		return false
+	state.phase_changed.emit(1)
+	state.campaign_event.emit(event.to_dict())
+	return true
 
 
 func debug_prepare_phase_transition(new_phase: int, custom_path: String = "") -> bool:
+	if _transition_busy or _saving:
+		return false
 	var state := get_node("/root/GameState")
 	var campaign = state.get("campaign")
 	var current_phase: int = int(state.get("current_phase"))
@@ -370,6 +426,8 @@ func reset_runtime_for_new_game() -> void:
 
 
 func clear_save() -> bool:
+	if _transition_busy or _saving:
+		return false
 	reset_runtime_for_new_game()
 	var success: bool = true
 	for path in [save_path, save_path + ".bak", save_path + ".tmp"]:
@@ -480,6 +538,8 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	var bodies: Variant = campaign.get("bodies", {})
 	if bodies is Dictionary:
 		for body in bodies.values():
+			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
+				return true
 			if body is Dictionary and body.has("generator_version") and body["generator_version"] != Campaign.GENERATOR_VERSION:
 				return true
 	return false

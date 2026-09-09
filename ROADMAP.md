@@ -1,5 +1,7 @@
 # Voxelverse – Entwicklungsroadmap
 
+Aktueller separater Integrationszweig: [Bestätigter Einstieg ins Stammeszeitalter](docs/TRIBAL_AGE.md) mit Gruppensteuerung, Transporten, Werkzeug, zwei Hütten und Versorgung. Nachbarstämme, erneuerbare Wirtschaft und weitere Epochen folgen gemäß den dort beschriebenen nächsten Schritten.
+
 Stand: 8. September 2026 · M1-Technikprototyp: `555f9efa2a16d8dde6fbf121157671ef944b2f83` · M0-Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354` · visuelle Ausgangsbasis: `b1f1ef9c2c14a27269505da1d086091a0884563f`
 
 Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfolge der nächsten Arbeiten. Es ist die zentrale Projektplanung. Die älteren Berichte unter `art/` dokumentieren einzelne Arbeitsstände; ihre Phasen A–F sind keine Spielphasen. M0 ist als Grundlagenpaket technisch geprüft. M1 ist als separates Planetenlabor implementiert und technisch geprüft; Nachweise und Integrationsgrenzen stehen im [M1-Bericht](docs/PLANET_M1.md). Lars' manueller Spieltest und die Produktionsintegration bleiben offen. M0-Verträge: [Kampagne](docs/CAMPAIGN_CONTRACTS.md).

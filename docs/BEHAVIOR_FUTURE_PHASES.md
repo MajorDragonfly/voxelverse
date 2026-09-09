@@ -1,5 +1,7 @@
 # Verhaltensfortschritt über alle Spielphasen
 
+> Aktueller Ausbau: Der bestätigte Dorfeinstieg ist in [TRIBAL_AGE.md](TRIBAL_AGE.md) beschrieben. Die folgende Dokumentation hält den ursprünglichen PR-23-Planungsstand fest.
+
 Planungsstand 9. September 2026. Kreaturenhandlungen und vier unmittelbare Fähigkeiten sind im Gameplay-Paket PR #17 angeschlossen. Die folgenden fünf Phasen sind hier **Entwurf**, keine freigeschalteten Spielmodi. Der Skilltree zeigt die Vorschau, die eigenen Bestände jeder ausgewählten Phase und tatsächlich gekaufte Vermächtnisse an.
 
 ## Bestätigte Trennung: Nestgruppe und Stamm

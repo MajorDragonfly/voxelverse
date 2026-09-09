@@ -2,13 +2,16 @@ name: Player progression UI
 
 on:
   push:
-    branches: ["agent/player-progression-ui", "agent/creature-behavior-gameplay", "agent/species-development-path"]
+    branches: ["agent/player-progression-ui", "agent/creature-behavior-gameplay", "agent/species-development-path", "agent/tribal-age"]
   pull_request:
     paths:
       - "ui/**"
       - "tests/behavior_skill_tree_test.gd"
       - "tests/creature_behavior_gameplay_test.gd"
       - "tests/development_path_test.gd"
+      - "tests/tribal_age*.gd"
+      - "world/tribe/**"
+      - "world/home_group/**"
       - "tests/fixtures/home_group_pr20.json"
       - "core/progression/**"
       - "autoload/progression_service.gd"
@@ -20,7 +23,7 @@ on:
 jobs:
   gui:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Install renderer and Godot
@@ -55,6 +58,18 @@ jobs:
           python3 tools/review_player_progression.py
           --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
           --development --output /tmp/development-path-review
+      - name: Exercise confirmed transition and village commands
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1200x24'
+          python3 tools/review_player_progression.py
+          --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
+          --tribe --output /tmp/tribal-age-review
+      - name: Exercise village on actual generated terrain
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1200x24'
+          python3 tools/review_player_progression.py
+          --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
+          --tribe-world --output /tmp/tribal-world-review
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -64,4 +79,6 @@ jobs:
             /tmp/player-progression-functional
             /tmp/creature-behavior-review
             /tmp/development-path-review
+            /tmp/tribal-age-review
+            /tmp/tribal-world-review
           retention-days: 14

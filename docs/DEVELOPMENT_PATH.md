@@ -1,5 +1,7 @@
 # Entwicklungspfad und Phasenansichten
 
+> Aktueller Ausbau: Der bestätigte Dorfeinstieg ist in [TRIBAL_AGE.md](TRIBAL_AGE.md) beschrieben. Die folgende Dokumentation hält den ursprünglichen PR-23-Planungsstand fest.
+
 Bestätigte Richtung vom 9. September 2026: **Kreatur → Nestgruppe innerhalb der Kreaturenphase → eigentliche Stammesphase mit Werkzeugen, Gruppenaufgaben und Dorfaufbau.**
 
 Dieses Paket auf `agent/species-development-path` erweitert den abgeschlossenen Verhaltensstand aus PR #17 (`15479d8b2b0f5e78e483b806dede879eceda50e3`). Es implementiert die zugehörige Fortschrittsoberfläche und den lesenden Anschluss an gespeicherte Nestgruppen. Es implementiert noch keine Werkzeuge, Baustellen oder steuerbare Stammesphase.

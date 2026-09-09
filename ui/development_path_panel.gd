@@ -54,12 +54,12 @@ func refresh() -> void:
 			labels[key].text = stage[key]
 		labels["panel"].add_theme_stylebox_override("panel", Style.box(Style.PANEL, Style.SOCIAL if data["current_stage"] == stage["id"] else Color("354750")))
 	_home.text = data["home"]["message"]
-	if not data["home"]["runtime_available"]:
+	if not data["home"]["runtime_available"] and int(data["current_phase"]) == 0:
 		_home.text += "\nNestgruppensteuerung ist in dieser Version noch nicht verfügbar."
 	var cooperation: int = roundi((float(data["legacy"]["group_cooperation"]["value"]) - 1.0) * 100.0)
 	var defense: int = roundi((float(data["legacy"]["group_defense"]["value"]) - 1.0) * 100.0)
 	_legacy.text = "Dein gekauftes Vermächtnis für den Stamm\nKoordination +%d %% · Verteidigung +%d %%" % [cooperation, defense]
-	_legacy.text += "\nFür die Stammesphase vorbereitet; in der Nestgruppe noch nicht aktiv."
+	_legacy.text += "\nKoordination beschleunigt die gemeinsame Dorfaufgaben; Verteidigung folgt mit Stammeskämpfen." if int(data["current_phase"]) == 1 else "\nIn der Nestgruppe noch nicht aktiv. Koordination wirkt nach dem Wechsel auf Dorfaufgaben; Verteidigung folgt mit Stammeskämpfen."
 	_transition.text = data["transition"]["message"]
 	_transition.text += "\nSoziale, aggressive und gemischte Entwicklung bleiben möglich. Punkte allein lösen keinen Phasenwechsel aus."
 

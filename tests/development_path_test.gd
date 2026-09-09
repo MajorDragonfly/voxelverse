@@ -70,7 +70,7 @@ func _run() -> void:
 	_expect(ui._view_phase == 1 and ui._wallet_labels["social"].text.begins_with("0 Punkte"), "Tribe view shows the creature wallet.")
 	_expect(not ui._cards["creature.social.approach"]["button"].is_visible_in_tree() and ui._purchase.disabled, "Tribe preview exposes creature purchase controls.")
 	_expect(ui._phase_preview.text.contains("Werkzeuge herstellen") and ui._phase_preview.text.contains("eigentliche Stammesphase"), "Tribe loop is confused with the nest-group precursor.")
-	_expect(ui._phase_preview.text.contains("Koordination +10 %") and ui._phase_preview.text.contains("noch nicht im Spiel aktiv"), "Real bought legacy or inactive consumer is misrepresented.")
+	_expect(ui._phase_preview.text.contains("Koordination +10 %") and ui._phase_preview.text.contains("Verteidigung folgt mit Stammeskämpfen"), "Real bought legacy or remaining combat scope is misrepresented.")
 	ui._buy_selected()
 	await _capture("tribe_wallet.png", Vector2i(1600, 900))
 	for phase in range(2, 6):

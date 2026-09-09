@@ -53,7 +53,8 @@ func _process(delta: float) -> void:
 	# No offline catch-up or campaign time spent in editors. SceneTree pause
 	# stops this node; speed applies to campaign simulation, not player physics.
 	var player := get_tree().get_first_node_in_group(&"player")
-	if player != null and player.is_physics_processing():
+	var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
+	if (player != null and player.is_physics_processing()) or (tribe != null and tribe.is_active()):
 		campaign.data["elapsed_seconds"] = float(campaign.data["elapsed_seconds"]) + simulation_delta(delta)
 
 
@@ -88,8 +89,11 @@ func record_campaign_event(event: GameEvent) -> bool:
 func get_phase_transition_blockers(new_phase: int) -> Array[String]:
 	if new_phase != current_phase + 1 or not PHASE_ABILITIES.has(new_phase):
 		return ["Only the next supported phase can be entered."]
-	# M5 installs real requirements and a society handoff. Enum/ability labels
-	# alone must never unlock an unfinished game phase.
+	if new_phase == Phase.TRIBE:
+		var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
+		if tribe != null:
+			return tribe.blockers()
+	# Later phases still require their own playable loop and explicit handoff.
 	return ["The gameplay and handoff for this phase are not implemented yet."]
 
 
@@ -118,6 +122,9 @@ func initialize_world_seed(
 
 
 func start_new_random_world() -> void:
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves != null and saves.is_phase_transition_active():
+		return
 	use_random_world_seed = true
 	_world_seed_initialized = false
 	_system_seed_initialized = false
@@ -129,6 +136,9 @@ func start_new_random_world() -> void:
 
 
 func start_world_with_seed(new_world_seed: int) -> void:
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves != null and saves.is_phase_transition_active():
+		return
 	use_random_world_seed = false
 	fixed_world_seed = _sanitize_world_seed(new_world_seed)
 	_world_seed_initialized = false
@@ -196,6 +206,9 @@ func set_phase(new_phase: int) -> void:
 
 
 func debug_set_phase(new_phase: int) -> void:
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves != null and saves.is_phase_transition_active():
+		return
 	if not PHASE_ABILITIES.has(new_phase):
 		push_warning("Unknown game phase: %s" % new_phase)
 		return

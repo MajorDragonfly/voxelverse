@@ -260,6 +260,12 @@ func get_development_path() -> Dictionary:
 	var result: Dictionary = preload("res://core/progression/development_path.gd").describe(
 		state.campaign.data, str(int(state.world_seed)), int(state.current_phase), runtime_available)
 	result["legacy"] = get_phase_progression_preview(1)["legacy"]
+	var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
+	if tribe != null:
+		var blockers: Array = tribe.blockers() if int(state.current_phase) == 0 else []
+		result["transition"] = {"implemented": true, "available": int(state.current_phase) == 0 and blockers.is_empty(),
+			"message": "Dein Stamm ist aktiv. Du führst die Gruppe und baust euer Dorf." if int(state.current_phase) == 1 else str(blockers[0]) if not blockers.is_empty() else "Deine Gruppe ist bereit. Öffne in der Welt Stammeszeitalter … und bestätige dort den Wechsel. Sichere Arbeitsplätze werden vor der Bestätigung geprüft."}
+		result["stages"][2]["status"] = "Aktuelle Phase" if int(state.current_phase) == 1 else "Spielbarer Einstieg · bewusster Wechsel"
 	return result
 
 

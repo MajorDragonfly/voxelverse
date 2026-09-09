@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://6sprsfjhecxs" path="res://world/resources/nests/nest.gd" id="1_pmytf"]
 [ext_resource type="Script" path="res://world/visuals/voxel/voxel_surface_styler.gd" id="2_styler"]
 [ext_resource type="Texture2D" path="res://world/visuals/voxel/textures/nest_fiber_01.png" id="3_nest_texture"]
+[ext_resource type="Script" path="res://world/home_group/home_group_controller.gd" id="4_home_group"]
+
+[ext_resource type="Script" path="res://world/tribe/tribe_controller.gd" id="3_tribe"]
 
 [node name="Nest" type="Node3D" unique_id=1293792252]
 script = ExtResource("1_pmytf")
@@ -16,3 +19,9 @@ texture_scale = 4.0
 palette_steps = 4
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=1260015313]
+
+[node name="HomeGroup" type="Node" parent="."]
+script = ExtResource("4_home_group")
+
+[node name="Tribe" type="Node" parent="."]
+script = ExtResource("3_tribe")

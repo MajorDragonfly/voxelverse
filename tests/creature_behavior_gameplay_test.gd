@@ -326,7 +326,7 @@ func _phase_preview_and_migration() -> void:
 	_expect(progression.purchase_behavior_node("creature.aggression.legacy")["ok"], "Could not buy aggression legacy with earned points.")
 	for phase in range(1, 6):
 		var preview: Dictionary = progression.get_phase_progression_preview(phase)
-		_expect(not preview["implemented"] and preview["wallet"]["available"] == {"social": 0, "aggression": 0}, "Preview invented later-phase gameplay/currency.")
+		_expect(bool(preview["implemented"]) == (phase == 1) and preview["wallet"]["available"] == {"social": 0, "aggression": 0}, "Preview must expose only the tribal village and preserve separate empty future wallets.")
 		_expect(is_equal_approx(preview["legacy"]["group_cooperation"]["value"], 1.1) and is_equal_approx(preview["legacy"]["group_defense"]["value"], 1.1), "Legacy preview lost actual purchased effects.")
 		state.current_phase = phase
 		_expect(not wildlife.get_node("SocialBehavior").befriend(player, 0.1)["ok"], "Creature action leaked into a later phase.")
@@ -349,7 +349,7 @@ func _phase_preview_and_migration() -> void:
 	_expect(JSON.parse_string(JSON.stringify(progression.export_state()["behavior"])) == old["progression"]["behavior"], "Migration changed earned points or purchased nodes.")
 	_expect(progression.export_state()["creature_encounters"]["entries"].is_empty(), "Migration invented historical relationships.")
 	_expect(FileAccess.get_file_as_string(TEST_SAVE) == bytes and FileAccess.file_exists(TEST_SAVE + ".schema4.backup.json"), "Migration did not preserve original save bytes.")
-	_expect(saves.save_now(), "Migrated schema 5 failed to save.")
+	_expect(saves.save_now(), "Migrated campaign failed to save.")
 	var bad: Dictionary = Encounters.new().export_state()
 	bad["entries"]["broken"] = {"health_ratio": NAN}
 	_expect(not Encounters.validate_state(bad).is_empty(), "Malformed encounter was accepted.")

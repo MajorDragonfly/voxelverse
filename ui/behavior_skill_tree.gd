@@ -61,7 +61,9 @@ func _ready() -> void:
 
 
 func open_panel() -> bool:
-	if visible or _closing or get_tree().paused or not is_instance_valid(player) or not player.is_physics_processing():
+	var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
+	var group_active: bool = tribe != null and tribe.is_active()
+	if visible or _closing or get_tree().paused or not is_instance_valid(player) or (not player.is_physics_processing() and not group_active):
 		return false
 	_previous_mouse_mode = Input.mouse_mode
 	_previous_focus = weakref(get_viewport().gui_get_focus_owner())
@@ -377,7 +379,7 @@ func _refresh_phase_preview() -> void:
 	_phase_preview.text += "\n%s\n%s\n%s" % [data["control"], " → ".join(data["loop"]), data["next"]]
 	if index > 0:
 		_phase_preview.text += "\nGekauftes Vermächtnis für diese Phase: Koordination +%d %% · Verteidigung +%d %%" % [roundi((float(data["legacy"]["group_cooperation"]["value"]) - 1.0) * 100.0), roundi((float(data["legacy"]["group_defense"]["value"]) - 1.0) * 100.0)]
-		_phase_preview.text += "\nDie Wirkung auf Gruppen ist vorbereitet und noch nicht im Spiel aktiv."
+		_phase_preview.text += "\nKoordination wirkt auf Dorfaufgaben. Verteidigung folgt mit Stammeskämpfen."
 		_phase_preview.text += "\nJede Phase verdient eigene Punkte. Kreaturenpunkte bleiben ihrem Baum zugeordnet."
 
 

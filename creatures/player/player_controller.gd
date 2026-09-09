@@ -298,6 +298,11 @@ func get_bite_damage() -> float:
 
 
 func receive_damage(damage: float) -> void:
+	# The village prototype owns civilian group control. Creature-phase combat
+	# cannot kill only the former player while its companions are untargetable.
+	var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
+	if tribe != null and tribe.is_active():
+		return
 	if is_dead or damage <= 0.0:
 		return
 	var mitigation: float = 1.0 + maxf(defense_rating, 0.0) * 0.12

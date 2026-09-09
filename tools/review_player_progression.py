@@ -19,6 +19,8 @@ def main():
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--gameplay", action="store_true", help="Exercise real F/H behavior input and earned purchases")
     mode.add_argument("--development", action="store_true", help="Exercise phase wallets, development path and saved home-group contract")
+    mode.add_argument("--tribe", action="store_true", help="Exercise confirmed transition, group orders and the village economy")
+    mode.add_argument("--tribe-world", action="store_true", help="Exercise a tribe in the generated main world")
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
@@ -31,7 +33,9 @@ def main():
         editor.chmod(0o755)
         env = {**os.environ, "XDG_DATA_HOME": str(isolation / "data"),
                "XDG_CONFIG_HOME": str(isolation / "config"), "LIBGL_ALWAYS_SOFTWARE": "1"}
-        script = ("res://tests/development_path_test.gd" if args.development else
+        script = ("res://tests/tribal_age_world_test.gd" if args.tribe_world else
+                  "res://tests/tribal_age_test.gd" if args.tribe else
+                  "res://tests/development_path_test.gd" if args.development else
                   "res://tools/review_behavior_gameplay.gd" if args.gameplay else
                   "res://tests/behavior_skill_tree_test.gd")
         process = subprocess.run([str(editor), "--path", str(args.project.resolve()),
@@ -48,13 +52,17 @@ def main():
     elif args.development:
         expected = {name + ".png": (1600, 900) for name in ["development_empty", "development_saved", "tribe_wallet", "development_legacy"]}
         expected.update({name + ".png": (800, 900) for name in ["development_800x900", "tribe_800x900"]})
+    if args.tribe:
+        expected = {name + ".png": (1280, 800) for name in ["01_confirmation", "02_group", "03_transport", "04_tool", "05_village"]}
+    elif args.tribe_world:
+        expected = {"06_generated_village.png": None}
     images = []
     for name, dimensions in expected.items():
         path = output / name
         data = path.read_bytes() if path.exists() else b""
         actual = struct.unpack(">II", data[16:24]) if data.startswith(b"\x89PNG") else None
         images.append({"file": name, "dimensions": actual, "passed": len(data) > 4096 and actual is not None and (dimensions is None or actual == dimensions)})
-    marker = "DEVELOPMENT_PATH_OK" if args.development else "BEHAVIOR_GUI_OK" if args.gameplay else "PROGRESSION_UI_OK"
+    marker = '"test":"tribal_age_world"' if args.tribe_world else '"test":"tribal_age"' if args.tribe else "DEVELOPMENT_PATH_OK" if args.development else "BEHAVIOR_GUI_OK" if args.gameplay else "PROGRESSION_UI_OK"
     passed = process.returncode == 0 and not error and marker in process.stdout and all(image["passed"] for image in images)
     (output / "review.json").write_text(json.dumps({"passed": passed, "renderer": "gl_compatibility", "exit_code": process.returncode, "captures": images}, indent=2) + "\n")
     print(process.stdout[-6000:])
