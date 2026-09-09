@@ -14,7 +14,7 @@ from validation_support import isolated_env, validation_editor
 
 # These acceptance flows include real 300-second production or 90-second growth
 # plus transport and restart. Keep short checks bounded independently.
-LONG_TESTS = {"tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test"}
+LONG_TESTS = {"tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
