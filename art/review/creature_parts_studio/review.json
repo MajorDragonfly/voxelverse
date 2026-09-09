@@ -1,0 +1,60 @@
+{
+  "renderer": "gl_compatibility",
+  "screenshots": [
+    {
+      "file": "round_body.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "94da8f190fecdcd6fdd1ffda569237e9827a5e783a183a4d1ca659e6ec1e1f6a"
+    },
+    {
+      "file": "grazer_parts.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "c6fc1d73b41e0156945889671d6bff1b4911e7709a8cd3d87bcd43264f4d85a5"
+    },
+    {
+      "file": "upright_paint.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "0b3fac7584b0aeadd8c9c0cb0f6e7efefacb39ec6c14871fc4c6428469d31652"
+    },
+    {
+      "file": "crawler_test.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "490f882bf4caf97da4ff177e325338ea6ff0e870266290789f5823e75caafc8c"
+    },
+    {
+      "file": "spike_symmetry.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "6fd9460b2b8949640924b5a3a34f51d6a357ee4b32b2121ec736b5061b997b2f"
+    },
+    {
+      "file": "hand_controls.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "6cc776fd8755b26997f05c4172f57f41d62c1a4886e4730f5713f11672f74eb4"
+    },
+    {
+      "file": "four_leg_feet.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "01eb28ba92da0ce188610b24f60e7942b0be9b4d5682565e5889dd66f9e507a2"
+    },
+    {
+      "file": "scales_surface.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "a518fa542a964ffdfde7999758976f73a986ed3962992b0a93290d484937a660"
+    },
+    {
+      "file": "fur_surface.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "4b5864328aaec979520ad595181414e3f9efd41c27147c825e251160d76ed7cc"
+    }
+  ],
+  "runtime_errors": 0
+}

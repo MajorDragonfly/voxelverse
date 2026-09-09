@@ -1,0 +1,73 @@
+{
+	"presets": [
+		{
+			"body_cell_size": 0.035,
+			"body_triangles": 27264,
+			"body_voxels": 72058,
+			"edit_max_ms": 49.578,
+			"edit_median_ms": 49.158,
+			"edit_samples_ms": [
+				48.765,
+				49.147,
+				49.578,
+				49.028,
+				49.376,
+				49.343,
+				49.158
+			],
+			"preset": "round"
+		},
+		{
+			"body_cell_size": 0.035,
+			"body_triangles": 22040,
+			"body_voxels": 42978,
+			"edit_max_ms": 40.897,
+			"edit_median_ms": 40.086,
+			"edit_samples_ms": [
+				39.619,
+				40.086,
+				39.757,
+				40.011,
+				40.493,
+				40.897,
+				40.475
+			],
+			"preset": "grazer"
+		},
+		{
+			"body_cell_size": 0.035,
+			"body_triangles": 16344,
+			"body_voxels": 26686,
+			"edit_max_ms": 29.284,
+			"edit_median_ms": 29.086,
+			"edit_samples_ms": [
+				28.914,
+				29.052,
+				28.884,
+				29.284,
+				29.208,
+				29.086,
+				29.107
+			],
+			"preset": "upright"
+		},
+		{
+			"body_cell_size": 0.035,
+			"body_triangles": 19316,
+			"body_voxels": 33508,
+			"edit_max_ms": 37.513,
+			"edit_median_ms": 37.234,
+			"edit_samples_ms": [
+				37.163,
+				37.234,
+				37.315,
+				37.233,
+				37.301,
+				37.213,
+				37.513
+			],
+			"preset": "crawler"
+		}
+	],
+	"timing": "synchronous editor shape changes, warm part cache; excludes rendering"
+}

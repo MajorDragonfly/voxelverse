@@ -1,6 +1,6 @@
 # Kreaturen-Werkstatt in Voxeloptik
 
-Lars hat am 9. September 2026 die gewünschte Darstellung präzisiert: Die direkte Gestaltung soll sich an Spore orientieren, Kreaturen und Werkstatt sollen zur Voxelgrafik von Voxelverse passen. Anschließend wurde das Kreaturenraster weiter verfeinert, damit Körperkonturen, Augen und Anbauteile mehr Details zeigen. Dieser Ausbau folgt auf die erste Kreaturen-Werkstatt in PR #12.
+Lars hat am 9. September 2026 die gewünschte Darstellung präzisiert: Die direkte Gestaltung soll sich an Spore orientieren, Kreaturen und Werkstatt sollen zur Voxelgrafik von Voxelverse passen. Anschließend wurde das Kreaturenraster weiter verfeinert, damit Körperkonturen, Augen und Anbauteile mehr Details zeigen. Dieser Ausbau folgt auf die erste Kreaturen-Werkstatt in PR #12. Den anschließenden Ausbau aller Anbauteile, der Bearbeitungsregler, Hände/Füße und Hauttypen beschreibt [CREATURE_PARTS_STUDIO.md](CREATURE_PARTS_STUDIO.md).
 
 ## Darstellung und Bedienung
 

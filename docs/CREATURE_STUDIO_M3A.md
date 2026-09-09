@@ -1,6 +1,6 @@
 # Kreaturen-Werkstatt M3A
 
-Stand: 8. September 2026. Eigener Branch `agent/creature-editor-spore`, Draft PR #12 auf PR #10. Die Implementierung übernimmt Lars’ neue Priorität: Kreaturen und Editor sollen sich beim Gestalten deutlich stärker an Spore orientieren. Voxelverse behält eigene Formen, Teile und Oberfläche. Am 9. September wurde die Darstellung auf Lars’ Wunsch wieder konsequent auf kleine Voxel abgestimmt; die direkte Formung bleibt bestehen. [Voxel-Überarbeitung](CREATURE_VOXEL_STYLE.md).
+Stand: 8. September 2026. Eigener Branch `agent/creature-editor-spore`, Draft PR #12 auf PR #10. Die Implementierung übernimmt Lars’ neue Priorität: Kreaturen und Editor sollen sich beim Gestalten deutlich stärker an Spore orientieren. Voxelverse behält eigene Formen, Teile und Oberfläche. Am 9. September wurde die Darstellung auf Lars’ Wunsch wieder konsequent auf kleine Voxel abgestimmt; die direkte Formung bleibt bestehen. [Voxel-Überarbeitung](CREATURE_VOXEL_STYLE.md). Der anschließende [Teileausbau](CREATURE_PARTS_STUDIO.md) ergänzt XYZ-Regler, Mitte/Paar-Befestigung, austauschbare Hände und Füße, gemeinsamen Sohlenstand sowie fünf kosmetische Hauttypen und mehr Farben.
 
 ## Was sich ändert
 
@@ -26,7 +26,7 @@ Stand: 8. September 2026. Eigener Branch `agent/creature-editor-spore`, Draft PR
 | Körperlänge ändern | Strg + Mausrad oder Längenregler |
 | Teil anbauen | Teile → Karte auf den Körper ziehen; alternativ anklicken |
 | Teil verschieben | Angebaute Komponente ziehen; bei deaktiviertem Andocken innerhalb der sicheren Befestigungsgrenzen frei bewegen |
-| Teil drehen | Alt + Ziehen oder Drehknöpfe |
+| Teil drehen | X/Y/Z-Regler, Alt + Ziehen oder Drehknöpfe |
 | Teil skalieren | Mausrad oder −/+ |
 | Ansicht drehen | Rechts/Mitte ziehen; auch links auf freier Fläche |
 | Ansicht einpassen | F |
@@ -41,7 +41,7 @@ Das Entwurfsformat bleibt V7. Neue optionale Felder sind `body.spine[].t`, `appe
 
 Ein Ziehvorgang bildet einen Rückgängig-Schritt. Speichern löscht die Historie nicht. Die Revision steigt erst mit einem erfolgreich geschriebenen V7-Entwurf; auch Speichern nach Rückgängig verwendet keine bereits geschriebene Revision erneut. Wenn die anschließende Kampagnensicherung scheitert, bleibt die Werkstatt geöffnet und zeigt den Fehler. Farben und Punktpositionen werden über die bestehende gemeinsame Entwurfssicherung übernommen.
 
-Die neue Darstellung nutzt den bestehenden `CreatureRuntimePreview`. Sein optionaler alter Voxelpfad bleibt für Vergleich und Regression verfügbar. Die ursprüngliche Prüfung identischer Voxel/Materialien mit und ohne Batching bleibt erhalten; ein zusätzlicher gerenderter Kreaturenfall prüft die neue Oberfläche gegen ein Budget von 120 Mesh-Nodes für die Referenzarten. Der Standardkörper benötigt 21 Geometrie-Nodes.
+Die neue Darstellung nutzt den bestehenden `CreatureRuntimePreview`. Sein optionaler alter Voxelpfad bleibt für Vergleich und Regression verfügbar. Die ursprüngliche Prüfung identischer Voxel/Materialien mit und ohne Batching bleibt erhalten; ein zusätzlicher gerenderter Kreaturenfall prüft die neue Oberfläche gegen ein Budget von 120 Mesh-Nodes für die Referenzarten. Vor dem Teileausbau benötigte der Standardkörper 21 Geometrie-Nodes; den aktuellen Stand dokumentiert [Körperteile, Hände, Füße und Hauttypen](CREATURE_PARTS_STUDIO.md).
 
 PR #12 wird nach PR #10 integriert. PR #11 kann separat übernommen werden; bei `tools/capture_environment.gd` sind beide Ergänzungen zu behalten: der Kreaturenvergleich hier und die Planeten-/Menünachweise aus PR #11. Keine automatische Zusammenführung nach `main`; PR #9 bleibt ungemergt.
 
