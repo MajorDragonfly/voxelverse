@@ -83,8 +83,7 @@ func _physics_process(delta: float) -> void:
 		forward = (orbit_axis.cross(up_direction) - orbit_axis.slide(up_direction) * up_direction.dot(orbit_axis) * 16.0).normalized()
 		move_input = Vector2(0.0, 1.0)
 	else:
-		move_input = Vector2(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)),
-			float(Input.is_physical_key_pressed(KEY_W)) - float(Input.is_physical_key_pressed(KEY_S))).limit_length()
+		move_input = _movement_input()
 	basis = Cube.frame(up_direction, forward)
 	var desired: Vector3 = (basis.x * move_input.x + forward * move_input.y) * speed
 	waiting_for_terrain = false
@@ -123,6 +122,11 @@ func _physics_process(delta: float) -> void:
 		terrain.rebase(point)
 		position = Vector3.ZERO
 	_update_camera()
+
+
+func _movement_input() -> Vector2:
+	return Vector2(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)),
+		float(Input.is_physical_key_pressed(KEY_W)) - float(Input.is_physical_key_pressed(KEY_S))).limit_length()
 
 
 func _attempt_step_up(motion: Vector3) -> void:

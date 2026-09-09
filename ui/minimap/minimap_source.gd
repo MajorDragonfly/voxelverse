@@ -22,6 +22,8 @@ static func campaign_snapshot(player: Node3D, tree: SceneTree) -> Dictionary:
 	var body_key: String = str(state.get_world_seed())
 	if not state.campaign.data["bodies"].has(body_key): state.get_current_body()
 	var body: Dictionary = state.campaign.data["bodies"][body_key]
+	if body.get("surface_mode") == Cube.MODE and tree.current_scene.has_method("map_snapshot"):
+		return tree.current_scene.map_snapshot()
 	if str(body.get("surface_mode", "")) != "legacy_plane_v9": return {}
 	var id: String = str(body["id"])
 	var actual: Dictionary = body

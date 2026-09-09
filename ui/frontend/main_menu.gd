@@ -8,6 +8,7 @@ var _flow: Node
 var _status: Label
 var _title_input: LineEdit
 var _seed_input: LineEdit
+var _sphere_choice: CheckBox
 var _page: String = "home"
 var _save_browser: Control
 var _help_text: Label
@@ -24,6 +25,9 @@ func _ready() -> void:
 	_show_home()
 	_flow.menu_error.connect(_show_error)
 	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
+	if "--sphere-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("sphere_smoke_consumed"):
+		get_tree().set_meta("sphere_smoke_consumed", true)
+		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/spherical_campaign_probe.gd").new())
 	# Keep the native acceptance entries explicitly available after changing
 	# the startup scene. Ordinary launches always stay at the title screen.
 	if "--planet-lab" in OS.get_cmdline_user_args() or "--input-smoke" in OS.get_cmdline_user_args():
@@ -140,6 +144,11 @@ func _show_new() -> void:
 	_seed_input.custom_minimum_size.y = 54
 	_seed_input.text_changed.connect(func(_text: String): _status.text = "")
 	_body.add_child(_seed_input)
+	_sphere_choice = CheckBox.new()
+	_sphere_choice.name = "SphericalCampaignChoice"
+	_sphere_choice.text = "Kugelwelt ausprobieren"
+	_body.add_child(_sphere_choice)
+	Style.paragraph(_body, "Auf der Kugel funktionieren derzeit Bewegung, Karte und Speichern. Nahrung, Begegnungen und Siedlungen sind noch nicht angebunden.", 17)
 	Style.button(_body, "Abenteuer beginnen", _begin, "Begin", true)
 	Style.button(_body, "Zurück", _show_home, "Back")
 	_title_input.grab_focus()
@@ -150,7 +159,7 @@ func _begin() -> void:
 		_show_error("Bitte einen Welt-Seed von 1 bis 2147483647 eingeben oder das Feld leer lassen.")
 		_seed_input.grab_focus()
 		return
-	_flow.new_game(_title_input.text, 0 if seed_text.is_empty() else int(seed_text))
+	_flow.new_game(_title_input.text, 0 if seed_text.is_empty() else int(seed_text), "cube_sphere_m1_v1" if _sphere_choice.button_pressed else "legacy_plane_v9")
 
 func _show_slots() -> void:
 	_clear("slots")

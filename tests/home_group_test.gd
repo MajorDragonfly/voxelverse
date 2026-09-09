@@ -133,14 +133,16 @@ func _run() -> void:
 	var code: int = OS.execute(OS.get_executable_path(), restart_args, output, true)
 	_expect(code == 0 and not str(output).contains("SCRIPT ERROR") and not str(output).contains("ERROR:"), "Fresh process rejected snapshot: " + str(output))
 	_expect(root.get_node("ProgressionService").export_state() == original_progression, "Nest/group operations changed behavior points, discoveries or unlocks.")
-	# Corrupt/future nested data stays opaque and unchanged, including when
-	# another ordinary campaign save is made. No silent reset or new residents.
+	# Save 8 validates nested contracts before replacing the joint snapshot.
+	# Future group data stays opaque in memory; the previous readable file is
+	# preserved until the compatible group is restored, with no new residents.
+	var previous_bytes: String = FileAccess.get_file_as_string(SAVE)
 	var body: Dictionary = state.campaign.data["bodies"][str(state.world_seed)]
 	body["home_group"]["schema"] = 99
 	var future: Dictionary = body["home_group"].duplicate(true)
 	home._refresh_runtime()
 	_expect(not home.issue_order("follow")["ok"] and body["home_group"] == future, "Unsupported group was changed.")
-	_expect(saves.save_now() and body["home_group"] == future, "Other campaign saving lost unsupported group payload.")
+	_expect(not saves.save_now() and body["home_group"] == future and FileAccess.get_file_as_string(SAVE) == previous_bytes, "Unsupported group replaced the last compatible snapshot or was reset.")
 	body["home_group"] = saved_group
 	home._refresh_runtime()
 	await _frames(3)

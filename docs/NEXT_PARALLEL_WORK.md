@@ -4,9 +4,11 @@ Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge er
 
 **Zuerst lesen:** [ROADMAP.md](../ROADMAP.md), [SPHERICAL_CAMPAIGN_MIGRATION.md](SPHERICAL_CAMPAIGN_MIGRATION.md), [VOXELVERSE_DESIGN.md](VOXELVERSE_DESIGN.md). Der vollständige Kugelumzug hat Vorrang vor neuen Epochen. Die belebte Kugelszene bleibt bis zur tatsächlichen Kampagnenintegration ein eigener Bereich.
 
-## 1. Gemeinsame Grundlage – zuerst abschließen
+## 1. Gemeinsame Grundlage – erweiterten Umzug abschließen
 
-„Setze M1e um: Verwende Cube-Sphere-Adressen und den bestehenden radialen Oberflächenadapter als Kampagnenkontext. Implementiere einen versionierten Start-/Lade-/Speicherweg für neue Kugelkampagnen. Erhalte den bisherigen Flachwelt-Lader und baue eine atomare Kopiermigration mit Manifest für vorhandene persistente Orte, Bewohner, Tiere, Vorräte und Fortschritt. Kein stilles Umdeuten alter XYZ-Werte, keine Neugenerierung bestehender Spezies. Liefere Vertrag, Implementierung, Schreibfehler-/Zukunftsversionstests und einen frischen Prozess als Nachweis. Änderungen an GameState und SaveGameService gehören zu diesem gemeinsamen Paket.“
+**Bereits eingebaut:** Save 8/Kampagne 2, `surface_context.gd`, der gemeinsame Kugelstart, radiale Spielerorte, Karten, frühe Kopiermigration mit Quellarchiv und Rückweg. [WORK_M1E_CAMPAIGN.md](WORK_M1E_CAMPAIGN.md) ist der aktuelle Anschlussvertrag. Keine zweite Kampagne oder Speicherdienststruktur anlegen. Noch offen sind die Zielzuordnung und Laufzeitanbindung vorhandener Regions-, Heimat-, Pflichtarten-, Dorf- und Tierhaltungsdaten; ihre Sperren dürfen erst nach entsprechendem Erhaltungsnachweis entfallen.
+
+„Vervollständige M1e auf dem bestehenden Vertrag: Verwende Cube-Sphere-Adressen und den bestehenden radialen Oberflächenadapter als Kampagnenkontext. Implementiere einen versionierten Start-/Lade-/Speicherweg für neue Kugelkampagnen. Erhalte den bisherigen Flachwelt-Lader und baue eine atomare Kopiermigration mit Manifest für vorhandene persistente Orte, Bewohner, Tiere, Vorräte und Fortschritt. Kein stilles Umdeuten alter XYZ-Werte, keine Neugenerierung bestehender Spezies. Liefere Vertrag, Implementierung, Schreibfehler-/Zukunftsversionstests und einen frischen Prozess als Nachweis. Änderungen an GameState und SaveGameService gehören zu diesem gemeinsamen Paket.“
 
 ## 2. Kreaturenphase auf der Kugel
 
