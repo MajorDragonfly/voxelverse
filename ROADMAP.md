@@ -35,7 +35,7 @@ Die folgenden Pakete sind im gemeinsamen Quellstand enthalten. „Enthalten“ e
 | Karten | Phasenskalierte Minimap, große Karte mit dauerhafter Erkundung, eigene/befreundete bekannte Orte; gleiche Karten auch im belebten Kugelbereich | Produktionskampagne auf Kugeln, später Galaxiennavigation |
 | Sprache | Zentraler Dienst für Deutsch/Englisch, 221 Vorlagen, gespeicherte Menüauswahl | HUD/Buch/Dorf/Editor vollständig übersetzen; L1 ist keine Vollübersetzung |
 | Wartung/Audio | Entfernte unreferenzierte Prototypen, isolierte Prüfungen, Streamingdiagnose, frühe Audiofreigabe und reale Mixerfrist | Windows-Gesamtpaket, Ziel-PC-Framezeiten; keine FPS-Zusage |
-| Speicherung | Gemeinsames Save 7, Fortschritt 5, Dorf 5, Stammesfortschritt 3, D1-/D2-/D3-/Atlasvalidatoren kombiniert | Atomarer Kampagnenumzug und einheitliche persistente Kugelorte |
+| Speicherung | Gemeinsames Save 7, Fortschritt 5, Dorf 5, Stammesfortschritt 3, Nachbarvertrag 2, Kugelspeicher 3; D1-/D2-/D3-/Atlasvalidatoren kombiniert | Atomarer Kampagnenumzug und einheitliche persistente Kugelorte |
 
 
 `Antike/Mittelalter` und `Neuzeit/Weltmacht` verwenden zunächst die bestehenden Phasen-IDs 2 und 3; gespeicherte Enum-Werte werden nicht umnummeriert. `MULTIVERSE` bleibt nur kompatibler Altwert, ohne spielbaren Kernumfang. Ein HUD-Phasentext ist keine Freigabe dieser Epochen.

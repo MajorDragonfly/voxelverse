@@ -1,6 +1,6 @@
 # Zweite Integration: gemeinsamer Stand und Kugelumzug
 
-Stand: 9. September 2026. Basis `3a3e0272375e556f3ff65b7370582af79a9d48b5`. Die vollständigen Quell- und Baumkennungen stehen in [integration-spherical-sources-2026-09-09.json](integration-spherical-sources-2026-09-09.json). Historische Einzelberichte behalten ihre damaligen Grenzen; dieses Dokument beschreibt den gemeinsamen Folgeaufbau.
+Stand: 9. September 2026. Zusammengeführter lokaler Integrationsbranch `agent/integration-spherical-2026-09-09`. Basis `3a3e0272375e556f3ff65b7370582af79a9d48b5`. Die vollständigen Quell- und Baumkennungen stehen in [integration-spherical-sources-2026-09-09.json](integration-spherical-sources-2026-09-09.json). Historische Einzelberichte behalten ihre damaligen Grenzen; dieses Dokument beschreibt den gemeinsamen Folgeaufbau.
 
 ## Übernommene Entwicklungsstränge
 
@@ -22,6 +22,7 @@ Die Quellhistorien wurden durch echte Merge-Commits erhalten. Bei doppelten D1-/
 ## Behobene gemeinsame Fehler
 
 - **Speicherung:** D1-Kataloge, D2-Tierbestände, D3-/Dorfzustände, Nachbarn, Fortschritt und Erkundungsatlas werden gemeinsam validiert. Sämtliche Schutzprüfungen für unbekannte neuere Unterverträge bleiben erhalten.
+- **Spielstandkopien:** Kopieren eines D2-Spielstands bindet das Tierregister an die neue Kampagnen-ID. Tier-/Körper-/Besitzkennungen und die Quelldatei bleiben erhalten; D3 findet die Tiere auch in der Kopie.
 - **D2 → D3:** Die Dorfhaltung liest jetzt direkt den tatsächlichen D2-Bestand, seine D1-Eignung und denselben Tier-Actor. Der Zugriff wird nach Kampagnenladen wiederhergestellt; es entsteht kein zweiter Tierbestand. Die explizite D3-Prüfszene darf weiterhin ihre isolierten Quellen anschließen.
 - **Dorfbewegung:** Haus-/Eingangshindernisse, Nachbarraster und D2-Reichweite verwenden denselben Navigationsaufruf. Fracht, Versorgung, Wachstum, Tierhaltung und Nachbararbeit bleiben im gemeinsamen Simulationstakt. Die frühere doppelte Radiusdeklaration ist entfernt.
 - **Fortschritt mit Wachstum:** Wirtschaftsnachweise akzeptieren die vorhandenen Dorfversionen 3–5. Neu hinzugekommene, validierte Bewohner werden in den gemeinsamen Arbeitsnachweis aufgenommen. Nachbarvertrag 2 erlaubt bis zu sechs eigene Träger; Vertrag 1 bleibt lesbar und wird beim nächsten Hilfsauftrag ausdrücklich angehoben.
@@ -33,7 +34,27 @@ Die Quellhistorien wurden durch echte Merge-Commits erhalten. Bei doppelten D1-/
 
 ## Prüfstand
 
-Die abschließende gemeinsame Quellprüfung und native Linux-Paketprüfung laufen. Bereits geprüft sind unter anderem Körper-/Sitzverträge, Zähmung mit D3-Leseanschluss, Tierhaltung samt echtem Neustart, wirtschaftliche Fortschrittsnachweise, UI/Bücher, Karten und radiale Landschaft. Der endgültige Ergebnisstand wird vor der Übernahme hier eingetragen. Einzelbranch-Nachweise werden nicht als gemeinsame Abnahme ausgegeben.
+**114/114 Quelltests und 28/28 Linux-Paketprüfungen bestanden**, mit Godot `4.6.3.stable.official.7d41c59c4`. Der [maschinenlesbare Nachweis](../validation/integration-spherical-2026-09-09/results.json) enthält sämtliche Ergebnisse, Herkunft und Grenzen.
+
+Der Gesamtlauf umfasste alle 114 Quelltests. Vier zunächst fehlgeschlagene Prüfungen wurden nach Korrektur gezielt erneut ausgeführt: D2-Weltnavigation, Forschungsmenü, Hauseingangsbewegung und gemeinsamer Mahlzeitenfortschritt. Beim letzten Punkt versorgt die Probe nun tatsächlich sämtliche Bewohner; drei Mahlzeiten insgesamt hatten wegen der automatischen Essenspausen noch nicht drei versorgte Bewohner nachgewiesen. Die Belohnungsregel und ihre strenge Punkteprüfung bleiben erhalten. Zusätzlich wurden D2-Kampagnenkopie, Spielstandverwaltung und radiale D1.2-Laufzeit erneut geprüft. Es handelt sich um einen Gesamtlauf während der Integration plus gezielte Nachprüfungen, nicht um einen einzigen unveränderten grünen Lauf am Schlusscommit.
+
+Der Quellstand ist durch Commit `38b93d4` festgehalten. Die Linux-Abnahme gehört zum Paketstand `664bf92`: tatsächlicher Release-Export, native Einstiege/Menüs, ausgelagerte Paketproben, Dorf mit Kaltstart, Forschung, Speicher und drei Welt-Seeds. Die spätere dreizeilige Korrektur der D2-Kampagnen-ID beim Kopieren wurde anschließend mit tatsächlichem Kopieren/Laden/Neustart und Spielstandtests im Quellbetrieb bestanden; dieses Linux-Paket wurde danach nicht erneut gebaut. Weitere spätere Änderungen betreffen Tests und Prüffristen.
+
+Separate Prozesse bestätigen außerdem D1.2-Schreiben/Lesen über die drei Referenzkörper, Altspeicher-Übernahme und Schutz vor unbekannten Versionen sowie D3-Pflege/Milchtransport mit anschließendem Neustart. Kartenprüfungen decken Körperwechsel, Wiederherstellung und das Verhindern von Erkundung durch bloßes Zoomen ab.
+
+Die Prüfungen lassen sich aus dem Projektverzeichnis mit den vorhandenen Werkzeugen wiederholen; `GODOT_BIN` bezeichnet den lokalen Godot-4.6.3-Pfad, die passenden Exportvorlagen müssen installiert sein:
+
+```sh
+python3 tools/validate_godot.py --godot "$GODOT_BIN" --output /tmp/voxelverse-source-check
+python3 tools/validate_export.py --godot "$GODOT_BIN" --platform linux --output /tmp/voxelverse-linux-check
+python3 tools/validate_domestic_fauna.py --godot "$GODOT_BIN" --probe d12 --output /tmp/voxelverse-d12-check
+```
+
+Diese Aufrufe schließen zusätzlich Import- bzw. Einstiegskontrollen ein; ihre Gesamtzahl kann deshalb über den oben genannten Einzeltests liegen. Die Paketprobe trennt native Tests ausdrücklich von instrumentierten Prüfungen mit dem Editor und dem Release-PCK.
+
+## Veröffentlichung
+
+Der Upload des Integrationsbranches nach `https://github.com/MajorDragonfly/voxelverse` wurde von der automatischen Freigabeprüfung abgelehnt. Begründung: Veröffentlichung von Quellcode und Historie ohne ausdrückliche Freigabe dieses Ziels. Das Ziel wurde anschließend lesend als das öffentliche Repository `MajorDragonfly/voxelverse` mit administrativem Kontozugriff bestätigt; daraus wurde keine Umgehung der abgelehnten Aktion abgeleitet. Es erfolgte kein weiterer Uploadversuch und kein Remote-Merge. Der abschließende lesende Ref-Abgleich bestätigt weiterhin `main` auf `3a3e027` und keinen veröffentlichten Integrationsbranch. Die lokalen Merge-Commits und Folgekorrekturen sind fertig prüfbar; Veröffentlichung und Übernahme nach `main` benötigen die ausdrückliche Freigabe.
 
 ## Verbindliche nächste Priorität
 
