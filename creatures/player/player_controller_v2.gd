@@ -108,6 +108,8 @@ func _try_bite_action() -> void:
 
 
 func perform_bite_on_target(target: Node) -> bool:
+	if is_dead or get_tree().paused or not is_physics_processing() or not can_perform_action(&"bite"):
+		return false
 	if target == null or not is_instance_valid(target):
 		return false
 	if not target.has_method("receive_creature_attack"):
@@ -118,13 +120,24 @@ func perform_bite_on_target(target: Node) -> bool:
 		)
 		if distance > bite_reach + 0.35:
 			return false
+		if not _has_clear_line_of_sight(target, global_position + Vector3.UP * 0.7, target.global_position + Vector3.UP * 0.7):
+			return false
 	if _bite_cooldown_timer > 0.0:
 		return false
 
+	var behavior := get_node("BehaviorController")
+	var before_stamina: Dictionary = behavior.export_state()
+	if not behavior.spend_bite():
+		return false
+	var damage: float = get_bite_damage()
+	if target.has_node("SocialBehavior") and GameState.current_phase == 0:
+		if not target.get_node("SocialBehavior").receive_player_attack(damage, self):
+			behavior.import_state(before_stamina)
+			return false
+	else:
+		target.call("receive_creature_attack", damage, self)
 	_bite_cooldown_timer = bite_cooldown
-	var damage: float = clampf(attack_power * bite_damage_scale, 2.0, 80.0)
 	_trigger_bite_animation()
-	target.call("receive_creature_attack", damage, self)
 	creature_attacked.emit(target, damage)
 	return true
 
@@ -221,7 +234,7 @@ func _find_wildlife_target(
 		var distance: float = delta.length()
 		if distance <= 0.001 or distance > maximum_distance:
 			continue
-		if distance < nearest_close_distance and distance <= minf(1.55, maximum_distance):
+		if distance < nearest_close_distance and distance <= minf(1.55, maximum_distance) and (not require_line_of_sight or _has_clear_line_of_sight(creature, origin, target_position)):
 			nearest_close_target = creature
 			nearest_close_distance = distance
 		var direction: Vector3 = delta / distance

@@ -1,5 +1,7 @@
 # Dritter Arbeitsstrang: Spielerfortschritt
 
+**Folgeauftrag 9. September 2026:** Das Entdeckungsbuch ist einem anderen Chat übergeben. Dieser Chat setzt auf `agent/creature-behavior-gameplay` reale Begegnungsbelohnungen und Skilltree-Effekte um. [Spielbarer Umfang und Integrationsanschlüsse](CREATURE_BEHAVIOR_GAMEPLAY.md), [Fortschritt ab Stamm](BEHAVIOR_FUTURE_PHASES.md). Nestgruppen und Begleiterbefehle gehören zum separaten Kreaturverhalten-Chat. Die folgende Beschreibung hält das abgeschlossene UI-Ausgangspaket fest.
+
 Stand: 9. September 2026.
 
 Lars hat einen dritten parallelen Chat für Voxelverse angefragt. Die beiden laufenden Chats bearbeiten Kreatureneditor/Kreaturen und Planeten/Welt. Dieser Arbeitsstrang übernimmt die Bedienoberfläche für den Spielerfortschritt auf der vorhandenen M2A-Grundlage.

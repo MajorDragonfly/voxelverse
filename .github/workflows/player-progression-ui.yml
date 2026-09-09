@@ -2,12 +2,15 @@ name: Player progression UI
 
 on:
   push:
-    branches: ["agent/player-progression-ui"]
+    branches: ["agent/player-progression-ui", "agent/creature-behavior-gameplay"]
   pull_request:
     paths:
       - "ui/**"
       - "tests/behavior_skill_tree_test.gd"
+      - "tests/creature_behavior_gameplay_test.gd"
+      - "creatures/behavior/**"
       - "tools/review_player_progression.py"
+      - "tools/review_behavior_gameplay.gd"
       - ".github/workflows/player-progression-ui.yml"
 
 jobs:
@@ -28,7 +31,7 @@ jobs:
         run: >-
           python3 tools/validate_godot.py
           --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
-          --tests behavior_progression_test behavior_skill_tree_test meta_runtime_test
+          --tests behavior_progression_test behavior_skill_tree_test creature_behavior_gameplay_test meta_runtime_test
           --skip-main --output /tmp/player-progression-functional
       - name: Exercise and capture actual GUI
         run: >-
@@ -36,6 +39,12 @@ jobs:
           python3 tools/review_player_progression.py
           --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
           --output /tmp/player-progression-review
+      - name: Exercise real social gameplay and earned purchases
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1080x24'
+          python3 tools/review_player_progression.py
+          --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
+          --gameplay --output /tmp/creature-behavior-review
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -43,4 +52,5 @@ jobs:
           path: |
             /tmp/player-progression-review
             /tmp/player-progression-functional
+            /tmp/creature-behavior-review
           retention-days: 14

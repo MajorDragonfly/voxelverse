@@ -73,10 +73,12 @@ func get_current_body() -> Dictionary:
 
 
 func record_campaign_event(event: GameEvent) -> bool:
+	var progression := get_node_or_null("/root/ProgressionService")
+	if progression != null and progression.is_behavior_transaction_active():
+		return false
 	if not campaign.accept_event(event, current_phase):
 		return false
 	# Commit reward state before any event observer can take a save snapshot.
-	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null:
 		progression.call("apply_campaign_event", event)
 	campaign_event.emit(event.to_dict())

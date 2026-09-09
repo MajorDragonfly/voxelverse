@@ -13,8 +13,9 @@ const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const Behavior = preload("res://core/progression/behavior_progression.gd")
 const BehaviorRules = preload("res://core/progression/behavior_catalog.gd")
+const Encounters = preload("res://core/progression/creature_encounters.gd")
 
-const SAVE_SCHEMA: int = 3
+const SAVE_SCHEMA: int = 4
 const SPECIES_DISCOVERY_POINTS: int = 3
 const REGION_DISCOVERY_POINTS: int = 1
 
@@ -24,6 +25,8 @@ var discovered_species: Dictionary = {}
 var discovered_regions: Dictionary = {}
 var _behavior := Behavior.new()
 var _behavior_purchase_active: bool = false
+var _encounters := Encounters.new()
+var _encounter_commit_active: bool = false
 
 
 func _ready() -> void:
@@ -36,6 +39,7 @@ func reset_for_new_game() -> void:
 	discovered_species.clear()
 	discovered_regions.clear()
 	_behavior.reset()
+	_encounters.entries.clear()
 	_ensure_starter_parts()
 	discovery_points_changed.emit(discovery_points)
 	behavior_changed.emit()
@@ -151,12 +155,16 @@ func export_state() -> Dictionary:
 		"discovered_species": discovered_species.duplicate(true),
 		"discovered_regions": discovered_regions.duplicate(true),
 		"behavior": _behavior.export_state(),
+		"creature_encounters": _encounters.export_state(),
 	}
 
 
 func import_state(data: Dictionary) -> bool:
 	if not validate_state(data).is_empty():
 		return false
+	_encounters.entries.clear()
+	if data.has("creature_encounters"):
+		_encounters.import_state(data["creature_encounters"])
 	if data.has("behavior"):
 		_behavior.import_state(data["behavior"])
 	else:
@@ -181,16 +189,22 @@ static func validate_state(data: Dictionary) -> String:
 	if not BehaviorRules.is_integer(data.get("schema", 1), 1, SAVE_SCHEMA):
 		return "Unsupported progression schema."
 	if data.has("behavior"):
-		return Behavior.validate_state(data["behavior"])
-	if int(data.get("schema", 1)) >= SAVE_SCHEMA:
+		var problem: String = Behavior.validate_state(data["behavior"])
+		if not problem.is_empty():
+			return problem
+	elif int(data.get("schema", 1)) >= 3:
 		return "Missing behavior progression."
+	if data.has("creature_encounters"):
+		return Encounters.validate_state(data["creature_encounters"])
+	if int(data.get("schema", 1)) >= 4:
+		return "Missing creature encounters."
 	return ""
 
 
 static func has_unsupported_contract(data: Variant) -> bool:
 	if not data is Dictionary:
 		return false
-	return BehaviorRules.is_newer_version(data.get("schema", 1), SAVE_SCHEMA) or Behavior.has_unsupported_contract(data.get("behavior", {}))
+	return BehaviorRules.is_newer_version(data.get("schema", 1), SAVE_SCHEMA) or Behavior.has_unsupported_contract(data.get("behavior", {})) or Encounters.has_unsupported_contract(data.get("creature_encounters", {}))
 
 
 func apply_campaign_event(event: GameEvent) -> Dictionary:
@@ -226,8 +240,19 @@ func get_behavior_effect(effect_id: String, phase: int, body_value: float = 1.0,
 	return _behavior.calculate_effect(effect_id, phase, body_value, technology_bonus)
 
 
+func get_phase_progression_preview(phase: int) -> Dictionary:
+	var result: Dictionary = preload("res://core/progression/phase_progression_plan.gd").phase(phase)
+	if result.is_empty():
+		return result
+	result["wallet"] = _behavior.wallet(phase)
+	result["legacy"] = {}
+	for effect_id in ["group_cooperation", "group_defense"]:
+		result["legacy"][effect_id] = _behavior.calculate_effect(effect_id, phase)
+	return result
+
+
 func purchase_behavior_node(node_id: String) -> Dictionary:
-	if _behavior_purchase_active:
+	if is_behavior_transaction_active():
 		return {"ok": false, "reason": "purchase_in_progress"}
 	var state := get_node_or_null("/root/GameState")
 	var saves := get_node_or_null("/root/SaveGameService")
@@ -247,6 +272,68 @@ func purchase_behavior_node(node_id: String) -> Dictionary:
 	behavior_changed.emit()
 	behavior_node_purchased.emit(node_id)
 	return result
+
+
+func is_behavior_transaction_active() -> bool:
+	return _behavior_purchase_active or _encounter_commit_active
+
+
+func get_creature_encounter(identity: Dictionary, role: String, individual_seed: int) -> Dictionary:
+	return _encounters.get_entry(identity, role, individual_seed)
+
+
+## Partial trust/health changes schedule a snapshot; completed actions commit now.
+func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcome: String = "", context: Dictionary = {}) -> Dictionary:
+	if is_behavior_transaction_active():
+		return {"ok": false, "reason": "transaction_in_progress"}
+	var state := get_node("/root/GameState")
+	var saves := get_node("/root/SaveGameService")
+	if int(state.current_phase) != 0 or entry.get("body_id") != state.get_current_body()["id"]:
+		return {"ok": false, "reason": "wrong_phase_or_body"}
+	var key: String = str(entry.get("object_id", ""))
+	var before_entry: Dictionary = _encounters.entries.get(key, {}).duplicate(true)
+	if not _encounters.put(entry):
+		return {"ok": false, "reason": "invalid_or_full_encounter"}
+	if not immediate and outcome.is_empty():
+		saves.schedule_autosave()
+		return {"ok": true, "saved": false}
+	var campaign = state.campaign
+	var before_campaign: Dictionary = campaign.export_state()
+	var before_behavior: Dictionary = _behavior.export_state()
+	var receipt: Dictionary = {"ok": false, "reason": "no_reward"}
+	var event: GameEvent
+	if not outcome.is_empty():
+		event = campaign.next_event(GameEvent.Kind.CONFLICT_RESULT if outcome == "won" else GameEvent.Kind.INTERACTION,
+			entry["object_id"], 0, outcome)
+		event.encounter_id = "creature:" + str(entry["object_id"])
+		event.behavior_context = context.duplicate(true)
+		if not campaign.accept_event(event, 0):
+			_restore_encounter_entry(key, before_entry)
+			return {"ok": false, "reason": "invalid_event"}
+		receipt = _behavior.apply_event(event, campaign.data["id"], campaign.data["player_object_id"], 0)
+	# No reward/relationship observer is notified until the joint snapshot exists.
+	_encounter_commit_active = true
+	var saved: bool = saves.save_now()
+	if not saved:
+		_restore_encounter_entry(key, before_entry)
+		_behavior.import_state(before_behavior)
+		campaign.import_state(before_campaign)
+	_encounter_commit_active = false
+	if not saved:
+		return {"ok": false, "reason": "save_failed"}
+	if event != null:
+		behavior_changed.emit()
+		if receipt.get("ok", false):
+			behavior_rewarded.emit(receipt.duplicate(true))
+		state.campaign_event.emit(event.to_dict())
+	return {"ok": true, "saved": true, "reward": receipt}
+
+
+func _restore_encounter_entry(key: String, before: Dictionary) -> void:
+	if before.is_empty():
+		_encounters.entries.erase(key)
+	else:
+		_encounters.entries[key] = before
 
 
 func get_discovered_species_count() -> int:

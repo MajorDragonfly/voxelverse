@@ -84,6 +84,9 @@ func _ready() -> void:
 	_initialize_hud()
 	_create_message_label()
 	_update_hud()
+	var behavior := preload("res://creatures/behavior/player_behavior_controller.gd").new()
+	behavior.name = "BehaviorController"
+	add_child(behavior)
 
 
 func _process(delta: float) -> void:
@@ -285,6 +288,15 @@ func can_perform_action(action: StringName) -> bool:
 	return GameState.has_ability(action)
 
 
+func get_behavior_multiplier(effect_id: String) -> float:
+	return float(ProgressionService.get_behavior_effect(effect_id, GameState.current_phase).get("value", 1.0))
+
+
+func get_bite_damage() -> float:
+	# Body attack remains the raw source; purchased effects are never baked into it.
+	return clampf(attack_power * bite_damage_scale, 2.0, 80.0) * get_behavior_multiplier("attack_efficiency")
+
+
 func receive_damage(damage: float) -> void:
 	if is_dead or damage <= 0.0:
 		return
@@ -377,6 +389,7 @@ func export_runtime_state() -> Dictionary:
 		"health_ratio": get_health_ratio(),
 		"hunger_ratio": get_hunger_ratio(),
 		"thirst_ratio": get_thirst_ratio(),
+		"behavior_runtime": get_node("BehaviorController").export_state(),
 	}
 
 
@@ -400,6 +413,7 @@ func import_runtime_state(data: Dictionary) -> void:
 	current_thirst = maximum_thirst * clampf(float(data.get("thirst_ratio", 1.0)), 0.0, 1.0)
 	velocity = Vector3.ZERO
 	is_dead = false
+	get_node("BehaviorController").import_state(data.get("behavior_runtime", {}))
 	_update_hud()
 
 

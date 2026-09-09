@@ -198,7 +198,7 @@ func _migrate_schema_three() -> void:
 	_expect(backup.get("design_files") == legacy["design_files"], "Migration backup lost bundled editor data.")
 	_expect(FileAccess.get_file_as_string(TEST_SAVE) == old_text, "Loading rewrote the original before an explicit save.")
 	_expect(bool(saves.call("save_now")), "Migrated schema 4 could not be saved.")
-	_expect(int(Atomic.parse_dictionary(FileAccess.get_file_as_string(TEST_SAVE))["schema"]) == 4, "New points are not protected from old schema-3 writers.")
+	_expect(int(Atomic.parse_dictionary(FileAccess.get_file_as_string(TEST_SAVE))["schema"]) == saves.SAVE_SCHEMA, "New progress is not protected from old writers.")
 
 
 func _game_event(target: String, outcome: String = "befriended") -> GameEvent:

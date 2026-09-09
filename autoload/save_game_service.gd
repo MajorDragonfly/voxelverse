@@ -4,7 +4,7 @@ signal game_saved(path: String)
 signal game_loaded(path: String)
 signal save_failed(message: String)
 
-const SAVE_SCHEMA: int = 4
+const SAVE_SCHEMA: int = 5
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Designs = preload("res://core/persistence/design_store.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
@@ -140,7 +140,7 @@ func load_now(custom_path: String = "") -> bool:
 			data["design_files"] = files
 		else:
 			last_migration_report.assign(data.get("migration_report", []))
-		last_migration_report.append("Schema %d -> 4; campaign, location and designs retained; behavior wallets initialized without retroactive rewards." % schema)
+		last_migration_report.append("Schema %d -> 5; campaign, location, designs and existing behavior retained; missing encounters initialized without retroactive rewards." % schema)
 	else:
 		last_migration_report.assign(data.get("migration_report", []))
 	if source_path != target_path:
@@ -194,8 +194,17 @@ func _validate_save(data: Dictionary) -> String:
 	var progression_problem: String = Progression.validate_state(data["progression"])
 	if not progression_problem.is_empty():
 		return progression_problem
-	if schema >= 4 and int(data["progression"].get("schema", 0)) != Progression.SAVE_SCHEMA:
+	if schema >= 4 and int(data["progression"].get("schema", 0)) < 3:
 		return "Schema 4 requires complete behavior progression."
+	if schema >= 5 and int(data["progression"].get("schema", 0)) != Progression.SAVE_SCHEMA:
+		return "Schema 5 requires persistent creature encounters."
+	var runtime: Variant = data["player"].get("behavior_runtime", {})
+	if not runtime is Dictionary:
+		return "Invalid player behavior state."
+	for key in runtime:
+		var value: Variant = runtime[key]
+		if key not in ["stamina", "recovery_delay"] or not (value is int or value is float) or not is_finite(float(value)) or float(value) < 0.0 or float(value) > (100.0 if key == "stamina" else 0.8):
+			return "Invalid player stamina state."
 	var state: Dictionary = data["game_state"]
 	if int(state.get("world_seed", 0)) <= 0 or int(state.get("phase", -1)) not in range(6):
 		return "Invalid world seed or phase."

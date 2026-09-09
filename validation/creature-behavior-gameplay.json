@@ -1,0 +1,483 @@
+{
+  "status": "local_verified_ci_pending",
+  "base_commit": "60f61e018e61a98824846d2bb020a0d6c1c18cb9",
+  "local": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.608
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.068
+      },
+      {
+        "name": "asset_pipeline_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.38
+      },
+      {
+        "name": "behavior_progression_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.808
+      },
+      {
+        "name": "behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.64
+      },
+      {
+        "name": "campaign_foundation_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.989
+      },
+      {
+        "name": "creature_behavior_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.74
+      },
+      {
+        "name": "creature_builder_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.529
+      },
+      {
+        "name": "creature_editor_v7_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.173
+      },
+      {
+        "name": "creature_v5_smoke_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.0
+      },
+      {
+        "name": "drainage_network_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.637
+      },
+      {
+        "name": "environment_cluster_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.825
+      },
+      {
+        "name": "environment_playtest_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.65
+      },
+      {
+        "name": "environment_production_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.58
+      },
+      {
+        "name": "gameplay_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.709
+      },
+      {
+        "name": "meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.707
+      },
+      {
+        "name": "modular_assembly_framework_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.53
+      },
+      {
+        "name": "planet_diversity_v9_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.333
+      },
+      {
+        "name": "planet_generation_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 6.491
+      },
+      {
+        "name": "planet_sphere_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.083
+      },
+      {
+        "name": "planet_sphere_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 44.257
+      },
+      {
+        "name": "planet_transition_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 12.115
+      },
+      {
+        "name": "runtime_geometry_batch_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.531
+      },
+      {
+        "name": "terrain_transition_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.752
+      },
+      {
+        "name": "water_continuity_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.702
+      },
+      {
+        "name": "water_depth_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.887
+      },
+      {
+        "name": "world_evolution_v2_ci_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.542
+      },
+      {
+        "name": "world_layered_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.806
+      },
+      {
+        "name": "world_runtime_continuity_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.078
+      },
+      {
+        "name": "planet_lab_entry",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.136
+      },
+      {
+        "name": "main_shutdown_45",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.256
+      },
+      {
+        "name": "main_shutdown_150",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.728
+      },
+      {
+        "name": "main",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.0
+      },
+      {
+        "name": "shutdown_15838_terrain",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.193
+      },
+      {
+        "name": "shutdown_15838_placement",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.16
+      },
+      {
+        "name": "shutdown_15838_resources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.255
+      },
+      {
+        "name": "shutdown_15838_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.913
+      },
+      {
+        "name": "shutdown_15838_cluster_build",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.886
+      },
+      {
+        "name": "shutdown_15838_cluster_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.327
+      },
+      {
+        "name": "shutdown_63352_terrain",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.271
+      },
+      {
+        "name": "shutdown_63352_placement",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.157
+      },
+      {
+        "name": "shutdown_63352_resources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.639
+      },
+      {
+        "name": "shutdown_63352_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.632
+      },
+      {
+        "name": "shutdown_63352_cluster_build",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 8.083
+      },
+      {
+        "name": "shutdown_63352_cluster_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 6.951
+      },
+      {
+        "name": "shutdown_23757_terrain",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.28
+      },
+      {
+        "name": "shutdown_23757_placement",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.938
+      },
+      {
+        "name": "shutdown_23757_resources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.027
+      },
+      {
+        "name": "shutdown_23757_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.221
+      },
+      {
+        "name": "shutdown_23757_cluster_build",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 8.53
+      },
+      {
+        "name": "shutdown_23757_cluster_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 8.54
+      },
+      {
+        "name": "streaming_cpu",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.5
+      }
+    ]
+  },
+  "measured_befriend_seconds": {
+    "base": 8.0,
+    "with_openness": 7.0
+  },
+  "integration": "No unfinished parallel branch merged.",
+  "remaining": [
+    "Graphical F/H/K and screenshots in CI",
+    "Native Windows and Linux package validation",
+    "Manual target-PC gameplay"
+  ],
+  "local_linux_export": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "platform": "linux",
+    "checks": [
+      {
+        "name": "release_export",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.639
+      },
+      {
+        "name": "packaged_main",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.865
+      },
+      {
+        "name": "packaged_planet_lab",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.659
+      },
+      {
+        "name": "packaged_creature_builder_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.53
+      },
+      {
+        "name": "packaged_modular_assembly_framework_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.433
+      },
+      {
+        "name": "packaged_gameplay_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.722
+      },
+      {
+        "name": "packaged_meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.729
+      },
+      {
+        "name": "packaged_planet_sphere_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.193
+      },
+      {
+        "name": "packaged_behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.575
+      },
+      {
+        "name": "packaged_creature_behavior_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.273
+      },
+      {
+        "name": "packaged_planet_15838",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 10.972
+      },
+      {
+        "name": "packaged_planet_63352",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.057
+      },
+      {
+        "name": "packaged_planet_23757",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.25
+      }
+    ],
+    "probes": [
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "verdant",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 80,
+        "loaded_meshes": 63,
+        "passed": true,
+        "planet_transition": "A-B-A",
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 15838,
+        "user_data_dir": "/tmp/voxelverse-export-gewrngo4/seed-15838/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "autumn",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 19,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 63352,
+        "user_data_dir": "/tmp/voxelverse-export-gewrngo4/seed-63352/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "violet",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 130,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 23757,
+        "user_data_dir": "/tmp/voxelverse-export-gewrngo4/seed-23757/xdg_data_home/godot/app_userdata/Voxelverse"
+      }
+    ],
+    "archive": {
+      "name": "voxelverse-linux-x86_64.zip",
+      "bytes": 31327777,
+      "sha256": "efbb030c9b04af6c4855cb682e8ea3aaa3775367eaa6d1883ea3ce44699163d3"
+    },
+    "passed": true
+  },
+  "final_targeted": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "creature_behavior_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.646
+      },
+      {
+        "name": "behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.643
+      }
+    ]
+  }
+}

@@ -71,6 +71,9 @@ func _ready() -> void:
 	_player = get_tree().get_first_node_in_group(&"player") as Node3D
 	_build_species()
 	_campaign_identity = _create_campaign_identity()
+	var social := preload("res://creatures/behavior/creature_social_component.gd").new()
+	social.name = "SocialBehavior"
+	add_child(social)
 	_choose_wander_state()
 
 
@@ -171,6 +174,9 @@ func interact(actor: Node) -> void:
 func receive_creature_attack(damage: float, attacker: Node = null) -> void:
 	if is_dead or damage <= 0.0:
 		return
+	if attacker != null and attacker.is_in_group(&"player") and get_node("/root/GameState").current_phase == 0:
+		get_node("SocialBehavior").receive_player_attack(damage, attacker)
+		return
 	if attacker != null:
 		_register_discovery(attacker)
 		_threat = attacker as Node3D
@@ -187,6 +193,8 @@ func receive_creature_attack(damage: float, attacker: Node = null) -> void:
 		)
 	if current_health <= 0.0:
 		_die(attacker)
+	if has_node("SocialBehavior"):
+		get_node("SocialBehavior").record_external_damage(attacker)
 
 
 func get_health_ratio() -> float:
@@ -222,6 +230,8 @@ func _register_discovery(actor: Node) -> void:
 
 
 func _update_role_direction() -> void:
+	if has_node("SocialBehavior") and get_node("SocialBehavior").controls_movement():
+		return
 	if _player == null or not is_instance_valid(_player):
 		_player = get_tree().get_first_node_in_group(&"player") as Node3D
 	if _threat_timer > 0.0 and _threat != null and is_instance_valid(_threat):
@@ -293,16 +303,26 @@ func _process_carcass(delta: float) -> void:
 
 
 func _try_feed_actor_from_carcass(actor: Node) -> void:
+	if actor is Node3D and global_position.distance_to(actor.global_position) > 3.6:
+		_show_actor_message(actor, "Zum Fressen näher herangehen.")
+		return
 	if carcass_food_remaining <= 0.01:
 		queue_free()
 		return
 	if not actor.has_method("consume_food"):
 		return
 	var serving: float = minf(carcass_bite_nutrition, carcass_food_remaining)
+	var before_actor: Dictionary = actor.export_runtime_state() if actor.has_method("export_runtime_state") else {}
 	var consumed: bool = bool(actor.call("consume_food", "meat", serving))
 	if not consumed:
 		return
 	carcass_food_remaining = maxf(carcass_food_remaining - serving, 0.0)
+	if has_node("SocialBehavior") and get_node("/root/GameState").current_phase == 0 and not get_node("SocialBehavior").store_carcass():
+		carcass_food_remaining += serving
+		if not before_actor.is_empty():
+			actor.import_runtime_state(before_actor)
+		_show_actor_message(actor, "Speichern fehlgeschlagen. Nahrung wurde zurückgesetzt.")
+		return
 	if carcass_food_remaining <= 0.01:
 		_show_actor_message(actor, "Carcass consumed.")
 		queue_free()

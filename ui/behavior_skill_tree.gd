@@ -25,6 +25,8 @@ var _message: Label
 var _close: Button
 var _tree_tab: Button
 var _journal_tab: Button
+var _phase_preview: Label
+var _phase_choice: OptionButton
 var _previous_mouse_mode: int = Input.MOUSE_MODE_VISIBLE
 var _previous_focus: WeakRef
 var _owns_pause: bool = false
@@ -177,9 +179,18 @@ func _build() -> void:
 	tree_area.add_child(_branches)
 	for track in ["social", "aggression"]:
 		_build_branch(track)
-	var notice := Style.label("Ausbauvorschau: Verhaltenspunkte können im normalen Spiel noch nicht verdient werden. Die gezeigten Boni sind vorbereitet, wirken aber noch nicht auf Spielaktionen. Vorhandene Punkte und Käufe werden bereits gespeichert.", 17, Style.MUTED)
+	var notice := Style.label("F halten: Befreunden · H: Verletzte versorgen · Beißen: Jagd oder feindlichen Konflikt abschließen. Eine Kreatur gibt höchstens einmal Punkte; jeder Ast hat ein Verdienstlimit von 24 Punkten. Offenheit, Zusammenhalt, Jagdinstinkt und Ausdauer wirken im Spiel.", 17, Style.MUTED)
 	notice.name = "GameplayAvailability"
 	tree_area.add_child(notice)
+	_phase_choice = OptionButton.new()
+	_phase_choice.name = "PhasePreviewChoice"
+	for index in range(PHASES.size()):
+		_phase_choice.add_item(PHASES[index] + (" · spielbar" if index == 0 else " · geplant"), index)
+	_phase_choice.item_selected.connect(func(_index: int) -> void: _refresh_phase_preview())
+	tree_area.add_child(_phase_choice)
+	_phase_preview = Style.label("", 17, Style.MUTED)
+	_phase_preview.name = "PhasePreview"
+	tree_area.add_child(_phase_preview)
 	var detail_panel := PanelContainer.new()
 	detail_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	detail_panel.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
@@ -264,6 +275,7 @@ func refresh() -> void:
 		var color: Color = Style.SOCIAL if definition["track"] == "social" else Style.AGGRESSION
 		_cards[id]["button"].add_theme_stylebox_override("normal", Style.box(Color("2b4149") if id == _selected else Style.PANEL, color if id == _selected else Color("40535c"), 12))
 	_update_details()
+	_refresh_phase_preview()
 
 
 func _select(id: String) -> void:
@@ -278,7 +290,7 @@ func _update_details() -> void:
 		_purchase.disabled = true
 		return
 	_title.text = definition["name"]
-	_description.text = "Vorgesehene Wirkung\n" + str(definition["description"])
+	_description.text = str(definition["description"])
 	var names: PackedStringArray = []
 	for id: String in definition["requires"]:
 		names.append(str(_nodes.get(id, {}).get("name", id)))
@@ -287,7 +299,7 @@ func _update_details() -> void:
 	var legacy: bool = not definition["legacy"].is_empty()
 	_effect.text = "Vermächtnis · für Stamm und spätere Phasen vorbereitet" if legacy else "Kreaturenbonus · endet mit der Kreaturenphase"
 	if definition["purchased"]:
-		_effect.text += "\nGekauft · " + ("ab Stamm vorgesehen" if legacy and phase == 0 else "in dieser Phase vorgesehen" if legacy or phase == 0 else "Kreaturenphase bereits verlassen")
+		_effect.text += "\nGekauft · " + ("ab Stamm vorgesehen" if legacy and phase == 0 else "in dieser Phase vorgesehen · Gruppenmechanik noch offen" if legacy else "jetzt im Spiel aktiv" if phase == 0 else "Kreaturenphase bereits verlassen")
 	var status: Dictionary = definition["purchase_status"]
 	_purchase.disabled = not status["ok"] or _purchase_active
 	_purchase.text = "Freigeschaltet" if definition["purchased"] else "Freischalten · %d %s" % [int(definition["cost"]), "Sozialpunkte" if definition["track"] == "social" else "Aggressionspunkte"]
@@ -320,6 +332,18 @@ func _reason(reason: String) -> String:
 		"save_failed": return "Speichern fehlgeschlagen. Punkte und Freischaltung wurden zurückgesetzt. Du kannst den Kauf erneut versuchen."
 		"purchase_in_progress": return "Der vorherige Kauf wird noch gespeichert."
 		_: return "Freischaltung momentan nicht möglich. Es wurden keine Punkte ausgegeben."
+
+
+func _refresh_phase_preview() -> void:
+	if _phase_preview == null:
+		return
+	var index: int = _phase_choice.selected
+	var data: Dictionary = get_node("/root/ProgressionService").get_phase_progression_preview(index)
+	_phase_preview.text = ("Aktueller Spielablauf" if data["implemented"] else "Planung · noch keine spielbare Phase") + " · " + str(data["scope"])
+	_phase_preview.text += "\nSozial: %s\nAggressiv: %s\n%s" % [data["social"], data["aggression"], data["next"]]
+	if index > 0:
+		_phase_preview.text += "\nVorbereitete Vermächtnisse: Koordination +%d %% · Verteidigung +%d %%" % [roundi((float(data["legacy"]["group_cooperation"]["value"]) - 1.0) * 100.0), roundi((float(data["legacy"]["group_defense"]["value"]) - 1.0) * 100.0)]
+		_phase_preview.text += "\nJede Phase verdient eigene Punkte. Kreaturenpunkte bleiben ihrem Baum zugeordnet."
 
 
 func _show_tab(journal: bool) -> void:

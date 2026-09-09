@@ -15,11 +15,21 @@ var _hit_reaction_remaining: float = 0.0
 func receive_creature_attack(damage: float, attacker: Node = null) -> void:
 	if is_dead or damage <= 0.0:
 		return
+	if attacker != null and attacker.is_in_group(&"player") and get_node("/root/GameState").current_phase == 0:
+		get_node("SocialBehavior").receive_player_attack(damage, attacker)
+		return
 	var was_alive: bool = not is_dead
 	super.receive_creature_attack(damage, attacker)
 	_hit_reaction_remaining = hit_reaction_duration
 	health_changed.emit(current_health, maximum_health)
 	if was_alive and is_dead:
+		creature_defeated.emit(self)
+
+
+func show_behavior_hit() -> void:
+	_hit_reaction_remaining = hit_reaction_duration
+	health_changed.emit(current_health, maximum_health)
+	if is_dead:
 		creature_defeated.emit(self)
 
 
