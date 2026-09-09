@@ -460,9 +460,7 @@ Loading resource: res://.godot/imported/tall_pine_v2_species1_near_0.png-d3c32fb
 Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_mid.glb
 Loading resource: res://.godot/imported/tall_pine_v2_species1_mid.glb-7449f037761d2527d7532ed4f86fe1c2.scn
 Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_mid_0.png
-Loading WARNING: Could not commit save: user://missing-frontend-directory/save.json (File not found)
-     at: push_warning (core/variant/variant_utility.cpp:1034)
-resource: res://.godot/imported/tall_pine_v2_species1_mid_0.png-499411d585fb409d0b0d8d7daed01551.ctex
+Loading resource: res://.godot/imported/tall_pine_v2_species1_mid_0.png-499411d585fb409d0b0d8d7daed01551.ctex
 Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_far.glb
 Loading resource: res://.godot/imported/tall_pine_v2_species1_far.glb-8d99544f1d0dd7b3e4ba6deee5e6f207.scn
 Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_far_0.png
@@ -479,6 +477,32 @@ Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v
 Loading resource: res://.godot/imported/dense_bush_v2_far.glb-5b094c383636fa122104551ca99d7cc7.scn
 Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_far_0.png
 Loading resource: res://.godot/imported/dense_bush_v2_far_0.png-0828fa9d2340f0de2032a59802efa636.ctex
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_near.glb
+Loading resource: res://.godot/imported/layered_rock_v2_species2_near.glb-3616619f21c0ad77c1f79d7f030b5506.scn
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_near_0.png
+Loading resource: res://.godot/imported/layered_rock_v2_species2_near_0.png-007b3bd7f08cfe7e4df8cd2c65ce688c.ctex
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_mid.glb
+Loading resource: res://.godot/imported/layered_rock_v2_species2_mid.glb-8112eed440f8006efb9ce1fc2e76ee68.scn
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_mid_0.png
+Loading resource: res://.godot/imported/layered_rock_v2_species2_mid_0.png-4b48d5c38a1125379b7417e7fbc55dd7.ctex
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_far.glb
+Loading resource: res://.godot/imported/layered_rock_v2_species2_far.glb-91f95545d99006e8c1e434816156f1b8.scn
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_far_0.png
+Loading resource: res://.godot/imported/layered_rock_v2_species2_far_0.png-19001096bf94e6e4dd8182a5ea555036.ctex
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_near.glb
+Loading resource: res://.godot/imported/fern_cluster_v2_species1_near.glb-cc564bf4c674e26c0f579f0f26a9ae1b.scn
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_near_0.png
+Loading resource: res://.godot/imported/fern_cluster_v2_species1_near_0.png-91c714923002d949332b15c48044b315.ctex
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_mid.glb
+Loading resource: res://.godot/imported/fern_cluster_v2_species1_mid.glb-aa46c6eb52f4120ae06c90d855d20a48.scn
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_mid_0.png
+Loading resource: res://.godot/imported/fern_cluster_v2_species1_mid_0.png-d21ac96b4b5e1a845740466dcefd790c.ctex
+Loading resource: res://assets/WARNING: Could not commit save: user://missing-frontend-directory/save.json (File not found)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_far.glb
+Loading resource: res://.godot/imported/fern_cluster_v2_species1_far.glb-3aae52e897866c972785db00889dd5b3.scn
+Loading resource: res://assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_far_0.png
+Loading resource: res://.godot/imported/fern_cluster_v2_species1_far_0.png-33497a4b71cf4ca66a29133d1eb4fb14.ctex
 Loading resource: res://.godot/exported/133200997/export-d30e63e8981b7be95e86593e3205a4e7-main_menu.scn
 Loading resource: res://.godot/exported/133200997/export-435f623093a3e2498450e744191b98a6-main.scn
 Loading resource: res://.godot/exported/133200997/export-bc6a3ef74d18bf0268930042c9cc99d5-player.scn

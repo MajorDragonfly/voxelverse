@@ -11,5 +11,7 @@ static func finish(tree: SceneTree, code: int = 0) -> void:
 		audio.queue_free()
 		await tree.process_frame
 		# Mixer cleanup follows wall time, even during accelerated simulation.
-		await tree.create_timer(0.15, true, false, true).timeout
+		var release_until: int = Time.get_ticks_msec() + 150
+		while Time.get_ticks_msec() < release_until:
+			await tree.process_frame
 	tree.quit(code)

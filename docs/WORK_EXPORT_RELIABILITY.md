@@ -9,7 +9,8 @@ Commit und lokal/remote identischer Git-Quellbaum stehen im PR-Text.
 
 Die veröffentlichten Fachbranches wurden vor der Änderung geprüft; keine
 Dateiüberschneidung mit den fünf bearbeiteten Bestandsdateien. Genaue Stände in
-`validation/export-reliability/branch-checks.json`. Nicht veröffentlichte Arbeit
+`validation/export-reliability/branch-checks.json`. Beim Abschlussabgleich kam
+eine D2-Änderung an `core/runtime_shutdown.gd` hinzu, siehe unten. Nicht veröffentlichte Arbeit
 anderer Chats ist nicht sichtbar. Planeten-, Menü-, Kreaturen- und Speicherschemata
 werden hier nicht umgebaut. `ROADMAP.md` bleibt beim Integrationschat.
 
@@ -42,8 +43,21 @@ stoppte der Manager die Musik erst dann. `runtime_shutdown.gd` ruft jetzt
 `AudioManager.prepare_shutdown()` auf, solange die Abspielknoten noch im Baum
 sind. Musik, Scanner-, Umgebungs-, Welt- und UI-Töne werden beendet, ausstehende
 Audioeinstellungen gespeichert und anschließend der Manager freigegeben.
-Die bestehende kurze Wartezeit für den Mixer bleibt erhalten. `_exit_tree()`
-verwendet dieselbe Aufräumfunktion als Rückfallebene.
+`_exit_tree()` verwendet dieselbe Aufräumfunktion als Rückfallebene.
+
+Der erste lokale Release bestand nach dieser Korrektur alle 29 Prüfungen; der
+anschließende CI-Lauf deckte einen weiteren Zeitfehler auf. Der bisherige
+`SceneTreeTimer` konnte nach einem langsamen Frame mit dessen bereits verstrichener
+Zeit verrechnet werden und praktisch sofort auslösen. Eine neue Probe mit einem
+absichtlich blockierenden 350-ms-Frame maß nur **2.371 Mikrosekunden** Wartezeit
+nach dem Austritt des AudioManagers. Die Wartezeit wird jetzt mit der realen Uhr
+begrenzt; dieselbe Probe maß danach **159.586 Mikrosekunden**.
+
+Die Zeitkorrektur entspricht der inzwischen von D2 veröffentlichten Änderung
+in Commit `38d6177a27a228fdf0ea8418062f710ab90b558e`. Hier ist ausschließlich
+diese gemeinsame Beenden-Stelle berücksichtigt; der D2-Fachbranch wurde nicht
+zusammengeführt. Unsere zusätzliche frühe Audiofreigabe bleibt erhalten. Eine
+Drei-Wege-Vorschau für die gemeinsame Datei ist textuell konfliktfrei.
 
 Der neue Shutdown-Test startet echte Ogg-Wiedergabe und prüft mit schwachen
 Referenzen, dass sie nach dem Aufräumen freigegeben ist: im laufenden und im
@@ -78,10 +92,12 @@ Vollständiger lokaler Linux-Release erfolgreich: **29 Prüfungen** einschließl
 Startmenü, Planetenlabor, echter Eingaben, Spielständen, Stammeswelt/Neustart und
 drei Planeten-Seeds. ZIP und SHA-256 wurden erst nach erfolgreicher Abnahme erzeugt.
 
-Fünf Audioprüfungen erfolgreich:
+Sechs Audioprüfungen erfolgreich:
 
 - `audio_scene_lifecycle_test`: Aushängen, Wiedereinbinden und vorgemerktes Löschen.
 - `audio_shutdown_test`: Freigabe echter Musikwiedergabe, laufend und pausiert.
+- `runtime_shutdown_test`: Mindestens 140 ms tatsächlich verstrichene Mixerzeit
+  nach einem absichtlich langsamen Frame; Sollwartezeit 150 ms.
 - Bestehende `audio_runtime_test`, `music_runtime_test`, `audio_expansion_test`.
 
 Die neuen Tests werden von der bestehenden rekursiven Testsuche automatisch
@@ -90,6 +106,16 @@ ausgeführt. Vorher-/Nachher-Nachweise und Exportergebnisse stehen in
 Die native Windows-Abnahme wird auf dem GitHub-Windows-Runner ausgeführt; genaue
 Ergebnisse und der geprüfte Commit stehen im PR. Keine lokale Windows-Ausführung
 und keine neue Grafik-/FPS-Abnahme.
+
+Im ersten Windows-CI-Lauf auf `821fcd470c380ddbb8e69b5aedcfa907baeec4eb`
+bestanden die nativen Menü-, Eingabe- und Planetenprüfungen. Später scheiterte
+`packaged_tribal_age_world_test`: Bei Seed 15838 fand die Prüfung unter Windows
+keinen geeigneten Heimat-/Dorfplatz (`sites=13`, Rückmeldung: fester, möglichst
+ebener Boden erforderlich). Derselbe Test besteht lokal unter Linux. Die Ursache
+dieses zusätzlichen Plattformbefunds ist noch offen. Der Dorfchat bearbeitet
+`tests/tribal_age_world_test.gd` bereits in `agent/m6-village-growth`; hier werden
+weder seine Platzierungsregeln geändert noch die Prüfung abgeschwächt.
+Der weitere Windows-Status nach der Zeitkorrektur ist im PR dokumentiert.
 
 Aus dem Projektverzeichnis:
 
