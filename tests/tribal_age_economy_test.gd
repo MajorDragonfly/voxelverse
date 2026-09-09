@@ -43,12 +43,13 @@ func _run() -> void:
 	var old: Dictionary = data.duplicate(true)
 	old["schema"] = 2
 	old.erase("economy")
+	old.erase("housing")
 	for kind: String in Economy.EXTRA:
 		old["stock"].erase(kind)
 	for kind: String in ["water", "fiber"]:
 		old["deposits"].erase(kind)
 	for member: Dictionary in old["members"]:
-		for key in ["hydration", "profession", "paused_order", "task", "blocked"]:
+		for key in ["hydration", "profession", "paused_order", "task", "blocked", "species_id", "faction_id", "construction_id"]:
 			member.erase(key)
 	tribe.body()["tribe"] = old
 	# No live tick is allowed on the deliberately old snapshot.
@@ -60,8 +61,12 @@ func _run() -> void:
 	paused = false
 	await _frames(15)
 	data = tribe.village()
-	_expect(int(data["schema"]) == 3 and data["economy"]["stations"].is_empty() and int(data["stock"]["water"]) == 0, "Migration granted water or workstations.")
+	_expect(int(data["schema"]) == Model.SCHEMA and data["economy"]["stations"].is_empty() and int(data["stock"]["water"]) == 0, "Migration granted water or workstations.")
 	_expect(data["members"].map(func(m: Dictionary) -> String: return m["id"]) == ids and FileAccess.get_file_as_string(SAVE) == bytes, "Migration replaced residents or rewrote old bytes.")
+	# Keep this three-worker economy probe at three beds. Population growth has
+	# a separate integration test; the legacy migration above retains both huts.
+	data["housing"]["homes"][1]["kind"] = "tent"
+	data["huts"] = 1
 	# Empty jobs persist before there is a replacement source.
 	tribe.select_all()
 	_expect(tribe.issue_order("wood"), "Cannot assign empty wood source.")

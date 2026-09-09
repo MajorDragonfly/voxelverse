@@ -4,11 +4,12 @@ extends RefCounted
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
-const SCHEMA: int = 3
+const Housing = preload("res://world/tribe/village_housing.gd")
+const SCHEMA: int = 4
 const KINDS: Array[String] = ["wood", "stone", "food"]
-const ORDERS: Array[String] = ["wait", "move", "wood", "stone", "food", "tool", "hut", "feed", "garden", "supply"]
-const COSTS: Dictionary = {"tool": {"wood": 3, "stone": 2}, "hut": {"wood": 6, "stone": 3}, "garden": {"wood": 4, "stone": 1}}
-const WORK: Dictionary = {"tool": 10.0, "hut": 20.0, "garden": 15.0}
+const ORDERS: Array[String] = ["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "feed", "garden", "supply"]
+const COSTS: Dictionary = {"tool": {"wood": 3, "stone": 2}, "hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}, "garden": {"wood": 4, "stone": 1}}
+const WORK: Dictionary = {"tool": 10.0, "hut": 20.0, "tent": 15.0, "garden": 15.0}
 const STORAGE: int = 48
 const FOOD_TARGET: int = 12
 const GROW_SECONDS: float = 20.0
@@ -32,6 +33,7 @@ static func create(home: Dictionary, campaign: Dictionary, player: Dictionary, s
 		"sites": sites["huts"].duplicate(true), "project": {}, "delivered": 0, "meals": 0,
 		"garden": 0, "growth": 0.0, "grown": 0}
 	Economy.install(data)
+	Housing.install(data)
 	return data
 
 static func upgrade(data: Dictionary) -> bool:
@@ -41,14 +43,16 @@ static func upgrade(data: Dictionary) -> bool:
 		return false
 	if old == 1:
 		data.merge({"garden": 0, "growth": 0.0, "grown": 0}, true)
-	Economy.install(data)
+	if old < 3:
+		Economy.install(data)
+	Housing.install(data)
 	data["schema"] = SCHEMA
 	return true
 
 static func cargo_count(data: Dictionary, kind: String) -> int:
 	var count: int = 0
 	for member: Dictionary in data["members"]:
-		count += 1 if member["cargo"] == kind else 0
+		count += 1 if member["cargo"] == kind and member.get("construction_id", "") == "" else 0
 	return count
 
 static func available_storage(data: Dictionary, kind: String) -> int:
@@ -72,6 +76,7 @@ static func grow(data: Dictionary, delta: float) -> bool:
 static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> String:
 	if not value is Dictionary or not integer(value.get("schema"), 1, SCHEMA):
 		return "Nicht unterstützter Stammesstand."
+	var growing: bool = int(value["schema"]) >= 4
 	var expanded: bool = int(value["schema"]) >= 3
 	var renewable: bool = int(value["schema"]) >= 2
 	if expanded:
@@ -89,15 +94,19 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 	if value.get("anchor") != home["anchor"] or not point(value.get("anchor")):
 		return "Ungültiger Dorfplatz."
 	var members: Variant = value.get("members")
-	if not members is Array or members.size() != 3:
+	if not members is Array or members.size() < 3 or members.size() > (Housing.MAX_RESIDENTS if growing else 3):
 		return "Der Stamm benötigt seine drei ursprünglichen Mitglieder."
 	var ids: Array = [campaign["player_object_id"], home["members"][0]["id"], home["members"][1]["id"]]
-	for i in range(3):
+	for i in range(3, members.size()):
+		ids.append(Housing.resident_id(value, i))
+	for i in range(members.size()):
 		var member: Variant = members[i]
 		if not member is Dictionary or member.get("id") != ids[i] or not member.get("name") is String or member["name"].is_empty() or member["name"].length() > 32:
 			return "Ungültiges Stammesmitglied."
 		if not local_point(member.get("position"), value["anchor"]) or not local_point(member.get("destination"), value["anchor"]) or member.get("order") not in (ORDERS + Economy.ORDERS if expanded else ORDERS) or member.get("stage") not in (["outbound", "return", "meal", "drink"] if expanded else ["outbound", "return", "meal"]) or member.get("cargo") not in ([""] + Economy.RESOURCES if expanded else ["", "wood", "stone", "food"]) or not number(member.get("work"), 0, 4) or not number(member.get("hunger"), 0, 100):
 			return "Ungültiger Auftrag oder Zustand eines Bewohners."
+		if not growing and member["order"] == "tent":
+			return "Zelte benötigen Stammesformat 4."
 		if not renewable and (member["order"] in ["garden", "supply"] or member["stage"] == "meal"):
 			return "Versorgungsauftrag benötigt Stammesformat 2."
 		if member["stage"] in ["meal", "drink"] and (member["cargo"] != "" or member["order"] in ["wait", "feed"]):
@@ -114,12 +123,12 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 		var produced: int = int(value.get("grown", 0)) if kind == "food" and renewable else 0
 		if expanded and kind in ["wood", "stone"]:
 			produced = int(value.get("economy", {}).get("produced", {}).get(kind, 0))
-		if int(deposit["remaining"]) + int(value["stock"][kind]) + carried > 48 + produced or int(value["stock"][kind]) + carried > STORAGE:
+		if int(deposit["remaining"]) + int(value["stock"][kind]) + carried > 48 + produced or int(value["stock"][kind]) + cargo_count(value, kind) > STORAGE:
 			return "Material wurde vervielfacht."
 	for key in ["tools", "huts", "delivered", "meals"]:
 		if not integer(value.get(key), 0, 1000000000 if renewable else 144):
 			return "Ungültiger Dorffortschritt."
-	if int(value["tools"]) > 1 or int(value["huts"]) > 2 or not value.get("sites") is Array or value["sites"].size() != 2:
+	if int(value["tools"]) > 1 or int(value["huts"]) > (Housing.MAX_HOMES if growing else 2) or not value.get("sites") is Array or value["sites"].size() != 2:
 		return "Ungültige Dorfgebäude."
 	if renewable and int(value["garden"]) == 1 and int(value["tools"]) != 1:
 		return "Ein Wurzelgarten benötigt ein Steinwerkzeug."
@@ -130,9 +139,9 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 	if not project is Dictionary:
 		return "Ungültige Baustelle."
 	if not project.is_empty():
-		if project.get("kind") not in (["tool", "hut", "garden"] + Economy.STATIONS.keys() if expanded else ["tool", "hut", "garden"]) or not number(project.get("progress"), 0, 20):
+		if project.get("kind") not in (["tool", "hut", "garden", "tent"] + Economy.STATIONS.keys() if growing else ["tool", "hut", "garden"] + Economy.STATIONS.keys() if expanded else ["tool", "hut", "garden"]) or not number(project.get("progress"), 0, 20):
 			return "Ungültiger Baufortschritt."
-		if (project["kind"] == "tool" and int(value["tools"]) != 0) or (project["kind"] == "hut" and (int(value["tools"]) != 1 or int(value["huts"]) >= 2)):
+		if (project["kind"] == "tool" and int(value["tools"]) != 0) or (project["kind"] == "hut" and (int(value["tools"]) != 1 or (not growing and int(value["huts"]) >= 2))):
 			return "Baustelle ist bereits abgeschlossen oder ohne Werkzeug."
 		if project["kind"] == "garden" and (not renewable or int(value["tools"]) != 1 or int(value["garden"]) != 0):
 			return "Ungültiger Gartenbau."
@@ -140,7 +149,11 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 			if int(value["tools"]) != 1 or not local_point(project.get("position"), value["anchor"]) or value.get("economy", {}).get("stations", {}).has(project["kind"]):
 				return "Ungültige Arbeitsplatzbaustelle."
 	if expanded:
-		return Economy.validate(value)
+		var problem: String = Economy.validate(value)
+		if not problem.is_empty():
+			return problem
+	if growing:
+		return Housing.validate(value)
 	return ""
 
 static func number(value: Variant, low: float, high: float) -> bool:

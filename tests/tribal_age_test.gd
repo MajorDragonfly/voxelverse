@@ -96,6 +96,7 @@ func _run() -> void:
 	await _frames(3)
 	_expect(not paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing tribal journal restored creature mouse capture.")
 	await _capture("02_group")
+	await _click(tribe.panel._collapse)
 	var identity: String = str(tribe.village()["members"][0]["id"])
 	var screen_point: Vector2 = tribe.camera.unproject_position(player.global_position + Vector3.UP)
 	await _world_click(screen_point, MOUSE_BUTTON_LEFT)
@@ -116,6 +117,7 @@ func _run() -> void:
 	await _frames(65)
 	_expect(player.global_position.distance_to(before) > 1.5 and player.is_on_floor(), "Original creature did not walk under group command.")
 	_expect(tribe.village()["members"][1]["order"] == "wait", "Individual move commanded other residents.")
+	await _click(tribe.panel._collapse)
 	tribe.select_all()
 	await _click(tribe.panel._buttons["wood"])
 	await _until(func() -> bool: return _has_cargo(), 350)
@@ -144,13 +146,15 @@ func _run() -> void:
 	_expect(int(tribe.village()["tools"]) == 1, "Workers did not craft the actual tool.")
 	await _capture("04_tool")
 	await _click(tribe.panel._buttons["hut"])
-	await _until(func() -> bool: return int(tribe.village()["huts"]) == 1, 550)
+	await _world_click(tribe.camera.unproject_position(Vector3(5, 100.06, 5)), MOUSE_BUTTON_RIGHT)
+	await _until(func() -> bool: return int(tribe.village()["huts"]) == 1, 1600)
 	_expect(int(tribe.village()["huts"]) == 1, "Workers did not finish the first shelter.")
 	await _click(tribe.panel._buttons["feed"])
 	await _until(func() -> bool: return int(tribe.village()["meals"]) >= 3, 350)
 	_expect(int(tribe.village()["meals"]) >= 3, "Feeding did not consume village food.")
 	await _click(tribe.panel._buttons["hut"])
-	await _until(func() -> bool: return int(tribe.village()["huts"]) == 2, 650)
+	await _world_click(tribe.camera.unproject_position(Vector3(9, 100.06, 1)), MOUSE_BUTTON_RIGHT)
+	await _until(func() -> bool: return int(tribe.village()["huts"]) == 2, 1600)
 	_expect(int(tribe.village()["huts"]) == 2, "The village could not expand to four sleeping places.")
 	await _capture("05_village")
 	_expect(Model.validate(tribe.village(), tribe.body(), state.campaign.data).is_empty(), "Village economy produced invalid state.")
@@ -295,6 +299,9 @@ func _key(code: int) -> void:
 	root.push_input(event, true)
 
 func _click(button: Button) -> void:
+	if tribe != null and tribe.panel._scroll.is_ancestor_of(button):
+		tribe.panel._scroll.ensure_control_visible(button)
+		await _frames(3)
 	_expect(button != null and button.is_visible_in_tree(), "Required button is absent: " + (str(button.name) if button != null else "null"))
 	if button == null:
 		return

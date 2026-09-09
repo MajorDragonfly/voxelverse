@@ -1,4 +1,5 @@
 extends CanvasLayer
+const Housing = preload("res://world/tribe/village_housing.gd")
 const Style = preload("res://ui/progression_style.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
@@ -31,6 +32,7 @@ var _tabs: TabContainer
 var _orders_page: VBoxContainer
 var _work_page: VBoxContainer
 var _hud_content: VBoxContainer
+var _scroll: ScrollContainer
 var _collapse: Button
 var _collapsed: bool = false
 
@@ -70,7 +72,11 @@ func _build() -> void:
 		refresh())
 	_hud_content = VBoxContainer.new()
 	_hud_content.add_theme_constant_override("separation", 7)
-	column.add_child(_hud_content)
+	_scroll = ScrollContainer.new()
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	column.add_child(_scroll)
+	_scroll.add_child(_hud_content)
+	_hud_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	column = _hud_content
 	_goal = Style.label("", 17)
 	column.add_child(_goal)
@@ -92,14 +98,16 @@ func _build() -> void:
 	all.name = "SelectAll"
 	orders.add_child(all)
 	all.pressed.connect(controller.select_all)
-	var titles: Dictionary = {"wood": "Holz sammeln", "stone": "Stein sammeln", "food": "Nahrung sammeln", "supply": "Versorgung sichern", "tool": "Werkzeug · 3 Holz / 2 Stein", "hut": "Hütte · 6 Holz / 3 Stein", "garden": "Wurzelgarten · 4 Holz / 1 Stein", "feed": "Jetzt essen", "wait": "Anhalten", "resume": "Fortsetzen", "water": "Wasser holen", "provision": "Nahrung & Wasser sichern", "drink": "Jetzt trinken"}
+	var titles: Dictionary = {"wood": "Holz sammeln", "stone": "Stein sammeln", "food": "Nahrung sammeln", "supply": "Versorgung sichern", "tool": "Werkzeug · 3 Holz / 2 Stein", "hut": "Hütte setzen · 6 Holz / 3 Stein", "tent": "Zelt setzen · 3 Holz / 2 Fasern", "garden": "Wurzelgarten · 4 Holz / 1 Stein", "feed": "Jetzt essen", "wait": "Anhalten", "resume": "Fortsetzen", "water": "Wasser holen", "provision": "Nahrung & Wasser sichern", "drink": "Jetzt trinken"}
 	for order: String in titles:
 		var button := Style.button(titles[order])
 		button.name = "Order_" + order
 		orders.add_child(button)
 		button.pressed.connect(func() -> void: controller.issue_order(order))
 		_buttons[order] = button
-	_buttons["supply"].tooltip_text = "Dauerauftrag: Nahrung ernten und einlagern, bis zwölf Portionen vorrätig oder unterwegs sind. Danach am Dorfplatz warten und bei Bedarf weiterarbeiten."
+	_buttons["supply"].tooltip_text = "Dauerauftrag: Nahrung ernten und einlagern, bis vier Portionen je Bewohner vorrätig oder unterwegs sind. Danach am Dorfplatz warten und bei Bedarf weiterarbeiten."
+	for kind: String in Housing.KINDS:
+		_buttons[kind].tooltip_text = "Festes Stammesmodell. Rechtsklick: freien Platz wählen. Material wird aus dem Lager zum Eingang getragen. Hütte: zwei Schlafplätze; Zelt: ein Schlafplatz."
 	_buttons["garden"].tooltip_text = "Benötigt ein Steinwerkzeug. Baut die Wurzelfundstelle zum Garten aus. Alle 20 Spielsekunden wächst eine Wurzel nach, bis dort acht bereitliegen."
 	var workplaces := HFlowContainer.new()
 	_work_page.add_child(workplaces)
@@ -169,6 +177,8 @@ func _layout() -> void:
 	viewport_size /= _scale_factor
 	entry.position = Vector2(viewport_size.x - 282, 76)
 	entry.size = Vector2(260, 46)
+	_scroll.visible = _hud_content.visible
+	_scroll.custom_minimum_size.y = minf(_hud_content.get_combined_minimum_size().y, viewport_size.y * 0.44) if _hud_content.visible else 0.0
 	_hud.size = Vector2(viewport_size.x - 36, 0)
 	_place_hud()
 	_shade.size = viewport_size
@@ -236,25 +246,28 @@ func refresh() -> void:
 	if data.is_empty():
 		return
 	var stock: Dictionary = data["stock"]
-	_stock.text = "STAMM · Holz %d · Stein %d · Nahrung %d · Wasser %d · Fasern %d · Milch %d   |   Schlafplätze %d / 3" % [stock["wood"], stock["stone"], stock["food"], stock["water"], stock["fiber"], stock["milk"], int(data["huts"]) * 2]
+	_stock.text = "STAMM · Holz %d · Stein %d · Nahrung %d · Wasser %d · Fasern %d · Milch %d   |   Bewohner %d / 6 · Schlafplätze %d" % [stock["wood"], stock["stone"], stock["food"], stock["water"], stock["fiber"], stock["milk"], data["members"].size(), Housing.beds(data)]
 	_supply.text = "Lager: je 48 Einheiten. Arbeitende Bewohner essen und trinken selbstständig; ihr Auftrag bleibt erhalten."
 	if int(data["garden"]) == 1:
 		_supply.text = "Wurzelgarten · %d erntereif · %s · Essens- und Trinkpausen erfolgen selbstständig." % [data["deposits"]["food"]["remaining"], "Garten gefüllt" if int(data["deposits"]["food"]["remaining"]) >= Model.GARDEN_CAPACITY else "Nächste Wurzel in %d s" % ceili(Model.GROW_SECONDS - float(data["growth"]))]
 	_goal.text = "Erster Schritt: Bewohner auswählen und Holz, Stein und Nahrung einlagern."
 	if int(data["tools"]) > 0:
-		_goal.text = "Steinwerkzeug bereit · Baue zwei Hütten für deine drei Bewohner und versorge sie mit Nahrung."
+		_goal.text = "Steinwerkzeug bereit · Setze Hütten oder Zelte auf freie Plätze und sichere Nahrung und Wasser."
 	elif int(stock["wood"]) >= 3 and int(stock["stone"]) >= 2:
 		_goal.text = "Material bereit · Weise Bewohner an, das erste Steinwerkzeug herzustellen."
 	if not data["project"].is_empty():
 		var kind: String = data["project"]["kind"]
-		_goal.text = "%s · %d %% · Weitere Bewohner können mitarbeiten." % [{"tool": "Werkzeugherstellung", "hut": "Hüttenbau", "garden": "Gartenbau", "well": "Brunnenbau", "forester": "Forstplatz", "quarry": "Steinbruch", "fiberbed": "Faserbeet"}[kind], int(float(data["project"]["progress"]) / float(Model.WORK.get(kind, 15.0)) * 100)]
-	elif int(data["huts"]) == 2:
+		_goal.text = "%s · %d %% · Weitere Bewohner können mitarbeiten." % [{"tool": "Werkzeugherstellung", "hut": "Hüttenbau", "tent": "Zeltbau", "garden": "Gartenbau", "well": "Brunnenbau", "forester": "Forstplatz", "quarry": "Steinbruch", "fiberbed": "Faserbeet"}[kind], int(float(data["project"]["progress"]) / float(Model.WORK.get(kind, 15.0)) * 100)]
+	elif Housing.beds(data) >= data["members"].size():
 		if int(data["garden"]) == 0:
 			_goal.text = "Dein Dorf steht · Lege einen Wurzelgarten für dauerhafte Nahrung an."
 		elif not data["economy"]["stations"].has("well"):
 			_goal.text = "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsplätze & Berufe."
 		else:
 			_goal.text = "Nahrung und Wasser sichern · Forstplatz, Steinbruch und Faserbeet erweitern die Rohstoffversorgung."
+	if data["project"].is_empty() and int(data["tools"]) > 0:
+		var reason: String = Housing.growth_blocker(data)
+		_goal.text = reason if not reason.is_empty() else "Dorfwachstum · noch %d s gute Versorgung · danach 2 Nahrung und 2 Wasser für den neuen Bewohner." % ceili(Housing.GROW_SECONDS - float(data["housing"]["clock"]))
 	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
 	if _resident_ids != identities:
 		_resident_ids = identities
@@ -266,13 +279,18 @@ func refresh() -> void:
 			button.toggle_mode = true
 			button.clip_text = true
 			button.add_theme_font_size_override("font_size", 16)
+			for state_name: String in ["normal", "hover", "pressed", "disabled"]:
+				var style: StyleBoxFlat = button.get_theme_stylebox(state_name).duplicate()
+				style.content_margin_top = 6
+				style.content_margin_bottom = 6
+				button.add_theme_stylebox_override(state_name, style)
 			button.name = "Resident_" + str(member["id"])
 			button.pressed.connect(func() -> void: controller.select_member(member["id"], Input.is_key_pressed(KEY_SHIFT)))
 			_residents.add_child(button)
-	for i in range(3):
+	for i in range(data["members"].size()):
 		var member: Dictionary = data["members"][i]
 		var button: Button = _residents.get_child(i)
-		var orders: Dictionary = {"wait": "wartet", "move": "unterwegs", "wood": "sammelt Holz", "stone": "sammelt Stein", "food": "sammelt Nahrung", "tool": "stellt Werkzeug her", "hut": "baut Hütte", "garden": "legt Garten an", "supply": "sichert Nahrung", "feed": "isst", "water": "holt Wasser", "fiber": "sammelt Fasern", "milk": "holt Milch", "drink": "trinkt", "provision": "sichert Nahrung und Wasser", "build": "bereit für Bauarbeiten", "well": "baut Brunnen", "forester": "baut Forstplatz", "quarry": "baut Steinbruch", "fiberbed": "legt Faserbeet an"}
+		var orders: Dictionary = {"wait": "wartet", "move": "unterwegs", "wood": "sammelt Holz", "stone": "sammelt Stein", "food": "sammelt Nahrung", "tool": "stellt Werkzeug her", "hut": "baut Hütte", "tent": "baut Zelt", "garden": "legt Garten an", "supply": "sichert Nahrung", "feed": "isst", "water": "holt Wasser", "fiber": "sammelt Fasern", "milk": "holt Milch", "drink": "trinkt", "provision": "sichert Nahrung und Wasser", "build": "bereit für Bauarbeiten", "well": "baut Brunnen", "forester": "baut Forstplatz", "quarry": "baut Steinbruch", "fiberbed": "legt Faserbeet an"}
 		var activity: String = orders[member["order"]]
 		if member["order"] == "supply" and controller._food_reserve_ready():
 			activity = "Vorrat bereit · bleibt zuständig"
@@ -294,8 +312,12 @@ func refresh() -> void:
 			activity = "Weg blockiert · prüft neuen Weg"
 		if member["order"] == "wait" and member["paused_order"] != "":
 			activity = "angehalten · Fortsetzen möglich"
-		button.text = "%s · %s\nSatt %d %% · Wasser %d %%\n%s" % [member["name"], Economy.JOBS[member["profession"]], roundi(float(member["hunger"])), roundi(float(member["hydration"])), "trägt " + Economy.TITLES[member["cargo"]] if member["cargo"] != "" else activity]
-		button.custom_minimum_size.x = maxf(180.0, (get_viewport().get_visible_rect().size.x / _scale_factor - 88.0) / 3.0)
+		if member["construction_id"] != "":
+			activity = "angehalten · trägt Baumaterial" if member["order"] == "wait" else "trägt Baumaterial zum Eingang"
+		button.text = "%s · %s\nSatt %d %% · Wasser %d %%\n%s" % [member["name"], Economy.JOBS[member["profession"]], roundi(float(member["hunger"])), roundi(float(member["hydration"])), "trägt " + Economy.TITLES[member["cargo"]] if member["cargo"] != "" and member["construction_id"] == "" else activity]
+		var logical_width: float = get_viewport().get_visible_rect().size.x / _scale_factor
+		var columns: int = 2 if logical_width < 1000 else 3
+		button.custom_minimum_size.x = maxf(180.0, (logical_width - 112.0) / columns)
 		button.tooltip_text = button.text
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 	for order: String in _buttons:

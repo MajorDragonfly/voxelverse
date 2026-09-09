@@ -1,0 +1,182 @@
+{
+  "engine": "Godot 4.6.3",
+  "checks": [
+    {
+      "name": "economy_contract",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_economy_contract"
+        }
+      ]
+    },
+    {
+      "name": "growth_contract",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_growth_contract"
+        }
+      ]
+    },
+    {
+      "name": "tribal_entry_and_commands",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age"
+        }
+      ]
+    },
+    {
+      "name": "schema1_and_food_supply",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_supply"
+        }
+      ]
+    },
+    {
+      "name": "economy_and_d3",
+      "passed": true,
+      "results": [
+        {
+          "evidence": {
+            "delivered": 51.0,
+            "drinks": 16.0,
+            "grown": 13.0,
+            "meals": 16.0,
+            "produced": {
+              "fiber": 10.0,
+              "stone": 10.0,
+              "water": 36.0,
+              "wood": 11.0
+            },
+            "stock": {
+              "fiber": 2.0,
+              "food": 12.0,
+              "milk": 0.0,
+              "stone": 8.0,
+              "water": 12.0,
+              "wood": 1.0
+            }
+          },
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_economy"
+        }
+      ]
+    },
+    {
+      "name": "housing_and_population_3_to_6",
+      "passed": true,
+      "results": [
+        {
+          "evidence": {
+            "beds": 6,
+            "deliveries": 64.0,
+            "homes": 4,
+            "original_ids_retained": true,
+            "population": 6,
+            "schema": 4,
+            "stock": {
+              "fiber": 0.0,
+              "food": 24.0,
+              "milk": 2.0,
+              "stone": 6.0,
+              "water": 24.0,
+              "wood": 6.0
+            }
+          },
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_growth"
+        },
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age"
+        }
+      ]
+    },
+    {
+      "name": "growth_cold_restart",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_growth_restart"
+        },
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age"
+        }
+      ]
+    },
+    {
+      "name": "legacy_collision_and_save_recovery",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_housing_recovery"
+        },
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age"
+        }
+      ]
+    },
+    {
+      "name": "generated_terrain_construction",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_world"
+        }
+      ]
+    },
+    {
+      "name": "generated_terrain_cold_restart",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_world"
+        }
+      ]
+    },
+    {
+      "name": "opengl_layout_and_cold_restart",
+      "passed": true,
+      "results": [
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age_growth_restart"
+        },
+        {
+          "failures": [],
+          "passed": true,
+          "test": "tribal_age"
+        }
+      ]
+    }
+  ]
+}

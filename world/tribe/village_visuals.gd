@@ -1,6 +1,6 @@
 extends Node3D
 ## Repo-native voxel props. Deposits are village salvage/forage patches, separate
-## from wildlife feeding and its bush stock. No collision can trap a worker.
+## from wildlife feeding and its bush stock. Housing has a separate stable owner.
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 
@@ -50,30 +50,22 @@ func rebuild(data: Dictionary) -> void:
 		var site: Vector3 = Home.vector(batch["position"])
 		_box(site + Vector3(0, 0.4, 0), Vector3(0.5, 0.8, 0.5), Color("f4f0dd"))
 		_label(site + Vector3(0, 2.5, 0), "Milch zur Abholung · %d" % batch["remaining"], Color("f4f0dd"))
-	for i in range(2):
-		var location: Vector3 = Home.vector(data["sites"][i])
-		if i < int(data["huts"]):
-			_hut(location)
-			_label(location + Vector3(0, 3.6, 0), "Hütte %d · 2 Schlafplätze" % (i + 1), Color("edd5a8"))
-		else:
-			for x in [-1, 1]:
-				for z in [-1, 1]:
-					_box(location + Vector3(x * 0.9, 0.2, z * 0.9), Vector3(0.18, 0.4, 0.18), Color("b19b64"))
-			var active: bool = not data["project"].is_empty() and data["project"]["kind"] == "hut" and i == int(data["huts"])
-			_label(location + Vector3(0, 2.2, 0), "Hütte im Bau" if active else "Bauplatz %d" % (i + 1), Color("a0b4b4"))
+	if data["project"].get("kind") in ["hut", "tent"]:
+		var project: Dictionary = data["project"]
+		var location: Vector3 = Home.vector(project["position"])
+		for x in [-1, 1]:
+			for z in [-1, 1]:
+				_box(location + Vector3(x, 0.25, z), Vector3(0.18, 0.5, 0.18), Color("b19b64"))
+		_box(Home.vector(project["entrance"]) + Vector3(0, 0.03, 0), Vector3(1.3, 0.06, 1), Color("c9b080"))
+		var delivered: int = 0
+		var required: int = 0
+		for kind: String in project["delivered_materials"]:
+			delivered += int(project["delivered_materials"][kind])
+			required += int(preload("res://world/tribe/village_housing.gd").COSTS[project["kind"]][kind])
+		_label(location + Vector3(0, 2.8, 0), "%s im Bau · Material %d / %d" % ["Hütte" if project["kind"] == "hut" else "Zelt", delivered, required], Color("edd5a8"))
 	if int(data["tools"]) == 1:
 		_box(center + Vector3(0, 0.6, -1.3), Vector3(0.18, 0.7, 0.18), Color("b08451"))
 		_box(center + Vector3(0.14, 0.9, -1.3), Vector3(0.5, 0.3, 0.22), Color("b2c0c2"))
-
-func _hut(location: Vector3) -> void:
-	for x in [-1, 1]:
-		for z in [-1, 1]:
-			_box(location + Vector3(x * 0.85, 0.85, z * 0.85), Vector3(0.22, 1.7, 0.22), Color("785031"))
-	for row in range(5):
-		_box(location + Vector3(0, 0.2 + row * 0.3, -0.85), Vector3(1.7, 0.25, 0.16), Color("957049"))
-	for layer in range(4):
-		var width: float = 2.5 - layer * 0.5
-		_box(location + Vector3(0, 1.8 + layer * 0.22, 0), Vector3(width, 0.24, 2.4), Color("9a975a"))
 
 func _box(location: Vector3, size: Vector3, color: Color) -> void:
 	var visual := MeshInstance3D.new()

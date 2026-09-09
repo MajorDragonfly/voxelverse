@@ -41,12 +41,13 @@ func _run() -> void:
 	for member: Dictionary in data["members"]:
 		member["hunger"] = 85.0
 	data["schema"] = 1
+	data.erase("housing")
 	for key in ["garden", "growth", "grown", "economy"]:
 		data.erase(key)
 	for kind in ["water", "fiber"]:
 		data["deposits"].erase(kind)
 	for member: Dictionary in data["members"]:
-		for key in ["hydration", "profession", "paused_order", "task", "blocked"]:
+		for key in ["hydration", "profession", "paused_order", "task", "blocked", "species_id", "faction_id", "construction_id"]:
 			member.erase(key)
 	# Compare with the actual JSON representation, including its float precision.
 	var originals: Array = JSON.parse_string(JSON.stringify(data["members"]))

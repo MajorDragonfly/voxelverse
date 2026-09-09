@@ -106,6 +106,8 @@ func _run() -> void:
 		var args: PackedStringArray = OS.get_cmdline_user_args()
 		if "--economy" in args:
 			await _economy_world(tribe)
+		if "--housing" in args:
+			await _housing_world(tribe)
 		if "--capture" in args:
 			var directory: String = args[args.find("--capture") + 1]
 			DirAccess.make_dir_recursive_absolute(directory)
@@ -152,6 +154,8 @@ func _restart_check(saves: Node, state: Node) -> void:
 		_expect(int(tribe.village()["deposits"]["wood"]["remaining"]) <= int(expected["deposits"]["wood"]["remaining"]), "Fresh process regenerated gathered resources.")
 		if "--economy" in OS.get_cmdline_user_args():
 			_expect(tribe.village()["economy"]["stations"] == expected["economy"]["stations"] and int(tribe.village()["stock"]["water"]) >= int(expected["stock"]["water"]), "Fresh process lost the well or delivered water.")
+		if "--housing" in OS.get_cmdline_user_args():
+			_expect(tribe.village()["housing"] == expected["housing"] and tribe._shelters.get_child_count() == 1, "Fresh process lost real-terrain shelter or collisions.")
 		_expect(not tribe.player.is_physics_processing() and tribe.camera.current, "Fresh process restored creature input instead of group control.")
 	paused = false
 	current_scene.queue_free()
@@ -206,3 +210,41 @@ func _economy_world(tribe: Node) -> void:
 			break
 	_expect(int(tribe.village()["stock"]["water"]) >= 2, "Water never reached the warehouse on generated terrain.")
 	print("M6: generated workplace ", candidate, " water delivered ", tribe.village()["stock"]["water"])
+
+func _housing_world(tribe: Node) -> void:
+	tribe.select_all()
+	for kind: String in ["wood", "stone"]:
+		tribe.issue_order(kind)
+		for frame in range(1800):
+			await physics_frame
+			await process_frame
+			if int(tribe.village()["stock"][kind]) >= (6 if kind == "wood" else 3):
+				break
+	tribe.navigation.rebuild(tribe.home, tribe.anchor(), tribe.village())
+	var candidate := Vector3.INF
+	for identity: int in tribe.navigation.graph.get_point_ids():
+		var point: Vector3 = tribe.navigation.graph.get_point_position(identity)
+		if tribe.navigation.free_shelter(point, tribe.village(), "hut") and (not candidate.is_finite() or point.distance_to(tribe.anchor()) < candidate.distance_to(tribe.anchor())):
+			candidate = point
+	_expect(candidate.is_finite(), "No reachable hut footprint/entrance on generated terrain.")
+	if not candidate.is_finite():
+		return
+	_expect(tribe.issue_order("hut", candidate), "Cannot place shelter on real terrain: " + tribe.status)
+	for frame in range(2600):
+		await physics_frame
+		await process_frame
+		if int(tribe.village()["huts"]) == 1:
+			break
+	_expect(int(tribe.village()["huts"]) == 1, "Real-terrain construction transport failed: " + str(tribe.village()["members"]))
+	if int(tribe.village()["huts"]) == 1:
+		var entrance: Vector3 = Home.vector(tribe.village()["housing"]["homes"][0]["entrance"])
+		_expect(not tribe.navigation.route(tribe.anchor(), entrance).is_empty(), "Finished real-terrain hut lost access.")
+	tribe.issue_order("wood")
+	var delivered: int = int(tribe.village()["delivered"])
+	for frame in range(1400):
+		await physics_frame
+		await process_frame
+		if int(tribe.village()["delivered"]) > delivered + 2:
+			break
+	_expect(int(tribe.village()["delivered"]) > delivered + 2, "New housing blocked subsequent real-terrain transport.")
+	print("M6 growth: generated hut ", candidate, " and continued deliveries ", tribe.village()["delivered"] - delivered)

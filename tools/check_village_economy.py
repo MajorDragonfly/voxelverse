@@ -20,9 +20,11 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     checks = [] if args.skip_import else [("import", ["--import"], "import")]
     checks += [(name, ["--script", "res://tests/" + name + ".gd"], name) for name in
-               ["tribal_age_economy_contract_test", "tribal_age_test", "tribal_age_supply_test", "tribal_age_economy_test"]]
-    checks += [("world", ["--script", "res://tests/tribal_age_world_test.gd", "--", "--economy"], "world"),
-               ("restart", ["--script", "res://tests/tribal_age_world_test.gd", "--", "--restart-check", "--economy"], "world")]
+               ["tribal_age_economy_contract_test", "tribal_age_growth_contract_test", "tribal_age_housing_recovery_test", "tribal_age_test", "tribal_age_supply_test", "tribal_age_economy_test"]]
+    checks += [("growth", ["--script", "res://tests/tribal_age_growth_test.gd"], "growth"),
+               ("growth_restart", ["--script", "res://tests/tribal_age_growth_test.gd", "--", "--restart-check"], "growth")]
+    checks += [("world", ["--script", "res://tests/tribal_age_world_test.gd", "--", "--economy", "--housing"], "world"),
+               ("restart", ["--script", "res://tests/tribal_age_world_test.gd", "--", "--restart-check", "--economy", "--housing"], "world")]
     results = []
     with tempfile.TemporaryDirectory(prefix="voxelverse-m6-") as scratch:
         for name, argv, save_group in checks:
@@ -30,7 +32,7 @@ def main():
             env = {**os.environ, "XDG_DATA_HOME": str(Path(scratch) / save_group)}
             try:
                 run = subprocess.run([args.godot, "--headless", "--path", str(args.project), *argv],
-                                     env=env, capture_output=True, text=True, timeout=300)
+                                     env=env, capture_output=True, text=True, timeout=420)
                 output, code = run.stdout + run.stderr, run.returncode
             except subprocess.TimeoutExpired as exc:
                 output, code = (exc.stdout or b"").decode(errors="replace") + "\nERROR: timeout", 124

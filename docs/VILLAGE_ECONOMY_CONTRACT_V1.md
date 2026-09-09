@@ -1,10 +1,12 @@
 # Dorfwirtschaft – Anschlussvertrag 1
 
-Gültig für `tribe.schema = 3`, auf gemeinsamer Basis `3a3e027`. Implementierung: `world/tribe/village_economy.gd` und vorhandener `tribe_controller.gd`. Auftrag 5 besitzt ausschließlich Dorfbewohner, Arbeitsplätze, Aufträge, Vorräte und Transporte.
+Gültig für `economy.schema = 1` unter `tribe.schema = 3/4`, auf gemeinsamer Basis `3a3e027`. Implementierung: `world/tribe/village_economy.gd` und vorhandener `tribe_controller.gd`. Auftrag 5 besitzt ausschließlich Dorfbewohner, Arbeitsplätze, Aufträge, Vorräte und Transporte.
+
+Die Erweiterung um Wohnraum und bis zu sechs Bewohner folgt [Wohnraumvertrag 1](VILLAGE_HOUSING_CONTRACT_V1.md). Der Milchvertrag bleibt identisch.
 
 ## Speicherung und Migration
 
-Die Erweiterung liegt weiterhin unter `campaign.bodies[seed].tribe`. Globale Save-Version 6, Kampagnenversion, Körper-IDs und Art-IDs bleiben unverändert. `Tribe.upgrade()` erweitert validierte Stammesstände 1/2 auf 3, ohne Bewohner zu ersetzen, alte Vorräte/Quellen aufzufüllen, Fracht zu entfernen oder Aufträge neu zu vergeben. Ein alter Garten bleibt erhalten; aus Format 1 entsteht keiner. Neue Bewohnerfelder erhalten `hydration = 100`, `profession = none`, leeren `paused_order`/`task` und `blocked = false`. Neue Wasser-/Faser-/Milchvorräte beginnen bei null. Der alte Primärspielstand wird durch bloßes Laden nicht überschrieben.
+Die Erweiterung liegt weiterhin unter `campaign.bodies[seed].tribe`. Globale Save-Version 6, Kampagnenversion, Körper-IDs und Art-IDs bleiben unverändert. `Tribe.upgrade()` erweitert validierte Stammesstände 1/2/3 auf 4, ohne Bewohner zu ersetzen, alte Vorräte/Quellen aufzufüllen, Fracht zu entfernen oder Aufträge neu zu vergeben. Ein alter Garten bleibt erhalten; aus Format 1 entsteht keiner. Neue Bewohnerfelder erhalten `hydration = 100`, `profession = none`, leeren `paused_order`/`task` und `blocked = false`. Neue Wasser-/Faser-/Milchvorräte beginnen bei null. Der alte Primärspielstand wird durch bloßes Laden nicht überschrieben.
 
 Neue wirtschaftliche Unterstruktur `economy.schema = 1`:
 
@@ -16,7 +18,7 @@ Neue wirtschaftliche Unterstruktur `economy.schema = 1`:
 | `receipts` | Letzte bestätigte Milchlieferung je Quelle, höchstens 64 Quellen |
 | `drinks`, `milk_meals`, `milk_received` | Kumulative tatsächliche Wasserverbräuche, Milchmahlzeiten und angenommene Milchmengen |
 
-Neue `stock`-Schlüssel: `water`, `fiber`, `milk`; zusätzliche `deposits`: `water`, `fiber`. Bestehende Quellen wood/stone/food und ihre IDs bleiben bestehen. Jeder Ressourcentyp hat gemeinsam für alle Bewohner 48 Lagerplätze. Fracht reserviert ihren Lagerplatz bereits bei der Abholung. Angenommene, noch nicht abgeholte Milch reserviert ebenfalls Platz; sie zählt nicht als eingelagerte Nahrung.
+Neue `stock`-Schlüssel: `water`, `fiber`, `milk`; zusätzliche `deposits`: `water`, `fiber`. Bestehende Quellen wood/stone/food und ihre IDs bleiben bestehen. Jeder Ressourcentyp hat gemeinsam für alle Bewohner 48 Lagerplätze. Fracht zum Lager reserviert ihren Lagerplatz bereits bei der Abholung. Für Baustellen reservierte Fracht ist der Unterkunft zugeordnet und beansprucht keinen zweiten Lagerplatz. Angenommene, noch nicht abgeholte Milch reserviert ebenfalls Platz; sie zählt nicht als eingelagerte Nahrung.
 
 Jede inkompatible Weiterentwicklung muss auch die äußere Stammesversion erhöhen. Der vorhandene Save-Service sperrt dann alte Leser vor einem stillen Rückgriff auf ältere Backups.
 
@@ -37,7 +39,7 @@ Freie Bauplätze benötigen einen zusammenhängenden trockenen Weg zum Dorf und 
 
 | Beruf | Dauerauftrag | gemeinsames Vorratsziel einschließlich Fracht |
 |---|---|---:|
-| Versorger | `provision`: Nahrung und Wasser nach Bedarf | je 12 |
+| Versorger | `provision`: Nahrung und Wasser nach Bedarf | 4 je Bewohner, mindestens je 12 |
 | Holzarbeiter | `wood` | 16 |
 | Steinmetz | `stone` | 16 |
 | Fasersammler | `fiber` | 12 |
@@ -46,7 +48,7 @@ Freie Bauplätze benötigen einen zusammenhängenden trockenen Weg zum Dorf und 
 
 Beruf und aktueller Befehl sind getrennt gespeichert. Manuelle Befehle erhalten den Beruf; „Beruf fortsetzen“ aktiviert dessen Zuständigkeit wieder. „Anhalten“ bewahrt Fracht, Arbeitsfortschritt, Bewegungsziel und vorherigen Befehl; „Fortsetzen“ nimmt diesen wieder auf. Essens-/Trinkpausen erhalten den Auftrag, Fracht wird vorher abgeliefert. Bei leeren Quellen und vollen Lagern bleibt die Zuständigkeit bestehen. Blockierte Wege werden ungefähr alle zwei Sekunden neu geprüft; es gibt keine Teleportation. Bewohner mit angehaltenem Auftrag bleiben angehalten, einschließlich ihrer Fracht.
 
-Hunger sinkt um 0,08, Wasserversorgung um 0,06 Prozentpunkte je Spielsekunde. Arbeitende Bewohner versorgen sich unter 40 % am gemeinsamen Lager. Eine Mahlzeit erhöht die Sättigung um 25, eine Wassereinheit die Versorgung um 30 Punkte. Milch wird vor Wurzeln verzehrt, dabei genau eine Einheit aus demselben Lager abgebucht. Unter 20 % Hunger oder Wasser arbeiten/bewegen sich Bewohner langsamer. Wachstum, Tod durch Mangel und Bevölkerungszuwachs gehören nicht zu dieser Lieferung.
+Hunger sinkt um 0,08, Wasserversorgung um 0,06 Prozentpunkte je Spielsekunde. Arbeitende Bewohner versorgen sich unter 55 % am gemeinsamen Lager. Eine Mahlzeit erhöht die Sättigung um 25, eine Wassereinheit die Versorgung um 30 Punkte. Milch wird vor Wurzeln verzehrt, dabei genau eine Einheit aus demselben Lager abgebucht. Unter 20 % Hunger oder Wasser arbeiten/bewegen sich Bewohner langsamer. Bevölkerungszuwachs ist im Wohnraumvertrag beschrieben. Tod durch Mangel ist weiterhin nicht enthalten.
 
 ## D3: fertige Milchproduktion übergeben
 
@@ -79,6 +81,6 @@ Milch wird am Abholort sichtbar, anschließend als Fracht getragen und erst bei 
 
 ## Auftrag 6/7: vorhandene Ereignisse nutzen
 
-Das bisherige Signal `order_resolved(order, command_id, accepted)` bleibt erhalten. Zusätzlich meldet der Dorfcontroller `community_event(kind, details)` nur tatsächliche Lieferungen, Mahlzeiten, Trinkvorgänge und fertige Bauten. Details enthalten `tribe_id`, bei Lieferungen/Mahlzeiten/Trinken einen kumulativen `sequence`-Zähler und Bewohner-/Ressourcenangaben. Konstruktion nennt `kind` und den aktuellen Hüttenstand.
+Das bisherige Signal `order_resolved(order, command_id, accepted)` bleibt erhalten. Zusätzlich meldet der Dorfcontroller `community_event(kind, details)` nur tatsächliche Lieferungen, Mahlzeiten, Trinkvorgänge und fertige Bauten. Details enthalten `tribe_id`, bei Lieferungen/Mahlzeiten/Trinken einen kumulativen `sequence`-Zähler und Bewohner-/Ressourcenangaben. Konstruktion nennt `kind`, den aktuellen Hüttenstand und ab Stammesformat 4 eine stabile `building_id`. Neue Bewohner melden `resident_added` mit `member_id`, `tribe_id` und `population` erst nach erfolgreichem Save.
 
-Fortschritt muss Ereignisse deduplizieren und im selben gemeinsamen Save-Kontext verbuchen: `(tribe_id, kind, sequence)` beziehungsweise `(tribe_id, construction, kind, huts)` für Gebäude. Keine Punkte beim Laden, bloßen Befehlen oder beim Anzeigen der Oberfläche vergeben. Die hierfür zuständige Fortschrittslogik wird von Auftrag 6 geliefert; diese Änderung vergibt keine Punkte und verändert keine fremde Art.
+Fortschritt muss Ereignisse deduplizieren und im selben gemeinsamen Save-Kontext verbuchen: `(tribe_id, kind, sequence)` beziehungsweise `(tribe_id, construction, building_id)` für Gebäude (Format-3-Ereignisse nutzen weiterhin `kind, huts`). Keine Punkte beim Laden, bloßen Befehlen oder beim Anzeigen der Oberfläche vergeben. Die hierfür zuständige Fortschrittslogik wird von Auftrag 6 geliefert; diese Änderung vergibt keine Punkte und verändert keine fremde Art.

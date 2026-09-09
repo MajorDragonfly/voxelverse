@@ -13,6 +13,7 @@ const JOB_ORDER: Dictionary = {"none": "wait", "provider": "provision", "foreste
 const ORDERS: Array[String] = ["water", "fiber", "milk", "drink", "provision", "build", "well", "forester", "quarry", "fiberbed"]
 const TARGETS: Dictionary = {"food": 12, "water": 12, "wood": 16, "stone": 16, "fiber": 12, "milk": 12}
 const CAPACITY: int = 8
+const CARE_THRESHOLD: float = 55.0
 
 static func install(data: Dictionary) -> void:
 	data["economy"] = {"schema": 1, "stations": {}, "clocks": {}, "produced": {}, "incoming": [], "receipts": {}, "drinks": 0, "milk_meals": 0, "milk_received": 0}
@@ -50,7 +51,7 @@ static func tick(data: Dictionary, delta: float) -> bool:
 static func carried(data: Dictionary, kind: String) -> int:
 	var count: int = 0
 	for member: Dictionary in data["members"]:
-		count += 1 if member["cargo"] == kind else 0
+		count += 1 if member["cargo"] == kind and member.get("construction_id", "") == "" else 0
 	return count
 
 static func reserve(data: Dictionary, kind: String) -> int:
@@ -68,20 +69,23 @@ static func gather_kind(data: Dictionary, member: Dictionary) -> String:
 	# Persist the selected leg while walking/working; concurrent workers still
 	# check the shared target at pickup, so neither food nor water overshoots.
 	var task: String = member["task"]
-	if task in ["food", "water"] and reserve(data, task) < int(TARGETS[task]) and int(data["deposits"][task]["remaining"]) > 0:
+	if task in ["food", "water"] and reserve(data, task) < target(data, task) and int(data["deposits"][task]["remaining"]) > 0:
 		return task
-	var food_ratio: float = float(reserve(data, "food")) / TARGETS["food"]
-	var water_ratio: float = float(reserve(data, "water")) / TARGETS["water"]
+	var food_ratio: float = float(reserve(data, "food")) / target(data, "food")
+	var water_ratio: float = float(reserve(data, "water")) / target(data, "water")
 	var choices: Array = ["water", "food"] if water_ratio <= food_ratio else ["food", "water"]
 	for kind: String in choices:
-		if reserve(data, kind) < int(TARGETS[kind]) and int(data["deposits"][kind]["remaining"]) > 0:
+		if reserve(data, kind) < target(data, kind) and int(data["deposits"][kind]["remaining"]) > 0:
 			member["task"] = kind
 			return kind
 	member["task"] = ""
 	return ""
 
+static func target(data: Dictionary, kind: String) -> int:
+	return maxi(int(TARGETS[kind]), data["members"].size() * 4) if kind in ["food", "water"] else int(TARGETS[kind])
+
 static func at_target(data: Dictionary, member: Dictionary, kind: String) -> bool:
-	var limit: int = int(TARGETS[kind]) if member["order"] in ["supply", "provision"] or member["profession"] != "none" else 48
+	var limit: int = target(data, kind) if member["order"] in ["supply", "provision"] or member["profession"] != "none" else 48
 	return reserve(data, kind) >= limit
 
 static func milk_pending(data: Dictionary) -> int:
@@ -144,7 +148,7 @@ static func validate(data: Dictionary) -> String:
 		if not built and (float(e["clocks"][kind]) != 0 or int(e["produced"][kind]) != 0):
 			return "Rohstoffe entstehen erst nach dem Arbeitsplatzbau."
 	for member: Dictionary in data["members"]:
-		if not number(member.get("hydration"), 0, 100) or member.get("profession") not in JOBS or not member.get("paused_order") is String or (member["paused_order"] != "" and member["paused_order"] not in (["wait", "move", "wood", "stone", "food", "tool", "hut", "feed", "garden", "supply"] + ORDERS)) or member.get("task") not in ["", "water", "food"] or not member.get("blocked") is bool:
+		if not number(member.get("hydration"), 0, 100) or member.get("profession") not in JOBS or not member.get("paused_order") is String or (member["paused_order"] != "" and member["paused_order"] not in (["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "feed", "garden", "supply"] + ORDERS)) or member.get("task") not in ["", "water", "food"] or not member.get("blocked") is bool:
 			return "Ungültiger Beruf oder unterbrochener Auftrag."
 		if member["paused_order"] != "" and member["order"] != "wait":
 			return "Unterbrochener Auftrag wird bereits ausgeführt."

@@ -3,6 +3,8 @@ extends Node
 signal order_resolved(order: StringName, command_id: String, accepted: bool)
 var _order_sequence: int = 0
 
+const Housing = preload("res://world/tribe/village_housing.gd")
+const Shelters = preload("res://world/tribe/village_shelters.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
 const Navigation = preload("res://world/tribe/village_navigation.gd")
@@ -31,6 +33,8 @@ var _signature: String = ""
 var _routes: Dictionary = {}
 var _goals: Dictionary = {}
 var _visuals: Node3D
+var _shelters: Node3D
+var _growth_retry: float = 0.0
 var _player_processing: Dictionary = {}
 var _hidden_layers: Array[CanvasLayer] = []
 var _original_camera: Camera3D
@@ -169,6 +173,7 @@ func _activate() -> void:
 	if navigation.graph.get_point_count() == 0:
 		return
 	Model.upgrade(village())
+	navigation.rebuild(home, HomeState.vector(village()["anchor"]), village())
 	# The home controller refreshes on a slower tick. Install the visible nest
 	# with this runtime, so a cold start cannot briefly expose the default home.
 	get_parent().global_position = HomeState.vector(village()["anchor"])
@@ -185,7 +190,7 @@ func _activate() -> void:
 	var blueprint: Dictionary = Assembly.load_best_available()
 	if blueprint.is_empty():
 		blueprint = Assembly.create_default()
-	for i in range(3):
+	for i in range(village()["members"].size()):
 		var member: Dictionary = village()["members"][i]
 		var actor: CharacterBody3D = player if i == 0 else Companion.new()
 		if i != 0:
@@ -206,6 +211,9 @@ func _activate() -> void:
 	_visuals = Visuals.new()
 	get_parent().get_parent().add_child(_visuals)
 	_visuals.rebuild(village())
+	_shelters = Shelters.new()
+	get_parent().get_parent().add_child(_shelters)
+	_shelters.sync(village(), actors)
 	_active = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	status = "Wähle Bewohner und erteile gemeinsame oder einzelne Aufträge."
@@ -235,6 +243,8 @@ func _deactivate() -> void:
 		camera.queue_free()
 	if is_instance_valid(_visuals):
 		_visuals.queue_free()
+	if is_instance_valid(_shelters):
+		_shelters.queue_free()
 	if is_instance_valid(player):
 		for child_name: String in ["TribeSelection", "TribeCargo"]:
 			var indicator: Node = player.get_node_or_null(child_name)
@@ -316,7 +326,7 @@ func screen_command(position: Vector2) -> void:
 	issue_order("move", target)
 
 func issue_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
-	if order in Economy.STATIONS and destination == Vector3.ZERO and is_active():
+	if order in Economy.STATIONS.keys() + Housing.KINDS and destination == Vector3.ZERO and is_active():
 		if not village()["project"].is_empty() and village()["project"]["kind"] == order:
 			destination = HomeState.vector(village()["project"]["position"])
 		else:
@@ -345,7 +355,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 				return false
 	var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
 	if order in costs:
-		if (order == "tool" and int(data["tools"]) == 1) or (order == "hut" and int(data["huts"]) >= 2) or (order == "garden" and int(data["garden"]) == 1) or data["economy"]["stations"].has(order):
+		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or data["economy"]["stations"].has(order):
 			status = "Dieser Ausbau ist bereits abgeschlossen."
 			return false
 		if order != "tool" and int(data["tools"]) == 0:
@@ -355,10 +365,10 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 			status = "Schließe zuerst die laufende Arbeit ab."
 			return false
 		if data["project"].is_empty():
-			if order in Economy.STATIONS:
-				navigation.rebuild(home, anchor())
+			if order in Economy.STATIONS.keys() + Housing.KINDS:
+				navigation.rebuild(home, anchor(), village())
 				var snapped: Vector3 = navigation.snap(destination)
-				if snapped.distance_to(destination) > 1.8 or not navigation.free_workplace(snapped, data, order):
+				if snapped.distance_to(destination) > 1.8 or not (navigation.free_shelter(snapped, data, order) if order in Housing.KINDS else navigation.free_workplace(snapped, data, order)):
 					status = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
 					return false
 				destination = snapped
@@ -368,12 +378,18 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 						return false
 			for kind: String in costs[order]:
 				if int(data["stock"][kind]) < int(costs[order][kind]):
-					status = "Es fehlen eingelagerte Materialien: %d Holz und %d Stein." % [costs[order]["wood"], costs[order]["stone"]]
+					status = "Es fehlen eingelagerte Materialien: %d %s." % [costs[order][kind], Economy.TITLES[kind]]
 					return false
 			for kind: String in costs[order]:
 				data["stock"][kind] -= costs[order][kind]
 			data["project"] = {"kind": order, "progress": 0.0}
-			if order in Economy.STATIONS:
+			if order in Housing.KINDS:
+				data["project"].merge(Housing.site(data, order, HomeState.vector_array(destination), data["housing"]["homes"].size()))
+				data["project"]["materials"] = costs[order].duplicate()
+				data["project"]["delivered_materials"] = {}
+				for kind: String in costs[order]:
+					data["project"]["delivered_materials"][kind] = 0
+			elif order in Economy.STATIONS:
 				data["project"]["position"] = HomeState.vector_array(destination)
 	for identity: String in selected:
 		var member: Dictionary = member_record(identity)
@@ -408,6 +424,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 	if success:
 		placement = ""
 		_visuals.rebuild(village())
+		navigation.rebuild(home, anchor(), village())
 	panel.refresh()
 	return success
 
@@ -428,7 +445,7 @@ func _physics_process(delta: float) -> void:
 		for member: Dictionary in village()["members"]:
 			blocked = blocked or bool(member["blocked"])
 		if blocked:
-			navigation.rebuild(home, anchor())
+			navigation.rebuild(home, anchor(), village())
 			_routes.clear()
 			_goals.clear()
 	for member: Dictionary in village()["members"]:
@@ -439,14 +456,18 @@ func _physics_process(delta: float) -> void:
 		# Deliver cargo before detours; the assigned order and partial work survive.
 		if member["cargo"] == "" and order not in ["wait", "feed", "drink"]:
 			if member["stage"] not in ["meal", "drink"]:
-				if float(member["hydration"]) < 40.0 and int(village()["stock"]["water"]) > 0:
+				if float(member["hydration"]) < Economy.CARE_THRESHOLD and int(village()["stock"]["water"]) > 0:
 					member["stage"] = "drink"
-				elif float(member["hunger"]) < 40.0 and Economy.has_food(village()):
+				elif float(member["hunger"]) < Economy.CARE_THRESHOLD and Economy.has_food(village()):
 					member["stage"] = "meal"
 			elif (member["stage"] == "meal" and not Economy.has_food(village())) or (member["stage"] == "drink" and int(village()["stock"]["water"]) == 0):
 				member["stage"] = "outbound"
 		var target: Vector3 = actor.global_position
-		if member["cargo"] != "" and order != "wait":
+		var construction: bool = false
+		if member["construction_id"] != "" and order != "wait":
+			target = HomeState.vector(village()["project"]["entrance"])
+			construction = true
+		elif member["cargo"] != "" and order != "wait":
 			target = anchor()
 		elif member["stage"] in ["meal", "drink"]:
 			target = anchor()
@@ -458,8 +479,9 @@ func _physics_process(delta: float) -> void:
 			target = HomeState.vector(village()["deposits"][kind]["position"]) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
 		elif order in ["feed", "drink", "tool", "build"]:
 			target = anchor()
-		elif order == "hut" and int(village()["huts"]) < 2:
-			target = HomeState.vector(village()["sites"][int(village()["huts"])])
+		elif order in Housing.KINDS and village()["project"].get("kind") == order:
+			construction = not Housing.pending(village()["project"])
+			target = HomeState.vector(village()["project"]["entrance"]) if construction else anchor()
 		elif order == "garden":
 			target = HomeState.vector(village()["deposits"]["food"]["position"])
 		elif order in Economy.STATIONS and not village()["project"].is_empty():
@@ -467,7 +489,8 @@ func _physics_process(delta: float) -> void:
 		elif order == "move":
 			target = HomeState.vector(member["destination"])
 		if order != "wait" and (member["cargo"] != "" or order != "move"):
-			target = _workplace(target, village()["members"].find(member))
+			var index: int = village()["members"].find(member)
+			target = _construction_workplace(target, index) if construction else _workplace(target, index)
 		var arrived: bool = _walk(actor, str(member["id"]), target, delta, minf(float(member["hunger"]), float(member["hydration"])))
 		member["position"] = HomeState.vector_array(actor.global_position)
 		if actor == player:
@@ -475,11 +498,17 @@ func _physics_process(delta: float) -> void:
 		if arrived:
 			_work(member, simulation_delta)
 	_update_selection()
+	_shelters.clear_entrances(actors)
+	_grow_residents(simulation_delta)
+
+func _construction_workplace(entrance: Vector3, index: int) -> Vector3:
+	var target: Vector3 = navigation.snap(entrance + Vector3(index % 3 - 1, 0, index / 3))
+	return target if target.distance_to(entrance) < 2.5 and not navigation.route(entrance, target).is_empty() else entrance
 
 func _workplace(center: Vector3, index: int) -> Vector3:
 	# Give residents separate work positions, keeping them visible/selectable.
-	var offsets: Array[Vector3] = [Vector3(-1.5, 0, 1), Vector3(1.5, 0, 1), Vector3(0, 0, -1.6)]
-	var target: Vector3 = navigation.snap(center + offsets[index % 3])
+	var offsets: Array[Vector3] = [Vector3(-1.5, 0, 1), Vector3(1.5, 0, 1), Vector3(0, 0, -1.6), Vector3(-1.5, 0, -1), Vector3(1.5, 0, -1), Vector3(0, 0, 2)]
+	var target: Vector3 = navigation.snap(center + offsets[index % offsets.size()])
 	if target.is_finite() and target.distance_to(center) < 2.8 and not navigation.route(center, target).is_empty():
 		return target
 	return center
@@ -551,6 +580,15 @@ func _work(member: Dictionary, delta: float) -> void:
 	var order: String = _effective_order(member)
 	if order == "wait":
 		return
+	if member["construction_id"] != "":
+		var project: Dictionary = data["project"]
+		if HomeState.vector(member["position"]).distance_to(HomeState.vector(project["entrance"])) <= 3.0:
+			project["delivered_materials"][member["cargo"]] += 1
+			member["cargo"] = ""
+			member["construction_id"] = ""
+			member["stage"] = "outbound"
+			_changed()
+		return
 	if member["cargo"] != "":
 		var kind: String = member["cargo"]
 		data["stock"][kind] += 1
@@ -607,26 +645,49 @@ func _work(member: Dictionary, delta: float) -> void:
 			if member["order"] != "build":
 				member["order"] = "wait"
 			return
+		if order in Housing.KINDS:
+			if Housing.pending(project):
+				if HomeState.vector(member["position"]).distance_to(anchor()) <= 3.0:
+					for kind: String in project["materials"]:
+						if int(project["materials"][kind]) > 0:
+							project["materials"][kind] -= 1
+							member["cargo"] = kind
+							member["construction_id"] = project["id"]
+							member["stage"] = "return"
+							_changed()
+							break
+				return
+			if not Housing.supplied(project) or HomeState.vector(member["position"]).distance_to(HomeState.vector(project["entrance"])) > 3.0:
+				return
 		project["progress"] = minf(20.0, float(project["progress"]) + delta * _work_rate(member))
 		if float(project["progress"]) >= float(Model.WORK.get(order, 15.0)):
-			if order in Economy.STATIONS:
+			if order in Housing.KINDS:
+				data["housing"]["homes"].append(Housing.site(data, order, project["position"], data["housing"]["homes"].size()))
+				if order == "hut":
+					data["huts"] += 1
+			elif order in Economy.STATIONS:
 				data["economy"]["stations"][order] = {"id": Model.Ids.scoped("workplace", data["id"], order), "position": project["position"].duplicate()}
 				data["deposits"][Economy.STATIONS[order]]["position"] = project["position"].duplicate()
 			else:
 				data[{"tool": "tools", "hut": "huts", "garden": "garden"}[order]] += 1
+			var completed_id: String = str(project.get("id", Model.Ids.scoped("workplace", data["id"], order)))
 			data["project"] = {}
+			_shelters.sync(data, actors)
+			navigation.rebuild(home, anchor(), data)
+			_routes.clear()
+			_goals.clear()
 			for worker: Dictionary in data["members"]:
 				if worker["order"] == order:
 					worker["order"] = Economy.JOB_ORDER[worker["profession"]]
 					worker["stage"] = "return" if worker["cargo"] != "" else "outbound"
-			community_event.emit(&"construction", {"kind": order, "tribe_id": data["id"], "huts": data["huts"]})
+			community_event.emit(&"construction", {"kind": order, "tribe_id": data["id"], "huts": data["huts"], "building_id": completed_id})
 			status = "Ausbau fertig · Bewohner mit Beruf setzen ihre Zuständigkeit fort."
 			_changed()
 	elif order == "move":
 		member["order"] = "wait"
 
 func _food_reserve_ready() -> bool:
-	return int(village()["stock"]["food"]) + Model.cargo_count(village(), "food") >= Model.FOOD_TARGET
+	return int(village()["stock"]["food"]) + Model.cargo_count(village(), "food") >= Economy.target(village(), "food")
 
 func _eat(member: Dictionary) -> bool:
 	var data: Dictionary = village()
@@ -740,3 +801,39 @@ func _update_selection() -> void:
 		var kind: String = member_record(identity)["cargo"]
 		cargo.visible = not kind.is_empty()
 		cargo.material_override.albedo_color = {"wood": Color("b9854d"), "stone": Color("bac8cf"), "food": Color("c27b4e"), "water": Color("60bde8"), "fiber": Color("b8bf67"), "milk": Color("f4f0dd")}.get(kind, Color.WHITE)
+
+func _grow_residents(delta: float) -> void:
+	_growth_retry = maxf(0.0, _growth_retry - delta)
+	if not Housing.tick(village(), delta) or _growth_retry > 0:
+		return
+	var location := Vector3.INF
+	for shelter: Dictionary in village()["housing"]["homes"]:
+		var entrance: Vector3 = HomeState.vector(shelter["entrance"])
+		var candidate: Vector3 = navigation.snap(entrance)
+		if candidate.distance_to(entrance) > 0.45 or navigation.route(anchor(), candidate).is_empty() or not home._clear_space(candidate + Vector3.UP * 0.78):
+			continue
+		var occupied: bool = false
+		for actor: Node3D in actors.values():
+			occupied = occupied or actor.global_position.distance_to(candidate) < 1.2
+		if not occupied:
+			location = candidate
+			break
+	if not location.is_finite():
+		status = "Dorfwachstum wartet auf einen freien, erreichbaren Eingang."
+		return
+	var before: Dictionary = village().duplicate(true)
+	var member: Dictionary = Housing.add_resident(village(), location)
+	if not _save_economy(before):
+		_growth_retry = 5.0
+		return
+	var blueprint: Dictionary = Assembly.load_best_available()
+	if blueprint.is_empty():
+		blueprint = Assembly.create_default()
+	var actor := Companion.new()
+	get_parent().get_parent().add_child(actor)
+	actor.setup(self, member, blueprint, village()["members"].size() - 1)
+	actor.set_physics_process(false)
+	actors[member["id"]] = actor
+	status = "%s gehört jetzt zu deinem Stamm. Wähle einen Beruf oder Auftrag." % member["name"]
+	community_event.emit(&"resident_added", {"member_id": member["id"], "tribe_id": village()["id"], "population": village()["members"].size()})
+	panel.refresh()
