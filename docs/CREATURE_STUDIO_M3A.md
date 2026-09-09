@@ -13,7 +13,7 @@ Stand: 8. September 2026. Eigener Branch `agent/creature-editor-spore`, Draft PR
 - Stehen/Atmen, Gehen und Laufen können direkt getestet werden. Die Vorschau verändert keine Entwurfsdaten. Zwei-, vier- und sechsbeinige Testkörper verwenden dieselbe Kniekonstruktion wie die adaptive Spielanimation.
 - Eine geschlossene Voxeloberfläche und aus kleinen Würfeln aufgebaute Augen, Mäuler, Gliedmaßen und Schmuckteile werden von Editor, Spieler und erzeugten Wildtieren gemeinsam verwendet. Der Spieler behält die adaptive Geländeanimation und die vorhandene Angriffsanimation. Wildtiere erhalten sichtbare Schrittbewegung; tote Tiere stoppen diese.
 
-![Kreaturen-Werkstatt mit Langhals und Teileauswahl](../art/review/creature_voxel_studio/grazer_parts.png)
+![Kreaturen-Werkstatt mit feinerem Langhals und Teileauswahl](../art/review/creature_fine_voxels/grazer_parts.png)
 
 ## Bedienung
 
