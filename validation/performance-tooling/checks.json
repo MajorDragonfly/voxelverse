@@ -1,0 +1,15 @@
+{
+  "python_tests": 5,
+  "python_tests_passed": true,
+  "actionlint_version": "1.7.12",
+  "workflows_validated": 4,
+  "actionlint_passed": true,
+  "composite_action_parsed": true,
+  "cached_editor_installed_twice_without_download": true,
+  "editor_only_requested_templates": false,
+  "source_diff_check_passed": true,
+  "rendered_route_tested_locally": false,
+  "headless_cycles": 3,
+  "headless_total_route_metres": 1152,
+  "legacy_streaming_samples": 6
+}

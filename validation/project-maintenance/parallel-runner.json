@@ -1,0 +1,11 @@
+{
+  "concurrent_validation_runs": 2,
+  "distinct_default_output_directories": true,
+  "portable_editor": true,
+  "relative_project_path": true,
+  "save_slots_passed": true,
+  "output_directories": [
+    "/tmp/voxelverse-validation-_z7igibm",
+    "/tmp/voxelverse-validation-nuk9hv73"
+  ]
+}

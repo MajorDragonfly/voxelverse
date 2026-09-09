@@ -1,0 +1,171 @@
+{
+  "base": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "branches": [
+    {
+      "ref": "origin/agent/creature-body-contract",
+      "sha": "004d5a62b4010b147a1975ccafa604bada7c5295",
+      "changed": 16,
+      "overlap": [],
+      "references": {}
+    },
+    {
+      "ref": "origin/agent/d1-planet-fauna",
+      "sha": "17b23f568dabbec9f3903217238650f0c9178d04",
+      "changed": 32,
+      "overlap": [],
+      "references": {
+        "world/fauna/fauna_streamer_v5.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:219:  \"world/fauna/fauna_streamer_v5.gd\": \"a8777e3f7d46cd8d532a3957a5ef1ba0b830adc9288f144b52ba7c8412a037a8\","
+        ],
+        "world/generation/world_generator_v4.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:234:  \"world/generation/world_generator_v4.gd\": \"5e3e404bca4f1f028caf0bbed575aba2c8d562ad634f2ef6f5ca107b5565535f\","
+        ],
+        "world/streaming/chunk_lod_controller_v6.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:277:  \"world/streaming/chunk_lod_controller_v6.gd\": \"9acb3f88dff661c19abea70199452d932a16b43fc395dde35ebe976091f901ce\","
+        ],
+        "world/visuals/scenery/procedural_ecosystem_v3.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:301:  \"world/visuals/scenery/procedural_ecosystem_v3.gd\": \"da403c003d15c7bf856a378e2113d1ac08022775dffc0821cf47380b0c1a623f\","
+        ],
+        "world/visuals/scenery/procedural_ecosystem_v4.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:302:  \"world/visuals/scenery/procedural_ecosystem_v4.gd\": \"b7276698471c1d4d00e00e8ed9b9f2da70616eda8a3f5c483e2f1a4d34c0c5a5\","
+        ],
+        "world/visuals/scenery/terrain_scenic_dressing_v2.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:305:  \"world/visuals/scenery/terrain_scenic_dressing_v2.gd\": \"f3d52a37eca56e4a53ad86a4f4db0560363f9e75f0437338f2ffa814cfe6369d\","
+        ],
+        "world/visuals/scenery/voxel_asset_library_v6.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:307:  \"world/visuals/scenery/voxel_asset_library_v6.gd\": \"e9d695e3ec0b3f642376133093aaa2474bd60be3ce1c085b265643c7094c0834\","
+        ],
+        "world/visuals/terrain/micro_voxel_surface_v5.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:309:  \"world/visuals/terrain/micro_voxel_surface_v5.gd\": \"7c36e60e7302af8f7b5c38abec387987ba52ce347a9f590798a61832fab1c77a\","
+        ],
+        "world/visuals/terrain/micro_voxel_surface_v6.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:310:  \"world/visuals/terrain/micro_voxel_surface_v6.gd\": \"6f404d575bcf6ae27904068eb64803facd61665e4d49016cdab928fe4b58063b\","
+        ],
+        "world/visuals/voxel/voxel_scenery_styler.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:319:  \"world/visuals/voxel/voxel_scenery_styler.gd\": \"b98c848ab72838fe8acfd9a057b6b864c71bb5054f9664802823894dac51754b\","
+        ],
+        "world/world_manager_v2.gd": [
+          "origin/agent/d1-planet-fauna:validation/d1/source-sha256.json:325:  \"world/world_manager_v2.gd\": \"b44f190f15e20de0352788d3129c75e59592cb1d0468b1c41682b16484a46328\""
+        ]
+      }
+    },
+    {
+      "ref": "origin/agent/d2-domestication",
+      "sha": "da6dbd62f505a688aba439cefe42ac8f029da4d4",
+      "changed": 25,
+      "overlap": [],
+      "references": {}
+    },
+    {
+      "ref": "origin/agent/interface-audio-task7",
+      "sha": "bd625a1c4cb1687748d44dff37b538fb694ae87f",
+      "changed": 27,
+      "overlap": [],
+      "references": {}
+    },
+    {
+      "ref": "origin/agent/m1d-surface-adapter",
+      "sha": "97e9e91a0b5babd10d303df97bfa719224f72300",
+      "changed": 25,
+      "overlap": [],
+      "references": {}
+    },
+    {
+      "ref": "origin/agent/m6-village-economy",
+      "sha": "a1b3d7cad8e2ec4661675d14b6e59974b27141fe",
+      "changed": 24,
+      "overlap": [],
+      "references": {}
+    }
+  ],
+  "remove": [
+    "world/fauna/fauna_streamer_v5.gd",
+    "world/generation/world_generator_v4.gd",
+    "world/streaming/chunk_lod_controller_v6.gd",
+    "world/visuals/scenery/procedural_ecosystem_v3.gd",
+    "world/visuals/scenery/procedural_ecosystem_v4.gd",
+    "world/visuals/scenery/terrain_scenic_dressing_v2.gd",
+    "world/visuals/scenery/voxel_asset_library_v6.gd",
+    "world/visuals/terrain/landscape_horizon.gdshader",
+    "world/visuals/terrain/micro_voxel_surface_v5.gd",
+    "world/visuals/terrain/micro_voxel_surface_v6.gd",
+    "world/visuals/voxel/voxel_scenery_styler.gd",
+    "world/world_manager_v2.gd"
+  ],
+  "removed": [
+    {
+      "path": "world/fauna/fauna_streamer_v5.gd",
+      "bytes": 3868,
+      "lines": 149,
+      "sha256": "a8777e3f7d46cd8d532a3957a5ef1ba0b830adc9288f144b52ba7c8412a037a8"
+    },
+    {
+      "path": "world/generation/world_generator_v4.gd",
+      "bytes": 8818,
+      "lines": 271,
+      "sha256": "5e3e404bca4f1f028caf0bbed575aba2c8d562ad634f2ef6f5ca107b5565535f"
+    },
+    {
+      "path": "world/streaming/chunk_lod_controller_v6.gd",
+      "bytes": 1591,
+      "lines": 55,
+      "sha256": "9acb3f88dff661c19abea70199452d932a16b43fc395dde35ebe976091f901ce"
+    },
+    {
+      "path": "world/visuals/scenery/procedural_ecosystem_v3.gd",
+      "bytes": 10212,
+      "lines": 269,
+      "sha256": "da403c003d15c7bf856a378e2113d1ac08022775dffc0821cf47380b0c1a623f"
+    },
+    {
+      "path": "world/visuals/scenery/procedural_ecosystem_v4.gd",
+      "bytes": 11801,
+      "lines": 450,
+      "sha256": "b7276698471c1d4d00e00e8ed9b9f2da70616eda8a3f5c483e2f1a4d34c0c5a5"
+    },
+    {
+      "path": "world/visuals/scenery/terrain_scenic_dressing_v2.gd",
+      "bytes": 3666,
+      "lines": 142,
+      "sha256": "f3d52a37eca56e4a53ad86a4f4db0560363f9e75f0437338f2ffa814cfe6369d"
+    },
+    {
+      "path": "world/visuals/scenery/voxel_asset_library_v6.gd",
+      "bytes": 5278,
+      "lines": 132,
+      "sha256": "e9d695e3ec0b3f642376133093aaa2474bd60be3ce1c085b265643c7094c0834"
+    },
+    {
+      "path": "world/visuals/terrain/landscape_horizon.gdshader",
+      "bytes": 820,
+      "lines": 20,
+      "sha256": "41b0acf87e31f11affd4a79da8b1b6c51108678d0a08af64d3243d32c50356cb"
+    },
+    {
+      "path": "world/visuals/terrain/micro_voxel_surface_v5.gd",
+      "bytes": 8249,
+      "lines": 282,
+      "sha256": "7c36e60e7302af8f7b5c38abec387987ba52ce347a9f590798a61832fab1c77a"
+    },
+    {
+      "path": "world/visuals/terrain/micro_voxel_surface_v6.gd",
+      "bytes": 7323,
+      "lines": 252,
+      "sha256": "6f404d575bcf6ae27904068eb64803facd61665e4d49016cdab928fe4b58063b"
+    },
+    {
+      "path": "world/visuals/voxel/voxel_scenery_styler.gd",
+      "bytes": 7006,
+      "lines": 401,
+      "sha256": "b98c848ab72838fe8acfd9a057b6b864c71bb5054f9664802823894dac51754b"
+    },
+    {
+      "path": "world/world_manager_v2.gd",
+      "bytes": 3106,
+      "lines": 100,
+      "sha256": "b44f190f15e20de0352788d3129c75e59592cb1d0468b1c41682b16484a46328"
+    }
+  ],
+  "removed_bytes": 71738,
+  "removed_lines": 2523
+}

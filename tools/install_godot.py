@@ -48,6 +48,8 @@ def main():
     parser.add_argument("--directory", type=Path, required=True)
     parser.add_argument("--platform", choices=["linux", "windows"],
                         default="windows" if os.name == "nt" else "linux")
+    parser.add_argument("--editor-only", action="store_true",
+                        help="Install the verified editor without downloading desktop export templates")
     args = parser.parse_args()
     directory = args.directory.resolve()
     directory.mkdir(parents=True, exist_ok=True)
@@ -65,6 +67,11 @@ def main():
                    else f"Godot_v{VERSION}-stable_linux.x86_64")
     editor = editor_dir / editor_name
     editor.chmod(0o755)
+    if args.editor_only:
+        metadata = {"version": VERSION, "editor": str(editor), "templates": None}
+        (directory / "editor-toolchain.json").write_text(json.dumps(metadata, indent=2) + "\n")
+        print(json.dumps(metadata), flush=True)
+        return
     templates = editor_dir / "editor_data/export_templates" / f"{VERSION}.stable"
     templates.mkdir(parents=True, exist_ok=True)
     template_archive = download_verified(directory, ASSETS["templates"])

@@ -1,0 +1,41 @@
+{
+  "godot": "4.6.3",
+  "checks": [
+    {
+      "name": "audio/audio_scene_lifecycle_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.897
+    },
+    {
+      "name": "audio/audio_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.128
+    },
+    {
+      "name": "audio/music_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.836
+    },
+    {
+      "name": "audio/audio_shutdown_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.175
+    },
+    {
+      "name": "audio/audio_expansion_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 32.001
+    },
+    {
+      "name": "audio/runtime_shutdown_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.992
+    }
+  ]
+}

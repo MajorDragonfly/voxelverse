@@ -4,12 +4,11 @@ import argparse
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
 import sys
 import tempfile
 
-from validate_export import isolated_env
+from validation_support import isolated_env, validation_editor
 from validate_godot import ERROR
 
 
@@ -27,7 +26,11 @@ def main():
     args = parser.parse_args()
     if args.frames < 4 or args.warmup < 4 or min(args.size) < 180:
         parser.error("Use at least 4 measured/warmup frames and a resolution of at least 180 pixels per side.")
-    godot = str(Path(shutil.which(args.godot) or args.godot).expanduser().resolve())
+    with validation_editor(args.godot) as editor:
+        return capture(args, str(editor))
+
+
+def capture(args, godot):
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)

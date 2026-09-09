@@ -4,13 +4,13 @@ Ein Spore-inspiriertes Einzelspielerspiel in Voxelgrafik: eine eigene Kreatur ge
 
 **Zentrale Projektplanung: [ROADMAP.md](ROADMAP.md).** Sie unterscheidet vorhandene Funktionen von geplanten Phasen, beschreibt die Grundlagen für echte Planeten/Sternsysteme und hält die Reihenfolge der nächsten Arbeiten fest. Vor neuen Entwicklungspaketen lesen und nach der Umsetzung aktualisieren.
 
-Der aktuelle Prototyp enthält Kreaturensteuerung und Überleben, Entdeckungen/Körperteilfreischaltungen, gestreamte Landschaften, einfache regionale Ökologie, Planetenwechsel per Debug-Taste sowie Kreaturen- und Gebäudeeditor. Das separate M1/M1b-Planetenlabor ergänzt begehbare Kugeloberflächen bis 12.742 km Durchmesser, ein kleines Testsystem, Doppelsterne und Orbit-/Systemansichten. Spätere spielbare Phasen und der Verhaltens-Skilltree sind geplant.
+Der integrierte Stand enthält Kreaturensteuerung und Überleben, einen gemeinsamen Entdeckungs-/Entwicklungsbuch-Einstieg, Scans und Körperteilfreischaltungen, einen wirkenden Verhaltens-Skilltree, Heimatgefährten sowie den bestätigten Wechsel in ein erstes spielbares Stammesdorf. Hinzu kommen gestreamte Landschaften, Kreaturen- und Gebäudeeditor, Start-/Pausenmenüs und Audio. Das separate M1/M1b-Planetenlabor ergänzt begehbare Kugeloberflächen bis 12.742 km Durchmesser, ein kleines Testsystem, Doppelsterne und Orbit-/Systemansichten. Mittelalter, Neuzeit und Weltraum sind noch keine freigegebenen Spielphasen. Neue parallele Fachpakete gelten erst nach ihrer Integration als gemeinsamer Stand.
 
 M1c ergänzt einen reproduzierbaren Galaxiekatalog: Sektoren und Sternsysteme abfragen, reale Körpergrößen ansehen sowie eigene Namen, Entdeckungen und Notizen speichern. Die Hauptwelt erhält zusammenhängende Baum-Fernmodelle, eine begrenzte Waldvorschau und gemeinsame Nah-/Fernfarben des Geländes. [M1c und Fernlandschaft: Umsetzung und Testpakete](docs/GALAXY_CATALOG_AND_DISTANCE.md).
 
 ## Projekt starten
 
-`project.godot` mit Godot 4.6.3 öffnen und die Hauptszene `main/main.tscn` starten. Windows-/Linux-Exporte und ihre Prüfung sind in [DESKTOP_EXPORT.md](docs/DESKTOP_EXPORT.md) beschrieben.
+`project.godot` mit Godot 4.6.3 öffnen und **F5 / Projekt ausführen** wählen. Das konfigurierte Startmenü `ui/frontend/main_menu.tscn` führt in die Kampagne. `main/main.tscn` ist die eigentliche Spielszene für gezielte Entwicklerprüfungen. Windows-/Linux-Exporte und ihre Prüfung sind in [DESKTOP_EXPORT.md](docs/DESKTOP_EXPORT.md) beschrieben.
 
 **Einstellungen und Pause:** **Esc** oder **F8** öffnet das mit Maus bedienbare Menü. Bildschirmmodus, Fensterauflösung, Oberflächengröße und VSync lassen sich übernehmen und speichern. „Zurück zum Spiel“ stellt den vorherigen Mausmodus wieder her; „Speichern & beenden“ beendet erst nach erfolgreicher Sicherung.
 
@@ -25,5 +25,6 @@ M1c ergänzt einen reproduzierbaren Galaxiekatalog: Sektoren und Sternsysteme ab
 - [Gemeinsames Bauplansystem und Gebäudeeditor](assembly/README.md)
 - [Letzter Grafik-/Gewässertiefenbericht](art/VOXEL_STYLE_DEPTH_REPORT.md)
 - [Umgebungs- und Assetplanung](art/FINAL_PRODUCTION_ROADMAP.md)
+- [Projektbereinigung und sichere parallele Prüfungen](docs/WORK_PROJECT_MAINTENANCE.md)
 
 Entwicklung der Kreatur erfolgt über Entdecken und bewusstes Gestalten. Ein Genom-/Mutationsspielsystem ist nicht Teil des aktuellen Projekts. Ältere versionierte Dateien und Berichte können historische Ansätze enthalten; für den aktiven Stand gelten die Szenenreferenzen und die zentrale Roadmap.

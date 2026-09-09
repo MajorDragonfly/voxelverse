@@ -1,0 +1,20 @@
+[
+  {
+    "workflow": "godot-validate.yml",
+    "triggers_unchanged": true,
+    "acceptance_commands_preserved": true,
+    "concurrency_scoped_to_workflow_event_ref": true
+  },
+  {
+    "workflow": "modular-assembly-validate.yml",
+    "triggers_unchanged": true,
+    "acceptance_commands_preserved": true,
+    "concurrency_scoped_to_workflow_event_ref": true
+  },
+  {
+    "workflow": "planet-diversity-v9.yml",
+    "triggers_unchanged": true,
+    "acceptance_commands_preserved": true,
+    "concurrency_scoped_to_workflow_event_ref": true
+  }
+]

@@ -32,8 +32,10 @@ jobs:
       - name: Cache pinned Godot downloads
         uses: actions/cache@v4
         with:
-          path: ${{ runner.temp }}/godot-export-toolchain
-          key: godot-4.6.3-desktop-v1-${{ runner.os }}
+          path: |
+            ${{ runner.temp }}/godot-export-toolchain/*.zip
+            ${{ runner.temp }}/godot-export-toolchain/*.tpz
+          key: godot-desktop-archives-${{ runner.os }}-${{ hashFiles('tools/install_godot.py') }}
       - name: Install verified editor and templates
         run: >-
           python tools/install_godot.py

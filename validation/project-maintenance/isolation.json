@@ -1,0 +1,10 @@
+{
+  "portable_editor_isolated": true,
+  "concurrent_processes_have_distinct_saves": true,
+  "existing_sentinel_seen": false,
+  "checks": 2,
+  "platform": "linux",
+  "godot": "4.6.3",
+  "temporary_editor_removed": true,
+  "portable_installation_unchanged": true
+}
