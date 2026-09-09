@@ -21,9 +21,11 @@ func _capture() -> void:
 		await process_frame
 	editor.call("_change_color", Color("89bfa0"), "base_color")
 	editor.call("_change_color", Color("30566c"), "accent_color")
+	var detail_metrics: Array[Dictionary] = []
 	for entry in [["round", "body"], ["grazer", "parts"], ["upright", "paint"], ["crawler", "test"]]:
 		editor.call("_set_mode", "body")
 		editor.call("_apply_body_preset", entry[0])
+		detail_metrics.append(_measure_shape_edits(editor, entry[0]))
 		editor.call("_set_mode", entry[1])
 		if entry[1] == "parts":
 			editor.call("_on_category_button_pressed", "eyes")
@@ -38,7 +40,34 @@ func _capture() -> void:
 			push_error("Could not save editor screenshot.")
 			quit(1)
 			return
+	var metrics := FileAccess.open(output.path_join("detail_metrics.json"), FileAccess.WRITE)
+	metrics.store_string(JSON.stringify({"presets": detail_metrics, "timing": "synchronous editor shape changes, warm part cache; excludes rendering"}, "\t") + "\n")
+	metrics.close()
 	editor.free()
 	await process_frame
 	print("Creature studio rendered review saved to ", output)
 	quit(0)
+
+
+func _measure_shape_edits(editor: Node, preset: String) -> Dictionary:
+	var selected: int = editor.get("selected_body_segment")
+	editor.set("selected_body_segment", 3)
+	var original: float = editor.SpineProfile.get_segment(editor.get("blueprint"), 3)["width_scale"]
+	var samples: Array[float] = []
+	editor.call("_begin_gesture")
+	for index in range(7):
+		var start: int = Time.get_ticks_usec()
+		editor.call("_change_shape", original + float(index + 1) * 0.006, "width_scale")
+		samples.append(float(Time.get_ticks_usec() - start) / 1000.0)
+	editor.call("_end_gesture")
+	editor.call("_undo_edit")
+	editor.set("selected_body_segment", selected)
+	editor.call("_refresh_preview")
+	var preview: Node3D = editor.get("_preview")
+	var skin: MeshInstance3D = preview.get_node("BodyV4/SculptedSkin")
+	var sorted: Array[float] = samples.duplicate()
+	sorted.sort()
+	return {"preset": preset, "body_cell_size": skin.mesh.get_meta("voxel_size"),
+		"body_voxels": skin.mesh.get_meta("voxel_count"),
+		"body_triangles": skin.mesh.surface_get_arrays(0)[Mesh.ARRAY_INDEX].size() / 3,
+		"edit_samples_ms": samples, "edit_median_ms": sorted[sorted.size() / 2], "edit_max_ms": sorted[-1]}

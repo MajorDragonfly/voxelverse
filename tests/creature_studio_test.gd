@@ -36,6 +36,7 @@ func _run() -> void:
 	_expect(skin != null, "Editable voxel skin is absent.")
 	if skin != null:
 		_check_cubic_faces(skin.mesh)
+		_check_body_shell(skin.mesh)
 		var cells: Dictionary = skin.mesh.get_meta("voxel_cells", {})
 		_expect(not cells.is_empty(), "Voxel body cannot be picked for part placement.")
 		for cell: Vector3i in cells:
@@ -161,6 +162,31 @@ func _check_voxel_contract() -> void:
 	_expect(Voxels.raycast(gap, Vector3(1.5, 5, 0.5), Vector3.DOWN).is_empty(), "An empty cell inside the body bounds accepted a part.")
 	for kind: String in ["ellipsoid", "capsule", "cone"]:
 		_check_cubic_faces(Voxels.primitive(Vector3(0.25, 0.8, 0.25), kind))
+	# Thin, vertically displaced rows and capped long designs must use the
+	# same surface as the exhaustive mesher, including their inside corners.
+	var thin: Dictionary = Assembly.create_default()
+	Spine.set_body_length_scale(thin, Spine.MAX_BODY_LENGTH_SCALE)
+	for index in range(7):
+		Spine.set_segment(thin, index, {"width_scale": 0.22 if index % 2 == 0 else 1.3,
+			"height_scale": 0.22 if index % 2 == 0 else 1.3, "y_offset": float(index % 3) * 0.43})
+	var skin: ArrayMesh = Surface.build_skin(thin)
+	_check_body_shell(skin)
+	var size: Vector3 = skin.get_aabb().size / float(skin.get_meta("voxel_size"))
+	_expect(maxf(size.x, maxf(size.y, size.z)) <= 130.0, "Extreme sculpt exceeded the bounded voxel grid.")
+	var cells: Dictionary = skin.get_meta("voxel_cells", {})
+	var interior_cell := Vector3i(-1, 0, 0)
+	if cells.has(interior_cell):
+		var inside: Vector3 = (Vector3(interior_cell) + Vector3.ONE * 0.5) * float(skin.get_meta("voxel_size"))
+		_expect(not Voxels.raycast(skin, inside, Vector3.RIGHT).is_empty(), "Surface optimization discarded solid occupancy used by picking.")
+
+
+func _check_body_shell(mesh: ArrayMesh) -> void:
+	var reference: ArrayMesh = Voxels.from_cells(mesh.get_meta("voxel_cells", {}), float(mesh.get_meta("voxel_size")))
+	var actual: Array = mesh.surface_get_arrays(0)
+	var expected: Array = reference.surface_get_arrays(0)
+	_expect(actual[Mesh.ARRAY_VERTEX] == expected[Mesh.ARRAY_VERTEX], "Row boundary optimization changed visible body faces.")
+	_expect(actual[Mesh.ARRAY_INDEX] == expected[Mesh.ARRAY_INDEX], "Row boundary optimization leaked or lost triangles.")
+	_expect(actual[Mesh.ARRAY_COLOR] == expected[Mesh.ARRAY_COLOR], "Row boundary optimization exposed unpainted interior cells.")
 
 
 func _check_cubic_faces(mesh: ArrayMesh) -> void:

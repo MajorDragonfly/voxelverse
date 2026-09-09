@@ -6,12 +6,15 @@ const NEIGHBORS: Array[Vector3i] = [Vector3i.RIGHT, Vector3i.LEFT, Vector3i.UP, 
 static var _primitive_cache: Dictionary = {}
 
 
-static func from_cells(cells: Dictionary, cell_size: float, keep_cells: bool = false) -> ArrayMesh:
+static func from_cells(cells: Dictionary, cell_size: float, keep_cells: bool = false, surface_cells: Array[Vector3i] = []) -> ArrayMesh:
 	var vertices := PackedVector3Array()
 	var normals := PackedVector3Array()
 	var colors := PackedColorArray()
 	var indices := PackedInt32Array()
-	for cell: Vector3i in cells:
+	# Body row spans already identify the shell. Keep the complete occupancy
+	# for neighbor culling and picking, but avoid walking its solid interior.
+	var candidates: Array = surface_cells if not surface_cells.is_empty() else cells.keys()
+	for cell: Vector3i in candidates:
 		var color: Color = cells[cell]
 		for neighbor: Vector3i in NEIGHBORS:
 			if cells.has(cell + neighbor):
@@ -57,7 +60,8 @@ static func primitive(size: Vector3, kind: String = "ellipsoid") -> ArrayMesh:
 		return _primitive_cache[key]
 	var longest: float = maxf(dimensions.x, maxf(dimensions.y, dimensions.z))
 	var smallest: float = minf(dimensions.x, minf(dimensions.y, dimensions.z))
-	var step: float = maxf(minf(0.065, smallest / 3.0), longest / 24.0)
+	# Fine eyes, pupils, joints and horn tips need smaller cells than the skin.
+	var step: float = maxf(minf(0.0325, smallest / 6.0), longest / 48.0)
 	var radius: Vector3 = dimensions * 0.5
 	var limit := Vector3i((radius / step).ceil())
 	var cells: Dictionary = {}

@@ -7,8 +7,8 @@ const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
 const Parts = preload("res://creatures/editor/creature_part_library.gd")
 const Spine = preload("res://creatures/editor/creature_spine_profile.gd")
 const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
-const BODY_CELL_SIZE: float = 0.105
-const MAX_BODY_AXIS_CELLS: float = 64.0
+const BODY_CELL_SIZE: float = 0.035
+const MAX_BODY_AXIS_CELLS: float = 128.0
 
 
 static func colors(blueprint: Dictionary) -> Array[Color]:
@@ -54,7 +54,10 @@ static func build_skin(blueprint: Dictionary) -> ArrayMesh:
 	# Equal-sized cubes in all three axes. Extreme designs coarsen within a
 	# bounded grid rather than stretching the cells into rectangular slices.
 	var step: float = maxf(BODY_CELL_SIZE * scale, maxf(length, maxf(width, top - bottom)) / MAX_BODY_AXIS_CELLS)
-	var cells: Dictionary = {}
+	# An elliptical cross-section consists of symmetric, solid X rows. Their
+	# extents reveal the boundary without six lookups for every interior cell.
+	var rows: Dictionary = {}
+	var sections: Dictionary = {}
 	for z in range(floori(-length * 0.5 / step), ceili(length * 0.5 / step)):
 		var t: float = (float(z) + 0.5) * step / length + 0.5
 		if t <= 0.0 or t >= 1.0:
@@ -65,26 +68,46 @@ static func build_skin(blueprint: Dictionary) -> ArrayMesh:
 		var radius: Vector2 = cross["radius"] * cap
 		# Keep thin sculpted necks represented on the symmetric cubic lattice.
 		radius = radius.max(Vector2.ONE * step * 0.76)
+		sections[z] = {"t": t, "center_y": center.y, "radius": radius}
 		for y in range(floori((center.y - radius.y) / step), ceili((center.y + radius.y) / step)):
-			for x in range(floori(-radius.x / step), ceili(radius.x / step)):
-				var cell := Vector3i(x, y, z)
-				var radial := Vector2((float(x) + 0.5) * step / radius.x, ((float(y) + 0.5) * step - center.y) / radius.y)
-				if radial.length_squared() > 1.0:
-					continue
-				var angle: float = atan2(radial.y, absf(radial.x))
-				var belly: float = floorf(clampf(-radial.y, 0.0, 1.0) * 3.0) / 3.0
-				var color: Color = palette[0].lerp(palette[0].lightened(0.26), belly * 0.7)
-				var mask: bool = false
-				match pattern:
-					"spots": mask = sin(t * 53.0 + cos(angle * 5.0)) * cos(angle * 7.0) > 0.60
-					"stripes": mask = sin(t * 47.0 + sin(angle * 3.0)) > 0.30
-					"warning": mask = sin(t * 36.0 + angle * 2.0) > 0.30
-					"crystal": mask = cos(t * 50.0) * sin(angle * 8.0) > 0.45
-				if mask and radial.y > -0.25:
-					color = color.lerp(palette[1], 0.86)
-				var variation: float = Voxels.shade(cell)
-				cells[cell] = color.lightened(variation) if variation > 0.0 else color.darkened(-variation)
-	return Voxels.from_cells(cells, step, true)
+			var radial_y: float = ((float(y) + 0.5) * step - center.y) / radius.y
+			if absf(radial_y) > 1.0:
+				continue
+			var extent: int = floori(radius.x * sqrt(maxf(0.0, 1.0 - radial_y * radial_y)) / step + 0.5)
+			if extent > 0:
+				rows[Vector2i(y, z)] = extent
+	var cells: Dictionary = {}
+	var surface_cells: Array[Vector3i] = []
+	for row: Vector2i in rows:
+		var extent: int = rows[row]
+		var interior: int = extent - 1
+		for offset: Vector2i in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+			interior = mini(interior, int(rows.get(row + offset, 0)))
+		var cross: Dictionary = sections[row.y]
+		var t: float = cross["t"]
+		var radius: Vector2 = cross["radius"]
+		var radial_y: float = ((float(row.x) + 0.5) * step - float(cross["center_y"])) / radius.y
+		var belly: float = floorf(clampf(-radial_y, 0.0, 1.0) * 3.0) / 3.0
+		var row_color: Color = palette[0].lerp(palette[0].lightened(0.26), belly * 0.7)
+		for x in range(-extent, extent):
+			var cell := Vector3i(x, row.x, row.y)
+			if x >= -interior and x < interior:
+				cells[cell] = Color.WHITE # Occupancy only: never a visible face.
+				continue
+			surface_cells.append(cell)
+			var color: Color = row_color
+			var angle: float = atan2(radial_y, absf((float(x) + 0.5) * step / radius.x))
+			var mask: bool = false
+			match pattern:
+				"spots": mask = sin(t * 53.0 + cos(angle * 5.0)) * cos(angle * 7.0) > 0.60
+				"stripes": mask = sin(t * 47.0 + sin(angle * 3.0)) > 0.30
+				"warning": mask = sin(t * 36.0 + angle * 2.0) > 0.30
+				"crystal": mask = cos(t * 50.0) * sin(angle * 8.0) > 0.45
+			if mask and radial_y > -0.25:
+				color = color.lerp(palette[1], 0.86)
+			var variation: float = Voxels.shade(cell)
+			cells[cell] = color.lightened(variation) if variation > 0.0 else color.darkened(-variation)
+	return Voxels.from_cells(cells, step, true, surface_cells)
 
 
 static func material(color: Color, vertex_colors: bool = false) -> StandardMaterial3D:
