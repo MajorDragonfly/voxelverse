@@ -100,6 +100,12 @@ func _build_species() -> void:
 		_preview.call("set_editor_state", blueprint, -1, -1, false)
 	else:
 		_preview.call("set_blueprint", blueprint)
+	if _preview.has_meta("ground_y"):
+		var collision_floor: float = 0.0
+		var collider := get_node_or_null("CollisionShape3D") as CollisionShape3D
+		if collider != null and collider.shape is CapsuleShape3D:
+			collision_floor = collider.position.y - collider.shape.height * 0.5
+		_preview.position.y = collision_floor - float(_preview.get_meta("ground_y")) * individual_scale + 0.015
 	_preview.call("set_motion", "idle")
 	_disable_collisions(_preview)
 	var stats: Dictionary = Blueprint.calculate_stats(blueprint)

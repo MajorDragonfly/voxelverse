@@ -24,11 +24,12 @@ func _run() -> void:
 	for count: int in [1, 2, 3]:
 		_check_stance(count)
 	await _check_terrain()
+	await _check_wildlife()
 	await _check_editor()
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():
-		print("Creature parts studio passed: 29 part recipes, 7 end pieces, XYZ controls, undo, mirrored spikes, center sockets, 2/4/6-leg soles, terrain IK, cosmetic skins and save roundtrip.")
+		print("Creature parts studio passed: 29 part recipes, 7 end pieces, XYZ controls, undo, mirrored spikes, center sockets, 2/4/6-leg soles, terrain IK, wildlife floor alignment, cosmetic skins and save roundtrip.")
 	quit(0 if failures.is_empty() else 1)
 
 
@@ -222,6 +223,42 @@ func _check_terrain() -> void:
 	animator.free()
 	preview.free()
 	player.free()
+	floor.free()
+
+
+func _check_wildlife() -> void:
+	var floor := StaticBody3D.new()
+	var collision := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(20, 0.2, 20)
+	collision.shape = box
+	floor.position.y = -0.1
+	floor.add_child(collision)
+	root.add_child(floor)
+	for index in range(2):
+		var wildlife: CharacterBody3D = load("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
+		wildlife.call("configure", 7 + index * 22, 91, Vector2i.ZERO, "grazer" if index == 0 else "predator")
+		wildlife.set("visual_scale_min", 0.42 if index == 0 else 0.72)
+		wildlife.set("visual_scale_max", wildlife.get("visual_scale_min"))
+		wildlife.position = Vector3(2, 0.018, -3)
+		wildlife.rotation.y = deg_to_rad(37)
+		wildlife.set_physics_process(false)
+		root.add_child(wildlife)
+		var preview: Node3D = wildlife.get("_preview")
+		preview.set_process(false)
+		for frame in range(4):
+			await physics_frame
+			wildlife.velocity = Vector3.DOWN
+			wildlife.move_and_slide()
+		_expect(wildlife.is_on_floor(), "Wildlife fixture did not reach the physical floor.")
+		var contacts: Array[Node] = preview.find_children("RuntimeFootContact", "Marker3D", true, false)
+		_expect(contacts.size() >= 2, "Wildlife lost its generated leg pair.")
+		var motion: RefCounted = preview.get("_motion")
+		for time: float in [0.0, 0.47]:
+			motion.call("sample", "idle", time)
+			for foot: Node3D in contacts:
+				_expect(foot.global_position.y >= -0.0002 and foot.global_position.y < 0.017, "Wildlife's fixed visual height displaced its soles from the floor.")
+		wildlife.free()
 	floor.free()
 
 
