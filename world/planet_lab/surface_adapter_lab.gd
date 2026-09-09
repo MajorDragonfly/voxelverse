@@ -108,7 +108,10 @@ func open_body(id: String, capture: bool = true) -> bool:
 	walker.camera.make_current()
 	walker.enabled = not paused
 	stream_objects()
-	_sun.basis = Cube.frame(walker.up_direction).rotated(walker.basis.x, -0.65)
+	# Use one radial frame for both light orientation and its rotation axis.
+	# A saved player heading must not rotate sunlight below the surface.
+	var sun_frame: Basis = Cube.frame(walker.up_direction)
+	_sun.basis = sun_frame.rotated(sun_frame.x, -0.65)
 	initial_load_ms = (Time.get_ticks_usec() - started) / 1000.0
 	return true
 

@@ -183,6 +183,7 @@ func _run() -> void:
 	ocean.height = 0.6
 	world.records[world.body_id].player.location = ocean.duplicate(true)
 	world.open_body(world.body_id, false)
+	_expect(world._sun.basis.z.dot(world.walker.up_direction) > 0.55, "Saved heading directed sunlight under the ground")
 	world.set_paused(false)
 	for frame in range(60):
 		await physics_frame

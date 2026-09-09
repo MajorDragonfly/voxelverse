@@ -12,3 +12,5 @@ func run() -> void:
 	for tile: Dictionary in tiles:
 		tile["anchor"] = surface.point(tile.face, tile.uv.x + tile.width * 0.5, tile.uv.y + tile.width * 0.5)
 		tile["arrays"] = Patch.build_arrays(tile, surface)
+		if body.get("surface_generation") == "living_planet_v1":
+			preload("res://world/surface/visuals/living_water_depth.gd").enrich(tile.arrays, tile)
