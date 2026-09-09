@@ -18,6 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         renderer: [forward_plus, gl_compatibility]
+        review: [planets, environment]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,26 +37,28 @@ jobs:
         run: |
           python tools/validate_godot.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --tests environment_production_test --skip-main --output "${{ runner.temp }}/render-import"
       - name: Render underwater optics, voxel planets, orbit and system
+        if: matrix.review == 'planets'
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
           xvfb-run -a -s '-screen 0 1280x720x24' python tools/profile_environment.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/planet-lab-review" --cases underwater planet_lab large_planet --seeds 12345 --size 1280 720 --frames 4 --warmup 4 --fast-setup
       - name: Upload M1 review
-        if: always()
+        if: always() && matrix.review == 'planets'
         uses: actions/upload-artifact@v4
         with:
           name: planet-lab-review-${{ matrix.renderer }}-${{ github.event_name }}
           path: ${{ runner.temp }}/planet-lab-review
           retention-days: 14
       - name: Render world, assets, Far clusters and creature comparisons
+        if: matrix.review == 'environment'
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
           xvfb-run -a -s '-screen 0 960x540x24' python tools/profile_environment.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/environment-review" --size 960 540 --frames 4 --warmup 4 --fast-setup
       - name: Upload rendered review and measurements
-        if: always()
+        if: always() && matrix.review == 'environment'
         uses: actions/upload-artifact@v4
         with:
           name: environment-review-${{ matrix.renderer }}-${{ github.event_name }}

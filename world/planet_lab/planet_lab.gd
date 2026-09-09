@@ -150,6 +150,11 @@ func _build_system_view() -> void:
 			space.add_child(orbit)
 			orbit_lines[id] = orbit
 		var sky_node := _body_visual(body, meshes[id])
+		# Camera-relative sky models must not cast camera-relative shadows.
+		sky_node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		for child in sky_node.get_children():
+			if child is GeometryInstance3D:
+				child.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		sky.add_child(sky_node)
 		sky_bodies[id] = sky_node
 		if body.kind == "star":
@@ -172,11 +177,13 @@ func _build_system_view() -> void:
 	space.add_child(landing_marker)
 
 
-func _body_visual(body: Dictionary, model: Dictionary) -> Node3D:
+func _body_visual(body: Dictionary, model: Dictionary) -> MeshInstance3D:
 	var node := MeshInstance3D.new()
 	node.mesh = model.land
 	var material := StandardMaterial3D.new()
 	if body.kind == "star":
+		# This mesh depicts the light source; it must not eclipse its own light.
+		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		material.albedo_color = Color("ffdc9b") if body.id == "m1:sol" else Color("b8dcff")
 	else:
