@@ -1,6 +1,8 @@
 # Übergabe Auftrag 2 – Passprüfung B2
 
-9. September 2026 · Branch `agent/creature-body-fit`.
+9. September 2026 · Branch `agent/creature-body-fit` · [PR #35](https://github.com/MajorDragonfly/voxelverse/pull/35).
+
+Implementierung: **`beda03adf70de89af206a46495a87c1c173de34f`**, Quellbaum **`2f4a1c7edcd1cb2fe65e0e0f8062ef36cfde4659`**. Nachfolgende Änderungen dieses Pakets ergänzen ausschließlich die Übergabenachweise.
 
 ## Basis und Umfang
 
@@ -27,7 +29,9 @@ Godot 4.6.3. Lokal erfolgreich: `creature_body_fit_test`, `creature_body_contrac
 
 Der neue Test prüft belegte/leere Voxel, Berührung, kleine Durchdringung, gedrehte Boundingbox-Leerräume, unbekannte Geometrie und Suchbudget, zwei/vier/sechs Beine, unveränderte Befunde bei gedrehtem/ungleich skaliertem Weltbezug, einen lokal gedrehten/skalierten Hornkörper, alle drei Anschlusskorrekturen, ausgeschaltete/zukünftige Anschlussdaten, ausgeschlossene Hilfsgeometrie, veraltete Vorschläge, gezielte Beinänderungen, Undo/Redo und Speichern/Neustart. Die bestehende Gelenkprüfung deckt weiterhin Rampen, Stufen und Fußkontakt ab.
 
-Die lokale Umgebung hat keinen nutzbaren Grafikdisplay. Die ergänzte CI-Abnahme erzeugt echte Werkstattaufnahmen in Compatibility und Forward+ für Befunde, Korrekturen, 1280×720 und einen angehaltenen Rampenlauf. Der bestätigte Lauf wird nach Veröffentlichung hier ergänzt.
+Die absichtlich ungünstige Referenzform zeigt vier Überschneidungen: beide Reiterbeine und beide Zugleinen treffen den Rumpf. Beim Sechsbeiner werden vier überstreckte Beine in zwei Paaren gefunden. Nach gezielter Übernahme beider Segmentlängen sinkt der größte Streckfaktor von **1,489684** auf **1,0**; alle sechs Füße bleiben auf der Bodenebene, maximale Abweichung **0,000000134** Entwurfseinheiten. Die andere Anatomie bleibt unverändert. Jeder der drei Anschlussvorschläge ist nach Übernahme für seine feste Passprobe kollisionsfrei.
+
+Die lokale Umgebung hat keinen nutzbaren Grafikdisplay. Die ergänzte CI-Abnahme erzeugt echte Werkstattaufnahmen in Compatibility und Forward+ für Befunde, Korrekturen, 1280×720 und einen angehaltenen Rampenlauf. [Grafik-/Fachprüfung, Lauf 34347964334](https://github.com/MajorDragonfly/voxelverse/actions/runs/34347964334) gehört exakt zum oben genannten Implementierungscommit. Zum Übergabestand wartet dieser Lauf auf einen GitHub-Runner (`queued`); eine erfolgreiche Grafikabnahme oder manuelle Bildsichtprüfung wird noch nicht behauptet.
 
 ## Grenzen
 
