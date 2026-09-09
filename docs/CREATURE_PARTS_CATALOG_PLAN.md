@@ -6,6 +6,8 @@ Die [Roadmap](../ROADMAP.md) ordnet den Ausbau der Kreaturenphase zu. [FEATURE_B
 
 ## Gestaltungsziel
 
+**Freiwillige Gestaltung:** Eine passende mitgelieferte oder heruntergeladene Kreaturenvorlage kann ohne Editorarbeit übernommen werden. Der Baukasten bleibt zum Selberbauen und optionalen Anpassen verfügbar. Der gemeinsame [Community-Designplan](COMMUNITY_DESIGNS_PLAN.md) definiert Austausch, Versionen und Erhalt der eigenen Spezies-/Kampagnenidentität.
+
 Der Spieler baut sein eigenes Tier aus erkennbaren Formen realer Tiere: beispielsweise einen breiten Körper mit Bärentatzen, Rüssel, Krebsschere und Greifschwanz. Die Vorbilder helfen, Formen wiederzuerkennen; sie schreiben keine vollständige Tierart oder starre Zusammenstellung vor. Alle Teile folgen derselben feinen Voxeloptik und passen in Maßstab, Anschlüssen und Detailgrad zum gemeinsamen Körper.
 
 **Einzelne Form statt bloßer Umbenennung:** Eine Krebsschere, ein Greiffuß oder ein Oktopusmund besitzt eine eigene lesbare Bauform. Größen, Farben und Hautmuster erweitern diese Form. Reine Farbvarianten werden nicht als neue Körperteile gezählt.
@@ -159,6 +161,8 @@ Panzer und Gehäuse sind bewusste eigenständige Teile. **Hautschuppen und Fell 
 | Panzerkreatur | Flacher Körper, kurze Beine, Spalthufe, gewölbter Panzer, Stielaugen | Freiraum um Beine/Kopf und korrekte symmetrische Platzierung |
 | Tentakelwesen | Runder Körper, Oktopusmund, mehrere Tentakel, kleiner Flossensaum | Eigenständiger Mund, Gelenkketten und gemeinsame Vorschau; Schwimmen als gesonderte Funktionsabnahme |
 | Geflügelter Vierbeiner | Vier Laufbeine, Katzenpfoten, Hautflügel, langer Schwanz | Anschlussvielfalt und Bewegungsraum; Flugfähigkeit erst nach geprüftem Flugmodell |
+
+Zusätzlich wird eine vollständige Kreaturenvorlage zwischen unabhängigen Spielständen übertragen und ohne manuelles Anbringen ihrer Teile im erlaubten Erschaffungs-/Umbauablauf verwendet. Anforderungen werden vor der Übernahme geprüft; eine passende Startvorlage bleibt direkt auswählbar.
 
 Alle Beispiele werden nach Speichern/Laden erneut geöffnet. Körper, Teile, Farben, Freischaltungen, Symmetrie und verfügbare Funktionen müssen erhalten bleiben. Altentwürfe dienen zusätzlich als Migrationsfälle.
 

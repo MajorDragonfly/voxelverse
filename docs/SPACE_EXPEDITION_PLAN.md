@@ -6,13 +6,13 @@ Stand: 9. September 2026 · **Status: geplant** · Konkretisierung von **M9** au
 
 Lars möchte mit einem großen, selbst gestalteten und ausgerüsteten Expeditionsschiff durch den Weltraum reisen. Ein Sternzerstörer aus Star Wars beschreibt dabei das gewünschte Gefühl von Größe und einer mächtigen mobilen Basis. Ein kleineres Schiff in der Größenrolle eines Starfighters übernimmt den Flug zur Oberfläche, die Landung und die planetare Expedition. Im Verlauf der Weltraumphase soll das Expeditionsschiff größer werden und mehr Waffen, Lagerraum, zusätzliche Schiffe und weitere Ausstattung aufnehmen können.
 
-**Schon der Einstieg verwendet zwei Schiffsebenen:** Das erste Expeditionsschiff ist gegenüber seinem Beiboot groß. Spätere Fortschritte erweitern den möglichen Rumpfumfang und die Ausstattung weiter. Der Spieler gestaltet die Schiffe aus einzelnen Teilen im gemeinsamen Bauplansystem; beide Schiffe besitzen eigene gespeicherte Entwürfe und individuelle Zustände.
+**Schon der Einstieg verwendet zwei Schiffsebenen:** Das erste Expeditionsschiff ist gegenüber seinem Beiboot groß. Spätere Fortschritte erweitern den möglichen Rumpfumfang und die Ausstattung weiter. Der Spieler kann die Schiffe aus einzelnen Teilen im gemeinsamen Bauplansystem gestalten oder eine passende fertige Vorlage wählen. Mitgelieferte und heruntergeladene Community-Entwürfe sind ohne eigene Editorarbeit verwendbar; beide Schiffe besitzen eigene gespeicherte Entwürfe und individuelle Zustände. Der gemeinsame [Community-Designplan](COMMUNITY_DESIGNS_PLAN.md) regelt Austausch und Versionen; Größe, Module, Baukosten und Hangareignung werden vor der Verwendung geprüft.
 
 Die eigene Spezies, ihre Zivilisation, Heimat und bisherige Entdeckungen bleiben erhalten. Der ausdrücklich bestätigte Wechsel in die Weltraumphase schaltet ihre tatsächlich spielbaren Systeme frei. Das Steuern eines Beiboots oder eines Forschers auf einer Oberfläche ändert nicht die gespeicherte Epoche.
 
 ## 1. Der zentrale Spielablauf
 
-1. **Expedition vorbereiten:** Expeditionsschiff bauen/umbauen, Module ausrüsten, ein kleines Landungs-/Erkundungsschiff mitnehmen und benötigte Vorräte verladen.
+1. **Expedition vorbereiten:** Passenden Expeditionsschiffentwurf aus Vorlagen wählen oder selbst gestalten, Schiff bauen/umbauen, Module ausrüsten, ein kleines Landungs-/Erkundungsschiff mitnehmen und benötigte Vorräte verladen.
 2. **Mit dem großen Schiff reisen:** Schiff direkt steuern und über die passende Orbit-/System-/Galaxienkarte ein bekanntes oder erreichbares Ziel auswählen. Erste Reisen bleiben auf einen begrenzten, spielbaren Systembereich beschränkt.
 3. **Planeten anfliegen und grob untersuchen:** Geeigneten Aufenthaltsort beim Planeten wählen und mit den tatsächlich verfügbaren Sensoren mögliche Expeditionsziele ermitteln.
 4. **Ins Beiboot wechseln:** Ein konkretes Schiff aus dem Hangar auswählen, abdocken und selbst zur Oberfläche fliegen. Das Expeditionsschiff verbleibt als persistente mobile Basis im Weltraum.
@@ -120,10 +120,11 @@ M9.5 ist kein zwingendes Kampftor vor friedlicher Systemreise oder Kolonisation.
 ## 8. Gemeinsame Abnahme
 
 - [ ] Neue Weltraumkampagne bzw. bestätigter Epochenwechsel erhält eigene Spezies, Fraktion, Heimat und bisherige Entdeckungen.
-- [ ] Expeditionsschiff und Beiboot sind tatsächlich unterschiedlich große, frei gestaltete Schiffe mit passenden Modulen.
+- [ ] Expeditionsschiff und Beiboot sind tatsächlich unterschiedlich große Schiffe mit passenden Modulen; eigene Gestaltung und die Übernahme fertiger Vorlagen sind beide geprüft.
 - [ ] Vollständige Expedition inklusive Steuern beider Schiffe, Aussteigen und Rückkehr am selben Kugelplaneten gelingt.
 - [ ] Speichern/Neustart im Hangar, während des Beibootflugs, gelandet, ausgestiegen und nach Rückkehr stellt den richtigen Zustand wieder her.
 - [ ] Unterbrochenes Andocken, Frachtumladen und Umbauen verliert oder dupliziert weder Schiffe noch Güter.
+- [ ] Ein passendes Expeditionsschiff und Beiboot lassen sich aus mitgelieferten oder Community-Vorlagen ohne eigene Editorarbeit bauen und verwenden; Besitz und individuelle Schiffzustände stammen aus dem Zielspielstand.
 - [ ] Der erste Größen-/Ausrüstungsfortschritt ist durch echte Forschung und Ressourcen erreichbar; neue Kapazität funktioniert.
 - [ ] Weitere Bordschiffe behalten individuelle Ausrüstung/Belegung und können eindeutig gewählt bzw. zurückgerufen werden.
 - [ ] Wechsel zwischen Nah-/Fernsimulation und Systemen erhält Zustände bei begrenztem Speicher-/Rechenaufwand.

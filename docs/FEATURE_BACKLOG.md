@@ -17,6 +17,7 @@ Stand: 9. September 2026. Ergänzt die [gemeinsame Roadmap](../ROADMAP.md) um ne
 | D3-EIER | Versorgung, Eierlegen, Sammeln, Transport und Nahrung aus eigenen Tieren | Tierhaltung und Dorfwirtschaft, D3/M6 | Nach D1-EIER, D2 und gemeinsamer D3-Haltungsbasis | Geplant |
 | M3-TEILE | Alle Körperteile überarbeiten oder kompatibel ersetzen; erkennbare Einzelteile realer Tiere frei kombinieren | Kreatureneditor, M2B/M3 | Bestandsprüfung und Anschlussregeln zuerst; danach Modellpakete und UI | Geplant |
 | M9-EXPEDITION | Modulares Expeditionsschiff, kleinere Landungsschiffe, Planetenuntersuchung und wachsender Schiffsausbau | Weltraumphase, M9.1–M9.6 | Nach M8 und vollständiger Kugelkampagne; Daten-/Editoranschlüsse früh vorbereiten | Geplant |
+| BP-COMMUNITY | Designs veröffentlichen, herunterladen und als fertige Vorlagen verwenden | Phasenübergreifend, M2B/M3 und spätere Bauplanarten | Format/lokale Bibliothek zuerst, dann vollständiger Online-Austausch; je Typ eigener Spielanschluss | Geplant |
 
 Die Reihenfolge ist technisch begründet. Der Kugelwelt-Umzug bleibt ein eigenes grundlegendes Paket. M9-EXPEDITION ist eine spätere Weltraumplanung; die laufenden Umzugsarbeiten behalten Vorrang. Datenkatalog und Modelle können unabhängig davon vorbereitet werden; finale Platzierung, Bodenkontakt, Legestellen und Transporte müssen die gemeinsame radiale Oberfläche nutzen.
 
@@ -117,6 +118,22 @@ Ein Rüssel wird im Editor bei Mund/Kopf auffindbar, erhält aber eine passende 
 - [ ] Bestehendes Ziel System-/Sektorreise, Galaxienkarte und versorgte Kolonien auf den vollständigen Expeditionsablauf aufbauen.
 
 **Abnahme:** Ein selbst gestaltetes Expeditionsschiff bringt ein individuelles Beiboot zu einem echten Kugelplaneten. Der Spieler fliegt hinunter, landet, steigt aus, untersucht die Umgebung und kehrt zur Basis zurück. Forschung erlaubt einen ersten wirksamen Schiffsausbau. Alle Schiffe, Güter, Entdeckungen und Orte überstehen Speichern/Neustart. Waffenfortschritt ist kein zwingendes Tor für friedliche Forschung oder Kolonisation.
+
+## BP-COMMUNITY – Vorlagen verwenden und Designs teilen
+
+**Nutzerwunsch:** Community-Mitglieder können Designs hochladen. Andere laden Kreaturen, Gebäude, Raumschiffe und weitere unterstützte Entwürfe in ihre eigenen Spielstände und verwenden sie. Niemand muss dafür selbst im Editor bauen.
+
+**Einordnung:** Phasenübergreifendes Bauplan-/Bibliothekspaket auf M2B; erster vollständiger Austausch für Kreaturen, später Gebäude/Fahrzeuge/Schiffe mit ihren spielbaren Systemen. Die [Detailplanung](COMMUNITY_DESIGNS_PLAN.md) zerlegt das Paket in BP-COMMUNITY.1–.5.
+
+- [ ] Gemeinsames portables Paket mit Designart, Teile-/Formatversionen, vollständigem Entwurf, Vorschau und Herkunft festlegen; lokale Weltobjekte und Kampagnendaten getrennt halten.
+- [ ] Lokale Bibliothek für eigene, mitgelieferte und heruntergeladene Designs einführen; passende Startvorlagen ohne eigene Editorarbeit verwenden können.
+- [ ] Community-Upload mit bewusster Veröffentlichung, Autorenangabe, Titel/Beschreibung, Vorschau und versioniertem Eintrag liefern.
+- [ ] Online-Galerie mit Suche, Kategorien, Anforderungen und Download an dieselbe lokale Bibliothek anschließen.
+- [ ] Heruntergeladene Entwürfe direkt über vorhandene Erschaffungs-/Bau-/Umbauabläufe einsetzen; aktueller Besitz, Teilefreischaltungen und Ressourcenregeln bleiben gültig.
+- [ ] Konkrete Downloadrevision lokal erhalten, offline wiederverwenden und Aktualisierungen nur ausdrücklich übernehmen; Varianten und Quellen nachvollziehbar halten.
+- [ ] Austausch zwischen unabhängigen Nutzern/Spielständen, Unterbrechung, Doppelimport, fehlende Teile, Altversionen und Save/Load prüfen.
+
+**Abnahme:** Nutzer A veröffentlicht ein Design; Nutzer B findet, lädt und verwendet es in einem eigenen Spielstand ohne Editorarbeit. Nach Neustart und ohne Verbindung bleiben Vorlage und gebaute Objekte erhalten. Für einen nicht verwendbaren Entwurf sind passende Alternativen auswählbar. Spätere Online-Änderungen überschreiben keine bestehenden Kreaturen, Gebäude oder Schiffe.
 
 ## Umsetzung und Übergabe
 
