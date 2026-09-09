@@ -12,6 +12,12 @@ var _wall_enabled := false
 var _occlusion_source: Node3D
 var _action_source: Node3D
 var _saved_rest_settings: Array
+var _saved_bindings: Array
+var _scan_running := false
+var _scan_ratio := 0.0
+var _scan_bar: ProgressBar
+var _scan_demo_serial := 0
+var _order_demo_serial := 0
 const VOICE_PROFILE = preload("res://audio/runtime/creature_voice_profile.gd")
 var _voice_role := "forager"
 var _voice_size := 1.0
@@ -21,6 +27,9 @@ func _ready() -> void:
 	_audio = get_node("/root/AudioManager")
 	_saved_rest_settings = [_audio.music.play_seconds, _audio.music.rest_min_seconds,
 		_audio.music.rest_max_seconds, _audio.music.rest_cycles_enabled]
+	_saved_bindings = [_audio.scans.automatic_binding, _audio.orders.automatic_binding]
+	_audio.scans.automatic_binding = false
+	_audio.orders.automatic_binding = false
 	_build_occlusion_demo()
 	_audio.director.automatic_tracking = false
 	_audio.creatures.automatic_tracking = false
@@ -57,6 +66,50 @@ func _ready() -> void:
 	var hint := Label.new()
 	hint.text = "Klänge auswählen · Richtung mit Kopfhörern prüfen · F7 für Lautstärke"
 	rows.add_child(hint)
+	var scan_title := Label.new()
+	scan_title.text = "SCANNER · Erfassen, Fortschritt, Abbruch und bekannte Art vergleichen"
+	rows.add_child(scan_title)
+	_scan_bar = ProgressBar.new()
+	_scan_bar.custom_minimum_size.y = 24
+	rows.add_child(_scan_bar)
+	var scan_buttons := HFlowContainer.new()
+	rows.add_child(scan_buttons)
+	button(scan_buttons, "Testscan starten · 2,5 s", func():
+		_scan_demo_serial += 1
+		_scan_ratio = 0.0
+		_scan_running = true
+		_status.text = "Unbekannte Art wird gescannt · Abbruch jederzeit möglich")
+	button(scan_buttons, "Ziel verlieren", func():
+		_scan_running = false
+		_scan_bar.value = 0.0
+		_audio.cancel_scan_audio()
+		_status.text = "Scan abgebrochen – kein Erfolgston")
+	button(scan_buttons, "Bekannte Art ansehen", func():
+		_scan_running = false
+		_scan_bar.value = 100.0
+		_audio.update_scan_audio(get_instance_id(), 1.0, true)
+		_status.text = "Bereits bekannte Art – kein neuer Scan oder Entdeckungston")
+	var order_title := Label.new()
+	order_title.text = "GRUPPENBEFEHLE · Eine Rückmeldung für den gesamten Auftrag"
+	rows.add_child(order_title)
+	var order_buttons := HFlowContainer.new()
+	rows.add_child(order_buttons)
+	for item in [["Bewegen", "move"], ["Sammeln", "gather"], ["Angreifen", "attack"],
+		["Bauen", "build"], ["Warten", "wait"], ["Versorgen", "feed"]]:
+		var order := StringName(item[1])
+		button(order_buttons, item[0], func():
+			_order_demo_serial += 1
+			_audio.play_group_order(order, "demo-order-%d" % _order_demo_serial)
+			_status.text = "Gruppenauftrag: " + String(order))
+	button(order_buttons, "Auftrag unmöglich", func():
+		_order_demo_serial += 1
+		_audio.play_group_order(&"move", "demo-order-%d" % _order_demo_serial, false)
+		_status.text = "Abgewiesener Auftrag – eigener Rückmeldeton")
+	button(order_buttons, "12 Mitglieder · ein Ton", func():
+		_order_demo_serial += 1
+		for index in 12:
+			_audio.play_group_order(&"move", "demo-order-%d" % _order_demo_serial)
+		_status.text = "Zwölf Meldungen zum selben Gruppenauftrag ergeben eine Bestätigung")
 	_music_status = Label.new()
 	_music_status.text = "MUSIK · Drei eigene Stücke mit weichen Übergängen"
 	rows.add_child(_music_status)
@@ -206,6 +259,23 @@ func _ready() -> void:
 	rows.add_child(_status)
 
 
+func _process(delta: float) -> void:
+	if not _scan_running:
+		return
+	if get_tree().paused or not _audio.is_window_focused():
+		_scan_running = false
+		_scan_bar.value = 0.0
+		_audio.scans.reset_playback()
+		return
+	_scan_ratio = minf(1.0, _scan_ratio + minf(delta, 0.1) / 2.5)
+	_scan_bar.value = _scan_ratio * 100.0
+	_audio.update_scan_audio(get_instance_id(), _scan_ratio)
+	if _scan_ratio >= 1.0:
+		_scan_running = false
+		_audio.complete_scan_audio("demo-species-%d" % _scan_demo_serial)
+		_status.text = "Scan abgeschlossen – vorhandener Entdeckungston"
+
+
 func _refresh_music_status() -> void:
 	_music_status.text = "MUSIK · " + ("Ruhephase – Umgebung und Kreaturen bleiben hörbar" if _audio.music.is_resting() else _audio.music.get_title())
 
@@ -239,6 +309,10 @@ func button(parent: Control, text: String, callback: Callable) -> void:
 
 func _exit_tree() -> void:
 	if is_instance_valid(_audio):
+		_audio.scans.reset_scene()
+		_audio.orders.reset_scene()
+		_audio.scans.automatic_binding = _saved_bindings[0]
+		_audio.orders.automatic_binding = _saved_bindings[1]
 		_audio.stop_source(_occlusion_source.get_instance_id())
 		_audio.stop_source(_action_source.get_instance_id())
 		_audio.music.configure_rest_cycle(_saved_rest_settings[0], _saved_rest_settings[1], _saved_rest_settings[2])

@@ -45,6 +45,11 @@ jobs:
           set -o pipefail
           timeout 90s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/audio_expansion_test.gd 2>&1 | tee /tmp/audio-expansion.log
           ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-expansion.log
+      - name: Run scanner, group feedback and comfort DSP tests
+        run: |
+          set -o pipefail
+          timeout 70s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/interface_audio_test.gd 2>&1 | tee /tmp/audio-interface.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-interface.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:

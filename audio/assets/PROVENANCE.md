@@ -44,3 +44,14 @@ Hüllkurven, ohne fremde Aufnahmen, Musik oder Stimmen. 16-Bit-PCM, mono,
 22.050 Hz; Spitzenpegel höchstens 0,5, Anfang und Ende exakt null. Deterministische
 NumPy-Erzeugung; NumPy wird zum Spielen nicht benötigt. Neuer Gesamtumfang:
 77 WAV-Dateien und drei Ogg-Musikstücke.
+
+
+Das fünfte Paket ergänzt zehn Interfaceklänge in `interface/`, generiert mit
+`tools/audio/generate_interface_sounds.py`: Scanner-Erfassen, -Abbruch und ein
+periodischer Scannerloop sowie sieben klar unterscheidbare Gruppenrückmeldungen.
+Grundlage sind selbst angeordnete Sinustöne mit Obertonanteilen und Hüllkurven.
+Keine Aufnahmen, Stimmenmodelle oder fremden Samples. 22.050 Hz, mono, 16-Bit-PCM;
+kurze Signale mit nullwertigen Endpunkten, Spitzenpegel höchstens 0,42. Der einsekündige
+periodische Loop hat Spitzenpegel 0,22; seine Schleifengrenze wird geprüft. Der
+Scan-Abschluss verwendet die vorhandene Entdeckungsdatei. Gesamtumfang nach diesem
+Paket: 87 WAV-Dateien und drei Ogg-Musikstücke.

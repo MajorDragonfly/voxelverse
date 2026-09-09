@@ -96,6 +96,10 @@ func _bind_progression() -> void:
 
 
 func _species_discovered(_key: String, _display_name: String) -> void:
+	# Scan-aware progression can report first sighting before scanning completes.
+	# Its scanner owns the success cue; legacy discovery-only services keep theirs.
+	if is_instance_valid(_progression) and _progression.has_method("has_species_scan"):
+		return
 	_notice(&"discovery")
 
 

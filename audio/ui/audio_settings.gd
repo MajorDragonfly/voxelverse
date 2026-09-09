@@ -4,6 +4,7 @@ extends CanvasLayer
 var _audio: Node
 var _sliders: Dictionary = {}
 var _values: Dictionary = {}
+var _preferences: Dictionary = {}
 const LABELS := {&"master": "Gesamtlautstärke", &"music": "Musik", &"ambience": "Umgebung",
 	&"effects": "Spieleffekte", &"ui": "Menügeräusche"}
 
@@ -63,11 +64,24 @@ func _ready() -> void:
 		_sliders[channel] = slider
 		_values[channel] = value
 		slider.value_changed.connect(_volume_changed.bind(channel))
+	for item in [[&"night_mode", "Nachtmodus · große Lautstärkeunterschiede verringern"],
+		[&"mute_in_background", "Stumm, wenn das Spielfenster im Hintergrund ist"]]:
+		var key := StringName(item[0])
+		var option := CheckButton.new()
+		option.text = item[1]
+		option.custom_minimum_size.y = 40
+		option.button_pressed = _audio.get_preference(key)
+		option.toggled.connect(func(enabled: bool): _audio.set_preference(key, enabled))
+		rows.add_child(option)
+		_preferences[key] = option
+	_audio.preference_changed.connect(func(key: StringName, enabled: bool):
+		if _preferences.has(key):
+			_preferences[key].set_pressed_no_signal(enabled))
 	var buttons := HBoxContainer.new()
 	buttons.add_theme_constant_override("separation", 12)
 	rows.add_child(buttons)
 	_add_button(buttons, "Testton", func(): _audio.play_ui())
-	_add_button(buttons, "Standardwerte", func(): _audio.reset_volumes())
+	_add_button(buttons, "Standardwerte", func(): _audio.reset_settings())
 	var close := _add_button(buttons, "Zurück · F7 / Esc", func(): _audio.close_settings())
 	close.grab_focus()
 	_audio.settings_changed.connect(_sync)

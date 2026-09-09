@@ -13,7 +13,7 @@ Keine Übernahme unfertiger Arbeiten anderer Chats. Einzige geänderte Bestandsd
   Oben lassen sich alle drei Musikstücke, ein achtsekündiger Gefahrwechsel und
   „Musik + Umgebung“ auswählen; darunter Schritte und Kreaturen dazuschalten.
   Die Seite ist scrollbar. F7 regelt den gesamten Mix.
-- Die 77 eigenen Effekte/Umgebungs-/Kreaturen-/Aktionsklänge und drei Musikstücke sind spielbare Prototypen.
+- Die 87 eigenen Effekte/Umgebungs-/Kreaturen-/Aktions-/Interfaceklänge und drei Musikstücke sind spielbare Prototypen.
   Ihr Klangcharakter braucht noch einen Hörtest auf dem Zielgerät.
 
 ## Verhalten
@@ -362,3 +362,159 @@ Körper, Filter-/Pegeltrennung, Pausenverhalten, Stimmenwiederverwendung, Abfrag
 Aktionssignale, Duplikate, abgewiesene Belege, unveränderte Spielwerte sowie natürliche
 Musikruhe, Wiederaufnahme und Gefahr während der Ausblendung. Subjektiver Klang,
 Grafik und Windows-Ausgabe bleiben dem gemeinsamen Hörtest vorbehalten.
+
+
+## Ausbau: Scanner, Gruppenbefehle und Audio-Komfort
+
+Zehn neue eigene WAV-Dateien ergänzen drei Scannerklänge (Erfassen, Abbruch und
+Fortschrittsschleife) sowie sieben kurze, unterscheidbare Befehlsrückmeldungen.
+Der vorhandene Entdeckungston bestätigt weiterhin einen erfolgreichen Scan.
+Gesamtumfang: **87 WAV-Klänge und drei Ogg-Musikstücke**.
+
+### Scannen
+
+Ein neuer, unbekannter Zielkörper startet einen leisen Erfassungston und genau
+eine Fortschrittsschleife. Die Tonhöhe folgt weich dem gemeldeten Scanfortschritt.
+Verliert der Spieler ein bereits begonnenes Ziel, ertönt ein kurzer Abbruch.
+Bei Pause, Fokusverlust oder deaktiviertem Scanmodus endet die Schleife still.
+Bereits bekannte Arten starten weder einen Scanloop noch eine Erfolgsfanfare.
+Ein Fortschrittswert von 1 allein löst keinen Erfolgston aus: erst das bestätigte
+Abschlussereignis spielt den vorhandenen Entdeckungston. Wiederholte Abschlüsse
+mit demselben Artenschlüssel werden im begrenzten Verlauf unterdrückt (128 Schlüssel).
+
+Die Audioanbindung erkennt optional einen bereiten Scanner mit dem Scriptpfad
+`res://creatures/player/creature_scanner.gd` unter einem Spieler der Gruppe `player`.
+Sie liest dessen öffentliche Schnittstelle `active()`, `ratio()`, `target`, `known`
+und verbindet `scan_completed(species_key: String)`. Die Suche ist auf 64 Knoten
+begrenzt und findet nur statt, solange kein Scanner gebunden ist. Die eigentliche
+Scanmechanik, Zielerfassung, Dauer und Eintragung ins Artenbuch stammen vollständig
+aus dem Scanner-Chat. Dessen Code wird durch diesen Audio-Branch nicht übernommen.
+Die geprüfte Schnittstelle ist bereits in jenem Scanner vorhanden; ein Integrationstest
+mit einer passenden Laufzeitfixture sichert den Vertrag ab.
+
+Ein scanfähiger `ProgressionService` mit `has_species_scan(...)` darf bereits beim
+ersten Sichten `species_discovered` melden. In diesem Fall wird der frühere allgemeine
+Entdeckungston unterdrückt: der Scanner übernimmt die Bestätigung beim Abschluss.
+Ältere Services ohne Scanvertrag behalten ihren bisherigen Entdeckungston.
+Die Audioanbindung vergibt keine Punkte, speichert keine Scans und verändert kein Ziel.
+
+Alternativ stehen explizite Anschlüsse bereit:
+
+```gdscript
+AudioManager.update_scan_audio(target.get_instance_id(), progress, already_known)
+AudioManager.cancel_scan_audio()                     # Ziel verloren.
+AudioManager.complete_scan_audio(species_key)        # Erst nach bestätigtem Erfolg.
+AudioManager.scans.bind_scanner(my_scanner)           # Abweichender Scriptpfad.
+```
+
+`update_scan_audio` erwartet während eines Scans regelmäßige Updates. Ohne neue
+Updates endet die Schleife nach 0,4 Sekunden, damit ein entfernter Produzent keinen
+Dauerton hinterlässt. Signal für Diagnose/Hörtest:
+`AudioManager.scans.feedback_played(event)`. Die zwei Scannerplayer laufen über
+`VV UI`; die Schleife beansprucht damit keine räumliche Kreaturenstimme. Alle
+Scanner-Wiedergaben werden bei Pause oder Fokusverlust gestoppt.
+
+Szenenwechsel, vorhandene `GameState.world_seed_changed(seed)`- und
+`SaveGameService.game_loaded(path)`-Signale setzen Scanner- und Befehlsverläufe
+zurück. Ein neues Spiel mit erneut verwendeten Artenschlüsseln wird dadurch nicht
+von alten Audio-Belegen unterdrückt. Optional später bereitgestellte Services werden
+angeschlossen; entfernte Services werden ohne verwaiste Verbindungen bereinigt.
+
+### Gruppenbefehle
+
+Die Bestätigung gehört zum ganzen Auftrag. Alle Meldungen zu diesem Auftrag
+verwenden dieselbe eindeutige `command_id`, unabhängig von der Zahl der Mitglieder.
+Die Audioanbindung nimmt höchstens eine Bestätigung pro ID an; der Verlauf hält
+maximal 256 IDs. Zusätzlich bremst eine globale Pause von 180 ms hektische Wiederholungen.
+Die Töne verwenden den vorhandenen begrenzten UI-Stimmenpool.
+
+```gdscript
+# Einmal nach tatsächlicher Prüfung bzw. erfolgreicher Speicherung des Auftrags:
+AudioManager.play_group_order(&"move", command_id, true)
+# Ein ausdrücklich abgewiesener Spielerauftrag:
+AudioManager.play_group_order(&"move", command_id, false)
+```
+
+| Auftrag | Klang |
+| --- | --- |
+| `move` | Bewegung bestätigen |
+| `gather`, `wood`, `stone`, `food` | Sammeln bestätigen |
+| `attack` | Angriff bestätigen |
+| `build`, `tool`, `hut` | Bau-/Herstellungsauftrag bestätigen |
+| `wait` | Warten bestätigen |
+| `feed` | Versorgung bestätigen |
+| Gültiger Auftrag mit `accepted = false` | Eigener Ablehnungston |
+
+Unbekannte Auftragsarten, leere/zu lange IDs und Aufträge während Pause werden
+ignoriert. Ein fehlgeschlagener Wiedergabeversuch verbraucht keine ID.
+`AudioManager.orders.feedback_played(order, command_id, accepted)` meldet eine
+angenommene Wiedergabe. IDs sollten über das Spiel/den Gruppenauftrag eindeutig
+sein, z.B. Kampagnen-ID plus fortlaufende Auftragsnummer; keine ID pro Bewohner.
+
+Ein Controller kann alternativ anbieten:
+
+```gdscript
+signal order_resolved(order: StringName, command_id: String, accepted: bool)
+```
+
+Controller der Gruppe `tribe_controller` mit diesem Signal werden automatisch
+angeschlossen; alternativ `AudioManager.orders.bind_source(controller)`.
+Der derzeit eingesehene Stammescontroller stellt `issue_order(...) -> bool` bereit,
+aber noch kein solches Ergebnissignal. **Die Befehlsgeräusche sind daher anschlussfertig;
+die einzelne Meldung nach dem Auftrag muss beim Zusammenführen im Gruppen-Chat
+ergänzt werden.** Speichern, Auswahl, Navigation, Ablehnungsgründe und Kampfmechanik
+werden von Audio weder geändert noch aus Texten oder laufenden Bewohnerzuständen erraten.
+Insbesondere wird eine vorbereitete Angriffsbestätigung hier nicht als neue
+Angriffsfunktion ausgegeben.
+
+### Nachtmodus und Hintergrund
+
+F7 enthält zwei neue, zunächst ausgeschaltete Schalter:
+
+- **Nachtmodus:** Eine sanfte Mischung aus Originalsignal und komprimiertem Signal
+  reduziert große Lautstärkeunterschiede. Der Kompressor liegt vor dem bestehenden
+  Limiter im VV-Masterbus. Er verstärkt keine leisen Signale und verändert keine Reglerwerte.
+- **Stumm im Hintergrund:** Fokusverlust des Spielfensters schaltet VV Master stumm.
+  Beim Zurückkehren gilt wieder die gewählte Lautstärke; 0 % bleibt immer stumm.
+  Bei ausgeschalteter Option kann Audio im Hintergrund weiterlaufen.
+
+Die Optionen werden zusammen mit den Lautstärken in `user://audio_settings.cfg`
+gespeichert. Ältere Dateien funktionieren weiterhin; fehlende oder falsch typisierte
+Bool-Werte werden als ausgeschaltet geladen. Fokuszustände werden nicht gespeichert.
+„Standardwerte“ im Panel setzt sowohl Lautstärken als auch Komfortoptionen zurück.
+
+```gdscript
+AudioManager.set_preference(&"night_mode", true)
+AudioManager.set_preference(&"mute_in_background", true)
+AudioManager.get_preference(&"night_mode")
+# Signal: preference_changed(preference, enabled)
+AudioManager.reset_settings()  # Alle Audioeinstellungen; reset_volumes nur Regler.
+```
+
+Technische Abstimmung: Kompressorschwelle −16 dB, Verhältnis 2:1, Attack 2 ms,
+Release 150 ms, 60 % Effektsignal, kein zusätzlicher Ausgangs-Gain. Eigenschaften:
+[Godot 4.6 AudioEffectCompressor](https://docs.godotengine.org/en/4.6/classes/class_audioeffectcompressor.html).
+Die Wirkung wird zusätzlich im Laufzeittest über `AudioEffectCapture` im echten
+Audiographen gemessen: Bei einem gleichbleibenden Sinus bleibt die leise Stufe fast
+unverändert, die laute Stufe wird reduziert, bleibt aber deutlich lauter als die leise.
+Diese technische Messung ersetzt nicht die Hörabstimmung des gesamten Spielmixes.
+
+### Testen
+
+Der Hörtest beginnt jetzt mit einem simulierten 2,5-Sekunden-Scan, Zielverlust,
+bekannter Art und acht Befehls-Schaltflächen. „12 Mitglieder · ein Ton“ sendet zwölf
+Meldungen mit derselben ID und demonstriert die einzelne Gruppenbestätigung.
+Die Simulation erzeugt keine echten Entdeckungen oder Gruppenaufträge. F7 erlaubt
+das Vergleichen des Nachtmodus im laufenden Mix; die Hintergrundoption lässt sich
+mit Wechsel zu einem anderen Fenster prüfen.
+
+```sh
+godot --headless --path . --script res://tests/audio/interface_audio_test.gd
+```
+
+Die neue Fixture prüft Scanfortschritt und echte Signale, Erfolg erst beim Abschluss,
+Deduplizierung mit dem Progression-Service, bekannte Arten, Zielverlust, Pause,
+fehlende Updates, Gruppen-IDs, Ablehnung, entfernte Controller/Services, Ladeereignisse,
+strenge Einstellungswerte, Speichern/Laden, F7-Abgleich, Fenster-Fokussignale und
+aufgezeichnete Kompressorwirkung. Die native Windows-Fokusausgabe und der subjektive
+Hörtest bleiben für das Zielgerät offen.

@@ -2,6 +2,7 @@ extends Node
 ## Shared sound API. World voices pause; menu previews remain available.
 
 signal settings_changed(channel: StringName, volume: float)
+signal preference_changed(preference: StringName, enabled: bool)
 signal sound_played(event: StringName, position: Vector3)
 signal creature_sound_played(source_id: int, event: StringName, pitch: float, family: String)
 
@@ -10,6 +11,7 @@ const CHANNELS := {&"master": &"VV Master", &"music": &"VV Music",
 	&"ambience": &"VV Ambience", &"effects": &"VV Effects", &"ui": &"VV UI"}
 const DEFAULTS := {&"master": 0.8, &"music": 0.5, &"ambience": 0.65,
 	&"effects": 0.8, &"ui": 0.6}
+const PREFERENCE_DEFAULTS := {&"night_mode": false, &"mute_in_background": false}
 const LIBRARY_PATH := "res://audio/runtime/sound_library.gd"
 const DIRECTOR = preload("res://audio/runtime/world_audio.gd")
 const PANEL = preload("res://audio/ui/audio_settings.gd")
@@ -23,6 +25,14 @@ var creatures: Node
 var music: Node
 var occlusion: Node
 var actions: Node
+var scans: Node
+var orders: Node
+var preferences: Dictionary = PREFERENCE_DEFAULTS.duplicate()
+var _night_compressor: AudioEffectCompressor
+var _night_effect_index := -1
+var _window_focused := true
+var _interface_sources: Dictionary = {}
+var _interface_bind_clock := 0.0
 var _streams: Dictionary = {}
 var _last_variant: Dictionary = {}
 var _last_time: Dictionary = {}
@@ -43,6 +53,9 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_rng.randomize()
 	_build_buses()
+	_window_focused = DisplayServer.get_name() == "headless" or get_window().has_focus()
+	get_window().focus_entered.connect(_focus_entered)
+	get_window().focus_exited.connect(_focus_exited)
 	load_settings()
 	# Load after asset import, avoiding autoload parse failures on a fresh clone.
 	var library: Script = load(LIBRARY_PATH)
@@ -54,6 +67,9 @@ func _ready() -> void:
 	var action_library: Script = load("res://audio/runtime/action_sound_library.gd")
 	for event in action_library.SOUNDS:
 		_streams[event] = action_library.SOUNDS[event]
+	var interface_library: Script = load("res://audio/runtime/interface_sound_library.gd")
+	for event in interface_library.SOUNDS:
+		_streams[event] = interface_library.SOUNDS[event]
 	for index in MAX_WORLD_VOICES:
 		var voice := AudioStreamPlayer3D.new()
 		voice.name = "WorldVoice%d" % index
@@ -88,6 +104,13 @@ func _ready() -> void:
 	actions = preload("res://audio/runtime/action_audio.gd").new()
 	actions.name = "ActionAudio"
 	add_child(actions)
+	scans = preload("res://audio/runtime/scanner_audio.gd").new()
+	scans.name = "ScannerAudio"
+	add_child(scans)
+	orders = preload("res://audio/runtime/order_audio.gd").new()
+	orders.name = "OrderAudio"
+	add_child(orders)
+	_bind_interface_lifecycle()
 	get_tree().scene_changed.connect(_scene_changed)
 
 
@@ -107,17 +130,54 @@ func _build_buses() -> void:
 	_filter = AudioEffectLowPassFilter.new()
 	_filter.cutoff_hz = 20000.0
 	AudioServer.add_bus_effect(world_index, _filter)
+	var master_index := AudioServer.get_bus_index(&"VV Master")
+	_night_compressor = AudioEffectCompressor.new()
+	_night_compressor.threshold = -16.0
+	_night_compressor.ratio = 2.0
+	_night_compressor.attack_us = 2000.0
+	_night_compressor.release_ms = 150.0
+	_night_compressor.gain = 0.0
+	_night_compressor.mix = 0.6
+	_night_effect_index = AudioServer.get_bus_effect_count(master_index)
+	AudioServer.add_bus_effect(master_index, _night_compressor)
+	AudioServer.set_bus_effect_enabled(master_index, _night_effect_index, false)
 	var limiter := AudioEffectLimiter.new()
 	AudioServer.add_bus_effect(AudioServer.get_bus_index(&"VV Master"), limiter)
 
 
 func _process(delta: float) -> void:
+	_interface_bind_clock -= delta
+	if _interface_bind_clock <= 0.0:
+		_interface_bind_clock = 0.5
+		_bind_interface_lifecycle()
 	_underwater = move_toward(_underwater, _underwater_target, delta * 2.5)
 	_filter.cutoff_hz = exp(lerpf(log(20000.0), log(750.0), _underwater))
 	if _save_pending:
 		_save_delay -= delta
 		if _save_delay <= 0.0:
 			save_settings()
+
+
+func _bind_interface_lifecycle() -> void:
+	for item in [["GameState", &"world_seed_changed"], ["SaveGameService", &"game_loaded"]]:
+		var service := get_node_or_null("/root/" + String(item[0]))
+		var previous: Variant = _interface_sources.get(item[0])
+		if not is_instance_valid(previous):
+			previous = null
+			_interface_sources.erase(item[0])
+		if service == previous:
+			continue
+		if is_instance_valid(previous) and previous.is_connected(item[1], _reset_interface_feedback):
+			previous.disconnect(item[1], _reset_interface_feedback)
+		_interface_sources.erase(item[0])
+		if service != null and service.has_signal(item[1]):
+			service.connect(item[1], _reset_interface_feedback)
+			_interface_sources[item[0]] = service
+
+
+func _reset_interface_feedback(_value: Variant) -> void:
+	scans.reset_scene()
+	orders.reset_scene()
 
 
 func set_volume(channel: StringName, value: float) -> void:
@@ -138,7 +198,43 @@ func _apply_volume(channel: StringName) -> void:
 	var index := AudioServer.get_bus_index(CHANNELS[channel])
 	var value := get_volume(channel)
 	AudioServer.set_bus_volume_db(index, linear_to_db(maxf(value, 0.0001)))
-	AudioServer.set_bus_mute(index, value <= 0.0)
+	AudioServer.set_bus_mute(index, value <= 0.0 or (channel == &"master" and get_preference(&"mute_in_background") and not _window_focused))
+
+
+func set_preference(preference: StringName, enabled: bool) -> bool:
+	if not PREFERENCE_DEFAULTS.has(preference):
+		return false
+	preferences[preference] = enabled
+	_apply_preferences()
+	_save_pending = true
+	_save_delay = 0.35
+	preference_changed.emit(preference, enabled)
+	return true
+
+
+func get_preference(preference: StringName) -> bool:
+	return bool(preferences.get(preference, false))
+
+
+func _apply_preferences() -> void:
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index(&"VV Master"), _night_effect_index, get_preference(&"night_mode"))
+	_apply_volume(&"master")
+
+
+func is_window_focused() -> bool:
+	return _window_focused
+
+
+func _focus_entered() -> void:
+	_window_focused = true
+	_apply_volume(&"master")
+
+
+func _focus_exited() -> void:
+	_window_focused = false
+	_apply_volume(&"master")
+	if is_instance_valid(scans):
+		scans.reset_playback()
 
 
 func load_settings(path: String = CONFIG_PATH) -> void:
@@ -151,12 +247,19 @@ func load_settings(path: String = CONFIG_PATH) -> void:
 		volumes[channel] = clampf(float(value), 0.0, 1.0)
 		_apply_volume(channel)
 		settings_changed.emit(channel, float(volumes[channel]))
+	for preference in PREFERENCE_DEFAULTS:
+		var value: Variant = config.get_value("preferences", String(preference), PREFERENCE_DEFAULTS[preference])
+		preferences[preference] = value if value is bool else PREFERENCE_DEFAULTS[preference]
+		preference_changed.emit(preference, bool(preferences[preference]))
+	_apply_preferences()
 
 
 func save_settings(path: String = CONFIG_PATH) -> Error:
 	var config := ConfigFile.new()
 	for channel in CHANNELS:
 		config.set_value("volume", String(channel), volumes[channel])
+	for preference in PREFERENCE_DEFAULTS:
+		config.set_value("preferences", String(preference), preferences[preference])
 	var result := config.save(path)
 	_save_pending = false
 	if result != OK:
@@ -167,6 +270,12 @@ func save_settings(path: String = CONFIG_PATH) -> Error:
 func reset_volumes() -> void:
 	for channel in CHANNELS:
 		set_volume(channel, float(DEFAULTS[channel]))
+
+
+func reset_settings() -> void:
+	reset_volumes()
+	for preference in PREFERENCE_DEFAULTS:
+		set_preference(preference, bool(PREFERENCE_DEFAULTS[preference]))
 
 
 func set_underwater(enabled: bool) -> void:
@@ -246,6 +355,22 @@ func play_action(action: StringName, source: Node3D = null, receipt_id: String =
 	return actions.play(action, source, receipt_id)
 
 
+func update_scan_audio(target_id: int, progress: float, already_known: bool = false) -> bool:
+	return scans.update_scan(target_id, progress, already_known)
+
+
+func complete_scan_audio(species_key: String) -> bool:
+	return scans.complete_scan(species_key)
+
+
+func cancel_scan_audio() -> void:
+	scans.cancel_scan()
+
+
+func play_group_order(order: StringName, command_id: String, accepted: bool = true) -> bool:
+	return orders.play_result(order, command_id, accepted)
+
+
 func set_music_context(context: StringName) -> bool:
 	return music.set_context(context)
 
@@ -300,6 +425,8 @@ func _scene_changed() -> void:
 	creatures.clear()
 	music.reset_scene()
 	actions.reset()
+	scans.reset_scene()
+	orders.reset_scene()
 	if is_instance_valid(_panel):
 		close_settings()
 
@@ -345,6 +472,8 @@ func close_settings() -> void:
 
 
 func _exit_tree() -> void:
+	if is_instance_valid(scans):
+		scans.reset_playback()
 	if is_instance_valid(music):
 		music.stop_immediately()
 	stop_world()
