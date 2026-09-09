@@ -10,7 +10,9 @@ Die Hauptwelt besitzt jetzt eine eigene Kameraatmosphäre für Wasser. Die tats�
 
 Die Wasserunterseite besitzt eine eigene, geschlossene Darstellung. Der bisherige Shader deutete von unten den Himmel oder Vegetation als Gewässergrund; daraus entstanden unpassende Transparenz-/Schaumfelder. Die Oberfläche von oben behält ihre bestehende Tiefenfarbe, flache Randbereiche und die geprüfte Aufteilung zwischen Horizont und Chunks. Im Planetenlabor benutzt die Unterwasserprüfung die radiale Höhe zum aktuellen Körper und berücksichtigt Ursprungswechsel.
 
-## Vorläufige Größen
+## Größen der Testkörper
+
+**Neue Zielvorgabe vom 9. September 2026:** Produktionsplaneten sollen reale Größenordnungen erreichen, die Weltraumphase eine ganze bereisbare Galaxie. Die folgenden Werte beschreiben die Testkörper dieser Lieferung. Die bisherige Annahme komprimierter Produktionsgrößen ist ersetzt; [M1b/M1c und die Galaxieabnahme](PLANET_SCALE_AND_GALAXY.md) halten den nächsten Ausbau fest.
 
 Alle Angaben sind tatsächliche Durchmesser des jeweiligen Laborkörpers. Die Bahnabstände sind im selben Metermaßstab gespeichert. Es handelt sich um eine komprimierte Spielwelt; eine erdgroße Laufzeitwelt ist damit weiterhin nicht abgenommen.
 

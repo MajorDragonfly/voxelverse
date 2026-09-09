@@ -1,6 +1,6 @@
 # Voxelverse – Entwicklungsroadmap
 
-Stand: 8. September 2026 · aktueller M1-Ausbau: `94b4dd3` · M1-Technikprototyp: `555f9efa2a16d8dde6fbf121157671ef944b2f83` · M0-Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354` · visuelle Ausgangsbasis: `b1f1ef9c2c14a27269505da1d086091a0884563f`
+Stand: 9. September 2026 · Zielmaßstab präzisiert: reale Körpergrößen und Galaxie · aktueller M1-Ausbau: `94b4dd3` · M1-Technikprototyp: `555f9efa2a16d8dde6fbf121157671ef944b2f83` · M0-Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354` · visuelle Ausgangsbasis: `b1f1ef9c2c14a27269505da1d086091a0884563f`
 
 Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfolge der nächsten Arbeiten. Es ist die zentrale Projektplanung. Die älteren Berichte unter `art/` dokumentieren einzelne Arbeitsstände; ihre Phasen A–F sind keine Spielphasen. M0 ist als Grundlagenpaket technisch geprüft. M1 ist als separates Planetenlabor implementiert und technisch geprüft; Nachweise und Integrationsgrenzen stehen im [M1-Bericht](docs/PLANET_M1.md) und im [aktuellen Ausbau](docs/UNDERWATER_VOXEL_PLANETS.md). Lars' positive Rückmeldung zum Planetensystem ist eingegangen; der erneute Spieltest der Unterwasser-/Voxeländerungen und die Produktionsintegration bleiben offen. M0-Verträge: [Kampagne](docs/CAMPAIGN_CONTRACTS.md).
 
@@ -8,8 +8,8 @@ Dieses Dokument bündelt das Zielbild, den tatsächlichen Stand und die Reihenfo
 
 Voxelverse ist ein Einzelspielerspiel mit selbst gestalteter Spezies und der Entwicklung **Kreatur → Stamm → Antike/Mittelalter → Weltmacht → Weltraum**. Das Spielprinzip orientiert sich an Spore: Entdecken, Gestalten und unterschiedliche gesellschaftliche Wege tragen die eigene Spezies durch mehrere Maßstäbe. Gestaltung und Entscheidungen müssen im Spiel erkennbare Folgen haben.
 
-- Planeten sollen endliche, kugelförmige Himmelskörper mit einer zusammenhängenden Oberfläche sein. Die Oberfläche, die später aus dem Orbit sichtbar ist, gehört zur tatsächlich bespielten Welt.
-- Sternsysteme enthalten unterschiedliche Sterne, Planeten und Monde. Ein- und Doppelsternsysteme gehören zum Zielumfang; weitere Konfigurationen werden über dasselbe Datenmodell ergänzt.
+- Planeten sollen endliche, kugelförmige Himmelskörper in Originalgrößen entsprechend ihrer Körperklasse sein und eine zusammenhängende Oberfläche besitzen. Die 1–8-km-Laborkörper dienen schnellen Tests; der nächste große Referenzkörper hat rund 12.700 km Durchmesser. Die Oberfläche, die später aus dem Orbit sichtbar ist, gehört zur tatsächlich bespielten Welt.
+- Die Weltraumphase umfasst eine ganze darstellbare und bereisbare Galaxie mit reproduzierbar erzeugten Sternsystemen und dauerhaften Wiederbesuchen. Sektoradressen, Katalog und Galaxieansicht werden ausdrücklich eingeplant. Sternsysteme enthalten unterschiedliche Sterne, Planeten und Monde. Ein- und Doppelsternsysteme gehören zum Zielumfang; weitere Konfigurationen werden über dasselbe Datenmodell ergänzt.
 - Kreaturen-, Gebäude-, Fahrzeug- und Raumschiffeditor nutzen gemeinsame Werkzeuge, aber jeweils passende Regeln für Anatomie, Bauweise und Funktion.
 - Soziales und aggressives Verhalten verdient jeweils passende Punkte. Der Spieler verteilt sie bewusst in einem Skilltree; daraus entstehen auch Boni für folgende Phasen.
 - Spezies, Entdeckungen, Entscheidungen, Baupläne und Weltveränderungen überdauern Phasenwechsel.
@@ -25,6 +25,7 @@ Voxelverse ist ein Einzelspielerspiel mit selbst gestalteter Spezies und der Ent
 | Bereich | Im geprüften Code vorhanden | Was noch fehlt | Einstieg im Code |
 |---|---|---|---|
 | Spielphasen | Bestehendes Enum; vorbereiteter, gespeicherter und wiederaufnehmbarer Debug-Phasenübergang; normaler Übergang bis zur tatsächlichen Spielschleife gesperrt | Spielschleifen nach der Kreaturenphase, echte Übergangsbedingungen, Steuerungswechsel und Übernahme der Gesellschaft | [GameState](autoload/game_state.gd) |
+| Galaxie | Feste Labor-Sternsysteme; Galaxietechnik bisher geplant | Reproduzierbarer Katalog, Galaxieansicht, begrenztes Systemstreaming und gespeicherte Wiederbesuche; M1c/M9 | [Maßstab und Galaxie](docs/PLANET_SCALE_AND_GALAXY.md) |
 | Sternsystem | Gemeinsame V9-Profilquelle; M1-Labor mit drei Planeten (3,072–8,192 km Durchmesser), Mond (1,024 km), Ein-/Doppelstern, Rotation und Kreisbahnen aus einer Uhr | Produktive Kampagnenanbindung, weitere Konfigurationen und Inhalte | [PlanetCatalog](world/generation/planet_catalog_v7.gd), [CelestialSystem](world/space/celestial_system.gd) |
 | Planetenwechsel | Taste P lädt die Szene mit anderem Planetenseed; regionale Ökologie wird beim Wiederbesuch übernommen | Spielbarer Raumflug, produktive Landung und Reise-/Kolonieregeln | [StarSystemRuntime](world/space/star_system_runtime_v7.gd) |
 | Planetengeometrie | Bestand auf X/Z-Ebene; zusätzlich vier adaptive M1-Kugeln mit radialen Voxelstufen, gemeinsamen Nah-/Fernkanten, radialer Physik, globalem Höhen-/Klimafeld und Ozean | Produktive Landschaft/Flora/Fauna auf Kugel, Kampagnenmigration, zeitliche Glättung von Detailwechseln | [WorldGenerator](world/generation/world_generator_planetary_v9.gd), [AdaptiveSphereTiles](world/planet_lab/adaptive_sphere_tiles.gd) |
@@ -52,7 +53,9 @@ Die folgenden Lösungen sind die empfohlene Arbeitsgrundlage. Noch nicht erprobt
 
 ### 1. Eine Welt, mehrere Darstellungen
 
-Die Hierarchie lautet Universum → Sternsystem → Himmelskörper → Oberflächenregion → Spielobjekt. Spezies und Fraktionen haben eigene Identitäten; eine Fraktion kann mehrere Regionen und Planeten besitzen, und eine Spezies kann mehrere Fraktionen bilden.
+Die geplante Hierarchie lautet Universum → Galaxie → Sektor → Sternsystem → Himmelskörper → Oberflächenregion → Spielobjekt. Galaxie-/Sektoradressen und ihr Katalog sind noch zu implementieren; das Labor beweist bisher die Körper-/Oberflächenebene. Spezies und Fraktionen haben eigene Identitäten; eine Fraktion kann mehrere Regionen und Planeten besitzen, und eine Spezies kann mehrere Fraktionen bilden.
+
+**Präzisierung von Lars am 9. September 2026:** Reale Planetengrößen und eine bereisbare Galaxie sind Produktionsziele. Die bisher vorgeschlagenen komprimierten Größen gelten als Testmaßstab. M1b prüft erdgroßes Gelände im tatsächlichen Spielbetrieb; M1c ergänzt Galaxieadressen und einen versionierten, reproduzierbaren Systemkatalog. [Anforderungen, vorhandene Grenzen und konkrete Abnahme](docs/PLANET_SCALE_AND_GALAXY.md).
 
 Ein Himmelskörper erhält eine stabile ID, Typ, Elternbezug, Seed, Generatorversion, Radius, Rotation, Achsenneigung, Schwerkraft-/Atmosphärenprofil und gegebenenfalls Orbitdaten. Gemeinsame Umlaufzentren können als eigene Bezugssysteme modelliert werden. Ein Stern, Mond oder Planet wird nicht durch seinen Platz in einer sortierten Liste identifiziert.
 
@@ -62,7 +65,7 @@ Sichtbarer Himmel, Beleuchtung, Systemkarte und Orbitansicht lesen dieselben Him
 
 ### 2. Echte Kugeloberfläche früh beweisen
 
-**In M1 erprobt:** sechs verbundene Cube-Sphere-Flächen mit hierarchischer Unterteilung bis 8,192 km Körperdurchmesser und begrenzten Nahkollisionen; lokal bleibt eine kleine, präzise Simulationsumgebung um Spieler oder Kamera. Körperfeste Adressen und der lokale Ursprung sind als Vertrag für M2 bestätigt. Größere Produktionsmaßstäbe benötigen eigene Laufzeit- und Leistungsmessungen.
+**In M1 erprobt:** sechs verbundene Cube-Sphere-Flächen mit hierarchischer Unterteilung bis 8,192 km Körperdurchmesser und begrenzten Nahkollisionen; lokal bleibt eine kleine, präzise Simulationsumgebung um Spieler oder Kamera. Körperfeste Adressen und der lokale Ursprung sind als Vertrag für M2 bestätigt. Der erdgroße Referenzkörper ist als nächster Laufzeitnachweis in M1b verbindlich; weitere Produktionsgrößen benötigen eigene Messungen. Die aktuelle Detailstufengrenze und mehrere Gelände-/Systemabfragen müssen dafür erweitert werden.
 
 Speicherorte enthalten Himmelskörper-ID und eine kanonische Oberflächenadresse samt Höhe und Orientierung. Lokale `Vector3`-Positionen entstehen daraus nur für Darstellung und Physik. Ein verschiebbarer lokaler Ursprung verhindert, dass Planeten-/Systementfernungen in dieselben kleinen Physikkoordinaten gepresst werden. Globale Routen und Entfernungen verwenden das Oberflächenmodell, keine X/Z-Abkürzungen durch die Kugel.
 
@@ -144,20 +147,22 @@ Dies sind Designvorschläge für Voxelverse, keine Behauptung über konkrete Spo
 
 ## Reihenfolge und Abnahmekriterien
 
-**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1: begrenzter Technikprototyp geprüft. M2–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
+**M0: technisch geprüft** (`3f7f2252e3cbce868920dcf7c86beb3b47d17354`, [Nachweise](docs/CAMPAIGN_CONTRACTS.md)). **M1: begrenzter Technikprototyp geprüft; M1b (reale Größen) und M1c (Galaxiegrundlage) offen. M2–M10: geplant.** Lars' manueller Spieltest von M0 ist noch offen. Der vorhandene spielbare Stand oben bleibt die Ausgangsbasis für M1. Reihenfolge ist wichtiger als ein unbelegter Kalendertermin. Jeder Meilenstein endet mit einer kleinen prüfbaren Version.
 
 | ID | Arbeitspaket | Voraussetzung | Fertig, wenn … |
 |---|---|---|---|
 | M0 | **Technisch geprüft:** Kampagnenverträge, IDs, gemeinsame Sicherung, Phasen-/Ereignismodell | Ausgangsstand `e1b0b7f` | Migration mit Kreatur, zwei Gebäuden, Entdeckungen und zwei Planeten; separater Prozessneustart; Ereigniswiederholung und unterbrochener Debug-Übergang geprüft. Commit `3f7f2252e3cbce868920dcf7c86beb3b47d17354`; manueller Spieltest offen |
 | M1 | **Technikprototyp und Ausbau geprüft:** Kugelplanet und Sternsystemlabor | M0 | Vier adaptive Kugeln mit 1,024–8,192 km Durchmesser, radiale Voxelstufen, Unterwasseransicht, echte Physik, Terrain-/Wassernähte, Ursprungswechsel und migrierbare Laborsicherung. Code `94b4dd3`: 53 Gesamtprüfungen, je 13 native Exportprüfungen und je 79 Renderaufnahmen; getrennt lesbare Größenbeschriftungen. Klickbares Esc/F8-Menü und F4-/Menüeinstieg. Manueller Ziel-PC-Test und Kampagnenanbindung offen. [Aktuelle Umsetzung und Nachweise](docs/UNDERWATER_VOXEL_PLANETS.md) |
+| M1b | Reale Planetengrößen im Spielbetrieb | M1 | Referenzen mit etwa 100 / 1.000 / 12.700 km Durchmesser, erhaltene Nahauflösung, präzise Physik/Wasser, geschlossene Nähte, Orbit/Rückkehr und Wiederladen bei gemessenen Speicher-/Laufzeitbudgets. [Abnahme](docs/PLANET_SCALE_AND_GALAXY.md) |
+| M1c | Galaxieadressen und reproduzierbarer Systemkatalog | M1-Koordinatenvertrag; parallel zu M1b | Versionierte Galaxie-/Sektor-/System-IDs, reproduzierbare Abfragen unabhängig von Besuchsreihenfolge, begrenzte Caches und zuverlässige Speicherung von Änderungen. Spielbare Galaxiereisen folgen in M9. |
 | M2 | Verhaltensfortschritt und gemeinsame Editorverträge | M0, Koordinatenentscheidung aus M1 | Echte bzw. im Test ausgelöste Ereignisse vergeben einmal Punkte; Knoten wirken einmal; Blaupausen besitzen stabile Identität und Revision; Import/Undo/Redo bleiben erhalten |
 | M3 | Kreaturen und Kreatureneditor überarbeiten | M2; Laufzeit auf M1-Grundlage | Repräsentative Körperformen lassen sich verständlich gestalten und bewegen; Vorschau und Spiel stimmen überein; erste Körperfähigkeiten funktionieren |
 | M4 | Lebendige Tierwelt und vollständiger Kreaturen-Spielablauf | M1–M3 | Herde, Nahrungssuche, Räuber-Beute, Befreunden, Entdeckungsbuch und kleiner Skilltree bilden einen spielbaren Ablauf; sozialer und aggressiver Fortschritt funktionieren |
 | M5 | Erster echter Wechsel Kreatur → Stamm | M4 | Aus derselben Spezies am bekannten Ort wird eine kleine steuerbare Gruppe mit einer nutzbaren Behausung; Vermächtnis, Besitz und Beziehungen bleiben nach Laden erhalten |
 | M6 | Stammesphase und Gebäudeeditor | M5 | Ein kleines Dorf mit selbst gestalteten Gebäuden, Aufgaben, Vorräten und Nachbargruppe ist spielbar; Bündnis und Konflikt sind alternative Fortschrittswege |
 | M7 | Antike/Mittelalter und erste Fahrzeuge | M6 | Mehrere Siedlungen handeln/konkurrieren; Landwirtschaft, Handwerk, Wege und ein Transportfahrzeug oder Boot funktionieren; regionaler Fortschritt ist erreichbar |
-| M8 | Weltmachtphase | M7, globale Oberfläche aus M1 | Globale Karte, Reiche, Ressourcenketten, Industrie, Diplomatie und Armeen funktionieren mit vereinfachter Fernsimulation; Raumfahrt wird nachvollziehbar freigeschaltet |
-| M9 | Weltraumphase und Raumschiffeditor | M8, Himmelskörpermodell aus M1 | Eigenes Schiff startet, besucht einen Mond/zweiten Planeten, gründet eine versorgte Kolonie und kehrt zurück; danach zweites System mit Kontakt, Handel oder Konflikt |
+| M8 | Weltmachtphase | M7, globale Oberfläche und Größenprüfung aus M1/M1b | Globale Karte, Reiche, Ressourcenketten, Industrie, Diplomatie und Armeen funktionieren mit vereinfachter Fernsimulation; Raumfahrt wird nachvollziehbar freigeschaltet |
+| M9 | Weltraumphase, Galaxiedarstellung und Raumschiffeditor | M8, reale Körpergrößen aus M1b, Galaxieadressen/Katalog aus M1c | Eigenes Schiff startet, besucht Mond/Planeten und versorgt eine Kolonie; eine zoomfähige Galaxieansicht verbindet Reisen zu Systemen in verschiedenen Sektoren. Entdeckungen, Besitz und Orte bleiben beim Wiederbesuch und Neustart erhalten; danach Umfang und Inhalte verbreitern. |
 | M10 | Umfang, Balancing und Veröffentlichung | Funktionierender Ablauf bis M9 | Die ganze Kampagne ist wiederholt durchspielbar; Inhalte, Bedienung, Ton, Lernhilfen, Speichern und Leistung erfüllen festgelegte Abnahmen |
 
 M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reift. Größere neue Welt-, Navigations- oder Stadtfunktionen warten auf den Koordinatennachweis. Wir bauen zunächst ein einziges gutes Beispiel pro System und verbreitern es danach. Alle Phasen werden nicht gleichzeitig als halbfertige Baustellen begonnen.
@@ -193,6 +198,10 @@ M2-Datenarbeit kann nach M0 schon stattfinden, während die M1-Entscheidung reif
 
 **Abnahme:** Keine sicht-/begehbaren Nahtlöcher, kein Wechsel in eine andere Landschaft beim Landen, kein Verlust des gespeicherten Orts, keine ungebundene Zunahme geladener Kacheln. Abweichungsgrenzen für Höhe/Ort, Planetengrößen und Messszene vor dem Test festhalten. M1 darf erst als abgeschlossen gelten, wenn der verwendete Kugelansatz funktioniert; eine gezeichnete Planetenkugel allein reicht nicht.
 
+### M1b/M1c – nächster Ausbau des Planeten-/Weltraumzweigs
+
+Die kleinen Kugeln bleiben schnelle Regressionstests. Als nächstes wird ein erdgroßer Referenzkörper im tatsächlichen Gelände-/Physikbetrieb nachgewiesen; reine Koordinatenrechnung reicht dafür nicht. Danach bzw. parallel entsteht die versionierte Galaxie-/Sektoradressierung mit einem reproduzierbaren Systemkatalog. Detailauflösung, Geländeabfragen, Körper-/Systemkoordinaten und begrenztes Streaming werden vor der Übernahme globaler Kampagnenorte geprüft. [Konkrete Arbeitspakete und Nachweise](docs/PLANET_SCALE_AND_GALAXY.md).
+
 ### M3–M6 – zuerst ein vollständiger Spielablauf
 
 Kreatureneditor zuerst an wenigen Referenzkörpern prüfen: Zweibeiner, Vierbeiner und ein weiterer Körperplan; Schwimmen als Bewegungsfall. Nicht sofort dutzende neue Teile produzieren. Die visuelle Abnahme umfasst Silhouette, Gelenkanschlüsse, Fußkontakt, Angriff und Rückkehr aus dem Wasser.
@@ -207,7 +216,7 @@ M7 führt regionale Produktion, Versorgung, Territorien, Forschung und Diplomati
 
 M8 ergänzt globale Interessen, Infrastruktur, Energie, Umweltfolgen und Versorgung von Armeen. Diplomatische, wirtschaftliche und militärische Wege erhalten jeweils Ziele und Gegenreaktionen. Konkurrenzfraktionen verfolgen eigene begrenzte Ziele und Ressourcenregeln. Globale Wege und Besitz referenzieren dieselben Orte, die in der Nahansicht existieren.
 
-M9 beginnt im Heimatsystem mit Start, Reise, Landung und Versorgung einer Kolonie. Danach Systemreise, Erstkontakt und fremde Reiche. Schiffsdesign, Technik und Verhaltenserbe beeinflussen Optionen. Terraforming und größere Flotten folgen erst nach dieser Schleife; Änderungen eines Planeten müssen seine versionierten Oberflächendaten verändern und bei einem Besuch erhalten bleiben.
+M9 beginnt im Heimatsystem mit Start, Reise, Landung und Versorgung einer Kolonie. Danach Systemreise, Erstkontakt und fremde Reiche. Schiffsdesign, Technik und Verhaltenserbe beeinflussen Optionen. Terraforming und größere Flotten folgen erst nach dieser Schleife; Änderungen eines Planeten müssen seine versionierten Oberflächendaten verändern und bei einem Besuch erhalten bleiben. Anschließend verbindet die Galaxieansicht Reisen zu Systemen in verschiedenen Sektoren; zuverlässige Wiederbesuche und begrenztes Systemstreaming werden bis zum vereinbarten Galaxieumfang geprüft.
 
 ## Ergänzungen, die sonst leicht fehlen
 
@@ -231,7 +240,7 @@ M9 beginnt im Heimatsystem mit Start, Reise, Landung und Versorgung einer Koloni
 
 | Entscheidung | Vorgeschlagener Ausgangspunkt | Entscheidung spätestens |
 |---|---|---|
-| Planetengrößen und Zeitmaßstab | Spielbare komprimierte Maßstäbe; kleiner Testplanet plus größerer Präzisionstest, keine realistischen Entfernungen als Pflicht | M1 vor dem Geometrieausbau |
+| Größenprofile, Galaxieumfang und Reisezeit | Reale Körpergrößen und eine bereisbare Galaxie sind festgelegt. Offen sind obere Radien je Körperklasse, Galaxieausdehnung/Systemzahl sowie Reisegeschwindigkeit und Zeitstufen; astronomische Adressen und Kartenmaßstab bleiben getrennt. | M1b/M1c: Größen- und Adressvertrag; M9: Umfang und Reisebedienung |
 | Nahtloser Flug | Oberfläche und Orbit teilen dieselbe Welt; sichtbare Ladefreiheit erst nach funktionierendem Streaming bewerten | M1 technische Machbarkeit, M9 Produktumfang |
 | Umfang der Mittelalterphase | Antike/Mittelalter zunächst eine gemeinsame Phase wie im bestehenden Enum; Epochen als interne Technikstufen | Vor M7 |
 | Steuern in späteren Phasen | Gruppen-/Strategiesteuerung als Hauptmodus, direkte Kreaturenansicht als separat zu prüfende Zusatzfunktion | M5 |

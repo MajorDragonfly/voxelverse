@@ -14,7 +14,9 @@ Der aktuelle Prototyp enthält Kreaturensteuerung und Überleben, Entdeckungen/K
 
 **M1 ausprobieren:** Im Spiel **F4** drücken oder im Esc-Menü **„Planetenlabor öffnen“** wählen. WASD/Maus bewegen die Kreatur; Tab wechselt zwischen Oberfläche und Orbit, M zum nächsten Körper, B zwischen einer und zwei Sonnen und T durch die Zeitstufen. **„Aster · 8 km“** öffnet den größeren Testplaneten mit adaptivem Gelände. F5/F9 sichern/laden Ort und Systemzeit. Das Labor benutzt eine eigene Sicherung; der vorhandene Kampagnenstand bleibt auf seiner bisherigen Landschaft. [M1-Grundlagen](docs/PLANET_M1.md) · [Ausbau, Bedienung und Grenzen](docs/PLANET_LOD_AND_MENU.md) · [Unterwasseransicht, Voxelplaneten und Größen](docs/UNDERWATER_VOXEL_PLANETS.md).
 
-**Grafik-Spieltest:** Unter Wasser begrenzt eine eigene Kameraatmosphäre die Sicht; die Wasserunterseite verdeckt Himmel und Wolken. Im Labor besitzen alle vier Körper adaptive Voxelstufen. Die vorläufigen Durchmesser sind Lune 1,024 km, Ember 3,072 km, Haven 4,096 km und Aster 8,192 km; alte Labor-Orte werden an die neue Geländeoberfläche angepasst.
+**Grafik-Spieltest:** Unter Wasser begrenzt eine eigene Kameraatmosphäre die Sicht; die Wasserunterseite verdeckt Himmel und Wolken. Im Labor besitzen alle vier Körper adaptive Voxelstufen. Die Durchmesser der kleinen Testkörper sind Lune 1,024 km, Ember 3,072 km, Haven 4,096 km und Aster 8,192 km; alte Labor-Orte werden an die neue Geländeoberfläche angepasst.
+
+**Weiteres Skalierungsziel:** Reale Planetengrößen und eine bereisbare Galaxie. Als nächstes werden der erdgroße Referenzkörper im Spielbetrieb sowie Galaxieadressen und ein reproduzierbarer Systemkatalog entwickelt. [Zielmaßstab und offene Nachweise](docs/PLANET_SCALE_AND_GALAXY.md).
 
 - [Kreatureneditor](creatures/editor/README.md)
 - [Kreatur im Spiel](creatures/runtime/README.md)
