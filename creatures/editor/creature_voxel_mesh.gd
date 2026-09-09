@@ -125,6 +125,17 @@ static func primitive(size: Vector3, kind: String = "ellipsoid") -> ArrayMesh:
 	if cells.is_empty():
 		cells[Vector3i.ZERO] = Color.WHITE
 	var mesh: ArrayMesh = from_cells(cells, step)
+	# Compact exact occupancy for optional fitting queries. One byte per grid
+	# cell avoids retaining the much larger color dictionary in the cache.
+	var grid: Vector3i = limit * 2
+	var occupancy := PackedByteArray()
+	occupancy.resize(grid.x * grid.y * grid.z)
+	for cell: Vector3i in cells:
+		var at: Vector3i = cell + limit
+		occupancy[at.x + grid.x * (at.y + grid.y * at.z)] = 1
+	mesh.set_meta("voxel_grid", grid)
+	mesh.set_meta("voxel_grid_origin", -limit)
+	mesh.set_meta("voxel_occupancy", occupancy)
 	if _primitive_cache.size() >= 96:
 		_primitive_cache.clear()
 	_primitive_cache[key] = mesh
