@@ -15,7 +15,13 @@ erhalten, mit Planetenwechsel und Neustart prüfen.
   Quellbaum `a1236175a3f6d230bc3165c0cc6425eb18dc75af`.
 - Datenvertrag zuerst: `e9df29a509454e26f8bf064ba9ad1dd02870ff54`
   (lokal `4a6728f7a0bcb62f7d355019cf168b35ee30b84f`).
-- [Versionierter Vertrag](D12_DATA_CONTRACT.md). Code-/Übergabe-Refs folgen unten.
+- [Versionierter Vertrag](D12_DATA_CONTRACT.md).
+- **[PR #40](https://github.com/MajorDragonfly/voxelverse/pull/40)**, zur Prüfung bereit.
+- Veröffentlichter Code-/Prüfcommit: **`6aeb22c7b22281c7233be7fb8357e1189dd0e551`**.
+  Lokal geprüft: `ec2f0f1b64d23ee60733f49ccd5f75c6e987d002`.
+  Beide haben exakt den Quellbaum **`bac172640710045bc2f9dccf49066f57514515be`**.
+  Unterschiedliche Commit-IDs entstehen durch die GitHub-Veröffentlichung.
+  Dieser reine Übergabenachtrag folgt separat.
 
 Keine automatische Übernahme nach `main`; `ROADMAP.md` bleibt beim Integrationschat.
 Keine fremden unfertigen Änderungen übernommen.
