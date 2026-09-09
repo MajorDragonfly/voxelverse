@@ -57,25 +57,25 @@ func _build_editor_room() -> void:
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("c0d8df")
-	environment.ambient_light_energy = 0.36
+	environment.ambient_light_energy = 0.24
 	world.environment = environment
 	add_child(world)
 	var key := DirectionalLight3D.new()
 	key.rotation_degrees = Vector3(-42, -28, 0)
 	key.light_color = Color("fff1da")
-	key.light_energy = 0.85
+	key.light_energy = 0.48
 	key.shadow_enabled = true
 	add_child(key)
 	var fill := OmniLight3D.new()
 	fill.position = Vector3(-3, 2, 3)
 	fill.light_color = Color("a3e8dd")
-	fill.light_energy = 0.40
+	fill.light_energy = 0.08
 	fill.omni_range = 9
 	add_child(fill)
 	var rim := OmniLight3D.new()
 	rim.position = Vector3(2, 3, -3)
 	rim.light_color = Color("f3ddb7")
-	rim.light_energy = 0.55
+	rim.light_energy = 0.12
 	rim.omni_range = 9
 	add_child(rim)
 	var platform := MeshInstance3D.new()
