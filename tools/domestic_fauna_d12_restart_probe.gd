@@ -54,6 +54,7 @@ func write_process(world: Node) -> void:
 	file.close()
 	var old: Dictionary = saved.duplicate(true)
 	old.schema = 1
+	old.erase("map_atlases")
 	for body: Dictionary in old.bodies.values():
 		body.erase("fauna_catalog")
 		body.erase("domestic_fauna")
@@ -107,7 +108,7 @@ func read_process(world: Node) -> void:
 		world.set_paused(true)
 		expect(world.records[id].fauna_catalog.schema == 2, "Old sphere did not receive D1 contract")
 	expect(world.save_lab(), "Save upgraded spherical schema 1")
-	expect(Save.read(world.store_path).data.get("schema") == 2, "Old spherical header did not upgrade")
+	expect(Save.read(world.store_path).data.get("schema") == Save.SCHEMA, "Old spherical header did not upgrade")
 	for kind in ["save", "catalog", "surface", "search", "evidence", "individual", "food", "generation"]:
 		var future: Dictionary = saved.duplicate(true)
 		var body: Dictionary = future.bodies["m1b:terra"]

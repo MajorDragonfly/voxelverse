@@ -11,7 +11,6 @@ var _spacing: float = 1.0
 var graph := AStar3D.new()
 var origin := Vector3.ZERO
 var home: Node
-var _radius: int = RADIUS
 
 func rebuild(controller: Node, anchor: Vector3, data: Dictionary = {}, extent: int = RADIUS) -> void:
 	shelters = Housing.obstacles(data)

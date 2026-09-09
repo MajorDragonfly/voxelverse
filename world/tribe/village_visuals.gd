@@ -79,6 +79,17 @@ func rebuild(data: Dictionary) -> void:
 		_box(center + Vector3(0, 0.6, -1.3), Vector3(0.18, 0.7, 0.18), Color("b08451"))
 		_box(center + Vector3(0.14, 0.9, -1.3), Vector3(0.5, 0.3, 0.22), Color("b2c0c2"))
 
+# Decorative neighbor shelter; own homes use village_shelters with collision.
+func _hut(location: Vector3) -> void:
+	for x in [-1, 1]:
+		for z in [-1, 1]:
+			_box(location + Vector3(x * 0.85, 0.85, z * 0.85), Vector3(0.22, 1.7, 0.22), Color("785031"))
+	for row in range(5):
+		_box(location + Vector3(0, 0.2 + row * 0.3, -0.85), Vector3(1.7, 0.25, 0.16), Color("957049"))
+	for layer in range(4):
+		var width: float = 2.5 - layer * 0.5
+		_box(location + Vector3(0, 1.8 + layer * 0.22, 0), Vector3(width, 0.24, 2.4), Color("9a975a"))
+
 func _box(location: Vector3, size: Vector3, color: Color) -> void:
 	var visual := MeshInstance3D.new()
 	var mesh := BoxMesh.new()

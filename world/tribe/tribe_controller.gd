@@ -345,7 +345,15 @@ func screen_command(position: Vector2) -> void:
 	issue_order("move", target)
 
 func issue_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
+	if not is_active() or selected.is_empty():
+		status = "Wähle zuerst mindestens einen Bewohner aus." if selected.is_empty() else "Die Gruppe kann gerade keine Befehle annehmen."
+		_resolve_order(order, false)
+		return false
 	if order in Economy.STATIONS.keys() + Housing.BUILDS and destination == Vector3.ZERO and is_active():
+		if int(village()["tools"]) == 0:
+			status = "Zuerst ein Steinwerkzeug herstellen."
+			_resolve_order(order, false)
+			return false
 		if not village()["project"].is_empty() and village()["project"]["kind"] == order:
 			destination = HomeState.vector(village()["project"]["position"])
 		else:

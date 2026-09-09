@@ -1,64 +1,31 @@
-# Nächste parallele Arbeitsrunde
+# Nächste Voxelverse-Arbeiten: Umzug der Kampagne
 
-Stand: 9. September 2026. Gemeinsame Ausgangsbasis ist die zusammengeführte Version gemäß [Integrationsbericht](INTEGRATION_2026-09-09.md). Vor jedem Start `main` aktualisieren und den Start-Commit im eigenen Bericht festhalten. Keine alten Fachbranches weiterverwenden, ohne sie zuerst bewusst auf die gemeinsame Basis zu bringen.
+Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge ersetzen die frühere Runde „D1 neu entwickeln / D2 anbinden / D3 später“. Die fertigen D1–D3-, B1–B3-, Dorf-, Nachbar-, UI-, Karten-, Sprach- und Wartungspakete sind zusammengeführt. Ausgangspunkt ist der in [INTEGRATION_SPHERICAL_2026-09-09.md](INTEGRATION_SPHERICAL_2026-09-09.md) dokumentierte Integrationsstand.
 
-**Veröffentlichung freigegeben:** Lars hat den öffentlichen Upload und die Übernahme nach `main` ausdrücklich bestätigt. Gemeinsamer Integrationsbranch: `agent/integration-2026-09-09`. Neue Fachbranches vom aktualisierten `main` erstellen, sobald der Integrations-PR dort zusammengeführt ist.
+**Zuerst lesen:** [ROADMAP.md](../ROADMAP.md), [SPHERICAL_CAMPAIGN_MIGRATION.md](SPHERICAL_CAMPAIGN_MIGRATION.md), [VOXELVERSE_DESIGN.md](VOXELVERSE_DESIGN.md). Der vollständige Kugelumzug hat Vorrang vor neuen Epochen. Die belebte Kugelszene bleibt bis zur tatsächlichen Kampagnenintegration ein eigener Bereich.
 
-## Gemeinsame Regeln
+## 1. Gemeinsame Grundlage – zuerst abschließen
 
-- Jeder Chat erstellt einen eigenen Branch und arbeitet nur an seinem abgegrenzten Paket. Kein Zusammenführen anderer unfertiger Stände und kein automatischer Merge nach main.
-- Vor Änderungen aktuelle Dateien und Eigentümer prüfen. Gemeinsame Kerndateien (`autoload/`, `project.godot`, `ui/progression_hud.gd`, Spieler-/Wildtierbasis, Speicherschemata) werden pro Integrationsrunde koordiniert. Erweiterungen sollen eigene Module und klar benannte Anschlüsse verwenden.
-- Nur der Integrationschat pflegt `ROADMAP.md`. Jeder Fachchat dokumentiert Ergebnis, genaue Commit-ID, Prüfungen, geänderte Dateien, Schemaänderungen und Grenzen in `docs/WORK_<Paket>.md`.
-- Fertig bedeutet ein überprüfbarer Ablauf mit Save/Load und gegebenenfalls Migration. Neue Eigenschaften dürfen nicht bloß im Menü behauptet werden.
-- Aufstieg betrifft nur die eigene Spezies. Zähmbare Tiere behalten ihre eigene Art und werden keine Bürger. Kein Tierrollen- oder Zähmungsprototyp darf vorhandene Arten/Spielstände still neu generieren.
-- Teilpakete können nacheinander geliefert werden. Datenvertrag D1 muss geprüft vorliegen, bevor andere Chats seine produktiven Daten anschließen. Bis dahin dürfen sie eigene kleine Prüfszenen vorbereiten; keine zweite konkurrierende Speziesdatenbank bauen.
+„Setze M1e um: Verwende Cube-Sphere-Adressen und den bestehenden radialen Oberflächenadapter als Kampagnenkontext. Implementiere einen versionierten Start-/Lade-/Speicherweg für neue Kugelkampagnen. Erhalte den bisherigen Flachwelt-Lader und baue eine atomare Kopiermigration mit Manifest für vorhandene persistente Orte, Bewohner, Tiere, Vorräte und Fortschritt. Kein stilles Umdeuten alter XYZ-Werte, keine Neugenerierung bestehender Spezies. Liefere Vertrag, Implementierung, Schreibfehler-/Zukunftsversionstests und einen frischen Prozess als Nachweis. Änderungen an GameState und SaveGameService gehören zu diesem gemeinsamen Paket.“
 
-## Sieben konkrete Aufträge
+## 2. Kreaturenphase auf der Kugel
 
-| Chat | Auftrag | Eigene Dateien/Module | Erster überprüfbarer Abschluss | Abhängigkeit |
-|---|---|---|---|---|
-| 1 – Planeten | M1d: vorhandene Weltobjekte an die Kugeloberfläche anbinden | `world/planet_lab/`, `world/surface/`, neue Adapter; V9-Kernänderung gesondert melden | Spieler, ein Baum und eine Kreatur auf radialer Oberfläche, Körper-/Ortsrückkehr; messbares Streaming | Gemeinsame Basis; keine stille Kampagnenmigration |
-| 2 – Kreaturen | Funktionale Anatomie und Anschlüsse für Reiter/Geschirr vorbereiten | `creatures/editor/`, `creatures/runtime/`, `assembly/`; eigener Körpervertrag | Zwei-/Vierbeiner und mehrere Beinpaare mit Fußkontakt; dokumentierter Sattel-/Geschirr-Anschluss in Vorschau und Laufzeit | Abstimmung mit D1; keine eigene Haltungslogik |
-| 3 – Artenkatalog | D1: deterministische Tierrollen pro Planet | Neue Module `world/fauna/domestication/`; gezielter Anschluss an Artenfabrik/Spawner | Drei unterschiedliche Pflichtarten mit Milch-, Zug-/Reit-, Begleiterfähigkeiten und erreichbarem Habitat; Mehr-Seed-/Neustartprüfung | Erster Datenvertrag für Chat 4/7; besitzt Spezies-Eignungsmodell |
-| 4 – Zähmung | D2: ein fremdes Tier in der Stammesphase zähmen | Neue Module `world/domestication/`; eigener Haltungszustand/Controller | Phase/Eignung/Futter/Kosten prüfen, Vertrauen, Folgen/Warten/Heimkehr; Individuum/Besitz/Auftrag nach Laden erhalten | D1-Vertrag und freigegebene Fauna in Phase 1; keine automatische Bürgerrekrutierung |
-| 5 – Dorfwirtschaft | M6: Wasser, weitere Rohstoffe, Berufe und anschließbar Milchproduktion | `world/tribe/`, `ui/tribe/`; Ressourcen-/Auftragsanschlüsse | Langfristig versorgtes Dorf ohne erschöpfte Startvorräte; weiterer Arbeitsplatz, zuverlässige Transporte; D3 nach D2 | Keine eigene Tierarten-/Zähmungsdatenbank; Chat 4 liefert konkrete Tiere |
-| 6 – Entwicklung | Stammesfortschritt der eigenen Spezies und Mittelaltervoraussetzungen | `core/progression/`, `ui/development_path_panel.gd`, `ui/behavior_skill_tree.gd`; Phasenvertrag | Echte Gemeinschaftserfolge verdienen eigene Stammespunkte; Nachbarfraktionen bleiben eigene Spezies; spätere Phase bleibt bis Spielschleife gesperrt | Gemeinschaftsereignisse von Chat 5; globale Speicheränderungen koordiniert |
-| 7 – Bedienung und Klang | Tierregister im Buch, Gruppenrückmeldung, UI-/Audio-Abnahme | `ui/discovery/`, `ui/frontend/`, `audio/`; vorhandene Ereignis-APIs | Gescannte Eignung versus eigenes gezähmtes Tier klar anzeigen; keine erfundenen Werte; klare Befehls-/Fehlerklänge; kleine Auflösungen | D1/D2 nur lesend; kein zweites Buch und keine zweite Pauseverwaltung |
+„Setze nach dem veröffentlichten M1e-Vertrag M1f um: Überführe Spielersteuerung, Kamera, Scanner, Sammeln/Essen, Wildtierverhalten, D1-Rollen und Heimatgruppe auf dieselbe radiale Oberfläche. Nutze bestehende Objekt-/Arten-IDs, Körperentwürfe, Fortschritt und Bücher. Prüfe echte Interaktionen, Flächenkanten, Ursprungswechsel, Pause und Neustart. Die neue Laufzeit muss die gemeinsame Kreaturenphase sein; eine zweite isolierte Demo erfüllt den Auftrag nicht.“
 
-## Kopierbare Einstiege für neue Chats
+## 3. Dorf, Zähmung und Tierhaltung auf der Kugel
 
-### 1 – Planeten
+„Setze nach M1e den radialen Teil M1g um. Übernimm die vorhandene Dorfwirtschaft, Wachstum bis sechs Bewohner, Nachbarhilfe, D2-Besitz/Befehle und D3-Pflege/Milch. Ersetze planare Orte und Welt-Y-Annahmen über den gemeinsamen Kontext. Halte Gruppenbewegung und Baufundamente lokal begrenzt; stelle echte erreichbare Wege und Materialtransporte sicher. D2 und D3 verwenden den jetzt vorhandenen gemeinsamen Tierbestand. Abnahme: Aufstieg mit gleichen Bewohnern → zähmen → Tierplatz → versorgen → Milchtransport → Pause/Neustart. Keine neuen Bürger aus fremden Tierarten.“
 
-„Arbeite auf dem zusammengeführten Voxelverse-main an M1d gemäß ROADMAP.md und docs/NEXT_PARALLEL_WORK.md, Auftrag 1. Beginne mit einem begrenzten Oberflächenadapter für Spieler, einen Baum und eine Kreatur auf einem real großen Kugelplaneten. Erhalte die bestehende Kampagne und liefere messbare Bewegung, Kollision und Wiederbesuch. Eigener Branch und Übergabebericht; keine fremden unfertigen Änderungen zusammenführen.“
+## 4. Skalierung, Gewässer und Audio
 
-### 2 – Kreaturen
+„Übernimm M1h. Messe zuerst aktive Terrain-/Fauna-/Objektgrenzen und Reiseverhalten. Schließe Wasser, Unterwasseransicht und räumliches Audio an den gleichen Oberflächenkontext an. Implementiere anschließend eine explizite Übergabe zwischen Nah- und Fernsimulation sowie begrenztes Regionsladen. Vorräte, Tierpflege und Fracht haben genau einen Simulationsbesitzer; Pause und geschlossene Anwendung erzeugen keine Offline-Produktion. Liefere Messroute, Hardware/Renderer, Speicherentwicklung und Übergabetests statt einer unbelegten FPS-Zusage.“
 
-„Arbeite auf dem zusammengeführten Voxelverse-main an Auftrag 2. Prüfe die vorhandene Werkstatt einschließlich mehrerer Beinpaare und Fußkontakt. Ergänze stabile, gespeicherte Körperanschlüsse, mit denen später Reiter und Geschirr korrekt am Tier sitzen. Zähmung/Wirtschaft gehören anderen Chats. Eigener Branch und überprüfbarer Körpervertrag für den Artenkatalog.“
+## 5. Gemeinsame Oberfläche und Abnahme
 
-### 3 – Arten und Tierrollen
+„Erhalte das gemeinsame Buch, Mini-/Weltkarte und die Designvorgabe. Führe die vorhandene Deutsch-/Englisch-Verwaltung schrittweise durch HUD, Buch, Dorf und Editor; L1 deckt bisher nur einen Teil der Oberfläche ab. Karten folgen dem tatsächlichen Körper und Spielerwissen. Prüfe neue Kugelkampagne und migrierten Altstand bei 1920×1080, 1280×720, 2560×1080 und großer UI-Skalierung. Verwende dieselben Auswahl-, Pause-, Speicher- und Rückmeldedienste.“
 
-„Setze D1 aus ROADMAP.md auf der gemeinsamen Voxelverse-Basis um. Jeder belebte Spielplanet braucht deterministisch eine Milchtierart, eine Zug-/Reittierart und eine hundeartige Begleiterart mit geeigneten Körper-/Verhaltensmerkmalen und erreichbaren Vorkommen. Behalte bestehende Art-IDs/Spielstände. Liefere zuerst den versionierten Datenvertrag, dann Generator-/Spawnanschluss und Neustartprüfung. Keine Zähmungsoberfläche parallel erfinden.“
+## Übergabe und Zusammenführung
 
-### 4 – Zähmung
+Alle Folgearbeiten starten vom veröffentlichten gemeinsamen Commit. Ein Fachpaket liefert exakten Commit, Vertragsversionen, veränderte Dateien, Tests und offene Grenzen. Die Integration prüft gegenseitige Abhängigkeiten erneut; Einzelbranch-Nachweise gelten nicht automatisch für den Gesamtstand. Gemeinsame Verträge und Roadmap werden durch die Integration gepflegt. Keine fremden unfertigen Arbeitsstände übernehmen.
 
-„Setze D2 gemäß Roadmap um: Ab Stammesphase ein geeignetes fremdes Tier zähmen und als individuelles Tier mit Besitzer, Vertrauen und Folgen/Warten/Heimkehr speichern. Befreunden ist keine Zähmung und das Tier wird kein Bürger. Nutze den geprüften D1-Vertrag; solange dieser fehlt, bereite eine klar abgegrenzte Prüfszene vor. Berücksichtige, dass die bisherige Fauna teilweise auf Phase 0 begrenzt ist.“
-
-### 5 – Dorf
-
-„Baue das gemeinsame Voxelverse-Stammesdorf gemäß Auftrag 5 aus. Beginne mit dauerhafter Wasser-/Rohstoffversorgung und wiederaufnehmbaren Aufträgen. Danach Berufe, weitere frei erreichbare Arbeitsplätze und Anschluss für Milchlieferung aus D3. Verwende gemeinsame Vorräte, tatsächliche Transporte und Save/Load. Keine eigene Arten- oder Zähmungslogik.“
-
-### 6 – Entwicklung
-
-„Baue den Stammesfortschritt der eigenen Spezies gemäß Auftrag 6 aus. Echte Gemeinschaftserfolge sollen getrennte Stammespunkte verdienen. Plane Nachbarstämme als Fraktionen derselben eigenen Spezies; fremde Wildarten steigen nicht auf. Definiere spielbare Voraussetzungen für Mittelalter und später Neuzeit, mit ausdrücklicher Bestätigung und erhaltenen Bewohnern/Tieren. Schalte noch fehlende Spielphasen nicht durch Punktestände allein frei.“
-
-### 7 – Oberfläche und Audio
-
-„Übernimm Auftrag 7 auf dem integrierten Voxelverse-main. Erweitere das vorhandene gemeinsame Entdeckungsbuch um echte Tierrollen-/Eignungsdaten aus D1 und später ein lesbares Register eigener Tiere aus D2. Verbessere die Gruppenrückmeldung, Tonanschlüsse und kleine Auflösungen. Nutze bestehende Services, Erfolgsereignisse und Pausezustände; keine Doppelimplementierung von Buch, Zähmung oder Speicherung.“
-
-## Integrationsreihenfolge dieser Runde
-
-1. D1-Datenvertrag und Editoranschlüsse prüfen; gemeinsame Einbaupunkte festlegen.
-2. Unabhängige Planeten-, UI-/Klang- und Dorfverbesserungen als abgeschlossene Pakete übernehmen.
-3. D2 mit aktiver Stammesfauna und eigenen Tier-IDs integrieren.
-4. D3/Milch und D4/Reiten/Pflügen jeweils als eigene spätere Lieferungen integrieren; D4 ist noch kein Auftrag, gleichzeitig einen kompletten Fahrzeugeditor zu bauen.
-5. Gesamtspieltest: neue Kampagne → Scan → eigene Nestgruppe → bestätigter Stamm → zähmen → versorgen → speichern/neustarten. Anschließend Roadmap und Folgeaufträge aktualisieren.
+Nach M1e können unabhängige Verbraucher an denselben veröffentlichten Vertrag anschließen. Der volle Neue-Spiel-Umschalter (M1i) kommt erst nach der Abnahmekette im Migrationsauftrag. D4, Mittelalter, Neuzeit und Raumfahrt folgen auf dieser Grundlage.

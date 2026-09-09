@@ -9,6 +9,8 @@ const BIOME_NAMES: Dictionary = {"grassland": "Wiese", "savanna": "Savanne", "de
 	"alpine": "Gebirge", "snow": "Schneeland", "coast": "Küste", "ocean": "Meer"}
 var ecosystem: Node
 var underwater: Node
+var map_atlases: Dictionary = {}
+var minimap: CanvasLayer
 
 
 func _init() -> void:
@@ -22,11 +24,12 @@ func _init() -> void:
 
 func _build_view() -> void:
 	super._build_view()
-	help_label.text = "WASD Bewegen · Maus Umsehen · Leertaste Springen · Esc Pause / Maus\nF5 Sichern · F9 Laden · M Planet wechseln · R Zum Startort zurück"
+	help_label.text = "WASD Bewegen · Maus Umsehen · Leertaste Springen · Esc Pause / Maus\nF5 Sichern · F9 Laden · M Weltkarte · P Planet wechseln · R Zum Startort zurück"
 	leave_without_saving.text = "Ohne Sicherung zurück"
 
 
 func save_lab() -> bool:
+	if is_instance_valid(minimap): minimap.atlas_window.tracker.update_exploration(true)
 	var success: bool = super.save_lab()
 	if success:
 		status.text = "Planet, Spieler und Tiere gesichert."
@@ -35,6 +38,9 @@ func save_lab() -> bool:
 
 func _ready() -> void:
 	super._ready()
+	minimap = preload("res://ui/minimap/minimap_hud.gd").new()
+	minimap.lab = self
+	add_child(minimap)
 	underwater = preload("res://world/visuals/underwater_view.gd").new()
 	underwater.sample_water = _sample_water
 	add_child(underwater)
@@ -109,10 +115,25 @@ func return_to_marker() -> void:
 
 func snapshot() -> Dictionary:
 	var data: Dictionary = super.snapshot()
-	data.schema = 2
+	data.schema = LivingStore.SCHEMA
 	data.surface_generation = LivingSurface.GENERATION
 	data.fauna_codec = "godot_native_v1"
+	data.map_atlases = map_atlases.duplicate(true)
 	return data
+
+func _restore_extensions(data: Dictionary) -> void:
+	map_atlases = data.get("map_atlases", {}).duplicate(true)
+	if is_instance_valid(minimap): minimap.atlas_window.tracker.invalidate()
+
+func map_is_read_only() -> bool:
+	return read_only
+
+func map_snapshot() -> Dictionary:
+	if not _ready_complete or paused or not is_instance_valid(walker) or not is_instance_valid(terrain): return {}
+	return {"context_id": "living:" + body_id + ":" + LivingSurface.GENERATION,
+		"address": walker.location(), "forward": walker.forward, "phase": 0,
+		"body_radius": float(terrain.surface.body.radius), "markers": [], "group_view": false,
+		"sample": preload("res://ui/minimap/minimap_source.gd").sample_sphere.bind(terrain.surface)}
 
 
 func set_paused(value: bool) -> void:

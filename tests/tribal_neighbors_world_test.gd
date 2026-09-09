@@ -40,7 +40,7 @@ func _run() -> void:
 		tribe.village()["deposits"][kind]["remaining"] -= 18
 	tribe.body()["animal_retention_fixture"] = {"id": "pet-original", "species_id": "foreign-animal-species", "owner": state.campaign.data["player_faction_id"], "trust": 0.6, "order": "home"}
 	var animal: Dictionary = tribe.body()["animal_retention_fixture"].duplicate(true)
-	tribe.panel._tabs.current_tab = 2
+	tribe.panel._tabs.current_tab = tribe.panel._neighbors.get_index()
 	await _frames(5)
 	var before: Dictionary = state.campaign.export_state()
 	tribe.panel._neighbors.refresh()
@@ -139,9 +139,11 @@ func _run() -> void:
 	evidence = {"aid": _neighbor()["aid"].duplicate(true), "neighbor_stock": _neighbor()["stock"].duplicate(), "wallet": progression.get_behavior_wallet(1)}
 	paused = false
 	root.size = Vector2i(800, 900)
-	tribe.panel._tabs.current_tab = 2
+	tribe.panel._tabs.current_tab = tribe.panel._neighbors.get_index()
 	await _frames(10)
 	for button: Button in [tribe.panel._neighbors.focus_button, tribe.panel._neighbors.home_button]:
+		tribe.panel._scroll.ensure_control_visible(button)
+		await _frames(3)
 		var rect: Rect2 = button.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, button.size)
 		_expect(root.get_visible_rect().encloses(rect), "Neighbor control outside narrow viewport")
 	await _click(tribe.panel._neighbors.focus_button)

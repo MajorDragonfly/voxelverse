@@ -50,7 +50,7 @@ func update_exploration(allow_paused: bool = false) -> void:
 	var records: Dictionary
 	var key: String
 	if is_instance_valid(lab):
-		if lab._save_read_only: return
+		if (lab.map_is_read_only() if lab.has_method("map_is_read_only") else lab._save_read_only): return
 		records = lab.map_atlases
 		key = value.address.body_id
 	else:

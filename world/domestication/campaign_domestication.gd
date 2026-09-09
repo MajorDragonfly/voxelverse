@@ -38,6 +38,11 @@ func _ready() -> void:
 	controls = AnimalControls.new()
 	controls.runtime = self
 	tribe.panel.add_extension(controls)
+	tribe.husbandry.configure(current_registry, resolve_suitability, actor_for)
+
+func current_registry() -> Dictionary:
+	# D3 reads the same live D2 registry that the shared save flushes.
+	return controller.registry if _ready_runtime else {}
 
 func _process(delta: float) -> void:
 	if _ready_runtime and (_campaign != _state.campaign.data["id"] or _body != _state.get_current_body()["id"]):

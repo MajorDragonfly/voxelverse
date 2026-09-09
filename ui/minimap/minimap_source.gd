@@ -50,6 +50,8 @@ static func campaign_snapshot(player: Node3D, tree: SceneTree) -> Dictionary:
 		"sample": sample_plane.bind(tree.root.get_node("WorldGenerator"))}
 
 static func laboratory_snapshot(lab: Node3D) -> Dictionary:
+	if is_instance_valid(lab) and lab.has_method("map_snapshot"):
+		return lab.map_snapshot()
 	if not is_instance_valid(lab) or not lab._ready_complete or lab.view_mode != "surface": return {}
 	if not is_instance_valid(lab.walker) or not is_instance_valid(lab.terrain): return {}
 	if is_instance_valid(lab.galaxy_panel) and lab.galaxy_panel.visible: return {}

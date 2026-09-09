@@ -127,6 +127,11 @@ func observe(before: Dictionary, after: Dictionary, actor_id: String, body: Dict
 	else:
 		entry = entry.duplicate(true)
 	var original: Dictionary = entry.duplicate(true)
+	# Housing adds real citizens after the first work observation. Retain earlier
+	# contributors and admit only IDs from the fully validated current village.
+	for resident: Dictionary in after["members"]:
+		if resident["id"] not in entry["members"]:
+			entry["members"].append(resident["id"])
 	var completed: Array[String] = []
 	if EconomyProgress.supported(after):
 		if entry["economy"].is_empty():

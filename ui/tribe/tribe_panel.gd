@@ -36,6 +36,10 @@ var _jobs: OptionButton
 var _tabs: TabContainer
 var _orders_page: VBoxContainer
 var _work_page: VBoxContainer
+var _hud_scroll: ScrollContainer:
+	get: return _scroll
+var _orders_scroll: ScrollContainer:
+	get: return _scroll
 var _scroll: ScrollContainer
 var _collapse: Button
 var _collapsed: bool = false
@@ -107,7 +111,6 @@ func _build() -> void:
 	_neighbors = Neighbors.new()
 	_neighbors.controller = controller
 	_neighbors.name = "Nachbarn"
-	_tabs.add_child(_neighbors)
 	var orders := HFlowContainer.new()
 	_orders_page.add_child(orders)
 	var all := Style.button("Alle auswählen")
@@ -152,6 +155,7 @@ func _build() -> void:
 	back.pressed.connect(func() -> void: controller.issue_order("profession"))
 	_work_page.add_child(Style.label("Versorger halten Nahrung und Wasser bereit. Baumeister helfen an der laufenden Baustelle. Manuelle Befehle ändern den Beruf nicht.", 15, Style.MUTED))
 	_build_husbandry()
+	_tabs.add_child(_neighbors)
 	_feedback = preload("res://ui/frontend/group_feedback.gd").new()
 	_feedback.controller = controller
 	_hud.get_child(0).add_child(_feedback)
@@ -197,7 +201,9 @@ func _layout() -> void:
 	entry.position = Vector2(viewport_size.x - 282, 76)
 	entry.size = Vector2(260, 46)
 	_scroll.visible = _hud_content.visible
-	_scroll.custom_minimum_size.y = minf(_hud_content.get_combined_minimum_size().y, viewport_size.y * 0.44) if _hud_content.visible else 0.0
+	var fixed_height: float = _hud.get_combined_minimum_size().y - _scroll.get_combined_minimum_size().y
+	var available_height: float = maxf(0.0, viewport_size.y - 36.0 - fixed_height)
+	_scroll.custom_minimum_size.y = minf(_hud_content.get_combined_minimum_size().y, minf(viewport_size.y * 0.44, available_height)) if _hud_content.visible else 0.0
 	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
 	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
 	_hud.size = Vector2(maxf(viewport_size.x - 36 - reserve, 280.0), 0)
@@ -260,6 +266,7 @@ func refresh() -> void:
 	entry.visible = not confirmation_open and not get_tree().paused and int(get_node("/root/GameState").current_phase) == 0 and is_instance_valid(controller.player)
 	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
 	_hud_content.visible = not _collapsed and controller.placement.is_empty()
+	_feedback.visible = not _collapsed
 	_collapse.text = "Aufträge" if not _hud_content.visible else "Einklappen"
 	if not controller._active:
 		return

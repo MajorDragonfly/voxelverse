@@ -3,6 +3,7 @@ const AnimalState = preload("res://world/domestication/animal_state.gd")
 const AnimalSave = preload("res://world/domestication/campaign_animal_state.gd")
 const Catalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const Contract = preload("res://world/fauna/domestication/domestication_contract.gd")
+const TamingPolicy = preload("res://world/domestication/d1_taming_policy.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 var d2: Node
 var animal_id: String
@@ -36,7 +37,7 @@ func _run() -> void:
 	_expect(home.establish_home()["ok"], "Could not establish actual home")
 	await _frames(15)
 	var catalog: Dictionary = Catalog.ensure(state)
-	var species: Dictionary = catalog["species"][2]
+	var species: Dictionary = catalog["species"][0]
 	var fauna: Node3D = load("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
 	fauna.configure(species["species_seed"], 781, Vector2i.ZERO, species["role"], "d2-campaign-fixture", species)
 	scene.add_child(fauna)
@@ -79,8 +80,9 @@ func _run() -> void:
 	_expect(not d2.offer(animal_id)["ok"], "Failed first adoption was accepted")
 	_expect(not tribe.body().has(AnimalSave.FIELD) and d2.animals.is_empty() and tribe.village()["stock"]["food"] == 12, "Failed adoption changed body, actors or food")
 	saves.save_path = campaign_save
-	var toggle: Button = tribe.panel._hud.get_child(0).get_child(0).get_child(1)
-	await _click(toggle)
+	var tabs: TabBar = tribe.panel._tabs.get_tab_bar()
+	var tab_index: int = d2.controls.get_index()
+	await _world_click(tabs.get_global_transform_with_canvas() * tabs.get_tab_rect(tab_index).get_center(), MOUSE_BUTTON_LEFT)
 	await _frames(18)
 	_expect(d2.controls.visible and d2.controls.selected_id() == animal_id, "Existing HUD did not open the actual animal controls")
 	await _click(d2.controls.buttons["offer"])
@@ -106,12 +108,17 @@ func _run() -> void:
 	await _frames(4)
 	_expect(d2.controller.record(animal_id)["pending"]["elapsed"] >= saved_partial, "Partial campaign offering lost progress")
 	await _until(func(): return d2.controller.record(animal_id)["pending"].is_empty(), 150)
-	_expect(tribe.village()["stock"]["food"] == 11 and d2.controller.record(animal_id)["trust"] == 25, "First meal did not consume exactly one shared unit")
-	for i in range(3):
+	var gain: float = TamingPolicy.evaluate(d2.resolve_suitability(source_identity["species_id"]), "plant")["trust_gain"]
+	var meals: int = ceili(100.0 / gain)
+	_expect(tribe.village()["stock"]["food"] == 11 and is_equal_approx(d2.controller.record(animal_id)["trust"], gain), "First meal did not consume exactly one shared unit or apply D1 trainability")
+	for i in range(meals - 1):
 		tribe.select_member(members_before[0])
 		_expect(d2.offer(animal_id)["ok"], "Additional offer rejected: " + d2.status)
 		await _until(func(): return d2.controller.record(animal_id)["pending"].is_empty(), 150)
-	_expect(d2.controller.record(animal_id)["status"] == "tamed" and tribe.village()["stock"]["food"] == 8, "Campaign did not tame at exact cost")
+	_expect(d2.controller.record(animal_id)["status"] == "tamed" and tribe.village()["stock"]["food"] == 12 - meals, "Campaign did not tame at exact cost")
+	_expect(animal_id in tribe.husbandry.candidates(), "D3 cannot read the actually tamed D1 milktier")
+	var live_source: Dictionary = tribe.husbandry.source.read(tribe.village(), state.campaign.data["id"], animal_id)
+	_expect(live_source.get("error") == "" and live_source.get("actor") == d2.animals[animal_id], "D3 resolved a different individual or unavailable source")
 	_expect(tribe.village()["members"].map(func(m: Dictionary): return m["id"]) == members_before, "Taming created or replaced citizen")
 	_expect(progression.get_saved_creature_encounter(animal_id)["trust"] == friends_before["trust"] and progression.get_saved_creature_encounter(animal_id)["relation"] == friends_before["relation"], "Taming rewrote friendship")
 	tribe.select_member(members_before[0])
@@ -163,6 +170,7 @@ func _restart() -> void:
 	d2 = tribe.get_node("Domestication")
 	await _frames(25)
 	_expect(d2.is_active() and d2.animals.has(animal_id), "Fresh process did not recreate held individual")
+	_expect(animal_id in tribe.husbandry.candidates(), "Fresh process did not reconnect D3 to the loaded D2 animal")
 	if not d2.animals.has(animal_id):
 		await _done()
 		return

@@ -3,6 +3,8 @@ const Model = preload("res://world/tribe/tribe_state.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
+const Tribal = preload("res://core/progression/tribal_progression.gd")
+const Neighbor = preload("res://world/tribe/neighbors/neighbor_state.gd")
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 var failures: Array[String] = []
 
@@ -82,12 +84,24 @@ func _run() -> void:
 	Housing.tick(data, 1)
 	_expect(data["housing"]["clock"] == 0, "Interrupted supply retained sustained-growth credit.")
 	data["stock"]["water"] = 20
+	var progress := Tribal.new()
+	_delivery(data, progress, body, campaign.data, 0)
 	for count in range(4, 7):
 		_expect(Housing.tick(data, 90), "Supplied growth did not become ready.")
 		var new_member: Dictionary = Housing.add_resident(data, Vector3(5, 0, 7))
 		_expect(not new_member.is_empty() and data["members"].size() == count and new_member["id"] == Housing.resident_id(data, count - 1), "New resident missing or unstable identity.")
 		_expect(new_member["species_id"] == data["species_id"] and new_member["faction_id"] == data["faction_id"], "Resident did not inherit own tribe.")
 		_expect(Model.validate(JSON.parse_string(JSON.stringify(data)), body, campaign.data).is_empty(), "Grown snapshot invalid.")
+		_delivery(data, progress, body, campaign.data, count - 1)
+		_expect(progress.export_state()["villages"][data["id"]]["members"].size() == count and progress.import_state(progress.export_state()), "Growth broke saved work evidence or omitted a real citizen.")
+	var neighbor: Dictionary = Neighbor.create(campaign.data, data, Vector3(10, 0, 0), [Vector3(10, 0, 1), Vector3(10, 0, -1)])
+	neighbor["schema"] = 1
+	_expect(Neighbor.validate(neighbor, data, campaign.data).is_empty(), "Legacy neighbor cannot load alongside growth.")
+	var carriers: Array = [0, 3, 4, 5].map(func(i: int) -> String: return data["members"][i]["id"])
+	_expect(Neighbor.begin(neighbor, data, carriers).is_empty() and neighbor["schema"] == Neighbor.SCHEMA and Neighbor.validate(neighbor, data, campaign.data).is_empty(), "Grown village cannot save four actual aid carriers.")
+	var old_neighbor: Dictionary = neighbor.duplicate(true)
+	old_neighbor["schema"] = 1
+	_expect(not Neighbor.validate(old_neighbor, data, campaign.data).is_empty(), "Four carriers silently changed the legacy contract.")
 	_expect(data["stock"]["food"] == 14 and data["stock"]["water"] == 14, "Growth did not spend shared supplies exactly once.")
 	_expect(not Housing.tick(data, 9000) and Housing.add_resident(data, Vector3.ZERO).is_empty() and data["members"].size() == 6, "Population cap bypassed.")
 	bad = data.duplicate(true)
@@ -109,3 +123,13 @@ func _run() -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		failures.append(message)
+
+func _delivery(data: Dictionary, progress: RefCounted, body: Dictionary, campaign: Dictionary, index: int) -> void:
+	var member: Dictionary = data["members"][index]
+	member.merge({"order": "wood", "cargo": "wood", "stage": "return"}, true)
+	data["deposits"]["wood"]["remaining"] -= 1
+	var before: Dictionary = data.duplicate(true)
+	member["cargo"] = ""
+	data["stock"]["wood"] += 1
+	data["delivered"] += 1
+	_expect(progress.observe(before, data, member["id"], body, campaign, 1)["changed"], "Actual citizen delivery did not enter tribal evidence.")

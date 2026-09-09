@@ -12,6 +12,8 @@ func _ready() -> void:
 
 func _run() -> void:
 	var tree := get_tree()
+	# Headless windows default to 64x64; use an actual supported test extent.
+	tree.root.size = Vector2i(1280, 720)
 	var settings := get_node("/root/DisplaySettings")
 	get_node("/root/SaveGameService").autosave_enabled = false
 	# The water/GUI acceptance needs a reproducible actual world. A random
@@ -197,7 +199,7 @@ func _click(control: Control) -> void:
 	if control == null:
 		_expect(false, "Missing menu control.")
 		return
-	var point: Vector2 = control.get_global_rect().get_center()
+	var point: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
 	var motion := InputEventMouseMotion.new()
 	motion.position = point
 	get_viewport().push_input(motion, true)

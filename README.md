@@ -8,6 +8,8 @@ Der integrierte Stand enthält Kreaturensteuerung und Überleben, einen gemeinsa
 
 M1c ergänzt einen reproduzierbaren Galaxiekatalog: Sektoren und Sternsysteme abfragen, reale Körpergrößen ansehen sowie eigene Namen, Entdeckungen und Notizen speichern. Die Hauptwelt erhält zusammenhängende Baum-Fernmodelle, eine begrenzte Waldvorschau und gemeinsame Nah-/Fernfarben des Geländes. [M1c und Fernlandschaft: Umsetzung und Testpakete](docs/GALAXY_CATALOG_AND_DISTANCE.md).
 
+Die zweite Integrationsrunde ergänzt B1–B3-Körperanschlüsse, D1–D3-Arten/Zähmung/Tierhaltung, erneuerbare Dorfwirtschaft mit Wachstum, Nachbarhilfe, gemeinsame Mini-/Weltkarte und die erste Deutsch-/Englisch-Verwaltung. **Nächste Hauptarbeit ist der vollständige [Umzug der Kampagne auf Kugelwelten](docs/SPHERICAL_CAMPAIGN_MIGRATION.md).** Die normale Kampagne läuft noch auf der bisherigen Oberfläche; die belebte Kugelwelt ist bereits separat spielbar, aber noch keine vollständige Kampagne. [Quellstände, Integration und Prüfergebnisse](docs/INTEGRATION_SPHERICAL_2026-09-09.md).
+
 ## Projekt starten
 
 `project.godot` mit Godot 4.6.3 öffnen und **F5 / Projekt ausführen** wählen. Das konfigurierte Startmenü `ui/frontend/main_menu.tscn` führt in die Kampagne. `main/main.tscn` ist die eigentliche Spielszene für gezielte Entwicklerprüfungen. Windows-/Linux-Exporte und ihre Prüfung sind in [DESKTOP_EXPORT.md](docs/DESKTOP_EXPORT.md) beschrieben.

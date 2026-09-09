@@ -3,7 +3,7 @@ extends RefCounted
 const Rules = preload("res://core/progression/behavior_catalog.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
-const SCHEMA: int = 1
+const SCHEMA: int = 2
 const COST: Dictionary = {"food": 6, "wood": 4}
 const BUILD_SECONDS: float = 12.0
 const NAV_EXTENT: int = 18
@@ -44,6 +44,7 @@ static func begin(data: Dictionary, village: Dictionary, selected: Array) -> Str
 		if member.is_empty() or not member["cargo"].is_empty() or data["aid"]["shipments"].has(id):
 			return "Ausgewählte Bewohner müssen ihre laufende Fracht oder Hilfslieferung zuerst beenden."
 	data["aid"]["status"] = "active"
+	data["schema"] = SCHEMA
 	for id: String in selected:
 		var member: Dictionary = resident(village, id)
 		member["order"] = "move"
@@ -176,7 +177,8 @@ static func validate(data: Variant, village: Dictionary, campaign: Dictionary) -
 	for key: String in ["received", "withdrawn", "returned", "carriers", "shipments", "builders"]:
 		if not aid.get(key) is Dictionary:
 			return "Ungültiges Lieferbuch."
-	if aid["shipments"].size() > 3 or aid["carriers"].size() > 3 or aid["builders"].size() > 2:
+	var carrier_limit: int = 6 if int(data["schema"]) >= 2 else 3
+	if aid["shipments"].size() > carrier_limit or aid["carriers"].size() > carrier_limit or aid["builders"].size() > 2:
 		return "Lieferbuch überschreitet seine Grenze."
 	var carried: Dictionary = {"food": 0, "wood": 0}
 	for actor: Variant in aid["shipments"]:

@@ -25,6 +25,7 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	root.size = Vector2i(1920, 1080)
 	saves = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
 	saves.save_path = SAVE_PATH
@@ -230,7 +231,7 @@ func _click(control: Control) -> void:
 	if ui._scroll.is_ancestor_of(control):
 		ui._scroll.ensure_control_visible(control)
 	await _frames()
-	var position: Vector2 = control.get_global_rect().get_center()
+	var position: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
 	for pressed_value in [true, false]:
 		var event := InputEventMouseButton.new()
 		event.button_index = MOUSE_BUTTON_LEFT

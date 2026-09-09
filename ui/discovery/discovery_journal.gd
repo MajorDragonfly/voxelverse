@@ -890,19 +890,14 @@ func _theme() -> Theme:
 
 
 func _layout_catalog() -> void:
-	var viewport_size := get_viewport().get_visible_rect().size
-	var narrow: bool = viewport_size.x < 940
-	var stacked: bool = viewport_size.x < 720 or (narrow and viewport_size.y >= 760)
-	_content.vertical = stacked
-	_browser.custom_minimum_size = Vector2(0 if stacked else (250 if narrow else 300), 150 if stacked else 0)
-	_browser.size_flags_vertical = Control.SIZE_FILL if stacked else Control.SIZE_EXPAND_FILL
-	_list.custom_minimum_size.y = 110 if stacked else 0
-	_list.fixed_icon_size = Vector2i(60, 60) if narrow else Vector2i(78, 78)
+	_layout()
+	var extent: Vector2 = get_viewport().get_visible_rect().size / maxf(_scale_factor, 0.001)
+	_browser.size_flags_vertical = Control.SIZE_FILL if _content.vertical else Control.SIZE_EXPAND_FILL
+	_list.custom_minimum_size.y = 72 if _content.vertical else 0
+	_list.fixed_icon_size = Vector2i(60, 60) if extent.x < 940 else Vector2i(78, 78)
 	_detail_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_panel.offset_left = 12 if narrow else 28
-	_panel.offset_right = -_panel.offset_left
 	_tabs.clip_tabs = true
-	_parts_grid.columns = 1 if viewport_size.x < 640 else 2
+	_parts_grid.columns = 1 if extent.x < 640 else 2
 
 
 func _visual_key(row: Dictionary, tab: int) -> String:

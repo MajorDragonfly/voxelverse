@@ -54,6 +54,7 @@ func _ready() -> void:
 	if not saved.data.is_empty():
 		records = saved.data.bodies
 		body_id = saved.data.body_id
+	_restore_extensions(saved.data)
 	open_body(body_id)
 	_ready_complete = true
 	status.text = "Vorhandene M1d-Datei geschützt; Sitzung nur lesend." if read_only else "Klicke in die Landschaft, um loszulaufen."
@@ -226,10 +227,14 @@ func load_lab() -> bool:
 		status.text = "Keine lesbare M1d-Sicherung gefunden."
 		return false
 	records = saved.data.bodies
+	_restore_extensions(saved.data)
 	read_only = false
 	open_body(saved.data.body_id, false)
 	status.text = "Gesicherte Körper und Orte wiederhergestellt."
 	return true
+
+func _restore_extensions(_data: Dictionary) -> void:
+	pass
 
 
 func next_body() -> void:
@@ -296,7 +301,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_SPACE: walker.jump_requested = true
 			KEY_F5: save_lab()
 			KEY_F9: load_lab()
-			KEY_M: next_body()
+			KEY_M:
+				if not has_method("map_snapshot"): next_body()
+			KEY_P: next_body()
 			KEY_R: return_to_marker()
 
 

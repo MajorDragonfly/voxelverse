@@ -86,7 +86,7 @@ func run() -> void:
 	world.set_paused(true)
 	expect(world.save_lab(), "D12 save failed")
 	var snapshot: Dictionary = Save.read(world.store_path).data
-	expect(not snapshot.is_empty() and snapshot.schema == 2, "Spherical save lacks version 2")
+	expect(not snapshot.is_empty() and snapshot.schema == Save.SCHEMA, "Spherical save lacks the current header")
 	var old_ids: Array = world.ecosystem.domestic.individuals.keys()
 	old_ids.sort()
 	var frozen: Variant = JSON.parse_string(JSON.stringify(catalog.species))
