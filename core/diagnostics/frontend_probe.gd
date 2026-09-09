@@ -11,6 +11,9 @@ func _ready() -> void:
 
 func _run() -> void:
 	var tree := get_tree()
+	# This acceptance fixture checks German copy. Windows CI otherwise starts
+	# in English through the new automatic device-language preference.
+	_expect(get_node("/root/LocaleManager").save_preference("de") == OK, "Cannot select the frontend fixture language.")
 	var flow := get_node("/root/SessionFlow")
 	var saves := get_node("/root/SaveGameService")
 	var settings := get_node("/root/DisplaySettings")

@@ -58,6 +58,8 @@ Weitere Remote-Nachprüfungen fanden zwei Laufzeitfehler: Ein aufgeschoben initi
 
 Die grafische Dorfweltprobe überschritt auf dem Software-Renderer ihre Frist während der automatischen Transporte. Sie rendert jetzt gezielt das Ergebnis nach denselben tatsächlichen Simulationsschritten, mit vier sichtbaren Vorlaufbildern vor der Aufnahme; der Modus wird im Ergebnis ausgewiesen. Die übrigen GUI-Eingabeprüfungen zeichnen unverändert laufend. Dieser Aufnahmeablauf ist kein Nachweis flüssiger Darstellung auf Zielhardware.
 
+Die native Windows-Menüprobe wählt nun ausdrücklich Deutsch für ihre deutschen Textprüfungen. Windows startete durch die neue automatische Spracherkennung korrekt auf Englisch; die Tastenbelegung selbst war erfolgreich gespeichert und wirksam, während drei alte deutsche Textvergleiche deshalb fehlschlugen. Die Geräte-Sprachwahl im normalen Spiel bleibt automatisch bzw. nutzerbestimmt.
+
 ## Veröffentlichung
 
 Der Nutzer hat die Veröffentlichung im öffentlichen Repository `MajorDragonfly/voxelverse` und die anschließende Übernahme nach `main` ausdrücklich freigegeben. Die ursprüngliche Ablehnung der automatischen Freigabeprüfung gehört zum vorherigen Prüfstand; der entsprechende Eintrag im Ergebnisnachweis dokumentiert diesen Zeitpunkt.
