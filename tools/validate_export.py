@@ -16,7 +16,7 @@ from validate_godot import ERROR
 
 PACKAGED_TESTS = ["creature_builder_v7_test", "modular_assembly_framework_test",
                   "gameplay_acceptance_test", "meta_runtime_test", "planet_sphere_contract_test",
-                  "behavior_skill_tree_test", "creature_behavior_gameplay_test"]
+                  "behavior_skill_tree_test", "creature_behavior_gameplay_test", "development_path_test"]
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
 
@@ -103,6 +103,7 @@ def main():
             # use the editor to instrument the exact release PCK, after starting
             # the untouched release executable above. Neither sees source files.
             pack_command = [args.godot, "--headless", "--main-pack", str(executable.with_suffix(".pck"))]
+            shutil.copy2(args.project / "tests/fixtures/home_group_pr20.json", qa / "home_group_pr20.json")
             for name in PACKAGED_TESTS:
                 probe = qa / f"{name}.gd"
                 shutil.copy2(args.project / "tests" / f"{name}.gd", probe)
@@ -132,6 +133,8 @@ def main():
                 f"Start {executable_name} with its .pck and any adjacent libraries kept together.\n"
                 "Controls: WASD move, Space jump, E inspect, right mouse/Q bite, P next planet.\n"
                 "K or the Entwicklung HUD button opens the skill tree and discovery journal. Esc closes it.\n"
+                "The phase selector shows separate wallets. Entwicklungspfad explains creature, nest group and tribe.\n"
+                "Tribal tools and village gameplay are planned; this view does not unlock them.\n"
                 "Hold F near a peaceful creature to befriend it. H shares food with injured wildlife. Bites use stamina.\n"
                 "F4 opens the M1 Planet Lab; Tab switches surface/orbit, M changes body, B toggles binary stars.\n"
                 "This build passed headless release acceptance. Visual/GPU acceptance is still pending.\n",

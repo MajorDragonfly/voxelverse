@@ -1,0 +1,217 @@
+{
+  "status": "local_verified_ci_pending",
+  "base_commit": "15479d8b2b0f5e78e483b806dede879eceda50e3",
+  "scope": "Phase-specific skilltree views and read-only development path; no tribal gameplay or phase unlock.",
+  "local": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.606
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.077
+      },
+      {
+        "name": "development_path_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.822
+      },
+      {
+        "name": "behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.642
+      },
+      {
+        "name": "creature_behavior_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.922
+      },
+      {
+        "name": "behavior_progression_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.806
+      }
+    ]
+  },
+  "local_final_targeted": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "development_path_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.834
+      },
+      {
+        "name": "behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.659
+      }
+    ]
+  },
+  "local_linux_export": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "platform": "linux",
+    "checks": [
+      {
+        "name": "release_export",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.328
+      },
+      {
+        "name": "packaged_main",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.87
+      },
+      {
+        "name": "packaged_planet_lab",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.37
+      },
+      {
+        "name": "packaged_creature_builder_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.426
+      },
+      {
+        "name": "packaged_modular_assembly_framework_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.43
+      },
+      {
+        "name": "packaged_gameplay_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.711
+      },
+      {
+        "name": "packaged_meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.616
+      },
+      {
+        "name": "packaged_planet_sphere_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.084
+      },
+      {
+        "name": "packaged_behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.542
+      },
+      {
+        "name": "packaged_creature_behavior_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.455
+      },
+      {
+        "name": "packaged_development_path_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.852
+      },
+      {
+        "name": "packaged_planet_15838",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 11.297
+      },
+      {
+        "name": "packaged_planet_63352",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.465
+      },
+      {
+        "name": "packaged_planet_23757",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.248
+      }
+    ],
+    "probes": [
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "verdant",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 80,
+        "loaded_meshes": 63,
+        "passed": true,
+        "planet_transition": "A-B-A",
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 15838,
+        "user_data_dir": "/tmp/voxelverse-export-j5ui4sfy/seed-15838/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "autumn",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 19,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 63352,
+        "user_data_dir": "/tmp/voxelverse-export-j5ui4sfy/seed-63352/xdg_data_home/godot/app_userdata/Voxelverse"
+      },
+      {
+        "engine_mode": "editor_with_release_pck",
+        "executable": "/tmp/voxelverse-progression-tools/godot",
+        "failures": [],
+        "flora_color_family": "violet",
+        "godot": "4.6.3-stable (official)",
+        "last_world_instances": 130,
+        "loaded_meshes": 63,
+        "passed": true,
+        "platform": "Linux",
+        "save_round_trip": true,
+        "seed": 23757,
+        "user_data_dir": "/tmp/voxelverse-export-j5ui4sfy/seed-23757/xdg_data_home/godot/app_userdata/Voxelverse"
+      }
+    ],
+    "archive": {
+      "name": "voxelverse-linux-x86_64.zip",
+      "bytes": 31343405,
+      "sha256": "c35bf5304d6f14dcfd6ad10e23c78e85ec62b55c6c9e40ee96b8496f1232d9f4"
+    },
+    "passed": true
+  },
+  "home_contract": {
+    "source_commit": "6ca5e484ea93870d4aab62bb0dec746846d00d0a",
+    "fixture": "tests/fixtures/home_group_pr20.json",
+    "generated_by": "Published home_group_state.create with its validate method; fixture generated from fetched source, not hand-built.",
+    "runtime_integrated": false,
+    "known_ci_blocker": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34321923374",
+    "failure": "home_group_world_test: No reachable nest site on generated starting terrain."
+  },
+  "remaining": [
+    "Graphical development and regression captures in CI.",
+    "Complete Godot and native Windows/Linux CI.",
+    "Manual target-PC playtest."
+  ]
+}

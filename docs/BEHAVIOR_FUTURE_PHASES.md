@@ -1,6 +1,14 @@
 # Verhaltensfortschritt über alle Spielphasen
 
-Planungsstand 9. September 2026. Kreaturenhandlungen und vier unmittelbare Fähigkeiten werden im zugehörigen Gameplay-Paket angeschlossen. Die folgenden fünf Phasen sind hier **Entwurf**, keine freigeschalteten Spielmodi. Der Skilltree zeigt die Vorschau und tatsächlich gekaufte Vermächtnisse an.
+Planungsstand 9. September 2026. Kreaturenhandlungen und vier unmittelbare Fähigkeiten sind im Gameplay-Paket PR #17 angeschlossen. Die folgenden fünf Phasen sind hier **Entwurf**, keine freigeschalteten Spielmodi. Der Skilltree zeigt die Vorschau, die eigenen Bestände jeder ausgewählten Phase und tatsächlich gekaufte Vermächtnisse an.
+
+## Bestätigte Trennung: Nestgruppe und Stamm
+
+Die Nestgruppe ist eine Vorstufe **innerhalb der Kreaturenphase**. Der Spieler steuert weiterhin seine Kreatur; eigene Artgenossen können folgen, warten und heimkehren. Diese Vorstufe hat noch keine Dorfwirtschaft.
+
+Erst in der eigentlichen Stammesphase befehligt der Spieler Gruppen und verteilt Aufgaben. Ihr erster vollständiger Ablauf lautet: **Material sammeln → Werkzeuge herstellen → Behausung bauen → Bewohner versorgen → Dorf erweitern**. Die bestehende Spezies, Mitglieder und Heimat bilden den Stamm; es wird keine Ersatzgruppe erzeugt. Eigene Bauformen sollen später aus dem Gebäudeeditor kommen.
+
+Die Ansicht „Entwicklungspfad“ bildet diese Trennung ab und liest vorhandene Nestdaten, ohne eine Phase freizuschalten. [Umsetzung, andere Arbeitsstände und Anschlüsse](DEVELOPMENT_PATH.md).
 
 ## Gemeinsame Regeln
 

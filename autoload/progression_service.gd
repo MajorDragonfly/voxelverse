@@ -251,6 +251,18 @@ func get_phase_progression_preview(phase: int) -> Dictionary:
 	return result
 
 
+func get_development_path() -> Dictionary:
+	var state := get_node("/root/GameState")
+	# The existing body record is read directly: opening this view must not create
+	# campaign bodies, home groups, members, point entries or transition snapshots.
+	var controller := get_tree().get_first_node_in_group(&"home_group_controller")
+	var runtime_available: bool = controller != null and controller.has_method("can_use_panel") and bool(controller.call("can_use_panel"))
+	var result: Dictionary = preload("res://core/progression/development_path.gd").describe(
+		state.campaign.data, str(int(state.world_seed)), int(state.current_phase), runtime_available)
+	result["legacy"] = get_phase_progression_preview(1)["legacy"]
+	return result
+
+
 func purchase_behavior_node(node_id: String) -> Dictionary:
 	if is_behavior_transaction_active():
 		return {"ok": false, "reason": "purchase_in_progress"}
