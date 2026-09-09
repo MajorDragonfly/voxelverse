@@ -95,6 +95,7 @@ func _run() -> void:
 	journal.close_journal()
 	await _frames(3)
 	_expect(not paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing tribal journal restored creature mouse capture.")
+	await _check_minimap()
 	await _capture("02_group")
 	# M6's expanded economy controls can cover the companions. Use its real
 	# collapse button before clicking/dragging in the world, like the player.
@@ -198,6 +199,60 @@ func _run() -> void:
 		_expect(false, "Second campaign cannot enter its own tribe.")
 	await _cleanup()
 	_finish()
+
+func _check_minimap() -> void:
+	var map := get_first_node_in_group(&"minimap_hud")
+	_expect(map != null, "Tribe has no shared minimap.")
+	if map == null: return
+	map._update_snapshot()
+	_expect(map.visible and map.phase == 1 and map.range_m == 160.0, "Real confirmed transition did not widen the map.")
+	_expect(map._map.group_view and map._map.markers.size() == 4, "Tribe map lost home or one of its three residents.")
+	var atlas: CanvasLayer = map.atlas_window
+	atlas.tracker.update_exploration()
+	var fog: Dictionary = atlas.tracker.atlas.data.duplicate(true)
+	var original_focus: Vector3 = tribe.map_focus()
+	tribe._focus += Vector3(200, 0, 200)
+	atlas.tracker.update_exploration()
+	_expect(atlas.tracker.atlas.data == fog, "Panning the tribal camera revealed unvisited ground.")
+	tribe._focus = original_focus
+	_expect(atlas.open_map() and paused, "Active tribe cannot open the shared world map.")
+	_key(KEY_SPACE)
+	_expect(paused and atlas.is_open, "Tribal pause key released the atlas pause.")
+	_key(KEY_ESCAPE)
+	await _frames(3)
+	_expect(not paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing the tribal atlas restored the wrong controls.")
+
+	var original_size: Vector2i = root.size
+	for dimensions in [Vector2i(1280, 720), Vector2i(800, 600)]:
+		root.size = dimensions
+		await _frames(5)
+		map._layout()
+		tribe.panel._layout()
+		await _frames(2)
+		var map_rect := _physical_rect(map._panel)
+		var commands := _physical_rect(tribe.panel._hud)
+		var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
+		_expect(screen.encloses(map_rect), "Tribal map escaped screen: " + str(dimensions))
+		_expect(screen.encloses(commands), "Tribal commands escaped screen: " + str(dimensions) + " " + str(commands))
+		_expect(not map_rect.intersects(commands), "Tribal orders cover the minimap: " + str(dimensions))
+		tribe.panel._hud_scroll.ensure_control_visible(tribe.panel._buttons["wait"])
+		await _frames(2)
+		_expect(commands.has_point(_physical_rect(tribe.panel._buttons["wait"]).get_center()), "Last tribal order cannot be reached by scrolling.")
+	root.size = original_size
+	await _frames(5)
+	var selected: Array = tribe.selected.duplicate()
+	var orders: Array = tribe.village()["members"].duplicate(true)
+	var point: Vector2 = map._map.get_global_transform_with_canvas() * (map._map.size * 0.5)
+	await _world_click(point, MOUSE_BUTTON_LEFT)
+	await _world_click(point, MOUSE_BUTTON_RIGHT)
+	_expect(tribe.selected == selected, "Map click changed world selection.")
+	for index in range(orders.size()):
+		_expect(orders[index]["order"] == tribe.village()["members"][index]["order"], "Map click issued a world order.")
+
+func _physical_rect(control: Control) -> Rect2:
+	var canvas: Transform2D = control.get_global_transform_with_canvas()
+	var factor: float = float(root.size.x) / root.get_visible_rect().size.x
+	return Rect2(canvas.origin * factor, control.size * canvas.get_scale() * factor)
 
 func _world_click(position: Vector2, button: int, shift: bool = false) -> void:
 	for pressed_value in [true, false]:
@@ -310,6 +365,8 @@ func _click(button: Button) -> void:
 	_expect(button != null and button.is_visible_in_tree(), "Required button is absent: " + (str(button.name) if button != null else "null"))
 	if button == null:
 		return
+	if tribe != null and tribe.panel._hud_scroll.is_ancestor_of(button):
+		tribe.panel._hud_scroll.ensure_control_visible(button)
 	await process_frame
 	var event := InputEventMouseButton.new()
 	event.position = button.get_global_transform_with_canvas() * (button.size * 0.5)

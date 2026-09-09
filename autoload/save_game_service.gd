@@ -16,6 +16,7 @@ const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const Progression = preload("res://autoload/progression_service.gd")
 const FaunaCatalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
+const Exploration = preload("res://core/map/exploration_atlas.gd")
 const Tribe = preload("res://world/tribe/tribe_state.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 const SLOT_DIRECTORY: String = "user://saves"
@@ -532,6 +533,10 @@ func _validate_save(data: Dictionary) -> String:
 		var animal_problem: String = Animals.validate_body(body, campaign)
 		if not animal_problem.is_empty():
 			return animal_problem
+		if body.has("exploration_atlas"):
+			var map_problem: String = Exploration.validate(body["exploration_atlas"], str(body.get("id", "")))
+			if not map_problem.is_empty(): return map_problem
+			if body["exploration_atlas"]["mode"] != body["surface_mode"]: return "Map and body surface modes differ."
 		if body.has("tribe"):
 			var tribe_problem: String = Tribe.validate(body["tribe"], body, campaign)
 			if not tribe_problem.is_empty():
@@ -860,6 +865,7 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 				return true
 			if body is Dictionary and body.has("fauna_catalog") and FaunaCatalog.has_unsupported(body["fauna_catalog"]):
 				return true
+			if body is Dictionary and Exploration.newer(body.get("exploration_atlas")): return true
 			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
 				return true
 			if body is Dictionary and body.has("generator_version") and body["generator_version"] != Campaign.GENERATOR_VERSION:

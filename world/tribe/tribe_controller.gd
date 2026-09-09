@@ -109,8 +109,11 @@ func _exit_tree() -> void:
 	_deactivate()
 
 func body() -> Dictionary:
-	_state.get_current_body()
-	return _state.campaign.data["bodies"][str(_state.get_world_seed())]
+	var key: String = str(_state.get_world_seed())
+	# This accessor already returns the authoritative record. Avoid deep-copying
+	# its growing exploration ledger just to ensure that the body exists.
+	if not _state.campaign.data["bodies"].has(key): _state.get_current_body()
+	return _state.campaign.data["bodies"][key]
 
 func village() -> Dictionary:
 	var value: Variant = body().get("tribe", {})
@@ -234,7 +237,7 @@ func _activate() -> void:
 	panel.refresh()
 
 func _hide_creature_ui(node: Node) -> void:
-	if node is CanvasLayer and node.visible and not node.is_in_group(&"discovery_journal"):
+	if node is CanvasLayer and node.visible and not node.is_in_group(&"discovery_journal") and not node.is_in_group(&"minimap_hud"):
 		_hidden_layers.append(node)
 		node.hide()
 	for child: Node in node.get_children():
@@ -890,3 +893,6 @@ func navigation_extent() -> int:
 	if is_instance_valid(domestication) and domestication._ready_runtime:
 		return 20
 	return NeighborRuntime.Model.NAV_EXTENT if body().has("tribal_neighbor") else Navigation.RADIUS
+
+func map_focus() -> Vector3:
+	return _focus

@@ -20,18 +20,52 @@ func _run() -> void:
 		var saved: Dictionary = Save.read()
 		_expect(lab.body_id == "m1b:terra" and lab.system.real_scale and lab.system.binary and lab.system.elapsed == 117.25, "Restart lost the large system or its clock.")
 		_expect(_distance(saved.location, lab.walker.location(), lab.system.bodies[lab.body_id].radius) < 0.001, "Restart lost the precise Earth location.")
+		_expect(saved.get("map_atlases", {}).has("m1b:terra"), "Lab restart lost planet exploration.")
 	else:
 		lab._open_body("m1b:terra")
 		lab.walker.enabled = false
 		_expect(lab.system.real_scale and lab.system.bodies[lab.body_id].radius == 6371000.0, "Terra is not physically Earth-sized.")
+		var map := get_first_node_in_group(&"minimap_hud")
+		_expect(map != null, "Surface lab did not install the shared minimap.")
+		map._update_snapshot()
+		_expect(map.visible and map.projection.mode == Cube.MODE and map.projection.body_id == lab.body_id, "Earth map used the legacy plane.")
+		var atlas: CanvasLayer = map.atlas_window
+		atlas.tracker.update_exploration()
+		_expect(atlas.open_map() and paused, "Earth atlas did not open with the surface map.")
+		_expect(atlas.tracker.atlas.known(lab.walker.location()), "Earth atlas did not retain the visited surface.")
+		var fog: Dictionary = atlas.tracker.atlas.data.duplicate(true)
+		atlas._pan_pixels(Vector2(600, 0))
+		atlas.zoom(2)
+		_expect(atlas.tracker.atlas.data == fog, "Earth atlas camera movement revealed terrain.")
+		atlas.close_map()
+		await process_frame
+		await process_frame
+		_expect(not paused, "Earth atlas kept the lab paused.")
+		var before_rebase: Vector2 = map.projection.project(lab.walker.location())
+		var point: Array = Cube.global_position(lab.walker.position, lab.terrain.origin)
+		var shifted: Array = lab.terrain.origin.duplicate()
+		shifted[0] += 220.0
+		lab.terrain.rebase(shifted)
+		lab.walker.position = Cube.local_position(point, shifted)
+		map._update_snapshot()
+		_expect(map.projection.project(lab.walker.location()).distance_to(before_rebase) < 0.002, "Floating-origin rebase moved the minimap.")
 		var original: Dictionary = lab.snapshot()
 		for mode in ["orbit", "system", "surface"]:
 			lab.set_view(mode)
 			lab.walker.enabled = false
 			await process_frame
+			map._update_snapshot()
+			_expect(map.visible == (mode == "surface"), "Surface minimap remained over the orbit/system overview.")
 			_expect(_distance(original.location, lab.walker.location(), 6371000.0) < 0.001, "Earth orbit return changed the physical saved location.")
 			if mode == "orbit":
 				_expect(lab.space_camera.position.length() < 100.0 and lab.space_bodies[lab.body_id].position.length() < 0.001, "Orbit did not centre/scale before converting to render coordinates.")
+		lab.open_galaxy_catalog()
+		map._update_snapshot()
+		_expect(not map.visible, "Surface minimap covered the galaxy catalog.")
+		lab.galaxy_panel.close()
+		lab.walker.enabled = false
+		map._update_snapshot()
+		_expect(map.visible, "Closing the galaxy catalog did not restore the minimap.")
 		lab.toggle_binary()
 		lab.system.elapsed = 117.25
 		_expect(lab.save_lab() and Save.read().schema == 3, "Full-size body was not saved with its own schema.")

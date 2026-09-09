@@ -80,6 +80,12 @@ Mindestens **drei unterschiedliche geeignete Arten je belebtem Spielplaneten**: 
 7. Tierhaltung ist ein Ressourcenablauf mit Futter/Wasser, Haltungskapazität, Betreuung, Produktion und Transport. Vermehrung/Bestandserholung, Tierverlust und Ersatz werden vor langfristiger Wirtschaft ergänzt. Dafür ist kein Genommodell notwendig.
 8. Bestände und Tierbindungen überstehen Mittelalter/Neuzeit. Verbesserte Geschirre, Pflüge, Zuchtwahl als Spielbonus und später Maschinen erweitern/ersetzen Tätigkeiten; bestehende Tiere werden nicht beim Epochenwechsel gelöscht.
 
+## Bedienoberfläche – Ergänzung aus dem Spieltest vom 9. September 2026
+
+- **Visuelle Überarbeitung als eigenes Paket:** Entdeckungs- und Entwicklungsbuch mit klarer Auswahl/Detailansicht, echten Körperteilvorschauen und Silhouetten bei gesperrten Teilen/Fähigkeiten; kompakte Überlebensanzeige oben links. Übergabe und Prüflimits: [WORK_UI_VISUAL_REFRESH.md](docs/WORK_UI_VISUAL_REFRESH.md). Das Paket wird erst mit seiner Integration Teil des gemeinsamen Spielstands.
+- **Minimap als geprüftes Fachpaket:** unten rechts, gemeinsames Gelände-/Wasserraster, Blickrichtung, Heimat und eigene Gruppenmitglieder. Der bestätigte Phasenwechsel erweitert den Maßstab automatisch; manuell +/− und Rückkehr zum Phasenmaßstab. Körpergebundene Projektion für V9 und Kugelplaneten, Save/Load sowie getrennte Dorfbedienung bei 1280 × 720 und 800 × 600 geprüft. Details und Grenzen: [WORK_MINIMAP.md](docs/WORK_MINIMAP.md). Noch nicht in den gemeinsamen `main` übernommen. Offen bleiben gespeicherte Wegpunkte, eigene gezähmte Tiere aus D2 und später passende Orbit-/Systemkarten; unbekannte Arten und Rohstoffe werden nicht verraten.
+- **Abnahme auf dem Ziel-PC:** Lesbarkeit der Bücher und Silhouetten, neue Beerenstrauchform, E als einziger Art-/Wertezugriff und passende Drehrichtung im Editor. Die lokale automatische Funktionsprüfung ersetzt die optische Abnahme nicht.
+
 ## Meilensteine mit tatsächlichem Status
 
 | ID | Status und nächstes Ergebnis | Voraussetzung | Abnahme |

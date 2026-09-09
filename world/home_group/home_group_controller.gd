@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 		_manager = get_tree().current_scene.get_node_or_null("WorldManager")
 	if player == null or _manager == null or not bool(_manager.get("world_initialized")):
 		return
-	var body: Dictionary = _state.get_current_body()
+	var body: Dictionary = _body_record()
 	var campaign_id: String = str(_state.campaign.data["id"])
 	if not _ready_for_world or campaign_id != _campaign_id or str(body["id"]) != _body_id:
 		_campaign_id = campaign_id
@@ -65,9 +65,11 @@ func can_use_panel() -> bool:
 	return _ready_for_world and is_instance_valid(player) and not bool(player.get("is_dead")) and int(_state.current_phase) == 0
 
 func _body_record() -> Dictionary:
-	var current: Dictionary = _state.get_current_body()
-	# JSON numbers return as floats; campaign body keys are integer seed text.
-	return _state.campaign.data["bodies"][str(int(current["seed"]))]
+	# The record was already returned by reference; a deep copy solely for its
+	# seed would repeatedly copy the complete exploration ledger.
+	var key: String = str(_state.get_world_seed())
+	if not _state.campaign.data["bodies"].has(key): _state.get_current_body()
+	return _state.campaign.data["bodies"][key]
 
 func group_state() -> Dictionary:
 	var value: Variant = _body_record().get("home_group", {})

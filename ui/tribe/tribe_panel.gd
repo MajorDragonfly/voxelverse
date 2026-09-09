@@ -17,6 +17,7 @@ var _dialog: PanelContainer
 var _detail: Label
 var _message: Label
 var _hud: PanelContainer
+var _hud_content: VBoxContainer
 var _stock: Label
 var _goal: Label
 var _supply: Label
@@ -35,7 +36,6 @@ var _jobs: OptionButton
 var _tabs: TabContainer
 var _orders_page: VBoxContainer
 var _work_page: VBoxContainer
-var _hud_content: VBoxContainer
 var _scroll: ScrollContainer
 var _collapse: Button
 var _collapsed: bool = false
@@ -198,7 +198,9 @@ func _layout() -> void:
 	entry.size = Vector2(260, 46)
 	_scroll.visible = _hud_content.visible
 	_scroll.custom_minimum_size.y = minf(_hud_content.get_combined_minimum_size().y, viewport_size.y * 0.44) if _hud_content.visible else 0.0
-	_hud.size = Vector2(viewport_size.x - 36, 0)
+	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
+	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
+	_hud.size = Vector2(maxf(viewport_size.x - 36 - reserve, 280.0), 0)
 	_place_hud()
 	_shade.size = viewport_size
 	_dialog.custom_minimum_size.x = minf(viewport_size.x - 48, 670)

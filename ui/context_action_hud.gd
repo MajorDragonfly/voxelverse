@@ -100,7 +100,7 @@ func _update_context() -> void:
 		)
 
 	if bool(_player.get("is_swimming")):
-		_label.text = "Swimming · %s drink · %s rise" % [KeyHints.binding_label("primary_action"), KeyHints.binding_label("jump")]
+		_label.text = "Schwimmen · %s trinken · %s auftauchen" % [KeyHints.binding_label("primary_action"), KeyHints.binding_label("jump")]
 		_label.visible = true
 		return
 	_ray.force_raycast_update()
@@ -111,7 +111,7 @@ func _update_context() -> void:
 	var point: Vector3 = _ray.get_collision_point()
 	if collider != null and collider.is_in_group(&"berry_bush"):
 		var depleted: bool = bool(collider.get("is_depleted"))
-		_label.text = "Berry bush · empty" if depleted else "Berry bush · %s eat" % KeyHints.binding_label("primary_action")
+		_label.text = "Beerenstrauch · abgeerntet" if depleted else "Beeren · %s fressen" % KeyHints.binding_label("primary_action")
 		_label.visible = true
 		return
 	var generator := get_node_or_null("/root/WorldGenerator")
@@ -124,45 +124,20 @@ func _update_context() -> void:
 			_player.global_position.distance_to(point) <= interaction_range
 			and bool(generator.call("is_water_at", point.x, point.z))
 		):
-			_label.text = "Water · %s drink" % KeyHints.binding_label("primary_action")
+			_label.text = "Wasser · %s trinken" % KeyHints.binding_label("primary_action")
 			_label.visible = true
 			return
 	_label.visible = false
 
 
 func _show_wildlife_context(target: Node) -> void:
-	var display_name: String = "Unknown creature"
-	if target.has_method("get_display_name"):
-		display_name = str(target.call("get_display_name"))
-	var role: String = str(target.get("ecological_role"))
-	var dead: bool = bool(target.get("is_dead"))
-	if dead:
-		var food_remaining: float = float(target.get("carcass_food_remaining"))
-		_label.text = "Carcass · %d food · %s eat" % [roundi(food_remaining), KeyHints.binding_label("primary_action")]
-		_label.visible = true
-		return
-
-	var current_health: float = float(target.get("current_health"))
-	var maximum_health: float = maxf(float(target.get("maximum_health")), 1.0)
-	var distance: float = 0.0
-	if target is Node3D:
-		distance = _player.global_position.distance_to((target as Node3D).global_position)
-	var bite_reach: float = 3.6
-	var bite_value: Variant = _player.get("bite_reach")
-	if bite_value != null:
-		bite_reach = float(bite_value)
-	var action_text: String = "%s observe · %s inspect" % [KeyHints.binding_label("primary_action"), KeyHints.binding_label("inspection_mode")]
-	if distance <= bite_reach + 0.15:
-		action_text += " · %s bite" % KeyHints.binding_label("bite_action")
-	_label.text = "%s · %s · %.1f m · HP %d/%d\n%s" % [
-		display_name,
-		role.capitalize(),
-		distance,
-		roundi(current_health),
-		roundi(maximum_health),
-		action_text,
-	]
-	_label.visible = true
+	# Species identity, role and stats belong exclusively to the E scanner.
+	# Keep the food action for a carcass without revealing species information.
+	if bool(target.get("is_dead")):
+		_label.text = "Nahrung · %s fressen" % KeyHints.binding_label("primary_action")
+		_label.show()
+	else:
+		_label.hide()
 
 
 func _resolve_parent_target(value: Variant) -> Node:

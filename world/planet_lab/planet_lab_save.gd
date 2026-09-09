@@ -6,10 +6,16 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const System = preload("res://world/space/celestial_system.gd")
 const Catalog = preload("res://world/space/galaxy_catalog.gd")
 const Visits = preload("res://world/space/galaxy_visits.gd")
+const Exploration = preload("res://core/map/exploration_atlas.gd")
 const PATH: String = "user://planet_lab_m1.json"
 
 
 static func valid(data: Dictionary) -> bool:
+	var atlases: Variant = data.get("map_atlases", {})
+	if not atlases is Dictionary or atlases.size() > 256: return false
+	for body_id in atlases:
+		if not body_id is String or not Exploration.validate(atlases[body_id], body_id).is_empty(): return false
+		if atlases[body_id].mode != Cube.MODE: return false
 	if (data.get("schema") != 1 and data.get("schema") != 2 and data.get("schema") != 3 and data.get("schema") != 4) or data.get("surface_version") != Cube.MODE:
 		return false
 	if data.get("schema") == 4:
@@ -70,6 +76,10 @@ static func read(path: String = PATH) -> Dictionary:
 
 
 static func _incompatible(data: Dictionary) -> bool:
+	var atlases: Variant = data.get("map_atlases", {})
+	if atlases is Dictionary:
+		for atlas in atlases.values():
+			if Exploration.newer(atlas): return true
 	if data.is_empty():
 		return false
 	var schema: int = int(data.get("schema", 1))
