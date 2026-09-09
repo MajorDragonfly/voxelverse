@@ -13,19 +13,11 @@ import time
 import zipfile
 
 from validate_godot import ERROR
+from validation_support import isolated_env
 
 PACKAGED_TESTS = ['creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test']
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
-
-
-def isolated_env(directory):
-    env = os.environ.copy()
-    for variable in ["XDG_DATA_HOME", "XDG_CONFIG_HOME", "XDG_CACHE_HOME", "APPDATA", "LOCALAPPDATA"]:
-        path = directory / variable.lower()
-        path.mkdir(parents=True, exist_ok=True)
-        env[variable] = str(path)
-    return env
 
 
 def main():

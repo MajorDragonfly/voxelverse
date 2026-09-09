@@ -1,48 +1,31 @@
-# World Evolution V2
+# Aktive Weltgenerierung
 
-This layer extends the existing Voxelverse chunk, terrain, collision and visual systems. It does not replace them.
+Die bestehende Kampagne verwendet `legacy_plane_v9`. Der globale Autoload
+`WorldGenerator` zeigt in `project.godot` auf `world_generator_planetary_v9.gd`.
+Kugelplaneten und deren Kampagnenanbindung sind ein getrenntes Arbeitspaket;
+maßgeblich sind [ROADMAP.md](../../ROADMAP.md) und die jeweilige Fachübergabe.
 
-## Generation pipeline
+## Benötigte ältere Grundlagen
 
-`world_generator_v2.gd` is the global `WorldGenerator` autoload. A world seed configures independent deterministic noise layers for:
+Die aktive Generator-Vererbung führt von `world_generator_planetary_v9.gd`
+über `world_generator_adventure.gd`, `world_generator_v6_smooth.gd` und
+`world_generator_v6.gd` zu `world_generator_v2.gd`. Diese Dateien bleiben
+Bestandteil der Laufzeit. Auch ältere Terrain- und Kreaturendateien können
+weiterhin Grundlagen oder gezielte Testfälle sein; ihre Versionsnummer
+ist kein Löschkriterium.
 
-- continentality and coast placement
-- broad terrain and regional landforms
-- mountain regions and ridgelines
-- erosion-like valley suppression
-- temperature and moisture
-- river corridors and inland lake basins
-- small-scale terrain detail and regional color variation
+## Laufzeit und Verträge
 
-The logical height remains continuous. `get_visual_terrain_height()` snaps that height to half-voxel terraces so the terrain keeps a voxel identity without relying on full block staircases.
+- `world/world_manager.gd` verwaltet Chunks, Aufbau und Entladen.
+- Die Terrain-Szene nutzt die vorhandene V8-Vererbung mit V7/V4/V3/V2-Grundlagen.
+- `procedural_ecosystem_v6.gd` bindet die gestalteten Umgebungsmodelle samt
+  Varianten, Platzierung und Kollision ein.
+- Die V9-Generierung verwendet `drainage_network.gd` für Fluss-/Seeprofile
+  und `ocean_bathymetry.gd` für Meerestiefen.
+- Terrainhöhe, sichtbare Terrassen, Biom, Wasserspiegel und Dichte bleiben
+  über die vorhandenen Generator-Methoden erreichbar. Seed und gespeicherte
+  Weltidentität werden durch Bereinigungen nicht geändert.
 
-## Compatibility
-
-The existing terrain chunk calls the same stable API as before:
-
-- `get_terrain_height()`
-- `get_visual_terrain_height()`
-- `get_biome()`
-- `get_biome_color()`
-- `get_sea_level()`
-- density and world-palette methods
-
-`terrain_chunk_v2.gd` and `terrain_scenic_dressing_v2.gd` only extend biome-specific material and placement rules. Geometry, collision creation, resources, existing objects and shaders remain in the original systems.
-
-## Runtime systems
-
-- `world_manager_v2.gd` stages chunk creation across frames and retains nearby chunks with unload hysteresis.
-- `procedural_biome_assets.gd` batches generated trees, shrubs, flowers and mushrooms into a small number of MultiMeshes per chunk.
-- `world_presentation_director.gd` tunes the existing environment and adds seeded voxel clouds.
-
-## Controls
-
-- **F7** creates and stores a new seed, then reloads the world.
-- **F9** reloads the current seed.
-- **F8** opens display settings.
-- **F10** cycles display mode.
-- **F11** toggles windowed and borderless fullscreen.
-
-## Current limits
-
-Rivers are deterministic noise-guided valleys rather than a full downhill flow-accumulation simulation. The erosion term shapes mountain regions but is not an offline hydraulic erosion pass. Both can later be upgraded behind the same public generator API without changing terrain chunks.
+Nicht mehr angebundene Prototypen sind mit Pfadliste und Wiederherstellungspunkt
+in [WORK_PROJECT_MAINTENANCE.md](../../docs/WORK_PROJECT_MAINTENANCE.md) dokumentiert.
+Historische Grafikberichte und bearbeitbare Modellquellen bleiben erhalten.

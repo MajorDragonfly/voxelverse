@@ -1,0 +1,71 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.9
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.788
+    },
+    {
+      "name": "world_runtime_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.561
+    },
+    {
+      "name": "world_evolution_v2_ci_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.113
+    },
+    {
+      "name": "world_layered_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.376
+    },
+    {
+      "name": "environment_playtest_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.255
+    },
+    {
+      "name": "water_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 15.119
+    },
+    {
+      "name": "planet_sphere_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.549
+    },
+    {
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.908
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.815
+    },
+    {
+      "name": "tribal_age_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.907
+    }
+  ]
+}

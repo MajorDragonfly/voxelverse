@@ -10,6 +10,8 @@ import sys
 import tempfile
 import time
 
+from validation_support import isolated_env, validation_editor
+
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
 
@@ -17,11 +19,21 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", default=os.environ.get("GODOT", "godot"))
     parser.add_argument("--project", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--output", type=Path, default=Path(tempfile.gettempdir()) / "voxelverse-validation")
+    parser.add_argument("--output", type=Path, help="Log directory; omitted creates a unique temporary directory")
     parser.add_argument("--tests", nargs="*", help="Test basenames; omit to discover all tests")
     parser.add_argument("--skip-import", action="store_true")
     parser.add_argument("--skip-main", action="store_true")
     args = parser.parse_args()
+    args.project = args.project.expanduser().resolve()
+    args.output = (args.output.expanduser().resolve() if args.output is not None
+                   else Path(tempfile.mkdtemp(prefix="voxelverse-validation-")))
+    print(f"Validation output: {args.output}", flush=True)
+    with validation_editor(args.godot) as editor:
+        args.godot = str(editor)
+        return validate(args)
+
+
+def validate(args):
     args.output.mkdir(parents=True, exist_ok=True)
     version = subprocess.check_output([args.godot, "--version"], text=True).strip()
     if not version.startswith("4.6.3."):
@@ -49,19 +61,18 @@ def main():
     for name, command, timeout in commands:
         started = time.monotonic()
         with tempfile.TemporaryDirectory(prefix="voxelverse-test-") as userdata:
-            env = os.environ.copy()
-            env["XDG_DATA_HOME"] = userdata
+            env = isolated_env(Path(userdata))
             try:
                 argv = ([sys.executable, str(args.project / "tools/art/export_benchmark_source.py"), "--check"]
                         if name == "art_sources" else [args.godot, "--headless", "--verbose", "--path", str(args.project), *command])
                 process = subprocess.run(argv,
                                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                         text=True, env=env, timeout=timeout)
+                                         text=True, encoding="utf-8", errors="replace", env=env, timeout=timeout)
                 log, status = process.stdout, process.returncode
             except subprocess.TimeoutExpired as exc:
                 log = (exc.stdout or b"").decode(errors="replace") + "\nERROR: validation timed out\n"
                 status = 124
-        (args.output / f"{name.replace(chr(47), chr(95))}.log").write_text(log)
+        (args.output / f"{name.replace(chr(47), chr(95))}.log").write_text(log, encoding="utf-8")
         failed = status != 0 or ERROR.search(log) is not None
         result = {"name": name, "passed": not failed, "exit_code": status,
                   "seconds": round(time.monotonic() - started, 3)}
@@ -71,7 +82,7 @@ def main():
             print(log[-12000:], flush=True)
         if name == "import" and failed:
             break
-    (args.output / "results.json").write_text(json.dumps({"godot": version, "checks": results}, indent=2) + "\n")
+    (args.output / "results.json").write_text(json.dumps({"godot": version, "checks": results}, indent=2) + "\n", encoding="utf-8")
     return 1 if any(not r["passed"] for r in results) else 0
 
 
