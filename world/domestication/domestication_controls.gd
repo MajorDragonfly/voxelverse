@@ -11,7 +11,7 @@ var _names: Array[String] = []
 func _ready() -> void:
 	var row := HBoxContainer.new()
 	add_child(row)
-	row.add_child(Style.label("Tierhaltung", 17, Style.SOCIAL))
+	row.add_child(Style.label("Zähmung", 17, Style.SOCIAL))
 	targets = OptionButton.new()
 	targets.custom_minimum_size.x = 190
 	targets.size_flags_horizontal = Control.SIZE_EXPAND_FILL

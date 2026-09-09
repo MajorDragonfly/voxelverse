@@ -123,7 +123,6 @@ func _run() -> void:
 	_expect(tribe.village()["members"][1]["order"] == "wait", "Individual move commanded other residents.")
 	await _click(tribe.panel._collapse)
 	tribe.select_all()
-	await _click(tribe.panel._collapse)
 	await _frames(3)
 	await _click(tribe.panel._buttons["wood"])
 	await _until(func() -> bool: return _has_cargo(), 350)
@@ -384,6 +383,7 @@ func _frames(count: int) -> void:
 		await process_frame
 
 func _capture(label: String) -> void:
+	print("TRIBAL_STAGE: " + label)
 	if capture_dir.is_empty():
 		return
 	await process_frame
@@ -400,6 +400,7 @@ func _cleanup() -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		failures.append(message)
+		printerr("TRIBAL_CHECK_FAILED: " + message)
 
 func _finish() -> void:
 	print(JSON.stringify({"test": "tribal_age", "passed": failures.is_empty(), "failures": failures}))

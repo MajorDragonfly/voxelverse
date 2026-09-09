@@ -70,7 +70,7 @@ func _run() -> void:
 					var floor_hit: Dictionary = home._floor_hit(point + offset)
 					if floor_hit.is_empty() or nav.route(floor_hit["position"] + Vector3.UP * 0.08, nav.origin).is_empty(): connected = false
 				if not connected: continue
-				nav.rebuild(home, home._floor_hit(point)["position"], 20)
+				nav.rebuild(home, home._floor_hit(point)["position"], {}, 20)
 				var can_approach: bool = false
 				for point_id: int in nav.graph.get_point_ids():
 					var reachable: Vector3 = nav.graph.get_point_position(point_id)
@@ -181,7 +181,7 @@ func _run() -> void:
 	for node: Node in get_nodes_in_group(&"wildlife"):
 		if node.get_campaign_identity()["object_id"] == identity["object_id"]: count += 1
 	_expect(count == 1 and d2.controller.record(identity["object_id"])["status"] == "tamed", "Main world reload duplicated or forgot held animal")
-	tribe.panel._hud.get_child(0).get_child(0).get_child(1).button_pressed = true
+	tribe.panel._tabs.current_tab = d2.controls.get_index()
 	for size: Vector2i in [Vector2i(1280, 800), Vector2i(1280, 720)]:
 		root.size = size
 		await _frames(4)
