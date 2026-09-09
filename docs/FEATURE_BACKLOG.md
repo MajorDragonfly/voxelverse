@@ -69,6 +69,8 @@ Die Reihenfolge ist technisch begründet. Der Kugelwelt-Umzug bleibt ein eigenes
 
 ### 2. Erste Teilefamilien und Ausbauvorschläge
 
+**Ausgeschmückter Gesamtkatalog:** [CREATURE_PARTS_CATALOG_PLAN.md](CREATURE_PARTS_CATALOG_PLAN.md) beschreibt zusätzlich Köpfe/Kiefer/Zähne/Zungen, Augen/Ohren/Fühler, Rumpf/Hals, Beine/Arme, Flügel/Flossen/Tentakel, Schwänze, Hörner/Geweihe/Panzer und Haut-/Farbmuster. Er enthält konkrete Tierformen, Kombinationsbeispiele und fünf Unteraufgaben M3-TEILE.1–.5. Die folgende Tabelle hält den ursprünglichen ersten Lieferumfang fest.
+
 Die ausdrücklich genannten Beispiele sind Pflichtumfang der ersten Lieferung. Weitere Beispiele unten sind konkrete Ausbauvorschläge; sie bedeuten keinen abgeschlossenen Anspruch auf jede existierende Tierform.
 
 | Familie | Pflichtbeispiele des Nutzerwunschs | Vorgeschlagene weitere Einzeloptionen |
@@ -81,6 +83,7 @@ Ein Rüssel wird im Editor bei Mund/Kopf auffindbar, erhält aber eine passende 
 
 ### 3. Modelle, Bearbeitung und Bewegung
 
+- [ ] Den [Gesamtkatalog](CREATURE_PARTS_CATALOG_PLAN.md) familienweise ausarbeiten und jede Form mit Status/Revision führen. Körpergrundformen, einzelne Teile, Materialmuster und besondere Bewegungsfunktionen eindeutig auseinanderhalten.
 - [ ] Zuerst je Familie ein Referenzmodell als sichtbaren Qualitätsmaßstab erstellen; anschließend die weiteren Varianten im selben feinen Voxelstil ausarbeiten.
 - [ ] Formen müssen bereits über Umriss und Bauform unterscheidbar sein. Farbe/Hautmuster bleiben kombinierbar; Detailgrad und Proportionen sollen zum bestehenden Körper passen.
 - [ ] Drehung, Größe, Position, Mittelachse und gespiegeltes Anbringen für jede passende Option prüfen.
@@ -100,7 +103,7 @@ Ein Rüssel wird im Editor bei Mund/Kopf auffindbar, erhält aber eine passende 
 ## Umsetzung und Übergabe
 
 1. D1-EIER als Vertrags-/Katalogerweiterung vorbereiten; M3-TEILE mit Bestandsprüfung und Anschlussvertrag beginnen.
-2. M3-TEILE in abgegrenzten Familien liefern: Mund/Kopf, Hände/Greifer, Füße; übrige Kategorien aus der Bestandsprüfung anschließend abarbeiten.
+2. M3-TEILE gemäß [Katalogplan](CREATURE_PARTS_CATALOG_PLAN.md) in fünf Unteraufgaben liefern: Bestand/Vertrag → erste Mund-/Hand-/Fußmodelle → breiter Landtierkatalog → bewegliche Spezialteile → gemeinsame Abnahme. Neue Flug-/Wasser-/Kletterfunktionen werden jeweils separat angeschlossen.
 3. D3-EIER auf den geprüften D1-/D2-/D3-Verträgen anschließen, unabhängig vom Abschluss aller neuen Modelle.
 4. Entdeckungsbuch, Vorschauen und Übersetzungen an die tatsächlichen Fachlieferungen anschließen.
 5. Je Teilpaket Branch, exakten Commit, geänderte Dateien, Vertragsrevisionen, Prüfungen und Grenzen liefern; erst danach Integrations-/Teststatus aktualisieren.
