@@ -15,7 +15,8 @@ import zipfile
 from validate_godot import ERROR
 
 PACKAGED_TESTS = ["creature_builder_v7_test", "modular_assembly_framework_test",
-                  "gameplay_acceptance_test", "meta_runtime_test", "planet_sphere_contract_test"]
+                  "gameplay_acceptance_test", "meta_runtime_test", "planet_sphere_contract_test",
+                  "input_preferences_test"]
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
 

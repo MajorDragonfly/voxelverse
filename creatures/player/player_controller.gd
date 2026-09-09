@@ -95,8 +95,12 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		camera_pivot.rotation.x -= event.screen_relative.y * mouse_sensitivity
-		camera_pivot.rotation.y -= event.screen_relative.x * mouse_sensitivity
+		var settings := get_node_or_null("/root/DisplaySettings")
+		var motion: Vector2 = event.screen_relative * mouse_sensitivity
+		if settings != null and settings.has_method("camera_motion"):
+			motion = settings.camera_motion(event.screen_relative, mouse_sensitivity)
+		camera_pivot.rotation.x -= motion.y
+		camera_pivot.rotation.y -= motion.x
 		camera_pivot.rotation.x = clampf(
 			camera_pivot.rotation.x,
 			deg_to_rad(minimum_camera_angle),

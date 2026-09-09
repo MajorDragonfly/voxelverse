@@ -1,4 +1,5 @@
 extends Node
+const KeyHints = preload("res://core/input_preferences.gd")
 
 @export_range(3, 12, 1) var maximum_listed_creatures: int = 6
 
@@ -8,6 +9,7 @@ var _panel: PanelContainer
 var _title: Label
 var _detail: Label
 var _nearby: Label
+var _controls: Label
 
 
 func _ready() -> void:
@@ -81,17 +83,18 @@ func _install() -> void:
 	_nearby.add_theme_color_override("font_color", Color(0.72, 0.79, 0.77, 0.96))
 	box.add_child(_nearby)
 
-	var controls := Label.new()
-	controls.text = "E close  ·  LMB observe  ·  RMB / Q bite"
-	controls.add_theme_font_size_override("font_size", 11)
-	controls.add_theme_color_override("font_color", Color(0.54, 0.64, 0.62, 0.92))
-	box.add_child(controls)
+	_controls = Label.new()
+	_controls.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_controls.add_theme_font_size_override("font_size", 11)
+	_controls.add_theme_color_override("font_color", Color(0.54, 0.64, 0.62, 0.92))
+	box.add_child(_controls)
 
 	_panel.visible = false
 	_hud.add_child(_panel)
 
 
 func _refresh() -> void:
+	_controls.text = "%s close  ·  %s observe  ·  %s bite" % [KeyHints.binding_label("inspection_mode"), KeyHints.binding_label("primary_action"), KeyHints.binding_label("bite_action")]
 	var target: Node = null
 	if _player.has_method("get_interaction_target"):
 		target = _player.call("get_interaction_target")

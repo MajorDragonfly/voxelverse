@@ -296,4 +296,9 @@ func _prepare_overlay() -> void:
 	_layer.show()
 
 func controls_text() -> String:
-	return "WASD   Bewegen\nMaus   Umschauen\nLeertaste   Springen / im Wasser steigen\nE   Untersuchungsmodus\nLinksklick   Interagieren / essen / trinken\nRechtsklick oder Q   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
+	var preferences = preload("res://core/input_preferences.gd")
+	return "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Untersuchungsmodus\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen" % [
+		preferences.binding_label("move_forward"), preferences.binding_label("move_back"),
+		preferences.binding_label("move_left"), preferences.binding_label("move_right"),
+		preferences.binding_label("jump"), preferences.binding_label("inspection_mode"),
+		preferences.binding_label("primary_action"), preferences.binding_label("bite_action")]

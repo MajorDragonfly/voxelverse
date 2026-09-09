@@ -1,0 +1,23 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "input_preferences_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.337
+    },
+    {
+      "name": "frontend_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.54
+    },
+    {
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.801
+    }
+  ]
+}

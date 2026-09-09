@@ -2,6 +2,10 @@ extends Node
 
 const CONFIG_PATH: String = "user://display_settings.cfg"
 const BASE_VIEWPORT_SIZE := Vector2i(1920, 1080)
+const InputPreferences = preload("res://core/input_preferences.gd")
+var input_preferences := InputPreferences.new()
+var _control_settings: VBoxContainer
+var _tabs: TabContainer
 
 const MODE_WINDOWED: int = 0
 const MODE_BORDERLESS: int = 1
@@ -37,11 +41,15 @@ var _previous_focus: Control
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	input_preferences.load_saved()
 	_load_settings()
 	call_deferred("_initialize_display")
 
 
 func _input(event: InputEvent) -> void:
+	if is_menu_open() and _control_settings.capture_input(event):
+		get_viewport().set_input_as_handled()
+		return
 	var flow := get_node_or_null("/root/SessionFlow")
 	if flow != null and bool(flow.loading):
 		return
@@ -215,15 +223,28 @@ func _build_settings_menu() -> void:
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	subtitle.add_theme_color_override("font_color", Color(0.58, 0.70, 0.72, 1.0))
 	content.add_child(subtitle)
+	_tabs = TabContainer.new()
+	_tabs.name = "SettingsTabs"
+	content.add_child(_tabs)
+	var display_scroll := ScrollContainer.new()
+	display_scroll.name = "Anzeige"
+	display_scroll.custom_minimum_size = Vector2(600, 440)
+	display_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	display_scroll.follow_focus = true
+	_tabs.add_child(display_scroll)
+	var display_content := VBoxContainer.new()
+	display_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	display_content.add_theme_constant_override("separation", 14)
+	display_scroll.add_child(display_content)
 
-	_mode_option = _add_option_row(content, "Bildschirmmodus")
+	_mode_option = _add_option_row(display_content, "Bildschirmmodus")
 	_mode_option.name = "DisplayMode"
 	_mode_option.add_item("Fenster", MODE_WINDOWED)
 	_mode_option.add_item("Randloses Vollbild", MODE_BORDERLESS)
 	_mode_option.add_item("Exklusives Vollbild", MODE_EXCLUSIVE_FULLSCREEN)
 	_mode_option.item_selected.connect(func(_index: int): _resolution_option.disabled = _mode_option.get_selected_id() != MODE_WINDOWED)
 
-	_resolution_option = _add_option_row(content, "Fensterauflösung")
+	_resolution_option = _add_option_row(display_content, "Fensterauflösung")
 	for size in RESOLUTIONS:
 		_resolution_option.add_item("%d × %d" % [size.x, size.y])
 		_resolution_option.set_item_metadata(
@@ -231,7 +252,7 @@ func _build_settings_menu() -> void:
 			size
 		)
 
-	_scale_option = _add_option_row(content, "Oberflächengröße")
+	_scale_option = _add_option_row(display_content, "Oberflächengröße")
 	for scale_value in [0.80, 0.90, 1.00, 1.10, 1.20, 1.30]:
 		_scale_option.add_item("%d%%" % roundi(float(scale_value) * 100.0))
 		_scale_option.set_item_metadata(
@@ -242,19 +263,25 @@ func _build_settings_menu() -> void:
 	_vsync_option = CheckButton.new()
 	_vsync_option.name = "VSync"
 	_vsync_option.text = "VSync – Bildrisse vermeiden"
-	content.add_child(_vsync_option)
-
-	var controls := Label.new()
-	controls.text = "WASD Bewegen · Leertaste Springen · E Untersuchen\nRechtsklick / Q Beißen · F2 Kreatureneditor\nPlanetenlabor: Tab Orbit · M Körper · B Sonnen"
-	controls.add_theme_font_size_override("font_size", 16)
-	content.add_child(controls)
+	display_content.add_child(_vsync_option)
 	_lab_button = Button.new()
 	_lab_button.name = "PlanetLab"
 	_lab_button.text = "Planetenlabor öffnen  ·  F4"
 	_lab_button.custom_minimum_size.y = 42
 	_lab_button.pressed.connect(_open_planet_lab)
-	content.add_child(_lab_button)
-	_message = Label.new()
+	display_content.add_child(_lab_button)
+	var control_scroll := ScrollContainer.new()
+	control_scroll.name = "Steuerung"
+	control_scroll.custom_minimum_size = Vector2(600, 440)
+	control_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	control_scroll.follow_focus = true
+	_tabs.add_child(control_scroll)
+	_control_settings = preload("res://ui/frontend/controls_settings.gd").new()
+	_control_settings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	control_scroll.add_child(_control_settings)
+	_control_settings.setup(input_preferences)
+	_tabs.tab_changed.connect(func(_tab: int): _control_settings.cancel_binding())
+	_message = _control_settings.message
 	_message.name = "Status"
 	_message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_message.custom_minimum_size.x = 480
@@ -307,6 +334,10 @@ func _add_option_row(parent: VBoxContainer, label_text: String) -> OptionButton:
 
 
 func _apply_menu_selection() -> void:
+	var reason: String = _control_settings.apply()
+	if not reason.is_empty():
+		_message.text = reason
+		return
 	if _mode_option != null:
 		display_mode = _mode_option.get_selected_id()
 	if _resolution_option != null:
@@ -318,7 +349,8 @@ func _apply_menu_selection() -> void:
 	vsync_enabled = _vsync_option.button_pressed
 
 	var saved: bool = _apply_settings(true)
-	_message.text = "Einstellungen übernommen und gespeichert." if saved else "Einstellungen übernommen; Speichern fehlgeschlagen."
+	_control_settings.refresh()
+	_message.text = "Einstellungen übernommen und gespeichert." if saved else "Steuerung gespeichert. Anzeige übernommen; Speichern der Anzeige fehlgeschlagen."
 
 
 func _sync_menu_controls() -> void:
@@ -359,13 +391,15 @@ func _toggle_settings_menu() -> void:
 		_previous_focus = get_viewport().gui_get_focus_owner()
 		_menu_layer.show()
 		_sync_menu_controls()
+		_tabs.current_tab = 0
+		_control_settings.refresh()
 		var scene := get_tree().current_scene
 		_lab_button.visible = scene != null and scene.has_node("DevelopmentTools")
 		_quit_button.visible = scene != null and (scene.has_method("save_lab") or scene.scene_file_path == "res://main/main.tscn")
 		var flow := get_node_or_null("/root/SessionFlow")
 		if flow != null and bool(flow.managed):
 			_quit_button.hide()
-		_message.text = ""
+		_message.text = input_preferences.load_message if not input_preferences.load_message.is_empty() else "Änderungen mit „Übernehmen & speichern“ aktivieren. Zurück verwirft ungespeicherte Änderungen."
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_tree().paused = true
 		_mode_option.grab_focus()
@@ -387,11 +421,17 @@ func close_menu() -> void:
 		return
 	for option: OptionButton in [_mode_option, _resolution_option, _scale_option]:
 		option.get_popup().hide()
+	_control_settings.fps.get_popup().hide()
+	_control_settings.cancel_binding()
 	_menu_layer.hide()
 	get_tree().paused = _previous_paused
 	Input.mouse_mode = _previous_mouse_mode
 	if is_instance_valid(_previous_focus) and _previous_focus.is_visible_in_tree():
 		_previous_focus.grab_focus()
+
+
+func camera_motion(motion: Vector2, base_sensitivity: float) -> Vector2:
+	return input_preferences.camera_motion(motion, base_sensitivity)
 
 
 func _open_planet_lab() -> void:

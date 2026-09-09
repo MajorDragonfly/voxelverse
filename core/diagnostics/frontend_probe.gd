@@ -31,6 +31,7 @@ func _run() -> void:
 	await _frames(2)
 	_expect(settings.vsync_enabled != old_vsync, "Real settings clicks were ignored.")
 	await _capture("settings")
+	await _exercise_controls(settings)
 	_key(KEY_ESCAPE)
 	await _frames(2)
 	_expect(not tree.paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Title settings captured the cursor or retained pause.")
@@ -61,6 +62,21 @@ func _run() -> void:
 	var first_id: String = get_node("/root/GameState").campaign.data.id
 	_expect(int(get_node("/root/GameState").world_seed) == 15838, "Requested seed was not used.")
 	_expect(tree.get_first_node_in_group(&"player") != null, "No player after loading.")
+	var player: Node = tree.get_first_node_in_group(&"player")
+	_key(KEY_R)
+	_expect(player.inspection_mode_enabled, "Remapped inspection key did not reach the player.")
+	_key(KEY_R)
+	_key(KEY_E)
+	_expect(not player.inspection_mode_enabled, "Old inspection key still toggled the player.")
+	# The headless display server cannot capture the cursor. The real render
+	# acceptance checks the full input path; preferences_test covers the math.
+	if DisplayServer.get_name() != "headless":
+		var old_rotation: Vector3 = player.camera_pivot.rotation
+		var motion := InputEventMouseMotion.new()
+		motion.screen_relative = Vector2(8, 4)
+		motion.relative = Vector2(8, 4)
+		get_viewport().push_input(motion, true)
+		_expect(is_equal_approx(player.camera_pivot.rotation.y - old_rotation.y, -8.0 * player.mouse_sensitivity * 1.5) and is_equal_approx(player.camera_pivot.rotation.x - old_rotation.x, 4.0 * player.mouse_sensitivity * 1.5), "Player camera did not use the saved sensitivity/inversion: %s -> %s; mouse mode %d." % [old_rotation, player.camera_pivot.rotation, Input.mouse_mode])
 	_key(KEY_ESCAPE)
 	await _frames(2)
 	_expect(flow.pause_open and tree.paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Esc did not pause the world.")
@@ -134,6 +150,65 @@ func _run() -> void:
 		print("FRONTEND_PASSED: title, no idle save, actual settings clicks, seed validation, loading, pause nesting, failed save retention, world teardown, campaign isolation, reload and backup/version handling.")
 	tree.quit(0 if failures.is_empty() else 1)
 
+func _exercise_controls(settings: Node) -> void:
+	var panel: Node = settings._control_settings
+	var bar: TabBar = settings._tabs.get_tab_bar()
+	_click_position(bar.global_position + bar.get_tab_rect(1).get_center())
+	await _frames(2)
+	_expect(settings._tabs.current_tab == 1, "Real click did not select the controls tab.")
+	var slider: HSlider = panel.sensitivity
+	slider.grab_focus()
+	for step in range(10):
+		_key(KEY_RIGHT)
+	_click(panel.invert_y)
+	panel.fps.select(panel.fps.get_item_index(120))
+	await _capture("controls")
+	var scroll: ScrollContainer = panel.get_parent()
+	var bind: Button = panel.find_child("Bind_move_forward_0", true, false)
+	scroll.ensure_control_visible(bind)
+	await _frames(2)
+	_click(bind)
+	_key(KEY_S)
+	_expect(panel.listening_action == "move_forward" and panel.message.text.contains("bereits"), "Conflicting key was not rejected in the UI.")
+	_key(KEY_ESCAPE)
+	_expect(settings.is_menu_open() and get_tree().paused and panel.listening_action.is_empty(), "Escape during capture closed the settings.")
+	_click(bind)
+	_key(KEY_UP)
+	_expect(panel.draft.move_forward[0] == KEY_UP and settings.input_preferences.bindings.move_forward[0] == KEY_W, "Draft key changed the live binding before Apply.")
+	bind = panel.find_child("Bind_inspection_mode_0", true, false)
+	scroll.ensure_control_visible(bind)
+	await _frames(2)
+	_click(bind)
+	_key(KEY_J)
+	_expect(panel.listening_action == "inspection_mode", "Reserved journal key was accepted.")
+	_key(KEY_R)
+	await _capture("bindings")
+	_click(settings._menu_panel.find_child("Apply", true, false))
+	await _frames(2)
+	_expect(is_equal_approx(settings.input_preferences.sensitivity, 1.5) and settings.input_preferences.invert_y and Engine.max_fps == 120, "GUI camera and FPS settings were not applied.")
+	var loaded = load("res://core/input_preferences.gd").new()
+	loaded.load_saved()
+	_expect(loaded.bindings.inspection_mode[0] == KEY_R and loaded.bindings.move_forward[0] == KEY_UP, "GUI remapping was not persisted.")
+	_expect(get_node("/root/SessionFlow").controls_text().contains("R   Untersuchungsmodus"), "Help still showed the old binding.")
+	# Unsaved reset is discarded on close; confirmed reset must update InputMap.
+	var reset: Button = panel.find_child("ResetControls", true, false)
+	scroll.ensure_control_visible(reset)
+	await _frames(2)
+	_click(reset)
+	settings.close_menu()
+	settings.open_menu()
+	_expect(panel.draft.inspection_mode[0] == KEY_R, "Closing settings persisted a draft reset.")
+	settings._tabs.current_tab = 1
+	scroll.ensure_control_visible(reset)
+	await _frames(2)
+	_click(reset)
+	_click(settings._menu_panel.find_child("Apply", true, false))
+	_expect(settings.input_preferences.bindings.inspection_mode[0] == KEY_E and Engine.max_fps == 0, "Confirmed defaults did not restore the original bindings/cap.")
+	# Restore the tested settings for the subsequent real-player acceptance.
+	var saved: Dictionary = loaded.bindings.duplicate(true)
+	_expect(settings.input_preferences.save_and_apply(saved, 1.5, true, 120).is_empty(), "Could not restore the test preferences.")
+	panel.refresh()
+
 func _frames(count: int) -> void:
 	for i in range(count):
 		await get_tree().process_frame
@@ -163,6 +238,9 @@ func _click(control: Control) -> void:
 		_expect(false, "Missing frontend control.")
 		return
 	var point: Vector2 = control.get_global_rect().get_center()
+	_click_position(point)
+
+func _click_position(point: Vector2) -> void:
 	var motion := InputEventMouseMotion.new()
 	motion.position = point
 	get_viewport().push_input(motion, true)

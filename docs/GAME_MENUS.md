@@ -35,7 +35,7 @@ Die eigenen Produktionsdateien liegen überwiegend unter `ui/frontend/` und in `
 
 `tests/frontend_test.gd` und die native Diagnose `--frontend-smoke` prüfen tatsächliche Viewport-Eingaben, neue/ladebare Kampagnen, Seedvalidierung, Pauseverschachtelung, fehlgeschlagenes Speichern, Weltabbau, getrennte Designs sowie beschädigte/neue Sicherungen. Die Diagnose muss mit isoliertem Benutzerordner ausgeführt werden; die bestehenden Prüfskripte richten diesen automatisch ein.
 
-`tools/validate_export.py` führt denselben Ablauf zusätzlich im unveränderten nativen Releaseprogramm aus. Die GitHub-Aktion `Voxelverse frontend review` erzeugt fünf tatsächliche Spielaufnahmen mit Softwaregrafik. Prüfresultate und eventuelle verbleibende Einschränkungen werden nach dem Lauf ergänzt. Ziel-PC-Leistung und Lars' manuelle Beurteilung der Optik bleiben ein Spieltest.
+`tools/validate_export.py` führt denselben Ablauf zusätzlich im unveränderten nativen Releaseprogramm aus. Die GitHub-Aktion `Voxelverse frontend review` erzeugt sieben tatsächliche Spielaufnahmen mit Softwaregrafik, einschließlich Kamera- und Tastenbelegungseinstellungen. Prüfresultate und eventuelle verbleibende Einschränkungen werden nach dem Lauf ergänzt. Ziel-PC-Leistung und Lars' manuelle Beurteilung der Optik bleiben ein Spieltest.
 
 Technischer Ladeablauf gemäß [Godot: Background loading](https://docs.godotengine.org/en/4.6/tutorials/io/background_loading.html).
 
@@ -59,3 +59,8 @@ Die JSON-Nachweise und Spielaufnahmen liegen unter `art/review/frontend/`.
 - Die CI-Bildaufnahme benutzt den Dummy-Audiotreiber, weil der Render-Runner kein Audiogerät besitzt.
 
 Veröffentlichung: [Entwurfs-PR #16](https://github.com/MajorDragonfly/voxelverse/pull/16), Zielbranch `agent/m2-behavior-skilltree`.
+
+
+## Erweiterung: Steuerung und Komfort
+
+Die F8-Einstellungen besitzen jetzt die Bereiche Anzeige und Steuerung. Frei belegbare Spieltasten, Mausempfindlichkeit, invertierbare Spielkamera und FPS-Limit werden außerhalb der Kampagnenspeicherung gesichert. Details, Integrationsstellen und Prüfumfang: [CONTROLS_SETTINGS.md](CONTROLS_SETTINGS.md).

@@ -43,6 +43,11 @@ static func theme() -> Theme:
 	result.set_color("font_color", "PopupMenu", TEXT)
 	result.set_stylebox("panel", "PopupMenu", box(PANEL))
 	result.set_stylebox("panel", "PanelContainer", box(PANEL))
+	result.set_stylebox("panel", "TabContainer", box(INK, EDGE, 12))
+	result.set_stylebox("tab_selected", "TabContainer", box(PANEL, ACCENT, 16))
+	result.set_stylebox("tab_unselected", "TabContainer", box(INK, EDGE, 16))
+	result.set_color("font_selected_color", "TabContainer", TEXT)
+	result.set_color("font_unselected_color", "TabContainer", MUTED)
 	result.set_constant("separation", "VBoxContainer", 12)
 	return result
 

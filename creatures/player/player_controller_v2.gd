@@ -165,15 +165,7 @@ func is_inspection_mode_enabled() -> bool:
 
 
 func _is_inspection_toggle_event(event: InputEvent) -> bool:
-	if not (event is InputEventKey):
-		return false
-	if not event.pressed or event.echo:
-		return false
-	var key_event := event as InputEventKey
-	return (
-		key_event.physical_keycode == KEY_E
-		or key_event.keycode == KEY_E
-	)
+	return event.is_action_pressed("inspection_mode") and not event.is_echo()
 
 
 func _get_camera_wildlife_target(maximum_distance_from_player: float) -> Node:
