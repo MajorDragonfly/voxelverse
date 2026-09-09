@@ -7,10 +7,12 @@ signal discovery_points_changed(points: int)
 signal behavior_changed
 signal behavior_rewarded(receipt: Dictionary)
 signal behavior_node_purchased(node_id: String)
+signal research_changed
 
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 const DiscoveryRecords = preload("res://core/discovery/discovery_records.gd")
 const DiscoveryPlanetCatalog = preload("res://world/generation/planet_catalog_v7.gd")
+const Research = preload("res://core/discovery/research_goals.gd")
 
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const Behavior = preload("res://core/progression/behavior_progression.gd")
@@ -26,6 +28,8 @@ var discovered_species: Dictionary = {}
 var discovered_regions: Dictionary = {}
 var _behavior := Behavior.new()
 var _behavior_purchase_active: bool = false
+var _research: Dictionary = Research.defaults()
+var _research_change_active: bool = false
 
 
 func _ready() -> void:
@@ -38,9 +42,11 @@ func reset_for_new_game() -> void:
 	discovered_species.clear()
 	discovered_regions.clear()
 	_behavior.reset()
+	_research = Research.defaults()
 	_ensure_starter_parts()
 	discovery_points_changed.emit(discovery_points)
 	behavior_changed.emit()
+	research_changed.emit()
 
 
 func is_part_unlocked(part_id: String) -> bool:
@@ -158,6 +164,7 @@ func export_state() -> Dictionary:
 		"discovered_species": discovered_species.duplicate(true),
 		"discovered_regions": discovered_regions.duplicate(true),
 		"behavior": _behavior.export_state(),
+		"research": _research.duplicate(true),
 	}
 
 
@@ -173,6 +180,8 @@ func import_state(data: Dictionary) -> bool:
 	unlocked_parts = _as_dictionary(data.get("unlocked_parts", {}))
 	discovered_species = _as_dictionary(data.get("discovered_species", {}))
 	discovered_regions = _as_dictionary(data.get("discovered_regions", {}))
+	_research = _as_dictionary(data.get("research", Research.defaults()))
+	_research["version"] = Research.VERSION
 	for entry in discovered_species.values():
 		_annotate_discovery(entry, false)
 	for entry in discovered_regions.values():
@@ -181,12 +190,17 @@ func import_state(data: Dictionary) -> bool:
 	_ensure_starter_parts()
 	discovery_points_changed.emit(discovery_points)
 	behavior_changed.emit()
+	research_changed.emit()
 	return true
 
 
 static func validate_state(data: Dictionary) -> String:
 	if not BehaviorRules.is_integer(data.get("schema", 1), 1, SAVE_SCHEMA):
 		return "Unsupported progression schema."
+	if data.has("research"):
+		var problem: String = Research.validate(data["research"])
+		if not problem.is_empty():
+			return problem
 	if data.has("behavior"):
 		return Behavior.validate_state(data["behavior"])
 	if int(data.get("schema", 1)) >= SAVE_SCHEMA:
@@ -197,7 +211,62 @@ static func validate_state(data: Dictionary) -> String:
 static func has_unsupported_contract(data: Variant) -> bool:
 	if not data is Dictionary:
 		return false
-	return BehaviorRules.is_newer_version(data.get("schema", 1), SAVE_SCHEMA) or Behavior.has_unsupported_contract(data.get("behavior", {}))
+	return BehaviorRules.is_newer_version(data.get("schema", 1), SAVE_SCHEMA) or Behavior.has_unsupported_contract(data.get("behavior", {})) or Research.has_unsupported_contract(data.get("research", {}))
+
+
+func get_research_settings() -> Dictionary:
+	return _research.duplicate(true)
+
+
+func get_pinned_research() -> Dictionary:
+	return Research.pinned({"discovered_species": discovered_species, "discovered_regions": discovered_regions,
+		"unlocked_parts": unlocked_parts}, _research)
+
+
+func set_research_pin(id: String) -> Dictionary:
+	if not id.is_empty() and not Research.is_goal(id):
+		if not id.begins_with("part:") or not _research["wished_parts"].has(id.trim_prefix("part:")):
+			return {"ok": false, "reason": "invalid_goal"}
+	var next: Dictionary = _research.duplicate(true)
+	next["pinned"] = id
+	return _commit_research(next)
+
+
+func set_part_wished(part_id: String, wished: bool) -> Dictionary:
+	var next: Dictionary = _research.duplicate(true)
+	var wishes: Array = next["wished_parts"]
+	if wished and not wishes.has(part_id):
+		if PartLibrary.get_part(part_id).is_empty() or is_part_unlocked(part_id):
+			return {"ok": false, "reason": "part_unavailable"}
+		if wishes.size() >= Research.MAX_WISHES:
+			return {"ok": false, "reason": "wishlist_full"}
+		wishes.append(part_id)
+	elif not wished:
+		wishes.erase(part_id)
+		if next["pinned"] == "part:" + part_id:
+			next["pinned"] = ""
+	return _commit_research(next)
+
+
+func _commit_research(next: Dictionary) -> Dictionary:
+	if _research_change_active or _behavior_purchase_active:
+		return {"ok": false, "reason": "save_in_progress"}
+	if next == _research:
+		return {"ok": true, "changed": false}
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves == null:
+		return {"ok": false, "reason": "save_failed"}
+	var before: Dictionary = _research
+	_research_change_active = true
+	_research = next
+	var saved: bool = bool(saves.call("save_now"))
+	if not saved:
+		_research = before
+	_research_change_active = false
+	if not saved:
+		return {"ok": false, "reason": "save_failed"}
+	research_changed.emit()
+	return {"ok": true, "changed": true}
 
 
 func apply_campaign_event(event: GameEvent) -> Dictionary:
@@ -234,7 +303,7 @@ func get_behavior_effect(effect_id: String, phase: int, body_value: float = 1.0,
 
 
 func purchase_behavior_node(node_id: String) -> Dictionary:
-	if _behavior_purchase_active:
+	if _behavior_purchase_active or _research_change_active:
 		return {"ok": false, "reason": "purchase_in_progress"}
 	var state := get_node_or_null("/root/GameState")
 	var saves := get_node_or_null("/root/SaveGameService")

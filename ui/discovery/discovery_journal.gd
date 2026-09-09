@@ -3,6 +3,7 @@ extends CanvasLayer
 
 const Records = preload("res://core/discovery/discovery_records.gd")
 const Preview = preload("res://ui/discovery/journal_preview.gd")
+const Research = preload("res://core/discovery/research_goals.gd")
 const PREFS_PATH := "user://discovery_journal_ui.cfg"
 const PAGE_SIZE: int = 100
 
@@ -32,6 +33,12 @@ var _guide: Label
 var _hint: Label
 var _hud: Control
 var _close: Button
+var _pin: Button
+var _wish: Button
+var _goal_progress: ProgressBar
+var _action_message: Label
+var _pinned_button: Button
+var _pinned_row: Dictionary = {}
 var _state: Dictionary = {}
 var _rows: Array[Dictionary] = []
 var _selected_key: String = ""
@@ -54,7 +61,9 @@ func _ready() -> void:
 		_progression.connect("discovery_points_changed", _on_points)
 		_progression.connect("region_discovered", func(_key: String) -> void: _on_points(0))
 		_progression.connect("part_unlocked", func(_id: String, _reason: String) -> void: _on_points(0))
+		_progression.connect("research_changed", _on_research_changed)
 	_update_hint()
+	_update_research_hud()
 
 
 func _exit_tree() -> void:
@@ -187,7 +196,7 @@ func _build() -> void:
 	layout.add_child(_summary)
 	_tabs = TabBar.new()
 	_tabs.name = "JournalTabs"
-	for tab in ["Arten", "Körperteile", "Regionen", "Nächste Schritte"]:
+	for tab in ["Arten", "Körperteile", "Regionen", "Nächste Schritte", "Forschungsziele"]:
 		_tabs.add_tab(tab)
 	_tabs.tab_changed.connect(_on_tab_changed)
 	layout.add_child(_tabs)
@@ -206,7 +215,7 @@ func _build() -> void:
 	tools_row.add_child(_filter)
 	_status = OptionButton.new()
 	_status.name = "PartStatus"
-	for text in ["Alle Teile", "Freigeschaltet", "Noch gesperrt"]:
+	for text in ["Alle Teile", "Freigeschaltet", "Noch gesperrt", "Merkliste"]:
 		_status.add_item(text)
 	_status.item_selected.connect(func(_index: int) -> void: _page = 0; _apply_filters())
 	tools_row.add_child(_status)
@@ -255,6 +264,17 @@ func _build() -> void:
 	_description = _label("", 17)
 	_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_description)
+	_goal_progress = ProgressBar.new()
+	_goal_progress.name = "ResearchProgress"
+	_goal_progress.show_percentage = false
+	_goal_progress.custom_minimum_size.y = 14
+	_detail.add_child(_goal_progress)
+	_pin = _button("Im Spiel verfolgen", _pin_selected)
+	_pin.name = "PinResearch"
+	_detail.add_child(_pin)
+	_wish = _button("Auf Merkliste setzen", _toggle_wish)
+	_wish.name = "WishPart"
+	_detail.add_child(_wish)
 	_parts_label = _label("", 16)
 	_parts_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_parts_label)
@@ -262,6 +282,11 @@ func _build() -> void:
 	_guide.name = "JournalGuide"
 	_guide.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_guide)
+	_action_message = _label("", 15)
+	_action_message.name = "ResearchSaveMessage"
+	_action_message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_action_message.hide()
+	layout.add_child(_action_message)
 	var hints := CheckButton.new()
 	hints.text = "Kurzen Spielhinweis anzeigen"
 	hints.button_pressed = _hint_enabled
@@ -294,6 +319,12 @@ func _build_hud() -> void:
 	_hint.add_theme_constant_override("shadow_offset_x", 1)
 	_hint.add_theme_constant_override("shadow_offset_y", 1)
 	layout.add_child(_hint)
+	_pinned_button = _button("", _open_pinned)
+	_pinned_button.name = "PinnedResearch"
+	_pinned_button.custom_minimum_size.y = 76
+	_pinned_button.clip_text = true
+	_pinned_button.hide()
+	layout.add_child(_pinned_button)
 	var open_button := _button("Entdeckungsbuch öffnen  ·  J", func() -> void: open_journal())
 	open_button.name = "OpenJournal"
 	open_button.size_flags_horizontal = Control.SIZE_SHRINK_END
@@ -303,6 +334,7 @@ func _build_hud() -> void:
 func _on_tab_changed(_index: int) -> void:
 	_page = 0
 	_selected_key = ""
+	_action_message.hide()
 	_search.clear()
 	_populate_filter()
 	_apply_filters()
@@ -320,6 +352,8 @@ func _populate_filter() -> void:
 	_status.visible = _tabs.current_tab == 1
 	_filter.visible = _tabs.current_tab < 2
 	_search.placeholder_text = "Teil oder Herkunft suchen …" if _tabs.current_tab == 1 else "Name oder Fundort suchen …"
+	if _tabs.current_tab == 4:
+		_search.placeholder_text = "Forschungsziel suchen …"
 
 
 func _apply_filters() -> void:
@@ -330,6 +364,9 @@ func _apply_filters() -> void:
 	_list.get_parent().visible = not guide_mode
 	_guide.visible = guide_mode
 	_parts_label.text = ""
+	_pin.hide()
+	_wish.hide()
+	_goal_progress.hide()
 	_preview.call("clear")
 	_preview.hide()
 	if guide_mode:
@@ -342,6 +379,7 @@ func _apply_filters() -> void:
 		0: _rows = Records.species_rows(_state, _search.text, filter_value)
 		1: _rows = Records.part_rows(_state, _search.text, filter_value, _status.selected)
 		2: _rows = Records.region_rows(_state, _search.text)
+		4: _rows = Research.rows(_state, _search.text)
 	_page = clampi(_page, 0, maxi((_rows.size() - 1) / PAGE_SIZE, 0))
 	_list.clear()
 	var selected_index: int = 0
@@ -350,6 +388,9 @@ func _apply_filters() -> void:
 		var label: String = str(row.get("name", "Unbekannte Art"))
 		if _tabs.current_tab == 1:
 			label = ("✓  " if row.get("unlocked", false) else "○  ") + label
+			if row.get("wished", false): label += " · gemerkt"
+		elif _tabs.current_tab == 4:
+			label = ("✓  " if row["complete"] else "○  ") + label
 		_list.add_item(label)
 		_list.set_item_tooltip(_list.item_count - 1, label + " · " + str(row.get("location", row.get("source", ""))))
 		if str(row.get("key", row.get("id", ""))) == _selected_key:
@@ -361,6 +402,9 @@ func _apply_filters() -> void:
 		_selected_key = ""
 		_title.text = "Noch keine Arten entdeckt" if _tabs.current_tab == 0 and Records.as_dictionary(_state.get("discovered_species", {})).is_empty() else "Keine passenden Einträge"
 		_description.text = "Ziele auf ein Tier in deiner Nähe und beobachte es mit Linksklick. Deine erste Entdeckung erscheint hier." if _title.text == "Noch keine Arten entdeckt" else "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
+		if _tabs.current_tab == 1 and _status.selected == 3 and _search.text.is_empty():
+			_title.text = "Deine Teile-Merkliste"
+			_description.text = "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen."
 		return
 	_list.select(selected_index)
 	_select_entry(selected_index)
@@ -375,6 +419,9 @@ func _select_entry(index: int) -> void:
 	_detail_scroll.scroll_vertical = 0
 	_title.text = str(row.get("name", "Unbekannte Art"))
 	_parts_label.text = ""
+	_pin.hide()
+	_wish.hide()
+	_goal_progress.hide()
 	_preview.call("clear")
 	_preview.hide()
 	if _tabs.current_tab == 0:
@@ -395,6 +442,12 @@ func _select_entry(index: int) -> void:
 		var awarded: String = str(row.get("unlocked_part", ""))
 		if not awarded.is_empty():
 			_description.text += "\n\nBei dieser Entdeckung freigeschaltet: %s" % Records.Parts.get_part(awarded).get("name", awarded)
+	elif _tabs.current_tab == 4:
+		_description.text = "%s\n\n%d / %d %s · %s\n\nBereits gespeicherte Entdeckungen zählen mit." % [row["description"], row["current"], row["target"], row["unit"], "Ziel erreicht" if row["complete"] else "In Arbeit"]
+		_goal_progress.max_value = row["target"]
+		_goal_progress.value = row["current"]
+		_goal_progress.show()
+		_show_pin(str(row["id"]))
 	elif _tabs.current_tab == 2:
 		_description.text = "Entdeckt auf %s\n\nGespeicherte Regionskoordinaten: %s / %s" % [row["location"], Records.saved_integer(row.get("x", "?")), Records.saved_integer(row.get("z", "?"))]
 	else:
@@ -403,6 +456,83 @@ func _select_entry(index: int) -> void:
 			"Freigeschaltet" if row["unlocked"] else "Noch gesperrt", row["source"], row.get("description", "")]
 		if row["unlocked"] and category != "missing":
 			_parts_label.text = "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken."
+		var wished: bool = row.get("wished", false)
+		_wish.visible = wished or (not row["unlocked"] and category != "missing")
+		_wish.text = "Von Merkliste entfernen" if wished else "Auf Merkliste setzen"
+		if wished:
+			_show_pin("part:" + str(row["id"]))
+			if row["unlocked"]:
+				_description.text += "\n\nSammelziel erreicht."
+		elif not row["unlocked"] and category != "missing":
+			_description.text += "\n\nWeitere neue Arten beobachten. Pro neuer Art wird höchstens ein Teil freigeschaltet; erneutes Beobachten bekannter Arten gibt kein weiteres Teil."
+
+
+func _show_pin(id: String) -> void:
+	_pin.show()
+	_pin.text = "Nicht mehr verfolgen" if _state.get("research", {}).get("pinned", "") == id else "Im Spiel verfolgen"
+
+
+func _pin_selected() -> void:
+	if _selected_key.is_empty():
+		return
+	var id: String = "part:" + _selected_key if _tabs.current_tab == 1 else _selected_key
+	if _state.get("research", {}).get("pinned", "") == id:
+		id = ""
+	_research_result(_progression.call("set_research_pin", id))
+
+
+func _toggle_wish() -> void:
+	if _selected_key.is_empty():
+		return
+	var wishes: Array = _state.get("research", {}).get("wished_parts", [])
+	_research_result(_progression.call("set_part_wished", _selected_key, not wishes.has(_selected_key)))
+
+
+func _research_result(result: Dictionary) -> void:
+	_action_message.show()
+	if result.get("ok", false):
+		_action_message.text = "Auswahl gespeichert."
+	else:
+		match str(result.get("reason", "")):
+			"wishlist_full": _action_message.text = "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil."
+			"part_unavailable": _action_message.text = "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog."
+			"save_in_progress": _action_message.text = "Es wird gerade gespeichert. Versuche es gleich erneut."
+			_: _action_message.text = "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen."
+
+
+func _on_research_changed() -> void:
+	_action_message.hide()
+	if is_open:
+		refresh()
+	_update_research_hud()
+
+
+func _update_research_hud() -> void:
+	if _progression == null:
+		return
+	_pinned_row = _progression.call("get_pinned_research")
+	_pinned_button.visible = not _pinned_row.is_empty()
+	_hud.offset_top = -216 if _pinned_button.visible else -132
+	if _pinned_row.is_empty():
+		return
+	var status: String = "Ziel erreicht" if _pinned_row["complete"] else "Dein Forschungsziel"
+	if not _pinned_row["available"]:
+		status = "Ziel nicht verfügbar"
+	_pinned_button.text = "%s · %s\n%d / %d %s · Im Buch ansehen" % [status, _pinned_row["name"], _pinned_row["current"], _pinned_row["target"], _pinned_row["unit"]]
+	_pinned_button.tooltip_text = _pinned_button.text
+
+
+func _open_pinned() -> void:
+	if _pinned_row.is_empty() or not open_journal():
+		return
+	_tabs.current_tab = 1 if _pinned_row["kind"] == "part" else 4
+	_search.clear()
+	_filter.select(0)
+	if _tabs.current_tab == 1:
+		_status.select(3)
+	_selected_key = _pinned_row["key"]
+	_page = 0
+	_apply_filters()
 
 
 func _current_hint() -> String:
@@ -434,6 +564,7 @@ func _on_discovery(_key: String, _name: String) -> void:
 	if is_open:
 		refresh()
 	_update_hint()
+	_update_research_hud()
 
 
 func _on_points(_points: int) -> void:
@@ -441,6 +572,7 @@ func _on_points(_points: int) -> void:
 	if is_open:
 		call_deferred("refresh")
 	_update_hint()
+	_update_research_hud()
 
 
 func _label(text: String, font_size: int) -> Label:

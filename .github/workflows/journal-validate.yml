@@ -11,6 +11,7 @@ on:
       - "ui/progression_hud.gd"
       - "tests/behavior_skill_tree_test.gd"
       - "tests/discovery_journal_test.gd"
+      - "tests/research_goals_test.gd"
       - "autoload/progression_service.gd"
       - ".github/workflows/journal-validate.yml"
 
@@ -44,7 +45,7 @@ jobs:
         run: >-
           python tools/validate_godot.py
           --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
-          --tests discovery_journal_test behavior_skill_tree_test behavior_progression_test campaign_foundation_test
+          --tests discovery_journal_test research_goals_test behavior_skill_tree_test behavior_progression_test campaign_foundation_test
           --skip-main --output "${{ runner.temp }}/journal-validation"
       - name: Render journal and exercise real GUI input
         env:
@@ -56,11 +57,14 @@ jobs:
           export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
           xvfb-run -a -s '-screen 0 1280x720x24' "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --path . --rendering-method ${{ matrix.renderer }} --audio-driver Dummy --script res://tests/discovery_journal_test.gd -- --journal-capture 2>&1 | tee "${{ runner.temp }}/journal-validation/render.log"
           python -c 'from pathlib import Path; text = Path("${{ runner.temp }}/journal-validation/render.log").read_text(); assert "SCRIPT ERROR" not in text and "ERROR:" not in text and "ObjectDB instances leaked" not in text, text'
+          xvfb-run -a -s '-screen 0 1280x720x24' "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --path . --rendering-method ${{ matrix.renderer }} --audio-driver Dummy --script res://tests/research_goals_test.gd -- --research-capture 2>&1 | tee "${{ runner.temp }}/journal-validation/research-render.log"
+          python -c 'from pathlib import Path; text = Path("${{ runner.temp }}/journal-validation/research-render.log").read_text(); assert "RESEARCH_GOALS_TEST" in text and "SCRIPT ERROR" not in text and "ERROR:" not in text and "ObjectDB instances leaked" not in text, text'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: discovery-journal-${{ matrix.renderer }}-${{ github.event_name }}
           path: |
             art/review/discovery_journal
+            art/review/research_goals
             ${{ runner.temp }}/journal-validation
           retention-days: 14

@@ -4,6 +4,9 @@ Stand: 9. September 2026. Arbeitszweig `agent/discovery-journal`. Lokal geprüft
 
 Lars hat diesen Arbeitsstrang mit Artenbuch, Körperteilübersicht, Entdeckungsmeldungen und Einstiegshilfen beauftragt. Auf seinen Hinweis wurde die zweite Entdeckungsübersicht aus dem Skilltree geprüft und in ein gemeinsames Buch überführt.
 
+
+**Erweiterung M4B:** Forschungsziele, angepinnter Fortschritt im Spiel und Teile-Merkliste sind jetzt ergänzt. [Bedienung, Datenvertrag und aktuelle Abnahme](RESEARCH_GOALS_M4B.md).
+
 ## Ein Buch, mehrere Einstiege
 
 `ui/progression_hud.gd` erzeugt genau eine Instanz von `ui/discovery/discovery_journal.gd` am Spieler und übergibt sie als `journal` an den Skilltree. J, der HUD-Button und der Button **Entdeckungsbuch · J** im Skilltree öffnen dieselbe Instanz. Die alte eingebettete Datei `ui/discovery_journal.gd` ist entfernt. Es gibt keinen zusätzlichen Buchknoten in der Hauptszene und keine nachträgliche Suche nach fremden Buttons.
@@ -53,7 +56,7 @@ Der erste Artenbuchstand hatte zusätzlich einen vollständigen Projektlauf mit 
 
 Nachweise: [validation/discovery-journal.json](../validation/discovery-journal.json), [Arten](../art/review/discovery_journal/species.png), [Regionen](../art/review/discovery_journal/regions.png), [kompakte Darstellung](../art/review/discovery_journal/compact.png).
 
-Windows und Forward+ müssen über die GitHub-Workflows dieses Branches geprüft werden. Lokale Softwaregrafik ersetzt keinen Spieltest auf Lars’ Ziel-PC. Aktuelle CI- und Paketlinks werden im Draft-PR bereitgestellt.
+Der veröffentlichte M4A-Grundstand `73583c0` hat inzwischen auch Windows-/Linux-Export, beide Journal-Renderer, Skilltree-GUI und die allgemeine Godot-Prüfung auf GitHub bestanden. Diese Abnahme gilt für den Grundstand; die neue Forschungserweiterung wird separat geprüft. Lokale Softwaregrafik ersetzt keinen Spieltest auf Lars’ Ziel-PC. Aktuelle CI- und Paketlinks stehen in PR #19.
 
 ## Bereitstellung
 

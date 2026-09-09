@@ -16,7 +16,7 @@ from validate_godot import ERROR
 
 PACKAGED_TESTS = ["creature_builder_v7_test", "modular_assembly_framework_test",
                   "gameplay_acceptance_test", "meta_runtime_test", "planet_sphere_contract_test",
-                  "behavior_skill_tree_test"]
+                  "behavior_skill_tree_test", "research_goals_test"]
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
 
@@ -106,7 +106,12 @@ def main():
             for name in PACKAGED_TESTS:
                 probe = qa / f"{name}.gd"
                 shutil.copy2(args.project / "tests" / f"{name}.gd", probe)
-                run(f"packaged_{name}", [*pack_command, "--script", str(probe)],
+                probe_args = ["--script", str(probe)]
+                if name == "research_goals_test":
+                    # Godot consumes --main-pack before exposing runtime args.
+                    # Pass the exact PCK to the independent reload process too.
+                    probe_args += ["--", "--research-pack", str(executable.with_suffix(".pck"))]
+                run(f"packaged_{name}", [*pack_command, *probe_args],
                     package, isolated_env(root / name))
             probe = qa / "export_runtime_probe.gd"
             shutil.copy2(args.project / "tools/export_runtime_probe.gd", probe)

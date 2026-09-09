@@ -102,6 +102,8 @@ static func region_rows(state: Dictionary, query: String = "") -> Array[Dictiona
 
 static func part_rows(state: Dictionary, query: String = "", category: String = "", status: int = 0) -> Array[Dictionary]:
 	var unlocks: Dictionary = as_dictionary(state.get("unlocked_parts", {}))
+	var settings: Dictionary = as_dictionary(state.get("research", {}))
+	var wishes: Array = settings.get("wished_parts", []) if settings.get("wished_parts", []) is Array else []
 	var catalog: Dictionary = {}
 	for section in Parts.get_categories():
 		for definition in Parts.get_parts_for_category(str(section["id"])):
@@ -109,7 +111,7 @@ static func part_rows(state: Dictionary, query: String = "", category: String = 
 			row["category"] = str(section["id"])
 			catalog[str(row["id"])] = row
 	# Preserve unavailable saved IDs visibly, rather than silently hiding old unlocks.
-	for part_id in unlocks:
+	for part_id in unlocks.keys() + wishes:
 		if not catalog.has(part_id):
 			catalog[part_id] = {"id": str(part_id), "name": str(part_id), "category": "missing",
 				"description": "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar."}
@@ -117,10 +119,13 @@ static func part_rows(state: Dictionary, query: String = "", category: String = 
 	for part_id in catalog:
 		var row: Dictionary = catalog[part_id]
 		row["unlocked"] = unlocks.has(part_id)
+		row["wished"] = wishes.has(part_id)
 		row["source"] = source_for(str(part_id), state)
 		if not category.is_empty() and row["category"] != category:
 			continue
 		if (status == 1 and not row["unlocked"]) or (status == 2 and row["unlocked"]):
+			continue
+		if status == 3 and not row["wished"]:
 			continue
 		var search_text: String = "%s %s %s" % [row.get("name", ""), row["source"], CATEGORIES.get(row["category"], row["category"])]
 		if not query.strip_edges().is_empty() and not search_text.to_lower().contains(query.strip_edges().to_lower()):
