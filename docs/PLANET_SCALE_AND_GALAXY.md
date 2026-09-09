@@ -1,6 +1,8 @@
 # Zielmaßstab: reale Planetengrößen und eine Galaxie
 
-9. September 2026 · Anforderung von Lars · **Planung, noch kein Laufzeitnachweis**.
+9. September 2026 · Anforderung von Lars · **Anforderungsstand vor M1b.**
+
+**Fortschritt:** Der [M1b-Referenzbetrieb](REAL_SCALE_PLANETS.md) setzt die Größenprüfung inzwischen bis 12.742 km Durchmesser um. Die folgende Bestandsanalyse dokumentiert den Ausgangspunkt `94b4dd3`; Galaxiekatalog und Galaxiereisen bleiben kommende Arbeit. Die Architektur- und Abnahmeanforderungen gelten weiter.
 
 Lars stellt klar: Die späteren Planeten sollen Originalgrößen besitzen; die Weltraumphase soll eine ganze Galaxie mit bereisbaren Sternsystemen darstellen. Die bisher in der Roadmap vorgeschlagenen komprimierten Spielgrößen werden als Produktionsziel ersetzt. Die Körper mit 1–8 km Durchmesser bleiben schnelle Testfälle. Sie belegen weder erdgroßes Gelände noch eine funktionierende Galaxie.
 
@@ -8,7 +10,7 @@ Lars stellt klar: Die späteren Planeten sollen Originalgrößen besitzen; die W
 
 Auf einem kleinen Körper lassen sich Polregionen, Würfelflächenkanten, Umrundung und Orbitwechsel in einem kurzen Prüflauf erreichen. Dieselben Fehler müssten auf einem großen Planeten mit gezielten Platzierungen und längeren Fahrten gesucht werden. Beide Prüfarten werden gebraucht: kleine Körper für schnelle wiederholbare Fehlerkontrolle, große Körper für Auflösung, Genauigkeit, Gelände und Leistung im Zielmaßstab.
 
-## Tatsächlich vorhandene Grundlage
+## Ausgangspunkt vor M1b
 
 | Bereich | Im aktuellen Code nachgewiesen | Offene Arbeit für den Zielmaßstab |
 |---|---|---|
