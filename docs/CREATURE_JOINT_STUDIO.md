@@ -40,3 +40,9 @@ Geprüfter Code: `f7a1c9d0103b9290a0c6a2b5726a1f6dab32cf18` mit Godot 4.6.3. Die
 ![Einstellbare Gelenke](../art/review/creature_joint_studio/joint_controls.png)
 
 ![Bewegungsprobe auf Stufen](../art/review/creature_joint_studio/steps_run.png)
+
+## Abschluss der ausstehenden Grafikprüfung
+
+Am 9. September 2026 wurde auch der beim ursprünglichen Abschluss noch laufende Forward+-Renderlauf erfolgreich beendet. [Compatibility und Forward+](https://github.com/MajorDragonfly/voxelverse/actions/runs/34328389438) bestehen jeweils 15/15 Szenenprüfungen. Alle sechs CI-Workflows für den geprüften Code `f7a1c9d0103b9290a0c6a2b5726a1f6dab32cf18` sind erfolgreich abgeschlossen.
+
+Der Abgleich mit dem anschließenden Stand `a6eff258cd489d886c3e03e06de698b140a164cf` bestätigt: Seit diesem geprüften Code kamen nur Dokumentation, Aufnahmen und Prüfnachweise hinzu. Das beauftragte Paket aus Griffen, Gelenken, Gangkorrekturen und Teststrecke ist damit technisch abgeschlossen. Die Grafikprüfungen liefen mit Softwarerendering; der manuelle Spieltest auf dem Ziel-PC und die spätere gemeinsame Integration bleiben separat.

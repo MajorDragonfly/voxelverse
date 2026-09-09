@@ -1016,9 +1016,164 @@
     },
     "forward_plus": {
       "job_id": 102391029541,
-      "status": "in_progress",
-      "conclusion": null
-    }
+      "status": "completed",
+      "conclusion": "success",
+      "checks": [
+        {
+          "case": "planet_lab",
+          "seed": 12345,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 7,
+          "passed": true
+        },
+        {
+          "case": "world",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 72068.615,
+          "setup_limit_seconds": 240,
+          "samples": 3,
+          "passed": true
+        },
+        {
+          "case": "assets",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 7,
+          "passed": true
+        },
+        {
+          "case": "species",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 4,
+          "passed": true
+        },
+        {
+          "case": "cluster",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "creature",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 3,
+          "passed": true
+        },
+        {
+          "case": "water",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 6,
+          "passed": true
+        },
+        {
+          "case": "hydrology",
+          "seed": 15838,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 30440.625,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        },
+        {
+          "case": "world",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 76436.09,
+          "setup_limit_seconds": 240,
+          "samples": 3,
+          "passed": true
+        },
+        {
+          "case": "assets",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 7,
+          "passed": true
+        },
+        {
+          "case": "species",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 4,
+          "passed": true
+        },
+        {
+          "case": "cluster",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 2,
+          "passed": true
+        },
+        {
+          "case": "creature",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 3,
+          "passed": true
+        },
+        {
+          "case": "water",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": null,
+          "setup_limit_seconds": null,
+          "samples": 6,
+          "passed": true
+        },
+        {
+          "case": "hydrology",
+          "seed": 23757,
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "software_renderer": true,
+          "setup_ms": 20381.81,
+          "setup_limit_seconds": 240,
+          "samples": 5,
+          "passed": true
+        }
+      ]
+    },
+    "passed": true,
+    "software_renderer": true,
+    "target_hardware_acceptance": false
   },
   "additional_workflows": [
     {
@@ -1031,5 +1186,13 @@
       "run_id": 34328389418,
       "conclusion": "success"
     }
-  ]
+  ],
+  "completion_review": {
+    "date": "2026-09-09",
+    "reviewed_head": "a6eff258cd489d886c3e03e06de698b140a164cf",
+    "tested_code_unchanged_since": "f7a1c9d0103b9290a0c6a2b5726a1f6dab32cf18",
+    "feature_package": "complete",
+    "ci_workflows": "all_completed_successfully",
+    "changes_in_review": "Document the completed Forward+ renderer checks; no gameplay changes."
+  }
 }
