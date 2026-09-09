@@ -997,6 +997,11 @@ func prepare_body_departure(controller: Node) -> bool:
 		body.clear()
 		body.merge(Registry.by_id(checkpoint.state.campaign, state.active_body_id).duplicate(true))
 		return false
+	# save_started flushes dirty regional pages and publishes their new root.
+	# Rollback must retain this committed source, not the pre-flush manifest.
+	checkpoint.state = state.export_state()
+	checkpoint.progression = get_node("/root/ProgressionService").export_state()
+	checkpoint.regions = _regions_by_body.duplicate(true)
 	_body_transfer = checkpoint
 	return true
 

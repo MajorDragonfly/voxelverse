@@ -76,10 +76,23 @@ func _run() -> void:
 	_expect(Migration.fingerprint(state.export_state()) == Migration.fingerprint(before) and state.active_body_id == a, "Failed departure changed ownership or live state.")
 	_expect(saves.autosave_enabled == before_autosave, "Failed departure disabled later automatic checkpoints.")
 	saves.save_path = original_path
+	var population: Node = tree.get_first_node_in_group(&"campaign_surface_population")
+	var food_key: String = ""
+	var regrow_at: float = state.campaign.data.elapsed_seconds + 1000.0
+	_expect(population != null and not population.plants.is_empty(), "Rollback fixture has no regional plant.")
+	if population != null and not population.plants.is_empty():
+		food_key = population.plants.values()[0].persistent_food_key
+		# A real regional record has changed since its last committed root.
+		var food: Dictionary = population.needs(food_key, "food", 4.0)
+		food.remaining = 0.0
+		food.regrow_at = regrow_at
 	_expect(not await flow.travel_to_planet(23757, 0, 15838, "missing-body"), "Unknown destination was invented.")
 	await _until(func() -> bool: return not flow.loading, 150000)
 	if not _expect_world(): await _finish(); return
 	_expect(state.active_body_id == a and state.campaign.data.bodies.size() == 2, "Failed destination did not restore source.")
+	if not food_key.is_empty():
+		var restored_food: Dictionary = preload("res://world/resources/plants/foraging_state.gd").plant(state, a, food_key, 4.0)
+		_expect(restored_food.get("remaining") == 0.0 and restored_food.get("regrow_at") == regrow_at, "Failed target restored an older regional root and lost the last harvest.")
 	flow.toggle_pause()
 	_expect(saves.save_now(), "Return checkpoint failed: " + saves.last_error)
 	var expected: Dictionary = {"path": path, "body_id": a, "clock": state.campaign.data.elapsed_seconds, "village": state.get_current_body().tribe}
