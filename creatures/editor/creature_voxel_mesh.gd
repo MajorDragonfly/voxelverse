@@ -14,22 +14,58 @@ static func from_cells(cells: Dictionary, cell_size: float, keep_cells: bool = f
 	# Body row spans already identify the shell. Keep the complete occupancy
 	# for neighbor culling and picking, but avoid walking its solid interior.
 	var candidates: Array = surface_cells if not surface_cells.is_empty() else cells.keys()
-	for cell: Vector3i in candidates:
+	var masks := PackedByteArray()
+	masks.resize(candidates.size())
+	var face_count: int = 0
+	for index in range(candidates.size()):
+		var cell: Vector3i = candidates[index]
+		var mask: int = 0
+		for side in range(6):
+			if not cells.has(cell + NEIGHBORS[side]):
+				mask |= 1 << side
+				face_count += 1
+		masks[index] = mask
+	# Allocate once, and calculate the six face templates once per mesh.
+	# This avoids creating small temporary arrays for every fine-voxel face.
+	vertices.resize(face_count * 4)
+	normals.resize(face_count * 4)
+	colors.resize(face_count * 4)
+	indices.resize(face_count * 6)
+	var corners: Array[PackedVector3Array] = []
+	for neighbor: Vector3i in NEIGHBORS:
+		var normal := Vector3(neighbor)
+		var tangent: Vector3 = Vector3.UP.cross(normal) if neighbor.y == 0 else Vector3.RIGHT
+		var bitangent: Vector3 = tangent.cross(normal)
+		var points := PackedVector3Array()
+		for corner: Vector2 in [Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)]:
+			points.append((Vector3.ONE + normal + tangent * corner.x + bitangent * corner.y) * cell_size * 0.5)
+		corners.append(points)
+	var face: int = 0
+	for index in range(candidates.size()):
+		var mask: int = masks[index]
+		if mask == 0:
+			continue
+		var cell: Vector3i = candidates[index]
 		var color: Color = cells[cell]
-		for neighbor: Vector3i in NEIGHBORS:
-			if cells.has(cell + neighbor):
+		var origin: Vector3 = Vector3(cell) * cell_size
+		for side in range(6):
+			if (mask & (1 << side)) == 0:
 				continue
-			var normal := Vector3(neighbor)
-			var tangent: Vector3 = Vector3.UP.cross(normal) if neighbor.y == 0 else Vector3.RIGHT
-			var bitangent: Vector3 = tangent.cross(normal)
-			var center: Vector3 = (Vector3(cell) + Vector3.ONE * 0.5 + normal * 0.5) * cell_size
-			var first: int = vertices.size()
-			for corner: Vector2 in [Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)]:
-				vertices.append(center + (tangent * corner.x + bitangent * corner.y) * cell_size * 0.5)
-				normals.append(normal)
-				colors.append(color)
+			var normal := Vector3(NEIGHBORS[side])
+			var first: int = face * 4
+			for corner in range(4):
+				vertices[first + corner] = origin + corners[side][corner]
+				normals[first + corner] = normal
+				colors[first + corner] = color
 			# Godot front faces use clockwise winding.
-			indices.append_array(PackedInt32Array([first, first + 1, first + 2, first, first + 2, first + 3]))
+			var offset: int = face * 6
+			indices[offset] = first
+			indices[offset + 1] = first + 1
+			indices[offset + 2] = first + 2
+			indices[offset + 3] = first
+			indices[offset + 4] = first + 2
+			indices[offset + 5] = first + 3
+			face += 1
 	var mesh := ArrayMesh.new()
 	if not vertices.is_empty():
 		var arrays: Array = []
