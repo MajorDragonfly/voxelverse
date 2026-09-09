@@ -3,6 +3,11 @@ extends CanvasLayer
 const Catalog = preload("res://world/space/galaxy_catalog.gd")
 const Journal = preload("res://world/space/galaxy_journal.gd")
 signal closed
+signal visit_requested(system_id: String, body_id: String)
+var initial_system_id: String = ""
+var travel_in_progress: bool = false
+var body_list: OptionButton
+var visit_button: Button
 var catalog: RefCounted = Catalog.new()
 var journal: RefCounted
 var journal_directory: String = "user://galaxy_m1c"
@@ -32,6 +37,13 @@ func _ready() -> void:
 	_storage_error = journal.open()
 	_build()
 	show_sector([0, 0, 0])
+	var address: Dictionary = Catalog.Address.parse(initial_system_id)
+	if address.get("kind") == "system" and catalog.owns(initial_system_id, "system"):
+		show_sector(address.sector)
+		for index in range(systems.size()):
+			if systems[index].id == initial_system_id:
+				system_list.select(index)
+				select_system(index)
 
 func _build() -> void:
 	var shade := ColorRect.new()
@@ -93,6 +105,15 @@ func _build() -> void:
 	description.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	description.custom_minimum_size.y = 100
 	detail.add_child(description)
+	var destination := HBoxContainer.new()
+	detail.add_child(destination)
+	body_list = OptionButton.new()
+	body_list.name = "GalaxyBodies"
+	body_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body_list.item_selected.connect(func(_index: int): _select_body())
+	destination.add_child(body_list)
+	visit_button = _button(destination, "Oberfläche besuchen", request_visit)
+	visit_button.name = "VisitGalaxyBody"
 	custom_name = LineEdit.new()
 	custom_name.placeholder_text = "Eigener Systemname (optional)"
 	custom_name.max_length = 80
@@ -119,6 +140,8 @@ func _build() -> void:
 	column.add_child(message)
 
 func show_sector(axes: Array) -> void:
+	if travel_in_progress:
+		return
 	if not _save_pending():
 		return
 	var sector: Dictionary = catalog.sector_at(axes)
@@ -133,16 +156,20 @@ func show_sector(axes: Array) -> void:
 	selected_index = -1
 	for system: Dictionary in systems:
 		system_list.add_item(system.name + (" · Doppelstern" if system.star_count == 2 else ""))
-	message.text = "%d Systeme · Die Raumreise folgt in einer späteren Spielphase." % systems.size() if _storage_error == OK else "Katalog lesbar; gespeicherte Notizen nicht verfügbar: " + error_string(_storage_error)
+	message.text = "%d Systeme · Gesteinsplaneten und Monde besuchen; gespeicherte Orte werden beim Wiederbesuch geladen." % systems.size() if _storage_error == OK else "Katalog lesbar; gespeicherte Notizen nicht verfügbar: " + error_string(_storage_error)
 	if not systems.is_empty():
 		system_list.select(0)
 		select_system(0)
 	else:
+		body_list.clear()
+		visit_button.disabled = true
 		record = {}
 		description.text = "In diesem Sektor sind keine Sterne verzeichnet."
 		_set_fields({}, false)
 
 func select_system(index: int) -> void:
+	if travel_in_progress:
+		return
 	if index < 0 or index >= systems.size():
 		return
 	if not _save_pending():
@@ -155,11 +182,21 @@ func select_system(index: int) -> void:
 	var local_position: Array = system.position.offset_ly
 	var lines: PackedStringArray = ["[font_size=22]" + system.name + "[/font_size]", "", "%d Stern(e) · Körpergrößen und Bahnabstände in Kilometern" % system.star_count, "Position im Sektor: %.3f / %.3f / %.3f Lichtjahre" % local_position, ""]
 	var kinds: Dictionary = {"star": "Stern", "planet": "Gesteinsplanet", "gas_giant": "Gasriese", "moon": "Mond"}
+	body_list.clear()
+	var first_landable: int = -1
 	for body: Dictionary in system.bodies.values():
+		var body_index: int = body_list.item_count
+		body_list.add_item("%s · %s · Ø %.0f km" % [body.name, kinds[body.kind], body.radius * 0.002])
+		body_list.set_item_metadata(body_index, body.id)
+		body_list.set_item_disabled(body_index, not body.landable)
+		if body.landable and first_landable < 0:
+			first_landable = body_index
 		lines.append("[b]%s[/b]  ·  %s  ·  Ø %.1f km" % [body.name, kinds[body.kind], body.radius * 0.002])
 		if body.orbit_radius > 0:
 			lines.append("Bahnabstand %.0f km" % (body.orbit_radius * 0.001))
 	description.text = "\n".join(lines)
+	body_list.select(first_landable)
+	_select_body()
 	var loaded: Dictionary = journal.read(selected_id) if _storage_error == OK else {"error": _storage_error}
 	record = loaded.get("record", {})
 	_set_fields(record, loaded.error == OK)
@@ -210,9 +247,21 @@ func _save_pending() -> bool:
 	return not _dirty or save_changes()
 
 func close() -> void:
+	if travel_in_progress:
+		return
 	if _save_pending():
 		closed.emit()
 		queue_free()
+
+
+func _select_body() -> void:
+	visit_button.disabled = body_list.selected < 0 or body_list.is_item_disabled(body_list.selected)
+
+
+func request_visit() -> void:
+	if travel_in_progress or visit_button.disabled or not _save_pending():
+		return
+	visit_requested.emit(selected_id, str(body_list.get_item_metadata(body_list.selected)))
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:

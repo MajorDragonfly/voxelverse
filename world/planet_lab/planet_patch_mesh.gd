@@ -20,13 +20,12 @@ static func build_arrays(tile: Dictionary, surface: RefCounted) -> Dictionary:
 	for y in range(STRIDE):
 		for x in range(STRIDE):
 			var uv: Vector2 = tile.uv + Vector2(x, y) * (float(tile.width) / CELLS)
-			var address: Dictionary = Cube.address(surface.body.id, tile.face, uv.x, uv.y)
 			var precise: Array = Cube.direction(tile.face, uv.x, uv.y)
 			var d: Vector3 = Cube.vector(precise)
 			var height: float = surface.height_precise(precise)
-			ocean.append(Cube.local_position(Cube.cartesian(address, surface.body.radius), tile.anchor))
-			address.height = height
-			vertices.append(Cube.local_position(Cube.cartesian(address, surface.body.radius), tile.anchor))
+			# Reuse the double direction and subtract the anchor before float conversion.
+			ocean.append(local_point(precise, surface.body.radius, tile.anchor))
+			vertices.append(local_point(precise, surface.body.radius + height, tile.anchor))
 			normals.append(d if surface.body.get("terrain_revision", 1) >= 3 else surface.normal_at(d))
 			colors.append(surface.color_at(d, height))
 			has_water = has_water or height < 1.0
@@ -88,3 +87,8 @@ static func upload(data: Dictionary) -> Dictionary:
 
 static func edge_index(edge: int, step: int) -> int:
 	return [step, step * STRIDE + CELLS, CELLS * STRIDE + step, step * STRIDE][edge]
+
+
+static func local_point(direction: Array, radius: float, anchor: Array) -> Vector3:
+	return Vector3(float(direction[0]) * radius - anchor[0],
+		float(direction[1]) * radius - anchor[1], float(direction[2]) * radius - anchor[2])

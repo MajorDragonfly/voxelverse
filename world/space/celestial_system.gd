@@ -6,6 +6,8 @@ var bodies: Dictionary = {}
 var elapsed: float = 0.0
 var binary: bool = false
 var real_scale: bool = false
+var catalog_id: String = ""
+var catalog_name: String = ""
 const LANDABLE: Array[String] = ["m1:haven", "m1:ember", "m1:lune", "m1:aster"]
 const REAL_LANDABLE: Array[String] = ["m1b:terra", "m1b:100", "m1b:1000"]
 const TERRAIN_REVISION: int = 2
@@ -64,7 +66,42 @@ func _real_system() -> void:
 
 
 func landable_ids() -> Array[String]:
+	if not catalog_id.is_empty():
+		var result: Array[String] = []
+		for id: String in bodies:
+			if bodies[id].get("landable", false):
+				result.append(id)
+		return result
 	return REAL_LANDABLE if real_scale else LANDABLE
+
+
+static func from_catalog(entry: Dictionary) -> RefCounted:
+	var result := CelestialSystem.new()
+	result.catalog_id = entry.id
+	result.catalog_name = entry.name
+	result.bodies = entry.bodies.duplicate(true)
+	result.binary = entry.star_count == 2
+	result.real_scale = true
+	return result
+
+
+func primary_star_id() -> String:
+	for id: String in bodies:
+		if bodies[id].kind == "star":
+			return id
+	return ""
+
+
+func extent_meters() -> float:
+	var extent: float = 1.0
+	for id: String in bodies:
+		var reach: float = bodies[id].radius
+		var parent: String = id
+		while not parent.is_empty():
+			reach += float(bodies[parent].orbit_radius)
+			parent = bodies[parent].parent_id
+		extent = maxf(extent, reach)
+	return extent
 
 
 func _add(id: String, label: String, kind: String, seed_value: int, radius: float,

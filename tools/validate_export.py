@@ -137,8 +137,9 @@ def main():
                 "Esc / F8: settings and pause. F4 or the menu button opens the Planet Lab.\n"
                 "Planet Lab: choose Terra (12,742 km), then M for Neris (100 km) / Orin (1,000 km).\n"
                 "Tab: surface/orbit; B: binary stars; F5/F9: save/load. Aster returns to the small test system.\n"
-                "Planet Lab > Galaxiekatalog: browse sectors and systems; save names, discoveries and notes.\n"
-                "M1c is the galaxy catalog foundation. Interstellar travel and campaign integration follow later.\n"
+                "Planet Lab > Galaxiekatalog: select a rocky planet or moon, then Oberflaeche besuchen to land.\n"
+                "Each visited body keeps its own location and heading; the last planet reopens after restart.\n"
+                "Names, discoveries and notes remain available. Flight and campaign integration follow later.\n"
                 "This build passed headless release acceptance. Visual/GPU acceptance is still pending.\n",
                 encoding="utf-8")
             archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"

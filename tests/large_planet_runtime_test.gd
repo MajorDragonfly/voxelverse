@@ -101,6 +101,7 @@ func _walk(body: Dictionary) -> void:
 		"peak_tiles": terrain.peak_tiles, "peak_resident_terrain_meshes": terrain.peak_resident_meshes,
 		"waiting_frames": waiting_frames, "simulated_seconds": frame_count / 60.0, "maximum_cell_width_m": largest_cell,
 		"publish_deferrals": terrain.publish_deferrals,
+		"cache_hits": terrain.cache_hits, "max_prepare_ms": terrain.max_prepare_usec / 1000.0,
 		"terrain_ready_ms": terrain_ready_ms, "peak_engine_static_bytes": peak_static_bytes,
 		"jobs": terrain.job_samples.duplicate(true),
 		"initial_publish_ms": terrain.max_initial_publish_usec / 1000.0, "max_worker_ms": terrain.max_worker_usec / 1000.0,

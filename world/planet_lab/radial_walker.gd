@@ -89,7 +89,9 @@ func _physics_process(delta: float) -> void:
 	var desired: Vector3 = (basis.x * move_input.x + forward * move_input.y) * speed
 	waiting_for_terrain = false
 	if terrain is AdaptiveSphereTiles and terrain.surface.body.get("terrain_revision", 1) >= 3:
-		terrain.lookahead_direction = (up_direction + desired * 0.75 / float(terrain.surface.body.radius)).normalized()
+		var lead_seconds: float = clampf(terrain.last_worker_seconds + 0.25, 0.75, 2.5)
+		var lead: Vector3 = (desired * lead_seconds).limit_length(32.0)
+		terrain.lookahead_direction = (up_direction + lead / float(terrain.surface.body.radius)).normalized()
 	terrain.stream_at(up_direction)
 	if terrain is AdaptiveSphereTiles and terrain.surface.body.get("terrain_revision", 1) >= 3 and desired.length_squared() > 0.0:
 		# A bounded streamer can take longer than the player to reach its next

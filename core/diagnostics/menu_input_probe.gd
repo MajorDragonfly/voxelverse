@@ -119,12 +119,28 @@ func _run() -> void:
 		_click(lab.find_child("OpenGalaxy", true, false))
 		await tree.process_frame
 		_expect(is_instance_valid(lab.galaxy_panel) and lab.galaxy_panel.note.text == "Native Eingabe und Wiederbesuch", "Native Galaxy reopen lost its note.")
-		lab.galaxy_panel.close()
-		await tree.process_frame
+		panel = lab.galaxy_panel
+		var destination: String = panel.body_list.get_item_metadata(panel.body_list.selected)
+		_click(panel.visit_button)
+		for frame in range(8):
+			await tree.process_frame
+			if not is_instance_valid(lab.galaxy_panel):
+				break
+		lab.walker.enabled = false
+		_expect(lab.body_id == destination and lab.system.real_scale and lab.terrain.active.size() == 24,
+			"Native catalog Visit click did not open its real physical planet.")
+		var visit: Dictionary = lab.snapshot()
+		_expect(lab.save_lab() and visit.schema == 4, "Native catalog surface did not persist its return point.")
+		lab._open_body("m1:aster")
+		lab.load_lab()
+		lab.walker.enabled = false
+		var radius: float = lab.system.bodies[lab.body_id].radius
+		_expect(lab.body_id == destination and cube.local_position(cube.cartesian(visit.location, radius),
+			cube.cartesian(lab.walker.location(), radius)).length() < 0.001, "Native catalog return lost its body or precise location.")
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():
-		print("MENU_INPUT_PASSED: underwater camera/air restoration, Esc, F8, actual paused GUI clicks, saved VSync, mouse restoration, physical F4, menu-to-lab round trip, Aster, real Terra, Galaxy button/save/reopen and modal Escape.")
+		print("MENU_INPUT_PASSED: underwater optics, Esc/F8, actual GUI clicks, VSync, mouse restoration, physical F4, lab round trip, real Terra, Galaxy notes/modal Escape, catalog Visit and precise saved return.")
 	tree.quit(0 if failures.is_empty() else 1)
 
 

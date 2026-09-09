@@ -42,7 +42,7 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
-          xvfb-run -a -s '-screen 0 1280x720x24' python tools/profile_environment.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/planet-lab-review" --cases underwater planet_lab large_planet galaxy --seeds 12345 --size 1280 720 --frames 4 --warmup 4 --fast-setup
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/profile_environment.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/planet-lab-review" --cases underwater planet_lab large_planet galaxy galaxy_visit --seeds 12345 --size 1280 720 --frames 4 --warmup 4 --fast-setup
       - name: Upload M1 review
         if: always() && matrix.review == 'planets'
         uses: actions/upload-artifact@v4

@@ -79,6 +79,8 @@ func _run() -> void:
 			await _large_planet()
 		"galaxy":
 			await _galaxy()
+		"galaxy_visit":
+			await _galaxy_visit()
 		_:
 			_failures.append("Unknown review case.")
 	RenderingServer.render_loop_enabled = true
@@ -851,6 +853,85 @@ func _galaxy() -> void:
 	await _capture("m1c_catalog_return", {"cache": panel.catalog.stats(), "journal": panel.journal.stats(), "selected": panel.selected_id})
 
 
+func _galaxy_visit() -> void:
+	change_scene_to_file("res://world/planet_lab/planet_lab.tscn")
+	await scene_changed
+	_scene = current_scene
+	_scene.time_speed = 0.0
+	_scene.walker.enabled = false
+	_scene.open_galaxy_catalog()
+	await process_frame
+	var panel: Node = _scene.galaxy_panel
+	var target: String = panel.body_list.get_item_metadata(panel.body_list.selected)
+	await _capture("m1c_visit_selection", {"system_id": panel.selected_id, "body_id": target})
+	panel.request_visit()
+	for frame in range(8):
+		await process_frame
+		if not is_instance_valid(_scene.galaxy_panel):
+			break
+	if _scene.body_id != target:
+		_failures.append("Catalog surface visit did not open the selected body.")
+		return
+	for frame in range(45):
+		await physics_frame
+	_scene.walker.enabled = false
+	await _capture("m1c_visit_surface", _scene.snapshot())
+	_scene.set_view("orbit")
+	await _capture("m1c_visit_orbit", _scene.snapshot())
+	_scene.set_view("system")
+	await _capture("m1c_visit_system", _scene.snapshot())
+	_scene.set_view("surface")
+	_scene.walker.enabled = false
+	var saved: Dictionary = _scene.snapshot()
+	if not _scene.save_lab():
+		_failures.append("Rendered catalog return point did not save.")
+	_scene._open_body("m1:aster")
+	_scene.load_lab()
+	_scene.walker.enabled = false
+	var cube = preload("res://world/space/cube_sphere.gd")
+	var radius: float = _scene.system.bodies[target].radius
+	var error: float = cube.local_position(cube.cartesian(saved.location, radius), cube.cartesian(_scene.walker.location(), radius)).length()
+	if _scene.body_id != target or error >= 0.001:
+		_failures.append("Rendered catalog return lost the precise planet location.")
+	await _capture("m1c_visit_return", {"snapshot": _scene.snapshot(), "return_error_m": error})
+	await _planet_transition_review()
+
+
+func _planet_transition_review() -> void:
+	var terrain: Node = _scene.terrain
+	terrain.set_process(false)
+	_scene.walker.preview.hide()
+	await _capture("m1c_lod_before", _scene.snapshot())
+	var cube = preload("res://world/space/cube_sphere.gd")
+	var up: Vector3 = _scene.walker.up_direction
+	var target: Vector3 = (up + _scene.walker.forward * 40.0 / float(terrain.surface.body.radius)).normalized()
+	RenderingServer.render_loop_enabled = false
+	terrain.lookahead_direction = target
+	terrain.stream_at(target)
+	var started: int = Time.get_ticks_msec()
+	while terrain._retired.is_empty() and Time.get_ticks_msec() - started < 30000:
+		terrain._process(0.0)
+		await process_frame
+	if terrain._retired.is_empty():
+		_failures.append("LOD review never produced a changing covering set.")
+		return
+	for phase in [0.0, 0.5, 1.0]:
+		terrain._set_phase(phase)
+		await _capture("m1c_lod_%d" % int(phase * 100.0), {"phase": phase, "old_tiles": terrain._retired.size(), "new_tiles": terrain._arriving.size(), "resident_meshes": terrain.peak_resident_meshes})
+	var initial: Image = _comparison_images.m1c_lod_0
+	var middle: Image = _comparison_images.m1c_lod_50
+	var final_image: Image = _comparison_images.m1c_lod_100
+	var first_change: float = _mean_rgb_difference(initial, middle)
+	var second_change: float = _mean_rgb_difference(middle, final_image)
+	var old_parity: float = _mean_rgb_difference(_comparison_images.m1c_lod_before, initial)
+	_samples[-1]["transition_changes"] = [first_change, second_change]
+	_samples[-1]["old_cover_rgb_error"] = old_parity
+	if first_change < 0.000001 or second_change < 0.000001 or old_parity > 0.004:
+		_failures.append("Planet LOD did not render both transition phases or preserve its original covering set.")
+	terrain._finish_transition()
+	terrain.set_process(true)
+
+
 func _capture(label: String, details: Dictionary) -> void:
 	RenderingServer.render_loop_enabled = true
 	for warmup in range(int(_config.get("warmup", 20))):
@@ -888,6 +969,8 @@ func _capture(label: String, details: Dictionary) -> void:
 		preview.resize(960 if planet_review else 480, 540 if planet_review else 270, Image.INTERPOLATE_LANCZOS)
 		print("REVIEW_PREVIEW ", str(_config["seed"]), " ", label, " ", Marshalls.raw_to_base64(preview.save_jpg_to_buffer(0.76)))
 	if label.begins_with("terrain_transition_"):
+		_comparison_images[label] = image
+	if label.begins_with("m1c_lod_"):
 		_comparison_images[label] = image
 	if label in ["far_batches", "creature_individual", "water_shared_reference"]:
 		_comparison_images[label] = image

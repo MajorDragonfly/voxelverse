@@ -9,6 +9,13 @@ const OrbitMesh = preload("res://world/planet_lab/planet_orbit_mesh.gd")
 const Walker = preload("res://world/planet_lab/radial_walker.gd")
 const LabSave = preload("res://world/planet_lab/planet_lab_save.gd")
 const GalaxyPanel = preload("res://world/planet_lab/galaxy_catalog_panel.gd")
+const Catalog = preload("res://world/space/galaxy_catalog.gd")
+const Visits = preload("res://world/space/galaxy_visits.gd")
+var catalog: RefCounted = Catalog.new()
+var visits: RefCounted
+var visit_record: Dictionary = {}
+var _visits_error: Error = OK
+var _system_extent: float = 1.0
 var galaxy_panel: CanvasLayer
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const MAIN_SCENE: String = "res://main/main.tscn"
@@ -72,8 +79,7 @@ func _ready() -> void:
 	_build_ui()
 	var saved: Dictionary = LabSave.read()
 	if not saved.is_empty():
-		system = System.new(saved.binary, saved.get("scale_mode", "test") == "real")
-		system.elapsed = saved.elapsed
+		_restore_system(saved)
 		body_id = saved.body_id
 	elif FileAccess.file_exists(LabSave.PATH) or FileAccess.file_exists(LabSave.PATH + ".bak"):
 		_save_read_only = true
@@ -102,6 +108,9 @@ func _notification(what: int) -> void:
 
 
 func _build_system_view() -> void:
+	# Keep orbital resources bounded to the one currently open system.
+	meshes.clear()
+	_system_extent = system.extent_meters()
 	for child in space.get_children():
 		space.remove_child(child)
 		child.queue_free()
@@ -161,8 +170,8 @@ func _build_system_view() -> void:
 		sky_bodies[id] = sky_node
 		if body.kind == "star":
 			var light := DirectionalLight3D.new()
-			light.light_color = Color("ffe2b2") if id == "m1:sol" else Color("b8d6ff")
-			light.light_energy = PRIMARY_LIGHT_ENERGY if id == "m1:sol" else SECONDARY_LIGHT_ENERGY
+			light.light_color = Color("ffe2b2") if id == system.primary_star_id() else Color("b8d6ff")
+			light.light_energy = PRIMARY_LIGHT_ENERGY if id == system.primary_star_id() else SECONDARY_LIGHT_ENERGY
 			light.shadow_enabled = true
 			light.directional_shadow_max_distance = 130.0
 			add_child(light)
@@ -187,7 +196,7 @@ func _body_visual(body: Dictionary, model: Dictionary) -> MeshInstance3D:
 		# This mesh depicts the light source; it must not eclipse its own light.
 		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		material.albedo_color = Color("ffdc9b") if body.id == "m1:sol" else Color("b8dcff")
+		material.albedo_color = Color("ffdc9b") if body.id == system.primary_star_id() else Color("b8dcff")
 	else:
 		material.vertex_color_use_as_albedo = true
 		material.vertex_color_is_srgb = true
@@ -206,8 +215,11 @@ func _body_visual(body: Dictionary, model: Dictionary) -> MeshInstance3D:
 
 
 func _open_body(id: String, saved: Dictionary = {}) -> void:
-	var full_size: bool = id in System.REAL_LANDABLE
-	if full_size != system.real_scale:
+	var leaving_catalog: bool = not system.catalog_id.is_empty() and id in System.LANDABLE + System.REAL_LANDABLE
+	if leaving_catalog and is_instance_valid(walker) and not save_lab():
+		return
+	var full_size: bool = id in System.REAL_LANDABLE or (not leaving_catalog and not system.catalog_id.is_empty())
+	if full_size != system.real_scale or leaving_catalog:
 		var time: float = system.elapsed
 		system = System.new(system.binary, full_size)
 		system.elapsed = time
@@ -228,7 +240,7 @@ func _open_body(id: String, saved: Dictionary = {}) -> void:
 	add_child(walker)
 	walker.camera.far = 50000.0 if system.real_scale else maxf(1800.0, float(system.bodies[id].radius) * 2.0)
 	walker.camera.near = 0.2 if system.real_scale else 0.05
-	var location: Dictionary = _coastal_spawn()
+	var location: Dictionary = _coastal_spawn() if saved.is_empty() else saved.location
 	var heading: Vector3 = Vector3.FORWARD
 	if not saved.is_empty():
 		location = saved.location
@@ -270,7 +282,7 @@ func _coastal_spawn() -> Dictionary:
 				var candidate: Dictionary = Cube.address(body_id, face, x * 0.2, y * 0.2)
 				var d: Vector3 = Cube.vector(Cube.direction(face, candidate.u, candidate.v))
 				var h: float = terrain.surface.height_precise(Cube.direction(face, candidate.u, candidate.v))
-				var day: float = d.dot(system.sky_direction(body_id, "m1:sol"))
+				var day: float = d.dot(system.sky_direction(body_id, system.primary_star_id()))
 				var cost: float = absf(h - 2.8) + maxf(0.2 - day, 0.0) * (10000.0 if system.real_scale else 30.0) + absf(d.y)
 				if cost < score:
 					score = cost
@@ -298,7 +310,7 @@ func set_view(mode: String) -> void:
 
 
 func _process(delta: float) -> void:
-	if is_instance_valid(galaxy_panel):
+	if is_instance_valid(galaxy_panel) or _opening_large:
 		return
 	if not _ready_complete:
 		return
@@ -306,7 +318,7 @@ func _process(delta: float) -> void:
 	_update_views()
 	var address_value: Dictionary = walker.location()
 	var up: Vector3 = Cube.vector(Cube.direction(address_value.face, address_value.u, address_value.v))
-	var daylight: float = up.dot(system.sky_direction(body_id, "m1:sol"))
+	var daylight: float = up.dot(system.sky_direction(body_id, system.primary_star_id()))
 	headline.text = "%s  /  %s" % [system.bodies[body_id].name, {"surface": "Oberfläche", "orbit": "Orbit", "system": "Sternsystem"}[view_mode]]
 	details.text = "%s  ·  %s  ·  Durchmesser %.2f km\n%02d:%02d  ·  Zeit ×%.0f  ·  %d / %d Nahkacheln  ·  %d Ursprungswechsel" % [
 		"Zwei Sonnen" if system.binary else "Eine Sonne", "Tag" if daylight > 0.0 else "Nacht", float(system.bodies[body_id].radius) * 0.002,
@@ -316,9 +328,13 @@ func _process(delta: float) -> void:
 			"Gelände wird berechnet" if terrain.pending_count() < 0 else "%d Kacheln vorbereitet" % terrain.pending_count()]
 	if view_mode == "system" and system.real_scale:
 		details.text += "\nKartenansicht mit vergrößerten Körpersymbolen"
+	if not system.catalog_id.is_empty():
+		details.text += "\n" + system.catalog_name + " · Rückkehrpunkt je Planet"
 	if walker.waiting_for_terrain:
 		details.text += "\nNahgelände wird nachgeladen – einen Moment …"
 	help.text = "WASD  Bewegen     Maus  Umsehen     Leertaste  Springen     Esc  Einstellungen\nTab  Orbit / Landen     M  Nächster Körper     B  Zwei Sonnen     T  Zeit     F5 / F9  Sichern / Laden"
+	if not system.catalog_id.is_empty():
+		help.text = help.text.replace("B  Zwei Sonnen     ", "")
 
 
 func _update_views() -> void:
@@ -332,7 +348,7 @@ func _update_views() -> void:
 	var origin: Array = body_position if view_mode == "orbit" else [0.0, 0.0, 0.0]
 	_space_scale = SPACE_SCALE
 	if system.real_scale:
-		_space_scale = 8.0 / float(system.bodies[body_id].radius) if view_mode == "orbit" else 300.0 / 240000000000.0
+		_space_scale = 8.0 / float(system.bodies[body_id].radius) if view_mode == "orbit" else 300.0 / _system_extent
 	var illumination: float = 0.0
 	var minimum := Vector3(INF, 0, INF)
 	var maximum := Vector3(-INF, 0, -INF)
@@ -369,7 +385,7 @@ func _update_views() -> void:
 			var direction: Vector3 = delta_position.normalized() if view_mode == "surface" else Cube.scaled_offset(system.position_precise(id), body_position, 1.0).normalized()
 			lights[id].basis = Basis.looking_at(-direction, Vector3.UP if absf(direction.y) < 0.95 else Vector3.RIGHT)
 			var horizon: float = smoothstep(-0.03, 0.04, up.dot(delta_position.normalized())) if view_mode == "surface" else 1.0
-			lights[id].light_energy = (PRIMARY_LIGHT_ENERGY if id == "m1:sol" else SECONDARY_LIGHT_ENERGY) * horizon
+			lights[id].light_energy = (PRIMARY_LIGHT_ENERGY if id == system.primary_star_id() else SECONDARY_LIGHT_ENERGY) * horizon
 			illumination += maxf(0.0, up.dot(delta_position.normalized()))
 	if view_mode == "surface":
 		environment.background_color = Color("080e20").lerp(Color("6fa9c1"), clampf(illumination * 1.7, 0.0, 1.0))
@@ -380,7 +396,7 @@ func _update_views() -> void:
 	else:
 		environment.background_color = Color("080c18")
 		environment.ambient_light_energy = 0.25
-	environment.fog_enabled = system.real_scale and view_mode == "surface"
+	environment.fog_enabled = system.real_scale and view_mode == "surface" and system.bodies[body_id].atmosphere != "none"
 	if environment.fog_enabled:
 		environment.fog_mode = Environment.FOG_MODE_DEPTH
 		environment.fog_light_color = environment.background_color
@@ -418,20 +434,26 @@ func _update_views() -> void:
 			if not str(body.parent_id).is_empty() and system.bodies[body.parent_id].kind == "planet":
 				label.position.z -= space_camera.size * 0.08
 			elif body.kind == "star":
-				var star_offset: float = (-0.13 if system.real_scale else -0.07) if id == "m1:vesper" else 0.045
+				var star_offset: float = (-0.13 if system.real_scale else -0.07) if id != system.primary_star_id() else 0.045
 				label.position.z += space_camera.size * star_offset
 
 
 func snapshot() -> Dictionary:
-	return {"schema": 3 if system.real_scale else 2, "scale_mode": "real" if system.real_scale else "test", "terrain_revision": 3 if system.real_scale else System.TERRAIN_REVISION, "surface_version": Cube.MODE, "body_id": body_id, "location": walker.location(),
+	var result: Dictionary = {"schema": 3 if system.real_scale else 2, "scale_mode": "real" if system.real_scale else "test", "terrain_revision": 3 if system.real_scale else System.TERRAIN_REVISION, "surface_version": Cube.MODE, "body_id": body_id, "location": walker.location(),
 		"forward": [walker.forward.x, walker.forward.y, walker.forward.z], "elapsed": system.elapsed, "binary": system.binary}
+	if not system.catalog_id.is_empty():
+		result.merge({"schema": 4, "catalog_version": Catalog.VERSION, "system_id": system.catalog_id}, true)
+	return result
 
 
 func save_lab() -> bool:
 	if _save_read_only:
 		status.text = "Vorhandene Laborsicherung geschützt; Speichern nicht möglich."
 		return false
-	var error: Error = LabSave.write(snapshot())
+	var data: Dictionary = snapshot()
+	var error: Error = _save_visit(data) if not system.catalog_id.is_empty() else OK
+	if error == OK:
+		error = LabSave.write(data)
 	status.text = "Ort und Systemzeit gesichert." if error == OK else "Sichern fehlgeschlagen (%s)." % error
 	return error == OK
 
@@ -442,14 +464,16 @@ func load_lab() -> void:
 		status.text = "Keine gültige Laborsicherung gefunden."
 		return
 	_save_read_only = false
-	system = System.new(saved.binary, saved.get("scale_mode", "test") == "real")
-	system.elapsed = saved.elapsed
+	_restore_system(saved)
 	_build_system_view()
 	_open_body(saved.body_id, saved)
 	status.text = "Gesicherten Ort und Systemzeit wiederhergestellt."
 
 
 func toggle_binary() -> void:
+	if not system.catalog_id.is_empty():
+		status.text = "Dieses Katalogsystem hat dauerhaft %d Sonne(n)." % lights.size()
+		return
 	var elapsed: float = system.elapsed
 	system = System.new(not system.binary, system.real_scale)
 	system.elapsed = elapsed
@@ -459,7 +483,11 @@ func toggle_binary() -> void:
 
 func next_body() -> void:
 	var index: int = system.landable_ids().find(body_id)
-	_open_body(system.landable_ids()[(index + 1) % system.landable_ids().size()])
+	var next: String = system.landable_ids()[(index + 1) % system.landable_ids().size()]
+	if not system.catalog_id.is_empty():
+		visit_planet(system.catalog_id, next)
+		return
+	_open_body(next)
 	status.text = "Technikreise: %s. Tab öffnet den Orbit." % system.bodies[body_id].name
 
 
@@ -483,7 +511,7 @@ func _leave_lab() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_instance_valid(galaxy_panel):
+	if is_instance_valid(galaxy_panel) or _opening_large:
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and view_mode == "surface":
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -596,11 +624,100 @@ func open_galaxy_catalog() -> void:
 	var previous_enabled: bool = walker.enabled
 	walker.enabled = false
 	galaxy_panel = GalaxyPanel.new()
+	galaxy_panel.catalog = catalog
+	galaxy_panel.initial_system_id = system.catalog_id
+	galaxy_panel.visit_requested.connect(_on_visit_requested)
 	galaxy_panel.closed.connect(func():
 		walker.enabled = previous_enabled
 		galaxy_panel = null
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE)
 	add_child(galaxy_panel)
+
+
+func _on_visit_requested(system_id: String, target_id: String) -> void:
+	if _opening_large:
+		return
+	_opening_large = true
+	galaxy_panel.travel_in_progress = true
+	galaxy_panel.message.text = "Oberfläche wird vorbereitet …"
+	galaxy_panel.visit_button.disabled = true
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var succeeded: bool = visit_planet(system_id, target_id)
+	_opening_large = false
+	if is_instance_valid(galaxy_panel):
+		galaxy_panel.travel_in_progress = false
+		if succeeded:
+			galaxy_panel.close()
+		else:
+			galaxy_panel.message.text = status.text
+			galaxy_panel.visit_button.disabled = false
+	if succeeded:
+		walker.enabled = true
+
+
+func _open_visits() -> void:
+	var directory: String = "user://galaxy_visits_m1c/" + str(catalog.identity().galaxy_id).sha256_text()
+	visits = Visits.new(catalog, directory)
+	_visits_error = visits.open()
+	visit_record = {}
+
+
+func _restore_system(saved: Dictionary) -> void:
+	if saved.get("schema") == 4:
+		var address: Dictionary = Catalog.Address.parse(saved.system_id)
+		catalog = Catalog.new(address.universe_seed, address.galaxy_index)
+		system = System.from_catalog(catalog.system(saved.system_id))
+		_open_visits()
+		if _visits_error == OK:
+			var loaded: Dictionary = visits.read(saved.system_id)
+			_visits_error = loaded.error
+			visit_record = loaded.get("record", {})
+	else:
+		system = System.new(saved.binary, saved.get("scale_mode", "test") == "real")
+	system.elapsed = saved.elapsed
+
+
+func _save_visit(data: Dictionary) -> Error:
+	if _visits_error != OK:
+		return _visits_error
+	if visit_record.is_empty() or visit_record.system_id != system.catalog_id:
+		return ERR_UNCONFIGURED
+	var edited: Dictionary = visit_record.duplicate(true)
+	edited.elapsed = system.elapsed
+	edited.bodies[body_id] = {"terrain_revision": 3, "location": data.location, "forward": data.forward}
+	var error: Error = visits.write(edited)
+	if error == OK:
+		visit_record = visits.read(system.catalog_id).record
+	return error
+
+
+func visit_planet(system_id: String, target_id: String) -> bool:
+	var entry: Dictionary = catalog.system(system_id)
+	if entry.is_empty() or not entry.bodies.has(target_id) or not entry.bodies[target_id].get("landable", false):
+		status.text = "Für diesen Körper ist keine begehbare Oberfläche verfügbar."
+		return false
+	if not save_lab():
+		return false
+	if visits == null:
+		_open_visits()
+	if _visits_error != OK:
+		status.text = "Rückkehrpunkte können nicht geöffnet werden: " + error_string(_visits_error)
+		return false
+	var loaded: Dictionary = visits.read(system_id)
+	if loaded.error != OK:
+		status.text = "Rückkehrpunkt nicht lesbar: " + error_string(loaded.error)
+		return false
+	visit_record = loaded.record
+	var saved: Dictionary = visit_record.bodies.get(target_id, {})
+	system = System.from_catalog(entry)
+	system.elapsed = visit_record.elapsed
+	_build_system_view()
+	_open_body(target_id, saved)
+	var persisted: bool = save_lab()
+	if persisted:
+		status.text = ("Rückkehr zu " if not saved.is_empty() else "Gelandet auf ") + system.bodies[body_id].name + ". Ort gespeichert; zum Laufen in die Landschaft klicken."
+	return persisted
 
 
 func _open_large_reference() -> void:
@@ -621,6 +738,8 @@ func _button(parent: Node, text: String, action: Callable) -> Button:
 	button.focus_mode = Control.FOCUS_NONE
 	button.custom_minimum_size.y = 36
 	button.add_theme_font_size_override("font_size", 15)
-	button.pressed.connect(action)
+	button.pressed.connect(func():
+		if not _opening_large:
+			action.call())
 	parent.add_child(button)
 	return button
