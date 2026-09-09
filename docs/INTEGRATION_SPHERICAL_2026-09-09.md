@@ -54,7 +54,9 @@ Diese Aufrufe schließen zusätzlich Import- bzw. Einstiegskontrollen ein; ihre 
 
 ## Veröffentlichung
 
-Der Upload des Integrationsbranches nach `https://github.com/MajorDragonfly/voxelverse` wurde von der automatischen Freigabeprüfung abgelehnt. Begründung: Veröffentlichung von Quellcode und Historie ohne ausdrückliche Freigabe dieses Ziels. Das Ziel wurde anschließend lesend als das öffentliche Repository `MajorDragonfly/voxelverse` mit administrativem Kontozugriff bestätigt; daraus wurde keine Umgehung der abgelehnten Aktion abgeleitet. Es erfolgte kein weiterer Uploadversuch und kein Remote-Merge. Der abschließende lesende Ref-Abgleich bestätigt weiterhin `main` auf `3a3e027` und keinen veröffentlichten Integrationsbranch. Die lokalen Merge-Commits und Folgekorrekturen sind fertig prüfbar; Veröffentlichung und Übernahme nach `main` benötigen die ausdrückliche Freigabe.
+Der Nutzer hat die Veröffentlichung im öffentlichen Repository `MajorDragonfly/voxelverse` und die anschließende Übernahme nach `main` ausdrücklich freigegeben. Die ursprüngliche Ablehnung der automatischen Freigabeprüfung gehört zum vorherigen Prüfstand; der entsprechende Eintrag im Ergebnisnachweis dokumentiert diesen Zeitpunkt.
+
+Die Übertragung erfolgt über die verbundene GitHub-App, weil dem lokalen Git-Client die Zugangsdaten fehlen. Bereits veröffentlichte Quellcommits behalten ihre Kennungen. Nur lokal vorhandene Commits werden mit identischen Dateibäumen, ursprünglicher Elternreihenfolge und Herkunftsangaben übertragen; die App vergibt dabei neue Commit-Kennungen. Die lokale Prüfhistorie bleibt erhalten. Die Zuordnung wird im Veröffentlichungsnachweis festgehalten. Die oben genannten Prüfergebnisse beziehen sich weiterhin auf ihre ausdrücklich angegebenen lokalen Quell- und Paketstände.
 
 ## Verbindliche nächste Priorität
 
