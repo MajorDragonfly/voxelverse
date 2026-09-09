@@ -88,6 +88,19 @@ func _until(predicate: Callable, milliseconds: int) -> void:
 	var started: int = Time.get_ticks_msec()
 	while not predicate.call() and Time.get_ticks_msec() - started < milliseconds: await tree.process_frame
 
+func _until_work(predicate: Callable, tribe: Node, milliseconds: int) -> Dictionary:
+	# A blocked path can request another sliced graph while a job is running.
+	# Keep the original active-work limit and a separate bounded graph budget.
+	var elapsed := {"work_ms": 0, "navigation_ms": 0}
+	var last: int = Time.get_ticks_msec()
+	while not predicate.call() and elapsed.work_ms < milliseconds and elapsed.navigation_ms < 45000:
+		var key: String = "navigation_ms" if tribe.navigation.pending else "work_ms"
+		await tree.process_frame
+		var now: int = Time.get_ticks_msec()
+		elapsed[key] += now - last
+		last = now
+	return elapsed
+
 func _animal_chain(tribe: Node) -> void:
 	_stage("build_workshops")
 	state.set_simulation_speed(4.0)
@@ -108,8 +121,9 @@ func _animal_chain(tribe: Node) -> void:
 		var workplace: Vector3 = _site(tribe, kind)
 		if not _expect_step(workplace.is_finite(), "No physical site for " + kind): return
 		if not _expect_step(tribe.issue_order(kind, workplace), "Cannot build " + kind + ": " + tribe.status): return
-		await _until(func() -> bool: return tribe.village().economy.stations.has(kind), 20000)
-		if not _expect_step(tribe.village().economy.stations.has(kind), "Construction did not finish: " + kind): return
+		var elapsed: Dictionary = await _until_work(func() -> bool: return tribe.village().economy.stations.has(kind), tribe, 20000)
+		print("SPHERE_WORKSHOP ", kind, " ", elapsed)
+		if not _expect_step(tribe.village().economy.stations.has(kind), "Construction did not finish: " + kind + " " + str({"elapsed": elapsed, "status": tribe.status, "navigation_pending": tribe.navigation.pending, "project": tribe.village().project, "members": tribe.village().members, "routes": tribe._routes, "goals": tribe._goals})): return
 		tribe.issue_order("water" if kind == "well" else "fiber")
 		await _until(func() -> bool: return tribe.village().stock["water" if kind == "well" else "fiber"] >= (12 if kind == "well" else 4), 45000)
 	tribe.issue_order("wait")
@@ -279,8 +293,16 @@ func _population_status(tribe: Node) -> Dictionary:
 		live.append({"id": actor.get_campaign_identity().object_id, "dead": actor.is_dead,
 			"distance": actor.global_position.distance_to(tribe.anchor()),
 			"milk": actor.blueprint.get("species", {}).get("domestication", {}).get("milk_yield", 0.0)})
-	return {"habitat_status": catalog.habitat_status, "habitats": catalog.habitats,
-		"evidence": catalog.species.map(func(entry: Dictionary) -> Dictionary: return {"id": entry.id, "group": entry.group, "body": entry.get("body_evidence", {})}),
+	var habitats: Array = []
+	for habitat: Dictionary in catalog.habitats:
+		var id: String = population.Habitat.object_id(habitat)
+		var saved: Dictionary = population.storage.record(id)
+		habitats.append({"id": id, "species_id": habitat.species_id, "generation": habitat.generation,
+			"replacement_at": habitat.replacement_at, "saved": not saved.is_empty(),
+			"encounter": population.saved_encounter(id), "reserved": population._reserved(id),
+			"distance": Space.resolve(self, saved.location).distance_to(tribe.anchor()) if saved.has("location") else -1.0})
+	return {"habitat_status": catalog.habitat_status, "clock": state.campaign.data.elapsed_seconds, "habitats": habitats,
+		"evidence": catalog.species.map(func(entry: Dictionary) -> Dictionary: return {"id": entry.id, "group": entry.group, "status": entry.get("body_evidence", {}).get("status", "pending"), "errors": entry.get("body_evidence", {}).get("errors", [])}),
 		"live": live, "storage_error": population.storage_error}
 
 func _approach_live(tribe: Node, runtime: Node, id: String, handler: String) -> bool:

@@ -4,7 +4,7 @@ Stand: 9. September 2026 · M1e-Kampagnengrundlage nach der zweiten Integrations
 
 ## Laufende Kugelintegration
 
-Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickeltem Kopierumzug und regionalem Population-Speicher ist im Integrationszweig umgesetzt und wird am gemeinsamen Stand abgenommen. [WORK_SPHERICAL_GAMEPLAY.md](docs/WORK_SPHERICAL_GAMEPLAY.md) ergänzt die untenstehenden bisherigen Meilensteinstände mit den aktuellen Nachweisen. Fernproduktion, Körper-ID-Migration, lange Reise und vollständige M1i-/Ziel-PC-Abnahme bleiben offen; die reguläre Startwahl wird erst danach umgestellt.
+Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickeltem Kopierumzug und regionalem Population-Speicher ist umgesetzt. Die Skalierungsrunde ergänzt Körper-ID-Migration, gemeinsame Nah-/Fernarbeit, portionierte Navigation und gesicherte A–B–A-Reisen; auch das fertig übergebene Animationspaket wird am gemeinsamen Stand geprüft. [WORK_SPHERICAL_GAMEPLAY.md](docs/WORK_SPHERICAL_GAMEPLAY.md) und [WORK_CAMPAIGN_SCALING.md](docs/WORK_CAMPAIGN_SCALING.md) ergänzen die untenstehenden bisherigen Meilensteinstände mit den aktuellen Nachweisen. Segmentierte globale Speicherung, lange Reisen auf Zielhardware und die vollständige M1i-Abnahme bleiben offen; die reguläre Startwahl wird erst danach umgestellt.
 
 ## Architekturprüfung und nächste verbindliche Arbeitsschritte
 
@@ -120,15 +120,17 @@ Mindestens **drei unterschiedliche geeignete Arten je belebtem Spielplaneten**: 
 |---|---|---|---|
 | M0 | Gemeinsame Grundlage integriert und automatisch geprüft; Veröffentlichung und Übernahme nach main von Lars freigegeben | Bisherige Basis | Alle sieben Stränge mit denselben Spielständen, keine verlorenen IDs, doppelte Boni oder getrennten Buchinstanzen; manueller Windows-Spieltest bleibt offen |
 | M1/M1b/M1c | Planetenlabor, reale Größen, Streaming und Katalogbesuche vorhanden | M0 | Technische Kugel-/Ortsprüfung erhalten; Ziel-PC-Framezeiten und Besuch/Laden abnehmen |
-| M1d | **Teilweise:** belebte Kugelwelt, Boden/Wasser und D1.2; volle Kugelkampagne offen | M1b/M1c, gemeinsamer Oberflächenadapter | Spieler, Flora, Fauna, Haus, Wasser und Audio auf derselben radialen Oberfläche; Wiederbesuch; expliziter Altstandschutz |
-| M1e | **Grundlage umgesetzt; erweiterter Umzug offen:** gemeinsamer Kugelstart, versionierte Orte, frühe Kopiermigration, Rückweg und Neustart | M1d und Integration | [Vertrag, Nachweise und verbleibende Migrationsfälle](docs/WORK_M1E_CAMPAIGN.md); vollständige Ortsübernahme mit M1f/M1g weiterführen |
+| M1d–M1g | Gemeinsamer Kugelablauf für Kreatur, Heimat, Stamm und D1/D2/D3 umgesetzt | M1b/M1c, gemeinsamer Oberflächenadapter | [Reale Spielkette, Wiederbesuch und Restgrenzen](docs/WORK_SPHERICAL_GAMEPLAY.md) |
+| M1e | Gemeinsamer Kugelstart, versionierte Orte, geprüfte Kopiermigration entwickelter Vertragsstände, Rückweg und Neustart | M1d und Integration | [Umzugsvertrag](docs/WORK_M1E_CAMPAIGN.md); weitere historische Stände bleiben eine Abnahmeaufgabe |
+| M1h | **Teilweise:** regionale Speicherung, stabile Körper-IDs, Nah-/Fernübergabe und sichere Körperreise umgesetzt | Gemeinsames Kugelspiel | Globalen Save segmentieren, lange Reisen und Speicherbudgets auf Zielhardware prüfen; [Messwerte und Grenzen](docs/WORK_CAMPAIGN_SCALING.md) |
+| M1i | **Offen:** vollständige gemeinsame Ziel-PC-Abnahme und regulärer Kugelstart | M1h | Darstellung, Bedienung, Langzeitstabilität und 1080p60 nachweisen |
 | M2A | Verhaltenspunkte, Käufe und Vermächtnis vorhanden | M0 | Erfolgreiche Aktionen geben einmal Punkte, Effekte wirken; gemischte Spielweisen bleiben erreichbar |
 | M2B | B1/B2/B3 zusammengeführt; gemeinsame Editor-/Anatomieverträge | M1-Adressen, vorhandene Kreaturenwerkstatt | Stabile Revisionen, Anschlussdaten, Vorschau/Laufzeit; neue Rollen können Körperfähigkeiten auslesen |
 | M3 | Kreaturenwerkstatt ausgebaut | M2B | Zwei-/Vierbeiner und mehrere Beinpaare belastbar; Extremformen, Fußkontakt, Wasser/Flug bleiben weitere Arbeit |
 | M4 | Kreaturenspiel mit Scan, Forschung, Sozialspiel und Bedürfnis-KI vorhanden | M2/M3 | Zusammenhängender Ablauf; offene Tierjagd/Navigation/Ökologie und Tod/Erholung ergänzen |
 | M5 | Bestätigter Stammesbeginn und erster Dorfablauf vorhanden | Heimatgruppe, begehbarer Ort | Gleiche Spezies und drei Bewohner, sichere Übergabe, Transport/Werkzeug/Hütten/Garten; Speichern und Neustart |
 | D1 | D1/D1.1/D1.2 zusammengeführt: Art-Eignung, Körpernachweise und begrenzte planare/radiale Habitate | Stabile Spezies-/Körper-IDs | Milch-, Zug-/Reit- und Begleiterart deterministisch vorhanden und erreichbar; alte Arten behalten Identität |
-| D2 | Kampagnenzähmung und dauerhafte Befehle zusammengeführt; radialer Host offen | D1, M5 | Eignung/Kosten/Phase prüfen; Tier folgt/wartet/kehrt zurück; Unterbrechung, Tod, Laden und Besitz geprüft |
+| D2 | Kampagnenzähmung, dauerhafte Befehle und radialer Host zusammengeführt | D1, M5 | Eignung/Kosten/Phase prüfen; Tier folgt/wartet/kehrt zurück; Unterbrechung, Tod, Laden und Besitz geprüft |
 | D3 | Tierpflege, Milch und Transport zusammengeführt; produktiver D2-Leseanschluss ergänzt | D2, gemeinsame Dorfvorräte | Betreuung → Produktion → Transport → Verbrauch, keine Doppelernte; Futter/Wasser/Haltungskosten wirken |
 | D4 | **Neu:** Reiten und Pflügen | D2, M2B, Feld-/Routenmodell | Passender Reitsitz, sichere Auf-/Abstiege; Zugtier mit Pflug bearbeitet reale Felder, Arbeitsfortschritt speicherbar |
 | M6 | Erneuerbare Wirtschaft, Berufe, Hütten/Zelte, sechs Bewohner, Tierhaltung und erste Nachbarhilfe; radiale Migration offen | M5, D1–D4 schrittweise | Erneuerbare Versorgung, Wasser, weitere Rohstoffe, Berufe, Wachstum, frei gebaute Häuser, Tiere und Nachbargruppen |
@@ -162,6 +164,6 @@ D1–D4 sind Teil des Stammesausbaus, keine zusätzlichen Spielzeitalter. Die We
 
 ## Nächste parallele Arbeitsrunde
 
-Die priorisierten Umzugsaufträge stehen in [NEXT_PARALLEL_WORK.md](docs/NEXT_PARALLEL_WORK.md). Alle Chats starten vom selben integrierten Stand. D1–D3 und die M1e-Kampagnengrundlage sind bereits übernommen. Zuerst die ergänzenden gemeinsamen Fachorte vereinbaren, dann Kreaturenphase und Dorf/Tierhaltung anschließen; die erweiterte M1e-Kopiermigration wird mit diesen Verbrauchern abgeschlossen. Regionsspeicherung und Fernsimulation folgen den Abhängigkeiten im Architektur-Backlog. Kein Chat führt fremde unfertige Branches zusammen.
+Die priorisierten Anschlussarbeiten stehen in [NEXT_PARALLEL_WORK.md](docs/NEXT_PARALLEL_WORK.md). Alle Chats starten vom selben integrierten Stand. Kugelspiel, entwickelter Kopierumzug, regionaler Populationsspeicher und die erste begrenzte Fernsimulation verwenden die gemeinsamen Fachverträge. Als Nächstes folgen die segmentierte globale Speicherung und Langzeit-/Ziel-PC-Nachweise nach [WORK_CAMPAIGN_SCALING.md](docs/WORK_CAMPAIGN_SCALING.md). Neue Inhalte dürfen keine zweite Tier-, Produktions- oder Speicherarchitektur eröffnen. Unfertige Fachzweige bleiben getrennt.
 
 Roadmap und gemeinsame Kerndateien haben pro Runde genau einen Integrationsverantwortlichen. Jeder Fachchat liefert einen eigenen Branch, exakten Commit, geänderte Dateien, Ergebnisse und Restgrenzen in seinem Übergabebericht. Erst danach folgt eine erneute gemeinsame Abnahme. Empfehlungen zum Ziel-PC gelten als offene Messung; bisherige Software-Renderer-Nachweise sind keine belegten 60 FPS auf Lars’ Rechner.

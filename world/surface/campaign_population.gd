@@ -10,6 +10,7 @@ const Planner = preload("res://world/fauna/domestication/domestic_surface_planne
 const Evidence = preload("res://world/fauna/domestication/domestic_body_evidence.gd")
 const Encoding = preload("res://world/fauna/domestication/domestication_contract.gd")
 const Species = preload("res://creatures/wildlife/species_assembly_factory_v7.gd")
+const Wildlife = preload("res://creatures/wildlife/procedural_wildlife_v7.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const MAX_ANIMALS: int = 12
 const MAX_PLANTS: int = 16
@@ -153,21 +154,10 @@ func _reserved(id: String) -> bool:
 func _spawn_animal(record: Dictionary) -> bool:
 	var encounter: Dictionary = record.get("encounter", {})
 	if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0: return false
-	var point: Vector3 = Space.resolve(self, record.location)
-	if not Space.ground_ready(self, point): return false
-	var hit: Dictionary = Space.floor_hit(player, point)
-	if hit.is_empty(): return false
-	point = hit.position + Space.up(self, hit.position) * 0.03
-	var shape := CapsuleShape3D.new()
-	shape.radius = 0.48
-	shape.height = 1.35
-	var query := PhysicsShapeQueryParameters3D.new()
-	query.shape = shape
-	query.transform = Transform3D(Space.frame(self, point), point + Space.up(self, point) * 0.75)
-	query.collision_mask = 1 | 2 | 4 | 8
-	if not player.get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty(): return false
-	var actor: CharacterBody3D = preload("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
 	var species: Dictionary = Catalog.species_for(body().fauna_catalog, str(record.get("catalog_species_id", "")))
+	var point: Vector3 = _spawn_position(Space.resolve(self, record.location), species)
+	if not point.is_finite(): return false
+	var actor: CharacterBody3D = preload("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
 	actor.configure(int(record.species_seed), int(record.individual_seed), Vector2i.ZERO, record.role, record.identity.get("habitat_cell", ""), species)
 	actor.supplied_identity = record.identity.duplicate(true)
 	actor.frozen_blueprint = Encoding.decode(record.blueprint)
@@ -194,6 +184,22 @@ func _spawn_animal(record: Dictionary) -> bool:
 	records[record.id] = record
 	animals[record.id] = actor
 	return true
+
+func _spawn_position(saved: Vector3, species: Dictionary = {}) -> Vector3:
+	if not Space.ground_ready(self, saved): return Vector3.INF
+	var hit: Dictionary = Space.floor_hit(player, saved)
+	if hit.is_empty(): return Vector3.INF
+	var up: Vector3 = Space.up(self, hit.position)
+	var floor_point: Vector3 = hit.position + up * 0.03
+	var geometry: Dictionary = Wildlife.collision_geometry(species)
+	var shape := CapsuleShape3D.new()
+	shape.radius = geometry.radius
+	shape.height = geometry.height
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = shape
+	query.collision_mask = 1 | 2 | 4 | 8
+	query.transform = Transform3D(Space.frame(self, floor_point), floor_point + up * float(geometry.center))
+	return floor_point if player.get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty() else Vector3.INF
 
 func _spawn_plant(record: Dictionary) -> bool:
 	var point: Vector3 = Space.resolve(self, record.location)
