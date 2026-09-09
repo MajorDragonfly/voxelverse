@@ -88,6 +88,9 @@ func _ready() -> void:
 	_build_system_view()
 	_open_body(body_id, saved)
 	_ready_complete = true
+	var minimap := preload("res://ui/minimap/minimap_hud.gd").new()
+	minimap.lab = self
+	add_child(minimap)
 	if "--planet-lab" in OS.get_cmdline_user_args():
 		print("PLANET_LAB_READY ", body_id)
 	if _save_read_only:
@@ -598,6 +601,7 @@ func _build_ui() -> void:
 	_legend_entries.add_theme_constant_override("separation", 10)
 	scroll.add_child(_legend_entries)
 	var bottom := PanelContainer.new()
+	bottom.name = "PlanetLabBottom"
 	bottom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	bottom.offset_left = 28
 	bottom.offset_right = -28

@@ -207,7 +207,7 @@ func _activate() -> void:
 	panel.refresh()
 
 func _hide_creature_ui(node: Node) -> void:
-	if node is CanvasLayer and node.visible and not node.is_in_group(&"discovery_journal"):
+	if node is CanvasLayer and node.visible and not node.is_in_group(&"discovery_journal") and not node.is_in_group(&"minimap_hud"):
 		_hidden_layers.append(node)
 		node.hide()
 	for child: Node in node.get_children():
@@ -574,3 +574,7 @@ func _update_selection() -> void:
 		var kind: String = member_record(identity)["cargo"]
 		cargo.visible = not kind.is_empty()
 		cargo.material_override.albedo_color = Color("b9854d") if kind == "wood" else Color("bac8cf") if kind == "stone" else Color("c27b4e")
+
+
+func map_focus() -> Vector3:
+	return _focus

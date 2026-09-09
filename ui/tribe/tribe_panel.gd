@@ -13,6 +13,8 @@ var _dialog: PanelContainer
 var _detail: Label
 var _message: Label
 var _hud: PanelContainer
+var _hud_scroll: ScrollContainer
+var _hud_content: VBoxContainer
 var _stock: Label
 var _goal: Label
 var _supply: Label
@@ -44,7 +46,13 @@ func _build() -> void:
 	_hud.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
 	_hud.add_theme_stylebox_override("panel", Style.box())
 	add_child(_hud)
-	var column := Style.column(_hud, 7)
+	_hud_scroll = ScrollContainer.new()
+	_hud_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_hud_scroll.follow_focus = true
+	_hud.add_child(_hud_scroll)
+	var column := Style.column(_hud_scroll, 7)
+	_hud_content = column
+	column.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
 	_stock = Style.label("", 22, Style.SOCIAL)
 	column.add_child(_stock)
 	_goal = Style.label("", 17)
@@ -110,7 +118,10 @@ func _layout() -> void:
 	viewport_size /= _scale_factor
 	entry.position = Vector2(viewport_size.x - 282, 76)
 	entry.size = Vector2(260, 46)
-	_hud.size = Vector2(viewport_size.x - 36, 0)
+	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
+	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
+	var height: float = minf(_hud_content.get_combined_minimum_size().y + 36.0, viewport_size.y * 0.54)
+	_hud.size = Vector2(maxf(viewport_size.x - 36 - reserve, 280.0), height)
 	_place_hud()
 	_shade.size = viewport_size
 	_dialog.custom_minimum_size.x = minf(viewport_size.x - 48, 670)

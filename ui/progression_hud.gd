@@ -65,6 +65,9 @@ func _install() -> void:
 	_discovery_journal.name = "DiscoveryJournal"
 	_discovery_journal.player = _player
 	add_child(_discovery_journal)
+	var minimap := preload("res://ui/minimap/minimap_hud.gd").new()
+	minimap.player = _player
+	add_child(minimap)
 	_skill_tree = SkillTree.new()
 	_skill_tree.player = _player
 	_skill_tree.journal = _discovery_journal
