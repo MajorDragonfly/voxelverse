@@ -14,12 +14,21 @@ func rebuild(data: Dictionary) -> void:
 		var deposit: Dictionary = data["deposits"][kind]
 		var location: Vector3 = Home.vector(deposit["position"])
 		var amount: int = int(deposit["remaining"])
+		if kind == "food" and int(data["garden"]) == 1:
+			_box(location + Vector3(0, 0.08, 0), Vector3(1.8, 0.16, 1.8), Color("634933"))
+			for side in [-1, 1]:
+				_box(location + Vector3(side * 0.95, 0.16, 0), Vector3(0.12, 0.25, 2), Color("ab8151"))
+			for i in range(8):
+				var root_position: Vector3 = location + Vector3((i % 4 - 1.5) * 0.4, 0.23, (i / 4 - 0.5) * 0.75)
+				_box(root_position, Vector3(0.12, 0.25 if i < amount else 0.08, 0.12), Color("7caa53") if i < amount else Color("46643c"))
 		if amount > 0:
 			for i in range(5):
 				var offset := Vector3((i % 3 - 1) * 0.35, 0.22 + (i / 3) * 0.22, (i % 2) * 0.4)
 				var size := Vector3(0.26, 0.26, 1.2) if kind == "wood" else Vector3(0.4, 0.4, 0.4)
 				_box(location + offset, size, Color("95643e") if kind == "wood" else Color("8e9fa4") if kind == "stone" else Color("ab7857"))
 		var title: String = {"wood": "Leseholz", "stone": "Lose Steine", "food": "Essbare Wurzeln"}[kind]
+		if kind == "food" and int(data["garden"]) == 1:
+			title = "Wurzelgarten · erntereif"
 		_label(location + Vector3(0, 2.3, 0), "%s · %d" % [title, amount], Color("c6dec7"))
 	for i in range(2):
 		var location: Vector3 = Home.vector(data["sites"][i])

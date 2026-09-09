@@ -14,7 +14,7 @@ const PHASES: Array[Dictionary] = [
 		"loop": ["Material sammeln", "Werkzeuge herstellen", "Behausung bauen", "Bewohner versorgen", "Dorf erweitern"],
 		"social": "Gemeinschaftsaufgaben, Hilfslieferungen und Bündnisse abschließen.",
 		"aggression": "Das Lager verteidigen und begrenzte Stammeskonflikte entscheiden.",
-		"next": "Dies ist die eigentliche Stammesphase mit einem spielbaren Dorfeinstieg. Als Nächstes: weitere Berufe, erneuerbare Versorgung, Nachbarstämme und Stammesfähigkeiten."},
+		"next": "Dein Dorf kann einen Wurzelgarten anlegen und seine Nahrung dauerhaft sichern. Als Nächstes: weitere Berufe, zusätzliche Rohstoffquellen, Bevölkerungswachstum und Nachbarstämme."},
 	{"name": "Antike / Mittelalter", "scope": "Siedlung und Fraktion", "implemented": false,
 		"control": "Du organisierst mehrere Siedlungen und ihre Bevölkerung.",
 		"loop": ["Landwirtschaft und Handwerk ausbauen", "Siedlungen verbinden", "Handel und regionale Konflikte führen"],

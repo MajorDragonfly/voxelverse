@@ -157,7 +157,7 @@ func _run() -> void:
 	var committed: String = FileAccess.get_file_as_string(SAVE)
 	# A future extension is never silently replaced by the older backup.
 	var future: Dictionary = JSON.parse_string(committed)
-	future["game_state"]["campaign"]["bodies"][str(state.get_world_seed())]["tribe"]["schema"] = 2
+	future["game_state"]["campaign"]["bodies"][str(state.get_world_seed())]["tribe"]["schema"] = Model.SCHEMA + 1
 	var output: FileAccess = FileAccess.open(SAVE, FileAccess.WRITE)
 	output.store_string(JSON.stringify(future))
 	output.close()

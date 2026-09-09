@@ -64,6 +64,12 @@ jobs:
           python3 tools/review_player_progression.py
           --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
           --tribe --output /tmp/tribal-age-review
+      - name: Exercise renewable village supply and saved meal detours
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1200x24'
+          python3 tools/review_player_progression.py
+          --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
+          --supply --output /tmp/tribal-supply-review
       - name: Exercise village on actual generated terrain
         run: >-
           xvfb-run -a -s '-screen 0 1920x1200x24'
@@ -81,4 +87,5 @@ jobs:
             /tmp/development-path-review
             /tmp/tribal-age-review
             /tmp/tribal-world-review
+            /tmp/tribal-supply-review
           retention-days: 14

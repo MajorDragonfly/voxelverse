@@ -1,6 +1,6 @@
 # Voxelverse – Entwicklungsroadmap
 
-Aktueller separater Integrationszweig: [Bestätigter Einstieg ins Stammeszeitalter](docs/TRIBAL_AGE.md) mit Gruppensteuerung, Transporten, Werkzeug, zwei Hütten und Versorgung. Nachbarstämme, erneuerbare Wirtschaft und weitere Epochen folgen gemäß den dort beschriebenen nächsten Schritten.
+Aktueller separater Integrationszweig: [Bestätigter Einstieg ins Stammeszeitalter](docs/TRIBAL_AGE.md) mit Gruppensteuerung, Transporten, Werkzeug, zwei Hütten, erneuerbarem Wurzelgarten und dauerhaften Versorgungsaufträgen. Weitere Rohstoffquellen, Berufe, Wachstum, Nachbarstämme und spätere Epochen folgen gemäß den dort beschriebenen nächsten Schritten.
 
 Stand: 8. September 2026 · M1-Technikprototyp: `555f9efa2a16d8dde6fbf121157671ef944b2f83` · M0-Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354` · visuelle Ausgangsbasis: `b1f1ef9c2c14a27269505da1d086091a0884563f`
 

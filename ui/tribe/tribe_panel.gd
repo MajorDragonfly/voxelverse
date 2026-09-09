@@ -1,5 +1,6 @@
 extends CanvasLayer
 const Style = preload("res://ui/progression_style.gd")
+const Model = preload("res://world/tribe/tribe_state.gd")
 
 var controller: Node
 var confirmation_open: bool = false
@@ -14,6 +15,7 @@ var _message: Label
 var _hud: PanelContainer
 var _stock: Label
 var _goal: Label
+var _supply: Label
 var _residents: HFlowContainer
 var _buttons: Dictionary = {}
 var _previous_mouse: int = Input.MOUSE_MODE_CAPTURED
@@ -47,6 +49,8 @@ func _build() -> void:
 	column.add_child(_stock)
 	_goal = Style.label("", 17)
 	column.add_child(_goal)
+	_supply = Style.label("", 16, Style.MUTED)
+	column.add_child(_supply)
 	_residents = HFlowContainer.new()
 	column.add_child(_residents)
 	var orders := HFlowContainer.new()
@@ -55,13 +59,15 @@ func _build() -> void:
 	all.name = "SelectAll"
 	orders.add_child(all)
 	all.pressed.connect(controller.select_all)
-	var titles: Dictionary = {"wood": "Holz sammeln", "stone": "Stein sammeln", "food": "Nahrung sammeln", "tool": "Werkzeug · 3 Holz / 2 Stein", "hut": "Hütte · 6 Holz / 3 Stein", "feed": "Versorgen", "wait": "Anhalten"}
+	var titles: Dictionary = {"wood": "Holz sammeln", "stone": "Stein sammeln", "food": "Nahrung sammeln", "supply": "Versorgung sichern", "tool": "Werkzeug · 3 Holz / 2 Stein", "hut": "Hütte · 6 Holz / 3 Stein", "garden": "Wurzelgarten · 4 Holz / 1 Stein", "feed": "Jetzt essen", "wait": "Anhalten"}
 	for order: String in titles:
 		var button := Style.button(titles[order])
 		button.name = "Order_" + order
 		orders.add_child(button)
 		button.pressed.connect(func() -> void: controller.issue_order(order))
 		_buttons[order] = button
+	_buttons["supply"].tooltip_text = "Dauerauftrag: Nahrung ernten und einlagern, bis zwölf Portionen vorrätig oder unterwegs sind. Danach am Dorfplatz warten und bei Bedarf weiterarbeiten."
+	_buttons["garden"].tooltip_text = "Benötigt ein Steinwerkzeug. Baut die Wurzelfundstelle zum Garten aus. Alle 20 Spielsekunden wächst eine Wurzel nach, bis dort acht bereitliegen."
 	_message = Style.label("", 16, Style.MUTED)
 	column.add_child(_message)
 	column.add_child(Style.label("Linksklick / Rahmen: auswählen · Umschalt: Auswahl ändern · Rechtsklick: laufen oder sammeln · WASD: Kamera · Mausrad: Zoom · Leertaste: Pause", 15, Style.MUTED))
@@ -169,16 +175,20 @@ func refresh() -> void:
 	if data.is_empty():
 		return
 	var stock: Dictionary = data["stock"]
-	_stock.text = "STAMMESZEITALTER   ·   Holz %d   Stein %d   Nahrung %d   ·   Schlafplätze %d / 3" % [stock["wood"], stock["stone"], stock["food"], int(data["huts"]) * 2]
+	_stock.text = "STAMMESZEITALTER   ·   Holz %d / 48   Stein %d / 48   Nahrung %d / 48   ·   Schlafplätze %d / 3" % [stock["wood"], stock["stone"], stock["food"], int(data["huts"]) * 2]
+	_supply.text = "Arbeitende Bewohner essen ab 40 % Sättigung selbstständig und setzen ihren Auftrag fort."
+	if int(data["garden"]) == 1:
+		_supply.text = "Wurzelgarten · %d erntereif · %s · Essenspausen erfolgen selbstständig." % [data["deposits"]["food"]["remaining"], "Garten gefüllt" if int(data["deposits"]["food"]["remaining"]) >= Model.GARDEN_CAPACITY else "Nächste Wurzel in %d s" % ceili(Model.GROW_SECONDS - float(data["growth"]))]
 	_goal.text = "Erster Schritt: Bewohner auswählen und Holz, Stein und Nahrung einlagern."
 	if int(data["tools"]) > 0:
 		_goal.text = "Steinwerkzeug bereit · Baue zwei Hütten für deine drei Bewohner und versorge sie mit Nahrung."
 	elif int(stock["wood"]) >= 3 and int(stock["stone"]) >= 2:
 		_goal.text = "Material bereit · Weise Bewohner an, das erste Steinwerkzeug herzustellen."
 	if not data["project"].is_empty():
-		_goal.text = "%s · %d %% · Weitere Bewohner können mitarbeiten." % ["Werkzeugherstellung" if data["project"]["kind"] == "tool" else "Hüttenbau", int(float(data["project"]["progress"]) / (10.0 if data["project"]["kind"] == "tool" else 20.0) * 100)]
+		var kind: String = data["project"]["kind"]
+		_goal.text = "%s · %d %% · Weitere Bewohner können mitarbeiten." % [{"tool": "Werkzeugherstellung", "hut": "Hüttenbau", "garden": "Gartenbau"}[kind], int(float(data["project"]["progress"]) / float(Model.WORK[kind]) * 100)]
 	elif int(data["huts"]) == 2 and int(data["meals"]) >= 3:
-		_goal.text = "Dein erstes Dorf steht: Werkzeug, vier Schlafplätze und versorgte Bewohner. Sichere eure verbleibenden Vorräte."
+		_goal.text = "Dein Dorf steht · Lege einen Wurzelgarten an und weise Bewohner dauerhaft der Versorgung zu." if int(data["garden"]) == 0 else "Dauerhafte Nahrung bereit · Versorgung sichern hält zwölf Portionen im Vorrat und nimmt die Arbeit bei Bedarf wieder auf."
 	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
 	if _resident_ids != identities:
 		_resident_ids = identities
@@ -194,8 +204,15 @@ func refresh() -> void:
 	for i in range(3):
 		var member: Dictionary = data["members"][i]
 		var button: Button = _residents.get_child(i)
-		var orders: Dictionary = {"wait": "wartet", "move": "unterwegs", "wood": "sammelt Holz", "stone": "sammelt Stein", "food": "sammelt Nahrung", "tool": "stellt Werkzeug her", "hut": "baut", "feed": "isst"}
-		button.text = "%s · Sättigung %d %%\n%s" % [member["name"], roundi(float(member["hunger"])), "trägt Material" if member["cargo"] != "" else orders[member["order"]]]
+		var orders: Dictionary = {"wait": "wartet", "move": "unterwegs", "wood": "sammelt Holz", "stone": "sammelt Stein", "food": "sammelt Nahrung", "tool": "stellt Werkzeug her", "hut": "baut Hütte", "garden": "legt Garten an", "supply": "sichert Nahrung", "feed": "isst"}
+		var activity: String = orders[member["order"]]
+		if member["order"] == "supply" and controller._food_reserve_ready():
+			activity = "Vorrat bereit · bleibt zuständig"
+		elif member["order"] in ["supply", "food"] and int(data["garden"]) == 1 and int(data["deposits"]["food"]["remaining"]) == 0:
+			activity = "wartet auf reife Wurzeln"
+		if member["stage"] == "meal":
+			activity = "Essenspause · kehrt zur Arbeit zurück"
+		button.text = "%s · Sättigung %d %%\n%s" % [member["name"], roundi(float(member["hunger"])), "trägt Material" if member["cargo"] != "" else activity]
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused

@@ -160,6 +160,7 @@ func _activate() -> void:
 	navigation.rebuild(home, HomeState.vector(village()["anchor"]))
 	if navigation.graph.get_point_count() == 0:
 		return
+	Model.upgrade(village())
 	# The home controller refreshes on a slower tick. Install the visible nest
 	# with this runtime, so a cold start cannot briefly expose the default home.
 	get_parent().global_position = HomeState.vector(village()["anchor"])
@@ -312,11 +313,11 @@ func issue_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 			if navigation.route(actors[identity].global_position, destination).is_empty():
 				status = "Mindestens ein ausgewählter Bewohner erreicht diesen Ort nicht."
 				return false
-	if order in ["tool", "hut"]:
-		if (order == "tool" and int(data["tools"]) == 1) or (order == "hut" and int(data["huts"]) >= 2):
+	if order in Model.COSTS:
+		if (order == "tool" and int(data["tools"]) == 1) or (order == "hut" and int(data["huts"]) >= 2) or (order == "garden" and int(data["garden"]) == 1):
 			status = "Dieser Ausbau ist bereits abgeschlossen."
 			return false
-		if order == "hut" and int(data["tools"]) == 0:
+		if order in ["hut", "garden"] and int(data["tools"]) == 0:
 			status = "Stelle zuerst ein Steinwerkzeug her."
 			return false
 		if not data["project"].is_empty() and data["project"]["kind"] != order:
@@ -357,19 +358,34 @@ func _physics_process(delta: float) -> void:
 	var simulation_delta: float = _state.simulation_delta(delta)
 	if simulation_delta <= 0:
 		return
+	if Model.grow(village(), simulation_delta):
+		_changed()
 	for member: Dictionary in village()["members"]:
 		var actor: CharacterBody3D = actors[member["id"]]
 		member["hunger"] = maxf(0.0, float(member["hunger"]) - simulation_delta * 0.08)
 		var order: String = member["order"]
+		# Keep the assigned work intact through a meal; deliver cargo first.
+		if member["cargo"] == "" and order not in ["wait", "feed"]:
+			if float(member["hunger"]) < 40.0 and int(village()["stock"]["food"]) > 0 and member["stage"] != "meal":
+				member["stage"] = "meal"
+				_saves.schedule_autosave(1.0)
+			elif member["stage"] == "meal" and int(village()["stock"]["food"]) == 0:
+				member["stage"] = "outbound"
 		var target: Vector3 = actor.global_position
 		if member["cargo"] != "" and order != "wait":
 			target = anchor()
+		elif member["stage"] == "meal":
+			target = anchor()
+		elif order == "supply":
+			target = anchor() if _food_reserve_ready() else HomeState.vector(village()["deposits"]["food"]["position"])
 		elif order in Model.KINDS:
 			target = HomeState.vector(village()["deposits"][order]["position"])
 		elif order in ["feed", "tool"]:
 			target = anchor()
 		elif order == "hut" and int(village()["huts"]) < 2:
 			target = HomeState.vector(village()["sites"][int(village()["huts"])])
+		elif order == "garden":
+			target = HomeState.vector(village()["deposits"]["food"]["position"])
 		elif order == "move":
 			target = HomeState.vector(member["destination"])
 		if order != "wait" and (member["cargo"] != "" or order != "move"):
@@ -450,43 +466,64 @@ func _work(member: Dictionary, delta: float) -> void:
 		member["stage"] = "outbound"
 		_changed()
 		return
-	if order in Model.KINDS:
-		var deposit: Dictionary = data["deposits"][order]
+	if member["stage"] == "meal":
+		_eat(member)
+		member["stage"] = "outbound"
+		_changed()
+		return
+	if order in Model.KINDS or order == "supply":
+		var kind: String = "food" if order == "supply" else order
+		if (order == "supply" and _food_reserve_ready()) or Model.available_storage(data, kind) <= 0:
+			return
+		var deposit: Dictionary = data["deposits"][kind]
 		if int(deposit["remaining"]) == 0:
-			member["order"] = "wait"
-			status = "Die örtliche Fundstelle ist aufgebraucht."
+			if kind == "food" and int(data["garden"]) == 1:
+				return # Garden harvesters resume as soon as a root is ripe.
+			if order != "supply":
+				member["order"] = "wait"
+			status = "Die örtliche Fundstelle ist aufgebraucht." if kind != "food" else "Die Wurzeln sind aufgebraucht. Lege einen Wurzelgarten für neue Nahrung an."
 			return
 		member["work"] = float(member["work"]) + delta * _work_rate(member)
 		if float(member["work"]) >= 3.0:
 			deposit["remaining"] -= 1
-			member["cargo"] = order
+			member["cargo"] = kind
 			member["stage"] = "return"
 			member["work"] = 0.0
 			_changed()
 	elif order == "feed":
-		if float(member["hunger"]) < 95.0 and int(data["stock"]["food"]) > 0:
-			data["stock"]["food"] -= 1
-			data["meals"] += 1
-			member["hunger"] = minf(100.0, float(member["hunger"]) + 25.0)
+		if _eat(member):
 			_changed()
 		member["order"] = "wait"
 		status = "Versorgung abgeschlossen." if int(data["stock"]["food"]) > 0 else "Lagere weitere Nahrung ein, um die Bewohner zu versorgen."
-	elif order in ["tool", "hut"]:
+	elif order in Model.COSTS:
 		var project: Dictionary = data["project"]
 		if project.is_empty() or project["kind"] != order:
 			member["order"] = "wait"
 			return
 		project["progress"] = minf(20.0, float(project["progress"]) + delta * _work_rate(member))
-		if float(project["progress"]) >= (10.0 if order == "tool" else 20.0):
-			data["tools" if order == "tool" else "huts"] += 1
+		if float(project["progress"]) >= float(Model.WORK[order]):
+			data[{"tool": "tools", "hut": "huts", "garden": "garden"}[order]] += 1
 			data["project"] = {}
 			for worker: Dictionary in data["members"]:
 				if worker["order"] == order:
 					worker["order"] = "wait"
-			status = "Steinwerkzeug fertig. Jetzt kannst du die erste Hütte bauen." if order == "tool" else "Hütte fertig: zwei weitere Schlafplätze."
+					worker["stage"] = "return" if worker["cargo"] != "" else "outbound"
+			status = {"tool": "Steinwerkzeug fertig. Jetzt kannst du Hütten und einen Garten bauen.", "hut": "Hütte fertig: zwei weitere Schlafplätze.", "garden": "Wurzelgarten fertig. Weise einen Bewohner dauerhaft der Versorgung zu."}[order]
 			_changed()
 	elif order == "move":
 		member["order"] = "wait"
+
+func _food_reserve_ready() -> bool:
+	return int(village()["stock"]["food"]) + Model.cargo_count(village(), "food") >= Model.FOOD_TARGET
+
+func _eat(member: Dictionary) -> bool:
+	var data: Dictionary = village()
+	if float(member["hunger"]) >= 95.0 or int(data["stock"]["food"]) <= 0:
+		return false
+	data["stock"]["food"] -= 1
+	data["meals"] += 1
+	member["hunger"] = minf(100.0, float(member["hunger"]) + 25.0)
+	return true
 
 func _work_rate(member: Dictionary) -> float:
 	var progression: Node = get_node("/root/ProgressionService")
