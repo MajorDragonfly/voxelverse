@@ -2,12 +2,18 @@ extends SceneTree
 const Navigation = preload("res://world/tribe/village_navigation.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 var failures: Array[String] = []
+var capture_on_demand: bool = false
 
 func _initialize() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
 	root.size = Vector2i(1280, 800)
+	capture_on_demand = "--capture-on-demand" in OS.get_cmdline_user_args() and "--capture" in OS.get_cmdline_user_args()
+	if capture_on_demand:
+		# This world probe issues simulation orders, then captures their result.
+		# Software CI renderers need not draw every setup/transport frame.
+		RenderingServer.render_loop_enabled = false
 	var saves: Node = root.get_node("SaveGameService")
 	var state: Node = root.get_node("GameState")
 	saves.autosave_enabled = false
@@ -112,9 +118,12 @@ func _run() -> void:
 		if "--capture" in args:
 			var directory: String = args[args.find("--capture") + 1]
 			DirAccess.make_dir_recursive_absolute(directory)
-			await process_frame
+			RenderingServer.render_loop_enabled = true
+			for frame in range(4):
+				await process_frame
 			await RenderingServer.frame_post_draw
 			root.get_texture().get_image().save_png(directory.path_join("06_generated_village.png"))
+			if capture_on_demand: RenderingServer.render_loop_enabled = false
 		var ids: Array = tribe.actors.keys()
 		_expect(saves.save_now() and saves.load_now(), "Generated tribal world cannot save/load.")
 		for frame in range(45):
@@ -172,7 +181,8 @@ func _extension(_tribe: Node) -> void:
 	pass
 
 func _finish() -> void:
-	print(JSON.stringify({"test": "tribal_age_world", "passed": failures.is_empty(), "failures": failures}))
+	RenderingServer.render_loop_enabled = true
+	print(JSON.stringify({"test": "tribal_age_world", "passed": failures.is_empty(), "failures": failures, "capture_on_demand": capture_on_demand}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
 
 func _economy_world(tribe: Node) -> void:

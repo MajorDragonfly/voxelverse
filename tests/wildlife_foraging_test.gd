@@ -57,6 +57,7 @@ func _run() -> void:
 		DirAccess.make_dir_recursive_absolute(captures)
 	_build_fixture()
 	await _frames(5)
+	await _detached_initialization()
 	var progression: Dictionary = root.get_node("ProgressionService").export_state().duplicate(true)
 	await _meal_and_persistence(args)
 	await _interruptions_and_obstacles()
@@ -65,6 +66,25 @@ func _run() -> void:
 	scene.queue_free()
 	await _frames(4)
 	_finish()
+
+func _detached_initialization() -> void:
+	var before: Dictionary = State.body(state).get("wildlife_foraging", {}).duplicate(true)
+	var chunk := Node3D.new()
+	scene.add_child(chunk)
+	var bush: Node3D = bushes.instantiate()
+	bush.snap_to_terrain = false
+	chunk.add_child(bush)
+	bush.position = Vector3(19, 100, 23)
+	# Match change_scene: detach the parent while initialization is queued.
+	scene.remove_child(chunk)
+	await _frames(1)
+	_expect(not bush._initialized and bush.bush_mesh.mesh == null, "Detached bush completed deferred initialization")
+	_expect(State.body(state).get("wildlife_foraging", {}) == before, "Detached bush registered food in the campaign")
+	chunk.free()
+	var discarded: Node3D = _bush(Vector3(21, 100, 24))
+	discarded.queue_free()
+	await _frames(1)
+	_expect(State.body(state).get("wildlife_foraging", {}) == before, "Discarded bush registered food before deletion")
 
 func _meal_and_persistence(args: PackedStringArray) -> void:
 	var bush: Node3D = _bush(Vector3(7, 100, 0))

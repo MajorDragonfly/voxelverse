@@ -16,6 +16,7 @@ const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.
 const TribePanel = preload("res://ui/tribe/tribe_panel.gd")
 const Visuals = preload("res://world/tribe/village_visuals.gd")
 const NeighborRuntime = preload("res://world/tribe/neighbors/neighbor_runtime.gd")
+const MOVEMENT_ARRIVAL_RADIUS: float = 0.45
 var neighbors: Node3D
 
 var home: Node
@@ -564,7 +565,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 		return false
 	var offset: Vector3 = target - actor.global_position
 	offset.y = 0
-	var arrived: bool = offset.length() < 0.45
+	var arrived: bool = offset.length() < MOVEMENT_ARRIVAL_RADIUS
 	var direction := Vector3.ZERO
 	var lookahead: float = 1.2
 	if not arrived:

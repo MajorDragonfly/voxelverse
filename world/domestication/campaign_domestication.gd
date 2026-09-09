@@ -182,9 +182,12 @@ func approach(id: String) -> bool:
 		return false
 	var best := Vector3.INF
 	var length: float = INF
+	# A resident stops within the shared movement arrival radius. Reserve that
+	# distance as well as a small animal-motion margin so arrival is in reach.
+	var approach_radius: float = Controller.REACH - tribe.MOVEMENT_ARRIVAL_RADIUS - 0.25
 	for point_id: int in tribe.navigation.graph.get_point_ids():
 		var point: Vector3 = tribe.navigation.graph.get_point_position(point_id)
-		if point.distance_to(actor.global_position) > Controller.REACH - 0.25 or point.distance_to(tribe.anchor()) > 20: continue
+		if point.distance_to(actor.global_position) > approach_radius or point.distance_to(tribe.anchor()) > 20: continue
 		var route: PackedVector3Array = tribe.navigation.route(handler.global_position, point)
 		if route.is_empty(): continue
 		if point.distance_to(handler.global_position) < length:

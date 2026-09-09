@@ -55,6 +55,9 @@ func _ready() -> void:
 
 
 func _initialize_bush() -> void:
+	# A scene/chunk can leave the tree before this deferred callback runs.
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	if snap_to_terrain:
 		_snap_to_terrain()
 
