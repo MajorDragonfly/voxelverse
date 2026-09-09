@@ -975,6 +975,22 @@ func _record_before_edit(label: String, force_new_entry: bool = false) -> void:
 		_gesture_recorded = true
 
 
+func _apply_restored_blueprint(restored: Dictionary, status_text: String) -> void:
+	var selected: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	var uid: String = str(selected.get("uid", ""))
+	var terminal: bool = _editing_terminal
+	super._apply_restored_blueprint(restored, status_text)
+	if uid.is_empty():
+		return
+	for index in range(blueprint.get("parts", []).size()):
+		if str(blueprint["parts"][index].get("uid", "")) == uid:
+			selected_part_index = index
+			_editing_terminal = terminal
+			_refresh_preview()
+			_refresh_stats_panel()
+			break
+
+
 func _change_shape(value: float, field: String) -> void:
 	if _syncing_ui or (selected_body_segment < 0 and field != "length"):
 		return

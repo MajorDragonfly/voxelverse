@@ -53,7 +53,7 @@ def main():
             env["XDG_DATA_HOME"] = userdata
             try:
                 argv = ([sys.executable, str(args.project / "tools/art/export_benchmark_source.py"), "--check"]
-                        if name == "art_sources" else [args.godot, "--headless", "--path", str(args.project), *command])
+                        if name == "art_sources" else [args.godot, "--headless", "--verbose", "--path", str(args.project), *command])
                 process = subprocess.run(argv,
                                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                          text=True, env=env, timeout=timeout)
