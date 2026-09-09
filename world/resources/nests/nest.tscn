@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://world/visuals/voxel/voxel_surface_styler.gd" id="2_styler"]
 [ext_resource type="Texture2D" path="res://world/visuals/voxel/textures/nest_fiber_01.png" id="3_nest_texture"]
 [ext_resource type="Script" path="res://world/home_group/home_group_controller.gd" id="4_home_group"]
+[ext_resource type="Script" path="res://world/resources/plants/plant_food_streamer.gd" id="5_food"]
 
 [node name="Nest" type="Node3D" unique_id=1293792252]
 script = ExtResource("1_pmytf")
@@ -20,3 +21,6 @@ palette_steps = 4
 
 [node name="HomeGroup" type="Node" parent="."]
 script = ExtResource("4_home_group")
+
+[node name="PlantFoodStreamer" type="Node3D" parent="."]
+script = ExtResource("5_food")

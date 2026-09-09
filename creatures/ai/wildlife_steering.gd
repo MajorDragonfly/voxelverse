@@ -11,9 +11,10 @@ static func clear_sight(actor: CharacterBody3D, target: Node3D) -> bool:
 	if not is_instance_valid(target) or not target.is_inside_tree():
 		return false
 	var ray := PhysicsRayQueryParameters3D.create(actor.global_position + Vector3.UP * 0.65, target.global_position + Vector3.UP * 0.65, 1)
-	ray.exclude = [actor.get_rid()]
+	var excluded: Array[RID] = [actor.get_rid()]
 	if target is CollisionObject3D:
-		ray.exclude.append(target.get_rid())
+		excluded.append(target.get_rid())
+	ray.exclude = excluded
 	return actor.get_world_3d().direct_space_state.intersect_ray(ray).is_empty()
 
 static func safe_direction(actor: CharacterBody3D, direction: Vector3, step_height: float, distance: float = 1.1) -> bool:
