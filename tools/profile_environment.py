@@ -60,7 +60,7 @@ def main():
                         code = 124
                 (directory / "engine.log").write_text(log, encoding="utf-8")
                 for line in log.splitlines():
-                    if line.startswith("REVIEW_PREVIEW ") or line.startswith("HYDROLOGY_RENDER "):
+                    if line.startswith(("REVIEW_PREVIEW ", "HYDROLOGY_RENDER ", "PLANET_TRANSITION_REVIEW ")):
                         print(line, flush=True)
                 if code != 0 or ERROR.search(log):
                     print(log[-12000:], file=sys.stderr)

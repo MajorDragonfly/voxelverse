@@ -48,6 +48,7 @@ func _run() -> void:
 			return
 		var descriptor: Dictionary = lab.catalog.body(first_body)
 		_expect(lab.terrain.surface.body == descriptor and lab.system.real_scale and descriptor.radius >= 50000.0, "Landing substituted a test body, radius, seed, or gravity.")
+		_expect(lab.terrain.surface.sample(lab.walker.location()).height >= 4.0, "Initial catalog landing did not prefer available walkable dry land.")
 		var starting: Dictionary = lab.walker.location()
 		lab.walker.orbit_axis = lab.walker.up_direction.cross(lab.walker.forward).normalized()
 		lab.walker.automatic = true
@@ -84,6 +85,8 @@ func _run() -> void:
 			lab.set_view(mode)
 			lab.walker.enabled = false
 			_expect(_distance(second_pose.location, lab.walker.location(), second_radius) < 0.001, "Catalog view switching moved the player.")
+			if mode == "system":
+				_expect(lab._system_legend.visible and lab._legend_entries.get_child_count() == lab.system.bodies.size() + 1, "Catalog system omitted its readable body legend.")
 		_expect(lab.lights.has(lab.system.primary_star_id()), "Catalog lighting used a missing reference star.")
 		_expect(not lab.visit_planet(second_system, lab.system.primary_star_id()) and lab.body_id == second_body, "A star visit changed the active surface.")
 		_expect(lab.visit_planet(first_system, first_body), "Returning to the first planet failed.")

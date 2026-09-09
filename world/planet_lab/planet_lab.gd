@@ -16,6 +16,8 @@ var visits: RefCounted
 var visit_record: Dictionary = {}
 var _visits_error: Error = OK
 var _system_extent: float = 1.0
+var _system_legend: PanelContainer
+var _legend_entries: VBoxContainer
 var galaxy_panel: CanvasLayer
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const MAIN_SCENE: String = "res://main/main.tscn"
@@ -186,6 +188,7 @@ func _build_system_view() -> void:
 	pin_material.albedo_color = Color("ffbe68")
 	landing_marker.material_override = pin_material
 	space.add_child(landing_marker)
+	_refresh_system_legend()
 
 
 func _body_visual(body: Dictionary, model: Dictionary) -> MeshInstance3D:
@@ -276,6 +279,8 @@ func _sample_camera_water(point: Vector3) -> Dictionary:
 func _coastal_spawn() -> Dictionary:
 	var best: Dictionary = Cube.address(body_id, 4, 0.0, 0.3)
 	var score: float = INF
+	var dry: Dictionary = {}
+	var dry_score: float = INF
 	for face in range(6):
 		for y in range(-4, 5):
 			for x in range(-4, 5):
@@ -287,7 +292,17 @@ func _coastal_spawn() -> Dictionary:
 				if cost < score:
 					score = cost
 					best = candidate
+				if not system.catalog_id.is_empty() and h >= 4.0 and cost < dry_score:
+					if terrain.surface.sample(candidate).normal.dot(d) > 0.94:
+						dry = candidate
+						dry_score = cost
+	# An unknown catalog coast can have shallow water at the best height score.
+	# Prefer a dry, walkable landing even when another hemisphere scores better.
+	if not dry.is_empty():
+		best = dry
 	best.height = terrain.surface.sample(best).height + 1.5
+	if not system.catalog_id.is_empty() and system.bodies[body_id].kind == "planet":
+		best.height = maxf(best.height, 0.6)
 	return best
 
 
@@ -299,6 +314,7 @@ func set_view(mode: String) -> void:
 	walker.enabled = on_surface
 	sky.visible = on_surface
 	space.visible = not on_surface
+	_system_legend.visible = mode == "system" and not system.catalog_id.is_empty()
 	if on_surface:
 		walker.camera.make_current()
 	else:
@@ -366,7 +382,7 @@ func _update_views() -> void:
 		minimum.z = minf(minimum.z, p.z)
 		maximum.x = maxf(maximum.x, p.x)
 		maximum.z = maxf(maximum.z, p.z)
-		body_labels[id].visible = view_mode == "system"
+		body_labels[id].visible = view_mode == "system" and (system.catalog_id.is_empty() or id == body_id)
 		body_labels[id].text = "%s · %.1f km" % [body.name, float(body.radius) * 0.002]
 		body_labels[id].position = p + Vector3(0, 0.2, symbol_radius + 2.5)
 		if orbit_lines.has(id):
@@ -564,6 +580,23 @@ func _build_ui() -> void:
 	badge.position = Vector2(-280, 38)
 	badge.add_theme_color_override("font_color", Color("a4bccb"))
 	root.add_child(badge)
+	_system_legend = PanelContainer.new()
+	_system_legend.name = "SystemLegend"
+	_system_legend.set_anchors_and_offsets_preset(Control.PRESET_RIGHT_WIDE)
+	_system_legend.offset_left = -360
+	_system_legend.offset_right = -28
+	_system_legend.offset_top = 28
+	_system_legend.offset_bottom = -216
+	_system_legend.add_theme_stylebox_override("panel", _panel())
+	_system_legend.hide()
+	root.add_child(_system_legend)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_system_legend.add_child(scroll)
+	_legend_entries = VBoxContainer.new()
+	_legend_entries.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_legend_entries.add_theme_constant_override("separation", 10)
+	scroll.add_child(_legend_entries)
 	var bottom := PanelContainer.new()
 	bottom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	bottom.offset_left = 28
@@ -616,6 +649,27 @@ func _panel() -> StyleBoxFlat:
 	style.content_margin_top = 16
 	style.content_margin_bottom = 16
 	return style
+
+
+func _refresh_system_legend() -> void:
+	if _legend_entries == null:
+		return
+	for child in _legend_entries.get_children():
+		_legend_entries.remove_child(child)
+		child.queue_free()
+	if system.catalog_id.is_empty():
+		return
+	var title := Label.new()
+	title.text = system.catalog_name + " · Körper"
+	title.add_theme_color_override("font_color", Color("80d4c1"))
+	_legend_entries.add_child(title)
+	var kinds: Dictionary = {"star": "Stern", "planet": "Gesteinsplanet", "gas_giant": "Gasriese", "moon": "Mond"}
+	for body: Dictionary in system.bodies.values():
+		var label := Label.new()
+		label.text = "%s\n%s · Ø %.1f km" % [body.name, kinds[body.kind], float(body.radius) * 0.002]
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.add_theme_font_size_override("font_size", 15)
+		_legend_entries.add_child(label)
 
 
 func open_galaxy_catalog() -> void:

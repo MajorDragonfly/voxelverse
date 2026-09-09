@@ -900,10 +900,15 @@ func _galaxy_visit() -> void:
 func _planet_transition_review() -> void:
 	var terrain: Node = _scene.terrain
 	terrain.set_process(false)
+	_scene.set_process(false)
 	_scene.walker.preview.hide()
-	await _capture("m1c_lod_before", _scene.snapshot())
-	var cube = preload("res://world/space/cube_sphere.gd")
 	var up: Vector3 = _scene.walker.up_direction
+	var review_camera := Camera3D.new()
+	_scene.add_child(review_camera)
+	review_camera.far = 50000.0
+	review_camera.look_at_from_position(up * 28.0 - _scene.walker.forward * 20.0, _scene.walker.forward * 80.0, up)
+	review_camera.make_current()
+	await _capture("m1c_lod_before", _scene.snapshot())
 	var target: Vector3 = (up + _scene.walker.forward * 40.0 / float(terrain.surface.body.radius)).normalized()
 	RenderingServer.render_loop_enabled = false
 	terrain.lookahead_direction = target
@@ -928,8 +933,22 @@ func _planet_transition_review() -> void:
 	_samples[-1]["old_cover_rgb_error"] = old_parity
 	if first_change < 0.000001 or second_change < 0.000001 or old_parity > 0.004:
 		_failures.append("Planet LOD did not render both transition phases or preserve its original covering set.")
+	# Deliberately remove the arriving cover at phase 1. This proves that the
+	# selected view can detect missing terrain, not just a changing HUD number.
+	for tile: Dictionary in terrain._arriving:
+		tile.node.hide()
+	await _capture("m1c_lod_gap_control", {"negative_control": true})
+	var gap_error: float = _mean_rgb_difference(final_image, _comparison_images.m1c_lod_gap_control)
+	if gap_error < 0.00001:
+		_failures.append("Planet LOD gate could not detect its missing-cover negative control.")
+	print("PLANET_TRANSITION_REVIEW ", JSON.stringify({"renderer": RenderingServer.get_current_rendering_method(), "changes": [first_change, second_change], "old_cover_error": old_parity, "gap_error": gap_error}))
+	for tile: Dictionary in terrain._arriving:
+		tile.node.show()
 	terrain._finish_transition()
 	terrain.set_process(true)
+	_scene.set_process(true)
+	_scene.walker.camera.make_current()
+	review_camera.queue_free()
 
 
 func _capture(label: String, details: Dictionary) -> void:
