@@ -2,6 +2,7 @@ extends Node
 
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 const SkillTree = preload("res://ui/behavior_skill_tree.gd")
+const Journal = preload("res://ui/discovery/discovery_journal.gd")
 
 var _player: Node3D
 var _hud: CanvasLayer
@@ -9,6 +10,7 @@ var _progress_label: Label
 var _notification_label: Label
 var _notification_timer: float = 0.0
 var _skill_tree: CanvasLayer
+var _discovery_journal: CanvasLayer
 
 
 func _ready() -> void:
@@ -48,6 +50,8 @@ func _install() -> void:
 	_notification_label.offset_top = 104.0
 	_notification_label.offset_right = 320.0
 	_notification_label.offset_bottom = 150.0
+	_notification_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_notification_label.offset_bottom = 205.0
 	_notification_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_notification_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_notification_label.add_theme_font_size_override("font_size", 17)
@@ -57,8 +61,13 @@ func _install() -> void:
 	_notification_label.add_theme_constant_override("shadow_offset_y", 2)
 	_notification_label.visible = false
 	_hud.add_child(_notification_label)
+	_discovery_journal = Journal.new()
+	_discovery_journal.name = "DiscoveryJournal"
+	_discovery_journal.player = _player
+	add_child(_discovery_journal)
 	_skill_tree = SkillTree.new()
 	_skill_tree.player = _player
+	_skill_tree.journal = _discovery_journal
 	add_child(_skill_tree)
 	var open_button := preload("res://ui/progression_style.gd").button("Entwicklung · K")
 	open_button.name = "OpenPlayerProgression"
@@ -107,8 +116,16 @@ func _on_part_unlocked(part_id: String, _reason: String) -> void:
 	_refresh_summary()
 
 
-func _on_species_discovered(_species_key: String, species_name: String) -> void:
-	_show_notification("ART ENTDECKT · %s" % species_name)
+func _on_species_discovered(species_key: String, species_name: String) -> void:
+	var text: String = "Neue Art: %s · +3 Entdeckungspunkte" % species_name
+	var progression := get_node_or_null("/root/ProgressionService")
+	if progression != null:
+		var species: Dictionary = progression.get("discovered_species")
+		var part_id: String = str(species.get(species_key, {}).get("unlocked_part", ""))
+		if not part_id.is_empty():
+			text += "\nNeues Teil: %s" % PartLibrary.get_part(part_id).get("name", part_id)
+	text += "\nJ · Im Entdeckungsbuch ansehen"
+	_show_notification(text)
 	_refresh_summary()
 
 

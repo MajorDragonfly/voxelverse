@@ -17,7 +17,7 @@ M2A enthält getrennte Sozial-/Aggressionspunkte, sechs Knoten, Kaufprüfung, Ef
 |---|---|---|
 | Kreaturenchat | `agent/creature-editor-spore` (PR #12) | Körpergestaltung, Anbauteile, Oberflächen, Symmetrie und Bewegung |
 | Planetenchat | `agent/underwater-voxel-planets` (PR #13), weiterer Branch `agent/planet-real-scale` sichtbar | Planeten, Gelände, Wasser, Maßstab und Galaxiegrundlagen |
-| Dieser Chat | `agent/player-progression-ui` | Skilltree-Bedienung, Fortschrittsanzeige und anschließend Entdeckungsbuch |
+| Dieser Chat | `agent/player-progression-ui` | Skilltree-Bedienung und Fortschrittsanzeige; Artenbuch wird im eigenen Arbeitsstrang weitergeführt |
 
 Diese Übersicht beruht auf Lars' aktueller Aufteilung und veröffentlichten Repository-Ständen. Sie ist keine Sperre für andere Chats. Noch nicht veröffentlichte Arbeit anderer Chats ist hier nicht sichtbar.
 
@@ -32,9 +32,11 @@ Diese Übersicht beruht auf Lars' aktueller Aufteilung und veröffentlichten Rep
 
 Vorgesehene eigene Dateien: `ui/behavior_skill_tree.gd`, bei Bedarf eine eigene Szene sowie `tests/behavior_skill_tree_test.gd`. `ui/progression_hud.gd` ist der zu prüfende Anschluss; im geprüften Stand der PRs #12 und #13 wird diese Datei nicht verändert. Eine vollständige Integrationsprüfung einschließlich PR #11 und künftiger Commits steht noch aus.
 
-## Ebenfalls umgesetzt: Entdeckungsbuch
+## Übergabe des Entdeckungsbuchs
 
-Vorhandene Arten- und Regionsentdeckungen sind durchsuchbar; Körperteilfreischaltungen werden als eigene Kategorie angezeigt. Die bisher nicht gespeicherte Zuordnung Art → Teil wird nicht erfunden. Das Buch zeigt höchstens 30 Einträge pro Seite und benötigt keine neuen dauerhaften Datenfelder.
+Lars hat das Entdeckungsbuch ausdrücklich dem Arbeitsstrang `agent/discovery-journal` zugeteilt. Dessen Integration baut auf dem abgeschlossenen PR-14-Stand `60f61e0` auf. Die einfache Übersicht aus `ui/discovery_journal.gd` ist dort entfernt; die einzige Implementierung liegt in `ui/discovery/discovery_journal.gd`.
+
+`ProgressionHUD` erzeugt genau eine Buchinstanz und übergibt sie als `journal` an den Skilltree. Dessen Button und J öffnen dasselbe Buch. Arten, Regionen und Teile bleiben erhalten; Vorschau, Freischaltursprung und Spielerführung werden im Artenbuchstrang gepflegt. Keine zweite Übersicht oder Punkteverwaltung anlegen. Weitere Informationen: [DISCOVERY_JOURNAL_M4A.md](DISCOVERY_JOURNAL_M4A.md).
 
 ## Grenzen und Zusammenführung
 
@@ -44,7 +46,7 @@ Aktuelle Planetenanforderung bleibt Originalgröße plus bereisbare Galaxie. Äl
 
 Vor Integration die aktuellen Branchköpfe und Dateiunterschiede erneut prüfen, Konflikte gezielt zusammenführen und den gemeinsamen Laufzeitstand testen. Keine Komplettordner über andere Arbeitsstände kopieren. PR #9 bleibt ungemergt; `main` wird hier nicht verändert. Dokumentationsfortschritt ersetzt keine technische oder spielerische Abnahme.
 
-## Status
+## Abnahme des ursprünglichen PR-14-Pakets
 
 **Technisch und grafisch geprüft, manueller Spieltest offen.** Skilltree, HUD-Anschluss und Entdeckungsbuch sind auf Codecommit `7a1d1ba35b7340bdb4e505a0b1b360e93928196f` umgesetzt. [Bedienung, Nachweise und Grenzen](PLAYER_PROGRESSION_UI.md). Die Tests gegen exportierte Spieldaten sind in `tools/validate_export.py` ergänzt; bei Integration dessen Testliste und README mit dem Planetenbranch gemeinsam erhalten.
 

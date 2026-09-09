@@ -1,7 +1,9 @@
 # Spielerfortschritt: Skilltree und Entdeckungsbuch
 
 Stand: 9. September 2026. Geprüfter Code: `7a1d1ba35b7340bdb4e505a0b1b360e93928196f`.
-Eigener Branch `agent/player-progression-ui`, [Draft PR #14](https://github.com/MajorDragonfly/voxelverse/pull/14), aufbauend auf M2A / PR #10.
+Die nachstehenden ursprünglichen Abnahmen beziehen sich auf den Skilltree-Branch. Das Artenbuch wird inzwischen im eigenen Arbeitsstrang weitergeführt, siehe [aktueller Anschluss](DISCOVERY_JOURNAL_M4A.md).
+
+Ursprünglicher Branch `agent/player-progression-ui`, [Draft PR #14](https://github.com/MajorDragonfly/voxelverse/pull/14), aufbauend auf M2A / PR #10.
 
 ## Bedienung
 
@@ -9,29 +11,29 @@ Im normalen Spiel **K** drücken oder nach Freigabe des Mauszeigers auf **Entwic
 
 Der Skilltree zeigt zwei unabhängige Verhaltensäste mit je drei Knoten. Einen Knoten auswählen, Voraussetzung und vorgesehene Wirkung lesen und bei ausreichenden Punkten freischalten. Die Oberfläche verwendet immer die bestehenden Kreaturenpunkte, auch wenn die Kampagne schon eine spätere Phase erreicht hat. Vermächtnisse sind als spätere Wirkung gekennzeichnet; Umskillen ist bisher nicht verfügbar.
 
-Das Entdeckungsbuch enthält Arten, besuchte Regionen und freigeschaltete Körperteile. Suche und Kategorien filtern vorhandene Daten. Pro Seite werden höchstens 30 Einträge aufgebaut. Die bisherigen Spielstände speichern keine Zuordnung zwischen entdeckter Art und freigeschaltetem Teil; das Buch erfindet diese Verbindung nicht. Nicht mehr verfügbare Teile bleiben als gespeicherte Freischaltung sichtbar.
+Der Button **Entdeckungsbuch · J** wechselt zum gemeinsamen Artenbuch; **J** öffnet es direkt aus dem Spiel. Es enthält beobachtete Arten mit gespeicherter Vorschau, besuchte Regionen und verfügbare/gesperrte Körperteile. Suche und Kategorien filtern vorhandene Daten; pro Seite erscheinen höchstens 100 Einträge. Neue Beobachtungen speichern Anatomie und tatsächliche Teilherkunft. Bei Altdaten bleibt eine nicht bekannte Herkunft ausdrücklich unbekannt.
 
 ![Skilltree mit getrennten Punkten und Detailansicht](../art/review/player_progression/skilltree.png)
 
-![Entdeckungsbuch](../art/review/player_progression/journal.png)
+![Gemeinsames Entdeckungsbuch](../art/review/discovery_journal/species.png)
 
 Die Bilder stammen aus einem isolierten Prüfszenario. Dessen Testpunkte und Beispielart werden nicht in normale Kampagnen übernommen.
 
 ## Tatsächlicher Funktionsumfang
 
-Die Oberfläche und der Kaufweg sind implementiert. M2A stellt die Punkte- und Effektregeln bereit; **im normalen Spiel fehlen weiterhin die Produzenten für abgeschlossene Befreunden-/Helfen-/Konfliktereignisse sowie die Anwendung der Boni auf Spielaktionen**. Das Fenster benennt diese Grenze. Eine neue Kampagne beginnt daher weiterhin mit null Verhaltenspunkten. Es gibt keinen Punkte-Cheat, keine erfundenen Belohnungen und keine neuen Speicherfelder in diesem Paket.
+Die Oberfläche und der Kaufweg sind implementiert. M2A stellt die Punkte- und Effektregeln bereit; **im normalen Spiel fehlen weiterhin die Produzenten für abgeschlossene Befreunden-/Helfen-/Konfliktereignisse sowie die Anwendung der Boni auf Spielaktionen**. Das Fenster benennt diese Grenze. Eine neue Kampagne beginnt daher weiterhin mit null Verhaltenspunkten. Der Skilltree gewährt selbst keine Punkte. Die additiven Beobachtungsfelder gehören zum separat dokumentierten Artenbuch.
 
 M4 ist damit nicht abgeschlossen. Der nächste fachliche Anschluss sind reale soziale Handlungen und Konfliktabschlüsse, stabile Begegnungsidentitäten und Verbraucher der vorhandenen Effektabfragen. Änderungen an der Tierwelt müssen wegen des parallelen Kreaturenbranches gesondert zusammengeführt werden.
 
 ## Verhalten und Architektur
 
-- `ui/progression_hud.gd` installiert den HUD-Button und das neue `behavior_skill_tree.gd`; `discovery_journal.gd` liest die Kampagnendaten. `progression_style.gd` bündelt die Darstellung.
+- `ui/progression_hud.gd` installiert den Skilltree und genau eine Instanz von `ui/discovery/discovery_journal.gd`. Der Skilltree erhält diese als direkte Referenz; die alte eingebettete Übersicht ist entfernt. `progression_style.gd` bündelt die Darstellung.
 - Käufe laufen ausschließlich über `ProgressionService.purchase_behavior_node()`. Erst nach erfolgreicher gemeinsamer Sicherung erscheint die Erfolgsmeldung. Ein Schreibfehler setzt Punkte und Knoten vollständig zurück und erlaubt einen erneuten Versuch.
 - Signale aktualisieren Punktestände, Knoten, Phase und Entdeckungen nach Laden, neuen Entdeckungen oder Zurücksetzen. Die Oberfläche besitzt keine Kopie der Fortschrittsregeln.
 - Das Fenster übernimmt die globale Pause nur, wenn kein anderes Menü pausiert. Seine Controls bleiben während der Pause bedienbar. Mausmodus und vorheriger Fokus werden wiederhergestellt. Das Schließen wartet eine Eingabeframe ab, bevor die Spielerabfrage weiterläuft; Szenenabbau löst die eigene Pause ebenfalls.
 - Konkurrierende Funktionstasten werden bereits vor den globalen Menühändlern abgefangen. `core/display_settings.gd`, Kreatureneditor und Planetenlaufzeit werden dafür nicht verändert.
 
-## Prüfungen
+## Ursprüngliche PR-14-Prüfungen
 
 | Prüfung | Nachweis und Umfang |
 |---|---|

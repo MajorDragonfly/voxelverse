@@ -1,15 +1,14 @@
 extends CanvasLayer
 
 const Style = preload("res://ui/progression_style.gd")
-const Journal = preload("res://ui/discovery_journal.gd")
 const PHASES: Array[String] = ["Kreatur", "Stamm", "Antike / Mittelalter", "Weltmacht", "Weltraum", "Multiversum"]
 
 var player: Node
+var journal: CanvasLayer
 var _panel: Control
 var _body: BoxContainer
 var _branches: BoxContainer
 var _details: VBoxContainer
-var _journal: VBoxContainer
 var _scroll: ScrollContainer
 var _phase_label: Label
 var _wallet_labels: Dictionary = {}
@@ -40,12 +39,8 @@ func _ready() -> void:
 	visible = false
 	var progression := get_node("/root/ProgressionService")
 	progression.behavior_changed.connect(refresh)
-	progression.discovery_points_changed.connect(func(_points: int) -> void: _refresh_journal())
-	progression.species_discovered.connect(func(_key: String, _title_text: String) -> void: _refresh_journal())
-	progression.region_discovered.connect(func(_key: String) -> void: _refresh_journal())
-	progression.part_unlocked.connect(func(_id: String, _reason: String) -> void: _refresh_journal())
 	get_node("/root/GameState").phase_changed.connect(func(_phase: int) -> void: refresh())
-	get_node("/root/SaveGameService").game_loaded.connect(func(_path: String) -> void: refresh(); _refresh_journal())
+	get_node("/root/SaveGameService").game_loaded.connect(func(_path: String) -> void: refresh())
 	get_viewport().size_changed.connect(_layout)
 	_layout()
 
@@ -61,7 +56,6 @@ func open_panel() -> bool:
 	visible = true
 	_message.text = ""
 	refresh()
-	_refresh_journal()
 	_tree_tab.grab_focus()
 	return true
 
@@ -152,11 +146,11 @@ func _build() -> void:
 	content.add_child(tabs)
 	_tree_tab = Style.button("Skilltree")
 	_tree_tab.name = "SkilltreeTab"
-	_tree_tab.pressed.connect(func() -> void: _show_tab(false))
+	_tree_tab.pressed.connect(func() -> void: _scroll.scroll_vertical = 0)
 	tabs.add_child(_tree_tab)
-	_journal_tab = Style.button("Entdeckungsbuch")
+	_journal_tab = Style.button("Entdeckungsbuch · J")
 	_journal_tab.name = "JournalTab"
-	_journal_tab.pressed.connect(func() -> void: _show_tab(true))
+	_journal_tab.pressed.connect(_open_journal)
 	tabs.add_child(_journal_tab)
 	_scroll = ScrollContainer.new()
 	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -200,12 +194,9 @@ func _build() -> void:
 	_purchase.pressed.connect(_buy_selected)
 	_details.add_child(_purchase)
 	_details.add_child(Style.label("Freischaltungen werden sofort gespeichert. Umskillen ist bisher nicht verfügbar.", 16, Style.MUTED))
-	_journal = Journal.new()
-	pages.add_child(_journal)
 	_message = Style.label("", 18, Style.SOCIAL)
 	_message.name = "PurchaseMessage"
 	content.add_child(_message)
-	_show_tab(false)
 
 
 func _build_branch(track: String) -> void:
@@ -322,19 +313,14 @@ func _reason(reason: String) -> String:
 		_: return "Freischaltung momentan nicht möglich. Es wurden keine Punkte ausgegeben."
 
 
-func _show_tab(journal: bool) -> void:
-	_body.visible = not journal
-	_journal.visible = journal
-	_tree_tab.modulate = Color.WHITE if not journal else Style.MUTED
-	_journal_tab.modulate = Color.WHITE if journal else Style.MUTED
-	if _message != null:
-		_message.text = ""
-	_scroll.scroll_vertical = 0
-
-
-func _refresh_journal() -> void:
-	if is_instance_valid(_journal) and visible:
-		_journal.call("refresh")
+func _open_journal() -> void:
+	if not visible or _closing or not is_instance_valid(journal):
+		return
+	close_panel()
+	# Finish the closing input event before transferring pause ownership.
+	await get_tree().process_frame
+	if is_inside_tree() and is_instance_valid(journal):
+		journal.open_journal()
 
 
 func _layout() -> void:

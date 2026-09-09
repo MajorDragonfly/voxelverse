@@ -135,40 +135,47 @@ func _run() -> void:
 func _journal_checks() -> void:
 	progression.discovered_species["ui_fixture"] = {"name": "Kieselrücken", "role": "grazer", "world_seed": 15838}
 	progression.discovered_regions["ui_region"] = {"world_seed": 15838, "x": -2, "z": 7}
-	ui._refresh_journal()
+	var before: Dictionary = progression.export_state()
 	await _click(ui._journal_tab)
-	var journal: VBoxContainer = ui._journal
+	var journal: CanvasLayer = ui.journal
+	_expect(journal.is_open and not ui.visible and paused, "Skilltree did not transfer to the shared journal.")
+	_expect(get_nodes_in_group(&"discovery_journal").size() == 1, "Player installed more than one discovery book.")
 	journal._search.grab_focus()
 	await _key(KEY_K, 107)
-	_expect(ui.visible and journal._search.text.to_lower() == "k", "K closed the modal while typing a search.")
-	_expect(journal._entries.get_child_count() == 1, "Journal search did not filter saved species.")
+	_expect(journal.is_open and journal._search.text.to_lower() == "k", "K closed the book while typing a search.")
+	_expect(journal._list.item_count == 1, "Journal search did not filter saved species.")
 	journal._search.text = "no-result"
 	journal._search.text_changed.emit("no-result")
-	_expect(journal._entries.get_child(0).text.contains("Keine passenden"), "Search has no clear empty state.")
-	journal._search.clear()
-	journal._search.text_changed.emit("")
-	journal._category.select(1)
-	journal._category.item_selected.emit(1)
-	_expect(journal._records[0]["title"] == "Region -2 / 7", "Region coordinates are not from the saved discovery.")
-	journal._category.select(2)
-	journal._category.item_selected.emit(2)
-	_expect(journal._records.size() == progression.get_unlocked_count(), "Journal does not reflect actual unlocked parts.")
-	for index in range(70):
+	_expect(journal._title.text.contains("Keine passenden"), "Search has no clear empty state.")
+	journal._tabs.current_tab = 2
+	_expect(journal._rows[0]["name"] == "Region -2 / 7", "Region coordinates are not from the saved discovery.")
+	journal._tabs.current_tab = 1
+	journal._status.select(1)
+	journal._status.item_selected.emit(1)
+	_expect(journal._rows.size() == progression.get_unlocked_count(), "Journal does not reflect actual unlocked parts.")
+	_expect(progression.export_state() == before, "Menu transfer or browsing changed progress or rewards.")
+	for index in range(220):
 		progression.discovered_species["page_%d" % index] = {"name": "Testart %d" % index, "role": "unknown", "world_seed": 15838}
-	journal._category.select(0)
-	journal._category.item_selected.emit(0)
-	_expect(journal._entries.get_child_count() == 30 and not journal._next.disabled, "Large journal is not paginated.")
-	journal._next.pressed.emit()
-	_expect(journal._page == 1 and journal._entries.get_child_count() == 30, "Journal page advance failed.")
-	for index in range(70):
+	journal._tabs.current_tab = 0
+	journal.refresh()
+	_expect(journal._list.item_count == journal.PAGE_SIZE and not journal._next_page.disabled, "Large journal is not paginated.")
+	await _click(journal._next_page)
+	_expect(journal._page == 1 and journal._list.item_count == journal.PAGE_SIZE, "Journal page advance failed.")
+	for index in range(220):
 		progression.discovered_species.erase("page_%d" % index)
 	journal.refresh()
 	progression.reset_for_new_game()
-	_expect(journal._records.is_empty(), "New game left old discoveries visible in the journal.")
+	await _frames()
+	_expect(journal._rows.is_empty(), "New game left old discoveries visible in the journal.")
 	_expect(saves.load_now(), "Could not restore journal fixture after reset.")
 	progression.discovered_species["ui_fixture"] = {"name": "Kieselrücken", "role": "grazer", "world_seed": 15838}
 	journal.refresh()
-	await _click(ui._tree_tab)
+	await _click(journal._close)
+	await _key(KEY_J)
+	_expect(journal.is_open and get_nodes_in_group(&"discovery_journal")[0] == journal, "J did not open the same journal instance.")
+	await _key(KEY_ESCAPE)
+	await _key(KEY_K)
+	_expect(ui.visible and paused, "Skilltree did not reopen after the journal.")
 
 
 func _capture_if_requested() -> void:
@@ -188,10 +195,12 @@ func _capture_if_requested() -> void:
 		root.get_texture().get_image().save_png(directory.path_join("skilltree_%dx%d.png" % [size_value.x, size_value.y]))
 	root.size = Vector2i(1600, 900)
 	await _frames()
-	ui._show_tab(true)
+	await _click(ui._journal_tab)
 	await _frames()
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(directory.path_join("journal.png"))
+	await _click(ui.journal._close)
+	await _key(KEY_K)
 
 
 func _screenshot(filename: String) -> void:

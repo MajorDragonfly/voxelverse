@@ -131,7 +131,7 @@ def main():
                 "Voxelverse development build\n\n"
                 f"Start {executable_name} with its .pck and any adjacent libraries kept together.\n"
                 "Controls: WASD move, Space jump, E inspect, right mouse/Q bite, P next planet.\n"
-                "K or the Entwicklung HUD button opens the skill tree and discovery journal. Esc closes it.\n"
+                "K opens the skill tree. J or its Entdeckungsbuch button opens the shared discovery book. Esc closes it.\n"
                 "F4 opens the M1 Planet Lab; Tab switches surface/orbit, M changes body, B toggles binary stars.\n"
                 "This build passed headless release acceptance. Visual/GPU acceptance is still pending.\n",
                 encoding="utf-8")
