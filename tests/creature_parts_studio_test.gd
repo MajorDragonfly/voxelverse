@@ -242,8 +242,8 @@ func _check_wildlife() -> void:
 		wildlife.set("visual_scale_max", wildlife.get("visual_scale_min"))
 		wildlife.position = Vector3(2, 0.018, -3)
 		wildlife.rotation.y = deg_to_rad(37)
-		wildlife.set_physics_process(false)
 		root.add_child(wildlife)
+		wildlife.set_physics_process(false)
 		var preview: Node3D = wildlife.get("_preview")
 		preview.set_process(false)
 		for frame in range(4):
@@ -251,13 +251,18 @@ func _check_wildlife() -> void:
 			wildlife.velocity = Vector3.DOWN
 			wildlife.move_and_slide()
 		_expect(wildlife.is_on_floor(), "Wildlife fixture did not reach the physical floor.")
-		var contacts: Array[Node] = preview.find_children("RuntimeFootContact", "Marker3D", true, false)
+		# Arm end markers are not supporting feet. Generated species may
+		# have hands as well as the required leg pair.
+		var contacts: Array[Node3D] = []
+		for part in preview.get_children():
+			if part is Node3D and str(part.get_meta("creature_part_category", "")) == "legs" and part.has_meta("sculpt_limb_rig"):
+				contacts.append(part.get_meta("sculpt_limb_rig")["foot"])
 		_expect(contacts.size() >= 2, "Wildlife lost its generated leg pair.")
 		var motion: RefCounted = preview.get("_motion")
 		for time: float in [0.0, 0.47]:
 			motion.call("sample", "idle", time)
 			for foot: Node3D in contacts:
-				_expect(foot.global_position.y >= -0.0002 and foot.global_position.y < 0.017, "Wildlife's fixed visual height displaced its soles from the floor.")
+				_expect(foot.global_position.y >= -0.0002 and foot.global_position.y < 0.017, "Wildlife sole is %.5f above the physical floor (species %d)." % [foot.global_position.y, wildlife.get("species_seed")])
 		wildlife.free()
 	floor.free()
 
