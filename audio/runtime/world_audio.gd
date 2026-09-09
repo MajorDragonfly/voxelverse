@@ -42,6 +42,7 @@ func _ready() -> void:
 	_shore.max_db = 0.0
 	_shore.volume_db = -80.0
 	add_child(_shore)
+	_audio.occlusion.register_voice(_shore, &"VV Ambience")
 	var generator := get_node_or_null("/root/WorldGenerator")
 	if generator != null and generator.has_signal("world_profile_changed"):
 		generator.connect("world_profile_changed", _world_changed)

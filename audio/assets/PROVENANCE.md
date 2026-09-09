@@ -35,3 +35,12 @@ Komposition und PCM-Erzeugung sind deterministisch; Containerdaten können sich
 zwischen FFmpeg-Versionen unterscheiden. `music/score.json` enthält Titel,
 Taktdauer und Messwerte nach dem Dekodieren. Insgesamt: 65 WAV-Klänge plus drei
 Ogg-Musikstücke. Auch die Musik ist ein erster spielbarer Entwurf zur Hörabnahme.
+
+
+Das vierte Paket ergänzt zwölf Aktionsklänge in `actions/`, erzeugt mit
+`tools/audio/generate_action_sounds.py`: drei Varianten für Essen, Trinken,
+Sammeln und Evolution. Eigene kurze Impulse, gefiltertes Rauschen, Sinustöne und
+Hüllkurven, ohne fremde Aufnahmen, Musik oder Stimmen. 16-Bit-PCM, mono,
+22.050 Hz; Spitzenpegel höchstens 0,5, Anfang und Ende exakt null. Deterministische
+NumPy-Erzeugung; NumPy wird zum Spielen nicht benötigt. Neuer Gesamtumfang:
+77 WAV-Dateien und drei Ogg-Musikstücke.

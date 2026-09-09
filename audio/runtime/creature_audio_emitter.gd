@@ -31,6 +31,7 @@ func _ready() -> void:
 	_connect_if("respawned", _respawned)
 	_connect_if("creature_attacked", _creature_attacked)
 	_connect_if("audio_event", _audio_event)
+	_connect_if("audio_action", _audio_action)
 
 
 func _connect_if(signal_name: StringName, callback: Callable) -> void:
@@ -140,6 +141,10 @@ func _respawned() -> void:
 func _creature_attacked(target: Node, damage: float) -> void:
 	if is_instance_valid(target) and is_finite(damage) and damage > 0.0:
 		emit_reaction(&"attack")
+
+
+func _audio_action(action: StringName) -> void:
+	audio.play_action(action, source)
 
 
 func _audio_event(event: StringName) -> void:

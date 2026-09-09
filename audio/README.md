@@ -13,7 +13,7 @@ Keine Übernahme unfertiger Arbeiten anderer Chats. Einzige geänderte Bestandsd
   Oben lassen sich alle drei Musikstücke, ein achtsekündiger Gefahrwechsel und
   „Musik + Umgebung“ auswählen; darunter Schritte und Kreaturen dazuschalten.
   Die Seite ist scrollbar. F7 regelt den gesamten Mix.
-- Die 65 eigenen Effekte/Umgebungs-/Kreaturenklänge und drei Musikstücke sind spielbare Prototypen.
+- Die 77 eigenen Effekte/Umgebungs-/Kreaturen-/Aktionsklänge und drei Musikstücke sind spielbare Prototypen.
   Ihr Klangcharakter braucht noch einen Hörtest auf dem Zielgerät.
 
 ## Verhalten
@@ -37,7 +37,8 @@ wird hier nicht hinzugefügt. Die Kameraposition bestimmt unabhängig von den F�
 ob der Unterwasserfilter aktiv ist. Wind, Blätter und Unterwassergeräusche blenden
 weich um. Wasserambiente ist räumlich an einer nahen Wasserprobe verankert.
 Ein Fluss-Biom allein löst keine Wassergeräusche aus. Die Ufersuche ist eine lokale
-Näherung; Schallverdeckung durch Hindernisse ist noch nicht umgesetzt.
+Näherung. Die räumlichen Stimmen erhalten nun Schallverdeckung anhand vorhandener
+Kollisionen; siehe Ausbau unten.
 
 ## Anschlüsse für die anderen Chats
 
@@ -183,7 +184,8 @@ einem gemeinsamen Motiv und zurückhaltendem Elektro-Groove. Alle verwenden
 
 Die Stücke liegen als Stereo-Ogg mit 32 kHz vor, zusammen etwa 1 MB. Der Generator
 legt Notenausklänge und Delay-Echos über die Schleifengrenze. Die Dateien werden
-im Spiel gestreamt und endlos abgespielt. Kein Python oder FFmpeg ist zum Spielen
+im Spiel gestreamt. Menü, Gefahr und direkte Hörtest-Auswahl laufen als Schleife;
+automatische Erkundung erhält jetzt zusätzlich Ruhephasen (siehe unten). Kein Python oder FFmpeg ist zum Spielen
 nötig. Partitur und Herkunft: `audio/assets/music/score.json` und
 `audio/assets/PROVENANCE.md`; Generator: `tools/audio/generate_music.py`.
 
@@ -238,3 +240,125 @@ Spielererkennung, echte Überblendung, schnelle Kontextwechsel, zeitweilige Gefa
 Die Audiodateien wurden zusätzlich dekodiert und auf Länge, Signalpegel, Clipping
 und Sprünge an der Schleifengrenze geprüft. Die musikalische Wirkung und der Mix
 brauchen weiterhin deinen gemeinsamen Hörtest auf dem Zielgerät.
+
+
+## Ausbau: Hindernisse, Ruhephasen und Aktionen
+
+### Schallverdeckung
+
+Alle 16 räumlichen Effektstimmen und die vorhandene Uferquelle prüfen die Linie
+zwischen aktueller Kamera und Klangposition. Ein Hindernis senkt nur diese Quelle
+um bis zu 9 dB und filtert Höhen bis 1.600 Hz. Die Wirkung steigt schnell an und
+löst sich weich auf; andere Quellen, Musik und Menü werden nicht mitgefiltert.
+Jede der höchstens 17 Quellen hat einen eigenen Filterbus, der weiterhin über
+Effekte bzw. Umgebung läuft. Die bestehenden Lautstärken und der Unterwasserfilter
+bleiben damit wirksam. Neue Wiedergabe auf einem wiederverwendeten Player beginnt
+mit zurückgesetzter Verdeckung. Unbenutzte Filter werden abgeschaltet.
+
+Die Abfrage läuft ausschließlich im Physiktakt und verbraucht global höchstens
+vier Strahlabfragen pro Schritt. Abfragen wechseln zwischen den aktiven Quellen,
+üblicherweise alle 120 ms je Stimme. Folgeabfragen für transparente Körper zählen
+zum selben Budget; unvollständige Abfragen behalten ihren vorherigen Zustand und
+werden erneut versucht. Daraus folgt eine kurze Reaktionszeit, keine exakte
+akustische Simulation. Beugung um Kanten, Hall und Materialstärken sind nicht
+enthalten. Rein sichtbare Objekte/Fernmeshes ohne Kollision verdecken keinen Klang.
+
+Quellkörper und Spielerkörper werden ausgeschlossen, Trigger-Areas ignoriert.
+Ein Treffer direkt am Quellendpunkt gilt nicht als Wand (z.B. ein Schritt auf dem
+Boden). Das Metadatum `audio_transparent = true` am Kollisionskörper oder einem
+übergeordneten Knoten nimmt ihn aus der Verdeckung. Eine Wand hinter diesem Objekt
+kann weiter erkannt werden. Es werden keine Kollisionslayer oder Spielknoten verändert.
+Die Standardmaske berücksichtigt alle Körper-Layer; sie kann beim Zusammenschluss
+mit der Weltanbindung eingeschränkt werden:
+
+```gdscript
+AudioManager.occlusion.collision_mask = 1
+AudioManager.occlusion.enabled = false # Optional, stellt den klaren Mix wieder her.
+```
+
+### Ruhephasen der Erkundungsmusik
+
+Die automatische Erkundung spielt ungefähr 60 Sekunden Musik, blendet aus und
+lässt danach 12–22 Sekunden nur Umgebung und Effekte hören. Anschließend beginnt
+das Erkundungsstück erneut mit Einblendung. Ein eigener Zufallsgenerator variiert
+die Ruhedauer, ohne die Welt-Zufallsfolge zu beeinflussen. Die stille Zeit zählt
+erst, wenn die vorherige Musik vollständig ausgeblendet ist. Pausieren hält die
+Zeitplanung an; die bereits bekannte leise Pausenmusik und laufende Blenden bleiben
+bestehen. Szenenwechsel und Gefahr setzen den Ruhezyklus zurück.
+
+Gefahr kann auch die laufende Ausblendung in die Ruhephase sofort unterbrechen;
+dabei bleibt es bei zwei Musikstimmen. Nach Gefahr beginnt ein neuer Erkundungszyklus.
+Menü, direkte Kontextwahl und die drei einzelnen Musikschaltflächen haben keine
+Ruhephasen, damit sich Stücke weiterhin gezielt vergleichen lassen.
+
+```gdscript
+AudioManager.music.configure_rest_cycle(60.0, 12.0, 22.0)
+AudioManager.music.rest_cycles_enabled = true
+AudioManager.resume_music_automation()
+# Signal: AudioManager.music.rest_changed(resting)
+# Abfrage: AudioManager.music.is_resting()
+```
+
+Der Hörtest bietet „Musik mit Ruhephasen“ und den kurzen „Pausentest · 6 s / 5 s“.
+Die genannten Zeiten enthalten nicht die zusätzliche Ausblendung. „Gefahr für
+8 Sekunden“ kann den Pausentest unterbrechen. Beim Verlassen der Szene werden
+die vorherigen Rhythmuseinstellungen wiederhergestellt; der Test verändert keine
+Spielstände oder dauerhaften Audioeinstellungen.
+
+### Aktionsgeräusche
+
+Zwölf neue eigene WAV-Dateien: jeweils drei Varianten für Essen, Trinken, Sammeln
+und Evolution. Knuspern, Flüssigkeitsblasen, kurzer Sammelimpuls und aufsteigende
+Evolutionsbestätigung werden synthetisiert. Insgesamt enthält das Paket damit
+77 WAV-Klänge und drei Ogg-Musikstücke. Der Hörtest kann jede Aktion unmittelbar
+vorspielen. Essen/Trinken/Sammeln sind räumliche Spieleffekte; Evolution ist eine
+Bestätigung über den UI-Kanal und funktioniert auch im pausierten Editor.
+
+Es werden bewusst nur bestätigte Aktionen angeschlossen. Das heutige Basisspiel
+hat dafür noch keine einheitlichen Erfolgssignale. Der Audioadapter leitet deshalb
+keine Aktion aus Eingabetasten, UI-Text, steigenden Hunger-/Durstwerten, Laden,
+Wiederbelebung oder einer bloßen Phasenänderung ab. Die anderen Chats können nach
+erfolgreicher Spielzustandsänderung aufrufen:
+
+```gdscript
+AudioManager.play_action(&"eat", creature, "optional-action-receipt-123")
+AudioManager.play_action(&"drink", creature)
+AudioManager.play_action(&"gather", creature)
+AudioManager.play_action(&"evolve")
+```
+
+Alternativ kann ein von der Kreaturen-Audioanbindung verfolgter Knoten das neue
+optionale Signal `signal audio_action(action: StringName)` anbieten und z.B.
+`audio_action.emit(&"eat")` auslösen. Die Anbindung wird einmalig beim Anhängen des
+Audio-Kindknotens hergestellt. Ein Aufruf allein fügt keine Nahrung, Ressourcen,
+Fähigkeiten oder Evolution hinzu. `AudioManager.actions.action_played(action,
+source_id)` meldet eine tatsächlich angenommene Wiedergabe.
+
+Wiederholungen je Aktion/Quelle sind gedrosselt (Essen/Trinken 650 ms, Sammeln
+250 ms, Evolution 1.500 ms). Optionale Beleg-IDs verhindern auch spätere doppelte
+Auslösung innerhalb derselben Szene, solange der Beleg im begrenzten Verlauf liegt
+(maximal 256 Belege und 128 zeitliche Einträge). Bei abgelehnter Wiedergabe, etwa
+einem vollen Pool, wird kein Beleg verbraucht. Direkter Aufruf plus Signal im selben
+Moment erzeugt keinen Doppelton. Unbekannte Aktionen, fehlende/freigegebene Quellen,
+Audio-Sperre und tote Quellen werden abgewiesen. Weltaktionen sind in Pause gesperrt.
+
+### Gemeinsamer Test
+
+In `audio/audio_playground.tscn`:
+
+1. „Rufschleife starten“, dann „Fels an/aus“: die mittlere Quelle wird durch einen
+   echten Test-Kollisionskörper verdeckt. „Rufschleife stoppen“ beendet sie.
+2. „Pausentest · 6 s / 5 s“ starten; während der Ruhephase „Gefahr für 8 Sekunden“ wählen.
+3. Essen, Trinken, Sammeln und Evolution zu Musik, Umgebung und Kreaturen dazuschalten.
+
+Zusätzliche automatische Prüfung mit echten Physikkörpern und laufender Audioausgabe:
+
+```sh
+godot --headless --path . --script res://tests/audio/audio_expansion_test.gd
+```
+
+Geprüft werden Quell-/Spielerkörper, blockierter und freier Weg, transparenter
+Körper, Filter-/Pegeltrennung, Pausenverhalten, Stimmenwiederverwendung, Abfragebudget,
+Aktionssignale, Duplikate, abgewiesene Belege, unveränderte Spielwerte sowie natürliche
+Musikruhe, Wiederaufnahme und Gefahr während der Ausblendung. Subjektiver Klang,
+Grafik und Windows-Ausgabe bleiben dem gemeinsamen Hörtest vorbehalten.

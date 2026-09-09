@@ -21,6 +21,8 @@ var volumes: Dictionary = DEFAULTS.duplicate()
 var director: Node
 var creatures: Node
 var music: Node
+var occlusion: Node
+var actions: Node
 var _streams: Dictionary = {}
 var _last_variant: Dictionary = {}
 var _last_time: Dictionary = {}
@@ -49,6 +51,9 @@ func _ready() -> void:
 	var creature_library: Script = load("res://audio/runtime/creature_sound_library.gd")
 	for event in creature_library.SOUNDS:
 		_streams[event] = creature_library.SOUNDS[event]
+	var action_library: Script = load("res://audio/runtime/action_sound_library.gd")
+	for event in action_library.SOUNDS:
+		_streams[event] = action_library.SOUNDS[event]
 	for index in MAX_WORLD_VOICES:
 		var voice := AudioStreamPlayer3D.new()
 		voice.name = "WorldVoice%d" % index
@@ -64,6 +69,11 @@ func _ready() -> void:
 		voice.bus = CHANNELS[&"ui"]
 		add_child(voice)
 		_ui_voices.append(voice)
+	occlusion = preload("res://audio/runtime/sound_occlusion.gd").new()
+	occlusion.name = "SoundOcclusion"
+	add_child(occlusion)
+	for voice in _voices:
+		occlusion.register_voice(voice, CHANNELS[&"effects"])
 	director = DIRECTOR.new()
 	director.name = "WorldAudio"
 	director.process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -75,6 +85,9 @@ func _ready() -> void:
 	music = preload("res://audio/runtime/music_director.gd").new()
 	music.name = "MusicDirector"
 	add_child(music)
+	actions = preload("res://audio/runtime/action_audio.gd").new()
+	actions.name = "ActionAudio"
+	add_child(actions)
 	get_tree().scene_changed.connect(_scene_changed)
 
 
@@ -210,6 +223,7 @@ func play_world(event: StringName, position: Vector3, gain_db: float = 0.0,
 	if selected == null:
 		return false
 	selected.stop()
+	occlusion.reset_voice(selected)
 	selected.stream = stream
 	selected.global_position = position
 	selected.volume_db = clampf(gain_db, -40.0, 3.0) if is_finite(gain_db) else 0.0
@@ -226,6 +240,10 @@ func play_world(event: StringName, position: Vector3, gain_db: float = 0.0,
 
 func play_creature(event: StringName, source: Node3D) -> bool:
 	return creatures.emit_for(source, event)
+
+
+func play_action(action: StringName, source: Node3D = null, receipt_id: String = "") -> bool:
+	return actions.play(action, source, receipt_id)
 
 
 func set_music_context(context: StringName) -> bool:
@@ -245,6 +263,7 @@ func stop_source(source_id: int) -> void:
 		if int(voice.get_meta(&"audio_source_id", -1)) == source_id:
 			voice.stop()
 			voice.stream = null
+			occlusion.reset_voice(voice)
 
 
 func stop_ui() -> void:
@@ -270,6 +289,8 @@ func stop_world() -> void:
 		voice.stop()
 		voice.stream = null
 	_last_time.clear()
+	if is_instance_valid(occlusion):
+		occlusion.reset()
 	set_underwater(false)
 
 
@@ -278,6 +299,7 @@ func _scene_changed() -> void:
 	director.reset_tracking()
 	creatures.clear()
 	music.reset_scene()
+	actions.reset()
 	if is_instance_valid(_panel):
 		close_settings()
 

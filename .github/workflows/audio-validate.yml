@@ -40,6 +40,11 @@ jobs:
           set -o pipefail
           timeout 70s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/music_runtime_test.gd 2>&1 | tee /tmp/audio-music.log
           ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-music.log
+      - name: Run occlusion, action and music cadence tests
+        run: |
+          set -o pipefail
+          timeout 90s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/audio_expansion_test.gd 2>&1 | tee /tmp/audio-expansion.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-expansion.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
