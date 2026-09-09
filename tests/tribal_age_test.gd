@@ -77,7 +77,7 @@ func _run() -> void:
 	_expect(root.get_node("ProgressionService").export_state() == progression, "Transition changed purchased behavior, points or relationships.")
 	_expect(not saves.request_phase_transition(1, token) and not saves.request_phase_transition(2), "Duplicate or later transition accepted.")
 	_expect(Model.validate(tribe.village(), tribe.body(), state.campaign.data).is_empty(), "Invalid fresh tribe.")
-	# Save observers cannot reenter the transition or reset the campaign mid-write.
+	# Group control keeps existing menus and phase-specific combat ownership.
 	var original_health: float = player.current_health
 	player.receive_damage(10000)
 	_expect(player.current_health == original_health and not player.is_dead, "Creature combat attacked only the former player in civilian group mode.")
@@ -158,6 +158,16 @@ func _run() -> void:
 	state.start_world_with_seed(15838)
 	await _frames(8)
 	_expect(not state.get_current_body().has("tribe") and not tribe._active and not tribe.panel._hud.visible, "New campaign retained the previous tribe.")
+	_expect(home.establish_home()["ok"], "New campaign cannot create its own nest.")
+	await _frames(20)
+	await _click(tribe.panel.entry)
+	await _click(tribe.panel.confirm)
+	await _frames(15)
+	if tribe.is_active():
+		await _click(tribe.panel._residents.get_child(1))
+		_expect(tribe.selected == [str(tribe.village()["members"][1]["id"])], "New campaign's resident buttons still select the former campaign's IDs.")
+	else:
+		_expect(false, "Second campaign cannot enter its own tribe.")
 	await _cleanup()
 	_finish()
 

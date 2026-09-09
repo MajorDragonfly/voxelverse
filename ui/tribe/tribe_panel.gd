@@ -22,6 +22,7 @@ var _selection: Panel
 var _drag_start := Vector2.ZERO
 var _dragging: bool = false
 var _scale_factor: float = 1.0
+var _resident_ids: Array = []
 
 func _ready() -> void:
 	layer = 40
@@ -95,6 +96,8 @@ func _build() -> void:
 	_hud.hide()
 
 func _layout() -> void:
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	_scale_factor = viewport_size.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
@@ -107,6 +110,8 @@ func _layout() -> void:
 	_dialog.custom_minimum_size.x = minf(viewport_size.x - 48, 670)
 
 func _place_hud() -> void:
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	_hud.position = Vector2(18, get_viewport().get_visible_rect().size.y / _scale_factor - _hud.size.y - 18)
 
 
@@ -174,7 +179,9 @@ func refresh() -> void:
 		_goal.text = "%s · %d %% · Weitere Bewohner können mitarbeiten." % ["Werkzeugherstellung" if data["project"]["kind"] == "tool" else "Hüttenbau", int(float(data["project"]["progress"]) / (10.0 if data["project"]["kind"] == "tool" else 20.0) * 100)]
 	elif int(data["huts"]) == 2 and int(data["meals"]) >= 3:
 		_goal.text = "Dein erstes Dorf steht: Werkzeug, vier Schlafplätze und versorgte Bewohner. Sichere eure verbleibenden Vorräte."
-	if _residents.get_child_count() != 3:
+	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
+	if _resident_ids != identities:
+		_resident_ids = identities
 		for child: Node in _residents.get_children():
 			_residents.remove_child(child)
 			child.queue_free()
