@@ -28,7 +28,7 @@ Die gemeinsamen Einstellungen respektieren fremde pausierte Oberflächen. Skillt
 
 Die Ausgangsbasis kombiniert ausschließlich die bereits veröffentlichten Grundlagen `agent/m2-behavior-skilltree` (`f015324`) und `agent/planet-lod-menu` (`0ad98d9`). Der lokale Basiskonflikt in der Roadmap wurde mit beiden Fortschrittsständen aufgelöst. Gemeinsamer Basiskommit: `8a1ef4e`.
 
-Der Kreaturenbranch, die neuere Unterwasser-/Originalmaßstab-Arbeit, Skilltree-Oberfläche und Entdeckungsbuch sind weiterhin eigene Arbeitszweige. Sie sind in diesem Testpaket nicht bereits alle zusammengeführt. `main` und PR #9 bleiben ungemergt. Lars' Ziel echter Planetengrößen und einer bereisbaren Galaxie bleibt maßgeblich; die Titelszene ist keine Änderung an diesen Anforderungen.
+Der Kreaturenbranch, die neuere Unterwasser-/Originalmaßstab-Arbeit, Skilltree-Oberfläche und neuere Buch-Erweiterungen sind weiterhin eigene Arbeitszweige. Der abgeschlossene M4A-Buchkern ist für den Scan-Anschluss gezielt übernommen; Einzelheiten stehen in CREATURE_SCANNING.md. Sie sind in diesem Testpaket nicht bereits alle zusammengeführt. `main` und PR #9 bleiben ungemergt. Lars' Ziel echter Planetengrößen und einer bereisbaren Galaxie bleibt maßgeblich; die Titelszene ist keine Änderung an diesen Anforderungen.
 
 Die eigenen Produktionsdateien liegen überwiegend unter `ui/frontend/` und in `autoload/session_flow.gd`. Gezielte Anschlussänderungen betreffen `project.godot`, `core/display_settings.gd`, `autoload/save_game_service.gd` und den Start der vorhandenen Entwicklungsdiagnostik in `core/development_tools.gd`. Bei späterer Integration diese vier gemeinsamen Dateien prüfen; keine vollständigen fremden Projektordner überschreiben.
 
@@ -36,7 +36,7 @@ Die eigenen Produktionsdateien liegen überwiegend unter `ui/frontend/` und in `
 
 `tests/frontend_test.gd` und die native Diagnose `--frontend-smoke` prüfen tatsächliche Viewport-Eingaben, neue/ladebare Kampagnen, Seedvalidierung, Pauseverschachtelung, fehlgeschlagenes Speichern, Weltabbau, getrennte Designs sowie beschädigte/neue Sicherungen. Die Diagnose muss mit isoliertem Benutzerordner ausgeführt werden; die bestehenden Prüfskripte richten diesen automatisch ein.
 
-`tools/validate_export.py` führt denselben Ablauf zusätzlich im unveränderten nativen Releaseprogramm aus. Die GitHub-Aktion `Voxelverse frontend review` erzeugt 14 tatsächliche Spielaufnahmen mit Softwaregrafik, einschließlich Kamera-/Tastenbelegungseinstellungen, Spielstandverwaltung, Speicherbestätigung und Einführung. Prüfresultate und eventuelle verbleibende Einschränkungen werden nach dem Lauf ergänzt. Ziel-PC-Leistung und Lars' manuelle Beurteilung der Optik bleiben ein Spieltest.
+`tools/validate_export.py` führt denselben Ablauf zusätzlich im unveränderten nativen Releaseprogramm aus. Die GitHub-Aktion `Voxelverse frontend review` erzeugt 17 tatsächliche Spielaufnahmen mit Softwaregrafik, einschließlich Kamera-/Tastenbelegungseinstellungen, Spielstandverwaltung, Speicherbestätigung und Einführung. Prüfresultate und eventuelle verbleibende Einschränkungen werden nach dem Lauf ergänzt. Ziel-PC-Leistung und Lars' manuelle Beurteilung der Optik bleiben ein Spieltest.
 
 Technischer Ladeablauf gemäß [Godot: Background loading](https://docs.godotengine.org/en/4.6/tutorials/io/background_loading.html).
 
@@ -73,3 +73,7 @@ Vorschaubilder, Umbenennen, unabhängige Kopien, acht rotierende Sicherungen und
 ## Erweiterung: Erste Schritte
 
 Die Einführung, ihr Speichervertrag und die Signalanschlüsse an tatsächlich ausgeführte Spielaktionen sind in [FIRST_STEPS.md](FIRST_STEPS.md) beschrieben.
+
+## Erweiterung: Kreaturen scannen
+
+Der Scanmodus verlangt 2,5 Sekunden ununterbrochenes Anvisieren. Ein Kreis zeigt den Fortschritt; danach erscheinen der Bucheintrag und die Werte. Bekannte Arten werden sofort erkannt. Datenvertrag, Herkunft des Buchkerns und Abnahme: [CREATURE_SCANNING.md](CREATURE_SCANNING.md).

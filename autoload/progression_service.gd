@@ -9,6 +9,8 @@ signal behavior_rewarded(receipt: Dictionary)
 signal behavior_node_purchased(node_id: String)
 
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
+const DiscoveryRecords = preload("res://core/discovery/discovery_records.gd")
+const DiscoveryPlanetCatalog = preload("res://world/generation/planet_catalog_v7.gd")
 
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const Behavior = preload("res://core/progression/behavior_progression.gd")
@@ -87,6 +89,7 @@ func register_species_discovery(
 		world_seed = _get_world_seed()
 	var species_key: String = "%d:%d" % [world_seed, species_seed]
 	if discovered_species.has(species_key):
+		_record_journal_observation(discovered_species[species_key], blueprint, world_seed)
 		return {
 			"is_new": false,
 			"species_key": species_key,
@@ -103,11 +106,16 @@ func register_species_discovery(
 		"world_seed": world_seed,
 		"name": species_name,
 		"role": str(species_data.get("ecological_role", "unknown")),
+		"scan": {"version": 1, "complete": false},
 	}
 	_annotate_discovery(discovered_species[species_key], false)
+	_record_journal_observation(discovered_species[species_key], blueprint, world_seed)
 	_emit_discovery_event(str(discovered_species[species_key].get("id", species_key)))
 	_add_discovery_points(SPECIES_DISCOVERY_POINTS)
 	var unlocked_part: String = _unlock_species_part(species_seed, blueprint)
+	if not unlocked_part.is_empty():
+		unlocked_parts[unlocked_part]["species_key"] = species_key
+		discovered_species[species_key]["unlocked_part"] = unlocked_part
 	species_discovered.emit(species_key, species_name)
 	return {
 		"is_new": true,
@@ -116,6 +124,29 @@ func register_species_discovery(
 		"unlocked_part": unlocked_part,
 		"points_awarded": SPECIES_DISCOVERY_POINTS,
 	}
+
+
+func has_species_scan(species_seed: int, world_seed: int = 0) -> bool:
+	if world_seed <= 0:
+		world_seed = _get_world_seed()
+	var entry: Dictionary = _as_dictionary(discovered_species.get("%d:%d" % [world_seed, species_seed], {}))
+	var scan: Dictionary = _as_dictionary(entry.get("scan", {}))
+	return int(scan.get("version", 0)) == 1 and bool(scan.get("complete", false))
+
+
+func register_species_scan(species_seed: int, blueprint: Dictionary, world_seed: int = 0) -> Dictionary:
+	if species_seed <= 0 or blueprint.is_empty():
+		return {}
+	if world_seed <= 0:
+		world_seed = _get_world_seed()
+	var result: Dictionary = register_species_discovery(species_seed, blueprint, world_seed)
+	var entry: Dictionary = discovered_species[result.species_key]
+	if not has_species_scan(species_seed, world_seed):
+		entry["scan"] = {"version": 1, "complete": true}
+		var saves := get_node_or_null("/root/SaveGameService")
+		if saves != null:
+			saves.schedule_autosave(0.2)
+	return result
 
 
 func register_region_discovery(
@@ -168,6 +199,10 @@ func import_state(data: Dictionary) -> bool:
 	discovered_regions = _as_dictionary(data.get("discovered_regions", {}))
 	for entry in discovered_species.values():
 		_annotate_discovery(entry, false)
+		# Earlier releases already awarded these discoveries. Keep them known;
+		# new entries carry an explicit incomplete scan until scanning finishes.
+		if not entry.has("scan"):
+			entry["scan"] = {"version": 1, "complete": true, "legacy": true}
 	for entry in discovered_regions.values():
 		_annotate_discovery(entry, true)
 	# Retain unlock IDs for unavailable parts so restored content is not lost.
@@ -308,6 +343,24 @@ func _append_candidate(candidates: Array[String], part_id: String) -> void:
 	if PartLibrary.get_part(part_id).is_empty():
 		return
 	candidates.append(part_id)
+
+
+func _record_journal_observation(entry: Dictionary, blueprint: Dictionary, world_seed: int) -> void:
+	# Additive metadata: old discoveries get their first real observation on revisit.
+	# Never regenerate an old species from a seed with a newer creature generator.
+	if entry.has("journal") or blueprint.is_empty():
+		return
+	var location: String = "Welt %d" % world_seed
+	var state := get_node_or_null("/root/GameState")
+	if state != null and int(state.call("get_world_seed")) == world_seed:
+		var system: Dictionary = DiscoveryPlanetCatalog.create_system(int(state.call("get_system_seed")))
+		var planet: Dictionary = DiscoveryPlanetCatalog.get_planet(system, int(state.call("get_current_planet_index")))
+		if int(planet.get("effective_seed", -1)) == world_seed:
+			location = str(planet.get("name", location))
+	entry["journal"] = DiscoveryRecords.observation(blueprint, location)
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves != null:
+		saves.call("schedule_autosave")
 
 
 func _add_discovery_points(amount: int) -> void:

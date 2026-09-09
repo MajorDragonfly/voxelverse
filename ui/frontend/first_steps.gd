@@ -4,7 +4,7 @@ const Style = preload("res://ui/frontend/menu_style.gd")
 const Keys = preload("res://core/input_preferences.gd")
 const Progress = preload("res://core/onboarding_progress.gd")
 const TITLES: Dictionary = {"look": "Schau dich um", "move": "Erkunde deine Umgebung",
-	"jump": "Mach einen Sprung", "inspect": "Lerne eine Kreatur kennen"}
+	"jump": "Mach einen Sprung", "inspect": "Scanne eine Kreatur"}
 var _saves: Node
 var _flow: Node
 var _player: Node
@@ -97,8 +97,8 @@ func hint(step: String) -> String:
 			return "%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf; für diese Aufgabe suche festen Boden." % Keys.binding_label("jump")
 		"inspect":
 			if is_instance_valid(_player) and bool(_player.get("inspection_mode_enabled")):
-				return "Gehe näher an eine Kreatur heran. Sobald ihre Daten angezeigt werden, ist dieser Schritt geschafft."
-			return "%s · Öffne den Untersuchungsmodus in der Nähe einer Kreatur. Ihre Daten erscheinen rechts." % Keys.binding_label("inspection_mode")
+				return "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort."
+			return "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch." % Keys.binding_label("inspection_mode")
 	return ""
 
 func build_help(parent: VBoxContainer) -> void:

@@ -1,12 +1,14 @@
 extends Node
 
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
+const Journal = preload("res://ui/discovery/discovery_journal.gd")
 
 var _player: Node3D
 var _hud: CanvasLayer
 var _progress_label: Label
 var _notification_label: Label
 var _notification_timer: float = 0.0
+var _discovery_journal: CanvasLayer
 
 
 func _ready() -> void:
@@ -55,6 +57,10 @@ func _install() -> void:
 	_notification_label.add_theme_constant_override("shadow_offset_y", 2)
 	_notification_label.visible = false
 	_hud.add_child(_notification_label)
+	_discovery_journal = Journal.new()
+	_discovery_journal.name = "DiscoveryJournal"
+	_discovery_journal.player = _player
+	add_child(_discovery_journal)
 
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null:
@@ -89,7 +95,7 @@ func _on_part_unlocked(part_id: String, _reason: String) -> void:
 
 
 func _on_species_discovered(_species_key: String, species_name: String) -> void:
-	_show_notification("SPECIES DISCOVERED · %s" % species_name)
+	_show_notification("ART GESCANNT · %s\nJ · Im Entdeckungsbuch ansehen" % species_name)
 	_refresh_summary()
 
 

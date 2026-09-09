@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://ui/context_action_hud.gd" id="7_context"]
 [ext_resource type="Script" path="res://ui/target_health_hud.gd" id="8_target_health"]
 [ext_resource type="Script" path="res://ui/creature_inspection_hud.gd" id="9_inspection"]
+[ext_resource type="Script" path="res://creatures/player/creature_scanner.gd" id="10_scanner"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.42
@@ -57,6 +58,9 @@ linger_time = 5.0
 [node name="CreatureInspectionHUD" type="Node" parent="."]
 script = ExtResource("9_inspection")
 maximum_listed_creatures = 6
+
+[node name="CreatureScanner" type="Node" parent="."]
+script = ExtResource("10_scanner")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=850860063]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.7, 0)

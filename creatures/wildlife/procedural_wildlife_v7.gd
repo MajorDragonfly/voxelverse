@@ -165,14 +165,14 @@ func interact(actor: Node) -> void:
 	if actor.has_method("can_perform_action"):
 		if not bool(actor.call("can_perform_action", &"socialize")):
 			return
-	_register_discovery(actor)
+	var key_hints = preload("res://core/input_preferences.gd")
+	_show_actor_message(actor, "%s · Scanmodus öffnen und das Tier im Fadenkreuz halten." % key_hints.binding_label("inspection_mode"))
 
 
 func receive_creature_attack(damage: float, attacker: Node = null) -> void:
 	if is_dead or damage <= 0.0:
 		return
 	if attacker != null:
-		_register_discovery(attacker)
 		_threat = attacker as Node3D
 		_threat_timer = threat_memory_seconds
 	current_health = maxf(current_health - damage, 0.0)
@@ -191,34 +191,6 @@ func receive_creature_attack(damage: float, attacker: Node = null) -> void:
 
 func get_health_ratio() -> float:
 	return current_health / maxf(maximum_health, 0.001)
-
-
-func _register_discovery(actor: Node) -> void:
-	var progression := get_node_or_null("/root/ProgressionService")
-	if progression == null or not progression.has_method("register_species_discovery"):
-		return
-	var result: Dictionary = progression.call(
-		"register_species_discovery",
-		species_seed,
-		blueprint,
-		WorldGenerator.get_world_seed()
-	)
-	var species_data: Dictionary = blueprint.get("species", {})
-	var species_name: String = str(
-		species_data.get("display_name", blueprint.get("name", "Unknown Species"))
-	)
-	if bool(result.get("is_new", false)):
-		var message: String = "Discovered %s" % species_name
-		var unlocked_part: String = str(result.get("unlocked_part", ""))
-		if not unlocked_part.is_empty():
-			var definition: Dictionary = PartLibrary.get_part(unlocked_part)
-			message += " · unlocked %s" % str(definition.get("name", unlocked_part))
-		_show_actor_message(actor, message)
-	else:
-		_show_actor_message(
-			actor,
-			"%s · %s" % [species_name, ecological_role.capitalize()]
-		)
 
 
 func _update_role_direction() -> void:

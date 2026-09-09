@@ -42,7 +42,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_timer = maxf(0.0, _timer - delta)
-	visible = _timer > 0.0 and _flow.can_pause() and not _flow.loading
+	visible = _timer > 0.0 and _flow.can_pause() and not _flow.loading and (not get_tree().paused or _flow.pause_open)
 	if not _can_capture():
 		_world_frames = 0
 		return
@@ -89,4 +89,4 @@ func _show_status(message: String, color: Color, seconds: float) -> void:
 	_label.text = message
 	_label.add_theme_color_override("font_color", color)
 	_timer = seconds
-	visible = _flow.can_pause() and not _flow.loading
+	visible = _flow.can_pause() and not _flow.loading and (not get_tree().paused or _flow.pause_open)

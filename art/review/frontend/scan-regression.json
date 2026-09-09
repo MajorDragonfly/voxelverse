@@ -1,0 +1,41 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "creature_scan_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.984
+    },
+    {
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.007
+    },
+    {
+      "name": "meta_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.914
+    },
+    {
+      "name": "onboarding_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.559
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.58
+    },
+    {
+      "name": "frontend_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 21.993
+    }
+  ]
+}

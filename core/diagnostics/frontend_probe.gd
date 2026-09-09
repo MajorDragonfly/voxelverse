@@ -229,26 +229,56 @@ func _exercise_first_steps(player: Node) -> void:
 	await _frames(2)
 	_expect(not saves.guidance.done("inspect"), "Opening an empty inspection completed the creature task.")
 	player.inspection_radius = radius
-	# Use an actual spawned creature with its real inspection data; position
-	# it nearby so acceptance does not depend on procedural spawn direction.
+	# Aim the real gameplay camera at an actual animal and hold it through
+	# the real physics-driven timer. A proximity fixture is insufficient.
+	for frame in range(180):
+		if player.is_on_floor():
+			break
+		await get_tree().physics_frame
 	var creature: Node3D
 	for frame in range(180):
 		creature = get_tree().get_first_node_in_group(&"wildlife") as Node3D
 		if creature != null:
 			break
 		await get_tree().physics_frame
+	_expect(creature != null, "No real wildlife available for scanning.")
 	if creature != null:
-		creature.global_position = player.global_position + Vector3(1.5, 0, 0)
-	await _frames(3)
-	_expect(saves.guidance.done("inspect"), "Displaying real nearby creature data did not complete inspection.")
+		var creature_home: Vector3 = creature.global_position
+		creature.set_physics_process(false)
+		creature.global_position = player.global_position + Vector3(0, 0, -4)
+		await _frames(3)
+		player._gameplay_camera.look_at(creature.global_position + Vector3(0, 0.56, 0))
+		var scanner: Node = player.get_node("CreatureScanner")
+		for frame in range(180):
+			await get_tree().physics_frame
+			if scanner.ratio() >= 0.4:
+				break
+		_expect(scanner.target == creature and scanner.ratio() >= 0.4 and not scanner.known, "Sustained aimed scan did not show partial progress.")
+		_expect(not player.get_node("HUD/CreatureInspectionPanel").visible and not saves.guidance.done("inspect"), "Unknown species exposed stats or completed the introduction early.")
+		await _capture("scan_progress")
+		for frame in range(180):
+			await get_tree().physics_frame
+			if scanner.known:
+				break
+		await _frames(2)
+		_expect(scanner.known and player.get_node("HUD/CreatureInspectionPanel").visible and saves.guidance.done("inspect"), "Completed scan did not unlock stats, book and introduction.")
+		await _capture("scan_known")
+		await _capture("first_steps_complete")
+		_key(KEY_J)
+		await _frames(3)
+		var journal: Node = get_tree().get_first_node_in_group(&"discovery_journal")
+		_expect(journal != null and journal.is_open and journal._list.item_count > 0 and get_tree().paused, "J did not open the populated discovery book.")
+		await _capture("scan_journal")
+		_key(KEY_ESCAPE)
+		await _frames(3)
+		_expect(not get_tree().paused and scanner.known, "Closing the book did not immediately recognize the known animal.")
+		creature.global_position = creature_home
+		creature.set_physics_process(true)
 	ground.queue_free()
 	player.global_position = home_position
 	player.velocity = Vector3.ZERO
 	player.camera_pivot.rotation = home_camera
-	await _frames(2)
-	if DisplayServer.get_name() != "headless":
-		_expect(saves.guidance.completed_count() == 4 and guide.visible, "All four actions did not show the completion message.")
-	await _capture("first_steps_complete")
+	player._gameplay_camera.rotation = Vector3.ZERO
 	_key(KEY_R)
 	await _restart_first_steps(flow)
 
@@ -371,7 +401,7 @@ func _exercise_controls(settings: Node) -> void:
 	var loaded = load("res://core/input_preferences.gd").new()
 	loaded.load_saved()
 	_expect(loaded.bindings.inspection_mode[0] == KEY_R and loaded.bindings.move_forward[0] == KEY_UP, "GUI remapping was not persisted.")
-	_expect(get_node("/root/SessionFlow").controls_text().contains("R   Untersuchungsmodus"), "Help still showed the old binding.")
+	_expect(get_node("/root/SessionFlow").controls_text().contains("R   Scanmodus"), "Help still showed the old binding.")
 	# Unsaved reset is discarded on close; confirmed reset must update InputMap.
 	var reset: Button = panel.find_child("ResetControls", true, false)
 	scroll.ensure_control_visible(reset)

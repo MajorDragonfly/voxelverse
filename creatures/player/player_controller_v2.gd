@@ -47,7 +47,7 @@ func toggle_inspection_mode() -> bool:
 	inspection_mode_enabled = not inspection_mode_enabled
 	inspection_mode_changed.emit(inspection_mode_enabled)
 	show_gameplay_message(
-		"Inspection mode enabled" if inspection_mode_enabled else "Inspection mode disabled",
+		"Scanmodus aktiviert" if inspection_mode_enabled else "Scanmodus deaktiviert",
 		1.4
 	)
 	return inspection_mode_enabled
@@ -138,6 +138,28 @@ func get_interaction_target() -> Node:
 		inspection_cone_degrees,
 		false
 	)
+
+
+func get_scan_target() -> Node3D:
+	if _gameplay_camera == null or not is_inside_tree():
+		return null
+	# Scan only the first collider under the exact center of the screen.
+	# Never reuse the forgiving proximity/cone query used by interaction.
+	var center: Vector2 = get_viewport().get_visible_rect().get_center()
+	var origin: Vector3 = _gameplay_camera.project_ray_origin(center)
+	var direction: Vector3 = _gameplay_camera.project_ray_normal(center)
+	var distance: float = origin.distance_to(global_position) + inspection_radius
+	var query := PhysicsRayQueryParameters3D.create(origin, origin + direction * distance, 5, [get_rid()])
+	query.collide_with_areas = true
+	var hit: Dictionary = get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return null
+	var creature: Node = _resolve_interaction_target(hit.get("collider"))
+	if not creature is Node3D or not creature.is_in_group(&"wildlife") or not creature.has_method("get_inspection_data"):
+		return null
+	if bool(creature.get("is_dead")) or global_position.distance_to(creature.global_position) > inspection_radius:
+		return null
+	return creature
 
 
 func get_nearby_wildlife(maximum_count: int = 8) -> Array[Node3D]:

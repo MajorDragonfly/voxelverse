@@ -70,6 +70,11 @@ func _install() -> void:
 func _update_context() -> void:
 	if _label == null or _ray == null or _player == null:
 		return
+	if bool(_player.get("inspection_mode_enabled")):
+		_label.hide()
+		if _crosshair != null:
+			_crosshair.hide()
+		return
 	if _crosshair != null:
 		_crosshair.visible = Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
