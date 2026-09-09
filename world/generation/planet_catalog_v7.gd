@@ -2,7 +2,7 @@ extends RefCounted
 class_name PlanetCatalogV7
 
 const PlanetProfile = preload(
-	"res://world/generation/planet_profile_v6.gd"
+	"res://world/space/celestial_body_profile.gd"
 )
 
 const PLANET_CLASSES: Array[String] = [
@@ -39,15 +39,19 @@ static func create_system(system_seed: int) -> Dictionary:
 				+ random.randi_range(1, 2_000_000_000)
 			)
 		planet_seed = maxi(planet_seed, 1)
-		var profile: Dictionary = PlanetProfile.create(planet_seed)
-		var planet_class: String = PLANET_CLASSES[
+		var profile: Dictionary = PlanetProfile.terrain_profile(planet_seed)
+		var fallback_class: String = PLANET_CLASSES[
 			posmod(planet_seed + planet_index, PLANET_CLASSES.size())
 		]
+		var archetype: String = str(profile.get("terrain_archetype", fallback_class))
 		planets.append({
 			"index": planet_index,
 			"planet_seed": planet_seed,
+			"effective_seed": clampi(planet_seed, 1, 2_147_483_647),
+			"body_profile": PlanetProfile.create("legacy:%d:%d" % [safe_seed, planet_seed],
+				"planet", planet_seed, 0.0, "legacy:%d:star" % safe_seed, "legacy_plane_v9"),
 			"name": _planet_name(safe_seed, planet_index),
-			"planet_class": planet_class,
+			"planet_class": archetype,
 			"orbit_radius": 0.72 + float(planet_index) * random.randf_range(0.42, 0.78),
 			"orbit_speed": random.randf_range(0.16, 0.72) / float(planet_index + 1),
 			"axial_tilt": random.randf_range(-28.0, 28.0),
@@ -55,7 +59,7 @@ static func create_system(system_seed: int) -> Dictionary:
 			"profile": profile,
 		})
 	return {
-		"schema": 1,
+		"schema": 2,
 		"system_seed": safe_seed,
 		"system_name": "%s-%04d" % [
 			STAR_PREFIXES[posmod(safe_seed, STAR_PREFIXES.size())],
@@ -87,24 +91,10 @@ static func get_planet_count(system: Dictionary) -> int:
 
 static func _planet_name(system_seed: int, planet_index: int) -> String:
 	var syllables_a: Array[String] = [
-		"Ae",
-		"Cor",
-		"Ily",
-		"Nex",
-		"Oro",
-		"Tera",
-		"Vey",
-		"Zan",
+		"Ae", "Cor", "Ily", "Nex", "Oro", "Tera", "Vey", "Zan",
 	]
 	var syllables_b: Array[String] = [
-		"bora",
-		"dune",
-		"lia",
-		"mera",
-		"nox",
-		"ria",
-		"vora",
-		"xis",
+		"bora", "dune", "lia", "mera", "nox", "ria", "vora", "xis",
 	]
 	var divided_seed: int = floori(float(system_seed) / 19.0)
 	return "%s%s %s" % [

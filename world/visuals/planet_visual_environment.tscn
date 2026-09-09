@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://world/visuals/planet_visual_environment.gd" id="1_visual"]
+[ext_resource type="Script" path="res://world/visuals/planet_visual_environment_v8.gd" id="1_visual"]
 
 [sub_resource type="Environment" id="Environment_placeholder"]
 
@@ -9,15 +9,15 @@ script = ExtResource("1_visual")
 enable_debug_mode_keys = false
 sun_elevation_degrees = 48.0
 sun_azimuth_degrees = -36.0
-surface_sun_energy = 0.92
+surface_sun_energy = 1.02
 surface_sun_color = Color(1, 0.95, 0.87, 1)
-surface_shadow_distance = 135.0
-surface_fog_begin = 90.0
-surface_fog_end = 250.0
-surface_fog_strength = 0.28
+surface_shadow_distance = 165.0
+surface_fog_begin = 105.0
+surface_fog_end = 300.0
+surface_fog_strength = 0.24
 enable_surface_volumetric_fog = false
-surface_volumetric_fog_density = 0.0006
-surface_volumetric_fog_length = 190.0
+surface_volumetric_fog_density = 0.0005
+surface_volumetric_fog_length = 210.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_placeholder")

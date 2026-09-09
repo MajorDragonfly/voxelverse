@@ -1,0 +1,581 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "effective_checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.893
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.398
+    },
+    {
+      "name": "asset_pipeline_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.504
+    },
+    {
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.481
+    },
+    {
+      "name": "creature_editor_v7_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.957
+    },
+    {
+      "name": "creature_v5_smoke_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.692
+    },
+    {
+      "name": "drainage_network_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.006
+    },
+    {
+      "name": "environment_cluster_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.59
+    },
+    {
+      "name": "environment_playtest_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.535
+    },
+    {
+      "name": "environment_production_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.976
+    },
+    {
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.855
+    },
+    {
+      "name": "meta_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.324
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.903
+    },
+    {
+      "name": "planet_diversity_v9_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.553
+    },
+    {
+      "name": "planet_generation_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.036
+    },
+    {
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.554
+    },
+    {
+      "name": "runtime_geometry_batch_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.644
+    },
+    {
+      "name": "terrain_transition_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.505
+    },
+    {
+      "name": "water_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.341
+    },
+    {
+      "name": "water_depth_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.184
+    },
+    {
+      "name": "world_evolution_v2_ci_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.302
+    },
+    {
+      "name": "world_layered_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.221
+    },
+    {
+      "name": "world_runtime_continuity_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.588
+    },
+    {
+      "name": "main_shutdown_45",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.789
+    },
+    {
+      "name": "main_shutdown_150",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.904
+    },
+    {
+      "name": "main",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.427
+    },
+    {
+      "name": "shutdown_15838_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.014
+    },
+    {
+      "name": "shutdown_15838_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.827
+    },
+    {
+      "name": "shutdown_15838_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.704
+    },
+    {
+      "name": "shutdown_15838_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.397
+    },
+    {
+      "name": "shutdown_15838_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.025
+    },
+    {
+      "name": "shutdown_15838_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.154
+    },
+    {
+      "name": "shutdown_63352_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.679
+    },
+    {
+      "name": "shutdown_63352_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.309
+    },
+    {
+      "name": "shutdown_63352_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.465
+    },
+    {
+      "name": "shutdown_63352_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.064
+    },
+    {
+      "name": "shutdown_63352_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.575
+    },
+    {
+      "name": "shutdown_63352_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.981
+    },
+    {
+      "name": "shutdown_23757_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.429
+    },
+    {
+      "name": "shutdown_23757_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.102
+    },
+    {
+      "name": "shutdown_23757_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.471
+    },
+    {
+      "name": "shutdown_23757_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.34
+    },
+    {
+      "name": "shutdown_23757_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 15.038
+    },
+    {
+      "name": "shutdown_23757_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.614
+    },
+    {
+      "name": "streaming_cpu",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.627
+    }
+  ],
+  "full_run": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 8.893
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.398
+      },
+      {
+        "name": "asset_pipeline_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.504
+      },
+      {
+        "name": "creature_builder_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.481
+      },
+      {
+        "name": "creature_editor_v7_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.957
+      },
+      {
+        "name": "creature_v5_smoke_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.692
+      },
+      {
+        "name": "drainage_network_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.006
+      },
+      {
+        "name": "environment_cluster_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.59
+      },
+      {
+        "name": "environment_playtest_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 11.392
+      },
+      {
+        "name": "environment_production_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.976
+      },
+      {
+        "name": "gameplay_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.855
+      },
+      {
+        "name": "meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.324
+      },
+      {
+        "name": "modular_assembly_framework_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.903
+      },
+      {
+        "name": "planet_diversity_v9_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.553
+      },
+      {
+        "name": "planet_generation_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 10.036
+      },
+      {
+        "name": "planet_transition_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 17.554
+      },
+      {
+        "name": "runtime_geometry_batch_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.644
+      },
+      {
+        "name": "terrain_transition_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.505
+      },
+      {
+        "name": "water_continuity_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 12.341
+      },
+      {
+        "name": "water_depth_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.184
+      },
+      {
+        "name": "world_evolution_v2_ci_test",
+        "passed": false,
+        "exit_code": 1,
+        "seconds": 2.515
+      },
+      {
+        "name": "world_layered_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.221
+      },
+      {
+        "name": "world_runtime_continuity_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.588
+      },
+      {
+        "name": "main_shutdown_45",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.789
+      },
+      {
+        "name": "main_shutdown_150",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 6.904
+      },
+      {
+        "name": "main",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.427
+      },
+      {
+        "name": "shutdown_15838_terrain",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.014
+      },
+      {
+        "name": "shutdown_15838_placement",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 6.827
+      },
+      {
+        "name": "shutdown_15838_resources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 9.704
+      },
+      {
+        "name": "shutdown_15838_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 8.397
+      },
+      {
+        "name": "shutdown_15838_cluster_build",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 13.025
+      },
+      {
+        "name": "shutdown_15838_cluster_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 13.154
+      },
+      {
+        "name": "shutdown_63352_terrain",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.679
+      },
+      {
+        "name": "shutdown_63352_placement",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.309
+      },
+      {
+        "name": "shutdown_63352_resources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 9.465
+      },
+      {
+        "name": "shutdown_63352_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 9.064
+      },
+      {
+        "name": "shutdown_63352_cluster_build",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 11.575
+      },
+      {
+        "name": "shutdown_63352_cluster_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 11.981
+      },
+      {
+        "name": "shutdown_23757_terrain",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.429
+      },
+      {
+        "name": "shutdown_23757_placement",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 9.102
+      },
+      {
+        "name": "shutdown_23757_resources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 8.471
+      },
+      {
+        "name": "shutdown_23757_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.34
+      },
+      {
+        "name": "shutdown_23757_cluster_build",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 15.038
+      },
+      {
+        "name": "shutdown_23757_cluster_complete",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 13.614
+      },
+      {
+        "name": "streaming_cpu",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.627
+      }
+    ]
+  },
+  "targeted_rechecks": [
+    {
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "checks": [
+        {
+          "name": "world_evolution_v2_ci_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 2.302
+        },
+        {
+          "name": "environment_playtest_test",
+          "passed": false,
+          "exit_code": 1,
+          "seconds": 12.609
+        }
+      ]
+    },
+    {
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "checks": [
+        {
+          "name": "environment_playtest_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 10.535
+        }
+      ]
+    }
+  ],
+  "notes": "The world range assertion was updated for -33 m ocean bathymetry; the new horizon check accommodates packed-normal precision. No runtime change followed the full local run."
+}

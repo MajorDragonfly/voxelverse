@@ -1,0 +1,611 @@
+{
+  "schema": 1,
+  "date": "2026-09-08",
+  "repository": "MajorDragonfly/voxelverse",
+  "branch": "agent/creature-editor-spore",
+  "pull_request": 12,
+  "base_commit": "f01532416674cc2202aca1a6a99c45cd91d559e0",
+  "tested_code_commit": "09ee6d4cb078f69bc54f03d5befe4e62d6ad2357",
+  "tested_code_tree": "92acb22369835589ffc2abf43fe946cd5ad54bbb",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "full_project": {
+    "passed": true,
+    "checks": [
+      {
+        "exit_code": 0,
+        "name": "import",
+        "passed": true,
+        "seconds": 9.658
+      },
+      {
+        "exit_code": 0,
+        "name": "art_sources",
+        "passed": true,
+        "seconds": 1.326
+      },
+      {
+        "exit_code": 0,
+        "name": "asset_pipeline_test",
+        "passed": true,
+        "seconds": 0.349
+      },
+      {
+        "exit_code": 0,
+        "name": "behavior_progression_test",
+        "passed": true,
+        "seconds": 0.907
+      },
+      {
+        "exit_code": 0,
+        "name": "campaign_foundation_test",
+        "passed": true,
+        "seconds": 1.001
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_builder_v7_test",
+        "passed": true,
+        "seconds": 0.723
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_editor_v7_runtime_test",
+        "passed": true,
+        "seconds": 0.909
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_studio_test",
+        "passed": true,
+        "seconds": 1.281
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_v5_smoke_test",
+        "passed": true,
+        "seconds": 1.095
+      },
+      {
+        "exit_code": 0,
+        "name": "drainage_network_test",
+        "passed": true,
+        "seconds": 1.934
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_cluster_test",
+        "passed": true,
+        "seconds": 2.418
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_playtest_test",
+        "passed": true,
+        "seconds": 9.944
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_production_test",
+        "passed": true,
+        "seconds": 2.772
+      },
+      {
+        "exit_code": 0,
+        "name": "gameplay_acceptance_test",
+        "passed": true,
+        "seconds": 0.816
+      },
+      {
+        "exit_code": 0,
+        "name": "meta_runtime_test",
+        "passed": true,
+        "seconds": 0.817
+      },
+      {
+        "exit_code": 0,
+        "name": "modular_assembly_framework_test",
+        "passed": true,
+        "seconds": 0.633
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_diversity_v9_test",
+        "passed": true,
+        "seconds": 0.445
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_generation_acceptance_test",
+        "passed": true,
+        "seconds": 7.422
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_sphere_contract_test",
+        "passed": true,
+        "seconds": 1.373
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_sphere_runtime_test",
+        "passed": true,
+        "seconds": 45.916
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_transition_runtime_test",
+        "passed": true,
+        "seconds": 13.19
+      },
+      {
+        "exit_code": 0,
+        "name": "runtime_geometry_batch_test",
+        "passed": true,
+        "seconds": 0.63
+      },
+      {
+        "exit_code": 0,
+        "name": "terrain_transition_test",
+        "passed": true,
+        "seconds": 1.839
+      },
+      {
+        "exit_code": 0,
+        "name": "water_continuity_test",
+        "passed": true,
+        "seconds": 9.004
+      },
+      {
+        "exit_code": 0,
+        "name": "water_depth_test",
+        "passed": true,
+        "seconds": 3.701
+      },
+      {
+        "exit_code": 0,
+        "name": "world_evolution_v2_ci_test",
+        "passed": true,
+        "seconds": 1.842
+      },
+      {
+        "exit_code": 0,
+        "name": "world_layered_v7_test",
+        "passed": true,
+        "seconds": 0.911
+      },
+      {
+        "exit_code": 0,
+        "name": "world_runtime_continuity_test",
+        "passed": true,
+        "seconds": 1.281
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_lab_entry",
+        "passed": true,
+        "seconds": 3.606
+      },
+      {
+        "exit_code": 0,
+        "name": "main_shutdown_45",
+        "passed": true,
+        "seconds": 5.195
+      },
+      {
+        "exit_code": 0,
+        "name": "main_shutdown_150",
+        "passed": true,
+        "seconds": 5.567
+      },
+      {
+        "exit_code": 0,
+        "name": "main",
+        "passed": true,
+        "seconds": 5.562
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_terrain",
+        "passed": true,
+        "seconds": 1.378
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_placement",
+        "passed": true,
+        "seconds": 4.915
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_resources",
+        "passed": true,
+        "seconds": 5.19
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_complete",
+        "passed": true,
+        "seconds": 5.474
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_cluster_build",
+        "passed": true,
+        "seconds": 11.796
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_cluster_complete",
+        "passed": true,
+        "seconds": 11.797
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_terrain",
+        "passed": true,
+        "seconds": 1.377
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_placement",
+        "passed": true,
+        "seconds": 5.003
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_resources",
+        "passed": true,
+        "seconds": 5.003
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_complete",
+        "passed": true,
+        "seconds": 5.468
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_cluster_build",
+        "passed": true,
+        "seconds": 11.89
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_cluster_complete",
+        "passed": true,
+        "seconds": 11.985
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_terrain",
+        "passed": true,
+        "seconds": 1.471
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_placement",
+        "passed": true,
+        "seconds": 5.284
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_resources",
+        "passed": true,
+        "seconds": 5.471
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_complete",
+        "passed": true,
+        "seconds": 5.752
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_cluster_build",
+        "passed": true,
+        "seconds": 13.379
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_cluster_complete",
+        "passed": true,
+        "seconds": 13.38
+      },
+      {
+        "exit_code": 0,
+        "name": "streaming_cpu",
+        "passed": true,
+        "seconds": 4.074
+      }
+    ],
+    "run_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264715"
+  },
+  "studio": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.174
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.203
+      },
+      {
+        "name": "creature_studio_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.367
+      },
+      {
+        "name": "creature_editor_v7_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.903
+      },
+      {
+        "name": "creature_builder_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.716
+      },
+      {
+        "name": "runtime_geometry_batch_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.622
+      }
+    ],
+    "run_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264726",
+    "review": "art/review/creature_studio/review.json"
+  },
+  "exports": {
+    "passed": true,
+    "platforms": [
+      {
+        "checks": [
+          {
+            "exit_code": 0,
+            "name": "import",
+            "passed": true,
+            "seconds": 7.969
+          },
+          {
+            "exit_code": 0,
+            "name": "release_export",
+            "passed": true,
+            "seconds": 6.843
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_main",
+            "passed": true,
+            "seconds": 5.86
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_lab",
+            "passed": true,
+            "seconds": 3.438
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_creature_builder_v7_test",
+            "passed": true,
+            "seconds": 0.968
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_modular_assembly_framework_test",
+            "passed": true,
+            "seconds": 0.782
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_gameplay_acceptance_test",
+            "passed": true,
+            "seconds": 1.156
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_meta_runtime_test",
+            "passed": true,
+            "seconds": 1.141
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_sphere_contract_test",
+            "passed": true,
+            "seconds": 1.797
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_15838",
+            "passed": true,
+            "seconds": 17.593
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_63352",
+            "passed": true,
+            "seconds": 6.438
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_23757",
+            "passed": true,
+            "seconds": 7.078
+          }
+        ],
+        "platform": "windows"
+      },
+      {
+        "checks": [
+          {
+            "exit_code": 0,
+            "name": "import",
+            "passed": true,
+            "seconds": 4.863
+          },
+          {
+            "exit_code": 0,
+            "name": "release_export",
+            "passed": true,
+            "seconds": 4.469
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_main",
+            "passed": true,
+            "seconds": 5.077
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_lab",
+            "passed": true,
+            "seconds": 2.75
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_creature_builder_v7_test",
+            "passed": true,
+            "seconds": 0.531
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_modular_assembly_framework_test",
+            "passed": true,
+            "seconds": 0.436
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_gameplay_acceptance_test",
+            "passed": true,
+            "seconds": 0.716
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_meta_runtime_test",
+            "passed": true,
+            "seconds": 0.623
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_sphere_contract_test",
+            "passed": true,
+            "seconds": 1.366
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_15838",
+            "passed": true,
+            "seconds": 14.762
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_63352",
+            "passed": true,
+            "seconds": 5.28
+          },
+          {
+            "exit_code": 0,
+            "name": "packaged_planet_23757",
+            "passed": true,
+            "seconds": 5.932
+          }
+        ],
+        "platform": "linux"
+      }
+    ],
+    "run_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264895",
+    "artifacts": [
+      {
+        "id": 10075869804,
+        "name": "voxelverse-windows-push",
+        "size_bytes": 40027719,
+        "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264895/artifacts/10075869804"
+      },
+      {
+        "id": 10075849720,
+        "name": "voxelverse-linux-push",
+        "size_bytes": 31299278,
+        "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264895/artifacts/10075849720"
+      }
+    ]
+  },
+  "environment": {
+    "passed": true,
+    "renderers": [
+      {
+        "name": "capture (forward_plus)",
+        "conclusion": "success",
+        "job_id": 102230068776
+      },
+      {
+        "name": "capture (gl_compatibility)",
+        "conclusion": "success",
+        "job_id": 102230069077
+      }
+    ],
+    "run_url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264723",
+    "software_renderer": true,
+    "target_hardware_acceptance": false
+  },
+  "workflow_runs": [
+    {
+      "name": "Desktop export validation",
+      "id": 34276264895,
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264895"
+    },
+    {
+      "name": "Godot validation",
+      "id": 34276264715,
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264715"
+    },
+    {
+      "name": "Modular assembly validation",
+      "id": 34276264731,
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264731"
+    },
+    {
+      "name": "Planet diversity V9",
+      "id": 34276264698,
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264698"
+    },
+    {
+      "name": "Creature studio validation",
+      "id": 34276264726,
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264726"
+    },
+    {
+      "name": "Environment render validation",
+      "id": 34276264723,
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34276264723"
+    }
+  ],
+  "integration": {
+    "planet_menu_branch": "agent/planet-lod-menu",
+    "tested_against": "0ad98d93aa10b42a55e18dde0a2180c1d3155b1f",
+    "code_conflicts": [],
+    "documentation_conflicts": [
+      "ROADMAP.md: combine M1 expansion, M2A and M3A status"
+    ],
+    "combined_runtime_tested": false,
+    "merged": false
+  },
+  "limitations": [
+    "Full M3 ability, terrain and swimming acceptance remains open.",
+    "Player collision remains its existing movement capsule.",
+    "Arbitrary articulated limb chains and swimming/flying preview are outside M3A."
+  ]
+}

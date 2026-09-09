@@ -1,0 +1,47 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "wildlife_ai_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 16.57
+    },
+    {
+      "name": "wildlife_drinking_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.55
+    },
+    {
+      "name": "wildlife_foraging_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.776
+    },
+    {
+      "name": "tribal_age_supply_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.795
+    },
+    {
+      "name": "behavior_skill_tree_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.512
+    },
+    {
+      "name": "audio/creature_audio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.216
+    },
+    {
+      "name": "audio/interface_audio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.828
+    }
+  ]
+}

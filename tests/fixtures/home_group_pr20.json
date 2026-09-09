@@ -1,0 +1,70 @@
+{
+  "body_key": "15838",
+  "campaign": {
+    "bodies": {
+      "15838": {
+        "generator_version": "planetary_v9",
+        "home_group": {
+          "anchor": [
+            3.0,
+            40.0,
+            -6.0
+          ],
+          "body_id": "body_db81a78fb4bdc4b8db2e0f2244f215c2",
+          "id": "group_aabf4a51b1479d4b91606f92e66ddf67",
+          "members": [
+            {
+              "id": "object_a6367aab93be64d583224d3ebd40199e",
+              "name": "Gefährte 1",
+              "order": "wait",
+              "position": [
+                0.5,
+                41.0,
+                -3.5
+              ]
+            },
+            {
+              "id": "object_dd02e0ce8fc5a4e6bf4e83f5bea8f39d",
+              "name": "Gefährte 2",
+              "order": "wait",
+              "position": [
+                5.5,
+                41.0,
+                -3.5
+              ]
+            }
+          ],
+          "schema": 1,
+          "species_id": "species_eb301f86777b9de742b721a03ecb11b0",
+          "surface_mode": "legacy_plane_v9"
+        },
+        "id": "body_db81a78fb4bdc4b8db2e0f2244f215c2",
+        "seed": 15838,
+        "surface_mode": "legacy_plane_v9",
+        "system_id": "system_a72e6b4967131b5946973c71f0f0cf5f"
+      }
+    },
+    "completed_transitions": {
+
+    },
+    "design_refs": {
+
+    },
+    "elapsed_seconds": 0.0,
+    "event_cursors": {
+
+    },
+    "id": "campaign_development_contract",
+    "pending_transition": {
+
+    },
+    "player_faction_id": "faction_eb301f86777b9de742b721a03ecb11b0",
+    "player_object_id": "object_eb301f86777b9de742b721a03ecb11b0",
+    "player_species_id": "species_eb301f86777b9de742b721a03ecb11b0",
+    "recent_events": [],
+    "schema": 1,
+    "time_scale": 1.0
+  },
+  "source_commit": "6ca5e484ea93870d4aab62bb0dec746846d00d0a",
+  "source_method": "home_group_state.create"
+}

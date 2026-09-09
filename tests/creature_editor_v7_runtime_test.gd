@@ -73,8 +73,8 @@ func _expect(condition: bool, message: String) -> void:
 func _finish() -> void:
 	if _failures.is_empty():
 		print("Creature Editor V7 runtime test passed.")
-		quit(0)
+		await preload("res://core/runtime_shutdown.gd").finish(self, 0)
 		return
 	for failure in _failures:
 		push_error(failure)
-	quit(1)
+	await preload("res://core/runtime_shutdown.gd").finish(self, 1)

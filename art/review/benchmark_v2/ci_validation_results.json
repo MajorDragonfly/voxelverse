@@ -1,0 +1,366 @@
+{
+  "checks": [
+    {
+      "exit_code": 0,
+      "name": "import",
+      "passed": true,
+      "seconds": 6.541
+    },
+    {
+      "exit_code": 0,
+      "name": "art_sources",
+      "passed": true,
+      "seconds": 0.816
+    },
+    {
+      "exit_code": 0,
+      "name": "asset_pipeline_test",
+      "passed": true,
+      "seconds": 0.349
+    },
+    {
+      "exit_code": 0,
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "seconds": 0.535
+    },
+    {
+      "exit_code": 0,
+      "name": "creature_editor_v7_runtime_test",
+      "passed": true,
+      "seconds": 0.912
+    },
+    {
+      "exit_code": 0,
+      "name": "creature_v5_smoke_test",
+      "passed": true,
+      "seconds": 0.907
+    },
+    {
+      "exit_code": 0,
+      "name": "environment_production_test",
+      "passed": true,
+      "seconds": 2.582
+    },
+    {
+      "exit_code": 0,
+      "name": "gameplay_acceptance_test",
+      "passed": true,
+      "seconds": 0.722
+    },
+    {
+      "exit_code": 0,
+      "name": "meta_runtime_test",
+      "passed": true,
+      "seconds": 0.723
+    },
+    {
+      "exit_code": 0,
+      "name": "modular_assembly_framework_test",
+      "passed": true,
+      "seconds": 0.534
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_diversity_v9_test",
+      "passed": true,
+      "seconds": 0.347
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_generation_acceptance_test",
+      "passed": true,
+      "seconds": 2.115
+    },
+    {
+      "exit_code": 0,
+      "name": "planet_transition_runtime_test",
+      "passed": true,
+      "seconds": 1.838
+    },
+    {
+      "exit_code": 0,
+      "name": "world_evolution_v2_ci_test",
+      "passed": true,
+      "seconds": 1
+    },
+    {
+      "exit_code": 0,
+      "name": "world_layered_v7_test",
+      "passed": true,
+      "seconds": 0.814
+    },
+    {
+      "exit_code": 0,
+      "name": "world_runtime_continuity_test",
+      "passed": true,
+      "seconds": 0.815
+    },
+    {
+      "exit_code": 0,
+      "name": "main_shutdown_45",
+      "passed": true,
+      "seconds": 1.375
+    },
+    {
+      "exit_code": 0,
+      "name": "main_shutdown_150",
+      "passed": true,
+      "seconds": 2.212
+    },
+    {
+      "exit_code": 0,
+      "name": "main",
+      "passed": true,
+      "seconds": 3.338
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_terrain",
+      "passed": true,
+      "seconds": 1.095
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_placement",
+      "passed": true,
+      "seconds": 1.094
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_resources",
+      "passed": true,
+      "seconds": 1.932
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_15838_complete",
+      "passed": true,
+      "seconds": 2.866
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_terrain",
+      "passed": true,
+      "seconds": 1.094
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_placement",
+      "passed": true,
+      "seconds": 1.095
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_resources",
+      "passed": true,
+      "seconds": 1.746
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_63352_complete",
+      "passed": true,
+      "seconds": 2.305
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_terrain",
+      "passed": true,
+      "seconds": 1.096
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_placement",
+      "passed": true,
+      "seconds": 1.094
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_resources",
+      "passed": true,
+      "seconds": 1.84
+    },
+    {
+      "exit_code": 0,
+      "name": "shutdown_23757_complete",
+      "passed": true,
+      "seconds": 2.589
+    },
+    {
+      "exit_code": 0,
+      "name": "streaming_cpu",
+      "passed": true,
+      "seconds": 4.907
+    }
+  ],
+  "commit": "247997c9bc81e3fc9ad530f0c9dc5e3ca203dce0",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "scope": "GitHub Actions Ubuntu headless CPU after main-thread resource staging; not comparable as absolute target-PC FPS.",
+  "seed": 424242,
+  "streaming_samples": [
+    {
+      "chunk": [
+        0,
+        0
+      ],
+      "create_ms": 0.519,
+      "ecology": {
+        "attempts": 499,
+        "batches": 14,
+        "complete": true,
+        "instances": 63,
+        "max_batch_usec": 589,
+        "max_placement_usec": 444,
+        "max_resource_usec": 5503,
+        "max_step_usec": 5503,
+        "nodes": 14
+      },
+      "upload_ms": 4.353
+    },
+    {
+      "chunk": [
+        1,
+        0
+      ],
+      "create_ms": 0.096,
+      "ecology": {
+        "attempts": 499,
+        "batches": 20,
+        "complete": true,
+        "instances": 97,
+        "max_batch_usec": 589,
+        "max_placement_usec": 444,
+        "max_resource_usec": 5503,
+        "max_step_usec": 5503,
+        "nodes": 20
+      },
+      "upload_ms": 3.814
+    },
+    {
+      "chunk": [
+        2,
+        0
+      ],
+      "create_ms": 0.096,
+      "ecology": {
+        "attempts": 499,
+        "batches": 19,
+        "complete": true,
+        "instances": 159,
+        "max_batch_usec": 589,
+        "max_placement_usec": 444,
+        "max_resource_usec": 5503,
+        "max_step_usec": 5503,
+        "nodes": 19
+      },
+      "upload_ms": 3.628
+    },
+    {
+      "chunk": [
+        1,
+        -1
+      ],
+      "create_ms": 0.09,
+      "ecology": {
+        "attempts": 499,
+        "batches": 20,
+        "complete": true,
+        "instances": 128,
+        "max_batch_usec": 589,
+        "max_placement_usec": 444,
+        "max_resource_usec": 5503,
+        "max_step_usec": 5503,
+        "nodes": 20
+      },
+      "upload_ms": 3.679
+    },
+    {
+      "chunk": [
+        2,
+        -1
+      ],
+      "create_ms": 0.086,
+      "ecology": {
+        "attempts": 499,
+        "batches": 21,
+        "complete": true,
+        "instances": 142,
+        "max_batch_usec": 589,
+        "max_placement_usec": 462,
+        "max_resource_usec": 5503,
+        "max_step_usec": 5503,
+        "nodes": 21
+      },
+      "upload_ms": 3.594
+    },
+    {
+      "chunk": [
+        1,
+        0
+      ],
+      "create_ms": 0.09,
+      "ecology": {
+        "attempts": 499,
+        "batches": 20,
+        "complete": true,
+        "instances": 97,
+        "max_batch_usec": 589,
+        "max_placement_usec": 462,
+        "max_resource_usec": 5503,
+        "max_step_usec": 5503,
+        "nodes": 20
+      },
+      "upload_ms": 3.668
+    }
+  ],
+  "workflow_runs": [
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "id": 34155137493,
+      "name": "Planet diversity V9",
+      "status": "completed",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34155137493"
+    },
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "id": 34155137471,
+      "name": "Modular assembly validation",
+      "status": "completed",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34155137471"
+    },
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "id": 34155137475,
+      "name": "Godot validation",
+      "status": "completed",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34155137475"
+    },
+    {
+      "conclusion": "success",
+      "event": "push",
+      "id": 34155134887,
+      "name": "Modular assembly validation",
+      "status": "completed",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34155134887"
+    },
+    {
+      "conclusion": "success",
+      "event": "push",
+      "id": 34155134878,
+      "name": "Planet diversity V9",
+      "status": "completed",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34155134878"
+    },
+    {
+      "conclusion": "success",
+      "event": "push",
+      "id": 34155134872,
+      "name": "Godot validation",
+      "status": "completed",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34155134872"
+    }
+  ]
+}

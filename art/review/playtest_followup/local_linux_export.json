@@ -1,0 +1,111 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "platform": "linux",
+  "checks": [
+    {
+      "name": "release_export",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.34
+    },
+    {
+      "name": "packaged_main",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.684
+    },
+    {
+      "name": "packaged_creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.647
+    },
+    {
+      "name": "packaged_modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.541
+    },
+    {
+      "name": "packaged_gameplay_acceptance_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.889
+    },
+    {
+      "name": "packaged_meta_runtime_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.839
+    },
+    {
+      "name": "packaged_planet_15838",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.261
+    },
+    {
+      "name": "packaged_planet_63352",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.134
+    },
+    {
+      "name": "packaged_planet_23757",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.316
+    }
+  ],
+  "probes": [
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "/tmp/voxelverse-godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+      "failures": [],
+      "flora_color_family": "verdant",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 65,
+      "loaded_meshes": 63,
+      "passed": true,
+      "planet_transition": "A-B-A",
+      "platform": "Linux",
+      "save_round_trip": true,
+      "seed": 15838,
+      "user_data_dir": "/tmp/voxelverse-export-6ldhyigq/seed-15838/xdg_data_home/godot/app_userdata/Voxelverse"
+    },
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "/tmp/voxelverse-godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+      "failures": [],
+      "flora_color_family": "autumn",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 19,
+      "loaded_meshes": 63,
+      "passed": true,
+      "platform": "Linux",
+      "save_round_trip": true,
+      "seed": 63352,
+      "user_data_dir": "/tmp/voxelverse-export-6ldhyigq/seed-63352/xdg_data_home/godot/app_userdata/Voxelverse"
+    },
+    {
+      "engine_mode": "editor_with_release_pck",
+      "executable": "/tmp/voxelverse-godot/editor/Godot_v4.6.3-stable_linux.x86_64",
+      "failures": [],
+      "flora_color_family": "violet",
+      "godot": "4.6.3-stable (official)",
+      "last_world_instances": 156,
+      "loaded_meshes": 63,
+      "passed": true,
+      "platform": "Linux",
+      "save_round_trip": true,
+      "seed": 23757,
+      "user_data_dir": "/tmp/voxelverse-export-6ldhyigq/seed-23757/xdg_data_home/godot/app_userdata/Voxelverse"
+    }
+  ],
+  "archive": {
+    "name": "voxelverse-linux-x86_64.zip",
+    "bytes": 31184793,
+    "sha256": "697a2e9ec9f02e03d3834cf521cef479d3a9c75a30032e186f4a59ee42989473"
+  },
+  "passed": true
+}

@@ -1,0 +1,65 @@
+name: Desktop export validation
+
+on:
+  push:
+    branches: [main, "agent/**"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: desktop-export-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  export:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux
+            editor: Godot_v4.6.3-stable_linux.x86_64
+          - os: windows-latest
+            platform: windows
+            editor: Godot_v4.6.3-stable_win64_console.exe
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Cache pinned Godot downloads
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/godot-export-toolchain
+          key: godot-4.6.3-desktop-v1-${{ runner.os }}
+      - name: Install verified editor and templates
+        run: >-
+          python tools/install_godot.py
+          --directory "${{ runner.temp }}/godot-export-toolchain"
+          --platform ${{ matrix.platform }}
+      - name: Export and validate outside the source checkout
+        run: >-
+          python tools/validate_export.py
+          --godot "${{ runner.temp }}/godot-export-toolchain/editor/${{ matrix.editor }}"
+          --platform ${{ matrix.platform }}
+          --output "${{ runner.temp }}/voxelverse-export"
+      - name: Upload accepted desktop build
+        uses: actions/upload-artifact@v4
+        with:
+          name: voxelverse-${{ matrix.platform }}-${{ github.event_name }}
+          path: |
+            ${{ runner.temp }}/voxelverse-export/*.zip
+            ${{ runner.temp }}/voxelverse-export/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload export diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: export-diagnostics-${{ matrix.platform }}-${{ github.event_name }}
+          path: |
+            ${{ runner.temp }}/voxelverse-export/logs
+            ${{ runner.temp }}/voxelverse-export/results.json
+          retention-days: 14

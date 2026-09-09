@@ -1,0 +1,48 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+WARNING: Could not commit save: user://research_missing_directory/save.json (File not found)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:454)
+         [1] save_now (res://autoload/save_game_service.gd:100)
+         [2] _commit_research (res://autoload/progression_service.gd:262)
+         [3] set_part_wished (res://autoload/progression_service.gd:248)
+         [4] _toggle_wish (res://ui/discovery/discovery_journal.gd:488)
+         [5] _click_at (res://tests/research_goals_test.gd:277)
+WARNING: Could not commit save: user://research_missing_directory/save.json (File not found)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:454)
+         [1] save_now (res://autoload/save_game_service.gd:100)
+         [2] _commit_research (res://autoload/progression_service.gd:262)
+         [3] set_research_pin (res://autoload/progression_service.gd:232)
+         [4] _test_wishlist_and_failed_save (res://tests/research_goals_test.gd:129)
+         [5] _click (res://tests/research_goals_test.gd:267)
+         [6] _click_at (res://tests/research_goals_test.gd:279)
+         [7] _frames (res://tests/research_goals_test.gd:284)
+WARNING: Unsupported save, campaign, progression or generator version.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:454)
+         [1] load_now (res://autoload/save_game_service.gd:115)
+         [2] _test_validation_and_future_save (res://tests/research_goals_test.gd:212)
+         [3] _run (res://tests/research_goals_test.gd:54)
+         [4] _test_campaign_switch_and_legacy (res://tests/research_goals_test.gd:193)
+         [5] _click (res://tests/research_goals_test.gd:267)
+         [6] _click_at (res://tests/research_goals_test.gd:279)
+         [7] _frames (res://tests/research_goals_test.gd:284)
+WARNING: Saving is blocked after an unreadable or newer save. Load a compatible save first.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:454)
+         [1] save_now (res://autoload/save_game_service.gd:66)
+         [2] _test_validation_and_future_save (res://tests/research_goals_test.gd:213)
+         [3] _run (res://tests/research_goals_test.gd:54)
+         [4] _test_campaign_switch_and_legacy (res://tests/research_goals_test.gd:193)
+         [5] _click (res://tests/research_goals_test.gd:267)
+         [6] _click_at (res://tests/research_goals_test.gd:279)
+         [7] _frames (res://tests/research_goals_test.gd:284)
+RESEARCH_GOALS_TEST {"failures":[],"passed":true}

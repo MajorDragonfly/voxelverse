@@ -53,7 +53,8 @@ func _test_primary_world() -> void:
 			var lake: float = float(sample.get("lake", -1.0))
 
 			_expect(not is_nan(height) and not is_inf(height), "Non-finite terrain height.")
-			_expect(height >= -7.01 and height <= 18.01, "Terrain height outside range.")
+			# The original -9 m ocean floor now has up to 24 m of bathymetry.
+			_expect(height >= -33.01 and height <= 96.01, "Terrain height outside the ocean/land range.")
 			_expect(biome >= BIOME_MIN and biome <= BIOME_MAX, "Invalid biome index.")
 			_expect(temperature >= 0.0 and temperature <= 1.0, "Temperature outside range.")
 			_expect(moisture >= 0.0 and moisture <= 1.0, "Moisture outside range.")
@@ -138,9 +139,9 @@ func _expect(condition: bool, message: String) -> void:
 func _finish() -> void:
 	if _failures.is_empty():
 		print("World Evolution V2 CI test passed.")
-		quit(0)
+		await preload("res://core/runtime_shutdown.gd").finish(self, 0)
 		return
 
 	for failure in _failures:
 		push_error(failure)
-	quit(1)
+	await preload("res://core/runtime_shutdown.gd").finish(self, 1)

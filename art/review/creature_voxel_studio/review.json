@@ -1,0 +1,34 @@
+{
+  "renderer": "gl_compatibility",
+  "screenshots": [
+    {
+      "file": "round_body.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "616f0bfc81c032e5ee53bb8a57dfdc8a8d4deedd6cb5e98337709ee1786578e6"
+    },
+    {
+      "file": "grazer_parts.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "4bda30e61cc797da4486ed6a086332f7d62fecc3d6aa80ca9d520fbe53034c4f"
+    },
+    {
+      "file": "upright_paint.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "5ff9a1806c358fb02e3e79f082f31a7ced7f3afb6e7e21620ca30482bd7ce1a1"
+    },
+    {
+      "file": "crawler_test.png",
+      "width": 1600,
+      "height": 900,
+      "sha256": "cd250e1df8cb05ed46e8035779ef6129887252b1c4402ddd709d662a1f58ba11"
+    }
+  ],
+  "runtime_errors": 0,
+  "source_commit": "b474fffac5277f5a957cd5be4d03cae7e17564fe",
+  "workflow_run": 34312086917,
+  "visually_reviewed": true,
+  "style": "cubic_voxels"
+}

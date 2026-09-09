@@ -1,5 +1,9 @@
 extends RefCounted
+
 class_name CreatureBlueprint
+
+const Store = preload("res://core/persistence/design_store.gd")
+const JointProfile = preload("res://creatures/editor/creature_joint_profile.gd")
 
 
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
@@ -280,6 +284,11 @@ static func nudge_part(
 	set_part_placement(blueprint, part_index, placement)
 
 
+static func get_part_shape(placement: Dictionary, field: String = "shape_scale") -> Vector3:
+	var value: Vector3 = _as_vector3(placement.get(field, Vector3.ONE))
+	return value.clamp(Vector3.ONE * 0.4, Vector3.ONE * 2.5) if value.is_finite() else Vector3.ONE
+
+
 static func rotate_part(
 	blueprint: Dictionary,
 	part_index: int,
@@ -394,6 +403,7 @@ static func calculate_complexity(blueprint: Dictionary) -> int:
 			str(placement.get("part_id", ""))
 		)
 		complexity += int(part_definition.get("complexity", 0))
+		complexity += int(PartLibrary.get_part(str(placement.get("end_part_id", ""))).get("complexity", 0))
 
 	return complexity
 
@@ -452,31 +462,14 @@ static func save_to_file(
 	blueprint: Dictionary,
 	save_path: String
 ) -> Error:
-	var file := FileAccess.open(save_path, FileAccess.WRITE)
-
-	if file == null:
-		return FileAccess.get_open_error()
-
-	file.store_string(JSON.stringify(_serialize_blueprint(blueprint), "\t"))
-	file.close()
-
-	return OK
+	return Store.write(save_path, _serialize_blueprint(blueprint))
 
 
 static func load_from_file(save_path: String) -> Dictionary:
-	if not FileAccess.file_exists(save_path):
+	if Store.read_text(save_path).is_empty():
 		return {}
 
-	var file := FileAccess.open(save_path, FileAccess.READ)
-
-	if file == null:
-		push_warning("Could not open creature save: %s" % save_path)
-		return {}
-
-	var json_text: String = file.get_as_text()
-	file.close()
-
-	var parsed: Variant = JSON.parse_string(json_text)
+	var parsed: Variant = JSON.parse_string(Store.read_text(save_path))
 
 	if not (parsed is Dictionary):
 		push_warning("Creature save is not a valid dictionary.")
@@ -507,6 +500,7 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 		serialized_parts.append({
 			"uid": str(placement.get("uid", "")),
 			"part_id": str(placement.get("part_id", "")),
+			"missing_part_id": str(placement.get("missing_part_id", "")),
 			"category": str(placement.get("category", "")),
 			"position": _serialize_vector3(
 				_as_vector3(placement.get("position", Vector3.ZERO))
@@ -516,13 +510,22 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 			),
 			"scale": float(placement.get("scale", 1.0)),
 			"mirrored": bool(placement.get("mirrored", false)),
+			"shape_scale": _serialize_vector3(get_part_shape(placement)),
+			"center_locked": bool(placement.get("center_locked", false)),
+			"end_part_id": str(placement.get("end_part_id", "")),
+			"end_scale": float(placement.get("end_scale", 1.0)),
+			"end_shape_scale": _serialize_vector3(get_part_shape(placement, "end_shape_scale")),
+			"end_rotation": _serialize_vector3(_as_vector3(placement.get("end_rotation", Vector3.ZERO))),
+			"joint": JointProfile.encode(placement.get("joint", {})),
 		})
 
 	return {
 		"version": SAVE_VERSION,
 		"name": str(blueprint.get("name", "New Creature")),
+		"design_id": str(blueprint.get("design_id", "")),
 		"body": {
 			"part_id": str(body.get("part_id", PartLibrary.get_default_body_part_id())),
+			"missing_part_id": str(body.get("missing_part_id", "")),
 			"shape": _serialize_vector3(
 				_as_vector3(body.get("shape", Vector3(1.3, 1.0, 2.1)))
 			),
@@ -530,6 +533,7 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 		},
 		"paint": {
 			"part_id": str(paint.get("part_id", PartLibrary.get_default_paint_id())),
+			"missing_part_id": str(paint.get("missing_part_id", "")),
 			"intensity": float(paint.get("intensity", 1.0)),
 		},
 		"parts": serialized_parts,
@@ -540,11 +544,14 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 	var blueprint: Dictionary = create_default()
 	blueprint["name"] = str(data.get("name", "New Creature"))
+	if not str(data.get("design_id", "")).is_empty():
+		blueprint["design_id"] = data["design_id"]
 	blueprint["parts"] = []
 
 	var body_data: Dictionary = data.get("body", {})
 	var body: Dictionary = {
 		"part_id": str(body_data.get("part_id", PartLibrary.get_default_body_part_id())),
+		"missing_part_id": str(body_data.get("missing_part_id", "")),
 		"shape": _deserialize_vector3(
 			body_data.get("shape", [1.3, 1.0, 2.1]),
 			Vector3(1.3, 1.0, 2.1)
@@ -556,6 +563,7 @@ static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 	var paint_data: Dictionary = data.get("paint", {})
 	blueprint["paint"] = {
 		"part_id": str(paint_data.get("part_id", PartLibrary.get_default_paint_id())),
+		"missing_part_id": str(paint_data.get("missing_part_id", "")),
 		"intensity": clampf(float(paint_data.get("intensity", 1.0)), 0.0, 1.0),
 	}
 
@@ -569,6 +577,7 @@ static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 		var placement: Dictionary = {
 			"uid": str(item.get("uid", "part_0000")),
 			"part_id": str(item.get("part_id", "")),
+			"missing_part_id": str(item.get("missing_part_id", "")),
 			"category": str(item.get("category", "")),
 			"position": _deserialize_vector3(
 				item.get("position", [0.0, 0.0, 0.0]),
@@ -580,6 +589,13 @@ static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 			),
 			"scale": clampf(float(item.get("scale", 1.0)), 0.25, 3.0),
 			"mirrored": bool(item.get("mirrored", false)),
+			"shape_scale": _deserialize_vector3(item.get("shape_scale", [1.0, 1.0, 1.0]), Vector3.ONE),
+			"center_locked": bool(item.get("center_locked", false)),
+			"end_part_id": str(item.get("end_part_id", "")),
+			"end_scale": clampf(float(item.get("end_scale", 1.0)), 0.4, 2.0),
+			"end_shape_scale": _deserialize_vector3(item.get("end_shape_scale", [1.0, 1.0, 1.0]), Vector3.ONE),
+			"end_rotation": _deserialize_vector3(item.get("end_rotation", [0.0, 0.0, 0.0]), Vector3.ZERO),
+			"joint": JointProfile.read(item.get("joint", {})),
 		}
 
 		if placement["part_id"] == "":

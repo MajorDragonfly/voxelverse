@@ -45,8 +45,8 @@ func _test_default_assembly() -> void:
 	var blueprint: Dictionary = AssemblyV7.create_default()
 	_expect(not blueprint.is_empty(), "Default V7 assembly is empty.")
 	_expect(
-		str(blueprint.get("progression", {}).get("phase", "")) == "creature",
-		"Creature progression phase is missing."
+		not blueprint.get("progression", {}).has("phase"),
+		"Creature blueprint must not own the campaign phase."
 	)
 	_expect(
 		int(blueprint.get("assembly", {}).get("schema", 0)) == 7,
@@ -177,8 +177,8 @@ func _expect(condition: bool, message: String) -> void:
 func _finish() -> void:
 	if _failures.is_empty():
 		print("Creature Builder V7 test passed.")
-		quit(0)
+		await preload("res://core/runtime_shutdown.gd").finish(self, 0)
 		return
 	for failure in _failures:
 		push_error(failure)
-	quit(1)
+	await preload("res://core/runtime_shutdown.gd").finish(self, 1)

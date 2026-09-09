@@ -1,0 +1,242 @@
+{
+  "tested_commit": "dc50d56d23155eb1636af45ca6ce6df9a8da175c",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "scope": {
+    "native_release_executable": "Real main scene, headless, 300 frames, outside source checkout",
+    "instrumented_checks": "Same-version editor using the unchanged release PCK and external probe scripts",
+    "target_gpu_visual_acceptance": false,
+    "build_artifact_retention_days": 14
+  },
+  "workflows": [
+    {
+      "id": 34188065632,
+      "name": "Modular assembly validation",
+      "event": "pull_request",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188065632"
+    },
+    {
+      "id": 34188065639,
+      "name": "Godot validation",
+      "event": "pull_request",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188065639"
+    },
+    {
+      "id": 34188065575,
+      "name": "Planet diversity V9",
+      "event": "pull_request",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188065575"
+    },
+    {
+      "id": 34188065523,
+      "name": "Desktop export validation",
+      "event": "pull_request",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188065523"
+    },
+    {
+      "id": 34188063537,
+      "name": "Modular assembly validation",
+      "event": "push",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063537"
+    },
+    {
+      "id": 34188063605,
+      "name": "Planet diversity V9",
+      "event": "push",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063605"
+    },
+    {
+      "id": 34188063550,
+      "name": "Godot validation",
+      "event": "push",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063550"
+    },
+    {
+      "id": 34188063652,
+      "name": "Desktop export validation",
+      "event": "push",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063652"
+    }
+  ],
+  "godot_runtime_validation": {
+    "job_id": 101940301193,
+    "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063550/job/101940301193",
+    "check_count": 32,
+    "all_passed": true
+  },
+  "native_exports": [
+    {
+      "job_id": 101940301593,
+      "name": "export (windows-latest, windows, Godot_v4.6.3-stable_win64_console.exe)",
+      "checks": [
+        {
+          "exit_code": 0,
+          "name": "import",
+          "passed": true,
+          "seconds": 10.532
+        },
+        {
+          "exit_code": 0,
+          "name": "release_export",
+          "passed": true,
+          "seconds": 5.328
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_main",
+          "passed": true,
+          "seconds": 3.157
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_creature_builder_v7_test",
+          "passed": true,
+          "seconds": 0.657
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_modular_assembly_framework_test",
+          "passed": true,
+          "seconds": 0.594
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_gameplay_acceptance_test",
+          "passed": true,
+          "seconds": 0.859
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_meta_runtime_test",
+          "passed": true,
+          "seconds": 0.843
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_15838",
+          "passed": true,
+          "seconds": 5.313
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_63352",
+          "passed": true,
+          "seconds": 2.344
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_23757",
+          "passed": true,
+          "seconds": 2.344
+        }
+      ]
+    },
+    {
+      "job_id": 101940301782,
+      "name": "export (ubuntu-latest, linux, Godot_v4.6.3-stable_linux.x86_64)",
+      "checks": [
+        {
+          "exit_code": 0,
+          "name": "import",
+          "passed": true,
+          "seconds": 9.361
+        },
+        {
+          "exit_code": 0,
+          "name": "release_export",
+          "passed": true,
+          "seconds": 4.001
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_main",
+          "passed": true,
+          "seconds": 3.127
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_creature_builder_v7_test",
+          "passed": true,
+          "seconds": 0.436
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_modular_assembly_framework_test",
+          "passed": true,
+          "seconds": 0.436
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_gameplay_acceptance_test",
+          "passed": true,
+          "seconds": 0.624
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_meta_runtime_test",
+          "passed": true,
+          "seconds": 0.625
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_15838",
+          "passed": true,
+          "seconds": 4.067
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_63352",
+          "passed": true,
+          "seconds": 1.741
+        },
+        {
+          "exit_code": 0,
+          "name": "packaged_planet_23757",
+          "passed": true,
+          "seconds": 1.742
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 10041224236,
+      "name": "export-diagnostics-windows-push",
+      "bytes": 18884,
+      "github_artifact_digest": "sha256:44ddc876cb14d7bd6a52536d22b49691e909fa9e10c320d8206a3d714981c257",
+      "expires_at": "2026-09-22T04:45:50Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063652/artifacts/10041224236"
+    },
+    {
+      "id": 10041223838,
+      "name": "voxelverse-windows-push",
+      "bytes": 40815505,
+      "github_artifact_digest": "sha256:abc75f07f9a6ea7dcec137aab3f31c489e0090ab261417931bc83948d8aa156b",
+      "expires_at": "2026-09-22T04:45:47Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063652/artifacts/10041223838"
+    },
+    {
+      "id": 10041217563,
+      "name": "export-diagnostics-linux-push",
+      "bytes": 21462,
+      "github_artifact_digest": "sha256:d31e6231259d580d31e3bc0d584642d1eaaff51dd7228491ac0df63b18311ab5",
+      "expires_at": "2026-09-22T04:45:30Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063652/artifacts/10041217563"
+    },
+    {
+      "id": 10041217099,
+      "name": "voxelverse-linux-push",
+      "bytes": 32087702,
+      "github_artifact_digest": "sha256:20c641162ef885b54de615cd211169d6122a1d3991b09d81ff0c723ba6a22fcb",
+      "expires_at": "2026-09-22T04:45:27Z",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34188063652/artifacts/10041217099"
+    }
+  ]
+}

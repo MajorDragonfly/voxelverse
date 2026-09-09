@@ -11,6 +11,11 @@ const SpineProfile = preload(
 	"res://creatures/editor/creature_spine_profile.gd"
 )
 
+const Compatibility = preload("res://core/persistence/design_compatibility.gd")
+const Ids = preload("res://core/campaign/campaign_ids.gd")
+const Store = preload("res://core/persistence/design_store.gd")
+const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
+
 const SAVE_VERSION: int = 7
 const SAVE_PATH: String = "user://creature_assembly_v7.json"
 const LEGACY_V5_PATH: String = "user://creature_editor_blueprint_v5.json"
@@ -40,7 +45,22 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 		blueprint = BaseBlueprint.create_default()
 	for field_name in REMOVED_GENETIC_FIELDS:
 		blueprint.erase(field_name)
+	Ids.ensure_design(blueprint)
 	SpineProfile.ensure_profile(blueprint)
+	Compatibility.resolve_creature(blueprint)
+	SkinStyle.normalize(blueprint)
+	for part: Dictionary in blueprint.get("parts", []):
+		part["joint"] = BaseBlueprint.JointProfile.read(part.get("joint", {}))
+		part["shape_scale"] = BaseBlueprint.get_part_shape(part)
+		part["end_shape_scale"] = BaseBlueprint.get_part_shape(part, "end_shape_scale")
+		part["end_scale"] = clampf(float(part.get("end_scale", 1.0)), 0.4, 2.0)
+		var end_id: String = str(part.get("end_part_id", ""))
+		var end: Dictionary = BaseBlueprint.PartLibrary.get_part(end_id)
+		var expected: String = "feet" if str(part.get("category", "")) == "legs" else ("hands" if str(part.get("category", "")) == "arms" else "")
+		if not end_id.is_empty() and (expected.is_empty() or end.is_empty() or str(end.get("category", "")) != expected):
+			part["end_part_id"] = ""
+		if bool(part.get("center_locked", false)):
+			part["mirrored"] = false
 
 	var assembly: Dictionary = blueprint.get("assembly", {})
 	assembly["schema"] = SAVE_VERSION
@@ -58,7 +78,7 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 	blueprint["assembly"] = assembly
 
 	var progression: Dictionary = blueprint.get("progression", {})
-	progression["phase"] = "creature"
+	progression.erase("phase") # Campaign phase belongs exclusively to GameState.
 	progression["unlocked_parts"] = progression.get(
 		"unlocked_parts",
 		[]
@@ -120,6 +140,7 @@ static func save_to_file(
 	normalize(blueprint)
 	var serialized: Dictionary = BaseBlueprint._serialize_blueprint(blueprint)
 	serialized["version"] = SAVE_VERSION
+	serialized["design_id"] = blueprint["design_id"]
 	serialized["assembly"] = blueprint.get("assembly", {}).duplicate(true)
 	serialized["progression"] = blueprint.get(
 		"progression",
@@ -132,6 +153,7 @@ static func save_to_file(
 		blueprint
 	)
 	serialized["body"] = body
+	serialized["appearance"] = blueprint.get("appearance", {}).duplicate(true)
 
 	var serialized_parts: Array = serialized.get("parts", [])
 	var source_parts: Array = blueprint.get("parts", [])
@@ -182,29 +204,23 @@ static func save_to_file(
 
 	for field_name in REMOVED_GENETIC_FIELDS:
 		serialized.erase(field_name)
-	var file := FileAccess.open(save_path, FileAccess.WRITE)
-	if file == null:
-		return FileAccess.get_open_error()
-	file.store_string(JSON.stringify(serialized, "\t"))
-	file.close()
-	return OK
+	return Store.write(save_path, serialized)
 
 
 static func load_from_file(
 	save_path: String = SAVE_PATH
 ) -> Dictionary:
-	if not FileAccess.file_exists(save_path):
+	var text: String = Store.read_text(save_path)
+	if text.is_empty():
 		return {}
-	var file := FileAccess.open(save_path, FileAccess.READ)
-	if file == null:
-		return {}
-	var parsed: Variant = JSON.parse_string(file.get_as_text())
-	file.close()
+	var parsed: Variant = JSON.parse_string(text)
 	if not (parsed is Dictionary):
 		push_warning("Creature assembly save is not a dictionary: %s" % save_path)
 		return {}
 
 	var blueprint: Dictionary = BaseBlueprint._deserialize_blueprint(parsed)
+	blueprint["design_id"] = str(parsed.get("design_id", ""))
+	Ids.ensure_design(blueprint, save_path)
 	var body_data: Dictionary = parsed.get("body", {})
 	var body: Dictionary = blueprint.get("body", {})
 	body["spine"] = _deserialize_spine(body_data.get("spine", []))
@@ -214,6 +230,7 @@ static func load_from_file(
 		SpineProfile.MAX_BODY_LENGTH_SCALE
 	)
 	blueprint["body"] = body
+	blueprint["appearance"] = parsed.get("appearance", {}).duplicate(true) if parsed.get("appearance", {}) is Dictionary else {}
 	blueprint["assembly"] = parsed.get("assembly", {}).duplicate(true)
 	blueprint["progression"] = parsed.get(
 		"progression",
@@ -277,6 +294,7 @@ static func load_best_available() -> Dictionary:
 			SpineProfile.load_profile(blueprint)
 	if blueprint.is_empty():
 		return create_default()
+	Ids.ensure_design(blueprint, LEGACY_V5_PATH if not Store.read_text(LEGACY_V5_PATH).is_empty() else LEGACY_BASE_PATH)
 	normalize(blueprint)
 	return blueprint
 
@@ -288,6 +306,7 @@ static func _serialize_spine(segments: Array) -> Array:
 		if segment_value is Dictionary:
 			segment = segment_value
 		serialized.append({
+			"t": float(segment.get("t", float(serialized.size()) / 6.0)),
 			"width_scale": float(segment.get("width_scale", 1.0)),
 			"height_scale": float(segment.get("height_scale", 1.0)),
 			"y_offset": float(segment.get("y_offset", 0.0)),
@@ -304,6 +323,7 @@ static func _deserialize_spine(value: Variant) -> Array:
 		if index < value.size() and value[index] is Dictionary:
 			source = value[index]
 		segments.append({
+			"t": float(source.get("t", float(index) / 6.0)),
 			"width_scale": clampf(
 				float(source.get("width_scale", 1.0)),
 				SpineProfile.MIN_WIDTH_SCALE,

@@ -1,0 +1,35 @@
+{
+  "kind": "Windows release PCK instrumented by Linux editor; not native Windows execution",
+  "checks": [
+    {
+      "name": "main",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "creature_scan_test",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "tribal_age_test",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "tribal_age_supply_test",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "interface_audio_test",
+      "passed": true,
+      "exit_code": 0
+    }
+  ]
+}

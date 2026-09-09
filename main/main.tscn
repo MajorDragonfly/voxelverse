@@ -5,9 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cm26fs2gvsrep" path="res://world/resources/nests/nest.tscn" id="3_xwkvk"]
 [ext_resource type="PackedScene" path="res://world/visuals/planet_visual_environment.tscn" id="4_c651c"]
 [ext_resource type="Script" path="res://world/visuals/world_presentation_director_v6.gd" id="5_presentation"]
-[ext_resource type="Script" path="res://world/simulation/region_background_simulation_v7.gd" id="6_simulation"]
+[ext_resource type="Script" path="res://world/simulation/region_ecology_simulation.gd" id="6_simulation"]
 [ext_resource type="Script" path="res://world/fauna/fauna_streamer_v7.gd" id="7_fauna"]
 [ext_resource type="Script" path="res://world/space/star_system_runtime_v7.gd" id="8_system"]
+[ext_resource type="Script" path="res://core/development_tools.gd" id="9_dev"]
 
 [node name="Main" type="Node3D" unique_id=926892959]
 
@@ -18,7 +19,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="Nest" parent="." unique_id=1293792252 instance=ExtResource("3_xwkvk")]
 
-[node name="RegionBackgroundSimulationV7" type="Node" parent="."]
+[node name="RegionEcologySimulation" type="Node" parent="."]
 script = ExtResource("6_simulation")
 tick_interval = 4.0
 simulated_hours_per_tick = 0.25
@@ -28,11 +29,11 @@ maximum_cached_regions = 96
 
 [node name="FaunaStreamerV7" type="Node3D" parent="."]
 script = ExtResource("7_fauna")
-target_population = 9
-maximum_population = 14
-spawn_interval = 0.80
-minimum_spawn_radius = 14.0
-maximum_spawn_radius = 31.0
+target_population = 11
+maximum_population = 16
+spawn_interval = 0.62
+minimum_spawn_radius = 9.0
+maximum_spawn_radius = 26.0
 despawn_radius = 82.0
 species_region_size = 256.0
 
@@ -45,3 +46,7 @@ script = ExtResource("5_presentation")
 script = ExtResource("8_system")
 enable_planet_cycle_debug_key = true
 show_planet_runtime_label = true
+reload_scene_on_planet_change = true
+
+[node name="DevelopmentTools" type="Node" parent="."]
+script = ExtResource("9_dev")

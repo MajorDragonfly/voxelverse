@@ -1,0 +1,35 @@
+{
+  "bpm": 96,
+  "meter": "4/4",
+  "tonality": "D Dorian",
+  "sample_rate": 32000,
+  "tracks": {
+    "menu": {
+      "title": "Kleine Umlaufbahn",
+      "bars": 16,
+      "seconds": 40.0,
+      "file": "menu.ogg",
+      "decoded_peak": 0.58998,
+      "decoded_rms": 0.1067,
+      "seam_max_delta": 0.003226
+    },
+    "exploration": {
+      "title": "Unter fremden Blättern",
+      "bars": 24,
+      "seconds": 60.0,
+      "file": "exploration.ogg",
+      "decoded_peak": 0.59158,
+      "decoded_rms": 0.11424,
+      "seam_max_delta": 0.008377
+    },
+    "danger": {
+      "title": "Etwas im Unterholz",
+      "bars": 16,
+      "seconds": 40.0,
+      "file": "danger.ogg",
+      "decoded_peak": 0.52805,
+      "decoded_rms": 0.11529,
+      "seam_max_delta": 0.009726
+    }
+  }
+}

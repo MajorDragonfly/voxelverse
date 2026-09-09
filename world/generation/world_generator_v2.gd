@@ -44,6 +44,7 @@ var _moisture_noise := FastNoiseLite.new()
 var _river_noise := FastNoiseLite.new()
 var _lake_noise := FastNoiseLite.new()
 var _regional_tint_noise := FastNoiseLite.new()
+var _game_state_cache: Node
 
 
 func _ready() -> void:
@@ -62,8 +63,11 @@ func clear_seed_override() -> void:
 
 
 func set_world_seed(new_seed: int) -> void:
-	_seed_override_enabled = false
-	GameState.set("world_seed", new_seed)
+	var state: Node = _get_game_state()
+	_seed_override_enabled = state == null
+	_seed_override = new_seed
+	if state != null:
+		state.set("world_seed", new_seed)
 	_rebuild_noise_state(new_seed)
 
 
@@ -457,10 +461,22 @@ func _ensure_noise_state() -> void:
 
 
 func _read_game_state_seed() -> int:
-	var seed_value: Variant = GameState.get("world_seed")
+	var state: Node = _get_game_state()
+	var seed_value: Variant = state.get("world_seed") if state != null else null
 	if seed_value == null:
 		return DEFAULT_WORLD_SEED
 	return int(seed_value)
+
+
+func _get_game_state() -> Node:
+	# Resolve once at runtime: standalone generator checks and worker-owned
+	# generators must compile without the autoload initialization order.
+	if is_instance_valid(_game_state_cache):
+		return _game_state_cache
+	var loop := Engine.get_main_loop() as SceneTree
+	if loop != null:
+		_game_state_cache = loop.root.get_node_or_null("GameState")
+	return _game_state_cache
 
 
 func _rebuild_noise_state(new_seed: int) -> void:

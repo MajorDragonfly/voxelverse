@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0o6hud5mkoyd"]
 
-[ext_resource type="Script" uid="uid://4lk6eno3gl3w" path="res://world/resources/plants/berry_bush.gd" id="1_fuab0"]
+[ext_resource type="Script" path="res://world/resources/plants/foraging_berry_bush.gd" id="1_fuab0"]
 [ext_resource type="Script" path="res://world/visuals/voxel/voxel_surface_styler.gd" id="2_styler"]
 
 [node name="BerryBush" type="StaticBody3D" unique_id=567949051]

@@ -1,0 +1,58 @@
+name: Audio validation
+
+on:
+  push:
+    branches: ["agent/audio-foundation"]
+  pull_request:
+    paths: ["audio/**", "tests/audio/**", "tools/audio/**", "project.godot", ".github/workflows/audio-validate.yml"]
+
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Godot
+        run: |
+          curl -L --fail --retry 3 -o /tmp/godot.zip https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
+          echo 'd0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  /tmp/godot.zip' | sha256sum -c -
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          chmod +x /tmp/godot/Godot_v4.6.3-stable_linux.x86_64
+      - name: Import a fresh checkout
+        run: |
+          set -o pipefail
+          /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --editor --import 2>&1 | tee /tmp/audio-import.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|Failed to load|Failed to create an autoload' /tmp/audio-import.log
+      - name: Run audio physics and settings tests
+        run: |
+          set -o pipefail
+          timeout 70s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/audio_runtime_test.gd 2>&1 | tee /tmp/audio-runtime.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-runtime.log
+      - name: Run creature voices and event integration tests
+        run: |
+          set -o pipefail
+          timeout 70s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/creature_audio_test.gd 2>&1 | tee /tmp/audio-creatures.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-creatures.log
+      - name: Run music playback and transition tests
+        run: |
+          set -o pipefail
+          timeout 70s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/music_runtime_test.gd 2>&1 | tee /tmp/audio-music.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-music.log
+      - name: Run occlusion, action and music cadence tests
+        run: |
+          set -o pipefail
+          timeout 90s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/audio_expansion_test.gd 2>&1 | tee /tmp/audio-expansion.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-expansion.log
+      - name: Run scanner, group feedback and comfort DSP tests
+        run: |
+          set -o pipefail
+          timeout 70s /tmp/godot/Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://tests/audio/interface_audio_test.gd 2>&1 | tee /tmp/audio-interface.log
+          ! grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/audio-interface.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audio-validation-logs
+          path: /tmp/audio-*.log
+          retention-days: 7

@@ -1,258 +1,313 @@
-extends "res://world/visuals/scenery/procedural_ecosystem_v4.gd"
+extends Node3D
 
-const AssetsV6 = preload(
-	"res://world/visuals/scenery/voxel_asset_library_v6.gd"
-)
+const AuthoredAssets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
+const PlacementJob = preload("res://world/streaming/environment_placement_job.gd")
+const Obstacles = preload("res://world/visuals/scenery/environment_obstacles.gd")
+const WorkBudget = preload("res://world/streaming/environment_generation_budget.gd")
+const ClusterBuilder = preload("res://world/visuals/scenery/environment_cluster_builder.gd")
+const Slots = preload("res://assets/catalog/planet_material_slots.gd")
+const ClusterShader = preload("res://assets/catalog/planet_cluster.gdshader")
+const InstanceBuffer = preload("res://core/multimesh_buffer.gd")
 
-@export_range(1.0, 2.5, 0.05)
-var forest_density_multiplier: float = 1.55
+const SEED_OFFSET: int = 2_104_729_311
+@export_range(0, 48, 1) var tree_attempts: int = 16
+@export_range(0, 48, 1) var rock_attempts: int = 10
+@export_range(0, 64, 1) var ground_attempts: int = 18
+@export var tree_visibility_distance: float = 150.0
+@export var detail_visibility_distance: float = 82.0
+@export var enable_cluster_lod: bool = true
+@export_range(0, 262144, 1024) var cluster_vertex_limit: int = 65536
 
-@export_range(0, 48, 1)
-var cliff_attempts: int = 10
+# Existing scene/editor properties remain valid while placement now consumes
+# the actual biome grammar and authored, shared meshes.
+@export_range(1.0, 2.5, 0.05) var forest_density_multiplier: float = 1.55
+@export_range(0, 48, 1) var cliff_attempts: int = 10
+@export_range(0, 96, 1) var plant_field_attempts: int = 42
 
-@export_range(0, 96, 1)
-var plant_field_attempts: int = 42
-
+signal generation_finished
+var generation_complete: bool = false
+var placement_attempt_count: int = 0
+var instance_count: int = 0
 var _lod_tier: int = 0
+var _batches: Dictionary = {}
+
+
+# Explicit staged state owns every resource. Cancelling/unloading a chunk cannot
+# strand coroutine locals (RNGs and profile dictionaries) at engine shutdown.
+var _phase: int = 0
+var _chunk: Node3D
+var _width: float
+var _depth: float
+var _profile: Dictionary = {}
+var _placement_job: RefCounted
+var _placement_task: int = -1
+var _placement_usec: int = 0
+var _obstacles: StaticBody3D
+var _recipes: Array[Dictionary] = []
+var _publish_keys: Array[String] = []
+var _publish_index: int = 0
+var _cluster_started: bool = false
+var _cluster_builders: Dictionary = {}
+var _cluster_nodes: Dictionary = {}
+var _cluster_fallbacks: Dictionary = {}
+var _cluster_vertices: int = 0
+var _cluster_indices: int = 0
+var _cluster_instances: int = 0
+
+
+func _ready() -> void:
+	_chunk = get_parent() as Node3D
+	if not _is_valid_chunk(_chunk):
+		set_process(false)
+
+
+func _process(_delta: float) -> void:
+	if generation_complete:
+		_process_clusters()
+		return
+	if _phase == 0:
+		if not bool(_chunk.get("generation_complete")) or not WorkBudget.claim_placement_job():
+			return
+		_begin_generation()
+	if _phase == 1:
+		if not WorkerThreadPool.is_task_completed(_placement_task):
+			return
+		WorkerThreadPool.wait_for_task_completion(_placement_task)
+		_placement_task = -1
+		WorkBudget.release_placement_job()
+		_batches = _placement_job.result["batches"]
+		placement_attempt_count = int(_placement_job.result["attempts"])
+		instance_count = int(_placement_job.result["instances"])
+		_placement_usec = _placement_job.elapsed_usec
+		_placement_job = null
+		_publish_keys.assign(_batches.keys())
+		_phase = 2
+	if _phase == 2:
+		while _publish_index < _publish_keys.size() and not WorkBudget.exhausted():
+			var key: String = _publish_keys[_publish_index]
+			var batch: Dictionary = _batches[key]
+			var started: int = Time.get_ticks_usec()
+			var prepared: bool = AuthoredAssets.prepare_lods(batch["asset_id"], int(batch["species"]["geometry_variant"]))
+			WorkBudget.record(started, "resource")
+			if not prepared or WorkBudget.exhausted():
+				return
+			started = Time.get_ticks_usec()
+			_publish_batch(key, batch, _profile)
+			WorkBudget.record(started, "batch")
+			_publish_index += 1
+		if _publish_index == _publish_keys.size():
+			_apply_lod()
+			_phase = 3
+			generation_complete = true
+			_profile.clear()
+			_recipes.clear()
+			set_process(false)
+			_schedule_clusters()
+			generation_finished.emit()
+
+
+func _begin_generation() -> void:
+	_width = float(_chunk.call("get_chunk_width"))
+	_depth = float(_chunk.call("get_chunk_depth"))
+	_profile = WorldGenerator.get_planet_profile()
+	var spawn: Vector3 = WorldGenerator.get_scenic_spawn()
+	_recipes = [
+		PlacementJob.tree_recipe(tree_attempts, forest_density_multiplier),
+		{"group": "shrub", "attempts": plant_field_attempts, "families": ["dense_bush_v2"], "chance": 0.74, "slope": 0.65},
+		{"group": "rock", "attempts": rock_attempts + cliff_attempts, "families": ["layered_rock_v2"], "chance": 0.62, "slope": 1.35},
+		{"group": "fern", "attempts": ground_attempts * 2, "families": ["fern_cluster_v2"], "chance": 0.85, "slope": 0.65},
+		{"group": "flower", "attempts": ground_attempts * 2, "families": ["flower_cluster_v2"], "chance": 0.70, "slope": 0.65},
+		{"group": "grass", "attempts": ground_attempts * 5, "families": ["grass_tuft_v2"], "chance": 1.00, "slope": 0.70},
+	]
+	_placement_job = PlacementJob.new()
+	_placement_job.generator_script = WorldGenerator.get_script()
+	_placement_job.world_seed = WorldGenerator.get_world_seed()
+	_placement_job.chunk_origin = Vector2(_chunk.global_position.x, _chunk.global_position.z)
+	_placement_job.width = _width
+	_placement_job.depth = _depth
+	_placement_job.cell_size = _chunk.cell_size
+	_placement_job.heights = _chunk._fast_height_grid
+	_placement_job.height_width = _chunk._fast_height_width
+	_placement_job.height_depth = _chunk._fast_height_depth
+	_placement_job.spawn_clear_center = Vector2(spawn.x, spawn.z)
+	_placement_job.recipes = _recipes
+	_phase = 1
+	_placement_task = WorkerThreadPool.add_task(_placement_job.run, false, "Environment %s" % _chunk.name)
+
+
+func _publish_batch(key: String, batch: Dictionary, profile: Dictionary) -> void:
+	var species: Dictionary = batch["species"]
+	var mesh: Mesh = AuthoredAssets.get_mesh(batch["asset_id"], _lod_tier, int(species["geometry_variant"]))
+	if mesh == null:
+		push_error("Environment asset has no valid runtime LOD: %s" % batch["asset_id"])
+		return
+	var transforms: Array = batch["transforms"]
+	var multimesh := MultiMesh.new()
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	multimesh.use_custom_data = true
+	multimesh.mesh = mesh
+	multimesh.instance_count = transforms.size()
+	var bounds: AABB
+	var all_lod_bounds: AABB = mesh.get_aabb()
+	for tier in range(3):
+		var lod_mesh: Mesh = AuthoredAssets.get_mesh(batch["asset_id"], tier, int(species["geometry_variant"]))
+		if lod_mesh != null:
+			all_lod_bounds = all_lod_bounds.merge(lod_mesh.get_aabb())
+	for i in range(transforms.size()):
+		var transform: Transform3D = transforms[i]
+		var instance_bounds: AABB = transform * all_lod_bounds
+		bounds = instance_bounds if i == 0 else bounds.merge(instance_bounds)
+	multimesh.custom_aabb = bounds.grow(0.65)
+	multimesh.buffer = InstanceBuffer.pack(transforms, batch["custom"])
+	var node := MultiMeshInstance3D.new()
+	node.name = key
+	node.multimesh = multimesh
+	node.material_override = AuthoredAssets.get_material(profile, species)
+	# Tree lifetime follows chunk ownership. A distance cutoff on a whole batch
+	# can remove an irregular strip before the distant forest takes ownership.
+	node.visibility_range_end = 0.0 if bool(batch["tree"]) else detail_visibility_distance
+	add_child(node)
+	batch["node"] = node
+	if Obstacles.has_collision(str(batch["asset_id"])):
+		if _obstacles == null:
+			_obstacles = Obstacles.new()
+			_obstacles.name = "EnvironmentObstacles"
+			_chunk.get_node("Objects").add_child(_obstacles)
+		_obstacles.add_batch(batch)
+	_apply_lod()
+
 
 
 func set_lod_tier(tier: int) -> void:
 	_lod_tier = clampi(tier, 0, 2)
 	_apply_lod()
+	_schedule_clusters()
 
 
-func _generate_staged() -> void:
-	var chunk := get_parent() as Node3D
-	if not _is_valid_chunk(chunk):
-		return
-	var width: float = float(chunk.call("get_chunk_width"))
-	var depth: float = float(chunk.call("get_chunk_depth"))
-	var random := _chunk_random(chunk, width, depth)
-
-	await get_tree().process_frame
-	if not is_inside_tree() or not _is_valid_chunk(chunk):
-		return
-	_generate_trees(chunk, width, depth, random)
+func set_cluster_enabled(enabled: bool) -> void:
+	enable_cluster_lod = enabled
 	_apply_lod()
-
-	await get_tree().process_frame
-	if not is_inside_tree() or not _is_valid_chunk(chunk):
-		return
-	_generate_rocks(chunk, width, depth, random)
-	_apply_lod()
-
-	await get_tree().process_frame
-	if not is_inside_tree() or not _is_valid_chunk(chunk):
-		return
-	_generate_ground_clusters(chunk, width, depth, random)
-	_apply_lod()
-
-
-func _generate_trees(
-	chunk: Node3D,
-	width: float,
-	depth: float,
-	random: RandomNumberGenerator
-) -> void:
-	var straight_trunks: Array[Transform3D] = []
-	var straight_trunk_colors: Array[Color] = []
-	var round_crowns: Array[Transform3D] = []
-	var round_crown_colors: Array[Color] = []
-	var gnarled_trunks: Array[Transform3D] = []
-	var gnarled_colors: Array[Color] = []
-	var flat_canopies: Array[Transform3D] = []
-	var flat_colors: Array[Color] = []
-	var conifer_trunks: Array[Transform3D] = []
-	var conifer_trunk_colors: Array[Color] = []
-	var conifer_crowns: Array[Transform3D] = []
-	var conifer_colors: Array[Color] = []
-
-	var attempts: int = maxi(roundi(float(tree_attempts) * forest_density_multiplier), tree_attempts)
-	for _attempt in range(attempts):
-		var point: Dictionary = _sample_point(chunk, width, depth, random, 0.52)
-		if point.is_empty():
-			continue
-		var biome: int = int(point.get("biome", WorldGenerator.Biome.GRASSLAND))
-		var ecology: float = float(point.get("ecology", 0.5))
-		if random.randf() > _tree_chance(biome) * ecology:
-			continue
-
-		var tree_height: float = random.randf_range(2.6, 6.4)
-		var trunk_width: float = random.randf_range(0.44, 0.80)
-		var crown_width: float = random.randf_range(1.15, 2.40)
-		var crown_height: float = random.randf_range(0.90, 1.90)
-		var angle: float = random.randf_range(0.0, TAU)
-		var local_x: float = float(point.get("local_x", 0.0))
-		var local_z: float = float(point.get("local_z", 0.0))
-		var surface_height: float = float(point.get("surface_height", 0.0))
-		var world_x: float = float(point.get("world_x", 0.0))
-		var world_z: float = float(point.get("world_z", 0.0))
-		var terrain_height: float = float(point.get("logical_height", 0.0))
-		var terrain_color: Color = WorldGenerator.get_biome_color(
-			world_x,
-			world_z,
-			terrain_height
-		)
-		var trunk_color: Color = _vary(Color(0.29, 0.17, 0.085, 1.0), random, 0.18)
-		var leaf_color: Color = _vary(
-			terrain_color.lerp(_leaf_target_color(biome), 0.76),
-			random,
-			0.16
-		)
-
-		var architecture: int = 0
-		if biome == WorldGenerator.Biome.SAVANNA:
-			architecture = 1
-		elif biome in [WorldGenerator.Biome.ALPINE, WorldGenerator.Biome.ROCKY_HIGHLANDS]:
-			architecture = 2
-		elif biome in [WorldGenerator.Biome.SWAMP, WorldGenerator.Biome.WETLAND]:
-			architecture = 1 if random.randf() < 0.62 else 0
-		else:
-			architecture = random.randi_range(0, 2)
-
-		if architecture == 1:
-			tree_height *= 0.82
-			crown_width *= 1.42
-			crown_height *= 0.72
-			gnarled_trunks.append(Transform3D(
-				Basis(Vector3.UP, angle).scaled(Vector3(trunk_width, tree_height, trunk_width)),
-				Vector3(local_x, surface_height + tree_height * 0.50, local_z)
-			))
-			gnarled_colors.append(trunk_color)
-			flat_canopies.append(Transform3D(
-				Basis(Vector3.UP, angle + 0.19).scaled(Vector3(crown_width, crown_height, crown_width)),
-				Vector3(local_x, surface_height + tree_height + crown_height * 0.15, local_z)
-			))
-			flat_colors.append(leaf_color)
-		elif architecture == 2:
-			tree_height *= 1.12
-			crown_width *= 0.78
-			crown_height *= 1.36
-			conifer_trunks.append(Transform3D(
-				Basis(Vector3.UP, angle).scaled(Vector3(trunk_width * 0.82, tree_height, trunk_width * 0.82)),
-				Vector3(local_x, surface_height + tree_height * 0.50, local_z)
-			))
-			conifer_trunk_colors.append(trunk_color.darkened(0.06))
-			conifer_crowns.append(Transform3D(
-				Basis(Vector3.UP, angle).scaled(Vector3(crown_width, crown_height, crown_width)),
-				Vector3(local_x, surface_height + tree_height + crown_height * 0.06, local_z)
-			))
-			conifer_colors.append(leaf_color.darkened(0.08))
-		else:
-			straight_trunks.append(Transform3D(
-				Basis(Vector3.UP, angle).scaled(Vector3(trunk_width, tree_height, trunk_width)),
-				Vector3(local_x, surface_height + tree_height * 0.50, local_z)
-			))
-			straight_trunk_colors.append(trunk_color)
-			round_crowns.append(Transform3D(
-				Basis(Vector3.UP, angle + 0.23).scaled(Vector3(crown_width, crown_height, crown_width)),
-				Vector3(local_x, surface_height + tree_height + crown_height * 0.20, local_z)
-			))
-			round_crown_colors.append(leaf_color)
-
-	_add_group("V6StraightTrunks", AssetsV6.get_straight_trunk_mesh(), straight_trunks, straight_trunk_colors, tree_visibility_distance, true)
-	_add_group("V6RoundCrowns", AssetsV6.get_round_crown_mesh(), round_crowns, round_crown_colors, tree_visibility_distance, true)
-	_add_group("V6GnarledTrunks", AssetsV6.get_gnarled_trunk_mesh(), gnarled_trunks, gnarled_colors, tree_visibility_distance, true)
-	_add_group("V6FlatCanopies", AssetsV6.get_flat_canopy_mesh(), flat_canopies, flat_colors, tree_visibility_distance, true)
-	_add_group("V6ConiferTrunks", AssetsV6.get_straight_trunk_mesh(), conifer_trunks, conifer_trunk_colors, tree_visibility_distance, true)
-	_add_group("V6ConiferCrowns", AssetsV6.get_conifer_crown_mesh(), conifer_crowns, conifer_colors, tree_visibility_distance, true)
-
-
-func _generate_rocks(
-	chunk: Node3D,
-	width: float,
-	depth: float,
-	random: RandomNumberGenerator
-) -> void:
-	super._generate_rocks(chunk, width, depth, random)
-	var transforms: Array[Transform3D] = []
-	var colors: Array[Color] = []
-	for _attempt in range(cliff_attempts):
-		var point: Dictionary = _sample_point(chunk, width, depth, random, 1.45)
-		if point.is_empty():
-			continue
-		var world_x: float = float(point.get("world_x", 0.0))
-		var world_z: float = float(point.get("world_z", 0.0))
-		var slope: float = WorldGenerator.get_terrain_slope(world_x, world_z, 0.65)
-		var biome: int = int(point.get("biome", WorldGenerator.Biome.GRASSLAND))
-		if slope < 0.38 and biome not in [WorldGenerator.Biome.ROCKY_HIGHLANDS, WorldGenerator.Biome.ALPINE]:
-			continue
-		var scale_value: float = random.randf_range(0.65, 1.75)
-		transforms.append(Transform3D(
-			Basis(Vector3.UP, random.randf_range(0.0, TAU)).scaled(
-				Vector3(scale_value * 1.2, scale_value, scale_value)
-			),
-			Vector3(
-				float(point.get("local_x", 0.0)),
-				float(point.get("surface_height", 0.0)) + scale_value * 0.18,
-				float(point.get("local_z", 0.0))
-			)
-		))
-		colors.append(_vary(WorldGenerator.get_world_rock_color(), random, 0.16))
-	_add_group("V6CliffClusters", AssetsV6.get_cliff_cluster_mesh(), transforms, colors, detail_visibility_distance * 1.55, true)
-
-
-func _generate_ground_clusters(
-	chunk: Node3D,
-	width: float,
-	depth: float,
-	random: RandomNumberGenerator
-) -> void:
-	super._generate_ground_clusters(chunk, width, depth, random)
-	var transforms: Array[Transform3D] = []
-	var colors: Array[Color] = []
-	for _attempt in range(plant_field_attempts):
-		var point: Dictionary = _sample_point(chunk, width, depth, random, 0.62)
-		if point.is_empty():
-			continue
-		var biome: int = int(point.get("biome", WorldGenerator.Biome.GRASSLAND))
-		var ecology: float = float(point.get("ecology", 0.5))
-		if random.randf() > _ground_chance(biome) * ecology * 0.90:
-			continue
-		var scale_value: float = random.randf_range(0.38, 0.90)
-		transforms.append(Transform3D(
-			Basis(Vector3.UP, random.randf_range(0.0, TAU)).scaled(Vector3.ONE * scale_value),
-			Vector3(
-				float(point.get("local_x", 0.0)),
-				float(point.get("surface_height", 0.0)) + scale_value * 0.08,
-				float(point.get("local_z", 0.0))
-			)
-		))
-		var terrain_color: Color = WorldGenerator.get_biome_color(
-			float(point.get("world_x", 0.0)),
-			float(point.get("world_z", 0.0)),
-			float(point.get("logical_height", 0.0))
-		)
-		colors.append(_vary(terrain_color.lerp(_ground_target_color(biome), 0.72), random, 0.16))
-	_add_group("V6FernFields", AssetsV6.get_fern_mesh(), transforms, colors, detail_visibility_distance, false)
+	_schedule_clusters()
 
 
 func _apply_lod() -> void:
-	for child in get_children():
-		var instance := child as MultiMeshInstance3D
-		if instance == null:
+	for batch: Dictionary in _batches.values():
+		var node := batch.get("node") as MultiMeshInstance3D
+		if node == null:
 			continue
-		var group_name: String = instance.name
-		var is_ground_detail: bool = (
-			"Ground" in group_name
-			or "Fern" in group_name
-		)
-		var is_tree: bool = (
-			"Trunk" in group_name
-			or "Crown" in group_name
-			or "Canop" in group_name
-		)
-		match _lod_tier:
-			0:
-				instance.visible = true
-				instance.cast_shadow = (
-					GeometryInstance3D.SHADOW_CASTING_SETTING_ON
-					if is_tree
-					else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-				)
-			1:
-				instance.visible = not is_ground_detail
-				instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-			2:
-				instance.visible = is_tree
-				instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		var mesh: Mesh = AuthoredAssets.get_mesh(batch["asset_id"], _lod_tier, int(batch["species"]["geometry_variant"]))
+		if mesh != null:
+			node.multimesh.mesh = mesh
+		var is_small: bool = batch["asset_id"] in ["fern_cluster_v2", "flower_cluster_v2", "grass_tuft_v2"]
+		var cluster_active: bool = enable_cluster_lod and _lod_tier == 2 and _cluster_nodes.has(_cluster_group(batch))
+		node.visible = (_lod_tier < 2 or not is_small) and not cluster_active
+		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON if _lod_tier == 0 and bool(batch["tree"]) else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	for node: MeshInstance3D in _cluster_nodes.values():
+		node.visible = enable_cluster_lod and _lod_tier == 2
+
+
+func _cluster_group(batch: Dictionary) -> String:
+	return "trees" if bool(batch["tree"]) else "low"
+
+
+func _schedule_clusters() -> void:
+	if not generation_complete:
+		return
+	if not enable_cluster_lod or _lod_tier != 2:
+		set_process(false)
+		return
+	if not _cluster_started:
+		_cluster_started = true
+		for batch: Dictionary in _batches.values():
+			if batch["asset_id"] in ["fern_cluster_v2", "flower_cluster_v2", "grass_tuft_v2"]:
+				continue
+			var group: String = _cluster_group(batch)
+			if not _cluster_builders.has(group):
+				var builder := ClusterBuilder.new()
+				builder.vertex_limit = cluster_vertex_limit
+				_cluster_builders[group] = builder
+			var species: Dictionary = batch["species"]
+			var mesh: Mesh = AuthoredAssets.get_mesh(batch["asset_id"], 2, int(species["geometry_variant"]))
+			_cluster_builders[group].sources.append({"mesh": mesh, "transforms": batch["transforms"],
+				"custom": batch["custom"], "palette": species["palette"]})
+	set_process(not _cluster_builders.is_empty())
+
+
+func _process_clusters() -> void:
+	if not enable_cluster_lod or _lod_tier != 2:
+		set_process(false)
+		return
+	for group: String in _cluster_builders.keys():
+		var builder: RefCounted = _cluster_builders[group]
+		while not bool(builder.complete) and not WorkBudget.exhausted():
+			var started: int = Time.get_ticks_usec()
+			builder.step()
+			WorkBudget.record(started, "cluster")
+		if not bool(builder.complete):
+			return
+		if not str(builder.failure).is_empty():
+			# Capacity/invalid-input fallback keeps the original Far batches visible.
+			_cluster_fallbacks[group] = builder.failure
+			_cluster_builders.erase(group)
+			continue
+		if WorkBudget.exhausted() or not WorkBudget.claim_mesh_upload():
+			return
+		var started: int = Time.get_ticks_usec()
+		var mesh := ArrayMesh.new()
+		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, builder.get_arrays())
+		var material := ShaderMaterial.new()
+		material.shader = ClusterShader
+		material.set_shader_parameter("planet_palette", Slots.create_atlas(builder.palettes))
+		var node := MeshInstance3D.new()
+		node.name = "FarCluster_" + group
+		node.mesh = mesh
+		node.material_override = material
+		node.custom_aabb = mesh.get_aabb().grow(0.65)
+		node.visibility_range_end = 0.0 if group == "trees" else detail_visibility_distance
+		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		add_child(node)
+		_cluster_nodes[group] = node
+		_cluster_vertices += builder.vertices.size()
+		_cluster_indices += builder.indices.size()
+		_cluster_instances += int(builder.instance_count)
+		_cluster_builders.erase(group)
+		_apply_lod()
+		WorkBudget.record(started, "cluster_upload")
+	set_process(not _cluster_builders.is_empty())
+
+
+func get_generation_stats() -> Dictionary:
+	var visible_batches: int = 0
+	for child: Node in get_children():
+		if child is GeometryInstance3D and child.visible:
+			visible_batches += 1
+	return {"complete": generation_complete, "attempts": placement_attempt_count, "instances": instance_count,
+		"placement_worker_usec": _placement_usec, "obstacle_shapes": _obstacles.shape_count if _obstacles != null else 0,
+		"batches": _batches.size(), "nodes": get_child_count(), "visible_batches": visible_batches,
+		"cluster_complete": _cluster_started and _cluster_builders.is_empty(),
+		"cluster_ready": _cluster_started and _cluster_builders.is_empty() and _cluster_fallbacks.is_empty(),
+		"cluster_nodes": _cluster_nodes.size(), "cluster_vertices": _cluster_vertices,
+		"cluster_indices": _cluster_indices, "cluster_instances": _cluster_instances,
+		"cluster_fallbacks": _cluster_fallbacks.duplicate(),
+		"max_cluster_step_usec": WorkBudget.max_cluster_step_usec, "max_cluster_upload_usec": WorkBudget.max_cluster_upload_usec,
+		"max_step_usec": WorkBudget.max_step_usec, "max_placement_usec": WorkBudget.max_placement_usec,
+		"max_batch_usec": WorkBudget.max_batch_usec, "max_resource_usec": WorkBudget.max_resource_usec}
+
+
+func _is_valid_chunk(chunk: Node3D) -> bool:
+	return (
+		chunk != null
+		and is_instance_valid(chunk)
+		and chunk.has_method("get_chunk_width")
+		and chunk.has_method("get_chunk_depth")
+		and chunk.has_method("get_surface_height_at_local_position")
+	)
+
+
+
+func _exit_tree() -> void:
+	if _placement_task >= 0:
+		WorkerThreadPool.wait_for_task_completion(_placement_task)
+		_placement_task = -1
+		WorkBudget.release_placement_job()
+	_placement_job = null

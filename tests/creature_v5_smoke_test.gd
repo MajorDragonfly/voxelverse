@@ -6,146 +6,77 @@ const Blueprint = preload(
 const BlueprintV5 = preload(
 	"res://creatures/editor/creature_blueprint_v5.gd"
 )
-const EvolutionGenerator = preload(
-	"res://creatures/editor/creature_evolution_generator.gd"
+const AssemblyV7 = preload(
+	"res://creatures/editor/creature_assembly_blueprint_v7.gd"
 )
 
-const TEST_SEED: int = 314159265
-
+const TEST_PATH: String = "user://creature_v5_migration_test.json"
 var _failures: Array[String] = []
 
 
 func _initialize() -> void:
-	_run_generator_checks()
-	_run_mutation_checks()
+	_run_legacy_roundtrip_and_migration()
 	_run_scene_resource_checks()
-
+	if FileAccess.file_exists(TEST_PATH):
+		DirAccess.remove_absolute(TEST_PATH)
 	if _failures.is_empty():
-		print("Creature V5 smoke test passed.")
-		quit(0)
+		print("Creature V5 migration compatibility test passed.")
+		await preload("res://core/runtime_shutdown.gd").finish(self, 0)
 		return
-
 	for failure in _failures:
 		push_error(failure)
-
-	quit(1)
-
-
-func _run_generator_checks() -> void:
-	for archetype in EvolutionGenerator.ARCHETYPES:
-		var first: Dictionary = EvolutionGenerator.generate(
-			TEST_SEED,
-			archetype
-		)
-		var second: Dictionary = EvolutionGenerator.generate(
-			TEST_SEED,
-			archetype
-		)
-
-		_expect(
-			not first.is_empty(),
-			"Generator returned an empty blueprint for %s." % archetype
-		)
-		_expect(
-			Blueprint.get_part_count(first) >= 2,
-			"Generated %s creature has too few parts." % archetype
-		)
-		_expect(
-			Blueprint.calculate_complexity(first)
-			<= Blueprint.COMPLEXITY_LIMIT,
-			"Generated %s creature exceeds complexity limit." % archetype
-		)
-
-		var first_path: String = "user://creature_v5_%s_a.json" % archetype
-		var second_path: String = "user://creature_v5_%s_b.json" % archetype
-		var first_error: Error = BlueprintV5.save_to_file(
-			first,
-			first_path
-		)
-		var second_error: Error = BlueprintV5.save_to_file(
-			second,
-			second_path
-		)
-
-		_expect(
-			first_error == OK and second_error == OK,
-			"Could not save deterministic %s test blueprints." % archetype
-		)
-
-		if first_error == OK and second_error == OK:
-			_expect(
-				_read_text(first_path) == _read_text(second_path),
-				"Seeded generation is not deterministic for %s." % archetype
-			)
-
-		var loaded: Dictionary = BlueprintV5.load_from_file(first_path)
-		var loaded_generation: Dictionary = loaded.get("generation", {})
-		_expect(
-			not loaded.is_empty(),
-			"V5 round-trip load failed for %s." % archetype
-		)
-		_expect(
-			int(loaded_generation.get("seed", 0)) == TEST_SEED,
-			"V5 round-trip lost seed metadata for %s." % archetype
-		)
+	await preload("res://core/runtime_shutdown.gd").finish(self, 1)
 
 
-func _run_mutation_checks() -> void:
-	var parent: Dictionary = EvolutionGenerator.generate(
-		TEST_SEED,
-		"grazer"
-	)
-	var child: Dictionary = EvolutionGenerator.mutate(
-		parent,
-		TEST_SEED + 1,
-		0.24
-	)
-	var parent_generation: Dictionary = parent.get("generation", {})
-	var child_generation: Dictionary = child.get("generation", {})
-
+func _run_legacy_roundtrip_and_migration() -> void:
+	var legacy: Dictionary = Blueprint.create_default()
+	legacy["generation"] = {
+		"seed": 314159265,
+		"generation": 4,
+		"parent_seed": 271828182,
+	}
+	legacy["genes"] = {"obsolete": true}
+	var save_error: Error = BlueprintV5.save_to_file(legacy, TEST_PATH)
+	_expect(save_error == OK, "Could not write legacy V5 migration fixture.")
+	if save_error != OK:
+		return
+	var loaded: Dictionary = BlueprintV5.load_from_file(TEST_PATH)
+	_expect(not loaded.is_empty(), "Legacy V5 fixture could not be loaded.")
+	AssemblyV7.normalize(loaded)
 	_expect(
-		int(child_generation.get("generation", -1))
-		== int(parent_generation.get("generation", 0)) + 1,
-		"Mutation did not increment generation metadata."
+		int(loaded.get("assembly", {}).get("schema", 0)) == 7,
+		"Legacy creature was not upgraded to assembly schema V7."
 	)
+	for forbidden_field in [
+		"generation",
+		"genes",
+		"genome",
+		"genetics",
+		"mutation",
+		"mutations",
+		"lineage",
+		"parent_seed",
+		"seed",
+	]:
+		_expect(
+			not loaded.has(forbidden_field),
+			"Legacy migration retained forbidden field: %s" % forbidden_field
+		)
 	_expect(
-		int(child_generation.get("parent_seed", 0))
-		== int(parent_generation.get("seed", 0)),
-		"Mutation did not retain the parent seed."
-	)
-	_expect(
-		Blueprint.calculate_complexity(child)
-		<= Blueprint.COMPLEXITY_LIMIT,
-		"Mutated creature exceeds complexity limit."
+		Blueprint.calculate_complexity(loaded) <= Blueprint.COMPLEXITY_LIMIT,
+		"Migrated creature exceeds the complexity limit."
 	)
 
 
 func _run_scene_resource_checks() -> void:
-	_expect(
-		load("res://creatures/editor/creature_editor.tscn") != null,
-		"Creature Lab V5 scene could not be loaded."
-	)
-	_expect(
-		load("res://creatures/player/player.tscn") != null,
-		"Player scene with runtime creature bridge could not be loaded."
-	)
-	_expect(
-		load("res://main/main.tscn") != null,
-		"Main scene could not be loaded."
-	)
+	for path in [
+		"res://creatures/editor/creature_editor.tscn",
+		"res://creatures/player/player.tscn",
+		"res://main/main.tscn",
+	]:
+		_expect(load(path) != null, "Required runtime scene could not load: %s" % path)
 
 
 func _expect(condition: bool, failure_message: String) -> void:
 	if not condition:
 		_failures.append(failure_message)
-
-
-func _read_text(path: String) -> String:
-	var file := FileAccess.open(path, FileAccess.READ)
-
-	if file == null:
-		return ""
-
-	var content: String = file.get_as_text()
-	file.close()
-	return content
