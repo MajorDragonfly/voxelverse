@@ -56,9 +56,14 @@ func _walk(body: Dictionary) -> void:
 	var rays: int = 0
 	var minimum: float = INF
 	var peak_static_bytes: int = 0
-	var frame_count: int = 420 if body.id == "m1b:terra" else 240
-	for frame in range(frame_count):
+	var frame_count: int = 0
+	var waiting_frames: int = 0
+	var largest_cell: float = 0.0
+	var distance_goal: float = 167.0
+	for frame in range(1800):
 		await physics_frame
+		frame_count = frame + 1
+		waiting_frames += int(walker.waiting_for_terrain)
 		var here: Dictionary = walker.location()
 		peak_static_bytes = maxi(peak_static_bytes, int(Performance.get_monitor(Performance.MEMORY_STATIC)))
 		var h: float = terrain.surface.sample(here).height
@@ -69,7 +74,8 @@ func _walk(body: Dictionary) -> void:
 		_expect(terrain.tiles.size() <= 768 and terrain.active.size() <= 24 and terrain.last_build_count <= 2, "Large-world streaming exceeded its bounded budgets.")
 		var owner: Dictionary = terrain.layout.find_at(here.face, here.u, here.v, terrain.leaves)
 		_expect(not owner.is_empty() and terrain.active.has(owner.id), "Nearest collider selection omitted the player's own tile.")
-		_expect(owner.width * body.radius / 16.0 <= 4.0, "Moving player lost metre-scale voxel terrain: %s frame=%d level=%d cell_m=%.3f" % [body.id, frame, owner.level, owner.width * body.radius / 16.0])
+		largest_cell = maxf(largest_cell, owner.width * body.radius / 16.0)
+		_expect(owner.width * body.radius / 16.0 <= 4.0, "Moving player lost metre-scale voxel terrain: " + body.id)
 		if frame % 30 == 0:
 			for id: String in terrain.active:
 				var tile: Dictionary = terrain.leaves[id]
@@ -85,12 +91,16 @@ func _walk(body: Dictionary) -> void:
 					var ray := PhysicsRayQueryParameters3D.create(point + up * 3.0, point - up * 3.0, 1, [walker.get_rid()])
 					_expect(not terrain.get_world_3d().direct_space_state.intersect_ray(ray).is_empty(), "Physical ray missed %s frame=%d edge=%d tiles=%s,%s" % [body.id, frame, edge, id, adjacent.id])
 					rays += 1
+		if walker.traveled >= distance_goal:
+			break
 	walker.enabled = false
-	_expect(contacts > frame_count * 0.95 and faces.size() >= 2 and walker.traveled > 80.0, "Large-body walking did not maintain contact across the cube boundary.")
+	_expect(contacts > frame_count * 0.95 and faces.size() >= 2 and walker.traveled >= distance_goal, "Large-body walking did not maintain contact across the cube boundary.")
 	_expect(terrain.rebases >= 2 and terrain.updates >= 3 and terrain.peak_resident_meshes <= 1536, "Large-body movement missed origin changes or streaming publication.")
 	var metrics: Dictionary = {"body": body.id, "frames": frame_count, "contacts": contacts, "walk_m": walker.traveled, "faces": faces.size(),
 		"rebases": terrain.rebases, "publishes": terrain.updates, "rays": rays, "minimum_clearance_m": minimum,
 		"peak_tiles": terrain.peak_tiles, "peak_resident_terrain_meshes": terrain.peak_resident_meshes,
+		"waiting_frames": waiting_frames, "simulated_seconds": frame_count / 60.0, "maximum_cell_width_m": largest_cell,
+		"publish_deferrals": terrain.publish_deferrals,
 		"terrain_ready_ms": terrain_ready_ms, "peak_engine_static_bytes": peak_static_bytes,
 		"jobs": terrain.job_samples.duplicate(true),
 		"initial_publish_ms": terrain.max_initial_publish_usec / 1000.0, "max_worker_ms": terrain.max_worker_usec / 1000.0,

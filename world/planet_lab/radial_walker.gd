@@ -18,6 +18,7 @@ var camera: Camera3D
 var pitch: float = -0.18
 var traveled: float = 0.0
 var creature_design: Dictionary = {}
+var waiting_for_terrain: bool = false
 
 
 func _ready() -> void:
@@ -86,9 +87,17 @@ func _physics_process(delta: float) -> void:
 			float(Input.is_physical_key_pressed(KEY_W)) - float(Input.is_physical_key_pressed(KEY_S))).limit_length()
 	basis = Cube.frame(up_direction, forward)
 	var desired: Vector3 = (basis.x * move_input.x + forward * move_input.y) * speed
-	if terrain is AdaptiveSphereTiles:
-		terrain.lookahead_direction = (up_direction + desired * 1.5 / float(terrain.surface.body.radius)).normalized()
+	waiting_for_terrain = false
+	if terrain is AdaptiveSphereTiles and terrain.surface.body.get("terrain_revision", 1) >= 3:
+		terrain.lookahead_direction = (up_direction + desired * 0.75 / float(terrain.surface.body.radius)).normalized()
 	terrain.stream_at(up_direction)
+	if terrain is AdaptiveSphereTiles and terrain.surface.body.get("terrain_revision", 1) >= 3 and desired.length_squared() > 0.0:
+		# A bounded streamer can take longer than the player to reach its next
+		# cells. Hold movement at the prepared edge instead of silently walking
+		# onto coarse geometry. Gravity/contact continue while the job finishes.
+		waiting_for_terrain = not terrain.ground_ready(Cube.global_position(position + desired * delta * 2.0, terrain.origin))
+		if waiting_for_terrain:
+			desired = Vector3.ZERO
 	var vertical: float = velocity.dot(up_direction)
 	var sample: Dictionary = terrain.surface.sample(address_value)
 	swimming = sample.water and address_value.height < 1.0

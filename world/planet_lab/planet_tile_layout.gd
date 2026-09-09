@@ -8,11 +8,13 @@ const TARGET_WIDTH: float = 32.0
 const NEAR_RADIUS_METERS: float = 64.0
 var radius: float
 var max_level: int
+var root_level: int
 
 
 func _init(body_radius: float) -> void:
 	radius = body_radius
-	max_level = clampi(ceili(log(radius * 2.0 / TARGET_WIDTH) / log(2.0)), ROOT_LEVEL, 24)
+	root_level = 2 if radius < 50000.0 else ROOT_LEVEL
+	max_level = clampi(ceili(log(radius * 2.0 / TARGET_WIDTH) / log(2.0)), root_level, 24)
 
 
 static func key(face: int, level: int, x: int, y: int) -> String:
@@ -35,12 +37,14 @@ func choose(direction: Vector3, previous_masks: Dictionary = {}) -> Dictionary:
 			retained[key(int(parts[0]), ancestor, int(parts[2]) >> (level - ancestor), int(parts[3]) >> (level - ancestor))] = true
 	# Bound memory independently of planet size. If necessary reduce the finest
 	# depth, never truncate a covering set or return an unbalanced hierarchy.
-	for depth in range(max_level, ROOT_LEVEL - 1, -1):
+	for depth in range(max_level, root_level - 1, -1):
 		for history: Dictionary in ([{}] if retained.is_empty() else [retained, {}]):
 			var leaves: Dictionary = {}
 			for face in range(6):
 				var focus: Array = _project_focus(face, direction)
-				_select(patch(face, ROOT_LEVEL, 0, 0), focus, depth, leaves, history)
+				for y in range(1 << root_level):
+					for x in range(1 << root_level):
+						_select(patch(face, root_level, x, y), focus, depth, leaves, history)
 			_balance(leaves)
 			if leaves.size() <= MAX_LEAVES:
 				for tile: Dictionary in leaves.values():
@@ -86,7 +90,7 @@ static func children(tile: Dictionary) -> Array[Dictionary]:
 
 func find_at(face: int, u: float, v: float, leaves: Dictionary) -> Dictionary:
 	var address: Dictionary = Cube.from_direction("layout", Cube.direction(face, u, v))
-	for level in range(ROOT_LEVEL, max_level + 1):
+	for level in range(root_level, max_level + 1):
 		var side: int = 1 << level
 		var x: int = clampi(floori((float(address.u) + 1.0) * 0.5 * side), 0, side - 1)
 		var y: int = clampi(floori((float(address.v) + 1.0) * 0.5 * side), 0, side - 1)

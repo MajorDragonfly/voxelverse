@@ -779,7 +779,8 @@ func _large_planet() -> void:
 			for x in range(-4, 5):
 				var candidate: Dictionary = cube.address("m1b:terra", face, x * 0.2, y * 0.2, -2.0)
 				var h: float = _scene.terrain.surface.sample(candidate).height
-				if h < -4.0 and absf(h + 8.0) < closest:
+				var daylight: float = cube.vector(cube.direction(face, candidate.u, candidate.v)).dot(_scene.system.sky_direction("m1b:terra", "m1:sol"))
+				if h < -4.0 and daylight > 0.2 and absf(h + 8.0) < closest:
 					closest = absf(h + 8.0)
 					water = candidate
 	if water.is_empty():
@@ -787,6 +788,7 @@ func _large_planet() -> void:
 	else:
 		_scene.walker.place(water)
 		_scene.walker.enabled = false
+		_scene.walker.preview.hide()
 		var camera := Camera3D.new()
 		_scene.add_child(camera)
 		var up: Vector3 = _scene.walker.up_direction

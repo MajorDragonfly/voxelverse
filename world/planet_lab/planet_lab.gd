@@ -184,7 +184,7 @@ func _body_visual(body: Dictionary, model: Dictionary) -> Node3D:
 		material.vertex_color_is_srgb = true
 		material.roughness = 0.95
 	node.material_override = material
-	if body.kind == "planet":
+	if body.kind == "planet" and model.water != null:
 		var ocean := MeshInstance3D.new()
 		ocean.mesh = model.water
 		var water_material := StandardMaterial3D.new()
@@ -301,10 +301,12 @@ func _process(delta: float) -> void:
 		"Zwei Sonnen" if system.binary else "Eine Sonne", "Tag" if daylight > 0.0 else "Nacht", float(system.bodies[body_id].radius) * 0.002,
 		int(system.elapsed) / 60, int(system.elapsed) % 60, time_speed, terrain.active.size(), Tiles.MAX_NEAR, terrain.rebases]
 	if terrain is AdaptiveSphereTiles:
-		details.text += "\n%d Kacheln · Detailstufen %d–%d · %s" % [terrain.tiles.size(), 0, terrain.layout.max_level,
+		details.text += "\n%d Kacheln · Detailstufen %d–%d · %s" % [terrain.tiles.size(), terrain.layout.root_level, terrain.layout.max_level,
 			"Gelände wird berechnet" if terrain.pending_count() < 0 else "%d Kacheln vorbereitet" % terrain.pending_count()]
 	if view_mode == "system" and system.real_scale:
 		details.text += "\nKartenansicht mit vergrößerten Körpersymbolen"
+	if walker.waiting_for_terrain:
+		details.text += "\nNahgelände wird nachgeladen – einen Moment …"
 	help.text = "WASD  Bewegen     Maus  Umsehen     Leertaste  Springen     Esc  Einstellungen\nTab  Orbit / Landen     M  Nächster Körper     B  Zwei Sonnen     T  Zeit     F5 / F9  Sichern / Laden"
 
 
@@ -386,6 +388,16 @@ func _update_views() -> void:
 		var center: Vector3 = (minimum + maximum) * 0.5
 		space_camera.size = maxf(190.0, (maximum.z - minimum.z + 20.0) / 0.40)
 		space_camera.size = maxf(space_camera.size, maximum.x - minimum.x + 40.0)
+		if system.real_scale:
+			# Include complete paths, not just the planets' current positions.
+			center = Vector3.ZERO
+			var extent: float = 0.0
+			for id: String in orbit_lines:
+				extent = maxf(extent, orbit_lines[id].position.length() + float(system.bodies[id].orbit_radius) * _space_scale)
+			space_camera.size = maxf(190.0, extent * 2.0 / 0.40)
+			for id: String in space_bodies:
+				var symbol_size: float = space_camera.size * (0.006 if system.bodies[id].kind == "star" else 0.003)
+				space_bodies[id].scale = Vector3.ONE * symbol_size
 		space_camera.position = center + Vector3(0.0, 180.0, 0.01)
 		space_camera.look_at(center, Vector3.FORWARD)
 		for id: String in body_labels:

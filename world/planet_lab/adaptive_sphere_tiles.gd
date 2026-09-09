@@ -26,6 +26,8 @@ var max_initial_publish_usec: int = 0
 var upload_samples: Array[float] = []
 var lookahead_direction: Vector3 = Vector3.ZERO
 var job_samples: Array[Dictionary] = []
+var _last_query_direction: Vector3 = Vector3.ZERO
+var publish_deferrals: int = 0
 
 
 func configure(descriptor: Dictionary) -> void:
@@ -45,7 +47,8 @@ func configure(descriptor: Dictionary) -> void:
 
 func stream_at(direction: Vector3, force: bool = false) -> void:
 	_requested_direction = direction
-	if force or (_task < 0 and _pending.is_empty() and direction.distance_to(_last_direction) * float(surface.body.radius) >= 8.0):
+	if force or (_task < 0 and _pending.is_empty() and direction.distance_to(_last_query_direction) * float(surface.body.radius) >= 8.0):
+		_last_query_direction = direction
 		_request(direction if force or lookahead_direction == Vector3.ZERO else lookahead_direction)
 	if force:
 		_collect_job()
@@ -131,6 +134,16 @@ func _build_next() -> void:
 func _publish() -> void:
 	if _staging.is_empty():
 		return
+	if not leaves.is_empty() and surface.body.get("terrain_revision", 1) >= 3:
+		var here: Dictionary = Cube.from_direction(surface.body.id, [_requested_direction.x, _requested_direction.y, _requested_direction.z])
+		var owner: Dictionary = layout.find_at(here.face, here.u, here.v, _staging)
+		if owner.is_empty() or owner.width * surface.body.radius / PatchMesh.CELLS > 4.0:
+			# Do not replace the walker's prepared floor with stale coarse data.
+			# Keep the old complete cover and recompute around its current point.
+			publish_deferrals += 1
+			_last_query_direction = _requested_direction
+			_request(_requested_direction)
+			return
 	var started: int = Time.get_ticks_usec()
 	var retired: Array[Node] = []
 	for tile: Dictionary in leaves.values():
@@ -201,6 +214,12 @@ func _update_collisions(direction: Vector3) -> void:
 
 func pending_count() -> int:
 	return _pending.size() if _task < 0 else -1
+
+
+func ground_ready(point: Array) -> bool:
+	var address: Dictionary = Cube.from_cartesian(surface.body.id, point, surface.body.radius)
+	var owner: Dictionary = layout.find_at(address.face, address.u, address.v, leaves)
+	return not owner.is_empty() and float(owner.width) * float(surface.body.radius) / PatchMesh.CELLS <= 4.0
 
 
 func _collision_shape(mesh: ArrayMesh) -> ConcavePolygonShape3D:

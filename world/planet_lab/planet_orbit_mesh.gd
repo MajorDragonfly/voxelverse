@@ -9,6 +9,7 @@ const CELLS: int = 32
 
 static func build(body: Dictionary) -> Dictionary:
 	var surface := Surface.new(body)
+	var combined_ocean: bool = body.kind == "planet" and body.get("terrain_revision", 1) >= 3
 	var land := PackedVector3Array()
 	var water := PackedVector3Array()
 	var colors := PackedColorArray()
@@ -21,10 +22,10 @@ static func build(body: Dictionary) -> Dictionary:
 				var d: Array = Cube.direction(face, -1.0 + 2.0 * x / CELLS, -1.0 + 2.0 * y / CELLS)
 				var height: float = surface.height_precise(d)
 				var up: Vector3 = Cube.vector(d)
-				land.append(up * (1.0 + height / float(body.radius)))
+				land.append(up * (1.0 + (maxf(height, 0.0) if combined_ocean else height) / float(body.radius)))
 				water.append(up)
 				normals.append(up)
-				colors.append(surface.color_at(up, height))
+				colors.append(Color("247c9d") if combined_ocean and height < 0.0 else surface.color_at(up, height))
 		for y in range(CELLS):
 			for x in range(CELLS):
 				var a: int = offset + y * (CELLS + 1) + x
@@ -37,6 +38,11 @@ static func build(body: Dictionary) -> Dictionary:
 	arrays[Mesh.ARRAY_INDEX] = indices
 	var mesh := ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	# At orbit distance, metre-deep coastal water is below depth-buffer
+	# precision even with shared tessellation. Use one visible outer shell;
+	# the detailed ground/ocean meshes remain separate in surface view.
+	if combined_ocean:
+		return {"land": mesh, "water": null}
 	arrays[Mesh.ARRAY_VERTEX] = water
 	arrays[Mesh.ARRAY_COLOR] = null
 	var sea := ArrayMesh.new()
