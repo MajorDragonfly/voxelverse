@@ -158,6 +158,9 @@ func _spawn_one_creature() -> void:
 
 
 func _has_active_identity(object_id: String) -> bool:
+	# A saved individual has one state owner, even before D2 actors restore.
+	if not preload("res://world/domestication/campaign_animal_state.gd").lookup(get_node("/root/GameState"), object_id).is_empty():
+		return true
 	for creature in _active_fauna:
 		if is_instance_valid(creature) and creature.get_campaign_identity().get("object_id") == object_id:
 			return true

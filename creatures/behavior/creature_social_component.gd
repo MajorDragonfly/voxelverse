@@ -167,6 +167,10 @@ func controls_movement() -> bool:
 
 
 func record_external_damage(attacker: Node) -> void:
+	if get_node("/root/GameState").current_phase == 1:
+		get_node("/root/ProgressionService").store_fauna_health(
+			creature.get_campaign_identity()["object_id"], creature.get_health_ratio(), creature.is_dead, creature.carcass_food_remaining)
+		return
 	if get_node("/root/GameState").current_phase != 0:
 		return
 	var data: Dictionary = entry()

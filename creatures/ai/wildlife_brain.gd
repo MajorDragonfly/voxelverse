@@ -90,7 +90,7 @@ func _physics_process(delta: float) -> void:
 	_refresh_label()
 
 func _update_role_direction() -> void:
-	if int(get_node("/root/GameState").current_phase) != 0:
+	if int(get_node("/root/GameState").current_phase) not in [0, 1]:
 		_wander_direction = Vector3.ZERO
 		return
 	if not is_instance_valid(_player):
@@ -108,6 +108,8 @@ func _update_role_direction() -> void:
 	var ally: bool = social_owns
 	if social != null and social.has_method("entry"):
 		ally = str(social.entry().get("relation", "wild")) == "ally"
+	# Tribal control is a group. Never target the disabled phase-0 player.
+	ally = ally or int(get_node("/root/GameState").current_phase) == 1
 	if ally != _ignore_player:
 		_ignore_player = ally
 		_sense_remaining = 0.0

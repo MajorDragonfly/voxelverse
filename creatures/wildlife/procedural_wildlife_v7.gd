@@ -265,6 +265,8 @@ func _update_role_direction() -> void:
 
 
 func _try_predator_attack(target: Node) -> void:
+	if target != null and target.is_in_group(&"player") and get_node("/root/GameState").current_phase != 0:
+		return
 	if _attack_timer > 0.0 or target == null:
 		return
 	if not target.has_method("receive_damage"):
