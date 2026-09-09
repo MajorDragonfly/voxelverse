@@ -4,6 +4,7 @@ extends CanvasLayer
 const Records = preload("res://core/discovery/discovery_records.gd")
 const Preview = preload("res://ui/discovery/journal_preview.gd")
 const Research = preload("res://core/discovery/research_goals.gd")
+const Comparison = preload("res://ui/discovery/species_comparison.gd")
 const PREFS_PATH := "user://discovery_journal_ui.cfg"
 const PAGE_SIZE: int = 100
 
@@ -23,6 +24,9 @@ var _list: ItemList
 var _detail: VBoxContainer
 var _detail_scroll: ScrollContainer
 var _preview: SubViewportContainer
+var _comparison: VBoxContainer
+var _compare_button: Button
+var _comparison_mode: bool = false
 var _title: Label
 var _description: Label
 var _parts_label: Label
@@ -136,6 +140,8 @@ func close_journal() -> void:
 	_closing = true
 	_surface.hide()
 	_preview.call("clear")
+	_comparison.call("clear")
+	_comparison_mode = false
 	_release_after_input_frame()
 
 
@@ -258,6 +264,16 @@ func _build() -> void:
 	_title = _label("", 26)
 	_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_title)
+	_compare_button = _button("Mit meiner Kreatur vergleichen", _toggle_comparison)
+	_compare_button.name = "CompareSpecies"
+	_compare_button.hide()
+	_detail.add_child(_compare_button)
+	_comparison = Comparison.new()
+	_comparison.name = "SpeciesComparison"
+	_comparison.connect("wish_requested", func(id: String, desired: bool) -> void:
+		_research_result(_progression.call("set_part_wished", id, desired)))
+	_detail.add_child(_comparison)
+	_comparison.hide()
 	_preview = Preview.new()
 	_preview.name = "SpeciesPreview"
 	_detail.add_child(_preview)
@@ -332,6 +348,7 @@ func _build_hud() -> void:
 
 
 func _on_tab_changed(_index: int) -> void:
+	_comparison_mode = false
 	_page = 0
 	_selected_key = ""
 	_action_message.hide()
@@ -364,6 +381,7 @@ func _apply_filters() -> void:
 	_list.get_parent().visible = not guide_mode
 	_guide.visible = guide_mode
 	_parts_label.text = ""
+	_clear_comparison()
 	_pin.hide()
 	_wish.hide()
 	_goal_progress.hide()
@@ -419,6 +437,7 @@ func _select_entry(index: int) -> void:
 	_detail_scroll.scroll_vertical = 0
 	_title.text = str(row.get("name", "Unbekannte Art"))
 	_parts_label.text = ""
+	_clear_comparison()
 	_pin.hide()
 	_wish.hide()
 	_goal_progress.hide()
@@ -430,6 +449,18 @@ func _select_entry(index: int) -> void:
 		if blueprint.is_empty():
 			_description.text += "\n\nFür diese frühere Entdeckung fehlt eine gespeicherte Ansicht. Beobachte die Art erneut, um sie zu ergänzen."
 		else:
+			var own: Dictionary = _player_blueprint()
+			_compare_button.show()
+			_compare_button.disabled = own.is_empty()
+			_compare_button.tooltip_text = "Dein Körperbau ist noch nicht verfügbar." if own.is_empty() else "Körperbauwerte und beobachtete Teile vergleichen."
+			_compare_button.text = "Zur Artenansicht" if _comparison_mode and not own.is_empty() else "Mit meiner Kreatur vergleichen"
+			if _comparison_mode and not own.is_empty():
+				_list.get_parent().hide()
+				_search.get_parent().hide()
+				_comparison.show()
+				_comparison.call("present", own, blueprint, _state)
+				_description.hide()
+				return
 			_preview.show()
 			_preview.call("show_blueprint", blueprint)
 			_description.text += "\n\nAnsicht drehen: ziehen · Zoom: Mausrad"
@@ -465,6 +496,33 @@ func _select_entry(index: int) -> void:
 				_description.text += "\n\nSammelziel erreicht."
 		elif not row["unlocked"] and category != "missing":
 			_description.text += "\n\nWeitere neue Arten beobachten. Pro neuer Art wird höchstens ein Teil freigeschaltet; erneutes Beobachten bekannter Arten gibt kein weiteres Teil."
+
+
+func _player_blueprint() -> Dictionary:
+	var active_player := player if is_instance_valid(player) else get_tree().get_first_node_in_group(&"player")
+	if active_player == null:
+		return {}
+	var visual := active_player.get_node_or_null("CreatureRuntimeVisual")
+	if visual == null:
+		return {}
+	var value: Variant = visual.get("blueprint")
+	return value.duplicate(true) if value is Dictionary else {}
+
+
+func _toggle_comparison() -> void:
+	_comparison_mode = not _comparison_mode
+	var selected: PackedInt32Array = _list.get_selected_items()
+	if not selected.is_empty():
+		_select_entry(selected[0])
+
+
+func _clear_comparison() -> void:
+	_compare_button.hide()
+	_comparison.call("clear")
+	_comparison.hide()
+	_description.show()
+	_list.get_parent().visible = _tabs.current_tab != 3
+	_search.get_parent().visible = _tabs.current_tab != 3
 
 
 func _show_pin(id: String) -> void:

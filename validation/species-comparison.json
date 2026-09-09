@@ -1,0 +1,147 @@
+{
+  "feature": "Artenvergleich mit Wertsymbolen / M4C",
+  "base_commit": "9a6f63701590c785cdae3d4af552d32be0098c6c",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "runtime_checks": [
+    {
+      "name": "species_comparison_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.56
+    },
+    {
+      "name": "discovery_journal_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.158
+    },
+    {
+      "name": "research_goals_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.836
+    },
+    {
+      "name": "behavior_skill_tree_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.934
+    }
+  ],
+  "import_and_art_sources": "passed before the final missing-body guard",
+  "visual_review": {
+    "renderer": "gl_compatibility",
+    "device": "Mesa llvmpipe",
+    "passed": true,
+    "captures": [
+      "art/review/species_comparison/comparison.png",
+      "art/review/species_comparison/part.png",
+      "art/review/species_comparison/compact.png"
+    ],
+    "note": "UI inspected at 1280x720 and 960x540; final missing-body guard does not change these valid fixtures."
+  },
+  "contracts": [
+    "No comparison writes or rewards",
+    "Shared transactional wishlist and failure rollback",
+    "Current player versus saved observed anatomy",
+    "Legacy missing anatomy and unavailable parts",
+    "Independent drag and zoom; models released on exit",
+    "12 original SVG icons imported"
+  ],
+  "ci": "Current published commit, renderer checks and Windows package are linked in PR #19.",
+  "manual_target_pc_test": "pending",
+  "linux_release": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "release_export",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.328
+      },
+      {
+        "name": "packaged_main",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.049
+      },
+      {
+        "name": "packaged_planet_lab",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.468
+      },
+      {
+        "name": "packaged_creature_builder_v7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.54
+      },
+      {
+        "name": "packaged_modular_assembly_framework_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.444
+      },
+      {
+        "name": "packaged_gameplay_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.8
+      },
+      {
+        "name": "packaged_meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.618
+      },
+      {
+        "name": "packaged_planet_sphere_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.176
+      },
+      {
+        "name": "packaged_behavior_skill_tree_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.644
+      },
+      {
+        "name": "packaged_research_goals_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.694
+      },
+      {
+        "name": "packaged_species_comparison_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.362
+      },
+      {
+        "name": "packaged_planet_15838",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 11.145
+      },
+      {
+        "name": "packaged_planet_63352",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.82
+      },
+      {
+        "name": "packaged_planet_23757",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.158
+      }
+    ],
+    "archive": {
+      "name": "voxelverse-linux-x86_64.zip",
+      "bytes": 31362544,
+      "sha256": "508f511eae780815f927258ef45da14732f59312f718950e47610469163d192e"
+    }
+  }
+}
