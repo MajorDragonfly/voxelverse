@@ -92,10 +92,12 @@ func _validate_group() -> String:
 func _refresh_runtime() -> void:
 	_clear_actors()
 	problem = _validate_group()
-	if not problem.is_empty() or group_state().is_empty() or int(_state.current_phase) != 0:
+	if not problem.is_empty() or group_state().is_empty():
 		return
 	var group: Dictionary = group_state()
 	_nest.global_position = State.vector(group["anchor"])
+	if int(_state.current_phase) != 0:
+		return
 	var blueprint: Dictionary = Assembly.load_best_available()
 	if blueprint.is_empty():
 		blueprint = Assembly.create_default()

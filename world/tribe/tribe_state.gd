@@ -15,7 +15,7 @@ static func create(home: Dictionary, campaign: Dictionary, player: Dictionary, s
 	for original: Dictionary in originals:
 		members.append({"id": original["id"], "name": original["name"], "position": original["position"].duplicate(),
 			"order": "wait", "destination": original["position"].duplicate(), "stage": "outbound", "work": 0.0,
-			"cargo": "", "hunger": clampf(float(player.get("hunger", 75.0)), 0.0, 100.0) if members.is_empty() else 75.0})
+			"cargo": "", "hunger": clampf(float(player.get("hunger_ratio", 1.0)) * 100.0, 0.0, 100.0) if members.is_empty() else 75.0})
 	var deposits: Dictionary = {}
 	for kind: String in KINDS:
 		deposits[kind] = {"id": Ids.scoped("resource", home["id"], kind), "position": sites[kind].duplicate(), "remaining": 48}

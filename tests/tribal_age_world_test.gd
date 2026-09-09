@@ -7,11 +7,15 @@ func _initialize() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
+	root.size = Vector2i(1280, 800)
 	var saves: Node = root.get_node("SaveGameService")
 	var state: Node = root.get_node("GameState")
 	saves.autosave_enabled = false
 	saves._loaded_once = true
 	saves.save_path = "user://tribal_age_world.json"
+	if "--restart-check" in OS.get_cmdline_user_args():
+		await _restart_check(saves, state)
+		return
 	state.start_world_with_seed(15838)
 	await process_frame
 	change_scene_to_file("res://main/main.tscn")
@@ -43,8 +47,12 @@ func _run() -> void:
 	print("Generated starting point ", origin)
 	# Search near the real starting player using physical loaded terrain. Test
 	# readiness is a floor contact, independent of runner speed/render frames.
-	for x in range(-16, 17, 2):
-		for z in range(-16, 17, 2):
+	var x_offsets: Array = [0]
+	x_offsets.append_array(range(-16, 17, 2))
+	var z_offsets: Array = [-4]
+	z_offsets.append_array(range(-16, 17, 2))
+	for x: int in x_offsets:
+		for z: int in z_offsets:
 			var point := origin + Vector3(x, 0, z)
 			point.y = generator.get_terrain_height(point.x, point.z) + 0.3
 			if not home.has_ground(point):
@@ -60,6 +68,7 @@ func _run() -> void:
 				break
 		if result["ok"]:
 			break
+	print("Village site search completed: ", result)
 	_expect(result["ok"], "No playable village footprint in generated starting terrain: " + str(result) + " sites=" + str(sites_found))
 	if not result["ok"]:
 		current_scene.queue_free()
@@ -69,6 +78,7 @@ func _run() -> void:
 	for frame in range(45):
 		await physics_frame
 		await process_frame
+	print("Opening tribal confirmation")
 	tribe.panel.open_confirmation()
 	_expect(not tribe.panel.confirm.disabled, "Generated home cannot enter tribe: " + tribe.panel._detail.text)
 	tribe.panel._confirm()
@@ -77,6 +87,7 @@ func _run() -> void:
 		await process_frame
 	_expect(tribe.is_active() and tribe.actors.size() == 3 and home.actors.is_empty(), "Actual main scene did not perform the handoff.")
 	if tribe.is_active():
+		print("Tribal group active; gathering on real terrain")
 		tribe.select_all()
 		_expect(tribe.issue_order("wood"), "Generated village cannot issue gathering command.")
 		for frame in range(1800):
@@ -100,6 +111,36 @@ func _run() -> void:
 			await physics_frame
 			await process_frame
 		_expect(tribe.is_active() and tribe.actors.keys() == ids and not player.is_physics_processing(), "Main reload did not restore the same commanded group.")
+	paused = false
+	current_scene.queue_free()
+	for frame in range(5):
+		await process_frame
+	_finish()
+
+func _restart_check(saves: Node, state: Node) -> void:
+	_expect(saves.load_now(), "Fresh process could not load the saved village.")
+	if state.current_phase != 1:
+		_expect(false, "Fresh process lost the tribal epoch.")
+		_finish()
+		return
+	var expected: Dictionary = state.get_current_body()["tribe"].duplicate(true)
+	change_scene_to_file("res://main/main.tscn")
+	await scene_changed
+	var tribe: Node = current_scene.get_node("Nest/Tribe")
+	for frame in range(1800):
+		await physics_frame
+		await process_frame
+		if tribe.is_active():
+			break
+	_expect(tribe.is_active(), "Fresh main scene did not restore group control.")
+	if tribe.is_active():
+		paused = true
+		_expect(current_scene.get_node("Nest").global_position.distance_to(Home.vector(expected["anchor"])) < 0.1, "Fresh process left the nest at the default world origin.")
+		_expect(tribe.actors.size() == 3 and tribe.home.actors.is_empty(), "Fresh process duplicated the original residents.")
+		for member: Dictionary in expected["members"]:
+			_expect(tribe.actors.has(member["id"]), "Fresh process changed a resident identity.")
+		_expect(int(tribe.village()["deposits"]["wood"]["remaining"]) <= int(expected["deposits"]["wood"]["remaining"]), "Fresh process regenerated gathered resources.")
+		_expect(not tribe.player.is_physics_processing() and tribe.camera.current, "Fresh process restored creature input instead of group control.")
 	paused = false
 	current_scene.queue_free()
 	for frame in range(5):

@@ -38,10 +38,17 @@ def main():
                   "res://tests/development_path_test.gd" if args.development else
                   "res://tools/review_behavior_gameplay.gd" if args.gameplay else
                   "res://tests/behavior_skill_tree_test.gd")
-        process = subprocess.run([str(editor), "--path", str(args.project.resolve()),
-                                  "--rendering-method", "gl_compatibility", "--audio-driver", "Dummy",
-                                  "--script", script, "--", "--capture", str(output)],
-                                 env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=180)
+        try:
+            process = subprocess.run([str(editor), "--path", str(args.project.resolve()),
+                                      "--rendering-method", "gl_compatibility", "--audio-driver", "Dummy",
+                                      "--script", script, "--", "--capture", str(output)],
+                                     env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=240 if args.tribe_world else 180)
+        except subprocess.TimeoutExpired as error:
+            log = error.stdout or b""
+            log = log.decode(errors="replace") if isinstance(log, bytes) else log
+            (output / "gui.log").write_text(log + "\nERROR: graphical validation timed out\n")
+            print(log[-6000:])
+            return 1
     (output / "gui.log").write_text(process.stdout)
     error = re.search(r"SCRIPT ERROR|(?:^|\n)ERROR:|Parse Error|ObjectDB instances leaked", process.stdout)
     expected = {"skilltree_empty.png": None, "skilltree_available.png": None,

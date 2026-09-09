@@ -62,7 +62,7 @@ func _label(location: Vector3, text: String, color: Color) -> void:
 	var label := Label3D.new()
 	label.text = text
 	label.font_size = 26
-	label.pixel_size = 0.011
+	label.pixel_size = 0.017
 	label.modulate = color
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(label)

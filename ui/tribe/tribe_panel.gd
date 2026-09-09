@@ -203,6 +203,21 @@ func refresh() -> void:
 	_layout()
 
 func _input(event: InputEvent) -> void:
+	if _dragging:
+		if not controller.is_active():
+			_dragging = false
+			_selection.hide()
+		elif event is InputEventMouseMotion:
+			var rect := Rect2(_drag_start, event.position - _drag_start).abs()
+			_selection.position = rect.position / _scale_factor
+			_selection.size = rect.size / _scale_factor
+			_selection.show()
+			get_viewport().set_input_as_handled()
+			return
+		elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			_finish_selection(event)
+			get_viewport().set_input_as_handled()
+			return
 	if confirmation_open:
 		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 			cancel_confirmation()
@@ -224,24 +239,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.pressed:
 				_drag_start = event.position
 				_dragging = true
-			else:
-				if _dragging:
-					var rect := Rect2(_drag_start, event.position - _drag_start).abs()
-					if rect.size.length() < 8:
-						rect = Rect2(event.position - Vector2(22, 32), Vector2(44, 64))
-					controller.screen_select(rect, event.shift_pressed)
-				_dragging = false
-				_selection.hide()
 		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 			controller.screen_command(event.position)
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			controller.zoom(-2.0 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 2.0)
 		get_viewport().set_input_as_handled()
-	elif event is InputEventMouseMotion and _dragging:
-		var rect := Rect2(_drag_start, event.position - _drag_start).abs()
-		_selection.position = rect.position / _scale_factor
-		_selection.size = rect.size / _scale_factor
-		_selection.show()
+
+func _finish_selection(event: InputEventMouseButton) -> void:
+	var rect := Rect2(_drag_start, event.position - _drag_start).abs()
+	if rect.size.length() < 8:
+		rect = Rect2(event.position - Vector2(22, 32), Vector2(44, 64))
+	controller.screen_select(rect, event.shift_pressed)
+	_dragging = false
+	_selection.hide()
 
 func _exit_tree() -> void:
 	if _owns_pause:

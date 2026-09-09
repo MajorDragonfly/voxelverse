@@ -31,6 +31,7 @@ func _run() -> void:
 	await process_frame
 	_build_fixture()
 	tribe = scene.get_node("Nest/Tribe")
+	player.current_hunger = 61.0
 	await _frames(25)
 	_expect(not saves.request_phase_transition(1), "Empty nest unlocked tribal age.")
 	_expect(home.establish_home()["ok"], "Could not establish precursor group.")
@@ -70,6 +71,7 @@ func _run() -> void:
 		await _cleanup()
 		_finish()
 		return
+	_expect(absf(float(tribe.village()["members"][0]["hunger"]) - 61.0) < 0.5, "Transition did not preserve the original creature hunger ratio.")
 	_expect(not player.is_physics_processing() and tribe.camera.current and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Control did not switch from creature to group overview.")
 	_expect(home.actors.is_empty() and tribe.actors.size() == 3 and tribe.actors[state.campaign.data["player_object_id"]] == player, "Original creature was replaced or residents duplicated.")
 	for i in range(2):
@@ -95,6 +97,12 @@ func _run() -> void:
 	var companion_id: String = str(tribe.village()["members"][1]["id"])
 	await _world_click(tribe.camera.unproject_position(tribe.actors[companion_id].global_position + Vector3.UP), MOUSE_BUTTON_LEFT, true)
 	_expect(tribe.selected.size() == 2, "Shift-click did not add the companion to the group.")
+	var selection_rect := Rect2(screen_point, Vector2.ONE)
+	for actor: Node3D in tribe.actors.values():
+		selection_rect = selection_rect.expand(tribe.camera.unproject_position(actor.global_position + Vector3.UP))
+	selection_rect = selection_rect.grow(12)
+	await _world_drag(selection_rect.position, selection_rect.end)
+	_expect(tribe.selected.size() == 3 and not tribe.panel._dragging, "Drag selection did not select and release the whole group.")
 	tribe.select_member(identity)
 	var before: Vector3 = player.global_position
 	await _world_click(tribe.camera.unproject_position(before + Vector3(3, 0, 0)), MOUSE_BUTTON_RIGHT)
@@ -107,6 +115,11 @@ func _run() -> void:
 	await _until(func() -> bool: return _has_cargo(), 350)
 	_expect(_has_cargo(), "Gatherers did not pick up material at a real deposit.")
 	await _capture("03_transport")
+	var stock_before_stop: Dictionary = tribe.village()["stock"].duplicate(true)
+	await _click(tribe.panel._buttons["wait"])
+	await _frames(10)
+	_expect(_has_cargo() and tribe.village()["stock"] == stock_before_stop, "Stop discarded cargo or credited it without a delivery.")
+	await _click(tribe.panel._buttons["wood"])
 	var at_save: Dictionary = tribe.village().duplicate(true)
 	_expect(saves.save_now() and saves.load_now(), "Could not reload a running delivery.")
 	await _frames(8)
@@ -179,6 +192,21 @@ func _world_click(position: Vector2, button: int, shift: bool = false) -> void:
 		event.pressed = pressed_value
 		event.shift_pressed = shift
 		root.push_input(event, true)
+	await process_frame
+
+func _world_drag(start: Vector2, end: Vector2) -> void:
+	var press := InputEventMouseButton.new()
+	press.position = start
+	press.button_index = MOUSE_BUTTON_LEFT
+	press.pressed = true
+	root.push_input(press, true)
+	var motion := InputEventMouseMotion.new()
+	motion.position = end
+	motion.button_mask = MOUSE_BUTTON_MASK_LEFT
+	root.push_input(motion, true)
+	press.position = end
+	press.pressed = false
+	root.push_input(press, true)
 	await process_frame
 
 func _has_cargo() -> bool:

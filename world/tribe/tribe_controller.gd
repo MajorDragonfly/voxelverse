@@ -222,9 +222,10 @@ func _deactivate() -> void:
 	if is_instance_valid(_visuals):
 		_visuals.queue_free()
 	if is_instance_valid(player):
-		var ring: Node = player.get_node_or_null("TribeSelection")
-		if ring != null:
-			ring.queue_free()
+		for child_name: String in ["TribeSelection", "TribeCargo"]:
+			var indicator: Node = player.get_node_or_null(child_name)
+			if indicator != null:
+				indicator.queue_free()
 		player.collision_layer = int(_player_processing.get("collision_layer", 1))
 		player.set_process(_player_processing.get("process", true))
 		player.set_physics_process(_player_processing.get("physics", true))
@@ -333,7 +334,7 @@ func issue_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
 		# Changing tasks never discards a carried unit of material.
 		member["stage"] = "return" if member["cargo"] != "" else "outbound"
 		if order == "move":
-			member["destination"] = HomeState.vector_array(destination)
+			member["destination"] = HomeState.vector_array(_workplace(destination, selected.find(identity)) if selected.size() > 1 else destination)
 	_transaction = true
 	var success: bool = _saves.save_now()
 	if not success:
@@ -358,7 +359,7 @@ func _physics_process(delta: float) -> void:
 		member["hunger"] = maxf(0.0, float(member["hunger"]) - simulation_delta * 0.08)
 		var order: String = member["order"]
 		var target: Vector3 = actor.global_position
-		if member["cargo"] != "":
+		if member["cargo"] != "" and order != "wait":
 			target = anchor()
 		elif order in Model.KINDS:
 			target = HomeState.vector(village()["deposits"][order]["position"])
@@ -368,6 +369,8 @@ func _physics_process(delta: float) -> void:
 			target = HomeState.vector(village()["sites"][int(village()["huts"])])
 		elif order == "move":
 			target = HomeState.vector(member["destination"])
+		if order != "wait" and (member["cargo"] != "" or order != "move"):
+			target = _workplace(target, village()["members"].find(member))
 		var arrived: bool = _walk(actor, str(member["id"]), target, delta, float(member["hunger"]))
 		member["position"] = HomeState.vector_array(actor.global_position)
 		if actor == player:
@@ -376,13 +379,21 @@ func _physics_process(delta: float) -> void:
 			_work(member, simulation_delta)
 	_update_selection()
 
+func _workplace(center: Vector3, index: int) -> Vector3:
+	# Give residents separate work positions, keeping them visible/selectable.
+	var offsets: Array[Vector3] = [Vector3(-1.5, 0, 1), Vector3(1.5, 0, 1), Vector3(0, 0, -1.6)]
+	var target: Vector3 = navigation.snap(center + offsets[index % 3])
+	if target.is_finite() and target.distance_to(center) < 2.8 and not navigation.route(center, target).is_empty():
+		return target
+	return center
+
 func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: float, hunger: float) -> bool:
 	if not home.has_ground(actor.global_position):
 		status = "Ein Bewohner wartet auf geladenen Boden."
 		return false
 	var offset: Vector3 = target - actor.global_position
 	offset.y = 0
-	var arrived: bool = offset.length() < 0.9
+	var arrived: bool = offset.length() < 0.45
 	var direction := Vector3.ZERO
 	if not arrived:
 		if not _goals.has(identity) or _goals[identity].distance_to(target) > 0.2:
@@ -421,6 +432,8 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 func _work(member: Dictionary, delta: float) -> void:
 	var data: Dictionary = village()
 	var order: String = member["order"]
+	if order == "wait":
+		return
 	if member["cargo"] != "":
 		data["stock"][member["cargo"]] += 1
 		data["delivered"] += 1
@@ -493,3 +506,16 @@ func _update_selection() -> void:
 			ring.position.y = 0.1
 			actor.add_child(ring)
 		ring.visible = identity in selected
+		var cargo: MeshInstance3D = actor.get_node_or_null("TribeCargo")
+		if cargo == null:
+			cargo = MeshInstance3D.new()
+			cargo.name = "TribeCargo"
+			var mesh := BoxMesh.new()
+			mesh.size = Vector3(0.45, 0.35, 0.5)
+			cargo.mesh = mesh
+			cargo.material_override = StandardMaterial3D.new()
+			cargo.position = Vector3(0, 1.45, 0.1)
+			actor.add_child(cargo)
+		var kind: String = member_record(identity)["cargo"]
+		cargo.visible = not kind.is_empty()
+		cargo.material_override.albedo_color = Color("b9854d") if kind == "wood" else Color("bac8cf") if kind == "stone" else Color("c27b4e")

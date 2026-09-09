@@ -109,6 +109,9 @@ def main():
                 shutil.copy2(args.project / "tests" / f"{name}.gd", probe)
                 run(f"packaged_{name}", [*pack_command, "--script", str(probe)],
                     package, isolated_env(root / name))
+                if name == "tribal_age_world_test":
+                    run("packaged_tribal_cold_restart", [*pack_command, "--script", str(probe), "--", "--restart-check"],
+                        package, isolated_env(root / name))
             probe = qa / "export_runtime_probe.gd"
             shutil.copy2(args.project / "tools/export_runtime_probe.gd", probe)
             notices_path = qa / "GODOT_NOTICES.txt"
