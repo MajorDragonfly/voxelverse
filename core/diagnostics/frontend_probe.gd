@@ -57,7 +57,7 @@ func _run() -> void:
 	await _capture("new_game")
 	_click(tree.current_scene.find_child("Begin", true, false))
 	await flow.world_started
-	await _frames(3)
+	await _frames(8)
 	var first_path: String = saves.save_path
 	var first_id: String = get_node("/root/GameState").campaign.data.id
 	_expect(int(get_node("/root/GameState").world_seed) == 15838, "Requested seed was not used.")
@@ -77,6 +77,10 @@ func _run() -> void:
 		motion.relative = Vector2(8, 4)
 		get_viewport().push_input(motion, true)
 		_expect(is_equal_approx(player.camera_pivot.rotation.y - old_rotation.y, -8.0 * player.mouse_sensitivity * 1.5) and is_equal_approx(player.camera_pivot.rotation.x - old_rotation.x, 4.0 * player.mouse_sensitivity * 1.5), "Player camera did not use the saved sensitivity/inversion: %s -> %s; mouse mode %d." % [old_rotation, player.camera_pivot.rotation, Input.mouse_mode])
+	_expect(saves.save_now(), "In-game save failed.")
+	await _frames(2)
+	_expect(flow.get_node("SaveFeedback").visible and flow.get_node("SaveFeedback")._label.text.contains("Gespeichert"), "In-game save confirmation was not visible.")
+	await _capture("save_status")
 	_key(KEY_ESCAPE)
 	await _frames(2)
 	_expect(flow.pause_open and tree.paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Esc did not pause the world.")
@@ -93,6 +97,7 @@ func _run() -> void:
 	_click(flow._overlay.find_child("SaveGame", true, false))
 	await _frames(2)
 	_expect(flow._message.text == "Spielstand gespeichert.", "Save success was not visible.")
+	_expect(flow.get_node("SaveFeedback")._label.text.contains("Gespeichert"), "Save status did not reflect the committed snapshot.")
 	saves.save_path = "user://missing-frontend-directory/save.json"
 	_click(flow._overlay.find_child("ReturnToTitle", true, false))
 	await _frames(2)
@@ -107,6 +112,7 @@ func _run() -> void:
 	var first_bytes: String = FileAccess.get_file_as_string(first_path)
 	flow.new_game("Zweite Welt", 23757)
 	await flow.world_started
+	await _frames(8)
 	var second_path: String = saves.save_path
 	_expect(second_path != first_path and get_node("/root/GameState").campaign.data.id != first_id, "New game reused campaign identity/path.")
 	_expect(not saves._design_files.has("user://building_designs/frontend_sentinel.json"), "New campaign inherited another campaign's design.")
@@ -118,6 +124,7 @@ func _run() -> void:
 	_click(tree.current_scene.find_child("Saves", true, false))
 	await _frames(3)
 	await _capture("save_slots")
+	await _exercise_save_browser(first_path)
 	flow.load_game(first_path)
 	await flow.world_started
 	_expect(get_node("/root/GameState").campaign.data.id == first_id and int(get_node("/root/GameState").world_seed) == 15838, "Loading did not restore the first campaign.")
@@ -147,8 +154,73 @@ func _run() -> void:
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():
-		print("FRONTEND_PASSED: title, no idle save, actual settings clicks, seed validation, loading, pause nesting, failed save retention, world teardown, campaign isolation, reload and backup/version handling.")
+		print("FRONTEND_PASSED: title, no idle save, actual settings clicks, seed validation, loading, pause nesting, save status, failed save retention, world teardown, campaign isolation, thumbnails, rename, independent copies, selected history recovery, reload and backup/version handling.")
 	tree.quit(0 if failures.is_empty() else 1)
+
+func _exercise_save_browser(original: String) -> void:
+	var tree := get_tree()
+	var saves: Node = get_node("/root/SaveGameService")
+	var flow: Node = get_node("/root/SessionFlow")
+	var browser: Node = tree.current_scene.get_node("SaveBrowser")
+	for button: Button in browser._list.get_children():
+		if str(button.get_meta("slot_path")) == original:
+			browser._list.get_parent().ensure_control_visible(button)
+			await _frames(2)
+			_click(button)
+			break
+	await _frames(2)
+	_expect(browser.selected_path == original, "Slot card selected the wrong adventure.")
+	if DisplayServer.get_name() != "headless":
+		_expect(not saves.inspect_slot(original).preview.is_empty(), "Rendered gameplay did not create a stored thumbnail.")
+	browser._name_input.text = "Erste Schritte – Basis"
+	var rename: Button = browser.find_child("RenameSlot", true, false)
+	browser._details.get_parent().ensure_control_visible(rename)
+	await _frames(2)
+	_click(rename)
+	await _frames(2)
+	_expect(saves.inspect_slot(original).name == "Erste Schritte – Basis", "Rename button did not update the selected slot.")
+	var original_bytes: String = FileAccess.get_file_as_string(original)
+	var copy: Button = browser.find_child("CopySlot", true, false)
+	browser._details.get_parent().ensure_control_visible(copy)
+	await _frames(2)
+	_click(copy)
+	await _frames(2)
+	var copied: String = browser.selected_path
+	_expect(copied != original and FileAccess.get_file_as_string(original) == original_bytes, "Copy button altered the original slot.")
+	await _capture("save_copy")
+	var play: Button = browser.find_child("LoadAdventure", true, false)
+	browser._details.get_parent().ensure_control_visible(play)
+	await _frames(2)
+	_click(play)
+	await flow.world_started
+	await _frames(8)
+	_expect(saves.save_path == copied, "Load button did not start the selected copied campaign.")
+	saves.record_design("user://building_designs/copy_only.json", '{"name":"Copy only"}')
+	flow.toggle_pause()
+	flow.return_to_title()
+	await tree.scene_changed
+	await _frames(3)
+	_expect(FileAccess.get_file_as_string(original) == original_bytes, "Playing the copied adventure changed the original.")
+	_click(tree.current_scene.find_child("Saves", true, false))
+	await _frames(3)
+	browser = tree.current_scene.get_node("SaveBrowser")
+	browser.select_slot(original)
+	await _frames(2)
+	var source: String = browser._entries[0].source
+	var source_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(source))
+	var restore: Button = browser.find_child("RestoreSlot", true, false)
+	browser._details.get_parent().ensure_control_visible(restore)
+	await _frames(3)
+	await _capture("save_history")
+	_click(restore)
+	await _frames(3)
+	_expect(browser.selected_path not in [original, copied], "Restore button did not select a new adventure.")
+	var restored: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(browser.selected_path))
+	_expect(restored.design_files == source_data.design_files and is_equal_approx(float(restored.game_state.campaign.elapsed_seconds), float(source_data.game_state.campaign.elapsed_seconds)), "Restore button used the wrong snapshot.")
+	_expect(FileAccess.get_file_as_string(original) == original_bytes, "Restore button overwrote the original adventure.")
+	_key(KEY_ESCAPE)
+	await _frames(2)
+	_expect(tree.current_scene._page == "home" and not tree.paused, "Esc did not leave the save browser cleanly.")
 
 func _exercise_controls(settings: Node) -> void:
 	var panel: Node = settings._control_settings

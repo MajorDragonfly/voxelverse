@@ -8,6 +8,7 @@ var _status: Label
 var _title_input: LineEdit
 var _seed_input: LineEdit
 var _page: String = "home"
+var _save_browser: Control
 
 func _enter_tree() -> void:
 	get_node("/root/SessionFlow").enter_frontend()
@@ -93,6 +94,10 @@ func _clear(page: String) -> void:
 	_status.text = ""
 
 func _show_home() -> void:
+	if is_instance_valid(_save_browser):
+		remove_child(_save_browser)
+		_save_browser.queue_free()
+		_save_browser = null
 	_clear("home")
 	var last: Dictionary = _flow.latest_slot()
 	var resume := Style.button(_body, "Fortsetzen", func(): _flow.load_game(str(last.get("path", ""))), "Continue", true)
@@ -142,20 +147,9 @@ func _begin() -> void:
 
 func _show_slots() -> void:
 	_clear("slots")
-	Style.label(_body, "DEINE SPIELSTÄNDE", 27)
-	var slots: Array = get_node("/root/SaveGameService").list_slots()
-	if slots.is_empty():
-		Style.paragraph(_body, "Hier erscheinen deine Abenteuer, sobald du ein neues Spiel beginnst.")
-	for slot: Dictionary in slots:
-		var entry := Style.button(_body, str(slot.name), func(): _flow.load_game(str(slot.path)), "Slot")
-		entry.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-		entry.disabled = not bool(slot.valid)
-		var detail: String = str(slot.problem)
-		if slot.valid:
-			detail = "%s · %s · %d Min.\nWelt-Seed %d%s" % [_date(int(slot.saved_time)), _phase(int(slot.phase)), int(float(slot.seconds) / 60.0), int(slot.seed), " · Sicherung verfügbar" if slot.recovered else ""]
-		Style.paragraph(_body, detail, 17)
-	var back := Style.button(_body, "Zurück", _show_home, "Back")
-	back.grab_focus()
+	_save_browser = load("res://ui/frontend/save_browser.gd").new()
+	_save_browser.back_requested.connect(_show_home)
+	add_child(_save_browser)
 
 func _show_help() -> void:
 	_clear("help")

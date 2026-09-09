@@ -26,6 +26,7 @@ var _resume_focus: Control
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().scene_changed.connect(_scene_changed)
+	add_child.call_deferred(preload("res://ui/frontend/save_feedback.gd").new())
 
 func enter_frontend() -> void:
 	managed = true

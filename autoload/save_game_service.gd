@@ -3,6 +3,8 @@ extends Node
 signal game_saved(path: String)
 signal game_loaded(path: String)
 signal save_failed(message: String)
+signal save_started(path: String)
+signal slots_changed
 
 const SAVE_SCHEMA: int = 4
 const Atomic = preload("res://core/persistence/atomic_json.gd")
@@ -13,6 +15,7 @@ const GameEvent = preload("res://core/campaign/game_event.gd")
 const Progression = preload("res://autoload/progression_service.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 const SLOT_DIRECTORY: String = "user://saves"
+const History = preload("res://core/persistence/slot_history.gd")
 
 @export_range(5.0, 300.0, 5.0) var autosave_interval: float = 45.0
 @export var autosave_enabled: bool = true
@@ -32,6 +35,10 @@ var last_error: String = ""
 var session_managed: bool = false
 var session_active: bool = false
 var slot_name: String = ""
+var _slot_preview: Dictionary = {}
+var _slot_origin: Dictionary = {}
+var _save_reason: String = "manual"
+var last_saved_unix_time: int = 0
 
 
 func _ready() -> void:
@@ -50,7 +57,9 @@ func _process(delta: float) -> void:
 	if _autosave_timer > 0.0:
 		return
 	_autosave_timer = autosave_interval
+	_save_reason = "automatic"
 	save_now()
+	_save_reason = "manual"
 
 
 func _notification(what: int) -> void:
@@ -76,6 +85,7 @@ func save_now(custom_path: String = "") -> bool:
 		_report_failure("Saving is blocked after an unreadable or newer save. Load a compatible save first.")
 		return false
 	var target_path: String = save_path if custom_path.is_empty() else custom_path
+	save_started.emit(target_path)
 	_capture_current_region_state()
 	var files: Dictionary = Designs.capture()
 	_upgrade_design_ids(files)
@@ -90,6 +100,8 @@ func save_now(custom_path: String = "") -> bool:
 		"regions_by_world": _regions_by_world.duplicate(true),
 		"design_files": files,
 		"migration_report": last_migration_report.duplicate(),
+		"slot_preview": _slot_preview.duplicate(true) if int(_slot_preview.get("world_seed", 0)) == _get_world_seed() else {},
+		"slot_origin": _slot_origin.duplicate(true),
 	}
 	_annotate_world_state(save_data)
 	var problem: String = _validate_save(save_data)
@@ -97,9 +109,18 @@ func save_now(custom_path: String = "") -> bool:
 		_report_failure(problem)
 		return false
 	var previous: Dictionary = _read_save(target_path)
+	if _has_unsupported_contract(previous):
+		_write_blocked = true
+		_report_failure("Der vorhandene Spielstand benötigt eine neuere Version und bleibt unverändert.")
+		return false
 	# The first migrated backup must also contain the editor bytes. The exact
 	# original schema-1/2 files remain in the immutable migration backup.
 	var keep_previous: bool = _validate_save(previous).is_empty()
+	if keep_previous and is_slot_path(target_path):
+		var history_error: Error = History.capture(target_path, previous, _save_reason)
+		if history_error != OK:
+			_report_failure("Sicherungshistorie konnte nicht geschrieben werden. Der bisherige Spielstand bleibt erhalten.")
+			return false
 	if keep_previous and int(previous.get("schema", 0)) < SAVE_SCHEMA:
 		var backup_error: Error = Atomic.write(target_path + ".bak", save_data, false)
 		if backup_error != OK:
@@ -113,6 +134,9 @@ func save_now(custom_path: String = "") -> bool:
 	_design_files = files
 	_design_snapshot_active = true
 	last_error = ""
+	last_saved_unix_time = int(save_data["saved_unix_time"])
+	if is_slot_path(target_path):
+		History.trim(target_path)
 	game_saved.emit(target_path)
 	return true
 
@@ -159,6 +183,9 @@ func load_now(custom_path: String = "") -> bool:
 		last_migration_report.append("Recovered the previous complete snapshot from .bak.")
 	_design_files = _dict(data.get("design_files", {}))
 	slot_name = str(data.get("slot_name", "Bisheriges Abenteuer"))
+	_slot_preview = _dict(data.get("slot_preview", {}))
+	_slot_origin = _dict(data.get("slot_origin", {}))
+	last_saved_unix_time = int(data.get("saved_unix_time", 0))
 	_design_snapshot_active = true
 	_write_blocked = false
 	var game_state := get_node_or_null("/root/GameState")
@@ -192,6 +219,12 @@ func list_slots() -> Array[Dictionary]:
 				var path: String = SLOT_DIRECTORY + "/" + candidate
 				if path not in paths:
 					paths.append(path)
+		for directory in DirAccess.get_directories_at(SLOT_DIRECTORY):
+			var path: String = SLOT_DIRECTORY.path_join(directory.trim_suffix(".history"))
+			if directory.ends_with(".history") and is_slot_path(path) and path not in paths:
+				paths.append(path)
+	if DirAccess.dir_exists_absolute(History.directory(DEFAULT_SAVE_PATH)) and DEFAULT_SAVE_PATH not in paths:
+		paths.append(DEFAULT_SAVE_PATH)
 	var result: Array[Dictionary] = []
 	for path in paths:
 		result.append(inspect_slot(path))
@@ -213,6 +246,10 @@ func inspect_slot(path: String) -> Dictionary:
 			data = backup
 			recovered = true
 	var valid: bool = not newer and _validate_save(data).is_empty()
+	return _slot_summary(path, data, valid, recovered, newer)
+
+
+func _slot_summary(path: String, data: Dictionary, valid: bool, recovered: bool = false, newer: bool = false) -> Dictionary:
 	var state: Dictionary = _dict(data.get("game_state", {}))
 	var campaign: Dictionary = _dict(state.get("campaign", {}))
 	var title: String = str(data.get("slot_name", "")).strip_edges()
@@ -221,7 +258,140 @@ func inspect_slot(path: String) -> Dictionary:
 	return {"path": path, "name": title, "valid": valid, "recovered": recovered,
 		"saved_time": int(data.get("saved_unix_time", 0)), "seed": int(state.get("world_seed", 0)),
 		"phase": int(state.get("phase", 0)), "seconds": float(campaign.get("elapsed_seconds", 0.0)),
+		"planet_index": int(state.get("planet_index", 0)), "preview": _dict(data.get("slot_preview", {})),
+		"history_count": History.paths(path).size(), "schema": int(data.get("schema", 0)),
 		"problem": "Benötigt eine neuere Spielversion." if newer else ("Spielstand und Sicherung nicht lesbar." if not valid else "")}
+
+
+static func is_slot_path(path: String) -> bool:
+	return path == DEFAULT_SAVE_PATH or (path.get_base_dir() == SLOT_DIRECTORY and path.get_file().begins_with("slot_") and path.get_file().ends_with(".json") and path == SLOT_DIRECTORY.path_join(path.get_file()))
+
+
+func _read_compatible_slot(path: String) -> Dictionary:
+	if not is_slot_path(path):
+		return {}
+	var current := _read_save(path)
+	if _has_unsupported_contract(current):
+		return {}
+	if _validate_save(current).is_empty():
+		return current
+	var backup := _read_save(path + ".bak")
+	return backup if not _has_unsupported_contract(backup) and _validate_save(backup).is_empty() else {}
+
+
+func _can_manage_slots() -> bool:
+	if session_active:
+		_report_failure("Bitte zuerst zum Hauptmenü zurückkehren.")
+		return false
+	return true
+
+
+func rename_slot(path: String, title: String) -> bool:
+	if not _can_manage_slots():
+		return false
+	title = title.strip_edges().left(48)
+	var data := _read_compatible_slot(path)
+	if data.is_empty() or title.is_empty():
+		_report_failure("Bitte einen lesbaren Spielstand und einen Namen auswählen.")
+		return false
+	if str(data.get("slot_name", "")) == title:
+		return true
+	var error: Error = History.capture(path, data, "rename")
+	if error == OK:
+		data["slot_name"] = title
+		error = Atomic.write(path, data, _validate_save(_read_save(path)).is_empty())
+	if error != OK:
+		_report_failure("Der Spielstand konnte nicht umbenannt werden.")
+		return false
+	History.trim(path)
+	last_error = ""
+	slots_changed.emit()
+	return true
+
+
+func duplicate_slot(path: String, title: String = "") -> String:
+	if not _can_manage_slots():
+		return ""
+	var data := _read_compatible_slot(path)
+	return _write_slot_copy(data, title, "copy")
+
+
+func list_slot_history(path: String) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if not is_slot_path(path):
+		return result
+	var sources := History.paths(path)
+	if FileAccess.file_exists(path + ".bak"):
+		sources.append(path + ".bak")
+	var seen := {}
+	for source: String in sources:
+		var data := _read_save(source)
+		var meta: Dictionary = _dict(data.get("slot_history", {}))
+		data.erase("slot_history")
+		var identity: String = JSON.stringify(data).sha256_text()
+		if seen.has(identity):
+			continue
+		seen[identity] = true
+		var newer: bool = _has_unsupported_contract(data)
+		var valid: bool = not newer and _validate_save(data).is_empty()
+		var entry: Dictionary = _slot_summary(path, data, valid, false, newer)
+		entry["source"] = source
+		entry["reason"] = str(meta.get("reason", "backup"))
+		entry["can_copy"] = valid and int(data.get("schema", 0)) >= 3
+		result.append(entry)
+	return result
+
+
+func restore_slot_copy(path: String, source_path: String, title: String = "") -> String:
+	if not _can_manage_slots():
+		return ""
+	if not is_slot_path(path) or not History.is_source(path, source_path):
+		_report_failure("Diese Sicherung gehört nicht zum ausgewählten Abenteuer.")
+		return ""
+	var data := _read_save(source_path)
+	return _write_slot_copy(data, title, "recovery")
+
+
+func _write_slot_copy(source: Dictionary, title: String, kind: String) -> String:
+	if _has_unsupported_contract(source) or not _validate_save(source).is_empty():
+		_report_failure("Dieser Spielstand kann nicht kopiert werden.")
+		return ""
+	if int(source.get("schema", 0)) < 3:
+		_report_failure("Bitte diesen älteren Spielstand zuerst laden und speichern, damit auch seine Kreaturenentwürfe gesichert sind.")
+		return ""
+	if DirAccess.make_dir_recursive_absolute(SLOT_DIRECTORY) != OK:
+		_report_failure("Der Ordner für Spielstände konnte nicht angelegt werden.")
+		return ""
+	var data: Dictionary = source.duplicate(true)
+	var campaign: Dictionary = data["game_state"]["campaign"]
+	var old_identity: String = campaign["id"]
+	campaign["id"] = Ids.create("campaign")
+	# Preserve opaque object/design/body IDs and paid-target ledgers: the copy
+	# branches an existing history, rather than recreating its discovered world.
+	for event: Dictionary in campaign["recent_events"]:
+		if str(event.get("campaign_id", "")) == old_identity:
+			event["campaign_id"] = campaign["id"]
+	data.erase("slot_history")
+	data["slot_origin"] = {"kind": kind, "campaign_id": old_identity,
+		"saved_unix_time": int(source.get("saved_unix_time", 0))}
+	data["saved_unix_time"] = int(Time.get_unix_time_from_system())
+	title = title.strip_edges().left(48)
+	if title.is_empty():
+		var old_title: String = str(source.get("slot_name", "Mein Abenteuer"))
+		title = old_title.left(32) + (" – Sicherung" if kind == "recovery" else " – Kopie")
+	data["slot_name"] = title
+	var path: String = SLOT_DIRECTORY + "/slot_" + Crypto.new().generate_random_bytes(12).hex_encode() + ".json"
+	if not _validate_save(data).is_empty() or Atomic.write(path, data, false) != OK:
+		_report_failure("Die Spielstandkopie konnte nicht gespeichert werden.")
+		return ""
+	last_error = ""
+	slots_changed.emit()
+	return path
+
+
+func cache_slot_preview(png: PackedByteArray, world_seed: int) -> void:
+	if session_active and not png.is_empty() and png.size() <= 524288 and world_seed == _get_world_seed():
+		_slot_preview = {"world_seed": world_seed, "png": Marshalls.raw_to_base64(png)}
 
 
 func create_slot(title: String, seed_value: int = 0) -> String:
@@ -462,6 +632,9 @@ func reset_runtime_for_new_game() -> void:
 	_design_snapshot_active = false
 	_write_blocked = false
 	last_migration_report.clear()
+	_slot_preview.clear()
+	_slot_origin.clear()
+	last_saved_unix_time = 0
 
 
 func clear_save() -> bool:

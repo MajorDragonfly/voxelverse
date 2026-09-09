@@ -8,7 +8,7 @@ Das Spiel startet in `ui/frontend/main_menu.tscn`. Die Titelszene zeigt einen ei
 
 - **Fortsetzen** lädt den zuletzt gespeicherten lesbaren Spielstand. Ohne vorhandenen Stand ist der Button deaktiviert.
 - **Neues Spiel** nimmt einen Namen und optional einen positiven Welt-Seed bis 2147483647 entgegen. Startphase ist die Kreaturenphase; spätere Spielphasen werden hier nicht vorgetäuscht.
-- **Spielstände** zeigt Namen, Sicherungszeit (UTC), Phase, Spielminuten und Welt-Seed. Nicht lesbare oder neuere Stände bleiben sichtbar und können nicht versehentlich geladen werden. Eine verwendbare Sicherung wird gekennzeichnet.
+- **Spielstände** zeigt Vorschaubild, Namen, Sicherungszeit (UTC), Planet, Phase, Spielminuten und Welt-Seed. Abenteuer können umbenannt und unabhängig kopiert werden. Acht archivierte Stände und die vorhandene letzte Sicherung können ausdrücklich als neues Abenteuer wiederhergestellt werden. Nicht lesbare oder neuere Stände bleiben sichtbar und können nicht versehentlich geladen werden.
 - **Esc** öffnet in der normalen Spielwelt ein Pausemenü mit Fortsetzen, Speichern, Einstellungen, Steuerung, Speichern/zum Hauptmenü und Speichern/beenden.
 - **F8** öffnet weiterhin die vorhandenen Anzeigeeinstellungen: Bildschirmmodus, Fensterauflösung, Oberflächengröße und VSync. Die Oberfläche funktioniert mit Maus und Tastatur und stellt vorherige Pause, Mausmodus und Fokus wieder her.
 - Beim Laden zeigt die Oberfläche zunächst den tatsächlich gemeldeten Ressourcenfortschritt. Danach wird der Geländeaufbau beschrieben; es gibt keinen erfundenen prozentualen Weltfortschritt. Die Steuerung wird erst nach bestätigtem Aufbau des Startchunks freigegeben.
@@ -35,7 +35,7 @@ Die eigenen Produktionsdateien liegen überwiegend unter `ui/frontend/` und in `
 
 `tests/frontend_test.gd` und die native Diagnose `--frontend-smoke` prüfen tatsächliche Viewport-Eingaben, neue/ladebare Kampagnen, Seedvalidierung, Pauseverschachtelung, fehlgeschlagenes Speichern, Weltabbau, getrennte Designs sowie beschädigte/neue Sicherungen. Die Diagnose muss mit isoliertem Benutzerordner ausgeführt werden; die bestehenden Prüfskripte richten diesen automatisch ein.
 
-`tools/validate_export.py` führt denselben Ablauf zusätzlich im unveränderten nativen Releaseprogramm aus. Die GitHub-Aktion `Voxelverse frontend review` erzeugt sieben tatsächliche Spielaufnahmen mit Softwaregrafik, einschließlich Kamera- und Tastenbelegungseinstellungen. Prüfresultate und eventuelle verbleibende Einschränkungen werden nach dem Lauf ergänzt. Ziel-PC-Leistung und Lars' manuelle Beurteilung der Optik bleiben ein Spieltest.
+`tools/validate_export.py` führt denselben Ablauf zusätzlich im unveränderten nativen Releaseprogramm aus. Die GitHub-Aktion `Voxelverse frontend review` erzeugt zehn tatsächliche Spielaufnahmen mit Softwaregrafik, einschließlich Kamera-/Tastenbelegungseinstellungen, Spielstandverwaltung und Speicherbestätigung. Prüfresultate und eventuelle verbleibende Einschränkungen werden nach dem Lauf ergänzt. Ziel-PC-Leistung und Lars' manuelle Beurteilung der Optik bleiben ein Spieltest.
 
 Technischer Ladeablauf gemäß [Godot: Background loading](https://docs.godotengine.org/en/4.6/tutorials/io/background_loading.html).
 
@@ -64,3 +64,7 @@ Veröffentlichung: [Entwurfs-PR #16](https://github.com/MajorDragonfly/voxelvers
 ## Erweiterung: Steuerung und Komfort
 
 Die F8-Einstellungen besitzen jetzt die Bereiche Anzeige und Steuerung. Frei belegbare Spieltasten, Mausempfindlichkeit, invertierbare Spielkamera und FPS-Limit werden außerhalb der Kampagnenspeicherung gesichert. Details, Integrationsstellen und Prüfumfang: [CONTROLS_SETTINGS.md](CONTROLS_SETTINGS.md).
+
+## Erweiterung: Spielstandverwaltung
+
+Vorschaubilder, Umbenennen, unabhängige Kopien, acht rotierende Sicherungen und die Speicheranzeige im Spiel sind umgesetzt. Datenvertrag, Wiederherstellungsverhalten und neue Prüfnachweise: [SAVE_MANAGEMENT.md](SAVE_MANAGEMENT.md).
