@@ -145,6 +145,7 @@ func run() -> void:
 	await frames(40)
 	check(audio.creatures.emitters.is_empty(), "All creature tracking released")
 	audio.stop_ui()
-	await frames(3)
+	# Let the mixer release pending playbacks before the process shuts down.
+	await create_timer(0.25).timeout
 	print("CREATURE_AUDIO_RESULT ", JSON.stringify({"passed": failures.is_empty(), "failures": failures, "heard": heard}))
 	quit(0 if failures.is_empty() else 1)

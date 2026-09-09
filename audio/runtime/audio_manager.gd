@@ -228,11 +228,13 @@ func stop_source(source_id: int) -> void:
 	for voice in _voices:
 		if int(voice.get_meta(&"audio_source_id", -1)) == source_id:
 			voice.stop()
+			voice.stream = null
 
 
 func stop_ui() -> void:
 	for voice in _ui_voices:
 		voice.stop()
+		voice.stream = null
 
 
 func play_ui(event: StringName = &"ui_confirm") -> bool:
@@ -250,6 +252,7 @@ func play_ui(event: StringName = &"ui_confirm") -> bool:
 func stop_world() -> void:
 	for voice in _voices:
 		voice.stop()
+		voice.stream = null
 	_last_time.clear()
 	set_underwater(false)
 
