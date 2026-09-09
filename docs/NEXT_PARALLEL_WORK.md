@@ -8,7 +8,7 @@ Stand: 9. September 2026. Gemeinsame Ausgangsbasis ist die zusammengeführte Ver
 
 - Jeder Chat erstellt einen eigenen Branch und arbeitet nur an seinem abgegrenzten Paket. Kein Zusammenführen anderer unfertiger Stände und kein automatischer Merge nach main.
 - Vor Änderungen aktuelle Dateien und Eigentümer prüfen. Gemeinsame Kerndateien (`autoload/`, `project.godot`, `ui/progression_hud.gd`, Spieler-/Wildtierbasis, Speicherschemata) werden pro Integrationsrunde koordiniert. Erweiterungen sollen eigene Module und klar benannte Anschlüsse verwenden.
-- Nur der Integrationschat pflegt `ROADMAP.md`. Jeder Fachchat dokumentiert Ergebnis, genaue Commit-ID, Prüfungen, geänderte Dateien, Schemaänderungen und Grenzen in `docs/WORK_<Paket>.md`.
+- Neue Ideen und ihre Roadmap-Einordnung werden gemäß Lars' Auftrag im Roadmap-Chat gepflegt; konkrete To-dos stehen in [FEATURE_BACKLOG.md](FEATURE_BACKLOG.md). Integrations- und Teststatus werden weiterhin nur anhand der Fach-/Integrationsnachweise aktualisiert. Jeder Fachchat dokumentiert Ergebnis, genaue Commit-ID, Prüfungen, geänderte Dateien, Schemaänderungen und Grenzen in `docs/WORK_<Paket>.md`.
 - Fertig bedeutet ein überprüfbarer Ablauf mit Save/Load und gegebenenfalls Migration. Neue Eigenschaften dürfen nicht bloß im Menü behauptet werden.
 - Aufstieg betrifft nur die eigene Spezies. Zähmbare Tiere behalten ihre eigene Art und werden keine Bürger. Kein Tierrollen- oder Zähmungsprototyp darf vorhandene Arten/Spielstände still neu generieren.
 - Teilpakete können nacheinander geliefert werden. Datenvertrag D1 muss geprüft vorliegen, bevor andere Chats seine produktiven Daten anschließen. Bis dahin dürfen sie eigene kleine Prüfszenen vorbereiten; keine zweite konkurrierende Speziesdatenbank bauen.
@@ -62,3 +62,17 @@ Stand: 9. September 2026. Gemeinsame Ausgangsbasis ist die zusammengeführte Ver
 3. D2 mit aktiver Stammesfauna und eigenen Tier-IDs integrieren.
 4. D3/Milch und D4/Reiten/Pflügen jeweils als eigene spätere Lieferungen integrieren; D4 ist noch kein Auftrag, gleichzeitig einen kompletten Fahrzeugeditor zu bauen.
 5. Gesamtspieltest: neue Kampagne → Scan → eigene Nestgruppe → bestätigter Stamm → zähmen → versorgen → speichern/neustarten. Anschließend Roadmap und Folgeaufträge aktualisieren.
+
+## Planungsergänzung: Eier und Tierkörperteile (9. September 2026)
+
+Die obenstehenden Einstiege beschreiben den Umfang der laufenden Grundlieferungen. Der neue Nutzerwunsch erweitert das Ziel über diese erste Runde hinaus; die konkreten To-dos und Abnahmen stehen in [FEATURE_BACKLOG.md](FEATURE_BACKLOG.md).
+
+| Zuständigkeit | Geplante Ergänzung | Anschluss / Reihenfolge |
+|---|---|---|
+| 2 – Kreaturen | M3-TEILE: alle vorhandenen Teile prüfen/überarbeiten oder kompatibel ersetzen; frei kombinierbare Einzeloptionen nach echten Tieren, zuerst Mund/Kopf, Hände/Greifer und Füße | M2B-Anschlüsse und stabile IDs zuerst; vorhandene Reiter-/Geschirrverträge erhalten |
+| 3 – Artenkatalog | D1-EIER: Eierlieferfähigkeit und eine vierte geeignete, erreichbare Art je belebtem Spielplaneten | Geprüften Drei-Arten-Grundvertrag versioniert erweitern; keine stille Neugenerierung |
+| 4 – Zähmung | Die neue Eier-Eignung über den gemeinsamen D1-Vertrag verwenden | Vorhandene Zähmung/Individuen wiederverwenden; kein zweites Tierregister |
+| 5 – Dorfwirtschaft | D3-EIER: Versorgung, Legestelle, Sammel-/Transportauftrag und Eier als Nahrung | Nach D1-EIER, D2 und D3-Haltungsbasis; gemeinsame Vorräte, reale Transporte, Save/Load |
+| 7 – Bedienung und Klang | Eierrolle und neue Teile aus echten Daten anzeigen; Vorschauen/Silhouetten und gemeinsame Symbole verwenden | Nach den jeweiligen Fachverträgen; Übersetzungsanschluss mit Sprachverwaltung abstimmen |
+
+Der vollständige Modellpass ist keine Voraussetzung für die erste Eierkette. Ein vorhandener Milchproduktionsnachweis oder Drei-Arten-Test gilt nicht automatisch als Abnahme der Erweiterung. Diese Dokumentation startet keine zusätzliche parallele Implementierung und ändert keine bestehenden Abschlussmeldungen.
