@@ -1,6 +1,8 @@
 # Übergabe Auftrag 2 – Sitzpassung B3
 
-9. September 2026 · Branch `agent/creature-seat-fit`.
+9. September 2026 · Branch `agent/creature-seat-fit` · [PR #38](https://github.com/MajorDragonfly/voxelverse/pull/38).
+
+Implementierung **`d48dfcf836bad549cbc357de4d86841a71329b80`**, Quellbaum **`5635e473e1d5480ba60bfba79d6701c7006e16ef`**. Nachfolgende Änderungen dieses Pakets ergänzen ausschließlich Übergabenachweise.
 
 ## Basis und Ergebnis
 
@@ -26,6 +28,14 @@ Godot 4.6.3. Acht relevante Tests lokal erfolgreich: `creature_seat_fit_test`, `
 
 Die Sitzprüfung deckt fehlende/falsche/zukünftige Daten, drei Referenzgrößen, echte Hauttreffer, schwebende/eindringende/seitlich fehlende/zu stark geneigte Auflage, übereinstimmende Darstellung und Kollisionsformen, gezielte Sitzkorrektur, atomisches Undo/Redo und Laden in einem neuen Prozess ab. Alle sechs Bewegungsszenarien werden mit zwei, vier und sechs Beinen geprüft. Eine zusätzliche Probe am Arm des Vierbeiners erzeugt gezielt einen erst später auftretenden Treffer. Die isolierte Prüfung verändert weder Entwurf noch ursprüngliche Testpose; Abbruch und Schließen der Werkstatt geben ihre Ressourcen frei. Die Kopie greift nicht in Physik oder Teileauswahl ein.
 
+| Beine | Geprüfte Posen | Mindestens aufgesetzte Füße | Größte Bodenunterschreitung | Größter Gesamt-Streckfaktor |
+|---:|---:|---:|---:|---:|
+| 2 | 958 | 1 | 0,000000182 | 1,215 |
+| 4 | 944 | 2 | 0,000000195 | 1,295 |
+| 6 | 616 | 3 | 0,000000343 | 1,937 |
+
+Insgesamt **2.518 Posen**. Die angepassten Zwei-/Sechsbeiner haben in diesen Posen keine Reiter-/Geschirrtreffer. Beim Vierbeiner erzeugt die gezielte Armprobe 33 Trefferposen; der erste Treffer liegt nach Bewegungsbeginn. Die absichtlich ungünstige Sechsbeinmischung zeigt trotz Fußkontakt erhebliche zusätzliche Dehnung. Dieses Paket verschweigt diesen Befund nicht und erklärt das Tier nicht eigenständig für geeignet. Die korrigierte Sattelauflage erreicht bei den Referenzformen 9/9 Punkte mit Lücken von 0,025 bis rund 0,060 Entwurfseinheiten vor Körpermaßstab; Beckenabstand zum Sattel 0,01.
+
 **B2-Nachtrag:** Die zuvor wartende [Grafik-/Fachabnahme 34347964334](https://github.com/MajorDragonfly/voxelverse/actions/runs/34347964334) ist inzwischen erfolgreich. Sie prüft B2-Implementierung `beda03adf70de89af206a46495a87c1c173de34f`: Import/Quellprüfung, fünf Fachtests sowie echte Werkstattaufnahmen in Compatibility (OpenGL) und Forward+ (Vulkan), einschließlich 1280×720. Das ist ein Nachweis für B2, nicht automatisch für dieses Folgepaket.
 
-Die eigene B3-Grafikabnahme erzeugt Aufnahmen für einen schwebenden Sitz, die korrigierte Auflage, das Bewegungsprotokoll und ein kleines Fenster. Lokales Grafikdisplay ist nicht verfügbar; eine manuelle Bildsichtkontrolle wird daher nicht behauptet. Veröffentlichungsstand und CI-Lauf werden im Abschlussnachtrag festgehalten.
+Die eigene [B3-Grafikabnahme 34351147965](https://github.com/MajorDragonfly/voxelverse/actions/runs/34351147965) prüft exakt den oben genannten Implementierungscommit. Sie erzeugt Aufnahmen für einen schwebenden Sitz, die korrigierte Auflage, das Bewegungsprotokoll und ein kleines Fenster in Compatibility und Forward+. Zum Übergabestand wartet der Lauf auf einen GitHub-Runner (`queued`). Lokales Grafikdisplay ist nicht verfügbar; eine erfolgreiche B3-Grafikabnahme oder manuelle Bildsichtkontrolle wird deshalb noch nicht behauptet.
