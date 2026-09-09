@@ -2,6 +2,26 @@
 
 Stand: 9. September 2026 · M1e-Kampagnengrundlage nach der zweiten Integrationsrunde. Maßgeblich sind jetzt [Runde 2](docs/INTEGRATION_SPHERICAL_2026-09-09.md) und der [Kugelumzug](docs/SPHERICAL_CAMPAIGN_MIGRATION.md). Die folgende ältere Quellenliste dokumentiert Runde 1. Die konkreten Quellstände stehen in [Integrationsquellen](docs/integration-sources-2026-09-09.json), gemeinsame Prüfungen und Grenzen im [Integrationsbericht](docs/INTEGRATION_2026-09-09.md). Ältere Berichte beschreiben ihre damaligen Einzelstände; diese Roadmap ist die aktuelle Planung. Ein vorhandener Prototyp zählt nicht als abgeschlossene Spielphase.
 
+## Architekturprüfung und nächste verbindliche Arbeitsschritte
+
+**Ergebnis vom 9. September 2026:** Die Basis bleibt verwendbar; ein kompletter Neustart ist nicht begründet. Zusätzliche Inhalte können vorhandene Dienste nutzen. Mehrere Siedlungen, lange Reisen und neue Epochen benötigen jedoch gezielte Arbeiten an Körperidentitäten, Ortsanschlüssen, Regionsspeicherung, Simulationsübergaben und Produktionsverträgen. „Immer neue Funktionen ohne Umbau anhängen“ ist im heutigen Stand keine belastbare Zusage.
+
+Der [Architekturbericht](docs/ARCHITECTURE_SCALABILITY_AUDIT.md) belegt die Befunde am veröffentlichten `main`-Commit `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7`. Der [ausführbare Architektur-Backlog](docs/ARCHITECTURE_BACKLOG.md) zerlegt die bestehenden Meilensteine in **30 Aufgaben mit Abhängigkeiten, Zuständigkeiten, Teilschritten und Abnahme**. Diese Aufgaben sind geplant; durch die Prüfung wurde kein Spielcode umgebaut. Neuere Fachlieferungen vor Arbeitsbeginn abgleichen und fertige Anschlüsse nicht nochmals erfinden.
+
+| Priorität | Konkretes Ergebnis | Aufgaben |
+|---|---|---|
+| Sofort parallel | Datenbesitzer, Erweiterungsvertrag, Messroute, zulässige Körpergrößen und Prüfkatalog | ARCH-01/02/05/29 |
+| Gemeinsamer Kern | Körper per eindeutiger ID statt nur Weltseed; versionierte Fachorte; kleine Speichermodule mit gemeinsamem Commit | ARCH-03/04/06/07 |
+| Kugelspiel vervollständigen | Kreatur/Heimat, Dorf/Zähmung/Milch und geprüfte Kopie entwickelter Altstände | ARCH-08–12 → M1f/M1g/Rest M1e |
+| Langzeitbetrieb | Regionen dauerhaft auslagern, technische Registergrenzen überwinden, Nah-/Fernsimulation eindeutig übergeben, Streaming/Körperwechsel begrenzen | ARCH-13–18 → M1h |
+| Gemeinsame Abnahme | Erst dann regulären Kugelstart freigeben; alten Lade-/Rückweg erhalten | ARCH-19 → M1i |
+| Weitere Inhalte | Gemeinsame Ressourcenproduktion vor Eierkette; versionierte Baupläne und Körperteilkatalog; einheitliche Darstellung | ARCH-20–25 → D1-EIER/D3-EIER/M3-TEILE/UI |
+| Größere Gesellschaft und Raumfahrt | Siedlungsinstanzen, regionale Transporte, geprüfte Epochenübergaben und Reise-/Schiffsvertrag | ARCH-26–28/30 → M6–M9 |
+
+**In dieser Prüfung von Lars bestätigt:** Kurze Übergänge zwischen Oberfläche und Orbit sind zulässig. Entfernte eigene Siedlungen arbeiten während des laufenden Spiels vereinfacht weiter; Pause und geschlossene Anwendung erzeugen weiterhin keine Produktion. Vorläufiges Leistungsziel ist ein Gaming-PC mit 1920 × 1080 bei 60 FPS. Genaue Hardware und Grafikpreset müssen vor der Leistungsabnahme dokumentiert werden; die 60 FPS sind noch kein gemessenes Ergebnis.
+
+Singleplayer, die bisherige Geländeoberfläche ohne allgemeines Graben und die gemeinsame Spezies-/Phasenlogik bleiben Arbeitsgrundlage. Neue Eierlieferanten, die umfassende Tierkörperteilüberarbeitung, die modulare Expeditionsbasis mit Landungsschiff und Community-Baupläne werden in den bestehenden Fachaufträgen weitergeführt. Ihre zusätzliche [Planungsquelle](https://github.com/MajorDragonfly/voxelverse/tree/61ccebb2c6eec5d6f5826867cc91205265dd7667/docs) wurde separat gelesen; dieses Audit führt keinen fremden Arbeitszweig zusammen. BP-COMMUNITY.1–.5 schließt an ARCH-23 an: Selbstgestalten bleibt freiwillig, passende fertige Vorlagen bleiben nach Übernahme offline nutzbar; dafür ist keine Multiplayer-Spielsimulation erforderlich. Die unten beschriebene Drei-Arten-Garantie ist der implementierte D1-Stand; **die vierte Eierart ist ein geplanter additiver Ausbau**.
+
 ## Verbindliches Zielbild
 
 **Kreatur → Stammeszeitalter → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum.** Dieselbe selbst gestaltete Spezies entwickelt sich durch die gesamte Kampagne. Das Spiel orientiert sich funktional an Spore und behält seine feine Voxeloptik.
@@ -138,6 +158,6 @@ D1–D4 sind Teil des Stammesausbaus, keine zusätzlichen Spielzeitalter. Die We
 
 ## Nächste parallele Arbeitsrunde
 
-Die priorisierten Umzugsaufträge stehen in [NEXT_PARALLEL_WORK.md](docs/NEXT_PARALLEL_WORK.md). Alle Chats starten vom selben integrierten Stand. D1–D3 sind bereits übernommen. Zuerst wird M1e als gemeinsamer Orts-/Kampagnenvertrag abgeschlossen; danach folgen Kreaturenphase, Dorf/Tierhaltung und Fernsimulation auf derselben Kugelgrundlage. Kein Chat führt fremde unfertige Branches zusammen.
+Die priorisierten Umzugsaufträge stehen in [NEXT_PARALLEL_WORK.md](docs/NEXT_PARALLEL_WORK.md). Alle Chats starten vom selben integrierten Stand. D1–D3 und die M1e-Kampagnengrundlage sind bereits übernommen. Zuerst die ergänzenden gemeinsamen Fachorte vereinbaren, dann Kreaturenphase und Dorf/Tierhaltung anschließen; die erweiterte M1e-Kopiermigration wird mit diesen Verbrauchern abgeschlossen. Regionsspeicherung und Fernsimulation folgen den Abhängigkeiten im Architektur-Backlog. Kein Chat führt fremde unfertige Branches zusammen.
 
 Roadmap und gemeinsame Kerndateien haben pro Runde genau einen Integrationsverantwortlichen. Jeder Fachchat liefert einen eigenen Branch, exakten Commit, geänderte Dateien, Ergebnisse und Restgrenzen in seinem Übergabebericht. Erst danach folgt eine erneute gemeinsame Abnahme. Empfehlungen zum Ziel-PC gelten als offene Messung; bisherige Software-Renderer-Nachweise sind keine belegten 60 FPS auf Lars’ Rechner.

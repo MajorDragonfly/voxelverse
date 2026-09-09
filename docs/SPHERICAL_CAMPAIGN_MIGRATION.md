@@ -2,6 +2,8 @@
 
 Stand: 9. September 2026. Verbindliche Priorität nach der zweiten Zusammenführung. Ziel ist die Größenordnung einer bereisbaren prozeduralen Galaxie mit begrenztem Aufwand pro Aufenthaltsort. „Wie No Man’s Sky“ bezeichnet das Skalierungsziel; eine vergleichbare Leistung oder ein fertiger Raumflug ist damit nicht nachgewiesen.
 
+Die [Architekturprüfung](ARCHITECTURE_SCALABILITY_AUDIT.md) am gemeinsamen Stand `d94d1e5` ergänzt diesen Auftrag um [ARCH-01–30](ARCHITECTURE_BACKLOG.md). Besonders Körper-ID statt Seedindex, versionierte Fachorte, dauerhafte Regionen und eindeutige Nah-/Fernübergabe sind vor größerem Ausbau abzunehmen. Die dortigen Teilaufträge konkretisieren M1e–M1i; bestehende Zuständigkeiten und die folgende Abnahmekette bleiben erhalten. Lars hat kurze Oberfläche-/Orbitübergänge und vereinfachtes Weiterarbeiten entfernter eigener Siedlungen während laufender Kampagnenzeit bestätigt. Pause und geschlossene Anwendung erzeugen weiterhin keinen Fortschritt.
+
 ## Entscheidung und heutige Grenze
 
 Neue Weltentwicklung baut auf `cube_sphere_m1_v1`, dem vorhandenen radialen Adapter und `living_planet_v1` auf. Die aktive Flachkampagne wird schrittweise in diese Architektur überführt. Zusätzliche Epochen und große neue planare Gameplaybereiche warten auf diesen Umzug. Bestehende Inhalte, Arten, Bewohner, Besitz, Karten, Entwürfe und Fortschritte gehören weiter zur selben Kampagne.
