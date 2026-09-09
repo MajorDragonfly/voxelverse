@@ -20,6 +20,7 @@ var creature: CharacterBody3D
 var body_id: String = "m1b:terra"
 var records: Dictionary = {}
 var store_path: String = Store.PATH
+var save_backend: Script = Store
 var read_only: bool = false
 var object_loads: int = 0
 var object_unloads: int = 0
@@ -27,6 +28,7 @@ var max_object_build_ms: float = 0.0
 var initial_load_ms: float = 0.0
 var hud: Label
 var status: Label
+var help_label: Label
 var _old_autosave: bool = true
 var _old_session_managed: bool = false
 var _old_session_active: bool = false
@@ -47,7 +49,7 @@ func _ready() -> void:
 		saves.session_active = false
 		saves.autosave_enabled = false
 	_build_view()
-	var saved: Dictionary = Store.read(store_path)
+	var saved: Dictionary = save_backend.read(store_path)
 	read_only = saved.error != OK
 	if not saved.data.is_empty():
 		records = saved.data.bodies
@@ -209,14 +211,14 @@ func snapshot() -> Dictionary:
 
 
 func save_lab() -> bool:
-	var error: Error = ERR_UNAVAILABLE if read_only else Store.write(snapshot(), store_path)
+	var error: Error = ERR_UNAVAILABLE if read_only else save_backend.write(snapshot(), store_path)
 	status.text = "Spieler, Baum und Kreatur gesichert." if error == OK else "Sicherung nicht möglich (%s). Vorhandene Datei bleibt erhalten." % error
 	leave_without_saving.visible = error != OK
 	return error == OK
 
 
 func load_lab() -> bool:
-	var saved: Dictionary = Store.read(store_path)
+	var saved: Dictionary = save_backend.read(store_path)
 	if saved.error != OK or saved.data.is_empty():
 		status.text = "Keine lesbare M1d-Sicherung gefunden."
 		return false
@@ -345,8 +347,8 @@ func _build_view() -> void:
 	leave_without_saving.pressed.connect(func(): get_tree().change_scene_to_file("res://world/planet_lab/planet_lab.tscn"))
 	leave_without_saving.hide()
 	buttons.add_child(leave_without_saving)
-	var help := Label.new()
-	help.text = "WASD Bewegen · Maus Umsehen · Leertaste Springen · Esc Pause / Maus\nBegrenzte Oberflächenprobe mit eigener Sicherung. Die Kampagne bleibt erhalten."
-	bottom.add_child(help)
+	help_label = Label.new()
+	help_label.text = "WASD Bewegen · Maus Umsehen · Leertaste Springen · Esc Pause / Maus\nBegrenzte Oberflächenprobe mit eigener Sicherung. Die Kampagne bleibt erhalten."
+	bottom.add_child(help_label)
 	status = Label.new()
 	bottom.add_child(status)

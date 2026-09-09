@@ -15,6 +15,7 @@ var waiting_for_terrain: bool = false
 var preview: Node3D
 var speed: float = 2.4
 var commanded_direction: Vector3 = Vector3.ZERO
+var design: Dictionary = {}
 
 
 func _ready() -> void:
@@ -33,7 +34,7 @@ func _ready() -> void:
 	add_child(collider)
 	preview = Preview.new()
 	add_child(preview)
-	preview.set_editor_state(Blueprint.create_default(), -1, -1, false)
+	preview.set_editor_state(Blueprint.create_default() if design.is_empty() else design, -1, -1, false)
 	_disable_picking(preview)
 	preview.position.y = -0.9
 	preview.scale = Vector3.ONE * 0.7

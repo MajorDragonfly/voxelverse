@@ -622,6 +622,10 @@ func _build_ui() -> void:
 		if save_lab():
 			get_tree().change_scene_to_file("res://world/planet_lab/surface_adapter_lab.tscn")
 	).name = "OpenSurfaceAdapter"
+	_button(buttons, "Belebter Voxelplanet", func():
+		if save_lab():
+			get_tree().change_scene_to_file("res://world/planet_lab/living_planet.tscn")
+	).name = "OpenLivingPlanet"
 	_button(buttons, "Aster · 8 km", func(): _open_body("m1:aster"))
 	_button(buttons, "Sonnen wechseln", toggle_binary)
 	_button(buttons, "Zeit", cycle_time)
