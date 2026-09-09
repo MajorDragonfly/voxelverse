@@ -395,6 +395,7 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 	offset.y = 0
 	var arrived: bool = offset.length() < 0.45
 	var direction := Vector3.ZERO
+	var lookahead: float = 1.2
 	if not arrived:
 		if not _goals.has(identity) or _goals[identity].distance_to(target) > 0.2:
 			_routes[identity] = navigation.route(actor.global_position, target)
@@ -405,12 +406,17 @@ func _walk(actor: CharacterBody3D, identity: String, target: Vector3, delta: flo
 			next_offset.y = 0
 			if next_offset.length() > 0.25:
 				direction = next_offset.normalized()
+				# Stop the probe at the next waypoint; looking past a turn can
+				# incorrectly test a tree or water outside the planned path.
+				lookahead = minf(1.2, next_offset.length())
 				break
 			route.remove_at(0)
 		_routes[identity] = route
-		if direction != Vector3.ZERO and not home.safe_step(actor, direction):
+		if direction != Vector3.ZERO and not home.safe_step(actor, direction, lookahead):
 			direction = Vector3.ZERO
 			status = "Weg blockiert. Erteile dem Bewohner einen neuen Wegbefehl."
+		elif direction != Vector3.ZERO and status.begins_with("Weg blockiert"):
+			status = "Die Bewohner setzen ihre Aufträge fort."
 	var speed: float = 3.8 * (0.6 if hunger < 20.0 else 1.0)
 	actor.velocity.x = direction.x * speed
 	actor.velocity.z = direction.z * speed

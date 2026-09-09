@@ -237,8 +237,8 @@ func _clear_space(position: Vector3) -> bool:
 	query.exclude = [player.get_rid()] if player is CollisionObject3D else []
 	return _nest.get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty()
 
-func safe_step(actor: CharacterBody3D, direction: Vector3) -> bool:
-	var next: Vector3 = actor.global_position + direction * 1.2
+func safe_step(actor: CharacterBody3D, direction: Vector3, distance: float = 1.2) -> bool:
+	var next: Vector3 = actor.global_position + direction * distance
 	var hit: Dictionary = _floor_hit(next)
 	if hit.is_empty() or hit["normal"].dot(Vector3.UP) < 0.7 or not _dry(hit["position"]):
 		return false
@@ -246,4 +246,4 @@ func safe_step(actor: CharacterBody3D, direction: Vector3) -> bool:
 	if difference > 0.58 or difference < -0.85:
 		return false
 	var raised: Transform3D = actor.global_transform.translated(Vector3.UP * 0.56)
-	return not actor.test_move(raised, direction * 1.2)
+	return not actor.test_move(raised, direction * distance)

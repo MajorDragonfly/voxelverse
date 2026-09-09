@@ -90,12 +90,17 @@ func _run() -> void:
 		print("Tribal group active; gathering on real terrain")
 		tribe.select_all()
 		_expect(tribe.issue_order("wood"), "Generated village cannot issue gathering command.")
+		var carriers: Dictionary = {}
 		for frame in range(1800):
 			await physics_frame
 			await process_frame
-			if int(tribe.village()["stock"]["wood"]) >= 3:
+			for member: Dictionary in tribe.village()["members"]:
+				if member["cargo"] == "wood":
+					carriers[member["id"]] = true
+			if int(tribe.village()["stock"]["wood"]) >= 6 and carriers.size() == 3:
 				break
-		_expect(int(tribe.village()["stock"]["wood"]) >= 3, "Workers cannot deliver wood over real terrain: " + str(tribe.village()["members"]) + " " + tribe.status)
+		_expect(carriers.size() == 3, "Not every resident could gather on real terrain.")
+		_expect(int(tribe.village()["stock"]["wood"]) >= 6, "Workers cannot deliver wood over real terrain: " + str(tribe.village()["members"]) + " " + tribe.status)
 		for actor: CharacterBody3D in tribe.actors.values():
 			_expect(actor.visible and actor.is_on_floor(), "Resident lost real terrain floor or visibility.")
 		var args: PackedStringArray = OS.get_cmdline_user_args()
