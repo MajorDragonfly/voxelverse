@@ -1,4 +1,5 @@
 extends Node
+const Neighbor = preload("res://world/tribe/neighbors/neighbor_state.gd")
 
 signal game_saved(path: String)
 signal game_loaded(path: String)
@@ -6,13 +7,16 @@ signal save_failed(message: String)
 signal save_started(path: String)
 signal slots_changed
 
-const SAVE_SCHEMA: int = 6
+const SAVE_SCHEMA: int = 7
+const Animals = preload("res://world/domestication/campaign_animal_state.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Designs = preload("res://core/persistence/design_store.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const Progression = preload("res://autoload/progression_service.gd")
+const FaunaCatalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
+const Exploration = preload("res://core/map/exploration_atlas.gd")
 const Tribe = preload("res://world/tribe/tribe_state.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 const SLOT_DIRECTORY: String = "user://saves"
@@ -192,14 +196,14 @@ func load_now(custom_path: String = "") -> bool:
 			data["design_files"] = files
 		else:
 			last_migration_report.assign(data.get("migration_report", []))
-		last_migration_report.append("Schema %d -> 6; campaign, location, designs, behavior and encounters retained; no tribe created without confirmation." % schema)
+		last_migration_report.append("Schema %d -> 7; campaign, location, designs, behavior and encounters retained; no tribe or tamed animal created by migration." % schema)
 	else:
 		last_migration_report.assign(data.get("migration_report", []))
 	if source_path != target_path:
 		last_migration_report.append("Recovered the previous complete snapshot from .bak.")
 	for saved_body: Dictionary in data["game_state"]["campaign"].get("bodies", {}).values():
 		if saved_body.has("tribe") and Tribe.upgrade(saved_body["tribe"]):
-			last_migration_report.append("Tribe 1 -> 2; residents, orders, cargo and stock retained. Garden must be built in play.")
+			last_migration_report.append("Tribe -> %d; residents, orders, cargo, stock and economy retained. Existing huts and paid construction keep their sites; new shelters, residents and husbandry develop in play." % Tribe.SCHEMA)
 	_design_files = _dict(data.get("design_files", {}))
 	slot_name = str(data.get("slot_name", "Bisheriges Abenteuer"))
 	_slot_preview = _dict(data.get("slot_preview", {}))
@@ -391,6 +395,11 @@ func _write_slot_copy(source: Dictionary, title: String, kind: String) -> String
 	for event: Dictionary in campaign["recent_events"]:
 		if str(event.get("campaign_id", "")) == old_identity:
 			event["campaign_id"] = campaign["id"]
+	for body: Dictionary in campaign["bodies"].values():
+		if body.has(Animals.FIELD):
+			body[Animals.FIELD]["registry"]["campaign_id"] = campaign["id"]
+	if data["progression"].get("tribal", {}).get("campaign_id", "") == old_identity:
+		data["progression"]["tribal"]["campaign_id"] = campaign["id"]
 	data.erase("slot_history")
 	data["slot_origin"] = {"kind": kind, "campaign_id": old_identity,
 		"saved_unix_time": int(source.get("saved_unix_time", 0))}
@@ -491,7 +500,7 @@ func _validate_save(data: Dictionary) -> String:
 		return progression_problem
 	if schema >= 4 and int(data["progression"].get("schema", 0)) < 3:
 		return "Schema 4 requires complete behavior progression."
-	if schema >= 5 and int(data["progression"].get("schema", 0)) != Progression.SAVE_SCHEMA:
+	if schema >= 5 and int(data["progression"].get("schema", 0)) < 4:
 		return "Schema 5 requires persistent creature encounters."
 	var runtime: Variant = data["player"].get("behavior_runtime", {})
 	if not runtime is Dictionary:
@@ -510,16 +519,46 @@ func _validate_save(data: Dictionary) -> String:
 	var campaign: Variant = state.get("campaign")
 	if not campaign is Dictionary or str(campaign.get("id", "")).is_empty() or int(campaign.get("schema", 0)) != Campaign.SCHEMA:
 		return "Invalid campaign identity or version."
+	var tribal: Dictionary = data["progression"].get("tribal", {})
+	if not str(tribal.get("campaign_id", "")).is_empty():
+		if tribal["campaign_id"] != campaign.get("id") or tribal["species_id"] != campaign.get("player_species_id") or tribal["faction_id"] != campaign.get("player_faction_id"):
+			return "Stammesfortschritt gehört zu einer anderen Kampagne, Spezies oder Fraktion."
 	for field in ["bodies", "event_cursors", "design_refs", "pending_transition", "completed_transitions"]:
 		if not campaign.get(field) is Dictionary:
 			return "Invalid campaign section: " + field
 	for body in campaign["bodies"].values():
 		if not body is Dictionary or body.get("generator_version") != Campaign.GENERATOR_VERSION or body.get("surface_mode") != Campaign.SURFACE_MODE:
 			return "Unsupported body generator/surface version."
+		if body.has("fauna_catalog"):
+			var fauna_problem: String = FaunaCatalog.validate(body["fauna_catalog"], body)
+			if not fauna_problem.is_empty():
+				return fauna_problem
+		var animal_problem: String = Animals.validate_body(body, campaign)
+		if not animal_problem.is_empty():
+			return animal_problem
+		if body.has("exploration_atlas"):
+			var map_problem: String = Exploration.validate(body["exploration_atlas"], str(body.get("id", "")))
+			if not map_problem.is_empty(): return map_problem
+			if body["exploration_atlas"]["mode"] != body["surface_mode"]: return "Map and body surface modes differ."
 		if body.has("tribe"):
 			var tribe_problem: String = Tribe.validate(body["tribe"], body, campaign)
 			if not tribe_problem.is_empty():
 				return tribe_problem
+		if body.has("tribal_neighbor"):
+			if int(tribal.get("schema", 0)) < 3:
+				return "Nachbarlager benötigt Stammesfortschrittformat 3."
+			var neighbor_problem: String = Neighbor.validate(body["tribal_neighbor"], body.get("tribe", {}), campaign)
+			if not neighbor_problem.is_empty():
+				return neighbor_problem
+	var aid_award: Dictionary = tribal.get("awards", {}).get("neighbor_help", {})
+	if not aid_award.is_empty():
+		var found: bool = false
+		for body: Dictionary in campaign["bodies"].values():
+			var neighbor: Dictionary = body.get("tribal_neighbor", {})
+			if neighbor.get("id") == aid_award["neighbor_id"] and neighbor.get("village_id") == aid_award["village_id"] and neighbor.get("aid", {}).get("id") == aid_award["agreement_id"] and Neighbor.progress(neighbor)["met"]:
+				found = true
+		if not found:
+			return "Stammesverdienst ohne erfüllte Nachbarhilfe."
 	if not campaign.get("recent_events") is Array or campaign["recent_events"].size() > 32:
 		return "Invalid event history."
 	for field in ["player_species_id", "player_faction_id", "player_object_id"]:
@@ -823,6 +862,13 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	var bodies: Variant = campaign.get("bodies", {})
 	if bodies is Dictionary:
 		for body in bodies.values():
+			if body is Dictionary and Animals.unsupported(body):
+				return true
+			if body is Dictionary and Neighbor.has_unsupported_contract(body.get("tribal_neighbor")):
+				return true
+			if body is Dictionary and body.has("fauna_catalog") and FaunaCatalog.has_unsupported(body["fauna_catalog"]):
+				return true
+			if body is Dictionary and Exploration.newer(body.get("exploration_atlas")): return true
 			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
 				return true
 			if body is Dictionary and body.has("generator_version") and body["generator_version"] != Campaign.GENERATOR_VERSION:

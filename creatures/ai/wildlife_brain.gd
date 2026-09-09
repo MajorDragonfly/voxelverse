@@ -40,6 +40,8 @@ var _label: Label3D
 
 func _ready() -> void:
 	super._ready()
+	if not catalog_species.is_empty():
+		sight_range = float(catalog_species["domestication"]["perception_range"])
 	_side = -1.0 if posmod(individual_seed, 2) == 0 else 1.0
 	_sense_remaining = float(posmod(individual_seed, 10)) * 0.02
 	_label = Label3D.new()
@@ -88,7 +90,7 @@ func _physics_process(delta: float) -> void:
 	_refresh_label()
 
 func _update_role_direction() -> void:
-	if int(get_node("/root/GameState").current_phase) != 0:
+	if int(get_node("/root/GameState").current_phase) not in [0, 1]:
 		_wander_direction = Vector3.ZERO
 		return
 	if not is_instance_valid(_player):
@@ -106,6 +108,8 @@ func _update_role_direction() -> void:
 	var ally: bool = social_owns
 	if social != null and social.has_method("entry"):
 		ally = str(social.entry().get("relation", "wild")) == "ally"
+	# Tribal control is a group. Never target the disabled phase-0 player.
+	ally = ally or int(get_node("/root/GameState").current_phase) == 1
 	if ally != _ignore_player:
 		_ignore_player = ally
 		_sense_remaining = 0.0
@@ -155,7 +159,7 @@ func _sense() -> void:
 			perceived = _threat
 			_last_attacker = _threat.get_instance_id()
 	if perceived == null and not _ignore_player and is_instance_valid(_player) and not bool(_player.get("is_dead")):
-		if can_perceive(_player, sight_range if ecological_role == "predator" else 6.0):
+		if can_perceive(_player, sight_range if ecological_role == "predator" else _player_caution_range()):
 			perceived = _player
 	if ecological_role != "predator":
 		for other in neighbors:
@@ -282,3 +286,7 @@ func get_inspection_data() -> Dictionary:
 
 static func _flat_distance(a: Vector3, b: Vector3) -> float:
 	return Vector2(a.x - b.x, a.z - b.z).length()
+
+func _player_caution_range() -> float:
+	if catalog_species.is_empty(): return 6.0
+	return 2.8 if catalog_species["domestication"]["temperament"] == "social" else 4.0

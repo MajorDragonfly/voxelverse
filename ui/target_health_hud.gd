@@ -40,10 +40,10 @@ func _install() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "CombatTargetPanel"
 	_panel.set_anchors_preset(Control.PRESET_CENTER_TOP)
-	_panel.offset_left = -230.0
+	_panel.offset_left = -150.0
 	_panel.offset_top = 22.0
-	_panel.offset_right = 230.0
-	_panel.offset_bottom = 116.0
+	_panel.offset_right = 150.0
+	_panel.offset_bottom = 94.0
 	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var panel_style := StyleBoxFlat.new()
 	panel_style.bg_color = Color(0.025, 0.035, 0.045, 0.86)
@@ -70,7 +70,7 @@ func _install() -> void:
 	box.add_child(_name_label)
 
 	_health_bar = ProgressBar.new()
-	_health_bar.custom_minimum_size = Vector2(420.0, 14.0)
+	_health_bar.custom_minimum_size = Vector2(272.0, 9.0)
 	_health_bar.min_value = 0.0
 	_health_bar.max_value = 100.0
 	_health_bar.show_percentage = false
@@ -145,11 +145,11 @@ func _refresh_target() -> void:
 		}
 	var maximum: float = maxf(float(data.get("maximum_health", 1.0)), 1.0)
 	var current: float = clampf(float(data.get("current_health", 0.0)), 0.0, maximum)
-	_name_label.text = str(data.get("name", "Creature"))
+	_name_label.text = "Im Kampf" # Identity is shown only by the E scanner.
 	_health_bar.max_value = maximum
 	_health_bar.value = current
 	var dead: bool = bool(data.get("dead", false))
-	_health_label.text = "DEFEATED" if dead else "%d / %d HP" % [roundi(current), roundi(maximum)]
+	_health_label.text = "Besiegt" if dead else "%d / %d Leben" % [roundi(current), roundi(maximum)]
 	if dead:
 		_timer = maxf(_timer, 2.2)
 

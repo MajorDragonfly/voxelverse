@@ -10,6 +10,8 @@ const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
 const Motion = preload("res://creatures/runtime/creature_sculpt_motion.gd")
 const PartGeometry = preload("res://creatures/editor/creature_part_geometry.gd")
 const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
+const BodyContract = preload("res://creatures/runtime/creature_body_contract.gd")
+const BodyGuides = preload("res://creatures/runtime/creature_body_attachment_guides.gd")
 
 # Kept for compatibility: true selects the editable, cubic surface; false
 # selects the original independently batched slice renderer.
@@ -18,6 +20,8 @@ var motion_mode: String = "edit"
 var motion_speed_scale: float = 1.0
 var show_center_axis: bool = false
 var editing_terminal: bool = false
+var show_body_attachments: bool = false
+var body_attachment_errors: Array[String] = []
 var _motion := Motion.new()
 var _motion_time: float = 0.0
 
@@ -67,9 +71,41 @@ func rebuild() -> void:
 		node.material_override = _shared_box_material
 		parent.add_child(node)
 	_pending_boxes.clear()
+	_rebuild_body_sockets()
 	if motion_mode != "edit":
 		_motion.bind(self)
 	set_process(motion_mode != "edit")
+
+
+func _rebuild_body_sockets() -> void:
+	body_attachment_errors.clear()
+	var skin: MeshInstance3D = get_node_or_null("BodyV4/SculptedSkin")
+	if skin == null:
+		return
+	var resolved: Dictionary = BodyContract.resolve(blueprint, skin.mesh)
+	body_attachment_errors.assign(resolved["errors"])
+	var mounts := Node3D.new()
+	mounts.name = "BodyAttachments"
+	mounts.set_meta("editor_guide", true)
+	skin.get_parent().add_child(mounts)
+	for id in resolved["sockets"]:
+		var marker := Marker3D.new()
+		marker.name = id.replace(".", "_")
+		marker.transform = resolved["sockets"][id]
+		mounts.add_child(marker)
+		if show_body_attachments:
+			BodyGuides.install(marker, id, Blueprint.get_body_scale(blueprint), BodyGuides.Shapes.Rider.read(blueprint))
+
+
+func body_socket(id: String) -> Dictionary:
+	# Resolve a fixed ID; arbitrary NodePaths and stale markers are not accepted.
+	if id not in BodyContract.Data.IDS:
+		return {}
+	var marker: Node3D = get_node_or_null("BodyV4/BodyAttachments/" + id.replace(".", "_"))
+	if marker == null or not marker.is_inside_tree():
+		return {}
+	return {"id": id, "schema": BodyContract.SCHEMA, "body_transform": marker.transform,
+		"world_transform": marker.global_transform}
 
 
 func set_motion(mode: String) -> void:
@@ -174,6 +210,7 @@ func _create_single_part_side(placement: Dictionary, definition: Dictionary, cat
 	root.set_meta("creature_part_category", category)
 	root.set_meta("creature_part_side", side)
 	root.set_meta("creature_part_id", str(definition["id"]))
+	root.set_meta("creature_part_uid", str(placement.get("uid", "")))
 	add_child(root)
 	PartGeometry.build(root, definition, placement, blueprint)
 	if selected:

@@ -1,0 +1,64 @@
+[
+  {
+    "branch": "origin/agent/creature-body-contract",
+    "sha": "004d5a62b4010b147a1975ccafa604bada7c5295",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/creature-body-fit",
+    "sha": "e2132d6e38bb4c546d6e1a434575caf7ec3b0ee5",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/creature-seat-fit",
+    "sha": "e34574ac91d6203f035914b8a73b3492e46a8fc2",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/d1-planet-fauna",
+    "sha": "17b23f568dabbec9f3903217238650f0c9178d04",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/d11-fauna-body-evidence",
+    "sha": "3ee18b1077a54c9b1a117580ac8d31c650221b30",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/d2-domestication",
+    "sha": "38d6177a27a228fdf0ea8418062f710ab90b558e",
+    "overlap": [
+      "core/runtime_shutdown.gd"
+    ]
+  },
+  {
+    "branch": "origin/agent/interface-audio-task7",
+    "sha": "7d6a5be3dc90e47509f3251340ad27ed1e9aa17b",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/m1d-surface-adapter",
+    "sha": "a18536c35a995c652a289f015fd55c2a7b29f173",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/m6-village-economy",
+    "sha": "a1b3d7cad8e2ec4661675d14b6e59974b27141fe",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/m6-village-growth",
+    "sha": "09b3b4621930bbe8008c6deca893beaabf5b7d1a",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/tribal-progression",
+    "sha": "ff841110690a6a98d1d37b22bbdab541c9207d66",
+    "overlap": []
+  },
+  {
+    "branch": "origin/agent/world-evolution-v2",
+    "sha": "f4c009cff3d9818e5551b253a13cbd363201a695",
+    "overlap": []
+  }
+]

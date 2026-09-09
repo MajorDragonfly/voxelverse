@@ -1,0 +1,13 @@
+2026-09-09T12:39:45.4048177Z {"name": "import", "passed": true, "exit_code": 0, "seconds": 10.375}
+2026-09-09T12:39:50.6245511Z {"name": "release_export", "passed": true, "exit_code": 0, "seconds": 5.219}
+2026-09-09T12:39:53.2003054Z {"name": "packaged_main", "passed": true, "exit_code": 0, "seconds": 2.575}
+2026-09-09T12:40:08.5981003Z {"name": "packaged_planet_lab", "passed": true, "exit_code": 0, "seconds": 15.397}
+2026-09-09T12:40:48.8217901Z {"name": "packaged_menu_input", "passed": false, "exit_code": 0, "seconds": 40.223}
+2026-09-09T12:40:48.8349552Z ERROR: 1 resources still in use at exit.
+2026-09-09T12:40:48.8385518Z Leaked instance: AudioStreamOggVorbis:9223372102990562963 - Reference count: 1
+2026-09-09T12:40:48.8386382Z Leaked instance: OggPacketSequence:9223372102504023704 - Reference count: 3
+2026-09-09T12:40:48.8387544Z Leaked instance: AudioStreamPlaybackOggVorbis:9223372113543432394 - Reference count: 1
+2026-09-09T12:40:48.8388578Z Leaked instance: OggPacketSequencePlayback:9223372113560209611 - Reference count: 1
+2026-09-09T12:40:48.8389895Z Hint: Leaked instances typically happen when nodes are removed from the scene tree (with `remove_child()`) but not freed (with `free()` or `queue_free()`).
+2026-09-09T12:40:48.8391353Z Resource still in use: res://audio/assets/music/menu.ogg::OggPacketSequence_blkk0 (OggPacketSequence)
+2026-09-09T12:40:48.8394484Z Export validation failed: packaged_menu_input

@@ -1,0 +1,20 @@
+2026-09-09T12:41:35.0477030Z {"name": "import", "passed": true, "exit_code": 0, "seconds": 15.281}
+2026-09-09T12:41:41.9905083Z {"name": "release_export", "passed": true, "exit_code": 0, "seconds": 6.938}
+2026-09-09T12:41:44.9220847Z {"name": "packaged_main", "passed": true, "exit_code": 0, "seconds": 2.921}
+2026-09-09T12:42:01.0153397Z {"name": "packaged_planet_lab", "passed": true, "exit_code": 0, "seconds": 16.094}
+2026-09-09T12:42:42.6523264Z {"name": "packaged_menu_input", "passed": true, "exit_code": 0, "seconds": 41.641}
+2026-09-09T12:43:16.7013708Z {"name": "packaged_frontend", "passed": true, "exit_code": 0, "seconds": 34.047}
+2026-09-09T12:43:18.8762786Z {"name": "packaged_creature_builder_v7_test", "passed": true, "exit_code": 0, "seconds": 2.11}
+2026-09-09T12:43:20.0219854Z {"name": "packaged_modular_assembly_framework_test", "passed": true, "exit_code": 0, "seconds": 1.125}
+2026-09-09T12:43:21.9151225Z {"name": "packaged_gameplay_acceptance_test", "passed": true, "exit_code": 0, "seconds": 1.875}
+2026-09-09T12:43:23.8246928Z {"name": "packaged_meta_runtime_test", "passed": true, "exit_code": 0, "seconds": 1.907}
+2026-09-09T12:43:26.1732311Z {"name": "packaged_planet_sphere_contract_test", "passed": true, "exit_code": 0, "seconds": 2.343}
+2026-09-09T12:43:28.8046201Z {"name": "packaged_behavior_skill_tree_test", "passed": true, "exit_code": 0, "seconds": 2.625}
+2026-09-09T12:43:33.6868526Z {"name": "packaged_creature_behavior_gameplay_test", "passed": true, "exit_code": 0, "seconds": 4.875}
+2026-09-09T12:43:36.4233932Z {"name": "packaged_development_path_test", "passed": true, "exit_code": 0, "seconds": 2.718}
+2026-09-09T12:44:13.6091501Z {"name": "packaged_tribal_age_test", "passed": true, "exit_code": 0, "seconds": 37.188}
+2026-09-09T12:44:43.0213458Z {"name": "packaged_tribal_age_supply_test", "passed": true, "exit_code": 0, "seconds": 29.406}
+2026-09-09T12:44:57.9452079Z {"name": "packaged_tribal_age_world_test", "passed": false, "exit_code": 1, "seconds": 14.906}
+2026-09-09T12:44:57.9459583Z Village site search completed: { "ok": false, "message": "W�hle festen, m�glichst ebenen Boden." }
+2026-09-09T12:44:57.9460990Z {"failures":["No playable village footprint in generated starting terrain: { \"ok\": false, \"message\": \"W�hle festen, m�glichst ebenen Boden.\" } sites=13"],"passed":false,"test":"tribal_age_world"}
+2026-09-09T12:44:58.0269132Z Export validation failed: packaged_tribal_age_world_test

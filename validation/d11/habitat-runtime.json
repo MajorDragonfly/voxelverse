@@ -1,0 +1,11 @@
+{
+  "failures": [],
+  "groups": [
+    "milk",
+    "work",
+    "companion"
+  ],
+  "habitats": 3,
+  "original_object_id": "object_e686606a5cd536fb5fb202ec45c97c1b",
+  "test": "domestic_habitat_runtime"
+}

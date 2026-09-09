@@ -246,7 +246,7 @@ func _without_research() -> Dictionary:
 
 
 func _tab(index: int) -> void:
-	await _click_at(journal._tabs.global_position + journal._tabs.get_tab_rect(index).get_center())
+	await _click_at(journal._tabs.get_global_transform_with_canvas() * journal._tabs.get_tab_rect(index).get_center())
 
 
 func _select_key(key: String) -> void:
@@ -260,11 +260,13 @@ func _select_key(key: String) -> void:
 
 
 func _click(control: Control) -> void:
+	# Preview/filter changes settle the detail height before scrolling to its action.
+	await _frames()
 	_check(control.is_visible_in_tree(), "Interaction target must be visible")
 	if journal._detail_scroll.is_ancestor_of(control):
 		journal._detail_scroll.ensure_control_visible(control)
 	await _frames()
-	await _click_at(control.get_global_rect().get_center())
+	await _click_at(control.get_global_transform_with_canvas() * (control.size * 0.5))
 
 
 func _click_at(position: Vector2) -> void:

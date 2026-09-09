@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+D3: pen built; care cargo stopped, reloaded, returned and resumed; canonical production started
+{"evidence":{"animal_id":"d3-lab-animal-001","care":{"consumed":{"food":1.03566666666658,"water":4.14266666666634},"delivered":{"food":4.0,"water":9.0},"pens":[{"animal_id":"d3-lab-animal-001","entrance":[0.0,100.059997558594,9.0],"food":2.96433333333218,"id":"pen_84d7c5bde4caef786ca12754ef00112e","kind":"pen","position":[0.0,100.059997558594,7.0],"water":4.85733333333379}],"records":{"d3-lab-animal-001":{"clock":10.7,"cycles":1.0,"design_ref":{"id":"d3-lab-body","revision":1.0},"handed_over":2.0,"pending_milk":0.0,"pickup":[0.0,100.059997558594,9.0],"produced":2.0,"recipe":{"milk_interval":300.0,"milk_yield":2.0,"water_need":4.0},"sequence":1.0,"species_id":"d3-lab-d1-milk-fixture"}},"returned":{"food":0.0,"water":2.0},"schema":1.0,"withdrawn":{"food":4.0,"water":11.0}},"cycles":1.0,"milk_received":2.0,"pen_id":"pen_84d7c5bde4caef786ca12754ef00112e","schema":5,"stock":{"fiber":2.0,"food":11.0,"milk":2.0,"stone":8.0,"water":12.0,"wood":12.0}},"failures":[],"passed":true,"test":"tribal_age_husbandry"}
+WARNING: Could not commit save: user://d3-blocked/save.json (Can't open file)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:146)
+         [2] save_now (res://autoload/save_game_service.gd:89)
+         [3] _save_economy (res://world/tribe/tribe_controller.gd:770)
+         [4] tick (res://world/tribe/husbandry_runtime.gd:127)
+         [5] _physics_process (res://world/tribe/tribe_controller.gd:510)

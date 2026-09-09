@@ -1140,7 +1140,7 @@ func handle_canvas_input(event: InputEvent) -> void:
 				_zoom_camera(-step * 4.0)
 	elif event is InputEventMouseMotion:
 		if _orbiting:
-			_preview_pivot.rotation.y -= event.relative.x * 0.008
+			_preview_pivot.rotation.y += event.relative.x * 0.008
 			_preview_pivot.rotation.x = clampf(_preview_pivot.rotation.x - event.relative.y * 0.005, -0.5, 0.5)
 		elif _drag_spine >= 0:
 			_drag_body_point(event)

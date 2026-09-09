@@ -3,6 +3,9 @@ extends Node3D
 const WILDLIFE_SCENE: PackedScene = preload(
 	"res://creatures/wildlife/procedural_wildlife_v7.tscn"
 )
+const DomesticFauna = preload("res://world/fauna/domestication/domestic_fauna_runtime.gd")
+var domestic_fauna := DomesticFauna.new()
+
 const HABITAT_SIZE: float = 12.0
 
 # Visible animals are only representatives of compact regional populations.
@@ -25,6 +28,7 @@ var _active_fauna: Array[Node3D] = []
 
 
 func _ready() -> void:
+	get_node("/root/SaveGameService").game_loaded.connect(func(_path: String) -> void: domestic_fauna.reset(self))
 	call_deferred("_bind_runtime_services")
 
 
@@ -34,13 +38,16 @@ func _process(delta: float) -> void:
 		return
 	if _simulation == null or not is_instance_valid(_simulation):
 		_bind_runtime_services()
+	domestic_fauna.update(self)
 	_prune_fauna()
 	_enforce_population_limit()
 	_spawn_timer -= delta
 	if _spawn_timer > 0.0:
 		return
 	_spawn_timer = spawn_interval
-	if _active_fauna.size() < target_population:
+	if domestic_fauna.try_spawn(self):
+		return
+	if _active_fauna.size() < mini(target_population, maximum_population):
 		_spawn_one_creature()
 
 
@@ -52,6 +59,8 @@ func _bind_runtime_services() -> void:
 
 
 func _spawn_one_creature() -> void:
+	if not DomesticFauna.Catalog.eligible(get_node("/root/GameState").get_current_body()):
+		return
 	var random := RandomNumberGenerator.new()
 	random.seed = (
 		WorldGenerator.get_world_seed()
@@ -149,6 +158,9 @@ func _spawn_one_creature() -> void:
 
 
 func _has_active_identity(object_id: String) -> bool:
+	# A saved individual has one state owner, even before D2 actors restore.
+	if not preload("res://world/domestication/campaign_animal_state.gd").lookup(get_node("/root/GameState"), object_id).is_empty():
+		return true
 	for creature in _active_fauna:
 		if is_instance_valid(creature) and creature.get_campaign_identity().get("object_id") == object_id:
 			return true
@@ -232,7 +244,7 @@ func _role_matches_biome(role: String, biome: int) -> bool:
 func _prune_fauna() -> void:
 	var retained: Array[Node3D] = []
 	for fauna in _active_fauna:
-		if fauna == null or not is_instance_valid(fauna):
+		if fauna == null or not is_instance_valid(fauna) or fauna.is_queued_for_deletion():
 			continue
 		if fauna.global_position.distance_to(_player.global_position) > despawn_radius:
 			fauna.queue_free()

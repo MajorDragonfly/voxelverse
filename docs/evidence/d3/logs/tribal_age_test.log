@@ -1,0 +1,62 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"failures":[],"passed":true,"test":"tribal_age"}
+WARNING: Lege mit N einen Heimatplatz für deine Nestgruppe fest.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:617)
+         [2] _run (res://tests/tribal_age_test.gd:36)
+         [3] _frames (res://tests/tribal_age_test.gd:322)
+WARNING: Bestätige den Wechsel im Fenster für das Stammeszeitalter erneut.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:622)
+         [2] _run (res://tests/tribal_age_test.gd:52)
+         [3] _click (res://tests/tribal_age_test.gd:317)
+WARNING: Bestätige den Wechsel im Fenster für das Stammeszeitalter erneut.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:622)
+         [2] _run (res://tests/tribal_age_test.gd:55)
+         [3] _click (res://tests/tribal_age_test.gd:317)
+WARNING: Could not commit save: user://blocked-parent/campaign.json (Can't open file)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:146)
+         [2] save_now (res://autoload/save_game_service.gd:89)
+         [3] request_phase_transition (res://autoload/save_game_service.gd:639)
+         [4] _run (res://tests/tribal_age_test.gd:61)
+         [5] _click (res://tests/tribal_age_test.gd:317)
+WARNING: Only the next supported phase can be entered.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:617)
+         [2] _run (res://tests/tribal_age_test.gd:80)
+         [3] _frames (res://tests/tribal_age_test.gd:322)
+WARNING: The gameplay and handoff for this phase are not implemented yet.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:617)
+         [2] _run (res://tests/tribal_age_test.gd:80)
+         [3] _frames (res://tests/tribal_age_test.gd:322)
+WARNING: Unsupported save, campaign, progression or generator version.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] load_now (res://autoload/save_game_service.gd:167)
+         [2] _run (res://tests/tribal_age_test.gd:174)
+         [3] _frames (res://tests/tribal_age_test.gd:322)
+WARNING: Saving is blocked after an unreadable or newer save. Load a compatible save first.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:806)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:98)
+         [2] save_now (res://autoload/save_game_service.gd:89)
+         [3] _run (res://tests/tribal_age_test.gd:174)
+         [4] _frames (res://tests/tribal_age_test.gd:322)

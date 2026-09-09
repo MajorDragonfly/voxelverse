@@ -6,6 +6,8 @@ const TEXT := Color("edf1df")
 const MUTED := Color("a5b9b7")
 const ACCENT := Color("c6df91")
 const EDGE := Color("31525a")
+# Shared design v1.0: readable borders for actionable controls.
+const CONTROL := Color("789394")
 
 static func box(color: Color, border: Color = EDGE, padding: int = 20) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()

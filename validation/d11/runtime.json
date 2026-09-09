@@ -1,0 +1,28 @@
+{
+  "bodies": [
+    {
+      "body_check_usec": 1622,
+      "group": "work",
+      "legs": 4,
+      "position": "(79.35004, 3.498368, -90.99776)",
+      "speed": 2.8
+    },
+    {
+      "body_check_usec": 1665,
+      "group": "milk",
+      "legs": 4,
+      "position": "(68.21949, 1.548334, -93.06062)",
+      "speed": 2.8
+    },
+    {
+      "body_check_usec": 1633,
+      "group": "companion",
+      "legs": 4,
+      "position": "(76.21725, 3.001036, -91.2978)",
+      "speed": 3.8
+    }
+  ],
+  "failures": [],
+  "food_sources": 3,
+  "test": "domestic_fauna_runtime"
+}

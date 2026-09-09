@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		return
 	_timer = 0.4
 	var player: Node3D = get_tree().get_first_node_in_group(&"player") as Node3D
-	if not is_instance_valid(player) or GameState.current_phase != 0:
+	if not is_instance_valid(player) or GameState.current_phase not in [0, 1]:
 		return
 	# The nest is also used in editors and fixtures; require a real ready world.
 	var manager: Node = get_tree().current_scene.get_node_or_null("WorldManager") if get_tree().current_scene != null else null

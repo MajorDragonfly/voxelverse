@@ -25,6 +25,7 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	root.size = Vector2i(1920, 1080)
 	saves = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
 	saves.save_path = SAVE_PATH
@@ -51,7 +52,7 @@ func _run() -> void:
 	await _key(KEY_K)
 	_expect(ui.visible and paused, "K did not open and pause the game.")
 	_expect(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Opening did not release the mouse.")
-	_expect(ui._cards.size() == 6, "Not all six backend nodes are visible.")
+	_expect(ui._cards.values().filter(func(card: Dictionary) -> bool: return card["button"].is_visible_in_tree()).size() == 6, "Not all six creature nodes are visible in the creature view.")
 	_expect(ui._purchase.disabled, "Empty wallet permits a purchase.")
 	await _screenshot("skilltree_empty.png")
 	var time_before: float = state.campaign.data["elapsed_seconds"]
@@ -230,7 +231,7 @@ func _click(control: Control) -> void:
 	if ui._scroll.is_ancestor_of(control):
 		ui._scroll.ensure_control_visible(control)
 	await _frames()
-	var position: Vector2 = control.get_global_rect().get_center()
+	var position: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
 	for pressed_value in [true, false]:
 		var event := InputEventMouseButton.new()
 		event.button_index = MOUSE_BUTTON_LEFT

@@ -1,0 +1,67 @@
+{
+  "base": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "date": "2026-09-09",
+  "method": "merge commits; retain every source history; integration fixes follow separately",
+  "sources": [
+    {
+      "package": "m1d_living_ground_water",
+      "commit": "a18536c35a995c652a289f015fd55c2a7b29f173",
+      "tree": "5a62e900da0918359d95f6591582125f86476ed3",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "body_b1_b2_b3",
+      "commit": "e34574ac91d6203f035914b8a73b3492e46a8fc2",
+      "tree": "284feb59d6b4b9c1fe137886114919c11e5e7bee",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "fauna_d1_d11_d12",
+      "commit": "a629fcee005958be2c3cf6a76190564c2082b36b",
+      "tree": "466d568ca20f202f588faaded53fc14d07e58cb3",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "d2_campaign",
+      "commit": "38d6177a27a228fdf0ea8418062f710ab90b558e",
+      "tree": "891204a41a310edee81a7daaefd863364bd27f86",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "village_economy_growth_d3",
+      "commit": "b2a7432e5dea6bff3607809a5135295dcef08242",
+      "tree": "595a87b968713b315bdb82efe60fa5f0ae4a24cc",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "tribal_progression_neighbors",
+      "commit": "25c1b77f30da7f1e96f8f420ca5023017c897486",
+      "tree": "6db67717f9a008e2f75bff4971fc2ae884bc8f75",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "interface_audio",
+      "commit": "7d6a5be3dc90e47509f3251340ad27ed1e9aa17b",
+      "tree": "ff91066f7c520f375a43ba1def876ca4c7f8f380",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "maintenance_performance_export",
+      "commit": "4dd9c7ad373cdaf314bd315b8ed29cdb84a7a8e1",
+      "tree": "b82d7db21d9a5d03b2c404da5303c02da7a05b81",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "visual_minimap_worldmap",
+      "commit": "e349a24e29c854b2ba06118ffd86e95fd9c26998",
+      "tree": "a3225ed0046bf9061fdf52abc2fbaa1743b7f9e9",
+      "included_by_ancestry": true
+    },
+    {
+      "package": "localization",
+      "commit": "691d2e585b3c6dc5a78bf7e8b503b06c22f3bc37",
+      "tree": "f520b5336f2070dbbae7b6456084f1d735213193",
+      "included_by_ancestry": true
+    }
+  ]
+}

@@ -40,10 +40,15 @@ def main():
                   "res://tests/development_path_test.gd" if args.development else
                   "res://tools/review_behavior_gameplay.gd" if args.gameplay else
                   "res://tests/behavior_skill_tree_test.gd")
+        capture_args = ["--capture", str(output)]
+        if args.tribe_world:
+            # Unlike the GUI event probes, this case drives world orders through
+            # the controller and only needs rendering for its resulting capture.
+            capture_args.append("--capture-on-demand")
         try:
             process = subprocess.run([str(editor), "--path", str(args.project.resolve()),
                                       "--rendering-method", "gl_compatibility", "--audio-driver", "Dummy",
-                                      "--script", script, "--", "--capture", str(output)],
+                                      "--script", script, "--", *capture_args],
                                      env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=240 if args.tribe_world else 180)
         except subprocess.TimeoutExpired as error:
             log = error.stdout or b""
@@ -76,7 +81,7 @@ def main():
         images.append({"file": name, "dimensions": actual, "passed": len(data) > 4096 and actual is not None and (dimensions is None or actual == dimensions)})
     marker = '"test":"tribal_age_supply"' if args.supply else '"test":"tribal_age_world"' if args.tribe_world else '"test":"tribal_age"' if args.tribe else "DEVELOPMENT_PATH_OK" if args.development else "BEHAVIOR_GUI_OK" if args.gameplay else "PROGRESSION_UI_OK"
     passed = process.returncode == 0 and not error and marker in process.stdout and all(image["passed"] for image in images)
-    (output / "review.json").write_text(json.dumps({"passed": passed, "renderer": "gl_compatibility", "exit_code": process.returncode, "captures": images}, indent=2) + "\n")
+    (output / "review.json").write_text(json.dumps({"passed": passed, "renderer": "gl_compatibility", "exit_code": process.returncode, "capture_on_demand": args.tribe_world, "captures": images}, indent=2) + "\n")
     print(process.stdout[-6000:])
     print(json.dumps({"passed": passed, "captures": images}))
     return 0 if passed else 1

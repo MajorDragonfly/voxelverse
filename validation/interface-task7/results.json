@@ -1,0 +1,85 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.4
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.948
+    },
+    {
+      "name": "interface_task7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.383
+    },
+    {
+      "name": "discovery_journal_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.454
+    },
+    {
+      "name": "research_goals_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.911
+    },
+    {
+      "name": "species_comparison_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.101
+    },
+    {
+      "name": "tribal_age_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 37.847
+    },
+    {
+      "name": "audio/interface_audio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.119
+    }
+  ],
+  "base_commit": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "code_commit": "5f77966a9dc7e5b8739dc1f4519e558c45685cab",
+  "d1_contract_commit": "bb43b61482ab129b72a66b5299a6bfec80a1e128",
+  "d1_dependency_mode": "Exact contract script loaded from an isolated test path; no D1 generator or spawn code merged.",
+  "rendered_test": {
+    "test": "interface_task7",
+    "passed": true,
+    "d1_checked": true,
+    "renderer": "Godot 4.6.3 gl_compatibility / Mesa llvmpipe",
+    "resolutions": [
+      [
+        1280,
+        720
+      ],
+      [
+        800,
+        600
+      ],
+      [
+        640,
+        480
+      ]
+    ],
+    "failures": []
+  },
+  "limits": [
+    "D1 production data requires integration of the separately owned D1 module.",
+    "D2 has no reviewed data contract here; only an unbound UI fixture exists.",
+    "Windows hardware, listening test and real D1 spawns remain integration checks."
+  ],
+  "tested_local_code_commit": "b50d290364cd53301056d7819555aed07a65ebf7",
+  "code_tree": "cf6d9cad730eafc86ca39d052d37ddbca87bd98b"
+}

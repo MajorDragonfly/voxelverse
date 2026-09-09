@@ -1,0 +1,55 @@
+name: Domestic fauna D1.2 spherical connection
+on:
+  push:
+    branches: ["agent/d12-spherical-fauna"]
+  pull_request:
+    paths:
+      - "world/fauna/**"
+      - "world/surface/**"
+      - "world/planet_lab/living_planet*"
+      - "tests/domestic_surface*"
+      - "tools/*domestic_fauna*"
+      - ".github/workflows/domestic-fauna-d12.yml"
+jobs:
+  spherical-fauna:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install verified engine with bounded retries
+        run: |
+          for attempt in 1 2 3; do
+            if python tools/install_godot.py --directory "${{ runner.temp }}/godot" --platform linux; then
+              exit 0
+            fi
+          done
+          exit 1
+      - name: Validate catalogs, physical habitats and scene entry
+        run: >-
+          python tools/validate_godot.py
+          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --tests domestication_contract_test domestic_fauna_catalog_test
+          domestic_surface_catalog_test domestic_surface_runtime_test
+          living_planet_entry_test surface_adapter_contract_test
+          --skip-main --output "${{ runner.temp }}/d12-checks"
+      - name: Verify spherical populations across a cold restart
+        run: >-
+          python tools/validate_domestic_fauna.py --probe d12
+          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --output "${{ runner.temp }}/d12-restart"
+      - name: Preserve the existing D1.1 campaign restart path
+        run: >-
+          python tools/validate_domestic_fauna.py --probe d11
+          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --output "${{ runner.temp }}/legacy-restart"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: domestic-fauna-d12-checks
+          path: |
+            ${{ runner.temp }}/d12-checks
+            ${{ runner.temp }}/d12-restart
+            ${{ runner.temp }}/legacy-restart

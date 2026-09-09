@@ -1,0 +1,75 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.816
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.774
+    },
+    {
+      "name": "owned_animal_register_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.085
+    },
+    {
+      "name": "interface_task7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.045
+    },
+    {
+      "name": "discovery_journal_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.081
+    },
+    {
+      "name": "research_goals_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.007
+    },
+    {
+      "name": "species_comparison_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.508
+    }
+  ],
+  "code_commit": "c6c409a9a91206caba45bea18c741d50544e44ce",
+  "tested_local_code_commit": "122ddaa032d7255a0e010e3461a72588c7d0225b",
+  "code_tree": "d65e7a5a0c9a6b84b514453c20ec9557b1aabc9e",
+  "d2_dependency_commit": "da6dbd62f505a688aba439cefe42ac8f029da4d4",
+  "d2_files_in_branch": false,
+  "d2_positive_checks": [
+    {
+      "name": "owned_animal_register_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.56
+    },
+    {
+      "name": "d2_separate_process_reload",
+      "passed": true,
+      "seconds": 1.005
+    },
+    {
+      "name": "native_d2_book",
+      "passed": true,
+      "renderer": "Mesa llvmpipe OpenGL ES",
+      "sizes": [
+        "1280x720",
+        "800x600",
+        "640x480"
+      ]
+    }
+  ]
+}

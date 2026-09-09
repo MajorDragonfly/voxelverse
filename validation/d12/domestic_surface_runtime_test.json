@@ -1,0 +1,139 @@
+{
+  "animals": 4,
+  "before": {
+    "object_a94d6fafcc96015e8ea7b683e36e3750": {
+      "forward": [
+        -0.707112014293671,
+        -0.707099199295044,
+        0.00183463760185987
+      ],
+      "goal": {
+        "body_id": "m1b:terra",
+        "face": 3.0,
+        "height": 11.540764,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.999982420387,
+        "v": 0.0
+      },
+      "habitat_key": "surface1:3:0",
+      "home": {
+        "body_id": "m1b:terra",
+        "face": 3.0,
+        "height": 11.7115521637872,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.999981164721977,
+        "v": 0.0
+      },
+      "location": {
+        "body_id": "m1b:terra",
+        "face": 3,
+        "height": 11.5636296207085,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.9999820510483,
+        "v": -1.25821235278241e-09
+      },
+      "returning": true,
+      "schema": 1.0,
+      "species_id": "species_730be2126129ccfe78652357d7879184",
+      "traveled": 11.9767376221716,
+      "velocity": [
+        -1.97991335391998,
+        -1.97987794876099,
+        0.00513698533177376
+      ]
+    },
+    "object_ac9f1067b8ee06bb3edcd32679b01777": {
+      "forward": [
+        -0.70711088180542,
+        -0.707102656364441,
+        2.6087316655321e-05
+      ],
+      "goal": {
+        "body_id": "m1b:terra",
+        "face": 3.0,
+        "height": 10.392728,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.999987443063,
+        "v": 0.0
+      },
+      "habitat_key": "surface1:-3:0",
+      "home": {
+        "body_id": "m1b:terra",
+        "face": 3.0,
+        "height": 10.1918234508485,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.999988698735827,
+        "v": 0.0
+      },
+      "location": {
+        "body_id": "m1b:terra",
+        "face": 3,
+        "height": 10.2014457834885,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.999988309886,
+        "v": -1.59899693418468e-11
+      },
+      "returning": false,
+      "schema": 1.0,
+      "species_id": "species_e30d7bcd59a3dcce7a882b6161be1442",
+      "traveled": 14.3451508283616,
+      "velocity": [
+        -2.68702125549316,
+        -2.6869900226593,
+        9.91318011074327e-05
+      ]
+    },
+    "object_b614760384817a7f169577acbbd008e1": {
+      "forward": [
+        -0.00831726472824812,
+        -0.00831510499119759,
+        0.999930918216705
+      ],
+      "goal": {
+        "body_id": "m1b:terra",
+        "face": 3.0,
+        "height": 11.143515,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.999984931722,
+        "v": 1.775797e-06
+      },
+      "habitat_key": "surface1:0:3",
+      "home": {
+        "body_id": "m1b:terra",
+        "face": 3.0,
+        "height": 10.9440559951514,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.999984931722025,
+        "v": 2.66369614776e-06
+      },
+      "location": {
+        "body_id": "m1b:terra",
+        "face": 3,
+        "height": 10.9445557259023,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.999984942329832,
+        "v": 2.04386914711331e-06
+      },
+      "returning": true,
+      "schema": 1.0,
+      "species_id": "species_6f907083091b3552c5416e86185dea3b",
+      "traveled": 11.9566402956843,
+      "velocity": [
+        -0.023288331925869,
+        -0.0232823044061661,
+        2.79980659484863
+      ]
+    }
+  },
+  "blocked_placements": 0,
+  "domestic": 3,
+  "failures": [],
+  "floor_contacts": 540,
+  "food": 3,
+  "max_body_check_ms": 1.491,
+  "max_search_ms": 2.867,
+  "movement_m": 30.3645475432277,
+  "physically_reached_habitats": 3,
+  "search_nodes": 36,
+  "search_status": "ready"
+}

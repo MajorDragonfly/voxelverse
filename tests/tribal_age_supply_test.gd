@@ -41,14 +41,20 @@ func _run() -> void:
 	for member: Dictionary in data["members"]:
 		member["hunger"] = 85.0
 	data["schema"] = 1
-	for key in ["garden", "growth", "grown"]:
+	data.erase("housing")
+	for key in ["garden", "growth", "grown", "economy"]:
 		data.erase(key)
+	for kind in ["water", "fiber"]:
+		data["deposits"].erase(kind)
+	for member: Dictionary in data["members"]:
+		for key in ["hydration", "profession", "paused_order", "task", "blocked", "species_id", "faction_id", "construction_id"]:
+			member.erase(key)
 	# Compare with the actual JSON representation, including its float precision.
 	var originals: Array = JSON.parse_string(JSON.stringify(data["members"]))
 	_expect(saves.save_now(), "Legacy fixture could not save.")
 	var legacy_bytes: String = FileAccess.get_file_as_string(SAVE)
 	_expect(saves.load_now(), "Schema-1 village did not load.")
-	_expect(tribe.village()["members"] == originals and int(tribe.village()["schema"]) == Model.SCHEMA, "Migration changed residents or orders: expected=%s actual=%s" % [originals, tribe.village()["members"]])
+	_expect(originals.all(func(m: Dictionary) -> bool: return m.keys().all(func(key: String) -> bool: return tribe.member_record(m["id"])[key] == m[key])) and int(tribe.village()["schema"]) == Model.SCHEMA, "Migration changed residents or orders: expected=%s actual=%s" % [originals, tribe.village()["members"]])
 	_expect(FileAccess.get_file_as_string(SAVE) == legacy_bytes, "Read migration overwrote the previous save.")
 	_expect(int(tribe.village()["garden"]) == 0 and int(tribe.village()["grown"]) == 0 and int(tribe.village()["stock"]["food"]) == 11, "Migration granted a garden or changed the food stock.")
 	await _frames(15)
@@ -136,12 +142,10 @@ func _run() -> void:
 	edge["grown"] = 100
 	_expect(not Model.validate(edge, tribe.body(), state.campaign.data).is_empty(), "Cargo reservations can overflow the store.")
 	_expect(Model.validate(tribe.village(), tribe.body(), state.campaign.data).is_empty() and saves.save_now(), "Renewable economy cannot be saved.")
-	# Narrow desktop screenshot exercises wrapping with the new actions.
+	# Every action must be reachable on its tab through the actual scroll container.
 	root.size = Vector2i(800, 900)
 	await _frames(8)
-	for button: Button in tribe.panel._buttons.values():
-		var rect: Rect2 = button.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, button.size)
-		_expect(root.get_visible_rect().encloses(rect), "Supply action is outside the narrow window: %s rect=%s viewport=%s" % [button.name, rect, root.get_visible_rect()])
+	await _check_scrolled_actions()
 	await _capture("10_supply_narrow")
 	await _cleanup()
 	_finish()

@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+const Text = preload("res://core/localization/ui_text.gd")
 const Preferences = preload("res://core/input_preferences.gd")
 var preferences: RefCounted
 var draft: Dictionary = {}
@@ -14,6 +15,7 @@ var _buttons: Dictionary = {}
 
 func setup(source: RefCounted) -> void:
 	preferences = source
+	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
 	add_theme_constant_override("separation", 12)
 	var camera := HBoxContainer.new()
 	add_child(camera)
@@ -107,7 +109,7 @@ func refresh() -> void:
 func begin_binding(action: String, slot: int) -> void:
 	listening_action = action
 	listening_slot = slot
-	message.text = "Taste für „%s“ drücken. Esc bricht ab; Rücktaste entfernt diese Belegung." % Preferences.ACTIONS[action]
+	message.text = Text.format_text("BIND_PROMPT", {"action": Text.text(Preferences.ACTIONS[action])})
 	_update_buttons()
 
 func capture_input(event: InputEvent) -> bool:
@@ -130,7 +132,7 @@ func capture_input(event: InputEvent) -> bool:
 	candidate[listening_action][listening_slot] = code
 	var reason: String = Preferences.validate(candidate)
 	if not reason.is_empty():
-		message.text = reason + " Andere Taste wählen oder Esc drücken."
+		message.text = Text.text(reason) + Text.text(" Andere Taste wählen oder Esc drücken.")
 		return true
 	draft = candidate
 	listening_action = ""
@@ -168,3 +170,8 @@ func _update_buttons() -> void:
 		for slot in range(2):
 			var button: Button = _buttons["Bind_%s_%d" % [action, slot]]
 			button.text = "Taste drücken …" if listening_action == action and listening_slot == slot else Preferences.code_label(draft[action][slot])
+
+func _language_changed(_locale: String) -> void:
+	_update_buttons()
+	if not listening_action.is_empty():
+		message.text = Text.format_text("BIND_PROMPT", {"action": Text.text(Preferences.ACTIONS[listening_action])})
