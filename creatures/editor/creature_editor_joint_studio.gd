@@ -326,6 +326,10 @@ func _refresh_preview() -> void:
 	super._refresh_preview()
 	if _course == null or not is_instance_valid(_preview):
 		return
+	# The screen-sized gizmo replaces the previous fixed-size guides.
+	if _studio_mode == "parts" and _gizmo != null:
+		for guide in _preview.find_children("SelectionRing", "MeshInstance3D", true, false) + _preview.find_children("LocalAxis*", "MeshInstance3D", true, false):
+			guide.visible = false
 	var testing: bool = _studio_mode == "test" and _course_choice != "flat"
 	_course.call("configure", _course_choice if testing else "flat", _preview.get_meta("ground_y", -1.0), _geometry_bounds(_preview).size)
 	get_node("SculptingPlinth").visible = not testing
@@ -377,5 +381,5 @@ func _frame_creature() -> void:
 	super._frame_creature()
 	if _studio_mode == "test" and _course_choice != "flat" and is_instance_valid(_course):
 		var length: float = _course.get("course_length")
-		_camera.position = Vector3(0, length * 0.62, length * 1.75)
+		_camera.position = Vector3(0, length * 0.52, length * 1.4)
 		_camera.look_at(Vector3(0, -0.3, 0))

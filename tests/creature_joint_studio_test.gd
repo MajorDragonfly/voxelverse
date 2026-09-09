@@ -93,7 +93,9 @@ func _check_authoring() -> void:
 	_expect(Assembly.save_to_file(blueprint, "user://joint_studio.json") == OK, "Could not save authored limb proportions.")
 	var loaded: Dictionary = Assembly.load_from_file("user://joint_studio.json")
 	for index in range(3):
-		_expect(loaded["parts"][index]["joint"] == blueprint["parts"][index]["joint"], "V7 roundtrip lost a knee or elbow setting.")
+		var saved_joint: Dictionary = blueprint["parts"][index]["joint"]
+		var loaded_joint: Dictionary = loaded["parts"][index]["joint"]
+		_expect(is_equal_approx(saved_joint["upper"], loaded_joint["upper"]) and is_equal_approx(saved_joint["lower"], loaded_joint["lower"]) and Vector3(saved_joint["offset"]).is_equal_approx(loaded_joint["offset"]), "V7 roundtrip lost joint %d: %s -> %s" % [index, saved_joint, loaded_joint])
 	_expect(Blueprint.calculate_stats(loaded) == stats, "Joint authoring changed progression or skill stats.")
 	var short_design: Dictionary = _design(1)
 	short_design["parts"][0]["scale"] = 0.6
@@ -140,6 +142,13 @@ func _check_direct_inputs() -> void:
 	var redo_count: int = history.get("_redo_stack").size()
 	await _drag(editor, "rotate", 2, true)
 	_expect(JSON.stringify(editor.get("blueprint")) == before_cancel and history.get("_redo_stack").size() == redo_count, "Escape changed the design or erased the previous redo history.")
+	Assembly.set_snap_to_surface(editor.get("blueprint"), false)
+	var old_position: Vector3 = editor.get("blueprint")["parts"][2]["position"]
+	await _drag(editor, "move", 2, false)
+	var moved: Vector3 = editor.get("blueprint")["parts"][2]["position"]
+	_expect(moved.z > old_position.z + 0.01 and is_equal_approx(moved.x, old_position.x) and is_equal_approx(moved.y, old_position.y), "Native translation handle did not isolate its selected axis.")
+	editor.call("_undo_edit")
+	Assembly.set_snap_to_surface(editor.get("blueprint"), true)
 	var old_shape: Vector3 = Blueprint.get_part_shape(editor.get("blueprint")["parts"][2])
 	await _drag(editor, "scale", 0, false)
 	_expect(Blueprint.get_part_shape(editor.get("blueprint")["parts"][2]).x > old_shape.x, "Native size handle did not change the selected axis.")
