@@ -30,12 +30,16 @@ func _draw() -> void:
 		var color: Color = definition.get("color", definition.get("base_tint", Color("92c2a3")))
 		if disabled:
 			color = color.darkened(0.58)
-		draw_set_transform(center, -0.18, Vector2(1.5, 0.85))
-		draw_circle(Vector2.ZERO, 22, color)
-		draw_set_transform(Vector2.ZERO)
-		if category == "paint":
-			for i in range(4):
-				draw_circle(center + Vector2(-20 + i * 13, sin(float(i)) * 10), 4, definition.get("accent", Color("285a48")))
+		for y in range(-3, 3):
+			for x in range(-5, 5):
+				if pow((float(x) + 0.5) / 5.0, 2.0) + pow((float(y) + 0.5) / 3.0, 2.0) > 1.0:
+					continue
+				var tile: Color = color
+				if category == "paint" and str(definition.get("pattern", "plain")) != "plain" and (x + y * 2) % 4 == 0:
+					tile = definition.get("accent", Color("285a48"))
+					if disabled:
+						tile = tile.darkened(0.58)
+				_draw_voxel_tile(center + Vector2(x * 6, y * 6), Vector2(6, 6), tile)
 		return
 	var projected: Array[Dictionary] = []
 	var bounds := Rect2()
@@ -57,9 +61,18 @@ func _draw() -> void:
 			color = Color("f7eedb")
 		if disabled:
 			color = color.darkened(0.55)
-		draw_set_transform(point, 0.0, extent * 0.5)
-		draw_circle(Vector2.ZERO, 1.0, color)
-		draw_set_transform(Vector2.ZERO)
+		_draw_voxel_tile(point, extent, color)
+
+
+func _draw_voxel_tile(center: Vector2, extent: Vector2, color: Color) -> void:
+	var rect := Rect2(center - extent * 0.5, extent)
+	var depth := Vector2(minf(5.0, extent.x * 0.22), -minf(4.0, extent.y * 0.22))
+	var a: Vector2 = rect.position
+	var b: Vector2 = rect.position + Vector2(rect.size.x, 0)
+	var c: Vector2 = rect.end
+	draw_colored_polygon(PackedVector2Array([a, a + depth, b + depth, b]), color.lightened(0.18))
+	draw_colored_polygon(PackedVector2Array([b, b + depth, c + depth, c]), color.darkened(0.22))
+	draw_rect(rect, color)
 
 
 func _get_drag_data(_position: Vector2) -> Variant:

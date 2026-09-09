@@ -3,6 +3,7 @@ extends "res://creatures/editor/creature_editor_v7.gd"
 
 const StudioPreview = preload("res://creatures/runtime/creature_runtime_preview.gd")
 const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
+const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
 const PartCard = preload("res://creatures/editor/creature_part_card.gd")
 const Canvas = preload("res://creatures/editor/creature_editor_canvas.gd")
 const CATEGORY_NAMES: Dictionary = {"body": "Körper", "mouth": "Mäuler", "eyes": "Augen", "legs": "Beine", "arms": "Arme", "tail": "Schwänze", "horns": "Hörner", "plates": "Panzer", "spikes": "Stacheln", "decor": "Details", "paint": "Muster"}
@@ -79,25 +80,24 @@ func _build_editor_room() -> void:
 	add_child(rim)
 	var platform := MeshInstance3D.new()
 	platform.name = "SculptingPlinth"
-	var cylinder := CylinderMesh.new()
-	cylinder.top_radius = 2.45
-	cylinder.bottom_radius = 2.55
-	cylinder.height = 0.16
-	cylinder.radial_segments = 96
-	platform.mesh = cylinder
+	platform.mesh = Voxels.plinth()
 	platform.position.y = -1.22
-	platform.material_override = Surface.material(Color("28414a"))
+	platform.material_override = Surface.material(Color.WHITE, true)
 	add_child(platform)
-	var ring := MeshInstance3D.new()
-	ring.name = "PlinthRim"
-	var torus := TorusMesh.new()
-	torus.inner_radius = 2.40
-	torus.outer_radius = 2.43
-	torus.rings = 96
-	ring.mesh = torus
-	ring.position.y = -1.125
-	ring.material_override = Surface.material(Color("80c9b3"))
-	add_child(ring)
+	var rim := Node3D.new()
+	rim.name = "PlinthRim"
+	for index in range(4):
+		var edge := MeshInstance3D.new()
+		var box := BoxMesh.new()
+		box.size = Vector3(3.2, 0.025, 0.025)
+		edge.mesh = box
+		edge.position = Vector3(0, 0, 2.49) if index == 0 else (Vector3(0, 0, -2.49) if index == 1 else Vector3(2.49 if index == 2 else -2.49, 0, 0))
+		if index >= 2:
+			edge.rotation.y = PI * 0.5
+		edge.material_override = Surface.material(Color("80c9b3"))
+		rim.add_child(edge)
+	rim.position.y = -1.215
+	add_child(rim)
 	_camera_pivot = Node3D.new()
 	add_child(_camera_pivot)
 	_camera = Camera3D.new()
@@ -165,7 +165,7 @@ func _studio_theme() -> Theme:
 			style.bg_color = Color("41776b")
 		if state == "disabled":
 			style.bg_color = Color("142d37")
-		style.set_corner_radius_all(10)
+		style.set_corner_radius_all(3)
 		style.content_margin_left = 12
 		style.content_margin_right = 12
 		style.content_margin_top = 9
@@ -177,7 +177,7 @@ func _studio_theme() -> Theme:
 		theme.set_stylebox(state, "Button", style)
 	var panel := StyleBoxFlat.new()
 	panel.bg_color = Color("102933")
-	panel.set_corner_radius_all(16)
+	panel.set_corner_radius_all(4)
 	panel.set_content_margin_all(18)
 	panel.border_color = Color("2b454b")
 	panel.set_border_width_all(1)
@@ -722,26 +722,13 @@ func _surface_hit(screen_position: Vector2) -> Dictionary:
 	var origin: Vector3 = _preview.to_local(_camera.project_ray_origin(screen_position))
 	var direction: Vector3 = (_preview.global_basis.inverse() * _camera.project_ray_normal(screen_position)).normalized()
 	var length: float = Blueprint.get_body_shape(blueprint).z * Blueprint.get_body_scale(blueprint) * SpineProfile.get_body_length_scale(blueprint)
-	var distance: float = 0.0
-	var previous: float = 0.0
-	for iteration in range(900):
-		var point: Vector3 = origin + direction * distance
-		var t: float = point.z / maxf(length, 0.01) + 0.5
-		if t > 0.002 and t < 0.998:
-			var cross: Dictionary = Surface.section(blueprint, t)
-			var center: Vector3 = cross["center"]
-			var radius: Vector2 = cross["radius"] * sqrt(maxf(0.0001, 1.0 - pow(absf(t * 2.0 - 1.0), 18.0)))
-			var normalized := Vector2(point.x / radius.x, (point.y - center.y) / radius.y)
-			if normalized.length_squared() <= 1.0:
-				# Refine the first intersection rather than jumping the part to
-				# the far side or letting a missed drop alter the blueprint.
-				if iteration < 1:
-					return {}
-				point = origin + direction * lerpf(previous, distance, 0.5)
-				return {"position": point, "t": t, "normal": Vector3(normalized.x / radius.x, normalized.y / radius.y, 0.0).normalized()}
-		previous = distance
-		distance += 0.025
-	return {}
+	var skin: MeshInstance3D = _preview.get_node_or_null("BodyV4/SculptedSkin")
+	if skin == null or not (skin.mesh is ArrayMesh):
+		return {}
+	var hit: Dictionary = Voxels.raycast(skin.mesh, origin, direction)
+	if not hit.is_empty():
+		hit["t"] = clampf(hit["position"].z / maxf(length, 0.01) + 0.5, 0.002, 0.998)
+	return hit
 
 
 func can_drop_part(part_id: String, screen_position: Vector2) -> bool:
@@ -952,8 +939,8 @@ func _update_plinth() -> void:
 		return
 	var bounds: AABB = _geometry_bounds(_preview)
 	if bounds.has_volume():
-		plinth.position.y = bounds.position.y - 0.10
-		rim.position.y = bounds.position.y - 0.005
+		plinth.position.y = bounds.position.y - 0.025
+		rim.position.y = bounds.position.y - 0.010
 
 
 func _reset_blueprint() -> void:

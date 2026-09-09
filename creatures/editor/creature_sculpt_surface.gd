@@ -1,13 +1,14 @@
 extends RefCounted
 ## Shared geometry for the editor, player and generated wildlife. One closed
-## skin replaces the old independent voxel slices; attachments use world-space
-## anatomy anchors exactly once.
+## voxel skin follows the editable spine; attachments use world-space anatomy
+## anchors exactly once. All visible pieces have hard cubic faces.
 
 const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
 const Parts = preload("res://creatures/editor/creature_part_library.gd")
 const Spine = preload("res://creatures/editor/creature_spine_profile.gd")
-const RINGS: int = 64
-const SIDES: int = 24
+const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
+const BODY_CELL_SIZE: float = 0.105
+const MAX_BODY_AXIS_CELLS: float = 64.0
 
 
 static func colors(blueprint: Dictionary) -> Array[Color]:
@@ -38,57 +39,52 @@ static func section(blueprint: Dictionary, t: float) -> Dictionary:
 static func build_skin(blueprint: Dictionary) -> ArrayMesh:
 	var palette: Array[Color] = colors(blueprint)
 	var pattern: String = str(Parts.get_part(Blueprint.get_paint_part_id(blueprint)).get("pattern", "plain"))
-	var vertices := PackedVector3Array()
-	var normals := PackedVector3Array()
-	var shades := PackedColorArray()
-	var indices := PackedInt32Array()
-	# Rounded end caps sit inside the existing attachment overlap. The seven
-	# shape knots remain at the same anatomical stations as legacy designs.
-	for ring in range(RINGS + 1):
-		var t: float = float(ring) / float(RINGS)
+	var scale: float = Blueprint.get_body_scale(blueprint)
+	var shape: Vector3 = Blueprint.get_body_shape(blueprint) * scale
+	var length: float = shape.z * Spine.get_body_length_scale(blueprint)
+	var width: float = 0.0
+	var bottom: float = INF
+	var top: float = -INF
+	for segment: Dictionary in Spine.get_segments(blueprint):
+		width = maxf(width, shape.x * float(segment["width_scale"]))
+		var center: float = float(segment["y_offset"]) * scale
+		var height: float = shape.y * float(segment["height_scale"]) * 0.5
+		bottom = minf(bottom, center - height)
+		top = maxf(top, center + height)
+	# Equal-sized cubes in all three axes. Extreme designs coarsen within a
+	# bounded grid rather than stretching the cells into rectangular slices.
+	var step: float = maxf(BODY_CELL_SIZE * scale, maxf(length, maxf(width, top - bottom)) / MAX_BODY_AXIS_CELLS)
+	var cells: Dictionary = {}
+	for z in range(floori(-length * 0.5 / step), ceili(length * 0.5 / step)):
+		var t: float = (float(z) + 0.5) * step / length + 0.5
+		if t <= 0.0 or t >= 1.0:
+			continue
 		var cross: Dictionary = section(blueprint, t)
 		var center: Vector3 = cross["center"]
-		var radius: Vector2 = cross["radius"]
 		var cap: float = sqrt(maxf(0.0, 1.0 - pow(absf(t * 2.0 - 1.0), 18.0)))
-		for side in range(SIDES + 1):
-			var angle: float = TAU * float(side) / float(SIDES)
-			var radial := Vector3(cos(angle) * radius.x * cap, sin(angle) * radius.y * cap, 0.0)
-			vertices.append(center + radial)
-			normals.append(Vector3.ZERO)
-			var color: Color = palette[0].lerp(palette[0].lightened(0.34), clampf(-sin(angle), 0.0, 1.0) * 0.7)
-			var mask: float = 0.0
-			match pattern:
-				"spots": mask = smoothstep(0.60, 0.80, sin(t * 53.0 + cos(angle * 5.0)) * cos(angle * 7.0))
-				"stripes": mask = smoothstep(0.25, 0.52, sin(t * 47.0 + sin(angle * 3.0)))
-				"warning": mask = smoothstep(0.25, 0.45, sin(t * 36.0 + angle * 2.0))
-				"crystal": mask = smoothstep(0.40, 0.72, cos(t * 50.0) * sin(angle * 8.0))
-			mask *= smoothstep(-0.4, 0.35, sin(angle))
-			shades.append(color.lerp(palette[1], mask * 0.86))
-	for ring in range(RINGS):
-		for side in range(SIDES):
-			var a: int = ring * (SIDES + 1) + side
-			var b: int = a + SIDES + 1
-			for tri in [[a, b, a + 1], [a + 1, b, b + 1]]:
-				indices.append_array(PackedInt32Array(tri))
-				var normal: Vector3 = (vertices[tri[2]] - vertices[tri[0]]).cross(vertices[tri[1]] - vertices[tri[0]])
-				for index: int in tri:
-					normals[index] += normal
-	for ring in range(RINGS + 1):
-		var first: int = ring * (SIDES + 1)
-		var seam: Vector3 = normals[first] + normals[first + SIDES]
-		normals[first] = seam
-		normals[first + SIDES] = seam
-	for index in range(normals.size()):
-		normals[index] = normals[index].normalized()
-	var arrays: Array = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_NORMAL] = normals
-	arrays[Mesh.ARRAY_COLOR] = shades
-	arrays[Mesh.ARRAY_INDEX] = indices
-	var mesh := ArrayMesh.new()
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	return mesh
+		var radius: Vector2 = cross["radius"] * cap
+		# Keep thin sculpted necks represented on the symmetric cubic lattice.
+		radius = radius.max(Vector2.ONE * step * 0.76)
+		for y in range(floori((center.y - radius.y) / step), ceili((center.y + radius.y) / step)):
+			for x in range(floori(-radius.x / step), ceili(radius.x / step)):
+				var cell := Vector3i(x, y, z)
+				var radial := Vector2((float(x) + 0.5) * step / radius.x, ((float(y) + 0.5) * step - center.y) / radius.y)
+				if radial.length_squared() > 1.0:
+					continue
+				var angle: float = atan2(radial.y, absf(radial.x))
+				var belly: float = floorf(clampf(-radial.y, 0.0, 1.0) * 3.0) / 3.0
+				var color: Color = palette[0].lerp(palette[0].lightened(0.26), belly * 0.7)
+				var mask: bool = false
+				match pattern:
+					"spots": mask = sin(t * 53.0 + cos(angle * 5.0)) * cos(angle * 7.0) > 0.60
+					"stripes": mask = sin(t * 47.0 + sin(angle * 3.0)) > 0.30
+					"warning": mask = sin(t * 36.0 + angle * 2.0) > 0.30
+					"crystal": mask = cos(t * 50.0) * sin(angle * 8.0) > 0.45
+				if mask and radial.y > -0.25:
+					color = color.lerp(palette[1], 0.86)
+				var variation: float = Voxels.shade(cell)
+				cells[cell] = color.lightened(variation) if variation > 0.0 else color.darkened(-variation)
+	return Voxels.from_cells(cells, step, true)
 
 
 static func material(color: Color, vertex_colors: bool = false) -> StandardMaterial3D:
@@ -96,7 +92,9 @@ static func material(color: Color, vertex_colors: bool = false) -> StandardMater
 	result.albedo_color = color
 	result.vertex_color_use_as_albedo = vertex_colors
 	result.vertex_color_is_srgb = true
-	result.roughness = 0.68
+	result.roughness = 1.0
+	result.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
+	result.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	return result
 
 
@@ -104,14 +102,8 @@ static func ellipsoid(parent: Node3D, node_name: String, position: Vector3, size
 	var node := MeshInstance3D.new()
 	node.name = node_name
 	node.position = position
-	var mesh := SphereMesh.new()
-	mesh.radius = 0.5
-	mesh.height = 1.0
-	mesh.radial_segments = 16
-	mesh.rings = 8
-	node.mesh = mesh
-	node.scale = size.max(Vector3.ONE * 0.001)
-	node.material_override = material(color)
+	node.mesh = Voxels.primitive(size)
+	node.material_override = material(color, true)
 	parent.add_child(node)
 	return node
 
@@ -120,14 +112,9 @@ static func bone(parent: Node3D, node_name: String, start: Vector3, end: Vector3
 	var node := MeshInstance3D.new()
 	node.name = node_name
 	node.position = (start + end) * 0.5
-	var mesh := CapsuleMesh.new()
-	mesh.radius = width * 0.5
-	mesh.height = maxf(start.distance_to(end) + width, width)
-	mesh.radial_segments = 12
-	mesh.rings = 4
-	node.mesh = mesh
+	node.mesh = Voxels.primitive(Vector3(width, maxf(start.distance_to(end) + width, width), width), "capsule")
 	node.quaternion = Quaternion(Vector3.UP, (end - start).normalized())
-	node.material_override = material(color)
+	node.material_override = material(color, true)
 	parent.add_child(node)
 	return node
 
@@ -150,14 +137,8 @@ static func make_part_piece(parent: Node3D, node_name: String, position: Vector3
 		var node := MeshInstance3D.new()
 		node.name = node_name
 		node.position = position
-		var cone := CylinderMesh.new()
-		cone.bottom_radius = 0.5
-		cone.top_radius = 0.035
-		cone.height = 1.0
-		cone.radial_segments = 12
-		node.mesh = cone
-		node.scale = size * Vector3(1.2, 1.2, 1.2)
-		node.material_override = material(color)
+		node.mesh = Voxels.primitive(size * 1.2, "cone")
+		node.material_override = material(color, true)
 		parent.add_child(node)
 	elif category in ["legs", "arms"] and size.y > size.x * 1.8:
 		# Two overlapping segments give the adaptive knee rig real upper/lower

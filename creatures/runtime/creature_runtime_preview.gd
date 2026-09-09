@@ -9,6 +9,8 @@ const SculptSurface = preload("res://creatures/editor/creature_sculpt_surface.gd
 const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
 const Motion = preload("res://creatures/runtime/creature_sculpt_motion.gd")
 
+# Kept for compatibility: true selects the editable, cubic surface; false
+# selects the original independently batched slice renderer.
 var sculpted_surface: bool = true
 var motion_mode: String = "edit"
 var _motion := Motion.new()
@@ -103,12 +105,18 @@ func _create_body() -> void:
 			handle.position = section["center"] + Vector3.UP * (section["radius"].y + 0.13)
 			root.add_child(handle)
 			var color := Color("fff1bd") if index == selected_body_segment else Color("8ae3ce")
-			var sphere := SculptSurface.ellipsoid(handle, "Handle", Vector3.ZERO, Vector3.ONE * 0.13, color)
-			sphere.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-			sphere.material_override.no_depth_test = true
+			var cube := MeshInstance3D.new()
+			cube.name = "Handle"
+			var box := BoxMesh.new()
+			box.size = Vector3.ONE * 0.13
+			cube.mesh = box
+			cube.material_override = SculptSurface.material(color)
+			cube.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			cube.material_override.no_depth_test = true
+			handle.add_child(cube)
 			var collision := CollisionShape3D.new()
-			var shape := SphereShape3D.new()
-			shape.radius = 0.10
+			var shape := BoxShape3D.new()
+			shape.size = Vector3.ONE * 0.20
 			collision.shape = shape
 			handle.add_child(collision)
 
@@ -145,12 +153,12 @@ func _create_selection_marker(part_root: Node3D) -> void:
 		return
 	var marker := MeshInstance3D.new()
 	marker.name = "SelectionRing"
-	var ring := TorusMesh.new()
-	ring.inner_radius = 0.15
-	ring.outer_radius = 0.17
-	ring.rings = 24
-	ring.ring_segments = 8
-	marker.mesh = ring
+	var frame: Dictionary = {}
+	for x in range(-5, 5):
+		for z in range(-5, 5):
+			if x in [-5, 4] or z in [-5, 4]:
+				frame[Vector3i(x, 0, z)] = Color.WHITE
+	marker.mesh = SculptSurface.Voxels.from_cells(frame, 0.035)
 	marker.material_override = SculptSurface.material(Color("9affd9"))
 	marker.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	marker.material_override.no_depth_test = true

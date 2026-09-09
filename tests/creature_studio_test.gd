@@ -5,6 +5,7 @@ const Spine = preload("res://creatures/editor/creature_spine_profile.gd")
 const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
 const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
 const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
+const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
 var _failures: Array[String] = []
 
 
@@ -13,6 +14,7 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	_check_voxel_contract()
 	var blueprint: Dictionary = Assembly.create_default()
 	Anatomy.reset_all_anchors(blueprint)
 	var ids: Array = blueprint["parts"].map(func(p: Dictionary) -> String: return str(p["uid"]))
@@ -30,7 +32,16 @@ func _run() -> void:
 	var preview := Preview.new()
 	root.add_child(preview)
 	preview.set_editor_state(loaded, -1, -1, false)
-	_expect(preview.get_node_or_null("BodyV4/SculptedSkin") != null, "Continuous skin is absent.")
+	var skin: MeshInstance3D = preview.get_node_or_null("BodyV4/SculptedSkin")
+	_expect(skin != null, "Editable voxel skin is absent.")
+	if skin != null:
+		_check_cubic_faces(skin.mesh)
+		var cells: Dictionary = skin.mesh.get_meta("voxel_cells", {})
+		_expect(not cells.is_empty(), "Voxel body cannot be picked for part placement.")
+		for cell: Vector3i in cells:
+			_expect(cells.has(Vector3i(-cell.x - 1, cell.y, cell.z)), "Voxelization broke body symmetry.")
+	for piece: MeshInstance3D in preview.find_children("*", "MeshInstance3D", true, false):
+		_expect(piece.mesh is ArrayMesh, "Smooth primitive remains in the active creature.")
 	var geometry: int = _geometry_count(preview)
 	_expect(geometry < 100, "Default sculpted creature exceeded 100 geometry nodes.")
 	for child in preview.get_children():
@@ -129,8 +140,55 @@ func _run() -> void:
 	for failure in _failures:
 		push_error(failure)
 	if _failures.is_empty():
-		print("Creature studio test passed: knot constraints, persistence, identities, skin/anchors, motion, undo/redo and safe drops. Geometry nodes: ", geometry)
+		print("Creature studio test passed: cubic exposed faces, voxel picking, knot constraints, persistence, identities, skin/anchors, motion, undo/redo and safe drops. Geometry nodes: ", geometry)
 	quit(0 if _failures.is_empty() else 1)
+
+
+func _check_voxel_contract() -> void:
+	var adjacent: Dictionary = {Vector3i.ZERO: Color.WHITE, Vector3i.RIGHT: Color.RED}
+	var mesh: ArrayMesh = Voxels.from_cells(adjacent, 1.0, true)
+	var arrays: Array = mesh.surface_get_arrays(0)
+	_expect(arrays[Mesh.ARRAY_INDEX].size() == 60, "Two adjacent voxels must expose ten faces; internal faces leaked.")
+	_check_cubic_faces(mesh)
+	var hit: Dictionary = Voxels.raycast(mesh, Vector3(5, 0.5, 0.5), Vector3.LEFT)
+	_expect(not hit.is_empty(), "A visible voxel face cannot receive a part.")
+	if not hit.is_empty():
+		_expect(hit["position"].is_equal_approx(Vector3(2, 0.5, 0.5)) and hit["normal"] == Vector3.RIGHT, "Voxel picking missed the first visible face.")
+	var reverse: Dictionary = Voxels.raycast(mesh, Vector3(-5, 0.5, 0.5), Vector3.RIGHT)
+	_expect(not reverse.is_empty() and reverse.get("normal") == Vector3.LEFT, "Picking from the opposite side failed.")
+	_expect(Voxels.raycast(mesh, Vector3(5, 1.1, 0.5), Vector3.LEFT).is_empty(), "Empty space next to a voxel accepted a part.")
+	var gap: ArrayMesh = Voxels.from_cells({Vector3i.ZERO: Color.WHITE, Vector3i(2, 0, 0): Color.RED}, 1.0, true)
+	_expect(Voxels.raycast(gap, Vector3(1.5, 5, 0.5), Vector3.DOWN).is_empty(), "An empty cell inside the body bounds accepted a part.")
+	for kind: String in ["ellipsoid", "capsule", "cone"]:
+		_check_cubic_faces(Voxels.primitive(Vector3(0.25, 0.8, 0.25), kind))
+
+
+func _check_cubic_faces(mesh: ArrayMesh) -> void:
+	_expect(mesh.get_surface_count() == 1, "Voxel piece must be a single visible mesh surface.")
+	if mesh.get_surface_count() != 1:
+		return
+	var arrays: Array = mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	var colors: PackedColorArray = arrays[Mesh.ARRAY_COLOR]
+	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+	var step: float = float(mesh.get_meta("voxel_size"))
+	var aligned: bool = true
+	var flat: bool = true
+	var winding: bool = true
+	for index in range(vertices.size()):
+		var grid: Vector3 = vertices[index] / step
+		aligned = aligned and grid.distance_to(grid.round()) < 0.0001
+		var normal: Vector3 = normals[index]
+		flat = flat and is_equal_approx(normal.abs().x + normal.abs().y + normal.abs().z, 1.0) and normal == normal.round()
+		flat = flat and colors[index].is_equal_approx(colors[index - index % 4])
+	for index in range(0, indices.size(), 3):
+		var a: int = indices[index]
+		var actual: Vector3 = (vertices[indices[index + 2]] - vertices[a]).cross(vertices[indices[index + 1]] - vertices[a]).normalized()
+		winding = winding and actual.dot(normals[a]) > 0.99
+	_expect(aligned, "Creature faces are off the equal-sized cubic lattice.")
+	_expect(flat, "Voxel faces have interpolated normals or color gradients.")
+	_expect(winding, "Voxel faces are inside-out or degenerate.")
 
 
 func _geometry_count(node: Node) -> int:
