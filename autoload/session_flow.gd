@@ -7,6 +7,8 @@ signal world_started
 const Style = preload("res://ui/frontend/menu_style.gd")
 const TITLE_SCENE: String = "res://ui/frontend/main_menu.tscn"
 const WORLD_SCENE: String = "res://main/main.tscn"
+const SPHERE_SCENE: String = "res://main/spherical_campaign.tscn"
+var _world_scene: String = WORLD_SCENE
 var managed: bool = false
 var loading: bool = false
 var pause_open: bool = false
@@ -57,13 +59,13 @@ func latest_slot() -> Dictionary:
 			return slot
 	return {}
 
-func new_game(title: String, seed_value: int = 0) -> void:
+func new_game(title: String, seed_value: int = 0, surface_mode: String = "legacy_plane_v9") -> void:
 	if loading or not _at_title():
 		return
 	_show_loading("Dein Abenteuer wird vorbereitet …")
 	await get_tree().process_frame
 	var saves := get_node("/root/SaveGameService")
-	if str(saves.create_slot(title, seed_value)).is_empty():
+	if str(saves.create_slot(title, seed_value, surface_mode)).is_empty():
 		_fail_loading("Neues Spiel konnte nicht gespeichert werden. " + str(saves.last_error))
 		return
 	await _request_world()
@@ -83,7 +85,8 @@ func _request_world() -> void:
 	# GameState defers its generator rebuild. Finish it before scene _ready.
 	await get_tree().process_frame
 	_loading_label.text = "Welt wird geladen …"
-	var error: Error = ResourceLoader.load_threaded_request(WORLD_SCENE, "PackedScene")
+	_world_scene = get_node("/root/GameState").campaign_scene()
+	var error: Error = ResourceLoader.load_threaded_request(_world_scene, "PackedScene")
 	if error != OK:
 		_fail_loading("Die Spielwelt konnte nicht geladen werden: " + error_string(error))
 		return
@@ -95,7 +98,7 @@ func _process(_delta: float) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if _loading_scene:
 		var progress: Array = []
-		var status: int = ResourceLoader.load_threaded_get_status(WORLD_SCENE, progress)
+		var status: int = ResourceLoader.load_threaded_get_status(_world_scene, progress)
 		if not progress.is_empty():
 			_loading_bar.value = float(progress[0]) * 100.0
 		if status == ResourceLoader.THREAD_LOAD_FAILED or status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
@@ -103,7 +106,7 @@ func _process(_delta: float) -> void:
 			_fail_loading("Die Spielwelt konnte nicht gelesen werden. Dein Spielstand bleibt erhalten.")
 		elif status == ResourceLoader.THREAD_LOAD_LOADED:
 			_loading_scene = false
-			var scene := ResourceLoader.load_threaded_get(WORLD_SCENE) as PackedScene
+			var scene := ResourceLoader.load_threaded_get(_world_scene) as PackedScene
 			if scene == null:
 				_fail_loading("Die Spielwelt ist nicht verfügbar.")
 				return
@@ -114,8 +117,8 @@ func _process(_delta: float) -> void:
 				_fail_loading("Die Spielwelt konnte nicht geöffnet werden: " + error_string(error))
 		return
 	var scene := get_tree().current_scene
-	if scene != null and scene.scene_file_path == WORLD_SCENE:
-		var manager := scene.get_node_or_null("WorldManager")
+	if scene != null and scene.scene_file_path == _world_scene:
+		var manager := scene if _world_scene == SPHERE_SCENE else scene.get_node_or_null("WorldManager")
 		if manager != null and bool(manager.get("world_initialized")):
 			_finish_loading()
 		elif Time.get_ticks_msec() - _load_started > 180000:
@@ -127,7 +130,7 @@ func _scene_changed() -> void:
 	var settings := get_node("/root/DisplaySettings")
 	settings.close_menu()
 	var scene := get_tree().current_scene
-	if loading and scene != null and scene.scene_file_path == WORLD_SCENE:
+	if loading and scene != null and scene.scene_file_path == _world_scene:
 		_player = get_tree().get_first_node_in_group(&"player")
 		if _player != null:
 			_player_mode = _player.process_mode
@@ -165,7 +168,7 @@ func can_pause() -> bool:
 	if not managed or loading:
 		return false
 	var scene := get_tree().current_scene
-	return scene != null and scene.scene_file_path == WORLD_SCENE
+	return scene != null and scene.scene_file_path in [WORLD_SCENE, SPHERE_SCENE]
 
 func toggle_pause() -> void:
 	if pause_open:
@@ -188,7 +191,8 @@ func _show_pause() -> void:
 	Style.button(_content, "Spiel speichern", _save, "SaveGame")
 	Style.button(_content, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "PauseSettings")
 	Style.button(_content, "Steuerung", _show_help, "PauseControls")
-	Style.button(_content, "Erste Schritte", _show_first_steps, "PauseFirstSteps")
+	if get_tree().current_scene.scene_file_path != SPHERE_SCENE:
+		Style.button(_content, "Erste Schritte", _show_first_steps, "PauseFirstSteps")
 	Style.button(_content, "Speichern & zum Hauptmenü", return_to_title, "ReturnToTitle")
 	Style.button(_content, "Speichern & beenden", request_quit, "QuitGame")
 	_message = Style.paragraph(_content, "", 18)
@@ -315,6 +319,10 @@ func _prepare_overlay() -> void:
 
 func controls_text() -> String:
 	var preferences = preload("res://core/input_preferences.gd")
+	if get_tree().current_scene != null and get_tree().current_scene.scene_file_path == SPHERE_SCENE:
+		return "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nNahrung, Begegnungen und Siedlungen sind auf der Kugel noch nicht angebunden." % [
+			preferences.binding_label("move_forward"), preferences.binding_label("move_back"), preferences.binding_label("move_left"),
+			preferences.binding_label("move_right"), preferences.binding_label("jump")]
 	return Text.text("%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen") % [
 		preferences.binding_label("move_forward"), preferences.binding_label("move_back"),
 		preferences.binding_label("move_left"), preferences.binding_label("move_right"),

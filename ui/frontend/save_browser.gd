@@ -162,6 +162,16 @@ func select_slot(path: String) -> void:
 	rename.disabled = not slot.valid
 	var copy := Style.button(_details, "Spielstand kopieren", _copy, "CopySlot")
 	copy.disabled = not slot.valid or int(slot.schema) < 3
+	Style.paragraph(_details, "Kugelwelt" if slot.surface_mode == "cube_sphere_m1_v1" else "Bisherige Flachwelt", 17)
+	if slot.valid and slot.surface_mode == "legacy_plane_v9":
+		Style.button(_details, "Kugelumzug prüfen", _preview_migration, "PreviewSphereMigration")
+	if slot.valid and slot.has_migration_archive:
+		Style.button(_details, "Flachwelt aus Umzugsarchiv kopieren", func() -> void:
+			var restored: String = _saves.restore_spherical_source(selected_path)
+			if restored.is_empty(): _status.text = _saves.last_error
+			else:
+				refresh(restored)
+				_status.text = "Flachwelt mit den ursprünglichen Karten als eigene Kopie wiederhergestellt.", "RestoreMigrationSource")
 	if slot.valid and int(slot.schema) < 3:
 		Style.paragraph(_details, "Diesen älteren Stand einmal laden und speichern, um auch seine Entwürfe kopieren zu können.", 17)
 	_details.add_child(HSeparator.new())
@@ -197,6 +207,32 @@ func _select_history(index: int) -> void:
 	_history_preview.add_child(_preview(entry.preview, 135))
 	if not entry.valid:
 		Style.paragraph(_history_preview, str(entry.problem), 17)
+
+func _preview_migration() -> void:
+	var source: String = selected_path
+	var preview: Dictionary = _saves.preview_spherical_migration(source)
+	if not preview.ok:
+		_clear_children(_details)
+		Style.label(_details, "UMZUG NOCH NICHT MÖGLICH", 25)
+		for problem in preview.blockers:
+			Style.paragraph(_details, str(problem), 18)
+		Style.button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "BackFromMigrationBlockers")
+		_status.text = "Die Quelle bleibt vollständig erhalten und kann weiter als Flachwelt geladen werden."
+		return
+	_clear_children(_details)
+	Style.label(_details, "KUGELKOPIE PRÜFEN", 25)
+	Style.paragraph(_details, "Diese Kopie übernimmt Identitäten, Entwürfe und Fortschritt. Der Spieler erhält einen geprüften Startplatz. Alte Karten bleiben im Quellarchiv; die neue Kugelkarte beginnt unerforscht.")
+	Style.paragraph(_details, "Auf der Kugel funktionieren derzeit Bewegung, Karte und Speichern. Nahrung, Begegnungen und Siedlungen folgen.")
+	var manifest: Dictionary = preview.manifest
+	Style.paragraph(_details, "Körper: %d · Entwurfsdateien: %d\nQuell-Hash: %s\nManifest: %s\nOriginal und vollständiges Quellarchiv bleiben erhalten." % [
+		manifest.inventory.body_count, preview.data.design_files.size(), str(manifest.source_sha256).left(16), str(manifest.id).left(16)], 17)
+	Style.button(_details, "Geprüfte Kugelkopie anlegen", func() -> void:
+		var target: String = _saves.migrate_slot_to_sphere(source, manifest.source_sha256)
+		if target.is_empty(): _status.text = _saves.last_error
+		else:
+			refresh(target)
+			_status.text = "Kugelkopie geschrieben, zurückgelesen und geprüft. Das Original ist weiterhin verfügbar.", "CommitSphereMigration", true)
+	Style.button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "CancelSphereMigration")
 
 func _rename() -> void:
 	var renamed: bool = _saves.rename_slot(selected_path, _name_input.text)

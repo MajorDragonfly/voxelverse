@@ -100,6 +100,10 @@ def main():
                 package, isolated_env(root / "frontend-userdata"))
             if "FRONTEND_PASSED" not in (logs / "packaged_frontend.log").read_text():
                 raise RuntimeError("Native executable did not pass title/pause/save-slot acceptance.")
+            run("packaged_spherical_campaign", [str(executable), "--headless", "--verbose", "--", "--sphere-smoke"],
+                package, isolated_env(root / "sphere-userdata"))
+            if "SPHERICAL_CAMPAIGN_RUNTIME_PASSED" not in (logs / "packaged_spherical_campaign.log").read_text():
+                raise RuntimeError("Native executable did not pass spherical migration/new-game/fresh-process acceptance.")
             # Official 4.6.3 release templates disable --script. Keep that intact:
             # use the editor to instrument the exact release PCK, after starting
             # the untouched release executable above. Neither sees source files.

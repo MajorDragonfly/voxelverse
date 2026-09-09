@@ -139,6 +139,12 @@ static func save_to_file(
 	blueprint: Dictionary,
 	save_path: String = SAVE_PATH
 ) -> Error:
+	return Store.write(save_path, serialize_snapshot(blueprint))
+
+
+## Pure encoding for the authoritative campaign snapshot. Creating a new
+## campaign must not replace another campaign's loose editor file on disk.
+static func serialize_snapshot(blueprint: Dictionary) -> Dictionary:
 	normalize(blueprint)
 	var serialized: Dictionary = BaseBlueprint._serialize_blueprint(blueprint)
 	serialized["version"] = SAVE_VERSION
@@ -206,7 +212,7 @@ static func save_to_file(
 
 	for field_name in REMOVED_GENETIC_FIELDS:
 		serialized.erase(field_name)
-	return Store.write(save_path, serialized)
+	return serialized
 
 
 static func load_from_file(

@@ -73,6 +73,10 @@ func get_current_body() -> Dictionary:
 	return campaign.body_for_seed(get_world_seed(), get_system_seed())
 
 
+func campaign_scene() -> String:
+	return Campaign.Surface.SCENE if get_current_body().get("surface_mode") == Campaign.Surface.Cube.MODE else "res://main/main.tscn"
+
+
 func record_campaign_event(event: GameEvent) -> bool:
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null and progression.is_behavior_transaction_active():

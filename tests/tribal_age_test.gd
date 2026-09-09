@@ -409,6 +409,8 @@ func _finish() -> void:
 func _check_scrolled_actions() -> void:
 	for button: Button in tribe.panel._buttons.values():
 		tribe.panel._tabs.current_tab = button.get_parent().get_parent().get_index()
+		var show_context: bool = tribe.panel._tabs.current_tab != 2
+		_expect(tribe.panel._goal.visible == show_context and tribe.panel._supply.visible == show_context, "Tab context waits for a simulation tick and can shift a scrolled action")
 		await _frames(3)
 		if not button.is_visible_in_tree():
 			continue # Milk pickup appears only when a delivery exists.

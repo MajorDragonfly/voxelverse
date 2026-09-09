@@ -7,6 +7,9 @@ const Home = preload("res://world/home_group/home_group_state.gd")
 static func campaign_snapshot(player: Node3D, tree: SceneTree) -> Dictionary:
 	var snapshot: Dictionary = Source.campaign_snapshot(player, tree)
 	if snapshot.is_empty(): return {}
+	if snapshot.address.mode == Source.Cube.MODE:
+		snapshot["explorers"] = [snapshot.address]
+		return snapshot
 	var tribe := tree.get_first_node_in_group(&"tribe_controller")
 	var explorers: Array[Dictionary] = []
 	if tribe != null and tribe.is_active():
@@ -20,6 +23,7 @@ static func campaign_snapshot(player: Node3D, tree: SceneTree) -> Dictionary:
 
 static func known_places(player: Node3D, tree: SceneTree, snapshot: Dictionary) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
+	if snapshot.address.mode == Source.Cube.MODE: return result
 	var state := tree.root.get_node("GameState")
 	var body: Dictionary = state.campaign.data.bodies[str(state.get_world_seed())]
 	var species_id: String = state.campaign.data.player_species_id

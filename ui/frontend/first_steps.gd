@@ -75,7 +75,7 @@ func _bind_player(player: Node) -> void:
 		player.guidance_action.connect(_record_action)
 
 func _in_game() -> bool:
-	return _flow.can_pause() and _saves.session_active and not get_tree().paused and is_instance_valid(_player) and not bool(_player.get("is_dead")) and int(get_node("/root/GameState").current_phase) == 0
+	return _flow.can_pause() and _saves.session_active and not get_tree().paused and is_instance_valid(_player) and _player.has_signal("guidance_action") and not bool(_player.get("is_dead")) and int(get_node("/root/GameState").current_phase) == 0
 
 func _record_action(action: String, value: float) -> void:
 	if not _in_game():

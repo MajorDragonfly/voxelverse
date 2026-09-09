@@ -11,6 +11,7 @@ const MAX_PATCHES: int = 25
 const MAX_ANIMALS: int = 4
 const MAX_RECORDS: int = 256
 var domestic: RefCounted
+var wildlife_enabled: bool = true
 var adapter: RefCounted
 var player: CharacterBody3D
 var spawn: Dictionary
@@ -149,6 +150,7 @@ func _publish(data: Dictionary) -> void:
 
 
 func _update_animals() -> void:
+	if not wildlife_enabled: return
 	if domestic != null:
 		domestic.update(self)
 		if domestic.built_this_update: return

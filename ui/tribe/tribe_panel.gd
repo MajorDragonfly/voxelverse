@@ -55,6 +55,9 @@ func _ready() -> void:
 	layer = 40
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build()
+	# Tab-dependent headings affect the scroll layout. Update them with the tab,
+	# before callers scroll to an action, instead of waiting for the next village tick.
+	_tabs.tab_changed.connect(func(_index: int) -> void: refresh())
 	get_viewport().size_changed.connect(_layout)
 	_layout()
 	refresh()

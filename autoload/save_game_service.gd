@@ -7,7 +7,12 @@ signal save_failed(message: String)
 signal save_started(path: String)
 signal slots_changed
 
-const SAVE_SCHEMA: int = 7
+const SAVE_SCHEMA: int = 8
+const Surface = preload("res://core/campaign/surface_context.gd")
+const Migration = preload("res://core/campaign/spherical_migration.gd")
+const Home = preload("res://world/home_group/home_group_state.gd")
+const GameModel = preload("res://autoload/game_state.gd")
+const PlayerBlueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Animals = preload("res://world/domestication/campaign_animal_state.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Designs = preload("res://core/persistence/design_store.gd")
@@ -196,7 +201,7 @@ func load_now(custom_path: String = "") -> bool:
 			data["design_files"] = files
 		else:
 			last_migration_report.assign(data.get("migration_report", []))
-		last_migration_report.append("Schema %d -> 7; campaign, location, designs, behavior and encounters retained; no tribe or tamed animal created by migration." % schema)
+		last_migration_report.append("Schema %d -> %d; campaign, location, designs, behavior and encounters retained; surface mode unchanged." % [schema, SAVE_SCHEMA])
 	else:
 		last_migration_report.assign(data.get("migration_report", []))
 	if source_path != target_path:
@@ -284,6 +289,8 @@ func _slot_summary(path: String, data: Dictionary, valid: bool, recovered: bool 
 		"phase": int(state.get("phase", 0)), "seconds": float(campaign.get("elapsed_seconds", 0.0)),
 		"planet_index": int(state.get("planet_index", 0)), "preview": _dict(data.get("slot_preview", {})),
 		"history_count": History.paths(path).size(), "schema": int(data.get("schema", 0)),
+		"surface_mode": _dict(_dict(campaign.get("bodies", {})).get(str(int(state.get("world_seed", 0))), {})).get("surface_mode", Surface.LEGACY),
+		"has_migration_archive": not _dict(campaign.get("surface_migration", {})).is_empty(),
 		"problem": "Benötigt eine neuere Spielversion." if newer else ("Spielstand und Sicherung nicht lesbar." if not valid else "")}
 
 
@@ -338,6 +345,83 @@ func duplicate_slot(path: String, title: String = "") -> String:
 		return ""
 	var data := _read_compatible_slot(path)
 	return _write_slot_copy(data, title, "copy")
+
+
+## Preflight is read-only and reports every known unconnected consumer. It
+## deliberately does not recover a backup: the hash refers to selected bytes.
+func preview_spherical_migration(path: String) -> Dictionary:
+	if not is_slot_path(path): return {"ok": false, "blockers": ["Ungültiger Quellpfad."]}
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null: return {"ok": false, "blockers": ["Die ausgewählte Primärdatei ist nicht lesbar. Eine Sicherung kann zuerst ausdrücklich als eigener Slot wiederhergestellt werden."]}
+	if file.get_length() > Migration.MAX_SOURCE_BYTES: return {"ok": false, "blockers": ["Quelle überschreitet das 16-MiB-Budget dieser Kopiermigration."]}
+	var source_text: String = file.get_as_text()
+	file.close()
+	var source: Dictionary = Atomic.parse_dictionary(source_text)
+	if _has_unsupported_contract(source): return {"ok": false, "blockers": ["Neuere Quelldaten bleiben geschützt; kein Rückgriff auf eine ältere Sicherung."]}
+	var problem: String = _validate_save(source)
+	if not problem.is_empty(): return {"ok": false, "blockers": ["Quelle ist nicht vollständig lesbar: " + problem]}
+	return Migration.plan(source, source_text, path)
+
+
+func migrate_slot_to_sphere(path: String, expected_source_sha256: String) -> String:
+	if not _can_manage_slots(): return ""
+	var plan: Dictionary = preview_spherical_migration(path)
+	if not plan.ok:
+		_report_failure("Kugelumzug noch nicht möglich:\n" + "\n".join(plan.blockers))
+		return ""
+	if expected_source_sha256 != plan.manifest.source_sha256:
+		_report_failure("Quelle wurde seit der Prüfung geändert. Bitte erneut prüfen.")
+		return ""
+	var target: String = SLOT_DIRECTORY.path_join("slot_sphere_" + str(plan.manifest.id) + ".json")
+	if FileAccess.file_exists(target) or FileAccess.file_exists(target + ".bak"):
+		var existing: Dictionary = _read_save(target)
+		if not _has_unsupported_contract(existing) and _validate_save(existing).is_empty() and existing.game_state.campaign.get("surface_migration", {}).get("id") == plan.manifest.id:
+			last_error = ""
+			return target # Idempotent: never reset a copy that has been played.
+		_report_failure("Die zugehörige Zielkopie existiert bereits und bleibt geschützt.")
+		return ""
+	var data: Dictionary = plan.data
+	var campaign: Dictionary = data.game_state.campaign
+	for field in ["object_id", "species_id", "faction_id"]:
+		data.player[field] = campaign["player_" + field]
+	if not _validate_save(data).is_empty() or Migration.inventory(data) != plan.manifest.inventory:
+		_report_failure("Zielvertrag oder Inventarprüfung fehlgeschlagen.")
+		return ""
+	if DirAccess.make_dir_recursive_absolute(SLOT_DIRECTORY) != OK:
+		_report_failure("Zielordner konnte nicht angelegt werden.")
+		return ""
+	var stage: String = target + ".migration-stage"
+	var error: Error = Atomic.write(stage, data, false)
+	var reread: Dictionary = _read_save(stage) if error == OK else {}
+	var readback_problem: String = _validate_save(reread) if error == OK else ""
+	if error == OK and (not readback_problem.is_empty() or Migration.fingerprint(reread) != Migration.fingerprint(data)):
+		error = ERR_FILE_CORRUPT
+	# The source must still match at commit time; a changed or newer file wins.
+	if error == OK and FileAccess.get_file_as_string(path).sha256_text() != expected_source_sha256:
+		error = ERR_BUSY
+	if error == OK and not FileAccess.file_exists(target):
+		error = DirAccess.rename_absolute(stage, target)
+	elif error == OK:
+		error = ERR_ALREADY_EXISTS
+	if error != OK:
+		_report_failure("Kugelkopie wurde nicht veröffentlicht: " + error_string(error) + (" · " + readback_problem if not readback_problem.is_empty() else ""))
+		return ""
+	if not _validate_save(_read_save(target)).is_empty():
+		_report_failure("Die veröffentlichte Kopie konnte nicht bestätigt werden. Quelle bleibt erhalten.")
+		return ""
+	last_error = ""
+	slots_changed.emit()
+	return target
+
+
+func restore_spherical_source(path: String) -> String:
+	if not _can_manage_slots(): return ""
+	var data: Dictionary = _read_compatible_slot(path)
+	var manifest: Dictionary = _dict(_dict(_dict(data.get("game_state", {})).get("campaign", {})).get("surface_migration", {}))
+	if not Migration.validate(manifest).is_empty():
+		_report_failure("Kein geprüftes Flachweltarchiv in diesem Spielstand.")
+		return ""
+	return _write_slot_copy(Atomic.parse_dictionary(manifest.source_text), "", "recovery")
 
 
 func list_slot_history(path: String) -> Array[Dictionary]:
@@ -423,7 +507,10 @@ func cache_slot_preview(png: PackedByteArray, world_seed: int) -> void:
 		_slot_preview = {"world_seed": world_seed, "png": Marshalls.raw_to_base64(png)}
 
 
-func create_slot(title: String, seed_value: int = 0) -> String:
+func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.LEGACY) -> String:
+	if surface_mode not in [Surface.LEGACY, Surface.Cube.MODE]:
+		_report_failure("Unbekannter Oberflächentyp.")
+		return ""
 	if DirAccess.make_dir_recursive_absolute(SLOT_DIRECTORY) != OK:
 		_report_failure("Der Ordner für Spielstände konnte nicht angelegt werden.")
 		return ""
@@ -435,8 +522,22 @@ func create_slot(title: String, seed_value: int = 0) -> String:
 		state.call("start_world_with_seed", seed_value)
 	else:
 		state.call("start_new_random_world")
+	if surface_mode == Surface.Cube.MODE:
+		state.campaign.data.surface_policy = surface_mode
+		var old: Dictionary = state.get_current_body()
+		# A new reset has no body yet; body_for_seed uses the selected policy.
+		if old.is_empty():
+			_report_failure("Kein geeigneter Startbereich auf diesem Planeten gefunden. Bitte einen anderen Seed wählen.")
+			return ""
+		var spawn: Dictionary = old.surface_context.spawn
+		var heading: Vector3 = -Surface.Cube.frame(Surface.Cube.vector(Surface.Cube.direction(spawn.face, spawn.u, spawn.v))).z
+		_last_player_state = {"surface_address": spawn.duplicate(true), "surface_forward": [heading.x, heading.y, heading.z],
+			"surface_velocity": [0.0, 0.0, 0.0], "surface_pitch": -0.18}
+		_pending_player_state = _last_player_state.duplicate(true)
 	_design_snapshot_active = true
 	_design_files.clear()
+	if surface_mode == Surface.Cube.MODE:
+		_design_files[PlayerBlueprint.SAVE_PATH] = JSON.stringify(PlayerBlueprint.serialize_snapshot(PlayerBlueprint.create_default()), "\t")
 	slot_name = title.strip_edges().left(48)
 	guidance.reset(true)
 	if slot_name.is_empty():
@@ -517,8 +618,19 @@ func _validate_save(data: Dictionary) -> String:
 	if schema < 3:
 		return ""
 	var campaign: Variant = state.get("campaign")
-	if not campaign is Dictionary or str(campaign.get("id", "")).is_empty() or int(campaign.get("schema", 0)) != Campaign.SCHEMA:
+	if not campaign is Dictionary or str(campaign.get("id", "")).is_empty() or (campaign.get("schema") != 1 and campaign.get("schema") != Campaign.SCHEMA):
 		return "Invalid campaign identity or version."
+	if campaign.has("surface_migration") and not campaign.surface_migration is Dictionary: return "Invalid migration section."
+	if campaign.get("schema") == Campaign.SCHEMA:
+		if campaign.get("surface_policy") not in [Surface.LEGACY, Surface.Cube.MODE] or not campaign.get("surface_migration") is Dictionary:
+			return "Invalid campaign surface policy or migration record."
+		if not campaign.surface_migration.is_empty():
+			var manifest_problem: String = Migration.validate(campaign.surface_migration)
+			if not manifest_problem.is_empty(): return manifest_problem
+			var archived: Dictionary = Atomic.parse_dictionary(campaign.surface_migration.source_text)
+			if _has_unsupported_contract(archived): return "Unknown contract in migration source archive."
+			var archived_problem: String = _validate_save(archived)
+			if not archived_problem.is_empty(): return "Invalid migration source archive: " + archived_problem
 	var tribal: Dictionary = data["progression"].get("tribal", {})
 	if not str(tribal.get("campaign_id", "")).is_empty():
 		if tribal["campaign_id"] != campaign.get("id") or tribal["species_id"] != campaign.get("player_species_id") or tribal["faction_id"] != campaign.get("player_faction_id"):
@@ -527,8 +639,17 @@ func _validate_save(data: Dictionary) -> String:
 		if not campaign.get(field) is Dictionary:
 			return "Invalid campaign section: " + field
 	for body in campaign["bodies"].values():
-		if not body is Dictionary or body.get("generator_version") != Campaign.GENERATOR_VERSION or body.get("surface_mode") != Campaign.SURFACE_MODE:
+		if not body is Dictionary or body.get("generator_version") != Campaign.GENERATOR_VERSION:
 			return "Unsupported body generator/surface version."
+		var surface_problem: String = Surface.validate(body)
+		if not surface_problem.is_empty(): return surface_problem
+		if body.surface_mode == Surface.Cube.MODE and (schema < 8 or campaign.schema < 2): return "Sphere requires save 8 and campaign 2."
+		if body.surface_mode == Surface.Cube.MODE:
+			var regions: Variant = data.get("regions_by_world", {}).get(str(int(body.seed)), {})
+			if not regions is Dictionary or not regions.is_empty(): return "Planar regional state requires an explicit regional migration adapter."
+		if body.has("home_group"):
+			var home_problem: String = Home.validate(body.home_group, str(body.id), str(campaign.player_species_id))
+			if not home_problem.is_empty(): return home_problem
 		if body.has("fauna_catalog"):
 			var fauna_problem: String = FaunaCatalog.validate(body["fauna_catalog"], body)
 			if not fauna_problem.is_empty():
@@ -550,6 +671,19 @@ func _validate_save(data: Dictionary) -> String:
 			var neighbor_problem: String = Neighbor.validate(body["tribal_neighbor"], body.get("tribe", {}), campaign)
 			if not neighbor_problem.is_empty():
 				return neighbor_problem
+	var active: Dictionary = campaign.bodies.get(str(int(state.world_seed)), {})
+	for mapping: Dictionary in campaign.get("surface_migration", {}).get("mapping", []):
+		var matched: bool = false
+		for body: Dictionary in campaign.bodies.values():
+			if body.id == mapping.body_id:
+				matched = Migration.fingerprint(body.get("surface_context", {})) == mapping.target_context_sha256
+		if not matched: return "Migrated body differs from its verified surface mapping."
+	if active.get("surface_mode") == Surface.Cube.MODE:
+		if int(state.phase) != 0 or not campaign.pending_transition.is_empty(): return "Radial phase handoff is not available yet."
+		var player_problem: String = Surface.player_problem(data.player, active)
+		if not player_problem.is_empty(): return player_problem
+		for field in ["object_id", "species_id", "faction_id"]:
+			if data.player.get(field) != campaign.get("player_" + field): return "Player identity differs from campaign."
 	var aid_award: Dictionary = tribal.get("awards", {}).get("neighbor_help", {})
 	if not aid_award.is_empty():
 		var found: bool = false
@@ -638,7 +772,8 @@ func _annotate_world_state(data: Dictionary) -> void:
 		player["object_id"] = campaign.data["player_object_id"]
 		player["species_id"] = campaign.data["player_species_id"]
 		player["faction_id"] = campaign.data["player_faction_id"]
-		player["surface_address"] = campaign.surface_address(state.call("get_current_body")["id"], player.get("position", [0, 0, 0]), float(player.get("yaw", 0)))
+		if state.call("get_current_body")["surface_mode"] == Surface.LEGACY:
+			player["surface_address"] = campaign.surface_address(state.call("get_current_body")["id"], player.get("position", [0, 0, 0]), float(player.get("yaw", 0)))
 		player["design_ref"] = campaign.data["design_refs"].get("user://creature_assembly_v7.json", {}).duplicate(true)
 	data["game_state"] = state.call("export_state")
 
@@ -849,19 +984,37 @@ func _report_failure(message: String) -> void:
 func _has_unsupported_contract(data: Dictionary) -> bool:
 	if int(data.get("schema", 0)) > SAVE_SCHEMA:
 		return true
+	var designs: Variant = data.get("design_files")
+	if designs is Dictionary and designs.get(PlayerBlueprint.SAVE_PATH) is String:
+		var design: Variant = JSON.parse_string(designs[PlayerBlueprint.SAVE_PATH])
+		if design is Dictionary and (design.get("version") is int or design.get("version") is float) and float(design.version) > PlayerBlueprint.SAVE_VERSION: return true
 	if Progression.has_unsupported_contract(data.get("progression", {})):
 		return true
 	var imported_state: Variant = data.get("game_state", {})
 	if not imported_state is Dictionary:
 		return false
+	if float(imported_state.get("schema", 0)) > GameModel.STATE_SCHEMA: return true
 	var campaign: Variant = imported_state.get("campaign", {})
 	if not campaign is Dictionary:
 		return false
 	if int(campaign.get("schema", 0)) > Campaign.SCHEMA:
 		return true
+	if campaign.has("surface_policy") and campaign.surface_policy not in [Surface.LEGACY, Surface.Cube.MODE]: return true
+	if campaign.get("surface_migration") is Dictionary and not campaign.surface_migration.is_empty() and campaign.surface_migration.get("schema") != Migration.SCHEMA: return true
+	if campaign.get("surface_migration") is Dictionary and not campaign.surface_migration.is_empty():
+		if campaign.surface_migration.get("algorithm") != "early_campaign_copy_v1": return true
+		var archive: Variant = campaign.surface_migration.get("source_text")
+		if archive is String and archive.to_utf8_buffer().size() <= Migration.MAX_SOURCE_BYTES:
+			var source: Dictionary = Atomic.parse_dictionary(archive)
+			var nested: Variant = _dict(_dict(source.get("game_state", {})).get("campaign", {})).get("surface_migration")
+			if nested is Dictionary and not nested.is_empty(): return true
+			if _has_unsupported_contract(source): return true
 	var bodies: Variant = campaign.get("bodies", {})
 	if bodies is Dictionary:
 		for body in bodies.values():
+			if body is Dictionary and Surface.unsupported(body): return true
+			if body is Dictionary and body.get("home_group") is Dictionary and body.home_group.get("schema") != Home.SCHEMA: return true
+			if body is Dictionary and Exploration.newer(body.get("legacy_exploration_atlas")): return true
 			if body is Dictionary and Animals.unsupported(body):
 				return true
 			if body is Dictionary and Neighbor.has_unsupported_contract(body.get("tribal_neighbor")):
