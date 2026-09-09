@@ -2,6 +2,8 @@
 
 Stand: 9. September 2026. Fortsetzung von Auftrag 1 nach dem ausdrücklichen Nutzerziel: Die Planeten sollen eine begehbare Landschaft wie das bestehende Flachland tragen, mit einer Funktion wie in Spore.
 
+Nachfolgende Boden-/Wasserüberarbeitung und geprüfte Gründe gegen eine sofortige Flachwelt-Abschaltung: [WORK_M1D_GROUND_WATER.md](WORK_M1D_GROUND_WATER.md).
+
 - Gemeinsame Ausgangsbasis: integrierter `main`, **`3a3e0272375e556f3ff65b7370582af79a9d48b5`**.
 - Eigener Branch: **`agent/m1d-surface-adapter`**; [Draft-PR #31](https://github.com/MajorDragonfly/voxelverse/pull/31).
 - Erstes Adapterpaket: veröffentlicht als `97e9e91a0b5babd10d303df97bfa719224f72300`; siehe [ersten Übergabebericht](WORK_M1D_SURFACE_ADAPTER.md).
