@@ -45,6 +45,7 @@ class Voxels:
         self.seed = seed
         self.cells = {}
         self.connected_paths = connected_paths
+        self.conservative_foliage = False
 
     def ellipsoid(self, center, radii, slot, rough=0.0, overwrite=True):
         step = self.step
@@ -54,7 +55,13 @@ class Voxels:
             for y in range(max(lo[1],0), hi[1]+1):
                 for z in range(lo[2], hi[2]+1):
                     p = (x,y,z)
-                    d = sum((((p[i]+.5)*step-center[i])/max(radii[i],step*.53))**2 for i in range(3))
+                    delta = [abs((p[i]+.5)*step-center[i]) for i in range(3)]
+                    if self.conservative_foliage and slot.startswith('foliage_'):
+                        # Thin needle layers must intersect cells even when no
+                        # cell centre lies inside them. Keep the coarse crown,
+                        # including the needle cap above the structural stem.
+                        delta = [max(distance-step*.5, 0.0) for distance in delta]
+                    d = sum((delta[i]/max(radii[i],step*.53))**2 for i in range(3))
                     # Smooth block-scale edge scalloping, not independent RGB noise.
                     n = math.sin(x*1.7+z*.8+self.seed)*math.cos(y*1.3-z*.9)
                     if d < 1 + rough*n and (overwrite or p not in self.cells):
@@ -155,6 +162,7 @@ def oak(vox, rng, tier, variant):
 
 
 def pine(vox,rng,tier,variant):
+    vox.conservative_foliage = vox.connected_paths
     if variant == 2:
         # Wind-shaped highland conifer, with a strongly one-sided branch fan.
         trunk=[(0,.05,0),(.2,1.5,0),(.6,3.2,0),(1.0,5.0,.12),(1.35,6.8,.2)]

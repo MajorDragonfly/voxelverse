@@ -6,7 +6,7 @@ from pathlib import Path
 import random
 import tempfile
 
-from build_benchmark import BUILDERS, FAMILIES, RUNTIME, Voxels, greedy_faces, write_glb
+from build_benchmark import BUILDERS, FAMILIES, RUNTIME, SLOT, Voxels, greedy_faces, write_glb
 
 
 class ObservedVoxels(Voxels):
@@ -53,6 +53,10 @@ def check():
                     vox = ObservedVoxels(step, seed, True)
                     BUILDERS[family](vox, random.Random(seed), tier, variant)
                     assert reaches_tip(vox), f"{family}/{variant}/{label}: disconnected stem"
+                    if family == "tall_pine_v2":
+                        foliage = {value for key, value in SLOT.items() if key.startswith("foliage_")}
+                        crown = max(p[1] for p, value in vox.cells.items() if value in foliage)
+                        assert crown >= math.floor(vox.stem[-1][1]/step), f"{family}/{variant}/{label}: bare needle cap"
                     old = ObservedVoxels(step, seed, False)
                     BUILDERS[family](old, random.Random(seed), tier, variant)
                     controls += not reaches_tip(old)
