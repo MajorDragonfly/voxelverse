@@ -29,7 +29,7 @@ static var _shared_box_material: StandardMaterial3D
 
 
 func rebuild() -> void:
-	_motion.reset()
+	_motion.unbind()
 	_pending_boxes.clear()
 	super.rebuild()
 	for parent: Node3D in _pending_boxes:
@@ -72,7 +72,7 @@ func rebuild() -> void:
 
 
 func set_motion(mode: String) -> void:
-	_motion.reset()
+	_motion.unbind()
 	motion_mode = mode if mode in ["edit", "idle", "walk", "run"] else "edit"
 	_motion_time = 0.0
 	if motion_mode != "edit":

@@ -34,6 +34,13 @@ func bind(preview: Node3D) -> void:
 	animator.free()
 
 
+func unbind() -> void:
+	reset()
+	_preview = null
+	_parts.clear()
+	_legs.clear()
+
+
 func reset() -> void:
 	if is_instance_valid(_preview):
 		_preview.position = _base_position
@@ -44,7 +51,7 @@ func reset() -> void:
 	for leg in _legs:
 		if is_instance_valid(leg.get("knee")):
 			leg["knee"].rotation = leg.get("knee_base_rotation", Vector3.ZERO)
-		if bool(leg.get("sculpt_rig", false)) and is_instance_valid(leg.get("root")):
+		if bool(leg.get("sculpt_rig", false)) and is_instance_valid(leg.get("root")) and leg["root"].is_inside_tree() and is_instance_valid(_preview) and _preview.is_inside_tree():
 			LimbRig.pose(leg, _preview.to_global(leg["rest_ankle_preview"]))
 
 

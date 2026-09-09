@@ -273,7 +273,8 @@ func _build_palette() -> void:
 
 
 func _build_inspector() -> void:
-	_right_panel = _panel("RightStatsPanel", 1, 0, 1, 1, Vector4(-300, 104, -16, -126))
+	_right_panel = _panel("RightStatsPanel", 1, 0, 1, 1, Vector4(-344, 104, -16, -126))
+	_right_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_right_panel.add_child(scroll)
@@ -1357,7 +1358,7 @@ func _frame_creature() -> void:
 	var shape: Vector3 = Blueprint.get_body_shape(blueprint) * Blueprint.get_body_scale(blueprint)
 	shape.z *= SpineProfile.get_body_length_scale(blueprint)
 	var radius: float = maxf(shape.z * 0.65, maxf(shape.x, shape.y) * 1.5)
-	var available: float = maxf(0.25, (get_viewport().get_visible_rect().size.x - 660.0) / get_viewport().get_visible_rect().size.x)
+	var available: float = maxf(0.25, (get_viewport().get_visible_rect().size.x - 704.0) / get_viewport().get_visible_rect().size.x)
 	_camera.position = Vector3(0, 1.3, clampf(radius / tan(deg_to_rad(_camera.fov * 0.5)) / sqrt(available), 5.6, 18.0))
 	_camera.look_at(Vector3(0, 0.05, 0))
 

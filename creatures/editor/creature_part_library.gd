@@ -326,9 +326,29 @@ static func get_terminal_parts() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	for entry in [["feet_pads", "Ballenfüße", "feet"], ["feet_claws", "Krallenfüße", "feet"], ["feet_hooves", "Spalthufe", "feet"], ["feet_webbed", "Schwimmfüße", "feet"], ["hands_grasp", "Greifhände", "hands"], ["hands_claws", "Krallenhände", "hands"], ["hands_pincers", "Scherenhände", "hands"]]:
 		var is_foot: bool = entry[2] == "feet"
-		var voxels: Array = [_voxel(Vector3(0, 0, -0.04), Vector3(0.28, 0.12 if is_foot else 0.22, 0.32 if is_foot else 0.14), Color("8fb39b"))]
-		for index in range(3):
-			voxels.append(_voxel(Vector3(float(index - 1) * 0.105, -0.02 if is_foot else -0.16, -0.18 if is_foot else -0.03), Vector3(0.065, 0.07 if is_foot else 0.18, 0.13 if is_foot else 0.07), Color("d6c7a4")))
+		var id: String = entry[0]
+		var skin := Color("8fb39b")
+		var horn := Color("e5d5ab")
+		var voxels: Array = []
+		if id == "feet_hooves":
+			for side: float in [-1.0, 1.0]:
+				voxels.append(_voxel(Vector3(side * 0.095, -0.04, -0.04), Vector3(0.14, 0.17, 0.22), horn.darkened(0.32)))
+		elif id == "hands_pincers":
+			voxels.append(_voxel(Vector3.ZERO, Vector3(0.22, 0.17, 0.06), skin))
+			for side: float in [-1.0, 1.0]:
+				voxels.append(_voxel(Vector3(side * 0.14, -0.15, 0), Vector3(0.075, 0.22, 0.055), horn))
+				voxels.append(_voxel(Vector3(side * 0.095, -0.27, 0), Vector3(0.07, 0.055, 0.04), horn))
+		else:
+			voxels.append(_voxel(Vector3.ZERO, Vector3(0.29, 0.10 if is_foot else 0.21, 0.18 if is_foot else 0.055), skin))
+			if id == "feet_webbed":
+				voxels.append(_voxel(Vector3(0, -0.02, -0.15), Vector3(0.44, 0.035, 0.23), skin.lightened(0.3)))
+			for index in range(3):
+				var tip := Vector3(float(index - 1) * 0.13, -0.035 if is_foot else -0.21, -0.17 if is_foot else 0)
+				voxels.append(_voxel(tip, Vector3(0.06, 0.065 if is_foot else 0.18, 0.15 if is_foot else 0.035), skin.lightened(0.12)))
+				if id.ends_with("claws"):
+					voxels.append(_voxel(tip + (Vector3.FORWARD * 0.13 if is_foot else Vector3.DOWN * 0.13), Vector3(0.045, 0.045 if is_foot else 0.095, 0.13 if is_foot else 0.025), horn))
+			if not is_foot:
+				voxels.append(_voxel(Vector3(-0.22, -0.075, 0), Vector3(0.09, 0.07, 0.04), skin))
 		result.append({"id": entry[0], "name": entry[1], "category": entry[2], "description": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.", "complexity": 2, "default_scale": 1.0, "stats": {}, "voxels": voxels})
 	return result
 

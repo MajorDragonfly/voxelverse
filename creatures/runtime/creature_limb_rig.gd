@@ -85,7 +85,10 @@ static func level_legs(preview: Node3D, body_bottom: float) -> float:
 
 static func pose(record: Dictionary, ankle_world: Vector3) -> void:
 	var root: Node3D = record["root"]
-	if not is_instance_valid(root):
+	if not is_instance_valid(root) or not root.is_inside_tree():
+		return
+	var preview: Node3D = root.get_parent() as Node3D
+	if preview == null:
 		return
 	var ankle: Vector3 = root.to_local(ankle_world)
 	var distance: float = maxf(ankle.length(), 0.001)
@@ -111,7 +114,6 @@ static func pose(record: Dictionary, ankle_world: Vector3) -> void:
 	record["joint"].position = knee_position
 	var socket: Node3D = record["socket"]
 	socket.position = ankle - knee_position
-	var preview: Node3D = root.get_parent() as Node3D
 	socket.basis = root.global_basis.inverse() * preview.global_basis * record["foot_basis"] * Basis.from_scale(Vector3.ONE * root.scale.x)
 
 

@@ -264,6 +264,15 @@ func _check_editor() -> void:
 	editor.call("_apply_color_palette", 2)
 	_expect(str(editor.get("blueprint")["appearance"]["skin_type"]) == "scales", "SkinStyle selector did not apply scales.")
 	_expect(editor.find_child("Swatch_f3ead6", true, false) != null, "Expanded color swatches are absent.")
+	# Rebuild repeatedly before deferred frees run, just as fast mode changes
+	# do. The former pose must never touch detached limb roots.
+	editor.call("_set_mode", "test")
+	editor.call("_choose_motion", "walk")
+	editor.call("_set_mode", "parts")
+	editor.call("_select_part_by_index", 2)
+	editor.call("_change_part_field", 19.0, "rotation", 0)
+	editor.call("_refresh_preview")
+	_expect(is_equal_approx(_part_roots(visual, 2)[0].rotation_degrees.x, 19), "Returning from motion lost the editable limb pose.")
 	editor.free()
 	await process_frame
 
