@@ -27,7 +27,7 @@ func _ready() -> void:
 	var environment := WorldEnvironment.new()
 	environment.environment = Environment.new()
 	environment.environment.background_mode = Environment.BG_COLOR
-	environment.environment.background_color = Color("172e2d")
+	environment.environment.background_color = Color("233441")
 	environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.environment.ambient_light_color = Color("dbebe1")
 	environment.environment.ambient_light_energy = 0.7
@@ -56,6 +56,10 @@ func show_blueprint(blueprint: Dictionary) -> void:
 	# Avoid editor handles and collision; setting the data before ready builds once.
 	_model.set("show_spine_handles", false)
 	_pivot.add_child(_model)
+	_fit_model()
+
+
+func _fit_model() -> void:
 	var boxes: Array[AABB] = []
 	_collect_bounds(_model, Transform3D.IDENTITY, boxes)
 	var bounds := AABB(Vector3(-1, -1, -1), Vector3(2, 2, 2))
@@ -68,6 +72,54 @@ func show_blueprint(blueprint: Dictionary) -> void:
 	_radius = maxf(bounds.size.length() * 0.5, 0.5)
 	_frame_camera()
 	_update_rendering()
+
+
+func show_part(part_id: String, unlocked: bool = true) -> void:
+	const Parts = preload("res://creatures/editor/creature_part_library.gd")
+	const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
+	const Geometry = preload("res://creatures/editor/creature_part_geometry.gd")
+	const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
+	var definition: Dictionary = Parts.get_part(part_id)
+	clear()
+	if definition.is_empty():
+		return
+	var category: String = str(definition.get("category", ""))
+	# Definitions are also used by the editor; category lives in the catalog.
+	if category.is_empty():
+		for section in Parts.get_categories():
+			for candidate in Parts.get_parts_for_category(str(section["id"])):
+				if candidate["id"] == part_id:
+					category = str(section["id"])
+	var blueprint: Dictionary = Blueprint.create_default()
+	blueprint["parts"] = []
+	_angle = -2.55
+	_zoom = 1.0
+	if category in ["body", "paint"]:
+		if category == "body": Blueprint.set_body_part(blueprint, part_id)
+		else: Blueprint.set_paint_part(blueprint, part_id)
+		show_blueprint(blueprint)
+		_angle = -2.55
+	else:
+		_model = Node3D.new()
+		_model.set_meta("skin_blueprint", blueprint)
+		_pivot.add_child(_model)
+		if category in ["feet", "hands"]:
+			Geometry._terminal(_model, part_id, Surface.colors(blueprint)[0], Color("e3d5b0"))
+		else:
+			Geometry.build(_model, definition, {"part_id": part_id, "category": category}, blueprint)
+	if not unlocked:
+		_silhouette(_model)
+	_fit_model()
+
+
+func _silhouette(node: Node) -> void:
+	if node is MeshInstance3D:
+		var material := StandardMaterial3D.new()
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		material.albedo_color = Color("080f18")
+		node.material_override = material
+	for child in node.get_children():
+		_silhouette(child)
 
 
 func clear() -> void:

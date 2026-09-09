@@ -35,9 +35,9 @@ func _install() -> void:
 	_progress_label = Label.new()
 	_progress_label.name = "ProgressionSummary"
 	_progress_label.offset_left = 20.0
-	_progress_label.offset_top = 164.0
-	_progress_label.offset_right = 650.0
-	_progress_label.offset_bottom = 212.0
+	_progress_label.offset_top = 136.0
+	_progress_label.offset_right = 320.0
+	_progress_label.offset_bottom = 176.0
 	_progress_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_progress_label.add_theme_font_size_override("font_size", 13)
 	_progress_label.add_theme_color_override("font_color", Color(0.62, 0.78, 0.75, 0.92))
@@ -100,13 +100,13 @@ func _refresh_summary() -> void:
 	if progression == null:
 		_progress_label.text = ""
 		return
-	_progress_label.text = "Arten %d · Körperteile %d · Insight %d" % [
+	_progress_label.text = "%d Arten · %d Teile · %d EP" % [
 		int(progression.call("get_discovered_species_count")),
 		int(progression.call("get_unlocked_count")),
 		int(progression.get("discovery_points")),
 	]
 	var wallet: Dictionary = progression.call("get_behavior_wallet", 0)
-	_progress_label.text += "\nKreaturenpunkte · Sozial %d · Aggressiv %d" % [int(wallet["available"]["social"]), int(wallet["available"]["aggression"])]
+	_progress_label.text += "\nSozial %d · Aggressiv %d" % [int(wallet["available"]["social"]), int(wallet["available"]["aggression"])]
 
 
 func _on_part_unlocked(part_id: String, _reason: String) -> void:

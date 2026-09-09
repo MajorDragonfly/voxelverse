@@ -1,9 +1,10 @@
 extends Button
-## Native, resolution-independent thumbnails generated from the part recipes.
+## Exact workshop geometry; locked cards use the same outline as a flat silhouette.
 ## A cancelled palette drag never changes the creature.
 const Parts = preload("res://creatures/editor/creature_part_library.gd")
 var definition: Dictionary = {}
 var category: String = ""
+var _portrait: SubViewportContainer
 
 
 func configure(part: Dictionary, category_id: String, available: bool) -> void:
@@ -24,55 +25,19 @@ func _draw() -> void:
 		title = title.left(16) + "…"
 	draw_string(font, Vector2(10, size.y - 28), title, HORIZONTAL_ALIGNMENT_LEFT, size.x - 20, 14, tint)
 	draw_string(font, Vector2(10, size.y - 10), "Gesperrt" if disabled else "%d Formpunkte" % int(definition.get("complexity", 0)), HORIZONTAL_ALIGNMENT_LEFT, size.x - 20, 11, tint.darkened(0.18))
-	var center := Vector2(size.x * 0.5, 44)
-	var voxels: Array = definition.get("voxels", [])
-	if category in ["body", "paint"]:
-		var color: Color = definition.get("color", definition.get("base_tint", Color("92c2a3")))
-		if disabled:
-			color = color.darkened(0.58)
-		for y in range(-3, 3):
-			for x in range(-5, 5):
-				if pow((float(x) + 0.5) / 5.0, 2.0) + pow((float(y) + 0.5) / 3.0, 2.0) > 1.0:
-					continue
-				var tile: Color = color
-				if category == "paint" and str(definition.get("pattern", "plain")) != "plain" and (x + y * 2) % 4 == 0:
-					tile = definition.get("accent", Color("285a48"))
-					if disabled:
-						tile = tile.darkened(0.58)
-				_draw_voxel_tile(center + Vector2(x * 6, y * 6), Vector2(6, 6), tile)
-		return
-	var projected: Array[Dictionary] = []
-	var bounds := Rect2()
-	for voxel: Dictionary in voxels:
-		var position: Vector3 = voxel.get("position", Vector3.ZERO)
-		var dimensions: Vector3 = voxel.get("size", Vector3.ONE * 0.2)
-		var point := Vector2(position.x * 0.8 - position.z * 0.65, -position.y + position.z * 0.18)
-		var extent := Vector2(dimensions.x * 0.8 + dimensions.z * 0.65, dimensions.y + dimensions.z * 0.18)
-		var rect := Rect2(point - extent * 0.5, extent)
-		bounds = rect if projected.is_empty() else bounds.merge(rect)
-		projected.append({"point": point, "extent": extent, "color": voxel.get("color", tint), "depth": position.z})
-	projected.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a["depth"] > b["depth"])
-	var factor: float = minf(72.0 / maxf(bounds.size.x, 0.01), 59.0 / maxf(bounds.size.y, 0.01))
-	for piece: Dictionary in projected:
-		var point: Vector2 = center + (piece["point"] - bounds.get_center()) * factor
-		var extent: Vector2 = piece["extent"] * factor
-		var color: Color = piece["color"]
-		if category == "eyes" and color.get_luminance() < 0.12:
-			color = Color("f7eedb")
-		if disabled:
-			color = color.darkened(0.55)
-		_draw_voxel_tile(point, extent, color)
 
 
-func _draw_voxel_tile(center: Vector2, extent: Vector2, color: Color) -> void:
-	var rect := Rect2(center - extent * 0.5, extent)
-	var depth := Vector2(minf(5.0, extent.x * 0.22), -minf(4.0, extent.y * 0.22))
-	var a: Vector2 = rect.position
-	var b: Vector2 = rect.position + Vector2(rect.size.x, 0)
-	var c: Vector2 = rect.end
-	draw_colored_polygon(PackedVector2Array([a, a + depth, b + depth, b]), color.lightened(0.18))
-	draw_colored_polygon(PackedVector2Array([b, b + depth, c + depth, c]), color.darkened(0.22))
-	draw_rect(rect, color)
+func _ready() -> void:
+	_portrait = preload("res://ui/discovery/journal_preview.gd").new()
+	_portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_portrait)
+	_portrait.custom_minimum_size = Vector2.ZERO
+	_portrait.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	_portrait.offset_left = 5
+	_portrait.offset_right = -5
+	_portrait.offset_top = 5
+	_portrait.offset_bottom = 79
+	_portrait.call("show_part", str(definition.get("id", "")), not disabled)
 
 
 func _get_drag_data(_position: Vector2) -> Variant:

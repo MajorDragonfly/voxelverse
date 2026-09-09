@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+const Symbols = preload("res://ui/catalog/development_symbols.gd")
 const Style = preload("res://ui/progression_style.gd")
 
 var _stage_labels: Dictionary = {}
@@ -7,14 +8,15 @@ var _home: Label
 var _legacy: Label
 var _transition: Label
 var _stages: BoxContainer
+var _future: BoxContainer
 
 
 func _ready() -> void:
 	name = "DevelopmentPath"
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_theme_constant_override("separation", 14)
-	add_child(Style.label("Von deiner Kreatur zum eigenen Dorf", 28))
-	add_child(Style.label("Die Nestgruppe gehört zur Kreaturenphase. Erst in der Stammesphase führst du Gruppen, stellst Werkzeuge her und baust ein Dorf.", 18, Style.MUTED))
+	add_child(Style.label("Dein Weg durch die Zeitalter", 26))
+	add_child(Style.label("Einzelne Kreatur → Nestgemeinschaft → eigener Stamm. Neue Zeitalter beginnen erst mit deiner Bestätigung.", 18, Style.MUTED))
 	_stages = BoxContainer.new()
 	_stages.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_stages.add_theme_constant_override("separation", 14)
@@ -24,17 +26,32 @@ func _ready() -> void:
 		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		panel.add_theme_stylebox_override("panel", Style.box())
 		_stages.add_child(panel)
-		var content := Style.column(panel, 6)
+		var content := Style.column(panel, 8)
+		var icon := Symbols.view(stage_id, false, 108)
+		content.add_child(icon)
 		var title := Style.label("", 23, Style.SOCIAL)
 		var status := Style.label("", 16, Style.MUTED)
 		var control := Style.label("", 18)
 		var description := Style.label("", 17, Style.MUTED)
 		for label in [title, status, control, description]:
 			content.add_child(label)
-		_stage_labels[stage_id] = {"title": title, "status": status, "control": control, "description": description, "panel": panel}
+		_stage_labels[stage_id] = {"title": title, "status": status, "control": control, "description": description, "panel": panel, "icon": icon}
 		if stage_id == "nest_group":
 			_home = Style.label("", 17)
 			content.add_child(_home)
+	add_child(Style.label("SPÄTERE ZEITALTER", 14, Style.MUTED))
+	_future = BoxContainer.new()
+	_future.add_theme_constant_override("separation", 12)
+	add_child(_future)
+	for entry in [["medieval", "Mittelalter"], ["modern", "Neuzeit"], ["space", "Weltraum"]]:
+		var panel := PanelContainer.new()
+		panel.add_theme_stylebox_override("panel", Style.box(Color("233441")))
+		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_future.add_child(panel)
+		var content := Style.column(panel, 4)
+		content.add_child(Symbols.view(entry[0], false, 68))
+		content.add_child(Style.label(entry[1], 18))
+		content.add_child(Style.label("Gesperrt · in Vorbereitung", 14, Style.MUTED))
 	_legacy = Style.label("", 18, Style.SOCIAL)
 	add_child(_legacy)
 	_transition = Style.label("", 17, Style.MUTED)
@@ -52,7 +69,9 @@ func refresh() -> void:
 		var labels: Dictionary = _stage_labels[stage["id"]]
 		for key in ["title", "status", "control", "description"]:
 			labels[key].text = stage[key]
-		labels["panel"].add_theme_stylebox_override("panel", Style.box(Style.PANEL, Style.SOCIAL if data["current_stage"] == stage["id"] else Color("354750")))
+		var reached: bool = stage["id"] == "creature" or int(data["current_phase"]) >= 1 or (stage["id"] == "nest_group" and data["current_stage"] == "nest_group")
+		labels["icon"].texture = Symbols.texture(stage["id"], reached)
+		labels["panel"].add_theme_stylebox_override("panel", Style.box(Color("233441"), Style.SOCIAL if data["current_stage"] == stage["id"] else Color("354750")))
 	_home.text = data["home"]["message"]
 	if not data["home"]["runtime_available"] and int(data["current_phase"]) == 0:
 		_home.text += "\nNestgruppensteuerung ist in dieser Version noch nicht verfügbar."
@@ -65,4 +84,5 @@ func refresh() -> void:
 
 
 func _layout() -> void:
-	_stages.vertical = get_viewport().get_visible_rect().size.x < 1050
+	_stages.vertical = get_viewport().get_visible_rect().size.x < 940
+	_future.vertical = get_viewport().get_visible_rect().size.x < 620

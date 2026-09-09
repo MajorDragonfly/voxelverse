@@ -7,6 +7,7 @@ const Research = preload("res://core/discovery/research_goals.gd")
 const Comparison = preload("res://ui/discovery/species_comparison.gd")
 const PREFS_PATH := "user://discovery_journal_ui.cfg"
 const PAGE_SIZE: int = 100
+const Symbols = preload("res://ui/catalog/development_symbols.gd")
 
 var is_open: bool = false
 var player: Node
@@ -47,8 +48,17 @@ var _state: Dictionary = {}
 var _rows: Array[Dictionary] = []
 var _selected_key: String = ""
 var _page: int = 0
-var _hint_enabled: bool = true
+var _hint_enabled: bool = false
 var _hint_timer: float = 0.0
+var _status_badge: Label
+var _thumbnail_preview: SubViewportContainer
+var _thumbnail_cache: Dictionary = {}
+var _thumbnail_queue: Array[Dictionary] = []
+var _thumbnail_running: bool = false
+var _parts_grid: GridContainer
+var _content: BoxContainer
+var _panel: PanelContainer
+var _browser: VBoxContainer
 
 
 func _ready() -> void:
@@ -141,6 +151,8 @@ func close_journal() -> void:
 	_closing = true
 	_surface.hide()
 	_preview.call("clear")
+	_thumbnail_queue.clear()
+	_thumbnail_preview.call("clear")
 	_comparison.call("clear")
 	_comparison_mode = false
 	_release_after_input_frame()
@@ -177,23 +189,24 @@ func _build() -> void:
 	_surface.theme = _theme()
 	add_child(_surface)
 	var shade := ColorRect.new()
-	shade.color = Color(0.015, 0.03, 0.025, 0.90)
+	shade.color = Color(0.02, 0.035, 0.05, 0.97)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_surface.add_child(shade)
 	var panel := PanelContainer.new()
+	_panel = panel
 	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	panel.offset_left = 28
 	panel.offset_top = 24
 	panel.offset_right = -28
 	panel.offset_bottom = -24
-	panel.add_theme_stylebox_override("panel", _box(Color("122422"), 20))
+	panel.add_theme_stylebox_override("panel", _box(Color("101c27"), 20))
 	_surface.add_child(panel)
 	var layout := VBoxContainer.new()
 	layout.add_theme_constant_override("separation", 12)
 	panel.add_child(layout)
 	var heading := HBoxContainer.new()
 	layout.add_child(heading)
-	var heading_text := _label("ENTDECKUNGSBUCH", 28)
+	var heading_text := _label("Entdeckungsbuch", 32)
 	heading_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(heading_text)
 	_close = _button("Zurück zum Spiel  ·  Esc", close_journal)
@@ -226,20 +239,25 @@ func _build() -> void:
 		_status.add_item(text)
 	_status.item_selected.connect(func(_index: int) -> void: _page = 0; _apply_filters())
 	tools_row.add_child(_status)
-	var content := HBoxContainer.new()
+	var content := BoxContainer.new()
+	_content = content
 	content.name = "JournalContent"
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	content.add_theme_constant_override("separation", 18)
 	layout.add_child(content)
 	var browser := VBoxContainer.new()
-	browser.custom_minimum_size.x = 240
+	_browser = browser
+	browser.custom_minimum_size.x = 300
 	browser.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	browser.size_flags_stretch_ratio = 0.38
+	browser.size_flags_stretch_ratio = 0.92
 	content.add_child(browser)
 	_list = ItemList.new()
 	_list.name = "JournalEntries"
 	_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_list.add_theme_constant_override("v_separation", 14)
+	_list.add_theme_constant_override("v_separation", 8)
+	_list.fixed_icon_size = Vector2i(78, 78)
+	_list.add_theme_constant_override("icon_margin", 12)
+	_list.add_theme_font_size_override("font_size", 16)
 	_list.item_selected.connect(_select_entry)
 	browser.add_child(_list)
 	var paging := HBoxContainer.new()
@@ -265,6 +283,9 @@ func _build() -> void:
 	_title = _label("", 26)
 	_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_title)
+	_status_badge = _label("", 14)
+	_status_badge.add_theme_color_override("font_color", Color("83d6bf"))
+	_detail.add_child(_status_badge)
 	_compare_button = _button("Mit meiner Kreatur vergleichen", _toggle_comparison)
 	_compare_button.name = "CompareSpecies"
 	_compare_button.hide()
@@ -295,6 +316,11 @@ func _build() -> void:
 	_parts_label = _label("", 16)
 	_parts_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_parts_label)
+	_parts_grid = GridContainer.new()
+	_parts_grid.columns = 2
+	_parts_grid.add_theme_constant_override("h_separation", 8)
+	_parts_grid.add_theme_constant_override("v_separation", 8)
+	_detail.add_child(_parts_grid)
 	_guide = _label("", 19)
 	_guide.name = "JournalGuide"
 	_guide.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -309,18 +335,26 @@ func _build() -> void:
 	hints.button_pressed = _hint_enabled
 	hints.toggled.connect(_toggle_hint)
 	layout.add_child(hints)
+	_thumbnail_preview = Preview.new()
+	_thumbnail_preview.name = "CatalogThumbnailRenderer"
+	_thumbnail_preview.position = Vector2(-2000, -2000)
+	_surface.add_child(_thumbnail_preview)
+	_thumbnail_preview.custom_minimum_size = Vector2.ZERO
+	_thumbnail_preview.size = Vector2(128, 128)
 	_surface.hide()
+	get_viewport().size_changed.connect(_layout_catalog)
+	_layout_catalog()
 	_build_hud()
 	_populate_filter()
 
 
 func _build_hud() -> void:
 	_hud = Control.new()
-	_hud.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	_hud.offset_left = -480
-	_hud.offset_top = -230
+	_hud.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	_hud.offset_left = -292
+	_hud.offset_top = 82
 	_hud.offset_right = -24
-	_hud.offset_bottom = -122
+	_hud.offset_bottom = 140
 	_hud.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_hud.theme = _surface.theme
 	add_child(_hud)
@@ -338,11 +372,11 @@ func _build_hud() -> void:
 	layout.add_child(_hint)
 	_pinned_button = _button("", _open_pinned)
 	_pinned_button.name = "PinnedResearch"
-	_pinned_button.custom_minimum_size.y = 76
+	_pinned_button.custom_minimum_size.y = 60
 	_pinned_button.clip_text = true
 	_pinned_button.hide()
 	layout.add_child(_pinned_button)
-	var open_button := _button("Entdeckungsbuch öffnen  ·  J", func() -> void: open_journal())
+	var open_button := _button("Entdeckungsbuch · J", func() -> void: open_journal())
 	open_button.name = "OpenJournal"
 	open_button.size_flags_horizontal = Control.SIZE_SHRINK_END
 	layout.add_child(open_button)
@@ -382,6 +416,8 @@ func _apply_filters() -> void:
 	_list.get_parent().visible = not guide_mode
 	_guide.visible = guide_mode
 	_parts_label.text = ""
+	_clear_part_tiles()
+	_status_badge.text = ""
 	_clear_comparison()
 	_pin.hide()
 	_wish.hide()
@@ -401,6 +437,7 @@ func _apply_filters() -> void:
 		4: _rows = Research.rows(_state, _search.text)
 	_page = clampi(_page, 0, maxi((_rows.size() - 1) / PAGE_SIZE, 0))
 	_list.clear()
+	_thumbnail_queue.clear()
 	var selected_index: int = 0
 	for index in range(_page * PAGE_SIZE, mini((_page + 1) * PAGE_SIZE, _rows.size())):
 		var row: Dictionary = _rows[index]
@@ -410,7 +447,11 @@ func _apply_filters() -> void:
 			if row.get("wished", false): label += " · gemerkt"
 		elif _tabs.current_tab == 4:
 			label = ("✓  " if row["complete"] else "○  ") + label
-		_list.add_item(label)
+		var visual_key: String = _visual_key(row, _tabs.current_tab)
+		_list.add_item(label, _thumbnail_cache.get(visual_key, Symbols.texture("creature" if _tabs.current_tab == 0 else "part", bool(row.get("unlocked", true)))))
+		_list.set_item_metadata(_list.item_count - 1, visual_key)
+		if not _thumbnail_cache.has(visual_key) and _tabs.current_tab in [0, 1]:
+			_thumbnail_queue.append({"row": row, "tab": _tabs.current_tab, "key": visual_key})
 		_list.set_item_tooltip(_list.item_count - 1, label + " · " + str(row.get("location", row.get("source", ""))))
 		if str(row.get("key", row.get("id", ""))) == _selected_key:
 			selected_index = _list.item_count - 1
@@ -425,6 +466,7 @@ func _apply_filters() -> void:
 			_title.text = "Deine Teile-Merkliste"
 			_description.text = "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen."
 		return
+	_render_thumbnails()
 	_list.select(selected_index)
 	_select_entry(selected_index)
 
@@ -438,6 +480,8 @@ func _select_entry(index: int) -> void:
 	_detail_scroll.scroll_vertical = 0
 	_title.text = str(row.get("name", "Unbekannte Art"))
 	_parts_label.text = ""
+	_clear_part_tiles()
+	_status_badge.text = ""
 	_clear_comparison()
 	_pin.hide()
 	_wish.hide()
@@ -445,7 +489,8 @@ func _select_entry(index: int) -> void:
 	_preview.call("clear")
 	_preview.hide()
 	if _tabs.current_tab == 0:
-		_description.text = "%s\nEntdeckt auf %s" % [row["role_label"], row["location"]]
+		_status_badge.text = "GESCANNT  ·  " + str(row["role_label"])
+		_description.text = "Fundort · " + str(row["location"])
 		var blueprint: Dictionary = Records.visual_for(row)
 		if blueprint.is_empty():
 			_description.text += "\n\nFür diese frühere Entdeckung fehlt eine gespeicherte Ansicht. Beobachte die Art erneut, um sie zu ergänzen."
@@ -465,12 +510,10 @@ func _select_entry(index: int) -> void:
 			_preview.show()
 			_preview.call("show_blueprint", blueprint)
 			_description.text += "\n\nAnsicht drehen: ziehen · Zoom: Mausrad"
-			var lines := PackedStringArray(["BEOBACHTETE KÖRPERTEILE"])
+			_parts_label.text = "KÖRPERTEILE DIESER ART"
 			for part_id in Records.part_ids(blueprint):
-				var definition: Dictionary = Records.Parts.get_part(part_id)
-				var available: bool = Records.as_dictionary(_state.get("unlocked_parts", {})).has(part_id)
-				lines.append("%s  %s · %s" % ["✓" if available else "○", definition.get("name", part_id), "verfügbar" if available else "noch gesperrt"])
-			_parts_label.text = "\n".join(lines)
+				_add_part_tile(part_id, Records.as_dictionary(_state.get("unlocked_parts", {})).has(part_id))
+
 		var awarded: String = str(row.get("unlocked_part", ""))
 		if not awarded.is_empty():
 			_description.text += "\n\nBei dieser Entdeckung freigeschaltet: %s" % Records.Parts.get_part(awarded).get("name", awarded)
@@ -484,8 +527,11 @@ func _select_entry(index: int) -> void:
 		_description.text = "Entdeckt auf %s\n\nGespeicherte Regionskoordinaten: %s / %s" % [row["location"], Records.saved_integer(row.get("x", "?")), Records.saved_integer(row.get("z", "?"))]
 	else:
 		var category: String = str(row.get("category", ""))
-		_description.text = "%s · %s\n\n%s\n\n%s" % [Records.CATEGORIES.get(category, "Gespeichertes Teil"),
-			"Freigeschaltet" if row["unlocked"] else "Noch gesperrt", row["source"], row.get("description", "")]
+		_status_badge.text = ("FREIGESCHALTET" if row["unlocked"] else "GESPERRT · SILHOUETTE") + "  /  " + str(Records.CATEGORIES.get(category, "Teil"))
+		if category != "missing":
+			_preview.show()
+			_preview.call("show_part", str(row["id"]), bool(row["unlocked"]))
+		_description.text = "%s\n\n%s" % [row.get("description", ""), row["source"]]
 		if row["unlocked"] and category != "missing":
 			_parts_label.text = "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken."
 		var wished: bool = row.get("wished", false)
@@ -571,7 +617,7 @@ func _update_research_hud() -> void:
 		return
 	_pinned_row = _progression.call("get_pinned_research")
 	_pinned_button.visible = not _pinned_row.is_empty()
-	_hud.offset_top = -314 if _pinned_button.visible else -230
+	_hud.offset_bottom = 252 if _pinned_button.visible else 174
 	if _pinned_row.is_empty():
 		return
 	var status: String = "Ziel erreicht" if _pinned_row["complete"] else "Dein Forschungsziel"
@@ -653,7 +699,7 @@ func _box(color: Color, margin: int = 12) -> StyleBoxFlat:
 	var box := StyleBoxFlat.new()
 	box.bg_color = color
 	box.set_border_width_all(1)
-	box.border_color = Color("3b5b51")
+	box.border_color = Color("344c5d")
 	box.set_corner_radius_all(3)
 	box.content_margin_left = margin
 	box.content_margin_right = margin
@@ -666,19 +712,100 @@ func _theme() -> Theme:
 	var theme := Theme.new()
 	theme.default_font_size = 17
 	for type in ["Label", "Button", "CheckButton", "OptionButton", "LineEdit", "ItemList", "TabBar"]:
-		theme.set_color("font_color", type, Color("e4eee3"))
+		theme.set_color("font_color", type, Color("e7eff2"))
 		theme.set_color("font_selected_color", type, Color("ffffff"))
 	for type in ["Button", "OptionButton", "LineEdit"]:
-		theme.set_stylebox("normal", type, _box(Color("213c35")))
-		theme.set_stylebox("hover", type, _box(Color("355d4c")))
-		theme.set_stylebox("pressed", type, _box(Color("47765b")))
+		theme.set_stylebox("normal", type, _box(Color("1c3040")))
+		theme.set_stylebox("hover", type, _box(Color("2e4b5b")))
+		theme.set_stylebox("pressed", type, _box(Color("356557")))
 		var focus: StyleBoxFlat = _box(Color(0, 0, 0, 0))
 		focus.border_color = Color("e0c785")
 		focus.set_border_width_all(2)
 		theme.set_stylebox("focus", type, focus)
-	theme.set_stylebox("panel", "ItemList", _box(Color("0d1c1b")))
-	theme.set_stylebox("selected", "ItemList", _box(Color("365c49")))
-	theme.set_stylebox("selected_focus", "ItemList", _box(Color("486d50")))
-	theme.set_stylebox("tab_selected", "TabBar", _box(Color("3b5d48")))
-	theme.set_stylebox("tab_unselected", "TabBar", _box(Color("1b302b")))
+	theme.set_stylebox("panel", "ItemList", _box(Color("142431")))
+	theme.set_stylebox("selected", "ItemList", _box(Color("2c4c56")))
+	theme.set_stylebox("selected_focus", "ItemList", _box(Color("365f67")))
+	theme.set_stylebox("tab_selected", "TabBar", _box(Color("2c4f59")))
+	theme.set_stylebox("tab_unselected", "TabBar", _box(Color("172936")))
 	return theme
+
+
+func _layout_catalog() -> void:
+	var viewport_size := get_viewport().get_visible_rect().size
+	var narrow: bool = viewport_size.x < 940
+	var stacked: bool = viewport_size.x < 720 or (narrow and viewport_size.y >= 760)
+	_content.vertical = stacked
+	_browser.custom_minimum_size = Vector2(0 if stacked else (250 if narrow else 300), 150 if stacked else 0)
+	_browser.size_flags_vertical = Control.SIZE_FILL if stacked else Control.SIZE_EXPAND_FILL
+	_list.custom_minimum_size.y = 110 if stacked else 0
+	_list.fixed_icon_size = Vector2i(60, 60) if narrow else Vector2i(78, 78)
+	_detail_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_panel.offset_left = 12 if narrow else 28
+	_panel.offset_right = -_panel.offset_left
+	_tabs.clip_tabs = true
+	_parts_grid.columns = 1 if viewport_size.x < 640 else 2
+
+
+func _visual_key(row: Dictionary, tab: int) -> String:
+	return str(tab) + ":" + str(row.get("id", row.get("key", ""))) + ":" + str(row.get("unlocked", true))
+
+
+func _render_thumbnails() -> void:
+	if _thumbnail_running or not is_open or DisplayServer.get_name() == "headless":
+		return
+	_thumbnail_running = true
+	while not _thumbnail_queue.is_empty() and is_open:
+		var job: Dictionary = _thumbnail_queue.pop_front()
+		var row: Dictionary = job["row"]
+		if int(job["tab"]) == 1:
+			_thumbnail_preview.call("show_part", str(row["id"]), bool(row["unlocked"]))
+		else:
+			var blueprint: Dictionary = Records.visual_for(row)
+			if blueprint.is_empty(): continue
+			_thumbnail_preview.call("show_blueprint", blueprint)
+		await RenderingServer.frame_post_draw
+		if not is_inside_tree() or not is_open: break
+		var picture: Image = _thumbnail_preview.viewport.get_texture().get_image()
+		var texture := ImageTexture.create_from_image(picture)
+		if _thumbnail_cache.size() >= 192: _thumbnail_cache.clear()
+		_thumbnail_cache[job["key"]] = texture
+		for index in range(_list.item_count):
+			if _list.get_item_metadata(index) == job["key"]:
+				_list.set_item_icon(index, texture)
+		for tile in _parts_grid.get_children():
+			if tile.get_meta("visual_key", "") == job["key"]:
+				tile.icon = texture
+		await get_tree().process_frame
+	_thumbnail_preview.call("clear")
+	_thumbnail_running = false
+
+
+func _clear_part_tiles() -> void:
+	if _parts_grid == null: return
+	for child in _parts_grid.get_children():
+		_parts_grid.remove_child(child)
+		child.queue_free()
+
+
+func _add_part_tile(id: String, unlocked: bool) -> void:
+	var row: Dictionary = {"id": id, "unlocked": unlocked}
+	var key: String = _visual_key(row, 1)
+	var tile := _button(str(Records.Parts.get_part(id).get("name", id)) + ("\nVerfügbar" if unlocked else "\nGesperrt"), func() -> void:
+		_tabs.current_tab = 1
+		_status.select(0)
+		_filter.select(0)
+		_search.clear()
+		_selected_key = id
+		_apply_filters())
+	tile.set_meta("visual_key", key)
+	tile.icon = _thumbnail_cache.get(key, Symbols.texture("part", unlocked))
+	tile.expand_icon = true
+	tile.add_theme_constant_override("icon_max_width", 60)
+	tile.add_theme_font_size_override("font_size", 14)
+	tile.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	tile.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	tile.custom_minimum_size.y = 74
+	_parts_grid.add_child(tile)
+	if not _thumbnail_cache.has(key):
+		_thumbnail_queue.append({"row": row, "tab": 1, "key": key})
+	_render_thumbnails()
