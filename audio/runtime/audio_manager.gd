@@ -476,6 +476,9 @@ func close_settings() -> void:
 func prepare_shutdown() -> void:
 	# Stop streams while their players still belong to the live tree. Child
 	# exit notifications pause playback before the parent's _exit_tree runs.
+	if is_instance_valid(creatures):
+		creatures.set_process(false)
+		creatures.clear()
 	if is_instance_valid(scans):
 		scans.reset_playback()
 	if is_instance_valid(music):

@@ -13,6 +13,7 @@ func _run() -> void:
 		await _finish()
 		return
 	var path: String = saves.create_slot("Radiale Gemeinschaft", 15838, Cube.MODE)
+	_stage("open_campaign")
 	await _open(path)
 	if not _expect_world(): await _finish(); return
 	var scene: Node3D = tree.current_scene
@@ -88,6 +89,7 @@ func _until(predicate: Callable, milliseconds: int) -> void:
 	while not predicate.call() and Time.get_ticks_msec() - started < milliseconds: await tree.process_frame
 
 func _animal_chain(tribe: Node) -> void:
+	_stage("build_workshops")
 	state.set_simulation_speed(4.0)
 	var data: Dictionary = tribe.village()
 	tribe.select_all()
@@ -112,6 +114,7 @@ func _animal_chain(tribe: Node) -> void:
 		await _until(func() -> bool: return tribe.village().stock["water" if kind == "well" else "fiber"] >= (12 if kind == "well" else 4), 45000)
 	tribe.issue_order("wait")
 	if not _expect_step(saves.save_now(), "Actual workshop reserve invalid: " + saves.last_error): return
+	_stage("approach_wildlife")
 	var runtime: Node = tribe.domestication
 	await _until(func() -> bool: return runtime.is_active(), 8000)
 	var animal: Node3D
@@ -137,6 +140,7 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(runtime.controller.record(id).get("status") == "tamed", "Milk animal did not retain completed food/trust.")
 	_expect(runtime.controller.record(id).species_id == species_id and data.members.size() == 3, "Taming changed species or recruited a citizen.")
 	print("SPHERE_TAMED ", id)
+	_stage("animal_book_and_home")
 	var journal: Node = tree.get_first_node_in_group(&"discovery_journal")
 	if not _expect_step(journal != null and journal.open_journal(), "Shared animal book did not open in the campaign."): return
 	journal._tabs.current_tab = journal.ANIMALS_TAB
@@ -154,12 +158,14 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(site.is_finite(), "No reachable physical pen site.")
 	if not site.is_finite(): return
 	_expect(tribe.issue_order("pen", site), "Cannot reserve pen construction: " + tribe.status)
+	_stage("build_pen")
 	await _until(func() -> bool: return not tribe.village().husbandry.pens.is_empty(), 45000)
 	_expect(not tribe.village().husbandry.pens.is_empty(), "Pen material transport/construction failed: " + str({"status": tribe.status, "project": tribe.village().project, "members": tribe.village().members, "routes": tribe._routes, "goals": tribe._goals}))
 	if tribe.village().husbandry.pens.is_empty(): return
 	tribe.issue_order("wait")
 	tribe.select_member(handler)
 	_expect(runtime.issue_command(id, "follow").ok, "Animal did not accept follow.")
+	_stage("follow_to_pen")
 	# Walk through the pen: follow deliberately stops behind the handler, so
 	# the resident's arrival radius must not be mistaken for animal admission.
 	var through: Vector3 = site + (site - tribe.anchor()).slide(Space.up(self, site)).normalized() * 1.2
@@ -175,11 +181,14 @@ func _animal_chain(tribe: Node) -> void:
 	tribe.assign_profession("keeper")
 	tribe.select_member(data.members[2].id)
 	tribe.assign_profession("milk_carrier")
+	_stage("supply_pen")
 	await _until(func() -> bool: return tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, 28000)
 	_expect(tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, "Keeper did not physically supply pen.")
 	var carrier: String = data.members[2].id
+	_stage("produce_and_collect_milk")
 	await _until(func() -> bool: return tribe.member_record(carrier).cargo == "milk", 100000)
 	if not _expect_step(tribe.member_record(carrier).cargo == "milk", "No real carrier collected the milk batch."): return
+	_stage("block_loaded_carrier")
 	tribe.select_member(carrier)
 	tribe.issue_order("wait")
 	var stock: int = tribe.village().stock.milk
@@ -211,6 +220,7 @@ func _animal_chain(tribe: Node) -> void:
 	if OS.has_feature("editor"): arguments.append_array(["--path", ProjectSettings.globalize_path("res://")])
 	arguments.append_array(["--", "--sphere-gameplay-smoke", "--sphere-gameplay-restart"])
 	var code: int = OS.execute(OS.get_executable_path(), arguments, output, true)
+	_stage("fresh_process_returned")
 	_expect(code == 0 and str(output).contains("SPHERE_GAMEPLAY_FRESH_PROCESS_PASSED"), "Fresh milk process failed: " + str(output))
 	await _open(path, true)
 	if not _expect_world(): return
@@ -224,6 +234,10 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(tribe.village().economy.milk_received > 0, "Milk cycle did not reach storage through actual transport.")
 	_expect(saves.save_now(), "Complete D1/D2/D3 sphere save failed: " + saves.last_error)
 	print("SPHERE_MILK_DELIVERED ", tribe.village().economy.milk_received)
+	_stage("milk_delivered")
+
+func _stage(label: String) -> void:
+	print("SPHERE_GAMEPLAY_STAGE ", label, " elapsed_seconds=", float(Time.get_ticks_msec()) / 1000.0)
 
 func _restart_gameplay() -> void:
 	var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string("user://sphere_gameplay_restart.json"))

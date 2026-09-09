@@ -83,6 +83,10 @@ func clear() -> void:
 	_scan_clock = 0.0
 
 
+func _exit_tree() -> void:
+	clear()
+
+
 func _bind_progression() -> void:
 	var service := get_node_or_null("/root/ProgressionService")
 	if service == null or service == _progression:

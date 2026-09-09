@@ -40,14 +40,14 @@ func _connect_if(signal_name: StringName, callback: Callable) -> void:
 
 
 func _process(delta: float) -> void:
+	if not _active():
+		return
 	_reaction_clock = maxf(0.0, _reaction_clock - delta)
 	_clock -= delta
 	_call_clock -= delta
 	if _clock > 0.0:
 		return
 	_clock = 0.1
-	if not is_instance_valid(source) or source.is_queued_for_deletion():
-		return
 	var dead_value: Variant = source.get("is_dead")
 	var dead: bool = _dead_reported if dead_value == null else dead_value == true
 	if dead and not _dead_reported:
@@ -86,7 +86,7 @@ func _observe_health(current: float, maximum: float) -> void:
 
 
 func emit_reaction(event: StringName) -> bool:
-	if not event in REACTIONS or not is_instance_valid(source) or source.is_queued_for_deletion():
+	if not event in REACTIONS or not _active():
 		return false
 	if get_tree().paused or source.get_meta(&"audio_disabled", false):
 		return false
@@ -144,7 +144,17 @@ func _creature_attacked(target: Node, damage: float) -> void:
 
 
 func _audio_action(action: StringName) -> void:
-	audio.play_action(action, source)
+	if _active():
+		audio.play_action(action, source)
+
+
+func _active() -> bool:
+	# Emitters belong to creatures, while their registry belongs to AudioManager.
+	# Either owner can leave the tree first during a scene change or shutdown.
+	return is_inside_tree() and not is_queued_for_deletion() \
+		and is_instance_valid(source) and source.is_inside_tree() and not source.is_queued_for_deletion() \
+		and is_instance_valid(registry) and registry.is_inside_tree() and not registry.is_queued_for_deletion() \
+		and is_instance_valid(audio) and audio.is_inside_tree() and not audio.is_queued_for_deletion()
 
 
 func _audio_event(event: StringName) -> void:
@@ -152,5 +162,5 @@ func _audio_event(event: StringName) -> void:
 
 
 func _exit_tree() -> void:
-	if is_instance_valid(audio):
+	if is_instance_valid(audio) and audio.is_inside_tree() and not audio.is_queued_for_deletion():
 		audio.stop_source(_source_id)
