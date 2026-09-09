@@ -407,7 +407,8 @@ func _update_views() -> void:
 			if not str(body.parent_id).is_empty() and system.bodies[body.parent_id].kind == "planet":
 				label.position.z -= space_camera.size * 0.08
 			elif body.kind == "star":
-				label.position.z += space_camera.size * (-0.07 if id == "m1:vesper" else 0.045)
+				var star_offset: float = (-0.13 if system.real_scale else -0.07) if id == "m1:vesper" else 0.045
+				label.position.z += space_camera.size * star_offset
 
 
 func snapshot() -> Dictionary:

@@ -14,8 +14,16 @@ func _run() -> void:
 	var tree := get_tree()
 	var settings := get_node("/root/DisplaySettings")
 	get_node("/root/SaveGameService").autosave_enabled = false
+	# The water/GUI acceptance needs a reproducible actual world. A random
+	# starting planet can have no ocean inside this deliberately small fixture.
+	get_node("/root/GameState").start_world_with_seed(15838)
+	await tree.process_frame
+	_expect(tree.change_scene_to_file("res://main/main.tscn") == OK, "The native acceptance world failed to load.")
+	await tree.scene_changed
 	for frame in range(4):
 		await tree.process_frame
+	_expect(get_node("/root/WorldGenerator").get_planet_profile().planet_seed == 15838,
+		"Native water/GUI acceptance did not use its deterministic world.")
 	await _probe_underwater_camera()
 	var old_mouse: int = Input.mouse_mode
 	_key(KEY_ESCAPE)
