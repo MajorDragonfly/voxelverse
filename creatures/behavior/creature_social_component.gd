@@ -53,6 +53,7 @@ func can_reach(actor: Node, reach: float = FRIEND_RANGE) -> bool:
 func befriend(actor: Node, delta: float) -> Dictionary:
 	if not can_reach(actor) or not is_finite(delta) or delta <= 0.0 or delta > 0.25:
 		return _failure("Komm näher und halte Sichtkontakt.")
+	_observe(actor)
 	var data: Dictionary = entry()
 	if data["relation"] == "ally":
 		return _failure("Diese Kreatur ist bereits mit dir befreundet.")
@@ -78,6 +79,7 @@ func befriend(actor: Node, delta: float) -> Dictionary:
 func help(actor: Node) -> Dictionary:
 	if not can_reach(actor, 3.6):
 		return _failure("Zum Helfen näher herangehen und Sichtkontakt halten.")
+	_observe(actor)
 	var data: Dictionary = entry()
 	if help_cooldown > 0.0:
 		return _failure("Einen Moment warten.")
@@ -112,6 +114,7 @@ func help(actor: Node) -> Dictionary:
 func receive_player_attack(damage: float, actor: Node) -> bool:
 	if not can_reach(actor, actor.bite_reach + 0.35) or not is_finite(damage) or damage <= 0.0:
 		return false
+	_observe(actor)
 	var data: Dictionary = entry()
 	if str(data["conflict_relation"]).is_empty():
 		if data["relation"] == "hostile":
@@ -187,3 +190,11 @@ func store_carcass() -> bool:
 
 static func _failure(message: String) -> Dictionary:
 	return {"ok": false, "message": message}
+
+
+func _observe(actor: Node) -> void:
+	# Keep the existing discovery producer available to the separate species book.
+	var progression := get_node("/root/ProgressionService")
+	var key: String = "%d:%d" % [get_node("/root/GameState").get_world_seed(), creature.species_seed]
+	if not progression.discovered_species.has(key):
+		creature._register_discovery(actor)

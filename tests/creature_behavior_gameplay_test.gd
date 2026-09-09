@@ -46,6 +46,7 @@ func _run() -> void:
 	await _help_loop()
 	await _combat_loop()
 	await _reload_and_guardrails()
+	await _actual_streamer_identity()
 	_phase_preview_and_migration()
 	await _dispose_wildlife()
 	player.queue_free()
@@ -94,6 +95,7 @@ func _social_loop() -> void:
 	first_identity = wildlife.get_campaign_identity()
 	first_duration = _befriend(social)
 	_expect(_earned("social") == 3 and reward_count == 1, "Real befriending did not earn exactly three points.")
+	_expect(progression.get_discovered_species_count() == 1, "Real social contact bypassed existing species discovery.")
 	_expect(social.entry()["relation"] == "ally", "Befriending did not persist an ally.")
 	var disk: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(TEST_SAVE))
 	_expect(disk["progression"]["creature_encounters"]["entries"][first_identity["object_id"]]["relation"] == "ally", "Reward committed without the relationship.")
@@ -243,6 +245,79 @@ func _verify_restart() -> void:
 	_expect(JSON.parse_string(JSON.stringify(progression.export_state())) == expected.get("progression"), "Fresh process changed relationships, rewards or purchases.")
 	if failures.is_empty():
 		print("Creature behavior restart passed")
+
+
+func _actual_streamer_identity() -> void:
+	await _dispose_wildlife()
+	var old_position: Vector3 = player.position
+	var generator := root.get_node("WorldGenerator")
+	player.position = preload("res://world/generation/adventure_spawn_selector.gd").find_spawn(generator)
+	var center: Vector3 = player.position
+	var streamer: Node3D = load("res://world/fauna/fauna_streamer_v7.gd").new()
+	root.add_child(streamer)
+	streamer.set_process(false)
+	await process_frame
+	streamer._bind_runtime_services()
+	for attempt in range(150):
+		streamer._spawn_one_creature()
+		if not streamer._active_fauna.is_empty():
+			break
+	_expect(not streamer._active_fauna.is_empty(), "Normal fauna streamer could not populate a valid habitat.")
+	if streamer._active_fauna.is_empty():
+		streamer.queue_free()
+		await process_frame
+		return
+	var target: Node3D = streamer._active_fauna[0]
+	target.set_physics_process(false)
+	var identity: Dictionary = target.get_campaign_identity()
+	var social: Node = target.get_node("SocialBehavior")
+	player.position = target.position + Vector3(0, 0, 2.0)
+	await physics_frame
+	await process_frame
+	# Persist a real action for whichever role the actual biome chooses.
+	if target.ecological_role != "predator":
+		_befriend(social)
+	else:
+		player._bite_cooldown_timer = 0.0
+		behavior.reset_stamina()
+		_expect(player.perform_bite_on_target(target), "Streamed predator could not receive a real attack.")
+	var expected: Dictionary = social.entry()
+	_expect(expected.has("habitat"), "Normal streamer did not persist its habitat descriptor.")
+	var earned_before: Dictionary = progression.get_behavior_wallet(0)["earned"]
+	streamer.queue_free()
+	await process_frame
+	await physics_frame
+	player.position = center
+	_expect(saves.load_now(), "Could not reload streamed encounter.")
+	player.position = center
+	streamer = load("res://world/fauna/fauna_streamer_v7.gd").new()
+	root.add_child(streamer)
+	streamer.set_process(false)
+	await process_frame
+	streamer._bind_runtime_services()
+	streamer._spawn_serial = 997
+	var restored: Node3D
+	for attempt in range(250):
+		streamer._spawn_one_creature()
+		for creature in streamer._active_fauna:
+			creature.set_physics_process(false)
+			if creature.get_campaign_identity()["object_id"] == identity["object_id"]:
+				restored = creature
+		if restored != null:
+			break
+	_expect(restored != null, "Different spawn order never restored the touched habitat.")
+	if restored != null:
+		_expect(restored.get_campaign_identity() == identity and restored.get_node("SocialBehavior").entry() == expected, "Normal streaming changed species, identity, health or relationship.")
+		_expect(progression.get_behavior_wallet(0)["earned"] == earned_before, "Normal streaming awarded points on respawn.")
+	var seen: Dictionary = {}
+	for creature in streamer._active_fauna:
+		var object_id: String = creature.get_campaign_identity()["object_id"]
+		_expect(not seen.has(object_id), "Normal streamer duplicated a living habitat identity.")
+		seen[object_id] = true
+	streamer.queue_free()
+	await process_frame
+	player.position = old_position
+	await _spawn(34)
 
 
 func _phase_preview_and_migration() -> void:

@@ -282,6 +282,10 @@ func get_creature_encounter(identity: Dictionary, role: String, individual_seed:
 	return _encounters.get_entry(identity, role, individual_seed)
 
 
+func get_saved_creature_encounter(object_id: String) -> Dictionary:
+	return _encounters.entries.get(object_id, {}).duplicate(true)
+
+
 ## Partial trust/health changes schedule a snapshot; completed actions commit now.
 func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcome: String = "", context: Dictionary = {}) -> Dictionary:
 	if is_behavior_transaction_active():

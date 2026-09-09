@@ -479,5 +479,33 @@
         "seconds": 1.643
       }
     ]
-  }
+  },
+  "streaming_and_discovery": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "creature_behavior_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.134
+      },
+      {
+        "name": "gameplay_acceptance_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.908
+      },
+      {
+        "name": "meta_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.71
+      }
+    ]
+  },
+  "initial_ci_findings": [
+    "Physical F/K, earning and purchase passed; graphical help assertion assumed fixed hunger before deferred body stats. Fixture corrected.",
+    "Windows initial run crashed after existing packaged_creature_builder_v7_test reported success; rerun on amended code required.",
+    "Normal spawner identity strengthened to persistent habitat cells; verified with changed spawn serial."
+  ]
 }

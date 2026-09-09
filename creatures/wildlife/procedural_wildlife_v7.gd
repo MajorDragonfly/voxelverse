@@ -13,6 +13,7 @@ const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 @export var individual_seed: int = 1
 @export var region_coordinates: Vector2i = Vector2i.ZERO
 @export var requested_role: String = "auto"
+var habitat_cell: String = ""
 @export_range(0.5, 8.0, 0.1) var base_move_speed: float = 1.7
 @export_range(0.5, 12.0, 0.5) var gravity_strength: float = 18.0
 @export_range(0.1, 1.0, 0.05) var visual_scale_min: float = 0.42
@@ -53,12 +54,14 @@ func configure(
 	new_species_seed: int,
 	new_individual_seed: int,
 	new_region_coordinates: Vector2i = Vector2i.ZERO,
-	new_role: String = "auto"
+	new_role: String = "auto",
+	new_habitat_cell: String = ""
 ) -> void:
 	species_seed = new_species_seed
 	individual_seed = new_individual_seed
 	region_coordinates = new_region_coordinates
 	requested_role = new_role
+	habitat_cell = new_habitat_cell
 
 
 func _ready() -> void:
@@ -416,6 +419,7 @@ func _create_campaign_identity() -> Dictionary:
 	var campaign = state.get("campaign")
 	var body: Dictionary = state.call("get_current_body")
 	var region: String = campaign.region_id(body["id"], region_coordinates)
-	return {"object_id": campaign.object_id(region, "wildlife:%d:%d" % [species_seed, individual_seed]),
+	return {"object_id": campaign.object_id(region, "wildlife:%d:%d" % [species_seed, individual_seed] if habitat_cell.is_empty() else "habitat:" + habitat_cell),
 		"species_id": campaign.species_id(body["id"], species_seed), "body_id": body["id"], "region_id": region,
+		"habitat_cell": habitat_cell, "species_seed": species_seed,
 		"design_ref": {"design_id": blueprint.get("design_id", ""), "revision": 0}}

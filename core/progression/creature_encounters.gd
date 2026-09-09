@@ -16,6 +16,10 @@ func import_state(value: Dictionary) -> bool:
 	if not validate_state(value).is_empty():
 		return false
 	entries = value["entries"].duplicate(true)
+	for entry in entries.values():
+		if entry.has("habitat"):
+			entry["habitat"]["species_seed"] = int(entry["habitat"]["species_seed"])
+			entry["habitat"]["individual_seed"] = int(entry["habitat"]["individual_seed"])
 	return true
 
 
@@ -26,12 +30,16 @@ func get_entry(identity: Dictionary, role: String, individual_seed: int) -> Dict
 	# A deterministic environmental injury gives helping a genuine, finite need.
 	# Merely spawning an animal does not grow the persistent encounter ledger.
 	var injured: bool = role != "predator" and posmod(individual_seed, 5) == 0
-	return {"object_id": key, "species_id": str(identity.get("species_id", "")),
+	var result := {"object_id": key, "species_id": str(identity.get("species_id", "")),
 		"body_id": str(identity.get("body_id", "")), "region_id": str(identity.get("region_id", "")),
 		"relation": "hostile" if role == "predator" else "wild", "trust": 0.0,
 		"health_ratio": 0.55 if injured else 1.0, "need_origin": "environment" if injured else "none",
 		"player_harmed": false, "conflict_relation": "", "conflict_reason": "",
 		"dead": false, "carcass_food": 0.0}
+	if identity.has("habitat_cell") and not str(identity["habitat_cell"]).is_empty():
+		result["habitat"] = {"cell": identity["habitat_cell"], "role": role,
+			"species_seed": identity["species_seed"], "individual_seed": individual_seed}
+	return result
 
 
 func put(entry: Dictionary) -> bool:
@@ -83,4 +91,10 @@ static func validate_entry(entry: Variant) -> String:
 		return "Inconsistent creature death."
 	if entry["relation"] == "ally" and float(entry["trust"]) < 100.0:
 		return "Incomplete ally relationship."
+	if entry.has("habitat"):
+		var habitat: Variant = entry["habitat"]
+		if not habitat is Dictionary or not habitat.get("cell") is String or habitat["cell"].is_empty() or habitat["cell"].length() > 64 or habitat.get("role") not in ["forager", "grazer", "scavenger", "predator", "climber", "swimmer"]:
+			return "Invalid persistent habitat."
+		if not Rules.is_integer(habitat.get("species_seed"), 0, 9007199254740991) or not Rules.is_integer(habitat.get("individual_seed"), 0, 2147483647):
+			return "Invalid persistent habitat seed."
 	return ""

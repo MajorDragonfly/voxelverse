@@ -3,6 +3,7 @@ extends Node3D
 const WILDLIFE_SCENE: PackedScene = preload(
 	"res://creatures/wildlife/procedural_wildlife_v7.tscn"
 )
+const HABITAT_SIZE: float = 12.0
 
 # Visible animals are only representatives of compact regional populations.
 # Their species and ecological roles come from RegionBackgroundSimulationV7.
@@ -67,6 +68,16 @@ func _spawn_one_creature() -> void:
 		)
 		var world_x: float = _player.global_position.x + cos(angle) * radius
 		var world_z: float = _player.global_position.z + sin(angle) * radius
+		# Candidate order may vary, but each habitat has stable placement and ID.
+		# It must not inherit a new individual from the transient spawn serial.
+		var habitat := Vector2i(floori(world_x / HABITAT_SIZE), floori(world_z / HABITAT_SIZE))
+		var cell_key: String = "%d:%d" % [habitat.x, habitat.y]
+		var slot_random := RandomNumberGenerator.new()
+		slot_random.seed = int((str(WorldGenerator.get_world_seed()) + ":" + cell_key).sha256_text().left(8).hex_to_int())
+		world_x = (float(habitat.x) + slot_random.randf_range(0.3, 0.7)) * HABITAT_SIZE
+		world_z = (float(habitat.y) + slot_random.randf_range(0.3, 0.7)) * HABITAT_SIZE
+		if Vector2(world_x - _player.global_position.x, world_z - _player.global_position.z).length() < minimum_spawn_radius:
+			continue
 		var height: float = WorldGenerator.get_terrain_height(world_x, world_z)
 		if height <= WorldGenerator.get_water_level(world_x, world_z) + 0.45:
 			continue
@@ -85,11 +96,22 @@ func _spawn_one_creature() -> void:
 			floori(world_x / species_region_size),
 			floori(world_z / species_region_size)
 		)
-		var species_entry: Dictionary = _choose_species_entry(
-			region_coordinates,
-			random.randf(),
-			WorldGenerator.get_biome_composition(world_x, world_z, height).get("fauna_weights", {})
-		)
+		var state := get_node("/root/GameState")
+		var body_id: String = state.get_current_body()["id"]
+		var region_id: String = state.campaign.region_id(body_id, region_coordinates)
+		var object_id: String = state.campaign.object_id(region_id, "habitat:" + cell_key)
+		if _has_active_identity(object_id):
+			continue
+		var saved: Dictionary = get_node("/root/ProgressionService").get_saved_creature_encounter(object_id)
+		if saved.get("dead", false) and float(saved.get("carcass_food", 0.0)) <= 0.0:
+			continue
+		var species_entry: Dictionary
+		if saved.has("habitat"):
+			species_entry = saved["habitat"].duplicate(true)
+			species_entry["population"] = 1.0
+		else:
+			species_entry = _choose_species_entry(region_coordinates, slot_random.randf(),
+				WorldGenerator.get_biome_composition(world_x, world_z, height).get("fauna_weights", {}))
 		if species_entry.is_empty():
 			continue
 		var population: float = float(species_entry.get("population", 0.0))
@@ -99,11 +121,7 @@ func _spawn_one_creature() -> void:
 		var role: String = str(species_entry.get("role", "forager"))
 		if not _role_matches_biome(role, biome):
 			continue
-		var individual_seed: int = absi(
-			species_seed
-			+ _spawn_serial * 32_452_843
-			+ attempt * 97_409
-		)
+		var individual_seed: int = int(saved["habitat"]["individual_seed"]) if saved.has("habitat") else int(slot_random.randi() % 2147483647)
 
 		var creature := WILDLIFE_SCENE.instantiate() as Node3D
 		if creature == null:
@@ -114,7 +132,8 @@ func _spawn_one_creature() -> void:
 				species_seed,
 				individual_seed,
 				region_coordinates,
-				role
+				role,
+				cell_key
 			)
 		creature.set_meta("region_coordinates", region_coordinates)
 		creature.set_meta("species_seed", species_seed)
@@ -127,6 +146,13 @@ func _spawn_one_creature() -> void:
 		)
 		_active_fauna.append(creature)
 		return
+
+
+func _has_active_identity(object_id: String) -> bool:
+	for creature in _active_fauna:
+		if is_instance_valid(creature) and creature.get_campaign_identity().get("object_id") == object_id:
+			return true
+	return false
 
 
 func _choose_species_entry(

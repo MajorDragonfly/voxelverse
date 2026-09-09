@@ -60,6 +60,9 @@ func _run() -> void:
 	player.camera_pivot.rotation = Vector3.ZERO
 	player.fall_acceleration = 0.0
 	await _frames()
+	# RuntimeVisual installs body-derived metabolism on a deferred frame.
+	player.hunger_loss_per_second = 0.0
+	player.thirst_loss_per_second = 0.0
 	ui = player.get_node("ProgressionHUD/PlayerProgression")
 	await _spawn(11)
 	_expect(Input.mouse_mode == Input.MOUSE_MODE_CAPTURED, "Real mouse capture failed.")
@@ -101,8 +104,9 @@ func _run() -> void:
 	await _capture("tribe_preview.png")
 	await _tap(KEY_ESCAPE)
 	await _spawn(10)
+	var hunger_before: float = player.current_hunger
 	await _tap(KEY_H)
-	_expect(is_equal_approx(animal.get_health_ratio(), 0.85) and is_equal_approx(player.current_hunger, 88.0), "Real H input did not trade food for care.")
+	_expect(is_equal_approx(animal.get_health_ratio(), 0.85) and is_equal_approx(player.current_hunger, hunger_before - 12.0), "Real H input did not trade food for care.")
 	await create_timer(0.9).timeout
 	await _tap(KEY_H)
 	_expect(root.get_node("ProgressionService").get_behavior_wallet(0)["earned"]["social"] == 5, "Real care input did not complete the injury reward.")
