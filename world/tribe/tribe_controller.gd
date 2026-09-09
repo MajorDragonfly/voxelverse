@@ -552,10 +552,13 @@ func _physics_process(delta: float) -> void:
 			target = _construction_workplace(target, index) if construction else _workplace(target, index)
 		var arrived: bool = _walk(actor, str(member["id"]), target, delta, minf(float(member["hunger"]), float(member["hydration"])))
 		member["position"] = Space.encode(self, actor.global_position)
-		if actor == player:
-			player.current_hunger = float(member["hunger"])
 		if arrived:
 			_work(member, simulation_delta)
+		if actor == player:
+			# The resident owns both needs, including this tick's meal/drink.
+			# Keep the exported traveler consistent with that authoritative state.
+			player.current_hunger = player.maximum_hunger * float(member["hunger"]) / 100.0
+			player.current_thirst = player.maximum_thirst * float(member["hydration"]) / 100.0
 	_update_selection()
 	_shelters.clear_entrances(actors)
 	husbandry.tick(simulation_delta)

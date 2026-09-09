@@ -31,8 +31,15 @@ func _run() -> void:
 	var member_id: String = tribe.village().members[1].id
 	tribe.select_member(member_id)
 	_expect(tribe.issue_order("wood"), "Companion could not accept real work.")
-	flow.toggle_pause()
 	var data: Dictionary = tribe.village()
+	data.members[0].hunger = 57.0
+	data.members[0].hydration = 63.0
+	tree.current_scene.player.current_health = tree.current_scene.player.maximum_health * 0.73
+	await tree.physics_frame
+	await tree.physics_frame
+	var needs: Dictionary = tree.current_scene.player.export_runtime_state()
+	_expect(absf(float(needs.hunger_ratio) * 100.0 - float(data.members[0].hunger)) < 0.01 and absf(float(needs.thirst_ratio) * 100.0 - float(data.members[0].hydration)) < 0.01, "Traveler export diverged from the resident's actual food/water needs.")
+	flow.toggle_pause()
 	# Preserve a conserved outstanding cargo while the other resident works.
 	data.deposits.stone.remaining -= 1
 	data.members[2].cargo = "stone"
@@ -48,6 +55,8 @@ func _run() -> void:
 	if not _expect_world(): await _finish(); return
 	var b: String = state.active_body_id
 	_expect(a != b and state.world_seed == 15838 and state.campaign.data.bodies.size() == 2, "Same-seed target reused source identity.")
+	var arrived_needs: Dictionary = tree.current_scene.player.export_runtime_state()
+	_expect(absf(float(arrived_needs.hunger_ratio) - float(needs.hunger_ratio)) < 0.005 and absf(float(arrived_needs.thirst_ratio) - float(needs.thirst_ratio)) < 0.005 and absf(float(arrived_needs.health_ratio) - 0.73) < 0.005, "Departure replaced the traveler's needs/health with a fresh body's defaults: " + str({"before": [needs.hunger_ratio, needs.thirst_ratio, needs.health_ratio], "after": [arrived_needs.hunger_ratio, arrived_needs.thirst_ratio, arrived_needs.health_ratio]}))
 	_expect(not is_instance_id_valid(old_scene_id), "Source world host survived arrival.")
 	_expect(state.campaign.body_record(a).village_simulation.owner == "far", "Departure left two near simulation owners.")
 	await _until(func() -> bool: return state.campaign.body_record(a).tribe.stock.wood > 0, 22000)
@@ -55,6 +64,9 @@ func _run() -> void:
 	_expect(remote.tribe.stock.wood > 0, "Absent companion did not complete physical-route work/return.")
 	_expect(remote.tribe.stock.stone == 0 and remote.tribe.members[2].cargo == "stone", "Remote waiting cargo was automatically credited.")
 	flow.toggle_pause()
+	# Distinct live needs on B must replace the old traveler values retained on A.
+	tree.current_scene.player.current_hunger = tree.current_scene.player.maximum_hunger * 0.46
+	tree.current_scene.player.current_thirst = tree.current_scene.player.maximum_thirst * 0.41
 	var paused: String = Migration.fingerprint(state.export_state())
 	for index in range(15): await tree.process_frame
 	_expect(Migration.fingerprint(state.export_state()) == paused, "Pause advanced remote work.")
@@ -65,6 +77,7 @@ func _run() -> void:
 	await _until(func() -> bool: return tribe.is_active() and not tribe.navigation.pending, 18000)
 	_expect(state.active_body_id == a and state.get_current_body().village_simulation.owner == "near", "Return did not reclaim exclusive near ownership.")
 	_expect(tribe.is_active() and tribe.actors.size() == 3 and tribe.member_record(member_id).order == "wood", "Return duplicated residents or lost their job.")
+	_expect(absf(float(tribe.village().members[0].hunger) - 46.0) < 0.5 and absf(float(tribe.village().members[0].hydration) - 41.0) < 0.5, "Return restored stale local food/water needs instead of the traveler's current state.")
 	tribe.select_all()
 	tribe.issue_order("wait")
 	flow.toggle_pause()

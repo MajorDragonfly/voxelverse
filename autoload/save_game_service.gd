@@ -1032,6 +1032,7 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 	for field in ["surface_address", "surface_forward", "surface_pitch"]:
 		if visited.has(field): player[field] = visited[field].duplicate(true) if visited[field] is Dictionary or visited[field] is Array else visited[field]
 	if not player.has("surface_address"): player.surface_address = target.surface_context.spawn.duplicate(true)
+	if not player.has("surface_pitch"): player.surface_pitch = -0.18
 	player.surface_velocity = [0.0, 0.0, 0.0]
 	if not player.has("surface_forward"):
 		var address: Dictionary = player.surface_address
@@ -1040,7 +1041,12 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 	if target.has("tribe"):
 		# The player traveled; remote residents retained their own needs and cargo.
 		target.tribe.members[0].hunger = float(player.get("hunger_ratio", 1.0)) * 100.0
+		target.tribe.members[0].hydration = float(player.get("thirst_ratio", 1.0)) * 100.0
 		player.surface_address = target.tribe.members[0].position.duplicate(true)
+	var player_problem: String = Surface.player_problem(player, target)
+	if not player_problem.is_empty():
+		last_error = player_problem
+		return false
 	if not state.activate_body(target.id, system_seed, planet_index): return false
 	_pending_player_state = player
 	_last_player_state = player.duplicate(true)
