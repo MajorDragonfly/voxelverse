@@ -29,6 +29,8 @@ Der Entwicklungsstand der anderen Chats ist relevant. Die folgende Prüfung bezi
 
 Es wurden weder diese Fremdbranches noch `main` oder PR #9 zusammengeführt. Der Gruppenvertrag wird mit einem gespeicherten Beispiel geprüft, das unverändert durch `home_group_state.create` aus dem veröffentlichten PR-20-Quelltext erzeugt wurde. Das ist ein Vertragstest, keine behauptete gemeinsame Spielabnahme.
 
+Beim Artenbuch ist die konkrete Überschneidung geprüft: #19 entfernt das eingebettete `_journal` und übergibt über `_open_journal()` die Pause an das gemeinsame Buch. Bei der Integration diesen Buchweg behalten, `_show_development()` und die Phasenauswahl ergänzen und die Kontextzeile an die gemeinsame Seitennavigation anpassen. Der Skilltree-Tab muss dabei wieder die Baumansicht öffnen; nur den Scrollwert zurückzusetzen genügt mit dem neuen Entwicklungspfad nicht mehr. Anschließend K/J, Buchwechsel, Entwicklungspfad, Esc und Speichern/Laden gemeinsam prüfen.
+
 ## Daten und Besitz
 
 `ProgressionService.get_development_path()` liest ausschließlich den vorhandenen Körperdatensatz der aktuellen Welt. `core/progression/development_path.gd` prüft die veröffentlichte Struktur `campaign.bodies[integer_seed_as_string].home_group`: Version, Körper-/Spezies-/Gruppenkennung, Oberfläche, zwei eindeutige Mitglieder, Befehle und endliche Ortsdaten.
@@ -52,4 +54,6 @@ Der Gebäudeeditor soll später eigene Bauformen liefern. Diese Fortschrittsarbe
 
 `tools/review_player_progression.py --development` prüft zusätzlich sechs native Viewport-Aufnahmen bei 1600 × 900 und 800 × 900. Der Exportprüfer führt denselben Test außerhalb des Projekts gegen das tatsächlich exportierte PCK aus; das Testbeispiel liegt nur im separaten Prüfverzeichnis und wird nicht in die Spielkampagne eingeschleust.
 
-Abschließende Ergebnisse: `validation/development-path.json`.
+Geprüfter Laufzeitstand: `000138882c4a738e697203e54318730c4645e7e9`, Dateibaum `52047958dcd91f62f70eff08fba29e52fec02c97`, [Draft-PR #23](https://github.com/MajorDragonfly/voxelverse/pull/23) auf PR #17. **53/53 [Projektprüfungen](https://github.com/MajorDragonfly/voxelverse/actions/runs/34325321229)** und jeweils **15/15 [Windows-/Linux-Exportprüfungen](https://github.com/MajorDragonfly/voxelverse/actions/runs/34325321214)** bestanden. Die [grafische Abnahme](https://github.com/MajorDragonfly/voxelverse/actions/runs/34325321237) besteht mit sechs neuen und elf bestehenden Aufnahmen. Alle sechs neuen Ansichten und der Kreaturenbaum bei 1280 × 720 wurden visuell kontrolliert; schmale Ansichten scrollen ohne überlagerte Bedienelemente. Vollständige Ergebnisse: `validation/development-path.json`.
+
+Testpakete dieses Skilltree-Zweigs: [Windows](https://github.com/MajorDragonfly/voxelverse/actions/runs/34325321214/artifacts/10093557037) · [Linux](https://github.com/MajorDragonfly/voxelverse/actions/runs/34325321214/artifacts/10093544662). Das enthaltene Spiel-ZIP vollständig entpacken. Neue Entwicklungen anderer Chats sind nicht automatisch Teil dieses Builds. Manueller Spieltest auf dem Ziel-PC bleibt offen.
