@@ -1,6 +1,8 @@
 extends RefCounted
 const Contract = preload("res://world/fauna/domestication/domestication_contract.gd")
 const Generator = preload("res://world/fauna/domestication/domestic_species_generator.gd")
+const BodyEvidence = preload("res://world/fauna/domestication/domestic_body_evidence.gd")
+const Recovery = preload("res://world/fauna/domestication/domestic_habitat_recovery.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const REPLACEMENT_SECONDS: float = 300.0
 
@@ -52,8 +54,10 @@ static func has_unsupported(value: Variant) -> bool:
 		return false
 	if not Contract.integer(value.get("schema"), 1, 1) or value.get("generator_version") != Contract.GENERATOR_VERSION:
 		return true
+	if value.has("habitat_recovery") and Recovery.unsupported(value["habitat_recovery"]): return true
 	if not value.get("species") is Array: return false
 	for entry in value.get("species", []):
+		if entry is Dictionary and BodyEvidence.unsupported(entry): return true
 		if entry is Dictionary and entry.get("domestication") is Dictionary and not Contract.integer(entry["domestication"].get("schema"), 1, 1):
 			return true
 	return false
@@ -90,6 +94,8 @@ static func validate(value: Variant, body: Dictionary) -> String:
 			if part.get("category") == "legs" and part.get("end_part_id") in ["feet_pads", "feet_hooves"]:
 				legs += 2 if part.get("mirrored", false) else 1
 		if legs < 4: return "Domestic species lacks support feet."
+		problem = BodyEvidence.validate(entry)
+		if not problem.is_empty(): return problem
 		groups.append(entry["group"])
 		identities.append(entry["id"])
 	var keys: Array = []
@@ -112,6 +118,8 @@ static func validate(value: Variant, body: Dictionary) -> String:
 		if habitat["species_id"] not in represented: represented.append(habitat["species_id"])
 	if value.get("habitat_status") not in ["pending", "ready", "unavailable"] or (value["habitat_status"] == "ready" and represented.size() != 3):
 		return "Mandatory habitats are incomplete."
+	if value.has("habitat_recovery"):
+		return Recovery.validate(value["habitat_recovery"], value)
 	return ""
 
 static func vector(value: Variant) -> bool:

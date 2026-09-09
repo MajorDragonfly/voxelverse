@@ -11,6 +11,7 @@ import tempfile
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--godot', required=True)
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--probe', choices=('d1', 'd11'), default='d1')
 args = parser.parse_args()
 project = Path(__file__).resolve().parents[1]
 args.output.mkdir(parents=True, exist_ok=True)
@@ -18,8 +19,10 @@ results = []
 with tempfile.TemporaryDirectory(prefix='voxelverse-d1-restart-') as userdata:
     for mode in ('write', 'read'):
         env = dict(os.environ, XDG_DATA_HOME=userdata, D1_RESTART_MODE=mode)
+        probe = ('res://tools/domestic_fauna_d11_restart_probe.gd' if args.probe == 'd11'
+                 else 'res://tools/domestic_fauna_restart_probe.gd')
         process = subprocess.run([args.godot, '--headless', '--path', str(project), '--script',
-                                  'res://tools/domestic_fauna_restart_probe.gd'], env=env, text=True,
+                                  probe], env=env, text=True,
                                  stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=120)
         (args.output / f'restart-{mode}.log').write_text(process.stdout)
         passed = process.returncode == 0 and not re.search(r'SCRIPT ERROR|(?:^|\n)ERROR:|ObjectDB instances leaked', process.stdout)

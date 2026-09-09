@@ -1,9 +1,14 @@
 extends RefCounted
 const Catalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const Planner = preload("res://world/fauna/domestication/domestic_habitat_planner.gd")
+const BodyEvidence = preload("res://world/fauna/domestication/domestic_body_evidence.gd")
+const Recovery = preload("res://world/fauna/domestication/domestic_habitat_recovery.gd")
 const Bush = preload("res://world/resources/plants/berry_bush.tscn")
 var catalog: Dictionary = {}
 var planner: RefCounted
+var recovery: RefCounted
+var next_recovery_save: int = 0
+var body_check_usec: Dictionary = {}
 var body_id: String = ""
 var plants: Dictionary = {}
 var next_food_retry: int = 0
@@ -13,6 +18,9 @@ var object_is_reserved: Callable
 func reset(streamer: Node3D) -> void:
 	catalog = {}
 	planner = null
+	recovery = null
+	next_recovery_save = 0
+	body_check_usec.clear()
 	body_id = ""
 	for fauna in streamer._active_fauna:
 		if is_instance_valid(fauna) and not fauna.catalog_species.is_empty(): fauna.queue_free()
@@ -43,6 +51,16 @@ func update(streamer: Node3D) -> void:
 			planner = null
 			streamer.get_node("/root/SaveGameService").schedule_autosave()
 	if catalog.is_empty(): return
+	if catalog["habitat_status"] == "unavailable":
+		if recovery == null:
+			recovery = Recovery.new()
+			recovery.begin(streamer.get_node("/root/WorldGenerator"), catalog)
+		if recovery.data["status"] == "searching":
+			recovery.step(streamer.get_node("/root/WorldGenerator"), catalog, 16, 2000)
+			# In-memory progress is always in the campaign; batch disk scheduling.
+			if Time.get_ticks_msec() >= next_recovery_save or recovery.data["status"] != "searching":
+				next_recovery_save = Time.get_ticks_msec() + 5000
+				streamer.get_node("/root/SaveGameService").schedule_autosave()
 	var now: float = state.campaign.data["elapsed_seconds"]
 	for habitat: Dictionary in catalog["habitats"]:
 		var identity: String = Catalog.object_id(state, habitat)
@@ -87,23 +105,38 @@ func try_spawn(streamer: Node3D) -> bool:
 		var distance: float = point.distance_to(streamer._player.global_position)
 		if distance > minf(streamer.despawn_radius - 4.0, maxf(streamer.maximum_spawn_radius, 40.0)) or distance < streamer.minimum_spawn_radius: continue
 		var entry: Dictionary = Catalog.species_for(catalog, habitat["species_id"])
+		if entry.has("body_evidence") and not BodyEvidence.approved(entry): continue
 		var floor: Dictionary = habitat_placement(streamer, generator, habitat, float(entry["visual_scale"]))
 		if floor.is_empty(): continue
 		# Reserve three of the existing population slots; ordinary fauna cannot
 		# indefinitely starve a mandatory role. The global maximum stays intact.
+		var victim: Node3D = null
 		if streamer._active_fauna.size() >= mini(streamer.target_population, streamer.maximum_population):
-			var victim: Node3D = null
 			for animal in streamer._active_fauna:
 				if is_instance_valid(animal) and (animal.catalog_species.is_empty() or animal.is_dead):
 					if victim == null or animal.global_position.distance_squared_to(streamer._player.global_position) > victim.global_position.distance_squared_to(streamer._player.global_position): victim = animal
 			if victim == null: return false
-			streamer._active_fauna.erase(victim)
-			victim.queue_free()
 		var animal: Node3D = streamer.WILDLIFE_SCENE.instantiate()
 		var region := Vector2i(floori(point.x / 256.0), floori(point.z / 256.0))
 		var individual_seed: int = int(object_identity.sha256_text().left(8).hex_to_int() % 2147483647)
 		animal.configure(int(entry["species_seed"]), individual_seed, region, entry["role"], Catalog.cell_key(habitat), entry)
 		streamer.add_child(animal)
+		if not entry.has("body_evidence"):
+			for species: Dictionary in catalog["species"]:
+				if species["id"] != entry["id"]: continue
+				var started: int = Time.get_ticks_usec()
+				BodyEvidence.confirm(species, streamer, animal._preview)
+				body_check_usec[species["id"]] = Time.get_ticks_usec() - started
+				entry["body_evidence"] = species["body_evidence"].duplicate(true)
+				animal.catalog_species["body_evidence"] = entry["body_evidence"].duplicate(true)
+				streamer.get_node("/root/SaveGameService").schedule_autosave()
+				break
+		if not BodyEvidence.approved(entry):
+			animal.free()
+			return false
+		if victim != null:
+			streamer._active_fauna.erase(victim)
+			victim.queue_free()
 		animal.global_position = floor["position"] + Vector3.UP * 0.05
 		habitat["spawn_position"] = [floor["position"].x, floor["position"].y, floor["position"].z]
 		streamer._active_fauna.append(animal)

@@ -47,8 +47,10 @@ static func resolve(blueprint: Dictionary, skin: ArrayMesh = null) -> Dictionary
 	return result
 
 
-static func describe(blueprint: Dictionary) -> Dictionary:
-	var resolved: Dictionary = resolve(blueprint)
+static func describe(blueprint: Dictionary, skin: ArrayMesh = null) -> Dictionary:
+	# Optional skin must belong to this blueprint, as in resolve(). Runtime
+	# consumers can reuse the actual rendered mesh instead of voxelizing twice.
+	var resolved: Dictionary = resolve(blueprint, skin)
 	var sockets: Dictionary = {}
 	for id in resolved["sockets"]:
 		sockets[id] = encode_transform(resolved["sockets"][id])

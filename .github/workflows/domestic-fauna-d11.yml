@@ -1,0 +1,58 @@
+name: Domestic fauna D1.1
+on:
+  push:
+    branches: ["agent/d11-fauna-body-evidence"]
+  pull_request:
+    paths:
+      - "world/fauna/**"
+      - "creatures/runtime/**"
+      - "creatures/wildlife/**"
+      - "assembly/core/creature_body_attachments.gd"
+      - "autoload/save_game_service.gd"
+      - "tests/domestic*"
+      - "tests/fixtures/domestic_recovery_terrain*"
+      - "tools/*domestic_fauna*"
+      - ".github/workflows/domestic-fauna-d11.yml"
+jobs:
+  evidence-and-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install verified engine with bounded download retries
+        run: |
+          for attempt in 1 2 3; do
+            if python tools/install_godot.py --directory "${{ runner.temp }}/godot" --platform linux; then
+              exit 0
+            fi
+          done
+          exit 1
+      - name: Verify anatomy, terrain routes and actual spawns
+        run: >-
+          python tools/validate_godot.py
+          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --tests domestication_contract_test domestic_body_evidence_test
+          domestic_fauna_catalog_test domestic_habitat_recovery_test
+          domestic_fauna_runtime_test domestic_habitat_runtime_test creature_body_contract_test
+          --skip-main --output "${{ runner.temp }}/d11-checks"
+      - name: Verify original D1 continuity in separate processes
+        run: >-
+          python tools/validate_domestic_fauna.py
+          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --output "${{ runner.temp }}/d1-restart"
+      - name: Verify D1.1 recovery and evidence across process restart
+        run: >-
+          python tools/validate_domestic_fauna.py --probe d11
+          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --output "${{ runner.temp }}/d11-restart"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: domestic-fauna-d11-checks
+          path: |
+            ${{ runner.temp }}/d11-checks
+            ${{ runner.temp }}/d1-restart
+            ${{ runner.temp }}/d11-restart

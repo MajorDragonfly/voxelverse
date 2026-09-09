@@ -1,6 +1,7 @@
 extends SceneTree
 const Catalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const Contract = preload("res://world/fauna/domestication/domestication_contract.gd")
+const Evidence = preload("res://world/fauna/domestication/domestic_body_evidence.gd")
 var failures: Array[String] = []
 func _initialize() -> void: call_deferred("run")
 func run() -> void:
@@ -51,6 +52,7 @@ func run() -> void:
 		if not is_instance_valid(animal) or animal.catalog_species.is_empty(): continue
 		animal.set_physics_process(false)
 		var entry: Dictionary = animal.catalog_species
+		check(Evidence.approved(entry), "Live spawn lacks verified anatomy")
 		check(Contract.validate(animal.get_inspection_data()["domestication"]).is_empty(), "Inspection missing actual suitability")
 		check(animal.get_campaign_identity()["species_id"] == entry["id"], "Runtime species identity mismatch")
 		check(animal.blueprint["species"]["id"] == entry["id"], "Runtime regenerated frozen blueprint")
@@ -58,7 +60,15 @@ func run() -> void:
 		check(is_equal_approx(animal._move_speed, float(entry["domestication"]["movement_speed"])), "Movement ignored species profile")
 		check(is_equal_approx(animal.sight_range, float(entry["domestication"]["perception_range"])), "Perception ignored species profile")
 		check(animal.get_node("SocialBehavior").entry()["relation"] == "wild", "Suitability automatically befriended animal")
-		bodies.append({"group": entry["group"], "legs": animal._preview._motion._legs.size(), "position": str(animal.position), "speed": animal._move_speed})
+		animal._preview.set_motion("edit")
+		animal._preview.rebuild()
+		var actual_rest: Dictionary = Evidence.Body.inspect_rest(animal._preview)
+		check(Evidence.assess(entry["body_evidence"]["body"], actual_rest, entry["group"]).is_empty(), "Live rest geometry differs from confirmed species")
+		if entry["group"] == "work":
+			for socket in Evidence.SOCKETS:
+				check(not animal._preview.body_socket(socket).is_empty(), "Live work animal lost " + socket)
+		bodies.append({"group": entry["group"], "legs": actual_rest["leg_count"], "position": str(animal.position), "speed": animal._move_speed,
+			"body_check_usec": streamer.domestic_fauna.body_check_usec.get(entry["id"], 0)})
 		identities.append(animal.get_campaign_identity()["object_id"])
 		var social: Dictionary = animal.get_node("SocialBehavior").entry()
 		check(root.get_node("ProgressionService").store_creature_encounter(social)["ok"], "Store visible identity")
@@ -72,6 +82,7 @@ func run() -> void:
 	streamer.domestic_fauna.update(streamer)
 	var reloaded: Dictionary = streamer.domestic_fauna.catalog
 	check(not reloaded.is_empty(), "Runtime failed to rebind loaded catalog")
+	for entry: Dictionary in reloaded.get("species", []): check(Evidence.approved(entry), "Save/load lost body evidence")
 	# Kill every representative habitat of one role and use simulation time.
 	if not reloaded.is_empty():
 		var species: Dictionary = reloaded["species"][0]
@@ -98,6 +109,23 @@ func run() -> void:
 		for old_id in old_ids:
 			check(root.get_node("ProgressionService").get_saved_creature_encounter(old_id)["dead"], "Recovery erased tombstone")
 		check(saves.save_now(), "Save recovery lifecycle")
+		# A malformed work candidate must not displace an animal or reach the
+		# simulation, and its rejected certificate must prevent repeated builds.
+		var work: Dictionary = reloaded["species"][1]
+		work.erase("body_evidence")
+		work["blueprint"]["assembly"]["body_attachments"]["sockets"]["saddle.primary"]["enabled"] = false
+		for habitat: Dictionary in reloaded["habitats"]:
+			if habitat["species_id"] != work["id"]: continue
+			var p: Array = habitat.get("spawn_position", habitat["position"])
+			player.global_position = Vector3(p[0], p[1], p[2]) + Vector3(0, 0, 15)
+			break
+		for attempt in range(8): streamer.domestic_fauna.try_spawn(streamer)
+		check(work.get("body_evidence", {}).get("status") == "rejected", "Unfit work body was not rejected by live spawn")
+		for animal in streamer._active_fauna:
+			check(animal.catalog_species.get("id") != work["id"], "Rejected work body entered active simulation")
+		var check_times: String = JSON.stringify(streamer.domestic_fauna.body_check_usec)
+		for attempt in range(8): streamer.domestic_fauna.try_spawn(streamer)
+		check(check_times == JSON.stringify(streamer.domestic_fauna.body_check_usec), "Rejected work body rebuilt on each spawn attempt")
 	print(JSON.stringify({"test": "domestic_fauna_runtime", "failures": failures, "bodies": bodies, "food_sources": live_food_sources}))
 	current_scene.queue_free()
 	for frame in range(12): await process_frame
