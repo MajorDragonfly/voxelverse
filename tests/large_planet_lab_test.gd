@@ -20,6 +20,7 @@ func _run() -> void:
 		var saved: Dictionary = Save.read()
 		_expect(lab.body_id == "m1b:terra" and lab.system.real_scale and lab.system.binary and lab.system.elapsed == 117.25, "Restart lost the large system or its clock.")
 		_expect(_distance(saved.location, lab.walker.location(), lab.system.bodies[lab.body_id].radius) < 0.001, "Restart lost the precise Earth location.")
+		_expect(saved.get("map_atlases", {}).has("m1b:terra"), "Lab restart lost planet exploration.")
 	else:
 		lab._open_body("m1b:terra")
 		lab.walker.enabled = false
@@ -28,6 +29,18 @@ func _run() -> void:
 		_expect(map != null, "Surface lab did not install the shared minimap.")
 		map._update_snapshot()
 		_expect(map.visible and map.projection.mode == Cube.MODE and map.projection.body_id == lab.body_id, "Earth map used the legacy plane.")
+		var atlas: CanvasLayer = map.atlas_window
+		atlas.tracker.update_exploration()
+		_expect(atlas.open_map() and paused, "Earth atlas did not open with the surface map.")
+		_expect(atlas.tracker.atlas.known(lab.walker.location()), "Earth atlas did not retain the visited surface.")
+		var fog: Dictionary = atlas.tracker.atlas.data.duplicate(true)
+		atlas._pan_pixels(Vector2(600, 0))
+		atlas.zoom(2)
+		_expect(atlas.tracker.atlas.data == fog, "Earth atlas camera movement revealed terrain.")
+		atlas.close_map()
+		await process_frame
+		await process_frame
+		_expect(not paused, "Earth atlas kept the lab paused.")
 		var before_rebase: Vector2 = map.projection.project(lab.walker.location())
 		var point: Array = Cube.global_position(lab.walker.position, lab.terrain.origin)
 		var shifted: Array = lab.terrain.origin.duplicate()

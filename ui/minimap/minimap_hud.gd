@@ -7,6 +7,8 @@ const Terrain = preload("res://ui/minimap/minimap_terrain.gd")
 const Source = preload("res://ui/minimap/minimap_source.gd")
 const MapCanvas = preload("res://ui/minimap/minimap_canvas.gd")
 const Style = preload("res://ui/progression_style.gd")
+var atlas_window: CanvasLayer
+var _atlas_button: Button
 var player: Node3D
 var lab: Node3D
 var snapshot_provider: Callable
@@ -36,6 +38,10 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	add_to_group(&"minimap_hud")
 	_build()
+	atlas_window = preload("res://ui/world_map/world_map_panel.gd").new()
+	atlas_window.player = player
+	atlas_window.lab = lab
+	add_child(atlas_window)
 	var state := get_node("/root/GameState")
 	state.phase_changed.connect(invalidate)
 	state.world_seed_changed.connect(invalidate)
@@ -77,6 +83,11 @@ func _build() -> void:
 	row.add_child(_reset)
 	_status = Style.label("", 11, Style.MUTED)
 	column.add_child(_status)
+	_atlas_button = _button("Weltkarte · M", func() -> void: atlas_window.open_map())
+	_atlas_button.custom_minimum_size.y = 44
+	_atlas_button.add_theme_font_size_override("font_size", 16)
+	_atlas_button.name = "OpenWorldMap"
+	column.add_child(_atlas_button)
 
 func _button(text: String, action: Callable) -> Button:
 	var button := Style.button(text)
@@ -117,6 +128,7 @@ func _update_snapshot() -> void:
 		hide()
 		return
 	show()
+	_atlas_button.text = "Weltkarte · " + atlas_window.shortcut_text()
 	var new_context: String = str(data.get("context_id", "")) + ":" + str(address["body_id"]) + ":" + str(address["mode"])
 	var new_phase: int = int(data.get("phase", 0))
 	var body_radius: float = float(data.get("body_radius", 0.0))

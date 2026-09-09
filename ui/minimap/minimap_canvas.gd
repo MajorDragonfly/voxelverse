@@ -43,9 +43,7 @@ func _draw() -> void:
 			point = inside.get_center() + delta * factor
 			draw_line(point - delta.normalized() * 12, point, Color("e5c38c"), 2)
 		if marker["kind"] == "home":
-			var roof := PackedVector2Array([point + Vector2(-7, -1), point + Vector2(0, -8), point + Vector2(7, -1), point + Vector2(5, -1), point + Vector2(5, 6), point + Vector2(-5, 6), point + Vector2(-5, -1)])
-			draw_colored_polygon(roof, Color("e5c38c"))
-			draw_rect(Rect2(point + Vector2(-1, 1), Vector2(3, 5)), Color("2a3540"))
+			preload("res://ui/minimap/map_markers.gd").draw_place(self, point, "home")
 		else:
 			draw_circle(point, 4.5, Color("0d202b"))
 			draw_circle(point, 3.0, Style.SOCIAL)

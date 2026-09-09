@@ -46,6 +46,7 @@ var status: Label
 var help: Label
 var _old_autosave: bool = true
 var _ready_complete: bool = false
+var map_atlases: Dictionary = {}
 var _save_read_only: bool = false
 var creature_design: Dictionary = {}
 var leave_without_saving: Button
@@ -80,6 +81,7 @@ func _ready() -> void:
 	space_camera.fov = 48.0
 	_build_ui()
 	var saved: Dictionary = LabSave.read()
+	map_atlases = saved.get("map_atlases", {}).duplicate(true)
 	if not saved.is_empty():
 		_restore_system(saved)
 		body_id = saved.body_id
@@ -462,6 +464,7 @@ func snapshot() -> Dictionary:
 		"forward": [walker.forward.x, walker.forward.y, walker.forward.z], "elapsed": system.elapsed, "binary": system.binary}
 	if not system.catalog_id.is_empty():
 		result.merge({"schema": 4, "catalog_version": Catalog.VERSION, "system_id": system.catalog_id}, true)
+	result["map_atlases"] = map_atlases.duplicate(true)
 	return result
 
 
@@ -469,6 +472,8 @@ func save_lab() -> bool:
 	if _save_read_only:
 		status.text = "Vorhandene Laborsicherung geschützt; Speichern nicht möglich."
 		return false
+	for tracker: Node in get_tree().get_nodes_in_group(&"exploration_tracker"):
+		if tracker.lab == self: tracker.update_exploration(true)
 	var data: Dictionary = snapshot()
 	var error: Error = _save_visit(data) if not system.catalog_id.is_empty() else OK
 	if error == OK:
@@ -483,6 +488,9 @@ func load_lab() -> void:
 		status.text = "Keine gültige Laborsicherung gefunden."
 		return
 	_save_read_only = false
+	map_atlases = saved.get("map_atlases", {}).duplicate(true)
+	for tracker: Node in get_tree().get_nodes_in_group(&"exploration_tracker"):
+		if tracker.lab == self: tracker.invalidate()
 	_restore_system(saved)
 	_build_system_view()
 	_open_body(saved.body_id, saved)

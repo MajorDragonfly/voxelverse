@@ -6,7 +6,10 @@ const CACHE_LIMIT: int = 6144
 const MAX_SAMPLES: int = 32
 const BUDGET_USEC: int = 1400
 const UNKNOWN := Color("172a36")
-var image: Image = Image.create(GRID, GRID, false, Image.FORMAT_RGBA8)
+var resolution: int = GRID
+var sample_limit: int = MAX_SAMPLES
+var cache_limit: int = CACHE_LIMIT
+var image: Image
 var texture: ImageTexture
 var center := Vector2.ZERO
 var radius: float = 64.0
@@ -24,7 +27,10 @@ var last_usec: int = 0
 var completed: bool = false
 var revision: int = 0
 
-func _init() -> void:
+func _init(grid_size: int = GRID) -> void:
+	resolution = clampi(grid_size, 32, 128)
+	cache_limit = CACHE_LIMIT if resolution == GRID else maxi(CACHE_LIMIT, resolution * resolution * 3)
+	image = Image.create(resolution, resolution, false, Image.FORMAT_RGBA8)
 	image.fill(UNKNOWN)
 	texture = ImageTexture.create_from_image(image)
 
@@ -44,7 +50,7 @@ func reset() -> void:
 func request(position: Vector2, extent: float, sample: Callable) -> void:
 	if not position.is_finite() or not is_finite(extent) or extent <= 0.0: return
 	sampling = sample
-	var step: float = extent * 2.0 / GRID
+	var step: float = extent * 2.0 / resolution
 	var snapped := Vector2i((position / step).floor())
 	var request_key := Vector3i(snapped.x, snapped.y, roundi(extent * 100.0))
 	if _key == request_key: return
@@ -54,8 +60,8 @@ func request(position: Vector2, extent: float, sample: Callable) -> void:
 	center = Vector2(snapped) * cell
 	_queue.clear()
 	_cursor = 0
-	for y in range(GRID):
-		for x in range(GRID):
+	for y in range(resolution):
+		for x in range(resolution):
 			var pixel := Vector2i(x, y)
 			var key: Vector3i = _pixel_key(pixel)
 			if _cache.has(key): image.set_pixel(x, y, _cache[key])
@@ -63,7 +69,7 @@ func request(position: Vector2, extent: float, sample: Callable) -> void:
 				image.set_pixel(x, y, UNKNOWN)
 				_queue.append(pixel)
 	_queue.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
-		return (Vector2(a) - Vector2.ONE * GRID * 0.5).length_squared() < (Vector2(b) - Vector2.ONE * GRID * 0.5).length_squared())
+		return (Vector2(a) - Vector2.ONE * resolution * 0.5).length_squared() < (Vector2(b) - Vector2.ONE * resolution * 0.5).length_squared())
 	completed = _queue.is_empty()
 	texture.update(image)
 	revision += 1
@@ -73,17 +79,17 @@ func step_work() -> void:
 	last_usec = 0
 	if completed or not sampling.is_valid(): return
 	var started: int = Time.get_ticks_usec()
-	while _cursor < _queue.size() and last_samples < MAX_SAMPLES:
+	while _cursor < _queue.size() and last_samples < sample_limit:
 		var pixel: Vector2i = _queue[_cursor]
 		_cursor += 1
-		var offset: Vector2 = center + (Vector2(pixel) + Vector2.ONE * 0.5 - Vector2.ONE * GRID * 0.5) * cell
+		var offset: Vector2 = center + (Vector2(pixel) + Vector2.ONE * 0.5 - Vector2.ONE * resolution * 0.5) * cell
 		var value: Variant = sampling.call(offset)
 		var color: Color = value if value is Color else UNKNOWN
-		if _cache.size() >= CACHE_LIMIT:
+		if _cache.size() >= cache_limit:
 			# Fixed-size FIFO ring avoids allocating thousands of keys per sample.
 			_cache.erase(_cache_order[_eviction_cursor])
 			_cache_order[_eviction_cursor] = _pixel_key(pixel)
-			_eviction_cursor = (_eviction_cursor + 1) % CACHE_LIMIT
+			_eviction_cursor = (_eviction_cursor + 1) % cache_limit
 		else:
 			_cache_order.append(_pixel_key(pixel))
 		_cache[_pixel_key(pixel)] = color
@@ -98,7 +104,7 @@ func step_work() -> void:
 		revision += 1
 
 func _pixel_key(pixel: Vector2i) -> Vector3i:
-	return Vector3i(_key.x + pixel.x - GRID / 2, _key.y + pixel.y - GRID / 2, _key.z)
+	return Vector3i(_key.x + pixel.x - resolution / 2, _key.y + pixel.y - resolution / 2, _key.z)
 
 func coverage() -> float:
-	return 1.0 - float(_queue.size() - _cursor) / float(GRID * GRID)
+	return 1.0 - float(_queue.size() - _cursor) / float(resolution * resolution)

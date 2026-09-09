@@ -87,8 +87,11 @@ func _exit_tree() -> void:
 	_deactivate()
 
 func body() -> Dictionary:
-	_state.get_current_body()
-	return _state.campaign.data["bodies"][str(_state.get_world_seed())]
+	var key: String = str(_state.get_world_seed())
+	# This accessor already returns the authoritative record. Avoid deep-copying
+	# its growing exploration ledger just to ensure that the body exists.
+	if not _state.campaign.data["bodies"].has(key): _state.get_current_body()
+	return _state.campaign.data["bodies"][key]
 
 func village() -> Dictionary:
 	var value: Variant = body().get("tribe", {})

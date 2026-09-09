@@ -198,6 +198,21 @@ func _check_minimap() -> void:
 	map._update_snapshot()
 	_expect(map.visible and map.phase == 1 and map.range_m == 160.0, "Real confirmed transition did not widen the map.")
 	_expect(map._map.group_view and map._map.markers.size() == 4, "Tribe map lost home or one of its three residents.")
+	var atlas: CanvasLayer = map.atlas_window
+	atlas.tracker.update_exploration()
+	var fog: Dictionary = atlas.tracker.atlas.data.duplicate(true)
+	var original_focus: Vector3 = tribe.map_focus()
+	tribe._focus += Vector3(200, 0, 200)
+	atlas.tracker.update_exploration()
+	_expect(atlas.tracker.atlas.data == fog, "Panning the tribal camera revealed unvisited ground.")
+	tribe._focus = original_focus
+	_expect(atlas.open_map() and paused, "Active tribe cannot open the shared world map.")
+	_key(KEY_SPACE)
+	_expect(paused and atlas.is_open, "Tribal pause key released the atlas pause.")
+	_key(KEY_ESCAPE)
+	await _frames(3)
+	_expect(not paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing the tribal atlas restored the wrong controls.")
+
 	var original_size: Vector2i = root.size
 	for dimensions in [Vector2i(1280, 720), Vector2i(800, 600)]:
 		root.size = dimensions
