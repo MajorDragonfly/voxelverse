@@ -29,6 +29,7 @@ var _drag_start := Vector2.ZERO
 var _dragging: bool = false
 var _scale_factor: float = 1.0
 var _resident_ids: Array = []
+var _feedback: VBoxContainer
 var animal_panel_open: bool = false
 var _jobs: OptionButton
 var _tabs: TabContainer
@@ -151,8 +152,10 @@ func _build() -> void:
 	back.pressed.connect(func() -> void: controller.issue_order("profession"))
 	_work_page.add_child(Style.label("Versorger halten Nahrung und Wasser bereit. Baumeister helfen an der laufenden Baustelle. Manuelle Befehle ändern den Beruf nicht.", 15, Style.MUTED))
 	_build_husbandry()
-	_message = Style.label("", 16, Style.MUTED)
-	_hud.get_child(0).add_child(_message)
+	_feedback = preload("res://ui/frontend/group_feedback.gd").new()
+	_feedback.controller = controller
+	_hud.get_child(0).add_child(_feedback)
+	_message = _feedback.result
 	column.add_child(Style.label("Linksklick / Rahmen: auswählen · Umschalt: Auswahl ändern · Rechtsklick: laufen oder sammeln · WASD: Kamera · Mausrad: Zoom · Leertaste: Pause", 15, Style.MUTED))
 	_shade = ColorRect.new()
 	_shade.color = Color(0.015, 0.025, 0.035, 0.78)
@@ -253,7 +256,7 @@ func refresh() -> void:
 	if entry == null:
 		return
 	entry.visible = not confirmation_open and not get_tree().paused and int(get_node("/root/GameState").current_phase) == 0 and is_instance_valid(controller.player)
-	_hud.visible = controller._active
+	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
 	_hud_content.visible = not _collapsed and controller.placement.is_empty()
 	_collapse.text = "Aufträge" if not _hud_content.visible else "Einklappen"
 	if not controller._active:
@@ -309,7 +312,7 @@ func refresh() -> void:
 		var member: Dictionary = data["members"][i]
 		var button: Button = _residents.get_child(i)
 		var orders: Dictionary = {"wait": "wartet", "move": "unterwegs", "wood": "sammelt Holz", "stone": "sammelt Stein", "food": "sammelt Nahrung", "tool": "stellt Werkzeug her", "hut": "baut Hütte", "tent": "baut Zelt", "pen": "baut Tierplatz", "tend": "versorgt Tiere", "garden": "legt Garten an", "supply": "sichert Nahrung", "feed": "isst", "water": "holt Wasser", "fiber": "sammelt Fasern", "milk": "holt Milch", "drink": "trinkt", "provision": "sichert Nahrung und Wasser", "build": "bereit für Bauarbeiten", "well": "baut Brunnen", "forester": "baut Forstplatz", "quarry": "baut Steinbruch", "fiberbed": "legt Faserbeet an"}
-		var activity: String = orders[member["order"]]
+		var activity: String = orders.get(member["order"], "Auftrag: " + str(member["order"]))
 		if member["order"] == "supply" and controller._food_reserve_ready():
 			activity = "Vorrat bereit · bleibt zuständig"
 		elif member["order"] in ["supply", "food"] and int(data["garden"]) == 1 and int(data["deposits"]["food"]["remaining"]) == 0:
@@ -342,9 +345,17 @@ func refresh() -> void:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
 	_buttons["milk"].visible = not data["economy"]["receipts"].is_empty()
 	_refresh_husbandry(data)
-	_message.text = ("PAUSE · Leertaste zum Fortsetzen. " if get_tree().paused else "") + controller.status
 	_neighbors.refresh()
+	_feedback.refresh()
 	_layout()
+
+func _process(_delta: float) -> void:
+	# Other modals own their pause. Never draw/capture input above the shared book.
+	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
+	if get_tree().paused and not _owns_pause:
+		_dragging = false
+		_selection.hide()
+
 
 func _input(event: InputEvent) -> void:
 	if not controller.placement.is_empty() and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:

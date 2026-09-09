@@ -1,0 +1,6 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Planet visual mode changed to: Surface
+Planet visual environment initialized in mode: Surface
+Surface streaming seed: 15838
+{"d1_checked":true,"discovery_cues":3,"failures":[],"restart":false,"scans":["15838:4701998715822","15838:4091918528769","15838:4445075400916"],"test":"domestic_fauna_journal"}

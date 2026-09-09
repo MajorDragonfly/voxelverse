@@ -1,0 +1,78 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "base_main": "3a3e0272375e556f3ff65b7370582af79a9d48b5",
+  "task7_parent": "6d776a780fe783f13a65452ce51b0941817af0bd",
+  "local_code_commit": "4bac89e57057b11cdad72bd65f0c0f24c4fe5b9f",
+  "code_tree": "c061132423b78d9400455d13a0a06d477b77d526",
+  "d1_commit": "17b23f568dabbec9f3903217238650f0c9178d04",
+  "d1_source_sha256": {
+    "autoload/save_game_service.gd": "06290ff51c476ef79e840f2bbf50eb8d321363ee38f9d1f6172efde8ad8c32f8",
+    "creatures/ai/wildlife_brain.gd": "8804b5fd49d972116c2186b75ae690ff6e633a8fb6bcc6f3e2f75979558b13d8",
+    "creatures/wildlife/procedural_wildlife_v7.gd": "c25bbf2129b8a664f046fc91daed94161df228093a9b6d97eed8bbdc8e5735a8",
+    "creatures/wildlife/procedural_wildlife_v8.gd": "9986f13a73b8a4e2cf1bd63d3ab4244045ae0de685092df89135489f99a20bb9",
+    "world/fauna/domestication/domestic_fauna_runtime.gd": "a341d0c3d71989b019bf1bebc544a00fcbe4ab4ac8d97ebb1e446288ddefc1fa",
+    "world/fauna/domestication/domestic_fauna_runtime.gd.uid": "5526e586bdc53ff697360b838f9614bbfdcfe96dd105e826d38a34b832da6938",
+    "world/fauna/domestication/domestic_habitat_planner.gd": "2642c4183514bb421e576a14f0b15620d2e0cfdf1bab355d8172f7df6d61a759",
+    "world/fauna/domestication/domestic_habitat_planner.gd.uid": "23ff5141c14a53e97868cbabefe4f6c879ecd18bdc9ee011748ccafd2ca378cb",
+    "world/fauna/domestication/domestic_species_generator.gd": "2495823953ef7afc1e4c9c641328f749e315eaaf182798e825357a721e164f55",
+    "world/fauna/domestication/domestic_species_generator.gd.uid": "4e0c5f69434c08c974e3e9ec1767cd167ade938770291dd394cd882e339a1400",
+    "world/fauna/domestication/domestication_contract.gd": "dce92ed4d8eac2ca6838a5349640edd14c2ec123bf64cead9c102cc4bee3ec2c",
+    "world/fauna/domestication/domestication_contract.gd.uid": "f435b544fe3583c0b4e4820e36922847ace456e5931ab896bf5e6df9c42170a0",
+    "world/fauna/domestication/planet_fauna_catalog.gd": "b6d2c0aeb859ffdd8a80c04e0c20bdfdbac14e151becb6a894cf71dd122c0412",
+    "world/fauna/domestication/planet_fauna_catalog.gd.uid": "229162ed0956f9baef4906e15a4116141a6fa43caf2519d4c93ed1e99432ab77",
+    "world/fauna/fauna_streamer_v7.gd": "55381cf4557caa611d06c0e5b5be1c086d5edcf98678d8e3ef248f920ff3e1a5"
+  },
+  "test_sha256": "e5a85b9481e0ee8f853dc1af21255141307c06e26bd1c979500d249ef55c6d6e",
+  "checks": {
+    "without_d1": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.988
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.822
+      },
+      {
+        "name": "domestic_fauna_journal_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.528
+      }
+    ],
+    "d1_import": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 15.028
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.771
+      }
+    ],
+    "with_d1": [
+      {
+        "name": "scan_save",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.539
+      },
+      {
+        "name": "separate_restart",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.953
+      }
+    ]
+  },
+  "scope": "Real D1 generated and streamed wildlife in main/main.tscn, bounded real scanner/camera physics, shared journal, existing campaign save and separate-process reload. Test freezes movement after spawn; no traversal, native rendering, Windows or D2 campaign acceptance. D1 source is overlaid only in an isolated test export.",
+  "published_code_commit": "eb7becd81a5ef46fba2f4447c1b57f01238daa7f"
+}

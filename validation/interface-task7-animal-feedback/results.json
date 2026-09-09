@@ -1,0 +1,67 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.301
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.936
+    },
+    {
+      "name": "audio/animal_action_feedback_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.015
+    },
+    {
+      "name": "audio/interface_audio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.887
+    },
+    {
+      "name": "owned_animal_register_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.915
+    },
+    {
+      "name": "interface_task7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.606
+    }
+  ],
+  "code_commit": "d5c5fdcd42bffb826156cf879ca31106360d5cbc",
+  "tested_local_code_commit": "a69f6f89045b76567c9fd15a0d674b474e5f24c8",
+  "code_tree": "1350c3c8e65b431ba5d5a445139d6c83e6f32e32",
+  "d2_dependency_commit": "da6dbd62f505a688aba439cefe42ac8f029da4d4",
+  "d2_files_in_branch": false,
+  "d2_positive_checks": [
+    {
+      "name": "d2_actions",
+      "passed": true,
+      "seconds": 4.473
+    },
+    {
+      "name": "separate_restart",
+      "passed": true,
+      "seconds": 1.002
+    },
+    {
+      "name": "native_feedback",
+      "passed": true,
+      "renderer": "Mesa llvmpipe OpenGL ES",
+      "sizes": [
+        "800x600",
+        "640x480"
+      ]
+    }
+  ]
+}

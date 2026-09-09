@@ -7,6 +7,10 @@ const Research = preload("res://core/discovery/research_goals.gd")
 const Comparison = preload("res://ui/discovery/species_comparison.gd")
 const PREFS_PATH := "user://discovery_journal_ui.cfg"
 const PAGE_SIZE: int = 100
+const Suitability = preload("res://ui/discovery/animal_suitability.gd")
+const OwnedReader = preload("res://ui/discovery/owned_animal_reader.gd")
+const OwnedRegister = preload("res://ui/discovery/owned_animal_register.gd")
+const ANIMALS_TAB := 5
 
 var is_open: bool = false
 var player: Node
@@ -49,6 +53,18 @@ var _selected_key: String = ""
 var _page: int = 0
 var _hint_enabled: bool = true
 var _hint_timer: float = 0.0
+var _animal_roles: Label
+var _roles_toggle: Button
+var _animal_contract: Script
+var _compact_tabs: OptionButton
+var _panel: PanelContainer
+var _content: BoxContainer
+var _browser: VBoxContainer
+var _heading: BoxContainer
+var _tools_row: BoxContainer
+var _scale_factor: float = 1.0
+var _owned_reader = OwnedReader.new()
+var _owned_register: VBoxContainer
 
 
 func _ready() -> void:
@@ -59,7 +75,11 @@ func _ready() -> void:
 	var prefs := ConfigFile.new()
 	if prefs.load(PREFS_PATH) == OK:
 		_hint_enabled = bool(prefs.get_value("journal", "show_hint", true))
+	_animal_contract = Suitability.contract()
 	_build()
+	_owned_reader.changed.connect(refresh_owned_animals)
+	get_viewport().size_changed.connect(_layout)
+	_layout()
 	if _progression != null:
 		_progression.connect("species_discovered", _on_discovery)
 		_progression.connect("discovery_points_changed", _on_points)
@@ -71,12 +91,15 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	_owned_reader.unbind()
 	if _owns_pause and get_tree() != null:
 		get_tree().paused = false
 		Input.mouse_mode = _previous_mouse
 
 
 func _process(delta: float) -> void:
+	if is_open and _tabs.current_tab == ANIMALS_TAB:
+		_owned_reader.check_context()
 	_hud.visible = not is_open and not get_tree().paused and (player == null or player.is_physics_processing())
 	_hint_timer -= delta
 	if _hint_timer <= 0.0 and not is_open:
@@ -170,10 +193,30 @@ func refresh() -> void:
 	_apply_filters()
 
 
+func bind_owned_animals(source: Object, context: Callable, names: Callable = Callable()) -> bool:
+	# Called by the D2 host after configure; no autoload, inferred IDs or lab save.
+	var bound: bool = _owned_reader.bind_source(source, context, names)
+	refresh_owned_animals()
+	return bound
+
+
+func unbind_owned_animals() -> void:
+	_owned_reader.unbind()
+	refresh_owned_animals()
+
+
+func refresh_owned_animals() -> void:
+	# Also called by the host after a successful load into the same controller.
+	if is_open and _tabs.current_tab == ANIMALS_TAB:
+		var scroll: int = _detail_scroll.scroll_vertical
+		_apply_filters()
+		_detail_scroll.set_deferred("scroll_vertical", scroll)
+
+
 func _build() -> void:
 	_surface = Control.new()
 	_surface.name = "JournalSurface"
-	_surface.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_surface.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	_surface.theme = _theme()
 	add_child(_surface)
 	var shade := ColorRect.new()
@@ -181,6 +224,7 @@ func _build() -> void:
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_surface.add_child(shade)
 	var panel := PanelContainer.new()
+	_panel = panel
 	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	panel.offset_left = 28
 	panel.offset_top = 24
@@ -191,7 +235,8 @@ func _build() -> void:
 	var layout := VBoxContainer.new()
 	layout.add_theme_constant_override("separation", 12)
 	panel.add_child(layout)
-	var heading := HBoxContainer.new()
+	var heading := BoxContainer.new()
+	_heading = heading
 	layout.add_child(heading)
 	var heading_text := _label("ENTDECKUNGSBUCH", 28)
 	heading_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -200,14 +245,23 @@ func _build() -> void:
 	_close.name = "CloseJournal"
 	heading.add_child(_close)
 	_summary = _label("", 15)
+	_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	layout.add_child(_summary)
 	_tabs = TabBar.new()
 	_tabs.name = "JournalTabs"
-	for tab in ["Arten", "Körperteile", "Regionen", "Nächste Schritte", "Forschungsziele"]:
+	for tab in ["Arten", "Körperteile", "Regionen", "Nächste Schritte", "Forschungsziele", "Eigene Tiere"]:
 		_tabs.add_tab(tab)
 	_tabs.tab_changed.connect(_on_tab_changed)
+	_tabs.clip_tabs = true
 	layout.add_child(_tabs)
-	var tools_row := HBoxContainer.new()
+	_compact_tabs = OptionButton.new()
+	_compact_tabs.name = "CompactJournalTabs"
+	for index in _tabs.tab_count:
+		_compact_tabs.add_item(_tabs.get_tab_title(index))
+	_compact_tabs.item_selected.connect(func(index: int) -> void: _tabs.current_tab = index)
+	layout.add_child(_compact_tabs)
+	var tools_row := BoxContainer.new()
+	_tools_row = tools_row
 	tools_row.name = "Filters"
 	layout.add_child(tools_row)
 	_search = LineEdit.new()
@@ -226,12 +280,14 @@ func _build() -> void:
 		_status.add_item(text)
 	_status.item_selected.connect(func(_index: int) -> void: _page = 0; _apply_filters())
 	tools_row.add_child(_status)
-	var content := HBoxContainer.new()
+	var content := BoxContainer.new()
+	_content = content
 	content.name = "JournalContent"
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	content.add_theme_constant_override("separation", 18)
 	layout.add_child(content)
 	var browser := VBoxContainer.new()
+	_browser = browser
 	browser.custom_minimum_size.x = 240
 	browser.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	browser.size_flags_stretch_ratio = 0.38
@@ -255,6 +311,8 @@ func _build() -> void:
 	_next_page.tooltip_text = "Nächste Seite"
 	paging.add_child(_next_page)
 	_detail_scroll = ScrollContainer.new()
+	_detail_scroll.follow_focus = true
+	_detail_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_detail_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_detail_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.add_child(_detail_scroll)
@@ -265,6 +323,19 @@ func _build() -> void:
 	_title = _label("", 26)
 	_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail.add_child(_title)
+	_owned_register = OwnedRegister.new()
+	_owned_register.name = "OwnedAnimalRegister"
+	_detail.add_child(_owned_register)
+	_owned_register.hide()
+	_roles_toggle = _button("Tierrollen ansehen", func() -> void: _animal_roles.visible = not _animal_roles.visible)
+	_roles_toggle.name = "ToggleAnimalSuitability"
+	_roles_toggle.hide()
+	_detail.add_child(_roles_toggle)
+	_animal_roles = _label("", 16)
+	_animal_roles.name = "AnimalSuitability"
+	_animal_roles.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_animal_roles.hide()
+	_detail.add_child(_animal_roles)
 	_compare_button = _button("Mit meiner Kreatur vergleichen", _toggle_comparison)
 	_compare_button.name = "CompareSpecies"
 	_compare_button.hide()
@@ -314,9 +385,54 @@ func _build() -> void:
 	_populate_filter()
 
 
+func _layout() -> void:
+	if not is_inside_tree() or _surface == null:
+		return
+	var extent := get_viewport().get_visible_rect().size
+	_scale_factor = extent.x / maxf(float(get_window().size.x), 1.0)
+	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
+	extent /= _scale_factor
+	_surface.size = extent
+	_preview.custom_minimum_size.y = 110 if extent.y <= 600 else 230
+	_title.add_theme_font_size_override("font_size", 20 if _tabs.current_tab == ANIMALS_TAB and extent.y <= 600 else 26)
+	var narrow := extent.x < 960
+	_summary.visible = extent.y >= 600
+	_panel.get_child(0).add_theme_constant_override("separation", 6 if narrow else 12)
+	_tabs.visible = not narrow
+	_compact_tabs.visible = narrow
+	_heading.vertical = extent.x < 700
+	_tools_row.vertical = extent.x < 600
+	_content.vertical = extent.x < 600
+	_browser.custom_minimum_size.x = 0 if _content.vertical else 210
+	_browser.custom_minimum_size.y = 115 if _content.vertical else 0
+	_browser.size_flags_stretch_ratio = 0.32
+	_panel.offset_left = 12 if narrow else 28
+	_panel.offset_right = -_panel.offset_left
+	_panel.offset_top = 12 if narrow else 24
+	_panel.offset_bottom = -_panel.offset_top
+	if _hud != null:
+		var hud_height := 192.0 if _pinned_button != null and _pinned_button.visible else 108.0
+		_hud.position = Vector2(maxf(12.0, extent.x - 480), maxf(12.0, extent.y - 122 - hud_height))
+		_hud.size = Vector2(minf(456.0, extent.x - 24), hud_height)
+
+func _species_rows(query: String, role: String) -> Array[Dictionary]:
+	var ecological_role := "" if role.begins_with("domestic:") else role
+	var result: Array[Dictionary] = []
+	for row in Records.species_rows(_state, "", ecological_role):
+		var profile: Dictionary = Suitability.read(row, _animal_contract)
+		if role.begins_with("domestic:") and role.trim_prefix("domestic:") not in profile.get("roles", []):
+			continue
+		var text := "%s %s %s" % [row.get("name", ""), row.get("location", ""), row.get("role_label", "")]
+		for ability in profile.get("roles", []):
+			text += " " + Suitability.ROLES[ability]
+		if query.strip_edges().is_empty() or text.to_lower().contains(query.strip_edges().to_lower()):
+			result.append(row)
+	return result
+
+
 func _build_hud() -> void:
 	_hud = Control.new()
-	_hud.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	_hud.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	_hud.offset_left = -480
 	_hud.offset_top = -230
 	_hud.offset_right = -24
@@ -349,6 +465,8 @@ func _build_hud() -> void:
 
 
 func _on_tab_changed(_index: int) -> void:
+	_compact_tabs.select(_index)
+	_layout()
 	_comparison_mode = false
 	_page = 0
 	_selected_key = ""
@@ -360,12 +478,25 @@ func _on_tab_changed(_index: int) -> void:
 
 func _populate_filter() -> void:
 	_filter.clear()
-	_filter.add_item("Alle Rollen" if _tabs.current_tab == 0 else "Alle Kategorien")
+	if _tabs.current_tab == ANIMALS_TAB:
+		for item in [["Lebende Tiere", "living"], ["Verstorbene Tiere", "dead"], ["Alle eigenen Tiere", "all"]]:
+			_filter.add_item(item[0])
+			_filter.set_item_metadata(_filter.item_count - 1, item[1])
+		_filter.select(0)
+		_filter.show()
+		_status.hide()
+		_search.placeholder_text = "Tier, Art oder Auftrag suchen …"
+		return
+	_filter.add_item("Alle Lebensweisen / Tierrollen" if _tabs.current_tab == 0 else "Alle Kategorien")
 	_filter.set_item_metadata(0, "")
 	var labels: Dictionary = Records.ROLES if _tabs.current_tab == 0 else Records.CATEGORIES
 	for key in labels:
 		_filter.add_item(str(labels[key]))
 		_filter.set_item_metadata(_filter.item_count - 1, key)
+	if _tabs.current_tab == 0:
+		for role in Suitability.ROLES:
+			_filter.add_item("Tierrolle: " + Suitability.ROLES[role])
+			_filter.set_item_metadata(_filter.item_count - 1, "domestic:" + role)
 	_filter.select(0)
 	_status.visible = _tabs.current_tab == 1
 	_filter.visible = _tabs.current_tab < 2
@@ -381,7 +512,10 @@ func _apply_filters() -> void:
 	_search.get_parent().visible = not guide_mode
 	_list.get_parent().visible = not guide_mode
 	_guide.visible = guide_mode
+	_owned_register.hide()
 	_parts_label.text = ""
+	_animal_roles.hide()
+	_roles_toggle.hide()
 	_clear_comparison()
 	_pin.hide()
 	_wish.hide()
@@ -394,11 +528,15 @@ func _apply_filters() -> void:
 		_guide.text = "BEOBACHTEN\nÖffne mit E den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Es zeigt deine gespeicherten Entdeckungen und lässt sich mit Esc wieder schließen."
 		return
 	var filter_value: String = str(_filter.get_item_metadata(_filter.selected)) if _filter.selected >= 0 else ""
+	var animals: Dictionary = {}
 	match _tabs.current_tab:
-		0: _rows = Records.species_rows(_state, _search.text, filter_value)
+		0: _rows = _species_rows(_search.text, filter_value)
 		1: _rows = Records.part_rows(_state, _search.text, filter_value, _status.selected)
 		2: _rows = Records.region_rows(_state, _search.text)
 		4: _rows = Research.rows(_state, _search.text)
+		ANIMALS_TAB:
+			animals = _owned_reader.read(_search.text, filter_value)
+			_rows.assign(animals["rows"])
 	_page = clampi(_page, 0, maxi((_rows.size() - 1) / PAGE_SIZE, 0))
 	_list.clear()
 	var selected_index: int = 0
@@ -410,6 +548,8 @@ func _apply_filters() -> void:
 			if row.get("wished", false): label += " · gemerkt"
 		elif _tabs.current_tab == 4:
 			label = ("✓  " if row["complete"] else "○  ") + label
+		elif _tabs.current_tab == ANIMALS_TAB and row["dead"]:
+			label += " · verstorben"
 		_list.add_item(label)
 		_list.set_item_tooltip(_list.item_count - 1, label + " · " + str(row.get("location", row.get("source", ""))))
 		if str(row.get("key", row.get("id", ""))) == _selected_key:
@@ -419,6 +559,10 @@ func _apply_filters() -> void:
 	_next_page.disabled = (_page + 1) * PAGE_SIZE >= _rows.size()
 	if _rows.is_empty():
 		_selected_key = ""
+		if _tabs.current_tab == ANIMALS_TAB:
+			_title.text = "Eigene Tiere"
+			_description.text = animals["message"]
+			return
 		_title.text = "Noch keine Arten entdeckt" if _tabs.current_tab == 0 and Records.as_dictionary(_state.get("discovered_species", {})).is_empty() else "Keine passenden Einträge"
 		_description.text = "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier." if _title.text == "Noch keine Arten entdeckt" else "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
 		if _tabs.current_tab == 1 and _status.selected == 3 and _search.text.is_empty():
@@ -438,13 +582,31 @@ func _select_entry(index: int) -> void:
 	_detail_scroll.scroll_vertical = 0
 	_title.text = str(row.get("name", "Unbekannte Art"))
 	_parts_label.text = ""
+	_animal_roles.hide()
+	_roles_toggle.hide()
 	_clear_comparison()
 	_pin.hide()
 	_wish.hide()
 	_goal_progress.hide()
 	_preview.call("clear")
 	_preview.hide()
-	if _tabs.current_tab == 0:
+	_owned_register.hide()
+	if _tabs.current_tab == ANIMALS_TAB:
+		_description.hide()
+		_owned_register.show()
+		_owned_register.present(row)
+	elif _tabs.current_tab == 0:
+		var profile: Dictionary = Suitability.read(row, _animal_contract)
+		_animal_roles.text = Suitability.describe(profile)
+		var role_names := PackedStringArray()
+		for role in profile.get("roles", []):
+			role_names.append(Suitability.ROLES[role])
+		_roles_toggle.text = "Tierrollen · " + (" · ".join(role_names) if not role_names.is_empty() else "noch nicht bekannt")
+		_roles_toggle.tooltip_text = "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz."
+		_roles_toggle.clip_text = true
+		_roles_toggle.show()
+		if not Records.as_dictionary(row.get("scan", {})).get("complete", false):
+			_animal_roles.text = "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht."
 		_description.text = "%s\nEntdeckt auf %s" % [row["role_label"], row["location"]]
 		var blueprint: Dictionary = Records.visual_for(row)
 		if blueprint.is_empty():
@@ -461,6 +623,8 @@ func _select_entry(index: int) -> void:
 				_comparison.show()
 				_comparison.call("present", own, blueprint, _state)
 				_description.hide()
+				_animal_roles.hide()
+				_roles_toggle.hide()
 				return
 			_preview.show()
 			_preview.call("show_blueprint", blueprint)
@@ -571,7 +735,7 @@ func _update_research_hud() -> void:
 		return
 	_pinned_row = _progression.call("get_pinned_research")
 	_pinned_button.visible = not _pinned_row.is_empty()
-	_hud.offset_top = -314 if _pinned_button.visible else -230
+	_layout()
 	if _pinned_row.is_empty():
 		return
 	var status: String = "Ziel erreicht" if _pinned_row["complete"] else "Dein Forschungsziel"
@@ -597,6 +761,8 @@ func _open_pinned() -> void:
 func _current_hint() -> String:
 	if _progression == null:
 		return "Entdecke deine Welt."
+	if int(get_node("/root/GameState").current_phase) == 1:
+		return "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen."
 	var state := {"discovered_species": _progression.get("discovered_species")}
 	var active_player := player if player != null else get_tree().get_first_node_in_group(&"player")
 	if active_player != null and active_player.has_method("get_health_ratio"):

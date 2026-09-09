@@ -25,6 +25,7 @@ var camera: Camera3D
 var actors: Dictionary = {}
 var selected: Array[String] = []
 var navigation := Navigation.new()
+var domestication: Node
 var husbandry := HusbandryRuntime.new()
 var status: String = ""
 var _state: Node
@@ -67,7 +68,7 @@ func _ready() -> void:
 	_state.phase_changed.connect(_invalidate)
 	_state.world_seed_changed.connect(_invalidate)
 	add_to_group(&"tribe_controller")
-	var domestication := preload("res://world/domestication/campaign_domestication.gd").new()
+	domestication = preload("res://world/domestication/campaign_domestication.gd").new()
 	domestication.name = "Domestication"
 	add_child(domestication)
 
@@ -181,7 +182,7 @@ func _activate() -> void:
 	# Wait for terrain collision and the home controller's reference to the player.
 	if home.player == null or not home.has_ground(HomeState.vector(village()["anchor"])):
 		return
-	navigation.rebuild(home, HomeState.vector(village()["anchor"]), NeighborRuntime.Model.NAV_EXTENT if body().has("tribal_neighbor") else Navigation.RADIUS)
+	navigation.rebuild(home, HomeState.vector(village()["anchor"]), village(), navigation_extent())
 	if navigation.graph.get_point_count() == 0:
 		return
 	Model.upgrade(village())
@@ -325,6 +326,7 @@ func screen_command(position: Vector2) -> void:
 	var hit: Dictionary = player.get_world_3d().direct_space_state.intersect_ray(ray)
 	if hit.is_empty():
 		status = "Hier ist kein geladener Boden."
+		_resolve_order("move", false)
 		return
 	var target: Vector3 = hit["position"]
 	if not placement.is_empty():
@@ -349,9 +351,13 @@ func issue_order(order: String, destination: Vector3 = Vector3.ZERO, movement_li
 			panel.refresh()
 			return true
 	var success: bool = _commit_order(order, destination, movement_limit)
+	_resolve_order(order, success)
+	return success
+
+func _resolve_order(order: String, success: bool) -> void:
 	_order_sequence += 1
 	order_resolved.emit(StringName(order), "%d:%d" % [get_instance_id(), _order_sequence], success)
-	return success
+	panel.refresh()
 
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
 	if not is_active() or selected.is_empty() or order not in Model.ORDERS + Economy.ORDERS + ["resume", "profession"]:

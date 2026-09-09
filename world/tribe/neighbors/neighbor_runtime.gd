@@ -68,7 +68,7 @@ func refresh() -> void:
 func contact() -> bool:
 	if not controller.is_active() or not data().is_empty():
 		return false
-	controller.navigation.rebuild(controller.home, controller.anchor(), Model.NAV_EXTENT)
+	controller.navigation.rebuild(controller.home, controller.anchor(), controller.village(), controller.navigation_extent())
 	var center: Vector3 = Vector3.INF
 	var places: Array[Vector3] = []
 	var foundation: Array = []
@@ -91,7 +91,7 @@ func contact() -> bool:
 		nearest = distance
 		places = [first, second]
 	if not center.is_finite():
-		controller.navigation.rebuild(controller.home, controller.anchor())
+		controller.navigation.rebuild(controller.home, controller.anchor(), controller.village(), controller.navigation_extent())
 		controller.status = "Kein sicher erreichbarer Lagerplatz in der geladenen Umgebung frei. Suche nach einer Änderung der Umgebung erneut."
 		return false
 	for corner: Vector3 in [Vector3(-1,0,-1), Vector3(1,0,-1), Vector3(-1,0,1), Vector3(1,0,1)]:
@@ -102,7 +102,7 @@ func contact() -> bool:
 	controller._transaction = false
 	if not saved:
 		controller.body().erase("tribal_neighbor")
-		controller.navigation.rebuild(controller.home, controller.anchor())
+		controller.navigation.rebuild(controller.home, controller.anchor(), controller.village(), controller.navigation_extent())
 		controller.status = "Kontakt konnte nicht gespeichert werden. Es wurde kein Lager angelegt."
 		return false
 	refresh()
