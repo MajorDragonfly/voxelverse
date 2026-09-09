@@ -8,6 +8,8 @@ const AdaptiveTiles = preload("res://world/planet_lab/adaptive_sphere_tiles.gd")
 const OrbitMesh = preload("res://world/planet_lab/planet_orbit_mesh.gd")
 const Walker = preload("res://world/planet_lab/radial_walker.gd")
 const LabSave = preload("res://world/planet_lab/planet_lab_save.gd")
+const GalaxyPanel = preload("res://world/planet_lab/galaxy_catalog_panel.gd")
+var galaxy_panel: CanvasLayer
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const MAIN_SCENE: String = "res://main/main.tscn"
 const PRIMARY_LIGHT_ENERGY: float = 1.0
@@ -296,6 +298,8 @@ func set_view(mode: String) -> void:
 
 
 func _process(delta: float) -> void:
+	if is_instance_valid(galaxy_panel):
+		return
 	if not _ready_complete:
 		return
 	system.elapsed += delta * time_speed
@@ -479,6 +483,8 @@ func _leave_lab() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(galaxy_panel):
+		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and view_mode == "surface":
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -547,6 +553,7 @@ func _build_ui() -> void:
 	_button(buttons, "Oberfläche", func(): set_view("surface"))
 	_button(buttons, "Orbit", func(): set_view("orbit"))
 	_button(buttons, "Sternsystem", func(): set_view("system"))
+	_button(buttons, "Galaxiekatalog", open_galaxy_catalog).name = "OpenGalaxy"
 	_button(buttons, "Körper wechseln", next_body)
 	var large_button: Button = _button(buttons, "Terra · 12.742 km", _open_large_reference)
 	large_button.name = "OpenTerra"
@@ -581,6 +588,19 @@ func _panel() -> StyleBoxFlat:
 	style.content_margin_top = 16
 	style.content_margin_bottom = 16
 	return style
+
+
+func open_galaxy_catalog() -> void:
+	if is_instance_valid(galaxy_panel):
+		return
+	var previous_enabled: bool = walker.enabled
+	walker.enabled = false
+	galaxy_panel = GalaxyPanel.new()
+	galaxy_panel.closed.connect(func():
+		walker.enabled = previous_enabled
+		galaxy_panel = null
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE)
+	add_child(galaxy_panel)
 
 
 func _open_large_reference() -> void:

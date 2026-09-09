@@ -22,10 +22,15 @@ var _tree_points: Array[Vector2] = []
 var placement_attempt_count: int = 0
 var instance_count: int = 0
 
-func run() -> void:
+static func tree_recipe(attempts: int = 16, density: float = 1.55) -> Dictionary:
+	return {"group": "tree", "attempts": roundi(attempts * density), "families": ["ancient_oak_v2", "tall_pine_v2"], "chance": 0.70, "slope": 0.52}
+
+func run(reusable_generator: Node = null) -> void:
 	var started: int = Time.get_ticks_usec()
-	_generator = generator_script.new()
-	_generator.set_seed_override(world_seed)
+	_generator = reusable_generator
+	if _generator == null:
+		_generator = generator_script.new()
+		_generator.set_seed_override(world_seed)
 	var profile: Dictionary = _generator.get_planet_profile()
 	var random := RandomNumberGenerator.new()
 	random.seed = world_seed + roundi(chunk_origin.x / width) * 73_856_093 + roundi(chunk_origin.y / depth) * 19_349_663 + 2_104_729_311
@@ -33,13 +38,19 @@ func run() -> void:
 		for attempt in range(int(recipe["attempts"])):
 			_place_attempt(random, profile, recipe, attempt)
 	result = {"batches": _batches, "attempts": placement_attempt_count, "instances": instance_count}
-	_generator.free()
+	if reusable_generator == null:
+		_generator.free()
 	_generator = null
 	elapsed_usec = Time.get_ticks_usec() - started
 
 func _surface_height(x: float, z: float) -> float:
 	var ix: int = clampi(floori((x + width * 0.5) / cell_size), 0, height_width - 3)
 	var iz: int = clampi(floori((z + depth * 0.5) / cell_size), 0, height_depth - 3)
+	if heights.is_empty():
+		# The distant tree preview samples the same cell centres without making
+		# collision chunks or a complete height grid for every forest tile.
+		var point: Vector2 = chunk_origin + Vector2((ix + 0.5) * cell_size - width * 0.5, (iz + 0.5) * cell_size - depth * 0.5)
+		return _generator.get_visual_terrain_height(point.x, point.y)
 	return heights[(iz + 1) * height_width + ix + 1]
 
 func _sample_point(random: RandomNumberGenerator, maximum_slope: float) -> Dictionary:
@@ -121,5 +132,4 @@ func _place_attempt(random: RandomNumberGenerator, profile: Dictionary, recipe: 
 	if tree:
 		_tree_points.append(Vector2(wx, wz))
 	instance_count += 1
-
 

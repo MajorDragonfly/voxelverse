@@ -2,7 +2,6 @@ extends Node3D
 
 const HorizonJob = preload("res://world/streaming/landscape_horizon_job.gd")
 const Budget = preload("res://world/streaming/environment_generation_budget.gd")
-const LandShader = preload("res://world/visuals/terrain/landscape_horizon.gdshader")
 const WaterBuilder = preload("res://world/visuals/terrain/water_mesh_builder_v7.gd")
 var generation_complete: bool = false
 var _task: int = -1
@@ -26,10 +25,10 @@ func _ready() -> void:
 	for node: MeshInstance3D in [_land, _water]:
 		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		add_child(node)
-	var land_material := ShaderMaterial.new()
-	land_material.shader = LandShader
-	_land.material_override = land_material
 	var reference: Node = _manager.loaded_chunks.values()[0]
+	# Snow, rock, strata and lighting must be identical on both sides of the
+	# streaming boundary. Duplicate the actual configured terrain material.
+	_configure_land(reference)
 	var settings: Dictionary = reference.get_node("Visuals").get_water_settings()
 	var profile: Dictionary = WorldGenerator.get_planet_profile()
 	_water.material_override = WaterBuilder.make_material(profile, settings)
@@ -38,6 +37,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not _manager.world_initialized:
 		return
+	if _land.material_override == null:
+		# Terrain-ready and the deferred material callback can arrive in different
+		# orders. Wait for the configured material instead of copying null/defaults.
+		if _manager.loaded_chunks.is_empty() or not _configure_land(_manager.loaded_chunks.values()[0]):
+			return
 	_update_coverage()
 	var player: Vector3 = _manager.player.global_position
 	var target: Vector2 = recenter_target(Vector2(player.x, player.z), _center)
@@ -74,6 +78,15 @@ func _process(_delta: float) -> void:
 		_update_coverage()
 		Budget.record(started, "terrain")
 
+func _configure_land(reference: Node) -> bool:
+	var source := reference.get_node("TerrainMesh").material_override as ShaderMaterial
+	if source == null:
+		return false
+	var material := source.duplicate() as ShaderMaterial
+	material.set_shader_parameter("terrain_is_horizon", true)
+	_land.material_override = material
+	return true
+
 func _update_coverage() -> void:
 	var origin: Vector2i = _manager.current_player_chunk - Vector2i(8, 8)
 	var image := Image.create(16, 16, false, Image.FORMAT_RGB8)
@@ -90,9 +103,9 @@ func _update_coverage() -> void:
 	elif data != _coverage_bytes:
 		_coverage.update(image)
 	_coverage_bytes = data
-	_land.material_override.set_shader_parameter("coverage", _coverage)
-	_land.material_override.set_shader_parameter("coverage_origin", Vector2(origin))
-	_land.material_override.set_shader_parameter("chunk_size", Vector2(_manager.chunk_width, _manager.chunk_depth))
+	_land.material_override.set_shader_parameter("terrain_coverage", _coverage)
+	_land.material_override.set_shader_parameter("terrain_coverage_origin", Vector2(origin))
+	_land.material_override.set_shader_parameter("terrain_chunk_size", Vector2(_manager.chunk_width, _manager.chunk_depth))
 	for chunk: Node3D in _manager.loaded_chunks.values():
 		for name: String in ["TerrainMesh", "FarTerrainMesh"]:
 			var material := chunk.get_node(name).material_override as ShaderMaterial

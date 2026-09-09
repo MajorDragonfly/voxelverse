@@ -77,6 +77,8 @@ func _run() -> void:
 			await _planet_lab()
 		"large_planet":
 			await _large_planet()
+		"galaxy":
+			await _galaxy()
 		_:
 			_failures.append("Unknown review case.")
 	RenderingServer.render_loop_enabled = true
@@ -195,6 +197,7 @@ func _world() -> void:
 		if int(manager.call("get_pending_chunk_count")) != 0:
 			continue
 		ready = bool(manager.get_node("LandscapeHorizon").generation_complete)
+		ready = ready and bool(manager.get_node("DistantForest").generation_complete)
 		for chunk: Node in manager.get("loaded_chunks").values():
 			if not bool(chunk.get_node("ProceduralEcosystemV6").get("generation_complete")) or chunk.get_node("ProceduralEcosystemV6").is_processing():
 				ready = false
@@ -258,6 +261,13 @@ func _capture_landscape_views(spawn: Vector3) -> void:
 	_camera.global_position = spawn + Vector3(0, 3.5, 0)
 	_camera.look_at(peak)
 	await _capture("landscape", {"target": [peak.x, peak.y, peak.z], "surface_height": peak.y})
+	# An elevated inland view exposes both the active chunk edge and the forest
+	# preview, instead of judging the land transition only from the sea shore.
+	_camera.global_position = spawn + Vector3(0, 22, 0)
+	var inland: Vector3 = spawn - Vector3(water.x - spawn.x, 0, water.z - spawn.z).normalized() * 160.0
+	inland.y = generator.get_visual_terrain_height(inland.x, inland.z)
+	_camera.look_at(inland)
+	await _capture("inland_transition", {"forest": _scene.get_node("WorldManager/DistantForest").stats, "target": [inland.x, inland.y, inland.z]})
 	if water_distance < 120.0:
 		var shore: Vector3 = spawn
 		for step in range(20):
@@ -813,6 +823,34 @@ func _large_planet() -> void:
 		await _capture("m1b_%s_orbit" % id.get_slice(":", 1), _scene.snapshot())
 
 
+func _galaxy() -> void:
+	change_scene_to_file("res://world/planet_lab/planet_lab.tscn")
+	await scene_changed
+	_scene = current_scene
+	_scene.walker.enabled = false
+	_scene.open_galaxy_catalog()
+	await process_frame
+	var panel: Node = _scene.galaxy_panel
+	if panel.systems.is_empty() or panel.record.is_empty():
+		_failures.append("Galaxy review has no selectable system or writable journal.")
+		return
+	var id: String = panel.selected_id
+	await _capture("m1c_catalog_centre", {"systems": panel.systems.size(), "selected": id})
+	panel.note.text = "Wiederbesuch: Diese Notiz bleibt am Sternsystem gespeichert."
+	if not panel.save_changes():
+		_failures.append("Galaxy review could not save its observation.")
+	panel.show_sector([1000, 0, -700])
+	await _capture("m1c_catalog_arm", {"systems": panel.systems.size()})
+	panel.close()
+	await process_frame
+	_scene.open_galaxy_catalog()
+	await process_frame
+	panel = _scene.galaxy_panel
+	if panel.selected_id != id or panel.note.text != "Wiederbesuch: Diese Notiz bleibt am Sternsystem gespeichert.":
+		_failures.append("Reopening the galaxy view lost its stored observation.")
+	await _capture("m1c_catalog_return", {"cache": panel.catalog.stats(), "journal": panel.journal.stats(), "selected": panel.selected_id})
+
+
 func _capture(label: String, details: Dictionary) -> void:
 	RenderingServer.render_loop_enabled = true
 	for warmup in range(int(_config.get("warmup", 20))):
@@ -844,8 +882,8 @@ func _capture(label: String, details: Dictionary) -> void:
 		"render_cpu_ms": _distribution(cpu), "render_gpu_ms": _distribution(gpu),
 		"gpu_timestamps_available": gpu.max() > 0.0, "draw_calls": _distribution(calls),
 		"rendered_primitives": _distribution(primitives)})
-	var planet_review: bool = label.begins_with("m1_") or label.begins_with("m1b_")
-	if planet_review or label.begins_with("underwater_") or label.begins_with("world_underwater") or label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "shore_water", "water_depth_steps"]:
+	var planet_review: bool = label.begins_with("m1_") or label.begins_with("m1b_") or label.begins_with("m1c_")
+	if planet_review or label.begins_with("underwater_") or label.begins_with("world_underwater") or label in ["hydrology_overview", "hydrology_shore", "terrain_transition_50", "landscape", "inland_transition", "shore_water", "water_depth_steps", "ancient_oak_v2", "tall_pine_v2"]:
 		var preview: Image = image.duplicate()
 		preview.resize(960 if planet_review else 480, 540 if planet_review else 270, Image.INTERPOLATE_LANCZOS)
 		print("REVIEW_PREVIEW ", str(_config["seed"]), " ", label, " ", Marshalls.raw_to_base64(preview.save_jpg_to_buffer(0.76)))

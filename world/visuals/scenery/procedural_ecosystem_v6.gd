@@ -112,7 +112,7 @@ func _begin_generation() -> void:
 	_profile = WorldGenerator.get_planet_profile()
 	var spawn: Vector3 = WorldGenerator.get_scenic_spawn()
 	_recipes = [
-		{"group": "tree", "attempts": roundi(tree_attempts * forest_density_multiplier), "families": ["ancient_oak_v2", "tall_pine_v2"], "chance": 0.70, "slope": 0.52},
+		PlacementJob.tree_recipe(tree_attempts, forest_density_multiplier),
 		{"group": "shrub", "attempts": plant_field_attempts, "families": ["dense_bush_v2"], "chance": 0.74, "slope": 0.65},
 		{"group": "rock", "attempts": rock_attempts + cliff_attempts, "families": ["layered_rock_v2"], "chance": 0.62, "slope": 1.35},
 		{"group": "fern", "attempts": ground_attempts * 2, "families": ["fern_cluster_v2"], "chance": 0.85, "slope": 0.65},
@@ -148,9 +148,14 @@ func _publish_batch(key: String, batch: Dictionary, profile: Dictionary) -> void
 	multimesh.mesh = mesh
 	multimesh.instance_count = transforms.size()
 	var bounds: AABB
+	var all_lod_bounds: AABB = mesh.get_aabb()
+	for tier in range(3):
+		var lod_mesh: Mesh = AuthoredAssets.get_mesh(batch["asset_id"], tier, int(species["geometry_variant"]))
+		if lod_mesh != null:
+			all_lod_bounds = all_lod_bounds.merge(lod_mesh.get_aabb())
 	for i in range(transforms.size()):
 		var transform: Transform3D = transforms[i]
-		var instance_bounds: AABB = transform * mesh.get_aabb()
+		var instance_bounds: AABB = transform * all_lod_bounds
 		bounds = instance_bounds if i == 0 else bounds.merge(instance_bounds)
 	multimesh.custom_aabb = bounds.grow(0.65)
 	multimesh.buffer = InstanceBuffer.pack(transforms, batch["custom"])
@@ -158,7 +163,9 @@ func _publish_batch(key: String, batch: Dictionary, profile: Dictionary) -> void
 	node.name = key
 	node.multimesh = multimesh
 	node.material_override = AuthoredAssets.get_material(profile, species)
-	node.visibility_range_end = tree_visibility_distance if bool(batch["tree"]) else detail_visibility_distance
+	# Tree lifetime follows chunk ownership. A distance cutoff on a whole batch
+	# can remove an irregular strip before the distant forest takes ownership.
+	node.visibility_range_end = 0.0 if bool(batch["tree"]) else detail_visibility_distance
 	add_child(node)
 	batch["node"] = node
 	if Obstacles.has_collision(str(batch["asset_id"])):
@@ -256,7 +263,7 @@ func _process_clusters() -> void:
 		node.mesh = mesh
 		node.material_override = material
 		node.custom_aabb = mesh.get_aabb().grow(0.65)
-		node.visibility_range_end = tree_visibility_distance if group == "trees" else detail_visibility_distance
+		node.visibility_range_end = 0.0 if group == "trees" else detail_visibility_distance
 		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		add_child(node)
 		_cluster_nodes[group] = node

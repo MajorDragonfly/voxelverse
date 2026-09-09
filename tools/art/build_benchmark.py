@@ -40,10 +40,11 @@ def png_palette():
 
 
 class Voxels:
-    def __init__(self, step, seed):
+    def __init__(self, step, seed, connected_paths=False):
         self.step = step
         self.seed = seed
         self.cells = {}
+        self.connected_paths = connected_paths
 
     def ellipsoid(self, center, radii, slot, rough=0.0, overwrite=True):
         step = self.step
@@ -60,6 +61,7 @@ class Voxels:
                         self.cells[p] = SLOT[slot]
 
     def path(self, points, radii, slot, rough=.0):
+        previous = None
         for a,b,ra,rb in zip(points, points[1:], radii, radii[1:]):
             dist = math.sqrt(sum((b[i]-a[i])**2 for i in range(3)))
             count = max(2,math.ceil(dist/(self.step*.55)))
@@ -68,6 +70,18 @@ class Voxels:
                 center = tuple(a[i]+(b[i]-a[i])*t for i in range(3))
                 radius = ra+(rb-ra)*t
                 self.ellipsoid(center,(radius,)*3,slot,rough)
+                if self.connected_paths:
+                    # A sub-cell stem can miss every ellipsoid sample at Far
+                    # resolution. Keep a face-connected structural centreline.
+                    cell = tuple(max(0, math.floor(center[i]/self.step)) if i == 1
+                                 else math.floor(center[i]/self.step) for i in range(3))
+                    cursor = list(previous or cell)
+                    self.cells.setdefault(tuple(cursor), SLOT[slot])
+                    while tuple(cursor) != cell:
+                        axis = max(range(3), key=lambda i: abs(cell[i]-cursor[i]))
+                        cursor[axis] += 1 if cell[axis] > cursor[axis] else -1
+                        self.cells.setdefault(tuple(cursor), SLOT[slot])
+                    previous = cell
 
     def leaf_lobe(self, rng, center, radii, family='foliage', detail=True):
         self.ellipsoid(center,radii,family+'_base',.19 if detail else .08,False)
@@ -165,7 +179,7 @@ def pine(vox,rng,tier,variant):
             a=b*math.tau/branches+layer*1.34+variant*.2
             stretch=rng.uniform(.8,1.18)
             tip=(math.cos(a)*span*stretch,y+.08,math.sin(a)*span*stretch)
-            if tier<2:
+            if tier<2 or vox.connected_paths:
                 vox.path([(0,y+.18,0),(tip[0]*.7,y-.12,tip[2]*.7),tip],[.10,.065,.025],'bark_base')
             center=(tip[0]*.70,y+.16,tip[2]*.70)
             vox.leaf_lobe(rng,center,(max(span*.44,.24),.28+span*.11,max(span*.44,.24)),detail=tier==0)
@@ -376,7 +390,7 @@ def main():
             for tier,label in enumerate(['near','mid','far']):
                 step=([.03125,.0625,.125] if small else ([.0625,.125,.25] if family=='dense_bush_v2' else [.125,.25,.50]))[tier]
                 seed=7177+FAMILIES.index(family)*917+variant*7907
-                vox=Voxels(step,seed);BUILDERS[family](vox,random.Random(seed),tier,variant)
+                vox=Voxels(step,seed,connected_paths=family in FAMILIES[:2] and tier > 0);BUILDERS[family](vox,random.Random(seed),tier,variant)
                 faces=greedy_faces(vox)
                 suffix='' if variant==0 else f'_species{variant}'
                 name=family+suffix+'_'+label

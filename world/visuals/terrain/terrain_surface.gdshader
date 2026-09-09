@@ -42,6 +42,7 @@ uniform float snow_start_altitude = 10.8;
 uniform float snow_end_altitude = 14.3;
 
 #include "res://world/visuals/terrain/terrain_transition.gdshaderinc"
+uniform bool terrain_is_horizon = false;
 
 varying vec3 world_position;
 varying vec3 world_normal;
@@ -53,8 +54,8 @@ varying float terrain_detail;
 
 void vertex() {
 	vec2 position_xz = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
-	float lod_blend = terrain_is_proxy ? 1.0 : terrain_proxy_weight(position_xz);
-	terrain_detail = terrain_detail_weight(position_xz);
+	float lod_blend = terrain_is_horizon ? 0.0 : (terrain_is_proxy ? 1.0 : terrain_proxy_weight(position_xz));
+	terrain_detail = terrain_is_horizon ? 0.0 : terrain_detail_weight(position_xz);
 	float detailed_height = mix(VERTEX.y, UV2.y, lod_blend);
 	VERTEX.y = mix(UV2.x, detailed_height, terrain_detail);
 	terrain_morph = max(lod_blend, 1.0 - terrain_detail);
@@ -129,6 +130,13 @@ float get_layered_pixel_multiplier(bool top_surface) {
 
 
 void fragment() {
+	if (terrain_is_horizon) {
+		// Whole column ownership includes the riser facing out of a live chunk.
+		vec2 owner = world_position.xz - world_normal.xz * 0.01;
+		vec2 cell = floor((owner + terrain_chunk_size * 0.5) / terrain_chunk_size);
+		vec2 uv = (cell - terrain_coverage_origin + 0.5) / 16.0;
+		if (all(greaterThanEqual(uv, vec2(0.0))) && all(lessThan(uv, vec2(1.0))) && texture(terrain_coverage, uv).g > 0.5) { discard; }
+	}
 	vec3 normal_value = normalize(world_normal);
 	vec3 shaped_normal = normalize(cross(dFdx(world_position), dFdy(world_position)));
 	if (dot(shaped_normal, normal_value) < 0.0) { shaped_normal = -shaped_normal; }
@@ -163,7 +171,9 @@ void fragment() {
 		texture_value
 	);
 	pixel_brightness *= get_layered_pixel_multiplier(top_surface);
-	pixel_brightness = mix(1.0, pixel_brightness, terrain_detail);
+	// The far field keeps the same snow, rock and strata rules. Only fine
+	// texture contrast fades with distance, before the loaded terrain ends.
+	pixel_brightness = mix(1.0, pixel_brightness, terrain_detail * (1.0 - smoothstep(near_detail_end, mid_detail_end, camera_distance_v7)));
 
 	vec3 base_color = clamp(vertex_base_color, vec3(0.0), vec3(1.0));
 	float slope = 1.0 - abs(normal_value.y);

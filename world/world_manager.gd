@@ -2,6 +2,7 @@ class_name WorldManager
 extends Node3D
 
 const Horizon = preload("res://world/visuals/terrain/landscape_horizon.gd")
+const DistantForest = preload("res://world/visuals/scenery/distant_forest.gd")
 const WaterBuilder = preload("res://world/visuals/terrain/water_mesh_builder_v7.gd")
 
 const AuthoredAssets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
@@ -86,6 +87,9 @@ func _initialize_streaming() -> void:
 	var horizon := Horizon.new()
 	horizon.name = "LandscapeHorizon"
 	add_child(horizon)
+	var forest := DistantForest.new()
+	forest.name = "DistantForest"
+	add_child(forest)
 	_stream_build_timer = chunk_build_interval
 	set_process(true)
 

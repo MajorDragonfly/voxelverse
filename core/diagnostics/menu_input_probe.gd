@@ -101,10 +101,30 @@ func _run() -> void:
 	var cube = preload("res://world/space/cube_sphere.gd")
 	_expect(lab.body_id == "m1b:terra" and cube.local_position(cube.cartesian(address, 6371000.0),
 		cube.cartesian(lab.walker.location(), 6371000.0)).length() < 0.001, "The packaged Earth save lost millimetre location precision.")
+	await tree.process_frame
+	_click(lab.find_child("OpenGalaxy", true, false))
+	await tree.process_frame
+	await tree.process_frame
+	var panel: Node = lab.galaxy_panel
+	_expect(is_instance_valid(panel) and not panel.systems.is_empty() and not panel.record.is_empty(), "Packaged Galaxy button did not open usable catalog metadata.")
+	if is_instance_valid(panel) and not panel.record.is_empty():
+		var original_body: String = lab.body_id
+		panel.note.text = "Native Eingabe und Wiederbesuch"
+		_click(panel.save_button)
+		await tree.process_frame
+		_expect(panel.record.note == "Native Eingabe und Wiederbesuch", "Native Galaxy save click failed.")
+		_key(KEY_ESCAPE)
+		await tree.process_frame
+		_expect(not is_instance_valid(lab.galaxy_panel) and not settings.is_menu_open() and lab.body_id == original_body, "Escape opened settings or changed the body behind the Galaxy panel.")
+		_click(lab.find_child("OpenGalaxy", true, false))
+		await tree.process_frame
+		_expect(is_instance_valid(lab.galaxy_panel) and lab.galaxy_panel.note.text == "Native Eingabe und Wiederbesuch", "Native Galaxy reopen lost its note.")
+		lab.galaxy_panel.close()
+		await tree.process_frame
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():
-		print("MENU_INPUT_PASSED: underwater camera/air restoration, Esc, F8, actual paused GUI clicks, saved VSync, mouse restoration, physical F4, menu-to-lab round trip, Aster and real Terra button/collision/save/load.")
+		print("MENU_INPUT_PASSED: underwater camera/air restoration, Esc, F8, actual paused GUI clicks, saved VSync, mouse restoration, physical F4, menu-to-lab round trip, Aster, real Terra, Galaxy button/save/reopen and modal Escape.")
 	tree.quit(0 if failures.is_empty() else 1)
 
 

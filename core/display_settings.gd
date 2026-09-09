@@ -41,6 +41,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if get_tree().get_first_node_in_group(&"galaxy_catalog_overlay") != null:
+		return
 	if not (event is InputEventKey):
 		return
 	if not event.pressed or event.echo:

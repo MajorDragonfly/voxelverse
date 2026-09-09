@@ -113,6 +113,11 @@ func _streaming_checks() -> void:
 			break
 	_expect(horizon.generation_complete, "Distant landscape did not publish actual runtime meshes.")
 	if horizon.generation_complete:
+		var distant_material: ShaderMaterial = horizon.get_node("DistantLand").material_override
+		var near_material: ShaderMaterial = manager.loaded_chunks.values()[0].get_node("TerrainMesh").material_override
+		_expect(distant_material.shader == near_material.shader, "Distant ground uses a different palette/lighting shader.")
+		for parameter: String in ["snow_color", "snow_start_altitude", "snow_end_altitude", "rock_color", "rock_strata_color", "strata_strength"]:
+			_expect(distant_material.get_shader_parameter(parameter) == near_material.get_shader_parameter(parameter), "Streaming changes terrain shading: " + parameter)
 		var mesh: Mesh = horizon.get_node("DistantLand").mesh
 		_expect(mesh.get_aabb().size.x >= 768.0 and mesh.get_aabb().size.z >= 768.0, "Distant landscape does not extend beyond active chunks.")
 		_expect(mesh.get_aabb().size.y > 15.0, "Distant terrain lost its mountain silhouette.")
@@ -143,6 +148,20 @@ func _streaming_checks() -> void:
 			ready_chunks += int(chunk.generation_complete)
 		_expect(covered == ready_chunks, "Horizon fails to mask ready terrain chunks.")
 	print("Directional streaming measurements ", JSON.stringify(measurements))
+	var forest: Node = manager.get_node("DistantForest")
+	for frame in range(6000):
+		await process_frame
+		if forest.generation_complete:
+			break
+	_expect(forest.generation_complete, "Distant forest did not complete.")
+	if forest.generation_complete:
+		_expect(forest.stats.trees > 0 and forest.stats.trees <= 2048 and forest.stats.batches <= 6, "Distant forest exceeded its instance/batch budget or stayed empty.")
+		print("Distant forest runtime ", JSON.stringify(forest.stats))
+		forest._update_ownership()
+		var owned: int = 0
+		for byte: int in forest._ownership_bytes:
+			owned += int(byte > 0)
+		_expect(owned > 0, "Published tree groups do not take ownership from the distant forest.")
 	var horizon_ref: WeakRef = weakref(horizon)
 	fixture.free()
 	await process_frame

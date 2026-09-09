@@ -77,6 +77,8 @@ def main():
         if count < 7:
             raise ValueError('Missing benchmark source/runtime pairs')
         print(f'Art source round-trip passed: {count} byte-identical Near GLBs')
+        from check_tree_lods import check
+        check()
     elif args.source and args.output:
         if args.output.suffix != '.glb':
             parser.error('--output must be a .glb path')
