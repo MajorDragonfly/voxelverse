@@ -6,6 +6,7 @@ const InputPreferences = preload("res://core/input_preferences.gd")
 var input_preferences := InputPreferences.new()
 var _control_settings: VBoxContainer
 var _tabs: TabContainer
+var _language_settings: VBoxContainer
 
 const MODE_WINDOWED: int = 0
 const MODE_BORDERLESS: int = 1
@@ -288,6 +289,15 @@ func _build_settings_menu() -> void:
 	_control_settings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	control_scroll.add_child(_control_settings)
 	_control_settings.setup(input_preferences)
+	var language_scroll := ScrollContainer.new()
+	language_scroll.name = "LANGUAGE_TAB"
+	language_scroll.custom_minimum_size = Vector2(600, 440)
+	language_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	language_scroll.follow_focus = true
+	_tabs.add_child(language_scroll)
+	_language_settings = preload("res://ui/localization/language_settings.gd").new()
+	_language_settings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	language_scroll.add_child(_language_settings)
 	_tabs.tab_changed.connect(func(_tab: int): _control_settings.cancel_binding())
 	_message = _control_settings.message
 	_message.name = "Status"
@@ -342,6 +352,13 @@ func _add_option_row(parent: VBoxContainer, label_text: String) -> OptionButton:
 
 
 func _apply_menu_selection() -> void:
+	if not _control_settings.listening_action.is_empty():
+		_message.text = "Bitte zuerst die Tastenauswahl beenden."
+		return
+	var language_reason: String = _language_settings.apply()
+	if not language_reason.is_empty():
+		_message.text = language_reason
+		return
 	var reason: String = _control_settings.apply()
 	if not reason.is_empty():
 		_message.text = reason
@@ -401,6 +418,7 @@ func _toggle_settings_menu() -> void:
 		_sync_menu_controls()
 		_tabs.current_tab = 0
 		_control_settings.refresh()
+		_language_settings.refresh()
 		var scene := get_tree().current_scene
 		_lab_button.visible = scene != null and scene.has_node("DevelopmentTools")
 		_quit_button.visible = scene != null and (scene.has_method("save_lab") or scene.scene_file_path == "res://main/main.tscn")
@@ -430,6 +448,7 @@ func close_menu() -> void:
 	for option: OptionButton in [_mode_option, _resolution_option, _scale_option]:
 		option.get_popup().hide()
 	_control_settings.fps.get_popup().hide()
+	_language_settings.close_popup()
 	_control_settings.cancel_binding()
 	_menu_layer.hide()
 	get_tree().paused = _previous_paused

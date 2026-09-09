@@ -1,5 +1,7 @@
 extends RefCounted
 
+const Text = preload("res://core/localization/ui_text.gd")
+
 ## Local comfort settings, independent of campaigns and creature statistics.
 const CONFIG_PATH := "user://input_preferences.cfg"
 const ACTIONS := {
@@ -41,16 +43,16 @@ static func event_code(event: InputEvent) -> int:
 static func code_label(code: int) -> String:
 	match code:
 		0: return "—"
-		-1: return "Linksklick"
-		-2: return "Rechtsklick"
-		-3: return "Mittelklick"
-		-8: return "Maustaste 4"
-		-9: return "Maustaste 5"
-		KEY_SPACE: return "Leertaste"
-		KEY_UP: return "Pfeil ↑"
-		KEY_DOWN: return "Pfeil ↓"
-		KEY_LEFT: return "Pfeil ←"
-		KEY_RIGHT: return "Pfeil →"
+		-1: return Text.text("Linksklick")
+		-2: return Text.text("Rechtsklick")
+		-3: return Text.text("Mittelklick")
+		-8: return Text.text("Maustaste 4")
+		-9: return Text.text("Maustaste 5")
+		KEY_SPACE: return Text.text("Leertaste")
+		KEY_UP: return Text.text("Pfeil ↑")
+		KEY_DOWN: return Text.text("Pfeil ↓")
+		KEY_LEFT: return Text.text("Pfeil ←")
+		KEY_RIGHT: return Text.text("Pfeil →")
 	var logical: int = code if DisplayServer.get_name() == "headless" else DisplayServer.keyboard_get_keycode_from_physical(code as Key)
 	return OS.get_keycode_string((logical if logical != 0 else code) as Key)
 
@@ -91,11 +93,11 @@ static func validate(candidate: Dictionary) -> String:
 			if code == 0:
 				continue
 			if occupied.has(code):
-				return "%s ist bereits mit „%s“ belegt." % [code_label(code), ACTIONS[occupied[code]]]
+				return Text.format_text("BIND_CONFLICT", {"key": code_label(code), "action": Text.text(ACTIONS[occupied[code]])})
 			occupied[code] = action
 			count += 1
 		if count == 0:
-			return "„%s“ braucht mindestens eine Taste." % ACTIONS[action]
+			return Text.format_text("BIND_REQUIRED", {"action": Text.text(ACTIONS[action])})
 	return ""
 
 func load_saved(path: String = CONFIG_PATH) -> void:
