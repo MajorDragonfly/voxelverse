@@ -1,6 +1,7 @@
 extends Node3D
 ## Repo-native voxel props. Deposits are village salvage/forage patches, separate
 ## from wildlife feeding and its bush stock. No collision can trap a worker.
+const Economy = preload("res://world/tribe/village_economy.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 
 func rebuild(data: Dictionary) -> void:
@@ -10,7 +11,9 @@ func rebuild(data: Dictionary) -> void:
 	var center: Vector3 = Home.vector(data["anchor"])
 	_box(center + Vector3(0, 0.16, -1.3), Vector3(2.2, 0.32, 0.8), Color("765130"))
 	_label(center + Vector3(0, 2.8, 0), "Dorfplatz · Lager & Werkbank", Color("ead19a"))
-	for kind: String in ["wood", "stone", "food"]:
+	for kind: String in data["deposits"]:
+		if kind in ["water", "fiber"] and not data["economy"]["stations"].has("well" if kind == "water" else "fiberbed"):
+			continue
 		var deposit: Dictionary = data["deposits"][kind]
 		var location: Vector3 = Home.vector(deposit["position"])
 		var amount: int = int(deposit["remaining"])
@@ -25,11 +28,28 @@ func rebuild(data: Dictionary) -> void:
 			for i in range(5):
 				var offset := Vector3((i % 3 - 1) * 0.35, 0.22 + (i / 3) * 0.22, (i % 2) * 0.4)
 				var size := Vector3(0.26, 0.26, 1.2) if kind == "wood" else Vector3(0.4, 0.4, 0.4)
-				_box(location + offset, size, Color("95643e") if kind == "wood" else Color("8e9fa4") if kind == "stone" else Color("ab7857"))
-		var title: String = {"wood": "Leseholz", "stone": "Lose Steine", "food": "Essbare Wurzeln"}[kind]
+				_box(location + offset, size, Color("95643e") if kind == "wood" else Color("8e9fa4") if kind == "stone" else Color("60bde8") if kind == "water" else Color("b8bf67") if kind == "fiber" else Color("ab7857"))
+		var title: String = {"wood": "Leseholz", "stone": "Lose Steine", "food": "Essbare Wurzeln", "water": "Brunnen", "fiber": "Faserbeet"}[kind]
 		if kind == "food" and int(data["garden"]) == 1:
 			title = "Wurzelgarten · erntereif"
+		for station: String in data["economy"]["stations"]:
+			if Economy.STATIONS[station] == kind:
+				title = {"well": "Brunnen", "forester": "Forstplatz", "quarry": "Steinbruch", "fiberbed": "Faserbeet"}[station]
+				if station == "well":
+					for side in [-1, 1]:
+						_box(location + Vector3(side * 0.7, 0.4, 0), Vector3(0.2, 0.8, 1.5), Color("a7b1b4"))
+					_box(location + Vector3(0, 0.2, 0), Vector3(1.2, 0.15, 1.2), Color("438fa9"))
+				else:
+					_box(location + Vector3(0, 0.08, 0), Vector3(2.1, 0.16, 2.1), Color("6b5b45"))
 		_label(location + Vector3(0, 2.3, 0), "%s · %d" % [title, amount], Color("c6dec7"))
+	if not data["project"].is_empty() and data["project"]["kind"] in Economy.STATIONS:
+		var site: Vector3 = Home.vector(data["project"]["position"])
+		_box(site + Vector3(0, 0.08, 0), Vector3(2.1, 0.16, 2.1), Color("b6a46a"))
+		_label(site + Vector3(0, 2.3, 0), "Arbeitsplatz im Bau", Color("edd5a8"))
+	for batch: Dictionary in data["economy"]["incoming"]:
+		var site: Vector3 = Home.vector(batch["position"])
+		_box(site + Vector3(0, 0.4, 0), Vector3(0.5, 0.8, 0.5), Color("f4f0dd"))
+		_label(site + Vector3(0, 2.5, 0), "Milch zur Abholung · %d" % batch["remaining"], Color("f4f0dd"))
 	for i in range(2):
 		var location: Vector3 = Home.vector(data["sites"][i])
 		if i < int(data["huts"]):

@@ -199,7 +199,7 @@ func load_now(custom_path: String = "") -> bool:
 		last_migration_report.append("Recovered the previous complete snapshot from .bak.")
 	for saved_body: Dictionary in data["game_state"]["campaign"].get("bodies", {}).values():
 		if saved_body.has("tribe") and Tribe.upgrade(saved_body["tribe"]):
-			last_migration_report.append("Tribe 1 -> 2; residents, orders, cargo and stock retained. Garden must be built in play.")
+			last_migration_report.append("Tribe -> 3; residents, orders, cargo and stock retained. Garden and renewable workplaces must be built in play.")
 	_design_files = _dict(data.get("design_files", {}))
 	slot_name = str(data.get("slot_name", "Bisheriges Abenteuer"))
 	_slot_preview = _dict(data.get("slot_preview", {}))

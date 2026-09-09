@@ -1,0 +1,80 @@
+{
+  "godot": "4.6.3",
+  "checks": {
+    "tribal_age": {
+      "failures": [],
+      "passed": true,
+      "test": "tribal_age"
+    },
+    "tribal_age_supply": {
+      "failures": [],
+      "passed": true,
+      "test": "tribal_age_supply"
+    },
+    "economy_contract": {
+      "failures": [],
+      "passed": true,
+      "test": "tribal_age_economy_contract"
+    },
+    "economy_headless": {
+      "evidence": {
+        "delivered": 51.0,
+        "drinks": 16.0,
+        "grown": 13.0,
+        "meals": 16.0,
+        "produced": {
+          "fiber": 10.0,
+          "stone": 10.0,
+          "water": 36.0,
+          "wood": 11.0
+        },
+        "stock": {
+          "fiber": 2.0,
+          "food": 12.0,
+          "milk": 0.0,
+          "stone": 8.0,
+          "water": 12.0,
+          "wood": 1.0
+        }
+      },
+      "failures": [],
+      "passed": true,
+      "test": "tribal_age_economy"
+    },
+    "generated_world": {
+      "failures": [],
+      "passed": true,
+      "test": "tribal_age_world"
+    },
+    "fresh_process": {
+      "failures": [],
+      "passed": true,
+      "test": "tribal_age_world"
+    },
+    "economy_render": {
+      "evidence": {
+        "delivered": 50.0,
+        "drinks": 16.0,
+        "grown": 13.0,
+        "meals": 16.0,
+        "produced": {
+          "fiber": 9.0,
+          "stone": 10.0,
+          "water": 36.0,
+          "wood": 11.0
+        },
+        "stock": {
+          "fiber": 1.0,
+          "food": 12.0,
+          "milk": 0.0,
+          "stone": 8.0,
+          "water": 12.0,
+          "wood": 1.0
+        }
+      },
+      "failures": [],
+      "passed": true,
+      "test": "tribal_age_economy"
+    }
+  }
+}
