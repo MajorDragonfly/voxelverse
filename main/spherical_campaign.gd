@@ -7,6 +7,7 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Terrain = preload("res://world/surface/surface_terrain.gd")
 const Adapter = preload("res://world/surface/radial_surface_adapter.gd")
 const Player = preload("res://creatures/player/spherical_campaign_player.gd")
+const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 var terrain: Node3D
 var adapter: RefCounted
 var player: CharacterBody3D
@@ -20,6 +21,15 @@ func _ready() -> void:
 	if body.get("surface_mode") != Cube.MODE or not Surface.validate(body).is_empty():
 		get_node("/root/SessionFlow").call_deferred("_fail_loading", "Dieser Spielstand besitzt keinen gültigen Kugelkontext.")
 		return
+	var saves := get_node("/root/SaveGameService")
+	var design: Dictionary = Blueprint.load_best_available()
+	# Freeze the selected design (or the first default if none exists) once in
+	# the current slot. Older embedded editor files remain untouched as evidence.
+	if not saves._design_files.has(Blueprint.SAVE_PATH):
+		saves.record_design(Blueprint.SAVE_PATH, JSON.stringify(Blueprint.serialize_snapshot(design), "\t"))
+		if not saves.save_now():
+			get_node("/root/SessionFlow").call_deferred("_fail_loading", "Der erste Kreaturenentwurf konnte nicht gesichert werden.")
+			return
 	_build_environment()
 	terrain = Terrain.new()
 	add_child(terrain)
@@ -29,6 +39,7 @@ func _ready() -> void:
 	player.name = "Player"
 	player.terrain = terrain
 	player.adapter = adapter
+	player.creature_design = design
 	# Blueprint.load_best_available reads SaveGameService's authoritative slot
 	# snapshot; it cannot inherit another campaign's editor files.
 	add_child(player)

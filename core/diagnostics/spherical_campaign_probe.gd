@@ -42,7 +42,7 @@ func _run() -> void:
 	if not _expect_world(): await _finish(); return
 	var scene: Node3D = tree.current_scene
 	var player: CharacterBody3D = scene.player
-	_expect(player.creature_design.is_empty() and player.preview != null and Blueprint.load_best_available().name == design.name, "Original blueprint not used.")
+	_expect(player.creature_design.design_id == design.design_id and player.preview != null and Blueprint.load_best_available().name == design.name, "Original blueprint not used.")
 	_expect(tree.get_first_node_in_group(&"region_background_simulation") == null, "Planar simulation ran on sphere.")
 	_expect(saves.session_active and flow.can_pause() and saves.save_path == target, "Sphere did not join normal session/pause/save flow.")
 	# Move through real physics, wait for streamed collision, then rebase twice
@@ -77,7 +77,11 @@ func _run() -> void:
 	await tree.scene_changed
 	_expect(tree.current_scene.scene_file_path == flow.TITLE_SCENE and not saves.session_active, "Return to title did not release campaign.")
 	var output: Array = []
-	var arguments: PackedStringArray = ["--headless", "--path", ProjectSettings.globalize_path("res://"), "--", "--sphere-smoke", "--sphere-restart"]
+	var arguments: PackedStringArray = ["--headless"]
+	# Official release templates intentionally disallow --path overrides. Their
+	# own adjacent PCK is authoritative; only source editor probes need --path.
+	if OS.has_feature("editor"): arguments.append_array(["--path", ProjectSettings.globalize_path("res://")])
+	arguments.append_array(["--", "--sphere-smoke", "--sphere-restart"])
 	var code: int = OS.execute(OS.get_executable_path(), arguments, output, true)
 	_expect(code == 0 and str(output).contains("SPHERE_FRESH_PROCESS_PASSED"), "Fresh process failed: " + str(output))
 	# Exercise the actual opt-in on the normal new-game form as well as copy
@@ -91,7 +95,7 @@ func _run() -> void:
 	while flow.loading and Time.get_ticks_msec() - new_start < 50000: await tree.process_frame
 	if _expect_world():
 		_expect(saves.save_path != target and state.campaign.data.id != checkpoint.game_state.campaign.id, "Opt-in reused migrated campaign.")
-		_expect(saves._design_files.is_empty(), "Opt-in inherited another campaign's design.")
+		_expect(saves._design_files.size() == 1 and Blueprint.load_best_available().design_id != design.design_id, "Opt-in did not freeze its own distinct default design.")
 		_expect(tree.root.get_node("AudioManager").director._player == null, "Planar audio sampled a radial floating origin.")
 		flow.toggle_pause()
 		flow.return_to_title()

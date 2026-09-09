@@ -4,6 +4,7 @@ extends RefCounted
 const Surface = preload("res://core/campaign/surface_context.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Atlas = preload("res://core/map/exploration_atlas.gd")
+const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const SCHEMA: int = 1
 const MAX_SOURCE_BYTES: int = 16 * 1024 * 1024
 
@@ -13,6 +14,10 @@ static func blockers(source: Dictionary) -> Array[String]:
 		return ["Diesen alten Stand zuerst laden und speichern, damit Identitäten und Entwürfe eingebettet sind."]
 	var state: Dictionary = source.game_state
 	var campaign: Dictionary = state.campaign
+	if source.design_files.has(Blueprint.SAVE_PATH):
+		var design: Variant = JSON.parse_string(source.design_files[Blueprint.SAVE_PATH])
+		if not design is Dictionary or design.get("version") != Blueprint.SAVE_VERSION:
+			result.append("Der aktuelle Kreaturenentwurf hat ein unbekanntes Format und bleibt unverändert.")
 	if int(state.phase) != 0: result.append("Die Stammesphase benötigt noch die radialen Bewohner-, Bau- und Transportanschlüsse (M1g).")
 	if not campaign.pending_transition.is_empty(): result.append("Ein Phasenwechsel ist noch nicht abgeschlossen.")
 	for body: Dictionary in campaign.bodies.values():

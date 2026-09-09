@@ -76,7 +76,9 @@ func _run() -> void:
 	var new_path: String = saves.create_slot("Neue Kugel", 23757, Cube.MODE)
 	_expect(not new_path.is_empty() and state.get_current_body().id != body.id, "New sphere campaign failed or reused reference ID.")
 	_expect(state.get_current_body().surface_context.radius == Surface.DEFAULT_RADIUS, "New sphere lost Earth scale.")
-	_expect(saves._read_save(new_path).design_files.is_empty(), "New campaign inherited migration designs.")
+	_expect(saves._read_save(new_path).design_files.size() == 1 and Blueprint.load_best_available().design_id != design.design_id, "New campaign inherited migration designs or failed to freeze its default.")
+	var default_id: String = Blueprint.load_best_available().design_id
+	_expect(saves.select_slot(new_path) and Blueprint.load_best_available().design_id == default_id, "Reload regenerated the new campaign's default design ID.")
 	await _finish()
 
 func _test_blockers(data: Dictionary) -> void:
@@ -95,6 +97,11 @@ func _test_blockers(data: Dictionary) -> void:
 	_expect(str(Migration.blockers(unknown)).contains("Regionen"), "Persistent region changes received no blocker.")
 	unknown.game_state.phase = 1
 	_expect(str(Migration.blockers(unknown)).contains("M1g"), "Tribe could be loaded through creature runtime.")
+	var newer_design: Dictionary = data.duplicate(true)
+	var encoded: Dictionary = JSON.parse_string(newer_design.design_files[Blueprint.SAVE_PATH])
+	encoded.version = 999
+	newer_design.design_files[Blueprint.SAVE_PATH] = JSON.stringify(encoded)
+	_expect(saves._has_unsupported_contract(newer_design) and not Migration.blockers(newer_design).is_empty(), "Future player design was silently normalized.")
 
 func _test_future_and_failure(source: String, source_text: String, target: String, copied: Dictionary) -> void:
 	var future: Dictionary = copied.duplicate(true)

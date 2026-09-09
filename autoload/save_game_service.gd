@@ -12,6 +12,7 @@ const Surface = preload("res://core/campaign/surface_context.gd")
 const Migration = preload("res://core/campaign/spherical_migration.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 const GameModel = preload("res://autoload/game_state.gd")
+const PlayerBlueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Animals = preload("res://world/domestication/campaign_animal_state.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Designs = preload("res://core/persistence/design_store.gd")
@@ -535,6 +536,8 @@ func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surf
 		_pending_player_state = _last_player_state.duplicate(true)
 	_design_snapshot_active = true
 	_design_files.clear()
+	if surface_mode == Surface.Cube.MODE:
+		_design_files[PlayerBlueprint.SAVE_PATH] = JSON.stringify(PlayerBlueprint.serialize_snapshot(PlayerBlueprint.create_default()), "\t")
 	slot_name = title.strip_edges().left(48)
 	guidance.reset(true)
 	if slot_name.is_empty():
@@ -981,6 +984,10 @@ func _report_failure(message: String) -> void:
 func _has_unsupported_contract(data: Dictionary) -> bool:
 	if int(data.get("schema", 0)) > SAVE_SCHEMA:
 		return true
+	var designs: Variant = data.get("design_files")
+	if designs is Dictionary and designs.get(PlayerBlueprint.SAVE_PATH) is String:
+		var design: Variant = JSON.parse_string(designs[PlayerBlueprint.SAVE_PATH])
+		if design is Dictionary and (design.get("version") is int or design.get("version") is float) and float(design.version) > PlayerBlueprint.SAVE_VERSION: return true
 	if Progression.has_unsupported_contract(data.get("progression", {})):
 		return true
 	var imported_state: Variant = data.get("game_state", {})
