@@ -1,11 +1,12 @@
 extends Node3D
-## F6 this scene in the editor to audition the complete first sound package.
+## F6 this scene in the editor to audition effects, ambience, creatures and music.
 
 var _audio: Node
 var _loop: AudioStreamPlayer
 var _position := Vector3(0, 0, -5)
 var _status: Label
 var _underwater := false
+var _music_status: Label
 const VOICE_PROFILE = preload("res://audio/runtime/creature_voice_profile.gd")
 var _voice_role := "forager"
 var _voice_size := 1.0
@@ -29,13 +30,18 @@ func _ready() -> void:
 	background.color = Color(0.025, 0.045, 0.060)
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	layer.add_child(background)
-	var center := CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	layer.add_child(center)
+	var scroll := ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.anchor_left = 0.08
+	scroll.anchor_right = 0.92
+	scroll.anchor_top = 0.06
+	scroll.anchor_bottom = 0.94
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	layer.add_child(scroll)
 	var rows := VBoxContainer.new()
-	rows.custom_minimum_size.x = 780
+	rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	rows.add_theme_constant_override("separation", 20)
-	center.add_child(rows)
+	scroll.add_child(rows)
 	var title := Label.new()
 	title.text = "VOXELVERSE · HÖRTEST"
 	title.add_theme_font_size_override("font_size", 36)
@@ -43,7 +49,31 @@ func _ready() -> void:
 	var hint := Label.new()
 	hint.text = "Klänge auswählen · Richtung mit Kopfhörern prüfen · F7 für Lautstärke"
 	rows.add_child(hint)
-	var locations := HBoxContainer.new()
+	_music_status = Label.new()
+	_music_status.text = "MUSIK · Drei eigene Stücke mit weichen Übergängen"
+	rows.add_child(_music_status)
+	_audio.music.context_changed.connect(func(_context: StringName, title_text: String):
+		_music_status.text = "MUSIK · " + title_text)
+	var music_buttons := GridContainer.new()
+	music_buttons.columns = 3
+	music_buttons.add_theme_constant_override("h_separation", 12)
+	music_buttons.add_theme_constant_override("v_separation", 12)
+	rows.add_child(music_buttons)
+	for item in [["Menümusik · 40 s", "menu"], ["Erkundung · 60 s", "exploration"],
+		["Gefahr · 40 s", "danger"], ["Musik aus", "silent"]]:
+		var context := StringName(item[1])
+		button(music_buttons, item[0], func(): _audio.set_music_context(context))
+	button(music_buttons, "Gefahr für 8 Sekunden", func():
+		set_meta(&"audio_music_context", &"exploration")
+		_audio.resume_music_automation()
+		_audio.notify_music_danger(8.0))
+	button(music_buttons, "Musik + Umgebung", func():
+		_audio.set_music_context(&"exploration")
+		_loop.stream = _audio.director.loop_stream(_audio.get_sound_stream(&"foliage_loop"))
+		_loop.volume_db = -16.0
+		_loop.play()
+		_status.text = "Spielmix läuft · Schritte und Kreaturen dazuschalten · F7 für Lautstärke")
+	var locations := HFlowContainer.new()
 	rows.add_child(locations)
 	for item in [["Links", Vector3(-5, 0, -2)], ["Mitte", Vector3(0, 0, -5)],
 		["Rechts", Vector3(5, 0, -2)], ["Weit entfernt", Vector3(0, 0, -35)]]:
@@ -67,16 +97,17 @@ func _ready() -> void:
 				_audio.play_ui(event)
 			else:
 				_audio.play_world(event, _position, 0.0, 1.0, 777))
-	var loops := HBoxContainer.new()
+	var loops := HFlowContainer.new()
 	rows.add_child(loops)
 	for item in [["Wind", "wind_loop"], ["Blätter", "foliage_loop"],
 		["Wasser", "water_loop"], ["Unter Wasser", "underwater_loop"]]:
 		var event := StringName(item[1])
 		button(loops, item[0], func():
+			_loop.volume_db = -12.0
 			_loop.stream = _audio.director.loop_stream(_audio.get_sound_stream(event))
 			_loop.play()
 			_status.text = "Umgebung: " + String(event))
-	var actions := HBoxContainer.new()
+	var actions := HFlowContainer.new()
 	rows.add_child(actions)
 	button(actions, "Umgebung stoppen", func(): _loop.stop())
 	button(actions, "Unterwasserfilter an/aus", func():
@@ -141,6 +172,7 @@ func button(parent: Control, text: String, callback: Callable) -> void:
 
 func _exit_tree() -> void:
 	if is_instance_valid(_audio):
+		_audio.music.reset_scene()
 		_audio.set_underwater(false)
 		_audio.director.automatic_tracking = true
 		_audio.creatures.automatic_tracking = true

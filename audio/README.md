@@ -1,4 +1,4 @@
-# Voxelverse Audio-Grundlage
+# Voxelverse Audiopaket
 
 Eigenständiges Paket auf main `c9be789b9d1b1effa9e3b30a653c739feb392b25`.
 Keine Übernahme unfertiger Arbeiten anderer Chats. Einzige geänderte Bestandsdatei:
@@ -6,11 +6,14 @@ Keine Übernahme unfertiger Arbeiten anderer Chats. Einzige geänderte Bestandsd
 
 ## Ausprobieren
 
-- Hauptszene starten: Schritte, Springen, Landen und Umgebungsgeräusche sind angeschlossen.
+- Hauptszene starten: Erkundungsmusik, Schritte, Springen, Landen und Umgebungsgeräusche sind angeschlossen.
 - F7 öffnet die Audioeinstellungen; F7/Escape schließt sie. Änderungen werden gespeichert.
 - `audio/audio_playground.tscn` im Editor öffnen und F6 drücken: alle Klänge anhören,
   Richtung/Entfernung vergleichen, Umgebungsloops und Unterwasserfilter testen.
-- Die 65 eigenen, synthetisierten Dateien sind spielbare Prototyp-Klänge.
+  Oben lassen sich alle drei Musikstücke, ein achtsekündiger Gefahrwechsel und
+  „Musik + Umgebung“ auswählen; darunter Schritte und Kreaturen dazuschalten.
+  Die Seite ist scrollbar. F7 regelt den gesamten Mix.
+- Die 65 eigenen Effekte/Umgebungs-/Kreaturenklänge und drei Musikstücke sind spielbare Prototypen.
   Ihr Klangcharakter braucht noch einen Hörtest auf dem Zielgerät.
 
 ## Verhalten
@@ -63,7 +66,7 @@ Ereignisse: `step_grass`, `step_sand`, `step_stone`, `step_snow`, `step_wood`,
 `wind_loop`, `foliage_loop`, `water_loop`, `underwater_loop`.
 
 Kreaturenstimmen und optionale Erfolgsereignisse sind im zweiten Paket enthalten
-(siehe unten). Ein Soundtrack ist noch nicht enthalten; der Musikkanal ist vorbereitet.
+(siehe unten). Das dritte Paket ergänzt einen spielbaren Soundtrack (siehe unten).
 
 ## Welt und spätere Planeten
 
@@ -163,3 +166,75 @@ godot --headless --path . --script res://tests/audio/creature_audio_test.gd
 Er prüft deterministische Artenstimmen, Größenunterschiede, automatische Rufe,
 echte Signale, Verletzung/Heilung/Statänderung, Todesduplikate, Wiederbelebung,
 Distanz, Pause, Stimmenpriorität, Bereinigung und optionale Entdeckungsanbindung.
+
+
+## Ausbau: Musikpaket
+
+Drei eigene instrumentale Kompositionen mit warmen Flächen, hellen Synth-Keys,
+einem gemeinsamen Motiv und zurückhaltendem Elektro-Groove. Alle verwenden
+96 BPM, 4/4 und D-Dorisch mit demselben achttaktigen Harmoniezyklus. Die Arrangements
+ändern innerhalb des Stücks Dichte, Bass und Schlagzeug. Gesang ist nicht enthalten.
+
+| Kontext | Stück | Länge | Charakter |
+| --- | --- | --- | --- |
+| `menu` | Kleine Umlaufbahn | 40 s / 16 Takte | Helle Keys und lockerer Rhythmus |
+| `exploration` | Unter fremden Blättern | 60 s / 24 Takte | Ruhige Flächen, luftiges Motiv, sparsame Percussion |
+| `danger` | Etwas im Unterholz | 40 s / 16 Takte | Bewegter Bass und dichterer Rhythmus |
+
+Die Stücke liegen als Stereo-Ogg mit 32 kHz vor, zusammen etwa 1 MB. Der Generator
+legt Notenausklänge und Delay-Echos über die Schleifengrenze. Die Dateien werden
+im Spiel gestreamt und endlos abgespielt. Kein Python oder FFmpeg ist zum Spielen
+nötig. Partitur und Herkunft: `audio/assets/music/score.json` und
+`audio/assets/PROVENANCE.md`; Generator: `tools/audio/generate_music.py`.
+
+Zwei Musikstimmen reichen für weiche Übergänge: normal drei Sekunden, hinein in
+Gefahr 1,2 Sekunden. Der neue Titel übernimmt die musikalische Position des alten.
+Schnelle Wechsel merken sich den zuletzt gewünschten Kontext und führen zunächst
+die laufende Blende zu Ende; es entstehen keine zusätzlichen Player. „Musik aus“
+ist eine Ausblendung. Der Lautstärkeregler auf 0 % schaltet sofort stumm.
+In Pause laufen Musik und Übergänge weiter, Weltmusik wird auf halben Pegel
+abgesenkt. Die Gefahruhr pausiert. Beim Fortsetzen steigt der Pegel wieder an.
+Menümusik wird in Pause nicht abgesenkt. Der Unterwasserfilter betrifft Musik nicht.
+
+Automatische Auswahl: eine vorhandene Node3D der Gruppe `player` ergibt Erkundung;
+die bekannte Frontend-Szene `res://ui/frontend/main_menu.tscn` ergibt Menü.
+Unbekannte Szenen ohne Spieler bleiben still. Die Menüszene wird hier weder
+mitgeliefert noch aus einem anderen Branch übernommen. Wenn sich ihr Pfad später
+ändert, kann der Menü-Chat die explizite API oder Szenen-Metadaten verwenden.
+
+Erfolgreich abgespielte Warnungs- oder Angriffsereignisse höchstens 24 m vom
+Spieler entfernt aktivieren Gefahr für zehn Sekunden. Weitere solche Ereignisse
+verlängern die Zeit. Nähe allein, harmlose Kontaktrufe oder Lebensverlust ohne
+Angriff lösen keinen Gefahrkontext aus. Nach Ablauf kehrt Erkundung zurück.
+Auf dem unveränderten main gibt es noch nicht für jede KI solche Signale; im
+Hörtest ist der Gefahrwechsel deshalb zusätzlich jederzeit direkt auswählbar.
+Die API erlaubt später auch Ereignisse unabhängig von einer Kreaturenstimme:
+
+```gdscript
+AudioManager.set_music_context(&"menu")         # Bis Automatik oder Szenenwechsel.
+AudioManager.set_music_context(&"exploration")
+AudioManager.set_music_context(&"danger")       # Bewusst festhalten, z.B. Hörtest.
+AudioManager.set_music_context(&"silent")
+AudioManager.resume_music_automation()
+AudioManager.notify_music_danger(10.0)          # Temporär, nur bei Erkundungsbasis.
+```
+
+Eine explizite Kontextwahl hat Vorrang vor der Automatik inklusive temporärer
+Gefahr. `resume_music_automation()` hebt diese Wahl auf. Szenenwechsel löschen
+manuelle Wahl und alte Gefahrzeiten. Ein Szenenwurzel-Metadatum
+`audio_music_context` (`menu`, `exploration`, `danger` oder `silent`) überschreibt
+die automatische Szenenerkennung. Signal für Anzeige/HUD:
+`AudioManager.music.context_changed(context, title)`.
+
+Zusätzlicher Laufzeit-/Exporttest:
+
+```sh
+godot --headless --path . --script res://tests/audio/music_runtime_test.gd
+```
+
+Er prüft die importierten und tatsächlich abgespielten Ogg-Schleifen, Menü- und
+Spielererkennung, echte Überblendung, schnelle Kontextwechsel, zeitweilige Gefahr
+über ein Kreaturensignal, Distanz, Pause, Lautstärke, Szenenwechsel und Freigabe.
+Die Audiodateien wurden zusätzlich dekodiert und auf Länge, Signalpegel, Clipping
+und Sprünge an der Schleifengrenze geprüft. Die musikalische Wirkung und der Mix
+brauchen weiterhin deinen gemeinsamen Hörtest auf dem Zielgerät.

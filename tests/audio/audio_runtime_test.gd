@@ -161,6 +161,15 @@ func run() -> void:
 	await frames(40)
 	for voice in audio.director._ambience.values():
 		check(not voice.playing, "No player: ambience stops")
+	# Music fades out after the player disappears; allow that public lifecycle
+	# to finish before terminating the mixer, instead of quitting mid-stream.
+	for index in 240:
+		await frames(1)
+		if audio.music.current_context == &"silent" and not audio.music._fading:
+			break
+	check(audio.music.current_context == &"silent" and not audio.music._fading, "No player: music fades out")
+	audio.stop_ui()
+	await create_timer(0.25).timeout
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_CONFIG))
 	print("AUDIO_RUNTIME_RESULT ", JSON.stringify({"passed": failures.is_empty(), "failures": failures, "events": events}))
 	quit(0 if failures.is_empty() else 1)

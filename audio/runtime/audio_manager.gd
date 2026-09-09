@@ -20,6 +20,7 @@ var fallback_shortcut_enabled := true
 var volumes: Dictionary = DEFAULTS.duplicate()
 var director: Node
 var creatures: Node
+var music: Node
 var _streams: Dictionary = {}
 var _last_variant: Dictionary = {}
 var _last_time: Dictionary = {}
@@ -71,6 +72,9 @@ func _ready() -> void:
 	creatures.name = "CreatureAudio"
 	creatures.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(creatures)
+	music = preload("res://audio/runtime/music_director.gd").new()
+	music.name = "MusicDirector"
+	add_child(music)
 	get_tree().scene_changed.connect(_scene_changed)
 
 
@@ -224,6 +228,18 @@ func play_creature(event: StringName, source: Node3D) -> bool:
 	return creatures.emit_for(source, event)
 
 
+func set_music_context(context: StringName) -> bool:
+	return music.set_context(context)
+
+
+func resume_music_automation() -> void:
+	music.resume_automation()
+
+
+func notify_music_danger(seconds: float = 10.0) -> void:
+	music.notify_danger(seconds)
+
+
 func stop_source(source_id: int) -> void:
 	for voice in _voices:
 		if int(voice.get_meta(&"audio_source_id", -1)) == source_id:
@@ -261,6 +277,7 @@ func _scene_changed() -> void:
 	stop_world()
 	director.reset_tracking()
 	creatures.clear()
+	music.reset_scene()
 	if is_instance_valid(_panel):
 		close_settings()
 
@@ -306,6 +323,8 @@ func close_settings() -> void:
 
 
 func _exit_tree() -> void:
+	if is_instance_valid(music):
+		music.stop_immediately()
 	stop_world()
 	stop_ui()
 	if _save_pending:
