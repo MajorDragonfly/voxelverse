@@ -25,6 +25,7 @@ var _drag_start := Vector2.ZERO
 var _dragging: bool = false
 var _scale_factor: float = 1.0
 var _resident_ids: Array = []
+var animal_panel_open: bool = false
 
 func _ready() -> void:
 	layer = 40
@@ -273,3 +274,28 @@ func _finish_selection(event: InputEventMouseButton) -> void:
 func _exit_tree() -> void:
 	if _owns_pause:
 		get_tree().paused = false
+
+## Feature-owned controls share this HUD and its existing pause/layout owner.
+func add_extension(control: Control) -> void:
+	var column: Node = _hud.get_child(0)
+	column.add_child(control)
+	column.move_child(control, maxi(0, column.get_child_count() - 3))
+	# Switch the existing work area; keep the world view and resident selection free.
+	var orders: Control = column.get_child(4)
+	var stock_row := HBoxContainer.new()
+	column.add_child(stock_row)
+	column.move_child(stock_row, 0)
+	_stock.reparent(stock_row)
+	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var toggle := Style.button("Tierhaltung")
+	toggle.toggle_mode = true
+	toggle.focus_mode = Control.FOCUS_NONE
+	stock_row.add_child(toggle)
+	toggle.toggled.connect(func(enabled: bool) -> void:
+		animal_panel_open = enabled
+		orders.visible = not enabled
+		_goal.visible = not enabled
+		_supply.visible = not enabled
+		control.visible = enabled
+		toggle.text = "Dorfarbeit" if enabled else "Tierhaltung"
+		call_deferred("_layout"))

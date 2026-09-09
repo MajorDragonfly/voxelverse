@@ -6,13 +6,15 @@ signal save_failed(message: String)
 signal save_started(path: String)
 signal slots_changed
 
-const SAVE_SCHEMA: int = 6
+const SAVE_SCHEMA: int = 7
+const Animals = preload("res://world/domestication/campaign_animal_state.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Designs = preload("res://core/persistence/design_store.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const Progression = preload("res://autoload/progression_service.gd")
+const FaunaCatalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const Tribe = preload("res://world/tribe/tribe_state.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 const SLOT_DIRECTORY: String = "user://saves"
@@ -192,7 +194,7 @@ func load_now(custom_path: String = "") -> bool:
 			data["design_files"] = files
 		else:
 			last_migration_report.assign(data.get("migration_report", []))
-		last_migration_report.append("Schema %d -> 6; campaign, location, designs, behavior and encounters retained; no tribe created without confirmation." % schema)
+		last_migration_report.append("Schema %d -> 7; campaign, location, designs, behavior and encounters retained; no tribe or tamed animal created by migration." % schema)
 	else:
 		last_migration_report.assign(data.get("migration_report", []))
 	if source_path != target_path:
@@ -516,6 +518,13 @@ func _validate_save(data: Dictionary) -> String:
 	for body in campaign["bodies"].values():
 		if not body is Dictionary or body.get("generator_version") != Campaign.GENERATOR_VERSION or body.get("surface_mode") != Campaign.SURFACE_MODE:
 			return "Unsupported body generator/surface version."
+		if body.has("fauna_catalog"):
+			var fauna_problem: String = FaunaCatalog.validate(body["fauna_catalog"], body)
+			if not fauna_problem.is_empty():
+				return fauna_problem
+		var animal_problem: String = Animals.validate_body(body, campaign)
+		if not animal_problem.is_empty():
+			return animal_problem
 		if body.has("tribe"):
 			var tribe_problem: String = Tribe.validate(body["tribe"], body, campaign)
 			if not tribe_problem.is_empty():
@@ -823,6 +832,10 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	var bodies: Variant = campaign.get("bodies", {})
 	if bodies is Dictionary:
 		for body in bodies.values():
+			if body is Dictionary and Animals.unsupported(body):
+				return true
+			if body is Dictionary and body.has("fauna_catalog") and FaunaCatalog.has_unsupported(body["fauna_catalog"]):
+				return true
 			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
 				return true
 			if body is Dictionary and body.has("generator_version") and body["generator_version"] != Campaign.GENERATOR_VERSION:

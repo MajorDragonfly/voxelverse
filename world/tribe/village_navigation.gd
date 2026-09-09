@@ -5,13 +5,15 @@ const RADIUS: int = 12
 var graph := AStar3D.new()
 var origin := Vector3.ZERO
 var home: Node
+var _radius: int = RADIUS
 
-func rebuild(controller: Node, anchor: Vector3) -> void:
+func rebuild(controller: Node, anchor: Vector3, radius: int = RADIUS) -> void:
 	home = controller
 	origin = anchor
+	_radius = clampi(radius, RADIUS, 20)
 	graph.clear()
-	for z in range(-RADIUS, RADIUS + 1):
-		for x in range(-RADIUS, RADIUS + 1):
+	for z in range(-_radius, _radius + 1):
+		for x in range(-_radius, _radius + 1):
 			var ray := PhysicsRayQueryParameters3D.create(anchor + Vector3(x, 4, z), anchor + Vector3(x, -4, z), 1)
 			ray.exclude = [home.player.get_rid()]
 			var hit: Dictionary = home.player.get_world_3d().direct_space_state.intersect_ray(ray)
@@ -21,16 +23,18 @@ func rebuild(controller: Node, anchor: Vector3) -> void:
 			if not home._clear_space(position + Vector3.UP * 0.72):
 				continue
 			graph.add_point(_id(x, z), position)
-	for z in range(-RADIUS, RADIUS + 1):
-		for x in range(-RADIUS, RADIUS + 1):
+	for z in range(-_radius, _radius + 1):
+		for x in range(-_radius, _radius + 1):
 			var id: int = _id(x, z)
 			if not graph.has_point(id):
 				continue
 			for offset: Vector2i in [Vector2i(1, 0), Vector2i(0, 1)]:
-				if x + offset.x > RADIUS or z + offset.y > RADIUS:
+				if x + offset.x > _radius or z + offset.y > _radius:
 					continue
 				var other: int = _id(x + offset.x, z + offset.y)
-				if graph.has_point(other) and absf(graph.get_point_position(id).y - graph.get_point_position(other).y) <= 0.5:
+				# Loaded voxel treads can differ by 0.50000... m after collision
+				# interpolation. Preserve half-metre links within the 0.55 m step budget.
+				if graph.has_point(other) and absf(graph.get_point_position(id).y - graph.get_point_position(other).y) <= 0.52:
 					# Midpoint clearance catches tree trunks between grid samples.
 					var middle: Vector3 = graph.get_point_position(id).lerp(graph.get_point_position(other), 0.5)
 					var floor_hit: Dictionary = home._floor_hit(middle)
@@ -43,7 +47,7 @@ func rebuild(controller: Node, anchor: Vector3) -> void:
 						graph.connect_points(id, other)
 
 func _id(x: int, z: int) -> int:
-	return (z + RADIUS) * (RADIUS * 2 + 1) + x + RADIUS
+	return (z + _radius) * (_radius * 2 + 1) + x + _radius
 
 func route(from: Vector3, to: Vector3) -> PackedVector3Array:
 	if graph.get_point_count() == 0:

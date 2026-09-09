@@ -39,7 +39,7 @@ static func validate(value: Variant) -> String:
 		if a.get("surface_mode") != "legacy_plane_v9":
 			return "D2-Prüfszene unterstützt nur den ausdrücklich benannten Ebenenadapter."
 		var design: Variant = a.get("design_ref")
-		if not design is Dictionary or not identity(design.get("id")) or not integer(design.get("revision"), 1, 1000000000):
+		if not design is Dictionary or not identity(design.get("id")) or not integer(design.get("revision"), 0, 1000000000):
 			return "Ungültiger Körperentwurfsbezug."
 		for field in ["position", "home", "wait_position"]:
 			if not point(a.get(field)):

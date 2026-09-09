@@ -49,6 +49,9 @@ func _ready() -> void:
 	_state.phase_changed.connect(_invalidate)
 	_state.world_seed_changed.connect(_invalidate)
 	add_to_group(&"tribe_controller")
+	var domestication := preload("res://world/domestication/campaign_domestication.gd").new()
+	domestication.name = "Domestication"
+	add_child(domestication)
 
 func _process(delta: float) -> void:
 	if not is_instance_valid(player):
@@ -302,20 +305,20 @@ func screen_command(position: Vector2) -> void:
 			return
 	issue_order("move", target)
 
-func issue_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
-	var success: bool = _commit_order(order, destination)
+func issue_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
+	var success: bool = _commit_order(order, destination, movement_limit)
 	_order_sequence += 1
 	order_resolved.emit(StringName(order), "%d:%d" % [get_instance_id(), _order_sequence], success)
 	return success
 
-func _commit_order(order: String, destination: Vector3 = Vector3.ZERO) -> bool:
+func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
 	if not is_active() or selected.is_empty() or order not in Model.ORDERS:
 		return false
 	var before: Dictionary = village().duplicate(true)
 	var data: Dictionary = village()
 	if order == "move":
 		destination = navigation.snap(destination)
-		if not destination.is_finite() or destination.distance_to(anchor()) > 18.0:
+		if not destination.is_finite() or destination.distance_to(anchor()) > clampf(movement_limit, 0.0, 20.0):
 			status = "Befehle bleiben zunächst in der sicheren Umgebung des Dorfes."
 			return false
 		for identity: String in selected:

@@ -408,6 +408,23 @@ func get_saved_creature_encounter(object_id: String) -> Dictionary:
 	return _encounters.entries.get(object_id, {}).duplicate(true)
 
 
+## Phase-1 compatibility for the existing fauna lifecycle. Health only:
+## never grant behavior rewards or change friendship, species or ownership.
+func store_fauna_health(identity: String, ratio: float, dead: bool, food: float) -> bool:
+	var state := get_node("/root/GameState")
+	if int(state.current_phase) != 1 or is_behavior_transaction_active() or not is_finite(ratio) or ratio < 0 or ratio > 1 or not is_finite(food) or food < 0 or food > 1000 or dead != (ratio == 0.0):
+		return false
+	var entry: Dictionary = get_saved_creature_encounter(identity)
+	if entry.is_empty() or entry.get("body_id") != state.get_current_body()["id"]:
+		return false
+	entry["health_ratio"] = ratio
+	entry["dead"] = dead
+	entry["carcass_food"] = food
+	if not _encounters.put(entry): return false
+	get_node("/root/SaveGameService").schedule_autosave()
+	return true
+
+
 ## Partial trust/health changes schedule a snapshot; completed actions commit now.
 func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcome: String = "", context: Dictionary = {}) -> Dictionary:
 	if is_behavior_transaction_active():

@@ -16,6 +16,7 @@ const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 @export var region_coordinates: Vector2i = Vector2i.ZERO
 @export var requested_role: String = "auto"
 var habitat_cell: String = ""
+var catalog_species: Dictionary = {}
 @export_range(0.5, 8.0, 0.1) var base_move_speed: float = 1.7
 @export_range(0.5, 12.0, 0.5) var gravity_strength: float = 18.0
 @export_range(0.1, 1.0, 0.05) var visual_scale_min: float = 0.42
@@ -57,13 +58,15 @@ func configure(
 	new_individual_seed: int,
 	new_region_coordinates: Vector2i = Vector2i.ZERO,
 	new_role: String = "auto",
-	new_habitat_cell: String = ""
+	new_habitat_cell: String = "",
+	new_catalog_species: Dictionary = {}
 ) -> void:
 	species_seed = new_species_seed
 	individual_seed = new_individual_seed
 	region_coordinates = new_region_coordinates
 	requested_role = new_role
 	habitat_cell = new_habitat_cell
+	catalog_species = new_catalog_species.duplicate(true)
 
 
 func _ready() -> void:
@@ -74,6 +77,14 @@ func _ready() -> void:
 	floor_constant_speed = true
 	_random.seed = individual_seed * 97_409 + species_seed
 	_player = get_tree().get_first_node_in_group(&"player") as Node3D
+	if not catalog_species.is_empty():
+		var collider := get_node("CollisionShape3D") as CollisionShape3D
+		var shape := CapsuleShape3D.new()
+		var size: float = catalog_species["visual_scale"]
+		shape.radius = maxf(0.34, size * 0.72)
+		shape.height = maxf(1.15, size * 1.95)
+		collider.shape = shape
+		collider.position.y = shape.height * 0.5
 	_build_species()
 	_campaign_identity = _create_campaign_identity()
 	var social := preload("res://creatures/behavior/creature_social_component.gd").new()
@@ -83,11 +94,10 @@ func _ready() -> void:
 
 
 func _build_species() -> void:
-	blueprint = SpeciesFactory.create_species(
-		species_seed,
-		region_coordinates,
-		requested_role
-	)
+	if catalog_species.is_empty():
+		blueprint = SpeciesFactory.create_species(species_seed, region_coordinates, requested_role)
+	else:
+		blueprint = preload("res://world/fauna/domestication/domestication_contract.gd").decode(catalog_species["blueprint"])
 	ecological_role = SpeciesFactory.get_role(blueprint)
 	add_to_group(StringName("wildlife_%s" % ecological_role))
 	_visual_root = Node3D.new()
@@ -101,6 +111,8 @@ func _build_species() -> void:
 		visual_scale_min,
 		visual_scale_max
 	)
+	if not catalog_species.is_empty():
+		individual_scale = float(catalog_species["visual_scale"])
 	_preview.scale = Vector3.ONE * individual_scale
 	_preview.position = Vector3(0.0, 0.72 * individual_scale, 0.0)
 	_visual_root.add_child(_preview)
@@ -128,6 +140,9 @@ func _build_species() -> void:
 		180.0
 	)
 	current_health = maximum_health
+	if not catalog_species.is_empty():
+		_move_speed = float(catalog_species["domestication"]["movement_speed"])
+		return
 	match ecological_role:
 		"predator": _move_speed *= 1.15
 		"grazer": _move_speed *= 0.90
@@ -250,6 +265,8 @@ func _update_role_direction() -> void:
 
 
 func _try_predator_attack(target: Node) -> void:
+	if target != null and target.is_in_group(&"player") and get_node("/root/GameState").current_phase != 0:
+		return
 	if _attack_timer > 0.0 or target == null:
 		return
 	if not target.has_method("receive_damage"):

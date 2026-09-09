@@ -1,0 +1,40 @@
+name: Domestication D2
+on:
+  push:
+    branches: ["agent/d2-domestication"]
+  pull_request:
+    paths:
+      - "world/domestication/**"
+      - "world/tribe/**"
+      - "world/fauna/**"
+      - "creatures/ai/**"
+      - "creatures/behavior/creature_social_component.gd"
+      - "autoload/save_game_service.gd"
+      - "autoload/progression_service.gd"
+      - "ui/tribe/**"
+      - "tests/domestication*"
+      - ".github/workflows/domestication-validate.yml"
+jobs:
+  domestication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned engine
+        run: python tools/install_godot.py --directory "${{ runner.temp }}/godot" --platform linux
+      - name: Verify shared campaign, individual identity and fresh process restore
+        run: >-
+          python tools/validate_godot.py
+          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --tests domestication_contract_test domestication_d1_adapter_test
+          domestication_state_test domestication_lab_test domestication_campaign_test
+          domestication_world_test tribal_age_test save_slots_test campaign_foundation_test
+          --skip-main --output "${{ runner.temp }}/d2-checks"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: domestication-checks
+          path: ${{ runner.temp }}/d2-checks

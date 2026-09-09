@@ -67,6 +67,7 @@ func get_inspection_data() -> Dictionary:
 	var body_shape: Vector3 = InspectionBlueprint.get_body_shape(blueprint)
 	return {
 		"name": get_display_name(),
+		"domestication": species.get("domestication", {}).duplicate(true),
 		"role": ecological_role,
 		"species_seed": species_seed,
 		"region": region_coordinates,

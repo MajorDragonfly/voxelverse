@@ -141,6 +141,7 @@ func _context_error(a: Dictionary, c: Dictionary) -> String:
 func _offer_error(a: Dictionary, food: String, c: Dictionary) -> String:
 	var error: String = _context_error(a, c)
 	if not error.is_empty(): return error
+	if not c.get("handler_available", true): return "handler_busy"
 	if a["status"] == "tamed": return "already_tamed"
 	if a["claim_faction_id"] not in ["", c["faction_id"]]: return "claimed_by_other"
 	if not State.integer(c.get("capacity"), 1, State.MAX_ANIMALS): return "invalid_capacity"
