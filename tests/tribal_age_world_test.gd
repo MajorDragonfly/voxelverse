@@ -40,36 +40,48 @@ func _run() -> void:
 	var player: CharacterBody3D = home.player
 	player.set_physics_process(false)
 	player.set_process(false)
-	for frame in range(500):
+	var origin: Vector3 = player.global_position
+	var manager: Node = current_scene.get_node("WorldManager")
+	var ready_deadline: int = Time.get_ticks_msec() + 60000
+	while not _search_area_ready(manager, origin) and Time.get_ticks_msec() < ready_deadline:
 		await physics_frame
 		await process_frame
-		if current_scene.get_node("WorldManager").get_pending_chunk_count() == 0:
-			break
-	var origin: Vector3 = player.global_position
+	_expect(_search_area_ready(manager, origin), "Village search terrain and obstacle generation did not finish.")
+	if not failures.is_empty():
+		current_scene.queue_free()
+		await process_frame
+		_finish()
+		return
+	# Publish completed collision changes before querying a footprint.
+	for frame in range(2):
+		await physics_frame
+		await process_frame
 	var generator: Node = root.get_node("WorldGenerator")
 	var navigation := Navigation.new()
 	var result: Dictionary = {"ok": false}
 	var sites_found: int = 0
 	print("Generated starting point ", origin)
-	# Search near the real starting player using physical loaded terrain. Test
-	# readiness is a floor contact, independent of runner speed/render frames.
+	# Search near the real starting player after terrain and obstacles finish.
+	# One-metre samples include usable clearings between the old coarse probes.
 	var x_offsets: Array = [0]
-	x_offsets.append_array(range(-16, 17, 2))
+	x_offsets.append_array(range(-16, 17))
 	var z_offsets: Array = [-4]
-	z_offsets.append_array(range(-16, 17, 2))
+	z_offsets.append_array(range(-16, 17))
 	for x: int in x_offsets:
 		for z: int in z_offsets:
 			var point := origin + Vector3(x, 0, z)
 			point.y = generator.get_terrain_height(point.x, point.z) + 0.3
-			if not home.has_ground(point):
+			var floor_hit: Dictionary = home._floor_hit(point)
+			if floor_hit.is_empty() or floor_hit["normal"].dot(Vector3.UP) < 0.9:
 				continue
-			var ground: Vector3 = home._floor_hit(point)["position"]
+			var ground: Vector3 = floor_hit["position"]
 			navigation.rebuild(home, ground)
 			if navigation.sites().is_empty():
 				continue
 			sites_found += 1
 			player.global_position = point
 			result = home.establish_home()
+			print("Village candidate ", point, ": ", result["message"])
 			if result["ok"]:
 				break
 		if result["ok"]:
@@ -172,6 +184,21 @@ func _restart_check(saves: Node, state: Node) -> void:
 	for frame in range(5):
 		await process_frame
 	_finish()
+
+func _search_area_ready(manager: Node, origin: Vector3) -> bool:
+	# A drained queue only means jobs were submitted. Wait for the actual
+	# terrain AND obstacle colliders throughout the footprint/navigation area.
+	var extent: float = 16.0 + Navigation.RADIUS
+	var first: Vector2i = manager._world_position_to_chunk(origin - Vector3(extent, 0, extent))
+	var last: Vector2i = manager._world_position_to_chunk(origin + Vector3(extent, 0, extent))
+	for z in range(first.y, last.y + 1):
+		for x in range(first.x, last.x + 1):
+			var chunk: Node = manager.loaded_chunks.get(Vector2i(x, z))
+			if chunk == null or not chunk.generation_complete:
+				return false
+			if not chunk.get_node("ProceduralEcosystemV6").generation_complete:
+				return false
+	return true
 
 func _expect(condition: bool, message: String) -> void:
 	if not condition:

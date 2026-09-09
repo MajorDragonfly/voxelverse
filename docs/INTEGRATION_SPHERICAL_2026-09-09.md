@@ -60,6 +60,10 @@ Die grafische Dorfweltprobe überschritt auf dem Software-Renderer ihre Frist w�
 
 Die native Windows-Menüprobe wählt nun ausdrücklich Deutsch für ihre deutschen Textprüfungen. Windows startete durch die neue automatische Spracherkennung korrekt auf Englisch; die Tastenbelegung selbst war erfolgreich gespeichert und wirksam, während drei alte deutsche Textvergleiche deshalb fehlschlugen. Die Geräte-Sprachwahl im normalen Spiel bleibt automatisch bzw. nutzerbestimmt.
 
+Die Dorfweltprobe wartet außerdem auf fertig erzeugtes Gelände und Hindernisse im gesamten Such-/Navigationsbereich, einschließlich der anschließenden Physikaktualisierung. Eine leere Erzeugungswarteschlange garantierte das bisher nicht. Ihr Suchraster berücksichtigt jetzt auch die Ein-Meter-Zwischenräume; sämtliche realen Boden-, Trockenheits-, Freiraum- und Transportprüfungen bleiben erhalten. Beim grafischen Vergleich des Planeten-Detailwechsels wird die unabhängig weiterladende Minimap vorübergehend angehalten: Die ursprüngliche Remote-Abweichung lag ausschließlich in dieser Anzeige, während das Gelände pixelgleich war. Vergleichsgrenzen, beide Übergangsphasen und die absichtlich entfernte Geländeabdeckung als Negativkontrolle bleiben unverändert.
+
+Der vollständige Quelllauf dauerte lokal bereits knapp 30 Minuten. GitHub verteilt die automatisch gefundenen Tests deshalb überschneidungsfrei auf vier Läufe (29/29/28/28 beim aktuellen Bestand), jeweils mit Importprüfung. Ein eigener Lauf prüft die tatsächlichen Einstiege, Abschaltpunkte und das Streaming. Die gemeinsame Abschlussprüfung `validate` verlangt den Erfolg sämtlicher Teilläufe; Testumfang und individuelle Fristen bleiben erhalten.
+
 ## Veröffentlichung
 
 Der Nutzer hat die Veröffentlichung im öffentlichen Repository `MajorDragonfly/voxelverse` und die anschließende Übernahme nach `main` ausdrücklich freigegeben. Die ursprüngliche Ablehnung der automatischen Freigabeprüfung gehört zum vorherigen Prüfstand; der entsprechende Eintrag im Ergebnisnachweis dokumentiert diesen Zeitpunkt.
