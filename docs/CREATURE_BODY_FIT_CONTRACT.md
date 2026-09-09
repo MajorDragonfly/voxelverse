@@ -1,5 +1,7 @@
 # Körpervertrag B2: geometrische Passprüfung
 
+Ergänzung B3: [Gespeicherte Reitermaße, Auflagepunkte und Bewegungsnachweis](CREATURE_SEAT_FIT_CONTRACT.md). Die dort beschriebenen Prüfprofile erweitern den hier dokumentierten historischen Referenzformensatz.
+
 Ergänzt [B1](CREATURE_BODY_CONTRACT.md). API: `creatures/runtime/creature_body_fit.gd`, `inspect(preview)`. Schema **1**, Prüfprofil **`workshop_reference_v1`**. D1 entscheidet weiterhin allein über Eignung. Dieser Bericht enthält ausschließlich Geometrienachweise.
 
 ## Messgegenstand

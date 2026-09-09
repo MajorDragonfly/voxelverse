@@ -1,0 +1,910 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "base": "e2132d6e38bb4c546d6e1a434575caf7ec3b0ee5",
+  "note": "Vierbeinige erste Ebene-Laufen-Probe enthält zusätzlich einen gezielten beweglichen Arm-Prüfvoxel. Keine durchgehende Bewegungsfreigabe.",
+  "summary": {
+    "2_legs": {
+      "samples_checked": 958,
+      "complete": true,
+      "minimum_supporting_feet": 1,
+      "max_foot_penetration": 1.8179416660935e-07,
+      "max_total_stretch": 1.21453750133514,
+      "collision_samples": 0
+    },
+    "4_legs": {
+      "samples_checked": 944,
+      "complete": true,
+      "minimum_supporting_feet": 2,
+      "max_foot_penetration": 1.94907188388882e-07,
+      "max_total_stretch": 1.29454898834229,
+      "collision_samples": 33
+    },
+    "6_legs": {
+      "samples_checked": 616,
+      "complete": true,
+      "minimum_supporting_feet": 3,
+      "max_foot_penetration": 3.42726707458496e-07,
+      "max_total_stretch": 1.93681473838997,
+      "collision_samples": 0
+    }
+  },
+  "evidence": {
+    "2_legs": {
+      "checked_sockets": [
+        "saddle.primary",
+        "harness.left",
+        "harness.right"
+      ],
+      "complete": true,
+      "continuous_clearance": false,
+      "coverage": "sampled_poses",
+      "design_id": "design_56572ad063a6bd78dc5a7b6cd91051a5",
+      "errors": [],
+      "geometry_profile": "workshop_rider_v1",
+      "rider_profile": {
+        "leg_spacing": 1.08,
+        "rider_scale": 1.0,
+        "schema": 1,
+        "seat_height": 0.2
+      },
+      "samples_checked": 958,
+      "samples_per_cycle": 32,
+      "scenarios": [
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "flat",
+          "duration": 2.44837542055722,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 7.45058059692383e-08,
+          "max_total_stretch": 1.0,
+          "minimum_supporting_feet": 1,
+          "mode": "walk",
+          "requested_samples": 65,
+          "sample_count": 65,
+          "time_step": 0.0382558659462066
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "flat",
+          "duration": 1.4838638912468,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 7.45058059692383e-08,
+          "max_total_stretch": 1.0,
+          "minimum_supporting_feet": 1,
+          "mode": "run",
+          "requested_samples": 65,
+          "sample_count": 65,
+          "time_step": 0.0231853733007313
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "slope",
+          "duration": 9.67178568859582,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 1.66893005359992e-07,
+          "max_total_stretch": 1.03055107593536,
+          "minimum_supporting_feet": 1,
+          "mode": "walk",
+          "requested_samples": 254,
+          "sample_count": 254,
+          "time_step": 0.0382284019312088
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "slope",
+          "duration": 3.68411385614642,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 1.8179416660935e-07,
+          "max_total_stretch": 1.07209527492523,
+          "minimum_supporting_feet": 1,
+          "mode": "run",
+          "requested_samples": 160,
+          "sample_count": 160,
+          "time_step": 0.0231705273971473
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "steps",
+          "duration": 9.67178568859582,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 1.65104866001187e-07,
+          "max_total_stretch": 1.18669354915619,
+          "minimum_supporting_feet": 1,
+          "mode": "walk",
+          "requested_samples": 254,
+          "sample_count": 254,
+          "time_step": 0.0382284019312088
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "steps",
+          "duration": 3.68411385614642,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 1.35302543613491e-07,
+          "max_total_stretch": 1.21453750133514,
+          "minimum_supporting_feet": 1,
+          "mode": "run",
+          "requested_samples": 160,
+          "sample_count": 160,
+          "time_step": 0.0231705273971473
+        }
+      ],
+      "schema": 1,
+      "source_fingerprint": "c7a7848b99a7d7e65408828582e6f82e201824ce66eded95ea86e679ee3f17ac",
+      "status": "completed",
+      "suitability_owner": "D1",
+      "support": {
+        "active": true,
+        "complete": true,
+        "errors": [],
+        "frame": "BodyV4",
+        "max_allowed_gap": 0.085,
+        "max_gap": 0.060036413371563,
+        "min_gap": 0.0250000189989805,
+        "rider_seat_gap": 0.01,
+        "rider_seated": true,
+        "samples": [
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              -0.159999996423721,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              0.159999996423721,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              -0.159999996423721,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              0.159999996423721,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.060036413371563,
+            "skin": [
+              -0.159999996423721,
+              0.454999923706055,
+              0.258811056613922
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          },
+          {
+            "gap": 0.0250000189989805,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              0.260405719280243
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          },
+          {
+            "gap": 0.060036413371563,
+            "skin": [
+              0.159999996423721,
+              0.454999923706055,
+              0.258811056613922
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          }
+        ],
+        "schema": 1,
+        "supported": true,
+        "supported_samples": 9,
+        "tilt_degrees": 2.60864529892639
+      }
+    },
+    "4_legs": {
+      "checked_sockets": [
+        "saddle.primary",
+        "harness.left",
+        "harness.right"
+      ],
+      "complete": true,
+      "continuous_clearance": false,
+      "coverage": "sampled_poses",
+      "design_id": "design_02157047260630ce91c01a4c57faed7f",
+      "errors": [],
+      "geometry_profile": "workshop_rider_v1",
+      "rider_profile": {
+        "leg_spacing": 1.08,
+        "rider_scale": 1.0,
+        "schema": 1,
+        "seat_height": 0.2
+      },
+      "samples_checked": 944,
+      "samples_per_cycle": 32,
+      "scenarios": [
+        {
+          "collision_samples": 30,
+          "complete": true,
+          "course": "flat",
+          "duration": 2.44837542055722,
+          "findings": [
+            {
+              "collision": {
+                "category": "arms",
+                "part_uid": "motion_probe",
+                "position": [
+                  -0.00499999988824129,
+                  0.916646301746368,
+                  0.130030915141106
+                ],
+                "shape_id": "Torso",
+                "side": 1.0,
+                "socket_id": "saddle.primary"
+              },
+              "time": 0.344302793515859
+            }
+          ],
+          "findings_truncated": false,
+          "first_collision": {
+            "collisions": [
+              {
+                "category": "arms",
+                "part_uid": "motion_probe",
+                "position": [
+                  -0.00499999988824129,
+                  0.916646301746368,
+                  0.130030915141106
+                ],
+                "shape_id": "Torso",
+                "side": 1.0,
+                "socket_id": "saddle.primary"
+              }
+            ],
+            "time": 0.344302793515859
+          },
+          "max_foot_penetration": 4.4703483581543e-08,
+          "max_total_stretch": 1.0,
+          "minimum_supporting_feet": 3,
+          "mode": "walk",
+          "requested_samples": 65,
+          "sample_count": 65,
+          "time_step": 0.0382558659462066
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "flat",
+          "duration": 1.4838638912468,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 4.4703483581543e-08,
+          "max_total_stretch": 1.0,
+          "minimum_supporting_feet": 2,
+          "mode": "run",
+          "requested_samples": 65,
+          "sample_count": 65,
+          "time_step": 0.0231853733007313
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "slope",
+          "duration": 9.82461138150953,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 1.8179416660935e-07,
+          "max_total_stretch": 1.08995044231415,
+          "minimum_supporting_feet": 2,
+          "mode": "walk",
+          "requested_samples": 258,
+          "sample_count": 258,
+          "time_step": 0.0382280598502316
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "slope",
+          "duration": 3.43046662529326,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 1.85519456907812e-07,
+          "max_total_stretch": 1.16519331932068,
+          "minimum_supporting_feet": 2,
+          "mode": "run",
+          "requested_samples": 149,
+          "sample_count": 149,
+          "time_step": 0.0231788285492788
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "steps",
+          "duration": 9.82461138150953,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 1.94907188388882e-07,
+          "max_total_stretch": 1.24179553985596,
+          "minimum_supporting_feet": 2,
+          "mode": "walk",
+          "requested_samples": 258,
+          "sample_count": 258,
+          "time_step": 0.0382280598502316
+        },
+        {
+          "collision_samples": 3,
+          "complete": true,
+          "course": "steps",
+          "duration": 3.43046662529326,
+          "findings": [
+            {
+              "collision": {
+                "category": "legs",
+                "part_uid": "part_0006",
+                "position": [
+                  -0.704119384288788,
+                  -0.11329410970211,
+                  0.107914566993713
+                ],
+                "shape_id": "HarnessPad",
+                "side": -1.0,
+                "socket_id": "harness.left"
+              },
+              "time": 1.15894142746394
+            },
+            {
+              "collision": {
+                "category": "legs",
+                "part_uid": "part_0006",
+                "position": [
+                  0.683647871017456,
+                  -0.115059494972229,
+                  0.0691675245761871
+                ],
+                "shape_id": "HarnessPad",
+                "side": 1.0,
+                "socket_id": "harness.right"
+              },
+              "time": 2.27152519782932
+            }
+          ],
+          "findings_truncated": false,
+          "first_collision": {
+            "collisions": [
+              {
+                "category": "legs",
+                "part_uid": "part_0006",
+                "position": [
+                  -0.704119384288788,
+                  -0.11329410970211,
+                  0.107914566993713
+                ],
+                "shape_id": "HarnessPad",
+                "side": -1.0,
+                "socket_id": "harness.left"
+              }
+            ],
+            "time": 1.15894142746394
+          },
+          "max_foot_penetration": 1.63912773132324e-07,
+          "max_total_stretch": 1.29454898834229,
+          "minimum_supporting_feet": 2,
+          "mode": "run",
+          "requested_samples": 149,
+          "sample_count": 149,
+          "time_step": 0.0231788285492788
+        }
+      ],
+      "schema": 1,
+      "source_fingerprint": "8051f951a3dfa83cad3e4d349a45a9ee865786c593530ceec1d775f3db070889",
+      "status": "completed",
+      "suitability_owner": "D1",
+      "support": {
+        "active": true,
+        "complete": true,
+        "errors": [],
+        "frame": "BodyV4",
+        "max_allowed_gap": 0.085,
+        "max_gap": 0.060036413371563,
+        "min_gap": 0.0250000189989805,
+        "rider_seat_gap": 0.01,
+        "rider_seated": true,
+        "samples": [
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              -0.159999996423721,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              0.159999996423721,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              -0.159999996423721,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              0.159999996423721,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.060036413371563,
+            "skin": [
+              -0.159999996423721,
+              0.454999923706055,
+              0.258811056613922
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          },
+          {
+            "gap": 0.0250000189989805,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              0.260405719280243
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          },
+          {
+            "gap": 0.060036413371563,
+            "skin": [
+              0.159999996423721,
+              0.454999923706055,
+              0.258811056613922
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          }
+        ],
+        "schema": 1,
+        "supported": true,
+        "supported_samples": 9,
+        "tilt_degrees": 2.60864529892639
+      }
+    },
+    "6_legs": {
+      "checked_sockets": [
+        "saddle.primary",
+        "harness.left",
+        "harness.right"
+      ],
+      "complete": true,
+      "continuous_clearance": false,
+      "coverage": "sampled_poses",
+      "design_id": "design_5e196f4a691738b826ca8b177796a89f",
+      "errors": [],
+      "geometry_profile": "workshop_rider_v1",
+      "rider_profile": {
+        "leg_spacing": 1.08,
+        "rider_scale": 1.0,
+        "schema": 1,
+        "seat_height": 0.2
+      },
+      "samples_checked": 616,
+      "samples_per_cycle": 32,
+      "scenarios": [
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "flat",
+          "duration": 2.97622160830411,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 3.42726707458496e-07,
+          "max_total_stretch": 1.62673441486542,
+          "minimum_supporting_feet": 3,
+          "mode": "walk",
+          "requested_samples": 65,
+          "sample_count": 65,
+          "time_step": 0.0465034626297517
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "flat",
+          "duration": 1.80377067169946,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 3.42726707458496e-07,
+          "max_total_stretch": 1.66167552904714,
+          "minimum_supporting_feet": 3,
+          "mode": "run",
+          "requested_samples": 65,
+          "sample_count": 65,
+          "time_step": 0.0281839167453041
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "slope",
+          "duration": 6.84348841847742,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 3.34531068846289e-07,
+          "max_total_stretch": 1.80945684739398,
+          "minimum_supporting_feet": 3,
+          "mode": "walk",
+          "requested_samples": 149,
+          "sample_count": 149,
+          "time_step": 0.0462397866113339
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "slope",
+          "duration": 2.60677720936459,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 2.41398811384741e-07,
+          "max_total_stretch": 1.90649951531977,
+          "minimum_supporting_feet": 3,
+          "mode": "run",
+          "requested_samples": 94,
+          "sample_count": 94,
+          "time_step": 0.0280298624662859
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "steps",
+          "duration": 6.84348841847742,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 2.75969505247886e-07,
+          "max_total_stretch": 1.93681473838997,
+          "minimum_supporting_feet": 3,
+          "mode": "walk",
+          "requested_samples": 149,
+          "sample_count": 149,
+          "time_step": 0.0462397866113339
+        },
+        {
+          "collision_samples": 0,
+          "complete": true,
+          "course": "steps",
+          "duration": 2.60677720936459,
+          "findings": [],
+          "findings_truncated": false,
+          "first_collision": {},
+          "max_foot_penetration": 3.42726707458496e-07,
+          "max_total_stretch": 1.86090667825439,
+          "minimum_supporting_feet": 3,
+          "mode": "run",
+          "requested_samples": 94,
+          "sample_count": 94,
+          "time_step": 0.0280298624662859
+        }
+      ],
+      "schema": 1,
+      "source_fingerprint": "d5641d9bfdb31360a31ae0608b8ff2755865a907103fe233c90dcfb5fd9defd9",
+      "status": "completed",
+      "suitability_owner": "D1",
+      "support": {
+        "active": true,
+        "complete": true,
+        "errors": [],
+        "frame": "BodyV4",
+        "max_allowed_gap": 0.085,
+        "max_gap": 0.060036413371563,
+        "min_gap": 0.0250000189989805,
+        "rider_seat_gap": 0.01,
+        "rider_seated": true,
+        "samples": [
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              -0.159999996423721,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0450472384691238,
+            "skin": [
+              0.159999996423721,
+              0.490000009536743,
+              -0.180050700902939
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.535000562667847,
+              -0.178000390529633
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              -0.159999996423721,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.0350236259400845,
+            "skin": [
+              0.159999996423721,
+              0.490000009536743,
+              0.0401775240898132
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.52498733997345,
+              0.0417716130614281
+            ]
+          },
+          {
+            "gap": 0.060036413371563,
+            "skin": [
+              -0.159999996423721,
+              0.454999923706055,
+              0.258811056613922
+            ],
+            "supported": true,
+            "underside": [
+              -0.159999996423721,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          },
+          {
+            "gap": 0.0250000189989805,
+            "skin": [
+              0.0,
+              0.490000009536743,
+              0.260405719280243
+            ],
+            "supported": true,
+            "underside": [
+              0.0,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          },
+          {
+            "gap": 0.060036413371563,
+            "skin": [
+              0.159999996423721,
+              0.454999923706055,
+              0.258811056613922
+            ],
+            "supported": true,
+            "underside": [
+              0.159999996423721,
+              0.514974117279053,
+              0.261543601751328
+            ]
+          }
+        ],
+        "schema": 1,
+        "supported": true,
+        "supported_samples": 9,
+        "tilt_degrees": 2.60864529892639
+      }
+    }
+  }
+}

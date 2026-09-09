@@ -14,6 +14,14 @@ static func inspect(preview: Node3D) -> Dictionary:
 		"pose": "rest" if preview.get("motion_mode") == "edit" else "single_motion_sample",
 		"complete": true, "checked_sockets": [], "collisions": [], "errors": [], "cells_tested": 0,
 		"rest_stretch_notice": STRETCH_NOTICE, "stretched_legs": [], "suitability_owner": "D1"}
+	var profile: Dictionary = Shapes.Rider.read(preview.get("blueprint"))
+	report["rider_profile"] = profile
+	if Contract.Data.read(preview.get("blueprint")).has(Shapes.Rider.KEY):
+		report["profile"] = Shapes.ADJUSTABLE_PROFILE
+	report["errors"] = Shapes.Rider.validate(profile)
+	if not report["errors"].is_empty():
+		report["complete"] = false
+		return report
 	var body: Node3D = preview.get_node_or_null("BodyV4")
 	var skin: MeshInstance3D = preview.get_node_or_null("BodyV4/SculptedSkin")
 	if body == null or skin == null:
@@ -26,7 +34,7 @@ static func inspect(preview: Node3D) -> Dictionary:
 	var geometry: Array = collect(preview)
 	var scale: float = Contract.Surface.Blueprint.get_body_scale(preview.get("blueprint"))
 	for id in resolved["sockets"]:
-		var sample: Dictionary = inspect_socket(geometry, id, body.transform * resolved["sockets"][id], scale, SCAN_BUDGET - int(report["cells_tested"]))
+		var sample: Dictionary = inspect_socket(geometry, id, body.transform * resolved["sockets"][id], scale, SCAN_BUDGET - int(report["cells_tested"]), profile)
 		report["checked_sockets"].append(id)
 		report["collisions"].append_array(sample["collisions"])
 		report["cells_tested"] += sample["cells_tested"]
@@ -67,10 +75,13 @@ static func _collect(node: Node3D, parent: Transform3D, uid: String, category: S
 			_collect(child, local, uid, category, side, geometry)
 
 
-static func inspect_socket(geometry: Array, id: String, socket: Transform3D, scale: float, budget: int = SCAN_BUDGET) -> Dictionary:
+static func inspect_socket(geometry: Array, id: String, socket: Transform3D, scale: float, budget: int = SCAN_BUDGET, profile: Dictionary = Shapes.Rider.DEFAULT) -> Dictionary:
 	var result: Dictionary = {"complete": true, "collisions": [], "cells_tested": 0}
+	if not Shapes.Rider.validate(profile).is_empty():
+		result["complete"] = false
+		return result
 	var pose: Transform3D = socket * Transform3D(Basis.from_scale(Vector3.ONE * scale), Vector3.ZERO)
-	for shape: Dictionary in Shapes.boxes(id):
+	for shape: Dictionary in Shapes.boxes(id, profile):
 		var found: Dictionary = {}
 		for piece: Dictionary in geometry:
 			if piece["mesh"] == null:
@@ -93,6 +104,9 @@ static func socket_proposal(preview: Node3D, id: String) -> Dictionary:
 	if preview.get("motion_mode") != "edit" or id not in Contract.Data.IDS:
 		return {}
 	var blueprint: Dictionary = preview.get("blueprint")
+	var profile: Dictionary = Shapes.Rider.read(blueprint)
+	if not Shapes.Rider.validate(profile).is_empty():
+		return {}
 	var data: Dictionary = Contract.Data.read(blueprint)
 	if not Contract.Data.validate(data).is_empty() or not data["sockets"][id]["enabled"]:
 		return {}
@@ -120,7 +134,7 @@ static func socket_proposal(preview: Node3D, id: String) -> Dictionary:
 		var resolved: Dictionary = Contract.resolve(candidate, skin.mesh)
 		if not resolved["sockets"].has(id):
 			continue
-		var sample: Dictionary = inspect_socket(geometry, id, preview.get_node("BodyV4").transform * resolved["sockets"][id], Contract.Surface.Blueprint.get_body_scale(candidate))
+		var sample: Dictionary = inspect_socket(geometry, id, preview.get_node("BodyV4").transform * resolved["sockets"][id], Contract.Surface.Blueprint.get_body_scale(candidate), SCAN_BUDGET, profile)
 		if sample["complete"] and sample["collisions"].is_empty():
 			return {"socket_id": id, "socket": socket, "profile": Shapes.PROFILE}
 	return {}
