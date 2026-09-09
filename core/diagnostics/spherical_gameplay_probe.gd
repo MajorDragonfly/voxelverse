@@ -117,13 +117,11 @@ func _animal_chain(tribe: Node) -> void:
 	_stage("approach_wildlife")
 	var runtime: Node = tribe.domestication
 	await _until(func() -> bool: return runtime.is_active(), 8000)
-	var animal: Node3D
-	# D1 exposes a role list; use the exact checked policy rather than an ecology role.
-	if animal == null:
-		for candidate: Node3D in runtime.visible_animals():
-			var traits: Dictionary = candidate.blueprint.get("species", {}).get("domestication", {})
-			if float(traits.get("milk_yield", 0.0)) > 0: animal = candidate; break
-	_expect(animal != null, "No live D1 milk animal.")
+	# Population publication and real patrols continue after the controller is
+	# ready. Observe a live D1 individual, including its bounded return to view.
+	await _until(func() -> bool: return _milk_animal(runtime) != null, 30000)
+	var animal: Node3D = _milk_animal(runtime)
+	_expect(animal != null, "No live D1 milk animal: " + str(_population_status(tribe)))
 	if animal == null: return
 	var id: String = animal.get_campaign_identity().object_id
 	var species_id: String = animal.get_campaign_identity().species_id
@@ -158,6 +156,9 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(site.is_finite(), "No reachable physical pen site.")
 	if not site.is_finite(): return
 	_expect(tribe.issue_order("pen", site), "Cannot reserve pen construction: " + tribe.status)
+	_stage("prepare_pen_navigation")
+	await _until(func() -> bool: return not tribe.navigation.pending, 45000)
+	if not _expect_step(not tribe.navigation.pending, "Pen navigation did not finish within its separate preparation budget."): return
 	_stage("build_pen")
 	await _until(func() -> bool: return not tribe.village().husbandry.pens.is_empty(), 45000)
 	_expect(not tribe.village().husbandry.pens.is_empty(), "Pen material transport/construction failed: " + str({"status": tribe.status, "project": tribe.village().project, "members": tribe.village().members, "routes": tribe._routes, "goals": tribe._goals}))
@@ -260,6 +261,25 @@ func _site(tribe: Node, kind: String) -> Vector3:
 		var free: bool = tribe.navigation.free_shelter(candidate, tribe.village(), kind) if kind == "pen" else tribe.navigation.free_workplace(candidate, tribe.village(), kind)
 		if free and not tribe.neighbors.occupies(candidate): return candidate
 	return Vector3.INF
+
+func _milk_animal(runtime: Node) -> Node3D:
+	# D1 exposes suitability; an ecology role alone is not proof of milk yield.
+	for candidate: Node3D in runtime.visible_animals():
+		var traits: Dictionary = candidate.blueprint.get("species", {}).get("domestication", {})
+		if not candidate.is_dead and float(traits.get("milk_yield", 0.0)) > 0: return candidate
+	return null
+
+func _population_status(tribe: Node) -> Dictionary:
+	var population: Node = tree.current_scene.population
+	var catalog: Dictionary = tribe.body().fauna_catalog
+	var live: Array = []
+	for actor: Node3D in population.animals.values():
+		live.append({"id": actor.get_campaign_identity().object_id, "dead": actor.is_dead,
+			"distance": actor.global_position.distance_to(tribe.anchor()),
+			"milk": actor.blueprint.get("species", {}).get("domestication", {}).get("milk_yield", 0.0)})
+	return {"habitat_status": catalog.habitat_status, "habitats": catalog.habitats,
+		"evidence": catalog.species.map(func(entry: Dictionary) -> Dictionary: return {"id": entry.id, "group": entry.group, "body": entry.get("body_evidence", {})}),
+		"live": live, "storage_error": population.storage_error}
 
 func _approach_live(tribe: Node, runtime: Node, id: String, handler: String) -> bool:
 	var start: int = Time.get_ticks_msec()
