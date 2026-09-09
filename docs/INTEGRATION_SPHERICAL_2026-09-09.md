@@ -56,7 +56,7 @@ Diese Aufrufe schließen zusätzlich Import- bzw. Einstiegskontrollen ein; ihre 
 
 Der Nutzer hat die Veröffentlichung im öffentlichen Repository `MajorDragonfly/voxelverse` und die anschließende Übernahme nach `main` ausdrücklich freigegeben. Die ursprüngliche Ablehnung der automatischen Freigabeprüfung gehört zum vorherigen Prüfstand; der entsprechende Eintrag im Ergebnisnachweis dokumentiert diesen Zeitpunkt.
 
-Die Übertragung erfolgt über die verbundene GitHub-App, weil dem lokalen Git-Client die Zugangsdaten fehlen. Bereits veröffentlichte Quellcommits behalten ihre Kennungen. Nur lokal vorhandene Commits werden mit identischen Dateibäumen, ursprünglicher Elternreihenfolge und Herkunftsangaben übertragen; die App vergibt dabei neue Commit-Kennungen. Die lokale Prüfhistorie bleibt erhalten. Die Zuordnung wird im Veröffentlichungsnachweis festgehalten. Die oben genannten Prüfergebnisse beziehen sich weiterhin auf ihre ausdrücklich angegebenen lokalen Quell- und Paketstände.
+Die Übertragung erfolgt über die verbundene GitHub-App, weil dem lokalen Git-Client die Zugangsdaten fehlen. Bereits veröffentlichte Quellcommits behalten ihre Kennungen. Nur lokal vorhandene Commits werden mit identischen Dateibäumen, ursprünglicher Elternreihenfolge und Herkunftsangaben übertragen; die App vergibt dabei neue Commit-Kennungen. Die lokale Prüfhistorie bleibt erhalten. Die Zuordnung steht im [Veröffentlichungsnachweis](integration-spherical-publication-2026-09-09.json); sämtliche übertragenen Dateibäume wurden gegen ihre lokalen Originale abgeglichen. Die oben genannten Prüfergebnisse beziehen sich weiterhin auf ihre ausdrücklich angegebenen lokalen Quell- und Paketstände.
 
 ## Verbindliche nächste Priorität
 
