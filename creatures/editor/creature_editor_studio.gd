@@ -84,8 +84,8 @@ func _build_editor_room() -> void:
 	platform.position.y = -1.22
 	platform.material_override = Surface.material(Color.WHITE, true)
 	add_child(platform)
-	var rim := Node3D.new()
-	rim.name = "PlinthRim"
+	var outline := Node3D.new()
+	outline.name = "PlinthRim"
 	for index in range(4):
 		var edge := MeshInstance3D.new()
 		var box := BoxMesh.new()
@@ -95,9 +95,9 @@ func _build_editor_room() -> void:
 		if index >= 2:
 			edge.rotation.y = PI * 0.5
 		edge.material_override = Surface.material(Color("80c9b3"))
-		rim.add_child(edge)
-	rim.position.y = -1.215
-	add_child(rim)
+		outline.add_child(edge)
+	outline.position.y = -1.215
+	add_child(outline)
 	_camera_pivot = Node3D.new()
 	add_child(_camera_pivot)
 	_camera = Camera3D.new()
