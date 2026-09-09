@@ -1,0 +1,1018 @@
+{
+  "images": [
+    {
+      "catalog_universe_seed": "15838",
+      "job_id": 102392419712,
+      "path": "art/review/planet_visits/catalog_selection.jpg",
+      "renderer": "gl_compatibility",
+      "run_id": 34328828662,
+      "source_label": "m1c_visit_selection",
+      "source_seed": "12345.0",
+      "sha256": "dc1e9f82efd99314a93781a20bf6d37906e46d1fe75eec8a09b86bebf717c648",
+      "bytes": 61567
+    },
+    {
+      "catalog_universe_seed": "15838",
+      "job_id": 102392419712,
+      "path": "art/review/planet_visits/catalog_surface.jpg",
+      "renderer": "gl_compatibility",
+      "run_id": 34328828662,
+      "source_label": "m1c_visit_surface",
+      "source_seed": "12345.0",
+      "sha256": "02addba7be63a88a651734b5d3f0b59c505eeef7a0c37bb2aa09324f9baf5084",
+      "bytes": 50350
+    },
+    {
+      "catalog_universe_seed": "15838",
+      "job_id": 102392419712,
+      "path": "art/review/planet_visits/catalog_orbit.jpg",
+      "renderer": "gl_compatibility",
+      "run_id": 34328828662,
+      "source_label": "m1c_visit_orbit",
+      "source_seed": "12345.0",
+      "sha256": "2a0bd9b14a1abf32666430f8a23426314e76e53974de7bc2f724bbdd7f958df7",
+      "bytes": 44863
+    },
+    {
+      "catalog_universe_seed": "15838",
+      "job_id": 102392419712,
+      "path": "art/review/planet_visits/catalog_system.jpg",
+      "renderer": "gl_compatibility",
+      "run_id": 34328828662,
+      "source_label": "m1c_visit_system",
+      "source_seed": "12345.0",
+      "sha256": "0e54aa38a09da329e04658eafac725ad02999888bfea7967d1aa286a35eebcf2",
+      "bytes": 59057
+    },
+    {
+      "catalog_universe_seed": "15838",
+      "job_id": 102392419712,
+      "path": "art/review/planet_visits/catalog_return.jpg",
+      "renderer": "gl_compatibility",
+      "run_id": 34328828662,
+      "source_label": "m1c_visit_return",
+      "source_seed": "12345.0",
+      "sha256": "b1df265f489b4685526c5cf2e381cac1e3f8e7177308e52df578fd1f983cd6d8",
+      "bytes": 49331
+    },
+    {
+      "catalog_universe_seed": "15838",
+      "job_id": 102392419712,
+      "path": "art/review/planet_visits/lod_midpoint.jpg",
+      "renderer": "gl_compatibility",
+      "run_id": 34328828662,
+      "source_label": "m1c_lod_50",
+      "source_seed": "12345.0",
+      "sha256": "2738a5a91146fab3f97608af47d736727049b6a2534f896f545f252719450452",
+      "bytes": 54109
+    }
+  ],
+  "render_transitions": [
+    {
+      "changes": [
+        0.00250760541485113,
+        0.0024938952432825
+      ],
+      "gap_error": 0.0510322811705701,
+      "job_id": 102392419712,
+      "old_cover_error": 0,
+      "renderer": "gl_compatibility"
+    },
+    {
+      "changes": [
+        0.00241646525508352,
+        0.00240184731299927
+      ],
+      "gap_error": 0.0181653688385076,
+      "job_id": 102392419965,
+      "old_cover_error": 0,
+      "renderer": "forward_plus"
+    }
+  ],
+  "runtime_commit": "3062ad4f9a48c74de481d6b44baf9bfc7a28617b",
+  "date": "2026-09-09",
+  "base_commit": "63fb400c4dec5a8a3490f1a5e6e5fa9e283ece72",
+  "branch": "agent/planet-streaming-visits",
+  "engine": "Godot 4.6.3",
+  "workflows": [
+    {
+      "id": 34328828831,
+      "name": "Modular assembly validation",
+      "head_sha": "3062ad4f9a48c74de481d6b44baf9bfc7a28617b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828831"
+    },
+    {
+      "id": 34328828778,
+      "name": "Planet diversity V9",
+      "head_sha": "3062ad4f9a48c74de481d6b44baf9bfc7a28617b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828778"
+    },
+    {
+      "id": 34328828590,
+      "name": "Desktop export validation",
+      "head_sha": "3062ad4f9a48c74de481d6b44baf9bfc7a28617b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828590"
+    },
+    {
+      "id": 34328828626,
+      "name": "Godot validation",
+      "head_sha": "3062ad4f9a48c74de481d6b44baf9bfc7a28617b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828626"
+    },
+    {
+      "id": 34328828662,
+      "name": "Environment render validation",
+      "head_sha": "3062ad4f9a48c74de481d6b44baf9bfc7a28617b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828662"
+    }
+  ],
+  "validation": {
+    "run_id": 34328828626,
+    "job_id": 102392331755,
+    "checks": [
+      {
+        "exit_code": 0,
+        "name": "import",
+        "passed": true,
+        "seconds": 8.87
+      },
+      {
+        "exit_code": 0,
+        "name": "art_sources",
+        "passed": true,
+        "seconds": 2.389
+      },
+      {
+        "exit_code": 0,
+        "name": "adaptive_planet_test",
+        "passed": true,
+        "seconds": 13.549
+      },
+      {
+        "exit_code": 0,
+        "name": "asset_pipeline_test",
+        "passed": true,
+        "seconds": 0.343
+      },
+      {
+        "exit_code": 0,
+        "name": "campaign_foundation_test",
+        "passed": true,
+        "seconds": 0.994
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_builder_v7_test",
+        "passed": true,
+        "seconds": 0.622
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_editor_v7_runtime_test",
+        "passed": true,
+        "seconds": 0.905
+      },
+      {
+        "exit_code": 0,
+        "name": "creature_v5_smoke_test",
+        "passed": true,
+        "seconds": 0.993
+      },
+      {
+        "exit_code": 0,
+        "name": "distant_forest_test",
+        "passed": true,
+        "seconds": 2.018
+      },
+      {
+        "exit_code": 0,
+        "name": "drainage_network_test",
+        "passed": true,
+        "seconds": 1.925
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_cluster_test",
+        "passed": true,
+        "seconds": 2.763
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_playtest_test",
+        "passed": true,
+        "seconds": 20.153
+      },
+      {
+        "exit_code": 0,
+        "name": "environment_production_test",
+        "passed": true,
+        "seconds": 3.048
+      },
+      {
+        "exit_code": 0,
+        "name": "galaxy_catalog_test",
+        "passed": true,
+        "seconds": 1.461
+      },
+      {
+        "exit_code": 0,
+        "name": "galaxy_visits_test",
+        "passed": true,
+        "seconds": 25.274
+      },
+      {
+        "exit_code": 0,
+        "name": "gameplay_acceptance_test",
+        "passed": true,
+        "seconds": 0.718
+      },
+      {
+        "exit_code": 0,
+        "name": "large_planet_geometry_test",
+        "passed": true,
+        "seconds": 40.426
+      },
+      {
+        "exit_code": 0,
+        "name": "large_planet_lab_test",
+        "passed": true,
+        "seconds": 24.348
+      },
+      {
+        "exit_code": 0,
+        "name": "large_planet_runtime_test",
+        "passed": true,
+        "seconds": 61.713
+      },
+      {
+        "exit_code": 0,
+        "name": "menu_input_test",
+        "passed": true,
+        "seconds": 30.107
+      },
+      {
+        "exit_code": 0,
+        "name": "meta_runtime_test",
+        "passed": true,
+        "seconds": 0.717
+      },
+      {
+        "exit_code": 0,
+        "name": "modular_assembly_framework_test",
+        "passed": true,
+        "seconds": 0.528
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_diversity_v9_test",
+        "passed": true,
+        "seconds": 0.342
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_generation_acceptance_test",
+        "passed": true,
+        "seconds": 7.967
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_scale_migration_test",
+        "passed": true,
+        "seconds": 14.21
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_sphere_contract_test",
+        "passed": true,
+        "seconds": 1.551
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_sphere_runtime_test",
+        "passed": true,
+        "seconds": 47.773
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_streaming_test",
+        "passed": true,
+        "seconds": 8.53
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_transition_runtime_test",
+        "passed": true,
+        "seconds": 32.897
+      },
+      {
+        "exit_code": 0,
+        "name": "runtime_geometry_batch_test",
+        "passed": true,
+        "seconds": 0.53
+      },
+      {
+        "exit_code": 0,
+        "name": "terrain_transition_test",
+        "passed": true,
+        "seconds": 2.204
+      },
+      {
+        "exit_code": 0,
+        "name": "underwater_view_test",
+        "passed": true,
+        "seconds": 0.342
+      },
+      {
+        "exit_code": 0,
+        "name": "water_continuity_test",
+        "passed": true,
+        "seconds": 27.875
+      },
+      {
+        "exit_code": 0,
+        "name": "water_depth_test",
+        "passed": true,
+        "seconds": 3.785
+      },
+      {
+        "exit_code": 0,
+        "name": "world_evolution_v2_ci_test",
+        "passed": true,
+        "seconds": 1.739
+      },
+      {
+        "exit_code": 0,
+        "name": "world_layered_v7_test",
+        "passed": true,
+        "seconds": 0.901
+      },
+      {
+        "exit_code": 0,
+        "name": "world_runtime_continuity_test",
+        "passed": true,
+        "seconds": 1.181
+      },
+      {
+        "exit_code": 0,
+        "name": "planet_lab_entry",
+        "passed": true,
+        "seconds": 3.136
+      },
+      {
+        "exit_code": 0,
+        "name": "main_shutdown_45",
+        "passed": true,
+        "seconds": 1.367
+      },
+      {
+        "exit_code": 0,
+        "name": "main_shutdown_150",
+        "passed": true,
+        "seconds": 12.342
+      },
+      {
+        "exit_code": 0,
+        "name": "main",
+        "passed": true,
+        "seconds": 12.342
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_terrain",
+        "passed": true,
+        "seconds": 1.368
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_placement",
+        "passed": true,
+        "seconds": 11.32
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_resources",
+        "passed": true,
+        "seconds": 11.414
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_complete",
+        "passed": true,
+        "seconds": 12.159
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_cluster_build",
+        "passed": true,
+        "seconds": 23.504
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_15838_cluster_complete",
+        "passed": true,
+        "seconds": 23.41
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_terrain",
+        "passed": true,
+        "seconds": 1.46
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_placement",
+        "passed": true,
+        "seconds": 11.508
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_resources",
+        "passed": true,
+        "seconds": 11.694
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_complete",
+        "passed": true,
+        "seconds": 12.343
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_cluster_build",
+        "passed": true,
+        "seconds": 23.038
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_63352_cluster_complete",
+        "passed": true,
+        "seconds": 23.226
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_terrain",
+        "passed": true,
+        "seconds": 1.462
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_placement",
+        "passed": true,
+        "seconds": 12.158
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_resources",
+        "passed": true,
+        "seconds": 12.532
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_complete",
+        "passed": true,
+        "seconds": 12.9
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_cluster_build",
+        "passed": true,
+        "seconds": 26.105
+      },
+      {
+        "exit_code": 0,
+        "name": "shutdown_23757_cluster_complete",
+        "passed": true,
+        "seconds": 26.013
+      },
+      {
+        "exit_code": 0,
+        "name": "streaming_cpu",
+        "passed": true,
+        "seconds": 4.714
+      }
+    ]
+  },
+  "exports": [
+    {
+      "platform": "windows",
+      "run_id": 34328828590,
+      "job_id": 102392331585,
+      "artifact_id": 10094977347,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828590/artifacts/10094977347",
+      "checks": [
+        {
+          "name": "import",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 10.156
+        },
+        {
+          "name": "release_export",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 5.89
+        },
+        {
+          "name": "packaged_main",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 13.844
+        },
+        {
+          "name": "packaged_planet_lab",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 3.156
+        },
+        {
+          "name": "packaged_menu_input",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 32.859
+        },
+        {
+          "name": "packaged_creature_builder_v7_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.75
+        },
+        {
+          "name": "packaged_modular_assembly_framework_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.656
+        },
+        {
+          "name": "packaged_gameplay_acceptance_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.937
+        },
+        {
+          "name": "packaged_meta_runtime_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.859
+        },
+        {
+          "name": "packaged_planet_sphere_contract_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.969
+        },
+        {
+          "name": "packaged_planet_15838",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 41.891
+        },
+        {
+          "name": "packaged_planet_63352",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 14.5
+        },
+        {
+          "name": "packaged_planet_23757",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 15.703
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "run_id": 34328828590,
+      "job_id": 102392331770,
+      "artifact_id": 10094936734,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828590/artifacts/10094936734",
+      "checks": [
+        {
+          "name": "import",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 7.022
+        },
+        {
+          "name": "release_export",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 4.828
+        },
+        {
+          "name": "packaged_main",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 8.89
+        },
+        {
+          "name": "packaged_planet_lab",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 2.193
+        },
+        {
+          "name": "packaged_menu_input",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 21.632
+        },
+        {
+          "name": "packaged_creature_builder_v7_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.441
+        },
+        {
+          "name": "packaged_modular_assembly_framework_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.442
+        },
+        {
+          "name": "packaged_gameplay_acceptance_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.72
+        },
+        {
+          "name": "packaged_meta_runtime_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.629
+        },
+        {
+          "name": "packaged_planet_sphere_contract_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.281
+        },
+        {
+          "name": "packaged_planet_15838",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 26.668
+        },
+        {
+          "name": "packaged_planet_63352",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 9.372
+        },
+        {
+          "name": "packaged_planet_23757",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 10.022
+        }
+      ]
+    }
+  ],
+  "renders": [
+    {
+      "renderer": "gl_compatibility",
+      "run_id": 34328828662,
+      "planet_job_id": 102392419712,
+      "environment_job_id": 102392420215,
+      "planet_samples": 40,
+      "environment_samples": 64,
+      "total_samples": 104,
+      "software_renderer": true,
+      "target_hardware_acceptance": false,
+      "environment_cases": [
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "world",
+          "passed": true,
+          "samples": 6,
+          "seed": 15838,
+          "setup_limit_seconds": 240,
+          "setup_ms": 30220.44,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "assets",
+          "passed": true,
+          "samples": 7,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "species",
+          "passed": true,
+          "samples": 4,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "cluster",
+          "passed": true,
+          "samples": 2,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "creature",
+          "passed": true,
+          "samples": 2,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "water",
+          "passed": true,
+          "samples": 6,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "hydrology",
+          "passed": true,
+          "samples": 5,
+          "seed": 15838,
+          "setup_limit_seconds": 240,
+          "setup_ms": 36729.288,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "world",
+          "passed": true,
+          "samples": 6,
+          "seed": 23757,
+          "setup_limit_seconds": 240,
+          "setup_ms": 32702.972,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "assets",
+          "passed": true,
+          "samples": 7,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "species",
+          "passed": true,
+          "samples": 4,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "cluster",
+          "passed": true,
+          "samples": 2,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "creature",
+          "passed": true,
+          "samples": 2,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "water",
+          "passed": true,
+          "samples": 6,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "hydrology",
+          "passed": true,
+          "samples": 5,
+          "seed": 23757,
+          "setup_limit_seconds": 240,
+          "setup_ms": 35468.102,
+          "software_renderer": true
+        }
+      ]
+    },
+    {
+      "renderer": "forward_plus",
+      "run_id": 34328828662,
+      "planet_job_id": 102392419965,
+      "environment_job_id": 102392419999,
+      "planet_samples": 40,
+      "environment_samples": 64,
+      "total_samples": 104,
+      "software_renderer": true,
+      "target_hardware_acceptance": false,
+      "environment_cases": [
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "world",
+          "passed": true,
+          "samples": 6,
+          "seed": 15838,
+          "setup_limit_seconds": 240,
+          "setup_ms": 83778.528,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "assets",
+          "passed": true,
+          "samples": 7,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "species",
+          "passed": true,
+          "samples": 4,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "cluster",
+          "passed": true,
+          "samples": 2,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "creature",
+          "passed": true,
+          "samples": 2,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "water",
+          "passed": true,
+          "samples": 6,
+          "seed": 15838,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "hydrology",
+          "passed": true,
+          "samples": 5,
+          "seed": 15838,
+          "setup_limit_seconds": 240,
+          "setup_ms": 54663.097,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "world",
+          "passed": true,
+          "samples": 6,
+          "seed": 23757,
+          "setup_limit_seconds": 240,
+          "setup_ms": 104528.281,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "assets",
+          "passed": true,
+          "samples": 7,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "species",
+          "passed": true,
+          "samples": 4,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "cluster",
+          "passed": true,
+          "samples": 2,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "creature",
+          "passed": true,
+          "samples": 2,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "water",
+          "passed": true,
+          "samples": 6,
+          "seed": 23757,
+          "setup_limit_seconds": null,
+          "setup_ms": null,
+          "software_renderer": true
+        },
+        {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "case": "hydrology",
+          "passed": true,
+          "samples": 5,
+          "seed": 23757,
+          "setup_limit_seconds": 240,
+          "setup_ms": 43195.355,
+          "software_renderer": true
+        }
+      ]
+    }
+  ],
+  "render_artifacts": [
+    {
+      "id": 10095346841,
+      "name": "environment-review-forward_plus-push",
+      "bytes": 12421622,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828662/artifacts/10095346841"
+    },
+    {
+      "id": 10095119846,
+      "name": "environment-review-gl_compatibility-push",
+      "bytes": 14294676,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828662/artifacts/10095119846"
+    },
+    {
+      "id": 10095036402,
+      "name": "planet-lab-review-forward_plus-push",
+      "bytes": 7108782,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828662/artifacts/10095036402"
+    },
+    {
+      "id": 10094972045,
+      "name": "planet-lab-review-gl_compatibility-push",
+      "bytes": 8261416,
+      "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34328828662/artifacts/10094972045"
+    }
+  ],
+  "benchmark": "paired_benchmark.json",
+  "local_checks": "local_checks.json",
+  "iteration_note": "Initial 5cd690c Compatibility visit capture could not distinguish LOD phases over a nearly uniform water view. Final 3062ad4 prefers dry landing sites, uses a fixed elevated dry-land review camera, compares both phases and an intentional missing-cover control, and gives crowded systems a separate body legend. All final workflows passed."
+}

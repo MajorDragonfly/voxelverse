@@ -2,6 +2,8 @@
 
 9. September 2026 · Branch `agent/planet-real-scale` · Basis PR #13.
 
+**Aktueller Folgeausbau:** [Planetenstreaming und gespeicherte Katalogbesuche](PLANET_STREAMING_AND_VISITS.md). Der folgende Bericht bewahrt den damaligen Prüfstand und dessen Grenzen.
+
 **Nachfolgender Ausbau:** [M1c: Galaxiekatalog und Fernlandschaft](GALAXY_CATALOG_AND_DISTANCE.md) enthält inzwischen die Galaxiegrundlage und ein neueres Testpaket. Dieser Bericht bewahrt den M1b-Prüfstand und seine Messungen.
 
 Der Referenzbetrieb reicht jetzt bis zu einem erdgroßen Körper. Die Radien sind echte Meterwerte in Gelände, Schwerkraft, Wasser und gespeicherten Orten. Eine verkleinerte Orbit- oder Kartenansicht verändert diese Werte nicht. Die Körper sind prozedurale Referenzen, keine Nachbildung der irdischen Geografie. Die Galaxie bleibt als nächstes eigenständiges Arbeitspaket M1c geplant.

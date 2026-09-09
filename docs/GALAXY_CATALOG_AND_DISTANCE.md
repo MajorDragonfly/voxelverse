@@ -2,6 +2,8 @@
 
 9. September 2026 · Branch `agent/galaxy-catalog` · Basis `b870bb6`, PR #15 (`agent/planet-real-scale`). Laufzeitstand `f7040b1dcca6913be76bb9b916f6e07fad8ec7c3`.
 
+**Aktueller Folgeausbau:** [Planetenstreaming und gespeicherte Katalogbesuche](PLANET_STREAMING_AND_VISITS.md). Der folgende Bericht bewahrt den damaligen Prüfstand und dessen Grenzen.
+
 M1c macht die Galaxie als reproduzierbaren Datenkatalog abfragbar. Im Planetenlabor lassen sich Sternsysteme und ihre Körper ansehen sowie eigene Namen, Notizen und Entdeckungsmarkierungen speichern. Gleichzeitig behebt dieser Stand die unterbrochenen Baum-Fernmodelle und verbessert den Übergang vom geladenen Gelände zur Fernlandschaft nach Lars’ Spieltest. Seine positive Rückmeldung zu Bergen und Wolken bleibt in der Roadmap festgehalten.
 
 ## Im Testpaket ausprobieren
