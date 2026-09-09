@@ -11,6 +11,9 @@ Stand: 9. September 2026. Abgeschlossenes Teilpaket auf
 - Fortsetzung Tierregister: Codecommit `c6c409a9a91206caba45bea18c741d50544e44ce`,
   lokal geprüft als `122ddaa032d7255a0e010e3461a72588c7d0225b`.
   Identischer Dateibaum: `d65e7a5a0c9a6b84b514453c20ec9557b1aabc9e`.
+- Fortsetzung Tierrückmeldung: Codecommit `d5c5fdcd42bffb826156cf879ca31106360d5cbc`,
+  lokal geprüft als `a69f6f89045b76567c9fd15a0d674b474e5f24c8`.
+  Identischer Dateibaum: `1350c3c8e65b431ba5d5a445139d6c83e6f32e32`.
 - Kein Merge nach `main`, keine fremden unfertigen Arbeiten übernommen.
 - Lars hat nach der lokalen Abnahme den öffentlichen Upload dieses Branches nach
   `MajorDragonfly/voxelverse` und die Erstellung eines PR ausdrücklich bestätigt.
@@ -221,7 +224,7 @@ Commit exportiert; sie sind nicht Teil dieses Branches.
 
 Die bestehenden Buch-, Forschungs-, Vergleichs- und Gruppenanschlüsse wurden mitgeprüft.
 Die vollständige Stammes-/Audioabnahme des ersten Pakets bleibt oben dokumentiert;
-die D2-Fortsetzung ändert deren Controller und Klangmodule nicht.
+das Registerteilpaket veränderte deren Controller und Klangmodule nicht.
 
 Reproduktion ohne integriertes D2:
 
@@ -257,3 +260,80 @@ Transaktion und Integration der D1-Spawnlieferung bleiben Aufgaben der Integrati
 PR #30 wurde nicht verändert oder übernommen. Die separate optische Überarbeitung
 soll die hier dokumentierten Buch-/D1-/D2-/Pausenanschlüsse erhalten. Windows-Zielgerät
 und abschließende Hörabnahme bleiben offen. Kein Merge nach `main`.
+
+## Fortsetzung: Meldungen und Klänge für Tieraktionen
+
+`ui/frontend/animal_action_feedback.gd` verbindet den unveränderten D2-Controller
+mit einem vorhandenen Meldungsbereich und der vorhandenen Audioverwaltung.
+Die Scope-Prüfung und Zahlenformatierung stammen aus dem gemeinsamen Tier-Reader;
+die eigentliche Vertragsvalidierung bleibt vollständig bei D2.
+
+| Tatsächliches Ergebnis | Rückmeldung / vorhandener Klang |
+|---|---|
+| Futter angeboten | Reichweite/Sicht halten; noch kein Erfolgsklang |
+| Futtergabe gespeichert | Tatsächliches Vertrauen aus D2, `order_feed` |
+| Zähmung vollständig gespeichert | Tier gehört jetzt dem Stamm, Meilensteinklang unter `order_tame` |
+| Folgen / Warten / Heimkehr gespeichert | Betreuer bzw. Auftragsziel; `order_move` / `order_wait` |
+| Aktion abgewiesen | Verständlicher Grund aus D2s Rückgabe, `order_reject` |
+| Unfertige Gabe unterbrochen | Grund und keine Kosten für diese unfertige Gabe; bewusstes Abbrechen bleibt still |
+| Laden / Binden / Buch öffnen | Keine wiederholte Aktionsmeldung und kein Erfolgsklang |
+
+Die Texte behaupten bei Bewegungsaufträgen keine Ankunft. Futterwerte und
+Vertrauensgewinn werden nicht neu berechnet. Unbekannte interne Ablehnungsgründe
+erhalten einen neutralen deutschen Ersatztext. Die Nachricht bleibt auch bei
+unterdrücktem oder stummgeschaltetem Klang lesbar.
+
+Die Klangzuordnung ergänzt nur `follow`, `home` und `tame` in der vorhandenen
+Befehls-API. `order_tame` referenziert die vorhandene `discovery.wav`; keine neuen
+Audiodateien, Stimmenpools, Busse oder Einstellungen. Der Ton vergibt keine Punkte.
+Stimmenbegrenzung, Ratenbegrenzung, Fehlerpriorität, UI-Lautstärke und
+Komforteinstellungen gelten weiter. Alle konkreten Host-Aufrufe stehen in
+[`audio/README.md`](../audio/README.md), Abschnitt „D2-Tieraktionen“.
+
+Erfolge stammen ausschließlich aus `animal_changed`. Der Host leitet tatsächliche
+Rückgaben an `report_result()` weiter; erfolgreiche Rückgaben werden dort ignoriert.
+Fehler werden über eine Host-Request-ID vor doppelter Meldung geschützt. Nach Laden
+ruft der Host `clear_after_load()` auf, beim Wechsel `unbind()`. Während Pause laufen
+keine neuen Tierklänge, und danach wird nichts nachgeholt. Der Baustein führt keine
+Tieraktion aus, pollt keine Aktionsrückgaben und schreibt keine Daten.
+
+### Prüfung der Tierrückmeldung
+
+Nachweise: [`validation/interface-task7-animal-feedback/`](../validation/interface-task7-animal-feedback/).
+Godot 4.6.3: Import/Artquellen sowie vier betroffene Tests ohne D2 bestanden.
+Zusätzlich verwendet `tests/audio/animal_action_feedback_test.gd` den unveränderten
+D2-Prüfauszug am Commit `da6dbd62f505a688aba439cefe42ac8f029da4d4`:
+
+- Falsches Futter, unbezahlter Reichweitenabbruch und fehlgeschlagene Speicherung
+  am Ende einer im ursprünglichen Labor-Physiktakt laufenden Futtergabe.
+- Vier tatsächliche Futterkosten, bezahltes Vertrauen und anschließende Zähmung
+  mit dem realen vorhandenen Audiostream, ohne zusätzliche Punkte.
+- Folgen/Warten/Heimkehr, unmittelbarer Fehler nach Erfolg, wiederholte Rückgaben
+  auch nach Ablauf der Klangbegrenzung und idempotente Ereignisbindung.
+- Pause, Buch/Laden, fremde Fraktion/Körper, Abmeldung und separater Prozessneustart
+  ohne nachträgliche Erfolgsgeräusche; unveränderter Kampagnen-Sentinel.
+- Grafisch bei 800×600 und 640×480: realer Klick auf den gescrollten Befehl und
+  sichtbare Fehlerrückmeldung. Die Prüfansicht verwendet physische UI-Größen.
+
+Der Wrapper `tests/fixtures/animal_feedback_d2_preview.tscn` erweitert die bestehende
+Buch-/D2-Prüfszene. Er leitet reale Button-Ergebnisse weiter. Nur dieser Laborwrapper
+beobachtet zusätzlich Änderungen an D2s `last_result`, weil das unveränderte Labor
+`advance_offer()` intern aufruft. Der produktive Host soll dessen tatsächliche
+Rückgabe direkt weiterleiten. Die Laborquellen wurden nicht geändert oder in diesen
+Branch übernommen; ihre vorhandene Zustands-/Bewegungsanzeige bleibt eine Laboranzeige.
+
+Reproduktion im bereits beschriebenen separaten D2-Prüfauszug:
+
+```sh
+godot --headless --path /pfad/zum/pruefauszug \
+  --script res://tests/audio/animal_action_feedback_test.gd
+godot --headless --path /pfad/zum/pruefauszug \
+  --script res://tests/audio/animal_action_feedback_test.gd -- --verify-reload
+godot --path /pfad/zum/pruefauszug res://tests/fixtures/animal_feedback_d2_preview.tscn
+```
+
+![Tierrückmeldung in der D2-Prüfansicht bei 640 × 480](../art/review/interface_task7/animal_feedback_640x480.png)
+
+Keine zusätzliche Pause-, Zähmungs-, Speicher- oder Buchimplementierung. Die normale
+Kampagne braucht weiterhin den freigegebenen D2-Host und dessen gemeinsame
+Speicherung; dort sind Buch und Feedback anschließend einmalig anzuschließen.

@@ -1,0 +1,3 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"d2_checked":true,"failures":[],"heard":[{"action":"feed","ok":false},{"action":"feed","ok":false},{"action":"feed","ok":false},{"action":"feed","ok":true},{"action":"feed","ok":true},{"action":"feed","ok":true},{"action":"tame","ok":true},{"action":"follow","ok":true},{"action":"wait","ok":true},{"action":"home","ok":true},{"action":"feed","ok":false},{"action":"home","ok":true},{"action":"feed","ok":false}],"passed":true,"test":"animal_action_feedback"}
