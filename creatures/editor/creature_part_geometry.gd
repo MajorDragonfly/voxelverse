@@ -3,7 +3,7 @@ extends RefCounted
 ## detail as an upright cone. End pieces belong to their moving limb socket.
 const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
 const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
-const Skin = preload("res://creatures/editor/creature_skin_style.gd")
+const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const Rig = preload("res://creatures/runtime/creature_limb_rig.gd")
 
 
@@ -14,7 +14,7 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 	var category: String = str(placement["category"])
 	var skin: Color = Surface.colors(blueprint)[0]
 	var accent: Color = Surface.colors(blueprint)[1]
-	var horn: Color = Skin.color(blueprint, "horn_color", Color("e3d5b0"))
+	var horn: Color = SkinStyle.color(blueprint, "horn_color", Color("e3d5b0"))
 	match category:
 		"legs", "arms":
 			_limb(root, id, placement, blueprint)
@@ -97,7 +97,7 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 
 
 static func _eye(root: Node3D, position: Vector3, size: Vector3, blueprint: Dictionary, prefix: String) -> void:
-	var iris: Color = Skin.color(blueprint, "eye_color", Surface.colors(blueprint)[1].lightened(0.15))
+	var iris: Color = SkinStyle.color(blueprint, "eye_color", Surface.colors(blueprint)[1].lightened(0.15))
 	_piece(root, prefix + "Sclera", position, size, Color("f4eedf"))
 	_piece(root, prefix + "Iris", position + Vector3(0, 0, -size.z * 0.43), size * Vector3(0.67, 0.71, 0.27), iris)
 	_piece(root, prefix + "Pupil", position + Vector3(0, 0, -size.z * 0.54), size * Vector3(0.32, 0.44, 0.14), Color("0e1b22"))
@@ -132,7 +132,7 @@ static func _limb(root: Node3D, id: String, placement: Dictionary, blueprint: Di
 	knee.add_child(socket)
 	var default_end: String = ("feet_hooves" if id == "legs_hoof" else ("feet_claws" if id in ["legs_spider", "legs_sprinter"] else "feet_pads")) if is_leg else ("hands_claws" if id == "arms_claws" else "hands_grasp")
 	var end_id: String = str(placement.get("end_part_id", ""))
-	_terminal(socket, default_end if end_id.is_empty() else end_id, skin, Skin.color(blueprint, "horn_color", Color("d7cba9")))
+	_terminal(socket, default_end if end_id.is_empty() else end_id, skin, SkinStyle.color(blueprint, "horn_color", Color("d7cba9")))
 	var rotation: Vector3 = Blueprint._as_vector3(placement.get("end_rotation", Vector3.ZERO)) * Vector3(1, float(root.get_meta("creature_part_side", 1.0)), float(root.get_meta("creature_part_side", 1.0)))
 	Rig.configure(root, upper, lower, knee, joint, socket, width, rotation * PI / 180.0)
 

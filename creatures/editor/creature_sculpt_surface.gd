@@ -7,7 +7,7 @@ const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
 const Parts = preload("res://creatures/editor/creature_part_library.gd")
 const Spine = preload("res://creatures/editor/creature_spine_profile.gd")
 const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
-const Skin = preload("res://creatures/editor/creature_skin_style.gd")
+const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const BODY_CELL_SIZE: float = 0.035
 const MAX_BODY_AXIS_CELLS: float = 128.0
 
@@ -89,7 +89,7 @@ static func build_skin(blueprint: Dictionary) -> ArrayMesh:
 		var radius: Vector2 = cross["radius"]
 		var radial_y: float = ((float(row.x) + 0.5) * step - float(cross["center_y"])) / radius.y
 		var belly: float = floorf(clampf(-radial_y, 0.0, 1.0) * 3.0) / 3.0
-		var row_color: Color = palette[0].lerp(Skin.color(blueprint, "belly_color", palette[0].lightened(0.26)), belly * 0.7)
+		var row_color: Color = palette[0].lerp(SkinStyle.color(blueprint, "belly_color", palette[0].lightened(0.26)), belly * 0.7)
 		for x in range(-extent, extent):
 			var cell := Vector3i(x, row.x, row.y)
 			if x >= -interior and x < interior:
@@ -119,7 +119,7 @@ static func material(color: Color, vertex_colors: bool = false, blueprint: Dicti
 	result.roughness = 1.0
 	result.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	result.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
-	Skin.apply(result, blueprint)
+	SkinStyle.apply(result, blueprint)
 	return result
 
 

@@ -8,7 +8,7 @@ const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
 const Sockets = preload("res://creatures/editor/creature_surface_sockets_v7.gd")
 const Spine = preload("res://creatures/editor/creature_spine_profile.gd")
 const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
-const Skin = preload("res://creatures/editor/creature_skin_style.gd")
+const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
 const Animator = preload("res://creatures/runtime/adaptive_locomotion_animator.gd")
 var failures: Array[String] = []
@@ -141,19 +141,19 @@ func _check_skin_and_storage() -> void:
 	var vertices: PackedVector3Array = Surface.build_skin(blueprint).surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
 	var stats: Dictionary = Blueprint.calculate_stats(blueprint)
 	var hashes: Array[int] = []
-	for kind: String in Skin.TYPES:
+	for kind: String in SkinStyle.TYPES:
 		blueprint["appearance"]["skin_type"] = kind
 		var material: StandardMaterial3D = Surface.material(Color.WHITE, true, blueprint)
-		_expect(Surface.build_skin(blueprint).surface_get_arrays(0)[Mesh.ARRAY_VERTEX] == vertices, "Skin style added geometry.")
+		_expect(Surface.build_skin(blueprint).surface_get_arrays(0)[Mesh.ARRAY_VERTEX] == vertices, "SkinStyle style added geometry.")
 		_expect(Blueprint.calculate_stats(blueprint) == stats, "Cosmetic skin changed stats.")
 		if kind != "smooth":
-			_expect(material.albedo_texture != null and material.uv1_triplanar, "Skin texture absent: " + kind)
+			_expect(material.albedo_texture != null and material.uv1_triplanar, "SkinStyle texture absent: " + kind)
 			if material.albedo_texture != null:
 				hashes.append(hash(material.albedo_texture.get_image().get_data()))
 	var unique: Dictionary = {}
 	for value: int in hashes:
 		unique[value] = true
-	_expect(hashes.size() == 4 and unique.size() == 4, "Skin types share identical textures.")
+	_expect(hashes.size() == 4 and unique.size() == 4, "SkinStyle types share identical textures.")
 	for end: Dictionary in Library.get_terminal_parts():
 		var index: int = Blueprint.add_part(blueprint, "legs_walker" if end["category"] == "feet" else "arms_grasping")
 		var part: Dictionary = blueprint["parts"][index]
@@ -163,13 +163,13 @@ func _check_skin_and_storage() -> void:
 		part["end_rotation"] = Vector3(0, -23, 10)
 		part["end_shape_scale"] = Vector3(0.8, 1.1, 1.4)
 		part["end_scale"] = 1.35
-	blueprint["appearance"].merge(Skin.PALETTES[2], true)
+	blueprint["appearance"].merge(SkinStyle.PALETTES[2], true)
 	_expect(Assembly.save_to_file(blueprint, "user://parts_studio.json") == OK, "New fields could not be saved.")
 	var loaded: Dictionary = Assembly.load_from_file("user://parts_studio.json")
 	for index in range(4, blueprint["parts"].size()):
 		for key: String in ["uid", "end_part_id", "rotation", "shape_scale", "end_rotation", "end_shape_scale", "end_scale"]:
 			_expect(loaded["parts"][index][key] == blueprint["parts"][index][key], "Saved part setting was lost: " + key)
-	_expect(loaded["appearance"] == blueprint["appearance"], "Skin / color choices lost on reload.")
+	_expect(loaded["appearance"] == blueprint["appearance"], "SkinStyle / color choices lost on reload.")
 	loaded["parts"][0]["end_part_id"] = "feet_unknown"
 	Assembly.normalize(loaded)
 	_expect(str(loaded["parts"][0]["end_part_id"]).is_empty(), "Invalid terminal attached to an eye.")
@@ -255,7 +255,7 @@ func _check_editor() -> void:
 	editor.call("_set_mode", "paint")
 	editor.call("_choose_skin_type", 1)
 	editor.call("_apply_color_palette", 2)
-	_expect(str(editor.get("blueprint")["appearance"]["skin_type"]) == "scales", "Skin selector did not apply scales.")
+	_expect(str(editor.get("blueprint")["appearance"]["skin_type"]) == "scales", "SkinStyle selector did not apply scales.")
 	_expect(editor.find_child("Swatch_f3ead6", true, false) != null, "Expanded color swatches are absent.")
 	editor.free()
 	await process_frame
