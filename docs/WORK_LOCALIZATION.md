@@ -77,3 +77,11 @@ Gesamtexport. Diese Grenzen stehen auch im sichtbaren Sprachhinweis.
 Weitere Sprachen mit mehr/anderen Pluralformen sowie anderen Zahlen-/Datums-
 oder Schriftsystemen brauchen passende Erweiterungen und konkrete Abnahme.
 Die beiden aktuellen Sprachen verwenden dieselben bestehenden UI-Bausteine.
+
+## Exakter geprüfter Implementierungsstand
+
+Codecommit: `23da78e028182fb2c4c70210ac4d35a52a678f6e`.
+Dateibaum: `9b6e075ceac4afb68dc5e420d9d653606ece500f`.
+Ein nachfolgender Commit ergänzt ausschließlich diese Übergabekennung.
+Zur Übernahme dieses abgeschlossene Paket verwenden; Folgearbeiten auf dem
+Branch sind damit nicht automatisch freigegeben.
