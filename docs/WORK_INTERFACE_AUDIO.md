@@ -14,6 +14,9 @@ Stand: 9. September 2026. Abgeschlossenes Teilpaket auf
 - Fortsetzung Tierrückmeldung: Codecommit `d5c5fdcd42bffb826156cf879ca31106360d5cbc`,
   lokal geprüft als `a69f6f89045b76567c9fd15a0d674b474e5f24c8`.
   Identischer Dateibaum: `1350c3c8e65b431ba5d5a445139d6c83e6f32e32`.
+- Fortsetzung D1-Laufzeitnachweis: Testcommit `eb7becd81a5ef46fba2f4447c1b57f01238daa7f`,
+  lokal geprüft als `4bac89e57057b11cdad72bd65f0c0f24c4fe5b9f`.
+  Identischer Dateibaum: `c061132423b78d9400455d13a0a06d477b77d526`.
 - Kein Merge nach `main`, keine fremden unfertigen Arbeiten übernommen.
 - Lars hat nach der lokalen Abnahme den öffentlichen Upload dieses Branches nach
   `MajorDragonfly/voxelverse` und die Erstellung eines PR ausdrücklich bestätigt.
@@ -68,10 +71,11 @@ Gelesen wird ausschließlich
 die vorhandenen `DiscoveryRecords` und Prüfung von `scan.version == 1` sowie
 `scan.complete == true`. Der D1-Validator besitzt weiterhin alle Eignungsregeln.
 
-Die positive Integrationsprüfung lädt die exakte Vertragsdatei des genannten Commits
+Die erste positive Integrationsprüfung lädt die exakte Vertragsdatei des genannten Commits
 in einem isolierten Testpfad und speichert Testbeobachtungen über die vorhandenen
-Services. Das ist kein Nachweis des noch getrennt entwickelten planetaren Generators,
-seiner Morphologie oder seiner erreichbaren Vorkommen. Produktive D1-Werte erscheinen
+Services. Die spätere vollständige Prüfung mit tatsächlich erzeugten und gespawnten
+D1-Tieren ist unten unter „Fortsetzung: D1-Laufzeit bis zum Buch und Neustart“ dokumentiert.
+Produktive D1-Werte erscheinen
 erst, wenn D1 integriert ist und die entsprechenden Tiere tatsächlich gescannt wurden.
 
 ## D2: lesender Buchanschluss, Kampagnenintegration noch offen
@@ -337,3 +341,67 @@ godot --path /pfad/zum/pruefauszug res://tests/fixtures/animal_feedback_d2_previ
 Keine zusätzliche Pause-, Zähmungs-, Speicher- oder Buchimplementierung. Die normale
 Kampagne braucht weiterhin den freigegebenen D2-Host und dessen gemeinsame
 Speicherung; dort sind Buch und Feedback anschließend einmalig anzuschließen.
+
+## Fortsetzung: D1-Laufzeit bis zum Buch und Neustart
+
+`tests/domestic_fauna_journal_test.gd` schließt die bisherige Lücke zwischen den
+vorbereiteten Beobachtungen der Readerprüfung und den echten D1-Laufzeitdaten.
+Geprüft wurde der abgeschlossene D1-Stand
+`17b23f568dabbec9f3903217238650f0c9178d04` in einem isolierten Projektauszug.
+Die 15 dafür benötigten D1-Dateien wurden bytegleich übernommen und mit SHA-256 in
+[`validation/interface-task7-d1-runtime/results.json`](../validation/interface-task7-d1-runtime/results.json)
+belegt. Im Auftrag-7-Branch liegen weiterhin keine Kopien dieser D1-Implementierung.
+
+Die normale `main/main.tscn` erzeugt zunächst über ihren unveränderten Spawner je
+einen Vertreter der Gruppen Milch, Arbeit und Begleitung. Erst danach friert die
+Prüfung Bewegung ein und richtet die reale Spielerkamera auf die echten Tierkollider.
+Der vorhandene Scanner entscheidet mit seinen normalen Reichweiten-, Sicht-,
+Zeit- und Pausenprüfungen über den Scan. Es gibt weder erfundene Eignungsprofile noch
+direkte Aufrufe von `register_species_scan()` im neuen Test.
+
+Bestanden mit Godot 4.6.3:
+
+- Die drei wirklich erzeugten Arten liefern Milch-, Zug-, Reit- und Begleiteignung
+  mit ihren unveränderten D1-Werten und dem tatsächlich beobachteten Körperbau.
+- Teilscans und Buchpause veröffentlichen keine neue Art. Der Katalog allein
+  liefert keine Bucheinträge; Wildtiere bleiben wild und erscheinen nicht als Besitz.
+- Rollenfilter und Rollensuche finden die jeweils gescannte Art im einzigen
+  vorhandenen Buch. Drei Erstscans erzeugen genau drei Punktebelohnungen und drei
+  Entdeckungsklänge. Buchöffnen und erneutes Ansehen belohnen nicht erneut.
+- Der bestehende `SaveGameService` speichert die Kampagne. Ein zweiter Godot-Prozess
+  lädt die exakten Scans samt Werten, Anatomie, Artkennung und Körperbezug. Wieder
+  gespawnte Vertreter werden sofort als bekannte Art erkannt, auch wenn D1 ein
+  anderes Individuum derselben Art auswählt. Es erklingt kein neuer Entdeckungston.
+- Reines Lesen lässt die gespeicherte Kampagnendatei bytegleich. Ohne D1 beendet
+  sich der optionale Test ausdrücklich mit `d1_checked: false`; `--require-d1`
+  macht eine fehlende Abhängigkeit zu einem Fehler.
+
+Reproduktion aus einem Checkout mit beiden veröffentlichten Commits:
+
+```sh
+git fetch origin agent/interface-audio-task7 agent/d1-planet-fauna
+test_dir=$(mktemp -d)
+test_userdata=$(mktemp -d)
+git archive eb7becd81a5ef46fba2f4447c1b57f01238daa7f | tar -x -C "$test_dir"
+git archive 17b23f568dabbec9f3903217238650f0c9178d04 \
+  world/fauna/domestication world/fauna/fauna_streamer_v7.gd \
+  creatures/ai/wildlife_brain.gd creatures/wildlife/procedural_wildlife_v7.gd \
+  creatures/wildlife/procedural_wildlife_v8.gd autoload/save_game_service.gd \
+  | tar -x -C "$test_dir"
+XDG_DATA_HOME="$test_userdata" godot --headless --path "$test_dir" --import
+XDG_DATA_HOME="$test_userdata" godot --headless --path "$test_dir" \
+  --script res://tests/domestic_fauna_journal_test.gd -- --require-d1
+XDG_DATA_HOME="$test_userdata" godot --headless --path "$test_dir" \
+  --script res://tests/domestic_fauna_journal_test.gd -- --require-d1 --verify-reload
+```
+
+Dabei Godot 4.6.3 ohne portable `_sc_`-Markierung verwenden, damit die beiden
+Prozesse denselben isolierten Benutzerpfad nutzen. Die Test-Erwartungsdatei gehört
+ausschließlich zur Prüfung; die Spielstände selbst schreibt und liest nur der
+vorhandene Speicherdienst. Nachweise: `scan_save.log`, `separate_restart.log` und
+`without_d1.log` im genannten Nachweisordner.
+
+Dieses Teilpaket ergänzt ausschließlich die automatische Integrationsprüfung und
+ihre Übergabe. Es ändert keine Spielmechanik, Oberfläche oder Sprachverwaltung.
+Der Nachweis gilt für den D1-Prüfstand auf Weltseed 15838, nicht für eine allgemeine
+Wegfindungs-, Windows- oder D2-Kampagnenfreigabe. Kein Merge nach `main`.
