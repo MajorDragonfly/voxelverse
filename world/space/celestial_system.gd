@@ -5,7 +5,7 @@ const Profile = preload("res://world/space/celestial_body_profile.gd")
 var bodies: Dictionary = {}
 var elapsed: float = 0.0
 var binary: bool = false
-const LANDABLE: Array[String] = ["m1:haven", "m1:ember", "m1:lune"]
+const LANDABLE: Array[String] = ["m1:haven", "m1:ember", "m1:lune", "m1:aster"]
 
 
 func _init(two_stars: bool = false) -> void:
@@ -18,12 +18,16 @@ func _init(two_stars: bool = false) -> void:
 	_add("m1:haven", "Haven", "planet", 12345, 256.0, "m1:sol", 6000.0, 1400.0, 0.1)
 	_add("m1:ember", "Ember", "planet", 98765, 160.0, "m1:sol", 11000.0, 2300.0, 2.2)
 	_add("m1:lune", "Lune", "moon", 31415, 64.0, "m1:haven", 950.0, 180.0, 1.1)
+	_add("m1:aster", "Aster", "planet", 15838, 4096.0, "m1:sol", 35000.0, 5100.0, 3.5)
+	bodies["m1:aster"]["adaptive_tiles"] = true
 	if binary:
 		# Empty parent denotes the common, stationary barycentric reference frame.
 		bodies["m1:haven"].parent_id = ""
 		bodies["m1:ember"].parent_id = ""
 		bodies["m1:haven"]["orbit_center"] = "barycenter"
 		bodies["m1:ember"]["orbit_center"] = "barycenter"
+		bodies["m1:aster"].parent_id = ""
+		bodies["m1:aster"]["orbit_center"] = "barycenter"
 	bodies["m1:lune"].gravity = 5.0
 
 

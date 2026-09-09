@@ -12,6 +12,7 @@ const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const Progression = preload("res://autoload/progression_service.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
+const SLOT_DIRECTORY: String = "user://saves"
 
 @export_range(5.0, 300.0, 5.0) var autosave_interval: float = 45.0
 @export var autosave_enabled: bool = true
@@ -28,6 +29,9 @@ var _design_files: Dictionary = {}
 var _write_blocked: bool = false
 var last_migration_report: Array[String] = []
 var last_error: String = ""
+var session_managed: bool = false
+var session_active: bool = false
+var slot_name: String = ""
 
 
 func _ready() -> void:
@@ -37,8 +41,10 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if session_managed and not session_active:
+		return
 	_apply_pending_runtime_state()
-	if not autosave_enabled:
+	if not autosave_enabled or (session_managed and get_tree().paused):
 		return
 	_autosave_timer -= delta
 	if _autosave_timer > 0.0:
@@ -48,11 +54,13 @@ func _process(delta: float) -> void:
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST and not session_managed:
 		save_now()
 
 
 func load_if_present() -> bool:
+	if session_managed:
+		return false
 	if _loaded_once:
 		return false
 	_loaded_once = true
@@ -62,6 +70,8 @@ func load_if_present() -> bool:
 
 
 func save_now(custom_path: String = "") -> bool:
+	if session_managed and not session_active:
+		return false
 	if _write_blocked:
 		_report_failure("Saving is blocked after an unreadable or newer save. Load a compatible save first.")
 		return false
@@ -71,6 +81,7 @@ func save_now(custom_path: String = "") -> bool:
 	_upgrade_design_ids(files)
 	_update_design_references(files)
 	var save_data: Dictionary = {
+		"slot_name": slot_name,
 		"schema": SAVE_SCHEMA,
 		"saved_unix_time": int(Time.get_unix_time_from_system()),
 		"game_state": _export_node_state("/root/GameState"),
@@ -101,6 +112,7 @@ func save_now(custom_path: String = "") -> bool:
 		return false
 	_design_files = files
 	_design_snapshot_active = true
+	last_error = ""
 	game_saved.emit(target_path)
 	return true
 
@@ -146,6 +158,7 @@ func load_now(custom_path: String = "") -> bool:
 	if source_path != target_path:
 		last_migration_report.append("Recovered the previous complete snapshot from .bak.")
 	_design_files = _dict(data.get("design_files", {}))
+	slot_name = str(data.get("slot_name", "Bisheriges Abenteuer"))
 	_design_snapshot_active = true
 	_write_blocked = false
 	var game_state := get_node_or_null("/root/GameState")
@@ -163,6 +176,97 @@ func load_now(custom_path: String = "") -> bool:
 	if not resume_phase_transition(target_path):
 		return false
 	game_loaded.emit(target_path)
+	last_error = ""
+	return true
+
+
+## Listing is read-only: validation and backup inspection never import a world.
+func list_slots() -> Array[Dictionary]:
+	var paths: Array[String] = []
+	if FileAccess.file_exists(DEFAULT_SAVE_PATH) or FileAccess.file_exists(DEFAULT_SAVE_PATH + ".bak"):
+		paths.append(DEFAULT_SAVE_PATH)
+	if DirAccess.dir_exists_absolute(SLOT_DIRECTORY):
+		for filename in DirAccess.get_files_at(SLOT_DIRECTORY):
+			var candidate: String = filename.trim_suffix(".bak")
+			if candidate.begins_with("slot_") and candidate.ends_with(".json"):
+				var path: String = SLOT_DIRECTORY + "/" + candidate
+				if path not in paths:
+					paths.append(path)
+	var result: Array[Dictionary] = []
+	for path in paths:
+		result.append(inspect_slot(path))
+	result.sort_custom(func(a: Dictionary, b: Dictionary):
+		if int(a.saved_time) == int(b.saved_time):
+			return str(a.path) > str(b.path)
+		return int(a.saved_time) > int(b.saved_time))
+	return result
+
+
+func inspect_slot(path: String) -> Dictionary:
+	var data: Dictionary = _read_save(path)
+	var recovered: bool = false
+	var newer: bool = _has_unsupported_contract(data)
+	if not newer and not _validate_save(data).is_empty():
+		var backup: Dictionary = _read_save(path + ".bak")
+		newer = _has_unsupported_contract(backup)
+		if not newer and _validate_save(backup).is_empty():
+			data = backup
+			recovered = true
+	var valid: bool = not newer and _validate_save(data).is_empty()
+	var state: Dictionary = _dict(data.get("game_state", {}))
+	var campaign: Dictionary = _dict(state.get("campaign", {}))
+	var title: String = str(data.get("slot_name", "")).strip_edges()
+	if title.is_empty():
+		title = "Bisheriges Abenteuer" if path == DEFAULT_SAVE_PATH else path.get_file().trim_suffix(".json")
+	return {"path": path, "name": title, "valid": valid, "recovered": recovered,
+		"saved_time": int(data.get("saved_unix_time", 0)), "seed": int(state.get("world_seed", 0)),
+		"phase": int(state.get("phase", 0)), "seconds": float(campaign.get("elapsed_seconds", 0.0)),
+		"problem": "Benötigt eine neuere Spielversion." if newer else ("Spielstand und Sicherung nicht lesbar." if not valid else "")}
+
+
+func create_slot(title: String, seed_value: int = 0) -> String:
+	if DirAccess.make_dir_recursive_absolute(SLOT_DIRECTORY) != OK:
+		_report_failure("Der Ordner für Spielstände konnte nicht angelegt werden.")
+		return ""
+	var path: String = SLOT_DIRECTORY + "/slot_" + Crypto.new().generate_random_bytes(12).hex_encode() + ".json"
+	# Campaign reset leaves legacy design files on disk. An explicit empty
+	# snapshot prevents a new campaign inheriting another campaign's creature.
+	var state := get_node("/root/GameState")
+	if seed_value > 0:
+		state.call("start_world_with_seed", seed_value)
+	else:
+		state.call("start_new_random_world")
+	_design_snapshot_active = true
+	_design_files.clear()
+	slot_name = title.strip_edges().left(48)
+	if slot_name.is_empty():
+		slot_name = "Mein Abenteuer"
+	save_path = path
+	_loaded_once = true
+	session_active = true
+	if not save_now():
+		session_active = false
+		return ""
+	return path
+
+
+func select_slot(path: String) -> bool:
+	var known: bool = false
+	for slot in list_slots():
+		if slot.path == path and slot.valid:
+			known = true
+			break
+	if not known:
+		last_error = "Dieser Spielstand kann nicht geladen werden."
+		return false
+	var previous_path: String = save_path
+	save_path = path
+	_loaded_once = true
+	session_active = true
+	if not load_now():
+		save_path = previous_path
+		session_active = false
+		return false
 	return true
 
 

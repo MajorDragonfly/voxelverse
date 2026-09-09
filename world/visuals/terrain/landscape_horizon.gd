@@ -6,6 +6,7 @@ const LandShader = preload("res://world/visuals/terrain/landscape_horizon.gdshad
 const WaterBuilder = preload("res://world/visuals/terrain/water_mesh_builder_v7.gd")
 var generation_complete: bool = false
 var _task: int = -1
+var _sampling: bool = false
 var _job: RefCounted
 var _center := Vector2(INF, INF)
 var published_center := Vector2(INF, INF)
@@ -46,8 +47,14 @@ func _process(_delta: float) -> void:
 		_job.generator_script = WorldGenerator.get_script()
 		_job.world_seed = WorldGenerator.get_world_seed()
 		_job.center = target
-		_task = WorkerThreadPool.add_task(_job.run, false, "Landscape horizon")
-	if _task >= 0 and WorkerThreadPool.is_task_completed(_task) and not Budget.exhausted() and Budget.claim_mesh_upload():
+		_job.prepare()
+		_sampling = true
+		_task = WorkerThreadPool.add_group_task(_job.sample_band, HorizonJob.BANDS, HorizonJob.SAMPLING_WORKERS, false, "Landscape samples")
+	if _task >= 0 and _sampling and WorkerThreadPool.is_group_task_completed(_task):
+		WorkerThreadPool.wait_for_group_task_completion(_task)
+		_sampling = false
+		_task = WorkerThreadPool.add_task(_job.assemble, false, "Landscape mesh")
+	if _task >= 0 and not _sampling and WorkerThreadPool.is_task_completed(_task) and not Budget.exhausted() and Budget.claim_mesh_upload():
 		WorkerThreadPool.wait_for_task_completion(_task)
 		_task = -1
 		var started: int = Time.get_ticks_usec()
@@ -110,7 +117,10 @@ static func recenter_target(player_xz: Vector2, center: Vector2) -> Vector2:
 
 func _exit_tree() -> void:
 	if _task >= 0:
-		WorkerThreadPool.wait_for_task_completion(_task)
+		if _sampling:
+			WorkerThreadPool.wait_for_group_task_completion(_task)
+		else:
+			WorkerThreadPool.wait_for_task_completion(_task)
 		_task = -1
 	_job = null
 	if is_instance_valid(_manager) and _manager.is_inside_tree() and not _manager.is_queued_for_deletion():

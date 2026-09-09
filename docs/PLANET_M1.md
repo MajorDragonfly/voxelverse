@@ -2,6 +2,8 @@
 
 Stand: 8. September 2026 · Technikprototyp geprüft · Code: `555f9efa2a16d8dde6fbf121157671ef944b2f83` · Lars' manueller Spieltest offen.
 
+Dieser Bericht beschreibt den ursprünglichen M1-Nachweis. Der anschließende [Ausbau mit Aster, adaptivem Gelände und klickbarem Esc/F8-Menü](PLANET_LOD_AND_MENU.md) ist separat dokumentiert.
+
 ## Vorab festgelegte Grenzen
 
 Eigenständige Szene `res://world/planet_lab/planet_lab.tscn`; bestehende Kampagnen bleiben `legacy_plane_v9`.

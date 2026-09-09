@@ -129,8 +129,8 @@ func _streaming_checks() -> void:
 					slopes += int(vertices[i].y != vertices[i + corner].y)
 			else:
 				slopes += int(absf(absf(normals[i].x) + absf(normals[i].z) - 1.0) > 0.001 or absf(normals[i].y) > 0.001)
-		_expect(slopes == 0 and tops == 192 * 192, "Actual distant mountain mesh is still smooth/sloped instead of block columns.")
-		_expect(vertices.size() <= 192 * 192 * 20, "Distant voxel terrain exceeds its fixed five-quad column budget.")
+		_expect(slopes == 0 and tops == 384 * 384, "Actual distant mountain mesh must contain the refined 2 m block columns.")
+		_expect(vertices.size() <= 384 * 384 * 20, "Distant voxel terrain exceeds its fixed five-quad column budget.")
 		print("Distant voxel geometry ", JSON.stringify({"columns": tops, "vertices": vertices.size(), "triangles": (arrays[Mesh.ARRAY_INDEX] as PackedInt32Array).size() / 3}))
 		horizon._update_coverage()
 		# The dummy renderer ignores ImageTexture.update(). Count the exact upload

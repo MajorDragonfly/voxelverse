@@ -1,0 +1,64 @@
+name: Voxelverse frontend review
+
+on:
+  push:
+    branches: ["agent/game-menus"]
+  pull_request:
+    paths:
+      - "ui/frontend/**"
+      - "autoload/session_flow.gd"
+      - "autoload/save_game_service.gd"
+      - "core/display_settings.gd"
+      - "core/diagnostics/frontend_probe.gd"
+      - ".github/workflows/frontend-validate.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: frontend-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/godot-export-toolchain
+          key: godot-4.6.3-desktop-v1-${{ runner.os }}
+      - name: Install graphics and Godot
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+          python tools/install_godot.py --directory "${{ runner.temp }}/godot-export-toolchain" --platform linux
+      - name: Import and exercise real menu inputs
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          XDG_DATA_HOME: ${{ runner.temp }}/frontend-userdata
+          VOXELVERSE_CAPTURE_DIR: ${{ runner.temp }}/frontend-review
+        run: |
+          mkdir -p "$VOXELVERSE_CAPTURE_DIR"
+          GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
+          "$GODOT" --headless --path . --import > "$VOXELVERSE_CAPTURE_DIR/import.log" 2>&1
+          xvfb-run -a -s '-screen 0 1600x900x24' timeout 480 "$GODOT" --path . --rendering-method gl_compatibility -- --frontend-smoke --frontend-capture > "$VOXELVERSE_CAPTURE_DIR/frontend.log" 2>&1
+          python - <<'PY'
+          import os,re
+          from pathlib import Path
+          root=Path(os.environ['VOXELVERSE_CAPTURE_DIR'])
+          log=(root/'frontend.log').read_text()
+          print(log)
+          assert 'FRONTEND_PASSED' in log
+          assert not re.search(r'SCRIPT ERROR|(?:^|\n)ERROR:|ObjectDB instances leaked', log)
+          assert all((root/(name+'.png')).is_file() for name in ['title','new_game','settings','pause','save_slots'])
+          PY
+      - name: Upload game screenshots and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: voxelverse-frontend-review
+          path: ${{ runner.temp }}/frontend-review
+          retention-days: 14

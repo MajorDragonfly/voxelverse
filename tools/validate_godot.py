@@ -33,7 +33,7 @@ def main():
     # SceneTree tests load gameplay scenes after autoloads exist, like the game.
     commands += [(name, ["--script", f"res://tests/{name}.gd"], 120) for name in tests]
     if not args.skip_main:
-        commands.append(("planet_lab_entry", ["--quit-after", "80", "--", "--planet-lab"], 120))
+        commands.append(("planet_lab_entry", ["--quit-after", "600", "--", "--planet-lab"], 120))
         for frames in [45, 150, 300]:
             name = "main" if frames == 300 else f"main_shutdown_{frames}"
             commands.append((name, ["--verbose", "--quit-after", str(frames)], 120))
