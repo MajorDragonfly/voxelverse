@@ -641,7 +641,7 @@ func _effective_order(member: Dictionary) -> String:
 
 func _work(member: Dictionary, delta: float) -> void:
 	if member["order"] == "wait": return
-	var before: Dictionary = Work.snapshot(village())
+	var before: Dictionary = Work.snapshot(village(), member)
 	if not neighbors.work(member):
 		_perform_work(member, delta)
 	get_node("/root/ProgressionService").record_tribal_work(before, str(member["id"]), self)
