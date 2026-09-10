@@ -20,6 +20,7 @@ const Designs = preload("res://core/persistence/design_store.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
+const PhaseHandoff = preload("res://core/campaign/phase_handoff.gd")
 const Progression = preload("res://autoload/progression_service.gd")
 const FaunaCatalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const Exploration = preload("res://core/map/exploration_atlas.gd")
@@ -534,10 +535,19 @@ func cache_slot_preview(png: PackedByteArray, world_seed: int) -> void:
 		_slot_preview = {"world_seed": world_seed, "png": Marshalls.raw_to_base64(png)}
 
 
-func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.Cube.MODE) -> String:
+func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.Cube.MODE, creature_template: Dictionary = {}) -> String:
 	if surface_mode not in [Surface.LEGACY, Surface.Cube.MODE]:
 		_report_failure("Unbekannter Oberflächentyp.")
 		return ""
+	# Validate against a fresh starter context before changing the live campaign.
+	var initial_creature: Dictionary = PlayerBlueprint.create_default()
+	if not creature_template.is_empty():
+		var templates = preload("res://assembly/exchange/creature_start_templates.gd")
+		var prepared: Dictionary = templates.prepare(creature_template, initial_creature)
+		if not prepared.ok or surface_mode != Surface.Cube.MODE:
+			_report_failure(TranslationServer.translate("BP_ERROR_START"))
+			return ""
+		initial_creature = prepared.blueprint
 	if DirAccess.make_dir_recursive_absolute(SLOT_DIRECTORY) != OK:
 		_report_failure("Der Ordner für Spielstände konnte nicht angelegt werden.")
 		return ""
@@ -563,7 +573,7 @@ func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surf
 	_design_snapshot_active = true
 	_design_files.clear()
 	if surface_mode == Surface.Cube.MODE:
-		_design_files[PlayerBlueprint.SAVE_PATH] = JSON.stringify(PlayerBlueprint.serialize_snapshot(PlayerBlueprint.create_default()), "\t")
+		_design_files[PlayerBlueprint.SAVE_PATH] = JSON.stringify(PlayerBlueprint.serialize_snapshot(initial_creature), "\t")
 	slot_name = title.strip_edges().left(48)
 	guidance.reset(true)
 	if slot_name.is_empty():
@@ -821,6 +831,8 @@ func _upgrade_design_ids(files: Dictionary) -> void:
 			if warning not in last_migration_report:
 				last_migration_report.append(warning)
 			continue
+		if Designs.is_blueprint(str(path), parsed) and not Designs.Contract.version_error(parsed).is_empty():
+			continue # Preserve opaque future designs, including missing IDs.
 		if str(parsed.get("design_id", "")).is_empty():
 			Ids.ensure_design(parsed, str(path))
 			files[path] = JSON.stringify(parsed, "\t")
@@ -833,7 +845,7 @@ func _update_design_references(files: Dictionary) -> void:
 	var references: Dictionary = {}
 	for path in files.keys():
 		var parsed: Dictionary = Atomic.parse_dictionary(str(files[path]))
-		if not parsed.is_empty():
+		if not parsed.is_empty() and Designs.Contract.version_error(parsed).is_empty():
 			var revision: int = int(parsed.get("assembly", {}).get("revision", parsed.get("revision", 0)))
 			references[path] = {"design_id": str(parsed.get("design_id", "")), "revision": revision}
 	state.get("campaign").data["design_refs"] = references
@@ -873,38 +885,31 @@ func request_phase_transition(new_phase: int, confirmation_token: String = "") -
 	if _transition_busy or _saving:
 		return false
 	var state: Node = get_node("/root/GameState")
-	var blockers: Array = state.get_phase_transition_blockers(new_phase)
-	if not blockers.is_empty():
-		_report_failure(str(blockers[0]))
-		return false
-	var runtime: Node = get_tree().get_first_node_in_group(&"tribe_controller")
-	var handoff: Dictionary = runtime.confirmed_handoff(confirmation_token) if runtime != null else {}
-	if new_phase != 1 or handoff.is_empty():
-		_report_failure("Bestätige den Wechsel im Fenster für das Stammeszeitalter erneut.")
+	var prepared: Dictionary = PhaseHandoff.prepare(state, new_phase, confirmation_token)
+	if not prepared.ok:
+		_report_failure(prepared.message)
 		return false
 	var campaign = state.campaign
-	var transition_id: String = Ids.scoped("transition", campaign.data["id"], "0:1")
-	if campaign.data["completed_transitions"].has(transition_id):
-		return false
 	var before: Dictionary = campaign.export_state()
 	_transition_busy = true
-	state.get_current_body_record()["tribe"] = handoff
-	state.current_phase = 1
-	var event = campaign.next_event(GameEvent.Kind.PHASE_TRANSITION, campaign.data["player_faction_id"], 1, "completed")
-	campaign.accept_event(event, 1)
-	campaign.data["completed_transitions"][transition_id] = {"id": transition_id, "from": 0, "to": 1,
-		"confirmed": true, "tribe_id": handoff["id"], "body_id": handoff["body_id"]}
+	if not campaign.import_state(prepared.campaign):
+		_transition_busy = false
+		_report_failure(campaign.last_error)
+		return false
+	state.current_phase = prepared.to
 	# One atomic replacement owns both the phase and the full village. A crash
 	# can load only the old creature snapshot or this complete tribal snapshot.
 	var saved: bool = save_now()
 	if not saved:
-		state.current_phase = 0
+		state.current_phase = prepared.from
 		campaign.import_state(before)
 	_transition_busy = false
 	if not saved:
 		return false
-	state.phase_changed.emit(1)
-	state.campaign_event.emit(event.to_dict())
+	# Existing phase listeners activate camera/group control only after commit;
+	# they also reconstruct it on load once terrain/navigation are ready.
+	state.phase_changed.emit(prepared.to)
+	state.campaign_event.emit(prepared.event)
 	return true
 
 
@@ -1184,9 +1189,7 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	if float(data.get("schema", 0)) > SAVE_SCHEMA:
 		return true
 	var designs: Variant = data.get("design_files")
-	if designs is Dictionary and designs.get(PlayerBlueprint.SAVE_PATH) is String:
-		var design: Variant = JSON.parse_string(designs[PlayerBlueprint.SAVE_PATH])
-		if design is Dictionary and (design.get("version") is int or design.get("version") is float) and float(design.version) > PlayerBlueprint.SAVE_VERSION: return true
+	if designs is Dictionary and Designs.has_unsupported_blueprints(designs): return true
 	if Progression.has_unsupported_contract(data.get("progression", {})):
 		return true
 	var imported_state: Variant = data.get("game_state", {})
@@ -1234,6 +1237,7 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 			if body is Dictionary and body.has("fauna_catalog") and FaunaCatalog.has_unsupported(body["fauna_catalog"]):
 				return true
 			if body is Dictionary and Exploration.newer(body.get("exploration_atlas")): return true
+			if body is Dictionary and body.get("tribe") is Dictionary and Tribe.Economy.has_unsupported_contract(body.tribe.get("economy")): return true
 			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
 				return true
 			if body is Dictionary and body.get("tribe") is Dictionary and body.tribe.get("schema") == Tribe.SCHEMA and not body.tribe.get("anchor") is Dictionary: return true

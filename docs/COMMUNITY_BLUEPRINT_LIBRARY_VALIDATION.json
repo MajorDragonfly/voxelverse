@@ -1,0 +1,316 @@
+{
+  "package": "BP-COMMUNITY.2",
+  "date": "2026-09-10",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "base_tree": "8fc08ba76970716212daa53667f047b462318dc5",
+  "platform": "Linux headless and native X11/OpenGL Compatibility (Mesa llvmpipe)",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.83,
+      "log_sha256": "8a744e62ca35bf60b4bfaad73d313cd057a8f6eec8dbd00a74ed2f43e16b6b2f"
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.921,
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+    },
+    {
+      "name": "creature_design_library_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.974,
+      "log_sha256": "2dd2aa62d6fb9d700818b984803fefbb4ff83442de8581e2e99894ea8015c10f"
+    },
+    {
+      "name": "creature_library_ui_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.896,
+      "log_sha256": "d6d5c284727542d7bf03fe5700f7b51168e83572e8411327089a7496cb1f8b9f"
+    },
+    {
+      "name": "community_blueprint_package_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.246,
+      "log_sha256": "d5e707847fcf02494b12afeb31d2f340d117d85815a96fa34a7e7d5ab025dac2"
+    },
+    {
+      "name": "creature_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.488,
+      "log_sha256": "5f669953ad2b6e0b156e1f629aa749ded13998264fb977ee7ca25394c273bc58"
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.32,
+      "log_sha256": "1ea3d1a747913f6e665175571309f50c20b90e45d45219f846aa5a85cfa50f0e"
+    },
+    {
+      "name": "localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.473,
+      "log_sha256": "dde802bd39e4bd843407a8cf63d787dbdcb5ae16f43f6f8fd50cd2c566a2931f"
+    },
+    {
+      "name": "frontend_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 59.676,
+      "log_sha256": "e4d427966659d04efb2e776f83974412cae2ee7c6db361e5f6bc82482a87482d"
+    },
+    {
+      "name": "planet_lab_entry",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.704,
+      "log_sha256": "edcb8a0baffdca2f547c2c040379f966405e1638616b686044a6cdfccc64da84"
+    },
+    {
+      "name": "main_shutdown_45",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.697,
+      "log_sha256": "89fa1a631826c73b0f8ee688afd20cb4e54ddeb511cb78b63b698a92e5909053"
+    },
+    {
+      "name": "main_shutdown_150",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.007,
+      "log_sha256": "a5c83c0b05f30a87309508b2db7a9b4a5a1dd230f2bd5c9e0bdc5aa4b0b7f019"
+    },
+    {
+      "name": "main",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.394,
+      "log_sha256": "1261a32a48545248431f505b25261df9001c30ae44759fb74457c8c6006c446b"
+    },
+    {
+      "name": "shutdown_15838_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.784,
+      "log_sha256": "703bf98d90afe523b123ea266fa97cafb728f9753857213c8ee66b2f0f4274ba"
+    },
+    {
+      "name": "shutdown_15838_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.549,
+      "log_sha256": "585febf5b22cc27628c23a9be4428120297b394d66e295b9948dbe180d79fa03"
+    },
+    {
+      "name": "shutdown_15838_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.195,
+      "log_sha256": "9a874379fb9573f8a2abbc0c960e77680af54c279f60c57576e0524085145d6a"
+    },
+    {
+      "name": "shutdown_15838_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.695,
+      "log_sha256": "0c49acc752ed824e8c7002bcabb204869d93bf1dd4990136590fb61c761f6477"
+    },
+    {
+      "name": "shutdown_15838_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.806,
+      "log_sha256": "66ae62c0e3897b2869ff198b51854ee46fc471bb37772450efe84320b53d3a41"
+    },
+    {
+      "name": "shutdown_15838_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.208,
+      "log_sha256": "763e33acc3ba00e1f8afbafbbd68c6fc855567ac2295a436aa622b8c58a91cf1"
+    },
+    {
+      "name": "shutdown_63352_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.524,
+      "log_sha256": "98df45097bcb984040ec66c88d3c88bca42c8e44715c6e1cfed5932e8aee9165"
+    },
+    {
+      "name": "shutdown_63352_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.445,
+      "log_sha256": "31a2a5e5e3a5e4678f9897bb06bcd77c6e19dcd990a515e481ef2e551c3067d6"
+    },
+    {
+      "name": "shutdown_63352_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.939,
+      "log_sha256": "61564f294a8c6ae803cbff0e920a7265e96aea4752b0f5cf052aa3ef636af70b"
+    },
+    {
+      "name": "shutdown_63352_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.845,
+      "log_sha256": "c0d8067117c41630428f988862347d470bf4b97ad2a7dd93fc9dcfeca1327c9a"
+    },
+    {
+      "name": "shutdown_63352_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.479,
+      "log_sha256": "8e9e1a11355ab0a2dbd8f77dadf157f426a5f1727977ac5957ca800aca284376"
+    },
+    {
+      "name": "shutdown_63352_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.064,
+      "log_sha256": "5b8aba078c5631059b5af22ecce3ee06ab1290ed672cce2b63b99f422f103993"
+    },
+    {
+      "name": "shutdown_23757_terrain",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.577,
+      "log_sha256": "8c3e23ad80ab597f6d24a0ce0015e697bcbbccd4712e6c1ff5a2eddab3d430cf"
+    },
+    {
+      "name": "shutdown_23757_placement",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.143,
+      "log_sha256": "a76f237cfc6b8467a02cbded7c2ff918782dba1af177672ede4c325791d9368c"
+    },
+    {
+      "name": "shutdown_23757_resources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.939,
+      "log_sha256": "5b6eee53bc4879cef27e962981356921c57139ad047ac6a93dbbbe7b0f4b18b2"
+    },
+    {
+      "name": "shutdown_23757_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.84,
+      "log_sha256": "3f1169de9b81a0f0241a1ddc457014df3fd87b30b6a931211703f30b306a7d27"
+    },
+    {
+      "name": "shutdown_23757_cluster_build",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 15.922,
+      "log_sha256": "8083de1fe60da05460131c79484e8d648d0db08ff6d20bee3c79ad892cd3cff9"
+    },
+    {
+      "name": "shutdown_23757_cluster_complete",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 16.568,
+      "log_sha256": "3eee225545634074c52a726408385dba07cb00dac73ec6757dbcea74a68529fc"
+    },
+    {
+      "name": "streaming_cpu",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.932,
+      "log_sha256": "a5bfdd7042e34f6ecbeaa46f41a566dbaf3933141d477c79c698e36686cd31b0"
+    }
+  ],
+  "native_ui": {
+    "exit_code": 0,
+    "seconds": 34.311,
+    "passed": true,
+    "log_sha256": "fb55f91932e83f5b2a5fe43571b5d88896391f62aabf4c97461ad386bce879f4",
+    "completion_markers": [
+      "CREATURE_LIBRARY_WORLD_STARTED",
+      "CREATURE_LIBRARY_UI_PASSED"
+    ],
+    "captures": [
+      {
+        "path": "docs/evidence/community-blueprint-library/desktop-1920-de.png",
+        "sha256": "4b7141082d811e32445e8d311bce46ec7497bc41be60d68e6f4d7435f7792e7c"
+      },
+      {
+        "path": "docs/evidence/community-blueprint-library/desktop-2560-de.png",
+        "sha256": "e63fb1d3f6d3fcadfc34ab4eedbcaf598b0bffd84ff815049959a9ef0244c166"
+      },
+      {
+        "path": "docs/evidence/community-blueprint-library/editor-templates-de.png",
+        "sha256": "742efabb6798bf34c604f4e6ac826e0b965e12a5e8d9748bd781b5d6857a1375"
+      },
+      {
+        "path": "docs/evidence/community-blueprint-library/invalid-import-de.png",
+        "sha256": "79cd00ed9b8a30e77be1c635f7de601e05c8877005069c4af4827fdbccbb2511"
+      },
+      {
+        "path": "docs/evidence/community-blueprint-library/local-variant-en.png",
+        "sha256": "9744fbb8a67eb6a75416ac37e4c49c69dfa675be306327799b6db09ce4b2a81d"
+      },
+      {
+        "path": "docs/evidence/community-blueprint-library/narrow-detail-en-150.png",
+        "sha256": "f9070fc90b49e1c6545b5b74b7693b1986bb8653d8949f32282e407c998e6db1"
+      },
+      {
+        "path": "docs/evidence/community-blueprint-library/narrow-list-en-150.png",
+        "sha256": "39378936cdffb9e7777ba92a47e4feec95e5670e308864d21f743209ae1291f8"
+      },
+      {
+        "path": "docs/evidence/community-blueprint-library/new-game-selected-de.png",
+        "sha256": "9cd9450377f38082d37af89558fe1adb009a1da2d84a4d3f994fd78df8d9c159"
+      }
+    ]
+  },
+  "catalog": {
+    "messages": 287,
+    "languages": [
+      "de",
+      "en"
+    ],
+    "check": "python3 tools/localization/catalog.py --check",
+    "passed": true
+  },
+  "source_sha256": {
+    "assembly/exchange/creature_design_library.gd": "20b66442bed69c556d22151eaa60c5012c286832ae8a72fc83034346faff7430",
+    "assembly/exchange/creature_start_templates.gd": "420f87291a6bf6091299225e308c72f7ce0fa13acd64f709c3066a066cc3eab5",
+    "ui/blueprints/creature_library_panel.gd": "c15ea2039a39ecccaea86967ac9027cfa214d5d08a2bde961d7ffd76d7e6101d",
+    "creatures/editor/creature_editor_runtime.gd": "fda11691a59c0d079ba3517606b78c8dc7d8b755372189cb26904a8467d98218",
+    "ui/frontend/main_menu.gd": "ab944ae493a5d64f827ec4d15bcdc54dc7cb1fbc6b60ed827ed0617f39855daf",
+    "autoload/session_flow.gd": "3d51e72ace720b6d76795178adcca2e5e6b4d4f9e7f49a4683683bd604d642fd",
+    "autoload/save_game_service.gd": "5c84f35fde025b3ce8b569d37f63610fc06e5d6f64e0d0f2fa9c07014cfa6c3d",
+    "localization/catalog.json": "204e18e7c9fe76896960d748b7cd101d90edec31cd1e7b14f31d277f7a4428f6",
+    "localization/de.po": "20f77cb396c127ee582f819b16820518dc89b5566c36716a671a7fed29ca2273",
+    "localization/en.po": "b1a37e0553b8704c18aa3899fffb30a11b9607cb99d06a25f02bf32fd7d31ee1",
+    "tests/creature_design_library_test.gd": "e8f622470cb587737892f06e20fc7923f47aed593f36fc7460b8ed92e77be7c4",
+    "tests/creature_library_ui_test.gd": "012f7f4ff488c8672666386ef1edc1f655db6027fc362b9c255c66d8754a851f"
+  },
+  "coverage": [
+    "Three authored starters use only normal starting unlocks.",
+    "Local copy survives source removal and a fresh child process.",
+    "Distinct variant IDs, unchanged immutable revisions, name collisions and conflicting content.",
+    "Corrupt/future library, failed staging and write failures preserve original bytes.",
+    "Real editor controls: adopt, one-step undo/redo, existing save, variant, export/import and confirmed removal.",
+    "Bad import reports failure without changing the editor or local entries.",
+    "Language change retains custom name, selection, search and preview camera; narrow back/close restores focus.",
+    "Real menu selection loads the spherical campaign; runtime body matches selected form with own identity and normal unlocks."
+  ],
+  "notes": [
+    "The 32-check regression batch was followed by final import, storage, localization and UI checks after presentation fixes; each named check records the latest passing log.",
+    "Native capture uses fresh isolated user storage and the same complete UI/world-start test.",
+    "File dialogs are opened with real buttons, then file_selected supplies the isolated test path; no manual Windows filesystem-picker acceptance.",
+    "Native software rendering proves layout and rendering, not target hardware performance. No Windows, online service or 60-FPS acceptance."
+  ]
+}

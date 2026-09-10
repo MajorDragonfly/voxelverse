@@ -9,6 +9,8 @@ var controller: Node
 var actors: Dictionary = {}
 var props: Node3D
 var _appearance: String = ""
+# Ephemeral command feedback; never part of a campaign snapshot.
+var last_result: Dictionary = {}
 
 func clear_runtime() -> void:
 	for child: Node in get_children():
@@ -18,6 +20,7 @@ func clear_runtime() -> void:
 	actors.clear()
 	props = null
 	_appearance = ""
+	last_result.clear()
 
 func data() -> Dictionary:
 	return controller.body().get("tribal_neighbor", {})
@@ -75,9 +78,20 @@ func refresh() -> void:
 	for index in range(int(data()["stock"]["food"])):
 		props._box(center + Vector3(-1.0 + (index % 3) * 0.35, 0.35 + (index / 3) * 0.25, 1.1), Vector3(0.25, 0.25, 0.25), Color("ab7857"))
 
+func _publish(outcome: Dictionary) -> Dictionary:
+	last_result = outcome.duplicate(true)
+	controller.status = str(outcome.code)
+	return outcome
+
+# Boolean ports remain available for existing gameplay callers.
 func contact() -> bool:
-	if not controller.is_active() or not data().is_empty():
-		return false
+	return contact_result().ok
+
+func contact_result() -> Dictionary:
+	if get_tree().paused or not controller.is_active():
+		return _publish(Model.result(false, "neighbor.unavailable"))
+	if not data().is_empty():
+		return _publish(Model.result(false, "neighbor.already_known"))
 	controller.navigation.rebuild(controller.home, controller.anchor(), controller.village(), controller.navigation_extent())
 	var center: Vector3 = Vector3.INF
 	var places: Array[Vector3] = []
@@ -102,8 +116,7 @@ func contact() -> bool:
 		places = [first, second]
 	if not center.is_finite():
 		controller.navigation.rebuild(controller.home, controller.anchor(), controller.village(), controller.navigation_extent())
-		controller.status = "Kein sicher erreichbarer Lagerplatz in der geladenen Umgebung frei. Suche nach einer Änderung der Umgebung erneut."
-		return false
+		return _publish(Model.result(false, "neighbor.no_site"))
 	for corner: Vector3 in [Vector3(-1,0,-1), Vector3(1,0,-1), Vector3(-1,0,1), Vector3(1,0,1)]:
 		foundation.append(Space.encode(self, controller.navigation.snap(Space.offset(self, center, corner))))
 	controller.body()["tribal_neighbor"] = Model.create(controller._state.campaign.data, controller.village(), Space.encode(self, center), places.map(func(p: Vector3) -> Variant: return Space.encode(self, p)), foundation)
@@ -113,25 +126,28 @@ func contact() -> bool:
 	if not saved:
 		controller.body().erase("tribal_neighbor")
 		controller.navigation.rebuild(controller.home, controller.anchor(), controller.village(), controller.navigation_extent())
-		controller.status = "Kontakt konnte nicht gespeichert werden. Es wurde kein Lager angelegt."
-		return false
+		return _publish(Model.result(false, "neighbor.contact_save_failed"))
 	refresh()
-	controller.status = "Der Uferbund braucht 6 Nahrung und 4 Holz für seine Unterkunft. Wähle zwei freie Bewohner als Träger."
-	return true
+	return _publish(Model.result(true, "neighbor.contacted", {"name": data().name, "food": Model.COST.food, "wood": Model.COST.wood}))
 
 func start_aid() -> bool:
-	if not controller.is_active() or data().is_empty():
-		return false
+	return start_aid_result().ok
+
+func start_aid_result() -> Dictionary:
+	if get_tree().paused or not controller.is_active():
+		return _publish(Model.result(false, "neighbor.unavailable"))
+	if data().is_empty():
+		return _publish(Model.result(false, "neighbor.not_known"))
 	for id: String in controller.selected:
+		if not controller.actors.has(id) or not is_instance_valid(controller.actors[id]):
+			return _publish(Model.result(false, "neighbor.carriers_busy"))
 		if controller.navigation.route(controller.actors[id].global_position, controller.anchor()).is_empty() or controller.navigation.route(controller.anchor(), Space.resolve(self, data()["anchor"])).is_empty():
-			controller.status = "Der Weg zum eigenen oder zum Nachbarlager ist blockiert."
-			return false
+			return _publish(Model.result(false, "neighbor.route_blocked"))
 	var previous: Dictionary = data().duplicate(true)
 	var village_before: Dictionary = controller.village().duplicate(true)
-	var problem: String = Model.begin(data(), controller.village(), controller.selected)
-	if not problem.is_empty():
-		controller.status = problem
-		return false
+	var outcome: Dictionary = Model.begin_result(data(), controller.village(), controller.selected)
+	if not outcome.ok:
+		return _publish(outcome)
 	controller._transaction = true
 	var saved: bool = controller._saves.save_now()
 	controller._transaction = false
@@ -140,8 +156,7 @@ func start_aid() -> bool:
 		controller.body()["tribe"] = village_before
 	controller._routes.clear()
 	controller._goals.clear()
-	controller.status = "Hilfslieferung unterwegs · Anhalten und Fortsetzen gelten auch für diese Träger." if saved else "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten."
-	return saved
+	return _publish(outcome if saved else Model.result(false, "neighbor.aid_save_failed"))
 
 func target(member: Dictionary) -> Vector3:
 	return Space.resolve(self, Model.target(data(), controller.village(), member)) if not data().is_empty() else Vector3.INF
@@ -176,7 +191,7 @@ func tick(delta: float, simulation_delta: float) -> void:
 	if before["aid"]["status"] != data()["aid"]["status"]:
 		get_node("/root/ProgressionService").record_neighbor_help(before, controller)
 		controller._saves.schedule_autosave(1.0)
-		controller.status = "Gemeinsam geholfen · Der Uferbund hat seine Unterkunft fertiggestellt und ist euch freundlich gesinnt."
+		_publish(Model.result(true, "neighbor.shelter_completed", {"name": data().name}))
 		refresh()
 
 func has_blocked() -> bool:

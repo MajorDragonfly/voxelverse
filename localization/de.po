@@ -705,3 +705,614 @@ msgstr "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spi
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+
+msgid "BP_LIBRARY_TITLE"
+msgstr "Kreaturenvorlagen"
+
+msgid "BP_CLOSE"
+msgstr "Schließen"
+
+msgid "BP_IMPORT"
+msgstr "Importieren"
+
+msgid "BP_EXPORT"
+msgstr "Exportieren"
+
+msgid "BP_REMOVE"
+msgstr "Entfernen"
+
+msgid "BP_SAVE_VARIANT"
+msgstr "Entwurf ablegen"
+
+msgid "BP_BACK_LIST"
+msgstr "Zurück zur Liste"
+
+msgid "BP_USE"
+msgstr "Im Editor übernehmen"
+
+msgid "BP_BUILTIN"
+msgstr "Startvorlage"
+
+msgid "BP_LOCAL"
+msgstr "Lokal gespeichert"
+
+msgid "BP_NO_RESULTS"
+msgstr "Keine passenden Vorlagen. Ändere die Suche oder importiere eine Datei."
+
+msgid "BP_AUTHOR"
+msgstr "Von {author}"
+
+msgid "BP_AUTHOR_UNKNOWN"
+msgstr "Ohne Autorenangabe"
+
+msgid "BP_SOURCES"
+msgstr "Auf {count} früheren Entwürfen aufgebaut."
+
+msgid "BP_COMPLEXITY"
+msgstr "Formpunkte: {count} / {limit}"
+
+msgid "BP_AVAILABLE_START"
+msgstr "Für eine neue Spezies verfügbar."
+
+msgid "BP_AVAILABLE"
+msgstr "Verfügbar. Deine Identität und dein Fortschritt bleiben erhalten."
+
+msgid "BP_IMPORTED"
+msgstr "Vorlage lokal gespeichert. Sie bleibt ohne die ursprüngliche Datei verfügbar."
+
+msgid "BP_EXPORTED"
+msgstr "Vorlage exportiert. Die Datei kann in einen anderen Spielstand importiert werden."
+
+msgid "BP_VARIANT_SAVED"
+msgstr "Entwurf als eigene Vorlage abgelegt. Dein Spielstand wurde dabei nicht verändert."
+
+msgid "BP_REMOVE_CONFIRM"
+msgstr "„{name}“ aus der Bibliothek entfernen? Bereits verwendete Kreaturen bleiben erhalten."
+
+msgid "BP_REMOVED"
+msgstr "Vorlage aus der Bibliothek entfernt."
+
+msgid "BP_LOCKED"
+msgstr "Noch nicht freigeschaltet: {parts}"
+
+msgid "BP_ERROR_LIBRARY"
+msgstr "Die Bibliothek kann nicht gelesen werden. Ihre Originaldatei bleibt unverändert. Startvorlagen sind weiterhin verfügbar."
+
+msgid "BP_ERROR_FULL"
+msgstr "Die Bibliothek ist voll. Exportiere benötigte Vorlagen und entferne nicht mehr benötigte Einträge."
+
+msgid "BP_ERROR_CONFLICT"
+msgstr "Diese Vorlage ist mit derselben Revision, aber anderem Inhalt vorhanden. Die gespeicherte Fassung bleibt erhalten."
+
+msgid "BP_ERROR_DESTINATION"
+msgstr "Diese Datei wird nicht überschrieben. Wähle einen neuen Dateinamen."
+
+msgid "BP_ERROR_WRITE"
+msgstr "Speichern fehlgeschlagen. Prüfe den Zielordner und versuche es erneut."
+
+msgid "BP_ERROR_PHASE"
+msgstr "Die eigene Körperform lässt sich nur in der Kreaturenphase ändern. Während eines Epochenwechsels ist die Übernahme gesperrt."
+
+msgid "BP_ERROR_COMPLEXITY"
+msgstr "Diese Vorlage überschreitet die verfügbaren Formpunkte."
+
+msgid "BP_ERROR_TARGET"
+msgstr "Der aktuelle Entwurf ist geschützt und kann nicht ersetzt werden."
+
+msgid "BP_ERROR_MISSING"
+msgstr "Diese Vorlage ist nicht mehr in der Bibliothek vorhanden."
+
+msgid "BP_ERROR_CAMPAIGN"
+msgstr "Öffne einen Spielstand, um die Vorlage im Editor zu übernehmen."
+
+msgid "BP_ERROR_PROVENANCE"
+msgstr "Diese Vorlage enthält bereits zu viele Herkunftseinträge für eine weitere Variante."
+
+msgid "BP_ERROR_NAME"
+msgstr "Gib einen kurzen Namen für die Vorlage ein."
+
+msgid "BP_ERROR_PACKAGE"
+msgstr "Die Vorlage ist beschädigt oder benötigt nicht unterstützte Teile oder eine andere Spielversion. Die Datei bleibt erhalten."
+
+msgid "BP_ERROR_EDITOR"
+msgstr "Die Anschlüsse dieser Vorlage passen nicht zum aktuellen Editor. Die Form wird nicht verändert übernommen."
+
+msgid "BP_SEARCH"
+msgstr "Vorlagen suchen"
+
+msgid "BP_ALL"
+msgstr "Alle Vorlagen"
+
+msgid "BP_BUILTINS"
+msgstr "Startvorlagen"
+
+msgid "BP_LOCALS"
+msgstr "Meine Bibliothek"
+
+msgid "BP_SELECT_START"
+msgstr "Als Startkreatur wählen"
+
+msgid "BP_CANCEL"
+msgstr "Abbrechen"
+
+msgid "BP_VARIANT_NAME"
+msgstr "Name der Vorlage"
+
+msgid "BP_TEMPLATES"
+msgstr "Kreaturenvorlagen"
+
+msgid "BP_ADOPTED"
+msgstr "Vorlage übernommen. Rückgängig stellt deine vorherige Kreatur wieder her. Speichere, um die Änderung zu behalten."
+
+msgid "BP_ERROR_START"
+msgstr "Diese Vorlage kann nicht als Startkreatur verwendet werden. Wähle eine verfügbare Startvorlage."
+
+msgid "BP_CHOOSE_START"
+msgstr "Startkreatur auswählen"
+
+msgid "BP_DEFAULT_START"
+msgstr "Startkreatur: Standardform · später im Editor veränderbar"
+
+msgid "BP_SELECTED_START"
+msgstr "Startkreatur: {name}"
+
+msgid "BP_START_MEADOW"
+msgstr "Wiesenläufer"
+
+msgid "BP_START_DUNE"
+msgstr "Dünenwanderer"
+
+msgid "BP_START_MOSS"
+msgstr "Mooskrabbler"
+
+msgid "BP_PREVIEW_HELP"
+msgstr "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
+
+msgid "NEIGHBOR_TAB"
+msgstr "Nachbarn"
+
+msgid "NEIGHBOR_CONTACT"
+msgstr "Nachbarlager suchen"
+
+msgid "NEIGHBOR_AID"
+msgstr "Auswahl liefert Hilfe"
+
+msgid "NEIGHBOR_FOCUS"
+msgstr "Nachbarlager ansehen"
+
+msgid "NEIGHBOR_HOME"
+msgstr "Eigenes Dorf ansehen"
+
+msgid "NEIGHBOR_AID_HINT"
+msgstr "Mindestens zwei freie Bewohner liefern aus dem eigenen Lager. Sechs Nahrung bleiben als Reserve. Pro Träger höchstens fünf Einheiten; Anhalten erhält die Fracht. Ein neuer Auftrag bringt übrige Hilfsfracht zuerst heim."
+
+msgid "NEIGHBOR_EMPTY"
+msgstr "Nachbarstämme gehören deiner Spezies an und haben eigene Bewohner und Vorräte. Suche einen erreichbaren Kontakt in der geladenen Dorfumgebung."
+
+msgid "NEIGHBOR_DETAIL"
+msgstr "{name} · Deine Spezies, eigene Fraktion · {residents} Bewohner\n{status}\nNahrung {food} / {food_required} · Holz {wood} / {wood_required}\nMitwirkende {contributors} · Unterkunft {shelter} %"
+
+msgid "NEIGHBOR_OFFERED"
+msgstr "Hilfsauftrag offen"
+
+msgid "NEIGHBOR_ACTIVE"
+msgstr "Hilfslieferung läuft"
+
+msgid "NEIGHBOR_BUILDING"
+msgstr "Nachbarn bauen ihre Unterkunft"
+
+msgid "NEIGHBOR_COMPLETED"
+msgstr "Hilfe erfüllt · freundlich"
+
+msgid "NEIGHBOR_UNAVAILABLE"
+msgstr "Die Gruppe kann gerade keine Befehle annehmen."
+
+msgid "NEIGHBOR_ALREADY_KNOWN"
+msgstr "Dieses Nachbarlager ist bereits bekannt."
+
+msgid "NEIGHBOR_NOT_KNOWN"
+msgstr "Suche zuerst ein erreichbares Nachbarlager."
+
+msgid "NEIGHBOR_NO_SITE"
+msgstr "Kein sicher erreichbarer Lagerplatz in der geladenen Umgebung frei. Suche nach einer Änderung der Umgebung erneut."
+
+msgid "NEIGHBOR_CONTACT_SAVE_FAILED"
+msgstr "Kontakt konnte nicht gespeichert werden. Es wurde kein Lager angelegt."
+
+msgid "NEIGHBOR_CONTACTED"
+msgstr "{name} braucht {food} Nahrung und {wood} Holz für seine Unterkunft. Wähle zwei freie Bewohner als Träger."
+
+msgid "NEIGHBOR_ROUTE_BLOCKED"
+msgstr "Der Weg zum eigenen oder zum Nachbarlager ist blockiert."
+
+msgid "NEIGHBOR_AID_FINISHED"
+msgstr "Diese Hilfslieferung ist bereits abgeschlossen."
+
+msgid "NEIGHBOR_SELECTION_REQUIRED"
+msgstr "Wähle mindestens {count} Bewohner für die gemeinsame Hilfslieferung."
+
+msgid "NEIGHBOR_CARRIERS_BUSY"
+msgstr "Ausgewählte Bewohner müssen ihre laufende Fracht oder Hilfslieferung zuerst beenden."
+
+msgid "NEIGHBOR_AID_STARTED"
+msgstr "Hilfslieferung für {count} Bewohner gespeichert · Anhalten und Fortsetzen gelten auch für diese Träger."
+
+msgid "NEIGHBOR_AID_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten."
+
+msgid "NEIGHBOR_SHELTER_COMPLETED"
+msgstr "Gemeinsam geholfen · {name} hat seine Unterkunft fertiggestellt und ist euch freundlich gesinnt."
+
+msgid "NEIGHBOR_UNKNOWN_RESULT"
+msgstr "Die Rückmeldung ist nicht verfügbar."
+
+msgid "GROUP_SELECTION_EMPTY"
+msgstr "Niemand ausgewählt · Bewohner anklicken oder einen Rahmen ziehen."
+
+msgid "GROUP_SELECTION"
+msgstr "{count} / {total} ausgewählt · {names}"
+
+msgid "GROUP_CARRYING"
+msgstr " · {count} mit Transportgut"
+
+msgid "GROUP_PAUSED"
+msgstr "PAUSE · Leertaste zum Fortsetzen. "
+
+msgid "Buch · J"
+msgstr "Buch · J"
+
+msgid "Weltkarte"
+msgstr "Weltkarte"
+
+msgid "Schließen"
+msgstr "Schließen"
+
+msgid "Karte schließen · Esc"
+msgstr "Karte schließen · Esc"
+
+msgid "Weiter herauszoomen"
+msgstr "Weiter herauszoomen"
+
+msgid "Näher heranzoomen"
+msgstr "Näher heranzoomen"
+
+msgid "Zu mir"
+msgstr "Zu mir"
+
+msgid "Erkundetes"
+msgstr "Erkundetes"
+
+msgid "Orte"
+msgstr "Orte"
+
+msgid "Zur Karte"
+msgstr "Zur Karte"
+
+msgid "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir"
+msgstr "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir"
+
+msgid "Bekannte Orte"
+msgstr "Bekannte Orte"
+
+msgid "Eigene"
+msgstr "Eigene"
+
+msgid "Freunde"
+msgstr "Freunde"
+
+msgid "Eigenes Nest"
+msgstr "Eigenes Nest"
+
+msgid "Heimat"
+msgstr "Heimat"
+
+msgid "Befreundet"
+msgstr "Befreundet"
+
+msgid "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen."
+msgstr "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen."
+
+msgid "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren"
+msgstr "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren"
+
+msgid "ATLAS_SHIFT_M"
+msgstr "Umschalt+M"
+
+msgid "ATLAS_OWN_NEST"
+msgstr "Eigenes Nest"
+
+msgid "ATLAS_SPECIES_HOME"
+msgstr "Heimat deiner Spezies"
+
+msgid "ATLAS_FRIEND_HABITAT"
+msgstr "Befreundete Kreatur · Lebensraum"
+
+msgid "ATLAS_NAMED_HABITAT"
+msgstr "{name} · Lebensraum"
+
+msgid "ATLAS_DISTANCE_M"
+msgstr "{distance} m"
+
+msgid "ATLAS_DISTANCE_KM"
+msgstr "{distance} km"
+
+msgid "ATLAS_EQUATOR_WIDTH"
+msgstr "Breite am Äquator: {distance}"
+
+msgid "ATLAS_WIDTH"
+msgstr "Kartenbreite: {distance}"
+
+msgid "ATLAS_UNEXPLORED"
+msgstr "Dunkle Flächen sind noch nicht erkundet."
+
+msgid "ATLAS_COLLECTION_FULL"
+msgstr "Die Kartensammlung ist voll. Bereits erkundete Gebiete bleiben erhalten."
+
+msgid "ATLAS_OWN_DETAIL"
+msgstr "{name} · Eigene Spezies"
+
+msgid "ATLAS_FRIEND_DETAIL"
+msgstr "{name} · Bekannter Ort einer befreundeten Kreatur"
+
+msgid "ATLAS_BODY_COLLECTION_FULL"
+msgstr "Die Sammlung erkundeter Himmelskörper ist voll."
+
+msgid "ATLAS_INVALID_RECORD"
+msgstr "Diese Erkundungskarte kann nicht gelesen werden. Die gespeicherten Daten bleiben erhalten."
+
+msgid "ATLAS_SURFACE_MISMATCH"
+msgstr "Die gespeicherte Karte passt nicht zu dieser Oberfläche."
+
+msgid "ATLAS_UNAVAILABLE"
+msgstr "Die Weltkarte ist gerade nicht verfügbar."
+
+msgid "HOME_TITLE"
+msgstr "HEIMAT & GRUPPE"
+
+msgid "HOME_HUD"
+msgstr "Heimat & Gruppe · N"
+
+msgid "HOME_HUD_INVALID"
+msgstr "Heimat & Gruppe · N · gespeicherten Stand prüfen"
+
+msgid "HOME_HUD_STATUS"
+msgstr "Heimat: {distance} m · Gruppe: {members} · N"
+
+msgid "HOME_HUD_WAITING"
+msgid_plural "HOME_HUD_WAITING_PLURAL"
+msgstr[0] " · {count} wartet am Weg"
+msgstr[1] " · {count} warten am Weg"
+
+msgid "HOME_ESTABLISH"
+msgstr "Heimat hier gründen"
+
+msgid "HOME_RELOCATE"
+msgstr "Heimat an diesen Ort verlegen"
+
+msgid "HOME_EMPTY"
+msgstr "Gründe auf einer freien, trockenen Fläche eine Nestgruppe mit zwei Gefährten deiner Spezies."
+
+msgid "HOME_SUMMARY"
+msgstr "Zwei Gefährten deiner Spezies · Änderungen werden sofort gespeichert."
+
+msgid "HOME_ALL"
+msgstr "Alle Gefährten"
+
+msgid "HOME_MEMBER_ORDER"
+msgstr "{name} · {order}"
+
+msgid "HOME_FOLLOW"
+msgstr "Folgen"
+
+msgid "HOME_WAIT"
+msgstr "Warten"
+
+msgid "HOME_RETURN"
+msgstr "Heimkehren"
+
+msgid "HOME_REST_HINT"
+msgstr "Am Heimatplatz erholst du dich langsam, solange du genug gegessen und getrunken hast. Deine Gefährten gehen zu Fuß und warten vor unpassierbaren Wegen."
+
+msgid "HOME_CLOSE"
+msgstr "Zurück zum Spiel · N / Esc"
+
+msgid "HOME_UNAVAILABLE"
+msgstr "Der Heimatplatz ist gerade nicht verfügbar."
+
+msgid "HOME_FLAT_GROUND_REQUIRED"
+msgstr "Wähle festen, möglichst ebenen Boden."
+
+msgid "HOME_DRY_GROUND_REQUIRED"
+msgstr "Der Heimatplatz muss auf trockenem Boden liegen."
+
+msgid "HOME_INSUFFICIENT_SPACE"
+msgstr "Hier ist zu wenig ebene, trockene Fläche für die Gruppe."
+
+msgid "HOME_OBSTRUCTED"
+msgstr "Bäume oder andere Hindernisse versperren den Heimatplatz."
+
+msgid "HOME_ORDER_UNAVAILABLE"
+msgstr "Dieser Befehl ist gerade nicht verfügbar."
+
+msgid "HOME_REQUIRED"
+msgstr "Lege zuerst einen Heimatplatz fest."
+
+msgid "HOME_MEMBER_UNAVAILABLE"
+msgstr "Dieses Gruppenmitglied ist nicht verfügbar."
+
+msgid "HOME_ESTABLISHED"
+msgstr "Heimatplatz gespeichert. Deine beiden Gefährten gehören dauerhaft zu dieser Nestgruppe."
+
+msgid "HOME_ORDER_SAVED"
+msgstr "Befehl gespeichert."
+
+msgid "HOME_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Die bisherige Gruppe und ihre Befehle bleiben erhalten."
+
+msgid "HOME_INVALID_RECORD"
+msgstr "Der gespeicherte Gruppenstand ist nicht lesbar."
+
+msgid "HOME_UNSUPPORTED_VERSION"
+msgstr "Diese Gruppenversion wird noch nicht unterstützt. Der gespeicherte Stand bleibt erhalten."
+
+msgid "HOME_RADIAL_SURFACE_REQUIRED"
+msgstr "Radiales Gruppenformat benötigt eine Kugeloberfläche."
+
+msgid "HOME_SURFACE_MISMATCH"
+msgstr "Gruppe und aktueller Lebensraum passen nicht zusammen."
+
+msgid "HOME_INVALID_ANCHOR"
+msgstr "Der gespeicherte Heimatplatz ist ungültig."
+
+msgid "HOME_INVALID_MEMBERS"
+msgstr "Die gespeicherten Gruppenmitglieder sind ungültig."
+
+msgid "HOME_INVALID_MEMBER_RECORD"
+msgstr "Ein Gruppenmitglied ist nicht lesbar."
+
+msgid "HOME_INVALID_MEMBER_ORDER"
+msgstr "Identität oder Befehl eines Gruppenmitglieds ist ungültig."
+
+msgid "HOME_INVALID_MEMBER_PLACE"
+msgstr "Name oder Standort eines Gruppenmitglieds ist ungültig."
+
+msgid "OWNED_FOLLOW"
+msgstr "Folgen"
+
+msgid "OWNED_WAIT"
+msgstr "Warten"
+
+msgid "OWNED_HOME"
+msgstr "Heimkehr"
+
+msgid "OWNED_NO_ORDER"
+msgstr "Kein aktiver Auftrag"
+
+msgid "OWNED_UNKNOWN"
+msgstr "Nicht bekannt"
+
+msgid "OWNED_UNNAMED_HANDLER"
+msgstr "Betreuer nicht benannt"
+
+msgid "OWNED_WAIT_TARGET"
+msgstr "Ziel: {point}"
+
+msgid "OWNED_HOME_TARGET"
+msgstr "Heimat: {point}"
+
+msgid "OWNED_UNNAMED_ANIMAL"
+msgstr "Unbenanntes Tier · {id}"
+
+msgid "OWNED_UNNAMED_SPECIES"
+msgstr "Name nicht bekannt · {id}"
+
+msgid "OWNED_YOUR_TRIBE"
+msgstr "Dein Stamm"
+
+msgid "OWNED_TRUST_VALUE"
+msgstr "{trust} / 100"
+
+msgid "OWNED_DEAD"
+msgstr "Verstorben"
+
+msgid "OWNED_TAMED"
+msgstr "Gezähmt"
+
+msgid "OWNED_CURRENT_WORLD"
+msgstr "Aktuelle Welt"
+
+msgid "OWNED_SPHERE_POINT"
+msgstr "Breite {latitude}° · Länge {longitude}° · Höhe {height} m"
+
+msgid "OWNED_PLANE_POINT"
+msgstr "X {x} · Y {y} · Z {z} m"
+
+msgid "OWNED_UNAVAILABLE"
+msgstr "Dein Tierbestand ist hier noch nicht verfügbar."
+
+msgid "OWNED_INVALID"
+msgstr "Dieser Tierbestand kann derzeit nicht gelesen werden."
+
+msgid "OWNED_SCOPE_MISMATCH"
+msgstr "Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar."
+
+msgid "OWNED_EMPTY"
+msgstr "Deinem Stamm gehören hier noch keine Tiere. Befreundete Wildtiere und begonnene Zähmungen zählen noch nicht dazu."
+
+msgid "OWNED_NO_MATCHES"
+msgstr "Keine passenden Tiere. Ändere die Suche oder den Filter."
+
+msgid "OWNED_DEAD_NAME"
+msgstr "{name} · verstorben"
+
+msgid "OWNED_OWNER"
+msgstr "Besitzer"
+
+msgid "OWNED_LAST_OWNER"
+msgstr "Letzter Besitzer"
+
+msgid "OWNED_DETAIL"
+msgstr "Art: {species}\n{owner_label}: {owner}\nZustand: {status}\nVertrauen: {trust}"
+
+msgid "OWNED_LOCATION_DETAIL"
+msgstr "{order}\n\nLetzter bekannter Ort:\n{location}"
+
+msgid "OWNED_ID"
+msgstr "Tierkennung: {id}"
+
+msgid "OWNED_ENTRY"
+msgstr "{name}\nArt: {species} · Besitzer: {owner}\nVertrauen: {trust} · Auftrag: {order}\nAufenthalt: {location}"
+
+msgid "OWNED_JOURNAL_SUMMARY"
+msgstr "{species} Arten     ·     {regions} Regionen     ·     {parts} Teile verfügbar     ·     {points} Entdeckungspunkte"
+
+msgid "OWNED_JOURNAL_PAGE"
+msgstr "{count} Einträge · {page} / {pages}"
+
+msgid "Zurück zum Spiel  ·  Esc"
+msgstr "Zurück zum Spiel  ·  Esc"
+
+msgid "Arten"
+msgstr "Arten"
+
+msgid "Körperteile"
+msgstr "Körperteile"
+
+msgid "Regionen"
+msgstr "Regionen"
+
+msgid "Nächste Schritte"
+msgstr "Nächste Schritte"
+
+msgid "Forschungsziele"
+msgstr "Forschungsziele"
+
+msgid "Eigene Tiere"
+msgstr "Eigene Tiere"
+
+msgid "Name oder Fundort suchen …"
+msgstr "Name oder Fundort suchen …"
+
+msgid "Tier, Art oder Auftrag suchen …"
+msgstr "Tier, Art oder Auftrag suchen …"
+
+msgid "Lebende Tiere"
+msgstr "Lebende Tiere"
+
+msgid "Verstorbene Tiere"
+msgstr "Verstorbene Tiere"
+
+msgid "Alle eigenen Tiere"
+msgstr "Alle eigenen Tiere"
+
+msgid "Vorherige Seite"
+msgstr "Vorherige Seite"
+
+msgid "Nächste Seite"
+msgstr "Nächste Seite"
+
+msgid "Kurzen Spielhinweis anzeigen"
+msgstr "Kurzen Spielhinweis anzeigen"
+
+msgid "Entdeckungsbuch · J"
+msgstr "Entdeckungsbuch · J"

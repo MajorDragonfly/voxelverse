@@ -1,0 +1,26 @@
+[
+  {
+    "run": "diagnostic-complete/spherical_gameplay_test",
+    "clock": 931.738972555743,
+    "saved_cursor": 931.732317889077,
+    "returned_cursor": 931.738972555743,
+    "owed_seconds": 0.006654666666008779,
+    "production_seconds": 0.006654666666600306,
+    "food_consumed": 2.218222223016042e-05,
+    "water_consumed": 8.872888888955544e-05,
+    "water_need": 4.0,
+    "care_seconds": 300
+  },
+  {
+    "run": "travel-debt",
+    "clock": 1087.37808733354,
+    "saved_cursor": 1081.94165000021,
+    "returned_cursor": 1087.37808733354,
+    "owed_seconds": 5.436437333329877,
+    "production_seconds": 5.436437333334398,
+    "food_consumed": 0.01812145777778018,
+    "water_consumed": 0.07248583111111984,
+    "water_need": 4.0,
+    "care_seconds": 300
+  }
+]

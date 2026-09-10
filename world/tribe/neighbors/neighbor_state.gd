@@ -35,15 +35,23 @@ static func in_transit(data: Dictionary, kind: String) -> int:
 		count += 1 if shipment["resource"] == kind else 0
 	return count
 
+## Compatibility port: an empty code still means success; errors are stable IDs.
 static func begin(data: Dictionary, village: Dictionary, selected: Array) -> String:
+	var outcome := begin_result(data, village, selected)
+	return "" if outcome.ok else str(outcome.code)
+
+static func result(ok: bool, code: String, params: Dictionary = {}) -> Dictionary:
+	return {"ok": ok, "code": code, "params": params.duplicate(true)}
+
+static func begin_result(data: Dictionary, village: Dictionary, selected: Array) -> Dictionary:
 	if data["aid"]["status"] not in ["offered", "active"]:
-		return "Diese Hilfslieferung ist bereits abgeschlossen."
+		return result(false, "neighbor.aid_finished")
 	if selected.size() < 2:
-		return "Wähle mindestens zwei Bewohner für die gemeinsame Hilfslieferung."
+		return result(false, "neighbor.selection_required", {"count": 2})
 	for id: String in selected:
 		var member: Dictionary = resident(village, id)
 		if member.is_empty() or not member["cargo"].is_empty() or data["aid"]["shipments"].has(id):
-			return "Ausgewählte Bewohner müssen ihre laufende Fracht oder Hilfslieferung zuerst beenden."
+			return result(false, "neighbor.carriers_busy")
 	data["aid"]["status"] = "active"
 	data["schema"] = SCHEMA if data.anchor is Dictionary else LEGACY_SCHEMA
 	for id: String in selected:
@@ -54,7 +62,7 @@ static func begin(data: Dictionary, village: Dictionary, selected: Array) -> Str
 		member["work"] = 0.0
 		member["stage"] = "outbound"
 		data["aid"]["shipments"][id] = {"leg": "collect", "resource": ""}
-	return ""
+	return result(true, "neighbor.aid_started", {"count": selected.size()})
 
 static func resident(village: Dictionary, id: String) -> Dictionary:
 	for member: Dictionary in village["members"]:
@@ -143,11 +151,16 @@ static func build(data: Dictionary, member_id: String, delta: float) -> bool:
 		aid["status"] = "completed"
 	return true
 
+## Read-only facts, with copied containers. No language or display text in the model.
 static func progress(data: Dictionary) -> Dictionary:
 	if data.is_empty():
-		return {"met": false, "text": "Noch kein Nachbarlager kontaktiert."}
+		return {"met": false, "known": false}
 	var aid: Dictionary = data["aid"]
-	return {"met": aid["status"] == "completed", "text": "%s · Nahrung %d/6 · Holz %d/4 · Mitwirkende %d · Unterkunft %d %%" % [data["name"], aid["received"]["food"], aid["received"]["wood"], aid["carriers"].size(), roundi(float(aid["build_seconds"]) / BUILD_SECONDS * 100)]}
+	return {"met": aid["status"] == "completed", "known": true,
+		"name": data["name"], "status": aid["status"], "residents": data["members"].size(),
+		"received": aid["received"].duplicate(true), "required": COST.duplicate(true),
+		"contributors": aid["carriers"].size(),
+		"shelter_percent": roundi(float(aid["build_seconds"]) / BUILD_SECONDS * 100)}
 
 static func has_unsupported_contract(data: Variant) -> bool:
 	return data is Dictionary and (Rules.is_newer_version(data.get("schema"), SCHEMA) or (data.get("schema") == SCHEMA and not data.get("anchor") is Dictionary))

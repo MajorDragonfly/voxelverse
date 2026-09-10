@@ -1,0 +1,26 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+SPHERE_GAMEPLAY_STAGE open_campaign elapsed_seconds=1.138
+SPHERE_POPULATION 3 2
+SPHERE_VILLAGE_PREPARED 604
+SPHERE_VILLAGE_ACTIVE 3 wood 2
+SPHERE_GAMEPLAY_STAGE build_workshops elapsed_seconds=70.255
+SPHERE_WORKSHOP well { "work_ms": 3727, "navigation_ms": 0 }
+SPHERE_WORKSHOP fiberbed { "work_ms": 2484, "navigation_ms": 0 }
+SPHERE_GAMEPLAY_STAGE approach_wildlife elapsed_seconds=116.542
+SPHERE_TAMED object_674a9af747b71fd2f1bb7713631b6edd
+SPHERE_GAMEPLAY_STAGE animal_book_and_home elapsed_seconds=129.041
+SPHERE_GAMEPLAY_STAGE prepare_pen_navigation elapsed_seconds=132.155
+SPHERE_GAMEPLAY_STAGE build_pen elapsed_seconds=155.843
+SPHERE_GAMEPLAY_STAGE follow_to_pen elapsed_seconds=193.299
+SPHERE_GAMEPLAY_STAGE supply_pen elapsed_seconds=196.424
+SPHERE_GAMEPLAY_STAGE produce_and_collect_milk elapsed_seconds=217.299
+SPHERE_GAMEPLAY_STAGE block_loaded_carrier elapsed_seconds=294.408
+SPHERE_GAMEPLAY_STAGE animal_returns_after_obstacle elapsed_seconds=294.69
+SPHERE_GAMEPLAY_STAGE animal_travel_failed_write elapsed_seconds=294.764
+WARNING: Could not commit save: user://missing-animal-travel-parent/blocked.json (File not found)
+SPHERE_GAMEPLAY_STAGE animal_travel_depart elapsed_seconds=294.818
+ANIMAL_TRAVEL_FAR { "body_id": "body_7d0314de83c88106dfb2bb1236c622d5", "animal_id": "object_674a9af747b71fd2f1bb7713631b6edd", "production_seconds_before": 309.0, "production_seconds_after": 314.060012, "food_consumed": 0.01686670666667, "cargo": "milk", "milk_stock": 0.0 }
+SPHERE_GAMEPLAY_STAGE animal_travel_far_restart elapsed_seconds=308.708
+SPHERE_GAMEPLAY_STAGE animal_travel_return elapsed_seconds=324.172
+ANIMAL_TRAVEL_RETURN_DIAGNOSTICS { "clock": 931.738972555743, "saved_clock": 931.738972555743, "saved_cursor": 931.732317889077, "returned_cursor": 931.738972555743 }
+ERROR: Return replayed or lost the remote husbandry state.

@@ -78,7 +78,7 @@ func run() -> void:
 func exercise(surface: RefCounted, anchor: Dictionary) -> Dictionary:
 	var catalog: Dictionary = Catalog.create_surface(surface.body, anchor)
 	var original: Dictionary = Catalog.create(surface.body)
-	expect(catalog.species == original.species, "Surface mode changed stable species or bodies")
+	expect(catalog.species.slice(0, 3) == original.species, "Surface extension changed existing species or bodies")
 	var frozen: String = JSON.stringify(catalog.species)
 	var resumed: Dictionary = catalog.duplicate(true)
 	var one := Planner.new()

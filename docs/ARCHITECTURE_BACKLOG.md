@@ -2,7 +2,11 @@
 
 Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7` auf veröffentlichtem `main`. [Befunde und Grenzen](ARCHITECTURE_SCALABILITY_AUDIT.md), [Roadmap](../ROADMAP.md), [Kugelumzug](SPHERICAL_CAMPAIGN_MIGRATION.md) und [Arbeitsverteilung](NEXT_PARALLEL_WORK.md) zusammen lesen.
 
-**Alle ARCH-Aufgaben sind geplant, keine davon ist durch dieses Dokument implementiert oder abgenommen.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Vor Arbeitsbeginn den aktuellen veröffentlichten Stand vergleichen: Bereits durch einen Fachchat gelieferte Arbeit mit Commit und Nachweis zuordnen, nicht nochmals implementieren. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
+**Das ursprüngliche Audit plante die ARCH-Aufgaben; aktuelle Lieferstände stehen bei den jeweiligen Aufträgen und in der Zuordnung unten.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Vor Arbeitsbeginn den aktuellen veröffentlichten Stand vergleichen: Bereits durch einen Fachchat gelieferte Arbeit mit Commit und Nachweis zuordnen, nicht nochmals implementieren. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
+
+## Aktueller Integrationsstand vom 10. September
+
+28 Übergaben sind in diesem Stand zusammengeführt. [Bericht, Prüfungen und Veröffentlichung](INTEGRATION_2026-09-10.md), [Quellcommits](integration-sources-2026-09-10.json) und [nächste Teilaufträge](NEXT_PARALLEL_WORK.md) gelten vor den historischen Startaufträgen. ARCH-01/05/20/21/23 sind geliefert; ARCH-02/13/14/17/24/25/28/29/30 enthalten die unten genannten Teilabschlüsse. Die noch offenen Punkte bleiben offen.
 
 ## Zuordnung der laufenden Implementierung
 
@@ -37,13 +41,18 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-01 – Datenbesitzer und Modulvertrag erfassen
 
+**Integration 10. September:** Im gemeinsamen Integrationsstand enthalten (PR #49); Besitzerinventar mit den neueren Verträgen aktualisiert.
+
+- **Lieferung vom 10. September 2026:** `feature/arch-01-module-contracts`, Basis `ea900f2e09946660694a9e59399b4680a5655a85`; Status **im gemeinsamen Integrationsstand enthalten** ([PR #49](https://github.com/MajorDragonfly/voxelverse/pull/49)). [Datenbesitzer und Modulanschlüsse](MODULE_CONTRACTS.md), [Übergabe und Prüfumfang](WORK_ARCH01_MODULE_CONTRACTS.md). Reines Codeinventar; ARCH-02/05/20/23/25/29 bleiben getrennt.
 - **Zuordnung:** M0, M1e. **Vorher:** aktueller gemeinsamer Commit. **Bereich:** `core/campaign`, Speicher-/Fachverträge; zunächst Dokumentation.
-- [ ] Kampagne, Körper, Regionen, Entwürfe, Heimat, D1, D2, Dorf, Nachbarn, Karte und Fortschritt mit genau einem autoritativen Besitzer erfassen.
-- [ ] Pro Modul ID, Schema, Lesezugriff, Befehle, Validator/Migration, Speicherteilnahme, Lebenszyklus und benötigte atomare Verbuchungen dokumentieren.
-- [ ] Lesekopie, veränderbaren Zustand, Szenenabbild und Cache unterscheiden; Sprache/Icons gehören zur Präsentation, Besitz nicht zur UI.
+- [x] Kampagne, Körper, Regionen, Entwürfe, Heimat, D1, D2, Dorf, Nachbarn, Karte und Fortschritt mit genau einem autoritativen Besitzer erfassen.
+- [x] Pro Modul ID, Schema, Lesezugriff, Befehle, Validator/Migration, Speicherteilnahme, Lebenszyklus und benötigte atomare Verbuchungen dokumentieren.
+- [x] Lesekopie, veränderbaren Zustand, Szenenabbild und Cache unterscheiden; Sprache/Icons gehören zur Präsentation, Besitz nicht zur UI.
 - **Fertig:** Ein neuer Verbraucher kann anhand der Tabelle seinen Anschluss finden; kein Modul besitzt dieselben Tiere/Vorräte ein zweites Mal. Keine neue Dienststruktur allein für die Dokumentation bauen.
 
 ### ARCH-02 – Messroute und vorläufige Budgets
+
+**Integration 10. September:** Kugelmessroute, Teilzeit-/Objekt-/Speicherdiagnostik und 1/10/100-Körperproben integriert (#58). Lange physische Rückroute, entwickelte Reiseprofile und Zielhardware bleiben offen.
 
 - **Zuordnung:** M1h/M10. **Vorher:** keiner; parallel zum Umzug. **Bereich:** vorhandene Diagnostik und `tools`.
 - [ ] Kaltstart, 10 Minuten Gehen mit Richtungswechseln, Rückkehr, Speichern/Laden und später Dorf/Reise als wiederholbare Routen mit Seed und Zustand festhalten.
@@ -70,10 +79,12 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-05 – Spielbare Oberflächenklassen und Abfragen
 
+**Integration 10. September:** Oberflächenklassen, tatsächliche Kollisionsbereitschaft und präzise Zellgeometrie integriert (#54); Größen-/Naht-/Neustartnachweise in WORK_ARCH05_SURFACE_SUPPORT.md.
+
 - **Zuordnung:** M1e/M1h. **Vorher:** vorhandener `surface_context`/radialer Adapter. **Bereich:** `core/campaign/surface_context.gd`, `world/surface`, `world/space`.
-- [ ] Zulässige Radius-/Terrainauflösung mit maximaler LOD-Tiefe und `ground_ready` abgleichen. Katalogkörper und begehbare Körper unterscheiden.
-- [ ] Bestehende Abfragen für Ort, Höhe, Wasser, Normale, Tangentialrahmen, Kollision und Ursprung als gemeinsamen Anschluss dokumentieren; fehlende Fähigkeit liefert einen definierten Fehler.
-- [ ] Unterstützte kleine Testkörper, Terra sowie obere/unzulässige Grenzfälle prüfen; keine neue Welt-Y-Abfrage in Fachsystemen.
+- [x] Zulässige Radius-/Terrainauflösung mit maximaler LOD-Tiefe und `ground_ready` abgleichen. Katalogkörper und begehbare Körper unterscheiden.
+- [x] Bestehende Abfragen für Ort, Höhe, Wasser, Normale, Tangentialrahmen, Kollision und Ursprung als gemeinsamen Anschluss dokumentieren; fehlende Fähigkeit liefert einen definierten Fehler.
+- [x] Unterstützte kleine Testkörper, Terra sowie obere/unzulässige Grenzfälle prüfen; keine neue Welt-Y-Abfrage in Fachsystemen.
 - **Fertig:** Jeder als begehbar akzeptierte Körper erreicht die benötigte lokale Bodenkollision; nicht unterstützte Größen werden vor dem Start verständlich zurückgewiesen. Kein stilles Verkleinern des Planeten.
 
 ### ARCH-06 – Persistente Orte je Fachmodul
@@ -137,6 +148,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-13 – Regionsspeicherung mit gemeinsamem Commit
 
+**Integration 10. September:** Population-, Atlas- und Ortsarchive mit vollständiger Referenzprüfung und frischen Prozessen integriert (#62/#71/#74). Kleines globales Manifest, Aufbewahrung/Bereinigung, Labordateien und Backup-Menü bleiben offen.
+
 - **Zuordnung:** M1h. **Vorher:** ARCH-02/04/06/07. **Bereich:** vorhandene Persistenz, neue begrenzte Regionsablage; Muster aus `galaxy_journal.gd` prüfen.
 - [ ] Stabile Regionsschlüssel nach Körper-ID und versionierter Cube-Sphere-Zelle festlegen; Regionen speichern Änderungen/Identitäten, unveränderte Landschaft bleibt prozedural.
 - [ ] Erst Speicherinterface und Rückschreiben vor Eviction umsetzen. Atomaren Kampagnenabschluss über versioniertes Manifest und unveränderliche Generationen von Segmenten erhalten.
@@ -147,6 +160,10 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-14 – Langzeitregister auslagern
 
+**Integration 10. September:** Kartenkacheln und bekannte Orte über RegionStore mit begrenztem Cache/Paging integriert (#59/#65); übrige Langzeitregister und die >256-Tier-Abnahme bleiben offen.
+
+- **Ortsregister-Teilpaket geliefert am 10. September 2026:** `feature/arch-14-place-register`, [PR #65](https://github.com/MajorDragonfly/voxelverse/pull/65), aufbauend auf PR #59. 3.105 Orte einschließlich Änderungen/Neustart geprüft; 96 offene Orte und 64 Einträge je UI-Seite. Schema 1/2 wird verlustfrei übernommen. [Vertrag und Integrationshinweise](WORK_ARCH14_PLACE_REGISTER.md), insbesondere zusätzlicher ARCH-13-Archivadapter für Schema 3 vor gemeinsamer Freigabe. Weitere Register bleiben offen.
+- **Atlas-Teilpaket geliefert am 10. September 2026:** `feature/arch-14-atlas-paging`, Basis `ea900f2`, [PR #59](https://github.com/MajorDragonfly/voxelverse/pull/59). Kartenwissen wächst über 8.192 Kacheln hinaus; höchstens 96 offene Kacheln plus begrenzter RegionStore-Cache. Vollständige Schema-1-Übernahme, unveränderliche alte Wurzeln und echte Neustart-/Fehlerprüfungen. [Vertrag, Registerinventar und Übergabe](WORK_ARCH14_ATLAS_PAGING.md). Gesamtpaket und übrige Register bleiben offen.
 - **Zuordnung:** M1h/M1f, Karten/D1. **Vorher:** ARCH-13, für Tierlaufzeit ARCH-09. **Bereich:** Ecosystem, Begegnungen, Nahrung, Atlas.
 - [ ] Die 256 `animal_records` von der Zahl aktiver Tiere trennen und regionsweise auslagern. Geänderte, gezähmte und anderweitig referenzierte Individuen behalten Identität.
 - [ ] Karten-/Orts-, Foraging- und Begegnungsgrenzen inventarisieren: Spielregel mit sichtbarer Grenze oder technischer Cache mit Paging. Kein stilles Verwerfen von Wissen oder Belohnungssperren.
@@ -155,10 +172,12 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-15 – Dorfregeln aus dem Szenencontroller lösen
 
+**Integration 10. September:** Gezielte Vorher-Zustände je angekommenem Bewohner integriert (#68/#73); ein gemeinsamer Dictionary-Anschluss und beide Vergleichssuiten. Echte Save-/Rollback-Snapshots bleiben vollständig.
+
 - **Zuordnung:** M1g/M1h/M6. **Vorher:** ARCH-01/06; Integration mit ARCH-11 koordinieren. **Bereich:** `tribe_controller.gd`, vorhandene Wirtschafts-/Auftragsdaten.
 - [x] Zuerst einen bestehenden Auftrag als Datenablauf abgrenzen: Befehl → Reservierung → bestätigte Ankunft → Arbeit → Ladung → bestätigte Lieferung → Beleg.
 - [x] Controller behält Darstellung, Eingabe und Navigation; Zustandsregeln können ohne geladene Figuren ausgewertet werden. Nahe Arbeit startet weiterhin erst nach tatsächlicher Ankunft.
-- [ ] Gesamtdorfkopien pro Bewohner/Tick durch gezielte Transaktionen ersetzen, ohne gemeinsamen Save-/Rollback-Schutz zu verlieren.
+- [x] Gesamtdorfkopien pro Bewohner/Tick durch gezielte Transaktionen ersetzen, ohne gemeinsamen Save-/Rollback-Schutz zu verlieren.
 - **Fertig:** Derselbe Auftrag behält seine Mengenbilanz und Unterbrechbarkeit. Pause sowie 1-/2-/4-fache Simulationsgeschwindigkeit funktionieren; wiederholte Ankunft/Bestätigung verbucht keine zusätzliche Ware.
 
 ### ARCH-16 – Nah-/Fernsimulation mit eindeutiger Übergabe
@@ -172,14 +191,20 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-17 – Streamingaufträge, Gewässer und Audio begrenzen
 
+**Integration 10. September:** Portionierter Pflanzenaufbau, begrenzte Tierplatzierung und radiales Wasser-/Unterwasseraudio integriert (#56); kalte Einzeluploads, Vorausschau und Ziel-PC-Messung bleiben offen.
+
+**Teilpaket 10. September 2026:** Pflanzenpublikation, Jobgültigkeit und begrenzte Tierplatzierungsversuche auf `agent/arch-17-fauna-budget`; Umfang, Messwerte und Nachweise in [WORK_ARCH17_POPULATION_BUDGET.md](WORK_ARCH17_POPULATION_BUDGET.md). Der anschließende [Wasser-/Audioteil](WORK_ARCH17_WATER_AUDIO.md) liefert begrenzte Uferabfragen und gemeinsame Unterwassergrenzen. Terrainvorausschau und Ziel-PC-Abnahme bleiben offen.
+
 - **Zuordnung:** M1h. **Vorher:** ARCH-02/05; Integration mit M1f/g. **Bereich:** Terrain-/Populationjobs, Wasser, Audio.
 - [ ] Gemessene teure Einzelpublikationen aufteilen; Queues, laufende Jobs, Meshes und Pflanzen-/Tieraufbau getrennt begrenzen. Ein weiches 4-ms-Limit ist keine Garantie für einen einzelnen Upload.
 - [ ] Jobs mit Körper-/Regions-/Laufzeitgeneration versehen; veraltete Ergebnisse nach Richtungs-/Körperwechsel verwerfen, ohne fremden Zustand zu verändern.
-- [ ] Wasser/Unterwasser und räumliches Audio an dieselbe Oberflächenquelle/Normale anschließen; keine aktive planare Umgebungsabtastung für den Kugelspieler.
+- [x] Wasser/Unterwasser und räumliches Audio an dieselbe Oberflächenquelle/Normale anschließen; keine aktive planare Umgebungsabtastung für den Kugelspieler. Quellenwechsel, Pause, Ursprung und Abfragegrenzen durch den Wasser-/Audio-Fachtest nachgewiesen; Ziel-PC-Hör-/Sichtprüfung bleibt separat.
 - [ ] Vorausschau an zugelassene Bewegungsgeschwindigkeit binden. Bei fehlender Kollision sicher warten; Fahrzeug-/Fluggeschwindigkeit erst nach eigener Messroute erhöhen.
 - **Fertig:** Lange Reise, Richtungswechsel, Pause und Verlassen während laufender Jobs halten die Budgets ein; keine fremden Sounds, veralteten Meshes oder verbleibenden Worker. Ziel-PC-Messung bleibt eigener Nachweis.
 
 ### ARCH-18 – Körperwechsel als Kampagnenübergabe
+
+**Integration 10. September:** Reale Tierhaltung samt begonnenem Milchzyklus und geladener Fracht für A–B–A/Neustart ergänzt (#69); Kollision bis zum abgeschlossenen Quellsave erhalten.
 
 - **Zuordnung:** M1h, Vorbereitung M9. **Vorher:** ARCH-04/13/16/17. **Bereich:** SessionFlow, Oberflächenhost und vorhandener Save-Abschluss.
 - [x] Abreise vorbereiten → Nahzustand/Fracht sichern → alten Host abmelden → Zielkontext aufbauen → erst bei Kollision/Hostbereitschaft Steuerung übergeben.
@@ -199,18 +224,23 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-20 – Ressourcen und Produktion vereinheitlichen
 
+**Integration 10. September:** Ressourcen-/Rezeptkatalog und Ressourcenbatch 2 mit Alt-Milchadapter integriert (#52). Noch keine Eierproduktion.
+
 - **Zuordnung:** D3/M6, Voraussetzung D3-EIER. **Vorher:** ARCH-01/15; Ortsanschluss mit 11 koordinieren. **Bereich:** `village_economy`, `village_husbandry`, bestehender D2-Leseanschluss.
-- [ ] Kleine feste Kataloge für `resource_id`, `recipe_id`, Einheit, Nährwert, Anzeige-/Icon-Schlüssel und Produktionsbedingungen anlegen; zunächst bestehende Werte übernehmen.
-- [ ] Bestehende Milchbuchung als allgemeinen Ressourcenbatch mit Quelle, Menge, Revision und Einmaligkeitsbeleg ausführen. Milch-Altadapter und Migration erhalten.
-- [ ] Resource-basierte Ausgabe/Tragen/Annahme/Verbrauch statt zusätzlicher Milch-/Eier-Sonderzweige nutzen; keine neue Tierbesitzlogik.
+- [x] Kleine feste Kataloge für `resource_id`, `recipe_id`, Einheit, Nährwert, Anzeige-/Icon-Schlüssel und Produktionsbedingungen anlegen; zunächst bestehende Werte übernehmen.
+- [x] Bestehende Milchbuchung als allgemeinen Ressourcenbatch mit Quelle, Menge, Revision und Einmaligkeitsbeleg ausführen. Milch-Altadapter und Migration erhalten.
+- [x] Resource-basierte Ausgabe/Tragen/Annahme/Verbrauch statt zusätzlicher Milch-/Eier-Sonderzweige nutzen; keine neue Tierbesitzlogik.
+- **Lieferung auf Fachbranch (10. September):** [WORK_RESOURCE_PRODUCTION.md](WORK_RESOURCE_PRODUCTION.md). Ressourcen-/Rezeptkatalog, Ressourcenbatch 2, reiner Milch-Altadapter, gemeinsamer Abhol-/Verbrauchsweg und Schutz unbekannter Revisionen. Hauptzweig-Integration erfolgt über den zugehörigen PR.
 - **Fertig:** Alte Milchstände behalten Bruchteile, begonnene Zyklen, Vorräte und Lieferbelege; Abbruch/Neustart erzeugt keine Doppelware. Noch keine Eier allein durch diesen Umbau erzeugen.
 
 ### ARCH-21 – D1-EIER und rollenspezifische Körperfähigkeiten
 
+**Integration 10. September:** Vierte Nutztierspezies mit Eierrolle, rollenspezifischen Körperfähigkeiten und additiver Kampagnenmigration integriert (#63). Fußanbieter aus ARCH-24 und Spawnbudget aus ARCH-17 gemeinsam erhalten.
+
 - **Zuordnung:** bestehender Fachauftrag D1-EIER; kein zweiter Artenkatalog. **Vorher:** ARCH-01/06, vorhandenes D1; Produktionseinheiten mit ARCH-20 abstimmen.
-- [ ] Pflichtrollenpolitik versionieren: drei bestehende Arten erhalten, vierte eigenständige Eierart additiv ergänzen. Alte Art-/Individuen-/Entdeckungs-IDs nicht neu erzeugen.
-- [ ] Fähigkeit pro Rolle prüfen: Eierlieferant darf z. B. zweibeinig sein; Reit-/Zugsicherheit bleibt über tatsächlich geeignete Kontakte, Stand und Körperanschlüsse abgesichert.
-- [ ] Neue Art deterministisch in erreichbarem radialem Habitat mit Wasser/Nahrung ansiedeln; Katalogeintrag ohne Vorkommen zählt nicht.
+- [x] Pflichtrollenpolitik versionieren: drei bestehende Arten erhalten, vierte eigenständige Eierart additiv ergänzen. Alte Art-/Individuen-/Entdeckungs-IDs nicht neu erzeugen.
+- [x] Fähigkeit pro Rolle prüfen: Eierlieferant darf z. B. zweibeinig sein; Reit-/Zugsicherheit bleibt über tatsächlich geeignete Kontakte, Stand und Körperanschlüsse abgesichert.
+- [x] Neue Art deterministisch in erreichbarem radialem Habitat mit Wasser/Nahrung ansiedeln; Katalogeintrag ohne Vorkommen zählt nicht.
 - **Fertig:** Neue und migrierte belebte Körper besitzen die vier geeigneten Arten; alte drei bleiben identisch. Mehrfachmigration, Seed-/Besuchsreihenfolge, Wiederbesuch und Neustart bestehen.
 
 ### ARCH-22 – D3-EIER als zweite Produktionskette
@@ -223,14 +253,20 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-23 – Bauplanversionen vor neuen Editoren absichern
 
+**Integration 10. September:** Versions-/Originalschutz für bestehende Kreaturen-/Gebäudeverbraucher integriert (#50). Portabler Kreaturenvertrag und lokale Vorlagenbibliothek ebenfalls integriert (#61/#75).
+
 - **Zuordnung:** M2B/M3/BP-COMMUNITY.1, Vorbereitung M7/M9. **Vorher:** ARCH-01. **Bereich:** `assembly/core`, DesignStore und bestehende Adapter.
-- [ ] Validierung/Migration von Normalisierung trennen; unbekannte zukünftige Bauplanschemata nicht auf Schema 1 umschreiben.
-- [ ] Parts-Erweiterungen, Entwurfsrevisionen, maximale Komplexität und Originalerhalt definieren. Bauplan-ID und konkrete Gebäude-/Fahrzeug-/Schiffinstanz bleiben getrennt.
-- [ ] Den geplanten portablen Bauplanvertrag für BP-COMMUNITY.1 berücksichtigen: deklarative Daten/Vorschau, begrenzte Größe/Teilezahl, lokale Prüfung der Fähigkeiten/Kosten, keine Skripte oder Kampagnen-/Besitzdaten. Downloadrevisionen lokal erhalten; ein Online-Update verändert vorhandene Objekte nicht automatisch.
-- [ ] Vorhandene Kreaturen-/Gebäudeverbraucher behalten; generischer Kreaturenadapter ist noch kein vollständiger Rückimport und braucht einen eigenen nachgewiesenen Anschluss.
+- [x] Validierung/Migration von Normalisierung trennen; unbekannte zukünftige Bauplanschemata nicht auf Schema 1 umschreiben.
+- [x] Parts-Erweiterungen, Entwurfsrevisionen, maximale Komplexität und Originalerhalt definieren. Bauplan-ID und konkrete Gebäude-/Fahrzeug-/Schiffinstanz bleiben getrennt.
+- [x] Den geplanten portablen Bauplanvertrag für BP-COMMUNITY.1 berücksichtigen: deklarative Daten/Vorschau, begrenzte Größe/Teilezahl, lokale Prüfung der Fähigkeiten/Kosten, keine Skripte oder Kampagnen-/Besitzdaten. Downloadrevisionen lokal erhalten; ein Online-Update verändert vorhandene Objekte nicht automatisch.
+- [x] Vorhandene Kreaturen-/Gebäudeverbraucher behalten; generischer Kreaturenadapter ist noch kein vollständiger Rückimport und braucht einen eigenen nachgewiesenen Anschluss.
 - **Fertig:** Bestehende Entwürfe laden identisch; unbekannte neuere Daten bleiben unverändert geschützt; Revision, Undo/Redo, Vorschau und gespeicherte Instanz bleiben nachvollziehbar. Formatanschluss für BP-COMMUNITY ist beschrieben; Online-Dienst/Galerie gehören zu dessen eigenen fünf Fachaufträgen, nicht in diesen Umbau.
 
+**Fachlieferung 10. September:** umgesetzt und lokal geprüft auf `agent/arch23-blueprint-contract-2026-09-10`; Integration nach main separat. [Vertrag](BLUEPRINT_CONTRACT.md) und [Übergabe/Nachweise](WORK_ARCH23_BLUEPRINTS.md). Onlineaustausch und ein vollständiger Kreaturen-Rückimport bleiben BP-COMMUNITY.
+
 ### ARCH-24 – M3-TEILE über Katalog und Geometrieanbieter
+
+**Integration 10. September:** Altteilinventar, Fuß-/Handanbieter, Katzenpfoten, Bärentatzen, Pferdehufe und Krebsscheren integriert (#55/#66/#70). Rüssel, weitere Schnauzen, Oktopusmund, gespeicherte Teilrevisionen und aktive Greiferöffnung bleiben eigene Arbeit.
 
 - **Zuordnung:** bestehende M3-TEILE.1–.5. **Vorher:** ARCH-23 für Schemaänderungen; Bestandsinventar darf sofort beginnen.
 - [ ] Alle alten Teil-IDs erfassen und je Teil Revision/Erhalt/kompatiblen Ersatz bestimmen. Katalogdaten von Geometrie, Kontaktpunkten und unterstützten Aktionen trennen.
@@ -239,6 +275,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 - **Fertig:** Neue Formen sind sichtbar unterscheidbar und in alten/neuen Entwürfen stabil. Darstellung von Flügel/Flosse/Kletterfuß allein gibt keine unimplementierte Bewegung frei. Detailumfang bleibt in M3-TEILE geführt.
 
 ### ARCH-25 – Fachresultate und Darstellung trennen
+
+**Integration 10. September:** Nachbarstämme, Weltkarte, Heimat/Gruppe und eigene Tiere DE/EN integriert (#51/#60/#64/#72); zusätzliche Bibliotheksoberfläche ebenfalls DE/EN. Restliches HUD/Buch, Dorf und Editor bleiben teilweise offen.
 
 - **Zuordnung:** UI/L1/M10. **Vorher:** vorhandene Designvorgabe; ARCH-01. **Bereich:** LocaleManager, gemeinsame UI und Fachresultate.
 - [ ] Neue Fachbefehle liefern stabile Ergebniskennung und Parameter; lokalisierter Text und einheitliche Stat-/Ressourcensymbole entstehen in der Darstellung.
@@ -266,22 +304,28 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-28 – Epochenübergaben abgrenzen
 
+**Integration 10. September:** Expliziter bestätigter 0→1-Adapter mit atomarem Save und Rollback integriert (#57). Weitere unspielbare Epochen bleiben gesperrt.
+
 - **Zuordnung:** M5 → M7 → M8 → M9. **Vorher:** ARCH-01/07; ersten 0 → 1-Ablauf aus ARCH-11 verwenden.
-- [ ] Bestehenden bestätigten Phasenwechsel hinter einem kleinen Übergabeanschluss für Voraussetzungen, Folgen, Commit und Kamera-/Steuerungswechsel kapseln.
-- [ ] Erst den bestehenden 0 → 1-Wechsel unverändert beweisen. Neue Zieladapter werden erst nach ihrer vollständigen spielbaren Phase registriert/freigegeben.
+- [x] Bestehenden bestätigten Phasenwechsel hinter einem kleinen Übergabeanschluss für Voraussetzungen, Folgen, Commit und Kamera-/Steuerungswechsel kapseln.
+- [x] Erst den bestehenden 0 → 1-Wechsel unverändert beweisen. Neue Zieladapter werden erst nach ihrer vollständigen spielbaren Phase registriert/freigegeben.
 - [ ] Spezies, Bewohner, Tiere, Entwürfe, Fraktionen, Bestände und Einmaligkeitsbelege erhalten; gespeicherte Phasen-IDs nicht umnummerieren.
 - **Fertig:** Doppelklick, Schreibfehler und Neustart führen zu genau einem Übergang oder vollständigem Rollback. Mittelalter/Neuzeit/Weltraum bleiben ohne eigene Spielschleife gesperrt.
 
 ### ARCH-29 – Verträge und relevante Prüfungen integrieren
 
+**Integration 10. September:** Vertrags-/Sprachgate integriert (#53) und auf alle 151 Godot-Tests in 17 Verträgen erweitert. >256 Tiere, native Pakete und Ziel-PC bleiben eigenständige Nachweise.
+
 - **Zuordnung:** M0/M10, kontinuierlich. **Vorher:** keiner. **Bereich:** vorhandene Tests, `tools`, CI.
-- [ ] Vorhandene Tests den Fachverträgen und gemeinsamen Spielketten zuordnen; Quellenprüfung, echte Runtime, Paket und Ziel-PC-Nachweis getrennt halten.
-- [ ] Bestehendes `tools/localization/catalog.py --check` in die integrierte Prüfung aufnehmen; generierte Übersetzungen müssen zur Quelle passen.
+- [x] Vorhandene Tests den Fachverträgen und gemeinsamen Spielketten zuordnen; Quellenprüfung, echte Runtime, Paket und Ziel-PC-Nachweis getrennt halten.
+- [x] Bestehendes `tools/localization/catalog.py --check` in die integrierte Prüfung aufnehmen; generierte Übersetzungen müssen zur Quelle passen.
 - [ ] Relevante Fälle für gleiche Seeds in verschiedenen Systemen, >96 Regionen, >256 Tieridentitäten, zukünftige Bauplanschemata und Nah-/Fernfracht mit ihren Implementierungen ergänzen.
 - [ ] Erweiterungen brauchen Neu-/Altstand und die betroffenen Unterbrechungsfälle; keine rein spiegelnden Tests und keine redundante Vollprüfung für Textänderungen.
 - **Fertig:** Neuer Modulanschluss wird in der gemeinsamen CI geprüft; Fachnachweise nennen exakten Commit, Route, Ergebnisse und verbleibende Grenzen. Grüne Einzeltests gelten nicht als fertige Gesamtphase.
 
 ### ARCH-30 – Reise-/Schiffsvertrag vor M9.1–M9.6
+
+**Integration 10. September:** Schiffs-/Reise-Datenentwurf mit Referenzprüfung integriert (#67). Große gespeicherte Double-Koordinaten, Flug, Laufzeit-/Save-Anschluss und M9-Spielabnahme bleiben offen.
 
 - **Zuordnung:** bestehendes M9-EXPEDITION. **Vorher:** Datenentwurf nach ARCH-04/06/23; Implementierung erst nach M8 und ARCH-16/18/27/28.
 - [ ] Bauplan und individuelles Schiff unterscheiden; Platzformen Oberfläche, Systemraum und Dock/Hangar mit Host-ID definieren. Ein Beiboot besitzt genau einen Aufenthaltsort.
@@ -298,4 +342,4 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 4. **Nachweis:** exakter Commit, betroffene Neu-/Altstände, relevante Fehler-/Neustartfälle und Messwerte. Optik/FPS nur mit tatsächlichem Zielgerätebeleg behaupten.
 5. **Status:** geplant → in Arbeit → geliefert → integriert; technische Abnahme und Lars' Spieltest separat. Eine Checkbox nur mit dazugehörigem Ergebnis schließen. Integration übernimmt ausschließlich abgegrenzte fertige Pakete.
 
-Die detaillierten Wünsche für Eier, Tierkörperteile, Expeditionsschiffe und Community-Baupläne wurden zusätzlich in der separaten Planungsquelle [`61ccebb2c6eec5d6f5826867cc91205265dd7667`](https://github.com/MajorDragonfly/voxelverse/tree/61ccebb2c6eec5d6f5826867cc91205265dd7667/docs) gelesen. Dort liegen `FEATURE_BACKLOG.md`, `CREATURE_PARTS_CATALOG_PLAN.md`, `SPACE_EXPEDITION_PLAN.md` und `COMMUNITY_DESIGNS_PLAN.md`. BP-COMMUNITY.1–.5 umfasst portablen Vertrag → lokale Bibliothek/Startvorlagen → Dienst → Galerie/Verwendung → weitere Typen. Erster Typ ist die Kreatur; Selbstgestalten ist freiwillig, heruntergeladene Vorlagen bleiben offline nutzbar. Online-Bauplanaustausch setzt keine Multiplayer-Spielsimulation voraus. Diese Architekturprüfung übernimmt Zielrichtung und Fach-IDs, führt den Branch aber nicht zusammen und behauptet keine Implementierung. Sobald die Planungsquelle integriert ist, ihre Detaildateien lokal verlinken und ausschließlich Abhängigkeiten ergänzen.
+Die detaillierten Wünsche für Eier, Tierkörperteile, Expeditionsschiffe und Community-Baupläne wurden zusätzlich in der separaten Planungsquelle [`61ccebb2c6eec5d6f5826867cc91205265dd7667`](https://github.com/MajorDragonfly/voxelverse/tree/61ccebb2c6eec5d6f5826867cc91205265dd7667/docs) gelesen. Dort liegen `FEATURE_BACKLOG.md`, `CREATURE_PARTS_CATALOG_PLAN.md`, `SPACE_EXPEDITION_PLAN.md` und `COMMUNITY_DESIGNS_PLAN.md`. BP-COMMUNITY.1–.5 umfasst portablen Vertrag → lokale Bibliothek/Startvorlagen → Dienst → Galerie/Verwendung → weitere Typen. Erster Typ ist die Kreatur; Selbstgestalten ist freiwillig, heruntergeladene Vorlagen bleiben offline nutzbar. Online-Bauplanaustausch setzt keine Multiplayer-Spielsimulation voraus. Das ursprüngliche Audit übernahm Zielrichtung und Fach-IDs ohne Implementierung. Die Planungsquelle ist mit PR #42 integriert; die lokalen Detaildateien und ihre aktualisierten Lieferstände gelten.

@@ -1,0 +1,35 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "village_work_snapshot_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.476
+    },
+    {
+      "name": "tribal_economy_progress_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 106.721
+    },
+    {
+      "name": "tribal_neighbors_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 33.969
+    },
+    {
+      "name": "tribal_age_housing_recovery_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.636
+    },
+    {
+      "name": "spherical_gameplay_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 337.957
+    }
+  ]
+}

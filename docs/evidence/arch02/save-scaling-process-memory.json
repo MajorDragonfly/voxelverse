@@ -1,0 +1,83 @@
+[
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 1,
+    "changed_regions_total": 0,
+    "rss_bytes": 135045120,
+    "peak_rss_bytes": 135045120
+  },
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 1,
+    "changed_regions_total": 10,
+    "rss_bytes": 135049216,
+    "peak_rss_bytes": 135049216
+  },
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 1,
+    "changed_regions_total": 1000,
+    "rss_bytes": 135049216,
+    "peak_rss_bytes": 135049216
+  },
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 10,
+    "changed_regions_total": 0,
+    "rss_bytes": 135049216,
+    "peak_rss_bytes": 135049216
+  },
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 10,
+    "changed_regions_total": 10,
+    "rss_bytes": 135049216,
+    "peak_rss_bytes": 135049216
+  },
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 10,
+    "changed_regions_total": 1000,
+    "rss_bytes": 135888896,
+    "peak_rss_bytes": 135888896
+  },
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 100,
+    "changed_regions_total": 0,
+    "rss_bytes": 137224192,
+    "peak_rss_bytes": 137224192
+  },
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 100,
+    "changed_regions_total": 10,
+    "rss_bytes": 137297920,
+    "peak_rss_bytes": 137297920
+  },
+  {
+    "cycle": null,
+    "stage": null,
+    "tick_us": null,
+    "bodies": 100,
+    "changed_regions_total": 1000,
+    "rss_bytes": 138457088,
+    "peak_rss_bytes": 138457088
+  }
+]

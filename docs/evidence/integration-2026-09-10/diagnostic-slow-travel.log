@@ -1,0 +1,12 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+REPLAY_FIXTURE_VALIDATION
+REPLAY_LOADED body_29301b6eb4b8649418eff562d9c6a926  { "path": "user://saves/slot_07a2311e279fc371ece0fa18.json", "name": "Radiale Gemeinschaft", "valid": true, "recovered": false, "saved_time": 1789045421, "seed": 15838, "phase": 1, "seconds": 997.513872222357, "planet_index": 0, "preview": {  }, "history_count": 8, "schema": 9, "surface_mode": "cube_sphere_m1_v1", "has_migration_archive": false, "problem": "" }
+REPLAY_PLACED 0.97031891345978
+SPHERE_GAMEPLAY_STAGE animal_travel_failed_write elapsed_seconds=38.867
+WARNING: Could not commit save: user://missing-animal-travel-parent/blocked.json (File not found)
+SPHERE_GAMEPLAY_STAGE animal_travel_depart elapsed_seconds=38.929
+ANIMAL_TRAVEL_FAR { "body_id": "body_29301b6eb4b8649418eff562d9c6a926", "animal_id": "object_6ee328b406f7d3513476b2f123bbe67e", "production_seconds_before": 310.066666666667, "production_seconds_after": 315.066666666667, "food_consumed": 0.01666666666666, "cargo": "milk", "milk_stock": 0.0 }
+SPHERE_GAMEPLAY_STAGE animal_travel_far_restart elapsed_seconds=70.557
+SPHERE_GAMEPLAY_STAGE animal_travel_return elapsed_seconds=87.155
+ANIMAL_TRAVEL_RETURN_DIAGNOSTICS { "clock": 1087.37808733354, "saved_clock": 1087.37808733354, "saved_cursor": 1081.94165000021, "returned_cursor": 1087.37808733354 }
+ERROR: Return replayed or lost the remote husbandry state.

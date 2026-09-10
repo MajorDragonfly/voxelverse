@@ -1,0 +1,67 @@
+{
+  "task": "ARCH-28: confirmed creature-to-tribe phase handoff",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "implementation_commit": "1e59c850861c427d53134a98e8bd37c5a9dacfd8",
+  "branch": "agent/arch28-phase-handoff-2026-09-10",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux, headless, isolated user data per test; no target-PC/graphics or native export acceptance",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.85
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.67
+    },
+    {
+      "name": "phase_handoff_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.767
+    },
+    {
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.679
+    },
+    {
+      "name": "tribal_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.218
+    },
+    {
+      "name": "spherical_gameplay_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 334.15
+    }
+  ],
+  "spherical_gameplay": {
+    "passed": true,
+    "seconds": 334.15,
+    "fresh_process": true,
+    "milk_delivered": 2.0
+  },
+  "localization_catalog": {
+    "passed": true,
+    "messages": 233,
+    "languages": 2
+  },
+  "publication": {
+    "status": "explicitly_authorized_by_user",
+    "scope": "Push agent/arch28-phase-handoff-2026-09-10 to MajorDragonfly/voxelverse and create a draft pull request; no merge authorization requested or assumed."
+  },
+  "scope": "Existing 0 -> 1 handoff only; future phases remain unregistered. Save and campaign schemas unchanged.",
+  "commands": [
+    "python tools/validate_godot.py --godot /path/to/godot --tests phase_handoff_test campaign_foundation_test tribal_progression_test spherical_gameplay_test --skip-main --output /tmp/arch28",
+    "python tools/localization/catalog.py --check"
+  ],
+  "technical_status": "passed; publication and draft pull request explicitly authorized by Lars"
+}

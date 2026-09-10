@@ -15,6 +15,9 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
 const MAX_ANIMALS: int = 12
 const MAX_PLANTS: int = 16
 const ACTIVE_DISTANCE: float = 82.0
+# Failed floor/shape checks are work too. Rotate blocked candidates instead
+# of scanning every stored individual in the same quarter-second update.
+const MAX_SPAWN_ATTEMPTS: int = 2
 var animals: Dictionary = {}
 var plants: Dictionary = {}
 var records: Dictionary = {}
@@ -28,6 +31,12 @@ var peak_animals: int = 0
 var max_frame_work_ms: float = 0.0
 var storage := preload("res://world/surface/campaign_region_storage.gd").new()
 var storage_error: String = ""
+var _animal_cursor: int = 0
+var _plant_cursor: int = 0
+var _prefer_plant: bool = true
+var last_spawn_attempts: int = 0
+var peak_spawn_attempts: int = 0
+var max_spawn_attempt_ms: float = 0.0
 
 func body() -> Dictionary:
 	var state := get_node("/root/GameState")
@@ -43,6 +52,7 @@ func _ready() -> void:
 		var anchor: Dictionary = record.surface_context.spawn.duplicate(true)
 		anchor.height = adapter.sample(anchor).height
 		record.fauna_catalog = Catalog.create_surface(descriptor, anchor)
+	elif not _upgrade_catalog(): return
 	if record.get("fauna_catalog", {}).get("habitat_status") == "pending":
 		planner = Planner.new()
 		planner.begin(adapter.terrain.surface, record.fauna_catalog)
@@ -101,6 +111,7 @@ func _tick() -> void:
 		if not is_instance_valid(plants[id]): plants.erase(id); continue
 		if plants[id].global_position.distance_to(player.global_position) > ACTIVE_DISTANCE + 12.0: _remove(plants, id)
 	var candidates: Array[Dictionary] = []
+	var plant_candidates: Array[Dictionary] = []
 	for key in wanted:
 		var region: Dictionary = storage.region(key, false)
 		if region.is_empty(): continue
@@ -109,14 +120,69 @@ func _tick() -> void:
 				candidates.append(record)
 		for record: Dictionary in region.plants.values():
 			if not plants.has(record.id) and plants.size() < MAX_PLANTS and Space.resolve(self, record.location).distance_to(player.global_position) < ACTIVE_DISTANCE:
-				if _spawn_plant(record): return # One expensive publication per update.
-	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		if a.has("catalog_species_id") != b.has("catalog_species_id"): return a.has("catalog_species_id")
-		return Space.resolve(self, a.location).distance_squared_to(player.global_position) < Space.resolve(self, b.location).distance_squared_to(player.global_position))
-	if animals.size() < MAX_ANIMALS:
-		for record in candidates:
-			if _spawn_animal(record): break
+				plant_candidates.append(record)
+	_prioritize_catalog(candidates)
+	_spawn_candidates(candidates, plant_candidates)
 	peak_animals = maxi(peak_animals, animals.size())
+
+func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Dictionary]) -> void:
+	last_spawn_attempts = 0
+	if animals.size() >= MAX_ANIMALS: candidates = []
+	if plants.size() >= MAX_PLANTS: plant_candidates = []
+	var animal_attempts: int = 0
+	var plant_attempts: int = 0
+	while last_spawn_attempts < MAX_SPAWN_ATTEMPTS:
+		var has_animal: bool = animal_attempts < candidates.size()
+		var has_plant: bool = plant_attempts < plant_candidates.size()
+		if not has_animal and not has_plant: break
+		var choose_plant: bool = has_plant and (_prefer_plant or not has_animal)
+		var started: int = Time.get_ticks_usec()
+		var spawned: bool
+		if choose_plant:
+			_plant_cursor %= plant_candidates.size()
+			spawned = _spawn_plant(plant_candidates[_plant_cursor])
+			# A successful candidate disappears next tick: its successor now
+			# occupies the same slot. Failed candidates advance to avoid stalls.
+			if not spawned: _plant_cursor += 1
+			plant_attempts += 1
+		else:
+			_animal_cursor %= candidates.size()
+			spawned = _spawn_animal(candidates[_animal_cursor])
+			if not spawned: _animal_cursor += 1
+			animal_attempts += 1
+		_prefer_plant = not choose_plant
+		last_spawn_attempts += 1
+		max_spawn_attempt_ms = maxf(max_spawn_attempt_ms, (Time.get_ticks_usec() - started) / 1000.0)
+		# At most one actor/plant construction succeeds per update.
+		if spawned: break
+	peak_spawn_attempts = maxi(peak_spawn_attempts, last_spawn_attempts)
+
+func _prioritize_catalog(candidates: Array[Dictionary]) -> void:
+	var represented: Dictionary = {}
+	for actor: Node in animals.values():
+		var species_id: String = str(actor.catalog_species.get("id", ""))
+		if not species_id.is_empty(): represented[species_id] = int(represented.get(species_id, 0)) + 1
+	var priority: Callable = func(record: Dictionary) -> int:
+		if not record.has("catalog_species_id"): return 2
+		var encounter: Dictionary = record.get("encounter", {})
+		if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0.0: return 2
+		return 1 if represented.has(record.catalog_species_id) else 0
+	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		if priority.call(a) != priority.call(b): return priority.call(a) < priority.call(b)
+		return Space.resolve(self, a.location).distance_squared_to(player.global_position) < Space.resolve(self, b.location).distance_squared_to(player.global_position))
+	if animals.size() < MAX_ANIMALS or candidates.is_empty() or priority.call(candidates[0]) != 0: return
+	# A full old population must not starve the additive fourth role. Preserve
+	# the sole nearby representative of each other role; unload one ordinary
+	# animal or duplicate through the existing capture/streaming path.
+	for id: String in animals:
+		var species_id: String = str(animals[id].catalog_species.get("id", ""))
+		if not species_id.is_empty() and int(represented.get(species_id, 0)) <= 1: continue
+		_capture_one(id)
+		_remove(animals, id)
+		# The freed slot belongs to the missing role at the front of this queue.
+		# A cursor retained from another region must not refill it with a duplicate.
+		_animal_cursor = 0
+		return
 
 func _place_value(point: Dictionary) -> Dictionary:
 	var result: Dictionary = point.duplicate(true)
@@ -229,16 +295,37 @@ func _remove(collection: Dictionary, id: String) -> void:
 	records.erase(id)
 
 func _loaded(_path: String) -> void:
+	_animal_cursor = 0
+	_plant_cursor = 0
+	_prefer_plant = true
+	last_spawn_attempts = 0
 	for id in animals.keys(): _remove(animals, id)
 	for id in plants.keys(): _remove(plants, id)
 	records.clear()
 	storage = preload("res://world/surface/campaign_region_storage.gd").new()
 	storage_error = ""
 	if not storage.open(self, descriptor): _storage_failed(); return
+	if not _upgrade_catalog(): return
 	planner = null
 	if body().get("fauna_catalog", {}).get("habitat_status") == "pending":
 		planner = Planner.new()
 		planner.begin(adapter.terrain.surface, body().fauna_catalog)
+
+func _upgrade_catalog() -> bool:
+	var record: Dictionary = body()
+	var catalog: Dictionary = record.get("fauna_catalog", {})
+	if catalog.get("schema") == Catalog.ROLE_SCHEMA: return true
+	var used: Dictionary = {}
+	for entry: Dictionary in get_node("/root/ProgressionService").discovered_species.values():
+		if entry.get("body_id") == descriptor.id: used[int(entry.get("species_seed", 0))] = true
+	var upgraded: Dictionary = Catalog.upgrade_surface(catalog, descriptor, used)
+	if upgraded.is_empty():
+		storage.store._fail("Pflichtarten konnten nicht verlustfrei ergänzt werden.")
+		_storage_failed()
+		return false
+	record.fauna_catalog = upgraded
+	get_node("/root/SaveGameService").schedule_autosave()
+	return true
 
 func _exit_tree() -> void:
 	# The scene owns these siblings and is already removing them. Only detach

@@ -24,6 +24,9 @@ func configure(body: Dictionary, record: Dictionary, source: RefCounted) -> void
 			var design: Dictionary = JSON.to_native(old.design, false)
 			used[int(design.get("species", {}).get("seed", 0))] = true
 		record.fauna_catalog = Catalog.create_surface(body, anchor, used)
+	if record.fauna_catalog.get("schema") != Catalog.ROLE_SCHEMA:
+		var upgraded: Dictionary = Catalog.upgrade_surface(record.fauna_catalog, body)
+		if not upgraded.is_empty(): record.fauna_catalog = upgraded
 	catalog = record.fauna_catalog
 	if catalog.is_empty() or not Catalog.validate(catalog, body).is_empty():
 		push_error("D12 catalog rejected at runtime: " + Catalog.validate(catalog, body))

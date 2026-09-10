@@ -51,7 +51,7 @@ func _candidate(catalog: Dictionary, index: int) -> bool:
 	if Contract.distance(anchor, node.location, surface.body.radius) < 12.0: return false
 	var represented: Array = []
 	for habitat: Dictionary in catalog.habitats:
-		represented.append(habitat.species_id)
+		if habitat.species_id not in represented: represented.append(habitat.species_id)
 		if Contract.distance(habitat.position, node.location, surface.body.radius) < 10.0: return false
 	var species_id: String = ""
 	for entry: Dictionary in catalog.species:
@@ -76,7 +76,7 @@ func _candidate(catalog: Dictionary, index: int) -> bool:
 		"region_id": Contract.region_id(catalog.body_id, node.location), "generation": 0, "replacement_at": 0.0,
 		"position": node.location.duplicate(true), "path": route, "travel_mode": "walk", "food": "plant",
 		"food_position": food, "water_supply": "requires_transport", "freshwater_distance": -1.0})
-	return catalog.habitats.size() >= 3
+	return represented.size() + 1 >= catalog.species.size()
 
 func _finish(catalog: Dictionary, ready: bool) -> void:
 	data.status = "ready" if ready else "blocked"

@@ -1,0 +1,245 @@
+[
+  {
+    "cycle": -1,
+    "stage": "cold_menu",
+    "tick_us": 1150225,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 164265984,
+    "peak_rss_bytes": 164265984
+  },
+  {
+    "cycle": 0,
+    "stage": "cold_world",
+    "tick_us": 2151109,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 165351424,
+    "peak_rss_bytes": 165351424
+  },
+  {
+    "cycle": 0,
+    "stage": "cold_world",
+    "tick_us": 16398130,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 295710720,
+    "peak_rss_bytes": 295710720
+  },
+  {
+    "cycle": 0,
+    "stage": "settle",
+    "tick_us": 17405076,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 303030272,
+    "peak_rss_bytes": 303030272
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_outward",
+    "tick_us": 18405331,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 312283136,
+    "peak_rss_bytes": 312283136
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_outward",
+    "tick_us": 19421624,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 316297216,
+    "peak_rss_bytes": 316297216
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_outward",
+    "tick_us": 20422142,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 316764160,
+    "peak_rss_bytes": 316764160
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_outward",
+    "tick_us": 21429948,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 343318528,
+    "peak_rss_bytes": 343318528
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_outward",
+    "tick_us": 22432618,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 389308416,
+    "peak_rss_bytes": 389308416
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_return",
+    "tick_us": 23442564,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 416444416,
+    "peak_rss_bytes": 416444416
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_return",
+    "tick_us": 24445697,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 442318848,
+    "peak_rss_bytes": 442318848
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_return",
+    "tick_us": 25457220,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 442318848,
+    "peak_rss_bytes": 442318848
+  },
+  {
+    "cycle": 0,
+    "stage": "walk_return",
+    "tick_us": 26457373,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 442318848,
+    "peak_rss_bytes": 442318848
+  },
+  {
+    "cycle": 0,
+    "stage": "save_and_menu",
+    "tick_us": 27560702,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 442429440,
+    "peak_rss_bytes": 442429440
+  },
+  {
+    "cycle": 1,
+    "stage": "reload_world",
+    "tick_us": 28598184,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 442429440,
+    "peak_rss_bytes": 442429440
+  },
+  {
+    "cycle": 1,
+    "stage": "reload_world",
+    "tick_us": 41735518,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 454254592,
+    "peak_rss_bytes": 454254592
+  },
+  {
+    "cycle": 1,
+    "stage": "settle",
+    "tick_us": 42743551,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 455000064,
+    "peak_rss_bytes": 455000064
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_outward",
+    "tick_us": 43759027,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 455004160,
+    "peak_rss_bytes": 455004160
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_outward",
+    "tick_us": 44759163,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 455004160,
+    "peak_rss_bytes": 455004160
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_outward",
+    "tick_us": 45759615,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 456757248,
+    "peak_rss_bytes": 456757248
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_outward",
+    "tick_us": 46767423,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 456757248,
+    "peak_rss_bytes": 456757248
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_outward",
+    "tick_us": 47774379,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 456757248,
+    "peak_rss_bytes": 456757248
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_return",
+    "tick_us": 48778063,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 456757248,
+    "peak_rss_bytes": 456757248
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_return",
+    "tick_us": 49790536,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 456757248,
+    "peak_rss_bytes": 456757248
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_return",
+    "tick_us": 50792394,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 456757248,
+    "peak_rss_bytes": 456757248
+  },
+  {
+    "cycle": 1,
+    "stage": "walk_return",
+    "tick_us": 51808845,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 456757248,
+    "peak_rss_bytes": 456757248
+  },
+  {
+    "cycle": 1,
+    "stage": "save_and_menu",
+    "tick_us": 52815444,
+    "bodies": null,
+    "changed_regions_total": null,
+    "rss_bytes": 456757248,
+    "peak_rss_bytes": 456757248
+  }
+]

@@ -3,6 +3,11 @@ extends Control
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Planet = preload("res://ui/frontend/menu_planet.gd")
 const Text = preload("res://core/localization/ui_text.gd")
+const BlueprintLibraryPanel = preload("res://ui/blueprints/creature_library_panel.gd")
+var _creature_template: Dictionary = {}
+var _creature_template_builtin: bool = false
+var _template_summary: Label
+var _library_panel: Control
 var _body: VBoxContainer
 var _flow: Node
 var _status: Label
@@ -74,6 +79,7 @@ func _build() -> void:
 	tagline.anchor_top = 0.84
 	tagline.anchor_bottom = 0.9
 	var scroll := ScrollContainer.new()
+	scroll.follow_focus = true
 	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	scroll.anchor_left = 0.075
 	scroll.anchor_right = 0.445
@@ -157,6 +163,9 @@ func _show_new() -> void:
 	_seed_input.text_changed.connect(func(_text: String): _status.text = "")
 	_body.add_child(_seed_input)
 	Style.paragraph(_body, "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm.", 17)
+	_template_summary = Style.paragraph(_body, _template_text(), 18)
+	_template_summary.name = "StartingCreatureSummary"
+	Style.button(_body, "BP_CHOOSE_START", _choose_start_template, "ChooseStartingCreature")
 	Style.button(_body, "Abenteuer beginnen", _begin, "Begin", true)
 	Style.button(_body, "Zurück", _show_home, "Back")
 	_title_input.grab_focus()
@@ -167,7 +176,30 @@ func _begin() -> void:
 		_show_error("Bitte einen Welt-Seed von 1 bis 2147483647 eingeben oder das Feld leer lassen.")
 		_seed_input.grab_focus()
 		return
-	_flow.new_game(_title_input.text, 0 if seed_text.is_empty() else int(seed_text))
+	_flow.new_game(_title_input.text, 0 if seed_text.is_empty() else int(seed_text), "cube_sphere_m1_v1", _creature_template)
+
+
+func _choose_start_template() -> void:
+	if is_instance_valid(_library_panel): return
+	_library_panel = BlueprintLibraryPanel.new()
+	_library_panel.start_mode = true
+	_library_panel.prepare_template = func(package: Dictionary) -> Dictionary:
+		return BlueprintLibraryPanel.Starter.prepare(package, BlueprintLibraryPanel.Package.Creature.create_default())
+	_library_panel.template_chosen.connect(func(package: Dictionary):
+		_creature_template = package.duplicate(true)
+		_creature_template_builtin = _library_panel._entry().builtin
+		_template_summary.text = _template_text()
+		_library_panel._close())
+	_library_panel.closed.connect(func(): _library_panel = null)
+	add_child(_library_panel)
+
+
+func _template_text() -> String:
+	if _creature_template.is_empty(): return Text.text("BP_DEFAULT_START")
+	var title: String = str(_creature_template.title)
+	if _creature_template_builtin:
+		title = Text.text("BP_START_" + str(_creature_template.design_id).trim_prefix("starter_").to_upper())
+	return Text.format_text("BP_SELECTED_START", {"name": title})
 
 func _show_slots() -> void:
 	_clear("slots")
@@ -183,6 +215,7 @@ func _show_help() -> void:
 	back.grab_focus()
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if is_instance_valid(_library_panel): return
 	if event.is_action_pressed("ui_cancel") and _page != "home":
 		_show_home()
 		get_viewport().set_input_as_handled()
@@ -199,6 +232,7 @@ static func _phase(value: int) -> String:
 	return Text.text(["Kreatur", "Stamm", "Antike / Mittelalter", "Weltmacht", "Weltraum", "Multiversum"][clampi(value, 0, 5)])
 
 func _language_changed(_locale: String) -> void:
+	if _page == "new" and is_instance_valid(_template_summary): _template_summary.text = _template_text()
 	if _page == "help" and is_instance_valid(_help_text):
 		_help_text.text = _flow.controls_text()
 	if _page == "home" and is_instance_valid(_latest_summary) and not _latest.is_empty():

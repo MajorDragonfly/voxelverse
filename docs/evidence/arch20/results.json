@@ -1,0 +1,64 @@
+{
+  "implementation_commit": "a1ff333e69eda85f803aa68881d82d7ee5ca23f4",
+  "base_commit": "ea900f2",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "platform": "Linux headless",
+  "import_passed": true,
+  "checks": [
+    {
+      "name": "tribal_age_economy_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.37
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.17
+    },
+    {
+      "name": "tribal_age_economy_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 104.0
+    },
+    {
+      "name": "husbandry",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 137.49
+    },
+    {
+      "name": "husbandry_restart",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.22
+    },
+    {
+      "name": "resource_production_contract_test",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "far_simulation_test",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "spherical_gameplay_test",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 53.003
+    }
+  ],
+  "limits": [
+    "No target-PC graphics/FPS acceptance",
+    "Main-branch integration and GitHub CI results are separate from these local checks"
+  ]
+}

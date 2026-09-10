@@ -1,0 +1,11 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "performance_measurement_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.018
+    }
+  ]
+}

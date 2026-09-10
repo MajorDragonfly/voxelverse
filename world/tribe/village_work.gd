@@ -9,15 +9,46 @@ const Housing = preload("res://world/tribe/village_housing.gd")
 static func effective_order(data: Dictionary, member: Dictionary) -> String:
 	return str(data["project"].get("kind", "build")) if member["order"] == "build" else str(member["order"])
 
-static func snapshot(data: Dictionary) -> Dictionary:
-	# Share immutable places/IDs and the potentially long milk receipt ledger.
-	# Copy only fields which a single arrived work step can mutate.
+static func snapshot(data: Dictionary, member: Dictionary) -> Dictionary:
+	# A synchronous before-image for ONE arrived work step, not a durable save
+	# or a general rollback. Unchanged branches are shared until observe returns.
+	# The step/care/neighbor adapters may change stock and this resident. Building
+	# completion can also reset other workers and invalidate all far routes.
+	var order: String = effective_order(data, member)
+	var building: bool = not data.project.is_empty() and data.project.kind == order \
+		and (order in Model.COSTS or order in Economy.STATIONS or order in Housing.BUILDS)
 	var before: Dictionary = data.duplicate()
-	for key in ["members", "stock", "deposits", "project", "housing", "husbandry"]:
-		before[key] = data[key].duplicate(true)
+	before.members = data.members.duplicate()
+	for index in range(data.members.size()):
+		if building or data.members[index].id == member.id:
+			before.members[index] = data.members[index].duplicate(true)
+	before.stock = data.stock.duplicate()
 	before.economy = data.economy.duplicate()
-	before.economy.incoming = data.economy.incoming.duplicate(true)
-	before.economy.stations = data.economy.stations.duplicate(true)
+	if order in Economy.RESOURCES or order in ["supply", "provision"]:
+		# gather_kind may choose a provider's task; capture must not change it.
+		var resource: String = Economy.gather_kind(data, member.duplicate())
+		if data.deposits.has(resource):
+			before.deposits = data.deposits.duplicate()
+			before.deposits[resource] = data.deposits[resource].duplicate()
+		elif resource in Economy.RESOURCES:
+			# Batch resources have no deposit. Preserve remaining units/removal;
+			# receipt payloads themselves are immutable during arrived work.
+			before.economy.incoming = data.economy.incoming.duplicate(true)
+	if building or member.construction_id != "":
+		before.project = data.project.duplicate(true)
+	if building:
+		before.housing = data.housing.duplicate()
+		before.housing.homes = data.housing.homes.duplicate()
+		before.economy.stations = data.economy.stations.duplicate()
+		if order in Economy.STATIONS:
+			var resource: String = Economy.STATIONS[order]
+			before.deposits = data.deposits.duplicate()
+			before.deposits[resource] = data.deposits[resource].duplicate()
+	if building or order == "tend" or member.care_pen_id != "":
+		before.husbandry = data.husbandry.duplicate()
+		before.husbandry.pens = data.husbandry.pens.duplicate(true)
+		for key in ["withdrawn", "delivered", "returned"]:
+			before.husbandry[key] = data.husbandry[key].duplicate()
 	return before
 
 static func prepare(data: Dictionary, member: Dictionary, delta: float) -> void:
@@ -36,9 +67,9 @@ static func target(data: Dictionary, member: Dictionary) -> Variant:
 	if order == "wait": return member.position
 	if member.construction_id != "": return data.project.entrance
 	if member.cargo != "" or member.stage in ["meal", "drink"]: return data.anchor
-	if order == "milk":
-		var incoming: Array = data.economy.incoming
-		return incoming[0].position if not incoming.is_empty() and not Economy.at_target(data, member, "milk") else data.anchor
+	if Economy.Resources.uses_batches(order):
+		var batch: Dictionary = Economy.pickup(data, order)
+		return batch.position if not batch.is_empty() and not Economy.at_target(data, member, order) else data.anchor
 	if order in Economy.RESOURCES or order in ["supply", "provision"]:
 		var kind: String = Economy.gather_kind(data, member)
 		return data.deposits[kind].position if not kind.is_empty() and not Economy.at_target(data, member, kind) else data.anchor
@@ -84,19 +115,8 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 		return
 	if order == "tend":
 		effects.append({"kind": "care_pickup"})
-	elif order == "milk":
-		var incoming: Array = data["economy"]["incoming"]
-		if incoming.is_empty() or Economy.at_target(data, member, "milk"):
-			return
-		# A batch may change while another carrier is walking. Recheck arrival.
-		if Home.distance(member["position"], incoming[0]["position"]) > 3.0:
-			return
-		incoming[0]["remaining"] -= 1
-		if int(incoming[0]["remaining"]) == 0:
-			incoming.pop_front()
-		member["cargo"] = "milk"
-		member["stage"] = "return"
-		effects.append({"kind": "changed"})
+	elif Economy.Resources.uses_batches(order):
+		if Economy.collect(data, member, order): effects.append({"kind": "changed"})
 	elif order in Economy.RESOURCES or order in ["supply", "provision"]:
 		var kind: String = Economy.gather_kind(data, member)
 		if kind.is_empty() or Economy.at_target(data, member, kind):
@@ -166,20 +186,17 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 static func eat(data: Dictionary, member: Dictionary, effects: Array) -> bool:
 	if float(member["hunger"]) >= 95.0 or not Economy.has_food(data):
 		return false
-	var food: String = "milk" if int(data["stock"]["milk"]) > 0 else "food"
-	data["stock"][food] -= 1
-	if food == "milk":
-		data["economy"]["milk_meals"] += 1
+	var food: String = Economy.food_kind(data)
+	var resource: Dictionary = Economy.consume(data, food)
 	data["meals"] += 1
 	effects.append({"kind": "meal", "data": {"resource": food, "sequence": data["meals"], "tribe_id": data["id"], "member_id": member["id"]}})
-	member["hunger"] = minf(100.0, float(member["hunger"]) + 25.0)
+	member["hunger"] = minf(100.0, float(member["hunger"]) + float(resource.nutrition))
 	return true
 
 static func drink(data: Dictionary, member: Dictionary, effects: Array) -> bool:
 	if float(member["hydration"]) >= 95.0 or int(data["stock"]["water"]) <= 0:
 		return false
-	data["stock"]["water"] -= 1
-	data["economy"]["drinks"] += 1
-	member["hydration"] = minf(100.0, float(member["hydration"]) + 30.0)
+	var resource: Dictionary = Economy.consume(data, "water")
+	member["hydration"] = minf(100.0, float(member["hydration"]) + float(resource.hydration))
 	effects.append({"kind": "drink", "data": {"sequence": data["economy"]["drinks"], "tribe_id": data["id"], "member_id": member["id"]}})
 	return true

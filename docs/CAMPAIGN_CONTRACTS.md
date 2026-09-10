@@ -1,5 +1,7 @@
 # Kampagnenverträge – M0
 
+**Historischer M0-Bericht:** Die folgenden Versions- und Spielstandsangaben beschreiben den damaligen Stand. Für den aktuellen Code auf `main` `ea900f2` gilt das [ARCH-01-Inventar der Datenbesitzer und Modulanschlüsse](MODULE_CONTRACTS.md) mit Save 9/GameState 4/Kampagne 3 und dem gemeinsamen Kugelspielweg. Die damaligen Tests und Grenzen bleiben hier als historische Nachweise erhalten.
+
 Stand: 8. September 2026. Implementierung: `3f7f2252e3cbce868920dcf7c86beb3b47d17354`. Grundlage: `e1b0b7f` auf `agent/meta-runtime-v8`.
 
 ## Ergebnis und Grenzen

@@ -11,7 +11,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check contract registration and generated translations
+        run: python3 tools/check_validation_contracts.py --output /tmp/validation-contracts/contracts.json
+      - name: Check validation failure paths
+        run: python3 -m unittest discover -s tests/tooling -p '*_test.py'
+      - name: Upload source contract report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: voxelverse-validate-contracts-${{ github.event_name }}
+          path: /tmp/validation-contracts
+          retention-days: 7
+
   source:
+    needs: contracts
     runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
@@ -22,7 +43,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-godot-editor
         id: engine
-      - name: Import and run disjoint source acceptance checks
+      - name: Import and run disjoint headless Godot checks
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
           VALIDATION_SHARD: ${{ matrix.shard }}
@@ -32,9 +53,9 @@ jobs:
           from pathlib import Path
           import sys
           from tools.validate_godot import main
+          from tools.check_validation_contracts import discover_tests
 
-          tests = sorted(str(path.relative_to("tests").with_suffix(""))
-                         for path in Path("tests").rglob("*_test.gd"))
+          tests = discover_tests(Path.cwd())
           shard = int(os.environ["VALIDATION_SHARD"])
           selected = tests[shard::4]
           assert selected, "Source shard unexpectedly contains no tests"
@@ -53,6 +74,7 @@ jobs:
           retention-days: 7
 
   runtime:
+    needs: contracts
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -74,15 +96,17 @@ jobs:
           retention-days: 7
 
   validate:
-    needs: [source, runtime]
+    needs: [contracts, source, runtime]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Require every source shard and runtime check
+      - name: Require contracts, every headless shard and runtime checks
         env:
+          CONTRACTS_RESULT: ${{ needs.contracts.result }}
           SOURCE_RESULT: ${{ needs.source.result }}
           RUNTIME_RESULT: ${{ needs.runtime.result }}
         run: |
+          test "$CONTRACTS_RESULT" = success
           test "$SOURCE_RESULT" = success
           test "$RUNTIME_RESULT" = success

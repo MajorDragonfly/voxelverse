@@ -17,6 +17,7 @@ const LEGACY_SAVE_PATH: String = "user://creature_editor_blueprint.json"
 
 
 static func normalize(blueprint: Dictionary) -> Dictionary:
+	if not BaseBlueprint.Contract.version_error(blueprint, "creature").is_empty(): return blueprint
 	if blueprint.is_empty():
 		blueprint = BaseBlueprint.create_default()
 
@@ -48,6 +49,7 @@ static func save_to_file(
 	blueprint: Dictionary,
 	save_path: String = SAVE_PATH
 ) -> Error:
+	if not BaseBlueprint.Contract.inspect(blueprint, "creature").ok: return ERR_INVALID_DATA
 	normalize(blueprint)
 
 	var serialized: Dictionary = BaseBlueprint._serialize_blueprint(
@@ -119,19 +121,13 @@ static func save_to_file(
 
 	serialized["parts"] = serialized_parts
 
-	var file := FileAccess.open(save_path, FileAccess.WRITE)
-
-	if file == null:
-		return FileAccess.get_open_error()
-
-	file.store_string(JSON.stringify(serialized, "\t"))
-	file.close()
-	return OK
+	return Store.write(save_path, serialized)
 
 
 static func load_from_file(
 	save_path: String = SAVE_PATH
 ) -> Dictionary:
+	if not BaseBlueprint.Contract.inspect_text(Store.read_text(save_path), "creature").ok: return {}
 	if Store.read_text(save_path).is_empty():
 		return {}
 

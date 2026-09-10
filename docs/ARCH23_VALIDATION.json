@@ -1,0 +1,55 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "blueprint_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.624
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.469
+    },
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.388
+    },
+    {
+      "name": "campaign_foundation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.572
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.219
+    },
+    {
+      "name": "creature_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.231
+    },
+    {
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.572
+    },
+    {
+      "name": "spherical_campaign_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.37
+    }
+  ],
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "platform": "Linux / headless; no target-PC FPS or Windows execution claimed"
+}

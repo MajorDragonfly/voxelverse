@@ -14,6 +14,7 @@ const SpineProfile = preload(
 const Compatibility = preload("res://core/persistence/design_compatibility.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Store = preload("res://core/persistence/design_store.gd")
+const Contract = preload("res://assembly/core/blueprint_contract.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const BodyAttachments = preload("res://assembly/core/creature_body_attachments.gd")
 
@@ -21,6 +22,7 @@ const SAVE_VERSION: int = 7
 const SAVE_PATH: String = "user://creature_assembly_v7.json"
 const LEGACY_V5_PATH: String = "user://creature_editor_blueprint_v5.json"
 const LEGACY_BASE_PATH: String = "user://creature_editor_blueprint.json"
+const PROTECTED_NOTICE: String = "Dieser Entwurf kann mit dieser Spielversion nicht geladen werden. Das Original bleibt erhalten; Speichern ist gesperrt."
 
 const REMOVED_GENETIC_FIELDS: Array[String] = [
 	"generation",
@@ -42,6 +44,7 @@ static func create_default() -> Dictionary:
 
 
 static func normalize(blueprint: Dictionary) -> Dictionary:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return blueprint
 	if blueprint.is_empty():
 		blueprint = BaseBlueprint.create_default()
 	for field_name in REMOVED_GENETIC_FIELDS:
@@ -88,10 +91,13 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 	blueprint["progression"] = progression
 	blueprint["version"] = SAVE_VERSION
 	BodyAttachments.ensure(blueprint)
+	if blueprint.has("_protected_design_source"):
+		blueprint["compatibility_warnings"].append(PROTECTED_NOTICE)
 	return blueprint
 
 
 static func increment_revision(blueprint: Dictionary) -> int:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return -1
 	normalize(blueprint)
 	var assembly: Dictionary = blueprint.get("assembly", {})
 	var revision: int = int(assembly.get("revision", 0)) + 1
@@ -109,6 +115,7 @@ static func set_symmetry_enabled(
 	blueprint: Dictionary,
 	enabled: bool
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	normalize(blueprint)
 	var assembly: Dictionary = blueprint.get("assembly", {})
 	assembly["symmetry_enabled"] = enabled
@@ -124,6 +131,7 @@ static func set_snap_to_surface(
 	blueprint: Dictionary,
 	enabled: bool
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	normalize(blueprint)
 	var assembly: Dictionary = blueprint.get("assembly", {})
 	assembly["snap_to_surface"] = enabled
@@ -139,12 +147,24 @@ static func save_to_file(
 	blueprint: Dictionary,
 	save_path: String = SAVE_PATH
 ) -> Error:
-	return Store.write(save_path, serialize_snapshot(blueprint))
+	if blueprint.has("_protected_design_source"): return ERR_UNAVAILABLE
+	if not Contract.inspect(blueprint, "creature").ok: return ERR_INVALID_DATA
+	var candidate: Dictionary = blueprint.duplicate(true)
+	normalize(candidate)
+	var error: Error = Store.write(save_path, serialize_snapshot(candidate))
+	if error == OK:
+		blueprint.clear()
+		blueprint.merge(candidate, true)
+	return error
 
 
 ## Pure encoding for the authoritative campaign snapshot. Creating a new
 ## campaign must not replace another campaign's loose editor file on disk.
 static func serialize_snapshot(blueprint: Dictionary) -> Dictionary:
+	if blueprint.has("_protected_design_source"): return {}
+	if not Contract.inspect(blueprint, "creature").ok: return {}
+	# Encoding cannot edit the author's live design, even on a failed write.
+	blueprint = blueprint.duplicate(true)
 	normalize(blueprint)
 	var serialized: Dictionary = BaseBlueprint._serialize_blueprint(blueprint)
 	serialized["version"] = SAVE_VERSION
@@ -162,6 +182,9 @@ static func serialize_snapshot(blueprint: Dictionary) -> Dictionary:
 	)
 	serialized["body"] = body
 	serialized["appearance"] = blueprint.get("appearance", {}).duplicate(true)
+	_copy_extensions(blueprint, serialized)
+	_copy_extensions(blueprint.get("body", {}), serialized["body"])
+	_copy_extensions(blueprint.get("paint", {}), serialized["paint"])
 
 	var serialized_parts: Array = serialized.get("parts", [])
 	var source_parts: Array = blueprint.get("parts", [])
@@ -173,6 +196,7 @@ static func serialize_snapshot(blueprint: Dictionary) -> Dictionary:
 			continue
 		var serialized_part: Dictionary = serialized_parts[index]
 		var source_part: Dictionary = source_parts[index]
+		_copy_extensions(source_part, serialized_part)
 		serialized_part["anchor_t"] = clampf(
 			float(source_part.get("anchor_t", 0.5)),
 			0.0,
@@ -221,14 +245,26 @@ static func load_from_file(
 	var text: String = Store.read_text(save_path)
 	if text.is_empty():
 		return {}
+	if not Contract.inspect_text(text, "creature").ok: return {}
 	var parsed: Variant = JSON.parse_string(text)
 	if not (parsed is Dictionary):
 		push_warning("Creature assembly save is not a dictionary: %s" % save_path)
 		return {}
 
+	return migrate_snapshot(parsed, save_path)
+
+
+## Explicit legacy migration. The caller retains the original bytes; only the
+## returned copy is normalized. Repeated migration retains IDs and revisions.
+static func migrate_snapshot(parsed: Dictionary, legacy_key: String = "") -> Dictionary:
+	if not Contract.inspect(parsed, "creature").ok: return {}
+	parsed = Contract.migrate_part_ids(parsed, legacy_key)
 	var blueprint: Dictionary = BaseBlueprint._deserialize_blueprint(parsed)
 	blueprint["design_id"] = str(parsed.get("design_id", ""))
-	Ids.ensure_design(blueprint, save_path)
+	Ids.ensure_design(blueprint, legacy_key)
+	_copy_extensions(parsed, blueprint)
+	_copy_extensions(parsed.get("body", {}), blueprint["body"])
+	_copy_extensions(parsed.get("paint", {}), blueprint["paint"])
 	var body_data: Dictionary = parsed.get("body", {})
 	var body: Dictionary = blueprint.get("body", {})
 	body["spine"] = _deserialize_spine(body_data.get("spine", []))
@@ -255,6 +291,7 @@ static func load_from_file(
 			continue
 		var placement: Dictionary = loaded_parts[index]
 		var serialized_part: Dictionary = serialized_parts[index]
+		_copy_extensions(serialized_part, placement)
 		placement["anchor_t"] = clampf(
 			float(serialized_part.get("anchor_t", 0.5)),
 			0.0,
@@ -292,6 +329,18 @@ static func load_from_file(
 
 
 static func load_best_available() -> Dictionary:
+	# An existing unreadable/newer draft is not permission to load an older
+	# design and autosave over it. Show a temporary default, with a clear notice;
+	# DesignStore enforces preservation independently of the editor UI.
+	for path in [SAVE_PATH, LEGACY_V5_PATH, LEGACY_BASE_PATH]:
+		var source_text: String = Store.read_text(path)
+		if source_text.is_empty(): continue
+		if not Contract.inspect_text(source_text, "creature").ok:
+			var placeholder: Dictionary = create_default()
+			placeholder["_protected_design_source"] = path
+			placeholder["compatibility_warnings"] = [PROTECTED_NOTICE]
+			return placeholder
+		break
 	var blueprint: Dictionary = load_from_file(SAVE_PATH)
 	if not blueprint.is_empty():
 		return blueprint
@@ -305,6 +354,15 @@ static func load_best_available() -> Dictionary:
 	Ids.ensure_design(blueprint, LEGACY_V5_PATH if not Store.read_text(LEGACY_V5_PATH).is_empty() else LEGACY_BASE_PATH)
 	normalize(blueprint)
 	return blueprint
+
+
+static func _copy_extensions(source: Dictionary, target: Dictionary) -> void:
+	# Additive declarative fields have a reserved lossless channel. Unknown
+	# behavior needs a schema change instead of being silently interpreted.
+	for field in ["extensions", "part_revision", "catalog_revision"]:
+		if source.has(field):
+			var value: Variant = source[field]
+			target[field] = value.duplicate(true) if value is Dictionary or value is Array else value
 
 
 static func _serialize_spine(segments: Array) -> Array:

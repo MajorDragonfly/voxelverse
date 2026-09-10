@@ -1,0 +1,25 @@
+test_real_atlas_export_restores_sphere_history_legacy_and_pending_changes (region_backup_test.GodotAtlasBackupTest.test_real_atlas_export_restores_sphere_history_legacy_and_pending_changes) ... ARCH13_ATLAS_NATIVE_RESULT {"export": {"ok": true, "snapshots": 4, "roots": 6, "verified_blobs": 4854, "copied_blobs": 1622, "copied_bytes": 436917, "peak_pending": 38, "peak_blob_bytes": 1179}, "created": {"body_id": "body_98728a636490a2289e34324d144aeea9", "campaign_id": "campaign_9fcb913461f23e5b6c05ac0414392c58", "legacy_tiles_per_generation": 130, "passed": true, "pending": 8, "regions": "/tmp/arch13-atlas-native-uv9eut2p/source/xdg_data_home/godot/app_userdata/Voxelverse/regions/blobs", "slot": "/tmp/arch13-atlas-native-uv9eut2p/source/xdg_data_home/godot/app_userdata/Voxelverse/saves/slot_574657964793177b150c4bb1.json", "tiles_per_generation": 1200}, "restart": {"atlas_snapshots": 3, "body_id": "body_98728a636490a2289e34324d144aeea9", "campaign_id": "campaign_9fcb913461f23e5b6c05ac0414392c58", "checked_legacy_tiles": 390, "checked_sphere_tiles": 3600, "passed": true, "peak_cache": 96, "peak_pages": 128}}
+ok
+test_real_store_1200_regions_and_save_service_in_fresh_user_directory (region_backup_test.GodotRegionBackupTest.test_real_store_1200_regions_and_save_service_in_fresh_user_directory) ... ARCH13_NATIVE_RESULT {"export": {"ok": true, "snapshots": 4, "roots": 3, "verified_blobs": 4416, "copied_blobs": 2944, "copied_bytes": 467860, "peak_pending": 35, "peak_blob_bytes": 1179}, "restart": {"body_id": "body_626ff6d430d98c4e3052d1a88af37ee8", "campaign_id": "campaign_aa4e1b6812eca66957fdfc9aaea54fac", "checked_regions": 3600, "passed": true, "peak_cache": 96}}
+ok
+test_atlas_closure_preserves_history_archive_overlay_and_independent_bodies (region_backup_test.RegionBackupTest.test_atlas_closure_preserves_history_archive_overlay_and_independent_bodies) ... ok
+test_atlas_deep_tiles_validate_payload_even_with_valid_hash_or_pending_override (region_backup_test.RegionBackupTest.test_atlas_deep_tiles_validate_payload_even_with_valid_hash_or_pending_override) ... ok
+test_atlas_future_versions_fields_and_body_mismatch_protect_all_snapshot_locations (region_backup_test.RegionBackupTest.test_atlas_future_versions_fields_and_body_mismatch_protect_all_snapshot_locations) ... ok
+test_atlas_source_can_advance_while_captured_root_remains_complete (region_backup_test.RegionBackupTest.test_atlas_source_can_advance_while_captured_root_remains_complete) ... ok
+test_bounds_bad_json_and_unsafe_paths (region_backup_test.RegionBackupTest.test_bounds_bad_json_and_unsafe_paths) ... ok
+test_complete_history_archive_closure_exceeds_cache_without_copying_orphans (region_backup_test.RegionBackupTest.test_complete_history_archive_closure_exceeds_cache_without_copying_orphans) ... ok
+test_depth_future_save_and_old_loose_design_versions_fail_explicitly (region_backup_test.RegionBackupTest.test_depth_future_save_and_old_loose_design_versions_fail_explicitly) ... ok
+test_future_manifest_and_nested_blob_are_protected (region_backup_test.RegionBackupTest.test_future_manifest_and_nested_blob_are_protected) ... ok
+test_inline_and_empty_atlas_need_no_blobs_and_preserve_signed_high_bits (region_backup_test.RegionBackupTest.test_inline_and_empty_atlas_need_no_blobs_and_preserve_signed_high_bits) ... ok
+test_inline_empty_store_and_backup_only_slot (region_backup_test.RegionBackupTest.test_inline_empty_store_and_backup_only_slot) ... ok
+test_interrupted_write_and_publish_keep_previous_backup (region_backup_test.RegionBackupTest.test_interrupted_write_and_publish_keep_previous_backup) ... ok
+test_missing_or_corrupt_child_never_publishes_and_keeps_sources (region_backup_test.RegionBackupTest.test_missing_or_corrupt_child_never_publishes_and_keeps_sources) ... ok
+test_multiple_slots_keep_independent_generations_and_duplicate_names_fail (region_backup_test.RegionBackupTest.test_multiple_slots_keep_independent_generations_and_duplicate_names_fail) ... ok
+test_source_can_change_after_capture_without_mixing_generations (region_backup_test.RegionBackupTest.test_source_can_change_after_capture_without_mixing_generations) ... ok
+test_symlinked_blob_is_rejected (region_backup_test.RegionBackupTest.test_symlinked_blob_is_rejected) ... ok
+test_valid_checksums_do_not_hide_wrong_keys_or_branches (region_backup_test.RegionBackupTest.test_valid_checksums_do_not_hide_wrong_keys_or_branches) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 14.913s
+
+OK

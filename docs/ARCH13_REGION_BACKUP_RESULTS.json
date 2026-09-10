@@ -1,0 +1,66 @@
+{
+  "package": "ARCH-13 / portable region backups",
+  "date": "2026-09-10",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "tested_local_code_commit": "d8174f176f8879d28560d5ee8f1f1534990b8254",
+  "tested_code_tree": "b5dc4ae0a724082eb1178036fcd8a00be5d911a0",
+  "passed": true,
+  "environment": "Linux, Python 3, Godot 4.6.3 headless, isolated user directories",
+  "python_checks": {
+    "tests": 12,
+    "skipped": 0,
+    "passed": true,
+    "seconds": 7.316
+  },
+  "godot_checks": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 6.846
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.769
+      },
+      {
+        "name": "region_store_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.853
+      }
+    ]
+  },
+  "native_roundtrip": {
+    "export": {
+      "ok": true,
+      "snapshots": 4,
+      "roots": 3,
+      "verified_blobs": 4416,
+      "copied_blobs": 2944,
+      "copied_bytes": 467860,
+      "peak_pending": 35,
+      "peak_blob_bytes": 1179
+    },
+    "restart": {
+      "body_id": "body_d1537cdbfffd982987a1008808aa27bf",
+      "campaign_id": "campaign_95ffd8517fcc3a5234f122206348606f",
+      "checked_regions": 3600,
+      "passed": true,
+      "peak_cache": 96
+    }
+  },
+  "limits": {
+    "blob_bytes": 2097152,
+    "snapshot_bytes": 67108864,
+    "archive_bytes": 16777216,
+    "snapshot_count": 4096,
+    "archive_depth": 8,
+    "trie_depth": 64
+  },
+  "scope": "Synthetic region payloads through the real RegionStore and SaveGameService. No visual, full gameplay, target-PC FPS, global-manifest migration or garbage-collection acceptance."
+}

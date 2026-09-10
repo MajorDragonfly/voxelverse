@@ -1,0 +1,51 @@
+test_default_still_installs_all_export_templates (installer_test.InstallerTest.test_default_still_installs_all_export_templates) ... ok
+test_linux_editor_only_does_not_download_templates (installer_test.InstallerTest.test_linux_editor_only_does_not_download_templates) ... ok
+test_windows_editor_only_keeps_console_and_gui (installer_test.InstallerTest.test_windows_editor_only_keeps_console_and_gui) ... ok
+test_preserves_previous_report (performance_cli_test.PerformanceCliTest.test_preserves_previous_report) ... ok
+test_rejects_invalid_seed_and_nonfinite_duration_before_launch (performance_cli_test.PerformanceCliTest.test_rejects_invalid_seed_and_nonfinite_duration_before_launch) ... ok
+test_rejects_output_inside_the_project_before_launching_godot (performance_cli_test.PerformanceCliTest.test_rejects_output_inside_the_project_before_launching_godot) ... ok
+test_native_place_pages_and_identites_restore_from_exported_files_only (region_backup_places_test.GodotPlaceBackupTest.test_native_place_pages_and_identites_restore_from_exported_files_only) ... ARCH13_PLACES_NATIVE_RESULT {"export": {"snapshots": 4, "roots": 9, "verified_blobs": 21069, "copied_blobs": 6897, "copied_bytes": 2180096, "peak_pending": 59, "peak_blob_bytes": 2577, "place_records": 9705, "index_reads": 32741, "peak_index_pages": 128}, "created": {"body_id": "body_0c92fccdf91eb18a3a3afe0f32cf5c86", "campaign_id": "campaign_65c96adbf144c8b10452e9e7e358afc5", "passed": true, "pending": 2, "place_count": 3106, "regions": "/tmp/arch13-places-native-kb0iimb7/source/xdg_data_home/godot/app_userdata/Voxelverse/regions/blobs", "slot": "/tmp/arch13-places-native-kb0iimb7/source/xdg_data_home/godot/app_userdata/Voxelverse/saves/slot_f1ab2e97e62774ae1fe7e81a.json"}, "restart": {"body_id": "body_0c92fccdf91eb18a3a3afe0f32cf5c86", "campaign_id": "campaign_65c96adbf144c8b10452e9e7e358afc5", "checked_legacy_places": 390, "checked_places": 9316, "passed": true, "peak_cache": 96, "peak_page_size": 64, "peak_pages": 128, "place_snapshots": 3}}
+ok
+test_all_roots_history_copy_archive_and_pending_keep_exact_snapshots (region_backup_places_test.PlaceBackupTest.test_all_roots_history_copy_archive_and_pending_keep_exact_snapshots) ... ok
+test_bad_reciprocal_indexes_do_not_publish_even_with_valid_hashes (region_backup_places_test.PlaceBackupTest.test_bad_reciprocal_indexes_do_not_publish_even_with_valid_hashes) ... ok
+test_count_coverage_empty_roots_and_pending_only_register (region_backup_places_test.PlaceBackupTest.test_count_coverage_empty_roots_and_pending_only_register) ... ok
+test_failed_copy_and_advancing_source_preserve_the_captured_pair_of_roots (region_backup_places_test.PlaceBackupTest.test_failed_copy_and_advancing_source_preserve_the_captured_pair_of_roots) ... ok
+test_future_headers_bad_overlays_and_wrong_types_are_rejected_in_archives (region_backup_places_test.PlaceBackupTest.test_future_headers_bad_overlays_and_wrong_types_are_rejected_in_archives) ... ok
+test_pending_overrides_cannot_hide_corruption_or_reassign_positions (region_backup_places_test.PlaceBackupTest.test_pending_overrides_cannot_hide_corruption_or_reassign_positions) ... ok
+test_real_atlas_export_restores_sphere_history_legacy_and_pending_changes (region_backup_test.GodotAtlasBackupTest.test_real_atlas_export_restores_sphere_history_legacy_and_pending_changes) ... ARCH13_ATLAS_NATIVE_RESULT {"export": {"ok": true, "snapshots": 4, "roots": 6, "verified_blobs": 4854, "copied_blobs": 1622, "copied_bytes": 436917, "peak_pending": 38, "peak_blob_bytes": 1179, "place_records": 0, "index_reads": 0, "peak_index_pages": 0}, "created": {"body_id": "body_6602f7af42e2219f7784ca3b4195ad09", "campaign_id": "campaign_efaa198590940851db2720234ca457dc", "legacy_tiles_per_generation": 130, "passed": true, "pending": 8, "regions": "/tmp/arch13-atlas-native-7uug5ysl/source/xdg_data_home/godot/app_userdata/Voxelverse/regions/blobs", "slot": "/tmp/arch13-atlas-native-7uug5ysl/source/xdg_data_home/godot/app_userdata/Voxelverse/saves/slot_459d6ced09e844e1fd02569b.json", "tiles_per_generation": 1200}, "restart": {"atlas_snapshots": 3, "body_id": "body_6602f7af42e2219f7784ca3b4195ad09", "campaign_id": "campaign_efaa198590940851db2720234ca457dc", "checked_legacy_tiles": 390, "checked_sphere_tiles": 3600, "passed": true, "peak_cache": 96, "peak_pages": 128}}
+ok
+test_real_store_1200_regions_and_save_service_in_fresh_user_directory (region_backup_test.GodotRegionBackupTest.test_real_store_1200_regions_and_save_service_in_fresh_user_directory) ... ARCH13_NATIVE_RESULT {"export": {"ok": true, "snapshots": 4, "roots": 3, "verified_blobs": 4416, "copied_blobs": 2944, "copied_bytes": 467860, "peak_pending": 35, "peak_blob_bytes": 1179, "place_records": 0, "index_reads": 0, "peak_index_pages": 0}, "restart": {"body_id": "body_b023e25a18944f9334f17f363aeb4a65", "campaign_id": "campaign_cde98871b2cb3cec22a75f03a2d3051f", "checked_regions": 3600, "passed": true, "peak_cache": 96}}
+ok
+test_atlas_closure_preserves_history_archive_overlay_and_independent_bodies (region_backup_test.RegionBackupTest.test_atlas_closure_preserves_history_archive_overlay_and_independent_bodies) ... ok
+test_atlas_deep_tiles_validate_payload_even_with_valid_hash_or_pending_override (region_backup_test.RegionBackupTest.test_atlas_deep_tiles_validate_payload_even_with_valid_hash_or_pending_override) ... ok
+test_atlas_future_versions_fields_and_body_mismatch_protect_all_snapshot_locations (region_backup_test.RegionBackupTest.test_atlas_future_versions_fields_and_body_mismatch_protect_all_snapshot_locations) ... ok
+test_atlas_source_can_advance_while_captured_root_remains_complete (region_backup_test.RegionBackupTest.test_atlas_source_can_advance_while_captured_root_remains_complete) ... ok
+test_bounds_bad_json_and_unsafe_paths (region_backup_test.RegionBackupTest.test_bounds_bad_json_and_unsafe_paths) ... ok
+test_complete_history_archive_closure_exceeds_cache_without_copying_orphans (region_backup_test.RegionBackupTest.test_complete_history_archive_closure_exceeds_cache_without_copying_orphans) ... ok
+test_depth_future_save_and_old_loose_design_versions_fail_explicitly (region_backup_test.RegionBackupTest.test_depth_future_save_and_old_loose_design_versions_fail_explicitly) ... ok
+test_future_manifest_and_nested_blob_are_protected (region_backup_test.RegionBackupTest.test_future_manifest_and_nested_blob_are_protected) ... ok
+test_inline_and_empty_atlas_need_no_blobs_and_preserve_signed_high_bits (region_backup_test.RegionBackupTest.test_inline_and_empty_atlas_need_no_blobs_and_preserve_signed_high_bits) ... ok
+test_inline_empty_store_and_backup_only_slot (region_backup_test.RegionBackupTest.test_inline_empty_store_and_backup_only_slot) ... ok
+test_interrupted_write_and_publish_keep_previous_backup (region_backup_test.RegionBackupTest.test_interrupted_write_and_publish_keep_previous_backup) ... ok
+test_missing_or_corrupt_child_never_publishes_and_keeps_sources (region_backup_test.RegionBackupTest.test_missing_or_corrupt_child_never_publishes_and_keeps_sources) ... ok
+test_multiple_slots_keep_independent_generations_and_duplicate_names_fail (region_backup_test.RegionBackupTest.test_multiple_slots_keep_independent_generations_and_duplicate_names_fail) ... ok
+test_source_can_change_after_capture_without_mixing_generations (region_backup_test.RegionBackupTest.test_source_can_change_after_capture_without_mixing_generations) ... ok
+test_symlinked_blob_is_rejected (region_backup_test.RegionBackupTest.test_symlinked_blob_is_rejected) ... ok
+test_valid_checksums_do_not_hide_wrong_keys_or_branches (region_backup_test.RegionBackupTest.test_valid_checksums_do_not_hide_wrong_keys_or_branches) ... ok
+test_duplicate_owner_rejected (validation_contracts_test.ValidationContractsTest.test_duplicate_owner_rejected) ... ok
+test_explicit_empty_selection_is_preserved (validation_contracts_test.ValidationContractsTest.test_explicit_empty_selection_is_preserved) ... ok
+test_future_manifest_is_not_rewritten (validation_contracts_test.ValidationContractsTest.test_future_manifest_is_not_rewritten) ... ok
+test_new_nested_test_requires_contract_registration (validation_contracts_test.ValidationContractsTest.test_new_nested_test_requires_contract_registration) ... ok
+test_placeholder_and_missing_translation_fail (validation_contracts_test.ValidationContractsTest.test_placeholder_and_missing_translation_fail) ... ok
+test_removed_test_is_not_silently_skipped (validation_contracts_test.ValidationContractsTest.test_removed_test_is_not_silently_skipped) ... ok
+test_scenario_cannot_claim_implementation_without_tests (validation_contracts_test.ValidationContractsTest.test_scenario_cannot_claim_implementation_without_tests) ... ok
+test_scenario_must_reference_registered_test (validation_contracts_test.ValidationContractsTest.test_scenario_must_reference_registered_test) ... ok
+test_skip_import_still_runs_source_gate (validation_contracts_test.ValidationContractsTest.test_skip_import_still_runs_source_gate) ... ok
+test_stale_generated_resources_rejected_without_repair (validation_contracts_test.ValidationContractsTest.test_stale_generated_resources_rejected_without_repair) ... ok
+test_unknown_requested_test_stops_before_game (validation_contracts_test.ValidationContractsTest.test_unknown_requested_test_stops_before_game) ... ok
+test_valid_catalog_is_read_only_and_pending_is_not_a_pass (validation_contracts_test.ValidationContractsTest.test_valid_catalog_is_read_only_and_pending_is_not_a_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 43 tests in 54.303s
+
+OK

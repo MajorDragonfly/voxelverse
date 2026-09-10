@@ -48,6 +48,7 @@ func _run() -> void:
 	_expect(state.campaign.export_state() == before and not tribe.body().has("tribal_neighbor"), "Viewing a page spawned a faction")
 	saves.save_path = "user://missing-neighbor-parent/save.json"
 	_expect(not tribe.neighbors.contact() and not tribe.body().has("tribal_neighbor") and tribe.neighbors.actors.is_empty(), "Failed save installed a half-faction")
+	_expect(tribe.neighbors.last_result.code == "neighbor.contact_save_failed", "Contact save failure lacks stable result")
 	saves.save_path = SAVE
 	await _click(tribe.panel._neighbors.contact_button)
 	await _frames(5)
@@ -64,6 +65,7 @@ func _run() -> void:
 	before = {"village": tribe.village().duplicate(true), "neighbor": _neighbor().duplicate(true)}
 	saves.save_path = "user://missing-neighbor-parent/save.json"
 	_expect(not tribe.neighbors.start_aid(), "Failed aid save reported success")
+	_expect(tribe.neighbors.last_result.code == "neighbor.aid_save_failed", "Aid save failure lacks stable result")
 	_expect(tribe.village() == before["village"] and _neighbor() == before["neighbor"], "Failed aid command changed costs, cargo or orders")
 	saves.save_path = SAVE
 	await _click(tribe.panel._neighbors.aid_button)
@@ -75,7 +77,15 @@ func _run() -> void:
 	paused = true
 	var frozen: Dictionary = _neighbor().duplicate(true)
 	var cargo: String = tribe.member_record(ids[0])["cargo"]
-	await _frames(20)
+	var locale: Node = root.get_node("LocaleManager")
+	var selected_before: Array = tribe.selected.duplicate()
+	var village_before_locale: Dictionary = tribe.village().duplicate(true)
+	var tab_before: int = tribe.panel._tabs.current_tab
+	for language: String in ["en", "de"]:
+		locale._apply(language)
+		await _frames(10)
+		_expect(_neighbor() == frozen and tribe.village() == village_before_locale and tribe.selected == selected_before, "Language change altered live aid cargo, orders or selection")
+		_expect(paused and tribe.panel._tabs.current_tab == tab_before, "Language change lost live pause/tab")
 	_expect(_neighbor() == frozen, "Global pause advanced neighbors or aid")
 	await _cold_restart()
 	_expect(saves.load_now(), "Cannot resume paused carrier snapshot")

@@ -2,6 +2,7 @@ extends RefCounted
 class_name BuildingBlueprint
 
 const Assembly = preload("res://assembly/core/modular_assembly.gd")
+const Contract = preload("res://assembly/core/blueprint_contract.gd")
 const Parts = preload("res://civilization/buildings/building_part_library.gd")
 
 const Compatibility = preload("res://core/persistence/design_compatibility.gd")
@@ -40,6 +41,7 @@ static func create_default() -> Dictionary:
 
 
 static func normalize(blueprint: Dictionary) -> Dictionary:
+	if not Contract.version_error(blueprint, "building").is_empty(): return blueprint
 	Ids.ensure_design(blueprint)
 	Assembly.normalize(blueprint, "building")
 	blueprint["assembly_type"] = "building"
@@ -58,6 +60,7 @@ static func normalize(blueprint: Dictionary) -> Dictionary:
 
 
 static func set_building_type(blueprint: Dictionary, type_name: String) -> void:
+	if not Contract.version_error(blueprint, "building").is_empty(): return
 	normalize(blueprint)
 	if type_name not in BUILDING_TYPES:
 		return
@@ -102,16 +105,19 @@ static func save_design(
 	blueprint: Dictionary,
 	design_name: String = ""
 ) -> String:
-	normalize(blueprint)
+	if not Contract.inspect(blueprint, "building").ok: return ""
 	var safe_name: String = design_name.strip_edges()
 	if safe_name.is_empty():
 		safe_name = str(blueprint.get("name", "building"))
-	blueprint["name"] = safe_name
-	Assembly.increment_revision(blueprint)
+	var candidate: Dictionary = blueprint.duplicate(true)
+	candidate["name"] = safe_name
 	_ensure_design_directory()
 	var filename: String = _slugify(safe_name) + ".json"
 	var path: String = "%s/%s" % [DESIGN_DIR, filename]
-	var error: Error = save_to_file(blueprint, path, false)
+	var error: Error = save_to_file(candidate, path, true)
+	if error == OK:
+		blueprint.clear()
+		blueprint.merge(candidate, true)
 	return path if error == OK else ""
 
 
@@ -120,18 +126,27 @@ static func save_to_file(
 	path: String,
 	increment_revision: bool = false
 ) -> Error:
-	normalize(blueprint)
+	if not Contract.inspect(blueprint, "building").ok: return ERR_INVALID_DATA
+	var candidate: Dictionary = blueprint.duplicate(true)
+	normalize(candidate)
 	if increment_revision:
-		Assembly.increment_revision(blueprint)
-	var data: Dictionary = Assembly.serialize(blueprint)
-	data["building"] = blueprint.get("building", {}).duplicate(true)
-	return Store.write(path, data)
+		var previous: Dictionary = Store.Atomic.parse_dictionary(Store.read_text(path))
+		if previous is Dictionary and previous.get("design_id") == candidate.get("design_id") and Contract.inspect(previous, "building").ok:
+			candidate["revision"] = maxi(int(candidate.get("revision", 0)), int(previous.get("revision", 0)))
+		Assembly.increment_revision(candidate)
+	var data: Dictionary = Assembly.serialize(candidate)
+	var error: Error = Store.write(path, data)
+	if error == OK:
+		blueprint.clear()
+		blueprint.merge(candidate, true)
+	return error
 
 
 static func load_from_file(path: String) -> Dictionary:
 	var text: String = Store.read_text(path)
 	if text.is_empty():
 		return {}
+	if not Contract.inspect_text(text, "building").ok: return {}
 	var parsed: Variant = JSON.parse_string(text)
 	if not (parsed is Dictionary):
 		return {}

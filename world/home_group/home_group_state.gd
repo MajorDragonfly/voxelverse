@@ -69,29 +69,45 @@ static func valid_position(value: Variant) -> bool:
 			return false
 	return true
 
+const VALIDATION_MESSAGES := {
+	"home.invalid_record": "Der gespeicherte Gruppenstand ist nicht lesbar.",
+	"home.unsupported_version": "Diese Gruppenversion wird noch nicht unterstützt. Der gespeicherte Stand bleibt erhalten.",
+	"home.radial_surface_required": "Radiales Gruppenformat benötigt eine Kugeloberfläche.",
+	"home.surface_mismatch": "Gruppe und aktueller Lebensraum passen nicht zusammen.",
+	"home.invalid_anchor": "Der gespeicherte Heimatplatz ist ungültig.",
+	"home.invalid_members": "Die gespeicherten Gruppenmitglieder sind ungültig.",
+	"home.invalid_member_record": "Ein Gruppenmitglied ist nicht lesbar.",
+	"home.invalid_member_order": "Identität oder Befehl eines Gruppenmitglieds ist ungültig.",
+	"home.invalid_member_place": "Name oder Standort eines Gruppenmitglieds ist ungültig.",
+}
+
 static func validate(value: Variant, body_id: String, species_id: String) -> String:
+	# Compatibility diagnostics for SaveService and existing validators.
+	return VALIDATION_MESSAGES.get(validation_code(value, body_id, species_id), "")
+
+static func validation_code(value: Variant, body_id: String, species_id: String) -> String:
 	if not value is Dictionary:
-		return "Der gespeicherte Gruppenstand ist nicht lesbar."
+		return "home.invalid_record"
 	if value.get("schema") != 1 and value.get("schema") != SCHEMA:
-		return "Diese Gruppenversion wird noch nicht unterstützt. Der gespeicherte Stand bleibt erhalten."
+		return "home.unsupported_version"
 	var mode: String = str(value.get("surface_mode", ""))
-	if value.schema == SCHEMA and mode != Cube.MODE: return "Radiales Gruppenformat benötigt eine Kugeloberfläche."
+	if value.schema == SCHEMA and mode != Cube.MODE: return "home.radial_surface_required"
 	if value.get("body_id") != body_id or value.get("species_id") != species_id or mode not in ["legacy_plane_v9", Cube.MODE] or (mode == Cube.MODE and value.schema != SCHEMA):
-		return "Gruppe und aktueller Lebensraum passen nicht zusammen."
+		return "home.surface_mismatch"
 	if value.get("id") != Ids.scoped("group", body_id, species_id + ":home") or not place_valid(value.get("anchor"), mode, body_id):
-		return "Der gespeicherte Heimatplatz ist ungültig."
+		return "home.invalid_anchor"
 	var members: Variant = value.get("members")
 	if not members is Array or members.size() != MEMBER_COUNT:
-		return "Die gespeicherten Gruppenmitglieder sind ungültig."
+		return "home.invalid_members"
 	var ids: Array[String] = []
 	for i in range(members.size()):
 		var member: Variant = members[i]
 		if not member is Dictionary:
-			return "Ein Gruppenmitglied ist nicht lesbar."
+			return "home.invalid_member_record"
 		var expected: String = Ids.scoped("object", str(value["id"]), str(i))
 		if member.get("id") != expected or expected in ids or member.get("order") not in ORDERS:
-			return "Identität oder Befehl eines Gruppenmitglieds ist ungültig."
+			return "home.invalid_member_order"
 		if not member.get("name") is String or member["name"].is_empty() or member["name"].length() > 32 or not place_valid(member.get("position"), mode, body_id):
-			return "Name oder Standort eines Gruppenmitglieds ist ungültig."
+			return "home.invalid_member_place"
 		ids.append(expected)
 	return ""

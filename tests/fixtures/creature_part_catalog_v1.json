@@ -1,0 +1,186 @@
+[
+	{
+		"category": "body",
+		"definition": "{\n\"color\": Color(0.7, 0.55, 0.38, 1),\n\"complexity\": 8,\n\"description\": \"Middle-sized creature body.\",\n\"id\": \"body_balanced_core\",\n\"name\": \"Balanced Core\",\n\"shape\": Vector3(1.35, 1, 2.1),\n\"stats\": {\n\"attack\": 1.0,\n\"defense\": 1.0,\n\"grip\": 0.0,\n\"health\": 100.0,\n\"hunger_drain\": 0.2,\n\"jump\": 6.0,\n\"perception\": 1.0,\n\"speed\": 5.0\n}\n}"
+	},
+	{
+		"category": "body",
+		"definition": "{\n\"color\": Color(0.62, 0.73, 0.38, 1),\n\"complexity\": 10,\n\"description\": \"Long body for stable herbivores.\",\n\"id\": \"body_long_grazer\",\n\"name\": \"Long Grazer Core\",\n\"shape\": Vector3(1.15, 0.9, 2.9),\n\"stats\": {\n\"attack\": 0.6,\n\"defense\": 1.1,\n\"grip\": 0.0,\n\"health\": 110.0,\n\"hunger_drain\": 0.22,\n\"jump\": 5.3,\n\"perception\": 1.0,\n\"speed\": 4.8\n}\n}"
+	},
+	{
+		"category": "body",
+		"definition": "{\n\"color\": Color(0.55, 0.48, 0.35, 1),\n\"complexity\": 12,\n\"description\": \"Wide protected body.\",\n\"id\": \"body_heavy_shell\",\n\"name\": \"Heavy Shell\",\n\"shape\": Vector3(1.75, 1.05, 2),\n\"stats\": {\n\"attack\": 0.8,\n\"defense\": 3.0,\n\"grip\": 0.0,\n\"health\": 145.0,\n\"hunger_drain\": 0.28,\n\"jump\": 4.3,\n\"perception\": 0.8,\n\"speed\": 3.5\n}\n}"
+	},
+	{
+		"category": "body",
+		"definition": "{\n\"color\": Color(0.25, 0.46, 0.34, 1),\n\"complexity\": 13,\n\"description\": \"Segmented body for many legs.\",\n\"id\": \"body_insectoid\",\n\"name\": \"Insectoid Thorax\",\n\"shape\": Vector3(1.25, 0.85, 2.45),\n\"stats\": {\n\"attack\": 1.1,\n\"defense\": 1.4,\n\"grip\": 0.0,\n\"health\": 90.0,\n\"hunger_drain\": 0.24,\n\"jump\": 6.1,\n\"perception\": 1.2,\n\"speed\": 5.4\n}\n}"
+	},
+	{
+		"category": "body",
+		"definition": "{\n\"color\": Color(0.52, 0.4, 0.64, 1),\n\"complexity\": 13,\n\"description\": \"Flexible stretched body.\",\n\"id\": \"body_serpent_base\",\n\"name\": \"Serpent Base\",\n\"shape\": Vector3(0.9, 0.75, 3.25),\n\"stats\": {\n\"attack\": 1.3,\n\"defense\": 0.9,\n\"grip\": 0.0,\n\"health\": 95.0,\n\"hunger_drain\": 0.21,\n\"jump\": 4.6,\n\"perception\": 1.2,\n\"speed\": 5.2\n}\n}"
+	},
+	{
+		"category": "mouth",
+		"definition": "{\n\"category\": \"mouth\",\n\"complexity\": 5,\n\"default_scale\": 1.0,\n\"description\": \"Good for plant food.\",\n\"id\": \"mouth_grazer\",\n\"name\": \"Grazer Mouth\",\n\"stats\": {\n\"attack\": 0.3,\n\"diet_meat\": 0.0,\n\"diet_plant\": 3.0,\n\"hunger_drain\": -0.02,\n\"perception\": 0.0\n},\n\"voxels\": [{\n\"color\": Color(0.72, 0.48, 0.32, 1),\n\"position\": Vector3(0, 0, -0.06),\n\"size\": Vector3(0.52, 0.25, 0.28)\n}, {\n\"color\": Color(0.45, 0.24, 0.14, 1),\n\"position\": Vector3(0, -0.09, -0.23),\n\"size\": Vector3(0.44, 0.1, 0.18)\n}]\n}"
+	},
+	{
+		"category": "mouth",
+		"definition": "{\n\"category\": \"mouth\",\n\"complexity\": 6,\n\"default_scale\": 1.0,\n\"description\": \"Simple hard beak.\",\n\"id\": \"mouth_broad_beak\",\n\"name\": \"Broad Beak\",\n\"stats\": {\n\"attack\": 1.1,\n\"diet_meat\": 1.0,\n\"diet_plant\": 1.5,\n\"hunger_drain\": 0.01,\n\"perception\": 0.0\n},\n\"voxels\": [{\n\"color\": Color(0.88, 0.72, 0.34, 1),\n\"position\": Vector3(0, 0, -0.12),\n\"size\": Vector3(0.58, 0.2, 0.35)\n}, {\n\"color\": Color(0.42, 0.28, 0.16, 1),\n\"position\": Vector3(0, -0.08, -0.3),\n\"size\": Vector3(0.44, 0.1, 0.18)\n}]\n}"
+	},
+	{
+		"category": "mouth",
+		"definition": "{\n\"category\": \"mouth\",\n\"complexity\": 8,\n\"default_scale\": 1.05,\n\"description\": \"Strong biting jaws.\",\n\"id\": \"mouth_predator_jaws\",\n\"name\": \"Predator Jaws\",\n\"stats\": {\n\"attack\": 2.7,\n\"diet_meat\": 3.0,\n\"diet_plant\": 0.0,\n\"hunger_drain\": 0.05,\n\"perception\": 0.0\n},\n\"voxels\": [{\n\"color\": Color(0.5, 0.38, 0.34, 1),\n\"position\": Vector3(0, 0.07, -0.1),\n\"size\": Vector3(0.62, 0.18, 0.36)\n}, {\n\"color\": Color(0.42, 0.3, 0.25, 1),\n\"position\": Vector3(0, -0.12, -0.12),\n\"size\": Vector3(0.62, 0.16, 0.34)\n}, {\n\"color\": Color(0.96, 0.92, 0.78, 1),\n\"position\": Vector3(-0.22, -0.02, -0.34),\n\"size\": Vector3(0.08, 0.22, 0.1)\n}, {\n\"color\": Color(0.96, 0.92, 0.78, 1),\n\"position\": Vector3(0.22, -0.02, -0.34),\n\"size\": Vector3(0.08, 0.22, 0.1)\n}]\n}"
+	},
+	{
+		"category": "mouth",
+		"definition": "{\n\"category\": \"mouth\",\n\"complexity\": 7,\n\"default_scale\": 1.0,\n\"description\": \"Long snout for shallow water feeding.\",\n\"id\": \"mouth_filter_snout\",\n\"name\": \"Filter Snout\",\n\"stats\": {\n\"attack\": 0.4,\n\"diet_meat\": 0.4,\n\"diet_plant\": 2.0,\n\"hunger_drain\": -0.01,\n\"perception\": 0.2\n},\n\"voxels\": [{\n\"color\": Color(0.54, 0.4, 0.33, 1),\n\"position\": Vector3(0, 0, -0.24),\n\"size\": Vector3(0.34, 0.22, 0.62)\n}, {\n\"color\": Color(0.3, 0.22, 0.18, 1),\n\"position\": Vector3(0, -0.11, -0.56),\n\"size\": Vector3(0.44, 0.1, 0.16)\n}]\n}"
+	},
+	{
+		"category": "eyes",
+		"definition": "{\n\"category\": \"eyes\",\n\"complexity\": 4,\n\"default_scale\": 1.0,\n\"description\": \"Cheap basic vision.\",\n\"id\": \"eyes_beady\",\n\"name\": \"Beady Eyes\",\n\"stats\": {\n\"perception\": 1.0\n},\n\"voxels\": [{\n\"color\": Color(0.05, 0.05, 0.05, 1),\n\"position\": Vector3(0, 0, 0),\n\"size\": Vector3(0.18, 0.18, 0.18)\n}, {\n\"color\": Color(0.7, 0.95, 1, 1),\n\"position\": Vector3(0, 0, -0.05),\n\"size\": Vector3(0.08, 0.08, 0.05)\n}]\n}"
+	},
+	{
+		"category": "eyes",
+		"definition": "{\n\"category\": \"eyes\",\n\"complexity\": 6,\n\"default_scale\": 1.05,\n\"description\": \"Large expressive eyes.\",\n\"id\": \"eyes_wide\",\n\"name\": \"Wide Watchers\",\n\"stats\": {\n\"perception\": 1.8\n},\n\"voxels\": [{\n\"color\": Color(0.08, 0.08, 0.08, 1),\n\"position\": Vector3(0, 0, 0),\n\"size\": Vector3(0.28, 0.25, 0.18)\n}, {\n\"color\": Color(0.66, 0.96, 1, 1),\n\"position\": Vector3(0, 0, -0.06),\n\"size\": Vector3(0.14, 0.13, 0.05)\n}]\n}"
+	},
+	{
+		"category": "eyes",
+		"definition": "{\n\"category\": \"eyes\",\n\"complexity\": 9,\n\"default_scale\": 1.0,\n\"description\": \"Raised eyes for safer scanning.\",\n\"id\": \"eyes_stalks\",\n\"name\": \"Eye Stalks\",\n\"stats\": {\n\"defense\": -0.2,\n\"perception\": 2.2\n},\n\"voxels\": [{\n\"color\": Color(0.48, 0.36, 0.28, 1),\n\"position\": Vector3(0, -0.2, 0),\n\"size\": Vector3(0.08, 0.38, 0.08)\n}, {\n\"color\": Color(0.07, 0.07, 0.07, 1),\n\"position\": Vector3(0, 0.03, -0.02),\n\"size\": Vector3(0.24, 0.22, 0.18)\n}, {\n\"color\": Color(0.6, 0.95, 1, 1),\n\"position\": Vector3(0, 0.03, -0.08),\n\"size\": Vector3(0.11, 0.1, 0.05)\n}]\n}"
+	},
+	{
+		"category": "eyes",
+		"definition": "{\n\"category\": \"eyes\",\n\"complexity\": 10,\n\"default_scale\": 1.0,\n\"description\": \"Multiple small sensor eyes.\",\n\"id\": \"eyes_cluster\",\n\"name\": \"Cluster Eyes\",\n\"stats\": {\n\"perception\": 2.5\n},\n\"voxels\": [{\n\"color\": Color(0.04, 0.04, 0.04, 1),\n\"position\": Vector3(-0.08, 0.06, 0),\n\"size\": Vector3(0.12, 0.12, 0.12)\n}, {\n\"color\": Color(0.04, 0.04, 0.04, 1),\n\"position\": Vector3(0.08, 0.06, 0),\n\"size\": Vector3(0.12, 0.12, 0.12)\n}, {\n\"color\": Color(0.04, 0.04, 0.04, 1),\n\"position\": Vector3(0, -0.08, 0),\n\"size\": Vector3(0.12, 0.12, 0.12)\n}, {\n\"color\": Color(0.67, 1, 0.85, 1),\n\"position\": Vector3(0, 0.02, -0.05),\n\"size\": Vector3(0.07, 0.07, 0.04)\n}]\n}"
+	},
+	{
+		"category": "legs",
+		"definition": "{\n\"category\": \"legs\",\n\"complexity\": 7,\n\"default_scale\": 1.0,\n\"description\": \"Stable but slow.\",\n\"id\": \"legs_stubby\",\n\"name\": \"Stubby Legs\",\n\"stats\": {\n\"defense\": 0.3,\n\"hunger_drain\": -0.01,\n\"jump\": -0.5,\n\"speed\": -0.4\n},\n\"voxels\": [{\n\"color\": Color(0.36, 0.28, 0.2, 1),\n\"position\": Vector3(0, -0.16, 0),\n\"size\": Vector3(0.22, 0.42, 0.22)\n}, {\n\"color\": Color(0.28, 0.22, 0.17, 1),\n\"position\": Vector3(0, -0.4, -0.02),\n\"size\": Vector3(0.34, 0.14, 0.3)\n}]\n}"
+	},
+	{
+		"category": "legs",
+		"definition": "{\n\"category\": \"legs\",\n\"complexity\": 8,\n\"default_scale\": 1.0,\n\"description\": \"Balanced movement.\",\n\"id\": \"legs_walker\",\n\"name\": \"Walker Legs\",\n\"stats\": {\n\"hunger_drain\": 0.02,\n\"jump\": 0.2,\n\"speed\": 0.5\n},\n\"voxels\": [{\n\"color\": Color(0.42, 0.3, 0.22, 1),\n\"position\": Vector3(0, -0.24, 0),\n\"size\": Vector3(0.18, 0.62, 0.18)\n}, {\n\"color\": Color(0.3, 0.24, 0.18, 1),\n\"position\": Vector3(0, -0.6, -0.04),\n\"size\": Vector3(0.34, 0.14, 0.34)\n}]\n}"
+	},
+	{
+		"category": "legs",
+		"definition": "{\n\"category\": \"legs\",\n\"complexity\": 10,\n\"default_scale\": 1.05,\n\"description\": \"Fast but hungry.\",\n\"id\": \"legs_sprinter\",\n\"name\": \"Sprinter Legs\",\n\"stats\": {\n\"defense\": -0.2,\n\"hunger_drain\": 0.05,\n\"jump\": 0.8,\n\"speed\": 1.4\n},\n\"voxels\": [{\n\"color\": Color(0.45, 0.31, 0.21, 1),\n\"position\": Vector3(0, -0.3, 0),\n\"size\": Vector3(0.16, 0.72, 0.16)\n}, {\n\"color\": Color(0.26, 0.2, 0.15, 1),\n\"position\": Vector3(0, -0.72, -0.1),\n\"size\": Vector3(0.4, 0.12, 0.44)\n}]\n}"
+	},
+	{
+		"category": "legs",
+		"definition": "{\n\"category\": \"legs\",\n\"complexity\": 13,\n\"default_scale\": 1.0,\n\"description\": \"Many-jointed side legs.\",\n\"id\": \"legs_spider\",\n\"name\": \"Spider Legs\",\n\"stats\": {\n\"grip\": 1.5,\n\"hunger_drain\": 0.04,\n\"jump\": 0.4,\n\"speed\": 0.9\n},\n\"voxels\": [{\n\"color\": Color(0.18, 0.14, 0.12, 1),\n\"position\": Vector3(0.08, -0.15, 0),\n\"size\": Vector3(0.38, 0.14, 0.14)\n}, {\n\"color\": Color(0.16, 0.12, 0.1, 1),\n\"position\": Vector3(0.28, -0.42, 0),\n\"size\": Vector3(0.14, 0.52, 0.14)\n}, {\n\"color\": Color(0.1, 0.08, 0.07, 1),\n\"position\": Vector3(0.36, -0.72, -0.05),\n\"size\": Vector3(0.34, 0.11, 0.28)\n}]\n}"
+	},
+	{
+		"category": "legs",
+		"definition": "{\n\"category\": \"legs\",\n\"complexity\": 10,\n\"default_scale\": 1.0,\n\"description\": \"Fast steppe legs.\",\n\"id\": \"legs_hoof\",\n\"name\": \"Hoof Legs\",\n\"stats\": {\n\"hunger_drain\": 0.03,\n\"jump\": 0.5,\n\"speed\": 1.1\n},\n\"voxels\": [{\n\"color\": Color(0.62, 0.47, 0.32, 1),\n\"position\": Vector3(0, -0.28, 0),\n\"size\": Vector3(0.18, 0.66, 0.18)\n}, {\n\"color\": Color(0.08, 0.07, 0.06, 1),\n\"position\": Vector3(0, -0.68, 0),\n\"size\": Vector3(0.28, 0.12, 0.26)\n}]\n}"
+	},
+	{
+		"category": "arms",
+		"definition": "{\n\"category\": \"arms\",\n\"complexity\": 10,\n\"default_scale\": 1.0,\n\"description\": \"Basic manipulation.\",\n\"id\": \"arms_grasping\",\n\"name\": \"Grasping Arms\",\n\"stats\": {\n\"attack\": 0.4,\n\"grip\": 2.0,\n\"hunger_drain\": 0.03\n},\n\"voxels\": [{\n\"color\": Color(0.44, 0.31, 0.23, 1),\n\"position\": Vector3(0, -0.18, 0),\n\"size\": Vector3(0.16, 0.54, 0.16)\n}, {\n\"color\": Color(0.35, 0.25, 0.18, 1),\n\"position\": Vector3(0, -0.5, -0.04),\n\"size\": Vector3(0.28, 0.16, 0.22)\n}, {\n\"color\": Color(0.24, 0.18, 0.14, 1),\n\"position\": Vector3(-0.11, -0.62, -0.06),\n\"size\": Vector3(0.08, 0.16, 0.08)\n}, {\n\"color\": Color(0.24, 0.18, 0.14, 1),\n\"position\": Vector3(0.11, -0.62, -0.06),\n\"size\": Vector3(0.08, 0.16, 0.08)\n}]\n}"
+	},
+	{
+		"category": "arms",
+		"definition": "{\n\"category\": \"arms\",\n\"complexity\": 12,\n\"default_scale\": 1.0,\n\"description\": \"Long arms with strong grip.\",\n\"id\": \"arms_climber\",\n\"name\": \"Climber Arms\",\n\"stats\": {\n\"attack\": 0.5,\n\"grip\": 3.0,\n\"hunger_drain\": 0.04,\n\"speed\": -0.2\n},\n\"voxels\": [{\n\"color\": Color(0.42, 0.3, 0.22, 1),\n\"position\": Vector3(0, -0.28, 0),\n\"size\": Vector3(0.15, 0.78, 0.15)\n}, {\n\"color\": Color(0.28, 0.2, 0.15, 1),\n\"position\": Vector3(0, -0.74, -0.02),\n\"size\": Vector3(0.36, 0.15, 0.26)\n}]\n}"
+	},
+	{
+		"category": "arms",
+		"definition": "{\n\"category\": \"arms\",\n\"complexity\": 14,\n\"default_scale\": 1.0,\n\"description\": \"Offensive clawed arms.\",\n\"id\": \"arms_claws\",\n\"name\": \"Claw Arms\",\n\"stats\": {\n\"attack\": 2.0,\n\"grip\": 1.1,\n\"hunger_drain\": 0.06\n},\n\"voxels\": [{\n\"color\": Color(0.36, 0.23, 0.18, 1),\n\"position\": Vector3(0, -0.2, 0),\n\"size\": Vector3(0.17, 0.58, 0.17)\n}, {\n\"color\": Color(0.24, 0.16, 0.12, 1),\n\"position\": Vector3(0, -0.56, -0.08),\n\"size\": Vector3(0.28, 0.15, 0.2)\n}, {\n\"color\": Color(0.96, 0.9, 0.76, 1),\n\"position\": Vector3(-0.12, -0.66, -0.18),\n\"size\": Vector3(0.06, 0.2, 0.06)\n}, {\n\"color\": Color(0.96, 0.9, 0.76, 1),\n\"position\": Vector3(0, -0.7, -0.2),\n\"size\": Vector3(0.06, 0.22, 0.06)\n}, {\n\"color\": Color(0.96, 0.9, 0.76, 1),\n\"position\": Vector3(0.12, -0.66, -0.18),\n\"size\": Vector3(0.06, 0.2, 0.06)\n}]\n}"
+	},
+	{
+		"category": "tail",
+		"definition": "{\n\"category\": \"tail\",\n\"complexity\": 7,\n\"default_scale\": 1.0,\n\"description\": \"Helps with movement.\",\n\"id\": \"tail_balance\",\n\"name\": \"Balance Tail\",\n\"stats\": {\n\"hunger_drain\": 0.01,\n\"jump\": 0.2,\n\"speed\": 0.3\n},\n\"voxels\": [{\n\"color\": Color(0.4, 0.3, 0.22, 1),\n\"position\": Vector3(0, 0, 0.18),\n\"size\": Vector3(0.24, 0.22, 0.62)\n}, {\n\"color\": Color(0.34, 0.24, 0.18, 1),\n\"position\": Vector3(0, -0.02, 0.6),\n\"size\": Vector3(0.18, 0.16, 0.44)\n}]\n}"
+	},
+	{
+		"category": "tail",
+		"definition": "{\n\"category\": \"tail\",\n\"complexity\": 11,\n\"default_scale\": 1.0,\n\"description\": \"Heavy defensive tail.\",\n\"id\": \"tail_club\",\n\"name\": \"Club Tail\",\n\"stats\": {\n\"attack\": 0.9,\n\"defense\": 1.0,\n\"hunger_drain\": 0.04,\n\"speed\": -0.3\n},\n\"voxels\": [{\n\"color\": Color(0.42, 0.3, 0.22, 1),\n\"position\": Vector3(0, 0, 0.2),\n\"size\": Vector3(0.22, 0.2, 0.6)\n}, {\n\"color\": Color(0.3, 0.26, 0.2, 1),\n\"position\": Vector3(0, 0, 0.72),\n\"size\": Vector3(0.5, 0.42, 0.5)\n}]\n}"
+	},
+	{
+		"category": "tail",
+		"definition": "{\n\"category\": \"tail\",\n\"complexity\": 10,\n\"default_scale\": 1.0,\n\"description\": \"Water movement helper.\",\n\"id\": \"tail_fin\",\n\"name\": \"Fin Tail\",\n\"stats\": {\n\"hunger_drain\": 0.02,\n\"speed\": 0.1,\n\"swim\": 2.0\n},\n\"voxels\": [{\n\"color\": Color(0.25, 0.45, 0.58, 1),\n\"position\": Vector3(0, 0, 0.25),\n\"size\": Vector3(0.2, 0.18, 0.6)\n}, {\n\"color\": Color(0.16, 0.62, 0.78, 1),\n\"position\": Vector3(0, 0.14, 0.6),\n\"size\": Vector3(0.12, 0.58, 0.42)\n}]\n}"
+	},
+	{
+		"category": "tail",
+		"definition": "{\n\"category\": \"tail\",\n\"complexity\": 13,\n\"default_scale\": 1.0,\n\"description\": \"Dangerous pointed tail.\",\n\"id\": \"tail_stinger\",\n\"name\": \"Stinger Tail\",\n\"stats\": {\n\"attack\": 1.8,\n\"defense\": 0.2,\n\"hunger_drain\": 0.04\n},\n\"voxels\": [{\n\"color\": Color(0.36, 0.25, 0.2, 1),\n\"position\": Vector3(0, 0, 0.24),\n\"size\": Vector3(0.18, 0.18, 0.66)\n}, {\n\"color\": Color(0.2, 0.12, 0.18, 1),\n\"position\": Vector3(0, 0, 0.72),\n\"size\": Vector3(0.3, 0.3, 0.3)\n}, {\n\"color\": Color(0.94, 0.88, 0.72, 1),\n\"position\": Vector3(0, 0.06, 0.94),\n\"size\": Vector3(0.12, 0.2, 0.28)\n}]\n}"
+	},
+	{
+		"category": "horns",
+		"definition": "{\n\"category\": \"horns\",\n\"complexity\": 6,\n\"default_scale\": 1.0,\n\"description\": \"Small defensive horns.\",\n\"id\": \"horns_small\",\n\"name\": \"Small Horns\",\n\"stats\": {\n\"attack\": 0.7,\n\"defense\": 0.2\n},\n\"voxels\": [{\n\"color\": Color(0.88, 0.8, 0.58, 1),\n\"position\": Vector3(0, 0.1, -0.02),\n\"size\": Vector3(0.16, 0.34, 0.16)\n}, {\n\"color\": Color(0.96, 0.9, 0.72, 1),\n\"position\": Vector3(0, 0.32, -0.05),\n\"size\": Vector3(0.1, 0.16, 0.1)\n}]\n}"
+	},
+	{
+		"category": "horns",
+		"definition": "{\n\"category\": \"horns\",\n\"complexity\": 9,\n\"default_scale\": 1.0,\n\"description\": \"Visual display and defense.\",\n\"id\": \"horns_crest\",\n\"name\": \"Crest Horns\",\n\"stats\": {\n\"attack\": 0.5,\n\"defense\": 0.7,\n\"perception\": 0.2\n},\n\"voxels\": [{\n\"color\": Color(0.8, 0.65, 0.42, 1),\n\"position\": Vector3(0, 0.06, 0),\n\"size\": Vector3(0.2, 0.34, 0.14)\n}, {\n\"color\": Color(0.92, 0.78, 0.5, 1),\n\"position\": Vector3(0, 0.26, -0.04),\n\"size\": Vector3(0.16, 0.24, 0.12)\n}, {\n\"color\": Color(0.98, 0.9, 0.65, 1),\n\"position\": Vector3(0, 0.42, -0.07),\n\"size\": Vector3(0.1, 0.16, 0.08)\n}]\n}"
+	},
+	{
+		"category": "horns",
+		"definition": "{\n\"category\": \"horns\",\n\"complexity\": 15,\n\"default_scale\": 1.0,\n\"description\": \"Large branching display horns.\",\n\"id\": \"horns_antlers\",\n\"name\": \"Branch Antlers\",\n\"stats\": {\n\"attack\": 0.8,\n\"defense\": 0.5,\n\"perception\": 0.4,\n\"speed\": -0.2\n},\n\"voxels\": [{\n\"color\": Color(0.76, 0.62, 0.38, 1),\n\"position\": Vector3(0, 0.2, 0),\n\"size\": Vector3(0.12, 0.52, 0.12)\n}, {\n\"color\": Color(0.84, 0.72, 0.48, 1),\n\"position\": Vector3(0.12, 0.46, -0.02),\n\"size\": Vector3(0.3, 0.1, 0.1)\n}, {\n\"color\": Color(0.9, 0.8, 0.56, 1),\n\"position\": Vector3(0.2, 0.62, -0.06),\n\"size\": Vector3(0.1, 0.26, 0.1)\n}]\n}"
+	},
+	{
+		"category": "plates",
+		"definition": "{\n\"category\": \"plates\",\n\"complexity\": 13,\n\"default_scale\": 1.0,\n\"description\": \"Back armor plates.\",\n\"id\": \"plates_dorsal\",\n\"name\": \"Dorsal Plates\",\n\"stats\": {\n\"defense\": 1.8,\n\"hunger_drain\": 0.03,\n\"speed\": -0.3\n},\n\"voxels\": [{\n\"color\": Color(0.28, 0.36, 0.32, 1),\n\"position\": Vector3(0, 0.1, -0.4),\n\"size\": Vector3(0.16, 0.42, 0.26)\n}, {\n\"color\": Color(0.24, 0.34, 0.3, 1),\n\"position\": Vector3(0, 0.16, 0),\n\"size\": Vector3(0.18, 0.54, 0.3)\n}, {\n\"color\": Color(0.28, 0.36, 0.32, 1),\n\"position\": Vector3(0, 0.1, 0.42),\n\"size\": Vector3(0.16, 0.42, 0.26)\n}]\n}"
+	},
+	{
+		"category": "plates",
+		"definition": "{\n\"category\": \"plates\",\n\"complexity\": 16,\n\"default_scale\": 1.0,\n\"description\": \"Layered shell armor.\",\n\"id\": \"plates_shell\",\n\"name\": \"Shell Plates\",\n\"stats\": {\n\"defense\": 2.6,\n\"hunger_drain\": 0.05,\n\"speed\": -0.6\n},\n\"voxels\": [{\n\"color\": Color(0.34, 0.32, 0.25, 1),\n\"position\": Vector3(-0.24, 0.06, -0.2),\n\"size\": Vector3(0.38, 0.24, 0.44)\n}, {\n\"color\": Color(0.34, 0.32, 0.25, 1),\n\"position\": Vector3(0.24, 0.06, -0.2),\n\"size\": Vector3(0.38, 0.24, 0.44)\n}, {\n\"color\": Color(0.3, 0.28, 0.22, 1),\n\"position\": Vector3(-0.24, 0.06, 0.26),\n\"size\": Vector3(0.38, 0.24, 0.44)\n}, {\n\"color\": Color(0.3, 0.28, 0.22, 1),\n\"position\": Vector3(0.24, 0.06, 0.26),\n\"size\": Vector3(0.38, 0.24, 0.44)\n}]\n}"
+	},
+	{
+		"category": "spikes",
+		"definition": "{\n\"category\": \"spikes\",\n\"complexity\": 12,\n\"default_scale\": 1.0,\n\"description\": \"Simple defensive spikes.\",\n\"id\": \"spikes_back\",\n\"name\": \"Back Spikes\",\n\"stats\": {\n\"attack\": 0.4,\n\"defense\": 1.2\n},\n\"voxels\": [{\n\"color\": Color(0.9, 0.82, 0.62, 1),\n\"position\": Vector3(0, 0.14, -0.34),\n\"size\": Vector3(0.14, 0.34, 0.14)\n}, {\n\"color\": Color(0.94, 0.86, 0.64, 1),\n\"position\": Vector3(0, 0.22, 0),\n\"size\": Vector3(0.16, 0.46, 0.16)\n}, {\n\"color\": Color(0.9, 0.82, 0.62, 1),\n\"position\": Vector3(0, 0.14, 0.38),\n\"size\": Vector3(0.14, 0.34, 0.14)\n}]\n}"
+	},
+	{
+		"category": "spikes",
+		"definition": "{\n\"category\": \"spikes\",\n\"complexity\": 10,\n\"default_scale\": 1.0,\n\"description\": \"Side protection.\",\n\"id\": \"spikes_side\",\n\"name\": \"Side Spikes\",\n\"stats\": {\n\"attack\": 0.3,\n\"defense\": 1.0\n},\n\"voxels\": [{\n\"color\": Color(0.88, 0.8, 0.64, 1),\n\"position\": Vector3(0.08, 0.02, -0.12),\n\"size\": Vector3(0.42, 0.14, 0.14)\n}, {\n\"color\": Color(0.88, 0.8, 0.64, 1),\n\"position\": Vector3(0.2, 0.02, 0.22),\n\"size\": Vector3(0.34, 0.12, 0.12)\n}]\n}"
+	},
+	{
+		"category": "decor",
+		"definition": "{\n\"category\": \"decor\",\n\"complexity\": 9,\n\"default_scale\": 1.0,\n\"description\": \"Colorful social display.\",\n\"id\": \"decor_feathers\",\n\"name\": \"Feather Crest\",\n\"stats\": {\n\"defense\": -0.1,\n\"perception\": 0.3\n},\n\"voxels\": [{\n\"color\": Color(0.95, 0.2, 0.45, 1),\n\"position\": Vector3(-0.16, 0.16, 0),\n\"size\": Vector3(0.1, 0.46, 0.1)\n}, {\n\"color\": Color(0.1, 0.85, 0.8, 1),\n\"position\": Vector3(0, 0.22, -0.02),\n\"size\": Vector3(0.1, 0.54, 0.1)\n}, {\n\"color\": Color(0.24, 0.4, 1, 1),\n\"position\": Vector3(0.16, 0.16, 0),\n\"size\": Vector3(0.1, 0.46, 0.1)\n}]\n}"
+	},
+	{
+		"category": "decor",
+		"definition": "{\n\"category\": \"decor\",\n\"complexity\": 12,\n\"default_scale\": 1.0,\n\"description\": \"Bright alien decoration.\",\n\"id\": \"decor_crystals\",\n\"name\": \"Crystal Growths\",\n\"stats\": {\n\"defense\": 0.2,\n\"perception\": 0.2\n},\n\"voxels\": [{\n\"color\": Color(0.05, 0.95, 1, 1),\n\"position\": Vector3(-0.16, 0.1, 0),\n\"size\": Vector3(0.18, 0.36, 0.18)\n}, {\n\"color\": Color(0.94, 0.18, 1, 1),\n\"position\": Vector3(0.12, 0.18, -0.05),\n\"size\": Vector3(0.2, 0.48, 0.2)\n}, {\n\"color\": Color(0.2, 0.48, 1, 1),\n\"position\": Vector3(0, 0.02, 0.16),\n\"size\": Vector3(0.15, 0.3, 0.15)\n}]\n}"
+	},
+	{
+		"category": "paint",
+		"definition": "{\n\"accent\": Color(0.18, 0.22, 0.12, 1),\n\"base_tint\": Color(1, 1, 1, 1),\n\"complexity\": 0,\n\"description\": \"Natural base color.\",\n\"id\": \"paint_plain\",\n\"name\": \"Plain Skin\",\n\"pattern\": \"plain\"\n}"
+	},
+	{
+		"category": "paint",
+		"definition": "{\n\"accent\": Color(0.07, 0.34, 0.11, 1),\n\"base_tint\": Color(0.75, 1, 0.7, 1),\n\"complexity\": 4,\n\"description\": \"Green camouflage spots.\",\n\"id\": \"paint_forest_spots\",\n\"name\": \"Forest Spots\",\n\"pattern\": \"spots\"\n}"
+	},
+	{
+		"category": "paint",
+		"definition": "{\n\"accent\": Color(0.45, 0.28, 0.13, 1),\n\"base_tint\": Color(1.12, 0.95, 0.66, 1),\n\"complexity\": 4,\n\"description\": \"Dry biome stripes.\",\n\"id\": \"paint_sand_stripes\",\n\"name\": \"Sand Stripes\",\n\"pattern\": \"stripes\"\n}"
+	},
+	{
+		"category": "paint",
+		"definition": "{\n\"accent\": Color(1, 0.1, 0.12, 1),\n\"base_tint\": Color(0.92, 0.78, 0.56, 1),\n\"complexity\": 6,\n\"description\": \"Bright poisonous markings.\",\n\"id\": \"paint_warning_marks\",\n\"name\": \"Warning Marks\",\n\"pattern\": \"warning\"\n}"
+	},
+	{
+		"category": "paint",
+		"definition": "{\n\"accent\": Color(0.95, 0.1, 0.85, 1),\n\"base_tint\": Color(0.7, 0.92, 1.05, 1),\n\"complexity\": 7,\n\"description\": \"Colorful alien plates.\",\n\"id\": \"paint_crystal_bloom\",\n\"name\": \"Crystal Bloom\",\n\"pattern\": \"crystal\"\n}"
+	},
+	{
+		"category": "feet",
+		"definition": "{\n\"category\": \"feet\",\n\"complexity\": 2,\n\"default_scale\": 1.0,\n\"description\": \"Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.\",\n\"id\": \"feet_pads\",\n\"name\": \"Ballenfüße\",\n\"stats\": {},\n\"voxels\": [{\n\"color\": Color(0.56078434, 0.7019608, 0.60784316, 1),\n\"position\": Vector3(0, 0, 0),\n\"size\": Vector3(0.29, 0.1, 0.18)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(-0.13, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0.13, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}]\n}"
+	},
+	{
+		"category": "feet",
+		"definition": "{\n\"category\": \"feet\",\n\"complexity\": 2,\n\"default_scale\": 1.0,\n\"description\": \"Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.\",\n\"id\": \"feet_claws\",\n\"name\": \"Krallenfüße\",\n\"stats\": {},\n\"voxels\": [{\n\"color\": Color(0.56078434, 0.7019608, 0.60784316, 1),\n\"position\": Vector3(0, 0, 0),\n\"size\": Vector3(0.29, 0.1, 0.18)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(-0.13, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(-0.13, -0.035, -0.3),\n\"size\": Vector3(0.045, 0.045, 0.13)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(0, -0.035, -0.3),\n\"size\": Vector3(0.045, 0.045, 0.13)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0.13, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(0.13, -0.035, -0.3),\n\"size\": Vector3(0.045, 0.045, 0.13)\n}]\n}"
+	},
+	{
+		"category": "feet",
+		"definition": "{\n\"category\": \"feet\",\n\"complexity\": 2,\n\"default_scale\": 1.0,\n\"description\": \"Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.\",\n\"id\": \"feet_hooves\",\n\"name\": \"Spalthufe\",\n\"stats\": {},\n\"voxels\": [{\n\"color\": Color(0.6106667, 0.568, 0.45600003, 1),\n\"position\": Vector3(-0.095, -0.04, -0.04),\n\"size\": Vector3(0.14, 0.17, 0.22)\n}, {\n\"color\": Color(0.6106667, 0.568, 0.45600003, 1),\n\"position\": Vector3(0.095, -0.04, -0.04),\n\"size\": Vector3(0.14, 0.17, 0.22)\n}]\n}"
+	},
+	{
+		"category": "feet",
+		"definition": "{\n\"category\": \"feet\",\n\"complexity\": 2,\n\"default_scale\": 1.0,\n\"description\": \"Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.\",\n\"id\": \"feet_webbed\",\n\"name\": \"Schwimmfüße\",\n\"stats\": {},\n\"voxels\": [{\n\"color\": Color(0.56078434, 0.7019608, 0.60784316, 1),\n\"position\": Vector3(0, 0, 0),\n\"size\": Vector3(0.29, 0.1, 0.18)\n}, {\n\"color\": Color(0.69254905, 0.79137254, 0.7254902, 1),\n\"position\": Vector3(0, -0.02, -0.15),\n\"size\": Vector3(0.44, 0.035, 0.23)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(-0.13, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0.13, -0.035, -0.17),\n\"size\": Vector3(0.06, 0.065, 0.15)\n}]\n}"
+	},
+	{
+		"category": "hands",
+		"definition": "{\n\"category\": \"hands\",\n\"complexity\": 2,\n\"default_scale\": 1.0,\n\"description\": \"Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.\",\n\"id\": \"hands_grasp\",\n\"name\": \"Greifhände\",\n\"stats\": {},\n\"voxels\": [{\n\"color\": Color(0.56078434, 0.7019608, 0.60784316, 1),\n\"position\": Vector3(0, 0, 0),\n\"size\": Vector3(0.29, 0.21, 0.055)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(-0.13, -0.21, 0),\n\"size\": Vector3(0.06, 0.18, 0.035)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0, -0.21, 0),\n\"size\": Vector3(0.06, 0.18, 0.035)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0.13, -0.21, 0),\n\"size\": Vector3(0.06, 0.18, 0.035)\n}, {\n\"color\": Color(0.56078434, 0.7019608, 0.60784316, 1),\n\"position\": Vector3(-0.22, -0.075, 0),\n\"size\": Vector3(0.09, 0.07, 0.04)\n}]\n}"
+	},
+	{
+		"category": "hands",
+		"definition": "{\n\"category\": \"hands\",\n\"complexity\": 2,\n\"default_scale\": 1.0,\n\"description\": \"Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.\",\n\"id\": \"hands_claws\",\n\"name\": \"Krallenhände\",\n\"stats\": {},\n\"voxels\": [{\n\"color\": Color(0.56078434, 0.7019608, 0.60784316, 1),\n\"position\": Vector3(0, 0, 0),\n\"size\": Vector3(0.29, 0.21, 0.055)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(-0.13, -0.21, 0),\n\"size\": Vector3(0.06, 0.18, 0.035)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(-0.13, -0.33999997, 0),\n\"size\": Vector3(0.045, 0.095, 0.025)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0, -0.21, 0),\n\"size\": Vector3(0.06, 0.18, 0.035)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(0, -0.33999997, 0),\n\"size\": Vector3(0.045, 0.095, 0.025)\n}, {\n\"color\": Color(0.6134902, 0.7377255, 0.654902, 1),\n\"position\": Vector3(0.13, -0.21, 0),\n\"size\": Vector3(0.06, 0.18, 0.035)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(0.13, -0.33999997, 0),\n\"size\": Vector3(0.045, 0.095, 0.025)\n}, {\n\"color\": Color(0.56078434, 0.7019608, 0.60784316, 1),\n\"position\": Vector3(-0.22, -0.075, 0),\n\"size\": Vector3(0.09, 0.07, 0.04)\n}]\n}"
+	},
+	{
+		"category": "hands",
+		"definition": "{\n\"category\": \"hands\",\n\"complexity\": 2,\n\"default_scale\": 1.0,\n\"description\": \"Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.\",\n\"id\": \"hands_pincers\",\n\"name\": \"Scherenhände\",\n\"stats\": {},\n\"voxels\": [{\n\"color\": Color(0.56078434, 0.7019608, 0.60784316, 1),\n\"position\": Vector3(0, 0, 0),\n\"size\": Vector3(0.22, 0.17, 0.06)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(-0.14, -0.15, 0),\n\"size\": Vector3(0.075, 0.22, 0.055)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(-0.095, -0.27, 0),\n\"size\": Vector3(0.07, 0.055, 0.04)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(0.14, -0.15, 0),\n\"size\": Vector3(0.075, 0.22, 0.055)\n}, {\n\"color\": Color(0.8980392, 0.8352941, 0.67058825, 1),\n\"position\": Vector3(0.095, -0.27, 0),\n\"size\": Vector3(0.07, 0.055, 0.04)\n}]\n}"
+	}
+]

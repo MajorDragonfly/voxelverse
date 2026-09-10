@@ -1,0 +1,46 @@
+{
+  "package": "ARCH-24 / M3-TEILE.1 / foot reference family",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "implementation_commit": "d6761d3f0cd9b0b166b384a12d7f7dbe763d3655",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "mode": "headless runtime; source matches implementation commit",
+  "checks": [
+    {
+      "name": "creature_parts_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.64
+    },
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.034
+    },
+    {
+      "name": "creature_foot_provider_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.224
+    },
+    {
+      "name": "domestic_surface_catalog_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.772
+    }
+  ],
+  "catalog_ids_preserved": 46,
+  "geometry_baseline_cases": 24,
+  "geometry_cases": "4 existing feet x 3 shape scales x 2 mirror sides; source baseline ea900f2",
+  "preview_cases": "shared journal mesh and locked material equality for all four feet; six-leg tilted-frame rest and walk",
+  "not_measured": [
+    "display screenshot: Xvfb could not open local sockets",
+    "target-PC graphics and FPS",
+    "packaged executable"
+  ],
+  "integration": "Published as draft PR #55 with explicit user approval; tree matches local approved source exactly; main integration remains pending.",
+  "published_implementation_commit": "fe00192ebebc78d03d25577eb5fa72be9f49d4ca",
+  "published_implementation_tree": "70814f7dbcc1d4050360c85e6a9cced2a97b60da",
+  "pull_request": "https://github.com/MajorDragonfly/voxelverse/pull/55"
+}
