@@ -145,7 +145,7 @@ func select_slot(path: String) -> void:
 	elif slot.recovered:
 		text += Text.text("\nDie letzte Sicherung ist verfügbar.")
 	Style.paragraph(summary, text, 19)
-	var load_button := Style.button(_details, "Abenteuer laden", func(): get_node("/root/SessionFlow").load_game(selected_path), "LoadAdventure", true)
+	var load_button := Style.button(_details, "Auf Kugelwelt fortsetzen" if slot.surface_mode == "legacy_plane_v9" else "Abenteuer laden", func(): get_node("/root/SessionFlow").load_game(selected_path), "LoadAdventure", true)
 	load_button.disabled = not slot.valid
 	var rename_row := HBoxContainer.new()
 	_details.add_child(rename_row)
@@ -162,18 +162,18 @@ func select_slot(path: String) -> void:
 	rename.disabled = not slot.valid
 	var copy := Style.button(_details, "Spielstand kopieren", _copy, "CopySlot")
 	copy.disabled = not slot.valid or int(slot.schema) < 3
-	Style.paragraph(_details, "Kugelwelt" if slot.surface_mode == "cube_sphere_m1_v1" else "Bisherige Flachwelt", 17)
+	Style.paragraph(_details, "Kugelwelt" if slot.surface_mode == "cube_sphere_m1_v1" else "Älterer Spielstand · beim Fortsetzen wird eine Kugelkopie angelegt. Das Original bleibt erhalten.", 17)
 	if slot.valid and slot.surface_mode == "legacy_plane_v9":
 		Style.button(_details, "Kugelumzug prüfen", _preview_migration, "PreviewSphereMigration")
 	if slot.valid and slot.has_migration_archive:
-		Style.button(_details, "Flachwelt aus Umzugsarchiv kopieren", func() -> void:
+		Style.button(_details, "Originalarchiv als Kopie sichern", func() -> void:
 			var restored: String = _saves.restore_spherical_source(selected_path)
 			if restored.is_empty(): _status.text = _saves.last_error
 			else:
 				refresh(restored)
-				_status.text = "Flachwelt mit den ursprünglichen Karten als eigene Kopie wiederhergestellt.", "RestoreMigrationSource")
+				_status.text = "Originaldaten und ursprüngliche Karten als eigene Archivkopie gesichert.", "RestoreMigrationSource")
 	if slot.valid and int(slot.schema) < 3:
-		Style.paragraph(_details, "Diesen älteren Stand einmal laden und speichern, um auch seine Entwürfe kopieren zu können.", 17)
+		Style.paragraph(_details, "Prüfe den Kugelumzug dieses älteren Spielstands. Seine Originaldaten bleiben erhalten.", 17)
 	_details.add_child(HSeparator.new())
 	_entries = _saves.list_slot_history(selected_path)
 	Style.label(_details, Text.plural("SAVE_BACKUPS", "SAVE_BACKUPS_PLURAL", _entries.size()), 21, Style.ACCENT)
@@ -217,12 +217,12 @@ func _preview_migration() -> void:
 		for problem in preview.blockers:
 			Style.paragraph(_details, str(problem), 18)
 		Style.button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "BackFromMigrationBlockers")
-		_status.text = "Die Quelle bleibt vollständig erhalten und kann weiter als Flachwelt geladen werden."
+		_status.text = "Das Original bleibt vollständig erhalten. Für diesen Spielstand muss der Kugelumzug noch ergänzt werden."
 		return
 	_clear_children(_details)
 	Style.label(_details, "KUGELKOPIE PRÜFEN", 25)
 	Style.paragraph(_details, "Die geprüfte Kopie übernimmt Entwürfe, Fortschritt, Heimat, Bewohner, Tierbesitz, Vorräte und laufende Lieferungen. Bekannte Orte erhalten neue Plätze auf der Kugel. Die ursprüngliche Landschaft und ihre Karten bleiben im Quellarchiv erhalten.")
-	Style.paragraph(_details, "Kreaturenphase, Stamm und Tierhaltung verwenden dieselbe Kampagne. Der Weltumzug befindet sich noch in der gemeinsamen Erprobung; das Original bleibt verfügbar.")
+	Style.paragraph(_details, "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten.")
 	var manifest: Dictionary = preview.manifest
 	Style.paragraph(_details, "Körper: %d · Entwurfsdateien: %d\nQuell-Hash: %s\nManifest: %s\nOriginal und vollständiges Quellarchiv bleiben erhalten." % [
 		manifest.inventory.body_count, preview.data.design_files.size(), str(manifest.source_sha256).left(16), str(manifest.id).left(16)], 17)

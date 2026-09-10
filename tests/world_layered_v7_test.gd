@@ -93,7 +93,7 @@ func _test_required_resources() -> void:
 		"res://world/generation/planet_profile_v8.gd",
 		"res://world/generation/planet_catalog_v7.gd",
 		"res://world/space/star_system_runtime_v7.gd",
-		"res://main/main.tscn",
+		"res://core/diagnostics/legacy_world.tscn",
 	]:
 		_expect(load(path) != null, "Layered World resource failed: %s" % path)
 

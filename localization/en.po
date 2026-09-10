@@ -669,3 +669,39 @@ msgstr "Discovered"
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
 msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature in crosshair\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
+
+msgid "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm."
+msgstr "Explore your planet, discover plants and animals, and develop your species from its first nest to its own tribe."
+
+msgid "Neue Abenteuer beginnen auf einem Kugelplaneten."
+msgstr "New adventures begin on a spherical planet."
+
+msgid "Deine Kampagne wird fortgesetzt …"
+msgstr "Resuming your campaign …"
+
+msgid "Dieser ältere Spielstand muss zuerst auf einen Kugelplaneten übertragen werden. Das Original bleibt erhalten."
+msgstr "This older save must first be transferred to a spherical planet. The original is preserved."
+
+msgid "Auf Kugelwelt fortsetzen"
+msgstr "Continue on a spherical planet"
+
+msgid "Älterer Spielstand · beim Fortsetzen wird eine Kugelkopie angelegt. Das Original bleibt erhalten."
+msgstr "Older save · continuing creates a spherical copy. The original is preserved."
+
+msgid "Originalarchiv als Kopie sichern"
+msgstr "Save a copy of the original archive"
+
+msgid "Originaldaten und ursprüngliche Karten als eigene Archivkopie gesichert."
+msgstr "Original data and maps saved as a separate archive copy."
+
+msgid "Prüfe den Kugelumzug dieses älteren Spielstands. Seine Originaldaten bleiben erhalten."
+msgstr "Check this older save for transfer to a spherical planet. Its original data is preserved."
+
+msgid "Das Original bleibt vollständig erhalten. Für diesen Spielstand muss der Kugelumzug noch ergänzt werden."
+msgstr "The original is fully preserved. Transfer to a spherical planet still needs to be extended for this save."
+
+msgid "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten."
+msgstr "Continue the adventure on a spherical planet. Your previous save is preserved as the original."
+
+msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"

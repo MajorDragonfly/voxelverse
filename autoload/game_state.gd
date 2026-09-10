@@ -92,7 +92,8 @@ func get_current_body_record() -> Dictionary:
 
 
 func campaign_scene() -> String:
-	return Campaign.Surface.SCENE if get_current_body().get("surface_mode") == Campaign.Surface.Cube.MODE else "res://main/main.tscn"
+	# Old data stays readable for copy migration, never as a gameplay fallback.
+	return Campaign.Surface.SCENE if get_current_body().get("surface_mode") == Campaign.Surface.Cube.MODE else "res://ui/frontend/main_menu.tscn"
 
 
 func record_campaign_event(event: GameEvent) -> bool:

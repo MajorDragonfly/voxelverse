@@ -74,7 +74,7 @@ func _test_active_runtime_resources() -> void:
 		"res://world/fauna/fauna_streamer_v7.gd",
 		"res://creatures/player/player_controller_v2.gd",
 		"res://creatures/player/player.tscn",
-		"res://main/main.tscn",
+		"res://core/diagnostics/legacy_world.tscn",
 	]:
 		_expect(load(path) != null, "Active runtime resource failed: %s" % path)
 

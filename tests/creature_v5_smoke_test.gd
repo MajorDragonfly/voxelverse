@@ -72,7 +72,7 @@ func _run_scene_resource_checks() -> void:
 	for path in [
 		"res://creatures/editor/creature_editor.tscn",
 		"res://creatures/player/player.tscn",
-		"res://main/main.tscn",
+		"res://core/diagnostics/legacy_world.tscn",
 	]:
 		_expect(load(path) != null, "Required runtime scene could not load: %s" % path)
 

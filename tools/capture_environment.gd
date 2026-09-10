@@ -168,7 +168,7 @@ func _assets() -> void:
 
 
 func _world() -> void:
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	var started: int = Time.get_ticks_usec()
 	var setup_limit: int = _setup_limit_usec()
 	var last_diagnostic: int = started

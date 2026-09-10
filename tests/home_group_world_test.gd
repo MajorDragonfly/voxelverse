@@ -13,7 +13,7 @@ func _run() -> void:
 	saves.save_path = "user://home_world_test.json"
 	root.get_node("GameState").start_world_with_seed(15838)
 	await process_frame
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	await scene_changed
 	var home: Node = current_scene.get_node("Nest/HomeGroup")
 	for frame in range(1800):

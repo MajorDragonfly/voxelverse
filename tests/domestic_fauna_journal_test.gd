@@ -47,7 +47,7 @@ func run() -> void:
 	if not failures.is_empty():
 		await finish(true)
 		return
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	await scene_changed
 	player = current_scene.get_node("Player")
 	player.is_dead = true # Hold the player while the unchanged world and D1 spawn.

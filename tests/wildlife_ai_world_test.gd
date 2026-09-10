@@ -17,7 +17,7 @@ func _run() -> void:
 	saves.save_path = "user://wildlife_ai_world_test.json"
 	root.get_node("GameState").start_world_with_seed(15838)
 	await process_frame
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	await scene_changed
 	var player: CharacterBody3D = current_scene.get_node("Player")
 	player.set_process(false)

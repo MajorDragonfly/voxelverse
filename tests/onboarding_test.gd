@@ -38,7 +38,7 @@ func _run() -> void:
 	var saves: Node = root.get_node("SaveGameService")
 	saves.session_managed = true
 	saves.autosave_enabled = false
-	var original: String = saves.create_slot("Einführung", 15838)
+	var original: String = saves.create_slot("Einführung", 15838, "legacy_plane_v9")
 	_expect(saves.guidance.current_step() == "look", "New adventure did not enable the guide.")
 	saves.guidance.record("look", 0.25)
 	saves.guidance.record("move", 1.75)
@@ -67,7 +67,7 @@ func _run() -> void:
 	Atomic.write(original, legacy, false)
 	_expect(saves.load_now() and saves.save_now(), "Future optional guide data blocked the campaign.")
 	_expect(Atomic.parse_dictionary(FileAccess.get_file_as_string(original)).onboarding == Atomic.parse_dictionary(JSON.stringify(future)), "Saving discarded future guide data.")
-	var next: String = saves.create_slot("Neues Abenteuer", 23757)
+	var next: String = saves.create_slot("Neues Abenteuer", 23757, "legacy_plane_v9")
 	_expect(not next.is_empty() and saves.guidance.completed_count() == 0 and saves.guidance.current_step() == "look", "New adventure inherited old tutorial progress.")
 	for failure in failures:
 		push_error(failure)

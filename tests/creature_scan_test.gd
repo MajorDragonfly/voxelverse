@@ -19,7 +19,7 @@ func _run() -> void:
 	var progression: Node = root.get_node("ProgressionService")
 	saves.session_managed = true
 	saves.autosave_enabled = false
-	var path: String = saves.create_slot("Scantest", 15838)
+	var path: String = saves.create_slot("Scantest", 15838, "legacy_plane_v9")
 	var player: Node3D = load("res://creatures/player/player.tscn").instantiate()
 	root.add_child(player)
 	player.global_position = Vector3(0, 100, 0)
@@ -107,7 +107,7 @@ func _run() -> void:
 	scanner.reset()
 	scanner._physics_process(0.01)
 	_expect(scanner.known and not Records.visual_for(progression.discovered_species[key]).is_empty(), "Legacy known species did not receive a journal preview on sight.")
-	saves.create_slot("Neuer Scantest", 15838)
+	saves.create_slot("Neuer Scantest", 15838, "legacy_plane_v9")
 	scanner._physics_process(0.1)
 	_expect(not scanner.known and scanner.ratio() < 0.05 and progression.get_discovered_species_count() == 0, "New campaign inherited old scans.")
 	player.inspection_radius = 0.1

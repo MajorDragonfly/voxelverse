@@ -1,5 +1,7 @@
 # Kampagnenskalierung und sichere Körperreisen
 
+**Aktualisierung 10. September:** Lars hat den Kugelstart als einzigen regulären Spielweg vorgezogen. Die bisherige Startfreigabesperre und der optionale Auswahlhaken sind aufgehoben. [WORK_SPHERE_ONLY_ENTRY.md](WORK_SPHERE_ONLY_ENTRY.md) ist für Einstieg und Altstände maßgeblich; die folgenden Nachweise und offenen Abnahmen bleiben bestehen.
+
 Stand: 10. September 2026. Gemeinsame Basis ist `main` `ca02572c199b1fe4b70174ac027359eaf2c588da` nach PR #45. Diese Runde erweitert die vorhandene Kugelkampagne und deren SaveService. Sie ist eine Grundlage für größere Welten, kein Nachweis einer fertigen No-Man’s-Sky-Skalierung.
 
 Das inzwischen fertig übergebene Animationspaket aus [PR #46](https://github.com/MajorDragonfly/voxelverse/pull/46), Commit `f7da7921b0b25303e9141c81a00c1d1062a774b3`, wird in denselben Integrationsstand übernommen. Die zuletzt ausgeführte PR-Prüfung dieses Fachpakets war erfolgreich, einschließlich beider nativer Plattformen. Gemeinsame Neuprüfung bleibt erforderlich; Bewegungsübergänge ändern keine IDs, Aufträge oder Saveformate. Anschlussregeln: [WORK_CREATURE_ANIMATION.md](WORK_CREATURE_ANIMATION.md).

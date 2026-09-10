@@ -116,7 +116,7 @@ func _test_seed_reproducibility() -> void:
 func _test_required_resources() -> void:
 	print("World test stage: load required resources")
 	for path in [
-		"res://main/main.tscn",
+		"res://core/diagnostics/legacy_world.tscn",
 		"res://world/world_manager.tscn",
 		"res://world/visuals/terrain/terrain_chunk.tscn",
 		"res://world/visuals/planet_visual_environment.tscn",

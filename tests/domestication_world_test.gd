@@ -14,7 +14,7 @@ func _run() -> void:
 	state.active_system_id = ""
 	state.set_world_seed(state.world_seed, false)
 	await process_frame
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	await scene_changed
 	var home: Node = current_scene.get_node("Nest/HomeGroup")
 	var tribe: Node = current_scene.get_node("Nest/Tribe")

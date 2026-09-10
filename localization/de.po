@@ -669,3 +669,39 @@ msgstr "Entdeckt"
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
 msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
+
+msgid "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm."
+msgstr "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm."
+
+msgid "Neue Abenteuer beginnen auf einem Kugelplaneten."
+msgstr "Neue Abenteuer beginnen auf einem Kugelplaneten."
+
+msgid "Deine Kampagne wird fortgesetzt …"
+msgstr "Deine Kampagne wird fortgesetzt …"
+
+msgid "Dieser ältere Spielstand muss zuerst auf einen Kugelplaneten übertragen werden. Das Original bleibt erhalten."
+msgstr "Dieser ältere Spielstand muss zuerst auf einen Kugelplaneten übertragen werden. Das Original bleibt erhalten."
+
+msgid "Auf Kugelwelt fortsetzen"
+msgstr "Auf Kugelwelt fortsetzen"
+
+msgid "Älterer Spielstand · beim Fortsetzen wird eine Kugelkopie angelegt. Das Original bleibt erhalten."
+msgstr "Älterer Spielstand · beim Fortsetzen wird eine Kugelkopie angelegt. Das Original bleibt erhalten."
+
+msgid "Originalarchiv als Kopie sichern"
+msgstr "Originalarchiv als Kopie sichern"
+
+msgid "Originaldaten und ursprüngliche Karten als eigene Archivkopie gesichert."
+msgstr "Originaldaten und ursprüngliche Karten als eigene Archivkopie gesichert."
+
+msgid "Prüfe den Kugelumzug dieses älteren Spielstands. Seine Originaldaten bleiben erhalten."
+msgstr "Prüfe den Kugelumzug dieses älteren Spielstands. Seine Originaldaten bleiben erhalten."
+
+msgid "Das Original bleibt vollständig erhalten. Für diesen Spielstand muss der Kugelumzug noch ergänzt werden."
+msgstr "Das Original bleibt vollständig erhalten. Für diesen Spielstand muss der Kugelumzug noch ergänzt werden."
+
+msgid "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten."
+msgstr "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten."
+
+msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"

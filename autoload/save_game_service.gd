@@ -534,7 +534,7 @@ func cache_slot_preview(png: PackedByteArray, world_seed: int) -> void:
 		_slot_preview = {"world_seed": world_seed, "png": Marshalls.raw_to_base64(png)}
 
 
-func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.LEGACY) -> String:
+func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.Cube.MODE) -> String:
 	if surface_mode not in [Surface.LEGACY, Surface.Cube.MODE]:
 		_report_failure("Unbekannter Oberflächentyp.")
 		return ""
@@ -575,6 +575,26 @@ func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surf
 		session_active = false
 		return ""
 	return path
+
+
+## Public loading always resolves to a sphere. The source remains byte-for-byte
+## intact; the existing migration is idempotent and protects changed targets.
+## Low-level select_slot/load_now remain available to import historical data.
+func prepare_playable_slot(path: String) -> String:
+	if not _can_manage_slots(): return ""
+	if not is_slot_path(path):
+		last_error = "Ungültiger Spielstandpfad."
+		return ""
+	var slot: Dictionary = inspect_slot(path)
+	if not slot.valid:
+		last_error = slot.problem
+		return ""
+	if slot.surface_mode == Surface.Cube.MODE: return path
+	var plan: Dictionary = preview_spherical_migration(path)
+	if not plan.ok:
+		last_error = "Der ältere Spielstand bleibt erhalten. Der Kugelumzug benötigt noch eine Korrektur:\n" + "\n".join(plan.blockers)
+		return ""
+	return migrate_slot_to_sphere(path, plan.manifest.source_sha256)
 
 
 func select_slot(path: String) -> bool:

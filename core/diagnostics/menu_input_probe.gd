@@ -18,9 +18,9 @@ func _run() -> void:
 	get_node("/root/SaveGameService").autosave_enabled = false
 	# The water/GUI acceptance needs a reproducible actual world. A random
 	# starting planet can have no ocean inside this deliberately small fixture.
-	get_node("/root/GameState").start_world_with_seed(15838)
+	get_node("/root/SaveGameService").create_slot("Historical GUI fixture", 15838, "legacy_plane_v9")
 	await tree.process_frame
-	_expect(tree.change_scene_to_file("res://main/main.tscn") == OK, "The native acceptance world failed to load.")
+	_expect(tree.change_scene_to_file("res://core/diagnostics/legacy_world.tscn") == OK, "The native acceptance world failed to load.")
 	await tree.scene_changed
 	for frame in range(4):
 		await tree.process_frame
@@ -65,6 +65,12 @@ func _run() -> void:
 	await tree.process_frame
 	_expect(not tree.paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Lab menu captured the previously visible cursor.")
 	lab.return_to_game()
+	await tree.scene_changed
+	_expect(tree.current_scene.scene_file_path == "res://ui/frontend/main_menu.tscn", "Legacy diagnostic returned to a playable plane.")
+	# Continue this historical GUI fixture explicitly. Production lab returns
+	# restore a spherical campaign or leave the player at the title screen.
+	get_node("/root/SaveGameService").session_active = true
+	_expect(tree.change_scene_to_file("res://core/diagnostics/legacy_world.tscn") == OK, "Legacy regression fixture could not resume.")
 	await tree.scene_changed
 	for frame in range(3):
 		await tree.process_frame

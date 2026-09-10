@@ -18,7 +18,7 @@ func _run() -> void:
 	state = root.get_node("GameState")
 	saves.session_managed = true
 	saves.autosave_enabled = false
-	var source: String = saves.create_slot("Flachwelt", 15838)
+	var source: String = saves.create_slot("Flachwelt", 15838, "legacy_plane_v9")
 	_expect(not source.is_empty(), "Could not create source.")
 	if source.is_empty(): await _finish(); return
 	var design: Dictionary = Blueprint.create_default()
@@ -71,20 +71,22 @@ func _run() -> void:
 	_expect(sphere.legacy_exploration_atlas == data.game_state.campaign.bodies[str(state.get_world_seed())].exploration_atlas and sphere.exploration_atlas.tiles.is_empty(), "Old map was lost or sphere pre-explored.")
 	_expect(copied.player.position == data.player.position and copied.player.health_ratio == data.player.health_ratio and copied.player.behavior_runtime == data.player.behavior_runtime, "Player inventory/runtime changed.")
 	_expect(Surface.location(copied.player.surface_address, body.id), "Player did not receive a canonical address.")
+	_expect(saves.prepare_playable_slot(source) == target, "Public load did not reuse the migration copy.")
+	_expect(FileAccess.get_file_as_string(source) == source_text, "Public load preparation changed source bytes.")
 	var target_text: String = FileAccess.get_file_as_string(target)
 	_expect(saves.migrate_slot_to_sphere(source, source_text.sha256_text()) == target and FileAccess.get_file_as_string(target) == target_text, "Repeated manifest duplicated or overwrote its copy.")
 	_expect(saves.select_slot(target), "Sphere copy did not load.")
 	_expect(state.campaign_scene() == Surface.SCENE and Blueprint.load_best_available().name == design.name, "Surface routing/design snapshot lost.")
 	_expect(saves.save_now(), "Common SaveGameService could not resave sphere.")
 	_expect(saves._read_save(target).player.surface_address == copied.player.surface_address, "Annotation replaced sphere coordinates with XYZ.")
-	_expect(saves.select_slot(source) and state.campaign_scene() == "res://main/main.tscn", "Return to legacy source failed.")
+	_expect(saves.select_slot(source) and state.campaign_scene() == "res://ui/frontend/main_menu.tscn", "Legacy data remained a playable scene.")
 	saves.session_active = false
 	var recovered: String = saves.restore_spherical_source(target)
 	_expect(not recovered.is_empty() and saves._read_save(recovered).design_files == data.design_files, "Complete source archive could not be recovered independently.")
 	_expect(saves._read_save(recovered).game_state.campaign.bodies.values()[0].exploration_atlas == data.game_state.campaign.bodies.values()[0].exploration_atlas, "Archived planar map was not accessible through recovery.")
 	_test_blockers(data)
 	_test_future_and_failure(source, source_text, target, copied)
-	var new_path: String = saves.create_slot("Neue Kugel", 23757, Cube.MODE)
+	var new_path: String = saves.create_slot("Neue Kugel", 23757)
 	_expect(not new_path.is_empty() and state.get_current_body().id != body.id, "New sphere campaign failed or reused reference ID.")
 	_expect(state.get_current_body().surface_context.radius == Surface.DEFAULT_RADIUS, "New sphere lost Earth scale.")
 	_expect(saves._read_save(new_path).design_files.size() == 1 and Blueprint.load_best_available().design_id != design.design_id, "New campaign inherited migration designs or failed to freeze its default.")
