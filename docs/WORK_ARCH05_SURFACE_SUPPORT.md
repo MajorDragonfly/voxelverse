@@ -60,6 +60,16 @@ python tools/validate_godot.py --godot /path/to/godot --skip-main \
   large_planet_runtime_test adaptive_planet_test spherical_campaign_runtime_test galaxy_visits_test
 ```
 
-Die Messergebnisse werden nach der Abschlussprüfung in `ARCH05_SURFACE_RESULTS.json` dokumentiert. Diese geometrische Abnahme ist keine 1080p60-/GPU-/Ziel-PC-Zusage. ARCH-02 behält Messroute und Performancebudgets; ARCH-19 behält den umfassenden Spieltest. Allgemeines Graben, unterirdische Navigation und neue Oberflächenarten sind keine verfügbaren Fähigkeiten.
+Abschlussprüfung am 10. September 2026, Codecommit `5cd89473ac611fab716de6f0a0997238c3e846a9`: alle sieben Fachtests sowie Import und Art-Quellenprüfung bestanden. [Rohwerte und Prüfergebnisse](ARCH05_SURFACE_RESULTS.json) dokumentieren die Messung. Der veröffentlichte Codebaum ist identisch mit dem lokal geprüften Baum `687ce19e569459dc4abce33459f466dda6050cf2`. Diese geometrische Abnahme ist keine 1080p60-/GPU-/Ziel-PC-Zusage. ARCH-02 behält Messroute und Performancebudgets; ARCH-19 behält den umfassenden Spieltest. Allgemeines Graben, unterirdische Navigation und neue Oberflächenarten sind keine verfügbaren Fähigkeiten.
+
+| Radius | LOD am Prüfpunkt | Nominale Zellweite | Treffer auf dem eigenen Kollisionsmesh |
+| --- | --- | --- | --- |
+| 64 m | 2 | 2,00 m | 256 / 256 |
+| 512 m | 5 | 2,00 m | 256 / 256 |
+| 50 km | 12 | 1,53 m | 256 / 256 |
+| 6.371 km (Terra) | 19 | 1,52 m | 256 / 256 |
+| 100.000 km | 23 | 1,49 m | 256 / 256 |
+
+Alle 1.280 Strahlen trafen den konkreten Kachelbesitzer. Die fünf Prüfstellen benötigen höchstens 525 Geländekacheln und jeweils 24 aktive Kollisionen. Der bestehende Bewegungsprobe durchlief auf drei großen Körpern je über 167 m und eine Flächenkante bei je drei Ursprungswechseln; der adaptive Nahtprobe prüfte 12.852 Verbindungen einschließlich 2.244 Flächenübergängen, größter Spalt etwa 0,077 mm. Die gemeinsame Kugelkampagne und Katalog-Wiederbesuche bestanden ihre vorhandenen Laufzeittests.
 
 Integration: ausschließlich diesen Branch prüfen; keine unfertigen Fachbranches übernehmen. Die drei ARCH-05-Teilpunkte können nach Integration mit diesem Bericht und dem neuen automatischen Test verknüpft werden. Gemeinsame Roadmap- und Arbeitsverteilungsdateien bleiben beim Integrationsbesitzer.
