@@ -81,10 +81,8 @@ def main():
             with log_path.open("w", encoding="utf-8") as log_file:
                 process = subprocess.Popen(command, env=isolated_env(root / "userdata"),
                                            stdout=log_file, stderr=subprocess.STDOUT)
-                memory = []
                 deadline = time.monotonic() + timeout
                 while process.poll() is None and time.monotonic() < deadline:
-                    memory.append(process_memory(process.pid))
                     try:
                         process.wait(timeout=1)
                     except subprocess.TimeoutExpired:
@@ -94,13 +92,16 @@ def main():
                     process.kill(); process.wait()
                     log_file.write("\nERROR: performance probe timed out\n")
                     code = 124
-            (output / "process-memory.json").write_text(json.dumps(memory, indent=2) + "\n", encoding="utf-8")
             # Keep the original slots, immutable history and region blobs for
             # investigation/replay, even when an actual route is blocked.
             shutil.copytree(root / "userdata", output / "fixture")
             log = log_path.read_text(encoding="utf-8", errors="replace")
             if (output / "capture.json").is_file():
                 summary.update(json.loads((output / "capture.json").read_text(encoding="utf-8")))
+                memory = [{key: s.get(key) for key in ("cycle", "stage", "tick_us", "bodies", "changed_regions_total", "rss_bytes", "peak_rss_bytes")}
+                          for s in summary.get("snapshots", summary.get("measurements", []))]
+                (output / "process-memory.json").write_text(json.dumps(memory, indent=2) + "\n", encoding="utf-8")
+                summary["process_rss_peak_bytes"] = max((s["peak_rss_bytes"] or 0 for s in memory), default=0) or None
             if code != 0 or ERROR.search(log):
                 summary["passed"] = False
                 print(log[-12000:], file=sys.stderr)
@@ -115,7 +116,6 @@ def main():
             if args.mode == "route" and args.renderer != "headless" and not any((s.get("draw_calls") or {}).get("max", 0) > 0 for s in capture["segments"]):
                 raise RuntimeError("Rendered profiling produced no draw calls")
             summary.update(capture)
-            summary["process_rss_peak_bytes"] = max((s["rss_bytes"] or 0 for s in memory), default=0) or None
             summary["passed"] = True
     except (OSError, ValueError, KeyError, RuntimeError, subprocess.SubprocessError) as error:
         summary["passed"] = False
@@ -134,17 +134,6 @@ def source_version(project):
     except (OSError, subprocess.SubprocessError):
         return {"commit": None, "dirty": None, "note": "No git metadata available"}
 
-
-def process_memory(pid):
-    sample = {"monotonic_seconds": time.monotonic(), "rss_bytes": None, "peak_rss_bytes": None}
-    try:
-        values = dict(line.split(":", 1) for line in Path(f"/proc/{pid}/status").read_text().splitlines() if ":" in line)
-        for field, key in [("VmRSS", "rss_bytes"), ("VmHWM", "peak_rss_bytes")]:
-            if field in values:
-                sample[key] = int(values[field].split()[0]) * 1024
-    except (OSError, ValueError):
-        pass  # Unsupported platforms must not report the allocator as process RAM.
-    return sample
 
 
 if __name__ == "__main__":

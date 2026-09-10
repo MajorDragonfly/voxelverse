@@ -42,7 +42,7 @@ jobs:
         run: >-
           python tools/profile_performance.py
           --godot "${{ steps.engine.outputs.godot }}"
-          --cycles 2 --renderer headless --walk-seconds 12
+          --cycles 2 --renderer headless --walk-seconds 6
           --output "${{ runner.temp }}/performance-route"
       - name: Measure 1-10-100 bodies and growing regional deltas
         run: >-

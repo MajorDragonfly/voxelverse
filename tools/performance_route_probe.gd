@@ -173,6 +173,13 @@ func _walk_return(player: CharacterBody3D) -> void:
 		var destination: Dictionary = breadcrumbs[index]
 		while _distance(player.location(), destination) > 0.65:
 			if player.is_dead or Time.get_ticks_msec() > deadline:
+				report.blockage = {"actual": player.location(), "target": destination, "is_dead": player.is_dead,
+					"terrain_wait": player.waiting_for_terrain, "on_floor": player.is_on_floor(), "collisions": []}
+				for hit_index in range(player.get_slide_collision_count()):
+					var hit: KinematicCollision3D = player.get_slide_collision(hit_index)
+					var collider: Object = hit.get_collider()
+					report.blockage.collisions.append({"normal": [hit.get_normal().x, hit.get_normal().y, hit.get_normal().z],
+						"collider": str(collider.get_path()) if collider is Node else str(collider)})
 				failures.append("Physical return blocked or player died; no teleport used.")
 				Input.action_release("move_forward")
 				return
@@ -215,6 +222,7 @@ func _tick() -> void:
 	raw.store_csv_line(row)
 	if now >= next_snapshot:
 		var snapshot: Dictionary = _world_snapshot()
+		snapshot.merge(Stats.process_memory())
 		snapshot.merge({"cycle": cycle, "stage": stage, "tick_us": now, "static_bytes": OS.get_static_memory_usage(),
 			"nodes": Performance.get_monitor(Performance.OBJECT_NODE_COUNT), "resources": Performance.get_monitor(Performance.OBJECT_RESOURCE_COUNT),
 			"physics_active_objects": Performance.get_monitor(Performance.PHYSICS_3D_ACTIVE_OBJECTS),

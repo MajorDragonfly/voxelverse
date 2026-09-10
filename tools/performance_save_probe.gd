@@ -109,6 +109,7 @@ func _run() -> void:
 				"dirty_save_total_ms": dirty_save_ms, "dirty_region_flush_ms": first_flush,
 				"cache_peak_per_body": cache_peak, "new_blob_writes": writes, "region_io_max_ms": io_max,
 				"static_allocator_bytes": OS.get_static_memory_usage(), "raw": raw}
+			row.merge(preload("res://tools/performance_stats.gd").process_memory())
 			rows.append(row)
 			print("SAVE_SCALING_CASE ", JSON.stringify(row))
 			if not failures.is_empty(): break
