@@ -134,6 +134,9 @@ func capacity_check() -> void:
 			if index < 3: actor.catalog_species = {"id": ["milk", "work", "companion"][index]}
 			elif duplicates: actor.catalog_species = {"id": "milk"}
 			population.animals[str(index)] = actor
+		var exhausted: Array[Dictionary] = [{"id": "dead-egg", "catalog_species_id": "eggs", "encounter": {"dead": true, "carcass_food": 0.0}}]
+		population._prioritize_catalog(exhausted)
+		expect(population.animals.size() == population.MAX_ANIMALS and population.captured.is_empty(), "Exhausted corpse evicted a live animal")
 		var candidates: Array[Dictionary] = [{"id": "ordinary"}, {"id": "new-egg", "catalog_species_id": "eggs"}]
 		population._prioritize_catalog(candidates)
 		expect(candidates[0].id == "new-egg" and population.animals.size() == population.MAX_ANIMALS - 1, "Full population starved missing fourth role")

@@ -54,6 +54,12 @@ func run() -> void:
 	note.position = Vector2(48, 650)
 	root.add_child(note)
 	for frame in range(12): await process_frame
+	# DisplaySettings applies saved defaults on a deferred startup callback.
+	# Fix this diagnostic capture's canvas after that callback has completed.
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	root.content_scale_size = Vector2i(1200, 720)
+	root.content_scale_factor = 1.0
+	await process_frame
 	await RenderingServer.frame_post_draw
 	var output: String = OS.get_cmdline_user_args()[0]
 	root.get_texture().get_image().save_png(output)

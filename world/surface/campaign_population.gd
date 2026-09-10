@@ -124,6 +124,8 @@ func _prioritize_catalog(candidates: Array[Dictionary]) -> void:
 		if not species_id.is_empty(): represented[species_id] = int(represented.get(species_id, 0)) + 1
 	var priority: Callable = func(record: Dictionary) -> int:
 		if not record.has("catalog_species_id"): return 2
+		var encounter: Dictionary = record.get("encounter", {})
+		if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0.0: return 2
 		return 1 if represented.has(record.catalog_species_id) else 0
 	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		if priority.call(a) != priority.call(b): return priority.call(a) < priority.call(b)
