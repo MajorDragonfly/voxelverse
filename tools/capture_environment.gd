@@ -208,10 +208,10 @@ func _world() -> void:
 			break
 	if is_instance_valid(_scene):
 		_report["streaming_state"] = _streaming_state(_scene.get_node("WorldManager"))
+	_report["setup_ms"] = (Time.get_ticks_usec() - started) / 1000.0
 	if not ready:
 		_failures.append("World streaming did not finish for capture.")
 		return
-	_report["setup_ms"] = (Time.get_ticks_usec() - started) / 1000.0
 	_report["setup_frame_ms"] = _distribution(setup_frames)
 	var player: Node3D = _scene.get_node("Player")
 	player.process_mode = Node.PROCESS_MODE_DISABLED
@@ -305,6 +305,8 @@ func _streaming_state(manager: Node) -> Dictionary:
 			"published": ecology.get("_publish_index"), "stats": ecology.call("get_generation_stats")})
 	return {"world_initialized": manager.get("world_initialized"),
 		"pending_chunks": manager.call("get_pending_chunk_count"), "chunks": states,
+		"horizon_ready": manager.get_node("LandscapeHorizon").get("generation_complete"),
+		"forest_ready": manager.get_node("DistantForest").get("generation_complete"),
 		"player_position": str(_scene.get_node("Player").position),
 		"player_dead": _scene.get_node("Player").get("is_dead")}
 
@@ -712,10 +714,10 @@ func _lake_shore_camera(generator: Node, center: Vector2, radius: float, level: 
 
 
 func _setup_limit_usec() -> int:
-	# llvmpipe's Forward+ resource creation can exceed two minutes for a full
+	# llvmpipe's Forward+ resource creation can exceed four minutes for a full
 	# forest fixture, even while publication continues. Fast setup is explicitly
 	# outside the gameplay frame measurements; retain a bounded watchdog here.
-	var seconds: int = 240 if bool(_report["software_renderer"]) and bool(_config.get("fast_setup", false)) else 120
+	var seconds: int = 360 if bool(_report["software_renderer"]) and bool(_config.get("fast_setup", false)) else 120
 	_report["setup_limit_seconds"] = seconds
 	return seconds * 1_000_000
 

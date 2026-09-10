@@ -47,7 +47,11 @@ func check(value: bool, reason: String) -> void:
 
 
 func tick(seconds: float = 0.12) -> void:
+	# UI audio debounce uses wall time; frame delta alone is not that clock.
+	var ready_at := Time.get_ticks_msec() + int(ceil(seconds * 1000.0))
 	await create_timer(seconds).timeout
+	while Time.get_ticks_msec() < ready_at:
+		await process_frame
 
 
 func run() -> void:
