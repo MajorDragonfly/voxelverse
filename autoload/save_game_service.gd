@@ -7,11 +7,11 @@ signal save_failed(message: String)
 signal save_started(path: String)
 signal slots_changed
 
+const Participants = preload("res://core/persistence/save_participants.gd")
 const Registry = preload("res://core/campaign/body_registry.gd")
 const SAVE_SCHEMA: int = Registry.SAVE_SCHEMA
 const Surface = preload("res://core/campaign/surface_context.gd")
 const Migration = preload("res://core/campaign/spherical_migration.gd")
-const Home = preload("res://world/home_group/home_group_state.gd")
 const GameModel = preload("res://autoload/game_state.gd")
 const PlayerBlueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Animals = preload("res://world/domestication/campaign_animal_state.gd")
@@ -21,10 +21,6 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
 const PhaseHandoff = preload("res://core/campaign/phase_handoff.gd")
-const Progression = preload("res://autoload/progression_service.gd")
-const FaunaCatalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
-const Exploration = preload("res://core/map/exploration_atlas.gd")
-const Tribe = preload("res://world/tribe/tribe_state.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 const SLOT_DIRECTORY: String = "user://saves"
 const History = preload("res://core/persistence/slot_history.gd")
@@ -119,20 +115,11 @@ func _save_snapshot(custom_path: String = "") -> bool:
 	var files: Dictionary = Designs.capture()
 	_upgrade_design_ids(files)
 	_update_design_references(files)
-	var save_data: Dictionary = {
-		"slot_name": slot_name,
-		"schema": SAVE_SCHEMA,
-		"saved_unix_time": int(Time.get_unix_time_from_system()),
-		"game_state": _export_node_state("/root/GameState"),
-		"progression": _export_node_state("/root/ProgressionService"),
-		"player": _export_player_state(),
-		"regions_by_body": _regions_by_body.duplicate(true),
-		"design_files": files,
-		"migration_report": last_migration_report.duplicate(),
-		"slot_preview": _slot_preview.duplicate(true) if int(_slot_preview.get("world_seed", 0)) == _get_world_seed() else {},
-		"slot_origin": _slot_origin.duplicate(true),
-		"onboarding": guidance.export_state(),
-	}
+	var snapshot: Dictionary = Participants.snapshot(self, files)
+	if not snapshot.ok:
+		_report_failure(snapshot.error)
+		return false
+	var save_data: Dictionary = snapshot.data
 	_annotate_world_state(save_data)
 	var problem: String = _validate_save(save_data)
 	if not problem.is_empty():
@@ -173,6 +160,11 @@ func _save_snapshot(custom_path: String = "") -> bool:
 
 func load_now(custom_path: String = "") -> bool:
 	if _transition_busy or _saving:
+		return false
+	var registration_problem: String = Participants.registration_problem(self)
+	if not registration_problem.is_empty():
+		_write_blocked = true
+		_report_failure(registration_problem)
 		return false
 	var target_path: String = save_path if custom_path.is_empty() else custom_path
 	var source_path: String = target_path
@@ -234,26 +226,10 @@ func load_now(custom_path: String = "") -> bool:
 		last_migration_report.append("Körperregister -> 3; IDs und Bestände erhalten, Regionen nach Körper-ID zugeordnet.")
 	if source_path != target_path:
 		last_migration_report.append("Recovered the previous complete snapshot from .bak.")
-	for saved_body: Dictionary in data["game_state"]["campaign"].get("bodies", {}).values():
-		if saved_body.has("tribe") and Tribe.upgrade(saved_body["tribe"]):
-			last_migration_report.append("Tribe -> %d; residents, orders, cargo, stock and economy retained. Existing huts and paid construction keep their sites; new shelters, residents and husbandry develop in play." % Tribe.SCHEMA)
-	_design_files = _dict(data.get("design_files", {}))
-	slot_name = str(data.get("slot_name", "Bisheriges Abenteuer"))
-	_slot_preview = _dict(data.get("slot_preview", {}))
-	_slot_origin = _dict(data.get("slot_origin", {}))
-	guidance.import_state(data.get("onboarding"))
-	last_saved_unix_time = int(data.get("saved_unix_time", 0))
+	Participants.migrate_bodies(data.game_state.campaign, last_migration_report)
 	_design_snapshot_active = true
 	_write_blocked = false
-	var game_state := get_node_or_null("/root/GameState")
-	if game_state != null:
-		game_state.call("import_state", _dict(data.get("game_state", {})), true)
-	var progression := get_node_or_null("/root/ProgressionService")
-	if progression != null:
-		progression.call("import_state", _dict(data.get("progression", {})))
-	_regions_by_body = _dict(data.get("regions_by_body", {}))
-	_last_player_state = _dict(data.get("player", {}))
-	_pending_player_state = _last_player_state.duplicate(true)
+	Participants.restore(self, data)
 	_pending_region_state = _get_saved_region_state_for_current_world()
 	_update_design_references(_design_files)
 	_apply_pending_runtime_state()
@@ -649,29 +625,9 @@ func _validate_save(data: Dictionary) -> String:
 	var schema: int = int(data.get("schema", 0))
 	if schema < 1 or schema > SAVE_SCHEMA or data.get("schema") != schema:
 		return "Unsupported or missing save schema."
-	for field in ["game_state", "progression", "player"]:
-		if not data.get(field) is Dictionary:
-			return "Invalid save section: " + field
-	var progression_problem: String = Progression.validate_state(data["progression"])
-	if not progression_problem.is_empty():
-		return progression_problem
-	if schema >= 4 and int(data["progression"].get("schema", 0)) < 3:
-		return "Schema 4 requires complete behavior progression."
-	if schema >= 5 and int(data["progression"].get("schema", 0)) < 4:
-		return "Schema 5 requires persistent creature encounters."
-	var runtime: Variant = data["player"].get("behavior_runtime", {})
-	if not runtime is Dictionary:
-		return "Invalid player behavior state."
-	for key in runtime:
-		var value: Variant = runtime[key]
-		if key not in ["stamina", "recovery_delay"] or not (value is int or value is float) or not is_finite(float(value)) or float(value) < 0.0 or float(value) > (100.0 if key == "stamina" else 0.8):
-			return "Invalid player stamina state."
+	var participant_problem: String = Participants.validate_sections(data)
+	if not participant_problem.is_empty(): return participant_problem
 	var state: Dictionary = data["game_state"]
-	if int(state.get("world_seed", 0)) <= 0 or int(state.get("phase", -1)) not in range(6):
-		return "Invalid world seed or phase."
-	if not data.get(Registry.regions_field(data), {}) is Dictionary:
-		return "Invalid region state."
-	if schema >= SAVE_SCHEMA and (not data.has("regions_by_body") or data.has("regions_by_world")): return "Invalid body-scoped region storage."
 	if schema < 3:
 		return ""
 	var campaign: Variant = state.get("campaign")
@@ -704,57 +660,12 @@ func _validate_save(data: Dictionary) -> String:
 			return "Unsupported body generator/surface version."
 		var surface_problem: String = Surface.validate(body)
 		if not surface_problem.is_empty(): return surface_problem
-		if body.has("village_simulation"):
-			var simulation_problem: String = VillageSimulation.validate(body.village_simulation, body, float(campaign.get("elapsed_seconds", 0)))
-			if not simulation_problem.is_empty(): return simulation_problem
-		if body.has("visit"):
-			var visit: Variant = body.visit
-			if not visit is Dictionary or visit.get("schema") != 1 or not visit.get("player") is Dictionary or not Surface.number(visit.get("system_seed"), 1, 2147483647) or not Surface.number(visit.get("planet_index"), 0, 1000000): return "Invalid body visit checkpoint."
-			if body.surface_mode != Surface.Cube.MODE or not Surface.player_problem(visit.player, body).is_empty(): return "Visit checkpoint refers to another surface."
 		if body.surface_mode == Surface.Cube.MODE and (schema < 8 or campaign.schema < 2): return "Sphere requires save 8 and campaign 2."
 		if body.surface_mode == Surface.Cube.MODE:
 			var regions: Variant = data.get(Registry.regions_field(data), {}).get(body.id if schema >= SAVE_SCHEMA else str(int(body.seed)), {})
 			if not regions is Dictionary or not regions.is_empty(): return "Planar regional state requires an explicit regional migration adapter."
-		if body.has("home_group"):
-			var home_problem: String = Home.validate(body.home_group, str(body.id), str(campaign.player_species_id))
-			if not home_problem.is_empty(): return home_problem
-		for extension in {"legacy_population": preload("res://world/fauna/legacy_population_state.gd"), "wildlife_foraging": preload("res://world/resources/plants/foraging_state.gd"), "wildlife_drinking": preload("res://creatures/ai/drinking_state.gd")}:
-			if not body.has(extension): continue
-			var validators := {"legacy_population": preload("res://world/fauna/legacy_population_state.gd"), "wildlife_foraging": preload("res://world/resources/plants/foraging_state.gd"), "wildlife_drinking": preload("res://creatures/ai/drinking_state.gd")}
-			var problem: String = validators[extension].validate(body[extension], str(body.id))
-			if not problem.is_empty(): return problem
-		if body.has("surface_ecology"):
-			if body.surface_mode != Surface.Cube.MODE: return "Radiale Ökologie ohne Kugelkontext."
-			var ecology_problem: String = preload("res://world/surface/campaign_ecology_state.gd").validate(body.surface_ecology, body)
-			if not ecology_problem.is_empty(): return ecology_problem
-		if body.has("fauna_catalog"):
-			var fauna_problem: String = FaunaCatalog.validate(body["fauna_catalog"], Surface.descriptor(body) if body.surface_mode == Surface.Cube.MODE else body)
-			if not fauna_problem.is_empty():
-				return fauna_problem
-		if body.has("surface_population"):
-			if body.surface_mode != Surface.Cube.MODE: return "Kugelbestand benötigt einen Kugelkontext."
-			var population_problem: String = preload("res://world/surface/campaign_population_state.gd").validate(body.surface_population, Surface.descriptor(body))
-			if not population_problem.is_empty(): return population_problem
-			if body.surface_population.schema == 2:
-				var storage := preload("res://core/persistence/region_store.gd").new()
-				if not storage.open(body.surface_population.storage): return storage.last_error
-		var animal_problem: String = Animals.validate_body(body, campaign)
-		if not animal_problem.is_empty():
-			return animal_problem
-		if body.has("exploration_atlas"):
-			var map_problem: String = Exploration.validate(body["exploration_atlas"], str(body.get("id", "")))
-			if not map_problem.is_empty(): return map_problem
-			if body["exploration_atlas"]["mode"] != body["surface_mode"]: return "Map and body surface modes differ."
-		if body.has("tribe"):
-			var tribe_problem: String = Tribe.validate(body["tribe"], body, campaign)
-			if not tribe_problem.is_empty():
-				return tribe_problem
-		if body.has("tribal_neighbor"):
-			if int(tribal.get("schema", 0)) < 3:
-				return "Nachbarlager benötigt Stammesfortschrittformat 3."
-			var neighbor_problem: String = Neighbor.validate(body["tribal_neighbor"], body.get("tribe", {}), campaign)
-			if not neighbor_problem.is_empty():
-				return neighbor_problem
+		var body_problem: String = Participants.validate_body(body, campaign, tribal)
+		if not body_problem.is_empty(): return body_problem
 	var active: Dictionary = Registry.active(state)
 	if active.is_empty(): return "Active body/system reference is missing or ambiguous."
 	for section in ["discovered_species", "discovered_regions"]:
@@ -795,11 +706,6 @@ func _validate_save(data: Dictionary) -> String:
 			return "Missing society identity: " + field
 	if not is_finite(float(campaign.get("elapsed_seconds", -1))) or float(campaign.get("elapsed_seconds", -1)) < 0 or float(campaign.get("time_scale", -1)) not in [0.0, 1.0, 2.0, 4.0]:
 		return "Invalid campaign time."
-	if not data.get("design_files") is Dictionary:
-		return "Missing design snapshot."
-	for path in data["design_files"].keys():
-		if not Designs.is_managed(str(path)) or not data["design_files"][path] is String:
-			return "Invalid design snapshot path/content."
 	var pending: Dictionary = campaign["pending_transition"]
 	if not pending.is_empty():
 		if not bool(pending.get("debug", false)) or int(pending.get("from", -1)) != int(state["phase"]) or int(pending.get("to", -1)) != int(state["phase"]) + 1 or int(pending.get("to", 6)) > 5 or str(pending.get("id", "")).is_empty() or not pending.get("handoff") is Dictionary:
@@ -1188,10 +1094,7 @@ func _ambiguous_bodies(data: Dictionary) -> bool:
 func _has_unsupported_contract(data: Dictionary) -> bool:
 	if float(data.get("schema", 0)) > SAVE_SCHEMA:
 		return true
-	var designs: Variant = data.get("design_files")
-	if designs is Dictionary and Designs.has_unsupported_blueprints(designs): return true
-	if Progression.has_unsupported_contract(data.get("progression", {})):
-		return true
+	if Participants.unsupported_sections(data): return true
 	var imported_state: Variant = data.get("game_state", {})
 	if not imported_state is Dictionary:
 		return false
@@ -1214,33 +1117,61 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	var bodies: Variant = campaign.get("bodies", {})
 	if bodies is Dictionary:
 		for body in bodies.values():
-			if body is Dictionary:
-				for extension in ["village_simulation", "visit"]:
-					if body.get(extension) is Dictionary and body[extension].get("schema") != 1: return true
-				for extension in ["legacy_population", "wildlife_foraging", "wildlife_drinking", "surface_ecology"]:
-					if body.get(extension) is Dictionary and body[extension].get("schema") != 1: return true
-			if body is Dictionary and Surface.unsupported(body): return true
-			if body is Dictionary and body.get("home_group") is Dictionary and body.home_group.get("schema") != 1 and body.home_group.get("schema") != Home.SCHEMA: return true
-			if body is Dictionary and body.get("home_group") is Dictionary and body.home_group.get("schema") == Home.SCHEMA and body.home_group.get("surface_mode") != Home.Cube.MODE: return true
-			if body is Dictionary and body.get("surface_population") is Dictionary:
-				if body.surface_population.get("schema") != 1 and body.surface_population.get("schema") != 2: return true
-				if body.surface_population.get("storage") is Dictionary and (body.surface_population.storage.get("schema") != 1 or body.surface_population.storage.get("format") != preload("res://core/persistence/region_store.gd").FORMAT): return true
-				if body.surface_population.get("schema") == 2 and body.surface_population.get("storage") is Dictionary:
-					var region_store := preload("res://core/persistence/region_store.gd").new()
-					region_store.open(body.surface_population.storage)
-					if region_store.unsupported: return true
-			if body is Dictionary and Exploration.newer(body.get("legacy_exploration_atlas")): return true
-			if body is Dictionary and Animals.unsupported(body):
-				return true
-			if body is Dictionary and Neighbor.has_unsupported_contract(body.get("tribal_neighbor")):
-				return true
-			if body is Dictionary and body.has("fauna_catalog") and FaunaCatalog.has_unsupported(body["fauna_catalog"]):
-				return true
-			if body is Dictionary and Exploration.newer(body.get("exploration_atlas")): return true
-			if body is Dictionary and body.get("tribe") is Dictionary and Tribe.Economy.has_unsupported_contract(body.tribe.get("economy")): return true
-			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
-				return true
-			if body is Dictionary and body.get("tribe") is Dictionary and body.tribe.get("schema") == Tribe.SCHEMA and not body.tribe.get("anchor") is Dictionary: return true
+			if body is Dictionary and (Surface.unsupported(body) or Participants.unsupported_body(body)): return true
 			if body is Dictionary and body.has("generator_version") and body["generator_version"] != Campaign.GENERATOR_VERSION:
 				return true
 	return false
+
+
+# Registered snapshot/import adapters. Keep host flush, annotation, migrations,
+# transaction/slot handling and success notifications in the central service.
+func _snapshot_metadata(_files: Dictionary) -> Dictionary:
+	return {"schema": SAVE_SCHEMA, "saved_unix_time": int(Time.get_unix_time_from_system()),
+		"slot_name": slot_name, "migration_report": last_migration_report.duplicate(),
+		"slot_preview": _slot_preview.duplicate(true) if int(_slot_preview.get("world_seed", 0)) == _get_world_seed() else {},
+		"slot_origin": _slot_origin.duplicate(true)}
+
+func _restore_metadata(data: Dictionary) -> void:
+	slot_name = str(data.get("slot_name", "Bisheriges Abenteuer"))
+	_slot_preview = _dict(data.get("slot_preview", {}))
+	_slot_origin = _dict(data.get("slot_origin", {}))
+	last_saved_unix_time = int(data.get("saved_unix_time", 0))
+
+func _snapshot_designs(files: Dictionary) -> Dictionary:
+	return {"design_files": files}
+
+func _restore_designs(data: Dictionary) -> void:
+	_design_files = _dict(data.get("design_files", {}))
+
+func _snapshot_game_state(_files: Dictionary) -> Dictionary:
+	return {"game_state": _export_node_state("/root/GameState")}
+
+func _restore_game_state(data: Dictionary) -> void:
+	var state := get_node_or_null("/root/GameState")
+	if state != null: state.call("import_state", _dict(data.get("game_state", {})), true)
+
+func _snapshot_progression(_files: Dictionary) -> Dictionary:
+	return {"progression": _export_node_state("/root/ProgressionService")}
+
+func _restore_progression(data: Dictionary) -> void:
+	var progression := get_node_or_null("/root/ProgressionService")
+	if progression != null: progression.call("import_state", _dict(data.get("progression", {})))
+
+func _snapshot_regions(_files: Dictionary) -> Dictionary:
+	return {"regions_by_body": _regions_by_body.duplicate(true)}
+
+func _restore_regions(data: Dictionary) -> void:
+	_regions_by_body = _dict(data.get("regions_by_body", {}))
+
+func _snapshot_player(_files: Dictionary) -> Dictionary:
+	return {"player": _export_player_state()}
+
+func _restore_player(data: Dictionary) -> void:
+	_last_player_state = _dict(data.get("player", {}))
+	_pending_player_state = _last_player_state.duplicate(true)
+
+func _snapshot_onboarding(_files: Dictionary) -> Dictionary:
+	return {"onboarding": guidance.export_state()}
+
+func _restore_onboarding(data: Dictionary) -> void:
+	guidance.import_state(data.get("onboarding"))
