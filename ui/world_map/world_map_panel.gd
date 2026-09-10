@@ -245,6 +245,7 @@ func _process(delta: float) -> void:
 		_request_delay = 0.08
 		terrain.request(projection.center, range_m, _sample)
 	terrain.step_work()
+	if not tracker.problem.is_empty(): _detail.text = tracker.problem
 	_canvas.queue_redraw()
 
 func _sample(point: Vector2) -> Color:
@@ -260,7 +261,7 @@ func _request() -> void:
 	_refresh_canvas_places()
 	var sphere: bool = projection.local.mode == Cube.MODE
 	_scale_label.text = ("Breite am Äquator: " if sphere else "Kartenbreite: ") + Profile.distance_text(range_m * 2.0).replace(".", ",")
-	if tracker.atlas.full: _detail.text = "Die Kartensammlung ist voll. Bereits erkundete Gebiete bleiben erhalten."
+	if tracker.atlas.full: _detail.text = "Die Liste bekannter Orte ist voll (2.048). Neue Landschaften werden weiter erkundet."
 
 func zoom(direction: int, screen_point: Vector2 = Vector2(INF, INF)) -> void:
 	if not is_open: return
@@ -285,23 +286,15 @@ func focus_player() -> void:
 	_layout()
 
 func fit_explored() -> void:
-	var has_point: bool = false
-	var bounds := Rect2()
-	for key: String in tracker.atlas.data.tiles:
-		var parts: PackedStringArray = key.split(":")
-		var rows: Array = tracker.atlas.data.tiles[key]
-		for row in range(32):
-			if int(rows[row]) == 0: continue
-			var bits: int = int(rows[row])
-			var first: int = roundi(log(float(bits & -bits)) / log(2.0))
-			var last: int = floori(log(float(bits)) / log(2.0))
-			for column in [first, last]:
-				var address: Dictionary = tracker.atlas.address_for(Vector3i(int(parts[0]), int(parts[1]) * 32 + column, int(parts[2]) * 32 + row))
-				var point: Vector2 = projection.project(address)
-				if not point.is_finite(): continue
-				if not has_point: bounds = Rect2(point, Vector2.ONE); has_point = true
-				else: bounds = bounds.expand(point)
-	if not has_point: focus_player(); return
+	var extent: Array = tracker.atlas.explored_extent()
+	if extent.is_empty(): focus_player(); return
+	var start := Vector2(extent[0], extent[1])
+	var end := Vector2(extent[2], extent[3])
+	if projection.local.mode != Cube.MODE:
+		var origin: Array = projection.local.origin.position
+		start -= Vector2(origin[0], origin[2])
+		end -= Vector2(origin[0], origin[2])
+	var bounds := Rect2(start, end - start)
 	projection.center = bounds.get_center()
 	range_m = maxf(maxf(bounds.size.x, bounds.size.y) * 0.6, 64.0)
 	_show_list = false

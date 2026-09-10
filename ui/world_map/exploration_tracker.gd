@@ -17,6 +17,7 @@ var problem: String = ""
 func _ready() -> void:
 	name = "ExplorationTracker"
 	add_to_group(&"exploration_tracker")
+	atlas.storage_failed.connect(_storage_failed)
 	var saves := get_node("/root/SaveGameService")
 	saves.game_loaded.connect(invalidate)
 	saves.save_started.connect(func(_path: String) -> void:
@@ -28,6 +29,8 @@ func invalidate(_value: Variant = null) -> void:
 	_record = {}
 	snapshot = {}
 	atlas.data = {}
+	atlas.last_error = ""
+	problem = ""
 	_last_cells.clear()
 	_timer = 0
 	_places_dirty = true
@@ -72,11 +75,12 @@ func update_exploration(allow_paused: bool = false) -> void:
 			problem = "Karte und Oberfläche passen nicht zusammen."
 			snapshot = {}
 			return
+		if not atlas.bind(candidate): snapshot = {}; return
 		_record = candidate
-		atlas.bind(_record)
 		_last_cells.clear()
 		_places_dirty = true
 	snapshot = value
+	if not atlas.last_error.is_empty(): return
 	var cells: Array[Vector3i] = []
 	for address: Dictionary in value.explorers:
 		var cell: Vector3i = atlas.cell_for(address)
@@ -89,3 +93,15 @@ func update_exploration(allow_paused: bool = false) -> void:
 		for place: Dictionary in Source.known_places(player, get_tree(), value):
 			# Own home is known; friends require an actually explored location.
 			if place.get("own", false) or atlas.known(place.get("address", {})): atlas.remember(place)
+
+func _storage_failed(message: String) -> void:
+	problem = message
+	if is_instance_valid(lab):
+		if lab.has_method("map_is_read_only"): lab.read_only = true
+		else: lab._save_read_only = true
+		lab.status.text = message
+	else:
+		# Existing save_started gate protects the last slot and its backup.
+		get_node("/root/SaveGameService")._write_blocked = true
+		if is_instance_valid(player) and player.has_method("show_gameplay_message"):
+			player.show_gameplay_message(message)
