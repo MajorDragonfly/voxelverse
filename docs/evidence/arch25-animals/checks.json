@@ -1,0 +1,79 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "owned_animal_localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.24
+    },
+    {
+      "name": "owned_animal_register_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.321
+    },
+    {
+      "name": "discovery_journal_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.977
+    },
+    {
+      "name": "localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.49
+    },
+    {
+      "name": "domestication_campaign_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 33.764
+    }
+  ],
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "assertions": {
+    "owned_animal_localization_test": 248,
+    "domestication_campaign_test_parent": 50
+  },
+  "render": {
+    "passed": true,
+    "screenshots": [
+      "owned-de-1280x720-100.png",
+      "owned-de-1280x720-150.png",
+      "owned-de-1920x1080-100.png",
+      "owned-de-1920x1080-150.png",
+      "owned-de-800x600-100.png",
+      "owned-de-800x600-150-dead.png",
+      "owned-de-800x600-150-detail.png",
+      "owned-de-800x600-150-empty.png",
+      "owned-de-800x600-150-invalid.png",
+      "owned-de-800x600-150.png",
+      "owned-en-1280x720-100.png",
+      "owned-en-1280x720-150.png",
+      "owned-en-1920x1080-100.png",
+      "owned-en-1920x1080-150.png",
+      "owned-en-800x600-100.png",
+      "owned-en-800x600-150-dead.png",
+      "owned-en-800x600-150-detail.png",
+      "owned-en-800x600-150-empty.png",
+      "owned-en-800x600-150-invalid.png",
+      "owned-en-800x600-150.png"
+    ],
+    "renderer": "gl_compatibility",
+    "scope": "Actual owned-animal journal with real D2 transactions/restart and a copied 127-record collection for bilingual paging/layout"
+  },
+  "static_checks": {
+    "catalog": "280 messages, 2 languages",
+    "python_syntax": true,
+    "git_diff_check": true
+  },
+  "scope": "D2 controller and campaign regression checks plus the actual journal with a copied, validated 127-record D2 fixture. Not a full spherical-game or export/performance acceptance.",
+  "selected_evidence": [
+    "owned-de-1280x720-100.png",
+    "owned-en-1920x1080-100.png",
+    "owned-en-800x600-150.png",
+    "owned-de-800x600-150-detail.png"
+  ]
+}

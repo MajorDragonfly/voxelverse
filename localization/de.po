@@ -705,3 +705,144 @@ msgstr "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spi
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+
+msgid "OWNED_FOLLOW"
+msgstr "Folgen"
+
+msgid "OWNED_WAIT"
+msgstr "Warten"
+
+msgid "OWNED_HOME"
+msgstr "Heimkehr"
+
+msgid "OWNED_NO_ORDER"
+msgstr "Kein aktiver Auftrag"
+
+msgid "OWNED_UNKNOWN"
+msgstr "Nicht bekannt"
+
+msgid "OWNED_UNNAMED_HANDLER"
+msgstr "Betreuer nicht benannt"
+
+msgid "OWNED_WAIT_TARGET"
+msgstr "Ziel: {point}"
+
+msgid "OWNED_HOME_TARGET"
+msgstr "Heimat: {point}"
+
+msgid "OWNED_UNNAMED_ANIMAL"
+msgstr "Unbenanntes Tier · {id}"
+
+msgid "OWNED_UNNAMED_SPECIES"
+msgstr "Name nicht bekannt · {id}"
+
+msgid "OWNED_YOUR_TRIBE"
+msgstr "Dein Stamm"
+
+msgid "OWNED_TRUST_VALUE"
+msgstr "{trust} / 100"
+
+msgid "OWNED_DEAD"
+msgstr "Verstorben"
+
+msgid "OWNED_TAMED"
+msgstr "Gezähmt"
+
+msgid "OWNED_CURRENT_WORLD"
+msgstr "Aktuelle Welt"
+
+msgid "OWNED_SPHERE_POINT"
+msgstr "Breite {latitude}° · Länge {longitude}° · Höhe {height} m"
+
+msgid "OWNED_PLANE_POINT"
+msgstr "X {x} · Y {y} · Z {z} m"
+
+msgid "OWNED_UNAVAILABLE"
+msgstr "Dein Tierbestand ist hier noch nicht verfügbar."
+
+msgid "OWNED_INVALID"
+msgstr "Dieser Tierbestand kann derzeit nicht gelesen werden."
+
+msgid "OWNED_SCOPE_MISMATCH"
+msgstr "Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar."
+
+msgid "OWNED_EMPTY"
+msgstr "Deinem Stamm gehören hier noch keine Tiere. Befreundete Wildtiere und begonnene Zähmungen zählen noch nicht dazu."
+
+msgid "OWNED_NO_MATCHES"
+msgstr "Keine passenden Tiere. Ändere die Suche oder den Filter."
+
+msgid "OWNED_DEAD_NAME"
+msgstr "{name} · verstorben"
+
+msgid "OWNED_OWNER"
+msgstr "Besitzer"
+
+msgid "OWNED_LAST_OWNER"
+msgstr "Letzter Besitzer"
+
+msgid "OWNED_DETAIL"
+msgstr "Art: {species}\n{owner_label}: {owner}\nZustand: {status}\nVertrauen: {trust}"
+
+msgid "OWNED_LOCATION_DETAIL"
+msgstr "{order}\n\nLetzter bekannter Ort:\n{location}"
+
+msgid "OWNED_ID"
+msgstr "Tierkennung: {id}"
+
+msgid "OWNED_ENTRY"
+msgstr "{name}\nArt: {species} · Besitzer: {owner}\nVertrauen: {trust} · Auftrag: {order}\nAufenthalt: {location}"
+
+msgid "OWNED_JOURNAL_SUMMARY"
+msgstr "{species} Arten     ·     {regions} Regionen     ·     {parts} Teile verfügbar     ·     {points} Entdeckungspunkte"
+
+msgid "OWNED_JOURNAL_PAGE"
+msgstr "{count} Einträge · {page} / {pages}"
+
+msgid "Zurück zum Spiel  ·  Esc"
+msgstr "Zurück zum Spiel  ·  Esc"
+
+msgid "Arten"
+msgstr "Arten"
+
+msgid "Körperteile"
+msgstr "Körperteile"
+
+msgid "Regionen"
+msgstr "Regionen"
+
+msgid "Nächste Schritte"
+msgstr "Nächste Schritte"
+
+msgid "Forschungsziele"
+msgstr "Forschungsziele"
+
+msgid "Eigene Tiere"
+msgstr "Eigene Tiere"
+
+msgid "Name oder Fundort suchen …"
+msgstr "Name oder Fundort suchen …"
+
+msgid "Tier, Art oder Auftrag suchen …"
+msgstr "Tier, Art oder Auftrag suchen …"
+
+msgid "Lebende Tiere"
+msgstr "Lebende Tiere"
+
+msgid "Verstorbene Tiere"
+msgstr "Verstorbene Tiere"
+
+msgid "Alle eigenen Tiere"
+msgstr "Alle eigenen Tiere"
+
+msgid "Vorherige Seite"
+msgstr "Vorherige Seite"
+
+msgid "Nächste Seite"
+msgstr "Nächste Seite"
+
+msgid "Kurzen Spielhinweis anzeigen"
+msgstr "Kurzen Spielhinweis anzeigen"
+
+msgid "Entdeckungsbuch · J"
+msgstr "Entdeckungsbuch · J"

@@ -1178,6 +1178,241 @@
       "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "OWNED_FOLLOW",
+      "de": "Folgen",
+      "en": "Follow"
+    },
+    {
+      "key": "OWNED_WAIT",
+      "de": "Warten",
+      "en": "Wait"
+    },
+    {
+      "key": "OWNED_HOME",
+      "de": "Heimkehr",
+      "en": "Return home"
+    },
+    {
+      "key": "OWNED_NO_ORDER",
+      "de": "Kein aktiver Auftrag",
+      "en": "No active command"
+    },
+    {
+      "key": "OWNED_UNKNOWN",
+      "de": "Nicht bekannt",
+      "en": "Unknown"
+    },
+    {
+      "key": "OWNED_UNNAMED_HANDLER",
+      "de": "Betreuer nicht benannt",
+      "en": "Unnamed handler"
+    },
+    {
+      "key": "OWNED_WAIT_TARGET",
+      "de": "Ziel: {point}",
+      "en": "Target: {point}"
+    },
+    {
+      "key": "OWNED_HOME_TARGET",
+      "de": "Heimat: {point}",
+      "en": "Home: {point}"
+    },
+    {
+      "key": "OWNED_UNNAMED_ANIMAL",
+      "de": "Unbenanntes Tier · {id}",
+      "en": "Unnamed animal · {id}"
+    },
+    {
+      "key": "OWNED_UNNAMED_SPECIES",
+      "de": "Name nicht bekannt · {id}",
+      "en": "Unknown name · {id}"
+    },
+    {
+      "key": "OWNED_YOUR_TRIBE",
+      "de": "Dein Stamm",
+      "en": "Your tribe"
+    },
+    {
+      "key": "OWNED_TRUST_VALUE",
+      "de": "{trust} / 100",
+      "en": "{trust} / 100"
+    },
+    {
+      "key": "OWNED_DEAD",
+      "de": "Verstorben",
+      "en": "Deceased"
+    },
+    {
+      "key": "OWNED_TAMED",
+      "de": "Gezähmt",
+      "en": "Tamed"
+    },
+    {
+      "key": "OWNED_CURRENT_WORLD",
+      "de": "Aktuelle Welt",
+      "en": "Current world"
+    },
+    {
+      "key": "OWNED_SPHERE_POINT",
+      "de": "Breite {latitude}° · Länge {longitude}° · Höhe {height} m",
+      "en": "Latitude {latitude}° · Longitude {longitude}° · Height {height} m"
+    },
+    {
+      "key": "OWNED_PLANE_POINT",
+      "de": "X {x} · Y {y} · Z {z} m",
+      "en": "X {x} · Y {y} · Z {z} m"
+    },
+    {
+      "key": "OWNED_UNAVAILABLE",
+      "de": "Dein Tierbestand ist hier noch nicht verfügbar.",
+      "en": "Your animal register is not available here yet."
+    },
+    {
+      "key": "OWNED_INVALID",
+      "de": "Dieser Tierbestand kann derzeit nicht gelesen werden.",
+      "en": "This animal register cannot currently be read."
+    },
+    {
+      "key": "OWNED_SCOPE_MISMATCH",
+      "de": "Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar.",
+      "en": "No animal register is available for your current tribe and this world."
+    },
+    {
+      "key": "OWNED_EMPTY",
+      "de": "Deinem Stamm gehören hier noch keine Tiere. Befreundete Wildtiere und begonnene Zähmungen zählen noch nicht dazu.",
+      "en": "Your tribe does not own any animals here yet. Befriended wildlife and animals still being tamed do not count as owned."
+    },
+    {
+      "key": "OWNED_NO_MATCHES",
+      "de": "Keine passenden Tiere. Ändere die Suche oder den Filter.",
+      "en": "No matching animals. Change the search or filter."
+    },
+    {
+      "key": "OWNED_DEAD_NAME",
+      "de": "{name} · verstorben",
+      "en": "{name} · deceased"
+    },
+    {
+      "key": "OWNED_OWNER",
+      "de": "Besitzer",
+      "en": "Owner"
+    },
+    {
+      "key": "OWNED_LAST_OWNER",
+      "de": "Letzter Besitzer",
+      "en": "Last owner"
+    },
+    {
+      "key": "OWNED_DETAIL",
+      "de": "Art: {species}\n{owner_label}: {owner}\nZustand: {status}\nVertrauen: {trust}",
+      "en": "Species: {species}\n{owner_label}: {owner}\nStatus: {status}\nTrust: {trust}"
+    },
+    {
+      "key": "OWNED_LOCATION_DETAIL",
+      "de": "{order}\n\nLetzter bekannter Ort:\n{location}",
+      "en": "{order}\n\nLast known location:\n{location}"
+    },
+    {
+      "key": "OWNED_ID",
+      "de": "Tierkennung: {id}",
+      "en": "Animal ID: {id}"
+    },
+    {
+      "key": "OWNED_ENTRY",
+      "de": "{name}\nArt: {species} · Besitzer: {owner}\nVertrauen: {trust} · Auftrag: {order}\nAufenthalt: {location}",
+      "en": "{name}\nSpecies: {species} · Owner: {owner}\nTrust: {trust} · Command: {order}\nLocation: {location}"
+    },
+    {
+      "key": "OWNED_JOURNAL_SUMMARY",
+      "de": "{species} Arten     ·     {regions} Regionen     ·     {parts} Teile verfügbar     ·     {points} Entdeckungspunkte",
+      "en": "{species} species     ·     {regions} regions     ·     {parts} parts available     ·     {points} discovery points"
+    },
+    {
+      "key": "OWNED_JOURNAL_PAGE",
+      "de": "{count} Einträge · {page} / {pages}",
+      "en": "{count} entries · {page} / {pages}"
+    },
+    {
+      "key": "Zurück zum Spiel  ·  Esc",
+      "de": "Zurück zum Spiel  ·  Esc",
+      "en": "Back to game  ·  Esc"
+    },
+    {
+      "key": "Arten",
+      "de": "Arten",
+      "en": "Species"
+    },
+    {
+      "key": "Körperteile",
+      "de": "Körperteile",
+      "en": "Body parts"
+    },
+    {
+      "key": "Regionen",
+      "de": "Regionen",
+      "en": "Regions"
+    },
+    {
+      "key": "Nächste Schritte",
+      "de": "Nächste Schritte",
+      "en": "Next steps"
+    },
+    {
+      "key": "Forschungsziele",
+      "de": "Forschungsziele",
+      "en": "Research goals"
+    },
+    {
+      "key": "Eigene Tiere",
+      "de": "Eigene Tiere",
+      "en": "Owned animals"
+    },
+    {
+      "key": "Name oder Fundort suchen …",
+      "de": "Name oder Fundort suchen …",
+      "en": "Search name or location …"
+    },
+    {
+      "key": "Tier, Art oder Auftrag suchen …",
+      "de": "Tier, Art oder Auftrag suchen …",
+      "en": "Search animal, species or command …"
+    },
+    {
+      "key": "Lebende Tiere",
+      "de": "Lebende Tiere",
+      "en": "Living animals"
+    },
+    {
+      "key": "Verstorbene Tiere",
+      "de": "Verstorbene Tiere",
+      "en": "Deceased animals"
+    },
+    {
+      "key": "Alle eigenen Tiere",
+      "de": "Alle eigenen Tiere",
+      "en": "All owned animals"
+    },
+    {
+      "key": "Vorherige Seite",
+      "de": "Vorherige Seite",
+      "en": "Previous page"
+    },
+    {
+      "key": "Nächste Seite",
+      "de": "Nächste Seite",
+      "en": "Next page"
+    },
+    {
+      "key": "Kurzen Spielhinweis anzeigen",
+      "de": "Kurzen Spielhinweis anzeigen",
+      "en": "Show brief gameplay hint"
+    },
+    {
+      "key": "Entdeckungsbuch · J",
+      "de": "Entdeckungsbuch · J",
+      "en": "Discovery journal · J"
     }
   ]
 }

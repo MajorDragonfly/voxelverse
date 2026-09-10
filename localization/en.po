@@ -705,3 +705,144 @@ msgstr "Continue the adventure on a spherical planet. Your previous save is pres
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "OWNED_FOLLOW"
+msgstr "Follow"
+
+msgid "OWNED_WAIT"
+msgstr "Wait"
+
+msgid "OWNED_HOME"
+msgstr "Return home"
+
+msgid "OWNED_NO_ORDER"
+msgstr "No active command"
+
+msgid "OWNED_UNKNOWN"
+msgstr "Unknown"
+
+msgid "OWNED_UNNAMED_HANDLER"
+msgstr "Unnamed handler"
+
+msgid "OWNED_WAIT_TARGET"
+msgstr "Target: {point}"
+
+msgid "OWNED_HOME_TARGET"
+msgstr "Home: {point}"
+
+msgid "OWNED_UNNAMED_ANIMAL"
+msgstr "Unnamed animal · {id}"
+
+msgid "OWNED_UNNAMED_SPECIES"
+msgstr "Unknown name · {id}"
+
+msgid "OWNED_YOUR_TRIBE"
+msgstr "Your tribe"
+
+msgid "OWNED_TRUST_VALUE"
+msgstr "{trust} / 100"
+
+msgid "OWNED_DEAD"
+msgstr "Deceased"
+
+msgid "OWNED_TAMED"
+msgstr "Tamed"
+
+msgid "OWNED_CURRENT_WORLD"
+msgstr "Current world"
+
+msgid "OWNED_SPHERE_POINT"
+msgstr "Latitude {latitude}° · Longitude {longitude}° · Height {height} m"
+
+msgid "OWNED_PLANE_POINT"
+msgstr "X {x} · Y {y} · Z {z} m"
+
+msgid "OWNED_UNAVAILABLE"
+msgstr "Your animal register is not available here yet."
+
+msgid "OWNED_INVALID"
+msgstr "This animal register cannot currently be read."
+
+msgid "OWNED_SCOPE_MISMATCH"
+msgstr "No animal register is available for your current tribe and this world."
+
+msgid "OWNED_EMPTY"
+msgstr "Your tribe does not own any animals here yet. Befriended wildlife and animals still being tamed do not count as owned."
+
+msgid "OWNED_NO_MATCHES"
+msgstr "No matching animals. Change the search or filter."
+
+msgid "OWNED_DEAD_NAME"
+msgstr "{name} · deceased"
+
+msgid "OWNED_OWNER"
+msgstr "Owner"
+
+msgid "OWNED_LAST_OWNER"
+msgstr "Last owner"
+
+msgid "OWNED_DETAIL"
+msgstr "Species: {species}\n{owner_label}: {owner}\nStatus: {status}\nTrust: {trust}"
+
+msgid "OWNED_LOCATION_DETAIL"
+msgstr "{order}\n\nLast known location:\n{location}"
+
+msgid "OWNED_ID"
+msgstr "Animal ID: {id}"
+
+msgid "OWNED_ENTRY"
+msgstr "{name}\nSpecies: {species} · Owner: {owner}\nTrust: {trust} · Command: {order}\nLocation: {location}"
+
+msgid "OWNED_JOURNAL_SUMMARY"
+msgstr "{species} species     ·     {regions} regions     ·     {parts} parts available     ·     {points} discovery points"
+
+msgid "OWNED_JOURNAL_PAGE"
+msgstr "{count} entries · {page} / {pages}"
+
+msgid "Zurück zum Spiel  ·  Esc"
+msgstr "Back to game  ·  Esc"
+
+msgid "Arten"
+msgstr "Species"
+
+msgid "Körperteile"
+msgstr "Body parts"
+
+msgid "Regionen"
+msgstr "Regions"
+
+msgid "Nächste Schritte"
+msgstr "Next steps"
+
+msgid "Forschungsziele"
+msgstr "Research goals"
+
+msgid "Eigene Tiere"
+msgstr "Owned animals"
+
+msgid "Name oder Fundort suchen …"
+msgstr "Search name or location …"
+
+msgid "Tier, Art oder Auftrag suchen …"
+msgstr "Search animal, species or command …"
+
+msgid "Lebende Tiere"
+msgstr "Living animals"
+
+msgid "Verstorbene Tiere"
+msgstr "Deceased animals"
+
+msgid "Alle eigenen Tiere"
+msgstr "All owned animals"
+
+msgid "Vorherige Seite"
+msgstr "Previous page"
+
+msgid "Nächste Seite"
+msgstr "Next page"
+
+msgid "Kurzen Spielhinweis anzeigen"
+msgstr "Show brief gameplay hint"
+
+msgid "Entdeckungsbuch · J"
+msgstr "Discovery journal · J"
