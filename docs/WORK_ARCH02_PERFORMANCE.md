@@ -18,13 +18,13 @@ Godot 4.6.3 und einmal importierte Projektquellen werden vorausgesetzt. `--outpu
 
 ```bash
 # Kurzer Test der Instrumentierung und zweier echter Spielbesuche:
-python tools/profile_performance.py --godot /pfad/zu/godot --walk-seconds 12 --cycles 2 --output ../arch02-kurz
+python tools/profile_performance.py --godot /pfad/zu/godot --walk-seconds 6 --cycles 2 --output ../arch02-kurz
 
 # Zehn Minuten Hinweg mit Richtungswechseln plus Rückkehr, anschließend Wiederbesuch:
 python tools/profile_performance.py --godot /pfad/zu/godot --renderer forward_plus --size 1920 1080 --walk-seconds 600 --cycles 2 --output ../arch02-zielpc
 
 # Derselbe eingefrorene Ausgangsstand in einem frischen isolierten Prozess:
-python tools/profile_performance.py --godot /pfad/zu/godot --replay ../arch02-kurz --seed 15838 --walk-seconds 12 --cycles 2 --output ../arch02-wiederholung
+python tools/profile_performance.py --godot /pfad/zu/godot --replay ../arch02-kurz --seed 15838 --walk-seconds 6 --cycles 2 --output ../arch02-wiederholung
 
 # 1/10/100 Körper × insgesamt 0/10/1000 geänderte Regionen:
 python tools/profile_performance.py --godot /pfad/zu/godot --mode saves --output ../arch02-speichern
