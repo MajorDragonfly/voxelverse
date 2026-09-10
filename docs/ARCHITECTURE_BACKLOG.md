@@ -37,6 +37,7 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-01 – Datenbesitzer und Modulvertrag erfassen
 
+- **Reserviert am 10. September 2026:** `feature/arch-01-module-contracts`, Basis `ea900f2e09946660694a9e59399b4680a5655a85`; Status **in Arbeit**. Umfang: Codeinventar und Anschlussdokumentation. ARCH-02/05/20/23/25/29 laufen in anderen Chats.
 - **Zuordnung:** M0, M1e. **Vorher:** aktueller gemeinsamer Commit. **Bereich:** `core/campaign`, Speicher-/Fachverträge; zunächst Dokumentation.
 - [ ] Kampagne, Körper, Regionen, Entwürfe, Heimat, D1, D2, Dorf, Nachbarn, Karte und Fortschritt mit genau einem autoritativen Besitzer erfassen.
 - [ ] Pro Modul ID, Schema, Lesezugriff, Befehle, Validator/Migration, Speicherteilnahme, Lebenszyklus und benötigte atomare Verbuchungen dokumentieren.
