@@ -32,7 +32,7 @@ func _run() -> void:
 		if not atlas.reveal(_address(body.id, i), 0):
 			_expect(false, "Exploration stopped at tile %d: %s" % [i, atlas.last_error])
 			break
-	_expect(atlas.data.schema == Atlas.SCHEMA and not atlas.full, "Old exploration ceiling is still a gameplay limit.")
+	_expect(atlas.data.schema == Atlas.TILE_SCHEMA and not atlas.full, "Old exploration ceiling is still a gameplay limit.")
 	_expect(atlas.data.tiles.size() <= Atlas.PENDING_LIMIT and atlas.store.cache.size() <= Store.CACHE_LIMIT and atlas.store.pages.size() <= Store.PAGE_LIMIT, "Atlas exceeded resident tile/page budgets.")
 	_expect(atlas.known(_address(body.id, 0)) and atlas.known(_address(body.id, COUNT - 1)), "Eviction forgot early or latest ground.")
 	var reads: int = atlas.store.reads
@@ -84,7 +84,7 @@ func _migration() -> void:
 	var atlas := Atlas.new()
 	_expect(atlas.bind(source), "Full legacy atlas cannot migrate: " + atlas.last_error)
 	_expect(legacy.schema == 1 and legacy.tiles.size() == Atlas.MAX_TILES, "Migration mutated its source copy.")
-	_expect(source.schema == Atlas.SCHEMA and source.tiles.is_empty() and JSON.stringify(source.places) == JSON.stringify(legacy.places), "Migration lost inline data or places.")
+	_expect(source.schema == Atlas.TILE_SCHEMA and source.tiles.is_empty() and JSON.stringify(source.places) == JSON.stringify(legacy.places), "Migration lost inline data or places.")
 	for i in [0, 4096, Atlas.MAX_TILES - 1]:
 		for column in [0, 31]:
 			_expect(atlas.known(Surface.plane_address("legacy", Vector3((-i * 32 + column + 0.5) * 16, 0, -8))), "Migration lost signed coordinates or high bits.")
@@ -111,7 +111,7 @@ func _corruption() -> void:
 	var writer := Store.new()
 	writer.put("-1:0:0", {"schema": 1, "body_id": "wrong-body", "mode": "legacy_plane_v9", "divisions": 0, "rows": []})
 	var record: Dictionary = Atlas.create("corrupt", "legacy_plane_v9")
-	record.merge({"schema": Atlas.SCHEMA, "storage": writer.checkpoint(), "extent": [8, 8, 8, 8]}, true)
+	record.merge({"schema": Atlas.TILE_SCHEMA, "storage": writer.checkpoint(), "extent": [8, 8, 8, 8]}, true)
 	var atlas := Atlas.new()
 	_expect(atlas.bind(record), "Tile validation was not lazy.")
 	_expect(not atlas.known(_address("corrupt", 0)) and not atlas.last_error.is_empty() and not atlas.checkpoint(), "Malformed tile was silently treated as unexplored.")

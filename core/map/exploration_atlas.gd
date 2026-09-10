@@ -4,7 +4,9 @@ extends RefCounted
 const MapProjection = preload("res://core/map/surface_map_projection.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Store = preload("res://core/persistence/region_store.gd")
-const SCHEMA: int = 2
+const Places = preload("res://core/map/atlas_place_store.gd")
+const SCHEMA: int = 3
+const TILE_SCHEMA: int = 2
 const INLINE_SCHEMA: int = 1
 const CELL_M: float = 16.0
 const TILE: int = 32
@@ -16,6 +18,7 @@ var revision: int = 0
 var full: bool = false
 var last_error: String = ""
 var store := Store.new()
+var places := Places.new()
 signal storage_failed(message: String)
 
 static func create(body_id: String, mode: String, radius: float = 0.0) -> Dictionary:
@@ -31,15 +34,19 @@ func bind(record: Dictionary, directory: String = Store.DIRECTORY) -> bool:
 	full = false
 	store = Store.new()
 	store.directory = directory
+	places = Places.new()
+	places.failed.connect(_fail)
 	var problem: String = validate(record, str(record.get("body_id", "")), directory)
 	if not problem.is_empty(): return _fail(problem)
-	if record.schema == SCHEMA and not store.open(record.storage): return _fail(store.last_error)
+	if record.schema >= TILE_SCHEMA and not store.open(record.storage): return _fail(store.last_error)
 	data = record
+	if not places.bind(data, directory, _valid_place.bind(data.body_id, data.mode)): return false
 	# JSON numbers reload as floats. Canonical integer rows keep bit masks and
 	# equality stable across saving and fresh processes.
 	for rows: Array in data.tiles.values():
 		for index in range(TILE): rows[index] = int(rows[index])
 	if data.tiles.size() > PENDING_LIMIT and not checkpoint(): return false
+	if data.schema < SCHEMA and data.places.size() > Places.PENDING_LIMIT and not _page_places(): return false
 	revision += 1
 	return true
 
@@ -99,7 +106,7 @@ func _mark(cell: Vector3i) -> bool:
 		if rows.is_empty(): rows.resize(TILE); rows.fill(0)
 		data.tiles[key] = rows
 	data.tiles[key][row] = after
-	if data.schema == SCHEMA: _include_cell(data.extent, cell)
+	if data.schema >= TILE_SCHEMA: _include_cell(data.extent, cell)
 	return true
 
 func _rows(key: String) -> Array:
@@ -130,7 +137,7 @@ func _spill(limit: int) -> bool:
 				"divisions": data.divisions, "rows": data.tiles[key].duplicate()}): return _fail(store.last_error)
 	var manifest: Dictionary = store.checkpoint()
 	if manifest.is_empty(): return _fail(store.last_error)
-	data.schema = SCHEMA
+	data.schema = maxi(int(data.schema), TILE_SCHEMA)
 	data.storage = manifest
 	data.extent = extent
 	for key: String in keys: data.tiles.erase(key)
@@ -140,7 +147,7 @@ func explored_extent() -> Array:
 	# Global plane coordinates or canonical longitude/latitude arc lengths.
 	# A fixed-size extent lets "Erkundetes" fit even evicted tiles without I/O.
 	if data.is_empty(): return []
-	if data.schema == SCHEMA: return data.extent.duplicate()
+	if data.schema >= TILE_SCHEMA: return data.extent.duplicate()
 	var extent: Array = []
 	for key: String in data.tiles:
 		var parts: PackedStringArray = key.split(":")
@@ -174,13 +181,38 @@ func _fail(message: String) -> bool:
 	return false
 
 func remember(place: Dictionary) -> bool:
-	if not last_error.is_empty(): return false
+	if data.is_empty() or not last_error.is_empty(): return false
 	if not _valid_place(place, data.body_id, data.mode): return false
-	if not data.places.has(place.id) and data.places.size() >= MAX_PLACES: full = true; return false
-	if data.places.get(place.id) == place: return false
-	data.places[place.id] = place.duplicate(true)
+	if data.schema < SCHEMA:
+		if data.places.get(place.id) == place: return false
+		if not data.places.has(place.id) and data.places.size() >= Places.PENDING_LIMIT:
+			if not _page_places(): return false
+	if data.schema == SCHEMA:
+		if not places.remember(place): return false
+	else: data.places[place.id] = place.duplicate(true)
 	revision += 1
 	return true
+
+func _page_places() -> bool:
+	var extent: Array = explored_extent()
+	if not places.migrate(): return false
+	# Schema 3 always carries the existing tile contract, even if its root is
+	# still empty and every explored tile is in the save-safe overlay.
+	if data.schema == INLINE_SCHEMA:
+		data.storage = store.manifest()
+		data.extent = extent
+	data.schema = SCHEMA
+	return true
+
+func get_place(id: String) -> Dictionary:
+	return {} if data.is_empty() or not last_error.is_empty() else places.get_place(id)
+
+func place_page(offset: int = 0, limit: int = Places.PAGE_SIZE) -> Dictionary:
+	return {} if data.is_empty() or not last_error.is_empty() else places.page(offset, limit)
+
+func checkpoint_places() -> bool:
+	if not last_error.is_empty(): return false
+	return places.spill() if data.get("schema") == SCHEMA else true
 
 static func _key(cell: Vector3i) -> String:
 	return "%d:%d:%d" % [cell.x, floori(float(cell.y) / TILE), floori(float(cell.z) / TILE)]
@@ -188,29 +220,35 @@ static func _key(cell: Vector3i) -> String:
 static func newer(value: Variant) -> bool:
 	if not value is Dictionary: return false
 	if _number(value.get("schema")) and float(value.schema) > SCHEMA: return true
-	if value.get("schema") == SCHEMA and value.get("storage") is Dictionary:
-		var probe := Store.new()
-		probe.open(value.storage)
-		return probe.unsupported
+	if value.get("schema") == TILE_SCHEMA or value.get("schema") == SCHEMA:
+		for field in ["storage", "place_storage"]:
+			if not value.get(field) is Dictionary: continue
+			var probe := Store.new()
+			probe.open(value[field])
+			if probe.unsupported: return true
 	return false
 
 static func validate(record: Variant, body_id: String, directory: String = Store.DIRECTORY) -> String:
 	# JSON decodes numbers as floats; Array membership compares Variant types.
-	if not record is Dictionary or (record.get("schema") != INLINE_SCHEMA and record.get("schema") != SCHEMA): return "Nicht unterstützte Version der Erkundungskarte."
+	if not record is Dictionary or (record.get("schema") != INLINE_SCHEMA and record.get("schema") != TILE_SCHEMA and record.get("schema") != SCHEMA): return "Nicht unterstützte Version der Erkundungskarte."
 	if record.get("body_id") != body_id or body_id.is_empty() or record.get("mode") not in ["legacy_plane_v9", Cube.MODE]: return "Karte und Himmelskörper passen nicht zusammen."
 	if not _number(record.get("radius")) or float(record.radius) < 0 or float(record.radius) > 1.0e10: return "Ungültiger Kartenradius."
 	if record.mode == Cube.MODE and float(record.radius) <= 0: return "Kugelkarte ohne Radius."
 	if record.mode == "legacy_plane_v9" and float(record.radius) != 0: return "Ungültiger Radius einer Flächenkarte."
 	if record.get("divisions") != create(body_id, record.mode, float(record.radius)).divisions: return "Ungültige Kartenauflösung."
 	var limit: int = MAX_TILES if record.schema == INLINE_SCHEMA else PENDING_LIMIT
-	if not record.get("tiles") is Dictionary or record.tiles.size() > limit or not record.get("places") is Dictionary or record.places.size() > MAX_PLACES: return "Ungültige Kartensammlung."
-	if record.schema == SCHEMA:
+	var place_limit: int = Places.PENDING_LIMIT if record.schema == SCHEMA else MAX_PLACES
+	if not record.get("tiles") is Dictionary or record.tiles.size() > limit or not record.get("places") is Dictionary or record.places.size() > place_limit: return "Ungültige Kartensammlung."
+	if record.schema >= TILE_SCHEMA:
 		var storage_problem: String = Store.manifest_problem(record.get("storage"))
 		if not storage_problem.is_empty(): return storage_problem
 		if not _valid_extent(record.get("extent")): return "Ungültige Kartenausdehnung."
 		var probe := Store.new()
 		probe.directory = directory
 		if not probe.open(record.storage): return probe.last_error
+	if record.schema == SCHEMA:
+		var problem: String = Places.validate(record, directory)
+		if not problem.is_empty(): return problem
 	for key in record.tiles:
 		if not key is String or key.length() > 72: return "Ungültige Kartenkachel."
 		var parts: PackedStringArray = key.split(":")

@@ -5,6 +5,9 @@ Stand: 10. September 2026. Branch `feature/arch-14-atlas-paging`, Basis
 Dieses Teilpaket liefert das Paging der Erkundungskacheln und das Inventar der
 übrigen Registergrenzen. ARCH-14 insgesamt bleibt offen.
 
+Fortsetzung: [PR #65 / dauerhaftes Ortsregister](WORK_ARCH14_PLACE_REGISTER.md)
+ergänzt Schema 3 und ersetzt die unten noch für PR #59 beschriebene Ortsgrenze.
+
 ## Ergebnis und Speichervertrag
 
 Die bisherige Grenze von 8.192 Kacheln beendet keine Erkundung mehr. Kleine Karten

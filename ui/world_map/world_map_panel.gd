@@ -19,6 +19,12 @@ var projection := ProjectionModel.new()
 var terrain := Raster.new(128)
 var range_m: float = 192.0
 var _places: Array[Dictionary] = []
+var _place_offset: int = 0
+var _place_total: int = 0
+var _place_pager: HBoxContainer
+var _place_previous: Button
+var _place_next: Button
+var _place_page_label: Label
 var _show_own: bool = true
 var _show_friends: bool = true
 var _selected: String = ""
@@ -134,6 +140,14 @@ func _build() -> void:
 	_list = VBoxContainer.new()
 	_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_scroll.add_child(_list)
+	_place_pager = HBoxContainer.new()
+	_sidebar.add_child(_place_pager)
+	_place_previous = _button(_place_pager, "←", func() -> void: _turn_place_page(-1), "AtlasPlacesPrevious")
+	_place_page_label = Style.label(_place_pager, "", 18)
+	_place_page_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_place_page_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_place_next = _button(_place_pager, "→", func() -> void: _turn_place_page(1), "AtlasPlacesNext")
+	_place_pager.hide()
 	var legend := HFlowContainer.new()
 	legend.add_theme_constant_override("h_separation", 16)
 	_sidebar.add_child(legend)
@@ -180,6 +194,7 @@ func open_map() -> bool:
 	show()
 	_show_list = false
 	_selected = ""
+	_place_offset = 0
 	range_m = Profile.for_phase(int(data.phase)).radius_m * 3.0
 	terrain.reset()
 	_request_delay = 0
@@ -261,7 +276,6 @@ func _request() -> void:
 	_refresh_canvas_places()
 	var sphere: bool = projection.local.mode == Cube.MODE
 	_scale_label.text = ("Breite am Äquator: " if sphere else "Kartenbreite: ") + Profile.distance_text(range_m * 2.0).replace(".", ",")
-	if tracker.atlas.full: _detail.text = "Die Liste bekannter Orte ist voll (2.048). Neue Landschaften werden weiter erkundet."
 
 func zoom(direction: int, screen_point: Vector2 = Vector2(INF, INF)) -> void:
 	if not is_open: return
@@ -302,7 +316,15 @@ func fit_explored() -> void:
 	_layout()
 
 func _refresh_places() -> void:
-	_places = Source.visible_places(tracker.atlas.data, get_tree())
+	var page: Dictionary = Source.visible_place_page(tracker.atlas, get_tree(), _place_offset)
+	_places.clear()
+	_place_total = int(page.get("total", 0))
+	if not page.is_empty(): _places.assign(page.places)
+	var page_size: int = tracker.atlas.Places.PAGE_SIZE
+	_place_pager.visible = _place_total > page_size
+	_place_previous.disabled = _place_offset <= 0
+	_place_next.disabled = _place_offset + page_size >= _place_total
+	_place_page_label.text = "%d / %d" % [floori(float(_place_offset) / page_size) + 1, maxi(1, ceili(float(_place_total) / page_size))]
 	for child in _list.get_children(): _list.remove_child(child); child.queue_free()
 	var shown: int = 0
 	for place: Dictionary in _places:
@@ -316,6 +338,14 @@ func _refresh_places() -> void:
 		button.tooltip_text = place.name
 	if shown == 0: Style.paragraph(_list, "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen.", 18)
 	_refresh_canvas_places()
+
+func _turn_place_page(direction: int) -> void:
+	var page_size: int = tracker.atlas.Places.PAGE_SIZE
+	var last: int = maxi(0, floori(float(_place_total - 1) / page_size) * page_size)
+	_place_offset = clampi(_place_offset + direction * page_size, 0, last)
+	_scroll.scroll_vertical = 0
+	_refresh_places()
+	_layout()
 
 func _place_visible(place: Dictionary) -> bool:
 	return _show_own if place.own else _show_friends
@@ -353,8 +383,6 @@ func _layout() -> void:
 	_panel.theme.default_font_size = roundi(20 * _font_scale)
 	_canvas.ui_scale = _font_scale
 	_scale_contents(_panel)
-	_panel.size = Vector2(minf(pixels.x * 0.94, 1600), pixels.y * 0.92)
-	_panel.position = (pixels - _panel.size) * 0.5
 	_small = pixels.x < 1100 or _font_scale >= 1.5
 	_sidebar.visible = not _small or _show_list
 	_canvas.visible = not _small or not _show_list
@@ -362,7 +390,13 @@ func _layout() -> void:
 	_sidebar.custom_minimum_size.x = 0 if _small else 280
 	_places_toggle.visible = _small
 	_places_toggle.text = "Zur Karte" if _show_list else "Orte"
-	_help.visible = pixels.y >= 720
+	var compact_places: bool = _small and _show_list and _place_pager.visible
+	_scroll.custom_minimum_size.y = 44 * _font_scale if compact_places else 0.0
+	_scale_label.visible = not compact_places
+	_detail.visible = not compact_places
+	_help.visible = pixels.y >= 720 and not compact_places
+	_panel.size = Vector2(minf(pixels.x * 0.94, 1600), pixels.y * 0.92)
+	_panel.position = (pixels - _panel.size) * 0.5
 
 func _scale_contents(node: Node) -> void:
 	if node is Label:
