@@ -62,6 +62,8 @@ Die Lastspitze wird auf kleinere Arbeitsschritte verteilt; Gesamtaufwand und Fer
 
 ## Verbleibende Grenzen / Integration
 
+**Fortsetzung am 10. September:** Wasser-/Audioanschluss, begrenzte Ufersuche und gemeinsame Unterwassergrenzen sind inzwischen in [WORK_ARCH17_WATER_AUDIO.md](WORK_ARCH17_WATER_AUDIO.md) geliefert. Die folgende ursprüngliche Restliste wird dadurch um diesen Anschluss reduziert.
+
 Dieses Paket schließt **ARCH-17 nicht insgesamt**. Wasser/Audio, geschwindigkeitsabhängige Terrainvorausschau, synchrone Regions-/Habitatprüfungen, portionierter individueller Kreaturenmeshaufbau und lange Ziel-PC-Routen bleiben offen. ARCH-02/05 können unabhängig fertiggestellt werden; dieses Paket setzt keine ihrer unveröffentlichten Änderungen voraus. Die gemeinsame Abnahme muss deren Oberflächenvertrag und Messinstrumentierung anschließend erneut mitprüfen.
 
 Es gibt keine Erhöhung von Objekt-, Bewegungs- oder Speichergrenzen. Keine neuen Saveversionen und keine Migration. ARCH-13/14 bleiben zuständig für dauerhaften Regionsbestand. Die Integration übernimmt nur dieses fertige Teilpaket; ein grüner Fachtest ist keine vollständige M1i- oder Windows-/Ziel-PC-Abnahme.

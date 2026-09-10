@@ -1,5 +1,6 @@
 extends Node
 class_name UnderwaterView
+const Immersion = preload("res://world/surface/water_immersion.gd")
 
 ## Camera-owned water atmosphere. Sampling follows the eye, including an
 ## elevated lake or a rebased sphere; swimming/body immersion is independent.
@@ -31,7 +32,7 @@ func update_view() -> void:
 	var water: Dictionary = sample_water.call(camera.global_position)
 	depth = float(water.get("depth", -1.0))
 	# Hysteresis lies below the waterline: an eye above water always sees air.
-	var wet: bool = bool(water.get("water", false)) and depth > (0.005 if submerged else 0.04)
+	var wet: bool = Immersion.submerged(bool(water.get("water", false)), depth, submerged)
 	if not wet:
 		_restore()
 		return

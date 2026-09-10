@@ -172,12 +172,12 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-17 – Streamingaufträge, Gewässer und Audio begrenzen
 
-**Teilpaket 10. September 2026:** Pflanzenpublikation, Jobgültigkeit und begrenzte Tierplatzierungsversuche auf `agent/arch-17-fauna-budget`; Umfang, Messwerte und Nachweise in [WORK_ARCH17_POPULATION_BUDGET.md](WORK_ARCH17_POPULATION_BUDGET.md). Wasser/Audio, Terrainvorausschau und Ziel-PC-Abnahme bleiben offen.
+**Teilpaket 10. September 2026:** Pflanzenpublikation, Jobgültigkeit und begrenzte Tierplatzierungsversuche auf `agent/arch-17-fauna-budget`; Umfang, Messwerte und Nachweise in [WORK_ARCH17_POPULATION_BUDGET.md](WORK_ARCH17_POPULATION_BUDGET.md). Der anschließende [Wasser-/Audioteil](WORK_ARCH17_WATER_AUDIO.md) liefert begrenzte Uferabfragen und gemeinsame Unterwassergrenzen. Terrainvorausschau und Ziel-PC-Abnahme bleiben offen.
 
 - **Zuordnung:** M1h. **Vorher:** ARCH-02/05; Integration mit M1f/g. **Bereich:** Terrain-/Populationjobs, Wasser, Audio.
 - [ ] Gemessene teure Einzelpublikationen aufteilen; Queues, laufende Jobs, Meshes und Pflanzen-/Tieraufbau getrennt begrenzen. Ein weiches 4-ms-Limit ist keine Garantie für einen einzelnen Upload.
 - [ ] Jobs mit Körper-/Regions-/Laufzeitgeneration versehen; veraltete Ergebnisse nach Richtungs-/Körperwechsel verwerfen, ohne fremden Zustand zu verändern.
-- [ ] Wasser/Unterwasser und räumliches Audio an dieselbe Oberflächenquelle/Normale anschließen; keine aktive planare Umgebungsabtastung für den Kugelspieler.
+- [x] Wasser/Unterwasser und räumliches Audio an dieselbe Oberflächenquelle/Normale anschließen; keine aktive planare Umgebungsabtastung für den Kugelspieler. Quellenwechsel, Pause, Ursprung und Abfragegrenzen durch den Wasser-/Audio-Fachtest nachgewiesen; Ziel-PC-Hör-/Sichtprüfung bleibt separat.
 - [ ] Vorausschau an zugelassene Bewegungsgeschwindigkeit binden. Bei fehlender Kollision sicher warten; Fahrzeug-/Fluggeschwindigkeit erst nach eigener Messroute erhöhen.
 - **Fertig:** Lange Reise, Richtungswechsel, Pause und Verlassen während laufender Jobs halten die Budgets ein; keine fremden Sounds, veralteten Meshes oder verbleibenden Worker. Ziel-PC-Messung bleibt eigener Nachweis.
 

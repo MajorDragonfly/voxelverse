@@ -1,7 +1,11 @@
 extends Node
 const Space = preload("res://world/surface/gameplay_space.gd")
+const ShoreSearch = preload("res://audio/runtime/shore_search.gd")
+const Immersion = preload("res://world/surface/water_immersion.gd")
 ## Read-only adapter for the existing player and generator. No movement changes.
-## Future local-planet/hydrology code can supply sample_provider(position).
+## The spherical campaign supplies Water.audio_sample; explicit diagnostic
+## scenes may supply sample_provider(position). A radial listener never falls
+## through to planar sampling when its surface or water port is missing.
 
 var sample_provider: Callable
 var automatic_tracking := true
@@ -23,6 +27,16 @@ var _shore_gain := 0.0
 var _shore_target := 0.0
 var _underwater := false
 var _audio: Node
+var _shore_job: RefCounted
+var _source_generation: int = 0
+var _bound_scope: Array = []
+var _on_surface: bool = true
+var last_sample_queries: int = 0
+var peak_sample_queries: int = 0
+var last_shore_queries: int = 0
+var completed_shore_searches: int = 0
+var cancelled_shore_searches: int = 0
+var max_environment_step_ms: float = 0.0
 
 
 func _ready() -> void:
@@ -63,6 +77,9 @@ func _world_changed(_seed: int) -> void:
 
 
 func reset_tracking() -> void:
+	_source_generation += 1
+	_cancel_shore_search()
+	_bound_scope.clear()
 	_player = null
 	_distance = 0.0
 	_sample_clock = 0.0
@@ -80,23 +97,34 @@ func reset_tracking() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	last_sample_queries = 0
+	last_shore_queries = 0
+	var started: int = Time.get_ticks_usec()
+	_track_world(delta)
+	peak_sample_queries = maxi(peak_sample_queries, last_sample_queries)
+	max_environment_step_ms = maxf(max_environment_step_ms, (Time.get_ticks_usec() - started) / 1000.0)
+
+
+func _track_world(delta: float) -> void:
 	if not automatic_tracking:
 		return
 	# Scene changes detach the old player before freeing it. A valid cached
 	# reference cannot be used for transforms or physics in that interval.
-	if is_instance_valid(_player) and (not _player.is_inside_tree() or _player.is_queued_for_deletion()):
+	if is_instance_valid(_player) and (not _player.is_inside_tree() or _player.is_queued_for_deletion() or not _in_current_scene(_player)):
 		reset_tracking()
 		return
+	if is_instance_valid(_player) and _bound_scope != _source_scope():
+		_audio.stop_world()
+		reset_tracking()
 	if not is_instance_valid(_player):
 		_bind_clock -= delta
 		if _bind_clock > 0.0:
 			return
 		_bind_clock = 0.25
-		var candidate := get_tree().get_first_node_in_group(&"player") as CharacterBody3D
-		# The current automatic sampler interprets XYZ as planar coordinates.
-		# Radial campaigns must supply their hydrology/audio adapter (M1h);
-		# never sample an unrelated plane at the floating origin.
-		if candidate != null and candidate.get_meta("surface_mode", "legacy_plane_v9") != "legacy_plane_v9" and Space.adapter(self) == null and not sample_provider.is_valid():
+		var candidate: CharacterBody3D = _find_player()
+		# A radial listener needs its own surface or an explicit local port;
+		# missing capabilities must never enable the legacy planar sampler.
+		if candidate != null and candidate.get_meta("surface_mode", "legacy_plane_v9") != "legacy_plane_v9" and Space.adapter(self) == null and not _has_sample_provider():
 			reset_tracking()
 			_bind_clock = 0.5
 			return
@@ -105,8 +133,10 @@ func _physics_process(delta: float) -> void:
 			_bind_clock = 0.25
 			return
 		_player = candidate
+		_bound_scope = _source_scope()
 		_reset_motion()
 		_update_environment()
+		_sample_clock = 0.35
 	var position := _player.global_position
 	var up := _player.up_direction.normalized()
 	var motion := position - _last_position
@@ -116,13 +146,18 @@ func _physics_process(delta: float) -> void:
 	# Teleport/respawn and long stalls must not synthesize a burst of steps.
 	if motion.length() > maxf(5.0, _player.velocity.length() * delta * 3.0) or delta > 0.2:
 		_audio.stop_world()
+		_source_generation += 1
+		_cancel_shore_search()
+		_shore_target = 0.0
 		_reset_motion()
 		_update_environment()
+		_sample_clock = 0.35
 		return
 	_sample_clock -= delta
 	if _sample_clock <= 0.0:
 		_sample_clock = 0.35
 		_update_environment()
+	_step_shore_search()
 	_settle = maxf(0.0, _settle - delta)
 	var wet := bool(_sample.get("water_present", false)) and _depth(_sample, position) > 0.04
 	var depth := _depth(_sample, position) if wet else 0.0
@@ -187,10 +222,14 @@ static func surface_for_biome(biome: String) -> String:
 
 
 func sample_at(position: Vector3) -> Dictionary:
-	if sample_provider.is_valid():
+	last_sample_queries += 1
+	if _has_sample_provider():
 		return sample_provider.call(position)
 	if Space.adapter(self) != null:
-		return get_tree().current_scene.get_node("Water").audio_sample(position)
+		var water: Node = get_tree().current_scene.get_node_or_null("Water")
+		return water.audio_sample(position) if is_instance_valid(water) and water.has_method("audio_sample") else {}
+	if is_instance_valid(_player) and _player.get_meta("surface_mode", "legacy_plane_v9") != "legacy_plane_v9":
+		return {}
 	var generator := get_node_or_null("/root/WorldGenerator")
 	if generator == null or not generator.has_method("get_terrain_height"):
 		return {}
@@ -208,39 +247,98 @@ func _update_environment() -> void:
 	if camera != null:
 		listener_position = camera.global_position
 	var listener_sample := sample_at(listener_position)
-	var threshold := 0.06 if _underwater else -0.06
-	_underwater = bool(listener_sample.get("water_present", false)) and _depth(listener_sample, listener_position) > -threshold
+	_underwater = Immersion.submerged(bool(listener_sample.get("water_present", false)), _depth(listener_sample, listener_position), _underwater)
 	_audio.set_underwater(_underwater)
 	var environment := get_tree().get_first_node_in_group(&"planet_visual_environment")
-	var on_surface := true
+	_on_surface = true
 	if environment != null and environment.has_method("get_visual_mode"):
-		on_surface = int(environment.get_visual_mode()) == 0
+		_on_surface = int(environment.get_visual_mode()) == 0
 	var foliage := "forest" in String(_sample.get("biome_name", "")).to_lower()
-	_targets[&"wind_loop"] = 0.7 if on_surface and not _underwater else 0.0
-	_targets[&"foliage_loop"] = 0.65 if on_surface and foliage and not _underwater else 0.0
-	_targets[&"underwater_loop"] = 0.8 if on_surface and _underwater else 0.0
-	_shore_target = 0.0
-	if not on_surface or _underwater:
+	_targets[&"wind_loop"] = 0.7 if _on_surface and not _underwater else 0.0
+	_targets[&"foliage_loop"] = 0.65 if _on_surface and foliage and not _underwater else 0.0
+	_targets[&"underwater_loop"] = 0.8 if _on_surface and _underwater else 0.0
+	if not _on_surface or _underwater:
+		_shore_target = 0.0
+		_cancel_shore_search()
 		return
-	# Only rendered water counts; river biome/noise alone does not imply water.
-	var nearest := INF
-	var nearest_position := Vector3.ZERO
-	for radius in [0.0, 7.0, 18.0, 30.0]:
-		for direction in 8 if radius > 0.0 else 1:
-			var angle := float(direction) * TAU / 8.0
-			var point: Vector3 = Space.offset(self, listener_position, Vector3(cos(angle), 0, sin(angle)) * float(radius))
-			var probe := sample_at(point)
-			if not bool(probe.get("water_present", false)):
-				continue
-			if probe.has("water_point"): point = probe.water_point
-			else: point.y = float(probe["water_height"])
-			var distance: float = point.distance_to(listener_position)
-			if distance < nearest:
-				nearest = distance
-				nearest_position = point
-	if nearest < 40.0:
-		_shore.global_position = nearest_position
+	# Finish the current bounded scan even at low FPS. Restarting every 0.35 s
+	# would starve a 25-probe search that needs 13 low-frequency physics ticks.
+	if _shore_job == null:
+		var frame: Basis = Space.frame(self, listener_position) if Space.adapter(self) != null else Space.Cube.frame(_player.up_direction)
+		_shore_job = ShoreSearch.new(listener_position, frame, _source_generation)
+
+
+func _listener_position() -> Vector3:
+	var camera := get_viewport().get_camera_3d()
+	return camera.global_position if camera != null else _player.global_position + _player.up_direction * 1.5
+
+
+func _step_shore_search() -> void:
+	last_shore_queries = 0
+	if _shore_job == null: return
+	if not is_instance_valid(_player) or not _player.is_inside_tree() or not _in_current_scene(_player) \
+		or _shore_job.generation != _source_generation or (not _bound_scope.is_empty() and _bound_scope != _source_scope()):
+		_cancel_shore_search()
+		_shore_target = 0.0
+		return
+	var listener: Vector3 = _listener_position()
+	if listener.distance_to(_shore_job.listener) > ShoreSearch.MAX_OBSERVER_DRIFT:
+		_cancel_shore_search()
+		_shore_target = 0.0
+		_sample_clock = 0.0
+		return
+	_shore_job.step(sample_at)
+	last_shore_queries = _shore_job.queries_last_step
+	if not _shore_job.complete(): return
+	_shore_target = 0.0
+	if _on_surface and not _underwater and _shore_job.nearest < 40.0 \
+		and _shore_job.nearest_position.distance_to(listener) < 40.0:
+		_shore.global_position = _shore_job.nearest_position
 		_shore_target = 0.75
+	_shore_job = null
+	completed_shore_searches += 1
+
+
+func _cancel_shore_search() -> void:
+	if _shore_job != null: cancelled_shore_searches += 1
+	_shore_job = null
+
+
+func _in_current_scene(node: Node) -> bool:
+	var scene: Node = get_tree().current_scene
+	return scene == null or node == scene or scene.is_ancestor_of(node)
+
+
+func _find_player() -> CharacterBody3D:
+	for candidate in get_tree().get_nodes_in_group(&"player"):
+		if candidate is CharacterBody3D and not candidate.is_queued_for_deletion() and _in_current_scene(candidate):
+			return candidate
+	return null
+
+
+func _has_sample_provider() -> bool:
+	if not sample_provider.is_valid(): return false
+	var owner: Object = sample_provider.get_object()
+	return not owner is Node or (owner.is_inside_tree() and not owner.is_queued_for_deletion() and _in_current_scene(owner))
+
+
+func _source_scope() -> Array:
+	var scene: Node = get_tree().current_scene
+	var surface: RefCounted = Space.adapter(self)
+	var water: Node = scene.get_node_or_null("Water") if scene != null else null
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	return [camera.get_instance_id() if camera != null else 0, scene.get_instance_id() if scene != null else 0,
+		_player.get_instance_id() if is_instance_valid(_player) else 0,
+		surface.get_instance_id() if surface != null else 0,
+		str(surface.terrain.surface.body.id) if surface != null else "",
+		water.get_instance_id() if water != null else 0, sample_provider if _has_sample_provider() else Callable()]
+
+
+func sampling_diagnostics() -> Dictionary:
+	return {"pending_searches": int(_shore_job != null), "pending_probes": ShoreSearch.PROBE_COUNT - _shore_job.cursor if _shore_job != null else 0,
+		"generation": _source_generation, "last_queries": last_sample_queries, "peak_queries": peak_sample_queries,
+		"last_shore_queries": last_shore_queries, "completed_searches": completed_shore_searches,
+		"cancelled_searches": cancelled_shore_searches, "max_step_ms": max_environment_step_ms}
 
 func _depth(sample: Dictionary, point: Vector3) -> float:
 	if sample.has("water_point"): return (sample.water_point - point).dot(sample.up)
@@ -250,6 +348,7 @@ func surface_origin_shifted(shift: Vector3) -> void:
 	_last_position += shift
 	_shore.global_position += shift
 	if _sample.has("water_point"): _sample.water_point += shift
+	if _shore_job != null: _shore_job.rebase(shift)
 	for voice: AudioStreamPlayer3D in _audio._voices:
 		if voice.playing: voice.global_position += shift
 
