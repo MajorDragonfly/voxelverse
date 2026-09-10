@@ -43,6 +43,7 @@ func _ready() -> void:
 		var anchor: Dictionary = record.surface_context.spawn.duplicate(true)
 		anchor.height = adapter.sample(anchor).height
 		record.fauna_catalog = Catalog.create_surface(descriptor, anchor)
+	elif not _upgrade_catalog(): return
 	if record.get("fauna_catalog", {}).get("habitat_status") == "pending":
 		planner = Planner.new()
 		planner.begin(adapter.terrain.surface, record.fauna_catalog)
@@ -110,13 +111,33 @@ func _tick() -> void:
 		for record: Dictionary in region.plants.values():
 			if not plants.has(record.id) and plants.size() < MAX_PLANTS and Space.resolve(self, record.location).distance_to(player.global_position) < ACTIVE_DISTANCE:
 				if _spawn_plant(record): return # One expensive publication per update.
-	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		if a.has("catalog_species_id") != b.has("catalog_species_id"): return a.has("catalog_species_id")
-		return Space.resolve(self, a.location).distance_squared_to(player.global_position) < Space.resolve(self, b.location).distance_squared_to(player.global_position))
+	_prioritize_catalog(candidates)
 	if animals.size() < MAX_ANIMALS:
 		for record in candidates:
 			if _spawn_animal(record): break
 	peak_animals = maxi(peak_animals, animals.size())
+
+func _prioritize_catalog(candidates: Array[Dictionary]) -> void:
+	var represented: Dictionary = {}
+	for actor: Node in animals.values():
+		var species_id: String = str(actor.catalog_species.get("id", ""))
+		if not species_id.is_empty(): represented[species_id] = int(represented.get(species_id, 0)) + 1
+	var priority: Callable = func(record: Dictionary) -> int:
+		if not record.has("catalog_species_id"): return 2
+		return 1 if represented.has(record.catalog_species_id) else 0
+	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		if priority.call(a) != priority.call(b): return priority.call(a) < priority.call(b)
+		return Space.resolve(self, a.location).distance_squared_to(player.global_position) < Space.resolve(self, b.location).distance_squared_to(player.global_position))
+	if animals.size() < MAX_ANIMALS or candidates.is_empty() or priority.call(candidates[0]) != 0: return
+	# A full old population must not starve the additive fourth role. Preserve
+	# the sole nearby representative of each other role; unload one ordinary
+	# animal or duplicate through the existing capture/streaming path.
+	for id: String in animals:
+		var species_id: String = str(animals[id].catalog_species.get("id", ""))
+		if not species_id.is_empty() and int(represented.get(species_id, 0)) <= 1: continue
+		_capture_one(id)
+		_remove(animals, id)
+		return
 
 func _place_value(point: Dictionary) -> Dictionary:
 	var result: Dictionary = point.duplicate(true)
@@ -235,10 +256,27 @@ func _loaded(_path: String) -> void:
 	storage = preload("res://world/surface/campaign_region_storage.gd").new()
 	storage_error = ""
 	if not storage.open(self, descriptor): _storage_failed(); return
+	if not _upgrade_catalog(): return
 	planner = null
 	if body().get("fauna_catalog", {}).get("habitat_status") == "pending":
 		planner = Planner.new()
 		planner.begin(adapter.terrain.surface, body().fauna_catalog)
+
+func _upgrade_catalog() -> bool:
+	var record: Dictionary = body()
+	var catalog: Dictionary = record.get("fauna_catalog", {})
+	if catalog.get("schema") == Catalog.ROLE_SCHEMA: return true
+	var used: Dictionary = {}
+	for entry: Dictionary in get_node("/root/ProgressionService").discovered_species.values():
+		if entry.get("body_id") == descriptor.id: used[int(entry.get("species_seed", 0))] = true
+	var upgraded: Dictionary = Catalog.upgrade_surface(catalog, descriptor, used)
+	if upgraded.is_empty():
+		storage.store._fail("Pflichtarten konnten nicht verlustfrei ergänzt werden.")
+		_storage_failed()
+		return false
+	record.fauna_catalog = upgraded
+	get_node("/root/SaveGameService").schedule_autosave()
+	return true
 
 func _exit_tree() -> void:
 	# The scene owns these siblings and is already removing them. Only detach

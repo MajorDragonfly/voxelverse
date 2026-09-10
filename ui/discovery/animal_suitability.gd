@@ -2,7 +2,7 @@ extends RefCounted
 ## D1 reader only. Never generates suitability or searches an unscanned catalog.
 const Records = preload("res://core/discovery/discovery_records.gd")
 const CONTRACT_PATH := "res://world/fauna/domestication/domestication_contract.gd"
-const ROLES := {"milk": "Milchtier", "draught": "Zugtier", "riding": "Reittier", "companion": "Begleittier"}
+const ROLES := {"milk": "Milchtier", "draught": "Zugtier", "riding": "Reittier", "companion": "Begleittier", "eggs": "Eiertier"}
 
 static func contract() -> Script:
 	return load(CONTRACT_PATH) as Script if ResourceLoader.exists(CONTRACT_PATH) else null
@@ -16,8 +16,8 @@ static func read(entry: Dictionary, validator: Script) -> Dictionary:
 	var value: Variant = species.get("domestication")
 	if validator == null or not value is Dictionary or not validator.has_method("validate"):
 		return {}
-	# Only the inspected D1 v1 contract owns validation, units and suitability rules.
-	if value.get("schema") != 1 or validator.get("SCHEMA") != 1:
+	# D1 owns supported role revisions, units and suitability rules.
+	if validator.get("SCHEMA") != 1:
 		return {}
 	if not str(validator.call("validate", value)).is_empty():
 		return {}
@@ -40,6 +40,8 @@ static func describe(profile: Dictionary) -> String:
 		"Wahrnehmung: %s m" % number(profile["perception_range"])])
 	if "milk" in profile["roles"]:
 		lines.append("Milcheignung: %s l je %s aktive Spielsekunden" % [number(profile["milk_yield"]), number(profile["milk_interval"])])
+	if "eggs" in profile["roles"]:
+		lines.append("Eiertier: geeignet für spätere Eierhaltung. Eiergewinnung ist noch nicht verfügbar.")
 	if "draught" in profile["roles"]:
 		lines.append("Zugkraft: %s N · benötigt passenden Geschirr-Anschluss" % number(profile["strength"]))
 	if "riding" in profile["roles"]:

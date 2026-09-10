@@ -5,6 +5,7 @@ const Body = preload("res://creatures/runtime/creature_body_contract.gd")
 const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
 const SCHEMA: int = 1
 const POLICY: String = "domestic_body_v1"
+const EGG_POLICY: String = "domestic_egg_body_v1"
 const SOCKETS: Array[String] = ["saddle.primary", "harness.left", "harness.right"]
 const MAX_GAP: float = 0.002
 
@@ -31,7 +32,7 @@ static func inspect(entry: Dictionary, parent: Node, ready_preview: Node3D = nul
 	if ready_preview == null: preview.free()
 	else: preview.set_motion(previous_motion)
 	var errors: Array[String] = assess(body, rest, str(entry["group"]))
-	return {"schema": SCHEMA, "policy_version": POLICY, "source_sha256": fingerprint(entry),
+	return {"schema": SCHEMA, "policy_version": EGG_POLICY if entry.group == "eggs" else POLICY, "source_sha256": fingerprint(entry),
 		"status": "passed" if errors.is_empty() else "rejected", "errors": errors,
 		"body": body, "rest": rest}
 
@@ -50,7 +51,7 @@ static func unsupported(entry: Dictionary) -> bool:
 		if not Contract.integer(assembly["body_attachments"].get("schema"), 1, 1): return true
 	if not entry.get("body_evidence") is Dictionary: return false
 	var value: Dictionary = entry["body_evidence"]
-	if not Contract.integer(value.get("schema"), SCHEMA, SCHEMA) or value.get("policy_version") != POLICY: return true
+	if not Contract.integer(value.get("schema"), SCHEMA, SCHEMA) or value.get("policy_version") != (EGG_POLICY if entry.get("group") == "eggs" else POLICY): return true
 	for key in ["body", "rest"]:
 		if value.get(key) is Dictionary and not Contract.integer(value[key].get("schema"), 1, 1): return true
 	if value.get("body") is Dictionary and not Contract.integer(value["body"].get("attachment_schema"), 1, 1): return true
@@ -73,7 +74,8 @@ static func assess(body: Dictionary, rest: Dictionary, group: String) -> Array[S
 	if body.get("schema") != 1 or body.get("frame") != "BodyV4" or body.get("units") != "design_units" or body.get("forward") != "-Z" or body.get("up") != "+Y" or not body.get("errors") is Array or not body.get("sockets") is Dictionary:
 		return ["invalid_body_descriptor"]
 	if not body["errors"].is_empty(): errors.append("body_geometry_errors")
-	if not Contract.integer(body.get("authored_leg_count"), 4, 12): errors.append("insufficient_authored_legs")
+	var minimum_legs: int = 2 if group == "eggs" else 4
+	if not Contract.integer(body.get("authored_leg_count"), minimum_legs, 12): errors.append("insufficient_authored_legs")
 	if group == "work":
 		for id in SOCKETS:
 			if not body["sockets"].has(id): errors.append("missing_socket:" + id)
@@ -84,7 +86,7 @@ static func assess(body: Dictionary, rest: Dictionary, group: String) -> Array[S
 	if rest.get("schema") != 1 or rest.get("pose") != "rest_only" or not rest.get("feet") is Array or not Contract.integer(rest.get("leg_count"), 0, 12) or rest["leg_count"] != rest["feet"].size():
 		errors.append("invalid_rest_descriptor")
 		return errors
-	if int(rest["leg_count"]) < 4 or rest["leg_count"] != body.get("authored_leg_count"): errors.append("insufficient_runtime_legs")
+	if int(rest["leg_count"]) < minimum_legs or rest["leg_count"] != body.get("authored_leg_count"): errors.append("insufficient_runtime_legs")
 	if not Contract.number(rest.get("max_contact_error"), 0, MAX_GAP) or rest.get("all_feet_on_plane") != true: errors.append("missing_rest_contact")
 	if not Contract.number(rest.get("max_rest_stretch"), 1, 1.20 if group == "work" else 1.35): errors.append("excessive_rest_stretch")
 	var minimum := Vector3(INF, INF, INF)
@@ -105,6 +107,15 @@ static func assess(body: Dictionary, rest: Dictionary, group: String) -> Array[S
 		return errors
 	var size: Vector3 = vector(bounds["size"])
 	var center: Vector3 = vector(bounds["position"]) + size * 0.5
+	if group == "eggs" and rest.leg_count == 2:
+		# Two feet cannot form the four-point load-bearing footprint required
+		# for mounts. Check lateral stance and a centered leg pair instead.
+		# This is geometric rest evidence, not a physical balance simulation.
+		if size.x <= 0 or size.y <= 0 or size.z <= 0 or maximum.x - minimum.x < size.x * 0.25:
+			errors.append("insufficient_support_span")
+		if center.x <= minimum.x + 0.02 or center.x >= maximum.x - 0.02 or absf((minimum.z + maximum.z) * 0.5 - center.z) > size.z * 0.2:
+			errors.append("body_outside_support")
+		return errors
 	if size.x <= 0 or size.y <= 0 or size.z <= 0 or maximum.x - minimum.x < size.x * 0.25 or maximum.z - minimum.z < size.z * 0.30:
 		errors.append("insufficient_support_span")
 	if center.x <= minimum.x + 0.02 or center.x >= maximum.x - 0.02 or center.z <= minimum.z + 0.02 or center.z >= maximum.z - 0.02:

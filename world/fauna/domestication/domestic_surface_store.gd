@@ -12,8 +12,8 @@ static func valid(record: Dictionary, descriptor: Dictionary, save_schema: int) 
 	body.surface_generation = Contract.GENERATION
 	body.inhabited = true
 	var catalog: Dictionary = record.fauna_catalog
-	if catalog.get("schema") != Contract.SCHEMA or not Catalog.validate(catalog, body).is_empty(): return false
-	if record.domestic_fauna.size() > 24: return false
+	if not Catalog.validate(catalog, body).is_empty() or int(catalog.schema) not in [Contract.SCHEMA, Catalog.ROLE_SCHEMA]: return false
+	if record.domestic_fauna.size() > (25 if catalog.schema == Catalog.ROLE_SCHEMA else 24): return false
 	var habitats: Dictionary = {}
 	for habitat: Dictionary in catalog.habitats: habitats[Contract.object_id(habitat)] = habitat
 	for id in record.domestic_fauna:
