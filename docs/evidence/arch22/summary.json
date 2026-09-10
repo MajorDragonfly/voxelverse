@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "base_main_commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "implementation_commit": "68bf25e0f39175c96c29c42dae027e2fb9105d56",
+  "local_implementation_commit": "fb39c01409a252f9756a99b1e5387376bb184d2e",
+  "verified_shared_source_tree": "b6d44cf52b45e76b127e807ec6d85a9f1519cfbe",
+  "branch": "agent/arch22-egg-production-2026-09-10",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "execution": "headless_source_project",
+  "unique_headless_tests_passed": 13,
+  "registry": {
+    "tests": 154,
+    "contracts": 17,
+    "complete_suite_executed": false
+  },
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.126,
+      "run": "egg-sphere-complete",
+      "log": "logs/source_contracts.log.gz",
+      "log_sha256": "2a2b5ca15ebee2adb643bd7450859e0f0e04077e9392a47412fe38cca98ec103"
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.372,
+      "contract": "village",
+      "run": "compatibility",
+      "log": "logs/tribal_age_husbandry_contract_test.log.gz",
+      "log_sha256": "8f71abd1746eda03fac29c620bb4de51a2da80ae71865efa590dddd130bd5313"
+    },
+    {
+      "name": "resource_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.878,
+      "contract": "village",
+      "run": "compatibility",
+      "log": "logs/resource_production_contract_test.log.gz",
+      "log_sha256": "4ec8331e95906a7503ce3d2afe2cdf5ec51d6b55ff9d6f8f29dc7aacea098954"
+    },
+    {
+      "name": "far_simulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.08,
+      "contract": "regions_simulation",
+      "run": "compatibility",
+      "log": "logs/far_simulation_test.log.gz",
+      "log_sha256": "f367546b4f13611e93a14f69920d4ad5d966e9ea9a6b0ff3946afaa4683912e5"
+    },
+    {
+      "name": "tribal_economy_progress_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.472,
+      "contract": "home_progression",
+      "run": "compatibility",
+      "log": "logs/tribal_economy_progress_test.log.gz",
+      "log_sha256": "9187c49509c8c51e747776299cf7b15eaf9304759932340c08ad8d63f7672334"
+    },
+    {
+      "name": "egg_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.977,
+      "contract": "village",
+      "run": "regression-final",
+      "log": "logs/egg_production_contract_test.log.gz",
+      "log_sha256": "fa04d0bf08bb905d7e0da8631a99a710db21a855c9fb8f50026e214cbc9027a2"
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 57.627,
+      "contract": "campaign",
+      "run": "regression-final",
+      "log": "logs/spherical_developed_migration_test.log.gz",
+      "log_sha256": "182985d2d1918c186a0514b5d4eef5762ca2b14720cec929c9cd0b9ac03660e9"
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.62,
+      "contract": "village",
+      "run": "regression-final",
+      "log": "logs/tribal_age_economy_contract_test.log.gz",
+      "log_sha256": "422ddcf17b312c5bf658efc91211f2b220940093b0aaaca31191e3c0a94f00bb"
+    },
+    {
+      "name": "tribal_age_growth_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.594,
+      "contract": "village",
+      "run": "regression-final",
+      "log": "logs/tribal_age_growth_contract_test.log.gz",
+      "log_sha256": "a231d0e0c1ad602de1816e5ad5e26217615f8b5c6a6305edca81b45debe44369"
+    },
+    {
+      "name": "tribal_age_husbandry_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 139.837,
+      "contract": "village",
+      "run": "regression-final",
+      "log": "logs/tribal_age_husbandry_test.log.gz",
+      "log_sha256": "fbb1f6ae7fec4b20c5c8cba416aefeb07d65bc82493f566c69d262b0b6a5a771"
+    },
+    {
+      "name": "village_work_snapshot_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.398,
+      "contract": "village",
+      "run": "regression-final",
+      "log": "logs/village_work_snapshot_test.log.gz",
+      "log_sha256": "cf3d341281e8fe421247b1cbb7401f7f5cb69b473c2b727004a79c1b72250719"
+    },
+    {
+      "name": "tribal_progression_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.621,
+      "contract": "home_progression",
+      "run": "regression-final",
+      "log": "logs/tribal_progression_test.log.gz",
+      "log_sha256": "a5bd0c8e4cba575d031bfe6f5e702904bf2ab142910905bfd4278818ba978f8c"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.015,
+      "run": "egg-ui",
+      "log": "logs/import.log.gz",
+      "log_sha256": "52224de136933027b727daea8660dea5b8810836123adb31f1e9edff92e57b93"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.058,
+      "run": "egg-ui",
+      "log": "logs/art_sources.log.gz",
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+    },
+    {
+      "name": "egg_husbandry_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.216,
+      "contract": "village",
+      "run": "egg-ui",
+      "log": "logs/egg_husbandry_ui_test.log.gz",
+      "log_sha256": "f44b52658bbebdb165a07f5f129bae3d5e628679a3a8c7f5548367137e0a06dd"
+    },
+    {
+      "name": "spherical_egg_production_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 424.189,
+      "contract": "spherical_gameplay",
+      "run": "egg-sphere-complete",
+      "log": "logs/spherical_egg_production_test.log.gz",
+      "log_sha256": "d541481b9e3fd98d9bcfe20dbd85b424d2cad86debee8047121c0b5ea3fa9143"
+    }
+  ],
+  "sphere_observations": {
+    "ANIMAL_TRAVEL_FAR": {
+      "body_id": "body_45f07de42f3515710a26d46b78296389",
+      "animal_id": "object_f38efe4149bed9ec9a3b9c52696ed254",
+      "production_seconds_before": 308.8,
+      "production_seconds_after": 314.036444,
+      "food_consumed": 0.01745481333333,
+      "cargo": "eggs",
+      "resource_id": "eggs",
+      "stock": 0.0
+    },
+    "ANIMAL_TRAVEL_RETURN_BALANCE": {
+      "owed_seconds": 5.6396106666665,
+      "campaign_clock": 922.49183634772,
+      "returned_cursor": 922.49183634772
+    }
+  },
+  "source_sha256": {
+    "autoload/save_game_service.gd": "ea1991da5d76d1c242b9765eb9ff279abc9816e7cd1f53e4ed2233b3e322eeb0",
+    "core/diagnostics/animal_travel_scenario.gd": "03c7c636b20990ff1be49b3dc064c85b0782b7992363d68e14295d70165e216c",
+    "core/diagnostics/spherical_gameplay_probe.gd": "c255238484a0ea6dc212f206c2dc706ccc0df259455dd3e96f246205169ccf52",
+    "core/progression/tribal_economy_progress.gd": "29b3b084dd30696761cb0c9851caad5264ea925b809920529f6af630ad04926b",
+    "core/progression/tribal_progression.gd": "6ad14ca821c29d59e3c895e4dddff67fae42089eadc05b3a254670aa01c4a90a",
+    "tests/egg_husbandry_ui_test.gd": "cef80931500708c2b4aa1a316b5f00e2df9827d4d0639aa44ed31b37fea0c271",
+    "tests/egg_husbandry_ui_test.gd.uid": "5a4c9f8e9d93458b89a12a1e1fba0c73294f47d3f786b0b05719a2329339b9b0",
+    "tests/egg_production_contract_test.gd": "52d531a120c1797fcc34368db570e38adeb017738dc936b3a6ad5eb19b625d53",
+    "tests/egg_production_contract_test.gd.uid": "fe809191d302b871c5fbee483dd53e41ae239d4b04de57c0989829260accf365",
+    "tests/resource_production_contract_test.gd": "64b843af12ef32cb02b469beae253b207e318a9ade16de89f5b25813f2e7dbde",
+    "tests/spherical_egg_production_test.gd": "e159c1966e3c1e1807fe95678c7077b9ea01eb2421f4a77a53a305c45bc651e9",
+    "tests/spherical_egg_production_test.gd.uid": "8cdb74603f6477c2ac82b65d584d652ea4d13ac86edabb8b130dbcb20bab6d3b",
+    "tests/tribal_age_husbandry_contract_test.gd": "e123452ce3bd89d660a5283a61045b95728436f5bd7b0943b5387af1c25af006",
+    "tools/validate_godot.py": "0d344ded9f3382969a884d0e00820a2ed053fcc2ae6443872519694e76051f0e",
+    "tools/validation/contracts.json": "6c68c34e1e87e2aac44fac65cfe59e2eda1c3bcf8b8180f94b1afb28f0d23f47",
+    "ui/tribe/tribe_panel.gd": "0c6e24af0bbdb0237883dc1b039a4a40dd1d8a2e25b8e19ded83e6aaaece27ff",
+    "world/tribe/husbandry_runtime.gd": "4261b6985defc71e4ab5949da82dadafde045fc575eb9dde362e0328d5acf1c5",
+    "world/tribe/husbandry_source.gd": "1d510f0a26c9cd9fc2ba6f0b4b22da8da2f19a75cbd17b614de837c7688c7284",
+    "world/tribe/production_catalog.gd": "d9f1621cd21a1e0ac8ebf9be57f98d5a9d2cee89c76f757a3ad0621de61229b1",
+    "world/tribe/resource_catalog.gd": "074ac28d15b7b80a5c32a0beef89c18b8a1b4c7edec8271c77be7b76e14d4030",
+    "world/tribe/tribe_controller.gd": "e2896db0de3e562eaabdce13f2bafd0c6d7423d5787664bf47e259ab671397e3",
+    "world/tribe/tribe_state.gd": "45031dc18b1afbd3d5db17dbf220cde30cad7b3f9a4a1f99fc44358f9752f91e",
+    "world/tribe/village_economy.gd": "a84ed9c5aa1b50f78cd495cd883d64984902d366289ab6682e29f48fb6ffaee8",
+    "world/tribe/village_housing.gd": "f17ffbd79cf558f1520ef436d20095ad75373a4224df6aceeaa0aea4d0400069",
+    "world/tribe/village_husbandry.gd": "217cdebd70156134edd7ca7f06a5dd84437c05fe42a04fff5a69416bfd7723d6",
+    "world/tribe/village_navigation.gd": "3920279b6a47c275f57b62ed8618836da028e3d77e2a949453de070d7cfd9f6a",
+    "world/tribe/village_simulation.gd": "f2e39bd25af56042447722a2154c9665a1f91f4836ba7fdb2748774dfd805f95",
+    "world/tribe/village_visuals.gd": "2a4e0c1929d2bf9928998c98c56d4040a8cb2188ef311bd660194bfd449fff25",
+    "world/tribe/village_work.gd": "a76ff015561fce4b03c6db2e38fa948c3388e036d1a5a060055647469f8a9b8e"
+  },
+  "diagnostic_attempts": [
+    "Initial editor parse error and JSON numeric schema membership error were fixed before the successful regression runs.",
+    "Egg contract test normalized its independent JSON comparison and joined child-process output before checking its JSON success marker.",
+    "First sphere attempt used an unsuitable 1.2 m origin-to-ground admission margin for the taller laying animal. Probe margin is 1.75 m; the actual game rule remains 1.8 m.",
+    "Another sphere attempt kept a blocked path to an outdated moving-animal position. Probe retries the normal approach command and stops the handler before feeding.",
+    "Supplementary reapproach run passed in 421.291 s, but the final acceptance below uses the frozen source including the explicit wait action."
+  ],
+  "notes": [
+    "Raw runners record repository HEAD and tracked dirtiness when writing results. Documentation was being prepared; final implementation file hashes and the matching published tree above identify the delivered source.",
+    "The sphere probe and travel helper alone changed during the final diagnostic retries. Earlier isolated contract/UI/regression checks do not execute those probes.",
+    "Expected failed-save/version-protection warnings are deliberate negative cases. SCRIPT ERROR, ERROR and leaked-object diagnostics remain fatal in the runner.",
+    "Fresh child-process success is required by the parent scenarios; the full parent logs include all assertions and final status."
+  ],
+  "not_run": [
+    "complete 154-test suite",
+    "graphical target-PC acceptance/screenshots",
+    "native packaged exports",
+    "later locked-era transitions"
+  ],
+  "publication_status": "feature_branch_pending_main_integration"
+}

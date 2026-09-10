@@ -1,0 +1,82 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "egg_production_contract_test",
+    "spherical_developed_migration_test",
+    "tribal_age_economy_contract_test",
+    "tribal_age_growth_contract_test",
+    "tribal_age_husbandry_test",
+    "village_work_snapshot_test",
+    "tribal_progression_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "egg_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.977,
+      "contract": "village"
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 57.627,
+      "contract": "campaign"
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.62,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_growth_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.594,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_husbandry_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 139.837,
+      "contract": "village"
+    },
+    {
+      "name": "village_work_snapshot_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.398,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_progression_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.621,
+      "contract": "home_progression"
+    }
+  ]
+}

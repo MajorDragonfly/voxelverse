@@ -98,7 +98,7 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
 		if _attending(body, pen): H.advance(data, pen, delta)
 	for id: String in data.husbandry.records:
 		var record: Dictionary = data.husbandry.records[id]
-		if record.pending_milk > 0 and simulation.roads.has(key(record.pickup)): H.offer(data, id)
+		if H.pending(record) > 0 and simulation.roads.has(key(record.pickup)): H.offer(data, id)
 	simulation.cursor = minf(clock, float(simulation.cursor) + delta)
 	if observer.is_valid(): observer.call({}, "", body, delta)
 	return true

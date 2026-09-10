@@ -245,10 +245,12 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-22 – D3-EIER als zweite Produktionskette
 
+**Fachbranch geliefert, 10. September:** Legestellen, Pflege, Eierbatches, echte Transporte und Mahlzeiten auf den bestehenden Verträgen. Alt-Milchdaten bleiben erhalten; Integration und Prüfgrenzen siehe [ARCH-22-Übergabe](WORK_ARCH22_EGG_PRODUCTION.md).
+
 - **Zuordnung:** bestehender Fachauftrag D3-EIER. **Vorher:** ARCH-11/20/21; Fernübergabe zusätzlich mit ARCH-16 abnehmen.
-- [ ] Eigenes geeignetes Tier, Versorgung und Legestelle an bestehende Haltung anschließen; Eier über den gemeinsamen Produktions-/Ressourcenvertrag erzeugen.
-- [ ] Sammeln, tatsächliches Tragen, Einlagern und Essen über dieselben Aufträge wie andere Ressourcen ausführen.
-- [ ] Essbare Eier bleiben von Nachwuchs/Bebrütung getrennt; Belohnungen verwenden bestehende begrenzte Erfolgsregeln.
+- [x] Eigenes geeignetes Tier, Versorgung und Legestelle an bestehende Haltung anschließen; Eier über den gemeinsamen Produktions-/Ressourcenvertrag erzeugen.
+- [x] Sammeln, tatsächliches Tragen, Einlagern und Essen über dieselben Aufträge wie andere Ressourcen ausführen.
+- [x] Essbare Eier bleiben von Nachwuchs/Bebrütung getrennt; Belohnungen verwenden bestehende begrenzte Erfolgsregeln.
 - **Fertig:** Jedes Ei liegt genau einmal an Legestelle, in Fracht oder im Lager; Pause, Unterbrechung, Tierverlust und Neustart erhalten Mengen. Eier benötigen nicht den Abschluss aller neuen Körpermodelle.
 
 ### ARCH-23 – Bauplanversionen vor neuen Editoren absichern

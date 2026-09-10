@@ -143,7 +143,7 @@ func observe(before: Dictionary, after: Dictionary, actor_id: String, body: Dict
 	if not cargo.is_empty() and member["cargo"].is_empty() and int(after["delivered"]) == int(before["delivered"]) + 1 and int(after["delivered"]) > int(entry["cursors"]["delivered"]) and int(after["stock"].get(cargo, 0)) == int(before["stock"].get(cargo, 0)) + 1:
 		entry["cursors"]["delivered"] = int(after["delivered"])
 		entry["deliveries"][actor_id] = mini(8, int(entry["deliveries"].get(actor_id, 0)) + 1)
-		if cargo in ["food", "milk"]:
+		if cargo in ["food", "milk", "eggs"]:
 			entry["food"][actor_id] = mini(3, int(entry["food"].get(actor_id, 0)) + 1)
 		if entry["deliveries"].size() >= 2 and _sum(entry["deliveries"]) >= 8:
 			completed.append("shared_stock")
@@ -217,7 +217,7 @@ func observe_neighbor(before: Dictionary, after: Dictionary, village: Dictionary
 	return result
 
 static func _food(village: Dictionary) -> int:
-	return int(village["stock"].get("food", 0)) + int(village["stock"].get("milk", 0))
+	return int(village["stock"].get("food", 0)) + int(village["stock"].get("milk", 0)) + int(village["stock"].get("eggs", 0))
 
 func matches_campaign(campaign: Dictionary) -> bool:
 	return data["campaign_id"].is_empty() or (data["campaign_id"] == campaign.get("id") and data["species_id"] == campaign.get("player_species_id") and data["faction_id"] == campaign.get("player_faction_id"))
