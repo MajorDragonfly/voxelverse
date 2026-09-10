@@ -1,13 +1,15 @@
 # ARCH-24 – Körperteilkatalog und Fuß-Geometrie
 
-Status: **erstes Teilpaket lokal fertig und geprüft**, reserviert am 10. September 2026.
+Status: **erstes Teilpaket veröffentlicht und geprüft**, reserviert am 10. September 2026.
 Basis: `ea900f2` (gemeinsamer veröffentlichter `main`).
 Branch: `agent/arch24-part-geometry-2026-09-10`.
 Lokaler Implementierungscommit: `d6761d3f0cd9b0b166b384a12d7f7dbe763d3655`.
 
-Die Veröffentlichung dieses fertigen Branches als Entwurfs-PR wurde von Lars
-am 10. September 2026 ausdrücklich freigegeben. Die Bereitstellung erfolgt über
-die verbundene GitHub-App; die Dateien werden gegen den lokalen Git-Baum geprüft.
+Veröffentlicht als [Entwurfs-PR #55](https://github.com/MajorDragonfly/voxelverse/pull/55)
+nach Lars’ ausdrücklicher Freigabe am 10. September 2026.
+Veröffentlichter Implementierungsstand: `fe00192ebebc78d03d25577eb5fa72be9f49d4ca`;
+sein Git-Dateibaum `70814f7dbcc1d4050360c85e6a9cced2a97b60da` ist exakt identisch
+mit dem lokalen freigegebenen Stand `252b67f5a1fb66085562eb271832b275943e4f25`.
 Die Integration nach `main` bleibt offen.
 
 ## Abgegrenzter Auftrag
@@ -78,7 +80,7 @@ python tools/validate_godot.py --godot /pfad/zu/godot --skip-main --tests creatu
 
 ## Integration und nächste Schritte
 
-1. Dieses begrenzte Teilpaket nach Freigabe veröffentlichen und getrennt integrieren.
+1. Dieses begrenzte Teilpaket aus Entwurfs-PR #55 prüfen und getrennt integrieren.
    Die drei bestehenden Laufzeitdateien sind `creature_part_library.gd`,
    `creature_part_geometry.gd` und `planet_fauna_catalog.gd`; die übrigen Änderungen
    sind eigene neue Dateien und Dokumentation.

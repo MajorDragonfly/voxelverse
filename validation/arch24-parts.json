@@ -39,5 +39,8 @@
     "target-PC graphics and FPS",
     "packaged executable"
   ],
-  "integration": "User explicitly approved branch publication and draft PR on 2026-09-10; GitHub App upload prepared; main integration remains pending."
+  "integration": "Published as draft PR #55 with explicit user approval; tree matches local approved source exactly; main integration remains pending.",
+  "published_implementation_commit": "fe00192ebebc78d03d25577eb5fa72be9f49d4ca",
+  "published_implementation_tree": "70814f7dbcc1d4050360c85e6a9cced2a97b60da",
+  "pull_request": "https://github.com/MajorDragonfly/voxelverse/pull/55"
 }
