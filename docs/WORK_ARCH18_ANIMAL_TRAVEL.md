@@ -26,10 +26,10 @@ Unveränderte Vertragsversionen: Save 9, Kampagne 3, GameState 4, D2-Tierregiste
 
 ## Zusammenhängende Route
 
-Das geführte Tier wartet innerhalb von einem Meter um die Gehegemitte. Damit bleibt sein vorhandener Bewegungsradius von 0,5 Metern auch nach Kollision oder neuer physischer Darstellung innerhalb der unveränderten D3-Zulassung von 1,8 Metern.
+Das geführte Tier wartet innerhalb von 1,2 Metern um die Gehegemitte. Damit bleibt sein vorhandener Bewegungsradius von 0,5 Metern auch nach Kollision oder neuer physischer Darstellung innerhalb der unveränderten D3-Zulassung von 1,8 Metern.
 
 1. Bestehender Neu-Kugelstand, bestätigter Stammesaufstieg, reale Gebäude-/Werkstattarbeit, D1-Tierannäherung und Fütterung, D2-Zähmung, geführter Gang zum Gehege, D3-Zuordnung und echte Versorgungswege.
-2. Einen vollständig produzierten Milchbatch physisch abholen. Geladenen Träger an einem echten Kollisionshindernis anhalten; danach wartend speichern.
+2. Einen vollständig produzierten Milchbatch physisch abholen. Geladenen Träger an einem echten Kollisionshindernis anhalten; danach warten, bis das gegebenenfalls mitverschobene Tier durch seinen vorhandenen Wartebefehl wieder körperlich am Gehege steht, und wartend speichern.
 3. Fehlgeschlagene Abreisespeicherung: derselbe Host und dieselbe Tierinstanz bleiben bestehen; Tierhaltung, Ladung, Autosave-Einstellung und letztes vollständiges Save bleiben erhalten.
 4. A → B mit gleichem Weltseed in einem anderen System: alter Host und Tierinstanz verschwinden, Körperidentitäten bleiben getrennt. Genau ein Fernbesitzer und reale D2-Anwesenheit am Tierplatz müssen bestätigt sein. Wartende Milch wird nicht sofort ins Lager gebucht.
 5. Während tatsächlichen Spielens auf B mindestens fünf weitere Produktionssekunden mit Futterverbrauch durch den vorhandenen Scheduler nachweisen. Pause hält die Kampagne und die Fernproduktion an.

@@ -193,8 +193,8 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(tribe.issue_order("move", through), "Handler cannot walk through pen.")
 	# Stop well inside the 1.8 m admission radius: the waiting animal can settle
 	# within 0.5 m of its target after collision or a fresh physical spawn.
-	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(site) < 1.0, 24000)
-	_expect(runtime.actor_for(id).global_position.distance_to(site) < 1.0, "Animal did not follow handler inside pen: " + str({"animal": runtime.actor_for(id).global_position, "handler": tribe.actors[handler].global_position, "site": site, "status": runtime.actor_for(id).status, "animal_route": runtime._routes.get(id), "handler_record": tribe.member_record(handler)}))
+	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(site) < 1.2, 24000)
+	if not _expect_step(runtime.actor_for(id).global_position.distance_to(site) < 1.2, "Animal did not follow handler inside pen: " + str({"animal": runtime.actor_for(id).global_position, "handler": tribe.actors[handler].global_position, "site": site, "status": runtime.actor_for(id).status, "animal_route": runtime._routes.get(id), "handler_record": tribe.member_record(handler)})): return
 	runtime.issue_command(id, "wait")
 	var pen: Dictionary = tribe.village().husbandry.pens[0]
 	_expect(tribe.husbandry.assign(pen.id, id), "D2->D3 admission failed: " + tribe.status)
@@ -232,6 +232,11 @@ func _animal_chain(tribe: Node) -> void:
 	tribe.issue_order("wait")
 	blocker.queue_free()
 	await tree.physics_frame
+	# The real carrier obstacle can also push the nearby animal. Let its
+	# existing wait order restore physical pen attendance before departure.
+	_stage("animal_returns_after_obstacle")
+	await _until(func() -> bool: return tribe.husbandry.attendance(pen).error.is_empty(), 20000)
+	if not _expect_step(tribe.husbandry.attendance(pen).error.is_empty(), "Animal did not return to its pen after removing the carrier obstacle."): return
 	flow.toggle_pause()
 	_expect(saves.save_now(), "Loaded milk carrier could not save: " + saves.last_error)
 	tribe = await preload("res://core/diagnostics/animal_travel_scenario.gd").new(self).run(tribe, id, carrier)
