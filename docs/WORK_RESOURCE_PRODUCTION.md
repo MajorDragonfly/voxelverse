@@ -74,4 +74,4 @@ Unverändert offen: vollständige M1i-/Ziel-PC-Abnahme, weitergehende Langzeit-/
 
 ## Veröffentlichungsstand
 
-Die automatische Freigabeprüfung hat den GitHub-Push mit Verweis auf fehlende ausdrückliche Uploadfreigabe abgelehnt. Der lokale Branch einschließlich Tests und Übergabe ist fertig. Es wurde kein PR angelegt und kein Merge ausgeführt. Nächste Aktion nach Freigabe: diesen Branch in `MajorDragonfly/voxelverse` hochladen und einen separaten PR gegen `main` erstellen.
+Lars hat den Upload dieses fertigen Branches in `MajorDragonfly/voxelverse` und die Erstellung eines separaten PR gegen `main` ausdrücklich freigegeben. Die Implementierung, neun gezielte Prüfungen und die Übergabe sind abgeschlossen. Die Integration in den Hauptzweig erfolgt separat nach Prüfung des PR; dieses Paket führt keinen automatischen Merge aus.

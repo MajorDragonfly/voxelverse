@@ -59,6 +59,6 @@
   ],
   "limits": [
     "No target-PC graphics/FPS acceptance",
-    "Not pushed or merged; GitHub upload blocked by automatic approval review pending explicit user authorization"
+    "Main-branch integration and GitHub CI results are separate from these local checks"
   ]
 }
