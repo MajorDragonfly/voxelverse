@@ -1,10 +1,14 @@
 # ARCH-24 – Katzenpfoten, Bärentatzen und Pferdehufe
 
-Status: **zweites Teilpaket umgesetzt und geprüft** · 10. September 2026.
+Status: **zweites Teilpaket veröffentlicht und geprüft** · 10. September 2026.
 Branch: `agent/arch24-animal-feet-2026-09-10`.
 Basis: fertiger eigener [PR #55](https://github.com/MajorDragonfly/voxelverse/pull/55),
 Commit `0200bbbdab82fd1008254412837d62a7e2aee56e` auf `main`-Basis `ea900f2`.
 Lokaler Implementierungscommit: `9d9a7495f662a827649bfa874b9f82b8d7c81b44`.
+Veröffentlichter Stand: `8384467d002f381869047bb2111a19f23534f347`,
+[Entwurfs-PR #66](https://github.com/MajorDragonfly/voxelverse/pull/66).
+Der Dateibaum `9883b2f6a6bf2c5eb9cded8677c001eb0e8f783f` entspricht exakt
+dem lokalen freigegebenen Modellpaket einschließlich der geprüften PNG-Ansicht.
 
 ## Lieferung und Bedienung
 
@@ -85,7 +89,8 @@ Ohne zusätzliche IDs zeigt der Helfer weiterhin die vier ursprünglichen Formen
 ## Übergabe
 
 Dieser Folgebranch baut ausschließlich auf dem fertigen eigenen PR #55 auf.
-Er soll als separater Folge-PR geprüft werden. Laufzeitänderungen betreffen nur
+Entwurfs-PR #66 zielt auf den Branch von #55 und zeigt nur dieses Modellpaket.
+Nach Integration von #55 soll #66 auf `main` umgestellt werden. Laufzeitänderungen betreffen nur
 `creature_foot_catalog.gd` und `creature_foot_geometry.gd`; weitere Änderungen
 sind Tests, Aufnahmehelfer und Dokumentation. ARCH-24/M3-TEILE.2 bleibt teilweise
 geliefert: Rüssel, zusätzliche Schnauzen, Oktopusmund und Krebsscheren sind weiter offen.

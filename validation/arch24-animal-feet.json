@@ -69,5 +69,9 @@
     "Target-PC graphics, FPS and packaged executable",
     "Broader creature-part families",
     "Editor DE/EN and procedural assignment use their own packages"
-  ]
+  ],
+  "published_implementation_commit": "8384467d002f381869047bb2111a19f23534f347",
+  "verified_tree": "9883b2f6a6bf2c5eb9cded8677c001eb0e8f783f",
+  "pull_request": "https://github.com/MajorDragonfly/voxelverse/pull/66",
+  "integration": "Draft PR66 targets PR55 branch; both await main integration."
 }
