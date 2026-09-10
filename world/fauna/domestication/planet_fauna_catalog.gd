@@ -5,6 +5,7 @@ const BodyEvidence = preload("res://world/fauna/domestication/domestic_body_evid
 const Recovery = preload("res://world/fauna/domestication/domestic_habitat_recovery.gd")
 const Surface = preload("res://world/fauna/domestication/domestic_surface_contract.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
+const Feet = preload("res://creatures/catalog/creature_foot_catalog.gd")
 const REPLACEMENT_SECONDS: float = 300.0
 
 static func eligible(body: Dictionary) -> bool:
@@ -107,7 +108,7 @@ static func validate(value: Variant, body: Dictionary) -> String:
 		var legs: int = 0
 		for part in entry["blueprint"]["parts"]:
 			if not part is Dictionary: return "Invalid domestic body part."
-			if part.get("category") == "legs" and part.get("end_part_id") in ["feet_pads", "feet_hooves"]:
+			if part.get("category") == "legs" and Feet.supports(str(part.get("end_part_id", "")), "domestic_support"):
 				legs += 2 if part.get("mirrored", false) else 1
 		if legs < 4: return "Domestic species lacks support feet."
 		problem = BodyEvidence.validate(entry)
