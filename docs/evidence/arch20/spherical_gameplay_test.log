@@ -1,0 +1,23 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SPHERE_GAMEPLAY_STAGE open_campaign elapsed_seconds=0.93
+SPHERE_POPULATION 2 16
+SPHERE_VILLAGE_PREPARED 604
+SPHERE_VILLAGE_ACTIVE 3 wood 2
+SPHERE_GAMEPLAY_STAGE build_workshops elapsed_seconds=68.775
+SPHERE_WORKSHOP well { "work_ms": 3742, "navigation_ms": 0 }
+SPHERE_WORKSHOP fiberbed { "work_ms": 2511, "navigation_ms": 0 }
+SPHERE_GAMEPLAY_STAGE approach_wildlife elapsed_seconds=115.055
+TAME_PATH (-8.213357, -9.164854, 2.326684) velocity=(-0.510785, -0.580436, -3.72051) floor=true route=[(-8.182277, -9.246491, 2.130581), (-8.840142, -9.999636, 2.130581)] target=(-13.08855, -14.82542, 1.753492)
+SPHERE_TAMED object_c23233791ef60bead4e3bee7ae623b89
+SPHERE_GAMEPLAY_STAGE animal_book_and_home elapsed_seconds=121.856
+SPHERE_GAMEPLAY_STAGE prepare_pen_navigation elapsed_seconds=126.236
+SPHERE_GAMEPLAY_STAGE build_pen elapsed_seconds=147.833
+SPHERE_GAMEPLAY_STAGE follow_to_pen elapsed_seconds=182.279
+SPHERE_GAMEPLAY_STAGE supply_pen elapsed_seconds=185.105
+SPHERE_GAMEPLAY_STAGE produce_and_collect_milk elapsed_seconds=205.973
+SPHERE_GAMEPLAY_STAGE block_loaded_carrier elapsed_seconds=283.058
+SPHERE_GAMEPLAY_STAGE fresh_process_returned elapsed_seconds=298.581
+SPHERE_MILK_DELIVERED 2.0
+SPHERE_GAMEPLAY_STAGE milk_delivered elapsed_seconds=333.903
+SPHERICAL_GAMEPLAY_PASSED: shared radial population, home, village, loaded cargo, neighbor, rebase and restart.

@@ -2,7 +2,7 @@
 
 Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7` auf veröffentlichtem `main`. [Befunde und Grenzen](ARCHITECTURE_SCALABILITY_AUDIT.md), [Roadmap](../ROADMAP.md), [Kugelumzug](SPHERICAL_CAMPAIGN_MIGRATION.md) und [Arbeitsverteilung](NEXT_PARALLEL_WORK.md) zusammen lesen.
 
-**Alle ARCH-Aufgaben sind geplant, keine davon ist durch dieses Dokument implementiert oder abgenommen.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Vor Arbeitsbeginn den aktuellen veröffentlichten Stand vergleichen: Bereits durch einen Fachchat gelieferte Arbeit mit Commit und Nachweis zuordnen, nicht nochmals implementieren. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
+**Das ursprüngliche Audit implementiert keine ARCH-Aufgaben. Gelieferte Teilaufgaben sind unten mit Nachweis markiert; ungekennzeichnete Aufgaben bleiben geplant.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Vor Arbeitsbeginn den aktuellen veröffentlichten Stand vergleichen: Bereits durch einen Fachchat gelieferte Arbeit mit Commit und Nachweis zuordnen, nicht nochmals implementieren. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
 
 ## Zuordnung der laufenden Implementierung
 
@@ -200,9 +200,10 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 ### ARCH-20 – Ressourcen und Produktion vereinheitlichen
 
 - **Zuordnung:** D3/M6, Voraussetzung D3-EIER. **Vorher:** ARCH-01/15; Ortsanschluss mit 11 koordinieren. **Bereich:** `village_economy`, `village_husbandry`, bestehender D2-Leseanschluss.
-- [ ] Kleine feste Kataloge für `resource_id`, `recipe_id`, Einheit, Nährwert, Anzeige-/Icon-Schlüssel und Produktionsbedingungen anlegen; zunächst bestehende Werte übernehmen.
-- [ ] Bestehende Milchbuchung als allgemeinen Ressourcenbatch mit Quelle, Menge, Revision und Einmaligkeitsbeleg ausführen. Milch-Altadapter und Migration erhalten.
-- [ ] Resource-basierte Ausgabe/Tragen/Annahme/Verbrauch statt zusätzlicher Milch-/Eier-Sonderzweige nutzen; keine neue Tierbesitzlogik.
+- [x] Kleine feste Kataloge für `resource_id`, `recipe_id`, Einheit, Nährwert, Anzeige-/Icon-Schlüssel und Produktionsbedingungen anlegen; zunächst bestehende Werte übernehmen.
+- [x] Bestehende Milchbuchung als allgemeinen Ressourcenbatch mit Quelle, Menge, Revision und Einmaligkeitsbeleg ausführen. Milch-Altadapter und Migration erhalten.
+- [x] Resource-basierte Ausgabe/Tragen/Annahme/Verbrauch statt zusätzlicher Milch-/Eier-Sonderzweige nutzen; keine neue Tierbesitzlogik.
+- **Lieferung auf Fachbranch (10. September):** [WORK_RESOURCE_PRODUCTION.md](WORK_RESOURCE_PRODUCTION.md). Ressourcen-/Rezeptkatalog, Ressourcenbatch 2, reiner Milch-Altadapter, gemeinsamer Abhol-/Verbrauchsweg und Schutz unbekannter Revisionen. Hauptzweig-Integration erfolgt über den zugehörigen PR.
 - **Fertig:** Alte Milchstände behalten Bruchteile, begonnene Zyklen, Vorräte und Lieferbelege; Abbruch/Neustart erzeugt keine Doppelware. Noch keine Eier allein durch diesen Umbau erzeugen.
 
 ### ARCH-21 – D1-EIER und rollenspezifische Körperfähigkeiten
