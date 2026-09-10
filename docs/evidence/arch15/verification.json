@@ -1,0 +1,142 @@
+{
+  "task": "ARCH-15",
+  "date": "2026-09-10",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "local_source_commit": "3f7cc304f986ad6c96ee532db75f6ef412d174a9",
+  "github_source_commit": "5ee006c0a4e625d9919ba177b37971005515cca7",
+  "identical_source_tree": "76f5fe668495dc86c080f46747b338ebfcb3903f",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source_sha256": {
+    "tests/village_work_snapshot_test.gd": "272600d5446461752cc2fc9610fc63475802d2aaccac76e4a20197c27a79a19e",
+    "tests/village_work_snapshot_test.gd.uid": "b20649c55b046e667f621879a2354b48cd53de6646963b28cfec15af970d572b",
+    "world/tribe/tribe_controller.gd": "a6d5d76023dfa52ab81b2542eefd4e4a3ec92387bff8a98e4cbc1fe31b3d62ae",
+    "world/tribe/village_simulation.gd": "6029d2eb9881712aef65cbe161ee423ff1732675bba11316e6c8e7b8677c7cdf",
+    "world/tribe/village_work.gd": "09c873773d046b816b28403caaadc30f8ee8e9135e3c2862ce8e1a4513a20c84"
+  },
+  "provenance": [
+    "Initial suite used the final production changes. The new snapshot test was subsequently extended with real simulation-speed comparisons and adjusted construction arrival positions.",
+    "Runtime suite used the final source files listed here. The source commit was created while the unchanged runtime suite was running; no source was edited during that suite.",
+    "The only files added after the source commit are this handoff and evidence. The initial import log is an explicitly labelled excerpt with the full original SHA-256; all other logs are copied in full."
+  ],
+  "initial": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.905
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.021
+    },
+    {
+      "name": "village_work_snapshot_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.973
+    },
+    {
+      "name": "tribal_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.219
+    },
+    {
+      "name": "tribal_economy_progress_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.22
+    },
+    {
+      "name": "far_simulation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.725
+    }
+  ],
+  "runtime": [
+    {
+      "name": "village_work_snapshot_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.476
+    },
+    {
+      "name": "tribal_economy_progress_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 106.721
+    },
+    {
+      "name": "tribal_neighbors_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 33.969
+    },
+    {
+      "name": "tribal_age_housing_recovery_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.636
+    },
+    {
+      "name": "spherical_gameplay_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 337.957
+    }
+  ],
+  "snapshot_test": {
+    "checks": 1366,
+    "failures": [],
+    "passed": true,
+    "test": "village_work_snapshot"
+  },
+  "benchmark": {
+    "benchmark": "arch15_arrived_work_snapshot",
+    "iterations_per_sample": 1000,
+    "kind": "headless_cpu_microbenchmark",
+    "new_copied_containers": 9,
+    "new_us_per_capture": [
+      15.84,
+      14.255,
+      12.203,
+      12.567,
+      12.999
+    ],
+    "old_copied_containers": 281,
+    "old_us_per_capture": [
+      273.963,
+      243.961,
+      272.813,
+      219.578,
+      254.799
+    ],
+    "pending_batches": 48,
+    "production_records": 32,
+    "receipts": 64,
+    "residents": 6
+  },
+  "benchmark_medians_us": {
+    "old": 254.799,
+    "new": 12.999
+  },
+  "measurement_scope": "Headless capture-function CPU microbenchmark; container counts are not bytes, frame-time or target-PC evidence.",
+  "evidence_sha256": {
+    "initial/art_sources.log": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+    "initial/far_simulation_test.log": "f367546b4f13611e93a14f69920d4ad5d966e9ea9a6b0ff3946afaa4683912e5",
+    "initial/import_excerpt.txt": "b930015d1a21cbaea62b4e224740d7b477d4e9c2ae8f191500bba7d6767a3bd1",
+    "initial/results.json": "50ec748e41dbaf3d8b6165eb04475df735c89427935a541f5ca658d49aa410c5",
+    "initial/tribal_economy_progress_test.log": "9187c49509c8c51e747776299cf7b15eaf9304759932340c08ad8d63f7672334",
+    "initial/tribal_progression_test.log": "a5bd0c8e4cba575d031bfe6f5e702904bf2ab142910905bfd4278818ba978f8c",
+    "initial/village_work_snapshot_test.log": "bafea169077ac756c0f28e9a186209e5c9a0736db7cc280868dd50c81a7d109d",
+    "runtime/results.json": "847d587ce8e842ed87d8ac349532deaf601b56181166a07f15048be07c5ea1ae",
+    "runtime/spherical_gameplay_test.log": "6f3b1b10b64937824e24e359a7c16b6114a42bc1af1b101c003814560431b9e6",
+    "runtime/tribal_age_housing_recovery_test.log": "b1fa04e63720e2035053a934b5475c5f0643e2ff408a4d1c0ec95af6d380f366",
+    "runtime/tribal_economy_progress_world_test.log": "71d8398b1fd4c1c919bd2c53c9cc9c2226af1b4343e38d6adfdfcab772c7988c",
+    "runtime/tribal_neighbors_world_test.log": "5283991a0cf3435b9b402665c3b36816e9751b35cb2d8f6fdaceae2df28b4766",
+    "runtime/village_work_snapshot_test.log": "c3bfdd5d435ab5355bb0da9aa8bcce887e00f9437bec926c7410159f85ce7552"
+  }
+}

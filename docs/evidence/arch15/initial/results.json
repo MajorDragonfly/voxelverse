@@ -1,0 +1,41 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.905
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.021
+    },
+    {
+      "name": "village_work_snapshot_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.973
+    },
+    {
+      "name": "tribal_progression_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.219
+    },
+    {
+      "name": "tribal_economy_progress_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.22
+    },
+    {
+      "name": "far_simulation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.725
+    }
+  ]
+}
