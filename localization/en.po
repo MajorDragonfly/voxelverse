@@ -1316,3 +1316,393 @@ msgstr "Show brief gameplay hint"
 
 msgid "Entdeckungsbuch · J"
 msgstr "Discovery journal · J"
+
+msgid "SKILLS_SPECIES"
+msgstr "VOXELVERSE  /  YOUR SPECIES"
+
+msgid "SKILLS_TITLE"
+msgstr "Development book"
+
+msgid "SKILLS_CLOSE"
+msgstr "Close · Esc"
+
+msgid "SKILLS_TAB"
+msgstr "Skills"
+
+msgid "SKILLS_JOURNAL"
+msgstr "Discovery journal · J"
+
+msgid "SKILLS_PATH"
+msgstr "Development path"
+
+msgid "SKILLS_HEADING"
+msgstr "Your skills"
+
+msgid "SKILLS_EARNING"
+msgstr "Earn points: befriend and help · hunt and resolve conflicts.\nSilhouette = still locked. Select an icon to see its effects and requirements."
+
+msgid "SKILLS_DETAIL"
+msgstr "SKILL"
+
+msgid "SKILLS_SAVE_HINT"
+msgstr "Unlocks are saved immediately. Respec is not yet available."
+
+msgid "SKILLS_SOCIAL"
+msgstr "SOCIAL"
+
+msgid "SKILLS_AGGRESSION"
+msgstr "AGGRESSIVE"
+
+msgid "SKILLS_LEGACY_CAPTION"
+msgstr "Legacy from tribal phase"
+
+msgid "SKILLS_TRIBE_CAPTION"
+msgstr "Tribal phase"
+
+msgid "SKILLS_CREATURE_CAPTION"
+msgstr "Creature phase"
+
+msgid "SKILLS_OPEN_PATH"
+msgstr "Your path stays open"
+
+msgid "SKILLS_TRIBE_PATH"
+msgstr "Your tribe · shared achievements"
+
+msgid "SKILLS_FUTURE_PATH"
+msgstr " · your future path"
+
+msgid "SKILLS_WALLET_CONTEXT"
+msgstr "Social and aggressive paths can be combined. Only points from the %s phase are shown."
+
+msgid "SKILLS_OLD_POINTS"
+msgstr " Creature points remain available in the creature tree."
+
+msgid "SKILLS_WALLET"
+msgstr "%d points available\n%d earned · %d spent"
+
+msgid "SKILLS_PLANNED_EARNING"
+msgstr "Planned ways to earn points\n"
+
+msgid "SKILLS_PLANNED_SKILLS"
+msgstr "\n\nSkills and purchases will follow with playable actions in this phase."
+
+msgid "SKILLS_TRIBE_EARNING"
+msgstr "Tribal points from shared achievements\nEach milestone counts once per campaign. Individual goals are listed in the development path."
+
+msgid "SKILLS_TRIBE_CONFLICT"
+msgstr "Group defence and tribal conflicts are planned. They currently offer no points or combat bonuses."
+
+msgid "SKILLS_UNLOCKED"
+msgstr "Unlocked"
+
+msgid "SKILLS_CARD_COST"
+msgstr "%d points · %s"
+
+msgid "SKILLS_AVAILABLE"
+msgstr "Available"
+
+msgid "SKILLS_LOCKED"
+msgstr "Locked"
+
+msgid "SKILLS_REQUIREMENT"
+msgstr "Requirement: "
+
+msgid "SKILLS_NONE"
+msgstr "none"
+
+msgid "SKILLS_LEGACY_EFFECT"
+msgstr "Legacy · prepared for the tribal and later phases"
+
+msgid "SKILLS_CREATURE_EFFECT"
+msgstr "Creature bonus · ends with the creature phase"
+
+msgid "SKILLS_PURCHASED"
+msgstr "\nPurchased · "
+
+msgid "SKILLS_FROM_TRIBE"
+msgstr "planned from the tribal phase"
+
+msgid "SKILLS_GROUP_PENDING"
+msgstr "planned for this phase · group mechanics pending"
+
+msgid "SKILLS_ACTIVE_NOW"
+msgstr "active in gameplay now"
+
+msgid "SKILLS_CREATURE_LEFT"
+msgstr "creature phase already left"
+
+msgid "SKILLS_TRIBE_EFFECT"
+msgstr "Tribal bonus · applies to actual village tasks"
+
+msgid "SKILLS_ACTIVE_PURCHASE"
+msgstr "\nPurchased · active"
+
+msgid "SKILLS_UNLOCK"
+msgstr "Unlock · %d %s"
+
+msgid "SKILLS_SOCIAL_POINTS"
+msgstr "social points"
+
+msgid "SKILLS_AGGRESSION_POINTS"
+msgstr "aggression points"
+
+msgid "SKILLS_SUCCESS"
+msgstr "%s unlocked and saved."
+
+msgid "SKILLS_POINTS_MISSING"
+msgstr "Not enough points in this branch yet."
+
+msgid "SKILLS_PREREQUISITE_MISSING"
+msgstr "Unlock the previous node first."
+
+msgid "SKILLS_ALREADY_PURCHASED"
+msgstr "This node is already unlocked."
+
+msgid "SKILLS_FUTURE_PHASE"
+msgstr "This unlock belongs to a later phase."
+
+msgid "SKILLS_SAVE_FAILED"
+msgstr "Saving failed. Points and the unlock were rolled back. You can try purchasing again."
+
+msgid "SKILLS_IN_PROGRESS"
+msgstr "The previous purchase is still being saved."
+
+msgid "SKILLS_UNAVAILABLE"
+msgstr "Cannot unlock right now. No points were spent."
+
+msgid "SKILLS_IMPLEMENTED"
+msgstr "Current gameplay"
+
+msgid "SKILLS_PLANNED"
+msgstr "Planned · not yet a playable phase"
+
+msgid "SKILLS_GROUP_BONUSES"
+msgstr "\nPurchased group bonuses for this phase: coordination +%d %% · defence +%d %%"
+
+msgid "SKILLS_BONUS_SCOPE"
+msgstr "\nCoordination affects village tasks. Defence will follow with tribal combat."
+
+msgid "SKILLS_POINT_SCOPE"
+msgstr "\nEach phase earns its own points. Creature points stay in their tree."
+
+msgid "SKILLS_VIEW"
+msgstr "Current phase: %s · View: %s · Game paused"
+
+msgid "SKILLS_PLAYABLE_CHOICE"
+msgstr " · playable"
+
+msgid "SKILLS_PLANNED_CHOICE"
+msgstr " · planned"
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_APPROACH_NAME"
+msgstr "Openness"
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_APPROACH_DESCRIPTION"
+msgstr "Befriending becomes 15 % more effective."
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_SUPPORT_NAME"
+msgstr "Solidarity"
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_SUPPORT_DESCRIPTION"
+msgstr "Supporting allied creatures becomes 15 % more effective."
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_LEGACY_NAME"
+msgstr "Community spirit"
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_LEGACY_DESCRIPTION"
+msgstr "From the tribal phase: 10 % better group coordination."
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_HUNTER_NAME"
+msgstr "Hunting instinct"
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_HUNTER_DESCRIPTION"
+msgstr "Attacks become 10 % more effective."
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_ENDURANCE_NAME"
+msgstr "Endurance"
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_ENDURANCE_DESCRIPTION"
+msgstr "Stamina recovers 15 % faster."
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_LEGACY_NAME"
+msgstr "Defensive spirit"
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_LEGACY_DESCRIPTION"
+msgstr "From the tribal phase: 10 % better shared defence."
+
+msgid "SKILLS_NODE_TRIBE_SOCIAL_TEAMWORK_NAME"
+msgstr "Division of labour"
+
+msgid "SKILLS_NODE_TRIBE_SOCIAL_TEAMWORK_DESCRIPTION"
+msgstr "Village tasks are completed 10 % faster in the tribal phase."
+
+msgid "SKILLS_NODE_TRIBE_SOCIAL_PRACTICE_NAME"
+msgstr "Practised community"
+
+msgid "SKILLS_NODE_TRIBE_SOCIAL_PRACTICE_DESCRIPTION"
+msgstr "Another 10 % to the tribal work rate. No additional production without work and transport."
+
+msgid "SKILLS_PHASE_0_NAME"
+msgstr "Creature"
+
+msgid "SKILLS_PHASE_0_SCOPE"
+msgstr "Individual encounter"
+
+msgid "SKILLS_PHASE_0_CONTROL"
+msgstr "You control your creature; the nest group remains part of this phase."
+
+msgid "SKILLS_PHASE_0_LOOP_0"
+msgstr "Explore and develop your body"
+
+msgid "SKILLS_PHASE_0_LOOP_1"
+msgstr "Build relationships or hunt"
+
+msgid "SKILLS_PHASE_0_LOOP_2"
+msgstr "Form your own nest group"
+
+msgid "SKILLS_PHASE_0_SOCIAL"
+msgstr "Befriend others and treat injuries caused by someone else."
+
+msgid "SKILLS_PHASE_0_AGGRESSION"
+msgstr "Complete prey hunts and conflicts with hostile animals."
+
+msgid "SKILLS_PHASE_0_NEXT"
+msgstr "Creature → nest group → tribal phase. The nest group is the preceding step, not yet a village."
+
+msgid "SKILLS_PHASE_1_NAME"
+msgstr "Tribe"
+
+msgid "SKILLS_PHASE_1_SCOPE"
+msgstr "Three residents and their first village"
+
+msgid "SKILLS_PHASE_1_CONTROL"
+msgstr "You command groups, assign tasks and develop a proper village."
+
+msgid "SKILLS_PHASE_1_LOOP_0"
+msgstr "Gather materials"
+
+msgid "SKILLS_PHASE_1_LOOP_1"
+msgstr "Craft tools"
+
+msgid "SKILLS_PHASE_1_LOOP_2"
+msgstr "Build shelter"
+
+msgid "SKILLS_PHASE_1_LOOP_3"
+msgstr "Provide for residents"
+
+msgid "SKILLS_PHASE_1_LOOP_4"
+msgstr "Expand the village"
+
+msgid "SKILLS_PHASE_1_SOCIAL"
+msgstr "Complete shared deliveries, crafting, hut building, gardening and care for the whole group. Each milestone earns separate tribal points once."
+
+msgid "SKILLS_PHASE_1_AGGRESSION"
+msgstr "Planned: defend the camp and resolve limited tribal conflicts. Not yet an active way to earn points."
+
+msgid "SKILLS_PHASE_1_NEXT"
+msgstr "This is the tribal phase with a playable village introduction. A root garden and recurring orders secure food. Next: more professions, resource sources, population growth and neighbouring tribes."
+
+msgid "SKILLS_PHASE_2_NAME"
+msgstr "Antiquity / Middle Ages"
+
+msgid "SKILLS_PHASE_2_SCOPE"
+msgstr "Settlement and faction"
+
+msgid "SKILLS_PHASE_2_CONTROL"
+msgstr "You organise several settlements and their population."
+
+msgid "SKILLS_PHASE_2_LOOP_0"
+msgstr "Expand farming and crafting"
+
+msgid "SKILLS_PHASE_2_LOOP_1"
+msgstr "Connect settlements"
+
+msgid "SKILLS_PHASE_2_LOOP_2"
+msgstr "Manage trade and regional conflicts"
+
+msgid "SKILLS_PHASE_2_SOCIAL"
+msgstr "Fulfil trade agreements, supply settlements and negotiate peace."
+
+msgid "SKILLS_PHASE_2_AGGRESSION"
+msgstr "Defend against sieges and complete campaigns with a defined objective."
+
+msgid "SKILLS_PHASE_2_NEXT"
+msgstr "Diplomacy, supply and defence; established institutions as a legacy."
+
+msgid "SKILLS_PHASE_3_NAME"
+msgstr "Modern age / World power"
+
+msgid "SKILLS_PHASE_3_SCOPE"
+msgstr "State and international conflict"
+
+msgid "SKILLS_PHASE_3_CONTROL"
+msgstr "You lead a state and direct its economy, diplomacy and defence."
+
+msgid "SKILLS_PHASE_3_LOOP_0"
+msgstr "Develop industry"
+
+msgid "SKILLS_PHASE_3_LOOP_1"
+msgstr "Shape international relations"
+
+msgid "SKILLS_PHASE_3_LOOP_2"
+msgstr "Prepare the journey into space"
+
+msgid "SKILLS_PHASE_3_SOCIAL"
+msgstr "Complete cooperation, humanitarian aid and joint research."
+
+msgid "SKILLS_PHASE_3_AGGRESSION"
+msgstr "Achieve strategic conflict objectives and protect your territory."
+
+msgid "SKILLS_PHASE_3_NEXT"
+msgstr "Prepare economic alliances and strategic logistics for the space phase."
+
+msgid "SKILLS_PHASE_4_NAME"
+msgstr "Space"
+
+msgid "SKILLS_PHASE_4_SCOPE"
+msgstr "Civilisation and star system"
+
+msgid "SKILLS_PHASE_4_CONTROL"
+msgstr "You develop your civilisation across planets and star systems."
+
+msgid "SKILLS_PHASE_4_LOOP_0"
+msgstr "Explore star systems"
+
+msgid "SKILLS_PHASE_4_LOOP_1"
+msgstr "Supply colonies"
+
+msgid "SKILLS_PHASE_4_LOOP_2"
+msgstr "Shape interstellar relations"
+
+msgid "SKILLS_PHASE_4_SOCIAL"
+msgstr "Successfully complete first contact, colony aid and interstellar agreements."
+
+msgid "SKILLS_PHASE_4_AGGRESSION"
+msgstr "Defend colonies and resolve conflicts over systems."
+
+msgid "SKILLS_PHASE_4_NEXT"
+msgstr "Interstellar cooperation and fleet coordination; stable galaxy, system and body addresses."
+
+msgid "SKILLS_PHASE_5_NAME"
+msgstr "Multiverse"
+
+msgid "SKILLS_PHASE_5_SCOPE"
+msgstr "Universe and cross-universe mission"
+
+msgid "SKILLS_PHASE_5_CONTROL"
+msgstr "A long-term concept for your civilisation across universes."
+
+msgid "SKILLS_PHASE_5_LOOP_0"
+msgstr "Explore new universes"
+
+msgid "SKILLS_PHASE_5_LOOP_1"
+msgstr "Develop expeditions and relationships across universes"
+
+msgid "SKILLS_PHASE_5_SOCIAL"
+msgstr "Complete joint expeditions and agreements between universes."
+
+msgid "SKILLS_PHASE_5_AGGRESSION"
+msgstr "Defeat threats across universes with a defined objective."
+
+msgid "SKILLS_PHASE_5_NEXT"
+msgstr "Long-term concept; concrete gameplay rules will be defined after the space phase."
