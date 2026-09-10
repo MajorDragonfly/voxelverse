@@ -93,7 +93,66 @@ def _version(value, versions: range | tuple, label: str) -> None:
     _require(type(value) in (int, float) and value in versions, f"Unsupported {label} version: {value}")
 
 
-def _roots(snapshot: dict, depth: int = 0) -> Iterator[str]:
+def _storage_root(storage) -> str:
+    _require(isinstance(storage, dict), "Missing region manifest")
+    _version(storage.get("schema"), (1,), "region manifest")
+    _require(storage.get("format") == STORE_FORMAT, "Unknown region storage format")
+    root = storage.get("root")
+    _require(isinstance(root, str) and (root == "" or HASH.fullmatch(root)), "Invalid root hash")
+    return root
+
+
+def _atlas_rows(rows) -> None:
+    _require(isinstance(rows, list) and len(rows) == 32 and all(
+        type(row) in (int, float) and 0 <= row <= 4294967295 and row == int(row) for row in rows),
+        "Invalid atlas tile rows")
+
+
+def _atlas_key(key: str, atlas: dict) -> None:
+    parts = key.split(":")
+    _require(len(key) <= 72 and len(parts) == 3 and all(
+        re.fullmatch(r"0|-?[1-9][0-9]{0,9}", part) and abs(int(part)) <= 2147483647 for part in parts),
+        "Invalid atlas tile key")
+    _require(int(parts[0]) in ((-1,) if atlas["mode"] == "legacy_plane_v9" else range(6)),
+        "Invalid atlas tile face")
+
+
+def _atlas_root(atlas, body_id: str) -> str:
+    _require(isinstance(atlas, dict), "Invalid exploration atlas")
+    _version(atlas.get("schema"), (1, 2), "exploration atlas")
+    # A future register (e.g. paged places) needs its own explicit root adapter;
+    # silently copying an unrecognized pointer would produce a partial backup.
+    fields = {"schema", "body_id", "mode", "radius", "divisions", "tiles", "places"}
+    if atlas["schema"] == 2:
+        fields.update(("storage", "extent"))
+    _require(set(atlas) <= fields, "Unsupported exploration atlas fields")
+    _require(isinstance(body_id, str) and bool(body_id) and atlas.get("body_id") == body_id,
+        "Atlas belongs to a different body")
+    _require(atlas.get("mode") in ("legacy_plane_v9", "cube_sphere_m1_v1"), "Unknown atlas surface mode")
+    radius = atlas.get("radius")
+    _require(type(radius) in (int, float) and math.isfinite(radius) and 0 <= radius <= 1e10,
+        "Invalid atlas radius")
+    sphere = atlas["mode"] == "cube_sphere_m1_v1"
+    _require(radius > 0 if sphere else radius == 0, "Atlas radius and mode differ")
+    divisions = 2 ** math.ceil(math.log2(max(2 * radius / 16, 1))) if sphere else 0
+    _require(type(atlas.get("divisions")) in (int, float) and atlas["divisions"] == divisions,
+        "Invalid atlas resolution")
+    tiles, places = atlas.get("tiles"), atlas.get("places")
+    _require(isinstance(tiles, dict) and len(tiles) <= (96 if atlas["schema"] == 2 else 8192)
+        and isinstance(places, dict) and len(places) <= 2048, "Invalid atlas collection")
+    for key, rows in tiles.items():
+        _atlas_key(key, atlas)
+        _atlas_rows(rows)
+    if atlas["schema"] == 1:
+        return ""
+    extent = atlas.get("extent")
+    _require(isinstance(extent, list) and (not extent or (len(extent) == 4 and all(
+        type(value) in (int, float) and math.isfinite(value) for value in extent)
+        and extent[0] <= extent[2] and extent[1] <= extent[3])), "Invalid atlas extent")
+    return _storage_root(atlas.get("storage"))
+
+
+def _roots(snapshot: dict, depth: int = 0) -> Iterator[tuple[str, dict | None]]:
     _require(depth <= MAX_ARCHIVE_DEPTH, "Migration archive nesting exceeds the backup budget")
     # Versions 1/2 refer to loose editor files; claiming a self-contained export
     # for them would silently omit those designs. Use the existing migration.
@@ -108,6 +167,12 @@ def _roots(snapshot: dict, depth: int = 0) -> Iterator[str]:
     _require(isinstance(bodies, dict), "Missing body register")
     for body in bodies.values():
         _require(isinstance(body, dict), "Invalid body record")
+        for field in ("exploration_atlas", "legacy_exploration_atlas"):
+            if field in body:
+                atlas = body[field]
+                root = _atlas_root(atlas, body.get("id"))
+                if root:
+                    yield root, atlas
         if "surface_population" not in body:
             continue
         population = body["surface_population"]
@@ -119,14 +184,9 @@ def _roots(snapshot: dict, depth: int = 0) -> Iterator[str]:
             _require(isinstance(population.get("regions"), dict) and "storage" not in population,
                      "Inline population has inconsistent storage")
             continue
-        storage = population.get("storage")
-        _require(isinstance(storage, dict), "Missing region manifest")
-        _version(storage.get("schema"), (1,), "region manifest")
-        _require(storage.get("format") == STORE_FORMAT, "Unknown region storage format")
-        root = storage.get("root")
-        _require(isinstance(root, str) and (root == "" or HASH.fullmatch(root)), "Invalid root hash")
+        root = _storage_root(population.get("storage"))
         if root:
-            yield root
+            yield root, None
     archive = campaign.get("surface_migration", {})
     _require(isinstance(archive, dict), "Invalid migration archive")
     if archive:
@@ -148,7 +208,7 @@ def _blob_path(directory: Path, digest: str) -> Path:
     return shard / (digest + ".json")
 
 
-def _walk(directory: Path, root: str, stats: Stats) -> Iterator[tuple[str, bytes]]:
+def _walk(directory: Path, root: str, stats: Stats, atlas: dict | None = None) -> Iterator[tuple[str, bytes]]:
     # Depth-first traversal retains at most 15 siblings per trie level plus
     # one leaf's 32 values. No world-sized visited set or region cache.
     pending = [(root, "", None)]
@@ -162,6 +222,16 @@ def _walk(directory: Path, root: str, stats: Stats) -> Iterator[tuple[str, bytes
         if key is not None:
             _require(value.get("key") == key and isinstance(value.get("value"), dict),
                      f"Region payload belongs to a different index key: {key}")
+            if atlas is not None:
+                _atlas_key(key, atlas)
+                tile = value["value"]
+                _version(tile.get("schema"), (1,), "atlas tile")
+                _require(set(tile) == {"schema", "body_id", "mode", "divisions", "rows"},
+                         "Unsupported atlas tile fields")
+                _require(type(tile.get("divisions")) in (int, float) and
+                         all(tile.get(field) == atlas[field] for field in ("body_id", "mode", "divisions")),
+                         "Atlas tile belongs to a different body or projection")
+                _atlas_rows(tile.get("rows"))
         else:
             kind = value.get("kind")
             _require(kind in ("branch", "leaf"), "Unknown trie page kind")
@@ -252,9 +322,9 @@ def export_bundle(slots: list[Path], regions: Path, output: Path) -> dict:
             _write_new(staging / relative, raw)
             snapshots.append({"path": relative, "sha256": _digest(raw)})
             stats.snapshots += 1
-            for root in _roots(snapshot):
+            for root, atlas in _roots(snapshot):
                 stats.roots += 1
-                for digest, blob in _walk(source_root, root, stats):
+                for digest, blob in _walk(source_root, root, stats, atlas):
                     destination = _blob_path(staging / "regions/blobs", digest)
                     if destination.exists():
                         _require(_read(destination, MAX_BLOB_BYTES) == blob, "Conflicting destination blob")
@@ -306,9 +376,9 @@ def verify_bundle(directory: Path) -> dict:
         stats.snapshots += 1
         _require(not (directory / "regions").is_symlink() and not (directory / "regions/blobs").is_symlink(),
                  "Symbolic link in backup regions")
-        for root in _roots(_object(raw)):
+        for root, atlas in _roots(_object(raw)):
             stats.roots += 1
-            for _ in _walk(directory / "regions/blobs", root, stats):
+            for _ in _walk(directory / "regions/blobs", root, stats, atlas):
                 pass
     return asdict(stats)
 

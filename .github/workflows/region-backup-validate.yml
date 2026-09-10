@@ -5,11 +5,13 @@ on:
     paths:
       - "tools/region_backup.py"
       - "tools/region_backup_probe.gd"
+      - "tools/atlas_backup_probe.gd"
       - "tests/tooling/region_backup_test.py"
       - "core/persistence/region_store.gd"
       - "core/persistence/slot_history.gd"
       - "autoload/save_game_service.gd"
       - "world/surface/campaign_population_state.gd"
+      - "core/map/exploration_atlas.gd"
       - ".github/workflows/region-backup-validate.yml"
   workflow_dispatch:
 
@@ -25,7 +27,16 @@ jobs:
         run: >-
           python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
           --skip-main --tests --output "${{ runner.temp }}/region-backup-import"
+      - name: Prepare the published Atlas contract for cross-package acceptance
+        # PR #59 is a completed, published subpackage. This temporary checkout
+        # exercises its actual writer/reader without merging it into this PR.
+        run: |
+          git fetch --depth=1 origin 57a330fc5e064ea0cda221e2f8e86140e8685f8f
+          git worktree add --detach "$RUNNER_TEMP/atlas-backup-reference" 57a330fc5e064ea0cda221e2f8e86140e8685f8f
+          cd "$RUNNER_TEMP/atlas-backup-reference"
+          python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --skip-main --tests --output "$RUNNER_TEMP/atlas-backup-import"
       - name: Verify backup failure paths and real Godot restart
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+          ATLAS_BACKUP_PROJECT: ${{ runner.temp }}/atlas-backup-reference
         run: python -m unittest discover -s tests/tooling -p 'region_backup_test.py' -v

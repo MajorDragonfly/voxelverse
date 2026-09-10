@@ -1,6 +1,7 @@
 """Region closure, publication failure and actual Godot restart acceptance."""
 from pathlib import Path
 import hashlib
+import copy
 import json
 import os
 import subprocess
@@ -35,7 +36,9 @@ class RegionBackupTest(unittest.TestCase):
     def tree(self, count=320, stock=7):
         entries = {f"body:test:region:{i}": self.blob({"schema": 1, "key": f"body:test:region:{i}",
                    "value": {"id": i, "stock": stock, "cargo": "milk", "dead": i == 0}}) for i in range(count)}
+        return self.index(entries), entries
 
+    def index(self, entries):
         def partition(values, depth=0):
             if len(values) <= 32:
                 return self.blob({"schema": 1, "kind": "leaf", "entries": values})
@@ -45,7 +48,148 @@ class RegionBackupTest(unittest.TestCase):
                 buckets.setdefault(digit, {})[key] = digest
             return self.blob({"schema": 1, "kind": "branch",
                               "children": {k: partition(v, depth + 1) for k, v in buckets.items()}})
-        return partition(entries), entries
+        return partition(entries)
+
+    def atlas(self, count=130, bits=2147483648, body_id="body:test"):
+        entries = {}
+        for i in range(count):
+            key = f"-1:{-i}:0"
+            entries[key] = self.blob({"schema": 1, "key": key, "value": {
+                "schema": 1, "body_id": body_id, "mode": "legacy_plane_v9", "divisions": 0,
+                "rows": [bits] + [0] * 31}})
+        return {"schema": 2, "body_id": body_id, "mode": "legacy_plane_v9", "radius": 0,
+                "divisions": 0, "tiles": {"-1:0:0": [bits | 1] + [0] * 31}, "places": {},
+                "extent": [-count * 512, 0, 512, 512], "storage": {
+                "schema": 1, "format": backup.STORE_FORMAT, "root": self.index(entries)}}, entries
+
+    def atlas_snapshot(self, atlas, field="exploration_atlas"):
+        snapshot = self.snapshot("")
+        body = snapshot["game_state"]["campaign"]["bodies"]["body:test"]
+        body.pop("surface_population")  # Atlas-only bodies must not be skipped.
+        body[field] = atlas
+        return snapshot
+
+    def test_atlas_closure_preserves_history_archive_overlay_and_independent_bodies(self):
+        old, _ = self.atlas(bits=1)
+        current, entries = self.atlas()
+        legacy, _ = self.atlas(bits=4)
+        other, _ = self.atlas(count=2, body_id="body:other")
+        source_text = json.dumps(self.atlas_snapshot(legacy))
+        snapshot = self.atlas_snapshot(current)
+        campaign = snapshot["game_state"]["campaign"]
+        campaign["bodies"]["body:test"]["legacy_exploration_atlas"] = legacy
+        campaign["bodies"]["body:other"] = {"id": "body:other", "exploration_atlas": other,
+            "surface_population": {"schema": 1, "body_id": "body:other", "regions": {}}}
+        campaign["surface_migration"] = {"schema": 1, "algorithm": "campaign_places_copy_v2",
+            "source_text": source_text, "source_sha256": backup._digest(source_text.encode())}
+        self.save(snapshot)
+        self.save(self.atlas_snapshot(old), Path(str(self.slot) + ".bak"))
+        self.save(self.atlas_snapshot(old), Path(str(self.slot) + ".history/snapshot_0001_old.json"))
+        second = self.save(self.atlas_snapshot(old), self.slot.with_name("slot_copy.json"))
+        originals = {p: p.read_bytes() for p in (self.root / "source").rglob("*.json")}
+        stats = backup.export_bundle([self.slot, second], self.regions, self.output)
+        self.assertEqual(stats["roots"], 7)
+        self.assertGreater(stats["copied_blobs"], 390)
+        self.assertLess(stats["peak_pending"], 100)
+        self.assertEqual(backup.verify_bundle(self.output)["roots"], 7)
+        self.assertEqual((self.output / "saves" / self.slot.name).read_bytes(), originals[self.slot])
+        self.assertEqual(backup._object((self.output / "saves" / self.slot.name).read_bytes()), snapshot)
+        for path, raw in originals.items():
+            self.assertEqual(path.read_bytes(), raw)
+        # This also rejects pre-extension backups which copied JSON but omitted atlas blobs.
+        backup._blob_path(self.output / "regions/blobs", entries["-1:-129:0"]).unlink()
+        with self.assertRaises(OSError):
+            backup.verify_bundle(self.output)
+
+    def test_atlas_future_versions_fields_and_body_mismatch_protect_all_snapshot_locations(self):
+        atlas, _ = self.atlas(count=1)
+        changes = ({"schema": 3}, {"schema": True}, {"body_id": "another"},
+            {"places_storage": atlas["storage"]}, {"storage": {**atlas["storage"], "schema": 2}},
+            {"storage": {**atlas["storage"], "format": "future"}}, {"storage": {}},
+            {"schema": 1}, {"tiles": {"-1:0:0": [4294967296] * 32}},
+            {"tiles": {"-1:00:0": [1] * 32}}, {"tiles": {"5:0:0": [1] * 32}},
+            {"tiles": {f"-1:{i}:0": [1] * 32 for i in range(97)}})
+        for location in ("current", "legacy", "archive", "backup", "history"):
+            for change in changes:
+                with self.subTest(location=location, change=change):
+                    candidate = self.atlas_snapshot({**atlas, **change},
+                        "legacy_exploration_atlas" if location == "legacy" else "exploration_atlas")
+                    path = self.slot
+                    if location == "archive":
+                        text = json.dumps(candidate)
+                        candidate = self.snapshot("")
+                        candidate["game_state"]["campaign"]["surface_migration"] = {
+                            "schema": 1, "algorithm": "campaign_places_copy_v2", "source_text": text,
+                            "source_sha256": backup._digest(text.encode())}
+                    elif location in ("backup", "history"):
+                        self.save(self.snapshot(""))
+                        path = Path(str(self.slot) + (".bak" if location == "backup" else ".history/snapshot_0001_old.json"))
+                    self.save(candidate, path)
+                    before = path.read_bytes()
+                    with self.assertRaises(backup.BackupError):
+                        backup.export_bundle([self.slot], self.regions, self.output)
+                    self.assertEqual(path.read_bytes(), before)
+                    self.assertFalse(self.output.exists())
+                    path.unlink()
+
+    def test_atlas_deep_tiles_validate_payload_even_with_valid_hash_or_pending_override(self):
+        atlas, entries = self.atlas(count=40)
+        key = "-1:0:0"  # Even an overlay cannot hide a broken committed payload.
+        tile = backup._object(backup._blob_path(self.regions, entries[key]).read_bytes())["value"]
+        for change in ({"schema": 2}, {"body_id": "another"}, {"mode": "cube_sphere_m1_v1"},
+                       {"divisions": 8}, {"divisions": False}, {"rows": [False] * 32}, {"rows": [0] * 31},
+                       {"rows": [0.5] * 32}, {"next_storage": atlas["storage"]}):
+            with self.subTest(change=change):
+                damaged = {**entries, key: self.blob({"schema": 1, "key": key, "value": {**tile, **change}})}
+                candidate = copy.deepcopy(atlas)
+                candidate["storage"]["root"] = self.index(damaged)
+                self.save(self.atlas_snapshot(candidate))
+                with self.assertRaises(backup.BackupError):
+                    backup.export_bundle([self.slot], self.regions, self.output)
+                self.assertFalse(self.output.exists())
+        for damage in ("missing", "checksum"):
+            self.save(self.atlas_snapshot(atlas))
+            path = backup._blob_path(self.regions, entries["-1:-39:0"])
+            raw = path.read_bytes()
+            if damage == "missing": path.unlink()
+            else: path.write_bytes(b"corrupted")
+            with self.assertRaises((backup.BackupError, OSError)):
+                backup.export_bundle([self.slot], self.regions, self.output)
+            self.assertFalse(self.output.exists())
+            path.write_bytes(raw)
+
+    def test_inline_and_empty_atlas_need_no_blobs_and_preserve_signed_high_bits(self):
+        atlas, _ = self.atlas(count=1)
+        for schema in (1, 2):
+            candidate = copy.deepcopy(atlas)
+            candidate["schema"] = schema
+            if schema == 1:
+                del candidate["storage"], candidate["extent"]
+            else:
+                candidate["storage"]["root"] = ""
+            candidate["tiles"] = {"-1:-1:-1": [4294967295] * 32}
+            self.save(self.atlas_snapshot(candidate))
+            output = self.output.with_name(f"backup-{schema}")
+            self.assertEqual(backup.export_bundle([self.slot], self.root / "no-blobs", output)["roots"], 0)
+            self.assertEqual((output / "saves" / self.slot.name).read_bytes(), self.slot.read_bytes())
+
+    def test_atlas_source_can_advance_while_captured_root_remains_complete(self):
+        atlas, _ = self.atlas(count=2)
+        newer, _ = self.atlas(count=3)
+        self.save(self.atlas_snapshot(atlas))
+        captured = self.slot.read_bytes()
+        original_write = backup._write_new
+
+        def advance(path, raw):
+            original_write(path, raw)
+            if path.name == self.slot.name:
+                self.save(self.atlas_snapshot(newer))
+
+        with patch.object(backup, "_write_new", side_effect=advance):
+            backup.export_bundle([self.slot], self.regions, self.output)
+        self.assertEqual((self.output / "saves" / self.slot.name).read_bytes(), captured)
+        self.assertNotEqual(self.slot.read_bytes(), captured)
+        self.assertEqual(backup.verify_bundle(self.output)["roots"], 1)
 
     def snapshot(self, root):
         return {"schema": 9, "game_state": {"schema": 4, "campaign": {"schema": 3, "id": "campaign:kept",
@@ -281,6 +425,52 @@ class GodotRegionBackupTest(unittest.TestCase):
             self.assertEqual(restored["body_id"], created["body_id"])
             self.assertGreaterEqual(stats["copied_blobs"], 1200)
             print("ARCH13_NATIVE_RESULT", json.dumps({"export": stats, "restart": restored}), flush=True)
+
+
+@unittest.skipUnless(os.environ.get("GODOT_BINARY") and os.environ.get("ATLAS_BACKUP_PROJECT"),
+                     "Set GODOT_BINARY and ATLAS_BACKUP_PROJECT (published ARCH-14 schema-2 project)")
+class GodotAtlasBackupTest(unittest.TestCase):
+    def test_real_atlas_export_restores_sphere_history_legacy_and_pending_changes(self):
+        project = Path(os.environ["ATLAS_BACKUP_PROJECT"]).resolve()
+        with tempfile.TemporaryDirectory(prefix="arch13-atlas-native-") as temporary, \
+                validation_editor(os.environ["GODOT_BINARY"]) as editor:
+            base = Path(temporary)
+
+            def run(mode, env):
+                result = subprocess.run([str(editor), "--headless", "--path", str(project), "--script",
+                    str(PROJECT / "tools/atlas_backup_probe.gd"), "--", mode], env=env,
+                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=120)
+                self.assertEqual(result.returncode, 0, result.stdout[-6000:])
+                self.assertNotIn("SCRIPT ERROR", result.stdout)
+                self.assertNotIn("ERROR:", result.stdout)
+                rows = [json.loads(line[len("ATLAS_BACKUP_PROBE "):]) for line in result.stdout.splitlines()
+                        if line.startswith("ATLAS_BACKUP_PROBE ")]
+                self.assertTrue(rows, result.stdout)
+                self.assertTrue(rows[-1]["passed"], result.stdout)
+                return rows[-1]
+
+            created = run("create", isolated_env(base / "source"))
+            self.assertGreater(created["pending"], 0)
+            self.assertLessEqual(created["pending"], 96)
+            restored_env = isolated_env(base / "restored")
+            destination = Path(restored_env["XDG_DATA_HOME"]) / "godot/app_userdata/Voxelverse"
+            exported = subprocess.run([sys.executable, str(PROJECT / "tools/region_backup.py"), "export",
+                "--slot", created["slot"], "--regions-dir", created["regions"], "--output", str(destination)],
+                capture_output=True, text=True, timeout=120)
+            self.assertEqual(exported.returncode, 0, exported.stderr)
+            stats = json.loads(exported.stdout)
+            self.assertEqual(backup.verify_bundle(destination)["roots"], stats["roots"])
+            Path(created["regions"]).rename(base / "source-blobs-unavailable")
+            restored = run("verify", restored_env)
+            self.assertEqual(restored["checked_sphere_tiles"], 1200 * restored["atlas_snapshots"])
+            self.assertEqual(restored["checked_legacy_tiles"], 130 * restored["atlas_snapshots"])
+            self.assertGreaterEqual(restored["atlas_snapshots"], 2)
+            self.assertLessEqual(restored["peak_cache"], 96)
+            self.assertLessEqual(restored["peak_pages"], 128)
+            self.assertEqual(restored["campaign_id"], created["campaign_id"])
+            self.assertEqual(restored["body_id"], created["body_id"])
+            print("ARCH13_ATLAS_NATIVE_RESULT", json.dumps({"export": stats, "created": created,
+                "restart": restored}), flush=True)
 
 
 if __name__ == "__main__":

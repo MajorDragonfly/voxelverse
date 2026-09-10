@@ -4,6 +4,12 @@ Abgegrenztes Teilpaket vom 10. September 2026. Basis: veröffentlichter `main`
 `ea900f2e09946660694a9e59399b4680a5655a85`. Branch:
 `agent/arch13-region-backups-2026-09-10`.
 
+Die [Atlas-Fortsetzung](WORK_ARCH13_ATLAS_BACKUPS.md) ergänzt auf dieser Lieferung
+die vollständigen Wurzeln aktueller und archivierter Kampagnenkarten gemäß dem
+veröffentlichten ARCH-14-Vertrag aus PR #59. Die zwölf Prüfungen und Messwerte
+unten dokumentieren die ursprüngliche Population-Lieferung; die Fortsetzung
+enthält den zusätzlichen Karten-/Neustartnachweis.
+
 ## Zweck und Zuständigkeit
 
 Ein Save-JSON verweist bei `surface_population.schema = 2` auf den vorhandenen
@@ -68,6 +74,9 @@ bereits belegten Benutzerdatenverzeichnis sind nicht Bestandteil dieses Pakets.
   Spielmigration verwenden.
 - Monolithische Population 1 bleibt unverändert in der JSON-Datei. Population 2
   wird über ihr vorhandenes Schema-1-Regionsmanifest vollständig verfolgt.
+  Die Atlas-Fortsetzung verfolgt außerdem `exploration_atlas.storage` und
+  `legacy_exploration_atlas.storage` (Atlas 2); offene Kacheln und bestehende
+  Inline-Atlanten bleiben vollständig in den unveränderten Snapshotbytes.
   Bekannte Umzugsarchive in `surface_migration.source_text` werden rekursiv
   berücksichtigt und gegen `source_sha256` geprüft. Ihre Originaltexte werden
   nicht neu serialisiert. Unbekannte Speicher-/Kampagnen-/Archivversionen brechen
@@ -147,6 +156,6 @@ Art-Quellenprüfung und der bestehende `region_store_test` bestanden ebenfalls.
 | Regionszugriffe nach frischem Prozessstart | 3.600 |
 | Höchster Godot-Regionscache | 96 Einträge |
 | Körper-/Kampagnenidentität und Bestand/Fracht | erhalten |
-Bei neuen segmentierten Fachregistern muss `_roots` um deren veröffentlichten
+Bei weiteren segmentierten Fachregistern muss `_roots` um deren veröffentlichten
 Speichervertrag erweitert werden. Erst nach dem vollständigen globalen
 Referenzinventar darf ARCH-13 eine Bereinigung historischer Blobs anschließen.
