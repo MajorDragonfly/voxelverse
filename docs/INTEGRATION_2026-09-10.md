@@ -1,6 +1,6 @@
 # Voxelverse – Integration vom 10. September 2026
 
-Basis: `main` bei `ea900f2e09946660694a9e59399b4680a5655a85`. Integrationsbranch: `agent/integration-2026-09-10`. Die 28 veröffentlichten Übergaben aus PR #42 und #49–75 sind auf dem Integrationsbranch zusammengeführt; ihre vollständigen Commit-IDs stehen in [integration-sources-2026-09-10.json](integration-sources-2026-09-10.json). Die Rücknahme einer doppelten ARCH-13-Reservierung enthält keine zusätzliche Implementierung. Historische, bereits anderweitig integrierte Weltbranches und ungespeicherte Fremdarbeit wurden nicht erneut übernommen.
+Basis: `main` bei `ea900f2e09946660694a9e59399b4680a5655a85`. Integrationsbranch: `agent/integration-2026-09-10`. Die 28 veröffentlichten Übergaben aus PR #42 und #49–75 sind über [PR #76](https://github.com/MajorDragonfly/voxelverse/pull/76) in `main` zusammengeführt; ihre vollständigen Commit-IDs stehen in [integration-sources-2026-09-10.json](integration-sources-2026-09-10.json). Die Rücknahme einer doppelten ARCH-13-Reservierung enthält keine zusätzliche Implementierung. Historische, bereits anderweitig integrierte Weltbranches und ungespeicherte Fremdarbeit wurden nicht erneut übernommen.
 
 ## Ergebnis
 
@@ -57,6 +57,14 @@ Der ARCH-30-Entwurf meldet weiterhin die Präzisionsgrenze des gemeinsamen JSON-
 
 ## Veröffentlichung
 
-Der erste Uploadversuch wurde durch die automatische Freigabeprüfung bis zur ausdrücklichen Zustimmung blockiert. Lars hat anschließend den Upload nach `MajorDragonfly/voxelverse` und die Übernahme in `main` ausdrücklich freigegeben. Die Veröffentlichung erfolgt auf Grundlage dieser Freigabe; der GitHub-PR-/Commit-Verlauf dokumentiert den tatsächlichen Abschluss. Die oben genannten grafischen und nativen Prüfgrenzen bleiben bestehen.
+Der erste Uploadversuch wurde durch die automatische Freigabeprüfung bis zur ausdrücklichen Zustimmung blockiert. Lars hat anschließend den Upload nach `MajorDragonfly/voxelverse` und die Übernahme in `main` ausdrücklich freigegeben. PR #76 wurde mit `08f1208b36555220343d2ad07ed182e1783599f4` in `main` übernommen. Der veröffentlichte Integrationscommit `50fc33eaa440f00e50980ed1fa995e2f95575138` besitzt exakt den lokal geprüften Dateibaum `a9117adb78597b28db4ff8af1c7b8720e35f0a60` und enthält sämtliche 28 Quellstände in seiner Vorgeschichte. Sieben auf Featurebranches gerichtete PRs wurden nach Prüfung ihrer enthaltenen Commit-IDs als integriert geschlossen. Die oben genannten grafischen und nativen Prüfgrenzen bleiben bestehen.
 
 Nächste Aufgaben und abgegrenzte Anschlüsse: [NEXT_PARALLEL_WORK.md](NEXT_PARALLEL_WORK.md).
+
+## CI-Ergänzung nach der Übernahme
+
+Die [vollständige GitHub-Quellprüfung](https://github.com/MajorDragonfly/voxelverse/actions/runs/34484170519) besteht einschließlich aller vier Godot-Testgruppen und der Laufzeitprüfungen. Zusätzliche Fachworkflows enthielten ältere Erwartungen: D1 behandelte die nun unterstützte Eier-Eignung Schema 2 als unbekannte Zukunftsversion; D1.2 erwartete nach der Migration noch Katalogschema 2. Die Proben verwenden jetzt die aktuellen Vertragsgrenzen. D1, D1.1 und D1.2 bestehen jeweils mit getrenntem Schreib- und Leseprozess, einschließlich Originalschutz, unveränderten Identitäten und fortgesetzter Habitatplanung.
+
+Die grafische Kugelprobe erwartete, dass die zuerst portioniert geladenen Tiere sofort innerhalb der Scanreichweite stehen. Ihre Vorbereitung setzt den Beobachter jetzt neben ein tatsächlich erzeugtes Tier, wartet auf Bodenkollision und verwendet den unveränderten echten Kamera-Scan. Vor der Heimat-/Editorprüfung kehrt der Beobachter zum ursprünglichen bebaubaren Ort zurück. Der gezielte Headless-Lauf besteht in 33,725 Sekunden; Fehlerausgaben der Grafikprüfung erscheinen künftig direkt im CI-Protokoll.
+
+Der Linux-Exportlauf bestand 27 Checks einschließlich der vollständigen verpackten Tier-/Frachtreise (504,794 Sekunden), bevor ihn das 20-Minuten-Gesamtlimit beendete. Das Linux-Limit entspricht jetzt dem bisherigen Windows-Limit von 30 Minuten. Der Windows-Frontendablauf überschritt 120 Sekunden; die beiden Abläufe mit mehreren vollständigen Weltstarts erhalten gezielt 240 Sekunden. Einzelne Fehler, Ergebniskennungen und harte Zeitgrenzen bleiben unverändert verbindlich. Vollständige native Exportabnahme und die Wiederholung der Grafikprobe mit beiden Renderern sind bis zum erfolgreichen Abschluss der neuen CI-Läufe offen. [Messwerte und Quellprüfsummen](evidence/integration-2026-09-10/ci-followup.json).

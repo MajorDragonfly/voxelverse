@@ -55,9 +55,9 @@ func run() -> void:
 		for kind in ["schema", "generator", "suitability"]:
 			var future: Dictionary = snapshot.duplicate(true)
 			var catalog: Dictionary = Registry.active(future.game_state)["fauna_catalog"]
-			if kind == "schema": catalog["schema"] = 2
+			if kind == "schema": catalog["schema"] = Catalog.ROLE_SCHEMA + 1
 			elif kind == "generator": catalog["generator_version"] = "future_v2"
-			else: catalog["species"][0]["domestication"]["schema"] = 2
+			else: catalog["species"][0]["domestication"]["schema"] = Catalog.Contract.EGG_SCHEMA + 1
 			check(Atomic.write("user://d1-future.json", future, false) == OK, "Write future fixture")
 			check(Atomic.write("user://d1-future.json.bak", snapshot, false) == OK, "Write compatible backup")
 			var before: String = FileAccess.get_file_as_string("user://d1-future.json")

@@ -1,0 +1,209 @@
+{
+  "schema": 1,
+  "base_main_commit": "08f1208b36555220343d2ad07ed182e1783599f4",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "restart_probes": {
+    "d1": {
+      "processes": [
+        {
+          "process": "write",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "process": "read",
+          "passed": true,
+          "exit_code": 0
+        }
+      ],
+      "markers": [
+        {
+          "failures": [],
+          "mode": "write",
+          "test": "domestic_fauna_restart"
+        },
+        {
+          "failures": [],
+          "mode": "read",
+          "test": "domestic_fauna_restart"
+        }
+      ]
+    },
+    "d11": {
+      "processes": [
+        {
+          "process": "write",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "process": "read",
+          "passed": true,
+          "exit_code": 0
+        }
+      ],
+      "markers": [
+        {
+          "failures": [],
+          "mode": "write",
+          "test": "domestic_fauna_d11_restart"
+        },
+        {
+          "failures": [],
+          "mode": "read",
+          "test": "domestic_fauna_d11_restart"
+        }
+      ]
+    },
+    "d12": {
+      "processes": [
+        {
+          "process": "write",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "process": "read",
+          "passed": true,
+          "exit_code": 0
+        }
+      ],
+      "markers": [
+        {
+          "cases": [
+            {
+              "body": "m1b:terra",
+              "individuals": [
+                "object_a94d6fafcc96015e8ea7b683e36e3750",
+                "object_b614760384817a7f169577acbbd008e1",
+                "object_ac9f1067b8ee06bb3edcd32679b01777"
+              ],
+              "plants": 3,
+              "species": 4
+            },
+            {
+              "body": "m1b:100",
+              "individuals": [
+                "object_f6e0878355dbeff3179107df244c3209",
+                "object_79f42c8b4c07d4dc69a2d00253b3a1ac",
+                "object_0c7c70d788c4109adec6b2a78708ad56"
+              ],
+              "plants": 3,
+              "species": 4
+            },
+            {
+              "body": "m1b:1000",
+              "individuals": [
+                "object_9330ff50e138a117022d7a9cc179f6ac",
+                "object_0e06380b2dec86d4d55387f16b37ff2c",
+                "object_5ad223d81b6a7d8fcbbcc55b282233a1"
+              ],
+              "plants": 3,
+              "species": 4
+            }
+          ],
+          "failures": [],
+          "probe": "d12",
+          "process": "write"
+        },
+        {
+          "cases": [
+            {
+              "cold_body": "m1b:1000",
+              "individuals": [
+                "object_0e06380b2dec86d4d55387f16b37ff2c",
+                "object_5ad223d81b6a7d8fcbbcc55b282233a1",
+                "object_9330ff50e138a117022d7a9cc179f6ac"
+              ]
+            },
+            {
+              "cold_body": "m1b:100",
+              "individuals": [
+                "object_0c7c70d788c4109adec6b2a78708ad56",
+                "object_79f42c8b4c07d4dc69a2d00253b3a1ac",
+                "object_f6e0878355dbeff3179107df244c3209"
+              ]
+            },
+            {
+              "cold_body": "m1b:terra",
+              "individuals": [
+                "object_a94d6fafcc96015e8ea7b683e36e3750",
+                "object_ac9f1067b8ee06bb3edcd32679b01777",
+                "object_b614760384817a7f169577acbbd008e1"
+              ]
+            },
+            {
+              "future_versions_protected": 8,
+              "legacy_sphere": true,
+              "resumed_nodes": 41
+            }
+          ],
+          "failures": [],
+          "probe": "d12",
+          "process": "read"
+        }
+      ]
+    }
+  },
+  "spherical_creature_check": {
+    "name": "spherical_creature_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 33.725,
+    "contract": "spherical_gameplay"
+  },
+  "source_sha256": {
+    "tools/domestic_fauna_restart_probe.gd": "2beb01a6464734e5276e6aa3536752eb5dd121bd02089895ab575377cca68b5c",
+    "tools/domestic_fauna_d12_restart_probe.gd": "cf3be26076c945ea6086df8f8d0aae5c7e526d69402bf4a4b374faada2d7a652",
+    "core/diagnostics/spherical_creature_probe.gd": "a47bdce36e2f58f0bae7cc5c10616e3fba54d6becaa2a87d97520171e54b7fb9",
+    "tools/review_spherical_campaign.py": "65ea899bb229f551d4f999c974f8d261d3a56af0fe5174cd9f1bacf80a5adace",
+    "tools/validate_export.py": "693750b2d5f8dc05ae3085638dd33f8d21ea445c0b30e2094ed826fdc7a2b722",
+    ".github/workflows/export-validate.yml": "fbf5bb3ac38d279740832218402ee0cb75c63296477224c2de0a9060d1028e6d"
+  },
+  "github_source_validation": {
+    "url": "https://github.com/MajorDragonfly/voxelverse/actions/runs/34484170519",
+    "head": "50fc33eaa440f00e50980ed1fa995e2f95575138",
+    "conclusion": "success"
+  },
+  "initial_ci_findings": [
+    {
+      "run": 34484522703,
+      "kind": "d1_future_suitability_fixture_used_supported_schema_2"
+    },
+    {
+      "run": 34484522730,
+      "kind": "d11_workflow_reuses_same_d1_probe"
+    },
+    {
+      "run": 34484522633,
+      "kind": "d12_expected_obsolete_catalog_schema_2"
+    },
+    {
+      "run": 34484170123,
+      "kind": "graphical_scan_assumed_initial_animals_in_range",
+      "renderers": [
+        "forward_plus",
+        "gl_compatibility"
+      ]
+    },
+    {
+      "run": 34484170081,
+      "kind": "linux_job_cancelled_at_20_minutes",
+      "successful_checks": 27
+    },
+    {
+      "run": 34484764330,
+      "kind": "windows_packaged_frontend_exceeded_120_seconds"
+    }
+  ],
+  "diagnostic_attempts": [
+    "First scan staging attempt passed the scan but changed the subsequent home/editor fixture location.",
+    "Second staging attempt selected an unsuitable home site and encountered a missing-home diagnostic; the execution service disconnected during that retry. It is not a pass.",
+    "Final staging restores the original buildable site before home/editor acceptance and waits for actual grounded physics."
+  ],
+  "pending": [
+    "graphical_scan_recheck_on_both_renderers",
+    "complete_native_linux_and_windows_exports_with_updated_deadlines"
+  ]
+}

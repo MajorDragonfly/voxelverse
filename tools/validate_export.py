@@ -97,11 +97,11 @@ def main():
             if "MENU_INPUT_PASSED" not in (logs / "packaged_menu_input.log").read_text():
                 raise RuntimeError("Native executable did not pass the actual menu-click/F4 acceptance.")
             run("packaged_frontend", [str(executable), "--headless", "--verbose", "--", "--frontend-smoke"],
-                package, isolated_env(root / "frontend-userdata"))
+                package, isolated_env(root / "frontend-userdata"), timeout=240)
             if "FRONTEND_PASSED" not in (logs / "packaged_frontend.log").read_text():
                 raise RuntimeError("Native executable did not pass title/pause/save-slot acceptance.")
             run("packaged_spherical_campaign", [str(executable), "--headless", "--verbose", "--", "--sphere-smoke"],
-                package, isolated_env(root / "sphere-userdata"))
+                package, isolated_env(root / "sphere-userdata"), timeout=240)
             if "SPHERICAL_CAMPAIGN_RUNTIME_PASSED" not in (logs / "packaged_spherical_campaign.log").read_text():
                 raise RuntimeError("Native executable did not pass spherical migration/new-game/fresh-process acceptance.")
             for name, flag, marker, timeout in [

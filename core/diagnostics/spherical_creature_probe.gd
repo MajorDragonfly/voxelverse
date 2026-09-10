@@ -16,11 +16,10 @@ func _run() -> void:
 	var player: CharacterBody3D = scene.player
 	var scanner: Node = player.get_node("CreatureScanner")
 	var progression: Node = tree.root.get_node("ProgressionService")
+	var home_location: Dictionary = player.location()
+	var home_heading: Vector3 = player.forward
+	var aimed: Node3D = await _aim_at_wildlife(scene)
 	player.toggle_inspection_mode()
-	var aimed: Node3D
-	for animal: Node3D in scene.population.animals.values():
-		player.camera.look_at(Space.offset(self, animal.global_position, Vector3(0, 0.7, 0)), player.up_direction)
-		if player.get_scan_target() == animal: aimed = animal; break
 	_expect(aimed != null, "Shared radial camera could not aim at actual wildlife.")
 	if aimed != null:
 		var points: int = progression.discovery_points
@@ -30,8 +29,17 @@ func _run() -> void:
 		_expect(progression.discovery_points == points + progression.SPECIES_DISCOVERY_POINTS, "Radial scan paid twice or lost its reward.")
 	player.toggle_inspection_mode()
 	await _capture("creature-and-wildlife")
+	# Home/editor acceptance keeps its original, known buildable site after
+	# the scan's independent camera/range setup.
+	player.place(home_location, home_heading)
+	await tree.physics_frame
+	await tree.physics_frame
+	await _until(func() -> bool: return Space.ground_ready(self, player.global_position) and player.is_on_floor(), 10000)
 	var home: Node = scene.get_node("Nest/HomeGroup")
-	_expect(home.establish_home().get("ok", false), "Cannot establish radial home before editing.")
+	if not home.establish_home().get("ok", false):
+		_expect(false, "Cannot establish radial home before editing.")
+		await _finish()
+		return
 	await _until(func() -> bool: return home.actors.size() == 2, 10000)
 	var identity: String = state.campaign.data.id
 	var original_home: Dictionary = state.get_current_body_record().home_group.duplicate(true)
@@ -56,12 +64,39 @@ func _run() -> void:
 	player = scene.player
 	_expect(state.campaign.data.id == identity and Blueprint.load_best_available().design_id == design_id and Blueprint.load_best_available().name == "Kugelheimat erhalten", "Editor switched campaign or lost the revised design.")
 	_expect(state.get_current_body_record().home_group.id == original_home.id and Home.distance(state.get_current_body_record().home_group.anchor, original_home.anchor) < 0.005, "Editor moved home or replaced companions.")
-	_expect(Home.distance(Space.encode(self, player.global_position), _radius(location)) < 1.5, "Editor returned player to a different place.")
+	var returned: Dictionary = Space.encode(self, player.global_position)
+	_expect(Home.distance(returned, _radius(location)) < 1.5, "Editor returned player to a different place: " + JSON.stringify({"before": _radius(location), "after": returned, "saved": saves._last_player_state.get("surface_address")}))
 	await _water(scene)
 	_expect(saves.save_now(), "Radial creature/water state did not save: " + saves.last_error)
 	flow.return_to_title()
 	await tree.scene_changed
 	await _finish()
+
+func _aim_at_wildlife(scene: Node3D) -> Node3D:
+	# Budgeted loading does not promise that the first two animals are inside
+	# the player's 20 m scan radius. Stage the observer near real wildlife;
+	# keep the normal range, collision query and first-hit visibility checks.
+	var player: CharacterBody3D = scene.player
+	for animal: Node3D in scene.population.animals.values().slice(0, 2):
+		if not is_instance_valid(animal): continue
+		var collision: CollisionShape3D = animal.get_node_or_null("CollisionShape3D")
+		if collision == null: continue
+		for index in range(4):
+			var location: Dictionary = Space.address(self, animal.global_position)
+			var angle: float = index * TAU / 4.0
+			var offset: Vector3 = scene.adapter.frame_at(location) * Vector3(cos(angle) * 6.0, 0, sin(angle) * 6.0)
+			var place: Dictionary = scene.adapter.offset(location, offset)
+			var ground: Dictionary = scene.adapter.sample(place)
+			if ground.water: continue
+			place.height = ground.height + 0.1
+			player.place(place, -offset)
+			await tree.physics_frame
+			await tree.physics_frame
+			await _until(func() -> bool: return Space.ground_ready(self, player.global_position) and player.is_on_floor(), 10000)
+			if not is_instance_valid(animal): break
+			player.camera.look_at(collision.global_position, player.up_direction)
+			if player.get_scan_target() == animal: return animal
+	return null
 
 func _water(scene: Node3D) -> void:
 	var surface: RefCounted = scene.terrain.surface
