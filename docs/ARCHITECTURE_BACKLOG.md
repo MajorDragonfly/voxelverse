@@ -172,6 +172,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-17 – Streamingaufträge, Gewässer und Audio begrenzen
 
+**Teilpaket 10. September 2026:** Pflanzenpublikation, Jobgültigkeit und begrenzte Tierplatzierungsversuche auf `agent/arch-17-fauna-budget`; Umfang, Messwerte und Nachweise in [WORK_ARCH17_POPULATION_BUDGET.md](WORK_ARCH17_POPULATION_BUDGET.md). Wasser/Audio, Terrainvorausschau und Ziel-PC-Abnahme bleiben offen.
+
 - **Zuordnung:** M1h. **Vorher:** ARCH-02/05; Integration mit M1f/g. **Bereich:** Terrain-/Populationjobs, Wasser, Audio.
 - [ ] Gemessene teure Einzelpublikationen aufteilen; Queues, laufende Jobs, Meshes und Pflanzen-/Tieraufbau getrennt begrenzen. Ein weiches 4-ms-Limit ist keine Garantie für einen einzelnen Upload.
 - [ ] Jobs mit Körper-/Regions-/Laufzeitgeneration versehen; veraltete Ergebnisse nach Richtungs-/Körperwechsel verwerfen, ohne fremden Zustand zu verändern.
