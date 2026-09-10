@@ -530,9 +530,9 @@ func _physics_process(delta: float) -> void:
 			target = anchor()
 		elif member["stage"] in ["meal", "drink"]:
 			target = anchor()
-		elif order == "milk":
-			var incoming: Array = village()["economy"]["incoming"]
-			target = Space.resolve(self, incoming[0]["position"]) if not incoming.is_empty() and not Economy.at_target(village(), member, "milk") else anchor()
+		elif Economy.Resources.uses_batches(order):
+			var batch: Dictionary = Economy.pickup(village(), order)
+			target = Space.resolve(self, batch.position) if not batch.is_empty() and not Economy.at_target(village(), member, order) else anchor()
 		elif order in Economy.RESOURCES or order in ["supply", "provision"]:
 			var kind: String = Economy.gather_kind(village(), member)
 			target = Space.resolve(self, village()["deposits"][kind]["position"]) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
@@ -702,16 +702,21 @@ func assign_profession(profession: String) -> bool:
 	return success
 
 func receive_milk(batch: Dictionary) -> bool:
+	if not is_active(): return false
+	var adapted: Dictionary = Economy.Batch.canonical(village(), batch)
+	return receive_resource_batch(adapted) if not adapted.is_empty() and adapted.resource_id == "milk" else false
+
+func receive_resource_batch(batch: Dictionary) -> bool:
 	if not is_active():
 		return false
 	var before: Dictionary = village().duplicate(true)
-	var problem: String = Economy.receive_milk(village(), batch)
+	var problem: String = Economy.receive_batch(village(), batch)
 	# A durable receipt remains acknowledged even if its old pickup route is
 	# now blocked or the milk has already been consumed.
 	if problem.is_empty() and village() == before:
 		return true
 	if problem.is_empty() and navigation.route(anchor(), Space.resolve(self, batch["position"])).is_empty():
-		problem = "Die Milchabholstelle ist nicht erreichbar."
+		problem = "Die Abholstelle ist nicht erreichbar."
 	if not problem.is_empty():
 		body()["tribe"] = before
 		status = problem
@@ -834,7 +839,7 @@ func _update_selection() -> void:
 			actor.add_child(cargo)
 		var kind: String = member_record(identity)["cargo"]
 		cargo.visible = not kind.is_empty()
-		cargo.material_override.albedo_color = {"wood": Color("b9854d"), "stone": Color("bac8cf"), "food": Color("c27b4e"), "water": Color("60bde8"), "fiber": Color("b8bf67"), "milk": Color("f4f0dd")}.get(kind, Color.WHITE)
+		cargo.material_override.albedo_color = Color(Economy.Resources.definition(kind).get("color", "ffffff"))
 
 func _grow_residents(delta: float) -> void:
 	_growth_retry = maxf(0.0, _growth_retry - delta)

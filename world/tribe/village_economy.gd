@@ -2,12 +2,14 @@ extends RefCounted
 ## Village-only economy. No species, ownership, taming or animal production here.
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
-const RESOURCES: Array[String] = ["wood", "stone", "food", "water", "fiber", "milk"]
+const Resources = preload("res://world/tribe/resource_catalog.gd")
+const Batch = preload("res://world/tribe/resource_batch.gd")
+const RESOURCES: Array[String] = Resources.IDS
 const EXTRA: Array[String] = ["water", "fiber", "milk"]
 const STATIONS: Dictionary = {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}
 const COSTS: Dictionary = {"well": {"wood": 3, "stone": 2}, "forester": {"wood": 4, "stone": 1}, "quarry": {"wood": 4, "stone": 2}, "fiberbed": {"wood": 2, "stone": 1}}
 const INTERVALS: Dictionary = {"water": 5.0, "wood": 12.0, "stone": 15.0, "fiber": 12.0}
-const TITLES: Dictionary = {"water": "Wasser", "wood": "Holz", "stone": "Stein", "fiber": "Fasern", "food": "Nahrung", "milk": "Milch"}
+const TITLES: Dictionary = Resources.TITLES
 const JOBS: Dictionary = {"none": "Ohne Beruf", "provider": "Versorger", "forester": "Holzarbeiter", "mason": "Steinmetz", "weaver": "Fasersammler", "builder": "Baumeister", "milk_carrier": "Milchträger", "keeper": "Tierpfleger"}
 const JOB_ORDER: Dictionary = {"none": "wait", "provider": "provision", "forester": "wood", "mason": "stone", "weaver": "fiber", "builder": "build", "milk_carrier": "milk", "keeper": "tend"}
 const ORDERS: Array[String] = ["water", "fiber", "milk", "drink", "provision", "build", "well", "forester", "quarry", "fiberbed", "tend"]
@@ -58,7 +60,19 @@ static func reserve(data: Dictionary, kind: String) -> int:
 	return int(data["stock"][kind]) + carried(data, kind)
 
 static func has_food(data: Dictionary) -> bool:
-	return int(data["stock"]["food"]) + int(data["stock"]["milk"]) > 0
+	return not food_kind(data).is_empty()
+
+static func food_kind(data: Dictionary) -> String:
+	for kind: String in Resources.FOODS:
+		if int(data.stock[kind]) > 0: return kind
+	return ""
+
+static func consume(data: Dictionary, kind: String) -> Dictionary:
+	var resource: Dictionary = Resources.definition(kind)
+	if resource.is_empty() or (resource.nutrition <= 0 and resource.hydration <= 0) or int(data.stock[kind]) <= 0: return {}
+	data.stock[kind] -= 1
+	Resources.add(data.economy, kind, "consumed", 1)
+	return resource
 
 static func gather_kind(data: Dictionary, member: Dictionary) -> String:
 	var order: String = member["order"]
@@ -88,34 +102,68 @@ static func at_target(data: Dictionary, member: Dictionary, kind: String) -> boo
 	var limit: int = target(data, kind) if member["order"] in ["supply", "provision"] or member["profession"] != "none" else 48
 	return reserve(data, kind) >= limit
 
-static func milk_pending(data: Dictionary) -> int:
+static func pending(data: Dictionary, kind: String) -> int:
 	var total: int = 0
-	for batch: Dictionary in data["economy"]["incoming"]:
-		total += int(batch["remaining"])
+	for batch: Dictionary in data.economy.incoming:
+		if Batch.resource_id(batch) == kind: total += int(batch.remaining)
 	return total
 
-static func receive_milk(data: Dictionary, batch: Dictionary) -> String:
-	# D3 passes a completed production batch. Acceptance is saved by controller
-	# before acknowledgment. Retries of the last identical sequence are harmless.
-	if batch.get("schema") != 1 or batch.get("body_id") != data["body_id"] or batch.get("faction_id") != data["faction_id"] or not text_id(batch.get("source_id")) or not integer(batch.get("sequence"), 1, 1000000000) or not integer(batch.get("amount"), 1, 48) or not local_point(batch.get("position"), data["anchor"]):
-		return "Ungültige Milchlieferung."
-	# JSON numbers must compare identically before and after a disk round trip.
-	batch = JSON.parse_string(JSON.stringify(batch))
-	var receipts: Dictionary = data["economy"]["receipts"]
-	var identity: String = batch["source_id"]
-	var last: Dictionary = receipts.get(identity, {})
-	if not last.is_empty() and int(batch["sequence"]) == int(last["sequence"]):
-		return "" if batch == last else "Veränderte Milchlieferung mit gleicher Nummer."
-	if int(batch["sequence"]) != int(last.get("sequence", 0)) + 1 or (not receipts.has(identity) and receipts.size() >= 64):
-		return "Milchlieferung außerhalb der erwarteten Reihenfolge."
-	if reserve(data, "milk") + milk_pending(data) + int(batch["amount"]) > 48:
-		return "Für diese Milchlieferung fehlt Lagerplatz."
-	data["economy"]["milk_received"] += int(batch["amount"])
+static func pickup(data: Dictionary, kind: String) -> Dictionary:
+	for batch: Dictionary in data.economy.incoming:
+		if Batch.resource_id(batch) == kind: return batch
+	return {}
+
+static func collect(data: Dictionary, member: Dictionary, kind: String) -> bool:
+	var batch: Dictionary = pickup(data, kind)
+	if batch.is_empty() or member.cargo != "" or at_target(data, member, kind) or Home.distance(member.position, batch.position) > 3.0: return false
+	batch.remaining -= 1
+	if int(batch.remaining) == 0: data.economy.incoming.erase(batch)
+	member.cargo = kind
+	member.stage = "return"
+	return true
+
+static func milk_pending(data: Dictionary) -> int:
+	return pending(data, "milk") # Compatibility API for existing D3/UI/tests.
+
+static func receive_milk(data: Dictionary, value: Dictionary) -> String:
+	var batch: Dictionary = Batch.canonical(data, value)
+	if batch.is_empty() or batch.resource_id != "milk": return "Ungültige Milchlieferung."
+	return receive_batch(data, batch)
+
+static func receive_batch(data: Dictionary, value: Dictionary) -> String:
+	# Inbox, receipt and producer acknowledgment share the campaign transaction.
+	var batch: Dictionary = Batch.canonical(data, value)
+	if batch.is_empty(): return "Ungültiger Ressourcenbatch oder unbekannte Revision."
+	var kind: String = batch.resource_id
+	if not Resources.uses_batches(kind): return "Diese Ressource besitzt keinen Produktionsanschluss."
+	var receipts: Dictionary = data.economy.receipts
+	var identity: String = batch.source_id
+	var saved: Dictionary = receipts.get(identity, {})
+	var last: Dictionary = Batch.canonical(data, saved)
+	if not saved.is_empty() and last.is_empty(): return "Gespeicherter Lieferbeleg ist ungültig."
+	if not last.is_empty() and int(batch.sequence) == int(last.sequence):
+		return "" if batch == last else "Veränderte Lieferung mit gleicher Nummer."
+	if not last.is_empty() and (batch.resource_id != last.resource_id or batch.recipe_id != last.recipe_id or batch.recipe_revision != last.recipe_revision): return "Produktionsquelle hat ihren Vertrag geändert."
+	if int(batch.sequence) != int(last.get("sequence", 0)) + 1 or (not receipts.has(identity) and receipts.size() >= 64): return "Lieferung außerhalb der erwarteten Reihenfolge."
+	if reserve(data, kind) + pending(data, kind) + int(batch.amount) > int(Resources.definition(kind).capacity): return "Für diese Lieferung fehlt Lagerplatz."
+	if Resources.total(data.economy, kind, "received") + int(batch.amount) > 1000000000: return "Produktionsnachweis ist ausgeschöpft."
+	Resources.add(data.economy, kind, "received", int(batch.amount))
 	receipts[identity] = batch.duplicate(true)
 	var incoming: Dictionary = batch.duplicate(true)
-	incoming["remaining"] = int(batch["amount"])
-	data["economy"]["incoming"].append(incoming)
+	incoming.remaining = int(batch.amount)
+	data.economy.incoming.append(incoming)
 	return ""
+
+static func has_unsupported_contract(value: Variant) -> bool:
+	if not value is Dictionary: return false
+	if value.get("schema") != 1: return true
+	if value.get("receipts") is Dictionary:
+		for receipt: Variant in value.receipts.values():
+			if Batch.unsupported(receipt): return true
+	if value.get("incoming") is Array:
+		for batch: Variant in value.incoming:
+			if Batch.unsupported(batch): return true
+	return false
 
 static func validate(data: Dictionary) -> String:
 	var e: Variant = data.get("economy")
@@ -154,22 +202,23 @@ static func validate(data: Dictionary) -> String:
 			return "Unterbrochener Auftrag wird bereits ausgeführt."
 	if not e.get("incoming") is Array or e["incoming"].size() > 48 or e["receipts"].size() > 64:
 		return "Ungültiges Milchlieferbuch."
-	for identity: Variant in e["receipts"]:
-		var receipt: Variant = e["receipts"][identity]
-		if not receipt is Dictionary or not text_id(identity) or receipt.get("source_id") != identity or receipt.get("schema") != 1 or receipt.get("body_id") != data["body_id"] or receipt.get("faction_id") != data["faction_id"] or not integer(receipt.get("sequence"), 1, 1000000000) or not integer(receipt.get("amount"), 1, 48) or not local_point(receipt.get("position"), data["anchor"]):
-			return "Ungültige Milchquittung."
+	for identity: Variant in e.receipts:
+		var receipt: Dictionary = Batch.canonical(data, e.receipts[identity])
+		if receipt.is_empty() or receipt.source_id != identity or e.receipts[identity].has("remaining"):
+			return "Ungültiger Ressourcenbeleg."
 	var keys: Array[String] = []
-	for batch: Variant in e["incoming"]:
-		if not batch is Dictionary or not text_id(batch.get("source_id")) or not e["receipts"].has(batch["source_id"]) or not integer(batch.get("sequence"), 1, int(e["receipts"][batch["source_id"]]["sequence"])) or not integer(batch.get("amount"), 1, 48) or not integer(batch.get("remaining"), 1, int(batch["amount"])) or not local_point(batch.get("position"), data["anchor"]) or batch.get("body_id") != data["body_id"] or batch.get("faction_id") != data["faction_id"] or batch.get("schema") != 1:
-			return "Ungültige offene Milchlieferung."
-		var key: String = "%s:%s" % [batch["source_id"], batch["sequence"]]
-		if key in keys:
-			return "Doppelte offene Milchlieferung."
-		keys.append(key)
-	if milk_pending(data) + reserve(data, "milk") + int(e["milk_meals"]) > int(e["milk_received"]):
-		return "Milch wurde vervielfacht."
-	if milk_pending(data) + reserve(data, "milk") > 48:
-		return "Milch überschreitet Lagerkapazität."
+	for value: Variant in e.incoming:
+		var batch: Dictionary = Batch.canonical(data, value)
+		if batch.is_empty() or not e.receipts.has(batch.source_id) or not integer(value.get("remaining"), 1, int(batch.amount)): return "Ungültige offene Ressourcenlieferung."
+		var last: Dictionary = Batch.canonical(data, e.receipts[batch.source_id])
+		if int(batch.sequence) > int(last.sequence) or batch.resource_id != last.resource_id or batch.recipe_id != last.recipe_id or batch.recipe_revision != last.recipe_revision: return "Lieferung widerspricht ihrem Produktionsbeleg."
+		if int(batch.sequence) == int(last.sequence) and batch != last: return "Offene Lieferung wurde nach Annahme verändert."
+		if batch.receipt_id in keys: return "Doppelte offene Ressourcenlieferung."
+		keys.append(batch.receipt_id)
+	for kind: String in RESOURCES:
+		if not Resources.uses_batches(kind): continue
+		if pending(data, kind) + reserve(data, kind) + Resources.total(e, kind, "consumed") > Resources.total(e, kind, "received"): return "Ressource wurde vervielfacht."
+		if pending(data, kind) + reserve(data, kind) > int(Resources.definition(kind).capacity): return "Ressource überschreitet Lagerkapazität."
 	return ""
 
 static func number(value: Variant, low: float, high: float) -> bool:

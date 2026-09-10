@@ -1234,6 +1234,7 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 			if body is Dictionary and body.has("fauna_catalog") and FaunaCatalog.has_unsupported(body["fauna_catalog"]):
 				return true
 			if body is Dictionary and Exploration.newer(body.get("exploration_atlas")): return true
+			if body is Dictionary and body.get("tribe") is Dictionary and Tribe.Economy.has_unsupported_contract(body.tribe.get("economy")): return true
 			if body is Dictionary and body.get("tribe") is Dictionary and int(body["tribe"].get("schema", 0)) > Tribe.SCHEMA:
 				return true
 			if body is Dictionary and body.get("tribe") is Dictionary and body.tribe.get("schema") == Tribe.SCHEMA and not body.tribe.get("anchor") is Dictionary: return true

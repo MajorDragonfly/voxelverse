@@ -1,5 +1,6 @@
 extends RefCounted
 ## Read-only D1/D2 boundary. The host retains all animal identity and movement.
+const Production = preload("res://world/tribe/production_catalog.gd")
 const D1 = preload("res://world/fauna/domestication/domestication_contract.gd")
 const D2 = preload("res://world/domestication/animal_state.gd")
 var registry: Callable
@@ -16,7 +17,8 @@ func read(data: Dictionary, campaign_id: String, identity: String) -> Dictionary
 	if animal.is_empty() or animal["status"] != "tamed" or animal["owner_faction_id"] != data["faction_id"] or animal["species_id"] == data["species_id"]:
 		return {"error": "Wähle ein lebendes, gezähmtes Milchtier deines Stammes."}
 	var traits: Variant = species.call(animal["species_id"])
-	if not D1.validate(traits).is_empty() or "milk" not in traits["roles"] or "plant" not in traits["diet"]:
+	var recipe: Dictionary = Production.definition(Production.MILK)
+	if not D1.validate(traits).is_empty() or recipe.role not in traits["roles"] or recipe.diet not in traits["diet"]:
 		return {"error": "Dieses Tier eignet sich nicht für die Milchhaltung mit Pflanzenfutter."}
 	var body: Variant = actor.call(identity)
 	if not body is Node3D or not is_instance_valid(body) or not body.is_inside_tree() or not body.is_visible_in_tree() or body.global_position.distance_to(preload("res://world/surface/gameplay_space.gd").resolve(body, animal["position"])) > 0.5:
