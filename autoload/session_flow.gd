@@ -63,7 +63,7 @@ func latest_slot() -> Dictionary:
 			return slot
 	return {}
 
-func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_sphere_m1_v1") -> void:
+func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_sphere_m1_v1", creature_template: Dictionary = {}) -> void:
 	if loading or not _at_title():
 		return
 	if surface_mode != "cube_sphere_m1_v1":
@@ -72,7 +72,7 @@ func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_s
 	_show_loading("Dein Abenteuer wird vorbereitet …")
 	await get_tree().process_frame
 	var saves := get_node("/root/SaveGameService")
-	if str(saves.create_slot(title, seed_value, surface_mode)).is_empty():
+	if str(saves.create_slot(title, seed_value, surface_mode, creature_template)).is_empty():
 		_fail_loading("Neues Spiel konnte nicht gespeichert werden. " + str(saves.last_error))
 		return
 	await _request_world()

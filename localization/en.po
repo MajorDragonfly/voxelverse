@@ -705,3 +705,165 @@ msgstr "Continue the adventure on a spherical planet. Your previous save is pres
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "BP_LIBRARY_TITLE"
+msgstr "Creature templates"
+
+msgid "BP_CLOSE"
+msgstr "Close"
+
+msgid "BP_IMPORT"
+msgstr "Import"
+
+msgid "BP_EXPORT"
+msgstr "Export"
+
+msgid "BP_REMOVE"
+msgstr "Remove"
+
+msgid "BP_SAVE_VARIANT"
+msgstr "Save design"
+
+msgid "BP_BACK_LIST"
+msgstr "Back to list"
+
+msgid "BP_USE"
+msgstr "Use in editor"
+
+msgid "BP_BUILTIN"
+msgstr "Starter template"
+
+msgid "BP_LOCAL"
+msgstr "Saved locally"
+
+msgid "BP_NO_RESULTS"
+msgstr "No matching templates. Change your search or import a file."
+
+msgid "BP_AUTHOR"
+msgstr "By {author}"
+
+msgid "BP_AUTHOR_UNKNOWN"
+msgstr "No author provided"
+
+msgid "BP_SOURCES"
+msgstr "Based on {count} earlier designs."
+
+msgid "BP_COMPLEXITY"
+msgstr "Form points: {count} / {limit}"
+
+msgid "BP_AVAILABLE_START"
+msgstr "Available for a new species."
+
+msgid "BP_AVAILABLE"
+msgstr "Available. Your identity and progress are preserved."
+
+msgid "BP_IMPORTED"
+msgstr "Template saved locally. It remains available without the original file."
+
+msgid "BP_EXPORTED"
+msgstr "Template exported. The file can be imported into another adventure."
+
+msgid "BP_VARIANT_SAVED"
+msgstr "Design saved as a new template. Your adventure was not changed."
+
+msgid "BP_REMOVE_CONFIRM"
+msgstr "Remove “{name}” from the library? Creatures already using it are preserved."
+
+msgid "BP_REMOVED"
+msgstr "Template removed from the library."
+
+msgid "BP_LOCKED"
+msgstr "Not yet unlocked: {parts}"
+
+msgid "BP_ERROR_LIBRARY"
+msgstr "The library cannot be read. Its original file is preserved. Starter templates remain available."
+
+msgid "BP_ERROR_FULL"
+msgstr "The library is full. Export templates you need and remove unwanted entries."
+
+msgid "BP_ERROR_CONFLICT"
+msgstr "This template already exists with the same revision but different content. The saved version is preserved."
+
+msgid "BP_ERROR_DESTINATION"
+msgstr "This file will not be overwritten. Choose a new filename."
+
+msgid "BP_ERROR_WRITE"
+msgstr "Saving failed. Check the destination folder and try again."
+
+msgid "BP_ERROR_PHASE"
+msgstr "Your body can only be redesigned in the creature phase. Templates cannot be applied during a phase transition."
+
+msgid "BP_ERROR_COMPLEXITY"
+msgstr "This template exceeds the available form points."
+
+msgid "BP_ERROR_TARGET"
+msgstr "The current design is protected and cannot be replaced."
+
+msgid "BP_ERROR_MISSING"
+msgstr "This template is no longer in the library."
+
+msgid "BP_ERROR_CAMPAIGN"
+msgstr "Open an adventure to use this template in the editor."
+
+msgid "BP_ERROR_PROVENANCE"
+msgstr "This template already contains too many source entries for another variant."
+
+msgid "BP_ERROR_NAME"
+msgstr "Enter a short name for the template."
+
+msgid "BP_ERROR_PACKAGE"
+msgstr "The template is damaged or requires unsupported parts or another game version. The file is preserved."
+
+msgid "BP_ERROR_EDITOR"
+msgstr "This template uses attachments incompatible with the current editor. It will not be applied with altered geometry."
+
+msgid "BP_SEARCH"
+msgstr "Search templates"
+
+msgid "BP_ALL"
+msgstr "All templates"
+
+msgid "BP_BUILTINS"
+msgstr "Starter templates"
+
+msgid "BP_LOCALS"
+msgstr "My library"
+
+msgid "BP_SELECT_START"
+msgstr "Choose starting creature"
+
+msgid "BP_CANCEL"
+msgstr "Cancel"
+
+msgid "BP_VARIANT_NAME"
+msgstr "Template name"
+
+msgid "BP_TEMPLATES"
+msgstr "Creature templates"
+
+msgid "BP_ADOPTED"
+msgstr "Template applied. Undo restores your previous creature. Save to keep this change."
+
+msgid "BP_ERROR_START"
+msgstr "This template cannot be used as a starting creature. Choose an available starter template."
+
+msgid "BP_CHOOSE_START"
+msgstr "Choose starting creature"
+
+msgid "BP_DEFAULT_START"
+msgstr "Starting creature: default form · editable later"
+
+msgid "BP_SELECTED_START"
+msgstr "Starting creature: {name}"
+
+msgid "BP_START_MEADOW"
+msgstr "Meadow walker"
+
+msgid "BP_START_DUNE"
+msgstr "Dune wanderer"
+
+msgid "BP_START_MOSS"
+msgstr "Moss crawler"
+
+msgid "BP_PREVIEW_HELP"
+msgstr "Drag with the left mouse button to rotate · Scroll to zoom"

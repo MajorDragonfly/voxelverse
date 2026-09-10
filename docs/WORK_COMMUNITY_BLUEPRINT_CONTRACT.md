@@ -35,5 +35,6 @@ ID-/Revisionskonflikten, Startvorlagen ohne Pflicht zum Selbstgestalten und klar
 Meldungen zu fehlenden Freischaltungen. Eine Vorlagenwahl darf keinen fremden
 Fortschritt übernehmen. Keine neue Speicher- oder Renderimplementierung anlegen.
 
-Dieses Folgepaket ist hier **nicht reserviert**. Es benötigt die Integration von
-ARCH-23 und BP-COMMUNITY.1; Planung/UI-Arbeit kann gegen den Fachbranch erfolgen.
+Das Folgepaket wird inzwischen im nachgelagerten Fachbranch umgesetzt; siehe
+[Übergabe BP-COMMUNITY.2](WORK_COMMUNITY_BLUEPRINT_LIBRARY.md). Die Integrationsfolge
+ARCH-23 → BP-COMMUNITY.1 → BP-COMMUNITY.2 bleibt verbindlich.

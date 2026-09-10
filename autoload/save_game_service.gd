@@ -534,10 +534,19 @@ func cache_slot_preview(png: PackedByteArray, world_seed: int) -> void:
 		_slot_preview = {"world_seed": world_seed, "png": Marshalls.raw_to_base64(png)}
 
 
-func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.Cube.MODE) -> String:
+func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.Cube.MODE, creature_template: Dictionary = {}) -> String:
 	if surface_mode not in [Surface.LEGACY, Surface.Cube.MODE]:
 		_report_failure("Unbekannter Oberflächentyp.")
 		return ""
+	# Validate against a fresh starter context before changing the live campaign.
+	var initial_creature: Dictionary = PlayerBlueprint.create_default()
+	if not creature_template.is_empty():
+		var templates = preload("res://assembly/exchange/creature_start_templates.gd")
+		var prepared: Dictionary = templates.prepare(creature_template, initial_creature)
+		if not prepared.ok or surface_mode != Surface.Cube.MODE:
+			_report_failure(TranslationServer.translate("BP_ERROR_START"))
+			return ""
+		initial_creature = prepared.blueprint
 	if DirAccess.make_dir_recursive_absolute(SLOT_DIRECTORY) != OK:
 		_report_failure("Der Ordner für Spielstände konnte nicht angelegt werden.")
 		return ""
@@ -563,7 +572,7 @@ func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surf
 	_design_snapshot_active = true
 	_design_files.clear()
 	if surface_mode == Surface.Cube.MODE:
-		_design_files[PlayerBlueprint.SAVE_PATH] = JSON.stringify(PlayerBlueprint.serialize_snapshot(PlayerBlueprint.create_default()), "\t")
+		_design_files[PlayerBlueprint.SAVE_PATH] = JSON.stringify(PlayerBlueprint.serialize_snapshot(initial_creature), "\t")
 	slot_name = title.strip_edges().left(48)
 	guidance.reset(true)
 	if slot_name.is_empty():

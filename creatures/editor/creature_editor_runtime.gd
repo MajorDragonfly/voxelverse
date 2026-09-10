@@ -6,6 +6,49 @@ const RuntimePartLibrary = preload(
 const RuntimeBlueprint = preload(
 	"res://creatures/editor/creature_blueprint.gd"
 )
+const BlueprintLibraryPanel = preload("res://ui/blueprints/creature_library_panel.gd")
+var _library_panel: Control
+
+
+func _build_palette() -> void:
+	super._build_palette()
+	var column: Node = _left_panel.get_child(0)
+	var button: Button = _button(column, "BP_TEMPLATES", _open_blueprint_library)
+	button.name = "OpenBlueprintLibrary"
+	column.move_child(button, 1)
+
+
+func _open_blueprint_library() -> void:
+	if is_instance_valid(_library_panel): return
+	_end_gesture()
+	_library_panel = BlueprintLibraryPanel.new()
+	_library_panel.prepare_template = _prepare_library_template
+	_library_panel.capture_current = func() -> Dictionary: return blueprint.duplicate(true)
+	_library_panel.template_chosen.connect(_adopt_library_template)
+	_library_panel.closed.connect(func(): _library_panel = null)
+	_ui_root.add_child(_library_panel)
+
+
+func _prepare_library_template(package: Dictionary) -> Dictionary:
+	return BlueprintLibraryPanel.Starter.for_editor(BlueprintLibraryPanel.Package.prepare_for_active_editor(package, blueprint))
+
+
+func _adopt_library_template(package: Dictionary) -> void:
+	var result: Dictionary = _prepare_library_template(package)
+	if not result.ok:
+		_library_panel.show_result(result)
+		return
+	_end_gesture()
+	_record_before_edit("Import creature template", true)
+	_apply_restored_blueprint(result.blueprint, BlueprintLibraryPanel.Text.text("BP_ADOPTED"))
+	_set_mode("body")
+	_frame_creature()
+	_library_panel._close()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(_library_panel): return
+	super._unhandled_input(event)
 
 
 func _ready() -> void:

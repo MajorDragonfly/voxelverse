@@ -705,3 +705,165 @@ msgstr "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spi
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+
+msgid "BP_LIBRARY_TITLE"
+msgstr "Kreaturenvorlagen"
+
+msgid "BP_CLOSE"
+msgstr "Schließen"
+
+msgid "BP_IMPORT"
+msgstr "Importieren"
+
+msgid "BP_EXPORT"
+msgstr "Exportieren"
+
+msgid "BP_REMOVE"
+msgstr "Entfernen"
+
+msgid "BP_SAVE_VARIANT"
+msgstr "Entwurf ablegen"
+
+msgid "BP_BACK_LIST"
+msgstr "Zurück zur Liste"
+
+msgid "BP_USE"
+msgstr "Im Editor übernehmen"
+
+msgid "BP_BUILTIN"
+msgstr "Startvorlage"
+
+msgid "BP_LOCAL"
+msgstr "Lokal gespeichert"
+
+msgid "BP_NO_RESULTS"
+msgstr "Keine passenden Vorlagen. Ändere die Suche oder importiere eine Datei."
+
+msgid "BP_AUTHOR"
+msgstr "Von {author}"
+
+msgid "BP_AUTHOR_UNKNOWN"
+msgstr "Ohne Autorenangabe"
+
+msgid "BP_SOURCES"
+msgstr "Auf {count} früheren Entwürfen aufgebaut."
+
+msgid "BP_COMPLEXITY"
+msgstr "Formpunkte: {count} / {limit}"
+
+msgid "BP_AVAILABLE_START"
+msgstr "Für eine neue Spezies verfügbar."
+
+msgid "BP_AVAILABLE"
+msgstr "Verfügbar. Deine Identität und dein Fortschritt bleiben erhalten."
+
+msgid "BP_IMPORTED"
+msgstr "Vorlage lokal gespeichert. Sie bleibt ohne die ursprüngliche Datei verfügbar."
+
+msgid "BP_EXPORTED"
+msgstr "Vorlage exportiert. Die Datei kann in einen anderen Spielstand importiert werden."
+
+msgid "BP_VARIANT_SAVED"
+msgstr "Entwurf als eigene Vorlage abgelegt. Dein Spielstand wurde dabei nicht verändert."
+
+msgid "BP_REMOVE_CONFIRM"
+msgstr "„{name}“ aus der Bibliothek entfernen? Bereits verwendete Kreaturen bleiben erhalten."
+
+msgid "BP_REMOVED"
+msgstr "Vorlage aus der Bibliothek entfernt."
+
+msgid "BP_LOCKED"
+msgstr "Noch nicht freigeschaltet: {parts}"
+
+msgid "BP_ERROR_LIBRARY"
+msgstr "Die Bibliothek kann nicht gelesen werden. Ihre Originaldatei bleibt unverändert. Startvorlagen sind weiterhin verfügbar."
+
+msgid "BP_ERROR_FULL"
+msgstr "Die Bibliothek ist voll. Exportiere benötigte Vorlagen und entferne nicht mehr benötigte Einträge."
+
+msgid "BP_ERROR_CONFLICT"
+msgstr "Diese Vorlage ist mit derselben Revision, aber anderem Inhalt vorhanden. Die gespeicherte Fassung bleibt erhalten."
+
+msgid "BP_ERROR_DESTINATION"
+msgstr "Diese Datei wird nicht überschrieben. Wähle einen neuen Dateinamen."
+
+msgid "BP_ERROR_WRITE"
+msgstr "Speichern fehlgeschlagen. Prüfe den Zielordner und versuche es erneut."
+
+msgid "BP_ERROR_PHASE"
+msgstr "Die eigene Körperform lässt sich nur in der Kreaturenphase ändern. Während eines Epochenwechsels ist die Übernahme gesperrt."
+
+msgid "BP_ERROR_COMPLEXITY"
+msgstr "Diese Vorlage überschreitet die verfügbaren Formpunkte."
+
+msgid "BP_ERROR_TARGET"
+msgstr "Der aktuelle Entwurf ist geschützt und kann nicht ersetzt werden."
+
+msgid "BP_ERROR_MISSING"
+msgstr "Diese Vorlage ist nicht mehr in der Bibliothek vorhanden."
+
+msgid "BP_ERROR_CAMPAIGN"
+msgstr "Öffne einen Spielstand, um die Vorlage im Editor zu übernehmen."
+
+msgid "BP_ERROR_PROVENANCE"
+msgstr "Diese Vorlage enthält bereits zu viele Herkunftseinträge für eine weitere Variante."
+
+msgid "BP_ERROR_NAME"
+msgstr "Gib einen kurzen Namen für die Vorlage ein."
+
+msgid "BP_ERROR_PACKAGE"
+msgstr "Die Vorlage ist beschädigt oder benötigt nicht unterstützte Teile oder eine andere Spielversion. Die Datei bleibt erhalten."
+
+msgid "BP_ERROR_EDITOR"
+msgstr "Die Anschlüsse dieser Vorlage passen nicht zum aktuellen Editor. Die Form wird nicht verändert übernommen."
+
+msgid "BP_SEARCH"
+msgstr "Vorlagen suchen"
+
+msgid "BP_ALL"
+msgstr "Alle Vorlagen"
+
+msgid "BP_BUILTINS"
+msgstr "Startvorlagen"
+
+msgid "BP_LOCALS"
+msgstr "Meine Bibliothek"
+
+msgid "BP_SELECT_START"
+msgstr "Als Startkreatur wählen"
+
+msgid "BP_CANCEL"
+msgstr "Abbrechen"
+
+msgid "BP_VARIANT_NAME"
+msgstr "Name der Vorlage"
+
+msgid "BP_TEMPLATES"
+msgstr "Kreaturenvorlagen"
+
+msgid "BP_ADOPTED"
+msgstr "Vorlage übernommen. Rückgängig stellt deine vorherige Kreatur wieder her. Speichere, um die Änderung zu behalten."
+
+msgid "BP_ERROR_START"
+msgstr "Diese Vorlage kann nicht als Startkreatur verwendet werden. Wähle eine verfügbare Startvorlage."
+
+msgid "BP_CHOOSE_START"
+msgstr "Startkreatur auswählen"
+
+msgid "BP_DEFAULT_START"
+msgstr "Startkreatur: Standardform · später im Editor veränderbar"
+
+msgid "BP_SELECTED_START"
+msgstr "Startkreatur: {name}"
+
+msgid "BP_START_MEADOW"
+msgstr "Wiesenläufer"
+
+msgid "BP_START_DUNE"
+msgstr "Dünenwanderer"
+
+msgid "BP_START_MOSS"
+msgstr "Mooskrabbler"
+
+msgid "BP_PREVIEW_HELP"
+msgstr "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"

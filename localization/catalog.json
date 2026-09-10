@@ -1178,6 +1178,276 @@
       "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "BP_LIBRARY_TITLE",
+      "de": "Kreaturenvorlagen",
+      "en": "Creature templates"
+    },
+    {
+      "key": "BP_CLOSE",
+      "de": "Schließen",
+      "en": "Close"
+    },
+    {
+      "key": "BP_IMPORT",
+      "de": "Importieren",
+      "en": "Import"
+    },
+    {
+      "key": "BP_EXPORT",
+      "de": "Exportieren",
+      "en": "Export"
+    },
+    {
+      "key": "BP_REMOVE",
+      "de": "Entfernen",
+      "en": "Remove"
+    },
+    {
+      "key": "BP_SAVE_VARIANT",
+      "de": "Entwurf ablegen",
+      "en": "Save design"
+    },
+    {
+      "key": "BP_BACK_LIST",
+      "de": "Zurück zur Liste",
+      "en": "Back to list"
+    },
+    {
+      "key": "BP_USE",
+      "de": "Im Editor übernehmen",
+      "en": "Use in editor"
+    },
+    {
+      "key": "BP_BUILTIN",
+      "de": "Startvorlage",
+      "en": "Starter template"
+    },
+    {
+      "key": "BP_LOCAL",
+      "de": "Lokal gespeichert",
+      "en": "Saved locally"
+    },
+    {
+      "key": "BP_NO_RESULTS",
+      "de": "Keine passenden Vorlagen. Ändere die Suche oder importiere eine Datei.",
+      "en": "No matching templates. Change your search or import a file."
+    },
+    {
+      "key": "BP_AUTHOR",
+      "de": "Von {author}",
+      "en": "By {author}"
+    },
+    {
+      "key": "BP_AUTHOR_UNKNOWN",
+      "de": "Ohne Autorenangabe",
+      "en": "No author provided"
+    },
+    {
+      "key": "BP_SOURCES",
+      "de": "Auf {count} früheren Entwürfen aufgebaut.",
+      "en": "Based on {count} earlier designs."
+    },
+    {
+      "key": "BP_COMPLEXITY",
+      "de": "Formpunkte: {count} / {limit}",
+      "en": "Form points: {count} / {limit}"
+    },
+    {
+      "key": "BP_AVAILABLE_START",
+      "de": "Für eine neue Spezies verfügbar.",
+      "en": "Available for a new species."
+    },
+    {
+      "key": "BP_AVAILABLE",
+      "de": "Verfügbar. Deine Identität und dein Fortschritt bleiben erhalten.",
+      "en": "Available. Your identity and progress are preserved."
+    },
+    {
+      "key": "BP_IMPORTED",
+      "de": "Vorlage lokal gespeichert. Sie bleibt ohne die ursprüngliche Datei verfügbar.",
+      "en": "Template saved locally. It remains available without the original file."
+    },
+    {
+      "key": "BP_EXPORTED",
+      "de": "Vorlage exportiert. Die Datei kann in einen anderen Spielstand importiert werden.",
+      "en": "Template exported. The file can be imported into another adventure."
+    },
+    {
+      "key": "BP_VARIANT_SAVED",
+      "de": "Entwurf als eigene Vorlage abgelegt. Dein Spielstand wurde dabei nicht verändert.",
+      "en": "Design saved as a new template. Your adventure was not changed."
+    },
+    {
+      "key": "BP_REMOVE_CONFIRM",
+      "de": "„{name}“ aus der Bibliothek entfernen? Bereits verwendete Kreaturen bleiben erhalten.",
+      "en": "Remove “{name}” from the library? Creatures already using it are preserved."
+    },
+    {
+      "key": "BP_REMOVED",
+      "de": "Vorlage aus der Bibliothek entfernt.",
+      "en": "Template removed from the library."
+    },
+    {
+      "key": "BP_LOCKED",
+      "de": "Noch nicht freigeschaltet: {parts}",
+      "en": "Not yet unlocked: {parts}"
+    },
+    {
+      "key": "BP_ERROR_LIBRARY",
+      "de": "Die Bibliothek kann nicht gelesen werden. Ihre Originaldatei bleibt unverändert. Startvorlagen sind weiterhin verfügbar.",
+      "en": "The library cannot be read. Its original file is preserved. Starter templates remain available."
+    },
+    {
+      "key": "BP_ERROR_FULL",
+      "de": "Die Bibliothek ist voll. Exportiere benötigte Vorlagen und entferne nicht mehr benötigte Einträge.",
+      "en": "The library is full. Export templates you need and remove unwanted entries."
+    },
+    {
+      "key": "BP_ERROR_CONFLICT",
+      "de": "Diese Vorlage ist mit derselben Revision, aber anderem Inhalt vorhanden. Die gespeicherte Fassung bleibt erhalten.",
+      "en": "This template already exists with the same revision but different content. The saved version is preserved."
+    },
+    {
+      "key": "BP_ERROR_DESTINATION",
+      "de": "Diese Datei wird nicht überschrieben. Wähle einen neuen Dateinamen.",
+      "en": "This file will not be overwritten. Choose a new filename."
+    },
+    {
+      "key": "BP_ERROR_WRITE",
+      "de": "Speichern fehlgeschlagen. Prüfe den Zielordner und versuche es erneut.",
+      "en": "Saving failed. Check the destination folder and try again."
+    },
+    {
+      "key": "BP_ERROR_PHASE",
+      "de": "Die eigene Körperform lässt sich nur in der Kreaturenphase ändern. Während eines Epochenwechsels ist die Übernahme gesperrt.",
+      "en": "Your body can only be redesigned in the creature phase. Templates cannot be applied during a phase transition."
+    },
+    {
+      "key": "BP_ERROR_COMPLEXITY",
+      "de": "Diese Vorlage überschreitet die verfügbaren Formpunkte.",
+      "en": "This template exceeds the available form points."
+    },
+    {
+      "key": "BP_ERROR_TARGET",
+      "de": "Der aktuelle Entwurf ist geschützt und kann nicht ersetzt werden.",
+      "en": "The current design is protected and cannot be replaced."
+    },
+    {
+      "key": "BP_ERROR_MISSING",
+      "de": "Diese Vorlage ist nicht mehr in der Bibliothek vorhanden.",
+      "en": "This template is no longer in the library."
+    },
+    {
+      "key": "BP_ERROR_CAMPAIGN",
+      "de": "Öffne einen Spielstand, um die Vorlage im Editor zu übernehmen.",
+      "en": "Open an adventure to use this template in the editor."
+    },
+    {
+      "key": "BP_ERROR_PROVENANCE",
+      "de": "Diese Vorlage enthält bereits zu viele Herkunftseinträge für eine weitere Variante.",
+      "en": "This template already contains too many source entries for another variant."
+    },
+    {
+      "key": "BP_ERROR_NAME",
+      "de": "Gib einen kurzen Namen für die Vorlage ein.",
+      "en": "Enter a short name for the template."
+    },
+    {
+      "key": "BP_ERROR_PACKAGE",
+      "de": "Die Vorlage ist beschädigt oder benötigt nicht unterstützte Teile oder eine andere Spielversion. Die Datei bleibt erhalten.",
+      "en": "The template is damaged or requires unsupported parts or another game version. The file is preserved."
+    },
+    {
+      "key": "BP_ERROR_EDITOR",
+      "de": "Die Anschlüsse dieser Vorlage passen nicht zum aktuellen Editor. Die Form wird nicht verändert übernommen.",
+      "en": "This template uses attachments incompatible with the current editor. It will not be applied with altered geometry."
+    },
+    {
+      "key": "BP_SEARCH",
+      "de": "Vorlagen suchen",
+      "en": "Search templates"
+    },
+    {
+      "key": "BP_ALL",
+      "de": "Alle Vorlagen",
+      "en": "All templates"
+    },
+    {
+      "key": "BP_BUILTINS",
+      "de": "Startvorlagen",
+      "en": "Starter templates"
+    },
+    {
+      "key": "BP_LOCALS",
+      "de": "Meine Bibliothek",
+      "en": "My library"
+    },
+    {
+      "key": "BP_SELECT_START",
+      "de": "Als Startkreatur wählen",
+      "en": "Choose starting creature"
+    },
+    {
+      "key": "BP_CANCEL",
+      "de": "Abbrechen",
+      "en": "Cancel"
+    },
+    {
+      "key": "BP_VARIANT_NAME",
+      "de": "Name der Vorlage",
+      "en": "Template name"
+    },
+    {
+      "key": "BP_TEMPLATES",
+      "de": "Kreaturenvorlagen",
+      "en": "Creature templates"
+    },
+    {
+      "key": "BP_ADOPTED",
+      "de": "Vorlage übernommen. Rückgängig stellt deine vorherige Kreatur wieder her. Speichere, um die Änderung zu behalten.",
+      "en": "Template applied. Undo restores your previous creature. Save to keep this change."
+    },
+    {
+      "key": "BP_ERROR_START",
+      "de": "Diese Vorlage kann nicht als Startkreatur verwendet werden. Wähle eine verfügbare Startvorlage.",
+      "en": "This template cannot be used as a starting creature. Choose an available starter template."
+    },
+    {
+      "key": "BP_CHOOSE_START",
+      "de": "Startkreatur auswählen",
+      "en": "Choose starting creature"
+    },
+    {
+      "key": "BP_DEFAULT_START",
+      "de": "Startkreatur: Standardform · später im Editor veränderbar",
+      "en": "Starting creature: default form · editable later"
+    },
+    {
+      "key": "BP_SELECTED_START",
+      "de": "Startkreatur: {name}",
+      "en": "Starting creature: {name}"
+    },
+    {
+      "key": "BP_START_MEADOW",
+      "de": "Wiesenläufer",
+      "en": "Meadow walker"
+    },
+    {
+      "key": "BP_START_DUNE",
+      "de": "Dünenwanderer",
+      "en": "Dune wanderer"
+    },
+    {
+      "key": "BP_START_MOSS",
+      "de": "Mooskrabbler",
+      "en": "Moss crawler"
+    },
+    {
+      "key": "BP_PREVIEW_HELP",
+      "de": "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen",
+      "en": "Drag with the left mouse button to rotate · Scroll to zoom"
     }
   ]
 }
