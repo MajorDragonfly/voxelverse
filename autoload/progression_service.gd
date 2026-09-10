@@ -73,6 +73,7 @@ func unlock_part(part_id: String, reason: String = "Discovery") -> bool:
 		"reason": reason,
 		"order": unlocked_parts.size(),
 	}
+	_ensure_mouth_model_unlocks()
 	part_unlocked.emit(part_id, reason)
 	return true
 
@@ -616,6 +617,20 @@ func _ensure_starter_parts() -> void:
 				"reason": "Starter part",
 				"order": unlocked_parts.size(),
 			}
+
+	_ensure_mouth_model_unlocks(false)
+
+
+func _ensure_mouth_model_unlocks(notify: bool = true) -> void:
+	# Model alternatives share an earned profile. Materialize ordinary unlock
+	# records so every existing reader (journal, research, editor, export) agrees.
+	var added: Array[String] = []
+	for model: Dictionary in PartLibrary.MouthCatalog.get_parts():
+		if not unlocked_parts.has(model.unlock_source) or unlocked_parts.has(model.id): continue
+		unlocked_parts[model.id] = {"reason": "Model variant", "source_part": model.unlock_source, "order": unlocked_parts.size()}
+		added.append(model.id)
+	if notify:
+		for id: String in added: part_unlocked.emit(id, "Model variant")
 
 
 func _unlock_species_part(species_seed: int, blueprint: Dictionary) -> String:

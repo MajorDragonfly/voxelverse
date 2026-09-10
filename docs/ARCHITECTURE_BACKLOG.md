@@ -268,6 +268,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 **Integration 10. September:** Altteilinventar, Fuß-/Handanbieter, Katzenpfoten, Bärentatzen, Pferdehufe und Krebsscheren integriert (#55/#66/#70). Rüssel, weitere Schnauzen, Oktopusmund, gespeicherte Teilrevisionen und aktive Greiferöffnung bleiben eigene Arbeit.
 
+**Weiteres Fachpaket 10. September:** [Hundeschnauze, Krokodilschnauze und Oktopusmund](WORK_ARCH24_MOUTH_MODELS.md) über gemeinsame Geometrie, Editor und Buch. Die Modelle teilen Werte/Freischaltung der bestehenden Raubkiefer; 24 alte Geometriefälle und 30 Altarten bleiben exakt erhalten. Lieferung auf eigenem Branch, Integration separat. Rüssel, weitere Modelle und bewegliche Kiefer bleiben offen.
+
 - **Zuordnung:** bestehende M3-TEILE.1–.5. **Vorher:** ARCH-23 für Schemaänderungen; Bestandsinventar darf sofort beginnen.
 - [ ] Alle alten Teil-IDs erfassen und je Teil Revision/Erhalt/kompatiblen Ersatz bestimmen. Katalogdaten von Geometrie, Kontaktpunkten und unterstützten Aktionen trennen.
 - [ ] Eine Referenzfamilie durch den vorhandenen Renderer/Editor/Buchanschluss führen; danach Rüssel, Schnauze, Oktopusmund, Pfoten/Tatzen, Krallen, Scheren und Tierfüße in kleinen Modellpaketen liefern.
