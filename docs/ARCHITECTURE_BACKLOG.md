@@ -137,6 +137,7 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-13 – Regionsspeicherung mit gemeinsamem Commit
 
+- **Reserviert am 10. September 2026:** `feature/arch-13-region-archives`, Basis `ea900f2`; Teilpaket **vollständige Regionssicherungen**, in Arbeit. Portables Archiv aus Slot, Backup, Historie, Migrationsquellen und allen referenzierten Regionsblobs; Prüfung und Wiederherstellung in einen neuen Zielordner. Keine konkurrierende Änderung an SaveGameService, Streaming, Körperreise oder CI; globales Manifest und Blobbereinigung bleiben weitere ARCH-13-Arbeit.
 - **Zuordnung:** M1h. **Vorher:** ARCH-02/04/06/07. **Bereich:** vorhandene Persistenz, neue begrenzte Regionsablage; Muster aus `galaxy_journal.gd` prüfen.
 - [ ] Stabile Regionsschlüssel nach Körper-ID und versionierter Cube-Sphere-Zelle festlegen; Regionen speichern Änderungen/Identitäten, unveränderte Landschaft bleibt prozedural.
 - [ ] Erst Speicherinterface und Rückschreiben vor Eviction umsetzen. Atomaren Kampagnenabschluss über versioniertes Manifest und unveränderliche Generationen von Segmenten erhalten.
