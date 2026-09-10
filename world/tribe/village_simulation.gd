@@ -72,7 +72,7 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
 			var delivery_target: Variant = Neighbor.target(neighbor, data, member)
 			if delivery_target is Dictionary or (delivery_target is Vector3 and delivery_target.is_finite()): target = Home.place(delivery_target)
 		if not move_member(data, simulation, member, target, delta * 3.8 * (0.6 if minf(member.hunger, member.hydration) < 20.0 else 1.0)): continue
-		var before: Dictionary = Work.snapshot(data) if observer.is_valid() else {}
+		var before: Dictionary = Work.snapshot(data, str(member.id)) if observer.is_valid() else {}
 		var effects: Array = []
 		var aid_work: bool = not neighbor.is_empty() and Neighbor.work(neighbor, data, member)
 		if not aid_work:

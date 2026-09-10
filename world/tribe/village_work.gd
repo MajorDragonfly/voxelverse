@@ -9,16 +9,41 @@ const Housing = preload("res://world/tribe/village_housing.gd")
 static func effective_order(data: Dictionary, member: Dictionary) -> String:
 	return str(data["project"].get("kind", "build")) if member["order"] == "build" else str(member["order"])
 
-static func snapshot(data: Dictionary) -> Dictionary:
-	# Share immutable places/IDs and the potentially long milk receipt ledger.
-	# Copy only fields which a single arrived work step can mutate.
+static func snapshot(data: Dictionary, actor_id: String = "") -> Dictionary:
+	# Read-only evidence for ONE synchronous arrived step, including its care/
+	# neighbor effects. Not a durable snapshot or a rollback for arbitrary edits.
+	# Work replaces places rather than mutating their coordinate containers.
 	var before: Dictionary = data.duplicate()
-	for key in ["members", "stock", "deposits", "project", "housing", "husbandry"]:
-		before[key] = data[key].duplicate(true)
+	before.members = data.members.duplicate()
+	var known_actor: bool = data.members.any(func(member: Dictionary) -> bool: return member.id == actor_id)
+	# Completing construction resets fellow builders; far construction can also
+	# block every resident while the new obstacle's routes await recertification.
+	var all_members: bool = not known_actor or not data.project.is_empty()
+	for index in range(data.members.size()):
+		if all_members or data.members[index].id == actor_id:
+			before.members[index] = data.members[index].duplicate()
+	before.stock = data.stock.duplicate()
+	before.deposits = data.deposits.duplicate()
+	for kind in data.deposits:
+		before.deposits[kind] = data.deposits[kind].duplicate()
+	before.project = data.project.duplicate(true) # Nested material reservations.
+	before.housing = data.housing.duplicate()
+	before.housing.homes = data.housing.homes.duplicate() # Construction appends.
+	before.husbandry = data.husbandry.duplicate()
+	before.husbandry.pens = _copy_rows(data.husbandry.pens)
+	for key in ["withdrawn", "returned", "delivered"]:
+		before.husbandry[key] = data.husbandry[key].duplicate()
+	# Production records, recipes and consumption clocks change in the separate
+	# husbandry tick, after the observer returns. Their rollback stays with D3.
 	before.economy = data.economy.duplicate()
-	before.economy.incoming = data.economy.incoming.duplicate(true)
-	before.economy.stations = data.economy.stations.duplicate(true)
+	before.economy.incoming = _copy_rows(data.economy.incoming)
+	before.economy.stations = data.economy.stations.duplicate()
 	return before
+
+static func _copy_rows(rows: Array) -> Array:
+	var result: Array = []
+	for row: Dictionary in rows: result.append(row.duplicate())
+	return result
 
 static func prepare(data: Dictionary, member: Dictionary, delta: float) -> void:
 	member.hunger = maxf(0.0, float(member.hunger) - delta * 0.08)
