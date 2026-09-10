@@ -4,9 +4,9 @@ const Geometry = preload("res://creatures/editor/creature_part_geometry.gd")
 const FootIds = ["feet_pads", "feet_claws", "feet_hooves", "feet_webbed"]
 
 
-static func capture() -> Dictionary:
+static func capture(part_ids: Array = FootIds) -> Dictionary:
 	var result: Dictionary = {}
-	for id: String in FootIds:
+	for id: String in part_ids:
 		for shape: Vector3 in [Vector3.ONE, Vector3(0.8, 1.1, 1.4), Vector3(1.7, 0.6, 0.9)]:
 			for side: float in [-1.0, 1.0]:
 				var node := Node3D.new()

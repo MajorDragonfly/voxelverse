@@ -1,0 +1,68 @@
+{
+  "package": "ARCH-24 / M3-TEILE.2 / crab claws and hand provider",
+  "base_commit": "4a3c805287787eabfcca35d4dde94dc8476c74fd",
+  "base_pr": 66,
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "runtime_checks": [
+    {
+      "name": "creature_foot_provider_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.528
+    },
+    {
+      "name": "creature_hand_provider_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.405
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.822
+    },
+    {
+      "name": "creature_animal_feet_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.947
+    },
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.058
+    }
+  ],
+  "preserved_legacy_hand_cases": 18,
+  "preserved_legacy_foot_cases": 24,
+  "preserved_original_catalog_definitions": 46,
+  "catalog_count": 50,
+  "terminal_count": 11,
+  "new_part": {
+    "id": "hands_crab_claws",
+    "mesh_nodes": 15,
+    "inner_teeth": 6,
+    "attachment": "arm_end",
+    "independent_pinch_animation": false,
+    "new_gameplay_actions": []
+  },
+  "catalog_check": {
+    "passed": true,
+    "messages": 233,
+    "languages": 2
+  },
+  "render_review": {
+    "type": "CPU rendering of actual Godot mesh arrays",
+    "file": "art/review/arch24_crab_claws/hand_models.png",
+    "visually_inspected": true,
+    "native_screenshot": false
+  },
+  "remaining": [
+    "Stacked integration after PR55 and PR66; combined ARCH23 compatibility",
+    "Target-PC graphics, FPS and packaged executable",
+    "Trunk, snout and octopus mouth models",
+    "Editor DE/EN and procedural assignment use their own packages"
+  ]
+}

@@ -122,3 +122,14 @@ Alle drei Formen unterstützen den vorhandenen Beinrig; ihre D1-Zulassung
 und prozedurale Verteilung werden nicht allein durch die neue Optik freigegeben.
 
 Modelle, Bedienung und Nachweise: [WORK_ARCH24_ANIMAL_FEET.md](WORK_ARCH24_ANIMAL_FEET.md).
+
+## Additiver Handanschluss vom 10. September 2026
+
+`hands_crab_claws` ergänzt die drei alten Hände als **Krebsscheren**, Revision 1.
+Damit gibt es 50 Teile und elf Endstücke. Kein bisheriges Teil wird ersetzt.
+Die drei alten Handrezepte sind jetzt im eigenen `creature_hand_geometry.gd`;
+Identität/Anatomie liegen in `creature_hand_catalog.gd`. Die neue Hand verwendet
+das vorhandene `end_part_id` und einen Armanschluss, keine neuen Fähigkeiten.
+
+Geometrieerhalt, Editor, Spiegelung und Neustart:
+[WORK_ARCH24_CRAB_CLAWS.md](WORK_ARCH24_CRAB_CLAWS.md).

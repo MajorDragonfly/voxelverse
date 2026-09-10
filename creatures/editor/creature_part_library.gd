@@ -1,6 +1,8 @@
 extends RefCounted
 class_name CreaturePartLibrary
 
+const HandCatalog = preload("res://creatures/catalog/creature_hand_catalog.gd")
+const HandGeometry = preload("res://creatures/editor/creature_hand_geometry.gd")
 const FootCatalog = preload("res://creatures/catalog/creature_foot_catalog.gd")
 const FootGeometry = preload("res://creatures/editor/creature_foot_geometry.gd")
 
@@ -328,25 +330,9 @@ static func get_terminal_parts() -> Array[Dictionary]:
 	var result: Array[Dictionary] = FootCatalog.get_parts()
 	for foot: Dictionary in result:
 		foot["voxels"] = FootGeometry.legacy_voxels(foot.id, foot.geometry_revision)
-	for entry in [["hands_grasp", "Greifhände", "hands"], ["hands_claws", "Krallenhände", "hands"], ["hands_pincers", "Scherenhände", "hands"]]:
-		var id: String = entry[0]
-		var skin := Color("8fb39b")
-		var horn := Color("e5d5ab")
-		var voxels: Array = []
-		if id == "hands_pincers":
-			voxels.append(_voxel(Vector3.ZERO, Vector3(0.22, 0.17, 0.06), skin))
-			for side: float in [-1.0, 1.0]:
-				voxels.append(_voxel(Vector3(side * 0.14, -0.15, 0), Vector3(0.075, 0.22, 0.055), horn))
-				voxels.append(_voxel(Vector3(side * 0.095, -0.27, 0), Vector3(0.07, 0.055, 0.04), horn))
-		else:
-			voxels.append(_voxel(Vector3.ZERO, Vector3(0.29, 0.21, 0.055), skin))
-			for index in range(3):
-				var tip := Vector3(float(index - 1) * 0.13, -0.21, 0)
-				voxels.append(_voxel(tip, Vector3(0.06, 0.18, 0.035), skin.lightened(0.12)))
-				if id.ends_with("claws"):
-					voxels.append(_voxel(tip + Vector3.DOWN * 0.13, Vector3(0.045, 0.095, 0.025), horn))
-			voxels.append(_voxel(Vector3(-0.22, -0.075, 0), Vector3(0.09, 0.07, 0.04), skin))
-		result.append({"id": entry[0], "name": entry[1], "category": entry[2], "description": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.", "complexity": 2, "default_scale": 1.0, "stats": {}, "voxels": voxels})
+	for hand: Dictionary in HandCatalog.get_parts():
+		hand["voxels"] = HandGeometry.legacy_voxels(hand.id)
+		result.append(hand)
 	return result
 
 
