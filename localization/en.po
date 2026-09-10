@@ -705,3 +705,96 @@ msgstr "Continue the adventure on a spherical planet. Your previous save is pres
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "NEIGHBOR_TAB"
+msgstr "Neighbors"
+
+msgid "NEIGHBOR_CONTACT"
+msgstr "Find a neighboring camp"
+
+msgid "NEIGHBOR_AID"
+msgstr "Send selected residents"
+
+msgid "NEIGHBOR_FOCUS"
+msgstr "View neighboring camp"
+
+msgid "NEIGHBOR_HOME"
+msgstr "View your village"
+
+msgid "NEIGHBOR_AID_HINT"
+msgstr "At least two available residents deliver supplies from your stores. Six food stay in reserve. Each carrier delivers up to five units. Stopping keeps their cargo; a new order returns remaining aid cargo home first."
+
+msgid "NEIGHBOR_EMPTY"
+msgstr "Neighboring tribes belong to your species and have their own residents and supplies. Find a reachable camp near your village."
+
+msgid "NEIGHBOR_DETAIL"
+msgstr "{name} · Your species, separate faction · {residents} residents\n{status}\nFood {food} / {food_required} · Wood {wood} / {wood_required}\nContributors {contributors} · Shelter {shelter} %"
+
+msgid "NEIGHBOR_OFFERED"
+msgstr "Aid requested"
+
+msgid "NEIGHBOR_ACTIVE"
+msgstr "Aid delivery in progress"
+
+msgid "NEIGHBOR_BUILDING"
+msgstr "Neighbors are building their shelter"
+
+msgid "NEIGHBOR_COMPLETED"
+msgstr "Aid completed · friendly"
+
+msgid "NEIGHBOR_UNAVAILABLE"
+msgstr "The group cannot accept commands right now."
+
+msgid "NEIGHBOR_ALREADY_KNOWN"
+msgstr "You have already contacted this camp."
+
+msgid "NEIGHBOR_NOT_KNOWN"
+msgstr "Find a reachable neighboring camp first."
+
+msgid "NEIGHBOR_NO_SITE"
+msgstr "No safe, reachable camp site is available nearby. Try again after the surroundings change."
+
+msgid "NEIGHBOR_CONTACT_SAVE_FAILED"
+msgstr "Contact could not be saved. No camp was created."
+
+msgid "NEIGHBOR_CONTACTED"
+msgstr "{name} needs {food} food and {wood} wood for a shelter. Select two available residents to carry supplies."
+
+msgid "NEIGHBOR_ROUTE_BLOCKED"
+msgstr "The route to your stores or the neighboring camp is blocked."
+
+msgid "NEIGHBOR_AID_FINISHED"
+msgstr "This aid delivery is already finished."
+
+msgid "NEIGHBOR_SELECTION_REQUIRED"
+msgstr "Select at least {count} residents for the joint aid delivery."
+
+msgid "NEIGHBOR_CARRIERS_BUSY"
+msgstr "Selected residents must finish their current cargo or aid delivery first."
+
+msgid "NEIGHBOR_AID_STARTED"
+msgstr "Aid delivery saved for {count} residents. Stop and Resume also apply to these carriers."
+
+msgid "NEIGHBOR_AID_SAVE_FAILED"
+msgstr "Saving failed. The previous order is preserved."
+
+msgid "NEIGHBOR_SHELTER_COMPLETED"
+msgstr "A shared success · {name} has finished its shelter and is now friendly toward you."
+
+msgid "NEIGHBOR_UNKNOWN_RESULT"
+msgstr "Feedback is unavailable."
+
+msgid "GROUP_SELECTION_EMPTY"
+msgstr "No one selected · Click residents or drag a selection box."
+
+msgid "GROUP_SELECTION"
+msgstr "{count} / {total} selected · {names}"
+
+msgid "GROUP_CARRYING"
+msgstr " · {count} carrying supplies"
+
+msgid "GROUP_PAUSED"
+msgstr "PAUSED · Press Space to resume. "
+
+msgid "Buch · J"
+msgstr "Journal · J"

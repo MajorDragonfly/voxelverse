@@ -705,3 +705,96 @@ msgstr "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spi
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+
+msgid "NEIGHBOR_TAB"
+msgstr "Nachbarn"
+
+msgid "NEIGHBOR_CONTACT"
+msgstr "Nachbarlager suchen"
+
+msgid "NEIGHBOR_AID"
+msgstr "Auswahl liefert Hilfe"
+
+msgid "NEIGHBOR_FOCUS"
+msgstr "Nachbarlager ansehen"
+
+msgid "NEIGHBOR_HOME"
+msgstr "Eigenes Dorf ansehen"
+
+msgid "NEIGHBOR_AID_HINT"
+msgstr "Mindestens zwei freie Bewohner liefern aus dem eigenen Lager. Sechs Nahrung bleiben als Reserve. Pro Träger höchstens fünf Einheiten; Anhalten erhält die Fracht. Ein neuer Auftrag bringt übrige Hilfsfracht zuerst heim."
+
+msgid "NEIGHBOR_EMPTY"
+msgstr "Nachbarstämme gehören deiner Spezies an und haben eigene Bewohner und Vorräte. Suche einen erreichbaren Kontakt in der geladenen Dorfumgebung."
+
+msgid "NEIGHBOR_DETAIL"
+msgstr "{name} · Deine Spezies, eigene Fraktion · {residents} Bewohner\n{status}\nNahrung {food} / {food_required} · Holz {wood} / {wood_required}\nMitwirkende {contributors} · Unterkunft {shelter} %"
+
+msgid "NEIGHBOR_OFFERED"
+msgstr "Hilfsauftrag offen"
+
+msgid "NEIGHBOR_ACTIVE"
+msgstr "Hilfslieferung läuft"
+
+msgid "NEIGHBOR_BUILDING"
+msgstr "Nachbarn bauen ihre Unterkunft"
+
+msgid "NEIGHBOR_COMPLETED"
+msgstr "Hilfe erfüllt · freundlich"
+
+msgid "NEIGHBOR_UNAVAILABLE"
+msgstr "Die Gruppe kann gerade keine Befehle annehmen."
+
+msgid "NEIGHBOR_ALREADY_KNOWN"
+msgstr "Dieses Nachbarlager ist bereits bekannt."
+
+msgid "NEIGHBOR_NOT_KNOWN"
+msgstr "Suche zuerst ein erreichbares Nachbarlager."
+
+msgid "NEIGHBOR_NO_SITE"
+msgstr "Kein sicher erreichbarer Lagerplatz in der geladenen Umgebung frei. Suche nach einer Änderung der Umgebung erneut."
+
+msgid "NEIGHBOR_CONTACT_SAVE_FAILED"
+msgstr "Kontakt konnte nicht gespeichert werden. Es wurde kein Lager angelegt."
+
+msgid "NEIGHBOR_CONTACTED"
+msgstr "{name} braucht {food} Nahrung und {wood} Holz für seine Unterkunft. Wähle zwei freie Bewohner als Träger."
+
+msgid "NEIGHBOR_ROUTE_BLOCKED"
+msgstr "Der Weg zum eigenen oder zum Nachbarlager ist blockiert."
+
+msgid "NEIGHBOR_AID_FINISHED"
+msgstr "Diese Hilfslieferung ist bereits abgeschlossen."
+
+msgid "NEIGHBOR_SELECTION_REQUIRED"
+msgstr "Wähle mindestens {count} Bewohner für die gemeinsame Hilfslieferung."
+
+msgid "NEIGHBOR_CARRIERS_BUSY"
+msgstr "Ausgewählte Bewohner müssen ihre laufende Fracht oder Hilfslieferung zuerst beenden."
+
+msgid "NEIGHBOR_AID_STARTED"
+msgstr "Hilfslieferung für {count} Bewohner gespeichert · Anhalten und Fortsetzen gelten auch für diese Träger."
+
+msgid "NEIGHBOR_AID_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten."
+
+msgid "NEIGHBOR_SHELTER_COMPLETED"
+msgstr "Gemeinsam geholfen · {name} hat seine Unterkunft fertiggestellt und ist euch freundlich gesinnt."
+
+msgid "NEIGHBOR_UNKNOWN_RESULT"
+msgstr "Die Rückmeldung ist nicht verfügbar."
+
+msgid "GROUP_SELECTION_EMPTY"
+msgstr "Niemand ausgewählt · Bewohner anklicken oder einen Rahmen ziehen."
+
+msgid "GROUP_SELECTION"
+msgstr "{count} / {total} ausgewählt · {names}"
+
+msgid "GROUP_CARRYING"
+msgstr " · {count} mit Transportgut"
+
+msgid "GROUP_PAUSED"
+msgstr "PAUSE · Leertaste zum Fortsetzen. "
+
+msgid "Buch · J"
+msgstr "Buch · J"

@@ -1178,6 +1178,161 @@
       "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "NEIGHBOR_TAB",
+      "de": "Nachbarn",
+      "en": "Neighbors"
+    },
+    {
+      "key": "NEIGHBOR_CONTACT",
+      "de": "Nachbarlager suchen",
+      "en": "Find a neighboring camp"
+    },
+    {
+      "key": "NEIGHBOR_AID",
+      "de": "Auswahl liefert Hilfe",
+      "en": "Send selected residents"
+    },
+    {
+      "key": "NEIGHBOR_FOCUS",
+      "de": "Nachbarlager ansehen",
+      "en": "View neighboring camp"
+    },
+    {
+      "key": "NEIGHBOR_HOME",
+      "de": "Eigenes Dorf ansehen",
+      "en": "View your village"
+    },
+    {
+      "key": "NEIGHBOR_AID_HINT",
+      "de": "Mindestens zwei freie Bewohner liefern aus dem eigenen Lager. Sechs Nahrung bleiben als Reserve. Pro Träger höchstens fünf Einheiten; Anhalten erhält die Fracht. Ein neuer Auftrag bringt übrige Hilfsfracht zuerst heim.",
+      "en": "At least two available residents deliver supplies from your stores. Six food stay in reserve. Each carrier delivers up to five units. Stopping keeps their cargo; a new order returns remaining aid cargo home first."
+    },
+    {
+      "key": "NEIGHBOR_EMPTY",
+      "de": "Nachbarstämme gehören deiner Spezies an und haben eigene Bewohner und Vorräte. Suche einen erreichbaren Kontakt in der geladenen Dorfumgebung.",
+      "en": "Neighboring tribes belong to your species and have their own residents and supplies. Find a reachable camp near your village."
+    },
+    {
+      "key": "NEIGHBOR_DETAIL",
+      "de": "{name} · Deine Spezies, eigene Fraktion · {residents} Bewohner\n{status}\nNahrung {food} / {food_required} · Holz {wood} / {wood_required}\nMitwirkende {contributors} · Unterkunft {shelter} %",
+      "en": "{name} · Your species, separate faction · {residents} residents\n{status}\nFood {food} / {food_required} · Wood {wood} / {wood_required}\nContributors {contributors} · Shelter {shelter} %"
+    },
+    {
+      "key": "NEIGHBOR_OFFERED",
+      "de": "Hilfsauftrag offen",
+      "en": "Aid requested"
+    },
+    {
+      "key": "NEIGHBOR_ACTIVE",
+      "de": "Hilfslieferung läuft",
+      "en": "Aid delivery in progress"
+    },
+    {
+      "key": "NEIGHBOR_BUILDING",
+      "de": "Nachbarn bauen ihre Unterkunft",
+      "en": "Neighbors are building their shelter"
+    },
+    {
+      "key": "NEIGHBOR_COMPLETED",
+      "de": "Hilfe erfüllt · freundlich",
+      "en": "Aid completed · friendly"
+    },
+    {
+      "key": "NEIGHBOR_UNAVAILABLE",
+      "de": "Die Gruppe kann gerade keine Befehle annehmen.",
+      "en": "The group cannot accept commands right now."
+    },
+    {
+      "key": "NEIGHBOR_ALREADY_KNOWN",
+      "de": "Dieses Nachbarlager ist bereits bekannt.",
+      "en": "You have already contacted this camp."
+    },
+    {
+      "key": "NEIGHBOR_NOT_KNOWN",
+      "de": "Suche zuerst ein erreichbares Nachbarlager.",
+      "en": "Find a reachable neighboring camp first."
+    },
+    {
+      "key": "NEIGHBOR_NO_SITE",
+      "de": "Kein sicher erreichbarer Lagerplatz in der geladenen Umgebung frei. Suche nach einer Änderung der Umgebung erneut.",
+      "en": "No safe, reachable camp site is available nearby. Try again after the surroundings change."
+    },
+    {
+      "key": "NEIGHBOR_CONTACT_SAVE_FAILED",
+      "de": "Kontakt konnte nicht gespeichert werden. Es wurde kein Lager angelegt.",
+      "en": "Contact could not be saved. No camp was created."
+    },
+    {
+      "key": "NEIGHBOR_CONTACTED",
+      "de": "{name} braucht {food} Nahrung und {wood} Holz für seine Unterkunft. Wähle zwei freie Bewohner als Träger.",
+      "en": "{name} needs {food} food and {wood} wood for a shelter. Select two available residents to carry supplies."
+    },
+    {
+      "key": "NEIGHBOR_ROUTE_BLOCKED",
+      "de": "Der Weg zum eigenen oder zum Nachbarlager ist blockiert.",
+      "en": "The route to your stores or the neighboring camp is blocked."
+    },
+    {
+      "key": "NEIGHBOR_AID_FINISHED",
+      "de": "Diese Hilfslieferung ist bereits abgeschlossen.",
+      "en": "This aid delivery is already finished."
+    },
+    {
+      "key": "NEIGHBOR_SELECTION_REQUIRED",
+      "de": "Wähle mindestens {count} Bewohner für die gemeinsame Hilfslieferung.",
+      "en": "Select at least {count} residents for the joint aid delivery."
+    },
+    {
+      "key": "NEIGHBOR_CARRIERS_BUSY",
+      "de": "Ausgewählte Bewohner müssen ihre laufende Fracht oder Hilfslieferung zuerst beenden.",
+      "en": "Selected residents must finish their current cargo or aid delivery first."
+    },
+    {
+      "key": "NEIGHBOR_AID_STARTED",
+      "de": "Hilfslieferung für {count} Bewohner gespeichert · Anhalten und Fortsetzen gelten auch für diese Träger.",
+      "en": "Aid delivery saved for {count} residents. Stop and Resume also apply to these carriers."
+    },
+    {
+      "key": "NEIGHBOR_AID_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten.",
+      "en": "Saving failed. The previous order is preserved."
+    },
+    {
+      "key": "NEIGHBOR_SHELTER_COMPLETED",
+      "de": "Gemeinsam geholfen · {name} hat seine Unterkunft fertiggestellt und ist euch freundlich gesinnt.",
+      "en": "A shared success · {name} has finished its shelter and is now friendly toward you."
+    },
+    {
+      "key": "NEIGHBOR_UNKNOWN_RESULT",
+      "de": "Die Rückmeldung ist nicht verfügbar.",
+      "en": "Feedback is unavailable."
+    },
+    {
+      "key": "GROUP_SELECTION_EMPTY",
+      "de": "Niemand ausgewählt · Bewohner anklicken oder einen Rahmen ziehen.",
+      "en": "No one selected · Click residents or drag a selection box."
+    },
+    {
+      "key": "GROUP_SELECTION",
+      "de": "{count} / {total} ausgewählt · {names}",
+      "en": "{count} / {total} selected · {names}"
+    },
+    {
+      "key": "GROUP_CARRYING",
+      "de": " · {count} mit Transportgut",
+      "en": " · {count} carrying supplies"
+    },
+    {
+      "key": "GROUP_PAUSED",
+      "de": "PAUSE · Leertaste zum Fortsetzen. ",
+      "en": "PAUSED · Press Space to resume. "
+    },
+    {
+      "key": "Buch · J",
+      "de": "Buch · J",
+      "en": "Journal · J"
     }
   ]
 }
