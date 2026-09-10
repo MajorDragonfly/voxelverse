@@ -1,0 +1,402 @@
+{
+  "package": "ARCH-21",
+  "date": "2026-09-10",
+  "status": "passed",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "base_main": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "full_suite": {
+    "local_commit": "9322ac7a7a6c5129558bdedf348ba038afe4ba6d",
+    "github_commit": "0ad76451d7c9bce31604a6017021403ec48829c4",
+    "identical_tree": "703b3f0b85aeda79168a0f21826cea1362a4bda6",
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 6.394
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.77
+      },
+      {
+        "name": "domestication_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.234
+      },
+      {
+        "name": "domestic_body_evidence_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 29.383
+      },
+      {
+        "name": "domestic_surface_catalog_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.653
+      },
+      {
+        "name": "egg_species_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.92
+      },
+      {
+        "name": "egg_species_campaign_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 50.951
+      },
+      {
+        "name": "domestic_surface_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 36.833
+      },
+      {
+        "name": "interface_task7_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.772
+      },
+      {
+        "name": "domestication_campaign_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 33.719
+      },
+      {
+        "name": "spherical_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 338.866
+      }
+    ]
+  },
+  "followup": {
+    "local_commit": "2821ee14f1d081504a5b0f3bafb9456a870754e0",
+    "github_commit": "7f781f2cdf73eca3083b25b30ac1f675c9a284ca",
+    "identical_tree": "d491a811086a1a12c4ac2d7c8655b5cbb2cd1fa4",
+    "changes": [
+      "Do not evict live actors for exhausted dead mandatory-role records; negative regression case added.",
+      "Diagnostic preview canvas resets after deferred display settings startup."
+    ],
+    "checks": [
+      {
+        "name": "egg_species_contract_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.783
+      }
+    ],
+    "full_suite_repeated": false
+  },
+  "fixture_provenance": {
+    "synthetic": true,
+    "local_source": "905e524003c5f782f7b7daab09f0e23a1b632756",
+    "github_equivalent": "ed529a2cc19fd6daece1a65e3e64fb611d6b8629",
+    "gameplay_base": "ea900f2e09946660694a9e59399b4680a5655a85"
+  },
+  "measurements": {
+    "contract": {
+      "cases": [
+        {
+          "body": "arch21-old:1",
+          "body_evidence": "passed",
+          "egg_id": "species_2990571f1192113d616a7490064b0f51",
+          "habitats": 4,
+          "legs": 2,
+          "old_source_sha256": "e3485a108540e6aa5d617667c1549624ab2de23f8555980bf5b91d8f75f6132d",
+          "species": 4
+        },
+        {
+          "body": "arch21-old:15838",
+          "body_evidence": "passed",
+          "egg_id": "species_5fb4a9efda97348f1c307a87d9cabcf7",
+          "habitats": 4,
+          "legs": 2,
+          "old_source_sha256": "72d174bc919ed62800122062ed67b1c79b73184601ea1aebe8f8c159f8efc160",
+          "species": 4
+        },
+        {
+          "body": "arch21-old:2147483647",
+          "body_evidence": "passed",
+          "egg_id": "species_d34444fce04ac3f5e86aeb908e84aa77",
+          "habitats": 4,
+          "legs": 2,
+          "old_source_sha256": "fded91aaab9185b16d7b23ddaf8c11a9be16afb57d46a1bfc570d33ef3f80b25",
+          "species": 4
+        }
+      ],
+      "failures": []
+    },
+    "campaign": {
+      "egg_id": "object_55741e15bfd4562bc733785319aa9eb3",
+      "failures": [],
+      "fresh_process": true,
+      "future_policy_protected": true,
+      "old_individuals_retained": 3,
+      "revisit": true,
+      "roles": 4,
+      "source": "905e524003c5f782f7b7daab09f0e23a1b632756"
+    },
+    "surface_runtime": {
+      "animals": 4,
+      "before": {
+        "object_a94d6fafcc96015e8ea7b683e36e3750": {
+          "forward": [
+            -0.707102477550507,
+            -0.70708954334259,
+            0.00551123265177011
+          ],
+          "goal": {
+            "body_id": "m1b:terra",
+            "face": 3.0,
+            "height": 11.540764,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999982420387,
+            "v": 0.0
+          },
+          "habitat_key": "surface1:3:0",
+          "home": {
+            "body_id": "m1b:terra",
+            "face": 3.0,
+            "height": 11.7115521637872,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999981164721977,
+            "v": 0.0
+          },
+          "location": {
+            "body_id": "m1b:terra",
+            "face": 3,
+            "height": 11.6150520034134,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999981613286302,
+            "v": -1.7481119978266e-09
+          },
+          "returning": true,
+          "schema": 1.0,
+          "species_id": "species_730be2126129ccfe78652357d7879184",
+          "traveled": 13.37547628209,
+          "velocity": [
+            -1.97988700866699,
+            -1.97985064983368,
+            0.0154314516112208
+          ]
+        },
+        "object_ac9f1067b8ee06bb3edcd32679b01777": {
+          "forward": [
+            0.707111120223999,
+            0.707102417945862,
+            2.72522697741806e-06
+          ],
+          "goal": {
+            "body_id": "m1b:terra",
+            "face": 3.0,
+            "height": 10.392728,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999987443063,
+            "v": 0.0
+          },
+          "habitat_key": "surface1:-3:0",
+          "home": {
+            "body_id": "m1b:terra",
+            "face": 3.0,
+            "height": 10.1918234508485,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999988698735827,
+            "v": 0.0
+          },
+          "location": {
+            "body_id": "m1b:terra",
+            "face": 3,
+            "height": 10.2878509704024,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999987756182818,
+            "v": -1.81633495533893e-12
+          },
+          "returning": true,
+          "schema": 1.0,
+          "species_id": "species_e30d7bcd59a3dcce7a882b6161be1442",
+          "traveled": 16.2449459657073,
+          "velocity": [
+            2.68702220916748,
+            2.68698906898499,
+            1.0355862286815e-05
+          ]
+        },
+        "object_b614760384817a7f169577acbbd008e1": {
+          "forward": [
+            -0.0151288555935025,
+            -0.015126284211874,
+            0.999771118164062
+          ],
+          "goal": {
+            "body_id": "m1b:terra",
+            "face": 3.0,
+            "height": 11.143515,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999984931722,
+            "v": 1.775797e-06
+          },
+          "habitat_key": "surface1:0:3",
+          "home": {
+            "body_id": "m1b:terra",
+            "face": 3.0,
+            "height": 10.9440559951514,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999984931722025,
+            "v": 2.66369614776e-06
+          },
+          "location": {
+            "body_id": "m1b:terra",
+            "face": 3,
+            "height": 10.9281205506995,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999984941351052,
+            "v": 2.3547313767482e-06
+          },
+          "returning": true,
+          "schema": 1.0,
+          "species_id": "species_6f907083091b3552c5416e86185dea3b",
+          "traveled": 13.3578238338232,
+          "velocity": [
+            -0.042360782623291,
+            -0.0423536002635956,
+            2.79935908317566
+          ]
+        },
+        "object_c2a7d7834f144058cdcf1797d4af8dd4": {
+          "forward": [
+            0.00487225642427802,
+            0.00486993696540594,
+            0.999976217746735
+          ],
+          "goal": {
+            "body_id": "m1b:terra",
+            "face": 3.0,
+            "height": 10.96146,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999984931722,
+            "v": -1.775797e-06
+          },
+          "habitat_key": "surface1:0:-3",
+          "home": {
+            "body_id": "m1b:terra",
+            "face": 3.0,
+            "height": 11.1233421296254,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999984931721996,
+            "v": -2.66369595866e-06
+          },
+          "location": {
+            "body_id": "m1b:terra",
+            "face": 3,
+            "height": 11.0768992798403,
+            "mode": "cube_sphere_m1_v1",
+            "u": 0.999984927206015,
+            "v": -2.22817788350417e-06
+          },
+          "returning": false,
+          "schema": 1.0,
+          "species_id": "species_92da111c35702b38fcc86ea819ebe464",
+          "traveled": 10.570172354579,
+          "velocity": [
+            0.013642318546772,
+            0.0136358216404915,
+            2.79993343353271
+          ]
+        }
+      },
+      "blocked_placements": 0,
+      "domestic": 4,
+      "failures": [],
+      "floor_contacts": 720,
+      "food": 4,
+      "max_body_check_ms": 1.725,
+      "max_search_ms": 3.75,
+      "movement_m": 41.1406693011522,
+      "physically_reached_habitats": 4,
+      "search_nodes": 41,
+      "search_status": "ready"
+    }
+  },
+  "native_preview": {
+    "file": "evidence/arch21/egg-species-preview.png",
+    "size": [
+      1200,
+      720
+    ],
+    "renderer": "Godot 4.6.3 OpenGL Compatibility / Mesa llvmpipe software rendering",
+    "review": "Two complete bodies, readable comparison labels, no overlap.",
+    "hardware_performance_acceptance": false
+  },
+  "scope": [
+    "Fourth mandatory egg-capable species for living spherical bodies.",
+    "Old three species and original synthetic slot retained; fresh-process campaign restart passed.",
+    "D1 egg capability only; production, collection and cargo remain ARCH-22/ARCH-20.",
+    "No automatic merge; neighboring ARCH-17/24/25/29 integration notes in WORK_ARCH21_EGG_SPECIES.md."
+  ],
+  "evidence": [
+    {
+      "path": "evidence/arch21/art_sources.log.gz",
+      "sha256": "861004118bb265669e056b8fc4f056590f2debda7885be149a9dd7ca259cec3c"
+    },
+    {
+      "path": "evidence/arch21/domestic_body_evidence_test.log.gz",
+      "sha256": "26f7aace445aefc0390a32e0833affe03a8e959170ef246073f1a505db478212"
+    },
+    {
+      "path": "evidence/arch21/domestic_surface_catalog_test.log.gz",
+      "sha256": "58e43ef225364269c0ad5574420839b30e49f59903d99cd910085ff03d6d8d33"
+    },
+    {
+      "path": "evidence/arch21/domestic_surface_runtime_test.log.gz",
+      "sha256": "dc9839c6de30e7d9c62941a21cd078b9058314d6eaf9e8e78d963df258addf9b"
+    },
+    {
+      "path": "evidence/arch21/domestication_campaign_test.log.gz",
+      "sha256": "c8728c96fc910227e883422b1bdc05ba3a24ad0c20a32a5f83cbc95b5e2db81e"
+    },
+    {
+      "path": "evidence/arch21/domestication_contract_test.log.gz",
+      "sha256": "b7109f65a94d522605ede1723b7ce26779d8ac522766b173188997f7cc45726e"
+    },
+    {
+      "path": "evidence/arch21/egg-species-preview.png",
+      "sha256": "c11deb017104d9b44a3b99890164a22179f72587fae582ede8aa14a92b13d66a"
+    },
+    {
+      "path": "evidence/arch21/egg_species_campaign_test.log.gz",
+      "sha256": "5fe93d9eec7c02f2311ac71ffab0ce26a28c76f38da38b19714dc73549c25d24"
+    },
+    {
+      "path": "evidence/arch21/egg_species_contract_followup.log.gz",
+      "sha256": "01244d9880aae6722a51be9d92476f883f3efc605b3f1d59b312160090f4e969"
+    },
+    {
+      "path": "evidence/arch21/egg_species_contract_test.log.gz",
+      "sha256": "01244d9880aae6722a51be9d92476f883f3efc605b3f1d59b312160090f4e969"
+    },
+    {
+      "path": "evidence/arch21/import.log.gz",
+      "sha256": "e45905abd0223934f245df08cc2439b842a5529dcc157f99e973f21d6a749491"
+    },
+    {
+      "path": "evidence/arch21/interface_task7_test.log.gz",
+      "sha256": "49a8975f772673f6dc6914402592c05b1f2ffc013582164f5e7850275f0e743d"
+    },
+    {
+      "path": "evidence/arch21/preview-render.log",
+      "sha256": "b8b1e0f109264698539546912231b11340a22e9f823015a4ea236df2a11baa8f"
+    },
+    {
+      "path": "evidence/arch21/spherical_gameplay_test.log.gz",
+      "sha256": "a6cbca6c764cf98c348116c8eaa1603c2fc8f3735406adf44be4bca008385dc5"
+    }
+  ]
+}
