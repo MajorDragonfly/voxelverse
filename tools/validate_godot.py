@@ -50,10 +50,10 @@ def validate(args):
     if not args.skip_import:
         commands.append(("art_sources", [], 120))
     # SceneTree tests load gameplay scenes after autoloads exist, like the game.
-    # The full sphere chain includes several cold terrain loads and a native
-    # child restart; successful Windows runs already take about 395 seconds.
+    # The full sphere chain includes real taming/production, A-B-A with the held
+    # animal, cold terrain loads and fresh processes on both sides of the trip.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  600 if name == "spherical_gameplay_test" else 420 if name in LONG_TESTS else 120) for name in tests]
+                  900 if name == "spherical_gameplay_test" else 420 if name in LONG_TESTS else 120) for name in tests]
     if not args.skip_main:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:

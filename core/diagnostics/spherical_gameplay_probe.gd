@@ -8,6 +8,10 @@ func _run() -> void:
 	flow = tree.root.get_node("SessionFlow")
 	saves.session_managed = true
 	saves.autosave_enabled = false
+	if "--animal-travel-restart" in OS.get_cmdline_user_args():
+		await preload("res://core/diagnostics/animal_travel_scenario.gd").new(self).restart()
+		await _finish()
+		return
 	if "--sphere-gameplay-restart" in OS.get_cmdline_user_args():
 		await _restart_gameplay()
 		await _finish()
@@ -187,8 +191,10 @@ func _animal_chain(tribe: Node) -> void:
 	var through: Vector3 = site + (site - tribe.anchor()).slide(Space.up(self, site)).normalized() * 1.2
 	through = tribe.navigation.snap(through)
 	_expect(tribe.issue_order("move", through), "Handler cannot walk through pen.")
-	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(site) < 1.8, 24000)
-	_expect(runtime.actor_for(id).global_position.distance_to(site) < 1.8, "Animal did not follow handler to pen: " + str({"animal": runtime.actor_for(id).global_position, "handler": tribe.actors[handler].global_position, "site": site, "status": runtime.actor_for(id).status, "animal_route": runtime._routes.get(id), "handler_record": tribe.member_record(handler)}))
+	# Stop well inside the 1.8 m admission radius: the waiting animal can settle
+	# within 0.5 m of its target after collision or a fresh physical spawn.
+	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(site) < 1.0, 24000)
+	_expect(runtime.actor_for(id).global_position.distance_to(site) < 1.0, "Animal did not follow handler inside pen: " + str({"animal": runtime.actor_for(id).global_position, "handler": tribe.actors[handler].global_position, "site": site, "status": runtime.actor_for(id).status, "animal_route": runtime._routes.get(id), "handler_record": tribe.member_record(handler)}))
 	runtime.issue_command(id, "wait")
 	var pen: Dictionary = tribe.village().husbandry.pens[0]
 	_expect(tribe.husbandry.assign(pen.id, id), "D2->D3 admission failed: " + tribe.status)
@@ -228,6 +234,8 @@ func _animal_chain(tribe: Node) -> void:
 	await tree.physics_frame
 	flow.toggle_pause()
 	_expect(saves.save_now(), "Loaded milk carrier could not save: " + saves.last_error)
+	tribe = await preload("res://core/diagnostics/animal_travel_scenario.gd").new(self).run(tribe, id, carrier)
+	if not is_instance_valid(tribe): return
 	var path: String = saves.save_path
 	var expected: Dictionary = {"target": path, "saved": saves._read_save(path)}
 	_expect(Atomic.write("user://sphere_gameplay_restart.json", expected, false) == OK, "Cannot preserve milk restart evidence.")
@@ -247,9 +255,12 @@ func _animal_chain(tribe: Node) -> void:
 	await _until(func() -> bool: return tribe.is_active(), 45000)
 	tribe.select_member(carrier)
 	_expect(tribe.member_record(carrier).cargo == "milk", "Reload lost real milk cargo.")
+	var stored_milk: int = tribe.village().stock.milk + tribe.village().economy.milk_meals
 	tribe.issue_order("resume")
-	await _until(func() -> bool: return tribe.village().economy.milk_received > 0, 18000)
-	_expect(tribe.village().economy.milk_received > 0, "Milk cycle did not reach storage through actual transport.")
+	await _until(func() -> bool: return (tribe.member_record(carrier).cargo != "milk"
+		and tribe.village().stock.milk + tribe.village().economy.milk_meals > stored_milk), 18000)
+	_expect(tribe.member_record(carrier).cargo != "milk" and tribe.village().stock.milk + tribe.village().economy.milk_meals > stored_milk,
+		"Milk cycle did not reach storage through actual transport.")
 	_expect(saves.save_now(), "Complete D1/D2/D3 sphere save failed: " + saves.last_error)
 	print("SPHERE_MILK_DELIVERED ", tribe.village().economy.milk_received)
 	_stage("milk_delivered")
