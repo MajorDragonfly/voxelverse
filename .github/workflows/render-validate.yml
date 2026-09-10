@@ -13,7 +13,8 @@ concurrency:
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # The complete forest review uses CPU Vulkan on hosted runners.
+    timeout-minutes: ${{ matrix.review == 'environment' && matrix.renderer == 'forward_plus' && 30 || 20 }}
     strategy:
       fail-fast: false
       matrix:

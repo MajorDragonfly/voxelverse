@@ -1,0 +1,42 @@
+{
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "fixture": "1/10/100 visited bodies with three-resident minimal villages, 1200 frames with production progression observer; no terrain, GPU or target-PC FPS measurement",
+  "godot": "4.6.3-stable (official)",
+  "measurements": [
+    {
+      "bodies": 1,
+      "body_reads_10000_ms": 9.483,
+      "far_jobs_max": 0,
+      "far_slice_max_ms": 0.075,
+      "far_slice_p95_ms": 0.001,
+      "load_ms": 2.311,
+      "save_bytes": 11615,
+      "save_ms": 2.345,
+      "static_allocator_bytes": 37835350
+    },
+    {
+      "bodies": 10,
+      "body_reads_10000_ms": 9.386,
+      "far_jobs_max": 9,
+      "far_slice_max_ms": 27.75,
+      "far_slice_p95_ms": 2.237,
+      "load_ms": 12.705,
+      "save_bytes": 96926,
+      "save_ms": 8.221,
+      "static_allocator_bytes": 38390134
+    },
+    {
+      "bodies": 100,
+      "body_reads_10000_ms": 8.998,
+      "far_jobs_max": 11,
+      "far_slice_max_ms": 3.852,
+      "far_slice_p95_ms": 2.911,
+      "load_ms": 89.695,
+      "save_bytes": 974438,
+      "save_ms": 70.015,
+      "static_allocator_bytes": 43980162
+    }
+  ],
+  "os": "Linux",
+  "measurement_context": "Headless Linux shared execution environment; concurrent acceptance probes. Wall-clock spikes include scheduling contention. Not a target-PC or GPU measurement."
+}

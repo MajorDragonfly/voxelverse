@@ -9,7 +9,7 @@ func _run() -> void:
 	var loaded: bool = saves.load_now()
 	var state := root.get_node("GameState")
 	var atlas := preload("res://core/map/exploration_atlas.gd").new()
-	var record: Dictionary = state.campaign.data.bodies[str(state.get_world_seed())].get("exploration_atlas", {})
+	var record: Dictionary = state.get_current_body_record().get("exploration_atlas", {})
 	var okay: bool = loaded and atlas.bind(record) and record.places.size() == 2
 	if okay:
 		okay = atlas.known(preload("res://core/map/surface_map_projection.gd").plane_address(record.body_id, Vector3(240, 100, 0)))

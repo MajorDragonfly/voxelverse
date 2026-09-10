@@ -120,7 +120,7 @@ func _run() -> void:
 	var saved_group: Dictionary = home.group_state().duplicate(true)
 	var migration := Campaign.new()
 	migration.import_state(state.campaign.export_state())
-	_expect(migration.data["bodies"][str(state.world_seed)]["home_group"] == saved_group, "Existing campaign import does not preserve extension.")
+	_expect(migration.body_record(saved_group.body_id)["home_group"] == saved_group, "Existing campaign import does not preserve extension.")
 	var output: Array = []
 	var restart_args: PackedStringArray = ["--headless"]
 	# Godot consumes --main-pack before get_cmdline_args; the export harness
@@ -137,7 +137,7 @@ func _run() -> void:
 	# Future group data stays opaque in memory; the previous readable file is
 	# preserved until the compatible group is restored, with no new residents.
 	var previous_bytes: String = FileAccess.get_file_as_string(SAVE)
-	var body: Dictionary = state.campaign.data["bodies"][str(state.world_seed)]
+	var body: Dictionary = state.get_current_body_record()
 	body["home_group"]["schema"] = 99
 	var future: Dictionary = body["home_group"].duplicate(true)
 	home._refresh_runtime()

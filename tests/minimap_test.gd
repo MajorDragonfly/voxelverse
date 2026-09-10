@@ -42,7 +42,7 @@ func _run() -> void:
 	_expect(hud != null and hud.visible, "Player did not install the map.")
 	var body: Dictionary = state.get_current_body()
 	var home: Dictionary = Home.create(body["id"], state.campaign.data["player_species_id"], Vector3(40, 0, -20))
-	state.campaign.data["bodies"][str(state.get_world_seed())]["home_group"] = home
+	state.get_current_body_record()["home_group"] = home
 	var original: Dictionary = state.campaign.export_state()
 	var observation: Dictionary = root.get_node("ProgressionService").export_state()
 	var real_snapshot: Dictionary = Source.campaign_snapshot(player, self)
@@ -97,7 +97,7 @@ func _run() -> void:
 	hud.change_zoom(1)
 	_expect(hud.zoom_index == 2, "Reload fixture did not have manual zoom.")
 	_expect(saves.save_now(), "Campaign with home could not save.")
-	state.campaign.data["bodies"][str(state.get_world_seed())].erase("home_group")
+	state.get_current_body_record().erase("home_group")
 	_expect(saves.load_now(), "Campaign did not reload.")
 	hud._update_snapshot()
 	_expect(hud.phase == 0 and hud.zoom_index == 1 and hud._map.markers.size() == 3, "Reload lost home or phase scale.")

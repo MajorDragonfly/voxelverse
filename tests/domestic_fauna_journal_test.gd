@@ -101,7 +101,7 @@ func scan_and_save() -> void:
 		var animal: Node3D = representatives[group]
 		if not await aim_at(animal):
 			continue
-		var key := "%d:%d" % [state.get_world_seed(), animal.species_seed]
+		var key: String = progression.species_discovery_key(animal.species_seed)
 		var count: int = progression.get_discovered_species_count()
 		var points: int = progression.discovery_points
 		for frame in range(12):

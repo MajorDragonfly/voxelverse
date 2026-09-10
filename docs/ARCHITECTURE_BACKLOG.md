@@ -6,7 +6,7 @@ Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984
 
 ## Zuordnung der laufenden Implementierung
 
-[WORK_SPHERICAL_GAMEPLAY.md](WORK_SPHERICAL_GAMEPLAY.md) liefert inzwischen konkrete Anschlüsse und Teilnachweise für ARCH-01, 05, 06, 08–14. Die Aufgaben werden hier erst nach ihrer jeweils vollständigen Abnahme als erledigt markiert. Besonders ARCH-03/04 (Körper-ID), ARCH-16 (weiterarbeitende ferne Orte) und ARCH-19 (regulärer Kugelstart) bleiben offen. Das ursprüngliche Audit bezog sich auf den oben angegebenen älteren Commit.
+[WORK_SPHERICAL_GAMEPLAY.md](WORK_SPHERICAL_GAMEPLAY.md) dokumentiert PR #45. [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md) ergänzt auf dessen `main`-Basis ARCH-03/04, den gemeinsamen Arbeitskern aus ARCH-15, die erste Fernsimulation aus ARCH-16, Navigationsbudgets aus ARCH-17 und Körperreisen aus ARCH-18. Die folgenden Häkchen beschreiben gelieferte Teilpunkte; sie ersetzen keine vollständige M1i-/Ziel-PC-Abnahme. ARCH-13/14, weitere Langzeitbudgets und ARCH-19 bleiben offen.
 
 ## Beschlossene Leitplanken
 
@@ -55,17 +55,17 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 ### ARCH-03 – Körperzugriff bündeln
 
 - **Zuordnung:** M1e, Vorbereitung M9. **Vorher:** ARCH-01. **Bereich:** Kampagne und bisherige Seed-Verbraucher; ein Integrationsbesitzer.
-- [ ] Eine kleine gemeinsame Fassade für `get_body_by_id`, aktiven Körper und ausdrückliche Anlage einführen; zunächst vorhandenes Speicherlayout erhalten.
-- [ ] `body_for_seed`-Zugriffe aus Save, Dorf, D2, Fortschritt und Karten über diese Fassade führen. Leseanfragen erzeugen keine neuen Körper.
-- [ ] Legacy-Lookup braucht Systemkontext; Mehrdeutigkeit wird gemeldet, nicht durch den ersten gefundenen Seed aufgelöst.
+- [x] Eine kleine gemeinsame Fassade für `get_body_by_id`, aktiven Körper und ausdrückliche Anlage einführen; zunächst vorhandenes Speicherlayout erhalten.
+- [x] `body_for_seed`-Zugriffe aus Save, Dorf, D2, Fortschritt und Karten über diese Fassade führen. Leseanfragen erzeugen keine neuen Körper.
+- [x] Legacy-Lookup braucht Systemkontext; Mehrdeutigkeit wird gemeldet, nicht durch den ersten gefundenen Seed aufgelöst.
 - **Fertig:** Bestehende Kampagnen behalten IDs und Inhalt; neue und alte Verbraucher benutzen denselben Körper. Keine heimliche Save-Migration in diesem Schritt.
 
 ### ARCH-04 – Körper-ID als Speicherschlüssel
 
 - **Zuordnung:** M1e, vor mehreren Systemen. **Vorher:** ARCH-03. **Bereich:** Kampagnenschema, Save-Adapter und Körper-/Regionsreferenzen.
-- [ ] `bodies` nach unveränderlicher `body_id` indizieren; Seed bleibt Generatorparameter. Alt-Seed-Schlüssel über versionierte Zuordnung migrieren.
-- [ ] Regionen, Heimat, Tiere, Besitz, Atlas und Fortschrittsverweise gegen die Zuordnung prüfen; alte IDs niemals aus neuer Listenreihenfolge ableiten.
-- [ ] Bereits mehrdeutige Altinformationen nicht erraten: Kopie/Quelle schützen und konkreten Konflikt ausgeben.
+- [x] `bodies` nach unveränderlicher `body_id` indizieren; Seed bleibt Generatorparameter. Alt-Seed-Schlüssel über versionierte Zuordnung migrieren.
+- [x] Regionen, Heimat, Tiere, Besitz, Atlas und Fortschrittsverweise gegen die Zuordnung prüfen; alte IDs niemals aus neuer Listenreihenfolge ableiten.
+- [x] Bereits mehrdeutige Altinformationen nicht erraten: Kopie/Quelle schützen und konkreten Konflikt ausgeben.
 - **Fertig:** Zwei Systeme mit identischem Weltseed enthalten zwei getrennte Körper; A → B → A und frischer Prozess erhalten getrennte Arten, Vorräte und Entdeckungen. Ein alter Ein-System-Stand behält alle Identitäten.
 
 ### ARCH-05 – Spielbare Oberflächenklassen und Abfragen
@@ -156,18 +156,18 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 ### ARCH-15 – Dorfregeln aus dem Szenencontroller lösen
 
 - **Zuordnung:** M1g/M1h/M6. **Vorher:** ARCH-01/06; Integration mit ARCH-11 koordinieren. **Bereich:** `tribe_controller.gd`, vorhandene Wirtschafts-/Auftragsdaten.
-- [ ] Zuerst einen bestehenden Auftrag als Datenablauf abgrenzen: Befehl → Reservierung → bestätigte Ankunft → Arbeit → Ladung → bestätigte Lieferung → Beleg.
-- [ ] Controller behält Darstellung, Eingabe und Navigation; Zustandsregeln können ohne geladene Figuren ausgewertet werden. Nahe Arbeit startet weiterhin erst nach tatsächlicher Ankunft.
+- [x] Zuerst einen bestehenden Auftrag als Datenablauf abgrenzen: Befehl → Reservierung → bestätigte Ankunft → Arbeit → Ladung → bestätigte Lieferung → Beleg.
+- [x] Controller behält Darstellung, Eingabe und Navigation; Zustandsregeln können ohne geladene Figuren ausgewertet werden. Nahe Arbeit startet weiterhin erst nach tatsächlicher Ankunft.
 - [ ] Gesamtdorfkopien pro Bewohner/Tick durch gezielte Transaktionen ersetzen, ohne gemeinsamen Save-/Rollback-Schutz zu verlieren.
 - **Fertig:** Derselbe Auftrag behält seine Mengenbilanz und Unterbrechbarkeit. Pause sowie 1-/2-/4-fache Simulationsgeschwindigkeit funktionieren; wiederholte Ankunft/Bestätigung verbucht keine zusätzliche Ware.
 
 ### ARCH-16 – Nah-/Fernsimulation mit eindeutiger Übergabe
 
 - **Zuordnung:** M1h; Nutzerentscheidung in dieser Prüfung. **Vorher:** ARCH-13/14/15, vorhandene radiale Produktionskette ARCH-11.
-- [ ] Pro Region/Auftrag genau einen Besitzer und gespeicherten Zeitcursor führen. Gemeinsame Kampagnenzeit von Wandzeit/Physikzeit trennen.
-- [ ] Bei Übergabe Nah → Fern bisherigen Besitzer am Tickende anhalten; Zustand, Ladung, Reservierungen, begonnenen Zyklus und Zeitcursor gemeinsam sichern; danach den neuen Besitzer aktivieren. Bei Schreibfehler bisherigen Besitzer mit unverändertem Zustand fortsetzen. Auch bei asynchronem Schreiben darf die Momentaufnahme nicht überholt werden.
-- [ ] Ferne eigene Orte in begrenzten Zeitschritten vereinfacht versorgen/produzieren. Fehlende Nahrung, Kapazität, Transportzeit und bekannte Wegsperren gelten weiter; keine fiktiven Sofortlieferungen.
-- [ ] Fern → Nah rekonstruiert denselben Zustand ohne erneutes Durchlaufen bereits verbuchter Zyklen. Unbesuchte Galaxienkörper erhalten keine vollständige Einzelsimulation.
+- [x] Pro Region/Auftrag genau einen Besitzer und gespeicherten Zeitcursor führen. Gemeinsame Kampagnenzeit von Wandzeit/Physikzeit trennen.
+- [x] Bei Übergabe Nah → Fern bisherigen Besitzer am Tickende anhalten; Zustand, Ladung, Reservierungen, begonnenen Zyklus und Zeitcursor gemeinsam sichern; danach den neuen Besitzer aktivieren. Bei Schreibfehler bisherigen Besitzer mit unverändertem Zustand fortsetzen. Auch bei asynchronem Schreiben darf die Momentaufnahme nicht überholt werden.
+- [x] Ferne eigene Orte in begrenzten Zeitschritten vereinfacht versorgen/produzieren. Fehlende Nahrung, Kapazität, Transportzeit und bekannte Wegsperren gelten weiter; keine fiktiven Sofortlieferungen.
+- [x] Fern → Nah rekonstruiert denselben Zustand ohne erneutes Durchlaufen bereits verbuchter Zyklen. Unbesuchte Galaxienkörper erhalten keine vollständige Einzelsimulation.
 - **Fertig:** Milch-/Materialfracht während Nah → Fern → Nah, Pause und Neustart existiert genau einmal. Die vorhandene eigene Siedlung arbeitet entfernt weiter; eine zweite isolierte Daten-Prüfinstanz belegt unabhängige Besitzer/Zeitcursor ohne zweites spielbares Dorf vorwegzunehmen. Zwei spielbare eigene Siedlungen folgen in ARCH-26. Geschlossene App und Menüs produzieren nichts; das Tickbudget begrenzt Nachholarbeit.
 
 ### ARCH-17 – Streamingaufträge, Gewässer und Audio begrenzen
@@ -182,9 +182,9 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 ### ARCH-18 – Körperwechsel als Kampagnenübergabe
 
 - **Zuordnung:** M1h, Vorbereitung M9. **Vorher:** ARCH-04/13/16/17. **Bereich:** SessionFlow, Oberflächenhost und vorhandener Save-Abschluss.
-- [ ] Abreise vorbereiten → Nahzustand/Fracht sichern → alten Host abmelden → Zielkontext aufbauen → erst bei Kollision/Hostbereitschaft Steuerung übergeben.
-- [ ] Bei Lade-/Schreibfehlern im alten gültigen Zustand bleiben; Listener, Audio, Kamera, Player und Jobs besitzen klaren Lebenszyklus.
-- [ ] Kurzen Lade-/Flugübergang zulassen. Noch keinen Schiffsflug vorziehen; vorhandenen Körperwechsel als Prüfeinstieg verwenden.
+- [x] Abreise vorbereiten → Nahzustand/Fracht sichern → alten Host abmelden → Zielkontext aufbauen → erst bei Kollision/Hostbereitschaft Steuerung übergeben.
+- [x] Bei Lade-/Schreibfehlern im alten gültigen Zustand bleiben; Listener, Audio, Kamera, Player und Jobs besitzen klaren Lebenszyklus.
+- [x] Kurzen Lade-/Flugübergang zulassen. Noch keinen Schiffsflug vorziehen; vorhandenen Körperwechsel als Prüfeinstieg verwenden.
 - **Fertig:** A → B → A mit Heimat, Tier und laufendem Auftrag sowie Neustart erhält Identitäten und Bilanz; zu keinem Zeitpunkt simulieren zwei Hosts dasselbe Individuum.
 
 ### ARCH-19 – M1i als zusammenhängende Abnahme

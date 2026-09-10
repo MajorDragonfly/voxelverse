@@ -24,6 +24,7 @@ var show_body_attachments: bool = false
 var body_attachment_errors: Array[String] = []
 var _motion := Motion.new()
 var _motion_time: float = 0.0
+var _locomotion_speed_ratio: float = -1.0
 
 # Runtime-only batching preserves body-slice and attachment roots. Leg meshes
 # remain individual because the adaptive animator reparents them into knee rigs.
@@ -109,8 +110,15 @@ func body_socket(id: String) -> Dictionary:
 
 
 func set_motion(mode: String) -> void:
+	var next: String = mode if mode in ["edit", "idle", "walk", "run"] else "edit"
+	if next == motion_mode:
+		return
+	if motion_mode != "edit" and next != "edit":
+		motion_mode = next
+		set_process(true)
+		return
 	_motion.unbind()
-	motion_mode = mode if mode in ["edit", "idle", "walk", "run"] else "edit"
+	motion_mode = next
 	_motion_time = 0.0
 	if motion_mode != "edit":
 		_motion.bind(self)
@@ -119,7 +127,11 @@ func set_motion(mode: String) -> void:
 
 func _process(delta: float) -> void:
 	_motion_time += delta * motion_speed_scale
-	_motion.sample(motion_mode, _motion_time)
+	_motion.advance(motion_mode, _motion_time, delta * motion_speed_scale, _locomotion_speed_ratio)
+
+
+func set_locomotion_speed(speed: float, reference_speed: float) -> void:
+	_locomotion_speed_ratio = clampf(speed / maxf(reference_speed, 0.1), 0.0, 1.0)
 
 
 func _create_body() -> void:

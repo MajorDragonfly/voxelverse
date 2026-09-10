@@ -35,7 +35,7 @@ func _run() -> void:
 	_expect(FileAccess.get_file_as_string(original) == original_bytes, "Copy modified original bytes.")
 	var copy_data: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(copied))
 	_expect(copy_data.game_state.campaign.id != campaign_id, "Copy retained the campaign identity.")
-	_expect(copy_data.design_files == before.design_files and copy_data.progression == before.progression and copy_data.regions_by_world == before.regions_by_world, "Copy lost embedded designs/progression/ecology.")
+	_expect(copy_data.design_files == before.design_files and copy_data.progression == before.progression and copy_data.regions_by_body == before.regions_by_body, "Copy lost embedded designs/progression/ecology.")
 	_expect(state.campaign.data.id == campaign_id and saves.save_path == original, "Copy loaded its state into the live services.")
 	_expect(saves.select_slot(copied), "Could not load the copied slot.")
 	_expect(not state.record_campaign_event(event), "Copy accepted an event from the original campaign.")

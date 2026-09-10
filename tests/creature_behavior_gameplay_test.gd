@@ -341,6 +341,17 @@ func _phase_preview_and_migration() -> void:
 	_expect(saves.load_now(), "Compatible contract did not unblock saving.")
 	var old: Dictionary = valid.duplicate(true)
 	old["schema"] = 4
+	old.game_state.schema = 3
+	old.game_state.erase("system_id")
+	old.game_state.campaign.schema = 2
+	old.game_state.campaign.erase("body_lookup")
+	var old_bodies: Dictionary = {}
+	for body: Dictionary in old.game_state.campaign.bodies.values(): old_bodies[str(int(body.seed))] = body
+	old.game_state.campaign.bodies = old_bodies
+	var old_regions: Dictionary = {}
+	for region: Dictionary in old.regions_by_body.values(): old_regions[str(int(region.world_seed))] = region
+	old.regions_by_world = old_regions
+	old.erase("regions_by_body")
 	old["progression"]["schema"] = 3
 	old["progression"].erase("creature_encounters")
 	Atomic.write(TEST_SAVE, old, false)

@@ -84,6 +84,9 @@ func _test_empty_and_input() -> void:
 
 
 func _test_records() -> void:
+	var game: Node = root.get_node("GameState")
+	game.set_world_seed(123456, false)
+	game.campaign.ensure_body(654321, game.system_seed, game.active_system_id)
 	var blueprint: Dictionary = Species.create_species(771337, Vector2i(1, -2), "predator")
 	var original: String = JSON.stringify(Records.encode(blueprint))
 	var receipt: Dictionary = _progression.call("register_species_discovery", 771337, blueprint, 123456)

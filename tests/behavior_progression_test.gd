@@ -182,6 +182,17 @@ func _migrate_schema_three() -> void:
 	_expect(bool(saves.call("save_now")), "Could not create migration fixture.")
 	var legacy: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(TEST_SAVE))
 	legacy["schema"] = 3
+	legacy.game_state.schema = 3
+	legacy.game_state.erase("system_id")
+	legacy.game_state.campaign.schema = 2
+	legacy.game_state.campaign.erase("body_lookup")
+	var old_bodies: Dictionary = {}
+	for body: Dictionary in legacy.game_state.campaign.bodies.values(): old_bodies[str(int(body.seed))] = body
+	legacy.game_state.campaign.bodies = old_bodies
+	var old_regions: Dictionary = {}
+	for region: Dictionary in legacy.regions_by_body.values(): old_regions[str(int(region.world_seed))] = region
+	legacy.regions_by_world = old_regions
+	legacy.erase("regions_by_body")
 	legacy["progression"]["schema"] = 2
 	legacy["progression"].erase("behavior")
 	_expect(Atomic.write(TEST_SAVE, legacy, false) == OK, "Could not write old schema-3 fixture.")
@@ -189,7 +200,7 @@ func _migrate_schema_three() -> void:
 	creature["name"] = "Different loose file"
 	Atomic.write(Creature.SAVE_PATH, creature, false)
 	_expect(bool(saves.call("load_now")), "M0/M1 schema-3 save failed to migrate.")
-	_expect(_json_value(state.get("campaign").export_state()) == _json_value(legacy["game_state"]["campaign"]), "Schema 3 migration replaced IDs, clock or event cursors.")
+	_expect(_json_value(state.get("campaign").export_state()) == _json_value(preload("res://core/campaign/body_registry.gd").upgrade_campaign(legacy["game_state"]["campaign"]).data), "Schema 3 migration replaced IDs, clock or event cursors.")
 	_expect(Creature.load_best_available()["name"] == "M2 retained design", "Migration preferred a loose editor file over the snapshot.")
 	_expect(int(progression.get("discovery_points")) == 1, "Migration changed Insight.")
 	_expect(_wallet(0)["earned"] == {"social": 0, "aggression": 0}, "Old discoveries became retroactive behavior points.")

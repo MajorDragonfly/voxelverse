@@ -94,7 +94,11 @@ func _run() -> void:
 	_expect(tame_voice and audio.get_sound_stream(&"order_tame") == audio.get_sound_stream(&"discovery"), "Taming did not reuse the actual milestone stream")
 	_expect(d2.record(id)["trust"] == 100.0 and lab.snapshot["stock"]["roots"] == 8, "Feedback changed D2 costs or trust")
 	for action in ["follow", "wait", "home"]:
+		# A fast game clock must not shorten the real-time audio interval.
+		var previous_time_scale := Engine.time_scale
+		if action == "follow": Engine.time_scale = 4.0
 		await _gap()
+		Engine.time_scale = previous_time_scale
 		_expect(fixture.perform(action)["ok"] and heard[-1] == {"action": StringName(action), "ok": true}, "Confirmed order mapping failed: " + action)
 		_expect(feedback.message.contains("gespeichert"), "Order claims completion rather than persistence")
 		if action == "follow": _expect(feedback.message.contains("Prüfbetreuer"), "Follow feedback lost concrete handler")
@@ -150,7 +154,11 @@ func _run() -> void:
 
 func _gap() -> void:
 	audio.stop_ui()
-	await create_timer(0.23).timeout
+	# Order audio throttles wall time. A SceneTree timer consumes frame delta,
+	# which can expire early in real time after a slow or accelerated frame.
+	var ready_at := Time.get_ticks_msec() + 230
+	while Time.get_ticks_msec() < ready_at:
+		await process_frame
 
 func _finish(d2_checked: bool) -> void:
 	fixture.queue_free()

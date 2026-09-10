@@ -33,9 +33,8 @@ func update(streamer: Node3D) -> void:
 	var scene: Node = streamer.get_tree().current_scene
 	var manager: Node = scene.get_node_or_null("WorldManager") if scene != null else null
 	if manager == null or not bool(manager.get("world_initialized")): return
-	var body_key: String = str(int(state.get_world_seed()))
-	var current_body: Dictionary = state.campaign.data["bodies"].get(body_key, {})
-	if current_body.is_empty(): current_body = state.get_current_body()
+	var current_body: Dictionary = state.get_current_body_record()
+	if current_body.is_empty(): return
 	if body_id != str(current_body["id"]):
 		reset(streamer)
 		body_id = current_body["id"]

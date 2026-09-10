@@ -19,11 +19,15 @@ jobs:
           - os: ubuntu-latest
             platform: linux
             editor: Godot_v4.6.3-stable_linux.x86_64
+            timeout_minutes: 20
           - os: windows-latest
             platform: windows
             editor: Godot_v4.6.3-stable_win64_console.exe
+            timeout_minutes: 30
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    # The complete 37-check campaign suite exceeds 20 minutes on Windows.
+    # Individual probe deadlines remain enforced by validate_export.py.
+    timeout-minutes: ${{ matrix.timeout_minutes }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

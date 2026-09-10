@@ -54,6 +54,7 @@ func _test_game_state_roundtrip(game_state: Node) -> void:
 
 
 func _test_progression(progression: Node) -> void:
+	root.get_node("GameState").set_world_seed(123_456)
 	progression.call("reset_for_new_game")
 	var starter_count: int = int(progression.call("get_unlocked_count"))
 	_expect(starter_count >= 5, "Creature progression has too few starter parts.")
@@ -203,7 +204,7 @@ func _test_save_service(save_service: Node) -> void:
 	if parsed is Dictionary:
 		_expect(int(parsed.get("schema", 0)) >= 2, "Meta save schema is missing.")
 		_expect(parsed.get("progression", {}) is Dictionary, "Progression is missing from save.")
-		_expect(parsed.get("regions_by_world", {}) is Dictionary, "Regional state is missing from save.")
+		_expect(parsed.get("regions_by_body", null) is Dictionary, "Regional state is missing from save.")
 
 
 func _test_removed_legacy_resources() -> void:

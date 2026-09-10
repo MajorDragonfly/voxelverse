@@ -6,7 +6,7 @@ Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge er
 
 ## Aktueller gemeinsamer Arbeitsstand
 
-M1f, lokale M1g-Verbraucher, entwickelte Kopiermigration und regionaler Population-Speicher werden in einem Integrationszweig zusammengeführt. Vor weiterer Arbeit [WORK_SPHERICAL_GAMEPLAY.md](WORK_SPHERICAL_GAMEPLAY.md) lesen: Dort stehen die tatsächlichen Datenbesitzer, Versionsgrenzen, ausgeführten Tests und verbleibenden Abnahmen. Die folgenden ursprünglichen Aufträge bezeichnen den Gesamtumfang; bereits gelieferte Anschlüsse nicht nochmals unabhängig implementieren. ARCH-03/04, Fernproduktion aus ARCH-16 und der reguläre Start aus ARCH-19 bleiben offen.
+M1f, die lokale M1g-Kette, entwickelte Kopiermigration und regionaler Population-Speicher sind über PR #45 integriert. Die anschließende Runde liefert Körper-ID-Speicherung, gemeinsame Dorfregeln, begrenzte Navigationsarbeit, Fernsimulation und sichere Körperwechsel. Vor weiterer Arbeit [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md) lesen. ARCH-03/04 nicht erneut entwickeln. ARCH-13/14 (kleines globales Manifest, segmentierter Langzeitbestand), die umfassende Langzeit-/Ziel-PC-Messung und ARCH-19 bleiben die nächsten Skalierungsgrenzen. Die ursprünglichen Aufträge unten sind die Gesamtplanung; ihr früherer Status ist keine neue Arbeitsanweisung.
 
 ## Architekturprüfung: Aufträge vor dem Start konkret wählen
 

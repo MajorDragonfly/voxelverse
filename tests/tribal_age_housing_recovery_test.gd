@@ -17,7 +17,7 @@ func _run() -> void:
 	await _frames(20)
 	await _click(tribe.panel.entry)
 	await _click(tribe.panel.confirm)
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	# Genuine pre-collision schema 3: a waiting resident saved in a hut wall.
 	var old: Dictionary = tribe.village().duplicate(true)
 	old["schema"] = 3
@@ -34,7 +34,7 @@ func _run() -> void:
 	paused = true
 	_expect(saves.save_now() and saves.load_now(), "Old decorative hut could not migrate.")
 	paused = false
-	await _frames(10)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	_expect(tribe.actors[identity].global_position.distance_to(trapped) < 0.15, "Migration teleported the old resident.")
 	_expect(tribe._shelters.get_child(0).collision_layer == 0, "Migration inserted a solid wall through a resident.")
 	tribe.select_member(identity)
@@ -92,7 +92,7 @@ func _run() -> void:
 	paused = true
 	_expect(saves.load_now() and tribe.village()["members"].size() == 4, "Resident was visible before being durable.")
 	paused = false
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	_expect(tribe.actors.size() == 4, "Reload duplicated recovered resident.")
 	print(JSON.stringify({"test": "tribal_age_housing_recovery", "passed": failures.is_empty(), "failures": failures}))
 	await _cleanup()

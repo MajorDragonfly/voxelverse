@@ -27,7 +27,7 @@ func _run() -> void:
 	await _frames(20)
 	await _click(tribe.panel.entry)
 	await _click(tribe.panel.confirm)
-	await _frames(15)
+	await _until(func() -> bool: return tribe._active and not tribe.navigation.pending, 1200)
 	if not tribe.is_active():
 		_expect(false, "Cannot enter actual tribal gameplay")
 		await _cleanup()
@@ -80,7 +80,7 @@ func _run() -> void:
 	await _cold_restart()
 	_expect(saves.load_now(), "Cannot resume paused carrier snapshot")
 	paused = false
-	await _frames(15)
+	await _until(func() -> bool: return tribe._active and not tribe.navigation.pending, 1200)
 	_expect(tribe.member_record(ids[0])["cargo"] == cargo and tribe.member_record(ids[0])["order"] == "wait", "Paused cargo moved or vanished on load")
 	# A different command returns carried aid; it is not new gathered material.
 	tribe.select_member(ids[0])
@@ -108,7 +108,7 @@ func _run() -> void:
 	paused = true
 	_expect(saves.save_now() and saves.load_now(), "Partial neighbor construction cannot save/load")
 	paused = false
-	await _frames(15)
+	await _until(func() -> bool: return tribe._active and not tribe.navigation.pending, 1200)
 	await _until(func() -> bool: return _neighbor()["aid"]["status"] == "completed", 650)
 	_expect(_neighbor()["aid"]["status"] == "completed" and _neighbor()["relation"] == "friendly" and _neighbor()["stock"]["wood"] == 0 and _neighbor()["technology"]["shelter"] == 1, "Neighbors did not build the supplied shelter")
 	_expect(progression.get_behavior_wallet(1)["earned"]["social"] == 3, "Actual help did not earn exactly three separate tribal points")
@@ -128,16 +128,17 @@ func _run() -> void:
 	var copy: String = saves._write_slot_copy(source, "Nachbarhilfe Kopie", "copy")
 	_expect(not copy.is_empty(), "Campaign copy cannot preserve neighbor help")
 	var future: Dictionary = source.duplicate(true)
-	future["game_state"]["campaign"]["bodies"]["15838"]["tribal_neighbor"]["schema"] += 1
+	Registry.active(future.game_state)["tribal_neighbor"]["schema"] += 1
 	_expect(saves._has_unsupported_contract(future), "Future neighbor contract has no overwrite protection")
 	var foreign: Dictionary = source.duplicate(true)
-	foreign["game_state"]["campaign"]["bodies"]["15838"]["tribal_neighbor"]["species_id"] = "wild-species"
+	Registry.active(foreign.game_state)["tribal_neighbor"]["species_id"] = "wild-species"
 	_expect(not saves._validate_save(foreign).is_empty(), "Foreign wild species can become a saved civilization")
 	var forged: Dictionary = source.duplicate(true)
-	forged["game_state"]["campaign"]["bodies"]["15838"].erase("tribal_neighbor")
+	Registry.active(forged.game_state).erase("tribal_neighbor")
 	_expect(not saves._validate_save(forged).is_empty(), "Points accepted without the completed neighbor agreement")
 	evidence = {"aid": _neighbor()["aid"].duplicate(true), "neighbor_stock": _neighbor()["stock"].duplicate(), "wallet": progression.get_behavior_wallet(1)}
 	paused = false
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	root.size = Vector2i(800, 900)
 	tribe.panel._tabs.current_tab = tribe.panel._neighbors.get_index()
 	await _frames(10)

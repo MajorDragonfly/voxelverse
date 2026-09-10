@@ -29,12 +29,21 @@ func run() -> void:
 	streamer.target_population = 3
 	streamer.maximum_population = 3
 	var groups: Dictionary = {}
-	for frame in range(1000):
-		await physics_frame
+	# Terrain workers and streamed collision advance independently of physics
+	# ticks. Fast/catch-up ticks can exhaust a frame count before a habitat's
+	# ground exists, even though recovery has already supplied its catalog row.
+	var population_started := Time.get_ticks_msec()
+	var population_deadline := population_started + 60_000
+	while Time.get_ticks_msec() < population_deadline:
+		await process_frame
 		groups.clear()
 		for animal in streamer._active_fauna:
 			if is_instance_valid(animal) and not animal.catalog_species.is_empty(): groups[animal.catalog_species["group"]] = true
 		if groups.size() == 3 and streamer.domestic_fauna.plants.size() >= 3: break
+	var population_wait := {"elapsed_ms": Time.get_ticks_msec() - population_started,
+		"body_id": streamer.domestic_fauna.body_id,
+		"pending_chunks": current_scene.get_node("WorldManager").get_pending_chunk_count(),
+		"active_count": streamer._active_fauna.size(), "plants": streamer.domestic_fauna.plants.size()}
 	streamer.set_process(false)
 	catalog = streamer.domestic_fauna.catalog
 	check(catalog.get("habitat_status") == "ready" and catalog.get("habitat_recovery", {}).get("status") == "ready", "Live runtime did not finish recovery")
@@ -50,7 +59,7 @@ func run() -> void:
 	streamer._prune_fauna()
 	streamer.domestic_fauna.update(streamer)
 	check(streamer.domestic_fauna.catalog.get("habitat_recovery", {}).get("status") == "ready", "Reload discarded completed recovery")
-	print(JSON.stringify({"test": "domestic_habitat_runtime", "failures": failures, "groups": groups.keys(), "habitats": catalog["habitats"].size(), "original_object_id": old_identity}))
+	print(JSON.stringify({"test": "domestic_habitat_runtime", "failures": failures, "groups": groups.keys(), "habitats": catalog["habitats"].size(), "original_object_id": old_identity, "population_wait": population_wait}))
 	current_scene.queue_free()
 	for frame in range(12): await process_frame
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)

@@ -9,6 +9,7 @@ const Housing = preload("res://world/tribe/village_housing.gd")
 const Shelters = preload("res://world/tribe/village_shelters.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
+const Work = preload("res://world/tribe/village_work.gd")
 const Navigation = preload("res://world/tribe/village_navigation.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 const HomeState = preload("res://world/home_group/home_group_state.gd")
@@ -34,7 +35,7 @@ var _state: Node
 var _saves: Node
 var _active: bool = false
 var _campaign_id: String = ""
-var _world_seed: int = 0
+var _body_id: String = ""
 var _prepared: Dictionary = {}
 var _token: String = ""
 var _signature: String = ""
@@ -86,7 +87,7 @@ func _process(delta: float) -> void:
 	var manager: Node = get_tree().current_scene.get_node_or_null("WorldManager") if get_tree().current_scene else null
 	if manager == null or not bool(manager.get("world_initialized")):
 		return
-	if _active and (_campaign_id != str(_state.campaign.data["id"]) or _world_seed != _state.get_world_seed() or int(_state.current_phase) != 1):
+	if _active and (_campaign_id != str(_state.campaign.data["id"]) or _body_id != _state.active_body_id or int(_state.current_phase) != 1):
 		_deactivate()
 	if not _active and int(_state.current_phase) == 1 and not village().is_empty():
 		_activate()
@@ -103,6 +104,7 @@ func _process(delta: float) -> void:
 		panel.refresh()
 
 func _invalidate(_value: Variant) -> void:
+	navigation.cancel()
 	_prepared.clear()
 	_token = ""
 	panel.cancel_confirmation()
@@ -112,14 +114,11 @@ func _invalidate(_value: Variant) -> void:
 	_deactivate()
 
 func _exit_tree() -> void:
+	navigation.cancel()
 	_deactivate()
 
 func body() -> Dictionary:
-	var key: String = str(_state.get_world_seed())
-	# This accessor already returns the authoritative record. Avoid deep-copying
-	# its growing exploration ledger just to ensure that the body exists.
-	if not _state.campaign.data["bodies"].has(key): _state.get_current_body_record()
-	return _state.campaign.data["bodies"][key]
+	return _state.get_current_body_record()
 
 func village() -> Dictionary:
 	var value: Variant = body().get("tribe", {})
@@ -177,7 +176,7 @@ func prepare_confirmation() -> String:
 	return ""
 
 func _current_signature() -> String:
-	return JSON.stringify([_state.campaign.data["id"], _state.get_world_seed(), _state.current_phase, home.group_state(), player.export_runtime_state()])
+	return JSON.stringify([_state.campaign.data["id"], _state.active_body_id, _state.current_phase, home.group_state(), player.export_runtime_state()])
 
 func confirmed_handoff(token: String) -> Dictionary:
 	if token.is_empty() or token != _token or _prepared.is_empty() or not panel.confirmation_open or not get_tree().paused or _current_signature() != _signature or not blockers().is_empty():
@@ -192,16 +191,19 @@ func _activate() -> void:
 	# Wait for terrain collision and the home controller's reference to the player.
 	if home.player == null or not home.has_ground(Space.resolve(self, village()["anchor"])):
 		return
-	navigation.rebuild(home, Space.resolve(self, village()["anchor"]), village(), navigation_extent())
-	if navigation.graph.get_point_count() == 0:
+	if navigation.pending: return
+	if navigation.completed_generation != navigation.generation:
+		Model.upgrade(village())
+		navigation.begin(home, Space.resolve(self, village()["anchor"]), village(), navigation_extent())
 		return
-	Model.upgrade(village())
-	navigation.rebuild(home, Space.resolve(self, village()["anchor"]), village(), navigation_extent())
+	if navigation.graph.get_point_count() == 0:
+		navigation.cancel()
+		return
 	# The home controller refreshes on a slower tick. Install the visible nest
 	# with this runtime, so a cold start cannot briefly expose the default home.
 	get_parent().global_position = Space.resolve(self, village()["anchor"])
 	_campaign_id = str(_state.campaign.data["id"])
-	_world_seed = _state.get_world_seed()
+	_body_id = _state.active_body_id
 	_player_processing = {"process": player.is_processing(), "physics": player.is_physics_processing(), "input": player.is_processing_input(), "unhandled": player.is_processing_unhandled_input(), "collision_layer": player.collision_layer, "collision_mask": player.collision_mask}
 	player.collision_layer = 0
 	# The player is now a resident on the same navigation graph as companions.
@@ -387,6 +389,9 @@ func _resolve_order(order: String, success: bool) -> void:
 	panel.refresh()
 
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
+	if not navigation.is_ready() and order in ["move"] + Economy.STATIONS.keys() + Housing.BUILDS:
+		status = "Die Dorfwege werden geprüft. Bitte einen Moment warten."
+		return false
 	if not is_active() or selected.is_empty() or order not in Model.ORDERS + Economy.ORDERS + ["resume", "profession"]:
 		return false
 	var before: Dictionary = village().duplicate(true)
@@ -413,7 +418,6 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 			return false
 		if data["project"].is_empty():
 			if order in Economy.STATIONS.keys() + Housing.BUILDS:
-				navigation.rebuild(home, anchor(), village(), navigation_extent())
 				var snapped: Vector3 = navigation.snap(destination)
 				if snapped.distance_to(destination) > 1.8 or neighbors.occupies(snapped) or not (navigation.free_shelter(snapped, data, order) if order in Housing.BUILDS else navigation.free_workplace(snapped, data, order)):
 					status = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
@@ -472,16 +476,27 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 	if success:
 		placement = ""
 		_visuals.rebuild(village())
-		navigation.rebuild(home, anchor(), village(), navigation_extent())
+		if Housing.obstacles(before) != Housing.obstacles(village()):
+			navigation.begin(home, anchor(), village(), navigation_extent())
 	panel.refresh()
 	return success
 
 func _physics_process(delta: float) -> void:
+	if navigation.pending:
+		if navigation.advance():
+			_routes.clear()
+			_goals.clear()
+			_route_retry = 2.0
+		if not navigation.is_ready(): return
 	if not is_active():
 		return
 	var simulation_delta: float = _state.simulation_delta(delta)
 	if simulation_delta <= 0:
 		return
+	var owner: Dictionary = body().get("village_simulation", {})
+	if not owner.is_empty():
+		if owner.owner != "near": return
+		owner.cursor = _state.campaign.data.elapsed_seconds
 	var grew: bool = Model.grow(village(), simulation_delta)
 	var renewed: bool = Economy.tick(village(), simulation_delta)
 	if grew or renewed:
@@ -489,28 +504,20 @@ func _physics_process(delta: float) -> void:
 	_route_retry -= delta
 	if _route_retry <= 0:
 		_route_retry = 2.0
-		var blocked: bool = false
-		blocked = neighbors.has_blocked()
+		var blocked: bool = not navigation.is_ready() or neighbors.has_blocked()
 		for member: Dictionary in village()["members"]:
 			blocked = blocked or bool(member["blocked"])
-		if blocked:
-			navigation.rebuild(home, anchor(), village(), navigation_extent())
-			_routes.clear()
-			_goals.clear()
+		if blocked and not navigation.pending:
+			# A single stalled patrol must not suspend everybody's work while
+			# the same topology is checked again. Hard building changes still
+			# discard old routes through begin()'s default mode.
+			navigation.begin(home, anchor(), village(), navigation_extent(), true)
+	if not navigation.is_ready(): return
 	for member: Dictionary in village()["members"]:
+		if not navigation.is_ready(): break
 		var actor: CharacterBody3D = actors[member["id"]]
-		member["hunger"] = maxf(0.0, float(member["hunger"]) - simulation_delta * 0.08)
-		member["hydration"] = maxf(0.0, float(member["hydration"]) - simulation_delta * 0.06)
+		Work.prepare(village(), member, simulation_delta)
 		var order: String = _effective_order(member)
-		# Deliver cargo before detours; the assigned order and partial work survive.
-		if member["cargo"] == "" and order not in ["wait", "feed", "drink"]:
-			if member["stage"] not in ["meal", "drink"]:
-				if float(member["hydration"]) < Economy.CARE_THRESHOLD and int(village()["stock"]["water"]) > 0:
-					member["stage"] = "drink"
-				elif float(member["hunger"]) < Economy.CARE_THRESHOLD and Economy.has_food(village()):
-					member["stage"] = "meal"
-			elif (member["stage"] == "meal" and not Economy.has_food(village())) or (member["stage"] == "drink" and int(village()["stock"]["water"]) == 0):
-				member["stage"] = "outbound"
 		var target: Vector3 = actor.global_position
 		var construction: bool = false
 		if member["construction_id"] != "" and order != "wait":
@@ -548,10 +555,13 @@ func _physics_process(delta: float) -> void:
 			target = _construction_workplace(target, index) if construction else _workplace(target, index)
 		var arrived: bool = _walk(actor, str(member["id"]), target, delta, minf(float(member["hunger"]), float(member["hydration"])))
 		member["position"] = Space.encode(self, actor.global_position)
-		if actor == player:
-			player.current_hunger = float(member["hunger"])
 		if arrived:
 			_work(member, simulation_delta)
+		if actor == player:
+			# The resident owns both needs, including this tick's meal/drink.
+			# Keep the exported traveler consistent with that authoritative state.
+			player.current_hunger = player.maximum_hunger * float(member["hunger"]) / 100.0
+			player.current_thirst = player.maximum_thirst * float(member["hydration"]) / 100.0
 	_update_selection()
 	_shelters.clear_entrances(actors)
 	husbandry.tick(simulation_delta)
@@ -630,156 +640,48 @@ func _effective_order(member: Dictionary) -> String:
 	return str(village()["project"].get("kind", "build")) if member["order"] == "build" else str(member["order"])
 
 func _work(member: Dictionary, delta: float) -> void:
-	var before: Dictionary = village().duplicate(true)
+	if member["order"] == "wait": return
+	var before: Dictionary = Work.snapshot(village())
 	if not neighbors.work(member):
 		_perform_work(member, delta)
 	get_node("/root/ProgressionService").record_tribal_work(before, str(member["id"]), self)
 
 func _perform_work(member: Dictionary, delta: float) -> void:
-	var data: Dictionary = village()
-	var order: String = _effective_order(member)
-	if order == "wait":
-		return
-	if member["construction_id"] != "":
-		var project: Dictionary = data["project"]
-		if Space.resolve(self, member["position"]).distance_to(Space.resolve(self, project["entrance"])) <= 3.0:
-			project["delivered_materials"][member["cargo"]] += 1
-			member["cargo"] = ""
-			member["construction_id"] = ""
-			member["stage"] = "outbound"
-			_changed()
-		return
-	if member["care_pen_id"] != "":
-		husbandry.deliver(member)
-		return
-	if member["cargo"] != "":
-		var kind: String = member["cargo"]
-		data["stock"][kind] += 1
-		data["delivered"] += 1
-		member["cargo"] = ""
-		member["stage"] = "outbound"
-		community_event.emit(&"delivery", {"resource": kind, "amount": 1, "member_id": member["id"], "sequence": data["delivered"], "tribe_id": data["id"]})
-		_changed()
-		return
-	if member["stage"] in ["meal", "drink"]:
-		if member["stage"] == "meal":
-			_eat(member)
+	var effects: Array = []
+	Work.step(village(), member, delta, _work_rate(member), effects)
+	_apply_work_effects(member, effects)
+
+func _apply_work_effects(member: Dictionary, effects: Array) -> void:
+	var changed: bool = false
+	for effect: Dictionary in effects:
+		if effect.kind == "care_delivery": husbandry.deliver(member)
+		elif effect.kind == "care_pickup": husbandry.pickup(member)
+		elif effect.kind == "changed": changed = true
 		else:
-			_drink(member)
-		member["stage"] = "outbound"
-		_changed()
-		return
-	if order == "tend":
-		husbandry.pickup(member)
-	elif order == "milk":
-		var incoming: Array = data["economy"]["incoming"]
-		if incoming.is_empty() or Economy.at_target(data, member, "milk"):
-			return
-		# A batch may change while another carrier is walking. Recheck arrival.
-		if Space.resolve(self, member["position"]).distance_to(Space.resolve(self, incoming[0]["position"])) > 3.0:
-			return
-		incoming[0]["remaining"] -= 1
-		if int(incoming[0]["remaining"]) == 0:
-			incoming.pop_front()
-		member["cargo"] = "milk"
-		member["stage"] = "return"
-		_changed()
-	elif order in Economy.RESOURCES or order in ["supply", "provision"]:
-		var kind: String = Economy.gather_kind(data, member)
-		if kind.is_empty() or Economy.at_target(data, member, kind):
-			return
-		var deposit: Dictionary = data["deposits"][kind]
-		if int(deposit["remaining"]) == 0:
-			return # Keep ownership of work across empty sources and full stores.
-		if Space.resolve(self, member["position"]).distance_to(Space.resolve(self, deposit["position"])) > 3.0:
-			return
-		member["work"] = minf(4.0, float(member["work"]) + delta * _work_rate(member))
-		if float(member["work"]) >= 3.0:
-			deposit["remaining"] -= 1
-			member["cargo"] = kind
-			member["stage"] = "return"
-			member["work"] = 0.0
-			_changed()
-	elif order in ["feed", "drink"]:
-		if _eat(member) if order == "feed" else _drink(member):
-			_changed()
-		member["order"] = "wait"
-	elif order in Model.COSTS or order in Economy.STATIONS:
-		var project: Dictionary = data["project"]
-		if project.is_empty() or project["kind"] != order:
-			if member["order"] != "build":
-				member["order"] = "wait"
-			return
-		if order in Housing.BUILDS:
-			if Housing.pending(project):
-				if Space.resolve(self, member["position"]).distance_to(anchor()) <= 3.0:
-					for kind: String in project["materials"]:
-						if int(project["materials"][kind]) > 0:
-							project["materials"][kind] -= 1
-							member["cargo"] = kind
-							member["construction_id"] = project["id"]
-							member["stage"] = "return"
-							_changed()
-							break
-				return
-			if not Housing.supplied(project) or Space.resolve(self, member["position"]).distance_to(Space.resolve(self, project["entrance"])) > 3.0:
-				return
-		project["progress"] = minf(20.0, float(project["progress"]) + delta * _work_rate(member))
-		if float(project["progress"]) >= float(Model.WORK.get(order, 15.0)):
-			if order in Housing.KINDS:
-				data["housing"]["homes"].append(Housing.site(data, order, project["position"], data["housing"]["homes"].size()))
-				if order == "hut":
-					data["huts"] += 1
-			elif order == "pen":
-				var p: Dictionary = Housing.site(data, order, project["position"], data["husbandry"]["pens"].size())
-				p.merge({"animal_id": "", "food": 0.0, "water": 0.0})
-				data["husbandry"]["pens"].append(p)
-			elif order in Economy.STATIONS:
-				data["economy"]["stations"][order] = {"id": Model.Ids.scoped("workplace", data["id"], order), "position": project["position"].duplicate()}
-				data["deposits"][Economy.STATIONS[order]]["position"] = project["position"].duplicate()
-			else:
-				data[{"tool": "tools", "hut": "huts", "garden": "garden"}[order]] += 1
-			var completed_id: String = str(project.get("id", Model.Ids.scoped("workplace", data["id"], order)))
-			data["project"] = {}
-			_shelters.sync(data, actors)
-			navigation.rebuild(home, anchor(), data, navigation_extent())
-			_routes.clear()
-			_goals.clear()
-			for worker: Dictionary in data["members"]:
-				if worker["order"] == order:
-					worker["order"] = Economy.JOB_ORDER[worker["profession"]]
-					worker["stage"] = "return" if worker["cargo"] != "" else "outbound"
-			community_event.emit(&"construction", {"kind": order, "tribe_id": data["id"], "huts": data["huts"], "building_id": completed_id})
-			status = "Ausbau fertig · Bewohner mit Beruf setzen ihre Zuständigkeit fort."
-			_changed()
-	elif order == "move":
-		member["order"] = "wait"
+			if effect.kind == "construction":
+				_shelters.sync(village(), actors)
+				if effect.data.kind in Housing.BUILDS:
+					navigation.begin(home, anchor(), village(), navigation_extent())
+				_routes.clear()
+				_goals.clear()
+				status = "Ausbau fertig · Bewohner mit Beruf setzen ihre Zuständigkeit fort."
+			community_event.emit(StringName(effect.kind), effect.data)
+	if changed: _changed()
 
 func _food_reserve_ready() -> bool:
 	return int(village()["stock"]["food"]) + Model.cargo_count(village(), "food") >= Economy.target(village(), "food")
 
 func _eat(member: Dictionary) -> bool:
-	var data: Dictionary = village()
-	if float(member["hunger"]) >= 95.0 or not Economy.has_food(data):
-		return false
-	var food: String = "milk" if int(data["stock"]["milk"]) > 0 else "food"
-	data["stock"][food] -= 1
-	if food == "milk":
-		data["economy"]["milk_meals"] += 1
-	data["meals"] += 1
-	community_event.emit(&"meal", {"resource": food, "sequence": data["meals"], "tribe_id": data["id"], "member_id": member["id"]})
-	member["hunger"] = minf(100.0, float(member["hunger"]) + 25.0)
-	return true
+	var effects: Array = []
+	var changed: bool = Work.eat(village(), member, effects)
+	_apply_work_effects(member, effects)
+	return changed
 
 func _drink(member: Dictionary) -> bool:
-	var data: Dictionary = village()
-	if float(member["hydration"]) >= 95.0 or int(data["stock"]["water"]) <= 0:
-		return false
-	data["stock"]["water"] -= 1
-	data["economy"]["drinks"] += 1
-	member["hydration"] = minf(100.0, float(member["hydration"]) + 30.0)
-	community_event.emit(&"drink", {"sequence": data["economy"]["drinks"], "tribe_id": data["id"], "member_id": member["id"]})
-	return true
+	var effects: Array = []
+	var changed: bool = Work.drink(village(), member, effects)
+	_apply_work_effects(member, effects)
+	return changed
 
 func assign_profession(profession: String) -> bool:
 	if not is_active() or selected.is_empty() or profession not in Economy.JOBS:
@@ -834,6 +736,69 @@ func _work_rate(member: Dictionary) -> float:
 	var progression: Node = get_node("/root/ProgressionService")
 	var legacy: Dictionary = progression.get_behavior_effect("group_cooperation", 1)
 	return float(legacy["value"]) * (0.5 if minf(float(member["hunger"]), float(member["hydration"])) < 20.0 else 1.0)
+
+func finish_navigation_for_departure() -> bool:
+	if not _active or _transaction or _body_id != _state.active_body_id: return false
+	var stamp: int = navigation.generation
+	var id: String = _state.active_body_id
+	var rebuilding: bool = navigation.pending
+	var deadline: int = Time.get_ticks_msec() + 45000
+	# SessionFlow pauses the tree but keeps source collision registered until
+	# this preflight ends. PROCESS_MODE_DISABLED would remove those shapes.
+	while navigation.pending:
+		if Time.get_ticks_msec() >= deadline: return false
+		navigation.advance()
+		if id != _state.active_body_id or stamp != navigation.generation: return false
+		if navigation.pending: await get_tree().physics_frame
+	if not navigation.is_ready(): return false
+	if rebuilding:
+		_routes.clear()
+		_goals.clear()
+		_route_retry = 2.0
+	return true
+
+func prepare_far_simulation() -> Dictionary:
+	# A frozen source is deliberately not is_active(): SessionFlow owns the
+	# handoff while loading, with physics stopped and this exact host retained.
+	if not _active or _transaction or navigation.pending or not navigation.is_ready() or _body_id != _state.active_body_id: return {}
+	var stamp: int = navigation.generation
+	var id: String = _state.active_body_id
+	var Simulation = preload("res://world/tribe/village_simulation.gd")
+	var data: Dictionary = village()
+	var places: Array = [data.anchor]
+	for deposit: Dictionary in data.deposits.values(): places.append(deposit.position)
+	for member: Dictionary in data.members:
+		places.append(member.position)
+		places.append(member.destination)
+	for batch: Dictionary in data.economy.incoming: places.append(batch.position)
+	for pen: Dictionary in data.husbandry.pens: places.append(pen.entrance)
+	for record: Dictionary in data.husbandry.records.values(): places.append(record.pickup)
+	if body().has("tribal_neighbor"):
+		places.append(body().tribal_neighbor.anchor)
+		for resident: Dictionary in body().tribal_neighbor.members:
+			places.append(resident.position)
+			places.append(resident.workplace)
+	if not data.project.is_empty(): places.append(data.project.get("entrance", data.project.get("position", data.anchor)))
+	var roads: Dictionary = {}
+	var visited: Dictionary = {}
+	for place: Variant in places:
+		var key: String = Simulation.key(place)
+		if visited.has(key): continue
+		visited[key] = true
+		if visited.size() > Simulation.MAX_ROADS: return {}
+		var route: PackedVector3Array = navigation.route(anchor(), Space.resolve(self, place))
+		if not route.is_empty() and route.size() + 2 <= Simulation.MAX_POINTS:
+			var path: Array = [data.anchor.duplicate(true)]
+			for point: Vector3 in route: path.append(Space.encode(self, point))
+			path.append(place.duplicate(true))
+			roads[key] = path
+		if visited.size() % 2 == 0:
+			await get_tree().physics_frame
+			if id != _state.active_body_id or stamp != navigation.generation: return {}
+	var attending: Array = []
+	for pen: Dictionary in data.husbandry.pens:
+		if husbandry.attendance(pen).error.is_empty(): attending.append(pen.animal_id)
+	return Simulation.create(id, float(_state.campaign.data.elapsed_seconds), roads, attending, str(_state.campaign.data.player_object_id))
 
 func _changed() -> void:
 	_saves.schedule_autosave(1.0)

@@ -4,6 +4,8 @@ Stand: 9. September 2026. Geprüfter gemeinsamer Commit: `d94d1e5f8a85b3e1a77d46
 Diese Prüfung bewertet Erweiterbarkeit, Weltgröße, dauerhafte Zustände und den Anschluss weiterer Spielphasen.
 Die ausführbaren Folgeaufträge stehen im [Architektur-Backlog](ARCHITECTURE_BACKLOG.md); ihre Reihenfolge ergänzt die [Roadmap](../ROADMAP.md).
 
+Nachfolgender Implementierungsstand: [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md). Dieses Audit bleibt eine historische Bewertung des oben genannten Commits; bereits gelieferte Anschlüsse nicht erneut implementieren.
+
 ## Ergebnis
 
 Die vorhandene Basis kann weiterverwendet werden. Für Koordinaten, prozedurale Weltgenerierung, Körperidentitäten und begrenzte Terrainlaufzeit bestehen geeignete Grundlagen.

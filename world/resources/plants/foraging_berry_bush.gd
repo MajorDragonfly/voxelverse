@@ -12,6 +12,14 @@ var _food_key: String = ""
 var _initialized: bool = false
 var _refresh_remaining: float = 0.0
 
+func _get_visual_seed() -> int:
+	# Surface plants retain their canonical identity while the local origin
+	# moves. Deriving geometry from global_position resized their collider on
+	# reload/harvest and could block a previously valid saved animal position.
+	if not persistent_food_key.is_empty():
+		return ("berry:" + persistent_food_key).sha256_text().left(15).hex_to_int()
+	return super._get_visual_seed()
+
 func _ready() -> void:
 	super._ready()
 	get_node("/root/SaveGameService").game_loaded.connect(_on_loaded)

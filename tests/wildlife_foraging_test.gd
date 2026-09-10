@@ -62,6 +62,7 @@ func _run() -> void:
 	await _meal_and_persistence(args)
 	await _interruptions_and_obstacles()
 	await _validation_and_scope()
+	await _origin_independent_bushes()
 	_expect(root.get_node("ProgressionService").export_state() == progression, "Ambient feeding awarded player progression or discovery.")
 	scene.queue_free()
 	await _frames(4)
@@ -229,6 +230,49 @@ func _hungry(animal: Node, value: float) -> void:
 	animal.satiety = value
 	animal._needs["satiety"] = value
 	animal._needs["seeking"] = true
+
+func _origin_independent_bushes() -> void:
+	# Streaming may recreate the same plant under another local origin. Its
+	# collision must leave the same saved animal position usable after reload.
+	var population: Node = load("res://world/surface/campaign_population.gd").new()
+	population.player = player
+	var species := {"visual_scale": 0.74}
+	for index in range(4):
+		var key: String = "persistent-surface-bush:" + str(index)
+		var bush: Node3D = bushes.instantiate()
+		bush.snap_to_terrain = false
+		bush.persistent_food_key = key
+		bush.position = Vector3(-20, 100, -20)
+		scene.add_child(bush)
+		await _frames(2)
+		var size: Vector3 = bush.bush_collision.shape.size
+		var vertices: PackedVector3Array = bush.bush_mesh.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+		var animal_point: Vector3 = bush.position + Vector3(size.x * 0.5 + 0.5328 + 0.05, 0, 0)
+		_expect(population._spawn_position(animal_point, species).is_finite(), "Initial animal position next to bush is blocked.")
+		var shift := Vector3(17, 0, -13)
+		bush.position += shift
+		animal_point += shift
+		bush.is_depleted = true
+		bush._generate_bush()
+		_expect(bush.bush_collision.shape.size == size, "Origin shift and harvest resized persistent plant collision.")
+		bush.is_depleted = false
+		bush._generate_bush()
+		_expect(bush.bush_mesh.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX] == vertices, "Origin shift changed persistent plant geometry.")
+		var restored_position: Vector3 = bush.position
+		bush.queue_free()
+		await _frames(2)
+		bush = bushes.instantiate()
+		bush.snap_to_terrain = false
+		bush.persistent_food_key = key
+		bush.position = restored_position
+		scene.add_child(bush)
+		await _frames(2)
+		_expect(bush.bush_collision.shape.size == size and bush.bush_mesh.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX] == vertices, "Reload under shifted origin changed persistent plant geometry.")
+		_expect(population._spawn_position(animal_point, species).is_finite(), "Reload blocked saved animal position next to persistent plant.")
+		_expect(not population._spawn_position(bush.position + Vector3(size.x * 0.5 + 0.1, 0, 0), species).is_finite(), "Animal spawn ignored a real plant obstacle.")
+		bush.queue_free()
+		await _frames(2)
+	population.free()
 
 func _bush(point: Vector3) -> Node3D:
 	var bush: Node3D = bushes.instantiate()

@@ -22,7 +22,7 @@ func _run() -> void:
 	await _frames(20)
 	await _click(tribe.panel.entry)
 	await _click(tribe.panel.confirm)
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	if not tribe.is_active():
 		_expect(false, "Could not enter village: " + saves.last_error)
 		await _cleanup()
@@ -59,7 +59,7 @@ func _run() -> void:
 	var ids: Array = old["members"].map(func(m: Dictionary) -> String: return m["id"])
 	_expect(saves.load_now(), "Legacy economy load failed.")
 	paused = false
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	data = tribe.village()
 	_expect(int(data["schema"]) == Model.LEGACY_SCHEMA and data["economy"]["stations"].is_empty() and int(data["stock"]["water"]) == 0, "Migration granted water or workstations.")
 	_expect(data["members"].map(func(m: Dictionary) -> String: return m["id"]) == ids and FileAccess.get_file_as_string(SAVE) == bytes, "Migration replaced residents or rewrote old bytes.")
@@ -101,7 +101,7 @@ func _run() -> void:
 			_expect(saves.save_now() and saves.load_now(), "Workplace construction failed Save/Load.")
 			_expect(tribe.village()["project"] == project and tribe.village()["stock"] == stock, "Construction restarted or charged twice after load: expected=%s/%s actual=%s/%s" % [project, stock, tribe.village()["project"], tribe.village()["stock"]])
 			paused = false
-			await _frames(15)
+			await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 		await _until(func() -> bool: return tribe.village()["economy"]["stations"].has(station), 650)
 		_expect(tribe.village()["economy"]["stations"].has(station), "Workplace did not complete: " + station)
 		_expect(not tribe.issue_order(station, sites[station]), "Completed station can be built twice.")
@@ -132,7 +132,7 @@ func _run() -> void:
 	await _frames(25)
 	_expect(tribe.member_record(worker)["cargo"] == "wood" and int(tribe.village()["stock"]["wood"]) == wood, "Paused carrier delivered remotely or lost cargo.")
 	_expect(saves.save_now() and saves.load_now(), "Paused cargo could not survive reload.")
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	_expect(tribe.member_record(worker)["paused_order"] == stopped["paused_order"] and tribe.member_record(worker)["profession"] == "forester", "Paused work or profession was lost.")
 	tribe.select_member(worker)
 	_expect(tribe.issue_order("resume"), "Saved order did not resume.")
@@ -147,7 +147,7 @@ func _run() -> void:
 	_expect(tribe.member_record(worker)["stage"] == "drink" and saves.save_now() and saves.load_now(), "Drink detour did not save/load.")
 	_expect(int(tribe.village()["economy"]["drinks"]) == drinks, "Load consumed water prematurely.")
 	paused = false
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	await _until(func() -> bool: return int(tribe.village()["economy"]["drinks"]) > drinks, 500)
 	_expect(tribe.member_record(worker)["order"] == "wood" and float(tribe.member_record(worker)["hydration"]) > 60, "Drink did not return worker to prior job.")
 	# More materials, visibly collected at their distinct reachable stations.
@@ -191,7 +191,7 @@ func _run() -> void:
 	await _until(func() -> bool: return tribe.member_record(ids[2])["cargo"] == "milk", 800)
 	_expect(tribe.member_record(ids[2])["cargo"] == "milk", "Milk was not picked up at source.")
 	_expect(saves.save_now() and saves.load_now(), "Milk in transit did not save/load.")
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	_expect(tribe.receive_milk(batch), "D3 retry after reload not acknowledged.")
 	_expect(Economy.milk_pending(tribe.village()) + Economy.reserve(tribe.village(), "milk") == 3, "Save/load duplicated milk in transit.")
 	await _until(func() -> bool: return int(tribe.village()["stock"]["milk"]) == 3, 1000)
@@ -210,7 +210,7 @@ func _run() -> void:
 	_expect(saves.save_now() and saves.load_now(), "Final economy failed persistence.")
 	_expect(tribe.village()["economy"] == JSON.parse_string(JSON.stringify(snapshot["economy"])), "Load advanced clocks or altered receipts.")
 	paused = false
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	# Long simulation uses the real movement/work loop with all initial sources
 	# exhausted. Higher needs repeatedly trigger replacement transports.
 	tribe.select_all()

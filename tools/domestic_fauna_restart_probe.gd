@@ -1,4 +1,5 @@
 extends SceneTree
+const Registry = preload("res://core/campaign/body_registry.gd")
 const Catalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const Planner = preload("res://world/fauna/domestication/domestic_habitat_planner.gd")
 const Legacy = preload("res://creatures/wildlife/species_assembly_factory_v7.gd")
@@ -16,6 +17,8 @@ func run() -> void:
 	if mode == "write":
 		state.start_world_with_seed(15838)
 		state.campaign.reset("d1-restart-campaign")
+		state.active_system_id = ""
+		state.set_world_seed(state.world_seed, false)
 		var body: Dictionary = state.get_current_body()
 		var region: String = state.campaign.region_id(body["id"], Vector2i.ZERO)
 		var legacy_id: String = state.campaign.object_id(region, "habitat:old:1")
@@ -48,10 +51,10 @@ func run() -> void:
 			check(JSON.stringify(Catalog.ensure(state)) == expected["catalogs"][str(seed_value)], "Restart/order changed species, body or habitats")
 		check(saves.save_now(), "Resave after restart")
 		var snapshot: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string(saves.save_path))
-		var body: Dictionary = snapshot["game_state"]["campaign"]["bodies"]["15838"]
+		var body: Dictionary = Registry.active(snapshot.game_state)
 		for kind in ["schema", "generator", "suitability"]:
 			var future: Dictionary = snapshot.duplicate(true)
-			var catalog: Dictionary = future["game_state"]["campaign"]["bodies"]["15838"]["fauna_catalog"]
+			var catalog: Dictionary = Registry.active(future.game_state)["fauna_catalog"]
 			if kind == "schema": catalog["schema"] = 2
 			elif kind == "generator": catalog["generator_version"] = "future_v2"
 			else: catalog["species"][0]["domestication"]["schema"] = 2

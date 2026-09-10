@@ -26,7 +26,7 @@ func _run() -> void:
 	await _frames(20)
 	await _click(tribe.panel.entry)
 	await _click(tribe.panel.confirm)
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	if not tribe.is_active():
 		_expect(false, "Village entry failed: " + saves.last_error)
 		await _cleanup()
@@ -50,7 +50,7 @@ func _run() -> void:
 	data["stock"]["fiber"] = 4
 	var original_ids: Array = data["members"].map(func(m: Dictionary) -> String: return m["id"])
 	_expect(saves.save_now() and saves.load_now(), "Prepared growth fixture did not load.")
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	tribe.select_all()
 	var before: Dictionary = tribe.village().duplicate(true)
 	_expect(not tribe.issue_order("hut", tribe.anchor()) and tribe.village() == before, "Overlapping housing charged materials.")
@@ -76,7 +76,7 @@ func _run() -> void:
 	var saved: Dictionary = JSON.parse_string(JSON.stringify(tribe.village()))
 	_expect(saves.save_now() and saves.load_now(), "Building cargo failed Save/Load.")
 	_expect(tribe.village() == saved, "Building cargo, cost or paused order changed on load.")
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	tribe.select_all()
 	_expect(tribe.issue_order("resume"), "Building transport could not resume.")
 	await _until(func() -> bool: return int(tribe.village()["huts"]) == 1, 1800)
@@ -86,7 +86,7 @@ func _run() -> void:
 		await _cleanup()
 		_finish()
 		return
-	await _frames(5)
+	await _until(func(): return not tribe.navigation.pending, 1200)
 	var first: Dictionary = tribe.village()["housing"]["homes"][0]
 	var center: Vector3 = Model.Home.vector(first["position"])
 	var wall_ray := PhysicsRayQueryParameters3D.create(center + Vector3(-3, 1, 0), center + Vector3(0, 1, 0), 1)
@@ -124,7 +124,7 @@ func _run() -> void:
 	_expect(tribe.village() == paused_snapshot, "Paused village continued growth or deliveries.")
 	_expect(saves.save_now() and saves.load_now(), "Growth clock did not load.")
 	_expect(float(tribe.village()["housing"]["clock"]) == float(paused_snapshot["housing"]["clock"]), "Growth clock reset on load.")
-	await _frames(15)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	await _until(func() -> bool: return tribe.actors.size() == 4, 2400)
 	_expect(tribe.actors.size() == 4, "First new resident was not created.")
 	print("M6 growth: population ", tribe.actors.size())
@@ -169,6 +169,7 @@ func _run() -> void:
 	_finish()
 
 func _build_home(kind: String, location: Vector3, expected_count: int) -> void:
+	await _until(func(): return not tribe.navigation.pending, 1200)
 	tribe.select_all()
 	_expect(tribe.issue_order(kind, location), "Placement rejected: " + kind + " " + tribe.status)
 	await _until(func() -> bool: return tribe.village()["housing"]["homes"].size() == expected_count, 1700)
@@ -177,12 +178,12 @@ func _build_home(kind: String, location: Vector3, expected_count: int) -> void:
 func _restart() -> void:
 	_expect(saves.load_now(), "Cold restart did not load growth snapshot.")
 	var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("user://growth-expected.json"))
-	var body: Dictionary = state.campaign.data["bodies"][str(state.get_world_seed())]
+	var body: Dictionary = state.get_current_body_record()
 	_expect(body["tribe"] == expected, "Cold restart changed saved growth state.")
 	await process_frame
 	_build_fixture()
 	tribe = scene.get_node("Nest/Tribe")
-	await _frames(35)
+	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	_expect(tribe._active and tribe.actors.size() == 6 and Housing.beds(tribe.village()) == 6, "Cold runtime did not rebuild six residents and homes.")
 	_expect(tribe.panel._residents.get_child_count() == 6, "Cold UI omitted residents.")
 	tribe.select_all()

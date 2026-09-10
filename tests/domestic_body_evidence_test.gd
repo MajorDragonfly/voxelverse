@@ -17,6 +17,8 @@ func run() -> void:
 	for seed_value in seeds:
 		state.start_world_with_seed(seed_value)
 		state.campaign.reset("d11-evidence")
+		state.active_system_id = ""
+		state.set_world_seed(state.world_seed, false)
 		var catalog: Dictionary = Catalog.ensure(state)
 		for entry: Dictionary in catalog["species"]:
 			var before: String = JSON.stringify(entry["blueprint"])

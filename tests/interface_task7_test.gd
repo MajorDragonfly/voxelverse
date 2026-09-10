@@ -23,7 +23,7 @@ func _run() -> void:
 	await _frames(15)
 	_expect(tribe.panel.open_confirmation(), "Real confirmation did not open")
 	await _click(tribe.panel.confirm)
-	await _frames(15)
+	await _until(func() -> bool: return tribe.is_active() and not tribe.navigation.pending, 1200)
 	_expect(tribe.is_active(), "Confirmed group is not active")
 	if not tribe.is_active():
 		await _cleanup()

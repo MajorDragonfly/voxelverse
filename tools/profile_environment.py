@@ -66,6 +66,29 @@ def capture(args, godot):
                     if line.startswith(("REVIEW_PREVIEW ", "HYDROLOGY_RENDER ", "PLANET_TRANSITION_REVIEW ")):
                         print(line, flush=True)
                 if code != 0 or ERROR.search(log):
+                    lines = log.splitlines()
+                    error_contexts = 0
+                    for index, line in enumerate(lines):
+                        if ERROR.search(line):
+                            print("\n".join(part[:1000] for part in lines[index:index + 6]),
+                                  file=sys.stderr, flush=True)
+                            error_contexts += 1
+                            if error_contexts >= 8:
+                                break
+                    # Large streaming inventories can push the real failure out
+                    # of the retained log tail. Keep the acceptance reason visible.
+                    try:
+                        failed = json.loads((directory / "capture.json").read_text(encoding="utf-8"))
+                        diagnostic = {key: failed.get(key) for key in
+                                      ("case", "seed", "renderer", "software_renderer", "setup_ms",
+                                       "setup_limit_seconds", "passed", "failures")}
+                        streaming = failed.get("streaming_state", {})
+                        diagnostic["streaming"] = {key: streaming.get(key) for key in
+                                                   ("world_initialized", "pending_chunks", "horizon_ready",
+                                                    "forest_ready", "player_dead")}
+                        print("CAPTURE_FAILURE " + json.dumps(diagnostic), file=sys.stderr, flush=True)
+                    except (OSError, ValueError, AttributeError):
+                        pass
                     print(log[-12000:], file=sys.stderr)
                     raise RuntimeError(f"Render capture failed: {case}/{seed}")
                 result = json.loads((directory / "capture.json").read_text(encoding="utf-8"))

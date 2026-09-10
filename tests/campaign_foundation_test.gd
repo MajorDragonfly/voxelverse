@@ -41,7 +41,7 @@ func _run() -> void:
 	var identity: String = state.get("campaign").data["id"]
 	state.call("start_world_with_seed", 12345)
 	_expect(state.get("campaign").data["id"] != identity, "Same-seed new game reused campaign identity.")
-	_expect(saves.get("_regions_by_world").is_empty(), "New game retained another campaign's ecology.")
+	_expect(saves.get("_regions_by_body").is_empty(), "New game retained another campaign's ecology.")
 	_expect(int(progression.get("discovery_points")) == 0, "Seeded new game retained discoveries.")
 	await process_frame
 	if failures.is_empty():
@@ -92,6 +92,7 @@ func _legacy_migration() -> void:
 	var old_state: Dictionary = state.call("export_state")
 	old_state.erase("campaign")
 	old_state.erase("body_id")
+	old_state.erase("system_id")
 	old_state["schema"] = 2
 	var old_progression: Dictionary = progression.call("export_state")
 	for entry in old_progression["discovered_species"].values():
@@ -100,6 +101,10 @@ func _legacy_migration() -> void:
 	for entry in old_progression["discovered_regions"].values():
 		entry.erase("id")
 		entry.erase("body_id")
+	# The released seed-keyed format predates body-scoped discovery keys.
+	old_progression.discovered_species = {"12345:77": old_progression.discovered_species.values()[0]}
+	old_progression.discovered_regions = {"12345:2:-3": old_progression.discovered_regions.values()[0]}
+	old_progression.schema = 5
 	var legacy: Dictionary = {"schema": 2, "game_state": old_state,
 		"progression": old_progression, "player": {"position": [23.5, 8.0, -71.0], "yaw": 1.5, "health_ratio": 0.6},
 		"regions_by_world": regions}
@@ -114,7 +119,7 @@ func _legacy_migration() -> void:
 	_expect(not migrated_creature["progression"].has("phase"), "Creature owns a second campaign phase.")
 	_expect(Building.list_designs().size() == 2, "Migration lost a building design.")
 	_expect(int(progression.get("discovery_points")) == 4, "Migration changed discovery rewards.")
-	_expect(saves.get("_regions_by_world").size() == 2, "Migration lost a visited planet.")
+	_expect(saves.get("_regions_by_body").size() == 2, "Migration lost a visited planet.")
 	_expect(bool(saves.call("save_now")), "Migrated campaign did not save.")
 	var snapshot: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(TEST_SAVE))
 	_expect(snapshot["player"]["surface_address"]["position"] == [23.5, 8.0, -71.0], "Legacy position moved during migration.")

@@ -13,6 +13,8 @@ func run() -> void:
 	saves._loaded_once = true
 	state.start_world_with_seed(15838)
 	state.campaign.reset("d11-recovery")
+	state.active_system_id = ""
+	state.set_world_seed(state.world_seed, false)
 	var template: Dictionary = Catalog.ensure(state).duplicate(true)
 	var terrain := Terrain.new()
 	root.add_child(terrain)
@@ -75,6 +77,8 @@ func run() -> void:
 	for seed_value in [15838, 63352, 23757, 1060]:
 		state.start_world_with_seed(seed_value)
 		state.campaign.reset("d11-real-recovery")
+		state.active_system_id = ""
+		state.set_world_seed(state.world_seed, false)
 		var catalog: Dictionary = Catalog.ensure(state)
 		if seed_value == 63352:
 			var island_radial := Planner.new()

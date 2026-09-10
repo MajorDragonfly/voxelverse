@@ -83,18 +83,26 @@ func _ready() -> void:
 	Space.orient(self)
 	if not catalog_species.is_empty():
 		var collider := get_node("CollisionShape3D") as CollisionShape3D
+		var geometry: Dictionary = collision_geometry(catalog_species)
 		var shape := CapsuleShape3D.new()
-		var size: float = catalog_species["visual_scale"]
-		shape.radius = maxf(0.34, size * 0.72)
-		shape.height = maxf(1.15, size * 1.95)
+		shape.radius = geometry.radius
+		shape.height = geometry.height
 		collider.shape = shape
-		collider.position.y = shape.height * 0.5
+		collider.position.y = geometry.center
 	_build_species()
 	_campaign_identity = _create_campaign_identity()
 	var social := preload("res://creatures/behavior/creature_social_component.gd").new()
 	social.name = "SocialBehavior"
 	add_child(social)
 	_choose_wander_state()
+
+
+static func collision_geometry(species: Dictionary = {}) -> Dictionary:
+	# The spawner and the live actor must test the same physical body.
+	if species.is_empty(): return {"radius": 0.34, "height": 1.15, "center": 0.56}
+	var size: float = species["visual_scale"]
+	var height: float = maxf(1.15, size * 1.95)
+	return {"radius": maxf(0.34, size * 0.72), "height": height, "center": height * 0.5}
 
 
 func _build_species() -> void:
@@ -182,6 +190,8 @@ func _physics_process(delta: float) -> void:
 	var pose: String = "walk" if velocity.slide(up_direction).length() > 0.15 else "idle"
 	if _preview != null and str(_preview.get("motion_mode")) != pose:
 		_preview.call("set_motion", pose)
+	if _preview != null:
+		_preview.call("set_locomotion_speed", velocity.slide(up_direction).length(), _move_speed)
 	if is_on_floor():
 		apply_floor_snap()
 	if _visual_root != null and _wander_direction.length_squared() > 0.01:
@@ -190,7 +200,7 @@ func _physics_process(delta: float) -> void:
 		_visual_root.rotation.y = lerp_angle(
 			_visual_root.rotation.y,
 			target_yaw,
-			clampf(delta * 4.5, 0.0, 1.0)
+			1.0 - exp(-4.5 * delta)
 		)
 	if get_slide_collision_count() > 0 and is_on_floor():
 		_wander_direction = _wander_direction.rotated(

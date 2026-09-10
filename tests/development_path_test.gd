@@ -48,6 +48,7 @@ func _run() -> void:
 	await _capture("development_empty.png", Vector2i(1600, 900))
 	# Use the exact schema-1 snapshot produced by the published PR #20 source.
 	state.campaign.import_state(fixture["campaign"])
+	state.activate_body(fixture["campaign"]["bodies"]["15838"]["id"], 15838, 0, false)
 	ui._show_development()
 	var home: Dictionary = progression.get_development_path()["home"]
 	_expect(home["status"] == "saved" and home["member_count"] == 2 and not home["runtime_available"], "Published group snapshot not recognized without importing its runtime.")
@@ -88,10 +89,10 @@ func _run() -> void:
 	await _choose_phase(0)
 	_expect(ui._cards["creature.social.legacy"]["button"].is_visible_in_tree() and ui._purchase.text == "Freigeschaltet", "Returning to creature phase lost purchased state.")
 	# The shared save preserves the extension; the adapter does not own its data.
-	state.campaign.data["bodies"]["15838"].erase("home_group")
+	state.get_current_body_record().erase("home_group")
 	_expect(saves.load_now(), "Shared save containing home-group extension failed to load.")
 	_expect(progression.get_development_path()["home"]["member_count"] == 2, "Loading did not restore actual saved home members.")
-	var group: Dictionary = state.campaign.data["bodies"]["15838"]["home_group"]
+	var group: Dictionary = state.get_current_body_record()["home_group"]
 	group["schema"] = 2
 	group["future_field"] = {"keep": [1, 2, 3]}
 	before = _snapshot()

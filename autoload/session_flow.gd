@@ -22,10 +22,12 @@ var _previous_mouse: int = Input.MOUSE_MODE_CAPTURED
 var _previous_pause: bool = false
 var _load_started: int = 0
 var _loading_scene: bool = false
+var _preparing_world: bool = false
 var _player: Node
 var _player_mode: int = Node.PROCESS_MODE_INHERIT
 var _resume_focus: Control
 var _help_label: Label
+var _travel_recovery: String = ""
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -92,6 +94,54 @@ func return_from_editor() -> Error:
 	_request_world()
 	return OK
 
+func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body_id: String = "") -> bool:
+	var scene := get_tree().current_scene
+	if loading or scene == null or scene.scene_file_path != SPHERE_SCENE: return false
+	var state: Node = get_node("/root/GameState")
+	if body_id == state.active_body_id or (body_id.is_empty() and system_seed == state.system_seed and world_seed == state.world_seed): return false
+	managed = true
+	var saves: Node = get_node("/root/SaveGameService")
+	var previous_mode: int = scene.process_mode
+	var previous_autosave: bool = saves.autosave_enabled
+	_show_loading("Abreise und Dorfwege werden gesichert …")
+	# Pause gameplay while pending route checks still need the source's real
+	# collision. Disabling the scene first removes CollisionObject3D shapes.
+	get_tree().paused = true
+	saves.autosave_enabled = false
+	var controller: Node = get_tree().get_first_node_in_group(&"tribe_controller")
+	var navigation_ready: bool = controller == null or not controller._active or await controller.finish_navigation_for_departure()
+	if navigation_ready:
+		scene.process_mode = Node.PROCESS_MODE_DISABLED
+		get_tree().paused = false
+	else:
+		saves.last_error = "Die Dorfwege konnten noch nicht vollständig gesichert werden."
+	if not navigation_ready or not await saves.prepare_body_departure(controller):
+		scene.process_mode = previous_mode
+		saves.autosave_enabled = previous_autosave
+		loading = false
+		pause_open = true
+		get_tree().paused = true
+		_show_pause()
+		_message.text = saves.last_error
+		return false
+	# Destroy old generation owners before the active body or origin changes.
+	await _release_world()
+	if not await saves.prepare_body_target(system_seed, planet_index, world_seed, body_id):
+		await _fail_loading("Reiseziel nicht verfügbar. " + saves.last_error)
+		return false
+	pause_open = false
+	await _request_world()
+	return true
+
+func _release_world() -> void:
+	var previous := get_tree().current_scene
+	if previous != null:
+		get_tree().current_scene = null
+		get_tree().root.remove_child(previous)
+		previous.queue_free()
+	_player = null
+	await get_tree().process_frame
+
 func _request_world() -> void:
 	# GameState defers its generator rebuild. Finish it before scene _ready.
 	await get_tree().process_frame
@@ -102,11 +152,13 @@ func _request_world() -> void:
 		_fail_loading("Die Spielwelt konnte nicht geladen werden: " + error_string(error))
 		return
 	_loading_scene = true
+	_preparing_world = false
 
 func _process(_delta: float) -> void:
 	if not loading:
 		return
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if _preparing_world: return
 	if _loading_scene:
 		var progress: Array = []
 		var status: int = ResourceLoader.load_threaded_get_status(_world_scene, progress)
@@ -151,6 +203,10 @@ func _scene_changed() -> void:
 	# selected campaign without turning the title screen into an active save.
 
 func _finish_loading() -> void:
+	var saves := get_node("/root/SaveGameService")
+	if not saves.complete_body_arrival():
+		_fail_loading("Die Ankunft konnte nicht gespeichert werden. " + saves.last_error)
+		return
 	loading = false
 	_layer.hide()
 	if is_instance_valid(_player):
@@ -158,14 +214,28 @@ func _finish_loading() -> void:
 	_player = null
 	get_tree().paused = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	var saves := get_node("/root/SaveGameService")
 	saves.autosave_enabled = true
 	saves.schedule_autosave(2.0)
+	if not _travel_recovery.is_empty():
+		get_node("SaveFeedback")._show_status("Reise abgebrochen · dein Ausgangsort wurde wiederhergestellt.", Color("f2b09b"), 10.0)
+		_travel_recovery = ""
 	world_started.emit()
 
 func _fail_loading(message: String) -> void:
+	var saves: Node = get_node("/root/SaveGameService")
+	if not saves._body_transfer.is_empty():
+		_loading_scene = false
+		_preparing_world = true
+		await _release_world()
+		if saves.rollback_body_transfer():
+			_travel_recovery = message
+			_loading_label.text = "Die Reise wurde abgebrochen. Dein Ausgangsort wird wiederhergestellt …"
+			_load_started = Time.get_ticks_msec()
+			await _request_world()
+			return
 	loading = false
 	_loading_scene = false
+	_preparing_world = false
 	get_node("/root/SaveGameService").session_active = false
 	_layer.hide()
 	if not _at_title():
@@ -200,6 +270,8 @@ func _show_pause() -> void:
 	slot_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_resume_focus = Style.button(_content, "Weiterspielen", resume, "ResumeGame", true)
 	Style.button(_content, "Spiel speichern", _save, "SaveGame")
+	if get_tree().current_scene.scene_file_path == SPHERE_SCENE:
+		Style.button(_content, "Reiseziel wählen", _show_travel, "TravelDestinations")
 	Style.button(_content, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "PauseSettings")
 	Style.button(_content, "Steuerung", _show_help, "PauseControls")
 	if get_tree().current_scene.scene_file_path != SPHERE_SCENE:
@@ -208,6 +280,20 @@ func _show_pause() -> void:
 	Style.button(_content, "Speichern & beenden", request_quit, "QuitGame")
 	_message = Style.paragraph(_content, "", 18)
 	_resume_focus.grab_focus()
+
+func _show_travel() -> void:
+	_prepare_overlay()
+	Style.label(_content, "REISEZIEL", 32, Style.ACCENT)
+	Style.paragraph(_content, "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort.", 19)
+	var state: Node = get_node("/root/GameState")
+	var catalog = preload("res://world/generation/planet_catalog_v7.gd")
+	var system: Dictionary = catalog.create_system(state.system_seed)
+	for index in range(catalog.get_planet_count(system)):
+		var planet: Dictionary = catalog.get_planet(system, index)
+		var seed_value: int = int(planet.planet_seed)
+		var button := Style.button(_content, "Planet %d%s" % [index + 1, " · aktueller Ort" if seed_value == state.world_seed else ""], func(): travel_to_planet(state.system_seed, index, seed_value), "TravelPlanet%d" % index)
+		button.disabled = seed_value == state.world_seed
+	Style.button(_content, "Zurück zur Pause", _show_pause, "BackToPause").grab_focus()
 
 func _show_help() -> void:
 	_prepare_overlay()
@@ -288,6 +374,7 @@ func _at_title() -> bool:
 
 func _show_loading(text: String) -> void:
 	loading = true
+	_preparing_world = true
 	_load_started = Time.get_ticks_msec()
 	_prepare_overlay()
 	Style.label(_content, "VOXELVERSE", 37, Style.ACCENT)
@@ -331,7 +418,7 @@ func _prepare_overlay() -> void:
 func controls_text() -> String:
 	var preferences = preload("res://core/input_preferences.gd")
 	if get_tree().current_scene != null and get_tree().current_scene.scene_file_path == SPHERE_SCENE:
-		return "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nNahrung, Begegnungen und Siedlungen sind auf der Kugel noch nicht angebunden." % [
+		return "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nNahrung sammeln, Arten entdecken und ein Dorf gründen. Über das Pausenmenü kannst du eine andere Kugelwelt besuchen." % [
 			preferences.binding_label("move_forward"), preferences.binding_label("move_back"), preferences.binding_label("move_left"),
 			preferences.binding_label("move_right"), preferences.binding_label("jump")]
 	return Text.text("%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen") % [

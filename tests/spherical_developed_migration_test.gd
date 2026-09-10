@@ -1,4 +1,5 @@
 extends SceneTree
+const Registry = preload("res://core/campaign/body_registry.gd")
 const Migration = preload("res://core/campaign/spherical_migration.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
@@ -24,7 +25,7 @@ func _run() -> void:
 	var path: String = saves.create_slot("Bestehendes Dorf", 15838)
 	var source: Dictionary = saves._read_save(path)
 	var campaign: Dictionary = source.game_state.campaign
-	var body: Dictionary = campaign.bodies["15838"]
+	var body: Dictionary = Registry.active(source.game_state)
 	body.home_group = Home.create(body.id, campaign.player_species_id, Vector3.ZERO)
 	body.tribe = Model.create(body.home_group, campaign, {"position": [0, 0, 0]}, {"wood": [-5,0,-4], "stone": [5,0,-4], "food": [-5,0,4], "huts": [[5,0,4], [8,0,0]]})
 	var village: Dictionary = body.tribe
@@ -67,14 +68,14 @@ func _run() -> void:
 	_expect(H.offer(village, id), "Cannot prepare completed undelivered milk.")
 	for i in range(70): H.advance(village, pen, 0.25)
 	source.game_state.phase = 1
-	source.regions_by_world = {"15838": {"schema": 1, "world_seed": 15838, "simulation_tick": 42, "regions": {"0,0": {"x": 0, "z": 0, "plant_biomass": 0.61, "water_availability": 0.73, "carcass_biomass": 0.18, "species": [], "last_touched_tick": 42}}}}
+	source.regions_by_body = {body.id: {"schema": 1, "world_seed": 15838, "simulation_tick": 42, "regions": {"0,0": {"x": 0, "z": 0, "plant_biomass": 0.61, "water_availability": 0.73, "carcass_biomass": 0.18, "species": [], "last_touched_tick": 42}}}}
 	var problem: String = saves._validate_save(source)
 	_expect(problem.is_empty(), "Invalid developed source fixture: " + problem)
 	if not problem.is_empty(): await _finish(); return
 	Atomic.write(path, source, false)
 	saves.session_active = false
 	var original: String = FileAccess.get_file_as_string(path)
-	var original_body: Dictionary = JSON.parse_string(original).game_state.campaign.bodies["15838"]
+	var original_body: Dictionary = Registry.active(JSON.parse_string(original).game_state)
 	var plan: Dictionary = saves.preview_spherical_migration(path)
 	_expect(plan.ok, "Developed migration blocked: " + str(plan.get("blockers")))
 	if plan.ok:
@@ -83,7 +84,7 @@ func _run() -> void:
 		if not destination.is_empty():
 			var result: Dictionary = saves._read_save(destination)
 			_expect(Migration.inventory(source) == Migration.inventory(result), "Changed people, ownership, recipes, cargo or regional inventory.")
-			var copied: Dictionary = result.game_state.campaign.bodies["15838"]
+			var copied: Dictionary = Registry.active(result.game_state)
 			_expect(copied.domesticated_animals.sources == original_body.domesticated_animals.sources, "Original frozen animal bodies changed.")
 			_expect(copied.tribe.economy.incoming[0].remaining == original_body.tribe.economy.incoming[0].remaining and copied.tribe.members[0].cargo == "wood", "In-flight stock was lost or credited early.")
 			_expect(copied.tribe.husbandry.records[id].clock == village.husbandry.records[id].clock, "Partial cycle changed.")
@@ -106,7 +107,7 @@ func _runtime(expected: Dictionary, restarting: bool) -> void:
 		_expect(false, "Developed runtime did not load: " + saves.last_error)
 		return
 	saves.autosave_enabled = false
-	var previous: Dictionary = expected.saved.game_state.campaign.bodies["15838"]
+	var previous: Dictionary = Registry.active(expected.saved.game_state)
 	var current: Dictionary = state.get_current_body_record()
 	for field in ["home_group", "tribe", "domesticated_animals", "tribal_neighbor"]:
 		_expect(Migration.fingerprint(current[field]) == Migration.fingerprint(previous[field]), "Loading changed developed inventory: " + field)

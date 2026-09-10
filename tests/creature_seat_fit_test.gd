@@ -139,6 +139,9 @@ func _check_motion(pairs: int) -> void:
 		# This small arm-end voxel enters the rider later in the actual arm
 		# swing. Static body/trace contacts must not hide the additional hit.
 		var trial: Preview = review.get("_preview")
+		# Authoring a new node requires a rig bind; repeated walk requests
+		# intentionally preserve the live rig and clock now.
+		trial.set_motion("edit")
 		var socket: Transform3D = trial.body_socket("saddle.primary")["body_transform"]
 		var probe := Node3D.new()
 		probe.set_meta("creature_part_uid", "motion_probe")

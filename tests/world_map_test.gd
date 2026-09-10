@@ -1,4 +1,5 @@
 extends SceneTree
+const Registry = preload("res://core/campaign/body_registry.gd")
 const Atlas = preload("res://core/map/exploration_atlas.gd")
 const Surface = preload("res://core/map/surface_map_projection.gd")
 const Chart = preload("res://core/map/atlas_projection.gd")
@@ -89,7 +90,7 @@ func _run() -> void:
 	_expect(tracker.atlas.known(Surface.plane_address(state.get_current_body().id, Vector3.ZERO)), "Travel forgot previously explored ground.")
 	var exported: Dictionary = tracker.atlas.data.duplicate(true)
 	_expect(saves.save_now(), "Exploration did not save with the campaign.")
-	state.campaign.data.bodies[str(state.get_world_seed())].erase("exploration_atlas")
+	state.get_current_body_record().erase("exploration_atlas")
 	_expect(saves.load_now(), "Exploration save did not load.")
 	await _frames(2)
 	tracker.update_exploration()
@@ -106,7 +107,7 @@ func _run() -> void:
 	_expect(Source.visible_places(tracker.atlas.data, self).size() == 1, "Dead ally retained a friendly marker.")
 	var saved_text: String = FileAccess.get_file_as_string(saves.save_path)
 	var future: Dictionary = JSON.parse_string(saved_text)
-	future.game_state.campaign.bodies[str(state.get_world_seed())].exploration_atlas.schema = 2
+	Registry.active(future.game_state).exploration_atlas.schema = 2
 	var file := FileAccess.open(saves.save_path, FileAccess.WRITE)
 	file.store_string(JSON.stringify(future)); file.close()
 	_expect(not saves.load_now() and not saves.save_now(), "Future map schema was silently downgraded.")
