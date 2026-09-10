@@ -6,12 +6,15 @@ on:
       - "tools/region_backup.py"
       - "tools/region_backup_probe.gd"
       - "tools/atlas_backup_probe.gd"
+      - "tools/place_backup_probe.gd"
       - "tests/tooling/region_backup_test.py"
+      - "tests/tooling/region_backup_places_test.py"
       - "core/persistence/region_store.gd"
       - "core/persistence/slot_history.gd"
       - "autoload/save_game_service.gd"
       - "world/surface/campaign_population_state.gd"
       - "core/map/exploration_atlas.gd"
+      - "core/map/atlas_place_store.gd"
       - ".github/workflows/region-backup-validate.yml"
   workflow_dispatch:
 
@@ -36,7 +39,19 @@ jobs:
           cd "$RUNNER_TEMP/atlas-backup-reference"
           python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --skip-main --tests --output "$RUNNER_TEMP/atlas-backup-import"
       - name: Verify backup failure paths and real Godot restart
+        # Keep the earlier Atlas-2 reference as its own compatibility gate.
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
           ATLAS_BACKUP_PROJECT: ${{ runner.temp }}/atlas-backup-reference
         run: python -m unittest discover -s tests/tooling -p 'region_backup_test.py' -v
+      - name: Prepare the published place-register contract
+        run: |
+          git fetch --depth=1 origin 75d4c4cf0d1868c8f8f8adf20b423ac745542579
+          git worktree add --detach "$RUNNER_TEMP/place-backup-reference" 75d4c4cf0d1868c8f8f8adf20b423ac745542579
+          cd "$RUNNER_TEMP/place-backup-reference"
+          python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --skip-main --tests --output "$RUNNER_TEMP/place-backup-import"
+      - name: Verify reciprocal place indexes and native page restoration
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+          PLACE_BACKUP_PROJECT: ${{ runner.temp }}/place-backup-reference
+        run: python -m unittest discover -s tests/tooling -p 'region_backup_places_test.py' -v

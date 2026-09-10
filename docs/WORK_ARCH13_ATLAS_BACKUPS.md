@@ -4,6 +4,10 @@ Folgepaket vom 10. September 2026 auf dem eigenen
 [Regionssicherungsexport, PR #62](https://github.com/MajorDragonfly/voxelverse/pull/62).
 Branch: `agent/arch13-atlas-backups-2026-09-10`.
 
+Die [Ortsregister-Fortsetzung](WORK_ARCH13_PLACE_BACKUPS.md) erweitert diese
+Lieferung inzwischen um den veröffentlichten Atlas-3-Vertrag aus PR #65.
+Die Abnahme und damaligen offenen Anschlüsse unten beschreiben den Atlas-2-Stand.
+
 ## Auftrag und bestehende Roadmap
 
 Lars hat die Umsetzung bestätigt, sofern sie in den bestehenden Arbeitspaketen

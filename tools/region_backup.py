@@ -18,6 +18,7 @@ import shutil
 import stat
 import tempfile
 from collections.abc import Iterator
+from collections import OrderedDict
 
 FORMAT = "voxelverse_region_backup_v1"
 STORE_FORMAT = "sha256_trie_v1"
@@ -26,6 +27,8 @@ MAX_SAVE_BYTES = 64 * 1024 * 1024
 MAX_ARCHIVE_BYTES = 16 * 1024 * 1024  # SphericalMigration.MAX_SOURCE_BYTES
 MAX_SNAPSHOTS = 4096
 MAX_ARCHIVE_DEPTH = 8
+MAX_PLACE_COUNT = 9007199254740991  # AtlasPlaceStore.MAX_COUNT
+INDEX_PAGE_LIMIT = 128
 HASH = re.compile(r"[0-9a-f]{64}\Z")
 RECORD = "region-backup.json"
 
@@ -43,6 +46,14 @@ class Stats:
     copied_bytes: int = 0
     peak_pending: int = 0
     peak_blob_bytes: int = 0
+    place_records: int = 0
+    index_reads: int = 0
+    peak_index_pages: int = 0
+
+
+@dataclass(frozen=True)
+class PlaceReference:
+    atlas: dict
 
 
 def _require(condition: bool, message: str) -> None:
@@ -117,14 +128,51 @@ def _atlas_key(key: str, atlas: dict) -> None:
         "Invalid atlas tile face")
 
 
+def _integer(value, low: int, high: int) -> bool:
+    return type(value) in (int, float) and low <= value <= high and value == int(value)
+
+
+def _finite(value) -> bool:
+    return type(value) in (int, float) and -1.7976931348623157e308 <= value <= 1.7976931348623157e308
+
+
+def _place(place, atlas: dict, identity: str) -> None:
+    _require(isinstance(place, dict), "Invalid atlas place")
+    _require(all(isinstance(place.get(field), str) and len(place[field]) <= 256
+                 for field in ("id", "name", "kind", "species_id", "object_id")), "Invalid place text")
+    _require(bool(identity) and place["id"] == identity and type(place.get("own")) is bool
+             and place["kind"] in ("nest", "home", "friend_habitat", "friend_nest"), "Invalid place identity or kind")
+    address = place.get("address")
+    _require(isinstance(address, dict) and address.get("body_id") == atlas["body_id"]
+             and address.get("mode") == atlas["mode"], "Place belongs to a different body or projection")
+    if atlas["mode"] == "legacy_plane_v9":
+        position = address.get("position")
+        _require(isinstance(position, list) and len(position) == 3 and all(map(_finite, position)),
+                 "Invalid planar place address")
+    else:
+        _require(_integer(address.get("face"), 0, 5) and all(_finite(address.get(field)) for field in ("u", "v", "height"))
+                 and abs(address["u"]) <= 1 and abs(address["v"]) <= 1, "Invalid spherical place address")
+
+
+def _places_header(atlas: dict) -> None:
+    count, ordinals = atlas.get("place_count"), atlas.get("place_ordinals")
+    _require(_integer(count, 0, MAX_PLACE_COUNT), "Invalid place count")
+    _require(isinstance(ordinals, dict) and ordinals.keys() == atlas["places"].keys(), "Invalid pending place IDs")
+    _require(all(_integer(value, 0, int(count) - 1) for value in ordinals.values()), "Invalid pending place ordinal")
+    _require(len(set(ordinals.values())) == len(ordinals), "Duplicate pending place ordinal")
+    _storage_root(atlas.get("place_storage"))
+
+
 def _atlas_root(atlas, body_id: str) -> str:
     _require(isinstance(atlas, dict), "Invalid exploration atlas")
-    _version(atlas.get("schema"), (1, 2), "exploration atlas")
-    # A future register (e.g. paged places) needs its own explicit root adapter;
+    _version(atlas.get("schema"), (1, 2, 3), "exploration atlas")
+    # A future register needs its own explicit root adapter;
     # silently copying an unrecognized pointer would produce a partial backup.
     fields = {"schema", "body_id", "mode", "radius", "divisions", "tiles", "places"}
-    if atlas["schema"] == 2:
+    if atlas["schema"] >= 2:
         fields.update(("storage", "extent"))
+    if atlas["schema"] == 3:
+        fields.update(("place_storage", "place_count", "place_ordinals"))
     _require(set(atlas) <= fields, "Unsupported exploration atlas fields")
     _require(isinstance(body_id, str) and bool(body_id) and atlas.get("body_id") == body_id,
         "Atlas belongs to a different body")
@@ -138,11 +186,15 @@ def _atlas_root(atlas, body_id: str) -> str:
     _require(type(atlas.get("divisions")) in (int, float) and atlas["divisions"] == divisions,
         "Invalid atlas resolution")
     tiles, places = atlas.get("tiles"), atlas.get("places")
-    _require(isinstance(tiles, dict) and len(tiles) <= (96 if atlas["schema"] == 2 else 8192)
-        and isinstance(places, dict) and len(places) <= 2048, "Invalid atlas collection")
+    _require(isinstance(tiles, dict) and len(tiles) <= (8192 if atlas["schema"] == 1 else 96)
+        and isinstance(places, dict) and len(places) <= (96 if atlas["schema"] == 3 else 2048), "Invalid atlas collection")
     for key, rows in tiles.items():
         _atlas_key(key, atlas)
         _atlas_rows(rows)
+    if atlas["schema"] == 3:
+        for identity, place in places.items():
+            _place(place, atlas, identity)
+        _places_header(atlas)
     if atlas["schema"] == 1:
         return ""
     extent = atlas.get("extent")
@@ -152,7 +204,7 @@ def _atlas_root(atlas, body_id: str) -> str:
     return _storage_root(atlas.get("storage"))
 
 
-def _roots(snapshot: dict, depth: int = 0) -> Iterator[tuple[str, dict | None]]:
+def _roots(snapshot: dict, depth: int = 0) -> Iterator[tuple[str, dict | PlaceReference | None]]:
     _require(depth <= MAX_ARCHIVE_DEPTH, "Migration archive nesting exceeds the backup budget")
     # Versions 1/2 refer to loose editor files; claiming a self-contained export
     # for them would silently omit those designs. Use the existing migration.
@@ -173,6 +225,9 @@ def _roots(snapshot: dict, depth: int = 0) -> Iterator[tuple[str, dict | None]]:
                 root = _atlas_root(atlas, body.get("id"))
                 if root:
                     yield root, atlas
+                if atlas["schema"] == 3:
+                    # Even an empty root must validate count and pending-only indexes.
+                    yield atlas["place_storage"]["root"], PlaceReference(atlas)
         if "surface_population" not in body:
             continue
         population = body["surface_population"]
@@ -208,7 +263,10 @@ def _blob_path(directory: Path, digest: str) -> Path:
     return shard / (digest + ".json")
 
 
-def _walk(directory: Path, root: str, stats: Stats, atlas: dict | None = None) -> Iterator[tuple[str, bytes]]:
+def _walk(directory: Path, root: str, stats: Stats, atlas: dict | PlaceReference | None = None) -> Iterator[tuple[str, bytes]]:
+    if isinstance(atlas, PlaceReference):
+        yield from _walk_places(directory, root, stats, atlas.atlas)
+        return
     # Depth-first traversal retains at most 15 siblings per trie level plus
     # one leaf's 32 values. No world-sized visited set or region cache.
     pending = [(root, "", None)]
@@ -253,6 +311,98 @@ def _walk(directory: Path, root: str, stats: Stats, atlas: dict | None = None) -
         stats.verified_blobs += 1
         stats.peak_blob_bytes = max(stats.peak_blob_bytes, len(raw))
         yield digest, raw
+
+
+def _lookup(directory: Path, root: str, key: str, pages: OrderedDict, stats: Stats) -> dict | None:
+    """Read one index path; retain only bounded routing pages, never place values."""
+    digest, prefix = root, ""
+    address = _digest(key.encode())
+    while digest:
+        if digest in pages:
+            kind, links = pages[digest]
+            pages.move_to_end(digest)
+        else:
+            raw = _read(_blob_path(directory, digest), MAX_BLOB_BYTES)
+            stats.index_reads += 1
+            _require(_digest(raw) == digest, "Place index checksum mismatch")
+            value = _object(raw)
+            _version(value.get("schema"), (1,), "region blob")
+            kind = value.get("kind")
+            _require(kind in ("branch", "leaf"), "Unknown place index page")
+            links = value.get("children" if kind == "branch" else "entries")
+            _require(isinstance(links, dict) and len(links) <= (16 if kind == "branch" else 32), "Invalid place index page")
+            _require(all(isinstance(name, str) and 0 < len(name) <= 400 and isinstance(child, str)
+                         and HASH.fullmatch(child) for name, child in links.items()), "Invalid place index link")
+            # Drop any extra JSON fields; cached routing state has at most 32 bounded keys.
+            pages[digest] = (kind, links)
+            if len(pages) > INDEX_PAGE_LIMIT:
+                pages.popitem(last=False)
+            stats.peak_index_pages = max(stats.peak_index_pages, len(pages))
+        if kind == "leaf":
+            if key not in links:
+                return None
+            raw = _read(_blob_path(directory, links[key]), MAX_BLOB_BYTES)
+            stats.index_reads += 1
+            _require(_digest(raw) == links[key], "Place payload checksum mismatch")
+            value = _object(raw)
+            _version(value.get("schema"), (1,), "region blob")
+            _require(value.get("key") == key and isinstance(value.get("value"), dict), "Invalid place index payload")
+            return value["value"]
+        _require(len(prefix) < 64, "Place index exceeds SHA-256 depth")
+        digit = address[len(prefix)]
+        prefix += digit
+        digest = links.get(digit, "")
+    return None
+
+
+def _place_entry(key: str, value: dict, atlas: dict) -> tuple[str, str, int | None]:
+    _version(value.get("schema"), (1,), "atlas place payload")
+    _require(value.get("body_id") == atlas["body_id"], "Place index belongs to a different body")
+    if key.startswith("p:"):
+        identity, ordinal = key[2:], value.get("ordinal")
+        _require(set(value) == {"schema", "body_id", "ordinal", "place"}, "Unsupported place payload fields")
+        _require(_integer(ordinal, 0, int(atlas["place_count"]) - 1), "Invalid stored place ordinal")
+        _place(value["place"], atlas, identity)
+        return "p", identity, int(ordinal)
+    _require(key.startswith("o:") and re.fullmatch(r"0|[1-9][0-9]{0,15}", key[2:]), "Unknown place index key")
+    ordinal = int(key[2:])
+    _require(ordinal < atlas["place_count"], "Place index ordinal exceeds count")
+    _require(set(value) == {"schema", "body_id", "id"} and isinstance(value.get("id"), str)
+             and 0 < len(value["id"]) <= 256, "Invalid place index identity")
+    return "o", value["id"], ordinal
+
+
+def _walk_places(directory: Path, root: str, stats: Stats, atlas: dict) -> Iterator[tuple[str, bytes]]:
+    pages: OrderedDict = OrderedDict()
+    committed = 0
+    # Bijection is checked by bounded point lookups, not a world-sized set of IDs.
+    for digest, raw in (_walk(directory, root, stats) if root else ()):
+        value = _object(raw)
+        if "key" in value:
+            kind, identity, ordinal = _place_entry(value["key"], value["value"], atlas)
+            other_key = "o:" + str(ordinal) if kind == "p" else "p:" + identity
+            other = _lookup(directory, root, other_key, pages, stats)
+            _require(other is not None, "Missing reciprocal place index")
+            other_kind, other_id, other_ordinal = _place_entry(other_key, other, atlas)
+            _require(other_kind != kind and identity == other_id and ordinal == other_ordinal,
+                     "Place ID and ordinal indexes disagree")
+            if kind == "p":
+                committed += 1
+                stats.place_records += 1
+        yield digest, raw
+    new_pending = 0
+    for identity, ordinal in atlas["place_ordinals"].items():
+        by_id = _lookup(directory, root, "p:" + identity, pages, stats)
+        by_position = _lookup(directory, root, "o:" + str(int(ordinal)), pages, stats)
+        if by_id is None and by_position is None:
+            new_pending += 1
+        else:
+            _require(by_id is not None and by_position is not None
+                     and by_id.get("ordinal") == ordinal and by_position.get("id") == identity,
+                     "Pending place remaps a committed identity or ordinal")
+    # Distinct reciprocal pairs + distinct new overlay positions inside the
+    # advertised range, with equal cardinality, prove there are no missing positions.
+    _require(committed + new_pending == atlas["place_count"], "Place count does not cover every ordinal")
 
 
 def _save_sources(slots: list[Path]) -> list[tuple[Path, str]]:
@@ -323,7 +473,7 @@ def export_bundle(slots: list[Path], regions: Path, output: Path) -> dict:
             snapshots.append({"path": relative, "sha256": _digest(raw)})
             stats.snapshots += 1
             for root, atlas in _roots(snapshot):
-                stats.roots += 1
+                stats.roots += bool(root)
                 for digest, blob in _walk(source_root, root, stats, atlas):
                     destination = _blob_path(staging / "regions/blobs", digest)
                     if destination.exists():
@@ -377,7 +527,7 @@ def verify_bundle(directory: Path) -> dict:
         _require(not (directory / "regions").is_symlink() and not (directory / "regions/blobs").is_symlink(),
                  "Symbolic link in backup regions")
         for root, atlas in _roots(_object(raw)):
-            stats.roots += 1
+            stats.roots += bool(root)
             for _ in _walk(directory / "regions/blobs", root, stats, atlas):
                 pass
     return asdict(stats)
