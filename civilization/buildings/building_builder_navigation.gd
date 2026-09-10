@@ -1,8 +1,5 @@
 extends Node
 
-const MAIN_SCENE: String = "res://main/main.tscn"
-
-
 func _ready() -> void:
 	call_deferred("_install_back_button")
 
@@ -39,7 +36,6 @@ func _return_to_world() -> void:
 		if blueprint_value is Dictionary:
 			var BuildingBlueprint = load("res://civilization/buildings/building_blueprint.gd")
 			BuildingBlueprint.save_autosave(blueprint_value)
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	var error: Error = get_tree().change_scene_to_file(MAIN_SCENE)
+	var error: Error = get_node("/root/SessionFlow").return_from_editor()
 	if error != OK:
 		push_error("Could not return to world: %s" % error)

@@ -4,7 +4,7 @@ Stand: 9. September 2026 · M1e-Kampagnengrundlage nach der zweiten Integrations
 
 ## Laufende Kugelintegration
 
-Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickeltem Kopierumzug und regionalem Population-Speicher ist umgesetzt. Die Skalierungsrunde ergänzt Körper-ID-Migration, gemeinsame Nah-/Fernarbeit, portionierte Navigation und gesicherte A–B–A-Reisen; auch das fertig übergebene Animationspaket wird am gemeinsamen Stand geprüft. [WORK_SPHERICAL_GAMEPLAY.md](docs/WORK_SPHERICAL_GAMEPLAY.md) und [WORK_CAMPAIGN_SCALING.md](docs/WORK_CAMPAIGN_SCALING.md) ergänzen die untenstehenden bisherigen Meilensteinstände mit den aktuellen Nachweisen. Segmentierte globale Speicherung, lange Reisen auf Zielhardware und die vollständige M1i-Abnahme bleiben offen; die reguläre Startwahl wird erst danach umgestellt.
+Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickeltem Kopierumzug und regionalem Population-Speicher ist umgesetzt. Die Skalierungsrunde ergänzt Körper-ID-Migration, gemeinsame Nah-/Fernarbeit, portionierte Navigation und gesicherte A–B–A-Reisen; auch das fertig übergebene Animationspaket wird am gemeinsamen Stand geprüft. [WORK_SPHERICAL_GAMEPLAY.md](docs/WORK_SPHERICAL_GAMEPLAY.md) und [WORK_CAMPAIGN_SCALING.md](docs/WORK_CAMPAIGN_SCALING.md) ergänzen die untenstehenden bisherigen Meilensteinstände mit den aktuellen Nachweisen. **Entscheidung von Lars am 10. September: Die Kugelwelt ist ab sofort der einzige reguläre Spielweg, unabhängig von der noch offenen Abnahme.** Flachwelt-Neustart und spielbare Rückwege entfallen; Altstände werden als erhaltene Quellen über die geprüfte Kopiermigration fortgesetzt. Segmentierte globale Speicherung, lange Reisen auf Zielhardware und die vollständige M1i-Abnahme bleiben offen. Details: [Kugelwelt als fester Spielweg](docs/WORK_SPHERE_ONLY_ENTRY.md).
 
 ## Architekturprüfung und nächste verbindliche Arbeitsschritte
 
@@ -18,7 +18,7 @@ Der [Architekturbericht](docs/ARCHITECTURE_SCALABILITY_AUDIT.md) belegt die Befu
 | Gemeinsamer Kern | Körper per eindeutiger ID statt nur Weltseed; versionierte Fachorte; kleine Speichermodule mit gemeinsamem Commit | ARCH-03/04/06/07 |
 | Kugelspiel vervollständigen | Kreatur/Heimat, Dorf/Zähmung/Milch und geprüfte Kopie entwickelter Altstände | ARCH-08–12 → M1f/M1g/Rest M1e |
 | Langzeitbetrieb | Regionen dauerhaft auslagern, technische Registergrenzen überwinden, Nah-/Fernsimulation eindeutig übergeben, Streaming/Körperwechsel begrenzen | ARCH-13–18 → M1h |
-| Gemeinsame Abnahme | Erst dann regulären Kugelstart freigeben; alten Lade-/Rückweg erhalten | ARCH-19 → M1i |
+| Gemeinsame Abnahme | Kugelstart ist freigegeben; Darstellung, Verhalten und Langzeitbetrieb darauf prüfen; Originaldaten erhalten | ARCH-19 → M1i |
 | Weitere Inhalte | Gemeinsame Ressourcenproduktion vor Eierkette; versionierte Baupläne und Körperteilkatalog; einheitliche Darstellung | ARCH-20–25 → D1-EIER/D3-EIER/M3-TEILE/UI |
 | Größere Gesellschaft und Raumfahrt | Siedlungsinstanzen, regionale Transporte, geprüfte Epochenübergaben und Reise-/Schiffsvertrag | ARCH-26–28/30 → M6–M9 |
 
@@ -123,7 +123,7 @@ Mindestens **drei unterschiedliche geeignete Arten je belebtem Spielplaneten**: 
 | M1d–M1g | Gemeinsamer Kugelablauf für Kreatur, Heimat, Stamm und D1/D2/D3 umgesetzt | M1b/M1c, gemeinsamer Oberflächenadapter | [Reale Spielkette, Wiederbesuch und Restgrenzen](docs/WORK_SPHERICAL_GAMEPLAY.md) |
 | M1e | Gemeinsamer Kugelstart, versionierte Orte, geprüfte Kopiermigration entwickelter Vertragsstände, Rückweg und Neustart | M1d und Integration | [Umzugsvertrag](docs/WORK_M1E_CAMPAIGN.md); weitere historische Stände bleiben eine Abnahmeaufgabe |
 | M1h | **Teilweise:** regionale Speicherung, stabile Körper-IDs, Nah-/Fernübergabe und sichere Körperreise umgesetzt | Gemeinsames Kugelspiel | Globalen Save segmentieren, lange Reisen und Speicherbudgets auf Zielhardware prüfen; [Messwerte und Grenzen](docs/WORK_CAMPAIGN_SCALING.md) |
-| M1i | **Offen:** vollständige gemeinsame Ziel-PC-Abnahme und regulärer Kugelstart | M1h | Darstellung, Bedienung, Langzeitstabilität und 1080p60 nachweisen |
+| M1i | **Teilweise umgesetzt:** Kugelstart ist einziger Spielweg; vollständige gemeinsame Ziel-PC-Abnahme offen | M1h | Darstellung, Bedienung, Langzeitstabilität und 1080p60 nachweisen |
 | M2A | Verhaltenspunkte, Käufe und Vermächtnis vorhanden | M0 | Erfolgreiche Aktionen geben einmal Punkte, Effekte wirken; gemischte Spielweisen bleiben erreichbar |
 | M2B | B1/B2/B3 zusammengeführt; gemeinsame Editor-/Anatomieverträge | M1-Adressen, vorhandene Kreaturenwerkstatt | Stabile Revisionen, Anschlussdaten, Vorschau/Laufzeit; neue Rollen können Körperfähigkeiten auslesen |
 | M3 | Kreaturenwerkstatt ausgebaut | M2B | Zwei-/Vierbeiner und mehrere Beinpaare belastbar; Extremformen, Fußkontakt, Wasser/Flug bleiben weitere Arbeit |

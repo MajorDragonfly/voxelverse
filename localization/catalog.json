@@ -1118,6 +1118,66 @@
       "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen",
       "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen",
       "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature in crosshair\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
+    },
+    {
+      "key": "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm.",
+      "de": "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm.",
+      "en": "Explore your planet, discover plants and animals, and develop your species from its first nest to its own tribe."
+    },
+    {
+      "key": "Neue Abenteuer beginnen auf einem Kugelplaneten.",
+      "de": "Neue Abenteuer beginnen auf einem Kugelplaneten.",
+      "en": "New adventures begin on a spherical planet."
+    },
+    {
+      "key": "Deine Kampagne wird fortgesetzt …",
+      "de": "Deine Kampagne wird fortgesetzt …",
+      "en": "Resuming your campaign …"
+    },
+    {
+      "key": "Dieser ältere Spielstand muss zuerst auf einen Kugelplaneten übertragen werden. Das Original bleibt erhalten.",
+      "de": "Dieser ältere Spielstand muss zuerst auf einen Kugelplaneten übertragen werden. Das Original bleibt erhalten.",
+      "en": "This older save must first be transferred to a spherical planet. The original is preserved."
+    },
+    {
+      "key": "Auf Kugelwelt fortsetzen",
+      "de": "Auf Kugelwelt fortsetzen",
+      "en": "Continue on a spherical planet"
+    },
+    {
+      "key": "Älterer Spielstand · beim Fortsetzen wird eine Kugelkopie angelegt. Das Original bleibt erhalten.",
+      "de": "Älterer Spielstand · beim Fortsetzen wird eine Kugelkopie angelegt. Das Original bleibt erhalten.",
+      "en": "Older save · continuing creates a spherical copy. The original is preserved."
+    },
+    {
+      "key": "Originalarchiv als Kopie sichern",
+      "de": "Originalarchiv als Kopie sichern",
+      "en": "Save a copy of the original archive"
+    },
+    {
+      "key": "Originaldaten und ursprüngliche Karten als eigene Archivkopie gesichert.",
+      "de": "Originaldaten und ursprüngliche Karten als eigene Archivkopie gesichert.",
+      "en": "Original data and maps saved as a separate archive copy."
+    },
+    {
+      "key": "Prüfe den Kugelumzug dieses älteren Spielstands. Seine Originaldaten bleiben erhalten.",
+      "de": "Prüfe den Kugelumzug dieses älteren Spielstands. Seine Originaldaten bleiben erhalten.",
+      "en": "Check this older save for transfer to a spherical planet. Its original data is preserved."
+    },
+    {
+      "key": "Das Original bleibt vollständig erhalten. Für diesen Spielstand muss der Kugelumzug noch ergänzt werden.",
+      "de": "Das Original bleibt vollständig erhalten. Für diesen Spielstand muss der Kugelumzug noch ergänzt werden.",
+      "en": "The original is fully preserved. Transfer to a spherical planet still needs to be extended for this save."
+    },
+    {
+      "key": "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten.",
+      "de": "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten.",
+      "en": "Continue the adventure on a spherical planet. Your previous save is preserved as the original."
+    },
+    {
+      "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
     }
   ]
 }

@@ -1,5 +1,7 @@
 # Gemeinsame Kugelkampagne: Gameplay und Regionsspeicher
 
+**Aktualisierung 10. September:** Lars hat den Kugelstart als einzigen regulären Spielweg vorgezogen. Die bisherige Startfreigabesperre und der optionale Auswahlhaken sind aufgehoben. [WORK_SPHERE_ONLY_ENTRY.md](WORK_SPHERE_ONLY_ENTRY.md) ist für Einstieg und Altstände maßgeblich; die folgenden Nachweise und offenen Abnahmen bleiben bestehen.
+
 Stand: 9. September 2026. Integration auf `agent/spherical-gameplay-migration-2026-09-09`, einschließlich des Architektur-Audits aus `main` `7e402506f5944e1ac457673395f94627c7d314d5`. Dieser Stand führt M1f, den lokalen M1g-Ablauf und erste M1h-Anschlüsse zusammen. Die vollständige M1i-Abnahme und der reguläre Kugelstart bleiben offen.
 
 Die anschließende Skalierungsrunde auf Basis von `main` `ca02572c199b1fe4b70174ac027359eaf2c588da` ist in [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md) dokumentiert. Die untenstehenden ursprünglichen Laufberichte bleiben als Historie erhalten.

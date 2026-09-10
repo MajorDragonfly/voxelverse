@@ -193,9 +193,10 @@ func _exercise_first_steps(player: Node) -> void:
 	shape.shape = box
 	ground.add_child(shape)
 	get_tree().current_scene.add_child(ground)
-	var water: float = get_node("/root/WorldGenerator").get_water_level(home_position.x, home_position.z)
-	ground.global_position = Vector3(home_position.x, maxf(home_position.y + 1.0, water + 4.0), home_position.z)
-	player.global_position = ground.global_position + Vector3(0, 1.5, 0)
+	var up: Vector3 = player.up_direction
+	ground.global_basis = player.global_basis
+	ground.global_position = home_position + up * 4.0
+	player.global_position = ground.global_position + up * 1.5
 	player.velocity = Vector3.ZERO
 	if DisplayServer.get_name() != "headless":
 		var motion := InputEventMouseMotion.new()
@@ -248,9 +249,9 @@ func _exercise_first_steps(player: Node) -> void:
 	if creature != null:
 		var creature_home: Vector3 = creature.global_position
 		creature.set_physics_process(false)
-		creature.global_position = player.global_position + Vector3(0, 0, -4)
+		creature.global_position = player.global_position + player.global_basis * Vector3(0, 0, -4)
 		await _frames(3)
-		player._gameplay_camera.look_at(creature.global_position + Vector3(0, 0.56, 0))
+		player._gameplay_camera.look_at(creature.global_position + up * 0.56, up)
 		var scanner: Node = player.get_node("CreatureScanner")
 		for frame in range(180):
 			await get_tree().physics_frame

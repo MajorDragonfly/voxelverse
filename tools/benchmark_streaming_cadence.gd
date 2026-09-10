@@ -10,7 +10,7 @@ func run() -> void:
 	root.get_node("GameState").start_world_with_seed(seed_value)
 	await process_frame
 	started = Time.get_ticks_usec()
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	for frame in range(6000):
 		await process_frame
 		if current_scene == null: continue

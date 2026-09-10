@@ -15,7 +15,7 @@ func _run() -> void:
 	state = root.get_node("GameState")
 	saves.autosave_enabled = false
 	saves.session_managed = true
-	var original: String = saves.create_slot("Original", 15838)
+	var original: String = saves.create_slot("Original", 15838, "legacy_plane_v9")
 	_expect(not original.is_empty(), "Could not create the original slot.")
 	await process_frame
 	var event = state.campaign.next_event(GameEvent.Kind.INTERACTION, "shared_target", 0, "befriended")

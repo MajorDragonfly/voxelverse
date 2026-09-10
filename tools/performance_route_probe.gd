@@ -1,8 +1,9 @@
 extends SceneTree
-## Instrumentation only: scripted player positions exercise streaming, not walking physics.
+## Historical planar comparison only. The public SessionFlow now starts spheres.
+## Scripted player positions exercise legacy streaming, not current campaign FPS.
 const Assets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
 const Shutdown = preload("res://core/runtime_shutdown.gd")
-const WORLD: String = "res://main/main.tscn"
+const WORLD: String = "res://core/diagnostics/legacy_world.tscn"
 const TITLE: String = "res://ui/frontend/main_menu.tscn"
 
 var _config: Dictionary
@@ -56,7 +57,7 @@ func _run() -> void:
 	_report = {"recipe": _recipe, "godot": Engine.get_version_info()["string"],
 		"renderer": "headless" if headless else RenderingServer.get_current_rendering_method(),
 		"adapter": adapter, "software_renderer": software, "user_data_dir": OS.get_user_data_dir(),
-		"scope": "Scripted streaming route and real SessionFlow save/load transitions; capped process-frame timings, not a physics walking test or target-PC FPS acceptance.",
+		"scope": "Historical planar streaming fixture with shared save/load and menu return; not the current spherical campaign or target-PC FPS acceptance.",
 		"monitor_note": "process_ms and physics_ms sample Godot's coarse runtime monitors; they are not independent per-frame CPU timings. Frame intervals include probe work and the configured cap.",
 		"segments": _segments, "menu_snapshots": _menus, "failures": _failures}
 	change_scene_to_file(TITLE)
@@ -68,9 +69,14 @@ func _run() -> void:
 	for cycle in range(int(_recipe["cycles"])):
 		_begin()
 		if cycle == 0:
-			_flow.new_game("Performance probe", int(_recipe["seed"]))
+			slot = _saves.create_slot("Historical performance fixture", int(_recipe["seed"]), "legacy_plane_v9")
 		else:
-			_flow.load_game(slot)
+			if not _saves.select_slot(slot):
+				_failures.append("Historical fixture save did not load.")
+				break
+		if slot.is_empty() or change_scene_to_file(WORLD) != OK:
+			_failures.append("Historical fixture could not start.")
+			break
 		if not await _ready_world():
 			break
 		var player: Node3D = current_scene.get_node("Player")
@@ -103,6 +109,7 @@ func _run() -> void:
 		_segments[-1]["visit"] = {"origin_unloaded": origin_unloaded, "origin_reloaded": returned,
 			"distance_m": float(_recipe["distance_m"]) * 2.0, "before": before, "after": _snapshot()}
 		_begin()
+		_flow.toggle_pause()
 		_flow.return_to_title()
 		var deadline: int = Time.get_ticks_usec() + int(float(_recipe["stage_timeout_seconds"]) * 1_000_000)
 		while current_scene == null or current_scene.scene_file_path != TITLE:

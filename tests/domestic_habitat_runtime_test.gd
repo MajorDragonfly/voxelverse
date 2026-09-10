@@ -21,7 +21,7 @@ func run() -> void:
 	var old_habitat: String = JSON.stringify(catalog["habitats"][0])
 	var old_identity: String = Catalog.object_id(state, catalog["habitats"][0])
 	check(saves.save_now(), "Save a partial D1 catalog")
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	await scene_changed
 	var player: CharacterBody3D = current_scene.get_node("Player")
 	player.is_dead = true

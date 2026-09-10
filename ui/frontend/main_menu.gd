@@ -8,7 +8,6 @@ var _flow: Node
 var _status: Label
 var _title_input: LineEdit
 var _seed_input: LineEdit
-var _sphere_choice: CheckBox
 var _page: String = "home"
 var _save_browser: Control
 var _help_text: Label
@@ -42,7 +41,11 @@ func _ready() -> void:
 	if "--planet-lab" in OS.get_cmdline_user_args() or "--input-smoke" in OS.get_cmdline_user_args():
 		if not get_tree().has_meta("frontend_diagnostic_consumed"):
 			get_tree().set_meta("frontend_diagnostic_consumed", true)
-			_flow.call_deferred("new_game", "Testlauf", 15838)
+			if "--input-smoke" in OS.get_cmdline_user_args():
+				get_tree().set_meta("menu_smoke_consumed", true)
+				get_tree().root.add_child.call_deferred(load("res://core/diagnostics/menu_input_probe.gd").new())
+			else:
+				get_tree().change_scene_to_file.call_deferred("res://world/planet_lab/planet_lab.tscn")
 	if "--frontend-smoke" in OS.get_cmdline_user_args() and not get_tree().has_meta("frontend_smoke_consumed"):
 		get_tree().set_meta("frontend_smoke_consumed", true)
 		get_tree().root.add_child.call_deferred(load("res://core/diagnostics/frontend_probe.gd").new())
@@ -153,11 +156,7 @@ func _show_new() -> void:
 	_seed_input.custom_minimum_size.y = 54
 	_seed_input.text_changed.connect(func(_text: String): _status.text = "")
 	_body.add_child(_seed_input)
-	_sphere_choice = CheckBox.new()
-	_sphere_choice.name = "SphericalCampaignChoice"
-	_sphere_choice.text = "Kugelwelt ausprobieren"
-	_body.add_child(_sphere_choice)
-	Style.paragraph(_body, "Auf der Kugel kannst du deine Kreatur gestalten, Arten entdecken, eine Heimat gründen und einen Stamm mit Tierhaltung aufbauen. Der Weltumzug befindet sich noch in der gemeinsamen Erprobung.", 17)
+	Style.paragraph(_body, "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm.", 17)
 	Style.button(_body, "Abenteuer beginnen", _begin, "Begin", true)
 	Style.button(_body, "Zurück", _show_home, "Back")
 	_title_input.grab_focus()
@@ -168,7 +167,7 @@ func _begin() -> void:
 		_show_error("Bitte einen Welt-Seed von 1 bis 2147483647 eingeben oder das Feld leer lassen.")
 		_seed_input.grab_focus()
 		return
-	_flow.new_game(_title_input.text, 0 if seed_text.is_empty() else int(seed_text), "cube_sphere_m1_v1" if _sphere_choice.button_pressed else "legacy_plane_v9")
+	_flow.new_game(_title_input.text, 0 if seed_text.is_empty() else int(seed_text))
 
 func _show_slots() -> void:
 	_clear("slots")

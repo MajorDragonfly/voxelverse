@@ -42,7 +42,7 @@ func _run() -> void:
 	root.get_node("SaveGameService").set("autosave_enabled", false)
 	root.get_node("GameState").call("start_world_with_seed", _seed_value)
 	await process_frame
-	_expect(change_scene_to_file("res://main/main.tscn") == OK, "Packaged main scene could not start.")
+	_expect(change_scene_to_file("res://core/diagnostics/legacy_world.tscn") == OK, "Packaged main scene could not start.")
 	if not await _wait_for_world():
 		_finish()
 		return

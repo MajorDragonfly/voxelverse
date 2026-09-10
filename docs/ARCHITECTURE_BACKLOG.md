@@ -24,7 +24,7 @@ Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984
 | Gemeinsame Verträge | ARCH-03 → 04, ARCH-06 → 07 | Eindeutige Körper und versionierte Ortsdaten; atomarer gemeinsamer Save bleibt erhalten |
 | Spielbarer Kugelumfang | ARCH-08 → 09; ARCH-10 → 11; ARCH-12 mit beiden Zweigen | Kreaturenphase und Stamm am selben Ort samt entwickelten Altständen |
 | Langzeitbetrieb | ARCH-13 → 14 → 16, ARCH-15; ARCH-17, 18 | Dauerhafte Regionen, ein Simulationsbesitzer, begrenzte Arbeit und Körperwechsel |
-| Regulärer Kugelstart | ARCH-19 | M1i-Abnahme vor Ablösung des regulären Flachstarts |
+| Regulärer Kugelstart | ARCH-19 | Kugelstart bereits freigegeben; verbleibende M1i-Abnahme auf der Kugelwelt |
 | Günstigerer Funktionsausbau | ARCH-20 → 21 → 22; ARCH-23, 24, 25 | Gemeinsame Produktionskette, Eier, versionierte Körperteile/Baupläne und Darstellung |
 | Mehr Siedlungen / weitere Epochen | ARCH-26, 27, 28 | Mehrere Orte und Verkehrsverbindungen; Übergaben nur für spielbare Epochen |
 | Weltraum | ARCH-30 → bestehende M9.1–M9.6 | Expeditionsbasis, individuelles Beiboot, Landung, Rückkehr, Ausbau |
@@ -192,8 +192,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 - **Zuordnung:** M1i/M10. **Vorher:** 08–14 und 16–18 geliefert; 15 ist Voraussetzung von 16. **Bereich:** Integration, Frontend und Export.
 - [ ] Vollständige Kette aus dem Migrationsauftrag mit neuer Kugelkampagne und entwickeltem Altstand am gleichen Commit durchführen.
 - [ ] Echte Szenen, frischen Prozess, Pause/Schreibfehler, Flächenkante/Ursprung und Reise/Rückkehr prüfen; Linux-/Windows-Paket außerhalb des Projekts starten.
-- [ ] Ziel-PC-Spieltest, Sichtbarkeit/Bedienung und Leistungsbericht separat dokumentieren. Regulären Neue-Spiel-Start erst nach bestandener Abnahme umstellen.
-- **Fertig:** Ein gemeinsamer spielbarer Kugelstand ist nachgewiesen. Flachwelt bleibt mindestens als alter Lader/Migrationsrückweg erhalten; endgültiges Entfernen braucht eigene Abhängigkeitsprüfung.
+- [ ] Ziel-PC-Spieltest, Sichtbarkeit/Bedienung und Leistungsbericht separat dokumentieren. Der reguläre Neue-Spiel-Start wurde auf Lars’ ausdrückliche Entscheidung vom 10. September vorgezogen; kein Rückfall auf Flachwelt bei offenen Befunden.
+- **Fertig:** Ein gemeinsamer spielbarer Kugelstand ist nachgewiesen. Alte Flachweltdaten bleiben für Kopiermigration und Originalarchive lesbar; sie sind kein regulärer Spielweg. Historische Regressionen dürfen ihre ausdrücklich planaren Prüfszenen weiter verwenden; gemeinsam genutzte Generator-/Assetdienste nicht blind löschen.
 
 ## Funktionsausbau auf gemeinsamen Bausteinen
 

@@ -24,7 +24,7 @@ func _run() -> void:
 		return
 	state.start_world_with_seed(15838)
 	await process_frame
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	await scene_changed
 	var home: Node = current_scene.get_node("Nest/HomeGroup")
 	var tribe: Node = current_scene.get_node("Nest/Tribe")
@@ -156,7 +156,7 @@ func _restart_check(saves: Node, state: Node) -> void:
 		_finish()
 		return
 	var expected: Dictionary = state.get_current_body()["tribe"].duplicate(true)
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	await scene_changed
 	var tribe: Node = current_scene.get_node("Nest/Tribe")
 	# Force the home controller's slower refresh to occur after tribal activation.

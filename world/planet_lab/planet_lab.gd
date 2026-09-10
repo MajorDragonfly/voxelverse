@@ -20,7 +20,6 @@ var _system_legend: PanelContainer
 var _legend_entries: VBoxContainer
 var galaxy_panel: CanvasLayer
 const Blueprint = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
-const MAIN_SCENE: String = "res://main/main.tscn"
 const PRIMARY_LIGHT_ENERGY: float = 1.0
 const SECONDARY_LIGHT_ENERGY: float = 0.45
 var system: RefCounted = System.new()
@@ -531,10 +530,7 @@ func return_to_game() -> void:
 
 
 func _leave_lab() -> void:
-	var saves := get_node_or_null("/root/SaveGameService")
-	if saves != null:
-		saves.load_now()
-	get_tree().change_scene_to_file(MAIN_SCENE)
+	get_node("/root/SessionFlow").return_from_planet_lab()
 
 
 func _unhandled_input(event: InputEvent) -> void:

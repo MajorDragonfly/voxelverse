@@ -6,8 +6,10 @@ signal world_started
 
 const Style = preload("res://ui/frontend/menu_style.gd")
 const TITLE_SCENE: String = "res://ui/frontend/main_menu.tscn"
-const WORLD_SCENE: String = "res://main/main.tscn"
 const SPHERE_SCENE: String = "res://main/spherical_campaign.tscn"
+const WORLD_SCENE: String = SPHERE_SCENE
+# Retained only for historical regression scenes; public entry never selects it.
+const LEGACY_TEST_SCENE: String = "res://core/diagnostics/legacy_world.tscn"
 var _world_scene: String = WORLD_SCENE
 var managed: bool = false
 var loading: bool = false
@@ -61,8 +63,11 @@ func latest_slot() -> Dictionary:
 			return slot
 	return {}
 
-func new_game(title: String, seed_value: int = 0, surface_mode: String = "legacy_plane_v9") -> void:
+func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_sphere_m1_v1") -> void:
 	if loading or not _at_title():
+		return
+	if surface_mode != "cube_sphere_m1_v1":
+		menu_error.emit("Neue Abenteuer beginnen auf einem Kugelplaneten.")
 		return
 	_show_loading("Dein Abenteuer wird vorbereitet …")
 	await get_tree().process_frame
@@ -78,21 +83,37 @@ func load_game(path: String) -> void:
 	_show_loading("Spielstand wird geladen …")
 	await get_tree().process_frame
 	var saves := get_node("/root/SaveGameService")
-	if not bool(saves.select_slot(path)):
+	var playable: String = saves.prepare_playable_slot(path)
+	if playable.is_empty() or not bool(saves.select_slot(playable)):
 		_fail_loading("Laden fehlgeschlagen. " + str(saves.last_error))
 		return
 	await _request_world()
 
 func return_from_editor() -> Error:
 	var scene := get_tree().current_scene
-	if loading or scene == null or not scene.scene_file_path.begins_with("res://creatures/editor/"):
+	if loading or scene == null or not (scene.scene_file_path.begins_with("res://creatures/editor/") or scene.scene_file_path.begins_with("res://civilization/buildings/")):
 		return ERR_BUSY
 	var saves := get_node("/root/SaveGameService")
+	if not saves.session_active or get_node("/root/GameState").campaign_scene() != SPHERE_SCENE:
+		return get_tree().change_scene_to_file(TITLE_SCENE)
 	if not saves.save_now(): return ERR_CANT_CREATE
 	saves.queue_current_world_restore()
 	_show_loading("Deine Kreatur kehrt in die Kampagne zurück …")
 	_request_world()
 	return OK
+
+func return_from_planet_lab() -> void:
+	if loading: return
+	var saves := get_node("/root/SaveGameService")
+	# Diagnostic worlds never write their player pose into the campaign.
+	if not saves.session_active or get_node("/root/GameState").campaign_scene() != SPHERE_SCENE:
+		get_tree().change_scene_to_file(TITLE_SCENE)
+		return
+	_show_loading("Deine Kampagne wird fortgesetzt …")
+	if not saves.load_now():
+		_fail_loading("Laden fehlgeschlagen. " + str(saves.last_error))
+		return
+	await _request_world()
 
 func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body_id: String = "") -> bool:
 	var scene := get_tree().current_scene
@@ -147,6 +168,9 @@ func _request_world() -> void:
 	await get_tree().process_frame
 	_loading_label.text = "Welt wird geladen …"
 	_world_scene = get_node("/root/GameState").campaign_scene()
+	if _world_scene != SPHERE_SCENE:
+		_fail_loading("Dieser ältere Spielstand muss zuerst auf einen Kugelplaneten übertragen werden. Das Original bleibt erhalten.")
+		return
 	var error: Error = ResourceLoader.load_threaded_request(_world_scene, "PackedScene")
 	if error != OK:
 		_fail_loading("Die Spielwelt konnte nicht geladen werden: " + error_string(error))
@@ -249,7 +273,7 @@ func can_pause() -> bool:
 	if not managed or loading:
 		return false
 	var scene := get_tree().current_scene
-	return scene != null and scene.scene_file_path in [WORLD_SCENE, SPHERE_SCENE]
+	return scene != null and scene.scene_file_path in [SPHERE_SCENE, LEGACY_TEST_SCENE]
 
 func toggle_pause() -> void:
 	if pause_open:
@@ -274,8 +298,7 @@ func _show_pause() -> void:
 		Style.button(_content, "Reiseziel wählen", _show_travel, "TravelDestinations")
 	Style.button(_content, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "PauseSettings")
 	Style.button(_content, "Steuerung", _show_help, "PauseControls")
-	if get_tree().current_scene.scene_file_path != SPHERE_SCENE:
-		Style.button(_content, "Erste Schritte", _show_first_steps, "PauseFirstSteps")
+	Style.button(_content, "Erste Schritte", _show_first_steps, "PauseFirstSteps")
 	Style.button(_content, "Speichern & zum Hauptmenü", return_to_title, "ReturnToTitle")
 	Style.button(_content, "Speichern & beenden", request_quit, "QuitGame")
 	_message = Style.paragraph(_content, "", 18)
@@ -417,11 +440,7 @@ func _prepare_overlay() -> void:
 
 func controls_text() -> String:
 	var preferences = preload("res://core/input_preferences.gd")
-	if get_tree().current_scene != null and get_tree().current_scene.scene_file_path == SPHERE_SCENE:
-		return "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nNahrung sammeln, Arten entdecken und ein Dorf gründen. Über das Pausenmenü kannst du eine andere Kugelwelt besuchen." % [
-			preferences.binding_label("move_forward"), preferences.binding_label("move_back"), preferences.binding_label("move_left"),
-			preferences.binding_label("move_right"), preferences.binding_label("jump")]
-	return Text.text("%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen") % [
+	return Text.text("%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)") % [
 		preferences.binding_label("move_forward"), preferences.binding_label("move_back"),
 		preferences.binding_label("move_left"), preferences.binding_label("move_right"),
 		preferences.binding_label("jump"), preferences.binding_label("inspection_mode"),

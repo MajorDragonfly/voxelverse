@@ -25,7 +25,7 @@ func _run() -> void:
 	var state := root.get_node("GameState")
 	var saves := root.get_node("SaveGameService")
 	saves.autosave_enabled = false
-	var slot_path: String = saves.create_slot("Beenden", 15838)
+	var slot_path: String = saves.create_slot("Beenden", 15838, "legacy_plane_v9")
 	expect(not slot_path.is_empty(), "Create an actual campaign for localization checks")
 	saves.session_active = false
 	var saved_bytes := FileAccess.get_file_as_string(slot_path)

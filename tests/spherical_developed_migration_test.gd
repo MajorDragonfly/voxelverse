@@ -22,7 +22,7 @@ func _run() -> void:
 		await _runtime(Atomic.parse_dictionary(FileAccess.get_file_as_string("user://developed_restart.json")), true)
 		await _finish()
 		return
-	var path: String = saves.create_slot("Bestehendes Dorf", 15838)
+	var path: String = saves.create_slot("Bestehendes Dorf", 15838, "legacy_plane_v9")
 	var source: Dictionary = saves._read_save(path)
 	var campaign: Dictionary = source.game_state.campaign
 	var body: Dictionary = Registry.active(source.game_state)

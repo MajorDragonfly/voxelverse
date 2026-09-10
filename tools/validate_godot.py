@@ -58,7 +58,7 @@ def validate(args):
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:
             name = "main" if frames == 300 else f"main_shutdown_{frames}"
-            commands.append((name, ["res://main/main.tscn", "--", "--runtime-exit-frames", str(frames)], 120))
+            commands.append((name, ["res://core/diagnostics/legacy_world.tscn", "--", "--runtime-exit-frames", str(frames)], 120))
         # Stop the real scene at resource-owning stages, not only arbitrary frames.
         # Separate processes keep the resource cache cold for every case.
         for seed in [15838, 63352, 23757]:

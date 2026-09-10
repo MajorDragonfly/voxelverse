@@ -27,7 +27,7 @@ func _run() -> void:
 		await _restart()
 		await _finish()
 		return
-	var source: String = saves.create_slot("Quellwelt", 15838)
+	var source: String = saves.create_slot("Quellwelt", 15838, Surface.LEGACY)
 	var design: Dictionary = Blueprint.create_default()
 	design.name = "Originaldesign beim Neustart"
 	Blueprint.save_to_file(design)
@@ -39,7 +39,8 @@ func _run() -> void:
 	var target: String = saves.migrate_slot_to_sphere(source, text.sha256_text())
 	_expect(not target.is_empty(), "Migration failed: " + saves.last_error)
 	if target.is_empty(): await _finish(); return
-	await _open(target)
+	# Public loading must migrate the old source and reuse the existing copy.
+	await _open(source)
 	if not _expect_world(): await _finish(); return
 	var scene: Node3D = tree.current_scene
 	var player: CharacterBody3D = scene.player
@@ -89,24 +90,46 @@ func _run() -> void:
 	arguments.append_array(["--", "--sphere-smoke", "--sphere-restart"])
 	var code: int = OS.execute(OS.get_executable_path(), arguments, output, true)
 	_expect(code == 0 and str(output).contains("SPHERE_FRESH_PROCESS_PASSED"), "Fresh process failed: " + str(output))
-	# Exercise the actual opt-in on the normal new-game form as well as copy
+	# Exercise the only normal new-game form as well as automatic copy
 	# loading. It must create another campaign with its own design snapshot.
+	var slots_before: int = saves.list_slots().size()
+	flow.new_game("Removed planar entry", 15838, Surface.LEGACY)
+	_expect(not flow.loading and saves.list_slots().size() == slots_before, "Public new game still created a plane.")
 	tree.current_scene._show_new()
 	tree.current_scene.find_child("AdventureName", true, false).text = "Neue Kugelkampagne"
 	tree.current_scene.find_child("WorldSeed", true, false).text = "23757"
-	tree.current_scene.find_child("SphericalCampaignChoice", true, false).button_pressed = true
+	_expect(tree.current_scene.find_child("SphericalCampaignChoice", true, false) == null, "Obsolete surface choice is still visible.")
 	tree.current_scene.find_child("Begin", true, false).pressed.emit()
 	var new_start: int = Time.get_ticks_msec()
 	while flow.loading and Time.get_ticks_msec() - new_start < 50000: await tree.process_frame
 	if _expect_world():
-		_expect(saves.save_path != target and state.campaign.data.id != checkpoint.game_state.campaign.id, "Opt-in reused migrated campaign.")
-		_expect(saves._design_files.size() == 1 and Blueprint.load_best_available().design_id != design.design_id, "Opt-in did not freeze its own distinct default design.")
+		var flora_start: int = Time.get_ticks_msec()
+		while tree.current_scene.flora.instance_count() == 0 and Time.get_ticks_msec() - flora_start < 30000:
+			await tree.process_frame
+		_expect(tree.current_scene.flora.instance_count() > 0, "Default campaign loaded no vegetation.")
+		_expect(saves.save_path != target and state.campaign.data.id != checkpoint.game_state.campaign.id, "Default entry reused migrated campaign.")
+		_expect(saves._design_files.size() == 1 and Blueprint.load_best_available().design_id != design.design_id, "Default entry did not freeze its own distinct default design.")
 		_expect(tree.root.get_node("AudioManager").director._player == tree.current_scene.player, "Shared audio did not bind the radial player.")
 		_expect(tree.root.get_node("AudioManager").director.sample_at(tree.current_scene.player.global_position).has("water_point"), "Audio lacks body-bound water coordinates.")
+		await _lab_round_trip()
 		flow.toggle_pause()
 		flow.return_to_title()
 		await tree.scene_changed
 	await _finish()
+
+func _lab_round_trip() -> void:
+	var id: String = state.campaign.data.id
+	var path: String = saves.save_path
+	_expect(tree.current_scene.get_node("DevelopmentTools")._open_planet_lab(), "F4 diagnostic entry failed.")
+	await tree.scene_changed
+	_expect(tree.current_scene.scene_file_path == "res://world/planet_lab/planet_lab.tscn", "F4 did not reach the diagnostic lab.")
+	var source_text: String = FileAccess.get_file_as_string(path)
+	tree.current_scene.return_to_game()
+	var started: int = Time.get_ticks_msec()
+	while flow.loading and Time.get_ticks_msec() - started < 50000: await tree.process_frame
+	if _expect_world():
+		_expect(state.campaign.data.id == id and saves.save_path == path, "Lab return switched campaign or save.")
+		_expect(FileAccess.get_file_as_string(path) == source_text, "Diagnostic lab wrote into the campaign before normal autosave.")
 
 func _restart() -> void:
 	var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string("user://sphere_campaign_restart.json"))

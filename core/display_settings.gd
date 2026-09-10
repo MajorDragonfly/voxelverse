@@ -72,7 +72,7 @@ func _input(event: InputEvent) -> void:
 				return
 			# Editors keep their own Esc/back behavior. F8 remains available there.
 			var scene := get_tree().current_scene
-			if is_menu_open() or (scene != null and scene.scene_file_path in ["res://main/main.tscn", "res://world/planet_lab/planet_lab.tscn"]):
+			if is_menu_open() or (scene != null and scene.scene_file_path in ["res://core/diagnostics/legacy_world.tscn", "res://world/planet_lab/planet_lab.tscn"]):
 				_toggle_settings_menu()
 				get_viewport().set_input_as_handled()
 		KEY_F8:
@@ -421,7 +421,7 @@ func _toggle_settings_menu() -> void:
 		_language_settings.refresh()
 		var scene := get_tree().current_scene
 		_lab_button.visible = scene != null and scene.has_node("DevelopmentTools")
-		_quit_button.visible = scene != null and (scene.has_method("save_lab") or scene.scene_file_path == "res://main/main.tscn")
+		_quit_button.visible = scene != null and (scene.has_method("save_lab") or scene.scene_file_path == "res://core/diagnostics/legacy_world.tscn")
 		var flow := get_node_or_null("/root/SessionFlow")
 		if flow != null and bool(flow.managed):
 			_quit_button.hide()

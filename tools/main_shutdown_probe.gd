@@ -27,7 +27,7 @@ func _start() -> void:
 
 
 func _load_main() -> void:
-	if change_scene_to_file("res://main/main.tscn") != OK:
+	if change_scene_to_file("res://core/diagnostics/legacy_world.tscn") != OK:
 		push_error("Could not load the real main scene for shutdown probe.")
 		await preload("res://core/runtime_shutdown.gd").finish(self, 1)
 		return

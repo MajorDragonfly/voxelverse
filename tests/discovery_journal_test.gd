@@ -215,7 +215,7 @@ func _test_pause_cleanup() -> void:
 	await process_frame
 	_check(not paused, "Removing journal while open releases only its own pause")
 	# Production scene integration is explicit and checked without loading terrain.
-	var scene: PackedScene = load("res://main/main.tscn")
+	var scene: PackedScene = load("res://core/diagnostics/legacy_world.tscn")
 	var main: Node = scene.instantiate()
 	_check(main.get_node_or_null("DiscoveryJournal") == null and main.get_node_or_null("Player/ProgressionHUD") != null, "Main delegates journal installation to player HUD without a duplicate root book")
 	main.free()

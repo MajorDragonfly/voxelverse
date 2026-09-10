@@ -22,7 +22,7 @@ const AttachmentNormalizerV7 = preload(
 	"res://creatures/editor/creature_attachment_normalizer.gd"
 )
 
-const MAIN_SCENE_PATH: String = "res://main/main.tscn"
+const MAIN_SCENE_PATH: String = "res://ui/frontend/main_menu.tscn"
 const LEGACY_SAVE_PATH: String = "user://creature_editor_blueprint.json"
 const EDIT_COALESCE_MSEC: int = 320
 

@@ -9,7 +9,7 @@ func _initialize() -> void:
 
 func _run() -> void:
 	root.get_node("SaveGameService").set("autosave_enabled", false)
-	_expect(change_scene_to_file("res://main/main.tscn") == OK, "Main scene could not start.")
+	_expect(change_scene_to_file("res://core/diagnostics/legacy_world.tscn") == OK, "Main scene could not start.")
 	await _wait_for_world()
 	if current_scene == null:
 		_finish()

@@ -11,7 +11,7 @@ func run() -> void:
 	saves._loaded_once = true
 	saves.save_path = "user://d1-runtime.json"
 	state.start_world_with_seed(15838)
-	change_scene_to_file("res://main/main.tscn")
+	change_scene_to_file("res://core/diagnostics/legacy_world.tscn")
 	await scene_changed
 	var player: CharacterBody3D = current_scene.get_node("Player")
 	var streamer: Node3D = current_scene.get_node("FaunaStreamerV7")

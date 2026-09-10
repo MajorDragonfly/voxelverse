@@ -91,6 +91,9 @@ func _ready() -> void:
 	var map := preload("res://ui/minimap/minimap_hud.gd").new()
 	map.player = player
 	add_child(map)
+	var development := preload("res://core/development_tools.gd").new()
+	development.name = "DevelopmentTools"
+	add_child(development)
 	var frame: Basis = Cube.frame(player.up_direction)
 	_sun.basis = frame.rotated(frame.x, -0.65)
 
