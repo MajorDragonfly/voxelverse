@@ -15,22 +15,22 @@ func configure(registry: Callable, species: Callable, actor: Callable) -> void:
 	source.actor = actor
 	retry = 0.0
 
-func candidates() -> Array[String]:
-	return source.candidates(controller.village(), controller._state.campaign.data["id"])
+func candidates(p: Dictionary = {}) -> Array[String]:
+	return source.candidates(controller.village(), controller._state.campaign.data["id"], H.site_recipe(p))
 
 func attendance(p: Dictionary, identity: String = "") -> Dictionary:
 	if identity.is_empty():
 		identity = p["animal_id"]
 	if identity.is_empty():
-		return {"error": "Führe ein gezähmtes Milchtier hierher und ordne es zu."}
+		return {"error": "Führe ein passendes gezähmtes Tier hierher und ordne es zu."}
 	var data: Dictionary = controller.village()
-	var result: Dictionary = source.read(data, controller._state.campaign.data["id"], identity)
+	var result: Dictionary = source.read(data, controller._state.campaign.data["id"], identity, H.site_recipe(p))
 	if not result["error"].is_empty():
 		return result
 	var animal: Dictionary = result["animal"]
 	var record: Dictionary = data["husbandry"]["records"].get(identity, {})
 	if not record.is_empty() and not H.matches(record, animal, result["recipe"]):
-		return {"error": "Art oder Körper des Milchtieres hat sich geändert."}
+		return {"error": "Art oder Körper des Tieres hat sich geändert."}
 	var actor: Node3D = result["actor"]
 	if animal["order"] not in ["wait", "home"] or actor.global_position.distance_to(Space.resolve(controller, p["position"])) > 1.8:
 		return {"error": "Das Tier muss am Tierplatz bleiben."}
@@ -66,6 +66,24 @@ func release(pen_id: String) -> bool:
 	if not problem.is_empty():
 		controller.status = problem
 		return false
+	return controller._save_economy(before)
+
+func change_site(pen_id: String) -> bool:
+	if not controller.is_active(): return false
+	var data: Dictionary = controller.village()
+	var p: Dictionary = H.pen(data, pen_id)
+	if p.is_empty(): return false
+	if p.animal_id != "":
+		controller.status = "Löse zuerst die Tierzuordnung."
+		return false
+	for member: Dictionary in data.members:
+		if member.care_pen_id == pen_id:
+			controller.status = "Warte, bis Futter und Wasser zurückgebracht wurden."
+			return false
+	var before: Dictionary = data.duplicate(true)
+	# Same footprint and material cost. Reuse the paid place without new IDs,
+	# moving trough credits or discarding old receipts and collected products.
+	p.kind = "pen" if p.get("kind", "pen") == "laying_site" else "laying_site"
 	return controller._save_economy(before)
 
 func cargo_target(member: Dictionary) -> Vector3:
@@ -122,8 +140,8 @@ func tick(delta: float) -> void:
 			durable = H.advance(data, p, minf(delta, 0.25)) or durable
 	for identity: String in data["husbandry"]["records"]:
 		var record: Dictionary = data["husbandry"]["records"][identity]
-		# Already produced milk survives disappearance of its source animal.
-		if int(record["pending_milk"]) > 0 and not controller.navigation.route(controller.anchor(), Space.resolve(controller, record["pickup"])).is_empty():
+		# Already produced resources survives disappearance of its source animal.
+		if H.pending(record) > 0 and not controller.navigation.route(controller.anchor(), Space.resolve(controller, record["pickup"])).is_empty():
 			durable = H.offer(data, identity) or durable
 	if durable and not controller._save_economy(before):
 		retry = 5.0
@@ -138,10 +156,12 @@ func description(p: Dictionary) -> String:
 	var status: String = result["error"]
 	if status.is_empty():
 		var record: Dictionary = controller.village()["husbandry"]["records"][p["animal_id"]]
-		if int(record["pending_milk"]) > 0:
-			status = "Milch bereit · Abholung wartet auf Lagerplatz."
+		var recipe: Dictionary = H.production_recipe(record)
+		var title: String = H.E.TITLES[recipe.resource_id]
+		if H.pending(record) > 0:
+			status = title + " bereit · Abholung wartet auf Lagerplatz."
 		elif float(p["food"]) <= 0 or float(p["water"]) <= 0:
-			status = "Milchproduktion wartet auf Futter und Wasser."
+			status = title + "produktion wartet auf Futter und Wasser."
 		else:
-			status = "Nächste Milch in %d s · %s Liter je Intervall." % [ceili(float(record["recipe"]["milk_interval"]) - float(record["clock"])), str(record["recipe"]["milk_yield"])]
+			status = "%s in %d s · %s %s je Intervall." % [title, ceili(float(recipe.interval) - float(record.clock)), str(recipe["yield"]), "Stück" if recipe.resource_id == "eggs" else "Liter"]
 	return "Futter %.1f / 4 · Wasser %.1f / 8 Liter\n%s" % [p["food"], p["water"], status]

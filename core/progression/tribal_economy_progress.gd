@@ -8,7 +8,7 @@ const JOBS: Dictionary = {"provider": ["food", "water"], "forester": ["wood"], "
 const SOURCES: Dictionary = {"water": "well", "wood": "forester", "stone": "quarry", "fiber": "fiberbed"}
 
 static func supported(village: Dictionary) -> bool:
-	return Rules.is_integer(village.get("schema"), 3, 6) and village.get("economy") is Dictionary and int(village["economy"].get("schema", 0)) == 1
+	return Rules.is_integer(village.get("schema"), 3, 6) and village.get("economy") is Dictionary and int(village["economy"].get("schema", 0)) in [1, Economy.SCHEMA]
 
 static func create(village: Dictionary) -> Dictionary:
 	return {"schema": SCHEMA, "delivery_cursor": int(village["delivered"]), "meal_cursor": int(village["meals"]),
@@ -21,7 +21,7 @@ static func observe_work(record: Dictionary, before: Dictionary, after: Dictiona
 	var picked: String = member["cargo"]
 	# An entire cycle must be witnessed: work at a renewable workplace, pickup,
 	# and later delivery. Legacy cargo and changing professions earn no free work.
-	if int(after["delivered"]) >= int(record["delivery_cursor"]) and cargo.is_empty() and not picked.is_empty() and picked in Economy.RESOURCES and picked != "milk":
+	if int(after["delivered"]) >= int(record["delivery_cursor"]) and cargo.is_empty() and not picked.is_empty() and picked in Economy.RESOURCES and not Economy.Resources.uses_batches(picked):
 		var profession: String = previous["profession"]
 		if JOBS.has(profession) and picked in JOBS[profession] and previous["order"] == Economy.JOB_ORDER[profession] and _renewable(after, picked) and int(after["deposits"][picked]["remaining"]) == int(before["deposits"][picked]["remaining"]) - 1:
 			record["pending"][actor] = {"resource": picked, "profession": profession, "source_id": after["deposits"][picked]["id"]}
@@ -82,7 +82,7 @@ static func progress(record: Dictionary, village: Dictionary) -> Dictionary:
 		"professions": {"met": ready_jobs >= 2 and workers.size() >= 2, "completed": ready_jobs, "text": ", ".join(job_details)}}
 
 static func _food(village: Dictionary) -> int:
-	return int(village["stock"].get("food", 0)) + int(village["stock"].get("milk", 0))
+	return int(village["stock"].get("food", 0)) + int(village["stock"].get("milk", 0)) + int(village["stock"].get("eggs", 0))
 
 static func _renewable(village: Dictionary, resource: String) -> bool:
 	if resource == "food":

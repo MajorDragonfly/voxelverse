@@ -253,7 +253,7 @@ func free_shelter(position: Vector3, data: Dictionary, kind: String) -> bool:
 		points.append(Space.resolve(home, p["position"]))
 		points.append(Space.resolve(home, p["entrance"]))
 	for record: Dictionary in data.get("husbandry", {}).get("records", {}).values():
-		if int(record["pending_milk"]) > 0:
+		if preload("res://world/tribe/village_husbandry.gd").pending(record) > 0:
 			points.append(Space.resolve(home, record["pickup"]))
 	for batch: Dictionary in data["economy"]["incoming"]:
 		points.append(Space.resolve(home, batch["position"]))
