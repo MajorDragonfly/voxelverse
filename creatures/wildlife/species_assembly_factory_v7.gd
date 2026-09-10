@@ -176,6 +176,10 @@ static func _add_random_part(
 	required: bool
 ) -> void:
 	var parts: Array = PartLibrary.get_parts_for_category(category_id)
+	# V7 regenerates some species from a seed. Keep its four original mouth
+	# choices and RNG range stable when the editor catalog gains model variants.
+	if category_id == PartLibrary.CATEGORY_MOUTH:
+		parts = parts.filter(func(part: Dictionary) -> bool: return part.id in PartLibrary.MouthCatalog.LEGACY_IDS)
 	if parts.is_empty():
 		return
 	if not required and random.randf() < 0.12:

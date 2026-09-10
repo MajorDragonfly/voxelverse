@@ -39,6 +39,8 @@ Vor Beginn den aktuellen Branch-/PR-Stand prüfen und genau einen Teilauftrag re
 | ARCH-26/27 | Mehrere eigene Siedlungen und tatsächliche Transporte | Erst benötigte Regions-/Ortsverträge liefern; keine zweiten Vorrats- oder Tierdienste |
 | BP-COMMUNITY.3 | Dienst-/Uploadumfang für den Community-Katalog festlegen und danach umsetzen | Lokale Bibliothek ist vorhanden; Onlineveröffentlichung, Galerie und weitere Bauplanarten bleiben offen |
 
+**ARCH-24-Fachübergabe dieser Runde:** `agent/arch24-mouth-models-2026-09-10` liefert Hundeschnauze, Krokodilschnauze und Oktopusmund; [Bericht](WORK_ARCH24_MOUTH_MODELS.md). Diese drei Modelle nicht erneut beginnen. Rüssel bleibt ein eigenes Kopfmodul mit getrenntem Mundanschluss; weitere Schnauzen sowie gespeicherte Teilrevisionen und aktive Kiefer-/Greiferöffnung bleiben offen. Gemeinsame Änderungen: `ProgressionService` ergänzt normale Freischalteinträge für Modellalternativen; die Testregistry erhält genau einen Test. ARCH-06/07/22 wurden nicht übernommen.
+
 ## Regeln für Übergaben
 
 Jedes Fachpaket nennt Basis, exakten Commit, Vertragsversionen, geänderte Dateien, tatsächlich ausgeführte Tests und verbleibende Grenzen. Neue Tests genau einmal in `tools/validation/contracts.json` eintragen. Die gemeinsame Integration prüft betroffene Verbraucher erneut; Einzelbranch-Ergebnisse ersetzen keine gemeinsame Abnahme.
