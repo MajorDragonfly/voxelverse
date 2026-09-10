@@ -1178,6 +1178,181 @@
       "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "Weltkarte",
+      "de": "Weltkarte",
+      "en": "World map"
+    },
+    {
+      "key": "Schließen",
+      "de": "Schließen",
+      "en": "Close"
+    },
+    {
+      "key": "Karte schließen · Esc",
+      "de": "Karte schließen · Esc",
+      "en": "Close map · Esc"
+    },
+    {
+      "key": "Weiter herauszoomen",
+      "de": "Weiter herauszoomen",
+      "en": "Zoom out"
+    },
+    {
+      "key": "Näher heranzoomen",
+      "de": "Näher heranzoomen",
+      "en": "Zoom in"
+    },
+    {
+      "key": "Zu mir",
+      "de": "Zu mir",
+      "en": "Find me"
+    },
+    {
+      "key": "Erkundetes",
+      "de": "Erkundetes",
+      "en": "Explored area"
+    },
+    {
+      "key": "Orte",
+      "de": "Orte",
+      "en": "Places"
+    },
+    {
+      "key": "Zur Karte",
+      "de": "Zur Karte",
+      "en": "Back to map"
+    },
+    {
+      "key": "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir",
+      "de": "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir",
+      "en": "Drag with the left mouse button to pan · Scroll wheel to zoom\nArrow keys: pan · + / −: zoom · Home: find me"
+    },
+    {
+      "key": "Bekannte Orte",
+      "de": "Bekannte Orte",
+      "en": "Known places"
+    },
+    {
+      "key": "Eigene",
+      "de": "Eigene",
+      "en": "Own"
+    },
+    {
+      "key": "Freunde",
+      "de": "Freunde",
+      "en": "Friends"
+    },
+    {
+      "key": "Eigenes Nest",
+      "de": "Eigenes Nest",
+      "en": "Own nest"
+    },
+    {
+      "key": "Heimat",
+      "de": "Heimat",
+      "en": "Home"
+    },
+    {
+      "key": "Befreundet",
+      "de": "Befreundet",
+      "en": "Friendly"
+    },
+    {
+      "key": "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen.",
+      "de": "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen.",
+      "en": "Your nests and known places of friendly creatures appear here."
+    },
+    {
+      "key": "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren",
+      "de": "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren",
+      "en": "Drag to pan · Scroll wheel to zoom · Select a place to center the map"
+    },
+    {
+      "key": "ATLAS_SHIFT_M",
+      "de": "Umschalt+M",
+      "en": "Shift+M"
+    },
+    {
+      "key": "ATLAS_OWN_NEST",
+      "de": "Eigenes Nest",
+      "en": "Own nest"
+    },
+    {
+      "key": "ATLAS_SPECIES_HOME",
+      "de": "Heimat deiner Spezies",
+      "en": "Home of your species"
+    },
+    {
+      "key": "ATLAS_FRIEND_HABITAT",
+      "de": "Befreundete Kreatur · Lebensraum",
+      "en": "Friendly creature · Habitat"
+    },
+    {
+      "key": "ATLAS_NAMED_HABITAT",
+      "de": "{name} · Lebensraum",
+      "en": "{name} · Habitat"
+    },
+    {
+      "key": "ATLAS_DISTANCE_M",
+      "de": "{distance} m",
+      "en": "{distance} m"
+    },
+    {
+      "key": "ATLAS_DISTANCE_KM",
+      "de": "{distance} km",
+      "en": "{distance} km"
+    },
+    {
+      "key": "ATLAS_EQUATOR_WIDTH",
+      "de": "Breite am Äquator: {distance}",
+      "en": "Equatorial width: {distance}"
+    },
+    {
+      "key": "ATLAS_WIDTH",
+      "de": "Kartenbreite: {distance}",
+      "en": "Map width: {distance}"
+    },
+    {
+      "key": "ATLAS_UNEXPLORED",
+      "de": "Dunkle Flächen sind noch nicht erkundet.",
+      "en": "Dark areas have not been explored yet."
+    },
+    {
+      "key": "ATLAS_COLLECTION_FULL",
+      "de": "Die Kartensammlung ist voll. Bereits erkundete Gebiete bleiben erhalten.",
+      "en": "The map collection is full. Previously explored areas are preserved."
+    },
+    {
+      "key": "ATLAS_OWN_DETAIL",
+      "de": "{name} · Eigene Spezies",
+      "en": "{name} · Your species"
+    },
+    {
+      "key": "ATLAS_FRIEND_DETAIL",
+      "de": "{name} · Bekannter Ort einer befreundeten Kreatur",
+      "en": "{name} · Known place of a friendly creature"
+    },
+    {
+      "key": "ATLAS_BODY_COLLECTION_FULL",
+      "de": "Die Sammlung erkundeter Himmelskörper ist voll.",
+      "en": "The collection of explored celestial bodies is full."
+    },
+    {
+      "key": "ATLAS_INVALID_RECORD",
+      "de": "Diese Erkundungskarte kann nicht gelesen werden. Die gespeicherten Daten bleiben erhalten.",
+      "en": "This exploration map cannot be read. The saved data is preserved."
+    },
+    {
+      "key": "ATLAS_SURFACE_MISMATCH",
+      "de": "Die gespeicherte Karte passt nicht zu dieser Oberfläche.",
+      "en": "The saved map does not match this surface."
+    },
+    {
+      "key": "ATLAS_UNAVAILABLE",
+      "de": "Die Weltkarte ist gerade nicht verfügbar.",
+      "en": "The world map is currently unavailable."
     }
   ]
 }

@@ -705,3 +705,108 @@ msgstr "Continue the adventure on a spherical planet. Your previous save is pres
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "Weltkarte"
+msgstr "World map"
+
+msgid "Schließen"
+msgstr "Close"
+
+msgid "Karte schließen · Esc"
+msgstr "Close map · Esc"
+
+msgid "Weiter herauszoomen"
+msgstr "Zoom out"
+
+msgid "Näher heranzoomen"
+msgstr "Zoom in"
+
+msgid "Zu mir"
+msgstr "Find me"
+
+msgid "Erkundetes"
+msgstr "Explored area"
+
+msgid "Orte"
+msgstr "Places"
+
+msgid "Zur Karte"
+msgstr "Back to map"
+
+msgid "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir"
+msgstr "Drag with the left mouse button to pan · Scroll wheel to zoom\nArrow keys: pan · + / −: zoom · Home: find me"
+
+msgid "Bekannte Orte"
+msgstr "Known places"
+
+msgid "Eigene"
+msgstr "Own"
+
+msgid "Freunde"
+msgstr "Friends"
+
+msgid "Eigenes Nest"
+msgstr "Own nest"
+
+msgid "Heimat"
+msgstr "Home"
+
+msgid "Befreundet"
+msgstr "Friendly"
+
+msgid "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen."
+msgstr "Your nests and known places of friendly creatures appear here."
+
+msgid "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren"
+msgstr "Drag to pan · Scroll wheel to zoom · Select a place to center the map"
+
+msgid "ATLAS_SHIFT_M"
+msgstr "Shift+M"
+
+msgid "ATLAS_OWN_NEST"
+msgstr "Own nest"
+
+msgid "ATLAS_SPECIES_HOME"
+msgstr "Home of your species"
+
+msgid "ATLAS_FRIEND_HABITAT"
+msgstr "Friendly creature · Habitat"
+
+msgid "ATLAS_NAMED_HABITAT"
+msgstr "{name} · Habitat"
+
+msgid "ATLAS_DISTANCE_M"
+msgstr "{distance} m"
+
+msgid "ATLAS_DISTANCE_KM"
+msgstr "{distance} km"
+
+msgid "ATLAS_EQUATOR_WIDTH"
+msgstr "Equatorial width: {distance}"
+
+msgid "ATLAS_WIDTH"
+msgstr "Map width: {distance}"
+
+msgid "ATLAS_UNEXPLORED"
+msgstr "Dark areas have not been explored yet."
+
+msgid "ATLAS_COLLECTION_FULL"
+msgstr "The map collection is full. Previously explored areas are preserved."
+
+msgid "ATLAS_OWN_DETAIL"
+msgstr "{name} · Your species"
+
+msgid "ATLAS_FRIEND_DETAIL"
+msgstr "{name} · Known place of a friendly creature"
+
+msgid "ATLAS_BODY_COLLECTION_FULL"
+msgstr "The collection of explored celestial bodies is full."
+
+msgid "ATLAS_INVALID_RECORD"
+msgstr "This exploration map cannot be read. The saved data is preserved."
+
+msgid "ATLAS_SURFACE_MISMATCH"
+msgstr "The saved map does not match this surface."
+
+msgid "ATLAS_UNAVAILABLE"
+msgstr "The world map is currently unavailable."

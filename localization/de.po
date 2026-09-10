@@ -705,3 +705,108 @@ msgstr "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spi
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+
+msgid "Weltkarte"
+msgstr "Weltkarte"
+
+msgid "Schließen"
+msgstr "Schließen"
+
+msgid "Karte schließen · Esc"
+msgstr "Karte schließen · Esc"
+
+msgid "Weiter herauszoomen"
+msgstr "Weiter herauszoomen"
+
+msgid "Näher heranzoomen"
+msgstr "Näher heranzoomen"
+
+msgid "Zu mir"
+msgstr "Zu mir"
+
+msgid "Erkundetes"
+msgstr "Erkundetes"
+
+msgid "Orte"
+msgstr "Orte"
+
+msgid "Zur Karte"
+msgstr "Zur Karte"
+
+msgid "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir"
+msgstr "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir"
+
+msgid "Bekannte Orte"
+msgstr "Bekannte Orte"
+
+msgid "Eigene"
+msgstr "Eigene"
+
+msgid "Freunde"
+msgstr "Freunde"
+
+msgid "Eigenes Nest"
+msgstr "Eigenes Nest"
+
+msgid "Heimat"
+msgstr "Heimat"
+
+msgid "Befreundet"
+msgstr "Befreundet"
+
+msgid "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen."
+msgstr "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen."
+
+msgid "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren"
+msgstr "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren"
+
+msgid "ATLAS_SHIFT_M"
+msgstr "Umschalt+M"
+
+msgid "ATLAS_OWN_NEST"
+msgstr "Eigenes Nest"
+
+msgid "ATLAS_SPECIES_HOME"
+msgstr "Heimat deiner Spezies"
+
+msgid "ATLAS_FRIEND_HABITAT"
+msgstr "Befreundete Kreatur · Lebensraum"
+
+msgid "ATLAS_NAMED_HABITAT"
+msgstr "{name} · Lebensraum"
+
+msgid "ATLAS_DISTANCE_M"
+msgstr "{distance} m"
+
+msgid "ATLAS_DISTANCE_KM"
+msgstr "{distance} km"
+
+msgid "ATLAS_EQUATOR_WIDTH"
+msgstr "Breite am Äquator: {distance}"
+
+msgid "ATLAS_WIDTH"
+msgstr "Kartenbreite: {distance}"
+
+msgid "ATLAS_UNEXPLORED"
+msgstr "Dunkle Flächen sind noch nicht erkundet."
+
+msgid "ATLAS_COLLECTION_FULL"
+msgstr "Die Kartensammlung ist voll. Bereits erkundete Gebiete bleiben erhalten."
+
+msgid "ATLAS_OWN_DETAIL"
+msgstr "{name} · Eigene Spezies"
+
+msgid "ATLAS_FRIEND_DETAIL"
+msgstr "{name} · Bekannter Ort einer befreundeten Kreatur"
+
+msgid "ATLAS_BODY_COLLECTION_FULL"
+msgstr "Die Sammlung erkundeter Himmelskörper ist voll."
+
+msgid "ATLAS_INVALID_RECORD"
+msgstr "Diese Erkundungskarte kann nicht gelesen werden. Die gespeicherten Daten bleiben erhalten."
+
+msgid "ATLAS_SURFACE_MISMATCH"
+msgstr "Die gespeicherte Karte passt nicht zu dieser Oberfläche."
+
+msgid "ATLAS_UNAVAILABLE"
+msgstr "Die Weltkarte ist gerade nicht verfügbar."

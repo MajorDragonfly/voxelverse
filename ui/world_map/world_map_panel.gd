@@ -1,4 +1,6 @@
 extends CanvasLayer
+const Text = preload("res://core/localization/ui_text.gd")
+const Presentation = preload("res://ui/world_map/atlas_presentation.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Profile = preload("res://core/map/minimap_profile.gd")
 const ProjectionModel = preload("res://core/map/atlas_projection.gd")
@@ -59,7 +61,7 @@ func _ready() -> void:
 	_layout()
 
 func shortcut_text() -> String:
-	return "M" if _plain_m_available() else "Umschalt+M"
+	return "M" if _plain_m_available() else Text.text("ATLAS_SHIFT_M")
 
 func _plain_m_available() -> bool:
 	for action: StringName in InputMap.get_actions():
@@ -119,7 +121,7 @@ func _build() -> void:
 	var filters := HBoxContainer.new()
 	_sidebar.add_child(filters)
 	for own in [true, false]:
-		var button := _button(filters, "Eigene" if own else "Freunde", func() -> void: pass)
+		var button := _button(filters, "Eigene" if own else "Freunde", func() -> void: pass, "AtlasOwnFilter" if own else "AtlasFriendFilter")
 		button.toggle_mode = true
 		button.button_pressed = true
 		button.toggled.connect(func(enabled: bool) -> void:
@@ -149,6 +151,8 @@ func _build() -> void:
 	_scale_label = Style.label(_column, "", 18, Style.MUTED)
 	_detail = Style.paragraph(_column, "Dunkle Flächen sind noch nicht erkundet.", 18)
 	_detail.max_lines_visible = 2
+	_detail.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	_scale_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_help = Style.label(_column, "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren", 16, Style.MUTED)
 	_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
@@ -166,8 +170,8 @@ func open_map() -> bool:
 	tracker.update_exploration()
 	if tracker.snapshot.is_empty() or tracker.atlas.data.is_empty():
 		if not tracker.problem.is_empty():
-			if is_instance_valid(lab): lab.status.text = tracker.problem
-			elif is_instance_valid(player) and player.has_method("show_gameplay_message"): player.show_gameplay_message(tracker.problem)
+			if is_instance_valid(lab): lab.status.text = Presentation.problem_text(tracker.problem_code)
+			elif is_instance_valid(player) and player.has_method("show_gameplay_message"): player.show_gameplay_message(Presentation.problem_text(tracker.problem_code))
 		return false
 	var data: Dictionary = tracker.snapshot
 	if not projection.configure(data.address, float(data.body_radius)): return false
@@ -258,9 +262,7 @@ func _request() -> void:
 	_canvas.explorers.clear()
 	for address: Dictionary in tracker.snapshot.get("explorers", []): _canvas.explorers.append(projection.project(address))
 	_refresh_canvas_places()
-	var sphere: bool = projection.local.mode == Cube.MODE
-	_scale_label.text = ("Breite am Äquator: " if sphere else "Kartenbreite: ") + Profile.distance_text(range_m * 2.0).replace(".", ",")
-	if tracker.atlas.full: _detail.text = "Die Kartensammlung ist voll. Bereits erkundete Gebiete bleiben erhalten."
+	_refresh_description()
 
 func zoom(direction: int, screen_point: Vector2 = Vector2(INF, INF)) -> void:
 	if not is_open: return
@@ -315,12 +317,14 @@ func _refresh_places() -> void:
 	for place: Dictionary in _places:
 		if not _place_visible(place): continue
 		shown += 1
-		var button := _button(_list, place.name, func() -> void: select_place(place.id))
+		var button := _button(_list, Presentation.place_name(place), func() -> void: select_place(place.id))
+		button.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		button.set_meta("atlas_place_id", place.id)
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.toggle_mode = true
 		button.button_pressed = place.id == _selected
-		button.tooltip_text = place.name
+		button.tooltip_text = Presentation.place_name(place)
 	if shown == 0: Style.paragraph(_list, "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen.", 18)
 	_refresh_canvas_places()
 
@@ -333,6 +337,7 @@ func _refresh_canvas_places() -> void:
 		if not _place_visible(place): continue
 		var copy: Dictionary = place.duplicate()
 		copy["position"] = projection.project(place.address)
+		copy["display_name"] = Presentation.place_name(place)
 		_canvas.places.append(copy)
 	_canvas.selected_id = _selected
 	_canvas.queue_redraw()
@@ -342,13 +347,40 @@ func select_place(id: String) -> void:
 		if place.id != id: continue
 		_selected = id
 		projection.center = projection.project(place.address)
-		_detail.text = place.name + (" · Eigene Spezies" if place.own else " · Bekannter Ort einer befreundeten Kreatur")
 		_show_list = false
 		_refresh_places()
 		_request()
 		_layout()
 		_canvas.grab_focus()
 		return
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		call_deferred("_refresh_language")
+
+func _refresh_language() -> void:
+	# Do not rebuild the list or request new terrain: selection, focus, scroll,
+	# projection and the exploration record all belong to the existing session.
+	if not is_instance_valid(_panel) or not is_instance_valid(tracker): return
+	var labels: Dictionary = {}
+	for place: Dictionary in _places: labels[place.id] = Presentation.place_name(place)
+	for child: Node in _list.get_children():
+		if child is Button and child.has_meta("atlas_place_id"):
+			child.text = labels.get(child.get_meta("atlas_place_id"), child.text)
+			child.tooltip_text = child.text
+	_refresh_canvas_places()
+	_refresh_description()
+	_layout()
+
+func _refresh_description() -> void:
+	_scale_label.text = Presentation.scale_text(range_m * 2.0, projection.local.mode == Cube.MODE)
+	var selected: Dictionary = {}
+	for place: Dictionary in _places:
+		if place.id == _selected:
+			selected = place
+			break
+	_detail.text = Presentation.detail_text(selected, tracker.atlas.full)
+	_detail.tooltip_text = _detail.text
 
 func _layout() -> void:
 	if _panel == null: return
@@ -368,6 +400,11 @@ func _layout() -> void:
 	_sidebar.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _small else Control.SIZE_FILL
 	_sidebar.custom_minimum_size.x = 0 if _small else 280
 	_places_toggle.visible = _small
+	# The compact place list needs at least one complete action row. Map scale
+	# and selected-place detail return with the map after choosing a place.
+	_scroll.custom_minimum_size.y = 44 * _font_scale
+	_scale_label.visible = not (_small and _show_list)
+	_detail.visible = not (_small and _show_list)
 	_places_toggle.text = "Zur Karte" if _show_list else "Orte"
 	_help.visible = pixels.y >= 720
 

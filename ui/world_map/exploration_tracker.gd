@@ -13,6 +13,8 @@ var _last_cells: Array[Vector3i] = []
 var _places_dirty: bool = true
 var _place_timer: float = 0.0
 var problem: String = ""
+# Stable presentation result; detailed validator diagnostics remain in problem.
+var problem_code: String = ""
 
 func _ready() -> void:
 	name = "ExplorationTracker"
@@ -25,6 +27,8 @@ func _ready() -> void:
 	get_node("/root/ProgressionService").behavior_changed.connect(func() -> void: _places_dirty = true)
 
 func invalidate(_value: Variant = null) -> void:
+	problem = ""
+	problem_code = ""
 	_record = {}
 	snapshot = {}
 	atlas.data = {}
@@ -42,6 +46,8 @@ func _process(delta: float) -> void:
 
 func update_exploration(allow_paused: bool = false) -> void:
 	if get_tree().paused and not allow_paused: return
+	problem = ""
+	problem_code = ""
 	var value: Dictionary = MiniSource.laboratory_snapshot(lab) if is_instance_valid(lab) else Source.campaign_snapshot(player, get_tree())
 	if value.is_empty():
 		snapshot = {}
@@ -59,6 +65,7 @@ func update_exploration(allow_paused: bool = false) -> void:
 		key = "exploration_atlas"
 	if not records.has(key):
 		if is_instance_valid(lab) and records.size() >= 256:
+			problem_code = "atlas.collection_full"
 			problem = "Die Sammlung erkundeter Himmelskörper ist voll."
 			snapshot = {}
 			return
@@ -67,8 +74,12 @@ func update_exploration(allow_paused: bool = false) -> void:
 	# Bind once per actual record instance; a loaded record can share body/seed.
 	if not is_same(candidate, _record):
 		problem = Atlas.validate(candidate, value.address.body_id)
-		if not problem.is_empty(): snapshot = {}; return
+		if not problem.is_empty():
+			problem_code = "atlas.invalid_record"
+			snapshot = {}
+			return
 		if candidate.mode != value.address.mode or float(candidate.radius) != float(value.body_radius):
+			problem_code = "atlas.surface_mismatch"
 			problem = "Karte und Oberfläche passen nicht zusammen."
 			snapshot = {}
 			return
