@@ -22,16 +22,22 @@ var last_slice_cells: int = 0
 var _cursor: int = 0
 var _phase: int = 0
 var _body_id: String = ""
+var _building_graph := AStar3D.new()
+var _keep_graph: bool = false
 
-func begin(controller: Node, anchor: Vector3, data: Dictionary = {}, extent: int = RADIUS) -> int:
+func begin(controller: Node, anchor: Vector3, data: Dictionary = {}, extent: int = RADIUS, keep_current: bool = false) -> int:
+	var state: Node = controller.get_node_or_null("/root/GameState")
+	var previous: AStar3D = graph if keep_current and is_ready() and home == controller and origin.distance_to(anchor) < 0.01 and _radius == clampi(extent, RADIUS, 20) and shelters == Housing.obstacles(data) and (state == null or state.active_body_id == _body_id) else null
 	cancel()
+	if previous != null:
+		graph = previous
+		_keep_graph = true
 	shelters = Housing.obstacles(data)
 	home = controller
 	origin = anchor
 	_radius = clampi(extent, RADIUS, 20)
 	_spacing = 0.5 if _radius > RADIUS else 1.0
 	_samples = roundi(float(_radius) / _spacing)
-	var state: Node = home.get_node_or_null("/root/GameState")
 	_body_id = state.active_body_id if state != null else ""
 	pending = true
 	return generation
@@ -41,7 +47,12 @@ func cancel() -> void:
 	pending = false
 	_cursor = 0
 	_phase = 0
-	graph.clear()
+	graph = AStar3D.new()
+	_building_graph = AStar3D.new()
+	_keep_graph = false
+
+func is_ready() -> bool:
+	return graph.get_point_count() > 0 and (not pending or _keep_graph)
 
 func advance(max_cells: int = MAX_CELLS_PER_SLICE, usecs: int = SLICE_USECS) -> bool:
 	last_slice_cells = 0
@@ -66,6 +77,10 @@ func advance(max_cells: int = MAX_CELLS_PER_SLICE, usecs: int = SLICE_USECS) -> 
 			_cursor = 0
 			_phase += 1
 			if _phase == 2:
+				# Publish only complete results. Soft obstacle retries retain the
+				# last verified graph; every actual step still tests live collision.
+				graph = _building_graph
+				_keep_graph = false
 				pending = false
 				completed_generation = generation
 		if Time.get_ticks_usec() - started >= maxi(1, usecs): break
@@ -91,11 +106,11 @@ func _sample_point(x: int, z: int) -> void:
 		return
 	if not home._clear_space(position + Space.up(home, position) * 0.72):
 		return
-	graph.add_point(_id(x, z), position)
+	_building_graph.add_point(_id(x, z), position)
 
 func _connect_point(x: int, z: int) -> void:
 	var id: int = _id(x, z)
-	if not graph.has_point(id):
+	if not _building_graph.has_point(id):
 		return
 	var offsets: Array[Vector2i] = [Vector2i(1, 0), Vector2i(0, 1)]
 	if _spacing < 1.0:
@@ -108,24 +123,24 @@ func _connect_point(x: int, z: int) -> void:
 		var other: int = _id(x + offset.x, z + offset.y)
 		# Loaded voxel treads can differ by 0.50000... m after collision
 		# interpolation. Preserve half-metre links within the 0.55 m step budget.
-		if graph.has_point(other) and absf((graph.get_point_position(id) - graph.get_point_position(other)).dot(Space.up(home, origin))) <= 0.52:
+		if _building_graph.has_point(other) and absf((_building_graph.get_point_position(id) - _building_graph.get_point_position(other)).dot(Space.up(home, origin))) <= 0.52:
 			# Midpoint clearance catches tree trunks between grid samples.
-			var middle: Vector3 = graph.get_point_position(id).lerp(graph.get_point_position(other), 0.5)
+			var middle: Vector3 = _building_graph.get_point_position(id).lerp(_building_graph.get_point_position(other), 0.5)
 			var floor_hit: Dictionary = home._floor_hit(middle)
 			if floor_hit.is_empty():
 				continue
 			# Stairs are discontinuous. The averaged endpoint height can
 			# put a standing capsule inside the higher tread; use its real floor.
 			var floor_position: Vector3 = floor_hit["position"]
-			if absf((floor_position - graph.get_point_position(id)).dot(Space.up(home, floor_position))) <= 0.56 and absf((floor_position - graph.get_point_position(other)).dot(Space.up(home, floor_position))) <= 0.56 and home._clear_space(floor_position + Space.up(home, floor_position) * 0.78):
-				graph.connect_points(id, other)
+			if absf((floor_position - _building_graph.get_point_position(id)).dot(Space.up(home, floor_position))) <= 0.56 and absf((floor_position - _building_graph.get_point_position(other)).dot(Space.up(home, floor_position))) <= 0.56 and home._clear_space(floor_position + Space.up(home, floor_position) * 0.78):
+				_building_graph.connect_points(id, other)
 
 
 func _id(x: int, z: int) -> int:
 	return (z + _samples) * (_samples * 2 + 1) + x + _samples
 
 func route(from: Vector3, to: Vector3) -> PackedVector3Array:
-	if pending or graph.get_point_count() == 0:
+	if not is_ready():
 		return PackedVector3Array()
 	if _occupied(to):
 		return PackedVector3Array()
@@ -146,7 +161,7 @@ func route(from: Vector3, to: Vector3) -> PackedVector3Array:
 	return prefix
 
 func snap(position: Vector3) -> Vector3:
-	return graph.get_point_position(graph.get_closest_point(position)) if not pending and graph.get_point_count() > 0 else Vector3.INF
+	return graph.get_point_position(graph.get_closest_point(position)) if is_ready() else Vector3.INF
 
 func sites() -> Dictionary:
 	var result: Dictionary = {"huts": []}
@@ -254,3 +269,5 @@ func free_shelter(position: Vector3, data: Dictionary, kind: String) -> bool:
 func surface_origin_shifted(shift: Vector3) -> void:
 	origin += shift
 	for id: int in graph.get_point_ids(): graph.set_point_position(id, graph.get_point_position(id) + shift)
+	if _building_graph != graph:
+		for id: int in _building_graph.get_point_ids(): _building_graph.set_point_position(id, _building_graph.get_point_position(id) + shift)

@@ -94,7 +94,7 @@ func _until_work(predicate: Callable, tribe: Node, milliseconds: int) -> Diction
 	var elapsed := {"work_ms": 0, "navigation_ms": 0}
 	var last: int = Time.get_ticks_msec()
 	while not predicate.call() and elapsed.work_ms < milliseconds and elapsed.navigation_ms < 45000:
-		var key: String = "navigation_ms" if tribe.navigation.pending else "work_ms"
+		var key: String = "work_ms" if tribe.navigation.is_ready() else "navigation_ms"
 		await tree.process_frame
 		var now: int = Time.get_ticks_msec()
 		elapsed[key] += now - last

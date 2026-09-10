@@ -47,6 +47,8 @@ func _run() -> void:
 	data.members[2].order = "wait"
 	data.members[2].blocked = true
 	_expect(saves.save_now(), "Departure fixture violated conservation.")
+	tribe.navigation.begin(home, tribe.anchor(), tribe.village(), tribe.navigation_extent(), true)
+	_expect(tribe.navigation.pending, "Departure did not start with a pending route refresh.")
 	var old_scene_id: int = tree.current_scene.get_instance_id()
 	var departed: bool = await flow.travel_to_planet(23757, 0, 15838)
 	_expect(departed, "Departure failed: " + saves.last_error)
@@ -105,7 +107,7 @@ func _run() -> void:
 	_expect(state.active_body_id == a and state.campaign.data.bodies.size() == 2, "Failed destination did not restore source.")
 	if not food_key.is_empty():
 		var restored_food: Dictionary = preload("res://world/resources/plants/foraging_state.gd").plant(state, a, food_key, 4.0)
-		_expect(restored_food.get("remaining") == 0.0 and restored_food.get("regrow_at") == regrow_at, "Failed target restored an older regional root and lost the last harvest.")
+		_expect(restored_food.get("remaining") == 0.0 and absf(float(restored_food.get("regrow_at", -1.0)) - regrow_at) < 0.000001, "Failed target restored an older regional root and lost the last harvest: " + str({"expected_regrow_at": regrow_at, "restored": restored_food}))
 	flow.toggle_pause()
 	_expect(saves.save_now(), "Return checkpoint failed: " + saves.last_error)
 	var expected: Dictionary = {"path": path, "body_id": a, "clock": state.campaign.data.elapsed_seconds, "village": state.get_current_body().tribe}

@@ -389,7 +389,7 @@ func _resolve_order(order: String, success: bool) -> void:
 	panel.refresh()
 
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
-	if navigation.pending and order in ["move"] + Economy.STATIONS.keys() + Housing.BUILDS:
+	if not navigation.is_ready() and order in ["move"] + Economy.STATIONS.keys() + Housing.BUILDS:
 		status = "Die Dorfwege werden geprüft. Bitte einen Moment warten."
 		return false
 	if not is_active() or selected.is_empty() or order not in Model.ORDERS + Economy.ORDERS + ["resume", "profession"]:
@@ -483,8 +483,11 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 
 func _physics_process(delta: float) -> void:
 	if navigation.pending:
-		navigation.advance()
-		return
+		if navigation.advance():
+			_routes.clear()
+			_goals.clear()
+			_route_retry = 2.0
+		if not navigation.is_ready(): return
 	if not is_active():
 		return
 	var simulation_delta: float = _state.simulation_delta(delta)
@@ -501,17 +504,17 @@ func _physics_process(delta: float) -> void:
 	_route_retry -= delta
 	if _route_retry <= 0:
 		_route_retry = 2.0
-		var blocked: bool = false
-		blocked = neighbors.has_blocked()
+		var blocked: bool = not navigation.is_ready() or neighbors.has_blocked()
 		for member: Dictionary in village()["members"]:
 			blocked = blocked or bool(member["blocked"])
-		if blocked:
-			navigation.begin(home, anchor(), village(), navigation_extent())
-			_routes.clear()
-			_goals.clear()
-	if navigation.pending: return
+		if blocked and not navigation.pending:
+			# A single stalled patrol must not suspend everybody's work while
+			# the same topology is checked again. Hard building changes still
+			# discard old routes through begin()'s default mode.
+			navigation.begin(home, anchor(), village(), navigation_extent(), true)
+	if not navigation.is_ready(): return
 	for member: Dictionary in village()["members"]:
-		if navigation.pending: break
+		if not navigation.is_ready(): break
 		var actor: CharacterBody3D = actors[member["id"]]
 		Work.prepare(village(), member, simulation_delta)
 		var order: String = _effective_order(member)
@@ -734,10 +737,32 @@ func _work_rate(member: Dictionary) -> float:
 	var legacy: Dictionary = progression.get_behavior_effect("group_cooperation", 1)
 	return float(legacy["value"]) * (0.5 if minf(float(member["hunger"]), float(member["hydration"])) < 20.0 else 1.0)
 
+func finish_navigation_for_departure() -> bool:
+	if not _active or _transaction or _body_id != _state.active_body_id: return false
+	var stamp: int = navigation.generation
+	var id: String = _state.active_body_id
+	var rebuilding: bool = navigation.pending
+	var deadline: int = Time.get_ticks_msec() + 45000
+	# SessionFlow pauses the tree but keeps source collision registered until
+	# this preflight ends. PROCESS_MODE_DISABLED would remove those shapes.
+	while navigation.pending:
+		if Time.get_ticks_msec() >= deadline: return false
+		navigation.advance()
+		if id != _state.active_body_id or stamp != navigation.generation: return false
+		if navigation.pending: await get_tree().physics_frame
+	if not navigation.is_ready(): return false
+	if rebuilding:
+		_routes.clear()
+		_goals.clear()
+		_route_retry = 2.0
+	return true
+
 func prepare_far_simulation() -> Dictionary:
 	# A frozen source is deliberately not is_active(): SessionFlow owns the
 	# handoff while loading, with physics stopped and this exact host retained.
-	if not _active or _transaction or navigation.pending or _body_id != _state.active_body_id: return {}
+	if not _active or _transaction or navigation.pending or not navigation.is_ready() or _body_id != _state.active_body_id: return {}
+	var stamp: int = navigation.generation
+	var id: String = _state.active_body_id
 	var Simulation = preload("res://world/tribe/village_simulation.gd")
 	var data: Dictionary = village()
 	var places: Array = [data.anchor]
@@ -756,8 +781,6 @@ func prepare_far_simulation() -> Dictionary:
 	if not data.project.is_empty(): places.append(data.project.get("entrance", data.project.get("position", data.anchor)))
 	var roads: Dictionary = {}
 	var visited: Dictionary = {}
-	var stamp: int = navigation.generation
-	var id: String = _state.active_body_id
 	for place: Variant in places:
 		var key: String = Simulation.key(place)
 		if visited.has(key): continue

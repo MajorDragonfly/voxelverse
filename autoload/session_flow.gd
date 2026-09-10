@@ -104,11 +104,18 @@ func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body
 	var previous_mode: int = scene.process_mode
 	var previous_autosave: bool = saves.autosave_enabled
 	_show_loading("Abreise und Dorfwege werden gesichert …")
-	get_tree().paused = false
-	scene.process_mode = Node.PROCESS_MODE_DISABLED
+	# Pause gameplay while pending route checks still need the source's real
+	# collision. Disabling the scene first removes CollisionObject3D shapes.
+	get_tree().paused = true
 	saves.autosave_enabled = false
 	var controller: Node = get_tree().get_first_node_in_group(&"tribe_controller")
-	if not await saves.prepare_body_departure(controller):
+	var navigation_ready: bool = controller == null or not controller._active or await controller.finish_navigation_for_departure()
+	if navigation_ready:
+		scene.process_mode = Node.PROCESS_MODE_DISABLED
+		get_tree().paused = false
+	else:
+		saves.last_error = "Die Dorfwege konnten noch nicht vollständig gesichert werden."
+	if not navigation_ready or not await saves.prepare_body_departure(controller):
 		scene.process_mode = previous_mode
 		saves.autosave_enabled = previous_autosave
 		loading = false
