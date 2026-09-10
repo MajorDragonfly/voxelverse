@@ -1,0 +1,2 @@
+LOCALIZATION_CATALOG_PASSED: 233 messages, 2 languages
+VALIDATION_CONTRACTS_PASSED: 127 tests, 16 contracts; scenarios={'implemented': 1, 'partial': 2, 'pending': 2} (not executed)

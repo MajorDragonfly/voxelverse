@@ -85,4 +85,13 @@ Damit sind die ersten beiden ARCH-29-Teilpunkte geliefert. Neue Größen-/Baupla
 
 ## Lokale Validierung
 
-Wird nach Abschluss der gezielten Ausführung mit dem exakten Implementierungscommit ergänzt. Keine neue Grafik- oder FPS-Abnahme Teil dieses Pakets.
+Implementierungscommit: **`91a40e9f26a42b34f10e48dedd878e2c0385bb18`**. Die Rohwerte stehen in [`evidence/arch29/results.json`](evidence/arch29/results.json); die einzelnen Godot-Logs und `tooling.log` liegen daneben. Der spätere Übergabecommit ergänzt nur diesen Nachweis. Getrackte Implementierungsdateien waren beim Lauf unverändert.
+
+- Godot **4.6.3.stable.official.7d41c59c4**, Linux, Headless. Maßgeblich ist die vollständige Enginekennung im JSON-Bericht.
+- Quellencheck: **127 Tests / 16 Fachverträge**, **233 Nachrichten / DE und EN**; offene Szenarien getrennt ausgewiesen.
+- **17 Python-Werkzeugtests bestanden**, davon zwölf neue ARCH-29-Fälle. Geprüft wurden unter anderem echte veraltete PO-/Registry-Dateien, falsche Platzhalter, fehlende Übersetzung, neue/entfernte/mehrfach zugeordnete Tests, Zukunftsversion der Registrierung und Stop vor dem Spielstart trotz `--skip-import`.
+- **Vier gezielte echte Godot-Tests bestanden**: Körperidentität samt frischem Prozess, 1.200 Regionsdatensätze, Fernsimulation samt Pause/Neustart und tatsächlicher Sprachwechsel. In `results.json` ist jeder Test seinem Fachvertrag zugeordnet.
+- Import und Assetquellenprüfung bestanden vorab mit derselben Spielbasis. Der abschließende Commitlauf verwendet den bereits vorhandenen Importcache; `--skip-import` überspringt das neue Quellengate ausdrücklich nicht.
+- CI-Konfiguration lokal geparst: Vertragsgate ist Voraussetzung und Teil des Abschlusses; vier überschneidungsfreie Gruppen mit **32/32/32/31 Tests**. Die übrigen 123 Godot-Tests wurden für diese Werkzeugänderung lokal nicht erneut ausgeführt.
+
+Die vollständige Remote-CI sowie native Pakete sind für diesen Branch bei Übergabe noch kein abgeschlossener Nachweis. Neue Grafik- oder FPS-Abnahme ist nicht Teil dieses Pakets.
