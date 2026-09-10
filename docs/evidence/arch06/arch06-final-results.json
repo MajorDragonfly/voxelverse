@@ -1,0 +1,46 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "coordinate_persistence_test",
+    "surface_adapter_contract_test",
+    "surface_adapter_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.117
+    },
+    {
+      "name": "coordinate_persistence_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.883,
+      "contract": "campaign"
+    },
+    {
+      "name": "surface_adapter_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.369,
+      "contract": "surface"
+    },
+    {
+      "name": "surface_adapter_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.36,
+      "contract": "surface"
+    }
+  ]
+}
