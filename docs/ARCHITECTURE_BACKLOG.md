@@ -147,6 +147,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-14 – Langzeitregister auslagern
 
+- **Reserviert am 10. September 2026:** `feature/arch-14-atlas-paging`, Basis `ea900f2`; Teilpaket dauerhaftes Kartenwissen mit begrenztem Kachelcache, in Arbeit. Schema-1-Karten verlustfrei übernehmen, Kacheln im vorhandenen RegionStore auslagern und Cachewechsel/Neustart sowie Schreibfehler prüfen. Tier-, Foraging- und Begegnungsregister bleiben weitere ARCH-14-Arbeit; keine Änderungen an ARCH-13-Archiven, SaveGameService oder gemeinsamer CI.
+
 - **Zuordnung:** M1h/M1f, Karten/D1. **Vorher:** ARCH-13, für Tierlaufzeit ARCH-09. **Bereich:** Ecosystem, Begegnungen, Nahrung, Atlas.
 - [ ] Die 256 `animal_records` von der Zahl aktiver Tiere trennen und regionsweise auslagern. Geänderte, gezähmte und anderweitig referenzierte Individuen behalten Identität.
 - [ ] Karten-/Orts-, Foraging- und Begegnungsgrenzen inventarisieren: Spielregel mit sichtbarer Grenze oder technischer Cache mit Paging. Kein stilles Verwerfen von Wissen oder Belohnungssperren.
