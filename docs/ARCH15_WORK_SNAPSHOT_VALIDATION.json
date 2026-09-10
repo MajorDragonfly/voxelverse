@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "work_package": "ARCH-15 synchronous work observation snapshots",
+  "source_commit": "2ac8c509c69289ee0109d73225cf29aa32b26d5b",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "date_utc": "2026-09-10",
+  "test_scope": "142 full-copy differential observations, existing far simulation and progression tests, real spherical gameplay, baseline comparison and one repeat after missing D1 animal in first run.",
+  "source_sha256": {
+    "tests/village_work_snapshot_test.gd": "49ad39b283359964cbb2bf282b0ed51a2175af867a209cdfe64e27f0a177e427",
+    "tests/village_work_snapshot_test.gd.uid": "6ca32249a3f660ef1205f79be2eec0aa6b3d4a723c9467b4e75d984af6f61379",
+    "tools/benchmark_village_work_snapshot.gd": "8b1c0df7ac833c8da39f320d9b125ad0c49664c07b4cc81e468273f77c0f4457",
+    "tools/benchmark_village_work_snapshot.gd.uid": "f0c3023912cbf41b77006f16a5d9e26828ac59b06df26ea980d8d291ae1b7f60",
+    "world/tribe/tribe_controller.gd": "0821c741d69e1511a200f0be3a835841108c09bd86ddf47e25807fb722e6d61b",
+    "world/tribe/village_simulation.gd": "cee5320f200788b9eef0c6eb2cc07b8378dad8e6734e24aca0e48b939cea7f48",
+    "world/tribe/village_work.gd": "61bec46216dd5b8a562c89a73186ed55418e4a332499472634c690c6f380df10"
+  },
+  "targeted": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 4.882
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.92
+      },
+      {
+        "name": "village_work_snapshot_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.671
+      },
+      {
+        "name": "far_simulation_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.824
+      },
+      {
+        "name": "tribal_economy_progress_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.321
+      }
+    ]
+  },
+  "snapshot_test": {
+    "passed": true,
+    "steps": 142
+  },
+  "benchmark": {
+    "passed": true,
+    "report": "ARCH15_WORK_SNAPSHOT_MEASUREMENTS.json"
+  },
+  "spherical_first": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "spherical_gameplay_test",
+        "passed": false,
+        "exit_code": 1,
+        "seconds": 146.359
+      }
+    ]
+  },
+  "spherical_first_failure": "No live D1 milk animal. Earlier radial cargo, pause, save/load and workshop stages completed. The animal chain could not continue; this run is not a full pass.",
+  "spherical_baseline": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 6.839
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.769
+      },
+      {
+        "name": "spherical_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 334.595
+      }
+    ]
+  },
+  "published_source_commit": "3e20839dabc1f5d3dfc051a58599997b846a01be",
+  "source_tree_sha": "bc9c4071a964af47331722de56a754232b84b6fc",
+  "spherical_repeat": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "spherical_gameplay_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 334.636
+      }
+    ]
+  },
+  "assessment": {
+    "targeted_tests_passed": true,
+    "benchmark_passed": true,
+    "complete_spherical_repeat_passed": true,
+    "initial_spherical_failure_resolved_causally": false,
+    "limitation": "First spherical run failed to find a live D1 milk animal. Baseline and unchanged candidate repeat passed completely. Root cause of the initial animal-availability failure remains open; the first failure has not been erased or classified as fixed by this package. Shared Linux headless validation is not target-PC performance acceptance."
+  },
+  "logs_sha256": {
+    "targeted_snapshot": "04bb1a80eb5e0457fa1e9aa1975dfae45465bccd2f05596e782d32abc86ff1d2",
+    "targeted_far": "f367546b4f13611e93a14f69920d4ad5d966e9ea9a6b0ff3946afaa4683912e5",
+    "targeted_progression": "9187c49509c8c51e747776299cf7b15eaf9304759932340c08ad8d63f7672334",
+    "sphere_first": "dd487975b120645368d0adffca09febda0ad0db14552e00a676e59388dbf7e28",
+    "sphere_baseline": "18cb8bd02b72b1782559cbae2b7aac065bda61a12279cc30220c98dc7f210859",
+    "sphere_repeat": "d798a0ac43dbad03d0a01d06d69098ce8b0c1a949af6ebb261aed23b1860e1f0",
+    "benchmark": "b00ba25a45eacc9e1cfa42b7a445e274646302e9406a54ce63b3c853f6354467"
+  }
+}
