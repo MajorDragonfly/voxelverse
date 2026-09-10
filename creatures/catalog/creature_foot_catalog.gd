@@ -7,6 +7,9 @@ const DEFINITIONS: Array = [
 	{"id": "feet_claws", "name": "Krallenfüße", "domestic_support": false},
 	{"id": "feet_hooves", "name": "Spalthufe", "domestic_support": true},
 	{"id": "feet_webbed", "name": "Schwimmfüße", "domestic_support": false},
+	{"id": "feet_feline_paws", "name": "Katzenpfoten", "domestic_support": false},
+	{"id": "feet_bear_paws", "name": "Bärentatzen", "domestic_support": false},
+	{"id": "feet_horse_hooves", "name": "Pferdehufe", "domestic_support": false},
 ]
 
 

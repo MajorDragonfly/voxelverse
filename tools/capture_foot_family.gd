@@ -8,6 +8,13 @@ func _initialize() -> void: call_deferred("run")
 
 
 func run() -> void:
+	var args: PackedStringArray = OS.get_cmdline_user_args()
+	var ids: Array = ["feet_pads", "feet_claws", "feet_hooves", "feet_webbed"]
+	if args.size() > 1: ids = Array(args).slice(1)
+	if ids.is_empty() or ids.size() > 4:
+		push_error("Capture one to four foot IDs per sheet.")
+		quit(1)
+		return
 	root.size = Vector2i(1280, 720)
 	root.content_scale_size = root.size
 	var background := ColorRect.new()
@@ -27,7 +34,12 @@ func run() -> void:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
 		column.add_child(row)
-		for part: Dictionary in Feet.get_parts():
+		for id: String in ids:
+			var part: Dictionary = Feet.get_profile(id)
+			if part.is_empty():
+				push_error("Unknown foot ID: " + id)
+				quit(1)
+				return
 			var card := VBoxContainer.new()
 			card.custom_minimum_size = Vector2(297, 270)
 			row.add_child(card)

@@ -103,3 +103,22 @@ Oktopusmund und Krebsscheren. Dieses Paket liefert die erste gemeinsame Referenz
 mit den vier vorhandenen Fußformen; es behauptet diese zusätzlichen Modelle nicht.
 
 Prüfumfang und Übergabe: [WORK_ARCH24_PARTS.md](WORK_ARCH24_PARTS.md).
+
+## Additives Modellpaket vom 10. September 2026
+
+Die historische Liste oben bleibt die Erhaltungsgrundlage. Der Katalog ergänzt
+die folgenden drei eigenen IDs und umfasst damit jetzt 49 Teile / 10 Endstücke:
+
+| Kategorie | Neue ID | Revision | Ersatz alter Formen |
+|---|---|---|---|
+| feet | `feet_feline_paws` | 1 | keiner |
+| feet | `feet_bear_paws` | 1 | keiner |
+| feet | `feet_horse_hooves` | 1 | keiner |
+
+Eigene IDs passen in das bestehende `end_part_id`-Feld und brauchen keine
+Schemaänderung. Die alten Revision-1-Formen bleiben erhalten. Neue gespeicherte
+Versionsfelder oder das Ersetzen alter Formen bleiben von ARCH-23 abhängig.
+Alle drei Formen unterstützen den vorhandenen Beinrig; ihre D1-Zulassung
+und prozedurale Verteilung werden nicht allein durch die neue Optik freigegeben.
+
+Modelle, Bedienung und Nachweise: [WORK_ARCH24_ANIMAL_FEET.md](WORK_ARCH24_ANIMAL_FEET.md).

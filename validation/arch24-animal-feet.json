@@ -1,0 +1,73 @@
+{
+  "package": "ARCH-24 / M3-TEILE.2 / three animal foot models",
+  "base_commit": "0200bbbdab82fd1008254412837d62a7e2aee56e",
+  "base_pr": 55,
+  "implementation_commit": "9d9a7495f662a827649bfa874b9f82b8d7c81b44",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "runtime_checks": [
+    {
+      "name": "creature_foot_provider_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.322
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.952
+    },
+    {
+      "name": "creature_animal_feet_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.143
+    },
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.989
+    },
+    {
+      "name": "domestic_surface_catalog_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.574
+    }
+  ],
+  "catalog_check": {
+    "passed": true,
+    "messages": 233,
+    "languages": 2
+  },
+  "new_parts": [
+    {
+      "id": "feet_feline_paws",
+      "mesh_nodes": 11
+    },
+    {
+      "id": "feet_bear_paws",
+      "mesh_nodes": 13
+    },
+    {
+      "id": "feet_horse_hooves",
+      "mesh_nodes": 5
+    }
+  ],
+  "catalog_count": 49,
+  "terminal_count": 10,
+  "preserved_legacy_definitions": 46,
+  "render_review": {
+    "type": "CPU rendering of exact Godot mesh arrays",
+    "file": "art/review/arch24_animal_feet/foot_models.png",
+    "visually_inspected": true,
+    "native_screenshot": false
+  },
+  "remaining": [
+    "Integration after PR55 and compatibility with ARCH23",
+    "Target-PC graphics, FPS and packaged executable",
+    "Broader creature-part families",
+    "Editor DE/EN and procedural assignment use their own packages"
+  ]
+}

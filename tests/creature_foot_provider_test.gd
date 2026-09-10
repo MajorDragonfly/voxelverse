@@ -46,7 +46,9 @@ func _check_catalog() -> void:
 		var current: Dictionary = Library.get_part(original.id)
 		for key: String in original:
 			check(current.get(key) == original[key], "Changed old definition %s.%s" % [original.id, key])
-	check(current_ids == expected_ids, "Catalog IDs/order changed (including terminal and default parts)")
+	var additions: Array = ["feet_feline_paws", "feet_bear_paws", "feet_horse_hooves"]
+	check(current_ids.filter(func(id: String) -> bool: return id not in additions) == expected_ids, "Legacy catalog IDs/order changed (including terminal and default parts)")
+	check(current_ids.size() == expected_ids.size() + additions.size(), "Unexpected catalog additions")
 
 
 func _check_profiles() -> void:
