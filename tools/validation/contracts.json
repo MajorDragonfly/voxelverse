@@ -37,7 +37,8 @@
         "far_simulation_test",
         "performance_measurement_test",
         "region_store_test",
-        "village_navigation_budget_test"
+        "village_navigation_budget_test",
+        "population_register_test"
       ]
     },
     {
@@ -294,10 +295,12 @@
     },
     {
       "id": "over_256_animals",
-      "status": "pending",
-      "tests": [],
-      "scope": "Mehr als 256 dauerhaft veränderte Tieridentitäten nach Eviction und frischem Prozess erhalten.",
-      "limits": "Gemeinsam mit ARCH-14 implementieren; vorhandene D1-/D2-Prüfungen erfüllen diese Größenabnahme nicht."
+      "status": "implemented",
+      "tests": [
+        "population_register_test"
+      ],
+      "scope": "384 veränderte Tieridentitäten und Nahrungsquellen plus ein weiteres Tier über regionale Kampagnen-/Fortschrittsanschlüsse; aktive Referenzen, Regionswechsel, Cache-Eviction, Altformat, Schreibfehler und frischer SaveGameService-Prozess.",
+      "limits": "Headless-Fachabnahme ohne gerenderte Reise/Physik; separates Planetlabor behält sein 256-Tier-Register. Ziel-PC und Labormigration bleiben offen."
     },
     {
       "id": "future_blueprints",
