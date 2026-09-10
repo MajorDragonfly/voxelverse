@@ -147,6 +147,7 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-14 – Langzeitregister auslagern
 
+- **Weiteres Teilpaket reserviert am 10. September 2026:** `feature/arch-14-place-register`, aufbauend auf PR #59. Bekannte Orte ohne feste Gesamtgrenze speichern, begrenztes Lesen nach ID und Seite, verlustfreie Übernahme und Neustart-/Fehlerprüfung. Kartenübersetzung bleibt in ARCH-25; lediglich Anschluss der bestehenden Liste an die Seitenabfrage.
 - **Atlas-Teilpaket geliefert am 10. September 2026:** `feature/arch-14-atlas-paging`, Basis `ea900f2`, [PR #59](https://github.com/MajorDragonfly/voxelverse/pull/59). Kartenwissen wächst über 8.192 Kacheln hinaus; höchstens 96 offene Kacheln plus begrenzter RegionStore-Cache. Vollständige Schema-1-Übernahme, unveränderliche alte Wurzeln und echte Neustart-/Fehlerprüfungen. [Vertrag, Registerinventar und Übergabe](WORK_ARCH14_ATLAS_PAGING.md). Gesamtpaket und übrige Register bleiben offen.
 - **Zuordnung:** M1h/M1f, Karten/D1. **Vorher:** ARCH-13, für Tierlaufzeit ARCH-09. **Bereich:** Ecosystem, Begegnungen, Nahrung, Atlas.
 - [ ] Die 256 `animal_records` von der Zahl aktiver Tiere trennen und regionsweise auslagern. Geänderte, gezähmte und anderweitig referenzierte Individuen behalten Identität.
