@@ -4,6 +4,7 @@ class_name AdaptiveSphereTiles
 const Layout = preload("res://world/planet_lab/planet_tile_layout.gd")
 const PatchMesh = preload("res://world/planet_lab/planet_patch_mesh.gd")
 const PatchJob = preload("res://world/planet_lab/planet_patch_job.gd")
+const Support = preload("res://world/surface/surface_support.gd")
 const BUILDS_PER_FRAME: int = 2
 const BUILD_BUDGET_USEC: int = 4000
 const MAX_CACHED: int = 256
@@ -190,7 +191,7 @@ func _publish() -> void:
 	if not leaves.is_empty() and surface.body.get("terrain_revision", 1) >= 3:
 		var here: Dictionary = Cube.from_direction(surface.body.id, [_requested_direction.x, _requested_direction.y, _requested_direction.z])
 		var owner: Dictionary = layout.find_at(here.face, here.u, here.v, _staging)
-		if owner.is_empty() or owner.width * surface.body.radius / PatchMesh.CELLS > 4.0:
+		if owner.is_empty() or Support.cell_width(owner.width, surface.body.radius) > Support.MAX_GROUND_CELL_METERS:
 			# Do not replace the walker's prepared floor with stale coarse data.
 			# Keep the old complete cover and recompute around its current point.
 			publish_deferrals += 1
@@ -317,9 +318,22 @@ func _discard_staging() -> void:
 
 
 func ground_ready(point: Array) -> bool:
+	if surface == null or layout == null or point.size() != 3: return false
+	var length_squared: float = 0.0
+	for component in point:
+		if not (component is int or component is float) or not is_finite(float(component)): return false
+		length_squared += float(component) * float(component)
+	if not is_finite(length_squared) or length_squared < 1.0: return false
 	var address: Dictionary = Cube.from_cartesian(surface.body.id, point, surface.body.radius)
 	var owner: Dictionary = layout.find_at(address.face, address.u, address.v, leaves)
-	return not owner.is_empty() and float(owner.width) * float(surface.body.radius) / PatchMesh.CELLS <= 4.0
+	if owner.is_empty() or Support.cell_width(owner.width, surface.body.radius) > Support.MAX_GROUND_CELL_METERS: return false
+	# Fine rendered geometry alone is not a physical floor. Only the currently
+	# attached owner can release movement, arrival or population placement.
+	var collider: StaticBody3D = active.get(owner.id)
+	if not is_instance_valid(collider) or not collider.is_inside_tree() or collider.is_queued_for_deletion() or collider.get_parent() != owner.get("node") or collider.collision_layer & 1 == 0: return false
+	for child in collider.get_children():
+		if child is CollisionShape3D and not child.disabled and child.shape != null: return true
+	return false
 
 
 func _collision_shape(mesh: ArrayMesh) -> ConcavePolygonShape3D:

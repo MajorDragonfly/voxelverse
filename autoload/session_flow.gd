@@ -63,7 +63,7 @@ func latest_slot() -> Dictionary:
 			return slot
 	return {}
 
-func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_sphere_m1_v1") -> void:
+func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_sphere_m1_v1", creature_template: Dictionary = {}) -> void:
 	if loading or not _at_title():
 		return
 	if surface_mode != "cube_sphere_m1_v1":
@@ -72,7 +72,7 @@ func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_s
 	_show_loading("Dein Abenteuer wird vorbereitet …")
 	await get_tree().process_frame
 	var saves := get_node("/root/SaveGameService")
-	if str(saves.create_slot(title, seed_value, surface_mode)).is_empty():
+	if str(saves.create_slot(title, seed_value, surface_mode, creature_template)).is_empty():
 		_fail_loading("Neues Spiel konnte nicht gespeichert werden. " + str(saves.last_error))
 		return
 	await _request_world()
@@ -125,16 +125,14 @@ func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body
 	var previous_mode: int = scene.process_mode
 	var previous_autosave: bool = saves.autosave_enabled
 	_show_loading("Abreise und Dorfwege werden gesichert …")
-	# Pause gameplay while pending route checks still need the source's real
-	# collision. Disabling the scene first removes CollisionObject3D shapes.
+	# Pause gameplay while both route checks AND held-animal attendance still
+	# need source collision. Disabling the scene removes CollisionObject3D
+	# shapes and would incorrectly omit every held animal from far production.
 	get_tree().paused = true
 	saves.autosave_enabled = false
 	var controller: Node = get_tree().get_first_node_in_group(&"tribe_controller")
 	var navigation_ready: bool = controller == null or not controller._active or await controller.finish_navigation_for_departure()
-	if navigation_ready:
-		scene.process_mode = Node.PROCESS_MODE_DISABLED
-		get_tree().paused = false
-	else:
+	if not navigation_ready:
 		saves.last_error = "Die Dorfwege konnten noch nicht vollständig gesichert werden."
 	if not navigation_ready or not await saves.prepare_body_departure(controller):
 		scene.process_mode = previous_mode
@@ -145,6 +143,10 @@ func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body
 		_show_pause()
 		_message.text = saves.last_error
 		return false
+	# Ownership/attendance and the complete source checkpoint are now durable.
+	# Only then remove collision and release the old generation's host.
+	scene.process_mode = Node.PROCESS_MODE_DISABLED
+	get_tree().paused = false
 	# Destroy old generation owners before the active body or origin changes.
 	await _release_world()
 	if not await saves.prepare_body_target(system_seed, planet_index, world_seed, body_id):

@@ -1,0 +1,97 @@
+{
+  "date": "2026-09-10",
+  "scope": "ARCH-18 / ARCH-16: real held animal and milk cargo through A-B-A",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "local_implementation_commit": "61ea7e535e36f0b5d76fa4a90d9def4c52ce27f7",
+  "published_implementation_commit": "745612d6adff1bf774df3566cca070f09322d26a",
+  "implementation_tree": "4889a4f32e3b3b04583985cf7788962fe0f45631",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux, headless editor; isolated user profiles; no target-PC or renderer performance claim",
+  "contracts": {
+    "save": 9,
+    "campaign": 3,
+    "game_state": 4,
+    "d2_registry": 2,
+    "d2_campaign_envelope": 1
+  },
+  "runtime_fix_blob": "b396c717cbeb8a723bff39752d25a9ac06535ddb",
+  "regression_reproduction": {
+    "source_session_flow": "main before fix",
+    "extended_probe": true,
+    "exit_code": 1,
+    "seconds": 302.874,
+    "failure": "Held animal was not certified for remote attendance",
+    "source_attending": [],
+    "full_log_sha256": "5e73d9dbbe3429ad66cc852e82466f2cebc4f3256142a036faed935349efcac9"
+  },
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.995
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.875
+    },
+    {
+      "name": "body_travel_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 108.825
+    },
+    {
+      "name": "far_simulation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.482
+    },
+    {
+      "name": "real_fixture_animal_travel_replay",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 129.148,
+      "log": "evidence/arch18/animal-travel-replay.log",
+      "log_sha256": "ec73f5a8dddd10d28818b9f7e962bac3e4029bb3db58f6a37423e98a802cffd3",
+      "fixture": "Preserved real new-game/taming/supply/milk checkpoint; handler physically led the existing animal inside the pen before travel."
+    },
+    {
+      "name": "spherical_gameplay_test",
+      "exit_code": 0,
+      "seconds": 406.726,
+      "passed": true,
+      "source_commit": "e7355d4aa37392760a28fc5442ca03d6fc8b8a48",
+      "log": "evidence/arch18/spherical-gameplay-stages.log",
+      "full_log_sha256": "dbc703d3fbcf8d7f56c85780759483e46ef5fbe9c84eb93d352362b8b2f114da",
+      "strict_log_policy": "tools.validate_godot.ERROR plus required SPHERICAL_GAMEPLAY_PASSED marker; identical real test entry; retained isolated profile for checkpoint inspection"
+    }
+  ],
+  "complete_new_game_chain": "passed",
+  "limits": [
+    "No native exported application tested locally",
+    "No target-PC/FPS acceptance",
+    "No year-long absence or multiple playable villages",
+    "Revalidate against the completed ARCH-20 production contract during integration"
+  ],
+  "local_final_code_commit": "e7355d4aa37392760a28fc5442ca03d6fc8b8a48",
+  "published_final_code_commit": "b0dc16aac95ab38c6962fabca3fccf4f732d8340",
+  "final_code_tree": "7524802ebecbb54613f7a2f84e07383e42299b5d",
+  "fixture_corrections": [
+    "Guide the real animal inside the admission area and await physical return after collision.",
+    "Place the real route obstruction ahead of the carrier, avoiding initial body penetration; assert retained ground contact.",
+    "The old milk_received-only assertion masked failed physical delivery."
+  ],
+  "final_delivery": {
+    "body_id": "body_29301b6eb4b8649418eff562d9c6a926",
+    "animal_id": "object_6ee328b406f7d3513476b2f123bbe67e",
+    "carrier_id": "object_d424aac97fc6738ffa0965c1ea0a9eae",
+    "cargo": "",
+    "stock_milk": 1.0,
+    "milk_meals": 0.0,
+    "milk_received": 2.0,
+    "simulation_owner": "near"
+  }
+}

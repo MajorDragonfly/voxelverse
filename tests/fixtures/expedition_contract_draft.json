@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "revision": 0,
+  "campaign_id": "campaign_fixture",
+  "faction_id": "faction_fixture",
+  "species_id": "species_fixture",
+  "ships": {
+    "ship_expedition": {
+      "id": "ship_expedition",
+      "role": "expedition",
+      "blueprint": {"design_id": "design_expedition", "revision": 1, "payload_schema": 1},
+      "capabilities": {
+        "design_revision": 1,
+        "catalog_revision": 1,
+        "hull_size": [60, 20, 100],
+        "cargo_space": 20,
+        "seats": 4,
+        "energy_capacity": 100,
+        "bays": {"bay_lander": [16, 8, 16]}
+      },
+      "place": {"kind": "system", "system_id": "system_home", "position": [1000000000000, 0, 0], "orientation": [0, 0, 0, 1]},
+      "energy": 80
+    },
+    "ship_lander": {
+      "id": "ship_lander",
+      "role": "lander",
+      "blueprint": {"design_id": "design_lander", "revision": 3, "payload_schema": 1},
+      "capabilities": {
+        "design_revision": 3,
+        "catalog_revision": 1,
+        "hull_size": [6, 3, 8],
+        "cargo_space": 8,
+        "seats": 2,
+        "energy_capacity": 20,
+        "bays": {}
+      },
+      "place": {"kind": "system", "system_id": "system_home", "position": [1000000000010, 0, 0], "orientation": [0, 0, 0, 1]},
+      "energy": 12
+    }
+  },
+  "people": {
+    "person_player": {"id": "person_player", "place": {"kind": "aboard", "ship_id": "ship_lander"}},
+    "person_crew": {"id": "person_crew", "place": {"kind": "aboard", "ship_id": "ship_expedition"}}
+  },
+  "assets": {
+    "transport_cargo": {"id": "transport_cargo", "kind": "cargo", "owner_module": "resource_owner", "record_id": "lot_fixture", "space": 2, "ship_id": "ship_lander"},
+    "transport_sample": {"id": "transport_sample", "kind": "sample", "owner_module": "sample_owner", "record_id": "sample_fixture", "space": 1, "ship_id": "ship_lander"}
+  },
+  "control": {"person_id": "person_player", "kind": "ship", "target_id": "ship_lander"}
+}

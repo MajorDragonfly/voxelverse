@@ -1,0 +1,1022 @@
+{
+	"feet_claws:(0.8, 1.1, 1.4):-1": [
+		{
+			"aabb": "AABB(-0.11000001, -0.0825, -0.22000001, 0.22000001, 0.165, 0.44000003)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.0165, -0.077)",
+			"vertex_hash": "70682ea2769c2c00adcdbc2dc4cc17697677293273c226ae044eaae7eac3fb46",
+			"vertices": 1824
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.0248, -0.0992, -0.041333333, 0.0496, 0.16533333, 0.082666665)",
+			"basis": "Basis(1, 0, 0, 0, -0.043308973, 0.9990617, 0, -0.9990617, -0.043308973)",
+			"color": "e5d5abff",
+			"name": "Claw0",
+			"position": "Vector3(0.092, -0.053900003, -0.3745)",
+			"vertex_hash": "4bcf3a32bf514c9d889e85876877b13aa584511cbe74f6049963a5d3ec2febbd",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.0248, -0.0992, -0.041333333, 0.0496, 0.16533333, 0.082666665)",
+			"basis": "Basis(1, 0, 0, 0, -0.043308973, 0.9990617, 0, -0.9990617, -0.043308973)",
+			"color": "e5d5abff",
+			"name": "Claw1",
+			"position": "Vector3(0, -0.053900003, -0.3745)",
+			"vertex_hash": "4bcf3a32bf514c9d889e85876877b13aa584511cbe74f6049963a5d3ec2febbd",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.0248, -0.0992, -0.041333333, 0.0496, 0.16533333, 0.082666665)",
+			"basis": "Basis(1, 0, 0, 0, -0.043308973, 0.9990617, 0, -0.9990617, -0.043308973)",
+			"color": "e5d5abff",
+			"name": "Claw2",
+			"position": "Vector3(-0.092, -0.053900003, -0.3745)",
+			"vertex_hash": "4bcf3a32bf514c9d889e85876877b13aa584511cbe74f6049963a5d3ec2febbd",
+			"vertices": 1888
+		}
+	],
+	"feet_claws:(0.8, 1.1, 1.4):1": [
+		{
+			"aabb": "AABB(-0.11000001, -0.0825, -0.22000001, 0.22000001, 0.165, 0.44000003)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.0165, -0.077)",
+			"vertex_hash": "70682ea2769c2c00adcdbc2dc4cc17697677293273c226ae044eaae7eac3fb46",
+			"vertices": 1824
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.0248, -0.0992, -0.041333333, 0.0496, 0.16533333, 0.082666665)",
+			"basis": "Basis(1, 0, 0, 0, -0.043308973, 0.9990617, 0, -0.9990617, -0.043308973)",
+			"color": "e5d5abff",
+			"name": "Claw0",
+			"position": "Vector3(-0.092, -0.053900003, -0.3745)",
+			"vertex_hash": "4bcf3a32bf514c9d889e85876877b13aa584511cbe74f6049963a5d3ec2febbd",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.0248, -0.0992, -0.041333333, 0.0496, 0.16533333, 0.082666665)",
+			"basis": "Basis(1, 0, 0, 0, -0.043308973, 0.9990617, 0, -0.9990617, -0.043308973)",
+			"color": "e5d5abff",
+			"name": "Claw1",
+			"position": "Vector3(0, -0.053900003, -0.3745)",
+			"vertex_hash": "4bcf3a32bf514c9d889e85876877b13aa584511cbe74f6049963a5d3ec2febbd",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.0248, -0.0992, -0.041333333, 0.0496, 0.16533333, 0.082666665)",
+			"basis": "Basis(1, 0, 0, 0, -0.043308973, 0.9990617, 0, -0.9990617, -0.043308973)",
+			"color": "e5d5abff",
+			"name": "Claw2",
+			"position": "Vector3(0.092, -0.053900003, -0.3745)",
+			"vertex_hash": "4bcf3a32bf514c9d889e85876877b13aa584511cbe74f6049963a5d3ec2febbd",
+			"vertices": 1888
+		}
+	],
+	"feet_claws:(1.0, 1.0, 1.0):-1": [
+		{
+			"aabb": "AABB(-0.15, -0.075, -0.15, 0.3, 0.15, 0.3)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.015, -0.055)",
+			"vertex_hash": "2c0b0257107fb82f0bd0b336ad618f538b2105420dd1cce237d6d53eb550504f",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.031, -0.072333336, -0.031, 0.062, 0.11366667, 0.062)",
+			"basis": "Basis(1, 0, 0, 0, -0.05508864, 0.99848145, 0, -0.99848145, -0.05508864)",
+			"color": "e5d5abff",
+			"name": "Claw0",
+			"position": "Vector3(0.115, -0.049000002, -0.2675)",
+			"vertex_hash": "641a54fe8eb646f98782658aac7c1ab94c8ff380104e956b787b2ad3d230e459",
+			"vertices": 832
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.031, -0.072333336, -0.031, 0.062, 0.11366667, 0.062)",
+			"basis": "Basis(1, 0, 0, 0, -0.05508864, 0.99848145, 0, -0.99848145, -0.05508864)",
+			"color": "e5d5abff",
+			"name": "Claw1",
+			"position": "Vector3(0, -0.049000002, -0.2675)",
+			"vertex_hash": "641a54fe8eb646f98782658aac7c1ab94c8ff380104e956b787b2ad3d230e459",
+			"vertices": 832
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.031, -0.072333336, -0.031, 0.062, 0.11366667, 0.062)",
+			"basis": "Basis(1, 0, 0, 0, -0.05508864, 0.99848145, 0, -0.99848145, -0.05508864)",
+			"color": "e5d5abff",
+			"name": "Claw2",
+			"position": "Vector3(-0.115, -0.049000002, -0.2675)",
+			"vertex_hash": "641a54fe8eb646f98782658aac7c1ab94c8ff380104e956b787b2ad3d230e459",
+			"vertices": 832
+		}
+	],
+	"feet_claws:(1.0, 1.0, 1.0):1": [
+		{
+			"aabb": "AABB(-0.15, -0.075, -0.15, 0.3, 0.15, 0.3)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.015, -0.055)",
+			"vertex_hash": "2c0b0257107fb82f0bd0b336ad618f538b2105420dd1cce237d6d53eb550504f",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.031, -0.072333336, -0.031, 0.062, 0.11366667, 0.062)",
+			"basis": "Basis(1, 0, 0, 0, -0.05508864, 0.99848145, 0, -0.99848145, -0.05508864)",
+			"color": "e5d5abff",
+			"name": "Claw0",
+			"position": "Vector3(-0.115, -0.049000002, -0.2675)",
+			"vertex_hash": "641a54fe8eb646f98782658aac7c1ab94c8ff380104e956b787b2ad3d230e459",
+			"vertices": 832
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.031, -0.072333336, -0.031, 0.062, 0.11366667, 0.062)",
+			"basis": "Basis(1, 0, 0, 0, -0.05508864, 0.99848145, 0, -0.99848145, -0.05508864)",
+			"color": "e5d5abff",
+			"name": "Claw1",
+			"position": "Vector3(0, -0.049000002, -0.2675)",
+			"vertex_hash": "641a54fe8eb646f98782658aac7c1ab94c8ff380104e956b787b2ad3d230e459",
+			"vertices": 832
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.031, -0.072333336, -0.031, 0.062, 0.11366667, 0.062)",
+			"basis": "Basis(1, 0, 0, 0, -0.05508864, 0.99848145, 0, -0.99848145, -0.05508864)",
+			"color": "e5d5abff",
+			"name": "Claw2",
+			"position": "Vector3(0.115, -0.049000002, -0.2675)",
+			"vertex_hash": "641a54fe8eb646f98782658aac7c1ab94c8ff380104e956b787b2ad3d230e459",
+			"vertices": 832
+		}
+	],
+	"feet_claws:(1.7, 0.6, 0.9):-1": [
+		{
+			"aabb": "AABB(-0.255, -0.045, -0.135, 0.51, 0.09, 0.27)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.009000001, -0.0495)",
+			"vertex_hash": "4224e5d4c0ece74765e7a559e18db6187db4959db9bea0cb998961e232636758",
+			"vertices": 6144
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.0465, -0.0651, -0.0279, 0.093, 0.1023, 0.0558)",
+			"basis": "Basis(1, 0, 0, 0, -0.036756873, 0.99932426, 0, -0.99932426, -0.036756873)",
+			"color": "e5d5abff",
+			"name": "Claw0",
+			"position": "Vector3(0.19550002, -0.029400002, -0.24075)",
+			"vertex_hash": "84032966503901a475af027d04526982f707332b4e7541b2b6d6ab33c664df99",
+			"vertices": 1312
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.0465, -0.0651, -0.0279, 0.093, 0.1023, 0.0558)",
+			"basis": "Basis(1, 0, 0, 0, -0.036756873, 0.99932426, 0, -0.99932426, -0.036756873)",
+			"color": "e5d5abff",
+			"name": "Claw1",
+			"position": "Vector3(0, -0.029400002, -0.24075)",
+			"vertex_hash": "84032966503901a475af027d04526982f707332b4e7541b2b6d6ab33c664df99",
+			"vertices": 1312
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.0465, -0.0651, -0.0279, 0.093, 0.1023, 0.0558)",
+			"basis": "Basis(1, 0, 0, 0, -0.036756873, 0.99932426, 0, -0.99932426, -0.036756873)",
+			"color": "e5d5abff",
+			"name": "Claw2",
+			"position": "Vector3(-0.19550002, -0.029400002, -0.24075)",
+			"vertex_hash": "84032966503901a475af027d04526982f707332b4e7541b2b6d6ab33c664df99",
+			"vertices": 1312
+		}
+	],
+	"feet_claws:(1.7, 0.6, 0.9):1": [
+		{
+			"aabb": "AABB(-0.255, -0.045, -0.135, 0.51, 0.09, 0.27)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.009000001, -0.0495)",
+			"vertex_hash": "4224e5d4c0ece74765e7a559e18db6187db4959db9bea0cb998961e232636758",
+			"vertices": 6144
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.0465, -0.0651, -0.0279, 0.093, 0.1023, 0.0558)",
+			"basis": "Basis(1, 0, 0, 0, -0.036756873, 0.99932426, 0, -0.99932426, -0.036756873)",
+			"color": "e5d5abff",
+			"name": "Claw0",
+			"position": "Vector3(-0.19550002, -0.029400002, -0.24075)",
+			"vertex_hash": "84032966503901a475af027d04526982f707332b4e7541b2b6d6ab33c664df99",
+			"vertices": 1312
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.0465, -0.0651, -0.0279, 0.093, 0.1023, 0.0558)",
+			"basis": "Basis(1, 0, 0, 0, -0.036756873, 0.99932426, 0, -0.99932426, -0.036756873)",
+			"color": "e5d5abff",
+			"name": "Claw1",
+			"position": "Vector3(0, -0.029400002, -0.24075)",
+			"vertex_hash": "84032966503901a475af027d04526982f707332b4e7541b2b6d6ab33c664df99",
+			"vertices": 1312
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.0465, -0.0651, -0.0279, 0.093, 0.1023, 0.0558)",
+			"basis": "Basis(1, 0, 0, 0, -0.036756873, 0.99932426, 0, -0.99932426, -0.036756873)",
+			"color": "e5d5abff",
+			"name": "Claw2",
+			"position": "Vector3(0.19550002, -0.029400002, -0.24075)",
+			"vertex_hash": "84032966503901a475af027d04526982f707332b4e7541b2b6d6ab33c664df99",
+			"vertices": 1312
+		}
+	],
+	"feet_hooves:(0.8, 1.1, 1.4):-1": [
+		{
+			"aabb": "AABB(-0.056, -0.09333334, -0.20533335, 0.112, 0.18666668, 0.4106667)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof-1",
+			"position": "Vector3(0.064, -0.0605, -0.049)",
+			"vertex_hash": "053bdf1b55c39d23cf6adc26019fd47d4bc38952c78b131b197dea1face7565e",
+			"vertices": 2496
+		},
+		{
+			"aabb": "AABB(-0.056, -0.09333334, -0.20533335, 0.112, 0.18666668, 0.4106667)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof1",
+			"position": "Vector3(-0.064, -0.0605, -0.049)",
+			"vertex_hash": "053bdf1b55c39d23cf6adc26019fd47d4bc38952c78b131b197dea1face7565e",
+			"vertices": 2496
+		}
+	],
+	"feet_hooves:(0.8, 1.1, 1.4):1": [
+		{
+			"aabb": "AABB(-0.056, -0.09333334, -0.20533335, 0.112, 0.18666668, 0.4106667)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof-1",
+			"position": "Vector3(-0.064, -0.0605, -0.049)",
+			"vertex_hash": "053bdf1b55c39d23cf6adc26019fd47d4bc38952c78b131b197dea1face7565e",
+			"vertices": 2496
+		},
+		{
+			"aabb": "AABB(-0.056, -0.09333334, -0.20533335, 0.112, 0.18666668, 0.4106667)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof1",
+			"position": "Vector3(0.064, -0.0605, -0.049)",
+			"vertex_hash": "053bdf1b55c39d23cf6adc26019fd47d4bc38952c78b131b197dea1face7565e",
+			"vertices": 2496
+		}
+	],
+	"feet_hooves:(1.0, 1.0, 1.0):-1": [
+		{
+			"aabb": "AABB(-0.07, -0.07, -0.14, 0.14, 0.14, 0.28)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof-1",
+			"position": "Vector3(0.08, -0.055, -0.035)",
+			"vertex_hash": "68681f62208475feca87bd9ea7c542786c72ebdf807d7cd637b3f1e16d5f809a",
+			"vertices": 1184
+		},
+		{
+			"aabb": "AABB(-0.07, -0.07, -0.14, 0.14, 0.14, 0.28)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof1",
+			"position": "Vector3(-0.08, -0.055, -0.035)",
+			"vertex_hash": "68681f62208475feca87bd9ea7c542786c72ebdf807d7cd637b3f1e16d5f809a",
+			"vertices": 1184
+		}
+	],
+	"feet_hooves:(1.0, 1.0, 1.0):1": [
+		{
+			"aabb": "AABB(-0.07, -0.07, -0.14, 0.14, 0.14, 0.28)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof-1",
+			"position": "Vector3(-0.08, -0.055, -0.035)",
+			"vertex_hash": "68681f62208475feca87bd9ea7c542786c72ebdf807d7cd637b3f1e16d5f809a",
+			"vertices": 1184
+		},
+		{
+			"aabb": "AABB(-0.07, -0.07, -0.14, 0.14, 0.14, 0.28)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof1",
+			"position": "Vector3(0.08, -0.055, -0.035)",
+			"vertex_hash": "68681f62208475feca87bd9ea7c542786c72ebdf807d7cd637b3f1e16d5f809a",
+			"vertices": 1184
+		}
+	],
+	"feet_hooves:(1.7, 0.6, 0.9):-1": [
+		{
+			"aabb": "AABB(-0.112, -0.048, -0.128, 0.224, 0.096, 0.256)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof-1",
+			"position": "Vector3(0.136, -0.033, -0.0315)",
+			"vertex_hash": "69085bc50378a6a24b01a22ed7a0d35c6015e96710ff57d48036562a201c4706",
+			"vertices": 2624
+		},
+		{
+			"aabb": "AABB(-0.112, -0.048, -0.128, 0.224, 0.096, 0.256)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof1",
+			"position": "Vector3(-0.136, -0.033, -0.0315)",
+			"vertex_hash": "69085bc50378a6a24b01a22ed7a0d35c6015e96710ff57d48036562a201c4706",
+			"vertices": 2624
+		}
+	],
+	"feet_hooves:(1.7, 0.6, 0.9):1": [
+		{
+			"aabb": "AABB(-0.112, -0.048, -0.128, 0.224, 0.096, 0.256)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof-1",
+			"position": "Vector3(-0.136, -0.033, -0.0315)",
+			"vertex_hash": "69085bc50378a6a24b01a22ed7a0d35c6015e96710ff57d48036562a201c4706",
+			"vertices": 2624
+		},
+		{
+			"aabb": "AABB(-0.112, -0.048, -0.128, 0.224, 0.096, 0.256)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "857c63ff",
+			"name": "Hoof1",
+			"position": "Vector3(0.136, -0.033, -0.0315)",
+			"vertex_hash": "69085bc50378a6a24b01a22ed7a0d35c6015e96710ff57d48036562a201c4706",
+			"vertices": 2624
+		}
+	],
+	"feet_pads:(0.8, 1.1, 1.4):-1": [
+		{
+			"aabb": "AABB(-0.11000001, -0.0825, -0.22000001, 0.22000001, 0.165, 0.44000003)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.0165, -0.077)",
+			"vertex_hash": "70682ea2769c2c00adcdbc2dc4cc17697677293273c226ae044eaae7eac3fb46",
+			"vertices": 1824
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		}
+	],
+	"feet_pads:(0.8, 1.1, 1.4):1": [
+		{
+			"aabb": "AABB(-0.11000001, -0.0825, -0.22000001, 0.22000001, 0.165, 0.44000003)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.0165, -0.077)",
+			"vertex_hash": "70682ea2769c2c00adcdbc2dc4cc17697677293273c226ae044eaae7eac3fb46",
+			"vertices": 1824
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		}
+	],
+	"feet_pads:(1.0, 1.0, 1.0):-1": [
+		{
+			"aabb": "AABB(-0.15, -0.075, -0.15, 0.3, 0.15, 0.3)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.015, -0.055)",
+			"vertex_hash": "2c0b0257107fb82f0bd0b336ad618f538b2105420dd1cce237d6d53eb550504f",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		}
+	],
+	"feet_pads:(1.0, 1.0, 1.0):1": [
+		{
+			"aabb": "AABB(-0.15, -0.075, -0.15, 0.3, 0.15, 0.3)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.015, -0.055)",
+			"vertex_hash": "2c0b0257107fb82f0bd0b336ad618f538b2105420dd1cce237d6d53eb550504f",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		}
+	],
+	"feet_pads:(1.7, 0.6, 0.9):-1": [
+		{
+			"aabb": "AABB(-0.255, -0.045, -0.135, 0.51, 0.09, 0.27)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.009000001, -0.0495)",
+			"vertex_hash": "4224e5d4c0ece74765e7a559e18db6187db4959db9bea0cb998961e232636758",
+			"vertices": 6144
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		}
+	],
+	"feet_pads:(1.7, 0.6, 0.9):1": [
+		{
+			"aabb": "AABB(-0.255, -0.045, -0.135, 0.51, 0.09, 0.27)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.009000001, -0.0495)",
+			"vertex_hash": "4224e5d4c0ece74765e7a559e18db6187db4959db9bea0cb998961e232636758",
+			"vertices": 6144
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		}
+	],
+	"feet_webbed:(0.8, 1.1, 1.4):-1": [
+		{
+			"aabb": "AABB(-0.11000001, -0.0825, -0.22000001, 0.22000001, 0.165, 0.44000003)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.0165, -0.077)",
+			"vertex_hash": "70682ea2769c2c00adcdbc2dc4cc17697677293273c226ae044eaae7eac3fb46",
+			"vertices": 1824
+		},
+		{
+			"aabb": "AABB(-0.16500002, -0.024750002, -0.18975002, 0.33000004, 0.049500003, 0.37950003)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "a3c1adff",
+			"name": "Webbing",
+			"position": "Vector3(0, -0.0605, -0.21000001)",
+			"vertex_hash": "8c888a1744ed0b5578fda21f7a946f48b2dfcff9af072930393bd824a6e68114",
+			"vertices": 14880
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		}
+	],
+	"feet_webbed:(0.8, 1.1, 1.4):1": [
+		{
+			"aabb": "AABB(-0.11000001, -0.0825, -0.22000001, 0.22000001, 0.165, 0.44000003)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.0165, -0.077)",
+			"vertex_hash": "70682ea2769c2c00adcdbc2dc4cc17697677293273c226ae044eaae7eac3fb46",
+			"vertices": 1824
+		},
+		{
+			"aabb": "AABB(-0.16500002, -0.024750002, -0.18975002, 0.33000004, 0.049500003, 0.37950003)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "a3c1adff",
+			"name": "Webbing",
+			"position": "Vector3(0, -0.0605, -0.21000001)",
+			"vertex_hash": "8c888a1744ed0b5578fda21f7a946f48b2dfcff9af072930393bd824a6e68114",
+			"vertices": 14880
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		},
+		{
+			"aabb": "AABB(-0.040000003, -0.05333334, -0.10666668, 0.080000006, 0.10666668, 0.21333335)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.092, -0.049500003, -0.252)",
+			"vertex_hash": "6bf37b5755be9a563339392218ff363618f45dd8cd18a417f8d7b00e99c7a653",
+			"vertices": 1696
+		}
+	],
+	"feet_webbed:(1.0, 1.0, 1.0):-1": [
+		{
+			"aabb": "AABB(-0.15, -0.075, -0.15, 0.3, 0.15, 0.3)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.015, -0.055)",
+			"vertex_hash": "2c0b0257107fb82f0bd0b336ad618f538b2105420dd1cce237d6d53eb550504f",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.20500001, -0.025625002, -0.13666667, 0.41000003, 0.051250003, 0.27333334)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "a3c1adff",
+			"name": "Webbing",
+			"position": "Vector3(0, -0.055, -0.15)",
+			"vertex_hash": "2cd2b9bbd2318fd0b66b2a9febf66db732a7320b80fadef8a2ce456315960f23",
+			"vertices": 12288
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		}
+	],
+	"feet_webbed:(1.0, 1.0, 1.0):1": [
+		{
+			"aabb": "AABB(-0.15, -0.075, -0.15, 0.3, 0.15, 0.3)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.015, -0.055)",
+			"vertex_hash": "2c0b0257107fb82f0bd0b336ad618f538b2105420dd1cce237d6d53eb550504f",
+			"vertices": 1888
+		},
+		{
+			"aabb": "AABB(-0.20500001, -0.025625002, -0.13666667, 0.41000003, 0.051250003, 0.27333334)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "a3c1adff",
+			"name": "Webbing",
+			"position": "Vector3(0, -0.055, -0.15)",
+			"vertex_hash": "2cd2b9bbd2318fd0b66b2a9febf66db732a7320b80fadef8a2ce456315960f23",
+			"vertices": 12288
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		},
+		{
+			"aabb": "AABB(-0.045, -0.045, -0.075, 0.09, 0.09, 0.15)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.115, -0.045, -0.18)",
+			"vertex_hash": "c5b0ad24dab706e4110f6c1c44efe500145e95a56a10a090faceca516da03233",
+			"vertices": 1088
+		}
+	],
+	"feet_webbed:(1.7, 0.6, 0.9):-1": [
+		{
+			"aabb": "AABB(-0.255, -0.045, -0.135, 0.51, 0.09, 0.27)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.009000001, -0.0495)",
+			"vertex_hash": "4224e5d4c0ece74765e7a559e18db6187db4959db9bea0cb998961e232636758",
+			"vertices": 6144
+		},
+		{
+			"aabb": "AABB(-0.2904167, -0.014520834, -0.10164584, 0.5808334, 0.029041668, 0.20329168)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "a3c1adff",
+			"name": "Webbing",
+			"position": "Vector3(0, -0.033, -0.135)",
+			"vertex_hash": "86e509bb7616d80b87226f7f165abbc9d32c1fff839c65fa2aa7a79039b100d7",
+			"vertices": 4544
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(-0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		}
+	],
+	"feet_webbed:(1.7, 0.6, 0.9):1": [
+		{
+			"aabb": "AABB(-0.255, -0.045, -0.135, 0.51, 0.09, 0.27)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "FootPad",
+			"position": "Vector3(0, -0.009000001, -0.0495)",
+			"vertex_hash": "4224e5d4c0ece74765e7a559e18db6187db4959db9bea0cb998961e232636758",
+			"vertices": 6144
+		},
+		{
+			"aabb": "AABB(-0.2904167, -0.014520834, -0.10164584, 0.5808334, 0.029041668, 0.20329168)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "a3c1adff",
+			"name": "Webbing",
+			"position": "Vector3(0, -0.033, -0.135)",
+			"vertex_hash": "86e509bb7616d80b87226f7f165abbc9d32c1fff839c65fa2aa7a79039b100d7",
+			"vertices": 4544
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe0",
+			"position": "Vector3(-0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe1",
+			"position": "Vector3(0, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		},
+		{
+			"aabb": "AABB(-0.08100001, -0.027000003, -0.072000004, 0.16200002, 0.054000005, 0.14400001)",
+			"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+			"color": "8fb39bff",
+			"name": "Toe2",
+			"position": "Vector3(0.19550002, -0.027000003, -0.162)",
+			"vertex_hash": "d0f778d44e74e326fba47df722b67dfa46bdfc0cffbaf74bc535ec8b42663b06",
+			"vertices": 3168
+		}
+	]
+}

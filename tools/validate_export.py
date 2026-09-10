@@ -106,7 +106,7 @@ def main():
                 raise RuntimeError("Native executable did not pass spherical migration/new-game/fresh-process acceptance.")
             for name, flag, marker, timeout in [
                 ("spherical_creature", "--sphere-creature-smoke", "SPHERICAL_CREATURE_PASSED", 180),
-                ("spherical_gameplay", "--sphere-gameplay-smoke", "SPHERICAL_GAMEPLAY_PASSED", 600),
+                ("spherical_gameplay", "--sphere-gameplay-smoke", "SPHERICAL_GAMEPLAY_PASSED", 900),
                 ("body_travel", "--body-travel-smoke", "BODY_TRAVEL_PASSED", 420),
             ]:
                 run(f"packaged_{name}", [str(executable), "--headless", "--verbose", "--", flag],

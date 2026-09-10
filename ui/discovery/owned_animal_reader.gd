@@ -2,6 +2,7 @@ extends RefCounted
 ## Read-only D2 projection. The host owns the controller, context and name lookup.
 ## No inferred ownership, generated names, command callbacks or persistence.
 signal changed
+const Presentation = preload("res://ui/discovery/owned_animal_presentation.gd")
 const STATE_PATH := "res://world/domestication/animal_state.gd"
 const ORDERS := {"follow": "Folgen", "wait": "Warten", "home": "Heimkehr"}
 var _source: WeakRef
@@ -51,10 +52,10 @@ func check_context() -> void:
 func read(query: String = "", life_filter: String = "living") -> Dictionary:
 	var source: Object = _source.get_ref() if _source != null else null
 	if not is_instance_valid(source) or _validator == null:
-		return _unavailable("Dein Tierbestand ist hier noch nicht verfügbar.")
+		return _unavailable("owned.unavailable")
 	var context := _read_context()
 	var registry := _registry(source)
-	var error := scope_error(registry, context, _validator)
+	var error := scope_code(registry, context, _validator)
 	if not error.is_empty():
 		return _unavailable(error)
 	var rows: Array[Dictionary] = []
@@ -68,49 +69,46 @@ func read(query: String = "", life_filter: String = "living") -> Dictionary:
 		if (life_filter == "living" and dead) or (life_filter == "dead" and not dead):
 			continue
 		var row := _row(animal)
-		var haystack: String = "%s %s %s %s %s %s" % [row["name"], row["species"], row["owner"], row["order"], row["location"], row["key"]]
+		var haystack: String = Presentation.search_text(row._display_data)
 		if query.strip_edges().is_empty() or haystack.to_lower().contains(query.strip_edges().to_lower()):
 			rows.append(row)
 	rows.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		var compared: int = a["name"].naturalnocasecmp_to(b["name"])
+		var compared: int = a._display_data.name.naturalnocasecmp_to(b._display_data.name)
 		return a["key"] < b["key"] if compared == 0 else compared < 0)
-	return {"available": true, "rows": rows, "message": "Deinem Stamm gehören hier noch keine Tiere. Befreundete Wildtiere und begonnene Zähmungen zählen noch nicht dazu." if owned_count == 0 else "Keine passenden Tiere. Ändere die Suche oder den Filter."}
+	var code := "owned.empty" if owned_count == 0 else "owned.no_matches"
+	return {"available": true, "rows": rows, "code": code, "message": Presentation.result_text(code)}
 
 static func scope_error(registry: Dictionary, context: Dictionary, validator: Script) -> String:
+	# Preserve the existing diagnostic API; the display uses stable result codes.
+	return {"owned.invalid": "Dieser Tierbestand kann derzeit nicht gelesen werden.",
+		"owned.scope_mismatch": "Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar."}.get(scope_code(registry, context, validator), "")
+
+static func scope_code(registry: Dictionary, context: Dictionary, validator: Script) -> String:
 	if validator == null or not validator.has_method("validate") or not validator.call("validate", registry).is_empty():
-		return "Dieser Tierbestand kann derzeit nicht gelesen werden."
+		return "owned.invalid"
 	if not context.get("faction_id") is String or context["faction_id"].is_empty() or context.get("campaign_id") != registry["campaign_id"] or context.get("body_id") != registry["body_id"]:
-		return "Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar."
+		return "owned.scope_mismatch"
 	return ""
 
 func _row(animal: Dictionary) -> Dictionary:
-	var id: String = animal["object_id"]
-	var dead: bool = animal["status"] == "dead"
-	var order: String = "Kein aktiver Auftrag" if dead else ORDERS.get(animal["order"], "Nicht bekannt")
-	if not dead:
-		match animal["order"]:
-			"follow": order += " · " + _name("handler", animal["handler_id"], "Betreuer nicht benannt")
-			"wait": order += " · Ziel: " + _point(animal["wait_position"])
-			"home": order += " · Heimat: " + _point(animal["home"])
-	return {"key": id, "name": _name("animal", id, "Unbenanntes Tier · " + id),
-		"species": _name("species", animal["species_id"], "Name nicht bekannt · " + animal["species_id"]),
-		"owner": _name("faction", animal["owner_faction_id"], "Dein Stamm"),
-		"trust": "%s / 100" % number(animal["trust"]),
-		"status": "Verstorben" if dead else "Gezähmt", "dead": dead, "order": order,
-		"location": "%s · %s" % [_name("body", animal["body_id"], "Aktuelle Welt"), _point(animal["position"])]}
+	var data := {"key": animal.object_id, "species_id": animal.species_id,
+		"name": _name("animal", animal.object_id), "species": _name("species", animal.species_id),
+		"owner": _name("faction", animal.owner_faction_id), "body": _name("body", animal.body_id),
+		"handler": _name("handler", animal.handler_id), "trust_value": float(animal.trust),
+		"dead": animal.status == "dead", "order_code": animal.order,
+		"position": animal.position.duplicate(true), "home": animal.home.duplicate(true),
+		"wait_position": animal.wait_position.duplicate(true)}
+	return Presentation.project(data)
 
-func _name(kind: String, id: String, fallback: String) -> String:
+func _name(kind: String, id: String, fallback: String = "") -> String:
 	var value: Variant = _names.call(kind, id) if _names.is_valid() else null
 	return value.strip_edges() if value is String and not value.strip_edges().is_empty() else fallback
 
 func _point(point: Variant) -> String:
-	if point is Dictionary:
-		var direction: Array = preload("res://world/space/cube_sphere.gd").direction(point.face, point.u, point.v)
-		return "Breite %s° · Länge %s° · Höhe %s m" % [String.num(rad_to_deg(asin(clampf(direction[1], -1.0, 1.0))), 5).replace(".", ","), String.num(rad_to_deg(atan2(direction[2], direction[0])), 5).replace(".", ","), number(point.height)]
-	return "X %s · Y %s · Z %s m" % [number(point[0]), number(point[1]), number(point[2])]
+	return Presentation.point(point)
 
 static func number(value: Variant) -> String:
-	return String.num(float(value), 1).trim_suffix(".0").replace(".", ",")
+	return Presentation.number(float(value))
 
 func _read_context() -> Dictionary:
 	var value: Variant = _context.call() if _context.is_valid() else null
@@ -120,8 +118,8 @@ func _registry(source: Object) -> Dictionary:
 	var value: Variant = source.get("registry") if is_instance_valid(source) else null
 	return value if value is Dictionary else {}
 
-func _unavailable(message: String) -> Dictionary:
-	return {"available": false, "rows": [], "message": message}
+func _unavailable(code: String) -> Dictionary:
+	return {"available": false, "rows": [], "code": code, "message": Presentation.result_text(code)}
 
 func _on_animal_changed(_object_id: String, _code: String) -> void:
 	changed.emit()

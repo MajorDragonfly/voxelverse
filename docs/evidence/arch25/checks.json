@@ -1,0 +1,76 @@
+{
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "engine": "Godot 4.6.3",
+  "source": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.689
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.769
+    },
+    {
+      "name": "tribal_neighbors_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.497
+    },
+    {
+      "name": "far_simulation_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.574
+    },
+    {
+      "name": "neighbor_localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.331
+    },
+    {
+      "name": "tribal_neighbors_world_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 33.435
+    },
+    {
+      "name": "localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.319
+    }
+  ],
+  "render": {
+    "passed": true,
+    "screenshots": [
+      "neighbor-de-1280x720-100.png",
+      "neighbor-de-1280x720-150.png",
+      "neighbor-de-1920x1080-100.png",
+      "neighbor-de-1920x1080-150.png",
+      "neighbor-de-800x600-100.png",
+      "neighbor-de-800x600-150-actions.png",
+      "neighbor-de-800x600-150.png",
+      "neighbor-en-1280x720-100.png",
+      "neighbor-en-1280x720-150.png",
+      "neighbor-en-1920x1080-100.png",
+      "neighbor-en-1920x1080-150.png",
+      "neighbor-en-800x600-100.png",
+      "neighbor-en-800x600-150-actions.png",
+      "neighbor-en-800x600-150.png"
+    ],
+    "renderer": "gl_compatibility",
+    "scope": "UI fixture, no world simulation"
+  },
+  "notes": [
+    "Linux software OpenGL under Xvfb; not a target-PC/FPS benchmark.",
+    "Initial tab-registration error corrected; affected UI and world tests rerun successfully.",
+    "Four representative captures checked in; all 14 are reproducible with tools/review_neighbor_localization.py."
+  ],
+  "ui_headless_checks": 166,
+  "ui_render_checks": 158
+}

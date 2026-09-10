@@ -1,59 +1,48 @@
-# Nächste Voxelverse-Arbeiten: Umzug der Kampagne
+# Nächste Voxelverse-Arbeiten
 
-Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge ersetzen die frühere Runde „D1 neu entwickeln / D2 anbinden / D3 später“. Die fertigen D1–D3-, B1–B3-, Dorf-, Nachbar-, UI-, Karten-, Sprach- und Wartungspakete sind zusammengeführt. Ausgangspunkt ist der in [INTEGRATION_SPHERICAL_2026-09-09.md](INTEGRATION_SPHERICAL_2026-09-09.md) dokumentierte Integrationsstand.
+Stand: 10. September 2026, gemeinsamer Integrationsstand aus 28 abgeschlossenen Übergaben. [Integrationsbericht und Prüfgrenzen](INTEGRATION_2026-09-10.md), [exakte Quellen](integration-sources-2026-09-10.json), [Roadmap](../ROADMAP.md), [Architekturaufgaben](ARCHITECTURE_BACKLOG.md), [Modulanschlüsse](MODULE_CONTRACTS.md) und [Designvorgabe](VOXELVERSE_DESIGN.md) zuerst lesen. Der Bericht nennt den Veröffentlichungsstatus; ein lokaler Integrationsstand ist noch kein aktualisiertes `main`.
 
-**Zuerst lesen:** [ROADMAP.md](../ROADMAP.md), [SPHERICAL_CAMPAIGN_MIGRATION.md](SPHERICAL_CAMPAIGN_MIGRATION.md), [VOXELVERSE_DESIGN.md](VOXELVERSE_DESIGN.md). Der vollständige Kugelumzug hat Vorrang vor neuen Epochen. Die belebte Kugelszene bleibt bis zur tatsächlichen Kampagnenintegration ein eigener Bereich.
+## Bereits zusammengeführt
 
-## Aktueller gemeinsamer Arbeitsstand
+Die reguläre Kampagne verwendet ausschließlich die Kugelwelt. Die vorhandenen Kreaturen-, Heimat-, Dorf-, Zähmungs-, Milch-, Fernsimulations- und Körperreiseanschlüsse bleiben die gemeinsame Grundlage. Alte Flachweltdaten werden als geschützte Quellen über die vorhandene Kopiermigration gelesen; sie sind kein alternativer regulärer Spielstart.
 
-M1f, die lokale M1g-Kette, entwickelte Kopiermigration und regionaler Population-Speicher sind über PR #45 integriert. Die anschließende Runde liefert Körper-ID-Speicherung, gemeinsame Dorfregeln, begrenzte Navigationsarbeit, Fernsimulation und sichere Körperwechsel. Vor weiterer Arbeit [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md) lesen. ARCH-03/04 nicht erneut entwickeln. ARCH-13/14 (kleines globales Manifest, segmentierter Langzeitbestand), die umfassende Langzeit-/Ziel-PC-Messung und ARCH-19 bleiben die nächsten Skalierungsgrenzen. Die ursprünglichen Aufträge unten sind die Gesamtplanung; ihr früherer Status ist keine neue Arbeitsanweisung.
+| Pakete | Vorhandener Anschluss |
+|---|---|
+| ARCH-01/03/04 | Dokumentierte Datenbesitzer, Körperfassade und eindeutige Körper-ID im Speicher |
+| ARCH-02/05 | Kugelmessrouten, Speicherproben, zulässige Oberflächen und tatsächliche Kollisionsbereitschaft |
+| ARCH-13/14 | Persistente Kartenkacheln und bekannte Orte; vollständige Population-/Atlas-/Ortsarchive mit Neustartprüfung |
+| ARCH-15/16/18/20 | Gemeinsame Nah-/Fernarbeit, gezielte Vorher-Zustände, Ressourcenbatches und erhaltene Tierhaltung/Milchfracht bei Körperwechsel |
+| ARCH-17/21 | Portionierter Pflanzenaufbau, begrenzte Spawnversuche, radiales Wasser-Audio und additive vierte Nutztierspezies für Eier |
+| ARCH-23/24 | Zukunftsversionsschutz, gemeinsamer Fuß-/Handanbieter, Katzenpfoten, Bärentatzen, Pferdehufe und Krebsscheren |
+| ARCH-25 | Nachbarstämme, Weltkarte, Heimat/Gruppe und eigene Tiere auf DE/EN; vorhandene Sitzung bleibt bei Sprachwechsel erhalten |
+| ARCH-28/29 | Explizite bestätigte Übergabe 0 → 1 und vollständige Zuordnung der 151 Godot-Tests zu 17 Verträgen |
+| BP-COMMUNITY.1/.2 | Portables Kreaturenformat, lokale Bibliothek mit Import/Export und Vorschau, Editorübernahme und Startvorlagen |
+| ARCH-30 | Geprüfter Schiffs-/Reise-Datenentwurf; kein spielbarer Schiffsflug |
 
-## Architekturprüfung: Aufträge vor dem Start konkret wählen
+ARCH-15 wurde in PR #68 und #73 doppelt bearbeitet. Die gemeinsame Laufzeit verwendet `VillageWork.snapshot(data, member)` aus #73. Der ergänzende Vergleich aus #68 bleibt als `village_work_observation_test` samt angepasster Messhilfe erhalten. Keine zweite Snapshot-Implementierung anlegen.
 
-Ergänzung vom 9. September 2026 auf geprüftem `main` `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7`: [Architekturbefunde](ARCHITECTURE_SCALABILITY_AUDIT.md) und [30 ausführbare Teilaufträge](ARCHITECTURE_BACKLOG.md) sind die zusätzliche Arbeitsgrundlage. Die folgenden fünf Stränge bleiben zuständig; ARCH-IDs zerlegen ihre Arbeit und sind keine konkurrierenden Neuentwicklungen. Vor Arbeitsbeginn aktuellen gemeinsamen Commit und gelieferte Pakete abgleichen. M1f ist in einem anderen Arbeitsstand bereits in Bearbeitung; dieses Audit bewertet ausschließlich veröffentlichten Code und startet diesen Auftrag nicht erneut.
+## Nächste begrenzte Arbeitspakete
 
-| Strang | Erster sinnvoller begrenzter Auftrag | Danach / Abhängigkeit |
+Vor Beginn den aktuellen Branch-/PR-Stand prüfen und genau einen Teilauftrag reservieren. Die Tabelle ist eine Arbeitsreihenfolge, keine neue Reservierung.
+
+| Paket | Konkreter nächster Umfang | Abhängigkeit / Grenze |
 |---|---|---|
-| Integration / Datenkern | ARCH-01, dann ARCH-03: Datenbesitzer und Körperzugriff bündeln | ARCH-04/06/07; entwickelte Kopiermigration ARCH-12 erst mit fertigen Verbrauchern |
-| Kreaturen auf Kugeln | Laufendes M1f gegen ARCH-08 abgleichen | ARCH-09 nach gemeinsamem Ortsvertrag; Langzeitregister ARCH-14 nach Regionsspeicher |
-| Dorf auf Kugeln | ARCH-10: lokale Navigation/Fundamente radial | ARCH-11 mit ARCH-09; Controllerregeln ARCH-15 innerhalb derselben Zuständigkeit |
-| Leistung / dauerhafte Welt | ARCH-02: Messroute und Budgetinventar | ARCH-05 mit Oberflächenbesitzer; ARCH-13 mit Save-Besitzer; ARCH-16/17/18 nach ihren Vertragsabhängigkeiten |
-| UI / Inhalt / Verträge | ARCH-25 als ein klar begrenzter DE/EN-Bildschirm; ARCH-23 separat im Editorstrang | Eier über ARCH-20/21/22, Teile über ARCH-24; gemeinsame Kataloge nicht gleichzeitig unabhängig ändern |
+| ARCH-06 | Große gespeicherte Double-Koordinaten verlustfrei serialisieren und Fachorte vollständig inventarisieren | Der ARCH-30-Präzisionsnachweis bleibt offen; keine unveröffentlichten lokalen Entwürfe als geliefert zählen |
+| ARCH-07 | Bestehende Save-Teilnehmer schrittweise hinter eine feste Registrierung führen | Gemeinsamer SaveGameService bleibt alleiniger Writer; aktuelle Versionssperren erhalten |
+| ARCH-13 | Kleines globales Manifest, vollständige Referenzaufbewahrung und sichere Bereinigung | Archive für Population/Atlas/Orte existieren bereits; Backup-Menü und Labordateien sind weitere abgegrenzte Anschlüsse |
+| ARCH-14 | Verbleibende Tier-, Begegnungs- und Nahrungslangzeitregister prüfen/auslagern | Karten-/Ortspaging nicht erneut entwickeln; mehr als 256 dauerhaft veränderte Tiere gesondert nachweisen |
+| ARCH-17 / ARCH-02 | Kalte Terrain-/Kreaturenpublikation, Vorausschau und längere physische Rückroute untersuchen | Gemeldeten Rückwegstillstand reproduzieren; keine FPS-Zusage aus Headless-Werten |
+| ARCH-19 | Gemeinsamen Stand grafisch und als native Pakete abnehmen; Ziel-PC und lange Reise messen | Einheitlicher Commit, echte Neustarts und vorhandene Integrationsprüfungen; Kugelstart bleibt aktiv |
+| ARCH-22 / D3-EIER | Legestelle → versorgen → produzieren → sammeln → tragen → einlagern/essen | ARCH-20 und ARCH-21 sind vorhanden. D2 bleibt Tierbesitzer; Nah-/Fernbilanz, Pause und Neustart prüfen |
+| ARCH-24 / M3-TEILE | Rüssel, zusätzliche Schnauzen und Oktopusmund als nächstes Modellpaket | Gemeinsame Kataloge/Renderer verwenden; gespeicherte Teilrevisionen und aktive Greiferöffnung sind noch eigene Anschlüsse |
+| ARCH-25 | Einen weiteren HUD-, Journal-, Dorf- oder Editorbereich vollständig DE/EN anschließen | Bestehende vier Teilbereiche erhalten; Katalogschlüssel vereinigen und PO-Dateien generieren |
+| ARCH-26/27 | Mehrere eigene Siedlungen und tatsächliche Transporte | Erst benötigte Regions-/Ortsverträge liefern; keine zweiten Vorrats- oder Tierdienste |
+| BP-COMMUNITY.3 | Dienst-/Uploadumfang für den Community-Katalog festlegen und danach umsetzen | Lokale Bibliothek ist vorhanden; Onlineveröffentlichung, Galerie und weitere Bauplanarten bleiben offen |
 
-**Jetzt direkt verwendbarer Auftrag für den Datenkern:**
+## Regeln für Übergaben
 
-„Übernimm ARCH-01 und anschließend nur ARCH-03 aus `docs/ARCHITECTURE_BACKLOG.md` am aktuellen gemeinsamen Voxelverse-main. Erfasse zuerst Datenbesitzer und Erweiterungsverträge. Bündele danach Körperzugriffe hinter dem vorhandenen Kampagnenmodell; Lesezugriff, Anlage und veränderbaren Zustand ausdrücklich trennen. Bestehende Speicherformate und IDs erhalten. Keine neue Save-Struktur, keine Seed-Neuvergabe und keine fremden unfertigen Änderungen übernehmen. Liefere genau diese Fassade mit Neu-/Altstandsnachweis und Übergabe für ARCH-04.“
+Jedes Fachpaket nennt Basis, exakten Commit, Vertragsversionen, geänderte Dateien, tatsächlich ausgeführte Tests und verbleibende Grenzen. Neue Tests genau einmal in `tools/validation/contracts.json` eintragen. Die gemeinsame Integration prüft betroffene Verbraucher erneut; Einzelbranch-Ergebnisse ersetzen keine gemeinsame Abnahme.
 
-**Parallel verwendbarer Messauftrag:**
+Gemeinsame Dateien wie SaveGameService, `campaign_population.gd`, Weltkartenpanel und Sprachkatalog pro Runde einem Integrationsbesitzer zuordnen. Fremde unfertige Änderungen nicht übernehmen. Neue Ideen bleiben im [Feature-Backlog](FEATURE_BACKLOG.md); bestehende Wünsche und spätere Spielphasen werden durch technische Teilprüfungen nicht automatisch als fertig markiert.
 
-„Übernimm ARCH-02. Messe den tatsächlichen gemeinsamen Stand mit reproduzierbarer Route und 1/10/100 Körpern für Speicherproben. Erfasse Frame-/Uploadzeiten, Queues, aktive Objekte und Speicherentwicklung. 1080p60 auf Gaming-PC ist das vorläufige Ziel; unbekannte Zielhardware und nicht messbare GPU-Werte offen kennzeichnen. Keine Grenzen ohne Messung erhöhen. Liefere Zahlen und konkrete Anschlussaufgaben für ARCH-13/17.“
-
-Gemeinsame Dateien und Kataloge erhalten pro Runde einen Integrationsbesitzer. Die vollständigen Abhängigkeiten, Abnahmen und Übergaberegeln stehen beim jeweiligen ARCH-Auftrag. Größere Funktionspakete beginnen erst nach ihrem benötigten Vertrag, können aber vorbereitende Daten-/Modellarbeiten unabhängig liefern.
-
-## 1. Gemeinsame Grundlage – erweiterten Umzug abschließen
-
-**Bereits eingebaut:** Save 8/Kampagne 2, `surface_context.gd`, der gemeinsame Kugelstart, radiale Spielerorte, Karten, frühe Kopiermigration mit Quellarchiv und Rückweg. [WORK_M1E_CAMPAIGN.md](WORK_M1E_CAMPAIGN.md) ist der aktuelle Anschlussvertrag. Keine zweite Kampagne oder Speicherdienststruktur anlegen. Noch offen sind die Zielzuordnung und Laufzeitanbindung vorhandener Regions-, Heimat-, Pflichtarten-, Dorf- und Tierhaltungsdaten; ihre Sperren dürfen erst nach entsprechendem Erhaltungsnachweis entfallen.
-
-„Vervollständige den noch offenen Teil von M1e gemäß ARCH-03/04/06/07/12. Der Start-/Lade-/Speicherweg und die frühe Kopiermigration existieren bereits. Bündele zuerst Körperzugriffe und sichere eindeutige Körperidentität, dann die versionierten Fachorte. Erweitere das vorhandene Manifest und den Kopierweg nach Fertigstellung der M1f-/M1g-Verbraucher auf tatsächlich entwickelte Stände mit Orten, Bewohnern, Tieren, Vorräten und laufender Fracht. Erhalte die Lesbarkeit der bisherigen Flachweltdaten ausschließlich für Kopiermigration und Wiederherstellung von Originalarchiven; kein stilles Umdeuten alter XYZ-Werte, keine Neugenerierung bestehender Spezies. Liefere Schreibfehler-/Zukunftsversionstests und einen frischen Prozess als Nachweis. Änderungen an GameState und SaveGameService gehören zu diesem gemeinsamen Paket.“
-
-## 2. Kreaturenphase auf der Kugel
-
-„Setze nach dem veröffentlichten M1e-Vertrag M1f um: Überführe Spielersteuerung, Kamera, Scanner, Sammeln/Essen, Wildtierverhalten, D1-Rollen und Heimatgruppe auf dieselbe radiale Oberfläche. Nutze bestehende Objekt-/Arten-IDs, Körperentwürfe, Fortschritt und Bücher. Prüfe echte Interaktionen, Flächenkanten, Ursprungswechsel, Pause und Neustart. Die neue Laufzeit muss die gemeinsame Kreaturenphase sein; eine zweite isolierte Demo erfüllt den Auftrag nicht.“
-
-## 3. Dorf, Zähmung und Tierhaltung auf der Kugel
-
-„Setze nach M1e den radialen Teil M1g um. Übernimm die vorhandene Dorfwirtschaft, Wachstum bis sechs Bewohner, Nachbarhilfe, D2-Besitz/Befehle und D3-Pflege/Milch. Ersetze planare Orte und Welt-Y-Annahmen über den gemeinsamen Kontext. Halte Gruppenbewegung und Baufundamente lokal begrenzt; stelle echte erreichbare Wege und Materialtransporte sicher. D2 und D3 verwenden den jetzt vorhandenen gemeinsamen Tierbestand. Abnahme: Aufstieg mit gleichen Bewohnern → zähmen → Tierplatz → versorgen → Milchtransport → Pause/Neustart. Keine neuen Bürger aus fremden Tierarten.“
-
-## 4. Skalierung, Gewässer und Audio
-
-„Übernimm M1h. Messe zuerst aktive Terrain-/Fauna-/Objektgrenzen und Reiseverhalten. Schließe Wasser, Unterwasseransicht und räumliches Audio an den gleichen Oberflächenkontext an. Implementiere anschließend eine explizite Übergabe zwischen Nah- und Fernsimulation sowie begrenztes Regionsladen. Vorräte, Tierpflege und Fracht haben genau einen Simulationsbesitzer; Pause und geschlossene Anwendung erzeugen keine Offline-Produktion. Liefere Messroute, Hardware/Renderer, Speicherentwicklung und Übergabetests statt einer unbelegten FPS-Zusage.“
-
-## 5. Gemeinsame Oberfläche und Abnahme
-
-„Erhalte das gemeinsame Buch, Mini-/Weltkarte und die Designvorgabe. Führe die vorhandene Deutsch-/Englisch-Verwaltung schrittweise durch HUD, Buch, Dorf und Editor; L1 deckt bisher nur einen Teil der Oberfläche ab. Karten folgen dem tatsächlichen Körper und Spielerwissen. Prüfe neue Kugelkampagne und migrierten Altstand bei 1920×1080, 1280×720, 2560×1080 und großer UI-Skalierung. Verwende dieselben Auswahl-, Pause-, Speicher- und Rückmeldedienste.“
-
-## Übergabe und Zusammenführung
-
-Alle Folgearbeiten starten vom veröffentlichten gemeinsamen Commit. Ein Fachpaket liefert exakten Commit, Vertragsversionen, veränderte Dateien, Tests und offene Grenzen. Die Integration prüft gegenseitige Abhängigkeiten erneut; Einzelbranch-Nachweise gelten nicht automatisch für den Gesamtstand. Gemeinsame Verträge und Roadmap werden durch die Integration gepflegt. Keine fremden unfertigen Arbeitsstände übernehmen.
-
-Nach der bereits vorhandenen M1e-Grundlage können unabhängige Verbraucher an denselben veröffentlichten Vertrag anschließen. **Entscheidung vom 10. September:** Der Kugelstart ist ohne vorgeschaltete Ziel-PC-Abnahme der einzige reguläre Spielweg. Neue Spiele, Fortsetzen und Editor-/Laborrückwege dürfen keine Flachwelt aktivieren. [WORK_SPHERE_ONLY_ENTRY.md](WORK_SPHERE_ONLY_ENTRY.md) beschreibt die Umstellung. Die verbleibende M1i/ARCH-19-Abnahme und Fehlerbehebung erfolgen direkt auf der Kugelwelt. D4, Mittelalter, Neuzeit und Raumfahrt folgen auf dieser Grundlage. Kurze Oberfläche-/Orbitübergänge sind zulässig; entfernte eigene Siedlungen sollen während laufender Kampagnenzeit vereinfacht weiterarbeiten, nicht während Pause oder geschlossener Anwendung. Diese bestätigten Entscheidungen gehören zu ARCH-16/18/30.
+Nur die eigene Spezies entwickelt Zivilisation. Epochenwechsel brauchen ausdrückliche Bestätigung; spätere unspielbare Phasen bleiben gesperrt. Gebäudeeditor erst im Mittelalter. Kurze Oberfläche-/Orbitübergänge sind zulässig. Entfernte eigene Orte arbeiten während laufender Kampagnenzeit; Pause, Editorpause und geschlossene Anwendung produzieren nichts. Selbstgestalten bleibt freiwillig: passende lokale Vorlagen müssen ohne eigene Editorarbeit nutzbar sein.

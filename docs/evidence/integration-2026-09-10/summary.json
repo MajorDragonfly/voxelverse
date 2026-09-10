@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "date": "2026-09-10",
+  "repository": "MajorDragonfly/voxelverse",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "integration_gameplay_commit": "9ba2becdebf67e11fd94aac9f3aafd6bf1f56ed7",
+  "verified_diagnostic_commit": "3ca7e5a70dc7230b266f2a509f945c4cbd87f1db",
+  "source_pull_requests": 28,
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "execution": "headless_source_project",
+  "counts": {
+    "godot_tests": 151,
+    "godot_passed_after_targeted_corrections": 151,
+    "initial_godot_passed": 149,
+    "runtime_entry_shutdown_streaming": 23,
+    "runtime_passed": 23,
+    "python_tooling_tests": 43,
+    "python_tooling_passed": 43,
+    "import_and_art_checks": 2,
+    "contract_gate_passed": true,
+    "contracts": 17,
+    "locale_messages_per_language": 436
+  },
+  "python_seconds": 54.303,
+  "atlas_schema_2_reference_commit": "57a330fc5e064ea0cda221e2f8e86140e8685f8f",
+  "initial_failures": [
+    {
+      "name": "egg_species_campaign_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 53.227,
+      "contract": "domestic_fauna"
+    },
+    {
+      "name": "spherical_gameplay_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 333.308,
+      "contract": "spherical_gameplay"
+    }
+  ],
+  "final_reruns": [
+    {
+      "name": "egg_species_campaign_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 45.334,
+      "contract": "domestic_fauna"
+    },
+    {
+      "name": "spherical_gameplay_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 443.385,
+      "contract": "spherical_gameplay"
+    }
+  ],
+  "focused_real_fixture_replay": {
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 118.744
+  },
+  "publication_status": "approved_for_upload_and_main_merge",
+  "not_run": [
+    "native packaged export",
+    "graphical target-PC/GPU acceptance",
+    "long physical return route / 1080p60 acceptance"
+  ],
+  "notes": [
+    "The 151 tests ran in four independent processes with isolated saves.",
+    "Only the two affected probes were rerun after correcting their timing assumptions; production gameplay code did not change after 9ba2bec.",
+    "Godot results can report a dirty tracked worktree because roadmap/documentation updates were pending during validation. The diagnostic source commits and targeted reruns are recorded separately.",
+    "An execution-service restart interrupted a diagnostic retry; another full retry was stopped after its setup needed correction. Neither counts as passed.",
+    "The deliberate failed-save warning is expected; ERROR/SCRIPT ERROR/leak diagnostics remain strict failures."
+  ],
+  "authorization": "Explicit user approval in the integration conversation"
+}

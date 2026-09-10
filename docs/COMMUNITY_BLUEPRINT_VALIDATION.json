@@ -1,0 +1,77 @@
+{
+  "package": "BP-COMMUNITY.1",
+  "date": "2026-09-10",
+  "platform": "Linux headless",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "base_tree": "366cdadcbe31d52d5b4eee2d5bac056d30f36c61",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.884,
+      "log_sha256": "0e41c6d62766c3d3f3ae8a820b758e7b0e64db64b754f8ead29155377413b684"
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.719,
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+    },
+    {
+      "name": "community_blueprint_package_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.381,
+      "log_sha256": "d5e707847fcf02494b12afeb31d2f340d117d85815a96fa34a7e7d5ab025dac2"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.522,
+      "log_sha256": "86a8337dc46687da938eb46529a53c589b686792ef70cadd5b763d434da9df92"
+    },
+    {
+      "name": "creature_body_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.333,
+      "log_sha256": "bf0744153a5129a1412f78761d986f3e6ac3032dcf36bbf76a053f5c064ab7df"
+    },
+    {
+      "name": "creature_builder_v7_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.47,
+      "log_sha256": "b436a033b434139e82a24f8897524d866684862404c11367aef3df2815ee4389"
+    },
+    {
+      "name": "creature_studio_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.833,
+      "log_sha256": "5f669953ad2b6e0b156e1f629aa749ded13998264fb977ee7ca25394c273bc58"
+    },
+    {
+      "name": "save_slots_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.271,
+      "log_sha256": "8ea03b2478e1c540c5c34e8209e14f2d3239e063ffb0ae1a40988c0e0add0552"
+    }
+  ],
+  "transfer_completion_markers": [
+    "COMMUNITY_TRANSFER_STAGE_PASSED: source",
+    "COMMUNITY_TRANSFER_STAGE_PASSED: receiver",
+    "COMMUNITY_TRANSFER_STAGE_PASSED: restart",
+    "COMMUNITY_BLUEPRINT_PACKAGE_PASSED"
+  ],
+  "source_sha256": {
+    "assembly/exchange/creature_blueprint_package.gd": "c483ba12ab73a77003289696f969a2ed9db32629a81479c6ddaaa8b4df9fb36f",
+    "assembly/exchange/creature_package_schema.gd": "ff26c36e3b4fbfbaab75f4bc13f8a311166af6ae97566666aa04f2ae76e9cff3",
+    "tests/community_blueprint_package_test.gd": "6621d830ca6042d9199984ee34e0db7f27220d44318778b66619d4a8d05e913e"
+  },
+  "scope": "Portable V7 creature package, strict import preparation, actual preview comparison, separate user directories and fresh-process offline restore. Existing editor/save regressions. No GUI/library/online service or Windows acceptance."
+}

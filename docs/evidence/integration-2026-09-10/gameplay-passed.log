@@ -1,0 +1,29 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+SPHERE_GAMEPLAY_STAGE open_campaign elapsed_seconds=1.139
+SPHERE_POPULATION 3 2
+SPHERE_VILLAGE_PREPARED 599
+SPHERE_VILLAGE_ACTIVE 3 wood 2
+SPHERE_GAMEPLAY_STAGE build_workshops elapsed_seconds=66.875
+SPHERE_WORKSHOP well { "work_ms": 3744, "navigation_ms": 0 }
+SPHERE_WORKSHOP fiberbed { "work_ms": 2515, "navigation_ms": 0 }
+SPHERE_GAMEPLAY_STAGE approach_wildlife elapsed_seconds=113.768
+SPHERE_TAMED object_fee1bedec2dbb52169fac27edd9ca358
+SPHERE_GAMEPLAY_STAGE animal_book_and_home elapsed_seconds=124.995
+SPHERE_GAMEPLAY_STAGE prepare_pen_navigation elapsed_seconds=133.274
+SPHERE_GAMEPLAY_STAGE build_pen elapsed_seconds=156.06
+SPHERE_GAMEPLAY_STAGE follow_to_pen elapsed_seconds=197.299
+SPHERE_GAMEPLAY_STAGE supply_pen elapsed_seconds=200.48
+SPHERE_GAMEPLAY_STAGE produce_and_collect_milk elapsed_seconds=221.322
+SPHERE_GAMEPLAY_STAGE block_loaded_carrier elapsed_seconds=298.421
+SPHERE_GAMEPLAY_STAGE animal_returns_after_obstacle elapsed_seconds=298.764
+SPHERE_GAMEPLAY_STAGE animal_travel_failed_write elapsed_seconds=298.891
+WARNING: Could not commit save: user://missing-animal-travel-parent/blocked.json (File not found)
+SPHERE_GAMEPLAY_STAGE animal_travel_depart elapsed_seconds=317.106
+ANIMAL_TRAVEL_FAR { "body_id": "body_db6ed7a5622252fb6d1a56cb0507f278", "animal_id": "object_fee1bedec2dbb52169fac27edd9ca358", "production_seconds_before": 309.2, "production_seconds_after": 314.441329333333, "food_consumed": 0.01747109777778, "cargo": "milk", "milk_stock": 0.0 }
+SPHERE_GAMEPLAY_STAGE animal_travel_far_restart elapsed_seconds=340.873
+SPHERE_GAMEPLAY_STAGE animal_travel_return elapsed_seconds=355.405
+ANIMAL_TRAVEL_RETURN_BALANCE { "owed_seconds": 5.71203599999956, "campaign_clock": 952.898397748852, "returned_cursor": 952.898397748852 }
+ANIMAL_TRAVEL_PASSED: real D1/D2 animal, pen and milk cargo; A-B-A, five far production seconds, failed write, pause, fresh process and single physical return.
+SPHERE_GAMEPLAY_STAGE fresh_process_returned elapsed_seconds=405.503
+SPHERE_MILK_DELIVERED 2.0
+SPHERE_GAMEPLAY_STAGE milk_delivered elapsed_seconds=442.832

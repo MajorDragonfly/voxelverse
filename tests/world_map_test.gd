@@ -107,7 +107,7 @@ func _run() -> void:
 	_expect(Source.visible_places(tracker.atlas.data, self).size() == 1, "Dead ally retained a friendly marker.")
 	var saved_text: String = FileAccess.get_file_as_string(saves.save_path)
 	var future: Dictionary = JSON.parse_string(saved_text)
-	Registry.active(future.game_state).exploration_atlas.schema = 2
+	Registry.active(future.game_state).exploration_atlas.schema = Atlas.SCHEMA + 1
 	var file := FileAccess.open(saves.save_path, FileAccess.WRITE)
 	file.store_string(JSON.stringify(future)); file.close()
 	_expect(not saves.load_now() and not saves.save_now(), "Future map schema was silently downgraded.")
@@ -134,7 +134,7 @@ func _test_model() -> void:
 	decoded.tiles.values()[0][0] = -1
 	_expect(not Atlas.validate(decoded, "test").is_empty(), "Corrupt fog bits were accepted.")
 	var legacy: Dictionary = Atlas.create("test", "legacy_plane_v9")
-	legacy.schema = 2
+	legacy.schema = Atlas.SCHEMA + 1
 	_expect(Atlas.newer(legacy), "Future map schema was not detected.")
 
 func _test_planet() -> void:

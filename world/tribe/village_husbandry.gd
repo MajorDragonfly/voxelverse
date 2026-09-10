@@ -1,5 +1,6 @@
 extends RefCounted
 ## D3 owns feed credits and production, never a second animal/species register.
+const Production = preload("res://world/tribe/production_catalog.gd")
 const E = preload("res://world/tribe/village_economy.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
@@ -7,7 +8,7 @@ const MAX_PENS: int = 2
 const MAX_RECORDS: int = 32
 const CAPACITY: Dictionary = {"food": 4.0, "water": 8.0}
 const TARGET: Dictionary = {"food": 2.0, "water": 4.0}
-const CARE_SECONDS: float = 300.0
+const CARE_SECONDS: float = Production.CARE_SECONDS
 
 static func install(data: Dictionary) -> void:
 	data["husbandry"] = {"schema": 1, "pens": [], "records": {},
@@ -82,23 +83,25 @@ static func advance(data: Dictionary, p: Dictionary, delta: float) -> bool:
 	if not E.number(delta, 0.000001, 0.25):
 		return false
 	var record: Dictionary = data["husbandry"]["records"][p["animal_id"]]
-	var recipe: Dictionary = record["recipe"]
-	var seconds: float = minf(delta, minf(float(p["food"]) * CARE_SECONDS, float(p["water"]) * CARE_SECONDS / float(recipe["water_need"])))
+	var recipe: Dictionary = Production.from_milk(record["recipe"])
+	var seconds: float = delta
+	for kind: String in recipe.inputs:
+		seconds = minf(seconds, float(p[kind]) * float(recipe.care_seconds) / float(recipe.inputs[kind]))
 	if seconds <= 0:
 		return false
-	for kind: String in ["food", "water"]:
-		var used: float = seconds / CARE_SECONDS * (float(recipe["water_need"]) if kind == "water" else 1.0)
+	for kind: String in recipe.inputs:
+		var used: float = seconds / CARE_SECONDS * float(recipe.inputs[kind])
 		p[kind] = maxf(0.0, float(p[kind]) - used)
 		data["husbandry"]["consumed"][kind] += used
 	if int(record["pending_milk"]) > 0:
 		return false # Continue upkeep but keep at most one completed batch.
-	record["clock"] = minf(float(recipe["milk_interval"]), float(record["clock"]) + seconds)
-	if float(record["clock"]) + 0.0000001 < float(recipe["milk_interval"]):
+	record["clock"] = minf(float(recipe.interval), float(record["clock"]) + seconds)
+	if float(record["clock"]) + 0.0000001 < float(recipe.interval):
 		return false
 	record["clock"] = 0.0
 	record["cycles"] += 1
 	# One stock unit is one litre. Fractional yields accumulate without rounding up.
-	var produced: int = floori(float(record["cycles"]) * float(recipe["milk_yield"]))
+	var produced: int = Production.produced(int(record["cycles"]), recipe)
 	record["pending_milk"] = produced - int(record["produced"])
 	record["produced"] = produced
 	record["pickup"] = p["entrance"].duplicate()
@@ -106,14 +109,13 @@ static func advance(data: Dictionary, p: Dictionary, delta: float) -> bool:
 
 static func offer(data: Dictionary, identity: String) -> bool:
 	var record: Dictionary = data["husbandry"]["records"][identity]
-	var space: int = 48 - E.reserve(data, "milk") - E.milk_pending(data)
-	var amount: int = mini(space, int(record["pending_milk"]))
-	if amount <= 0:
-		return false
-	var batch: Dictionary = {"schema": 1, "source_id": identity, "body_id": data["body_id"], "faction_id": data["faction_id"],
-		"sequence": int(record["sequence"]) + 1, "amount": amount, "position": record["pickup"].duplicate()}
-	if not E.receive_milk(data, batch).is_empty():
-		return false
+	var recipe: Dictionary = Production.from_milk(record.recipe)
+	var kind: String = recipe.resource_id
+	var space: int = int(E.Resources.definition(kind).capacity) - E.reserve(data, kind) - E.pending(data, kind)
+	var amount: int = mini(space, int(record.pending_milk))
+	if amount <= 0: return false
+	var batch: Dictionary = E.Batch.create(data, identity, int(record.sequence) + 1, amount, record.pickup, recipe.recipe_id)
+	if not E.receive_batch(data, batch).is_empty(): return false
 	# Same campaign transaction as the inbox: no acknowledgment gap or second file.
 	record["sequence"] += 1
 	record["pending_milk"] -= amount

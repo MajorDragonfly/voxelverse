@@ -20,8 +20,16 @@ class PerformanceCliTest(unittest.TestCase):
             self.assertIn("outside the source project", result.stderr)
             self.assertFalse(output.exists())
 
+    def test_rejects_invalid_seed_and_nonfinite_duration_before_launch(self):
+        for option, value in [("--seed", "0"), ("--seed", "2147483648"), ("--walk-seconds", "nan"), ("--walk-seconds", "inf")]:
+            with self.subTest(option=option, value=value):
+                result = subprocess.run([sys.executable, str(RUNNER), option, value,
+                                         "--godot", "missing-engine"], capture_output=True, text=True)
+                self.assertEqual(result.returncode, 2)
+                self.assertNotIn("Godot executable not found", result.stderr)
+
     def test_preserves_previous_report(self):
-        for name in ("performance.json", "capture.json", "engine.log"):
+        for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture"):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary:
                 output = Path(temporary)
                 previous = output / name

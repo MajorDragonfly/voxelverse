@@ -1,6 +1,8 @@
 extends RefCounted
 class_name ModularAssembly
 
+const Contract = preload("res://assembly/core/blueprint_contract.gd")
+const Ids = preload("res://core/campaign/campaign_ids.gd")
 const SCHEMA_VERSION: int = 1
 const DEFAULT_GRID_SIZE: float = 0.25
 
@@ -11,6 +13,7 @@ static func create(
 ) -> Dictionary:
 	return {
 		"schema": SCHEMA_VERSION,
+		"design_id": Ids.create("design"),
 		"assembly_type": assembly_type,
 		"name": display_name,
 		"revision": 0,
@@ -25,6 +28,8 @@ static func normalize(
 	blueprint: Dictionary,
 	assembly_type: String = "generic"
 ) -> Dictionary:
+	if not Contract.version_error(blueprint).is_empty():
+		return blueprint
 	if blueprint.is_empty():
 		blueprint = create(assembly_type)
 	blueprint["schema"] = SCHEMA_VERSION
@@ -77,6 +82,8 @@ static func add_part(
 	scale: Vector3 = Vector3.ONE,
 	socket_id: String = ""
 ) -> int:
+	if not Contract.version_error(blueprint).is_empty() or blueprint.get("parts", []).size() >= Contract.MAX_PARTS:
+		return -1
 	normalize(blueprint, str(blueprint.get("assembly_type", "generic")))
 	var parts: Array = blueprint.get("parts", [])
 	var part: Dictionary = _default_part(part_id)
@@ -90,6 +97,8 @@ static func add_part(
 
 
 static func duplicate_part(blueprint: Dictionary, index: int) -> int:
+	if not Contract.version_error(blueprint).is_empty() or blueprint.get("parts", []).size() >= Contract.MAX_PARTS:
+		return -1
 	var parts: Array = blueprint.get("parts", [])
 	if index < 0 or index >= parts.size() or not (parts[index] is Dictionary):
 		return -1
@@ -102,6 +111,7 @@ static func duplicate_part(blueprint: Dictionary, index: int) -> int:
 
 
 static func remove_part(blueprint: Dictionary, index: int) -> bool:
+	if not Contract.version_error(blueprint).is_empty(): return false
 	var parts: Array = blueprint.get("parts", [])
 	if index < 0 or index >= parts.size():
 		return false
@@ -118,6 +128,7 @@ static func get_part(blueprint: Dictionary, index: int) -> Dictionary:
 
 
 static func set_part(blueprint: Dictionary, index: int, part: Dictionary) -> bool:
+	if not Contract.version_error(blueprint).is_empty(): return false
 	var parts: Array = blueprint.get("parts", [])
 	if index < 0 or index >= parts.size():
 		return false
@@ -133,6 +144,7 @@ static func transform_part(
 	rotation_delta: Vector3 = Vector3.ZERO,
 	scale_multiplier: Vector3 = Vector3.ONE
 ) -> bool:
+	if not Contract.version_error(blueprint).is_empty(): return false
 	var part: Dictionary = get_part(blueprint, index)
 	if part.is_empty():
 		return false
@@ -159,20 +171,24 @@ static func snap_position(position: Vector3, grid_size: float) -> Vector3:
 
 
 static func set_grid_snap(blueprint: Dictionary, enabled: bool) -> void:
+	if not Contract.version_error(blueprint).is_empty(): return
 	blueprint["grid_snap"] = enabled
 
 
 static func set_grid_size(blueprint: Dictionary, grid_size: float) -> void:
+	if not Contract.version_error(blueprint).is_empty(): return
 	blueprint["grid_size"] = clampf(grid_size, 0.03125, 4.0)
 
 
 static func increment_revision(blueprint: Dictionary) -> int:
+	if not Contract.version_error(blueprint).is_empty(): return -1
 	var revision: int = maxi(int(blueprint.get("revision", 0)), 0) + 1
 	blueprint["revision"] = revision
 	return revision
 
 
 static func serialize(blueprint: Dictionary) -> Dictionary:
+	if not Contract.inspect(blueprint).ok: return {}
 	var normalized: Dictionary = blueprint.duplicate(true)
 	normalize(normalized, str(normalized.get("assembly_type", "generic")))
 	var serialized_parts: Array = []
@@ -180,7 +196,8 @@ static func serialize(blueprint: Dictionary) -> Dictionary:
 		if not (part_value is Dictionary):
 			continue
 		var part: Dictionary = part_value
-		serialized_parts.append({
+		var serialized_part: Dictionary = part.duplicate(true)
+		serialized_part.merge({
 			"uid": str(part.get("uid", "")),
 			"part_id": str(part.get("part_id", "")),
 			"missing_part_id": str(part.get("missing_part_id", "")),
@@ -190,14 +207,16 @@ static func serialize(blueprint: Dictionary) -> Dictionary:
 			"mirror_group": str(part.get("mirror_group", "")),
 			"socket_id": str(part.get("socket_id", "")),
 			"tags": part.get("tags", []).duplicate(),
-		})
+		}, true)
+		serialized_parts.append(serialized_part)
 	normalized["parts"] = serialized_parts
 	return normalized
 
 
 static func deserialize(data: Dictionary) -> Dictionary:
-	var blueprint: Dictionary = data.duplicate(true)
-	var source_parts: Array = data.get("parts", []) if data.get("parts", []) is Array else []
+	if not Contract.inspect(data).ok: return {}
+	var blueprint: Dictionary = Contract.migrate_part_ids(data)
+	var source_parts: Array = blueprint.get("parts", [])
 	var parts: Array = []
 	for value in source_parts:
 		if not (value is Dictionary):
@@ -233,6 +252,10 @@ static func validate(
 	part_definitions: Dictionary
 ) -> Array[String]:
 	var errors: Array[String] = []
+	var inspection: Dictionary = Contract.inspect(blueprint)
+	if not inspection.ok:
+		errors.append(str(inspection.code))
+		return errors
 	if str(blueprint.get("assembly_type", "")).is_empty():
 		errors.append("Assembly type is missing.")
 	var seen_uids: Dictionary = {}

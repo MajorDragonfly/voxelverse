@@ -22,7 +22,7 @@ jobs:
         run: >-
           python3 tools/validate_godot.py
           --godot "${{ steps.engine.outputs.godot }}"
-          --output /tmp/validation-assembly --tests modular_assembly_framework_test asset_pipeline_test --skip-main
+          --output /tmp/validation-assembly --tests blueprint_contract_test modular_assembly_framework_test asset_pipeline_test --skip-main
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4

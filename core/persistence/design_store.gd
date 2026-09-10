@@ -2,6 +2,7 @@ extends RefCounted
 class_name CampaignDesignStore
 
 const Atomic = preload("res://core/persistence/atomic_json.gd")
+const Contract = preload("res://assembly/core/blueprint_contract.gd")
 const FIXED_PATHS: Array[String] = ["user://creature_assembly_v7.json",
 	"user://creature_editor_blueprint_v5.json", "user://creature_editor_blueprint.json", "user://creature_editor_spine_v4.json",
 	"user://building_builder_autosave.json"]
@@ -28,10 +29,37 @@ static func write(path: String, value: Dictionary) -> Error:
 	var owner := service()
 	if is_managed(path) and owner != null and bool(owner.get("_write_blocked")):
 		return ERR_UNAVAILABLE
+	if is_blueprint(path, value):
+		if not Contract.inspect(value).ok: return ERR_INVALID_DATA
+		# Check both the authoritative slot and the loose file before touching
+		# either. A fallback preview must never overwrite a protected original.
+		if not write_status(path).ok: return ERR_UNAVAILABLE
 	var error: Error = Atomic.write(path, value)
 	if error == OK and is_managed(path) and owner != null:
 		owner.call("record_design", path, JSON.stringify(value, "\t"))
 	return error
+
+
+static func is_blueprint(path: String, value: Dictionary = {}) -> bool:
+	return path != "user://creature_editor_spine_v4.json" and (value.has("parts") or path in FIXED_PATHS or path.get_base_dir() == BUILDING_DIR)
+
+
+static func write_status(path: String) -> Dictionary:
+	var texts: Array[String] = [read_text(path)]
+	if FileAccess.file_exists(path): texts.append(FileAccess.get_file_as_string(path))
+	for text in texts:
+		if text.is_empty(): continue
+		var result: Dictionary = Contract.inspect_text(text)
+		if not result.ok: return result
+	return {"ok": true, "code": ""}
+
+
+static func has_unsupported_blueprints(files: Dictionary) -> bool:
+	for path in files:
+		if not is_blueprint(str(path)) or not files[path] is String: continue
+		var parsed: Dictionary = Atomic.parse_dictionary(files[path])
+		if parsed is Dictionary and not Contract.version_error(parsed).is_empty(): return true
+	return false
 
 
 static func list_buildings() -> Array[String]:

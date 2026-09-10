@@ -1,255 +1,271 @@
 extends SceneTree
-## Historical planar comparison only. The public SessionFlow now starts spheres.
-## Scripted player positions exercise legacy streaming, not current campaign FPS.
-const Assets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
+## ARCH-02: real spherical player input, no position snapping or speed changes.
+const Surface = preload("res://core/campaign/surface_context.gd")
+const Cube = preload("res://world/space/cube_sphere.gd")
 const Shutdown = preload("res://core/runtime_shutdown.gd")
-const WORLD: String = "res://core/diagnostics/legacy_world.tscn"
+const Stats = preload("res://tools/performance_stats.gd")
 const TITLE: String = "res://ui/frontend/main_menu.tscn"
+var config: Dictionary
+var recipe: Dictionary
+var report: Dictionary
+var failures: Array[String] = []
+var segments: Array = []
+var snapshots: Array = []
+var saves: Node
+var flow: Node
+var raw: FileAccess
+var samples: Dictionary = {}
+var started: int
+var last_tick: int
+var next_snapshot: int = 0
+var stage: String
+var cycle: int = -1
+var headless: bool
+var breadcrumbs: Array[Dictionary] = []
+var source_world: WeakRef
 
-var _config: Dictionary
-var _recipe: Dictionary
-var _report: Dictionary
-var _failures: Array[String] = []
-var _segments: Array[Dictionary] = []
-var _menus: Array[Dictionary] = []
-var _worlds: Array[WeakRef] = []
-var _saves: Node
-var _flow: Node
-var _frames: Array[float] = []
-var _draws: Array[float] = []
-var _process_samples: Array[float] = []
-var _physics_samples: Array[float] = []
-var _memory_peak: int = 0
-var _started: int = 0
-var _last_tick: int = 0
-var _pending_peak: int = 0
-
-
-func _initialize() -> void:
-	call_deferred("_run")
-
+func _initialize() -> void: call_deferred("_run")
 
 func _run() -> void:
-	var arguments := OS.get_cmdline_user_args()
-	if arguments.size() != 1:
-		push_error("Expected the performance configuration path.")
-		await Shutdown.finish(self, 1)
-		return
-	var decoded: Variant = JSON.parse_string(FileAccess.get_file_as_string(arguments[0]))
-	if not decoded is Dictionary:
-		push_error("Invalid performance configuration.")
-		await Shutdown.finish(self, 1)
-		return
-	_config = decoded
-	_recipe = _config["recipe"]
-	Engine.max_fps = int(_recipe["frame_cap"])
-	root.size = Vector2i(int(_recipe["resolution"][0]), int(_recipe["resolution"][1]))
+	var args := OS.get_cmdline_user_args()
+	if args.size() != 1: push_error("Expected performance config path."); await Shutdown.finish(self, 1); return
+	config = JSON.parse_string(FileAccess.get_file_as_string(args[0]))
+	recipe = config.recipe
+	saves = root.get_node("SaveGameService")
+	flow = root.get_node("SessionFlow")
+	headless = DisplayServer.get_name() == "headless"
+	Engine.max_fps = recipe.frame_cap
+	root.size = Vector2i(recipe.resolution[0], recipe.resolution[1])
 	root.content_scale_size = root.size
-	var headless: bool = DisplayServer.get_name() == "headless"
 	if not headless:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	var adapter: String = RenderingServer.get_video_adapter_name()
-	var software: bool = headless
-	for token: String in ["llvmpipe", "lavapipe", "softpipe", "software", "swiftshader"]:
-		software = software or token in adapter.to_lower()
-	_saves = root.get_node("SaveGameService")
-	_flow = root.get_node("SessionFlow")
-	_report = {"recipe": _recipe, "godot": Engine.get_version_info()["string"],
+		RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(), true)
+	raw = FileAccess.open(str(config.output).path_join("frames.csv"), FileAccess.WRITE)
+	if raw == null: push_error("Cannot write raw frames."); await Shutdown.finish(self, 1); return
+	raw.store_csv_line(["cycle", "stage", "tick_us", "frame_ms", "process_monitor_ms", "physics_monitor_ms", "render_cpu_ms", "render_gpu_ms", "draw_calls"])
+	report = {"protocol": 2, "recipe": recipe, "source": config.source,
+		"godot": Engine.get_version_info().string, "cpu": OS.get_processor_name(), "logical_cpus": OS.get_processor_count(),
+		"software_renderer": headless or RenderingServer.get_video_adapter_type() == RenderingDevice.DEVICE_TYPE_CPU,
 		"renderer": "headless" if headless else RenderingServer.get_current_rendering_method(),
-		"adapter": adapter, "software_renderer": software, "user_data_dir": OS.get_user_data_dir(),
-		"scope": "Historical planar streaming fixture with shared save/load and menu return; not the current spherical campaign or target-PC FPS acceptance.",
-		"monitor_note": "process_ms and physics_ms sample Godot's coarse runtime monitors; they are not independent per-frame CPU timings. Frame intervals include probe work and the configured cap.",
-		"segments": _segments, "menu_snapshots": _menus, "failures": _failures}
+		"adapter": RenderingServer.get_video_adapter_name(), "user_data_dir": OS.get_user_data_dir(),
+		"target_pc_acceptance": false, "segments": segments, "snapshots": snapshots, "failures": failures,
+		"scope": "Spherical campaign through SessionFlow; actual player physics/input, terrain, flora, population, save/load and menu teardown. Short routes are instrumentation checks, not ten-minute acceptance.",
+		"metrics": Stats.metric_notes(), "deferred_routes": ["developed village", "A-B-A body travel", "target-PC ten-minute walk"]}
+	_begin("cold_menu")
 	change_scene_to_file(TITLE)
 	await scene_changed
 	await _settle()
-	_report["cold_menu"] = _snapshot()
+	_end()
+	report.engine_start_to_menu_ready_ms = Time.get_ticks_usec() / 1000.0
 	var slot: String = ""
-	var origin := Vector3.ZERO
-	for cycle in range(int(_recipe["cycles"])):
-		_begin()
-		if cycle == 0:
-			slot = _saves.create_slot("Historical performance fixture", int(_recipe["seed"]), "legacy_plane_v9")
-		else:
-			if not _saves.select_slot(slot):
-				_failures.append("Historical fixture save did not load.")
-				break
-		if slot.is_empty() or change_scene_to_file(WORLD) != OK:
-			_failures.append("Historical fixture could not start.")
-			break
-		if not await _ready_world():
-			break
-		var player: Node3D = current_scene.get_node("Player")
-		_worlds.append(weakref(current_scene))
-		if cycle == 0:
-			origin = player.global_position
-			slot = str(_saves.save_path)
-		elif Vector2(player.global_position.x, player.global_position.z).distance_to(Vector2(origin.x, origin.z)) > 0.1:
-			_failures.append("Saved route origin was not restored.")
-		_end("world_ready", cycle)
-		var manager: Node = current_scene.get_node("WorldManager")
-		var initial_chunk: Vector2i = manager.current_player_chunk
-		var before: Dictionary = _snapshot()
-		_begin()
-		await _move_route(player, origin, false)
-		if not await _ready_world():
-			break
-		_end("outward", cycle)
-		var origin_unloaded: bool = not manager.loaded_chunks.has(initial_chunk)
-		if not origin_unloaded:
-			_failures.append("Route did not unload the origin chunk; enlarge the distance.")
-		_begin()
-		await _move_route(player, origin, true)
-		if not await _ready_world():
-			break
-		_end("return", cycle)
-		var returned: bool = manager.loaded_chunks.has(initial_chunk)
-		if not returned:
-			_failures.append("Return route did not reload the origin chunk.")
-		_segments[-1]["visit"] = {"origin_unloaded": origin_unloaded, "origin_reloaded": returned,
-			"distance_m": float(_recipe["distance_m"]) * 2.0, "before": before, "after": _snapshot()}
-		_begin()
-		_flow.toggle_pause()
-		_flow.return_to_title()
-		var deadline: int = Time.get_ticks_usec() + int(float(_recipe["stage_timeout_seconds"]) * 1_000_000)
+	var saved_address: Dictionary = {}
+	for index in range(recipe.cycles):
+		cycle = index
+		_begin("cold_world" if index == 0 else "reload_world")
+		if index == 0 and config.has("replay_initial_save"):
+			var replay_slot: String = config.replay_slot
+			if not saves.is_slot_path(replay_slot) or preload("res://core/persistence/atomic_json.gd").write(replay_slot, config.replay_initial_save, false) != OK:
+				failures.append("Cannot restore isolated route fixture."); break
+			flow.load_game(replay_slot)
+		elif index == 0: flow.new_game("ARCH-02 measurement", recipe.seed)
+		else: flow.load_game(slot)
+		if not await _ready_world(): break
+		if index == 0: report.engine_start_to_world_ready_ms = Time.get_ticks_usec() / 1000.0
+		slot = saves.save_path
+		var player: CharacterBody3D = current_scene.player
+		source_world = weakref(current_scene)
+		if index > 0 and _distance(player.location(), saved_address) > 0.3:
+			failures.append("Reload changed the saved spherical address.")
+		_end()
+		# Freeze the exact initial snapshot in immutable slot history before walking.
+		if not saves.save_now(): failures.append(saves.last_error); break
+		if index == 0:
+			report.initial_save = saves._read_save(slot)
+			report.initial_address = player.location()
+			report.surface = current_scene.terrain.surface.body.duplicate(true)
+		_begin("settle")
+		await _settle()
+		_end()
+		_begin("walk_outward")
+		await _walk_outward(player)
+		_end()
+		if not failures.is_empty(): break
+		_begin("walk_return")
+		await _walk_return(player)
+		_end()
+		if not failures.is_empty(): break
+		saved_address = player.location()
+		_begin("save_and_menu")
+		flow.toggle_pause()
+		# Capture counters before the scene and its diagnostic samples disappear.
+		report["world_%d" % index] = _world_snapshot()
+		report["world_%d" % index]["terrain_upload_samples_ms"] = current_scene.terrain.upload_samples.duplicate()
+		report["world_%d" % index]["terrain_job_samples"] = current_scene.terrain.job_samples.duplicate(true)
+		report["world_%d" % index]["sample_limits"] = {"upload_samples": 2048, "job_samples": 256,
+			"note": "Existing diagnostic arrays retain the first samples; lifetime maxima still cover later work. Not an unbiased full-route percentile."}
+		var save_start: int = Time.get_ticks_usec()
+		if not saves.save_now(): failures.append(saves.last_error); break
+		report["save_%d_ms" % index] = (Time.get_ticks_usec() - save_start) / 1000.0
+		saved_address = saves._read_save(slot).player.surface_address
+		flow.return_to_title()
+		var deadline: int = Time.get_ticks_msec() + int(recipe.stage_timeout_seconds * 1000)
 		while current_scene == null or current_scene.scene_file_path != TITLE:
-			if Time.get_ticks_usec() > deadline:
-				_failures.append("Return to title timed out or save failed.")
-				break
+			if Time.get_ticks_msec() > deadline: failures.append("Menu/save transition timed out."); break
 			await _tick()
 		await _settle()
-		_end("menu_return", cycle)
-		var menu: Dictionary = _snapshot()
-		menu["cycle"] = cycle
-		menu["retained_world_scenes"] = _retained_worlds()
-		menu["active_world_managers"] = get_nodes_in_group(&"world_manager").size()
-		_menus.append(menu)
-		if menu["retained_world_scenes"] != 0 or menu["active_world_managers"] != 0:
-			_failures.append("A world scene or manager survived the menu transition.")
-		if not _failures.is_empty():
-			break
-	var observations: Dictionary = {}
-	if _menus.size() >= 2:
-		for key: String in ["static_bytes", "nodes", "resources", "orphans"]:
-			observations[key + "_change_after_warm_cycle"] = int(_menus[-1][key]) - int(_menus[0][key])
-		observations["note"] = "Warm-cycle differences include retained caches and the probe's growing report; growth alone is not proof of a leak."
-	_report["observations"] = observations
-	_report["passed"] = _failures.is_empty() and _menus.size() == int(_recipe["cycles"])
-	var file := FileAccess.open(str(_config["output"]).path_join("capture.json"), FileAccess.WRITE)
-	if file == null:
-		push_error("Cannot write performance capture.")
-		await Shutdown.finish(self, 1)
-		return
-	file.store_string(JSON.stringify(_report, "\t") + "\n")
+		_end()
+		if source_world.get_ref() != null or not get_nodes_in_group(&"campaign_surface_population").is_empty():
+			failures.append("Spherical world survived menu teardown.")
+		if not failures.is_empty(): break
+	Input.action_release("move_forward")
+	raw.close()
+	if _is_world(): report.final_world = _world_snapshot()
+	report.passed = failures.is_empty() and cycle == recipe.cycles - 1
+	report.full_walk_protocol = recipe.walk_seconds >= 600 and report.passed
+	report.fixture_slot = slot
+	var file := FileAccess.open(str(config.output).path_join("capture.json"), FileAccess.WRITE)
+	if file == null: push_error("Cannot write performance capture."); await Shutdown.finish(self, 1); return
+	file.store_string(JSON.stringify(report, "\t") + "\n")
 	file.close()
-	for failure: String in _failures:
-		push_error(failure)
-	await Shutdown.finish(self, 0 if _report["passed"] else 1)
+	for failure in failures: push_error(failure)
+	await Shutdown.finish(self, 0 if report.passed else 1)
 
+func _ready_world() -> bool:
+	var deadline: int = Time.get_ticks_msec() + int(recipe.stage_timeout_seconds * 1000)
+	while Time.get_ticks_msec() < deadline:
+		await _tick()
+		if _is_world() and not flow.loading and current_scene.world_initialized:
+			return true
+	failures.append("Spherical collision/start timed out: " + saves.last_error)
+	return false
+
+func _is_world() -> bool:
+	return current_scene != null and current_scene.scene_file_path == Surface.SCENE and is_instance_valid(current_scene.player)
+
+func _walk_outward(player: CharacterBody3D) -> void:
+	breadcrumbs = [player.location()]
+	var initial_forward: Vector3 = player.forward
+	var begin: int = Time.get_ticks_msec()
+	var duration: float = recipe.walk_seconds
+	var last_progress: int = begin
+	Input.action_press("move_forward")
+	while (Time.get_ticks_msec() - begin) / 1000.0 < duration:
+		var elapsed: float = (Time.get_ticks_msec() - begin) / 1000.0
+		var leg: int = mini(2, int(elapsed / (duration / 3.0)))
+		var up: Vector3 = current_scene.adapter.up_at(player.location())
+		player.global_basis = Cube.frame(up, initial_forward.rotated(up, [0.0, PI / 4.0, -PI / 4.0][leg]))
+		await _tick()
+		if player.is_dead: failures.append("Player died on the route; no survival overrides applied."); break
+		if _distance(player.location(), breadcrumbs[-1]) >= 0.75:
+			breadcrumbs.append(player.location())
+			last_progress = Time.get_ticks_msec()
+		if Time.get_ticks_msec() - last_progress > int(recipe.stage_timeout_seconds * 1000):
+			failures.append("Walk blocked; actual progress and terrain wait are retained in raw evidence."); break
+	Input.action_release("move_forward")
+	segments.append({"stage": "route_outcome", "cycle": cycle, "breadcrumbs": breadcrumbs.duplicate(true),
+		"actual_outward_m": _path_length(), "requested_outward_seconds": duration})
+	if breadcrumbs.size() < 2: failures.append("Route produced no measurable physical movement.")
+
+func _walk_return(player: CharacterBody3D) -> void:
+	var deadline: int = Time.get_ticks_msec() + int((recipe.walk_seconds * 2 + recipe.stage_timeout_seconds) * 1000)
+	Input.action_press("move_forward")
+	for index in range(breadcrumbs.size() - 1, -1, -1):
+		var destination: Dictionary = breadcrumbs[index]
+		while _distance(player.location(), destination) > 0.65:
+			if player.is_dead or Time.get_ticks_msec() > deadline:
+				report.blockage = {"actual": player.location(), "target": destination, "is_dead": player.is_dead,
+					"terrain_wait": player.waiting_for_terrain, "on_floor": player.is_on_floor(), "collisions": []}
+				for hit_index in range(player.get_slide_collision_count()):
+					var hit: KinematicCollision3D = player.get_slide_collision(hit_index)
+					var collider: Object = hit.get_collider()
+					report.blockage.collisions.append({"normal": [hit.get_normal().x, hit.get_normal().y, hit.get_normal().z],
+						"collider": str(collider.get_path()) if collider is Node else str(collider)})
+				failures.append("Physical return blocked or player died; no teleport used.")
+				Input.action_release("move_forward")
+				return
+			var up: Vector3 = current_scene.adapter.up_at(player.location())
+			var delta: Vector3 = current_scene.adapter.to_local(destination) - player.global_position
+			player.global_basis = Cube.frame(up, delta.slide(up).normalized())
+			await _tick()
+	Input.action_release("move_forward")
+	segments.append({"stage": "return_outcome", "cycle": cycle, "distance_from_start_m": _distance(player.location(), breadcrumbs[0])})
+
+func _distance(a: Dictionary, b: Dictionary) -> float:
+	# Directional displacement ignores standing-height oscillation on voxel steps.
+	var left: Dictionary = a.duplicate(); left.height = 0.0
+	var right: Dictionary = b.duplicate(); right.height = 0.0
+	var radius: float = current_scene.terrain.surface.body.radius
+	return Cube.local_position(Cube.cartesian(left, radius), Cube.cartesian(right, radius)).length()
+
+func _path_length() -> float:
+	var result: float = 0.0
+	for i in range(1, breadcrumbs.size()): result += _distance(breadcrumbs[i - 1], breadcrumbs[i])
+	return result
 
 func _tick() -> void:
 	await process_frame
 	var now: int = Time.get_ticks_usec()
-	_frames.append((now - _last_tick) / 1000.0 if _last_tick > 0 else 0.0)
-	_last_tick = now
-	_process_samples.append(Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0)
-	_physics_samples.append(Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0)
-	_memory_peak = maxi(_memory_peak, int(Performance.get_monitor(Performance.MEMORY_STATIC)))
-	_saves.autosave_enabled = false
-	if DisplayServer.get_name() != "headless":
-		_draws.append(float(RenderingServer.viewport_get_render_info(root.get_viewport_rid(), RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME)))
-	if current_scene != null and current_scene.scene_file_path == WORLD:
-		var manager: Node = current_scene.get_node("WorldManager")
-		_pending_peak = maxi(_pending_peak, manager.get_pending_chunk_count())
-		var player: Node = current_scene.get_node("Player")
-		player.set_process(false)
-		if manager.world_initialized:
-			player.set_physics_process(false)
-		for creature: Node in current_scene.get_node("FaunaStreamerV7").get_children():
-			if not creature.has_meta(&"performance_safe"):
-				creature.set("predator_attack_damage", 0.0)
-				creature.set_meta(&"performance_safe", true)
+	var frame: float = (now - last_tick) / 1000.0
+	last_tick = now
+	saves.autosave_enabled = false
+	var rid: RID = root.get_viewport_rid()
+	var values: Array = [frame, Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
+		Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0,
+		null if headless else RenderingServer.viewport_get_measured_render_time_cpu(rid) + RenderingServer.get_frame_setup_time_cpu(),
+		null if headless else RenderingServer.viewport_get_measured_render_time_gpu(rid),
+		null if headless else RenderingServer.viewport_get_render_info(rid, RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME)]
+	var keys: Array = ["frame_ms", "process_monitor_ms", "physics_monitor_ms", "render_cpu_ms", "render_gpu_ms", "draw_calls"]
+	var row: PackedStringArray = [str(cycle), stage, str(now)]
+	for i in range(keys.size()):
+		if values[i] != null: samples[keys[i]].append(float(values[i]))
+		row.append("" if values[i] == null else str(values[i]))
+	raw.store_csv_line(row)
+	if now >= next_snapshot:
+		var snapshot: Dictionary = _world_snapshot()
+		snapshot.merge(Stats.process_memory())
+		snapshot.merge({"cycle": cycle, "stage": stage, "tick_us": now, "static_bytes": OS.get_static_memory_usage(),
+			"nodes": Performance.get_monitor(Performance.OBJECT_NODE_COUNT), "resources": Performance.get_monitor(Performance.OBJECT_RESOURCE_COUNT),
+			"physics_active_objects": Performance.get_monitor(Performance.PHYSICS_3D_ACTIVE_OBJECTS),
+			"physics_collision_pairs": Performance.get_monitor(Performance.PHYSICS_3D_COLLISION_PAIRS),
+			"orphans": Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT)})
+		snapshots.append(snapshot)
+		next_snapshot = now + 1_000_000
+		print("PERFORMANCE_PROGRESS ", cycle, " ", stage, " ", now)
 
-
-func _ready_world() -> bool:
-	var deadline: int = Time.get_ticks_usec() + int(float(_recipe["stage_timeout_seconds"]) * 1_000_000)
-	while Time.get_ticks_usec() < deadline:
-		await _tick()
-		if current_scene == null or current_scene.scene_file_path != WORLD or _flow.loading:
-			continue
-		var manager: Node = current_scene.get_node("WorldManager")
-		if not manager.world_initialized or manager.get_pending_chunk_count() != 0:
-			continue
-		var complete: bool = manager.get_node("LandscapeHorizon").generation_complete and manager.get_node("DistantForest").generation_complete
-		for chunk: Node in manager.loaded_chunks.values():
-			var eco: Node = chunk.get_node("ProceduralEcosystemV6")
-			complete = complete and eco.generation_complete and not eco.is_processing()
-		if complete:
-			return true
-	_failures.append("World streaming did not settle before the stage timeout.")
-	return false
-
-
-func _move_route(player: Node3D, origin: Vector3, returning: bool) -> void:
-	var steps: int = ceili(float(_recipe["distance_m"]) / float(_recipe["step_m"]))
-	for index in range(1, steps + 1):
-		var progress: float = float(index) / float(steps)
-		var offset: float = float(_recipe["distance_m"]) * (1.0 - progress if returning else progress)
-		var point: Vector3 = origin + Vector3(offset, 0, 0)
-		point.y = root.get_node("WorldGenerator").get_terrain_height(point.x, point.z) + 2.2
-		player.global_position = point
-		await _tick()
-	if returning:
-		player.global_position = origin
-
+func _world_snapshot() -> Dictionary:
+	if not _is_world(): return {}
+	var terrain: Node = current_scene.terrain
+	var flora: Node = current_scene.flora
+	var population: Node = current_scene.population
+	var store: RefCounted = population.storage.store
+	var workers: int = 0
+	if terrain._job != null: workers = terrain._job._tasks.size() + int(terrain._job._selection_task >= 0)
+	return {"address": current_scene.player.location(), "terrain_wait": current_scene.player.waiting_for_terrain,
+		"terrain_tiles": terrain.leaves.size(), "terrain_collisions": terrain.active.size(), "terrain_pending_uploads": terrain._pending.size(),
+		"terrain_workers": workers, "terrain_cached_tiles": terrain._cache.size(), "terrain_resident_peak": terrain.peak_resident_meshes,
+		"rebases": terrain.rebases, "flora_instances": flora.instance_count(), "flora_worker": int(flora._task >= 0),
+		"active_animals": population.animals.size(), "active_plants": population.plants.size(),
+		"region_cache": store.cache.size(), "region_pages": store.pages.size(), "region_dirty": store.dirty.size(),
+		"region_reads": store.reads, "region_writes": store.writes, "region_io_max_ms": store.max_io_usec / 1000.0,
+		"terrain_initial_publish_ms": terrain.max_initial_publish_usec / 1000.0, "terrain_publish_max_ms": terrain.max_publish_usec / 1000.0,
+		"terrain_upload_max_ms": terrain.max_build_usec / 1000.0, "terrain_worker_max_ms": terrain.max_worker_usec / 1000.0,
+		"flora_work_max_ms": flora.max_frame_work_ms, "population_work_max_ms": population.max_frame_work_ms,
+		"render_memory_bytes": null if headless else RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_VIDEO_MEM_USED)}
 
 func _settle() -> void:
-	for frame in range(int(_recipe["settle_frames"])):
-		await _tick()
+	for i in range(recipe.settle_frames): await _tick()
 
+func _begin(label: String) -> void:
+	stage = label
+	samples = {}
+	for key in ["frame_ms", "process_monitor_ms", "physics_monitor_ms", "render_cpu_ms", "render_gpu_ms", "draw_calls"]: samples[key] = []
+	started = Time.get_ticks_usec()
+	last_tick = started
 
-func _begin() -> void:
-	_frames.clear()
-	_draws.clear()
-	_process_samples.clear()
-	_physics_samples.clear()
-	_memory_peak = 0
-	_pending_peak = 0
-	_started = Time.get_ticks_usec()
-	_last_tick = _started
-
-
-func _end(label: String, cycle: int) -> void:
-	var segment: Dictionary = {"stage": label, "cycle": cycle,
-		"elapsed_ms": (Time.get_ticks_usec() - _started) / 1000.0,
-		"frames": _frames.size(), "frame_ms": _distribution(_frames),
-		"process_ms": _distribution(_process_samples), "physics_ms": _distribution(_physics_samples),
-		"draw_calls": _distribution(_draws), "static_peak_bytes": _memory_peak,
-		"pending_chunks_peak": _pending_peak, "snapshot": _snapshot()}
-	_segments.append(segment)
-	print("PERFORMANCE_STAGE ", JSON.stringify(segment))
-
-
-func _snapshot() -> Dictionary:
-	return {"static_bytes": int(Performance.get_monitor(Performance.MEMORY_STATIC)),
-		"nodes": int(Performance.get_monitor(Performance.OBJECT_NODE_COUNT)),
-		"resources": int(Performance.get_monitor(Performance.OBJECT_RESOURCE_COUNT)),
-		"orphans": int(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT)),
-		"asset_cache": Assets.get_cache_counts()}
-
-
-func _retained_worlds() -> int:
-	var count: int = 0
-	for reference: WeakRef in _worlds:
-		count += int(reference.get_ref() != null)
-	return count
-
-
-func _distribution(values: Array[float]) -> Dictionary:
-	if values.is_empty():
-		return {}
-	var ordered: Array[float] = values.duplicate()
-	ordered.sort()
-	return {"median": ordered[ordered.size() / 2],
-		"p95": ordered[mini(ceili(ordered.size() * 0.95) - 1, ordered.size() - 1)],
-		"p99": ordered[mini(ceili(ordered.size() * 0.99) - 1, ordered.size() - 1)], "max": ordered[-1]}
+func _end() -> void:
+	var value: Dictionary = {"stage": stage, "cycle": cycle, "elapsed_ms": (Time.get_ticks_usec() - started) / 1000.0}
+	for key in samples: value[key] = Stats.distribution(samples[key])
+	value.gpu_timestamps_available = not samples.render_gpu_ms.is_empty() and samples.render_gpu_ms.max() > 0.0
+	if not value.gpu_timestamps_available: value.render_gpu_ms = null
+	segments.append(value)
+	print("PERFORMANCE_STAGE ", JSON.stringify(value))

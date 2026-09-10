@@ -91,7 +91,7 @@ func _draw() -> void:
 			Markers.draw_place(self, point, place.kind, place.id == selected_id, ui_scale)
 			if place.id in [selected_id, _hovered]:
 				var font := get_theme_default_font()
-				var label: String = str(place.name).left(40)
+				var label: String = str(place.get("display_name", place.name)).left(40)
 				var text_size: int = roundi(16 * ui_scale)
 				var length: float = minf(font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, text_size).x + 16, area.size.x - 12)
 				var origin := Vector2(clampf(point.x + 14, area.position.x + 4, area.end.x - length - 4), clampf(point.y - 13, 4, size.y - 30))

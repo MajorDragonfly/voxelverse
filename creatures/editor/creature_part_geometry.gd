@@ -5,6 +5,8 @@ const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
 const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const Rig = preload("res://creatures/runtime/creature_limb_rig.gd")
+const HandGeometry = preload("res://creatures/editor/creature_hand_geometry.gd")
+const FootGeometry = preload("res://creatures/editor/creature_foot_geometry.gd")
 
 
 static func build(root: Node3D, definition: Dictionary, placement: Dictionary, blueprint: Dictionary) -> void:
@@ -141,31 +143,18 @@ static func _limb(root: Node3D, id: String, placement: Dictionary, blueprint: Di
 
 
 static func _terminal(root: Node3D, id: String, skin: Color, horn: Color) -> void:
-	if id == "feet_hooves":
-		for side: float in [-1.0, 1.0]:
-			_piece(root, "Hoof%d" % int(side), Vector3(side * 0.08, -0.055, -0.035), Vector3(0.14, 0.16, 0.29), horn.darkened(0.42))
-	elif id.begins_with("feet_"):
-		_piece(root, "FootPad", Vector3(0, -0.015, -0.055), Vector3(0.31, 0.15, 0.32), skin, true)
-		if id == "feet_webbed":
-			_piece(root, "Webbing", Vector3(0, -0.055, -0.15), Vector3(0.41, 0.045, 0.28), skin.lightened(0.18), true)
-		for index in range(3):
-			var point := Vector3(float(index - 1) * 0.115, -0.045, -0.18)
-			_piece(root, "Toe%d" % index, point, Vector3(0.10, 0.09, 0.16), skin, true)
-			if id == "feet_claws":
-				_cone(root, "Claw%d" % index, point - Vector3(0, 0, 0.015), point + Vector3(0, -0.008, -0.16), 0.062, horn)
+	if id.begins_with("feet_"):
+		for piece: Dictionary in FootGeometry.recipe(id, skin, horn):
+			if piece.kind == "cone":
+				_cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
+			else:
+				_piece(root, piece.name, piece.position, piece.size, piece.color, piece.skin)
 	else:
-		_piece(root, "Palm", Vector3(0, -0.05, 0), Vector3(0.25, 0.22, 0.13), skin, true)
-		if id == "hands_pincers":
-			for side: float in [-1.0, 1.0]:
-				_cone(root, "Pincer%d" % int(side), Vector3(side * 0.10, -0.09, 0), Vector3(side * 0.045, -0.38, -0.07), 0.16, horn)
-		else:
-			for index in range(3):
-				var start := Vector3(float(index - 1) * 0.083, -0.12, 0)
-				var tip: Vector3 = start + Vector3(0, -0.17 - (0.03 if index == 1 else 0), -0.05)
-				_bone(root, "Finger%d" % index, start, tip, 0.065, skin)
-				if id == "hands_claws":
-					_cone(root, "Nail%d" % index, tip, tip + Vector3(0, -0.075, -0.055), 0.050, horn)
-			_bone(root, "Thumb", Vector3(-0.10, -0.055, 0), Vector3(-0.19, -0.18, -0.055), 0.08, skin)
+		for piece: Dictionary in HandGeometry.recipe(id, skin, horn):
+			match piece.kind:
+				"cone": _cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
+				"bone": _bone(root, piece.name, piece.start, piece.end, piece.width, piece.color, piece.skin)
+				"piece": _piece(root, piece.name, piece.position, piece.size, piece.color, piece.skin)
 
 
 static func _point(root: Node3D, point: Vector3) -> Vector3:

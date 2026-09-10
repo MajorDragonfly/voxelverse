@@ -1,0 +1,39 @@
+Import log excerpt: first 4 and last 30 lines; middle verbose resource/import lines omitted.
+Original size: 249477 bytes
+Original SHA-256: 8e73ee359879b472f503842ca8ad2747d6248a49e7fac49221f34ee23810e18c
+
+WorkerThreadPool: 9 threads, 6 max low-priority.
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+[...]
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 1
+glTF: Creating mesh for: layered_rock_v2_species1_far
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+Saving scene to: res://.godot/imported/layered_rock_v2_species1_far.glb-3229a7c7c804b6add7226cc328fc3e22.scn
+[92m[ DONE ][39m [1mimport[22m
+[0m
+EditorFileSystem: "res://assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_far.glb" import took 3 ms.
+[  99% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (247 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Loading resource: res://ui/frontend/main_menu.tscn
+Loading resource: res://ui/frontend/main_menu.gd
+Script docs haven't been properly loaded or regenerated, so don't save them to disk.
+EditorSettings: Save OK!
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
+Orphan StringName: Node (static: 3, total: 4)
+StringName: 1 unclaimed string names at exit.

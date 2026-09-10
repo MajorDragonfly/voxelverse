@@ -1,8 +1,9 @@
 extends RefCounted
 ## D1 owns species suitability; ownership, trust and orders belong to D2.
 const SCHEMA: int = 1
+const EGG_SCHEMA: int = 2
 const GENERATOR_VERSION: String = "domestic_fauna_v1"
-const ROLES: Array[String] = ["milk", "draught", "riding", "companion"]
+const ROLES: Array[String] = ["milk", "draught", "riding", "companion", "eggs"]
 const GROUPS: Array[String] = ["milk", "work", "companion"]
 const LIMITS: Dictionary = {
 	"trainability": [0.0, 1.0], "sociality": [0.0, 1.0], "bonding": [0.0, 1.0],
@@ -14,7 +15,7 @@ const LIMITS: Dictionary = {
 static func suitability(group: String) -> Dictionary:
 	var work: bool = group == "work"
 	var milk: bool = group == "milk"
-	return {"schema": SCHEMA, "roles": ["draught", "riding"] if work else [group],
+	var result := {"schema": SCHEMA, "roles": ["draught", "riding"] if work else [group],
 		"tameable": true, "temperament": "calm" if group != "companion" else "social",
 		"trainability": 0.9 if group == "companion" else 0.7, "sociality": 0.85, "bonding": 0.9 if group == "companion" else 0.6,
 		"diet": ["plant"], "water_need": 8.0 if work else 4.0,
@@ -25,9 +26,16 @@ static func suitability(group: String) -> Dictionary:
 		"movement_speed": 3.8 if group == "companion" else 2.8,
 		"anatomy": {"locomotion": "ground", "min_support_legs": 4, "lactation": milk,
 			"back_clear": work, "attachment_requirements": ["saddle", "harness"] if work else []}}
+	if group == "eggs":
+		result.schema = EGG_SCHEMA
+		result["egg_yield"] = 1.0
+		result["egg_interval"] = 300.0
+		result.anatomy.min_support_legs = 2
+		result.anatomy["egg_laying"] = true
+	return result
 
 static func validate(value: Variant) -> String:
-	if not value is Dictionary or not integer(value.get("schema"), SCHEMA, SCHEMA):
+	if not value is Dictionary or not integer(value.get("schema"), SCHEMA, EGG_SCHEMA):
 		return "Unsupported domestication schema."
 	if not value.get("roles") is Array or value["roles"].is_empty():
 		return "Missing domestication roles."
@@ -36,6 +44,10 @@ static func validate(value: Variant) -> String:
 		if role not in ROLES or role in seen:
 			return "Invalid or duplicate domestication role."
 		seen.append(role)
+	# Schema 1 remains the unchanged three-species contract. Only the new egg
+	# role uses schema 2; an old role cannot silently acquire a new revision.
+	if ("eggs" in seen) != (value.schema == EGG_SCHEMA):
+		return "Role and domestication revision disagree."
 	if value.get("tameable") != true or value.get("temperament") not in ["calm", "social"]:
 		return "Invalid domestic temperament."
 	if not value.get("diet") is Array or value["diet"].is_empty():
@@ -47,8 +59,12 @@ static func validate(value: Variant) -> String:
 		if not number(value.get(field), LIMITS[field][0], LIMITS[field][1]):
 			return "Invalid domestic value: " + field
 	var anatomy: Variant = value.get("anatomy")
-	if not anatomy is Dictionary or anatomy.get("locomotion") != "ground" or not integer(anatomy.get("min_support_legs"), 4, 12) or not anatomy.get("attachment_requirements") is Array:
+	var minimum: int = 2 if seen == ["eggs"] else 4
+	if not anatomy is Dictionary or anatomy.get("locomotion") != "ground" or not integer(anatomy.get("min_support_legs"), minimum, 12) or not anatomy.get("attachment_requirements") is Array:
 		return "Invalid domestic anatomy."
+	if "eggs" in seen:
+		if seen != ["eggs"] or anatomy.get("egg_laying") != true or not number(value.get("egg_yield"), 1, 100) or not number(value.get("egg_interval"), 1, 86400):
+			return "Eggs require a dedicated laying species and positive yield/interval."
 	if float(value["water_need"]) <= 0.0 or float(value["stamina"]) <= 0.0:
 		return "Land animals require water and stamina."
 	if "milk" in seen:

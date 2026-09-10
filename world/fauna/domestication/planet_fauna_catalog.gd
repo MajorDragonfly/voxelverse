@@ -5,7 +5,13 @@ const BodyEvidence = preload("res://world/fauna/domestication/domestic_body_evid
 const Recovery = preload("res://world/fauna/domestication/domestic_habitat_recovery.gd")
 const Surface = preload("res://world/fauna/domestication/domestic_surface_contract.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
+const Feet = preload("res://creatures/catalog/creature_foot_catalog.gd")
 const REPLACEMENT_SECONDS: float = 300.0
+const ROLE_SCHEMA: int = 4
+const ROLE_POLICY: int = 2
+
+static func groups_for(catalog: Dictionary) -> Array:
+	return Contract.GROUPS + ["eggs"] if catalog.get("role_policy", 1) == ROLE_POLICY else Contract.GROUPS.duplicate()
 
 static func eligible(body: Dictionary) -> bool:
 	# Legacy campaign bodies predate kind/life flags and are inhabited planets.
@@ -50,7 +56,28 @@ static func create_surface(body: Dictionary, anchor: Dictionary, used_seeds: Dic
 	catalog.schema = Surface.SCHEMA
 	catalog.surface = {"schema": 1, "mode": Surface.Cube.MODE, "generation": body.surface_generation,
 		"radius": body.radius, "terrain_revision": body.terrain_revision, "anchor": Surface.canonical(anchor)}
-	return catalog
+	return upgrade_surface(catalog, body, used_seeds)
+
+## Add one role on a validated copy. Existing species, evidence, habitat keys,
+## generations, food, ownership and the planar migration archive are untouched.
+## Old executables reject schema 4 instead of overwriting an unknown policy.
+static func upgrade_surface(catalog: Dictionary, body: Dictionary, used_seeds: Dictionary = {}) -> Dictionary:
+	if not Surface.eligible(body) or not validate(catalog, body).is_empty(): return {}
+	if catalog.schema == ROLE_SCHEMA: return catalog.duplicate(true)
+	if int(catalog.schema) not in [Surface.SCHEMA, Surface.MIGRATED_SCHEMA]: return {}
+	var result: Dictionary = catalog.duplicate(true)
+	var used: Dictionary = used_seeds.duplicate()
+	for entry: Dictionary in result.species: used[int(entry.species_seed)] = true
+	var seed_value: int = 4_000_000_000_000 + int((str(int(body.seed)) + ":" + str(body.id) + ":" + Contract.GENERATOR_VERSION + ":eggs").sha256_text().left(10).hex_to_int())
+	while used.has(seed_value): seed_value += 1
+	result.species.append(Generator.create(body, "eggs", seed_value))
+	result.schema = ROLE_SCHEMA
+	result.role_policy = ROLE_POLICY
+	# Resume the same bounded search from the anchor, retaining every old
+	# habitat and its population. The fourth route must be independently found.
+	result.erase("surface_search")
+	result.habitat_status = "pending"
+	return result if validate(result, body).is_empty() else {}
 
 static func species_for(catalog: Dictionary, species_id: String) -> Dictionary:
 	for entry: Dictionary in catalog.get("species", []):
@@ -67,14 +94,15 @@ static func cell_key(habitat: Dictionary) -> String:
 static func has_unsupported(value: Variant) -> bool:
 	if not value is Dictionary:
 		return false
-	if not Contract.integer(value.get("schema"), 1, Surface.MIGRATED_SCHEMA) or value.get("generator_version") != Contract.GENERATOR_VERSION:
+	if not Contract.integer(value.get("schema"), 1, ROLE_SCHEMA) or value.get("generator_version") != Contract.GENERATOR_VERSION:
 		return true
+	if value.get("role_policy", 1) != (ROLE_POLICY if value.schema == ROLE_SCHEMA else 1): return true
 	if value.get("schema", 0) >= Surface.SCHEMA and Surface.unsupported(value): return true
 	if value.has("habitat_recovery") and Recovery.unsupported(value["habitat_recovery"]): return true
 	if not value.get("species") is Array: return false
 	for entry in value.get("species", []):
 		if entry is Dictionary and BodyEvidence.unsupported(entry): return true
-		if entry is Dictionary and entry.get("domestication") is Dictionary and not Contract.integer(entry["domestication"].get("schema"), 1, 1):
+		if entry is Dictionary and entry.get("domestication") is Dictionary and not Contract.integer(entry["domestication"].get("schema"), 1, Contract.EGG_SCHEMA):
 			return true
 	return false
 
@@ -83,12 +111,13 @@ static func validate(value: Variant, body: Dictionary) -> String:
 		return "Unsupported fauna catalog version."
 	if value.get("body_id") != body.get("id") or not Contract.integer(value.get("seed"), int(body.get("seed", -1)), int(body.get("seed", -1))):
 		return "Fauna catalog belongs to another body."
-	if not value.get("species") is Array or value["species"].size() != 3 or not value.get("habitats") is Array or value["habitats"].size() > 24:
+	var required: Array = groups_for(value)
+	if not value.get("species") is Array or value["species"].size() != required.size() or not value.get("habitats") is Array or value["habitats"].size() > (25 if value.schema == ROLE_SCHEMA else 24):
 		return "Invalid fauna catalog collections."
 	var groups: Array = []
 	var identities: Array = []
 	for entry in value["species"]:
-		if not entry is Dictionary or entry.get("group") not in Contract.GROUPS or entry.get("group") in groups or entry.get("id") in identities:
+		if not entry is Dictionary or entry.get("group") not in required or entry.get("group") in groups or entry.get("id") in identities:
 			return "Missing or duplicate mandatory species."
 		if entry.get("body_id") != body["id"] or not Contract.integer(entry.get("species_seed"), 1, 9007199254740991) or entry.get("id") != Ids.scoped("species", body["id"], str(int(entry["species_seed"]))):
 			return "Invalid domestic species identity."
@@ -107,15 +136,15 @@ static func validate(value: Variant, body: Dictionary) -> String:
 		var legs: int = 0
 		for part in entry["blueprint"]["parts"]:
 			if not part is Dictionary: return "Invalid domestic body part."
-			if part.get("category") == "legs" and part.get("end_part_id") in ["feet_pads", "feet_hooves"]:
+			if part.get("category") == "legs" and Feet.supports(str(part.get("end_part_id", "")), "domestic_support"):
 				legs += 2 if part.get("mirrored", false) else 1
-		if legs < 4: return "Domestic species lacks support feet."
+		if legs < int(entry.domestication.anatomy.min_support_legs): return "Domestic species lacks support feet."
 		problem = BodyEvidence.validate(entry)
 		if not problem.is_empty(): return problem
 		groups.append(entry["group"])
 		identities.append(entry["id"])
 	if value["schema"] >= Surface.SCHEMA:
-		if value["schema"] == Surface.MIGRATED_SCHEMA:
+		if value["schema"] == Surface.MIGRATED_SCHEMA or value.has("migration_source"):
 			var archive: Variant = value.get("migration_source")
 			if not archive is Dictionary or archive.get("schema") != 1 or not archive.get("catalog") is Dictionary or archive.catalog.get("schema") != 1 or archive.catalog.has("migration_source"): return "Invalid migrated catalog archive."
 			var old_body: Dictionary = {"id": body.id, "seed": body.seed, "surface_mode": "legacy_plane_v9"}
@@ -123,6 +152,7 @@ static func validate(value: Variant, body: Dictionary) -> String:
 			if not original_problem.is_empty(): return original_problem
 			for entry: Dictionary in value.species:
 				var old_entry: Dictionary = species_for(archive.catalog, entry.id)
+				if entry.group == "eggs" and value.schema == ROLE_SCHEMA: continue
 				if old_entry.is_empty() or BodyEvidence.fingerprint(entry) != BodyEvidence.fingerprint(old_entry): return "Migrated species body was replaced."
 		return Surface.validate(value, body, identities)
 	var keys: Array = []
@@ -143,7 +173,7 @@ static func validate(value: Variant, body: Dictionary) -> String:
 			return "Invalid domestic habitat lifecycle."
 		keys.append(habitat["key"])
 		if habitat["species_id"] not in represented: represented.append(habitat["species_id"])
-	if value.get("habitat_status") not in ["pending", "ready", "unavailable"] or (value["habitat_status"] == "ready" and represented.size() != 3):
+	if value.get("habitat_status") not in ["pending", "ready", "unavailable"] or (value["habitat_status"] == "ready" and represented.size() != required.size()):
 		return "Mandatory habitats are incomplete."
 	if value.has("habitat_recovery"):
 		return Recovery.validate(value["habitat_recovery"], value)

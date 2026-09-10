@@ -1178,6 +1178,1024 @@
       "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
       "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "BP_LIBRARY_TITLE",
+      "de": "Kreaturenvorlagen",
+      "en": "Creature templates"
+    },
+    {
+      "key": "BP_CLOSE",
+      "de": "Schließen",
+      "en": "Close"
+    },
+    {
+      "key": "BP_IMPORT",
+      "de": "Importieren",
+      "en": "Import"
+    },
+    {
+      "key": "BP_EXPORT",
+      "de": "Exportieren",
+      "en": "Export"
+    },
+    {
+      "key": "BP_REMOVE",
+      "de": "Entfernen",
+      "en": "Remove"
+    },
+    {
+      "key": "BP_SAVE_VARIANT",
+      "de": "Entwurf ablegen",
+      "en": "Save design"
+    },
+    {
+      "key": "BP_BACK_LIST",
+      "de": "Zurück zur Liste",
+      "en": "Back to list"
+    },
+    {
+      "key": "BP_USE",
+      "de": "Im Editor übernehmen",
+      "en": "Use in editor"
+    },
+    {
+      "key": "BP_BUILTIN",
+      "de": "Startvorlage",
+      "en": "Starter template"
+    },
+    {
+      "key": "BP_LOCAL",
+      "de": "Lokal gespeichert",
+      "en": "Saved locally"
+    },
+    {
+      "key": "BP_NO_RESULTS",
+      "de": "Keine passenden Vorlagen. Ändere die Suche oder importiere eine Datei.",
+      "en": "No matching templates. Change your search or import a file."
+    },
+    {
+      "key": "BP_AUTHOR",
+      "de": "Von {author}",
+      "en": "By {author}"
+    },
+    {
+      "key": "BP_AUTHOR_UNKNOWN",
+      "de": "Ohne Autorenangabe",
+      "en": "No author provided"
+    },
+    {
+      "key": "BP_SOURCES",
+      "de": "Auf {count} früheren Entwürfen aufgebaut.",
+      "en": "Based on {count} earlier designs."
+    },
+    {
+      "key": "BP_COMPLEXITY",
+      "de": "Formpunkte: {count} / {limit}",
+      "en": "Form points: {count} / {limit}"
+    },
+    {
+      "key": "BP_AVAILABLE_START",
+      "de": "Für eine neue Spezies verfügbar.",
+      "en": "Available for a new species."
+    },
+    {
+      "key": "BP_AVAILABLE",
+      "de": "Verfügbar. Deine Identität und dein Fortschritt bleiben erhalten.",
+      "en": "Available. Your identity and progress are preserved."
+    },
+    {
+      "key": "BP_IMPORTED",
+      "de": "Vorlage lokal gespeichert. Sie bleibt ohne die ursprüngliche Datei verfügbar.",
+      "en": "Template saved locally. It remains available without the original file."
+    },
+    {
+      "key": "BP_EXPORTED",
+      "de": "Vorlage exportiert. Die Datei kann in einen anderen Spielstand importiert werden.",
+      "en": "Template exported. The file can be imported into another adventure."
+    },
+    {
+      "key": "BP_VARIANT_SAVED",
+      "de": "Entwurf als eigene Vorlage abgelegt. Dein Spielstand wurde dabei nicht verändert.",
+      "en": "Design saved as a new template. Your adventure was not changed."
+    },
+    {
+      "key": "BP_REMOVE_CONFIRM",
+      "de": "„{name}“ aus der Bibliothek entfernen? Bereits verwendete Kreaturen bleiben erhalten.",
+      "en": "Remove “{name}” from the library? Creatures already using it are preserved."
+    },
+    {
+      "key": "BP_REMOVED",
+      "de": "Vorlage aus der Bibliothek entfernt.",
+      "en": "Template removed from the library."
+    },
+    {
+      "key": "BP_LOCKED",
+      "de": "Noch nicht freigeschaltet: {parts}",
+      "en": "Not yet unlocked: {parts}"
+    },
+    {
+      "key": "BP_ERROR_LIBRARY",
+      "de": "Die Bibliothek kann nicht gelesen werden. Ihre Originaldatei bleibt unverändert. Startvorlagen sind weiterhin verfügbar.",
+      "en": "The library cannot be read. Its original file is preserved. Starter templates remain available."
+    },
+    {
+      "key": "BP_ERROR_FULL",
+      "de": "Die Bibliothek ist voll. Exportiere benötigte Vorlagen und entferne nicht mehr benötigte Einträge.",
+      "en": "The library is full. Export templates you need and remove unwanted entries."
+    },
+    {
+      "key": "BP_ERROR_CONFLICT",
+      "de": "Diese Vorlage ist mit derselben Revision, aber anderem Inhalt vorhanden. Die gespeicherte Fassung bleibt erhalten.",
+      "en": "This template already exists with the same revision but different content. The saved version is preserved."
+    },
+    {
+      "key": "BP_ERROR_DESTINATION",
+      "de": "Diese Datei wird nicht überschrieben. Wähle einen neuen Dateinamen.",
+      "en": "This file will not be overwritten. Choose a new filename."
+    },
+    {
+      "key": "BP_ERROR_WRITE",
+      "de": "Speichern fehlgeschlagen. Prüfe den Zielordner und versuche es erneut.",
+      "en": "Saving failed. Check the destination folder and try again."
+    },
+    {
+      "key": "BP_ERROR_PHASE",
+      "de": "Die eigene Körperform lässt sich nur in der Kreaturenphase ändern. Während eines Epochenwechsels ist die Übernahme gesperrt.",
+      "en": "Your body can only be redesigned in the creature phase. Templates cannot be applied during a phase transition."
+    },
+    {
+      "key": "BP_ERROR_COMPLEXITY",
+      "de": "Diese Vorlage überschreitet die verfügbaren Formpunkte.",
+      "en": "This template exceeds the available form points."
+    },
+    {
+      "key": "BP_ERROR_TARGET",
+      "de": "Der aktuelle Entwurf ist geschützt und kann nicht ersetzt werden.",
+      "en": "The current design is protected and cannot be replaced."
+    },
+    {
+      "key": "BP_ERROR_MISSING",
+      "de": "Diese Vorlage ist nicht mehr in der Bibliothek vorhanden.",
+      "en": "This template is no longer in the library."
+    },
+    {
+      "key": "BP_ERROR_CAMPAIGN",
+      "de": "Öffne einen Spielstand, um die Vorlage im Editor zu übernehmen.",
+      "en": "Open an adventure to use this template in the editor."
+    },
+    {
+      "key": "BP_ERROR_PROVENANCE",
+      "de": "Diese Vorlage enthält bereits zu viele Herkunftseinträge für eine weitere Variante.",
+      "en": "This template already contains too many source entries for another variant."
+    },
+    {
+      "key": "BP_ERROR_NAME",
+      "de": "Gib einen kurzen Namen für die Vorlage ein.",
+      "en": "Enter a short name for the template."
+    },
+    {
+      "key": "BP_ERROR_PACKAGE",
+      "de": "Die Vorlage ist beschädigt oder benötigt nicht unterstützte Teile oder eine andere Spielversion. Die Datei bleibt erhalten.",
+      "en": "The template is damaged or requires unsupported parts or another game version. The file is preserved."
+    },
+    {
+      "key": "BP_ERROR_EDITOR",
+      "de": "Die Anschlüsse dieser Vorlage passen nicht zum aktuellen Editor. Die Form wird nicht verändert übernommen.",
+      "en": "This template uses attachments incompatible with the current editor. It will not be applied with altered geometry."
+    },
+    {
+      "key": "BP_SEARCH",
+      "de": "Vorlagen suchen",
+      "en": "Search templates"
+    },
+    {
+      "key": "BP_ALL",
+      "de": "Alle Vorlagen",
+      "en": "All templates"
+    },
+    {
+      "key": "BP_BUILTINS",
+      "de": "Startvorlagen",
+      "en": "Starter templates"
+    },
+    {
+      "key": "BP_LOCALS",
+      "de": "Meine Bibliothek",
+      "en": "My library"
+    },
+    {
+      "key": "BP_SELECT_START",
+      "de": "Als Startkreatur wählen",
+      "en": "Choose starting creature"
+    },
+    {
+      "key": "BP_CANCEL",
+      "de": "Abbrechen",
+      "en": "Cancel"
+    },
+    {
+      "key": "BP_VARIANT_NAME",
+      "de": "Name der Vorlage",
+      "en": "Template name"
+    },
+    {
+      "key": "BP_TEMPLATES",
+      "de": "Kreaturenvorlagen",
+      "en": "Creature templates"
+    },
+    {
+      "key": "BP_ADOPTED",
+      "de": "Vorlage übernommen. Rückgängig stellt deine vorherige Kreatur wieder her. Speichere, um die Änderung zu behalten.",
+      "en": "Template applied. Undo restores your previous creature. Save to keep this change."
+    },
+    {
+      "key": "BP_ERROR_START",
+      "de": "Diese Vorlage kann nicht als Startkreatur verwendet werden. Wähle eine verfügbare Startvorlage.",
+      "en": "This template cannot be used as a starting creature. Choose an available starter template."
+    },
+    {
+      "key": "BP_CHOOSE_START",
+      "de": "Startkreatur auswählen",
+      "en": "Choose starting creature"
+    },
+    {
+      "key": "BP_DEFAULT_START",
+      "de": "Startkreatur: Standardform · später im Editor veränderbar",
+      "en": "Starting creature: default form · editable later"
+    },
+    {
+      "key": "BP_SELECTED_START",
+      "de": "Startkreatur: {name}",
+      "en": "Starting creature: {name}"
+    },
+    {
+      "key": "BP_START_MEADOW",
+      "de": "Wiesenläufer",
+      "en": "Meadow walker"
+    },
+    {
+      "key": "BP_START_DUNE",
+      "de": "Dünenwanderer",
+      "en": "Dune wanderer"
+    },
+    {
+      "key": "BP_START_MOSS",
+      "de": "Mooskrabbler",
+      "en": "Moss crawler"
+    },
+    {
+      "key": "BP_PREVIEW_HELP",
+      "de": "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen",
+      "en": "Drag with the left mouse button to rotate · Scroll to zoom"
+    },
+    {
+      "key": "NEIGHBOR_TAB",
+      "de": "Nachbarn",
+      "en": "Neighbors"
+    },
+    {
+      "key": "NEIGHBOR_CONTACT",
+      "de": "Nachbarlager suchen",
+      "en": "Find a neighboring camp"
+    },
+    {
+      "key": "NEIGHBOR_AID",
+      "de": "Auswahl liefert Hilfe",
+      "en": "Send selected residents"
+    },
+    {
+      "key": "NEIGHBOR_FOCUS",
+      "de": "Nachbarlager ansehen",
+      "en": "View neighboring camp"
+    },
+    {
+      "key": "NEIGHBOR_HOME",
+      "de": "Eigenes Dorf ansehen",
+      "en": "View your village"
+    },
+    {
+      "key": "NEIGHBOR_AID_HINT",
+      "de": "Mindestens zwei freie Bewohner liefern aus dem eigenen Lager. Sechs Nahrung bleiben als Reserve. Pro Träger höchstens fünf Einheiten; Anhalten erhält die Fracht. Ein neuer Auftrag bringt übrige Hilfsfracht zuerst heim.",
+      "en": "At least two available residents deliver supplies from your stores. Six food stay in reserve. Each carrier delivers up to five units. Stopping keeps their cargo; a new order returns remaining aid cargo home first."
+    },
+    {
+      "key": "NEIGHBOR_EMPTY",
+      "de": "Nachbarstämme gehören deiner Spezies an und haben eigene Bewohner und Vorräte. Suche einen erreichbaren Kontakt in der geladenen Dorfumgebung.",
+      "en": "Neighboring tribes belong to your species and have their own residents and supplies. Find a reachable camp near your village."
+    },
+    {
+      "key": "NEIGHBOR_DETAIL",
+      "de": "{name} · Deine Spezies, eigene Fraktion · {residents} Bewohner\n{status}\nNahrung {food} / {food_required} · Holz {wood} / {wood_required}\nMitwirkende {contributors} · Unterkunft {shelter} %",
+      "en": "{name} · Your species, separate faction · {residents} residents\n{status}\nFood {food} / {food_required} · Wood {wood} / {wood_required}\nContributors {contributors} · Shelter {shelter} %"
+    },
+    {
+      "key": "NEIGHBOR_OFFERED",
+      "de": "Hilfsauftrag offen",
+      "en": "Aid requested"
+    },
+    {
+      "key": "NEIGHBOR_ACTIVE",
+      "de": "Hilfslieferung läuft",
+      "en": "Aid delivery in progress"
+    },
+    {
+      "key": "NEIGHBOR_BUILDING",
+      "de": "Nachbarn bauen ihre Unterkunft",
+      "en": "Neighbors are building their shelter"
+    },
+    {
+      "key": "NEIGHBOR_COMPLETED",
+      "de": "Hilfe erfüllt · freundlich",
+      "en": "Aid completed · friendly"
+    },
+    {
+      "key": "NEIGHBOR_UNAVAILABLE",
+      "de": "Die Gruppe kann gerade keine Befehle annehmen.",
+      "en": "The group cannot accept commands right now."
+    },
+    {
+      "key": "NEIGHBOR_ALREADY_KNOWN",
+      "de": "Dieses Nachbarlager ist bereits bekannt.",
+      "en": "You have already contacted this camp."
+    },
+    {
+      "key": "NEIGHBOR_NOT_KNOWN",
+      "de": "Suche zuerst ein erreichbares Nachbarlager.",
+      "en": "Find a reachable neighboring camp first."
+    },
+    {
+      "key": "NEIGHBOR_NO_SITE",
+      "de": "Kein sicher erreichbarer Lagerplatz in der geladenen Umgebung frei. Suche nach einer Änderung der Umgebung erneut.",
+      "en": "No safe, reachable camp site is available nearby. Try again after the surroundings change."
+    },
+    {
+      "key": "NEIGHBOR_CONTACT_SAVE_FAILED",
+      "de": "Kontakt konnte nicht gespeichert werden. Es wurde kein Lager angelegt.",
+      "en": "Contact could not be saved. No camp was created."
+    },
+    {
+      "key": "NEIGHBOR_CONTACTED",
+      "de": "{name} braucht {food} Nahrung und {wood} Holz für seine Unterkunft. Wähle zwei freie Bewohner als Träger.",
+      "en": "{name} needs {food} food and {wood} wood for a shelter. Select two available residents to carry supplies."
+    },
+    {
+      "key": "NEIGHBOR_ROUTE_BLOCKED",
+      "de": "Der Weg zum eigenen oder zum Nachbarlager ist blockiert.",
+      "en": "The route to your stores or the neighboring camp is blocked."
+    },
+    {
+      "key": "NEIGHBOR_AID_FINISHED",
+      "de": "Diese Hilfslieferung ist bereits abgeschlossen.",
+      "en": "This aid delivery is already finished."
+    },
+    {
+      "key": "NEIGHBOR_SELECTION_REQUIRED",
+      "de": "Wähle mindestens {count} Bewohner für die gemeinsame Hilfslieferung.",
+      "en": "Select at least {count} residents for the joint aid delivery."
+    },
+    {
+      "key": "NEIGHBOR_CARRIERS_BUSY",
+      "de": "Ausgewählte Bewohner müssen ihre laufende Fracht oder Hilfslieferung zuerst beenden.",
+      "en": "Selected residents must finish their current cargo or aid delivery first."
+    },
+    {
+      "key": "NEIGHBOR_AID_STARTED",
+      "de": "Hilfslieferung für {count} Bewohner gespeichert · Anhalten und Fortsetzen gelten auch für diese Träger.",
+      "en": "Aid delivery saved for {count} residents. Stop and Resume also apply to these carriers."
+    },
+    {
+      "key": "NEIGHBOR_AID_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten.",
+      "en": "Saving failed. The previous order is preserved."
+    },
+    {
+      "key": "NEIGHBOR_SHELTER_COMPLETED",
+      "de": "Gemeinsam geholfen · {name} hat seine Unterkunft fertiggestellt und ist euch freundlich gesinnt.",
+      "en": "A shared success · {name} has finished its shelter and is now friendly toward you."
+    },
+    {
+      "key": "NEIGHBOR_UNKNOWN_RESULT",
+      "de": "Die Rückmeldung ist nicht verfügbar.",
+      "en": "Feedback is unavailable."
+    },
+    {
+      "key": "GROUP_SELECTION_EMPTY",
+      "de": "Niemand ausgewählt · Bewohner anklicken oder einen Rahmen ziehen.",
+      "en": "No one selected · Click residents or drag a selection box."
+    },
+    {
+      "key": "GROUP_SELECTION",
+      "de": "{count} / {total} ausgewählt · {names}",
+      "en": "{count} / {total} selected · {names}"
+    },
+    {
+      "key": "GROUP_CARRYING",
+      "de": " · {count} mit Transportgut",
+      "en": " · {count} carrying supplies"
+    },
+    {
+      "key": "GROUP_PAUSED",
+      "de": "PAUSE · Leertaste zum Fortsetzen. ",
+      "en": "PAUSED · Press Space to resume. "
+    },
+    {
+      "key": "Buch · J",
+      "de": "Buch · J",
+      "en": "Journal · J"
+    },
+    {
+      "key": "Weltkarte",
+      "de": "Weltkarte",
+      "en": "World map"
+    },
+    {
+      "key": "Schließen",
+      "de": "Schließen",
+      "en": "Close"
+    },
+    {
+      "key": "Karte schließen · Esc",
+      "de": "Karte schließen · Esc",
+      "en": "Close map · Esc"
+    },
+    {
+      "key": "Weiter herauszoomen",
+      "de": "Weiter herauszoomen",
+      "en": "Zoom out"
+    },
+    {
+      "key": "Näher heranzoomen",
+      "de": "Näher heranzoomen",
+      "en": "Zoom in"
+    },
+    {
+      "key": "Zu mir",
+      "de": "Zu mir",
+      "en": "Find me"
+    },
+    {
+      "key": "Erkundetes",
+      "de": "Erkundetes",
+      "en": "Explored area"
+    },
+    {
+      "key": "Orte",
+      "de": "Orte",
+      "en": "Places"
+    },
+    {
+      "key": "Zur Karte",
+      "de": "Zur Karte",
+      "en": "Back to map"
+    },
+    {
+      "key": "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir",
+      "de": "Linksklick ziehen: Karte verschieben · Mausrad: zoomen\nPfeiltasten: verschieben · + / −: zoomen · Pos1: zu dir",
+      "en": "Drag with the left mouse button to pan · Scroll wheel to zoom\nArrow keys: pan · + / −: zoom · Home: find me"
+    },
+    {
+      "key": "Bekannte Orte",
+      "de": "Bekannte Orte",
+      "en": "Known places"
+    },
+    {
+      "key": "Eigene",
+      "de": "Eigene",
+      "en": "Own"
+    },
+    {
+      "key": "Freunde",
+      "de": "Freunde",
+      "en": "Friends"
+    },
+    {
+      "key": "Eigenes Nest",
+      "de": "Eigenes Nest",
+      "en": "Own nest"
+    },
+    {
+      "key": "Heimat",
+      "de": "Heimat",
+      "en": "Home"
+    },
+    {
+      "key": "Befreundet",
+      "de": "Befreundet",
+      "en": "Friendly"
+    },
+    {
+      "key": "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen.",
+      "de": "Hier erscheinen deine Nester und bekannte Orte befreundeter Kreaturen.",
+      "en": "Your nests and known places of friendly creatures appear here."
+    },
+    {
+      "key": "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren",
+      "de": "Ziehen: verschieben · Mausrad: zoomen · Ortsname: Karte zentrieren",
+      "en": "Drag to pan · Scroll wheel to zoom · Select a place to center the map"
+    },
+    {
+      "key": "ATLAS_SHIFT_M",
+      "de": "Umschalt+M",
+      "en": "Shift+M"
+    },
+    {
+      "key": "ATLAS_OWN_NEST",
+      "de": "Eigenes Nest",
+      "en": "Own nest"
+    },
+    {
+      "key": "ATLAS_SPECIES_HOME",
+      "de": "Heimat deiner Spezies",
+      "en": "Home of your species"
+    },
+    {
+      "key": "ATLAS_FRIEND_HABITAT",
+      "de": "Befreundete Kreatur · Lebensraum",
+      "en": "Friendly creature · Habitat"
+    },
+    {
+      "key": "ATLAS_NAMED_HABITAT",
+      "de": "{name} · Lebensraum",
+      "en": "{name} · Habitat"
+    },
+    {
+      "key": "ATLAS_DISTANCE_M",
+      "de": "{distance} m",
+      "en": "{distance} m"
+    },
+    {
+      "key": "ATLAS_DISTANCE_KM",
+      "de": "{distance} km",
+      "en": "{distance} km"
+    },
+    {
+      "key": "ATLAS_EQUATOR_WIDTH",
+      "de": "Breite am Äquator: {distance}",
+      "en": "Equatorial width: {distance}"
+    },
+    {
+      "key": "ATLAS_WIDTH",
+      "de": "Kartenbreite: {distance}",
+      "en": "Map width: {distance}"
+    },
+    {
+      "key": "ATLAS_UNEXPLORED",
+      "de": "Dunkle Flächen sind noch nicht erkundet.",
+      "en": "Dark areas have not been explored yet."
+    },
+    {
+      "key": "ATLAS_COLLECTION_FULL",
+      "de": "Die Kartensammlung ist voll. Bereits erkundete Gebiete bleiben erhalten.",
+      "en": "The map collection is full. Previously explored areas are preserved."
+    },
+    {
+      "key": "ATLAS_OWN_DETAIL",
+      "de": "{name} · Eigene Spezies",
+      "en": "{name} · Your species"
+    },
+    {
+      "key": "ATLAS_FRIEND_DETAIL",
+      "de": "{name} · Bekannter Ort einer befreundeten Kreatur",
+      "en": "{name} · Known place of a friendly creature"
+    },
+    {
+      "key": "ATLAS_BODY_COLLECTION_FULL",
+      "de": "Die Sammlung erkundeter Himmelskörper ist voll.",
+      "en": "The collection of explored celestial bodies is full."
+    },
+    {
+      "key": "ATLAS_INVALID_RECORD",
+      "de": "Diese Erkundungskarte kann nicht gelesen werden. Die gespeicherten Daten bleiben erhalten.",
+      "en": "This exploration map cannot be read. The saved data is preserved."
+    },
+    {
+      "key": "ATLAS_SURFACE_MISMATCH",
+      "de": "Die gespeicherte Karte passt nicht zu dieser Oberfläche.",
+      "en": "The saved map does not match this surface."
+    },
+    {
+      "key": "ATLAS_UNAVAILABLE",
+      "de": "Die Weltkarte ist gerade nicht verfügbar.",
+      "en": "The world map is currently unavailable."
+    },
+    {
+      "key": "HOME_TITLE",
+      "de": "HEIMAT & GRUPPE",
+      "en": "HOME & GROUP"
+    },
+    {
+      "key": "HOME_HUD",
+      "de": "Heimat & Gruppe · N",
+      "en": "Home & group · N"
+    },
+    {
+      "key": "HOME_HUD_INVALID",
+      "de": "Heimat & Gruppe · N · gespeicherten Stand prüfen",
+      "en": "Home & group · N · check saved group"
+    },
+    {
+      "key": "HOME_HUD_STATUS",
+      "de": "Heimat: {distance} m · Gruppe: {members} · N",
+      "en": "Home: {distance} m · Group: {members} · N"
+    },
+    {
+      "key": "HOME_HUD_WAITING",
+      "de": " · {count} wartet am Weg",
+      "en": " · {count} waiting along the route",
+      "plural_key": "HOME_HUD_WAITING_PLURAL",
+      "de_plural": " · {count} warten am Weg",
+      "en_plural": " · {count} waiting along the route"
+    },
+    {
+      "key": "HOME_ESTABLISH",
+      "de": "Heimat hier gründen",
+      "en": "Establish home here"
+    },
+    {
+      "key": "HOME_RELOCATE",
+      "de": "Heimat an diesen Ort verlegen",
+      "en": "Move home to this location"
+    },
+    {
+      "key": "HOME_EMPTY",
+      "de": "Gründe auf einer freien, trockenen Fläche eine Nestgruppe mit zwei Gefährten deiner Spezies.",
+      "en": "Establish a nest group with two companions of your species on clear, dry ground."
+    },
+    {
+      "key": "HOME_SUMMARY",
+      "de": "Zwei Gefährten deiner Spezies · Änderungen werden sofort gespeichert.",
+      "en": "Two companions of your species · Changes are saved immediately."
+    },
+    {
+      "key": "HOME_ALL",
+      "de": "Alle Gefährten",
+      "en": "All companions"
+    },
+    {
+      "key": "HOME_MEMBER_ORDER",
+      "de": "{name} · {order}",
+      "en": "{name} · {order}"
+    },
+    {
+      "key": "HOME_FOLLOW",
+      "de": "Folgen",
+      "en": "Follow"
+    },
+    {
+      "key": "HOME_WAIT",
+      "de": "Warten",
+      "en": "Wait"
+    },
+    {
+      "key": "HOME_RETURN",
+      "de": "Heimkehren",
+      "en": "Return home"
+    },
+    {
+      "key": "HOME_REST_HINT",
+      "de": "Am Heimatplatz erholst du dich langsam, solange du genug gegessen und getrunken hast. Deine Gefährten gehen zu Fuß und warten vor unpassierbaren Wegen.",
+      "en": "You recover slowly at home while well fed and hydrated. Your companions travel on foot and wait when a route is blocked."
+    },
+    {
+      "key": "HOME_CLOSE",
+      "de": "Zurück zum Spiel · N / Esc",
+      "en": "Back to game · N / Esc"
+    },
+    {
+      "key": "HOME_UNAVAILABLE",
+      "de": "Der Heimatplatz ist gerade nicht verfügbar.",
+      "en": "Home is currently unavailable."
+    },
+    {
+      "key": "HOME_FLAT_GROUND_REQUIRED",
+      "de": "Wähle festen, möglichst ebenen Boden.",
+      "en": "Choose firm, reasonably level ground."
+    },
+    {
+      "key": "HOME_DRY_GROUND_REQUIRED",
+      "de": "Der Heimatplatz muss auf trockenem Boden liegen.",
+      "en": "Home must be on dry ground."
+    },
+    {
+      "key": "HOME_INSUFFICIENT_SPACE",
+      "de": "Hier ist zu wenig ebene, trockene Fläche für die Gruppe.",
+      "en": "There is not enough level, dry ground here for the group."
+    },
+    {
+      "key": "HOME_OBSTRUCTED",
+      "de": "Bäume oder andere Hindernisse versperren den Heimatplatz.",
+      "en": "Trees or other obstacles block the home site."
+    },
+    {
+      "key": "HOME_ORDER_UNAVAILABLE",
+      "de": "Dieser Befehl ist gerade nicht verfügbar.",
+      "en": "This command is currently unavailable."
+    },
+    {
+      "key": "HOME_REQUIRED",
+      "de": "Lege zuerst einen Heimatplatz fest.",
+      "en": "Establish a home first."
+    },
+    {
+      "key": "HOME_MEMBER_UNAVAILABLE",
+      "de": "Dieses Gruppenmitglied ist nicht verfügbar.",
+      "en": "This group member is unavailable."
+    },
+    {
+      "key": "HOME_ESTABLISHED",
+      "de": "Heimatplatz gespeichert. Deine beiden Gefährten gehören dauerhaft zu dieser Nestgruppe.",
+      "en": "Home saved. Your two companions are now permanent members of this nest group."
+    },
+    {
+      "key": "HOME_ORDER_SAVED",
+      "de": "Befehl gespeichert.",
+      "en": "Command saved."
+    },
+    {
+      "key": "HOME_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Die bisherige Gruppe und ihre Befehle bleiben erhalten.",
+      "en": "Saving failed. Your previous group and its commands are preserved."
+    },
+    {
+      "key": "HOME_INVALID_RECORD",
+      "de": "Der gespeicherte Gruppenstand ist nicht lesbar.",
+      "en": "The saved group cannot be read."
+    },
+    {
+      "key": "HOME_UNSUPPORTED_VERSION",
+      "de": "Diese Gruppenversion wird noch nicht unterstützt. Der gespeicherte Stand bleibt erhalten.",
+      "en": "This group version is not supported yet. The saved group is preserved."
+    },
+    {
+      "key": "HOME_RADIAL_SURFACE_REQUIRED",
+      "de": "Radiales Gruppenformat benötigt eine Kugeloberfläche.",
+      "en": "This saved group requires a spherical surface."
+    },
+    {
+      "key": "HOME_SURFACE_MISMATCH",
+      "de": "Gruppe und aktueller Lebensraum passen nicht zusammen.",
+      "en": "The group does not match the current habitat."
+    },
+    {
+      "key": "HOME_INVALID_ANCHOR",
+      "de": "Der gespeicherte Heimatplatz ist ungültig.",
+      "en": "The saved home location is invalid."
+    },
+    {
+      "key": "HOME_INVALID_MEMBERS",
+      "de": "Die gespeicherten Gruppenmitglieder sind ungültig.",
+      "en": "The saved group members are invalid."
+    },
+    {
+      "key": "HOME_INVALID_MEMBER_RECORD",
+      "de": "Ein Gruppenmitglied ist nicht lesbar.",
+      "en": "A group member cannot be read."
+    },
+    {
+      "key": "HOME_INVALID_MEMBER_ORDER",
+      "de": "Identität oder Befehl eines Gruppenmitglieds ist ungültig.",
+      "en": "A group member has an invalid identity or command."
+    },
+    {
+      "key": "HOME_INVALID_MEMBER_PLACE",
+      "de": "Name oder Standort eines Gruppenmitglieds ist ungültig.",
+      "en": "A group member has an invalid name or location."
+    },
+    {
+      "key": "OWNED_FOLLOW",
+      "de": "Folgen",
+      "en": "Follow"
+    },
+    {
+      "key": "OWNED_WAIT",
+      "de": "Warten",
+      "en": "Wait"
+    },
+    {
+      "key": "OWNED_HOME",
+      "de": "Heimkehr",
+      "en": "Return home"
+    },
+    {
+      "key": "OWNED_NO_ORDER",
+      "de": "Kein aktiver Auftrag",
+      "en": "No active command"
+    },
+    {
+      "key": "OWNED_UNKNOWN",
+      "de": "Nicht bekannt",
+      "en": "Unknown"
+    },
+    {
+      "key": "OWNED_UNNAMED_HANDLER",
+      "de": "Betreuer nicht benannt",
+      "en": "Unnamed handler"
+    },
+    {
+      "key": "OWNED_WAIT_TARGET",
+      "de": "Ziel: {point}",
+      "en": "Target: {point}"
+    },
+    {
+      "key": "OWNED_HOME_TARGET",
+      "de": "Heimat: {point}",
+      "en": "Home: {point}"
+    },
+    {
+      "key": "OWNED_UNNAMED_ANIMAL",
+      "de": "Unbenanntes Tier · {id}",
+      "en": "Unnamed animal · {id}"
+    },
+    {
+      "key": "OWNED_UNNAMED_SPECIES",
+      "de": "Name nicht bekannt · {id}",
+      "en": "Unknown name · {id}"
+    },
+    {
+      "key": "OWNED_YOUR_TRIBE",
+      "de": "Dein Stamm",
+      "en": "Your tribe"
+    },
+    {
+      "key": "OWNED_TRUST_VALUE",
+      "de": "{trust} / 100",
+      "en": "{trust} / 100"
+    },
+    {
+      "key": "OWNED_DEAD",
+      "de": "Verstorben",
+      "en": "Deceased"
+    },
+    {
+      "key": "OWNED_TAMED",
+      "de": "Gezähmt",
+      "en": "Tamed"
+    },
+    {
+      "key": "OWNED_CURRENT_WORLD",
+      "de": "Aktuelle Welt",
+      "en": "Current world"
+    },
+    {
+      "key": "OWNED_SPHERE_POINT",
+      "de": "Breite {latitude}° · Länge {longitude}° · Höhe {height} m",
+      "en": "Latitude {latitude}° · Longitude {longitude}° · Height {height} m"
+    },
+    {
+      "key": "OWNED_PLANE_POINT",
+      "de": "X {x} · Y {y} · Z {z} m",
+      "en": "X {x} · Y {y} · Z {z} m"
+    },
+    {
+      "key": "OWNED_UNAVAILABLE",
+      "de": "Dein Tierbestand ist hier noch nicht verfügbar.",
+      "en": "Your animal register is not available here yet."
+    },
+    {
+      "key": "OWNED_INVALID",
+      "de": "Dieser Tierbestand kann derzeit nicht gelesen werden.",
+      "en": "This animal register cannot currently be read."
+    },
+    {
+      "key": "OWNED_SCOPE_MISMATCH",
+      "de": "Für deinen aktuellen Stamm und diese Welt ist kein Tierbestand verfügbar.",
+      "en": "No animal register is available for your current tribe and this world."
+    },
+    {
+      "key": "OWNED_EMPTY",
+      "de": "Deinem Stamm gehören hier noch keine Tiere. Befreundete Wildtiere und begonnene Zähmungen zählen noch nicht dazu.",
+      "en": "Your tribe does not own any animals here yet. Befriended wildlife and animals still being tamed do not count as owned."
+    },
+    {
+      "key": "OWNED_NO_MATCHES",
+      "de": "Keine passenden Tiere. Ändere die Suche oder den Filter.",
+      "en": "No matching animals. Change the search or filter."
+    },
+    {
+      "key": "OWNED_DEAD_NAME",
+      "de": "{name} · verstorben",
+      "en": "{name} · deceased"
+    },
+    {
+      "key": "OWNED_OWNER",
+      "de": "Besitzer",
+      "en": "Owner"
+    },
+    {
+      "key": "OWNED_LAST_OWNER",
+      "de": "Letzter Besitzer",
+      "en": "Last owner"
+    },
+    {
+      "key": "OWNED_DETAIL",
+      "de": "Art: {species}\n{owner_label}: {owner}\nZustand: {status}\nVertrauen: {trust}",
+      "en": "Species: {species}\n{owner_label}: {owner}\nStatus: {status}\nTrust: {trust}"
+    },
+    {
+      "key": "OWNED_LOCATION_DETAIL",
+      "de": "{order}\n\nLetzter bekannter Ort:\n{location}",
+      "en": "{order}\n\nLast known location:\n{location}"
+    },
+    {
+      "key": "OWNED_ID",
+      "de": "Tierkennung: {id}",
+      "en": "Animal ID: {id}"
+    },
+    {
+      "key": "OWNED_ENTRY",
+      "de": "{name}\nArt: {species} · Besitzer: {owner}\nVertrauen: {trust} · Auftrag: {order}\nAufenthalt: {location}",
+      "en": "{name}\nSpecies: {species} · Owner: {owner}\nTrust: {trust} · Command: {order}\nLocation: {location}"
+    },
+    {
+      "key": "OWNED_JOURNAL_SUMMARY",
+      "de": "{species} Arten     ·     {regions} Regionen     ·     {parts} Teile verfügbar     ·     {points} Entdeckungspunkte",
+      "en": "{species} species     ·     {regions} regions     ·     {parts} parts available     ·     {points} discovery points"
+    },
+    {
+      "key": "OWNED_JOURNAL_PAGE",
+      "de": "{count} Einträge · {page} / {pages}",
+      "en": "{count} entries · {page} / {pages}"
+    },
+    {
+      "key": "Zurück zum Spiel  ·  Esc",
+      "de": "Zurück zum Spiel  ·  Esc",
+      "en": "Back to game  ·  Esc"
+    },
+    {
+      "key": "Arten",
+      "de": "Arten",
+      "en": "Species"
+    },
+    {
+      "key": "Körperteile",
+      "de": "Körperteile",
+      "en": "Body parts"
+    },
+    {
+      "key": "Regionen",
+      "de": "Regionen",
+      "en": "Regions"
+    },
+    {
+      "key": "Nächste Schritte",
+      "de": "Nächste Schritte",
+      "en": "Next steps"
+    },
+    {
+      "key": "Forschungsziele",
+      "de": "Forschungsziele",
+      "en": "Research goals"
+    },
+    {
+      "key": "Eigene Tiere",
+      "de": "Eigene Tiere",
+      "en": "Owned animals"
+    },
+    {
+      "key": "Name oder Fundort suchen …",
+      "de": "Name oder Fundort suchen …",
+      "en": "Search name or location …"
+    },
+    {
+      "key": "Tier, Art oder Auftrag suchen …",
+      "de": "Tier, Art oder Auftrag suchen …",
+      "en": "Search animal, species or command …"
+    },
+    {
+      "key": "Lebende Tiere",
+      "de": "Lebende Tiere",
+      "en": "Living animals"
+    },
+    {
+      "key": "Verstorbene Tiere",
+      "de": "Verstorbene Tiere",
+      "en": "Deceased animals"
+    },
+    {
+      "key": "Alle eigenen Tiere",
+      "de": "Alle eigenen Tiere",
+      "en": "All owned animals"
+    },
+    {
+      "key": "Vorherige Seite",
+      "de": "Vorherige Seite",
+      "en": "Previous page"
+    },
+    {
+      "key": "Nächste Seite",
+      "de": "Nächste Seite",
+      "en": "Next page"
+    },
+    {
+      "key": "Kurzen Spielhinweis anzeigen",
+      "de": "Kurzen Spielhinweis anzeigen",
+      "en": "Show brief gameplay hint"
+    },
+    {
+      "key": "Entdeckungsbuch · J",
+      "de": "Entdeckungsbuch · J",
+      "en": "Discovery journal · J"
     }
   ]
 }

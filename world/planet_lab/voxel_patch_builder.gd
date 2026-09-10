@@ -26,8 +26,9 @@ func build(tile: Dictionary, surface: RefCounted, seam_arrays: Array) -> Array:
 	var directions: Array[Vector3] = []
 	for y in range(CELLS):
 		for x in range(CELLS):
-			var center: Vector2 = tile.uv + Vector2(x + 0.5, y + 0.5) * (float(tile.width) / CELLS)
-			var precise: Array = Cube.direction(tile.face, center.x, center.y)
+			var center_u: float = float(tile.uv.x) + (x + 0.5) * (float(tile.width) / CELLS)
+			var center_v: float = float(tile.uv.y) + (y + 0.5) * (float(tile.width) / CELLS)
+			var precise: Array = Cube.direction(tile.face, center_u, center_v)
 			var direction: Vector3 = Cube.vector(precise)
 			var height: float = snappedf(surface.height_precise(precise), HEIGHT_STEP)
 			var pigment: Color = surface.color_at(direction, height)
@@ -38,8 +39,9 @@ func build(tile: Dictionary, surface: RefCounted, seam_arrays: Array) -> Array:
 				if corner.x == 0 or corner.y == 0 or corner.x == CELLS or corner.y == CELLS:
 					top.append(vertices[corner.y * STRIDE + corner.x])
 				else:
-					var uv: Vector2 = tile.uv + Vector2(corner) * (float(tile.width) / CELLS)
-					var address: Dictionary = Cube.address(surface.body.id, tile.face, uv.x, uv.y, height)
+					var u: float = float(tile.uv.x) + corner.x * (float(tile.width) / CELLS)
+					var v: float = float(tile.uv.y) + corner.y * (float(tile.width) / CELLS)
+					var address: Dictionary = Cube.address(surface.body.id, tile.face, u, v, height)
 					top.append(Cube.local_position(Cube.cartesian(address, surface.body.radius), tile.anchor))
 			tops.append(top)
 			heights.append(height)

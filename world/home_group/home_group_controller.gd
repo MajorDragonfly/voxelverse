@@ -10,6 +10,7 @@ var player: Node3D
 var panel: CanvasLayer
 var actors: Dictionary = {}
 var problem: String = ""
+var problem_code: String = ""
 var _campaign_id: String = ""
 var _body_id: String = ""
 var _timer: float = 0.0
@@ -84,9 +85,10 @@ func home_position() -> Vector3:
 
 func _validate_group() -> String:
 	var body: Dictionary = _body_record()
-	if not body.has("home_group"):
-		return ""
-	return State.validate(body["home_group"], str(body["id"]), str(_state.campaign.data["player_species_id"]))
+	problem_code = ""
+	if body.has("home_group"):
+		problem_code = State.validation_code(body["home_group"], str(body["id"]), str(_state.campaign.data["player_species_id"]))
+	return State.VALIDATION_MESSAGES.get(problem_code, "")
 
 func _refresh_runtime() -> void:
 	_clear_actors()
@@ -147,26 +149,26 @@ func record_position(identity: String, position: Vector3) -> void:
 
 func establish_home() -> Dictionary:
 	if not can_use_panel() or _transaction:
-		return {"ok": false, "message": "Der Heimatplatz ist gerade nicht verfügbar."}
+		return _result(false, "home.unavailable", "Der Heimatplatz ist gerade nicht verfügbar.")
 	problem = _validate_group()
 	if not problem.is_empty():
-		return {"ok": false, "message": problem}
+		return _result(false, problem_code, problem)
 	var location: Vector3 = player.global_position
 	var hit: Dictionary = _floor_hit(location)
 	var up: Vector3 = Space.up(self, location)
 	if hit.is_empty() or hit["normal"].dot(up) < 0.9:
-		return {"ok": false, "message": "Wähle festen, möglichst ebenen Boden."}
+		return _result(false, "home.flat_ground_required", "Wähle festen, möglichst ebenen Boden.")
 	location = Vector3(hit["position"]) + up * 0.02
 	if not _dry(location):
-		return {"ok": false, "message": "Der Heimatplatz muss auf trockenem Boden liegen."}
+		return _result(false, "home.dry_ground_required", "Der Heimatplatz muss auf trockenem Boden liegen.")
 	# Check the full footprint and initial resident positions, not only the
 	# centre ray; refuse ledges, water and obstructed spawn points.
 	for offset in [Vector3(2.5, 0, 2.5), Vector3(-2.5, 0, 2.5), Vector3(0, 0, -2.0), Vector3(2.0, 0, 0), Vector3(-2.0, 0, 0)]:
 		var sample: Dictionary = _floor_hit(Space.offset(self, location, offset))
 		if sample.is_empty() or absf((Vector3(sample["position"]) - location).dot(up)) > 0.45 or sample["normal"].dot(up) < 0.9 or not _dry(sample["position"]):
-			return {"ok": false, "message": "Hier ist zu wenig ebene, trockene Fläche für die Gruppe."}
+			return _result(false, "home.insufficient_space", "Hier ist zu wenig ebene, trockene Fläche für die Gruppe.")
 		if not _clear_space(Vector3(sample["position"]) + up * 0.8):
-			return {"ok": false, "message": "Bäume oder andere Hindernisse versperren den Heimatplatz."}
+			return _result(false, "home.obstructed", "Bäume oder andere Hindernisse versperren den Heimatplatz.")
 	var candidate: Dictionary = group_state().duplicate(true)
 	if candidate.is_empty():
 		candidate = State.create(str(_body_record()["id"]), str(_state.campaign.data["player_species_id"]), Vector3.ZERO)
@@ -182,25 +184,26 @@ func establish_home() -> Dictionary:
 	var result: Dictionary = _commit(candidate)
 	if result["ok"]:
 		_refresh_runtime()
+		result["code"] = "home.established"
 		result["message"] = "Heimatplatz gespeichert. Deine beiden Gefährten gehören dauerhaft zu dieser Nestgruppe."
 	return result
 
 func issue_order(order: String, identity: String = "") -> Dictionary:
 	if order not in State.ORDERS or not can_use_panel() or _transaction:
-		return {"ok": false, "message": "Dieser Befehl ist gerade nicht verfügbar."}
+		return _result(false, "home.order_unavailable", "Dieser Befehl ist gerade nicht verfügbar.")
 	problem = _validate_group()
 	if not problem.is_empty():
-		return {"ok": false, "message": problem}
+		return _result(false, problem_code, problem)
 	var candidate: Dictionary = group_state().duplicate(true)
 	if candidate.is_empty():
-		return {"ok": false, "message": "Lege zuerst einen Heimatplatz fest."}
+		return _result(false, "home.required", "Lege zuerst einen Heimatplatz fest.")
 	var found: bool = false
 	for member in candidate["members"]:
 		if identity.is_empty() or member["id"] == identity:
 			member["order"] = order
 			found = true
 	if not found:
-		return {"ok": false, "message": "Dieses Gruppenmitglied ist nicht verfügbar."}
+		return _result(false, "home.member_unavailable", "Dieses Gruppenmitglied ist nicht verfügbar.")
 	return _commit(candidate)
 
 func _commit(candidate: Dictionary) -> Dictionary:
@@ -216,7 +219,11 @@ func _commit(candidate: Dictionary) -> Dictionary:
 		else:
 			body.erase("home_group")
 	_transaction = false
-	return {"ok": saved, "message": "Befehl gespeichert." if saved else "Speichern fehlgeschlagen. Die bisherige Gruppe und ihre Befehle bleiben erhalten."}
+	return _result(saved, "home.order_saved" if saved else "home.save_failed", "Befehl gespeichert." if saved else "Speichern fehlgeschlagen. Die bisherige Gruppe und ihre Befehle bleiben erhalten.")
+
+func _result(ok: bool, code: String, diagnostic: String) -> Dictionary:
+	# The panel uses code/params. Keep message for existing diagnostic callers.
+	return {"ok": ok, "code": code, "params": {}, "message": diagnostic}
 
 func _floor_hit(position: Vector3) -> Dictionary:
 	if not is_inside_tree() or _nest.get_world_3d() == null:

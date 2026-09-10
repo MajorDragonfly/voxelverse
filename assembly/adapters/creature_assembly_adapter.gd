@@ -2,16 +2,19 @@ extends RefCounted
 class_name CreatureAssemblyAdapter
 
 const Assembly = preload("res://assembly/core/modular_assembly.gd")
+const Contract = preload("res://assembly/core/blueprint_contract.gd")
 const CreatureBlueprint = preload("res://creatures/editor/creature_blueprint.gd")
 const BodyAttachments = preload("res://assembly/core/creature_body_attachments.gd")
 
 
 static func to_modular_blueprint(creature: Dictionary) -> Dictionary:
+	if not Contract.inspect(creature, "creature").ok: return {}
 	var modular: Dictionary = Assembly.create(
 		"creature",
 		str(creature.get("name", "Creature"))
 	)
 	var creature_assembly: Dictionary = creature.get("assembly", {})
+	modular["design_id"] = str(creature.get("design_id", ""))
 	modular["revision"] = maxi(int(creature_assembly.get("revision", 0)), 0)
 	modular["grid_snap"] = false
 	modular["metadata"] = {
@@ -47,6 +50,7 @@ static func to_modular_blueprint(creature: Dictionary) -> Dictionary:
 
 static func get_migration_summary(creature: Dictionary) -> Dictionary:
 	var modular: Dictionary = to_modular_blueprint(creature)
+	if modular.is_empty(): return {"ready_for_shared_transform_history": false, "error": "unsupported_blueprint"}
 	return {
 		"name": str(modular.get("name", "Creature")),
 		"revision": int(modular.get("revision", 0)),

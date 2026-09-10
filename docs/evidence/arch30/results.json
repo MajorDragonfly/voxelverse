@@ -1,0 +1,23 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.936
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.923
+    },
+    {
+      "name": "expedition_contract_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.989
+    }
+  ]
+}

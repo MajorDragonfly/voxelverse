@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+REPLAY_FIXTURE_VALIDATION
+REPLAY_LOADED body_7d0314de83c88106dfb2bb1236c622d5  { "path": "user://saves/slot_b1e40429f5a5b10e2039de91.json", "name": "Radiale Gemeinschaft", "valid": true, "recovered": false, "saved_time": 1789046042, "seed": 15838, "phase": 1, "seconds": 926.672305889076, "planet_index": 0, "preview": {  }, "history_count": 8, "schema": 9, "surface_mode": "cube_sphere_m1_v1", "has_migration_archive": false, "problem": "" }
+REPLAY_PLACED 0.96466368436813
+SPHERE_GAMEPLAY_STAGE animal_travel_failed_write elapsed_seconds=44.207
+WARNING: Could not commit save: user://missing-animal-travel-parent/blocked.json (File not found)
+SPHERE_GAMEPLAY_STAGE animal_travel_depart elapsed_seconds=44.267
+ANIMAL_TRAVEL_FAR { "body_id": "body_7d0314de83c88106dfb2bb1236c622d5", "animal_id": "object_674a9af747b71fd2f1bb7713631b6edd", "production_seconds_before": 309.533333333333, "production_seconds_after": 314.781589333333, "food_consumed": 0.01749418666667, "cargo": "milk", "milk_stock": 0.0 }
+SPHERE_GAMEPLAY_STAGE animal_travel_far_restart elapsed_seconds=67.691
+SPHERE_GAMEPLAY_STAGE animal_travel_return elapsed_seconds=82.796
+ANIMAL_TRAVEL_RETURN_BALANCE { "owed_seconds": 5.67049599999996, "campaign_clock": 1041.83021132831, "returned_cursor": 1041.83021132831 }
+ANIMAL_TRAVEL_PASSED: real D1/D2 animal, pen and milk cargo; A-B-A, five far production seconds, failed write, pause, fresh process and single physical return.
+ANIMAL_TRAVEL_REPLAY_PASSED

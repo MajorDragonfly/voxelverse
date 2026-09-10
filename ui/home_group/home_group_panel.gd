@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+const Text = preload("res://core/localization/ui_text.gd")
+const Presentation = preload("res://ui/home_group/home_group_presentation.gd")
+
 var controller: Node
 var is_open: bool = false
 var _owns_pause: bool = false
@@ -13,6 +16,8 @@ var _summary: Label
 var _hud: Label
 var _establish: Button
 var _close: Button
+var _last_result: Dictionary = {}
+var _font_scale: float = 1.0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -47,6 +52,7 @@ func open_panel() -> bool:
 	get_tree().paused = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_surface.show()
+	_last_result = {}
 	_message.text = ""
 	_refresh_members()
 	_close.grab_focus()
@@ -79,7 +85,10 @@ func _exit_tree() -> void:
 
 func _build() -> void:
 	_hud = Label.new()
-	_hud.text = "Heimat & Gruppe · N"
+	_hud.text = Text.text("HOME_HUD")
+	_hud.set_meta("home_font_size", 16)
+	_hud.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	_hud.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_hud.add_theme_font_size_override("font_size", 16)
 	_hud.add_theme_color_override("font_color", Color(1, 0.91, 0.67))
 	_hud.add_theme_color_override("font_shadow_color", Color.BLACK)
@@ -116,27 +125,31 @@ func _build() -> void:
 	var scroll := ScrollContainer.new()
 	scroll.name = "Scroll"
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
 	stack.add_child(scroll)
 	var content := VBoxContainer.new()
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.add_theme_constant_override("separation", 16)
 	scroll.add_child(content)
-	var title := _label("HEIMAT & GRUPPE", 28)
+	var title := _label("HOME_TITLE", 28)
 	title.add_theme_color_override("font_color", Color(1, 0.87, 0.53))
 	content.add_child(title)
 	_summary = _label("", 18)
 	content.add_child(_summary)
-	_establish = _button("Heimat hier gründen", func() -> void: _result(controller.establish_home()))
+	_summary.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	_establish = _button("HOME_ESTABLISH", func() -> void: _result(controller.establish_home()))
 	_establish.name = "EstablishHome"
+	_establish.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	content.add_child(_establish)
 	_list = VBoxContainer.new()
 	_list.add_theme_constant_override("separation", 12)
 	content.add_child(_list)
 	_message = _label("", 17)
 	_message.name = "Result"
+	_message.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	content.add_child(_message)
-	content.add_child(_label("Am Heimatplatz erholst du dich langsam, solange du genug gegessen und getrunken hast. Deine Gefährten gehen zu Fuß und warten vor unpassierbaren Wegen.", 16))
-	_close = _button("Zurück zum Spiel · N / Esc", close_panel)
+	content.add_child(_label("HOME_REST_HINT", 16))
+	_close = _button("HOME_CLOSE", close_panel)
 	_close.name = "CloseHome"
 	stack.add_child(_close)
 	_surface.hide()
@@ -149,45 +162,48 @@ func _layout() -> void:
 	var factor: float = viewport_size.x / maxf(window_size.x, 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * factor, 0.0, Vector2.ZERO)
 	var size: Vector2 = viewport_size / factor
+	_font_scale = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
+	_apply_fonts(self)
 	_surface.size = size
 	var panel: Control = _surface.get_node("Centre/Panel")
-	panel.custom_minimum_size.x = maxf(280, minf(730, size.x - 40))
+	panel.custom_minimum_size.x = maxf(280, minf(730 * _font_scale, size.x - 40))
 	var scroll: Control = panel.get_node("Stack/Scroll")
-	scroll.custom_minimum_size.y = minf(520, maxf(100, size.y - 160))
-	_hud.position = Vector2(24, maxf(24, size.y - 82))
+	scroll.custom_minimum_size.y = minf(520 * _font_scale, maxf(100, size.y - 100 - 42 * _font_scale))
+	_hud.position = Vector2(24, maxf(24, size.y - 82 * _font_scale))
+	_hud.size.x = minf(700 * _font_scale, size.x - 48)
 
 func _refresh_members() -> void:
 	for child in _list.get_children():
 		_list.remove_child(child)
 		child.queue_free()
 	var group: Dictionary = controller.group_state()
-	_establish.text = "Heimat hier gründen" if group.is_empty() else "Heimat an diesen Ort verlegen"
-	_establish.disabled = not str(controller.problem).is_empty()
-	_summary.text = "Gründe auf einer freien, trockenen Fläche eine Nestgruppe mit zwei Gefährten deiner Spezies." if group.is_empty() else "Zwei Gefährten deiner Spezies · Änderungen werden sofort gespeichert."
-	if not str(controller.problem).is_empty():
-		_summary.text = str(controller.problem)
+	_refresh_texts()
+	if not str(controller.problem).is_empty() or group.is_empty():
+		_surface.get_node("Centre/Panel/Stack/Scroll").scroll_vertical = 0
 		return
-	if group.is_empty():
-		return
-	_add_order_row("Alle Gefährten", "")
-	for member in group["members"]:
-		var order: String = {"follow": "Folgen", "wait": "Warten", "home": "Heimkehren"}[member["order"]]
-		_add_order_row(str(member["name"]) + " · " + order, str(member["id"]))
+	_add_order_row(Text.text("HOME_ALL"), "")
+	for member: Dictionary in group["members"]:
+		_add_order_row(Presentation.member_text(member), str(member["id"]))
+	_layout()
 
 func _add_order_row(title: String, identity: String) -> void:
-	_list.add_child(_label(title, 18))
+	var label := _label(title, 18)
+	label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	label.set_meta("home_member_id", identity)
+	_list.add_child(label)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
 	_list.add_child(row)
 	for order in ["follow", "wait", "home"]:
-		var text: String = {"follow": "Folgen", "wait": "Warten", "home": "Heimkehren"}[order]
+		var text: String = Presentation.ORDER_KEYS[order]
 		var button := _button(text, func() -> void: _result(controller.issue_order(order, identity)))
 		button.name = order.capitalize() + ("All" if identity.is_empty() else "Member")
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(button)
 
 func _result(result: Dictionary) -> void:
-	_message.text = str(result.get("message", ""))
+	_last_result = result.duplicate(true)
+	_message.text = Presentation.result_text(_last_result)
 	_message.add_theme_color_override("font_color", Color(0.70, 0.91, 0.61) if result.get("ok", false) else Color(1, 0.64, 0.48))
 	_refresh_members()
 	_close.grab_focus()
@@ -195,22 +211,23 @@ func _result(result: Dictionary) -> void:
 func refresh_status() -> void:
 	_hud.visible = controller.can_use_panel() and not is_open
 	if not controller.problem.is_empty():
-		_hud.text = "Heimat & Gruppe · N · gespeicherten Stand prüfen"
+		_hud.text = Text.text("HOME_HUD_INVALID")
 		return
 	var group: Dictionary = controller.group_state()
 	if group.is_empty():
-		_hud.text = "Heimat & Gruppe · N"
+		_hud.text = Text.text("HOME_HUD")
 		return
 	var distance: float = controller.player.global_position.distance_to(controller.home_position())
 	var waiting: int = 0
 	for actor in controller.actors.values():
-		if is_instance_valid(actor) and actor.status in ["Weg blockiert", "Außerhalb der geladenen Umgebung"]:
+		if is_instance_valid(actor) and actor.status_code in ["blocked", "unloaded"]:
 			waiting += 1
-	_hud.text = "Heimat: %d m · Gruppe: 2 · N%s" % [roundi(distance), " · %d warten am Weg" % waiting if waiting else ""]
+	_hud.text = Presentation.hud_text(distance, waiting, group.members.size())
 
 func _label(text: String, font_size: int) -> Label:
 	var label := Label.new()
 	label.text = text
+	label.set_meta("home_font_size", font_size)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.add_theme_font_size_override("font_size", font_size)
 	return label
@@ -218,6 +235,8 @@ func _label(text: String, font_size: int) -> Label:
 func _button(text: String, action: Callable) -> Button:
 	var button := Button.new()
 	button.text = text
+	button.set_meta("home_font_size", 18)
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.custom_minimum_size.y = 42
 	button.add_theme_font_size_override("font_size", 18)
 	var normal := StyleBoxFlat.new()
@@ -241,3 +260,40 @@ func _button(text: String, action: Callable) -> Button:
 	button.add_theme_stylebox_override("focus", focus)
 	button.pressed.connect(action)
 	return button
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		call_deferred("_refresh_language")
+
+func _refresh_language() -> void:
+	if not is_instance_valid(controller): return
+	# Keep the existing rows and actors; language changes issue no commands.
+	_refresh_texts()
+	refresh_status()
+	_layout()
+
+func _refresh_texts() -> void:
+	var group: Dictionary = controller.group_state()
+	_establish.text = Text.text("HOME_ESTABLISH" if group.is_empty() else "HOME_RELOCATE")
+	_establish.disabled = not str(controller.problem).is_empty()
+	_summary.text = Text.text("HOME_EMPTY" if group.is_empty() else "HOME_SUMMARY")
+	if not str(controller.problem).is_empty():
+		_summary.text = Presentation.result_text({"code": controller.problem_code})
+	_message.text = Presentation.result_text(_last_result)
+	# Invalid saved data is already explained in the summary above the actions.
+	_message.visible = not _last_result.is_empty() and _last_result.get("code", "") != controller.problem_code
+	if not controller.problem.is_empty(): return
+	for label: Node in _list.get_children():
+		if not label.has_meta("home_member_id"): continue
+		var identity: String = label.get_meta("home_member_id")
+		if identity.is_empty():
+			label.text = Text.text("HOME_ALL")
+		else:
+			var member: Dictionary = controller.member_record(identity)
+			if not member.is_empty(): label.text = Presentation.member_text(member)
+
+func _apply_fonts(node: Node) -> void:
+	if node.has_meta("home_font_size"):
+		node.add_theme_font_size_override("font_size", roundi(float(node.get_meta("home_font_size")) * _font_scale))
+		if node is Button: node.custom_minimum_size.y = 42 * _font_scale
+	for child in node.get_children(): _apply_fonts(child)

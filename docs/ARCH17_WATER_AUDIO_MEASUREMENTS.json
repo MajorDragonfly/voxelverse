@@ -1,0 +1,60 @@
+{
+  "base_commit": "1355b741d56164fa277276edf4473493d3b08889",
+  "date": "2026-09-10",
+  "note": "Headless CPU; actual living_planet_v2 surface/water, synthetic collision-readiness port; 10 stationary searches. Scope includes separate calls: runtime combines at most 2 environment and 2 shore queries per physics tick.",
+  "baseline": {
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "godot": "4.6.3-stable (official)",
+    "max_queries_per_step": 27,
+    "scope": "Headless CPU, real living_planet_v2 water sampler, Terra seed 15838, synthetic collision-readiness port, 10 stationary searches, no renderer/FPS claim",
+    "search_max_ms": 4.319,
+    "search_p50_ms": 3.801,
+    "step_max_ms": 4.319,
+    "step_p50_ms": 3.801,
+    "step_p95_ms": 4.319,
+    "steps": 10,
+    "total_queries": 270
+  },
+  "incremental": {
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "godot": "4.6.3-stable (official)",
+    "max_queries_per_step": 2,
+    "scope": "Headless CPU, real living_planet_v2 water sampler, Terra seed 15838, synthetic collision-readiness port, 10 stationary searches, no renderer/FPS claim",
+    "search_max_ms": 6.8,
+    "search_p50_ms": 6.236,
+    "step_max_ms": 1.639,
+    "step_p50_ms": 0.409,
+    "step_p95_ms": 0.594,
+    "steps": 140,
+    "total_queries": 270
+  },
+  "validation": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "checks": [
+      {
+        "name": "audio/spherical_water_audio_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.319
+      },
+      {
+        "name": "audio/audio_runtime_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 14.628
+      },
+      {
+        "name": "audio/audio_scene_lifecycle_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.218
+      },
+      {
+        "name": "underwater_view_test",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.218
+      }
+    ]
+  }
+}

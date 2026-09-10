@@ -79,5 +79,14 @@ static func visible_places(record: Dictionary, tree: SceneTree) -> Array[Diction
 		return bool(a.own) if a.own != b.own else str(a.name).naturalnocasecmp_to(str(b.name)) < 0)
 	return result
 
+static func visible_place_page(atlas: RefCounted, tree: SceneTree, offset: int = 0) -> Dictionary:
+	var page: Dictionary = atlas.place_page(offset)
+	if page.is_empty(): return {}
+	var records: Dictionary = {}
+	for place: Dictionary in page.places: records[place.id] = place
+	# Friendship/death still comes from the encounter owner, never the atlas.
+	page.places = visible_places({"body_id": atlas.data.body_id, "places": records}, tree)
+	return page
+
 static func _place(id: String, name: String, kind: String, species: String, object: String, own: bool, address: Dictionary) -> Dictionary:
 	return {"id": id, "name": name, "kind": kind, "species_id": species, "object_id": object, "own": own, "address": address}

@@ -11,6 +11,7 @@ const LabSave = preload("res://world/planet_lab/planet_lab_save.gd")
 const GalaxyPanel = preload("res://world/planet_lab/galaxy_catalog_panel.gd")
 const Catalog = preload("res://world/space/galaxy_catalog.gd")
 const Visits = preload("res://world/space/galaxy_visits.gd")
+const SurfaceSupport = preload("res://world/surface/surface_support.gd")
 var catalog: RefCounted = Catalog.new()
 var visits: RefCounted
 var visit_record: Dictionary = {}
@@ -231,6 +232,10 @@ func _open_body(id: String, saved: Dictionary = {}) -> void:
 		system = System.new(system.binary, full_size)
 		system.elapsed = time
 		_build_system_view()
+	var admission: Dictionary = SurfaceSupport.inspect(system.bodies.get(id, {}))
+	if not admission.ok:
+		status.text = SurfaceSupport.error_text(admission)
+		return
 	if is_instance_valid(walker):
 		remove_child(walker)
 		walker.queue_free()
@@ -766,6 +771,10 @@ func visit_planet(system_id: String, target_id: String) -> bool:
 	var entry: Dictionary = catalog.system(system_id)
 	if entry.is_empty() or not entry.bodies.has(target_id) or not entry.bodies[target_id].get("landable", false):
 		status.text = "Für diesen Körper ist keine begehbare Oberfläche verfügbar."
+		return false
+	var admission: Dictionary = SurfaceSupport.inspect(entry.bodies[target_id])
+	if not admission.ok:
+		status.text = SurfaceSupport.error_text(admission)
 		return false
 	if not save_lab():
 		return false

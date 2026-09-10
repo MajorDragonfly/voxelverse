@@ -1,0 +1,236 @@
+{
+  "schema": 1,
+  "repository": "MajorDragonfly/voxelverse",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "branch": "agent/integration-2026-09-10",
+  "publication_status": "approved_for_upload_and_main_merge",
+  "sources": [
+    {
+      "pr": 42,
+      "title": "Roadmap: Tierrollen, Körperteile, Expeditionen und Community-Designs",
+      "branch": "agent/roadmap-eggs-animal-parts-2026-09-09",
+      "commit": "61ccebb2c6eec5d6f5826867cc91205265dd7667",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/42"
+    },
+    {
+      "pr": 49,
+      "title": "ARCH-01: Datenbesitzer, Speicherwege und Modulanschlüsse dokumentieren",
+      "branch": "feature/arch-01-module-contracts",
+      "commit": "383fd5a7d044aebd3236eb7b20d0e859d1f36885",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/49"
+    },
+    {
+      "pr": 50,
+      "title": "ARCH-23: Bauplanversionen, Originalentwürfe und Revisionen absichern",
+      "branch": "agent/arch23-blueprint-contract-2026-09-10",
+      "commit": "e6378087b46fae8758a7dc7a75185a5df3dc037f",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/50"
+    },
+    {
+      "pr": 51,
+      "title": "ARCH-25: Nachbarstamm-Ansicht und Aktionsrückmeldungen auf Deutsch/Englisch",
+      "branch": "agent/arch25-neighbor-localization-2026-09-10",
+      "commit": "bc3455bfbdd3921df46b63b686de6898403a57d0",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/51"
+    },
+    {
+      "pr": 52,
+      "title": "ARCH-20: Ressourcenproduktion vereinheitlichen und alte Milchstände erhalten",
+      "branch": "agent/arch20-production-contract-2026-09-10",
+      "commit": "9705508da21ea1e2494aefc6afab71aba25dfdab",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/52"
+    },
+    {
+      "pr": 53,
+      "title": "ARCH-29: gemeinsame Vertragsprüfung und Sprachkatalog-Gate",
+      "branch": "agent/arch29-contract-validation-2026-09-10",
+      "commit": "840cf17b50c7fbc3c755e63f0f1d19c7a466afa3",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/53"
+    },
+    {
+      "pr": 54,
+      "title": "ARCH-05: begehbare Planetengrößen und verlässliche Bodenkollision",
+      "branch": "agent/arch05-surface-contract-2026-09-10",
+      "commit": "d6db9050f12a35d7ed1eeabdc181d5ff3e6ddbf6",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/54"
+    },
+    {
+      "pr": 55,
+      "title": "ARCH-24: Körperteilinventar und gemeinsamer Fuß-Geometrieanbieter",
+      "branch": "agent/arch24-part-geometry-2026-09-10",
+      "commit": "0200bbbdab82fd1008254412837d62a7e2aee56e",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/55"
+    },
+    {
+      "pr": 56,
+      "title": "ARCH-17: Pflanzenaufbau, Tierplatzierung und Wasser-Audio begrenzen",
+      "branch": "agent/arch-17-fauna-budget",
+      "commit": "f99ae15db7048c4b9c9a630e4504a5aeb963cba1",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/56"
+    },
+    {
+      "pr": 57,
+      "title": "ARCH-28: bestätigte Kreaturen-zu-Stamm-Übergabe kapseln",
+      "branch": "agent/arch28-phase-handoff-2026-09-10",
+      "commit": "95ab56c4f6f3624a26e79da5dc446b3ad528cae0",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/57"
+    },
+    {
+      "pr": 58,
+      "title": "ARCH-02: Kugel-Messrouten und Speicherbudgets",
+      "branch": "agent/arch02-spherical-performance-2026-09-10",
+      "commit": "ed529a2cc19fd6daece1a65e3e64fb611d6b8629",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/58"
+    },
+    {
+      "pr": 59,
+      "title": "ARCH-14: dauerhaftes Kartenwissen mit begrenztem Cache",
+      "branch": "feature/arch-14-atlas-paging",
+      "commit": "57a330fc5e064ea0cda221e2f8e86140e8685f8f",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/59"
+    },
+    {
+      "pr": 60,
+      "title": "ARCH-25: Weltkarte DE/EN mit erhaltener Kartensitzung",
+      "branch": "agent/arch25-world-map-localization-2026-09-10",
+      "commit": "a89634129bf708af7b1464f4362a4e70ca3a6c2d",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/60"
+    },
+    {
+      "pr": 61,
+      "title": "BP-COMMUNITY.1: Kreaturenbaupläne portabel exportieren und importieren",
+      "branch": "agent/community-blueprint-contract-2026-09-10",
+      "commit": "ec422710f7a4a468390ae1e8806b9788443a1ea4",
+      "base": "agent/arch23-blueprint-contract-2026-09-10",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/61"
+    },
+    {
+      "pr": 62,
+      "title": "ARCH-13: vollständige Regionssicherungen exportieren und prüfen",
+      "branch": "agent/arch13-region-backups-2026-09-10",
+      "commit": "2e400ce850fce22d76c2b902f60a1955ce67e533",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/62"
+    },
+    {
+      "pr": 63,
+      "title": "ARCH-21: vierte Nutztierspezies für Eier",
+      "branch": "agent/arch21-egg-species-2026-09-10",
+      "commit": "6ea9f55ba665ca17d3288419041acad328284c9d",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/63"
+    },
+    {
+      "pr": 64,
+      "title": "ARCH-25: Heimat & Gruppe DE/EN mit erhaltenen Gefährten",
+      "branch": "agent/arch25-home-group-localization-2026-09-10",
+      "commit": "25c5b07a80d8d551b473882a8ef1c1cb0bf0223d",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/64"
+    },
+    {
+      "pr": 65,
+      "title": "ARCH-14: bekanntes Ortsregister dauerhaft auslagern",
+      "branch": "feature/arch-14-place-register",
+      "commit": "75d4c4cf0d1868c8f8f8adf20b423ac745542579",
+      "base": "feature/arch-14-atlas-paging",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/65"
+    },
+    {
+      "pr": 66,
+      "title": "ARCH-24: Katzenpfoten, Bärentatzen und Pferdehufe im Kreatureneditor",
+      "branch": "agent/arch24-animal-feet-2026-09-10",
+      "commit": "4a3c805287787eabfcca35d4dde94dc8476c74fd",
+      "base": "agent/arch24-part-geometry-2026-09-10",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/66"
+    },
+    {
+      "pr": 67,
+      "title": "ARCH-30: Reise- und Schiffsvertrag als geprüften Datenentwurf liefern",
+      "branch": "agent/arch30-expedition-contract-2026-09-10",
+      "commit": "5da2fe5c62deb665ab030453eee672c3d41d85ee",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/67"
+    },
+    {
+      "pr": 68,
+      "title": "ARCH-15: Kopieraufwand der Dorfarbeit begrenzen",
+      "branch": "agent/arch15-work-observation-2026-09-10",
+      "commit": "cef4a9a686c275038d00fad24fba07824d4f887d",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/68"
+    },
+    {
+      "pr": 69,
+      "title": "ARCH-18: Tierhaltung und Milchfracht bei Planetenwechsel erhalten",
+      "branch": "agent/arch18-animal-travel-2026-09-10",
+      "commit": "930324b3f97678b91369d39d601aded5c9aa6e6d",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/69"
+    },
+    {
+      "pr": 70,
+      "title": "ARCH-24: Krebsscheren im Kreatureneditor und gemeinsamer Handanbieter",
+      "branch": "agent/arch24-crab-claws-2026-09-10",
+      "commit": "29961b382354c3b5f34b13d96c6684282d27c4ab",
+      "base": "agent/arch24-animal-feet-2026-09-10",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/70"
+    },
+    {
+      "pr": 71,
+      "title": "ARCH-13: erkundete Karten und Atlasarchive vollständig mitsichern",
+      "branch": "agent/arch13-atlas-backups-2026-09-10",
+      "commit": "d2dbc9af16c54fad7e93dc7edebce3db4d9d173e",
+      "base": "agent/arch13-region-backups-2026-09-10",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/71"
+    },
+    {
+      "pr": 72,
+      "title": "ARCH-25: Eigene Tiere im Entdeckungsbuch auf Deutsch und Englisch",
+      "branch": "agent/arch25-owned-animals-localization-2026-09-10",
+      "commit": "670e6e7ffea86fa2be47de7676d1bc93591ab1a7",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/72"
+    },
+    {
+      "pr": 73,
+      "title": "ARCH-15: Dorfarbeit mit gezielten Vorher-Zuständen absichern",
+      "branch": "agent/arch15-targeted-work-snapshots-2026-09-10",
+      "commit": "47677b8d6cf2a40f8455f13b2ee2294178deee4a",
+      "base": "main",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/73"
+    },
+    {
+      "pr": 74,
+      "title": "ARCH-13: bekannte Orte und ihre Indexzuordnung vollständig mitsichern",
+      "branch": "agent/arch13-place-backups-2026-09-10",
+      "commit": "a3915a9a2bc55f5b90bbc60173ef09a5dae6a12e",
+      "base": "agent/arch13-atlas-backups-2026-09-10",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/74"
+    },
+    {
+      "pr": 75,
+      "title": "BP-COMMUNITY.2: lokale Kreaturenvorlagen im Editor und Spielstart",
+      "branch": "agent/community-blueprint-library-2026-09-10",
+      "commit": "5b0159e15f6739601039c30813d387274132456a",
+      "base": "agent/community-blueprint-contract-2026-09-10",
+      "url": "https://github.com/MajorDragonfly/voxelverse/pull/75"
+    }
+  ],
+  "verified_source_commit": "3ca7e5a70dc7230b266f2a509f945c4cbd87f1db",
+  "evidence": "evidence/integration-2026-09-10/summary.json",
+  "authorization": "Explicit user approval in the integration conversation"
+}

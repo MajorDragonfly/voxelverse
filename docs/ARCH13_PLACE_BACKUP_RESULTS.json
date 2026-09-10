@@ -1,0 +1,153 @@
+{
+  "schema": 1,
+  "work_package": "ARCH-13 Atlas-3 place-register backups",
+  "date": "2026-09-10",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "local_implementation_commit": "c7b09d993a4b0a06db0f9c8ea09d8dbcc26d2d43",
+  "implementation_tree": "7777bda0740fa9bd83b547f8e8a23922e22ccf0e",
+  "base_pr71_commit": "d2dbc9af16c54fad7e93dc7edebce3db4d9d173e",
+  "place_reference_pr65_commit": "75d4c4cf0d1868c8f8f8adf20b423ac745542579",
+  "atlas_reference_pr59_commit": "57a330fc5e064ea0cda221e2f8e86140e8685f8f",
+  "reference_code_used_only_for_acceptance": true,
+  "tests": {
+    "passed": 25,
+    "skipped": 0,
+    "seconds": 43.635
+  },
+  "native": {
+    "ARCH13_PLACES_NATIVE_RESULT": {
+      "export": {
+        "snapshots": 4,
+        "roots": 9,
+        "verified_blobs": 21069,
+        "copied_blobs": 6897,
+        "copied_bytes": 2180096,
+        "peak_pending": 59,
+        "peak_blob_bytes": 2577,
+        "place_records": 9705,
+        "index_reads": 32741,
+        "peak_index_pages": 128
+      },
+      "created": {
+        "body_id": "body_81753ef1cf88f155cb34c0342eea9bca",
+        "campaign_id": "campaign_5d1d61761c40aa1c1082e5a72f71bf8e",
+        "passed": true,
+        "pending": 2,
+        "place_count": 3106,
+        "regions": "/tmp/arch13-places-native-bdd3x_hi/source/xdg_data_home/godot/app_userdata/Voxelverse/regions/blobs",
+        "slot": "/tmp/arch13-places-native-bdd3x_hi/source/xdg_data_home/godot/app_userdata/Voxelverse/saves/slot_0873be393481f6195cb9b364.json"
+      },
+      "restart": {
+        "body_id": "body_81753ef1cf88f155cb34c0342eea9bca",
+        "campaign_id": "campaign_5d1d61761c40aa1c1082e5a72f71bf8e",
+        "checked_legacy_places": 390,
+        "checked_places": 9316,
+        "passed": true,
+        "peak_cache": 96,
+        "peak_page_size": 64,
+        "peak_pages": 128,
+        "place_snapshots": 3
+      }
+    },
+    "ARCH13_ATLAS_NATIVE_RESULT": {
+      "export": {
+        "ok": true,
+        "snapshots": 4,
+        "roots": 6,
+        "verified_blobs": 4854,
+        "copied_blobs": 1622,
+        "copied_bytes": 436917,
+        "peak_pending": 38,
+        "peak_blob_bytes": 1179,
+        "place_records": 0,
+        "index_reads": 0,
+        "peak_index_pages": 0
+      },
+      "created": {
+        "body_id": "body_ef90b9f7a29fa285b2f875ce0fe01544",
+        "campaign_id": "campaign_3fe8986a69d6e4a95ce5fbb4c756599e",
+        "legacy_tiles_per_generation": 130,
+        "passed": true,
+        "pending": 8,
+        "regions": "/tmp/arch13-atlas-native-kz9j6chr/source/xdg_data_home/godot/app_userdata/Voxelverse/regions/blobs",
+        "slot": "/tmp/arch13-atlas-native-kz9j6chr/source/xdg_data_home/godot/app_userdata/Voxelverse/saves/slot_28481149d501caa83dbcf80a.json",
+        "tiles_per_generation": 1200
+      },
+      "restart": {
+        "atlas_snapshots": 3,
+        "body_id": "body_ef90b9f7a29fa285b2f875ce0fe01544",
+        "campaign_id": "campaign_3fe8986a69d6e4a95ce5fbb4c756599e",
+        "checked_legacy_tiles": 390,
+        "checked_sphere_tiles": 3600,
+        "passed": true,
+        "peak_cache": 96,
+        "peak_pages": 128
+      }
+    },
+    "ARCH13_NATIVE_RESULT": {
+      "export": {
+        "ok": true,
+        "snapshots": 4,
+        "roots": 3,
+        "verified_blobs": 4416,
+        "copied_blobs": 2944,
+        "copied_bytes": 467860,
+        "peak_pending": 35,
+        "peak_blob_bytes": 1179,
+        "place_records": 0,
+        "index_reads": 0,
+        "peak_index_pages": 0
+      },
+      "restart": {
+        "body_id": "body_9bab83e7e4f2ccaa1f82090a9a8c319d",
+        "campaign_id": "campaign_102fa624f24eacb76fbef89ae87323bb",
+        "checked_regions": 3600,
+        "passed": true,
+        "peak_cache": 96
+      }
+    }
+  },
+  "imports": {
+    "own": {
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "checks": [
+        {
+          "name": "import",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 5.846
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.869
+        }
+      ]
+    },
+    "reference": {
+      "godot": "4.6.3.stable.official.7d41c59c4",
+      "checks": [
+        {
+          "name": "import",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 6.844
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.944
+        }
+      ]
+    }
+  },
+  "scope": "Linux headless; actual Atlas, AtlasPlaceStore, RegionStore, SaveGameService and separate restart processes; synthetic places/addresses. No visual, FPS, target-PC or full integration acceptance.",
+  "remaining": [
+    "Integrate own PR #71 chain and published runtime #65/#59",
+    "Separate laboratory backup files",
+    "Global save manifest",
+    "Garbage collection"
+  ]
+}

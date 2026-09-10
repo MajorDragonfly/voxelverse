@@ -1,0 +1,18 @@
+test_real_store_1200_regions_and_save_service_in_fresh_user_directory (region_backup_test.GodotRegionBackupTest.test_real_store_1200_regions_and_save_service_in_fresh_user_directory) ... ARCH13_NATIVE_RESULT {"export": {"ok": true, "snapshots": 4, "roots": 3, "verified_blobs": 4416, "copied_blobs": 2944, "copied_bytes": 467860, "peak_pending": 35, "peak_blob_bytes": 1179}, "restart": {"body_id": "body_d1537cdbfffd982987a1008808aa27bf", "campaign_id": "campaign_95ffd8517fcc3a5234f122206348606f", "checked_regions": 3600, "passed": true, "peak_cache": 96}}
+ok
+test_bounds_bad_json_and_unsafe_paths (region_backup_test.RegionBackupTest.test_bounds_bad_json_and_unsafe_paths) ... ok
+test_complete_history_archive_closure_exceeds_cache_without_copying_orphans (region_backup_test.RegionBackupTest.test_complete_history_archive_closure_exceeds_cache_without_copying_orphans) ... ok
+test_depth_future_save_and_old_loose_design_versions_fail_explicitly (region_backup_test.RegionBackupTest.test_depth_future_save_and_old_loose_design_versions_fail_explicitly) ... ok
+test_future_manifest_and_nested_blob_are_protected (region_backup_test.RegionBackupTest.test_future_manifest_and_nested_blob_are_protected) ... ok
+test_inline_empty_store_and_backup_only_slot (region_backup_test.RegionBackupTest.test_inline_empty_store_and_backup_only_slot) ... ok
+test_interrupted_write_and_publish_keep_previous_backup (region_backup_test.RegionBackupTest.test_interrupted_write_and_publish_keep_previous_backup) ... ok
+test_missing_or_corrupt_child_never_publishes_and_keeps_sources (region_backup_test.RegionBackupTest.test_missing_or_corrupt_child_never_publishes_and_keeps_sources) ... ok
+test_multiple_slots_keep_independent_generations_and_duplicate_names_fail (region_backup_test.RegionBackupTest.test_multiple_slots_keep_independent_generations_and_duplicate_names_fail) ... ok
+test_source_can_change_after_capture_without_mixing_generations (region_backup_test.RegionBackupTest.test_source_can_change_after_capture_without_mixing_generations) ... ok
+test_symlinked_blob_is_rejected (region_backup_test.RegionBackupTest.test_symlinked_blob_is_rejected) ... ok
+test_valid_checksums_do_not_hide_wrong_keys_or_branches (region_backup_test.RegionBackupTest.test_valid_checksums_do_not_hide_wrong_keys_or_branches) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 7.316s
+
+OK

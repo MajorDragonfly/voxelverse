@@ -1,0 +1,4361 @@
+{
+  "passed": true,
+  "recipe": {
+    "cycles": 2.0,
+    "frame_cap": 60.0,
+    "mode": "route",
+    "protocol": 2.0,
+    "renderer": "headless",
+    "resolution": [
+      1920.0,
+      1080.0
+    ],
+    "seed": 15838.0,
+    "settle_frames": 60.0,
+    "stage_timeout_seconds": 45.0,
+    "walk_seconds": 6.0
+  },
+  "host": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "processor": "x86_64"
+  },
+  "target_pc_acceptance": false,
+  "adapter": "",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "deferred_routes": [
+    "developed village",
+    "A-B-A body travel",
+    "target-PC ten-minute walk"
+  ],
+  "engine_start_to_menu_ready_ms": 2115.909,
+  "engine_start_to_world_ready_ms": 16404.506,
+  "failures": [],
+  "fixture_slot": "user://saves/slot_6e37c13aeda7488e5e7c423b.json",
+  "full_walk_protocol": false,
+  "godot": "4.6.3-stable (official)",
+  "initial_address": {
+    "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+    "face": 0,
+    "height": 26.4085880015045,
+    "mode": "cube_sphere_m1_v1",
+    "u": 0.0,
+    "v": -0.88
+  },
+  "initial_save": {
+    "design_files": {
+      "user://creature_assembly_v7.json": "{\n\t\"appearance\": {\n\t\t\"skin_scale\": 1.0,\n\t\t\"skin_strength\": 0.65,\n\t\t\"skin_type\": \"smooth\"\n\t},\n\t\"assembly\": {\n\t\t\"attachment_schema_version\": 3,\n\t\t\"body_attachments\": {\n\t\t\t\"schema\": 1.0,\n\t\t\t\"sockets\": {\n\t\t\t\t\"harness.left\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.32\n\t\t\t\t},\n\t\t\t\t\"harness.right\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.32\n\t\t\t\t},\n\t\t\t\t\"saddle.primary\": {\n\t\t\t\t\t\"enabled\": true,\n\t\t\t\t\t\"offset\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"rotation_degrees\": [\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0,\n\t\t\t\t\t\t0.0\n\t\t\t\t\t],\n\t\t\t\t\t\"t\": 0.52\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"edit_mode\": \"body\",\n\t\t\"last_selected_category\": \"body\",\n\t\t\"revision\": 0,\n\t\t\"schema\": 7,\n\t\t\"snap_to_surface\": true,\n\t\t\"symmetry_enabled\": true\n\t},\n\t\"body\": {\n\t\t\"missing_part_id\": \"\",\n\t\t\"part_id\": \"body_balanced_core\",\n\t\t\"scale\": 1.0,\n\t\t\"shape\": [\n\t\t\t1.35000002384186,\n\t\t\t1.0,\n\t\t\t2.09999990463257\n\t\t],\n\t\t\"spine\": [\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.0,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.166666666666667,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.333333333333333,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.5,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.666666666666667,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 0.833333333333333,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"height_scale\": 1.0,\n\t\t\t\t\"t\": 1.0,\n\t\t\t\t\"width_scale\": 1.0,\n\t\t\t\t\"y_offset\": 0.0\n\t\t\t}\n\t\t],\n\t\t\"spine_length_scale\": 1.0\n\t},\n\t\"design_id\": \"design_7ef503db2fe58697d45bc0f923ac2ab2\",\n\t\"name\": \"New Creature\",\n\t\"next_part_uid\": 5,\n\t\"paint\": {\n\t\t\"intensity\": 1.0,\n\t\t\"missing_part_id\": \"\",\n\t\t\"part_id\": \"paint_plain\"\n\t},\n\t\"parts\": [\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.58,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0199999995529652,\n\t\t\t\t-0.0500000007450581\n\t\t\t],\n\t\t\t\"anchor_t\": 0.055,\n\t\t\t\"anchor_vertical\": 0.38,\n\t\t\t\"category\": \"eyes\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": true,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"eyes_beady\",\n\t\t\t\"position\": [\n\t\t\t\t0.323814362287521,\n\t\t\t\t0.206753194332123,\n\t\t\t\t-0.984499990940094\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0001\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0200000014156103\n\t\t\t],\n\t\t\t\"anchor_t\": 0.0,\n\t\t\t\"anchor_vertical\": 0.02,\n\t\t\t\"category\": \"mouth\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": false,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"mouth_grazer\",\n\t\t\t\"position\": [\n\t\t\t\t0.0,\n\t\t\t\t0.00968439970165491,\n\t\t\t\t-1.02999997138977\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0002\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"anchor_t\": 0.5,\n\t\t\t\"anchor_vertical\": 0.0,\n\t\t\t\"category\": \"legs\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": true,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"legs_walker\",\n\t\t\t\"position\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0003\"\n\t\t},\n\t\t{\n\t\t\t\"anchor_locked\": true,\n\t\t\t\"anchor_side\": 0.0,\n\t\t\t\"anchor_surface_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0299999956041574\n\t\t\t],\n\t\t\t\"anchor_t\": 1.0,\n\t\t\t\"anchor_vertical\": -0.02,\n\t\t\t\"category\": \"tail\",\n\t\t\t\"center_locked\": false,\n\t\t\t\"end_part_id\": \"\",\n\t\t\t\"end_rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"end_scale\": 1.0,\n\t\t\t\"end_shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"joint\": {\n\t\t\t\t\"lower\": 1.0,\n\t\t\t\t\"offset\": [\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0,\n\t\t\t\t\t0.0\n\t\t\t\t],\n\t\t\t\t\"upper\": 1.0\n\t\t\t},\n\t\t\t\"manual_offset\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"mirrored\": false,\n\t\t\t\"missing_part_id\": \"\",\n\t\t\t\"paired_uid\": \"\",\n\t\t\t\"part_id\": \"tail_balance\",\n\t\t\t\"position\": [\n\t\t\t\t0.0,\n\t\t\t\t-0.00968439970165491,\n\t\t\t\t1.07999992370605\n\t\t\t],\n\t\t\t\"rotation\": [\n\t\t\t\t0.0,\n\t\t\t\t0.0,\n\t\t\t\t0.0\n\t\t\t],\n\t\t\t\"scale\": 1.0,\n\t\t\t\"shape_scale\": [\n\t\t\t\t1.0,\n\t\t\t\t1.0,\n\t\t\t\t1.0\n\t\t\t],\n\t\t\t\"socket_type\": \"surface\",\n\t\t\t\"uid\": \"part_0004\"\n\t\t}\n\t],\n\t\"progression\": {\n\t\t\"discoveries\": [],\n\t\t\"unlocked_parts\": []\n\t},\n\t\"version\": 7\n}"
+    },
+    "game_state": {
+      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+      "campaign": {
+        "bodies": {
+          "body_57d29a0edf66ecb1309999dc43772160": {
+            "exploration_atlas": {
+              "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+              "divisions": 1048576.0,
+              "mode": "cube_sphere_m1_v1",
+              "places": {
+                "body_57d29a0edf66ecb1309999dc43772160:nest": {
+                  "address": {
+                    "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                    "face": 0.0,
+                    "height": 25.3285880079493,
+                    "mode": "cube_sphere_m1_v1",
+                    "radius": 6371000.0,
+                    "u": 0.0,
+                    "v": -0.879999999999991
+                  },
+                  "id": "body_57d29a0edf66ecb1309999dc43772160:nest",
+                  "kind": "nest",
+                  "name": "Eigenes Nest",
+                  "object_id": "",
+                  "own": true,
+                  "species_id": "species_5a5dd0261b47d3177304add149e1aa6b"
+                }
+              },
+              "radius": 6371000.0,
+              "schema": 1.0,
+              "tiles": {
+                "0:16383:1965": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  2147483648.0,
+                  3758096384.0,
+                  3758096384.0
+                ],
+                "0:16383:1966": [
+                  4026531840.0,
+                  4026531840.0,
+                  4026531840.0,
+                  4026531840.0,
+                  4026531840.0,
+                  3758096384.0,
+                  3758096384.0,
+                  2147483648.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "0:16384:1965": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0,
+                  7.0,
+                  7.0
+                ],
+                "0:16384:1966": [
+                  15.0,
+                  15.0,
+                  15.0,
+                  15.0,
+                  15.0,
+                  7.0,
+                  7.0,
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            },
+            "fauna_catalog": {
+              "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+              "generator_version": "domestic_fauna_v1",
+              "habitat_status": "pending",
+              "habitats": [],
+              "schema": 2.0,
+              "seed": 15838.0,
+              "species": [
+                {
+                  "blueprint": {
+                    "appearance": {
+                      "accent_color": "512f43",
+                      "base_color": "c75b45",
+                      "belly_color": "e5b676",
+                      "eye_color": "ebd966",
+                      "horn_color": "24262f",
+                      "name": "Glut",
+                      "skin_scale": 1.0,
+                      "skin_strength": 0.65,
+                      "skin_type": "leather"
+                    },
+                    "assembly": {
+                      "attachment_schema_version": 3.0,
+                      "body_attachments": {
+                        "schema": 1.0,
+                        "sockets": {
+                          "harness.left": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "harness.right": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "saddle.primary": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.52
+                          }
+                        }
+                      },
+                      "edit_mode": "body",
+                      "last_selected_category": "body",
+                      "revision": 0.0,
+                      "schema": 7.0,
+                      "snap_to_surface": true,
+                      "symmetry_enabled": true
+                    },
+                    "body": {
+                      "part_id": "body_long_grazer",
+                      "scale": 1.0,
+                      "shape": {
+                        "$vector3": [
+                          1.64016354084015,
+                          1.163987159729,
+                          2.96287608146667
+                        ]
+                      },
+                      "spine": [
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.166666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.333333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.5,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.666666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.833333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 1.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        }
+                      ],
+                      "spine_length_scale": 1.0
+                    },
+                    "compatibility_warnings": [],
+                    "design_id": "design_59c9807c6fd278d36cffe87b91199e26",
+                    "name": "Senuvek \u00b7 Milchweider",
+                    "next_part_uid": 13.0,
+                    "paint": {
+                      "intensity": 0.8553187251091,
+                      "part_id": "paint_warning_marks"
+                    },
+                    "parts": [
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            -0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 0.0,
+                        "anchor_vertical": 0.04,
+                        "category": "mouth",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "mouth_grazer",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            0.0225450340658426,
+                            -1.60143804550171
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0008"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.58,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0199999995529652,
+                            -0.0500000007450581
+                          ]
+                        },
+                        "anchor_t": 0.055,
+                        "anchor_vertical": 0.38,
+                        "category": "eyes",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "eyes_wide",
+                        "position": {
+                          "$vector3": [
+                            0.393413692712784,
+                            0.23737832903862,
+                            -1.36847984790802
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0009"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.25,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_hooves",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_hoof",
+                        "position": {
+                          "$vector3": [
+                            0.422689825296402,
+                            -0.325031071901321,
+                            -0.740719020366669
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0010"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.75,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_hooves",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_hoof",
+                        "position": {
+                          "$vector3": [
+                            0.422689825296402,
+                            -0.325031071901321,
+                            0.740719020366669
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0011"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 1.0,
+                        "anchor_vertical": -0.02,
+                        "category": "tail",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "tail_balance",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            -0.0112725170329213,
+                            1.60143804550171
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0012"
+                      }
+                    ],
+                    "progression": {
+                      "discoveries": [],
+                      "unlocked_parts": []
+                    },
+                    "species": {
+                      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                      "display_name": "Senuvek \u00b7 Milchweider",
+                      "domestication": {
+                        "anatomy": {
+                          "attachment_requirements": [],
+                          "back_clear": false,
+                          "lactation": true,
+                          "locomotion": "ground",
+                          "min_support_legs": 4.0
+                        },
+                        "bonding": 0.6,
+                        "carry_capacity": 0.0,
+                        "diet": [
+                          "plant"
+                        ],
+                        "milk_interval": 300.0,
+                        "milk_yield": 2.0,
+                        "movement_speed": 2.8,
+                        "perception_range": 12.0,
+                        "roles": [
+                          "milk"
+                        ],
+                        "schema": 1.0,
+                        "sociality": 0.85,
+                        "stamina": 120.0,
+                        "strength": 500.0,
+                        "tameable": true,
+                        "temperament": "calm",
+                        "trainability": 0.7,
+                        "water_need": 4.0
+                      },
+                      "ecological_role": "grazer",
+                      "id": "species_e285c8bfe3d09bf03777b514a05f99ba",
+                      "region_x": 0.0,
+                      "region_z": 0.0,
+                      "species_seed": 4115906043309.0
+                    },
+                    "version": 7.0
+                  },
+                  "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                  "domestication": {
+                    "anatomy": {
+                      "attachment_requirements": [],
+                      "back_clear": false,
+                      "lactation": true,
+                      "locomotion": "ground",
+                      "min_support_legs": 4.0
+                    },
+                    "bonding": 0.6,
+                    "carry_capacity": 0.0,
+                    "diet": [
+                      "plant"
+                    ],
+                    "milk_interval": 300.0,
+                    "milk_yield": 2.0,
+                    "movement_speed": 2.8,
+                    "perception_range": 12.0,
+                    "roles": [
+                      "milk"
+                    ],
+                    "schema": 1.0,
+                    "sociality": 0.85,
+                    "stamina": 120.0,
+                    "strength": 500.0,
+                    "tameable": true,
+                    "temperament": "calm",
+                    "trainability": 0.7,
+                    "water_need": 4.0
+                  },
+                  "group": "milk",
+                  "id": "species_e285c8bfe3d09bf03777b514a05f99ba",
+                  "role": "grazer",
+                  "species_seed": 4115906043309.0,
+                  "visual_scale": 0.74
+                },
+                {
+                  "blueprint": {
+                    "appearance": {
+                      "accent_color": "233c6e",
+                      "base_color": "548faf",
+                      "belly_color": "c5e7dc",
+                      "eye_color": "eebc58",
+                      "horn_color": "dddfe5",
+                      "name": "Ozean",
+                      "skin_scale": 1.0,
+                      "skin_strength": 0.65,
+                      "skin_type": "fur"
+                    },
+                    "assembly": {
+                      "attachment_schema_version": 3.0,
+                      "body_attachments": {
+                        "schema": 1.0,
+                        "sockets": {
+                          "harness.left": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "harness.right": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "saddle.primary": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.52
+                          }
+                        }
+                      },
+                      "edit_mode": "body",
+                      "last_selected_category": "body",
+                      "revision": 0.0,
+                      "schema": 7.0,
+                      "snap_to_surface": true,
+                      "symmetry_enabled": true
+                    },
+                    "body": {
+                      "part_id": "body_long_grazer",
+                      "scale": 1.0,
+                      "shape": {
+                        "$vector3": [
+                          1.63166427612305,
+                          1.15795540809631,
+                          2.94752264022827
+                        ]
+                      },
+                      "spine": [
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.166666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.333333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.5,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.666666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.833333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 1.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        }
+                      ],
+                      "spine_length_scale": 1.0
+                    },
+                    "compatibility_warnings": [],
+                    "design_id": "design_633baf8210026b87e6315da0bae6dfbe",
+                    "name": "Arupoda \u00b7 Lastl\u00e4ufer",
+                    "next_part_uid": 16.0,
+                    "paint": {
+                      "intensity": 0.91874897480011,
+                      "part_id": "paint_warning_marks"
+                    },
+                    "parts": [
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            -0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 0.0,
+                        "anchor_vertical": 0.04,
+                        "category": "mouth",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "mouth_grazer",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            0.0224282070994377,
+                            -1.59376132488251
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0011"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.58,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0199999995529652,
+                            -0.0500000007450581
+                          ]
+                        },
+                        "anchor_t": 0.055,
+                        "anchor_vertical": 0.38,
+                        "category": "eyes",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "eyes_beady",
+                        "position": {
+                          "$vector3": [
+                            0.391375035047531,
+                            0.236251875758171,
+                            -1.36164748668671
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0012"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.25,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_hooves",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_hoof",
+                        "position": {
+                          "$vector3": [
+                            0.420499473810196,
+                            -0.323346763849258,
+                            -0.736880660057068
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0013"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.75,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_hooves",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_hoof",
+                        "position": {
+                          "$vector3": [
+                            0.420499473810196,
+                            -0.323346763849258,
+                            0.736880660057068
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0014"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 1.0,
+                        "anchor_vertical": -0.02,
+                        "category": "tail",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "tail_balance",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            -0.0112141035497189,
+                            1.59376132488251
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0015"
+                      }
+                    ],
+                    "progression": {
+                      "discoveries": [],
+                      "unlocked_parts": []
+                    },
+                    "species": {
+                      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                      "display_name": "Arupoda \u00b7 Lastl\u00e4ufer",
+                      "domestication": {
+                        "anatomy": {
+                          "attachment_requirements": [
+                            "saddle",
+                            "harness"
+                          ],
+                          "back_clear": true,
+                          "lactation": false,
+                          "locomotion": "ground",
+                          "min_support_legs": 4.0
+                        },
+                        "bonding": 0.6,
+                        "carry_capacity": 120.0,
+                        "diet": [
+                          "plant"
+                        ],
+                        "milk_interval": 0.0,
+                        "milk_yield": 0.0,
+                        "movement_speed": 2.8,
+                        "perception_range": 12.0,
+                        "roles": [
+                          "draught",
+                          "riding"
+                        ],
+                        "schema": 1.0,
+                        "sociality": 0.85,
+                        "stamina": 180.0,
+                        "strength": 1800.0,
+                        "tameable": true,
+                        "temperament": "calm",
+                        "trainability": 0.7,
+                        "water_need": 8.0
+                      },
+                      "ecological_role": "grazer",
+                      "id": "species_b7260934a362487d1ff9b9bc2c321aae",
+                      "region_x": 0.0,
+                      "region_z": 0.0,
+                      "species_seed": 4149222772976.0
+                    },
+                    "version": 7.0
+                  },
+                  "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                  "domestication": {
+                    "anatomy": {
+                      "attachment_requirements": [
+                        "saddle",
+                        "harness"
+                      ],
+                      "back_clear": true,
+                      "lactation": false,
+                      "locomotion": "ground",
+                      "min_support_legs": 4.0
+                    },
+                    "bonding": 0.6,
+                    "carry_capacity": 120.0,
+                    "diet": [
+                      "plant"
+                    ],
+                    "milk_interval": 0.0,
+                    "milk_yield": 0.0,
+                    "movement_speed": 2.8,
+                    "perception_range": 12.0,
+                    "roles": [
+                      "draught",
+                      "riding"
+                    ],
+                    "schema": 1.0,
+                    "sociality": 0.85,
+                    "stamina": 180.0,
+                    "strength": 1800.0,
+                    "tameable": true,
+                    "temperament": "calm",
+                    "trainability": 0.7,
+                    "water_need": 8.0
+                  },
+                  "group": "work",
+                  "id": "species_b7260934a362487d1ff9b9bc2c321aae",
+                  "role": "grazer",
+                  "species_seed": 4149222772976.0,
+                  "visual_scale": 0.88
+                },
+                {
+                  "blueprint": {
+                    "appearance": {
+                      "accent_color": "667e90",
+                      "base_color": "d4e4dd",
+                      "belly_color": "f2ead8",
+                      "eye_color": "4eadd0",
+                      "horn_color": "424956",
+                      "name": "Polar",
+                      "skin_scale": 1.0,
+                      "skin_strength": 0.65,
+                      "skin_type": "fur"
+                    },
+                    "assembly": {
+                      "attachment_schema_version": 3.0,
+                      "body_attachments": {
+                        "schema": 1.0,
+                        "sockets": {
+                          "harness.left": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "harness.right": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.32
+                          },
+                          "saddle.primary": {
+                            "enabled": true,
+                            "offset": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "rotation_degrees": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ],
+                            "t": 0.52
+                          }
+                        }
+                      },
+                      "edit_mode": "body",
+                      "last_selected_category": "body",
+                      "revision": 0.0,
+                      "schema": 7.0,
+                      "snap_to_surface": true,
+                      "symmetry_enabled": true
+                    },
+                    "body": {
+                      "part_id": "body_balanced_core",
+                      "scale": 1.0,
+                      "shape": {
+                        "$vector3": [
+                          1.13293135166168,
+                          0.863185822963715,
+                          2.31981182098389
+                        ]
+                      },
+                      "spine": [
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.166666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.333333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.5,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.666666666666667,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 0.833333333333333,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        },
+                        {
+                          "height_scale": 1.0,
+                          "t": 1.0,
+                          "width_scale": 1.0,
+                          "y_offset": 0.0
+                        }
+                      ],
+                      "spine_length_scale": 1.0
+                    },
+                    "compatibility_warnings": [],
+                    "design_id": "design_7e505aaa15368a88d418633152a56489",
+                    "name": "Korolume \u00b7 Sp\u00fcrl\u00e4ufer",
+                    "next_part_uid": 15.0,
+                    "paint": {
+                      "intensity": 0.645080089569092,
+                      "part_id": "paint_forest_spots"
+                    },
+                    "parts": [
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            -0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 0.0,
+                        "anchor_vertical": 0.04,
+                        "category": "mouth",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "mouth_filter_snout",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            0.0167188737541437,
+                            -1.27990591526031
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0010"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.58,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0199999995529652,
+                            -0.0500000007450581
+                          ]
+                        },
+                        "anchor_t": 0.055,
+                        "anchor_vertical": 0.38,
+                        "category": "eyes",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "eyes_wide",
+                        "position": {
+                          "$vector3": [
+                            0.27174773812294,
+                            0.181202709674835,
+                            -1.08231616020203
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.05,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0011"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.25,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_pads",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_walker",
+                        "position": {
+                          "$vector3": [
+                            0.291970014572144,
+                            -0.241035491228104,
+                            -0.579952955245972
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 0.85,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0012"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.56,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "anchor_t": 0.75,
+                        "anchor_vertical": -0.54,
+                        "category": "legs",
+                        "end_part_id": "feet_pads",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": true,
+                        "part_id": "legs_walker",
+                        "position": {
+                          "$vector3": [
+                            0.291970014572144,
+                            -0.241035491228104,
+                            0.579952955245972
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 0.85,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0013"
+                      },
+                      {
+                        "anchor_locked": true,
+                        "anchor_side": 0.0,
+                        "anchor_surface_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.119999997317791
+                          ]
+                        },
+                        "anchor_t": 1.0,
+                        "anchor_vertical": -0.02,
+                        "category": "tail",
+                        "end_scale": 1.0,
+                        "end_shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "joint": {
+                          "lower": 1.0,
+                          "offset": {
+                            "$vector3": [
+                              0.0,
+                              0.0,
+                              0.0
+                            ]
+                          },
+                          "upper": 1.0
+                        },
+                        "manual_offset": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "mirrored": false,
+                        "part_id": "tail_balance",
+                        "position": {
+                          "$vector3": [
+                            0.0,
+                            -0.00835943687707186,
+                            1.27990591526031
+                          ]
+                        },
+                        "rotation": {
+                          "$vector3": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ]
+                        },
+                        "scale": 1.0,
+                        "shape_scale": {
+                          "$vector3": [
+                            1.0,
+                            1.0,
+                            1.0
+                          ]
+                        },
+                        "uid": "part_0014"
+                      }
+                    ],
+                    "progression": {
+                      "discoveries": [],
+                      "unlocked_parts": []
+                    },
+                    "species": {
+                      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                      "display_name": "Korolume \u00b7 Sp\u00fcrl\u00e4ufer",
+                      "domestication": {
+                        "anatomy": {
+                          "attachment_requirements": [],
+                          "back_clear": false,
+                          "lactation": false,
+                          "locomotion": "ground",
+                          "min_support_legs": 4.0
+                        },
+                        "bonding": 0.9,
+                        "carry_capacity": 0.0,
+                        "diet": [
+                          "plant"
+                        ],
+                        "milk_interval": 0.0,
+                        "milk_yield": 0.0,
+                        "movement_speed": 3.8,
+                        "perception_range": 18.0,
+                        "roles": [
+                          "companion"
+                        ],
+                        "schema": 1.0,
+                        "sociality": 0.85,
+                        "stamina": 120.0,
+                        "strength": 500.0,
+                        "tameable": true,
+                        "temperament": "social",
+                        "trainability": 0.9,
+                        "water_need": 4.0
+                      },
+                      "ecological_role": "forager",
+                      "id": "species_bce9ebfc7fa14df71fa0c525b5cf9d64",
+                      "region_x": 0.0,
+                      "region_z": 0.0,
+                      "species_seed": 5087249972729.0
+                    },
+                    "version": 7.0
+                  },
+                  "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                  "domestication": {
+                    "anatomy": {
+                      "attachment_requirements": [],
+                      "back_clear": false,
+                      "lactation": false,
+                      "locomotion": "ground",
+                      "min_support_legs": 4.0
+                    },
+                    "bonding": 0.9,
+                    "carry_capacity": 0.0,
+                    "diet": [
+                      "plant"
+                    ],
+                    "milk_interval": 0.0,
+                    "milk_yield": 0.0,
+                    "movement_speed": 3.8,
+                    "perception_range": 18.0,
+                    "roles": [
+                      "companion"
+                    ],
+                    "schema": 1.0,
+                    "sociality": 0.85,
+                    "stamina": 120.0,
+                    "strength": 500.0,
+                    "tameable": true,
+                    "temperament": "social",
+                    "trainability": 0.9,
+                    "water_need": 4.0
+                  },
+                  "group": "companion",
+                  "id": "species_bce9ebfc7fa14df71fa0c525b5cf9d64",
+                  "role": "forager",
+                  "species_seed": 5087249972729.0,
+                  "visual_scale": 0.55
+                }
+              ],
+              "surface": {
+                "anchor": {
+                  "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                  "face": 0.0,
+                  "height": 25.308588,
+                  "mode": "cube_sphere_m1_v1",
+                  "u": 0.0,
+                  "v": -0.88
+                },
+                "generation": "living_planet_v2",
+                "mode": "cube_sphere_m1_v1",
+                "radius": 6371000.0,
+                "schema": 1.0,
+                "terrain_revision": 4.0
+              },
+              "surface_search": {
+                "algorithm": "domestic_surface_search_v1",
+                "direction": 4.0,
+                "head": 0.0,
+                "nodes": [
+                  {
+                    "location": {
+                      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                      "face": 0.0,
+                      "height": 25.308588,
+                      "mode": "cube_sphere_m1_v1",
+                      "u": 0.0,
+                      "v": -0.88
+                    },
+                    "parent": -1.0,
+                    "x": 0.0,
+                    "z": 0.0
+                  },
+                  {
+                    "location": {
+                      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                      "face": 0.0,
+                      "height": 25.339183,
+                      "mode": "cube_sphere_m1_v1",
+                      "u": 0.0,
+                      "v": -0.880001114044
+                    },
+                    "parent": 0.0,
+                    "x": 1.0,
+                    "z": 0.0
+                  },
+                  {
+                    "location": {
+                      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                      "face": 0.0,
+                      "height": 25.328794,
+                      "mode": "cube_sphere_m1_v1",
+                      "u": -8.36328e-07,
+                      "v": -0.88
+                    },
+                    "parent": 0.0,
+                    "x": 0.0,
+                    "z": 1.0
+                  },
+                  {
+                    "location": {
+                      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                      "face": 0.0,
+                      "height": 25.2771,
+                      "mode": "cube_sphere_m1_v1",
+                      "u": 0.0,
+                      "v": -0.879998885957
+                    },
+                    "parent": 0.0,
+                    "x": -1.0,
+                    "z": 0.0
+                  },
+                  {
+                    "location": {
+                      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                      "face": 0.0,
+                      "height": 25.32453,
+                      "mode": "cube_sphere_m1_v1",
+                      "u": 8.36328e-07,
+                      "v": -0.88
+                    },
+                    "parent": 0.0,
+                    "x": 0.0,
+                    "z": -1.0
+                  }
+                ],
+                "schema": 1.0,
+                "status": "searching"
+              }
+            },
+            "generator_version": "planetary_v9",
+            "id": "body_57d29a0edf66ecb1309999dc43772160",
+            "seed": 15838.0,
+            "surface_context": {
+              "generation": "living_planet_v2",
+              "gravity": 9.81,
+              "mode": "cube_sphere_m1_v1",
+              "radius": 6371000.0,
+              "schema": 1.0,
+              "spawn": {
+                "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+                "face": 0.0,
+                "height": 26.4085880013659,
+                "mode": "cube_sphere_m1_v1",
+                "u": 0.0,
+                "v": -0.88
+              },
+              "terrain_revision": 4.0
+            },
+            "surface_mode": "cube_sphere_m1_v1",
+            "surface_population": {
+              "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+              "schema": 2.0,
+              "storage": {
+                "format": "sha256_trie_v1",
+                "root": "4e1fdf6f55572c83c1c295a789d17d39bfd851e672f339f1f1f7ce362ffdd5f9",
+                "schema": 1.0
+              }
+            },
+            "system_id": "system_3ceca5f6e480e1ef272949a7d5f2ee6f"
+          }
+        },
+        "body_lookup": {
+          "[\"system_3ceca5f6e480e1ef272949a7d5f2ee6f\",15838]": "body_57d29a0edf66ecb1309999dc43772160"
+        },
+        "completed_transitions": {},
+        "design_refs": {
+          "user://creature_assembly_v7.json": {
+            "design_id": "design_7ef503db2fe58697d45bc0f923ac2ab2",
+            "revision": 0.0
+          }
+        },
+        "elapsed_seconds": 0.0,
+        "event_cursors": {},
+        "id": "campaign_e5a710353e45c156a501e38110249fbd",
+        "pending_transition": {},
+        "player_faction_id": "faction_5a5dd0261b47d3177304add149e1aa6b",
+        "player_object_id": "object_5a5dd0261b47d3177304add149e1aa6b",
+        "player_species_id": "species_5a5dd0261b47d3177304add149e1aa6b",
+        "recent_events": [],
+        "schema": 3.0,
+        "surface_migration": {},
+        "surface_policy": "cube_sphere_m1_v1",
+        "time_scale": 1.0
+      },
+      "phase": 0.0,
+      "planet_index": 0.0,
+      "schema": 4.0,
+      "system_id": "system_3ceca5f6e480e1ef272949a7d5f2ee6f",
+      "system_seed": 15838.0,
+      "world_seed": 15838.0
+    },
+    "migration_report": [],
+    "onboarding": {
+      "progress": {
+        "inspect": 0.0,
+        "jump": 0.0,
+        "look": 0.0,
+        "move": 0.0
+      },
+      "schema": 1.0,
+      "skipped": false
+    },
+    "player": {
+      "behavior_runtime": {
+        "recovery_delay": 0.0,
+        "stamina": 100.0
+      },
+      "camera_pitch": -0.180000007152557,
+      "camera_yaw": 0.0,
+      "design_ref": {
+        "design_id": "design_7ef503db2fe58697d45bc0f923ac2ab2",
+        "revision": 0.0
+      },
+      "faction_id": "faction_5a5dd0261b47d3177304add149e1aa6b",
+      "health_ratio": 1.0,
+      "hunger_ratio": 0.999921505220528,
+      "object_id": "object_5a5dd0261b47d3177304add149e1aa6b",
+      "species_id": "species_5a5dd0261b47d3177304add149e1aa6b",
+      "surface_address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0.0,
+        "height": 26.4085880015045,
+        "mode": "cube_sphere_m1_v1",
+        "radius": 6371000.0,
+        "u": 0.0,
+        "v": -0.88
+      },
+      "surface_forward": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "surface_pitch": -0.180000007152557,
+      "surface_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "thirst_ratio": 0.9998882
+    },
+    "progression": {
+      "behavior": {
+        "phases": {
+          "0": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "1": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "2": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "3": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "4": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          },
+          "5": {
+            "earned": {
+              "aggression": 0.0,
+              "social": 0.0
+            },
+            "rewards": {},
+            "spent": {
+              "aggression": 0.0,
+              "social": 0.0
+            }
+          }
+        },
+        "purchased_nodes": {},
+        "rules_version": 1.0,
+        "schema": 1.0
+      },
+      "creature_encounters": {
+        "entries": {},
+        "schema": 1.0
+      },
+      "discovered_regions": {},
+      "discovered_species": {},
+      "discovery_points": 0.0,
+      "research": {
+        "pinned": "",
+        "version": 1.0,
+        "wished_parts": []
+      },
+      "schema": 6.0,
+      "tribal": {
+        "awards": {},
+        "campaign_id": "",
+        "faction_id": "",
+        "purchases": {},
+        "schema": 3.0,
+        "species_id": "",
+        "villages": {}
+      },
+      "unlocked_parts": {
+        "arms_grasping": {
+          "order": 4.0,
+          "reason": "Starter part"
+        },
+        "body_balanced_core": {
+          "order": 0.0,
+          "reason": "Starter part"
+        },
+        "decor_feathers": {
+          "order": 9.0,
+          "reason": "Starter part"
+        },
+        "eyes_beady": {
+          "order": 2.0,
+          "reason": "Starter part"
+        },
+        "horns_small": {
+          "order": 6.0,
+          "reason": "Starter part"
+        },
+        "legs_stubby": {
+          "order": 3.0,
+          "reason": "Starter part"
+        },
+        "mouth_grazer": {
+          "order": 1.0,
+          "reason": "Starter part"
+        },
+        "paint_plain": {
+          "order": 10.0,
+          "reason": "Starter part"
+        },
+        "plates_dorsal": {
+          "order": 7.0,
+          "reason": "Starter part"
+        },
+        "spikes_back": {
+          "order": 8.0,
+          "reason": "Starter part"
+        },
+        "tail_balance": {
+          "order": 5.0,
+          "reason": "Starter part"
+        }
+      }
+    },
+    "regions_by_body": {},
+    "saved_unix_time": 1789018363.0,
+    "schema": 9.0,
+    "slot_name": "ARCH-02 measurement",
+    "slot_origin": {},
+    "slot_preview": {}
+  },
+  "logical_cpus": 9,
+  "metrics": {
+    "frame_ms": "Wall-clock process-frame intervals, including physics, waits, probe cost and configured cap; not CPU busy time.",
+    "physics_monitor_ms": "Godot's coarse TIME_PHYSICS_PROCESS monitor, repeated between refreshes.",
+    "process_monitor_ms": "Godot's coarse TIME_PROCESS monitor, repeated between refreshes; not independent per-frame CPU samples.",
+    "raw": "frames.csv contains every sampled frame; snapshots sample object/queue/memory state once per second.",
+    "render_cpu_ms": "Viewport render CPU plus engine frame setup; excludes gameplay CPU. Null when headless.",
+    "render_gpu_ms": "Godot viewport GPU timestamps; null when unavailable. Software rendering is not target hardware.",
+    "render_memory_bytes": "Godot-reported rendering allocation, not measured physical VRAM residency; null when headless.",
+    "static_bytes": "Godot static allocator, not total process RAM. Process RSS is sampled from the Godot process itself on Linux.",
+    "terrain_upload_max_ms": "CPU upload/build submission wall time, not GPU transfer latency. Maxima are scene-lifetime counters."
+  },
+  "protocol": 2,
+  "renderer": "headless",
+  "save_0_ms": 79.467,
+  "save_1_ms": 68.418,
+  "scope": "Spherical campaign through SessionFlow; actual player physics/input, terrain, flora, population, save/load and menu teardown. Short routes are instrumentation checks, not ten-minute acceptance.",
+  "segments": [
+    {
+      "cycle": -1,
+      "draw_calls": null,
+      "elapsed_ms": 1064.827,
+      "frame_ms": {
+        "count": 60,
+        "max": 99.273,
+        "median": 16.664,
+        "p95": 16.82,
+        "p99": 99.273
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 60,
+        "max": 57.764,
+        "median": 57.764,
+        "p95": 57.764,
+        "p99": 57.764
+      },
+      "process_monitor_ms": {
+        "count": 60,
+        "max": 42.379,
+        "median": 42.379,
+        "p95": 42.379,
+        "p99": 42.379
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "cold_menu"
+    },
+    {
+      "cycle": 0,
+      "draw_calls": null,
+      "elapsed_ms": 14288.591,
+      "frame_ms": {
+        "count": 55,
+        "max": 13415.663,
+        "median": 16.648,
+        "p95": 17.438,
+        "p99": 13415.663
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 55,
+        "max": 10.633,
+        "median": 0.949,
+        "p95": 0.949,
+        "p99": 10.633
+      },
+      "process_monitor_ms": {
+        "count": 55,
+        "max": 13404.405,
+        "median": 0.866,
+        "p95": 0.866,
+        "p99": 13404.405
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "cold_world"
+    },
+    {
+      "cycle": 0,
+      "draw_calls": null,
+      "elapsed_ms": 982.362,
+      "frame_ms": {
+        "count": 60,
+        "max": 24.006,
+        "median": 16.6515,
+        "p95": 20.944,
+        "p99": 24.006
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 60,
+        "max": 10.633,
+        "median": 10.633,
+        "p95": 10.633,
+        "p99": 10.633
+      },
+      "process_monitor_ms": {
+        "count": 60,
+        "max": 13404.405,
+        "median": 13404.405,
+        "p95": 13404.405,
+        "p99": 13404.405
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "settle"
+    },
+    {
+      "actual_outward_m": 23.2914251685143,
+      "breadcrumbs": [
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.321312460117,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.880000000000024
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.4488130705431,
+          "mode": "cube_sphere_m1_v1",
+          "u": 1.58948235241967e-07,
+          "v": -0.879999999968002
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5152573185042,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.18997581894023e-07,
+          "v": -0.879999999968022
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149370059371,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.80472898472672e-07,
+          "v": -0.879999999968016
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5122727882117,
+          "mode": "cube_sphere_m1_v1",
+          "u": 6.41948190379252e-07,
+          "v": -0.879999999968026
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.51464532502,
+          "mode": "cube_sphere_m1_v1",
+          "u": 8.03423481785749e-07,
+          "v": -0.87999999996804
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149977635592,
+          "mode": "cube_sphere_m1_v1",
+          "u": 9.64893439530897e-07,
+          "v": -0.879999999961217
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5122683243826,
+          "mode": "cube_sphere_m1_v1",
+          "u": 1.12636903074365e-06,
+          "v": -0.879999999961227
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149543806911,
+          "mode": "cube_sphere_m1_v1",
+          "u": 1.28784462100012e-06,
+          "v": -0.879999999961246
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149998972192,
+          "mode": "cube_sphere_m1_v1",
+          "u": 1.44932110900331e-06,
+          "v": -0.879999999961253
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.515001620166,
+          "mode": "cube_sphere_m1_v1",
+          "u": 1.61079679943124e-06,
+          "v": -0.879999999961291
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5122760599479,
+          "mode": "cube_sphere_m1_v1",
+          "u": 1.77227239091978e-06,
+          "v": -0.879999999961305
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.514993804507,
+          "mode": "cube_sphere_m1_v1",
+          "u": 1.93374628602525e-06,
+          "v": -0.879999999958293
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149998674169,
+          "mode": "cube_sphere_m1_v1",
+          "u": 2.09522197645175e-06,
+          "v": -0.879999999958309
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5147804897279,
+          "mode": "cube_sphere_m1_v1",
+          "u": 2.25668909291156e-06,
+          "v": -0.879999999943084
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5122748808935,
+          "mode": "cube_sphere_m1_v1",
+          "u": 2.41816478429541e-06,
+          "v": -0.87999999994306
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5118791041896,
+          "mode": "cube_sphere_m1_v1",
+          "u": 2.55252680907344e-06,
+          "v": -0.879999847856867
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5146006606519,
+          "mode": "cube_sphere_m1_v1",
+          "u": 2.66670574978658e-06,
+          "v": -0.879999695762851
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5145548721775,
+          "mode": "cube_sphere_m1_v1",
+          "u": 2.78088427559408e-06,
+          "v": -0.879999543669496
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5150023931637,
+          "mode": "cube_sphere_m1_v1",
+          "u": 2.89506298335004e-06,
+          "v": -0.879999391576019
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.512269760482,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.00926041862961e-06,
+          "v": -0.879999239511141
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5119116501883,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.12343909235559e-06,
+          "v": -0.879999087417429
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5119213480502,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.23761794807832e-06,
+          "v": -0.879998935323572
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5150011274964,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.35179658556526e-06,
+          "v": -0.879998783230045
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5122354580089,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.46597520893983e-06,
+          "v": -0.879998631161417
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5183239495382,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.58015141742424e-06,
+          "v": -0.879998479069595
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.6200406337157,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.69154079671596e-06,
+          "v": -0.879998327117263
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.7135263411328,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.80238580930196e-06,
+          "v": -0.879998174835139
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5823272615671,
+          "mode": "cube_sphere_m1_v1",
+          "u": 3.99261093895334e-06,
+          "v": -0.879997881497695
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149801559746,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.20363549777888e-06,
+          "v": -0.879997848918484
+        }
+      ],
+      "cycle": 0,
+      "requested_outward_seconds": 6.0,
+      "stage": "route_outcome"
+    },
+    {
+      "cycle": 0,
+      "draw_calls": null,
+      "elapsed_ms": 6000.442,
+      "frame_ms": {
+        "count": 292,
+        "max": 180.531,
+        "median": 16.6375,
+        "p95": 24.631,
+        "p99": 171.893
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 292,
+        "max": 11.801,
+        "median": 6.915,
+        "p95": 11.801,
+        "p99": 11.801
+      },
+      "process_monitor_ms": {
+        "count": 292,
+        "max": 168.773,
+        "median": 24.252,
+        "p95": 168.773,
+        "p99": 168.773
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "walk_outward"
+    },
+    {
+      "cycle": 0,
+      "distance_from_start_m": 0.634047091007233,
+      "stage": "return_outcome"
+    },
+    {
+      "cycle": 0,
+      "draw_calls": null,
+      "elapsed_ms": 3970.806,
+      "frame_ms": {
+        "count": 221,
+        "max": 210.77,
+        "median": 16.639,
+        "p95": 21.065,
+        "p99": 26.247
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 221,
+        "max": 14.729,
+        "median": 13.053,
+        "p95": 14.729,
+        "p99": 14.729
+      },
+      "process_monitor_ms": {
+        "count": 221,
+        "max": 178.282,
+        "median": 8.527,
+        "p95": 178.282,
+        "p99": 178.282
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "walk_return"
+    },
+    {
+      "cycle": 0,
+      "draw_calls": null,
+      "elapsed_ms": 1169.385,
+      "frame_ms": {
+        "count": 61,
+        "max": 183.553,
+        "median": 16.662,
+        "p95": 16.925,
+        "p99": 183.553
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 61,
+        "max": 11.594,
+        "median": 9.941,
+        "p95": 11.594,
+        "p99": 11.594
+      },
+      "process_monitor_ms": {
+        "count": 61,
+        "max": 183.238,
+        "median": 183.238,
+        "p95": 183.238,
+        "p99": 183.238
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "save_and_menu"
+    },
+    {
+      "cycle": 1,
+      "draw_calls": null,
+      "elapsed_ms": 13203.529,
+      "frame_ms": {
+        "count": 5,
+        "max": 13135.676,
+        "median": 12.299,
+        "p95": 13135.676,
+        "p99": 13135.676
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 5,
+        "max": 11.389,
+        "median": 9.941,
+        "p95": 11.389,
+        "p99": 11.389
+      },
+      "process_monitor_ms": {
+        "count": 5,
+        "max": 13123.8,
+        "median": 183.238,
+        "p95": 13123.8,
+        "p99": 13123.8
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "reload_world"
+    },
+    {
+      "cycle": 1,
+      "draw_calls": null,
+      "elapsed_ms": 980.708,
+      "frame_ms": {
+        "count": 60,
+        "max": 44.545,
+        "median": 16.6395,
+        "p95": 20.416,
+        "p99": 44.545
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 60,
+        "max": 11.389,
+        "median": 4.985,
+        "p95": 11.389,
+        "p99": 11.389
+      },
+      "process_monitor_ms": {
+        "count": 60,
+        "max": 13123.8,
+        "median": 42.477,
+        "p95": 13123.8,
+        "p99": 13123.8
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "settle"
+    },
+    {
+      "actual_outward_m": 22.5676859617233,
+      "breadcrumbs": [
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.4277803907171,
+          "mode": "cube_sphere_m1_v1",
+          "u": 1.3256830205e-07,
+          "v": -0.879999999974898
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.3628030018881,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.89485655423871e-08,
+          "v": -0.880000000005455
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.4697570158169,
+          "mode": "cube_sphere_m1_v1",
+          "u": -1.87476560180381e-07,
+          "v": -0.880000000001134
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5122598232701,
+          "mode": "cube_sphere_m1_v1",
+          "u": -3.48252095201182e-07,
+          "v": -0.880000000031599
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5142798051238,
+          "mode": "cube_sphere_m1_v1",
+          "u": -5.09726938117293e-07,
+          "v": -0.880000000062197
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149535061792,
+          "mode": "cube_sphere_m1_v1",
+          "u": -6.71201980473797e-07,
+          "v": -0.880000000092793
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5122692072764,
+          "mode": "cube_sphere_m1_v1",
+          "u": -8.32677372183016e-07,
+          "v": -0.88000000012339
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5150002548471,
+          "mode": "cube_sphere_m1_v1",
+          "u": -9.94149572854643e-07,
+          "v": -0.88000000015988
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5150015419349,
+          "mode": "cube_sphere_m1_v1",
+          "u": -1.15561788567029e-06,
+          "v": -0.880000000203359
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149430492893,
+          "mode": "cube_sphere_m1_v1",
+          "u": -1.31709955802999e-06,
+          "v": -0.880000000232678
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149518502876,
+          "mode": "cube_sphere_m1_v1",
+          "u": -1.47857534819985e-06,
+          "v": -0.880000000263266
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149879585952,
+          "mode": "cube_sphere_m1_v1",
+          "u": -1.64005063987713e-06,
+          "v": -0.880000000293868
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5146358544007,
+          "mode": "cube_sphere_m1_v1",
+          "u": -1.80152533347925e-06,
+          "v": -0.880000000324479
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149984052405,
+          "mode": "cube_sphere_m1_v1",
+          "u": -1.96299683654751e-06,
+          "v": -0.880000000355075
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149989621714,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.12446953609927e-06,
+          "v": -0.880000000385676
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149936731905,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.28594522659854e-06,
+          "v": -0.880000000416269
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5149134993553,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.40011458947713e-06,
+          "v": -0.880000152531408
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5122299548239,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.51427918510907e-06,
+          "v": -0.880000304648563
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5150007931516,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.5326217096155e-06,
+          "v": -0.880000528721993
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5150009505451,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.53260003872101e-06,
+          "v": -0.880000737853913
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.51254497841,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.53268919604812e-06,
+          "v": -0.880000441294016
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5148801468313,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.63496087709213e-06,
+          "v": -0.880000166836339
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.514904611744,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.74915239271262e-06,
+          "v": -0.880000014770125
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5146868405864,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.77104698665909e-06,
+          "v": -0.879999806110562
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5146942101419,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.77108954323489e-06,
+          "v": -0.87999957794847
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5146866254508,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.77104379359487e-06,
+          "v": -0.879999368850972
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5146872270852,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.77111409234717e-06,
+          "v": -0.879999159713765
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5150018567219,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.77111258226104e-06,
+          "v": -0.879998931546043
+        },
+        {
+          "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+          "face": 0,
+          "height": 25.5142895858735,
+          "mode": "cube_sphere_m1_v1",
+          "u": -2.90434939597604e-06,
+          "v": -0.879998695012013
+        }
+      ],
+      "cycle": 1,
+      "requested_outward_seconds": 6.0,
+      "stage": "route_outcome"
+    },
+    {
+      "cycle": 1,
+      "draw_calls": null,
+      "elapsed_ms": 6001.851,
+      "frame_ms": {
+        "count": 311,
+        "max": 134.349,
+        "median": 16.604,
+        "p95": 28.8,
+        "p99": 118.975
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 311,
+        "max": 63.362,
+        "median": 8.671,
+        "p95": 63.362,
+        "p99": 63.362
+      },
+      "process_monitor_ms": {
+        "count": 311,
+        "max": 122.698,
+        "median": 27.724,
+        "p95": 122.698,
+        "p99": 122.698
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "walk_outward"
+    },
+    {
+      "cycle": 1,
+      "distance_from_start_m": 0.604176640510559,
+      "stage": "return_outcome"
+    },
+    {
+      "cycle": 1,
+      "draw_calls": null,
+      "elapsed_ms": 3715.371,
+      "frame_ms": {
+        "count": 219,
+        "max": 80.116,
+        "median": 16.703,
+        "p95": 22.337,
+        "p99": 34.857
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 219,
+        "max": 36.494,
+        "median": 11.661,
+        "p95": 36.494,
+        "p99": 36.494
+      },
+      "process_monitor_ms": {
+        "count": 219,
+        "max": 110.822,
+        "median": 12.05,
+        "p95": 110.822,
+        "p99": 110.822
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "walk_return"
+    },
+    {
+      "cycle": 1,
+      "draw_calls": null,
+      "elapsed_ms": 1154.711,
+      "frame_ms": {
+        "count": 61,
+        "max": 171.601,
+        "median": 16.649,
+        "p95": 16.901,
+        "p99": 171.601
+      },
+      "gpu_timestamps_available": false,
+      "physics_monitor_ms": {
+        "count": 61,
+        "max": 12.184,
+        "median": 11.919,
+        "p95": 12.184,
+        "p99": 12.184
+      },
+      "process_monitor_ms": {
+        "count": 61,
+        "max": 171.227,
+        "median": 171.227,
+        "p95": 171.227,
+        "p99": 171.227
+      },
+      "render_cpu_ms": null,
+      "render_gpu_ms": null,
+      "stage": "save_and_menu"
+    }
+  ],
+  "snapshots": [
+    {
+      "cycle": -1,
+      "nodes": 232.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 164265984,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "resources": 230.0,
+      "rss_bytes": 164265984,
+      "stage": "cold_menu",
+      "static_bytes": 47141341,
+      "tick_us": 1150225
+    },
+    {
+      "cycle": 0,
+      "nodes": 242.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 165351424,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "resources": 230.0,
+      "rss_bytes": 165351424,
+      "stage": "cold_world",
+      "static_bytes": 48468233,
+      "tick_us": 2151109
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 0,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 26.4085880015045,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.0,
+        "v": -0.88
+      },
+      "cycle": 0,
+      "flora_instances": 0,
+      "flora_work_max_ms": 0.0,
+      "flora_worker": 0,
+      "nodes": 1782.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 295710720,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 0.0,
+      "rebases": 2,
+      "region_cache": 0,
+      "region_dirty": 0,
+      "region_io_max_ms": 0.112,
+      "region_pages": 1,
+      "region_reads": 1,
+      "region_writes": 0,
+      "render_memory_bytes": null,
+      "resources": 356.0,
+      "rss_bytes": 295710720,
+      "stage": "cold_world",
+      "static_bytes": 134925408,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 2.51,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 16398130
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 3,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.321312460117,
+        "mode": "cube_sphere_m1_v1",
+        "u": 0.0,
+        "v": -0.880000000000024
+      },
+      "cycle": 0,
+      "flora_instances": 172,
+      "flora_work_max_ms": 5.099,
+      "flora_worker": 1,
+      "nodes": 1843.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 303030272,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 10.63,
+      "rebases": 2,
+      "region_cache": 18,
+      "region_dirty": 18,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 303030272,
+      "stage": "settle",
+      "static_bytes": 146248760,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 2.51,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 17405076
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 7,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5149928769097,
+        "mode": "cube_sphere_m1_v1",
+        "u": 1.20710687547615e-06,
+        "v": -0.879999999961231
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.099,
+      "flora_worker": 0,
+      "nodes": 1948.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 312283136,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 10.63,
+      "rebases": 2,
+      "region_cache": 30,
+      "region_dirty": 30,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 312283136,
+      "stage": "walk_outward",
+      "static_bytes": 148347516,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 2.51,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 18405331
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 11,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5146468831226,
+        "mode": "cube_sphere_m1_v1",
+        "u": 2.43834924469964e-06,
+        "v": -0.879999999943057
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.64,
+      "flora_worker": 0,
+      "nodes": 1960.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 316297216,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 12.095,
+      "rebases": 2,
+      "region_cache": 41,
+      "region_dirty": 41,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 316297216,
+      "stage": "walk_outward",
+      "static_bytes": 149715272,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.092,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 19421624
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 15,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5145955746993,
+        "mode": "cube_sphere_m1_v1",
+        "u": 3.29470667021597e-06,
+        "v": -0.879998859277811
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.64,
+      "flora_worker": 0,
+      "nodes": 1972.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 316764160,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 12.095,
+      "rebases": 2,
+      "region_cache": 52,
+      "region_dirty": 52,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 316764160,
+      "stage": "walk_outward",
+      "static_bytes": 151659724,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.092,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 1,
+      "tick_us": 20422142
+    },
+    {
+      "active_animals": 2,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5137335062027,
+        "mode": "cube_sphere_m1_v1",
+        "u": 4.09254159342384e-06,
+        "v": -0.879997786406217
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.648,
+      "flora_worker": 0,
+      "nodes": 2169.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 343318528,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 166.71,
+      "rebases": 2,
+      "region_cache": 60,
+      "region_dirty": 60,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 343318528,
+      "stage": "walk_outward",
+      "static_bytes": 169376960,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 13,
+      "terrain_publish_max_ms": 3.092,
+      "terrain_resident_peak": 501,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 2.044,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 21429948
+    },
+    {
+      "active_animals": 6,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5145832421258,
+        "mode": "cube_sphere_m1_v1",
+        "u": 4.20161761774961e-06,
+        "v": -0.879997851499305
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.648,
+      "flora_worker": 0,
+      "nodes": 2509.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 389308416,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 166.71,
+      "rebases": 2,
+      "region_cache": 72,
+      "region_dirty": 72,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 389308416,
+      "stage": "walk_outward",
+      "static_bytes": 203900908,
+      "terrain_cached_tiles": 13,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 6.353,
+      "terrain_resident_peak": 514,
+      "terrain_tiles": 501,
+      "terrain_upload_max_ms": 2.044,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 22432618
+    },
+    {
+      "active_animals": 10,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5149190118536,
+        "mode": "cube_sphere_m1_v1",
+        "u": 4.16154543358363e-06,
+        "v": -0.879997848918631
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.648,
+      "flora_worker": 0,
+      "nodes": 2897.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 416444416,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 166.71,
+      "rebases": 2,
+      "region_cache": 78,
+      "region_dirty": 78,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 416444416,
+      "stage": "walk_return",
+      "static_bytes": 226260984,
+      "terrain_cached_tiles": 13,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 6.353,
+      "terrain_resident_peak": 514,
+      "terrain_tiles": 501,
+      "terrain_upload_max_ms": 2.044,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 23442564
+    },
+    {
+      "active_animals": 12,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5142911765724,
+        "mode": "cube_sphere_m1_v1",
+        "u": 3.33948710513398e-06,
+        "v": -0.879998799092815
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.767,
+      "flora_worker": 0,
+      "nodes": 3102.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 442318848,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 171.895,
+      "rebases": 2,
+      "region_cache": 78,
+      "region_dirty": 78,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 442318848,
+      "stage": "walk_return",
+      "static_bytes": 244932108,
+      "terrain_cached_tiles": 13,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 6.353,
+      "terrain_resident_peak": 514,
+      "terrain_tiles": 501,
+      "terrain_upload_max_ms": 2.044,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 24445697
+    },
+    {
+      "active_animals": 12,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5145540703088,
+        "mode": "cube_sphere_m1_v1",
+        "u": 2.44823101342453e-06,
+        "v": -0.879999918281773
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.767,
+      "flora_worker": 0,
+      "nodes": 3102.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 442318848,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 171.895,
+      "rebases": 2,
+      "region_cache": 78,
+      "region_dirty": 78,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 442318848,
+      "stage": "walk_return",
+      "static_bytes": 244939668,
+      "terrain_cached_tiles": 13,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 6.353,
+      "terrain_resident_peak": 514,
+      "terrain_tiles": 501,
+      "terrain_upload_max_ms": 2.044,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 0,
+      "tick_us": 25457220
+    },
+    {
+      "active_animals": 12,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5146402716637,
+        "mode": "cube_sphere_m1_v1",
+        "u": 1.24271950488705e-06,
+        "v": -0.879999999850264
+      },
+      "cycle": 0,
+      "flora_instances": 473,
+      "flora_work_max_ms": 5.767,
+      "flora_worker": 0,
+      "nodes": 3102.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 442318848,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 171.895,
+      "rebases": 2,
+      "region_cache": 78,
+      "region_dirty": 78,
+      "region_io_max_ms": 0.771,
+      "region_pages": 2,
+      "region_reads": 3,
+      "region_writes": 1,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 442318848,
+      "stage": "walk_return",
+      "static_bytes": 245684116,
+      "terrain_cached_tiles": 13,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 11.194,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 6.353,
+      "terrain_resident_peak": 514,
+      "terrain_tiles": 501,
+      "terrain_upload_max_ms": 2.044,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12599.935,
+      "terrain_workers": 1,
+      "tick_us": 26457373
+    },
+    {
+      "cycle": 0,
+      "nodes": 250.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 442429440,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "resources": 440.0,
+      "rss_bytes": 442429440,
+      "stage": "save_and_menu",
+      "static_bytes": 113342152,
+      "tick_us": 27560702
+    },
+    {
+      "cycle": 1,
+      "nodes": 242.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 442429440,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "resources": 440.0,
+      "rss_bytes": 442429440,
+      "stage": "reload_world",
+      "static_bytes": 113274950,
+      "tick_us": 28598184
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 0,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.4577553719282,
+        "mode": "cube_sphere_m1_v1",
+        "u": 1.3256830205e-07,
+        "v": -0.879999999974898
+      },
+      "cycle": 1,
+      "flora_instances": 0,
+      "flora_work_max_ms": 0.0,
+      "flora_worker": 0,
+      "nodes": 1782.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 454254592,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 0.0,
+      "rebases": 2,
+      "region_cache": 0,
+      "region_dirty": 0,
+      "region_io_max_ms": 0.155,
+      "region_pages": 1,
+      "region_reads": 1,
+      "region_writes": 0,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 454254592,
+      "stage": "reload_world",
+      "static_bytes": 150084608,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 41735518
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 4,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.4277803907171,
+        "mode": "cube_sphere_m1_v1",
+        "u": 1.3256830205e-07,
+        "v": -0.879999999974898
+      },
+      "cycle": 1,
+      "flora_instances": 473,
+      "flora_work_max_ms": 3.744,
+      "flora_worker": 0,
+      "nodes": 1939.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 455000064,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 4.319,
+      "rebases": 2,
+      "region_cache": 16,
+      "region_dirty": 9,
+      "region_io_max_ms": 1.41,
+      "region_pages": 18,
+      "region_reads": 32,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 455000064,
+      "stage": "settle",
+      "static_bytes": 153705912,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 42743551
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 8,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5148058691993,
+        "mode": "cube_sphere_m1_v1",
+        "u": -1.07488014016936e-06,
+        "v": -0.880000000187996
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 5.939,
+      "flora_worker": 0,
+      "nodes": 1952.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 455004160,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 10.277,
+      "rebases": 2,
+      "region_cache": 26,
+      "region_dirty": 15,
+      "region_io_max_ms": 1.41,
+      "region_pages": 20,
+      "region_reads": 41,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 455004160,
+      "stage": "walk_outward",
+      "static_bytes": 155226436,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 43759027
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 12,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5149936731905,
+        "mode": "cube_sphere_m1_v1",
+        "u": -2.28594522659854e-06,
+        "v": -0.880000000416269
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 8.838,
+      "flora_worker": 0,
+      "nodes": 1964.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 455004160,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 13.344,
+      "rebases": 2,
+      "region_cache": 33,
+      "region_dirty": 19,
+      "region_io_max_ms": 1.41,
+      "region_pages": 21,
+      "region_reads": 46,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 455004160,
+      "stage": "walk_outward",
+      "static_bytes": 156435276,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 44759163
+    },
+    {
+      "active_animals": 0,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.6044590165839,
+        "mode": "cube_sphere_m1_v1",
+        "u": -2.53458279607871e-06,
+        "v": -0.880000894970811
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 11.656,
+      "flora_worker": 0,
+      "nodes": 1976.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 456757248,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 13.344,
+      "rebases": 2,
+      "region_cache": 43,
+      "region_dirty": 25,
+      "region_io_max_ms": 1.41,
+      "region_pages": 22,
+      "region_reads": 54,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 440.0,
+      "rss_bytes": 456757248,
+      "stage": "walk_outward",
+      "static_bytes": 157749976,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 45759615
+    },
+    {
+      "active_animals": 3,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.6053109308705,
+        "mode": "cube_sphere_m1_v1",
+        "u": -2.53461908587544e-06,
+        "v": -0.880000895004728
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 11.656,
+      "flora_worker": 0,
+      "nodes": 2244.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 456757248,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 119.99,
+      "rebases": 2,
+      "region_cache": 48,
+      "region_dirty": 30,
+      "region_io_max_ms": 1.41,
+      "region_pages": 23,
+      "region_reads": 60,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 456757248,
+      "stage": "walk_outward",
+      "static_bytes": 181805608,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 46767423
+    },
+    {
+      "active_animals": 7,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.514687821269,
+        "mode": "cube_sphere_m1_v1",
+        "u": -2.77105804832439e-06,
+        "v": -0.879999730063098
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 11.656,
+      "flora_worker": 0,
+      "nodes": 2604.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 456757248,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 119.99,
+      "rebases": 2,
+      "region_cache": 55,
+      "region_dirty": 33,
+      "region_io_max_ms": 1.41,
+      "region_pages": 23,
+      "region_reads": 64,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 456757248,
+      "stage": "walk_outward",
+      "static_bytes": 204011996,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 47774379
+    },
+    {
+      "active_animals": 11,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.514953690581,
+        "mode": "cube_sphere_m1_v1",
+        "u": -2.96290508310741e-06,
+        "v": -0.879998620728298
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 11.656,
+      "flora_worker": 0,
+      "nodes": 3024.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 456757248,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 119.99,
+      "rebases": 2,
+      "region_cache": 62,
+      "region_dirty": 36,
+      "region_io_max_ms": 1.41,
+      "region_pages": 23,
+      "region_reads": 68,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 456757248,
+      "stage": "walk_return",
+      "static_bytes": 230063180,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 1,
+      "tick_us": 48778063
+    },
+    {
+      "active_animals": 11,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5149990068749,
+        "mode": "cube_sphere_m1_v1",
+        "u": -2.67785241278299e-06,
+        "v": -0.880000054653282
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 11.656,
+      "flora_worker": 0,
+      "nodes": 3025.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 456757248,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 119.99,
+      "rebases": 2,
+      "region_cache": 62,
+      "region_dirty": 36,
+      "region_io_max_ms": 1.41,
+      "region_pages": 23,
+      "region_reads": 68,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 456757248,
+      "stage": "walk_return",
+      "static_bytes": 231761188,
+      "terrain_cached_tiles": 0,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 3.841,
+      "terrain_resident_peak": 489,
+      "terrain_tiles": 489,
+      "terrain_upload_max_ms": 0.0,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 4,
+      "tick_us": 49790536
+    },
+    {
+      "active_animals": 11,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5149783687666,
+        "mode": "cube_sphere_m1_v1",
+        "u": -2.03206943898321e-06,
+        "v": -0.880000023308613
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 11.656,
+      "flora_worker": 0,
+      "nodes": 3037.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 456757248,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 119.99,
+      "rebases": 2,
+      "region_cache": 62,
+      "region_dirty": 36,
+      "region_io_max_ms": 1.41,
+      "region_pages": 23,
+      "region_reads": 68,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 456757248,
+      "stage": "walk_return",
+      "static_bytes": 230705764,
+      "terrain_cached_tiles": 13,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 4.136,
+      "terrain_resident_peak": 514,
+      "terrain_tiles": 501,
+      "terrain_upload_max_ms": 1.472,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 50792394
+    },
+    {
+      "active_animals": 11,
+      "active_plants": 16,
+      "address": {
+        "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+        "face": 0,
+        "height": 25.5149379307404,
+        "mode": "cube_sphere_m1_v1",
+        "u": -8.01234911002038e-07,
+        "v": -0.880000000158833
+      },
+      "cycle": 1,
+      "flora_instances": 481,
+      "flora_work_max_ms": 11.656,
+      "flora_worker": 0,
+      "nodes": 3037.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 456757248,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "population_work_max_ms": 119.99,
+      "rebases": 2,
+      "region_cache": 62,
+      "region_dirty": 36,
+      "region_io_max_ms": 1.41,
+      "region_pages": 23,
+      "region_reads": 68,
+      "region_writes": 7,
+      "render_memory_bytes": null,
+      "resources": 442.0,
+      "rss_bytes": 456757248,
+      "stage": "walk_return",
+      "static_bytes": 230766308,
+      "terrain_cached_tiles": 13,
+      "terrain_collisions": 24,
+      "terrain_initial_publish_ms": 10.82,
+      "terrain_pending_uploads": 0,
+      "terrain_publish_max_ms": 4.136,
+      "terrain_resident_peak": 514,
+      "terrain_tiles": 501,
+      "terrain_upload_max_ms": 1.472,
+      "terrain_wait": false,
+      "terrain_worker_max_ms": 12454.56,
+      "terrain_workers": 0,
+      "tick_us": 51808845
+    },
+    {
+      "cycle": 1,
+      "nodes": 250.0,
+      "orphans": 0.0,
+      "peak_rss_bytes": 456757248,
+      "physics_active_objects": 0.0,
+      "physics_collision_pairs": 0.0,
+      "resources": 440.0,
+      "rss_bytes": 456757248,
+      "stage": "save_and_menu",
+      "static_bytes": 113822016,
+      "tick_us": 52815444
+    }
+  ],
+  "software_renderer": true,
+  "source": {
+    "changes": [],
+    "commit": "ff812644ddbe99a348b7182fcd8c55092d930123",
+    "dirty": false
+  },
+  "surface": {
+    "adaptive": true,
+    "atmosphere": "temperate",
+    "axial_tilt": 0.2,
+    "generator_version": "planetary_v9",
+    "gravity": 9.81,
+    "id": "body_57d29a0edf66ecb1309999dc43772160",
+    "inhabited": true,
+    "kind": "planet",
+    "orbit_period": 600.0,
+    "orbit_phase": 0.0,
+    "orbit_radius": 0.0,
+    "parent_id": "",
+    "radius": 6371000.0,
+    "rotation_period": 240.0,
+    "schema": 1,
+    "seed": 15838,
+    "surface_generation": "living_planet_v2",
+    "surface_mode": "cube_sphere_m1_v1",
+    "terrain_revision": 4.0
+  },
+  "user_data_dir": "/tmp/voxelverse-performance-user-3ioy1fv7/userdata/xdg_data_home/godot/app_userdata/Voxelverse",
+  "world_0": {
+    "active_animals": 12,
+    "active_plants": 16,
+    "address": {
+      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+      "face": 0,
+      "height": 25.4577553728595,
+      "mode": "cube_sphere_m1_v1",
+      "u": 1.32568302050369e-07,
+      "v": -0.879999999974898
+    },
+    "flora_instances": 473,
+    "flora_work_max_ms": 5.767,
+    "flora_worker": 0,
+    "population_work_max_ms": 171.895,
+    "rebases": 2,
+    "region_cache": 78,
+    "region_dirty": 78,
+    "region_io_max_ms": 0.771,
+    "region_pages": 2,
+    "region_reads": 3,
+    "region_writes": 1,
+    "render_memory_bytes": null,
+    "sample_limits": {
+      "job_samples": 256,
+      "note": "Existing diagnostic arrays retain the first samples; lifetime maxima still cover later work. Not an unbiased full-route percentile.",
+      "upload_samples": 2048
+    },
+    "terrain_cached_tiles": 13,
+    "terrain_collisions": 24,
+    "terrain_initial_publish_ms": 11.194,
+    "terrain_job_samples": [
+      {
+        "mesh_ms": 12136.246,
+        "selection_ms": 463.626,
+        "tiles": 489,
+        "uploads": 489,
+        "worker_ms": 12599.935,
+        "workers": 4
+      },
+      {
+        "mesh_ms": 0.418,
+        "selection_ms": 490.51,
+        "tiles": 489,
+        "uploads": 0,
+        "worker_ms": 490.978,
+        "workers": 0
+      },
+      {
+        "mesh_ms": 0.829,
+        "selection_ms": 489.144,
+        "tiles": 489,
+        "uploads": 0,
+        "worker_ms": 503.926,
+        "workers": 0
+      },
+      {
+        "mesh_ms": 474.971,
+        "selection_ms": 527.243,
+        "tiles": 501,
+        "uploads": 25,
+        "worker_ms": 1007.836,
+        "workers": 4
+      },
+      {
+        "mesh_ms": 0.711,
+        "selection_ms": 530.566,
+        "tiles": 501,
+        "uploads": 0,
+        "worker_ms": 541.539,
+        "workers": 0
+      }
+    ],
+    "terrain_pending_uploads": 0,
+    "terrain_publish_max_ms": 6.353,
+    "terrain_resident_peak": 514,
+    "terrain_tiles": 501,
+    "terrain_upload_max_ms": 2.044,
+    "terrain_upload_samples_ms": [
+      1.297,
+      1.422,
+      1.287,
+      2.044,
+      1.773,
+      1.675,
+      2.039,
+      1.525,
+      0.926,
+      1.083,
+      1.234,
+      1.266,
+      1.083
+    ],
+    "terrain_wait": false,
+    "terrain_worker_max_ms": 12599.935,
+    "terrain_workers": 0
+  },
+  "world_1": {
+    "active_animals": 11,
+    "active_plants": 16,
+    "address": {
+      "body_id": "body_57d29a0edf66ecb1309999dc43772160",
+      "face": 0,
+      "height": 25.3628810476512,
+      "mode": "cube_sphere_m1_v1",
+      "u": 6.24539535814263e-09,
+      "v": -0.879999999993032
+    },
+    "flora_instances": 481,
+    "flora_work_max_ms": 11.656,
+    "flora_worker": 0,
+    "population_work_max_ms": 119.99,
+    "rebases": 2,
+    "region_cache": 62,
+    "region_dirty": 36,
+    "region_io_max_ms": 1.41,
+    "region_pages": 23,
+    "region_reads": 68,
+    "region_writes": 7,
+    "render_memory_bytes": null,
+    "sample_limits": {
+      "job_samples": 256,
+      "note": "Existing diagnostic arrays retain the first samples; lifetime maxima still cover later work. Not an unbiased full-route percentile.",
+      "upload_samples": 2048
+    },
+    "terrain_cached_tiles": 13,
+    "terrain_collisions": 24,
+    "terrain_initial_publish_ms": 10.82,
+    "terrain_job_samples": [
+      {
+        "mesh_ms": 11950.683,
+        "selection_ms": 503.817,
+        "tiles": 489,
+        "uploads": 489,
+        "worker_ms": 12454.56,
+        "workers": 4
+      },
+      {
+        "mesh_ms": 0.748,
+        "selection_ms": 419.591,
+        "tiles": 489,
+        "uploads": 0,
+        "worker_ms": 420.409,
+        "workers": 0
+      },
+      {
+        "mesh_ms": 0.855,
+        "selection_ms": 498.066,
+        "tiles": 489,
+        "uploads": 0,
+        "worker_ms": 500.586,
+        "workers": 0
+      },
+      {
+        "mesh_ms": 746.709,
+        "selection_ms": 544.939,
+        "tiles": 501,
+        "uploads": 25,
+        "worker_ms": 1296.187,
+        "workers": 4
+      },
+      {
+        "mesh_ms": 1.188,
+        "selection_ms": 548.134,
+        "tiles": 501,
+        "uploads": 0,
+        "worker_ms": 555.7,
+        "workers": 0
+      }
+    ],
+    "terrain_pending_uploads": 0,
+    "terrain_publish_max_ms": 4.136,
+    "terrain_resident_peak": 514,
+    "terrain_tiles": 501,
+    "terrain_upload_max_ms": 1.472,
+    "terrain_upload_samples_ms": [
+      1.28,
+      1.244,
+      1.066,
+      0.98,
+      1.056,
+      1.241,
+      1.043,
+      1.022,
+      1.472,
+      0.977,
+      1.047,
+      1.068,
+      0.666
+    ],
+    "terrain_wait": false,
+    "terrain_worker_max_ms": 12454.56,
+    "terrain_workers": 0
+  },
+  "process_rss_peak_bytes": 456757248
+}

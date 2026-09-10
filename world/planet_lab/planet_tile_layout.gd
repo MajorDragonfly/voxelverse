@@ -3,6 +3,7 @@ class_name PlanetTileLayout
 
 const Cube = preload("res://world/space/cube_sphere.gd")
 const ROOT_LEVEL: int = 0
+const MAX_LEVEL: int = 24
 const MAX_LEAVES: int = 768
 const TARGET_WIDTH: float = 32.0
 const NEAR_RADIUS_METERS: float = 64.0
@@ -14,7 +15,7 @@ var root_level: int
 func _init(body_radius: float) -> void:
 	radius = body_radius
 	root_level = 2 if radius < 50000.0 else ROOT_LEVEL
-	max_level = clampi(ceili(log(radius * 2.0 / TARGET_WIDTH) / log(2.0)), root_level, 24)
+	max_level = clampi(ceili(log(radius * 2.0 / TARGET_WIDTH) / log(2.0)), root_level, MAX_LEVEL)
 
 
 static func key(face: int, level: int, x: int, y: int) -> String:

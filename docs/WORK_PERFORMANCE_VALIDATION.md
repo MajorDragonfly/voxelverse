@@ -1,5 +1,7 @@
 # Leistungsprüfung und CI – 9. September 2026
 
+**Aktueller Anschluss (10. September):** Neue Messläufe verwenden Protokoll 2 für die Kugelkampagne; siehe [WORK_ARCH02_PERFORMANCE.md](WORK_ARCH02_PERFORMANCE.md). Der folgende Bericht dokumentiert die historische Flachwelt-Messung.
+
 ## Paket und Integrationsfolge
 
 Branch: `agent/performance-validation-2026-09-09`.

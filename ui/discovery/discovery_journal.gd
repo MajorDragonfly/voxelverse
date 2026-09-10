@@ -11,6 +11,7 @@ const Suitability = preload("res://ui/discovery/animal_suitability.gd")
 const OwnedReader = preload("res://ui/discovery/owned_animal_reader.gd")
 const OwnedRegister = preload("res://ui/discovery/owned_animal_register.gd")
 const ANIMALS_TAB := 5
+const AnimalText = preload("res://ui/discovery/owned_animal_presentation.gd")
 const Symbols = preload("res://ui/catalog/development_symbols.gd")
 
 var is_open: bool = false
@@ -66,6 +67,7 @@ var _tools_row: BoxContainer
 var _scale_factor: float = 1.0
 var _owned_reader = OwnedReader.new()
 var _owned_register: VBoxContainer
+var _animals_result_code: String = "owned.unavailable"
 var _status_badge: Label
 var _thumbnail_preview: SubViewportContainer
 var _thumbnail_cache: Dictionary = {}
@@ -195,10 +197,7 @@ func refresh() -> void:
 	if _progression == null:
 		return
 	_state = _progression.call("export_state")
-	_summary.text = "%d Arten     ·     %d Regionen     ·     %d Teile verfügbar     ·     %d Entdeckungspunkte" % [
-		Records.as_dictionary(_state.get("discovered_species", {})).size(),
-		Records.as_dictionary(_state.get("discovered_regions", {})).size(),
-		Records.as_dictionary(_state.get("unlocked_parts", {})).size(), int(_state.get("discovery_points", 0))]
+	_refresh_summary()
 	_apply_filters()
 
 
@@ -252,9 +251,11 @@ func _build() -> void:
 	heading.add_child(heading_text)
 	_close = _button("Zurück zum Spiel  ·  Esc", close_journal)
 	_close.name = "CloseJournal"
+	_close.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	heading.add_child(_close)
 	_summary = _label("", 15)
 	_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_summary.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	layout.add_child(_summary)
 	_tabs = TabBar.new()
 	_tabs.name = "JournalTabs"
@@ -303,6 +304,7 @@ func _build() -> void:
 	content.add_child(browser)
 	_list = ItemList.new()
 	_list.name = "JournalEntries"
+	_list.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_list.add_theme_constant_override("v_separation", 8)
 	_list.fixed_icon_size = Vector2i(78, 78)
@@ -318,6 +320,8 @@ func _build() -> void:
 	_page_label = _label("", 13)
 	_page_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_page_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_page_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_page_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	paging.add_child(_page_label)
 	_next_page = _button("›", func() -> void: _page += 1; _apply_filters())
 	_next_page.tooltip_text = "Nächste Seite"
@@ -420,16 +424,19 @@ func _layout() -> void:
 	_scale_factor = extent.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
 	extent /= _scale_factor
+	var animal_scale: float = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5) if _tabs.current_tab == ANIMALS_TAB else 1.0
+	_animal_fonts(_surface, animal_scale)
+	_close.custom_minimum_size.x = 280 * animal_scale
 	_surface.size = extent
 	_preview.custom_minimum_size.y = 110 if extent.y <= 600 else 230
-	_title.add_theme_font_size_override("font_size", 20 if _tabs.current_tab == ANIMALS_TAB and extent.y <= 600 else 26)
+	_title.add_theme_font_size_override("font_size", roundi((20 if _tabs.current_tab == ANIMALS_TAB and extent.y <= 600 else 26) * animal_scale))
 	var narrow := extent.x < 960
-	_summary.visible = extent.y >= 600
+	_summary.visible = extent.y >= 600 and not (animal_scale > 1.0 and extent.y < 720)
 	_panel.get_child(0).add_theme_constant_override("separation", 6 if narrow else 12)
 	_tabs.visible = not narrow
 	_compact_tabs.visible = narrow
-	_heading.vertical = extent.x < 700
-	_tools_row.vertical = extent.x < 600
+	_heading.vertical = extent.x < 700 * animal_scale
+	_tools_row.vertical = extent.x < 600 * animal_scale
 	_content.vertical = extent.x < 600
 	_browser.custom_minimum_size.x = 0 if _content.vertical else 210
 	_browser.custom_minimum_size.y = 115 if _content.vertical else 0
@@ -536,11 +543,14 @@ func _populate_filter() -> void:
 func _apply_filters() -> void:
 	if _tabs == null:
 		return
+	_title.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED if _tabs.current_tab == ANIMALS_TAB else Node.AUTO_TRANSLATE_MODE_INHERIT
+	_description.auto_translate_mode = _title.auto_translate_mode
 	var guide_mode: bool = _tabs.current_tab == 3
 	_search.get_parent().visible = not guide_mode
 	_list.get_parent().visible = not guide_mode
 	_guide.visible = guide_mode
 	_owned_register.hide()
+	_description.show()
 	_parts_label.text = ""
 	_animal_roles.hide()
 	_roles_toggle.hide()
@@ -566,6 +576,7 @@ func _apply_filters() -> void:
 		4: _rows = Research.rows(_state, _search.text)
 		ANIMALS_TAB:
 			animals = _owned_reader.read(_search.text, filter_value)
+			_animals_result_code = animals.code
 			_rows.assign(animals["rows"])
 	_page = clampi(_page, 0, maxi((_rows.size() - 1) / PAGE_SIZE, 0))
 	_list.clear()
@@ -579,8 +590,8 @@ func _apply_filters() -> void:
 			if row.get("wished", false): label += " · gemerkt"
 		elif _tabs.current_tab == 4:
 			label = ("✓  " if row["complete"] else "○  ") + label
-		elif _tabs.current_tab == ANIMALS_TAB and row["dead"]:
-			label += " · verstorben"
+		elif _tabs.current_tab == ANIMALS_TAB:
+			label = AnimalText.list_text(row)
 		var visual_key: String = _visual_key(row, _tabs.current_tab)
 		_list.add_item(label, _thumbnail_cache.get(visual_key, Symbols.texture("creature" if _tabs.current_tab == 0 else "part", bool(row.get("unlocked", true)))))
 		_list.set_item_metadata(_list.item_count - 1, visual_key)
@@ -589,14 +600,14 @@ func _apply_filters() -> void:
 		_list.set_item_tooltip(_list.item_count - 1, label + " · " + str(row.get("location", row.get("source", ""))))
 		if str(row.get("key", row.get("id", ""))) == _selected_key:
 			selected_index = _list.item_count - 1
-	_page_label.text = "%d Einträge · %d / %d" % [_rows.size(), _page + 1, maxi(ceili(float(_rows.size()) / PAGE_SIZE), 1)]
+	_refresh_page_label()
 	_previous_page.disabled = _page == 0
 	_next_page.disabled = (_page + 1) * PAGE_SIZE >= _rows.size()
 	if _rows.is_empty():
 		_selected_key = ""
 		if _tabs.current_tab == ANIMALS_TAB:
-			_title.text = "Eigene Tiere"
-			_description.text = animals["message"]
+			_title.text = AnimalText.text("Eigene Tiere")
+			_description.text = AnimalText.result_text(_animals_result_code)
 			return
 		_title.text = "Noch keine Arten entdeckt" if _tabs.current_tab == 0 and Records.as_dictionary(_state.get("discovered_species", {})).is_empty() else "Keine passenden Einträge"
 		_description.text = "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier." if _title.text == "Noch keine Arten entdeckt" else "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
@@ -633,6 +644,7 @@ func _select_entry(index: int) -> void:
 		_description.hide()
 		_owned_register.show()
 		_owned_register.present(row)
+		_layout()
 	elif _tabs.current_tab == 0:
 		var profile: Dictionary = Suitability.read(row, _animal_contract)
 		_animal_roles.text = Suitability.describe(profile)
@@ -963,3 +975,47 @@ func _add_part_tile(id: String, unlocked: bool) -> void:
 	if not _thumbnail_cache.has(key):
 		_thumbnail_queue.append({"row": row, "tab": 1, "key": key})
 	_render_thumbnails()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		call_deferred("_refresh_animal_language")
+
+func _refresh_summary() -> void:
+	_summary.text = AnimalText.format_text("OWNED_JOURNAL_SUMMARY", {
+		"species": Records.as_dictionary(_state.get("discovered_species", {})).size(),
+		"regions": Records.as_dictionary(_state.get("discovered_regions", {})).size(),
+		"parts": Records.as_dictionary(_state.get("unlocked_parts", {})).size(),
+		"points": int(_state.get("discovery_points", 0))})
+
+func _refresh_page_label() -> void:
+	_page_label.text = AnimalText.format_text("OWNED_JOURNAL_PAGE", {
+		"count": _rows.size(), "page": _page + 1, "pages": maxi(ceili(float(_rows.size()) / PAGE_SIZE), 1)})
+
+func _refresh_animal_language() -> void:
+	_refresh_summary()
+	_refresh_page_label()
+	if _tabs.current_tab != ANIMALS_TAB: return
+	# No read/filter/reselection: preserve search/caret, page, list and scrolls.
+	for index in _rows.size(): _rows[index] = AnimalText.project(_rows[index]._display_data)
+	for index in _list.item_count:
+		var row: Dictionary = _rows[_page * PAGE_SIZE + index]
+		var label: String = AnimalText.list_text(row)
+		_list.set_item_text(index, label)
+		_list.set_item_tooltip(index, label + " · " + str(row.location))
+	if _rows.is_empty():
+		_title.text = AnimalText.text("Eigene Tiere")
+		_description.text = AnimalText.result_text(_animals_result_code)
+	else:
+		for row: Dictionary in _rows:
+			if row.key == _selected_key:
+				_title.text = row.name
+				_owned_register.present(row)
+				break
+	_layout()
+
+func _animal_fonts(node: Node, scale: float) -> void:
+	if node is Control and node != _title and node.get_class() in ["Label", "Button", "CheckButton", "OptionButton", "LineEdit", "ItemList", "TabBar"]:
+		if not node.has_meta("animal_base_font"):
+			node.set_meta("animal_base_font", node.get_theme_font_size("font_size"))
+		node.add_theme_font_size_override("font_size", roundi(float(node.get_meta("animal_base_font")) * scale))
+	for child in node.get_children(): _animal_fonts(child, scale)

@@ -1,0 +1,20 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+REPLAY_FIXTURE_VALIDATION 
+REPLAY_LOADED body_587a554022d764b77041c4f3ee936a07  { "path": "user://saves/slot_ce564af8a4f5c147f0e80531.json", "name": "Radiale Gemeinschaft", "valid": true, "recovered": false, "saved_time": 1789019074, "seed": 15838, "phase": 1, "seconds": 898.999165000265, "planet_index": 0, "preview": {  }, "history_count": 8, "schema": 9, "surface_mode": "cube_sphere_m1_v1", "has_migration_archive": false, "problem": "" }
+REPLAY_PLACED 0.96964740753174
+SPHERE_GAMEPLAY_STAGE animal_travel_failed_write elapsed_seconds=43.402
+WARNING: Could not commit save: user://missing-animal-travel-parent/blocked.json (File not found)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1175)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:161)
+         [2] save_now (res://autoload/save_game_service.gd:101)
+         [3] prepare_body_departure (res://autoload/save_game_service.gd:1016)
+         [4] prepare_far_simulation (res://world/tribe/tribe_controller.gd:801)
+SPHERE_GAMEPLAY_STAGE animal_travel_depart elapsed_seconds=60.808
+ANIMAL_TRAVEL_FAR { "body_id": "body_587a554022d764b77041c4f3ee936a07", "animal_id": "object_1e9af81a87df1e20731f6a59b2f32f59", "production_seconds_before": 308.466666666667, "production_seconds_after": 313.482539682544, "food_consumed": 0.01671957671959, "cargo": "milk", "milk_stock": 0.0 }
+SPHERE_GAMEPLAY_STAGE animal_travel_far_restart elapsed_seconds=75.752
+SPHERE_GAMEPLAY_STAGE animal_travel_return elapsed_seconds=92.29
+ANIMAL_TRAVEL_PASSED: real D1/D2 animal, pen and milk cargo; A-B-A, five far production seconds, failed write, pause, fresh process and single physical return.
+ANIMAL_TRAVEL_REPLAY_PASSED

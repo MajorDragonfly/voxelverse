@@ -78,7 +78,7 @@ func run() -> void:
 		if arrived and world.walker.position.distance_to(target_animal.position) <= 3.0: reached += 1
 		world.walker.enabled = false
 		world.walker.automatic = false
-	expect(reached == 3, "Player cannot physically approach all three mandatory habitats")
+	expect(reached == 4, "Player cannot physically approach all four mandatory habitats")
 	metrics.physically_reached_habitats = reached
 	world.walker.place(world.records[world.body_id].spawn)
 	metrics.floor_contacts = floor_contacts
@@ -147,8 +147,8 @@ func populate(world: Node) -> void:
 		await physics_frame
 		var count: int = 0
 		for id: String in world.ecosystem.animals: count += int(world.ecosystem.domestic.owns(id))
-		if count == 3 and world.ecosystem.domestic.plants.size() == 3: return
-	failures.append("Three live mandatory species and food did not materialize: " + JSON.stringify({"catalog": world.ecosystem.domestic.catalog.habitat_status,
+		if count == 4 and world.ecosystem.domestic.plants.size() == 4: return
+	failures.append("Four live mandatory species and food did not materialize: " + JSON.stringify({"catalog": world.ecosystem.domestic.catalog.habitat_status,
 		"individuals": world.ecosystem.domestic.individuals.keys(), "food": world.ecosystem.domestic.plants.size(), "blocked": world.ecosystem.domestic.blocked_placements}))
 
 func expect(ok: bool, message: String) -> void:

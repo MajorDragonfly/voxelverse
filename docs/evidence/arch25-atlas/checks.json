@@ -1,0 +1,100 @@
+{
+  "package": "ARCH-25 world map DE/EN, part 2",
+  "date": "2026-09-10",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.054
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.87
+    },
+    {
+      "name": "world_map_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.734
+    },
+    {
+      "name": "world_map_localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.909
+    },
+    {
+      "name": "localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.419
+    },
+    {
+      "name": "minimap_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.128
+    },
+    {
+      "name": "living_planet_map_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.121
+    }
+  ],
+  "source_checks": {
+    "catalog": "268 messages, 2 languages; generator --check passed",
+    "python_syntax": true,
+    "git_diff_check": true
+  },
+  "native_review": {
+    "passed": true,
+    "screenshots": [
+      "atlas-de-1280x720-100.png",
+      "atlas-de-1280x720-150.png",
+      "atlas-de-1920x1080-100.png",
+      "atlas-de-1920x1080-150.png",
+      "atlas-de-800x600-100.png",
+      "atlas-de-800x600-150-empty.png",
+      "atlas-de-800x600-150-places.png",
+      "atlas-de-800x600-150.png",
+      "atlas-en-1280x720-100.png",
+      "atlas-en-1280x720-150.png",
+      "atlas-en-1920x1080-100.png",
+      "atlas-en-1920x1080-150.png",
+      "atlas-en-800x600-100.png",
+      "atlas-en-800x600-150-empty.png",
+      "atlas-en-800x600-150-places.png",
+      "atlas-en-800x600-150.png"
+    ],
+    "renderer": "gl_compatibility",
+    "scope": "Actual atlas in the player/map/save/restart test scene"
+  },
+  "included_screenshots": [
+    "atlas-de-1280x720-100.png",
+    "atlas-en-1920x1080-150.png",
+    "atlas-en-800x600-150-places.png",
+    "atlas-en-800x600-150-empty.png"
+  ],
+  "scope": "Actual player/atlas/save/restart fixture; native software OpenGL/Xvfb; no target hardware, full game or export claim",
+  "resolved_during_validation": [
+    "Use 1270 m width to avoid an ambiguous half-rounding assertion.",
+    "Ensure a full place action remains reachable when the English toolbar wraps at 800x600 / 150%."
+  ],
+  "source_sha256": {
+    "localization/catalog.json": "245b60c07668f20d008833011df2cbb575d0637c5a7d411129960ba3d3c4ec07",
+    "localization/de.po": "1e0bab4c26f7aa7311ee97a25b36d720c741733775a54d51c3c048bfce4dafd6",
+    "localization/en.po": "24f6c48f48fa15b0adf7eb049123b667680e68c921d3546bbc100565bb1a02fc",
+    "ui/world_map/atlas_presentation.gd": "3e25072ce572efdfb52342cef90a0f4c444e75a6d6276831ab94f666d50838ef",
+    "ui/world_map/exploration_tracker.gd": "e82b680ac714909eb92fec42e0bda6397c2c34708fa3fb718f010c5d301c4fcc",
+    "ui/world_map/world_map_canvas.gd": "98a3f0d94b7252c3ad9746c5b665b11f4cc4d5d853af845dc86da89363c04d2c",
+    "ui/world_map/world_map_panel.gd": "e1108311bea4d8332b890de7fb620d77843bbe89e3e49ac2e1d4924fa6d4a6c1",
+    "tests/world_map_localization_test.gd": "190a8ead7569acc1cd7f38e712e0de02f77f5880854525d20a56381a7327f425",
+    "tools/review_world_map_localization.py": "e948a6ea9ce0752a3c5681db7d0b5eba5378a7a0c93bd9c65b7119ab4af05ae8"
+  }
+}

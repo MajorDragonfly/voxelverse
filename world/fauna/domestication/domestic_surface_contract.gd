@@ -52,7 +52,7 @@ static func distance(a: Dictionary, b: Dictionary, radius: float) -> float:
 	return Cube.local_position(Cube.cartesian(a, radius), Cube.cartesian(b, radius)).length()
 
 static func validate(catalog: Dictionary, body: Dictionary, identities: Array) -> String:
-	var migrated: bool = catalog.schema == MIGRATED_SCHEMA
+	var migrated: bool = catalog.schema == MIGRATED_SCHEMA or catalog.has("migration_source")
 	var originals: Dictionary = {}
 	if migrated:
 		var archive: Variant = catalog.get("migration_source")
@@ -72,7 +72,9 @@ static func validate(catalog: Dictionary, body: Dictionary, identities: Array) -
 			or (not habitat.key.begins_with("surface1:") and not originals.has(habitat.key)) or habitat.key in keys: return "Invalid spherical habitat identity."
 		if not location(habitat.get("position"), id) or not location(habitat.get("food_position"), id) \
 			or not habitat.get("path") is Array or habitat.path.size() < 2 or habitat.path.size() > (2048 if migrated else MAX_PATH): return "Invalid spherical habitat route."
-		if habitat.path[0] != surface.anchor or habitat.path[-1] != habitat.position: return "Spherical route endpoints disagree."
+		# JSON restores integer face fields as floats. Compare the canonical
+		# address value without rewriting archived routes during a role upgrade.
+		if canonical(habitat.path[0]) != canonical(surface.anchor) or canonical(habitat.path[-1]) != canonical(habitat.position): return "Spherical route endpoints disagree."
 		var previous: Dictionary = habitat.path[0]
 		for point in habitat.path:
 			if not location(point, id) or distance(previous, point, surface.radius) > 8.0: return "Invalid spherical route edge."
@@ -89,7 +91,7 @@ static func validate(catalog: Dictionary, body: Dictionary, identities: Array) -
 			if not food is Dictionary or food.get("schema") != 1 or not Values.number(food.get("remaining"), 0, 30) or not Values.number(food.get("regrow_remaining"), 0, 180): return "Invalid spherical food state."
 		keys.append(habitat.key)
 		if habitat.species_id not in represented: represented.append(habitat.species_id)
-	if catalog.get("habitat_status") not in ["pending", "ready", "unavailable"] or (catalog.habitat_status == "ready" and represented.size() != 3): return "Incomplete spherical habitats."
+	if catalog.get("habitat_status") not in ["pending", "ready", "unavailable"] or (catalog.habitat_status == "ready" and represented.size() != identities.size()): return "Incomplete spherical habitats."
 	if catalog.has("surface_search"): return validate_search(catalog.surface_search, surface, id)
 	return ""
 

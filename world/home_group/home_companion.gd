@@ -15,7 +15,13 @@ var current_health: float = 100.0
 var is_dead: bool = false
 var _visual: Node3D
 var _label: Label3D
+const STATUS_TEXT := {
+	"waiting": "Wartet", "at_home": "Am Heimatplatz", "near_player": "Bei dir",
+	"following": "Folgt dir", "returning": "Kehrt heim",
+	"blocked": "Weg blockiert", "unloaded": "Außerhalb der geladenen Umgebung",
+}
 var status: String = "Wartet"
+var status_code: String = "waiting"
 var _turn_sign: float = 1.0
 
 func setup(owner_node: Node, member: Dictionary, blueprint: Dictionary, index: int) -> void:
@@ -50,6 +56,7 @@ func setup(owner_node: Node, member: Dictionary, blueprint: Dictionary, index: i
 	add_child(animator)
 	_label = Label3D.new()
 	_label.text = str(member["name"])
+	_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_label.position.y = 2.0
 	_label.font_size = 28
 	_label.pixel_size = 0.007
@@ -76,7 +83,7 @@ func _physics_process(delta: float) -> void:
 	if player == null or player.global_position.distance_to(global_position) > 90.0 or not controller.has_ground(global_position):
 		visible = false
 		velocity = Vector3.ZERO
-		status = "Außerhalb der geladenen Umgebung"
+		_set_status("unloaded")
 		return
 	visible = true
 	var target: Vector3 = global_position
@@ -88,10 +95,10 @@ func _physics_process(delta: float) -> void:
 	var offset: Vector3 = target - global_position
 	offset = offset.slide(up_direction)
 	var direction := Vector3.ZERO
-	status = "Wartet" if order == "wait" else "Am Heimatplatz" if order == "home" else "Bei dir"
+	_set_status("waiting" if order == "wait" else "at_home" if order == "home" else "near_player")
 	if order != "wait" and offset.length() > 1.1:
 		direction = offset.normalized()
-		status = "Folgt dir" if order == "follow" else "Kehrt heim"
+		_set_status("following" if order == "follow" else "returning")
 		# Small local avoidance, not global pathfinding. Never cross unknown floor,
 		# a steep drop or deep water; waiting is preferable to teleporting a member.
 		var chosen := Vector3.ZERO
@@ -102,7 +109,7 @@ func _physics_process(delta: float) -> void:
 				break
 		direction = chosen
 		if direction == Vector3.ZERO:
-			status = "Weg blockiert"
+			_set_status("blocked")
 	velocity = direction * move_speed + up_direction * (-0.5 if is_on_floor() else maxf(-12.0, velocity.dot(up_direction) - 20.0 * delta))
 	if is_on_floor() and direction != Vector3.ZERO:
 		_step_up(direction * move_speed * delta)
@@ -119,3 +126,7 @@ func _step_up(motion: Vector3) -> void:
 
 func surface_origin_shifted(shift: Vector3) -> void:
 	get_node("AdaptiveLocomotionAnimator").surface_origin_shifted(shift)
+
+func _set_status(code: String) -> void:
+	status_code = code
+	status = STATUS_TEXT[code]
