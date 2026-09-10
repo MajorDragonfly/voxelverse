@@ -224,11 +224,13 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 ### ARCH-23 – Bauplanversionen vor neuen Editoren absichern
 
 - **Zuordnung:** M2B/M3/BP-COMMUNITY.1, Vorbereitung M7/M9. **Vorher:** ARCH-01. **Bereich:** `assembly/core`, DesignStore und bestehende Adapter.
-- [ ] Validierung/Migration von Normalisierung trennen; unbekannte zukünftige Bauplanschemata nicht auf Schema 1 umschreiben.
-- [ ] Parts-Erweiterungen, Entwurfsrevisionen, maximale Komplexität und Originalerhalt definieren. Bauplan-ID und konkrete Gebäude-/Fahrzeug-/Schiffinstanz bleiben getrennt.
-- [ ] Den geplanten portablen Bauplanvertrag für BP-COMMUNITY.1 berücksichtigen: deklarative Daten/Vorschau, begrenzte Größe/Teilezahl, lokale Prüfung der Fähigkeiten/Kosten, keine Skripte oder Kampagnen-/Besitzdaten. Downloadrevisionen lokal erhalten; ein Online-Update verändert vorhandene Objekte nicht automatisch.
-- [ ] Vorhandene Kreaturen-/Gebäudeverbraucher behalten; generischer Kreaturenadapter ist noch kein vollständiger Rückimport und braucht einen eigenen nachgewiesenen Anschluss.
+- [x] Validierung/Migration von Normalisierung trennen; unbekannte zukünftige Bauplanschemata nicht auf Schema 1 umschreiben.
+- [x] Parts-Erweiterungen, Entwurfsrevisionen, maximale Komplexität und Originalerhalt definieren. Bauplan-ID und konkrete Gebäude-/Fahrzeug-/Schiffinstanz bleiben getrennt.
+- [x] Den geplanten portablen Bauplanvertrag für BP-COMMUNITY.1 berücksichtigen: deklarative Daten/Vorschau, begrenzte Größe/Teilezahl, lokale Prüfung der Fähigkeiten/Kosten, keine Skripte oder Kampagnen-/Besitzdaten. Downloadrevisionen lokal erhalten; ein Online-Update verändert vorhandene Objekte nicht automatisch.
+- [x] Vorhandene Kreaturen-/Gebäudeverbraucher behalten; generischer Kreaturenadapter ist noch kein vollständiger Rückimport und braucht einen eigenen nachgewiesenen Anschluss.
 - **Fertig:** Bestehende Entwürfe laden identisch; unbekannte neuere Daten bleiben unverändert geschützt; Revision, Undo/Redo, Vorschau und gespeicherte Instanz bleiben nachvollziehbar. Formatanschluss für BP-COMMUNITY ist beschrieben; Online-Dienst/Galerie gehören zu dessen eigenen fünf Fachaufträgen, nicht in diesen Umbau.
+
+**Fachlieferung 10. September:** umgesetzt und lokal geprüft auf `agent/arch23-blueprint-contract-2026-09-10`; Integration nach main separat. [Vertrag](BLUEPRINT_CONTRACT.md) und [Übergabe/Nachweise](WORK_ARCH23_BLUEPRINTS.md). Onlineaustausch und ein vollständiger Kreaturen-Rückimport bleiben BP-COMMUNITY.
 
 ### ARCH-24 – M3-TEILE über Katalog und Geometrieanbieter
 

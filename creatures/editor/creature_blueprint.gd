@@ -3,6 +3,7 @@ extends RefCounted
 class_name CreatureBlueprint
 
 const Store = preload("res://core/persistence/design_store.gd")
+const Contract = preload("res://assembly/core/blueprint_contract.gd")
 const JointProfile = preload("res://creatures/editor/creature_joint_profile.gd")
 
 
@@ -462,10 +463,12 @@ static func save_to_file(
 	blueprint: Dictionary,
 	save_path: String
 ) -> Error:
+	if not Contract.inspect(blueprint, "creature").ok: return ERR_INVALID_DATA
 	return Store.write(save_path, _serialize_blueprint(blueprint))
 
 
 static func load_from_file(save_path: String) -> Dictionary:
+	if not Contract.inspect_text(Store.read_text(save_path), "creature").ok: return {}
 	if Store.read_text(save_path).is_empty():
 		return {}
 
@@ -489,6 +492,7 @@ static func _add_stats_from_definition(
 
 
 static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
+	if not Contract.inspect(blueprint, "creature").ok: return {}
 	var body: Dictionary = blueprint.get("body", {})
 	var paint: Dictionary = blueprint.get("paint", {})
 	var serialized_parts: Array = []
@@ -542,6 +546,7 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 
 
 static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
+	if not Contract.inspect(data, "creature").ok: return {}
 	var blueprint: Dictionary = create_default()
 	blueprint["name"] = str(data.get("name", "New Creature"))
 	if not str(data.get("design_id", "")).is_empty():

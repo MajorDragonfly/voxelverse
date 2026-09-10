@@ -32,6 +32,7 @@ func set_blueprint(
 	blueprint: Dictionary,
 	selected_index: int = -1
 ) -> void:
+	if not Blueprint.Contract.inspect(blueprint, "building").ok: return
 	building_blueprint = blueprint.duplicate(true)
 	Blueprint.normalize(building_blueprint)
 	selected_part_index = selected_index
@@ -47,6 +48,7 @@ func set_selected_part(index: int) -> void:
 
 func rebuild() -> void:
 	_ensure_nodes()
+	if not Blueprint.Contract.inspect(building_blueprint, "building").ok: return
 	_assembler.call(
 		"configure",
 		building_blueprint,

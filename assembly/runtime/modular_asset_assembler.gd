@@ -1,5 +1,6 @@
 extends Node3D
 class_name ModularAssetAssembler
+const Contract = preload("res://assembly/core/blueprint_contract.gd")
 
 const MeshBuilder = preload(
 	"res://assembly/runtime/modular_voxel_mesh_builder.gd"
@@ -28,6 +29,7 @@ func configure(
 	selected_index: int = -1,
 	new_lod_tier: int = 0
 ) -> void:
+	if not Contract.inspect(new_blueprint).ok: return
 	blueprint = new_blueprint.duplicate(true)
 	part_definitions = new_part_definitions.duplicate(true)
 	selected_part_index = selected_index

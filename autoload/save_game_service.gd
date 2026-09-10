@@ -821,6 +821,8 @@ func _upgrade_design_ids(files: Dictionary) -> void:
 			if warning not in last_migration_report:
 				last_migration_report.append(warning)
 			continue
+		if Designs.is_blueprint(str(path), parsed) and not Designs.Contract.version_error(parsed).is_empty():
+			continue # Preserve opaque future designs, including missing IDs.
 		if str(parsed.get("design_id", "")).is_empty():
 			Ids.ensure_design(parsed, str(path))
 			files[path] = JSON.stringify(parsed, "\t")
@@ -833,7 +835,7 @@ func _update_design_references(files: Dictionary) -> void:
 	var references: Dictionary = {}
 	for path in files.keys():
 		var parsed: Dictionary = Atomic.parse_dictionary(str(files[path]))
-		if not parsed.is_empty():
+		if not parsed.is_empty() and Designs.Contract.version_error(parsed).is_empty():
 			var revision: int = int(parsed.get("assembly", {}).get("revision", parsed.get("revision", 0)))
 			references[path] = {"design_id": str(parsed.get("design_id", "")), "revision": revision}
 	state.get("campaign").data["design_refs"] = references
@@ -1184,9 +1186,7 @@ func _has_unsupported_contract(data: Dictionary) -> bool:
 	if float(data.get("schema", 0)) > SAVE_SCHEMA:
 		return true
 	var designs: Variant = data.get("design_files")
-	if designs is Dictionary and designs.get(PlayerBlueprint.SAVE_PATH) is String:
-		var design: Variant = JSON.parse_string(designs[PlayerBlueprint.SAVE_PATH])
-		if design is Dictionary and (design.get("version") is int or design.get("version") is float) and float(design.version) > PlayerBlueprint.SAVE_VERSION: return true
+	if designs is Dictionary and Designs.has_unsupported_blueprints(designs): return true
 	if Progression.has_unsupported_contract(data.get("progression", {})):
 		return true
 	var imported_state: Variant = data.get("game_state", {})

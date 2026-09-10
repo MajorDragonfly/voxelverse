@@ -26,6 +26,8 @@ Der [Architekturbericht](docs/ARCHITECTURE_SCALABILITY_AUDIT.md) belegt die Befu
 
 Singleplayer, die bisherige Geländeoberfläche ohne allgemeines Graben und die gemeinsame Spezies-/Phasenlogik bleiben Arbeitsgrundlage. Neue Eierlieferanten, die umfassende Tierkörperteilüberarbeitung, die modulare Expeditionsbasis mit Landungsschiff und Community-Baupläne werden in den bestehenden Fachaufträgen weitergeführt. Ihre zusätzliche [Planungsquelle](https://github.com/MajorDragonfly/voxelverse/tree/61ccebb2c6eec5d6f5826867cc91205265dd7667/docs) wurde separat gelesen; dieses Audit führt keinen fremden Arbeitszweig zusammen. BP-COMMUNITY.1–.5 schließt an ARCH-23 an: Selbstgestalten bleibt freiwillig, passende fertige Vorlagen bleiben nach Übernahme offline nutzbar; dafür ist keine Multiplayer-Spielsimulation erforderlich. Die unten beschriebene Drei-Arten-Garantie ist der implementierte D1-Stand; **die vierte Eierart ist ein geplanter additiver Ausbau**.
 
+**Fachpaket ARCH-23 (10. September):** Bauplanversionen und Originalschutz sind auf einem eigenen Branch umgesetzt und lokal geprüft; Übernahme nach main steht separat an. [Vertrag und Nachweise](docs/WORK_ARCH23_BLUEPRINTS.md). Als unabhängiger Folgeauftrag ist ARCH-20 (bestehende Ressourcen-/Milchproduktion vereinheitlichen) abgegrenzt.
+
 ## Verbindliches Zielbild
 
 **Kreatur → Stammeszeitalter → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum.** Dieselbe selbst gestaltete Spezies entwickelt sich durch die gesamte Kampagne. Das Spiel orientiert sich funktional an Spore und behält seine feine Voxeloptik.

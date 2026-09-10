@@ -25,6 +25,9 @@ func _ready() -> void:
 		return
 	var saves := get_node("/root/SaveGameService")
 	var design: Dictionary = Blueprint.load_best_available()
+	if design.has("_protected_design_source"):
+		get_node("/root/SessionFlow").call_deferred("_fail_loading", Blueprint.PROTECTED_NOTICE)
+		return
 	# Freeze the selected design (or the first default if none exists) once in
 	# the current slot. Older embedded editor files remain untouched as evidence.
 	if not saves._design_files.has(Blueprint.SAVE_PATH):

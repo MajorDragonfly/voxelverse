@@ -8,6 +8,18 @@ Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge er
 
 M1f, die lokale M1g-Kette, entwickelte Kopiermigration und regionaler Population-Speicher sind über PR #45 integriert. Die anschließende Runde liefert Körper-ID-Speicherung, gemeinsame Dorfregeln, begrenzte Navigationsarbeit, Fernsimulation und sichere Körperwechsel. Vor weiterer Arbeit [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md) lesen. ARCH-03/04 nicht erneut entwickeln. ARCH-13/14 (kleines globales Manifest, segmentierter Langzeitbestand), die umfassende Langzeit-/Ziel-PC-Messung und ARCH-19 bleiben die nächsten Skalierungsgrenzen. Die ursprünglichen Aufträge unten sind die Gesamtplanung; ihr früherer Status ist keine neue Arbeitsanweisung.
 
+## Abgegrenzte Fachrunde vom 10. September
+
+- **ARCH-23 übernommen und fachlich umgesetzt:** Bauplanversionen, Altentwürfe,
+  Schreib-/Originalschutz und Revisionsprüfung. Eigener Branch
+  `agent/arch23-blueprint-contract-2026-09-10`; [Übergabe](WORK_ARCH23_BLUEPRINTS.md).
+  Bis zur Integration diese Bauplan-/Speicheranschlüsse nicht parallel ändern.
+- **Unabhängig startbar: ARCH-20.** Bestehende Milchproduktion über einen gemeinsamen
+  Ressourcen-/Produktionsvertrag führen; Altstände, Transport und Einmalbelege erhalten;
+  noch keine Eier erzeugen. ARCH-23 ändert keine Dorfwirtschaft oder Tierhaltung.
+- ARCH-13/14 bleibt die größere Skalierungsaufgabe. Änderungen am gemeinsamen
+  `SaveGameService` mit dem kleinen ARCH-23-Entwurfsversionsschutz nacheinander integrieren.
+
 ## Architekturprüfung: Aufträge vor dem Start konkret wählen
 
 Ergänzung vom 9. September 2026 auf geprüftem `main` `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7`: [Architekturbefunde](ARCHITECTURE_SCALABILITY_AUDIT.md) und [30 ausführbare Teilaufträge](ARCHITECTURE_BACKLOG.md) sind die zusätzliche Arbeitsgrundlage. Die folgenden fünf Stränge bleiben zuständig; ARCH-IDs zerlegen ihre Arbeit und sind keine konkurrierenden Neuentwicklungen. Vor Arbeitsbeginn aktuellen gemeinsamen Commit und gelieferte Pakete abgleichen. M1f ist in einem anderen Arbeitsstand bereits in Bearbeitung; dieses Audit bewertet ausschließlich veröffentlichten Code und startet diesen Auftrag nicht erneut.
