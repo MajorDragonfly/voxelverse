@@ -705,3 +705,113 @@ msgstr "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spi
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+
+msgid "HOME_TITLE"
+msgstr "HEIMAT & GRUPPE"
+
+msgid "HOME_HUD"
+msgstr "Heimat & Gruppe · N"
+
+msgid "HOME_HUD_INVALID"
+msgstr "Heimat & Gruppe · N · gespeicherten Stand prüfen"
+
+msgid "HOME_HUD_STATUS"
+msgstr "Heimat: {distance} m · Gruppe: {members} · N"
+
+msgid "HOME_HUD_WAITING"
+msgid_plural "HOME_HUD_WAITING_PLURAL"
+msgstr[0] " · {count} wartet am Weg"
+msgstr[1] " · {count} warten am Weg"
+
+msgid "HOME_ESTABLISH"
+msgstr "Heimat hier gründen"
+
+msgid "HOME_RELOCATE"
+msgstr "Heimat an diesen Ort verlegen"
+
+msgid "HOME_EMPTY"
+msgstr "Gründe auf einer freien, trockenen Fläche eine Nestgruppe mit zwei Gefährten deiner Spezies."
+
+msgid "HOME_SUMMARY"
+msgstr "Zwei Gefährten deiner Spezies · Änderungen werden sofort gespeichert."
+
+msgid "HOME_ALL"
+msgstr "Alle Gefährten"
+
+msgid "HOME_MEMBER_ORDER"
+msgstr "{name} · {order}"
+
+msgid "HOME_FOLLOW"
+msgstr "Folgen"
+
+msgid "HOME_WAIT"
+msgstr "Warten"
+
+msgid "HOME_RETURN"
+msgstr "Heimkehren"
+
+msgid "HOME_REST_HINT"
+msgstr "Am Heimatplatz erholst du dich langsam, solange du genug gegessen und getrunken hast. Deine Gefährten gehen zu Fuß und warten vor unpassierbaren Wegen."
+
+msgid "HOME_CLOSE"
+msgstr "Zurück zum Spiel · N / Esc"
+
+msgid "HOME_UNAVAILABLE"
+msgstr "Der Heimatplatz ist gerade nicht verfügbar."
+
+msgid "HOME_FLAT_GROUND_REQUIRED"
+msgstr "Wähle festen, möglichst ebenen Boden."
+
+msgid "HOME_DRY_GROUND_REQUIRED"
+msgstr "Der Heimatplatz muss auf trockenem Boden liegen."
+
+msgid "HOME_INSUFFICIENT_SPACE"
+msgstr "Hier ist zu wenig ebene, trockene Fläche für die Gruppe."
+
+msgid "HOME_OBSTRUCTED"
+msgstr "Bäume oder andere Hindernisse versperren den Heimatplatz."
+
+msgid "HOME_ORDER_UNAVAILABLE"
+msgstr "Dieser Befehl ist gerade nicht verfügbar."
+
+msgid "HOME_REQUIRED"
+msgstr "Lege zuerst einen Heimatplatz fest."
+
+msgid "HOME_MEMBER_UNAVAILABLE"
+msgstr "Dieses Gruppenmitglied ist nicht verfügbar."
+
+msgid "HOME_ESTABLISHED"
+msgstr "Heimatplatz gespeichert. Deine beiden Gefährten gehören dauerhaft zu dieser Nestgruppe."
+
+msgid "HOME_ORDER_SAVED"
+msgstr "Befehl gespeichert."
+
+msgid "HOME_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Die bisherige Gruppe und ihre Befehle bleiben erhalten."
+
+msgid "HOME_INVALID_RECORD"
+msgstr "Der gespeicherte Gruppenstand ist nicht lesbar."
+
+msgid "HOME_UNSUPPORTED_VERSION"
+msgstr "Diese Gruppenversion wird noch nicht unterstützt. Der gespeicherte Stand bleibt erhalten."
+
+msgid "HOME_RADIAL_SURFACE_REQUIRED"
+msgstr "Radiales Gruppenformat benötigt eine Kugeloberfläche."
+
+msgid "HOME_SURFACE_MISMATCH"
+msgstr "Gruppe und aktueller Lebensraum passen nicht zusammen."
+
+msgid "HOME_INVALID_ANCHOR"
+msgstr "Der gespeicherte Heimatplatz ist ungültig."
+
+msgid "HOME_INVALID_MEMBERS"
+msgstr "Die gespeicherten Gruppenmitglieder sind ungültig."
+
+msgid "HOME_INVALID_MEMBER_RECORD"
+msgstr "Ein Gruppenmitglied ist nicht lesbar."
+
+msgid "HOME_INVALID_MEMBER_ORDER"
+msgstr "Identität oder Befehl eines Gruppenmitglieds ist ungültig."
+
+msgid "HOME_INVALID_MEMBER_PLACE"
+msgstr "Name oder Standort eines Gruppenmitglieds ist ungültig."

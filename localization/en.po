@@ -705,3 +705,113 @@ msgstr "Continue the adventure on a spherical planet. Your previous save is pres
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "HOME_TITLE"
+msgstr "HOME & GROUP"
+
+msgid "HOME_HUD"
+msgstr "Home & group · N"
+
+msgid "HOME_HUD_INVALID"
+msgstr "Home & group · N · check saved group"
+
+msgid "HOME_HUD_STATUS"
+msgstr "Home: {distance} m · Group: {members} · N"
+
+msgid "HOME_HUD_WAITING"
+msgid_plural "HOME_HUD_WAITING_PLURAL"
+msgstr[0] " · {count} waiting along the route"
+msgstr[1] " · {count} waiting along the route"
+
+msgid "HOME_ESTABLISH"
+msgstr "Establish home here"
+
+msgid "HOME_RELOCATE"
+msgstr "Move home to this location"
+
+msgid "HOME_EMPTY"
+msgstr "Establish a nest group with two companions of your species on clear, dry ground."
+
+msgid "HOME_SUMMARY"
+msgstr "Two companions of your species · Changes are saved immediately."
+
+msgid "HOME_ALL"
+msgstr "All companions"
+
+msgid "HOME_MEMBER_ORDER"
+msgstr "{name} · {order}"
+
+msgid "HOME_FOLLOW"
+msgstr "Follow"
+
+msgid "HOME_WAIT"
+msgstr "Wait"
+
+msgid "HOME_RETURN"
+msgstr "Return home"
+
+msgid "HOME_REST_HINT"
+msgstr "You recover slowly at home while well fed and hydrated. Your companions travel on foot and wait when a route is blocked."
+
+msgid "HOME_CLOSE"
+msgstr "Back to game · N / Esc"
+
+msgid "HOME_UNAVAILABLE"
+msgstr "Home is currently unavailable."
+
+msgid "HOME_FLAT_GROUND_REQUIRED"
+msgstr "Choose firm, reasonably level ground."
+
+msgid "HOME_DRY_GROUND_REQUIRED"
+msgstr "Home must be on dry ground."
+
+msgid "HOME_INSUFFICIENT_SPACE"
+msgstr "There is not enough level, dry ground here for the group."
+
+msgid "HOME_OBSTRUCTED"
+msgstr "Trees or other obstacles block the home site."
+
+msgid "HOME_ORDER_UNAVAILABLE"
+msgstr "This command is currently unavailable."
+
+msgid "HOME_REQUIRED"
+msgstr "Establish a home first."
+
+msgid "HOME_MEMBER_UNAVAILABLE"
+msgstr "This group member is unavailable."
+
+msgid "HOME_ESTABLISHED"
+msgstr "Home saved. Your two companions are now permanent members of this nest group."
+
+msgid "HOME_ORDER_SAVED"
+msgstr "Command saved."
+
+msgid "HOME_SAVE_FAILED"
+msgstr "Saving failed. Your previous group and its commands are preserved."
+
+msgid "HOME_INVALID_RECORD"
+msgstr "The saved group cannot be read."
+
+msgid "HOME_UNSUPPORTED_VERSION"
+msgstr "This group version is not supported yet. The saved group is preserved."
+
+msgid "HOME_RADIAL_SURFACE_REQUIRED"
+msgstr "This saved group requires a spherical surface."
+
+msgid "HOME_SURFACE_MISMATCH"
+msgstr "The group does not match the current habitat."
+
+msgid "HOME_INVALID_ANCHOR"
+msgstr "The saved home location is invalid."
+
+msgid "HOME_INVALID_MEMBERS"
+msgstr "The saved group members are invalid."
+
+msgid "HOME_INVALID_MEMBER_RECORD"
+msgstr "A group member cannot be read."
+
+msgid "HOME_INVALID_MEMBER_ORDER"
+msgstr "A group member has an invalid identity or command."
+
+msgid "HOME_INVALID_MEMBER_PLACE"
+msgstr "A group member has an invalid name or location."

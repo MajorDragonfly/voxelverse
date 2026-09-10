@@ -1,0 +1,104 @@
+{
+  "package": "ARCH-25 home group DE/EN, part 3",
+  "date": "2026-09-10",
+  "base_commit": "ea900f2e09946660694a9e59399b4680a5655a85",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.837
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.873
+    },
+    {
+      "name": "home_group_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.317
+    },
+    {
+      "name": "localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.32
+    },
+    {
+      "name": "home_group_localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.671
+    },
+    {
+      "name": "localization_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.47
+    },
+    {
+      "name": "spherical_creature_test",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 40.461
+    }
+  ],
+  "home_localization_route_checks": 355,
+  "native_review": {
+    "passed": true,
+    "screenshots": [
+      "home-de-1280x720-100.png",
+      "home-de-1280x720-150.png",
+      "home-de-1920x1080-100.png",
+      "home-de-1920x1080-150.png",
+      "home-de-800x600-100.png",
+      "home-de-800x600-150-empty.png",
+      "home-de-800x600-150-invalid.png",
+      "home-de-800x600-150-orders.png",
+      "home-de-800x600-150.png",
+      "home-en-1280x720-100.png",
+      "home-en-1280x720-150.png",
+      "home-en-1920x1080-100.png",
+      "home-en-1920x1080-150.png",
+      "home-en-800x600-100.png",
+      "home-en-800x600-150-empty.png",
+      "home-en-800x600-150-invalid.png",
+      "home-en-800x600-150-orders.png",
+      "home-en-800x600-150.png"
+    ],
+    "renderer": "gl_compatibility",
+    "scope": "Actual home group panel with real resident physics, GUI commands and save/restart"
+  },
+  "source_checks": {
+    "catalog": "269 messages, 2 languages; generator --check passed",
+    "python_syntax": true,
+    "git_diff_check": true
+  },
+  "included_screenshots": [
+    "home-de-1280x720-100.png",
+    "home-en-1920x1080-150.png",
+    "home-en-800x600-150-orders.png",
+    "home-en-800x600-150-invalid.png"
+  ],
+  "scope": "Actual resident/controller/GUI/save/restart fixture; native software OpenGL/Xvfb; separate real spherical_creature_test; no target hardware or full-game/export claim",
+  "notes": [
+    "Names HOME_FOLLOW {name} and Schließen deliberately test literal names.",
+    "The spherical runtime check preceded the final presentation-only duplicate-warning/scroll and plural fixes; its domain sources are unchanged."
+  ],
+  "source_sha256": {
+    "localization/catalog.json": "a0755b571fb3502ec1f85b22f6f74a98f1cf32dcc4cc1ff15d7f5f7570abb096",
+    "localization/de.po": "888b206aaa2280c08c76455917696fa1792731e612feaabb5deab19d7bcbbcfa",
+    "localization/en.po": "d43aa556a47cfce0200d26714f5c2801c542383b17ca6bb065db52f34d86d00f",
+    "ui/home_group/home_group_panel.gd": "29ecc1bcf7489b8392cf2cae7547ec17e0291a80e27db865fa46ac2191db109e",
+    "ui/home_group/home_group_presentation.gd": "b9dd2c762e40eaabdbe517c16c2cdae455c7e67da69e4a3ad7e3238d62a17ffa",
+    "world/home_group/home_group_controller.gd": "00c60078f2a027f6e624ac298b5c7816954c60b516083bbe66bba8346186c3ac",
+    "world/home_group/home_group_state.gd": "7b2f31fa30716d6c27bf42464a7335c9b2187595d05ae346d0bc485a4343f521",
+    "world/home_group/home_companion.gd": "49f1b5bc0aba0cf17493ef070163c17d3a7f221ac8e4dc6f94378ece8fe92fb1",
+    "tests/home_group_localization_test.gd": "01357fb15dfd1a7c483582fd21a0c2dd151f1b05396469feb4430dbe8727638c",
+    "tools/review_home_group_localization.py": "4031b2a59ab163f524890b7232c9863a9df80321eef184b5bda01b3304bbe5c6"
+  }
+}
