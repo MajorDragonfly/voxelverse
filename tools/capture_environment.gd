@@ -297,6 +297,9 @@ func _capture_landscape_views(spawn: Vector3) -> void:
 
 func _streaming_state(manager: Node) -> Dictionary:
 	var states: Array[Dictionary] = []
+	# The first diagnostic can run before these deferred world nodes exist.
+	var horizon := manager.get_node_or_null("LandscapeHorizon")
+	var forest := manager.get_node_or_null("DistantForest")
 	for chunk: Node in manager.get("loaded_chunks").values():
 		var ecology: Node = chunk.get_node("ProceduralEcosystemV6")
 		states.append({"chunk": str(chunk.get("chunk_coordinates")),
@@ -305,8 +308,8 @@ func _streaming_state(manager: Node) -> Dictionary:
 			"published": ecology.get("_publish_index"), "stats": ecology.call("get_generation_stats")})
 	return {"world_initialized": manager.get("world_initialized"),
 		"pending_chunks": manager.call("get_pending_chunk_count"), "chunks": states,
-		"horizon_ready": manager.get_node("LandscapeHorizon").get("generation_complete"),
-		"forest_ready": manager.get_node("DistantForest").get("generation_complete"),
+		"horizon_ready": horizon != null and bool(horizon.get("generation_complete")),
+		"forest_ready": forest != null and bool(forest.get("generation_complete")),
 		"player_position": str(_scene.get_node("Player").position),
 		"player_dead": _scene.get_node("Player").get("is_dead")}
 

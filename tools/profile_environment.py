@@ -66,6 +66,15 @@ def capture(args, godot):
                     if line.startswith(("REVIEW_PREVIEW ", "HYDROLOGY_RENDER ", "PLANET_TRANSITION_REVIEW ")):
                         print(line, flush=True)
                 if code != 0 or ERROR.search(log):
+                    lines = log.splitlines()
+                    error_contexts = 0
+                    for index, line in enumerate(lines):
+                        if ERROR.search(line):
+                            print("\n".join(part[:1000] for part in lines[index:index + 6]),
+                                  file=sys.stderr, flush=True)
+                            error_contexts += 1
+                            if error_contexts >= 8:
+                                break
                     # Large streaming inventories can push the real failure out
                     # of the retained log tail. Keep the acceptance reason visible.
                     try:
