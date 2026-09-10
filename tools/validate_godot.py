@@ -11,8 +11,10 @@ import tempfile
 import time
 
 if __package__:
+    from .check_validation_contracts import discover_tests, read_contracts, revision
     from .validation_support import isolated_env, validation_editor
 else:
+    from check_validation_contracts import discover_tests, read_contracts, revision
     from validation_support import isolated_env, validation_editor
 
 # These acceptance flows include real 300-second production or 90-second growth
@@ -45,9 +47,10 @@ def validate(args):
     version = subprocess.check_output([args.godot, "--version"], text=True).strip()
     if not version.startswith("4.6.3."):
         sys.exit(f"Expected Godot 4.6.3, got {version}")
-    tests = args.tests if args.tests is not None else [str(p.relative_to(args.project / "tests").with_suffix("")) for p in sorted((args.project / "tests").rglob("*_test.gd"))]
-    commands = [] if args.skip_import else [("import", ["--import"], 180)]
+    tests = args.tests if args.tests is not None else discover_tests(args.project)
+    commands = [("source_contracts", [], 45)]
     if not args.skip_import:
+        commands.append(("import", ["--import"], 180))
         commands.append(("art_sources", [], 120))
     # SceneTree tests load gameplay scenes after autoloads exist, like the game.
     # The full sphere chain includes several cold terrain loads and a native
@@ -68,15 +71,20 @@ def validate(args):
                                         "--", str(seed), stage], 120))
         commands.append(("streaming_cpu", ["--script", "res://tools/benchmark_streaming.gd", "--",
                                            "--report", str(args.output / "streaming_cpu_measurements.json")], 120))
-    results = []
+    results, owners = [], {}
     for name, command, timeout in commands:
         started = time.monotonic()
         log_path = args.output / f"{name.replace(chr(47), chr(95))}.log"
         with tempfile.TemporaryDirectory(prefix="voxelverse-test-") as userdata:
             env = isolated_env(Path(userdata))
             try:
-                argv = ([sys.executable, str(args.project / "tools/art/export_benchmark_source.py"), "--check"]
-                        if name == "art_sources" else [args.godot, "--headless", "--verbose", "--path", str(args.project), *command])
+                if name == "source_contracts":
+                    argv = [sys.executable, str(args.project / "tools/check_validation_contracts.py"),
+                            "--project", str(args.project), "--output", str(args.output / "contracts.json")]
+                elif name == "art_sources":
+                    argv = [sys.executable, str(args.project / "tools/art/export_benchmark_source.py"), "--check"]
+                else:
+                    argv = [args.godot, "--headless", "--verbose", "--path", str(args.project), *command]
                 # Long travel/restart probes expose progress while they run;
                 # strict validation still inspects the complete final log.
                 with log_path.open("wb") as stream:
@@ -89,15 +97,28 @@ def validate(args):
                 status = 124
         log = log_path.read_text(encoding="utf-8", errors="replace")
         failed = status != 0 or ERROR.search(log) is not None
-        result = {"name": name, "passed": not failed, "exit_code": status,
+        kind = ("source_contract" if name in {"source_contracts", "art_sources"} else
+                "editor_import" if name == "import" else "headless_godot")
+        result = {"name": name, "kind": kind, "passed": not failed, "exit_code": status,
                   "seconds": round(time.monotonic() - started, 3)}
+        if name in owners:
+            result["contract"] = owners[name]
         results.append(result)
         print(json.dumps(result), flush=True)
         if failed or name == "streaming_cpu":
             print(log[-12000:], flush=True)
-        if name == "import" and failed:
+        if name in {"source_contracts", "import"} and failed:
             break
-    (args.output / "results.json").write_text(json.dumps({"godot": version, "checks": results}, indent=2) + "\n", encoding="utf-8")
+        if name == "source_contracts":
+            _, owners = read_contracts(args.project)
+            unknown = sorted(set(tests) - owners.keys())
+            if unknown:
+                results.append({"name": "test_selection", "kind": "source_contract", "passed": False,
+                                "error": "Unknown tests: " + ", ".join(unknown)})
+                print(json.dumps(results[-1]), flush=True)
+                break
+    (args.output / "results.json").write_text(json.dumps({"godot": version, "source": revision(args.project),
+        "execution": "headless_source_project", "selected_tests": tests, "checks": results}, indent=2) + "\n", encoding="utf-8")
     return 1 if any(not r["passed"] for r in results) else 0
 
 

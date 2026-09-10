@@ -1,0 +1,290 @@
+{
+  "schema": 1,
+  "contracts": [
+    {
+      "id": "campaign",
+      "title": "Kampagne, Körperidentität und Speichern",
+      "work": "M1e / ARCH-03,04,07,12,18",
+      "tests": [
+        "body_identity_test",
+        "body_travel_test",
+        "campaign_foundation_test",
+        "galaxy_catalog_test",
+        "galaxy_visits_test",
+        "meta_runtime_test",
+        "save_slots_test",
+        "spherical_campaign_contract_test",
+        "spherical_campaign_runtime_test",
+        "spherical_developed_migration_test"
+      ]
+    },
+    {
+      "id": "spherical_gameplay",
+      "title": "Gemeinsame Kugel-Spielschleife",
+      "work": "M1f/M1g / ARCH-08–11,19",
+      "tests": [
+        "spherical_creature_test",
+        "spherical_gameplay_test"
+      ]
+    },
+    {
+      "id": "regions_simulation",
+      "title": "Regionsspeicher, Fernarbeit und Budgets",
+      "work": "M1h / ARCH-13–18",
+      "tests": [
+        "campaign_scaling_test",
+        "far_simulation_test",
+        "region_store_test",
+        "village_navigation_budget_test"
+      ]
+    },
+    {
+      "id": "surface",
+      "title": "Planeten, Oberflächenadapter und Streaming",
+      "work": "M1 / ARCH-05",
+      "tests": [
+        "adaptive_planet_test",
+        "large_planet_geometry_test",
+        "large_planet_lab_test",
+        "large_planet_runtime_test",
+        "living_planet_entry_test",
+        "living_planet_test",
+        "living_surface_materials_test",
+        "planet_scale_migration_test",
+        "planet_sphere_contract_test",
+        "planet_sphere_runtime_test",
+        "planet_streaming_test",
+        "planet_transition_runtime_test",
+        "surface_adapter_contract_test",
+        "surface_adapter_entry_test",
+        "surface_adapter_test",
+        "surface_scale_contract_test",
+        "terrain_transition_test"
+      ]
+    },
+    {
+      "id": "terrain_art",
+      "title": "Gelände, Vegetation, Wasser und Assetanschluss",
+      "work": "M1/M10",
+      "tests": [
+        "asset_pipeline_test",
+        "distant_forest_test",
+        "drainage_network_test",
+        "environment_cluster_test",
+        "environment_playtest_test",
+        "environment_production_test",
+        "planet_diversity_v9_test",
+        "planet_generation_acceptance_test",
+        "underwater_view_test",
+        "water_continuity_test",
+        "water_depth_test",
+        "world_evolution_v2_ci_test",
+        "world_layered_v7_test",
+        "world_runtime_continuity_test"
+      ]
+    },
+    {
+      "id": "creature_body",
+      "title": "Kreaturenentwurf, Körperanschlüsse und Animation",
+      "work": "M2/M3 / ARCH-24",
+      "tests": [
+        "creature_animation_continuity_test",
+        "creature_body_contract_test",
+        "creature_body_fit_test",
+        "creature_builder_v7_test",
+        "creature_editor_v7_runtime_test",
+        "creature_joint_studio_test",
+        "creature_parts_studio_test",
+        "creature_seat_fit_test",
+        "creature_studio_test",
+        "creature_v5_smoke_test",
+        "runtime_geometry_batch_test"
+      ]
+    },
+    {
+      "id": "blueprints",
+      "title": "Gemeinsame Baupläne und Designregister",
+      "work": "M2B / ARCH-23",
+      "tests": [
+        "modular_assembly_framework_test"
+      ]
+    },
+    {
+      "id": "domestic_fauna",
+      "title": "Pflichtarten, Körperrollen und Vorkommen",
+      "work": "D1",
+      "tests": [
+        "domestic_body_evidence_test",
+        "domestic_fauna_catalog_test",
+        "domestic_fauna_runtime_test",
+        "domestic_habitat_recovery_test",
+        "domestic_habitat_runtime_test",
+        "domestic_surface_catalog_test",
+        "domestic_surface_runtime_test"
+      ]
+    },
+    {
+      "id": "domestication",
+      "title": "Individueller Tierbesitz und Zähmung",
+      "work": "D2",
+      "tests": [
+        "domestication_campaign_test",
+        "domestication_contract_test",
+        "domestication_d1_adapter_test",
+        "domestication_lab_test",
+        "domestication_state_test",
+        "domestication_world_test"
+      ]
+    },
+    {
+      "id": "wildlife",
+      "title": "Wildtierverhalten, Sammeln und Trinken",
+      "work": "M4",
+      "tests": [
+        "creature_behavior_gameplay_test",
+        "wildlife_ai_test",
+        "wildlife_ai_world_test",
+        "wildlife_drinking_test",
+        "wildlife_drinking_world_test",
+        "wildlife_foraging_test",
+        "wildlife_foraging_world_test"
+      ]
+    },
+    {
+      "id": "home_progression",
+      "title": "Heimat, eigene Spezies und Fortschritt",
+      "work": "M4/M5 / ARCH-28",
+      "tests": [
+        "behavior_progression_test",
+        "behavior_skill_tree_test",
+        "development_path_test",
+        "gameplay_acceptance_test",
+        "home_group_test",
+        "home_group_world_test",
+        "tribal_economy_progress_test",
+        "tribal_economy_progress_world_test",
+        "tribal_progression_test",
+        "tribal_progression_world_test"
+      ]
+    },
+    {
+      "id": "village",
+      "title": "Dorf, Versorgung, Wachstum und Milchfracht",
+      "work": "M6/D3 / ARCH-10,11,20–22",
+      "tests": [
+        "tribal_age_economy_contract_test",
+        "tribal_age_economy_test",
+        "tribal_age_growth_contract_test",
+        "tribal_age_growth_test",
+        "tribal_age_housing_recovery_test",
+        "tribal_age_husbandry_contract_test",
+        "tribal_age_husbandry_test",
+        "tribal_age_supply_test",
+        "tribal_age_test",
+        "tribal_age_world_test"
+      ]
+    },
+    {
+      "id": "neighbors",
+      "title": "Nachbarstämme und Hilfe",
+      "work": "M6 / ARCH-25",
+      "tests": [
+        "tribal_neighbors_contract_test",
+        "tribal_neighbors_generated_test",
+        "tribal_neighbors_world_test"
+      ]
+    },
+    {
+      "id": "discovery_map",
+      "title": "Scanner, gemeinsame Bücher und Karten",
+      "work": "M4/M10",
+      "tests": [
+        "creature_scan_test",
+        "discovery_journal_test",
+        "domestic_fauna_journal_test",
+        "interface_task7_test",
+        "living_planet_map_test",
+        "minimap_test",
+        "owned_animal_register_test",
+        "research_goals_test",
+        "species_comparison_test",
+        "world_map_test"
+      ]
+    },
+    {
+      "id": "frontend_locale",
+      "title": "Menüs, Eingaben und Sprachwechsel",
+      "work": "L1/M10 / ARCH-25",
+      "tests": [
+        "frontend_test",
+        "input_preferences_test",
+        "localization_test",
+        "menu_input_test",
+        "onboarding_test",
+        "ui_visual_refresh_test"
+      ]
+    },
+    {
+      "id": "audio",
+      "title": "Audioereignisse, Mischung und Lebenszyklus",
+      "work": "M10",
+      "tests": [
+        "audio/animal_action_feedback_test",
+        "audio/audio_expansion_test",
+        "audio/audio_runtime_test",
+        "audio/audio_scene_lifecycle_test",
+        "audio/audio_shutdown_test",
+        "audio/creature_audio_test",
+        "audio/interface_audio_test",
+        "audio/music_runtime_test",
+        "audio/runtime_shutdown_test"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "same_seed_systems",
+      "status": "implemented",
+      "tests": [
+        "body_identity_test",
+        "body_travel_test"
+      ],
+      "scope": "Gleicher Seed in zwei Systemen; getrennte Entdeckungen/Vorräte; A–B–A; Altformat, Schreibfehler und frischer Prozess.",
+      "limits": "Quell-/Headless-Ausführung allein belegt weder native Pakete noch Ziel-PC-Darstellung."
+    },
+    {
+      "id": "over_96_regions",
+      "status": "partial",
+      "tests": [
+        "region_store_test"
+      ],
+      "scope": "1.200 Regionsdatensätze, begrenzte Caches, Eviction, alter Commit, neuer Leser, beschädigte und zukünftige Wurzeln.",
+      "limits": "Store-Prüfstand; kein vollständiger Kampagnensnapshot mit >96 bespielten Regionen und kein Prozessneustart. Globales Manifest/segmentierte Fachbestände bleiben ARCH-13/14."
+    },
+    {
+      "id": "over_256_animals",
+      "status": "pending",
+      "tests": [],
+      "scope": "Mehr als 256 dauerhaft veränderte Tieridentitäten nach Eviction und frischem Prozess erhalten.",
+      "limits": "Gemeinsam mit ARCH-14 implementieren; vorhandene D1-/D2-Prüfungen erfüllen diese Größenabnahme nicht."
+    },
+    {
+      "id": "future_blueprints",
+      "status": "pending",
+      "tests": [],
+      "scope": "Unbekannte neuere Bauplanversion bei Import, Vorschau, Speichern und Rückimport unverändert schützen.",
+      "limits": "ARCH-23 ist parallel vergeben. Dessen exakte gelieferte Prüfungen erst nach Integration eintragen; modular_assembly_framework_test allein belegt dies nicht."
+    },
+    {
+      "id": "near_far_cargo",
+      "status": "partial",
+      "tests": [
+        "far_simulation_test",
+        "body_travel_test",
+        "spherical_gameplay_test"
+      ],
+      "scope": "Ein Simulationsbesitzer, zeitliche Fernarbeit, Pause, blockierte Fracht, Schreibfehler, frischer Prozess und reale lokale D1→D2→D3-Milchkette.",
+      "limits": "Fernmilch nutzt einen D2-Leseport-Prüfstand. Echtes gebundenes Tier in der A–B–A-Reiseszene und lange Abwesenheit bleiben separat offen."
+    }
+  ]
+}
