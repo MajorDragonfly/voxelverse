@@ -160,6 +160,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-14 – Langzeitregister auslagern
 
+**Fachlieferung 10. September (eigener Branch, noch nicht integriert):** [Kampagnen-Tierregister](WORK_ARCH14_POPULATION_REGISTERS.md) mit 384 dauerhaft veränderten Tieren/Nahrungsquellen und einem weiteren Tier. Aktive Bedürfnisreferenzen und Ortsänderungen bleiben nach Checkpoint/Eviction erhalten; Altformat, Schreibfehler und frischer Prozess geprüft. Das separate Planetlabor mit 256 `animal_records` sowie große Entdeckungsbücher bleiben offen.
+
 **Integration 10. September:** Kartenkacheln und bekannte Orte über RegionStore mit begrenztem Cache/Paging integriert (#59/#65); übrige Langzeitregister und die >256-Tier-Abnahme bleiben offen.
 
 - **Ortsregister-Teilpaket geliefert am 10. September 2026:** `feature/arch-14-place-register`, [PR #65](https://github.com/MajorDragonfly/voxelverse/pull/65), aufbauend auf PR #59. 3.105 Orte einschließlich Änderungen/Neustart geprüft; 96 offene Orte und 64 Einträge je UI-Seite. Schema 1/2 wird verlustfrei übernommen. [Vertrag und Integrationshinweise](WORK_ARCH14_PLACE_REGISTER.md), insbesondere zusätzlicher ARCH-13-Archivadapter für Schema 3 vor gemeinsamer Freigabe. Weitere Register bleiben offen.
