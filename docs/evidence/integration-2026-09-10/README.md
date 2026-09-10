@@ -25,3 +25,14 @@ python tools/validate_godot.py --godot /pfad/zu/Godot_4.6.3 --skip-import --skip
 ```
 
 Die Reiseprüfung lässt tatsächlich gespielte Frames kurzzeitig mit zwei Frames pro Sekunde laufen, um offene Fernsimulationszeit zuverlässig auszulösen. Sie verändert keine Kampagnenzeit direkt und baut kein künstliches Tier-/Produktionsregister. Der vollständige Ablauf erzeugt Tier, Tierplatz und Milch über echte Spielbefehle, prüft misslungene Speicherung, Pause, A–B–A, frische Prozesse und die abschließende körperliche Einlagerung der Milch.
+
+## Ergänzende CI-Prüfungen
+
+[ci-followup.json](ci-followup.json) dokumentiert die separaten D1-/D1.1-/D1.2-Neustarts, die korrigierte Scanvorbereitung, konkrete CI-Fehler und offene Export-/Grafikwiederholungen. Die drei Neustartproben bestehen jeweils in zwei getrennten Prozessen:
+
+```sh
+python tools/validate_domestic_fauna.py --probe d1 --godot /pfad/zu/Godot_4.6.3 --output /tmp/voxelverse-d1
+python tools/validate_domestic_fauna.py --probe d11 --godot /pfad/zu/Godot_4.6.3 --output /tmp/voxelverse-d11
+python tools/validate_domestic_fauna.py --probe d12 --godot /pfad/zu/Godot_4.6.3 --output /tmp/voxelverse-d12
+python tools/validate_godot.py --godot /pfad/zu/Godot_4.6.3 --skip-import --skip-main --tests spherical_creature_test --output /tmp/voxelverse-scan
+```

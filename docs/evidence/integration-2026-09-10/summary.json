@@ -64,7 +64,7 @@
     "passed": true,
     "seconds": 118.744
   },
-  "publication_status": "approved_for_upload_and_main_merge",
+  "publication_status": "integrated_in_main",
   "not_run": [
     "native packaged export",
     "graphical target-PC/GPU acceptance",
@@ -75,7 +75,12 @@
     "Only the two affected probes were rerun after correcting their timing assumptions; production gameplay code did not change after 9ba2bec.",
     "Godot results can report a dirty tracked worktree because roadmap/documentation updates were pending during validation. The diagnostic source commits and targeted reruns are recorded separately.",
     "An execution-service restart interrupted a diagnostic retry; another full retry was stopped after its setup needed correction. Neither counts as passed.",
-    "The deliberate failed-save warning is expected; ERROR/SCRIPT ERROR/leak diagnostics remain strict failures."
+    "The deliberate failed-save warning is expected; ERROR/SCRIPT ERROR/leak diagnostics remain strict failures.",
+    "GitHub independently passed the complete source validation. Separate CI probes and native/graphical deadlines are tracked in ci-followup.json; pending native or graphical runs are not counted as passes."
   ],
-  "authorization": "Explicit user approval in the integration conversation"
+  "authorization": "Explicit user approval in the integration conversation",
+  "published_integration_commit": "50fc33eaa440f00e50980ed1fa995e2f95575138",
+  "main_merge_commit": "08f1208b36555220343d2ad07ed182e1783599f4",
+  "integration_pull_request": 76,
+  "ci_followup": "ci-followup.json"
 }

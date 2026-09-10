@@ -106,7 +106,8 @@ func read_process(world: Node) -> void:
 		expect(world.records[id].fauna == reference.old.bodies[id].fauna, "Old M1d animal IDs/designs changed")
 		await populate(world)
 		world.set_paused(true)
-		expect(world.records[id].fauna_catalog.schema == 2, "Old sphere did not receive D1 contract")
+		expect(world.records[id].fauna_catalog.schema == Catalog.ROLE_SCHEMA \
+			and world.records[id].fauna_catalog.role_policy == Catalog.ROLE_POLICY, "Old sphere did not receive current fauna role contract")
 	expect(world.save_lab(), "Save upgraded spherical schema 1")
 	expect(Save.read(world.store_path).data.get("schema") == Save.SCHEMA, "Old spherical header did not upgrade")
 	for kind in ["save", "catalog", "surface", "search", "evidence", "individual", "food", "generation"]:

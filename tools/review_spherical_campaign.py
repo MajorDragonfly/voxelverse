@@ -26,6 +26,7 @@ def main():
             text=True, encoding="utf-8", errors="replace", timeout=240)
     (output / "runtime.log").write_text(result.stdout, encoding="utf-8")
     if result.returncode or ERROR.search(result.stdout) or "SPHERICAL_CREATURE_PASSED" not in result.stdout:
+        print(result.stdout, flush=True)
         raise RuntimeError(f"Spherical graphical acceptance failed; inspect {output / 'runtime.log'}")
     if len(list(output.glob("*.png"))) != 3:
         raise RuntimeError("Graphical acceptance did not produce all three actual scene captures.")
