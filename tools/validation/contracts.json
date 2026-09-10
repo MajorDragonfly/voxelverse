@@ -13,6 +13,7 @@
         "galaxy_visits_test",
         "meta_runtime_test",
         "phase_handoff_test",
+        "save_participants_test",
         "save_slots_test",
         "spherical_campaign_contract_test",
         "spherical_campaign_runtime_test",
