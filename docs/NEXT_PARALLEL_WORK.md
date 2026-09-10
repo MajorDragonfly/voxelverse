@@ -6,6 +6,8 @@ Stand: 9. September 2026, nach der zweiten Integrationsrunde. Diese Aufträge er
 
 ## Aktueller gemeinsamer Arbeitsstand
 
+**ARCH-01, Lieferung vom 10. September:** [Modulanschlüsse](MODULE_CONTRACTS.md) und [Übergabe](WORK_ARCH01_MODULE_CONTRACTS.md) auf `main` `ea900f2e09946660694a9e59399b4680a5655a85`; [PR #49](https://github.com/MajorDragonfly/voxelverse/pull/49), Integration offen. Das vollständige Besitzerinventar ist geliefert; ARCH-03/04 sind bereits zuvor integriert. Den historischen Auftrag „ARCH-01 und anschließend ARCH-03“ unten nicht erneut beginnen. ARCH-02/05/20/23/25/29 sind laut Arbeitsvergabe vom 10. September in anderen Chats; gemeinsame Dokumentänderungen beim Merge einzeln abgleichen.
+
 M1f, die lokale M1g-Kette, entwickelte Kopiermigration und regionaler Population-Speicher sind über PR #45 integriert. Die anschließende Runde liefert Körper-ID-Speicherung, gemeinsame Dorfregeln, begrenzte Navigationsarbeit, Fernsimulation und sichere Körperwechsel. Vor weiterer Arbeit [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md) lesen. ARCH-03/04 nicht erneut entwickeln. ARCH-13/14 (kleines globales Manifest, segmentierter Langzeitbestand), die umfassende Langzeit-/Ziel-PC-Messung und ARCH-19 bleiben die nächsten Skalierungsgrenzen. Die ursprünglichen Aufträge unten sind die Gesamtplanung; ihr früherer Status ist keine neue Arbeitsanweisung.
 
 ## Architekturprüfung: Aufträge vor dem Start konkret wählen

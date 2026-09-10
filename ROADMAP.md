@@ -8,6 +8,8 @@ Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickelt
 
 ## Architekturprüfung und nächste verbindliche Arbeitsschritte
 
+**ARCH-01 geliefert am 10. September (Integration offen, [PR #49](https://github.com/MajorDragonfly/voxelverse/pull/49)):** [Datenbesitzer und Modulanschlüsse](docs/MODULE_CONTRACTS.md) erfassen den Code auf `main` `ea900f2e09946660694a9e59399b4680a5655a85`: IDs/Versionen, Lese- und Befehlswege, Save-/Ladeanschlüsse, Lebenszyklen und gemeinsame Transaktionen. Für Folgepakete zuerst dort den vorhandenen Anschluss wählen. [Prüfumfang](docs/WORK_ARCH01_MODULE_CONTRACTS.md); reine Dokumentation, keine zusätzliche Spiel- oder Leistungsfreigabe.
+
 **Ergebnis vom 9. September 2026:** Die Basis bleibt verwendbar; ein kompletter Neustart ist nicht begründet. Zusätzliche Inhalte können vorhandene Dienste nutzen. Mehrere Siedlungen, lange Reisen und neue Epochen benötigen jedoch gezielte Arbeiten an Körperidentitäten, Ortsanschlüssen, Regionsspeicherung, Simulationsübergaben und Produktionsverträgen. „Immer neue Funktionen ohne Umbau anhängen“ ist im heutigen Stand keine belastbare Zusage.
 
 Der [Architekturbericht](docs/ARCHITECTURE_SCALABILITY_AUDIT.md) belegt die Befunde am veröffentlichten `main`-Commit `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7`. Der [ausführbare Architektur-Backlog](docs/ARCHITECTURE_BACKLOG.md) zerlegt die bestehenden Meilensteine in **30 Aufgaben mit Abhängigkeiten, Zuständigkeiten, Teilschritten und Abnahme**. Diese Aufgaben sind geplant; durch die Prüfung wurde kein Spielcode umgebaut. Neuere Fachlieferungen vor Arbeitsbeginn abgleichen und fertige Anschlüsse nicht nochmals erfinden.

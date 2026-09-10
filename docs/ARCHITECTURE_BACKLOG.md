@@ -2,7 +2,7 @@
 
 Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7` auf veröffentlichtem `main`. [Befunde und Grenzen](ARCHITECTURE_SCALABILITY_AUDIT.md), [Roadmap](../ROADMAP.md), [Kugelumzug](SPHERICAL_CAMPAIGN_MIGRATION.md) und [Arbeitsverteilung](NEXT_PARALLEL_WORK.md) zusammen lesen.
 
-**Alle ARCH-Aufgaben sind geplant, keine davon ist durch dieses Dokument implementiert oder abgenommen.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Vor Arbeitsbeginn den aktuellen veröffentlichten Stand vergleichen: Bereits durch einen Fachchat gelieferte Arbeit mit Commit und Nachweis zuordnen, nicht nochmals implementieren. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
+**Das ursprüngliche Audit plante die ARCH-Aufgaben; aktuelle Lieferstände stehen bei den jeweiligen Aufträgen und in der Zuordnung unten.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Vor Arbeitsbeginn den aktuellen veröffentlichten Stand vergleichen: Bereits durch einen Fachchat gelieferte Arbeit mit Commit und Nachweis zuordnen, nicht nochmals implementieren. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
 
 ## Zuordnung der laufenden Implementierung
 
@@ -37,11 +37,11 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-01 – Datenbesitzer und Modulvertrag erfassen
 
-- **Reserviert am 10. September 2026:** `feature/arch-01-module-contracts`, Basis `ea900f2e09946660694a9e59399b4680a5655a85`; Status **in Arbeit**. Umfang: Codeinventar und Anschlussdokumentation. ARCH-02/05/20/23/25/29 laufen in anderen Chats.
+- **Lieferung vom 10. September 2026:** `feature/arch-01-module-contracts`, Basis `ea900f2e09946660694a9e59399b4680a5655a85`; Status **geliefert, Integration offen** ([PR #49](https://github.com/MajorDragonfly/voxelverse/pull/49)). [Datenbesitzer und Modulanschlüsse](MODULE_CONTRACTS.md), [Übergabe und Prüfumfang](WORK_ARCH01_MODULE_CONTRACTS.md). Reines Codeinventar; ARCH-02/05/20/23/25/29 bleiben getrennt.
 - **Zuordnung:** M0, M1e. **Vorher:** aktueller gemeinsamer Commit. **Bereich:** `core/campaign`, Speicher-/Fachverträge; zunächst Dokumentation.
-- [ ] Kampagne, Körper, Regionen, Entwürfe, Heimat, D1, D2, Dorf, Nachbarn, Karte und Fortschritt mit genau einem autoritativen Besitzer erfassen.
-- [ ] Pro Modul ID, Schema, Lesezugriff, Befehle, Validator/Migration, Speicherteilnahme, Lebenszyklus und benötigte atomare Verbuchungen dokumentieren.
-- [ ] Lesekopie, veränderbaren Zustand, Szenenabbild und Cache unterscheiden; Sprache/Icons gehören zur Präsentation, Besitz nicht zur UI.
+- [x] Kampagne, Körper, Regionen, Entwürfe, Heimat, D1, D2, Dorf, Nachbarn, Karte und Fortschritt mit genau einem autoritativen Besitzer erfassen.
+- [x] Pro Modul ID, Schema, Lesezugriff, Befehle, Validator/Migration, Speicherteilnahme, Lebenszyklus und benötigte atomare Verbuchungen dokumentieren.
+- [x] Lesekopie, veränderbaren Zustand, Szenenabbild und Cache unterscheiden; Sprache/Icons gehören zur Präsentation, Besitz nicht zur UI.
 - **Fertig:** Ein neuer Verbraucher kann anhand der Tabelle seinen Anschluss finden; kein Modul besitzt dieselben Tiere/Vorräte ein zweites Mal. Keine neue Dienststruktur allein für die Dokumentation bauen.
 
 ### ARCH-02 – Messroute und vorläufige Budgets
