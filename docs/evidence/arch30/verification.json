@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "scope": "ARCH-30 data design; no runtime/save/phase integration",
+  "source_commit": "cddb4dff8fbabe1feabdbab14219c10f1af0c06a",
+  "source_tree": "0d141560bf42941a991c2ee0a090d1243367fe60",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "contract_proof_passed": true,
+  "runtime_ready": false,
+  "godot_processes": 3,
+  "results": [
+    {
+      "integration_gate": "system_coordinate_save_precision",
+      "ready": false,
+      "required": "lossless double round trip through shared save owner"
+    },
+    {
+      "checks": 5,
+      "failures": [],
+      "passed": true,
+      "scope": "design_fixture",
+      "test": "expedition_contract"
+    },
+    {
+      "checks": 5,
+      "failures": [],
+      "passed": true,
+      "scope": "design_fixture",
+      "test": "expedition_contract"
+    },
+    {
+      "checks": 312,
+      "failures": [],
+      "passed": true,
+      "scope": "design_fixture",
+      "test": "expedition_contract"
+    }
+  ],
+  "limits": [
+    "Shared writer precision gate is open.",
+    "No real ship flight or campaign save participation.",
+    "ARCH-29 registry entry must be added when integrating PR 53."
+  ]
+}
