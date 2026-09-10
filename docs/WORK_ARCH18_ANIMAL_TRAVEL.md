@@ -57,4 +57,10 @@ Die Diagnose schreibt vor der Reise eine echte Quellkopie `animal_travel_fixture
 
 ## Ergebnis
 
-In Arbeit; Ergebnisse und konkrete Implementierungsfassung werden nach dem tatsächlichen Lauf ergänzt.
+Der abgegrenzte Teilauftrag ist lokal bestanden. Die vollständige Neu-Spiel-Kette einschließlich tatsächlicher Milchlieferung bestand in **406,726 Sekunden** mit Godot **4.6.3.stable.official.7d41c59c4**, Linux/headless. Der Träger gab seine Milchladung ab; Bestand plus dokumentierter Milchverbrauch stiegen. A → B → A erhielt Tier, Gehege, Bewohner, Teilproduktion und Einmaligkeitsbelege; ein neuer Prozess auf B und nach Rückkehr erzeugte keine Offlineproduktion.
+
+Zusätzlich bestanden: Import (5,995 s), Art-Quellen (1,875 s), bestehende Körperreise (108,825 s), bestehende Fernsimulation (2,482 s) und Wiederholung der echten erhaltenen Tier-/Milchszene mit physischem Hineinführen ins Gehege (129,148 s). Der ursprüngliche Fehler wurde mit der erweiterten Probe gegen den unveränderten Abflugcode nach 302,874 Sekunden reproduziert. Die beiden bestehenden Regressionen prüfen denselben unveränderten Laufzeitfix wie der abschließende Gesamtlauf.
+
+Geprüfter abschließender Codecommit: `e7355d4aa37392760a28fc5442ca03d6fc8b8a48`; veröffentlichter identischer Codebaum: `b0dc16aac95ab38c6962fabca3fccf4f732d8340`, Tree `7524802ebecbb54613f7a2f84e07383e42299b5d`. Der Unterschied der Commit-IDs entsteht durch die Übertragung mit dem verbundenen GitHub-Zugang; die Bäume wurden exakt verglichen. Der nachfolgende Nachweiscommit ändert nur Dokumentation und Ergebnisse.
+
+Maschinenlesbare Ergebnisse stehen in [ARCH18_ANIMAL_TRAVEL_RESULTS.json](ARCH18_ANIMAL_TRAVEL_RESULTS.json), die Stufen des Gesamtlaufs in [spherical-gameplay-stages.log](evidence/arch18/spherical-gameplay-stages.log), die erhaltene echte Wiederholung in [animal-travel-replay.log](evidence/arch18/animal-travel-replay.log). Kein lokaler Nachweis für native Exporte oder Ziel-PC/FPS; deren bestehende CI-Einstiege verwenden dieselbe erweiterte Probe. Gemeinsame Integration und die übrigen ARCH-16/18-Langzeitaufgaben bleiben separat.
