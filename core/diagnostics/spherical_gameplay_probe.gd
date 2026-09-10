@@ -220,15 +220,21 @@ func _animal_chain(tribe: Node) -> void:
 	blocker.collision_layer = 2
 	var shape := CollisionShape3D.new()
 	var box := BoxShape3D.new()
-	box.size = Vector3(3, 3, 3)
+	box.size = Vector3(3, 3, 0.25)
 	shape.shape = box
 	blocker.add_child(shape)
 	tree.current_scene.add_child(blocker)
-	blocker.global_transform = Transform3D(Space.frame(self, tribe.actors[carrier].global_position), Space.offset(self, tribe.actors[carrier].global_position, Vector3(0, 1, 0)))
+	# Block the route ahead. Spawning a solid box around the carrier can eject
+	# it underneath the floor, which is not a reachable-path obstruction.
+	var carrier_position: Vector3 = tribe.actors[carrier].global_position
+	var up: Vector3 = Space.up(self, carrier_position)
+	var direction: Vector3 = (tribe.anchor() - carrier_position).slide(up).normalized()
+	blocker.global_transform = Transform3D(Space.frame(self, carrier_position, direction), carrier_position + direction * 0.9 + up)
 	await tree.physics_frame
 	tribe.issue_order("resume")
 	await _until(func() -> bool: return tribe.member_record(carrier).blocked, 5000)
 	_expect(tribe.member_record(carrier).blocked and tribe.member_record(carrier).cargo == "milk" and tribe.village().stock.milk == stock, "Blocked path delivered or lost milk.")
+	if not _expect_step(tribe.home.has_ground(tribe.actors[carrier].global_position), "Carrier obstacle displaced the resident off the real floor."): return
 	tribe.issue_order("wait")
 	blocker.queue_free()
 	await tree.physics_frame

@@ -35,7 +35,7 @@ Das geführte Tier wartet innerhalb von 1,2 Metern um die Gehegemitte. Damit ble
 5. Während tatsächlichen Spielens auf B mindestens fünf weitere Produktionssekunden mit Futterverbrauch durch den vorhandenen Scheduler nachweisen. Pause hält die Kampagne und die Fernproduktion an.
 6. Auf B speichern und einen neuen Engineprozess starten: vollständiger entfernter Körper einschließlich D2, Gehege, begonnener Produktion und Milchfracht bleibt identisch; keine Offlineproduktion und kein fremdes Tier auf B.
 7. Rückkehr A: Produktions-/Futter-/Lager-/Quittungsstand vor Wiederaufnahme unverändert; genau ein körperlich dargestelltes eigenes Tier, dieselben Bewohner und derselbe Tierplatz.
-8. Bestehende lokale Neustartprüfung weiterführen und die Milch tatsächlich abliefern. Die Prüfbedingung verlangt nun geleerte Trägerfracht und gestiegenen Milchbestand (einschließlich nachweislich verzehrter Milch). `milk_received` allein kennzeichnet die Batchannahme und reicht dafür nicht aus.
+8. Bestehende lokale Neustartprüfung weiterführen und die Milch tatsächlich abliefern. Das Kollisionshindernis steht vor dem Träger im Weg. Der bisherige Prüfwürfel umschloss seinen Körper und konnte ihn unter die Bodenfläche drücken; der neue Aufbau bestätigt ausdrücklich erhaltenen Bodenkontakt. Die Prüfbedingung verlangt nun geleerte Trägerfracht und gestiegenen Milchbestand (einschließlich nachweislich verzehrter Milch). `milk_received` allein kennzeichnet die Batchannahme und reicht dafür nicht aus.
 
 Die Route ist Teil des vorhandenen `spherical_gameplay_test` und des bereits vorhandenen nativen `--sphere-gameplay-smoke`-Einstiegs. Keine doppelte lange Testkette wird zusätzlich in die CI eingetragen. Der Zeitrahmen für genau diesen Quellen-/Paketprobe beträgt wegen zusätzlicher Reisen und Neustart 900 Sekunden; die begrenzten Einzelwartezeiten und sonstigen Prüflimits bleiben erhalten.
 
@@ -50,7 +50,7 @@ Die Diagnose schreibt vor der Reise eine echte Quellkopie `animal_travel_fixture
 
 ## Integration und Grenzen
 
-- Bei gemeinsamer Integration mit PR #53 dessen Vertragsgate und Ergebnisfelder behalten; in `tools/validate_godot.py` nur das spezifische Zeitlimit der erweiterten Kugelkette ergänzen. Die bestehende Test-ID bleibt registriert.
+- Bei gemeinsamer Integration mit PR #53 dessen Vertragsgate und Ergebnisfelder behalten; in `tools/validate_godot.py` nur das spezifische Zeitlimit der erweiterten Kugelkette ergänzen. Die bestehende Test-ID bleibt registriert. Im bereits vorhandenen Szenario `near_far_cargo` kann die Integration anschließend den Nachweis für das echte Tier bei A → B → A ergänzen; die Grenzen für lange Abwesenheiten bleiben offen.
 - ARCH-20 verändert die Produktionsverträge; die erweiterte Kette muss nach Übernahme jenes exakten fertigen Commits gemeinsam erneut laufen.
 - Die Probe verlangt kein Schiff und transportiert das Tier nicht zum Zielplaneten: Es bleibt als Eigentum am Gehege auf A, arbeitet dort entfernt weiter und wird bei Rückkehr wieder dargestellt.
 - Keine Größenabnahme für viele Siedlungen/Regionen, keine lange Abwesenheit über Spieljahre und kein Ziel-PC-/Grafik-/FPS-Nachweis.
