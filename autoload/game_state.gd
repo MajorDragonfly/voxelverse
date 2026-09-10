@@ -22,6 +22,7 @@ const Registry = preload("res://core/campaign/body_registry.gd")
 const STATE_SCHEMA: int = Registry.STATE_SCHEMA
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
+const PhaseHandoff = preload("res://core/campaign/phase_handoff.gd")
 
 
 const PHASE_ABILITIES: Dictionary = {
@@ -110,19 +111,7 @@ func record_campaign_event(event: GameEvent) -> bool:
 
 
 func get_phase_transition_blockers(new_phase: int) -> Array[String]:
-	if new_phase != current_phase + 1 or not PHASE_ABILITIES.has(new_phase):
-		return ["Only the next supported phase can be entered."]
-	if new_phase == Phase.TRIBE:
-		var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
-		if tribe != null:
-			return tribe.blockers()
-	if new_phase in [2, 3]:
-		var epoch: Dictionary = preload("res://core/progression/civilization_contract.gd").describe(campaign.data, active_body_id, current_phase, new_phase)
-		var reasons: Array[String] = []
-		reasons.assign(epoch["blockers"])
-		return reasons
-	# Later phases still require their own playable loop and explicit handoff.
-	return ["The gameplay and handoff for this phase are not implemented yet."]
+	return PhaseHandoff.blockers(self, new_phase)
 
 
 func initialize_world_seed(

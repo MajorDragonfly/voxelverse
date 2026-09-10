@@ -20,6 +20,7 @@ const Designs = preload("res://core/persistence/design_store.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Campaign = preload("res://core/campaign/campaign_state.gd")
 const GameEvent = preload("res://core/campaign/game_event.gd")
+const PhaseHandoff = preload("res://core/campaign/phase_handoff.gd")
 const Progression = preload("res://autoload/progression_service.gd")
 const FaunaCatalog = preload("res://world/fauna/domestication/planet_fauna_catalog.gd")
 const Exploration = preload("res://core/map/exploration_atlas.gd")
@@ -873,38 +874,31 @@ func request_phase_transition(new_phase: int, confirmation_token: String = "") -
 	if _transition_busy or _saving:
 		return false
 	var state: Node = get_node("/root/GameState")
-	var blockers: Array = state.get_phase_transition_blockers(new_phase)
-	if not blockers.is_empty():
-		_report_failure(str(blockers[0]))
-		return false
-	var runtime: Node = get_tree().get_first_node_in_group(&"tribe_controller")
-	var handoff: Dictionary = runtime.confirmed_handoff(confirmation_token) if runtime != null else {}
-	if new_phase != 1 or handoff.is_empty():
-		_report_failure("Bestätige den Wechsel im Fenster für das Stammeszeitalter erneut.")
+	var prepared: Dictionary = PhaseHandoff.prepare(state, new_phase, confirmation_token)
+	if not prepared.ok:
+		_report_failure(prepared.message)
 		return false
 	var campaign = state.campaign
-	var transition_id: String = Ids.scoped("transition", campaign.data["id"], "0:1")
-	if campaign.data["completed_transitions"].has(transition_id):
-		return false
 	var before: Dictionary = campaign.export_state()
 	_transition_busy = true
-	state.get_current_body_record()["tribe"] = handoff
-	state.current_phase = 1
-	var event = campaign.next_event(GameEvent.Kind.PHASE_TRANSITION, campaign.data["player_faction_id"], 1, "completed")
-	campaign.accept_event(event, 1)
-	campaign.data["completed_transitions"][transition_id] = {"id": transition_id, "from": 0, "to": 1,
-		"confirmed": true, "tribe_id": handoff["id"], "body_id": handoff["body_id"]}
+	if not campaign.import_state(prepared.campaign):
+		_transition_busy = false
+		_report_failure(campaign.last_error)
+		return false
+	state.current_phase = prepared.to
 	# One atomic replacement owns both the phase and the full village. A crash
 	# can load only the old creature snapshot or this complete tribal snapshot.
 	var saved: bool = save_now()
 	if not saved:
-		state.current_phase = 0
+		state.current_phase = prepared.from
 		campaign.import_state(before)
 	_transition_busy = false
 	if not saved:
 		return false
-	state.phase_changed.emit(1)
-	state.campaign_event.emit(event.to_dict())
+	# Existing phase listeners activate camera/group control only after commit;
+	# they also reconstruct it on load once terrain/navigation are ready.
+	state.phase_changed.emit(prepared.to)
+	state.campaign_event.emit(prepared.event)
 	return true
 
 
