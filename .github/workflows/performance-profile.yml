@@ -6,6 +6,9 @@ on:
     paths:
       - "tools/profile_performance.py"
       - "tools/performance_route_probe.gd"
+      - "tools/performance_save_probe.gd"
+      - "tools/performance_stats.gd"
+      - "tests/performance_measurement_test.gd"
       - "tools/validation_support.py"
       - "tools/benchmark_streaming.gd"
       - "tools/validate_godot.py"
@@ -30,12 +33,21 @@ jobs:
         run: |
           python -m unittest discover -s tests/tooling -p '*_test.py' -v
           python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --skip-main --tests --output "$RUNNER_TEMP/performance-import"
-      - name: Measure three world visits and streaming routes
+      - name: Check measurement semantics
+        run: >-
+          python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --skip-import --skip-main --tests performance_measurement_test
+          --output "${{ runner.temp }}/performance-tests"
+      - name: Measure two short physical spherical routes (not target-PC acceptance)
         run: >-
           python tools/profile_performance.py
           --godot "${{ steps.engine.outputs.godot }}"
-          --cycles 3 --renderer headless
+          --cycles 2 --renderer headless --walk-seconds 12
           --output "${{ runner.temp }}/performance-route"
+      - name: Measure 1-10-100 bodies and growing regional deltas
+        run: >-
+          python tools/profile_performance.py --godot "${{ steps.engine.outputs.godot }}"
+          --mode saves --output "${{ runner.temp }}/performance-saves"
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -44,4 +56,6 @@ jobs:
           path: |
             ${{ runner.temp }}/performance-route
             ${{ runner.temp }}/performance-import
+            ${{ runner.temp }}/performance-tests
+            ${{ runner.temp }}/performance-saves
           retention-days: 7
