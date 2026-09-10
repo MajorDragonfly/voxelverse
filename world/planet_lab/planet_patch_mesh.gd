@@ -19,8 +19,11 @@ static func build_arrays(tile: Dictionary, surface: RefCounted) -> Dictionary:
 	var has_water: bool = false
 	for y in range(STRIDE):
 		for x in range(STRIDE):
-			var uv: Vector2 = tile.uv + Vector2(x, y) * (float(tile.width) / CELLS)
-			var precise: Array = Cube.direction(tile.face, uv.x, uv.y)
+			# Scalar doubles retain individual cells even near the upper radius
+			# limit. A Vector2 UV rounds distinct vertices together at high LOD.
+			var u: float = float(tile.uv.x) + x * (float(tile.width) / CELLS)
+			var v: float = float(tile.uv.y) + y * (float(tile.width) / CELLS)
+			var precise: Array = Cube.direction(tile.face, u, v)
 			var d: Vector3 = Cube.vector(precise)
 			var height: float = surface.height_precise(precise)
 			var water_level: float = surface.water_level_precise(precise) if surface.has_method("water_level_precise") else 0.0

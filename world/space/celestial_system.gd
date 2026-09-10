@@ -2,6 +2,7 @@ extends RefCounted
 class_name CelestialSystem
 
 const Profile = preload("res://world/space/celestial_body_profile.gd")
+const SurfaceSupport = preload("res://world/surface/surface_support.gd")
 var bodies: Dictionary = {}
 var elapsed: float = 0.0
 var binary: bool = false
@@ -69,7 +70,7 @@ func landable_ids() -> Array[String]:
 	if not catalog_id.is_empty():
 		var result: Array[String] = []
 		for id: String in bodies:
-			if bodies[id].get("landable", false):
+			if bodies[id].get("landable", false) and SurfaceSupport.inspect(bodies[id]).ok:
 				result.append(id)
 		return result
 	return REAL_LANDABLE if real_scale else LANDABLE

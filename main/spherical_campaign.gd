@@ -20,8 +20,9 @@ var _sun: DirectionalLight3D
 func _ready() -> void:
 	var state := get_node("/root/GameState")
 	var body: Dictionary = state.get_current_body_record()
-	if body.get("surface_mode") != Cube.MODE or not Surface.validate(body).is_empty():
-		get_node("/root/SessionFlow").call_deferred("_fail_loading", "Dieser Spielstand besitzt keinen gültigen Kugelkontext.")
+	var surface_problem: String = Surface.validate(body)
+	if body.get("surface_mode") != Cube.MODE or not surface_problem.is_empty():
+		get_node("/root/SessionFlow").call_deferred("_fail_loading", surface_problem if not surface_problem.is_empty() else "Dieser Spielstand besitzt keinen gültigen Kugelkontext.")
 		return
 	var saves := get_node("/root/SaveGameService")
 	var design: Dictionary = Blueprint.load_best_available()

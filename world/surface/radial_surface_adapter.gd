@@ -4,6 +4,7 @@ extends RefCounted
 ## Vector3 before subtracting the origin. Bind a root once, never both an
 ## ancestor and its descendants; registered roots must have unscaled parents.
 const Cube = preload("res://world/space/cube_sphere.gd")
+const Support = preload("res://world/surface/surface_support.gd")
 signal origin_shifted(shift: Vector3)
 var terrain: Node3D
 var attached: Dictionary = {}
@@ -18,6 +19,27 @@ func _init(value: Node3D) -> void:
 func sample(address: Dictionary) -> Dictionary:
 	assert(Cube.valid(address, terrain.surface.body.id))
 	return terrain.surface.sample(address)
+
+
+func query(address: Dictionary, capability: String = "sample") -> Dictionary:
+	# Public checked entry for new consumers; existing internal methods keep
+	# their contract assertions. No fallback to another body or world-Y.
+	if not is_instance_valid(terrain) or terrain.surface == null:
+		return Support.failure("surface_unavailable")
+	if not Cube.valid(address): return Support.failure("invalid_address")
+	if address.body_id != terrain.surface.body.id: return Support.failure("foreign_body")
+	var value: Variant
+	match capability:
+		"sample": value = sample(address).duplicate(true)
+		"local_position": value = to_local(address)
+		"up": value = up_at(address)
+		"frame": value = frame_at(address)
+		"origin": value = terrain.origin.duplicate()
+		"collision":
+			if not collision_ready(address): return Support.failure("ground_not_ready")
+			value = true
+		_: return Support.failure("unsupported_capability", {"capability": capability})
+	return {"ok": true, "code": "ready", "schema": Support.SCHEMA, "parameters": {}, "value": value}
 
 
 func to_local(address: Dictionary) -> Vector3:
@@ -66,9 +88,8 @@ func unbind(id: String) -> void:
 
 
 func collision_ready(address: Dictionary) -> bool:
-	var owner: Dictionary = terrain.layout.find_at(address.face, address.u, address.v, terrain.leaves)
-	return not owner.is_empty() and terrain.active.has(owner.id) \
-		and owner.width * terrain.surface.body.radius / 16.0 <= 4.0
+	return is_instance_valid(terrain) and terrain.surface != null and Cube.valid(address, terrain.surface.body.id) \
+		and terrain.ground_ready(Cube.cartesian(address, terrain.surface.body.radius))
 
 
 func attempt_step(body: CharacterBody3D, motion: Vector3) -> void:

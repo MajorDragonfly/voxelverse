@@ -5,11 +5,12 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Profile = preload("res://world/space/celestial_body_profile.gd")
 const Factory = preload("res://world/surface/planet_surface_factory.gd")
 const Atlas = preload("res://core/map/exploration_atlas.gd")
+const Support = preload("res://world/surface/surface_support.gd")
 const SCHEMA: int = 1
 const LEGACY: String = "legacy_plane_v9"
 const GENERATION: String = "living_planet_v2"
 const DEFAULT_RADIUS: float = 6371000.0
-const MAX_WALKABLE_RADIUS: float = 100000000.0
+const MAX_WALKABLE_RADIUS: float = Support.MAX_RADIUS
 const SCENE: String = "res://main/spherical_campaign.tscn"
 
 static func descriptor(body: Dictionary) -> Dictionary:
@@ -20,7 +21,7 @@ static func descriptor(body: Dictionary) -> Dictionary:
 	return result
 
 static func create(body: Dictionary, radius: float = DEFAULT_RADIUS) -> Dictionary:
-	if not number(radius, 50000.0, MAX_WALKABLE_RADIUS): return {}
+	if not Support.radius_support(radius, true).ok: return {}
 	var result: Dictionary = body.duplicate(true)
 	result.surface_mode = Cube.MODE
 	result.surface_context = {"schema": SCHEMA, "mode": Cube.MODE, "generation": GENERATION,
@@ -57,13 +58,15 @@ static func landing_problem(surface: RefCounted, address: Dictionary) -> String:
 static func unsupported(body: Dictionary) -> bool:
 	if body.get("surface_mode") not in [LEGACY, Cube.MODE]: return true
 	var value: Variant = body.get("surface_context")
-	if value is Dictionary and number(value.get("radius"), MAX_WALKABLE_RADIUS + 1.0, 1.0e10): return true
+	if value is Dictionary and Support.radius_support(value.get("radius"), true).code == "radius_too_large": return true
 	return value is Dictionary and (value.get("schema") != SCHEMA or value.get("mode") != Cube.MODE or
 		(value.get("generation") != GENERATION or value.get("terrain_revision") != 4) and
 		(value.get("generation") != "living_planet_v1" or value.get("terrain_revision") != 3))
 
 static func validate(body: Dictionary) -> String:
-	if body.get("surface_context") is Dictionary and number(body.surface_context.get("radius"), MAX_WALKABLE_RADIUS + 1.0, 1.0e10): return "Dieser Körper ist für die derzeitige Bodenkollision zu groß; seine Daten bleiben unverändert."
+	if body.get("surface_context") is Dictionary:
+		var support: Dictionary = Support.radius_support(body.surface_context.get("radius"), true)
+		if not support.ok: return Support.error_text(support)
 	if unsupported(body): return "Unbekannter Oberflächenvertrag; Spielstand bleibt geschützt."
 	if body.surface_mode == LEGACY:
 		return "Flachwelt mit widersprüchlichem Kugelkontext." if body.has("surface_context") else ""
@@ -73,6 +76,8 @@ static func validate(body: Dictionary) -> String:
 		return "Ungültige Körperidentität oder Seed."
 	if not number(value.get("radius"), 50000.0, MAX_WALKABLE_RADIUS) or not number(value.get("gravity"), 0.1, 100.0):
 		return "Ungültiger Radius oder ungültige Schwerkraft."
+	var admission: Dictionary = Support.inspect(descriptor(body), true)
+	if not admission.ok: return Support.error_text(admission)
 	if not location(value.get("spawn"), str(body.get("id", ""))): return "Ungültiger Startort auf der Kugel."
 	if body.has("home_group") and body.home_group.get("surface_mode") != Cube.MODE: return "Heimatgruppe besitzt noch planare Orte."
 	var place_problem: String = validate_places(body, str(body.id), float(value.radius))
