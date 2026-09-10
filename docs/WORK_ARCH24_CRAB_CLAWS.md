@@ -1,9 +1,13 @@
 # ARCH-24 – Krebsscheren und gemeinsamer Handanbieter
 
-Status: **drittes Teilpaket lokal umgesetzt und geprüft** · 10. September 2026.
+Status: **drittes Teilpaket veröffentlicht und geprüft** · 10. September 2026.
 Branch: `agent/arch24-crab-claws-2026-09-10`.
 Basis: eigener [PR #66](https://github.com/MajorDragonfly/voxelverse/pull/66),
 Commit `4a3c805287787eabfcca35d4dde94dc8476c74fd`; darunter eigener PR #55.
+Veröffentlicht als [Entwurfs-PR #70](https://github.com/MajorDragonfly/voxelverse/pull/70).
+Remote-Implementierungscommit `25dab2253c498072253e8fdb89ff9cbac5941cc1`
+entspricht lokal `50ca9eecbc7c4accf1b1ee16fca04e64f77204e4`; verifizierter
+Git-Dateibaum `9a7ec641fb025d3398e440ad3c54e10e7430e8fb` einschließlich PNG.
 
 ## Lieferung und Bedienung
 
@@ -97,7 +101,7 @@ neu geschrieben werden, um einen fehlgeschlagenen Vergleich zu verdecken.
 ## Integration und verbleibende Arbeit
 
 Dieser Branch baut ausschließlich auf den abgeschlossenen eigenen Paketen #55
-und #66 auf. Der Folge-PR soll zunächst auf den Branch von #66 zeigen und erst
+und #66 auf. Entwurfs-PR #70 zeigt auf den Branch von #66 und soll erst
 nach dessen Integration auf `main` wechseln. Keine fremden Arbeitsstände wurden
 übernommen. Gemeinsame Abnahme mit ARCH-23/#50 und der neuen Vertragsregistry
 bleibt der Integration vorbehalten; dort `creature_hand_provider_test` in die

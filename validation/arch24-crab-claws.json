@@ -64,5 +64,10 @@
     "Target-PC graphics, FPS and packaged executable",
     "Trunk, snout and octopus mouth models",
     "Editor DE/EN and procedural assignment use their own packages"
-  ]
+  ],
+  "implementation_commit": "50ca9eecbc7c4accf1b1ee16fca04e64f77204e4",
+  "published_implementation_commit": "25dab2253c498072253e8fdb89ff9cbac5941cc1",
+  "verified_tree": "9a7ec641fb025d3398e440ad3c54e10e7430e8fb",
+  "pull_request": "https://github.com/MajorDragonfly/voxelverse/pull/70",
+  "integration": "Draft PR70 targets PR66 branch; PR55, PR66 and PR70 await main integration."
 }
