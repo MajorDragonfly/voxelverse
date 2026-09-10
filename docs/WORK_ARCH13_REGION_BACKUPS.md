@@ -131,7 +131,22 @@ Godot-/CLI-Nachweis aus. Das allgemeine Vertragsregister von ARCH-29 bleibt beim
 dortigen Besitzer; der neue GDScript-Probe wird vom Python-Test gestartet und
 ist kein zweiter eigenständig auszuführender `*_test.gd`-Test.
 
-Die abschließenden lokalen Ergebnisse stehen in `ARCH13_REGION_BACKUP_RESULTS.json`.
+Die zwölf lokalen Prüfungen bestanden ohne übersprungene Tests. Import,
+Art-Quellenprüfung und der bestehende `region_store_test` bestanden ebenfalls.
+[Ergebnisse](ARCH13_REGION_BACKUP_RESULTS.json) und
+[Rohprotokoll](evidence/arch13/region-backup-tests.log) halten den Nachweis fest.
+
+| Tatsächlicher Godot-/CLI-Probe | Ergebnis |
+| --- | --- |
+| Verschiedene Regionen pro Generation | 1.200 |
+| Exportierte Haupt-/Backup-/Historien-Dateien | 4 |
+| Referenzierte nichtleere Roots | 3 |
+| Geprüfte Blobverweise / tatsächlich kopierte Dateien | 4.416 / 2.944 |
+| Kopierte Blob-Nutzbytes | 467.860 |
+| Höchster Stapel offener Verweise | 35 |
+| Regionszugriffe nach frischem Prozessstart | 3.600 |
+| Höchster Godot-Regionscache | 96 Einträge |
+| Körper-/Kampagnenidentität und Bestand/Fracht | erhalten |
 Bei neuen segmentierten Fachregistern muss `_roots` um deren veröffentlichten
 Speichervertrag erweitert werden. Erst nach dem vollständigen globalen
 Referenzinventar darf ARCH-13 eine Bereinigung historischer Blobs anschließen.
