@@ -56,7 +56,7 @@ def validate(args):
     # The full sphere chain includes real taming/production, A-B-A with the held
     # animal, cold terrain loads and fresh processes on both sides of the trip.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  900 if name == "spherical_gameplay_test" else 420 if name in LONG_TESTS else 120) for name in tests]
+                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 120) for name in tests]
     if not args.skip_main:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:

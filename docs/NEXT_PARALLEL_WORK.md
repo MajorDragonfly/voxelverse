@@ -33,7 +33,7 @@ Vor Beginn den aktuellen Branch-/PR-Stand prüfen und genau einen Teilauftrag re
 | ARCH-14 | Verbleibende Tier-, Begegnungs- und Nahrungslangzeitregister prüfen/auslagern | Karten-/Ortspaging nicht erneut entwickeln; mehr als 256 dauerhaft veränderte Tiere gesondert nachweisen |
 | ARCH-17 / ARCH-02 | Kalte Terrain-/Kreaturenpublikation, Vorausschau und längere physische Rückroute untersuchen | Gemeldeten Rückwegstillstand reproduzieren; keine FPS-Zusage aus Headless-Werten |
 | ARCH-19 | Gemeinsamen Stand grafisch und als native Pakete abnehmen; Ziel-PC und lange Reise messen | Einheitlicher Commit, echte Neustarts und vorhandene Integrationsprüfungen; Kugelstart bleibt aktiv |
-| ARCH-22 / D3-EIER | Legestelle → versorgen → produzieren → sammeln → tragen → einlagern/essen | ARCH-20 und ARCH-21 sind vorhanden. D2 bleibt Tierbesitzer; Nah-/Fernbilanz, Pause und Neustart prüfen |
+| ARCH-22 / D3-EIER | **Fachbranch geliefert:** Legestelle → Versorgung → Produktion → Transport → Mahlzeit; [Übergabe](WORK_ARCH22_EGG_PRODUCTION.md) | Nicht erneut reservieren. Separat integrieren; D2 bleibt Tierbesitzer, Milchdaten und alleinige Nah-/Fernzuständigkeit erhalten |
 | ARCH-24 / M3-TEILE | Rüssel, zusätzliche Schnauzen und Oktopusmund als nächstes Modellpaket | Gemeinsame Kataloge/Renderer verwenden; gespeicherte Teilrevisionen und aktive Greiferöffnung sind noch eigene Anschlüsse |
 | ARCH-25 | Einen weiteren HUD-, Journal-, Dorf- oder Editorbereich vollständig DE/EN anschließen | Bestehende vier Teilbereiche erhalten; Katalogschlüssel vereinigen und PO-Dateien generieren |
 | ARCH-26/27 | Mehrere eigene Siedlungen und tatsächliche Transporte | Erst benötigte Regions-/Ortsverträge liefern; keine zweiten Vorrats- oder Tierdienste |

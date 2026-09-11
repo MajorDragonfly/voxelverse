@@ -226,7 +226,7 @@ static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 		"tribal_neighbor": return Neighbor.has_unsupported_contract(value)
 		"fauna_catalog": return body.has(id) and FaunaCatalog.has_unsupported(value)
 		"tribe":
-			return value is Dictionary and (Tribe.Economy.has_unsupported_contract(value.get("economy")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
+			return value is Dictionary and (Tribe.Economy.has_unsupported_contract(value.get("economy")) or Tribe.Husbandry.has_unsupported_contract(value.get("husbandry")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
 		_: return true
 	return false
 

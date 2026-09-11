@@ -27,7 +27,8 @@
       "work": "M1f/M1g / ARCH-08–11,19",
       "tests": [
         "spherical_creature_test",
-        "spherical_gameplay_test"
+        "spherical_gameplay_test",
+        "spherical_egg_production_test"
       ]
     },
     {
@@ -200,7 +201,9 @@
         "tribal_age_test",
         "tribal_age_world_test",
         "village_work_observation_test",
-        "village_work_snapshot_test"
+        "village_work_snapshot_test",
+        "egg_production_contract_test",
+        "egg_husbandry_ui_test"
       ]
     },
     {

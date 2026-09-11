@@ -1,15 +1,17 @@
 extends RefCounted
 ## Reuses a genuinely tamed and supplied animal from the shared sphere probe.
-## Never creates an animal, pen, milk batch or second simulation itself.
+## Never creates an animal, pen, resource batch or second simulation itself.
 const Simulation = preload("res://world/tribe/village_simulation.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Migration = preload("res://core/campaign/spherical_migration.gd")
 const CHECKPOINT: String = "user://animal_travel_restart.json"
 var probe: Node
+var resource: String = "milk"
 
 func _init(owner: Node) -> void:
 	probe = owner
+	resource = owner.production_kind
 
 func run(tribe: Node, identity: String, carrier: String) -> Node:
 	var state: Node = probe.state
@@ -22,10 +24,10 @@ func run(tribe: Node, identity: String, carrier: String) -> Node:
 	var pen_id: String = tribe.village().husbandry.pens[0].id
 	var old_actor_id: int = tribe.domestication.actor_for(identity).get_instance_id()
 	var old_scene_id: int = tree.current_scene.get_instance_id()
-	var stock: int = tribe.village().stock.milk
+	var stock: int = tribe.village().stock[resource]
 	var residents: Array = tribe.village().members.map(func(member: Dictionary) -> String: return member.id)
-	if not _check(original.status == "tamed" and tribe.member_record(carrier).cargo == "milk" and tree.paused,
-			"Animal travel needs the actual paused D2/D3 milk checkpoint."): return null
+	if not _check(original.status == "tamed" and tribe.member_record(carrier).cargo == resource and tree.paused,
+			"Animal travel needs the actual paused D2/D3 production checkpoint."): return null
 	var attendance: String = tribe.husbandry.attendance(tribe.village().husbandry.pens[0]).error
 	if not _check(attendance.is_empty(), "The source animal is not physically eligible before departure: " + attendance): return null
 	# Hold other village work through its real command port. The already supplied
@@ -70,9 +72,9 @@ func run(tribe: Node, identity: String, carrier: String) -> Node:
 			"roads": remote.village_simulation.roads.size()})): return null
 	if not _check(Simulation._attending(remote, remote.tribe.husbandry.pens[0]),
 			"The real saved D2 animal cannot feed the existing far-production read port."): return null
-	if not _check(_same_animal(remote, identity, original) and _cargo(remote, carrier) == "milk"
-			and remote.tribe.stock.milk == stock and _active_count(identity) == 0,
-			"Departure lost/duplicated the animal or credited waiting milk cargo."): return null
+	if not _check(_same_animal(remote, identity, original) and _cargo(remote, carrier) == resource
+			and remote.tribe.stock[resource] == stock and _active_count(identity) == 0,
+			"Departure lost/duplicated the animal or credited waiting product cargo."): return null
 	# Let the actual campaign scheduler advance while B is played. Five seconds
 	# of production proves a partial cycle survives the handoff without skipping
 	# an interval or constructing the old isolated D2 test dictionary.
@@ -94,12 +96,12 @@ func run(tribe: Node, identity: String, carrier: String) -> Node:
 	if not _check(_serviced(remote.tribe.husbandry.records[identity]) >= service_before + 5.0
 			and float(remote.tribe.husbandry.consumed.food) > consumed_before,
 			"Held animal stopped consuming supplies or advancing its cycle during actual far play."): return null
-	if not _check(_cargo(remote, carrier) == "milk" and remote.tribe.stock.milk == stock,
-			"Far work automatically delivered paused milk cargo."): return null
+	if not _check(_cargo(remote, carrier) == resource and remote.tribe.stock[resource] == stock,
+			"Far work automatically delivered paused product cargo."): return null
 	print("ANIMAL_TRAVEL_FAR ", {"body_id": a, "animal_id": identity,
 		"production_seconds_before": service_before, "production_seconds_after": _serviced(remote.tribe.husbandry.records[identity]),
 		"food_consumed": float(remote.tribe.husbandry.consumed.food) - consumed_before,
-		"cargo": _cargo(remote, carrier), "milk_stock": remote.tribe.stock.milk})
+		"cargo": _cargo(remote, carrier), "resource_id": resource, "stock": remote.tribe.stock[resource]})
 	var paused: String = Migration.fingerprint(state.export_state())
 	for index in range(15): await tree.process_frame
 	if not _check(Migration.fingerprint(state.export_state()) == paused, "Pause advanced far animal production."): return null
@@ -112,6 +114,7 @@ func run(tribe: Node, identity: String, carrier: String) -> Node:
 	var args := PackedStringArray(["--headless"])
 	if OS.has_feature("editor"): args.append_array(["--path", ProjectSettings.globalize_path("res://")])
 	args.append_array(["--", "--sphere-gameplay-smoke", "--animal-travel-restart"])
+	if resource == "eggs": args.append("--egg-production")
 	var code: int = OS.execute(OS.get_executable_path(), args, output, true)
 	if not _check(code == 0 and str(output).contains("ANIMAL_TRAVEL_FRESH_PROCESS_PASSED")
 			and not str(output).contains("SCRIPT ERROR") and not str(output).contains("ERROR:"),
@@ -139,11 +142,11 @@ func run(tribe: Node, identity: String, carrier: String) -> Node:
 			"Return failed to reconstruct exactly one physical owned animal."): return null
 	if not _check(tribe.village().members.map(func(member: Dictionary) -> String: return member.id) == residents
 			and tribe.husbandry.attendance(tribe.village().husbandry.pens[0]).error.is_empty()
-			and tribe.village().husbandry.pens[0].id == pen_id and _cargo(tribe.body(), carrier) == "milk",
+			and tribe.village().husbandry.pens[0].id == pen_id and _cargo(tribe.body(), carrier) == resource,
 			"Return changed residents, pen admission or the actual waiting carrier."): return null
 	flow.toggle_pause()
 	if not _check(saves.save_now(), "Returned animal checkpoint failed: " + saves.last_error): return null
-	print("ANIMAL_TRAVEL_PASSED: real D1/D2 animal, pen and milk cargo; A-B-A, five far production seconds, failed write, pause, fresh process and single physical return.")
+	print("ANIMAL_TRAVEL_PASSED: real D1/D2 animal, pen and product cargo; A-B-A, five far production seconds, failed write, pause, fresh process and single physical return.")
 	return tribe
 
 func _return_husbandry(before: Dictionary, returned: Dictionary, identity: String, clock: float) -> bool:
@@ -154,9 +157,9 @@ func _return_husbandry(before: Dictionary, returned: Dictionary, identity: Strin
 	var actual: Dictionary = returned.tribe.husbandry.duplicate(true)
 	var record: Dictionary = old.records[identity]
 	# This checkpoint exercises an interrupted partial cycle, with the previous
-	# milk batch still carried. It must not cross another production boundary.
-	if not _check(record.pending_milk == 0 and float(record.clock) + debt < float(record.recipe.milk_interval),
-			"Travel checkpoint no longer represents a partial milk cycle."): return false
+	# resource batch still carried. It must not cross another production boundary.
+	if not _check(Simulation.H.pending(record) == 0 and float(record.clock) + debt < float(Simulation.H.production_recipe(record).interval),
+			"Travel checkpoint no longer represents a partial production cycle."): return false
 	if not _check(absf(_serviced(actual.records[identity]) - _serviced(record) - debt) < 0.000001,
 			"Return lost or replayed partial animal production."): return false
 	actual.records[identity].clock = record.clock
@@ -185,10 +188,10 @@ func restart() -> void:
 	var body: Dictionary = state.campaign.body_record(expected.source_id)
 	_check(state.active_body_id == expected.active_id and state.campaign.data.bodies.size() == 2,
 			"Restart changed the active body or duplicated a planet.")
-	_check(Migration.fingerprint(body) == Migration.fingerprint(expected.source), "Restart changed the complete remote body, including animal and milk freight.")
+	_check(Migration.fingerprint(body) == Migration.fingerprint(expected.source), "Restart changed the complete remote body, including animal and product freight.")
 	_check(absf(float(state.campaign.data.elapsed_seconds) - float(expected.clock)) < 0.000001,
 			"Closed application created offline animal production.")
-	_check(_active_count(expected.animal_id) == 0 and _cargo(body, expected.carrier) == "milk"
+	_check(_active_count(expected.animal_id) == 0 and _cargo(body, expected.carrier) == resource
 			and body.get("village_simulation", {}).get("owner") == "far",
 			"Restart spawned the remote animal locally or replayed waiting cargo.")
 	if probe.failures.is_empty(): print("ANIMAL_TRAVEL_FRESH_PROCESS_PASSED")
@@ -222,7 +225,7 @@ func _cargo(body: Dictionary, identity: String) -> String:
 	return "missing-carrier"
 
 func _serviced(record: Dictionary) -> float:
-	return float(record.cycles) * float(record.recipe.milk_interval) + float(record.clock)
+	return float(record.cycles) * float(Simulation.H.production_recipe(record).interval) + float(record.clock)
 
 func _check(condition: bool, message: String) -> bool:
 	probe._expect(condition, message)
