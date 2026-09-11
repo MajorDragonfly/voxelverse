@@ -97,10 +97,12 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-07 – Speicherteilnahme modularisieren
 
+**Fachlieferung 10. September:** Statische Registrierung für sieben Snapshot-Teilnehmer und 14 körpergebundene Speicherbausteine umgesetzt. [Vertrag, Prüfbasis und Integrationsgrenzen](WORK_ARCH07_SAVE_PARTICIPANTS.md). Eigener Branch auf `bb2f83b`; noch nicht in `main` integriert. ARCH-06 beim gemeinsamen Save-Service anschließend sequenziell abgleichen.
+
 - **Zuordnung:** M0/M1e. **Vorher:** ARCH-01; mit ARCH-04/06 sequenziell integrieren. **Bereich:** SaveService, vorhandene Validatoren/Migratoren.
-- [ ] Vorhandene Module in einer statischen, expliziten Liste mit Schema-, Validierungs-, Migrations- und Snapshot-Anschluss erfassen; keine beliebig geladenen Plugins.
-- [ ] Vorhandene Validierungszweige schrittweise hinter diese Anschlüsse verschieben. Slotverwaltung, Writer und gemeinsamer Transaktionsabschluss bleiben zentral.
-- [ ] Neue Top-Level-Felder brauchen einen Import-/Exportanschluss. Unbekannte Pflichtversionen blockieren weiterhin Backup-Rückfall und Schreiben.
+- [x] Vorhandene Module in einer statischen, expliziten Liste mit Schema-, Validierungs-, Migrations- und Snapshot-Anschluss erfassen; keine beliebig geladenen Plugins.
+- [x] Vorhandene Validierungszweige schrittweise hinter diese Anschlüsse verschieben. Slotverwaltung, Writer und gemeinsamer Transaktionsabschluss bleiben zentral.
+- [x] Neue Top-Level-Felder brauchen einen Import-/Exportanschluss. Unbekannte Pflichtversionen blockieren weiterhin Backup-Rückfall und Schreiben.
 - **Fertig:** Heimat, D2, Dorf, Atlas und Fortschritt werden unverändert gespeichert; fehlende Registrierung fällt bei der Prüfung auf. Alte Save-, Zukunftsversion- und Schreibfehlertests bleiben erfolgreich.
 
 ## Vollständige Spielschleife auf Kugeln

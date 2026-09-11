@@ -28,7 +28,7 @@ Vor Beginn den aktuellen Branch-/PR-Stand prüfen und genau einen Teilauftrag re
 | Paket | Konkreter nächster Umfang | Abhängigkeit / Grenze |
 |---|---|---|
 | ARCH-06 | Große gespeicherte Double-Koordinaten verlustfrei serialisieren und Fachorte vollständig inventarisieren | Der ARCH-30-Präzisionsnachweis bleibt offen; keine unveröffentlichten lokalen Entwürfe als geliefert zählen |
-| ARCH-07 | Bestehende Save-Teilnehmer schrittweise hinter eine feste Registrierung führen | Gemeinsamer SaveGameService bleibt alleiniger Writer; aktuelle Versionssperren erhalten |
+| ARCH-07 | Fachlieferung: feste Speicherregistrierung und bestehende Teilnehmer angeschlossen; [Übergabe](WORK_ARCH07_SAVE_PARTICIPANTS.md) | Eigener Branch, Integration offen. SaveService mit ARCH-06 sequenziell zusammenführen; keinen zweiten Registeransatz beginnen |
 | ARCH-13 | Kleines globales Manifest, vollständige Referenzaufbewahrung und sichere Bereinigung | Archive für Population/Atlas/Orte existieren bereits; Backup-Menü und Labordateien sind weitere abgegrenzte Anschlüsse |
 | ARCH-14 | Verbleibende Tier-, Begegnungs- und Nahrungslangzeitregister prüfen/auslagern | Karten-/Ortspaging nicht erneut entwickeln; mehr als 256 dauerhaft veränderte Tiere gesondert nachweisen |
 | ARCH-17 / ARCH-02 | Kalte Terrain-/Kreaturenpublikation, Vorausschau und längere physische Rückroute untersuchen | Gemeldeten Rückwegstillstand reproduzieren; keine FPS-Zusage aus Headless-Werten |

@@ -1,0 +1,206 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "ce0f84cd6bdd319ce6dce6f443bd2917a9adf918",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "save_participants_test",
+    "campaign_foundation_test",
+    "save_slots_test",
+    "body_identity_test",
+    "spherical_campaign_contract_test",
+    "phase_handoff_test",
+    "onboarding_test",
+    "blueprint_contract_test",
+    "world_map_test",
+    "domestication_contract_test",
+    "domestication_campaign_test",
+    "tribal_age_economy_contract_test",
+    "tribal_age_husbandry_contract_test",
+    "tribal_neighbors_contract_test",
+    "behavior_progression_test",
+    "tribal_progression_test",
+    "campaign_scaling_test",
+    "spherical_campaign_runtime_test",
+    "spherical_developed_migration_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.996
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.025
+    },
+    {
+      "name": "save_participants_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.276,
+      "contract": "campaign"
+    },
+    {
+      "name": "campaign_foundation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.379,
+      "contract": "campaign"
+    },
+    {
+      "name": "save_slots_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.579,
+      "contract": "campaign"
+    },
+    {
+      "name": "body_identity_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.881,
+      "contract": "campaign"
+    },
+    {
+      "name": "spherical_campaign_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.771,
+      "contract": "campaign"
+    },
+    {
+      "name": "phase_handoff_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.424,
+      "contract": "campaign"
+    },
+    {
+      "name": "onboarding_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.57,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.378,
+      "contract": "blueprints"
+    },
+    {
+      "name": "world_map_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.282,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "domestication_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.222,
+      "contract": "domestication"
+    },
+    {
+      "name": "domestication_campaign_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.351,
+      "contract": "domestication"
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.789,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.531,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_neighbors_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.677,
+      "contract": "neighbors"
+    },
+    {
+      "name": "behavior_progression_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.08,
+      "contract": "home_progression"
+    },
+    {
+      "name": "tribal_progression_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.825,
+      "contract": "home_progression"
+    },
+    {
+      "name": "campaign_scaling_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.093,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "spherical_campaign_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 58.779,
+      "contract": "campaign"
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 57.673,
+      "contract": "campaign"
+    }
+  ],
+  "implementation_commit": "ce0f84cd6bdd319ce6dce6f443bd2917a9adf918",
+  "source_note": "Implementation, tests and validation manifest match implementation_commit exactly. Only handoff documentation was edited while checks ran."
+}

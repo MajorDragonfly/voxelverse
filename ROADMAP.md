@@ -18,6 +18,8 @@ Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickelt
 
 ## Architekturprüfung und nächste verbindliche Arbeitsschritte
 
+**ARCH-07 umgesetzt auf eigenem Fachbranch (10. September):** Bestehende Speicherteilnehmer sind statisch registriert; gemeinsamer Save, alte Formate, Sicherungen und Versionssperren bleiben erhalten. Fehlende Anschlüsse und unbekannte Pflichtbausteine werden abgewiesen. [Vertrag, Tests und Integration](docs/WORK_ARCH07_SAVE_PARTICIPANTS.md). Noch nicht in `main`; gemeinsame Save-Datei mit ARCH-06 sequenziell integrieren.
+
 **ARCH-01 geliefert am 10. September (im Integrationsstand enthalten, [PR #49](https://github.com/MajorDragonfly/voxelverse/pull/49)):** [Datenbesitzer und Modulanschlüsse](docs/MODULE_CONTRACTS.md) erfassen die Basis `ea900f2e09946660694a9e59399b4680a5655a85` und die neuen gemeinsamen Verträge: IDs/Versionen, Lese- und Befehlswege, Save-/Ladeanschlüsse, Lebenszyklen und gemeinsame Transaktionen. Für Folgepakete zuerst dort den vorhandenen Anschluss wählen. [Prüfumfang](docs/WORK_ARCH01_MODULE_CONTRACTS.md); reine Dokumentation, keine zusätzliche Spiel- oder Leistungsfreigabe.
 
 **Ergebnis vom 9. September 2026:** Die Basis bleibt verwendbar; ein kompletter Neustart ist nicht begründet. Zusätzliche Inhalte können vorhandene Dienste nutzen. Mehrere Siedlungen, lange Reisen und neue Epochen benötigen jedoch gezielte Arbeiten an Körperidentitäten, Ortsanschlüssen, Regionsspeicherung, Simulationsübergaben und Produktionsverträgen. „Immer neue Funktionen ohne Umbau anhängen“ ist im heutigen Stand keine belastbare Zusage.
