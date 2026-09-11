@@ -1,0 +1,104 @@
+{
+  "package": "ARCH-24 mouth models",
+  "base": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "implementation_commit": "149864cb6cb7e3a5e8da3f2dfed4f9466039ed62",
+  "test_count_correction_commit": "44a9facd6af82c4fbf5e4ec617dbf2e58e9c862c",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "execution": "headless_source_project",
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.117
+    },
+    {
+      "name": "creature_mouth_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.154,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_foot_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.88,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_hand_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.787,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.362,
+      "contract": "creature_body"
+    },
+    {
+      "name": "discovery_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.548,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "research_goals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.853,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.288,
+      "contract": "blueprints"
+    },
+    {
+      "name": "community_blueprint_package_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.387,
+      "contract": "blueprints"
+    }
+  ],
+  "initial_failure": {
+    "test": "creature_parts_studio_test",
+    "reason": "Expected 29 placeable recipes; three new mouth models increase this to 32. All exercised model checks passed; fixed count gate updated and test repeated.",
+    "exit_code": 1
+  },
+  "visual_review": "Inspected six CPU views rendered from actual Godot mesh arrays. Not a native game screenshot or FPS acceptance.",
+  "source_hashes": {
+    "art/review/arch24_mouth_models/mouth_models.png": "edbb6ede17cd739daf244fc7dce50570f4a70341df6dd4cd9f7f954d7abafab6",
+    "autoload/progression_service.gd": "2cdf223456c3804e8618976d364600499a5cbe385d86cee45f1ad15cd8e6f6f9",
+    "creatures/catalog/creature_mouth_catalog.gd": "45a40e7b00a64a0bfc21ba004e63cd79a910e78db348f75ac8b09b316e95567e",
+    "creatures/editor/creature_mouth_geometry.gd": "c786a8ca203f5784cfea3a3e689a449ed77325d5c55ff39dc1d70c78e4e4d5da",
+    "creatures/editor/creature_part_geometry.gd": "1903f67c121236a0e735fbf5962e375f942b5581334dee4c06a269165748e188",
+    "creatures/editor/creature_part_library.gd": "157d315764f5b019e7529baba7f35d4cf64598dca002c6874d36b919c0974d9a",
+    "creatures/wildlife/species_assembly_factory_v7.gd": "20c1ea127ff75aea78d99b8b57e36f405166147cbe0da64f4cfbccec5d5c78c4",
+    "tests/creature_foot_provider_test.gd": "a0a52f5c376281fc68e726d36dca9f688928b618471bc6fb7c8e2565a5720df9",
+    "tests/creature_mouth_provider_test.gd": "3c4446d1601cb994a88b98eb11b28d866906645040b5f02a95ae7fb478c44ef2",
+    "tests/creature_parts_studio_test.gd": "131d2a6eaa34c19ac3d4484102147c47bf4fa4e9642372b03120b0a2cb5ca1c5",
+    "tests/fixtures/creature_mouths_v1.json": "86e8191a2208238bafccb031a7dffaec72e7bfdf7034f3f1d5bf9cda81b857c5",
+    "tools/capture_mouth_baseline.gd": "2938f68c1b66e4b90ec7da12d2f2cde6b17dea409e394f41fef23f9c611906e0",
+    "tools/export_animal_foot_meshes.gd": "a4e8f8032d03efd3ad979d041f63e83ffaea3bbb64413b65d7803d7a1742c5cf",
+    "tools/render_animal_foot_meshes.py": "6f829c64ca6a81a86232a8467ac9b14b6b2ef0a86abc1bf3de7a1aac4cb94270",
+    "tools/validation/contracts.json": "6ed8e1a5f160f94c6fad476c66a8ba49ecbcb45c09a55f5dba2a24ae0ff60ffa"
+  }
+}

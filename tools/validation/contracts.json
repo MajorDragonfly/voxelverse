@@ -105,6 +105,7 @@
         "creature_foot_provider_test",
         "creature_hand_provider_test",
         "creature_joint_studio_test",
+        "creature_mouth_provider_test",
         "creature_parts_studio_test",
         "creature_seat_fit_test",
         "creature_studio_test",
