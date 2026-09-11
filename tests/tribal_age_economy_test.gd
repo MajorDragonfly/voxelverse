@@ -1,4 +1,5 @@
 extends "tribal_age_test.gd"
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 var evidence: Dictionary = {}
 
@@ -96,8 +97,8 @@ func _run() -> void:
 		await _until(func() -> bool: return not tribe.village()["project"].is_empty() and float(tribe.village()["project"]["progress"]) > 1, 400)
 		if station == "well":
 			paused = true
-			var project: Dictionary = JSON.parse_string(JSON.stringify(tribe.village()["project"]))
-			var stock: Dictionary = JSON.parse_string(JSON.stringify(tribe.village()["stock"]))
+			var project: Dictionary = JSON.parse_string(Atomic.stringify(tribe.village()["project"]))
+			var stock: Dictionary = JSON.parse_string(Atomic.stringify(tribe.village()["stock"]))
 			_expect(saves.save_now() and saves.load_now(), "Workplace construction failed Save/Load.")
 			_expect(tribe.village()["project"] == project and tribe.village()["stock"] == stock, "Construction restarted or charged twice after load: expected=%s/%s actual=%s/%s" % [project, stock, tribe.village()["project"], tribe.village()["stock"]])
 			paused = false
@@ -208,7 +209,7 @@ func _run() -> void:
 	await _frames(25)
 	_expect(tribe.village() == snapshot, "Economy advanced while paused.")
 	_expect(saves.save_now() and saves.load_now(), "Final economy failed persistence.")
-	_expect(tribe.village()["economy"] == JSON.parse_string(JSON.stringify(snapshot["economy"])), "Load advanced clocks or altered receipts.")
+	_expect(tribe.village()["economy"] == JSON.parse_string(Atomic.stringify(snapshot["economy"])), "Load advanced clocks or altered receipts.")
 	paused = false
 	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	# Long simulation uses the real movement/work loop with all initial sources

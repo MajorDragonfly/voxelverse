@@ -83,7 +83,7 @@ func _run() -> void:
 		_expect(not destination.is_empty(), "Developed copy failed: " + saves.last_error)
 		if not destination.is_empty():
 			var result: Dictionary = saves._read_save(destination)
-			_expect(Migration.inventory(source) == Migration.inventory(result), "Changed people, ownership, recipes, cargo or regional inventory.")
+			_expect(Migration.inventory(Atomic.parse_dictionary(original)) == Migration.inventory(result), "Changed people, ownership, recipes, cargo or regional inventory.")
 			var copied: Dictionary = Registry.active(result.game_state)
 			_expect(copied.domesticated_animals.sources == original_body.domesticated_animals.sources, "Original frozen animal bodies changed.")
 			_expect(copied.tribe.economy.incoming[0].remaining == original_body.tribe.economy.incoming[0].remaining and copied.tribe.members[0].cargo == "wood", "In-flight stock was lost or credited early.")

@@ -1,4 +1,5 @@
 extends "tribal_age_test.gd"
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 const H = preload("res://world/tribe/village_husbandry.gd")
 const Lab = preload("res://world/tribe/lab/husbandry_lab.gd")
 var evidence: Dictionary = {}
@@ -42,7 +43,7 @@ func _run() -> void:
 	tribe.select_all()
 	tribe.panel._tabs.current_tab = 2
 	await _frames(3)
-	var original_source: Dictionary = JSON.parse_string(JSON.stringify(lab.registry()))
+	var original_source: Dictionary = JSON.parse_string(Atomic.stringify(lab.registry()))
 	await _click(tribe.panel._buttons["pen"])
 	_expect(tribe.placement == "pen", "Pen UI did not arm placement.")
 	await _world_click(tribe.camera.unproject_position(Vector3(0, 100.06, 7)), MOUSE_BUTTON_RIGHT)
@@ -151,7 +152,7 @@ func _run() -> void:
 	tribe.issue_order("resume")
 	await _until(func() -> bool: return int(tribe.village()["stock"]["milk"]) + int(tribe.village()["economy"]["milk_meals"]) == 2, 800)
 	_expect(int(tribe.village()["stock"]["milk"]) + int(tribe.village()["economy"]["milk_meals"]) == 2, "Produced milk did not arrive exactly once.")
-	_expect(JSON.parse_string(JSON.stringify(lab.registry())) == original_source, "D3 changed D2 identity, ownership, health, orders or animal position.")
+	_expect(JSON.parse_string(Atomic.stringify(lab.registry())) == original_source, "D3 changed D2 identity, ownership, health, orders or animal position.")
 	# Freeze through a missing host for cold-start evidence; earned progress must survive.
 	tribe.husbandry.source.registry = Callable()
 	tribe.select_all()
@@ -173,9 +174,9 @@ func _run() -> void:
 
 func _saved_roundtrip(label: String) -> void:
 	_key(KEY_SPACE)
-	var saved: Dictionary = JSON.parse_string(JSON.stringify(tribe.village()))
+	var saved: Dictionary = JSON.parse_string(Atomic.stringify(tribe.village()))
 	await _frames(15)
-	_expect(JSON.parse_string(JSON.stringify(tribe.village())) == saved, "Pause changed " + label)
+	_expect(JSON.parse_string(Atomic.stringify(tribe.village())) == saved, "Pause changed " + label)
 	_expect(saves.save_now() and saves.load_now(), "Save/Load failed: " + label + " / " + saves.last_error)
 	_expect(tribe.village() == saved, "Load changed " + label)
 	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)

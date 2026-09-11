@@ -125,6 +125,12 @@ func _save_snapshot(custom_path: String = "") -> bool:
 	if not problem.is_empty():
 		_report_failure(problem)
 		return false
+	# Validate what the reader will actually see BEFORE any live file moves.
+	var readback: Dictionary = Atomic.parse_dictionary(Atomic.stringify(save_data))
+	var readback_problem: String = _validate_save(readback)
+	if not readback_problem.is_empty():
+		_report_failure("Serialized save failed validation; previous snapshot retained: " + readback_problem)
+		return false
 	var previous: Dictionary = _read_save(target_path)
 	if _has_unsupported_contract(previous):
 		_write_blocked = true
@@ -178,7 +184,8 @@ func load_now(custom_path: String = "") -> bool:
 		_write_blocked = true
 		_report_failure("Unsupported save, campaign, progression or generator version.")
 		return false
-	if not _validate_save(data).is_empty():
+	var primary_problem: String = _validate_save(data)
+	if not primary_problem.is_empty():
 		source_path = target_path + ".bak"
 		data = _read_save(source_path)
 		if _has_unsupported_contract(data):
@@ -187,7 +194,7 @@ func load_now(custom_path: String = "") -> bool:
 			return false
 	if not _validate_save(data).is_empty():
 		_write_blocked = true
-		_report_failure("No valid campaign snapshot or backup: " + target_path)
+		_report_failure("No valid campaign snapshot or backup: " + target_path + " · Primary: " + primary_problem + " · Backup: " + _validate_save(data))
 		return false
 	last_migration_report.clear()
 	var schema: int = int(data["schema"])

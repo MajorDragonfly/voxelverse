@@ -75,6 +75,10 @@ func _run() -> void:
 	flow.return_to_title()
 	await tree.scene_changed
 	await _open(path, true)
+	if not _expect_world(): await _finish(); return
+	if not _expect_step(state.get_current_body().get("tribe") is Dictionary, "Reload lost the saved tribe: " + saves.last_error):
+		await _finish()
+		return
 	_expect(Migration.fingerprint(state.get_current_body().tribe) == Migration.fingerprint(Registry.active(checkpoint.game_state).tribe), "Restart changed resident orders or cargo.")
 	flow.resume()
 	await _until(func() -> bool: return tree.current_scene.get_node("Nest/Tribe").is_active(), 45000)

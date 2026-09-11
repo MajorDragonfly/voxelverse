@@ -29,7 +29,7 @@ func run() -> void:
 		check(progression.store_creature_encounter(encounter)["ok"], "Store legacy encounter")
 		progression.register_species_scan(771, Legacy.create_species(771, Vector2i.ZERO, "grazer"))
 		check(saves.save_now("user://d1-legacy.json"), "Save original pre-D1 campaign")
-		var old_progression: String = JSON.stringify(JSON.parse_string(JSON.stringify(progression.export_state())))
+		var old_progression: String = JSON.stringify(JSON.parse_string(Atomic.stringify(progression.export_state())))
 		var signatures: Dictionary = {}
 		for seed_value in [15838, 63352, 23757]:
 			state.activate_planet(15838, 0, seed_value)
@@ -39,13 +39,13 @@ func run() -> void:
 			while not planner.finished: planner.step(root.get_node("WorldGenerator"), catalog, 32)
 			catalog["habitats"] = planner.habitats
 			catalog["habitat_status"] = "ready"
-			signatures[str(seed_value)] = JSON.stringify(JSON.parse_string(JSON.stringify(catalog)))
+			signatures[str(seed_value)] = JSON.stringify(JSON.parse_string(Atomic.stringify(catalog)))
 		check(saves.save_now(), "Save D1 campaign: " + saves.last_error)
 		check(Atomic.write("user://d1-expected.json", {"catalogs": signatures, "progression": old_progression, "legacy_id": legacy_id}) == OK, "Save expected signatures")
 	elif mode == "read":
 		check(saves.load_now(), "Cold load: " + saves.last_error)
 		var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string("user://d1-expected.json"))
-		check(JSON.stringify(JSON.parse_string(JSON.stringify(progression.export_state()))) == expected["progression"], "Old discoveries/relations changed")
+		check(JSON.stringify(JSON.parse_string(Atomic.stringify(progression.export_state()))) == expected["progression"], "Old discoveries/relations changed")
 		for seed_value in [23757, 15838, 63352]:
 			state.activate_planet(15838, 0, seed_value)
 			check(JSON.stringify(Catalog.ensure(state)) == expected["catalogs"][str(seed_value)], "Restart/order changed species, body or habitats")
@@ -74,7 +74,7 @@ func run() -> void:
 		var migrated: Dictionary = Catalog.ensure(state)
 		check(not migrated.is_empty(), "Additive old-save upgrade")
 		var expected_catalog: Dictionary = JSON.parse_string(expected["catalogs"]["15838"])
-		check(JSON.stringify(JSON.parse_string(JSON.stringify(migrated["species"]))) == JSON.stringify(expected_catalog["species"]), "Fresh and migrated body seeds generated different species")
+		check(JSON.stringify(JSON.parse_string(Atomic.stringify(migrated["species"]))) == JSON.stringify(expected_catalog["species"]), "Fresh and migrated body seeds generated different species")
 		check(JSON.stringify(progression.export_state()) == legacy_before, "Migration altered old encounters")
 	else: failures.append("Set D1_RESTART_MODE=write/read; run in separate processes")
 	print(JSON.stringify({"test": "domestic_fauna_restart", "mode": mode, "failures": failures}))

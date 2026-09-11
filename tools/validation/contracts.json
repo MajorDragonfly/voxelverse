@@ -18,7 +18,8 @@
         "save_slots_test",
         "spherical_campaign_contract_test",
         "spherical_campaign_runtime_test",
-        "spherical_developed_migration_test"
+        "spherical_developed_migration_test",
+        "frozen_body_serialization_test"
       ]
     },
     {
@@ -67,7 +68,8 @@
         "surface_population_budget_test",
         "surface_scale_contract_test",
         "surface_support_test",
-        "terrain_transition_test"
+        "terrain_transition_test",
+        "radial_step_test"
       ]
     },
     {

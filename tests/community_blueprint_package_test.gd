@@ -307,8 +307,8 @@ func _restart_receiver() -> void:
 	var saves: Node = root.get_node("SaveGameService")
 	_expect(saves.select_slot(saved.slot), "Fresh process could not select receiver slot")
 	var loaded: Dictionary = Creature.load_best_available()
-	_expect(JSON.parse_string(JSON.stringify(Creature.serialize_snapshot(loaded))) == saved.design, "Offline restart lost adopted authoring/provenance")
-	_expect(JSON.parse_string(JSON.stringify(root.get_node("ProgressionService").export_state())) == saved.progression, "Offline restart changed progress")
+	_expect(JSON.parse_string(Atomic.stringify(Creature.serialize_snapshot(loaded))) == saved.design, "Offline restart lost adopted authoring/provenance")
+	_expect(JSON.parse_string(Atomic.stringify(root.get_node("ProgressionService").export_state())) == saved.progression, "Offline restart changed progress")
 	for key in ["id", "player_species_id", "player_faction_id", "player_object_id"]:
 		_expect(root.get_node("GameState").campaign.data[key] == saved.campaign[key], "Restart changed receiving identity: " + key)
 	var preview := Preview.new()
