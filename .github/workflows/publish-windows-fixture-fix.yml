@@ -77,12 +77,12 @@ jobs:
                           package, isolated_env(root / "egg-production-userdata"), timeout=900)
                       if "SPHERICAL_EGG_PRODUCTION_PASSED" not in (logs / "packaged_spherical_egg_production.log").read_text():
                           raise RuntimeError("Native executable did not complete real egg transport, meal and restart acceptance.")
-                      # Official 4.6.3 release templates disable --script. Keep that intact:'''.replace('\n          ','\n'))
+                      # Official 4.6.3 release templates disable --script. Keep that intact:''')
           edit(export,'            archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"','''            (package / "BUILD_INFO.json").write_text(json.dumps({
                           "source": summary["source"], "godot": version, "platform": args.platform,
                           "acceptance": "native_headless_release_and_exact_pck", "checks_passed": len(results),
                           "target_pc_acceptance": False}, indent=2) + "\\n", encoding="utf-8")
-                      archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"'''.replace('\n          ','\n'))
+                      archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"''')
           edit('.github/workflows/export-validate.yml','timeout_minutes: 30','timeout_minutes: 40',2)
           edit('.github/workflows/export-validate.yml','# The complete 37-check campaign suite exceeds 20 minutes on both runners.','# Full release acceptance now includes both real milk and egg production trips.\n    # Each runs production, blocked freight, A-B-A and fresh processes; no checks skipped.')
           edit('.github/workflows/godot-validate.yml','    timeout-minutes: 20\n    strategy:','    # Two shards include full production/travel chains; retain per-test deadlines.\n    timeout-minutes: 30\n    strategy:')
