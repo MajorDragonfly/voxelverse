@@ -4,11 +4,12 @@
     {
       "id": "campaign",
       "title": "Kampagne, Körperidentität und Speichern",
-      "work": "M1e / ARCH-03,04,07,12,18",
+      "work": "M1e / ARCH-03,04,06,07,12,18",
       "tests": [
         "body_identity_test",
         "body_travel_test",
         "campaign_foundation_test",
+        "coordinate_persistence_test",
         "galaxy_catalog_test",
         "galaxy_visits_test",
         "meta_runtime_test",

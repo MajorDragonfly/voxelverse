@@ -1,10 +1,16 @@
 extends RefCounted
 class_name AtomicJson
 
+## Persistent scalar doubles must survive JSON unchanged. This also applies
+## to tiny Cube-Sphere face offsets, not just astronomical Cartesian values.
+## Keep ordinary JSON numbers and sorted keys; existing readers still work.
+static func stringify(value: Variant, indent: String = "\t") -> String:
+	return JSON.stringify(value, indent, true, true)
+
 ## Stage and verify before replacing. Never remove the live file first.
 ## DirAccess.rename_absolute overwrites an existing writable file.
 static func write(path: String, data: Dictionary, keep_backup: bool = true) -> Error:
-	var text: String = JSON.stringify(data, "\t")
+	var text: String = stringify(data)
 	var temporary: String = path + ".tmp"
 	var error: Error = _write_text(temporary, text)
 	if error != OK:
