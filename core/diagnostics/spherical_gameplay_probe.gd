@@ -168,7 +168,16 @@ func _animal_chain(tribe: Node) -> void:
 	journal._tabs.current_tab = journal.ANIMALS_TAB
 	journal.refresh_owned_animals()
 	var owned: Array = journal._rows.filter(func(row: Dictionary) -> bool: return row.key == id)
-	_expect(owned.size() == 1 and owned[0].location.contains("Breite"), "Shared campaign book lost the original spherical production animal.")
+	# Identity and the canonical address are invariant; a German word is not.
+	# The same real journal must also pass on an English Windows installation.
+	var listed: Dictionary = owned[0].get("_display_data", {}) if owned.size() == 1 else {}
+	var listed_place: Variant = listed.get("position")
+	var correct_place: bool = listed_place is Dictionary and listed_place.get("body_id") == state.get_current_body().id
+	if correct_place:
+		correct_place = Home.distance(listed_place, runtime.controller.record(id).position) < 0.005
+	var location_text: String = preload("res://ui/discovery/owned_animal_presentation.gd").point(listed_place) if correct_place else ""
+	_expect(owned.size() == 1 and listed.get("key") == id and listed.get("species_id") == species_id
+		and correct_place and owned[0].location.ends_with(location_text), "Shared campaign book lost the original spherical production animal/address: " + str(owned))
 	journal.close_journal()
 	await tree.process_frame
 	_expect(runtime.issue_command(id, "home").ok, "Radial home command failed.")
@@ -231,13 +240,30 @@ func _animal_chain(tribe: Node) -> void:
 	box.size = Vector3(3, 3, 0.25)
 	shape.shape = box
 	blocker.add_child(shape)
-	tree.current_scene.add_child(blocker)
-	# Block the route ahead. Spawning a solid box around the carrier can eject
-	# it underneath the floor, which is not a reachable-path obstruction.
+	# Stage a route obstruction outside every live capsule. An intersecting
+	# wall can push the nearby production animal outside its pen while it is
+	# still within the legitimate 0.5 m tolerance of its wait target.
 	var carrier_position: Vector3 = tribe.actors[carrier].global_position
 	var up: Vector3 = Space.up(self, carrier_position)
 	var direction: Vector3 = (tribe.anchor() - carrier_position).slide(up).normalized()
-	blocker.global_transform = Transform3D(Space.frame(self, carrier_position, direction), carrier_position + direction * 0.9 + up)
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = box
+	query.collision_mask = 4 | 8 # Existing animals, villagers and player; not ground.
+	query.margin = 0.1
+	var placed: bool = false
+	for distance in [0.9, 1.3, 1.7, 2.1, 2.5, 2.9]:
+		query.transform = Transform3D(Space.frame(self, carrier_position, direction), carrier_position + direction * distance + up)
+		var occupants: Array[Dictionary] = tribe.actors[carrier].get_world_3d().direct_space_state.intersect_shape(query, 32)
+		if not occupants.is_empty(): continue
+		tree.current_scene.add_child(blocker)
+		blocker.global_transform = query.transform
+		placed = true
+		print("SPHERE_CARRIER_OBSTACLE ", {"distance": distance, "overlapping_actors": occupants.size()})
+		break
+	if not placed:
+		blocker.free()
+		_expect(false, "No collision-free obstruction for the actual loaded carrier.")
+		return
 	await tree.physics_frame
 	tribe.issue_order("resume")
 	await _until(func() -> bool: return tribe.member_record(carrier).blocked, 5000)
@@ -246,8 +272,8 @@ func _animal_chain(tribe: Node) -> void:
 	tribe.issue_order("wait")
 	blocker.queue_free()
 	await tree.physics_frame
-	# The real carrier obstacle can also push the nearby animal. Let its
-	# existing wait order restore physical pen attendance before departure.
+	# Keep the actual pen attendance requirement after removing the wall;
+	# neither the animal nor its wait target is moved by the probe.
 	_stage("animal_returns_after_obstacle")
 	await _until(func() -> bool: return tribe.husbandry.attendance(pen).error.is_empty(), 20000)
 	if not _expect_step(tribe.husbandry.attendance(pen).error.is_empty(), "Animal did not return to its pen after removing the carrier obstacle."): return

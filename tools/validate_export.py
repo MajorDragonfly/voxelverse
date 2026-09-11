@@ -13,6 +13,7 @@ import time
 import zipfile
 
 from validate_godot import ERROR
+from check_validation_contracts import revision
 from validation_support import isolated_env
 
 PACKAGED_TESTS = ['body_identity_test', 'far_simulation_test', 'village_navigation_budget_test', 'campaign_scaling_test', 'creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test']
@@ -64,7 +65,8 @@ def main():
             print(text[-12000:], flush=True)
             raise RuntimeError(f"Export validation failed: {name}")
 
-    summary = {"godot": version, "platform": args.platform, "checks": results, "probes": []}
+    summary = {"godot": version, "platform": args.platform, "source": revision(args.project),
+               "checks": results, "probes": []}
     try:
         with tempfile.TemporaryDirectory(prefix="voxelverse-export-") as temporary:
             root = Path(temporary).resolve()
@@ -113,6 +115,11 @@ def main():
                     package, isolated_env(root / f"{name}-userdata"), timeout=timeout)
                 if marker not in (logs / f"packaged_{name}.log").read_text():
                     raise RuntimeError(f"Native executable did not complete {name} acceptance.")
+            run("packaged_spherical_egg_production", [str(executable), "--headless", "--verbose", "--",
+                                                       "--sphere-gameplay-smoke", "--egg-production"],
+                package, isolated_env(root / "egg-production-userdata"), timeout=900)
+            if "SPHERICAL_EGG_PRODUCTION_PASSED" not in (logs / "packaged_spherical_egg_production.log").read_text():
+                raise RuntimeError("Native executable did not complete real egg transport, meal and restart acceptance.")
             # Official 4.6.3 release templates disable --script. Keep that intact:
             # use the editor to instrument the exact release PCK, after starting
             # the untouched release executable above. Neither sees source files.
@@ -171,6 +178,10 @@ def main():
                 "F4: Planetenlabor/Galaxiekatalog; Tab: Boden/Orbit, M: Koerperwechsel.\n"
                 "This build passed headless release acceptance. Visual/GPU acceptance is still pending.\n",
                 encoding="utf-8")
+            (package / "BUILD_INFO.json").write_text(json.dumps({
+                "source": summary["source"], "godot": version, "platform": args.platform,
+                "acceptance": "native_headless_release_and_exact_pck", "checks_passed": len(results),
+                "target_pc_acceptance": False}, indent=2) + "\n", encoding="utf-8")
             archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"
             with zipfile.ZipFile(archive_path, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
                 for path in sorted(package.rglob("*")):

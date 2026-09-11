@@ -19,13 +19,14 @@ jobs:
           - os: ubuntu-latest
             platform: linux
             editor: Godot_v4.6.3-stable_linux.x86_64
-            timeout_minutes: 30
+            timeout_minutes: 40
           - os: windows-latest
             platform: windows
             editor: Godot_v4.6.3-stable_win64_console.exe
-            timeout_minutes: 30
+            timeout_minutes: 40
     runs-on: ${{ matrix.os }}
-    # The complete 37-check campaign suite exceeds 20 minutes on both runners.
+    # Full release acceptance now includes both real milk and egg production trips.
+    # Each runs production, blocked freight, A-B-A and fresh processes; no checks skipped.
     # Individual probe deadlines remain enforced by validate_export.py.
     timeout-minutes: ${{ matrix.timeout_minutes }}
     steps:
