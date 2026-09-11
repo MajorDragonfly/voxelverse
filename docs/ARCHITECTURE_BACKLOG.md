@@ -1,3 +1,5 @@
+> **Aktueller Integrationsbranch, 11. September 2026:** PR #78–#83 sind auf `agent/integration-sphere-acceptance-2026-09-11` zusammengeführt, noch nicht als gemeinsame Laufzeit-/Ziel-PC-Abnahme freigegeben. ARCH-06-Präzision, ARCH-07-Save-Teilnehmer, ARCH-14-Zustandsschutz, ARCH-22-Eierkette, ARCH-24-Mundmodelle und ARCH-25-Fähigkeiten DE/EN nicht doppelt beginnen. Maßgeblich sind `docs/INTEGRATION_2026-09-11.md` und die exakten Quellcommits. Ältere „nächste Aufgabe“-Zeilen unten sind für diese sechs Lieferungen historisch. Nächster Vorrang: gemeinsame Kugel-/Vegetations-/Rückreiseprüfung, dann verbleibende ARCH-13/14/17/19-Aufträge.
+
 # Voxelverse – ausführbare Architekturaufgaben
 
 Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7` auf veröffentlichtem `main`. [Befunde und Grenzen](ARCHITECTURE_SCALABILITY_AUDIT.md), [Roadmap](../ROADMAP.md), [Kugelumzug](SPHERICAL_CAMPAIGN_MIGRATION.md) und [Arbeitsverteilung](NEXT_PARALLEL_WORK.md) zusammen lesen.

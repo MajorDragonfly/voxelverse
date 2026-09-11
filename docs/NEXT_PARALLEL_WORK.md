@@ -1,3 +1,5 @@
+> **Aktueller Integrationsbranch, 11. September 2026:** PR #78–#83 sind auf `agent/integration-sphere-acceptance-2026-09-11` zusammengeführt, noch nicht als gemeinsame Laufzeit-/Ziel-PC-Abnahme freigegeben. ARCH-06-Präzision, ARCH-07-Save-Teilnehmer, ARCH-14-Zustandsschutz, ARCH-22-Eierkette, ARCH-24-Mundmodelle und ARCH-25-Fähigkeiten DE/EN nicht doppelt beginnen. Maßgeblich sind `docs/INTEGRATION_2026-09-11.md` und die exakten Quellcommits. Ältere „nächste Aufgabe“-Zeilen unten sind für diese sechs Lieferungen historisch. Nächster Vorrang: gemeinsame Kugel-/Vegetations-/Rückreiseprüfung, dann verbleibende ARCH-13/14/17/19-Aufträge.
+
 # Nächste Voxelverse-Arbeiten
 
 Stand: 10. September 2026, gemeinsamer Integrationsstand aus 28 abgeschlossenen Übergaben. [Integrationsbericht und Prüfgrenzen](INTEGRATION_2026-09-10.md), [exakte Quellen](integration-sources-2026-09-10.json), [Roadmap](../ROADMAP.md), [Architekturaufgaben](ARCHITECTURE_BACKLOG.md), [Modulanschlüsse](MODULE_CONTRACTS.md) und [Designvorgabe](VOXELVERSE_DESIGN.md) zuerst lesen. Der Bericht nennt den Veröffentlichungsstatus; ein lokaler Integrationsstand ist noch kein aktualisiertes `main`.
