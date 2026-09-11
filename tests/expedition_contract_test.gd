@@ -191,15 +191,15 @@ func _transfer_checks() -> void:
 	_expect(Contract.admit(loaded, staged, CONTEXT).code == "schema.unsupported" and FileAccess.get_file_as_string(PATH) == old_text and FileAccess.get_file_as_string(PATH + ".bak") == old_backup, "Future source or backup was changed by admission.")
 
 func _precision_gate(initial: Dictionary) -> void:
-	# This independent probe records a real integration blocker. The transition
-	# proof uses exact coordinates; it does NOT certify the current save format
-	# for arbitrary astronomical doubles. Full-precision serialization is needed.
+	# ARCH-06 closes the shared writer gate. Keep this a hard regression;
+	# the design fixture still does not imply a playable M9 save participant.
 	var precise: Dictionary = initial.duplicate(true)
 	precise.ships.ship_lander.place.position[0] = 1000000000010.125
 	_expect(Atomic.parse_dictionary(JSON.stringify(precise, "", true, true)) == precise, "Full-precision JSON cannot represent the proposed address.")
 	var probe_path: String = PATH + ".precision_probe.json"
 	_expect(Atomic.write(probe_path, precise, false) == OK, "Precision probe could not write its fixture.")
 	var preserved: bool = Atomic.parse_dictionary(FileAccess.get_file_as_string(probe_path)) == precise
+	_expect(preserved, "Shared writer rounded the expedition system coordinate.")
 	print(JSON.stringify({"integration_gate": "system_coordinate_save_precision", "ready": preserved, "required": "lossless double round trip through shared save owner"}))
 
 func _malformed_fields(base: Dictionary) -> void:

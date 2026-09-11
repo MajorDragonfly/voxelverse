@@ -407,7 +407,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 				return false
 	var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
 	if order in costs:
-		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or (order == "pen" and data["husbandry"]["pens"].size() >= Husbandry.MAX_PENS) or data["economy"]["stations"].has(order):
+		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or (order in Housing.ANIMAL_SITES and data["husbandry"]["pens"].size() >= Husbandry.MAX_PENS) or data["economy"]["stations"].has(order):
 			status = "Dieser Ausbau ist bereits abgeschlossen."
 			return false
 		if order != "tool" and int(data["tools"]) == 0:
@@ -435,7 +435,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 				data["stock"][kind] -= costs[order][kind]
 			data["project"] = {"kind": order, "progress": 0.0}
 			if order in Housing.BUILDS:
-				var index: int = data["husbandry"]["pens"].size() if order == "pen" else data["housing"]["homes"].size()
+				var index: int = data["husbandry"]["pens"].size() if order in Housing.ANIMAL_SITES else data["housing"]["homes"].size()
 				data["project"].merge(Housing.site(data, order, Space.encode(self, destination), index))
 				data["project"]["materials"] = costs[order].duplicate()
 				data["project"]["delivered_materials"] = {}

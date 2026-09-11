@@ -5,20 +5,21 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Resources = preload("res://world/tribe/resource_catalog.gd")
 const Batch = preload("res://world/tribe/resource_batch.gd")
 const RESOURCES: Array[String] = Resources.IDS
-const EXTRA: Array[String] = ["water", "fiber", "milk"]
+const SCHEMA: int = 2
+const EXTRA: Array[String] = ["water", "fiber", "milk", "eggs"]
 const STATIONS: Dictionary = {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}
 const COSTS: Dictionary = {"well": {"wood": 3, "stone": 2}, "forester": {"wood": 4, "stone": 1}, "quarry": {"wood": 4, "stone": 2}, "fiberbed": {"wood": 2, "stone": 1}}
 const INTERVALS: Dictionary = {"water": 5.0, "wood": 12.0, "stone": 15.0, "fiber": 12.0}
 const TITLES: Dictionary = Resources.TITLES
-const JOBS: Dictionary = {"none": "Ohne Beruf", "provider": "Versorger", "forester": "Holzarbeiter", "mason": "Steinmetz", "weaver": "Fasersammler", "builder": "Baumeister", "milk_carrier": "Milchträger", "keeper": "Tierpfleger"}
-const JOB_ORDER: Dictionary = {"none": "wait", "provider": "provision", "forester": "wood", "mason": "stone", "weaver": "fiber", "builder": "build", "milk_carrier": "milk", "keeper": "tend"}
-const ORDERS: Array[String] = ["water", "fiber", "milk", "drink", "provision", "build", "well", "forester", "quarry", "fiberbed", "tend"]
-const TARGETS: Dictionary = {"food": 12, "water": 12, "wood": 16, "stone": 16, "fiber": 12, "milk": 12}
+const JOBS: Dictionary = {"none": "Ohne Beruf", "provider": "Versorger", "forester": "Holzarbeiter", "mason": "Steinmetz", "weaver": "Fasersammler", "builder": "Baumeister", "milk_carrier": "Milchträger", "keeper": "Tierpfleger", "egg_carrier": "Eierträger"}
+const JOB_ORDER: Dictionary = {"none": "wait", "provider": "provision", "forester": "wood", "mason": "stone", "weaver": "fiber", "builder": "build", "milk_carrier": "milk", "keeper": "tend", "egg_carrier": "eggs"}
+const ORDERS: Array[String] = ["water", "fiber", "milk", "eggs", "laying_site", "drink", "provision", "build", "well", "forester", "quarry", "fiberbed", "tend"]
+const TARGETS: Dictionary = {"food": 12, "water": 12, "wood": 16, "stone": 16, "fiber": 12, "milk": 12, "eggs": 12}
 const CAPACITY: int = 8
 const CARE_THRESHOLD: float = 55.0
 
 static func install(data: Dictionary) -> void:
-	data["economy"] = {"schema": 1, "stations": {}, "clocks": {}, "produced": {}, "incoming": [], "receipts": {}, "drinks": 0, "milk_meals": 0, "milk_received": 0}
+	data["economy"] = {"schema": SCHEMA, "eggs_received": 0, "eggs_meals": 0, "stations": {}, "clocks": {}, "produced": {}, "incoming": [], "receipts": {}, "drinks": 0, "milk_meals": 0, "milk_received": 0}
 	for kind: String in EXTRA:
 		data["stock"][kind] = 0
 	for kind: String in INTERVALS:
@@ -28,6 +29,14 @@ static func install(data: Dictionary) -> void:
 		data["deposits"][kind] = {"id": Ids.scoped("resource", data["home_group_id"], kind), "position": data["anchor"].duplicate(), "remaining": 0}
 	for member: Dictionary in data["members"]:
 		member.merge({"hydration": 100.0, "profession": "none", "paused_order": "", "task": "", "blocked": false}, true)
+
+static func upgrade(data: Dictionary) -> bool:
+	if data.get("economy", {}).get("schema") != 1: return false
+	data.economy.schema = SCHEMA
+	data.economy["eggs_received"] = 0
+	data.economy["eggs_meals"] = 0
+	data.stock["eggs"] = 0
+	return true
 
 static func tick(data: Dictionary, delta: float) -> bool:
 	if delta <= 0 or not is_finite(delta):
@@ -57,19 +66,19 @@ static func carried(data: Dictionary, kind: String) -> int:
 	return count
 
 static func reserve(data: Dictionary, kind: String) -> int:
-	return int(data["stock"][kind]) + carried(data, kind)
+	return int(data["stock"].get(kind, 0)) + carried(data, kind)
 
 static func has_food(data: Dictionary) -> bool:
 	return not food_kind(data).is_empty()
 
 static func food_kind(data: Dictionary) -> String:
 	for kind: String in Resources.FOODS:
-		if int(data.stock[kind]) > 0: return kind
+		if int(data.stock.get(kind, 0)) > 0: return kind
 	return ""
 
 static func consume(data: Dictionary, kind: String) -> Dictionary:
 	var resource: Dictionary = Resources.definition(kind)
-	if resource.is_empty() or (resource.nutrition <= 0 and resource.hydration <= 0) or int(data.stock[kind]) <= 0: return {}
+	if resource.is_empty() or (resource.nutrition <= 0 and resource.hydration <= 0) or int(data.stock.get(kind, 0)) <= 0: return {}
 	data.stock[kind] -= 1
 	Resources.add(data.economy, kind, "consumed", 1)
 	return resource
@@ -135,6 +144,7 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
 	var batch: Dictionary = Batch.canonical(data, value)
 	if batch.is_empty(): return "Ungültiger Ressourcenbatch oder unbekannte Revision."
 	var kind: String = batch.resource_id
+	if kind == "eggs" and data.economy.schema != SCHEMA: return "Eier benötigen das aktuelle Wirtschaftsformat."
 	if not Resources.uses_batches(kind): return "Diese Ressource besitzt keinen Produktionsanschluss."
 	var receipts: Dictionary = data.economy.receipts
 	var identity: String = batch.source_id
@@ -156,7 +166,7 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
 
 static func has_unsupported_contract(value: Variant) -> bool:
 	if not value is Dictionary: return false
-	if value.get("schema") != 1: return true
+	if (value.get("schema") != 1 and value.get("schema") != SCHEMA): return true
 	if value.get("receipts") is Dictionary:
 		for receipt: Variant in value.receipts.values():
 			if Batch.unsupported(receipt): return true
@@ -167,14 +177,20 @@ static func has_unsupported_contract(value: Variant) -> bool:
 
 static func validate(data: Dictionary) -> String:
 	var e: Variant = data.get("economy")
-	if not e is Dictionary or e.get("schema") != 1:
+	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != SCHEMA):
 		return "Ungültige Dorfwirtschaft."
 	for field in ["stations", "clocks", "produced", "receipts"]:
 		if not e.get(field) is Dictionary:
 			return "Ungültiger Wirtschaftsvertrag."
 	if not integer(e.get("milk_received"), 0, 1000000000) or not integer(e.get("drinks"), 0, 1000000000) or not integer(e.get("milk_meals"), 0, 1000000000):
 		return "Ungültiger Verbrauch."
+	if e.schema == SCHEMA:
+		for counter in ["eggs_received", "eggs_meals"]:
+			if not integer(e.get(counter), 0, 1000000000): return "Ungültige Eierbilanz."
+	elif data.stock.has("eggs") or e.has("eggs_received") or e.has("eggs_meals"):
+		return "Eier benötigen Wirtschaftsformat 2."
 	for kind: String in EXTRA:
+		if kind == "eggs" and e.schema == 1: continue
 		if not integer(data["stock"].get(kind), 0, 48) or reserve(data, kind) > 48:
 			return "Ungültiger Zusatzvorrat."
 	for kind: String in INTERVALS:
@@ -198,17 +214,20 @@ static func validate(data: Dictionary) -> String:
 	for member: Dictionary in data["members"]:
 		if not number(member.get("hydration"), 0, 100) or member.get("profession") not in JOBS or not member.get("paused_order") is String or (member["paused_order"] != "" and member["paused_order"] not in (["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "pen", "feed", "garden", "supply"] + ORDERS)) or member.get("task") not in ["", "water", "food"] or not member.get("blocked") is bool:
 			return "Ungültiger Beruf oder unterbrochener Auftrag."
+		if e.schema == 1 and (member.get("order") in ["eggs", "laying_site"] or member.get("paused_order") in ["eggs", "laying_site"] or member.get("cargo") == "eggs" or member.get("profession") == "egg_carrier"): return "Eierauftrag benötigt Wirtschaftsformat 2."
 		if member["paused_order"] != "" and member["order"] != "wait":
 			return "Unterbrochener Auftrag wird bereits ausgeführt."
 	if not e.get("incoming") is Array or e["incoming"].size() > 48 or e["receipts"].size() > 64:
 		return "Ungültiges Milchlieferbuch."
 	for identity: Variant in e.receipts:
 		var receipt: Dictionary = Batch.canonical(data, e.receipts[identity])
+		if not receipt.is_empty() and e.schema == 1 and receipt.resource_id == "eggs": return "Eierbeleg benötigt Wirtschaftsformat 2."
 		if receipt.is_empty() or receipt.source_id != identity or e.receipts[identity].has("remaining"):
 			return "Ungültiger Ressourcenbeleg."
 	var keys: Array[String] = []
 	for value: Variant in e.incoming:
 		var batch: Dictionary = Batch.canonical(data, value)
+		if not batch.is_empty() and e.schema == 1 and batch.resource_id == "eggs": return "Eierlieferung benötigt Wirtschaftsformat 2."
 		if batch.is_empty() or not e.receipts.has(batch.source_id) or not integer(value.get("remaining"), 1, int(batch.amount)): return "Ungültige offene Ressourcenlieferung."
 		var last: Dictionary = Batch.canonical(data, e.receipts[batch.source_id])
 		if int(batch.sequence) > int(last.sequence) or batch.resource_id != last.resource_id or batch.recipe_id != last.recipe_id or batch.recipe_revision != last.recipe_revision: return "Lieferung widerspricht ihrem Produktionsbeleg."
@@ -217,6 +236,7 @@ static func validate(data: Dictionary) -> String:
 		keys.append(batch.receipt_id)
 	for kind: String in RESOURCES:
 		if not Resources.uses_batches(kind): continue
+		if kind == "eggs" and pending(data, kind) + reserve(data, kind) + Resources.total(e, kind, "consumed") != Resources.total(e, kind, "received"): return "Eier wurden verloren oder doppelt gebucht."
 		if pending(data, kind) + reserve(data, kind) + Resources.total(e, kind, "consumed") > Resources.total(e, kind, "received"): return "Ressource wurde vervielfacht."
 		if pending(data, kind) + reserve(data, kind) > int(Resources.definition(kind).capacity): return "Ressource überschreitet Lagerkapazität."
 	return ""

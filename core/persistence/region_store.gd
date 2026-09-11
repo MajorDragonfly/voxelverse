@@ -190,7 +190,9 @@ func _read(hash_value: String) -> Dictionary:
 func _write(value: Dictionary) -> String:
 	if not last_error.is_empty(): return ""
 	var started: int = Time.get_ticks_usec()
-	var contents: String = JSON.stringify(value, "", true)
+	# Hash the exact bytes written. Older blobs retain their original hashes
+	# and remain readable; only new/changed values use full double precision.
+	var contents: String = Atomic.stringify(value, "")
 	if contents.to_utf8_buffer().size() > MAX_BYTES: _fail("Regionsdatei überschreitet ihr Budget."); return ""
 	var hash_value: String = contents.sha256_text()
 	var path: String = _path(hash_value)

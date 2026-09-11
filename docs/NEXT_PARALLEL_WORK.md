@@ -1,3 +1,5 @@
+> **Aktueller Integrationsbranch, 11. September 2026:** PR #78–#83 sind auf `agent/integration-sphere-acceptance-2026-09-11` zusammengeführt, noch nicht als gemeinsame Laufzeit-/Ziel-PC-Abnahme freigegeben. ARCH-06-Präzision, ARCH-07-Save-Teilnehmer, ARCH-14-Zustandsschutz, ARCH-22-Eierkette, ARCH-24-Mundmodelle und ARCH-25-Fähigkeiten DE/EN nicht doppelt beginnen. Maßgeblich sind `docs/INTEGRATION_2026-09-11.md` und die exakten Quellcommits. Ältere „nächste Aufgabe“-Zeilen unten sind für diese sechs Lieferungen historisch. Nächster Vorrang: gemeinsame Kugel-/Vegetations-/Rückreiseprüfung, dann verbleibende ARCH-13/14/17/19-Aufträge.
+
 # Nächste Voxelverse-Arbeiten
 
 Stand: 10. September 2026, gemeinsamer Integrationsstand aus 28 abgeschlossenen Übergaben. [Integrationsbericht und Prüfgrenzen](INTEGRATION_2026-09-10.md), [exakte Quellen](integration-sources-2026-09-10.json), [Roadmap](../ROADMAP.md), [Architekturaufgaben](ARCHITECTURE_BACKLOG.md), [Modulanschlüsse](MODULE_CONTRACTS.md) und [Designvorgabe](VOXELVERSE_DESIGN.md) zuerst lesen. Der Bericht nennt den Veröffentlichungsstatus; ein lokaler Integrationsstand ist noch kein aktualisiertes `main`.
@@ -28,16 +30,18 @@ Vor Beginn den aktuellen Branch-/PR-Stand prüfen und genau einen Teilauftrag re
 | Paket | Konkreter nächster Umfang | Abhängigkeit / Grenze |
 |---|---|---|
 | ARCH-06 | Große gespeicherte Double-Koordinaten verlustfrei serialisieren und Fachorte vollständig inventarisieren | Der ARCH-30-Präzisionsnachweis bleibt offen; keine unveröffentlichten lokalen Entwürfe als geliefert zählen |
-| ARCH-07 | Bestehende Save-Teilnehmer schrittweise hinter eine feste Registrierung führen | Gemeinsamer SaveGameService bleibt alleiniger Writer; aktuelle Versionssperren erhalten |
+| ARCH-07 | Fachlieferung: feste Speicherregistrierung und bestehende Teilnehmer angeschlossen; [Übergabe](WORK_ARCH07_SAVE_PARTICIPANTS.md) | Eigener Branch, Integration offen. SaveService mit ARCH-06 sequenziell zusammenführen; keinen zweiten Registeransatz beginnen |
 | ARCH-13 | Kleines globales Manifest, vollständige Referenzaufbewahrung und sichere Bereinigung | Archive für Population/Atlas/Orte existieren bereits; Backup-Menü und Labordateien sind weitere abgegrenzte Anschlüsse |
-| ARCH-14 | Verbleibende Tier-, Begegnungs- und Nahrungslangzeitregister prüfen/auslagern | Karten-/Ortspaging nicht erneut entwickeln; mehr als 256 dauerhaft veränderte Tiere gesondert nachweisen |
+| ARCH-14 | [Kampagnenregister-Teilpaket](WORK_ARCH14_POPULATION_REGISTERS.md) geliefert auf eigenem Branch, Integration ausstehend; danach separates Planetlabor und große Entdeckungsbücher | 384 veränderte Tiere/Nahrungsquellen plus weiteres Tier mit Neustart geprüft; Karten-/Ortspaging nicht erneut entwickeln |
 | ARCH-17 / ARCH-02 | Kalte Terrain-/Kreaturenpublikation, Vorausschau und längere physische Rückroute untersuchen | Gemeldeten Rückwegstillstand reproduzieren; keine FPS-Zusage aus Headless-Werten |
 | ARCH-19 | Gemeinsamen Stand grafisch und als native Pakete abnehmen; Ziel-PC und lange Reise messen | Einheitlicher Commit, echte Neustarts und vorhandene Integrationsprüfungen; Kugelstart bleibt aktiv |
-| ARCH-22 / D3-EIER | Legestelle → versorgen → produzieren → sammeln → tragen → einlagern/essen | ARCH-20 und ARCH-21 sind vorhanden. D2 bleibt Tierbesitzer; Nah-/Fernbilanz, Pause und Neustart prüfen |
+| ARCH-22 / D3-EIER | **Fachbranch geliefert:** Legestelle → Versorgung → Produktion → Transport → Mahlzeit; [Übergabe](WORK_ARCH22_EGG_PRODUCTION.md) | Nicht erneut reservieren. Separat integrieren; D2 bleibt Tierbesitzer, Milchdaten und alleinige Nah-/Fernzuständigkeit erhalten |
 | ARCH-24 / M3-TEILE | Rüssel, zusätzliche Schnauzen und Oktopusmund als nächstes Modellpaket | Gemeinsame Kataloge/Renderer verwenden; gespeicherte Teilrevisionen und aktive Greiferöffnung sind noch eigene Anschlüsse |
 | ARCH-25 | Einen weiteren HUD-, Journal-, Dorf- oder Editorbereich vollständig DE/EN anschließen | Bestehende vier Teilbereiche erhalten; Katalogschlüssel vereinigen und PO-Dateien generieren |
 | ARCH-26/27 | Mehrere eigene Siedlungen und tatsächliche Transporte | Erst benötigte Regions-/Ortsverträge liefern; keine zweiten Vorrats- oder Tierdienste |
 | BP-COMMUNITY.3 | Dienst-/Uploadumfang für den Community-Katalog festlegen und danach umsetzen | Lokale Bibliothek ist vorhanden; Onlineveröffentlichung, Galerie und weitere Bauplanarten bleiben offen |
+
+**ARCH-24-Fachübergabe dieser Runde:** `agent/arch24-mouth-models-2026-09-10` liefert Hundeschnauze, Krokodilschnauze und Oktopusmund; [Bericht](WORK_ARCH24_MOUTH_MODELS.md). Diese drei Modelle nicht erneut beginnen. Rüssel bleibt ein eigenes Kopfmodul mit getrenntem Mundanschluss; weitere Schnauzen sowie gespeicherte Teilrevisionen und aktive Kiefer-/Greiferöffnung bleiben offen. Gemeinsame Änderungen: `ProgressionService` ergänzt normale Freischalteinträge für Modellalternativen; die Testregistry erhält genau einen Test. ARCH-06/07/22 wurden nicht übernommen.
 
 ## Regeln für Übergaben
 

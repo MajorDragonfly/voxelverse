@@ -1,3 +1,5 @@
+> **Aktueller Integrationsbranch, 11. September 2026:** PR #78–#83 sind auf `agent/integration-sphere-acceptance-2026-09-11` zusammengeführt, noch nicht als gemeinsame Laufzeit-/Ziel-PC-Abnahme freigegeben. ARCH-06-Präzision, ARCH-07-Save-Teilnehmer, ARCH-14-Zustandsschutz, ARCH-22-Eierkette, ARCH-24-Mundmodelle und ARCH-25-Fähigkeiten DE/EN nicht doppelt beginnen. Maßgeblich sind `docs/INTEGRATION_2026-09-11.md` und die exakten Quellcommits. Ältere „nächste Aufgabe“-Zeilen unten sind für diese sechs Lieferungen historisch. Nächster Vorrang: gemeinsame Kugel-/Vegetations-/Rückreiseprüfung, dann verbleibende ARCH-13/14/17/19-Aufträge.
+
 # Voxelverse – ausführbare Architekturaufgaben
 
 Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7` auf veröffentlichtem `main`. [Befunde und Grenzen](ARCHITECTURE_SCALABILITY_AUDIT.md), [Roadmap](../ROADMAP.md), [Kugelumzug](SPHERICAL_CAMPAIGN_MIGRATION.md) und [Arbeitsverteilung](NEXT_PARALLEL_WORK.md) zusammen lesen.
@@ -97,10 +99,12 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-07 – Speicherteilnahme modularisieren
 
+**Fachlieferung 10. September:** Statische Registrierung für sieben Snapshot-Teilnehmer und 14 körpergebundene Speicherbausteine umgesetzt. [Vertrag, Prüfbasis und Integrationsgrenzen](WORK_ARCH07_SAVE_PARTICIPANTS.md). Eigener Branch auf `bb2f83b`; noch nicht in `main` integriert. ARCH-06 beim gemeinsamen Save-Service anschließend sequenziell abgleichen.
+
 - **Zuordnung:** M0/M1e. **Vorher:** ARCH-01; mit ARCH-04/06 sequenziell integrieren. **Bereich:** SaveService, vorhandene Validatoren/Migratoren.
-- [ ] Vorhandene Module in einer statischen, expliziten Liste mit Schema-, Validierungs-, Migrations- und Snapshot-Anschluss erfassen; keine beliebig geladenen Plugins.
-- [ ] Vorhandene Validierungszweige schrittweise hinter diese Anschlüsse verschieben. Slotverwaltung, Writer und gemeinsamer Transaktionsabschluss bleiben zentral.
-- [ ] Neue Top-Level-Felder brauchen einen Import-/Exportanschluss. Unbekannte Pflichtversionen blockieren weiterhin Backup-Rückfall und Schreiben.
+- [x] Vorhandene Module in einer statischen, expliziten Liste mit Schema-, Validierungs-, Migrations- und Snapshot-Anschluss erfassen; keine beliebig geladenen Plugins.
+- [x] Vorhandene Validierungszweige schrittweise hinter diese Anschlüsse verschieben. Slotverwaltung, Writer und gemeinsamer Transaktionsabschluss bleiben zentral.
+- [x] Neue Top-Level-Felder brauchen einen Import-/Exportanschluss. Unbekannte Pflichtversionen blockieren weiterhin Backup-Rückfall und Schreiben.
 - **Fertig:** Heimat, D2, Dorf, Atlas und Fortschritt werden unverändert gespeichert; fehlende Registrierung fällt bei der Prüfung auf. Alte Save-, Zukunftsversion- und Schreibfehlertests bleiben erfolgreich.
 
 ## Vollständige Spielschleife auf Kugeln
@@ -159,6 +163,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 - **Fertig:** Abbruch zwischen Segmenten/Manifest führt zum letzten vollständigen Zustand; keine halbe Lieferung. Änderungsregion → mehr als 96 weitere Regionen → Rückkehr/Neustart erhält Population und Ressourcen bei begrenztem RAM.
 
 ### ARCH-14 – Langzeitregister auslagern
+
+**Fachlieferung 10. September (eigener Branch, noch nicht integriert):** [Kampagnen-Tierregister](WORK_ARCH14_POPULATION_REGISTERS.md) mit 384 dauerhaft veränderten Tieren/Nahrungsquellen und einem weiteren Tier. Aktive Bedürfnisreferenzen und Ortsänderungen bleiben nach Checkpoint/Eviction erhalten; Altformat, Schreibfehler und frischer Prozess geprüft. Das separate Planetlabor mit 256 `animal_records` sowie große Entdeckungsbücher bleiben offen.
 
 **Integration 10. September:** Kartenkacheln und bekannte Orte über RegionStore mit begrenztem Cache/Paging integriert (#59/#65); übrige Langzeitregister und die >256-Tier-Abnahme bleiben offen.
 
@@ -245,10 +251,12 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-22 – D3-EIER als zweite Produktionskette
 
+**Fachbranch geliefert, 10. September:** Legestellen, Pflege, Eierbatches, echte Transporte und Mahlzeiten auf den bestehenden Verträgen. Alt-Milchdaten bleiben erhalten; Integration und Prüfgrenzen siehe [ARCH-22-Übergabe](WORK_ARCH22_EGG_PRODUCTION.md).
+
 - **Zuordnung:** bestehender Fachauftrag D3-EIER. **Vorher:** ARCH-11/20/21; Fernübergabe zusätzlich mit ARCH-16 abnehmen.
-- [ ] Eigenes geeignetes Tier, Versorgung und Legestelle an bestehende Haltung anschließen; Eier über den gemeinsamen Produktions-/Ressourcenvertrag erzeugen.
-- [ ] Sammeln, tatsächliches Tragen, Einlagern und Essen über dieselben Aufträge wie andere Ressourcen ausführen.
-- [ ] Essbare Eier bleiben von Nachwuchs/Bebrütung getrennt; Belohnungen verwenden bestehende begrenzte Erfolgsregeln.
+- [x] Eigenes geeignetes Tier, Versorgung und Legestelle an bestehende Haltung anschließen; Eier über den gemeinsamen Produktions-/Ressourcenvertrag erzeugen.
+- [x] Sammeln, tatsächliches Tragen, Einlagern und Essen über dieselben Aufträge wie andere Ressourcen ausführen.
+- [x] Essbare Eier bleiben von Nachwuchs/Bebrütung getrennt; Belohnungen verwenden bestehende begrenzte Erfolgsregeln.
 - **Fertig:** Jedes Ei liegt genau einmal an Legestelle, in Fracht oder im Lager; Pause, Unterbrechung, Tierverlust und Neustart erhalten Mengen. Eier benötigen nicht den Abschluss aller neuen Körpermodelle.
 
 ### ARCH-23 – Bauplanversionen vor neuen Editoren absichern
@@ -267,6 +275,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 ### ARCH-24 – M3-TEILE über Katalog und Geometrieanbieter
 
 **Integration 10. September:** Altteilinventar, Fuß-/Handanbieter, Katzenpfoten, Bärentatzen, Pferdehufe und Krebsscheren integriert (#55/#66/#70). Rüssel, weitere Schnauzen, Oktopusmund, gespeicherte Teilrevisionen und aktive Greiferöffnung bleiben eigene Arbeit.
+
+**Weiteres Fachpaket 10. September:** [Hundeschnauze, Krokodilschnauze und Oktopusmund](WORK_ARCH24_MOUTH_MODELS.md) über gemeinsame Geometrie, Editor und Buch. Die Modelle teilen Werte/Freischaltung der bestehenden Raubkiefer; 24 alte Geometriefälle und 30 Altarten bleiben exakt erhalten. Lieferung auf eigenem Branch, Integration separat. Rüssel, weitere Modelle und bewegliche Kiefer bleiben offen.
 
 - **Zuordnung:** bestehende M3-TEILE.1–.5. **Vorher:** ARCH-23 für Schemaänderungen; Bestandsinventar darf sofort beginnen.
 - [ ] Alle alten Teil-IDs erfassen und je Teil Revision/Erhalt/kompatiblen Ersatz bestimmen. Katalogdaten von Geometrie, Kontaktpunkten und unterstützten Aktionen trennen.

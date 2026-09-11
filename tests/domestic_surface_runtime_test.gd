@@ -1,4 +1,5 @@
 extends SceneTree
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 const World = preload("res://world/planet_lab/living_planet.gd")
 const Save = preload("res://world/surface/living_planet_store.gd")
 const Contract = preload("res://world/fauna/domestication/domestic_surface_contract.gd")
@@ -89,9 +90,9 @@ func run() -> void:
 	expect(not snapshot.is_empty() and snapshot.schema == Save.SCHEMA, "Spherical save lacks the current header")
 	var old_ids: Array = world.ecosystem.domestic.individuals.keys()
 	old_ids.sort()
-	var frozen: Variant = JSON.parse_string(JSON.stringify(catalog.species))
+	var frozen: Variant = JSON.parse_string(Atomic.stringify(catalog.species))
 	expect(world.load_lab(), "D12 reload failed")
-	expect(JSON.parse_string(JSON.stringify(world.ecosystem.domestic.catalog.species)) == frozen, "Reload mutated frozen bodies/evidence")
+	expect(JSON.parse_string(Atomic.stringify(world.ecosystem.domestic.catalog.species)) == frozen, "Reload mutated frozen bodies/evidence")
 	world.set_paused(false)
 	world.walker.enabled = false
 	await populate(world)
@@ -127,7 +128,7 @@ func run() -> void:
 	expect(same_ids(world.ecosystem.domestic.individuals, old_ids), "Streaming return changed identities")
 	world.set_paused(true)
 	world._capture()
-	expect(JSON.parse_string(JSON.stringify(world.records[world.body_id].fauna_catalog.species)) == frozen, "Streaming regenerated species")
+	expect(JSON.parse_string(Atomic.stringify(world.records[world.body_id].fauna_catalog.species)) == frozen, "Streaming regenerated species")
 	expect(JSON.stringify(root.get_node("GameState").campaign.export_state()) == campaign_before, "Sphere fauna/food wrote into legacy campaign")
 	metrics.before = before.bodies[world.body_id].domestic_fauna
 	if "--d12-render" in OS.get_cmdline_user_args():

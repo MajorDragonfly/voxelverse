@@ -242,7 +242,7 @@ func _reload_and_guardrails() -> void:
 func _verify_restart() -> void:
 	var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string("user://creature_behavior_expected.json"))
 	_expect(saves.load_now(), "Fresh process could not load behavior.")
-	_expect(JSON.parse_string(JSON.stringify(progression.export_state())) == expected.get("progression"), "Fresh process changed relationships, rewards or purchases.")
+	_expect(JSON.parse_string(Atomic.stringify(progression.export_state())) == expected.get("progression"), "Fresh process changed relationships, rewards or purchases.")
 	if failures.is_empty():
 		print("Creature behavior restart passed")
 
@@ -357,7 +357,7 @@ func _phase_preview_and_migration() -> void:
 	Atomic.write(TEST_SAVE, old, false)
 	var bytes: String = FileAccess.get_file_as_string(TEST_SAVE)
 	_expect(saves.load_now(), "Existing M2/UI schema 4 did not migrate.")
-	_expect(JSON.parse_string(JSON.stringify(progression.export_state()["behavior"])) == old["progression"]["behavior"], "Migration changed earned points or purchased nodes.")
+	_expect(JSON.parse_string(Atomic.stringify(progression.export_state()["behavior"])) == old["progression"]["behavior"], "Migration changed earned points or purchased nodes.")
 	_expect(progression.export_state()["creature_encounters"]["entries"].is_empty(), "Migration invented historical relationships.")
 	_expect(FileAccess.get_file_as_string(TEST_SAVE) == bytes and FileAccess.file_exists(TEST_SAVE + ".schema4.backup.json"), "Migration did not preserve original save bytes.")
 	_expect(saves.save_now(), "Migrated campaign failed to save.")
