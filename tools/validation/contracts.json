@@ -183,7 +183,8 @@
         "tribal_economy_progress_test",
         "tribal_economy_progress_world_test",
         "tribal_progression_test",
-        "tribal_progression_world_test"
+        "tribal_progression_world_test",
+        "skills_localization_test"
       ]
     },
     {

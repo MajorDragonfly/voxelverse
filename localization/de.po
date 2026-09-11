@@ -1316,3 +1316,393 @@ msgstr "Kurzen Spielhinweis anzeigen"
 
 msgid "Entdeckungsbuch · J"
 msgstr "Entdeckungsbuch · J"
+
+msgid "SKILLS_SPECIES"
+msgstr "VOXELVERSE  /  DEINE SPEZIES"
+
+msgid "SKILLS_TITLE"
+msgstr "Entwicklungsbuch"
+
+msgid "SKILLS_CLOSE"
+msgstr "Schließen · Esc"
+
+msgid "SKILLS_TAB"
+msgstr "Fähigkeiten"
+
+msgid "SKILLS_JOURNAL"
+msgstr "Entdeckungsbuch · J"
+
+msgid "SKILLS_PATH"
+msgstr "Entwicklungspfad"
+
+msgid "SKILLS_HEADING"
+msgstr "Deine Fähigkeiten"
+
+msgid "SKILLS_EARNING"
+msgstr "Punkte verdienen: Befreunden und Helfen · Jagen und Konflikte abschließen.\nSilhouette = noch nicht freigeschaltet. Wähle ein Symbol für Wirkung und Voraussetzungen."
+
+msgid "SKILLS_DETAIL"
+msgstr "FÄHIGKEIT"
+
+msgid "SKILLS_SAVE_HINT"
+msgstr "Freischaltungen werden sofort gespeichert. Umskillen ist bisher nicht verfügbar."
+
+msgid "SKILLS_SOCIAL"
+msgstr "SOZIAL"
+
+msgid "SKILLS_AGGRESSION"
+msgstr "AGGRESSIV"
+
+msgid "SKILLS_LEGACY_CAPTION"
+msgstr "Vermächtnis ab Stamm"
+
+msgid "SKILLS_TRIBE_CAPTION"
+msgstr "Stammesphase"
+
+msgid "SKILLS_CREATURE_CAPTION"
+msgstr "Kreaturenphase"
+
+msgid "SKILLS_OPEN_PATH"
+msgstr "Dein Weg bleibt offen"
+
+msgid "SKILLS_TRIBE_PATH"
+msgstr "Dein Stamm · gemeinsame Erfolge"
+
+msgid "SKILLS_FUTURE_PATH"
+msgstr " · dein zukünftiger Weg"
+
+msgid "SKILLS_WALLET_CONTEXT"
+msgstr "Sozial und aggressiv lassen sich kombinieren. Angezeigt werden ausschließlich die Punkte der Phase %s."
+
+msgid "SKILLS_OLD_POINTS"
+msgstr " Kreaturenpunkte bleiben im Kreaturenbaum ausgebbar."
+
+msgid "SKILLS_WALLET"
+msgstr "%d Punkte verfügbar\n%d verdient · %d eingesetzt"
+
+msgid "SKILLS_PLANNED_EARNING"
+msgstr "Geplante Punktequellen\n"
+
+msgid "SKILLS_PLANNED_SKILLS"
+msgstr "\n\nFähigkeiten und Käufe folgen mit den spielbaren Handlungen dieser Phase."
+
+msgid "SKILLS_TRIBE_EARNING"
+msgstr "Stammespunkte aus Gemeinschaftserfolgen\nJeder Meilenstein zählt einmal pro Kampagne. Die einzelnen Ziele stehen im Entwicklungspfad."
+
+msgid "SKILLS_TRIBE_CONFLICT"
+msgstr "Gruppenverteidigung und Stammeskonflikte folgen noch. Dafür werden derzeit keine Punkte oder Kampfboni angeboten."
+
+msgid "SKILLS_UNLOCKED"
+msgstr "Freigeschaltet"
+
+msgid "SKILLS_CARD_COST"
+msgstr "%d Punkte · %s"
+
+msgid "SKILLS_AVAILABLE"
+msgstr "Verfügbar"
+
+msgid "SKILLS_LOCKED"
+msgstr "Gesperrt"
+
+msgid "SKILLS_REQUIREMENT"
+msgstr "Voraussetzung: "
+
+msgid "SKILLS_NONE"
+msgstr "keine"
+
+msgid "SKILLS_LEGACY_EFFECT"
+msgstr "Vermächtnis · für Stamm und spätere Phasen vorbereitet"
+
+msgid "SKILLS_CREATURE_EFFECT"
+msgstr "Kreaturenbonus · endet mit der Kreaturenphase"
+
+msgid "SKILLS_PURCHASED"
+msgstr "\nGekauft · "
+
+msgid "SKILLS_FROM_TRIBE"
+msgstr "ab Stamm vorgesehen"
+
+msgid "SKILLS_GROUP_PENDING"
+msgstr "in dieser Phase vorgesehen · Gruppenmechanik noch offen"
+
+msgid "SKILLS_ACTIVE_NOW"
+msgstr "jetzt im Spiel aktiv"
+
+msgid "SKILLS_CREATURE_LEFT"
+msgstr "Kreaturenphase bereits verlassen"
+
+msgid "SKILLS_TRIBE_EFFECT"
+msgstr "Stammesbonus · wirkt auf tatsächliche Dorfaufgaben"
+
+msgid "SKILLS_ACTIVE_PURCHASE"
+msgstr "\nGekauft · aktiv"
+
+msgid "SKILLS_UNLOCK"
+msgstr "Freischalten · %d %s"
+
+msgid "SKILLS_SOCIAL_POINTS"
+msgstr "Sozialpunkte"
+
+msgid "SKILLS_AGGRESSION_POINTS"
+msgstr "Aggressionspunkte"
+
+msgid "SKILLS_SUCCESS"
+msgstr "%s freigeschaltet und gespeichert."
+
+msgid "SKILLS_POINTS_MISSING"
+msgstr "Noch nicht genügend Punkte in diesem Ast."
+
+msgid "SKILLS_PREREQUISITE_MISSING"
+msgstr "Zuerst den vorherigen Knoten freischalten."
+
+msgid "SKILLS_ALREADY_PURCHASED"
+msgstr "Dieser Knoten ist bereits freigeschaltet."
+
+msgid "SKILLS_FUTURE_PHASE"
+msgstr "Diese Freischaltung gehört zu einer späteren Phase."
+
+msgid "SKILLS_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Punkte und Freischaltung wurden zurückgesetzt. Du kannst den Kauf erneut versuchen."
+
+msgid "SKILLS_IN_PROGRESS"
+msgstr "Der vorherige Kauf wird noch gespeichert."
+
+msgid "SKILLS_UNAVAILABLE"
+msgstr "Freischaltung momentan nicht möglich. Es wurden keine Punkte ausgegeben."
+
+msgid "SKILLS_IMPLEMENTED"
+msgstr "Aktueller Spielablauf"
+
+msgid "SKILLS_PLANNED"
+msgstr "Planung · noch keine spielbare Phase"
+
+msgid "SKILLS_GROUP_BONUSES"
+msgstr "\nGekaufte Gruppenboni für diese Phase: Koordination +%d %% · Verteidigung +%d %%"
+
+msgid "SKILLS_BONUS_SCOPE"
+msgstr "\nKoordination wirkt auf Dorfaufgaben. Verteidigung folgt mit Stammeskämpfen."
+
+msgid "SKILLS_POINT_SCOPE"
+msgstr "\nJede Phase verdient eigene Punkte. Kreaturenpunkte bleiben ihrem Baum zugeordnet."
+
+msgid "SKILLS_VIEW"
+msgstr "Aktuelle Phase: %s · Ansicht: %s · Spiel pausiert"
+
+msgid "SKILLS_PLAYABLE_CHOICE"
+msgstr " · spielbar"
+
+msgid "SKILLS_PLANNED_CHOICE"
+msgstr " · geplant"
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_APPROACH_NAME"
+msgstr "Offenheit"
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_APPROACH_DESCRIPTION"
+msgstr "Befreunden wird um 15 % wirksamer."
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_SUPPORT_NAME"
+msgstr "Zusammenhalt"
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_SUPPORT_DESCRIPTION"
+msgstr "Unterstützung verbündeter Kreaturen wird um 15 % wirksamer."
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_LEGACY_NAME"
+msgstr "Gemeinsinn"
+
+msgid "SKILLS_NODE_CREATURE_SOCIAL_LEGACY_DESCRIPTION"
+msgstr "Ab der Stammesphase: 10 % bessere Gruppenkoordination."
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_HUNTER_NAME"
+msgstr "Jagdinstinkt"
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_HUNTER_DESCRIPTION"
+msgstr "Angriffe werden um 10 % wirksamer."
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_ENDURANCE_NAME"
+msgstr "Ausdauer"
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_ENDURANCE_DESCRIPTION"
+msgstr "Ausdauer erholt sich um 15 % schneller."
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_LEGACY_NAME"
+msgstr "Wehrhaftigkeit"
+
+msgid "SKILLS_NODE_CREATURE_AGGRESSION_LEGACY_DESCRIPTION"
+msgstr "Ab der Stammesphase: 10 % bessere gemeinsame Verteidigung."
+
+msgid "SKILLS_NODE_TRIBE_SOCIAL_TEAMWORK_NAME"
+msgstr "Arbeitsteilung"
+
+msgid "SKILLS_NODE_TRIBE_SOCIAL_TEAMWORK_DESCRIPTION"
+msgstr "Dorfaufgaben werden im Stamm um 10 % schneller erledigt."
+
+msgid "SKILLS_NODE_TRIBE_SOCIAL_PRACTICE_NAME"
+msgstr "Eingespielte Gemeinschaft"
+
+msgid "SKILLS_NODE_TRIBE_SOCIAL_PRACTICE_DESCRIPTION"
+msgstr "Weitere 10 % auf die Arbeitsrate im Stamm. Keine zusätzliche Produktion ohne Arbeit und Transport."
+
+msgid "SKILLS_PHASE_0_NAME"
+msgstr "Kreatur"
+
+msgid "SKILLS_PHASE_0_SCOPE"
+msgstr "Einzelne Begegnung"
+
+msgid "SKILLS_PHASE_0_CONTROL"
+msgstr "Du steuerst deine Kreatur; die Nestgruppe bleibt Teil dieser Phase."
+
+msgid "SKILLS_PHASE_0_LOOP_0"
+msgstr "Erkunden und Körper entwickeln"
+
+msgid "SKILLS_PHASE_0_LOOP_1"
+msgstr "Beziehungen aufbauen oder jagen"
+
+msgid "SKILLS_PHASE_0_LOOP_2"
+msgstr "Eine eigene Nestgruppe bilden"
+
+msgid "SKILLS_PHASE_0_SOCIAL"
+msgstr "Befreunden und fremd verursachte Verletzungen versorgen."
+
+msgid "SKILLS_PHASE_0_AGGRESSION"
+msgstr "Jagd auf Beute und Konflikte mit feindlichen Tieren abschließen."
+
+msgid "SKILLS_PHASE_0_NEXT"
+msgstr "Kreatur → Nestgruppe → Stammesphase. Die Nestgruppe ist die Vorstufe, noch kein Dorf."
+
+msgid "SKILLS_PHASE_1_NAME"
+msgstr "Stamm"
+
+msgid "SKILLS_PHASE_1_SCOPE"
+msgstr "Drei Bewohner und ihr erstes Dorf"
+
+msgid "SKILLS_PHASE_1_CONTROL"
+msgstr "Du befehligst Gruppen, verteilst Aufgaben und entwickelst ein richtiges Dorf."
+
+msgid "SKILLS_PHASE_1_LOOP_0"
+msgstr "Material sammeln"
+
+msgid "SKILLS_PHASE_1_LOOP_1"
+msgstr "Werkzeuge herstellen"
+
+msgid "SKILLS_PHASE_1_LOOP_2"
+msgstr "Behausung bauen"
+
+msgid "SKILLS_PHASE_1_LOOP_3"
+msgstr "Bewohner versorgen"
+
+msgid "SKILLS_PHASE_1_LOOP_4"
+msgstr "Dorf erweitern"
+
+msgid "SKILLS_PHASE_1_SOCIAL"
+msgstr "Gemeinsame Transporte, Handwerk, Hüttenbau, Gartenbau und Versorgung der ganzen Gruppe abschließen. Jeder Meilenstein verdient einmal eigene Stammespunkte."
+
+msgid "SKILLS_PHASE_1_AGGRESSION"
+msgstr "Geplant: das Lager verteidigen und begrenzte Stammeskonflikte entscheiden. Noch keine aktive Punktequelle."
+
+msgid "SKILLS_PHASE_1_NEXT"
+msgstr "Dies ist die eigentliche Stammesphase mit einem spielbaren Dorfeinstieg. Ein Wurzelgarten und Daueraufträge sichern Nahrung. Als Nächstes: weitere Berufe, Rohstoffquellen, Bevölkerungswachstum und Nachbarstämme."
+
+msgid "SKILLS_PHASE_2_NAME"
+msgstr "Antike / Mittelalter"
+
+msgid "SKILLS_PHASE_2_SCOPE"
+msgstr "Siedlung und Fraktion"
+
+msgid "SKILLS_PHASE_2_CONTROL"
+msgstr "Du organisierst mehrere Siedlungen und ihre Bevölkerung."
+
+msgid "SKILLS_PHASE_2_LOOP_0"
+msgstr "Landwirtschaft und Handwerk ausbauen"
+
+msgid "SKILLS_PHASE_2_LOOP_1"
+msgstr "Siedlungen verbinden"
+
+msgid "SKILLS_PHASE_2_LOOP_2"
+msgstr "Handel und regionale Konflikte führen"
+
+msgid "SKILLS_PHASE_2_SOCIAL"
+msgstr "Handelsabkommen erfüllen, Siedlungen versorgen und Frieden aushandeln."
+
+msgid "SKILLS_PHASE_2_AGGRESSION"
+msgstr "Belagerungen abwehren und Feldzüge mit festem Ziel abschließen."
+
+msgid "SKILLS_PHASE_2_NEXT"
+msgstr "Diplomatie, Versorgung und Verteidigung; bewährte Institutionen als Vermächtnis."
+
+msgid "SKILLS_PHASE_3_NAME"
+msgstr "Neuzeit / Weltmacht"
+
+msgid "SKILLS_PHASE_3_SCOPE"
+msgstr "Staat und internationaler Konflikt"
+
+msgid "SKILLS_PHASE_3_CONTROL"
+msgstr "Du führst einen Staat und lenkst Wirtschaft, Diplomatie und Verteidigung."
+
+msgid "SKILLS_PHASE_3_LOOP_0"
+msgstr "Industrie entwickeln"
+
+msgid "SKILLS_PHASE_3_LOOP_1"
+msgstr "Internationale Beziehungen gestalten"
+
+msgid "SKILLS_PHASE_3_LOOP_2"
+msgstr "Den Schritt ins All vorbereiten"
+
+msgid "SKILLS_PHASE_3_SOCIAL"
+msgstr "Kooperation, humanitäre Hilfe und gemeinsame Forschung abschließen."
+
+msgid "SKILLS_PHASE_3_AGGRESSION"
+msgstr "Strategische Konfliktziele erreichen und das eigene Gebiet schützen."
+
+msgid "SKILLS_PHASE_3_NEXT"
+msgstr "Wirtschaftsverbünde und strategische Logistik für die Weltraumphase vorbereiten."
+
+msgid "SKILLS_PHASE_4_NAME"
+msgstr "Weltraum"
+
+msgid "SKILLS_PHASE_4_SCOPE"
+msgstr "Zivilisation und Sternensystem"
+
+msgid "SKILLS_PHASE_4_CONTROL"
+msgstr "Du entwickelst deine Zivilisation über Planeten und Sternensysteme hinweg."
+
+msgid "SKILLS_PHASE_4_LOOP_0"
+msgstr "Sternensysteme erkunden"
+
+msgid "SKILLS_PHASE_4_LOOP_1"
+msgstr "Kolonien versorgen"
+
+msgid "SKILLS_PHASE_4_LOOP_2"
+msgstr "Interstellare Beziehungen gestalten"
+
+msgid "SKILLS_PHASE_4_SOCIAL"
+msgstr "Erstkontakt, Koloniehilfe und interstellare Verträge erfolgreich abschließen."
+
+msgid "SKILLS_PHASE_4_AGGRESSION"
+msgstr "Kolonien verteidigen und Konflikte um Systeme entscheiden."
+
+msgid "SKILLS_PHASE_4_NEXT"
+msgstr "Interstellare Zusammenarbeit und Flottenkoordination; stabile Galaxie-/System-/Körperadressen."
+
+msgid "SKILLS_PHASE_5_NAME"
+msgstr "Multiversum"
+
+msgid "SKILLS_PHASE_5_SCOPE"
+msgstr "Universum und universenübergreifender Auftrag"
+
+msgid "SKILLS_PHASE_5_CONTROL"
+msgstr "Langfristiger Entwurf für deine universenübergreifende Zivilisation."
+
+msgid "SKILLS_PHASE_5_LOOP_0"
+msgstr "Neue Universen erkunden"
+
+msgid "SKILLS_PHASE_5_LOOP_1"
+msgstr "Expeditionen und übergreifende Beziehungen entwickeln"
+
+msgid "SKILLS_PHASE_5_SOCIAL"
+msgstr "Gemeinsame Expeditionen und Abkommen zwischen Universen abschließen."
+
+msgid "SKILLS_PHASE_5_AGGRESSION"
+msgstr "Universenübergreifende Bedrohungen mit definiertem Ziel abwehren."
+
+msgid "SKILLS_PHASE_5_NEXT"
+msgstr "Langfristiger Entwurf; konkrete Spielregeln erst nach der Weltraumphase festlegen."
