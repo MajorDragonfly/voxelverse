@@ -10,6 +10,8 @@ Katzenpfoten, Bärentatzen, Pferdehufe und Krebsscheren ergänzen den gemeinsame
 
 Die abgeschlossenen Teilpakete nicht erneut beginnen. Die [aktuelle Arbeitsverteilung](docs/NEXT_PARALLEL_WORK.md) ersetzt die historischen direkten ARCH-01/03-Aufträge.
 
+**ARCH-14 – Kampagnen-Tierregister (Fachbranch, noch nicht integriert):** Änderungen an Hunger, Durst und Tierorten bleiben nach Speicherpunkt und Cachewechsel erhalten. 384 veränderte Tieridentitäten/Nahrungsquellen plus ein weiteres Tier mit echtem Neustart und Schreibfehler geprüft. [Umfang und Grenzen](docs/WORK_ARCH14_POPULATION_REGISTERS.md); die separate 256-Tier-Grenze des Planetlabors bleibt offen.
+
 ## Laufende Kugelintegration
 
 Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickeltem Kopierumzug und regionalem Population-Speicher ist umgesetzt. Die Skalierungsrunde ergänzt Körper-ID-Migration, gemeinsame Nah-/Fernarbeit, portionierte Navigation und gesicherte A–B–A-Reisen; auch das fertig übergebene Animationspaket wird am gemeinsamen Stand geprüft. [WORK_SPHERICAL_GAMEPLAY.md](docs/WORK_SPHERICAL_GAMEPLAY.md) und [WORK_CAMPAIGN_SCALING.md](docs/WORK_CAMPAIGN_SCALING.md) ergänzen die untenstehenden bisherigen Meilensteinstände mit den aktuellen Nachweisen. **Entscheidung von Lars am 10. September: Die Kugelwelt ist ab sofort der einzige reguläre Spielweg, unabhängig von der noch offenen Abnahme.** Flachwelt-Neustart und spielbare Rückwege entfallen; Altstände werden als erhaltene Quellen über die geprüfte Kopiermigration fortgesetzt. Segmentierte globale Speicherung, lange Reisen auf Zielhardware und die vollständige M1i-Abnahme bleiben offen. Details: [Kugelwelt als fester Spielweg](docs/WORK_SPHERE_ONLY_ENTRY.md).
