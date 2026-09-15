@@ -1,0 +1,112 @@
+{
+  "packet": "ARCH-24-PART-REVISIONS",
+  "base_commit": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+  "source_commit": "f68d50ada84aea4f5987a74afea5b0e177a87a83",
+  "source_tree": "bafab2d9375972758e2fffad2864c8ace18e4961",
+  "files": [
+    {
+      "path": "assembly/core/blueprint_contract.gd",
+      "sha256": "73e018d967310e6a68657f859935170c012f94fb2daabc9ddbdfd87f93f9c721"
+    },
+    {
+      "path": "assembly/exchange/creature_blueprint_package.gd",
+      "sha256": "992800920ef6fa5a063d0bea20bca5ed2465e7737f523f00da034a9540950330"
+    },
+    {
+      "path": "assembly/exchange/creature_design_library.gd",
+      "sha256": "2c89fcfeef67a0adfd8d0a412b8438f5019eb5bc1ff5373ea68f3ca324408107"
+    },
+    {
+      "path": "assembly/exchange/creature_package_schema.gd",
+      "sha256": "6559e8f11f28681d65732dce62f36582aedf0bf9adf04ab5d09933d4d2b18765"
+    },
+    {
+      "path": "creatures/catalog/creature_part_revisions.gd",
+      "sha256": "84f9dd550f4a95c4d96f45699e9c1ae552e84ade627df84e79dbc73af70416d5"
+    },
+    {
+      "path": "creatures/catalog/creature_part_revisions.gd.uid",
+      "sha256": "9594731eb88d7d5df7a998dd9867b0a4525d6e98b3e4fca26145cb08367bb5d6"
+    },
+    {
+      "path": "creatures/editor/creature_assembly_blueprint_v7.gd",
+      "sha256": "13964958ad90d7a2b242008751358ed4b24641b00bb1fadaaf9e9b5c1fb8346f"
+    },
+    {
+      "path": "creatures/editor/creature_blueprint.gd",
+      "sha256": "63135b1f354891a97c6d594c3fb2db9d2b6469c7992c2129ec69908afc6b03b7"
+    },
+    {
+      "path": "creatures/editor/creature_editor_runtime.gd",
+      "sha256": "14687a67139ea14b3899a1081e597ad9ff0bc22b79fed0acd25ce78d412ef084"
+    },
+    {
+      "path": "creatures/editor/creature_editor_studio.gd",
+      "sha256": "d24380cffee42833b729f3eb583dc9fc4b3aa050534f4ba949a1fc7b94139904"
+    },
+    {
+      "path": "creatures/editor/creature_editor_v7.gd",
+      "sha256": "bc938d5d936c3d4ec2756f4dcf4b0903fea6b5254715fec404626aa8a091e6b5"
+    },
+    {
+      "path": "creatures/editor/creature_part_geometry.gd",
+      "sha256": "22259038164db36fbec01e33f3e11d5e23893f9e7b7b0ca61454680a915ff086"
+    },
+    {
+      "path": "creatures/editor/creature_preview.gd",
+      "sha256": "ef35b640321d08ba83652eb18b6e61df4d86416daa72dea5f482ec1182b375a3"
+    },
+    {
+      "path": "creatures/editor/creature_preview_v4.gd",
+      "sha256": "3c07bf7fb9f3559ab59264d4c8ecc1dc97722198fb288fb091242f9110f54556"
+    },
+    {
+      "path": "creatures/runtime/creature_body_contract.gd",
+      "sha256": "c71632b67b1c35c15449fbc8b753a82f7c14baf0338dcd49cf46ce1d126069c7"
+    },
+    {
+      "path": "creatures/runtime/creature_runtime_preview.gd",
+      "sha256": "d7a5eea874589b2a6fe612f35461021a2c692ddbae8d00f1d1ffbd27a1d585a6"
+    },
+    {
+      "path": "docs/WORK_ARCH24_PART_REVISIONS.md",
+      "sha256": "2d42fcc33ea1a07627758b63567510bb143900c2ae4b87b296874669eda9d5e7"
+    },
+    {
+      "path": "tests/blueprint_contract_test.gd",
+      "sha256": "b586d0df3828e2dad61ded8905ffc319b005f006e9288e385f495c101d43e040"
+    },
+    {
+      "path": "tests/creature_hand_provider_test.gd",
+      "sha256": "f7324f2554a7ceeb3434b39950836120e4cf3296227645b9e5c98d557cda901d"
+    },
+    {
+      "path": "tests/creature_mouth_provider_test.gd",
+      "sha256": "3ddf6043d565bd87f18249b75f0c0befc8279a55d102895033ec57ddf87f49cf"
+    },
+    {
+      "path": "tests/creature_part_articulation_test.gd",
+      "sha256": "e0281164b8117c7f0a518024fa599530c7db5a425f4d9a6cdce72f206b205d26"
+    },
+    {
+      "path": "tests/creature_part_revisions_test.gd",
+      "sha256": "87e934cef936594afd608598394181a21b5a59572915fed918de7fdb9c1cc0a9"
+    },
+    {
+      "path": "tests/creature_part_revisions_test.gd.uid",
+      "sha256": "e5b4e8e3b8aa161a92aeaa2b4da9aadd5f965a9b9be54403cfb5447c1478df30"
+    },
+    {
+      "path": "tests/creature_snout_family_test.gd",
+      "sha256": "7c068bc8c91895f288d5eec4e0649f88c75495ae9a4776d833dd803f2e5c4fec"
+    },
+    {
+      "path": "tests/creature_trunk_provider_test.gd",
+      "sha256": "9e0fb86c98d7def17c9241b96762cdd8f5cbb11be7f7ff2ddc48568a5b6e3933"
+    },
+    {
+      "path": "tools/validation/contracts.json",
+      "sha256": "863034ce881ffd3a1b06efa288595a3fd630d769981a283d497bffb0a48c556c"
+    }
+  ]
+}
