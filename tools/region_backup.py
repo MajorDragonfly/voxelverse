@@ -547,9 +547,22 @@ def main(argv=None) -> int:
     userdata.add_argument("--output", type=Path, required=True)
     full_verify = commands.add_parser("verify-user-data", help="Verify all bytes of a complete user-data archive")
     full_verify.add_argument("directory", type=Path)
+    retention = commands.add_parser("plan-retention", help="Inventory a stopped game and retain every blob; never delete")
+    retention.add_argument("--user-data", type=Path, required=True)
+    retention.add_argument("--output", type=Path, required=True)
+    retention_verify = commands.add_parser("verify-retention", help="Recheck a retain-only plan against its exact source generation")
+    retention_verify.add_argument("directory", type=Path)
+    retention_verify.add_argument("--user-data", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
-        if args.command in ("export-user-data", "verify-user-data"):
+        if args.command in ("plan-retention", "verify-retention"):
+            if __package__:
+                from .region_retention import plan_retention, verify_retention
+            else:
+                from region_retention import plan_retention, verify_retention
+            result = (plan_retention(args.user_data, args.output) if args.command == "plan-retention"
+                      else verify_retention(args.user_data, args.directory))
+        elif args.command in ("export-user-data", "verify-user-data"):
             if __package__:
                 from .region_backup_userdata import export_userdata, verify_userdata
             else:

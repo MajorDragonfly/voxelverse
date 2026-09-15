@@ -1,0 +1,16 @@
+test_campaign_and_independent_labs_restore_without_original_directory (region_backup_userdata_test.NativeUserdataBackupTest.test_campaign_and_independent_labs_restore_without_original_directory) ... ARCH13_USERDATA_NATIVE_RESULT {"archive": {"files": 9668, "directories": 265, "bytes": 7258970, "entries": 9933, "index_sha256": "4cd68e618fffdabb5dbf903095b0df2f50e5f8e9ee47d629b839e94c34717eb9"}, "retention": {"files": 9668, "directories": 265, "bytes": 7258970, "entries": 9933, "owners": 17, "opaque_owners": 2, "roots": 6, "blobs": 9651, "reachable_blobs": 3091, "reachable_bytes": 506506, "not_referenced_by_known_roots": 6560, "not_referenced_bytes": 6650169, "source_generation": "4cd68e618fffdabb5dbf903095b0df2f50e5f8e9ee47d629b839e94c34717eb9"}, "regions": {"body_id": "body_6a6ce47945dc2bb069ecb15977c253a5", "campaign_id": "campaign_e9a8be2881e47d1c8f7970f706ed91e0", "checked_regions": 3600, "passed": true, "peak_cache": 96}, "labs": {"d2_roots": 8, "galaxy_system": "vx1/u9007199254740993/g0/s0,0,0/t0", "lab_tiles": 130, "passed": true, "template_count": 1}}
+ok
+test_cli_export_and_verify_report_bytes_separately_from_game_validity (region_backup_userdata_test.UserdataBackupTest.test_cli_export_and_verify_report_bytes_separately_from_game_validity) ... ok
+test_corruption_missing_added_files_and_manifest_tampering_fail (region_backup_userdata_test.UserdataBackupTest.test_corruption_missing_added_files_and_manifest_tampering_fail) ... ok
+test_empty_directory_and_chunked_large_file (region_backup_userdata_test.UserdataBackupTest.test_empty_directory_and_chunked_large_file) ... ok
+test_every_original_and_unknown_file_is_preserved_without_normalizing (region_backup_userdata_test.UserdataBackupTest.test_every_original_and_unknown_file_is_preserved_without_normalizing) ... ok
+test_existing_nested_targets_and_concurrent_export_are_protected (region_backup_userdata_test.UserdataBackupTest.test_existing_nested_targets_and_concurrent_export_are_protected) ... ok
+test_explicit_budgets_fail_instead_of_truncating (region_backup_userdata_test.UserdataBackupTest.test_explicit_budgets_fail_instead_of_truncating) ... ok
+test_source_changes_additions_and_removals_abort_publication (region_backup_userdata_test.UserdataBackupTest.test_source_changes_additions_and_removals_abort_publication) ... ok
+test_symlinks_special_files_and_unsafe_names_fail_without_following (region_backup_userdata_test.UserdataBackupTest.test_symlinks_special_files_and_unsafe_names_fail_without_following) ... ok
+test_write_verify_and_rename_failures_leave_sources_and_prior_archive (region_backup_userdata_test.UserdataBackupTest.test_write_verify_and_rename_failures_leave_sources_and_prior_archive) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 15.561s
+
+OK
