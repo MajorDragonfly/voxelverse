@@ -1,0 +1,23 @@
+extends SceneTree
+func _initialize() -> void:
+	call_deferred("_run")
+func _run() -> void:
+	root.get_node("SaveGameService").autosave_enabled = false
+	for i in range(6): await process_frame
+	var settings := root.get_node("DisplaySettings")
+	settings.open_menu()
+	settings._tabs.current_tab = settings._tabs.get_node("GRAPHICS_TAB").get_index()
+	for locale: String in ["de","en"]:
+		root.get_node("LocaleManager").save_preference(locale)
+		settings._atmosphere_option.select(1 if locale == "de" else 2)
+		settings._atmosphere_option.item_selected.emit(settings._atmosphere_option.selected)
+		for i in range(6): await process_frame
+		if locale == "de":
+			settings._atmosphere_option.show_popup()
+			for i in range(3): await process_frame
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png("/workspace/scratch/ce67c4b472f8/qa-settings-graphics/settings-"+locale+".png")
+		settings._atmosphere_option.get_popup().hide()
+	settings.close_menu()
+	print("GRAPHICS_SETTINGS_CAPTURE_PASSED")
+	await preload("res://core/runtime_shutdown.gd").finish(self,0)
