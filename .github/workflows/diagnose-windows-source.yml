@@ -1,0 +1,17 @@
+name: Diagnose Windows source provenance
+on:
+  push:
+    branches: [agent/playtest-windows-diagnostic-20260915]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: windows-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Inspect source observation and Windows stat identity
+        run: python tools/diagnose_windows_source.py
