@@ -1,0 +1,38 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "f901d5f1f0fb3a8f0cf42844d34b799357d99ceb",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "site_transport_test",
+    "site_transport_runtime_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.118
+    },
+    {
+      "name": "site_transport_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.601,
+      "contract": "village"
+    },
+    {
+      "name": "site_transport_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 99.355,
+      "contract": "village"
+    }
+  ]
+}

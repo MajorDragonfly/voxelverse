@@ -1,0 +1,54 @@
+{
+  "packet": "ARCH-27-SITE-TRANSPORT",
+  "base": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux/headless; runner-isolated synthetic user data",
+  "commits": [
+    {
+      "local": "bdbef8fe36e1addd8a71de0138045bc3d3817dfa",
+      "public": "31b8099ce6d35f46d8e9782fac4182ebfec03597",
+      "tree": "67b6e8da32898ee5fa1d8a5245fe83db1ddb5089",
+      "scope": "All gameplay changes and original probes; 12 targeted tests pass."
+    },
+    {
+      "local": "f901d5f1f0fb3a8f0cf42844d34b799357d99ceb",
+      "public": "cfce3af7f48bc78d1ef22ede5056085401573e5c",
+      "tree": "7202da0df1993e5f1dd969d587de476d8a4fffe4",
+      "scope": "Two probe extensions only; both shipment tests pass again."
+    }
+  ],
+  "files": {
+    "autoload/save_game_service.gd": "a9ce3d67401a9f1750386eb858e342bcc2eeb48821b7be70ae5bce2e2a66ff5d",
+    "core/campaign/far_scheduler.gd": "52811579f7a2f6a8458f937be0cb6b1eff4f8c17ff71083c9b9b8d3a11410e0f",
+    "core/diagnostics/site_transport_probe.gd": "b9a82db570489549103f149b0d4ba67782308e8fe5b8d2f1d534e8e868ee685f",
+    "core/diagnostics/site_transport_probe.gd.uid": "d36f23f8077d5c6380160db8c2919e040632df9a12995d3888cfd0631bf14f5f",
+    "core/persistence/save_participants.gd": "88e1f694dc110681fac032c4327636cdf1bbc39fb8425ffe259b3f85fa50eb55",
+    "docs/WORK_ARCH27_SITE_TRANSPORT.md": "d9edc6329546aa168f274cf96683b32a71b67930a3c6b1bd3381bbdef054e957",
+    "localization/catalog.json": "30c33acfbfd7a86c2e4e69a3e0bf3224a908cc593954b3ba95311c10fe9c72c5",
+    "localization/de.po": "3285beaec954e645f4144ff85ab521051ce8a59bdf266a0177a0efd5ea3a761b",
+    "localization/en.po": "d0e4729c769166c3ee0d76a59ed09e3207c2f07e847bce5c9456466de2d96351",
+    "tests/site_transport_runtime_test.gd": "ffb92cb82bf32821147b870d5a7828b1b0af8e8c3a480e8a83489d8b22555d19",
+    "tests/site_transport_runtime_test.gd.uid": "422e5491df60af9084165ef25579660b29ebe21897d789187cfc78606aa530b6",
+    "tests/site_transport_test.gd": "cb92fb04d87ba8546528d7be1202ce13f8053177bae3d94151b5024b0d64d187",
+    "tests/site_transport_test.gd.uid": "e882ff7080e70cc2349475ab3db7e0e7d4d5a3ac540954f80386bd399ccc35e6",
+    "tools/validation/contracts.json": "222812f7fd25e03f251a0564d56ded9bbc9e28e14c3dcc3480dbd4e87c61d25c",
+    "ui/tribe/settlement_panel.gd": "06887fe0658db00575b586cae5b4a0a9a169aa1d091472ea4df9835e2faf441e",
+    "ui/tribe/site_transport_panel.gd": "3660d0a08b4798509ca6e7d21baefbd110c098a298ebdc8d0bdad8ae47efb7a6",
+    "ui/tribe/site_transport_panel.gd.uid": "93efe4aa61fd37b8585f0eb342da7ec51fcb5a07784dfde741c6e756784ac9c1",
+    "world/domestication/campaign_domestication.gd": "dcd62f39d293fa65f48613d7c80d8b058bc2a4d9c086f264b51ea18e06c8dd06",
+    "world/tribe/neighbors/neighbor_runtime.gd": "a3a87059b9837e0ef497caca3c88aba2fe7ee593f9fca96646d66c62a8b587b1",
+    "world/tribe/settlement_collection.gd": "7c0effc5c4889d82740dd2b68496c0499107a4f294e486d0171249c5d0b91e20",
+    "world/tribe/settlement_runtime.gd": "19843d4eef65623cdbf06ca096753010bfba042f12d6560d5c639c2613cd7600",
+    "world/tribe/transport/freight_ledger.gd": "c29675f60fa30001be374fc682ebe456bedb180556f9385a53fd1f5f73103c80",
+    "world/tribe/transport/freight_ledger.gd.uid": "b7e18db8bb150efb86d1b6f775188a5d9aacde6938104347dec6172f221d783a",
+    "world/tribe/transport/site_transport_runtime.gd": "c038871ca361cf937d4d3b4b44fd1f72f169071f72cc9891af2df9bd337cf49e",
+    "world/tribe/transport/site_transport_runtime.gd.uid": "c7b29e75f8993ab278897bf9ffd27df77e260d7daca700215379278ca3af0e47",
+    "world/tribe/transport/site_transport_state.gd": "2f67e99494b0b9e44d18f36836f63812a3a69b281de30d0ba635e0d48dd3c55c",
+    "world/tribe/transport/site_transport_state.gd.uid": "3b98482013a9afd699dcd7002b330a27bbe7902a0e3788bc334d4c063cb3dc9c",
+    "world/tribe/tribe_controller.gd": "3ab827118bb9dfb2c35ccf5ebfa481c867e37572eb329f449f3e1ad1ec5c14e4",
+    "world/tribe/tribe_state.gd": "e2f91ae66dfb9246aa4a58cde051af7449eb81300d853ff94ca250807a09aed1",
+    "world/tribe/village_economy.gd": "058d014b97eb42c783938c22d6c873ba5da6d450e7d752b7a8e3d514f5a77279",
+    "world/tribe/village_husbandry.gd": "6776d57567f9bcdf3f889151b2a6947069f09642b311eb494c53f388937fb2cf",
+    "world/tribe/village_simulation.gd": "8a6700f66c7f1ae10cd24736aa0314a3ba7327c94f5710cdea5011b76f5e5069"
+  }
+}
