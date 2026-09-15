@@ -126,8 +126,8 @@ func _check_editor() -> void:
 	check(Assembly.save_to_file(design, SAVE) == OK, "Trunk save failed")
 	check(Assembly.save_to_file(without_head, "user://trunk_legacy.json") == OK, "Existing body save failed")
 	var file := FileAccess.open("user://trunk_expected.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify({"design_id": design.design_id, "parts": Assembly.BaseBlueprint._serialize_blueprint(design).parts,
-		"legacy": Assembly.BaseBlueprint._serialize_blueprint(without_head).parts, "progression": state, "game": root.get_node("GameState").export_state()}))
+	file.store_string(JSON.stringify({"design_id": design.design_id, "parts": Assembly.serialize_snapshot(design).parts,
+		"legacy": Assembly.serialize_snapshot(without_head).parts, "progression": state, "game": root.get_node("GameState").export_state()}))
 	file.close()
 	editor.free()
 	await process_frame
@@ -166,9 +166,9 @@ func _verify_restart() -> void:
 	root.get_node("GameState").import_state(expected.game, false)
 	var loaded: Dictionary = Assembly.load_from_file(SAVE)
 	check(loaded.get("design_id") == expected.design_id, "Restart changed design identity")
-	check(JSON.parse_string(JSON.stringify(Assembly.BaseBlueprint._serialize_blueprint(loaded).parts)) == expected.parts, "Restart changed head/mouth IDs, UIDs, anchors or transforms")
+	check(JSON.parse_string(JSON.stringify(Assembly.serialize_snapshot(loaded).parts)) == expected.parts, "Restart changed head/mouth IDs, UIDs, anchors or transforms")
 	var legacy: Dictionary = Assembly.load_from_file("user://trunk_legacy.json")
-	check(JSON.parse_string(JSON.stringify(Assembly.BaseBlueprint._serialize_blueprint(legacy).parts)) == expected.legacy, "Restart changed existing design without trunk")
+	check(JSON.parse_string(JSON.stringify(Assembly.serialize_snapshot(legacy).parts)) == expected.legacy, "Restart changed existing design without trunk")
 	var progress: Node = root.get_node("ProgressionService")
 	check(progress.import_state(expected.progression) and progress.is_part_unlocked(ID), "Restart lost earned trunk")
 	_check_runtime(loaded)

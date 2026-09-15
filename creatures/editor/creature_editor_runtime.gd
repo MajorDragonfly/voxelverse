@@ -76,6 +76,10 @@ func _on_part_button_pressed(part_id: String) -> void:
 
 
 func _save_blueprint() -> void:
+	if blueprint.has("_protected_design_source") or not AssemblyV7.Contract.version_error(blueprint, "creature").is_empty():
+		_last_save_ok = false
+		_set_builder_status("EDITOR_STATUS_SAVE_FAILED")
+		return
 	_sync_progression_into_blueprint()
 	super._save_blueprint()
 	var save_service := get_node_or_null("/root/SaveGameService")

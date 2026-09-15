@@ -24,7 +24,7 @@ func _run() -> void:
 	if "--restart" in OS.get_cmdline_user_args():
 		var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("user://articulation_expected.json"))
 		var loaded: Dictionary = Assembly.load_from_file(SAVE)
-		check(JSON.stringify(Assembly.BaseBlueprint._serialize_blueprint(loaded)).sha256_text() == expected.hash,
+		check(_saved_fingerprint(loaded) == expected.hash,
 			"Fresh process changed saved identity, transformations or appearance")
 		await _preview_lifecycle(loaded)
 	else:
@@ -35,7 +35,7 @@ func _run() -> void:
 		var design: Dictionary = _design()
 		check(Assembly.save_to_file(design, SAVE) == OK, "Design save failed")
 		var file := FileAccess.open("user://articulation_expected.json", FileAccess.WRITE)
-		file.store_string(JSON.stringify({"hash": JSON.stringify(Assembly.BaseBlueprint._serialize_blueprint(design)).sha256_text()}))
+		file.store_string(JSON.stringify({"hash": _saved_fingerprint(design)}))
 		file.close()
 		var output: Array = []
 		var status: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"),
@@ -232,6 +232,12 @@ func _gameplay_actions() -> void:
 	wildlife.free()
 	player.free()
 	await process_frame
+
+
+func _saved_fingerprint(design: Dictionary) -> String:
+	# Compare the full saved reference contract, including terminals. Parsing
+	# both sides canonicalizes equivalent JSON schema numbers (1 versus 1.0).
+	return JSON.stringify(JSON.parse_string(JSON.stringify(Assembly.serialize_snapshot(design)))).sha256_text()
 
 
 func check(value: bool, message: String) -> void:

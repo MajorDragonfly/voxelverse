@@ -9,6 +9,8 @@ const ORIGIN_KEY: String = "org.voxelverse.community_blueprint"
 
 
 static func export_blueprint(blueprint: Dictionary, metadata: Dictionary = {}) -> Dictionary:
+	if Creature.Contract.PartRevisions.version_error(blueprint) == "unsupported_part_revision":
+		return _fail("unsupported_catalog")
 	var metadata_rule: Dictionary = {"title?": ["text", 120], "description?": ["text", 2000],
 		"author?": ["text", 120], "tags?": ["list", ["text", 40], 12]}
 	if not Schema.problem(metadata, metadata_rule).is_empty(): return _fail("invalid_metadata")
@@ -158,10 +160,26 @@ static func write_file(path: String, package: Variant) -> Dictionary:
 		# Existing immutable exports may use either released number encoding.
 		var precise: Dictionary = Atomic.parse_dictionary(Atomic.stringify(package))
 		var legacy: Dictionary = JSON.parse_string(JSON.stringify(package))
-		if old.package != precise and old.package != legacy: return _fail("destination_conflict")
+		if not same_content(old.package, precise) and not same_content(old.package, legacy): return _fail("destination_conflict")
 		return {"ok": true, "code": ""}
 	var error: Error = Atomic.write(path, package, false)
 	return {"ok": error == OK, "code": "" if error == OK else "write_failed", "error": error}
+
+
+## Call only for inspected packages. Omitted legacy references and explicit
+## revision 1 describe the same immutable design; never rewrite the old file.
+static func same_content(first: Dictionary, second: Dictionary) -> bool:
+	var a: Dictionary = first.duplicate(true)
+	var b: Dictionary = second.duplicate(true)
+	Creature.Contract.PartRevisions.pin_legacy(a.blueprint)
+	Creature.Contract.PartRevisions.pin_legacy(b.blueprint)
+	# Godot's deep Dictionary comparison distinguishes int and JSON float
+	# values. Canonicalize reference integers only, retaining geometry doubles.
+	for data: Dictionary in [a.blueprint, b.blueprint]:
+		for section: Dictionary in [data.body, data.paint] + data.parts:
+			for field: String in Creature.Contract.PartRevisions.FIELDS:
+				if section.has(field): section[field] = int(section[field])
+	return a == b
 
 
 static func _requirements(data: Dictionary) -> Array:

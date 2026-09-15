@@ -156,7 +156,7 @@ func _save_and_exchange() -> void:
 	var imported: Dictionary = Designs.add(package.package, "user://snout_library.json")
 	check(imported.ok, "Local snout library import failed")
 	check(Designs.add(package.package, "user://snout_library.json").ok, "Repeated snout import failed")
-	var expected: Dictionary = {"design": Assembly.BaseBlueprint._serialize_blueprint(design), "key": Designs.key_of(package.package),
+	var expected: Dictionary = {"design": Assembly.serialize_snapshot(design), "key": Designs.key_of(package.package),
 		"progression": root.get_node("ProgressionService").export_state(), "game": root.get_node("GameState").export_state()}
 	var file := FileAccess.open("user://snouts_expected.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(expected))
@@ -170,7 +170,7 @@ func _restart_snouts() -> void:
 	check(progress.import_state(expected.progression), "Restart rejected progression")
 	for id: String in SNOUTS: check(progress.is_part_unlocked(id), "Restart lost earned snout")
 	var loaded: Dictionary = Assembly.load_from_file(SNOUT_SAVE)
-	check(JSON.parse_string(JSON.stringify(Assembly.BaseBlueprint._serialize_blueprint(loaded))) == expected.design, "Restart changed design ID/revision/parts/colors")
+	check(JSON.parse_string(JSON.stringify(Assembly.serialize_snapshot(loaded))) == expected.design, "Restart changed design ID/revision/parts/colors")
 	_check_runtime(loaded)
 	var library: Dictionary = Designs.read("user://snout_library.json")
 	check(library.ok and library.packages.size() == 1, "Offline library lost or duplicated package")

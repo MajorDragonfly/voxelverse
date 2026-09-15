@@ -114,6 +114,7 @@
         "creature_joint_studio_test",
         "creature_mouth_provider_test",
         "creature_part_articulation_test",
+        "creature_part_revisions_test",
         "creature_parts_studio_test",
         "creature_seat_fit_test",
         "creature_snout_family_test",

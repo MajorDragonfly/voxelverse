@@ -39,7 +39,7 @@ static func add(package: Dictionary, path: String = PATH) -> Dictionary:
 	var key: String = key_of(package)
 	for existing: Dictionary in stored.packages:
 		if key_of(existing) == key:
-			return {"ok": true, "code": "already_present", "key": key} if existing == canonical else _fail("revision_conflict")
+			return {"ok": true, "code": "already_present", "key": key} if Package.same_content(existing, canonical) else _fail("revision_conflict")
 	if stored.packages.size() >= MAX_ENTRIES: return _fail("library_full")
 	stored.packages.append(canonical)
 	var written: Dictionary = _write(path, stored.packages)

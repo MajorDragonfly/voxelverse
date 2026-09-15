@@ -5,6 +5,7 @@ const MAX_PARTS: int = 2048
 const MAX_BYTES: int = 2 * 1024 * 1024
 const MAX_DEPTH: int = 24
 const MAX_VALUES: int = 100000
+const PartRevisions = preload("res://creatures/catalog/creature_part_revisions.gd")
 
 
 static func kind_of(data: Dictionary) -> String:
@@ -27,7 +28,8 @@ static func version_error(data: Dictionary, kind: String = "") -> String:
 		var assembly: Dictionary = data.get("assembly", {})
 		code = _section(assembly, "body_attachments", 1)
 		if not code.is_empty(): return code
-		return _section(assembly.get("body_attachments", {}), "fit_profile", 1)
+		code = _section(assembly.get("body_attachments", {}), "fit_profile", 1)
+		return code if not code.is_empty() else PartRevisions.version_error(data)
 	code = _version(data, "schema", 1)
 	if not code.is_empty(): return code
 	return _section(data, "building", 1) if kind == "building" else ""

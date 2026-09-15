@@ -1323,6 +1323,9 @@ func _save_migrated_assembly_without_revision() -> void:
 
 func _save_blueprint() -> void:
 	_last_save_ok = false
+	if blueprint.has("_protected_design_source") or not AssemblyV7.Contract.version_error(blueprint, "creature").is_empty():
+		_set_builder_status("EDITOR_STATUS_SAVE_FAILED")
+		return
 	blueprint["name"] = _creature_name_edit.text.strip_edges()
 	if str(blueprint["name"]).is_empty():
 		blueprint["name"] = "Neue Kreatur"

@@ -37,6 +37,7 @@ static var _shared_box_material: StandardMaterial3D
 
 
 func rebuild() -> void:
+	if not Blueprint.Contract.version_error(blueprint, "creature").is_empty(): return
 	_articulation.unbind()
 	_motion.unbind()
 	_pending_boxes.clear()
