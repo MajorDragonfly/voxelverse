@@ -30,6 +30,48 @@ class RegionRetentionTest(unittest.TestCase):
     def rows(self, name):
         return [json.loads(line) for line in (self.output / name).read_text().splitlines()]
 
+    def test_separate_laboratory_store_and_equal_hashes_keep_both_owners(self):
+        root, _ = self.fixture.tree(count=2)
+        self.fixture.save(self.fixture.snapshot(root))
+        lab = self.source / "living_fauna/blobs"
+        shutil.copytree(self.fixture.regions, lab)
+        self.fixture.save({"bodies": {"body:test": {"fauna_archive": {
+            "schema": 1, "body_id": "body:test", "count": 2,
+            "storage": {"schema": 1, "format": backup.STORE_FORMAT, "root": root}}}}},
+            self.source / "living_planet_v1.json")
+        record = self.plan()
+        self.assertEqual(record["stats"]["reachable_blobs"], 6)
+        self.assertEqual(record["stats"]["not_referenced_by_known_roots"], 0)
+        self.assertEqual(retention.verify_retention(self.source, self.output), record)
+        self.assertEqual({row.get("store_directory", "regions/blobs") for row in self.rows("roots.jsonl")},
+                         {"regions/blobs", "living_fauna/blobs"})
+        # Identical content in the campaign store cannot mask a missing lab blob.
+        backup._blob_path(lab, root).unlink()
+        with self.assertRaises(OSError):
+            retention.plan_retention(self.source, self.fixture.root / "missing-lab-plan")
+
+    def test_lab_future_and_empty_root_count_mismatch_block_publication(self):
+        for manifest in [
+            {"schema": 2, "body_id": "body:test", "count": 0,
+             "storage": {"schema": 1, "format": backup.STORE_FORMAT, "root": ""}},
+            {"schema": 1, "body_id": "body:test", "count": 2,
+             "storage": {"schema": 1, "format": backup.STORE_FORMAT, "root": ""}},
+        ]:
+            with self.subTest(manifest=manifest):
+                self.fixture.save({"fauna_archive": manifest}, self.source / "living_planet_v1.json")
+                with self.assertRaises(backup.BackupError): self.plan()
+                self.assertFalse(self.output.exists())
+
+    def test_encounter_semantics_are_preserved_in_global_manifest(self):
+        snapshot, _ = self.fixture.encounter_snapshot()
+        self.fixture.save(snapshot)
+        self.plan()
+        self.assertIn("encounters", {row["contract"] for row in self.rows("roots.jsonl")})
+        snapshot, _ = self.fixture.encounter_snapshot({"schema": 1, "entry": {"object_id": "wrong"}})
+        self.fixture.save(snapshot)
+        with self.assertRaises(backup.BackupError):
+            retention.plan_retention(self.source, self.fixture.root / "bad-encounter-plan")
+
     def test_all_owners_generations_shared_blobs_migration_and_orphans(self):
         f = self.fixture
         current, _ = f.tree(count=130, stock=8)

@@ -273,6 +273,8 @@ func _spawn_plant(record: Dictionary) -> bool:
 	var bush: Node3D = preload("res://world/resources/plants/berry_bush.tscn").instantiate()
 	bush.snap_to_terrain = false
 	bush.persistent_food_key = record.food_key
+	bush.visual_profile = adapter.terrain.surface.terrain
+	bush.visual_biome = str(adapter.terrain.surface.sample(record.location).biome)
 	bush.position = point
 	get_parent().add_child(bush)
 	Space.track(bush, record.id)

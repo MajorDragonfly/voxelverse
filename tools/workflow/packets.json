@@ -2,9 +2,9 @@
   "schema": 1,
   "packets": [
     {
-      "id": "ARCH-17-PUBLISH",
-      "title": "Kalte Terrainpublikation begrenzen",
-      "goal": "Teuersten Mesh-/Kollisionsupload auf der vorhandenen Messroute messen und begrenzen; vollständigen Boden bei Übergabe erhalten.",
+      "id": "ARCH-17-PUBLISH-TAIL",
+      "title": "Verbleibende Publikationsspitzen messen",
+      "goal": "Nach der integrierten schrittweisen Publikation den teuersten verbleibenden Engineaufruf bzw. Coverwechsel auf derselben kalten Route isolieren und nur diesen Engpass verbessern.",
       "write_groups": [
         "terrain"
       ],
@@ -15,127 +15,57 @@
         "tools/benchmark_surface_publication.gd"
       ],
       "read": [
-        "docs/WORK_ARCH17_TERRAIN_LOOKAHEAD.md"
+        "docs/WORK_ARCH17_PUBLICATION.md"
       ],
       "contracts": [
         "surface"
       ],
       "acceptance": "Kalter Aufbau, Richtungswechsel und Abbau; echte Bodenbereitschaft, Uploadspitze und Queuegrenzen vor/nach derselben Änderung belegen.",
-      "limits": "Kein zweiter Streamer. Bestehende Vorausschau und Generationen sind integriert. Keine globale Framerate aus Headless-Zeiten ableiten."
+      "limits": "ARCH-17-PUBLISH und AUDIO sind integriert. Keine zweite Queue und kein erneuter Grundumbau; 4 ms bleiben ein kooperatives Budget."
     },
     {
-      "id": "ARCH-13-MANIFEST",
-      "title": "Lebensdauer der Regionsarchive",
-      "goal": "Gemeinsames Generationenmanifest mit vollständig erreichbaren Blobs abgrenzen; zunächst eine überprüfbare Aufbewahrungsplanung ohne Löschung liefern.",
+      "id": "ARCH-13-RETENTION-LIFECYCLE",
+      "title": "Archivlebensdauer und laufende Schreiber abgrenzen",
+      "goal": "Auf dem integrierten retain-only Manifest eine Generationen-/Schreibervereinbarung für einen sicheren späteren Aufbewahrungslauf entwickeln; zuerst synthetische aktive Saves, Historien und beide Blobverzeichnisse beweisen.",
       "write_groups": [
         "persistence",
         "population"
       ],
       "files": [
+        "tools/region_retention.py",
+        "tools/region_backup.py",
+        "tools/region_backup_userdata.py",
         "core/persistence/region_store.gd",
-        "core/persistence/slot_history.gd",
-        "autoload/save_game_service.gd",
-        "world/surface/campaign_region_storage.gd",
-        "tools/region_backup.py"
+        "autoload/save_game_service.gd"
       ],
       "read": [
-        "docs/WORK_ARCH13_USERDATA_BACKUPS.md"
+        "docs/WORK_ARCH13_MANIFEST.md",
+        "docs/INTEGRATION_2026-09-15_RESOURCES.md"
       ],
       "contracts": [
         "campaign",
         "regions_simulation"
       ],
       "acceptance": "Aktiver Save, Backup, Slothistorie, Kopien und Migration erhalten alle erreichbaren Blobs; Schreibabbruch veröffentlicht keine unvollständige Generation.",
-      "limits": "Vollständige Benutzer-/Laborbackups sind integriert. Bereinigung erst nach nachgewiesener Erreichbarkeit; keine fremden oder realen Nutzerdaten löschen."
+      "limits": "Offline-Manifest, Begegnungs- und Labortierarchive sind integriert. Dieses Paket löscht keine Dateien; reale Bereinigung ist ein separater Auftrag nach vollständigem Referenznachweis."
     },
     {
-      "id": "ARCH-14-ENCOUNTERS",
-      "title": "Dauerhafte Begegnungen auslagern",
-      "goal": "Einen noch unbeschränkt wachsenden Begegnungsbestand über den vorhandenen Regionsspeicher begrenzen und mit Neustart erhalten.",
-      "write_groups": [
-        "persistence",
-        "population",
-        "progression"
-      ],
-      "files": [
-        "core/progression/creature_encounters.gd",
-        "autoload/progression_service.gd",
-        "world/surface/campaign_population_state.gd",
-        "world/surface/campaign_region_storage.gd"
-      ],
-      "read": [
-        "docs/WORK_ARCH14_JOURNAL_PAGING.md"
-      ],
-      "contracts": [
-        "regions_simulation",
-        "discovery_map",
-        "campaign"
-      ],
-      "acceptance": "Cachefreigabe und Neustart verlieren weder Gesundheit, Beziehung noch Entdeckungsbelege; aktiver Speicher bleibt messbar begrenzt.",
-      "limits": "Journal-Seiten und Tierzustandsschutz sind integriert. Nicht parallel mit ARCH-13-MANIFEST in dieselben Speicheranschlüsse schreiben."
-    },
-    {
-      "id": "ARCH-24-TRUNK",
-      "title": "Rüssel als eigenes Kopfmodul",
-      "goal": "Eine Rüsselform über den vorhandenen Geometrieanbieter mit getrenntem Mundanschluss ergänzen.",
-      "write_groups": [
-        "creature_editor",
-        "progression"
-      ],
-      "files": [
-        "creatures/catalog/creature_mouth_catalog.gd",
-        "creatures/editor/creature_mouth_geometry.gd",
-        "creatures/editor/creature_editor_studio.gd",
-        "autoload/progression_service.gd"
-      ],
-      "read": [
-        "docs/WORK_ARCH24_MOUTH_MODELS.md",
-        "docs/CREATURE_PARTS_CATALOG_PLAN.md"
-      ],
-      "contracts": [
-        "creature_body",
-        "blueprints"
-      ],
-      "acceptance": "Vorschau, Körperanschluss und bestehende Entwürfe nach Save/Load erhalten; Modell auf einem echten Kreaturenkörper grafisch zeigen.",
-      "limits": "Hund, Krokodil und Oktopus sind integriert. Keine parallele Neuerfindung von Katalog, Mundanbieter oder Freischaltsystem."
-    },
-    {
-      "id": "ARCH-25-EDITOR",
-      "title": "Einen Editorbereich auf DE/EN anschließen",
-      "goal": "Einen klar benannten Bereich des Kreatureneditors vollständig auf die vorhandene Sprachverwaltung umstellen.",
-      "write_groups": [
-        "creature_editor",
-        "localization"
-      ],
-      "files": [
-        "creatures/editor/creature_editor_studio.gd",
-        "localization/catalog.json",
-        "tools/localization/catalog.py"
-      ],
-      "read": [
-        "docs/VOXELVERSE_DESIGN.md"
-      ],
-      "contracts": [
-        "frontend_locale",
-        "creature_body"
-      ],
-      "acceptance": "Sprachwechsel erhält die laufende Editorsitzung; kurze und lange Texte bei kleiner Auflösung sichtbar prüfen.",
-      "limits": "Bereich vor Beginn benennen. Fähigkeiten DE/EN sind integriert. Sprachkatalog und Editor werden pro Runde nur einem Fachchat zugeteilt."
-    },
-    {
-      "id": "ARCH-26-SECOND-SITE",
-      "title": "Zweiten Siedlungsort produktiv anschließen",
-      "goal": "Den integrierten Siedlungsvertrag an einen zweiten echten Arbeitsplatz mit eigener Identität, Vorrat und gespeicherten Aufträgen anbinden.",
+      "id": "ARCH-27-SITE-TRANSPORT",
+      "title": "Warentransport zwischen zwei Siedlungen anschließen",
+      "goal": "Den bestehenden Regionaltransport an die zwei echten Ortslager anschließen: Auftrag, Reservierung, sichtbare oder zeitliche Ankunft und genau eine Buchung.",
       "write_groups": [
         "village",
-        "persistence"
+        "persistence",
+        "transport"
       ],
       "files": [
-        "world/tribe/settlement_collection.gd",
-        "world/tribe/tribe_controller.gd",
-        "autoload/save_game_service.gd"
+        "world/tribe/transport/regional_routes.gd",
+        "world/tribe/transport/regional_transport.gd",
+        "world/tribe/settlement_runtime.gd",
+        "world/tribe/settlement_collection.gd"
       ],
       "read": [
+        "docs/WORK_ARCH26_SECOND_SITE.md",
         "docs/ARCHITECTURE_BACKLOG.md"
       ],
       "contracts": [
@@ -143,8 +73,82 @@
         "regions_simulation",
         "campaign"
       ],
-      "acceptance": "Zwei getrennte Orte mit erhaltenen IDs und genau einmal verbuchter Fracht über Nah/Fern und Neustart; Instanzgrenzen erst nach Messung erhöhen.",
-      "limits": "Vertragsmodell ist integriert, spielbare Gründung noch offen. Mit ARCH-27 und allen Save-Schreibern nacheinander integrieren."
+      "acceptance": "Ware A→B erst bei Ankunft; Wegsperre, Abbruch, Pause, Nah/Fern und Neustart erhalten Fracht und Reservierungen genau einmal.",
+      "limits": "Zwei Siedlungen und Transport-Datenvertrag sind vorhanden. Keine neuen Fraktionen, keine Sofortware und kein planetenweites Feinraster. Mit Arbeitsplatzpaket nacheinander integrieren."
+    },
+    {
+      "id": "ARCH-24-PART-REVISIONS",
+      "title": "Gespeicherte Teilrevisionen absichern",
+      "goal": "Vor weiteren Modellrevisionen die vorhandenen Katalogrevisionen eindeutig an gespeicherte Teile und deren Geometrieauflösung anschließen, mit Schutz unbekannter neuer Formen.",
+      "write_groups": [
+        "creature_editor",
+        "progression"
+      ],
+      "files": [
+        "creatures/catalog/creature_mouth_catalog.gd",
+        "creatures/editor/creature_blueprint.gd",
+        "creatures/editor/creature_assembly_blueprint_v7.gd",
+        "creatures/editor/creature_part_geometry.gd"
+      ],
+      "read": [
+        "docs/WORK_ARCH24_SNOUTS.md",
+        "docs/CREATURE_PARTS_CATALOG_PLAN.md"
+      ],
+      "contracts": [
+        "creature_body",
+        "blueprints"
+      ],
+      "acceptance": "Bisherige Entwürfe/Arten behalten Geometrie und IDs; unbekannte zukünftige Teilrevisionen überschreiben kein Original. Editor, Laufzeit, Bibliothek und neuer Prozess prüfen.",
+      "limits": "Rüssel, aktive Kiefer/Scheren und Katze/Bär/Schwein sind integriert. Keine erneute Modelllieferung; Save-/Blueprintanschlüsse pro Runde zuordnen."
+    },
+    {
+      "id": "ARCH-25-HUSBANDRY-UI",
+      "title": "Tierhaltungsdetails und Epochenhinweise auf DE/EN",
+      "goal": "Die verbleibenden Tierhaltungs- und Epochenhinweise im Dorf auf bestehende Ergebniskennungen/Sprachdienst anschließen; laufende Auswahl und Fracht erhalten.",
+      "write_groups": [
+        "creature_editor",
+        "localization"
+      ],
+      "files": [
+        "ui/tribe/tribe_panel.gd",
+        "world/tribe/husbandry_runtime.gd",
+        "localization/catalog.json"
+      ],
+      "read": [
+        "docs/INTEGRATION_2026-09-15_RESOURCES.md",
+        "docs/VOXELVERSE_DESIGN.md"
+      ],
+      "contracts": [
+        "frontend_locale",
+        "creature_body"
+      ],
+      "acceptance": "Sprachwechsel bei belegter Legestelle/Milchtierplatz, langen Namen, 800×600 und 150 Prozent; keine wiederholten Spielbefehle oder Speicheraktionen.",
+      "limits": "Kreatureneditor, Dorforders/Berufe, neues HUD und Siedlungen sind integriert. Nur bisher offene Tierhaltungs-/Epochenkopie bearbeiten."
+    },
+    {
+      "id": "ARCH-26-WORKPLACE-INSTANCES",
+      "title": "Mehrere gleichartige Arbeitsplätze pro Ort",
+      "goal": "Den vorhandenen Zweitortanschluss um zwei gleichartige Arbeitsstellen innerhalb eines Ortes mit eigenen IDs, Aufträgen und Wegen erweitern.",
+      "write_groups": [
+        "village",
+        "persistence"
+      ],
+      "files": [
+        "world/tribe/village_economy.gd",
+        "world/tribe/settlement_collection.gd",
+        "world/tribe/tribe_controller.gd",
+        "world/tribe/village_work.gd"
+      ],
+      "read": [
+        "docs/WORK_ARCH26_SECOND_SITE.md"
+      ],
+      "contracts": [
+        "village",
+        "regions_simulation",
+        "campaign"
+      ],
+      "acceptance": "Zwei gleichartige Arbeitsstellen im selben Ort behalten Produktion, Wege, Baustellen, Reservierungen und Fracht über Nah/Fern/Neustart.",
+      "limits": "Zweites produktives Siedlungslager ist integriert. Orts-/Bewohnergrenzen nicht ohne Messung erhöhen; Transportanschluss mit ARCH-27 koordinieren."
     },
     {
       "id": "ARCH-19-TARGET-PC",

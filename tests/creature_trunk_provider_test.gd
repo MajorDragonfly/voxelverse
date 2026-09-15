@@ -31,7 +31,9 @@ func run() -> void:
 func _check_profile() -> void:
 	var profile: Dictionary = Models.get_profile(ID)
 	check(profile.category == "head" and profile.stats.is_empty() and profile.capabilities.is_empty() and profile.supported_actions.is_empty(), "Trunk became a feeding mouth or granted an unsupported ability")
-	check(profile.unlock_source == "mouth_filter_snout" and Library.get_parts_for_category("mouth").size() == 7, "Trunk replaced a mouth or its unlock source")
+	var mouth_ids: Array = Library.get_parts_for_category("mouth").map(func(part: Dictionary) -> String: return part.id)
+	var expected_mouths: Array = ["mouth_grazer", "mouth_broad_beak", "mouth_predator_jaws", "mouth_filter_snout", "mouth_canine_snout", "mouth_crocodile_snout", "mouth_octopus_beak", "mouth_feline_snout", "mouth_bear_snout", "mouth_pig_snout"]
+	check(profile.unlock_source == "mouth_filter_snout" and mouth_ids == expected_mouths and ID not in mouth_ids, "Trunk replaced a mouth or its unlock source")
 	profile.features.clear()
 	check(not Models.get_profile(ID).features.is_empty(), "Caller changed shared model profile")
 	check(Models.get_profile(ID, 2).is_empty() and ModelGeometry.recipe(ID, Color.WHITE, Color.WHITE, Color.WHITE, 2).is_empty(), "Future revision silently rendered old trunk")

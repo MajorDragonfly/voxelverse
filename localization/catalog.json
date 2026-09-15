@@ -5601,6 +5601,51 @@
       "key": "EDITOR_GAIT_FREE",
       "de": "Freier Körperbau",
       "en": "Free body plan"
+    },
+    {
+      "key": "EDITOR_CATEGORY_HEAD",
+      "de": "Kopfmodule",
+      "en": "Head modules"
+    },
+    {
+      "key": "EDITOR_PART_HEAD_ELEPHANT_TRUNK_NAME",
+      "de": "Elefantenrüssel",
+      "en": "Elephant trunk"
+    },
+    {
+      "key": "EDITOR_PART_HEAD_ELEPHANT_TRUNK_DESCRIPTION",
+      "de": "Gebogener Rüssel über dem separat wählbaren Mund. Freischaltung mit der Filterschnauze; reines Gestaltungsteil.",
+      "en": "Curved trunk above a separately selectable mouth. Unlocked with the filter snout; cosmetic part."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_FELINE_SNOUT_NAME",
+      "de": "Katzenschnauze",
+      "en": "Feline muzzle"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_FELINE_SNOUT_DESCRIPTION",
+      "de": "Kurze Schnauze mit zwei Schnurrhaarkissen, kleiner Nase und Fangzähnen. Werte und Freischaltung wie Raubkiefer.",
+      "en": "Short muzzle with whisker pads, a small nose and fangs. Shares the predator jaws profile and unlock."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_BEAR_SNOUT_NAME",
+      "de": "Bärenschnauze",
+      "en": "Bear muzzle"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_BEAR_SNOUT_DESCRIPTION",
+      "de": "Breite, kräftige Schnauze mit großem Nasenspiegel und Mahlzähnen. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels.",
+      "en": "Broad, strong muzzle with a large nose and molars. Shares the broad beak omnivore profile and unlock."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_PIG_SNOUT_NAME",
+      "de": "Schweineschnauze",
+      "en": "Pig snout"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_PIG_SNOUT_DESCRIPTION",
+      "de": "Kurze Schnauze mit flacher Rüsselscheibe und zwei Nasenlöchern. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels.",
+      "en": "Short snout with a flat nose disc and two nostrils. Shares the broad beak omnivore profile and unlock."
     }
   ]
 }

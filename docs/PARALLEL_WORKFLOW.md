@@ -21,12 +21,12 @@ Neue externe Tickets/Nachrichten nur im Rahmen des autorisierten Auftrags erzeug
 
 ```sh
 python3 tools/work_packet.py list
-python3 tools/work_packet.py conflicts ARCH-17-PUBLISH ARCH-13-MANIFEST ARCH-24-TRUNK
-python3 tools/work_packet.py show ARCH-17-PUBLISH
+python3 tools/work_packet.py conflicts ARCH-17-PUBLISH-TAIL ARCH-13-RETENTION-LIFECYCLE ARCH-24-PART-REVISIONS
+python3 tools/work_packet.py show ARCH-17-PUBLISH-TAIL
 ```
 
 Der Konfliktprüfer vergleicht deklarierte Schreibbereiche und gleiche
-Einstiegsdateien. Er meldet beispielsweise ARCH-13/14 sowie ARCH-24/25 als
+Einstiegsdateien. Er meldet beispielsweise ARCH-13/26/27 sowie ARCH-24/25 als
 Kollision. Neue Dateien, indirekte Verbraucher und nicht deklarierte Änderungen
 muss der Integrationsbesitzer zusätzlich zuordnen. Parallel gelesene Dateien
 sind keine Schreibkonflikte. Die Paketbriefe sind begrenzte Vorschläge aus den
@@ -36,7 +36,7 @@ offenen ARCH-Aufgaben und werden nach ihrer Lieferung ersetzt oder entfernt.
 
 Ein geeigneter Startauftrag ist:
 
-> Übernimm ARCH-17-PUBLISH auf Basis des zugewiesenen Commits in einem eigenen
+> Übernimm ARCH-17-PUBLISH-TAIL auf Basis des zugewiesenen Commits in einem eigenen
 > Branch. Lies AGENTS.md, PROJECT_STATUS.md und den Paketbrief. Bearbeite nur
 > diesen Umfang, prüfe die betroffenen Verträge und übergib einen PR mit kurzer
 > Testevidenz. Zentrale Planung und Gesamtintegration übernimmt der Integrationschat.

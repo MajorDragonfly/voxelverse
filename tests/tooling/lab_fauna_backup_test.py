@@ -11,6 +11,7 @@ import unittest
 PROJECT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT))
 from tools import region_backup_userdata as full
+from tools import region_retention as retention
 from tools.validation_support import isolated_env, validation_editor
 
 
@@ -36,6 +37,12 @@ class LabFaunaBackupTest(unittest.TestCase):
             prefix = "LIVING_FAUNA_METRICS "
             metrics = json.loads(next(line[len(prefix):] for line in output.splitlines() if line.startswith(prefix)))
             source = Path(metrics["save"]).parent
+            plan = base / "retention-plan"
+            manifest = retention.plan_retention(source, plan)
+            self.assertEqual(retention.verify_retention(source, plan), manifest)
+            self.assertGreater(manifest["stats"]["reachable_blobs"], 0)
+            roots = [json.loads(line) for line in (plan / "roots.jsonl").read_text().splitlines()]
+            self.assertTrue(any(row.get("store_directory") == "living_fauna/blobs" for row in roots))
             archive = base / "archive"
             stats = full.export_userdata(source, archive)
             self.assertEqual(full.verify_userdata(archive), stats)

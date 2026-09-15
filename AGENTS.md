@@ -6,7 +6,7 @@
    im selben Chat nutze den vorhandenen Kontext; wiederhole den Einstieg nur bei
    einer neuen Basis, einem Konflikt oder einer geänderten Anforderung.
 2. `python3 tools/work_packet.py list` zeigt vorbereitete Teilaufträge.
-   `python3 tools/work_packet.py show ARCH-17-PUBLISH` gibt einen kleinen Kontext
+   `python3 tools/work_packet.py show ARCH-17-PUBLISH-TAIL` gibt einen kleinen Kontext
    mit Dateien, Schreibbereichen und relevanten Prüfverträgen aus.
 3. Lies danach nur die betroffenen Implementierungen und die passenden Abschnitte
    in `docs/MODULE_CONTRACTS.md`. ROADMAP, alte Audits, alle PRs, alle Branches und

@@ -3359,3 +3359,30 @@ msgstr "Tripod gait"
 
 msgid "EDITOR_GAIT_FREE"
 msgstr "Free body plan"
+
+msgid "EDITOR_CATEGORY_HEAD"
+msgstr "Head modules"
+
+msgid "EDITOR_PART_HEAD_ELEPHANT_TRUNK_NAME"
+msgstr "Elephant trunk"
+
+msgid "EDITOR_PART_HEAD_ELEPHANT_TRUNK_DESCRIPTION"
+msgstr "Curved trunk above a separately selectable mouth. Unlocked with the filter snout; cosmetic part."
+
+msgid "EDITOR_PART_MOUTH_FELINE_SNOUT_NAME"
+msgstr "Feline muzzle"
+
+msgid "EDITOR_PART_MOUTH_FELINE_SNOUT_DESCRIPTION"
+msgstr "Short muzzle with whisker pads, a small nose and fangs. Shares the predator jaws profile and unlock."
+
+msgid "EDITOR_PART_MOUTH_BEAR_SNOUT_NAME"
+msgstr "Bear muzzle"
+
+msgid "EDITOR_PART_MOUTH_BEAR_SNOUT_DESCRIPTION"
+msgstr "Broad, strong muzzle with a large nose and molars. Shares the broad beak omnivore profile and unlock."
+
+msgid "EDITOR_PART_MOUTH_PIG_SNOUT_NAME"
+msgstr "Pig snout"
+
+msgid "EDITOR_PART_MOUTH_PIG_SNOUT_DESCRIPTION"
+msgstr "Short snout with a flat nose disc and two nostrils. Shares the broad beak omnivore profile and unlock."

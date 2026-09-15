@@ -94,7 +94,8 @@
         "water_depth_test",
         "world_evolution_v2_ci_test",
         "world_layered_v7_test",
-        "world_runtime_continuity_test"
+        "world_runtime_continuity_test",
+        "resource_visuals_test"
       ]
     },
     {

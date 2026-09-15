@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 from contextlib import closing
+from dataclasses import dataclass
 import os
 from pathlib import Path
 import shutil
@@ -26,6 +27,11 @@ RECORD = "region-retention.json"
 REPORTS = ("files.jsonl", "owners.jsonl", "roots.jsonl", "blobs.jsonl")
 MAX_ROOTS = 100_000
 MAX_JSON_DEPTH = 128
+
+@dataclass(frozen=True)
+class LabFaunaReference:
+    """The laboratory owns a separate blob directory, even for equal hashes."""
+    body_id: str
 
 
 def _references(value, location="$", depth=0, archives=0):
@@ -49,6 +55,27 @@ def _references(value, location="$", depth=0, archives=0):
             for _ in backup._roots(value):
                 pass
     excluded = set()
+    if value.get("fauna_codec") == "godot_native_v1" and "bodies" in value:
+        backup._version(value.get("schema"), (1, 2, 3, 4), "living laboratory")
+    if "fauna_archive" in value:
+        fauna = value["fauna_archive"]
+        backup._require(isinstance(fauna, dict) and set(fauna) == {"schema", "body_id", "count", "storage"}
+                        and "fauna" not in value, "Unsupported laboratory fauna archive")
+        backup._version(fauna.get("schema"), (1,), "laboratory fauna archive")
+        backup._require(isinstance(fauna["body_id"], str) and 0 < len(fauna["body_id"]) <= 256
+                        and backup._integer(fauna["count"], 0, 9007199254740991), "Invalid laboratory fauna identity/count")
+        root = backup._storage_root(fauna["storage"])
+        backup._require((fauna["count"] == 0) == (root == ""), "Empty laboratory fauna root/count mismatch")
+        yield location + "/fauna_archive/storage", root, LabFaunaReference(fauna["body_id"])
+        excluded.add("fauna_archive")
+    if "creature_encounters" in value:
+        encounters = value["creature_encounters"]
+        backup._require(isinstance(encounters, dict), "Invalid encounter ledger")
+        backup._version(encounters.get("schema"), (1, 2), "creature encounters")
+        if encounters["schema"] == 2:
+            backup._require(set(encounters) == {"schema", "storage"}, "Unsupported encounter archive fields")
+            yield location + "/creature_encounters/storage", backup._storage_root(encounters["storage"]), backup.EncounterReference()
+            excluded.add("creature_encounters")
     if {"tiles", "places", "body_id", "mode", "divisions"} <= value.keys():
         root = backup._atlas_root(value, value["body_id"])
         if value["schema"] >= 2:
@@ -76,7 +103,7 @@ def _references(value, location="$", depth=0, archives=0):
 
 def _blob_digest(relative: str) -> str | None:
     parts = relative.split("/")
-    if len(parts) == 4 and parts[:2] == ["regions", "blobs"] and parts[3].endswith(".json"):
+    if len(parts) == 4 and parts[0] in ("regions", "living_fauna") and parts[1] == "blobs" and parts[3].endswith(".json"):
         digest = parts[3][:-5]
         if backup.HASH.fullmatch(digest) and parts[2] == digest[:2]:
             return digest
@@ -100,8 +127,8 @@ def _build(source: Path, directory: Path) -> dict:
         with closing(sqlite3.connect(str(Path(temporary) / "index.sqlite"))) as index:
             # SQLite's page cache and disk index avoid a galaxy-sized Python set.
             index.execute("PRAGMA cache_size = -2048")
-            index.execute("CREATE TABLE blobs (digest TEXT PRIMARY KEY, path TEXT, bytes INTEGER)")
-            index.execute("CREATE TABLE reachable (digest TEXT PRIMARY KEY)")
+            index.execute("CREATE TABLE blobs (digest TEXT, path TEXT PRIMARY KEY, bytes INTEGER)")
+            index.execute("CREATE TABLE reachable (path TEXT PRIMARY KEY)")
             with (directory / "files.jsonl").open("xb") as files, \
                     (directory / "owners.jsonl").open("xb") as owners, \
                     (directory / "roots.jsonl").open("xb") as roots:
@@ -139,18 +166,25 @@ def _build(source: Path, directory: Path) -> dict:
                             status = "json_scanned"
                             for location, root, context in _references(value):
                                 backup._require(stats["roots"] < MAX_ROOTS, "Root reference budget exceeded")
-                                contract = ("atlas_places" if isinstance(context, backup.PlaceReference)
+                                contract = ("lab_fauna_trie" if isinstance(context, LabFaunaReference)
+                                            else "encounters" if isinstance(context, backup.EncounterReference)
+                                            else "atlas_places" if isinstance(context, backup.PlaceReference)
                                             else "atlas_tiles" if context is not None else "region_trie")
-                                roots.write(userdata._line({"owner": relative, "owner_sha256": entry["sha256"],
-                                    "location": location, "root": root, "contract": contract}))
+                                store_directory = "living_fauna/blobs" if isinstance(context, LabFaunaReference) else "regions/blobs"
+                                root_record = {"owner": relative, "owner_sha256": entry["sha256"],
+                                    "location": location, "root": root, "contract": contract}
+                                if isinstance(context, LabFaunaReference): root_record["store_directory"] = store_directory
+                                roots.write(userdata._line(root_record))
                                 stats["roots"] += 1
                                 count += 1
                                 if root or isinstance(context, backup.PlaceReference):
                                     if root:
-                                        userdata._directory(source / "regions")
-                                        userdata._directory(source / "regions/blobs")
-                                    for reached, _ in backup._walk(source / "regions/blobs", root, walk_stats, context):
-                                        index.execute("INSERT OR IGNORE INTO reachable VALUES (?)", (reached,))
+                                        userdata._directory((source / store_directory).parent)
+                                        userdata._directory(source / store_directory)
+                                    domain_context = None if isinstance(context, LabFaunaReference) else context
+                                    for reached, _ in backup._walk(source / store_directory, root, walk_stats, domain_context):
+                                        relative_blob = backup._blob_path(Path(store_directory), reached).as_posix()
+                                        index.execute("INSERT OR IGNORE INTO reachable VALUES (?)", (relative_blob,))
                     else:
                         backup._require(".json" not in Path(relative).name, "JSON owner exceeds byte budget: " + relative)
                     stats["opaque_owners"] += status == "opaque_retained"
@@ -159,12 +193,12 @@ def _build(source: Path, directory: Path) -> dict:
                     _finish(stream)
             # A closure reached during traversal must also exist in the complete
             # inventory. This detects removals between owner and blob scanning.
-            missing = index.execute("SELECT digest FROM reachable EXCEPT SELECT digest FROM blobs LIMIT 1").fetchone()
+            missing = index.execute("SELECT path FROM reachable EXCEPT SELECT path FROM blobs LIMIT 1").fetchone()
             backup._require(missing is None, "Reachable blob missing from generation inventory")
             with (directory / "blobs.jsonl").open("xb") as blobs:
                 for digest, path, size, reached in index.execute(
-                        "SELECT b.digest, b.path, b.bytes, r.digest IS NOT NULL "
-                        "FROM blobs b LEFT JOIN reachable r ON b.digest = r.digest ORDER BY b.path"):
+                        "SELECT b.digest, b.path, b.bytes, r.path IS NOT NULL "
+                        "FROM blobs b LEFT JOIN reachable r ON b.path = r.path ORDER BY b.path"):
                     stats["blobs"] += 1
                     stats["reachable_blobs" if reached else "not_referenced_by_known_roots"] += 1
                     stats["reachable_bytes" if reached else "not_referenced_bytes"] += size

@@ -3359,3 +3359,30 @@ msgstr "Dreipunktgang"
 
 msgid "EDITOR_GAIT_FREE"
 msgstr "Freier Körperbau"
+
+msgid "EDITOR_CATEGORY_HEAD"
+msgstr "Kopfmodule"
+
+msgid "EDITOR_PART_HEAD_ELEPHANT_TRUNK_NAME"
+msgstr "Elefantenrüssel"
+
+msgid "EDITOR_PART_HEAD_ELEPHANT_TRUNK_DESCRIPTION"
+msgstr "Gebogener Rüssel über dem separat wählbaren Mund. Freischaltung mit der Filterschnauze; reines Gestaltungsteil."
+
+msgid "EDITOR_PART_MOUTH_FELINE_SNOUT_NAME"
+msgstr "Katzenschnauze"
+
+msgid "EDITOR_PART_MOUTH_FELINE_SNOUT_DESCRIPTION"
+msgstr "Kurze Schnauze mit zwei Schnurrhaarkissen, kleiner Nase und Fangzähnen. Werte und Freischaltung wie Raubkiefer."
+
+msgid "EDITOR_PART_MOUTH_BEAR_SNOUT_NAME"
+msgstr "Bärenschnauze"
+
+msgid "EDITOR_PART_MOUTH_BEAR_SNOUT_DESCRIPTION"
+msgstr "Breite, kräftige Schnauze mit großem Nasenspiegel und Mahlzähnen. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels."
+
+msgid "EDITOR_PART_MOUTH_PIG_SNOUT_NAME"
+msgstr "Schweineschnauze"
+
+msgid "EDITOR_PART_MOUTH_PIG_SNOUT_DESCRIPTION"
+msgstr "Kurze Schnauze mit flacher Rüsselscheibe und zwei Nasenlöchern. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels."

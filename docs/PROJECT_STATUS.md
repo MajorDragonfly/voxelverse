@@ -1,65 +1,54 @@
 # Aktueller Projektstand
 
-Stand: 15. September 2026. Diese Seite ist der kurze Einstieg für neue Fachchats.
-Der Integrationschat aktualisiert sie nach einer gemeinsamen Lieferung.
+Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue Fachchats.
 
 ## Gemeinsame Basis
 
-- Veröffentlichtes `main`: `c8b83f4c8109219f340864a05b2673545d018521`, Merge von
-  [PR #90](https://github.com/MajorDragonfly/voxelverse/pull/90).
-- Enthaltener Spielcode: `59d73d7822b85445f48fbb9bb4fba738cfb3d5aa`.
-  Git-Tree: `c95ac1638832dc413efca38310859fca90542c60`.
-  Das ist die geprüfte Ausgangsbasis dieser Workflow-Überarbeitung, kein Alias für
-  ein künftig bewegliches `main`. Zum Rundenstart einmal auf Änderungen prüfen.
-- Godot **4.6.3**, Forward+, Jolt; Start über `ui/frontend/main_menu.tscn` in
-  `main/spherical_campaign.tscn`. Die Flachwelt ist nur historische Prüfszene.
-- Frühere Integrationsbranchnamen und „noch nicht angebunden“-Texte in datierten
-  Berichten beschreiben deren damaligen Stand. Sie sind keine neuen Arbeitsaufträge.
+- `main` beim Abruf: `d378ca0ecd7f03429a5150df6358e0646ec06689`, Merge von #92.
+- Neuer gemeinsamer Kandidat: `agent/integration-vegetation-nest-20260915`.
+  Enthält die veröffentlichten PRs **#93–108** und die Ressourcen-/Anschlusskorrekturen.
+  Exakte Eingangsköpfe: [Integrationsbericht](INTEGRATION_2026-09-15_RESOURCES.md).
+- Der Kandidat ist eine eigene Branchlieferung. `main` wird dadurch nicht umbenannt
+  oder stillschweigend als bereits geprüft erklärt. Für neue Pakete den festen
+  Quellcommit aus der aktuellen PR-Übergabe verwenden.
+- Godot **4.6.3**, Forward+, Jolt; regulärer Start ausschließlich über
+  `ui/frontend/main_menu.tscn` → `main/spherical_campaign.tscn`.
 
 ## Enthalten und offen
 
-| Bereich | Im gemeinsamen Quellstand | Nächste Grenze |
+| Bereich | Gemeinsamer Kandidat | Nächste Grenze |
 |---|---|---|
-| Kugelkampagne | Kreatur, Heimat, Dorf, vier Nutztierspezies, Zähmung, Milch/Eier, radiale Orte und A–B–A-Anschlüsse | Langer begehbarer Ziel-PC-Test und Lade-/Darstellungsspitzen |
-| Speicherung | Präzise Koordinaten, feste Speicherteilnehmer, Regions-/Kartenarchive und vollständige Benutzer-/Laborbackups | Globales Manifest, Aufbewahrung/Bereinigung und weitere Langzeitregister |
-| Streaming | Vorausschau, gültige Jobgenerationen, radiale Stufenkollision, korrigierter Erstfokus | Kalte Mesh-/Kollisionspublikation messen und begrenzen |
-| Kreaturen und UI | Zusätzliche Füße/Münder, Journal-Seiten, lokale Bauplanbibliothek, Fähigkeiten DE/EN | Rüssel und weitere Körperteile, restliche Übersetzungen und visuelle Abnahme |
-| Spätere Systeme | Siedlungs-, Regionaltransport- und Schiffsverträge | Produktive Mehrsiedlungsabläufe, spätere Epochen, Schiffsspiel und Onlinekatalog |
+| Kugelkampagne | Heimat, Dorf, vier Nutztierspezies, Milch/Eier und Körperreise | Zusammenhängende Ziel-PC-Abnahme |
+| Vegetation/Heimat | Sechs individuell erzeugte Beerenformen, Planeten-/Biompalette, modernes Zweignest; stabile Form beim Wiederbesuch | Optische Abnahme im nativen Build |
+| Speicher | Globaler Aufbewahrungsbericht, archivierte Begegnungen und Labortierhistorie; beide Blobverzeichnisse | Laufende Schreiber und sichere spätere Bereinigung |
+| Leistung | Schrittweise Terrain-/Kollisionspublikation, begrenzte Tier-Audiobeobachter; Ernte ohne Mesh-/Colliderneubau | Restliche Einzelaufrufe und Ziel-PC-Messung |
+| Kreaturen | Separater Rüssel, aktive Kiefer/Scheren, Katze/Bär/Schwein; Werkstatt DE/EN | Gespeicherte Teilrevisionen und weitere Katalogwünsche |
+| UI/Audio | Vitalwerte unter der Minimap, Scanner, Dorfaufträge/Berufe DE/EN; weichere Schritte und Wasserklänge | Restliche Tierhaltungs-/Epochenkopie und Hörabnahme |
+| Siedlungen | Zwei produktive eigene Orte, getrennte Vorräte/Aufträge und Nah-/Fernarbeit | Gleichartige Arbeitsplätze im selben Ort, Transporte zwischen Lagern |
+| Raumfahrt | Modularer Schiffseditor mit Vorlagen, Vorschau, Symmetrie, Bibliothek und Undo | Instanz-/Kampagnenanschluss und spätere spielbare Flugschleife |
+| Entwicklungsablauf | Fachtestplan aus lokalem Git-Diff; aktualisierte Folgepakete | Neue Pakete immer von diesem gemeinsamen Stand ableiten |
 
-**Enthaltener Code ist nicht automatisch vollständig abgenommen.** Bei der
-Statusabfrage dieses Audits waren auf dem Spielcode-Commit unter anderem
-Godot-Gesamtprüfung, Export und Rendering noch nicht abgeschlossen. Vor einer
-Buildfreigabe prüft die Integration die aktuellen Läufe genau einmal. Ein alter
-grüner Fachlauf ersetzt den neuen gemeinsamen Kandidaten nicht. Der 1080p60-
-Nachweis auf benannter CPU/GPU/RAM-Konfiguration fehlt weiterhin.
+**Enthaltener Code ist nicht automatisch vollständig abgenommen.** Die genaue
+lokale und CI-Prüfung steht in der [aktuellen Übergabe](INTEGRATION_2026-09-15_RESOURCES.md).
+Keine Ableitung von Ziel-PC-FPS aus Headless-/CPU-Ansichten.
 
-## Referenzhardware für den Spieltest
-
-Von Lars am 15. September 2026 angegeben:
+## Referenzhardware
 
 | Komponente | Ausstattung |
 |---|---|
 | CPU | AMD Ryzen 7 9800X3D |
 | GPU | NVIDIA GeForce RTX 4070 Ti |
-| Arbeitsspeicher | 32 GB, 5200 MT/s |
+| RAM | 32 GB, 5200 MT/s |
 
-Vorläufiges Leistungsziel bleibt 1920 × 1080 bei 60 FPS. Grafikpreset,
-Treiberstand und tatsächliche Messwerte werden beim Test protokolliert.
-Dieser Referenz-PC ist keine festgelegte Mindestanforderung für das Spiel.
+Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset und Treiber beim Lauf erfassen;
+das ist keine Mindesthardwarefestlegung.
 
 ## Nächste Arbeitsrunde
 
-`python3 tools/work_packet.py list` zeigt sieben abgegrenzte Vorschläge.
-Sie haben bewusst keine lokale „frei/reserviert“-Spalte: Eine Branchkopie könnte
-die tatsächliche Belegung anderer Chats nicht zuverlässig kennen.
+`python3 tools/work_packet.py list` enthält ausschließlich neue abgegrenzte
+Folgevorschläge und die offene Ziel-PC-Abnahme. Alte Pakete für Rüssel, Editor,
+Manifest, Begegnungen, Zweitort und erste Terrainpublikation nicht nochmals starten.
+Der Katalog reserviert keine Arbeit; die Belegung führt der Integrationschat.
 
-Empfohlener Anfang: `ARCH-17-PUBLISH`, `ARCH-13-MANIFEST`, `ARCH-24-TRUNK` plus
-ein Integrationschat. `ARCH-14-ENCOUNTERS` folgt in den geteilten Speicherbereichen
-nach ARCH-13; `ARCH-25-EDITOR` alternativ zum Kreatureneditorpaket.
-`ARCH-26-SECOND-SITE` erst mit zugeordnetem Save-/Dorfbesitzer beginnen.
-`ARCH-19-TARGET-PC` gehört zur gemeinsamen Abnahme auf der oben benannten Hardware.
-
-Aufträge und Belegung: [Arbeitsablauf](PARALLEL_WORKFLOW.md). Technische Richtung:
-[Godot und Skalierung](GODOT_TECHNICAL_DIRECTION.md). Vollständige Ziele bleiben
-in [ROADMAP](../ROADMAP.md) und den jeweiligen ARCH-Abschnitten erhalten.
-Quellhistorie bei Bedarf: [Integration 15.09.](INTEGRATION_2026-09-15.md).
+[Folgearbeiten](NEXT_PARALLEL_WORK.md) · [Arbeitsablauf](PARALLEL_WORKFLOW.md) ·
+[Technische Richtung](GODOT_TECHNICAL_DIRECTION.md) · [Roadmap](../ROADMAP.md).

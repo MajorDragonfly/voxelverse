@@ -72,6 +72,9 @@ func _ready() -> void:
 	var nest: Node3D = preload("res://world/resources/nests/nest.tscn").instantiate()
 	nest.name = "Nest"
 	nest.snap_to_terrain = false
+	nest.persistent_visual_key = str(body.id) + ":nest"
+	nest.visual_profile = terrain.surface.terrain
+	nest.visual_biome = str(terrain.surface.sample(body.get("home_group", {}).get("anchor", body.surface_context.spawn)).biome)
 	# The campaign population supplies radial food; do not start the plane streamer.
 	nest.get_node("PlantFoodStreamer").free()
 	add_child(nest)

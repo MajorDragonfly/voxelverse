@@ -6,6 +6,16 @@ Die Lieferungen #78–89 sind über PR #90 in `main` enthalten. Für Fachchats g
 Der Integrationschat aktualisiert gemeinsame Lieferstände einmal je Runde.
 Historische Berichte belegen ihren damaligen Commit, keine heutige Abnahme.
 
+## Zweite Integration am 15. September
+
+Der gemeinsame Kandidat auf `agent/integration-vegetation-nest-20260915` vereinigt
+#93–108: Terrain-/Audioarbeit, Archive, neue Teile/Gelenke, DE/EN-Werkstatt und Dorf,
+HUD, zwei eigene Siedlungen, Schiffseditor und bessere Fachtestauswahl. Hinzu kommen
+sechs prozedurale Beerenformen und ein neu aufgebautes Voxelzweignest mit stabiler
+Identität. [Lieferliste, Korrekturen und Abnahme](docs/INTEGRATION_2026-09-15_RESOURCES.md).
+Schiffsflug, weitere Epochen, automatische Archivbereinigung und Ziel-PC-FPS
+bleiben eigenständige Folgeziele. Ältere Abschnitte behalten ihren datierten Kontext.
+
 ## Lieferhistorie: 10. September
 
 Bauplan-/Originalschutz, lokale Kreaturenvorlagen mit Startauswahl, gemeinsame Ressourcenproduktion, optimierte Dorfarbeit, erhaltene Tierhaltung und Milchfracht bei Planetenreisen sind zusammengeführt. Kartenkacheln und bekannte Orte werden dauerhaft mit begrenztem Cache gespeichert und vollständig archiviert. Die vierte Nutztierspezies besitzt Eier-Eignung; die eigentliche Eierproduktionskette folgt in ARCH-22.
