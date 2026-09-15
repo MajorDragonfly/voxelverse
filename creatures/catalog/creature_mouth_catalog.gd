@@ -1,6 +1,5 @@
 extends RefCounted
-## Additive model variants. Legacy identities, stats and species generation stay
-## frozen; these shapes share the earned predator-jaw profile and unlock.
+## Shared mouth/head model provider. Legacy identities and species stay frozen.
 const REVISION: int = 1
 const LEGACY_IDS: Array[String] = ["mouth_grazer", "mouth_broad_beak", "mouth_predator_jaws", "mouth_filter_snout"]
 const DEFINITIONS: Array = [
@@ -13,6 +12,12 @@ const DEFINITIONS: Array = [
 	{"id": "mouth_octopus_beak", "name": "Oktopusmund",
 		"description": "Runde Mundöffnung mit innenliegendem Schnabel. Werte und Freischaltung wie Raubkiefer.",
 		"features": ["oral_ring", "mouth_cavity", "inner_beak"]},
+	{"id": "head_elephant_trunk", "name": "Elefantenrüssel",
+		"description": "Gebogener Rüssel über dem separat wählbaren Mund. Freischaltung mit der Filterschnauze; reines Gestaltungsteil.",
+		"category": "head", "stats_source": "", "stats": {},
+		"complexity": 9, "default_scale": 1.0,
+		"unlock_source": "mouth_filter_snout",
+		"features": ["tapered_trunk", "curled_tip", "nostrils", "separate_mouth"]},
 ]
 
 

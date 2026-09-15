@@ -33,7 +33,7 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 					_eye(root, Vector3(float(index - 1) * 0.13, 0.07 if index != 1 else -0.07, 0), size * 0.64, blueprint, "Eye%d" % index)
 			else:
 				_eye(root, Vector3.ZERO, size, blueprint, "Eye")
-		"mouth":
+		"mouth", "head":
 			if id not in MouthGeometry.Catalog.LEGACY_IDS:
 				for piece: Dictionary in MouthGeometry.recipe(id, skin, accent, horn):
 					if piece.kind == "cone":

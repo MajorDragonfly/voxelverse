@@ -135,7 +135,7 @@ func _pose(time: float, moving: float, settings: Dictionary, phase: float) -> vo
 			node.rotation.y += sin(time * 2.5) * 0.20
 		elif category == "arms":
 			node.rotation.x += sin(phase + side * PI * 0.5) * 0.32 * moving
-		elif category in ["mouth", "eyes"]:
+		elif category in ["mouth", "head", "eyes"]:
 			node.rotation.x += sin(time * 1.8) * 0.025
 	for leg in _legs:
 		if not is_instance_valid(leg["root"]):

@@ -7,7 +7,7 @@ const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
 const PartCard = preload("res://creatures/editor/creature_part_card.gd")
 const Canvas = preload("res://creatures/editor/creature_editor_canvas.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
-const CATEGORY_NAMES: Dictionary = {"body": "Körper", "mouth": "Mäuler", "eyes": "Augen", "legs": "Beine", "arms": "Arme", "feet": "Füße", "hands": "Hände", "tail": "Schwänze", "horns": "Hörner", "plates": "Panzer", "spikes": "Stacheln", "decor": "Details", "paint": "Muster"}
+const CATEGORY_NAMES: Dictionary = {"body": "Körper", "mouth": "Mäuler", "head": "Kopfmodule", "eyes": "Augen", "legs": "Beine", "arms": "Arme", "feet": "Füße", "hands": "Hände", "tail": "Schwänze", "horns": "Hörner", "plates": "Panzer", "spikes": "Stacheln", "decor": "Details", "paint": "Muster"}
 const MINT := Color("a6ebcc")
 const INK := Color("0d202b")
 
@@ -700,7 +700,7 @@ func _on_part_button_pressed(id: String) -> void:
 	AnatomyV7.reset_part_anchor(blueprint, index)
 	SurfaceSocketsV7.apply_symmetry(blueprint, index, AssemblyV7.is_symmetry_enabled(blueprint))
 	var part: Dictionary = blueprint["parts"][index]
-	if str(part["category"]) not in ["mouth", "tail"]:
+	if str(part["category"]) not in ["mouth", "head", "tail"]:
 		_snap_to_shape(index, part["position"])
 	_refresh_all()
 	_set_builder_status("Teil ausgewählt · Rechts: Drehen X/Y/Z, Form und Größe · Goldene Punkte: Mittellinie.")
@@ -817,7 +817,7 @@ func _refresh_category_buttons() -> void:
 	_category_grid.visible = _studio_mode == "parts"
 	if _studio_mode != "parts":
 		return
-	for category in ["mouth", "eyes", "legs", "arms", "feet", "hands", "tail", "horns", "plates", "spikes", "decor"]:
+	for category in ["mouth", "head", "eyes", "legs", "arms", "feet", "hands", "tail", "horns", "plates", "spikes", "decor"]:
 		var button := _button(_category_grid, CATEGORY_NAMES[category], _on_category_button_pressed.bind(category))
 		button.add_theme_font_size_override("font_size", 12)
 		button.custom_minimum_size = Vector2(78, 34)
@@ -1373,7 +1373,7 @@ func _prepare_surface_anchors() -> void:
 		return
 	var length: float = Blueprint.get_body_shape(blueprint).z * Blueprint.get_body_scale(blueprint) * SpineProfile.get_body_length_scale(blueprint)
 	for part: Dictionary in blueprint.get("parts", []):
-		if str(part.get("category", "")) in ["mouth", "tail"]:
+		if str(part.get("category", "")) in ["mouth", "head", "tail"]:
 			continue
 		var point: Vector3 = Blueprint._as_vector3(part.get("position", Vector3.ZERO))
 		var t: float = clampf(point.z / maxf(length, 0.01) + 0.5, 0.035, 0.965)
