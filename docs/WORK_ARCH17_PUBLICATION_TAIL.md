@@ -6,8 +6,9 @@ Teilauftrag vom 15.09.2026, Branch `agent/arch17-publish-tail-20260915`.
 Basis: `1d6573d9551c3f24bf1dd6fa64e5c301583a26c8`, veröffentlichter Kopf
 des Integrationskandidaten [PR #110](https://github.com/MajorDragonfly/voxelverse/pull/110).
 Der Nutzer hat die Paketauswahl und lokale Umsetzung beauftragt; ARCH-13 und
-ARCH-24 werden parallel bearbeitet. Veröffentlichung benötigt gemäß seiner
-bisherigen Vorgabe eine ausdrückliche Freigabe. Kein Push, PR oder Merge erfolgt.
+ARCH-24 werden parallel bearbeitet. Der Nutzer hat nach der lokalen Abnahme
+die Veröffentlichung von Branch und Pull Request ausdrücklich freigegeben.
+Ziel ist der Integrationsbranch von PR #110; ein Merge ist nicht beauftragt.
 
 ## Änderung
 
