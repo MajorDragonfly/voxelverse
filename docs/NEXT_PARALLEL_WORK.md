@@ -2,13 +2,13 @@
 
 Basis: der feste Quellcommit des gemeinsamen Kandidaten aus
 [PROJECT_STATUS](PROJECT_STATUS.md), nicht erneut die veralteten Einzelbranches.
-[Integration #93–108 und Ressourcen](INTEGRATION_2026-09-15_RESOURCES.md) enthält die
+[Integration #93–109 und Ressourcen](INTEGRATION_2026-09-15_RESOURCES.md) enthält die
 kurze Lieferliste; die früheren WORK-Berichte bleiben historische Fachnachweise.
 
 ## Bereits geliefert
 
 Rüssel, bewegliche Kiefer/Scheren, weitere Schnauzen, Werkstatt DE/EN, HUD,
-Dorfaufträge/Berufe, zweites produktives Lager, Terrainpublikation, Audio-Budget,
+Dorfaufträge/Berufe, Entdeckungsbuch DE/EN, zweites produktives Lager, Terrainpublikation, Audio-Budget,
 Schiffsautoreneditor, Begegnungs-/Labortierarchive, Aufbewahrungsmanifest,
 Dorfmessroute und automatische Fachtestauswahl sind im Kandidaten vereinigt.
 Beerenbüsche und Nest nutzen die neue deterministische Ressourcendarstellung.

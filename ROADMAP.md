@@ -9,7 +9,7 @@ Historische Berichte belegen ihren damaligen Commit, keine heutige Abnahme.
 ## Zweite Integration am 15. September
 
 Der gemeinsame Kandidat auf `agent/integration-vegetation-nest-20260915` vereinigt
-#93–108: Terrain-/Audioarbeit, Archive, neue Teile/Gelenke, DE/EN-Werkstatt und Dorf,
+#93–109: Terrain-/Audioarbeit, Archive, neue Teile/Gelenke, DE/EN-Werkstatt, Dorf und Entdeckungsbuch,
 HUD, zwei eigene Siedlungen, Schiffseditor und bessere Fachtestauswahl. Hinzu kommen
 sechs prozedurale Beerenformen und ein neu aufgebautes Voxelzweignest mit stabiler
 Identität. [Lieferliste, Korrekturen und Abnahme](docs/INTEGRATION_2026-09-15_RESOURCES.md).

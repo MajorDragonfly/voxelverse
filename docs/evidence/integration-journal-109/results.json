@@ -1,0 +1,124 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "d1f92fec1a1c4945bff0dc1481ab0aeb3a5074ae",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "journal_localization_test",
+    "discovery_journal_test",
+    "journal_paging_test",
+    "owned_animal_localization_test",
+    "domestic_fauna_journal_test",
+    "research_goals_test",
+    "localization_test",
+    "hud_layout_test",
+    "editor_localization_test",
+    "resource_visuals_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.943
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.021
+    },
+    {
+      "name": "journal_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.999,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "discovery_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.433,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "journal_paging_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.32,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "owned_animal_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.716,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "domestic_fauna_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.148,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "research_goals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.782,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.773,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "hud_layout_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.494,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "editor_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 31.717,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "resource_visuals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.03,
+      "contract": "terrain_art"
+    }
+  ]
+}

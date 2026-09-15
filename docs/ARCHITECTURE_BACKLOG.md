@@ -6,7 +6,7 @@ Ursprünglicher Aufgabenkatalog vom 9. September 2026. Grundlage der damaligen C
 
 ## Zweite Integration am 15. September
 
-#93–108 sind im aktuellen gemeinsamen Kandidaten vereinigt. Lieferung und genaue
+#93–109 sind im aktuellen gemeinsamen Kandidaten vereinigt. Lieferung und genaue
 Grenzen: [Integrationsbericht](INTEGRATION_2026-09-15_RESOURCES.md). Datierte
 Fachtexte unten bleiben Nachweise ihrer damaligen Quellen. Folgende Teilpunkte
 sind zusätzlich geliefert; kein vollständiger ARCH-/Epochenabschluss daraus:
@@ -18,7 +18,7 @@ sind zusätzlich geliefert; kein vollständiger ARCH-/Epochenabschluss daraus:
 - [x] ARCH-17: Erste portionierte Terrain-/Kollisionspublikation und begrenzte
   Audiobeobachter samt Quellenwechsel.
 - [x] ARCH-24: Rüssel als Kopfmodul, aktive Kiefer/Scheren und Katze/Bär/Schwein.
-- [x] ARCH-25: Kreaturenwerkstatt und Dorfaufträge/Berufe DE/EN sowie HUD-Überarbeitung.
+- [x] ARCH-25: Kreaturenwerkstatt, Dorfaufträge/Berufe und Entdeckungsbuch DE/EN sowie HUD-Überarbeitung.
 - [x] ARCH-26: Erste verlustfreie Ortsübernahme und zwei produktive eigene Lager;
   mehrere gleichartige Arbeitsstellen im selben Ort bleiben offen.
 - [x] ARCH-29/02: Fachtestplan aus Git-Diff und entwickelte Messroute mit Neustarts.

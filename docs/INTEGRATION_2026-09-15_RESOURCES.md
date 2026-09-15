@@ -26,6 +26,7 @@ Quellen sind ausschließlich die veröffentlichten PR-Köpfe, keine ungesicherte
 | [#106](https://github.com/MajorDragonfly/voxelverse/pull/106) | ARCH-14-LAB-POPULATION: Tierhistorie im Planetenlabor ohne 256er-Grenze | `5c675ec56dc3eabe2dfb3ee1022133792243f98b` |
 | [#107](https://github.com/MajorDragonfly/voxelverse/pull/107) | ARCH-29-CHECK-PLAN: gezielte Tests aus dem tatsächlichen Git-Diff | `0012e49a549b15523b87cd9314ec526181645457` |
 | [#108](https://github.com/MajorDragonfly/voxelverse/pull/108) | M10-FOLEY: weichere Schritte und differenzierte Wassergeräusche | `51d4b95ed426569ec7810ae273aec6816a883a7e` |
+| [#109](https://github.com/MajorDragonfly/voxelverse/pull/109) | ARCH-25-JOURNAL: Entdeckungsbuch und Artenvergleich DE/EN, Bedienzustand erhalten | `1e850040e7384ac4a077fbb5e253979bf7408421` |
 
 #105 folgt auf #100. Alle übrigen Lieferungen basieren auf d378ca0. Einzelne PRs
 waren als Entwurf veröffentlicht; ihre Fachnachweise und Grenzen bleiben in den
@@ -106,10 +107,10 @@ Fachchats können jetzt `validate_godot.py --changed-since BASIS_SHA --plan`
 verwenden. Unbekannte/zentrale Änderungen erweitern auf die volle Suite. Das
 erspart manuelles Nachlesen der Testzuordnung, ohne eine Testfreigabe vorzutäuschen.
 
-## Nachweise und Grenzen
+## Erste Abnahme: #93–108
 
-Quell-/Werkzeugstand: `4648ae9a0f3f3f418889da57e806cffba1f24c7d`. Danach folgen
-nur diese Übergabe und Nachweise. Alle Ergebnisse und Quelländerungen stehen in
+Quell-/Werkzeugstand dieser Abnahme: `4648ae9a0f3f3f418889da57e806cffba1f24c7d`.
+Sie endet mit Übergabecommit `b9ffcaa`. Alle Ergebnisse und Quelländerungen stehen in
 [der Abnahme](evidence/integration-resources-20260915/README.md).
 
 - Alle **179 registrierten Godot-Tests** ausgeführt, nach dokumentierten
@@ -137,3 +138,26 @@ lokale X-Server kann keine Sockets öffnen. Die beigefügten CPU-Ansichten verwe
 echte exportierte Godot-Meshdaten, sind jedoch keine Spielaufnahmen. Ressourcenansichten
 sind in beiden vorhandenen Renderer-Matrizen registriert. Hardware-FPS und
 subjektive Spiel-/Hörabnahme können erst auf dem Ziel-PC erfolgen.
+
+## Nachtrag: #109
+
+Beim erneuten Abruf waren `main` und die Köpfe #93–108 unverändert. Neu war #109;
+dieser feste Stand ist zusätzlich integriert. Aktueller Quell-/Werkzeugcommit:
+`d1f92fec1a1c4945bff0dc1481ab0aeb3a5074ae`.
+
+Der Sprachkatalog übernimmt 158 Buchtexte einmalig und behält die 106 bereits
+vorhandenen Teiltexte aus #103 sowie alle weiteren Ergänzungen. Zusätzlich ist
+„Kopfmodule“ für den Buchfilter angeschlossen; Rüssel, Katze, Bär und Schwein
+werden über die bestehenden Teiltexte übersetzt. Insgesamt 1285 Nachrichten
+in zwei Sprachen, 180 registrierte Tests. HUD-Einstieg und Ressourcen bleiben erhalten.
+
+Zehn direkte Fach-/Anschlusstests und drei Import-/Quellgates bestanden am sauberen
+Mergecommit. Enthalten sind Sprachwechsel, Paging, Tierregister, Forschung,
+Speicherfehler/Neustarts, HUD, Werkstatt und Ressourcen. Der frühere volle Lauf
+wird nicht als Vollprüfung dieses neuen Merge-Trees ausgegeben. Details unter
+[Nachtrag #109](evidence/integration-journal-109/README.md).
+
+Eine lokale Git-Abhängigkeit von einem inzwischen entfernten fremden Checkout
+wurde aus den unveränderten GitHub-Objekten wiederhergestellt und auf eigenständige
+Objektspeicherung umgestellt. Commit-IDs und geprüfte Arbeitsdateien blieben erhalten.
+Der Arbeitsablauf weist nun ausdrücklich auf unabhängige lokale Git-Objekte hin.

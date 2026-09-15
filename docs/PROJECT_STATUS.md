@@ -6,8 +6,8 @@ Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue F
 
 - `main` beim Abruf: `d378ca0ecd7f03429a5150df6358e0646ec06689`, Merge von #92.
 - Neuer gemeinsamer Kandidat: `agent/integration-vegetation-nest-20260915`.
-  Enthält die veröffentlichten PRs **#93–108** und die Ressourcen-/Anschlusskorrekturen.
-  Quell-/Werkzeugstand `4648ae9a0f3f3f418889da57e806cffba1f24c7d`; aktuell lokal
+  Enthält die veröffentlichten PRs **#93–109** und die Ressourcen-/Anschlusskorrekturen.
+  Quell-/Werkzeugstand `d1f92fec1a1c4945bff0dc1481ab0aeb3a5074ae`; aktuell lokal
   vorbereitet, GitHub-Veröffentlichung und Integrations-PR stehen noch aus.
   Exakte Eingangsköpfe: [Integrationsbericht](INTEGRATION_2026-09-15_RESOURCES.md).
 - Der Kandidat ist eine eigene Branchlieferung. `main` wird dadurch nicht umbenannt
@@ -25,7 +25,7 @@ Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue F
 | Speicher | Globaler Aufbewahrungsbericht, archivierte Begegnungen und Labortierhistorie; beide Blobverzeichnisse | Laufende Schreiber und sichere spätere Bereinigung |
 | Leistung | Schrittweise Terrain-/Kollisionspublikation, begrenzte Tier-Audiobeobachter; Ernte ohne Mesh-/Colliderneubau | Restliche Einzelaufrufe und Ziel-PC-Messung |
 | Kreaturen | Separater Rüssel, aktive Kiefer/Scheren, Katze/Bär/Schwein; Werkstatt DE/EN | Gespeicherte Teilrevisionen und weitere Katalogwünsche |
-| UI/Audio | Vitalwerte unter der Minimap, Scanner, Dorfaufträge/Berufe DE/EN; weichere Schritte und Wasserklänge | Restliche Tierhaltungs-/Epochenkopie und Hörabnahme |
+| UI/Audio | Vitalwerte unter der Minimap, Scanner, Dorfaufträge/Berufe und Entdeckungsbuch DE/EN; weichere Schritte und Wasserklänge | Restliche Tierhaltungs-/Epochenkopie und Hörabnahme |
 | Siedlungen | Zwei produktive eigene Orte, getrennte Vorräte/Aufträge und Nah-/Fernarbeit | Gleichartige Arbeitsplätze im selben Ort, Transporte zwischen Lagern |
 | Raumfahrt | Modularer Schiffseditor mit Vorlagen, Vorschau, Symmetrie, Bibliothek und Undo | Instanz-/Kampagnenanschluss und spätere spielbare Flugschleife |
 | Entwicklungsablauf | Fachtestplan aus lokalem Git-Diff; aktualisierte Folgepakete | Neue Pakete immer von diesem gemeinsamen Stand ableiten |
@@ -34,10 +34,13 @@ Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue F
 lokale und CI-Prüfung steht in der [aktuellen Übergabe](INTEGRATION_2026-09-15_RESOURCES.md).
 Keine Ableitung von Ziel-PC-FPS aus Headless-/CPU-Ansichten.
 
-Lokaler Stand: 179 Godot-Tests mit dokumentierten Korrekturen/Nachläufen, 24
+Vorstand #93–108: 179 Godot-Tests mit dokumentierten Korrekturen/Nachläufen, 24
 Laufzeit-/Quellprüfungen und 101 Python-Tests erfolgreich (6 optional ausgelassen).
 Linux vollständig vor der letzten Flächenkorrektur und anschließend am neu
 exportierten PCK gezielt geprüft. Windows und native Grafikprüfung bleiben offen.
+Nachtrag #109: 10 direkte Fach-/Anschlusstests sowie Import und Quellgates am
+sauberen `d1f92fe` erfolgreich. Registry jetzt 180 Tests; kein neuer Voll-/Exportlauf
+für diesen Nachtrag behauptet. [Nachweis](evidence/integration-journal-109/README.md).
 
 ## Referenzhardware
 

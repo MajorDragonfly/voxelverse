@@ -6,6 +6,11 @@ Teilaufträge bearbeiten. Einstieg und verbindliche Kurzregeln stehen in
 
 ## Runde vorbereiten
 
+Jeder Checkout braucht eigenständige Git-Objekte. Keine dauerhafte Abhängigkeit
+von Objektverzeichnissen fremder temporärer Checkouts: Wird deren Verzeichnis
+entfernt, können sonst Historie und Merge-Basis fehlen, obwohl Arbeitsdateien
+noch vorhanden sind. Nach lokalem Klonen diese Unabhängigkeit sicherstellen.
+
 Ein Integrationschat legt den Basiscommit und zunächst drei Fachaufträge fest.
 Er prüft aktuelle Lieferungen/Belegungen einmal und führt genau eine Rundenliste:
 
