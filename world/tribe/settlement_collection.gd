@@ -1,5 +1,5 @@
 extends RefCounted
-## ARCH-26.1: opt-in data contract, not yet a registered campaign save field.
+## Two bounded settlement instances in the common campaign snapshot.
 ## Each village payload remains the sole owner of stock, orders and cargo.
 const Tribe = preload("res://world/tribe/tribe_state.gd")
 const Simulation = preload("res://world/tribe/village_simulation.gd")
@@ -9,8 +9,8 @@ const Economy = Tribe.Economy
 const SCHEMA: int = 1
 const MAX_SETTLEMENTS: int = 2
 
-## Prepare a COPY for the future coordinated save migration. Never install it
-## into GameState until SaveGameService and all body.tribe consumers are ready.
+## Detached, lossless migration at first founding. The caller installs the copy
+## only through the existing atomic SaveGameService transaction.
 static func prepare_legacy(body: Dictionary, campaign: Dictionary) -> Dictionary:
 	if body.has("settlements"):
 		var existing: String = validate(body, campaign)
@@ -42,6 +42,7 @@ static func instance_view(body: Dictionary, settlement_id: String) -> Dictionary
 	if entry.is_empty(): return {}
 	var view: Dictionary = body.duplicate(false)
 	view.erase("settlements")
+	view["_settlement_id"] = settlement_id
 	view["tribe"] = entry.village
 	view["village_simulation"] = entry.simulation
 	if settlement_id != origin_id(body): view.erase("tribal_neighbor")
@@ -89,7 +90,7 @@ static func _add_place(result: Dictionary, place: Dictionary, settlement_id: Str
 		"entrance": place.get("entrance", place.position).duplicate(true)}
 
 ## Validate before binding a new snapshot; work ticks do not rescan the tree.
-## Live SaveGameService deliberately does not consume this contract yet.
+## SaveGameService validates this registered body participant before restore.
 static func validate(body: Dictionary, campaign: Dictionary) -> String:
 	if body.has("tribe") or body.has("village_simulation"): return "settlements.duplicate_authority"
 	if body.get("surface_mode") != Home.Cube.MODE: return "settlements.radial_migration_required"
@@ -152,3 +153,103 @@ static func validate(body: Dictionary, campaign: Dictionary) -> String:
 	for id: String in seen_members:
 		if id not in allowed: return "settlements.unknown_resident"
 	return ""
+
+## Body-level writers always keep the canonical body. These short-lived views
+## are for Work/Simulation consumers only, never snapshots or extension writes.
+static func selected_id(body: Dictionary) -> String:
+	return str(body.get("settlements", {}).get("selected_settlement_id", body.get("tribe", {}).get("id", "")))
+
+static func ids(body: Dictionary) -> Array:
+	if body.has("settlements"): return body.settlements.entries.keys()
+	return [selected_id(body)] if body.has("tribe") else []
+
+static func view(body: Dictionary, id: String = "") -> Dictionary:
+	if not body.has("settlements"): return body
+	return instance_view(body, selected_id(body) if id.is_empty() else id)
+
+static func village(body: Dictionary, id: String = "") -> Dictionary:
+	return view(body, id).get("tribe", {})
+
+static func replace_village(body: Dictionary, data: Dictionary) -> void:
+	if body.has("settlements"): body.settlements.entries[selected_id(body)].village = data
+	else: body.tribe = data
+
+static func set_simulation(body: Dictionary, simulation: Dictionary, id: String = "") -> void:
+	if body.has("settlements"): body.settlements.entries[selected_id(body) if id.is_empty() else id].simulation = simulation
+	else: body.village_simulation = simulation
+
+static func resident_count(body: Dictionary) -> int:
+	var total: int = 0
+	for id: String in ids(body): total += village(body, id).members.size()
+	return total
+
+static func next_resident_id(body: Dictionary) -> String:
+	var used: Array = []
+	for id: String in ids(body):
+		for member: Dictionary in village(body, id).members: used.append(member.id)
+	for index in range(3, Tribe.Housing.MAX_RESIDENTS):
+		var id: String = Tribe.Housing.resident_id({"id": origin_id(body)}, index)
+		if id not in used: return id
+	return ""
+
+static func player_member(body: Dictionary, campaign: Dictionary) -> Dictionary:
+	for id: String in ids(body):
+		for member: Dictionary in village(body, id).members:
+			if member.id == campaign.player_object_id: return member
+	return {}
+
+static func unsupported(body: Dictionary) -> bool:
+	var collection: Variant = body.get("settlements")
+	if not collection is Dictionary: return false
+	if collection.get("schema") != SCHEMA: return true
+	var entries: Variant = collection.get("entries", {})
+	if not entries is Dictionary: return false
+	for entry: Variant in entries.values():
+		if not entry is Dictionary: continue
+		if entry.get("schema") != SCHEMA: return true
+		var data: Variant = entry.get("village")
+		if data is Dictionary and (data.get("schema") != Tribe.SCHEMA or Economy.has_unsupported_contract(data.get("economy")) or Tribe.Husbandry.has_unsupported_contract(data.get("husbandry"))): return true
+		var simulation: Variant = entry.get("simulation")
+		if simulation is Dictionary and not simulation.is_empty() and simulation.get("schema") != 1: return true
+	return false
+
+## The founder must already have walked here. No resident duplication, movement,
+## free stock, tool, completed building, or inter-site freight is synthesized.
+static func found(body: Dictionary, campaign: Dictionary, member_id: String, anchor: Dictionary, sites: Dictionary) -> Dictionary:
+	var prepared: Dictionary = prepare_legacy(body, campaign)
+	if not prepared.ok: return prepared
+	var result: Dictionary = prepared.body
+	if result.settlements.entries.size() >= MAX_SETTLEMENTS: return _failure("settlements.limit")
+	var source: Dictionary = village(result)
+	if source.id != origin_id(result) or member_id == campaign.player_object_id: return _failure("settlements.founder")
+	var founder: Dictionary = {}
+	for member: Dictionary in source.members:
+		if member.id == member_id: founder = member
+	if founder.is_empty() or founder.cargo != "" or founder.construction_id != "" or founder.care_pen_id != "" or founder.order != "wait" or founder.paused_order != "": return _failure("settlements.founder_busy")
+	for animal: Dictionary in result.get("domesticated_animals", {}).get("registry", {}).get("animals", {}).values():
+		if animal.handler_id == member_id or animal.get("pending", {}).get("actor_id") == member_id: return _failure("settlements.founder_busy")
+	if member_id in result.get("tribal_neighbor", {}).get("aid", {}).get("carriers", []): return _failure("settlements.founder_busy")
+	if not Home.place_valid(anchor, Home.Cube.MODE, str(body.id)) or anchor.get("radius") != body.surface_context.radius: return _failure("settlements.site")
+	var distance: float = Home.distance(anchor, source.anchor)
+	if distance < 14.0 or distance > 20.0 or Home.distance(founder.position, anchor) > 0.6: return _failure("settlements.site")
+	var id: String = Ids.scoped("settlement", body.id, "outpost:1")
+	var home: Dictionary = result.home_group.duplicate(true)
+	home.anchor = anchor.duplicate(true)
+	var data: Dictionary = Tribe.create(home, campaign, {"surface_address": anchor}, sites)
+	data.id = id
+	for kind: String in data.deposits: data.deposits[kind].id = Ids.scoped("resource", id, kind)
+	source.members.erase(founder)
+	data.members = [founder]
+	# Destination becomes a waiting location; physical position is unchanged.
+	founder.destination = founder.position.duplicate(true)
+	founder.stage = "outbound"
+	founder.work = 0.0
+	founder.task = ""
+	founder.blocked = false
+	var old_simulation: Dictionary = view(result).get("village_simulation", {})
+	old_simulation.get("legs", {}).erase(member_id)
+	result.settlements.entries[id] = {"schema": SCHEMA, "settlement_id": id, "village": data,
+		"simulation": Simulation.create(body.id, float(campaign.elapsed_seconds), {}, [], campaign.player_object_id)}
+	var problem: String = validate(result, campaign)
+	if not problem.is_empty(): return _failure(problem)
+	return {"ok": true, "code": "", "body": result, "settlement_id": id}

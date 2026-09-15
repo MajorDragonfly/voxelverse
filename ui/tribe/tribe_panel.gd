@@ -504,3 +504,8 @@ func _refresh_husbandry(data: Dictionary) -> void:
 	_bind_animal.disabled = get_tree().paused or _pens.selected < 0 or _animals.selected < 0
 	_release_animal.disabled = get_tree().paused or _pens.selected < 0 or pens[_pens.selected]["animal_id"] == ""
 	_care_status.text = "Baue einen Milchtierplatz oder eine Legestelle auf trockenem, frei erreichbarem Boden." if pens.is_empty() else controller.husbandry.description(pens[_pens.selected])
+
+func add_settlements(runtime: Node) -> void:
+	var page := preload("res://ui/tribe/settlement_panel.gd").new()
+	page.runtime = runtime
+	_tabs.add_child(page)

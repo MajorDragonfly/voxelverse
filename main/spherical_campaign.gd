@@ -117,8 +117,11 @@ func map_snapshot() -> Dictionary:
 	var explorers: Array[Dictionary] = []
 	var home: Dictionary = body.get("home_group", {})
 	if not home.is_empty(): markers.append({"kind": "home", "address": home.anchor, "name": "Heimat"})
+	var Settlements = preload("res://world/tribe/settlement_collection.gd")
+	for id: String in Settlements.ids(body):
+		if id != Settlements.origin_id(body): markers.append({"kind": "home", "address": Settlements.village(body, id).anchor, "name": "Außenlager"})
 	var owner: Node = tribe if in_tribe else get_node("Nest/HomeGroup")
-	var group: Dictionary = body.get("tribe", {}) if in_tribe else home
+	var group: Dictionary = tribe.village() if in_tribe else home
 	for member: Dictionary in group.get("members", []):
 		var place: Dictionary = member.position
 		var actor: Node3D = owner.actors.get(member.id)
@@ -141,6 +144,9 @@ func known_map_places() -> Array[Dictionary]:
 	var home: Dictionary = body.get("home_group", {})
 	places.append(Source._place(str(body.id) + ":nest", "Eigenes Nest", "nest", state.campaign.data.player_species_id, "", true, Space.encode(self, get_node("Nest").global_position)))
 	if not home.is_empty(): places.append(Source._place(home.id, "Heimat deiner Spezies", "home", home.species_id, "", true, home.anchor))
+	var Settlements = preload("res://world/tribe/settlement_collection.gd")
+	for id: String in Settlements.ids(body):
+		if id != Settlements.origin_id(body): places.append(Source._place(id, TranslationServer.translate("SETTLEMENT_OUTPOST"), "home", state.campaign.data.player_species_id, "", true, Settlements.village(body, id).anchor))
 	if population != null:
 		for record: Dictionary in population.records.values():
 			var encounter: Dictionary = get_node("/root/ProgressionService").get_saved_creature_encounter(record.id)

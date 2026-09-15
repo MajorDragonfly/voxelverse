@@ -1706,3 +1706,93 @@ msgstr "Defeat threats across universes with a defined objective."
 
 msgid "SKILLS_PHASE_5_NEXT"
 msgstr "Long-term concept; concrete gameplay rules will be defined after the space phase."
+
+msgid "SETTLEMENT_NOT_READY"
+msgstr "This site is not ready yet."
+
+msgid "SETTLEMENT_SPHERE_REQUIRED"
+msgstr "An outpost requires a spherical world."
+
+msgid "SETTLEMENT_LIMIT"
+msgstr "Both settlement sites have been founded."
+
+msgid "SETTLEMENT_SELECT_FOUNDER"
+msgstr "Select one companion to found the outpost."
+
+msgid "SETTLEMENT_KEEP_PLAYER"
+msgstr "Your creature stays in the home village; choose a companion."
+
+msgid "SETTLEMENT_FOUNDER_BUSY"
+msgstr "The founder must finish their job and wait without cargo."
+
+msgid "SETTLEMENT_WALK_FIRST"
+msgstr "Right-click to send the founder 14–18 m from the village center. Found the outpost here after they arrive."
+
+msgid "SETTLEMENT_ROUTE_MISSING"
+msgstr "There is no safe route to the new site."
+
+msgid "SETTLEMENT_GROUND_MISSING"
+msgstr "The new site lacks loaded ground and safe routes."
+
+msgid "SETTLEMENT_OVERLAP"
+msgstr "This site overlaps existing workplaces or has too little free space."
+
+msgid "SETTLEMENT_ROUTES_BUSY"
+msgstr "The current village routes are not ready yet."
+
+msgid "SETTLEMENT_CERTIFY_FAILED"
+msgstr "The existing work routes could not be secured."
+
+msgid "SETTLEMENT_FOUND_FAILED"
+msgstr "The founder is still assigned elsewhere or the site is no longer valid."
+
+msgid "SETTLEMENT_FOUND_SAVE_FAILED"
+msgstr "Saving failed. The resident and the existing site are preserved."
+
+msgid "SETTLEMENT_FOUNDED"
+msgstr "Outpost founded. Choose it in Settlements to assign jobs there."
+
+msgid "SETTLEMENT_ROUTES_PENDING"
+msgstr "The village routes are not ready yet."
+
+msgid "SETTLEMENT_WORK_CHECKPOINT"
+msgstr "The current jobs could not be secured for the site switch."
+
+msgid "SETTLEMENT_TARGET_ROUTES"
+msgstr "The destination does not yet have safe loaded routes."
+
+msgid "SETTLEMENT_SWITCH_FAILED"
+msgstr "Saving failed. The view, stock and jobs remain at the current site."
+
+msgid "SETTLEMENT_SWITCHED"
+msgstr "Site switched. Each site keeps its own residents, stock and jobs."
+
+msgid "SETTLEMENT_TAB"
+msgstr "Settlements"
+
+msgid "SETTLEMENT_HELP"
+msgstr "Each site has its own residents, stock and jobs. The other site keeps working through simplified simulation while you play. Pausing or closing the game produces nothing."
+
+msgid "SETTLEMENT_MANAGE"
+msgstr "Manage this site"
+
+msgid "SETTLEMENT_FOUND"
+msgstr "Found an outpost at the founder’s location"
+
+msgid "SETTLEMENT_HOME"
+msgstr "Home village"
+
+msgid "SETTLEMENT_OUTPOST"
+msgstr "Outpost"
+
+msgid "SETTLEMENT_NEAR"
+msgstr "In view"
+
+msgid "SETTLEMENT_FAR"
+msgstr "Working in the background"
+
+msgid "SETTLEMENT_ARRIVED"
+msgstr "Founder arrived. The new site starts with its own empty store."
+
+msgid "SETTLEMENT_DETAIL"
+msgstr "%s · %d residents\nWood %d · Stone %d · Food %d · Water %d\n\n%s"

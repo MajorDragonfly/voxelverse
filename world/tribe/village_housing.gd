@@ -85,11 +85,11 @@ static func tick(data: Dictionary, delta: float) -> bool:
 	data["housing"]["clock"] = minf(GROW_SECONDS, float(data["housing"]["clock"]) + delta)
 	return float(data["housing"]["clock"]) >= GROW_SECONDS
 
-static func add_resident(data: Dictionary, position: Variant) -> Dictionary:
+static func add_resident(data: Dictionary, position: Variant, identity: String = "") -> Dictionary:
 	if not growth_blocker(data).is_empty() or float(data["housing"]["clock"]) < GROW_SECONDS or not Economy.local_point(Home.place(position), data["anchor"]):
 		return {}
 	var index: int = data["members"].size()
-	var member: Dictionary = {"id": resident_id(data, index), "name": "Dorfbewohner %d" % (index + 1),
+	var member: Dictionary = {"id": resident_id(data, index) if identity.is_empty() else identity, "name": "Dorfbewohner %d" % (index + 1),
 		"species_id": data["species_id"], "faction_id": data["faction_id"], "position": Home.place(position),
 		"destination": Home.place(position), "order": "wait", "stage": "outbound", "work": 0.0,
 		"cargo": "", "hunger": 75.0, "hydration": 100.0, "profession": "none", "paused_order": "", "task": "", "blocked": false, "construction_id": ""}

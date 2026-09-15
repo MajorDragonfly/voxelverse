@@ -58,6 +58,7 @@ func _process(delta: float) -> void:
 	if not _ready_runtime and tribe.is_active(): _activate()
 	if not is_active(): return
 	for id: String in controller.registry.get("animals", {}):
+		if not animal_is_near(id): continue
 		var a: Dictionary = controller.record(id)
 		if not a["pending"].is_empty():
 			var handler_id: String = a["pending"]["actor_id"]
@@ -356,3 +357,15 @@ func surface_origin_shifted(shift: Vector3) -> void:
 		var route: PackedVector3Array = _routes[id]
 		for i in range(route.size()): route[i] += shift
 		_routes[id] = route
+
+func animal_is_near(id: String) -> bool:
+	if not tribe.body().has("settlements"): return true
+	for site_id: String in tribe.Settlements.ids(tribe.body()):
+		if site_id == tribe.village().get("id"): continue
+		var data: Dictionary = tribe.Settlements.village(tribe.body(), site_id)
+		for pen: Dictionary in data.husbandry.pens:
+			if pen.animal_id == id: return false
+		var animal: Dictionary = controller.record(id)
+		for member: Dictionary in data.members:
+			if animal.get("handler_id") == member.id: return false
+	return true

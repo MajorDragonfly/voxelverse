@@ -18,6 +18,7 @@ const Ecology = preload("res://world/surface/campaign_ecology_state.gd")
 const LegacyPopulation = preload("res://world/fauna/legacy_population_state.gd")
 const Foraging = preload("res://world/resources/plants/foraging_state.gd")
 const Drinking = preload("res://creatures/ai/drinking_state.gd")
+const Settlements = preload("res://world/tribe/settlement_collection.gd")
 const Onboarding = preload("res://core/onboarding_progress.gd")
 
 # Order also defines import order: designs, then GameState, then progression,
@@ -32,6 +33,7 @@ const SECTIONS: Array = [
 	{"id": "player", "fields": ["player"], "schema": 0},
 ]
 const BODY_SECTIONS: Array = [
+	{"id": "settlements", "schema": Settlements.SCHEMA},
 	{"id": "village_simulation", "schema": 1},
 	{"id": "visit", "schema": 1},
 	{"id": "home_group", "schema": Home.SCHEMA},
@@ -142,6 +144,7 @@ static func unsupported_sections(data: Dictionary) -> bool:
 	return false
 
 static func validate_body(body: Dictionary, campaign: Dictionary, tribal: Dictionary) -> String:
+	if body.has("_settlement_id"): return "A settlement work view cannot be saved as a body."
 	var unknown: String = unknown_body_section(body)
 	if not unknown.is_empty(): return "Unregistered body save section: " + unknown
 	for section: Dictionary in BODY_SECTIONS:
@@ -165,6 +168,7 @@ static func unknown_body_section(body: Dictionary) -> String:
 
 static func _validate_body_section(id: String, body: Dictionary, campaign: Dictionary, tribal: Dictionary) -> String:
 	match id:
+		"settlements": return Settlements.validate(body, campaign)
 		"village_simulation": return VillageSimulation.validate(body[id], body, float(campaign.get("elapsed_seconds", 0)))
 		"visit":
 			var visit: Variant = body[id]
@@ -196,7 +200,7 @@ static func _validate_body_section(id: String, body: Dictionary, campaign: Dicti
 		"tribe": return Tribe.validate(body[id], body, campaign)
 		"tribal_neighbor":
 			if int(tribal.get("schema", 0)) < 3: return "Nachbarlager benötigt Stammesfortschrittformat 3."
-			return Neighbor.validate(body[id], body.get("tribe", {}), campaign)
+			return Neighbor.validate(body[id], Settlements.village(body, Settlements.origin_id(body)), campaign)
 		_: return "Missing body participant validator: " + id
 	return ""
 
@@ -209,6 +213,7 @@ static func unsupported_body(body: Dictionary) -> bool:
 static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 	var value: Variant = body.get(id)
 	match id:
+		"settlements": return Settlements.unsupported(body)
 		"village_simulation", "visit", "legacy_population", "wildlife_foraging", "wildlife_drinking", "surface_ecology":
 			return value is Dictionary and value.get("schema") != 1
 		"home_group":
