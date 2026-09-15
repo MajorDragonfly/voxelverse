@@ -23,6 +23,8 @@ ARCH-15 wurde in PR #68 und #73 doppelt bearbeitet. Die gemeinsame Laufzeit verw
 
 ## Nächste begrenzte Arbeitspakete
 
+**ARCH-14-Fachlieferung vom 15. September:** [Große Sammlungen im Entdeckungsbuch](WORK_ARCH14_JOURNAL_PAGING.md) verwenden begrenzte Arten-/Regionsseiten und gezielte Körperansichten. Branch `agent/arch14-journal-paging-2026-09-15` zur Integration vorbereitet; diese Buchoptimierung nicht nochmals beginnen. Persistente Entdeckungs-/Begegnungsarchive und weitere Langzeitregister bleiben offen.
+
 Vor Beginn den aktuellen Branch-/PR-Stand prüfen und genau einen Teilauftrag reservieren. Die Tabelle ist eine Arbeitsreihenfolge, keine neue Reservierung.
 
 | Paket | Konkreter nächster Umfang | Abhängigkeit / Grenze |
