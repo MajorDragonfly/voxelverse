@@ -2,10 +2,11 @@ name: Godot validation
 
 on:
   push:
-    branches: [main, "agent/**"]
+    branches: [main]
   pull_request:
+  workflow_dispatch:
 
-# Keep branch checks and PR merge checks independent; replace only older runs.
+# Validate PR merge trees once; keep main and manual checks independently cancellable.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
@@ -21,6 +22,8 @@ jobs:
           python-version: "3.12"
       - name: Check contract registration and generated translations
         run: python3 tools/check_validation_contracts.py --output /tmp/validation-contracts/contracts.json
+      - name: Check bounded work briefs
+        run: python3 tools/work_packet.py check
       - name: Check validation failure paths
         run: python3 -m unittest discover -s tests/tooling -p '*_test.py'
       - name: Upload source contract report

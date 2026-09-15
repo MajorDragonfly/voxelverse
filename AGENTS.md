@@ -1,0 +1,69 @@
+# Voxelverse: effizient zusammenarbeiten
+
+## Einstieg und Fortsetzung
+
+1. Lies `docs/PROJECT_STATUS.md` und den konkreten Auftrag. Bei einer Fortsetzung
+   im selben Chat nutze den vorhandenen Kontext; wiederhole den Einstieg nur bei
+   einer neuen Basis, einem Konflikt oder einer geänderten Anforderung.
+2. `python3 tools/work_packet.py list` zeigt vorbereitete Teilaufträge.
+   `python3 tools/work_packet.py show ARCH-17-PUBLISH` gibt einen kleinen Kontext
+   mit Dateien, Schreibbereichen und relevanten Prüfverträgen aus.
+3. Lies danach nur die betroffenen Implementierungen und die passenden Abschnitte
+   in `docs/MODULE_CONTRACTS.md`. ROADMAP, alte Audits, alle PRs, alle Branches und
+   fremde Checkouts gehören nicht zum Pflichtprogramm jedes Fachchats.
+4. Hole die vereinbarte Basis einmal zum Paketstart; arbeite auf einem eigenen
+   Branch/Checkout. Notiere Basis-SHA und Teilauftrags-ID. Nicht auf `main` arbeiten.
+   Fremde unfertige Dateien bleiben beim Besitzer. Nutzeraufträge haben Vorrang.
+
+## Eine Zuständigkeit pro Teilauftrag
+
+- Eine Runde hat einen Integrationschat. Er ordnet Teilauftrags-ID, Besitzer,
+  Branch, Basis-SHA und gemeinsame Schreibbereiche zu und hält die Belegung
+  zentral in **einer** Rundenliste im Integrationschat oder einem bestehenden Ticket.
+- Eine ARCH-Nummer allein ist keine Reservierung: ARCH-14 enthält mehrere
+  unterschiedliche Lieferungen. Nutze eindeutige IDs wie `ARCH-14-ENCOUNTERS`.
+- Der Paketkatalog ist ein Planungsvorschlag, keine Live-Sperre. Weder ein lokaler
+  Eintrag noch ein neuer Branch reserviert Arbeit in anderen Chats. Eine unklare
+  Doppelbelegung einmal mit der zentralen Zuordnung klären, nicht alle Historien lesen.
+- Vor mehreren Zuweisungen: `python3 tools/work_packet.py conflicts ID ID ...`.
+  Das prüft deklarierte gemeinsame Schreibbereiche, nicht sämtliche Codeabhängigkeiten.
+- Gemeinsame Schreibbereiche werden nacheinander bearbeitet oder ausdrücklich
+  einem Integrationsbesitzer zugeteilt. Den nötigen Anschluss im Auftrag mitführen.
+  Unerwartete Änderungen daran sind ein Anlass zur Abstimmung, kein Nebenprojekt.
+- Fachchats schreiben ihre kurze Übergabe im PR. Der Integrationschat aktualisiert
+  PROJECT_STATUS, NEXT_PARALLEL_WORK und zentrale Backlog-Häkchen einmal je Runde.
+  Historische Messberichte bleiben Nachweise ihres jeweiligen Stands.
+
+## Einmal gezielt prüfen
+
+- Verwende `tools/validation/contracts.json` als einzige Testzuordnung. Neue
+  Godot-Tests genau einmal dort registrieren. `--contracts` wählt vorhandene Tests,
+  zum Beispiel `python3 tools/validate_godot.py --contracts creature_body --skip-main`.
+- Ein Fachchat prüft den geänderten Ablauf und betroffene direkte Verbraucher.
+  Umfang nach tatsächlichem Risiko wählen; `--skip-main` eignet sich nur für ein
+  abgegrenztes Paket. Save-/ID-/Körper-/Lebenszyklusänderungen brauchen ihre echten
+  Fehler- und Neustartfälle. Isolierte Nutzerdaten des vorhandenen Runners nutzen.
+- Import nicht unnötig wiederholen. `--skip-import` nur, wenn derselbe lokale
+  Ressourcenstand bereits erfolgreich importiert wurde. CI behält seinen Import.
+- Volle Suite, gemeinsame Produktions-/Reisekette und native Exporte gehören zur
+  Integration. Einen bereits laufenden identischen CI-Job nicht lokal duplizieren,
+  außer zur Diagnose eines konkreten Fehlers. Kein Testfehler wird wegdefiniert.
+- Nachweis mit Quellcommit/Tree, sauberem Arbeitsstand, Engine, Befehl, Umgebung,
+  Ergebnis und Log-/CI-Verweis übergeben. Gleicher Tree, gleicher Befehl und gleiche
+  Umgebung erlauben Wiederverwendung; geänderter Merge-Tree braucht neue Prüfung.
+  Bei schmutzigem Arbeitsstand zusätzlich die tatsächlich geprüften Änderungen
+  identifizieren. Teilnachweise sind keine Gesamt-, Export- oder FPS-Freigabe.
+- Bei unverändertem geprüften Stand stoppen. Keine wiederholten Vollabgleiche,
+  umfangreichen Erfolgsausgaben oder neuen Tests für reine Textkorrekturen.
+
+## Feste Produktgrundlage
+
+Godot 4.6.3; Singleplayer; Kugelkampagne als einziger regulärer Spielweg;
+stabile IDs und ein gemeinsamer SaveService; lokale Koordinaten und begrenzte
+Nah-/Fernsimulation. Pause/geschlossenes Spiel produziert nichts. Nur die eigene
+Spezies entwickelt Zivilisation, Epochenwechsel braucht Bestätigung. Gebäudeeditor
+erst Mittelalter. Keine allgemeine Terrainzerstörung; kurze Orbitübergänge sind
+erlaubt. Bestehende Nutzerdaten und Zukunftsversionsschutz erhalten.
+
+Details nur bei Bedarf: `docs/PARALLEL_WORKFLOW.md`,
+`docs/GODOT_TECHNICAL_DIRECTION.md`, `docs/ARCHITECTURE_BACKLOG.md`.

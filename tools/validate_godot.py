@@ -24,16 +24,47 @@ LONG_TESTS = {"body_travel_test", "spherical_gameplay_test", "tribal_age_husband
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
 
+def select_contract_tests(project, names):
+    """Use the existing ownership registry; reject typos instead of running nothing."""
+    data, _ = read_contracts(project)
+    contracts = {item["id"]: item["tests"] for item in data["contracts"]}
+    unknown = sorted(set(names) - contracts.keys())
+    if unknown:
+        raise ValueError("Unknown contracts: " + ", ".join(unknown))
+    if not names:
+        raise ValueError("Select at least one contract")
+    return sorted({test for name in names for test in contracts[name]})
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", default=os.environ.get("GODOT", "godot"))
     parser.add_argument("--project", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, help="Log directory; omitted creates a unique temporary directory")
-    parser.add_argument("--tests", nargs="*", help="Test basenames; omit to discover all tests")
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--tests", nargs="*", help="Test basenames; omit to discover all tests")
+    selection.add_argument("--contracts", nargs="+", help="Contract IDs from tools/validation/contracts.json")
+    parser.add_argument("--list-tests", action="store_true", help="Print selection without starting Godot; not test evidence")
     parser.add_argument("--skip-import", action="store_true")
     parser.add_argument("--skip-main", action="store_true")
     args = parser.parse_args()
     args.project = args.project.expanduser().resolve()
+    if args.contracts is not None or args.list_tests:
+        try:
+            if args.contracts is not None:
+                args.tests = select_contract_tests(args.project, args.contracts)
+            else:
+                _, owners = read_contracts(args.project)
+                selected = args.tests if args.tests is not None else sorted(owners)
+                unknown = sorted(set(selected) - owners.keys())
+                if unknown:
+                    raise ValueError("Unknown tests: " + ", ".join(unknown))
+                args.tests = list(dict.fromkeys(selected))
+        except (OSError, ValueError) as error:
+            parser.error(str(error))
+    if args.list_tests:
+        print("\n".join(args.tests))
+        return 0
     args.output = (args.output.expanduser().resolve() if args.output is not None
                    else Path(tempfile.mkdtemp(prefix="voxelverse-validation-")))
     print(f"Validation output: {args.output}", flush=True)

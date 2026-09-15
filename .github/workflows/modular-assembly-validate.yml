@@ -2,10 +2,11 @@ name: Modular assembly validation
 
 on:
   push:
-    branches: [main, "agent/**"]
+    branches: [main]
   pull_request:
+  workflow_dispatch:
 
-# Keep branch checks and PR merge checks independent; replace only older runs.
+# Validate PR merge trees once; keep main and manual checks independently cancellable.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true

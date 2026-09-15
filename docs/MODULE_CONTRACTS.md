@@ -1,5 +1,7 @@
 # Datenbesitzer und Modulanschlüsse – ARCH-01
 
+Einstieg für Fachchats: nur den betroffenen Besitzer/Vertrag lesen. Aktuelle Basis und Lieferstände stehen in [PROJECT_STATUS](PROJECT_STATUS.md); dieser Katalog ist ein Nachschlagewerk.
+
 Stand: 10. September 2026. Basisinventar auf `ea900f2e09946660694a9e59399b4680a5655a85`, mit den zusammengeführten ARCH-Verträgen aktualisiert. [Integration, Quellen und Nachweise](INTEGRATION_2026-09-10.md). Historische Fachberichte behalten ihre damaligen Versionsangaben; die folgende Übersicht beschreibt diesen gemeinsamen Stand.
 
 Die Angaben lösen für den aktuellen Anschluss die historischen Besitzer-/Versionsangaben in [CAMPAIGN_CONTRACTS.md](CAMPAIGN_CONTRACTS.md) ab. Fachdetails und ältere Nachweise bleiben in den verlinkten Verträgen erhalten. Status und Prüfumfang: [WORK_ARCH01_MODULE_CONTRACTS.md](WORK_ARCH01_MODULE_CONTRACTS.md).

@@ -1,14 +1,12 @@
-> **Aktueller Integrationsbranch, 11. September 2026:** PR #78–#83 sind auf `agent/integration-sphere-acceptance-2026-09-11` zusammengeführt, noch nicht als gemeinsame Laufzeit-/Ziel-PC-Abnahme freigegeben. ARCH-06-Präzision, ARCH-07-Save-Teilnehmer, ARCH-14-Zustandsschutz, ARCH-22-Eierkette, ARCH-24-Mundmodelle und ARCH-25-Fähigkeiten DE/EN nicht doppelt beginnen. Maßgeblich sind `docs/INTEGRATION_2026-09-11.md` und die exakten Quellcommits. Ältere „nächste Aufgabe“-Zeilen unten sind für diese sechs Lieferungen historisch. Nächster Vorrang: gemeinsame Kugel-/Vegetations-/Rückreiseprüfung, dann verbleibende ARCH-13/14/17/19-Aufträge.
-
-## Gemeinsamer Spieltest vom 15. September 2026
-
-Alle veröffentlichten Lieferungen #78–89 sind im Branch `agent/playtest-integration-2026-09-15` vereinigt: präzises Speichern, Speicherteilnehmer, Eierkette, Tierzustandsschutz, Mundmodelle, Fähigkeiten DE/EN, Terrain-Vorausschau, Journal-Seiten, vollständige Sicherungen und vorbereitende Siedlungs-/Transportmodelle. [Integrationsbericht](docs/INTEGRATION_2026-09-15.md), [exakte Quellen](docs/integration-sources-2026-09-15.json) und [Windows-Spieltest](docs/WINDOWS_TEST_2026-09-15.md) führen die aktuelle Prüfung. Die älteren Lieferstatusangaben darunter sind historisch; die aktuellen Folgeaufträge stehen in [NEXT_PARALLEL_WORK](docs/NEXT_PARALLEL_WORK.md).
-
 # Voxelverse – gemeinsame Entwicklungsroadmap
 
-Stand: 10. September 2026 · Gemeinsamer Integrationsstand aus 28 Übergaben. Maßgeblich sind [Integrationsbericht und Veröffentlichungsstatus](docs/INTEGRATION_2026-09-10.md), [exakte Quellen](docs/integration-sources-2026-09-10.json) und [nächste Arbeiten](docs/NEXT_PARALLEL_WORK.md). Frühere Berichte und Quellenlisten bleiben historische Nachweise ihrer jeweiligen Stände; ein technischer Teilabschluss ist keine fertige spätere Spielphase.
+Aktueller Lieferstand und feste Basis: [PROJECT_STATUS](docs/PROJECT_STATUS.md).
+Die Lieferungen #78–89 sind über PR #90 in `main` enthalten. Für Fachchats gilt
+[AGENTS.md](AGENTS.md); die Roadmap wird nach Bedarf abschnittsweise gelesen.
+Der Integrationschat aktualisiert gemeinsame Lieferstände einmal je Runde.
+Historische Berichte belegen ihren damaligen Commit, keine heutige Abnahme.
 
-## Neue gemeinsame Lieferungen vom 10. September
+## Lieferhistorie: 10. September
 
 Bauplan-/Originalschutz, lokale Kreaturenvorlagen mit Startauswahl, gemeinsame Ressourcenproduktion, optimierte Dorfarbeit, erhaltene Tierhaltung und Milchfracht bei Planetenreisen sind zusammengeführt. Kartenkacheln und bekannte Orte werden dauerhaft mit begrenztem Cache gespeichert und vollständig archiviert. Die vierte Nutztierspezies besitzt Eier-Eignung; die eigentliche Eierproduktionskette folgt in ARCH-22.
 
@@ -16,11 +14,11 @@ Katzenpfoten, Bärentatzen, Pferdehufe und Krebsscheren ergänzen den gemeinsame
 
 Die abgeschlossenen Teilpakete nicht erneut beginnen. Die [aktuelle Arbeitsverteilung](docs/NEXT_PARALLEL_WORK.md) ersetzt die historischen direkten ARCH-01/03-Aufträge.
 
-## Laufende Kugelintegration
+## Gemeinsame Kugelkampagne
 
 Der gemeinsame Anschluss von Kreaturenphase, Heimat, Stamm, D1/D2/D3, entwickeltem Kopierumzug und regionalem Population-Speicher ist umgesetzt. Die Skalierungsrunde ergänzt Körper-ID-Migration, gemeinsame Nah-/Fernarbeit, portionierte Navigation und gesicherte A–B–A-Reisen; auch das fertig übergebene Animationspaket wird am gemeinsamen Stand geprüft. [WORK_SPHERICAL_GAMEPLAY.md](docs/WORK_SPHERICAL_GAMEPLAY.md) und [WORK_CAMPAIGN_SCALING.md](docs/WORK_CAMPAIGN_SCALING.md) ergänzen die untenstehenden bisherigen Meilensteinstände mit den aktuellen Nachweisen. **Entscheidung von Lars am 10. September: Die Kugelwelt ist ab sofort der einzige reguläre Spielweg, unabhängig von der noch offenen Abnahme.** Flachwelt-Neustart und spielbare Rückwege entfallen; Altstände werden als erhaltene Quellen über die geprüfte Kopiermigration fortgesetzt. Segmentierte globale Speicherung, lange Reisen auf Zielhardware und die vollständige M1i-Abnahme bleiben offen. Details: [Kugelwelt als fester Spielweg](docs/WORK_SPHERE_ONLY_ENTRY.md).
 
-**ARCH-20 – Ressourcenproduktion (Fachbranch, 10. September):** Die bestehende Milchproduktion nutzt einen gemeinsamen Ressourcenbatch mit versioniertem Rezept-/Ressourcenbezug. Alte Milchbelege, Bruchteile und laufende Fracht bleiben erhalten. Vertrag und Prüfnachweise: [WORK_RESOURCE_PRODUCTION.md](docs/WORK_RESOURCE_PRODUCTION.md). Eier folgen separat in ARCH-21/22; Integration in `main` über den Fach-PR.
+**ARCH-20 – Ressourcenproduktion (integriert):** Milch und die inzwischen integrierte Eierkette verwenden gemeinsame Ressourcenbatches mit versioniertem Rezept-/Ressourcenbezug. Alte Milchbelege, Bruchteile und laufende Fracht bleiben erhalten. Vertrag und Prüfnachweise: [WORK_RESOURCE_PRODUCTION.md](docs/WORK_RESOURCE_PRODUCTION.md).
 
 ## Architekturprüfung und nächste verbindliche Arbeitsschritte
 
@@ -46,7 +44,7 @@ Singleplayer, die bisherige Geländeoberfläche ohne allgemeines Graben und die 
 
 **Planungsergänzungen vom 9. September 2026:** Eier liefernde Nutztiere, der erweiterte Körperteil-Baukasten, die Weltraumphase mit modularem Expeditionsschiff/Beibooten und eine gemeinsame Community-Designbibliothek sind aufgenommen. Konkrete To-dos und Abnahmen stehen im [Ideen- und Aufgabenbacklog](docs/FEATURE_BACKLOG.md), [Körperteilkatalog](docs/CREATURE_PARTS_CATALOG_PLAN.md), [Expeditionsplan](docs/SPACE_EXPEDITION_PLAN.md) und [Community-Designplan](docs/COMMUNITY_DESIGNS_PLAN.md). Die damaligen Ergänzungen waren geplant; der aktuelle Lieferstatus steht im Abschnitt oben und in den verlinkten Fachplänen.
 
-**ARCH-23 integriert:** Bauplanversionen und Originalschutz sind mit der lokalen Kreaturenbibliothek zusammengeführt. [Vertrag und Nachweise](docs/WORK_ARCH23_BLUEPRINTS.md). ARCH-20 liefert den gemeinsamen Ressourcen-/Milchanschluss; Eierproduktion folgt in ARCH-22.
+**ARCH-23 integriert:** Bauplanversionen und Originalschutz sind mit der lokalen Kreaturenbibliothek zusammengeführt. [Vertrag und Nachweise](docs/WORK_ARCH23_BLUEPRINTS.md). ARCH-20 liefert den gemeinsamen Ressourcen-/Milchanschluss; die Eierproduktion aus ARCH-22 ist über PR #90 ebenfalls enthalten.
 
 ## Verbindliches Zielbild
 
@@ -66,26 +64,16 @@ Singleplayer, die bisherige Geländeoberfläche ohne allgemeines Graben und die 
 
 ## Vorrang: vollständiger Umzug auf Kugelwelten
 
-Neue Weltentwicklung verwendet die vorhandene Cube-Sphere-Oberfläche, stabile Körper-/Objektadressen und begrenztes Streaming. Die Ebene bleibt ausschließlich kompatibler Kampagnenbetrieb bis zur geprüften Übergabe. **Die vollständige Kugelkampagne ist noch nicht umgesetzt.** Der gemeinsame Kugelstart, Save 8/Kampagne 2, radiale Spielerorte, gemeinsame Karten und eine geprüfte Kopiermigration für frühe Stände sind jetzt angebunden. Bestehende regionale Änderungen, Heimatgruppen, Pflichtartenkataloge und Siedlungen benötigen noch ihre Zieladapter und werden beim Umzug ausdrücklich gesperrt. Details: [M1e-Vertrag und Grenzen](docs/WORK_M1E_CAMPAIGN.md). Das Planetenlabor wird nicht durch Umbenennen oder einen Menüwechsel zur Kampagne. Der [Migrationsauftrag](docs/SPHERICAL_CAMPAIGN_MIGRATION.md) definiert Reihenfolge, Besitzer und Abschaltkriterien. Für sichtbare Elemente gilt die gemeinsame [Designvorgabe](docs/VOXELVERSE_DESIGN.md).
+Neue Weltentwicklung verwendet die vorhandene Cube-Sphere-Oberfläche, stabile Körper-/Objektadressen und begrenztes Streaming. Die Kugelkampagne ist der einzige reguläre Spielweg. Kreaturenphase, Heimat, Dorf, Pflichtarten, Zähmung, Milch/Eier, regionale Zustände und der geschützte Umzug unterstützter Altstände sind angebunden. Die alte Ebene bleibt ausschließlich historische Prüfszene und erhaltene Migrationsquelle. Die vollständige Langzeit-/Ziel-PC-Abnahme bleibt offen; das ist von bereits integriertem Spielcode zu unterscheiden. [Kugelstart und Altstände](docs/WORK_SPHERE_ONLY_ENTRY.md), [gemeinsame Skalierung](docs/WORK_CAMPAIGN_SCALING.md), [Designvorgabe](docs/VOXELVERSE_DESIGN.md).
 
 ## Gemeinsamer Ist-Stand
 
-Die folgenden Pakete sind im gemeinsamen Quellstand enthalten. „Enthalten“ ersetzt weder den gemeinsamen Prüfbericht noch Lars’ Spieltest.
+„Enthalten“ beschreibt integrierten Quellcode und ersetzt weder den gemeinsamen Prüfbericht noch Lars’ Spieltest.
 
-| Bereich | Zusammengeführt | Noch offen |
-|---|---|---|
-| Kugelwelt | M1d-Oberflächenadapter, Erdgröße, belebtes Gelände, radiale Flora-/Faunakollision, überarbeiteter Boden und Wasser, Wiederbesuch | Vollständige Kampagne, Dorf, lokale Flüsse/Seen und räumliches Audio auf Kugeln |
-| Arten | D1, D1.1 Körpernachweise/Habitaterholung, D1.2 Pflichtarten auf Kugeln; bestehende IDs erhalten | Größere Suchräume und populationsbasierte Fernsimulation; begrenzte Habitatsuche bleibt begrenzt |
-| Tierhaltung | D2 mit echten Betreuern und gemeinsamem Save; D3 Tierplätze/Pflege/Milchtransport; lesender D2→D3-Anschluss | Radiale Tierhaltung; Reiten/Pflügen D4; geplante Eierrolle/-produktion D1-EIER/D3-EIER |
-| Dorf | Erneuerbare Quellen/Wasser, Berufe, gespeicherte Aufträge, feste Hütten/Zelte und Wachstum bis sechs Bewohner | Kugelorte, regionale Navigation, weitere Siedlungen; Gebäudeeditor erst Mittelalter |
-| Fortschritt | Eigene Stammespunkte aus realen Arbeiten/Versorgung, eigene Nachbarfraktion mit Hilfstransport | Vollständige Folgeepochen bleiben gesperrt; kein Aufstieg fremder Tiere |
-| Kreaturen | B1 Anschlüsse, B2 Passprüfung/Korrekturen, B3 Sattelauflage/Reitermaße und Bewegungsnachweise | Echte Reitsteuerung, Lastsimulation, Ziel-PC-Abnahme; geplanter Körperteilkatalog M3-TEILE |
-| Oberfläche | Ein Buch mit D1-Eignung/D2-Tierregister, Körperteilvorschauen/Silhouetten, überarbeitete Skills/HUD, Gruppen-/Tierfeedback | Gemeinsame visuelle Ziel-PC-Abnahme; vollständige Übersetzung der Spielinhalte |
-| Karten | Phasenskalierte Minimap, große Karte mit dauerhafter Erkundung, eigene/befreundete bekannte Orte; gleiche Karten auch im belebten Kugelbereich | Produktionskampagne auf Kugeln, später Galaxiennavigation |
-| Sprache | Zentraler Dienst für Deutsch/Englisch, 221 Vorlagen, gespeicherte Menüauswahl | HUD/Buch/Dorf/Editor vollständig übersetzen; L1 ist keine Vollübersetzung |
-| Wartung/Audio | Entfernte unreferenzierte Prototypen, isolierte Prüfungen, Streamingdiagnose, frühe Audiofreigabe und reale Mixerfrist | Windows-Gesamtpaket, Ziel-PC-Framezeiten; keine FPS-Zusage |
-| Speicherung | Gemeinsames Save 8/Kampagne 2, körperfeste Kugelorte, atomare Kopie früher Stände mit Manifest und Quellarchiv; alte Verträge bleiben lesbar | Zielzuordnung und Übernahme besiedelter/veränderter Regionen, Gefährten, Pflichtarten und Wirtschaft |
-
+Der kompakte Ist-Stand wird nur in [PROJECT_STATUS.md](docs/PROJECT_STATUS.md)
+gepflegt. Dadurch stehen hier keine abweichenden Zahlen, erneut offenen
+Kugelanschlüsse oder alten Drei-Arten-/Sprachstände neben dem aktuellen Stand.
+Die nachfolgenden Meilensteine bewahren Zielumfang und detaillierte Geschichte.
 
 `Antike/Mittelalter` und `Neuzeit/Weltmacht` verwenden zunächst die bestehenden Phasen-IDs 2 und 3; gespeicherte Enum-Werte werden nicht umnummeriert. `MULTIVERSE` bleibt nur kompatibler Altwert, ohne spielbaren Kernumfang. Ein HUD-Phasentext ist keine Freigabe dieser Epochen.
 
@@ -95,7 +83,7 @@ Die folgenden Pakete sind im gemeinsamen Quellstand enthalten. „Enthalten“ e
 
 Universum → Galaxie → Sektor → System → Himmelskörper → Oberflächenregion → Objekt. IDs sind stabil und werden nicht aus der Reihenfolge von Listen abgeleitet. Die Cube-Sphere-Adresse mit kleinem lokalem Ursprung ist die Grundlage für große Kugeln. Höhe, Wasserspiegel, Biom, Bodennormale und Routen greifen auf dieselbe Oberflächenquelle zu.
 
-Die bisherige Kampagne bleibt `legacy_plane_v9`, bis ein eigener Migrations-/Neuweltablauf geprüft ist. Fauna, Häuser, Audio, Reiter und Pflüge dürfen beim Kugelausbau nicht dauerhaft Welt-Y als „oben“ voraussetzen. Ein begrenzter Weltadapter muss das gemeinsam lösen. Die gesamte alte Ebene lässt sich nicht verlustfrei auf einen endlichen Planeten übertragen; dafür wird kein stilles Versprechen gegeben.
+Der reguläre Spielweg ist `main/spherical_campaign.tscn`; `legacy_plane_v9` bleibt nur ein lesbares Altformat mit geschützter Kopiermigration. Fauna, Häuser, Audio, Reiter und Pflüge dürfen beim Kugelausbau nicht dauerhaft Welt-Y als „oben“ voraussetzen. Ein begrenzter Weltadapter muss das gemeinsam lösen. Die gesamte alte Ebene lässt sich nicht verlustfrei auf einen endlichen Planeten übertragen; dafür wird kein stilles Versprechen gegeben.
 
 Nahe Objekte verwenden Physik/Animation, entfernte Gruppen vereinfachte Zustände, entfernte Regionen Vorräte/Populationen. Es gibt genau einen zuständigen Simulationsbesitzer; sichtbare Jagd, Milch-/Eierproduktion oder Transport werden nicht noch einmal abstrakt abgerechnet. Die Zahl aktiver Objekte bleibt begrenzt. Kampagnenzeit zählt bei Pause und geschlossenem Spiel nicht weiter, sofern später keine ausdrückliche Offline-Regel beschlossen wird.
 

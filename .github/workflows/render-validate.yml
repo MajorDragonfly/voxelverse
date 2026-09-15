@@ -2,7 +2,7 @@ name: Environment render validation
 
 on:
   push:
-    branches: [main, "agent/**"]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
