@@ -27,7 +27,7 @@ func _run() -> void:
 		var stored: Dictionary = Save.read().data
 		_expect(not stored.is_empty() and stored.body_id == world.body_id, "Restart lost body")
 		_expect(_distance(stored.bodies[world.body_id].player.location, world.walker.location(), world) < 0.001, "Restart lost player location")
-		_expect(stored.bodies[world.body_id].fauna_archive == world.ecosystem.fauna.checkpoint(), "Restart changed individual anatomy or saved animal state")
+		_expect(JSON.stringify(stored.bodies[world.body_id].fauna_archive) == JSON.stringify(world.ecosystem.fauna.checkpoint()), "Restart changed individual anatomy or saved animal state")
 		# Load real runtime visuals in the fresh process, not just JSON records.
 		world.set_paused(false)
 		for frame in range(900):
@@ -157,7 +157,7 @@ func _run() -> void:
 	world.set_paused(true)
 	_expect(_distance(before.bodies[world.body_id].spawn, world.walker.location(), world) < 0.001, "Return-to-place failed")
 	for id in before_fauna:
-		_expect(world.ecosystem.fauna.get_state(id).get("design") == before_fauna[id].design, "Return regenerated an existing animal's body")
+		_expect(preload("res://tests/fixtures/domestic_native_comparison.gd").native_equal(world.ecosystem.fauna.get_state(id).get("design"), before_fauna[id].design), "Return regenerated an existing animal's body")
 	# Finish one reloaded individual and retain the native runtime anatomy for
 	# an independent binary comparison after JSON save and a new engine process.
 	world.set_paused(false)

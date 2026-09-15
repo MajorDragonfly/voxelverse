@@ -164,12 +164,17 @@ func _faults() -> void:
 	Atomic._write_text(path, contents)
 	_expect(world.load_lab(), "Cannot reload after restoring damaged fixture")
 	_quiet()
-	var blocker: String = "user://lab-fauna-blocker"
-	Atomic._write_text(blocker, "regular file blocks directory creation")
-	_expect(world.ecosystem.fauna.put_state(_id(HISTORY + 1), _state(HISTORY + 1)), "Cannot stage write failure")
-	world.ecosystem.fauna.store.directory = blocker + "/blobs"
+	var staged_id: String = _id(HISTORY + 1)
+	_expect(world.ecosystem.fauna.put_state(staged_id, _state(HISTORY + 1)), "Cannot stage write failure")
+	var pending: Dictionary = {"schema": 1, "key": staged_id, "value": world.ecosystem.fauna.store.cache[staged_id]}
+	var pending_hash: String = Atomic.stringify(pending, "").sha256_text()
+	var temporary: String = world.ecosystem.fauna.store._path(pending_hash) + "." + str(OS.get_process_id()) + ".tmp"
+	# A directory at the exact temporary file path causes a real FileAccess
+	# failure without the engine's unrelated mkdir diagnostic on stderr.
+	_expect(DirAccess.make_dir_recursive_absolute(temporary) == OK, "Cannot prepare blocked atomic temporary file")
 	_expect(not world.save_lab() and world.read_only, "Blob write failure reported save success")
 	_expect(FileAccess.get_file_as_bytes(PATH) == original and FileAccess.get_file_as_bytes(PATH + ".bak") == backup, "Failed checkpoint replaced primary or backup")
+	DirAccess.remove_absolute(temporary)
 	# Well-hashed future payloads and malformed state must also fail closed.
 	for kind: String in ["missing", "future", "invalid", "empty"]:
 		var probe := Archive.new()
