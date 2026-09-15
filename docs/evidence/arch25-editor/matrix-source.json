@@ -1,0 +1,21 @@
+{
+  "commit": "71db7458a53fe8b611b46f05d785f3487e39fed6",
+  "tree": "cb2fb3ef02a4c6e35c5d4e13d8c4e87e40da8763",
+  "clean": true,
+  "files": {
+    "creatures/editor/creature_editor_attachment_studio.gd": "c86fd2577da74f5f194b1e0bb6de946134067c08922fb33e2bc782de79385a50",
+    "creatures/editor/creature_editor_joint_studio.gd": "363b7dbb117d61a1f61e7805c025872f180739b56c1d6976b34cef8ebfd4357f",
+    "creatures/editor/creature_editor_runtime.gd": "ec853a5b35e263a684e758ce7e0a4afae1e831465ee5527e62ee4ff3fbab34d7",
+    "creatures/editor/creature_editor_seat_studio.gd": "7fec0c0baf667f23efb1b026259738ad063055d125400e4f0f0fbd425bfec6a2",
+    "creatures/editor/creature_editor_studio.gd": "fb867a3c97a9fc4ccf95160c269412bb97ae605ef820bc12c35eb782e47001fd",
+    "creatures/editor/creature_editor_text.gd": "9cf3c62fb177779f79d69478abc8af85a8a3eb6505b0e45d42dd49304c358bf0",
+    "creatures/editor/creature_part_card.gd": "5648d86555b3382800b9a6c920867caa0d530ab3d816f50aa8778aa3d8ea4639",
+    "docs/WORK_ARCH25_EDITOR.md": "4592237a583d0259f4e859720263ba3c2c09ea55855dfaf875e147f7ac9068ad",
+    "localization/catalog.json": "d32d33216377c8ce9f6ead43fce56854d540ccb06d152c59fb51d52e6cac575e",
+    "localization/de.po": "fb0a39d222b782236c50844c866175b61adf8fb60743f58066bd00e7276bb5e2",
+    "localization/en.po": "1cc6635f07d3693042c4a5f2ddcc8b03a4ac0dafff6f9711ea3346523ab4e7ab",
+    "tests/editor_localization_test.gd": "f945c3d247cb282dd908a43b47bf4587084d1bd637ccf566748c3a37ea83dc6a",
+    "tools/review_editor_localization.py": "ac030fafe39b0ba0daef7584fb21c29b3091307d07d9f9ab716218c6b6d2667c",
+    "tools/validation/contracts.json": "db8b4cd36d1f0e2fc6898c05dafe5a9b6d10ca4117041d0b1a4019ab2da713e1"
+  }
+}

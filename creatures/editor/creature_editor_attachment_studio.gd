@@ -27,7 +27,7 @@ func _build_inspector() -> void:
 	_inspector.move_child(_attachment_panel, 3)
 	var show := CheckButton.new()
 	show.name = "ShowBodyFittings"
-	show.text = "Sattel & Geschirr prüfen"
+	EditorText.bind(show, "text", "EDITOR_FITTINGS")
 	show.add_theme_font_size_override("font_size", 14)
 	show.toggled.connect(_toggle_fittings)
 	_attachment_panel.add_child(show)
@@ -36,9 +36,9 @@ func _build_inspector() -> void:
 	_attachment_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_fit_actions = VBoxContainer.new()
 	_attachment_panel.add_child(_fit_actions)
-	_button(_fit_actions, "Anhalten & jetzt prüfen", _check_fit_now).name = "CheckBodyFit"
-	_button(_fit_actions, "Freiraum am Anschluss suchen", _find_fit_proposal).name = "FindBodyFit"
-	_fit_proposal_button = _button(_fit_actions, "Vorschlag übernehmen", _apply_fit_proposal)
+	_button(_fit_actions, "EDITOR_FIT_CHECK", _check_fit_now).name = "CheckBodyFit"
+	_button(_fit_actions, "EDITOR_FIT_FIND", _find_fit_proposal).name = "FindBodyFit"
+	_fit_proposal_button = _button(_fit_actions, "EDITOR_FIT_APPLY", _apply_fit_proposal)
 	_fit_proposal_button.name = "ApplyBodyFit"
 	_fit_proposal_button.visible = false
 	_fit_findings = VBoxContainer.new()
@@ -47,8 +47,8 @@ func _build_inspector() -> void:
 	_attachment_panel.add_child(_attachment_fields)
 	_attachment_choice = OptionButton.new()
 	_attachment_choice.name = "BodySocketChoice"
-	for label in ["Sattel / Reitersitz", "Geschirr links", "Geschirr rechts"]:
-		_attachment_choice.add_item(label)
+	for label in ["EDITOR_SOCKET_SADDLE", "EDITOR_SOCKET_LEFT", "EDITOR_SOCKET_RIGHT"]:
+		EditorText.add_option(_attachment_choice, label)
 	_attachment_choice.item_selected.connect(func(index: int) -> void:
 		_end_gesture()
 		_fit_proposal.clear()
@@ -58,15 +58,15 @@ func _build_inspector() -> void:
 	_attachment_fields.add_child(_attachment_choice)
 	_attachment_enabled = CheckButton.new()
 	_attachment_enabled.name = "BodySocketEnabled"
-	_attachment_enabled.text = "Anschluss aktiv"
+	EditorText.bind(_attachment_enabled, "text", "EDITOR_SOCKET_ENABLED")
 	_attachment_enabled.toggled.connect(_set_fitting_enabled)
 	_attachment_fields.add_child(_attachment_enabled)
-	_add_fitting_spin("t", -1, "Lage am Rücken", 12, 88, 1, "%")
+	_add_fitting_spin("t", -1, "EDITOR_SOCKET_POSITION", 12, 88, 1, "%")
 	for axis in range(3):
-		_add_fitting_spin("offset", axis, ["Versatz rechts", "Versatz oben", "Versatz hinten"][axis], -50, 50, 1, "%")
+		_add_fitting_spin("offset", axis, ["EDITOR_SOCKET_OFFSET_X", "EDITOR_SOCKET_OFFSET_Y", "EDITOR_SOCKET_OFFSET_Z"][axis], -50, 50, 1, "%")
 	for axis in range(3):
-		_add_fitting_spin("rotation_degrees", axis, ["Neigung", "Drehung", "Seitneigung"][axis], -180, 180, 5, "°")
-	var mirror := _button(_attachment_fields, "Geschirr auf Gegenseite spiegeln", _mirror_fitting)
+		_add_fitting_spin("rotation_degrees", axis, ["EDITOR_SOCKET_TILT", "EDITOR_SOCKET_ROTATION", "EDITOR_SOCKET_ROLL"][axis], -180, 180, 5, "°")
+	var mirror := _button(_attachment_fields, "EDITOR_SOCKET_MIRROR", _mirror_fitting)
 	mirror.name = "MirrorBodyHarness"
 	mirror.add_theme_font_size_override("font_size", 12)
 
@@ -122,7 +122,7 @@ func _refresh_attachment_controls() -> void:
 				_fit_report = BodyFit.inspect(_preview)
 			_show_fit_report()
 		else:
-			_attachment_status.text = "Passprobe in Bewegung. Anhalten & jetzt prüfen untersucht die aktuelle Pose."
+			EditorText.bind(_attachment_status, "text", "EDITOR_FIT_MOVING")
 	_syncing_attachments = false
 
 
@@ -201,25 +201,25 @@ func _show_fit_report() -> void:
 		child.queue_free()
 	var hits: Array = _fit_report["collisions"]
 	var legs: Array = _fit_report["stretched_legs"]
-	var state: String = "Keine Überschneidung" if hits.is_empty() else "%d Überschneidungen · rot markiert" % hits.size()
+	var state: Variant = "EDITOR_FIT_CLEAR" if hits.is_empty() else EditorText.formatted("EDITOR_FIT_COLLISIONS", [hits.size()])
 	if not _fit_report["complete"]:
-		state = "Prüfung unvollständig · Anschlusslage oder Geometrie prüfen"
+		state = "EDITOR_FIT_INCOMPLETE"
 	elif _fit_report["checked_sockets"].is_empty():
-		state = "Keine aktiven Anschlüsse geprüft"
-	_attachment_status.text = "%s\nFeste Probereitergröße · %s · %d stark gestreckte Beine (>20%%)." % [state,
-		"Ruhepose" if _studio_mode == "body" else "angehaltene Momentaufnahme", legs.size()]
+		state = "EDITOR_FIT_NO_SOCKETS"
+	EditorText.bind(_attachment_status, "text", EditorText.formatted("EDITOR_FIT_REPORT", [state,
+		"EDITOR_REST_POSE" if _studio_mode == "body" else "EDITOR_STILL_POSE", legs.size()]))
 	if _studio_mode == "body":
 		var rest: Dictionary = AttachmentContract.inspect_rest(_preview)
-		_attachment_status.text += "\n%d Füße · Bodenabweichung %.3f" % [rest["leg_count"], rest["max_contact_error"]]
+		EditorText.append(_attachment_status, EditorText.formatted("EDITOR_FIT_FEET", [rest["leg_count"], rest["max_contact_error"]]))
 	var listed: Dictionary = {}
 	for hit: Dictionary in hits:
 		var key: String = str(hit["socket_id"]) + ":" + str(hit["part_uid"])
 		if listed.has(key):
 			continue
 		listed[key] = true
-		var socket_label: String = {"saddle.primary": "Sattel / Reiter", "harness.left": "Geschirr links", "harness.right": "Geschirr rechts"}[hit["socket_id"]]
-		var target: String = "Rumpf" if hit["part_uid"] == "body" else "Anbauteil"
-		var button := _button(_fit_findings, socket_label + " ↔ " + target, _edit_fit_collision.bind(hit["part_uid"], hit["socket_id"]))
+		var socket_label: String = {"saddle.primary": "EDITOR_SOCKET_RIDER", "harness.left": "EDITOR_SOCKET_LEFT", "harness.right": "EDITOR_SOCKET_RIGHT"}[hit["socket_id"]]
+		var target: String = "EDITOR_BODY_TARGET" if hit["part_uid"] == "body" else "EDITOR_PART_TARGET"
+		var button := _button(_fit_findings, EditorText.formatted("EDITOR_FIT_TARGET", [socket_label, target]), _edit_fit_collision.bind(hit["part_uid"], hit["socket_id"]))
 		button.add_theme_font_size_override("font_size", 12)
 	var seen: Dictionary = {}
 	for leg: Dictionary in legs:
@@ -227,9 +227,9 @@ func _show_fit_report() -> void:
 		if seen.has(uid):
 			continue
 		seen[uid] = true
-		_button(_fit_findings, "Beinpaar +%.0f%% · Gelenk bearbeiten" % ((float(leg["stretch"]) - 1.0) * 100), _edit_fit_part.bind(uid, true)).add_theme_font_size_override("font_size", 12)
+		_button(_fit_findings, EditorText.formatted("EDITOR_FIT_STRETCH", [((float(leg["stretch"]) - 1.0) * 100)]), _edit_fit_part.bind(uid, true)).add_theme_font_size_override("font_size", 12)
 		if _studio_mode == "body":
-			_button(_fit_findings, "Segmentlängen übernehmen", _fit_leg_lengths.bind(uid)).add_theme_font_size_override("font_size", 12)
+			_button(_fit_findings, "EDITOR_FIT_LEG_LENGTHS", _fit_leg_lengths.bind(uid)).add_theme_font_size_override("font_size", 12)
 	_paint_fit_report()
 
 
@@ -283,7 +283,7 @@ func _process(delta: float) -> void:
 		for child in _fit_findings.get_children():
 			_fit_findings.remove_child(child)
 			child.queue_free()
-		_attachment_status.text = "Passprobe in Bewegung. Anhalten & jetzt prüfen untersucht die aktuelle Pose."
+		EditorText.bind(_attachment_status, "text", "EDITOR_FIT_MOVING")
 
 
 func _find_fit_proposal() -> void:
@@ -296,17 +296,17 @@ func _find_fit_proposal() -> void:
 	for hit: Dictionary in current["collisions"]:
 		collides = collides or hit["socket_id"] == _fitting_id
 	if current["complete"] and _fitting_id in current["checked_sockets"] and not collides:
-		_attachment_status.text = "Gewählte Passprobe ist in dieser Pose bereits frei."
+		EditorText.bind(_attachment_status, "text", "EDITOR_FIT_ALREADY_CLEAR")
 		return
 	_fit_proposal = BodyFit.socket_proposal(_preview, _fitting_id)
 	_fit_proposal_button.visible = not _fit_proposal.is_empty()
 	if _fit_proposal.is_empty():
-		_attachment_status.text = "Kein freier Vorschlag im Suchbereich. Lage/Drehung oder das markierte Anbauteil bearbeiten."
+		EditorText.bind(_attachment_status, "text", "EDITOR_FIT_NO_PROPOSAL")
 	else:
 		_fit_proposal["source"] = var_to_str(blueprint)
 		var socket: Dictionary = _fit_proposal["socket"]
-		_attachment_status.text = "Freiraumvorschlag: Rücken %.0f%% · Versatz %.0f / %.0f / %.0f%%.\nFür die feste Passprobe geprüft; Sattelauflage anschließend ansehen." % [float(socket["t"]) * 100,
-			float(socket["offset"][0]) * 100, float(socket["offset"][1]) * 100, float(socket["offset"][2]) * 100]
+		EditorText.bind(_attachment_status, "text", EditorText.formatted("EDITOR_FIT_PROPOSAL", [float(socket["t"]) * 100,
+			float(socket["offset"][0]) * 100, float(socket["offset"][1]) * 100, float(socket["offset"][2]) * 100]))
 
 
 func _apply_fit_proposal() -> void:
@@ -320,7 +320,7 @@ func _apply_fit_proposal() -> void:
 func _edit_fit_part(uid: String, joint: bool = false) -> void:
 	if uid == "body":
 		_set_mode("body")
-		_set_builder_status("Rückenform oder Anschlusslage ändern; rote Passprobe erneut prüfen.")
+		_set_builder_status("EDITOR_FIT_BODY_HINT")
 		return
 	for index in range(blueprint.get("parts", []).size()):
 		if blueprint["parts"][index].get("uid", "") == uid:
@@ -341,7 +341,7 @@ func _fit_leg_lengths(uid: String) -> bool:
 		return false
 	var candidate: Dictionary = BodyFit.leg_candidate(blueprint, BodyFit.inspect(_preview), uid)
 	if candidate.is_empty():
-		_set_builder_status("Segmentgrenze erreicht. Gelenk, Größe oder Beinansatz dieses Paars bearbeiten.")
+		_set_builder_status("EDITOR_FIT_LEG_LIMIT")
 		return false
 	var trial: Node3D = _preview.get_script().new()
 	trial.visible = false
@@ -358,11 +358,11 @@ func _fit_leg_lengths(uid: String) -> bool:
 				improved = false
 	trial.free()
 	if not improved:
-		_set_builder_status("Keine sichere Längenanpassung gefunden. Gelenk und Beinansatz dieses Paars bearbeiten.")
+		_set_builder_status("EDITOR_FIT_LEG_UNSAFE")
 		return false
 	_end_gesture()
 	_record_before_edit("Beinpaar an Bodenabstand anpassen")
 	blueprint = candidate
 	_refresh_all()
-	_set_builder_status("Segmentlängen dieses Paars übernommen · Fußkontakt erneut geprüft.")
+	_set_builder_status("EDITOR_FIT_LEG_APPLIED")
 	return true

@@ -40,7 +40,7 @@ func _build_part_controls() -> void:
 	tools.columns = 2
 	_part_controls.add_child(tools)
 	_part_controls.move_child(tools, 1)
-	for entry in [["move", "Verschieben · W"], ["rotate", "Drehen · E"], ["scale", "Größe · R"], ["joint", "Gelenk · J"]]:
+	for entry in [["move", "EDITOR_TOOL_MOVE"], ["rotate", "EDITOR_TOOL_ROTATE"], ["scale", "EDITOR_TOOL_SCALE"], ["joint", "EDITOR_TOOL_JOINT"]]:
 		var button := _button(tools, entry[1], _choose_tool.bind(entry[0]))
 		button.name = "Tool_" + str(entry[0])
 		button.toggle_mode = true
@@ -52,11 +52,11 @@ func _build_part_controls() -> void:
 	_joint_controls.name = "JointSettings"
 	_part_controls.add_child(_joint_controls)
 	_part_controls.move_child(_joint_controls, 2)
-	_label(_joint_controls, "Gelenkpunkt ziehen · Umschalt: Raster", 12)
+	_label(_joint_controls, "EDITOR_JOINT_HELP", 12)
 	for field in ["upper", "lower"]:
 		var row := HBoxContainer.new()
 		_joint_controls.add_child(row)
-		var label := _label(row, "Oberes Segment" if field == "upper" else "Unteres Segment", 12)
+		var label := _label(row, "EDITOR_JOINT_UPPER" if field == "upper" else "EDITOR_JOINT_LOWER", 12)
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var spin := SpinBox.new()
 		spin.name = "Joint_" + field
@@ -71,7 +71,7 @@ func _build_part_controls() -> void:
 		spin.get_line_edit().focus_exited.connect(_end_gesture)
 		row.add_child(spin)
 		_joint_fields[field] = spin
-	_label(_joint_controls, "Gelenkversatz · X / Y / Z", 12)
+	_label(_joint_controls, "EDITOR_JOINT_OFFSET", 12)
 	var row := HBoxContainer.new()
 	_joint_controls.add_child(row)
 	for axis in range(3):
@@ -89,7 +89,7 @@ func _build_part_controls() -> void:
 		spin.get_line_edit().focus_exited.connect(_end_gesture)
 		row.add_child(spin)
 		_joint_fields["offset_%d" % axis] = spin
-	_button(_joint_controls, "Gelenk zurücksetzen", _reset_joint).add_theme_font_size_override("font_size", 12)
+	_button(_joint_controls, "EDITOR_JOINT_RESET", _reset_joint).add_theme_font_size_override("font_size", 12)
 
 
 func _refresh_design_controls() -> void:
@@ -119,7 +119,7 @@ func _choose_tool(mode: String) -> void:
 	if _gizmo != null:
 		_gizmo.set("mode", mode)
 	_refresh_stats_panel()
-	_set_builder_status({"move": "Pfeil ziehen: eine Achse verschieben · Andocken bleibt wirksam.", "rotate": "Farbring ziehen: lokal drehen · Umschalt: 15°-Schritte.", "scale": "Quadrat ziehen: Proportion ändern · Mitte: Gesamtgröße.", "joint": "Goldenen Gelenkpunkt oder Achsen ziehen · Rechts: Segmentlängen."}.get(mode, ""))
+	_set_builder_status({"move": "EDITOR_TOOL_MOVE_HINT", "rotate": "EDITOR_TOOL_ROTATE_HINT", "scale": "EDITOR_TOOL_SCALE_HINT", "joint": "EDITOR_TOOL_JOINT_HINT"}.get(mode, ""))
 
 
 func _choose_transform_target(index: int) -> void:
@@ -161,7 +161,7 @@ func _reset_joint() -> void:
 	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
 	if part.is_empty():
 		return
-	_record_before_edit("Gelenk zurücksetzen", true)
+	_record_before_edit("EDITOR_JOINT_RESET", true)
 	part["joint"] = JointProfile.read({})
 	_refresh_preview()
 	_refresh_stats_panel()
@@ -242,7 +242,7 @@ func _cancel_gizmo_drag(data: Dictionary) -> void:
 	_history.set("_redo_stack", data["history_redo"])
 	_refresh_preview()
 	_refresh_stats_panel()
-	_set_builder_status("Bearbeitung abgebrochen.")
+	_set_builder_status("EDITOR_EDIT_CANCELLED")
 
 
 func handle_canvas_input(event: InputEvent) -> void:
@@ -293,17 +293,17 @@ func _refresh_part_palette() -> void:
 	super._refresh_part_palette()
 	if _studio_mode != "test":
 		return
-	_label(_part_grid, "TESTSTRECKE", 13)
-	for entry in [["flat", "Arbeitsfläche"], ["slope", "Steigung"], ["steps", "Stufen"]]:
+	_label(_part_grid, "EDITOR_COURSE_TITLE", 13)
+	for entry in [["flat", "EDITOR_COURSE_FLAT"], ["slope", "EDITOR_COURSE_SLOPE"], ["steps", "EDITOR_COURSE_STEPS"]]:
 		var button := _button(_part_grid, entry[1], _choose_course.bind(entry[0]))
 		button.name = "Course_" + str(entry[0])
 		button.toggle_mode = true
 		button.set_pressed_no_signal(_course_choice == entry[0])
 	var actions := HBoxContainer.new()
 	_part_grid.add_child(actions)
-	_button(actions, "Weiter" if _course_paused else "Pause", _toggle_course_pause).name = "CoursePause"
-	_button(actions, "Neu starten", _restart_course).name = "CourseRestart"
-	_label(_part_grid, "Tempo der Vorschau", 12)
+	_button(actions, "EDITOR_COURSE_RESUME" if _course_paused else "EDITOR_COURSE_PAUSE", _toggle_course_pause).name = "CoursePause"
+	_button(actions, "EDITOR_COURSE_RESTART", _restart_course).name = "CourseRestart"
+	_label(_part_grid, "EDITOR_COURSE_SPEED", 12)
 	var speed := HSlider.new()
 	speed.name = "PreviewSpeed"
 	speed.min_value = 0.5
@@ -317,7 +317,7 @@ func _refresh_part_palette() -> void:
 	_part_grid.add_child(speed)
 	_course_label = _label(_part_grid, "", 13)
 	_course_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_help_label.text = "Teste Haltung und Schritte auf der Arbeitsfläche, an einer Steigung oder auf Stufen."
+	EditorText.bind(_help_label, "text", "EDITOR_COURSE_HELP")
 
 
 func _refresh_preview() -> void:
@@ -377,7 +377,7 @@ func _process(_delta: float) -> void:
 		return
 	var motion: RefCounted = _preview.get("_motion")
 	var profile: Dictionary = motion.get("_profile")
-	_course_label.text = "%s · %d Beine\n%s" % [profile.get("name", ""), int(profile.get("count", 0)), "Ziel erreicht · Neu starten" if bool(motion.get("course_finished")) else ("Angehalten" if _course_paused else "Entwurf bleibt erhalten")]
+	EditorText.bind(_course_label, "text", EditorText.formatted("EDITOR_COURSE_STATUS", [{"Zweibeinig": "EDITOR_GAIT_TWO", "Vierbeinig": "EDITOR_GAIT_FOUR", "Dreipunktgang": "EDITOR_GAIT_SIX"}.get(profile.get("name", ""), "EDITOR_GAIT_FREE"), int(profile.get("count", 0)), "EDITOR_COURSE_FINISHED" if bool(motion.get("course_finished")) else ("EDITOR_COURSE_PAUSED" if _course_paused else "EDITOR_COURSE_DESIGN_SAFE")]))
 
 
 func _frame_creature() -> void:

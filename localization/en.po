@@ -2297,3 +2297,1065 @@ msgstr "Founder arrived. The new site starts with its own empty store."
 
 msgid "SETTLEMENT_DETAIL"
 msgstr "%s · %d residents\nWood %d · Stone %d · Food %d · Water %d\n\n%s"
+
+msgid "EDITOR_TITLE"
+msgstr "VOXELVERSE  /  CREATURES"
+
+msgid "EDITOR_WELCOME"
+msgstr "Your creature. Your shape."
+
+msgid "EDITOR_TAB_BODY"
+msgstr "01  Shape"
+
+msgid "EDITOR_TAB_PARTS"
+msgstr "02  Parts"
+
+msgid "EDITOR_TAB_PAINT"
+msgstr "03  Color"
+
+msgid "EDITOR_TAB_TEST"
+msgstr "04  Test"
+
+msgid "EDITOR_PLAY"
+msgstr "Into the world  →"
+
+msgid "EDITOR_PALETTE_BODY"
+msgstr "SHAPE THE BODY"
+
+msgid "EDITOR_PALETTE_PARTS"
+msgstr "ATTACH PARTS"
+
+msgid "EDITOR_PALETTE_PAINT"
+msgstr "COLOR & PATTERN"
+
+msgid "EDITOR_PALETTE_TEST"
+msgstr "BRING IT TO LIFE"
+
+msgid "EDITOR_PALETTE_DEFAULT"
+msgstr "PARTS"
+
+msgid "EDITOR_INSPECTOR"
+msgstr "YOUR CREATURE"
+
+msgid "EDITOR_ATTACHED"
+msgstr "ATTACHED PARTS"
+
+msgid "EDITOR_SELECT_POINT"
+msgstr "Select a body point"
+
+msgid "EDITOR_WIDTH"
+msgstr "Width"
+
+msgid "EDITOR_HEIGHT"
+msgstr "Height"
+
+msgid "EDITOR_CURVATURE"
+msgstr "Curvature"
+
+msgid "EDITOR_LENGTH"
+msgstr "Body length"
+
+msgid "EDITOR_BASE_COLOR"
+msgstr "Skin color"
+
+msgid "EDITOR_ACCENT_COLOR"
+msgstr "Pattern color"
+
+msgid "EDITOR_BELLY_COLOR"
+msgstr "Belly color"
+
+msgid "EDITOR_EYE_COLOR"
+msgstr "Iris color"
+
+msgid "EDITOR_HORN_COLOR"
+msgstr "Horns & claws"
+
+msgid "EDITOR_DUPLICATE"
+msgstr "Duplicate"
+
+msgid "EDITOR_REMOVE"
+msgstr "Remove"
+
+msgid "EDITOR_FRAME"
+msgstr "Fit view  ·  F"
+
+msgid "EDITOR_TARGET_LIMB"
+msgstr "Whole limb"
+
+msgid "EDITOR_TARGET_END"
+msgstr "Foot / hand"
+
+msgid "EDITOR_TARGET_FOOT"
+msgstr "Edit foot"
+
+msgid "EDITOR_TARGET_HAND"
+msgstr "Edit hand"
+
+msgid "EDITOR_SINGLE"
+msgstr "Single"
+
+msgid "EDITOR_PAIRED"
+msgstr "Pair"
+
+msgid "EDITOR_CENTER"
+msgstr "Center"
+
+msgid "EDITOR_POSITION"
+msgstr "Position"
+
+msgid "EDITOR_ROTATION"
+msgstr "Rotate"
+
+msgid "EDITOR_SHAPE"
+msgstr "Shape"
+
+msgid "EDITOR_AXIS_X"
+msgstr "X: sideways / width"
+
+msgid "EDITOR_AXIS_Y"
+msgstr "Y: height / length"
+
+msgid "EDITOR_AXIS_Z"
+msgstr "Z: forward and back / depth"
+
+msgid "EDITOR_DEGREES"
+msgstr " · degrees"
+
+msgid "EDITOR_SIZE"
+msgstr "Overall size"
+
+msgid "EDITOR_RESET_SHAPE"
+msgstr "Reset rotation & shape"
+
+msgid "EDITOR_DEFAULT_END"
+msgstr "Default foot / hand"
+
+msgid "EDITOR_SKIN_TYPE"
+msgstr "Skin type · surface only"
+
+msgid "EDITOR_SKIN_STRENGTH"
+msgstr "Texture strength"
+
+msgid "EDITOR_SKIN_SCALE"
+msgstr "Texture detail"
+
+msgid "EDITOR_PATTERN_STRENGTH"
+msgstr "Pattern strength"
+
+msgid "EDITOR_SWATCH_SKIN"
+msgstr "Swatches → Skin"
+
+msgid "EDITOR_SWATCH_PATTERN"
+msgstr "Swatches → Pattern"
+
+msgid "EDITOR_SWATCH_BELLY"
+msgstr "Swatches → Belly"
+
+msgid "EDITOR_SWATCH_IRIS"
+msgstr "Swatches → Iris"
+
+msgid "EDITOR_SWATCH_HORNS"
+msgstr "Swatches → Horns"
+
+msgid "EDITOR_NAME_HINT"
+msgstr "Your creature's name"
+
+msgid "EDITOR_UNDO_HINT"
+msgstr "Undo · Ctrl+Z"
+
+msgid "EDITOR_REDO_HINT"
+msgstr "Redo · Ctrl+Y"
+
+msgid "EDITOR_SYMMETRY"
+msgstr "Symmetry"
+
+msgid "EDITOR_SNAP"
+msgstr "Surface snap"
+
+msgid "EDITOR_NEW"
+msgstr "New"
+
+msgid "EDITOR_LOAD"
+msgstr "Load"
+
+msgid "EDITOR_SAVE"
+msgstr "Save"
+
+msgid "EDITOR_MOTION_IDLE"
+msgstr "Stand & breathe"
+
+msgid "EDITOR_MOTION_WALK"
+msgstr "Walk"
+
+msgid "EDITOR_MOTION_RUN"
+msgstr "Run"
+
+msgid "EDITOR_PRESET_UPRIGHT"
+msgstr "Upright"
+
+msgid "EDITOR_PRESET_GRAZER"
+msgstr "Long neck"
+
+msgid "EDITOR_PRESET_CRAWLER"
+msgstr "Crawler"
+
+msgid "EDITOR_PRESET_ROUND"
+msgstr "Round belly"
+
+msgid "EDITOR_PRESET_HINT"
+msgstr "Reshape the body only. Your parts stay attached. Undo with Ctrl+Z."
+
+msgid "EDITOR_SELECT_PART"
+msgstr "Select a part"
+
+msgid "EDITOR_YOUR_PALETTE"
+msgstr "Your color palette"
+
+msgid "EDITOR_MOTION_PREVIEW"
+msgstr "Motion preview"
+
+msgid "EDITOR_FOOT"
+msgstr "Foot"
+
+msgid "EDITOR_HAND"
+msgstr "Hand"
+
+msgid "EDITOR_PART"
+msgstr "Part"
+
+msgid "EDITOR_CAPTION_BODY"
+msgstr "Drag, stretch, shape."
+
+msgid "EDITOR_CAPTION_PARTS"
+msgstr "What should your creature do?"
+
+msgid "EDITOR_CAPTION_PAINT"
+msgstr "Give it its own character."
+
+msgid "EDITOR_CAPTION_TEST"
+msgstr "A shape comes to life."
+
+msgid "EDITOR_STATUS_CENTER"
+msgstr "Centerline: seven fixed attachment points."
+
+msgid "EDITOR_STATUS_PAIRED"
+msgstr "Left and right sides are edited together."
+
+msgid "EDITOR_STATUS_SINGLE"
+msgstr "Editing a single part."
+
+msgid "EDITOR_STATUS_LEG_FIRST"
+msgstr "Select the intended leg first."
+
+msgid "EDITOR_STATUS_ARM_FIRST"
+msgstr "Select the intended arm first."
+
+msgid "EDITOR_STATUS_END_COST"
+msgstr "Not enough shape points for this foot or hand."
+
+msgid "EDITOR_STATUS_END_ADDED"
+msgstr "Foot or hand attached · Adjust size, shape and rotation in Properties."
+
+msgid "EDITOR_STATUS_COPY_COST"
+msgstr "Not enough shape points for a duplicate."
+
+msgid "EDITOR_STATUS_LOCKED"
+msgstr "Discover species to unlock this part."
+
+msgid "EDITOR_STATUS_COST"
+msgstr "Not enough shape points. Remove a part first."
+
+msgid "EDITOR_STATUS_SELECTED"
+msgstr "Part selected · Properties: rotation X/Y/Z, shape and size · Gold points: centerline."
+
+msgid "EDITOR_STATUS_PRESET"
+msgstr "Body shape applied · Your parts stay attached · Ctrl+Z to undo."
+
+msgid "EDITOR_STATUS_TOO_MANY"
+msgstr "Too many shape points. Remove a part first."
+
+msgid "EDITOR_STATUS_ADDED"
+msgstr "Part attached · Wheel: size · Alt + drag: rotate · Ctrl+Z: undo"
+
+msgid "EDITOR_STATUS_SAVE_FAILED"
+msgstr "Save failed. Your design remains open here."
+
+msgid "EDITOR_STATUS_WORLD_FAILED"
+msgstr "The world could not be opened. Your design has been saved."
+
+msgid "EDITOR_STATUS_NEW"
+msgstr "New creature · Restore your previous design with Ctrl+Z."
+
+msgid "EDITOR_STATUS_LOADED"
+msgstr "Saved creature loaded · Ctrl+Z restores your previous edits."
+
+msgid "EDITOR_HELP_INITIAL"
+msgstr "Drag the body points. Use the wheel to make the selected point thicker or thinner."
+
+msgid "EDITOR_HELP_BODY"
+msgstr "Drag a point: shape the body.\nWheel: thicker / thinner.\nCtrl + wheel: body length."
+
+msgid "EDITOR_HELP_PARTS"
+msgstr "Drag parts onto the body.\nWheel: size · Alt + drag: rotate.\nRight drag: orbit the view."
+
+msgid "EDITOR_HELP_PAINT"
+msgstr "Choose a skin color, accent and pattern. Preview every change immediately."
+
+msgid "EDITOR_HELP_TEST"
+msgstr "Test your shape in motion.\nThe preview keeps your design unchanged."
+
+msgid "EDITOR_HELP_END"
+msgstr "Select a leg or arm.\nClick a foot or hand, or drag it onto the limb.\nAdjust size and rotation in Properties."
+
+msgid "EDITOR_HELP_SKIN"
+msgstr "Combine skin type, pattern and five colors. Skin types affect only the surface."
+
+msgid "EDITOR_CATEGORY_BODY"
+msgstr "Body"
+
+msgid "EDITOR_CATEGORY_MOUTH"
+msgstr "Mouths"
+
+msgid "EDITOR_CATEGORY_EYES"
+msgstr "Eyes"
+
+msgid "EDITOR_CATEGORY_LEGS"
+msgstr "Legs"
+
+msgid "EDITOR_CATEGORY_ARMS"
+msgstr "Arms"
+
+msgid "EDITOR_CATEGORY_FEET"
+msgstr "Feet"
+
+msgid "EDITOR_CATEGORY_HANDS"
+msgstr "Hands"
+
+msgid "EDITOR_CATEGORY_TAIL"
+msgstr "Tails"
+
+msgid "EDITOR_CATEGORY_HORNS"
+msgstr "Horns"
+
+msgid "EDITOR_CATEGORY_PLATES"
+msgstr "Armor"
+
+msgid "EDITOR_CATEGORY_SPIKES"
+msgstr "Spikes"
+
+msgid "EDITOR_CATEGORY_DECOR"
+msgstr "Details"
+
+msgid "EDITOR_CATEGORY_PAINT"
+msgstr "Patterns"
+
+msgid "EDITOR_SKIN_SMOOTH"
+msgstr "Smooth"
+
+msgid "EDITOR_SKIN_SCALES"
+msgstr "Scales"
+
+msgid "EDITOR_SKIN_FUR"
+msgstr "Short fur"
+
+msgid "EDITOR_SKIN_LEATHER"
+msgstr "Leather"
+
+msgid "EDITOR_SKIN_CHITIN"
+msgstr "Chitin"
+
+msgid "EDITOR_COLOR_PALETTE_0"
+msgstr "Forest"
+
+msgid "EDITOR_COLOR_PALETTE_1"
+msgstr "Desert"
+
+msgid "EDITOR_COLOR_PALETTE_2"
+msgstr "Ocean"
+
+msgid "EDITOR_COLOR_PALETTE_3"
+msgstr "Ember"
+
+msgid "EDITOR_COLOR_PALETTE_4"
+msgstr "Twilight"
+
+msgid "EDITOR_COLOR_PALETTE_5"
+msgstr "Polar"
+
+msgid "EDITOR_STATS"
+msgstr "{used} / {limit} shape points\n\nSpeed  {speed}     Power  {attack}\nArmor  {defense}     Senses  {perception}"
+
+msgid "EDITOR_POINT"
+msgstr "Point {point} / 7"
+
+msgid "EDITOR_STATUS_SAVED"
+msgstr "Saved · {name} · Revision {revision}"
+
+msgid "EDITOR_SHOW_INSPECTOR"
+msgstr "Properties"
+
+msgid "EDITOR_SHOW_PALETTE"
+msgstr "Palette"
+
+msgid "EDITOR_CARD_LOCKED"
+msgstr "Locked"
+
+msgid "EDITOR_CARD_COST"
+msgstr "{count} shape points"
+
+msgid "EDITOR_CARD_HINT"
+msgstr "Drag onto the creature or click."
+
+msgid "EDITOR_CARD_UNLOCK"
+msgstr "Discover species to unlock."
+
+msgid "EDITOR_STATUS_UNDO_EMPTY"
+msgstr "Nothing to undo."
+
+msgid "EDITOR_STATUS_REDO_EMPTY"
+msgstr "Nothing to redo."
+
+msgid "EDITOR_STATUS_UNDO"
+msgstr "Undo applied."
+
+msgid "EDITOR_STATUS_REDO"
+msgstr "Redo applied."
+
+msgid "EDITOR_STATUS_SNAP_ON"
+msgstr "Surface snap enabled."
+
+msgid "EDITOR_STATUS_SNAP_OFF"
+msgstr "Surface snap disabled."
+
+msgid "EDITOR_STATUS_ATTACH_SELECT"
+msgstr "Select a modular part first."
+
+msgid "EDITOR_STATUS_ATTACHED"
+msgstr "Selected part attached to the body surface."
+
+msgid "EDITOR_PART_BODY_BALANCED_CORE_NAME"
+msgstr "Balanced Core"
+
+msgid "EDITOR_PART_BODY_BALANCED_CORE_DESCRIPTION"
+msgstr "Middle-sized creature body."
+
+msgid "EDITOR_PART_BODY_LONG_GRAZER_NAME"
+msgstr "Long Grazer Core"
+
+msgid "EDITOR_PART_BODY_LONG_GRAZER_DESCRIPTION"
+msgstr "Long body for stable herbivores."
+
+msgid "EDITOR_PART_BODY_HEAVY_SHELL_NAME"
+msgstr "Heavy Shell"
+
+msgid "EDITOR_PART_BODY_HEAVY_SHELL_DESCRIPTION"
+msgstr "Wide protected body."
+
+msgid "EDITOR_PART_BODY_INSECTOID_NAME"
+msgstr "Insectoid Thorax"
+
+msgid "EDITOR_PART_BODY_INSECTOID_DESCRIPTION"
+msgstr "Segmented body for many legs."
+
+msgid "EDITOR_PART_BODY_SERPENT_BASE_NAME"
+msgstr "Serpent Base"
+
+msgid "EDITOR_PART_BODY_SERPENT_BASE_DESCRIPTION"
+msgstr "Flexible stretched body."
+
+msgid "EDITOR_PART_PAINT_PLAIN_NAME"
+msgstr "Plain Skin"
+
+msgid "EDITOR_PART_PAINT_PLAIN_DESCRIPTION"
+msgstr "Natural base color."
+
+msgid "EDITOR_PART_PAINT_FOREST_SPOTS_NAME"
+msgstr "Forest Spots"
+
+msgid "EDITOR_PART_PAINT_FOREST_SPOTS_DESCRIPTION"
+msgstr "Green camouflage spots."
+
+msgid "EDITOR_PART_PAINT_SAND_STRIPES_NAME"
+msgstr "Sand Stripes"
+
+msgid "EDITOR_PART_PAINT_SAND_STRIPES_DESCRIPTION"
+msgstr "Dry biome stripes."
+
+msgid "EDITOR_PART_PAINT_WARNING_MARKS_NAME"
+msgstr "Warning Marks"
+
+msgid "EDITOR_PART_PAINT_WARNING_MARKS_DESCRIPTION"
+msgstr "Bright poisonous markings."
+
+msgid "EDITOR_PART_PAINT_CRYSTAL_BLOOM_NAME"
+msgstr "Crystal Bloom"
+
+msgid "EDITOR_PART_PAINT_CRYSTAL_BLOOM_DESCRIPTION"
+msgstr "Colorful alien plates."
+
+msgid "EDITOR_PART_MOUTH_GRAZER_NAME"
+msgstr "Grazer Mouth"
+
+msgid "EDITOR_PART_MOUTH_GRAZER_DESCRIPTION"
+msgstr "Good for plant food."
+
+msgid "EDITOR_PART_MOUTH_BROAD_BEAK_NAME"
+msgstr "Broad Beak"
+
+msgid "EDITOR_PART_MOUTH_BROAD_BEAK_DESCRIPTION"
+msgstr "Simple hard beak."
+
+msgid "EDITOR_PART_MOUTH_PREDATOR_JAWS_NAME"
+msgstr "Predator Jaws"
+
+msgid "EDITOR_PART_MOUTH_PREDATOR_JAWS_DESCRIPTION"
+msgstr "Strong biting jaws."
+
+msgid "EDITOR_PART_MOUTH_FILTER_SNOUT_NAME"
+msgstr "Filter Snout"
+
+msgid "EDITOR_PART_MOUTH_FILTER_SNOUT_DESCRIPTION"
+msgstr "Long snout for shallow water feeding."
+
+msgid "EDITOR_PART_EYES_BEADY_NAME"
+msgstr "Beady Eyes"
+
+msgid "EDITOR_PART_EYES_BEADY_DESCRIPTION"
+msgstr "Cheap basic vision."
+
+msgid "EDITOR_PART_EYES_WIDE_NAME"
+msgstr "Wide Watchers"
+
+msgid "EDITOR_PART_EYES_WIDE_DESCRIPTION"
+msgstr "Large expressive eyes."
+
+msgid "EDITOR_PART_EYES_STALKS_NAME"
+msgstr "Eye Stalks"
+
+msgid "EDITOR_PART_EYES_STALKS_DESCRIPTION"
+msgstr "Raised eyes for safer scanning."
+
+msgid "EDITOR_PART_EYES_CLUSTER_NAME"
+msgstr "Cluster Eyes"
+
+msgid "EDITOR_PART_EYES_CLUSTER_DESCRIPTION"
+msgstr "Multiple small sensor eyes."
+
+msgid "EDITOR_PART_LEGS_STUBBY_NAME"
+msgstr "Stubby Legs"
+
+msgid "EDITOR_PART_LEGS_STUBBY_DESCRIPTION"
+msgstr "Stable but slow."
+
+msgid "EDITOR_PART_LEGS_WALKER_NAME"
+msgstr "Walker Legs"
+
+msgid "EDITOR_PART_LEGS_WALKER_DESCRIPTION"
+msgstr "Balanced movement."
+
+msgid "EDITOR_PART_LEGS_SPRINTER_NAME"
+msgstr "Sprinter Legs"
+
+msgid "EDITOR_PART_LEGS_SPRINTER_DESCRIPTION"
+msgstr "Fast but hungry."
+
+msgid "EDITOR_PART_LEGS_SPIDER_NAME"
+msgstr "Spider Legs"
+
+msgid "EDITOR_PART_LEGS_SPIDER_DESCRIPTION"
+msgstr "Many-jointed side legs."
+
+msgid "EDITOR_PART_LEGS_HOOF_NAME"
+msgstr "Hoof Legs"
+
+msgid "EDITOR_PART_LEGS_HOOF_DESCRIPTION"
+msgstr "Fast steppe legs."
+
+msgid "EDITOR_PART_ARMS_GRASPING_NAME"
+msgstr "Grasping Arms"
+
+msgid "EDITOR_PART_ARMS_GRASPING_DESCRIPTION"
+msgstr "Basic manipulation."
+
+msgid "EDITOR_PART_ARMS_CLIMBER_NAME"
+msgstr "Climber Arms"
+
+msgid "EDITOR_PART_ARMS_CLIMBER_DESCRIPTION"
+msgstr "Long arms with strong grip."
+
+msgid "EDITOR_PART_ARMS_CLAWS_NAME"
+msgstr "Claw Arms"
+
+msgid "EDITOR_PART_ARMS_CLAWS_DESCRIPTION"
+msgstr "Offensive clawed arms."
+
+msgid "EDITOR_PART_TAIL_BALANCE_NAME"
+msgstr "Balance Tail"
+
+msgid "EDITOR_PART_TAIL_BALANCE_DESCRIPTION"
+msgstr "Helps with movement."
+
+msgid "EDITOR_PART_TAIL_CLUB_NAME"
+msgstr "Club Tail"
+
+msgid "EDITOR_PART_TAIL_CLUB_DESCRIPTION"
+msgstr "Heavy defensive tail."
+
+msgid "EDITOR_PART_TAIL_FIN_NAME"
+msgstr "Fin Tail"
+
+msgid "EDITOR_PART_TAIL_FIN_DESCRIPTION"
+msgstr "Water movement helper."
+
+msgid "EDITOR_PART_TAIL_STINGER_NAME"
+msgstr "Stinger Tail"
+
+msgid "EDITOR_PART_TAIL_STINGER_DESCRIPTION"
+msgstr "Dangerous pointed tail."
+
+msgid "EDITOR_PART_HORNS_SMALL_NAME"
+msgstr "Small Horns"
+
+msgid "EDITOR_PART_HORNS_SMALL_DESCRIPTION"
+msgstr "Small defensive horns."
+
+msgid "EDITOR_PART_HORNS_CREST_NAME"
+msgstr "Crest Horns"
+
+msgid "EDITOR_PART_HORNS_CREST_DESCRIPTION"
+msgstr "Visual display and defense."
+
+msgid "EDITOR_PART_HORNS_ANTLERS_NAME"
+msgstr "Branch Antlers"
+
+msgid "EDITOR_PART_HORNS_ANTLERS_DESCRIPTION"
+msgstr "Large branching display horns."
+
+msgid "EDITOR_PART_PLATES_DORSAL_NAME"
+msgstr "Dorsal Plates"
+
+msgid "EDITOR_PART_PLATES_DORSAL_DESCRIPTION"
+msgstr "Back armor plates."
+
+msgid "EDITOR_PART_PLATES_SHELL_NAME"
+msgstr "Shell Plates"
+
+msgid "EDITOR_PART_PLATES_SHELL_DESCRIPTION"
+msgstr "Layered shell armor."
+
+msgid "EDITOR_PART_SPIKES_BACK_NAME"
+msgstr "Back Spikes"
+
+msgid "EDITOR_PART_SPIKES_BACK_DESCRIPTION"
+msgstr "Simple defensive spikes."
+
+msgid "EDITOR_PART_SPIKES_SIDE_NAME"
+msgstr "Side Spikes"
+
+msgid "EDITOR_PART_SPIKES_SIDE_DESCRIPTION"
+msgstr "Side protection."
+
+msgid "EDITOR_PART_DECOR_FEATHERS_NAME"
+msgstr "Feather Crest"
+
+msgid "EDITOR_PART_DECOR_FEATHERS_DESCRIPTION"
+msgstr "Colorful social display."
+
+msgid "EDITOR_PART_DECOR_CRYSTALS_NAME"
+msgstr "Crystal Growths"
+
+msgid "EDITOR_PART_DECOR_CRYSTALS_DESCRIPTION"
+msgstr "Bright alien decoration."
+
+msgid "EDITOR_PART_FEET_PADS_NAME"
+msgstr "Padded feet"
+
+msgid "EDITOR_PART_FEET_PADS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_CLAWS_NAME"
+msgstr "Clawed feet"
+
+msgid "EDITOR_PART_FEET_CLAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_HOOVES_NAME"
+msgstr "Cloven hooves"
+
+msgid "EDITOR_PART_FEET_HOOVES_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_WEBBED_NAME"
+msgstr "Webbed feet"
+
+msgid "EDITOR_PART_FEET_WEBBED_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_FELINE_PAWS_NAME"
+msgstr "Cat paws"
+
+msgid "EDITOR_PART_FEET_FELINE_PAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_BEAR_PAWS_NAME"
+msgstr "Bear paws"
+
+msgid "EDITOR_PART_FEET_BEAR_PAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_HORSE_HOOVES_NAME"
+msgstr "Horse hooves"
+
+msgid "EDITOR_PART_FEET_HORSE_HOOVES_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_HANDS_GRASP_NAME"
+msgstr "Grasping hands"
+
+msgid "EDITOR_PART_HANDS_GRASP_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_HANDS_CLAWS_NAME"
+msgstr "Clawed hands"
+
+msgid "EDITOR_PART_HANDS_CLAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_HANDS_PINCERS_NAME"
+msgstr "Pincers"
+
+msgid "EDITOR_PART_HANDS_PINCERS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_HANDS_CRAB_CLAWS_NAME"
+msgstr "Crab claws"
+
+msgid "EDITOR_PART_HANDS_CRAB_CLAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_MOUTH_CANINE_SNOUT_NAME"
+msgstr "Canine snout"
+
+msgid "EDITOR_PART_MOUTH_CANINE_SNOUT_DESCRIPTION"
+msgstr "Tapered snout with a nose pad and fangs. Stats and unlock match Predator Jaws."
+
+msgid "EDITOR_PART_MOUTH_CROCODILE_SNOUT_NAME"
+msgstr "Crocodile snout"
+
+msgid "EDITOR_PART_MOUTH_CROCODILE_SNOUT_DESCRIPTION"
+msgstr "Long, flat snout with two rows of teeth. Stats and unlock match Predator Jaws."
+
+msgid "EDITOR_PART_MOUTH_OCTOPUS_BEAK_NAME"
+msgstr "Octopus mouth"
+
+msgid "EDITOR_PART_MOUTH_OCTOPUS_BEAK_DESCRIPTION"
+msgstr "Round mouth opening with an inner beak. Stats and unlock match Predator Jaws."
+
+msgid "EDITOR_TOOL_MOVE"
+msgstr "Move · W"
+
+msgid "EDITOR_TOOL_ROTATE"
+msgstr "Rotate · E"
+
+msgid "EDITOR_TOOL_SCALE"
+msgstr "Scale · R"
+
+msgid "EDITOR_TOOL_JOINT"
+msgstr "Joint · J"
+
+msgid "EDITOR_JOINT_HELP"
+msgstr "Drag joint point · Shift: snap"
+
+msgid "EDITOR_JOINT_UPPER"
+msgstr "Upper segment"
+
+msgid "EDITOR_JOINT_LOWER"
+msgstr "Lower segment"
+
+msgid "EDITOR_JOINT_OFFSET"
+msgstr "Joint offset · X / Y / Z"
+
+msgid "EDITOR_JOINT_RESET"
+msgstr "Reset joint"
+
+msgid "EDITOR_TOOL_MOVE_HINT"
+msgstr "Drag an arrow: move along one axis · Surface snap stays active."
+
+msgid "EDITOR_TOOL_ROTATE_HINT"
+msgstr "Drag a colored ring: rotate locally · Shift: 15° steps."
+
+msgid "EDITOR_TOOL_SCALE_HINT"
+msgstr "Drag a square: change proportions · Center: overall size."
+
+msgid "EDITOR_TOOL_JOINT_HINT"
+msgstr "Drag the gold joint point or axes · Properties: segment lengths."
+
+msgid "EDITOR_EDIT_CANCELLED"
+msgstr "Edit cancelled."
+
+msgid "EDITOR_COURSE_TITLE"
+msgstr "TEST COURSE"
+
+msgid "EDITOR_COURSE_FLAT"
+msgstr "Workbench"
+
+msgid "EDITOR_COURSE_SLOPE"
+msgstr "Slope"
+
+msgid "EDITOR_COURSE_STEPS"
+msgstr "Steps"
+
+msgid "EDITOR_COURSE_RESUME"
+msgstr "Resume"
+
+msgid "EDITOR_COURSE_PAUSE"
+msgstr "Pause"
+
+msgid "EDITOR_COURSE_RESTART"
+msgstr "Restart"
+
+msgid "EDITOR_COURSE_SPEED"
+msgstr "Preview speed"
+
+msgid "EDITOR_COURSE_HELP"
+msgstr "Test posture and steps on the workbench, a slope or steps."
+
+msgid "EDITOR_COURSE_FINISHED"
+msgstr "Destination reached · Restart"
+
+msgid "EDITOR_COURSE_PAUSED"
+msgstr "Paused"
+
+msgid "EDITOR_COURSE_DESIGN_SAFE"
+msgstr "Your design stays unchanged"
+
+msgid "EDITOR_FITTINGS"
+msgstr "Check saddle & harness"
+
+msgid "EDITOR_FIT_CHECK"
+msgstr "Pause & check now"
+
+msgid "EDITOR_FIT_FIND"
+msgstr "Find attachment clearance"
+
+msgid "EDITOR_FIT_APPLY"
+msgstr "Apply proposal"
+
+msgid "EDITOR_SOCKET_SADDLE"
+msgstr "Saddle / rider seat"
+
+msgid "EDITOR_SOCKET_LEFT"
+msgstr "Left harness"
+
+msgid "EDITOR_SOCKET_RIGHT"
+msgstr "Right harness"
+
+msgid "EDITOR_SOCKET_ENABLED"
+msgstr "Attachment enabled"
+
+msgid "EDITOR_SOCKET_POSITION"
+msgstr "Position on back"
+
+msgid "EDITOR_SOCKET_OFFSET_X"
+msgstr "Offset right"
+
+msgid "EDITOR_SOCKET_OFFSET_Y"
+msgstr "Offset up"
+
+msgid "EDITOR_SOCKET_OFFSET_Z"
+msgstr "Offset back"
+
+msgid "EDITOR_SOCKET_TILT"
+msgstr "Pitch"
+
+msgid "EDITOR_SOCKET_ROTATION"
+msgstr "Yaw"
+
+msgid "EDITOR_SOCKET_ROLL"
+msgstr "Roll"
+
+msgid "EDITOR_SOCKET_MIRROR"
+msgstr "Mirror harness to other side"
+
+msgid "EDITOR_FIT_MOVING"
+msgstr "Fit preview in motion. Pause & check now inspects the current pose."
+
+msgid "EDITOR_FIT_CLEAR"
+msgstr "No overlap"
+
+msgid "EDITOR_FIT_INCOMPLETE"
+msgstr "Check incomplete · Inspect attachment position or geometry"
+
+msgid "EDITOR_FIT_NO_SOCKETS"
+msgstr "No active attachments checked"
+
+msgid "EDITOR_REST_POSE"
+msgstr "Rest pose"
+
+msgid "EDITOR_STILL_POSE"
+msgstr "paused snapshot"
+
+msgid "EDITOR_SOCKET_RIDER"
+msgstr "Saddle / rider"
+
+msgid "EDITOR_BODY_TARGET"
+msgstr "Body"
+
+msgid "EDITOR_PART_TARGET"
+msgstr "Attached part"
+
+msgid "EDITOR_FIT_LEG_LENGTHS"
+msgstr "Apply segment lengths"
+
+msgid "EDITOR_FIT_ALREADY_CLEAR"
+msgstr "The selected fitting already has clearance in this pose."
+
+msgid "EDITOR_FIT_NO_PROPOSAL"
+msgstr "No clear placement found in the search range. Edit position, rotation or the highlighted part."
+
+msgid "EDITOR_FIT_BODY_HINT"
+msgstr "Edit back shape or attachment position; check the red fitting again."
+
+msgid "EDITOR_FIT_LEG_LIMIT"
+msgstr "Segment limit reached. Edit this pair's joint, size or leg attachment."
+
+msgid "EDITOR_FIT_LEG_UNSAFE"
+msgstr "No safe length adjustment found. Edit this pair's joint and leg attachment."
+
+msgid "EDITOR_FIT_LEG_APPLIED"
+msgstr "Segment lengths applied for this pair · Foot contact checked again."
+
+msgid "EDITOR_RIDER_DIMENSIONS"
+msgstr "Rider dimensions"
+
+msgid "EDITOR_RIDER_SCALE"
+msgstr "Rider size"
+
+msgid "EDITOR_RIDER_SPACING"
+msgstr "Leg spacing"
+
+msgid "EDITOR_RIDER_HEIGHT"
+msgstr "Seat height"
+
+msgid "EDITOR_SEAT_FIND"
+msgstr "Fit seat to back"
+
+msgid "EDITOR_SEAT_APPLY"
+msgstr "Apply seat proposal"
+
+msgid "EDITOR_REVIEW_START"
+msgstr "Check walking, slope & steps"
+
+msgid "EDITOR_SEAT_NO_PROPOSAL"
+msgstr "No supported seat found. Edit back shape, attachment tilt or highlighted parts."
+
+msgid "EDITOR_REVIEW_CANCEL"
+msgstr "Cancel check"
+
+msgid "EDITOR_REVIEW_INCOMPLETE"
+msgstr "Check cancelled or incomplete · No approval."
+
+msgid "EDITOR_REVIEW_FLAT"
+msgstr "Flat"
+
+msgid "EDITOR_REVIEW_SLOPE"
+msgstr "Slope"
+
+msgid "EDITOR_REVIEW_WALK"
+msgstr "Walk"
+
+msgid "EDITOR_REVIEW_RUN"
+msgstr "Run"
+
+msgid "EDITOR_REVIEW_BODY_HIT"
+msgstr "Body collision"
+
+msgid "EDITOR_REVIEW_PART_HIT"
+msgstr "Part collision"
+
+msgid "EDITOR_STATUS_CAMPAIGN_SAVE_FAILED"
+msgstr "Creature saved; the campaign could not be saved. Please try again."
+
+msgid "EDITOR_COURSE_STATUS"
+msgstr "%s · %d legs\n%s"
+
+msgid "EDITOR_FIT_COLLISIONS"
+msgstr "%d overlaps · marked red"
+
+msgid "EDITOR_FIT_REPORT"
+msgstr "%s\nFixed test rider size · %s · %d overstretched legs (>20%%)."
+
+msgid "EDITOR_FIT_FEET"
+msgstr "\n%d feet · Ground deviation %.3f"
+
+msgid "EDITOR_FIT_STRETCH"
+msgstr "Leg pair +%.0f%% · Edit joint"
+
+msgid "EDITOR_FIT_PROPOSAL"
+msgstr "Clearance proposal: back %.0f%% · Offset %.0f / %.0f / %.0f%%.\nChecked for the fixed fitting; inspect saddle support afterwards."
+
+msgid "EDITOR_SEAT_UNAVAILABLE"
+msgstr "\nSeat check unavailable: inspect attachment or rider dimensions."
+
+msgid "EDITOR_SEAT_DISABLED"
+msgstr "\nSaddle disabled."
+
+msgid "EDITOR_SEAT_SUPPORT"
+msgstr "\nSupport %d/9 · Largest gap %.1f%%"
+
+msgid "EDITOR_SEAT_ADJUST"
+msgstr " · Fit seat to back"
+
+msgid "EDITOR_SEAT_CONTACT"
+msgstr "\nCheck rider contact · Gap %.1f%%"
+
+msgid "EDITOR_SEAT_PROPOSAL"
+msgstr "Seat proposal: back %.0f%% · Height %+.1f%%\nLeg spacing %.0f%% · Seat height %.0f%%\n9/9 support points and clearance checked at rest."
+
+msgid "EDITOR_REVIEW_RUNNING"
+msgstr "Checking a copy · %d poses · %d/6 courses complete"
+
+msgid "EDITOR_REVIEW_DONE"
+msgstr "%d poses checked · No continuous motion approval."
+
+msgid "EDITOR_REVIEW_HITS"
+msgstr " · %d collision poses"
+
+msgid "EDITOR_REVIEW_SEE_HIT"
+msgstr " at %.2f s · View"
+
+msgid "EDITOR_REVIEW_NO_HITS"
+msgstr " · No collisions in %d poses"
+
+msgid "EDITOR_REVIEW_GROUND"
+msgstr "Ground contact ≥%d feet · Stretch up to +%.0f%%"
+
+msgid "EDITOR_REVIEW_POSE"
+msgstr "Collision pose at %.2f s · %s"
+
+msgid "EDITOR_FIT_TARGET"
+msgstr "%s ↔ %s"
+
+msgid "EDITOR_REVIEW_SCENARIO"
+msgstr "%s · %s"
+
+msgid "EDITOR_REVIEW_RESULT_HIT"
+msgstr "%s · %d collision poses"
+
+msgid "EDITOR_REVIEW_RESULT_CLEAR"
+msgstr "%s · No collisions in %d poses"
+
+msgid "EDITOR_REVIEW_RESULT_POSE"
+msgstr "%s at %.2f s · View"
+
+msgid "EDITOR_GAIT_TWO"
+msgstr "Biped"
+
+msgid "EDITOR_GAIT_FOUR"
+msgstr "Quadruped"
+
+msgid "EDITOR_GAIT_SIX"
+msgstr "Tripod gait"
+
+msgid "EDITOR_GAIT_FREE"
+msgstr "Free body plan"

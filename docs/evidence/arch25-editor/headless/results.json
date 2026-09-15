@@ -1,0 +1,105 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "71db7458a53fe8b611b46f05d785f3487e39fed6",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "editor_localization_test",
+    "creature_studio_test",
+    "creature_parts_studio_test",
+    "creature_joint_studio_test",
+    "creature_body_fit_test",
+    "creature_seat_fit_test",
+    "creature_library_ui_test",
+    "localization_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.83
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.92
+    },
+    {
+      "name": "editor_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.208,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "creature_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.232,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.914,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_joint_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.399,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_body_fit_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.834,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_seat_fit_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 15.436,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_library_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.518,
+      "contract": "blueprints"
+    },
+    {
+      "name": "localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.78,
+      "contract": "frontend_locale"
+    }
+  ]
+}

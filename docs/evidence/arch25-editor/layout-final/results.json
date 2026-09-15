@@ -1,0 +1,37 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "bdc922d14b617e10189b09b55ad6f3e41dc6a874",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "editor_localization_test",
+    "creature_parts_studio_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "editor_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.405,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.564,
+      "contract": "creature_body"
+    }
+  ]
+}
