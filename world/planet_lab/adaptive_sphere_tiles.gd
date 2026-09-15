@@ -86,7 +86,9 @@ func configure(descriptor: Dictionary) -> void:
 
 func stream_at(direction: Vector3, force: bool = false) -> void:
 	_requested_direction = direction
-	if force: lookahead_direction = direction
+	# A forced initial load clears the previous motion hint. Without a new hint,
+	# subsequent requests must follow their own position, not the spawn point.
+	if force: lookahead_direction = Vector3.ZERO
 	var focus: Vector3 = direction if force or lookahead_direction == Vector3.ZERO else lookahead_direction
 	if force or direction.distance_to(_last_query_direction) * float(surface.body.radius) >= REFOCUS_METERS \
 			or focus.distance_to(_focus_direction) * float(surface.body.radius) >= REFOCUS_METERS:
