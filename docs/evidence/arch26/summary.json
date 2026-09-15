@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "package": "ARCH-26.1",
+  "base_commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "code_commit": "072c701b7b12733156827177e40dd23cb811923b",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.776,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_growth_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.671,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_housing_recovery_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.983,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.478,
+      "contract": "village"
+    },
+    {
+      "name": "resource_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.883,
+      "contract": "village"
+    },
+    {
+      "name": "far_simulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.276,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "village_work_snapshot_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.19,
+      "contract": "village"
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 60.015,
+      "contract": "campaign"
+    },
+    {
+      "name": "settlement_collection_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.973,
+      "contract": "village"
+    }
+  ],
+  "new_test_checks": {
+    "parent_process": 86,
+    "fresh_process": 11
+  },
+  "all_selected_checks_passed": true,
+  "regression_provenance": "Eight existing regressions ran before the code commit against unchanged shared validators. Final new-contract test reran at the exact code commit. The earlier invalid receipt fixture and its corrected rerun are preserved.",
+  "limits": [
+    "Isolated contract, not a live SaveGameService participant",
+    "No playable settlement founding or regional transport",
+    "No physical navigation, graphical/native export or target-PC performance evidence"
+  ],
+  "shared_validator_blobs": {
+    "world/tribe/tribe_state.gd": "b9ade963ce62b9336e8c8ea1786f5515c50d42e4",
+    "world/tribe/village_economy.gd": "5da535444abe6a37520fcf800c13e09b90ae10c1",
+    "world/tribe/village_simulation.gd": "0877c66431fe1faa109abf9bd260e6894a8ca0e4"
+  }
+}
