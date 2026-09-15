@@ -7,6 +7,8 @@ Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue F
 - `main` beim Abruf: `d378ca0ecd7f03429a5150df6358e0646ec06689`, Merge von #92.
 - Neuer gemeinsamer Kandidat: `agent/integration-vegetation-nest-20260915`.
   Enthält die veröffentlichten PRs **#93–108** und die Ressourcen-/Anschlusskorrekturen.
+  Quell-/Werkzeugstand `4648ae9a0f3f3f418889da57e806cffba1f24c7d`; aktuell lokal
+  vorbereitet, GitHub-Veröffentlichung und Integrations-PR stehen noch aus.
   Exakte Eingangsköpfe: [Integrationsbericht](INTEGRATION_2026-09-15_RESOURCES.md).
 - Der Kandidat ist eine eigene Branchlieferung. `main` wird dadurch nicht umbenannt
   oder stillschweigend als bereits geprüft erklärt. Für neue Pakete den festen
@@ -31,6 +33,11 @@ Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue F
 **Enthaltener Code ist nicht automatisch vollständig abgenommen.** Die genaue
 lokale und CI-Prüfung steht in der [aktuellen Übergabe](INTEGRATION_2026-09-15_RESOURCES.md).
 Keine Ableitung von Ziel-PC-FPS aus Headless-/CPU-Ansichten.
+
+Lokaler Stand: 179 Godot-Tests mit dokumentierten Korrekturen/Nachläufen, 24
+Laufzeit-/Quellprüfungen und 101 Python-Tests erfolgreich (6 optional ausgelassen).
+Linux vollständig vor der letzten Flächenkorrektur und anschließend am neu
+exportierten PCK gezielt geprüft. Windows und native Grafikprüfung bleiben offen.
 
 ## Referenzhardware
 

@@ -30,6 +30,11 @@ Ausführbare Briefe: [`tools/workflow/packets.json`](../tools/workflow/packets.j
 ARCH-26 und ARCH-27 nacheinander bearbeiten; Speicheranschlüsse brauchen einen
 zugeordneten Integrationsbesitzer. Der Katalog ist keine Live-Belegung.
 
+Kleine Werkzeugfolgearbeit: `validate_godot.py` sollte Quellcommit/Tree sowohl vor
+als auch nach einem Lauf erfassen und zwischenzeitliche Änderungen sichtbar
+machen. Derzeit wird die Revision erst beim Schreiben von `results.json` gelesen;
+die aktuelle Integration dokumentiert den Start und ihre Deltas gesondert.
+
 ```sh
 python3 tools/work_packet.py list
 python3 tools/work_packet.py show ARCH-17-PUBLISH-TAIL

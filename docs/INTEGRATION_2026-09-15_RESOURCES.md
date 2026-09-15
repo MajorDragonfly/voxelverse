@@ -30,7 +30,8 @@ Quellen sind ausschließlich die veröffentlichten PR-Köpfe, keine ungesicherte
 #105 folgt auf #100. Alle übrigen Lieferungen basieren auf d378ca0. Einzelne PRs
 waren als Entwurf veröffentlicht; ihre Fachnachweise und Grenzen bleiben in den
 jeweiligen WORK-Dateien erhalten. #99 hatte im PR-Text noch einen laufenden
-Abschlusslauf. Seine Freigabe hängt vom gemeinsamen Siedlungs-/Speicherlauf ab.
+Abschlusslauf. Der gemeinsame Siedlungs-/Speicherlauf hat inzwischen bestanden:
+zwei Orte, getrennte Vorräte, laufende Fracht, Nah/Fern, Pause und frischer Prozess.
 
 ## Integrationskorrekturen
 
@@ -42,6 +43,10 @@ Abschlusslauf. Seine Freigabe hängt vom gemeinsamen Siedlungs-/Speicherlauf ab.
   Karten und Backup-CI erhalten alle unabhängigen Anschlüsse.
 - Alte Rüsselprüfung erwartete pauschal sieben Münder. Jetzt werden die zehn
   konkreten Mund-IDs geprüft und der separate Rüssel ausdrücklich ausgeschlossen.
+- Die Werkstattprüfung berücksichtigt alle 36 Rezepte einschließlich der drei
+  neuen Schnauzen. Der echte alte Eierkampagnen-Spielstand behält sämtliche
+  Entdeckungen, Punkte, Freischaltungen und Forschung; sein leeres Begegnungsbuch
+  wird ausdrücklich als Übergang von Inline-Schema 1 zu leerem Archiv-Schema 2 geprüft.
 - Globales Aufbewahrungsmanifest kannte nur `regions/blobs`. Das Labortierpaket
   verwendet `living_fauna/blobs`. Der Bericht führt beide Speicherbereiche nach
   Pfad; identische Hashes im falschen Verzeichnis ersetzen keinen fehlenden Blob.
@@ -67,6 +72,13 @@ um und behalten Laubmesh und Collider. Bisherige Dimensionen der Kollision und
 Nahrungs-/Regenerationsregeln bleiben erhalten. Der gemeinsame kleine Voxelbauer
 emittiert nur äußere Flächen und verwendet ein gemeinsames Material. Keine
 zusätzlichen Nodes pro Voxel und kein unbegrenzt wachsender globaler Meshcache.
+
+Bei der Abschlussprüfung wurde eine verkehrte Flächenreihenfolge im neuen
+Meshbauer korrigiert. Der Regressionstest vergleicht sie jetzt mit Godots eigenem
+`BoxMesh`; der vorherige Stand scheitert an dieser Prüfung, die Korrektur besteht.
+Godot erwartet vorne sichtbare Dreiecke im Uhrzeigersinn
+([Godot 4.6: ArrayMesh](https://docs.godotengine.org/en/4.6/classes/class_arraymesh.html)).
+Auch der Exportvertrag prüft die Ressourcen und ihren Neustart direkt aus der PCK.
 
 Das Nest hat einen versetzten Zweigrand, eine flache gepolsterte Mulde, kurze
 Faserstränge, Blätter in der Planetenpalette und einen niedrigeren Eingang. Die
@@ -96,11 +108,32 @@ erspart manuelles Nachlesen der Testzuordnung, ohne eine Testfreigabe vorzutäus
 
 ## Nachweise und Grenzen
 
-Aktuelle Ergebnisse und genaue Quellzuordnung liegen unter
-`docs/evidence/integration-resources-20260915/`. Der gemeinsame Kandidat benötigt
-volle Godot-, Produktions-/Reise-, Desktopexport- und Grafik-CI; frühere Fachläufe
-sind kein Gesamtnachweis. Der lokale X-Server kann keine Sockets öffnen. Die
-beigefügten CPU-Ansichten verwenden echte exportierte Godot-Meshdaten, sind jedoch
-keine Spielaufnahmen. Native Ressourcenansichten sind in beiden vorhandenen
-Renderer-Matrizen registriert. Hardware-FPS und subjektive Spiel-/Hörabnahme
-können erst auf dem Ziel-PC erfolgen.
+Quell-/Werkzeugstand: `4648ae9a0f3f3f418889da57e806cffba1f24c7d`. Danach folgen
+nur diese Übergabe und Nachweise. Alle Ergebnisse und Quelländerungen stehen in
+[der Abnahme](evidence/integration-resources-20260915/README.md).
+
+- Alle **179 registrierten Godot-Tests** ausgeführt, nach dokumentierten
+  Integrationskorrekturen erfolgreich; zusätzliche Nachprüfungen für die
+  Flächenkorrektur und den Ressourcen-Neustart aus dem Export.
+- **24** gemeinsame Quell-/Laufzeitprüfungen einschließlich Start,
+  Abbruchphasen und Streaming erfolgreich. Separater Import/Art-Check erfolgreich.
+- **101 Python-Tests** erfolgreich, **6 optionale Prüfungen** ausgelassen.
+  Labortier-Backup zusätzlich nativ mit 388 historischen Identitäten und
+  Wiederherstellung ohne Originalverzeichnis geprüft.
+- Voller nativer Linux-Lauf am `41deb8c`: **37 Prüfungen** einschließlich
+  Produktions-/Reiseketten erfolgreich. Nach der späteren reinen Flächenkorrektur
+  neuer Export am `4648ae9` mit **6 gezielten Nachprüfungen** für Start,
+  Kugelkampagne, Ressourcen/PCK/Neustart und Meshdaten. Der ältere volle Lauf
+  wird ausdrücklich nicht als Vollprüfung des späteren PCK ausgegeben.
+
+Die ursprünglichen Testprotokolle bleiben unverändert, einschließlich der beiden
+behobenen Integrationsfehler und der absichtlich roten Flächen-Regressionsprüfung.
+Der alte Quellrunner erfasst den Commit erst beim Berichtsschreiben; Startstand,
+zwischenzeitliche Änderungen und Nachläufe sind deshalb zusätzlich dokumentiert.
+
+Der Branch ist lokal vorbereitet; GitHub-Veröffentlichung und gemeinsame CI
+stehen noch aus. Native Windows-, Grafik- und Ziel-PC-Abnahme sind offen. Der
+lokale X-Server kann keine Sockets öffnen. Die beigefügten CPU-Ansichten verwenden
+echte exportierte Godot-Meshdaten, sind jedoch keine Spielaufnahmen. Ressourcenansichten
+sind in beiden vorhandenen Renderer-Matrizen registriert. Hardware-FPS und
+subjektive Spiel-/Hörabnahme können erst auf dem Ziel-PC erfolgen.

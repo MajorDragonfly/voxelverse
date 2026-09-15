@@ -1,0 +1,162 @@
+[
+  {
+    "number": 93,
+    "title": "ARCH-13-MANIFEST: Generationenmanifest und Aufbewahrungsplanung",
+    "head": "agent/arch13-global-manifest-2026-09-15",
+    "sha": "bc7ab45c4bd0a41bc67101d61200f5d3ac38e57f",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": false,
+    "updated_at": "2026-09-15T08:56:15Z"
+  },
+  {
+    "number": 94,
+    "title": "ARCH-17-PUBLISH: Terrain- und Kollisionspublikation aufteilen",
+    "head": "agent/arch-17-publish-2026-09-15",
+    "sha": "f67853c110b705d5e7b7ecb0af86e8959de1b7e6",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": true,
+    "updated_at": "2026-09-15T08:56:20Z"
+  },
+  {
+    "number": 95,
+    "title": "ARCH-25-TRIBE-UI: Dorfübersicht, Aufträge und Berufe DE/EN",
+    "head": "agent/arch25-tribe-ui-2026-09-15",
+    "sha": "c77be299bb3d3aa4cedb31e1873905a4395a25d5",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": false,
+    "updated_at": "2026-09-15T08:56:34Z"
+  },
+  {
+    "number": 96,
+    "title": "ARCH-24-TRUNK: Elefantenrüssel als eigenes Kopfmodul",
+    "head": "agent/arch24-trunk",
+    "sha": "3846da5d55b59d91b99b95c985a31bf952371049",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": false,
+    "updated_at": "2026-09-15T08:57:56Z"
+  },
+  {
+    "number": 97,
+    "title": "HUD: Vitalwerte an der Minimap und übersichtliche Scanansicht",
+    "head": "agent/hud-redesign-20260915",
+    "sha": "bb42e7485a380edd85b7da1ac1bd889549a84989",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": false,
+    "updated_at": "2026-09-15T09:23:43Z"
+  },
+  {
+    "number": 98,
+    "title": "ARCH-14-ENCOUNTERS: dauerhafte Tierbegegnungen speicherschonend archivieren",
+    "head": "agent/arch14-encounters-20260915",
+    "sha": "c0b49ecd17e981a5f01881830727fa9f580d333e",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": false,
+    "updated_at": "2026-09-15T09:31:37Z"
+  },
+  {
+    "number": 99,
+    "title": "ARCH-26: zweites produktives Siedlungslager mit Nah-/Fernarbeit",
+    "head": "agent/arch26-second-site-20260915",
+    "sha": "816fa73d8abdc6fd342486ad0950714dbabb07a5",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": true,
+    "updated_at": "2026-09-15T10:13:16Z"
+  },
+  {
+    "number": 100,
+    "title": "ARCH-24-ARTICULATION: bewegliche Kiefer und Krebsscheren",
+    "head": "agent/arch24-articulation-20260915",
+    "sha": "5d3d6321425f2072daafcb70b3b9c0b968252daf",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": true,
+    "updated_at": "2026-09-15T10:08:07Z"
+  },
+  {
+    "number": 101,
+    "title": "ARCH-30-SHIPYARD: modularer Schiffseditor für Expedition und Beiboot",
+    "head": "agent/arch30-shipyard-20260915",
+    "sha": "70e135a17053d11f7a57e516950b06f2211e5703",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": false,
+    "updated_at": "2026-09-15T10:40:09Z"
+  },
+  {
+    "number": 102,
+    "title": "ARCH-17-AUDIO: begrenzte Tierbeobachter und saubere Klangquellen",
+    "head": "agent/arch17-audio-budget-20260915",
+    "sha": "a89860bd1f96ae7c55c1949f74ec06fcca68e0f6",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": true,
+    "updated_at": "2026-09-15T10:16:49Z"
+  },
+  {
+    "number": 103,
+    "title": "ARCH-25-EDITOR: Kreaturenwerkstatt DE/EN und nutzbare kleine Layouts",
+    "head": "agent/arch25-editor-20260915",
+    "sha": "38c1687655e2edaf5c4ea436ab4000ef5aa251b6",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": true,
+    "updated_at": "2026-09-15T10:19:49Z"
+  },
+  {
+    "number": 104,
+    "title": "ARCH-02-DEVELOPED: Dorf, Tierhaltung und Planetenreisen messen",
+    "head": "agent/arch02-developed-route-20260915",
+    "sha": "58e31d5a29c1751d971b83d958ed5ddb35422d90",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": true,
+    "updated_at": "2026-09-15T10:21:09Z"
+  },
+  {
+    "number": 105,
+    "title": "ARCH-24-SNOUTS: Katzen-, Bären- und Schweineschnauzen",
+    "head": "agent/arch24-snouts-20260915",
+    "sha": "1442aa13a5681cbd1eb3e42ee218a1a2c85e47f6",
+    "base": "agent/arch24-articulation-20260915",
+    "base_sha": "5d3d6321425f2072daafcb70b3b9c0b968252daf",
+    "draft": true,
+    "updated_at": "2026-09-15T10:32:08Z"
+  },
+  {
+    "number": 106,
+    "title": "ARCH-14-LAB-POPULATION: Tierhistorie im Planetenlabor ohne 256er-Grenze",
+    "head": "agent/arch14-lab-population-20260915",
+    "sha": "5c675ec56dc3eabe2dfb3ee1022133792243f98b",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": false,
+    "updated_at": "2026-09-15T10:37:21Z"
+  },
+  {
+    "number": 107,
+    "title": "ARCH-29-CHECK-PLAN: gezielte Tests aus dem tatsächlichen Git-Diff",
+    "head": "agent/arch29-check-plan-20260915",
+    "sha": "0012e49a549b15523b87cd9314ec526181645457",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": true,
+    "updated_at": "2026-09-15T10:41:27Z"
+  },
+  {
+    "number": 108,
+    "title": "M10-FOLEY: weichere Schritte und differenzierte Wassergeräusche",
+    "head": "agent/m10-foley-20260915",
+    "sha": "51d4b95ed426569ec7810ae273aec6816a883a7e",
+    "base": "main",
+    "base_sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "draft": true,
+    "updated_at": "2026-09-15T10:41:51Z"
+  }
+]

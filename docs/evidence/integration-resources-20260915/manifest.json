@@ -1,0 +1,52 @@
+{
+  "created_at_utc": "2026-09-15T11:38:16.001654+00:00",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "branch": "agent/integration-vegetation-nest-20260915",
+  "source_at_full_run_start": {
+    "commit": "41deb8c27f028eec4d765035bf04b640d54cf1bd",
+    "tree": "19eee91f1372a87dfed76db312d0ee970f527e36",
+    "clean": true
+  },
+  "reviewed_code_and_tooling": {
+    "commit": "4648ae9a0f3f3f418889da57e806cffba1f24c7d",
+    "tree": "05afb484def6078486e2f06f60cf9f636aaf6c46"
+  },
+  "source_provenance_note": "The original source runner records revision at report completion. Full runs started at 41deb8c. Two old test expectations were corrected and rerun; packet ownership and a harvest comment changed. A later visual review found reversed resource triangles; their index order and the faulty winding assertion were corrected at d3d9ed6 using Godot BoxMesh as the reference. No vertices, colors, food state, colliders, IDs or simulation logic changed. Resource, home and spherical campaign tests were rerun. 4648ae9 adds release-pack restart support to that test. The original full Linux executable/PCK were built at 41deb8c; a new release at 4648ae9 passed a scoped native startup/campaign and exact-PCK geometry/restart acceptance. This is documented delta evidence, not a claim that the original full suite ran entirely at the final source tree. Raw results remain unchanged; the full source delta is attached.",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "cpu_count": 9,
+    "cpu_max": "800000 100000",
+    "memory_max_bytes": 21474836480,
+    "test_userdata": "Isolated temporary directories via existing validation_support; editor copied outside self-contained marker.",
+    "source_parallel_shards": 4
+  },
+  "results": {
+    "godot_tests_passed_after_corrections": 179,
+    "source_runtime_and_contract_checks": 24,
+    "native_linux_release_checks": 37,
+    "native_linux_visual_delta_checks": 6,
+    "python_tests_passed": 101,
+    "python_optional_skipped": 6,
+    "python_source": "2f551d0f3b73240e706e05a5c447376a878420fd",
+    "native_lab_backup": {
+      "passed": true,
+      "history": 388,
+      "active_max": 4,
+      "cache_max": 96,
+      "note": "Earlier targeted native run observed in session output; complete retention plan/verify, archive and restore with unavailable original directory. Not repeated solely to recreate stdout."
+    }
+  },
+  "limitations": [
+    "No local graphical X server; CPU views use actual Godot mesh arrays, not game screenshots.",
+    "Forward+ and Compatibility resource capture added to existing CI; not yet run for this integration.",
+    "No native Windows or target-PC visual/audio/FPS acceptance for this integration.",
+    "GitHub publication blocked by automatic approval review; no remote integration PR or main merge."
+  ],
+  "pre_winding_correction_release_archive": {
+    "name": "voxelverse-linux-x86_64.zip",
+    "bytes": 34906321,
+    "sha256": "59d5602c51a95dc600eb072caee367dcfc6402a0a8c5df1f3485e6a890dc5153"
+  },
+  "final_release_pack_sha256": "f21b4f71a90f2a48f83c11a1f63f8bcf2ec18708fb6394dc01c8a8615507d4e3"
+}

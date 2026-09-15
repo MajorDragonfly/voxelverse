@@ -1,0 +1,102 @@
+{
+  "source": {
+    "commit": "4648ae9a0f3f3f418889da57e806cffba1f24c7d",
+    "tracked_worktree_dirty": false
+  },
+  "scope": "resource_triangle_winding_delta_after_full_integration",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "checks": [
+    {
+      "name": "release_export",
+      "command": [
+        "/workspace/scratch/391d67669cd0/godot-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/workspace/scratch/d2f8e8a15ebb/voxelverse",
+        "--export-release",
+        "Linux Desktop",
+        "/workspace/scratch/d2f8e8a15ebb/qa/linux-resource-final/package/voxelverse.x86_64"
+      ],
+      "exit_code": 0,
+      "seconds": 5.501,
+      "passed": true
+    },
+    {
+      "name": "native_main",
+      "command": [
+        "/workspace/scratch/d2f8e8a15ebb/qa/linux-resource-final/package/voxelverse.x86_64",
+        "--headless",
+        "--verbose",
+        "--",
+        "--runtime-exit-frames",
+        "300"
+      ],
+      "exit_code": 0,
+      "seconds": 3.129,
+      "passed": true
+    },
+    {
+      "name": "native_spherical_campaign",
+      "command": [
+        "/workspace/scratch/d2f8e8a15ebb/qa/linux-resource-final/package/voxelverse.x86_64",
+        "--headless",
+        "--verbose",
+        "--",
+        "--sphere-smoke"
+      ],
+      "exit_code": 0,
+      "seconds": 54.85,
+      "passed": true
+    },
+    {
+      "name": "packaged_resource_visuals_and_restart",
+      "command": [
+        "/tmp/voxelverse-validation-editor-r3ljpgzt/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--main-pack",
+        "/workspace/scratch/d2f8e8a15ebb/qa/linux-resource-final/package/voxelverse.pck",
+        "--script",
+        "/tmp/resource-release-delta-0qb9gu5i/resource_visuals_test.gd",
+        "--",
+        "--resource-restart-pack",
+        "/workspace/scratch/d2f8e8a15ebb/qa/linux-resource-final/package/voxelverse.pck"
+      ],
+      "exit_code": 0,
+      "seconds": 3.061,
+      "passed": true
+    },
+    {
+      "name": "source_resource_visuals_and_restart",
+      "command": [
+        "/tmp/voxelverse-validation-editor-r3ljpgzt/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/workspace/scratch/d2f8e8a15ebb/voxelverse",
+        "--script",
+        "res://tests/resource_visuals_test.gd"
+      ],
+      "exit_code": 0,
+      "seconds": 3.98,
+      "passed": true
+    },
+    {
+      "name": "mesh_data_export",
+      "command": [
+        "/tmp/voxelverse-validation-editor-r3ljpgzt/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/workspace/scratch/d2f8e8a15ebb/voxelverse",
+        "--script",
+        "res://tools/review_resource_visuals.gd",
+        "--",
+        "--mesh-export",
+        "/workspace/scratch/d2f8e8a15ebb/qa/mesh-review-final"
+      ],
+      "exit_code": 0,
+      "seconds": 1.928,
+      "passed": true
+    }
+  ],
+  "pack_sha256": "f21b4f71a90f2a48f83c11a1f63f8bcf2ec18708fb6394dc01c8a8615507d4e3",
+  "passed": true
+}
