@@ -82,7 +82,8 @@
       "goal": "Vor weiteren Modellrevisionen die vorhandenen Katalogrevisionen eindeutig an gespeicherte Teile und deren Geometrieauflösung anschließen, mit Schutz unbekannter neuer Formen.",
       "write_groups": [
         "creature_editor",
-        "progression"
+        "blueprints",
+        "persistence"
       ],
       "files": [
         "creatures/catalog/creature_mouth_catalog.gd",
@@ -106,7 +107,7 @@
       "title": "Tierhaltungsdetails und Epochenhinweise auf DE/EN",
       "goal": "Die verbleibenden Tierhaltungs- und Epochenhinweise im Dorf auf bestehende Ergebniskennungen/Sprachdienst anschließen; laufende Auswahl und Fracht erhalten.",
       "write_groups": [
-        "creature_editor",
+        "village",
         "localization"
       ],
       "files": [
@@ -120,7 +121,8 @@
       ],
       "contracts": [
         "frontend_locale",
-        "creature_body"
+        "village",
+        "domestic_fauna"
       ],
       "acceptance": "Sprachwechsel bei belegter Legestelle/Milchtierplatz, langen Namen, 800×600 und 150 Prozent; keine wiederholten Spielbefehle oder Speicheraktionen.",
       "limits": "Kreatureneditor, Dorforders/Berufe, neues HUD und Siedlungen sind integriert. Nur bisher offene Tierhaltungs-/Epochenkopie bearbeiten."

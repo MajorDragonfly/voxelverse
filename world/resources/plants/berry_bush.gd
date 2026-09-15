@@ -101,8 +101,7 @@ func interact(actor: Node) -> void:
 func _harvest_berries() -> void:
 	is_depleted = true
 
-	# Der Busch wird mit demselben Seed erneut generiert,
-	# dieses Mal jedoch ohne Beeren.
+	# Nur die Früchte ausblenden; Form und Kollision bleiben erhalten.
 	_generate_bush()
 
 	print("Berries eaten. Bush is now empty.")
