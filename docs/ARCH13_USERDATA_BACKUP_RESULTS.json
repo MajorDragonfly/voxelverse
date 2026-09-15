@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "work": "ARCH-13 complete user-data archives",
+  "date": "2026-09-10",
+  "base_commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "branch": "agent/arch13-full-userdata-backups-2026-09-10",
+  "engine": "Godot 4.6.3 Stable",
+  "platform": "Linux headless",
+  "passed": true,
+  "checks": [
+    {"name": "whole_user_data_archive", "tests": 10, "passed": 10, "skipped": 0, "seconds": 14.532},
+    {"name": "existing_region_atlas_place_failure_paths", "tests": 22, "passed": 22, "skipped": 0, "seconds": 3.047},
+    {"name": "editor_import", "passed": true, "seconds": 8.045},
+    {"name": "source_contracts", "passed": true},
+    {"name": "art_sources", "passed": true}
+  ],
+  "native": {
+    "archive": {
+      "files": 9668,
+      "directories": 265,
+      "bytes": 7258902,
+      "entries": 9933,
+      "index_sha256": "92d4d38a6808d58605d3140eb6a86878e6622bc5f001210e31f27cba50e7b218"
+    },
+    "regions": {
+      "body_id": "body_e8acfa275a003d0ee3f712821c92bb03",
+      "campaign_id": "campaign_ee003c0ac7da4307d1ac9c055304fdee",
+      "checked_regions": 3600,
+      "passed": true,
+      "peak_cache": 96
+    },
+    "labs": {
+      "d2_roots": 8,
+      "galaxy_system": "vx1/u9007199254740993/g0/s0,0,0/t0",
+      "lab_tiles": 130,
+      "passed": true,
+      "template_count": 1
+    }
+  },
+  "limits": [
+    "No graphical acceptance or target-PC performance measurement",
+    "Stopped game required; no live snapshot guarantee",
+    "No global campaign manifest migration or blob deletion",
+    "Byte verification preserves unknown or damaged formats without claiming they are playable"
+  ]
+}

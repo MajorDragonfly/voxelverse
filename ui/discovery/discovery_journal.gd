@@ -7,6 +7,7 @@ const Research = preload("res://core/discovery/research_goals.gd")
 const Comparison = preload("res://ui/discovery/species_comparison.gd")
 const PREFS_PATH := "user://discovery_journal_ui.cfg"
 const PAGE_SIZE: int = 100
+const Catalog = preload("res://core/discovery/journal_catalog.gd")
 const Suitability = preload("res://ui/discovery/animal_suitability.gd")
 const OwnedReader = preload("res://ui/discovery/owned_animal_reader.gd")
 const OwnedRegister = preload("res://ui/discovery/owned_animal_register.gd")
@@ -74,6 +75,9 @@ var _thumbnail_cache: Dictionary = {}
 var _thumbnail_queue: Array[Dictionary] = []
 var _thumbnail_running: bool = false
 var _parts_grid: GridContainer
+var _catalog := Catalog.new()
+var _row_total: int = 0
+var _thumbnail_generation: int = 0
 
 
 func _ready() -> void:
@@ -175,6 +179,12 @@ func close_journal() -> void:
 	_preview.call("clear")
 	_thumbnail_queue.clear()
 	_thumbnail_preview.call("clear")
+	_thumbnail_generation += 1
+	_thumbnail_cache.clear()
+	_catalog.clear()
+	_state = {}
+	_rows.clear()
+	_row_total = 0
 	_comparison.call("clear")
 	_comparison_mode = false
 	_release_after_input_frame()
@@ -196,7 +206,15 @@ func _release_after_input_frame() -> void:
 func refresh() -> void:
 	if _progression == null:
 		return
-	_state = _progression.call("export_state")
+	_catalog.bind(_progression, Suitability.read.bind(_animal_contract))
+	_state = _catalog.state
+	_thumbnail_generation += 1
+	_thumbnail_cache.clear()
+	# Keep the selected discovery visible when a new observation changes sort order.
+	if _paged_discoveries():
+		_discovery_page()
+		var selected_page: int = _catalog.page_for(_selected_key)
+		if selected_page >= 0: _page = selected_page
 	_refresh_summary()
 	_apply_filters()
 
@@ -451,18 +469,17 @@ func _layout() -> void:
 		_hud.size = Vector2(minf(456.0, extent.x - 24), hud_height)
 
 func _species_rows(query: String, role: String) -> Array[Dictionary]:
-	var ecological_role := "" if role.begins_with("domestic:") else role
-	var result: Array[Dictionary] = []
-	for row in Records.species_rows(_state, "", ecological_role):
-		var profile: Dictionary = Suitability.read(row, _animal_contract)
-		if role.begins_with("domestic:") and role.trim_prefix("domestic:") not in profile.get("roles", []):
-			continue
-		var text := "%s %s %s" % [row.get("name", ""), row.get("location", ""), row.get("role_label", "")]
-		for ability in profile.get("roles", []):
-			text += " " + Suitability.ROLES[ability]
-		if query.strip_edges().is_empty() or text.to_lower().contains(query.strip_edges().to_lower()):
-			result.append(row)
-	return result
+	return _catalog.page("species", query, role, _page, Suitability.ROLES).rows
+
+func _paged_discoveries() -> bool:
+	return _tabs != null and _tabs.current_tab in [0, 2]
+
+func _discovery_page() -> Dictionary:
+	var role: String = str(_filter.get_item_metadata(_filter.selected)) if _filter.selected >= 0 else ""
+	return _catalog.page("species" if _tabs.current_tab == 0 else "regions", _search.text, role if _tabs.current_tab == 0 else "", _page, Suitability.ROLES)
+
+func _entry_index(index: int) -> int:
+	return index if _paged_discoveries() else _page * PAGE_SIZE + index
 
 
 func _build_hud() -> void:
@@ -543,6 +560,8 @@ func _populate_filter() -> void:
 func _apply_filters() -> void:
 	if _tabs == null:
 		return
+	_thumbnail_generation += 1
+	_thumbnail_queue.clear()
 	_title.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED if _tabs.current_tab == ANIMALS_TAB else Node.AUTO_TRANSLATE_MODE_INHERIT
 	_description.auto_translate_mode = _title.auto_translate_mode
 	var guide_mode: bool = _tabs.current_tab == 3
@@ -570,19 +589,24 @@ func _apply_filters() -> void:
 	var filter_value: String = str(_filter.get_item_metadata(_filter.selected)) if _filter.selected >= 0 else ""
 	var animals: Dictionary = {}
 	match _tabs.current_tab:
-		0: _rows = _species_rows(_search.text, filter_value)
+		0, 2:
+			var result: Dictionary = _discovery_page()
+			_rows = result.rows
+			_page = result.page
+			_row_total = result.total
 		1: _rows = Records.part_rows(_state, _search.text, filter_value, _status.selected)
-		2: _rows = Records.region_rows(_state, _search.text)
 		4: _rows = Research.rows(_state, _search.text)
 		ANIMALS_TAB:
 			animals = _owned_reader.read(_search.text, filter_value)
 			_animals_result_code = animals.code
 			_rows.assign(animals["rows"])
-	_page = clampi(_page, 0, maxi((_rows.size() - 1) / PAGE_SIZE, 0))
+	if not _paged_discoveries():
+		_row_total = _rows.size()
+		_page = clampi(_page, 0, maxi((_row_total - 1) / PAGE_SIZE, 0))
 	_list.clear()
-	_thumbnail_queue.clear()
 	var selected_index: int = 0
-	for index in range(_page * PAGE_SIZE, mini((_page + 1) * PAGE_SIZE, _rows.size())):
+	var start: int = 0 if _paged_discoveries() else _page * PAGE_SIZE
+	for index in range(start, mini(start + PAGE_SIZE, _rows.size())):
 		var row: Dictionary = _rows[index]
 		var label: String = str(row.get("name", "Unbekannte Art"))
 		if _tabs.current_tab == 1:
@@ -602,7 +626,7 @@ func _apply_filters() -> void:
 			selected_index = _list.item_count - 1
 	_refresh_page_label()
 	_previous_page.disabled = _page == 0
-	_next_page.disabled = (_page + 1) * PAGE_SIZE >= _rows.size()
+	_next_page.disabled = (_page + 1) * PAGE_SIZE >= _row_total
 	if _rows.is_empty():
 		_selected_key = ""
 		if _tabs.current_tab == ANIMALS_TAB:
@@ -621,10 +645,15 @@ func _apply_filters() -> void:
 
 
 func _select_entry(index: int) -> void:
-	var absolute: int = _page * PAGE_SIZE + index
+	var absolute: int = _entry_index(index)
 	if absolute < 0 or absolute >= _rows.size():
 		return
 	var row: Dictionary = _rows[absolute]
+	if _tabs.current_tab == 0:
+		row = _catalog.species_detail(str(row.key))
+		if row.is_empty(): refresh(); return
+		# Retire part tiles from the previous selection, retaining page thumbnails.
+		_thumbnail_queue.assign(_thumbnail_queue.filter(func(job: Dictionary) -> bool: return int(job.tab) == 0))
 	_selected_key = str(row.get("key", row.get("id", "")))
 	_detail_scroll.scroll_vertical = 0
 	_title.text = str(row.get("name", "Unbekannte Art"))
@@ -922,15 +951,17 @@ func _render_thumbnails() -> void:
 	_thumbnail_running = true
 	while not _thumbnail_queue.is_empty() and is_open:
 		var job: Dictionary = _thumbnail_queue.pop_front()
+		var generation: int = _thumbnail_generation
 		var row: Dictionary = job["row"]
 		if int(job["tab"]) == 1:
 			_thumbnail_preview.call("show_part", str(row["id"]), bool(row["unlocked"]))
 		else:
-			var blueprint: Dictionary = Records.visual_for(row)
+			var blueprint: Dictionary = Records.visual_for(_catalog.species_detail(str(row.get("key", ""))))
 			if blueprint.is_empty(): continue
 			_thumbnail_preview.call("show_blueprint", blueprint)
 		await RenderingServer.frame_post_draw
 		if not is_inside_tree() or not is_open: break
+		if generation != _thumbnail_generation: continue
 		var picture: Image = _thumbnail_preview.viewport.get_texture().get_image()
 		var texture := ImageTexture.create_from_image(picture)
 		if _thumbnail_cache.size() >= 192: _thumbnail_cache.clear()
@@ -989,7 +1020,7 @@ func _refresh_summary() -> void:
 
 func _refresh_page_label() -> void:
 	_page_label.text = AnimalText.format_text("OWNED_JOURNAL_PAGE", {
-		"count": _rows.size(), "page": _page + 1, "pages": maxi(ceili(float(_rows.size()) / PAGE_SIZE), 1)})
+		"count": _row_total, "page": _page + 1, "pages": maxi(ceili(float(_row_total) / PAGE_SIZE), 1)})
 
 func _refresh_animal_language() -> void:
 	_refresh_summary()

@@ -86,6 +86,16 @@ static func grow(data: Dictionary, delta: float) -> bool:
 	return changed
 
 static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> String:
+	return _validate(value, body, campaign)
+
+## ARCH-26 instance contract only; the live legacy save still uses validate().
+## The collection validator owns cross-settlement identity/ownership checks.
+static func validate_settlement(value: Variant, body: Dictionary, campaign: Dictionary, settlement_id: String) -> String:
+	if not Economy.text_id(settlement_id): return "Ungültige Siedlungskennung."
+	return _validate(value, body, campaign, settlement_id)
+
+static func _validate(value: Variant, body: Dictionary, campaign: Dictionary, settlement_id: String = "") -> String:
+	var instanced: bool = not settlement_id.is_empty()
 	if not value is Dictionary or not integer(value.get("schema"), 1, SCHEMA):
 		return "Nicht unterstützter Stammesstand."
 	if body.get("surface_mode") == Home.Cube.MODE and value.schema != SCHEMA: return "Radiales Dorf benötigt Stammesformat 6."
@@ -103,20 +113,23 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 	var home: Variant = body.get("home_group")
 	if not Home.validate(home, str(body.get("id", "")), str(campaign.get("player_species_id", ""))).is_empty():
 		return "Dem Stamm fehlt seine ursprüngliche Nestgruppe."
-	if value.get("home_group_id") != home["id"] or value.get("id") != Ids.scoped("tribe", home["id"], "settled") or value.get("body_id") != body["id"] or value.get("species_id") != campaign["player_species_id"] or value.get("faction_id") != campaign["player_faction_id"]:
+	var origin_id: String = Ids.scoped("tribe", home["id"], "settled")
+	if value.get("home_group_id") != home["id"] or value.get("id") != (settlement_id if instanced else origin_id) or value.get("body_id") != body["id"] or value.get("species_id") != campaign["player_species_id"] or value.get("faction_id") != campaign["player_faction_id"]:
 		return "Stamm und Herkunft stimmen nicht überein."
-	if value.get("anchor") != home["anchor"] or not point(value.get("anchor")):
+	if (not instanced and value.get("anchor") != home["anchor"]) or not Home.place_valid(value.get("anchor"), str(home.surface_mode), str(body.id)):
 		return "Ungültiger Dorfplatz."
 	var members: Variant = value.get("members")
-	if not members is Array or members.size() < 3 or members.size() > (Housing.MAX_RESIDENTS if growing else 3):
+	if not members is Array or members.size() < (1 if instanced else 3) or members.size() > (Housing.MAX_RESIDENTS if growing else 3):
 		return "Der Stamm benötigt seine drei ursprünglichen Mitglieder."
 	var ids: Array = [campaign["player_object_id"], home["members"][0]["id"], home["members"][1]["id"]]
 	for i in range(3, members.size()):
 		ids.append(Housing.resident_id(value, i))
+	var seen: Dictionary = {}
 	for i in range(members.size()):
 		var member: Variant = members[i]
-		if not member is Dictionary or member.get("id") != ids[i] or not member.get("name") is String or member["name"].is_empty() or member["name"].length() > 32:
+		if not member is Dictionary or not Economy.text_id(member.get("id")) or seen.has(member.id) or (not instanced and member.id != ids[i]) or not member.get("name") is String or member["name"].is_empty() or member["name"].length() > 32:
 			return "Ungültiges Stammesmitglied."
+		seen[member.id] = true
 		if not local_point(member.get("position"), value["anchor"]) or not local_point(member.get("destination"), value["anchor"]) or member.get("order") not in (ORDERS + Economy.ORDERS if expanded else ORDERS) or member.get("stage") not in (["outbound", "return", "meal", "drink"] if expanded else ["outbound", "return", "meal"]) or member.get("cargo") not in ([""] + Economy.RESOURCES if expanded else ["", "wood", "stone", "food"]) or not number(member.get("work"), 0, 4) or not number(member.get("hunger"), 0, 100):
 			return "Ungültiger Auftrag oder Zustand eines Bewohners."
 		if not growing and member["order"] == "tent":
@@ -131,7 +144,8 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 		return "Ungültige Dorfvorräte."
 	for kind: String in KINDS:
 		var deposit: Variant = value["deposits"].get(kind)
-		if not deposit is Dictionary or deposit.get("id") != Ids.scoped("resource", home["id"], kind) or not local_point(deposit.get("position"), value["anchor"]) or not integer(deposit.get("remaining"), 0, 48) or not integer(value["stock"].get(kind), 0, 48):
+		var deposit_owner: String = settlement_id if instanced and settlement_id != origin_id else str(home.id)
+		if not deposit is Dictionary or deposit.get("id") != Ids.scoped("resource", deposit_owner, kind) or not local_point(deposit.get("position"), value["anchor"]) or not integer(deposit.get("remaining"), 0, 48) or not integer(value["stock"].get(kind), 0, 48):
 			return "Ungültiger Materialbestand."
 		var carried: int = 0
 		for member: Dictionary in members:
@@ -165,7 +179,8 @@ static func validate(value: Variant, body: Dictionary, campaign: Dictionary) -> 
 			if int(value["tools"]) != 1 or not local_point(project.get("position"), value["anchor"]) or value.get("economy", {}).get("stations", {}).has(project["kind"]):
 				return "Ungültige Arbeitsplatzbaustelle."
 	if expanded:
-		var problem: String = Economy.validate(value)
+		var resource_owner: String = settlement_id if instanced and settlement_id != origin_id else str(home.id)
+		var problem: String = Economy.validate(value, resource_owner)
 		if not problem.is_empty():
 			return problem
 	if growing:

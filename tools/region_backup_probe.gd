@@ -33,7 +33,10 @@ func _run() -> void:
 		var peak_cache: int = 0
 		var slot: String = ""
 		for filename in DirAccess.get_files_at("user://saves"):
-			if filename.ends_with(".json"): slot = "user://saves/" + filename
+			# Migration originals are retained alongside slots but are wrappers,
+			# not a campaign snapshot that this reader should choose as active.
+			if filename.ends_with(".json") and not filename.contains(".json."):
+				slot = "user://saves/" + filename
 		_expect(not slot.is_empty(), "Restored slot missing")
 		var paths: Array[String] = [slot, slot + ".bak"]
 		paths.append_array(History.paths(slot))

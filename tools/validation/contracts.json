@@ -35,14 +35,15 @@
     {
       "id": "regions_simulation",
       "title": "Regionsspeicher, Fernarbeit und Budgets",
-      "work": "M1h / ARCH-13–18",
+      "work": "M1h / ARCH-13–18; ARCH-27 regional transport contract",
       "tests": [
         "campaign_scaling_test",
         "far_simulation_test",
         "performance_measurement_test",
         "region_store_test",
-        "village_navigation_budget_test",
-        "population_register_test"
+        "population_register_test",
+        "regional_transport_test",
+        "village_navigation_budget_test"
       ]
     },
     {
@@ -68,8 +69,9 @@
         "surface_population_budget_test",
         "surface_scale_contract_test",
         "surface_support_test",
-        "terrain_transition_test",
-        "radial_step_test"
+        "radial_step_test",
+        "terrain_lookahead_test",
+        "terrain_transition_test"
       ]
     },
     {
@@ -195,6 +197,7 @@
       "work": "M6/D3 / ARCH-10,11,20–22",
       "tests": [
         "resource_production_contract_test",
+        "settlement_collection_test",
         "tribal_age_economy_contract_test",
         "tribal_age_economy_test",
         "tribal_age_growth_contract_test",
@@ -233,6 +236,7 @@
         "discovery_journal_test",
         "domestic_fauna_journal_test",
         "interface_task7_test",
+        "journal_paging_test",
         "living_planet_map_test",
         "minimap_test",
         "owned_animal_localization_test",
@@ -343,6 +347,15 @@
       ],
       "scope": "8.205 Kacheln und 3.105 Orte mit begrenzten Caches, Migration, vollständigen Seiten, offenem Puffer, Schreibfehlern und frischem SaveGameService-Prozess. Sprachwechsel auf der vorhandenen Kartensitzung.",
       "limits": "Kein räumlicher Vollindex und kein Ziel-PC-Nachweis; Backup-/Archivprüfungen laufen zusätzlich im Python-Gate."
+    },
+    {
+      "id": "settlement_instances",
+      "scope": "ARCH-26.1: isolated settlement contract and lossless legacy copy; two instances use the existing work core.",
+      "status": "partial",
+      "tests": [
+        "settlement_collection_test"
+      ],
+      "limits": "No live SaveGameService registration, founding UI, physical navigation certification, regional paging or transports. Fixture validates model work, held cargo and fresh process only."
     }
   ]
 }

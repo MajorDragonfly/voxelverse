@@ -161,7 +161,12 @@ func _run() -> void:
 		_expect(FileAccess.get_file_as_string(campaign_save) == source_bytes, "Campaign copy modified its source")
 		_expect(saves.load_now(campaign_save), "Cannot return from the copied campaign")
 		await _until(func(): return tribe._active and not tribe.navigation.pending and d2.is_active(), 1200)
-	var proof: Dictionary = {"id": animal_id, "identity": source_identity, "body": source_body, "members": members_before,
+	# Compare against the frozen body in the committed save. Store the expected
+	# runtime encoding as opaque text so the precise proof writer cannot change
+	# its number representation independently of schema-1 frozen anatomy.
+	var saved_body: Dictionary = Registry.active(source_save.game_state)[AnimalSave.FIELD].sources[animal_id].blueprint
+	var body_json: String = JSON.stringify(Contract.encode(Contract.decode(saved_body)))
+	var proof: Dictionary = {"id": animal_id, "identity": source_identity, "body_json": body_json, "members": members_before,
 		"record": d2.controller.record(animal_id), "food": tribe.village()["stock"]["food"]}
 	_expect(Atomic.write(proof_path, proof, false) == OK, "Cannot save restart assertions")
 	var output: Array = []
@@ -194,7 +199,7 @@ func _restart() -> void:
 	_expect(a["object_id"] == proof["id"] and a["species_id"] == proof["identity"]["species_id"] and a["owner_faction_id"] == state.campaign.data["player_faction_id"] and a["order"] == "home", "Restart lost identity, owner or command")
 	_expect(tribe.village()["stock"]["food"] == proof["food"] and a["trust"] == 100, "Restart changed food or trust")
 	_expect(AnimalState.vector(a["position"]).distance_to(AnimalState.vector(proof["record"]["position"])) < 0.15, "Restart lost animal position")
-	_expect(JSON.stringify(Contract.encode(d2.animals[animal_id].blueprint)) == JSON.stringify(proof["body"]), "Restart regenerated animal body")
+	_expect(JSON.stringify(Contract.encode(d2.animals[animal_id].blueprint)) == proof["body_json"], "Restart regenerated animal body")
 	_expect(tribe.village()["members"].map(func(m: Dictionary): return m["id"]) == proof["members"], "Restart changed citizens")
 	tribe.select_member(proof["members"][0])
 	var previous: Dictionary = d2.controller.record(animal_id)

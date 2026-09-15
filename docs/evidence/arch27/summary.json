@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "package": "ARCH-27 regional route/transport contract, first model slice",
+  "base_commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "code_commit": "880bc5ac4df1fb84bde2aae729a9168dc50172cf",
+  "execution": "Godot headless source project, isolated userdata",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "tested_worktree_note": "Executed on working tree derived from base_commit, then committed unchanged as code_commit. Final implementation/test/registry hashes below match that commit. Initial editor import predates the final small zero-leg-return adjustment, which was compiled/executed by the final test run.",
+  "sha256": {
+    "world/tribe/transport/regional_routes.gd": "f3ad4d8663ac759740deb6c36ffe60c1ca015a96898f8bf015d3e8667db36cbe",
+    "world/tribe/transport/regional_transport.gd": "ce6b6ea1a5cd2578db4d0ef42cd1817a37122d1ee23e14fc8751b0c1e8d4be78",
+    "tests/regional_transport_test.gd": "96ad7712b6bd7ced72c66a782dbbbb499efd356bbdca86046c8760a5db0c2a3c",
+    "tools/validation/contracts.json": "0b00123f867038b5e543ae50dbd439db6d3c8b21ac8185b94ce5cc7548847c07"
+  },
+  "editor_and_asset_checks": [
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.914
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.022
+    }
+  ],
+  "final_checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "regional_transport_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.181,
+      "contract": "regions_simulation"
+    }
+  ],
+  "parent_assertions": 224,
+  "fresh_process_runs": 2,
+  "assertions_per_fresh_process": 5,
+  "scope_limits": [
+    "No productive settlement, stock, carrier or save-participant binding",
+    "Fixture inventory/atomic writer boundary, not two playable settlements",
+    "Gateway-only near/far handoff; changed route recertification has no automatic reroute",
+    "No target-PC, graphical, native export or FPS acceptance"
+  ]
+}

@@ -175,7 +175,8 @@ static func has_unsupported_contract(value: Variant) -> bool:
 			if Batch.unsupported(batch): return true
 	return false
 
-static func validate(data: Dictionary) -> String:
+static func validate(data: Dictionary, resource_owner: String = "") -> String:
+	if resource_owner.is_empty(): resource_owner = str(data.get("home_group_id", ""))
 	var e: Variant = data.get("economy")
 	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != SCHEMA):
 		return "Ungültige Dorfwirtschaft."
@@ -197,7 +198,7 @@ static func validate(data: Dictionary) -> String:
 		if not number(e["clocks"].get(kind), 0, INTERVALS[kind]) or not integer(e["produced"].get(kind), 0, 1000000000):
 			return "Ungültiger Rohstofftakt."
 		var deposit: Variant = data["deposits"].get(kind)
-		if not deposit is Dictionary or deposit.get("id") != Ids.scoped("resource", data["home_group_id"], kind) or not local_point(deposit.get("position"), data["anchor"]) or not integer(deposit.get("remaining"), 0, 48):
+		if not deposit is Dictionary or deposit.get("id") != Ids.scoped("resource", resource_owner, kind) or not local_point(deposit.get("position"), data["anchor"]) or not integer(deposit.get("remaining"), 0, 48):
 			return "Ungültiger Rohstoffplatz."
 		if int(deposit["remaining"]) + reserve(data, kind) > (48 if kind in ["wood", "stone"] else 0) + int(e["produced"][kind]):
 			return "Rohstoff wurde vervielfacht."
