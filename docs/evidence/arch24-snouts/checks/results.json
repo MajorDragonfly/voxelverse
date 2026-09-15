@@ -1,0 +1,69 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "4c4e2d5c3c0c78bc0dffa4d50b24d684c95545b6",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_snout_family_test",
+    "creature_mouth_provider_test",
+    "creature_part_articulation_test",
+    "community_blueprint_package_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.834
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.769
+    },
+    {
+      "name": "creature_snout_family_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 0.266,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_mouth_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.048,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_part_articulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.03,
+      "contract": "creature_body"
+    },
+    {
+      "name": "community_blueprint_package_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.136,
+      "contract": "blueprints"
+    }
+  ]
+}

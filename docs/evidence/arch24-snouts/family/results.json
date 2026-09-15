@@ -1,0 +1,28 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "4c4e2d5c3c0c78bc0dffa4d50b24d684c95545b6",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_snout_family_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "creature_snout_family_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.26,
+      "contract": "creature_body"
+    }
+  ]
+}
