@@ -55,3 +55,27 @@ kurze Signale mit nullwertigen Endpunkten, Spitzenpegel höchstens 0,42. Der ein
 periodische Loop hat Spitzenpegel 0,22; seine Schleifengrenze wird geprüft. Der
 Scan-Abschluss verwendet die vorhandene Entdeckungsdatei. Gesamtumfang nach diesem
 Paket: 87 WAV-Dateien und drei Ogg-Musikstücke.
+
+## M10-FOLEY, 15. September 2026
+
+`tools/audio/generate_foley.py` überarbeitet 23 bestehende WAV-Dateien:
+18 Schrittvarianten, Landung, Wassereintritt, Schwimmzug und zwei Wasserambientes.
+Sechs neue Dateien liefern Verlassen des Wassers, Ein-/Auftauchen und drei
+Blasenbewegungen. Damit enthält das Audiopaket 93 WAV-Dateien plus drei Musikstücke.
+Die vollständige Basisneugenerierung ruft denselben Foley-Generator auf.
+
+Eigene Schichtung aus bandbegrenzten Kontakt-/Reibgeräuschen, versetzten kurzen
+Materialereignissen und gedämpften Blasenresonanzen; keine fremden Samples,
+Aufnahmen, Sprach-/Atemsimulation oder Stimmenmodelle. Einzelne Assetnamen besitzen
+unabhängige feste Zufallsfolgen. PCM-Erzeugung mit NumPy 2.3.5, 22.050 Hz, 16 Bit;
+räumliche Effekte und Ufer mono, Unterwasserbett stereo. Vorhandene Dateipfade und
+Ereignis-IDs bleiben erhalten. Neu: `water_exit`, `water_dive`, `water_surface`,
+`underwater_bubbles` (drei Varianten).
+
+`foley-manifest.json` enthält Revision, Inventar, Signalspitzen und SHA-256 je Datei.
+`tools/audio/check_foley.py` prüft Inventar, Pegel, Endpunkte, Loopgrenzen, Kanäle,
+Variantenunterschiede und den begrenzten anfänglichen Energieanteil der Schritte.
+Hörqualität bleibt eine gesonderte Abnahme; die Zahlen belegen keine subjektive
+Natürlichkeit. Die Hörprobe unter `docs/evidence/m10-foley/` enthält Original- und
+Neufassungen aus diesem Repository bei gleichem Abspielpegel. Sie ist mit FFmpeg
+als Vorbis codiert, kein Mitschnitt des Spiels.

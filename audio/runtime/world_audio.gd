@@ -2,6 +2,7 @@ extends Node
 const Space = preload("res://world/surface/gameplay_space.gd")
 const ShoreSearch = preload("res://audio/runtime/shore_search.gd")
 const Immersion = preload("res://world/surface/water_immersion.gd")
+const WaterFoley = preload("res://audio/runtime/water_foley.gd")
 ## Read-only adapter for the existing player and generator. No movement changes.
 ## The spherical campaign supplies Water.audio_sample; explicit diagnostic
 ## scenes may supply sample_provider(position). A radial listener never falls
@@ -31,6 +32,7 @@ var _shore_job: RefCounted
 var _source_generation: int = 0
 var _bound_scope: Array = []
 var _on_surface: bool = true
+var _water_foley := WaterFoley.new()
 var last_sample_queries: int = 0
 var peak_sample_queries: int = 0
 var last_shore_queries: int = 0
@@ -77,6 +79,7 @@ func _world_changed(_seed: int) -> void:
 
 
 func reset_tracking() -> void:
+	_water_foley.reset()
 	_source_generation += 1
 	_cancel_shore_search()
 	_bound_scope.clear()
@@ -99,6 +102,8 @@ func reset_tracking() -> void:
 func _physics_process(delta: float) -> void:
 	last_sample_queries = 0
 	last_shore_queries = 0
+	if get_tree().paused:
+		return
 	var started: int = Time.get_ticks_usec()
 	_track_world(delta)
 	peak_sample_queries = maxi(peak_sample_queries, last_sample_queries)
@@ -107,6 +112,9 @@ func _physics_process(delta: float) -> void:
 
 func _track_world(delta: float) -> void:
 	if not automatic_tracking:
+		return
+	if not is_instance_valid(_player) and not _bound_scope.is_empty():
+		reset_tracking() # A freed source must not retain wet ambience until rebinding.
 		return
 	# Scene changes detach the old player before freeing it. A valid cached
 	# reference cannot be used for transforms or physics in that interval.
@@ -162,20 +170,27 @@ func _track_world(delta: float) -> void:
 	var wet := bool(_sample.get("water_present", false)) and _depth(_sample, position) > 0.04
 	var depth := _depth(_sample, position) if wet else 0.0
 	var alive: bool = _player.get("is_dead") != true
-	if alive and _settle <= 0.0:
+	var water_cue: Dictionary = _water_foley.advance(delta, _underwater, motion.length(), alive and _on_surface and _settle <= 0.0)
+	if not water_cue.is_empty():
+		_audio.play_world(water_cue.event, _listener_position(), water_cue.gain, water_cue.pitch, _player.get_instance_id(), 0)
+	if alive and _on_surface and _settle <= 0.0:
 		if wet != _last_wet:
-			_audio.play_world(&"splash", position, -5.0, 1.0, _player.get_instance_id())
+			# Eye/foot crossings can happen together; one transition is sufficient.
+			if water_cue.is_empty():
+				_audio.play_world(&"splash" if wet else &"water_exit", position, -6.0, 1.0, _player.get_instance_id())
 		elif _last_grounded and not grounded and vertical_speed > 1.0:
 			_audio.play_world(&"jump", position, -6.0, 1.0, _player.get_instance_id())
 		elif not _last_grounded and grounded and _last_vertical_speed < -1.5:
 			_audio.play_world(&"land", position, clampf(absf(_last_vertical_speed) - 12.0, -9.0, 0.0), 1.0, _player.get_instance_id())
 			_distance = 0.0
-		if horizontal > 0.002 and (grounded or wet):
-			_distance += horizontal
-			var stride := 1.65 if depth > 0.8 else 1.35
+		var swimming: bool = _swimming(depth)
+		var movement: float = motion.length() if swimming else horizontal
+		if movement > 0.002 and (grounded or wet):
+			_distance += movement
+			var stride := 1.65 if swimming else 1.35
 			if _distance >= stride:
 				_distance = fmod(_distance, stride)
-				var event: StringName = &"swim" if depth > 0.8 else StringName("step_" + _surface(wet))
+				var event: StringName = &"swim" if swimming else StringName("step_" + _surface(wet))
 				_audio.play_world(event, position, -3.0, randf_range(0.94, 1.06), _player.get_instance_id())
 		else:
 			_distance = 0.0
@@ -186,12 +201,19 @@ func _track_world(delta: float) -> void:
 
 
 func _reset_motion() -> void:
+	_water_foley.reset()
 	_last_position = _player.global_position
 	_last_grounded = _player.is_on_floor()
 	_last_vertical_speed = 0.0
 	_last_wet = false
 	_distance = 0.0
 	_settle = 0.4
+
+
+func _swimming(depth: float) -> bool:
+	# Use the real movement controller's state, with legacy diagnostic fallback.
+	var declared: Variant = _player.get("is_swimming")
+	return declared if declared is bool else depth > 0.8
 
 
 func _surface(wet: bool) -> String:
