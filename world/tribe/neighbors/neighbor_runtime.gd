@@ -1,4 +1,5 @@
 extends Node3D
+const Settlements = preload("res://world/tribe/settlement_collection.gd")
 const Model = preload("res://world/tribe/neighbors/neighbor_state.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
@@ -23,7 +24,7 @@ func clear_runtime() -> void:
 	last_result.clear()
 
 func data() -> Dictionary:
-	return controller.village_body().get("tribal_neighbor", {})
+	return Settlements.view(controller.body()).get("tribal_neighbor", {})
 
 func refresh() -> void:
 	if data().is_empty():
@@ -88,7 +89,7 @@ func contact() -> bool:
 	return contact_result().ok
 
 func contact_result() -> Dictionary:
-	if get_tree().paused or not controller.is_active() or (controller.body().has("settlements") and controller.village().id != controller.Settlements.origin_id(controller.body())):
+	if get_tree().paused or not controller.is_active() or (controller.body().has("settlements") and controller.village().id != Settlements.origin_id(controller.body())):
 		return _publish(Model.result(false, "neighbor.unavailable"))
 	if not data().is_empty():
 		return _publish(Model.result(false, "neighbor.already_known"))
@@ -134,7 +135,7 @@ func start_aid() -> bool:
 	return start_aid_result().ok
 
 func start_aid_result() -> Dictionary:
-	if get_tree().paused or not controller.is_active() or (controller.body().has("settlements") and controller.village().id != controller.Settlements.origin_id(controller.body())):
+	if get_tree().paused or not controller.is_active() or (controller.body().has("settlements") and controller.village().id != Settlements.origin_id(controller.body())):
 		return _publish(Model.result(false, "neighbor.unavailable"))
 	if data().is_empty():
 		return _publish(Model.result(false, "neighbor.not_known"))
@@ -153,7 +154,7 @@ func start_aid_result() -> Dictionary:
 	controller._transaction = false
 	if not saved:
 		controller.body()["tribal_neighbor"] = previous
-		controller.replace_village(village_before)
+		Settlements.replace_village(controller.body(), village_before)
 	controller._routes.clear()
 	controller._goals.clear()
 	return _publish(outcome if saved else Model.result(false, "neighbor.aid_save_failed"))

@@ -173,8 +173,9 @@ func _capture() -> void:
 			for frame in range(8): await tree.process_frame
 			page.refresh()
 			tribe.panel._layout()
-			tribe.panel._scroll.scroll_vertical = 0
 			for frame in range(4): await tree.process_frame
+			tribe.panel._scroll.ensure_control_visible(page._places)
+			for frame in range(2): await tree.process_frame
 			await RenderingServer.frame_post_draw
 			get_viewport().get_texture().get_image().save_png(directory.path_join("settlements-%s-%dx%d.png" % [locale, size.x, size.y]))
 			_expect(page._places.selected == 1 and page._ids == ids, "Language/resolution changed the selected site.")

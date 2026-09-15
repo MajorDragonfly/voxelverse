@@ -27,12 +27,14 @@ def main():
                    'res://tests/settlement_runtime_test.gd', '--', '--capture-dir', str(output)]
         with log_path.open('w') as log:
             try:
-                result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=420)
+                result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=600)
                 status = result.returncode
             except subprocess.TimeoutExpired:
                 log.write('\nERROR: settlement render timed out\n')
                 status = 124
     text = log_path.read_text(errors='replace')
+    # Keep failures diagnosable directly from the job log as well as its artifact.
+    print(text, flush=True)
     captures = sorted(path.name for path in output.glob('settlements-*.png'))
     passed = (status == 0 and not ERROR.search(text) and 'SECOND_SITE_RUNTIME_PASSED' in text
               and len(captures) == 6)
