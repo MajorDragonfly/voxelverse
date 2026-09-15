@@ -1,0 +1,43 @@
+{
+  "package": "ARCH-24-TAIL-FAMILIES",
+  "base_commit": "9b502ef121a49bcdf2e7c0d0995b8075b61469c9",
+  "source_commit": "d903f7d7be344a16ea2272559713db9f80cd8254",
+  "source_tree": "922daabf97eea665505af016eb020d198961e0c7",
+  "remote_source_commit": "71819110b8c26717f9056884fec8c0e62f0a23f8",
+  "connection_suite_commit": "86a9a9c08828faf7710540ec12f8439f56ef0753",
+  "connection_suite_tree": "52f4e9c55b027bf9c1aa52223eb1dfe8f60124e8",
+  "changes_after_connection_suite": [
+    "tests/creature_tail_family_test.gd"
+  ],
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "matplotlib": "3.10.8",
+  "numpy": "2.3.5",
+  "files": {
+    "autoload/progression_service.gd": "cc5867c6e7587e0744900e84018f0d1b831f7c45955c70eb120ecc735e00dbc3",
+    "creatures/catalog/creature_part_revisions.gd": "4daacf7510c1421e0c52d56e017ef6051e135e32511416e20fcac4eef53afa7f",
+    "creatures/catalog/creature_tail_catalog.gd": "067d293d691840a3ce9b7e405260f168b84a0a83b2abcf7842c318344ad171f5",
+    "creatures/catalog/creature_tail_catalog.gd.uid": "b277b93bf36aa84c4f61b660981f822f3e4075f62ab67a3cda66402c52f71a2c",
+    "creatures/editor/creature_part_geometry.gd": "01c38cf77b072083f87db7dcccfa62c5b82b2a5d6dd2c498a072c774127b2d24",
+    "creatures/editor/creature_part_library.gd": "8030316a4a5ec1b2b7a20debe6c3c5169fcfaf3f1c962eabad43fc3cb372c333",
+    "creatures/editor/creature_tail_geometry.gd": "2725cce9a3a70b3603fe4dc4c0c9b5d24899829a59f0ff261a56d3de5deb3068",
+    "creatures/editor/creature_tail_geometry.gd.uid": "ebb7cbea668dd4dcdf5d954c30c1ea20640b1f42d215a935cfa8eaaa15f2ab7c",
+    "creatures/wildlife/species_assembly_factory_v7.gd": "4f205e0d1539b0e5da605e59f0d84487f84f3e8af274d9b2f7008231fce09c22",
+    "docs/WORK_ARCH24_TAIL_FAMILIES.md": "5d3b41d24b7de2a67526b03263bc0bc94ddbebc8a0ff01e7a408073ae3a8c87f",
+    "localization/catalog.json": "71742e75201945f5184d6a1b818e2e2fb4add7a230c4e90e36800e91dab610bd",
+    "localization/de.po": "d467fa0cadd6f96fb0b03f5c81c5510996b6431afbdee8e9ab7f4297f831f843",
+    "localization/en.po": "a868e68e7afe9440341e342905d68be5745b7c9994c2fb4992c68a3d06e47ce6",
+    "tests/creature_foot_provider_test.gd": "8ad9c59a4d7a3215a61a670758185b54975fd2285c0351d394c3d2d1d69722ee",
+    "tests/creature_parts_studio_test.gd": "1206f9e640d89a9c770d7490705e6a2914fd87da8ad6c616d4bcaf2ea30b68d2",
+    "tests/creature_tail_family_test.gd": "5cf0377353497c0935898eda94b0a5699fbc782916e9666a18a8535aed75c3d4",
+    "tests/creature_tail_family_test.gd.uid": "f881bed3120248b4dc3ef6e9a58904736d62171999f8a762be5c335ee85fc9d6",
+    "tests/fixtures/creature_tail_families_v1.json": "9123b2e8cf2f008813671f53ff145da25d45b141040d0227a6bc02f79fb05a20",
+    "tests/fixtures/creature_tails_v1.json": "3a881001ef7e1ad66b872fcf924583212edae62b68ffa159cc97781fb90bf5ac",
+    "tools/capture_tail_baseline.gd": "963f5d86b36608ff1a525bd3d92f358cb568263be168f9d9ec702012e922a1fb",
+    "tools/capture_tail_baseline.gd.uid": "19a97fb9291055c13ae2e5bddbff98abd28e17e249bb258246f5fb1954137fa7",
+    "tools/export_tail_review.gd": "74d2dbe6f4930efe8a57a1ddffd158d612fbf3ff9974cb8154645fd91f9eee9f",
+    "tools/export_tail_review.gd.uid": "5feb60a9644b7d0406dea24cb0cbccee2947b8d971113cd14090ec7de1eca381",
+    "tools/render_tail_review.py": "aa55863c21188f221f3c174756543888ab49d8e0084a8e8973cbfe0da51fa073",
+    "tools/validation/contracts.json": "74bccdfe4b978ee4cc9077822805d016dc889fb7982bab4b3e9b355da24cdc19"
+  }
+}
