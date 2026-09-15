@@ -20,7 +20,7 @@ RULES = Path("tools/validation/selection_rules.json")
 
 def git(project, *arguments):
     try:
-        return subprocess.check_output(["git", "-C", str(project), *arguments],
+        return subprocess.check_output(["git", "--no-optional-locks", "-C", str(project), *arguments],
                                        stderr=subprocess.PIPE, timeout=20)
     except subprocess.CalledProcessError as error:
         raise ValueError("Cannot plan Git changes: " + error.stderr.decode("utf-8", "replace").strip()) from error

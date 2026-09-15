@@ -11,13 +11,15 @@ import tempfile
 import time
 
 if __package__:
-    from .check_validation_contracts import discover_tests, read_contracts, revision
+    from .check_validation_contracts import discover_tests, read_contracts
     from .validation_support import isolated_env, validation_editor
     from .validation_plan import build_plan
+    from .validation_provenance import SourceRun, check_output_directory
 else:
-    from check_validation_contracts import discover_tests, read_contracts, revision
+    from check_validation_contracts import discover_tests, read_contracts
     from validation_support import isolated_env, validation_editor
     from validation_plan import build_plan
+    from validation_provenance import SourceRun, check_output_directory
 
 # These acceptance flows include real 300-second production or 90-second growth
 # plus transport and restart. Keep short checks bounded independently.
@@ -56,6 +58,8 @@ def main():
     args.change_plan = None
     if args.plan and (args.changed_since is None or args.list_tests):
         parser.error("--plan requires --changed-since and cannot be combined with --list-tests")
+    # Capture before selection so a later edit cannot silently stale a change plan.
+    args.source_run = None if args.plan or args.list_tests else SourceRun(args.project)
     if args.changed_since is not None:
         try:
             args.change_plan = build_plan(args.project, args.changed_since)
@@ -86,11 +90,10 @@ def main():
         return 0
     args.output = (args.output.expanduser().resolve() if args.output is not None
                    else Path(tempfile.mkdtemp(prefix="voxelverse-validation-")))
-    if args.change_plan is not None:
-        if args.output.is_relative_to(args.project):
-            parser.error("Change-plan reports must be outside the project to avoid changing their own source inputs")
-        if args.output.exists() and (not args.output.is_dir() or any(args.output.iterdir())):
-            parser.error("Choose a new output directory to preserve previous check evidence")
+    try:
+        check_output_directory(args.project, args.output)
+    except ValueError as error:
+        parser.error(str(error))
     print(f"Validation output: {args.output}", flush=True)
     if args.change_plan is not None and not args.tests:
         return validate(args)
@@ -100,7 +103,11 @@ def main():
 
 
 def validate(args):
+    check_output_directory(args.project, args.output)
+    source_run = getattr(args, "source_run", None) or SourceRun(args.project)
     args.output.mkdir(parents=True, exist_ok=True)
+    # Survives abrupt termination even when no final report can be written.
+    (args.output / "source-start.json").write_text(json.dumps(source_run.start, indent=2) + "\n", encoding="utf-8")
     change_plan = getattr(args, "change_plan", None)
     source_only = change_plan is not None and not args.tests
     version = None if source_only else subprocess.check_output([args.godot, "--version"], text=True).strip()
@@ -132,6 +139,10 @@ def validate(args):
                                            "--report", str(args.output / "streaming_cpu_measurements.json")], 120))
     results, owners = [], {}
     for name, command, timeout in commands:
+        source_run.record("before:" + name)
+        if not source_run.valid:
+            break
+        source_before = source_run.observations[-1]["snapshot"]
         started = time.monotonic()
         log_path = args.output / f"{name.replace(chr(47), chr(95))}.log"
         with tempfile.TemporaryDirectory(prefix="voxelverse-test-") as userdata:
@@ -154,32 +165,54 @@ def validate(args):
                 with log_path.open("ab") as stream:
                     stream.write(b"\nERROR: validation timed out\n")
                 status = 124
+            except OSError as error:
+                with log_path.open("ab") as stream:
+                    stream.write(("\nERROR: could not start validation: " + str(error) + "\n").encode())
+                status = 127
         log = log_path.read_text(encoding="utf-8", errors="replace")
         failed = status != 0 or ERROR.search(log) is not None
         kind = ("source_contract" if name in {"source_contracts", "art_sources"} else
                 "editor_import" if name == "import" else "headless_godot")
         result = {"name": name, "kind": kind, "passed": not failed, "exit_code": status,
-                  "seconds": round(time.monotonic() - started, 3)}
+                  "seconds": round(time.monotonic() - started, 3), "command": argv, "timeout_seconds": timeout}
+        source_run.record("after:" + name, allow_import_uids=name == "import" and not failed)
+        result["source_before"] = source_before
+        result["source_after"] = source_run.observations[-1]["snapshot"]
         if name in owners:
             result["contract"] = owners[name]
         results.append(result)
         print(json.dumps(result), flush=True)
         if failed or name == "streaming_cpu":
             print(log[-12000:], flush=True)
+        if not source_run.valid:
+            break
         if name in {"source_contracts", "import"} and failed:
             break
         if name == "source_contracts":
-            _, owners = read_contracts(args.project)
+            try:
+                _, owners = read_contracts(args.project)
+            except (OSError, ValueError) as error:
+                results.append({"name": "test_selection", "kind": "source_contract", "passed": False,
+                                "error": str(error)})
+                break
             unknown = sorted(set(tests) - owners.keys())
             if unknown:
                 results.append({"name": "test_selection", "kind": "source_contract", "passed": False,
                                 "error": "Unknown tests: " + ", ".join(unknown)})
                 print(json.dumps(results[-1]), flush=True)
                 break
-    (args.output / "results.json").write_text(json.dumps({"godot": version, "source": revision(args.project),
+    source_run.record("run_end")
+    completed = {r["name"] for r in results}
+    unexecuted = [name for name, _, _ in commands if name not in completed]
+    checks_passed = bool(results) and not unexecuted and all(r["passed"] for r in results)
+    passed = checks_passed and source_run.valid
+    print(json.dumps({"kind": "source_provenance", "status": source_run.status,
+                      "passed": source_run.valid, "events": source_run.events}), flush=True)
+    (args.output / "results.json").write_text(json.dumps({"godot": version, "source": source_run.start,
         "execution": "source_only" if source_only else "headless_source_project", "selected_tests": tests,
-        "change_plan": change_plan, "checks": results}, indent=2) + "\n", encoding="utf-8")
-    return 1 if any(not r["passed"] for r in results) else 0
+        "change_plan": change_plan, "checks": results, "checks_passed": checks_passed, "passed": passed,
+        "unexecuted_checks": unexecuted, "source_provenance": source_run.report()}, indent=2) + "\n", encoding="utf-8")
+    return 0 if passed else 1
 
 
 if __name__ == "__main__":

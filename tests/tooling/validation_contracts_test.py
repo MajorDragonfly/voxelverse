@@ -38,6 +38,10 @@ class ValidationContractsTest(unittest.TestCase):
         self.save_catalog()
         subprocess.run([sys.executable, str(self.project / "tools/localization/catalog.py")],
                        check=True, capture_output=True)
+        for command in [["init", "-q"], ["config", "user.name", "Validation fixture"],
+                        ["config", "user.email", "fixture@example.invalid"], ["add", "."],
+                        ["commit", "-qm", "Fixture checkpoint"]]:
+            subprocess.run(["git", "-C", str(self.project), *command], check=True, capture_output=True)
 
     def save_manifest(self):
         (self.project / contracts.MANIFEST).write_text(json.dumps(self.manifest), encoding="utf-8")
@@ -155,17 +159,24 @@ class ValidationContractsTest(unittest.TestCase):
                 self.assertEqual(self.snapshot(), before)
 
     def run_without_game(self, tests):
-        args = Namespace(project=self.project, output=self.project / "results", godot="unused-godot",
+        output = tempfile.TemporaryDirectory()
+        self.addCleanup(output.cleanup)
+        args = Namespace(project=self.project, output=Path(output.name), godot="unused-godot",
                          tests=tests, skip_import=True, skip_main=True)
         real_run = subprocess.run
+        real_output = subprocess.check_output
+
+        def version_or_git(argv, **kwargs):
+            if argv[0] == "unused-godot":
+                return "4.6.3.stable.test"
+            return real_output(argv, **kwargs)
 
         def only_source(argv, **kwargs):
-            self.assertEqual(argv[0], sys.executable, "Runner started Godot after a source failure")
+            self.assertIn(argv[0], [sys.executable, "git"], "Runner started Godot after a source failure")
             return real_run(argv, **kwargs)
 
-        with patch.object(validate_godot.subprocess, "check_output", return_value="4.6.3.stable.test"), \
+        with patch.object(validate_godot.subprocess, "check_output", side_effect=version_or_git), \
                 patch.object(validate_godot.subprocess, "run", side_effect=only_source), \
-                patch.object(validate_godot, "revision", return_value={"commit": "fixture"}), \
                 contextlib.redirect_stdout(io.StringIO()):
             status = validate_godot.validate(args)
         return status, json.loads((args.output / "results.json").read_text())
