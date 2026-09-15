@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "repository": "MajorDragonfly/voxelverse",
+  "branch": "agent/arch26-workplace-instances-20260915",
+  "base_commit": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+  "authorization": "User explicitly approved publishing this branch to the public repository and creating a pull request after the initial automatic approval rejection.",
+  "publication_method": "GitHub connected app; local and published commit IDs differ, all four ordered commit trees verified identical.",
+  "commits": [
+    {
+      "identical_tree": true,
+      "local_commit": "a3d0a1af6b2bcea300a0cf5fdef4561759c4743e",
+      "published_commit": "650906e0c4edd65737086ebf6a585f2a7dcb4daf",
+      "tree": "706857f417aee38dee51b132de6418e4f99b58a6"
+    },
+    {
+      "identical_tree": true,
+      "local_commit": "ffc7e7696e3ce8336298c9705ccba2833bf400f7",
+      "published_commit": "36fe05d23124647c35c4418d77776cde81f13f4c",
+      "tree": "79b460d39c41f10a3a6aebe46a98df777c8edfc7"
+    },
+    {
+      "identical_tree": true,
+      "local_commit": "5d49a2f1a0bfe2c52498abcd0fef14ebd3604fe4",
+      "published_commit": "8a3c358ac412aa5d1ac6819fe0600df9e23e3ef7",
+      "tree": "3df913915d7cfc6dda2f900763046a6afa5498fb"
+    },
+    {
+      "identical_tree": true,
+      "local_commit": "a316095517d70e8f08551cdf28ecad17e18e9554",
+      "published_commit": "31ade09af5ced17535870621ce5709e1f8ff4ee0",
+      "tree": "e0e752e32bacda49fcb38200406de41e5c68d989"
+    }
+  ],
+  "raw_evidence": "Original logs and result files retain local commit IDs and remain unchanged.",
+  "scope": "Publication metadata only after the documented source commits; no new product changes or additional test claims."
+}

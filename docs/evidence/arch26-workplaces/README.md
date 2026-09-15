@@ -63,5 +63,13 @@ und wird nicht als sauberer abschließender Quellnachweis ausgegeben.
   gespeicherten Schlüssel abgefangen, bevor der zweite auf ihn zugreift.
 
 Keine Windows-/Export-, native Grafik-, Ziel-PC-/FPS- oder vollständige
-Integrationsfreigabe. Die externe Branch-Veröffentlichung wurde von der
-automatischen Freigabeprüfung abgelehnt und wartet auf ausdrückliche Zustimmung.
+Integrationsfreigabe.
+
+Nach der anfänglichen Ablehnung durch die automatische Freigabeprüfung hat der
+Nutzer Branch-Veröffentlichung und PR-Anlage ausdrücklich genehmigt. Der Branch
+`agent/arch26-workplace-instances-20260915` ist veröffentlicht. Die GitHub-App
+vergibt neue Commit-IDs; alle vier ursprünglichen Commit-Trees wurden exakt
+verglichen und ihre Elternreihenfolge erhalten. Die Rohprotokolle bleiben
+unverändert. Die [Commit-Zuordnung](publication.json) verbindet ihre lokalen
+Kennungen mit den veröffentlichten Ständen. Der anschließende Nachtrag ändert
+nur diese Veröffentlichungsdokumentation.

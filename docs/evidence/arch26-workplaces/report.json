@@ -173,6 +173,6 @@
     "Headless Linux; no native graphics, Windows export or target-PC/FPS acceptance.",
     "22 distinct tests succeeded across documented source commits, not a rerun of all 22 at the final head.",
     "Import/art checks used the already imported resource state; later edits were GDScript only.",
-    "The source-only branch is committed locally; external publication was rejected by automatic approval review and needs user authorization."
+    "Branch publication and PR creation were explicitly authorized by the user after the initial automatic approval rejection. The branch is published; publication.json maps the four original local commits to published commits with identical trees and preserved parent order."
   ]
 }
