@@ -1,0 +1,28 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "journal_localization_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "journal_localization_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 19.028,
+      "contract": "frontend_locale"
+    }
+  ]
+}

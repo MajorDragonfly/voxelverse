@@ -1,0 +1,82 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "e1e01a160df4a68e1a82ac3c830d112d3cd5e169",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "journal_localization_test",
+    "discovery_journal_test",
+    "journal_paging_test",
+    "owned_animal_localization_test",
+    "domestic_fauna_journal_test",
+    "research_goals_test",
+    "localization_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "journal_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.366,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "discovery_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.382,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "journal_paging_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.946,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "owned_animal_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.007,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "domestic_fauna_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.834,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "research_goals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.323,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.679,
+      "contract": "frontend_locale"
+    }
+  ]
+}

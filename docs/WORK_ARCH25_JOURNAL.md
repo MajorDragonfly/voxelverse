@@ -57,7 +57,7 @@ Gesamtkampagnen- oder Ziel-PC-/FPS-Abnahme aus diesem Fachpaket ableiten.
 
 ## Integration
 
-- #97 ändert im Buch ausschließlich den vorhandenen HUD-Einstieg. Dessen
+- #97 überarbeitet den HUD-Einstieg des Buchs. Dessen
   Zugangs-/Sichtbarkeitslogik erhalten; die hier übersetzten Buchansichten ergänzen.
 - #103 liefert dieselben 106 `EDITOR_PART_*_NAME`/`*_DESCRIPTION`-Einträge:
   nach Schlüssel **einmal** übernehmen. Andere Ergänzungen (#95/#97/#99) erhalten;
