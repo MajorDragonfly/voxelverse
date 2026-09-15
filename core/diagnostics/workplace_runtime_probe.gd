@@ -15,15 +15,6 @@ func _run() -> void:
 	var path: String = saves.create_slot("Zwei Forstplätze", 15838, Cube.MODE)
 	await _open(path)
 	if not _expect_world(): await _done(); return
-	var social_nodes: Array[Node] = tree.current_scene.find_children("SocialBehavior", "Node", true, false)
-	_expect(not social_nodes.is_empty(), "No live social component for load lifecycle check.")
-	if not social_nodes.is_empty():
-		var social: Node = social_nodes[0]
-		var parent: Node = social.get_parent()
-		parent.remove_child(social)
-		_expect(not saves.game_loaded.is_connected(social._on_game_loaded), "Detached social component retained its load listener.")
-		parent.add_child(social)
-		_expect(saves.game_loaded.is_connected(social._on_game_loaded), "Re-entered social component lost its load listener.")
 	var home: Node = tree.current_scene.get_node("Nest/HomeGroup")
 	_expect(home.establish_home().get("ok", false), "Home founding failed.")
 	await _until(func() -> bool: return home.actors.size() == 2, 10000)
@@ -63,6 +54,15 @@ func _run() -> void:
 			_expect(false, "Physical construction did not finish: " + key + " " + str(tribe.village().project) + " " + str(tribe.village().members))
 			await _done(); return
 		print("WORKPLACE_RUNTIME built ", key)
+	var social_nodes: Array[Node] = tree.current_scene.find_children("SocialBehavior", "Node", true, false)
+	_expect(not social_nodes.is_empty(), "No live social component for load lifecycle check.")
+	if not social_nodes.is_empty():
+		var social: Node = social_nodes[0]
+		var parent: Node = social.get_parent()
+		parent.remove_child(social)
+		_expect(not saves.game_loaded.is_connected(social._on_game_loaded), "Detached social component retained its load listener.")
+		parent.add_child(social)
+		_expect(saves.game_loaded.is_connected(social._on_game_loaded), "Re-entered social component lost its load listener.")
 	data = tribe.village()
 	var first: String = data.economy.stations.forester.id
 	var second: String = data.economy.stations["forester:2"].id
