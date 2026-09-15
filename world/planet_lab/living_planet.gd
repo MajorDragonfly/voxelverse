@@ -10,6 +10,7 @@ const BIOME_NAMES: Dictionary = {"grassland": "Wiese", "savanna": "Savanne", "de
 var ecosystem: Node
 var underwater: Node
 var map_atlases: Dictionary = {}
+var fauna_error: String = ""
 var minimap: CanvasLayer
 
 
@@ -33,6 +34,14 @@ func save_lab() -> bool:
 	var success: bool = super.save_lab()
 	if success:
 		status.text = "Planet, Spieler und Tiere gesichert."
+	return success
+
+
+func load_lab() -> bool:
+	var success: bool = super.load_lab()
+	if not fauna_error.is_empty():
+		status.text = fauna_error + " Vorhandener Spielstand bleibt geschützt."
+		return false
 	return success
 
 
@@ -81,17 +90,51 @@ func stream_objects() -> void:
 		ecosystem.adapter = adapter
 		ecosystem.player = walker
 		ecosystem.spawn = records[body_id].spawn.duplicate(true)
-		ecosystem.animal_records = records[body_id].get("fauna", {}).duplicate(true)
 		ecosystem.paused = paused
 		ecosystem.domestic = Domestic.new()
+		# The legacy catalog still derives exclusions from inline fauna before
+		# that bounded source is replaced by its immutable archive manifest.
 		ecosystem.domestic.configure(system.bodies[body_id], records[body_id], terrain.surface)
+		if not read_only:
+			if ecosystem.configure_fauna(body_id, records[body_id]):
+				_capture_fauna()
+			else:
+				_fauna_failed()
+		ecosystem.wildlife_enabled = not read_only
 		add_child(ecosystem)
 
 
 func _capture() -> void:
 	super._capture()
-	if is_instance_valid(ecosystem):
-		records[body_id].fauna = ecosystem.capture()
+	if is_instance_valid(ecosystem) and ecosystem.fauna != null:
+		_capture_fauna()
+
+
+func _capture_fauna() -> void:
+	var manifest: Dictionary = ecosystem.capture()
+	if manifest.is_empty():
+		_fauna_failed()
+		return
+	records[body_id].fauna_archive = manifest
+	records[body_id].erase("fauna")
+
+
+func _fauna_failed() -> void:
+	fauna_error = ecosystem.fauna.problem()
+	if fauna_error.is_empty(): fauna_error = "Labortiere konnten nicht vollständig gesichert werden."
+	read_only = true
+	ecosystem.wildlife_enabled = false
+	for animal: Node in ecosystem.animals.values(): animal.enabled = false
+	status.text = fauna_error + " Vorhandener Spielstand bleibt geschützt."
+	leave_without_saving.visible = true
+
+
+func open_body(id: String, capture: bool = true) -> bool:
+	if id not in System.REAL_LANDABLE: return false
+	if capture and is_instance_valid(ecosystem):
+		_capture()
+		if not fauna_error.is_empty(): return false
+	return super.open_body(id, false)
 
 
 func _clear_ecosystem() -> void:
@@ -109,12 +152,14 @@ func _clear_body() -> void:
 
 func return_to_marker() -> void:
 	_capture()
+	if not fauna_error.is_empty(): return
 	_clear_ecosystem()
 	super.return_to_marker()
 
 
 func snapshot() -> Dictionary:
 	var data: Dictionary = super.snapshot()
+	if not fauna_error.is_empty(): return {}
 	data.schema = LivingStore.SCHEMA
 	data.surface_generation = LivingSurface.GENERATION
 	data.fauna_codec = "godot_native_v1"
@@ -122,6 +167,7 @@ func snapshot() -> Dictionary:
 	return data
 
 func _restore_extensions(data: Dictionary) -> void:
+	fauna_error = ""
 	map_atlases = data.get("map_atlases", {}).duplicate(true)
 	if is_instance_valid(minimap): minimap.atlas_window.tracker.invalidate()
 
@@ -149,6 +195,7 @@ func _process(delta: float) -> void:
 	super._process(delta)
 	if not _ready_complete or not is_instance_valid(ecosystem):
 		return
+	if ecosystem.fauna != null and not ecosystem.fauna.problem().is_empty() and fauna_error.is_empty(): _fauna_failed()
 	var sample: Dictionary = adapter.sample(walker.location())
 	hud.text = "VOXELVERSE · %s\nDurchmesser %.0f km · %s\n%.1f m erkundet · %d Pflanzen/Felsen · %d Tiere\nUmgebung %d/25 · nachgeladen %d · entladen %d%s" % [
 		system.bodies[body_id].name, system.bodies[body_id].radius * 0.002, BIOME_NAMES.get(sample.biome, sample.biome),

@@ -9,7 +9,7 @@ const Creature = preload("res://world/surface/surface_creature.gd")
 const Species = preload("res://creatures/wildlife/species_assembly_factory_v7.gd")
 const MAX_PATCHES: int = 25
 const MAX_ANIMALS: int = 4
-const MAX_RECORDS: int = 256
+const Fauna = preload("res://world/surface/living_fauna_archive.gd")
 var domestic: RefCounted
 var wildlife_enabled: bool = true
 var adapter: RefCounted
@@ -17,7 +17,7 @@ var player: CharacterBody3D
 var spawn: Dictionary
 var patches: Dictionary = {}
 var animals: Dictionary = {}
-var animal_records: Dictionary = {}
+var fauna: RefCounted
 var wanted: Dictionary = {}
 var loaded: int = 0
 var unloaded: int = 0
@@ -258,8 +258,23 @@ func _campaign_exclusions() -> Array[Dictionary]:
 	return result
 
 
+func configure_fauna(body_id: String, record: Dictionary) -> bool:
+	fauna = Fauna.new()
+	return fauna.open(body_id, record)
+
+
+func _pin_animals() -> void:
+	fauna.store.pinned.clear()
+	for id: String in animals:
+		if domestic == null or not domestic.owns(id): fauna.store.pinned[id] = true
+
+
 func _update_animals() -> void:
-	if not wildlife_enabled: return
+	if not wildlife_enabled or fauna == null: return
+	if not fauna.problem().is_empty():
+		for animal: Node in animals.values(): animal.enabled = false
+		return
+	_pin_animals()
 	if domestic != null:
 		domestic.update(self)
 		if domestic.built_this_update:
@@ -270,7 +285,8 @@ func _update_animals() -> void:
 		var animal: CharacterBody3D = animals[id]
 		animal.enabled = not paused
 		if animal.position.distance_to(player.position) > 105.0 or not wanted.has(id.trim_suffix(":animal")):
-			_capture_animal(id)
+			if not _capture_animal(id): return
+			fauna.store.pinned.erase(id)
 			adapter.unbind(id)
 			animal.get_parent().remove_child(animal)
 			animal.queue_free()
@@ -281,20 +297,19 @@ func _update_animals() -> void:
 		var actor: Dictionary = patch.actor
 		if actor.is_empty() or animals.has(actor.id):
 			continue
-		var state: Dictionary = animal_records.get(actor.id, {})
+		var state: Dictionary = fauna.get_state(actor.id)
+		if not fauna.problem().is_empty(): return
 		var here: Dictionary = actor.location if state.is_empty() else state.location
 		if adapter.to_local(here).distance_to(player.position) > 70.0 or not adapter.collision_ready(here):
 			continue
 		var started: int = Time.get_ticks_usec()
 		if state.is_empty():
-			if animal_records.size() >= MAX_RECORDS:
-				continue
 			var design: Dictionary = Species.create_species(actor.species_seed, Vector2i(patch.cell.x / 8, patch.cell.y / 8), actor.role)
 			var frame: Basis = adapter.frame_at(here)
 			state = {"location": here.duplicate(true), "forward": [-frame.z.x, -frame.z.y, -frame.z.z], "velocity": [0.0, 0.0, 0.0],
 				"traveled": 0.0, "home": here.duplicate(true), "goal": adapter.offset(here, frame.x * 7.0, 1.1),
 				"returning": false, "design": JSON.from_native(design)}
-			animal_records[actor.id] = state
+			if not fauna.put_state(actor.id, state): return
 		var animal := Creature.new()
 		animal.adapter = adapter
 		animal.home = state.home.duplicate(true)
@@ -309,25 +324,30 @@ func _update_animals() -> void:
 		get_parent().add_child(animal)
 		adapter.bind(actor.id, animal, here, animal.forward)
 		animals[actor.id] = animal
+		fauna.store.pinned[actor.id] = true
 		last_publish_units = 1
 		max_animal_build_ms = maxf(max_animal_build_ms, (Time.get_ticks_usec() - started) / 1000.0)
 		# One creature build per update; all others remain pending.
 		break
 
 
-func _capture_animal(id: String) -> void:
+func _capture_animal(id: String) -> bool:
 	if domestic != null and domestic.owns(id):
 		domestic.capture_one(self, id)
-		return
+		return true
+	if fauna == null or not fauna.problem().is_empty(): return false
+	var state: Dictionary = fauna.get_state(id)
+	if state.is_empty(): return false
 	var animal: CharacterBody3D = animals[id]
-	animal_records[id].merge({"location": adapter.location(animal), "forward": [animal.forward.x, animal.forward.y, animal.forward.z],
+	state.merge({"location": adapter.location(animal), "forward": [animal.forward.x, animal.forward.y, animal.forward.z],
 		"velocity": [animal.velocity.x, animal.velocity.y, animal.velocity.z], "traveled": animal.traveled, "returning": animal.returning}, true)
+	return fauna.put_state(id, state)
 
 
 func capture() -> Dictionary:
 	for id: String in animals:
-		_capture_animal(id)
-	return animal_records.duplicate(true)
+		if not _capture_animal(id): return {}
+	return fauna.checkpoint() if fauna != null else {}
 
 
 func instance_count() -> int:
