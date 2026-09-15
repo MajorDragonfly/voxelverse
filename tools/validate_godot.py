@@ -207,7 +207,9 @@ def validate(args):
     checks_passed = bool(results) and not unexecuted and all(r["passed"] for r in results)
     passed = checks_passed and source_run.valid
     print(json.dumps({"kind": "source_provenance", "status": source_run.status,
-                      "passed": source_run.valid, "events": source_run.events}), flush=True)
+                      "passed": source_run.valid, "observations": len(source_run.observations),
+                      "unexpected_events": sum(e["unexpected"] for e in source_run.events),
+                      "generated_uid_files": sum(len(e["generated_uid_paths"]) for e in source_run.events)}), flush=True)
     (args.output / "results.json").write_text(json.dumps({"godot": version, "source": source_run.start,
         "execution": "source_only" if source_only else "headless_source_project", "selected_tests": tests,
         "change_plan": change_plan, "checks": results, "checks_passed": checks_passed, "passed": passed,
