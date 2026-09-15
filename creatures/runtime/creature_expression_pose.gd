@@ -22,7 +22,6 @@ static func apply(preview: Node3D, parts: Array[Dictionary], pose: Dictionary) -
 		if category in ["head", "mouth", "eyes"]:
 			node.position = pivot + face * (node.position - pivot)
 			node.basis = face * node.basis
-			if category == "eyes": node.scale.y *= float(pose.get("eye_open", 1.0))
 		elif category == "tail":
 			# Replace the generic idle wag instead of adding a second oscillator.
 			node.rotation = part.rotation + Vector3(pose.get("tail_pitch", 0.0), pose.get("tail_yaw", 0.0), 0)

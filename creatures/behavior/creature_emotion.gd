@@ -96,10 +96,15 @@ func pose() -> Dictionary:
 		tail_yaw += float(_weights[id]) * float(profile[5]) * sin(clock * float(profile[6]) + phase)
 		for index in range(values.size()): values[index] += float(profile[index]) * float(_weights[id])
 	var blink_time: float = fmod(clock + phase, blink_period)
-	var blink: float = pow(sin(PI * blink_time / 0.18), 2.0) if blink_time < 0.18 else 0.0
+	# Close quickly, remain shut for a short beat, then reopen more gently.
+	# A hold makes full closure visible even at 30 Hz with different seed phases.
+	var blink: float = 0.0
+	if blink_time < 0.075: blink = smoothstep(0.0, 0.075, blink_time)
+	elif blink_time < 0.115: blink = 1.0
+	elif blink_time < 0.24: blink = 1.0 - smoothstep(0.115, 0.24, blink_time)
 	return {"state": state, "head_pitch": values[0] * expressiveness,
 		"head_roll": values[1] * sin(clock * 1.7 + phase) * expressiveness,
 		"body_drop": values[2] * expressiveness, "body_pitch": values[3],
 		"tail_pitch": values[4] * expressiveness,
 		"tail_yaw": tail_yaw * expressiveness,
-		"eye_open": maxf(0.06, values[7] * (1.0 - blink)), "look_yaw": _look}
+		"eye_open": clampf(values[7] * (1.0 - blink), 0.0, 1.0), "look_yaw": _look}

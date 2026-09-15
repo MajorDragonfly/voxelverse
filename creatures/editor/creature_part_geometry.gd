@@ -112,7 +112,7 @@ static func _eye(root: Node3D, position: Vector3, size: Vector3, blueprint: Dict
 	_piece(root, prefix + "Iris", position + Vector3(0, 0, -size.z * 0.43), size * Vector3(0.67, 0.71, 0.27), iris)
 	_piece(root, prefix + "Pupil", position + Vector3(0, 0, -size.z * 0.54), size * Vector3(0.32, 0.44, 0.14), Color("0e1b22"))
 	_piece(root, prefix + "Glint", position + Vector3(-size.x * 0.08, size.y * 0.12, -size.z * 0.59), size * 0.12, Color.WHITE)
-	_piece(root, prefix + "Lid", position + Vector3(0, size.y * 0.39, 0.01), size * Vector3(1.06, 0.19, 0.90), Surface.colors(blueprint)[0], true)
+	preload("res://creatures/runtime/creature_eye_expression.gd").prepare(root, prefix, Surface.colors(blueprint)[0], blueprint)
 
 
 static func _limb(root: Node3D, id: String, placement: Dictionary, blueprint: Dictionary) -> void:

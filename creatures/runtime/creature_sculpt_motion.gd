@@ -4,6 +4,8 @@ const Animator = preload("res://creatures/runtime/adaptive_locomotion_animator.g
 const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
 const Gait = preload("res://creatures/runtime/creature_gait_profile.gd")
 const ExpressionPose = preload("res://creatures/runtime/creature_expression_pose.gd")
+const EyeExpression = preload("res://creatures/runtime/creature_eye_expression.gd")
+var _eyes := EyeExpression.new()
 var expression_pose: Dictionary = {}
 var _preview: Node3D
 var _base_position := Vector3.ZERO
@@ -30,6 +32,7 @@ func bind(preview: Node3D) -> void:
 	for child in preview.get_children():
 		if child is Node3D and child.has_meta("creature_part_category"):
 			_parts.append({"node": child, "position": child.position, "rotation": child.rotation, "scale": child.scale})
+	_eyes.bind(preview)
 	var legs: Array[Node3D] = []
 	for part in _parts:
 		if str(part["node"].get_meta("creature_part_category")) == "legs":
@@ -54,6 +57,7 @@ func set_course(course: Node3D) -> void:
 
 func unbind() -> void:
 	reset()
+	_eyes.unbind()
 	_preview = null
 	_course = null
 	_parts.clear()
@@ -62,6 +66,7 @@ func unbind() -> void:
 
 
 func reset() -> void:
+	_eyes.reset()
 	if is_instance_valid(_preview):
 		_preview.position = _base_position
 		_preview.rotation = _base_rotation
@@ -142,6 +147,7 @@ func _pose(time: float, moving: float, settings: Dictionary, phase: float) -> vo
 		elif category in ["mouth", "head", "eyes"]:
 			node.rotation.x += sin(time * 1.8) * 0.025
 	ExpressionPose.apply(_preview, _parts, expression_pose)
+	_eyes.apply(expression_pose)
 	for leg in _legs:
 		if not is_instance_valid(leg["root"]):
 			continue

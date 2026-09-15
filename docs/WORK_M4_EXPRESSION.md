@@ -53,6 +53,33 @@ die Füße im vorhandenen lokalen/radialen Rahmen. Kieferaktionen bleiben beim
 bestehenden Artikulationssystem. Keine neuen Rendernodes, Meshneubauten,
 Kollisionsformen oder Änderungen an Körperanschlüssen während der Animation.
 
+## Augen-/Lidkorrektur nach Nutzerfeedback
+
+Die alte Lidkante lag zum Teil hinter Sclera, Iris und Glanzpunkt. Zusätzlich
+skalierte die Ausdruckspose das gesamte Augenmodul, einschließlich Augenstiel.
+`CreatureEyeExpression` berechnet jetzt pro Auge aus den tatsächlichen,
+voxelgerundeten Meshgrenzen eine eigene Öffnung. Die Vorderseite der Lider
+liegt vor allen Augenteilen; ihre feste Außenkontur bleibt beim Schließen erhalten.
+Ober- und Unterlid bilden bei vollständigem Lidschluss eine geschlossene Hautfläche.
+Nur Sclera/Iris/Pupille/Glanzpunkt verändern ihre Höhe; Augenstiele und die
+vom Nutzer modellierten Anschlussrahmen behalten ihre Form.
+
+Alle vier Augenfamilien verwenden denselben Aufbau im Editor und im RuntimePreview.
+Die Augen einer Augengruppe erhalten getrennte Öffnungen. Die Pupille bewegt sich
+mitsamt Iris und Reflex begrenzt innerhalb des eigenen Auges. Blinzeln schließt
+zügig, hält 40 ms vollständig geschlossen und öffnet sanfter; der Übergang zu
+vollständig offenen Augen ist kontinuierlich. Erschrecken vergrößert den Augapfel
+nicht mehr über die Augenhöhle hinaus. Editormodus, Neubau und Entfernen setzen
+vorübergehende Posen zurück, ohne Blueprintdaten zu ändern.
+
+Je Auge entstehen beim Aufbau zwei MultiMesh-Lider mit jeweils 16 festen
+Voxelstreifen und einem gemeinsamen Würfelmesh. Die Animation aktualisiert
+Instanzpuffer, erzeugt aber keine Nodes oder Meshes. Unveränderte Posen werden
+übersprungen. Der Vorschauexport liest die tatsächlich eingereichten Puffer,
+da einzelne MultiMesh-Transformgetter im Headless-Renderer Identitäten liefern.
+
+Aktueller Korrekturstand: [Augenprüfung und Nahansichten](evidence/m4-expression/eyes/README.md).
+
 ## Integration und Grenzen
 
 Gemeinsame Anschlussdateien: RuntimePreview/SculptMotion (wenige Zeilen),
