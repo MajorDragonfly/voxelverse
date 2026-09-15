@@ -1,0 +1,75 @@
+{
+  "baseline": {
+    "alive_observers_peak": 64,
+    "attachments_peak": 64,
+    "bounded_peaks": {},
+    "creatures": 402,
+    "dt": 0.0166666666666667,
+    "engine": "4.6.3-stable (official)",
+    "frames": 1080,
+    "max_us": 1198,
+    "median_us": 82,
+    "nodes": 2048,
+    "p95_us": 267,
+    "scope": "registry and emitter CPU only; synthetic scene; no rendering or FPS claim",
+    "stages": [
+      {
+        "listener_x": 0.0,
+        "nearest_first_frame": -1,
+        "nearest_tracked_at_end": false
+      },
+      {
+        "listener_x": 1000.0,
+        "nearest_first_frame": -1,
+        "nearest_tracked_at_end": false
+      },
+      {
+        "listener_x": 0.0,
+        "nearest_first_frame": -1,
+        "nearest_tracked_at_end": false
+      }
+    ],
+    "sum_us": 126981,
+    "tracked_peak": 64
+  },
+  "changed": {
+    "alive_observers_peak": 66,
+    "attachments_peak": 2,
+    "bounded_peaks": {
+      "attached": 2,
+      "attempted": 2,
+      "polled": 8,
+      "retired": 2,
+      "walk_depth": 3,
+      "walk_steps": 64
+    },
+    "creatures": 402,
+    "dt": 0.0166666666666667,
+    "engine": "4.6.3-stable (official)",
+    "frames": 1080,
+    "max_us": 1300,
+    "median_us": 210,
+    "nodes": 2048,
+    "p95_us": 364,
+    "scope": "registry and emitter CPU only; synthetic scene; no rendering or FPS claim",
+    "stages": [
+      {
+        "listener_x": 0.0,
+        "nearest_first_frame": 114,
+        "nearest_tracked_at_end": true
+      },
+      {
+        "listener_x": 1000.0,
+        "nearest_first_frame": 197,
+        "nearest_tracked_at_end": true
+      },
+      {
+        "listener_x": 0.0,
+        "nearest_first_frame": 43,
+        "nearest_tracked_at_end": true
+      }
+    ],
+    "sum_us": 240797,
+    "tracked_peak": 64
+  }
+}

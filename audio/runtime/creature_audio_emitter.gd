@@ -16,9 +16,16 @@ var _call_clock := 0.0
 var _reaction_clock := 0.0
 var _last_reaction: StringName
 var _source_id := 0
+var managed := false
+var group_tracked := false
+var generation := 0
+var last_sample := 0.0
+var _enabled := true
+var _connections: Array[Array] = []
 
 
 func _ready() -> void:
+	set_process(false) # The registry polls a bounded subset, using elapsed game time.
 	_source_id = source.get_instance_id()
 	_rng.seed = _source_id
 	profile = PROFILE.from_creature(source)
@@ -37,9 +44,10 @@ func _ready() -> void:
 func _connect_if(signal_name: StringName, callback: Callable) -> void:
 	if source.has_signal(signal_name) and not source.is_connected(signal_name, callback):
 		source.connect(signal_name, callback)
+		_connections.append([signal_name, callback])
 
 
-func _process(delta: float) -> void:
+func sample(delta: float) -> void:
 	if not _active():
 		return
 	_reaction_clock = maxf(0.0, _reaction_clock - delta)
@@ -151,16 +159,31 @@ func _audio_action(action: StringName) -> void:
 func _active() -> bool:
 	# Emitters belong to creatures, while their registry belongs to AudioManager.
 	# Either owner can leave the tree first during a scene change or shutdown.
-	return is_inside_tree() and not is_queued_for_deletion() \
+	return _enabled and is_inside_tree() and not is_queued_for_deletion() \
 		and is_instance_valid(source) and source.is_inside_tree() and not source.is_queued_for_deletion() \
 		and is_instance_valid(registry) and registry.is_inside_tree() and not registry.is_queued_for_deletion() \
-		and is_instance_valid(audio) and audio.is_inside_tree() and not audio.is_queued_for_deletion()
+		and is_instance_valid(audio) and audio.is_inside_tree() and not audio.is_queued_for_deletion() \
+		and registry.owns(_source_id, self, generation)
 
 
 func _audio_event(event: StringName) -> void:
 	emit_reaction(event)
 
 
-func _exit_tree() -> void:
+func deactivate() -> void:
+	_enabled = false
+	set_process(false)
+	if is_instance_valid(source):
+		for pair in _connections:
+			if source.is_connected(pair[0], pair[1]):
+				source.disconnect(pair[0], pair[1])
+	_connections.clear()
 	if is_instance_valid(audio) and audio.is_inside_tree() and not audio.is_queued_for_deletion():
 		audio.stop_source(_source_id)
+
+
+func _exit_tree() -> void:
+	deactivate()
+	if is_instance_valid(registry):
+		registry.release(_source_id, self)
+	queue_free() # A detached and later restored creature gets a fresh observer.

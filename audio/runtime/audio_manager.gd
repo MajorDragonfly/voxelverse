@@ -146,6 +146,8 @@ func _build_buses() -> void:
 
 
 func _process(delta: float) -> void:
+	if not get_tree().paused:
+		_update_world_sources()
 	_interface_bind_clock -= delta
 	if _interface_bind_clock <= 0.0:
 		_interface_bind_clock = 0.5
@@ -339,12 +341,38 @@ func play_world(event: StringName, position: Vector3, gain_db: float = 0.0,
 	selected.pitch_scale = clampf(pitch, 0.5, 2.0) if is_finite(pitch) else 1.0
 	selected.set_meta(&"audio_priority", clampi(priority, 0, 2))
 	selected.set_meta(&"audio_source_id", source_id)
+	var source := instance_from_id(source_id) as Node3D if source_id > 0 else null
+	selected.set_meta(&"audio_source", weakref(source) if is_instance_valid(source) else null)
+	selected.set_meta(&"audio_follows_source", String(event).begins_with("creature_") or String(event).begins_with("action_"))
 	selected.play()
 	if _last_time.size() > 512:
 		_last_time.clear()
 	_last_time[key] = now
 	sound_played.emit(event, position)
 	return true
+
+
+func _update_world_sources() -> void:
+	# Exactly the fixed voice pool; never enumerate scene objects here.
+	for voice in _voices:
+		if not voice.playing:
+			continue
+		var reference: WeakRef = voice.get_meta(&"audio_source") if voice.has_meta(&"audio_source") else null
+		if reference == null:
+			continue # Explicit anonymous/diagnostic point sounds remain supported.
+		var source := reference.get_ref() as Node3D
+		var scene := get_tree().current_scene
+		if not is_instance_valid(source) or not source.is_inside_tree() or source.is_queued_for_deletion() \
+				or source.get_meta(&"audio_disabled", false) or not source.is_visible_in_tree() \
+				or not source.global_position.is_finite() or source.get_viewport() != voice.get_viewport() \
+				or source.get_world_3d() != voice.get_world_3d() \
+				or (scene != null and source != scene and not scene.is_ancestor_of(source)):
+			voice.stop()
+			voice.stream = null
+			occlusion.reset_voice(voice)
+			continue
+		if voice.get_meta(&"audio_follows_source", false) and source.global_position.is_finite():
+			voice.global_position = source.global_position
 
 
 func play_creature(event: StringName, source: Node3D) -> bool:

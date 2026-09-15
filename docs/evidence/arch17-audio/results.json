@@ -1,0 +1,286 @@
+{
+  "packet": "ARCH-17-AUDIO",
+  "date": "2026-09-15",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "source": {
+    "commit": "195e029b513ddbc101cf28be49c491c56ac4d77a",
+    "tree": "ad915307b79932d2a2c80a346dcdd0068577e74f",
+    "files": {
+      "audio/runtime/audio_manager.gd": "c7b4dc0c5864b771a23cfb134c371c467de1a1791f788072320029d5d2315ebd",
+      "audio/runtime/creature_audio_emitter.gd": "690345ff5fa478ee1aff45b6c0f1729a7afafafc4345a299741a83550cba5f46",
+      "audio/runtime/creature_audio_registry.gd": "809efeae659f2cec5d1303a5cb65abacac42e606ef57a9a29c91195ef7e09473",
+      "docs/WORK_ARCH17_AUDIO.md": "c93c643c67594292a59e22beab09086b69ea1bf04906c60e59928d07ea479dc6",
+      "tests/audio/creature_audio_budget_test.gd": "7871c3de35be584fbc0f3237285403ac7f146a0ac70a5304f356a041d31abf94",
+      "tools/benchmark_creature_audio.gd": "1db8a1c64e310318f4ec41af3c6cff63d8b160bbea56f1924a385db0d90c0777",
+      "tools/validation/contracts.json": "d9a7e66eb9e87bc890d809b65e4812b8e2d03dc0841a17b03863d52c0cd17f58"
+    }
+  },
+  "environment": {
+    "engine": "4.6.3.stable.official.7d41c59c4",
+    "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "mode": "Linux headless, shared host, isolated XDG_DATA_HOME / XDG_CONFIG_HOME / XDG_CACHE_HOME / APPDATA / LOCALAPPDATA; no user saves"
+  },
+  "validation_command": "python3 tools/validate_godot.py --godot GODOT_4_6_3 --contracts audio --skip-main --skip-import --output QA/final",
+  "import_evidence": "raw-logs.tar.gz: initial/import.log; successful same-local-assets import before tests; only GDScript/test/docs edits afterward, no asset edits",
+  "validation": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "source": {
+      "commit": "195e029b513ddbc101cf28be49c491c56ac4d77a",
+      "tracked_worktree_dirty": false
+    },
+    "execution": "headless_source_project",
+    "selected_tests": [
+      "audio/animal_action_feedback_test",
+      "audio/audio_expansion_test",
+      "audio/audio_runtime_test",
+      "audio/audio_scene_lifecycle_test",
+      "audio/audio_shutdown_test",
+      "audio/creature_audio_budget_test",
+      "audio/creature_audio_test",
+      "audio/interface_audio_test",
+      "audio/music_runtime_test",
+      "audio/runtime_shutdown_test",
+      "audio/spherical_water_audio_test"
+    ],
+    "checks": [
+      {
+        "name": "source_contracts",
+        "kind": "source_contract",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.116
+      },
+      {
+        "name": "audio/animal_action_feedback_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.23,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/audio_expansion_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 32.82,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/audio_runtime_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 14.873,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/audio_scene_lifecycle_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.469,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/audio_shutdown_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.175,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/creature_audio_budget_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 8.742,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/creature_audio_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.881,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/interface_audio_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 9.889,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/music_runtime_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 29.617,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/runtime_shutdown_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.772,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/spherical_water_audio_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.57,
+        "contract": "audio"
+      }
+    ]
+  },
+  "budget_test": {
+    "checks": 8765,
+    "diagnostics": {
+      "attached": 1,
+      "attempted": 1,
+      "completed_sweeps": 14,
+      "depth_skips": 0,
+      "generation": 6,
+      "polled": 0,
+      "retired": 1,
+      "tracked": 0,
+      "walk_depth": 0,
+      "walk_steps": 7
+    },
+    "failures": [],
+    "passed": true,
+    "peaks": {
+      "attached": 2,
+      "attempted": 2,
+      "polled": 8,
+      "retired": 2,
+      "tracked": 64,
+      "walk_depth": 3,
+      "walk_steps": 64
+    },
+    "registry_step": {
+      "count": 1036,
+      "max_us": 1523,
+      "p95_us": 389
+    }
+  },
+  "comparison": {
+    "baseline": {
+      "alive_observers_peak": 64,
+      "attachments_peak": 64,
+      "bounded_peaks": {},
+      "creatures": 402,
+      "dt": 0.0166666666666667,
+      "engine": "4.6.3-stable (official)",
+      "frames": 1080,
+      "max_us": 1198,
+      "median_us": 82,
+      "nodes": 2048,
+      "p95_us": 267,
+      "scope": "registry and emitter CPU only; synthetic scene; no rendering or FPS claim",
+      "stages": [
+        {
+          "listener_x": 0.0,
+          "nearest_first_frame": -1,
+          "nearest_tracked_at_end": false
+        },
+        {
+          "listener_x": 1000.0,
+          "nearest_first_frame": -1,
+          "nearest_tracked_at_end": false
+        },
+        {
+          "listener_x": 0.0,
+          "nearest_first_frame": -1,
+          "nearest_tracked_at_end": false
+        }
+      ],
+      "sum_us": 126981,
+      "tracked_peak": 64
+    },
+    "changed": {
+      "alive_observers_peak": 66,
+      "attachments_peak": 2,
+      "bounded_peaks": {
+        "attached": 2,
+        "attempted": 2,
+        "polled": 8,
+        "retired": 2,
+        "walk_depth": 3,
+        "walk_steps": 64
+      },
+      "creatures": 402,
+      "dt": 0.0166666666666667,
+      "engine": "4.6.3-stable (official)",
+      "frames": 1080,
+      "max_us": 1300,
+      "median_us": 210,
+      "nodes": 2048,
+      "p95_us": 364,
+      "scope": "registry and emitter CPU only; synthetic scene; no rendering or FPS claim",
+      "stages": [
+        {
+          "listener_x": 0.0,
+          "nearest_first_frame": 114,
+          "nearest_tracked_at_end": true
+        },
+        {
+          "listener_x": 1000.0,
+          "nearest_first_frame": 197,
+          "nearest_tracked_at_end": true
+        },
+        {
+          "listener_x": 0.0,
+          "nearest_first_frame": 43,
+          "nearest_tracked_at_end": true
+        }
+      ],
+      "sum_us": 240797,
+      "tracked_peak": 64
+    }
+  },
+  "comparison_source": {
+    "baseline": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "changed_source": "195e029b513ddbc101cf28be49c491c56ac4d77a",
+    "probe_sha256": "1db8a1c64e310318f4ec41af3c6cff63d8b160bbea56f1924a385db0d90c0777",
+    "command": "godot --headless --path PROJECT --script res://tools/benchmark_creature_audio.gd",
+    "order": "baseline then changed, one run each, 1080 frames; 1/60 simulated seconds per frame, manually invoked registry and baseline emitter callbacks"
+  },
+  "tradeoffs": [
+    "The nearest selected creature is now tracked in all three route stages, versus none in the baseline.",
+    "Automatic attachment burst falls from 64 to 2; 64 active observers plus at most 2 retired inactive nodes awaiting end-of-frame deletion.",
+    "Final measured CPU total increases from 126981 to 240797 microseconds over 1080 steps; p95 increases from 267 to 364 microseconds and max from 1198 to 1300. This is a bounded-work/correctness result, not a CPU reduction or FPS claim.",
+    "Nearest source discovery takes 114, 197 and 43 frames on the new synthetic A-B-A route; explicit reactions may attach immediately within their reserved budget. Scene traversal latency grows with node count.",
+    "Traversal beyond 128 ancestor levels is counted and skipped. Scene/Shutdown clear retires up to the fixed total of 64 immediately, outside the ordinary two-retirement limit."
+  ],
+  "development_failures": [
+    {
+      "run": "budget-1",
+      "cause": "New test requested wind rather than existing wind_loop resource; corrected fixture key."
+    },
+    {
+      "run": "budget-2",
+      "cause": "Anonymous voice metadata was absent; get_meta with null default logs errors in Godot. Added explicit has_meta guard. Existing assertions passed but strict log check correctly failed this run."
+    },
+    {
+      "run": "comparison",
+      "cause": "First implementation repeated full scope queries while ranking every eviction candidate. Reused poller scope ownership and squared distances for bounded ranking; retained initial measurements."
+    }
+  ],
+  "raw_logs": {
+    "path": "raw-logs.tar.gz",
+    "sha256": "8d6003bf1e1a2453eb11485bf693dce1ddd1136529d9eea6454a7a59aa63db88"
+  },
+  "limits": [
+    "No full game-chain acceptance, Windows/native export, graphical or subjective listening test, or target-PC/FPS measurement.",
+    "No scene-tree-independent global candidate index; incremental discovery revisits the active scene and has measurable ongoing cost."
+  ]
+}
