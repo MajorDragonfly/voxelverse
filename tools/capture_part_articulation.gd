@@ -17,6 +17,20 @@ func _capture() -> void:
 	root.add_child(stage)
 	var actors: Array[Preview] = []
 	var ids: Array[String] = ["mouth_canine_snout", "mouth_crocodile_snout", "mouth_octopus_beak"]
+	if OS.get_cmdline_user_args().size() > 1:
+		ids.assign(OS.get_cmdline_user_args().slice(1))
+		if ids.size() != 3:
+			push_error("Select exactly three mouth IDs")
+			quit(1)
+			return
+	var names: Array[String] = []
+	for id: String in ids:
+		var definition: Dictionary = preload("res://creatures/editor/creature_part_library.gd").get_part(id)
+		if str(definition.get("category", "")) != "mouth":
+			push_error("Not a mouth: " + id)
+			quit(1)
+			return
+		names.append(str(definition.name))
 	for index in range(ids.size()):
 		var design: Dictionary = Assembly.create_default()
 		design.parts = []
@@ -43,7 +57,7 @@ func _capture() -> void:
 			actor.set_articulation_pose(amount, amount)
 			var meshes: Array = []
 			_meshes(actor, actor.global_transform.affine_inverse(), meshes)
-			models.append({"id": ids[index], "name": ["Hundeschnauze", "Krokodilschnauze", "Oktopusmund"][index],
+			models.append({"id": ids[index], "name": names[index],
 				"pose": "Ausgangspose" if amount == 0 else "Geöffnet", "meshes": meshes})
 	var file := FileAccess.open(output.path_join("bodies.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(models))

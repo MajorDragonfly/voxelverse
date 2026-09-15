@@ -113,6 +113,7 @@
         "creature_part_articulation_test",
         "creature_parts_studio_test",
         "creature_seat_fit_test",
+        "creature_snout_family_test",
         "creature_studio_test",
         "creature_v5_smoke_test",
         "runtime_geometry_batch_test"
