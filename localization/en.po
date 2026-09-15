@@ -3863,3 +3863,165 @@ msgstr "Back · Esc"
 
 msgid "Kopfmodule"
 msgstr "Head modules"
+
+msgid "HUSBANDRY_ASSIGN_KEEPER"
+msgstr "Assign animal keeper"
+
+msgid "HUSBANDRY_HINT"
+msgstr "One owned animal per dairy pen or laying site. Animal keepers deliver feed and water. Eggs are collected, stored and eaten."
+
+msgid "HUSBANDRY_ASSIGN"
+msgstr "Assign animal"
+
+msgid "HUSBANDRY_RELEASE"
+msgstr "Release assignment"
+
+msgid "HUSBANDRY_CHANGE_SITE"
+msgstr "Convert empty site"
+
+msgid "HUSBANDRY_CHANGE_HINT"
+msgstr "Convert an empty dairy pen to a laying site or back. Supplies and finished products are retained."
+
+msgid "HUSBANDRY_BUILD_HINT"
+msgstr "Build a dairy pen or laying site on dry, accessible ground."
+
+msgid "HUSBANDRY_PEN"
+msgstr "Dairy pen {number}"
+
+msgid "HUSBANDRY_LAYING_SITE"
+msgstr "Laying site {number}"
+
+msgid "HUSBANDRY_MILK_ANIMAL"
+msgstr "Dairy animal {number}"
+
+msgid "HUSBANDRY_EGG_ANIMAL"
+msgstr "Egg-laying animal {number}"
+
+msgid "HUSBANDRY_SUPPLIES"
+msgstr "Feed {food} / 4 · Water {water} / 8 litres\n{status}"
+
+msgid "HUSBANDRY_STORAGE"
+msgstr "{resource} ready · Collection is waiting for storage space."
+
+msgid "HUSBANDRY_WAIT_SUPPLIES"
+msgstr "Production ({resource}) is waiting for feed and water."
+
+msgid "HUSBANDRY_PRODUCTION"
+msgstr "{resource} in {seconds} s · {amount} per interval."
+
+msgid "HUSBANDRY_EGG_AMOUNT"
+msgstr "{count} eggs"
+
+msgid "HUSBANDRY_MILK_AMOUNT"
+msgstr "{count} litres"
+
+msgid "TRIBE_AGE_ENTRY"
+msgstr "Tribal age …"
+
+msgid "TRIBE_AGE_TITLE"
+msgstr "A new age begins"
+
+msgid "TRIBE_AGE_CONFIRM"
+msgstr "Advance to the tribal age now"
+
+msgid "TRIBE_AGE_CANCEL"
+msgstr "Stay in the creature phase"
+
+msgid "TRIBE_AGE_RETURN"
+msgstr "Return to your creature"
+
+msgid "TRIBE_AGE_DETAIL"
+msgstr "You will lead the group from the overview. Your creature and its two companions remain the same members. Your species, home, relationships and purchased abilities are retained.\n\nGather materials, craft a stone tool, build huts and provide for your residents. The transition is saved and direct control of an individual ends. You can already meet and support neighbouring tribes. Tribal combat will follow later."
+
+msgid "TRIBE_AGE_BLOCKED"
+msgstr "{reason}\n\nThe transition only begins after you explicitly confirm it here."
+
+msgid "TRIBE_AGE_SAVE_FAILED"
+msgstr "The transition could not be saved. You remain in the creature phase.\n\n{reason}"
+
+msgid "HUSBANDRY_NEED_ANIMAL"
+msgstr "Bring a suitable tamed animal here and assign it."
+
+msgid "HUSBANDRY_CHANGED_ANIMAL"
+msgstr "The animal’s species or body has changed."
+
+msgid "HUSBANDRY_STAY"
+msgstr "The animal must stay at its assigned site."
+
+msgid "HUSBANDRY_ACCESS"
+msgstr "The animal site or its entrance is currently inaccessible."
+
+msgid "HUSBANDRY_RELEASE_FIRST"
+msgstr "Release the animal assignment first."
+
+msgid "HUSBANDRY_RETURN_SUPPLIES"
+msgstr "Wait until feed and water have been returned."
+
+msgid "HUSBANDRY_UNAVAILABLE"
+msgstr "The animal is currently unavailable."
+
+msgid "HUSBANDRY_WRONG_REGISTER"
+msgstr "The animal registry does not belong to this village."
+
+msgid "HUSBANDRY_OWNED_ANIMAL"
+msgstr "Choose a living, tamed livestock animal owned by your tribe."
+
+msgid "HUSBANDRY_UNSUITABLE"
+msgstr "This animal is unsuitable for this site with plant feed."
+
+msgid "HUSBANDRY_NOT_LOADED"
+msgstr "The animal must be in the loaded area around the village."
+
+msgid "HUSBANDRY_WRONG_SITE"
+msgstr "This animal is unsuitable for this site."
+
+msgid "HUSBANDRY_OCCUPIED"
+msgstr "This animal site is already occupied."
+
+msgid "HUSBANDRY_ALREADY_ASSIGNED"
+msgstr "This animal already has an assigned site."
+
+msgid "HUSBANDRY_CHANGED_RECORD"
+msgstr "The saved animal’s species or body has changed."
+
+msgid "HUSBANDRY_RECORD_LIMIT"
+msgstr "No free production record is available for this animal."
+
+msgid "HUSBANDRY_COLLECT_FIRST"
+msgstr "Collect the finished products and free up storage space first."
+
+msgid "HUSBANDRY_DELIVER_FIRST"
+msgstr "Wait until the feed and water in transit have been delivered."
+
+msgid "TRIBE_AGE_OTHER"
+msgstr "Your tribe is already in another age."
+
+msgid "TRIBE_AGE_WORLD"
+msgstr "Return to the loaded world with your creature first."
+
+msgid "TRIBE_AGE_HOME"
+msgstr "Return home to advance with your group."
+
+msgid "TRIBE_AGE_PENDING"
+msgstr "Another transition is still being completed."
+
+msgid "TRIBE_AGE_SPACE"
+msgstr "Your first village needs safe paths and five free work sites. Move your home to a larger dry area."
+
+msgid "TRIBE_AGE_COMPANION"
+msgstr "A companion cannot yet reach the village site. Bring it closer."
+
+msgid "TRIBE_AGE_PLAYER"
+msgstr "Your creature cannot yet reach the village site."
+
+msgid "TRIBE_AGE_ESTABLISH"
+msgstr "Use {key} to establish a home for your nest group."
+
+msgid "TRIBE_AGE_RECALL"
+msgstr "Call both companions home with {key} → Return home."
+
+msgid "HUSBANDRY_BUILD_PEN"
+msgstr "Dairy pen · 4 wood / 2 fibre"
+
+msgid "HUSBANDRY_BUILD_LAYING"
+msgstr "Laying site · 4 wood / 2 fibre"

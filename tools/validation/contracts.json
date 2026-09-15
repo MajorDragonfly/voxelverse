@@ -269,7 +269,8 @@
         "tribe_localization_test",
         "hud_layout_test",
         "editor_localization_test",
-        "journal_localization_test"
+        "journal_localization_test",
+        "husbandry_localization_test"
       ]
     },
     {

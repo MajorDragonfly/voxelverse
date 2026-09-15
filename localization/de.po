@@ -3863,3 +3863,165 @@ msgstr "Zurück · Esc"
 
 msgid "Kopfmodule"
 msgstr "Kopfmodule"
+
+msgid "HUSBANDRY_ASSIGN_KEEPER"
+msgstr "Tierpfleger zuweisen"
+
+msgid "HUSBANDRY_HINT"
+msgstr "Ein eigenes Tier pro Platz: Milchtierplatz oder Legestelle. Tierpfleger liefern Futter und Wasser. Eier werden abgeholt, eingelagert und gegessen."
+
+msgid "HUSBANDRY_ASSIGN"
+msgstr "Tier zuordnen"
+
+msgid "HUSBANDRY_RELEASE"
+msgstr "Zuordnung lösen"
+
+msgid "HUSBANDRY_CHANGE_SITE"
+msgstr "Freien Platz umstellen"
+
+msgid "HUSBANDRY_CHANGE_HINT"
+msgstr "Wechselt einen freien Milchtierplatz zur Legestelle oder zurück. Vorräte und fertige Produkte bleiben erhalten."
+
+msgid "HUSBANDRY_BUILD_HINT"
+msgstr "Baue einen Milchtierplatz oder eine Legestelle auf trockenem, frei erreichbarem Boden."
+
+msgid "HUSBANDRY_PEN"
+msgstr "Milchtierplatz {number}"
+
+msgid "HUSBANDRY_LAYING_SITE"
+msgstr "Legestelle {number}"
+
+msgid "HUSBANDRY_MILK_ANIMAL"
+msgstr "Milchtier {number}"
+
+msgid "HUSBANDRY_EGG_ANIMAL"
+msgstr "Eierlieferant {number}"
+
+msgid "HUSBANDRY_SUPPLIES"
+msgstr "Futter {food} / 4 · Wasser {water} / 8 Liter\n{status}"
+
+msgid "HUSBANDRY_STORAGE"
+msgstr "{resource} bereit · Abholung wartet auf Lagerplatz."
+
+msgid "HUSBANDRY_WAIT_SUPPLIES"
+msgstr "Produktion ({resource}) wartet auf Futter und Wasser."
+
+msgid "HUSBANDRY_PRODUCTION"
+msgstr "{resource} in {seconds} s · {amount} je Intervall."
+
+msgid "HUSBANDRY_EGG_AMOUNT"
+msgstr "{count} Stück"
+
+msgid "HUSBANDRY_MILK_AMOUNT"
+msgstr "{count} Liter"
+
+msgid "TRIBE_AGE_ENTRY"
+msgstr "Stammeszeitalter …"
+
+msgid "TRIBE_AGE_TITLE"
+msgstr "Ein neues Zeitalter beginnt"
+
+msgid "TRIBE_AGE_CONFIRM"
+msgstr "Jetzt ins Stammeszeitalter fortschreiten"
+
+msgid "TRIBE_AGE_CANCEL"
+msgstr "In der Kreaturenphase bleiben"
+
+msgid "TRIBE_AGE_RETURN"
+msgstr "Zur Kreatur zurück"
+
+msgid "TRIBE_AGE_DETAIL"
+msgstr "Du führst künftig die Gruppe aus der Übersicht. Deine Kreatur und ihre beiden Gefährten bleiben dieselben Mitglieder. Eure Spezies, Heimat, Beziehungen und gekauften Fähigkeiten bleiben erhalten.\n\nSammelt Material, stellt ein Steinwerkzeug her, baut Hütten und versorgt eure Bewohner. Der Wechsel wird gespeichert; die direkte Einzelsteuerung endet. Nachbarstämme könnt ihr bereits treffen und unterstützen. Stammeskämpfe folgen später."
+
+msgid "TRIBE_AGE_BLOCKED"
+msgstr "{reason}\n\nDer Wechsel beginnt erst, wenn du ihn hier ausdrücklich bestätigst."
+
+msgid "TRIBE_AGE_SAVE_FAILED"
+msgstr "Der Wechsel konnte nicht gespeichert werden. Du bleibst in der Kreaturenphase.\n\n{reason}"
+
+msgid "HUSBANDRY_NEED_ANIMAL"
+msgstr "Führe ein passendes gezähmtes Tier hierher und ordne es zu."
+
+msgid "HUSBANDRY_CHANGED_ANIMAL"
+msgstr "Art oder Körper des Tieres hat sich geändert."
+
+msgid "HUSBANDRY_STAY"
+msgstr "Das Tier muss am Tierplatz bleiben."
+
+msgid "HUSBANDRY_ACCESS"
+msgstr "Tierplatz oder Zugang ist momentan nicht erreichbar."
+
+msgid "HUSBANDRY_RELEASE_FIRST"
+msgstr "Löse zuerst die Tierzuordnung."
+
+msgid "HUSBANDRY_RETURN_SUPPLIES"
+msgstr "Warte, bis Futter und Wasser zurückgebracht wurden."
+
+msgid "HUSBANDRY_UNAVAILABLE"
+msgstr "Das Tier ist zurzeit nicht verfügbar."
+
+msgid "HUSBANDRY_WRONG_REGISTER"
+msgstr "Das Tierregister gehört nicht zu diesem Dorf."
+
+msgid "HUSBANDRY_OWNED_ANIMAL"
+msgstr "Wähle ein lebendes, gezähmtes Nutztier deines Stammes."
+
+msgid "HUSBANDRY_UNSUITABLE"
+msgstr "Dieses Tier eignet sich nicht für diesen Haltungsplatz mit Pflanzenfutter."
+
+msgid "HUSBANDRY_NOT_LOADED"
+msgstr "Das Tier muss in der geladenen Dorfumgebung sein."
+
+msgid "HUSBANDRY_WRONG_SITE"
+msgstr "Dieses Tier passt nicht zu diesem Haltungsplatz."
+
+msgid "HUSBANDRY_OCCUPIED"
+msgstr "Dieser Tierplatz ist bereits belegt."
+
+msgid "HUSBANDRY_ALREADY_ASSIGNED"
+msgstr "Dieses Tier hat bereits einen Tierplatz."
+
+msgid "HUSBANDRY_CHANGED_RECORD"
+msgstr "Art oder Körper des gespeicherten Tieres hat sich geändert."
+
+msgid "HUSBANDRY_RECORD_LIMIT"
+msgstr "Für dieses Tier ist kein freier Produktionsnachweis verfügbar."
+
+msgid "HUSBANDRY_COLLECT_FIRST"
+msgstr "Hole zuerst die fertigen Produkte ab und schaffe Lagerplatz."
+
+msgid "HUSBANDRY_DELIVER_FIRST"
+msgstr "Warte, bis unterwegs befindliches Tierfutter und Wasser abgeliefert sind."
+
+msgid "TRIBE_AGE_OTHER"
+msgstr "Dein Stamm befindet sich bereits in einem anderen Zeitalter."
+
+msgid "TRIBE_AGE_WORLD"
+msgstr "Kehre zuerst mit deiner Kreatur in die geladene Welt zurück."
+
+msgid "TRIBE_AGE_HOME"
+msgstr "Kehre zum Heimatplatz zurück, um mit deiner Gruppe fortzuschreiten."
+
+msgid "TRIBE_AGE_PENDING"
+msgstr "Ein anderer Übergang wird noch abgeschlossen."
+
+msgid "TRIBE_AGE_SPACE"
+msgstr "Für das erste Dorf fehlen sichere Wege und fünf freie Arbeitsplätze. Verlege den Heimatplatz auf eine größere trockene Fläche."
+
+msgid "TRIBE_AGE_COMPANION"
+msgstr "Ein Gefährte erreicht den Dorfplatz noch nicht. Hole ihn näher heran."
+
+msgid "TRIBE_AGE_PLAYER"
+msgstr "Deine Kreatur erreicht den Dorfplatz noch nicht."
+
+msgid "TRIBE_AGE_ESTABLISH"
+msgstr "Lege mit {key} einen Heimatplatz für deine Nestgruppe fest."
+
+msgid "TRIBE_AGE_RECALL"
+msgstr "Rufe beide Gefährten mit {key} → Heimkehren zum Heimatplatz."
+
+msgid "HUSBANDRY_BUILD_PEN"
+msgstr "Milchtierplatz · 4 Holz / 2 Fasern"
+
+msgid "HUSBANDRY_BUILD_LAYING"
+msgstr "Legestelle · 4 Holz / 2 Fasern"

@@ -90,6 +90,32 @@ const PROJECTS := {
 	"fiberbed": "TRIBE_PROJECT_FIBERBED"
 }
 const LEGACY := {
+	"Führe ein passendes gezähmtes Tier hierher und ordne es zu.": "HUSBANDRY_NEED_ANIMAL",
+	"Art oder Körper des Tieres hat sich geändert.": "HUSBANDRY_CHANGED_ANIMAL",
+	"Das Tier muss am Tierplatz bleiben.": "HUSBANDRY_STAY",
+	"Tierplatz oder Zugang ist momentan nicht erreichbar.": "HUSBANDRY_ACCESS",
+	"Löse zuerst die Tierzuordnung.": "HUSBANDRY_RELEASE_FIRST",
+	"Warte, bis Futter und Wasser zurückgebracht wurden.": "HUSBANDRY_RETURN_SUPPLIES",
+	"Das Tier ist zurzeit nicht verfügbar.": "HUSBANDRY_UNAVAILABLE",
+	"Das Tierregister gehört nicht zu diesem Dorf.": "HUSBANDRY_WRONG_REGISTER",
+	"Wähle ein lebendes, gezähmtes Nutztier deines Stammes.": "HUSBANDRY_OWNED_ANIMAL",
+	"Dieses Tier eignet sich nicht für diesen Haltungsplatz mit Pflanzenfutter.": "HUSBANDRY_UNSUITABLE",
+	"Das Tier muss in der geladenen Dorfumgebung sein.": "HUSBANDRY_NOT_LOADED",
+	"Dieses Tier passt nicht zu diesem Haltungsplatz.": "HUSBANDRY_WRONG_SITE",
+	"Dieser Tierplatz ist bereits belegt.": "HUSBANDRY_OCCUPIED",
+	"Dieses Tier hat bereits einen Tierplatz.": "HUSBANDRY_ALREADY_ASSIGNED",
+	"Art oder Körper des gespeicherten Tieres hat sich geändert.": "HUSBANDRY_CHANGED_RECORD",
+	"Für dieses Tier ist kein freier Produktionsnachweis verfügbar.": "HUSBANDRY_RECORD_LIMIT",
+	"Hole zuerst die fertigen Produkte ab und schaffe Lagerplatz.": "HUSBANDRY_COLLECT_FIRST",
+	"Warte, bis unterwegs befindliches Tierfutter und Wasser abgeliefert sind.": "HUSBANDRY_DELIVER_FIRST",
+	"Dein Stamm befindet sich bereits in einem anderen Zeitalter.": "TRIBE_AGE_OTHER",
+	"Kehre zuerst mit deiner Kreatur in die geladene Welt zurück.": "TRIBE_AGE_WORLD",
+	"Kehre zum Heimatplatz zurück, um mit deiner Gruppe fortzuschreiten.": "TRIBE_AGE_HOME",
+	"Ein anderer Übergang wird noch abgeschlossen.": "TRIBE_AGE_PENDING",
+	"Für das erste Dorf fehlen sichere Wege und fünf freie Arbeitsplätze. Verlege den Heimatplatz auf eine größere trockene Fläche.": "TRIBE_AGE_SPACE",
+	"Ein Gefährte erreicht den Dorfplatz noch nicht. Hole ihn näher heran.": "TRIBE_AGE_COMPANION",
+	"Deine Kreatur erreicht den Dorfplatz noch nicht.": "TRIBE_AGE_PLAYER",
+
 	"Dein Stamm zählt sechs Bewohner.": "TRIBE_GROWTH_MAX",
 	"Dorfwachstum: Baue zusätzliche Schlafplätze.": "TRIBE_GROWTH_BEDS",
 	"Dorfwachstum: Wurzelgarten und Brunnen werden benötigt.": "TRIBE_GROWTH_STATIONS",
@@ -142,6 +168,8 @@ static func activity_title(identity: String) -> String:
 	return Text.text(ACTIVITIES.get(identity, "TRIBE_ACTIVITY_UNKNOWN"))
 
 static func legacy_status(value: String) -> String:
+	if value in ["Lege mit N einen Heimatplatz für deine Nestgruppe fest.", "Rufe beide Gefährten mit N → Heimkehren zum Heimatplatz."]:
+		return Text.format_text("TRIBE_AGE_ESTABLISH" if value.begins_with("Lege") else "TRIBE_AGE_RECALL", {"key": preload("res://core/input_preferences.gd").code_label(KEY_N)})
 	if LEGACY.has(value):
 		return Text.text(LEGACY[value])
 	# Anchor every adapter. Names are inserted once through UiText, never translated.
@@ -160,3 +188,15 @@ static func _match(pattern: String, value: String) -> RegExMatch:
 	var expression := RegEx.new()
 	expression.compile(pattern)
 	return expression.search(value)
+
+static func husbandry_detail(view: Dictionary) -> String:
+	var status: String = legacy_status(view.error)
+	if view.state != "blocked":
+		var resource: String = resource_title(view.resource)
+		match view.state:
+			"storage": status = Text.format_text("HUSBANDRY_STORAGE", {"resource": resource})
+			"supplies": status = Text.format_text("HUSBANDRY_WAIT_SUPPLIES", {"resource": resource})
+			"producing":
+				var amount: String = Text.format_text("HUSBANDRY_EGG_AMOUNT" if view.resource == "eggs" else "HUSBANDRY_MILK_AMOUNT", {"count": Text.number(view["yield"], 2)})
+				status = Text.format_text("HUSBANDRY_PRODUCTION", {"resource": resource, "seconds": view.seconds, "amount": amount})
+	return Text.format_text("HUSBANDRY_SUPPLIES", {"food": Text.number(view.food, 1), "water": Text.number(view.water, 1), "status": status})

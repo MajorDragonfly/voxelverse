@@ -6441,6 +6441,276 @@
       "key": "Kopfmodule",
       "de": "Kopfmodule",
       "en": "Head modules"
+    },
+    {
+      "key": "HUSBANDRY_ASSIGN_KEEPER",
+      "de": "Tierpfleger zuweisen",
+      "en": "Assign animal keeper"
+    },
+    {
+      "key": "HUSBANDRY_HINT",
+      "de": "Ein eigenes Tier pro Platz: Milchtierplatz oder Legestelle. Tierpfleger liefern Futter und Wasser. Eier werden abgeholt, eingelagert und gegessen.",
+      "en": "One owned animal per dairy pen or laying site. Animal keepers deliver feed and water. Eggs are collected, stored and eaten."
+    },
+    {
+      "key": "HUSBANDRY_ASSIGN",
+      "de": "Tier zuordnen",
+      "en": "Assign animal"
+    },
+    {
+      "key": "HUSBANDRY_RELEASE",
+      "de": "Zuordnung lösen",
+      "en": "Release assignment"
+    },
+    {
+      "key": "HUSBANDRY_CHANGE_SITE",
+      "de": "Freien Platz umstellen",
+      "en": "Convert empty site"
+    },
+    {
+      "key": "HUSBANDRY_CHANGE_HINT",
+      "de": "Wechselt einen freien Milchtierplatz zur Legestelle oder zurück. Vorräte und fertige Produkte bleiben erhalten.",
+      "en": "Convert an empty dairy pen to a laying site or back. Supplies and finished products are retained."
+    },
+    {
+      "key": "HUSBANDRY_BUILD_HINT",
+      "de": "Baue einen Milchtierplatz oder eine Legestelle auf trockenem, frei erreichbarem Boden.",
+      "en": "Build a dairy pen or laying site on dry, accessible ground."
+    },
+    {
+      "key": "HUSBANDRY_PEN",
+      "de": "Milchtierplatz {number}",
+      "en": "Dairy pen {number}"
+    },
+    {
+      "key": "HUSBANDRY_LAYING_SITE",
+      "de": "Legestelle {number}",
+      "en": "Laying site {number}"
+    },
+    {
+      "key": "HUSBANDRY_MILK_ANIMAL",
+      "de": "Milchtier {number}",
+      "en": "Dairy animal {number}"
+    },
+    {
+      "key": "HUSBANDRY_EGG_ANIMAL",
+      "de": "Eierlieferant {number}",
+      "en": "Egg-laying animal {number}"
+    },
+    {
+      "key": "HUSBANDRY_SUPPLIES",
+      "de": "Futter {food} / 4 · Wasser {water} / 8 Liter\n{status}",
+      "en": "Feed {food} / 4 · Water {water} / 8 litres\n{status}"
+    },
+    {
+      "key": "HUSBANDRY_STORAGE",
+      "de": "{resource} bereit · Abholung wartet auf Lagerplatz.",
+      "en": "{resource} ready · Collection is waiting for storage space."
+    },
+    {
+      "key": "HUSBANDRY_WAIT_SUPPLIES",
+      "de": "Produktion ({resource}) wartet auf Futter und Wasser.",
+      "en": "Production ({resource}) is waiting for feed and water."
+    },
+    {
+      "key": "HUSBANDRY_PRODUCTION",
+      "de": "{resource} in {seconds} s · {amount} je Intervall.",
+      "en": "{resource} in {seconds} s · {amount} per interval."
+    },
+    {
+      "key": "HUSBANDRY_EGG_AMOUNT",
+      "de": "{count} Stück",
+      "en": "{count} eggs"
+    },
+    {
+      "key": "HUSBANDRY_MILK_AMOUNT",
+      "de": "{count} Liter",
+      "en": "{count} litres"
+    },
+    {
+      "key": "TRIBE_AGE_ENTRY",
+      "de": "Stammeszeitalter …",
+      "en": "Tribal age …"
+    },
+    {
+      "key": "TRIBE_AGE_TITLE",
+      "de": "Ein neues Zeitalter beginnt",
+      "en": "A new age begins"
+    },
+    {
+      "key": "TRIBE_AGE_CONFIRM",
+      "de": "Jetzt ins Stammeszeitalter fortschreiten",
+      "en": "Advance to the tribal age now"
+    },
+    {
+      "key": "TRIBE_AGE_CANCEL",
+      "de": "In der Kreaturenphase bleiben",
+      "en": "Stay in the creature phase"
+    },
+    {
+      "key": "TRIBE_AGE_RETURN",
+      "de": "Zur Kreatur zurück",
+      "en": "Return to your creature"
+    },
+    {
+      "key": "TRIBE_AGE_DETAIL",
+      "de": "Du führst künftig die Gruppe aus der Übersicht. Deine Kreatur und ihre beiden Gefährten bleiben dieselben Mitglieder. Eure Spezies, Heimat, Beziehungen und gekauften Fähigkeiten bleiben erhalten.\n\nSammelt Material, stellt ein Steinwerkzeug her, baut Hütten und versorgt eure Bewohner. Der Wechsel wird gespeichert; die direkte Einzelsteuerung endet. Nachbarstämme könnt ihr bereits treffen und unterstützen. Stammeskämpfe folgen später.",
+      "en": "You will lead the group from the overview. Your creature and its two companions remain the same members. Your species, home, relationships and purchased abilities are retained.\n\nGather materials, craft a stone tool, build huts and provide for your residents. The transition is saved and direct control of an individual ends. You can already meet and support neighbouring tribes. Tribal combat will follow later."
+    },
+    {
+      "key": "TRIBE_AGE_BLOCKED",
+      "de": "{reason}\n\nDer Wechsel beginnt erst, wenn du ihn hier ausdrücklich bestätigst.",
+      "en": "{reason}\n\nThe transition only begins after you explicitly confirm it here."
+    },
+    {
+      "key": "TRIBE_AGE_SAVE_FAILED",
+      "de": "Der Wechsel konnte nicht gespeichert werden. Du bleibst in der Kreaturenphase.\n\n{reason}",
+      "en": "The transition could not be saved. You remain in the creature phase.\n\n{reason}"
+    },
+    {
+      "key": "HUSBANDRY_NEED_ANIMAL",
+      "de": "Führe ein passendes gezähmtes Tier hierher und ordne es zu.",
+      "en": "Bring a suitable tamed animal here and assign it."
+    },
+    {
+      "key": "HUSBANDRY_CHANGED_ANIMAL",
+      "de": "Art oder Körper des Tieres hat sich geändert.",
+      "en": "The animal’s species or body has changed."
+    },
+    {
+      "key": "HUSBANDRY_STAY",
+      "de": "Das Tier muss am Tierplatz bleiben.",
+      "en": "The animal must stay at its assigned site."
+    },
+    {
+      "key": "HUSBANDRY_ACCESS",
+      "de": "Tierplatz oder Zugang ist momentan nicht erreichbar.",
+      "en": "The animal site or its entrance is currently inaccessible."
+    },
+    {
+      "key": "HUSBANDRY_RELEASE_FIRST",
+      "de": "Löse zuerst die Tierzuordnung.",
+      "en": "Release the animal assignment first."
+    },
+    {
+      "key": "HUSBANDRY_RETURN_SUPPLIES",
+      "de": "Warte, bis Futter und Wasser zurückgebracht wurden.",
+      "en": "Wait until feed and water have been returned."
+    },
+    {
+      "key": "HUSBANDRY_UNAVAILABLE",
+      "de": "Das Tier ist zurzeit nicht verfügbar.",
+      "en": "The animal is currently unavailable."
+    },
+    {
+      "key": "HUSBANDRY_WRONG_REGISTER",
+      "de": "Das Tierregister gehört nicht zu diesem Dorf.",
+      "en": "The animal registry does not belong to this village."
+    },
+    {
+      "key": "HUSBANDRY_OWNED_ANIMAL",
+      "de": "Wähle ein lebendes, gezähmtes Nutztier deines Stammes.",
+      "en": "Choose a living, tamed livestock animal owned by your tribe."
+    },
+    {
+      "key": "HUSBANDRY_UNSUITABLE",
+      "de": "Dieses Tier eignet sich nicht für diesen Haltungsplatz mit Pflanzenfutter.",
+      "en": "This animal is unsuitable for this site with plant feed."
+    },
+    {
+      "key": "HUSBANDRY_NOT_LOADED",
+      "de": "Das Tier muss in der geladenen Dorfumgebung sein.",
+      "en": "The animal must be in the loaded area around the village."
+    },
+    {
+      "key": "HUSBANDRY_WRONG_SITE",
+      "de": "Dieses Tier passt nicht zu diesem Haltungsplatz.",
+      "en": "This animal is unsuitable for this site."
+    },
+    {
+      "key": "HUSBANDRY_OCCUPIED",
+      "de": "Dieser Tierplatz ist bereits belegt.",
+      "en": "This animal site is already occupied."
+    },
+    {
+      "key": "HUSBANDRY_ALREADY_ASSIGNED",
+      "de": "Dieses Tier hat bereits einen Tierplatz.",
+      "en": "This animal already has an assigned site."
+    },
+    {
+      "key": "HUSBANDRY_CHANGED_RECORD",
+      "de": "Art oder Körper des gespeicherten Tieres hat sich geändert.",
+      "en": "The saved animal’s species or body has changed."
+    },
+    {
+      "key": "HUSBANDRY_RECORD_LIMIT",
+      "de": "Für dieses Tier ist kein freier Produktionsnachweis verfügbar.",
+      "en": "No free production record is available for this animal."
+    },
+    {
+      "key": "HUSBANDRY_COLLECT_FIRST",
+      "de": "Hole zuerst die fertigen Produkte ab und schaffe Lagerplatz.",
+      "en": "Collect the finished products and free up storage space first."
+    },
+    {
+      "key": "HUSBANDRY_DELIVER_FIRST",
+      "de": "Warte, bis unterwegs befindliches Tierfutter und Wasser abgeliefert sind.",
+      "en": "Wait until the feed and water in transit have been delivered."
+    },
+    {
+      "key": "TRIBE_AGE_OTHER",
+      "de": "Dein Stamm befindet sich bereits in einem anderen Zeitalter.",
+      "en": "Your tribe is already in another age."
+    },
+    {
+      "key": "TRIBE_AGE_WORLD",
+      "de": "Kehre zuerst mit deiner Kreatur in die geladene Welt zurück.",
+      "en": "Return to the loaded world with your creature first."
+    },
+    {
+      "key": "TRIBE_AGE_HOME",
+      "de": "Kehre zum Heimatplatz zurück, um mit deiner Gruppe fortzuschreiten.",
+      "en": "Return home to advance with your group."
+    },
+    {
+      "key": "TRIBE_AGE_PENDING",
+      "de": "Ein anderer Übergang wird noch abgeschlossen.",
+      "en": "Another transition is still being completed."
+    },
+    {
+      "key": "TRIBE_AGE_SPACE",
+      "de": "Für das erste Dorf fehlen sichere Wege und fünf freie Arbeitsplätze. Verlege den Heimatplatz auf eine größere trockene Fläche.",
+      "en": "Your first village needs safe paths and five free work sites. Move your home to a larger dry area."
+    },
+    {
+      "key": "TRIBE_AGE_COMPANION",
+      "de": "Ein Gefährte erreicht den Dorfplatz noch nicht. Hole ihn näher heran.",
+      "en": "A companion cannot yet reach the village site. Bring it closer."
+    },
+    {
+      "key": "TRIBE_AGE_PLAYER",
+      "de": "Deine Kreatur erreicht den Dorfplatz noch nicht.",
+      "en": "Your creature cannot yet reach the village site."
+    },
+    {
+      "key": "TRIBE_AGE_ESTABLISH",
+      "de": "Lege mit {key} einen Heimatplatz für deine Nestgruppe fest.",
+      "en": "Use {key} to establish a home for your nest group."
+    },
+    {
+      "key": "TRIBE_AGE_RECALL",
+      "de": "Rufe beide Gefährten mit {key} → Heimkehren zum Heimatplatz.",
+      "en": "Call both companions home with {key} → Return home."
+    },
+    {
+      "key": "HUSBANDRY_BUILD_PEN",
+      "de": "Milchtierplatz · 4 Holz / 2 Fasern",
+      "en": "Dairy pen · 4 wood / 2 fibre"
+    },
+    {
+      "key": "HUSBANDRY_BUILD_LAYING",
+      "de": "Legestelle · 4 Holz / 2 Fasern",
+      "en": "Laying site · 4 wood / 2 fibre"
     }
   ]
 }

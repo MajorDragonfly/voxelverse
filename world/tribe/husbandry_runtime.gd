@@ -151,17 +151,18 @@ func tick(delta: float) -> void:
 		refresh_clock = 0.0
 		controller._changed()
 
-func description(p: Dictionary) -> String:
+func describe(p: Dictionary) -> Dictionary:
+	# Read-only presentation snapshot. Language changes never repeat a transaction.
 	var result: Dictionary = attendance(p)
-	var status: String = result["error"]
-	if status.is_empty():
+	var view: Dictionary = {"food": p.food, "water": p.water, "error": result.error, "state": "blocked"}
+	if result.error.is_empty():
 		var record: Dictionary = controller.village()["husbandry"]["records"][p["animal_id"]]
 		var recipe: Dictionary = H.production_recipe(record)
-		var title: String = H.E.TITLES[recipe.resource_id]
+		view.merge({"resource": recipe.resource_id, "seconds": ceili(float(recipe.interval) - float(record.clock)), "yield": recipe["yield"]})
 		if H.pending(record) > 0:
-			status = title + " bereit · Abholung wartet auf Lagerplatz."
+			view.state = "storage"
 		elif float(p["food"]) <= 0 or float(p["water"]) <= 0:
-			status = title + "produktion wartet auf Futter und Wasser."
+			view.state = "supplies"
 		else:
-			status = "%s in %d s · %s %s je Intervall." % [title, ceili(float(recipe.interval) - float(record.clock)), str(recipe["yield"]), "Stück" if recipe.resource_id == "eggs" else "Liter"]
-	return "Futter %.1f / 4 · Wasser %.1f / 8 Liter\n%s" % [p["food"], p["water"], status]
+			view.state = "producing"
+	return view
