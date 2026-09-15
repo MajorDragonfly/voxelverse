@@ -1,0 +1,64 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "a1515e623a650b862b28f09d9e7ac7ef9dce24c0",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "living_fauna_archive_test",
+    "living_planet_test",
+    "living_planet_map_test",
+    "domestic_surface_runtime_test",
+    "surface_population_budget_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "living_fauna_archive_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 0,
+      "seconds": 36.696,
+      "contract": "surface"
+    },
+    {
+      "name": "living_planet_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 32.362,
+      "contract": "surface"
+    },
+    {
+      "name": "living_planet_map_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.226,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "domestic_surface_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.383,
+      "contract": "domestic_fauna"
+    },
+    {
+      "name": "surface_population_budget_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.873,
+      "contract": "surface"
+    }
+  ]
+}
