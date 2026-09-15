@@ -1,0 +1,109 @@
+{
+  "packet": "ARCH-30-SHIPYARD-EXPANSION",
+  "base_local": "0f586f44267d67d755274a4b04d7ef4f7b7ece8d",
+  "base_published": "80125c9780aa42770bacd7aa5308b5ed1c69fa5c",
+  "source_commit": "f6d487db76649d964be37f433cb1ae85357abe4f",
+  "published_source_commit": "6e78ef8bcb9885333f15010326fdf0b9d746afec",
+  "source_tree": "7028a488e069fbc18f5f56693b1c1d63db6642f8",
+  "tracked_worktree_clean": true,
+  "publication_note": "Local and published commits have identical trees; commit metadata differs. Historical raw logs keep the local tested SHA.",
+  "source_sha256": {
+    "docs/WORK_ARCH30_SHIPYARD.md": "39f64f7313e442e70a5285ff286e9036baba65ed6bc158aa8d124f4f8ff9e5ed",
+    "space/ships/ship_blueprint.gd": "b752c899c5873b5217e075b14c93ad75b752cd0b08f9c51962e42a88b3f052f6",
+    "space/ships/ship_library_page.gd": "42a4645d891fcf24e92dd4a8404f59dbed4f92a86be8f65756790b465c334f08",
+    "space/ships/ship_library_page.gd.uid": "811cbf92ff5520c4edc9147472858b6e1f8821a1800e5d0169a80216db26438d",
+    "space/ships/ship_module_catalog.gd": "706e12db74a3d11e84636f76cbdf4743e79ead209937adc33f0f8b74eb051a2d",
+    "space/ships/ship_placement.gd": "e2cd8d9d0b23764cfd9cef7fe0c301202f171e9376f70a2eb72abe59168ca2c5",
+    "space/ships/ship_placement.gd.uid": "0a21a999960dc5d8548b3afd9dc2cb5c3ba917774d6a45c8b6409e6f04fd0f5c",
+    "space/ships/shipyard.gd": "c4bff203de0de2106a081bde7939d4be2426818865f9c97b692ae4437a7ccf63",
+    "tests/shipyard_test.gd": "26c266e64ea855d6d530e1217921cedc5d400d5989d07e845df4e3dd47ba0662",
+    "tools/review_shipyard.py": "df562c746a8cecec824c0552b8ed73f85327f6ab979f21afd6e30984d191bfb4"
+  },
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "engine": "4.6.3.stable.official.7d41c59c4",
+    "renderer": "OpenGL Compatibility / Mesa llvmpipe / Xvfb",
+    "user_data": "isolated by existing validation_support"
+  },
+  "passed": true,
+  "commands": [
+    "python3 tools/validate_godot.py --godot /workspace/scratch/866c41791224/bin/godot --tests shipyard_test expedition_contract_test modular_assembly_framework_test --skip-import --skip-main --output /workspace/scratch/78eb01499f8e/shipyard-v2-final-check",
+    "python3 tools/review_shipyard.py --godot /workspace/scratch/866c41791224/bin/godot --output /workspace/scratch/78eb01499f8e/shipyard-v2-final-render (authenticated loopback Xvfb display, isolated user data)"
+  ],
+  "headless": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "shipyard_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.99,
+      "contract": "expedition_design"
+    },
+    {
+      "name": "expedition_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.849,
+      "contract": "expedition_design"
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.89,
+      "contract": "blueprints"
+    }
+  ],
+  "native_report": "native/results.json",
+  "native_test_records": [
+    {
+      "checks": 9,
+      "failures": [],
+      "passed": true,
+      "test": "shipyard"
+    },
+    {
+      "capability_evaluations": 0,
+      "full_mesh_rebuilds": 0,
+      "microseconds": 419558,
+      "modules": 56,
+      "probe": "shipyard_selection",
+      "scope": "CPU authoring; not target-PC FPS",
+      "selections": 100
+    },
+    {
+      "checks": 206,
+      "failures": [],
+      "passed": true,
+      "test": "shipyard"
+    }
+  ],
+  "visual_review": [
+    "Symmetric green preview in top view",
+    "Blocked red preview and disabled add action",
+    "960x640 lander layout with reachable scrolling sidebars"
+  ],
+  "initial_findings": [
+    "First expansion import and art/source gates passed; later runs reused that imported resource set. Initial import raw logs are retained.",
+    "Programmatic LineEdit.text assignment in the test did not emit text_changed; test now emits the actual search signal explicitly.",
+    "Native idle test incorrectly assumed the render_target_update_mode getter changes from UPDATE_ONCE to UPDATE_DISABLED. It now observes retained pixels across idle frames, changes the background without requesting a frame, and then verifies that an explicit render request updates the pixels.",
+    "Native rendering uses a retained TextureRect/own SubViewport with explicit render requests; pointer selection through the displayed texture is exercised.",
+    "Early failed headless/native logs are diagnostic history, not passing completion evidence."
+  ],
+  "limits": [
+    "Standalone local authoring editor, not integrated campaign state or flight.",
+    "Paging retains twelve metadata entries, with at most two synchronous file reads (each at most 2 MiB) and 32 directory entries per tick. The 3 ms budget is cooperative, not a worst-case latency guarantee.",
+    "Directory offsets assume unchanged enumeration between page requests; no indexed sorting or snapshot isolation under external file changes.",
+    "Selection timing is a CPU authoring probe, not a target-PC FPS or GPU benchmark. Idle optimization covers the 3D viewport, not the whole application.",
+    "No full-suite/merged-tree, Windows-export or campaign acceptance; no schema/revision/balancing changes."
+  ]
+}

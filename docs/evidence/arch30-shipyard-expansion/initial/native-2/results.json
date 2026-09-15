@@ -1,0 +1,35 @@
+{
+  "passed": false,
+  "source": {
+    "commit": "0f586f44267d67d755274a4b04d7ef4f7b7ece8d",
+    "tracked_worktree_dirty": true
+  },
+  "command": [
+    "/workspace/scratch/866c41791224/bin/godot",
+    "--path",
+    "/workspace/scratch/78eb01499f8e/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/shipyard_test.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/78eb01499f8e/shipyard-v2-render-2"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility",
+  "screenshots": [
+    "shipyard-blocked-preview.png",
+    "shipyard-expedition-1280x720.png",
+    "shipyard-expedition-1920x1080.png",
+    "shipyard-expedition-960x640.png",
+    "shipyard-hangar-check.png",
+    "shipyard-lander-1280x720.png",
+    "shipyard-lander-1920x1080.png",
+    "shipyard-lander-960x640.png",
+    "shipyard-symmetry-preview.png"
+  ],
+  "scope": "Standalone authoring, real module meshes, three sizes, pointer add/cancel, paged hangar picker, symmetric placement and blocked preview"
+}
