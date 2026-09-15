@@ -12,6 +12,11 @@ on:
       - "tests/tooling/region_backup_test.py"
       - "tests/tooling/region_backup_places_test.py"
       - "tests/tooling/region_backup_userdata_test.py"
+      - "tests/tooling/lab_fauna_backup_test.py"
+      - "tests/living_fauna_archive_test.gd"
+      - "world/surface/living_fauna_archive.gd"
+      - "world/surface/living_planet_store.gd"
+      - "world/planet_lab/living_planet.gd"
       - "core/persistence/region_store.gd"
       - "core/persistence/slot_history.gd"
       - "autoload/save_game_service.gd"
@@ -56,3 +61,7 @@ jobs:
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
         run: python -m unittest discover -s tests/tooling -p 'region_backup_userdata_test.py' -v
+      - name: Restore paged laboratory fauna without its original user directory
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: python -m unittest discover -s tests/tooling -p 'lab_fauna_backup_test.py' -v
