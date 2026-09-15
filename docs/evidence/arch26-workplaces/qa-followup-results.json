@@ -1,0 +1,83 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "ffc7e7696e3ce8336298c9705ccba2833bf400f7",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "workplace_instances_test",
+    "workplace_runtime_test",
+    "tribal_age_economy_contract_test",
+    "egg_production_contract_test",
+    "creature_behavior_gameplay_test",
+    "save_participants_test",
+    "settlement_collection_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "workplace_instances_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.637,
+      "contract": "village"
+    },
+    {
+      "name": "workplace_runtime_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 50.091,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.028,
+      "contract": "village"
+    },
+    {
+      "name": "egg_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.138,
+      "contract": "village"
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.11,
+      "contract": "wildlife"
+    },
+    {
+      "name": "save_participants_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.48,
+      "contract": "campaign"
+    },
+    {
+      "name": "settlement_collection_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.73,
+      "contract": "village"
+    }
+  ]
+}

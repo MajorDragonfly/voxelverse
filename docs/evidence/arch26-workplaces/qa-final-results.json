@@ -1,0 +1,218 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "a3d0a1af6b2bcea300a0cf5fdef4561759c4743e",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "workplace_instances_test",
+    "workplace_runtime_test",
+    "tribal_age_economy_contract_test",
+    "tribal_age_economy_test",
+    "tribal_age_growth_contract_test",
+    "tribal_age_housing_recovery_test",
+    "tribal_age_husbandry_contract_test",
+    "egg_production_contract_test",
+    "settlement_collection_test",
+    "settlement_save_test",
+    "settlement_runtime_test",
+    "village_work_snapshot_test",
+    "village_work_observation_test",
+    "village_navigation_budget_test",
+    "tribal_economy_progress_test",
+    "tribal_economy_progress_world_test",
+    "tribal_neighbors_contract_test",
+    "creature_behavior_gameplay_test",
+    "tribe_localization_test",
+    "egg_husbandry_ui_test",
+    "far_simulation_test",
+    "save_participants_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "workplace_instances_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.844,
+      "contract": "village"
+    },
+    {
+      "name": "workplace_runtime_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 52.493,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.971,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_economy_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 108.409,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_growth_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.569,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_housing_recovery_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.006,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.623,
+      "contract": "village"
+    },
+    {
+      "name": "egg_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.632,
+      "contract": "village"
+    },
+    {
+      "name": "settlement_collection_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.752,
+      "contract": "village"
+    },
+    {
+      "name": "settlement_save_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.635,
+      "contract": "village"
+    },
+    {
+      "name": "settlement_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 206.531,
+      "contract": "village"
+    },
+    {
+      "name": "village_work_snapshot_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.238,
+      "contract": "village"
+    },
+    {
+      "name": "village_work_observation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.872,
+      "contract": "village"
+    },
+    {
+      "name": "village_navigation_budget_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.179,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "tribal_economy_progress_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.572,
+      "contract": "home_progression"
+    },
+    {
+      "name": "tribal_economy_progress_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 108.308,
+      "contract": "home_progression"
+    },
+    {
+      "name": "tribal_neighbors_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.369,
+      "contract": "neighbors"
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.15,
+      "contract": "wildlife"
+    },
+    {
+      "name": "tribe_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.108,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "egg_husbandry_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.994,
+      "contract": "village"
+    },
+    {
+      "name": "far_simulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.477,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "save_participants_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.279,
+      "contract": "campaign"
+    }
+  ]
+}
