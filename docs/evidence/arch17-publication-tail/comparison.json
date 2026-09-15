@@ -1,0 +1,98 @@
+{
+  "method": "Three baseline processes followed by three candidate processes, same cold route/probe hash, isolated user data; medians of per-process values, shared Linux CPU, no GPU/FPS claim.",
+  "runs": {
+    "baseline": [
+      {
+        "run": "baseline-1",
+        "source": {
+          "commit": "84d8f318ad1920a99653e71cee7fe6f072a3ec46",
+          "tracked_worktree_dirty": false,
+          "files": {
+            "tools/benchmark_terrain_publication.gd": "cea068acd878ad6d174292c7d1bd87b51a7467223a84f426e42cb476d3d02bfd",
+            "world/planet_lab/adaptive_sphere_tiles.gd": "3a7583b647df122e67502d940ef03142d92787f5a7f2eb72fdf5302515b93526"
+          }
+        }
+      },
+      {
+        "run": "baseline-2",
+        "source": {
+          "commit": "84d8f318ad1920a99653e71cee7fe6f072a3ec46",
+          "tracked_worktree_dirty": false,
+          "files": {
+            "tools/benchmark_terrain_publication.gd": "cea068acd878ad6d174292c7d1bd87b51a7467223a84f426e42cb476d3d02bfd",
+            "world/planet_lab/adaptive_sphere_tiles.gd": "3a7583b647df122e67502d940ef03142d92787f5a7f2eb72fdf5302515b93526"
+          }
+        }
+      },
+      {
+        "run": "baseline-3",
+        "source": {
+          "commit": "84d8f318ad1920a99653e71cee7fe6f072a3ec46",
+          "tracked_worktree_dirty": false,
+          "files": {
+            "tools/benchmark_terrain_publication.gd": "cea068acd878ad6d174292c7d1bd87b51a7467223a84f426e42cb476d3d02bfd",
+            "world/planet_lab/adaptive_sphere_tiles.gd": "3a7583b647df122e67502d940ef03142d92787f5a7f2eb72fdf5302515b93526"
+          }
+        }
+      }
+    ],
+    "candidate": [
+      {
+        "run": "candidate-1",
+        "source": {
+          "commit": "6dcddc09aa0f6f46363ef377058ed79725a48a9d",
+          "tracked_worktree_dirty": false,
+          "files": {
+            "tools/benchmark_terrain_publication.gd": "cea068acd878ad6d174292c7d1bd87b51a7467223a84f426e42cb476d3d02bfd",
+            "world/planet_lab/adaptive_sphere_tiles.gd": "0f8a982215f139315c94af4ceac440dee9418d867c3d1ef3fcc2e5389787c37c"
+          }
+        }
+      },
+      {
+        "run": "candidate-2",
+        "source": {
+          "commit": "6dcddc09aa0f6f46363ef377058ed79725a48a9d",
+          "tracked_worktree_dirty": false,
+          "files": {
+            "tools/benchmark_terrain_publication.gd": "cea068acd878ad6d174292c7d1bd87b51a7467223a84f426e42cb476d3d02bfd",
+            "world/planet_lab/adaptive_sphere_tiles.gd": "0f8a982215f139315c94af4ceac440dee9418d867c3d1ef3fcc2e5389787c37c"
+          }
+        }
+      },
+      {
+        "run": "candidate-3",
+        "source": {
+          "commit": "6dcddc09aa0f6f46363ef377058ed79725a48a9d",
+          "tracked_worktree_dirty": false,
+          "files": {
+            "tools/benchmark_terrain_publication.gd": "cea068acd878ad6d174292c7d1bd87b51a7467223a84f426e42cb476d3d02bfd",
+            "world/planet_lab/adaptive_sphere_tiles.gd": "0f8a982215f139315c94af4ceac440dee9418d867c3d1ef3fcc2e5389787c37c"
+          }
+        }
+      }
+    ]
+  },
+  "median": {
+    "baseline": {
+      "cache_total_ms": 589.603,
+      "cache_max_ms": 2.432,
+      "terrain_step_p95_ms": 1.071,
+      "terrain_step_max_ms": 11.736,
+      "upload_max_ms": 3.801,
+      "handoff_max_ms": 5.711,
+      "cold_ms": 14400,
+      "teardown_ms": 604.914
+    },
+    "candidate": {
+      "cache_total_ms": 5.219,
+      "cache_max_ms": 0.123,
+      "terrain_step_p95_ms": 0.232,
+      "terrain_step_max_ms": 10.142,
+      "upload_max_ms": 1.336,
+      "handoff_max_ms": 6.041,
+      "cold_ms": 13932,
+      "teardown_ms": 517.974
+    }
+  },
+  "cache_total_reduction_percent": 99.1148281131541
+}
