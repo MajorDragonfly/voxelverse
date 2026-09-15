@@ -50,9 +50,18 @@ static func all() -> Dictionary:
 		else:
 			geometry.append(_box(Vector3(0, size.y * 0.5 - 0.1, 0), Vector3(size.x * 0.6, 0.2, size.z * 0.75), DARK))
 		result[id] = {"id": id, "name": row[1], "role": row[2], "size": size,
-			"stats": row[4], "geometry": geometry, "revision": REVISION}
+			"stats": row[4], "geometry": geometry, "revision": REVISION, "category": _category(id)}
 		if id == "hangar": result[id]["bay_size"] = Vector3(12, 8, 16)
 	return result
+
+static func _category(id: String) -> String:
+	if id.begins_with("hull") or id == "landing_gear": return "Rumpf"
+	if id.begins_with("drive"): return "Antrieb"
+	if id.begins_with("reactor") or id.begins_with("battery"): return "Energie"
+	if id.begins_with("cargo"): return "Fracht"
+	if id == "hangar": return "Hangar"
+	if id == "laboratory": return "Forschung"
+	return "Besatzung"
 
 static func _box(position: Vector3, size: Vector3, color: Color) -> Dictionary:
 	return {"position": position, "size": size, "color": color}

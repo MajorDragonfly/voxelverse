@@ -33,11 +33,11 @@ def main():
     log_text = (output / "render.log").read_text()
     screenshots = sorted(p.name for p in output.glob("shipyard-*.png"))
     passed = (result.returncode == 0 and not ERROR.search(log_text)
-              and '"passed":true,"test":"shipyard"' in log_text and len(screenshots) == 7)
+              and '"passed":true,"test":"shipyard"' in log_text and len(screenshots) == 9)
     report = {"passed": passed, "source": source, "command": command,
               "engine": subprocess.check_output([args.godot, "--version"], text=True).strip(),
               "renderer": "gl_compatibility", "screenshots": screenshots,
-              "scope": "Standalone authoring, real module meshes, 960x640/1280x720/1920x1080, pointer add/cancel and hangar picker"}
+              "scope": "Standalone authoring, real module meshes, three sizes, pointer add/cancel, paged hangar picker, symmetric placement and blocked preview"}
     (output / "results.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps({"passed": passed, "screenshots": screenshots}), flush=True)
     if not passed:

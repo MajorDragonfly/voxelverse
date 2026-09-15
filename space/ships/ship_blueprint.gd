@@ -8,6 +8,7 @@ const Store = preload("res://core/persistence/design_store.gd")
 const MAX_MODULES: int = 128
 const DIRECTORY: String = "user://ship_designs"
 const LIMITS: Dictionary = {"lander": Vector3(16, 12, 24), "expedition": Vector3(96, 48, 160)}
+static var _definitions: Dictionary = Catalog.all()
 
 static func template(role: String) -> Dictionary:
 	if not LIMITS.has(role): return {}
@@ -46,7 +47,7 @@ static func inspect(data: Dictionary) -> Dictionary:
 	for key in ["design_id", "name"]:
 		if not data.get(key) is String or data[key].strip_edges().is_empty() or data[key].length() > 120: return _result("ship.identity")
 	if data.parts.size() > MAX_MODULES: return _result("ship.module_limit")
-	var definitions: Dictionary = Catalog.all()
+	var definitions: Dictionary = _definitions
 	for part: Dictionary in data.parts:
 		if not part.get("uid") is String or part.uid.is_empty() or part.uid.length() > 120: return _result("ship.module_identity")
 		if not definitions.has(part.get("part_id", "")): return _result("ship.unknown_module")
@@ -65,7 +66,7 @@ static func inspect(data: Dictionary) -> Dictionary:
 static func evaluate(data: Dictionary) -> Dictionary:
 	var inspection: Dictionary = inspect(data)
 	if not inspection.ok: return {"ok": false, "code": inspection.code, "issues": [{"code": inspection.code, "parts": []}], "stats": {}, "bounds": AABB()}
-	var definitions: Dictionary = Catalog.all()
+	var definitions: Dictionary = _definitions
 	var stats: Dictionary = {}
 	for key in ["mass", "cost", "cargo", "seats", "energy", "power", "draw", "thrust", "structure", "command", "landing", "research"]: stats[key] = 0
 	var boxes: Array[AABB] = []
@@ -178,6 +179,20 @@ static func save_design(data: Dictionary, path: String = "") -> Dictionary:
 	data.clear()
 	data.merge(candidate, true)
 	return {"ok": true, "code": "", "path": path}
+
+static func save_copy(data: Dictionary) -> Dictionary:
+	var check: Dictionary = inspect(data)
+	if not check.ok: return check
+	var candidate: Dictionary = data.duplicate(true)
+	candidate.design_id = Assembly.Ids.create("design")
+	candidate.revision = 0
+	candidate.name = data.name.left(114) + " Kopie"
+	for part: Dictionary in candidate.parts:
+		part.uid = Assembly.Ids.create("module")
+		part.mirror_group = ""
+	var saved: Dictionary = save_design(candidate)
+	if saved.ok: saved.blueprint = candidate
+	return saved
 
 static func load_design(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path): return _result("ship.file_missing")
