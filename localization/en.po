@@ -3877,4 +3877,22 @@ msgid "ATMOSPHERE_CINEMATIC"
 msgstr "Cinematic · light in mist"
 
 msgid "ATMOSPHERE_HINT"
-msgstr "Takes effect in the spherical world after “Apply & save”. Cinematic needs more graphics performance. Additional effects depend on the rendering mode."
+msgstr "Applies to the spherical world. “Apply & save” activates your selection and keeps it for the next launch. “Back” discards a selection that has not been applied."
+
+msgid "GRAPHICS_TAB"
+msgstr "Graphics"
+
+msgid "ATMOSPHERE_TITLE"
+msgstr "Atmosphere and lighting"
+
+msgid "ATMOSPHERE_LOW_DESCRIPTION"
+msgstr "Sky, simple moving clouds, sunlight and distance haze. The lightest preset."
+
+msgid "ATMOSPHERE_STANDARD_DESCRIPTION"
+msgstr "More detailed clouds, softer sun shadows, contact shadows and subtle glow. The default preset."
+
+msgid "ATMOSPHERE_CINEMATIC_DESCRIPTION"
+msgstr "All default effects plus light shafts in volumetric fog, additional cloud detail and greater shadow distance. Requires more graphics performance."
+
+msgid "ATMOSPHERE_FALLBACK"
+msgstr "Advanced lighting and fog effects are unavailable in your current graphics mode. Sky, clouds and distance haze remain active."

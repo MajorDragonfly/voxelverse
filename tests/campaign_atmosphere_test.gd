@@ -73,11 +73,24 @@ func _run() -> void:
 	# Actual settings control, persistence and group broadcast while paused.
 	var option: OptionButton = settings._menu_layer.find_child("AtmosphereQuality",true,false)
 	_expect(option != null and option.item_count == 3, "F8 has no usable atmosphere choice.")
-	paused = true
+	settings.open_menu()
+	settings._tabs.current_tab = settings._tabs.get_node("GRAPHICS_TAB").get_index()
 	option.select(2)
+	option.item_selected.emit(2)
 	settings._apply_menu_selection()
-	_expect(settings.atmosphere_quality == 2 and air.quality == 2, "Applying F8 preference did not reach paused campaign.")
-	paused = false
+	_expect(paused and settings.atmosphere_quality == 2 and air.quality == 2, "Applying graphics preference did not reach paused campaign.")
+	settings.close_menu()
+	settings.open_menu()
+	settings._tabs.current_tab = settings._tabs.get_node("GRAPHICS_TAB").get_index()
+	option.select(0)
+	option.item_selected.emit(0)
+	option.get_popup().popup()
+	settings.close_menu()
+	_expect(not option.get_popup().visible and not paused, "Closing graphics settings left popup or pause active.")
+	_expect(settings.atmosphere_quality == 2 and air.quality == 2, "Unapplied graphics selection changed active effects.")
+	settings.open_menu()
+	_expect(option.selected == 2 and settings._atmosphere_description.text == "ATMOSPHERE_CINEMATIC_DESCRIPTION", "Reopening did not discard unapplied selection and explanation.")
+	settings.close_menu()
 	var config := ConfigFile.new()
 	_expect(config.load(settings.CONFIG_PATH) == OK and config.get_value("display","atmosphere_quality",-1) == 2, "Quality was not written alongside display settings.")
 	# Camera override must remain owned by UnderwaterView across changing air/quality.

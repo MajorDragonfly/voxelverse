@@ -19,7 +19,7 @@ radiales Oben auch in der Stammesansicht. Weltbeleuchtung gehört zum Controller
 der bestehende UnderwaterView behält seine Kameraumgebung und stellt beim Auftauchen
 die aktuelle Luftumgebung wieder her.
 
-**F8 → Anzeige → Atmosphäre → Übernehmen & speichern:**
+**Einstellungen → Grafik → Atmosphäre (auch über F8) → Übernehmen & speichern:**
 
 | Stufe | Wirkung |
 |---|---|
@@ -84,3 +84,12 @@ Stammeskamera sowie einen Körperwechsel im gemeinsamen Windows-Build ansehen.
 Enginegrundlagen: [Sky-Shader](https://docs.godotengine.org/en/4.6/tutorials/shaders/shader_reference/sky_shader.html),
 [Environment](https://docs.godotengine.org/en/4.6/classes/class_environment.html),
 [volumetrischer Nebel](https://docs.godotengine.org/en/4.6/tutorials/3d/volumetric_fog.html).
+
+## Ergänzung: Einstellungen und Roadmap
+
+Die Stufen besitzen einen eigenen Grafikreiter mit einer Erklärung der gewählten
+Stufe und einem Hinweis bei fehlender Renderer-Unterstützung. Schließen verwirft
+eine unübernommene Auswahl und schließt auch das Auswahlmenü. Der gemeinsame
+Dialog ist über Hauptmenü, Spielpause und F8 erreichbar. Individuelle Effektregler
+sind als **ATMOSPHERE-SETTINGS-DETAIL** in der [Roadmap](../ROADMAP.md) geplant;
+dieser Anschluss liefert weiterhin die drei Presets.

@@ -27,6 +27,7 @@ var ui_scale: float = 1.0
 var vsync_enabled: bool = true
 var atmosphere_quality: int = 1
 var _atmosphere_option: OptionButton
+var _atmosphere_description: Label
 
 var _menu_layer: CanvasLayer
 var _menu_panel: PanelContainer
@@ -268,16 +269,6 @@ func _build_settings_menu() -> void:
 			float(scale_value)
 		)
 
-	_atmosphere_option = _add_option_row(display_content, "ATMOSPHERE_LABEL")
-	_atmosphere_option.name = "AtmosphereQuality"
-	for key in ["ATMOSPHERE_LOW", "ATMOSPHERE_STANDARD", "ATMOSPHERE_CINEMATIC"]:
-		_atmosphere_option.add_item(key)
-	var atmosphere_hint := Label.new()
-	atmosphere_hint.text = "ATMOSPHERE_HINT"
-	atmosphere_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	atmosphere_hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	display_content.add_child(atmosphere_hint)
-
 	_vsync_option = CheckButton.new()
 	_vsync_option.name = "VSync"
 	_vsync_option.text = "VSync – Bildrisse vermeiden"
@@ -313,6 +304,38 @@ func _build_settings_menu() -> void:
 	_language_settings = preload("res://ui/localization/language_settings.gd").new()
 	_language_settings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	language_scroll.add_child(_language_settings)
+	var graphics_scroll := ScrollContainer.new()
+	graphics_scroll.name = "GRAPHICS_TAB"
+	graphics_scroll.custom_minimum_size = Vector2(600, 440)
+	graphics_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	graphics_scroll.follow_focus = true
+	_tabs.add_child(graphics_scroll)
+	var graphics_content := VBoxContainer.new()
+	graphics_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	graphics_content.add_theme_constant_override("separation", 16)
+	graphics_scroll.add_child(graphics_content)
+	var graphics_title := Label.new()
+	graphics_title.text = "ATMOSPHERE_TITLE"
+	graphics_title.add_theme_font_size_override("font_size", 21)
+	graphics_content.add_child(graphics_title)
+	_atmosphere_option = _add_option_row(graphics_content, "ATMOSPHERE_LABEL")
+	_atmosphere_option.name = "AtmosphereQuality"
+	for key in ["ATMOSPHERE_LOW", "ATMOSPHERE_STANDARD", "ATMOSPHERE_CINEMATIC"]:
+		_atmosphere_option.add_item(key)
+	_atmosphere_description = Label.new()
+	_atmosphere_description.name = "AtmosphereDescription"
+	_atmosphere_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	graphics_content.add_child(_atmosphere_description)
+	_atmosphere_option.item_selected.connect(_refresh_atmosphere_description)
+	var atmosphere_hint := Label.new()
+	atmosphere_hint.text = "ATMOSPHERE_HINT"
+	atmosphere_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	graphics_content.add_child(atmosphere_hint)
+	var fallback_hint := Label.new()
+	fallback_hint.text = "ATMOSPHERE_FALLBACK"
+	fallback_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	fallback_hint.visible = RenderingServer.get_current_rendering_method() != "forward_plus"
+	graphics_content.add_child(fallback_hint)
 	_tabs.tab_changed.connect(func(_tab: int): _control_settings.cancel_binding())
 	_message = _control_settings.message
 	_message.name = "Status"
@@ -394,9 +417,14 @@ func _apply_menu_selection() -> void:
 	_message.text = "Einstellungen übernommen und gespeichert." if saved else "Steuerung gespeichert. Anzeige übernommen; Speichern der Anzeige fehlgeschlagen."
 
 
+func _refresh_atmosphere_description(index: int) -> void:
+	_atmosphere_description.text = ["ATMOSPHERE_LOW_DESCRIPTION", "ATMOSPHERE_STANDARD_DESCRIPTION", "ATMOSPHERE_CINEMATIC_DESCRIPTION"][clampi(index, 0, 2)]
+
+
 func _sync_menu_controls() -> void:
 	if _atmosphere_option != null:
 		_atmosphere_option.select(atmosphere_quality)
+		_refresh_atmosphere_description(atmosphere_quality)
 	if _mode_option != null:
 		for index in range(_mode_option.item_count):
 			if _mode_option.get_item_id(index) == display_mode:
@@ -463,7 +491,7 @@ func open_menu() -> void:
 func close_menu() -> void:
 	if not is_menu_open():
 		return
-	for option: OptionButton in [_mode_option, _resolution_option, _scale_option]:
+	for option: OptionButton in [_mode_option, _resolution_option, _scale_option, _atmosphere_option]:
 		option.get_popup().hide()
 	_control_settings.fps.get_popup().hide()
 	_language_settings.close_popup()

@@ -3877,4 +3877,22 @@ msgid "ATMOSPHERE_CINEMATIC"
 msgstr "Cineastisch · Licht im Nebel"
 
 msgid "ATMOSPHERE_HINT"
-msgstr "Wirkt in der Kugelwelt nach „Übernehmen & speichern“. Cineastisch benötigt mehr Grafikleistung. Zusatzeffekte sind abhängig vom Grafikmodus verfügbar."
+msgstr "Gilt für die Kugelwelt. Die Auswahl wird mit „Übernehmen & speichern“ aktiviert und für den nächsten Spielstart gespeichert. „Zurück“ verwirft eine noch nicht übernommene Auswahl."
+
+msgid "GRAPHICS_TAB"
+msgstr "Grafik"
+
+msgid "ATMOSPHERE_TITLE"
+msgstr "Atmosphäre und Licht"
+
+msgid "ATMOSPHERE_LOW_DESCRIPTION"
+msgstr "Himmel, einfache bewegte Wolken, Sonnenlicht und Entfernungsdunst. Die sparsamste Stufe."
+
+msgid "ATMOSPHERE_STANDARD_DESCRIPTION"
+msgstr "Detailliertere Wolken, weichere Sonnenschatten, Kontaktschatten und dezente Leuchteffekte. Die Standardstufe."
+
+msgid "ATMOSPHERE_CINEMATIC_DESCRIPTION"
+msgstr "Alle Effekte der Standardstufe sowie Lichtstrahlen im volumetrischen Nebel, weitere Wolkendetails und größere Schattenreichweite. Benötigt mehr Grafikleistung."
+
+msgid "ATMOSPHERE_FALLBACK"
+msgstr "Erweiterte Licht- und Nebeleffekte sind in deinem aktuellen Grafikmodus nicht verfügbar. Himmel, Wolken und Entfernungsdunst bleiben aktiv."

@@ -6464,8 +6464,38 @@
     },
     {
       "key": "ATMOSPHERE_HINT",
-      "de": "Wirkt in der Kugelwelt nach „Übernehmen & speichern“. Cineastisch benötigt mehr Grafikleistung. Zusatzeffekte sind abhängig vom Grafikmodus verfügbar.",
-      "en": "Takes effect in the spherical world after “Apply & save”. Cinematic needs more graphics performance. Additional effects depend on the rendering mode."
+      "de": "Gilt für die Kugelwelt. Die Auswahl wird mit „Übernehmen & speichern“ aktiviert und für den nächsten Spielstart gespeichert. „Zurück“ verwirft eine noch nicht übernommene Auswahl.",
+      "en": "Applies to the spherical world. “Apply & save” activates your selection and keeps it for the next launch. “Back” discards a selection that has not been applied."
+    },
+    {
+      "key": "GRAPHICS_TAB",
+      "de": "Grafik",
+      "en": "Graphics"
+    },
+    {
+      "key": "ATMOSPHERE_TITLE",
+      "de": "Atmosphäre und Licht",
+      "en": "Atmosphere and lighting"
+    },
+    {
+      "key": "ATMOSPHERE_LOW_DESCRIPTION",
+      "de": "Himmel, einfache bewegte Wolken, Sonnenlicht und Entfernungsdunst. Die sparsamste Stufe.",
+      "en": "Sky, simple moving clouds, sunlight and distance haze. The lightest preset."
+    },
+    {
+      "key": "ATMOSPHERE_STANDARD_DESCRIPTION",
+      "de": "Detailliertere Wolken, weichere Sonnenschatten, Kontaktschatten und dezente Leuchteffekte. Die Standardstufe.",
+      "en": "More detailed clouds, softer sun shadows, contact shadows and subtle glow. The default preset."
+    },
+    {
+      "key": "ATMOSPHERE_CINEMATIC_DESCRIPTION",
+      "de": "Alle Effekte der Standardstufe sowie Lichtstrahlen im volumetrischen Nebel, weitere Wolkendetails und größere Schattenreichweite. Benötigt mehr Grafikleistung.",
+      "en": "All default effects plus light shafts in volumetric fog, additional cloud detail and greater shadow distance. Requires more graphics performance."
+    },
+    {
+      "key": "ATMOSPHERE_FALLBACK",
+      "de": "Erweiterte Licht- und Nebeleffekte sind in deinem aktuellen Grafikmodus nicht verfügbar. Himmel, Wolken und Entfernungsdunst bleiben aktiv.",
+      "en": "Advanced lighting and fog effects are unavailable in your current graphics mode. Sky, clouds and distance haze remain active."
     }
   ]
 }

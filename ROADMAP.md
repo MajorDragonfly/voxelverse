@@ -140,6 +140,42 @@ Der zusammengeführte D1-Grundvertrag mit drei Pflichtarten bleibt als eigene Li
 - **Minimap als geprüftes Fachpaket:** unten rechts, gemeinsames Gelände-/Wasserraster, Blickrichtung, Heimat und eigene Gruppenmitglieder. Der bestätigte Phasenwechsel erweitert den Maßstab automatisch; manuell +/− und Rückkehr zum Phasenmaßstab. Körpergebundene Projektion für V9 und Kugelplaneten, Save/Load sowie getrennte Dorfbedienung bei 1280 × 720 und 800 × 600 geprüft. Details und Grenzen: [WORK_MINIMAP.md](docs/WORK_MINIMAP.md). In der zweiten Integrationsrunde samt dauerhafter Weltkarte übernommen. Offen bleiben gespeicherte Wegpunkte, eigene gezähmte Tiere aus D2 und später passende Orbit-/Systemkarten; unbekannte Arten und Rohstoffe werden nicht verraten.
 - **Abnahme auf dem Ziel-PC:** Lesbarkeit der Bücher und Silhouetten, neue Beerenstrauchform, E als einziger Art-/Wertezugriff und passende Drehrichtung im Editor. Die lokale automatische Funktionsprüfung ersetzt die optische Abnahme nicht.
 
+### Grafik- und Atmosphäreneinstellungen · Auftrag vom 15. September 2026
+
+**ATMOSPHERE-SHADERS:** [PR #117](https://github.com/MajorDragonfly/voxelverse/pull/117)
+führt die Umsetzung als eigenen Fachbranch; die gemeinsame Integration und
+Windows-/Ziel-PC-Abnahme stehen aus. [Paket und Bedienung](docs/WORK_ATMOSPHERE_SHADERS.md).
+
+- [x] Im Fachbranch umgesetzt: gemeinsamer Reiter **Einstellungen → Grafik** mit
+  **Basis / Atmosphärisch / Cineastisch**, verständlicher Erklärung pro Stufe,
+  Übernehmen/Speichern und Wiederherstellung nach Neustart. Hauptmenü und
+  Spielpause verwenden denselben Einstellungsdialog; F8 öffnet ihn direkt.
+- [ ] **ATMOSPHERE-SETTINGS-DETAIL:** Im selben Grafikreiter die Effekte einzeln
+  einstellbar machen; nach eigener Änderung das Preset als „Benutzerdefiniert“
+  anzeigen und die Werte unabhängig vom gewählten Spielstand speichern.
+
+| Geplanter Einzelregler | Bedienung / Wirkung |
+|---|---|
+| Wolken | Darstellung ein/aus und Detailqualität; planetare Bewölkung bleibt beim Wettermodell |
+| Entfernungsdunst | Darstellungsstärke; Klima, Sichtbedingungen und Gefahren bleiben beim Wettermodell |
+| Volumetrischer Nebel / Lichtstrahlen | Ein/aus, Darstellungsqualität und Stärke |
+| Sonnenschatten | Ein/aus, Qualität, Weichheit und Reichweite |
+| Kontaktschatten (SSAO) | Ein/aus, Stärke und Qualität |
+| Bloom / Leuchteffekte | Ein/aus und Stärke |
+| Bildhelligkeit und Farben | Belichtung, Kontrast und Sättigung mit begrenzten, rücksetzbaren Werten |
+
+**Abnahme des Folgepakets:** Presets setzen reproduzierbare Werte; eigener Reglerstand
+übersteht Menüwechsel, Neustart, Laden und Planetenwechsel. „Übernehmen“ aktiviert,
+„Zurück“ verwirft unübernommene Werte, „Standard wiederherstellen“ bietet eine klare
+Rückkehr. Nicht unterstützte Effekte werden verständlich gekennzeichnet. DE/EN,
+Tastatur/Maus, kleine Fenster und größere UI-Skalierung bleiben bedienbar.
+Darstellung vor/nach dem Wechsel, Unterwasserübergänge und Leistung auf dem Ziel-PC
+prüfen. Grafikregler verändern weder Wettergefahren noch die Simulationsregeln.
+
+Der Wetterchat besitzt Klima/Wetterereignisse; der Planeten-Renderchat besitzt
+Terrain, Materialien und Ladebereitschaft. Die individuellen Grafikregler nutzen
+den vorhandenen Atmosphärencontroller und den gemeinsamen Einstellungsdialog.
+
 ## Weltraumphase – mobile Expeditionsbasis
 
 Das erste Expeditionsschiff ist bereits deutlich größer als sein Landungs-/Erkundungsschiff. Die Basis bleibt beim Planeten im Weltraum, während der Spieler mit einem konkreten Beiboot landet, aussteigt und die Oberfläche untersucht. Schiffwechsel sind Kontroll-/Ortswechsel innerhalb derselben Kampagne und Epoche.
