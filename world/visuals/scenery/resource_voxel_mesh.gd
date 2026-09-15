@@ -38,7 +38,8 @@ static func build(cells: Dictionary, cell: Vector3) -> ArrayMesh:
 				vertices.append(center + corner * cell * 0.5)
 				normals.append(Vector3(DIRECTIONS[side]))
 				colors.append(cells[key])
-			for index in [0, 1, 2, 0, 2, 3]: indices.append(offset + index)
+			# Clockwise front faces, matching Godot's native primitive meshes.
+			for index in [0, 2, 1, 0, 3, 2]: indices.append(offset + index)
 	var mesh := ArrayMesh.new()
 	if vertices.is_empty(): return mesh
 	var arrays: Array = []

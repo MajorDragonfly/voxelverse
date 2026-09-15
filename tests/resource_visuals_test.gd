@@ -44,11 +44,20 @@ func _run() -> void:
 	var mesh: ArrayMesh = Voxels.build(grid, Vector3.ONE)
 	check(mesh.surface_get_array_index_len(0) == 60, "Grid includes an internal face")
 	var arrays: Array = mesh.surface_get_arrays(0)
+	# Anchor the convention in Godot's own primitive, not in this mesher.
+	# Godot front faces wind clockwise, opposite to (b-a) cross (c-a).
+	var native: Array = BoxMesh.new().get_mesh_arrays()
+	var native_indices: PackedInt32Array = native[Mesh.ARRAY_INDEX]
+	var native_vertices: PackedVector3Array = native[Mesh.ARRAY_VERTEX]
+	var native_a: int = native_indices[0]
+	var native_winding: float = (native_vertices[native_indices[1]]-native_vertices[native_a]).cross(native_vertices[native_indices[2]]-native_vertices[native_a]).dot(native[Mesh.ARRAY_NORMAL][native_a])
+	check(native_winding < 0.0, "Unexpected Godot primitive front-face convention")
 	for i in range(0,arrays[Mesh.ARRAY_INDEX].size(),3):
 		var a: int = arrays[Mesh.ARRAY_INDEX][i]
 		var b: int = arrays[Mesh.ARRAY_INDEX][i+1]
 		var c: int = arrays[Mesh.ARRAY_INDEX][i+2]
-		check((arrays[Mesh.ARRAY_VERTEX][b]-arrays[Mesh.ARRAY_VERTEX][a]).cross(arrays[Mesh.ARRAY_VERTEX][c]-arrays[Mesh.ARRAY_VERTEX][a]).dot(arrays[Mesh.ARRAY_NORMAL][a]) > 0, "Incorrect exterior face winding")
+		var winding: float = (arrays[Mesh.ARRAY_VERTEX][b]-arrays[Mesh.ARRAY_VERTEX][a]).cross(arrays[Mesh.ARRAY_VERTEX][c]-arrays[Mesh.ARRAY_VERTEX][a]).dot(arrays[Mesh.ARRAY_NORMAL][a])
+		check(winding * native_winding > 0.0, "Resource front face disagrees with Godot BoxMesh")
 	var holder := Node3D.new()
 	root.add_child(holder)
 	var bush: Node3D = load("res://world/resources/plants/berry_bush.tscn").instantiate()
