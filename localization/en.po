@@ -3863,3 +3863,75 @@ msgstr "Back · Esc"
 
 msgid "Kopfmodule"
 msgstr "Head modules"
+
+msgid "SITE_FREIGHT_TITLE"
+msgstr "Shipment → %s"
+
+msgid "SITE_FREIGHT_SEND"
+msgstr "Send with selected resident"
+
+msgid "SITE_FREIGHT_CANCEL"
+msgstr "Cancel / return cargo"
+
+msgid "SITE_FREIGHT_AMOUNT"
+msgstr "Amount (1–4 units)"
+
+msgid "SITE_FREIGHT_HELP"
+msgstr "An idle resident at the store carries up to four units. Stock is credited on arrival."
+
+msgid "SITE_FREIGHT_NOT_READY"
+msgstr "The village and loaded paths must be ready."
+
+msgid "SITE_FREIGHT_DESTINATION"
+msgstr "Found a second settlement first."
+
+msgid "SITE_FREIGHT_BUSY"
+msgstr "A shipment is in progress. Its carrier stays assigned until completion."
+
+msgid "SITE_FREIGHT_CARRIER"
+msgstr "Select an idle companion waiting at the store without cargo. Your creature stays in the village."
+
+msgid "SITE_FREIGHT_ROUTE"
+msgstr "No safe loaded transport route is available."
+
+msgid "SITE_FREIGHT_CAPACITY"
+msgstr "The destination has insufficient unreserved storage space."
+
+msgid "SITE_FREIGHT_STOCK"
+msgstr "This amount is unavailable at the source store."
+
+msgid "SITE_FREIGHT_SENT"
+msgstr "Shipment saved. Goods and storage space are reserved."
+
+msgid "SITE_FREIGHT_RETURN_REQUESTED"
+msgstr "Return requested. The carrier turns back at the next waypoint."
+
+msgid "SITE_FREIGHT_SAVE_FAILED"
+msgstr "Save failed. The previous shipment and stock are preserved."
+
+msgid "SITE_FREIGHT_DETAIL"
+msgstr "%s · %d × %s"
+
+msgid "SITE_FREIGHT_STATUS_RESERVED"
+msgstr "Ready for pickup"
+
+msgid "SITE_FREIGHT_STATUS_MOVING"
+msgstr "In transit"
+
+msgid "SITE_FREIGHT_STATUS_ARRIVED"
+msgstr "Arrived – awaiting storage"
+
+msgid "SITE_FREIGHT_STATUS_DELIVERED"
+msgstr "Delivered"
+
+msgid "SITE_FREIGHT_STATUS_RETURNED"
+msgstr "Returned to source"
+
+msgid "SITE_FREIGHT_STATUS_CANCELLED"
+msgstr "Cancelled"
+
+msgid "SITE_FREIGHT_STATUS_BLOCKED"
+msgstr "Route blocked – cargo stays with the carrier"
+
+msgid "SITE_FREIGHT_STATUS_RETURNING"
+msgstr "Return requested / returning"

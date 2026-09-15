@@ -6,6 +6,9 @@ var _order_sequence: int = 0
 const Settlements = preload("res://world/tribe/settlement_collection.gd")
 const SettlementRuntime = preload("res://world/tribe/settlement_runtime.gd")
 var settlements: Node
+const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
+const SiteTransportRuntime = preload("res://world/tribe/transport/site_transport_runtime.gd")
+var site_transport: Node
 const Husbandry = preload("res://world/tribe/village_husbandry.gd")
 const HusbandryRuntime = preload("res://world/tribe/husbandry_runtime.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
@@ -80,6 +83,9 @@ func _ready() -> void:
 	domestication = preload("res://world/domestication/campaign_domestication.gd").new()
 	domestication.name = "Domestication"
 	add_child(domestication)
+	site_transport = SiteTransportRuntime.new()
+	site_transport.controller = self
+	add_child(site_transport)
 	settlements = SettlementRuntime.new()
 	settlements.controller = self
 	add_child(settlements)
@@ -405,6 +411,10 @@ func _resolve_order(order: String, success: bool) -> void:
 	panel.refresh()
 
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
+	for id: String in selected:
+		if SiteTransport.bound(body(), id):
+			status = preload("res://core/localization/ui_text.gd").text("SITE_FREIGHT_BUSY")
+			return false
 	if not navigation.is_ready() and order in ["move"] + Economy.STATIONS.keys() + Housing.BUILDS:
 		status = "Die Dorfwege werden geprüft. Bitte einen Moment warten."
 		return false
@@ -532,6 +542,9 @@ func _physics_process(delta: float) -> void:
 	for member: Dictionary in village()["members"]:
 		if not navigation.is_ready(): break
 		var actor: CharacterBody3D = actors[member["id"]]
+		if SiteTransport.bound(body(), member.id):
+			site_transport.tick(member, actor, delta, simulation_delta)
+			continue
 		Work.prepare(village(), member, simulation_delta)
 		var order: String = _effective_order(member)
 		var target: Vector3 = actor.global_position
@@ -700,6 +713,8 @@ func _drink(member: Dictionary) -> bool:
 	return changed
 
 func assign_profession(profession: String) -> bool:
+	for id: String in selected:
+		if SiteTransport.bound(body(), id): return false
 	if not is_active() or selected.is_empty() or profession not in Economy.JOBS:
 		return false
 	var before: Dictionary = village().duplicate(true)
@@ -854,6 +869,7 @@ func _update_selection() -> void:
 			cargo.position = Vector3(0, 1.45, 0.1)
 			actor.add_child(cargo)
 		var kind: String = member_record(identity)["cargo"]
+		if SiteTransport.bound(body(), identity) and SiteTransport.job(body()).status != "reserved": kind = SiteTransport.job(body()).resource_id
 		cargo.visible = not kind.is_empty()
 		cargo.material_override.albedo_color = Color(Economy.Resources.definition(kind).get("color", "ffffff"))
 

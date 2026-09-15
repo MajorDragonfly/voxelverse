@@ -1,4 +1,5 @@
 extends RefCounted
+const Freight = preload("res://world/tribe/transport/freight_ledger.gd")
 ## Village-only economy. No species, ownership, taming or animal production here.
 const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
@@ -66,6 +67,9 @@ static func carried(data: Dictionary, kind: String) -> int:
 	return count
 
 static func reserve(data: Dictionary, kind: String) -> int:
+	return int(data["stock"].get(kind, 0)) + carried(data, kind) + Freight.amount(data, "held", kind)
+
+static func goods(data: Dictionary, kind: String) -> int:
 	return int(data["stock"].get(kind, 0)) + carried(data, kind)
 
 static func has_food(data: Dictionary) -> bool:
@@ -167,6 +171,7 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
 static func has_unsupported_contract(value: Variant) -> bool:
 	if not value is Dictionary: return false
 	if (value.get("schema") != 1 and value.get("schema") != SCHEMA): return true
+	if value.get("freight") is Dictionary and value.freight.get("schema") != 1: return true
 	if value.get("receipts") is Dictionary:
 		for receipt: Variant in value.receipts.values():
 			if Batch.unsupported(receipt): return true
@@ -178,6 +183,7 @@ static func has_unsupported_contract(value: Variant) -> bool:
 static func validate(data: Dictionary, resource_owner: String = "") -> String:
 	if resource_owner.is_empty(): resource_owner = str(data.get("home_group_id", ""))
 	var e: Variant = data.get("economy")
+	if e is Dictionary and e.has("freight") and not Freight.valid(e.freight): return "Ungültige Lagertransportbilanz."
 	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != SCHEMA):
 		return "Ungültige Dorfwirtschaft."
 	for field in ["stations", "clocks", "produced", "receipts"]:
@@ -200,7 +206,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 		var deposit: Variant = data["deposits"].get(kind)
 		if not deposit is Dictionary or deposit.get("id") != Ids.scoped("resource", resource_owner, kind) or not local_point(deposit.get("position"), data["anchor"]) or not integer(deposit.get("remaining"), 0, 48):
 			return "Ungültiger Rohstoffplatz."
-		if int(deposit["remaining"]) + reserve(data, kind) > (48 if kind in ["wood", "stone"] else 0) + int(e["produced"][kind]):
+		if int(deposit["remaining"]) + goods(data, kind) > (48 if kind in ["wood", "stone"] else 0) + int(e["produced"][kind]) + Freight.net(data, kind):
 			return "Rohstoff wurde vervielfacht."
 	for station: String in e["stations"]:
 		var site: Variant = e["stations"][station]
@@ -237,8 +243,8 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 		keys.append(batch.receipt_id)
 	for kind: String in RESOURCES:
 		if not Resources.uses_batches(kind): continue
-		if kind == "eggs" and pending(data, kind) + reserve(data, kind) + Resources.total(e, kind, "consumed") != Resources.total(e, kind, "received"): return "Eier wurden verloren oder doppelt gebucht."
-		if pending(data, kind) + reserve(data, kind) + Resources.total(e, kind, "consumed") > Resources.total(e, kind, "received"): return "Ressource wurde vervielfacht."
+		if kind == "eggs" and pending(data, kind) + goods(data, kind) + Resources.total(e, kind, "consumed") != Resources.total(e, kind, "received") + Freight.net(data, kind): return "Eier wurden verloren oder doppelt gebucht."
+		if pending(data, kind) + goods(data, kind) + Resources.total(e, kind, "consumed") > Resources.total(e, kind, "received") + Freight.net(data, kind): return "Ressource wurde vervielfacht."
 		if pending(data, kind) + reserve(data, kind) > int(Resources.definition(kind).capacity): return "Ressource überschreitet Lagerkapazität."
 	return ""
 

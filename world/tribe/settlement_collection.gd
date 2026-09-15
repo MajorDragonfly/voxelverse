@@ -1,6 +1,7 @@
 extends RefCounted
 ## Two bounded settlement instances in the common campaign snapshot.
 ## Each village payload remains the sole owner of stock, orders and cargo.
+const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Tribe = preload("res://world/tribe/tribe_state.gd")
 const Simulation = preload("res://world/tribe/village_simulation.gd")
 const Home = Tribe.Home
@@ -152,7 +153,7 @@ static func validate(body: Dictionary, campaign: Dictionary) -> String:
 	for index in range(3, Tribe.Housing.MAX_RESIDENTS): allowed.append(Tribe.Housing.resident_id({"id": original}, index))
 	for id: String in seen_members:
 		if id not in allowed: return "settlements.unknown_resident"
-	return ""
+	return SiteTransport.validate(body, campaign)
 
 ## Body-level writers always keep the canonical body. These short-lived views
 ## are for Work/Simulation consumers only, never snapshots or extension writes.

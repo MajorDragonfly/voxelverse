@@ -88,6 +88,8 @@ func select(id: String) -> bool:
 	var before: Dictionary = body.duplicate(true)
 	var progression: Node = get_node("/root/ProgressionService")
 	var progress_before: Dictionary = progression.export_state()
+	if Collection.SiteTransport.active(body) and not Collection.SiteTransport.handoff(body, "far"):
+		return _end(Text.text("SITE_FREIGHT_ROUTE"))
 	Collection.set_simulation(body, simulation)
 	var target: Dictionary = Collection.view(body, id)
 	# Only already accrued, bounded campaign time; no wall-clock production.
@@ -95,7 +97,10 @@ func select(id: String) -> bool:
 		var started: int = Time.get_ticks_usec()
 		for index in range(32):
 			if not Collection.Simulation.advance(target, float(controller._state.campaign.data.elapsed_seconds), float(progression.get_behavior_effect("group_cooperation", 1).value), progression.record_far_work.bind(controller._state), true): break
+			if Collection.SiteTransport.active(body): Collection.SiteTransport.advance(body, float(controller._state.campaign.data.elapsed_seconds))
 			if Time.get_ticks_usec() - started >= 2000: break
+		await get_tree().process_frame
+	while Collection.SiteTransport.active(body) and Collection.SiteTransport.advance(body, float(controller._state.campaign.data.elapsed_seconds)):
 		await get_tree().process_frame
 	var nav := Navigation.new()
 	nav.begin(controller.home, Space.resolve(self, target.tribe.anchor), target.tribe, 20)
@@ -221,6 +226,7 @@ func _exit_tree() -> void:
 ## Keep both sites' structures and already certified freight corridors free.
 ## This is a placement preflight, not another per-frame navigation graph.
 func occupies(position: Vector3) -> bool:
+	if controller.site_transport.occupies(position): return true
 	var body: Dictionary = controller.body()
 	for id: String in Collection.ids(body):
 		if id == Collection.selected_id(body): continue

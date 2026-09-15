@@ -3863,3 +3863,75 @@ msgstr "Zurück · Esc"
 
 msgid "Kopfmodule"
 msgstr "Kopfmodule"
+
+msgid "SITE_FREIGHT_TITLE"
+msgstr "Warentransport → %s"
+
+msgid "SITE_FREIGHT_SEND"
+msgstr "Mit ausgewähltem Bewohner versenden"
+
+msgid "SITE_FREIGHT_CANCEL"
+msgstr "Abbrechen / Ware zurückbringen"
+
+msgid "SITE_FREIGHT_AMOUNT"
+msgstr "Menge (1–4 Einheiten)"
+
+msgid "SITE_FREIGHT_HELP"
+msgstr "Ein freier Bewohner am Lager trägt bis zu vier Einheiten. Gebucht wird erst bei Ankunft."
+
+msgid "SITE_FREIGHT_NOT_READY"
+msgstr "Dorf und geladene Wege müssen bereit sein."
+
+msgid "SITE_FREIGHT_DESTINATION"
+msgstr "Gründe zuerst ein zweites Lager."
+
+msgid "SITE_FREIGHT_BUSY"
+msgstr "Ein Lagertransport läuft. Der Träger bleibt bis zum Abschluss gebunden."
+
+msgid "SITE_FREIGHT_CARRIER"
+msgstr "Wähle einen freien Gefährten, der ohne Ladung direkt am Lager wartet. Deine Kreatur bleibt im Dorf."
+
+msgid "SITE_FREIGHT_ROUTE"
+msgstr "Kein sicherer geladener Transportweg verfügbar."
+
+msgid "SITE_FREIGHT_CAPACITY"
+msgstr "Im Ziellager ist nicht genug ungebundener Platz."
+
+msgid "SITE_FREIGHT_STOCK"
+msgstr "Diese Menge ist im Ausgangslager nicht verfügbar."
+
+msgid "SITE_FREIGHT_SENT"
+msgstr "Auftrag gespeichert. Ware und Lagerplätze sind gebunden."
+
+msgid "SITE_FREIGHT_RETURN_REQUESTED"
+msgstr "Rückkehr angefordert. Unterwegs wird am nächsten Wegpunkt umgekehrt."
+
+msgid "SITE_FREIGHT_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Der bisherige Auftrag und Bestand bleiben erhalten."
+
+msgid "SITE_FREIGHT_DETAIL"
+msgstr "%s · %d × %s"
+
+msgid "SITE_FREIGHT_STATUS_RESERVED"
+msgstr "Zur Abholung bereit"
+
+msgid "SITE_FREIGHT_STATUS_MOVING"
+msgstr "Unterwegs"
+
+msgid "SITE_FREIGHT_STATUS_ARRIVED"
+msgstr "Angekommen – Einlagerung ausstehend"
+
+msgid "SITE_FREIGHT_STATUS_DELIVERED"
+msgstr "Eingelagert"
+
+msgid "SITE_FREIGHT_STATUS_RETURNED"
+msgstr "Zurück im Ausgangslager"
+
+msgid "SITE_FREIGHT_STATUS_CANCELLED"
+msgstr "Abgebrochen"
+
+msgid "SITE_FREIGHT_STATUS_BLOCKED"
+msgstr "Weg gesperrt – Fracht bleibt beim Träger"
+
+msgid "SITE_FREIGHT_STATUS_RETURNING"
+msgstr "Rückkehr angefordert / unterwegs zurück"

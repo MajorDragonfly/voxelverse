@@ -6441,6 +6441,126 @@
       "key": "Kopfmodule",
       "de": "Kopfmodule",
       "en": "Head modules"
+    },
+    {
+      "key": "SITE_FREIGHT_TITLE",
+      "de": "Warentransport → %s",
+      "en": "Shipment → %s"
+    },
+    {
+      "key": "SITE_FREIGHT_SEND",
+      "de": "Mit ausgewähltem Bewohner versenden",
+      "en": "Send with selected resident"
+    },
+    {
+      "key": "SITE_FREIGHT_CANCEL",
+      "de": "Abbrechen / Ware zurückbringen",
+      "en": "Cancel / return cargo"
+    },
+    {
+      "key": "SITE_FREIGHT_AMOUNT",
+      "de": "Menge (1–4 Einheiten)",
+      "en": "Amount (1–4 units)"
+    },
+    {
+      "key": "SITE_FREIGHT_HELP",
+      "de": "Ein freier Bewohner am Lager trägt bis zu vier Einheiten. Gebucht wird erst bei Ankunft.",
+      "en": "An idle resident at the store carries up to four units. Stock is credited on arrival."
+    },
+    {
+      "key": "SITE_FREIGHT_NOT_READY",
+      "de": "Dorf und geladene Wege müssen bereit sein.",
+      "en": "The village and loaded paths must be ready."
+    },
+    {
+      "key": "SITE_FREIGHT_DESTINATION",
+      "de": "Gründe zuerst ein zweites Lager.",
+      "en": "Found a second settlement first."
+    },
+    {
+      "key": "SITE_FREIGHT_BUSY",
+      "de": "Ein Lagertransport läuft. Der Träger bleibt bis zum Abschluss gebunden.",
+      "en": "A shipment is in progress. Its carrier stays assigned until completion."
+    },
+    {
+      "key": "SITE_FREIGHT_CARRIER",
+      "de": "Wähle einen freien Gefährten, der ohne Ladung direkt am Lager wartet. Deine Kreatur bleibt im Dorf.",
+      "en": "Select an idle companion waiting at the store without cargo. Your creature stays in the village."
+    },
+    {
+      "key": "SITE_FREIGHT_ROUTE",
+      "de": "Kein sicherer geladener Transportweg verfügbar.",
+      "en": "No safe loaded transport route is available."
+    },
+    {
+      "key": "SITE_FREIGHT_CAPACITY",
+      "de": "Im Ziellager ist nicht genug ungebundener Platz.",
+      "en": "The destination has insufficient unreserved storage space."
+    },
+    {
+      "key": "SITE_FREIGHT_STOCK",
+      "de": "Diese Menge ist im Ausgangslager nicht verfügbar.",
+      "en": "This amount is unavailable at the source store."
+    },
+    {
+      "key": "SITE_FREIGHT_SENT",
+      "de": "Auftrag gespeichert. Ware und Lagerplätze sind gebunden.",
+      "en": "Shipment saved. Goods and storage space are reserved."
+    },
+    {
+      "key": "SITE_FREIGHT_RETURN_REQUESTED",
+      "de": "Rückkehr angefordert. Unterwegs wird am nächsten Wegpunkt umgekehrt.",
+      "en": "Return requested. The carrier turns back at the next waypoint."
+    },
+    {
+      "key": "SITE_FREIGHT_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Der bisherige Auftrag und Bestand bleiben erhalten.",
+      "en": "Save failed. The previous shipment and stock are preserved."
+    },
+    {
+      "key": "SITE_FREIGHT_DETAIL",
+      "de": "%s · %d × %s",
+      "en": "%s · %d × %s"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RESERVED",
+      "de": "Zur Abholung bereit",
+      "en": "Ready for pickup"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_MOVING",
+      "de": "Unterwegs",
+      "en": "In transit"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_ARRIVED",
+      "de": "Angekommen – Einlagerung ausstehend",
+      "en": "Arrived – awaiting storage"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_DELIVERED",
+      "de": "Eingelagert",
+      "en": "Delivered"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RETURNED",
+      "de": "Zurück im Ausgangslager",
+      "en": "Returned to source"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_CANCELLED",
+      "de": "Abgebrochen",
+      "en": "Cancelled"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_BLOCKED",
+      "de": "Weg gesperrt – Fracht bleibt beim Träger",
+      "en": "Route blocked – cargo stays with the carrier"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RETURNING",
+      "de": "Rückkehr angefordert / unterwegs zurück",
+      "en": "Return requested / returning"
     }
   ]
 }

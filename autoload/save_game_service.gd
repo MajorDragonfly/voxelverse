@@ -930,6 +930,9 @@ func prepare_body_departure(controller: Node) -> bool:
 		if simulation.is_empty():
 			last_error = "Die Dorfwege konnten noch nicht vollständig gesichert werden."
 			return false
+		if Settlements.SiteTransport.active(body) and not Settlements.SiteTransport.handoff(body, "far"):
+			last_error = "Der Träger muss seinen geprüften Transportweg erreichen."
+			return false
 		Settlements.set_simulation(body, simulation)
 	body.visit = {"schema": 1, "system_seed": state.system_seed, "planet_index": state.current_planet_index, "player": player.duplicate(true)}
 	if not save_now():
@@ -965,8 +968,11 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 			var started: int = Time.get_ticks_usec()
 			for index in range(32):
 				if not VillageSimulation.advance(instance, float(state.campaign.data.elapsed_seconds), float(get_node("/root/ProgressionService").get_behavior_effect("group_cooperation", 1).value), get_node("/root/ProgressionService").record_far_work.bind(state)): break
+				if Settlements.SiteTransport.active(target): Settlements.SiteTransport.advance(target, float(state.campaign.data.elapsed_seconds))
 				if Time.get_ticks_usec() - started >= 2000: break
 			await get_tree().process_frame
+	while Settlements.SiteTransport.active(target) and Settlements.SiteTransport.advance(target, float(state.campaign.data.elapsed_seconds)):
+		await get_tree().process_frame
 	var simulation: Dictionary = Settlements.view(target).get("village_simulation", {})
 	if not simulation.is_empty():
 		simulation.owner = "near"

@@ -1,6 +1,7 @@
 extends RefCounted
 ## One persisted owner and simulation cursor per village. Far work follows the
 ## last physically verified paths; absence of a route never produces arrival.
+const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Work = preload("res://world/tribe/village_work.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
@@ -82,6 +83,7 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
 	for member: Dictionary in data.members:
 		# The traveling player cannot simultaneously work on another planet.
 		if member.id == simulation.traveler and not include_player: continue
+		if SiteTransport.bound(body, member.id): continue
 		Work.prepare(data, member, delta)
 		if member.order == "wait" or member.blocked: continue
 		var target: Variant = Work.target(data, member)
