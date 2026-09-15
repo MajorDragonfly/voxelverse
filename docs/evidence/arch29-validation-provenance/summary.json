@@ -1,0 +1,36 @@
+{
+  "source_commit": "3c506cd2319ef375fb54657283eb597d5f078486",
+  "source_tree": "8a2a53f94ccd881e73a674d3182ff897c055ea88",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "passed": true,
+  "provenance_status": "generated_outputs_only",
+  "observations": 10,
+  "generated_uid_files": 184,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "passed": true,
+      "seconds": 0.115
+    },
+    {
+      "name": "import",
+      "passed": true,
+      "seconds": 5.89
+    },
+    {
+      "name": "art_sources",
+      "passed": true,
+      "seconds": 2.021
+    },
+    {
+      "name": "performance_measurement_test",
+      "passed": true,
+      "seconds": 1.419
+    }
+  ],
+  "python_tests": 53,
+  "python_new_provenance_tests": 19,
+  "console_summary_commit": "45b29f717d2ce0b20a8e2fbe041f34a0abee1a62",
+  "console_summary_tree": "0dee64898200bf2f5d2906985fe327038dd63550",
+  "console_summary_validation": "Same 53 targeted Python tests passed; only terminal summary changed, no second Godot run claimed."
+}
