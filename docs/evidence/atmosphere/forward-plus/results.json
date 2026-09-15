@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "renderer": "forward_plus",
+  "command": [
+    "/tmp/voxelverse-validation-editor-5b7g0pev/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/ce67c4b472f8/voxelverse",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_atmosphere.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/ce67c4b472f8/qa-final-render-forward"
+  ],
+  "scope": "Native voxel fixture, identical camera/geometry: before, atmospheric, cinematic, radial, sunset, night. Not a campaign/FPS/Windows acceptance.",
+  "commit": "84d42fa8841ca0b12ca38d68e9f4dd11db4ebbf5",
+  "tree": "8d08597f66dc5709313ad849fdb98c864e959506",
+  "dirty": false
+}
