@@ -4,6 +4,7 @@ const Cube = preload("res://world/space/cube_sphere.gd")
 const Voxels = preload("res://world/planet_lab/voxel_patch_builder.gd")
 const CELLS: int = 16
 const STRIDE: int = CELLS + 1
+const COLLISION_EDGE_GUARD: float = 0.0005
 
 
 static func build(tile: Dictionary, surface: RefCounted) -> Dictionary:
@@ -80,13 +81,40 @@ static func build_arrays(tile: Dictionary, surface: RefCounted) -> Dictionary:
 
 
 static func upload(data: Dictionary) -> Dictionary:
-	var land := ArrayMesh.new()
-	land.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, data.land_arrays)
+	var land: ArrayMesh = upload_surface(data.land_arrays)
 	var water: ArrayMesh
 	if not data.water_arrays.is_empty():
-		water = ArrayMesh.new()
-		water.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, data.water_arrays)
+		water = upload_surface(data.water_arrays)
 	return {"mesh": land, "water": water}
+
+
+static func upload_surface(arrays: Array) -> ArrayMesh:
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return mesh
+
+
+static func collision_faces(arrays: Array) -> PackedVector3Array:
+	# CPU-only worker preparation. Preserve the existing half-millimetre seam
+	# guard exactly, without reading render buffers back on the frame thread.
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX].duplicate()
+	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+	var faces := PackedVector3Array()
+	faces.resize(indices.size())
+	if vertices.size() <= STRIDE * STRIDE:
+		for i in range(vertices.size()):
+			var x: int = i % STRIDE
+			var y: int = i / STRIDE
+			if x == 0 or x == CELLS or y == 0 or y == CELLS:
+				vertices[i] += vertices[i].normalized() * COLLISION_EDGE_GUARD
+		for i in range(indices.size()): faces[i] = vertices[indices[i]]
+	else:
+		for i in range(0, indices.size(), 3):
+			var center: Vector3 = (vertices[indices[i]] + vertices[indices[i + 1]] + vertices[indices[i + 2]]) / 3.0
+			for corner in range(3):
+				var point: Vector3 = vertices[indices[i + corner]]
+				faces[i + corner] = point + (point - center).normalized() * COLLISION_EDGE_GUARD
+	return faces
 
 
 static func edge_index(edge: int, step: int) -> int:

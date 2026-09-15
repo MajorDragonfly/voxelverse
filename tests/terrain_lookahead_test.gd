@@ -68,7 +68,7 @@ func _run() -> void:
 	await _drain(start)
 	_expect(terrain.discarded_jobs > 0 and old_job._tasks.is_empty() and old_job._selection_task == -1, "Obsolete worker survived or was published.")
 	old_job = null
-	# Start the opposite covering set and build exactly one unpublished node.
+	# Start the opposite cover and abandon a fully prepared, inactive collider.
 	terrain.set_motion_hint(up, -tangent * 24.0)
 	terrain.stream_at(up)
 	deadline = Time.get_ticks_msec() + 20000
@@ -78,11 +78,30 @@ func _run() -> void:
 	terrain._collect_job()
 	_expect(not terrain._pending.is_empty(), "Fixture did not require a changed terrain patch.")
 	if terrain._pending.is_empty(): await _finish(); return
-	var id: String = terrain._pending[-1]
-	terrain._build_next()
+	var id: String = ""
+	for candidate: String in terrain._prepared_near:
+		if candidate in terrain._pending and not terrain._staging[candidate].has("node"):
+			id = candidate
+			break
+	_expect(not id.is_empty(), "Fixture has no unpublished near collider to cancel.")
+	if id.is_empty(): await _finish(); return
+	terrain._pending.erase(id)
+	terrain._pending.append(id)
+	# A patch now spans several budgeted operations; each step must leave the
+	# old floor intact and the new node invisible until the whole cover exists.
+	for step in range(5):
+		terrain._build_next()
+		_expect(terrain.ground_ready(start), "Partial upload removed the old floor.")
+		if terrain._staging[id].has("node"): break
 	var unpublished: Node3D = terrain._staging[id].node
 	var reference: WeakRef = weakref(unpublished)
 	_expect(not unpublished.visible, "Incomplete terrain became visible.")
+	for step in range(2):
+		terrain._build_next()
+		if terrain._staging[id].has("collider"): break
+	var staged_body: StaticBody3D = terrain._staging[id].collider
+	var body_reference: WeakRef = weakref(staged_body)
+	_expect(staged_body.is_inside_tree() and staged_body.collision_layer == 0 and staged_body.collision_mask == 0, "Prepared physics body became collidable before handoff.")
 	var point: Array = Cube.global_position(unpublished.position, terrain.origin)
 	terrain.rebase([terrain.origin[0] + 80.0, terrain.origin[1] - 40.0, terrain.origin[2] + 15.0])
 	_expect(Cube.local_position(Cube.global_position(unpublished.position, terrain.origin), point).length() < 0.001, "Origin shift moved a staged patch.")
@@ -92,8 +111,10 @@ func _run() -> void:
 	terrain._process(1.0 / 60.0)
 	_expect(terrain.updates == published and terrain.discarded_publications > 0, "Obsolete partial publication replaced the valid floor.")
 	unpublished = null
+	staged_body = null
 	await process_frame
 	_expect(reference.get_ref() == null, "Discarded staged node remained allocated.")
+	_expect(body_reference.get_ref() == null, "Discarded staged physics body remained allocated.")
 	await _drain(start)
 	metrics = terrain.streaming_diagnostics()
 	metrics.merge({"tiles": terrain.leaves.size(), "collisions": terrain.active.size(), "resident_peak": terrain.peak_resident_meshes})
@@ -111,9 +132,12 @@ func _run() -> void:
 
 func _drain(start: Array) -> void:
 	var deadline: int = Time.get_ticks_msec() + 20000
-	while terrain._job != null or not terrain._pending.is_empty() or not terrain._retired.is_empty():
+	while terrain._job != null or not terrain._pending.is_empty() or not terrain._retired.is_empty() or not terrain._collision_pending.is_empty():
 		terrain._process(1.0 / 60.0)
-		_expect(terrain.last_build_count <= 2 and terrain.leaves.size() <= 768 and terrain.active.size() <= 24 and terrain.peak_resident_meshes <= 1536, "Streaming exceeded its existing object/upload budgets.")
+		_expect(terrain.last_build_count <= 2 and terrain.leaves.size() <= 768 and terrain.active.size() <= 24 and terrain.peak_resident_meshes <= 1536 and terrain._collision_pending.size() <= 24, "Streaming exceeded its existing object/upload budgets.")
+		for tile: Dictionary in terrain._staging.values():
+			if tile.has("collider") and terrain.active.get(tile.id) != tile.collider:
+				_expect(tile.collider.collision_layer == 0 and tile.collider.collision_mask == 0, "Unpublished terrain entered active physics.")
 		_expect(terrain.ground_ready(start), "Job handoff removed the walker's attached floor.")
 		if Time.get_ticks_msec() > deadline: _expect(false, "Latest terrain intent did not finish."); return
 		await process_frame
