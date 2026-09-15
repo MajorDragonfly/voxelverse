@@ -1,0 +1,15 @@
+test_all_owners_generations_shared_blobs_migration_and_orphans (region_retention_test.RegionRetentionTest.test_all_owners_generations_shared_blobs_migration_and_orphans) ... ok
+test_changed_added_removed_source_prevents_publication (region_retention_test.RegionRetentionTest.test_changed_added_removed_source_prevents_publication) ... ok
+test_discovery_is_not_limited_to_slot_names_or_known_fields (region_retention_test.RegionRetentionTest.test_discovery_is_not_limited_to_slot_names_or_known_fields) ... ok
+test_empty_generation_and_cli_replay (region_retention_test.RegionRetentionTest.test_empty_generation_and_cli_replay) ... ok
+test_links_special_files_and_nested_or_concurrent_targets_fail (region_retention_test.RegionRetentionTest.test_links_special_files_and_nested_or_concurrent_targets_fail) ... ok
+test_missing_corrupt_and_future_data_cannot_publish_complete_generation (region_retention_test.RegionRetentionTest.test_missing_corrupt_and_future_data_cannot_publish_complete_generation) ... ok
+test_place_roots_preserve_overlays_and_reject_broken_reciprocal_index (region_retention_test.RegionRetentionTest.test_place_roots_preserve_overlays_and_reject_broken_reciprocal_index) ... ok
+test_root_and_inventory_budgets_abort_without_truncation (region_retention_test.RegionRetentionTest.test_root_and_inventory_budgets_abort_without_truncation) ... ok
+test_tampered_report_even_with_recomputed_checksums_is_rejected (region_retention_test.RegionRetentionTest.test_tampered_report_even_with_recomputed_checksums_is_rejected) ... ok
+test_write_and_publish_failure_leave_source_and_previous_plan_untouched (region_retention_test.RegionRetentionTest.test_write_and_publish_failure_leave_source_and_previous_plan_untouched) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.221s
+
+OK

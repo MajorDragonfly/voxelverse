@@ -1,0 +1,59 @@
+{
+  "packet": "ARCH-13-MANIFEST",
+  "base_commit": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "environment": {
+    "python": "Python 3.12.14",
+    "engine": "Godot 4.6.3.stable",
+    "platform": "Linux headless",
+    "user_data": "isolated_env; synthetic data only"
+  },
+  "checked_files_sha256": {
+    "tools/region_retention.py": "9937e5c113db590674103d3cd5289e393f4d89211557b6bae4351e1de9739837",
+    "tools/region_backup.py": "aa0196d27ca1a233580ec84c9c65955b07d2cc1c65c2d33ee4f30e39ea50a4e2",
+    "tests/tooling/region_retention_test.py": "2e9570d3fa04c593638f877f8b9c22c83e1fd9fb608a2147ac0f7666f24dbea4",
+    "tests/tooling/region_backup_userdata_test.py": "25e6cdeff25ec2a5265fdb3f20c32b78bb442a22ac63a24766704ce12b8b1943",
+    ".github/workflows/region-backup-validate.yml": "5f0805e7ccd36a506e9c1b2d14e419d6da160026b03995e1a7259c642e976fae"
+  },
+  "checks": [
+    {
+      "name": "retention_failure_paths_final",
+      "command": "python -m unittest discover -s tests/tooling -p 'region_retention_test.py' -v",
+      "tests": 10,
+      "passed": true,
+      "log": "retention-tests.log"
+    },
+    {
+      "name": "existing_backup_failure_paths",
+      "command": "python -m unittest region_backup_test.RegionBackupTest region_backup_places_test.PlaceBackupTest region_backup_userdata_test.UserdataBackupTest -v",
+      "cwd": "tests/tooling",
+      "tests": 31,
+      "passed": true,
+      "note": "Executed together with the initial 10 retention checks (41 passed); final retention checks repeated after explicit SQLite close and malformed report-header protection. Existing backup algorithms unchanged."
+    },
+    {
+      "name": "native_userdata_restart",
+      "command": "GODOT_BINARY=<Godot 4.6.3> python -m unittest discover -s tests/tooling -p 'region_backup_userdata_test.py' -v",
+      "tests": 10,
+      "passed": true,
+      "log": "retention-native.log",
+      "note": "Includes 9 existing userdata checks and 1 native cross-process check."
+    },
+    {
+      "name": "import_and_source_contracts",
+      "command": "python tools/validate_godot.py --godot <Godot 4.6.3> --skip-main --tests --output <scratch>/validation/retention-import",
+      "passed": true,
+      "checks": [
+        "source_contracts",
+        "import",
+        "art_sources"
+      ]
+    }
+  ],
+  "limitations": [
+    "Offline retain-only report; deletion_allowed=false",
+    "Known region closures, not exhaustive game validity",
+    "No live writer coordination or power-loss proof",
+    "No full game suite, native export, rendering or target-PC FPS acceptance"
+  ],
+  "working_tree_at_validation": "Package changes before commit; exact modified sources identified above. Godot generated untracked .gd.uid/.png.import sidecars during import, removed after native checks."
+}
