@@ -66,16 +66,21 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if get_node("/root/SessionFlow").loading or not get_parent().world_initialized: return
 	var up: Vector3 = adapter.up_at(location())
-	var lead: Vector3 = (velocity.slide(up) * clampf(terrain.last_worker_seconds + 0.25, 0.75, 2.5)).limit_length(32.0)
-	terrain.lookahead_direction = (up + lead / float(terrain.surface.body.radius)).normalized()
+	if is_dead: terrain.set_motion_hint(up, Vector3.ZERO)
 	terrain.stream_at(up)
-	waiting_for_terrain = not Space.ground_ready(self, global_position + velocity * delta * 2.0)
-	if not Space.ground_ready(self, global_position): return
+	waiting_for_terrain = not Space.ground_ready(self, global_position)
+	if waiting_for_terrain: return
 	var before: Vector3 = global_position
 	super._physics_process(delta)
 	traveled += global_position.distance_to(before)
 	if global_position.length() > 64.0:
 		terrain.rebase(Cube.global_position(global_position, terrain.origin))
+
+func _prepare_surface_movement(desired: Vector3, delta: float) -> Vector3:
+	terrain.set_motion_hint(up_direction, desired)
+	terrain.stream_at(up_direction)
+	waiting_for_terrain = not Space.ground_ready(self, global_position + desired * delta * 2.0)
+	return Vector3.ZERO if waiting_for_terrain else desired
 
 func _unhandled_input(event: InputEvent) -> void:
 	if get_node("/root/SessionFlow").loading or not get_parent().world_initialized: return

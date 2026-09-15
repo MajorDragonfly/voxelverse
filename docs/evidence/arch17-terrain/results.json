@@ -1,0 +1,418 @@
+{
+  "schema": 1,
+  "base_commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "implementation_commit": "500d18b585b96c26414a11896e79ff6a577bc9b8",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "execution": "headless_source_project",
+  "target_pc_acceptance": false,
+  "final_implementation_checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "terrain_lookahead_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 34.071,
+      "contract": "surface"
+    },
+    {
+      "name": "large_planet_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 48.306,
+      "contract": "surface"
+    }
+  ],
+  "check_source_note": "Final code was tested as tracked changes on bb2f83b, then committed unchanged as implementation_commit. Documentation was written during the tests.",
+  "terrain_lifecycle": {
+    "failures": [],
+    "metrics": {
+      "collisions": 24,
+      "discarded_jobs": 1,
+      "discarded_publications": 1,
+      "generation": 14,
+      "lookahead_m": 31.9072993661393,
+      "pending_uploads": 0,
+      "published_generation": 14,
+      "refresh_queued": false,
+      "resident_peak": 888,
+      "tiles": 429,
+      "worker_active": false
+    },
+    "passed": true
+  },
+  "large_planets": [
+    {
+      "body": "m1b:terra",
+      "cache_hits": 0,
+      "contacts": 627,
+      "faces": 2,
+      "frames": 628,
+      "initial_publish_ms": 11.594,
+      "jobs": [
+        {
+          "mesh_ms": 2300.523,
+          "selection_ms": 530.557,
+          "tiles": 489,
+          "uploads": 489,
+          "worker_ms": 2831.148,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1229.666,
+          "selection_ms": 710.648,
+          "tiles": 579,
+          "uploads": 262,
+          "worker_ms": 1943.221,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 2085.461,
+          "selection_ms": 647.194,
+          "tiles": 489,
+          "uploads": 421,
+          "worker_ms": 2743.42,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 799.535,
+          "selection_ms": 729.38,
+          "tiles": 495,
+          "uploads": 66,
+          "worker_ms": 1532.074,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 1.039,
+      "max_publish_ms": 18.766,
+      "max_upload_ms": 2.947,
+      "max_worker_ms": 2831.148,
+      "maximum_cell_width_m": 3.03792953491211,
+      "minimum_clearance_m": 1.00030396253806,
+      "peak_engine_static_bytes": 123440696,
+      "peak_resident_terrain_meshes": 1172,
+      "peak_tiles": 579,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1566,
+      "rebases": 3,
+      "simulated_seconds": 10.4666666666667,
+      "terrain_ready_ms": 2930.494,
+      "waiting_frames": 210,
+      "walk_m": 167.119583904743
+    },
+    {
+      "body": "m1b:100",
+      "cache_hits": 0,
+      "contacts": 470,
+      "faces": 2,
+      "frames": 471,
+      "initial_publish_ms": 12.446,
+      "jobs": [
+        {
+          "mesh_ms": 2372.285,
+          "selection_ms": 179.87,
+          "tiles": 321,
+          "uploads": 321,
+          "worker_ms": 2552.216,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1351.566,
+          "selection_ms": 169.419,
+          "tiles": 369,
+          "uploads": 164,
+          "worker_ms": 1521.186,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1400.233,
+          "selection_ms": 190.518,
+          "tiles": 369,
+          "uploads": 209,
+          "worker_ms": 1592.201,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1314.572,
+          "selection_ms": 183.972,
+          "tiles": 327,
+          "uploads": 154,
+          "worker_ms": 1509.114,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 1.1,
+      "max_publish_ms": 14.982,
+      "max_upload_ms": 2.177,
+      "max_worker_ms": 2552.216,
+      "maximum_cell_width_m": 3.0517578125,
+      "minimum_clearance_m": 1.00016235281805,
+      "peak_engine_static_bytes": 120598428,
+      "peak_resident_terrain_meshes": 779,
+      "peak_tiles": 369,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1197,
+      "rebases": 3,
+      "simulated_seconds": 7.85,
+      "terrain_ready_ms": 2631.111,
+      "waiting_frames": 53,
+      "walk_m": 167.359777003527
+    },
+    {
+      "body": "m1b:1000",
+      "cache_hits": 0,
+      "contacts": 475,
+      "faces": 2,
+      "frames": 476,
+      "initial_publish_ms": 10.98,
+      "jobs": [
+        {
+          "mesh_ms": 1683.772,
+          "selection_ms": 230.049,
+          "tiles": 375,
+          "uploads": 375,
+          "worker_ms": 1917.436,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1151.854,
+          "selection_ms": 410.119,
+          "tiles": 459,
+          "uploads": 192,
+          "worker_ms": 1566.226,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1673.342,
+          "selection_ms": 321.55,
+          "tiles": 459,
+          "uploads": 251,
+          "worker_ms": 1995.779,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1254.279,
+          "selection_ms": 285.099,
+          "tiles": 399,
+          "uploads": 178,
+          "worker_ms": 1545.77,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 18.014,
+      "max_publish_ms": 18.076,
+      "max_upload_ms": 30.54,
+      "max_worker_ms": 1995.779,
+      "maximum_cell_width_m": 3.814697265625,
+      "minimum_clearance_m": 0.999742918067113,
+      "peak_engine_static_bytes": 124450972,
+      "peak_resident_terrain_meshes": 893,
+      "peak_tiles": 459,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1194,
+      "rebases": 3,
+      "simulated_seconds": 7.93333333333333,
+      "terrain_ready_ms": 2001.706,
+      "waiting_frames": 57,
+      "walk_m": 167.235307961702
+    }
+  ],
+  "earlier_creature_regression": {
+    "name": "spherical_creature_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 37.365,
+    "contract": "spherical_gameplay"
+  },
+  "earlier_creature_regression_note": "Passed before the forward-progress scheduling correction. Final scheduling is exercised by the final terrain, three large-planet walks, and final saved campaign route.",
+  "baseline_return_blocker": {
+    "source_commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+    "source_note": "Tracked files were unchanged at process start; dirty status came only from generated untracked Godot UID sidecars.",
+    "recipe": {
+      "cycles": 2.0,
+      "frame_cap": 60.0,
+      "mode": "route",
+      "protocol": 2.0,
+      "renderer": "headless",
+      "resolution": [
+        1920.0,
+        1080.0
+      ],
+      "seed": 15838.0,
+      "settle_frames": 60.0,
+      "stage_timeout_seconds": 45.0,
+      "walk_seconds": 30.0
+    },
+    "passed": false,
+    "failures": [
+      "Physical return blocked or player died; no teleport used."
+    ],
+    "blockage": {
+      "actual": {
+        "body_id": "body_12252c77442841c6683a9ff27cfc91df",
+        "face": 0,
+        "height": 20.5388339161873,
+        "mode": "cube_sphere_m1_v1",
+        "u": 1.63328181764781e-05,
+        "v": -0.879993557382221
+      },
+      "collisions": [
+        {
+          "collider": "/root/SphericalCampaign/@Node3D@140/Patch_0_19_262148_31458/@StaticBody3D@1290",
+          "normal": [
+            0.660625100135803,
+            0.750715911388397,
+            -0.000108618660306092
+          ]
+        },
+        {
+          "collider": "/root/SphericalCampaign/@Node3D@140/Patch_0_19_262148_31458/@StaticBody3D@1290",
+          "normal": [
+            0.734187424182892,
+            -0.678408920764923,
+            0.0270205717533827
+          ]
+        }
+      ],
+      "is_dead": false,
+      "on_floor": true,
+      "target": {
+        "body_id": "body_12252c77442841c6683a9ff27cfc91df",
+        "face": 0,
+        "height": 21.4982300586998,
+        "mode": "cube_sphere_m1_v1",
+        "u": 1.63027796580933e-05,
+        "v": -0.879993863767646
+      },
+      "terrain_wait": false
+    },
+    "outcome": [
+      {
+        "actual_outward_m": 117.014867842197,
+        "cycle": 0,
+        "requested_outward_seconds": 30.0,
+        "stage": "route_outcome"
+      }
+    ],
+    "terrain": {
+      "terrain_collisions": 24,
+      "terrain_tiles": 450,
+      "terrain_workers": 0,
+      "terrain_pending_uploads": 0,
+      "terrain_wait": false
+    },
+    "replay": "docs/evidence/arch02/blocked-route-replay.zip"
+  },
+  "development_failures": [
+    {
+      "case": "initial test setup",
+      "reason": "SessionFlow correctly refused new_game without the title scene; test setup now enters the actual menu."
+    },
+    {
+      "case": "initial generation policy",
+      "reason": "Invalidating every 8 m starved still-useful work while moving forward. Terrain/collision remained safe, but Terra published only twice over 167 m and failed the existing >=3 publication gate. Forward progress now queues the next focus without cancelling useful work; reversal still invalidates."
+    }
+  ],
+  "source_sha256": {
+    "creatures/player/player_controller.gd": "3c118269a3ad701ccf4abaa721f4833b9e70a6568290a093937f5a2f88d61537",
+    "creatures/player/spherical_campaign_player.gd": "62a64710dcd48faecd589f2c53012a2a0d54283d1a3924214a6270d605a3399a",
+    "docs/ARCHITECTURE_BACKLOG.md": "765271216c7562c74b95185a3dae7f4a644338c732be24c0b3d4770be02e34ab",
+    "docs/NEXT_PARALLEL_WORK.md": "139e6a5c9b5f3945660dde6b51b41d8f5f3d61ed14fb1a6f2a45045aa620d4a4",
+    "docs/WORK_ARCH17_TERRAIN_LOOKAHEAD.md": "10f10812edf198fd8c9e0658a6c1b826cc44df9e6bab31763f42f2e2654eedea",
+    "tests/terrain_lookahead_test.gd": "b25314d5de3e1e23d9268dab557ee4722002747a53ecea7f555710c639e30dc5",
+    "tools/performance_route_probe.gd": "aa817ffe10efb1c926b1fb5a39e7a0e1886d34679da5f3f6b2704b0eb349f9b0",
+    "tools/validation/contracts.json": "6f35193778bb60270e952cb4ceaf7bd19fab61641b47774d0b4c004f225d6a3e",
+    "world/planet_lab/adaptive_sphere_tiles.gd": "273734da09159fd582e21e7c6b3e96b3ce6ef695bcbf53bafcb834d72d719f75",
+    "world/planet_lab/planet_patch_job.gd": "beb2a2e20abd808787748e3e5293ebe870ee28e76ea3fd9d98527d7988be9a6a",
+    "world/planet_lab/radial_walker.gd": "8aad60c996483792ed4d0fe876d45e7c0f154250344f812612ad09825f745724"
+  },
+  "pending": [
+    "target-PC graphics/performance and ten-minute traversable return route",
+    "cold individual upload budgeting"
+  ],
+  "final_saved_campaign_route": {
+    "source": {
+      "changes": [],
+      "commit": "500d18b585b96c26414a11896e79ff6a577bc9b8",
+      "dirty": false
+    },
+    "recipe": {
+      "cycles": 2.0,
+      "frame_cap": 60.0,
+      "mode": "route",
+      "protocol": 2.0,
+      "renderer": "headless",
+      "resolution": [
+        1920.0,
+        1080.0
+      ],
+      "seed": 15838.0,
+      "settle_frames": 60.0,
+      "stage_timeout_seconds": 45.0,
+      "walk_seconds": 6.0
+    },
+    "passed": true,
+    "failures": [],
+    "full_walk_protocol": false,
+    "target_pc_acceptance": false,
+    "process_rss_peak_bytes": 443486208,
+    "outcomes": [
+      {
+        "actual_outward_m": 23.2382987737656,
+        "cycle": 0,
+        "requested_outward_seconds": 6.0,
+        "stage": "route_outcome"
+      },
+      {
+        "cycle": 0,
+        "distance_from_start_m": 0.574405789375305,
+        "stage": "return_outcome"
+      },
+      {
+        "actual_outward_m": 23.0477728247643,
+        "cycle": 1,
+        "requested_outward_seconds": 6.0,
+        "stage": "route_outcome"
+      },
+      {
+        "cycle": 1,
+        "distance_from_start_m": 0.577852070331573,
+        "stage": "return_outcome"
+      }
+    ],
+    "worlds": [
+      {
+        "discarded_jobs": 0,
+        "discarded_publications": 1,
+        "generation": 12,
+        "lookahead_m": 4.9877901864761,
+        "pending_uploads": 0,
+        "published_generation": 11,
+        "refresh_queued": false,
+        "worker_active": true
+      },
+      {
+        "discarded_jobs": 0,
+        "discarded_publications": 1,
+        "generation": 10,
+        "lookahead_m": 4.56545008245257,
+        "pending_uploads": 0,
+        "published_generation": 10,
+        "refresh_queued": false,
+        "worker_active": false
+      }
+    ],
+    "replay": "docs/evidence/arch02/verified-route-replay.zip"
+  }
+}

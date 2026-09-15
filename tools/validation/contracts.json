@@ -63,6 +63,7 @@
         "surface_population_budget_test",
         "surface_scale_contract_test",
         "surface_support_test",
+        "terrain_lookahead_test",
         "terrain_transition_test"
       ]
     },

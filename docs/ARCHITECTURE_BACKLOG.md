@@ -193,6 +193,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 **Integration 10. September:** Portionierter Pflanzenaufbau, begrenzte Tierplatzierung und radiales Wasser-/Unterwasseraudio integriert (#56); kalte Einzeluploads, Vorausschau und Ziel-PC-Messung bleiben offen.
 
+**Weitere Fachlieferung:** [Terrainvorausschau und gültige Aufträge](WORK_ARCH17_TERRAIN_LOOKAHEAD.md) auf `agent/arch17-terrain-lookahead-2026-09-10`: aktuelle Bewegungsabsicht, generationsgebundene Terrainjobs, Verwerfen überholter Teilpublikationen und reproduzierter physischer Rückwegblocker. Integration separat; kalte Einzeluploads und lange Ziel-PC-Abnahme bleiben offen.
+
 **Teilpaket 10. September 2026:** Pflanzenpublikation, Jobgültigkeit und begrenzte Tierplatzierungsversuche auf `agent/arch-17-fauna-budget`; Umfang, Messwerte und Nachweise in [WORK_ARCH17_POPULATION_BUDGET.md](WORK_ARCH17_POPULATION_BUDGET.md). Der anschließende [Wasser-/Audioteil](WORK_ARCH17_WATER_AUDIO.md) liefert begrenzte Uferabfragen und gemeinsame Unterwassergrenzen. Terrainvorausschau und Ziel-PC-Abnahme bleiben offen.
 
 - **Zuordnung:** M1h. **Vorher:** ARCH-02/05; Integration mit M1f/g. **Bereich:** Terrain-/Populationjobs, Wasser, Audio.

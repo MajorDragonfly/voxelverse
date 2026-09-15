@@ -65,6 +65,15 @@ func advance(blocking: bool = false) -> bool:
 	return true
 
 
+func try_join() -> bool:
+	# Retire obsolete work without blocking or launching a mesh batch.
+	if _selection_task >= 0 and not WorkerThreadPool.is_task_completed(_selection_task): return false
+	for task: int in _tasks:
+		if not WorkerThreadPool.is_task_completed(task): return false
+	join()
+	return true
+
+
 func join() -> void:
 	# Cancellation joins existing work without starting unused mesh batches.
 	if _selection_task >= 0:

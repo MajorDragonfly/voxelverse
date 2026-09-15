@@ -142,7 +142,7 @@ func _physics_process(delta: float) -> void:
 	if direction.length_squared() > 0.0:
 		direction = direction.normalized()
 	var desired: Vector3 = direction * move_speed
-	if not Space.ground_ready(self, global_position + desired * delta * 2.0): desired = Vector3.ZERO
+	desired = _prepare_surface_movement(desired, delta)
 	velocity = desired + up_direction * velocity.dot(up_direction)
 
 	var grounded_before_move: bool = is_on_floor()
@@ -174,6 +174,10 @@ func _physics_process(delta: float) -> void:
 		guidance_action.emit("jump", 1.0)
 	if is_on_floor() and not is_swimming:
 		apply_floor_snap()
+
+
+func _prepare_surface_movement(desired: Vector3, delta: float) -> Vector3:
+	return desired if Space.ground_ready(self, global_position + desired * delta * 2.0) else Vector3.ZERO
 
 
 func _update_water_movement(delta: float) -> void:
