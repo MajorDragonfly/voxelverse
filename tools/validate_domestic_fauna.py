@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import subprocess
 import tempfile
+from validation_support import isolated_env, validation_editor
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--godot', required=True)
@@ -16,12 +17,12 @@ args = parser.parse_args()
 project = Path(__file__).resolve().parents[1]
 args.output.mkdir(parents=True, exist_ok=True)
 results = []
-with tempfile.TemporaryDirectory(prefix='voxelverse-d1-restart-') as userdata:
+with tempfile.TemporaryDirectory(prefix='voxelverse-d1-restart-') as userdata, validation_editor(args.godot) as editor:
     for mode in ('write', 'read'):
-        env = dict(os.environ, XDG_DATA_HOME=userdata, D1_RESTART_MODE=mode)
+        env = dict(isolated_env(Path(userdata)), D1_RESTART_MODE=mode)
         probe = ('res://tools/domestic_fauna_restart_probe.gd' if args.probe == 'd1'
                  else f'res://tools/domestic_fauna_{args.probe}_restart_probe.gd')
-        process = subprocess.run([args.godot, '--headless', '--path', str(project), '--script',
+        process = subprocess.run([str(editor), '--headless', '--path', str(project), '--script',
                                   probe], env=env, text=True,
                                  stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=240 if args.probe == 'd12' else 120)
         (args.output / f'restart-{mode}.log').write_text(process.stdout)

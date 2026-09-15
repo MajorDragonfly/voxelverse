@@ -1,0 +1,20 @@
+{
+  "local_source": "7929f839f58950f39f7507bbeec6e7eeb8e02f92",
+  "remote_source": "6aab52a3d7e5738ec391c4db4ed01a401b4df33c",
+  "identical_tree": "68c11200966e27065d3ebacd6ff2e2b02af2863e",
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "headless_command": "python3 tools/validate_godot.py --godot GODOT --tests campaign_atmosphere_test frontend_test --skip-main --output OUT",
+  "graphics_command": "GODOT --path PROJECT --rendering-method gl_compatibility --audio-driver Dummy --script /workspace/scratch/ce67c4b472f8/settings_preview.gd",
+  "graphics_environment": "Linux, Xvfb, Mesa llvmpipe; isolated user data; DE/EN; both captures visually inspected",
+  "source_sha256": {
+    "ROADMAP.md": "e173a2801644db5647bdbc4570057389eb7a8c54698bbc971d276823cb412cfd",
+    "core/display_settings.gd": "39c5c96ae8e33c4d5e3d21a14ad45aae3aa8cf66b8b67c6bb3418f94ee35aad9",
+    "docs/WORK_ATMOSPHERE_SHADERS.md": "9d1ba4e8ec9fad734dd602ee33c26e1fedc4e8e8aeb79f3c69cc24c98cfb5429",
+    "localization/catalog.json": "8304a205dd77adc30d1a0e99354f94faba7812ae0adcc0a95d4fa80b350454ac",
+    "localization/de.po": "d910646f1a6c4b881a93918f064ec806f93a3f3ca481b11b5311d5487d7c1d6c",
+    "localization/en.po": "cbe6623f6bac3b9eaf6c2536a7dfbc46e16aa951d7790aba86510aede3dbabfd",
+    "tests/campaign_atmosphere_test.gd": "fd2803fecaf7538b0bf5407f481bdbccbfd854d6f7c4def39b21777ac90d1dde"
+  },
+  "source_state": "Tracked source clean; editor import generated untracked UID sidecars only, excluded from delivery.",
+  "scope": "Graphics tab, descriptions, apply/persistence/fresh process, discard and popup closure; existing full frontend flow. No shader/terrain changes or new FPS/Windows acceptance."
+}

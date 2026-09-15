@@ -1,0 +1,29 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "853e7baa113cebddf28de3886fcf92ea5b9ce82c",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "tribal_playtest_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.119
+    },
+    {
+      "name": "tribal_playtest_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 72.254,
+      "contract": "frontend_locale"
+    }
+  ]
+}

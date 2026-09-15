@@ -23,6 +23,8 @@ const GameEvent = preload("res://core/campaign/game_event.gd")
 const PhaseHandoff = preload("res://core/campaign/phase_handoff.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 const SLOT_DIRECTORY: String = "user://saves"
+const Access = preload("res://core/persistence/userdata_access.gd")
+var _userdata_lease: RefCounted
 const History = preload("res://core/persistence/slot_history.gd")
 
 @export_range(5.0, 300.0, 5.0) var autosave_interval: float = 45.0
@@ -56,9 +58,16 @@ var guidance := preload("res://core/onboarding_progress.gd").new()
 
 
 func _ready() -> void:
+	_userdata_lease = Access.acquire()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_autosave_timer = autosave_interval
 	call_deferred("load_if_present")
+
+
+func _exit_tree() -> void:
+	if _userdata_lease != null:
+		_userdata_lease.release()
+		_userdata_lease = null
 
 
 func _process(delta: float) -> void:
@@ -92,7 +101,16 @@ func load_if_present() -> bool:
 	return load_now()
 
 
+func _acquire_userdata() -> bool:
+	if _userdata_lease == null: _userdata_lease = Access.acquire()
+	if _userdata_lease == null:
+		_report_failure("User data is in use by an archive tool. Close it and retry saving.")
+		return false
+	return true
+
+
 func save_now(custom_path: String = "") -> bool:
+	if not _acquire_userdata(): return false
 	if _saving:
 		return false
 	_saving = true
@@ -166,6 +184,7 @@ func _save_snapshot(custom_path: String = "") -> bool:
 
 
 func load_now(custom_path: String = "") -> bool:
+	if not _acquire_userdata(): return false
 	if _transition_busy or _saving:
 		return false
 	var registration_problem: String = Participants.registration_problem(self)
@@ -323,6 +342,7 @@ func _read_compatible_slot(path: String) -> Dictionary:
 
 
 func _can_manage_slots() -> bool:
+	if not _acquire_userdata(): return false
 	if session_active:
 		_report_failure("Bitte zuerst zum Hauptmenü zurückkehren.")
 		return false
@@ -520,6 +540,7 @@ func cache_slot_preview(png: PackedByteArray, world_seed: int) -> void:
 
 
 func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.Cube.MODE, creature_template: Dictionary = {}) -> String:
+	if not _acquire_userdata(): return ""
 	if surface_mode not in [Surface.LEGACY, Surface.Cube.MODE]:
 		_report_failure("Unbekannter Oberflächentyp.")
 		return ""
@@ -890,6 +911,7 @@ func reset_runtime_for_new_game() -> void:
 
 
 func clear_save() -> bool:
+	if not _acquire_userdata(): return false
 	if _transition_busy or _saving:
 		return false
 	reset_runtime_for_new_game()
@@ -930,6 +952,9 @@ func prepare_body_departure(controller: Node) -> bool:
 		if simulation.is_empty():
 			last_error = "Die Dorfwege konnten noch nicht vollständig gesichert werden."
 			return false
+		if Settlements.SiteTransport.active(body) and not Settlements.SiteTransport.handoff(body, "far"):
+			last_error = "Der Träger muss seinen geprüften Transportweg erreichen."
+			return false
 		Settlements.set_simulation(body, simulation)
 	body.visit = {"schema": 1, "system_seed": state.system_seed, "planet_index": state.current_planet_index, "player": player.duplicate(true)}
 	if not save_now():
@@ -965,8 +990,11 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 			var started: int = Time.get_ticks_usec()
 			for index in range(32):
 				if not VillageSimulation.advance(instance, float(state.campaign.data.elapsed_seconds), float(get_node("/root/ProgressionService").get_behavior_effect("group_cooperation", 1).value), get_node("/root/ProgressionService").record_far_work.bind(state)): break
+				if Settlements.SiteTransport.active(target): Settlements.SiteTransport.advance(target, float(state.campaign.data.elapsed_seconds))
 				if Time.get_ticks_usec() - started >= 2000: break
 			await get_tree().process_frame
+	while Settlements.SiteTransport.active(target) and Settlements.SiteTransport.advance(target, float(state.campaign.data.elapsed_seconds)):
+		await get_tree().process_frame
 	var simulation: Dictionary = Settlements.view(target).get("village_simulation", {})
 	if not simulation.is_empty():
 		simulation.owner = "near"

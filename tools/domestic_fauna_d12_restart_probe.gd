@@ -55,7 +55,10 @@ func write_process(world: Node) -> void:
 	var old: Dictionary = saved.duplicate(true)
 	old.schema = 1
 	old.erase("map_atlases")
-	for body: Dictionary in old.bodies.values():
+	for body_id: String in old.bodies:
+		var body: Dictionary = old.bodies[body_id]
+		body.fauna = _inline_fauna(body_id, body)
+		body.erase("fauna_archive")
 		body.erase("fauna_catalog")
 		body.erase("domestic_fauna")
 	expect(Save.write(old, "user://d12-old.json") == OK, "Write valid pre-D1 spherical save")
@@ -103,7 +106,7 @@ func read_process(world: Node) -> void:
 	expect(world.load_lab(), "Load original spherical schema 1")
 	for id in ["m1b:terra", "m1b:100", "m1b:1000"]:
 		world.open_body(id)
-		expect(world.records[id].fauna == reference.old.bodies[id].fauna, "Old M1d animal IDs/designs changed")
+		expect(_inline_fauna(id, world.records[id]) == reference.old.bodies[id].fauna, "Old M1d animal IDs/designs changed")
 		await populate(world)
 		world.set_paused(true)
 		expect(world.records[id].fauna_catalog.schema == Catalog.ROLE_SCHEMA \
@@ -144,3 +147,27 @@ func populate(world: Node) -> void:
 
 func expect(ok: bool, message: String) -> void:
 	if not ok: failures.append(message)
+
+# Convert the tiny, real fixture back to its historical inline representation.
+# Changing only the header would leave schema-4 archive fields in a schema-1 save.
+func _inline_fauna(body_id: String, record: Dictionary) -> Dictionary:
+	if record.has("fauna"): return record.fauna.duplicate(true)
+	var archive := Save.Fauna.new()
+	expect(archive.open(body_id, record), "Cannot read legacy fixture archive")
+	var result: Dictionary = {}
+	var pending: Array[String] = []
+	if not archive.store.root.is_empty(): pending.append(archive.store.root)
+	var visited: Dictionary = {}
+	while not pending.is_empty():
+		var hash_value: String = pending.pop_back()
+		expect(not visited.has(hash_value) and visited.size() < 256, "Invalid fixture archive traversal")
+		if visited.has(hash_value) or visited.size() >= 256: break
+		visited[hash_value] = true
+		var page: Dictionary = archive.store._page(hash_value)
+		if page.get("kind") == "leaf":
+			for key: String in page.entries: result[key] = archive.get_state(key)
+		elif page.get("kind") == "branch":
+			for child: String in page.children.values(): pending.append(child)
+		expect(archive.problem().is_empty(), "Corrupt legacy fixture archive")
+	expect(result.size() == archive.count and result.size() <= 256, "Incomplete bounded legacy fixture")
+	return result

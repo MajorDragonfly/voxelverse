@@ -3,6 +3,10 @@ extends RefCounted
 const Animator = preload("res://creatures/runtime/adaptive_locomotion_animator.gd")
 const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
 const Gait = preload("res://creatures/runtime/creature_gait_profile.gd")
+const ExpressionPose = preload("res://creatures/runtime/creature_expression_pose.gd")
+const EyeExpression = preload("res://creatures/runtime/creature_eye_expression.gd")
+var _eyes := EyeExpression.new()
+var expression_pose: Dictionary = {}
 var _preview: Node3D
 var _base_position := Vector3.ZERO
 var _base_rotation := Vector3.ZERO
@@ -27,7 +31,8 @@ func bind(preview: Node3D) -> void:
 	_live_run = 0.0
 	for child in preview.get_children():
 		if child is Node3D and child.has_meta("creature_part_category"):
-			_parts.append({"node": child, "position": child.position, "rotation": child.rotation})
+			_parts.append({"node": child, "position": child.position, "rotation": child.rotation, "scale": child.scale})
+	_eyes.bind(preview)
 	var legs: Array[Node3D] = []
 	for part in _parts:
 		if str(part["node"].get_meta("creature_part_category")) == "legs":
@@ -52,6 +57,7 @@ func set_course(course: Node3D) -> void:
 
 func unbind() -> void:
 	reset()
+	_eyes.unbind()
 	_preview = null
 	_course = null
 	_parts.clear()
@@ -60,6 +66,7 @@ func unbind() -> void:
 
 
 func reset() -> void:
+	_eyes.reset()
 	if is_instance_valid(_preview):
 		_preview.position = _base_position
 		_preview.rotation = _base_rotation
@@ -67,6 +74,7 @@ func reset() -> void:
 		if is_instance_valid(part["node"]):
 			part["node"].position = part["position"]
 			part["node"].rotation = part["rotation"]
+			part["node"].scale = part["scale"]
 	for leg in _legs:
 		if is_instance_valid(leg.get("knee")):
 			leg["knee"].rotation = leg.get("knee_base_rotation", Vector3.ZERO)
@@ -129,6 +137,7 @@ func _pose(time: float, moving: float, settings: Dictionary, phase: float) -> vo
 			continue
 		node.position = part["position"]
 		node.rotation = part["rotation"]
+		node.scale = part["scale"]
 		var category: String = str(node.get_meta("creature_part_category", ""))
 		var side: float = float(node.get_meta("creature_part_side", 1.0))
 		if category == "tail":
@@ -137,6 +146,8 @@ func _pose(time: float, moving: float, settings: Dictionary, phase: float) -> vo
 			node.rotation.x += sin(phase + side * PI * 0.5) * 0.32 * moving
 		elif category in ["mouth", "head", "eyes"]:
 			node.rotation.x += sin(time * 1.8) * 0.025
+	ExpressionPose.apply(_preview, _parts, expression_pose)
+	_eyes.apply(expression_pose)
 	for leg in _legs:
 		if not is_instance_valid(leg["root"]):
 			continue

@@ -7,13 +7,20 @@ const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const Rig = preload("res://creatures/runtime/creature_limb_rig.gd")
 const MouthGeometry = preload("res://creatures/editor/creature_mouth_geometry.gd")
 const HandGeometry = preload("res://creatures/editor/creature_hand_geometry.gd")
+const TailGeometry = preload("res://creatures/editor/creature_tail_geometry.gd")
 const FootGeometry = preload("res://creatures/editor/creature_foot_geometry.gd")
+const Revisions = preload("res://creatures/catalog/creature_part_revisions.gd")
 
 
 static func build(root: Node3D, definition: Dictionary, placement: Dictionary, blueprint: Dictionary) -> void:
+	var resolved: Dictionary = Revisions.resolve(str(definition.get("id", "")), placement)
+	if resolved.is_empty(): return
 	root.set_meta("part_shape", Blueprint.get_part_shape(placement))
 	root.set_meta("skin_blueprint", blueprint)
-	var id: String = str(definition["id"])
+	var id: String = resolved.geometry_id
+	var revision: int = resolved.geometry_revision
+	root.set_meta("geometry_id", id)
+	root.set_meta("geometry_revision", revision)
 	var category: String = str(placement["category"])
 	var skin: Color = Surface.colors(blueprint)[0]
 	var accent: Color = Surface.colors(blueprint)[1]
@@ -34,9 +41,9 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 			else:
 				_eye(root, Vector3.ZERO, size, blueprint, "Eye")
 		"mouth", "head":
-			root.set_meta("part_articulation", MouthGeometry.articulation(id))
+			root.set_meta("part_articulation", MouthGeometry.articulation(id, revision))
 			if id not in MouthGeometry.Catalog.LEGACY_IDS:
-				for piece: Dictionary in MouthGeometry.recipe(id, skin, accent, horn):
+				for piece: Dictionary in MouthGeometry.recipe(id, skin, accent, horn, revision):
 					if piece.kind == "cone":
 						_cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
 					else:
@@ -57,18 +64,11 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 					for index in range(4):
 						_cone(root, "Tooth%d" % index, Vector3(float(index) * 0.13 - 0.195, -0.035, -0.28), Vector3(float(index) * 0.13 - 0.195, -0.16, -0.29), 0.075, horn)
 		"tail":
-			_bone(root, "TailBase", Vector3(0, 0, -0.02), Vector3(0, -0.025, 0.38), 0.23, skin)
-			_bone(root, "TailTip", Vector3(0, -0.025, 0.35), Vector3(0, 0.04, 0.78), 0.14, skin)
-			if id == "tail_club":
-				_piece(root, "TailClub", Vector3(0, 0.04, 0.77), Vector3(0.47, 0.39, 0.47), accent, true)
-			elif id == "tail_fin":
-				_piece(root, "TailFin", Vector3(0, 0.14, 0.72), Vector3(0.08, 0.60, 0.42), accent, true)
-				for index in range(3):
-					_bone(root, "FinRay%d" % index, Vector3(0, 0, 0.55), Vector3(0, float(index - 1) * 0.22 + 0.14, 0.85), 0.025, skin.lightened(0.25))
-			elif id == "tail_stinger":
-				_cone(root, "Stinger", Vector3(0, 0.04, 0.73), Vector3(0, 0.25, 1.01), 0.24, horn)
-			else:
-				_cone(root, "TailPoint", Vector3(0, 0.04, 0.72), Vector3(0, 0.12, 1.0), 0.14, skin)
+			for piece: Dictionary in TailGeometry.recipe(id, skin, accent, horn, revision):
+				match piece.kind:
+					"bone": _bone(root, piece.name, piece.start, piece.end, piece.width, piece.color, piece.skin)
+					"cone": _cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
+					"piece": _piece(root, piece.name, piece.position, piece.size, piece.color, piece.skin)
 		"horns":
 			_piece(root, "HornSocket", Vector3(0, 0.015, 0), Vector3(0.25, 0.10, 0.23), skin, true)
 			if id == "horns_antlers":
@@ -112,11 +112,10 @@ static func _eye(root: Node3D, position: Vector3, size: Vector3, blueprint: Dict
 	_piece(root, prefix + "Iris", position + Vector3(0, 0, -size.z * 0.43), size * Vector3(0.67, 0.71, 0.27), iris)
 	_piece(root, prefix + "Pupil", position + Vector3(0, 0, -size.z * 0.54), size * Vector3(0.32, 0.44, 0.14), Color("0e1b22"))
 	_piece(root, prefix + "Glint", position + Vector3(-size.x * 0.08, size.y * 0.12, -size.z * 0.59), size * 0.12, Color.WHITE)
-	_piece(root, prefix + "Lid", position + Vector3(0, size.y * 0.39, 0.01), size * Vector3(1.06, 0.19, 0.90), Surface.colors(blueprint)[0], true)
+	preload("res://creatures/runtime/creature_eye_expression.gd").prepare(root, prefix, Surface.colors(blueprint)[0], blueprint)
 
 
 static func _limb(root: Node3D, id: String, placement: Dictionary, blueprint: Dictionary) -> void:
-	var is_leg: bool = str(placement["category"]) == "legs"
 	var shape: Vector3 = Blueprint.get_part_shape(placement)
 	var length: float = {"legs_stubby": 0.43, "legs_walker": 0.64, "legs_sprinter": 0.85, "legs_spider": 0.68, "legs_hoof": 0.77, "arms_grasping": 0.52, "arms_climber": 0.77, "arms_claws": 0.60}.get(id, 0.62)
 	length *= shape.y
@@ -142,28 +141,32 @@ static func _limb(root: Node3D, id: String, placement: Dictionary, blueprint: Di
 	socket.set_meta("part_shape", Blueprint.get_part_shape(placement, "end_shape_scale") * float(placement.get("end_scale", 1.0)))
 	socket.set_meta("skin_blueprint", blueprint)
 	knee.add_child(socket)
-	var default_end: String = ("feet_hooves" if id == "legs_hoof" else ("feet_claws" if id in ["legs_spider", "legs_sprinter"] else "feet_pads")) if is_leg else ("hands_claws" if id == "arms_claws" else "hands_grasp")
+	var default_end: String = Revisions.default_terminal(id, str(placement["category"]))
 	var end_id: String = str(placement.get("end_part_id", ""))
-	_terminal(socket, default_end if end_id.is_empty() else end_id, skin, SkinStyle.color(blueprint, "horn_color", Color("d7cba9")))
+	var resolved: Dictionary = Revisions.resolve(default_end if end_id.is_empty() else end_id, placement, "end_")
+	if not resolved.is_empty():
+		socket.set_meta("geometry_id", resolved.geometry_id)
+		socket.set_meta("geometry_revision", resolved.geometry_revision)
+		_terminal(socket, resolved.geometry_id, skin, SkinStyle.color(blueprint, "horn_color", Color("d7cba9")), resolved.geometry_revision)
 	var rotation: Vector3 = Blueprint._as_vector3(placement.get("end_rotation", Vector3.ZERO)) * Vector3(1, float(root.get_meta("creature_part_side", 1.0)), float(root.get_meta("creature_part_side", 1.0)))
 	Rig.configure(root, upper, lower, knee, joint, socket, width, rotation * PI / 180.0)
 	root.set_meta("joint_reference_length", layout["reference_length"])
 
 
-static func _terminal(root: Node3D, id: String, skin: Color, horn: Color) -> void:
+static func _terminal(root: Node3D, id: String, skin: Color, horn: Color, revision: int = 1) -> void:
 	if id.begins_with("feet_"):
-		for piece: Dictionary in FootGeometry.recipe(id, skin, horn):
+		for piece: Dictionary in FootGeometry.recipe(id, skin, horn, revision):
 			if piece.kind == "cone":
 				_cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
 			else:
 				_piece(root, piece.name, piece.position, piece.size, piece.color, piece.skin)
 	else:
-		for piece: Dictionary in HandGeometry.recipe(id, skin, horn):
+		for piece: Dictionary in HandGeometry.recipe(id, skin, horn, revision):
 			match piece.kind:
 				"cone": _cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
 				"bone": _bone(root, piece.name, piece.start, piece.end, piece.width, piece.color, piece.skin)
 				"piece": _piece(root, piece.name, piece.position, piece.size, piece.color, piece.skin)
-		root.set_meta("part_articulation", HandGeometry.articulation(id))
+		root.set_meta("part_articulation", HandGeometry.articulation(id, revision))
 
 
 static func _point(root: Node3D, point: Vector3) -> Vector3:

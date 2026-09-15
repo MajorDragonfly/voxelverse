@@ -1,0 +1,178 @@
+{
+  "package": "ARCH-26-WORKPLACE-INSTANCES",
+  "base": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+  "branch": "agent/arch26-workplace-instances-20260915",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "source_refs": [
+    {
+      "commit": "a3d0a1af6b2bcea300a0cf5fdef4561759c4743e",
+      "tree": "706857f417aee38dee51b132de6418e4f99b58a6"
+    },
+    {
+      "commit": "ffc7e7696e3ce8336298c9705ccba2833bf400f7",
+      "tree": "79b460d39c41f10a3a6aebe46a98df777c8edfc7"
+    },
+    {
+      "commit": "5d49a2f1a0bfe2c52498abcd0fef14ebd3604fe4",
+      "tree": "3df913915d7cfc6dda2f900763046a6afa5498fb"
+    }
+  ],
+  "runs": [
+    {
+      "run": "qa-final",
+      "source": {
+        "commit": "a3d0a1af6b2bcea300a0cf5fdef4561759c4743e",
+        "tracked_worktree_dirty": false
+      },
+      "passed_tests": [
+        "workplace_instances_test",
+        "tribal_age_economy_contract_test",
+        "tribal_age_economy_test",
+        "tribal_age_growth_contract_test",
+        "tribal_age_housing_recovery_test",
+        "tribal_age_husbandry_contract_test",
+        "egg_production_contract_test",
+        "settlement_collection_test",
+        "settlement_save_test",
+        "settlement_runtime_test",
+        "village_work_snapshot_test",
+        "village_work_observation_test",
+        "village_navigation_budget_test",
+        "tribal_economy_progress_test",
+        "tribal_economy_progress_world_test",
+        "tribal_neighbors_contract_test",
+        "creature_behavior_gameplay_test",
+        "tribe_localization_test",
+        "egg_husbandry_ui_test",
+        "far_simulation_test",
+        "save_participants_test"
+      ],
+      "failed_tests": [
+        "workplace_runtime_test"
+      ],
+      "command": [
+        "python3",
+        "tools/validate_godot.py",
+        "--godot",
+        "/workspace/scratch/d2f8e8a15ebb/godot-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--tests",
+        "workplace_instances_test",
+        "workplace_runtime_test",
+        "tribal_age_economy_contract_test",
+        "tribal_age_economy_test",
+        "tribal_age_growth_contract_test",
+        "tribal_age_housing_recovery_test",
+        "tribal_age_husbandry_contract_test",
+        "egg_production_contract_test",
+        "settlement_collection_test",
+        "settlement_save_test",
+        "settlement_runtime_test",
+        "village_work_snapshot_test",
+        "village_work_observation_test",
+        "village_navigation_budget_test",
+        "tribal_economy_progress_test",
+        "tribal_economy_progress_world_test",
+        "tribal_neighbors_contract_test",
+        "creature_behavior_gameplay_test",
+        "tribe_localization_test",
+        "egg_husbandry_ui_test",
+        "far_simulation_test",
+        "save_participants_test",
+        "--skip-import",
+        "--skip-main",
+        "--output",
+        "/workspace/scratch/f39fba89419a/qa-final"
+      ]
+    },
+    {
+      "run": "qa-followup",
+      "source": {
+        "commit": "ffc7e7696e3ce8336298c9705ccba2833bf400f7",
+        "tracked_worktree_dirty": false
+      },
+      "passed_tests": [
+        "workplace_instances_test",
+        "tribal_age_economy_contract_test",
+        "egg_production_contract_test",
+        "creature_behavior_gameplay_test",
+        "save_participants_test",
+        "settlement_collection_test"
+      ],
+      "failed_tests": [
+        "workplace_runtime_test"
+      ],
+      "command": [
+        "python3",
+        "tools/validate_godot.py",
+        "--godot",
+        "/workspace/scratch/d2f8e8a15ebb/godot-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--tests",
+        "workplace_instances_test",
+        "workplace_runtime_test",
+        "tribal_age_economy_contract_test",
+        "egg_production_contract_test",
+        "creature_behavior_gameplay_test",
+        "save_participants_test",
+        "settlement_collection_test",
+        "--skip-import",
+        "--skip-main",
+        "--output",
+        "/workspace/scratch/f39fba89419a/qa-followup"
+      ]
+    },
+    {
+      "run": "qa-runtime-final",
+      "source": {
+        "commit": "5d49a2f1a0bfe2c52498abcd0fef14ebd3604fe4",
+        "tracked_worktree_dirty": false
+      },
+      "passed_tests": [
+        "workplace_runtime_test"
+      ],
+      "failed_tests": [],
+      "command": [
+        "python3",
+        "tools/validate_godot.py",
+        "--godot",
+        "/workspace/scratch/d2f8e8a15ebb/godot-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64",
+        "--tests",
+        "workplace_runtime_test",
+        "--skip-import",
+        "--skip-main",
+        "--output",
+        "/workspace/scratch/f39fba89419a/qa-runtime-final"
+      ]
+    }
+  ],
+  "unique_successful_tests": [
+    "creature_behavior_gameplay_test",
+    "egg_husbandry_ui_test",
+    "egg_production_contract_test",
+    "far_simulation_test",
+    "save_participants_test",
+    "settlement_collection_test",
+    "settlement_runtime_test",
+    "settlement_save_test",
+    "tribal_age_economy_contract_test",
+    "tribal_age_economy_test",
+    "tribal_age_growth_contract_test",
+    "tribal_age_housing_recovery_test",
+    "tribal_age_husbandry_contract_test",
+    "tribal_economy_progress_test",
+    "tribal_economy_progress_world_test",
+    "tribal_neighbors_contract_test",
+    "tribe_localization_test",
+    "village_navigation_budget_test",
+    "village_work_observation_test",
+    "village_work_snapshot_test",
+    "workplace_instances_test",
+    "workplace_runtime_test"
+  ],
+  "limits": [
+    "Headless Linux; no native graphics, Windows export or target-PC/FPS acceptance.",
+    "22 distinct tests succeeded across documented source commits, not a rerun of all 22 at the final head.",
+    "Import/art checks used the already imported resource state; later edits were GDScript only.",
+    "Branch publication and PR creation were explicitly authorized by the user after the initial automatic approval rejection. The branch is published; publication.json maps the four original local commits to published commits with identical trees and preserved parent order."
+  ]
+}

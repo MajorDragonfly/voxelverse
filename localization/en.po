@@ -3863,3 +3863,351 @@ msgstr "Back · Esc"
 
 msgid "Kopfmodule"
 msgstr "Head modules"
+
+msgid "HUSBANDRY_ASSIGN_KEEPER"
+msgstr "Assign animal keeper"
+
+msgid "HUSBANDRY_HINT"
+msgstr "One owned animal per dairy pen or laying site. Animal keepers deliver feed and water. Eggs are collected, stored and eaten."
+
+msgid "HUSBANDRY_ASSIGN"
+msgstr "Assign animal"
+
+msgid "HUSBANDRY_RELEASE"
+msgstr "Release assignment"
+
+msgid "HUSBANDRY_CHANGE_SITE"
+msgstr "Convert empty site"
+
+msgid "HUSBANDRY_CHANGE_HINT"
+msgstr "Convert an empty dairy pen to a laying site or back. Supplies and finished products are retained."
+
+msgid "HUSBANDRY_BUILD_HINT"
+msgstr "Build a dairy pen or laying site on dry, accessible ground."
+
+msgid "HUSBANDRY_PEN"
+msgstr "Dairy pen {number}"
+
+msgid "HUSBANDRY_LAYING_SITE"
+msgstr "Laying site {number}"
+
+msgid "HUSBANDRY_MILK_ANIMAL"
+msgstr "Dairy animal {number}"
+
+msgid "HUSBANDRY_EGG_ANIMAL"
+msgstr "Egg-laying animal {number}"
+
+msgid "HUSBANDRY_SUPPLIES"
+msgstr "Feed {food} / 4 · Water {water} / 8 litres\n{status}"
+
+msgid "HUSBANDRY_STORAGE"
+msgstr "{resource} ready · Collection is waiting for storage space."
+
+msgid "HUSBANDRY_WAIT_SUPPLIES"
+msgstr "Production ({resource}) is waiting for feed and water."
+
+msgid "HUSBANDRY_PRODUCTION"
+msgstr "{resource} in {seconds} s · {amount} per interval."
+
+msgid "HUSBANDRY_EGG_AMOUNT"
+msgstr "{count} eggs"
+
+msgid "HUSBANDRY_MILK_AMOUNT"
+msgstr "{count} litres"
+
+msgid "TRIBE_AGE_ENTRY"
+msgstr "Tribal age …"
+
+msgid "TRIBE_AGE_TITLE"
+msgstr "A new age begins"
+
+msgid "TRIBE_AGE_CONFIRM"
+msgstr "Advance to the tribal age now"
+
+msgid "TRIBE_AGE_CANCEL"
+msgstr "Stay in the creature phase"
+
+msgid "TRIBE_AGE_RETURN"
+msgstr "Return to your creature"
+
+msgid "TRIBE_AGE_DETAIL"
+msgstr "You will lead the group from the overview. Your creature and its two companions remain the same members. Your species, home, relationships and purchased abilities are retained.\n\nGather materials, craft a stone tool, build huts and provide for your residents. The transition is saved and direct control of an individual ends. You can already meet and support neighbouring tribes. Tribal combat will follow later."
+
+msgid "TRIBE_AGE_BLOCKED"
+msgstr "{reason}\n\nThe transition only begins after you explicitly confirm it here."
+
+msgid "TRIBE_AGE_SAVE_FAILED"
+msgstr "The transition could not be saved. You remain in the creature phase.\n\n{reason}"
+
+msgid "HUSBANDRY_NEED_ANIMAL"
+msgstr "Bring a suitable tamed animal here and assign it."
+
+msgid "HUSBANDRY_CHANGED_ANIMAL"
+msgstr "The animal’s species or body has changed."
+
+msgid "HUSBANDRY_STAY"
+msgstr "The animal must stay at its assigned site."
+
+msgid "HUSBANDRY_ACCESS"
+msgstr "The animal site or its entrance is currently inaccessible."
+
+msgid "HUSBANDRY_RELEASE_FIRST"
+msgstr "Release the animal assignment first."
+
+msgid "HUSBANDRY_RETURN_SUPPLIES"
+msgstr "Wait until feed and water have been returned."
+
+msgid "HUSBANDRY_UNAVAILABLE"
+msgstr "The animal is currently unavailable."
+
+msgid "HUSBANDRY_WRONG_REGISTER"
+msgstr "The animal registry does not belong to this village."
+
+msgid "HUSBANDRY_OWNED_ANIMAL"
+msgstr "Choose a living, tamed livestock animal owned by your tribe."
+
+msgid "HUSBANDRY_UNSUITABLE"
+msgstr "This animal is unsuitable for this site with plant feed."
+
+msgid "HUSBANDRY_NOT_LOADED"
+msgstr "The animal must be in the loaded area around the village."
+
+msgid "HUSBANDRY_WRONG_SITE"
+msgstr "This animal is unsuitable for this site."
+
+msgid "HUSBANDRY_OCCUPIED"
+msgstr "This animal site is already occupied."
+
+msgid "HUSBANDRY_ALREADY_ASSIGNED"
+msgstr "This animal already has an assigned site."
+
+msgid "HUSBANDRY_CHANGED_RECORD"
+msgstr "The saved animal’s species or body has changed."
+
+msgid "HUSBANDRY_RECORD_LIMIT"
+msgstr "No free production record is available for this animal."
+
+msgid "HUSBANDRY_COLLECT_FIRST"
+msgstr "Collect the finished products and free up storage space first."
+
+msgid "HUSBANDRY_DELIVER_FIRST"
+msgstr "Wait until the feed and water in transit have been delivered."
+
+msgid "TRIBE_AGE_OTHER"
+msgstr "Your tribe is already in another age."
+
+msgid "TRIBE_AGE_WORLD"
+msgstr "Return to the loaded world with your creature first."
+
+msgid "TRIBE_AGE_HOME"
+msgstr "Return home to advance with your group."
+
+msgid "TRIBE_AGE_PENDING"
+msgstr "Another transition is still being completed."
+
+msgid "TRIBE_AGE_SPACE"
+msgstr "Your first village needs safe paths and five free work sites. Move your home to a larger dry area."
+
+msgid "TRIBE_AGE_COMPANION"
+msgstr "A companion cannot yet reach the village site. Bring it closer."
+
+msgid "TRIBE_AGE_PLAYER"
+msgstr "Your creature cannot yet reach the village site."
+
+msgid "TRIBE_AGE_ESTABLISH"
+msgstr "Use {key} to establish a home for your nest group."
+
+msgid "TRIBE_AGE_RECALL"
+msgstr "Call both companions home with {key} → Return home."
+
+msgid "HUSBANDRY_BUILD_PEN"
+msgstr "Dairy pen · 4 wood / 2 fibre"
+
+msgid "HUSBANDRY_BUILD_LAYING"
+msgstr "Laying site · 4 wood / 2 fibre"
+
+msgid "EXPRESSION_GREET_HINT"
+msgstr "{key} · Greet (move closer)"
+
+msgid "EXPRESSION_GREET_OK"
+msgstr "Your animal friend returns your greeting."
+
+msgid "EXPRESSION_GREET_UNAVAILABLE"
+msgstr "To greet: move closer, keep line of sight and wait for a calm moment."
+
+msgid "TRIBAL_TEST_ENTRY"
+msgstr "Try the tribal age"
+
+msgid "TRIBAL_TEST_DESCRIPTION"
+msgstr "A separate test world starts with your creature and two companions at a prepared home. You then confirm the transition to the tribal age. Your existing saves are preserved."
+
+msgid "TRIBAL_TEST_CONTROLS"
+msgstr "In the tribal age, control three residents from an overhead view: select them, gather resources and build a village. You can save and resume the test world. Cancel the transition to stay in its creature phase."
+
+msgid "TRIBAL_TEST_PREPARE"
+msgstr "Prepare test world"
+
+msgid "TRIBAL_TEST_SAVE_NAME"
+msgstr "Tribal age – test world"
+
+msgid "TRIBAL_TEST_LOADING"
+msgstr "Preparing your home and companions … You can then confirm the transition."
+
+msgid "TRIBAL_TEST_CANCEL_SETUP"
+msgstr "Cancel preparation · play as a creature"
+
+msgid "TRIBAL_TEST_SETUP_FAILED"
+msgstr "The home could not be fully prepared. You can play as a creature in this test world and press N to establish a home. Then open “Tribal age …” to confirm the transition."
+
+msgid "ATMOSPHERE_LABEL"
+msgstr "Atmosphere"
+
+msgid "ATMOSPHERE_LOW"
+msgstr "Basic · sky and haze"
+
+msgid "ATMOSPHERE_STANDARD"
+msgstr "Atmospheric · shadows and glow"
+
+msgid "ATMOSPHERE_CINEMATIC"
+msgstr "Cinematic · light in mist"
+
+msgid "ATMOSPHERE_HINT"
+msgstr "Applies to the spherical world. “Apply & save” activates your selection and keeps it for the next launch. “Back” discards a selection that has not been applied."
+
+msgid "GRAPHICS_TAB"
+msgstr "Graphics"
+
+msgid "ATMOSPHERE_TITLE"
+msgstr "Atmosphere and lighting"
+
+msgid "ATMOSPHERE_LOW_DESCRIPTION"
+msgstr "Sky, simple moving clouds, sunlight and distance haze. The lightest preset."
+
+msgid "ATMOSPHERE_STANDARD_DESCRIPTION"
+msgstr "More detailed clouds, softer sun shadows, contact shadows and subtle glow. The default preset."
+
+msgid "ATMOSPHERE_CINEMATIC_DESCRIPTION"
+msgstr "All default effects plus light shafts in volumetric fog, additional cloud detail and greater shadow distance. Requires more graphics performance."
+
+msgid "ATMOSPHERE_FALLBACK"
+msgstr "Advanced lighting and fog effects are unavailable in your current graphics mode. Sky, clouds and distance haze remain active."
+
+msgid "SITE_FREIGHT_TITLE"
+msgstr "Shipment → %s"
+
+msgid "SITE_FREIGHT_SEND"
+msgstr "Send with selected resident"
+
+msgid "SITE_FREIGHT_CANCEL"
+msgstr "Cancel / return cargo"
+
+msgid "SITE_FREIGHT_AMOUNT"
+msgstr "Amount (1–4 units)"
+
+msgid "SITE_FREIGHT_HELP"
+msgstr "An idle resident at the store carries up to four units. Stock is credited on arrival."
+
+msgid "SITE_FREIGHT_NOT_READY"
+msgstr "The village and loaded paths must be ready."
+
+msgid "SITE_FREIGHT_DESTINATION"
+msgstr "Found a second settlement first."
+
+msgid "SITE_FREIGHT_BUSY"
+msgstr "A shipment is in progress. Its carrier stays assigned until completion."
+
+msgid "SITE_FREIGHT_CARRIER"
+msgstr "Select an idle companion waiting at the store without cargo. Your creature stays in the village."
+
+msgid "SITE_FREIGHT_ROUTE"
+msgstr "No safe loaded transport route is available."
+
+msgid "SITE_FREIGHT_CAPACITY"
+msgstr "The destination has insufficient unreserved storage space."
+
+msgid "SITE_FREIGHT_STOCK"
+msgstr "This amount is unavailable at the source store."
+
+msgid "SITE_FREIGHT_SENT"
+msgstr "Shipment saved. Goods and storage space are reserved."
+
+msgid "SITE_FREIGHT_RETURN_REQUESTED"
+msgstr "Return requested. The carrier turns back at the next waypoint."
+
+msgid "SITE_FREIGHT_SAVE_FAILED"
+msgstr "Save failed. The previous shipment and stock are preserved."
+
+msgid "SITE_FREIGHT_DETAIL"
+msgstr "%s · %d × %s"
+
+msgid "SITE_FREIGHT_STATUS_RESERVED"
+msgstr "Ready for pickup"
+
+msgid "SITE_FREIGHT_STATUS_MOVING"
+msgstr "In transit"
+
+msgid "SITE_FREIGHT_STATUS_ARRIVED"
+msgstr "Arrived – awaiting storage"
+
+msgid "SITE_FREIGHT_STATUS_DELIVERED"
+msgstr "Delivered"
+
+msgid "SITE_FREIGHT_STATUS_RETURNED"
+msgstr "Returned to source"
+
+msgid "SITE_FREIGHT_STATUS_CANCELLED"
+msgstr "Cancelled"
+
+msgid "SITE_FREIGHT_STATUS_BLOCKED"
+msgstr "Route blocked – cargo stays with the carrier"
+
+msgid "SITE_FREIGHT_STATUS_RETURNING"
+msgstr "Return requested / returning"
+
+msgid "EDITOR_PART_TAIL_STUMP_NAME"
+msgstr "Stump tail"
+
+msgid "EDITOR_PART_TAIL_STUMP_DESCRIPTION"
+msgstr "Short, rounded tail. Shares the balance tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_REPTILE_NAME"
+msgstr "Reptile tail"
+
+msgid "EDITOR_PART_TAIL_REPTILE_DESCRIPTION"
+msgstr "Thick root with a long, curved tip and dorsal scales. Shares the balance tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_BEAVER_PADDLE_NAME"
+msgstr "Beaver paddle"
+
+msgid "EDITOR_PART_TAIL_BEAVER_PADDLE_DESCRIPTION"
+msgstr "Broad, flat paddle tail with scales. Shares the fin tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_NAME"
+msgstr "Horizontal tail fluke"
+
+msgid "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_DESCRIPTION"
+msgstr "Two lateral flukes on a narrow root. Shares the fin tail’s stats and unlock."
+
+msgid "WORKPLACE_HINT"
+msgstr "Up to two workplaces of each type. Select residents, then choose their workplace."
+
+msgid "WORKPLACE_ROW"
+msgstr "{name} {number} · {ready} ready · {assigned} assigned"
+
+msgid "WORKPLACE_ASSIGNED"
+msgstr "Workplace: {name} {number}"
+
+msgid "WORKPLACE_ASSIGN_HINT"
+msgstr "Selected residents gather at this workplace. Carried goods are delivered first."
+
+msgid "WORKPLACE_SELECT_RESIDENT"
+msgstr "Select at least one resident first."
+
+msgid "WORKPLACE_UNKNOWN"
+msgstr "This workplace does not belong to the selected settlement."
+
+msgid "WORKPLACE_UNREACHABLE"
+msgstr "This workplace cannot be reached using the verified village paths."
+
+msgid "WORKPLACE_LIMIT"
+msgstr "This settlement already has two workplaces of this type."

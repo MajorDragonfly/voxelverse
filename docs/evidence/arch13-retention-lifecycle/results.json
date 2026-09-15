@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "package": "ARCH-13-RETENTION-LIFECYCLE",
+  "base": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+  "local_source_commit": "98096573ab7b4a8d7de1c3d935652650abcaf1d4",
+  "published_source_commit": "d5610e24866c6b58e935b338ba41ca4b53ca26e7",
+  "source_tree": "91913241d5a61975db6feedaee881fd08d9e607a",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "execution": "Linux headless source project; isolated synthetic user data",
+  "tooling": {
+    "total": 61,
+    "passed": 60,
+    "skipped": 1,
+    "seconds": 124.474,
+    "skip_reason": "Optional historical Schema-2 Atlas project not supplied",
+    "source_clean_at_start": true
+  },
+  "runtime": {
+    "passed": [
+      "region_store_test",
+      "save_slots_test",
+      "save_participants_test",
+      "spherical_developed_migration_test"
+    ],
+    "tracked_worktree_dirty_at_start": true,
+    "note": "Recorded against base plus worktree changes before source commit. Runtime code and tests unchanged since this passing run; later changes only completed package documentation."
+  },
+  "source_file_sha256": {
+    ".github/workflows/region-backup-validate.yml": "9aa6ba72d24cea3f6920b5524ad88d6202c1e68553193c9f57e1ed1b7a390634",
+    "autoload/save_game_service.gd": "c7c44bf7615aa2b03e63c10df4a5803610860665f782f508d5a280a9f2ce07f0",
+    "core/persistence/atomic_json.gd": "2d41728814f81f2d7833b1edab7bd73931d3c83544bcf2c0a5e0c917efbe2be2",
+    "core/persistence/region_store.gd": "27dcf127551fefad31595b416a792c73c670128823a120ec13036890d2d80410",
+    "core/persistence/userdata_access.gd": "c8c3e18eff860090abb61ac8590be5dc26c9ca6518301631d904923c812792be",
+    "core/persistence/userdata_access.gd.uid": "4336f03fc23ecd88d1ae5deb8f751020734fb6ca545e0afd6f80565d3a469ef6",
+    "docs/WORK_ARCH13_RETENTION_LIFECYCLE.md": "3e9b2df560dd01c387a9c4c33562063604e32cf89b678f8c70c44769f4d1d0f7",
+    "tests/tooling/userdata_access_test.py": "60933cdba0255e5c5f1d3e2174a71f285978d2c1a5043f6d6be6a152b9f6f60a",
+    "tools/region_backup_userdata.py": "911535c3ce14edf50f24cf8fc3a9f95d5703f789bcbafd572a193bdb96fd815f",
+    "tools/region_retention.py": "c8714323bf1e62ddb0830d4094af743343a50a5f635f641fabe9e81f6017424c",
+    "tools/userdata_access.py": "591ffce8b5796365d8b8475ae3e9919524744123e299fc7bcfd04204eb99c27d",
+    "tools/userdata_access_probe.gd": "8a28027ebf12a79680dd42b66f8bb1405b3a855edc9c305c0919ff1ebca86f8f",
+    "tools/userdata_access_probe.gd.uid": "5b6be47a1632492e6d4cb3e83714715bf6435fbe9eb513d4c1bbf7438be59789"
+  },
+  "limits": [
+    "No complete integration suite",
+    "No Windows execution",
+    "No native game export",
+    "No graphics/FPS evidence",
+    "Local cooperative protocol only; no deletion authorized"
+  ]
+}

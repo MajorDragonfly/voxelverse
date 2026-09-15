@@ -1,0 +1,47 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "6dcddc09aa0f6f46363ef377058ed79725a48a9d",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "terrain_lookahead_test",
+    "adaptive_planet_test",
+    "large_planet_runtime_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "terrain_lookahead_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.166,
+      "contract": "surface"
+    },
+    {
+      "name": "adaptive_planet_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.903,
+      "contract": "surface"
+    },
+    {
+      "name": "large_planet_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 53.532,
+      "contract": "surface"
+    }
+  ]
+}

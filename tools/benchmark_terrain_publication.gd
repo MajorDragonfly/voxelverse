@@ -1,16 +1,58 @@
 extends RefCounted
 ## Same cold CPU route on base and candidate; no GPU/FPS claim.
-const Terrain = preload("res://world/surface/surface_terrain.gd")
+class TerrainProbe:
+	extends "res://world/surface/surface_terrain.gd"
+	var timings: Dictionary = {}
+
+	func _measure(stage: String, started: int) -> void:
+		var elapsed: int = Time.get_ticks_usec() - started
+		var sample: Dictionary = timings.get(stage, {"calls": 0, "total_usec": 0, "max_usec": 0})
+		sample.calls += 1
+		sample.total_usec += elapsed
+		sample.max_usec = maxi(sample.max_usec, elapsed)
+		timings[stage] = sample
+
+	func _finish_transition() -> void:
+		var started: int = Time.get_ticks_usec()
+		super._finish_transition()
+		_measure("finish_transition", started)
+
+	func _trim_cache() -> void:
+		var started: int = Time.get_ticks_usec()
+		super._trim_cache()
+		_measure("trim_cache", started)
+
+	func _collect_job() -> void:
+		var started: int = Time.get_ticks_usec()
+		super._collect_job()
+		_measure("collect_job", started)
+
+	func _discard_staging() -> void:
+		var started: int = Time.get_ticks_usec()
+		super._discard_staging()
+		_measure("discard_staging", started)
+
+	func _publish() -> void:
+		var started: int = Time.get_ticks_usec()
+		super._publish()
+		_measure("publish", started)
+
+	func _update_collisions(direction: Vector3) -> void:
+		var started: int = Time.get_ticks_usec()
+		super._update_collisions(direction)
+		_measure("update_collisions", started)
 const System = preload("res://world/space/celestial_system.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 var failures: Array[String] = []
 var peak_queue: int = 0
+var peak_collision_queue: int = 0
+var peak_cache: int = 0
 var steps: Array[float] = []
 var drains: Array[Dictionary] = []
 
 func run(tree: SceneTree) -> void:
 	tree.root.get_node("SaveGameService").autosave_enabled = false
-	var terrain := Terrain.new()
+	var terrain := TerrainProbe.new()
 	tree.root.add_child(terrain)
 	terrain.set_process(false)
 	var descriptor: Dictionary = System.new(false, true).bodies["m1b:terra"].duplicate(true)
@@ -53,8 +95,9 @@ func run(tree: SceneTree) -> void:
 		"steps": steps.size(), "step_p95_ms": steps[mini(steps.size() - 1, ceili(steps.size() * 0.95) - 1)], "step_max_ms": steps[-1],
 		"max_upload_ms": terrain.max_build_usec / 1000.0, "max_prepare_ms": terrain.max_prepare_usec / 1000.0,
 		"max_handoff_ms": maxf(terrain.max_publish_usec, terrain.max_initial_publish_usec) / 1000.0,
-		"queue_peak": peak_queue, "resident_peak": terrain.peak_resident_meshes, "tiles": terrain.leaves.size(), "collisions": terrain.active.size(),
-		"drains": drains, "diagnostics": terrain.streaming_diagnostics()}
+		"queue_peak": peak_queue, "collision_queue_peak": peak_collision_queue, "cache_peak": peak_cache,
+		"resident_peak": terrain.peak_resident_meshes, "tiles": terrain.leaves.size(), "collisions": terrain.active.size(),
+		"drains": drains, "diagnostics": terrain.streaming_diagnostics(), "phase_timings": terrain.timings.duplicate(true)}
 	terrain.last_worker_seconds = 1.1
 	terrain.set_motion_hint(up, -tangent * 24.0)
 	terrain.stream_at(up)
@@ -73,18 +116,22 @@ func run(tree: SceneTree) -> void:
 func _drain(tree: SceneTree, terrain: Node3D, point: Array, label: String, retain_floor: bool) -> void:
 	var started: int = Time.get_ticks_msec()
 	var prior_updates: int = terrain.updates
-	while terrain._job != null or not terrain._pending.is_empty() or not terrain._retired.is_empty():
+	var step_max: float = 0.0
+	while terrain._job != null or not terrain._pending.is_empty() or not terrain._retired.is_empty() or not terrain._collision_pending.is_empty():
 		var tick: int = Time.get_ticks_usec()
 		terrain._process(1.0 / 60.0)
 		steps.append((Time.get_ticks_usec() - tick) / 1000.0)
+		step_max = maxf(step_max, steps[-1])
 		peak_queue = maxi(peak_queue, terrain._pending.size())
-		_check(terrain.last_build_count <= 2 and terrain.leaves.size() <= 768 and terrain.active.size() <= 24 and terrain.peak_resident_meshes <= 1536, "Object/upload budget exceeded")
+		peak_collision_queue = maxi(peak_collision_queue, terrain._collision_pending.size())
+		peak_cache = maxi(peak_cache, terrain._cache.size())
+		_check(terrain.last_build_count <= 2 and terrain.leaves.size() <= 768 and terrain.active.size() <= 24 and terrain.peak_resident_meshes <= 1536 and terrain._cache.size() <= 256 and terrain._collision_pending.size() <= 24, "Object/upload budget exceeded")
 		if retain_floor: _check(terrain.ground_ready(point), "Handoff lost attached floor")
 		if Time.get_ticks_msec() - started > 30000:
 			_check(false, "Drain timeout: " + label)
 			break
 		await tree.process_frame
-	drains.append({"stage": label, "elapsed_ms": Time.get_ticks_msec() - started, "publications": terrain.updates - prior_updates})
+	drains.append({"stage": label, "elapsed_ms": Time.get_ticks_msec() - started, "publications": terrain.updates - prior_updates, "step_max_ms": step_max})
 
 func _check(ok: bool, message: String) -> void:
 	if not ok and message not in failures: failures.append(message)

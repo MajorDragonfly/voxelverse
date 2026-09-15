@@ -16,6 +16,7 @@ class ActorStub extends Node:
 
 func _initialize() -> void: call_deferred("run")
 func run() -> void:
+	root.get_node("LocaleManager")._apply("de")
 	root.get_node("SaveGameService").autosave_enabled = false
 	capacity_check()
 	var fixture: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/egg_species_legacy.json"))
@@ -101,7 +102,7 @@ func run() -> void:
 		var collision: Dictionary = Catalog.upgrade_surface(old, body, {int(egg.species_seed): true})
 		expect(collision.species[3].species_seed == int(egg.species_seed) + 1, "Existing discovered seed collided")
 		var scan := {"scan": {"version": 1, "complete": true}, "journal": Records.observation(Traits.decode(egg.blueprint), "Prüfplanet")}
-		expect(Suitability.read(scan, Traits) == egg.domestication and Suitability.describe(egg.domestication).contains("Eiergewinnung ist noch nicht verfügbar"), "Book cannot show scanned egg role or promises production")
+		expect(Suitability.read(scan, Traits) == egg.domestication and Suitability.describe(egg.domestication).contains("Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich."), "Book cannot show scanned egg role or promises production")
 		scan.scan.complete = false
 		expect(Suitability.read(scan, Traits).is_empty(), "Unscanned catalog leaked into the book")
 		measurements.append({"body": body.id, "old_source_sha256": source_hash, "species": resumed.species.size(), "habitats": resumed.habitats.size(), "egg_id": egg.id, "body_evidence": egg.body_evidence.status, "legs": egg.body_evidence.rest.leg_count})

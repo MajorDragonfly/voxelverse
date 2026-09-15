@@ -1,4 +1,5 @@
 extends RefCounted
+const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Simulation = preload("res://world/tribe/village_simulation.gd")
 const MAX_JOBS: int = 32
 const BUDGET_USECS: int = 2000
@@ -30,5 +31,9 @@ func process(campaign: Dictionary, active_id: String, cooperation: float, observ
 		var body: Dictionary = Settlements.view(raw, job.settlement_id)
 		if body.is_empty(): continue
 		if Simulation.advance(body, clock, cooperation, observer, job.body_id == active_id): last_jobs += 1
+		if SiteTransport.active(raw):
+			var source: String = SiteTransport.job(raw).source.settlement_id
+			if raw.settlements.entries[source].simulation.get("owner") == "far": SiteTransport.advance(raw, clock)
+			else: SiteTransport.settle(raw)
 		if Time.get_ticks_usec() - started >= BUDGET_USECS: break
 	last_usecs = Time.get_ticks_usec() - started

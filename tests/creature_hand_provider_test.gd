@@ -164,7 +164,7 @@ func _save_design() -> void:
 	var design: Dictionary = _arm_design("arms_claws")
 	check(Assembly.save_to_file(design, SAVE) == OK, "Crab design save failed")
 	var file := FileAccess.open("user://crab_claws_expected.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify({"design_id": design.design_id, "parts": Assembly.BaseBlueprint._serialize_blueprint(design).parts}))
+	file.store_string(JSON.stringify({"design_id": design.design_id, "parts": Assembly.serialize_snapshot(design).parts}))
 	file.close()
 
 
@@ -172,5 +172,5 @@ func _verify_restart() -> void:
 	var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("user://crab_claws_expected.json"))
 	var loaded: Dictionary = Assembly.load_from_file(SAVE)
 	check(loaded.get("design_id") == expected.design_id, "Restart changed design identity")
-	check(JSON.parse_string(JSON.stringify(Assembly.BaseBlueprint._serialize_blueprint(loaded).parts)) == expected.parts, "Restart changed crab ID, limb UID or transforms")
+	check(JSON.parse_string(JSON.stringify(Assembly.serialize_snapshot(loaded).parts)) == expected.parts, "Restart changed crab ID, limb UID or transforms")
 	_check_arm_motion(loaded)

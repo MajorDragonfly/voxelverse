@@ -1,6 +1,7 @@
 extends RefCounted
 ## Two bounded settlement instances in the common campaign snapshot.
 ## Each village payload remains the sole owner of stock, orders and cargo.
+const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Tribe = preload("res://world/tribe/tribe_state.gd")
 const Simulation = preload("res://world/tribe/village_simulation.gd")
 const Home = Tribe.Home
@@ -69,7 +70,7 @@ static func workplaces(body: Dictionary, settlement_id: String) -> Dictionary:
 	for kind: String in village.deposits:
 		_add_place(result, village.deposits[kind], settlement_id, "deposit", kind)
 	for kind: String in village.economy.stations:
-		_add_place(result, village.economy.stations[kind], settlement_id, "station", kind)
+		_add_place(result, village.economy.stations[kind], settlement_id, "station", Economy.station_kind(kind))
 	for shelter: Dictionary in village.housing.homes:
 		_add_place(result, shelter, settlement_id, "shelter", shelter.kind)
 	for pen: Dictionary in village.husbandry.pens:
@@ -152,7 +153,7 @@ static func validate(body: Dictionary, campaign: Dictionary) -> String:
 	for index in range(3, Tribe.Housing.MAX_RESIDENTS): allowed.append(Tribe.Housing.resident_id({"id": original}, index))
 	for id: String in seen_members:
 		if id not in allowed: return "settlements.unknown_resident"
-	return ""
+	return SiteTransport.validate(body, campaign)
 
 ## Body-level writers always keep the canonical body. These short-lived views
 ## are for Work/Simulation consumers only, never snapshots or extension writes.
@@ -225,7 +226,7 @@ static func found(body: Dictionary, campaign: Dictionary, member_id: String, anc
 	var founder: Dictionary = {}
 	for member: Dictionary in source.members:
 		if member.id == member_id: founder = member
-	if founder.is_empty() or founder.cargo != "" or founder.construction_id != "" or founder.care_pen_id != "" or founder.order != "wait" or founder.paused_order != "": return _failure("settlements.founder_busy")
+	if founder.is_empty() or founder.cargo != "" or founder.construction_id != "" or founder.care_pen_id != "" or founder.order != "wait" or founder.paused_order != "" or founder.get("workplace_id", "") != "": return _failure("settlements.founder_busy")
 	for animal: Dictionary in result.get("domesticated_animals", {}).get("registry", {}).get("animals", {}).values():
 		if animal.handler_id == member_id or animal.get("pending", {}).get("actor_id") == member_id: return _failure("settlements.founder_busy")
 	if member_id in result.get("tribal_neighbor", {}).get("aid", {}).get("carriers", []): return _failure("settlements.founder_busy")

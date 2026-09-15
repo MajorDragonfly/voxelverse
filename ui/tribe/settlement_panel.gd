@@ -1,4 +1,5 @@
-extends VBoxContainer
+extends ScrollContainer
+var _content: VBoxContainer
 const Style = preload("res://ui/progression_style.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Collection = preload("res://world/tribe/settlement_collection.gd")
@@ -10,35 +11,43 @@ var _found: Button
 var _visit: Button
 var _ids: Array = []
 var _timer: float = 0.0
+var _freight: VBoxContainer
 
 func _ready() -> void:
 	name = "Siedlungen"
 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
-	add_theme_constant_override("separation", 8)
+	horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_content = VBoxContainer.new()
+	_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_content.add_theme_constant_override("separation", 8)
+	add_child(_content)
 	_help = Style.label(Text.text("SETTLEMENT_HELP"), 16, Style.MUTED)
 	_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	add_child(_help)
+	_content.add_child(_help)
 	_places = OptionButton.new()
 	_places.name = "SettlementChoice"
 	_places.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_child(_places)
+	_content.add_child(_places)
 	_places.item_selected.connect(func(_index: int) -> void: refresh())
 	_details = Style.label("", 16)
 	_details.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	add_child(_details)
+	_content.add_child(_details)
 	_visit = Style.button(Text.text("SETTLEMENT_MANAGE"))
 	_visit.name = "ManageSettlement"
 	_visit.pressed.connect(func() -> void:
 		if _places.selected >= 0: await runtime.select(_ids[_places.selected])
 		refresh())
-	add_child(_visit)
+	_content.add_child(_visit)
 	_found = Style.button(Text.text("SETTLEMENT_FOUND"))
 	_found.name = "FoundSettlement"
 	_found.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_found.pressed.connect(func() -> void:
 		await runtime.found()
 		refresh())
-	add_child(_found)
+	_content.add_child(_found)
+	_freight = preload("res://ui/tribe/site_transport_panel.gd").new()
+	_freight.runtime = runtime.controller.site_transport
+	_content.add_child(_freight)
 	refresh()
 
 func _process(delta: float) -> void:
@@ -49,6 +58,7 @@ func _process(delta: float) -> void:
 
 func refresh() -> void:
 	if _places == null: return
+	if _freight != null: _freight.refresh()
 	_help.text = Text.text("SETTLEMENT_HELP")
 	_visit.text = Text.text("SETTLEMENT_MANAGE")
 	_found.text = Text.text("SETTLEMENT_FOUND")

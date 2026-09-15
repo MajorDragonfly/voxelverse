@@ -1,0 +1,12 @@
+{
+  "source_commit": "853e7baa113cebddf28de3886fcf92ea5b9ce82c",
+  "source_tree": "71f8b6e8bb996385a09b86c07825d052bc067e04",
+  "runtime_sha256": {
+    "ui/frontend/main_menu.gd": "11372e714084335280b255ecc1d19d4ff40851353d1e0c90461c2ce55709f11f",
+    "ui/frontend/tribal_playtest.gd": "fa3e67b1c52a22a3acf804ca4425455d895a00cbfab4893da8bd7c3cca2abc66",
+    "localization/catalog.json": "b170fc6ed3cdde63ca92a5c8c7afb964fcdb2f9e8c46861d590558353985f2da",
+    "localization/de.po": "64fcedd0d0845fe03539a0557b55057f67627dbbaebaec133945464c58bb9147",
+    "localization/en.po": "98d750e38bb5b6006e289e9f69fb56248e9a34741f0579629941a3057be39fa1",
+    "tools/validation/contracts.json": "2cbdea3ee37c19a979871ec8a61b2613d68d675df544d1f2f7ef70886d5142fb"
+  }
+}

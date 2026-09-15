@@ -95,7 +95,8 @@
         "world_evolution_v2_ci_test",
         "world_layered_v7_test",
         "world_runtime_continuity_test",
-        "resource_visuals_test"
+        "resource_visuals_test",
+        "campaign_atmosphere_test"
       ]
     },
     {
@@ -114,13 +115,16 @@
         "creature_joint_studio_test",
         "creature_mouth_provider_test",
         "creature_part_articulation_test",
+        "creature_part_revisions_test",
         "creature_parts_studio_test",
         "creature_seat_fit_test",
         "creature_snout_family_test",
         "creature_studio_test",
         "creature_trunk_provider_test",
         "creature_v5_smoke_test",
-        "runtime_geometry_batch_test"
+        "runtime_geometry_batch_test",
+        "creature_eye_expression_test",
+        "creature_tail_family_test"
       ]
     },
     {
@@ -175,7 +179,8 @@
         "wildlife_drinking_test",
         "wildlife_drinking_world_test",
         "wildlife_foraging_test",
-        "wildlife_foraging_world_test"
+        "wildlife_foraging_world_test",
+        "creature_expression_test"
       ]
     },
     {
@@ -219,7 +224,11 @@
         "egg_production_contract_test",
         "egg_husbandry_ui_test",
         "settlement_runtime_test",
-        "settlement_save_test"
+        "settlement_save_test",
+        "site_transport_test",
+        "site_transport_runtime_test",
+        "workplace_instances_test",
+        "workplace_runtime_test"
       ]
     },
     {
@@ -269,7 +278,9 @@
         "tribe_localization_test",
         "hud_layout_test",
         "editor_localization_test",
-        "journal_localization_test"
+        "journal_localization_test",
+        "husbandry_localization_test",
+        "tribal_playtest_test"
       ]
     },
     {
@@ -298,6 +309,16 @@
       "tests": [
         "expedition_contract_test",
         "shipyard_test"
+      ]
+    },
+    {
+      "id": "weather",
+      "title": "Sanftes Planetenwetter und Darstellungsanschluss",
+      "work": "WEATHER-01 / WEATHER-02A",
+      "tests": [
+        "weather_model_test",
+        "weather_runtime_test",
+        "regional_weather_test"
       ]
     }
   ],

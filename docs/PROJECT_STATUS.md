@@ -2,7 +2,20 @@
 
 Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue Fachchats.
 
-## Gemeinsame Basis
+## Aktueller Spieltest-Kandidat
+
+Dritte Runde vom 15. September: `agent/playtest-latest-20260915`, auf #110
+aufbauend. Zwölf weitere feste Lieferungen aus #111–123 sind zusammengeführt;
+#122 ist die nicht doppelt integrierte Alternative zu #120.
+[Exakte Eingangsliste, gemeinsame Korrekturen und Bedienung](INTEGRATION_2026-09-15_PLAYTEST.md).
+
+Neu enthalten: Tieremotionen/korrigierte Lider, Modellrevisionen und Schwanzformen,
+Stammes-Testslot, Tierhaltungs-UI DE/EN, mehrere Arbeitsplätze, Lagertransporte,
+Terrain-Cachepflege, Archivlebensdauer, Wetter und Atmosphäre mit Grafikpresets.
+Vollsuite und native Builds werden über die CI dieses Kandidaten abgenommen.
+Folgende Angaben zur zweiten Runde bleiben als historische Basis erhalten.
+
+## Historische gemeinsame Basis der zweiten Runde
 
 - `main` beim Abruf: `d378ca0ecd7f03429a5150df6358e0646ec06689`, Merge von #92.
 - Neuer gemeinsamer Kandidat: `agent/integration-vegetation-nest-20260915`.

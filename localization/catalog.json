@@ -6441,6 +6441,586 @@
       "key": "Kopfmodule",
       "de": "Kopfmodule",
       "en": "Head modules"
+    },
+    {
+      "key": "HUSBANDRY_ASSIGN_KEEPER",
+      "de": "Tierpfleger zuweisen",
+      "en": "Assign animal keeper"
+    },
+    {
+      "key": "HUSBANDRY_HINT",
+      "de": "Ein eigenes Tier pro Platz: Milchtierplatz oder Legestelle. Tierpfleger liefern Futter und Wasser. Eier werden abgeholt, eingelagert und gegessen.",
+      "en": "One owned animal per dairy pen or laying site. Animal keepers deliver feed and water. Eggs are collected, stored and eaten."
+    },
+    {
+      "key": "HUSBANDRY_ASSIGN",
+      "de": "Tier zuordnen",
+      "en": "Assign animal"
+    },
+    {
+      "key": "HUSBANDRY_RELEASE",
+      "de": "Zuordnung lösen",
+      "en": "Release assignment"
+    },
+    {
+      "key": "HUSBANDRY_CHANGE_SITE",
+      "de": "Freien Platz umstellen",
+      "en": "Convert empty site"
+    },
+    {
+      "key": "HUSBANDRY_CHANGE_HINT",
+      "de": "Wechselt einen freien Milchtierplatz zur Legestelle oder zurück. Vorräte und fertige Produkte bleiben erhalten.",
+      "en": "Convert an empty dairy pen to a laying site or back. Supplies and finished products are retained."
+    },
+    {
+      "key": "HUSBANDRY_BUILD_HINT",
+      "de": "Baue einen Milchtierplatz oder eine Legestelle auf trockenem, frei erreichbarem Boden.",
+      "en": "Build a dairy pen or laying site on dry, accessible ground."
+    },
+    {
+      "key": "HUSBANDRY_PEN",
+      "de": "Milchtierplatz {number}",
+      "en": "Dairy pen {number}"
+    },
+    {
+      "key": "HUSBANDRY_LAYING_SITE",
+      "de": "Legestelle {number}",
+      "en": "Laying site {number}"
+    },
+    {
+      "key": "HUSBANDRY_MILK_ANIMAL",
+      "de": "Milchtier {number}",
+      "en": "Dairy animal {number}"
+    },
+    {
+      "key": "HUSBANDRY_EGG_ANIMAL",
+      "de": "Eierlieferant {number}",
+      "en": "Egg-laying animal {number}"
+    },
+    {
+      "key": "HUSBANDRY_SUPPLIES",
+      "de": "Futter {food} / 4 · Wasser {water} / 8 Liter\n{status}",
+      "en": "Feed {food} / 4 · Water {water} / 8 litres\n{status}"
+    },
+    {
+      "key": "HUSBANDRY_STORAGE",
+      "de": "{resource} bereit · Abholung wartet auf Lagerplatz.",
+      "en": "{resource} ready · Collection is waiting for storage space."
+    },
+    {
+      "key": "HUSBANDRY_WAIT_SUPPLIES",
+      "de": "Produktion ({resource}) wartet auf Futter und Wasser.",
+      "en": "Production ({resource}) is waiting for feed and water."
+    },
+    {
+      "key": "HUSBANDRY_PRODUCTION",
+      "de": "{resource} in {seconds} s · {amount} je Intervall.",
+      "en": "{resource} in {seconds} s · {amount} per interval."
+    },
+    {
+      "key": "HUSBANDRY_EGG_AMOUNT",
+      "de": "{count} Stück",
+      "en": "{count} eggs"
+    },
+    {
+      "key": "HUSBANDRY_MILK_AMOUNT",
+      "de": "{count} Liter",
+      "en": "{count} litres"
+    },
+    {
+      "key": "TRIBE_AGE_ENTRY",
+      "de": "Stammeszeitalter …",
+      "en": "Tribal age …"
+    },
+    {
+      "key": "TRIBE_AGE_TITLE",
+      "de": "Ein neues Zeitalter beginnt",
+      "en": "A new age begins"
+    },
+    {
+      "key": "TRIBE_AGE_CONFIRM",
+      "de": "Jetzt ins Stammeszeitalter fortschreiten",
+      "en": "Advance to the tribal age now"
+    },
+    {
+      "key": "TRIBE_AGE_CANCEL",
+      "de": "In der Kreaturenphase bleiben",
+      "en": "Stay in the creature phase"
+    },
+    {
+      "key": "TRIBE_AGE_RETURN",
+      "de": "Zur Kreatur zurück",
+      "en": "Return to your creature"
+    },
+    {
+      "key": "TRIBE_AGE_DETAIL",
+      "de": "Du führst künftig die Gruppe aus der Übersicht. Deine Kreatur und ihre beiden Gefährten bleiben dieselben Mitglieder. Eure Spezies, Heimat, Beziehungen und gekauften Fähigkeiten bleiben erhalten.\n\nSammelt Material, stellt ein Steinwerkzeug her, baut Hütten und versorgt eure Bewohner. Der Wechsel wird gespeichert; die direkte Einzelsteuerung endet. Nachbarstämme könnt ihr bereits treffen und unterstützen. Stammeskämpfe folgen später.",
+      "en": "You will lead the group from the overview. Your creature and its two companions remain the same members. Your species, home, relationships and purchased abilities are retained.\n\nGather materials, craft a stone tool, build huts and provide for your residents. The transition is saved and direct control of an individual ends. You can already meet and support neighbouring tribes. Tribal combat will follow later."
+    },
+    {
+      "key": "TRIBE_AGE_BLOCKED",
+      "de": "{reason}\n\nDer Wechsel beginnt erst, wenn du ihn hier ausdrücklich bestätigst.",
+      "en": "{reason}\n\nThe transition only begins after you explicitly confirm it here."
+    },
+    {
+      "key": "TRIBE_AGE_SAVE_FAILED",
+      "de": "Der Wechsel konnte nicht gespeichert werden. Du bleibst in der Kreaturenphase.\n\n{reason}",
+      "en": "The transition could not be saved. You remain in the creature phase.\n\n{reason}"
+    },
+    {
+      "key": "HUSBANDRY_NEED_ANIMAL",
+      "de": "Führe ein passendes gezähmtes Tier hierher und ordne es zu.",
+      "en": "Bring a suitable tamed animal here and assign it."
+    },
+    {
+      "key": "HUSBANDRY_CHANGED_ANIMAL",
+      "de": "Art oder Körper des Tieres hat sich geändert.",
+      "en": "The animal’s species or body has changed."
+    },
+    {
+      "key": "HUSBANDRY_STAY",
+      "de": "Das Tier muss am Tierplatz bleiben.",
+      "en": "The animal must stay at its assigned site."
+    },
+    {
+      "key": "HUSBANDRY_ACCESS",
+      "de": "Tierplatz oder Zugang ist momentan nicht erreichbar.",
+      "en": "The animal site or its entrance is currently inaccessible."
+    },
+    {
+      "key": "HUSBANDRY_RELEASE_FIRST",
+      "de": "Löse zuerst die Tierzuordnung.",
+      "en": "Release the animal assignment first."
+    },
+    {
+      "key": "HUSBANDRY_RETURN_SUPPLIES",
+      "de": "Warte, bis Futter und Wasser zurückgebracht wurden.",
+      "en": "Wait until feed and water have been returned."
+    },
+    {
+      "key": "HUSBANDRY_UNAVAILABLE",
+      "de": "Das Tier ist zurzeit nicht verfügbar.",
+      "en": "The animal is currently unavailable."
+    },
+    {
+      "key": "HUSBANDRY_WRONG_REGISTER",
+      "de": "Das Tierregister gehört nicht zu diesem Dorf.",
+      "en": "The animal registry does not belong to this village."
+    },
+    {
+      "key": "HUSBANDRY_OWNED_ANIMAL",
+      "de": "Wähle ein lebendes, gezähmtes Nutztier deines Stammes.",
+      "en": "Choose a living, tamed livestock animal owned by your tribe."
+    },
+    {
+      "key": "HUSBANDRY_UNSUITABLE",
+      "de": "Dieses Tier eignet sich nicht für diesen Haltungsplatz mit Pflanzenfutter.",
+      "en": "This animal is unsuitable for this site with plant feed."
+    },
+    {
+      "key": "HUSBANDRY_NOT_LOADED",
+      "de": "Das Tier muss in der geladenen Dorfumgebung sein.",
+      "en": "The animal must be in the loaded area around the village."
+    },
+    {
+      "key": "HUSBANDRY_WRONG_SITE",
+      "de": "Dieses Tier passt nicht zu diesem Haltungsplatz.",
+      "en": "This animal is unsuitable for this site."
+    },
+    {
+      "key": "HUSBANDRY_OCCUPIED",
+      "de": "Dieser Tierplatz ist bereits belegt.",
+      "en": "This animal site is already occupied."
+    },
+    {
+      "key": "HUSBANDRY_ALREADY_ASSIGNED",
+      "de": "Dieses Tier hat bereits einen Tierplatz.",
+      "en": "This animal already has an assigned site."
+    },
+    {
+      "key": "HUSBANDRY_CHANGED_RECORD",
+      "de": "Art oder Körper des gespeicherten Tieres hat sich geändert.",
+      "en": "The saved animal’s species or body has changed."
+    },
+    {
+      "key": "HUSBANDRY_RECORD_LIMIT",
+      "de": "Für dieses Tier ist kein freier Produktionsnachweis verfügbar.",
+      "en": "No free production record is available for this animal."
+    },
+    {
+      "key": "HUSBANDRY_COLLECT_FIRST",
+      "de": "Hole zuerst die fertigen Produkte ab und schaffe Lagerplatz.",
+      "en": "Collect the finished products and free up storage space first."
+    },
+    {
+      "key": "HUSBANDRY_DELIVER_FIRST",
+      "de": "Warte, bis unterwegs befindliches Tierfutter und Wasser abgeliefert sind.",
+      "en": "Wait until the feed and water in transit have been delivered."
+    },
+    {
+      "key": "TRIBE_AGE_OTHER",
+      "de": "Dein Stamm befindet sich bereits in einem anderen Zeitalter.",
+      "en": "Your tribe is already in another age."
+    },
+    {
+      "key": "TRIBE_AGE_WORLD",
+      "de": "Kehre zuerst mit deiner Kreatur in die geladene Welt zurück.",
+      "en": "Return to the loaded world with your creature first."
+    },
+    {
+      "key": "TRIBE_AGE_HOME",
+      "de": "Kehre zum Heimatplatz zurück, um mit deiner Gruppe fortzuschreiten.",
+      "en": "Return home to advance with your group."
+    },
+    {
+      "key": "TRIBE_AGE_PENDING",
+      "de": "Ein anderer Übergang wird noch abgeschlossen.",
+      "en": "Another transition is still being completed."
+    },
+    {
+      "key": "TRIBE_AGE_SPACE",
+      "de": "Für das erste Dorf fehlen sichere Wege und fünf freie Arbeitsplätze. Verlege den Heimatplatz auf eine größere trockene Fläche.",
+      "en": "Your first village needs safe paths and five free work sites. Move your home to a larger dry area."
+    },
+    {
+      "key": "TRIBE_AGE_COMPANION",
+      "de": "Ein Gefährte erreicht den Dorfplatz noch nicht. Hole ihn näher heran.",
+      "en": "A companion cannot yet reach the village site. Bring it closer."
+    },
+    {
+      "key": "TRIBE_AGE_PLAYER",
+      "de": "Deine Kreatur erreicht den Dorfplatz noch nicht.",
+      "en": "Your creature cannot yet reach the village site."
+    },
+    {
+      "key": "TRIBE_AGE_ESTABLISH",
+      "de": "Lege mit {key} einen Heimatplatz für deine Nestgruppe fest.",
+      "en": "Use {key} to establish a home for your nest group."
+    },
+    {
+      "key": "TRIBE_AGE_RECALL",
+      "de": "Rufe beide Gefährten mit {key} → Heimkehren zum Heimatplatz.",
+      "en": "Call both companions home with {key} → Return home."
+    },
+    {
+      "key": "HUSBANDRY_BUILD_PEN",
+      "de": "Milchtierplatz · 4 Holz / 2 Fasern",
+      "en": "Dairy pen · 4 wood / 2 fibre"
+    },
+    {
+      "key": "HUSBANDRY_BUILD_LAYING",
+      "de": "Legestelle · 4 Holz / 2 Fasern",
+      "en": "Laying site · 4 wood / 2 fibre"
+    },
+    {
+      "key": "EXPRESSION_GREET_HINT",
+      "de": "{key} · Begrüßen (nah herangehen)",
+      "en": "{key} · Greet (move closer)"
+    },
+    {
+      "key": "EXPRESSION_GREET_OK",
+      "de": "Dein Tierfreund erwidert die Begrüßung.",
+      "en": "Your animal friend returns your greeting."
+    },
+    {
+      "key": "EXPRESSION_GREET_UNAVAILABLE",
+      "de": "Begrüßen: nah herangehen, Sichtkontakt halten und einen ruhigen Moment abwarten.",
+      "en": "To greet: move closer, keep line of sight and wait for a calm moment."
+    },
+    {
+      "key": "TRIBAL_TEST_ENTRY",
+      "de": "Stammeszeitalter testen",
+      "en": "Try the tribal age"
+    },
+    {
+      "key": "TRIBAL_TEST_DESCRIPTION",
+      "de": "Eine eigene Testwelt startet mit deiner Kreatur und zwei Gefährten an einem vorbereiteten Heimatplatz. Danach bestätigst du den Wechsel ins Stammeszeitalter. Deine bisherigen Spielstände bleiben erhalten.",
+      "en": "A separate test world starts with your creature and two companions at a prepared home. You then confirm the transition to the tribal age. Your existing saves are preserved."
+    },
+    {
+      "key": "TRIBAL_TEST_CONTROLS",
+      "de": "Im Stammeszeitalter steuerst du drei Bewohner aus der Übersicht: auswählen, Rohstoffe sammeln und ein Dorf aufbauen. Die Testwelt lässt sich speichern und fortsetzen. Brichst du den Wechsel ab, bleibst du in ihrer Kreaturenphase.",
+      "en": "In the tribal age, control three residents from an overhead view: select them, gather resources and build a village. You can save and resume the test world. Cancel the transition to stay in its creature phase."
+    },
+    {
+      "key": "TRIBAL_TEST_PREPARE",
+      "de": "Testwelt vorbereiten",
+      "en": "Prepare test world"
+    },
+    {
+      "key": "TRIBAL_TEST_SAVE_NAME",
+      "de": "Stammeszeitalter – Testwelt",
+      "en": "Tribal age – test world"
+    },
+    {
+      "key": "TRIBAL_TEST_LOADING",
+      "de": "Dein Heimatplatz und deine Gefährten werden vorbereitet … Anschließend kannst du den Wechsel bestätigen.",
+      "en": "Preparing your home and companions … You can then confirm the transition."
+    },
+    {
+      "key": "TRIBAL_TEST_CANCEL_SETUP",
+      "de": "Vorbereitung abbrechen · als Kreatur spielen",
+      "en": "Cancel preparation · play as a creature"
+    },
+    {
+      "key": "TRIBAL_TEST_SETUP_FAILED",
+      "de": "Der Heimatplatz konnte nicht vollständig vorbereitet werden. Du kannst in dieser Testwelt als Kreatur spielen und mit N einen Heimatplatz anlegen. Öffne danach „Stammeszeitalter …“, um den Wechsel zu bestätigen.",
+      "en": "The home could not be fully prepared. You can play as a creature in this test world and press N to establish a home. Then open “Tribal age …” to confirm the transition."
+    },
+    {
+      "key": "ATMOSPHERE_LABEL",
+      "de": "Atmosphäre",
+      "en": "Atmosphere"
+    },
+    {
+      "key": "ATMOSPHERE_LOW",
+      "de": "Basis · Himmel und Dunst",
+      "en": "Basic · sky and haze"
+    },
+    {
+      "key": "ATMOSPHERE_STANDARD",
+      "de": "Atmosphärisch · Schatten und Leuchten",
+      "en": "Atmospheric · shadows and glow"
+    },
+    {
+      "key": "ATMOSPHERE_CINEMATIC",
+      "de": "Cineastisch · Licht im Nebel",
+      "en": "Cinematic · light in mist"
+    },
+    {
+      "key": "ATMOSPHERE_HINT",
+      "de": "Gilt für die Kugelwelt. Die Auswahl wird mit „Übernehmen & speichern“ aktiviert und für den nächsten Spielstart gespeichert. „Zurück“ verwirft eine noch nicht übernommene Auswahl.",
+      "en": "Applies to the spherical world. “Apply & save” activates your selection and keeps it for the next launch. “Back” discards a selection that has not been applied."
+    },
+    {
+      "key": "GRAPHICS_TAB",
+      "de": "Grafik",
+      "en": "Graphics"
+    },
+    {
+      "key": "ATMOSPHERE_TITLE",
+      "de": "Atmosphäre und Licht",
+      "en": "Atmosphere and lighting"
+    },
+    {
+      "key": "ATMOSPHERE_LOW_DESCRIPTION",
+      "de": "Himmel, einfache bewegte Wolken, Sonnenlicht und Entfernungsdunst. Die sparsamste Stufe.",
+      "en": "Sky, simple moving clouds, sunlight and distance haze. The lightest preset."
+    },
+    {
+      "key": "ATMOSPHERE_STANDARD_DESCRIPTION",
+      "de": "Detailliertere Wolken, weichere Sonnenschatten, Kontaktschatten und dezente Leuchteffekte. Die Standardstufe.",
+      "en": "More detailed clouds, softer sun shadows, contact shadows and subtle glow. The default preset."
+    },
+    {
+      "key": "ATMOSPHERE_CINEMATIC_DESCRIPTION",
+      "de": "Alle Effekte der Standardstufe sowie Lichtstrahlen im volumetrischen Nebel, weitere Wolkendetails und größere Schattenreichweite. Benötigt mehr Grafikleistung.",
+      "en": "All default effects plus light shafts in volumetric fog, additional cloud detail and greater shadow distance. Requires more graphics performance."
+    },
+    {
+      "key": "ATMOSPHERE_FALLBACK",
+      "de": "Erweiterte Licht- und Nebeleffekte sind in deinem aktuellen Grafikmodus nicht verfügbar. Himmel, Wolken und Entfernungsdunst bleiben aktiv.",
+      "en": "Advanced lighting and fog effects are unavailable in your current graphics mode. Sky, clouds and distance haze remain active."
+    },
+    {
+      "key": "SITE_FREIGHT_TITLE",
+      "de": "Warentransport → %s",
+      "en": "Shipment → %s"
+    },
+    {
+      "key": "SITE_FREIGHT_SEND",
+      "de": "Mit ausgewähltem Bewohner versenden",
+      "en": "Send with selected resident"
+    },
+    {
+      "key": "SITE_FREIGHT_CANCEL",
+      "de": "Abbrechen / Ware zurückbringen",
+      "en": "Cancel / return cargo"
+    },
+    {
+      "key": "SITE_FREIGHT_AMOUNT",
+      "de": "Menge (1–4 Einheiten)",
+      "en": "Amount (1–4 units)"
+    },
+    {
+      "key": "SITE_FREIGHT_HELP",
+      "de": "Ein freier Bewohner am Lager trägt bis zu vier Einheiten. Gebucht wird erst bei Ankunft.",
+      "en": "An idle resident at the store carries up to four units. Stock is credited on arrival."
+    },
+    {
+      "key": "SITE_FREIGHT_NOT_READY",
+      "de": "Dorf und geladene Wege müssen bereit sein.",
+      "en": "The village and loaded paths must be ready."
+    },
+    {
+      "key": "SITE_FREIGHT_DESTINATION",
+      "de": "Gründe zuerst ein zweites Lager.",
+      "en": "Found a second settlement first."
+    },
+    {
+      "key": "SITE_FREIGHT_BUSY",
+      "de": "Ein Lagertransport läuft. Der Träger bleibt bis zum Abschluss gebunden.",
+      "en": "A shipment is in progress. Its carrier stays assigned until completion."
+    },
+    {
+      "key": "SITE_FREIGHT_CARRIER",
+      "de": "Wähle einen freien Gefährten, der ohne Ladung direkt am Lager wartet. Deine Kreatur bleibt im Dorf.",
+      "en": "Select an idle companion waiting at the store without cargo. Your creature stays in the village."
+    },
+    {
+      "key": "SITE_FREIGHT_ROUTE",
+      "de": "Kein sicherer geladener Transportweg verfügbar.",
+      "en": "No safe loaded transport route is available."
+    },
+    {
+      "key": "SITE_FREIGHT_CAPACITY",
+      "de": "Im Ziellager ist nicht genug ungebundener Platz.",
+      "en": "The destination has insufficient unreserved storage space."
+    },
+    {
+      "key": "SITE_FREIGHT_STOCK",
+      "de": "Diese Menge ist im Ausgangslager nicht verfügbar.",
+      "en": "This amount is unavailable at the source store."
+    },
+    {
+      "key": "SITE_FREIGHT_SENT",
+      "de": "Auftrag gespeichert. Ware und Lagerplätze sind gebunden.",
+      "en": "Shipment saved. Goods and storage space are reserved."
+    },
+    {
+      "key": "SITE_FREIGHT_RETURN_REQUESTED",
+      "de": "Rückkehr angefordert. Unterwegs wird am nächsten Wegpunkt umgekehrt.",
+      "en": "Return requested. The carrier turns back at the next waypoint."
+    },
+    {
+      "key": "SITE_FREIGHT_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Der bisherige Auftrag und Bestand bleiben erhalten.",
+      "en": "Save failed. The previous shipment and stock are preserved."
+    },
+    {
+      "key": "SITE_FREIGHT_DETAIL",
+      "de": "%s · %d × %s",
+      "en": "%s · %d × %s"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RESERVED",
+      "de": "Zur Abholung bereit",
+      "en": "Ready for pickup"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_MOVING",
+      "de": "Unterwegs",
+      "en": "In transit"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_ARRIVED",
+      "de": "Angekommen – Einlagerung ausstehend",
+      "en": "Arrived – awaiting storage"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_DELIVERED",
+      "de": "Eingelagert",
+      "en": "Delivered"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RETURNED",
+      "de": "Zurück im Ausgangslager",
+      "en": "Returned to source"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_CANCELLED",
+      "de": "Abgebrochen",
+      "en": "Cancelled"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_BLOCKED",
+      "de": "Weg gesperrt – Fracht bleibt beim Träger",
+      "en": "Route blocked – cargo stays with the carrier"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RETURNING",
+      "de": "Rückkehr angefordert / unterwegs zurück",
+      "en": "Return requested / returning"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STUMP_NAME",
+      "de": "Stummelschwanz",
+      "en": "Stump tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STUMP_DESCRIPTION",
+      "de": "Kurzer, runder Schwanz. Werte und Freischaltung wie Balanceschwanz.",
+      "en": "Short, rounded tail. Shares the balance tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_REPTILE_NAME",
+      "de": "Reptilienschwanz",
+      "en": "Reptile tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_REPTILE_DESCRIPTION",
+      "de": "Kräftiger Ansatz mit langem, gebogenem Ende und Rückenschuppen. Werte und Freischaltung wie Balanceschwanz.",
+      "en": "Thick root with a long, curved tip and dorsal scales. Shares the balance tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BEAVER_PADDLE_NAME",
+      "de": "Biberpaddel",
+      "en": "Beaver paddle"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BEAVER_PADDLE_DESCRIPTION",
+      "de": "Breiter, flacher Paddelschwanz mit Schuppen. Werte und Freischaltung wie Flossenschwanz.",
+      "en": "Broad, flat paddle tail with scales. Shares the fin tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_NAME",
+      "de": "Horizontale Schwanzflosse",
+      "en": "Horizontal tail fluke"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_DESCRIPTION",
+      "de": "Zwei seitliche Flossenlappen mit schmalem Ansatz. Werte und Freischaltung wie Flossenschwanz.",
+      "en": "Two lateral flukes on a narrow root. Shares the fin tail’s stats and unlock."
+    },
+    {
+      "key": "WORKPLACE_HINT",
+      "de": "Bis zu zwei Arbeitsplätze je Typ. Wähle Bewohner und anschließend den gewünschten Platz.",
+      "en": "Up to two workplaces of each type. Select residents, then choose their workplace."
+    },
+    {
+      "key": "WORKPLACE_ROW",
+      "de": "{name} {number} · {ready} abholbereit · {assigned} zugeordnet",
+      "en": "{name} {number} · {ready} ready · {assigned} assigned"
+    },
+    {
+      "key": "WORKPLACE_ASSIGNED",
+      "de": "Arbeitsplatz: {name} {number}",
+      "en": "Workplace: {name} {number}"
+    },
+    {
+      "key": "WORKPLACE_ASSIGN_HINT",
+      "de": "Ausgewählte Bewohner sammeln an genau diesem Platz. Getragene Ware wird zuerst abgeliefert.",
+      "en": "Selected residents gather at this workplace. Carried goods are delivered first."
+    },
+    {
+      "key": "WORKPLACE_SELECT_RESIDENT",
+      "de": "Wähle zuerst mindestens einen Bewohner aus.",
+      "en": "Select at least one resident first."
+    },
+    {
+      "key": "WORKPLACE_UNKNOWN",
+      "de": "Dieser Arbeitsplatz gehört nicht zum ausgewählten Ort.",
+      "en": "This workplace does not belong to the selected settlement."
+    },
+    {
+      "key": "WORKPLACE_UNREACHABLE",
+      "de": "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar.",
+      "en": "This workplace cannot be reached using the verified village paths."
+    },
+    {
+      "key": "WORKPLACE_LIMIT",
+      "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
+      "en": "This settlement already has two workplaces of this type."
     }
   ]
 }

@@ -55,10 +55,17 @@ static func pending(project: Dictionary) -> bool:
 	return false
 
 static func supplied(project: Dictionary) -> bool:
-	for kind: String in COSTS[project["kind"]]:
-		if int(project["delivered_materials"][kind]) != int(COSTS[project["kind"]][kind]):
+	var costs: Dictionary = construction_costs(project)
+	for kind: String in costs:
+		if int(project["delivered_materials"][kind]) != int(costs[kind]):
 			return false
 	return true
+
+static func material_project(project: Dictionary) -> bool:
+	return project.get("kind", "") in BUILDS or (project.get("kind", "") in Economy.STATIONS and project.has("station_key"))
+
+static func construction_costs(project: Dictionary) -> Dictionary:
+	return COSTS.get(project.get("kind"), Economy.COSTS.get(project.get("kind"), {}))
 
 static func growth_blocker(data: Dictionary) -> String:
 	var count: int = data["members"].size()
@@ -108,7 +115,7 @@ static func validate(data: Dictionary) -> String:
 	var huts: int = 0
 	var all_sites: Array = h["homes"].duplicate()
 	var project: Dictionary = data["project"]
-	var building: bool = project.get("kind", "") in BUILDS
+	var building: bool = material_project(project)
 	if building and not Economy.text_id(project.get("id")):
 		return "Der Baustelle fehlt ihre Kennung."
 	if project.get("kind", "") in KINDS:
@@ -130,10 +137,10 @@ static func validate(data: Dictionary) -> String:
 	for member: Dictionary in data["members"]:
 		if member.get("species_id") != data["species_id"] or member.get("faction_id") != data["faction_id"] or not member.get("construction_id") is String:
 			return "Bewohner und Stamm gehören nicht zusammen."
-		if member["construction_id"] != "" and (not building or member["construction_id"] != project["id"] or member["cargo"] not in COSTS[project["kind"]]):
+		if member["construction_id"] != "" and (not building or member["construction_id"] != project["id"] or member["cargo"] not in construction_costs(project)):
 			return "Baufracht ohne zugehörige Baustelle."
 	if building:
-		var costs: Dictionary = COSTS[project["kind"]]
+		var costs: Dictionary = construction_costs(project)
 		for field: String in ["materials", "delivered_materials"]:
 			if not project.get(field) is Dictionary or project[field].size() != costs.size():
 				return "Ungültige Baumaterialreservierung."
@@ -146,7 +153,7 @@ static func validate(data: Dictionary) -> String:
 			if int(project["materials"][kind]) + int(project["delivered_materials"][kind]) + cargo != int(costs[kind]):
 				return "Baumaterial fehlt oder wurde vervielfacht."
 			var budget: int = (48 if kind in ["wood", "stone"] else 0) + int(data["economy"]["produced"][kind])
-			if int(data["deposits"][kind]["remaining"]) + Economy.reserve(data, kind) + int(costs[kind]) > budget:
+			if Economy.remaining(data, kind) + Economy.reserve(data, kind) + int(costs[kind]) > budget:
 				return "Reserviertes Baumaterial wurde zusätzlich ins Lager gebucht."
 		if float(project["progress"]) > 0 and not supplied(project):
 			return "Baufortschritt ohne angelieferte Materialien."

@@ -15,7 +15,7 @@ var player: CharacterBody3D
 var flora: Node
 var population: Node
 var world_initialized: bool = false
-var _sun: DirectionalLight3D
+var _atmosphere: Node3D
 
 func _ready() -> void:
 	var state := get_node("/root/GameState")
@@ -99,8 +99,9 @@ func _ready() -> void:
 	var development := preload("res://core/development_tools.gd").new()
 	development.name = "DevelopmentTools"
 	add_child(development)
-	var frame: Basis = Cube.frame(player.up_direction)
-	_sun.basis = frame.rotated(frame.x, -0.65)
+	var anchor: Dictionary = body.surface_context.spawn
+	_atmosphere.configure(terrain.surface.terrain, int(terrain.surface.body.seed),
+		Cube.vector(Cube.direction(anchor.face, anchor.u, anchor.v)), _atmosphere.campaign_sample)
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(player) and not world_initialized:
@@ -160,22 +161,5 @@ func _exit_tree() -> void:
 	if adapter != null: adapter.close()
 
 func _build_environment() -> void:
-	var environment := Environment.new()
-	environment.background_mode = Environment.BG_COLOR
-	environment.background_color = Color("83b4ce")
-	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_color = Color("c4d8e4")
-	environment.ambient_light_energy = 0.22
-	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.fog_enabled = true
-	environment.fog_mode = Environment.FOG_MODE_DEPTH
-	environment.fog_light_color = Color("83b4ce")
-	environment.fog_depth_begin = 1500.0
-	environment.fog_depth_end = 18000.0
-	var world := WorldEnvironment.new()
-	world.environment = environment
-	add_child(world)
-	_sun = DirectionalLight3D.new()
-	_sun.light_energy = 0.8
-	_sun.shadow_enabled = true
-	add_child(_sun)
+	_atmosphere = preload("res://world/visuals/atmosphere/campaign_atmosphere.gd").new()
+	add_child(_atmosphere)

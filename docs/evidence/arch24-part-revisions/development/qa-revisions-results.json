@@ -1,0 +1,97 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_part_revisions_test",
+    "creature_design_library_test",
+    "creature_library_ui_test",
+    "creature_foot_provider_test",
+    "creature_hand_provider_test",
+    "creature_part_articulation_test",
+    "creature_trunk_provider_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.94
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.222
+    },
+    {
+      "name": "creature_part_revisions_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 9.152,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_design_library_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.238,
+      "contract": "blueprints"
+    },
+    {
+      "name": "creature_library_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 26.16,
+      "contract": "blueprints"
+    },
+    {
+      "name": "creature_foot_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.875,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_hand_provider_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 8.096,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_part_articulation_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 5.483,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_trunk_provider_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 7.55,
+      "contract": "creature_body"
+    }
+  ]
+}

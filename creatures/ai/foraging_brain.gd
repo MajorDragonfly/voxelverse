@@ -20,6 +20,11 @@ var _food_distance: float = INF
 var _avoided: Dictionary = {}
 var _foraging_clock: float = 0.0
 
+func get_expression_context() -> Dictionary:
+	var context: Dictionary = super.get_expression_context()
+	context["sated"] = satiety >= 75.0
+	return context
+
 func _ready() -> void:
 	super._ready()
 	_load_needs("")

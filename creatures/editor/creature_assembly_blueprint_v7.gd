@@ -166,6 +166,7 @@ static func serialize_snapshot(blueprint: Dictionary) -> Dictionary:
 	# Encoding cannot edit the author's live design, even on a failed write.
 	blueprint = blueprint.duplicate(true)
 	normalize(blueprint)
+	Contract.PartRevisions.pin_legacy(blueprint)
 	var serialized: Dictionary = BaseBlueprint._serialize_blueprint(blueprint)
 	serialized["version"] = SAVE_VERSION
 	serialized["design_id"] = blueprint["design_id"]
@@ -359,7 +360,8 @@ static func load_best_available() -> Dictionary:
 static func _copy_extensions(source: Dictionary, target: Dictionary) -> void:
 	# Additive declarative fields have a reserved lossless channel. Unknown
 	# behavior needs a schema change instead of being silently interpreted.
-	for field in ["extensions", "part_revision", "catalog_revision"]:
+	Contract.PartRevisions.copy_fields(source, target)
+	for field in ["extensions"]:
 		if source.has(field):
 			var value: Variant = source[field]
 			target[field] = value.duplicate(true) if value is Dictionary or value is Array else value

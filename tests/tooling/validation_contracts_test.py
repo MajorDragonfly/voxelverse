@@ -38,6 +38,10 @@ class ValidationContractsTest(unittest.TestCase):
         self.save_catalog()
         subprocess.run([sys.executable, str(self.project / "tools/localization/catalog.py")],
                        check=True, capture_output=True)
+        for command in [["init", "-q"], ["config", "user.name", "Validation fixture"],
+                        ["config", "user.email", "fixture@example.invalid"],
+                        ["add", "."], ["commit", "-qm", "Fixture sources"]]:
+            subprocess.run(["git", "-C", str(self.project), *command], check=True, capture_output=True)
 
     def save_manifest(self):
         (self.project / contracts.MANIFEST).write_text(json.dumps(self.manifest), encoding="utf-8")
@@ -155,17 +159,17 @@ class ValidationContractsTest(unittest.TestCase):
                 self.assertEqual(self.snapshot(), before)
 
     def run_without_game(self, tests):
-        args = Namespace(project=self.project, output=self.project / "results", godot="unused-godot",
+        args = Namespace(project=self.project, output=self.project.parent / (self.project.name + "-results"), godot="unused-godot",
                          tests=tests, skip_import=True, skip_main=True)
+        self.addCleanup(shutil.rmtree, args.output, True)
         real_run = subprocess.run
 
         def only_source(argv, **kwargs):
-            self.assertEqual(argv[0], sys.executable, "Runner started Godot after a source failure")
+            self.assertIn(argv[0], [sys.executable, "git"], "Runner started Godot after a source failure")
             return real_run(argv, **kwargs)
 
         with patch.object(validate_godot.subprocess, "check_output", return_value="4.6.3.stable.test"), \
                 patch.object(validate_godot.subprocess, "run", side_effect=only_source), \
-                patch.object(validate_godot, "revision", return_value={"commit": "fixture"}), \
                 contextlib.redirect_stdout(io.StringIO()):
             status = validate_godot.validate(args)
         return status, json.loads((args.output / "results.json").read_text())
@@ -174,21 +178,22 @@ class ValidationContractsTest(unittest.TestCase):
         (self.project / "localization/en.po").write_text("stale\n")
         status, result = self.run_without_game(["example_test"])
         self.assertEqual(status, 1)
-        self.assertEqual([c["name"] for c in result["checks"]], ["source_contracts"])
+        self.assertEqual([c["name"] for c in result["checks"]], ["source_contracts", "source_integrity"])
         self.assertFalse(result["checks"][0]["passed"])
         self.assertEqual(result["checks"][0]["kind"], "source_contract")
 
     def test_unknown_requested_test_stops_before_game(self):
         status, result = self.run_without_game(["typo_test"])
         self.assertEqual(status, 1)
-        self.assertEqual(result["checks"][-1]["name"], "test_selection")
+        self.assertEqual(result["checks"][-2]["name"], "test_selection")
 
     def test_explicit_empty_selection_is_preserved(self):
         status, result = self.run_without_game([])
         self.assertEqual(status, 0)
         self.assertEqual(result["selected_tests"], [])
         self.assertEqual(result["execution"], "headless_source_project")
-        self.assertEqual(len(result["checks"]), 1)
+        self.assertEqual(len(result["checks"]), 2)
+        self.assertTrue(result["provenance"]["reusable"])
 
 
 if __name__ == "__main__":

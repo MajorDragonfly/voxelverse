@@ -18,6 +18,7 @@ const Ecology = preload("res://world/surface/campaign_ecology_state.gd")
 const LegacyPopulation = preload("res://world/fauna/legacy_population_state.gd")
 const Foraging = preload("res://world/resources/plants/foraging_state.gd")
 const Drinking = preload("res://creatures/ai/drinking_state.gd")
+const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Settlements = preload("res://world/tribe/settlement_collection.gd")
 const Onboarding = preload("res://core/onboarding_progress.gd")
 
@@ -34,6 +35,7 @@ const SECTIONS: Array = [
 ]
 const BODY_SECTIONS: Array = [
 	{"id": "settlements", "schema": Settlements.SCHEMA},
+	{"id": SiteTransport.FIELD, "schema": 1},
 	{"id": "village_simulation", "schema": 1},
 	{"id": "visit", "schema": 1},
 	{"id": "home_group", "schema": Home.SCHEMA},
@@ -168,6 +170,7 @@ static func unknown_body_section(body: Dictionary) -> String:
 
 static func _validate_body_section(id: String, body: Dictionary, campaign: Dictionary, tribal: Dictionary) -> String:
 	match id:
+		"site_transport": return SiteTransport.validate(body, campaign)
 		"settlements": return Settlements.validate(body, campaign)
 		"village_simulation": return VillageSimulation.validate(body[id], body, float(campaign.get("elapsed_seconds", 0)))
 		"visit":
@@ -213,6 +216,7 @@ static func unsupported_body(body: Dictionary) -> bool:
 static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 	var value: Variant = body.get(id)
 	match id:
+		"site_transport": return SiteTransport.unsupported(body)
 		"settlements": return Settlements.unsupported(body)
 		"village_simulation", "visit", "legacy_population", "wildlife_foraging", "wildlife_drinking", "surface_ecology":
 			return value is Dictionary and value.get("schema") != 1

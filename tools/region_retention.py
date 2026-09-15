@@ -16,9 +16,11 @@ import sqlite3
 import tempfile
 
 if __package__:
+    from .userdata_access import access
     from . import region_backup as backup
     from . import region_backup_userdata as userdata
 else:
+    from userdata_access import access
     import region_backup as backup
     import region_backup_userdata as userdata
 
@@ -240,6 +242,11 @@ def _read_plan(directory: Path) -> dict:
 
 
 def plan_retention(source: Path, output: Path) -> dict:
+    with access(source):
+        return _plan_retention(source, output)
+
+
+def _plan_retention(source: Path, output: Path) -> dict:
     source = source.absolute()
     userdata._directory(source)
     source = source.resolve()
@@ -271,6 +278,11 @@ def plan_retention(source: Path, output: Path) -> dict:
 
 def verify_retention(source: Path, directory: Path) -> dict:
     """Replay against the exact source generation, including all closure checks."""
+    with access(source):
+        return _verify_retention(source, directory)
+
+
+def _verify_retention(source: Path, directory: Path) -> dict:
     source, directory = source.absolute(), directory.absolute()
     userdata._directory(source)
     record = _read_plan(directory)

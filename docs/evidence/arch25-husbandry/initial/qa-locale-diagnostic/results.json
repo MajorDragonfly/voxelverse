@@ -1,0 +1,33 @@
+{
+  "passed": false,
+  "command": [
+    "/tmp/voxelverse-validation-editor-rjaq198x/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/0c3a1cbd3edc/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--headless",
+    "--script",
+    "res://tests/husbandry_localization_test.gd"
+  ],
+  "source_before": {
+    "commit": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+    "tracked_worktree_dirty": true
+  },
+  "source_after": {
+    "commit": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+    "tracked_worktree_dirty": true
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "mode": "headless",
+  "test": {
+    "checks": 518,
+    "failures": [
+      "Real care order did not collect feed or water",
+      "Care transport could not save",
+      "Reload changed site identities or care cargo"
+    ],
+    "passed": false
+  },
+  "screenshots": []
+}

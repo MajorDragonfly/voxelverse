@@ -1,0 +1,31 @@
+{
+  "base": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+  "local_source_commit": "84d42fa8841ca0b12ca38d68e9f4dd11db4ebbf5",
+  "remote_source_commit": "bee4069410c2e38599795d93a38958ad7e141379",
+  "identical_source_tree": "8d08597f66dc5709313ad849fdb98c864e959506",
+  "source_sha256": {
+    "core/display_settings.gd": "2642b1668c406f70d53004e0294bf2e009b154e997e30a237414d3d0aa36afbb",
+    "docs/WORK_ATMOSPHERE_SHADERS.md": "c17f7d55053be113c6ae59996d939965c11b4e18a5a597583ef0cb668f33473d",
+    "localization/catalog.json": "7be47afa0ea21af1368c717966b81d24f64a579c838316f398b036c867873ac4",
+    "localization/de.po": "2639410f54febcfada4cf255495fe5002ab9da2b13a126bf3a0ff9a6842e2132",
+    "localization/en.po": "a7e5edee8d93aaebfd943ae035e83730ddb504e2eefbdd0d673a5870a7360921",
+    "main/spherical_campaign.gd": "9c807e45c54ba908f927063aba93943e2959f25bfdecfa6bc6b9b2fbc1d33534",
+    "tests/campaign_atmosphere_test.gd": "42dc7f0a7c30ee3cee3e45b86b160401e5297ec58bae3fe15260facda870e75b",
+    "tools/review_atmosphere.gd": "5976e3b94abf800982cf571c08b357404eb172ba73bcf06a0f4ca3cb1e1e75dc",
+    "tools/review_atmosphere.py": "39f58d7d562a27bf87d4143fce63f42f37b29ef7a878db480a324fe6ede3409c",
+    "tools/validation/contracts.json": "f57c40318d32c7843b8ca94f350e95799eb8cdf40b7dccb7306dc8cd153ca697",
+    "world/visuals/atmosphere/campaign_atmosphere.gd": "252d78da241136662f20607161e43bf1d5b17eb90189d5317cd82b6ff840e99a",
+    "world/visuals/atmosphere/campaign_atmosphere.gd.uid": "af6b71e6c53a2a04aeefde41fd1113e1db51e1c7e789d44c14224f1e92b7fb4e",
+    "world/visuals/atmosphere/campaign_sky.gdshader": "9c607180df5a12b6fbee28588ec1e059d2dcdfdf79402d45a962c2b1bb5ebf13",
+    "world/visuals/atmosphere/campaign_sky.gdshader.uid": "aeb432870fd079b2ae2658b0fd2267ea54aefc7ac93fa5b234cfff3263261298"
+  },
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux; isolated synthetic user data; native Xvfb/Mesa llvmpipe LLVM 20.1.2; Forward+ Vulkan and OpenGL compatibility",
+  "final_headless": "final/results.json",
+  "native": [
+    "forward-plus/results.json",
+    "compatibility/results.json"
+  ],
+  "first_failure": "first-functional/frontend_test.log: RefCounted with reference count 0 on shutdown. Baseline control and final run passed. Root cause not established; no test check removed or changed.",
+  "limits": "No native Windows/D3D12 export, target PC FPS or full integration. Images show a synthetic voxel fixture, not normal gameplay."
+}

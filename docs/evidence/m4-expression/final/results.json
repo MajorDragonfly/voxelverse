@@ -1,0 +1,83 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "1d8a9e9e3776b80d9d9d5e6063c9ebf50980f360",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_expression_test",
+    "creature_part_articulation_test",
+    "creature_behavior_gameplay_test",
+    "domestication_campaign_test",
+    "wildlife_ai_test",
+    "wildlife_foraging_test",
+    "wildlife_drinking_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "creature_expression_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.089,
+      "contract": "wildlife"
+    },
+    {
+      "name": "creature_part_articulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.889,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.253,
+      "contract": "wildlife"
+    },
+    {
+      "name": "domestication_campaign_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.299,
+      "contract": "domestication"
+    },
+    {
+      "name": "wildlife_ai_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.038,
+      "contract": "wildlife"
+    },
+    {
+      "name": "wildlife_foraging_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.024,
+      "contract": "wildlife"
+    },
+    {
+      "name": "wildlife_drinking_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 41.163,
+      "contract": "wildlife"
+    }
+  ]
+}

@@ -140,6 +140,7 @@ func start_aid_result() -> Dictionary:
 	if data().is_empty():
 		return _publish(Model.result(false, "neighbor.not_known"))
 	for id: String in controller.selected:
+		if controller.SiteTransport.bound(controller.body(), id): return _publish(Model.result(false, "neighbor.carriers_busy"))
 		if not controller.actors.has(id) or not is_instance_valid(controller.actors[id]):
 			return _publish(Model.result(false, "neighbor.carriers_busy"))
 		if controller.navigation.route(controller.actors[id].global_position, controller.anchor()).is_empty() or controller.navigation.route(controller.anchor(), Space.resolve(self, data()["anchor"])).is_empty():

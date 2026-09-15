@@ -209,11 +209,13 @@ func free_workplace(position: Vector3, data: Dictionary, kind: String, maximum_d
 			return false
 	for resource: String in data["deposits"]:
 		# Upgrading an old source in place is allowed; other sources keep room.
-		if resource == {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}.get(kind):
+		if resource == Housing.Economy.STATIONS.get(kind) and not data.economy.stations.has(kind):
 			continue
 		var site: Variant = data["deposits"][resource]["position"]
 		if position.distance_to(Space.resolve(home, site)) < 3.0:
 			return false
+	for site: Dictionary in data.economy.stations.values():
+		if position.distance_to(Space.resolve(home, site.position)) < 3.0: return false
 	return true
 
 func _occupied(position: Vector3) -> bool:
@@ -247,6 +249,8 @@ func free_shelter(position: Vector3, data: Dictionary, kind: String) -> bool:
 			points.append(Space.resolve(home, member["destination"]))
 	for deposit: Dictionary in data["deposits"].values():
 		points.append(Space.resolve(home, deposit["position"]))
+	for site: Dictionary in data.economy.stations.values():
+		points.append(Space.resolve(home, site.position))
 	for shelter: Dictionary in data["housing"]["homes"]:
 		points.append(Space.resolve(home, shelter["entrance"]))
 	for p: Dictionary in data.get("husbandry", {}).get("pens", []):

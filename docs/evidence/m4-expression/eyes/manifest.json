@@ -1,0 +1,46 @@
+{
+  "package": "M4-EXPRESSION-EYES",
+  "previous_published_head": "7a023ec602aa20ee38a9a2408beb0a06f8ece9e6",
+  "local_source_commit": "c5d44123b4d721dfacf7ce372292d7e7acd87e2d",
+  "published_source_commit": "ca609e1f1a70485f2781aaf136de82eeda959215",
+  "identical_source_tree": "07a7c8da42b8190b9667d544d93959ce81d1ebf9",
+  "environment": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "mode": "headless_source_project",
+    "user_data": "isolated synthetic data via tools/validation_support.py"
+  },
+  "source_sha256": {
+    "creatures/behavior/creature_emotion.gd": "7f93583c3bf7396824e80d283edebbc7ad48e020179aa0fa69b07db08b65d001",
+    "creatures/editor/creature_part_geometry.gd": "eb25c1838b47a1d13c05c981e624b0f1e166be877dc98f6907579d39261183dd",
+    "creatures/runtime/creature_expression_pose.gd": "abfeebf4e5a8f5590d9ce4d32c2f5849f9e5b1c3803c8529ff0559b91b489129",
+    "creatures/runtime/creature_eye_expression.gd": "d092b43e4f4c7f5339b0a80116d3bed4959c5ff5c7998ba8a1b88918cd220d1f",
+    "creatures/runtime/creature_sculpt_motion.gd": "adce80a7f5f2301ded17faed54b888783654b8818ead9cc5f4a78c83fb5a8ebc",
+    "docs/WORK_M4_EXPRESSION.md": "55ca9c2a5280e35e82fb10d4691191ffe7188e60a83ac8c8bea7b04a326107e0",
+    "tests/creature_eye_expression_test.gd": "1318be12bdf1d37af769ba6a268a32c11630f63f639f2f426e1e382628e91274",
+    "tools/export_creature_expressions.gd": "549902b95f2876bb92af0a1fc64202dc5dfaf0f1c8053bcf5f5530d4bc0fbd6f",
+    "tools/render_creature_expressions.py": "e6fca98513674863bfe3518242221e24cda3da9c7b7ee05b3994de821dc162d1",
+    "tools/validation/contracts.json": "45d0ad621f22005e719b099c4631336aad25967af67f438adedc716b8893ec6e"
+  },
+  "evidence_sha256": {
+    "README.md": "f03314f498abc96a05e649658d0803dfce67abb99293f219e50ff28ba3c3647c",
+    "animal-expressions.png": "182a957da65ac12157cbfe47232236a5c6b447a8bc31feca7e44d11a367e6d52",
+    "animal-eyes.png": "8b92e5dae50cc4c78fa674c23073a6a09d4fdc04eceaf6d6b3f8dfb4cde11dcc",
+    "diagnostics/creature_eye_expression_test.log": "ad2a459e30692d0c072b42aeb6d12a002fac5ea70a217afb06ab86ed6df96e0b",
+    "diagnostics/results.json": "77f8994ccc181942279614deee7d7f2185413d107524b741e0858313b6bd8fd4",
+    "expressions-export.log": "9066d72d3c2cebb7152267dcc2cc73df3bf89af85aef38dca740eec9d3ab1ad8",
+    "eyes-export.log": "9b339ec8ffbd5e889901f63ddff76582b3edd8c64893ba2190abc142e45d8f72",
+    "final/contracts.json": "15cba819a7ea25986df4a448edcca5bbf6c4c67d10be6750a6de6cebae9e338f",
+    "final/creature_expression_test.log": "e23b330bca7b9cb65155d35ba1cefbf703d0de26adfbfd1cd9fd64a4c66495ae",
+    "final/creature_eye_expression_test.log": "7efaf374b50e2d51cd69bf07ded17c64d5d158c94d829f1294ca96ede5e9cd9c",
+    "final/creature_part_articulation_test.log": "468f2f14c9e88845fab64446f549d05bd18d270d33e74c925303e6f44ab3899b",
+    "final/creature_studio_test.log": "7dae823ab7c73a2a462c8821a19faf24d265f2070dbacdcab2c46e05347c5310",
+    "final/results.json": "8e44f9fa36488018d2cc800a9d30aeabf7d0dec4fc70770eec6259980f2416e8",
+    "final/source_contracts.log": "57d1730be281fc33565479248c8e6086dac3487dfee824c6c35622c3ddd03479"
+  },
+  "preview_json_sha256": {
+    "eyes.json": "757543722833f243b452d88825e0018b38d9ee632bd0b43152b107a01aac1e81",
+    "expressions.json": "eec29c769cbaaca53d294c7611c1827e1ac48cb6ff5d63a3e202b0a73b85f09e"
+  },
+  "native_rendered": false
+}

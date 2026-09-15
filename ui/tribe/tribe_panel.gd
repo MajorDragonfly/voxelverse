@@ -17,6 +17,10 @@ var _shade: ColorRect
 var _center: CenterContainer
 var _dialog: PanelContainer
 var _detail: Label
+var _dialog_scroll: ScrollContainer
+var _dialog_content: VBoxContainer
+var _confirmation_problem: String = ""
+var _confirmation_error: String = ""
 var _message: Label
 var _hud: PanelContainer
 var _hud_content: VBoxContainer
@@ -38,6 +42,7 @@ var _jobs: OptionButton
 var _tabs: TabContainer
 var _orders_page: VBoxContainer
 var _work_page: VBoxContainer
+var _workplaces: VBoxContainer
 var _hud_scroll: ScrollContainer:
 	get: return _scroll
 var _orders_scroll: ScrollContainer:
@@ -52,6 +57,7 @@ var _animal_ids: Array[String] = []
 var _care_status: Label
 var _bind_animal: Button
 var _release_animal: Button
+var _change_site: Button
 
 func _ready() -> void:
 	layer = 40
@@ -67,7 +73,7 @@ func _ready() -> void:
 	refresh()
 
 func _build() -> void:
-	entry = Style.button("Stammeszeitalter …")
+	entry = _local_button("TRIBE_AGE_ENTRY")
 	entry.name = "TribalAgeEntry"
 	add_child(entry)
 	entry.pressed.connect(open_confirmation)
@@ -162,6 +168,9 @@ func _build() -> void:
 	professions.add_child(back)
 	back.pressed.connect(func() -> void: controller.issue_order("profession"))
 	_work_page.add_child(_local_label("TRIBE_PROFESSION_HINT", 15, Style.MUTED))
+	_workplaces = preload("res://ui/tribe/workplace_panel.gd").new()
+	_workplaces.controller = controller
+	_work_page.add_child(_workplaces)
 	_build_husbandry()
 	_tabs.add_child(_neighbors)
 	_feedback = preload("res://ui/frontend/group_feedback.gd").new()
@@ -177,17 +186,22 @@ func _build() -> void:
 	_center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_shade.add_child(_center)
 	_dialog = PanelContainer.new()
+	_dialog.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
 	_dialog.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Style.SOCIAL, 28))
 	_center.add_child(_dialog)
-	var content := Style.column(_dialog, 18)
-	content.add_child(Style.label("Ein neues Zeitalter beginnt", 30, Style.SOCIAL))
+	var content := Style.column(_dialog, 12)
+	content.add_child(_local_label("TRIBE_AGE_TITLE", 30, Style.SOCIAL))
+	_dialog_scroll = ScrollContainer.new()
+	_dialog_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	content.add_child(_dialog_scroll)
+	_dialog_content = Style.column(_dialog_scroll, 0)
 	_detail = Style.label("", 19)
-	content.add_child(_detail)
-	confirm = Style.button("Jetzt ins Stammeszeitalter fortschreiten")
+	_dialog_content.add_child(_detail)
+	confirm = _local_button("TRIBE_AGE_CONFIRM")
 	confirm.name = "ConfirmTribalAge"
 	content.add_child(confirm)
 	confirm.pressed.connect(_confirm)
-	cancel = Style.button("In der Kreaturenphase bleiben", Style.MUTED)
+	cancel = _local_button("TRIBE_AGE_CANCEL")
 	cancel.name = "CancelTribalAge"
 	content.add_child(cancel)
 	cancel.pressed.connect(cancel_confirmation)
@@ -203,6 +217,8 @@ func _layout() -> void:
 	if not is_inside_tree() or is_queued_for_deletion():
 		return
 	_apply_hud_fonts(_hud, clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5))
+	_apply_hud_fonts(_dialog, clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5))
+	_apply_hud_fonts(entry, clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5))
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	_scale_factor = viewport_size.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
@@ -225,6 +241,9 @@ func _layout() -> void:
 	_place_hud()
 	_shade.size = viewport_size
 	_dialog.custom_minimum_size.x = minf(viewport_size.x - 48, 670)
+	var dialog_fixed: float = _dialog.get_combined_minimum_size().y - _dialog_scroll.get_combined_minimum_size().y
+	_dialog_scroll.custom_minimum_size.y = minf(_dialog_content.get_combined_minimum_size().y, maxf(0.0, viewport_size.y - 48.0 - dialog_fixed))
+	_dialog.size = Vector2(_dialog.custom_minimum_size.x, 0)
 
 func _place_hud() -> void:
 	if not is_inside_tree() or is_queued_for_deletion():
@@ -235,11 +254,11 @@ func _place_hud() -> void:
 func open_confirmation() -> bool:
 	if confirmation_open or get_tree().paused or controller._active:
 		return false
-	var problem: String = controller.prepare_confirmation()
-	_detail.text = "Du führst künftig die Gruppe aus der Übersicht. Deine Kreatur und ihre beiden Gefährten bleiben dieselben Mitglieder. Eure Spezies, Heimat, Beziehungen und gekauften Fähigkeiten bleiben erhalten.\n\nSammelt Material, stellt ein Steinwerkzeug her, baut Hütten und versorgt eure Bewohner. Der Wechsel wird gespeichert; die direkte Einzelsteuerung endet. Stammeskämpfe und Nachbarstämme folgen in einem weiteren Ausbau."
-	confirm.disabled = not problem.is_empty()
-	if not problem.is_empty():
-		_detail.text = problem + "\n\nDer Wechsel beginnt erst, wenn du ihn hier ausdrücklich bestätigst."
+	_confirmation_problem = controller.prepare_confirmation()
+	_confirmation_error = ""
+	confirm.disabled = not _confirmation_problem.is_empty()
+	_refresh_confirmation_text()
+	_dialog_scroll.scroll_vertical = 0
 	confirmation_open = true
 	_previous_mouse = Input.mouse_mode
 	_owns_pause = true
@@ -272,8 +291,19 @@ func _confirm() -> void:
 	if saves.request_phase_transition(1, controller._token):
 		cancel_confirmation()
 	else:
-		_detail.text = "Der Wechsel konnte nicht gespeichert werden. Du bleibst in der Kreaturenphase.\n\n" + saves.last_error
-		cancel.text = "Zur Kreatur zurück"
+		_confirmation_error = saves.last_error
+		_refresh_confirmation_text()
+		_layout()
+		cancel.grab_focus()
+
+func _refresh_confirmation_text() -> void:
+	# Re-render the captured outcome, never prepare/retry a transition on locale change.
+	cancel.text = Text.text("TRIBE_AGE_CANCEL" if _confirmation_error.is_empty() else "TRIBE_AGE_RETURN")
+	_detail.text = Text.text("TRIBE_AGE_DETAIL")
+	if not _confirmation_problem.is_empty():
+		_detail.text = Text.format_text("TRIBE_AGE_BLOCKED", {"reason": Presentation.legacy_status(_confirmation_problem)})
+	if not _confirmation_error.is_empty():
+		_detail.text = Text.format_text("TRIBE_AGE_SAVE_FAILED", {"reason": Presentation.legacy_status(_confirmation_error)})
 
 func refresh() -> void:
 	if entry == null:
@@ -346,7 +376,7 @@ func refresh() -> void:
 				activity = Text.text("TRIBE_RESERVE_READY")
 			elif Economy.Resources.uses_batches(resource) and Economy.pickup(data, resource).is_empty():
 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
-			elif not Economy.Resources.uses_batches(resource) and int(data["deposits"][resource]["remaining"]) == 0:
+			elif not Economy.Resources.uses_batches(resource) and int(Economy.source(data, member, resource)["remaining"]) == 0:
 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
 		if member["stage"] == "meal":
 			activity = Text.text("TRIBE_MEAL")
@@ -359,6 +389,9 @@ func refresh() -> void:
 		if member["construction_id"] != "":
 			activity = Text.text("TRIBE_STOPPED_CARGO") if member["order"] == "wait" else Text.text("TRIBE_BUILD_CARGO")
 		button.text = Text.format_text("TRIBE_RESIDENT", {"name": member["name"], "profession": Presentation.job_title(member["profession"]), "food": roundi(float(member["hunger"])), "water": roundi(float(member["hydration"])), "activity": Text.format_text("TRIBE_CARRYING", {"resource": Presentation.resource_title(member["cargo"])}) if member["cargo"] != "" and member["construction_id"] == "" else activity})
+		var workplace: String = Economy.station_key(data, str(member.get("workplace_id", "")))
+		if not workplace.is_empty():
+			button.text += "\n" + Text.format_text("WORKPLACE_ASSIGNED", {"name": Text.text(Presentation.PROJECTS[Economy.station_kind(workplace)]), "number": 1 if workplace in Economy.STATIONS else 2})
 		var logical_width: float = get_viewport().get_visible_rect().size.x / _scale_factor
 		var columns: int = 2 if logical_width < 1000 else 3
 		button.custom_minimum_size.x = maxf(180.0, (_hud.size.x - 56.0) / columns)
@@ -366,6 +399,8 @@ func refresh() -> void:
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
+		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty(): _buttons[order].disabled = true
+	_workplaces.refresh(data)
 	_buttons["milk"].visible = not data["economy"]["receipts"].is_empty()
 	_refresh_husbandry(data)
 	_neighbors.refresh()
@@ -457,35 +492,41 @@ func _build_husbandry() -> void:
 	var commands := HFlowContainer.new()
 	_husbandry_page.add_child(commands)
 	for order: String in ["pen", "laying_site", "tend", "eggs"]:
-		var button := Style.button({"pen": "Milchtierplatz · 4 Holz / 2 Fasern", "laying_site": "Legestelle · 4 Holz / 2 Fasern", "tend": "Tiere versorgen", "eggs": "Eier abholen"}[order])
+		var button := _local_button({"pen": "HUSBANDRY_BUILD_PEN", "laying_site": "HUSBANDRY_BUILD_LAYING"}.get(order, Presentation.ORDERS[order]))
 		button.name = "Order_" + order
 		commands.add_child(button)
 		button.pressed.connect(func() -> void: controller.issue_order(order))
 		_buttons[order] = button
-	var keeper := Style.button("Tierpfleger zuweisen")
+	var keeper := _local_button("HUSBANDRY_ASSIGN_KEEPER")
 	keeper.name = "AssignKeeper"
 	commands.add_child(keeper)
 	keeper.pressed.connect(func() -> void: controller.assign_profession("keeper"))
 	_care_status = Style.label("", 16)
 	_husbandry_page.add_child(_care_status)
-	_husbandry_page.add_child(Style.label("Ein eigenes Tier pro Platz: Milchtierplatz oder Legestelle. Tierpfleger liefern Futter und Wasser. Eier werden abgeholt, eingelagert und gegessen.", 15, Style.MUTED))
+	_husbandry_page.add_child(_local_label("HUSBANDRY_HINT", 15, Style.MUTED))
 	var choices := HFlowContainer.new()
 	_husbandry_page.add_child(choices)
 	_pens = OptionButton.new()
+	_pens.fit_to_longest_item = false
+	_pens.custom_minimum_size.x = 230
+	_pens.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	choices.add_child(_pens)
 	_pens.item_selected.connect(func(_index: int) -> void: refresh())
 	_animals = OptionButton.new()
+	_animals.fit_to_longest_item = false
+	_animals.custom_minimum_size.x = 230
+	_animals.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	choices.add_child(_animals)
-	_bind_animal = Style.button("Tier zuordnen")
+	_bind_animal = _local_button("HUSBANDRY_ASSIGN")
 	choices.add_child(_bind_animal)
 	_bind_animal.pressed.connect(func() -> void:
 		if _pens.selected >= 0 and _animals.selected >= 0:
 			controller.husbandry.assign(controller.village()["husbandry"]["pens"][_pens.selected]["id"], _animal_ids[_animals.selected])
 		refresh())
-	_release_animal = Style.button("Zuordnung lösen")
+	_release_animal = _local_button("HUSBANDRY_RELEASE")
 	choices.add_child(_release_animal)
-	var change_site := Style.button("Freien Platz umstellen")
-	change_site.tooltip_text = "Wechselt einen freien Milchtierplatz zur Legestelle oder zurück. Vorräte und fertige Produkte bleiben erhalten."
+	var change_site := _local_button("HUSBANDRY_CHANGE_SITE")
+	_change_site = change_site
 	choices.add_child(change_site)
 	change_site.pressed.connect(func() -> void:
 		if _pens.selected >= 0:
@@ -499,23 +540,32 @@ func _build_husbandry() -> void:
 func _refresh_husbandry(data: Dictionary) -> void:
 	var pens: Array = data["husbandry"]["pens"]
 	if _pens.item_count != pens.size():
+		var selected_id: String = str(_pens.get_item_metadata(_pens.selected)) if _pens.selected >= 0 else ""
 		_pens.clear()
 		for i in range(pens.size()):
-			_pens.add_item(("Legestelle" if pens[i].get("kind", "pen") == "laying_site" else "Milchtierplatz") + " %d" % (i + 1))
+			_pens.add_item("")
+			_pens.set_item_metadata(i, pens[i].id)
+			if pens[i].id == selected_id:
+				_pens.select(i)
 	for i in range(pens.size()):
-		_pens.set_item_text(i, ("Legestelle" if pens[i].get("kind", "pen") == "laying_site" else "Milchtierplatz") + " %d" % (i + 1))
+		_pens.set_item_text(i, Text.format_text("HUSBANDRY_LAYING_SITE" if pens[i].get("kind", "pen") == "laying_site" else "HUSBANDRY_PEN", {"number": i + 1}))
 	var animals: Array[String] = controller.husbandry.candidates(pens[_pens.selected] if _pens.selected >= 0 else {})
 	if animals != _animal_ids:
 		var selected_id: String = _animal_ids[_animals.selected] if _animals.selected >= 0 else ""
 		_animal_ids = animals
 		_animals.clear()
 		for identity: String in animals:
-			_animals.add_item(("Eierlieferant" if _pens.selected >= 0 and pens[_pens.selected].get("kind") == "laying_site" else "Milchtier") + " %d" % (animals.find(identity) + 1))
+			_animals.add_item("")
 		if selected_id in animals:
 			_animals.select(animals.find(selected_id))
+	for i in range(animals.size()):
+		_animals.set_item_text(i, Text.format_text("HUSBANDRY_EGG_ANIMAL" if _pens.selected >= 0 and pens[_pens.selected].get("kind") == "laying_site" else "HUSBANDRY_MILK_ANIMAL", {"number": i + 1}))
+	for choice: OptionButton in [_pens, _animals]:
+		choice.tooltip_text = choice.get_item_text(choice.selected) if choice.selected >= 0 else ""
 	_bind_animal.disabled = get_tree().paused or _pens.selected < 0 or _animals.selected < 0
 	_release_animal.disabled = get_tree().paused or _pens.selected < 0 or pens[_pens.selected]["animal_id"] == ""
-	_care_status.text = "Baue einen Milchtierplatz oder eine Legestelle auf trockenem, frei erreichbarem Boden." if pens.is_empty() else controller.husbandry.description(pens[_pens.selected])
+	_change_site.disabled = get_tree().paused or _pens.selected < 0
+	_care_status.text = Text.text("HUSBANDRY_BUILD_HINT") if pens.is_empty() else Presentation.husbandry_detail(controller.husbandry.describe(pens[_pens.selected]))
 
 func _local_button(key: String) -> Button:
 	var button := Style.button(Text.text(key))
@@ -533,13 +583,16 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready() and _scroll != null:
 		# Keep the session, resident nodes, profession selection, focus and tab.
 		var old_scroll: int = _scroll.scroll_vertical
+		var old_dialog_scroll: int = _dialog_scroll.scroll_vertical
 		_refresh_language()
 		refresh()
-		call_deferred("_restore_language_scroll", old_scroll)
+		_layout()
+		call_deferred("_restore_language_scroll", old_scroll, old_dialog_scroll)
 
-func _restore_language_scroll(value: int) -> void:
+func _restore_language_scroll(value: int, dialog_value: int) -> void:
 	if is_inside_tree():
 		_scroll.scroll_vertical = value
+		_dialog_scroll.scroll_vertical = dialog_value
 
 func _refresh_language() -> void:
 	for control: Node in find_children("*", "Control", true, false):
@@ -564,9 +617,11 @@ func _refresh_language() -> void:
 		_buttons[kind].tooltip_text = Text.text("TRIBE_HOUSING_HINT")
 	for order: String in ["well", "forester", "quarry", "fiberbed", "fiber", "milk"]:
 		_buttons[order].tooltip_text = Text.text("TRIBE_STATION_HINT" if order in Economy.STATIONS else "TRIBE_TRANSPORT_HINT")
+	_change_site.tooltip_text = Text.text("HUSBANDRY_CHANGE_HINT")
+	_refresh_confirmation_text()
 
 func _apply_hud_fonts(node: Node, font_scale: float) -> void:
-	if node is Label or node is Button or node is TabBar:
+	if node is Label or node is Button or node is TabBar or node is PopupMenu:
 		if not node.has_meta("tribe_base_font_size"):
 			node.set_meta("tribe_base_font_size", node.get_theme_font_size("font_size"))
 		var target: int = roundi(float(node.get_meta("tribe_base_font_size")) * font_scale)

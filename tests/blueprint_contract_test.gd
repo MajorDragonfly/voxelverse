@@ -106,7 +106,7 @@ func _roundtrips() -> void:
 	creature.name = "ARCH23 retained creature"
 	creature.extensions = {"org.voxelverse.example": {"schema": 1, "label": "original"}}
 	creature.parts[0].extensions = {"example": [1, "retained", true]}
-	creature.parts[0].part_revision = 3
+	creature.parts[0].part_revision = 1
 	creature.parts[0].shape_scale = Vector3(0.8, 1.2, 1.1)
 	creature.assembly.revision = 17
 	var original: String = var_to_str(creature)
@@ -114,7 +114,7 @@ func _roundtrips() -> void:
 	_expect(var_to_str(creature) == original, "Pure serialization mutated creature")
 	var loaded: Dictionary = Creature.load_from_file(CREATURE_PATH)
 	_expect(loaded.extensions == JSON.parse_string(JSON.stringify(creature.extensions)) and loaded.parts[0].extensions == JSON.parse_string(JSON.stringify(creature.parts[0].extensions)), "Creature extensions lost")
-	_expect(loaded.parts[0].part_revision == 3 and loaded.parts[0].shape_scale.is_equal_approx(creature.parts[0].shape_scale), "Part revision/geometry changed")
+	_expect(loaded.parts[0].part_revision == 1 and loaded.parts[0].shape_scale.is_equal_approx(creature.parts[0].shape_scale), "Part revision/geometry changed")
 	_expect(Adapter.to_modular_blueprint(loaded).design_id == creature.design_id, "Adapter lost design identity")
 	var building: Dictionary = Building.create_default()
 	building.extensions = {"example": {"schema": 1, "color": "amber"}}
@@ -175,7 +175,7 @@ func _verify_restart() -> void:
 	var building: Dictionary = Building.load_from_file(BUILDING_PATH)
 	_expect(not creature.is_empty() and Creature.get_revision(creature) == 17, "Restart lost creature/revision")
 	_expect(not building.is_empty() and int(building.get("revision", 0)) == 10, "Restart lost building/revision")
-	if not creature.is_empty(): _expect(creature.parts[0].part_revision == 3, "Restart lost creature part revision")
+	if not creature.is_empty(): _expect(creature.parts[0].part_revision == 1, "Restart lost creature part revision")
 	if not building.is_empty(): _expect(building.parts[0].extensions == {"maker": "original"}, "Restart lost building extension")
 
 

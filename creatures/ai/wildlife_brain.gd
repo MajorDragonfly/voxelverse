@@ -57,6 +57,16 @@ func _choose_wander_state() -> void:
 	super._choose_wander_state()
 	_ambient_heading = _wander_direction
 
+func get_expression_context() -> Dictionary:
+	var context: Dictionary = super.get_expression_context()
+	context["intent"] = _intent if ai_state == "blocked" else ai_state
+	context["active"] = ai_state != "unloaded" and get_node("/root/GameState").current_phase in [0, 1]
+	if not context.get("attention", false) and _intent in ["alert", "chase", "search", "herd"]:
+		var point: Vector3 = _goal if _intent == "herd" else _last_seen
+		var local: Vector3 = _visual_root.global_basis.inverse() * (point - global_position)
+		context["look_yaw"] = atan2(-local.x, -local.z)
+	return context
+
 func _physics_process(delta: float) -> void:
 	Space.orient(self)
 	if not _anchor_ready:

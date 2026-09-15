@@ -420,6 +420,7 @@ func _randomize_blueprint() -> void:
 
 
 func _save_blueprint() -> void:
+	if blueprint.has("_protected_design_source") or not AssemblyV7.Contract.version_error(blueprint, "creature").is_empty(): return
 	if _creature_name_edit != null:
 		var creature_name: String = _creature_name_edit.text.strip_edges()
 		if creature_name.is_empty():

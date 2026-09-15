@@ -16,6 +16,9 @@ const MAX_LOOKAHEAD_METERS: float = 32.0
 var layout: RefCounted
 var leaves: Dictionary = {}
 var _staging: Dictionary = {}
+## Meshes owned only by staging; reused live leaves are counted by leaves.
+## Updated on cache transfer/upload and reset when staging publishes/discards.
+var _staging_mesh_count: int = 0
 var _pending: Array[String] = []
 var _collision_pending: Array[String] = []
 var publication_operations: Dictionary = {}
@@ -145,6 +148,7 @@ func _collect_job() -> void:
 	if _job == null:
 		return
 	_staging = _job.result
+	_staging_mesh_count = 0
 	_staging_generation = _job_generation
 	last_worker_seconds = _job.duration_usec / 1000000.0
 	max_worker_usec = maxi(max_worker_usec, _job.duration_usec)
@@ -160,6 +164,7 @@ func _collect_job() -> void:
 			if _cache.has(key):
 				tile.merge(_cache[key])
 				_cache.erase(key)
+				_staging_mesh_count += 1
 				cache_hits += 1
 			_pending.append(id)
 	_queue_near_preparation()
@@ -223,6 +228,7 @@ func _build_next() -> void:
 	if not tile.has("mesh"):
 		operation = "land"
 		tile["mesh"] = PatchMesh.upload_surface(tile.arrays.land_arrays)
+		_staging_mesh_count += 1
 		# Empty water needs no separate upload or frame.
 		if tile.arrays.water_arrays.is_empty(): tile["water"] = null
 	elif not tile.has("water"):
@@ -355,6 +361,7 @@ func _publish() -> void:
 	leaves = _staging
 	_published_generation = _staging_generation
 	_staging = {}
+	_staging_mesh_count = 0
 	tiles.assign(leaves.values())
 	_collision_pending.clear()
 	_update_collisions(_requested_direction)
@@ -405,6 +412,7 @@ func streaming_diagnostics() -> Dictionary:
 		"refresh_queued": _refresh_requested,
 		"discarded_jobs": discarded_jobs, "discarded_publications": discarded_publications,
 		"pending_uploads": _pending.size(), "pending_collisions": _collision_pending.size(), "worker_active": _job != null,
+		"staging_meshes": _staging_mesh_count,
 		"operations": publication_operations.duplicate(), "max_operation_usec": max_operation_usec.duplicate(),
 		"lookahead_m": lookahead_direction.distance_to(_requested_direction) * float(surface.body.radius)}
 
@@ -444,12 +452,14 @@ func _finish_transition() -> void:
 
 
 func _trim_cache() -> void:
-	var resident: int = leaves.size() + _retired.size()
-	for tile: Dictionary in _staging.values():
-		if tile.has("mesh") and (not leaves.has(tile.id) or leaves[tile.id].get("node") != tile.get("node")):
-			resident += 1
-	while not _cache.is_empty() and (_cache.size() > MAX_CACHED or resident + _cache.size() > MAX_RESIDENT):
-		_cache.erase(_cache.keys()[0])
+	# This runs after every indivisible upload step. Do not scan the entire
+	# staging cover (up to 768 tiles) again for water, nodes, shapes and bodies.
+	var resident: int = leaves.size() + _retired.size() + _staging_mesh_count
+	var excess: int = maxi(_cache.size() - MAX_CACHED, resident + _cache.size() - MAX_RESIDENT)
+	if excess > 0:
+		# Preserve oldest-first eviction, with one key snapshot for the batch.
+		var keys: Array = _cache.keys()
+		for index in range(mini(excess, keys.size())): _cache.erase(keys[index])
 	peak_resident_meshes = maxi(peak_resident_meshes, resident + _cache.size())
 
 
@@ -461,6 +471,7 @@ func _discard_staging() -> void:
 		elif tile.has("collider") and active.get(tile.id) != tile.collider:
 			_drop_collider(tile)
 	_staging.clear()
+	_staging_mesh_count = 0
 	_pending.clear()
 
 
@@ -490,6 +501,7 @@ func _exit_tree() -> void:
 		_job.join()
 	_job = null
 	_staging.clear()
+	_staging_mesh_count = 0
 	_pending.clear()
 	_collision_pending.clear()
 	_cache.clear()

@@ -4,7 +4,25 @@ Ursprünglicher Aufgabenkatalog vom 9. September 2026. Grundlage der damaligen C
 
 **Das ursprüngliche Audit plante die ARCH-Aufgaben; aktuelle Lieferstände stehen bei den jeweiligen Aufträgen und in der Zuordnung unten.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Der Integrationschat ordnet veröffentlichte Lieferungen einmal je Runde zu; Fachchats übernehmen diese Basis und ihre konkrete Teilauftrags-ID. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
 
-## Zweite Integration am 15. September
+## Dritte Integration am 15. September
+
+[Spieltest-Kandidat](INTEGRATION_2026-09-15_PLAYTEST.md):
+
+- [x] ARCH-13: kooperativer Zugangsvertrag für Archivierung und aktive Schreiber.
+- [x] ARCH-17: fortlaufende Zählung vorbereiteter Terrainmeshes.
+- [x] ARCH-24: gespeicherte Teilrevisionen und vier zusätzliche Schwanzfamilien.
+- [x] ARCH-25: Tierhaltung/Epochenbestätigung DE/EN und isolierter Stammes-Teststart.
+- [x] ARCH-26: zwei gleichartige Arbeitsplätze je Ort mit separaten Quellen.
+- [x] ARCH-27: physische/fernsimulierte Lagertransporte einschließlich gemeinsamer Bilanz.
+- [x] ARCH-29: Quellenbeobachtung mit Dateihashes und exklusiven Prüfausgaben (#120).
+- [x] M4/Atmosphäre/Wetter: Tierausdruck und Lider, Shader-/Grafikpresets, mildes
+  regionales Wetter; gemeinsame Anschlüsse im Kandidaten.
+- [ ] ARCH-19: optische und FPS-Abnahme auf Lars' Ziel-PC.
+
+Die Häkchen bezeichnen integrierten Umfang. Vollsuite und native Builds richten
+sich nach der CI des gemeinsamen PR; keine pauschale Epochenfreigabe.
+
+## Historische zweite Integration am 15. September
 
 #93–109 sind im aktuellen gemeinsamen Kandidaten vereinigt. Lieferung und genaue
 Grenzen: [Integrationsbericht](INTEGRATION_2026-09-15_RESOURCES.md). Datierte
