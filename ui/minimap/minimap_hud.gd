@@ -6,6 +6,7 @@ const MapProjection = preload("res://core/map/surface_map_projection.gd")
 const Terrain = preload("res://ui/minimap/minimap_terrain.gd")
 const Source = preload("res://ui/minimap/minimap_source.gd")
 const MapCanvas = preload("res://ui/minimap/minimap_canvas.gd")
+const Layout = preload("res://ui/hud_layout.gd")
 const Style = preload("res://ui/progression_style.gd")
 var atlas_window: CanvasLayer
 var _atlas_button: Button
@@ -82,10 +83,11 @@ func _build() -> void:
 	_reset.tooltip_text = "Zum Maßstab dieses Zeitalters zurückkehren"
 	row.add_child(_reset)
 	_status = Style.label("", 11, Style.MUTED)
+	_status.hide()
 	column.add_child(_status)
-	_atlas_button = _button("Weltkarte · M", func() -> void: atlas_window.open_map())
-	_atlas_button.custom_minimum_size.y = 44
-	_atlas_button.add_theme_font_size_override("font_size", 16)
+	_atlas_button = _button("HUD_MAP", func() -> void: atlas_window.open_map())
+	_atlas_button.custom_minimum_size.y = 30
+	_atlas_button.add_theme_font_size_override("font_size", 13)
 	_atlas_button.name = "OpenWorldMap"
 	column.add_child(_atlas_button)
 
@@ -117,7 +119,7 @@ func _process(delta: float) -> void:
 		_update_snapshot()
 	if not visible: return
 	terrain.step_work()
-	_status.text = "Gelände wird ergänzt …" if not terrain.completed else "Balken: " + Profile.distance_text(range_m * 0.5)
+	_map.tooltip_text = tr("HUD_MAP_HELP") + "\n" + tr("HUD_MAP_SCALE") % Profile.distance_text(range_m * 0.5)
 	_map.queue_redraw()
 
 func _update_snapshot() -> void:
@@ -128,7 +130,7 @@ func _update_snapshot() -> void:
 		hide()
 		return
 	show()
-	_atlas_button.text = "Weltkarte · " + atlas_window.shortcut_text()
+	_atlas_button.text = tr("HUD_MAP") + " · " + atlas_window.shortcut_text()
 	var new_context: String = str(data.get("context_id", "")) + ":" + str(address["body_id"]) + ":" + str(address["mode"])
 	var new_phase: int = int(data.get("phase", 0))
 	var body_radius: float = float(data.get("body_radius", 0.0))
@@ -162,7 +164,7 @@ func _refresh_range() -> void:
 	if _snapshot.is_empty(): return
 	var profile: Dictionary = Profile.for_phase(phase, zoom_index, float(_snapshot.get("body_radius", 0.0)))
 	range_m = profile["radius_m"]
-	_title.text = profile["name"]
+	_title.text = tr(profile["name"])
 	_scale_label.text = Profile.distance_text(range_m * 2.0)
 	_scale_label.tooltip_text = "Gesamte Kartenbreite"
 	_minus.disabled = zoom_index >= Profile.ZOOMS.size() - 1
@@ -200,11 +202,16 @@ func _layout() -> void:
 	var scale_factor: float = logical.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * scale_factor, 0.0, Vector2.ZERO)
 	var pixels: Vector2 = logical / scale_factor
-	var width: float = 224.0 if pixels.x >= 1000 else 188.0
-	_map.custom_minimum_size = Vector2(width - 18, width - 18)
+	var width: float = Layout.dock_width(self)
+	# Leave room below the tribe entry on short windows. MapCanvas preserves metres/aspect.
+	_map.custom_minimum_size = Vector2(width - 18, width - (42 if pixels.y < 680 else 18))
 	_panel.size = Vector2(width, 0)
 	_physical_size = _panel.get_combined_minimum_size()
-	var bottom: float = 16.0
+	var bottom: float = Layout.MARGIN
+	if is_instance_valid(player):
+		var presentation := player.get_node_or_null("HUDPresentation")
+		if presentation != null and presentation.has_method("vitals_reserved_height"):
+			bottom += presentation.vitals_reserved_height()
 	if is_instance_valid(lab):
 		var blocker: Control = lab.find_child("PlanetLabBottom", true, false)
 		if blocker != null: bottom = pixels.y - blocker.get_global_rect().position.y / scale_factor + 12.0

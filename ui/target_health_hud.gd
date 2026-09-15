@@ -70,7 +70,7 @@ func _install() -> void:
 	box.add_child(_name_label)
 
 	_health_bar = ProgressBar.new()
-	_health_bar.custom_minimum_size = Vector2(272.0, 9.0)
+	_health_bar.custom_minimum_size = Vector2(0.0, 9.0)
 	_health_bar.min_value = 0.0
 	_health_bar.max_value = 100.0
 	_health_bar.show_percentage = false

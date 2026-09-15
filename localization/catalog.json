@@ -2846,6 +2846,66 @@
       "key": "SKILLS_PHASE_5_NEXT",
       "de": "Langfristiger Entwurf; konkrete Spielregeln erst nach der Weltraumphase festlegen.",
       "en": "Long-term concept; concrete gameplay rules will be defined after the space phase."
+    },
+    {
+      "key": "HUD_HEALTH",
+      "de": "Leben",
+      "en": "Health"
+    },
+    {
+      "key": "HUD_FOOD",
+      "de": "Nahrung",
+      "en": "Food"
+    },
+    {
+      "key": "HUD_THIRST",
+      "de": "Durst",
+      "en": "Thirst"
+    },
+    {
+      "key": "HUD_DEVELOPMENT",
+      "de": "Entwicklung · K",
+      "en": "Evolution · K"
+    },
+    {
+      "key": "HUD_JOURNAL",
+      "de": "Buch · J",
+      "en": "Journal · J"
+    },
+    {
+      "key": "HUD_PROGRESS",
+      "de": "{species} Arten · {parts} Teile · {points} EP",
+      "en": "{species} species · {parts} parts · {points} DP"
+    },
+    {
+      "key": "HUD_BEHAVIOR",
+      "de": "Sozial {social} · Aggressiv {aggression}",
+      "en": "Social {social} · Aggression {aggression}"
+    },
+    {
+      "key": "HUD_MAP",
+      "de": "Weltkarte",
+      "en": "World map"
+    },
+    {
+      "key": "HUD_MAP_HELP",
+      "de": "Norden ist oben. Dreieck: Blickrichtung · Haus: Heimat · Punkte: eigene Gruppe.\nTasten + / −: Kartenmaßstab ändern.",
+      "en": "North is up. Triangle: heading · House: home · Dots: your group.\nKeys + / −: change map scale."
+    },
+    {
+      "key": "HUD_MAP_SCALE",
+      "de": "Maßstabsbalken: %s",
+      "en": "Scale bar: %s"
+    },
+    {
+      "key": "HUD_IDENTIFIED",
+      "de": "ART ERKANNT",
+      "en": "SPECIES IDENTIFIED"
+    },
+    {
+      "key": "HUD_SCAN_CONTROLS",
+      "de": "%s · Scan schließen\nJ · Alle Werte im Entdeckungsbuch",
+      "en": "%s · Close scanner\nJ · All stats in the journal"
     }
   ]
 }

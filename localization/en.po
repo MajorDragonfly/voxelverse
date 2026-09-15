@@ -1706,3 +1706,39 @@ msgstr "Defeat threats across universes with a defined objective."
 
 msgid "SKILLS_PHASE_5_NEXT"
 msgstr "Long-term concept; concrete gameplay rules will be defined after the space phase."
+
+msgid "HUD_HEALTH"
+msgstr "Health"
+
+msgid "HUD_FOOD"
+msgstr "Food"
+
+msgid "HUD_THIRST"
+msgstr "Thirst"
+
+msgid "HUD_DEVELOPMENT"
+msgstr "Evolution · K"
+
+msgid "HUD_JOURNAL"
+msgstr "Journal · J"
+
+msgid "HUD_PROGRESS"
+msgstr "{species} species · {parts} parts · {points} DP"
+
+msgid "HUD_BEHAVIOR"
+msgstr "Social {social} · Aggression {aggression}"
+
+msgid "HUD_MAP"
+msgstr "World map"
+
+msgid "HUD_MAP_HELP"
+msgstr "North is up. Triangle: heading · House: home · Dots: your group.\nKeys + / −: change map scale."
+
+msgid "HUD_MAP_SCALE"
+msgstr "Scale bar: %s"
+
+msgid "HUD_IDENTIFIED"
+msgstr "SPECIES IDENTIFIED"
+
+msgid "HUD_SCAN_CONTROLS"
+msgstr "%s · Close scanner\nJ · All stats in the journal"

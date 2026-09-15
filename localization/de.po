@@ -1706,3 +1706,39 @@ msgstr "Universenübergreifende Bedrohungen mit definiertem Ziel abwehren."
 
 msgid "SKILLS_PHASE_5_NEXT"
 msgstr "Langfristiger Entwurf; konkrete Spielregeln erst nach der Weltraumphase festlegen."
+
+msgid "HUD_HEALTH"
+msgstr "Leben"
+
+msgid "HUD_FOOD"
+msgstr "Nahrung"
+
+msgid "HUD_THIRST"
+msgstr "Durst"
+
+msgid "HUD_DEVELOPMENT"
+msgstr "Entwicklung · K"
+
+msgid "HUD_JOURNAL"
+msgstr "Buch · J"
+
+msgid "HUD_PROGRESS"
+msgstr "{species} Arten · {parts} Teile · {points} EP"
+
+msgid "HUD_BEHAVIOR"
+msgstr "Sozial {social} · Aggressiv {aggression}"
+
+msgid "HUD_MAP"
+msgstr "Weltkarte"
+
+msgid "HUD_MAP_HELP"
+msgstr "Norden ist oben. Dreieck: Blickrichtung · Haus: Heimat · Punkte: eigene Gruppe.\nTasten + / −: Kartenmaßstab ändern."
+
+msgid "HUD_MAP_SCALE"
+msgstr "Maßstabsbalken: %s"
+
+msgid "HUD_IDENTIFIED"
+msgstr "ART ERKANNT"
+
+msgid "HUD_SCAN_CONTROLS"
+msgstr "%s · Scan schließen\nJ · Alle Werte im Entdeckungsbuch"

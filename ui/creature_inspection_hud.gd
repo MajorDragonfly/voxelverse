@@ -1,5 +1,8 @@
 extends Node
 
+const Layout = preload("res://ui/hud_layout.gd")
+const Symbols = preload("res://ui/discovery/stat_symbols.gd")
+const ProgressStyle = preload("res://ui/progression_style.gd")
 const KeyHints = preload("res://core/input_preferences.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Reticle = preload("res://ui/discovery/scan_reticle.gd")
@@ -12,6 +15,7 @@ var _detail: Label
 var _controls: Label
 var _reticle: Control
 var _scan_label: Label
+var _stats: Dictionary = {}
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -35,9 +39,30 @@ func _install() -> void:
 	hud.add_child(_panel)
 	var box := VBoxContainer.new()
 	_panel.add_child(box)
-	Style.label(box, "ART ERKANNT", 20, Style.ACCENT)
+	Style.label(box, "HUD_IDENTIFIED", 13, Style.ACCENT)
 	_detail = Style.paragraph(box, "", 16)
-	_controls = Style.paragraph(box, "", 14)
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 12)
+	grid.add_theme_constant_override("v_separation", 8)
+	box.add_child(grid)
+	for metric: Dictionary in [{"id": "health", "label": "Leben"}, {"id": "speed", "label": "Tempo"},
+		{"id": "attack", "label": "Angriff"}, {"id": "defense", "label": "Abwehr"}]:
+		var row := Symbols.label_for(metric)
+		row.get_child(0).custom_minimum_size = Vector2(22, 22)
+		var label: Label = row.get_child(1)
+		label.add_theme_font_size_override("font_size", 11)
+		row.remove_child(label)
+		var values := VBoxContainer.new()
+		values.add_theme_constant_override("separation", 0)
+		row.add_child(values)
+		values.add_child(label)
+		var amount := ProgressStyle.label("", 14)
+		amount.autowrap_mode = TextServer.AUTOWRAP_OFF
+		values.add_child(amount)
+		_stats[metric.id] = amount
+		grid.add_child(row)
+	_controls = Style.paragraph(box, "", 13)
 	_ignore_mouse(_panel)
 	_reticle = Reticle.new()
 	_reticle.name = "CreatureScanReticle"
@@ -62,6 +87,8 @@ func _install() -> void:
 	_scan_label.add_theme_constant_override("shadow_offset_y", 2)
 	_scan_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(_scan_label)
+	get_viewport().size_changed.connect(_layout)
+	_layout()
 	_panel.hide()
 	_reticle.hide()
 	_scan_label.hide()
@@ -87,7 +114,8 @@ func _process(_delta: float) -> void:
 		_show_target(target)
 	else:
 		_scan_label.text = "Unbekannte Art · Scannen %d %%\nHalte das Tier im Fadenkreuz." % floori(_scanner.ratio() * 100.0)
-	_controls.text = "%s · Scanmodus schließen\nJ · Entdeckungsbuch" % KeyHints.binding_label("inspection_mode")
+	_controls.text = tr("HUD_SCAN_CONTROLS") % KeyHints.binding_label("inspection_mode")
+	_layout()
 
 func _ignore_mouse(node: Node) -> void:
 	if node is Control:
@@ -110,36 +138,27 @@ func _show_target(target: Node) -> void:
 		float(data.get("diet_meat", 0.0))
 	)
 	var life_state: String = "TOT" if not bool(data.get("alive", true)) else "LEBEND"
-	_detail.text = (
-		"%s\n"
-		+ "%s  ·  %.1f m  ·  %s\n\n"
-		+ "LEBEN       %d / %d\n"
-		+ "TEMPO       %.1f\n"
-		+ "SPRUNG      %.1f\n"
-		+ "ANGRIFF     %.1f\n"
-		+ "ABWEHR      %.1f\n"
-		+ "WAHRNEHMUNG %.1f\n"
-		+ "GRIFF       %.1f\n"
-		+ "SCHWIMMEN   %.1f\n"
-		+ "NAHRUNG     %s\n"
-		+ "KÖRPERTEILE %d"
-	) % [
-		str(data.get("name", "Unknown Creature")),
-		str(data.get("role", "unknown")).capitalize(),
-		distance,
-		life_state,
-		roundi(float(data.get("health", 0.0))),
-		roundi(float(data.get("maximum_health", 0.0))),
-		float(data.get("speed", 0.0)),
-		float(data.get("jump", 0.0)),
-		float(data.get("attack", 0.0)),
-		float(data.get("defense", 0.0)),
-		float(data.get("perception", 0.0)),
-		float(data.get("grip", 0.0)),
-		float(data.get("swim", 0.0)),
-		diet_text,
-		int(data.get("part_count", 0)),
-	]
+	_detail.text = "%s\n%.1f m · %s\n%s" % [str(data.get("name", "Unknown Creature")), distance, life_state, diet_text]
+	_stats.health.text = "%d/%d" % [roundi(float(data.get("health", 0))), roundi(float(data.get("maximum_health", 0)))]
+	for metric: String in ["speed", "attack", "defense"]:
+		_stats[metric].text = "%.1f" % float(data.get(metric, 0))
+
+func _layout() -> void:
+	if _panel == null: return
+	var screen := Layout.screen_size(self)
+	# Identity and key stats stay to the left; full detail is available in J.
+	var width := 312.0 if screen.x >= 1000 else 260.0
+	var top := 220.0
+	var journal := get_tree().get_first_node_in_group(&"discovery_journal")
+	if journal != null: top = maxf(top, journal._hud.position.y + journal._hud.size.y + 12)
+	Layout.place(_panel, Rect2(Vector2(16, top), Vector2(width, 0)))
+	_panel.size.y = _panel.get_combined_minimum_size().y
+	var status_width := minf(440.0, screen.x - 2 * (Layout.dock_width(self) + 26))
+	status_width = maxf(220, status_width)
+	_scan_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_scan_label.add_theme_font_size_override("font_size", 14)
+	Layout.place(_scan_label, Rect2(Vector2((screen.x - status_width) / 2, screen.y / 2 + 48), Vector2(status_width, 0)))
+
 
 
 func _diet_label(plant: float, meat: float) -> String:

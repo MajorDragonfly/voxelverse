@@ -2,6 +2,7 @@ extends RefCounted
 ## Original, angular SVG pictograms. Labels remain visible beside every icon.
 
 const ICONS := {
+	"thirst": preload("res://ui/discovery/icons/thirst.svg"),
 	"attack": preload("res://ui/discovery/icons/attack.svg"),
 	"defense": preload("res://ui/discovery/icons/defense.svg"),
 	"health": preload("res://ui/discovery/icons/health.svg"),

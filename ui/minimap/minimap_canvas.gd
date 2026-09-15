@@ -15,7 +15,9 @@ func _ready() -> void:
 	gui_input.connect(func(_event: InputEvent) -> void: accept_event())
 
 func map_rect() -> Rect2:
-	return Rect2(Vector2(12, 18), size - Vector2(24, 30))
+	# A short HUD window may reduce height; do not stretch distances or headings.
+	var side := minf(size.x - 24, size.y - 30)
+	return Rect2(Vector2((size.x - side) * 0.5, 18), Vector2.ONE * side)
 
 func screen_point(point: Vector2) -> Vector2:
 	var area := map_rect()
