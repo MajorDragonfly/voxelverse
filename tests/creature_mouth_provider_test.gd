@@ -161,7 +161,9 @@ func _check_editor_and_unlocks() -> void:
 	for row: Dictionary in Records.part_rows(state, "", "mouth"):
 		if row.id in MODELS: check(row.unlocked, "Journal disagrees with editor unlock")
 	var source_state: Dictionary = state.duplicate(true)
-	for id: String in MODELS: source_state.unlocked_parts.erase(id)
+	# A pre-model save has none of the variants of its earned source profile.
+	for model: Dictionary in Mouths.get_parts():
+		if model.unlock_source == "mouth_predator_jaws": source_state.unlocked_parts.erase(model.id)
 	var original: String = JSON.stringify(source_state)
 	check(progress.import_state(source_state), "Old earned mouth state rejected")
 	check(JSON.stringify(source_state) == original, "Migration rewrote input snapshot")

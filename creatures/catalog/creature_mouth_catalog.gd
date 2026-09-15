@@ -18,6 +18,17 @@ const DEFINITIONS: Array = [
 		"complexity": 9, "default_scale": 1.0,
 		"unlock_source": "mouth_filter_snout",
 		"features": ["tapered_trunk", "curled_tip", "nostrils", "separate_mouth"]},
+	{"id": "mouth_feline_snout", "name": "Katzenschnauze",
+		"description": "Kurze Schnauze mit zwei Schnurrhaarkissen, kleiner Nase und Fangzähnen. Werte und Freischaltung wie Raubkiefer.",
+		"features": ["short_muzzle", "whisker_pads", "small_nose", "canines"]},
+	{"id": "mouth_bear_snout", "name": "Bärenschnauze",
+		"description": "Breite, kräftige Schnauze mit großem Nasenspiegel und Mahlzähnen. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels.",
+		"stats_source": "mouth_broad_beak", "unlock_source": "mouth_broad_beak",
+		"features": ["broad_muzzle", "large_nose", "cheek_pads", "molars"]},
+	{"id": "mouth_pig_snout", "name": "Schweineschnauze",
+		"description": "Kurze Schnauze mit flacher Rüsselscheibe und zwei Nasenlöchern. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels.",
+		"stats_source": "mouth_broad_beak", "unlock_source": "mouth_broad_beak",
+		"features": ["short_snout", "flat_nose_disc", "paired_nostrils", "lower_jaw"]},
 ]
 
 
@@ -28,7 +39,8 @@ static func get_profile(part_id: String, revision: int = REVISION) -> Dictionary
 			var result: Dictionary = entry.duplicate(true)
 			result.merge({"category": "mouth", "revision": REVISION,
 				"geometry_id": part_id, "geometry_revision": REVISION,
-				"stats_source": "mouth_predator_jaws", "unlock_source": "mouth_predator_jaws",
+				"stats_source": str(entry.get("stats_source", "mouth_predator_jaws")),
+				"unlock_source": str(entry.get("unlock_source", "mouth_predator_jaws")),
 				"attachment": "body_surface", "forward": "-Z",
 				"capabilities": [], "supported_actions": []})
 			return result

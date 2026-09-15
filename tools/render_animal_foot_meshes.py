@@ -28,7 +28,13 @@ def main():
     subtitle = "Bisherige Scherenhand · Neues Modell · Gespiegeltes Modell" if args.hands else ("Godot-Voxelgeometrie · Vorder- und Seitenansicht" if args.mouths else "Godot-Voxelgeometrie · Standansicht und Sohle")
     if args.trunk:
         subtitle = "Gemeinsame Godot-Geometrie · eigener Anschluss oberhalb des Mundes"
-    fig.text(0.5, 0.895 if args.trunk else (0.885 if args.hands else 0.915), subtitle, ha="center", color="#a5b9b7", fontsize=12)
+    fig.text(0.5, 0.895 if args.trunk else (0.885 if args.hands else 0.900), subtitle, ha="center", color="#a5b9b7", fontsize=12)
+
+    mouth_bounds = None
+    if args.mouths:
+        points = np.concatenate([np.asarray(mesh["vertices"])[:, [0, 2, 1]]
+                                 for model in models for mesh in model["meshes"]])
+        mouth_bounds = (points.min(axis=0) - 0.07, points.max(axis=0) + 0.07)
     light = np.array([0.3, 0.8, 0.5])
     light /= np.linalg.norm(light)
     for column, model in enumerate(models):
@@ -60,8 +66,9 @@ def main():
                        zlim=(low[2] - margin[2], high[2] + margin[2]))
                 ax.set_box_aspect(high - low, zoom=1.6 if model["id"] == "trunk_body" else 1.1)
             elif args.mouths:
-                ax.set(xlim=(-0.4, 0.4), ylim=(-1.0, 0.22), zlim=(-0.42, 0.42))
-                ax.set_box_aspect((0.8, 1.22, 0.84))
+                low, high = mouth_bounds
+                ax.set(xlim=(low[0], high[0]), ylim=(low[1], high[1]), zlim=(low[2], high[2]))
+                ax.set_box_aspect(high - low)
             elif args.hands:
                 ax.set(xlim=(-0.38, 0.38), ylim=(-0.2, 0.2), zlim=(-0.68, 0.18))
                 ax.set_box_aspect((0.76, 0.4, 0.86))

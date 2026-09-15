@@ -19,6 +19,12 @@ static func articulation(id: String, revision: int = 1) -> Array[Dictionary]:
 		return [_joint(["LowerJaw"], Vector3(0, -0.17, -0.015), -28.0)]
 	if id == "mouth_crocodile_snout":
 		return [_joint(["LowerJaw", "LowerTooth"], Vector3(0, -0.19, -0.015), -28.0)]
+	if id == "mouth_feline_snout":
+		return [_joint(["LowerJaw"], Vector3(0, -0.16, 0.015), -25.0)]
+	if id == "mouth_bear_snout":
+		return [_joint(["LowerJaw", "LowerMolar"], Vector3(0, -0.24, 0.01), -25.0)]
+	if id == "mouth_pig_snout":
+		return [_joint(["LowerJaw"], Vector3(0, -0.19, -0.02), -24.0)]
 	return []
 
 
@@ -34,6 +40,9 @@ static func recipe(id: String, skin: Color, accent: Color, horn: Color, revision
 		"mouth_crocodile_snout": return _crocodile(skin, accent, horn)
 		"mouth_octopus_beak": return _octopus(skin, accent, horn)
 		"head_elephant_trunk": return _trunk(skin, accent)
+		"mouth_feline_snout": return _feline(skin, accent, horn)
+		"mouth_bear_snout": return _bear(skin, accent, horn)
+		"mouth_pig_snout": return _pig(skin, accent)
 	return []
 
 
@@ -117,6 +126,68 @@ static func _octopus(skin: Color, accent: Color, horn: Color) -> Array[Dictionar
 		var angle: float = TAU * float(index) / 12.0
 		var position := Vector3(cos(angle) * 0.275, sin(angle) * 0.275, -0.18)
 		result.append(_piece("OralRing%02d" % index, position, Vector3(0.165, 0.165, 0.30), skin.lerp(accent, 0.12), true))
+	return result
+
+
+static func _feline(skin: Color, accent: Color, horn: Color) -> Array[Dictionary]:
+	var pad: Color = skin.lightened(0.20)
+	var result: Array[Dictionary] = [
+		_piece("MuzzleBase", Vector3(0, 0.015, -0.08), Vector3(0.52, 0.25, 0.25), skin, true),
+		_piece("NoseBridge", Vector3(0, 0.075, -0.19), Vector3(0.19, 0.18, 0.24), skin, true),
+		_piece("MouthCavity", Vector3(0, -0.092, -0.18), Vector3(0.34, 0.045, 0.27), Color("172a29")),
+		_piece("LowerJaw", Vector3(0, -0.16, -0.135), Vector3(0.36, 0.085, 0.30), pad.darkened(0.12), true),
+		_piece("Nose", Vector3(0, 0.057, -0.315), Vector3(0.16, 0.065, 0.065), accent.darkened(0.5)),
+		_piece("NosePoint", Vector3(0, 0.014, -0.319), Vector3(0.075, 0.03, 0.065), accent.darkened(0.5)),
+	]
+	for side: float in [-1.0, 1.0]:
+		var suffix: String = "Left" if side < 0 else "Right"
+		result.append(_piece("WhiskerPad" + suffix, Vector3(side * 0.12, -0.018, -0.21), Vector3(0.235, 0.145, 0.24), pad, true))
+		result.append(_cone("Canine" + suffix, Vector3(side * 0.145, -0.055, -0.24), Vector3(side * 0.135, -0.105, -0.25), 0.045, horn))
+		for index in range(3):
+			result.append(_piece("Follicle%s%d" % [suffix, index], Vector3(side * (0.105 + float(index) * 0.052), -0.004 - float(index % 2) * 0.036, -0.333), Vector3(0.017, 0.017, 0.017), accent.darkened(0.45)))
+	return result
+
+
+static func _bear(skin: Color, accent: Color, horn: Color) -> Array[Dictionary]:
+	var muzzle: Color = skin.lightened(0.16)
+	var result: Array[Dictionary] = [
+		_piece("MuzzleBase", Vector3(0, 0.025, -0.10), Vector3(0.72, 0.36, 0.34), skin, true),
+		_piece("MuzzleBridge", Vector3(0, 0.055, -0.275), Vector3(0.53, 0.29, 0.36), muzzle, true),
+		_piece("Nose", Vector3(0, 0.105, -0.465), Vector3(0.34, 0.18, 0.11), accent.darkened(0.6)),
+		_piece("NoseRidge", Vector3(0, 0.19, -0.44), Vector3(0.24, 0.05, 0.11), accent.darkened(0.45)),
+		_piece("MouthCavity", Vector3(0, -0.133, -0.225), Vector3(0.52, 0.062, 0.46), Color("172a29")),
+		_piece("LowerJaw", Vector3(0, -0.24, -0.235), Vector3(0.58, 0.115, 0.49), muzzle.darkened(0.13), true),
+	]
+	for side: float in [-1.0, 1.0]:
+		var suffix: String = "Left" if side < 0 else "Right"
+		result.append(_piece("CheekPad" + suffix, Vector3(side * 0.225, -0.025, -0.29), Vector3(0.24, 0.20, 0.29), muzzle, true))
+		result.append(_piece("Nostril" + suffix, Vector3(side * 0.10, 0.084, -0.523), Vector3(0.07, 0.06, 0.018), Color("111f22")))
+		result.append(_cone("Canine" + suffix, Vector3(side * 0.245, -0.104, -0.37), Vector3(side * 0.225, -0.167, -0.385), 0.070, horn))
+		for index in range(2):
+			var z: float = -0.07 - float(index) * 0.12
+			result.append(_piece("UpperMolar%s%d" % [suffix, index], Vector3(side * 0.24, -0.122, z), Vector3(0.075, 0.032, 0.075), horn))
+			result.append(_piece("LowerMolar%s%d" % [suffix, index], Vector3(side * 0.23, -0.172, z - 0.035), Vector3(0.07, 0.028, 0.07), horn.darkened(0.07)))
+	return result
+
+
+static func _pig(skin: Color, accent: Color) -> Array[Dictionary]:
+	var nose: Color = skin.lightened(0.14).lerp(accent, 0.12)
+	var result: Array[Dictionary] = [
+		_piece("SnoutBase", Vector3(0, 0.035, -0.09), Vector3(0.47, 0.28, 0.30), skin, true),
+		_piece("SnoutBridge", Vector3(0, 0.04, -0.255), Vector3(0.43, 0.265, 0.31), skin, true),
+		# Disjoint stepped bands form a flattened disc without coplanar faces.
+		_piece("NoseDisc", Vector3(0, 0.045, -0.435), Vector3(0.51, 0.20, 0.11), nose),
+		_piece("NoseDiscUpper", Vector3(0, 0.165, -0.435), Vector3(0.47, 0.04, 0.11), nose),
+		_piece("NoseDiscLower", Vector3(0, -0.075, -0.435), Vector3(0.47, 0.04, 0.11), nose),
+		_piece("NoseDiscTop", Vector3(0, 0.20, -0.435), Vector3(0.37, 0.03, 0.11), nose),
+		_piece("NoseDiscBottom", Vector3(0, -0.11, -0.435), Vector3(0.37, 0.03, 0.11), nose),
+		_piece("MouthCavity", Vector3(0, -0.122, -0.22), Vector3(0.34, 0.045, 0.30), Color("172a29")),
+		_piece("LowerJaw", Vector3(0, -0.19, -0.20), Vector3(0.38, 0.095, 0.36), skin.darkened(0.12), true),
+	]
+	for side: float in [-1.0, 1.0]:
+		var suffix: String = "Left" if side < 0 else "Right"
+		result.append(_piece("Nostril" + suffix, Vector3(side * 0.115, 0.055, -0.498), Vector3(0.075, 0.105, 0.025), accent.darkened(0.6)))
+		result.append(_piece("NostrilUpper" + suffix, Vector3(side * 0.115, 0.105, -0.492), Vector3(0.05, 0.03, 0.03), accent.darkened(0.5)))
 	return result
 
 
