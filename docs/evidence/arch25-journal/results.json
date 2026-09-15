@@ -1,0 +1,72 @@
+{
+  "package": "ARCH-25-JOURNAL",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux; isolated synthetic user data; Xvfb/OpenGL compatibility/Mesa llvmpipe",
+  "sources": [
+    {
+      "commit": "e1e01a160df4a68e1a82ac3c830d112d3cd5e169",
+      "tree": "5f35123bc55af5ffa242b548903254aa6c65da9c",
+      "evidence": "headless/results.json",
+      "scope": "7 targeted tests and source gates"
+    },
+    {
+      "commit": "ac64277491523dab590b3487a105875647db0974",
+      "tree": "0a3438fe5020bfe536b2f88cb67dd7dddc0b3688",
+      "evidence": "layout-final/results.json",
+      "scope": "3 affected tests after empty-heading fix; native thumbnail measurement fixture corrected"
+    },
+    {
+      "commit": "ac64277491523dab590b3487a105875647db0974",
+      "tree": "0a3438fe5020bfe536b2f88cb67dd7dddc0b3688",
+      "evidence": "render/results.json",
+      "scope": "72 layouts, 18 native captures, 653 recorded language/layout checks plus inherited comparison/save checks",
+      "tracked_docs_delta": "render-docs-delta.patch",
+      "note": "Game code and tests unchanged throughout. A one-line handoff wording edit during the render caused dirty=true; exact documentation delta is retained."
+    }
+  ],
+  "initial_findings": [
+    {
+      "evidence": "development/initial-small-layout-results.json",
+      "cause": "At 800x600/150% the part filters left too little list/detail space; fixed compact header and grouped filter controls."
+    },
+    {
+      "evidence": "development/initial-native-results.json",
+      "cause": "Native thumbnail jobs continue reading anatomy independently of language changes; measurement fixture now waits for its initial queue before checking for new reads. No production work was disabled."
+    }
+  ],
+  "retained_screenshots": [
+    "journal-en-800x600-150-tab1.png",
+    "journal-de-800x600-150-tab4.png",
+    "journal-en-1920x1080-100-compare.png",
+    "journal-en-800x600-150-compare.png",
+    "journal-en-800x600-150-tab3.png",
+    "journal-de-1920x1080-100-tab0.png"
+  ],
+  "visual_inspection": [
+    "journal-en-800x600-150-tab1.png",
+    "journal-de-800x600-150-tab4.png",
+    "journal-en-1920x1080-100-compare.png",
+    "journal-en-800x600-150-compare.png"
+  ],
+  "limits": [
+    "No Windows export",
+    "No combined candidate/campaign acceptance",
+    "No target-PC FPS or performance claim",
+    "O(N) search metadata index remains; no persistence-schema change"
+  ],
+  "final_source_sha256": {
+    "core/discovery/journal_catalog.gd": "6e817c9f7642f6d19d3aa89ae33f38158c3e5e095496b7a761d3e8ee398d4f95",
+    "localization/catalog.json": "b9d7cf5970fe161f50f9801a9935dd6ebde4c5426b16c1c3b8bc6b128324e151",
+    "localization/de.po": "b2e8cf9ec88df251a837fcaee4a38395a4d7d4a8fdb32610d18046c18146fc62",
+    "localization/en.po": "61dcf366b1b9f92b1d6a7318d269961b08df0051348e2c530883bc3839e8d41b",
+    "tests/journal_localization_test.gd": "f7f045e625db520a61549762d2fd54eb01b949549a7fbf03ebbe83799ccdc3de",
+    "tools/review_journal_localization.py": "a546a33aab25c0d52e3bb303ce66052208eba4fa1f952bd477c18c299ee29fb2",
+    "tools/validation/contracts.json": "c4082758aaa06e1fb7a0904d0a7bce97938efd36cbf1121d0c8edbbae9ca2153",
+    "ui/discovery/animal_suitability.gd": "1e09015422e505876b211c36dcaf88da66efe56b8b7de0d8a10aadfcd8b91129",
+    "ui/discovery/discovery_journal.gd": "1512be2a2cd0e03cfdaa983a2d6c16a9c5ed00e1e58a9e8850af60c5bf126cc9",
+    "ui/discovery/journal_presentation.gd": "e9ac8075595919b2efe19486eb4a4ad03726503c10e53f275ab17a852a8df73f",
+    "ui/discovery/journal_preview.gd": "a0938a909d0564ea05f07951da3e6763c9c3c28ec6dd11042c4bbb6746c92450",
+    "ui/discovery/species_comparison.gd": "50a28f1569f416a986bb23d511c217e7a887df9fded9aacc12fd98dd9244aba5"
+  }
+}

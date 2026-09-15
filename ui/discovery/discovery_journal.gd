@@ -1,6 +1,7 @@
 extends CanvasLayer
 ## Shared discovery book, installed once by ProgressionHUD for J and the skilltree.
 
+const Text = preload("res://ui/discovery/journal_presentation.gd")
 const Records = preload("res://core/discovery/discovery_records.gd")
 const Preview = preload("res://ui/discovery/journal_preview.gd")
 const Research = preload("res://core/discovery/research_goals.gd")
@@ -78,6 +79,11 @@ var _parts_grid: GridContainer
 var _catalog := Catalog.new()
 var _row_total: int = 0
 var _thumbnail_generation: int = 0
+var _selected_row: Dictionary = {}
+var _last_result: Dictionary = {}
+var _language_pending: bool = false
+const TAB_TITLES := ["Arten", "Körperteile", "Regionen", "Nächste Schritte", "Forschungsziele", "Eigene Tiere"]
+const STATUS_TITLES := ["Alle Teile", "Freigeschaltet", "Noch gesperrt", "Merkliste"]
 
 
 func _ready() -> void:
@@ -90,6 +96,7 @@ func _ready() -> void:
 		_hint_enabled = bool(prefs.get_value("journal", "show_hint", true))
 	_animal_contract = Suitability.contract()
 	_build()
+	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_owned_reader.changed.connect(refresh_owned_animals)
 	get_viewport().size_changed.connect(_layout)
 	_layout()
@@ -184,6 +191,7 @@ func close_journal() -> void:
 	_catalog.clear()
 	_state = {}
 	_rows.clear()
+	_selected_row.clear()
 	_row_total = 0
 	_comparison.call("clear")
 	_comparison_mode = false
@@ -206,7 +214,7 @@ func _release_after_input_frame() -> void:
 func refresh() -> void:
 	if _progression == null:
 		return
-	_catalog.bind(_progression, Suitability.read.bind(_animal_contract))
+	_catalog.bind(_progression, Suitability.read.bind(_animal_contract), Text.discovery_search)
 	_state = _catalog.state
 	_thumbnail_generation += 1
 	_thumbnail_cache.clear()
@@ -277,8 +285,8 @@ func _build() -> void:
 	layout.add_child(_summary)
 	_tabs = TabBar.new()
 	_tabs.name = "JournalTabs"
-	for tab in ["Arten", "Körperteile", "Regionen", "Nächste Schritte", "Forschungsziele", "Eigene Tiere"]:
-		_tabs.add_tab(tab)
+	for tab in TAB_TITLES:
+		_tabs.add_tab(Text.text(tab))
 	_tabs.tab_changed.connect(_on_tab_changed)
 	_tabs.clip_tabs = true
 	layout.add_child(_tabs)
@@ -294,20 +302,27 @@ func _build() -> void:
 	layout.add_child(tools_row)
 	_search = LineEdit.new()
 	_search.name = "JournalSearch"
-	_search.placeholder_text = "Name oder Fundort suchen …"
+	Text.bind(_search, "placeholder_text", "Name oder Fundort suchen …")
 	_search.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_search.text_changed.connect(func(_value: String) -> void: _page = 0; _apply_filters())
 	tools_row.add_child(_search)
+	var choices := HBoxContainer.new()
+	choices.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	tools_row.add_child(choices)
 	_filter = OptionButton.new()
 	_filter.name = "JournalFilter"
+	_filter.fit_to_longest_item = false
+	_filter.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_filter.item_selected.connect(func(_index: int) -> void: _page = 0; _apply_filters())
-	tools_row.add_child(_filter)
+	choices.add_child(_filter)
 	_status = OptionButton.new()
 	_status.name = "PartStatus"
-	for text in ["Alle Teile", "Freigeschaltet", "Noch gesperrt", "Merkliste"]:
-		_status.add_item(text)
+	_status.fit_to_longest_item = false
+	_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for text in STATUS_TITLES:
+		_status.add_item(Text.text(text))
 	_status.item_selected.connect(func(_index: int) -> void: _page = 0; _apply_filters())
-	tools_row.add_child(_status)
+	choices.add_child(_status)
 	var content := BoxContainer.new()
 	_content = content
 	content.name = "JournalContent"
@@ -333,7 +348,7 @@ func _build() -> void:
 	var paging := HBoxContainer.new()
 	browser.add_child(paging)
 	_previous_page = _button("‹", func() -> void: _page -= 1; _apply_filters())
-	_previous_page.tooltip_text = "Vorherige Seite"
+	Text.bind(_previous_page, "tooltip_text", "Vorherige Seite")
 	paging.add_child(_previous_page)
 	_page_label = _label("", 13)
 	_page_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -342,7 +357,7 @@ func _build() -> void:
 	_page_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	paging.add_child(_page_label)
 	_next_page = _button("›", func() -> void: _page += 1; _apply_filters())
-	_next_page.tooltip_text = "Nächste Seite"
+	Text.bind(_next_page, "tooltip_text", "Nächste Seite")
 	paging.add_child(_next_page)
 	_detail_scroll = ScrollContainer.new()
 	_detail_scroll.follow_focus = true
@@ -371,6 +386,7 @@ func _build() -> void:
 	_animal_roles.hide()
 	_detail.add_child(_animal_roles)
 	_status_badge = _label("", 14)
+	_status_badge.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_status_badge.add_theme_color_override("font_color", Color("83d6bf"))
 	_detail.add_child(_status_badge)
 	_compare_button = _button("Mit meiner Kreatur vergleichen", _toggle_comparison)
@@ -418,7 +434,7 @@ func _build() -> void:
 	_action_message.hide()
 	layout.add_child(_action_message)
 	var hints := CheckButton.new()
-	hints.text = "Kurzen Spielhinweis anzeigen"
+	Text.bind(hints, "text", "Kurzen Spielhinweis anzeigen")
 	hints.button_pressed = _hint_enabled
 	hints.toggled.connect(_toggle_hint)
 	layout.add_child(hints)
@@ -442,19 +458,20 @@ func _layout() -> void:
 	_scale_factor = extent.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
 	extent /= _scale_factor
-	var animal_scale: float = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5) if _tabs.current_tab == ANIMALS_TAB else 1.0
+	var animal_scale: float = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
 	_animal_fonts(_surface, animal_scale)
-	_close.custom_minimum_size.x = 280 * animal_scale
+	_close.custom_minimum_size.x = (190 if extent.x < 1100 * animal_scale else 280) * animal_scale
+	_close.text = Text.text("JOURNAL_CLOSE_COMPACT" if extent.x < 1100 * animal_scale else "Zurück zum Spiel  ·  Esc")
 	_surface.size = extent
 	_preview.custom_minimum_size.y = 110 if extent.y <= 600 else 230
-	_title.add_theme_font_size_override("font_size", roundi((20 if _tabs.current_tab == ANIMALS_TAB and extent.y <= 600 else 26) * animal_scale))
-	var narrow := extent.x < 960
+	_title.add_theme_font_size_override("font_size", roundi((20 if extent.y <= 600 else 26) * animal_scale))
+	var narrow := extent.x < 1100 * animal_scale
 	_summary.visible = extent.y >= 600 and not (animal_scale > 1.0 and extent.y < 720)
 	_panel.get_child(0).add_theme_constant_override("separation", 6 if narrow else 12)
 	_tabs.visible = not narrow
 	_compact_tabs.visible = narrow
-	_heading.vertical = extent.x < 700 * animal_scale
-	_tools_row.vertical = extent.x < 600 * animal_scale
+	_heading.vertical = extent.x < 700
+	_tools_row.vertical = extent.x < 680 * animal_scale
 	_content.vertical = extent.x < 600
 	_browser.custom_minimum_size.x = 0 if _content.vertical else 210
 	_browser.custom_minimum_size.y = 115 if _content.vertical else 0
@@ -471,14 +488,14 @@ func _layout() -> void:
 		_hud.size.y = _hud.get_child(0).get_combined_minimum_size().y
 
 func _species_rows(query: String, role: String) -> Array[Dictionary]:
-	return _catalog.page("species", query, role, _page, Suitability.ROLES).rows
+	return _catalog.page("species", query, role, _page, Suitability.search_roles()).rows
 
 func _paged_discoveries() -> bool:
 	return _tabs != null and _tabs.current_tab in [0, 2]
 
 func _discovery_page() -> Dictionary:
 	var role: String = str(_filter.get_item_metadata(_filter.selected)) if _filter.selected >= 0 else ""
-	return _catalog.page("species" if _tabs.current_tab == 0 else "regions", _search.text, role if _tabs.current_tab == 0 else "", _page, Suitability.ROLES)
+	return _catalog.page("species" if _tabs.current_tab == 0 else "regions", _search.text, role if _tabs.current_tab == 0 else "", _page, Suitability.search_roles())
 
 func _entry_index(index: int) -> int:
 	return index if _paged_discoveries() else _page * PAGE_SIZE + index
@@ -537,29 +554,29 @@ func _populate_filter() -> void:
 	_filter.clear()
 	if _tabs.current_tab == ANIMALS_TAB:
 		for item in [["Lebende Tiere", "living"], ["Verstorbene Tiere", "dead"], ["Alle eigenen Tiere", "all"]]:
-			_filter.add_item(item[0])
+			_filter.add_item(Text.text(item[0]))
 			_filter.set_item_metadata(_filter.item_count - 1, item[1])
 		_filter.select(0)
 		_filter.show()
 		_status.hide()
-		_search.placeholder_text = "Tier, Art oder Auftrag suchen …"
+		Text.bind(_search, "placeholder_text", "Tier, Art oder Auftrag suchen …")
 		return
-	_filter.add_item("Alle Lebensweisen / Tierrollen" if _tabs.current_tab == 0 else "Alle Kategorien")
+	_filter.add_item(Text.text("Alle Lebensweisen / Tierrollen" if _tabs.current_tab == 0 else "Alle Kategorien"))
 	_filter.set_item_metadata(0, "")
 	var labels: Dictionary = Records.ROLES if _tabs.current_tab == 0 else Records.CATEGORIES
 	for key in labels:
-		_filter.add_item(str(labels[key]))
+		_filter.add_item(Text.text(str(labels[key])))
 		_filter.set_item_metadata(_filter.item_count - 1, key)
 	if _tabs.current_tab == 0:
 		for role in Suitability.ROLES:
-			_filter.add_item("Tierrolle: " + Suitability.ROLES[role])
+			_filter.add_item(Text.text("Tierrolle: %s") % Text.text(Suitability.ROLES[role]))
 			_filter.set_item_metadata(_filter.item_count - 1, "domestic:" + role)
 	_filter.select(0)
 	_status.visible = _tabs.current_tab == 1
 	_filter.visible = _tabs.current_tab < 2
-	_search.placeholder_text = "Teil oder Herkunft suchen …" if _tabs.current_tab == 1 else "Name oder Fundort suchen …"
+	Text.bind(_search, "placeholder_text", "Teil oder Herkunft suchen …" if _tabs.current_tab == 1 else "Name oder Fundort suchen …")
 	if _tabs.current_tab == 4:
-		_search.placeholder_text = "Forschungsziel suchen …"
+		Text.bind(_search, "placeholder_text", "Forschungsziel suchen …")
 
 
 func _apply_filters() -> void:
@@ -567,7 +584,7 @@ func _apply_filters() -> void:
 		return
 	_thumbnail_generation += 1
 	_thumbnail_queue.clear()
-	_title.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED if _tabs.current_tab == ANIMALS_TAB else Node.AUTO_TRANSLATE_MODE_INHERIT
+	_title.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_description.auto_translate_mode = _title.auto_translate_mode
 	var guide_mode: bool = _tabs.current_tab == 3
 	_search.get_parent().visible = not guide_mode
@@ -586,10 +603,9 @@ func _apply_filters() -> void:
 	_goal_progress.hide()
 	_preview.call("clear")
 	_preview.hide()
+	_selected_row = {}
 	if guide_mode:
-		_title.text = "Dein nächster Schritt"
-		_description.text = _current_hint()
-		_guide.text = "BEOBACHTEN\nÖffne mit E den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Es zeigt deine gespeicherten Entdeckungen und lässt sich mit Esc wieder schließen."
+		_render_empty()
 		return
 	var filter_value: String = str(_filter.get_item_metadata(_filter.selected)) if _filter.selected >= 0 else ""
 	var animals: Dictionary = {}
@@ -599,8 +615,8 @@ func _apply_filters() -> void:
 			_rows = result.rows
 			_page = result.page
 			_row_total = result.total
-		1: _rows = Records.part_rows(_state, _search.text, filter_value, _status.selected)
-		4: _rows = Research.rows(_state, _search.text)
+		1: _rows = Text.part_rows(_state, _search.text, filter_value, _status.selected)
+		4: _rows = Text.goals(_state, _search.text)
 		ANIMALS_TAB:
 			animals = _owned_reader.read(_search.text, filter_value)
 			_animals_result_code = animals.code
@@ -613,20 +629,13 @@ func _apply_filters() -> void:
 	var start: int = 0 if _paged_discoveries() else _page * PAGE_SIZE
 	for index in range(start, mini(start + PAGE_SIZE, _rows.size())):
 		var row: Dictionary = _rows[index]
-		var label: String = str(row.get("name", "Unbekannte Art"))
-		if _tabs.current_tab == 1:
-			label = ("✓  " if row.get("unlocked", false) else "○  ") + label
-			if row.get("wished", false): label += " · gemerkt"
-		elif _tabs.current_tab == 4:
-			label = ("✓  " if row["complete"] else "○  ") + label
-		elif _tabs.current_tab == ANIMALS_TAB:
-			label = AnimalText.list_text(row)
+		var label: String = _row_label(row)
 		var visual_key: String = _visual_key(row, _tabs.current_tab)
 		_list.add_item(label, _thumbnail_cache.get(visual_key, Symbols.texture("creature" if _tabs.current_tab == 0 else "part", bool(row.get("unlocked", true)))))
 		_list.set_item_metadata(_list.item_count - 1, visual_key)
 		if not _thumbnail_cache.has(visual_key) and _tabs.current_tab in [0, 1]:
 			_thumbnail_queue.append({"row": row, "tab": _tabs.current_tab, "key": visual_key})
-		_list.set_item_tooltip(_list.item_count - 1, label + " · " + str(row.get("location", row.get("source", ""))))
+		_list.set_item_tooltip(_list.item_count - 1, label + " · " + _row_tooltip(row))
 		if str(row.get("key", row.get("id", ""))) == _selected_key:
 			selected_index = _list.item_count - 1
 	_refresh_page_label()
@@ -634,15 +643,7 @@ func _apply_filters() -> void:
 	_next_page.disabled = (_page + 1) * PAGE_SIZE >= _row_total
 	if _rows.is_empty():
 		_selected_key = ""
-		if _tabs.current_tab == ANIMALS_TAB:
-			_title.text = AnimalText.text("Eigene Tiere")
-			_description.text = AnimalText.result_text(_animals_result_code)
-			return
-		_title.text = "Noch keine Arten entdeckt" if _tabs.current_tab == 0 and Records.as_dictionary(_state.get("discovered_species", {})).is_empty() else "Keine passenden Einträge"
-		_description.text = "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier." if _title.text == "Noch keine Arten entdeckt" else "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
-		if _tabs.current_tab == 1 and _status.selected == 3 and _search.text.is_empty():
-			_title.text = "Deine Teile-Merkliste"
-			_description.text = "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen."
+		_render_empty()
 		return
 	_render_thumbnails()
 	_list.select(selected_index)
@@ -651,22 +652,18 @@ func _apply_filters() -> void:
 
 func _select_entry(index: int) -> void:
 	var absolute: int = _entry_index(index)
-	if absolute < 0 or absolute >= _rows.size():
-		return
+	if absolute < 0 or absolute >= _rows.size(): return
 	var row: Dictionary = _rows[absolute]
 	if _tabs.current_tab == 0:
 		row = _catalog.species_detail(str(row.key))
 		if row.is_empty(): refresh(); return
-		# Retire part tiles from the previous selection, retaining page thumbnails.
 		_thumbnail_queue.assign(_thumbnail_queue.filter(func(job: Dictionary) -> bool: return int(job.tab) == 0))
+	_selected_row = row
 	_selected_key = str(row.get("key", row.get("id", "")))
 	_detail_scroll.scroll_vertical = 0
-	_title.text = str(row.get("name", "Unbekannte Art"))
-	_parts_label.text = ""
 	_animal_roles.hide()
 	_roles_toggle.hide()
 	_clear_part_tiles()
-	_status_badge.text = ""
 	_clear_comparison()
 	_pin.hide()
 	_wish.hide()
@@ -678,74 +675,118 @@ func _select_entry(index: int) -> void:
 		_description.hide()
 		_owned_register.show()
 		_owned_register.present(row)
-		_layout()
 	elif _tabs.current_tab == 0:
-		var profile: Dictionary = Suitability.read(row, _animal_contract)
-		_animal_roles.text = Suitability.describe(profile)
-		var role_names := PackedStringArray()
-		for role in profile.get("roles", []):
-			role_names.append(Suitability.ROLES[role])
-		_roles_toggle.text = "Tierrollen · " + (" · ".join(role_names) if not role_names.is_empty() else "noch nicht bekannt")
-		_roles_toggle.tooltip_text = "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz."
-		_roles_toggle.clip_text = true
 		_roles_toggle.show()
-		if not Records.as_dictionary(row.get("scan", {})).get("complete", false):
-			_animal_roles.text = "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht."
-		_description.text = "%s\nEntdeckt auf %s" % [row["role_label"], row["location"]]
 		var blueprint: Dictionary = Records.visual_for(row)
-		if blueprint.is_empty():
-			_description.text += "\n\nFür diese frühere Entdeckung fehlt eine gespeicherte Ansicht. Beobachte die Art erneut, um sie zu ergänzen."
-		else:
+		if not blueprint.is_empty():
 			var own: Dictionary = _player_blueprint()
 			_compare_button.show()
 			_compare_button.disabled = own.is_empty()
-			_compare_button.tooltip_text = "Dein Körperbau ist noch nicht verfügbar." if own.is_empty() else "Körperbauwerte und beobachtete Teile vergleichen."
-			_compare_button.text = "Zur Artenansicht" if _comparison_mode and not own.is_empty() else "Mit meiner Kreatur vergleichen"
 			if _comparison_mode and not own.is_empty():
 				_list.get_parent().hide()
 				_search.get_parent().hide()
 				_comparison.show()
 				_comparison.call("present", own, blueprint, _state)
 				_description.hide()
-				_animal_roles.hide()
 				_roles_toggle.hide()
-				return
-			_preview.show()
-			_preview.call("show_blueprint", blueprint)
-			_description.text += "\n\nAnsicht drehen: ziehen · Zoom: Mausrad"
-			_parts_label.text = "KÖRPERTEILE DIESER ART"
-			for part_id in Records.part_ids(blueprint):
-				_add_part_tile(part_id, Records.as_dictionary(_state.get("unlocked_parts", {})).has(part_id))
-
-		var awarded: String = str(row.get("unlocked_part", ""))
-		if not awarded.is_empty():
-			_description.text += "\n\nBei dieser Entdeckung freigeschaltet: %s" % Records.Parts.get_part(awarded).get("name", awarded)
+			else:
+				_preview.show()
+				_preview.call("show_blueprint", blueprint)
+				for id in Records.part_ids(blueprint):
+					_add_part_tile(id, Records.as_dictionary(_state.get("unlocked_parts", {})).has(id))
 	elif _tabs.current_tab == 4:
-		_description.text = "%s\n\n%d / %d %s · %s\n\nBereits gespeicherte Entdeckungen zählen mit." % [row["description"], row["current"], row["target"], row["unit"], "Ziel erreicht" if row["complete"] else "In Arbeit"]
-		_goal_progress.max_value = row["target"]
-		_goal_progress.value = row["current"]
+		_goal_progress.max_value = row.target
+		_goal_progress.value = row.current
 		_goal_progress.show()
-		_show_pin(str(row["id"]))
-	elif _tabs.current_tab == 2:
-		_description.text = "Entdeckt auf %s\n\nGespeicherte Regionskoordinaten: %s / %s" % [row["location"], Records.saved_integer(row.get("x", "?")), Records.saved_integer(row.get("z", "?"))]
-	else:
-		var category: String = str(row.get("category", ""))
-		_status_badge.text = ("FREIGESCHALTET" if row["unlocked"] else "GESPERRT · SILHOUETTE") + "  /  " + str(Records.CATEGORIES.get(category, "Teil"))
-		if category != "missing":
+		_pin.show()
+	elif _tabs.current_tab == 1:
+		if row.category != "missing":
 			_preview.show()
-			_preview.call("show_part", str(row["id"]), bool(row["unlocked"]))
-		_description.text = "%s\n\n%s" % [row.get("description", ""), row["source"]]
-		if row["unlocked"] and category != "missing":
-			_parts_label.text = "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken."
-		var wished: bool = row.get("wished", false)
-		_wish.visible = wished or (not row["unlocked"] and category != "missing")
-		_wish.text = "Von Merkliste entfernen" if wished else "Auf Merkliste setzen"
-		if wished:
-			_show_pin("part:" + str(row["id"]))
-			if row["unlocked"]:
-				_description.text += "\n\nSammelziel erreicht."
-		elif not row["unlocked"] and category != "missing":
-			_description.text += "\n\nWeitere neue Arten beobachten. Pro neuer Art wird höchstens ein Teil freigeschaltet; erneutes Beobachten bekannter Arten gibt kein weiteres Teil."
+			_preview.call("show_part", str(row.id), bool(row.unlocked))
+		_wish.visible = row.get("wished", false) or (not row.unlocked and row.category != "missing")
+		_pin.visible = row.get("wished", false)
+	_render_entry_text()
+	_layout()
+
+
+func _render_entry_text() -> void:
+	var row: Dictionary = _selected_row
+	if row.is_empty(): return
+	_title.text = Text.name(row, _tabs.current_tab)
+	_parts_label.text = ""
+	_status_badge.text = ""
+	_status_badge.visible = _tabs.current_tab == 1
+	_parts_label.visible = (_tabs.current_tab == 0 and not _comparison.visible) or (_tabs.current_tab == 1 and row.unlocked and row.category != "missing")
+	if _tabs.current_tab == ANIMALS_TAB: return
+	if _tabs.current_tab == 0:
+		var profile: Dictionary = Suitability.read(row, _animal_contract)
+		_animal_roles.text = Suitability.describe(profile) if Records.as_dictionary(row.get("scan", {})).get("complete", false) else Text.text("JOURNAL_UNSCANNED")
+		var roles: Array = profile.get("roles", []).map(func(role: String) -> String: return Text.text(Suitability.ROLES[role]))
+		_roles_toggle.text = Text.text("Tierrollen · %s") % (" · ".join(roles) if not roles.is_empty() else Text.text("noch nicht bekannt"))
+		_roles_toggle.tooltip_text = Text.text("Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz.")
+		_description.text = Text.text("JOURNAL_SPECIES_DETAIL") % [Text.text(Records.ROLES.get(str(row.get("role", "")), "Noch nicht bekannt")), Text.location(row)]
+		var has_view: bool = _preview.visible or _comparison.visible
+		if not has_view:
+			_description.text += Text.text("JOURNAL_MISSING_VIEW")
+		else:
+			_compare_button.tooltip_text = Text.text("Dein Körperbau ist noch nicht verfügbar." if _compare_button.disabled else "Körperbauwerte und beobachtete Teile vergleichen.")
+			_compare_button.text = Text.text("Zur Artenansicht" if _comparison.visible else "Mit meiner Kreatur vergleichen")
+			_description.text += Text.text("JOURNAL_VIEW_HINT")
+			_parts_label.text = Text.text("KÖRPERTEILE DIESER ART")
+		var awarded: String = str(row.get("unlocked_part", ""))
+		if not awarded.is_empty(): _description.text += Text.text("JOURNAL_AWARDED") % Text.part(awarded)
+	elif _tabs.current_tab == 4:
+		var goal := Text.goal(row)
+		_description.text = Text.text("JOURNAL_GOAL_DETAIL") % [goal.description, row.current, row.target, goal.unit, Text.text("Ziel erreicht" if row.complete else "In Arbeit")]
+	elif _tabs.current_tab == 2:
+		_description.text = Text.text("JOURNAL_REGION_DETAIL") % [Text.location(row), Records.saved_integer(row.get("x", "?")), Records.saved_integer(row.get("z", "?"))]
+	else:
+		_status_badge.text = Text.text("FREIGESCHALTET" if row.unlocked else "GESPERRT · SILHOUETTE") + "  /  " + Text.text(Records.CATEGORIES.get(row.category, "Teil"))
+		var description := Text.text("Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar.") if row.category == "missing" else Text.part(row.id, "description")
+		_description.text = description + "\n\n" + Text.source(row.id, _state)
+		if row.unlocked and row.category != "missing": _parts_label.text = Text.text("Im Kreatureneditor verfügbar · Buch schließen und F2 drücken.")
+		_wish.text = Text.text("Von Merkliste entfernen" if row.get("wished", false) else "Auf Merkliste setzen")
+		if row.get("wished", false) and row.unlocked: _description.text += Text.text("JOURNAL_WISH_COMPLETE")
+		elif not row.unlocked and row.category != "missing": _description.text += Text.text("JOURNAL_WISH_HINT")
+	if _pin.visible:
+		var id: String = "part:" + _selected_key if _tabs.current_tab == 1 else _selected_key
+		_pin.text = Text.text("Nicht mehr verfolgen" if _state.get("research", {}).get("pinned", "") == id else "Im Spiel verfolgen")
+	for tile: Button in _parts_grid.get_children():
+		tile.text = Text.part(tile.get_meta("part_id")) + "\n" + Text.text("Verfügbar" if tile.get_meta("unlocked") else "Gesperrt")
+
+
+func _row_label(row: Dictionary) -> String:
+	if _tabs.current_tab == ANIMALS_TAB: return AnimalText.list_text(row)
+	var label := Text.name(row, _tabs.current_tab)
+	if _tabs.current_tab == 1:
+		label = ("✓  " if row.get("unlocked", false) else "○  ") + label
+		if row.get("wished", false): label += Text.text(" · gemerkt")
+	elif _tabs.current_tab == 4: label = ("✓  " if row.complete else "○  ") + label
+	return label
+
+
+func _row_tooltip(row: Dictionary) -> String:
+	if _tabs.current_tab == 1: return Text.source(row.id, _state)
+	return Text.location(row) if _tabs.current_tab in [0, 2] else str(row.get("location", ""))
+
+
+func _render_empty() -> void:
+	_status_badge.hide()
+	_parts_label.hide()
+	if _tabs.current_tab == 3:
+		_title.text = Text.text("Dein nächster Schritt")
+		_description.text = _current_hint()
+		_guide.text = Text.Text.format_text("JOURNAL_GUIDE", {"scan": Records.KeyHints.binding_label("inspection_mode")})
+	elif _tabs.current_tab == ANIMALS_TAB:
+		_title.text = AnimalText.text("Eigene Tiere")
+		_description.text = AnimalText.result_text(_animals_result_code)
+	elif _tabs.current_tab == 1 and _status.selected == 3 and _search.text.is_empty():
+		_title.text = Text.text("Deine Teile-Merkliste")
+		_description.text = Text.text("Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen.")
+	else:
+		var first: bool = _tabs.current_tab == 0 and Records.as_dictionary(_state.get("discovered_species", {})).is_empty()
+		_title.text = Text.text("Noch keine Arten entdeckt" if first else "Keine passenden Einträge")
+		_description.text = Text.text("Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier." if first else "Ändere die Suche oder den Filter, um weitere Einträge zu sehen.")
 
 
 func _player_blueprint() -> Dictionary:
@@ -797,15 +838,16 @@ func _toggle_wish() -> void:
 
 
 func _research_result(result: Dictionary) -> void:
+	_last_result = result.duplicate(true)
 	_action_message.show()
 	if result.get("ok", false):
-		_action_message.text = "Auswahl gespeichert."
+		_action_message.text = Text.text("Auswahl gespeichert.")
 	else:
 		match str(result.get("reason", "")):
-			"wishlist_full": _action_message.text = "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil."
-			"part_unavailable": _action_message.text = "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog."
-			"save_in_progress": _action_message.text = "Es wird gerade gespeichert. Versuche es gleich erneut."
-			_: _action_message.text = "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen."
+			"wishlist_full": _action_message.text = Text.text("Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil.")
+			"part_unavailable": _action_message.text = Text.text("Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog.")
+			"save_in_progress": _action_message.text = Text.text("Es wird gerade gespeichert. Versuche es gleich erneut.")
+			_: _action_message.text = Text.text("Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen.")
 
 
 func _on_research_changed() -> void:
@@ -823,10 +865,11 @@ func _update_research_hud() -> void:
 	_layout()
 	if _pinned_row.is_empty():
 		return
-	var status: String = "Ziel erreicht" if _pinned_row["complete"] else "Dein Forschungsziel"
+	var row := Text.goal(_pinned_row)
+	var status: String = Text.text("Ziel erreicht" if row.complete else "Dein Forschungsziel")
 	if not _pinned_row["available"]:
-		status = "Ziel nicht verfügbar"
-	_pinned_button.text = "%s · %s\n%d / %d %s · Im Buch ansehen" % [status, _pinned_row["name"], _pinned_row["current"], _pinned_row["target"], _pinned_row["unit"]]
+		status = Text.text("Ziel nicht verfügbar")
+	_pinned_button.text = Text.text("JOURNAL_PINNED") % [status, row.name, row.current, row.target, row.unit]
 	_pinned_button.tooltip_text = _pinned_button.text
 
 
@@ -845,14 +888,14 @@ func _open_pinned() -> void:
 
 func _current_hint() -> String:
 	if _progression == null:
-		return "Entdecke deine Welt."
+		return Text.text("Entdecke deine Welt.")
 	if int(get_node("/root/GameState").current_phase) == 1:
-		return "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen."
+		return Text.text("Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen.")
 	var state := {"discovered_species": _progression.get("discovered_species")}
 	var active_player := player if player != null else get_tree().get_first_node_in_group(&"player")
 	if active_player != null and active_player.has_method("get_health_ratio"):
-		return Records.next_step(state, float(active_player.call("get_health_ratio")), float(active_player.call("get_thirst_ratio")), float(active_player.call("get_hunger_ratio")))
-	return Records.next_step(state)
+		return Text.hint(state, float(active_player.call("get_health_ratio")), float(active_player.call("get_thirst_ratio")), float(active_player.call("get_hunger_ratio")))
+	return Text.hint(state)
 
 
 func _update_hint() -> void:
@@ -868,7 +911,7 @@ func _toggle_hint(enabled: bool) -> void:
 	var prefs := ConfigFile.new()
 	prefs.set_value("journal", "show_hint", enabled)
 	if prefs.save(PREFS_PATH) != OK:
-		_hint.tooltip_text = "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden."
+		_hint.tooltip_text = Text.text("Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden.")
 
 
 func _on_discovery(_key: String, _name: String) -> void:
@@ -888,14 +931,16 @@ func _on_points(_points: int) -> void:
 
 func _label(text: String, font_size: int) -> Label:
 	var label := Label.new()
-	label.text = text
+	if not text.is_empty(): Text.bind(label, "text", text)
 	label.add_theme_font_size_override("font_size", font_size)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return label
 
 
 func _button(text: String, action: Callable) -> Button:
 	var button := Button.new()
-	button.text = text
+	if not text.is_empty(): Text.bind(button, "text", text)
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.custom_minimum_size.y = 40
 	button.pressed.connect(action)
 	return button
@@ -1000,6 +1045,9 @@ func _add_part_tile(id: String, unlocked: bool) -> void:
 		_search.clear()
 		_selected_key = id
 		_apply_filters())
+	tile.remove_meta("journal_text")
+	tile.set_meta("part_id", id)
+	tile.set_meta("unlocked", unlocked)
 	tile.set_meta("visual_key", key)
 	tile.icon = _thumbnail_cache.get(key, Symbols.texture("part", unlocked))
 	tile.expand_icon = true
@@ -1015,7 +1063,9 @@ func _add_part_tile(id: String, unlocked: bool) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
-		call_deferred("_refresh_animal_language")
+		if not _language_pending:
+			_language_pending = true
+			call_deferred("_refresh_language")
 
 func _refresh_summary() -> void:
 	_summary.text = AnimalText.format_text("OWNED_JOURNAL_SUMMARY", {
@@ -1056,3 +1106,43 @@ func _animal_fonts(node: Node, scale: float) -> void:
 			node.set_meta("animal_base_font", node.get_theme_font_size("font_size"))
 		node.add_theme_font_size_override("font_size", roundi(float(node.get_meta("animal_base_font")) * scale))
 	for child in node.get_children(): _animal_fonts(child, scale)
+
+func _refresh_language() -> void:
+	_language_pending = false
+	if not is_inside_tree(): return
+	var detail_scroll := _detail_scroll.scroll_vertical
+	var list_scroll := _list.get_v_scroll_bar().value
+	Text.refresh(_surface)
+	Text.refresh(_hud)
+	for index in _tabs.tab_count:
+		_tabs.set_tab_title(index, Text.text(TAB_TITLES[index]))
+		_compact_tabs.set_item_text(index, Text.text(TAB_TITLES[index]))
+	for index in _status.item_count: _status.set_item_text(index, Text.text(STATUS_TITLES[index]))
+	for index in _filter.item_count:
+		var code: String = str(_filter.get_item_metadata(index))
+		var label := ""
+		if _tabs.current_tab == ANIMALS_TAB:
+			label = Text.text({"living": "Lebende Tiere", "dead": "Verstorbene Tiere", "all": "Alle eigenen Tiere"}.get(code, code))
+		elif code.is_empty(): label = Text.text("Alle Lebensweisen / Tierrollen" if _tabs.current_tab == 0 else "Alle Kategorien")
+		elif code.begins_with("domestic:"): label = Text.text("Tierrolle: %s") % Text.text(Suitability.ROLES[code.trim_prefix("domestic:")])
+		else: label = Text.text((Records.ROLES if _tabs.current_tab == 0 else Records.CATEGORIES).get(code, code))
+		_filter.set_item_text(index, label)
+	if is_open:
+		if _tabs.current_tab == ANIMALS_TAB:
+			_refresh_animal_language()
+		else:
+			for index in _list.item_count:
+				var row: Dictionary = _rows[_entry_index(index)]
+				_list.set_item_text(index, _row_label(row))
+				_list.set_item_tooltip(index, _row_label(row) + " · " + _row_tooltip(row))
+			if _selected_row.is_empty() or _tabs.current_tab == 3: _render_empty()
+			else: _render_entry_text()
+			if _comparison.visible: _comparison.refresh_language()
+		_refresh_summary()
+		_refresh_page_label()
+	if _action_message.visible: _research_result(_last_result)
+	_update_hint()
+	_update_research_hud()
+	_layout()
+	_detail_scroll.set_deferred("scroll_vertical", detail_scroll)
+	_list.get_v_scroll_bar().set_deferred("value", list_scroll)

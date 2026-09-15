@@ -3386,3 +3386,480 @@ msgstr "Pig snout"
 
 msgid "EDITOR_PART_MOUTH_PIG_SNOUT_DESCRIPTION"
 msgstr "Short snout with a flat nose disc and two nostrils. Shares the broad beak omnivore profile and unlock."
+
+msgid "Alle Teile"
+msgstr "All parts"
+
+msgid "Noch gesperrt"
+msgstr "Still locked"
+
+msgid "Merkliste"
+msgstr "Wishlist"
+
+msgid "Tierrollen ansehen"
+msgstr "View animal roles"
+
+msgid "Mit meiner Kreatur vergleichen"
+msgstr "Compare with my creature"
+
+msgid "Im Spiel verfolgen"
+msgstr "Track in game"
+
+msgid "Alle Lebensweisen / Tierrollen"
+msgstr "All lifestyles / animal roles"
+
+msgid "Alle Kategorien"
+msgstr "All categories"
+
+msgid "Tierrolle: %s"
+msgstr "Animal role: %s"
+
+msgid "Teil oder Herkunft suchen …"
+msgstr "Search part or origin…"
+
+msgid "Forschungsziel suchen …"
+msgstr "Search research goals…"
+
+msgid "Dein nächster Schritt"
+msgstr "Your next step"
+
+msgid "Unbekannte Art"
+msgstr "Unknown species"
+
+msgid " · gemerkt"
+msgstr " · wished"
+
+msgid "Noch keine Arten entdeckt"
+msgstr "No species discovered yet"
+
+msgid "Keine passenden Einträge"
+msgstr "No matching entries"
+
+msgid "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier."
+msgstr "Open scan mode and keep an animal in the crosshair for 2.5 seconds. When the circle fills, its species appears here."
+
+msgid "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
+msgstr "Change your search or filter to see more entries."
+
+msgid "Deine Teile-Merkliste"
+msgstr "Your body-part wishlist"
+
+msgid "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen."
+msgstr "Choose a body part under “Still locked” and add it to your wishlist. You can track one wished part as a goal in the game."
+
+msgid "Tierrollen · %s"
+msgstr "Animal roles · %s"
+
+msgid "noch nicht bekannt"
+msgstr "not yet known"
+
+msgid "Noch nicht bekannt"
+msgstr "Not yet known"
+
+msgid "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz."
+msgstr "Show or hide recorded species suitability. This does not indicate ownership."
+
+msgid "Dein Körperbau ist noch nicht verfügbar."
+msgstr "Your creature's anatomy is not available yet."
+
+msgid "Körperbauwerte und beobachtete Teile vergleichen."
+msgstr "Compare anatomy values and observed parts."
+
+msgid "Zur Artenansicht"
+msgstr "Back to species view"
+
+msgid "KÖRPERTEILE DIESER ART"
+msgstr "BODY PARTS OF THIS SPECIES"
+
+msgid "Ziel erreicht"
+msgstr "Goal complete"
+
+msgid "In Arbeit"
+msgstr "In progress"
+
+msgid "FREIGESCHALTET"
+msgstr "UNLOCKED"
+
+msgid "GESPERRT · SILHOUETTE"
+msgstr "LOCKED · SILHOUETTE"
+
+msgid "Teil"
+msgstr "Part"
+
+msgid "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken."
+msgstr "Available in the creature editor · close the book and press F2."
+
+msgid "Von Merkliste entfernen"
+msgstr "Remove from wishlist"
+
+msgid "Nicht mehr verfolgen"
+msgstr "Stop tracking"
+
+msgid "Auswahl gespeichert."
+msgstr "Selection saved."
+
+msgid "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil."
+msgstr "Your wishlist is full (32 parts). Remove another part first."
+
+msgid "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog."
+msgstr "This part is already available or missing from the catalog."
+
+msgid "Es wird gerade gespeichert. Versuche es gleich erneut."
+msgstr "Saving is in progress. Try again shortly."
+
+msgid "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen."
+msgstr "Saving failed. Your previous selection is preserved; you can try again."
+
+msgid "Dein Forschungsziel"
+msgstr "Your research goal"
+
+msgid "Ziel nicht verfügbar"
+msgstr "Goal unavailable"
+
+msgid "Entdecke deine Welt."
+msgstr "Discover your world."
+
+msgid "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen."
+msgstr "Your tribe · select residents and give the group an order. J opens your shared discoveries."
+
+msgid "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden."
+msgstr "The display was changed, but the preference could not be saved for next time."
+
+msgid "Verfügbar"
+msgstr "Available"
+
+msgid "Deine Kreatur"
+msgstr "Your creature"
+
+msgid "Entdeckte Art"
+msgstr "Observed species"
+
+msgid "Ansichten einzeln drehen: ziehen · Zoom: Mausrad"
+msgstr "Rotate each view: drag · Zoom: mouse wheel"
+
+msgid "KÖRPERTEILE DER ENTDECKTEN ART"
+msgstr "BODY PARTS OF THE OBSERVED SPECIES"
+
+msgid "Körperbau"
+msgstr "Anatomy"
+
+msgid "Du"
+msgstr "You"
+
+msgid "Art"
+msgstr "Species"
+
+msgid "Art − Du"
+msgstr "Species − you"
+
+msgid "Wert der entdeckten Art minus dein Körperbauwert."
+msgstr "Observed species value minus your anatomy value."
+
+msgid "Keine gespeicherten Körperteile."
+msgstr "No recorded body parts."
+
+msgid "Freigeschaltet · im Editor verfügbar"
+msgstr "Unlocked · available in the editor"
+
+msgid "Dieses frühere Teil fehlt im aktuellen Katalog."
+msgstr "This legacy part is missing from the current catalog."
+
+msgid "Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile."
+msgstr "Values unavailable: a saved anatomy is incomplete or contains legacy parts."
+
+msgid "Pflanzenfresser"
+msgstr "Grazer"
+
+msgid "Räuber"
+msgstr "Predator"
+
+msgid "Sammler"
+msgstr "Forager"
+
+msgid "Aasfresser"
+msgstr "Scavenger"
+
+msgid "Kletterer"
+msgstr "Climber"
+
+msgid "Wasserbewohner"
+msgstr "Aquatic species"
+
+msgid "Körper"
+msgstr "Body"
+
+msgid "Mäuler"
+msgstr "Mouths"
+
+msgid "Augen"
+msgstr "Eyes"
+
+msgid "Beine"
+msgstr "Legs"
+
+msgid "Arme"
+msgstr "Arms"
+
+msgid "Schwänze"
+msgstr "Tails"
+
+msgid "Hörner"
+msgstr "Horns"
+
+msgid "Panzerplatten"
+msgstr "Armor plates"
+
+msgid "Stacheln"
+msgstr "Spikes"
+
+msgid "Verzierungen"
+msgstr "Decorations"
+
+msgid "Farben"
+msgstr "Colors"
+
+msgid "Füße"
+msgstr "Feet"
+
+msgid "Hände"
+msgstr "Hands"
+
+msgid "Milchtier"
+msgstr "Milk animal"
+
+msgid "Zugtier"
+msgstr "Draught animal"
+
+msgid "Reittier"
+msgstr "Riding animal"
+
+msgid "Begleittier"
+msgstr "Companion animal"
+
+msgid "Eiertier"
+msgstr "Egg animal"
+
+msgid "Pflanzen"
+msgstr "Plants"
+
+msgid "Fleisch"
+msgstr "Meat"
+
+msgid "ruhiges Temperament"
+msgstr "calm temperament"
+
+msgid "soziales Temperament"
+msgstr "social temperament"
+
+msgid "TIERROLLEN · GESCANNTE ART"
+msgstr "ANIMAL ROLES · SCANNED SPECIES"
+
+msgid "Grundsätzlich zähmbar · %s"
+msgstr "Tameable species · %s"
+
+msgid "Nahrung: %s · Wasser: %s l je 300 Spielsekunden"
+msgstr "Food: %s · water: %s l per 300 game seconds"
+
+msgid "Lernfähigkeit: %d %% · Sozialverträglichkeit: %d %% · Bindungsfähigkeit: %d %%"
+msgstr "Trainability: %d %% · sociability: %d %% · bonding: %d %%"
+
+msgid "Ausdauer bei Nennlast: %s s · Bodentempo: %s m/s"
+msgstr "Stamina at rated load: %s s · ground speed: %s m/s"
+
+msgid "Wahrnehmung: %s m"
+msgstr "Perception: %s m"
+
+msgid "Milcheignung: %s l je %s aktive Spielsekunden"
+msgstr "Milk suitability: %s l per %s active game seconds"
+
+msgid "Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich."
+msgstr "Egg husbandry in the tribal age requires an owned animal, a nesting site and supplies."
+
+msgid "Zugkraft: %s N · benötigt passenden Geschirr-Anschluss"
+msgstr "Pulling force: %s N · requires a compatible harness attachment"
+
+msgid "Zusätzliche Traglast: %s kg · benötigt passenden Sattel-Anschluss"
+msgstr "Additional carrying capacity: %s kg · requires a compatible saddle attachment"
+
+msgid "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar."
+msgstr "This saved part is unavailable in the current part catalog."
+
+msgid "Noch gesperrt · weitere Arten beobachten"
+msgstr "Still locked · observe more species"
+
+msgid "Entdeckt bei %s · %s"
+msgstr "Discovered from %s · %s"
+
+msgid "unbekannter Art"
+msgstr "unknown species"
+
+msgid "Von Beginn an verfügbar"
+msgstr "Available from the start"
+
+msgid "Durch Artenentdeckung · ursprüngliche Art nicht vermerkt"
+msgstr "Unlocked by discovering a species · original species not recorded"
+
+msgid "Aus deinem bisherigen Kreaturenentwurf übernommen"
+msgstr "Imported from your previous creature design"
+
+msgid "Bereits freigeschaltet"
+msgstr "Already unlocked"
+
+msgid "Welt %s"
+msgstr "World %s"
+
+msgid "unbekannt"
+msgstr "unknown"
+
+msgid "Region %s / %s"
+msgstr "Region %s / %s"
+
+msgid "Zurück zum Nest · nach der Erholung kannst du weiter erkunden."
+msgstr "Return to the nest · continue exploring after recovering."
+
+msgid "Wasser suchen · gehe ans Wasser und trinke mit Linksklick."
+msgstr "Find water · approach it and drink with left click."
+
+msgid "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt."
+msgstr "Find food · left-click food suited to your creature."
+
+msgid "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+msgstr "Your first species · %s opens scan mode. Keep an animal in the crosshair until the circle fills."
+
+msgid "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2."
+msgstr "Keep exploring · use %s to scan unknown species. Find new parts in the editor with F2."
+
+msgid "Erste Begegnung"
+msgstr "First encounter"
+
+msgid "Artenvielfalt"
+msgstr "Species diversity"
+
+msgid "Leben im Wasser"
+msgstr "Life in water"
+
+msgid "Neue Horizonte"
+msgstr "New horizons"
+
+msgid "Feldforscher"
+msgstr "Field researcher"
+
+msgid "Wasserart"
+msgstr "Aquatic species"
+
+msgid "Ziel nicht mehr verfügbar"
+msgstr "Goal no longer available"
+
+msgid "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen."
+msgstr "This tracked goal belongs to an earlier version. Stop tracking it or choose another goal."
+
+msgid "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+msgstr "Discover your first species. Open scan mode with %s and keep an animal in the crosshair until the circle fills."
+
+msgid "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal."
+msgstr "Discover three different species. Observing known species again does not count twice."
+
+msgid "Entdecke eine wasserbewohnende Tierart. Suche an Gewässern und scanne sie mit %s."
+msgstr "Discover an aquatic species. Search near water and scan it with %s."
+
+msgid "Erkunde drei verschiedene Regionen. Neu betretene Regionen werden vom Spiel erfasst; wiederholte Besuche zählen nicht mehrfach."
+msgstr "Explore three different regions. Newly entered regions are recorded automatically; repeat visits do not count again."
+
+msgid "Entdecke zehn verschiedene Tierarten. Die Entdeckungen deiner gesamten Kampagne zählen mit."
+msgstr "Discover ten different species. Discoveries from your entire campaign count."
+
+msgid "Angriffswert des Körperbaus; kein garantierter Schaden pro Biss."
+msgstr "Anatomy attack value; not guaranteed damage per bite."
+
+msgid "Verteidigungswert durch Körper und angesetzte Teile."
+msgstr "Defense value from the body and attached parts."
+
+msgid "Körperbauwert für Gesundheit, einschließlich Körpergröße; keine aktuelle Gesundheit."
+msgstr "Anatomical health value, including body size; not current health."
+
+msgid "Tempo des Körperbaus einschließlich Masse; Bewegung im Spiel kann begrenzt sein."
+msgstr "Anatomical speed including mass; movement in the game may be limited."
+
+msgid "Sprungwert des Körperbaus; keine Höhenangabe in Metern."
+msgstr "Anatomical jump value; not a height in meters."
+
+msgid "Anatomischer Schwimmwert. Daraus folgt keine bestimmte Schwimmgeschwindigkeit."
+msgstr "Anatomical swimming value. This does not specify a swimming speed."
+
+msgid "Wahrnehmungswert durch Körperteile."
+msgstr "Perception value from body parts."
+
+msgid "Greifwert durch Körperteile."
+msgstr "Grip value from body parts."
+
+msgid "Eignung des Körperbaus für pflanzliche Nahrung."
+msgstr "Anatomical suitability for plant food."
+
+msgid "Eignung des Körperbaus für tierische Nahrung."
+msgstr "Anatomical suitability for animal food."
+
+msgid "Anatomischer Flugwert; schaltet allein keinen Flugmodus frei."
+msgstr "Anatomical flight value; does not unlock flight on its own."
+
+msgid "Grundverbrauch des Körperbaus. Ein kleinerer Wert bedeutet weniger Verbrauch."
+msgstr "Base anatomical consumption. A lower value means less consumption."
+
+msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
+msgstr "Hold the left mouse button to rotate · use the mouse wheel to zoom"
+
+msgid "JOURNAL_GUIDE"
+msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\nJ opens this book. Esc closes it."
+
+msgid "JOURNAL_UNSCANNED"
+msgstr "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
+
+msgid "JOURNAL_SPECIES_DETAIL"
+msgstr "%s\nDiscovered on %s"
+
+msgid "JOURNAL_MISSING_VIEW"
+msgstr "\n\nThis earlier discovery has no saved view. Observe the species again to add one."
+
+msgid "JOURNAL_VIEW_HINT"
+msgstr "\n\nRotate view: drag · Zoom: mouse wheel"
+
+msgid "JOURNAL_AWARDED"
+msgstr "\n\nUnlocked by this discovery: %s"
+
+msgid "JOURNAL_GOAL_DETAIL"
+msgstr "%s\n\n%d / %d %s · %s\n\nPreviously saved discoveries count."
+
+msgid "JOURNAL_REGION_DETAIL"
+msgstr "Discovered on %s\n\nRecorded region coordinates: %s / %s"
+
+msgid "JOURNAL_WISH_COMPLETE"
+msgstr "\n\nCollection goal complete."
+
+msgid "JOURNAL_WISH_HINT"
+msgstr "\n\nObserve more new species. Each new species unlocks at most one part; observing a known species again gives no additional part."
+
+msgid "JOURNAL_PINNED"
+msgstr "%s · %s\n%d / %d %s · View in book"
+
+msgid "JOURNAL_ANATOMY_NOTE"
+msgstr "Anatomy values without skill bonuses.\nIn-game values may differ."
+
+msgid "JOURNAL_PART_LEGACY"
+msgstr "\nValues unavailable: the saved anatomy contains legacy parts."
+
+msgid "JOURNAL_PART_NEUTRAL"
+msgstr "\nThis part does not change the calculated anatomy values."
+
+msgid "JOURNAL_PART_CONTRIBUTION"
+msgstr "\nContribution to this anatomy · used %d×"
+
+msgid "JOURNAL_ROLES_EMPTY"
+msgstr "ANIMAL ROLES\nNo readable suitability data exists for this observation.\n\nScanning a species or befriending it does not tame an animal."
+
+msgid "JOURNAL_ROLES_NOTICE"
+msgstr "\nSpecies suitability is not ownership. Taming begins in the tribal age. Riding, ploughing and milking require an owned animal with suitable supplies and equipment."
+
+msgid "JOURNAL_CLOSE_COMPACT"
+msgstr "Back · Esc"
+
+msgid "Kopfmodule"
+msgstr "Head modules"

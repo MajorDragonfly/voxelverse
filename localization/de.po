@@ -3386,3 +3386,480 @@ msgstr "Schweineschnauze"
 
 msgid "EDITOR_PART_MOUTH_PIG_SNOUT_DESCRIPTION"
 msgstr "Kurze Schnauze mit flacher Rüsselscheibe und zwei Nasenlöchern. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels."
+
+msgid "Alle Teile"
+msgstr "Alle Teile"
+
+msgid "Noch gesperrt"
+msgstr "Noch gesperrt"
+
+msgid "Merkliste"
+msgstr "Merkliste"
+
+msgid "Tierrollen ansehen"
+msgstr "Tierrollen ansehen"
+
+msgid "Mit meiner Kreatur vergleichen"
+msgstr "Mit meiner Kreatur vergleichen"
+
+msgid "Im Spiel verfolgen"
+msgstr "Im Spiel verfolgen"
+
+msgid "Alle Lebensweisen / Tierrollen"
+msgstr "Alle Lebensweisen / Tierrollen"
+
+msgid "Alle Kategorien"
+msgstr "Alle Kategorien"
+
+msgid "Tierrolle: %s"
+msgstr "Tierrolle: %s"
+
+msgid "Teil oder Herkunft suchen …"
+msgstr "Teil oder Herkunft suchen …"
+
+msgid "Forschungsziel suchen …"
+msgstr "Forschungsziel suchen …"
+
+msgid "Dein nächster Schritt"
+msgstr "Dein nächster Schritt"
+
+msgid "Unbekannte Art"
+msgstr "Unbekannte Art"
+
+msgid " · gemerkt"
+msgstr " · gemerkt"
+
+msgid "Noch keine Arten entdeckt"
+msgstr "Noch keine Arten entdeckt"
+
+msgid "Keine passenden Einträge"
+msgstr "Keine passenden Einträge"
+
+msgid "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier."
+msgstr "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier."
+
+msgid "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
+msgstr "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
+
+msgid "Deine Teile-Merkliste"
+msgstr "Deine Teile-Merkliste"
+
+msgid "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen."
+msgstr "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen."
+
+msgid "Tierrollen · %s"
+msgstr "Tierrollen · %s"
+
+msgid "noch nicht bekannt"
+msgstr "noch nicht bekannt"
+
+msgid "Noch nicht bekannt"
+msgstr "Noch nicht bekannt"
+
+msgid "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz."
+msgstr "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz."
+
+msgid "Dein Körperbau ist noch nicht verfügbar."
+msgstr "Dein Körperbau ist noch nicht verfügbar."
+
+msgid "Körperbauwerte und beobachtete Teile vergleichen."
+msgstr "Körperbauwerte und beobachtete Teile vergleichen."
+
+msgid "Zur Artenansicht"
+msgstr "Zur Artenansicht"
+
+msgid "KÖRPERTEILE DIESER ART"
+msgstr "KÖRPERTEILE DIESER ART"
+
+msgid "Ziel erreicht"
+msgstr "Ziel erreicht"
+
+msgid "In Arbeit"
+msgstr "In Arbeit"
+
+msgid "FREIGESCHALTET"
+msgstr "FREIGESCHALTET"
+
+msgid "GESPERRT · SILHOUETTE"
+msgstr "GESPERRT · SILHOUETTE"
+
+msgid "Teil"
+msgstr "Teil"
+
+msgid "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken."
+msgstr "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken."
+
+msgid "Von Merkliste entfernen"
+msgstr "Von Merkliste entfernen"
+
+msgid "Nicht mehr verfolgen"
+msgstr "Nicht mehr verfolgen"
+
+msgid "Auswahl gespeichert."
+msgstr "Auswahl gespeichert."
+
+msgid "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil."
+msgstr "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil."
+
+msgid "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog."
+msgstr "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog."
+
+msgid "Es wird gerade gespeichert. Versuche es gleich erneut."
+msgstr "Es wird gerade gespeichert. Versuche es gleich erneut."
+
+msgid "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen."
+msgstr "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen."
+
+msgid "Dein Forschungsziel"
+msgstr "Dein Forschungsziel"
+
+msgid "Ziel nicht verfügbar"
+msgstr "Ziel nicht verfügbar"
+
+msgid "Entdecke deine Welt."
+msgstr "Entdecke deine Welt."
+
+msgid "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen."
+msgstr "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen."
+
+msgid "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden."
+msgstr "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden."
+
+msgid "Verfügbar"
+msgstr "Verfügbar"
+
+msgid "Deine Kreatur"
+msgstr "Deine Kreatur"
+
+msgid "Entdeckte Art"
+msgstr "Entdeckte Art"
+
+msgid "Ansichten einzeln drehen: ziehen · Zoom: Mausrad"
+msgstr "Ansichten einzeln drehen: ziehen · Zoom: Mausrad"
+
+msgid "KÖRPERTEILE DER ENTDECKTEN ART"
+msgstr "KÖRPERTEILE DER ENTDECKTEN ART"
+
+msgid "Körperbau"
+msgstr "Körperbau"
+
+msgid "Du"
+msgstr "Du"
+
+msgid "Art"
+msgstr "Art"
+
+msgid "Art − Du"
+msgstr "Art − Du"
+
+msgid "Wert der entdeckten Art minus dein Körperbauwert."
+msgstr "Wert der entdeckten Art minus dein Körperbauwert."
+
+msgid "Keine gespeicherten Körperteile."
+msgstr "Keine gespeicherten Körperteile."
+
+msgid "Freigeschaltet · im Editor verfügbar"
+msgstr "Freigeschaltet · im Editor verfügbar"
+
+msgid "Dieses frühere Teil fehlt im aktuellen Katalog."
+msgstr "Dieses frühere Teil fehlt im aktuellen Katalog."
+
+msgid "Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile."
+msgstr "Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile."
+
+msgid "Pflanzenfresser"
+msgstr "Pflanzenfresser"
+
+msgid "Räuber"
+msgstr "Räuber"
+
+msgid "Sammler"
+msgstr "Sammler"
+
+msgid "Aasfresser"
+msgstr "Aasfresser"
+
+msgid "Kletterer"
+msgstr "Kletterer"
+
+msgid "Wasserbewohner"
+msgstr "Wasserbewohner"
+
+msgid "Körper"
+msgstr "Körper"
+
+msgid "Mäuler"
+msgstr "Mäuler"
+
+msgid "Augen"
+msgstr "Augen"
+
+msgid "Beine"
+msgstr "Beine"
+
+msgid "Arme"
+msgstr "Arme"
+
+msgid "Schwänze"
+msgstr "Schwänze"
+
+msgid "Hörner"
+msgstr "Hörner"
+
+msgid "Panzerplatten"
+msgstr "Panzerplatten"
+
+msgid "Stacheln"
+msgstr "Stacheln"
+
+msgid "Verzierungen"
+msgstr "Verzierungen"
+
+msgid "Farben"
+msgstr "Farben"
+
+msgid "Füße"
+msgstr "Füße"
+
+msgid "Hände"
+msgstr "Hände"
+
+msgid "Milchtier"
+msgstr "Milchtier"
+
+msgid "Zugtier"
+msgstr "Zugtier"
+
+msgid "Reittier"
+msgstr "Reittier"
+
+msgid "Begleittier"
+msgstr "Begleittier"
+
+msgid "Eiertier"
+msgstr "Eiertier"
+
+msgid "Pflanzen"
+msgstr "Pflanzen"
+
+msgid "Fleisch"
+msgstr "Fleisch"
+
+msgid "ruhiges Temperament"
+msgstr "ruhiges Temperament"
+
+msgid "soziales Temperament"
+msgstr "soziales Temperament"
+
+msgid "TIERROLLEN · GESCANNTE ART"
+msgstr "TIERROLLEN · GESCANNTE ART"
+
+msgid "Grundsätzlich zähmbar · %s"
+msgstr "Grundsätzlich zähmbar · %s"
+
+msgid "Nahrung: %s · Wasser: %s l je 300 Spielsekunden"
+msgstr "Nahrung: %s · Wasser: %s l je 300 Spielsekunden"
+
+msgid "Lernfähigkeit: %d %% · Sozialverträglichkeit: %d %% · Bindungsfähigkeit: %d %%"
+msgstr "Lernfähigkeit: %d %% · Sozialverträglichkeit: %d %% · Bindungsfähigkeit: %d %%"
+
+msgid "Ausdauer bei Nennlast: %s s · Bodentempo: %s m/s"
+msgstr "Ausdauer bei Nennlast: %s s · Bodentempo: %s m/s"
+
+msgid "Wahrnehmung: %s m"
+msgstr "Wahrnehmung: %s m"
+
+msgid "Milcheignung: %s l je %s aktive Spielsekunden"
+msgstr "Milcheignung: %s l je %s aktive Spielsekunden"
+
+msgid "Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich."
+msgstr "Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich."
+
+msgid "Zugkraft: %s N · benötigt passenden Geschirr-Anschluss"
+msgstr "Zugkraft: %s N · benötigt passenden Geschirr-Anschluss"
+
+msgid "Zusätzliche Traglast: %s kg · benötigt passenden Sattel-Anschluss"
+msgstr "Zusätzliche Traglast: %s kg · benötigt passenden Sattel-Anschluss"
+
+msgid "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar."
+msgstr "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar."
+
+msgid "Noch gesperrt · weitere Arten beobachten"
+msgstr "Noch gesperrt · weitere Arten beobachten"
+
+msgid "Entdeckt bei %s · %s"
+msgstr "Entdeckt bei %s · %s"
+
+msgid "unbekannter Art"
+msgstr "unbekannter Art"
+
+msgid "Von Beginn an verfügbar"
+msgstr "Von Beginn an verfügbar"
+
+msgid "Durch Artenentdeckung · ursprüngliche Art nicht vermerkt"
+msgstr "Durch Artenentdeckung · ursprüngliche Art nicht vermerkt"
+
+msgid "Aus deinem bisherigen Kreaturenentwurf übernommen"
+msgstr "Aus deinem bisherigen Kreaturenentwurf übernommen"
+
+msgid "Bereits freigeschaltet"
+msgstr "Bereits freigeschaltet"
+
+msgid "Welt %s"
+msgstr "Welt %s"
+
+msgid "unbekannt"
+msgstr "unbekannt"
+
+msgid "Region %s / %s"
+msgstr "Region %s / %s"
+
+msgid "Zurück zum Nest · nach der Erholung kannst du weiter erkunden."
+msgstr "Zurück zum Nest · nach der Erholung kannst du weiter erkunden."
+
+msgid "Wasser suchen · gehe ans Wasser und trinke mit Linksklick."
+msgstr "Wasser suchen · gehe ans Wasser und trinke mit Linksklick."
+
+msgid "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt."
+msgstr "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt."
+
+msgid "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+msgstr "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+
+msgid "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2."
+msgstr "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2."
+
+msgid "Erste Begegnung"
+msgstr "Erste Begegnung"
+
+msgid "Artenvielfalt"
+msgstr "Artenvielfalt"
+
+msgid "Leben im Wasser"
+msgstr "Leben im Wasser"
+
+msgid "Neue Horizonte"
+msgstr "Neue Horizonte"
+
+msgid "Feldforscher"
+msgstr "Feldforscher"
+
+msgid "Wasserart"
+msgstr "Wasserart"
+
+msgid "Ziel nicht mehr verfügbar"
+msgstr "Ziel nicht mehr verfügbar"
+
+msgid "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen."
+msgstr "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen."
+
+msgid "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+msgstr "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+
+msgid "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal."
+msgstr "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal."
+
+msgid "Entdecke eine wasserbewohnende Tierart. Suche an Gewässern und scanne sie mit %s."
+msgstr "Entdecke eine wasserbewohnende Tierart. Suche an Gewässern und scanne sie mit %s."
+
+msgid "Erkunde drei verschiedene Regionen. Neu betretene Regionen werden vom Spiel erfasst; wiederholte Besuche zählen nicht mehrfach."
+msgstr "Erkunde drei verschiedene Regionen. Neu betretene Regionen werden vom Spiel erfasst; wiederholte Besuche zählen nicht mehrfach."
+
+msgid "Entdecke zehn verschiedene Tierarten. Die Entdeckungen deiner gesamten Kampagne zählen mit."
+msgstr "Entdecke zehn verschiedene Tierarten. Die Entdeckungen deiner gesamten Kampagne zählen mit."
+
+msgid "Angriffswert des Körperbaus; kein garantierter Schaden pro Biss."
+msgstr "Angriffswert des Körperbaus; kein garantierter Schaden pro Biss."
+
+msgid "Verteidigungswert durch Körper und angesetzte Teile."
+msgstr "Verteidigungswert durch Körper und angesetzte Teile."
+
+msgid "Körperbauwert für Gesundheit, einschließlich Körpergröße; keine aktuelle Gesundheit."
+msgstr "Körperbauwert für Gesundheit, einschließlich Körpergröße; keine aktuelle Gesundheit."
+
+msgid "Tempo des Körperbaus einschließlich Masse; Bewegung im Spiel kann begrenzt sein."
+msgstr "Tempo des Körperbaus einschließlich Masse; Bewegung im Spiel kann begrenzt sein."
+
+msgid "Sprungwert des Körperbaus; keine Höhenangabe in Metern."
+msgstr "Sprungwert des Körperbaus; keine Höhenangabe in Metern."
+
+msgid "Anatomischer Schwimmwert. Daraus folgt keine bestimmte Schwimmgeschwindigkeit."
+msgstr "Anatomischer Schwimmwert. Daraus folgt keine bestimmte Schwimmgeschwindigkeit."
+
+msgid "Wahrnehmungswert durch Körperteile."
+msgstr "Wahrnehmungswert durch Körperteile."
+
+msgid "Greifwert durch Körperteile."
+msgstr "Greifwert durch Körperteile."
+
+msgid "Eignung des Körperbaus für pflanzliche Nahrung."
+msgstr "Eignung des Körperbaus für pflanzliche Nahrung."
+
+msgid "Eignung des Körperbaus für tierische Nahrung."
+msgstr "Eignung des Körperbaus für tierische Nahrung."
+
+msgid "Anatomischer Flugwert; schaltet allein keinen Flugmodus frei."
+msgstr "Anatomischer Flugwert; schaltet allein keinen Flugmodus frei."
+
+msgid "Grundverbrauch des Körperbaus. Ein kleinerer Wert bedeutet weniger Verbrauch."
+msgstr "Grundverbrauch des Körperbaus. Ein kleinerer Wert bedeutet weniger Verbrauch."
+
+msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
+msgstr "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
+
+msgid "JOURNAL_GUIDE"
+msgstr "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Esc schließt es wieder."
+
+msgid "JOURNAL_UNSCANNED"
+msgstr "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht."
+
+msgid "JOURNAL_SPECIES_DETAIL"
+msgstr "%s\nEntdeckt auf %s"
+
+msgid "JOURNAL_MISSING_VIEW"
+msgstr "\n\nFür diese frühere Entdeckung fehlt eine gespeicherte Ansicht. Beobachte die Art erneut, um sie zu ergänzen."
+
+msgid "JOURNAL_VIEW_HINT"
+msgstr "\n\nAnsicht drehen: ziehen · Zoom: Mausrad"
+
+msgid "JOURNAL_AWARDED"
+msgstr "\n\nBei dieser Entdeckung freigeschaltet: %s"
+
+msgid "JOURNAL_GOAL_DETAIL"
+msgstr "%s\n\n%d / %d %s · %s\n\nBereits gespeicherte Entdeckungen zählen mit."
+
+msgid "JOURNAL_REGION_DETAIL"
+msgstr "Entdeckt auf %s\n\nGespeicherte Regionskoordinaten: %s / %s"
+
+msgid "JOURNAL_WISH_COMPLETE"
+msgstr "\n\nSammelziel erreicht."
+
+msgid "JOURNAL_WISH_HINT"
+msgstr "\n\nWeitere neue Arten beobachten. Pro neuer Art wird höchstens ein Teil freigeschaltet; erneutes Beobachten bekannter Arten gibt kein weiteres Teil."
+
+msgid "JOURNAL_PINNED"
+msgstr "%s · %s\n%d / %d %s · Im Buch ansehen"
+
+msgid "JOURNAL_ANATOMY_NOTE"
+msgstr "Körperbauwerte ohne Skillboni.\nDie Spielwerte können abweichen."
+
+msgid "JOURNAL_PART_LEGACY"
+msgstr "\nWerte nicht verfügbar: Der gespeicherte Körperbau enthält frühere Teile."
+
+msgid "JOURNAL_PART_NEUTRAL"
+msgstr "\nDieses Teil verändert die berechneten Körperbauwerte nicht."
+
+msgid "JOURNAL_PART_CONTRIBUTION"
+msgstr "\nBeitrag in diesem Körperbau · %d× verbaut"
+
+msgid "JOURNAL_ROLES_EMPTY"
+msgstr "TIERROLLEN\nFür diese Beobachtung sind keine lesbaren Eignungsdaten vorhanden.\n\nEin Artenscan oder eine Freundschaft bedeutet keine Zähmung."
+
+msgid "JOURNAL_ROLES_NOTICE"
+msgstr "\nArt-Eignung ist kein Tierbesitz. Zähmung beginnt im Stammeszeitalter. Reiten, Pflügen und Milchgewinnung benötigen ein eigenes Tier und die passende Versorgung und Ausrüstung."
+
+msgid "JOURNAL_CLOSE_COMPACT"
+msgstr "Zurück · Esc"
+
+msgid "Kopfmodule"
+msgstr "Kopfmodule"

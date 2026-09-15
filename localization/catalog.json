@@ -5646,6 +5646,801 @@
       "key": "EDITOR_PART_MOUTH_PIG_SNOUT_DESCRIPTION",
       "de": "Kurze Schnauze mit flacher Rüsselscheibe und zwei Nasenlöchern. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels.",
       "en": "Short snout with a flat nose disc and two nostrils. Shares the broad beak omnivore profile and unlock."
+    },
+    {
+      "key": "Alle Teile",
+      "de": "Alle Teile",
+      "en": "All parts"
+    },
+    {
+      "key": "Noch gesperrt",
+      "de": "Noch gesperrt",
+      "en": "Still locked"
+    },
+    {
+      "key": "Merkliste",
+      "de": "Merkliste",
+      "en": "Wishlist"
+    },
+    {
+      "key": "Tierrollen ansehen",
+      "de": "Tierrollen ansehen",
+      "en": "View animal roles"
+    },
+    {
+      "key": "Mit meiner Kreatur vergleichen",
+      "de": "Mit meiner Kreatur vergleichen",
+      "en": "Compare with my creature"
+    },
+    {
+      "key": "Im Spiel verfolgen",
+      "de": "Im Spiel verfolgen",
+      "en": "Track in game"
+    },
+    {
+      "key": "Alle Lebensweisen / Tierrollen",
+      "de": "Alle Lebensweisen / Tierrollen",
+      "en": "All lifestyles / animal roles"
+    },
+    {
+      "key": "Alle Kategorien",
+      "de": "Alle Kategorien",
+      "en": "All categories"
+    },
+    {
+      "key": "Tierrolle: %s",
+      "de": "Tierrolle: %s",
+      "en": "Animal role: %s"
+    },
+    {
+      "key": "Teil oder Herkunft suchen …",
+      "de": "Teil oder Herkunft suchen …",
+      "en": "Search part or origin…"
+    },
+    {
+      "key": "Forschungsziel suchen …",
+      "de": "Forschungsziel suchen …",
+      "en": "Search research goals…"
+    },
+    {
+      "key": "Dein nächster Schritt",
+      "de": "Dein nächster Schritt",
+      "en": "Your next step"
+    },
+    {
+      "key": "Unbekannte Art",
+      "de": "Unbekannte Art",
+      "en": "Unknown species"
+    },
+    {
+      "key": " · gemerkt",
+      "de": " · gemerkt",
+      "en": " · wished"
+    },
+    {
+      "key": "Noch keine Arten entdeckt",
+      "de": "Noch keine Arten entdeckt",
+      "en": "No species discovered yet"
+    },
+    {
+      "key": "Keine passenden Einträge",
+      "de": "Keine passenden Einträge",
+      "en": "No matching entries"
+    },
+    {
+      "key": "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier.",
+      "de": "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier.",
+      "en": "Open scan mode and keep an animal in the crosshair for 2.5 seconds. When the circle fills, its species appears here."
+    },
+    {
+      "key": "Ändere die Suche oder den Filter, um weitere Einträge zu sehen.",
+      "de": "Ändere die Suche oder den Filter, um weitere Einträge zu sehen.",
+      "en": "Change your search or filter to see more entries."
+    },
+    {
+      "key": "Deine Teile-Merkliste",
+      "de": "Deine Teile-Merkliste",
+      "en": "Your body-part wishlist"
+    },
+    {
+      "key": "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen.",
+      "de": "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen.",
+      "en": "Choose a body part under “Still locked” and add it to your wishlist. You can track one wished part as a goal in the game."
+    },
+    {
+      "key": "Tierrollen · %s",
+      "de": "Tierrollen · %s",
+      "en": "Animal roles · %s"
+    },
+    {
+      "key": "noch nicht bekannt",
+      "de": "noch nicht bekannt",
+      "en": "not yet known"
+    },
+    {
+      "key": "Noch nicht bekannt",
+      "de": "Noch nicht bekannt",
+      "en": "Not yet known"
+    },
+    {
+      "key": "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz.",
+      "de": "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz.",
+      "en": "Show or hide recorded species suitability. This does not indicate ownership."
+    },
+    {
+      "key": "Dein Körperbau ist noch nicht verfügbar.",
+      "de": "Dein Körperbau ist noch nicht verfügbar.",
+      "en": "Your creature's anatomy is not available yet."
+    },
+    {
+      "key": "Körperbauwerte und beobachtete Teile vergleichen.",
+      "de": "Körperbauwerte und beobachtete Teile vergleichen.",
+      "en": "Compare anatomy values and observed parts."
+    },
+    {
+      "key": "Zur Artenansicht",
+      "de": "Zur Artenansicht",
+      "en": "Back to species view"
+    },
+    {
+      "key": "KÖRPERTEILE DIESER ART",
+      "de": "KÖRPERTEILE DIESER ART",
+      "en": "BODY PARTS OF THIS SPECIES"
+    },
+    {
+      "key": "Ziel erreicht",
+      "de": "Ziel erreicht",
+      "en": "Goal complete"
+    },
+    {
+      "key": "In Arbeit",
+      "de": "In Arbeit",
+      "en": "In progress"
+    },
+    {
+      "key": "FREIGESCHALTET",
+      "de": "FREIGESCHALTET",
+      "en": "UNLOCKED"
+    },
+    {
+      "key": "GESPERRT · SILHOUETTE",
+      "de": "GESPERRT · SILHOUETTE",
+      "en": "LOCKED · SILHOUETTE"
+    },
+    {
+      "key": "Teil",
+      "de": "Teil",
+      "en": "Part"
+    },
+    {
+      "key": "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken.",
+      "de": "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken.",
+      "en": "Available in the creature editor · close the book and press F2."
+    },
+    {
+      "key": "Von Merkliste entfernen",
+      "de": "Von Merkliste entfernen",
+      "en": "Remove from wishlist"
+    },
+    {
+      "key": "Nicht mehr verfolgen",
+      "de": "Nicht mehr verfolgen",
+      "en": "Stop tracking"
+    },
+    {
+      "key": "Auswahl gespeichert.",
+      "de": "Auswahl gespeichert.",
+      "en": "Selection saved."
+    },
+    {
+      "key": "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil.",
+      "de": "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil.",
+      "en": "Your wishlist is full (32 parts). Remove another part first."
+    },
+    {
+      "key": "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog.",
+      "de": "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog.",
+      "en": "This part is already available or missing from the catalog."
+    },
+    {
+      "key": "Es wird gerade gespeichert. Versuche es gleich erneut.",
+      "de": "Es wird gerade gespeichert. Versuche es gleich erneut.",
+      "en": "Saving is in progress. Try again shortly."
+    },
+    {
+      "key": "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen.",
+      "de": "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen.",
+      "en": "Saving failed. Your previous selection is preserved; you can try again."
+    },
+    {
+      "key": "Dein Forschungsziel",
+      "de": "Dein Forschungsziel",
+      "en": "Your research goal"
+    },
+    {
+      "key": "Ziel nicht verfügbar",
+      "de": "Ziel nicht verfügbar",
+      "en": "Goal unavailable"
+    },
+    {
+      "key": "Entdecke deine Welt.",
+      "de": "Entdecke deine Welt.",
+      "en": "Discover your world."
+    },
+    {
+      "key": "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen.",
+      "de": "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen.",
+      "en": "Your tribe · select residents and give the group an order. J opens your shared discoveries."
+    },
+    {
+      "key": "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden.",
+      "de": "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden.",
+      "en": "The display was changed, but the preference could not be saved for next time."
+    },
+    {
+      "key": "Verfügbar",
+      "de": "Verfügbar",
+      "en": "Available"
+    },
+    {
+      "key": "Deine Kreatur",
+      "de": "Deine Kreatur",
+      "en": "Your creature"
+    },
+    {
+      "key": "Entdeckte Art",
+      "de": "Entdeckte Art",
+      "en": "Observed species"
+    },
+    {
+      "key": "Ansichten einzeln drehen: ziehen · Zoom: Mausrad",
+      "de": "Ansichten einzeln drehen: ziehen · Zoom: Mausrad",
+      "en": "Rotate each view: drag · Zoom: mouse wheel"
+    },
+    {
+      "key": "KÖRPERTEILE DER ENTDECKTEN ART",
+      "de": "KÖRPERTEILE DER ENTDECKTEN ART",
+      "en": "BODY PARTS OF THE OBSERVED SPECIES"
+    },
+    {
+      "key": "Körperbau",
+      "de": "Körperbau",
+      "en": "Anatomy"
+    },
+    {
+      "key": "Du",
+      "de": "Du",
+      "en": "You"
+    },
+    {
+      "key": "Art",
+      "de": "Art",
+      "en": "Species"
+    },
+    {
+      "key": "Art − Du",
+      "de": "Art − Du",
+      "en": "Species − you"
+    },
+    {
+      "key": "Wert der entdeckten Art minus dein Körperbauwert.",
+      "de": "Wert der entdeckten Art minus dein Körperbauwert.",
+      "en": "Observed species value minus your anatomy value."
+    },
+    {
+      "key": "Keine gespeicherten Körperteile.",
+      "de": "Keine gespeicherten Körperteile.",
+      "en": "No recorded body parts."
+    },
+    {
+      "key": "Freigeschaltet · im Editor verfügbar",
+      "de": "Freigeschaltet · im Editor verfügbar",
+      "en": "Unlocked · available in the editor"
+    },
+    {
+      "key": "Dieses frühere Teil fehlt im aktuellen Katalog.",
+      "de": "Dieses frühere Teil fehlt im aktuellen Katalog.",
+      "en": "This legacy part is missing from the current catalog."
+    },
+    {
+      "key": "Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile.",
+      "de": "Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile.",
+      "en": "Values unavailable: a saved anatomy is incomplete or contains legacy parts."
+    },
+    {
+      "key": "Pflanzenfresser",
+      "de": "Pflanzenfresser",
+      "en": "Grazer"
+    },
+    {
+      "key": "Räuber",
+      "de": "Räuber",
+      "en": "Predator"
+    },
+    {
+      "key": "Sammler",
+      "de": "Sammler",
+      "en": "Forager"
+    },
+    {
+      "key": "Aasfresser",
+      "de": "Aasfresser",
+      "en": "Scavenger"
+    },
+    {
+      "key": "Kletterer",
+      "de": "Kletterer",
+      "en": "Climber"
+    },
+    {
+      "key": "Wasserbewohner",
+      "de": "Wasserbewohner",
+      "en": "Aquatic species"
+    },
+    {
+      "key": "Körper",
+      "de": "Körper",
+      "en": "Body"
+    },
+    {
+      "key": "Mäuler",
+      "de": "Mäuler",
+      "en": "Mouths"
+    },
+    {
+      "key": "Augen",
+      "de": "Augen",
+      "en": "Eyes"
+    },
+    {
+      "key": "Beine",
+      "de": "Beine",
+      "en": "Legs"
+    },
+    {
+      "key": "Arme",
+      "de": "Arme",
+      "en": "Arms"
+    },
+    {
+      "key": "Schwänze",
+      "de": "Schwänze",
+      "en": "Tails"
+    },
+    {
+      "key": "Hörner",
+      "de": "Hörner",
+      "en": "Horns"
+    },
+    {
+      "key": "Panzerplatten",
+      "de": "Panzerplatten",
+      "en": "Armor plates"
+    },
+    {
+      "key": "Stacheln",
+      "de": "Stacheln",
+      "en": "Spikes"
+    },
+    {
+      "key": "Verzierungen",
+      "de": "Verzierungen",
+      "en": "Decorations"
+    },
+    {
+      "key": "Farben",
+      "de": "Farben",
+      "en": "Colors"
+    },
+    {
+      "key": "Füße",
+      "de": "Füße",
+      "en": "Feet"
+    },
+    {
+      "key": "Hände",
+      "de": "Hände",
+      "en": "Hands"
+    },
+    {
+      "key": "Milchtier",
+      "de": "Milchtier",
+      "en": "Milk animal"
+    },
+    {
+      "key": "Zugtier",
+      "de": "Zugtier",
+      "en": "Draught animal"
+    },
+    {
+      "key": "Reittier",
+      "de": "Reittier",
+      "en": "Riding animal"
+    },
+    {
+      "key": "Begleittier",
+      "de": "Begleittier",
+      "en": "Companion animal"
+    },
+    {
+      "key": "Eiertier",
+      "de": "Eiertier",
+      "en": "Egg animal"
+    },
+    {
+      "key": "Pflanzen",
+      "de": "Pflanzen",
+      "en": "Plants"
+    },
+    {
+      "key": "Fleisch",
+      "de": "Fleisch",
+      "en": "Meat"
+    },
+    {
+      "key": "ruhiges Temperament",
+      "de": "ruhiges Temperament",
+      "en": "calm temperament"
+    },
+    {
+      "key": "soziales Temperament",
+      "de": "soziales Temperament",
+      "en": "social temperament"
+    },
+    {
+      "key": "TIERROLLEN · GESCANNTE ART",
+      "de": "TIERROLLEN · GESCANNTE ART",
+      "en": "ANIMAL ROLES · SCANNED SPECIES"
+    },
+    {
+      "key": "Grundsätzlich zähmbar · %s",
+      "de": "Grundsätzlich zähmbar · %s",
+      "en": "Tameable species · %s"
+    },
+    {
+      "key": "Nahrung: %s · Wasser: %s l je 300 Spielsekunden",
+      "de": "Nahrung: %s · Wasser: %s l je 300 Spielsekunden",
+      "en": "Food: %s · water: %s l per 300 game seconds"
+    },
+    {
+      "key": "Lernfähigkeit: %d %% · Sozialverträglichkeit: %d %% · Bindungsfähigkeit: %d %%",
+      "de": "Lernfähigkeit: %d %% · Sozialverträglichkeit: %d %% · Bindungsfähigkeit: %d %%",
+      "en": "Trainability: %d %% · sociability: %d %% · bonding: %d %%"
+    },
+    {
+      "key": "Ausdauer bei Nennlast: %s s · Bodentempo: %s m/s",
+      "de": "Ausdauer bei Nennlast: %s s · Bodentempo: %s m/s",
+      "en": "Stamina at rated load: %s s · ground speed: %s m/s"
+    },
+    {
+      "key": "Wahrnehmung: %s m",
+      "de": "Wahrnehmung: %s m",
+      "en": "Perception: %s m"
+    },
+    {
+      "key": "Milcheignung: %s l je %s aktive Spielsekunden",
+      "de": "Milcheignung: %s l je %s aktive Spielsekunden",
+      "en": "Milk suitability: %s l per %s active game seconds"
+    },
+    {
+      "key": "Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich.",
+      "de": "Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich.",
+      "en": "Egg husbandry in the tribal age requires an owned animal, a nesting site and supplies."
+    },
+    {
+      "key": "Zugkraft: %s N · benötigt passenden Geschirr-Anschluss",
+      "de": "Zugkraft: %s N · benötigt passenden Geschirr-Anschluss",
+      "en": "Pulling force: %s N · requires a compatible harness attachment"
+    },
+    {
+      "key": "Zusätzliche Traglast: %s kg · benötigt passenden Sattel-Anschluss",
+      "de": "Zusätzliche Traglast: %s kg · benötigt passenden Sattel-Anschluss",
+      "en": "Additional carrying capacity: %s kg · requires a compatible saddle attachment"
+    },
+    {
+      "key": "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar.",
+      "de": "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar.",
+      "en": "This saved part is unavailable in the current part catalog."
+    },
+    {
+      "key": "Noch gesperrt · weitere Arten beobachten",
+      "de": "Noch gesperrt · weitere Arten beobachten",
+      "en": "Still locked · observe more species"
+    },
+    {
+      "key": "Entdeckt bei %s · %s",
+      "de": "Entdeckt bei %s · %s",
+      "en": "Discovered from %s · %s"
+    },
+    {
+      "key": "unbekannter Art",
+      "de": "unbekannter Art",
+      "en": "unknown species"
+    },
+    {
+      "key": "Von Beginn an verfügbar",
+      "de": "Von Beginn an verfügbar",
+      "en": "Available from the start"
+    },
+    {
+      "key": "Durch Artenentdeckung · ursprüngliche Art nicht vermerkt",
+      "de": "Durch Artenentdeckung · ursprüngliche Art nicht vermerkt",
+      "en": "Unlocked by discovering a species · original species not recorded"
+    },
+    {
+      "key": "Aus deinem bisherigen Kreaturenentwurf übernommen",
+      "de": "Aus deinem bisherigen Kreaturenentwurf übernommen",
+      "en": "Imported from your previous creature design"
+    },
+    {
+      "key": "Bereits freigeschaltet",
+      "de": "Bereits freigeschaltet",
+      "en": "Already unlocked"
+    },
+    {
+      "key": "Welt %s",
+      "de": "Welt %s",
+      "en": "World %s"
+    },
+    {
+      "key": "unbekannt",
+      "de": "unbekannt",
+      "en": "unknown"
+    },
+    {
+      "key": "Region %s / %s",
+      "de": "Region %s / %s",
+      "en": "Region %s / %s"
+    },
+    {
+      "key": "Zurück zum Nest · nach der Erholung kannst du weiter erkunden.",
+      "de": "Zurück zum Nest · nach der Erholung kannst du weiter erkunden.",
+      "en": "Return to the nest · continue exploring after recovering."
+    },
+    {
+      "key": "Wasser suchen · gehe ans Wasser und trinke mit Linksklick.",
+      "de": "Wasser suchen · gehe ans Wasser und trinke mit Linksklick.",
+      "en": "Find water · approach it and drink with left click."
+    },
+    {
+      "key": "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt.",
+      "de": "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt.",
+      "en": "Find food · left-click food suited to your creature."
+    },
+    {
+      "key": "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
+      "de": "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
+      "en": "Your first species · %s opens scan mode. Keep an animal in the crosshair until the circle fills."
+    },
+    {
+      "key": "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2.",
+      "de": "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2.",
+      "en": "Keep exploring · use %s to scan unknown species. Find new parts in the editor with F2."
+    },
+    {
+      "key": "Erste Begegnung",
+      "de": "Erste Begegnung",
+      "en": "First encounter"
+    },
+    {
+      "key": "Artenvielfalt",
+      "de": "Artenvielfalt",
+      "en": "Species diversity"
+    },
+    {
+      "key": "Leben im Wasser",
+      "de": "Leben im Wasser",
+      "en": "Life in water"
+    },
+    {
+      "key": "Neue Horizonte",
+      "de": "Neue Horizonte",
+      "en": "New horizons"
+    },
+    {
+      "key": "Feldforscher",
+      "de": "Feldforscher",
+      "en": "Field researcher"
+    },
+    {
+      "key": "Wasserart",
+      "de": "Wasserart",
+      "en": "Aquatic species"
+    },
+    {
+      "key": "Ziel nicht mehr verfügbar",
+      "de": "Ziel nicht mehr verfügbar",
+      "en": "Goal no longer available"
+    },
+    {
+      "key": "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen.",
+      "de": "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen.",
+      "en": "This tracked goal belongs to an earlier version. Stop tracking it or choose another goal."
+    },
+    {
+      "key": "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
+      "de": "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
+      "en": "Discover your first species. Open scan mode with %s and keep an animal in the crosshair until the circle fills."
+    },
+    {
+      "key": "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal.",
+      "de": "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal.",
+      "en": "Discover three different species. Observing known species again does not count twice."
+    },
+    {
+      "key": "Entdecke eine wasserbewohnende Tierart. Suche an Gewässern und scanne sie mit %s.",
+      "de": "Entdecke eine wasserbewohnende Tierart. Suche an Gewässern und scanne sie mit %s.",
+      "en": "Discover an aquatic species. Search near water and scan it with %s."
+    },
+    {
+      "key": "Erkunde drei verschiedene Regionen. Neu betretene Regionen werden vom Spiel erfasst; wiederholte Besuche zählen nicht mehrfach.",
+      "de": "Erkunde drei verschiedene Regionen. Neu betretene Regionen werden vom Spiel erfasst; wiederholte Besuche zählen nicht mehrfach.",
+      "en": "Explore three different regions. Newly entered regions are recorded automatically; repeat visits do not count again."
+    },
+    {
+      "key": "Entdecke zehn verschiedene Tierarten. Die Entdeckungen deiner gesamten Kampagne zählen mit.",
+      "de": "Entdecke zehn verschiedene Tierarten. Die Entdeckungen deiner gesamten Kampagne zählen mit.",
+      "en": "Discover ten different species. Discoveries from your entire campaign count."
+    },
+    {
+      "key": "Angriffswert des Körperbaus; kein garantierter Schaden pro Biss.",
+      "de": "Angriffswert des Körperbaus; kein garantierter Schaden pro Biss.",
+      "en": "Anatomy attack value; not guaranteed damage per bite."
+    },
+    {
+      "key": "Verteidigungswert durch Körper und angesetzte Teile.",
+      "de": "Verteidigungswert durch Körper und angesetzte Teile.",
+      "en": "Defense value from the body and attached parts."
+    },
+    {
+      "key": "Körperbauwert für Gesundheit, einschließlich Körpergröße; keine aktuelle Gesundheit.",
+      "de": "Körperbauwert für Gesundheit, einschließlich Körpergröße; keine aktuelle Gesundheit.",
+      "en": "Anatomical health value, including body size; not current health."
+    },
+    {
+      "key": "Tempo des Körperbaus einschließlich Masse; Bewegung im Spiel kann begrenzt sein.",
+      "de": "Tempo des Körperbaus einschließlich Masse; Bewegung im Spiel kann begrenzt sein.",
+      "en": "Anatomical speed including mass; movement in the game may be limited."
+    },
+    {
+      "key": "Sprungwert des Körperbaus; keine Höhenangabe in Metern.",
+      "de": "Sprungwert des Körperbaus; keine Höhenangabe in Metern.",
+      "en": "Anatomical jump value; not a height in meters."
+    },
+    {
+      "key": "Anatomischer Schwimmwert. Daraus folgt keine bestimmte Schwimmgeschwindigkeit.",
+      "de": "Anatomischer Schwimmwert. Daraus folgt keine bestimmte Schwimmgeschwindigkeit.",
+      "en": "Anatomical swimming value. This does not specify a swimming speed."
+    },
+    {
+      "key": "Wahrnehmungswert durch Körperteile.",
+      "de": "Wahrnehmungswert durch Körperteile.",
+      "en": "Perception value from body parts."
+    },
+    {
+      "key": "Greifwert durch Körperteile.",
+      "de": "Greifwert durch Körperteile.",
+      "en": "Grip value from body parts."
+    },
+    {
+      "key": "Eignung des Körperbaus für pflanzliche Nahrung.",
+      "de": "Eignung des Körperbaus für pflanzliche Nahrung.",
+      "en": "Anatomical suitability for plant food."
+    },
+    {
+      "key": "Eignung des Körperbaus für tierische Nahrung.",
+      "de": "Eignung des Körperbaus für tierische Nahrung.",
+      "en": "Anatomical suitability for animal food."
+    },
+    {
+      "key": "Anatomischer Flugwert; schaltet allein keinen Flugmodus frei.",
+      "de": "Anatomischer Flugwert; schaltet allein keinen Flugmodus frei.",
+      "en": "Anatomical flight value; does not unlock flight on its own."
+    },
+    {
+      "key": "Grundverbrauch des Körperbaus. Ein kleinerer Wert bedeutet weniger Verbrauch.",
+      "de": "Grundverbrauch des Körperbaus. Ein kleinerer Wert bedeutet weniger Verbrauch.",
+      "en": "Base anatomical consumption. A lower value means less consumption."
+    },
+    {
+      "key": "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen",
+      "de": "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen",
+      "en": "Hold the left mouse button to rotate · use the mouse wheel to zoom"
+    },
+    {
+      "key": "JOURNAL_GUIDE",
+      "de": "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Esc schließt es wieder.",
+      "en": "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\nJ opens this book. Esc closes it."
+    },
+    {
+      "key": "JOURNAL_UNSCANNED",
+      "de": "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht.",
+      "en": "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
+    },
+    {
+      "key": "JOURNAL_SPECIES_DETAIL",
+      "de": "%s\nEntdeckt auf %s",
+      "en": "%s\nDiscovered on %s"
+    },
+    {
+      "key": "JOURNAL_MISSING_VIEW",
+      "de": "\n\nFür diese frühere Entdeckung fehlt eine gespeicherte Ansicht. Beobachte die Art erneut, um sie zu ergänzen.",
+      "en": "\n\nThis earlier discovery has no saved view. Observe the species again to add one."
+    },
+    {
+      "key": "JOURNAL_VIEW_HINT",
+      "de": "\n\nAnsicht drehen: ziehen · Zoom: Mausrad",
+      "en": "\n\nRotate view: drag · Zoom: mouse wheel"
+    },
+    {
+      "key": "JOURNAL_AWARDED",
+      "de": "\n\nBei dieser Entdeckung freigeschaltet: %s",
+      "en": "\n\nUnlocked by this discovery: %s"
+    },
+    {
+      "key": "JOURNAL_GOAL_DETAIL",
+      "de": "%s\n\n%d / %d %s · %s\n\nBereits gespeicherte Entdeckungen zählen mit.",
+      "en": "%s\n\n%d / %d %s · %s\n\nPreviously saved discoveries count."
+    },
+    {
+      "key": "JOURNAL_REGION_DETAIL",
+      "de": "Entdeckt auf %s\n\nGespeicherte Regionskoordinaten: %s / %s",
+      "en": "Discovered on %s\n\nRecorded region coordinates: %s / %s"
+    },
+    {
+      "key": "JOURNAL_WISH_COMPLETE",
+      "de": "\n\nSammelziel erreicht.",
+      "en": "\n\nCollection goal complete."
+    },
+    {
+      "key": "JOURNAL_WISH_HINT",
+      "de": "\n\nWeitere neue Arten beobachten. Pro neuer Art wird höchstens ein Teil freigeschaltet; erneutes Beobachten bekannter Arten gibt kein weiteres Teil.",
+      "en": "\n\nObserve more new species. Each new species unlocks at most one part; observing a known species again gives no additional part."
+    },
+    {
+      "key": "JOURNAL_PINNED",
+      "de": "%s · %s\n%d / %d %s · Im Buch ansehen",
+      "en": "%s · %s\n%d / %d %s · View in book"
+    },
+    {
+      "key": "JOURNAL_ANATOMY_NOTE",
+      "de": "Körperbauwerte ohne Skillboni.\nDie Spielwerte können abweichen.",
+      "en": "Anatomy values without skill bonuses.\nIn-game values may differ."
+    },
+    {
+      "key": "JOURNAL_PART_LEGACY",
+      "de": "\nWerte nicht verfügbar: Der gespeicherte Körperbau enthält frühere Teile.",
+      "en": "\nValues unavailable: the saved anatomy contains legacy parts."
+    },
+    {
+      "key": "JOURNAL_PART_NEUTRAL",
+      "de": "\nDieses Teil verändert die berechneten Körperbauwerte nicht.",
+      "en": "\nThis part does not change the calculated anatomy values."
+    },
+    {
+      "key": "JOURNAL_PART_CONTRIBUTION",
+      "de": "\nBeitrag in diesem Körperbau · %d× verbaut",
+      "en": "\nContribution to this anatomy · used %d×"
+    },
+    {
+      "key": "JOURNAL_ROLES_EMPTY",
+      "de": "TIERROLLEN\nFür diese Beobachtung sind keine lesbaren Eignungsdaten vorhanden.\n\nEin Artenscan oder eine Freundschaft bedeutet keine Zähmung.",
+      "en": "ANIMAL ROLES\nNo readable suitability data exists for this observation.\n\nScanning a species or befriending it does not tame an animal."
+    },
+    {
+      "key": "JOURNAL_ROLES_NOTICE",
+      "de": "\nArt-Eignung ist kein Tierbesitz. Zähmung beginnt im Stammeszeitalter. Reiten, Pflügen und Milchgewinnung benötigen ein eigenes Tier und die passende Versorgung und Ausrüstung.",
+      "en": "\nSpecies suitability is not ownership. Taming begins in the tribal age. Riding, ploughing and milking require an owned animal with suitable supplies and equipment."
+    },
+    {
+      "key": "JOURNAL_CLOSE_COMPACT",
+      "de": "Zurück · Esc",
+      "en": "Back · Esc"
+    },
+    {
+      "key": "Kopfmodule",
+      "de": "Kopfmodule",
+      "en": "Head modules"
     }
   ]
 }

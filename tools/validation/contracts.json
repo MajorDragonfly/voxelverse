@@ -268,7 +268,8 @@
         "ui_visual_refresh_test",
         "tribe_localization_test",
         "hud_layout_test",
-        "editor_localization_test"
+        "editor_localization_test",
+        "journal_localization_test"
       ]
     },
     {

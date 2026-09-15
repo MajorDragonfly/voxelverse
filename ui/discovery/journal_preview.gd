@@ -18,7 +18,7 @@ func _ready() -> void:
 	stretch = true
 	custom_minimum_size = Vector2(0, 230)
 	mouse_default_cursor_shape = Control.CURSOR_DRAG
-	tooltip_text = "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
+	preload("res://ui/discovery/journal_presentation.gd").bind(self, "tooltip_text", "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen")
 	viewport = SubViewport.new()
 	viewport.size = Vector2i(600, 300)
 	viewport.own_world_3d = true
