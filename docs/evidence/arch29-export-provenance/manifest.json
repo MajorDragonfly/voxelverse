@@ -1,0 +1,49 @@
+{
+  "base_commit": "365c402d4e5635c024e96f4299e8b85561c35cd0",
+  "local_code_commit": "d9ca33bbc76f876426a409bbdb469ff318ced8df",
+  "published_code_commit": "5b9907089e0a51569522001d978afa0ce03957e1",
+  "identical_source_tree": "cbab04e09f8a09f3576df083535f783c37916824",
+  "archive_sha256": "fe0eaa14c7aa28e25529763e0a03bcf66b2ad2f2fedb71efffc8ad8c82b09cea",
+  "files": [
+    {
+      "path": "contracts.json",
+      "sha256": "61f50901bede2845e7961855a3d6ba3fc9fd8ccd1e00aa551a0022bb9d8c7643",
+      "bytes": 3869
+    },
+    {
+      "path": "export-regressions.log",
+      "sha256": "32bc27556d50bd0e1c037b960b89ce2d6e391bc11dee1f7d699d319155178c83",
+      "bytes": 2401
+    },
+    {
+      "path": "results.json",
+      "sha256": "f83b2c98184f947d5d016fde02bf026bce671a7a549f179d71ad911bc8f63eef",
+      "bytes": 5917
+    },
+    {
+      "path": "run-start.json",
+      "sha256": "f73d615a2345139b36f861e23b2dd2bc4c8143978f8122923dbc6cb05368d05b",
+      "bytes": 678
+    },
+    {
+      "path": "source-contracts.log",
+      "sha256": "8478f573dc3ddd8ada4cece64196bfd802c7b8fdab8433e2c603d493637e5738",
+      "bytes": 168
+    },
+    {
+      "path": "source-files-end.jsonl",
+      "sha256": "fe0107c1ad715aad87a35bd9e24c43357a724e225cc09aaa33285da2ace3bf8a",
+      "bytes": 560893
+    },
+    {
+      "path": "source-files-start.jsonl",
+      "sha256": "fe0107c1ad715aad87a35bd9e24c43357a724e225cc09aaa33285da2ace3bf8a",
+      "bytes": 560893
+    },
+    {
+      "path": "validation-regressions.log",
+      "sha256": "351d6e20988bfe2a362984a473844243f7054dad53ef1cc736f80fe00bf06b2c",
+      "bytes": 8545
+    }
+  ]
+}

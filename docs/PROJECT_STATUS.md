@@ -5,7 +5,7 @@ Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue F
 ## Aktueller Spieltest-Kandidat
 
 Dritte Runde vom 15. September: `agent/playtest-latest-20260915`, auf #110
-aufbauend. Zwölf weitere feste Lieferungen aus #111–123 sind zusammengeführt;
+aufbauend. Dreizehn weitere feste Lieferungen aus #111–124 sind zusammengeführt;
 #122 ist die nicht doppelt integrierte Alternative zu #120.
 [Exakte Eingangsliste, gemeinsame Korrekturen und Bedienung](INTEGRATION_2026-09-15_PLAYTEST.md).
 

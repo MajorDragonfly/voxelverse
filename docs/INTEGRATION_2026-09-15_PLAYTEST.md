@@ -2,7 +2,7 @@
 
 Branch: `agent/playtest-latest-20260915`. Basis ist PR #110 bei
 `1d6573d9551c3f24bf1dd6fa64e5c301583a26c8`, einschließlich #93–109.
-Die ausdrücklich übergebenen zwölf neuen Lieferungen werden mit festen Commits
+Die ausdrücklich übergebenen dreizehn neuen Lieferungen werden mit festen Commits
 integriert. `main` bleibt außerhalb dieser Zusammenführung.
 
 ## Eingänge
@@ -21,6 +21,8 @@ integriert. `main` bleibt außerhalb dieser Zusammenführung.
 | [#120](https://github.com/MajorDragonfly/voxelverse/pull/120) | `365c402d4e5635c024e96f4299e8b85561c35cd0` | Quellnachweise im Prüfläufer |
 | [#121](https://github.com/MajorDragonfly/voxelverse/pull/121) | `aed0f9a24cb78dceedbe536aa0d2686bc8669e76` | Vier weitere Schwanzfamilien |
 | [#123](https://github.com/MajorDragonfly/voxelverse/pull/123) | `4385501d05491da8f514a3397738dadd65082ef0` | Zwei gleichartige Arbeitsplätze pro Ort |
+
+| [#124](https://github.com/MajorDragonfly/voxelverse/pull/124) | `535bf4d7c585d79c9144d1cc7ec3c3c80135ff29` | Export-Quellnachweise und ZIP-Freigabe |
 
 PR #122 (`3689bddb01117984e0cc5609e2958b4feb8f7b21`) ist eine alternative
 Implementierung desselben ARCH-29-Folgeauftrags wie #120. Beide ersetzen dieselben
