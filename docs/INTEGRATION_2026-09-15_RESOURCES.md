@@ -49,6 +49,10 @@ Abschlusslauf. Seine Freigabe hängt vom gemeinsamen Siedlungs-/Speicherlauf ab.
   werden strukturell geprüft; ihre fachliche Validierung bleibt beim Godot-Lader.
   Die Planung erhält weiterhin alle Dateien und erteilt keine Löschfreigabe.
 
+- `docs/evidence/.gdignore` hält historische Screenshots, Hörproben und Diagnosekopien
+  aus dem aktiven Godot-Import heraus. Sie bleiben lesbare Nachweise; das Spiel
+  referenziert keine dieser Dateien.
+
 ## Beeren und Nest
 
 `resource_visual_factory.gd` nutzt die vorhandene V9-Flora-/Biompalette. Sechs
