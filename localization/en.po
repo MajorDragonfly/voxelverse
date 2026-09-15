@@ -3863,3 +3863,18 @@ msgstr "Back · Esc"
 
 msgid "Kopfmodule"
 msgstr "Head modules"
+
+msgid "ATMOSPHERE_LABEL"
+msgstr "Atmosphere"
+
+msgid "ATMOSPHERE_LOW"
+msgstr "Basic · sky and haze"
+
+msgid "ATMOSPHERE_STANDARD"
+msgstr "Atmospheric · shadows and glow"
+
+msgid "ATMOSPHERE_CINEMATIC"
+msgstr "Cinematic · light in mist"
+
+msgid "ATMOSPHERE_HINT"
+msgstr "Takes effect in the spherical world after “Apply & save”. Cinematic needs more graphics performance. Additional effects depend on the rendering mode."

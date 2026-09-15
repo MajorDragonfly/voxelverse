@@ -25,6 +25,8 @@ var display_mode: int = MODE_BORDERLESS
 var resolution: Vector2i = Vector2i(1600, 900)
 var ui_scale: float = 1.0
 var vsync_enabled: bool = true
+var atmosphere_quality: int = 1
+var _atmosphere_option: OptionButton
 
 var _menu_layer: CanvasLayer
 var _menu_panel: PanelContainer
@@ -126,6 +128,7 @@ func _load_settings() -> void:
 		1.35
 	)
 	vsync_enabled = bool(config.get_value("display", "vsync", true))
+	atmosphere_quality = clampi(int(config.get_value("display", "atmosphere_quality", 1)), 0, 2)
 
 
 func _save_settings() -> bool:
@@ -135,6 +138,7 @@ func _save_settings() -> bool:
 	config.set_value("display", "height", resolution.y)
 	config.set_value("display", "ui_scale", ui_scale)
 	config.set_value("display", "vsync", vsync_enabled)
+	config.set_value("display", "atmosphere_quality", atmosphere_quality)
 	var save_error: Error = config.save(CONFIG_PATH)
 	if save_error != OK:
 		push_warning("Display settings could not be saved: %s" % save_error)
@@ -158,6 +162,7 @@ func _apply_settings(save_after_apply: bool) -> bool:
 		MODE_EXCLUSIVE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 
+	get_tree().call_group(&"campaign_atmosphere", "set_quality", atmosphere_quality)
 	_sync_menu_controls()
 	if save_after_apply:
 		return _save_settings()
@@ -262,6 +267,16 @@ func _build_settings_menu() -> void:
 			_scale_option.item_count - 1,
 			float(scale_value)
 		)
+
+	_atmosphere_option = _add_option_row(display_content, "ATMOSPHERE_LABEL")
+	_atmosphere_option.name = "AtmosphereQuality"
+	for key in ["ATMOSPHERE_LOW", "ATMOSPHERE_STANDARD", "ATMOSPHERE_CINEMATIC"]:
+		_atmosphere_option.add_item(key)
+	var atmosphere_hint := Label.new()
+	atmosphere_hint.text = "ATMOSPHERE_HINT"
+	atmosphere_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	atmosphere_hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	display_content.add_child(atmosphere_hint)
 
 	_vsync_option = CheckButton.new()
 	_vsync_option.name = "VSync"
@@ -372,6 +387,7 @@ func _apply_menu_selection() -> void:
 	if _scale_option != null:
 		ui_scale = float(_scale_option.get_selected_metadata())
 	vsync_enabled = _vsync_option.button_pressed
+	atmosphere_quality = _atmosphere_option.selected
 
 	var saved: bool = _apply_settings(true)
 	_control_settings.refresh()
@@ -379,6 +395,8 @@ func _apply_menu_selection() -> void:
 
 
 func _sync_menu_controls() -> void:
+	if _atmosphere_option != null:
+		_atmosphere_option.select(atmosphere_quality)
 	if _mode_option != null:
 		for index in range(_mode_option.item_count):
 			if _mode_option.get_item_id(index) == display_mode:

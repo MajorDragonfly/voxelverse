@@ -3863,3 +3863,18 @@ msgstr "Zurück · Esc"
 
 msgid "Kopfmodule"
 msgstr "Kopfmodule"
+
+msgid "ATMOSPHERE_LABEL"
+msgstr "Atmosphäre"
+
+msgid "ATMOSPHERE_LOW"
+msgstr "Basis · Himmel und Dunst"
+
+msgid "ATMOSPHERE_STANDARD"
+msgstr "Atmosphärisch · Schatten und Leuchten"
+
+msgid "ATMOSPHERE_CINEMATIC"
+msgstr "Cineastisch · Licht im Nebel"
+
+msgid "ATMOSPHERE_HINT"
+msgstr "Wirkt in der Kugelwelt nach „Übernehmen & speichern“. Cineastisch benötigt mehr Grafikleistung. Zusatzeffekte sind abhängig vom Grafikmodus verfügbar."

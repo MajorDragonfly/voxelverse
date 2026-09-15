@@ -6441,6 +6441,31 @@
       "key": "Kopfmodule",
       "de": "Kopfmodule",
       "en": "Head modules"
+    },
+    {
+      "key": "ATMOSPHERE_LABEL",
+      "de": "Atmosphäre",
+      "en": "Atmosphere"
+    },
+    {
+      "key": "ATMOSPHERE_LOW",
+      "de": "Basis · Himmel und Dunst",
+      "en": "Basic · sky and haze"
+    },
+    {
+      "key": "ATMOSPHERE_STANDARD",
+      "de": "Atmosphärisch · Schatten und Leuchten",
+      "en": "Atmospheric · shadows and glow"
+    },
+    {
+      "key": "ATMOSPHERE_CINEMATIC",
+      "de": "Cineastisch · Licht im Nebel",
+      "en": "Cinematic · light in mist"
+    },
+    {
+      "key": "ATMOSPHERE_HINT",
+      "de": "Wirkt in der Kugelwelt nach „Übernehmen & speichern“. Cineastisch benötigt mehr Grafikleistung. Zusatzeffekte sind abhängig vom Grafikmodus verfügbar.",
+      "en": "Takes effect in the spherical world after “Apply & save”. Cinematic needs more graphics performance. Additional effects depend on the rendering mode."
     }
   ]
 }
