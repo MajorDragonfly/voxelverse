@@ -160,6 +160,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 
 ### ARCH-14 – Langzeitregister auslagern
 
+**Journal-Teilpaket, 15. September 2026 (Fachbranch):** Arten-/Regionslisten lesen höchstens 100 Zeilen pro Seite und Körperdaten gezielt; 10.005 Arten/Regionen sowie echter Neustart mit jeweils 1.205 Einträgen geprüft. [Vertrag, Prüfgrenzen und Übergabe](WORK_ARCH14_JOURNAL_PAGING.md). Die Entdeckungsarchive beim Datenbesitzer sind weiterhin vollständig im Speicher; das Gesamtpaket bleibt offen.
+
 **Integration 10. September:** Kartenkacheln und bekannte Orte über RegionStore mit begrenztem Cache/Paging integriert (#59/#65); übrige Langzeitregister und die >256-Tier-Abnahme bleiben offen.
 
 - **Ortsregister-Teilpaket geliefert am 10. September 2026:** `feature/arch-14-place-register`, [PR #65](https://github.com/MajorDragonfly/voxelverse/pull/65), aufbauend auf PR #59. 3.105 Orte einschließlich Änderungen/Neustart geprüft; 96 offene Orte und 64 Einträge je UI-Seite. Schema 1/2 wird verlustfrei übernommen. [Vertrag und Integrationshinweise](WORK_ARCH14_PLACE_REGISTER.md), insbesondere zusätzlicher ARCH-13-Archivadapter für Schema 3 vor gemeinsamer Freigabe. Weitere Register bleiben offen.
