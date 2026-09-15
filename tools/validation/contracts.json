@@ -223,6 +223,7 @@
         "discovery_journal_test",
         "domestic_fauna_journal_test",
         "interface_task7_test",
+        "journal_paging_test",
         "living_planet_map_test",
         "minimap_test",
         "owned_animal_localization_test",
