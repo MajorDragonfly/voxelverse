@@ -1,5 +1,8 @@
 # Prüfstand M4-EXPRESSION
 
+**Aktualisierung nach Nutzerfeedback:** [Korrigierte Augen/Lider und neuer Prüfstand](eyes/README.md).
+Der folgende Bericht und seine Vorschau dokumentieren die erste Lieferung.
+
 Geprüfter sauberer lokaler Quellcommit:
 `1d8a9e9e3776b80d9d9d5e6063c9ebf50980f360`.
 Veröffentlicht als `f425744148c242ec55d64f2a55f989655501e1e0`;
