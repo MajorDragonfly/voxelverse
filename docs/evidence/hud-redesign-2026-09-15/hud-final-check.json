@@ -1,0 +1,73 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "hud_layout_test",
+    "minimap_test",
+    "creature_scan_test",
+    "research_goals_test",
+    "onboarding_test",
+    "ui_visual_refresh_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "hud_layout_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.072,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "minimap_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.524,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "creature_scan_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.978,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "research_goals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.041,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "onboarding_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.372,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "ui_visual_refresh_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.387,
+      "contract": "frontend_locale"
+    }
+  ]
+}

@@ -92,9 +92,7 @@ func _ready() -> void:
 	var ecology := preload("res://world/surface/campaign_ecology.gd").new()
 	ecology.population = population
 	add_child(ecology)
-	var map := preload("res://ui/minimap/minimap_hud.gd").new()
-	map.player = player
-	add_child(map)
+	# ProgressionHUD on the shared player owns the single campaign minimap.
 	var development := preload("res://core/development_tools.gd").new()
 	development.name = "DevelopmentTools"
 	add_child(development)

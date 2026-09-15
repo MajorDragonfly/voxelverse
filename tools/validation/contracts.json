@@ -259,7 +259,8 @@
         "menu_input_test",
         "onboarding_test",
         "ui_visual_refresh_test",
-        "tribe_localization_test"
+        "tribe_localization_test",
+        "hud_layout_test"
       ]
     },
     {

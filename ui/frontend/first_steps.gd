@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+const Layout = preload("res://ui/hud_layout.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Keys = preload("res://core/input_preferences.gd")
@@ -36,15 +37,15 @@ func _ready() -> void:
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 8)
 	_panel.add_child(box)
-	_heading = Style.label(box, "ERSTE SCHRITTE", 16, Style.ACCENT)
-	_title = Style.label(box, "", 24)
-	_hint = Style.paragraph(box, "", 18)
-	_hint.custom_minimum_size.y = 62
+	_heading = Style.label(box, "ERSTE SCHRITTE", 12, Style.ACCENT)
+	_title = Style.label(box, "", 18)
+	_hint = Style.paragraph(box, "", 14)
+	_hint.custom_minimum_size.y = 40
 	_bar = ProgressBar.new()
 	_bar.custom_minimum_size.y = 5
 	_bar.show_percentage = false
 	box.add_child(_bar)
-	Style.paragraph(box, "Esc → Erste Schritte: Hilfe oder überspringen", 15)
+	Style.paragraph(box, "Esc → Erste Schritte: Hilfe oder überspringen", 12)
 	_ignore_mouse(_panel)
 	hide()
 
@@ -58,13 +59,18 @@ func _process(delta: float) -> void:
 	_completion_timer = maxf(0.0, _completion_timer - delta)
 	var progress = _saves.guidance
 	var step: String = progress.current_step()
-	visible = not step.is_empty() or _completion_timer > 0.0
+	# The scanner provides its own aiming instructions without covering this card.
+	visible = (not step.is_empty() or _completion_timer > 0.0) and not bool(_player.get("inspection_mode_enabled"))
 	if not visible:
 		return
 	_heading.text = Text.text("ERSTE SCHRITTE · %d / 4") % progress.completed_count()
 	_title.text = TITLES[step] if not step.is_empty() else "Bereit für dein Abenteuer"
 	_hint.text = hint(step) if not step.is_empty() else "Die Grundlagen sitzen. Erkunde deine Welt in deinem Tempo. Die Hilfe bleibt im Pausemenü erreichbar."
 	_bar.value = 100.0 * progress.amount(step) / float(Progress.GOALS[step]) if not step.is_empty() else 100.0
+	var screen := Layout.screen_size(self)
+	var width := 292.0 if screen.x >= 1000 else 240.0
+	Layout.place(_panel, Rect2(Vector2(16, 0), Vector2(width, 0)))
+	Layout.place(_panel, Rect2(Vector2(16, screen.y - 108 - _panel.size.y), _panel.size))
 
 func _bind_player(player: Node) -> void:
 	if is_instance_valid(_player) and _player.has_signal("guidance_action") and _player.guidance_action.is_connected(_record_action):

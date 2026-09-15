@@ -141,18 +141,18 @@ func import_state(data: Dictionary) -> void:
 func _refresh_hud() -> void:
 	if _hud == null:
 		return
-	_hud.text = "Ausdauer %d / 100  ·  F halten: Befreunden  ·  H: Helfen  ·  K: Skilltree" % roundi(stamina)
+	_hud.text = "Ausdauer %d / 100" % roundi(stamina)
 	var target: Node = find_target()
 	if target == null:
-		_hud.text += "\nNähere dich einer Kreatur und richte die Kamera auf sie."
+		if stamina >= MAX_STAMINA: _hud.text = ""
 		return
 	var data: Dictionary = target.get_node("SocialBehavior").entry()
 	var relation: String = {"wild": "Wild", "ally": "Befreundet", "hostile": "Feindlich"}[data["relation"]]
-	var name_text: String = target.get_display_name() if target.has_method("get_display_name") else "Kreatur"
-	_hud.text += "\n%s · %s · Vertrauen %d %% · Gesundheit %d %%" % [name_text, relation, roundi(data["trust"]), roundi(float(data["health_ratio"]) * 100.0)]
+	# Species identity is reserved for the scanner. Keep actionable relation feedback.
+	_hud.text += "\n%s · Vertrauen %d %%" % [relation, roundi(data["trust"])]
 	if data["need_origin"] in ["environment", "third_party"] and not data["player_harmed"]:
-		_hud.text += "\nVerletzt · H: Nahrung teilen (12 Sättigung; bis 3,6 m)"
+		_hud.text += "\nVerletzt · H: Nahrung teilen"
 	elif data["relation"] == "wild":
-		_hud.text += "\nF halten · Vertrauen aufbauen (bis 6 m)"
+		_hud.text += "\nF halten · Befreunden"
 	elif data["relation"] == "ally":
-		_hud.text += "\nDiese Kreatur vertraut dir und flieht nicht vor dir."
+		_hud.text += "\nDiese Kreatur vertraut dir."

@@ -464,9 +464,11 @@ func _layout() -> void:
 	_panel.offset_top = 12 if narrow else 24
 	_panel.offset_bottom = -_panel.offset_top
 	if _hud != null:
-		var hud_height := 192.0 if _pinned_button != null and _pinned_button.visible else 108.0
-		_hud.position = Vector2(maxf(12.0, extent.x - 480), maxf(12.0, extent.y - 122 - hud_height))
-		_hud.size = Vector2(minf(456.0, extent.x - 24), hud_height)
+		# Short guidance belongs below the progression shortcuts, away from the map.
+		_hud.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		_hud.position = Vector2(16, 116)
+		_hud.size = Vector2(292 if extent.x >= 1000 else 240, 0)
+		_hud.size.y = _hud.get_child(0).get_combined_minimum_size().y
 
 func _species_rows(query: String, role: String) -> Array[Dictionary]:
 	return _catalog.page("species", query, role, _page, Suitability.ROLES).rows
@@ -498,7 +500,7 @@ func _build_hud() -> void:
 	_hud.add_child(layout)
 	_hint = _label("", 14)
 	_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_hint.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_hint.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_hint.add_theme_color_override("font_shadow_color", Color.BLACK)
 	_hint.add_theme_constant_override("shadow_offset_x", 1)
@@ -506,14 +508,17 @@ func _build_hud() -> void:
 	layout.add_child(_hint)
 	_pinned_button = _button("", _open_pinned)
 	_pinned_button.name = "PinnedResearch"
-	_pinned_button.custom_minimum_size.y = 60
+	_pinned_button.custom_minimum_size.y = 48
+	_pinned_button.add_theme_font_size_override("font_size", 13)
 	_pinned_button.clip_text = true
 	_pinned_button.hide()
 	layout.add_child(_pinned_button)
-	var open_button := _button("Entdeckungsbuch · J", func() -> void: open_journal())
-	open_button.name = "OpenJournal"
-	open_button.size_flags_horizontal = Control.SIZE_SHRINK_END
-	layout.add_child(open_button)
+	# Standalone book hosts retain an entry button; the player has the shared dock.
+	if player == null or player.get_node_or_null("ProgressionHUD") == null:
+		var open_button := _button("Entdeckungsbuch · J", func() -> void: open_journal())
+		open_button.name = "OpenJournal"
+		open_button.size_flags_horizontal = Control.SIZE_SHRINK_END
+		layout.add_child(open_button)
 
 
 func _on_tab_changed(_index: int) -> void:
@@ -854,6 +859,7 @@ func _update_hint() -> void:
 	_hint.visible = _hint_enabled
 	if _hint_enabled:
 		_hint.text = _current_hint()
+		if _hud != null: _hud.size.y = _hud.get_child(0).get_combined_minimum_size().y
 
 
 func _toggle_hint(enabled: bool) -> void:
