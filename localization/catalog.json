@@ -2846,6 +2846,781 @@
       "key": "SKILLS_PHASE_5_NEXT",
       "de": "Langfristiger Entwurf; konkrete Spielregeln erst nach der Weltraumphase festlegen.",
       "en": "Long-term concept; concrete gameplay rules will be defined after the space phase."
+    },
+    {
+      "key": "TRIBE_ORDER_WOOD",
+      "de": "Holz sammeln",
+      "en": "Gather wood"
+    },
+    {
+      "key": "TRIBE_ORDER_STONE",
+      "de": "Stein sammeln",
+      "en": "Gather stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FOOD",
+      "de": "Nahrung sammeln",
+      "en": "Gather food"
+    },
+    {
+      "key": "TRIBE_ORDER_SUPPLY",
+      "de": "Versorgung sichern",
+      "en": "Maintain food supply"
+    },
+    {
+      "key": "TRIBE_ORDER_TOOL",
+      "de": "Werkzeug · 3 Holz / 2 Stein",
+      "en": "Tool · 3 wood / 2 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_HUT",
+      "de": "Hütte setzen · 6 Holz / 3 Stein",
+      "en": "Place hut · 6 wood / 3 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_TENT",
+      "de": "Zelt setzen · 3 Holz / 2 Fasern",
+      "en": "Place tent · 3 wood / 2 fiber"
+    },
+    {
+      "key": "TRIBE_ORDER_GARDEN",
+      "de": "Wurzelgarten · 4 Holz / 1 Stein",
+      "en": "Root garden · 4 wood / 1 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FEED",
+      "de": "Jetzt essen",
+      "en": "Eat now"
+    },
+    {
+      "key": "TRIBE_ORDER_WAIT",
+      "de": "Anhalten",
+      "en": "Stop"
+    },
+    {
+      "key": "TRIBE_ORDER_RESUME",
+      "de": "Fortsetzen",
+      "en": "Resume"
+    },
+    {
+      "key": "TRIBE_ORDER_WATER",
+      "de": "Wasser holen",
+      "en": "Fetch water"
+    },
+    {
+      "key": "TRIBE_ORDER_PROVISION",
+      "de": "Nahrung & Wasser sichern",
+      "en": "Maintain food & water"
+    },
+    {
+      "key": "TRIBE_ORDER_DRINK",
+      "de": "Jetzt trinken",
+      "en": "Drink now"
+    },
+    {
+      "key": "TRIBE_ORDER_WELL",
+      "de": "Brunnen · 3 Holz / 2 Stein",
+      "en": "Well · 3 wood / 2 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FORESTER",
+      "de": "Forstplatz · 4 Holz / 1 Stein",
+      "en": "Forestry · 4 wood / 1 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_QUARRY",
+      "de": "Steinbruch · 4 Holz / 2 Stein",
+      "en": "Quarry · 4 wood / 2 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FIBERBED",
+      "de": "Faserbeet · 2 Holz / 1 Stein",
+      "en": "Fiber bed · 2 wood / 1 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FIBER",
+      "de": "Fasern sammeln",
+      "en": "Gather fiber"
+    },
+    {
+      "key": "TRIBE_ORDER_MILK",
+      "de": "Milch abholen",
+      "en": "Collect milk"
+    },
+    {
+      "key": "TRIBE_ORDER_MOVE",
+      "de": "Laufen",
+      "en": "Move"
+    },
+    {
+      "key": "TRIBE_ORDER_PROFESSION",
+      "de": "Beruf fortsetzen",
+      "en": "Resume profession"
+    },
+    {
+      "key": "TRIBE_ORDER_PEN",
+      "de": "Milchtierplatz bauen",
+      "en": "Build milk pen"
+    },
+    {
+      "key": "TRIBE_ORDER_LAYING_SITE",
+      "de": "Legestelle bauen",
+      "en": "Build laying site"
+    },
+    {
+      "key": "TRIBE_ORDER_TEND",
+      "de": "Tiere versorgen",
+      "en": "Care for animals"
+    },
+    {
+      "key": "TRIBE_ORDER_EGGS",
+      "de": "Eier abholen",
+      "en": "Collect eggs"
+    },
+    {
+      "key": "TRIBE_JOB_NONE",
+      "de": "Ohne Beruf",
+      "en": "No profession"
+    },
+    {
+      "key": "TRIBE_JOB_PROVIDER",
+      "de": "Versorger",
+      "en": "Provider"
+    },
+    {
+      "key": "TRIBE_JOB_FORESTER",
+      "de": "Holzarbeiter",
+      "en": "Woodworker"
+    },
+    {
+      "key": "TRIBE_JOB_MASON",
+      "de": "Steinmetz",
+      "en": "Stoneworker"
+    },
+    {
+      "key": "TRIBE_JOB_WEAVER",
+      "de": "Fasersammler",
+      "en": "Fiber gatherer"
+    },
+    {
+      "key": "TRIBE_JOB_BUILDER",
+      "de": "Baumeister",
+      "en": "Builder"
+    },
+    {
+      "key": "TRIBE_JOB_MILK_CARRIER",
+      "de": "Milchträger",
+      "en": "Milk carrier"
+    },
+    {
+      "key": "TRIBE_JOB_KEEPER",
+      "de": "Tierpfleger",
+      "en": "Animal keeper"
+    },
+    {
+      "key": "TRIBE_JOB_EGG_CARRIER",
+      "de": "Eierträger",
+      "en": "Egg carrier"
+    },
+    {
+      "key": "TRIBE_RESOURCE_WOOD",
+      "de": "Holz",
+      "en": "wood"
+    },
+    {
+      "key": "TRIBE_RESOURCE_STONE",
+      "de": "Stein",
+      "en": "stone"
+    },
+    {
+      "key": "TRIBE_RESOURCE_FOOD",
+      "de": "Nahrung",
+      "en": "food"
+    },
+    {
+      "key": "TRIBE_RESOURCE_WATER",
+      "de": "Wasser",
+      "en": "water"
+    },
+    {
+      "key": "TRIBE_RESOURCE_FIBER",
+      "de": "Fasern",
+      "en": "fiber"
+    },
+    {
+      "key": "TRIBE_RESOURCE_MILK",
+      "de": "Milch",
+      "en": "milk"
+    },
+    {
+      "key": "TRIBE_RESOURCE_EGGS",
+      "de": "Eier",
+      "en": "eggs"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_WAIT",
+      "de": "wartet",
+      "en": "waiting"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_MOVE",
+      "de": "unterwegs",
+      "en": "moving"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_WOOD",
+      "de": "sammelt Holz",
+      "en": "gathering wood"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_STONE",
+      "de": "sammelt Stein",
+      "en": "gathering stone"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FOOD",
+      "de": "sammelt Nahrung",
+      "en": "gathering food"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_TOOL",
+      "de": "stellt Werkzeug her",
+      "en": "making a tool"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_HUT",
+      "de": "baut Hütte",
+      "en": "building a hut"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_TENT",
+      "de": "baut Zelt",
+      "en": "building a tent"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_PEN",
+      "de": "baut Tierplatz",
+      "en": "building an animal pen"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_LAYING_SITE",
+      "de": "baut Legestelle",
+      "en": "building a laying site"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_EGGS",
+      "de": "holt Eier",
+      "en": "collecting eggs"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_TEND",
+      "de": "versorgt Tiere",
+      "en": "caring for animals"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_GARDEN",
+      "de": "legt Garten an",
+      "en": "planting a garden"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_SUPPLY",
+      "de": "sichert Nahrung",
+      "en": "maintaining food supply"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FEED",
+      "de": "isst",
+      "en": "eating"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_WATER",
+      "de": "holt Wasser",
+      "en": "fetching water"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FIBER",
+      "de": "sammelt Fasern",
+      "en": "gathering fiber"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_MILK",
+      "de": "holt Milch",
+      "en": "collecting milk"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_DRINK",
+      "de": "trinkt",
+      "en": "drinking"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_PROVISION",
+      "de": "sichert Nahrung und Wasser",
+      "en": "maintaining food and water"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_BUILD",
+      "de": "bereit für Bauarbeiten",
+      "en": "ready to build"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_WELL",
+      "de": "baut Brunnen",
+      "en": "building a well"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FORESTER",
+      "de": "baut Forstplatz",
+      "en": "building a forestry station"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_QUARRY",
+      "de": "baut Steinbruch",
+      "en": "building a quarry"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FIBERBED",
+      "de": "legt Faserbeet an",
+      "en": "planting a fiber bed"
+    },
+    {
+      "key": "TRIBE_PROJECT_TOOL",
+      "de": "Werkzeugherstellung",
+      "en": "Tool crafting"
+    },
+    {
+      "key": "TRIBE_PROJECT_HUT",
+      "de": "Hüttenbau",
+      "en": "Hut construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_TENT",
+      "de": "Zeltbau",
+      "en": "Tent construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_PEN",
+      "de": "Tierplatzbau",
+      "en": "Animal pen construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_LAYING_SITE",
+      "de": "Legestellenbau",
+      "en": "Laying site construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_GARDEN",
+      "de": "Gartenbau",
+      "en": "Garden planting"
+    },
+    {
+      "key": "TRIBE_PROJECT_WELL",
+      "de": "Brunnenbau",
+      "en": "Well construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_FORESTER",
+      "de": "Forstplatz",
+      "en": "Forestry station"
+    },
+    {
+      "key": "TRIBE_PROJECT_QUARRY",
+      "de": "Steinbruch",
+      "en": "Quarry"
+    },
+    {
+      "key": "TRIBE_PROJECT_FIBERBED",
+      "de": "Faserbeet",
+      "en": "Fiber bed"
+    },
+    {
+      "key": "TRIBE_COLLAPSE",
+      "de": "Einklappen",
+      "en": "Collapse"
+    },
+    {
+      "key": "TRIBE_ORDERS_TAB",
+      "de": "Aufträge",
+      "en": "Orders"
+    },
+    {
+      "key": "TRIBE_WORK_TAB",
+      "de": "Arbeitsplätze & Berufe",
+      "en": "Workplaces & professions"
+    },
+    {
+      "key": "TRIBE_HUSBANDRY_TAB",
+      "de": "Tierhaltung",
+      "en": "Animal husbandry"
+    },
+    {
+      "key": "TRIBE_SELECT_ALL",
+      "de": "Alle auswählen",
+      "en": "Select all"
+    },
+    {
+      "key": "TRIBE_PROFESSION_LABEL",
+      "de": "Beruf für die Auswahl:",
+      "en": "Profession for selection:"
+    },
+    {
+      "key": "TRIBE_ASSIGN_PROFESSION",
+      "de": "Beruf zuweisen",
+      "en": "Assign profession"
+    },
+    {
+      "key": "TRIBE_RESUME_PROFESSION",
+      "de": "Beruf fortsetzen",
+      "en": "Resume profession"
+    },
+    {
+      "key": "TRIBE_PROFESSION_HINT",
+      "de": "Versorger halten Nahrung und Wasser bereit. Baumeister helfen an der laufenden Baustelle. Manuelle Befehle ändern den Beruf nicht.",
+      "en": "Providers maintain food and water. Builders help at the active construction site. Manual orders do not change professions."
+    },
+    {
+      "key": "TRIBE_CONTROLS",
+      "de": "Linksklick / Rahmen: auswählen · Umschalt: Auswahl ändern · Rechtsklick: laufen oder sammeln · WASD: Kamera · Mausrad: Zoom · Leertaste: Pause",
+      "en": "Left click / drag: select · Shift: change selection · Right click: move or gather · WASD: camera · Wheel: zoom · Space: pause"
+    },
+    {
+      "key": "TRIBE_SUPPLY_HINT",
+      "de": "Dauerauftrag: Nahrung ernten und einlagern, bis vier Portionen je Bewohner vorrätig oder unterwegs sind. Danach am Dorfplatz warten und bei Bedarf weiterarbeiten.",
+      "en": "Ongoing order: harvest and store food until four portions per resident are stored or in transit. Then wait at the village and resume when needed."
+    },
+    {
+      "key": "TRIBE_HOUSING_HINT",
+      "de": "Festes Stammesmodell. Rechtsklick: freien Platz wählen. Material wird aus dem Lager zum Eingang getragen. Hütte: zwei Schlafplätze; Zelt: ein Schlafplatz.",
+      "en": "Fixed tribal design. Right click to choose an open site. Materials are carried from storage to the entrance. Hut: two beds; tent: one bed."
+    },
+    {
+      "key": "TRIBE_GARDEN_HINT",
+      "de": "Benötigt ein Steinwerkzeug. Baut die Wurzelfundstelle zum Garten aus. Alle 20 Spielsekunden wächst eine Wurzel nach, bis dort acht bereitliegen.",
+      "en": "Requires a stone tool. Upgrades the root patch to a garden. One root regrows every 20 gameplay seconds, up to eight ready to harvest."
+    },
+    {
+      "key": "TRIBE_STATION_HINT",
+      "de": "Steinwerkzeug erforderlich. Anklicken, dann mit Rechtsklick einen freien, erreichbaren Platz wählen.",
+      "en": "Requires a stone tool. Click, then right click an open, reachable site."
+    },
+    {
+      "key": "TRIBE_TRANSPORT_HINT",
+      "de": "Dauerauftrag mit Transport zum gemeinsamen Lager.",
+      "en": "Ongoing order with delivery to shared storage."
+    },
+    {
+      "key": "TRIBE_STOCK",
+      "de": "STAMM · Holz {wood} · Stein {stone} · Nahrung {food} · Wasser {water} · Fasern {fiber} · Milch {milk} · Eier {eggs}   |   Bewohner {residents} / {capacity} · Schlafplätze {beds}",
+      "en": "TRIBE · Wood {wood} · Stone {stone} · Food {food} · Water {water} · Fiber {fiber} · Milk {milk} · Eggs {eggs}   |   Residents {residents} / {capacity} · Beds {beds}"
+    },
+    {
+      "key": "TRIBE_STORE_HINT",
+      "de": "Lager: je 48 Einheiten. Arbeitende Bewohner essen und trinken selbstständig; ihr Auftrag bleibt erhalten.",
+      "en": "Storage: 48 units each. Working residents eat and drink automatically while keeping their orders."
+    },
+    {
+      "key": "TRIBE_GARDEN_STATUS",
+      "de": "Wurzelgarten · {ready} erntereif · {growth} · Essens- und Trinkpausen erfolgen selbstständig.",
+      "en": "Root garden · {ready} ready to harvest · {growth} · Residents take meal and water breaks automatically."
+    },
+    {
+      "key": "TRIBE_GARDEN_FULL",
+      "de": "Garten gefüllt",
+      "en": "Garden full"
+    },
+    {
+      "key": "TRIBE_GARDEN_NEXT",
+      "de": "Nächste Wurzel in {seconds} s",
+      "en": "Next root in {seconds} s"
+    },
+    {
+      "key": "TRIBE_GOAL_START",
+      "de": "Erster Schritt: Bewohner auswählen und Holz, Stein und Nahrung einlagern.",
+      "en": "First step: select residents and store wood, stone and food."
+    },
+    {
+      "key": "TRIBE_GOAL_TOOL",
+      "de": "Steinwerkzeug bereit · Setze Hütten oder Zelte auf freie Plätze und sichere Nahrung und Wasser.",
+      "en": "Stone tool ready · Place huts or tents on open sites and secure food and water."
+    },
+    {
+      "key": "TRIBE_GOAL_MATERIAL",
+      "de": "Material bereit · Weise Bewohner an, das erste Steinwerkzeug herzustellen.",
+      "en": "Materials ready · Order residents to craft the first stone tool."
+    },
+    {
+      "key": "TRIBE_GOAL_PROJECT",
+      "de": "{project} · {percent} % · Weitere Bewohner können mitarbeiten.",
+      "en": "{project} · {percent} % · More residents can help."
+    },
+    {
+      "key": "TRIBE_GOAL_GARDEN",
+      "de": "Dein Dorf steht · Lege einen Wurzelgarten für dauerhafte Nahrung an.",
+      "en": "Your village is ready · Plant a root garden for a steady food supply."
+    },
+    {
+      "key": "TRIBE_GOAL_WELL",
+      "de": "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsplätze & Berufe.",
+      "en": "Food regrows · Build a well under Workplaces & professions."
+    },
+    {
+      "key": "TRIBE_GOAL_SUPPLY",
+      "de": "Nahrung und Wasser sichern · Forstplatz, Steinbruch und Faserbeet erweitern die Rohstoffversorgung.",
+      "en": "Secure food and water · Forestry, quarry and fiber bed expand your resource supply."
+    },
+    {
+      "key": "TRIBE_GROWTH_READY",
+      "de": "Dorfwachstum · noch {seconds} s gute Versorgung · danach 2 Nahrung und 2 Wasser für den neuen Bewohner.",
+      "en": "Village growth · {seconds} s of good provision remaining · then 2 food and 2 water for the new resident."
+    },
+    {
+      "key": "TRIBE_ACTIVITY_UNKNOWN",
+      "de": "Auftrag läuft",
+      "en": "Order in progress"
+    },
+    {
+      "key": "TRIBE_RESERVE_READY",
+      "de": "Vorrat bereit · bleibt zuständig",
+      "en": "Supply ready · remains responsible"
+    },
+    {
+      "key": "TRIBE_WAIT_ROOTS",
+      "de": "wartet auf reife Wurzeln",
+      "en": "waiting for ripe roots"
+    },
+    {
+      "key": "TRIBE_WAIT_RESOURCE",
+      "de": "wartet auf {resource}",
+      "en": "waiting for {resource}"
+    },
+    {
+      "key": "TRIBE_MEAL",
+      "de": "Essenspause · kehrt zur Arbeit zurück",
+      "en": "Meal break · will return to work"
+    },
+    {
+      "key": "TRIBE_DRINK",
+      "de": "Trinkpause · kehrt zur Arbeit zurück",
+      "en": "Water break · will return to work"
+    },
+    {
+      "key": "TRIBE_BLOCKED",
+      "de": "Weg blockiert · prüft neuen Weg",
+      "en": "Route blocked · checking another route"
+    },
+    {
+      "key": "TRIBE_STOPPED",
+      "de": "angehalten · Fortsetzen möglich",
+      "en": "stopped · can resume"
+    },
+    {
+      "key": "TRIBE_STOPPED_CARGO",
+      "de": "angehalten · trägt Baumaterial",
+      "en": "stopped · carrying building materials"
+    },
+    {
+      "key": "TRIBE_BUILD_CARGO",
+      "de": "trägt Baumaterial zum Eingang",
+      "en": "carrying building materials to the entrance"
+    },
+    {
+      "key": "TRIBE_CARRYING",
+      "de": "trägt {resource}",
+      "en": "carrying {resource}"
+    },
+    {
+      "key": "TRIBE_RESIDENT",
+      "de": "{name} · {profession}\nSatt {food} % · Wasser {water} %\n{activity}",
+      "en": "{name} · {profession}\nFood {food} % · Water {water} %\n{activity}"
+    },
+    {
+      "key": "TRIBE_UNKNOWN_JOB",
+      "de": "Unbekannter Beruf",
+      "en": "Unknown profession"
+    },
+    {
+      "key": "TRIBE_UNKNOWN_RESOURCE",
+      "de": "Material",
+      "en": "material"
+    },
+    {
+      "key": "TRIBE_COMMAND",
+      "de": "Gruppenbefehl",
+      "en": "Group command"
+    },
+    {
+      "key": "TRIBE_BOOK",
+      "de": "Buch · J",
+      "en": "Journal · J"
+    },
+    {
+      "key": "TRIBE_ORDER_ACCEPTED",
+      "de": "✓ {order} · Auftrag für {count} Bewohner gespeichert.",
+      "en": "✓ {order} · Order saved for {count} residents."
+    },
+    {
+      "key": "TRIBE_ORDER_REJECTED",
+      "de": "Nicht ausgeführt · {reason}",
+      "en": "Not carried out · {reason}"
+    },
+    {
+      "key": "TRIBE_GROWTH_MAX",
+      "de": "Dein Stamm zählt sechs Bewohner.",
+      "en": "Your tribe has six residents."
+    },
+    {
+      "key": "TRIBE_GROWTH_BEDS",
+      "de": "Dorfwachstum: Baue zusätzliche Schlafplätze.",
+      "en": "Village growth: build more beds."
+    },
+    {
+      "key": "TRIBE_GROWTH_STATIONS",
+      "de": "Dorfwachstum: Wurzelgarten und Brunnen werden benötigt.",
+      "en": "Village growth: a root garden and a well are required."
+    },
+    {
+      "key": "TRIBE_GROWTH_NEEDS",
+      "de": "Dorfwachstum: Alle Bewohner müssen mindestens halb satt und mit Wasser versorgt sein.",
+      "en": "Village growth: all residents need at least 50% food and water."
+    },
+    {
+      "key": "TRIBE_STATUS_SELECT",
+      "de": "Wähle Bewohner und erteile gemeinsame oder einzelne Aufträge.",
+      "en": "Select residents and issue group or individual orders."
+    },
+    {
+      "key": "TRIBE_STATUS_NO_GROUND",
+      "de": "Hier ist kein geladener Boden.",
+      "en": "The ground here is not loaded."
+    },
+    {
+      "key": "TRIBE_STATUS_NO_SELECTION",
+      "de": "Wähle zuerst mindestens einen Bewohner aus.",
+      "en": "Select at least one resident first."
+    },
+    {
+      "key": "TRIBE_STATUS_UNAVAILABLE",
+      "de": "Die Gruppe kann gerade keine Befehle annehmen.",
+      "en": "The group cannot accept orders right now."
+    },
+    {
+      "key": "TRIBE_STATUS_TOOL",
+      "de": "Zuerst ein Steinwerkzeug herstellen.",
+      "en": "Craft a stone tool first."
+    },
+    {
+      "key": "TRIBE_STATUS_TOOL_FIRST",
+      "de": "Stelle zuerst ein Steinwerkzeug her.",
+      "en": "Craft a stone tool first."
+    },
+    {
+      "key": "TRIBE_STATUS_PLACEMENT",
+      "de": "Rechtsklick auf einen freien Bauplatz · Esc bricht die Platzierung ab.",
+      "en": "Right click an open building site · Esc cancels placement."
+    },
+    {
+      "key": "TRIBE_STATUS_CANCEL",
+      "de": "Platzierung abgebrochen.",
+      "en": "Placement cancelled."
+    },
+    {
+      "key": "TRIBE_STATUS_PATHS",
+      "de": "Die Dorfwege werden geprüft. Bitte einen Moment warten.",
+      "en": "Checking village routes. Please wait a moment."
+    },
+    {
+      "key": "TRIBE_STATUS_RANGE",
+      "de": "Befehle bleiben zunächst in der sicheren Umgebung des Dorfes.",
+      "en": "Orders are currently limited to the safe area around the village."
+    },
+    {
+      "key": "TRIBE_STATUS_ROUTE",
+      "de": "Mindestens ein ausgewählter Bewohner erreicht diesen Ort nicht.",
+      "en": "At least one selected resident cannot reach this location."
+    },
+    {
+      "key": "TRIBE_STATUS_DONE",
+      "de": "Dieser Ausbau ist bereits abgeschlossen.",
+      "en": "This upgrade is already complete."
+    },
+    {
+      "key": "TRIBE_STATUS_BUSY",
+      "de": "Schließe zuerst die laufende Arbeit ab.",
+      "en": "Finish the current project first."
+    },
+    {
+      "key": "TRIBE_STATUS_SITE",
+      "de": "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager.",
+      "en": "This site needs space, dry ground and a clear route to storage."
+    },
+    {
+      "key": "TRIBE_STATUS_SITE_ROUTE",
+      "de": "Ein ausgewählter Bewohner erreicht diesen Bauplatz nicht.",
+      "en": "A selected resident cannot reach this building site."
+    },
+    {
+      "key": "TRIBE_STATUS_SAVED",
+      "de": "Auftrag gespeichert.",
+      "en": "Order saved."
+    },
+    {
+      "key": "TRIBE_STATUS_SAVE_ORDER",
+      "de": "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten.",
+      "en": "Saving failed. The previous order is preserved."
+    },
+    {
+      "key": "TRIBE_STATUS_SAVE_STATE",
+      "de": "Speichern fehlgeschlagen. Der bisherige Stand bleibt erhalten.",
+      "en": "Saving failed. The previous state is preserved."
+    },
+    {
+      "key": "TRIBE_STATUS_GROUND",
+      "de": "Ein Bewohner wartet auf geladenen Boden.",
+      "en": "A resident is waiting for the ground to load."
+    },
+    {
+      "key": "TRIBE_STATUS_BLOCKED",
+      "de": "Weg blockiert · der Auftrag bleibt erhalten; neue Wege werden geprüft.",
+      "en": "Route blocked · the order is preserved; checking new routes."
+    },
+    {
+      "key": "TRIBE_STATUS_RESUME",
+      "de": "Die Bewohner setzen ihre Aufträge fort.",
+      "en": "Residents are resuming their orders."
+    },
+    {
+      "key": "TRIBE_STATUS_BUILT",
+      "de": "Ausbau fertig · Bewohner mit Beruf setzen ihre Zuständigkeit fort.",
+      "en": "Upgrade complete · residents with professions resume their duties."
+    },
+    {
+      "key": "TRIBE_STATUS_GROWTH_SITE",
+      "de": "Dorfwachstum wartet auf einen freien, erreichbaren Eingang.",
+      "en": "Village growth is waiting for an open, reachable entrance."
+    },
+    {
+      "key": "TRIBE_STATUS_PICKUP",
+      "de": "Die Abholstelle ist nicht erreichbar.",
+      "en": "The pickup point is not reachable."
+    },
+    {
+      "key": "TRIBE_GROWTH_RESERVE",
+      "de": "Dorfwachstum: Halte je {count} Nahrung und Wasser im Lager bereit.",
+      "en": "Village growth: keep {count} units each of food and water in storage."
+    },
+    {
+      "key": "TRIBE_STATUS_MATERIAL",
+      "de": "Es fehlen eingelagerte Materialien: {count} {resource}.",
+      "en": "Required stored materials: {count} {resource}."
+    },
+    {
+      "key": "TRIBE_STATUS_JOINED",
+      "de": "{name} gehört jetzt zu deinem Stamm. Wähle einen Beruf oder Auftrag.",
+      "en": "{name} has joined your tribe. Choose a profession or order."
+    },
+    {
+      "key": "TRIBE_TAMING_TAB",
+      "de": "Zähmung",
+      "en": "Taming"
     }
   ]
 }

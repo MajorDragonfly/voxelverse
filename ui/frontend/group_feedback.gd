@@ -2,16 +2,16 @@ extends VBoxContainer
 ## Read-only presentation of the controller's selection and committed receipts.
 const Text = preload("res://core/localization/ui_text.gd")
 const NeighborPresentation = preload("res://ui/tribe/neighbor_presentation.gd")
+const TribePresentation = preload("res://ui/tribe/tribe_presentation.gd")
 const Style = preload("res://ui/progression_style.gd")
-const LABELS := {"move": "Laufen", "wood": "Holz sammeln", "stone": "Stein sammeln",
-	"food": "Nahrung sammeln", "supply": "Versorgung sichern", "tool": "Werkzeug herstellen",
-	"hut": "Hütte bauen", "garden": "Garten anlegen", "feed": "Essen", "wait": "Anhalten"}
 var controller: Node
 var selection: Label
 var result: Label
 var _last_receipt := ""
 var _last_status := ""
 var _text := ""
+var _receipt: Dictionary = {}
+var _book: Button
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -22,7 +22,8 @@ func _ready() -> void:
 	selection.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	selection.name = "GroupSelectionSummary"
 	row.add_child(selection)
-	var book := Style.button("Buch · J")
+	var book := Style.button(Text.text("TRIBE_BOOK"))
+	_book = book
 	book.name = "OpenGroupJournal"
 	book.pressed.connect(func() -> void:
 		var journal := get_tree().get_first_node_in_group(&"discovery_journal")
@@ -41,6 +42,7 @@ func _notification(what: int) -> void:
 		refresh()
 
 func refresh() -> void:
+	_book.text = Text.text("TRIBE_BOOK")
 	var data: Dictionary = controller.village()
 	var names := PackedStringArray()
 	var carrying := 0
@@ -57,8 +59,11 @@ func refresh() -> void:
 	if controller.status != _last_status:
 		_last_status = controller.status
 		_text = _last_status
+		_receipt.clear()
 		result.add_theme_color_override("font_color", Style.MUTED)
-	var display_text := _text
+	var display_text := TribePresentation.legacy_status(_text)
+	if not _receipt.is_empty():
+		display_text = Text.format_text("TRIBE_ORDER_ACCEPTED", {"order": TribePresentation.order_title(_receipt.order), "count": _receipt.count}) if _receipt.accepted else Text.format_text("TRIBE_ORDER_REJECTED", {"reason": TribePresentation.legacy_status(_receipt.reason)})
 	# Only the current neighbor result owns these parameters. Other group commands
 	# retain their existing feedback and cannot replay a stale neighbor receipt.
 	if NeighborPresentation.RESULT_KEYS.has(_text):
@@ -71,8 +76,7 @@ func _on_result(order: StringName, command_id: String, accepted: bool) -> void:
 		return
 	_last_receipt = command_id
 	_last_status = controller.status
-	var title: String = LABELS.get(String(order), "Gruppenbefehl")
-	_text = ("✓ %s · Auftrag für %d Bewohner gespeichert." % [title, controller.selected.size()]
-		if accepted else "Nicht ausgeführt · %s" % controller.status)
+	_text = controller.status
+	_receipt = {"order": String(order), "accepted": accepted, "count": controller.selected.size(), "reason": controller.status}
 	result.add_theme_color_override("font_color", Style.SOCIAL if accepted else Style.AGGRESSION)
 	refresh()

@@ -1706,3 +1706,468 @@ msgstr "Universenübergreifende Bedrohungen mit definiertem Ziel abwehren."
 
 msgid "SKILLS_PHASE_5_NEXT"
 msgstr "Langfristiger Entwurf; konkrete Spielregeln erst nach der Weltraumphase festlegen."
+
+msgid "TRIBE_ORDER_WOOD"
+msgstr "Holz sammeln"
+
+msgid "TRIBE_ORDER_STONE"
+msgstr "Stein sammeln"
+
+msgid "TRIBE_ORDER_FOOD"
+msgstr "Nahrung sammeln"
+
+msgid "TRIBE_ORDER_SUPPLY"
+msgstr "Versorgung sichern"
+
+msgid "TRIBE_ORDER_TOOL"
+msgstr "Werkzeug · 3 Holz / 2 Stein"
+
+msgid "TRIBE_ORDER_HUT"
+msgstr "Hütte setzen · 6 Holz / 3 Stein"
+
+msgid "TRIBE_ORDER_TENT"
+msgstr "Zelt setzen · 3 Holz / 2 Fasern"
+
+msgid "TRIBE_ORDER_GARDEN"
+msgstr "Wurzelgarten · 4 Holz / 1 Stein"
+
+msgid "TRIBE_ORDER_FEED"
+msgstr "Jetzt essen"
+
+msgid "TRIBE_ORDER_WAIT"
+msgstr "Anhalten"
+
+msgid "TRIBE_ORDER_RESUME"
+msgstr "Fortsetzen"
+
+msgid "TRIBE_ORDER_WATER"
+msgstr "Wasser holen"
+
+msgid "TRIBE_ORDER_PROVISION"
+msgstr "Nahrung & Wasser sichern"
+
+msgid "TRIBE_ORDER_DRINK"
+msgstr "Jetzt trinken"
+
+msgid "TRIBE_ORDER_WELL"
+msgstr "Brunnen · 3 Holz / 2 Stein"
+
+msgid "TRIBE_ORDER_FORESTER"
+msgstr "Forstplatz · 4 Holz / 1 Stein"
+
+msgid "TRIBE_ORDER_QUARRY"
+msgstr "Steinbruch · 4 Holz / 2 Stein"
+
+msgid "TRIBE_ORDER_FIBERBED"
+msgstr "Faserbeet · 2 Holz / 1 Stein"
+
+msgid "TRIBE_ORDER_FIBER"
+msgstr "Fasern sammeln"
+
+msgid "TRIBE_ORDER_MILK"
+msgstr "Milch abholen"
+
+msgid "TRIBE_ORDER_MOVE"
+msgstr "Laufen"
+
+msgid "TRIBE_ORDER_PROFESSION"
+msgstr "Beruf fortsetzen"
+
+msgid "TRIBE_ORDER_PEN"
+msgstr "Milchtierplatz bauen"
+
+msgid "TRIBE_ORDER_LAYING_SITE"
+msgstr "Legestelle bauen"
+
+msgid "TRIBE_ORDER_TEND"
+msgstr "Tiere versorgen"
+
+msgid "TRIBE_ORDER_EGGS"
+msgstr "Eier abholen"
+
+msgid "TRIBE_JOB_NONE"
+msgstr "Ohne Beruf"
+
+msgid "TRIBE_JOB_PROVIDER"
+msgstr "Versorger"
+
+msgid "TRIBE_JOB_FORESTER"
+msgstr "Holzarbeiter"
+
+msgid "TRIBE_JOB_MASON"
+msgstr "Steinmetz"
+
+msgid "TRIBE_JOB_WEAVER"
+msgstr "Fasersammler"
+
+msgid "TRIBE_JOB_BUILDER"
+msgstr "Baumeister"
+
+msgid "TRIBE_JOB_MILK_CARRIER"
+msgstr "Milchträger"
+
+msgid "TRIBE_JOB_KEEPER"
+msgstr "Tierpfleger"
+
+msgid "TRIBE_JOB_EGG_CARRIER"
+msgstr "Eierträger"
+
+msgid "TRIBE_RESOURCE_WOOD"
+msgstr "Holz"
+
+msgid "TRIBE_RESOURCE_STONE"
+msgstr "Stein"
+
+msgid "TRIBE_RESOURCE_FOOD"
+msgstr "Nahrung"
+
+msgid "TRIBE_RESOURCE_WATER"
+msgstr "Wasser"
+
+msgid "TRIBE_RESOURCE_FIBER"
+msgstr "Fasern"
+
+msgid "TRIBE_RESOURCE_MILK"
+msgstr "Milch"
+
+msgid "TRIBE_RESOURCE_EGGS"
+msgstr "Eier"
+
+msgid "TRIBE_ACTIVITY_WAIT"
+msgstr "wartet"
+
+msgid "TRIBE_ACTIVITY_MOVE"
+msgstr "unterwegs"
+
+msgid "TRIBE_ACTIVITY_WOOD"
+msgstr "sammelt Holz"
+
+msgid "TRIBE_ACTIVITY_STONE"
+msgstr "sammelt Stein"
+
+msgid "TRIBE_ACTIVITY_FOOD"
+msgstr "sammelt Nahrung"
+
+msgid "TRIBE_ACTIVITY_TOOL"
+msgstr "stellt Werkzeug her"
+
+msgid "TRIBE_ACTIVITY_HUT"
+msgstr "baut Hütte"
+
+msgid "TRIBE_ACTIVITY_TENT"
+msgstr "baut Zelt"
+
+msgid "TRIBE_ACTIVITY_PEN"
+msgstr "baut Tierplatz"
+
+msgid "TRIBE_ACTIVITY_LAYING_SITE"
+msgstr "baut Legestelle"
+
+msgid "TRIBE_ACTIVITY_EGGS"
+msgstr "holt Eier"
+
+msgid "TRIBE_ACTIVITY_TEND"
+msgstr "versorgt Tiere"
+
+msgid "TRIBE_ACTIVITY_GARDEN"
+msgstr "legt Garten an"
+
+msgid "TRIBE_ACTIVITY_SUPPLY"
+msgstr "sichert Nahrung"
+
+msgid "TRIBE_ACTIVITY_FEED"
+msgstr "isst"
+
+msgid "TRIBE_ACTIVITY_WATER"
+msgstr "holt Wasser"
+
+msgid "TRIBE_ACTIVITY_FIBER"
+msgstr "sammelt Fasern"
+
+msgid "TRIBE_ACTIVITY_MILK"
+msgstr "holt Milch"
+
+msgid "TRIBE_ACTIVITY_DRINK"
+msgstr "trinkt"
+
+msgid "TRIBE_ACTIVITY_PROVISION"
+msgstr "sichert Nahrung und Wasser"
+
+msgid "TRIBE_ACTIVITY_BUILD"
+msgstr "bereit für Bauarbeiten"
+
+msgid "TRIBE_ACTIVITY_WELL"
+msgstr "baut Brunnen"
+
+msgid "TRIBE_ACTIVITY_FORESTER"
+msgstr "baut Forstplatz"
+
+msgid "TRIBE_ACTIVITY_QUARRY"
+msgstr "baut Steinbruch"
+
+msgid "TRIBE_ACTIVITY_FIBERBED"
+msgstr "legt Faserbeet an"
+
+msgid "TRIBE_PROJECT_TOOL"
+msgstr "Werkzeugherstellung"
+
+msgid "TRIBE_PROJECT_HUT"
+msgstr "Hüttenbau"
+
+msgid "TRIBE_PROJECT_TENT"
+msgstr "Zeltbau"
+
+msgid "TRIBE_PROJECT_PEN"
+msgstr "Tierplatzbau"
+
+msgid "TRIBE_PROJECT_LAYING_SITE"
+msgstr "Legestellenbau"
+
+msgid "TRIBE_PROJECT_GARDEN"
+msgstr "Gartenbau"
+
+msgid "TRIBE_PROJECT_WELL"
+msgstr "Brunnenbau"
+
+msgid "TRIBE_PROJECT_FORESTER"
+msgstr "Forstplatz"
+
+msgid "TRIBE_PROJECT_QUARRY"
+msgstr "Steinbruch"
+
+msgid "TRIBE_PROJECT_FIBERBED"
+msgstr "Faserbeet"
+
+msgid "TRIBE_COLLAPSE"
+msgstr "Einklappen"
+
+msgid "TRIBE_ORDERS_TAB"
+msgstr "Aufträge"
+
+msgid "TRIBE_WORK_TAB"
+msgstr "Arbeitsplätze & Berufe"
+
+msgid "TRIBE_HUSBANDRY_TAB"
+msgstr "Tierhaltung"
+
+msgid "TRIBE_SELECT_ALL"
+msgstr "Alle auswählen"
+
+msgid "TRIBE_PROFESSION_LABEL"
+msgstr "Beruf für die Auswahl:"
+
+msgid "TRIBE_ASSIGN_PROFESSION"
+msgstr "Beruf zuweisen"
+
+msgid "TRIBE_RESUME_PROFESSION"
+msgstr "Beruf fortsetzen"
+
+msgid "TRIBE_PROFESSION_HINT"
+msgstr "Versorger halten Nahrung und Wasser bereit. Baumeister helfen an der laufenden Baustelle. Manuelle Befehle ändern den Beruf nicht."
+
+msgid "TRIBE_CONTROLS"
+msgstr "Linksklick / Rahmen: auswählen · Umschalt: Auswahl ändern · Rechtsklick: laufen oder sammeln · WASD: Kamera · Mausrad: Zoom · Leertaste: Pause"
+
+msgid "TRIBE_SUPPLY_HINT"
+msgstr "Dauerauftrag: Nahrung ernten und einlagern, bis vier Portionen je Bewohner vorrätig oder unterwegs sind. Danach am Dorfplatz warten und bei Bedarf weiterarbeiten."
+
+msgid "TRIBE_HOUSING_HINT"
+msgstr "Festes Stammesmodell. Rechtsklick: freien Platz wählen. Material wird aus dem Lager zum Eingang getragen. Hütte: zwei Schlafplätze; Zelt: ein Schlafplatz."
+
+msgid "TRIBE_GARDEN_HINT"
+msgstr "Benötigt ein Steinwerkzeug. Baut die Wurzelfundstelle zum Garten aus. Alle 20 Spielsekunden wächst eine Wurzel nach, bis dort acht bereitliegen."
+
+msgid "TRIBE_STATION_HINT"
+msgstr "Steinwerkzeug erforderlich. Anklicken, dann mit Rechtsklick einen freien, erreichbaren Platz wählen."
+
+msgid "TRIBE_TRANSPORT_HINT"
+msgstr "Dauerauftrag mit Transport zum gemeinsamen Lager."
+
+msgid "TRIBE_STOCK"
+msgstr "STAMM · Holz {wood} · Stein {stone} · Nahrung {food} · Wasser {water} · Fasern {fiber} · Milch {milk} · Eier {eggs}   |   Bewohner {residents} / {capacity} · Schlafplätze {beds}"
+
+msgid "TRIBE_STORE_HINT"
+msgstr "Lager: je 48 Einheiten. Arbeitende Bewohner essen und trinken selbstständig; ihr Auftrag bleibt erhalten."
+
+msgid "TRIBE_GARDEN_STATUS"
+msgstr "Wurzelgarten · {ready} erntereif · {growth} · Essens- und Trinkpausen erfolgen selbstständig."
+
+msgid "TRIBE_GARDEN_FULL"
+msgstr "Garten gefüllt"
+
+msgid "TRIBE_GARDEN_NEXT"
+msgstr "Nächste Wurzel in {seconds} s"
+
+msgid "TRIBE_GOAL_START"
+msgstr "Erster Schritt: Bewohner auswählen und Holz, Stein und Nahrung einlagern."
+
+msgid "TRIBE_GOAL_TOOL"
+msgstr "Steinwerkzeug bereit · Setze Hütten oder Zelte auf freie Plätze und sichere Nahrung und Wasser."
+
+msgid "TRIBE_GOAL_MATERIAL"
+msgstr "Material bereit · Weise Bewohner an, das erste Steinwerkzeug herzustellen."
+
+msgid "TRIBE_GOAL_PROJECT"
+msgstr "{project} · {percent} % · Weitere Bewohner können mitarbeiten."
+
+msgid "TRIBE_GOAL_GARDEN"
+msgstr "Dein Dorf steht · Lege einen Wurzelgarten für dauerhafte Nahrung an."
+
+msgid "TRIBE_GOAL_WELL"
+msgstr "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsplätze & Berufe."
+
+msgid "TRIBE_GOAL_SUPPLY"
+msgstr "Nahrung und Wasser sichern · Forstplatz, Steinbruch und Faserbeet erweitern die Rohstoffversorgung."
+
+msgid "TRIBE_GROWTH_READY"
+msgstr "Dorfwachstum · noch {seconds} s gute Versorgung · danach 2 Nahrung und 2 Wasser für den neuen Bewohner."
+
+msgid "TRIBE_ACTIVITY_UNKNOWN"
+msgstr "Auftrag läuft"
+
+msgid "TRIBE_RESERVE_READY"
+msgstr "Vorrat bereit · bleibt zuständig"
+
+msgid "TRIBE_WAIT_ROOTS"
+msgstr "wartet auf reife Wurzeln"
+
+msgid "TRIBE_WAIT_RESOURCE"
+msgstr "wartet auf {resource}"
+
+msgid "TRIBE_MEAL"
+msgstr "Essenspause · kehrt zur Arbeit zurück"
+
+msgid "TRIBE_DRINK"
+msgstr "Trinkpause · kehrt zur Arbeit zurück"
+
+msgid "TRIBE_BLOCKED"
+msgstr "Weg blockiert · prüft neuen Weg"
+
+msgid "TRIBE_STOPPED"
+msgstr "angehalten · Fortsetzen möglich"
+
+msgid "TRIBE_STOPPED_CARGO"
+msgstr "angehalten · trägt Baumaterial"
+
+msgid "TRIBE_BUILD_CARGO"
+msgstr "trägt Baumaterial zum Eingang"
+
+msgid "TRIBE_CARRYING"
+msgstr "trägt {resource}"
+
+msgid "TRIBE_RESIDENT"
+msgstr "{name} · {profession}\nSatt {food} % · Wasser {water} %\n{activity}"
+
+msgid "TRIBE_UNKNOWN_JOB"
+msgstr "Unbekannter Beruf"
+
+msgid "TRIBE_UNKNOWN_RESOURCE"
+msgstr "Material"
+
+msgid "TRIBE_COMMAND"
+msgstr "Gruppenbefehl"
+
+msgid "TRIBE_BOOK"
+msgstr "Buch · J"
+
+msgid "TRIBE_ORDER_ACCEPTED"
+msgstr "✓ {order} · Auftrag für {count} Bewohner gespeichert."
+
+msgid "TRIBE_ORDER_REJECTED"
+msgstr "Nicht ausgeführt · {reason}"
+
+msgid "TRIBE_GROWTH_MAX"
+msgstr "Dein Stamm zählt sechs Bewohner."
+
+msgid "TRIBE_GROWTH_BEDS"
+msgstr "Dorfwachstum: Baue zusätzliche Schlafplätze."
+
+msgid "TRIBE_GROWTH_STATIONS"
+msgstr "Dorfwachstum: Wurzelgarten und Brunnen werden benötigt."
+
+msgid "TRIBE_GROWTH_NEEDS"
+msgstr "Dorfwachstum: Alle Bewohner müssen mindestens halb satt und mit Wasser versorgt sein."
+
+msgid "TRIBE_STATUS_SELECT"
+msgstr "Wähle Bewohner und erteile gemeinsame oder einzelne Aufträge."
+
+msgid "TRIBE_STATUS_NO_GROUND"
+msgstr "Hier ist kein geladener Boden."
+
+msgid "TRIBE_STATUS_NO_SELECTION"
+msgstr "Wähle zuerst mindestens einen Bewohner aus."
+
+msgid "TRIBE_STATUS_UNAVAILABLE"
+msgstr "Die Gruppe kann gerade keine Befehle annehmen."
+
+msgid "TRIBE_STATUS_TOOL"
+msgstr "Zuerst ein Steinwerkzeug herstellen."
+
+msgid "TRIBE_STATUS_TOOL_FIRST"
+msgstr "Stelle zuerst ein Steinwerkzeug her."
+
+msgid "TRIBE_STATUS_PLACEMENT"
+msgstr "Rechtsklick auf einen freien Bauplatz · Esc bricht die Platzierung ab."
+
+msgid "TRIBE_STATUS_CANCEL"
+msgstr "Platzierung abgebrochen."
+
+msgid "TRIBE_STATUS_PATHS"
+msgstr "Die Dorfwege werden geprüft. Bitte einen Moment warten."
+
+msgid "TRIBE_STATUS_RANGE"
+msgstr "Befehle bleiben zunächst in der sicheren Umgebung des Dorfes."
+
+msgid "TRIBE_STATUS_ROUTE"
+msgstr "Mindestens ein ausgewählter Bewohner erreicht diesen Ort nicht."
+
+msgid "TRIBE_STATUS_DONE"
+msgstr "Dieser Ausbau ist bereits abgeschlossen."
+
+msgid "TRIBE_STATUS_BUSY"
+msgstr "Schließe zuerst die laufende Arbeit ab."
+
+msgid "TRIBE_STATUS_SITE"
+msgstr "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
+
+msgid "TRIBE_STATUS_SITE_ROUTE"
+msgstr "Ein ausgewählter Bewohner erreicht diesen Bauplatz nicht."
+
+msgid "TRIBE_STATUS_SAVED"
+msgstr "Auftrag gespeichert."
+
+msgid "TRIBE_STATUS_SAVE_ORDER"
+msgstr "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten."
+
+msgid "TRIBE_STATUS_SAVE_STATE"
+msgstr "Speichern fehlgeschlagen. Der bisherige Stand bleibt erhalten."
+
+msgid "TRIBE_STATUS_GROUND"
+msgstr "Ein Bewohner wartet auf geladenen Boden."
+
+msgid "TRIBE_STATUS_BLOCKED"
+msgstr "Weg blockiert · der Auftrag bleibt erhalten; neue Wege werden geprüft."
+
+msgid "TRIBE_STATUS_RESUME"
+msgstr "Die Bewohner setzen ihre Aufträge fort."
+
+msgid "TRIBE_STATUS_BUILT"
+msgstr "Ausbau fertig · Bewohner mit Beruf setzen ihre Zuständigkeit fort."
+
+msgid "TRIBE_STATUS_GROWTH_SITE"
+msgstr "Dorfwachstum wartet auf einen freien, erreichbaren Eingang."
+
+msgid "TRIBE_STATUS_PICKUP"
+msgstr "Die Abholstelle ist nicht erreichbar."
+
+msgid "TRIBE_GROWTH_RESERVE"
+msgstr "Dorfwachstum: Halte je {count} Nahrung und Wasser im Lager bereit."
+
+msgid "TRIBE_STATUS_MATERIAL"
+msgstr "Es fehlen eingelagerte Materialien: {count} {resource}."
+
+msgid "TRIBE_STATUS_JOINED"
+msgstr "{name} gehört jetzt zu deinem Stamm. Wähle einen Beruf oder Auftrag."
+
+msgid "TRIBE_TAMING_TAB"
+msgstr "Zähmung"

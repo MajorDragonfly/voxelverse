@@ -1706,3 +1706,468 @@ msgstr "Defeat threats across universes with a defined objective."
 
 msgid "SKILLS_PHASE_5_NEXT"
 msgstr "Long-term concept; concrete gameplay rules will be defined after the space phase."
+
+msgid "TRIBE_ORDER_WOOD"
+msgstr "Gather wood"
+
+msgid "TRIBE_ORDER_STONE"
+msgstr "Gather stone"
+
+msgid "TRIBE_ORDER_FOOD"
+msgstr "Gather food"
+
+msgid "TRIBE_ORDER_SUPPLY"
+msgstr "Maintain food supply"
+
+msgid "TRIBE_ORDER_TOOL"
+msgstr "Tool · 3 wood / 2 stone"
+
+msgid "TRIBE_ORDER_HUT"
+msgstr "Place hut · 6 wood / 3 stone"
+
+msgid "TRIBE_ORDER_TENT"
+msgstr "Place tent · 3 wood / 2 fiber"
+
+msgid "TRIBE_ORDER_GARDEN"
+msgstr "Root garden · 4 wood / 1 stone"
+
+msgid "TRIBE_ORDER_FEED"
+msgstr "Eat now"
+
+msgid "TRIBE_ORDER_WAIT"
+msgstr "Stop"
+
+msgid "TRIBE_ORDER_RESUME"
+msgstr "Resume"
+
+msgid "TRIBE_ORDER_WATER"
+msgstr "Fetch water"
+
+msgid "TRIBE_ORDER_PROVISION"
+msgstr "Maintain food & water"
+
+msgid "TRIBE_ORDER_DRINK"
+msgstr "Drink now"
+
+msgid "TRIBE_ORDER_WELL"
+msgstr "Well · 3 wood / 2 stone"
+
+msgid "TRIBE_ORDER_FORESTER"
+msgstr "Forestry · 4 wood / 1 stone"
+
+msgid "TRIBE_ORDER_QUARRY"
+msgstr "Quarry · 4 wood / 2 stone"
+
+msgid "TRIBE_ORDER_FIBERBED"
+msgstr "Fiber bed · 2 wood / 1 stone"
+
+msgid "TRIBE_ORDER_FIBER"
+msgstr "Gather fiber"
+
+msgid "TRIBE_ORDER_MILK"
+msgstr "Collect milk"
+
+msgid "TRIBE_ORDER_MOVE"
+msgstr "Move"
+
+msgid "TRIBE_ORDER_PROFESSION"
+msgstr "Resume profession"
+
+msgid "TRIBE_ORDER_PEN"
+msgstr "Build milk pen"
+
+msgid "TRIBE_ORDER_LAYING_SITE"
+msgstr "Build laying site"
+
+msgid "TRIBE_ORDER_TEND"
+msgstr "Care for animals"
+
+msgid "TRIBE_ORDER_EGGS"
+msgstr "Collect eggs"
+
+msgid "TRIBE_JOB_NONE"
+msgstr "No profession"
+
+msgid "TRIBE_JOB_PROVIDER"
+msgstr "Provider"
+
+msgid "TRIBE_JOB_FORESTER"
+msgstr "Woodworker"
+
+msgid "TRIBE_JOB_MASON"
+msgstr "Stoneworker"
+
+msgid "TRIBE_JOB_WEAVER"
+msgstr "Fiber gatherer"
+
+msgid "TRIBE_JOB_BUILDER"
+msgstr "Builder"
+
+msgid "TRIBE_JOB_MILK_CARRIER"
+msgstr "Milk carrier"
+
+msgid "TRIBE_JOB_KEEPER"
+msgstr "Animal keeper"
+
+msgid "TRIBE_JOB_EGG_CARRIER"
+msgstr "Egg carrier"
+
+msgid "TRIBE_RESOURCE_WOOD"
+msgstr "wood"
+
+msgid "TRIBE_RESOURCE_STONE"
+msgstr "stone"
+
+msgid "TRIBE_RESOURCE_FOOD"
+msgstr "food"
+
+msgid "TRIBE_RESOURCE_WATER"
+msgstr "water"
+
+msgid "TRIBE_RESOURCE_FIBER"
+msgstr "fiber"
+
+msgid "TRIBE_RESOURCE_MILK"
+msgstr "milk"
+
+msgid "TRIBE_RESOURCE_EGGS"
+msgstr "eggs"
+
+msgid "TRIBE_ACTIVITY_WAIT"
+msgstr "waiting"
+
+msgid "TRIBE_ACTIVITY_MOVE"
+msgstr "moving"
+
+msgid "TRIBE_ACTIVITY_WOOD"
+msgstr "gathering wood"
+
+msgid "TRIBE_ACTIVITY_STONE"
+msgstr "gathering stone"
+
+msgid "TRIBE_ACTIVITY_FOOD"
+msgstr "gathering food"
+
+msgid "TRIBE_ACTIVITY_TOOL"
+msgstr "making a tool"
+
+msgid "TRIBE_ACTIVITY_HUT"
+msgstr "building a hut"
+
+msgid "TRIBE_ACTIVITY_TENT"
+msgstr "building a tent"
+
+msgid "TRIBE_ACTIVITY_PEN"
+msgstr "building an animal pen"
+
+msgid "TRIBE_ACTIVITY_LAYING_SITE"
+msgstr "building a laying site"
+
+msgid "TRIBE_ACTIVITY_EGGS"
+msgstr "collecting eggs"
+
+msgid "TRIBE_ACTIVITY_TEND"
+msgstr "caring for animals"
+
+msgid "TRIBE_ACTIVITY_GARDEN"
+msgstr "planting a garden"
+
+msgid "TRIBE_ACTIVITY_SUPPLY"
+msgstr "maintaining food supply"
+
+msgid "TRIBE_ACTIVITY_FEED"
+msgstr "eating"
+
+msgid "TRIBE_ACTIVITY_WATER"
+msgstr "fetching water"
+
+msgid "TRIBE_ACTIVITY_FIBER"
+msgstr "gathering fiber"
+
+msgid "TRIBE_ACTIVITY_MILK"
+msgstr "collecting milk"
+
+msgid "TRIBE_ACTIVITY_DRINK"
+msgstr "drinking"
+
+msgid "TRIBE_ACTIVITY_PROVISION"
+msgstr "maintaining food and water"
+
+msgid "TRIBE_ACTIVITY_BUILD"
+msgstr "ready to build"
+
+msgid "TRIBE_ACTIVITY_WELL"
+msgstr "building a well"
+
+msgid "TRIBE_ACTIVITY_FORESTER"
+msgstr "building a forestry station"
+
+msgid "TRIBE_ACTIVITY_QUARRY"
+msgstr "building a quarry"
+
+msgid "TRIBE_ACTIVITY_FIBERBED"
+msgstr "planting a fiber bed"
+
+msgid "TRIBE_PROJECT_TOOL"
+msgstr "Tool crafting"
+
+msgid "TRIBE_PROJECT_HUT"
+msgstr "Hut construction"
+
+msgid "TRIBE_PROJECT_TENT"
+msgstr "Tent construction"
+
+msgid "TRIBE_PROJECT_PEN"
+msgstr "Animal pen construction"
+
+msgid "TRIBE_PROJECT_LAYING_SITE"
+msgstr "Laying site construction"
+
+msgid "TRIBE_PROJECT_GARDEN"
+msgstr "Garden planting"
+
+msgid "TRIBE_PROJECT_WELL"
+msgstr "Well construction"
+
+msgid "TRIBE_PROJECT_FORESTER"
+msgstr "Forestry station"
+
+msgid "TRIBE_PROJECT_QUARRY"
+msgstr "Quarry"
+
+msgid "TRIBE_PROJECT_FIBERBED"
+msgstr "Fiber bed"
+
+msgid "TRIBE_COLLAPSE"
+msgstr "Collapse"
+
+msgid "TRIBE_ORDERS_TAB"
+msgstr "Orders"
+
+msgid "TRIBE_WORK_TAB"
+msgstr "Workplaces & professions"
+
+msgid "TRIBE_HUSBANDRY_TAB"
+msgstr "Animal husbandry"
+
+msgid "TRIBE_SELECT_ALL"
+msgstr "Select all"
+
+msgid "TRIBE_PROFESSION_LABEL"
+msgstr "Profession for selection:"
+
+msgid "TRIBE_ASSIGN_PROFESSION"
+msgstr "Assign profession"
+
+msgid "TRIBE_RESUME_PROFESSION"
+msgstr "Resume profession"
+
+msgid "TRIBE_PROFESSION_HINT"
+msgstr "Providers maintain food and water. Builders help at the active construction site. Manual orders do not change professions."
+
+msgid "TRIBE_CONTROLS"
+msgstr "Left click / drag: select · Shift: change selection · Right click: move or gather · WASD: camera · Wheel: zoom · Space: pause"
+
+msgid "TRIBE_SUPPLY_HINT"
+msgstr "Ongoing order: harvest and store food until four portions per resident are stored or in transit. Then wait at the village and resume when needed."
+
+msgid "TRIBE_HOUSING_HINT"
+msgstr "Fixed tribal design. Right click to choose an open site. Materials are carried from storage to the entrance. Hut: two beds; tent: one bed."
+
+msgid "TRIBE_GARDEN_HINT"
+msgstr "Requires a stone tool. Upgrades the root patch to a garden. One root regrows every 20 gameplay seconds, up to eight ready to harvest."
+
+msgid "TRIBE_STATION_HINT"
+msgstr "Requires a stone tool. Click, then right click an open, reachable site."
+
+msgid "TRIBE_TRANSPORT_HINT"
+msgstr "Ongoing order with delivery to shared storage."
+
+msgid "TRIBE_STOCK"
+msgstr "TRIBE · Wood {wood} · Stone {stone} · Food {food} · Water {water} · Fiber {fiber} · Milk {milk} · Eggs {eggs}   |   Residents {residents} / {capacity} · Beds {beds}"
+
+msgid "TRIBE_STORE_HINT"
+msgstr "Storage: 48 units each. Working residents eat and drink automatically while keeping their orders."
+
+msgid "TRIBE_GARDEN_STATUS"
+msgstr "Root garden · {ready} ready to harvest · {growth} · Residents take meal and water breaks automatically."
+
+msgid "TRIBE_GARDEN_FULL"
+msgstr "Garden full"
+
+msgid "TRIBE_GARDEN_NEXT"
+msgstr "Next root in {seconds} s"
+
+msgid "TRIBE_GOAL_START"
+msgstr "First step: select residents and store wood, stone and food."
+
+msgid "TRIBE_GOAL_TOOL"
+msgstr "Stone tool ready · Place huts or tents on open sites and secure food and water."
+
+msgid "TRIBE_GOAL_MATERIAL"
+msgstr "Materials ready · Order residents to craft the first stone tool."
+
+msgid "TRIBE_GOAL_PROJECT"
+msgstr "{project} · {percent} % · More residents can help."
+
+msgid "TRIBE_GOAL_GARDEN"
+msgstr "Your village is ready · Plant a root garden for a steady food supply."
+
+msgid "TRIBE_GOAL_WELL"
+msgstr "Food regrows · Build a well under Workplaces & professions."
+
+msgid "TRIBE_GOAL_SUPPLY"
+msgstr "Secure food and water · Forestry, quarry and fiber bed expand your resource supply."
+
+msgid "TRIBE_GROWTH_READY"
+msgstr "Village growth · {seconds} s of good provision remaining · then 2 food and 2 water for the new resident."
+
+msgid "TRIBE_ACTIVITY_UNKNOWN"
+msgstr "Order in progress"
+
+msgid "TRIBE_RESERVE_READY"
+msgstr "Supply ready · remains responsible"
+
+msgid "TRIBE_WAIT_ROOTS"
+msgstr "waiting for ripe roots"
+
+msgid "TRIBE_WAIT_RESOURCE"
+msgstr "waiting for {resource}"
+
+msgid "TRIBE_MEAL"
+msgstr "Meal break · will return to work"
+
+msgid "TRIBE_DRINK"
+msgstr "Water break · will return to work"
+
+msgid "TRIBE_BLOCKED"
+msgstr "Route blocked · checking another route"
+
+msgid "TRIBE_STOPPED"
+msgstr "stopped · can resume"
+
+msgid "TRIBE_STOPPED_CARGO"
+msgstr "stopped · carrying building materials"
+
+msgid "TRIBE_BUILD_CARGO"
+msgstr "carrying building materials to the entrance"
+
+msgid "TRIBE_CARRYING"
+msgstr "carrying {resource}"
+
+msgid "TRIBE_RESIDENT"
+msgstr "{name} · {profession}\nFood {food} % · Water {water} %\n{activity}"
+
+msgid "TRIBE_UNKNOWN_JOB"
+msgstr "Unknown profession"
+
+msgid "TRIBE_UNKNOWN_RESOURCE"
+msgstr "material"
+
+msgid "TRIBE_COMMAND"
+msgstr "Group command"
+
+msgid "TRIBE_BOOK"
+msgstr "Journal · J"
+
+msgid "TRIBE_ORDER_ACCEPTED"
+msgstr "✓ {order} · Order saved for {count} residents."
+
+msgid "TRIBE_ORDER_REJECTED"
+msgstr "Not carried out · {reason}"
+
+msgid "TRIBE_GROWTH_MAX"
+msgstr "Your tribe has six residents."
+
+msgid "TRIBE_GROWTH_BEDS"
+msgstr "Village growth: build more beds."
+
+msgid "TRIBE_GROWTH_STATIONS"
+msgstr "Village growth: a root garden and a well are required."
+
+msgid "TRIBE_GROWTH_NEEDS"
+msgstr "Village growth: all residents need at least 50% food and water."
+
+msgid "TRIBE_STATUS_SELECT"
+msgstr "Select residents and issue group or individual orders."
+
+msgid "TRIBE_STATUS_NO_GROUND"
+msgstr "The ground here is not loaded."
+
+msgid "TRIBE_STATUS_NO_SELECTION"
+msgstr "Select at least one resident first."
+
+msgid "TRIBE_STATUS_UNAVAILABLE"
+msgstr "The group cannot accept orders right now."
+
+msgid "TRIBE_STATUS_TOOL"
+msgstr "Craft a stone tool first."
+
+msgid "TRIBE_STATUS_TOOL_FIRST"
+msgstr "Craft a stone tool first."
+
+msgid "TRIBE_STATUS_PLACEMENT"
+msgstr "Right click an open building site · Esc cancels placement."
+
+msgid "TRIBE_STATUS_CANCEL"
+msgstr "Placement cancelled."
+
+msgid "TRIBE_STATUS_PATHS"
+msgstr "Checking village routes. Please wait a moment."
+
+msgid "TRIBE_STATUS_RANGE"
+msgstr "Orders are currently limited to the safe area around the village."
+
+msgid "TRIBE_STATUS_ROUTE"
+msgstr "At least one selected resident cannot reach this location."
+
+msgid "TRIBE_STATUS_DONE"
+msgstr "This upgrade is already complete."
+
+msgid "TRIBE_STATUS_BUSY"
+msgstr "Finish the current project first."
+
+msgid "TRIBE_STATUS_SITE"
+msgstr "This site needs space, dry ground and a clear route to storage."
+
+msgid "TRIBE_STATUS_SITE_ROUTE"
+msgstr "A selected resident cannot reach this building site."
+
+msgid "TRIBE_STATUS_SAVED"
+msgstr "Order saved."
+
+msgid "TRIBE_STATUS_SAVE_ORDER"
+msgstr "Saving failed. The previous order is preserved."
+
+msgid "TRIBE_STATUS_SAVE_STATE"
+msgstr "Saving failed. The previous state is preserved."
+
+msgid "TRIBE_STATUS_GROUND"
+msgstr "A resident is waiting for the ground to load."
+
+msgid "TRIBE_STATUS_BLOCKED"
+msgstr "Route blocked · the order is preserved; checking new routes."
+
+msgid "TRIBE_STATUS_RESUME"
+msgstr "Residents are resuming their orders."
+
+msgid "TRIBE_STATUS_BUILT"
+msgstr "Upgrade complete · residents with professions resume their duties."
+
+msgid "TRIBE_STATUS_GROWTH_SITE"
+msgstr "Village growth is waiting for an open, reachable entrance."
+
+msgid "TRIBE_STATUS_PICKUP"
+msgstr "The pickup point is not reachable."
+
+msgid "TRIBE_GROWTH_RESERVE"
+msgstr "Village growth: keep {count} units each of food and water in storage."
+
+msgid "TRIBE_STATUS_MATERIAL"
+msgstr "Required stored materials: {count} {resource}."
+
+msgid "TRIBE_STATUS_JOINED"
+msgstr "{name} has joined your tribe. Choose a profession or order."
+
+msgid "TRIBE_TAMING_TAB"
+msgstr "Taming"
