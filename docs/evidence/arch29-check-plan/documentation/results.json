@@ -1,0 +1,54 @@
+{
+  "godot": null,
+  "source": {
+    "commit": "167b4df8acb4b8b65f8b1de1a89a409b8ae8d0c2",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "source_only",
+  "selected_tests": [],
+  "change_plan": {
+    "scope": "documentation",
+    "requires_main": false,
+    "contracts": [],
+    "selected_tests": [],
+    "registered_test_count": 165,
+    "selected_test_count": 0,
+    "decisions": [
+      {
+        "path": "docs/WORK_ARCH29_CHECK_PLAN.md",
+        "contracts": [],
+        "direct_tests": [],
+        "rules": [],
+        "reason": "documentation_only"
+      }
+    ],
+    "schema": 1,
+    "kind": "validation_plan",
+    "tests_executed": false,
+    "source": {
+      "base_commit": "167b4df8acb4b8b65f8b1de1a89a409b8ae8d0c2",
+      "head_commit": "167b4df8acb4b8b65f8b1de1a89a409b8ae8d0c2",
+      "head_tree": "e3a1f74c42bd6e6a98451a566949b020cd6a0b4f",
+      "changes": [
+        {
+          "path": "docs/WORK_ARCH29_CHECK_PLAN.md",
+          "status": "M",
+          "sha256": "728ebfaf208234c639491dcd3e6ea6ad12422712f0e004d893af70ece0903d46",
+          "symlink": false
+        }
+      ]
+    },
+    "registry_sha256": "c76dd79aaec5b2a1032e3bdc89a7d3314ba8f784a08f74511e0a2c715298c173",
+    "rules_sha256": "dc1124d4ebad585ceb2aea27b49de7a4ac25a44da0940691ba373aad91a55bc1",
+    "limits": "Conservative path rules, not a complete dependency graph or test result. Unknown paths expand to all tests. Default integration CI remains full; exports, graphics and target-PC checks stay separate."
+  },
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.568
+    }
+  ]
+}

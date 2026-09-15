@@ -1,0 +1,86 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "167b4df8acb4b8b65f8b1de1a89a409b8ae8d0c2",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "performance_measurement_test"
+  ],
+  "change_plan": {
+    "scope": "targeted",
+    "requires_main": false,
+    "contracts": [
+      "regions_simulation"
+    ],
+    "selected_tests": [
+      "performance_measurement_test"
+    ],
+    "registered_test_count": 165,
+    "selected_test_count": 1,
+    "decisions": [
+      {
+        "path": "tests/performance_measurement_test.gd",
+        "contracts": [
+          "regions_simulation"
+        ],
+        "direct_tests": [
+          "performance_measurement_test"
+        ],
+        "rules": [],
+        "reason": "changed_registered_test"
+      }
+    ],
+    "schema": 1,
+    "kind": "validation_plan",
+    "tests_executed": false,
+    "source": {
+      "base_commit": "167b4df8acb4b8b65f8b1de1a89a409b8ae8d0c2",
+      "head_commit": "167b4df8acb4b8b65f8b1de1a89a409b8ae8d0c2",
+      "head_tree": "e3a1f74c42bd6e6a98451a566949b020cd6a0b4f",
+      "changes": [
+        {
+          "path": "tests/performance_measurement_test.gd",
+          "status": "M",
+          "sha256": "ba9c1205006bd6c1b5440c07dd0ca7308341759dc911654862bdf6fbaee6da15",
+          "symlink": false
+        }
+      ]
+    },
+    "registry_sha256": "c76dd79aaec5b2a1032e3bdc89a7d3314ba8f784a08f74511e0a2c715298c173",
+    "rules_sha256": "dc1124d4ebad585ceb2aea27b49de7a4ac25a44da0940691ba373aad91a55bc1",
+    "limits": "Conservative path rules, not a complete dependency graph or test result. Unknown paths expand to all tests. Default integration CI remains full; exports, graphics and target-PC checks stay separate."
+  },
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.217
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.014
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.922
+    },
+    {
+      "name": "performance_measurement_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.325,
+      "contract": "regions_simulation"
+    }
+  ]
+}
