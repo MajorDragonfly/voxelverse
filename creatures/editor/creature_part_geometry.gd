@@ -5,6 +5,7 @@ const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
 const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const Rig = preload("res://creatures/runtime/creature_limb_rig.gd")
+const MouthGeometry = preload("res://creatures/editor/creature_mouth_geometry.gd")
 const HandGeometry = preload("res://creatures/editor/creature_hand_geometry.gd")
 const FootGeometry = preload("res://creatures/editor/creature_foot_geometry.gd")
 
@@ -33,7 +34,13 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 			else:
 				_eye(root, Vector3.ZERO, size, blueprint, "Eye")
 		"mouth":
-			if id == "mouth_broad_beak":
+			if id not in MouthGeometry.Catalog.LEGACY_IDS:
+				for piece: Dictionary in MouthGeometry.recipe(id, skin, accent, horn):
+					if piece.kind == "cone":
+						_cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
+					else:
+						_piece(root, piece.name, piece.position, piece.size, piece.color, piece.skin)
+			elif id == "mouth_broad_beak":
 				_cone(root, "UpperBeak", Vector3(0, 0.03, 0.04), Vector3(0, 0.0, -0.48), 0.43, horn)
 				_cone(root, "LowerBeak", Vector3(0, -0.095, 0.02), Vector3(0, -0.075, -0.39), 0.32, horn.darkened(0.16))
 			else:

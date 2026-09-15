@@ -10,6 +10,8 @@ const BUILD_BUDGET_USEC: int = 4000
 const MAX_CACHED: int = 256
 const MAX_RESIDENT: int = 1536
 const TRANSITION_SECONDS: float = 0.18
+const REFOCUS_METERS: float = 8.0
+const MAX_LOOKAHEAD_METERS: float = 32.0
 var layout: RefCounted
 var leaves: Dictionary = {}
 var _staging: Dictionary = {}
@@ -44,6 +46,23 @@ var lookahead_direction: Vector3 = Vector3.ZERO
 var job_samples: Array[Dictionary] = []
 var _last_query_direction: Vector3 = Vector3.ZERO
 var publish_deferrals: int = 0
+var _focus_direction: Vector3 = Vector3.ZERO
+var _refresh_requested: bool = true
+var _generation: int = 0
+var _job_generation: int = -1
+var _staging_generation: int = -1
+var _published_generation: int = -1
+var _job_body_id: String = ""
+var discarded_jobs: int = 0
+var discarded_publications: int = 0
+
+
+func set_motion_hint(direction: Vector3, desired_velocity: Vector3) -> void:
+	# Use intended tangent movement, including at a blocked frontier. Actual
+	# velocity is zero there and still points the old way on a reversal.
+	var seconds: float = clampf(last_worker_seconds + 0.25, 0.75, 2.5)
+	var lead: Vector3 = (desired_velocity.slide(direction) * seconds).limit_length(MAX_LOOKAHEAD_METERS)
+	lookahead_direction = (direction + lead / float(surface.body.radius)).normalized()
 
 
 func configure(descriptor: Dictionary) -> void:
@@ -67,9 +86,23 @@ func configure(descriptor: Dictionary) -> void:
 
 func stream_at(direction: Vector3, force: bool = false) -> void:
 	_requested_direction = direction
-	if force or (_job == null and _pending.is_empty() and _retired.is_empty() and direction.distance_to(_last_query_direction) * float(surface.body.radius) >= 8.0):
+	# A forced initial load clears the previous motion hint. Without a new hint,
+	# subsequent requests must follow their own position, not the spawn point.
+	if force: lookahead_direction = Vector3.ZERO
+	var focus: Vector3 = direction if force or lookahead_direction == Vector3.ZERO else lookahead_direction
+	if force or direction.distance_to(_last_query_direction) * float(surface.body.radius) >= REFOCUS_METERS \
+			or focus.distance_to(_focus_direction) * float(surface.body.radius) >= REFOCUS_METERS:
+		var previous_hint: Vector3 = _focus_direction - _last_query_direction
+		var next_hint: Vector3 = focus - direction
+		# Forward progress queues a newer focus but keeps useful work alive.
+		# Cancelling it every 8 m would starve uploads at normal walking speeds.
+		if previous_hint.dot(next_hint) < 0.0 or direction.distance_to(_last_query_direction) * float(surface.body.radius) > MAX_LOOKAHEAD_METERS * 2.0:
+			_generation += 1
 		_last_query_direction = direction
-		_request(direction if force or lookahead_direction == Vector3.ZERO else lookahead_direction)
+		_focus_direction = focus
+		_refresh_requested = true
+	if force or (_job == null and _pending.is_empty() and _retired.is_empty() and _refresh_requested):
+		_request(_focus_direction)
 	if force:
 		_job.advance(true)
 		_collect_job()
@@ -87,11 +120,15 @@ func _request(direction: Vector3) -> void:
 	_finish_transition()
 	_discard_staging()
 	_last_direction = direction
+	_generation += 1
+	_refresh_requested = false
 	_staging = {}
 	_pending.clear()
 	_job = PatchJob.new()
 	_job.body = surface.body.duplicate(true)
 	_job.direction = direction
+	_job_generation = _generation
+	_job_body_id = str(surface.body.id)
 	for id: String in leaves:
 		_job.previous_masks[id] = leaves[id].mask
 		_job.available[PatchJob.variant_key(leaves[id])] = true
@@ -104,6 +141,7 @@ func _collect_job() -> void:
 	if _job == null:
 		return
 	_staging = _job.result
+	_staging_generation = _job_generation
 	last_worker_seconds = _job.duration_usec / 1000000.0
 	max_worker_usec = maxi(max_worker_usec, _job.duration_usec)
 	if job_samples.size() < 256:
@@ -139,9 +177,21 @@ func _process(delta: float) -> void:
 		if _transition >= 1.0:
 			_finish_transition()
 	if _job != null:
+		if _job_generation != _generation or _job_body_id != str(surface.body.id):
+			# A turn only replaces the queued intent; never join unfinished work
+			# on the frame thread or start mesh batches for obsolete selection.
+			if not _job.try_join(): return
+			_job = null
+			discarded_jobs += 1
+			_request(_focus_direction)
+			return
 		if not _job.advance():
 			return
 		_collect_job()
+	if not _staging.is_empty() and _staging_generation != _generation:
+		discarded_publications += 1
+		_request(_focus_direction)
+		return
 	var started: int = Time.get_ticks_usec()
 	while not _pending.is_empty() and last_build_count < BUILDS_PER_FRAME:
 		_build_next()
@@ -188,6 +238,10 @@ func _build_next() -> void:
 func _publish() -> void:
 	if _staging.is_empty():
 		return
+	if _staging_generation != _generation:
+		discarded_publications += 1
+		_request(_focus_direction)
+		return
 	if not leaves.is_empty() and surface.body.get("terrain_revision", 1) >= 3:
 		var here: Dictionary = Cube.from_direction(surface.body.id, [_requested_direction.x, _requested_direction.y, _requested_direction.z])
 		var owner: Dictionary = layout.find_at(here.face, here.u, here.v, _staging)
@@ -196,6 +250,8 @@ func _publish() -> void:
 			# Keep the old complete cover and recompute around its current point.
 			publish_deferrals += 1
 			_last_query_direction = _requested_direction
+			_focus_direction = _requested_direction
+			_generation += 1
 			_request(_requested_direction)
 			return
 	var started: int = Time.get_ticks_usec()
@@ -210,6 +266,7 @@ func _publish() -> void:
 		if not retired.is_empty():
 			_arriving.append(tile)
 	leaves = _staging
+	_published_generation = _staging_generation
 	_staging = {}
 	tiles.assign(leaves.values())
 	# Rebuild changed physical owners before retiring old surfaces. There is
@@ -264,6 +321,14 @@ func _update_collisions(direction: Vector3) -> void:
 
 func pending_count() -> int:
 	return _pending.size() if _job == null else -1
+
+
+func streaming_diagnostics() -> Dictionary:
+	return {"generation": _generation, "published_generation": _published_generation,
+		"refresh_queued": _refresh_requested,
+		"discarded_jobs": discarded_jobs, "discarded_publications": discarded_publications,
+		"pending_uploads": _pending.size(), "worker_active": _job != null,
+		"lookahead_m": lookahead_direction.distance_to(_requested_direction) * float(surface.body.radius)}
 
 
 func rebase(new_origin: Array) -> void:

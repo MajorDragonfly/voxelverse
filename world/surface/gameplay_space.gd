@@ -115,9 +115,24 @@ static func step(actor: CharacterBody3D, motion: Vector3, height: float, probe: 
 	if actor.test_move(raised, motion): return false
 	var landing := KinematicCollision3D.new()
 	if not actor.test_move(raised.translated(motion), -actor.up_direction * (height + probe), landing): return false
-	if landing.get_normal().dot(actor.up_direction) < cos(actor.floor_max_angle): return false
+	if landing.get_normal().dot(actor.up_direction) < cos(actor.floor_max_angle):
+		# A rounded capsule edge contact need not have the supporting top normal.
+		if not _walkable_step_top(actor, motion, landing.get_position(), height, probe): return false
 	actor.global_transform = raised
 	return true
+
+static func _walkable_step_top(actor: CharacterBody3D, motion: Vector3, contact: Vector3, height: float, probe: float) -> bool:
+	var up_vector: Vector3 = actor.up_direction
+	var edge: Vector3 = contact + motion.normalized() * minf(probe, motion.length())
+	var lateral: Vector3 = (edge - actor.global_position).slide(up_vector)
+	var from: Vector3 = actor.global_position + lateral + up_vector * (height + probe)
+	var to: Vector3 = actor.global_position + lateral - up_vector * probe
+	var ray := PhysicsRayQueryParameters3D.create(from, to, actor.collision_mask)
+	ray.exclude = [actor.get_rid()]
+	var hit: Dictionary = actor.get_world_3d().direct_space_state.intersect_ray(ray)
+	if hit.is_empty() or hit.normal.dot(up_vector) < cos(actor.floor_max_angle): return false
+	var rise: float = (hit.position - actor.global_position).dot(up_vector)
+	return rise > actor.safe_margin and rise <= height
 
 static func visual_data(root: Node3D, data: Variant) -> Variant:
 	# Read-only scene copy. Economy and save records remain canonical.

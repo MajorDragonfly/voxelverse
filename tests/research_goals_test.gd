@@ -165,7 +165,7 @@ func _test_campaign_switch_and_legacy() -> void:
 	_check(not journal._pinned_button.visible, "Switching campaign removes the old HUD target")
 	_check(saves.save_now(), "Second campaign saves independently")
 	_check(saves.load_now(SAVE_A), "First campaign reloads")
-	_check(Atomic.parse_dictionary(JSON.stringify(progression.export_state())) == Atomic.parse_dictionary(JSON.stringify(saved)), "First campaign restores all discoveries, wishes and pin exactly")
+	_check(Atomic.parse_dictionary(Atomic.stringify(progression.export_state())) == Atomic.parse_dictionary(Atomic.stringify(saved)), "First campaign restores all discoveries, wishes and pin exactly")
 	_check(journal._pinned_button.text.contains("Ziel erreicht"), "Reload restores the completed HUD target without another event")
 	_check(saves.load_now(SAVE_B), "Second campaign reloads")
 	_check(progression.get_research_settings() == Research.defaults(), "Wishes do not leak between campaign files")

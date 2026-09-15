@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "source_commit": "f9488ae5eabe18e8f44c57cb252e4c53f5efba80",
+  "source_tree": "b8cbd8294e31a51b814c338e5705bef845be9294",
+  "tracked_worktree_dirty": false,
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "run_id": 34589316437,
+  "artifact_id": 10195453468,
+  "artifact_sha256": "926e5c5b09b83fcc3e0c7108e33fda75ff994ce1cd4b67040c6d38c621e4a545",
+  "executed_passed_tests": ["frozen_body_serialization_test", "radial_step_test", "coordinate_persistence_test", "save_participants_test", "phase_handoff_test", "far_simulation_test", "frontend_test", "domestication_world_test", "wildlife_ai_world_test", "home_group_world_test", "spherical_campaign_runtime_test", "spherical_developed_migration_test", "domestic_surface_runtime_test", "tribal_age_economy_test", "tribal_age_supply_test", "tribal_age_growth_test", "tribal_age_husbandry_test"],
+  "source_contracts_passed": true,
+  "editor_import_passed": true,
+  "art_sources_passed": true,
+  "restart_probes": {"d1": {"write": true, "read": true}, "d11": {"write": true, "read": true}, "d12": {"write": true, "read": true}},
+  "full_suite_acceptance": false,
+  "native_windows_acceptance": false,
+  "target_pc_acceptance": false
+}

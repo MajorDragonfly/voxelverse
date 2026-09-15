@@ -1,4 +1,5 @@
 extends "tribal_age_test.gd"
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 ## Reuses the real world/player fixture and real mouse helpers. This script also
 ## runs beside its base probe against the release PCK outside the source tree.
 
@@ -50,7 +51,7 @@ func _run() -> void:
 		for key in ["hydration", "profession", "paused_order", "task", "blocked", "species_id", "faction_id", "construction_id"]:
 			member.erase(key)
 	# Compare with the actual JSON representation, including its float precision.
-	var originals: Array = JSON.parse_string(JSON.stringify(data["members"]))
+	var originals: Array = JSON.parse_string(Atomic.stringify(data["members"]))
 	_expect(saves.save_now(), "Legacy fixture could not save.")
 	var legacy_bytes: String = FileAccess.get_file_as_string(SAVE)
 	_expect(saves.load_now(), "Schema-1 village did not load.")
@@ -71,7 +72,7 @@ func _run() -> void:
 	_expect(tribe.issue_order("garden"), "Additional builders could not join the existing garden.")
 	await _until(func() -> bool: return not tribe.village()["project"].is_empty() and float(tribe.village()["project"]["progress"]) > 2, 350)
 	_key(KEY_SPACE)
-	var work: Dictionary = JSON.parse_string(JSON.stringify(tribe.village()["project"]))
+	var work: Dictionary = JSON.parse_string(Atomic.stringify(tribe.village()["project"]))
 	_expect(not work.is_empty(), "Builders never reached the actual garden.")
 	_expect(saves.save_now() and saves.load_now(), "Could not resume garden construction.")
 	_expect(tribe.village()["project"] == work and int(tribe.village()["stock"]["wood"]) == 0, "Load repeated costs or construction progress: expected=%s actual=%s stock=%s" % [work, tribe.village()["project"], tribe.village()["stock"]])

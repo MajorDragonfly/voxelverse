@@ -1,0 +1,100 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "settlement_collection_test",
+    "tribal_age_economy_contract_test",
+    "tribal_age_growth_contract_test",
+    "tribal_age_housing_recovery_test",
+    "tribal_age_husbandry_contract_test",
+    "resource_production_contract_test",
+    "far_simulation_test",
+    "village_work_snapshot_test",
+    "spherical_developed_migration_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "settlement_collection_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 3.748,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.776,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_growth_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.671,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_housing_recovery_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.983,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.478,
+      "contract": "village"
+    },
+    {
+      "name": "resource_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.883,
+      "contract": "village"
+    },
+    {
+      "name": "far_simulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.276,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "village_work_snapshot_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.19,
+      "contract": "village"
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 60.015,
+      "contract": "campaign"
+    }
+  ]
+}

@@ -3,18 +3,26 @@ extends RefCounted
 ## The recipe view adapts saved D3 parameters without resetting clocks/fractions.
 const CARE_SECONDS: float = 300.0
 const MILK: String = "husbandry.milk"
+const EGGS: String = "husbandry.eggs"
 const RECIPES: Dictionary = {
 	MILK: {"revision": 1, "resource_id": "milk", "role": "milk", "diet": "plant",
 		"care_seconds": CARE_SECONDS, "conditions": ["tamed", "same_faction", "foreign_species", "pen_attendance", "food", "water", "simulation_time"],
 		"yield_field": "milk_yield", "interval_field": "milk_interval"},
+	EGGS: {"revision": 1, "resource_id": "eggs", "role": "eggs", "diet": "plant",
+		"care_seconds": CARE_SECONDS, "conditions": ["tamed", "same_faction", "foreign_species", "pen_attendance", "food", "water", "simulation_time"],
+		"yield_field": "egg_yield", "interval_field": "egg_interval"},
 }
 
 static func definition(identity: String) -> Dictionary:
 	return RECIPES.get(identity, {}).duplicate(true)
 
 static func from_milk(parameters: Dictionary) -> Dictionary:
-	var recipe: Dictionary = definition(MILK)
-	recipe.merge({"recipe_id": MILK, "yield": parameters[recipe.yield_field],
+	return from_parameters(MILK, parameters)
+
+static func from_parameters(identity: String, parameters: Dictionary) -> Dictionary:
+	var recipe: Dictionary = definition(identity)
+	if recipe.is_empty(): return {}
+	recipe.merge({"recipe_id": identity, "yield": parameters[recipe.yield_field],
 		"interval": parameters[recipe.interval_field], "inputs": {"food": 1.0, "water": parameters.water_need}})
 	return recipe
 

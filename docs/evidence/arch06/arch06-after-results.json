@@ -1,0 +1,82 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "coordinate_persistence_test",
+    "expedition_contract_test",
+    "save_slots_test",
+    "spherical_campaign_contract_test",
+    "spherical_developed_migration_test",
+    "region_store_test",
+    "blueprint_contract_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "coordinate_persistence_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 3.03,
+      "contract": "campaign"
+    },
+    {
+      "name": "expedition_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.178,
+      "contract": "expedition_design"
+    },
+    {
+      "name": "save_slots_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.47,
+      "contract": "campaign"
+    },
+    {
+      "name": "spherical_campaign_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.67,
+      "contract": "campaign"
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 53.637,
+      "contract": "campaign"
+    },
+    {
+      "name": "region_store_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.43,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.976,
+      "contract": "blueprints"
+    }
+  ]
+}

@@ -1,3 +1,9 @@
+> **Aktueller Integrationsbranch, 11. September 2026:** PR #78–#83 sind auf `agent/integration-sphere-acceptance-2026-09-11` zusammengeführt, noch nicht als gemeinsame Laufzeit-/Ziel-PC-Abnahme freigegeben. ARCH-06-Präzision, ARCH-07-Save-Teilnehmer, ARCH-14-Zustandsschutz, ARCH-22-Eierkette, ARCH-24-Mundmodelle und ARCH-25-Fähigkeiten DE/EN nicht doppelt beginnen. Maßgeblich sind `docs/INTEGRATION_2026-09-11.md` und die exakten Quellcommits. Ältere „nächste Aufgabe“-Zeilen unten sind für diese sechs Lieferungen historisch. Nächster Vorrang: gemeinsame Kugel-/Vegetations-/Rückreiseprüfung, dann verbleibende ARCH-13/14/17/19-Aufträge.
+
+## Gemeinsamer Spieltest vom 15. September 2026
+
+Alle veröffentlichten Lieferungen #78–89 sind im Branch `agent/playtest-integration-2026-09-15` vereinigt: präzises Speichern, Speicherteilnehmer, Eierkette, Tierzustandsschutz, Mundmodelle, Fähigkeiten DE/EN, Terrain-Vorausschau, Journal-Seiten, vollständige Sicherungen und vorbereitende Siedlungs-/Transportmodelle. [Integrationsbericht](docs/INTEGRATION_2026-09-15.md), [exakte Quellen](docs/integration-sources-2026-09-15.json) und [Windows-Spieltest](docs/WINDOWS_TEST_2026-09-15.md) führen die aktuelle Prüfung. Die älteren Lieferstatusangaben darunter sind historisch; die aktuellen Folgeaufträge stehen in [NEXT_PARALLEL_WORK](docs/NEXT_PARALLEL_WORK.md).
+
 # Voxelverse – gemeinsame Entwicklungsroadmap
 
 Stand: 10. September 2026 · Gemeinsamer Integrationsstand aus 28 Übergaben. Maßgeblich sind [Integrationsbericht und Veröffentlichungsstatus](docs/INTEGRATION_2026-09-10.md), [exakte Quellen](docs/integration-sources-2026-09-10.json) und [nächste Arbeiten](docs/NEXT_PARALLEL_WORK.md). Frühere Berichte und Quellenlisten bleiben historische Nachweise ihrer jeweiligen Stände; ein technischer Teilabschluss ist keine fertige spätere Spielphase.

@@ -1,4 +1,5 @@
 extends SceneTree
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Simulation = preload("res://world/tribe/village_simulation.gd")
 const Registry = preload("res://core/campaign/body_registry.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
@@ -66,9 +67,10 @@ func _run() -> void:
 	before = Migration.fingerprint(state.export_state())
 	state._process(3600.0)
 	_expect(Migration.fingerprint(state.export_state()) == before, "Menu/editor time advanced far work.")
+	var stored_before: Dictionary = Atomic.parse_dictionary(Atomic.stringify(state.export_state()))
 	_expect(saves.save_now(), "Far owner/cargo/stock did not commit together: " + saves.last_error)
 	_expect(saves.load_now(), "Far save could not reload.")
-	_expect(Migration.fingerprint(state.export_state()) == before, "Reload replayed work or lost a cursor.")
+	_expect(Migration.fingerprint(state.export_state()) == Migration.fingerprint(stored_before), "Reload replayed work or lost a cursor.")
 	var output: Array = []
 	var args := PackedStringArray(["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", get_script().resource_path, "--", "--restart-check"])
 	var user_args: PackedStringArray = OS.get_cmdline_user_args()

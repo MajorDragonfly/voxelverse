@@ -2,9 +2,9 @@ extends RefCounted
 ## Fixed resource identities. Revision 1 retains the existing stock units/balance.
 ## Legacy ledger keys are storage adapters, never duplicate counters.
 const REVISION: int = 1
-const IDS: Array[String] = ["wood", "stone", "food", "water", "fiber", "milk"]
-const FOODS: Array[String] = ["milk", "food"]
-const TITLES: Dictionary = {"wood": "Holz", "stone": "Stein", "food": "Nahrung", "water": "Wasser", "fiber": "Fasern", "milk": "Milch"}
+const IDS: Array[String] = ["wood", "stone", "food", "water", "fiber", "milk", "eggs"]
+const FOODS: Array[String] = ["milk", "eggs", "food"]
+const TITLES: Dictionary = {"wood": "Holz", "stone": "Stein", "food": "Nahrung", "water": "Wasser", "fiber": "Fasern", "milk": "Milch", "eggs": "Eier"}
 const DEFINITIONS: Dictionary = {
 	"wood": {"unit": "unit", "nutrition": 0.0, "hydration": 0.0, "label_key": "resource.wood", "icon_key": "resource.wood", "color": "b9854d"},
 	"stone": {"unit": "unit", "nutrition": 0.0, "hydration": 0.0, "label_key": "resource.stone", "icon_key": "resource.stone", "color": "bac8cf"},
@@ -12,6 +12,7 @@ const DEFINITIONS: Dictionary = {
 	"water": {"unit": "unit", "nutrition": 0.0, "hydration": 30.0, "label_key": "resource.water", "icon_key": "resource.water", "color": "60bde8", "consumed_key": "drinks"},
 	"fiber": {"unit": "unit", "nutrition": 0.0, "hydration": 0.0, "label_key": "resource.fiber", "icon_key": "resource.fiber", "color": "b8bf67"},
 	"milk": {"unit": "litre", "nutrition": 25.0, "hydration": 0.0, "label_key": "resource.milk", "icon_key": "resource.milk", "color": "f4f0dd", "received_key": "milk_received", "consumed_key": "milk_meals"},
+	"eggs": {"unit": "piece", "nutrition": 25.0, "hydration": 0.0, "label_key": "resource.eggs", "icon_key": "resource.eggs", "color": "e7d6aa", "received_key": "eggs_received", "consumed_key": "eggs_meals"},
 }
 
 static func definition(identity: String) -> Dictionary:

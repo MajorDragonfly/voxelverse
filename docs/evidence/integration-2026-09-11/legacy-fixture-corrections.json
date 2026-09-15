@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "base_candidate": "6f0dc167287b391afd07607e0dfb95506935fa40",
+  "runtime_game_code_changed": false,
+  "corrections": {
+    "tribal_economy_progress_world_test": {
+      "cause": "Expected village was rounded with the historical JSON writer, while the real save correctly preserved full numeric precision.",
+      "diagnostic_actual_equals_precise_snapshot": true,
+      "legacy_rounding_differences": 35,
+      "maximum_absolute_difference": 4.831690603168681e-13,
+      "diagnostic_full_scenario_and_cold_restart_exit_code": 0,
+      "oracle": "Strict equality of the entire loaded village with AtomicJson's precise persisted representation; no field or tolerance relaxed."
+    },
+    "german_gui_fixtures": {
+      "tests": ["behavior_skill_tree_test", "development_path_test"],
+      "cause": "Historical tests assert German wording but inherited the operating system language after skills localization.",
+      "correction": "Select German through the real LocaleManager in each isolated test profile; preserve all existing assertions and separate DE/EN localization suites.",
+      "passed_source_seconds": [3.196, 3.373]
+    }
+  },
+  "native_windows_acceptance": false,
+  "full_suite_acceptance": false,
+  "target_pc_acceptance": false
+}

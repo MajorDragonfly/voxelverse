@@ -155,7 +155,10 @@ static func write_file(path: String, package: Variant) -> Dictionary:
 	if FileAccess.file_exists(path):
 		var old: Dictionary = read_file(path)
 		if not old.ok: return _fail("protected_destination")
-		if old.package != JSON.parse_string(JSON.stringify(package)): return _fail("destination_conflict")
+		# Existing immutable exports may use either released number encoding.
+		var precise: Dictionary = Atomic.parse_dictionary(Atomic.stringify(package))
+		var legacy: Dictionary = JSON.parse_string(JSON.stringify(package))
+		if old.package != precise and old.package != legacy: return _fail("destination_conflict")
 		return {"ok": true, "code": ""}
 	var error: Error = Atomic.write(path, package, false)
 	return {"ok": error == OK, "code": "" if error == OK else "write_failed", "error": error}

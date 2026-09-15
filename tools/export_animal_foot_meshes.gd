@@ -16,7 +16,11 @@ func _initialize() -> void:
 		var side: float = -1.0 if fields.size() > 1 and fields[1] == "-1" else 1.0
 		var node := Node3D.new()
 		node.set_meta("creature_part_side", side)
-		Geometry._terminal(node, id, Color("b09d85"), Color("e5d5ab"))
+		if str(Catalog.get_part(id).get("category", "")) == "mouth":
+			var blueprint: Dictionary = preload("res://creatures/editor/creature_blueprint.gd").create_default()
+			Geometry.build(node, Catalog.get_part(id), {"category": "mouth"}, blueprint)
+		else:
+			Geometry._terminal(node, id, Color("b09d85"), Color("e5d5ab"))
 		var meshes: Array = []
 		for child: MeshInstance3D in node.get_children():
 			var arrays: Array = child.mesh.surface_get_arrays(0)

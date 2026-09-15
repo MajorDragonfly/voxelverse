@@ -112,7 +112,7 @@ func _legacy_migration() -> void:
 	_expect(bool(saves.call("load_now")), "Legacy campaign did not migrate.")
 	var backup: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(TEST_SAVE + ".schema2.backup.json"))
 	_expect(backup["design_files"] == originals, "Migration backup did not preserve exact design bytes.")
-	_expect(JSON.parse_string(backup["legacy_save_text"]) == JSON.parse_string(JSON.stringify(legacy)), "Migration backup changed campaign data.")
+	_expect(JSON.parse_string(backup["legacy_save_text"]) == JSON.parse_string(Atomic.stringify(legacy)), "Migration backup changed campaign data.")
 	var migrated_creature: Dictionary = Creature.load_best_available()
 	_expect(migrated_creature["name"] == creature["name"], "Creature name lost during migration.")
 	_expect(Creature.get_revision(migrated_creature) == 1, "Creature revision lost.")
@@ -268,7 +268,7 @@ func _expect(condition: bool, message: String) -> void:
 
 
 func _json_value(value: Variant) -> Variant:
-	return JSON.parse_string(JSON.stringify(value))
+	return JSON.parse_string(Atomic.stringify(value))
 
 
 func _process_restart() -> void:

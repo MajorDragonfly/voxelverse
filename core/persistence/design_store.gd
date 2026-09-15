@@ -36,7 +36,7 @@ static func write(path: String, value: Dictionary) -> Error:
 		if not write_status(path).ok: return ERR_UNAVAILABLE
 	var error: Error = Atomic.write(path, value)
 	if error == OK and is_managed(path) and owner != null:
-		owner.call("record_design", path, JSON.stringify(value, "\t"))
+		owner.call("record_design", path, Atomic.stringify(value))
 	return error
 
 

@@ -1,0 +1,105 @@
+{
+  "base": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "code_commit": "55765f6b9502f9923a732ad6d4f9d26a12c037c3",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "scope": "targeted headless source tests, no native/visual/performance acceptance",
+  "passed_tests": [
+    {
+      "name": "expedition_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.178,
+      "contract": "expedition_design",
+      "run": "arch06-after"
+    },
+    {
+      "name": "save_slots_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.47,
+      "contract": "campaign",
+      "run": "arch06-after"
+    },
+    {
+      "name": "spherical_campaign_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.67,
+      "contract": "campaign",
+      "run": "arch06-after"
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 53.637,
+      "contract": "campaign",
+      "run": "arch06-after"
+    },
+    {
+      "name": "region_store_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.43,
+      "contract": "regions_simulation",
+      "run": "arch06-after"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.976,
+      "contract": "blueprints",
+      "run": "arch06-after"
+    },
+    {
+      "name": "coordinate_persistence_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.883,
+      "contract": "campaign",
+      "run": "arch06-final"
+    },
+    {
+      "name": "surface_adapter_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.369,
+      "contract": "surface",
+      "run": "arch06-final"
+    },
+    {
+      "name": "surface_adapter_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.36,
+      "contract": "surface",
+      "run": "arch06-final"
+    }
+  ],
+  "source_sha256": {
+    "core/campaign/spherical_migration.gd": "29aa83d74956cd0f0f80ece7cbc96033f7e8f2c46d305c292254cb6a7ba38dfd",
+    "core/persistence/atomic_json.gd": "9a37547e3220195221bc8f6eda6a9d2e7625bb786f7e1cc7c167fa58d028db38",
+    "core/persistence/design_store.gd": "24cef2ceaaa82010f342b3743cb9e904e93a2cbbb920c6283cd9c299465ac50c",
+    "core/persistence/region_store.gd": "ab1f540bc65d3481059b63369dfae89c19da07aa14d1e6b2d6812fa7445e4ed1",
+    "tests/coordinate_persistence_test.gd": "b64f4b5035364fcf7887aebb3d9143a8e690f4dfaf6ffd11b3d73f4a18486eef",
+    "tests/coordinate_persistence_test.gd.uid": "f1f5c42cbbbff0525427bbb27345840ad463b029727f8b820e66a44084a5b591",
+    "tests/expedition_contract_test.gd": "d88cbbd10d11bcada7d0c09dcbe7a11f2b2233f8aac7fb58c84250ffd8dcfedd",
+    "tools/validation/contracts.json": "6b2dcaaa6929796dee637c390c30e7f6cc325aa31d5aa45a47a00393e4ea0f6f"
+  },
+  "precision_conditions": {
+    "parent": 139,
+    "fresh_process": 9
+  },
+  "surface_rebase_max_error_m": 2.41706720771617e-06,
+  "note": "Runner manifests preserve original dirty-checkout revision metadata. Runtime correction was unchanged across after/final; final adds the managed design assertion and corrects player field comparison."
+}

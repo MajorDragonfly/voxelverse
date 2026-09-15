@@ -140,7 +140,7 @@ func _restart() -> void:
 
 
 func _json(value: Variant) -> Variant:
-	return JSON.parse_string(JSON.stringify(value))
+	return JSON.parse_string(Atomic.stringify(value))
 
 
 func _finish() -> void:

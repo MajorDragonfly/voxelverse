@@ -147,7 +147,9 @@ static func regional_inventory(source: Dictionary) -> Dictionary:
 	return result
 
 static func fingerprint(value: Variant) -> String:
-	# Match AtomicJson's JSON precision, including the int/float round trip.
+	# Historical manifest fingerprint (v1/v2): retain its original decimal
+	# normalization, including the int/float round trip. It is NOT a writer.
+	# Changing it with AtomicJson's precision would invalidate old archives.
 	return JSON.stringify(JSON.parse_string(JSON.stringify(value)), "", true).sha256_text()
 
 static func validate(manifest: Variant) -> String:

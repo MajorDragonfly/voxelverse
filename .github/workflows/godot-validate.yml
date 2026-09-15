@@ -34,7 +34,8 @@ jobs:
   source:
     needs: contracts
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # Two shards include full production/travel chains; retain per-test deadlines.
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:

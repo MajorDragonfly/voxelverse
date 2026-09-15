@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "work": "ARCH-14 / M1h-M1f: regional campaign animal registers",
+  "base_commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "branch": "agent/arch14-population-registers-2026-09-10",
+  "source_sha256": {
+    "world/surface/campaign_region_storage.gd": "865209eaaa39778e5b7c3876c141c95b6c25986b2bf49f1ee7eadbfe6516f173",
+    "tests/population_register_test.gd": "3e253d6997ae76fe224a51b22bc79e1a3770a1a202d5b830df29ab56414984f9",
+    "tests/fixtures/population_register_host.gd": "9226a2336740776afb61b99f9615178b2a88e47de46b3dec52b07e0cfdecd239"
+  },
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "execution": "headless_source_project",
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.117
+    },
+    {
+      "name": "population_register_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.743,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "region_store_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.065,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "surface_population_budget_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.874,
+      "contract": "surface"
+    },
+    {
+      "name": "wildlife_foraging_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 21.493,
+      "contract": "wildlife"
+    },
+    {
+      "name": "wildlife_drinking_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 41.086,
+      "contract": "wildlife"
+    },
+    {
+      "name": "spherical_creature_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 35.391,
+      "contract": "spherical_gameplay"
+    }
+  ],
+  "editor_import": {
+    "name": "import",
+    "kind": "editor_import",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 8.965
+  },
+  "art_source_check": {
+    "name": "art_sources",
+    "kind": "source_contract",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 2.076
+  },
+  "metrics": {
+    "changed_animals": 384,
+    "food_sources": 384,
+    "additional_animal": 1,
+    "peak_resident_records": 96,
+    "max_index_pages": 128,
+    "initial_restart_page_reads": 1,
+    "real_fresh_process": true
+  },
+  "regression_on_unmodified_base": {
+    "test_exit_code": 1,
+    "failures": [
+      "Save omitted needs changed through an active AI reference.",
+      "Unpin/eviction lost changes after the previous checkpoint.",
+      "Same-cell movement vanished after eviction.",
+      "Hunger changed at 1",
+      "Moved positions did not survive a fresh reader."
+    ],
+    "method": "Run the same final register test with only campaign_region_storage.gd restored to base; then restore the fixed adapter."
+  },
+  "limits": [
+    "Headless register fixture without rendered travel or terrain physics.",
+    "Spherical creature scene regression passed headless; not a visual or target-PC acceptance.",
+    "Separate planet-lab animal_records cap remains 256.",
+    "Discovery-journal paging and complete ARCH-14 acceptance remain open."
+  ]
+}

@@ -4,8 +4,9 @@ const Home = preload("res://world/home_group/home_group_state.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const KINDS: Array[String] = ["hut", "tent"]
-const BUILDS: Array[String] = ["hut", "tent", "pen"]
-const COSTS: Dictionary = {"hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}, "pen": {"wood": 4, "fiber": 2}}
+const ANIMAL_SITES: Array[String] = ["pen", "laying_site"]
+const BUILDS: Array[String] = ["hut", "tent", "pen", "laying_site"]
+const COSTS: Dictionary = {"hut": {"wood": 6, "stone": 3}, "tent": {"wood": 3, "fiber": 2}, "pen": {"wood": 4, "fiber": 2}, "laying_site": {"wood": 4, "fiber": 2}}
 const BEDS: Dictionary = {"hut": 2, "tent": 1}
 const MAX_RESIDENTS: int = 6
 const MAX_HOMES: int = 6
@@ -15,7 +16,7 @@ static func resident_id(data: Dictionary, index: int) -> String:
 	return Ids.scoped("resident", data["id"], str(index))
 
 static func site(data: Dictionary, kind: String, position: Variant, index: int) -> Dictionary:
-	return {"id": Ids.scoped("pen" if kind == "pen" else "shelter", data["id"], str(index)), "kind": kind,
+	return {"id": Ids.scoped("pen" if kind in ANIMAL_SITES else "shelter", data["id"], str(index)), "kind": kind,
 		"position": position.duplicate(), "entrance": Home.offset_place(position, Vector3(0, 0, 2))}
 
 static func install(data: Dictionary) -> void:

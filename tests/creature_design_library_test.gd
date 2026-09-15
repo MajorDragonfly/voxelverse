@@ -113,8 +113,8 @@ func _restart(saves: Node) -> void:
 	_expect(not FileAccess.file_exists("user://incoming.json"), "Offline proof retained transfer file")
 	_expect(saves.select_slot(expected.slot), "Restart failed to load template adventure")
 	var creature: Dictionary = Creature.load_best_available()
-	_expect(JSON.parse_string(JSON.stringify(Creature.serialize_snapshot(creature))) == expected.design, "Restart altered template authoring data")
-	_expect(JSON.parse_string(JSON.stringify(root.get_node("ProgressionService").export_state())) == expected.progression, "Restart changed starting progress")
+	_expect(JSON.parse_string(Atomic.stringify(Creature.serialize_snapshot(creature))) == expected.design, "Restart altered template authoring data")
+	_expect(JSON.parse_string(Atomic.stringify(root.get_node("ProgressionService").export_state())) == expected.progression, "Restart changed starting progress")
 	for key in ["id", "player_species_id", "player_faction_id", "player_object_id"]:
 		_expect(root.get_node("GameState").campaign.data[key] == expected.campaign[key], "Restart changed identity: " + key)
 

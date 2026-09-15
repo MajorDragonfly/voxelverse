@@ -241,6 +241,7 @@ func _world_snapshot() -> Dictionary:
 	var workers: int = 0
 	if terrain._job != null: workers = terrain._job._tasks.size() + int(terrain._job._selection_task >= 0)
 	return {"address": current_scene.player.location(), "terrain_wait": current_scene.player.waiting_for_terrain,
+		"terrain_streaming": terrain.streaming_diagnostics(),
 		"terrain_tiles": terrain.leaves.size(), "terrain_collisions": terrain.active.size(), "terrain_pending_uploads": terrain._pending.size(),
 		"terrain_workers": workers, "terrain_cached_tiles": terrain._cache.size(), "terrain_resident_peak": terrain.peak_resident_meshes,
 		"rebases": terrain.rebases, "flora_instances": flora.instance_count(), "flora_worker": int(flora._task >= 0),

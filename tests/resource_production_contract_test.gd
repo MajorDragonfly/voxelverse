@@ -48,7 +48,7 @@ func _prepare() -> void:
 	forged.economy.incoming[0].position = [0, 0, -8]
 	_expect(not valid(forged), "Altered outstanding batch disagreed with receipt but validated.")
 	_expect(not E.collect(data, data.members[1], "milk") and data == before, "Remote pickup teleported resources.")
-	_expect(E.Resources.definition("eggs").is_empty() and E.Batch.Production.definition("husbandry.eggs").is_empty(), "ARCH-20 activated eggs.")
+	_expect(E.pending(data, "eggs") == 0 and E.Resources.total(data.economy, "eggs", "received") == 0, "Legacy milk admission generated eggs.")
 	var file := FileAccess.open(SAVE, FileAccess.WRITE)
 	file.store_string(JSON.stringify({"data": data, "body": body, "campaign": campaign.data}))
 	file.close()

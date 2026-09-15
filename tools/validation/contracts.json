@@ -4,19 +4,22 @@
     {
       "id": "campaign",
       "title": "Kampagne, Körperidentität und Speichern",
-      "work": "M1e / ARCH-03,04,07,12,18",
+      "work": "M1e / ARCH-03,04,06,07,12,18",
       "tests": [
         "body_identity_test",
         "body_travel_test",
         "campaign_foundation_test",
+        "coordinate_persistence_test",
         "galaxy_catalog_test",
         "galaxy_visits_test",
         "meta_runtime_test",
         "phase_handoff_test",
+        "save_participants_test",
         "save_slots_test",
         "spherical_campaign_contract_test",
         "spherical_campaign_runtime_test",
-        "spherical_developed_migration_test"
+        "spherical_developed_migration_test",
+        "frozen_body_serialization_test"
       ]
     },
     {
@@ -25,18 +28,21 @@
       "work": "M1f/M1g / ARCH-08–11,19",
       "tests": [
         "spherical_creature_test",
-        "spherical_gameplay_test"
+        "spherical_gameplay_test",
+        "spherical_egg_production_test"
       ]
     },
     {
       "id": "regions_simulation",
       "title": "Regionsspeicher, Fernarbeit und Budgets",
-      "work": "M1h / ARCH-13–18",
+      "work": "M1h / ARCH-13–18; ARCH-27 regional transport contract",
       "tests": [
         "campaign_scaling_test",
         "far_simulation_test",
         "performance_measurement_test",
         "region_store_test",
+        "population_register_test",
+        "regional_transport_test",
         "village_navigation_budget_test"
       ]
     },
@@ -63,6 +69,8 @@
         "surface_population_budget_test",
         "surface_scale_contract_test",
         "surface_support_test",
+        "radial_step_test",
+        "terrain_lookahead_test",
         "terrain_transition_test"
       ]
     },
@@ -101,6 +109,7 @@
         "creature_foot_provider_test",
         "creature_hand_provider_test",
         "creature_joint_studio_test",
+        "creature_mouth_provider_test",
         "creature_parts_studio_test",
         "creature_seat_fit_test",
         "creature_studio_test",
@@ -178,7 +187,8 @@
         "tribal_economy_progress_test",
         "tribal_economy_progress_world_test",
         "tribal_progression_test",
-        "tribal_progression_world_test"
+        "tribal_progression_world_test",
+        "skills_localization_test"
       ]
     },
     {
@@ -187,6 +197,7 @@
       "work": "M6/D3 / ARCH-10,11,20–22",
       "tests": [
         "resource_production_contract_test",
+        "settlement_collection_test",
         "tribal_age_economy_contract_test",
         "tribal_age_economy_test",
         "tribal_age_growth_contract_test",
@@ -198,7 +209,9 @@
         "tribal_age_test",
         "tribal_age_world_test",
         "village_work_observation_test",
-        "village_work_snapshot_test"
+        "village_work_snapshot_test",
+        "egg_production_contract_test",
+        "egg_husbandry_ui_test"
       ]
     },
     {
@@ -223,6 +236,7 @@
         "discovery_journal_test",
         "domestic_fauna_journal_test",
         "interface_task7_test",
+        "journal_paging_test",
         "living_planet_map_test",
         "minimap_test",
         "owned_animal_localization_test",
@@ -294,10 +308,12 @@
     },
     {
       "id": "over_256_animals",
-      "status": "pending",
-      "tests": [],
-      "scope": "Mehr als 256 dauerhaft veränderte Tieridentitäten nach Eviction und frischem Prozess erhalten.",
-      "limits": "Gemeinsam mit ARCH-14 implementieren; vorhandene D1-/D2-Prüfungen erfüllen diese Größenabnahme nicht."
+      "status": "implemented",
+      "tests": [
+        "population_register_test"
+      ],
+      "scope": "384 veränderte Tieridentitäten und Nahrungsquellen plus ein weiteres Tier über regionale Kampagnen-/Fortschrittsanschlüsse; aktive Referenzen, Regionswechsel, Cache-Eviction, Altformat, Schreibfehler und frischer SaveGameService-Prozess.",
+      "limits": "Headless-Fachabnahme ohne gerenderte Reise/Physik; separates Planetlabor behält sein 256-Tier-Register. Ziel-PC und Labormigration bleiben offen."
     },
     {
       "id": "future_blueprints",
@@ -331,6 +347,15 @@
       ],
       "scope": "8.205 Kacheln und 3.105 Orte mit begrenzten Caches, Migration, vollständigen Seiten, offenem Puffer, Schreibfehlern und frischem SaveGameService-Prozess. Sprachwechsel auf der vorhandenen Kartensitzung.",
       "limits": "Kein räumlicher Vollindex und kein Ziel-PC-Nachweis; Backup-/Archivprüfungen laufen zusätzlich im Python-Gate."
+    },
+    {
+      "id": "settlement_instances",
+      "scope": "ARCH-26.1: isolated settlement contract and lossless legacy copy; two instances use the existing work core.",
+      "status": "partial",
+      "tests": [
+        "settlement_collection_test"
+      ],
+      "limits": "No live SaveGameService registration, founding UI, physical navigation certification, regional paging or transports. Fixture validates model work, held cargo and fresh process only."
     }
   ]
 }

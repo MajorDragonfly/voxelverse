@@ -18,6 +18,8 @@ Der Spieler baut sein eigenes Tier aus erkennbaren Formen realer Tiere: beispiel
 
 Die folgende Auswahl ist ein ausbaufähiger Produktionskatalog mit konkreten Vorbildern. Ein Vorbild benennt eine gewünschte Spielgestaltung, keine zoologische Vollsimulation. Die ursprünglichen Pflichtbeispiele bleiben die erste Lieferung; die übrigen Formen werden in den unten beschriebenen Paketen ausgearbeitet.
 
+**Weiteres Modellpaket auf Fachbranch:** [Hundeschnauze, Krokodilschnauze und Oktopusmund](WORK_ARCH24_MOUTH_MODELS.md) sind additive, einzeln wählbare Mundformen. Die Freischaltung folgt den vorhandenen Raubkiefern; Werte und Kosten bleiben deren Profil. Alte Wildarten werden nicht neu erzeugt. Rüssel, weitere Formen, eigenständige Kieferbewegung und prozedurale Verteilung der neuen Modelle bleiben offen. Die folgenden Familienlisten sind weiterhin der vollständige Zielumfang.
+
 ## 1. Köpfe, Mund und Nahrung
 
 Kopfform, Mund und Zubehör bekommen getrennte passende Anschlüsse. Ein langer Hals darf ebenso einen kurzen runden Kopf wie eine lange Schnauze tragen.

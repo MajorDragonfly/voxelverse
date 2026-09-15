@@ -96,6 +96,6 @@ func run() -> void:
 func complete(recovery: RefCounted, catalog: Dictionary, budget: int) -> void:
 	while recovery.data["status"] == "searching": recovery.step(root.get_node("WorldGenerator"), catalog, budget)
 func signature(value: Variant) -> String:
-	return JSON.stringify(JSON.parse_string(JSON.stringify(value))).sha256_text()
+	return JSON.stringify(JSON.parse_string(Atomic.stringify(value))).sha256_text()
 func check(ok: bool, message: String) -> void:
 	if not ok: failures.append(message)

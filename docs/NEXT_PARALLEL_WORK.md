@@ -1,6 +1,6 @@
 # Nächste Voxelverse-Arbeiten
 
-Stand: 10. September 2026, gemeinsamer Integrationsstand aus 28 abgeschlossenen Übergaben. [Integrationsbericht und Prüfgrenzen](INTEGRATION_2026-09-10.md), [exakte Quellen](integration-sources-2026-09-10.json), [Roadmap](../ROADMAP.md), [Architekturaufgaben](ARCHITECTURE_BACKLOG.md), [Modulanschlüsse](MODULE_CONTRACTS.md) und [Designvorgabe](VOXELVERSE_DESIGN.md) zuerst lesen. Der Bericht nennt den Veröffentlichungsstatus; ein lokaler Integrationsstand ist noch kein aktualisiertes `main`.
+Stand: 15. September 2026. `agent/playtest-integration-2026-09-15` enthält sämtliche veröffentlichten Lieferungen #78–89 einschließlich der Integrationskorrekturen aus #84. [Aktueller Integrationsbericht](INTEGRATION_2026-09-15.md) und [Spieltest](WINDOWS_TEST_2026-09-15.md) benennen die neue Abnahme. Die folgenden Anschlüsse aus der Runde vom 10. September bleiben erhalten. [Integrationsbericht und Prüfgrenzen](INTEGRATION_2026-09-10.md), [exakte Quellen](integration-sources-2026-09-10.json), [Roadmap](../ROADMAP.md), [Architekturaufgaben](ARCHITECTURE_BACKLOG.md), [Modulanschlüsse](MODULE_CONTRACTS.md) und [Designvorgabe](VOXELVERSE_DESIGN.md) zuerst lesen. Der Bericht nennt den Veröffentlichungsstatus; ein lokaler Integrationsstand ist noch kein aktualisiertes `main`.
 
 ## Bereits zusammengeführt
 
@@ -23,21 +23,25 @@ ARCH-15 wurde in PR #68 und #73 doppelt bearbeitet. Die gemeinsame Laufzeit verw
 
 ## Nächste begrenzte Arbeitspakete
 
+**ARCH-14-Fachlieferung vom 15. September:** [Große Sammlungen im Entdeckungsbuch](WORK_ARCH14_JOURNAL_PAGING.md) verwenden begrenzte Arten-/Regionsseiten und gezielte Körperansichten. Im gemeinsamen Spieltestbranch integriert; diese Buchoptimierung nicht nochmals beginnen. Persistente Entdeckungs-/Begegnungsarchive und weitere Langzeitregister bleiben offen.
+
 Vor Beginn den aktuellen Branch-/PR-Stand prüfen und genau einen Teilauftrag reservieren. Die Tabelle ist eine Arbeitsreihenfolge, keine neue Reservierung.
 
 | Paket | Konkreter nächster Umfang | Abhängigkeit / Grenze |
 |---|---|---|
-| ARCH-06 | Große gespeicherte Double-Koordinaten verlustfrei serialisieren und Fachorte vollständig inventarisieren | Der ARCH-30-Präzisionsnachweis bleibt offen; keine unveröffentlichten lokalen Entwürfe als geliefert zählen |
-| ARCH-07 | Bestehende Save-Teilnehmer schrittweise hinter eine feste Registrierung führen | Gemeinsamer SaveGameService bleibt alleiniger Writer; aktuelle Versionssperren erhalten |
-| ARCH-13 | Kleines globales Manifest, vollständige Referenzaufbewahrung und sichere Bereinigung | Archive für Population/Atlas/Orte existieren bereits; Backup-Menü und Labordateien sind weitere abgegrenzte Anschlüsse |
-| ARCH-14 | Verbleibende Tier-, Begegnungs- und Nahrungslangzeitregister prüfen/auslagern | Karten-/Ortspaging nicht erneut entwickeln; mehr als 256 dauerhaft veränderte Tiere gesondert nachweisen |
-| ARCH-17 / ARCH-02 | Kalte Terrain-/Kreaturenpublikation, Vorausschau und längere physische Rückroute untersuchen | Gemeldeten Rückwegstillstand reproduzieren; keine FPS-Zusage aus Headless-Werten |
+| ARCH-06 | Präziser gemeinsamer JSON-/Regionsschreiber und Fachinventar integriert; neue Fachorte weiter anbinden | Bestehende eingefrorene Körpernachweise und Altstände erhalten |
+| ARCH-07 | Feste Speicherteilnehmer integriert; neue Teilnehmer über vorhandene Adapter ergänzen | Gemeinsamer SaveService bleibt alleiniger Writer |
+| ARCH-13 | Globales Manifest, Aufbewahrung/Bereinigung und Backup-Menü | Vollständige Benutzer-/Laborarchive aus #89 sind integriert |
+| ARCH-14 | Separate Laborpopulation und dauerhafte Begegnungsarchive weiter auslagern | Tierzustandsschutz #79 und Journal-Seiten #88 sind integriert |
+| ARCH-17 / ARCH-02 | Kalte Terrain-/Kreaturenpublikation und längere physische Rückroute untersuchen | [Vorausschau-/Jobfortsetzung](WORK_ARCH17_TERRAIN_LOOKAHEAD.md) integriert; radiale Stufenkollision aus PR #84 erhalten. Lange Ziel-PC-Route bleibt offen. |
 | ARCH-19 | Gemeinsamen Stand grafisch und als native Pakete abnehmen; Ziel-PC und lange Reise messen | Einheitlicher Commit, echte Neustarts und vorhandene Integrationsprüfungen; Kugelstart bleibt aktiv |
-| ARCH-22 / D3-EIER | Legestelle → versorgen → produzieren → sammeln → tragen → einlagern/essen | ARCH-20 und ARCH-21 sind vorhanden. D2 bleibt Tierbesitzer; Nah-/Fernbilanz, Pause und Neustart prüfen |
-| ARCH-24 / M3-TEILE | Rüssel, zusätzliche Schnauzen und Oktopusmund als nächstes Modellpaket | Gemeinsame Kataloge/Renderer verwenden; gespeicherte Teilrevisionen und aktive Greiferöffnung sind noch eigene Anschlüsse |
-| ARCH-25 | Einen weiteren HUD-, Journal-, Dorf- oder Editorbereich vollständig DE/EN anschließen | Bestehende vier Teilbereiche erhalten; Katalogschlüssel vereinigen und PO-Dateien generieren |
-| ARCH-26/27 | Mehrere eigene Siedlungen und tatsächliche Transporte | Erst benötigte Regions-/Ortsverträge liefern; keine zweiten Vorrats- oder Tierdienste |
+| ARCH-22 / D3-EIER | Eierkette integriert: Legestelle, Versorgung, Produktion, Transport und Mahlzeit | Milchdaten und eindeutige Nah-/Fernzuständigkeit bleiben erhalten |
+| ARCH-24 / M3-TEILE | Rüssel, weitere Formen, gespeicherte Teilrevisionen und aktive Greifer/Kiefer | Hundeschnauze, Krokodilschnauze und Oktopusmund integriert |
+| ARCH-25 | Einen weiteren HUD-, Journal-, Dorf- oder Editorbereich auf DE/EN anschließen | Fähigkeitenbereich #82 zusätzlich integriert; 566 Nachrichten je Sprache |
+| ARCH-26/27 | Vorhandene Siedlungs-/Transportverträge produktiv an Speicher, Vorräte und physische Träger anschließen | #85/#86 sind integrierte vorbereitende Modelle; noch keine spielbare Siedlungsgründung |
 | BP-COMMUNITY.3 | Dienst-/Uploadumfang für den Community-Katalog festlegen und danach umsetzen | Lokale Bibliothek ist vorhanden; Onlineveröffentlichung, Galerie und weitere Bauplanarten bleiben offen |
+
+**ARCH-24-Fachübergabe dieser Runde:** `agent/arch24-mouth-models-2026-09-10` liefert Hundeschnauze, Krokodilschnauze und Oktopusmund; [Bericht](WORK_ARCH24_MOUTH_MODELS.md). Diese drei Modelle nicht erneut beginnen. Rüssel bleibt ein eigenes Kopfmodul mit getrenntem Mundanschluss; weitere Schnauzen sowie gespeicherte Teilrevisionen und aktive Kiefer-/Greiferöffnung bleiben offen. Gemeinsame Änderungen: `ProgressionService` ergänzt normale Freischalteinträge für Modellalternativen; die Testregistry erhält genau einen Test. Die Fachpakete sind jetzt im gemeinsamen Testbranch vereinigt.
 
 ## Regeln für Übergaben
 

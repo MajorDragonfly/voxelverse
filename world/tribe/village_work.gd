@@ -163,7 +163,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 				data["housing"]["homes"].append(Housing.site(data, order, project["position"], data["housing"]["homes"].size()))
 				if order == "hut":
 					data["huts"] += 1
-			elif order == "pen":
+			elif order in Housing.ANIMAL_SITES:
 				var p: Dictionary = Housing.site(data, order, project["position"], data["husbandry"]["pens"].size())
 				p.merge({"animal_id": "", "food": 0.0, "water": 0.0})
 				data["husbandry"]["pens"].append(p)

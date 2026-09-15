@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "base_game_commit": "f9488ae5eabe18e8f44c57cb252e4c53f5efba80",
+  "execution": "headless_source_project_with_reviewed_candidate_patch",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "candidate_file_blobs": {
+    ".github/workflows/export-validate.yml": "7bf0fb6c15670296fabcd7f2f9c43c62fc5c010a",
+    ".github/workflows/godot-validate.yml": "2e7156846b739cf64ff121f0064667eee73deb44",
+    "core/diagnostics/spherical_gameplay_probe.gd": "bdd34740a3d34c7e58e88926ba0b53ea44c6e0eb",
+    "tools/validate_export.py": "48c54a35a4ee1bf3db355f9cf1b20c7bcc3b0211"
+  },
+  "completed_source_checks": [
+    {"name": "spherical_egg_production_test", "passed": true, "exit_code": 0, "seconds": 454.914},
+    {"name": "spherical_gameplay_test", "passed": true, "exit_code": 0, "seconds": 459.541}
+  ],
+  "corrections": [
+    "Journal assertion validates original animal identity and canonical address independent of locale.",
+    "Carrier obstruction is staged only after a bounded query confirms zero intersecting live capsules; actual blocked freight and pen attendance remain required.",
+    "Native export retains previous checks and additionally requires complete egg production, transport, meal and fresh-process resumption.",
+    "Build info records exact source; workflow total budgets account for both complete production chains without relaxing individual probe deadlines."
+  ],
+  "native_windows_acceptance": false,
+  "full_suite_acceptance": false,
+  "target_pc_acceptance": false
+}

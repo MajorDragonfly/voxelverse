@@ -40,7 +40,9 @@ func _check_economy_progress() -> void:
 	_expect(progression.export_state()["tribal"] == snapshot, "Global pause advanced economic evidence")
 	_expect(saves.save_now() and saves.load_now(), "Running supply clock cannot save/load")
 	_expect(JSON.parse_string(JSON.stringify(progression.export_state()["tribal"])) == JSON.parse_string(JSON.stringify(snapshot)), "Loading granted offline supply time or lost receipts")
-	_expect(tribe.village() == JSON.parse_string(JSON.stringify(village_snapshot)), "Evidence persistence changed residents or village resources")
+	# Compare the exact persisted numeric representation, not the retired
+	# rounded JSON writer. Keep strict equality for every resident/resource.
+	_expect(tribe.village() == JSON.parse_string(Atomic.stringify(village_snapshot)), "Evidence persistence changed residents or village resources")
 	paused = false
 	# Continue only active simulated time; no edits to counters, clock or awards.
 	state.set_simulation_speed(4)

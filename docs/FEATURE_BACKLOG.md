@@ -14,7 +14,7 @@ Stand: 10. September 2026. Ergänzt die [gemeinsame Roadmap](../ROADMAP.md) um n
 | ID | Gewünschtes Ergebnis | Spielphase / Einordnung | Reihenfolge | Status |
 |---|---|---|---|---|
 | D1-EIER | Eine geeignete, erreichbare Eierlieferanten-Art je belebtem Spielplaneten | Artenkatalog; entdeckbar in der Kreaturenphase, nutzbar ab Stamm | Nach geprüftem D1-Grundvertrag; vor D3-EIER | Integriert: ARCH-21; Eierproduktion separat |
-| D3-EIER | Versorgung, Eierlegen, Sammeln, Transport und Nahrung aus eigenen Tieren | Tierhaltung und Dorfwirtschaft, D3/M6 | Nach D1-EIER, D2 und gemeinsamer D3-Haltungsbasis | Geplant |
+| D3-EIER | Versorgung, Eierlegen, Sammeln, Transport und Nahrung aus eigenen Tieren | Tierhaltung und Dorfwirtschaft, D3/M6 | Nach D1-EIER, D2 und gemeinsamer D3-Haltungsbasis | Fachbranch geliefert: [ARCH-22](WORK_ARCH22_EGG_PRODUCTION.md), separat integrieren |
 | M3-TEILE | Alle Körperteile überarbeiten oder kompatibel ersetzen; erkennbare Einzelteile realer Tiere frei kombinieren | Kreatureneditor, M2B/M3 | Bestandsprüfung und Anschlussregeln zuerst; danach Modellpakete und UI | Teilweise integriert: Inventar, Fuß-/Handanbieter, Pfoten/Tatzen/Hufe/Scheren |
 | M9-EXPEDITION | Modulares Expeditionsschiff, kleinere Landungsschiffe, Planetenuntersuchung und wachsender Schiffsausbau | Weltraumphase, M9.1–M9.6 | Nach M8 und vollständiger Kugelkampagne; Daten-/Editoranschlüsse früh vorbereiten | Datenentwurf integriert; Spielphase geplant |
 | BP-COMMUNITY | Designs veröffentlichen, herunterladen und als fertige Vorlagen verwenden | Phasenübergreifend, M2B/M3 und spätere Bauplanarten | Format/lokale Bibliothek zuerst, dann vollständiger Online-Austausch; je Typ eigener Spielanschluss | Kreaturenformat und lokale Bibliothek (.1/.2) integriert; Online-Austausch geplant |
@@ -42,16 +42,19 @@ Die Reihenfolge ist technisch begründet. Der Kugelwelt-Umzug ist die vorhandene
 
 ## D3-EIER – Eier als Nahrungskette im Stammesdorf
 
+**Fachbranch vom 10. September:** ARCH-22 liefert die Nahrungskette über bestehende D1-/D2-/D3-Verträge. [Übergabe, konkrete Tests und Grenzen](WORK_ARCH22_EGG_PRODUCTION.md); noch keine gemeinsame Integration oder Ziel-PC-Abnahme.
+
 **Zuständigkeit:** D3/Dorfwirtschaft. Bestehende D2-Tiere, gemeinsame Vorräte und wiederaufnehmbare Aufträge verwenden.
 
-- [ ] Ein tatsächlich gezähmtes, geeignetes Individuum einem Haltungsplatz mit Legestelle zuordnen.
-- [ ] Futter, Wasser, Betreuung und Haltungskapazität in der gemeinsamen Haltungslogik berücksichtigen; fehlende Versorgung hat eine definierte Wirkung.
-- [ ] Eier mit nachvollziehbarem Intervall und Menge an der Legestelle erzeugen. Genau ein zuständiger Dienst verbucht die Produktion in naher und vereinfachter Simulation.
-- [ ] Bewohner sammeln fertige Eier, tragen sie tatsächlich und liefern sie ins gemeinsame Lager. Das Lager erhält die Ressource erst bei erfolgter Lieferung.
-- [ ] Eier als Nahrung an die vorhandene Vorrats-/Verbrauchslogik anschließen; keinen zweiten Nahrungsvorrat oder Verbrauchsdienst einführen.
-- [ ] Unterbrochene Sammel-/Transportaufträge wieder aufnehmen. Gespeicherter Ort und Besitzer der Ressource bleiben eindeutig: Legestelle, Transport oder Lager.
-- [ ] Produktion, Lagerung, Pause, Nachladen, Neustart, Tierverlust und Epochenwechsel erhalten/prüfen. Keine doppelte Ernte und kein unbeschlossenes Offline-Wachstum.
-- [ ] Erfolge an vorhandene Ereignisse anschließen; wiederholtes Eiersammeln erzeugt keine unbegrenzten Sozial-/Stammespunkte.
+- [x] Ein tatsächlich gezähmtes, geeignetes Individuum einem Haltungsplatz mit Legestelle zuordnen.
+- [x] Futter, Wasser, Betreuung und Haltungskapazität in der gemeinsamen Haltungslogik berücksichtigen; fehlende Versorgung hat eine definierte Wirkung.
+- [x] Eier mit nachvollziehbarem Intervall und Menge an der Legestelle erzeugen. Genau ein zuständiger Dienst verbucht die Produktion in naher und vereinfachter Simulation.
+- [x] Bewohner sammeln fertige Eier, tragen sie tatsächlich und liefern sie ins gemeinsame Lager. Das Lager erhält die Ressource erst bei erfolgter Lieferung.
+- [x] Eier als Nahrung an die vorhandene Vorrats-/Verbrauchslogik anschließen; keinen zweiten Nahrungsvorrat oder Verbrauchsdienst einführen.
+- [x] Unterbrochene Sammel-/Transportaufträge wieder aufnehmen. Gespeicherter Ort und Besitzer der Ressource bleiben eindeutig: Legestelle, Transport oder Lager.
+- [x] Produktion, Lagerung, Pause, Nachladen, Neustart und Tierverlust erhalten/prüfen. Keine doppelte Ernte und kein unbeschlossenes Offline-Wachstum.
+- [ ] Eierbestände bei späteren spielbaren Epochenwechseln gesondert abnehmen; diese Epochen sind weiterhin gesperrt.
+- [x] Erfolge an vorhandene Ereignisse anschließen; wiederholtes Eiersammeln erzeugt keine unbegrenzten Sozial-/Stammespunkte.
 
 **Abnahme:** Ein Bewohner versorgt ein eigenes Tier, sammelt dessen Eier und liefert sie als nutzbare Nahrung ins Lager. Speichern und Laden vor dem Sammeln, unterwegs und nach Lieferung erhält genau denselben Bestand und Arbeitsfortschritt.
 

@@ -82,7 +82,7 @@ func _run() -> void:
 		H.advance(data, data["husbandry"]["pens"][0], 0.25)
 	var r: Dictionary = data["husbandry"]["records"]["d3-unit-animal"]
 	_expect(r["pending_milk"] == 2 and r["cycles"] == 1 and absf(data["husbandry"]["consumed"]["food"] - 1.0) < 0.000001 and absf(data["husbandry"]["consumed"]["water"] - 4.0) < 0.000001, "Canonical cycle created wrong milk or free supplies.")
-	_expect(H.offer(data, "d3-unit-animal") and valid(data), "Joint production and inbox receipt invalid.")
+	_expect(H.offer(data, "d3-unit-animal") and valid(data), "Joint production and inbox receipt invalid: " + Model.validate(data, body, campaign.data))
 	before = JSON.parse_string(JSON.stringify(data))
 	data = before.duplicate(true)
 	_expect(not H.offer(data, "d3-unit-animal") and data == before, "Repeat offer duplicated milk.")

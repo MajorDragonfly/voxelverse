@@ -97,7 +97,7 @@ func read_process(world: Node) -> void:
 	expect(world.load_lab(), "Load persisted in-progress habitat search")
 	var resumed: Dictionary = world.ecosystem.domestic.catalog
 	while resumed.habitat_status == "pending": world.ecosystem.domestic.planner.step(resumed, 1, 1)
-	expect(JSON.parse_string(JSON.stringify(resumed)) == reference.completed, "Cold search changed habitats, identities or cursor")
+	expect(JSON.parse_string(Atomic.stringify(resumed)) == reference.completed, "Cold search changed habitats, identities or cursor")
 	# Pre-D1 spherical worlds acquire only the new optional data.
 	world.store_path = "user://d12-old.json"
 	expect(world.load_lab(), "Load original spherical schema 1")

@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "kind": "source_contract",
+  "source": {
+    "commit": "ce0f84cd6bdd319ce6dce6f443bd2917a9adf918",
+    "tracked_worktree_dirty": false
+  },
+  "contracts": 17,
+  "registered_tests": 152,
+  "catalog": "LOCALIZATION_CATALOG_PASSED: 436 messages, 2 languages",
+  "scenarios": [
+    {
+      "id": "same_seed_systems",
+      "status": "implemented",
+      "tests": [
+        "body_identity_test",
+        "body_travel_test"
+      ],
+      "scope": "Gleicher Seed in zwei Systemen; getrennte Entdeckungen/Vorräte; A–B–A; Altformat, Schreibfehler und frischer Prozess.",
+      "limits": "Quell-/Headless-Ausführung allein belegt weder native Pakete noch Ziel-PC-Darstellung."
+    },
+    {
+      "id": "over_96_regions",
+      "status": "partial",
+      "tests": [
+        "region_store_test"
+      ],
+      "scope": "1.200 Regionsdatensätze, begrenzte Caches, Eviction, alter Commit, neuer Leser, beschädigte und zukünftige Wurzeln.",
+      "limits": "Store-Prüfstand; kein vollständiger Kampagnensnapshot mit >96 bespielten Regionen und kein Prozessneustart. Globales Manifest/segmentierte Fachbestände bleiben ARCH-13/14."
+    },
+    {
+      "id": "over_256_animals",
+      "status": "pending",
+      "tests": [],
+      "scope": "Mehr als 256 dauerhaft veränderte Tieridentitäten nach Eviction und frischem Prozess erhalten.",
+      "limits": "Gemeinsam mit ARCH-14 implementieren; vorhandene D1-/D2-Prüfungen erfüllen diese Größenabnahme nicht."
+    },
+    {
+      "id": "future_blueprints",
+      "status": "implemented",
+      "tests": [
+        "blueprint_contract_test",
+        "community_blueprint_package_test",
+        "creature_design_library_test"
+      ],
+      "scope": "Unbekannte neuere Bauplanversion bei Import, Vorschau, Speichern und Rückimport unverändert schützen.",
+      "limits": "Original-/Zukunftsschutz für vorhandene Kreaturen- und Gebäudeverbraucher; spätere Fahrzeug-/Schiffsverbraucher und Online-Dienst bleiben eigene Arbeit."
+    },
+    {
+      "id": "near_far_cargo",
+      "status": "partial",
+      "tests": [
+        "far_simulation_test",
+        "body_travel_test",
+        "spherical_gameplay_test"
+      ],
+      "scope": "Ein Simulationsbesitzer, tatsächliches D1→D2→D3-Tier mit Gehege und geladener Milch bei A–B–A; Versorgung, Pause, blockierte Fracht, Schreibfehler, frische Prozesse und tatsächliche Einlagerung.",
+      "limits": "Lange Abwesenheit, mehrere spielbare eigene Siedlungen und Ziel-PC-Abnahme bleiben offen."
+    },
+    {
+      "id": "persistent_atlas_pages",
+      "status": "implemented",
+      "tests": [
+        "atlas_paging_test",
+        "atlas_places_test",
+        "world_map_localization_test"
+      ],
+      "scope": "8.205 Kacheln und 3.105 Orte mit begrenzten Caches, Migration, vollständigen Seiten, offenem Puffer, Schreibfehlern und frischem SaveGameService-Prozess. Sprachwechsel auf der vorhandenen Kartensitzung.",
+      "limits": "Kein räumlicher Vollindex und kein Ziel-PC-Nachweis; Backup-/Archivprüfungen laufen zusätzlich im Python-Gate."
+    }
+  ],
+  "scenario_counts": {
+    "implemented": 3,
+    "partial": 2,
+    "pending": 1
+  },
+  "passed": true
+}

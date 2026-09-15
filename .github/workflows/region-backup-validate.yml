@@ -4,11 +4,14 @@ on:
   pull_request:
     paths:
       - "tools/region_backup.py"
+      - "tools/region_backup_userdata.py"
+      - "tools/userdata_backup_probe.gd"
       - "tools/region_backup_probe.gd"
       - "tools/atlas_backup_probe.gd"
       - "tools/place_backup_probe.gd"
       - "tests/tooling/region_backup_test.py"
       - "tests/tooling/region_backup_places_test.py"
+      - "tests/tooling/region_backup_userdata_test.py"
       - "core/persistence/region_store.gd"
       - "core/persistence/slot_history.gd"
       - "autoload/save_game_service.gd"
@@ -49,3 +52,7 @@ jobs:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
           PLACE_BACKUP_PROJECT: ${{ github.workspace }}
         run: python -m unittest discover -s tests/tooling -p 'region_backup_places_test.py' -v
+      - name: Verify complete user-data archives and native laboratory restart
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: python -m unittest discover -s tests/tooling -p 'region_backup_userdata_test.py' -v

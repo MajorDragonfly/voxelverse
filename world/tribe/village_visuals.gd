@@ -55,9 +55,15 @@ func rebuild(data: Dictionary) -> void:
 		_label(site + Vector3(0, 2.3, 0), "Arbeitsplatz im Bau", Color("edd5a8"))
 	for batch: Dictionary in data["economy"]["incoming"]:
 		var site: Vector3 = Home.vector(batch["position"])
-		_box(site + Vector3(0, 0.4, 0), Vector3(0.5, 0.8, 0.5), Color("f4f0dd"))
-		_label(site + Vector3(0, 2.5, 0), "Milch zur Abholung · %d" % batch["remaining"], Color("f4f0dd"))
-	if data["project"].get("kind") in ["hut", "tent", "pen"]:
+		var kind: String = Economy.Batch.resource_id(batch)
+		if kind == "eggs":
+			_box(site + Vector3(0, 0.15, 0), Vector3(0.7, 0.3, 0.5), Color("95643e"))
+			for index in range(mini(3, int(batch.remaining))):
+				_egg(site + Vector3((index - 1) * 0.18, 0.38, 0))
+		else:
+			_box(site + Vector3(0, 0.4, 0), Vector3(0.5, 0.8, 0.5), Color("f4f0dd"))
+		_label(site + Vector3(0, 2.5, 0), "%s zur Abholung · %d" % [Economy.TITLES[kind], batch.remaining], Color(Economy.Resources.definition(kind).color))
+	if data["project"].get("kind") in ["hut", "tent", "pen", "laying_site"]:
 		var project: Dictionary = data["project"]
 		var location: Vector3 = Home.vector(project["position"])
 		for x in [-1, 1]:
@@ -69,9 +75,17 @@ func rebuild(data: Dictionary) -> void:
 		for kind: String in project["delivered_materials"]:
 			delivered += int(project["delivered_materials"][kind])
 			required += int(preload("res://world/tribe/village_housing.gd").COSTS[project["kind"]][kind])
-		_label(location + Vector3(0, 2.8, 0), "%s im Bau · Material %d / %d" % [{"hut": "Hütte", "tent": "Zelt", "pen": "Tierplatz"}[project["kind"]], delivered, required], Color("edd5a8"))
+		_label(location + Vector3(0, 2.8, 0), "%s im Bau · Material %d / %d" % [{"hut": "Hütte", "tent": "Zelt", "pen": "Tierplatz", "laying_site": "Legestelle"}[project["kind"]], delivered, required], Color("edd5a8"))
 	for p: Dictionary in data.get("husbandry", {}).get("pens", []):
 		var location: Vector3 = Home.vector(p["position"])
+		if p.get("kind", "pen") == "laying_site":
+			_box(location + Vector3(0, 0.08, -0.3), Vector3(1.3, 0.16, 1.3), Color("b8a36c"))
+			for side in [-1, 1]:
+				_box(location + Vector3(side * 0.65, 0.16, -0.3), Vector3(0.12, 0.25, 1.3), Color("95643e"))
+			var record: Dictionary = data.husbandry.records.get(p.animal_id, {})
+			if not record.is_empty():
+				for index in range(mini(3, preload("res://world/tribe/village_husbandry.gd").pending(record))):
+					_egg(location + Vector3((index - 1) * 0.2, 0.23, -0.3))
 		# Open care place: posts mark capacity, no invisible enclosure or animal motion.
 		for x in [-1, 1]:
 			_box(location + Vector3(x, 0.5, -1), Vector3(0.16, 1, 0.16), Color("95643e"))
@@ -81,7 +95,7 @@ func rebuild(data: Dictionary) -> void:
 			if float(p[kind]) > 0:
 				_box(location + Vector3(side * 0.85, 0.4, 0.5), Vector3(0.32, 0.06, 0.9), Color("60bde8") if side == 1 else Color("b8bf67"))
 		_box(Home.vector(p["entrance"]) + Vector3(0, 0.03, 0), Vector3(1.3, 0.06, 0.7), Color("c9b080"))
-		_label(location + Vector3(0, 3, 0), "Tierplatz · %s" % ("frei" if p["animal_id"] == "" else "belegt"), Color("ead19a"))
+		_label(location + Vector3(0, 3, 0), "%s · %s" % ["Legestelle" if p.get("kind", "pen") == "laying_site" else "Milchtierplatz", "frei" if p["animal_id"] == "" else "belegt"], Color("ead19a"))
 	if int(data["tools"]) == 1:
 		_box(center + Vector3(0, 0.6, -1.3), Vector3(0.18, 0.7, 0.18), Color("b08451"))
 		_box(center + Vector3(0.14, 0.9, -1.3), Vector3(0.5, 0.3, 0.22), Color("b2c0c2"))
@@ -96,6 +110,11 @@ func _hut(location: Vector3) -> void:
 	for layer in range(4):
 		var width: float = 2.5 - layer * 0.5
 		_box(location + Vector3(0, 1.8 + layer * 0.22, 0), Vector3(width, 0.24, 2.4), Color("9a975a"))
+
+func _egg(location: Vector3) -> void:
+	# Small stepped voxel silhouette, matching the existing resource props.
+	_box(location, Vector3(0.14, 0.12, 0.14), Color("e7d6aa"))
+	_box(location + Vector3(0, 0.09, 0), Vector3(0.1, 0.08, 0.1), Color("f2e6ce"))
 
 func _box(location: Vector3, size: Vector3, color: Color) -> void:
 	var visual := MeshInstance3D.new()

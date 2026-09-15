@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "screenshots": [
+    "skills-de-1280x720-100-details.png",
+    "skills-de-1280x720-100.png",
+    "skills-de-1280x720-150-details.png",
+    "skills-de-1280x720-150.png",
+    "skills-de-1920x1080-100-details.png",
+    "skills-de-1920x1080-100.png",
+    "skills-de-1920x1080-150-details.png",
+    "skills-de-1920x1080-150.png",
+    "skills-de-800x600-100-details.png",
+    "skills-de-800x600-100.png",
+    "skills-de-800x600-150-details.png",
+    "skills-de-800x600-150.png",
+    "skills-en-1280x720-100-details.png",
+    "skills-en-1280x720-100.png",
+    "skills-en-1280x720-150-details.png",
+    "skills-en-1280x720-150.png",
+    "skills-en-1920x1080-100-details.png",
+    "skills-en-1920x1080-100.png",
+    "skills-en-1920x1080-150-details.png",
+    "skills-en-1920x1080-150.png",
+    "skills-en-800x600-100-details.png",
+    "skills-en-800x600-100.png",
+    "skills-en-800x600-150-details.png",
+    "skills-en-800x600-150-future.png",
+    "skills-en-800x600-150-tribe.png",
+    "skills-en-800x600-150.png"
+  ],
+  "renderer": "gl_compatibility",
+  "scope": "Real skills UI; mouse/keyboard purchases, rollback, language changes, reload and fresh process",
+  "source_commit": "072503ecbe092eda7611f3bc70b1dbcf282b00d2",
+  "source_tree": "d56d80ba5780db2fc4505554c9bb8381548ade1d",
+  "retained_images": [
+    "skills-en-800x600-150-details.png",
+    "skills-de-1280x720-150.png",
+    "skills-en-1920x1080-100.png",
+    "skills-de-800x600-150.png"
+  ],
+  "source_sha256": {
+    "ui/behavior_skill_tree.gd": "96d59c3f1eff7333a3939546b1e9f5540b7d26a47c40176d4b181bc3ba8c17ca",
+    "ui/skills_presentation.gd": "a83da2948120902081ef6aef2324ca3f6e40f6bb8c0f505243bf919b8edc1e7a",
+    "tests/skills_localization_test.gd": "f10431d85af23db83b47fb2d3f3943753678c170138933e3eb9161cef46fca47",
+    "localization/catalog.json": "0242978f1ef8e155481a32fcc858b581adf1b70d97779d4b242033932a74ad0a"
+  }
+}

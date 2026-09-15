@@ -1,0 +1,78 @@
+{
+  "base": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "branch": "agent/playtest-integration-2026-09-15",
+  "sources": [
+    {
+      "pr": 89,
+      "branch": "agent/arch13-full-userdata-backups-2026-09-10",
+      "commit": "0be9d47b3f3dd7f3d6aa5283a79a09b35a56a3ce",
+      "title": "ARCH-13: Vollständige Sicherungen einschließlich Laborständen und Migrationsoriginalen"
+    },
+    {
+      "pr": 88,
+      "branch": "agent/arch14-journal-paging-2026-09-15",
+      "commit": "9bbf4e8369c7ac5c969e35a84c808a5890bd4fb6",
+      "title": "ARCH-14: große Journal-Sammlungen seitenweise lesen"
+    },
+    {
+      "pr": 87,
+      "branch": "agent/arch17-terrain-lookahead-2026-09-10",
+      "commit": "a09f44ad7b3faa42e82ac428073bbb4e11cac280",
+      "title": "ARCH-17: Terrain-Vorausschau und sichere Jobgenerationen"
+    },
+    {
+      "pr": 86,
+      "branch": "agent/arch26-settlement-contract-2026-09-10",
+      "commit": "17d3377fc4acc11f8c5b8056203535a0e67f4566",
+      "title": "ARCH-26.1: Siedlungsvertrag und verlustfreie Dorfmigration"
+    },
+    {
+      "pr": 85,
+      "branch": "agent/arch27-regional-transport-2026-09-10",
+      "commit": "83766c071c420e2a36826912ab9931af4369de1c",
+      "title": "ARCH-27: regionaler Wege- und Transportvertrag mit Neustartschutz"
+    },
+    {
+      "pr": 84,
+      "branch": "agent/integration-sphere-acceptance-2026-09-11",
+      "commit": "00c04d0ddbf3f11bfc3d794f66b618dbd5814b59",
+      "title": "Integration #78–83 und gemeinsame Kugelwelt-Abnahme"
+    },
+    {
+      "pr": 83,
+      "branch": "agent/arch22-egg-production-2026-09-10",
+      "commit": "f2b2ee90838719d8dd2fbb619babeb9e1078e938",
+      "title": "ARCH-22: Eierproduktion mit Legestellen, echten Transporten und Save/Load"
+    },
+    {
+      "pr": 82,
+      "branch": "agent/arch25-skills-localization-2026-09-10",
+      "commit": "15c6f1fbd6c1766aeafcffe490050cea78fb5f07",
+      "title": "ARCH-25: Fähigkeiten-Reiter vollständig DE/EN und responsive"
+    },
+    {
+      "pr": 81,
+      "branch": "agent/arch07-save-participants-2026-09-10",
+      "commit": "6693a51d941ccd2dd236db07f78ba736ce9d9534",
+      "title": "ARCH-07: bestehende Speicherteilnehmer fest registrieren"
+    },
+    {
+      "pr": 80,
+      "branch": "agent/arch24-mouth-models-2026-09-10",
+      "commit": "3930b019b9fb3126cf5b0f285f2178c682c83e30",
+      "title": "ARCH-24: Hundeschnauze, Krokodilschnauze und Oktopusmund"
+    },
+    {
+      "pr": 79,
+      "branch": "agent/arch14-population-registers-2026-09-10",
+      "commit": "034316fcfe1bd4078671582dcd880209a1c8ad3c",
+      "title": "ARCH-14: Tierzustand nach Speichern und Regionswechsel erhalten"
+    },
+    {
+      "pr": 78,
+      "branch": "agent/arch06-coordinate-precision-2026-09-10",
+      "commit": "cff4a6928bbac312ea4849e19b9d47bd3fd9d887",
+      "title": "ARCH-06: Ortskoordinaten verlustfrei speichern und Fachorte inventarisieren"
+    }
+  ]
+}

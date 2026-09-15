@@ -1,8 +1,10 @@
 extends "res://core/diagnostics/spherical_campaign_probe.gd"
 const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
+var production_kind: String = "milk"
 
 func _run() -> void:
+	if "--egg-production" in OS.get_cmdline_user_args(): production_kind = "eggs"
 	saves = tree.root.get_node("SaveGameService")
 	state = tree.root.get_node("GameState")
 	flow = tree.root.get_node("SessionFlow")
@@ -73,6 +75,10 @@ func _run() -> void:
 	flow.return_to_title()
 	await tree.scene_changed
 	await _open(path, true)
+	if not _expect_world(): await _finish(); return
+	if not _expect_step(state.get_current_body().get("tribe") is Dictionary, "Reload lost the saved tribe: " + saves.last_error):
+		await _finish()
+		return
 	_expect(Migration.fingerprint(state.get_current_body().tribe) == Migration.fingerprint(Registry.active(checkpoint.game_state).tribe), "Restart changed resident orders or cargo.")
 	flow.resume()
 	await _until(func() -> bool: return tree.current_scene.get_node("Nest/Tribe").is_active(), 45000)
@@ -137,9 +143,9 @@ func _animal_chain(tribe: Node) -> void:
 	await _until(func() -> bool: return runtime.is_active(), 8000)
 	# Population publication and real patrols continue after the controller is
 	# ready. Observe a live D1 individual, including its bounded return to view.
-	await _until(func() -> bool: return _milk_animal(runtime) != null, 30000)
-	var animal: Node3D = _milk_animal(runtime)
-	_expect(animal != null, "No live D1 milk animal: " + str(_population_status(tribe)))
+	await _until(func() -> bool: return _production_animal(runtime) != null, 30000)
+	var animal: Node3D = _production_animal(runtime)
+	_expect(animal != null, "No live D1 production animal: " + str(_population_status(tribe)))
 	if animal == null: return
 	var id: String = animal.get_campaign_identity().object_id
 	var species_id: String = animal.get_campaign_identity().species_id
@@ -150,10 +156,10 @@ func _animal_chain(tribe: Node) -> void:
 		if runtime.controller.record(id).get("status") == "tamed": break
 		if not await _approach_live(tribe, runtime, id, handler): return
 		var offer: Dictionary = runtime.offer(id)
-		_expect(offer.ok, "Milk animal offer failed: " + str(offer))
+		_expect(offer.ok, "Production animal offer failed: " + str(offer))
 		if not offer.ok: return
 		await _until(func() -> bool: return runtime.controller.record(id).pending.is_empty(), 6000)
-	_expect(runtime.controller.record(id).get("status") == "tamed", "Milk animal did not retain completed food/trust.")
+	_expect(runtime.controller.record(id).get("status") == "tamed", "Production animal did not retain completed food/trust.")
 	_expect(runtime.controller.record(id).species_id == species_id and data.members.size() == 3, "Taming changed species or recruited a citizen.")
 	print("SPHERE_TAMED ", id)
 	_stage("animal_book_and_home")
@@ -162,7 +168,16 @@ func _animal_chain(tribe: Node) -> void:
 	journal._tabs.current_tab = journal.ANIMALS_TAB
 	journal.refresh_owned_animals()
 	var owned: Array = journal._rows.filter(func(row: Dictionary) -> bool: return row.key == id)
-	_expect(owned.size() == 1 and owned[0].location.contains("Breite"), "Shared campaign book lost the original spherical milk animal.")
+	# Identity and the canonical address are invariant; a German word is not.
+	# The same real journal must also pass on an English Windows installation.
+	var listed: Dictionary = owned[0].get("_display_data", {}) if owned.size() == 1 else {}
+	var listed_place: Variant = listed.get("position")
+	var correct_place: bool = listed_place is Dictionary and listed_place.get("body_id") == state.get_current_body().id
+	if correct_place:
+		correct_place = Home.distance(listed_place, runtime.controller.record(id).position) < 0.005
+	var location_text: String = preload("res://ui/discovery/owned_animal_presentation.gd").point(listed_place) if correct_place else ""
+	_expect(owned.size() == 1 and listed.get("key") == id and listed.get("species_id") == species_id
+		and correct_place and owned[0].location.ends_with(location_text), "Shared campaign book lost the original spherical production animal/address: " + str(owned))
 	journal.close_journal()
 	await tree.process_frame
 	_expect(runtime.issue_command(id, "home").ok, "Radial home command failed.")
@@ -170,10 +185,10 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(runtime.actor_for(id).global_position.distance_to(tribe.anchor()) < 1.6, "Owned animal did not walk home.")
 	_expect(runtime.issue_command(id, "wait").ok, "Radial animal wait failed.")
 	tribe.select_all()
-	var site: Vector3 = _site(tribe, "pen")
+	var site: Vector3 = _site(tribe, "laying_site" if production_kind == "eggs" else "pen")
 	_expect(site.is_finite(), "No reachable physical pen site.")
 	if not site.is_finite(): return
-	_expect(tribe.issue_order("pen", site), "Cannot reserve pen construction: " + tribe.status)
+	_expect(tribe.issue_order("laying_site" if production_kind == "eggs" else "pen", site), "Cannot reserve pen construction: " + tribe.status)
 	_stage("prepare_pen_navigation")
 	await _until(func() -> bool: return not tribe.navigation.pending, 45000)
 	if not _expect_step(not tribe.navigation.pending, "Pen navigation did not finish within its separate preparation budget."): return
@@ -191,10 +206,12 @@ func _animal_chain(tribe: Node) -> void:
 	var through: Vector3 = site + (site - tribe.anchor()).slide(Space.up(self, site)).normalized() * 1.2
 	through = tribe.navigation.snap(through)
 	_expect(tribe.issue_order("move", through), "Handler cannot walk through pen.")
-	# Stop well inside the 1.8 m admission radius: the waiting animal can settle
-	# within 0.5 m of its target after collision or a fresh physical spawn.
-	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(site) < 1.2, 24000)
-	if not _expect_step(runtime.actor_for(id).global_position.distance_to(site) < 1.2, "Animal did not follow handler inside pen: " + str({"animal": runtime.actor_for(id).global_position, "handler": tribe.actors[handler].global_position, "site": site, "status": runtime.actor_for(id).status, "animal_route": runtime._routes.get(id), "handler_record": tribe.member_record(handler)})): return
+	# Admission checks the real actor origin. The upright egg animal has a
+	# taller origin than the milk animal; use the unchanged 1.8 m game rule.
+	# Waiting and the later cold return both recheck actual pen attendance.
+	var admission_margin: float = 1.75 if production_kind == "eggs" else 1.2
+	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(site) < admission_margin, 24000)
+	if not _expect_step(runtime.actor_for(id).global_position.distance_to(site) < admission_margin, "Animal did not follow handler inside pen: " + str({"animal": runtime.actor_for(id).global_position, "handler": tribe.actors[handler].global_position, "site": site, "status": runtime.actor_for(id).status, "animal_route": runtime._routes.get(id), "handler_record": tribe.member_record(handler)})): return
 	runtime.issue_command(id, "wait")
 	var pen: Dictionary = tribe.village().husbandry.pens[0]
 	_expect(tribe.husbandry.assign(pen.id, id), "D2->D3 admission failed: " + tribe.status)
@@ -202,20 +219,20 @@ func _animal_chain(tribe: Node) -> void:
 	tribe.select_member(data.members[1].id)
 	tribe.assign_profession("keeper")
 	tribe.select_member(data.members[2].id)
-	tribe.assign_profession("milk_carrier")
+	tribe.assign_profession("egg_carrier" if production_kind == "eggs" else "milk_carrier")
 	_stage("supply_pen")
 	# One keeper carries one unit per return trip. Water reaches its four-unit
 	# target before food is chosen; allow those five real trips and needs stops.
 	await _until(func() -> bool: return tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, 60000)
 	_expect(tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, "Keeper did not physically supply pen: " + str({"delivered": tribe.village().husbandry.delivered, "members": tribe.village().members, "routes": tribe._routes, "status": tribe.status}))
 	var carrier: String = data.members[2].id
-	_stage("produce_and_collect_milk")
-	await _until(func() -> bool: return tribe.member_record(carrier).cargo == "milk", 100000)
-	if not _expect_step(tribe.member_record(carrier).cargo == "milk", "No real carrier collected the milk batch."): return
+	_stage("produce_and_collect_" + production_kind)
+	await _until(func() -> bool: return tribe.member_record(carrier).cargo == production_kind, 100000)
+	if not _expect_step(tribe.member_record(carrier).cargo == production_kind, "No real carrier collected the resource batch."): return
 	_stage("block_loaded_carrier")
 	tribe.select_member(carrier)
 	tribe.issue_order("wait")
-	var stock: int = tribe.village().stock.milk
+	var stock: int = tribe.village().stock[production_kind]
 	var blocker := StaticBody3D.new()
 	blocker.collision_layer = 2
 	var shape := CollisionShape3D.new()
@@ -223,58 +240,85 @@ func _animal_chain(tribe: Node) -> void:
 	box.size = Vector3(3, 3, 0.25)
 	shape.shape = box
 	blocker.add_child(shape)
-	tree.current_scene.add_child(blocker)
-	# Block the route ahead. Spawning a solid box around the carrier can eject
-	# it underneath the floor, which is not a reachable-path obstruction.
+	# Stage a route obstruction outside every live capsule. An intersecting
+	# wall can push the nearby production animal outside its pen while it is
+	# still within the legitimate 0.5 m tolerance of its wait target.
 	var carrier_position: Vector3 = tribe.actors[carrier].global_position
 	var up: Vector3 = Space.up(self, carrier_position)
 	var direction: Vector3 = (tribe.anchor() - carrier_position).slide(up).normalized()
-	blocker.global_transform = Transform3D(Space.frame(self, carrier_position, direction), carrier_position + direction * 0.9 + up)
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = box
+	query.collision_mask = 4 | 8 # Existing animals, villagers and player; not ground.
+	query.margin = 0.1
+	var placed: bool = false
+	for distance in [0.9, 1.3, 1.7, 2.1, 2.5, 2.9]:
+		query.transform = Transform3D(Space.frame(self, carrier_position, direction), carrier_position + direction * distance + up)
+		var occupants: Array[Dictionary] = tribe.actors[carrier].get_world_3d().direct_space_state.intersect_shape(query, 32)
+		if not occupants.is_empty(): continue
+		tree.current_scene.add_child(blocker)
+		blocker.global_transform = query.transform
+		placed = true
+		print("SPHERE_CARRIER_OBSTACLE ", {"distance": distance, "overlapping_actors": occupants.size()})
+		break
+	if not placed:
+		blocker.free()
+		_expect(false, "No collision-free obstruction for the actual loaded carrier.")
+		return
 	await tree.physics_frame
 	tribe.issue_order("resume")
 	await _until(func() -> bool: return tribe.member_record(carrier).blocked, 5000)
-	_expect(tribe.member_record(carrier).blocked and tribe.member_record(carrier).cargo == "milk" and tribe.village().stock.milk == stock, "Blocked path delivered or lost milk.")
+	_expect(tribe.member_record(carrier).blocked and tribe.member_record(carrier).cargo == production_kind and tribe.village().stock[production_kind] == stock, "Blocked path delivered or lost cargo.")
 	if not _expect_step(tribe.home.has_ground(tribe.actors[carrier].global_position), "Carrier obstacle displaced the resident off the real floor."): return
 	tribe.issue_order("wait")
 	blocker.queue_free()
 	await tree.physics_frame
-	# The real carrier obstacle can also push the nearby animal. Let its
-	# existing wait order restore physical pen attendance before departure.
+	# Keep the actual pen attendance requirement after removing the wall;
+	# neither the animal nor its wait target is moved by the probe.
 	_stage("animal_returns_after_obstacle")
 	await _until(func() -> bool: return tribe.husbandry.attendance(pen).error.is_empty(), 20000)
 	if not _expect_step(tribe.husbandry.attendance(pen).error.is_empty(), "Animal did not return to its pen after removing the carrier obstacle."): return
 	flow.toggle_pause()
-	_expect(saves.save_now(), "Loaded milk carrier could not save: " + saves.last_error)
+	_expect(saves.save_now(), "Loaded product carrier could not save: " + saves.last_error)
 	tribe = await preload("res://core/diagnostics/animal_travel_scenario.gd").new(self).run(tribe, id, carrier)
 	if not is_instance_valid(tribe): return
 	var path: String = saves.save_path
 	var expected: Dictionary = {"target": path, "saved": saves._read_save(path)}
-	_expect(Atomic.write("user://sphere_gameplay_restart.json", expected, false) == OK, "Cannot preserve milk restart evidence.")
+	_expect(Atomic.write("user://sphere_gameplay_restart.json", expected, false) == OK, "Cannot preserve production restart evidence.")
 	flow.return_to_title()
 	await tree.scene_changed
 	var output: Array = []
 	var arguments: PackedStringArray = ["--headless"]
 	if OS.has_feature("editor"): arguments.append_array(["--path", ProjectSettings.globalize_path("res://")])
 	arguments.append_array(["--", "--sphere-gameplay-smoke", "--sphere-gameplay-restart"])
+	if production_kind == "eggs": arguments.append("--egg-production")
 	var code: int = OS.execute(OS.get_executable_path(), arguments, output, true)
 	_stage("fresh_process_returned")
-	_expect(code == 0 and str(output).contains("SPHERE_GAMEPLAY_FRESH_PROCESS_PASSED"), "Fresh milk process failed: " + str(output))
+	_expect(code == 0 and str(output).contains("SPHERE_GAMEPLAY_FRESH_PROCESS_PASSED"), "Fresh production process failed: " + str(output))
 	await _open(path, true)
 	if not _expect_world(): return
 	tribe = tree.current_scene.get_node("Nest/Tribe")
 	flow.resume()
 	await _until(func() -> bool: return tribe.is_active(), 45000)
 	tribe.select_member(carrier)
-	_expect(tribe.member_record(carrier).cargo == "milk", "Reload lost real milk cargo.")
-	var stored_milk: int = tribe.village().stock.milk + tribe.village().economy.milk_meals
+	_expect(tribe.member_record(carrier).cargo == production_kind, "Reload lost real resource cargo.")
+	var stored_products: int = tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"]
 	tribe.issue_order("resume")
-	await _until(func() -> bool: return (tribe.member_record(carrier).cargo != "milk"
-		and tribe.village().stock.milk + tribe.village().economy.milk_meals > stored_milk), 18000)
-	_expect(tribe.member_record(carrier).cargo != "milk" and tribe.village().stock.milk + tribe.village().economy.milk_meals > stored_milk,
-		"Milk cycle did not reach storage through actual transport.")
+	await _until(func() -> bool: return (tribe.member_record(carrier).cargo != production_kind
+		and tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"] > stored_products), 18000)
+	_expect(tribe.member_record(carrier).cargo != production_kind and tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"] > stored_products,
+		"Production cycle did not reach storage through actual transport.")
 	_expect(saves.save_now(), "Complete D1/D2/D3 sphere save failed: " + saves.last_error)
-	print("SPHERE_MILK_DELIVERED ", tribe.village().economy.milk_received)
-	_stage("milk_delivered")
+	print("SPHERE_MILK_DELIVERED " if production_kind == "milk" else "SPHERE_EGGS_DELIVERED ", tribe.village().economy[production_kind + "_received"])
+	_stage(production_kind + "_delivered")
+	if production_kind == "eggs":
+		# Ordinary need/meal command consumes the physically delivered unit.
+		var meals: int = tribe.village().economy.eggs_meals
+		tribe.select_member(carrier)
+		_expect(tribe.issue_order("feed"), "Egg carrier could not accept a meal order.")
+		await _until(func() -> bool: return tribe.village().economy.eggs_meals > meals, 18000)
+		_expect(tribe.village().economy.eggs_meals > meals, "Delivered eggs were not edible through ordinary meals.")
+		_expect(saves.save_now(), "Egg meal failed to persist: " + saves.last_error)
+		if failures.is_empty(): print("SPHERICAL_EGG_PRODUCTION_PASSED: real laying species, taming, construction, supplies, production, freight, meal and A-B-A restart.")
 
 func _stage(label: String) -> void:
 	print("SPHERE_GAMEPLAY_STAGE ", label, " elapsed_seconds=", float(Time.get_ticks_msec()) / 1000.0)
@@ -286,7 +330,7 @@ func _restart_gameplay() -> void:
 	var body: Dictionary = state.get_current_body_record()
 	var previous: Dictionary = Registry.active(expected.saved.game_state)
 	for field in ["home_group", "tribe", "domesticated_animals", "tribal_neighbor", "surface_population"]:
-		_expect(Migration.fingerprint(body[field]) == Migration.fingerprint(previous[field]), "Fresh process changed milk checkpoint: " + field)
+		_expect(Migration.fingerprint(body[field]) == Migration.fingerprint(previous[field]), "Fresh process changed production checkpoint: " + field)
 	_expect(state.campaign.data.elapsed_seconds == expected.saved.game_state.campaign.elapsed_seconds, "Closed application advanced campaign time.")
 	if failures.is_empty(): print("SPHERE_GAMEPLAY_FRESH_PROCESS_PASSED")
 	flow.return_to_title()
@@ -296,15 +340,15 @@ func _site(tribe: Node, kind: String) -> Vector3:
 	for point_id: int in tribe.navigation.graph.get_point_ids():
 		var candidate: Vector3 = tribe.navigation.graph.get_point_position(point_id)
 		if candidate.distance_to(tribe.anchor()) < 6 or candidate.distance_to(tribe.anchor()) > 9: continue
-		var free: bool = tribe.navigation.free_shelter(candidate, tribe.village(), kind) if kind == "pen" else tribe.navigation.free_workplace(candidate, tribe.village(), kind)
+		var free: bool = tribe.navigation.free_shelter(candidate, tribe.village(), kind) if kind in ["pen", "laying_site"] else tribe.navigation.free_workplace(candidate, tribe.village(), kind)
 		if free and not tribe.neighbors.occupies(candidate): return candidate
 	return Vector3.INF
 
-func _milk_animal(runtime: Node) -> Node3D:
-	# D1 exposes suitability; an ecology role alone is not proof of milk yield.
+func _production_animal(runtime: Node) -> Node3D:
+	# D1 exposes suitability; an ecology role alone is not proof of production yield.
 	for candidate: Node3D in runtime.visible_animals():
 		var traits: Dictionary = candidate.blueprint.get("species", {}).get("domestication", {})
-		if not candidate.is_dead and float(traits.get("milk_yield", 0.0)) > 0: return candidate
+		if not candidate.is_dead and float(traits.get("egg_yield" if production_kind == "eggs" else "milk_yield", 0.0)) > 0: return candidate
 	return null
 
 func _population_status(tribe: Node) -> Dictionary:
@@ -334,10 +378,12 @@ func _approach_live(tribe: Node, runtime: Node, id: String, handler: String) -> 
 	while Time.get_ticks_msec() - start < 24000:
 		var actor: Node3D = runtime.actor_for(id)
 		if actor == null: break
-		if tribe.member_record(handler).order == "wait":
-			if actor.global_position.distance_to(tribe.actors[handler].global_position) <= runtime.Controller.REACH - 0.1 and runtime.context(id, handler).line_of_sight: return true
+		if tribe.member_record(handler).order == "wait" or tribe.member_record(handler).blocked:
+			if actor.global_position.distance_to(tribe.actors[handler].global_position) <= runtime.Controller.REACH - 0.1 and runtime.context(id, handler).line_of_sight:
+				return tribe.issue_order("wait")
 			# A wild animal can temporarily leave the resident's work area.
-			# Wait for its real patrol/return instead of requiring instant reach.
+			# Retry the ordinary approach action when its previous location is
+			# blocked, just as a player can select the moving animal again.
 			if Time.get_ticks_msec() >= retry_at:
 				runtime.approach(id)
 				retry_at = Time.get_ticks_msec() + 250

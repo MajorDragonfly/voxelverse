@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "base": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "sources": [
+    {
+      "pr": 78,
+      "sha": "cff4a6928bbac312ea4849e19b9d47bd3fd9d887",
+      "package": "ARCH-06"
+    },
+    {
+      "pr": 81,
+      "sha": "6693a51d941ccd2dd236db07f78ba736ce9d9534",
+      "package": "ARCH-07"
+    },
+    {
+      "pr": 83,
+      "sha": "f2b2ee90838719d8dd2fbb619babeb9e1078e938",
+      "package": "ARCH-22"
+    },
+    {
+      "pr": 79,
+      "sha": "034316fcfe1bd4078671582dcd880209a1c8ad3c",
+      "package": "ARCH-14"
+    },
+    {
+      "pr": 80,
+      "sha": "3930b019b9fb3126cf5b0f285f2178c682c83e30",
+      "package": "ARCH-24"
+    },
+    {
+      "pr": 82,
+      "sha": "15c6f1fbd6c1766aeafcffe490050cea78fb5f07",
+      "package": "ARCH-25"
+    }
+  ],
+  "status": "source_integrated_validation_pending",
+  "runtime_checks": [],
+  "target_pc_acceptance": false
+}

@@ -19,6 +19,9 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	# This historical GUI fixture asserts German wording. The separate
+	# localization suites exercise DE/EN; never depend on the runner OS locale.
+	_expect(root.get_node("LocaleManager").save_preference("de") == OK, "Cannot select the German GUI fixture locale.")
 	state = root.get_node("GameState")
 	progression = root.get_node("ProgressionService")
 	saves = root.get_node("SaveGameService")

@@ -1,0 +1,1218 @@
+{
+	"mouths": {
+		"mouth_broad_beak:(0.8, 1.1, 1.4):-1": [
+			{
+				"aabb": "AABB(-0.1625, -0.3575, -0.2925, 0.325, 0.65, 0.585)",
+				"basis": "Basis(1, 0, 0, 0, -0.0452832, 0.9989742, 0, -0.9989742, -0.0452832)",
+				"color": "e3d5b0ff",
+				"name": "UpperBeak",
+				"position": "Vector3(0, 0.0165, -0.308)",
+				"vertex_hash": "00cd7d5bffbabe5a149a5598e677623de76c97d03b139d931830b78adc110b8c",
+				"vertices": 3696
+			},
+			{
+				"aabb": "AABB(-0.13, -0.2925, -0.22749999, 0.26, 0.48749998, 0.45499998)",
+				"basis": "Basis(1, 0, 0, 0, 0.03829938, 0.9992663, 0, -0.9992663, 0.03829938)",
+				"color": "bfb394ff",
+				"name": "LowerBeak",
+				"position": "Vector3(0, -0.0935, -0.25899997)",
+				"vertex_hash": "09242e352bb26c955f3b0ee6bbddb109b4af60283a1e61d33b0f115fa7176725",
+				"vertices": 2176
+			}
+		],
+		"mouth_broad_beak:(0.8, 1.1, 1.4):1": [
+			{
+				"aabb": "AABB(-0.1625, -0.3575, -0.2925, 0.325, 0.65, 0.585)",
+				"basis": "Basis(1, 0, 0, 0, -0.0452832, 0.9989742, 0, -0.9989742, -0.0452832)",
+				"color": "e3d5b0ff",
+				"name": "UpperBeak",
+				"position": "Vector3(0, 0.0165, -0.308)",
+				"vertex_hash": "00cd7d5bffbabe5a149a5598e677623de76c97d03b139d931830b78adc110b8c",
+				"vertices": 3696
+			},
+			{
+				"aabb": "AABB(-0.13, -0.2925, -0.22749999, 0.26, 0.48749998, 0.45499998)",
+				"basis": "Basis(1, 0, 0, 0, 0.03829938, 0.9992663, 0, -0.9992663, 0.03829938)",
+				"color": "bfb394ff",
+				"name": "LowerBeak",
+				"position": "Vector3(0, -0.0935, -0.25899997)",
+				"vertex_hash": "09242e352bb26c955f3b0ee6bbddb109b4af60283a1e61d33b0f115fa7176725",
+				"vertices": 2176
+			}
+		],
+		"mouth_broad_beak:(1.0, 1.0, 1.0):-1": [
+			{
+				"aabb": "AABB(-0.195, -0.26, -0.195, 0.39, 0.45499998, 0.39)",
+				"basis": "Basis(1, 0, 0, 0, -0.057596445, 0.9983399, 0, -0.9983399, -0.057596445)",
+				"color": "e3d5b0ff",
+				"name": "UpperBeak",
+				"position": "Vector3(0, 0.015, -0.22)",
+				"vertex_hash": "309c03d28c90ce9d63bf281fd482beb64fbd08d3cb7b6a3a5a464fe11e0af36c",
+				"vertices": 2624
+			},
+			{
+				"aabb": "AABB(-0.1625, -0.195, -0.1625, 0.325, 0.3575, 0.325)",
+				"basis": "Basis(1, 0, 0, 0, 0.048722506, 0.9988124, 0, -0.9988124, 0.048722506)",
+				"color": "bfb394ff",
+				"name": "LowerBeak",
+				"position": "Vector3(0, -0.085, -0.18499999)",
+				"vertex_hash": "ef2ffd822d3c9816b0333aa2bf2551b5ee59c8c81c213f1592e1d300f32d61fc",
+				"vertices": 1472
+			}
+		],
+		"mouth_broad_beak:(1.0, 1.0, 1.0):1": [
+			{
+				"aabb": "AABB(-0.195, -0.26, -0.195, 0.39, 0.45499998, 0.39)",
+				"basis": "Basis(1, 0, 0, 0, -0.057596445, 0.9983399, 0, -0.9983399, -0.057596445)",
+				"color": "e3d5b0ff",
+				"name": "UpperBeak",
+				"position": "Vector3(0, 0.015, -0.22)",
+				"vertex_hash": "309c03d28c90ce9d63bf281fd482beb64fbd08d3cb7b6a3a5a464fe11e0af36c",
+				"vertices": 2624
+			},
+			{
+				"aabb": "AABB(-0.1625, -0.195, -0.1625, 0.325, 0.3575, 0.325)",
+				"basis": "Basis(1, 0, 0, 0, 0.048722506, 0.9988124, 0, -0.9988124, 0.048722506)",
+				"color": "bfb394ff",
+				"name": "LowerBeak",
+				"position": "Vector3(0, -0.085, -0.18499999)",
+				"vertex_hash": "ef2ffd822d3c9816b0333aa2bf2551b5ee59c8c81c213f1592e1d300f32d61fc",
+				"vertices": 1472
+			}
+		],
+		"mouth_broad_beak:(1.7, 0.6, 0.9):-1": [
+			{
+				"aabb": "AABB(-0.3575, -0.22749999, -0.195, 0.715, 0.42249998, 0.39)",
+				"basis": "Basis(1, 0, 0, 0, -0.038433194, 0.9992612, 0, -0.9992612, -0.038433194)",
+				"color": "e3d5b0ff",
+				"name": "UpperBeak",
+				"position": "Vector3(0, 0.009000001, -0.19799998)",
+				"vertex_hash": "e44a96a2469d8b15b6277a2597b83b7f05c793ee515b45a421de83d3a809d2a6",
+				"vertices": 3456
+			},
+			{
+				"aabb": "AABB(-0.26, -0.195, -0.13, 0.52, 0.325, 0.26)",
+				"basis": "Basis(1, 0, 0, 0, 0.03250289, 0.9994717, 0, -0.9994717, 0.03250289)",
+				"color": "bfb394ff",
+				"name": "LowerBeak",
+				"position": "Vector3(0, -0.051, -0.16649999)",
+				"vertex_hash": "353014d79f857066132168e8424eec2d3a92b25037f005aae411bdd493a14ca9",
+				"vertices": 2064
+			}
+		],
+		"mouth_broad_beak:(1.7, 0.6, 0.9):1": [
+			{
+				"aabb": "AABB(-0.3575, -0.22749999, -0.195, 0.715, 0.42249998, 0.39)",
+				"basis": "Basis(1, 0, 0, 0, -0.038433194, 0.9992612, 0, -0.9992612, -0.038433194)",
+				"color": "e3d5b0ff",
+				"name": "UpperBeak",
+				"position": "Vector3(0, 0.009000001, -0.19799998)",
+				"vertex_hash": "e44a96a2469d8b15b6277a2597b83b7f05c793ee515b45a421de83d3a809d2a6",
+				"vertices": 3456
+			},
+			{
+				"aabb": "AABB(-0.26, -0.195, -0.13, 0.52, 0.325, 0.26)",
+				"basis": "Basis(1, 0, 0, 0, 0.03250289, 0.9994717, 0, -0.9994717, 0.03250289)",
+				"color": "bfb394ff",
+				"name": "LowerBeak",
+				"position": "Vector3(0, -0.051, -0.16649999)",
+				"vertex_hash": "353014d79f857066132168e8424eec2d3a92b25037f005aae411bdd493a14ca9",
+				"vertices": 2064
+			}
+		],
+		"mouth_filter_snout:(0.8, 1.1, 1.4):-1": [
+			{
+				"aabb": "AABB(-0.13, -0.13, -0.45499998, 0.26, 0.26, 0.90999997)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.027500002, -0.3332)",
+				"vertex_hash": "83e33dbc4cc2ad283a40743dbb12aa6504362f6f195fca17271d47b713c990f3",
+				"vertices": 3424
+			},
+			{
+				"aabb": "AABB(-0.14279999, -0.023799999, -0.2737, 0.28559998, 0.047599997, 0.5474)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.0935, -0.6188)",
+				"vertex_hash": "dad178b91218e22431ea84e5530c639e67e45744b10dca9c362d850f52e93d74",
+				"vertices": 8128
+			},
+			{
+				"aabb": "AABB(-0.15073334, -0.056525, -0.4522, 0.30146667, 0.11305, 0.9044)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.1595, -0.3808)",
+				"vertex_hash": "547035be4d14a840cd070ac8ebfb90b3c73a2e142e268f0fb3285a2c5b031f24",
+				"vertices": 6880
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.088, 0.09900001, -0.6664)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.088, 0.09900001, -0.6664)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			}
+		],
+		"mouth_filter_snout:(0.8, 1.1, 1.4):1": [
+			{
+				"aabb": "AABB(-0.13, -0.13, -0.45499998, 0.26, 0.26, 0.90999997)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.027500002, -0.3332)",
+				"vertex_hash": "83e33dbc4cc2ad283a40743dbb12aa6504362f6f195fca17271d47b713c990f3",
+				"vertices": 3424
+			},
+			{
+				"aabb": "AABB(-0.14279999, -0.023799999, -0.2737, 0.28559998, 0.047599997, 0.5474)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.0935, -0.6188)",
+				"vertex_hash": "dad178b91218e22431ea84e5530c639e67e45744b10dca9c362d850f52e93d74",
+				"vertices": 8128
+			},
+			{
+				"aabb": "AABB(-0.15073334, -0.056525, -0.4522, 0.30146667, 0.11305, 0.9044)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.1595, -0.3808)",
+				"vertex_hash": "547035be4d14a840cd070ac8ebfb90b3c73a2e142e268f0fb3285a2c5b031f24",
+				"vertices": 6880
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.088, 0.09900001, -0.6664)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.088, 0.09900001, -0.6664)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			}
+		],
+		"mouth_filter_snout:(1.0, 1.0, 1.0):-1": [
+			{
+				"aabb": "AABB(-0.1625, -0.13, -0.325, 0.325, 0.26, 0.65)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.025, -0.238)",
+				"vertex_hash": "f582c79041907894ef11aa1376286e11360723728161df8045d74c42add8122f",
+				"vertices": 2880
+			},
+			{
+				"aabb": "AABB(-0.1785, -0.016999999, -0.19549999, 0.357, 0.033999998, 0.39099997)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.085, -0.442)",
+				"vertex_hash": "8ba1b009a686865f0957a80f5882aab47d87207da52287ed096ca8b38ae8554a",
+				"vertices": 14304
+			},
+			{
+				"aabb": "AABB(-0.18333334, -0.050000004, -0.3166667, 0.36666667, 0.10000001, 0.6333334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.145, -0.272)",
+				"vertex_hash": "1a11f6268ab6b40e61c8b2632d91445a515e629a00abec7ca22701576d6cd2e8",
+				"vertices": 7488
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.11, 0.09, -0.476)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.11, 0.09, -0.476)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			}
+		],
+		"mouth_filter_snout:(1.0, 1.0, 1.0):1": [
+			{
+				"aabb": "AABB(-0.1625, -0.13, -0.325, 0.325, 0.26, 0.65)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.025, -0.238)",
+				"vertex_hash": "f582c79041907894ef11aa1376286e11360723728161df8045d74c42add8122f",
+				"vertices": 2880
+			},
+			{
+				"aabb": "AABB(-0.1785, -0.016999999, -0.19549999, 0.357, 0.033999998, 0.39099997)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.085, -0.442)",
+				"vertex_hash": "8ba1b009a686865f0957a80f5882aab47d87207da52287ed096ca8b38ae8554a",
+				"vertices": 14304
+			},
+			{
+				"aabb": "AABB(-0.18333334, -0.050000004, -0.3166667, 0.36666667, 0.10000001, 0.6333334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.145, -0.272)",
+				"vertex_hash": "1a11f6268ab6b40e61c8b2632d91445a515e629a00abec7ca22701576d6cd2e8",
+				"vertices": 7488
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.11, 0.09, -0.476)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.11, 0.09, -0.476)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			}
+		],
+		"mouth_filter_snout:(1.7, 0.6, 0.9):-1": [
+			{
+				"aabb": "AABB(-0.28800002, -0.072000004, -0.31200004, 0.57600003, 0.14400001, 0.6240001)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.015000001, -0.2142)",
+				"vertex_hash": "2d2e1ce5e29fbc46f44f2ce13496d433b6e1bac0afa86c752fc5a6f7787689ed",
+				"vertices": 5792
+			},
+			{
+				"aabb": "AABB(-0.24225001, -0.012750001, -0.14025001, 0.48450002, 0.025500001, 0.28050002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.051000003, -0.3978)",
+				"vertex_hash": "c2b6ffe4734427859f428824c71f47d049417065cf5b1e7e60ff9c869a5b733f",
+				"vertices": 6464
+			},
+			{
+				"aabb": "AABB(-0.29325002, -0.025500001, -0.28050002, 0.58650005, 0.051000003, 0.56100005)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.087, -0.2448)",
+				"vertex_hash": "75cc7dab26baf487b0404c8c483c3ac52890d489ee133dd0e1ff083633728f56",
+				"vertices": 15680
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.187, 0.054000005, -0.4284)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.187, 0.054000005, -0.4284)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			}
+		],
+		"mouth_filter_snout:(1.7, 0.6, 0.9):1": [
+			{
+				"aabb": "AABB(-0.28800002, -0.072000004, -0.31200004, 0.57600003, 0.14400001, 0.6240001)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.015000001, -0.2142)",
+				"vertex_hash": "2d2e1ce5e29fbc46f44f2ce13496d433b6e1bac0afa86c752fc5a6f7787689ed",
+				"vertices": 5792
+			},
+			{
+				"aabb": "AABB(-0.24225001, -0.012750001, -0.14025001, 0.48450002, 0.025500001, 0.28050002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.051000003, -0.3978)",
+				"vertex_hash": "c2b6ffe4734427859f428824c71f47d049417065cf5b1e7e60ff9c869a5b733f",
+				"vertices": 6464
+			},
+			{
+				"aabb": "AABB(-0.29325002, -0.025500001, -0.28050002, 0.58650005, 0.051000003, 0.56100005)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.087, -0.2448)",
+				"vertex_hash": "75cc7dab26baf487b0404c8c483c3ac52890d489ee133dd0e1ff083633728f56",
+				"vertices": 15680
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.187, 0.054000005, -0.4284)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.187, 0.054000005, -0.4284)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			}
+		],
+		"mouth_grazer:(0.8, 1.1, 1.4):-1": [
+			{
+				"aabb": "AABB(-0.22749999, -0.13, -0.26, 0.45499998, 0.26, 0.52)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.027500002, -0.1862)",
+				"vertex_hash": "a9b97e22e1be8da5d13b86694821e72dfde8e3392e18a1086d1ff86575445606",
+				"vertices": 3072
+			},
+			{
+				"aabb": "AABB(-0.19166668, -0.016666668, -0.15833335, 0.38333336, 0.033333335, 0.3166667)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.0935, -0.34579998)",
+				"vertex_hash": "d879b97d00f7c6e45d6ab43e1dede8e98bcbac26b458dfa19a054f9d6270caba",
+				"vertices": 13312
+			},
+			{
+				"aabb": "AABB(-0.22000001, -0.055000003, -0.2566667, 0.44000003, 0.11000001, 0.5133334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.1595, -0.2128)",
+				"vertex_hash": "63df8b79e321c6ea4f87b959c69fa7d2422e81498698a889ba7df7cfdd87549d",
+				"vertices": 5952
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.14400001, 0.09900001, -0.3724)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.14400001, 0.09900001, -0.3724)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			}
+		],
+		"mouth_grazer:(0.8, 1.1, 1.4):1": [
+			{
+				"aabb": "AABB(-0.22749999, -0.13, -0.26, 0.45499998, 0.26, 0.52)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.027500002, -0.1862)",
+				"vertex_hash": "a9b97e22e1be8da5d13b86694821e72dfde8e3392e18a1086d1ff86575445606",
+				"vertices": 3072
+			},
+			{
+				"aabb": "AABB(-0.19166668, -0.016666668, -0.15833335, 0.38333336, 0.033333335, 0.3166667)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.0935, -0.34579998)",
+				"vertex_hash": "d879b97d00f7c6e45d6ab43e1dede8e98bcbac26b458dfa19a054f9d6270caba",
+				"vertices": 13312
+			},
+			{
+				"aabb": "AABB(-0.22000001, -0.055000003, -0.2566667, 0.44000003, 0.11000001, 0.5133334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.1595, -0.2128)",
+				"vertex_hash": "63df8b79e321c6ea4f87b959c69fa7d2422e81498698a889ba7df7cfdd87549d",
+				"vertices": 5952
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.14400001, 0.09900001, -0.3724)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.14400001, 0.09900001, -0.3724)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			}
+		],
+		"mouth_grazer:(1.0, 1.0, 1.0):-1": [
+			{
+				"aabb": "AABB(-0.2925, -0.13, -0.195, 0.585, 0.26, 0.39)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.025, -0.133)",
+				"vertex_hash": "fee65d1c2da895bb82db9e8f6a4c8acaa2755b8b3a39e58c00754f8198492096",
+				"vertices": 2752
+			},
+			{
+				"aabb": "AABB(-0.23958334, -0.020833334, -0.10416667, 0.4791667, 0.041666668, 0.20833334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.085, -0.247)",
+				"vertex_hash": "4ebf937772ace2907bc06bf6c7f51938ca8e43ac9150da9d29f0bbb195e3992f",
+				"vertices": 7552
+			},
+			{
+				"aabb": "AABB(-0.26666668, -0.050000004, -0.18333334, 0.53333336, 0.10000001, 0.36666667)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.145, -0.152)",
+				"vertex_hash": "2d14b88db74b5cd453fea0351d4ca236785438ce73ff3d567cd424986d07c748",
+				"vertices": 6400
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.18, 0.09, -0.266)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.18, 0.09, -0.266)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			}
+		],
+		"mouth_grazer:(1.0, 1.0, 1.0):1": [
+			{
+				"aabb": "AABB(-0.2925, -0.13, -0.195, 0.585, 0.26, 0.39)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.025, -0.133)",
+				"vertex_hash": "fee65d1c2da895bb82db9e8f6a4c8acaa2755b8b3a39e58c00754f8198492096",
+				"vertices": 2752
+			},
+			{
+				"aabb": "AABB(-0.23958334, -0.020833334, -0.10416667, 0.4791667, 0.041666668, 0.20833334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.085, -0.247)",
+				"vertex_hash": "4ebf937772ace2907bc06bf6c7f51938ca8e43ac9150da9d29f0bbb195e3992f",
+				"vertices": 7552
+			},
+			{
+				"aabb": "AABB(-0.26666668, -0.050000004, -0.18333334, 0.53333336, 0.10000001, 0.36666667)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.145, -0.152)",
+				"vertex_hash": "2d14b88db74b5cd453fea0351d4ca236785438ce73ff3d567cd424986d07c748",
+				"vertices": 6400
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.18, 0.09, -0.266)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.18, 0.09, -0.266)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			}
+		],
+		"mouth_grazer:(1.7, 0.6, 0.9):-1": [
+			{
+				"aabb": "AABB(-0.50400007, -0.072000004, -0.16800001, 1.0080001, 0.14400001, 0.33600003)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.015000001, -0.1197)",
+				"vertex_hash": "896a113fb5b9977a705244069861b702ccce144345debd57b837d066c9fc84af",
+				"vertices": 5888
+			},
+			{
+				"aabb": "AABB(-0.23020834, -0.017708333, -0.053125, 0.46041667, 0.035416666, 0.10625)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.051000003, -0.2223)",
+				"vertex_hash": "856b1615e9edd529d57bbdd55d3be45031c7402d0568e1167a85e63a03e164de",
+				"vertices": 1536
+			},
+			{
+				"aabb": "AABB(-0.43987504, -0.038250003, -0.15300001, 0.8797501, 0.076500006, 0.30600002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.087, -0.13679999)",
+				"vertex_hash": "ed5c958f07ba0734053ebac18d3d072a72d92b761d61773670a8e82589cfaf37",
+				"vertices": 5888
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.30600002, 0.054000005, -0.2394)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.30600002, 0.054000005, -0.2394)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			}
+		],
+		"mouth_grazer:(1.7, 0.6, 0.9):1": [
+			{
+				"aabb": "AABB(-0.50400007, -0.072000004, -0.16800001, 1.0080001, 0.14400001, 0.33600003)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.015000001, -0.1197)",
+				"vertex_hash": "896a113fb5b9977a705244069861b702ccce144345debd57b837d066c9fc84af",
+				"vertices": 5888
+			},
+			{
+				"aabb": "AABB(-0.23020834, -0.017708333, -0.053125, 0.46041667, 0.035416666, 0.10625)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.051000003, -0.2223)",
+				"vertex_hash": "856b1615e9edd529d57bbdd55d3be45031c7402d0568e1167a85e63a03e164de",
+				"vertices": 1536
+			},
+			{
+				"aabb": "AABB(-0.43987504, -0.038250003, -0.15300001, 0.8797501, 0.076500006, 0.30600002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.087, -0.13679999)",
+				"vertex_hash": "ed5c958f07ba0734053ebac18d3d072a72d92b761d61773670a8e82589cfaf37",
+				"vertices": 5888
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.30600002, 0.054000005, -0.2394)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.30600002, 0.054000005, -0.2394)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			}
+		],
+		"mouth_predator_jaws:(0.8, 1.1, 1.4):-1": [
+			{
+				"aabb": "AABB(-0.22749999, -0.13, -0.26, 0.45499998, 0.26, 0.52)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.027500002, -0.1862)",
+				"vertex_hash": "a9b97e22e1be8da5d13b86694821e72dfde8e3392e18a1086d1ff86575445606",
+				"vertices": 3072
+			},
+			{
+				"aabb": "AABB(-0.19166668, -0.016666668, -0.15833335, 0.38333336, 0.033333335, 0.3166667)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.0935, -0.34579998)",
+				"vertex_hash": "d879b97d00f7c6e45d6ab43e1dede8e98bcbac26b458dfa19a054f9d6270caba",
+				"vertices": 13312
+			},
+			{
+				"aabb": "AABB(-0.22000001, -0.055000003, -0.2566667, 0.44000003, 0.11000001, 0.5133334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.1595, -0.2128)",
+				"vertex_hash": "63df8b79e321c6ea4f87b959c69fa7d2422e81498698a889ba7df7cfdd87549d",
+				"vertices": 5952
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.14400001, 0.09900001, -0.3724)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.14400001, 0.09900001, -0.3724)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.07000001, -0.050000004, 0.060000002, 0.110000014, 0.10000001)",
+				"basis": "Basis(1, 0, 0, 0, -0.99485636, 0.10129468, 0, -0.10129468, -0.99485636)",
+				"color": "e3d5b0ff",
+				"name": "Tooth0",
+				"position": "Vector3(0.156, -0.10725, -0.399)",
+				"vertex_hash": "f165d214df027d085513c0af97b54bcce4e5a9a99264e0b0d751eab2faed084d",
+				"vertices": 1232
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.07000001, -0.050000004, 0.060000002, 0.110000014, 0.10000001)",
+				"basis": "Basis(1, 0, 0, 0, -0.99485636, 0.10129468, 0, -0.10129468, -0.99485636)",
+				"color": "e3d5b0ff",
+				"name": "Tooth1",
+				"position": "Vector3(0.051999997, -0.10725, -0.399)",
+				"vertex_hash": "f165d214df027d085513c0af97b54bcce4e5a9a99264e0b0d751eab2faed084d",
+				"vertices": 1232
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.07000001, -0.050000004, 0.060000002, 0.110000014, 0.10000001)",
+				"basis": "Basis(1, 0, 0, 0, -0.99485636, 0.10129468, 0, -0.10129468, -0.99485636)",
+				"color": "e3d5b0ff",
+				"name": "Tooth2",
+				"position": "Vector3(-0.051999997, -0.10725, -0.399)",
+				"vertex_hash": "f165d214df027d085513c0af97b54bcce4e5a9a99264e0b0d751eab2faed084d",
+				"vertices": 1232
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.07000001, -0.050000004, 0.060000002, 0.110000014, 0.10000001)",
+				"basis": "Basis(1, 0, 0, 0, -0.99485636, 0.10129468, 0, -0.10129468, -0.99485636)",
+				"color": "e3d5b0ff",
+				"name": "Tooth3",
+				"position": "Vector3(-0.156, -0.10725, -0.399)",
+				"vertex_hash": "f165d214df027d085513c0af97b54bcce4e5a9a99264e0b0d751eab2faed084d",
+				"vertices": 1232
+			}
+		],
+		"mouth_predator_jaws:(0.8, 1.1, 1.4):1": [
+			{
+				"aabb": "AABB(-0.22749999, -0.13, -0.26, 0.45499998, 0.26, 0.52)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.027500002, -0.1862)",
+				"vertex_hash": "a9b97e22e1be8da5d13b86694821e72dfde8e3392e18a1086d1ff86575445606",
+				"vertices": 3072
+			},
+			{
+				"aabb": "AABB(-0.19166668, -0.016666668, -0.15833335, 0.38333336, 0.033333335, 0.3166667)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.0935, -0.34579998)",
+				"vertex_hash": "d879b97d00f7c6e45d6ab43e1dede8e98bcbac26b458dfa19a054f9d6270caba",
+				"vertices": 13312
+			},
+			{
+				"aabb": "AABB(-0.22000001, -0.055000003, -0.2566667, 0.44000003, 0.11000001, 0.5133334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.1595, -0.2128)",
+				"vertex_hash": "63df8b79e321c6ea4f87b959c69fa7d2422e81498698a889ba7df7cfdd87549d",
+				"vertices": 5952
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.14400001, 0.09900001, -0.3724)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			},
+			{
+				"aabb": "AABB(-0.022, -0.022, -0.029333333, 0.044, 0.044, 0.058666665)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.14400001, 0.09900001, -0.3724)",
+				"vertex_hash": "09338ebb2dd80d26c2e324fbfd2fef146071aec5cfb973eb68162c90e329ba5c",
+				"vertices": 928
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.07000001, -0.050000004, 0.060000002, 0.110000014, 0.10000001)",
+				"basis": "Basis(1, 0, 0, 0, -0.99485636, 0.10129468, 0, -0.10129468, -0.99485636)",
+				"color": "e3d5b0ff",
+				"name": "Tooth0",
+				"position": "Vector3(-0.156, -0.10725, -0.399)",
+				"vertex_hash": "f165d214df027d085513c0af97b54bcce4e5a9a99264e0b0d751eab2faed084d",
+				"vertices": 1232
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.07000001, -0.050000004, 0.060000002, 0.110000014, 0.10000001)",
+				"basis": "Basis(1, 0, 0, 0, -0.99485636, 0.10129468, 0, -0.10129468, -0.99485636)",
+				"color": "e3d5b0ff",
+				"name": "Tooth1",
+				"position": "Vector3(-0.051999997, -0.10725, -0.399)",
+				"vertex_hash": "f165d214df027d085513c0af97b54bcce4e5a9a99264e0b0d751eab2faed084d",
+				"vertices": 1232
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.07000001, -0.050000004, 0.060000002, 0.110000014, 0.10000001)",
+				"basis": "Basis(1, 0, 0, 0, -0.99485636, 0.10129468, 0, -0.10129468, -0.99485636)",
+				"color": "e3d5b0ff",
+				"name": "Tooth2",
+				"position": "Vector3(0.051999997, -0.10725, -0.399)",
+				"vertex_hash": "f165d214df027d085513c0af97b54bcce4e5a9a99264e0b0d751eab2faed084d",
+				"vertices": 1232
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.07000001, -0.050000004, 0.060000002, 0.110000014, 0.10000001)",
+				"basis": "Basis(1, 0, 0, 0, -0.99485636, 0.10129468, 0, -0.10129468, -0.99485636)",
+				"color": "e3d5b0ff",
+				"name": "Tooth3",
+				"position": "Vector3(0.156, -0.10725, -0.399)",
+				"vertex_hash": "f165d214df027d085513c0af97b54bcce4e5a9a99264e0b0d751eab2faed084d",
+				"vertices": 1232
+			}
+		],
+		"mouth_predator_jaws:(1.0, 1.0, 1.0):-1": [
+			{
+				"aabb": "AABB(-0.2925, -0.13, -0.195, 0.585, 0.26, 0.39)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.025, -0.133)",
+				"vertex_hash": "fee65d1c2da895bb82db9e8f6a4c8acaa2755b8b3a39e58c00754f8198492096",
+				"vertices": 2752
+			},
+			{
+				"aabb": "AABB(-0.23958334, -0.020833334, -0.10416667, 0.4791667, 0.041666668, 0.20833334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.085, -0.247)",
+				"vertex_hash": "4ebf937772ace2907bc06bf6c7f51938ca8e43ac9150da9d29f0bbb195e3992f",
+				"vertices": 7552
+			},
+			{
+				"aabb": "AABB(-0.26666668, -0.050000004, -0.18333334, 0.53333336, 0.10000001, 0.36666667)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.145, -0.152)",
+				"vertex_hash": "2d14b88db74b5cd453fea0351d4ca236785438ce73ff3d567cd424986d07c748",
+				"vertices": 6400
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.18, 0.09, -0.266)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.18, 0.09, -0.266)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			},
+			{
+				"aabb": "AABB(-0.0375, -0.0625, -0.0375, 0.075, 0.1, 0.075)",
+				"basis": "Basis(1, 0, 0, 0, -0.9968153, 0.07974416, 0, -0.07974416, -0.9968153)",
+				"color": "e3d5b0ff",
+				"name": "Tooth0",
+				"position": "Vector3(0.195, -0.0975, -0.285)",
+				"vertex_hash": "8baa02a2ee774819a38a5652f02e7d141dfe23a74f1db32589cacb2b120bef7c",
+				"vertices": 640
+			},
+			{
+				"aabb": "AABB(-0.0375, -0.0625, -0.0375, 0.075, 0.1, 0.075)",
+				"basis": "Basis(1, 0, 0, 0, -0.9968153, 0.07974416, 0, -0.07974416, -0.9968153)",
+				"color": "e3d5b0ff",
+				"name": "Tooth1",
+				"position": "Vector3(0.065, -0.0975, -0.285)",
+				"vertex_hash": "8baa02a2ee774819a38a5652f02e7d141dfe23a74f1db32589cacb2b120bef7c",
+				"vertices": 640
+			},
+			{
+				"aabb": "AABB(-0.0375, -0.0625, -0.0375, 0.075, 0.1, 0.075)",
+				"basis": "Basis(1, 0, 0, 0, -0.9968153, 0.07974416, 0, -0.07974416, -0.9968153)",
+				"color": "e3d5b0ff",
+				"name": "Tooth2",
+				"position": "Vector3(-0.065, -0.0975, -0.285)",
+				"vertex_hash": "8baa02a2ee774819a38a5652f02e7d141dfe23a74f1db32589cacb2b120bef7c",
+				"vertices": 640
+			},
+			{
+				"aabb": "AABB(-0.0375, -0.0625, -0.0375, 0.075, 0.1, 0.075)",
+				"basis": "Basis(1, 0, 0, 0, -0.9968153, 0.07974416, 0, -0.07974416, -0.9968153)",
+				"color": "e3d5b0ff",
+				"name": "Tooth3",
+				"position": "Vector3(-0.195, -0.0975, -0.285)",
+				"vertex_hash": "8baa02a2ee774819a38a5652f02e7d141dfe23a74f1db32589cacb2b120bef7c",
+				"vertices": 640
+			}
+		],
+		"mouth_predator_jaws:(1.0, 1.0, 1.0):1": [
+			{
+				"aabb": "AABB(-0.2925, -0.13, -0.195, 0.585, 0.26, 0.39)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.025, -0.133)",
+				"vertex_hash": "fee65d1c2da895bb82db9e8f6a4c8acaa2755b8b3a39e58c00754f8198492096",
+				"vertices": 2752
+			},
+			{
+				"aabb": "AABB(-0.23958334, -0.020833334, -0.10416667, 0.4791667, 0.041666668, 0.20833334)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.085, -0.247)",
+				"vertex_hash": "4ebf937772ace2907bc06bf6c7f51938ca8e43ac9150da9d29f0bbb195e3992f",
+				"vertices": 7552
+			},
+			{
+				"aabb": "AABB(-0.26666668, -0.050000004, -0.18333334, 0.53333336, 0.10000001, 0.36666667)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.145, -0.152)",
+				"vertex_hash": "2d14b88db74b5cd453fea0351d4ca236785438ce73ff3d567cd424986d07c748",
+				"vertices": 6400
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.18, 0.09, -0.266)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			},
+			{
+				"aabb": "AABB(-0.030000001, -0.0225, -0.0225, 0.060000002, 0.045, 0.045)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.18, 0.09, -0.266)",
+				"vertex_hash": "30a164bdf5811698ac4d1a9cf009b0be240312408e4356e29de5c8d9fba43b65",
+				"vertices": 832
+			},
+			{
+				"aabb": "AABB(-0.0375, -0.0625, -0.0375, 0.075, 0.1, 0.075)",
+				"basis": "Basis(1, 0, 0, 0, -0.9968153, 0.07974416, 0, -0.07974416, -0.9968153)",
+				"color": "e3d5b0ff",
+				"name": "Tooth0",
+				"position": "Vector3(-0.195, -0.0975, -0.285)",
+				"vertex_hash": "8baa02a2ee774819a38a5652f02e7d141dfe23a74f1db32589cacb2b120bef7c",
+				"vertices": 640
+			},
+			{
+				"aabb": "AABB(-0.0375, -0.0625, -0.0375, 0.075, 0.1, 0.075)",
+				"basis": "Basis(1, 0, 0, 0, -0.9968153, 0.07974416, 0, -0.07974416, -0.9968153)",
+				"color": "e3d5b0ff",
+				"name": "Tooth1",
+				"position": "Vector3(-0.065, -0.0975, -0.285)",
+				"vertex_hash": "8baa02a2ee774819a38a5652f02e7d141dfe23a74f1db32589cacb2b120bef7c",
+				"vertices": 640
+			},
+			{
+				"aabb": "AABB(-0.0375, -0.0625, -0.0375, 0.075, 0.1, 0.075)",
+				"basis": "Basis(1, 0, 0, 0, -0.9968153, 0.07974416, 0, -0.07974416, -0.9968153)",
+				"color": "e3d5b0ff",
+				"name": "Tooth2",
+				"position": "Vector3(0.065, -0.0975, -0.285)",
+				"vertex_hash": "8baa02a2ee774819a38a5652f02e7d141dfe23a74f1db32589cacb2b120bef7c",
+				"vertices": 640
+			},
+			{
+				"aabb": "AABB(-0.0375, -0.0625, -0.0375, 0.075, 0.1, 0.075)",
+				"basis": "Basis(1, 0, 0, 0, -0.9968153, 0.07974416, 0, -0.07974416, -0.9968153)",
+				"color": "e3d5b0ff",
+				"name": "Tooth3",
+				"position": "Vector3(0.195, -0.0975, -0.285)",
+				"vertex_hash": "8baa02a2ee774819a38a5652f02e7d141dfe23a74f1db32589cacb2b120bef7c",
+				"vertices": 640
+			}
+		],
+		"mouth_predator_jaws:(1.7, 0.6, 0.9):-1": [
+			{
+				"aabb": "AABB(-0.50400007, -0.072000004, -0.16800001, 1.0080001, 0.14400001, 0.33600003)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.015000001, -0.1197)",
+				"vertex_hash": "896a113fb5b9977a705244069861b702ccce144345debd57b837d066c9fc84af",
+				"vertices": 5888
+			},
+			{
+				"aabb": "AABB(-0.23020834, -0.017708333, -0.053125, 0.46041667, 0.035416666, 0.10625)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.051000003, -0.2223)",
+				"vertex_hash": "856b1615e9edd529d57bbdd55d3be45031c7402d0568e1167a85e63a03e164de",
+				"vertices": 1536
+			},
+			{
+				"aabb": "AABB(-0.43987504, -0.038250003, -0.15300001, 0.8797501, 0.076500006, 0.30600002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.087, -0.13679999)",
+				"vertex_hash": "ed5c958f07ba0734053ebac18d3d072a72d92b761d61773670a8e82589cfaf37",
+				"vertices": 5888
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(0.30600002, 0.054000005, -0.2394)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(-0.30600002, 0.054000005, -0.2394)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			},
+			{
+				"aabb": "AABB(-0.05625, -0.033749998, -0.033749998, 0.1125, 0.05625, 0.067499995)",
+				"basis": "Basis(1, 0, 0, 0, -0.9928769, 0.11914477, 0, -0.11914477, -0.9928769)",
+				"color": "e3d5b0ff",
+				"name": "Tooth0",
+				"position": "Vector3(0.3315, -0.0585, -0.2565)",
+				"vertex_hash": "b8c05452cbbf287fdb0437d24ff534449b5d9b89c8237cdef9d57751cfb171f1",
+				"vertices": 704
+			},
+			{
+				"aabb": "AABB(-0.05625, -0.033749998, -0.033749998, 0.1125, 0.05625, 0.067499995)",
+				"basis": "Basis(1, 0, 0, 0, -0.9928769, 0.11914477, 0, -0.11914477, -0.9928769)",
+				"color": "e3d5b0ff",
+				"name": "Tooth1",
+				"position": "Vector3(0.1105, -0.0585, -0.2565)",
+				"vertex_hash": "b8c05452cbbf287fdb0437d24ff534449b5d9b89c8237cdef9d57751cfb171f1",
+				"vertices": 704
+			},
+			{
+				"aabb": "AABB(-0.05625, -0.033749998, -0.033749998, 0.1125, 0.05625, 0.067499995)",
+				"basis": "Basis(1, 0, 0, 0, -0.9928769, 0.11914477, 0, -0.11914477, -0.9928769)",
+				"color": "e3d5b0ff",
+				"name": "Tooth2",
+				"position": "Vector3(-0.1105, -0.0585, -0.2565)",
+				"vertex_hash": "b8c05452cbbf287fdb0437d24ff534449b5d9b89c8237cdef9d57751cfb171f1",
+				"vertices": 704
+			},
+			{
+				"aabb": "AABB(-0.05625, -0.033749998, -0.033749998, 0.1125, 0.05625, 0.067499995)",
+				"basis": "Basis(1, 0, 0, 0, -0.9928769, 0.11914477, 0, -0.11914477, -0.9928769)",
+				"color": "e3d5b0ff",
+				"name": "Tooth3",
+				"position": "Vector3(-0.3315, -0.0585, -0.2565)",
+				"vertex_hash": "b8c05452cbbf287fdb0437d24ff534449b5d9b89c8237cdef9d57751cfb171f1",
+				"vertices": 704
+			}
+		],
+		"mouth_predator_jaws:(1.7, 0.6, 0.9):1": [
+			{
+				"aabb": "AABB(-0.50400007, -0.072000004, -0.16800001, 1.0080001, 0.14400001, 0.33600003)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "b38c61ff",
+				"name": "Muzzle",
+				"position": "Vector3(0, 0.015000001, -0.1197)",
+				"vertex_hash": "896a113fb5b9977a705244069861b702ccce144345debd57b837d066c9fc84af",
+				"vertices": 5888
+			},
+			{
+				"aabb": "AABB(-0.23020834, -0.017708333, -0.053125, 0.46041667, 0.035416666, 0.10625)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "23312cff",
+				"name": "MouthLine",
+				"position": "Vector3(0, -0.051000003, -0.2223)",
+				"vertex_hash": "856b1615e9edd529d57bbdd55d3be45031c7402d0568e1167a85e63a03e164de",
+				"vertices": 1536
+			},
+			{
+				"aabb": "AABB(-0.43987504, -0.038250003, -0.15300001, 0.8797501, 0.076500006, 0.30600002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "9d7b55ff",
+				"name": "LowerJaw",
+				"position": "Vector3(0, -0.087, -0.13679999)",
+				"vertex_hash": "ed5c958f07ba0734053ebac18d3d072a72d92b761d61773670a8e82589cfaf37",
+				"vertices": 5888
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril-1",
+				"position": "Vector3(-0.30600002, 0.054000005, -0.2394)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			},
+			{
+				"aabb": "AABB(-0.045, -0.013500001, -0.018000001, 0.09, 0.027000003, 0.036000002)",
+				"basis": "Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)",
+				"color": "191f11ff",
+				"name": "Nostril1",
+				"position": "Vector3(0.30600002, 0.054000005, -0.2394)",
+				"vertex_hash": "a082199906ad051c4af86ed290ea2359896dba72f4f9ec81c4b3d9b0b44f5995",
+				"vertices": 2208
+			},
+			{
+				"aabb": "AABB(-0.05625, -0.033749998, -0.033749998, 0.1125, 0.05625, 0.067499995)",
+				"basis": "Basis(1, 0, 0, 0, -0.9928769, 0.11914477, 0, -0.11914477, -0.9928769)",
+				"color": "e3d5b0ff",
+				"name": "Tooth0",
+				"position": "Vector3(-0.3315, -0.0585, -0.2565)",
+				"vertex_hash": "b8c05452cbbf287fdb0437d24ff534449b5d9b89c8237cdef9d57751cfb171f1",
+				"vertices": 704
+			},
+			{
+				"aabb": "AABB(-0.05625, -0.033749998, -0.033749998, 0.1125, 0.05625, 0.067499995)",
+				"basis": "Basis(1, 0, 0, 0, -0.9928769, 0.11914477, 0, -0.11914477, -0.9928769)",
+				"color": "e3d5b0ff",
+				"name": "Tooth1",
+				"position": "Vector3(-0.1105, -0.0585, -0.2565)",
+				"vertex_hash": "b8c05452cbbf287fdb0437d24ff534449b5d9b89c8237cdef9d57751cfb171f1",
+				"vertices": 704
+			},
+			{
+				"aabb": "AABB(-0.05625, -0.033749998, -0.033749998, 0.1125, 0.05625, 0.067499995)",
+				"basis": "Basis(1, 0, 0, 0, -0.9928769, 0.11914477, 0, -0.11914477, -0.9928769)",
+				"color": "e3d5b0ff",
+				"name": "Tooth2",
+				"position": "Vector3(0.1105, -0.0585, -0.2565)",
+				"vertex_hash": "b8c05452cbbf287fdb0437d24ff534449b5d9b89c8237cdef9d57751cfb171f1",
+				"vertices": 704
+			},
+			{
+				"aabb": "AABB(-0.05625, -0.033749998, -0.033749998, 0.1125, 0.05625, 0.067499995)",
+				"basis": "Basis(1, 0, 0, 0, -0.9928769, 0.11914477, 0, -0.11914477, -0.9928769)",
+				"color": "e3d5b0ff",
+				"name": "Tooth3",
+				"position": "Vector3(0.3315, -0.0585, -0.2565)",
+				"vertex_hash": "b8c05452cbbf287fdb0437d24ff534449b5d9b89c8237cdef9d57751cfb171f1",
+				"vertices": 704
+			}
+		]
+	},
+	"species": {
+		"17:climber": "14c5fdd6ee48afbbaa2471528ed1c4716d626de88740683229c9420402e4f238",
+		"17:forager": "d1544268c6f5c9155d7a9e61f56afa79544a6328f5872f5f92a69cb3f9b7f300",
+		"17:grazer": "d1e3b55ba4b09d049bb5d77ba76227043ae4e7ba08164da09225c16264bebdc8",
+		"17:predator": "b9b46e25f10cef259cd76718842ff591f06bf05f3b471c871fd13e979384c20e",
+		"17:scavenger": "f0c8521166a1d7219e7bf6340867169a9fd4cd85feb8e87b4d2d21d3de049e72",
+		"17:swimmer": "afa98db9e33978e7329cd2058db9af5e5dea853af38d175af32805d9f30c57cd",
+		"1:climber": "677caf4906b0e00b2d987208c60178741a9bfb172e1fe10d6441dfd937ace838",
+		"1:forager": "fb2484305ddf565501a6fd392eb0ed34514bfddf329974559054089459e7a688",
+		"1:grazer": "a42ae2d4a243582337bbc6a316cb1fe956df908e6ce174557edb6ef5cedc9618",
+		"1:predator": "683b64c483e3a97cbe43d74f8913d993b42667c048a9daa1136e6f801c245e11",
+		"1:scavenger": "6b9d89f6393f67159f9bf7d52d18d706c5f15ce316224080084bb1de80f0c7a5",
+		"1:swimmer": "5fe482ecd93f0fd827306865889b901e9c05d06973add8350e11b5690cd5e17b",
+		"42:climber": "02cb49955b85a3b2b6bf1f56975396655d72439f836332338d7623d3666eaddf",
+		"42:forager": "0cdf5c9be9a8e5a97a470698049e26f9553fa99667ea83362453eb2746074659",
+		"42:grazer": "47fdd699895b3733cd76983ff67d2263df50bcf1ae0d2938cfe1ee260e343a72",
+		"42:predator": "6db9c721d930aa68854f33a9f11eeffdeff36b38edfe86dd9101a1839f440594",
+		"42:scavenger": "74a55ea2fc730cd033dea982ab28f55951185b5d0e8b94d98b770f91a9a75c89",
+		"42:swimmer": "ec4d7581de7db3b5dfd004e2fd660223020dfdef1f5be0461c297c8a55b0f11c",
+		"8192:climber": "8006f48376f6ff44d11a7a8c7bc0f47b8b77a57e34d962a9d0e6777835709142",
+		"8192:forager": "bd6b570c29f3db3fa56d2694d69f9d20b1aa411e84579ea34441430dd2ae8c20",
+		"8192:grazer": "58904438a54ad0c432817c94d15586c03c39403e9f378e7e88d2048616a818aa",
+		"8192:predator": "0fade82bef48cded73ad5714af92f38e96feb94f365f711ac570f0840c283efb",
+		"8192:scavenger": "c6a99df28b569ec01e7dbf0e3d10ec5e53a5da96cc033b661ad4fd5791ee6421",
+		"8192:swimmer": "c8b11e5271ac826689dac24eac4363d7c1a9a8ca71a6d6ccf08ef2091f1f60ac",
+		"977:climber": "dbbd667d537572bb16b3c19ebe891ced8843514ed667db82f88780d5e4a88e86",
+		"977:forager": "b387ad8baf7e071452a6698c4ceba02e6576788dce766ef7fb1b52b04b8123af",
+		"977:grazer": "7929387b92a108de40f4c3a9e280836c9411e26377ae13f46e9bd6d8fcd7ed8f",
+		"977:predator": "d08192b0d6d43d81cd4bb1a09b96d6352bbb82a0d500b93d86ef90d82a8f6412",
+		"977:scavenger": "cdce7cff28f41ada2ebd951a8f560bb64c76abbaebd02561fa07fbe159226717",
+		"977:swimmer": "2a23836c08ab562e88649a82a220b90d1692e90b5f8b6e69201f810958c1725b"
+	}
+}
