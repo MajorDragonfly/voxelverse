@@ -61,7 +61,7 @@ func _run() -> void:
 	if not Freight.active(tribe.body()): await _done(); return
 	_expect(tribe.village().stock.wood == stock - 2 and Collection.village(tribe.body(), second).stock.wood == 0, "Shipment credited destination before walking.")
 	_expect(not tribe.issue_order("wood"), "Carrier accepted a competing village order.")
-	_expect(not tribe.assign_profession("woodcutter"), "Carrier accepted a competing profession.")
+	_expect(not tribe.assign_profession("forester"), "Carrier accepted a competing profession.")
 	_expect(not tribe.neighbors.start_aid_result().ok, "Carrier accepted competing neighbor aid.")
 	_expect(tribe.domestication.issue_command("missing-animal", "follow").code == "handler_busy", "Carrier accepted competing animal handling.")
 	await tree.physics_frame

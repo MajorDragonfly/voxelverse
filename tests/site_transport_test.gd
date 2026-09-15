@@ -90,6 +90,17 @@ func _run() -> void:
 	_expect(Freight.handoff(body, "near") and Freight.member(body).position == location, "Far-to-near moved the carrier.")
 	_expect(Freight.handoff(body, "far") and Freight.member(body).position == location, "Near-to-far moved the carrier.")
 	_expect(saves.save_now(), "Handoff native save failed: " + saves.last_error)
+	# The real return preflight drains both existing village clocks and the load
+	# before rebinding the source as near; no wall-clock time is introduced.
+	state.campaign.data.elapsed_seconds = 125.0
+	saves._body_transfer = {"player": saves._export_player_state()}
+	_expect(await saves.prepare_body_target(state.system_seed, state.current_planet_index, state.world_seed, body.id), "Return with active shipment failed: " + saves.last_error)
+	body = state.get_current_body_record()
+	_expect(Freight.job(body).status == "delivered" and Freight.village(body, Freight.job(body).destination.settlement_id).stock.wood == 3, "Return preflight dropped or duplicated active shipment.")
+	_expect(Freight.validate(body, state.campaign.data).is_empty(), "Return invalidated transport balances.")
+	_expect(saves.save_now(SAVE), "Returning shipment could not save: " + saves.last_error)
+	saves._body_transfer.clear()
+	body.clear(); body.merge(moving.duplicate(true)); _clocks(body, 100.25)
 	# Changed graph revision blocks; existing route is not a fresh certificate.
 	var value: Dictionary = Freight.job(body)
 	var edge: Dictionary = body[Freight.FIELD].graph.edges[value.route.legs[int(value.leg)].id]
