@@ -1,0 +1,110 @@
+{
+  "date": "2026-09-15",
+  "base_commit": "bb2f83b56267964baa7037720c4daca26fe3d007",
+  "branch": "agent/arch14-journal-paging-2026-09-15",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "execution": "headless_source_project_isolated_user_data",
+  "source_sha256": {
+    "core/discovery/journal_catalog.gd": "ca757ab00cb5726f5ec960747bd2bb963c760253fa1dcb68b1c428e8dec2d76d",
+    "ui/discovery/discovery_journal.gd": "50787d44cedb1b4a4c2390398ece0a294bacba534a91e54054a5ef932a9f7aeb",
+    "tools/validation/contracts.json": "3fee8daeaf5bc90b75f6535b85f04baff6fc35babf5c5f65577329d86d2b5d79",
+    "tests/journal_paging_test.gd": "8b662d926d08c89987086f108f79a5c281308bc5498e8628927d11c4747d9ed8",
+    "tests/discovery_journal_test.gd": "99f2e78535e98f8170b0972c08b38b4f56fb442aa898246505c115ddda095d86",
+    "tests/domestic_fauna_journal_test.gd": "e001bad6cb36d00d83cf4ab34915e7b09a9cac2dc18c37ed6dcc202f1ef12f50",
+    "tests/species_comparison_test.gd": "24e6f0951dcfb20c8ff6eae1883aaa835dabe8e12b60a3a1d88cd489b1c75664",
+    "tests/owned_animal_localization_test.gd": "24dd594c7254a8c0dd8a7af610dd34feb9bb241b972def1199686ae2b496642a",
+    "tests/research_goals_test.gd": "0faac1c9375a3c5cc2ce8e1e2e8d6fab921343fd89626f86f7e1b5e2399f0d69"
+  },
+  "checks": [
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.286
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.87
+    },
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "journal_paging_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.552,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "discovery_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.482,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "domestic_fauna_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.144,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "species_comparison_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.027,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "owned_animal_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.882,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "research_goals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.278,
+      "contract": "discovery_map"
+    }
+  ],
+  "paging_test_summary": {
+    "failures": [],
+    "measurements": {
+      "index_10005_species_and_regions_ms": 324.861
+    },
+    "passed": true
+  },
+  "scale": {
+    "indexed_species": 10005,
+    "indexed_regions": 10005,
+    "reachable_species_pages": 101,
+    "page_limit": 100,
+    "saved_species": 1205,
+    "saved_regions": 1205,
+    "fresh_process_save_reload": true
+  },
+  "limitations": [
+    "Metadata index and matching IDs are O(N); owner still holds the full discovery archive.",
+    "Headless checks build real preview models but do not exercise GPU thumbnail readback. Xvfb is unavailable because Unix sockets are denied.",
+    "No target hardware frame-rate claim; other ARCH-14 registers remain open."
+  ]
+}
