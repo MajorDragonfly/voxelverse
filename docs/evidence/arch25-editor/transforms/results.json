@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "command": [
+    "/workspace/scratch/866c41791224/bin/godot",
+    "--path",
+    "/workspace/scratch/b39a60ca41f5/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "/workspace/scratch/b39a60ca41f5/capture_editor_transform_layout.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/b39a60ca41f5/editor-transform-final-render"
+  ],
+  "source_commit": "bdc922d14b617e10189b09b55ad6f3e41dc6a874",
+  "tree": "ad2f3d1587abfc4d2ffb87b57e057c13b9e8d0ae",
+  "scope": "Final transform labels: DE/EN, 800x600 at 150% and 1920x1080 at 100%; actual controls scrolled into view"
+}

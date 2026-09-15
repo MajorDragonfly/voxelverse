@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "screenshots": [
+    "editor-de-1920x1080-100-body.png",
+    "editor-de-1920x1080-100-paint.png",
+    "editor-de-1920x1080-100-parts.png",
+    "editor-de-1920x1080-100-test.png",
+    "editor-de-800x600-150-body.png",
+    "editor-de-800x600-150-paint.png",
+    "editor-de-800x600-150-parts.png",
+    "editor-de-800x600-150-test.png",
+    "editor-en-1920x1080-100-body.png",
+    "editor-en-1920x1080-100-paint.png",
+    "editor-en-1920x1080-100-parts.png",
+    "editor-en-1920x1080-100-test.png",
+    "editor-en-800x600-150-body.png",
+    "editor-en-800x600-150-paint.png",
+    "editor-en-800x600-150-parts.png",
+    "editor-en-800x600-150-test.png"
+  ],
+  "renderer": "gl_compatibility",
+  "command": [
+    "/workspace/scratch/866c41791224/bin/godot",
+    "--path",
+    "/workspace/scratch/b39a60ca41f5/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/editor_localization_test.gd",
+    "--",
+    "--capture",
+    "/tmp/editor-review-agfkw9ta"
+  ],
+  "scope": "Real workshop: 48 layouts, DE/EN, 800/1280/1920, 100/150% text, four modes; 16 captures",
+  "test_results": [
+    {
+      "checks": 1146,
+      "failures": [],
+      "passed": true
+    }
+  ]
+}
