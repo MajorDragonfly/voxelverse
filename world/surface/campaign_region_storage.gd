@@ -39,7 +39,7 @@ func open(host: Node, body_descriptor: Dictionary) -> bool:
 			value.ecology[key] = body.surface_ecology.legacy_state.regions[key].duplicate(true)
 	var manifest: Dictionary = store.checkpoint()
 	if manifest.is_empty(): return false
-	_commit_legacy()
+	if not _commit_legacy(): return false
 	body.surface_population = {"schema": Model.PAGED_SCHEMA, "body_id": body.id, "storage": manifest}
 	# Exact originals remain in the migration archive / earlier slot version.
 	body.erase("surface_ecology")
@@ -109,7 +109,7 @@ func _put_record(record_value: Dictionary, key: String, plant: bool) -> bool:
 	if not _index(record_value, key, plant): return false
 	collection[record_value.id] = record_value
 	_take_legacy(record_value, plant)
-	return true
+	return store.last_error.is_empty()
 
 func move(record_value: Dictionary, location: Dictionary) -> bool:
 	var pointer: Dictionary = store.get_value("i:" + record_value.id)
@@ -148,7 +148,7 @@ func checkpoint() -> bool:
 	_touch_active()
 	var manifest: Dictionary = store.checkpoint()
 	if manifest.is_empty(): return false
-	_commit_legacy()
+	if not _commit_legacy(): return false
 	owner.body().surface_population.storage = manifest
 	return true
 
@@ -176,11 +176,18 @@ func _take_legacy(value: Dictionary, plant: bool) -> void:
 		if entries.has(value.id) and not value.has(pair[1]):
 			value[pair[1]] = entries[value.id].duplicate(true)
 			_legacy_moves.append([entries, value.id])
-	var encounters: Dictionary = owner.get_node("/root/ProgressionService")._encounters.entries
-	if encounters.has(value.id) and not value.has("encounter"):
-		value.encounter = encounters[value.id].duplicate(true)
+	var encounters = owner.get_node("/root/ProgressionService")._encounters
+	var encounter: Dictionary = encounters.saved(value.id)
+	if not encounters.last_error.is_empty():
+		store._fail(encounters.last_error)
+		return
+	if not encounter.is_empty() and not value.has("encounter"):
+		value.encounter = encounter
 		_legacy_moves.append([encounters, value.id])
 
-func _commit_legacy() -> void:
-	for move in _legacy_moves: move[0].erase(move[1])
+func _commit_legacy() -> bool:
+	for move in _legacy_moves:
+		if move[0] is Dictionary: move[0].erase(move[1])
+		elif not move[0].erase(move[1]): return store._fail(move[0].last_error)
 	_legacy_moves.clear()
+	return true

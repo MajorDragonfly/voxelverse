@@ -29,6 +29,7 @@ func entry() -> Dictionary:
 
 func _restore() -> void:
 	var data: Dictionary = entry()
+	if data.is_empty(): return
 	creature.current_health = creature.maximum_health * float(data["health_ratio"])
 	creature.is_dead = data["dead"]
 	creature.carcass_food_remaining = data["carcass_food"]
@@ -55,6 +56,7 @@ func befriend(actor: Node, delta: float) -> Dictionary:
 	if not can_reach(actor) or not is_finite(delta) or delta <= 0.0 or delta > 0.25:
 		return _failure("Komm näher und halte Sichtkontakt.")
 	var data: Dictionary = entry()
+	if data.is_empty(): return _failure("Begegnungsdaten konnten nicht geladen werden.")
 	if data["relation"] == "ally":
 		return _failure("Diese Kreatur ist bereits mit dir befreundet.")
 	if data["relation"] == "hostile" or data["player_harmed"] or creature._threat_timer > 0.0:
@@ -81,6 +83,7 @@ func help(actor: Node) -> Dictionary:
 	if not can_reach(actor, 3.6):
 		return _failure("Zum Helfen näher herangehen und Sichtkontakt halten.")
 	var data: Dictionary = entry()
+	if data.is_empty(): return _failure("Begegnungsdaten konnten nicht geladen werden.")
 	if help_cooldown > 0.0:
 		return _failure("Einen Moment warten.")
 	if data["relation"] == "hostile" or data["player_harmed"]:
@@ -115,6 +118,7 @@ func receive_player_attack(damage: float, actor: Node) -> bool:
 	if not can_reach(actor, actor.bite_reach + 0.35) or not is_finite(damage) or damage <= 0.0:
 		return false
 	var data: Dictionary = entry()
+	if data.is_empty(): return false
 	if str(data["conflict_relation"]).is_empty():
 		if data["relation"] == "hostile":
 			data["conflict_relation"] = "hostile"
@@ -158,7 +162,7 @@ func controls_movement() -> bool:
 	if attention_remaining > 0.0:
 		creature._wander_direction = Vector3.ZERO
 		return true
-	if entry()["relation"] != "ally":
+	if entry().get("relation") != "ally":
 		return false
 	if creature._threat_timer > 0.0 and is_instance_valid(creature._threat) and not creature._threat.is_in_group(&"player"):
 		return false
@@ -175,6 +179,7 @@ func record_external_damage(attacker: Node) -> void:
 	if get_node("/root/GameState").current_phase != 0:
 		return
 	var data: Dictionary = entry()
+	if data.is_empty(): return
 	data["health_ratio"] = creature.get_health_ratio()
 	data["dead"] = creature.is_dead
 	data["carcass_food"] = creature.carcass_food_remaining
@@ -187,6 +192,7 @@ func record_external_damage(attacker: Node) -> void:
 
 func store_carcass() -> bool:
 	var data: Dictionary = entry()
+	if data.is_empty(): return false
 	data["carcass_food"] = creature.carcass_food_remaining
 	return get_node("/root/ProgressionService").store_creature_encounter(data, true).get("ok", false)
 

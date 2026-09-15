@@ -50,7 +50,7 @@ func reset_for_new_game() -> void:
 	discovered_regions.clear()
 	_behavior.reset()
 	_tribal.reset()
-	_encounters.entries.clear()
+	_encounters.reset()
 	_research = Research.defaults()
 	_ensure_starter_parts()
 	discovery_points_changed.emit(discovery_points)
@@ -193,6 +193,9 @@ func register_region_discovery(
 
 
 func export_state() -> Dictionary:
+	var ready: bool = _prepare_encounter_archive()
+	var encounters: Dictionary = _encounters.export_state() if ready else {}
+	_report_encounter_error()
 	return {
 		"schema": SAVE_SCHEMA,
 		"discovery_points": discovery_points,
@@ -201,7 +204,7 @@ func export_state() -> Dictionary:
 		"discovered_regions": discovered_regions.duplicate(true),
 		"behavior": _behavior.export_state(),
 		"tribal": _tribal.export_state(),
-		"creature_encounters": _encounters.export_state(),
+		"creature_encounters": encounters,
 		"research": _research.duplicate(true),
 	}
 
@@ -216,10 +219,10 @@ func import_state(data: Dictionary) -> bool:
 		if not entry.has("scan"): entry.scan = {"version": 1, "complete": true, "legacy": true}
 	for entry: Dictionary in imported_regions.values():
 		if not _annotate_discovery(entry, true): return false
+	var imported_encounters := Encounters.new()
+	if data.has("creature_encounters") and not imported_encounters.import_state(data["creature_encounters"]): return false
 	_tribal.import_state(data.get("tribal", Tribal.defaults()))
-	_encounters.entries.clear()
-	if data.has("creature_encounters"):
-		_encounters.import_state(data["creature_encounters"])
+	_encounters = imported_encounters
 	if data.has("behavior"):
 		_behavior.import_state(data["behavior"])
 	else:
@@ -259,7 +262,12 @@ static func validate_state(data: Dictionary) -> String:
 	elif int(data.get("schema", 1)) >= 3:
 		return "Missing behavior progression."
 	if data.has("creature_encounters"):
-		return Encounters.validate_state(data["creature_encounters"])
+		var problem: String = Encounters.validate_state(data["creature_encounters"])
+		if not problem.is_empty(): return problem
+		if data.creature_encounters.schema == Encounters.PAGED_SCHEMA:
+			var reader := Encounters.Store.new()
+			if not reader.open(data.creature_encounters.storage): return reader.last_error
+		return ""
 	if int(data.get("schema", 1)) >= 4:
 		return "Missing creature encounters."
 	return ""
@@ -491,6 +499,7 @@ func is_behavior_transaction_active() -> bool:
 func get_creature_encounter(identity: Dictionary, role: String, individual_seed: int) -> Dictionary:
 	var saved: Dictionary = get_saved_creature_encounter(str(identity.get("object_id", "")))
 	if not saved.is_empty(): return saved
+	if get_node("/root/SaveGameService")._write_blocked: return {}
 	return _encounters.get_entry(identity, role, individual_seed)
 
 
@@ -498,14 +507,45 @@ func get_saved_creature_encounter(object_id: String) -> Dictionary:
 	var population: Node = get_tree().get_first_node_in_group(&"campaign_surface_population")
 	if population != null:
 		var entry: Dictionary = population.saved_encounter(object_id)
-		if not entry.is_empty(): return entry
-	return _encounters.entries.get(object_id, {}).duplicate(true)
+		if not population.storage.store.last_error.is_empty():
+			population._storage_failed()
+			return {}
+		if not entry.is_empty():
+			Encounters._normalize(entry)
+			return entry
+	var entry: Dictionary = _encounters.saved(object_id)
+	_report_encounter_error()
+	return entry
 
 func _put_encounter(entry: Dictionary) -> bool:
+	if get_node("/root/SaveGameService")._write_blocked: return false
 	if not Encounters.validate_entry(entry).is_empty(): return false
 	var population: Node = get_tree().get_first_node_in_group(&"campaign_surface_population")
 	if population != null and not population.storage.record(str(entry.object_id)).is_empty(): return population.store_encounter(str(entry.object_id), entry)
-	return _encounters.put(entry)
+	if not _prepare_encounter_archive():
+		_report_encounter_error()
+		return false
+	var ok: bool = _encounters.put(entry)
+	_report_encounter_error()
+	return ok
+
+
+func _prepare_encounter_archive() -> bool:
+	# Historical planar tooling keeps its inline contract. All normal campaigns
+	# use the spherical policy and migrate the global fallback ledger once.
+	var state := get_node("/root/GameState")
+	if state.campaign.data.get("surface_policy") != preload("res://world/space/cube_sphere.gd").MODE: return true
+	return _encounters.enable_paging()
+
+
+func _report_encounter_error() -> void:
+	if _encounters.last_error.is_empty(): return
+	var saves := get_node("/root/SaveGameService")
+	if not saves._write_blocked:
+		saves._report_failure(_encounters.last_error)
+		if saves.session_managed and saves.session_active:
+			get_node("/root/SessionFlow").call_deferred("_fail_loading", _encounters.last_error)
+	saves._write_blocked = true
 
 
 ## Phase-1 compatibility for the existing fauna lifecycle. Health only:
@@ -545,6 +585,7 @@ func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcom
 	if not immediate and outcome.is_empty():
 		saves.schedule_autosave()
 		return {"ok": true, "saved": false}
+	if _encounters.store != null: _encounters.store.pinned[key] = true
 	var campaign = state.campaign
 	var before_campaign: Dictionary = campaign.export_state()
 	var before_behavior: Dictionary = _behavior.export_state()
@@ -557,6 +598,7 @@ func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcom
 		event.behavior_context = context.duplicate(true)
 		if not campaign.accept_event(event, 0):
 			_restore_encounter_entry(key, before_entry)
+			if _encounters.store != null: _encounters.store.pinned.erase(key)
 			return {"ok": false, "reason": "invalid_event"}
 		receipt = _behavior.apply_event(event, campaign.data["id"], campaign.data["player_object_id"], 0)
 	# No reward/relationship observer is notified until the joint snapshot exists.
@@ -567,6 +609,7 @@ func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcom
 		_behavior.import_state(before_behavior)
 		campaign.import_state(before_campaign)
 	_encounter_commit_active = false
+	if _encounters.store != null: _encounters.store.pinned.erase(key)
 	if not saved:
 		return {"ok": false, "reason": "save_failed"}
 	if event != null:
@@ -582,10 +625,7 @@ func _restore_encounter_entry(key: String, before: Dictionary) -> void:
 	if population != null and not population.storage.record(key).is_empty():
 		population.store_encounter(key, before)
 		return
-	if before.is_empty():
-		_encounters.entries.erase(key)
-	else:
-		_encounters.entries[key] = before
+	_encounters.restore(key, before)
 
 
 func get_discovered_species_count() -> int:
