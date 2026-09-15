@@ -3863,3 +3863,27 @@ msgstr "Back · Esc"
 
 msgid "Kopfmodule"
 msgstr "Head modules"
+
+msgid "TRIBAL_TEST_ENTRY"
+msgstr "Try the tribal age"
+
+msgid "TRIBAL_TEST_DESCRIPTION"
+msgstr "A separate test world starts with your creature and two companions at a prepared home. You then confirm the transition to the tribal age. Your existing saves are preserved."
+
+msgid "TRIBAL_TEST_CONTROLS"
+msgstr "In the tribal age, control three residents from an overhead view: select them, gather resources and build a village. You can save and resume the test world. Cancel the transition to stay in its creature phase."
+
+msgid "TRIBAL_TEST_PREPARE"
+msgstr "Prepare test world"
+
+msgid "TRIBAL_TEST_SAVE_NAME"
+msgstr "Tribal age – test world"
+
+msgid "TRIBAL_TEST_LOADING"
+msgstr "Preparing your home and companions … You can then confirm the transition."
+
+msgid "TRIBAL_TEST_CANCEL_SETUP"
+msgstr "Cancel preparation · play as a creature"
+
+msgid "TRIBAL_TEST_SETUP_FAILED"
+msgstr "The home could not be fully prepared. You can play as a creature in this test world and press N to establish a home. Then open “Tribal age …” to confirm the transition."

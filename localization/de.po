@@ -3863,3 +3863,27 @@ msgstr "Zurück · Esc"
 
 msgid "Kopfmodule"
 msgstr "Kopfmodule"
+
+msgid "TRIBAL_TEST_ENTRY"
+msgstr "Stammeszeitalter testen"
+
+msgid "TRIBAL_TEST_DESCRIPTION"
+msgstr "Eine eigene Testwelt startet mit deiner Kreatur und zwei Gefährten an einem vorbereiteten Heimatplatz. Danach bestätigst du den Wechsel ins Stammeszeitalter. Deine bisherigen Spielstände bleiben erhalten."
+
+msgid "TRIBAL_TEST_CONTROLS"
+msgstr "Im Stammeszeitalter steuerst du drei Bewohner aus der Übersicht: auswählen, Rohstoffe sammeln und ein Dorf aufbauen. Die Testwelt lässt sich speichern und fortsetzen. Brichst du den Wechsel ab, bleibst du in ihrer Kreaturenphase."
+
+msgid "TRIBAL_TEST_PREPARE"
+msgstr "Testwelt vorbereiten"
+
+msgid "TRIBAL_TEST_SAVE_NAME"
+msgstr "Stammeszeitalter – Testwelt"
+
+msgid "TRIBAL_TEST_LOADING"
+msgstr "Dein Heimatplatz und deine Gefährten werden vorbereitet … Anschließend kannst du den Wechsel bestätigen."
+
+msgid "TRIBAL_TEST_CANCEL_SETUP"
+msgstr "Vorbereitung abbrechen · als Kreatur spielen"
+
+msgid "TRIBAL_TEST_SETUP_FAILED"
+msgstr "Der Heimatplatz konnte nicht vollständig vorbereitet werden. Du kannst in dieser Testwelt als Kreatur spielen und mit N einen Heimatplatz anlegen. Öffne danach „Stammeszeitalter …“, um den Wechsel zu bestätigen."
