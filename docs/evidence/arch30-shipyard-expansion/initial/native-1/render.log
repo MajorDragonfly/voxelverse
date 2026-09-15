@@ -1,0 +1,47 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"checks":5,"failures":[],"passed":true,"test":"shipyard"}
+
+ERROR: Module search filters the real role catalogue
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:465)
+       [1] _expanded_editor_checks (res://tests/shipyard_test.gd:304)
+       [2] _editor_checks (res://tests/shipyard_test.gd:285)
+{"capability_evaluations":0,"full_mesh_rebuilds":0,"microseconds":352222,"modules":56,"probe":"shipyard_selection","scope":"CPU authoring; not target-PC FPS","selections":100}
+ERROR: Idle 3D preview stops requesting redraws
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:465)
+       [1] _capture_editor (res://tests/shipyard_test.gd:374)
+ERROR: Idle 3D preview stops requesting redraws
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:465)
+       [1] _capture_editor (res://tests/shipyard_test.gd:374)
+ERROR: Idle 3D preview stops requesting redraws
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:465)
+       [1] _capture_editor (res://tests/shipyard_test.gd:374)
+ERROR: Idle 3D preview stops requesting redraws
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:465)
+       [1] _capture_editor (res://tests/shipyard_test.gd:374)
+ERROR: Idle 3D preview stops requesting redraws
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:465)
+       [1] _capture_editor (res://tests/shipyard_test.gd:374)
+ERROR: Idle 3D preview stops requesting redraws
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:465)
+       [1] _capture_editor (res://tests/shipyard_test.gd:374)
+{"checks":203,"failures":["Module search filters the real role catalogue","Idle 3D preview stops requesting redraws","Idle 3D preview stops requesting redraws","Idle 3D preview stops requesting redraws","Idle 3D preview stops requesting redraws","Idle 3D preview stops requesting redraws","Idle 3D preview stops requesting redraws"],"passed":false,"test":"shipyard"}

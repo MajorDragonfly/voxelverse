@@ -290,7 +290,8 @@
       "title": "Expedition: Orts- und Übergabenentwurf",
       "work": "ARCH-30 / Vorbereitung M9-EXPEDITION",
       "tests": [
-        "expedition_contract_test"
+        "expedition_contract_test",
+        "shipyard_test"
       ]
     }
   ],

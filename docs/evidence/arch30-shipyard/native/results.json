@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "source": {
+    "commit": "0fde3d02c8e06390973f852b19dc6f9a363e9c9e",
+    "tracked_worktree_dirty": false
+  },
+  "command": [
+    "/workspace/scratch/866c41791224/bin/godot",
+    "--path",
+    "/workspace/scratch/78eb01499f8e/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/shipyard_test.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/78eb01499f8e/shipyard-final-render"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility",
+  "screenshots": [
+    "shipyard-expedition-1280x720.png",
+    "shipyard-expedition-1920x1080.png",
+    "shipyard-expedition-960x640.png",
+    "shipyard-hangar-check.png",
+    "shipyard-lander-1280x720.png",
+    "shipyard-lander-1920x1080.png",
+    "shipyard-lander-960x640.png"
+  ],
+  "scope": "Standalone authoring, real module meshes, 960x640/1280x720/1920x1080, pointer add/cancel and hangar picker"
+}

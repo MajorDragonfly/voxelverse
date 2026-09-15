@@ -1,0 +1,62 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"checks":5,"failures":[],"passed":true,"test":"shipyard"}
+
+ERROR: Editor fits window width
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:223)
+ERROR: Save feedback remains inside the window
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:225)
+ERROR: Editor fits window width
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:223)
+ERROR: Save feedback remains inside the window
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:225)
+ERROR: Editor fits window width
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:223)
+ERROR: Save feedback remains inside the window
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:225)
+ERROR: Editor fits window width
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:223)
+ERROR: Save feedback remains inside the window
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:225)
+ERROR: Pointer click on Add actually installs a module
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:237)
+       [2] _click (res://tests/shipyard_test.gd:275)
+ERROR: Pointer replacement protects the dirty draft
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shipyard_test.gd:290)
+       [1] _capture_editor (res://tests/shipyard_test.gd:240)
+       [2] _click (res://tests/shipyard_test.gd:275)
+{"checks":108,"failures":["Editor fits window width","Save feedback remains inside the window","Editor fits window width","Save feedback remains inside the window","Editor fits window width","Save feedback remains inside the window","Editor fits window width","Save feedback remains inside the window","Pointer click on Add actually installs a module","Pointer replacement protects the dirty draft"],"passed":false,"test":"shipyard"}
