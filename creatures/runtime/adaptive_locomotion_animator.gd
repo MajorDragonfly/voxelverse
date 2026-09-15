@@ -364,7 +364,7 @@ func _animate_non_leg_parts() -> void:
 			"tail":
 				target_rotation.y += deg_to_rad(tail_swing_degrees) * (sin(_idle_time * 2.5) * 0.35 + sin(_phase - 0.5) * _movement_blend * 0.65)
 				target_rotation.x += deg_to_rad(3.5) * sin(_idle_time * 1.4)
-			"mouth", "eyes", "horns":
+			"mouth", "head", "eyes", "horns":
 				target_rotation.x += deg_to_rad(1.8) * sin(_idle_time * 1.8)
 				target_position.y += sin(_idle_time * 2.0) * 0.010
 			"plates", "spikes", "decor":

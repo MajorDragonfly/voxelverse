@@ -10,7 +10,28 @@ static func recipe(id: String, skin: Color, accent: Color, horn: Color, revision
 		"mouth_canine_snout": return _canine(skin, accent, horn)
 		"mouth_crocodile_snout": return _crocodile(skin, accent, horn)
 		"mouth_octopus_beak": return _octopus(skin, accent, horn)
+		"head_elephant_trunk": return _trunk(skin, accent)
 	return []
+
+
+static func _trunk(skin: Color, accent: Color) -> Array[Dictionary]:
+	# Overlapping voxel sections form one continuous, tapered nose. The bridge
+	# clears the independent mouth below; the tip is a nose, not another mouth.
+	var result: Array[Dictionary] = [
+		_piece("TrunkRoot", Vector3(0, 0, 0), Vector3(0.42, 0.30, 0.30), skin, true),
+		_piece("TrunkBridge", Vector3(0, 0.005, -0.23), Vector3(0.37, 0.29, 0.34), skin, true),
+		_piece("TrunkBend", Vector3(0, -0.045, -0.45), Vector3(0.32, 0.29, 0.29), skin, true),
+		_piece("TrunkUpper", Vector3(0, -0.20, -0.60), Vector3(0.28, 0.30, 0.25), skin, true),
+		_piece("TrunkMiddle", Vector3(0, -0.41, -0.69), Vector3(0.24, 0.30, 0.23), skin, true),
+		_piece("TrunkLower", Vector3(0, -0.62, -0.75), Vector3(0.20, 0.28, 0.20), skin, true),
+		_piece("TrunkCurl", Vector3(0, -0.79, -0.84), Vector3(0.18, 0.20, 0.25), skin, true),
+		_piece("TrunkTip", Vector3(0, -0.77, -1.01), Vector3(0.17, 0.17, 0.23), skin.lightened(0.05), true),
+		_piece("TipFinger", Vector3(0, -0.685, -1.06), Vector3(0.10, 0.085, 0.15), skin, true),
+	]
+	for side: float in [-1.0, 1.0]:
+		result.append(_piece("TrunkNostril" + ("Left" if side < 0 else "Right"),
+			Vector3(side * 0.043, -0.77, -1.128), Vector3(0.046, 0.075, 0.019), accent.darkened(0.65)))
+	return result
 
 
 static func legacy_voxels(id: String, revision: int = 1) -> Array:

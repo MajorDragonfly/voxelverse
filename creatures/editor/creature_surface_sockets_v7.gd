@@ -128,7 +128,7 @@ static func _get_socket_type(category_id: String) -> String:
 			return "lower_side"
 		PartLibrary.CATEGORY_ARMS:
 			return "side"
-		PartLibrary.CATEGORY_EYES, PartLibrary.CATEGORY_HORNS:
+		PartLibrary.CATEGORY_HEAD, PartLibrary.CATEGORY_EYES, PartLibrary.CATEGORY_HORNS:
 			return "upper_front"
 		PartLibrary.CATEGORY_PLATES, PartLibrary.CATEGORY_SPIKES:
 			return "upper_spine"
