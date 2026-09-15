@@ -3863,3 +3863,27 @@ msgstr "Back · Esc"
 
 msgid "Kopfmodule"
 msgstr "Head modules"
+
+msgid "EDITOR_PART_TAIL_STUMP_NAME"
+msgstr "Stump tail"
+
+msgid "EDITOR_PART_TAIL_STUMP_DESCRIPTION"
+msgstr "Short, rounded tail. Shares the balance tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_REPTILE_NAME"
+msgstr "Reptile tail"
+
+msgid "EDITOR_PART_TAIL_REPTILE_DESCRIPTION"
+msgstr "Thick root with a long, curved tip and dorsal scales. Shares the balance tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_BEAVER_PADDLE_NAME"
+msgstr "Beaver paddle"
+
+msgid "EDITOR_PART_TAIL_BEAVER_PADDLE_DESCRIPTION"
+msgstr "Broad, flat paddle tail with scales. Shares the fin tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_NAME"
+msgstr "Horizontal tail fluke"
+
+msgid "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_DESCRIPTION"
+msgstr "Two lateral flukes on a narrow root. Shares the fin tail’s stats and unlock."

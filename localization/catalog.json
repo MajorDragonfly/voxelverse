@@ -6441,6 +6441,46 @@
       "key": "Kopfmodule",
       "de": "Kopfmodule",
       "en": "Head modules"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STUMP_NAME",
+      "de": "Stummelschwanz",
+      "en": "Stump tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STUMP_DESCRIPTION",
+      "de": "Kurzer, runder Schwanz. Werte und Freischaltung wie Balanceschwanz.",
+      "en": "Short, rounded tail. Shares the balance tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_REPTILE_NAME",
+      "de": "Reptilienschwanz",
+      "en": "Reptile tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_REPTILE_DESCRIPTION",
+      "de": "Kräftiger Ansatz mit langem, gebogenem Ende und Rückenschuppen. Werte und Freischaltung wie Balanceschwanz.",
+      "en": "Thick root with a long, curved tip and dorsal scales. Shares the balance tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BEAVER_PADDLE_NAME",
+      "de": "Biberpaddel",
+      "en": "Beaver paddle"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BEAVER_PADDLE_DESCRIPTION",
+      "de": "Breiter, flacher Paddelschwanz mit Schuppen. Werte und Freischaltung wie Flossenschwanz.",
+      "en": "Broad, flat paddle tail with scales. Shares the fin tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_NAME",
+      "de": "Horizontale Schwanzflosse",
+      "en": "Horizontal tail fluke"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_DESCRIPTION",
+      "de": "Zwei seitliche Flossenlappen mit schmalem Ansatz. Werte und Freischaltung wie Flossenschwanz.",
+      "en": "Two lateral flukes on a narrow root. Shares the fin tail’s stats and unlock."
     }
   ]
 }

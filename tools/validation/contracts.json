@@ -121,7 +121,8 @@
         "creature_studio_test",
         "creature_trunk_provider_test",
         "creature_v5_smoke_test",
-        "runtime_geometry_batch_test"
+        "runtime_geometry_batch_test",
+        "creature_tail_family_test"
       ]
     },
     {

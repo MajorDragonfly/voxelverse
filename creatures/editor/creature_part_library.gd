@@ -1,6 +1,8 @@
 extends RefCounted
 class_name CreaturePartLibrary
 
+const TailCatalog = preload("res://creatures/catalog/creature_tail_catalog.gd")
+const TailGeometry = preload("res://creatures/editor/creature_tail_geometry.gd")
 const MouthCatalog = preload("res://creatures/catalog/creature_mouth_catalog.gd")
 const MouthGeometry = preload("res://creatures/editor/creature_mouth_geometry.gd")
 const HandCatalog = preload("res://creatures/catalog/creature_hand_catalog.gd")
@@ -887,14 +889,14 @@ static func _get_placeable_parts() -> Array:
 	]
 
 	# Add models after the frozen legacy catalog; copy existing gameplay values.
-	for model: Dictionary in MouthCatalog.get_parts():
+	for model: Dictionary in MouthCatalog.get_parts() + TailCatalog.get_parts():
 		for source: Dictionary in result:
 			if source.id == model.stats_source:
 				model["stats"] = source.stats.duplicate(true)
 				model["complexity"] = source.complexity
 				model["default_scale"] = source.default_scale
 				break
-		model["voxels"] = MouthGeometry.legacy_voxels(model.id, model.geometry_revision)
+		model["voxels"] = TailGeometry.legacy_voxels(model.id, model.geometry_revision) if model.category == CATEGORY_TAIL else MouthGeometry.legacy_voxels(model.id, model.geometry_revision)
 		result.append(model)
 	return result
 

@@ -3,6 +3,7 @@ extends RefCounted
 ## never the latest model. Assembly/design revisions are a separate contract.
 const Mouths = preload("res://creatures/catalog/creature_mouth_catalog.gd")
 const Hands = preload("res://creatures/catalog/creature_hand_catalog.gd")
+const Tails = preload("res://creatures/catalog/creature_tail_catalog.gd")
 const Feet = preload("res://creatures/catalog/creature_foot_catalog.gd")
 const LEGACY_REVISION: int = 1
 const LEGACY_CATALOG_REVISION: int = 1
@@ -69,6 +70,9 @@ static func resolve(id: String, reference: Dictionary, prefix: String = "") -> D
 		if profile.is_empty(): return {}
 	elif id.begins_with("hands_"):
 		profile = Hands.get_profile(id, revision)
+		if profile.is_empty(): return {}
+	elif id.begins_with("tail_"):
+		profile = Tails.get_profile(id, revision)
 		if profile.is_empty(): return {}
 	elif id.begins_with("mouth_") or id.begins_with("head_"):
 		profile = Mouths.get_profile(id, revision)

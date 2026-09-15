@@ -29,7 +29,7 @@ func _run() -> void:
 	for failure in failures:
 		push_error(failure)
 	if failures.is_empty():
-		print("Creature parts studio passed: 36 part recipes, 11 end pieces, XYZ controls, undo, mirrored spikes, center sockets, 2/4/6-leg soles, terrain IK, wildlife floor alignment, cosmetic skins and save roundtrip.")
+		print("Creature parts studio passed: 40 part recipes, 11 end pieces, XYZ controls, undo, mirrored spikes, center sockets, 2/4/6-leg soles, terrain IK, wildlife floor alignment, cosmetic skins and save roundtrip.")
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
 
 
@@ -65,10 +65,9 @@ func _check_catalog_and_pairs() -> void:
 					_expect(mesh.mesh is ArrayMesh, "Non-voxel detail in " + str(definition["id"]))
 			preview.free()
 			count += 1
-	# The integrated catalogue adds feline, bear and pig mouths to the 33
-	# already covered recipes (including the independent trunk). Every recipe
-	# above must still produce real voxel geometry in the shared preview.
-	_expect(count == 36 and Library.get_terminal_parts().size() == 11, "Part or end-piece catalog incomplete.")
+	# Four tail families extend the 36 previously covered recipes. Every
+	# recipe above must still produce real voxel geometry in the shared preview.
+	_expect(count == 40 and Library.get_terminal_parts().size() == 11, "Part or end-piece catalog incomplete.")
 	var blueprint: Dictionary = Assembly.create_default()
 	var index: int = Blueprint.add_part(blueprint, "spikes_side")
 	Anatomy.reset_all_anchors(blueprint)

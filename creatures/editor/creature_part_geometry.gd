@@ -7,6 +7,7 @@ const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const Rig = preload("res://creatures/runtime/creature_limb_rig.gd")
 const MouthGeometry = preload("res://creatures/editor/creature_mouth_geometry.gd")
 const HandGeometry = preload("res://creatures/editor/creature_hand_geometry.gd")
+const TailGeometry = preload("res://creatures/editor/creature_tail_geometry.gd")
 const FootGeometry = preload("res://creatures/editor/creature_foot_geometry.gd")
 const Revisions = preload("res://creatures/catalog/creature_part_revisions.gd")
 
@@ -63,18 +64,11 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 					for index in range(4):
 						_cone(root, "Tooth%d" % index, Vector3(float(index) * 0.13 - 0.195, -0.035, -0.28), Vector3(float(index) * 0.13 - 0.195, -0.16, -0.29), 0.075, horn)
 		"tail":
-			_bone(root, "TailBase", Vector3(0, 0, -0.02), Vector3(0, -0.025, 0.38), 0.23, skin)
-			_bone(root, "TailTip", Vector3(0, -0.025, 0.35), Vector3(0, 0.04, 0.78), 0.14, skin)
-			if id == "tail_club":
-				_piece(root, "TailClub", Vector3(0, 0.04, 0.77), Vector3(0.47, 0.39, 0.47), accent, true)
-			elif id == "tail_fin":
-				_piece(root, "TailFin", Vector3(0, 0.14, 0.72), Vector3(0.08, 0.60, 0.42), accent, true)
-				for index in range(3):
-					_bone(root, "FinRay%d" % index, Vector3(0, 0, 0.55), Vector3(0, float(index - 1) * 0.22 + 0.14, 0.85), 0.025, skin.lightened(0.25))
-			elif id == "tail_stinger":
-				_cone(root, "Stinger", Vector3(0, 0.04, 0.73), Vector3(0, 0.25, 1.01), 0.24, horn)
-			else:
-				_cone(root, "TailPoint", Vector3(0, 0.04, 0.72), Vector3(0, 0.12, 1.0), 0.14, skin)
+			for piece: Dictionary in TailGeometry.recipe(id, skin, accent, horn, revision):
+				match piece.kind:
+					"bone": _bone(root, piece.name, piece.start, piece.end, piece.width, piece.color, piece.skin)
+					"cone": _cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
+					"piece": _piece(root, piece.name, piece.position, piece.size, piece.color, piece.skin)
 		"horns":
 			_piece(root, "HornSocket", Vector3(0, 0.015, 0), Vector3(0.25, 0.10, 0.23), skin, true)
 			if id == "horns_antlers":

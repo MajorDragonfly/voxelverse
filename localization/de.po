@@ -3863,3 +3863,27 @@ msgstr "Zurück · Esc"
 
 msgid "Kopfmodule"
 msgstr "Kopfmodule"
+
+msgid "EDITOR_PART_TAIL_STUMP_NAME"
+msgstr "Stummelschwanz"
+
+msgid "EDITOR_PART_TAIL_STUMP_DESCRIPTION"
+msgstr "Kurzer, runder Schwanz. Werte und Freischaltung wie Balanceschwanz."
+
+msgid "EDITOR_PART_TAIL_REPTILE_NAME"
+msgstr "Reptilienschwanz"
+
+msgid "EDITOR_PART_TAIL_REPTILE_DESCRIPTION"
+msgstr "Kräftiger Ansatz mit langem, gebogenem Ende und Rückenschuppen. Werte und Freischaltung wie Balanceschwanz."
+
+msgid "EDITOR_PART_TAIL_BEAVER_PADDLE_NAME"
+msgstr "Biberpaddel"
+
+msgid "EDITOR_PART_TAIL_BEAVER_PADDLE_DESCRIPTION"
+msgstr "Breiter, flacher Paddelschwanz mit Schuppen. Werte und Freischaltung wie Flossenschwanz."
+
+msgid "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_NAME"
+msgstr "Horizontale Schwanzflosse"
+
+msgid "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_DESCRIPTION"
+msgstr "Zwei seitliche Flossenlappen mit schmalem Ansatz. Werte und Freischaltung wie Flossenschwanz."
