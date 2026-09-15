@@ -161,3 +161,25 @@ Eine lokale Git-Abhängigkeit von einem inzwischen entfernten fremden Checkout
 wurde aus den unveränderten GitHub-Objekten wiederhergestellt und auf eigenständige
 Objektspeicherung umgestellt. Commit-IDs und geprüfte Arbeitsdateien blieben erhalten.
 Der Arbeitsablauf weist nun ausdrücklich auf unabhängige lokale Git-Objekte hin.
+
+## Veröffentlichung nach Nutzerfreigabe
+
+Der Nutzer hat die öffentliche Veröffentlichung dieses Integrationsbranches und
+das Anlegen des PR ausdrücklich freigegeben. Der Upload erfolgte über die
+verbundene GitHub-App, da dem lokalen Git-Terminal Zugangsdaten fehlen.
+Die App vergibt neue Commit-IDs; alle 26 Commit-Trees wurden auf exakte Gleichheit
+geprüft und sämtliche geordneten Elternbeziehungen erhalten. Die ursprünglichen
+lokalen Testreferenzen und Rohprotokolle bleiben unverändert.
+
+| Lokal geprüfter Stand | Veröffentlichter Commit |
+|---|---|
+| `41deb8c27f028eec4d765035bf04b640d54cf1bd` – Beginn der Vollprüfung | `a402be97f653823613195f0283638af83ed2ebe1` |
+| `4648ae9a0f3f3f418889da57e806cffba1f24c7d` – korrigierte Ressourcen/PCK | `a295bcd573ff2e5aa152523e5aa355f6c482447e` |
+| `d1f92fec1a1c4945bff0dc1481ab0aeb3a5074ae` – Nachtrag #109 | `753a15d07d660df9a297baf4ed1cb9704dae2dab` |
+
+Vollständige Zuordnung: [Veröffentlichungsnachweis](evidence/integration-publication-20260915.json).
+Danach folgt ausschließlich dieser Veröffentlichungsvermerk. Die historischen
+Hinweise auf den damals noch blockierten Upload beschreiben den jeweiligen
+Nachweiszeitpunkt. Die Freigabe umfasst Branch und PR; ein Merge auf `main` ist
+weiterhin eine gesonderte Entscheidung. Gemeinsame CI und native Ziel-PC-Abnahme
+behalten ihre oben genannten Grenzen.

@@ -7,8 +7,11 @@ Stand: 15. September 2026, zweite Integrationsrunde. Kurzer Einstieg für neue F
 - `main` beim Abruf: `d378ca0ecd7f03429a5150df6358e0646ec06689`, Merge von #92.
 - Neuer gemeinsamer Kandidat: `agent/integration-vegetation-nest-20260915`.
   Enthält die veröffentlichten PRs **#93–109** und die Ressourcen-/Anschlusskorrekturen.
-  Quell-/Werkzeugstand `d1f92fec1a1c4945bff0dc1481ab0aeb3a5074ae`; aktuell lokal
-  vorbereitet, GitHub-Veröffentlichung und Integrations-PR stehen noch aus.
+  Veröffentlichter Quell-/Werkzeugstand `753a15d07d660df9a297baf4ed1cb9704dae2dab`,
+  identischer Tree zum lokal geprüften `d1f92fec1a1c4945bff0dc1481ab0aeb3a5074ae`.
+  [Integrationsbranch auf GitHub](https://github.com/MajorDragonfly/voxelverse/tree/agent/integration-vegetation-nest-20260915);
+  Prüfung und Freigabe erfolgen über den zugehörigen Integrations-PR.
+  [Zuordnung aller Quellcommits](evidence/integration-publication-20260915.json).
   Exakte Eingangsköpfe: [Integrationsbericht](INTEGRATION_2026-09-15_RESOURCES.md).
 - Der Kandidat ist eine eigene Branchlieferung. `main` wird dadurch nicht umbenannt
   oder stillschweigend als bereits geprüft erklärt. Für neue Pakete den festen
