@@ -1,0 +1,71 @@
+{
+  "work_packet": "ARCH-02-DEVELOPED",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "source_commit": "9fc27268f758486e9601868a74c46a415d9bc453",
+  "source_tree": "695fe7d0e35420451ed3ac57603907fbc4247b25",
+  "postprocess_commit": "6333a84d12eb4a900979fc8e982b056a2019eb40",
+  "postprocess_tree": "cea7db5877c42f2481d1f761547e16b0b3b2c571",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux headless, isolated synthetic userdata; milk/eggs overlapped on a shared host, no timing comparison or target-PC acceptance",
+  "checks": [
+    {
+      "name": "milk",
+      "godot_scenario_passed": true,
+      "aggregation_passed_after_fix": true,
+      "children": [
+        {
+          "process": "cycle_0_far_restart",
+          "passed": true
+        },
+        {
+          "process": "cycle_0_home_restart",
+          "passed": true
+        }
+      ],
+      "segments": 32,
+      "command": "python3 tools/profile_performance.py --godot GODOT --mode developed --production milk --output OUTPUT",
+      "cpu": "AMD EPYC 9V74 80-Core Processor",
+      "rss_single_process_peak_bytes": 499617792
+    },
+    {
+      "name": "eggs",
+      "godot_scenario_passed": true,
+      "aggregation_passed_after_fix": true,
+      "children": [
+        {
+          "process": "cycle_0_far_restart",
+          "passed": true
+        },
+        {
+          "process": "cycle_0_home_restart",
+          "passed": true
+        }
+      ],
+      "segments": 33,
+      "command": "python3 tools/profile_performance.py --godot GODOT --mode developed --production eggs --output OUTPUT",
+      "cpu": "AMD EPYC 9V74 80-Core Processor",
+      "rss_single_process_peak_bytes": 501338112
+    },
+    {
+      "name": "python-performance-tools",
+      "passed": true,
+      "tests": 14,
+      "command": "python3 -m unittest discover -s tests/tooling -p 'performance*_test.py' -v"
+    },
+    {
+      "name": "measurement-statistics-and-source-contracts",
+      "passed": true,
+      "command": "python3 tools/validate_godot.py --godot GODOT --skip-import --skip-main --tests performance_measurement_test --output OUTPUT",
+      "import": "same local resources imported successfully before the runs"
+    }
+  ],
+  "limitations": [
+    "No graphical, Windows export or target-PC test",
+    "Diagnostic reserve, 4x production simulation and 2 FPS far-debt segment are explicit",
+    "Two complete Godot scenarios passed on clean 9fc2726; their initial Python aggregation failed on Godot float JSON cycles. Corrected aggregator 6333a84 was tested against the unchanged captures; no GDScript changed after the passing runtime runs.",
+    "First development attempt started the child probe twice. Fixed and retested from the preserved far checkpoint before the final complete runs.",
+    "Synthetic fixture folders remain local; archived evidence contains all frame/capture/engine reports, not a portable user-data backup."
+  ],
+  "archive_sha256": "8cb7e46b38d42d229f62b8ae653576566c761466e7487fd7abaf0cf47bb1361c",
+  "archive_bytes": 418523
+}
