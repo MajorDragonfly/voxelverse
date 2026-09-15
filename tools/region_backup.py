@@ -542,11 +542,24 @@ def main(argv=None) -> int:
     export.add_argument("--output", type=Path, required=True)
     verify = commands.add_parser("verify", help="Read-only verification of a completed backup")
     verify.add_argument("directory", type=Path)
+    userdata = commands.add_parser("export-user-data", help="Archive every file of a stopped game's user-data directory")
+    userdata.add_argument("--user-data", type=Path, required=True)
+    userdata.add_argument("--output", type=Path, required=True)
+    full_verify = commands.add_parser("verify-user-data", help="Verify all bytes of a complete user-data archive")
+    full_verify.add_argument("directory", type=Path)
     args = parser.parse_args(argv)
     try:
-        result = (export_bundle(args.slot, args.regions_dir, args.output) if args.command == "export"
-                  else verify_bundle(args.directory))
-    except (BackupError, OSError, UnicodeError, RecursionError) as error:
+        if args.command in ("export-user-data", "verify-user-data"):
+            if __package__:
+                from .region_backup_userdata import export_userdata, verify_userdata
+            else:
+                from region_backup_userdata import export_userdata, verify_userdata
+            result = (export_userdata(args.user_data, args.output) if args.command == "export-user-data"
+                      else verify_userdata(args.directory))
+        else:
+            result = (export_bundle(args.slot, args.regions_dir, args.output) if args.command == "export"
+                      else verify_bundle(args.directory))
+    except (ValueError, OSError, UnicodeError, RecursionError) as error:
         parser.exit(2, f"Region backup failed: {error}\n")
     print(json.dumps({"ok": True, **result}))
     return 0
