@@ -4,6 +4,7 @@ const Habitat = preload("res://world/fauna/domestication/domestic_surface_contra
 const Traits = preload("res://world/fauna/domestication/domestication_contract.gd")
 const Suitability = preload("res://ui/discovery/animal_suitability.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
+const Encounters = preload("res://core/progression/creature_encounters.gd")
 var metrics: Dictionary = {}
 var egg_floor_ticks: int = 0
 
@@ -37,7 +38,7 @@ func _run() -> void:
 	_expect(body.fauna_catalog.schema == 4 and body.fauna_catalog.species.size() == 4, "Runtime did not add the fourth species")
 	_expect(_same(body.fauna_catalog.species.slice(0, 3), original.fauna_catalog.species), "Runtime replaced old species or measured bodies")
 	_expect(_same(body.fauna_catalog.habitats, original.fauna_catalog.habitats), "Runtime rewrote existing habitat addresses/generations")
-	_expect(_same(tree.root.get_node("ProgressionService").export_state(), legacy.saved.progression), "Migration changed existing discoveries or points")
+	_check_legacy_progression(legacy.saved.progression)
 	_expect(population.storage.record(legacy.plant_id, true).food.remaining == 2.0, "Upgrade reset harvested plant")
 	var old_ids: Array = []
 	for habitat: Dictionary in original.fauna_catalog.habitats:
@@ -104,6 +105,22 @@ func _run() -> void:
 		"egg_floor_ticks": egg_floor_ticks,
 		"revisit": true, "fresh_process": code == 0, "future_policy_protected": true}
 	await _done()
+
+func _check_legacy_progression(before: Dictionary) -> void:
+	var after: Dictionary = tree.root.get_node("ProgressionService").export_state()
+	# This genuine old fixture has no encounters. ARCH-14 now migrates that
+	# inline ledger to an empty paged root; every other progression field must
+	# remain identical, including discoveries, points, unlocks and research.
+	var old_ledger: Dictionary = before.get("creature_encounters", {})
+	var new_ledger: Dictionary = after.get("creature_encounters", {})
+	_expect(old_ledger.get("schema") == 1 and old_ledger.get("entries") == {}, "Legacy fixture encounter ledger changed")
+	_expect(new_ledger.get("schema") == 2 and Encounters.validate_state(new_ledger).is_empty(), "Migration did not produce a valid paged encounter ledger")
+	_expect(new_ledger.get("storage", {}).get("root", "missing") == "", "Migration added encounters to the empty legacy ledger")
+	var old_progression: Dictionary = before.duplicate(true)
+	var new_progression: Dictionary = after.duplicate(true)
+	old_progression.erase("creature_encounters")
+	new_progression.erase("creature_encounters")
+	_expect(_same(new_progression, old_progression), "Migration changed existing discoveries, points or other progression")
 
 func _extract_fixture() -> void:
 	var zip := ZIPReader.new()
