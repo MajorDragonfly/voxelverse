@@ -416,7 +416,7 @@ func record_tribal_work(before: Dictionary, actor_id: String, producer: Node) ->
 	var controller := get_tree().get_first_node_in_group(&"tribe_controller")
 	if controller == null or producer != controller or int(state.current_phase) != 1 or not controller.is_active() or is_behavior_transaction_active():
 		return
-	var result: Dictionary = _tribal.observe(before, controller.village(), actor_id, controller.body(), state.campaign.data, int(state.current_phase))
+	var result: Dictionary = _tribal.observe(before, controller.village(), actor_id, controller.village_body(), state.campaign.data, int(state.current_phase))
 	_publish_tribal_result(result)
 
 
@@ -427,7 +427,7 @@ func record_tribal_tick(delta: float, producer: Node) -> void:
 	if producer != controller or controller == null or not controller.is_active() or is_behavior_transaction_active() or frame == _last_tribal_tick:
 		return
 	_last_tribal_tick = frame
-	var result: Dictionary = _tribal.observe_supply(controller.village(), controller.body(), state.campaign.data, int(state.current_phase), delta)
+	var result: Dictionary = _tribal.observe_supply(controller.village(), controller.village_body(), state.campaign.data, int(state.current_phase), delta)
 	# Regular snapshots already include the live clock. Rescheduling each frame
 	# would keep postponing the autosave forever while the village is healthy.
 	if not result["rewards"].is_empty():
@@ -435,7 +435,7 @@ func record_tribal_tick(delta: float, producer: Node) -> void:
 
 func record_far_work(before: Dictionary, actor_id: String, body: Dictionary, delta: float, producer: Node) -> void:
 	var state: Node = get_node("/root/GameState")
-	if producer != state or state.active_body_id == body.get("id") or body.get("village_simulation", {}).get("owner") != "far" or is_behavior_transaction_active(): return
+	if producer != state or (state.active_body_id == body.get("id") and not state.get_current_body_record().has("settlements")) or body.get("village_simulation", {}).get("owner") != "far" or is_behavior_transaction_active(): return
 	if actor_id == body.get("tribal_neighbor", {}).get("id"):
 		_publish_tribal_result(_tribal.observe_neighbor(before, body.tribal_neighbor, body.tribe, state.campaign.data, int(state.current_phase)))
 		return
@@ -447,7 +447,9 @@ func record_far_work(before: Dictionary, actor_id: String, body: Dictionary, del
 
 func get_tribal_economy_progress() -> Dictionary:
 	var state := get_node("/root/GameState")
-	var village: Dictionary = state.get_current_body_record().get("tribe", {})
+	var Settlements = preload("res://world/tribe/settlement_collection.gd")
+	var body: Dictionary = state.get_current_body_record()
+	var village: Dictionary = Settlements.village(body, Settlements.origin_id(body))
 	return _tribal.economy_progress(village)
 
 func record_neighbor_help(before: Dictionary, producer: Node) -> void:
@@ -455,7 +457,7 @@ func record_neighbor_help(before: Dictionary, producer: Node) -> void:
 	var controller := get_tree().get_first_node_in_group(&"tribe_controller")
 	if controller == null or controller != producer or not controller.is_active() or is_behavior_transaction_active():
 		return
-	_publish_tribal_result(_tribal.observe_neighbor(before, controller.body().get("tribal_neighbor", {}), controller.village(), state.campaign.data, int(state.current_phase)))
+	_publish_tribal_result(_tribal.observe_neighbor(before, controller.village_body().get("tribal_neighbor", {}), controller.village(), state.campaign.data, int(state.current_phase)))
 
 
 func _publish_tribal_result(result: Dictionary) -> void:

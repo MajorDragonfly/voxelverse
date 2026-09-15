@@ -3681,6 +3681,156 @@
       "key": "HUD_SCAN_CONTROLS",
       "de": "%s · Scan schließen\nJ · Alle Werte im Entdeckungsbuch",
       "en": "%s · Close scanner\nJ · All stats in the journal"
+    },
+    {
+      "key": "SETTLEMENT_NOT_READY",
+      "de": "Der Ort ist noch nicht bereit.",
+      "en": "This site is not ready yet."
+    },
+    {
+      "key": "SETTLEMENT_SPHERE_REQUIRED",
+      "de": "Ein Außenlager benötigt eine Kugelwelt.",
+      "en": "An outpost requires a spherical world."
+    },
+    {
+      "key": "SETTLEMENT_LIMIT",
+      "de": "Beide Siedlungsorte sind gegründet.",
+      "en": "Both settlement sites have been founded."
+    },
+    {
+      "key": "SETTLEMENT_SELECT_FOUNDER",
+      "de": "Wähle einen einzelnen Gefährten als Gründer.",
+      "en": "Select one companion to found the outpost."
+    },
+    {
+      "key": "SETTLEMENT_KEEP_PLAYER",
+      "de": "Deine Kreatur bleibt im Heimatdorf; wähle einen Gefährten.",
+      "en": "Your creature stays in the home village; choose a companion."
+    },
+    {
+      "key": "SETTLEMENT_FOUNDER_BUSY",
+      "de": "Der Gründer muss seinen Auftrag abschließen und ohne Fracht warten.",
+      "en": "The founder must finish their job and wait without cargo."
+    },
+    {
+      "key": "SETTLEMENT_WALK_FIRST",
+      "de": "Schicke den Gründer per Rechtsklick 14–18 m vom Dorfplatz weg. Gründe nach seiner Ankunft hier ein Außenlager.",
+      "en": "Right-click to send the founder 14–18 m from the village center. Found the outpost here after they arrive."
+    },
+    {
+      "key": "SETTLEMENT_ROUTE_MISSING",
+      "de": "Zum neuen Platz fehlt ein sicherer Weg.",
+      "en": "There is no safe route to the new site."
+    },
+    {
+      "key": "SETTLEMENT_GROUND_MISSING",
+      "de": "Am neuen Ort fehlen geladener Boden und sichere Wege.",
+      "en": "The new site lacks loaded ground and safe routes."
+    },
+    {
+      "key": "SETTLEMENT_OVERLAP",
+      "de": "Der Platz überlappt bestehende Arbeitsstellen oder bietet zu wenig freie Fläche.",
+      "en": "This site overlaps existing workplaces or has too little free space."
+    },
+    {
+      "key": "SETTLEMENT_ROUTES_BUSY",
+      "de": "Die bisherigen Dorfwege sind noch nicht bereit.",
+      "en": "The current village routes are not ready yet."
+    },
+    {
+      "key": "SETTLEMENT_CERTIFY_FAILED",
+      "de": "Die bisherigen Arbeitswege konnten nicht gesichert werden.",
+      "en": "The existing work routes could not be secured."
+    },
+    {
+      "key": "SETTLEMENT_FOUND_FAILED",
+      "de": "Der Gründer ist noch gebunden oder der Platz ist nicht mehr gültig.",
+      "en": "The founder is still assigned elsewhere or the site is no longer valid."
+    },
+    {
+      "key": "SETTLEMENT_FOUND_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Bewohner und bisheriger Ort bleiben erhalten.",
+      "en": "Saving failed. The resident and the existing site are preserved."
+    },
+    {
+      "key": "SETTLEMENT_FOUNDED",
+      "de": "Außenlager gegründet. Wähle den Ort im Reiter Siedlungen und erteile dort Aufträge.",
+      "en": "Outpost founded. Choose it in Settlements to assign jobs there."
+    },
+    {
+      "key": "SETTLEMENT_ROUTES_PENDING",
+      "de": "Die Dorfwege sind noch nicht bereit.",
+      "en": "The village routes are not ready yet."
+    },
+    {
+      "key": "SETTLEMENT_WORK_CHECKPOINT",
+      "de": "Die laufenden Aufträge konnten nicht für den Ortswechsel gesichert werden.",
+      "en": "The current jobs could not be secured for the site switch."
+    },
+    {
+      "key": "SETTLEMENT_TARGET_ROUTES",
+      "de": "Der Zielort hat noch keine sicheren geladenen Wege.",
+      "en": "The destination does not yet have safe loaded routes."
+    },
+    {
+      "key": "SETTLEMENT_SWITCH_FAILED",
+      "de": "Speichern fehlgeschlagen. Ansicht, Vorräte und Aufträge bleiben am bisherigen Ort.",
+      "en": "Saving failed. The view, stock and jobs remain at the current site."
+    },
+    {
+      "key": "SETTLEMENT_SWITCHED",
+      "de": "Ort gewechselt. Jeder Ort behält seine Bewohner, Vorräte und Aufträge.",
+      "en": "Site switched. Each site keeps its own residents, stock and jobs."
+    },
+    {
+      "key": "SETTLEMENT_TAB",
+      "de": "Siedlungen",
+      "en": "Settlements"
+    },
+    {
+      "key": "SETTLEMENT_HELP",
+      "de": "Jeder Ort besitzt eigene Bewohner, Vorräte und Arbeitsaufträge. Der andere Ort arbeitet während des laufenden Spiels vereinfacht weiter. Pause und geschlossenes Spiel erzeugen nichts.",
+      "en": "Each site has its own residents, stock and jobs. The other site keeps working through simplified simulation while you play. Pausing or closing the game produces nothing."
+    },
+    {
+      "key": "SETTLEMENT_MANAGE",
+      "de": "Diesen Ort verwalten",
+      "en": "Manage this site"
+    },
+    {
+      "key": "SETTLEMENT_FOUND",
+      "de": "Außenlager am Standort des Gründers errichten",
+      "en": "Found an outpost at the founder’s location"
+    },
+    {
+      "key": "SETTLEMENT_HOME",
+      "de": "Heimatdorf",
+      "en": "Home village"
+    },
+    {
+      "key": "SETTLEMENT_OUTPOST",
+      "de": "Außenlager",
+      "en": "Outpost"
+    },
+    {
+      "key": "SETTLEMENT_NEAR",
+      "de": "In der Ansicht",
+      "en": "In view"
+    },
+    {
+      "key": "SETTLEMENT_FAR",
+      "de": "Arbeitet im Hintergrund",
+      "en": "Working in the background"
+    },
+    {
+      "key": "SETTLEMENT_ARRIVED",
+      "de": "Gründer angekommen. Der neue Ort beginnt mit einem eigenen leeren Lager.",
+      "en": "Founder arrived. The new site starts with its own empty store."
+    },
+    {
+      "key": "SETTLEMENT_DETAIL",
+      "de": "%s · %d Bewohner\nHolz %d · Stein %d · Nahrung %d · Wasser %d\n\n%s",
+      "en": "%s · %d residents\nWood %d · Stone %d · Food %d · Water %d\n\n%s"
     }
   ]
 }

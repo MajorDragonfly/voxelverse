@@ -244,11 +244,15 @@ func _campaign_exclusions() -> Array[Dictionary]:
 	if preload("res://world/surface/gameplay_space.gd").adapter(self) == null: return result
 	var body: Dictionary = get_node("/root/GameState").get_current_body_record()
 	if body.has("home_group"): result.append({"point": adapter.to_local(body.home_group.anchor), "radius": 4.0})
-	var village: Dictionary = body.get("tribe", {})
-	var structures: Array = village.get("housing", {}).get("homes", []).duplicate()
-	structures.append_array(village.get("husbandry", {}).get("pens", []))
-	structures.append_array(village.get("economy", {}).get("stations", {}).values())
-	if village.get("project", {}).has("position"): structures.append(village.project)
+	var Settlements = preload("res://world/tribe/settlement_collection.gd")
+	var structures: Array = []
+	for id: String in Settlements.ids(body):
+		var village: Dictionary = Settlements.village(body, id)
+		result.append({"point": adapter.to_local(village.anchor), "radius": 4.0})
+		structures.append_array(village.get("housing", {}).get("homes", []))
+		structures.append_array(village.get("husbandry", {}).get("pens", []))
+		structures.append_array(village.get("economy", {}).get("stations", {}).values())
+		if village.get("project", {}).has("position"): structures.append(village.project)
 	for object: Dictionary in structures: result.append({"point": adapter.to_local(object.position), "radius": 3.0})
 	if body.has("tribal_neighbor"): result.append({"point": adapter.to_local(body.tribal_neighbor.anchor), "radius": 4.0})
 	return result

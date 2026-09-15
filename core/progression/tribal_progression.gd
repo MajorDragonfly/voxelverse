@@ -100,7 +100,7 @@ func goals() -> Array[Dictionary]:
 ## before/after must enclose ONE resident's arrived work step. A UI action is not evidence.
 func observe(before: Dictionary, after: Dictionary, actor_id: String, body: Dictionary, campaign: Dictionary, phase: int) -> Dictionary:
 	var rejected: Dictionary = {"changed": false, "rewards": []}
-	if phase != 1 or before.get("id") != after.get("id") or not Tribe.validate(before, body, campaign).is_empty() or not Tribe.validate(after, body, campaign).is_empty():
+	if phase != 1 or before.get("id") != after.get("id") or not _village_problem(before, body, campaign).is_empty() or not _village_problem(after, body, campaign).is_empty():
 		return rejected
 	if not data["campaign_id"].is_empty() and not matches_campaign(campaign):
 		return rejected
@@ -188,7 +188,7 @@ func observe(before: Dictionary, after: Dictionary, actor_id: String, body: Dict
 ## Called once per active simulation step, after the village has updated.
 func observe_supply(village: Dictionary, body: Dictionary, campaign: Dictionary, phase: int, delta: float) -> Dictionary:
 	var result: Dictionary = {"changed": false, "rewards": []}
-	if phase != 1 or not is_finite(delta) or delta <= 0.0 or not EconomyProgress.supported(village) or not Tribe.validate(village, body, campaign).is_empty() or not matches_campaign(campaign):
+	if phase != 1 or not is_finite(delta) or delta <= 0.0 or not EconomyProgress.supported(village) or not _village_problem(village, body, campaign).is_empty() or not matches_campaign(campaign):
 		return result
 	# Work observations own the resident identities and initialize from real counters.
 	var entry: Dictionary = data["villages"].get(village["id"], {})
@@ -312,3 +312,7 @@ static func _valid_contributions(value: Variant, members: Dictionary, maximum: i
 		if not members.has(id) or not Rules.is_integer(value[id], 1, maximum):
 			return false
 	return true
+
+static func _village_problem(village: Dictionary, body: Dictionary, campaign: Dictionary) -> String:
+	var id: String = str(body.get("_settlement_id", ""))
+	return Tribe.validate(village, body, campaign) if id.is_empty() else Tribe.validate_settlement(village, body, campaign, id)

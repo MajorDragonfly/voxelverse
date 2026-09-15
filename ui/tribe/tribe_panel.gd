@@ -574,3 +574,8 @@ func _apply_hud_fonts(node: Node, font_scale: float) -> void:
 			node.add_theme_font_size_override("font_size", target)
 	for child: Node in node.get_children(true):
 		_apply_hud_fonts(child, font_scale)
+
+func add_settlements(runtime: Node) -> void:
+	var page := preload("res://ui/tribe/settlement_panel.gd").new()
+	page.runtime = runtime
+	_tabs.add_child(page)

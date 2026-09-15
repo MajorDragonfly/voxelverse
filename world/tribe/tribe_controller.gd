@@ -3,6 +3,9 @@ extends Node
 signal order_resolved(order: StringName, command_id: String, accepted: bool)
 var _order_sequence: int = 0
 
+const Settlements = preload("res://world/tribe/settlement_collection.gd")
+const SettlementRuntime = preload("res://world/tribe/settlement_runtime.gd")
+var settlements: Node
 const Husbandry = preload("res://world/tribe/village_husbandry.gd")
 const HusbandryRuntime = preload("res://world/tribe/husbandry_runtime.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
@@ -46,6 +49,7 @@ var _shelters: Node3D
 var _growth_retry: float = 0.0
 var _player_processing: Dictionary = {}
 var _hidden_layers: Array[CanvasLayer] = []
+var _player_visible_before: bool = true
 var _original_camera: Camera3D
 var _focus := Vector3.ZERO
 var _zoom: float = 26.0
@@ -76,6 +80,9 @@ func _ready() -> void:
 	domestication = preload("res://world/domestication/campaign_domestication.gd").new()
 	domestication.name = "Domestication"
 	add_child(domestication)
+	settlements = SettlementRuntime.new()
+	settlements.controller = self
+	add_child(settlements)
 
 func _process(delta: float) -> void:
 	var flow := get_node_or_null("/root/SessionFlow")
@@ -96,7 +103,7 @@ func _process(delta: float) -> void:
 		_focus += Space.frame(self, anchor()) * pan * delta * 10.0
 		var offset: Vector3 = _focus - anchor()
 		offset = offset.slide(Space.up(self, anchor()))
-		_focus = anchor() + offset.limit_length(NeighborRuntime.Model.SITE_RADIUS if body().has("tribal_neighbor") else 10.0)
+		_focus = anchor() + offset.limit_length(NeighborRuntime.Model.SITE_RADIUS if village_body().has("tribal_neighbor") else 10.0)
 		_update_camera()
 	_timer -= delta
 	if _timer <= 0:
@@ -121,8 +128,14 @@ func body() -> Dictionary:
 	return _state.get_current_body_record()
 
 func village() -> Dictionary:
-	var value: Variant = body().get("tribe", {})
+	var value: Variant = Settlements.village(body())
 	return value if value is Dictionary else {}
+
+func village_body() -> Dictionary:
+	return Settlements.view(body())
+
+func replace_village(data: Dictionary) -> void:
+	Settlements.replace_village(body(), data)
 
 func anchor() -> Vector3:
 	return Space.resolve(self, village()["anchor"])
@@ -184,7 +197,7 @@ func confirmed_handoff(token: String) -> Dictionary:
 	return _prepared.duplicate(true)
 
 func _activate() -> void:
-	var problem: String = Model.validate(village(), body(), _state.campaign.data)
+	var problem: String = Settlements.validate(body(), _state.campaign.data) if body().has("settlements") else Model.validate(village(), body(), _state.campaign.data)
 	if not problem.is_empty():
 		status = problem
 		return
@@ -201,9 +214,10 @@ func _activate() -> void:
 		return
 	# The home controller refreshes on a slower tick. Install the visible nest
 	# with this runtime, so a cold start cannot briefly expose the default home.
-	get_parent().global_position = Space.resolve(self, village()["anchor"])
+	get_parent().global_position = Space.resolve(self, body().home_group.anchor)
 	_campaign_id = str(_state.campaign.data["id"])
 	_body_id = _state.active_body_id
+	_player_visible_before = player.visible
 	_player_processing = {"process": player.is_processing(), "physics": player.is_physics_processing(), "input": player.is_processing_input(), "unhandled": player.is_processing_unhandled_input(), "collision_layer": player.collision_layer, "collision_mask": player.collision_mask}
 	player.collision_layer = 0
 	# The player is now a resident on the same navigation graph as companions.
@@ -221,8 +235,8 @@ func _activate() -> void:
 		blueprint = Assembly.create_default()
 	for i in range(village()["members"].size()):
 		var member: Dictionary = village()["members"][i]
-		var actor: CharacterBody3D = player if i == 0 else Companion.new()
-		if i != 0:
+		var actor: CharacterBody3D = player if member.id == _state.campaign.data.player_object_id else Companion.new()
+		if actor != player:
 			get_parent().get_parent().add_child(actor)
 			actor.setup(self, member, blueprint, i)
 			actor.set_physics_process(false)
@@ -230,6 +244,7 @@ func _activate() -> void:
 		actor.velocity = Vector3.ZERO
 		actors[member["id"]] = actor
 		selected.append(str(member["id"]))
+	player.visible = actors.has(str(_state.campaign.data.player_object_id))
 	camera = Camera3D.new()
 	get_parent().get_parent().add_child(camera)
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
@@ -285,6 +300,7 @@ func _deactivate() -> void:
 			var indicator: Node = player.get_node_or_null(child_name)
 			if indicator != null:
 				indicator.queue_free()
+		player.visible = _player_visible_before
 		player.collision_layer = int(_player_processing.get("collision_layer", 1))
 		player.collision_mask = int(_player_processing.get("collision_mask", 5))
 		player.set_process(_player_processing.get("process", true))
@@ -419,7 +435,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 		if data["project"].is_empty():
 			if order in Economy.STATIONS.keys() + Housing.BUILDS:
 				var snapped: Vector3 = navigation.snap(destination)
-				if snapped.distance_to(destination) > 1.8 or neighbors.occupies(snapped) or not (navigation.free_shelter(snapped, data, order) if order in Housing.BUILDS else navigation.free_workplace(snapped, data, order)):
+				if snapped.distance_to(destination) > 1.8 or neighbors.occupies(snapped) or (settlements != null and settlements.occupies(snapped)) or not (navigation.free_shelter(snapped, data, order) if order in Housing.BUILDS else navigation.free_workplace(snapped, data, order)):
 					status = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
 					return false
 				destination = snapped
@@ -468,7 +484,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 	_transaction = true
 	var success: bool = _saves.save_now()
 	if not success:
-		body()["tribe"] = before
+		replace_village(before)
 	_transaction = false
 	_routes.clear()
 	_goals.clear()
@@ -493,7 +509,7 @@ func _physics_process(delta: float) -> void:
 	var simulation_delta: float = _state.simulation_delta(delta)
 	if simulation_delta <= 0:
 		return
-	var owner: Dictionary = body().get("village_simulation", {})
+	var owner: Dictionary = village_body().get("village_simulation", {})
 	if not owner.is_empty():
 		if owner.owner != "near": return
 		owner.cursor = _state.campaign.data.elapsed_seconds
@@ -718,7 +734,7 @@ func receive_resource_batch(batch: Dictionary) -> bool:
 	if problem.is_empty() and navigation.route(anchor(), Space.resolve(self, batch["position"])).is_empty():
 		problem = "Die Abholstelle ist nicht erreichbar."
 	if not problem.is_empty():
-		body()["tribe"] = before
+		replace_village(before)
 		status = problem
 		return false
 	return _save_economy(before)
@@ -727,7 +743,7 @@ func _save_economy(before: Dictionary) -> bool:
 	_transaction = true
 	var success: bool = _saves.save_now()
 	if not success:
-		body()["tribe"] = before
+		replace_village(before)
 	_transaction = false
 	_routes.clear()
 	_goals.clear()
@@ -778,9 +794,9 @@ func prepare_far_simulation() -> Dictionary:
 	for batch: Dictionary in data.economy.incoming: places.append(batch.position)
 	for pen: Dictionary in data.husbandry.pens: places.append(pen.entrance)
 	for record: Dictionary in data.husbandry.records.values(): places.append(record.pickup)
-	if body().has("tribal_neighbor"):
-		places.append(body().tribal_neighbor.anchor)
-		for resident: Dictionary in body().tribal_neighbor.members:
+	if village_body().has("tribal_neighbor"):
+		places.append(village_body().tribal_neighbor.anchor)
+		for resident: Dictionary in village_body().tribal_neighbor.members:
 			places.append(resident.position)
 			places.append(resident.workplace)
 	if not data.project.is_empty(): places.append(data.project.get("entrance", data.project.get("position", data.anchor)))
@@ -842,6 +858,7 @@ func _update_selection() -> void:
 		cargo.material_override.albedo_color = Color(Economy.Resources.definition(kind).get("color", "ffffff"))
 
 func _grow_residents(delta: float) -> void:
+	if body().has("settlements") and Settlements.resident_count(body()) >= Housing.MAX_RESIDENTS: return
 	_growth_retry = maxf(0.0, _growth_retry - delta)
 	if not Housing.tick(village(), delta) or _growth_retry > 0:
 		return
@@ -861,7 +878,7 @@ func _grow_residents(delta: float) -> void:
 		status = "Dorfwachstum wartet auf einen freien, erreichbaren Eingang."
 		return
 	var before: Dictionary = village().duplicate(true)
-	var member: Dictionary = Housing.add_resident(village(), Space.encode(self, location))
+	var member: Dictionary = Housing.add_resident(village(), Space.encode(self, location), Settlements.next_resident_id(body()) if body().has("settlements") else "")
 	if not _save_economy(before):
 		_growth_retry = 5.0
 		return
@@ -880,7 +897,7 @@ func _grow_residents(delta: float) -> void:
 func navigation_extent() -> int:
 	if is_instance_valid(domestication) and domestication._ready_runtime:
 		return 20
-	return NeighborRuntime.Model.NAV_EXTENT if body().has("tribal_neighbor") else Navigation.RADIUS
+	return NeighborRuntime.Model.NAV_EXTENT if village_body().has("tribal_neighbor") else Navigation.RADIUS
 
 func map_focus() -> Vector3:
 	return _focus

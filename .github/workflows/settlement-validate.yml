@@ -1,0 +1,55 @@
+name: Settlement gameplay render
+
+on:
+  pull_request:
+    paths:
+      - 'world/tribe/**'
+      - 'ui/tribe/**'
+      - 'core/campaign/far_scheduler.gd'
+      - 'core/persistence/save_participants.gd'
+      - 'autoload/save_game_service.gd'
+      - 'core/diagnostics/settlement_runtime_probe.gd'
+      - 'tests/settlement_*'
+      - 'tools/review_settlements.py'
+      - '.github/workflows/settlement-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: settlement-render-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  settlements:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install local software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Import the unchanged review source once
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests --skip-main --output "${{ runner.temp }}/settlement-import"
+      - name: Render real founding, work and site switching in DE and EN
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1080x24'
+          python3 tools/review_settlements.py --godot "${{ steps.engine.outputs.godot }}"
+          --output "${{ runner.temp }}/settlement-review"
+      - name: Upload exact-source logs and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: settlement-review
+          path: |
+            ${{ runner.temp }}/settlement-import
+            ${{ runner.temp }}/settlement-review
+          retention-days: 14

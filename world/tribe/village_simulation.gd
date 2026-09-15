@@ -70,7 +70,7 @@ static func path_to(data: Dictionary, simulation: Dictionary, from: Variant, to:
 	path.append_array(last)
 	return path
 
-static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, observer: Callable = Callable()) -> bool:
+static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, observer: Callable = Callable(), include_player: bool = false) -> bool:
 	var simulation: Dictionary = body.get("village_simulation", {})
 	if simulation.is_empty() or simulation.owner != "far": return false
 	var delta: float = minf(STEP, clock - float(simulation.cursor))
@@ -81,7 +81,7 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
 	Economy.tick(data, delta)
 	for member: Dictionary in data.members:
 		# The traveling player cannot simultaneously work on another planet.
-		if member.id == simulation.traveler: continue
+		if member.id == simulation.traveler and not include_player: continue
 		Work.prepare(data, member, delta)
 		if member.order == "wait" or member.blocked: continue
 		var target: Variant = Work.target(data, member)

@@ -29,7 +29,9 @@ static func describe(campaign: Dictionary, body_key: String, current_phase: int,
 	var rules: Dictionary = PHASES.get(target, {})
 	if rules.is_empty():
 		return {}
-	var village: Dictionary = campaign.get("bodies", {}).get(body_key, {}).get("tribe", {})
+	var Settlements = preload("res://world/tribe/settlement_collection.gd")
+	var body: Dictionary = campaign.get("bodies", {}).get(body_key, {})
+	var village: Dictionary = Settlements.village(body, Settlements.origin_id(body))
 	var owned: bool = not village.is_empty() and village.get("species_id") == campaign.get("player_species_id") and village.get("faction_id") == campaign.get("player_faction_id")
 	var facts: Dictionary = {"housing": owned and int(village.get("huts", 0)) >= 2,
 		"craft": owned and int(village.get("tools", 0)) >= 1,

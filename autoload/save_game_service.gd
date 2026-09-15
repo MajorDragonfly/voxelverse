@@ -41,6 +41,7 @@ var _write_blocked: bool = false
 var last_migration_report: Array[String] = []
 var last_error: String = ""
 var _body_transfer: Dictionary = {}
+const Settlements = preload("res://world/tribe/settlement_collection.gd")
 const VillageSimulation = preload("res://world/tribe/village_simulation.gd")
 var _saving: bool = false
 var _transition_busy: bool = false
@@ -921,7 +922,7 @@ func prepare_body_departure(controller: Node) -> bool:
 	var player: Dictionary = _export_player_state()
 	var checkpoint: Dictionary = {"state": state.export_state(), "progression": get_node("/root/ProgressionService").export_state(),
 		"player": player.duplicate(true), "regions": _regions_by_body.duplicate(true)}
-	if body.has("tribe"):
+	if not Settlements.ids(body).is_empty():
 		if controller == null or not controller._active or controller._body_id != body.id:
 			last_error = "Bitte warten, bis das Dorf und seine Wege bereit sind."
 			return false
@@ -929,7 +930,7 @@ func prepare_body_departure(controller: Node) -> bool:
 		if simulation.is_empty():
 			last_error = "Die Dorfwege konnten noch nicht vollständig gesichert werden."
 			return false
-		body.village_simulation = simulation
+		Settlements.set_simulation(body, simulation)
 	body.visit = {"schema": 1, "system_seed": state.system_seed, "planet_index": state.current_planet_index, "player": player.duplicate(true)}
 	if not save_now():
 		body.clear()
@@ -954,13 +955,19 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 	target = state.campaign.body_record(target.id)
 	# Drain only active campaign time already owed to this returning village.
 	# The bounded slices yield while the loading overlay keeps gameplay frozen.
-	var simulation: Dictionary = target.get("village_simulation", {})
-	while simulation.get("owner") == "far" and float(simulation.cursor) + 0.000001 < float(state.campaign.data.elapsed_seconds):
-		var started: int = Time.get_ticks_usec()
-		for index in range(32):
-			if not VillageSimulation.advance(target, float(state.campaign.data.elapsed_seconds), float(get_node("/root/ProgressionService").get_behavior_effect("group_cooperation", 1).value), get_node("/root/ProgressionService").record_far_work.bind(state)): break
-			if Time.get_ticks_usec() - started >= 2000: break
-		await get_tree().process_frame
+	# Settle every local cursor while the traveler is still absent. Otherwise
+	# origin debt could incorrectly let the player work during the return trip
+	# when the selected destination is the secondary settlement.
+	for settlement_id: String in Settlements.ids(target):
+		var instance: Dictionary = Settlements.view(target, settlement_id)
+		var pending: Dictionary = instance.get("village_simulation", {})
+		while pending.get("owner") == "far" and float(pending.cursor) + 0.000001 < float(state.campaign.data.elapsed_seconds):
+			var started: int = Time.get_ticks_usec()
+			for index in range(32):
+				if not VillageSimulation.advance(instance, float(state.campaign.data.elapsed_seconds), float(get_node("/root/ProgressionService").get_behavior_effect("group_cooperation", 1).value), get_node("/root/ProgressionService").record_far_work.bind(state)): break
+				if Time.get_ticks_usec() - started >= 2000: break
+			await get_tree().process_frame
+	var simulation: Dictionary = Settlements.view(target).get("village_simulation", {})
 	if not simulation.is_empty():
 		simulation.owner = "near"
 		simulation.legs.clear()
@@ -976,11 +983,12 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 		var address: Dictionary = player.surface_address
 		var forward: Vector3 = -Surface.Cube.frame(Surface.Cube.vector(Surface.Cube.direction(address.face, address.u, address.v))).z
 		player.surface_forward = [forward.x, forward.y, forward.z]
-	if target.has("tribe"):
+	var resident: Dictionary = Settlements.player_member(target, state.campaign.data)
+	if not resident.is_empty():
 		# The player traveled; remote residents retained their own needs and cargo.
-		target.tribe.members[0].hunger = float(player.get("hunger_ratio", 1.0)) * 100.0
-		target.tribe.members[0].hydration = float(player.get("thirst_ratio", 1.0)) * 100.0
-		player.surface_address = target.tribe.members[0].position.duplicate(true)
+		resident.hunger = float(player.get("hunger_ratio", 1.0)) * 100.0
+		resident.hydration = float(player.get("thirst_ratio", 1.0)) * 100.0
+		player.surface_address = resident.position.duplicate(true)
 	var player_problem: String = Surface.player_problem(player, target)
 	if not player_problem.is_empty():
 		last_error = player_problem
@@ -993,7 +1001,7 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 
 func complete_body_arrival() -> bool:
 	var state: Node = get_node("/root/GameState")
-	var simulation: Dictionary = state.get_current_body_record().get("village_simulation", {})
+	var simulation: Dictionary = Settlements.view(state.get_current_body_record()).get("village_simulation", {})
 	var changed: bool = not simulation.is_empty() and simulation.owner != "near"
 	if changed:
 		simulation.owner = "near"
@@ -1064,6 +1072,14 @@ func _export_player_state() -> Dictionary:
 	if player != null and player.has_method("export_runtime_state"):
 		var value: Variant = player.call("export_runtime_state")
 		_last_player_state = _dict(value)
+	var state: Node = get_node("/root/GameState")
+	var body: Dictionary = state.get_current_body_record()
+	if body.has("settlements"):
+		var resident: Dictionary = Settlements.player_member(body, state.campaign.data)
+		if not resident.is_empty():
+			_last_player_state.surface_address = resident.position.duplicate(true)
+			_last_player_state.hunger_ratio = float(resident.hunger) / 100.0
+			_last_player_state.thirst_ratio = float(resident.hydration) / 100.0
 	return _last_player_state.duplicate(true)
 
 

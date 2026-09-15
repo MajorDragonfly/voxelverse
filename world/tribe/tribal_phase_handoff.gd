@@ -22,7 +22,7 @@ static func install(campaign: Dictionary, body_id: String, handoff: Dictionary) 
 	var body: Dictionary = campaign["bodies"].get(body_id, {})
 	if body.is_empty():
 		return "Dem Epochenwechsel fehlt sein aktiver Körper."
-	if body.has("tribe"):
+	if body.has("tribe") or body.has("settlements"):
 		return "Ein vorhandener Stamm darf beim Epochenwechsel nicht ersetzt werden."
 	var problem: String = Model.validate(handoff, body, campaign)
 	if not problem.is_empty():

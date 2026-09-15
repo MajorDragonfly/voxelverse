@@ -76,7 +76,7 @@ func apply_record(record: Dictionary) -> void:
 		if _preview.motion_mode != "edit": _preview.set_motion("edit")
 
 func _physics_process(delta: float) -> void:
-	if not is_instance_valid(runtime) or not runtime.is_active(): return
+	if not is_instance_valid(runtime) or not runtime.is_active() or not runtime.animal_is_near(object_id): return
 	var record: Dictionary = runtime.controller.record(object_id)
 	if record.is_empty(): return
 	apply_record(record)

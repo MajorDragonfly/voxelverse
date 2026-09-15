@@ -1,5 +1,6 @@
 extends RefCounted
 ## Optional body.domesticated_animals; lives in the ONE campaign snapshot.
+const Settlements = preload("res://world/tribe/settlement_collection.gd")
 const State = preload("res://world/domestication/animal_state.gd")
 const D1 = preload("res://world/fauna/domestication/domestication_contract.gd")
 const SCHEMA: int = 1
@@ -37,11 +38,12 @@ static func validate_body(body: Dictionary, campaign: Dictionary) -> String:
 	if not data.get("sources") is Dictionary or data["sources"].size() != registry["animals"].size():
 		return "Gespeicherter Tierkörper fehlt."
 	if registry["animals"].is_empty(): return ""
-	var tribe: Variant = body.get("tribe")
+	var tribe: Variant = Settlements.village(body, Settlements.origin_id(body))
 	if not tribe is Dictionary or tribe.get("body_id") != body["id"]:
 		return "Tierhaltung benötigt den zugehörigen Stamm."
 	var members: Array = []
-	for member: Dictionary in tribe.get("members", []): members.append(member["id"])
+	for settlement_id: String in Settlements.ids(body):
+		for member: Dictionary in Settlements.village(body, settlement_id).get("members", []): members.append(member["id"])
 	for id: String in registry["animals"]:
 		var animal: Dictionary = registry["animals"][id]
 		if id in members or animal["species_id"] == campaign.get("player_species_id"):

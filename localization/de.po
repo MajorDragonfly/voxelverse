@@ -2207,3 +2207,93 @@ msgstr "ART ERKANNT"
 
 msgid "HUD_SCAN_CONTROLS"
 msgstr "%s · Scan schließen\nJ · Alle Werte im Entdeckungsbuch"
+
+msgid "SETTLEMENT_NOT_READY"
+msgstr "Der Ort ist noch nicht bereit."
+
+msgid "SETTLEMENT_SPHERE_REQUIRED"
+msgstr "Ein Außenlager benötigt eine Kugelwelt."
+
+msgid "SETTLEMENT_LIMIT"
+msgstr "Beide Siedlungsorte sind gegründet."
+
+msgid "SETTLEMENT_SELECT_FOUNDER"
+msgstr "Wähle einen einzelnen Gefährten als Gründer."
+
+msgid "SETTLEMENT_KEEP_PLAYER"
+msgstr "Deine Kreatur bleibt im Heimatdorf; wähle einen Gefährten."
+
+msgid "SETTLEMENT_FOUNDER_BUSY"
+msgstr "Der Gründer muss seinen Auftrag abschließen und ohne Fracht warten."
+
+msgid "SETTLEMENT_WALK_FIRST"
+msgstr "Schicke den Gründer per Rechtsklick 14–18 m vom Dorfplatz weg. Gründe nach seiner Ankunft hier ein Außenlager."
+
+msgid "SETTLEMENT_ROUTE_MISSING"
+msgstr "Zum neuen Platz fehlt ein sicherer Weg."
+
+msgid "SETTLEMENT_GROUND_MISSING"
+msgstr "Am neuen Ort fehlen geladener Boden und sichere Wege."
+
+msgid "SETTLEMENT_OVERLAP"
+msgstr "Der Platz überlappt bestehende Arbeitsstellen oder bietet zu wenig freie Fläche."
+
+msgid "SETTLEMENT_ROUTES_BUSY"
+msgstr "Die bisherigen Dorfwege sind noch nicht bereit."
+
+msgid "SETTLEMENT_CERTIFY_FAILED"
+msgstr "Die bisherigen Arbeitswege konnten nicht gesichert werden."
+
+msgid "SETTLEMENT_FOUND_FAILED"
+msgstr "Der Gründer ist noch gebunden oder der Platz ist nicht mehr gültig."
+
+msgid "SETTLEMENT_FOUND_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Bewohner und bisheriger Ort bleiben erhalten."
+
+msgid "SETTLEMENT_FOUNDED"
+msgstr "Außenlager gegründet. Wähle den Ort im Reiter Siedlungen und erteile dort Aufträge."
+
+msgid "SETTLEMENT_ROUTES_PENDING"
+msgstr "Die Dorfwege sind noch nicht bereit."
+
+msgid "SETTLEMENT_WORK_CHECKPOINT"
+msgstr "Die laufenden Aufträge konnten nicht für den Ortswechsel gesichert werden."
+
+msgid "SETTLEMENT_TARGET_ROUTES"
+msgstr "Der Zielort hat noch keine sicheren geladenen Wege."
+
+msgid "SETTLEMENT_SWITCH_FAILED"
+msgstr "Speichern fehlgeschlagen. Ansicht, Vorräte und Aufträge bleiben am bisherigen Ort."
+
+msgid "SETTLEMENT_SWITCHED"
+msgstr "Ort gewechselt. Jeder Ort behält seine Bewohner, Vorräte und Aufträge."
+
+msgid "SETTLEMENT_TAB"
+msgstr "Siedlungen"
+
+msgid "SETTLEMENT_HELP"
+msgstr "Jeder Ort besitzt eigene Bewohner, Vorräte und Arbeitsaufträge. Der andere Ort arbeitet während des laufenden Spiels vereinfacht weiter. Pause und geschlossenes Spiel erzeugen nichts."
+
+msgid "SETTLEMENT_MANAGE"
+msgstr "Diesen Ort verwalten"
+
+msgid "SETTLEMENT_FOUND"
+msgstr "Außenlager am Standort des Gründers errichten"
+
+msgid "SETTLEMENT_HOME"
+msgstr "Heimatdorf"
+
+msgid "SETTLEMENT_OUTPOST"
+msgstr "Außenlager"
+
+msgid "SETTLEMENT_NEAR"
+msgstr "In der Ansicht"
+
+msgid "SETTLEMENT_FAR"
+msgstr "Arbeitet im Hintergrund"
+
+msgid "SETTLEMENT_ARRIVED"
+msgstr "Gründer angekommen. Der neue Ort beginnt mit einem eigenen leeren Lager."
+
+msgid "SETTLEMENT_DETAIL"
+msgstr "%s · %d Bewohner\nHolz %d · Stein %d · Nahrung %d · Wasser %d\n\n%s"
