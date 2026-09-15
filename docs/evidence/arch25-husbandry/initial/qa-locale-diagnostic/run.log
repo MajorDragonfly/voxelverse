@@ -1,0 +1,35 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+WARNING: Could not commit save: user://husbandry-locale-block/campaign.json (Can't open file)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1109)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:156)
+         [2] save_now (res://autoload/save_game_service.gd:99)
+         [3] request_phase_transition (res://autoload/save_game_service.gd:816)
+         [4] _confirm (res://ui/tribe/tribe_panel.gd:287)
+         [5] _click (res://tests/tribal_age_test.gd:380)
+WARNING: Ungültiges Stammesmitglied.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1109)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:127)
+         [2] save_now (res://autoload/save_game_service.gd:99)
+         [3] _commit_order (res://world/tribe/tribe_controller.gd:485)
+         [4] issue_order (res://world/tribe/tribe_controller.gd:398)
+         [5] <anonymous lambda> (res://ui/tribe/tribe_panel.gd:489)
+         [6] _click (res://tests/tribal_age_test.gd:380)
+TRIBAL_CHECK_FAILED: Real care order did not collect feed or water
+WARNING: Ungültiges Stammesmitglied.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1109)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:127)
+         [2] save_now (res://autoload/save_game_service.gd:99)
+         [3] _run (res://tests/husbandry_localization_test.gd:101)
+         [4] _layouts (res://tests/husbandry_localization_test.gd:223)
+         [5] _frames (res://tests/tribal_age_test.gd:386)
+TRIBAL_CHECK_FAILED: Care transport could not save
+TRIBAL_CHECK_FAILED: Reload changed site identities or care cargo
+HUSBANDRY_LOCALIZATION_RESULT {"checks":518,"failures":["Real care order did not collect feed or water","Care transport could not save","Reload changed site identities or care cargo"],"passed":false}
+{"failures":["Real care order did not collect feed or water","Care transport could not save","Reload changed site identities or care cargo"],"passed":false,"test":"tribal_age"}

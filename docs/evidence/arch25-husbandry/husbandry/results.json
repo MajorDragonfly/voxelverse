@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "command": [
+    "/tmp/voxelverse-validation-editor-32j62ipy/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/0c3a1cbd3edc/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--headless",
+    "--script",
+    "res://tests/husbandry_localization_test.gd"
+  ],
+  "source_before": {
+    "commit": "b038fecf476825e99f8c405af640f2bd3ff0a1da",
+    "tracked_worktree_dirty": false
+  },
+  "source_after": {
+    "commit": "b038fecf476825e99f8c405af640f2bd3ff0a1da",
+    "tracked_worktree_dirty": false
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "mode": "headless",
+  "test": {
+    "checks": 518,
+    "failures": [],
+    "passed": true,
+    "reload_delta": {}
+  },
+  "screenshots": []
+}
