@@ -1,0 +1,65 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+TRIBAL_STAGE: tribe-de-1920x1080-tab0-scale100-top
+TRIBAL_STAGE: tribe-de-1920x1080-tab0-scale100-actions
+TRIBAL_STAGE: tribe-de-1920x1080-tab1-scale100-top
+TRIBAL_STAGE: tribe-de-1920x1080-tab1-scale100-actions
+TRIBAL_STAGE: tribe-en-1920x1080-tab0-scale100-top
+TRIBAL_STAGE: tribe-en-1920x1080-tab0-scale100-actions
+TRIBAL_STAGE: tribe-en-1920x1080-tab1-scale100-top
+TRIBAL_STAGE: tribe-en-1920x1080-tab1-scale100-actions
+TRIBAL_STAGE: tribe-de-1920x1080-tab0-scale150-top
+TRIBAL_STAGE: tribe-de-1920x1080-tab0-scale150-actions
+TRIBAL_STAGE: tribe-de-1920x1080-tab1-scale150-top
+TRIBAL_STAGE: tribe-de-1920x1080-tab1-scale150-actions
+TRIBAL_STAGE: tribe-en-1920x1080-tab0-scale150-top
+TRIBAL_STAGE: tribe-en-1920x1080-tab0-scale150-actions
+TRIBAL_STAGE: tribe-en-1920x1080-tab1-scale150-top
+TRIBAL_STAGE: tribe-en-1920x1080-tab1-scale150-actions
+TRIBAL_STAGE: tribe-de-1280x720-tab0-scale100-top
+TRIBAL_STAGE: tribe-de-1280x720-tab0-scale100-actions
+TRIBAL_STAGE: tribe-de-1280x720-tab1-scale100-top
+TRIBAL_STAGE: tribe-de-1280x720-tab1-scale100-actions
+TRIBAL_STAGE: tribe-en-1280x720-tab0-scale100-top
+TRIBAL_STAGE: tribe-en-1280x720-tab0-scale100-actions
+TRIBAL_STAGE: tribe-en-1280x720-tab1-scale100-top
+TRIBAL_STAGE: tribe-en-1280x720-tab1-scale100-actions
+TRIBAL_STAGE: tribe-de-1280x720-tab0-scale150-top
+TRIBAL_STAGE: tribe-de-1280x720-tab0-scale150-actions
+TRIBAL_STAGE: tribe-de-1280x720-tab1-scale150-top
+TRIBAL_STAGE: tribe-de-1280x720-tab1-scale150-actions
+TRIBAL_STAGE: tribe-en-1280x720-tab0-scale150-top
+TRIBAL_STAGE: tribe-en-1280x720-tab0-scale150-actions
+TRIBAL_STAGE: tribe-en-1280x720-tab1-scale150-top
+TRIBAL_STAGE: tribe-en-1280x720-tab1-scale150-actions
+TRIBAL_STAGE: tribe-de-800x600-tab0-scale100-top
+TRIBAL_STAGE: tribe-de-800x600-tab0-scale100-actions
+TRIBAL_STAGE: tribe-de-800x600-tab1-scale100-top
+TRIBAL_STAGE: tribe-de-800x600-tab1-scale100-actions
+TRIBAL_STAGE: tribe-en-800x600-tab0-scale100-top
+TRIBAL_STAGE: tribe-en-800x600-tab0-scale100-actions
+TRIBAL_STAGE: tribe-en-800x600-tab1-scale100-top
+TRIBAL_STAGE: tribe-en-800x600-tab1-scale100-actions
+TRIBAL_STAGE: tribe-de-800x600-tab0-scale150-top
+TRIBAL_STAGE: tribe-de-800x600-tab0-scale150-actions
+TRIBAL_STAGE: tribe-de-800x600-tab1-scale150-top
+TRIBAL_STAGE: tribe-de-800x600-tab1-scale150-actions
+TRIBAL_STAGE: tribe-en-800x600-tab0-scale150-top
+TRIBAL_STAGE: tribe-en-800x600-tab0-scale150-actions
+TRIBAL_STAGE: tribe-en-800x600-tab1-scale150-top
+TRIBAL_STAGE: tribe-en-800x600-tab1-scale150-actions
+WARNING: Could not commit save: user://tribe-locale-blocked/save.json (Can't open file)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1093)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:155)
+         [2] save_now (res://autoload/save_game_service.gd:98)
+         [3] _commit_order (res://world/tribe/tribe_controller.gd:469)
+         [4] issue_order (res://world/tribe/tribe_controller.gd:382)
+         [5] _run (res://tests/tribe_localization_test.gd:103)
+         [6] _frames (res://tests/tribal_age_test.gd:386)
+TRIBE_LOCALIZATION_CHECKS: 847
+{"failures":[],"passed":true,"test":"tribal_age"}
