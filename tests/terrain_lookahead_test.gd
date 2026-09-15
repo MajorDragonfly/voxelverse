@@ -6,6 +6,8 @@ var failures: Array[String] = []
 var terrain: Node3D
 var player: CharacterBody3D
 var metrics: Dictionary = {}
+var residency_checks: int = 0
+var residency_states: Dictionary = {}
 
 func _initialize() -> void: call_deferred("_run")
 
@@ -34,6 +36,7 @@ func _run() -> void:
 	var tangent: Vector3 = Cube.frame(up).x
 	var start: Array = Cube.cartesian(player.location(), terrain.surface.body.radius)
 	_expect(terrain.ground_ready(start), "Forced seam placement lacks the real floor.")
+	_check_residency()
 	var speed: float = player.move_speed
 	player.velocity = tangent * speed
 	var movement: Vector3 = player._prepare_surface_movement(-tangent * speed, 1.0 / 60.0)
@@ -76,6 +79,7 @@ func _run() -> void:
 		if Time.get_ticks_msec() > deadline: _expect(false, "Staging preparation timed out."); await _finish(); return
 		await process_frame
 	terrain._collect_job()
+	_check_residency()
 	_expect(not terrain._pending.is_empty(), "Fixture did not require a changed terrain patch.")
 	if terrain._pending.is_empty(): await _finish(); return
 	var id: String = ""
@@ -91,6 +95,7 @@ func _run() -> void:
 	# old floor intact and the new node invisible until the whole cover exists.
 	for step in range(5):
 		terrain._build_next()
+		_check_residency()
 		_expect(terrain.ground_ready(start), "Partial upload removed the old floor.")
 		if terrain._staging[id].has("node"): break
 	var unpublished: Node3D = terrain._staging[id].node
@@ -98,6 +103,7 @@ func _run() -> void:
 	_expect(not unpublished.visible, "Incomplete terrain became visible.")
 	for step in range(2):
 		terrain._build_next()
+		_check_residency()
 		if terrain._staging[id].has("collider"): break
 	var staged_body: StaticBody3D = terrain._staging[id].collider
 	var body_reference: WeakRef = weakref(staged_body)
@@ -109,6 +115,7 @@ func _run() -> void:
 	terrain.set_motion_hint(up, tangent * 24.0)
 	terrain.stream_at(up)
 	terrain._process(1.0 / 60.0)
+	_check_residency()
 	_expect(terrain.updates == published and terrain.discarded_publications > 0, "Obsolete partial publication replaced the valid floor.")
 	unpublished = null
 	staged_body = null
@@ -116,7 +123,11 @@ func _run() -> void:
 	_expect(reference.get_ref() == null, "Discarded staged node remained allocated.")
 	_expect(body_reference.get_ref() == null, "Discarded staged physics body remained allocated.")
 	await _drain(start)
+	_expect(terrain.cache_hits > 0, "Reversal fixture never reused a cached mesh.")
+	for state in ["shared", "mesh_before_node", "retired", "cache", "empty"]:
+		_expect(residency_states.has(state), "Residency fixture missed state: " + state)
 	metrics = terrain.streaming_diagnostics()
+	metrics.merge({"residency_checks": residency_checks, "residency_states": residency_states})
 	metrics.merge({"tiles": terrain.leaves.size(), "collisions": terrain.active.size(), "resident_peak": terrain.peak_resident_meshes})
 	# Actual scene teardown joins a queued selection/mesh worker.
 	terrain.set_motion_hint(up, -tangent * 24.0)
@@ -134,6 +145,7 @@ func _drain(start: Array) -> void:
 	var deadline: int = Time.get_ticks_msec() + 20000
 	while terrain._job != null or not terrain._pending.is_empty() or not terrain._retired.is_empty() or not terrain._collision_pending.is_empty():
 		terrain._process(1.0 / 60.0)
+		_check_residency()
 		_expect(terrain.last_build_count <= 2 and terrain.leaves.size() <= 768 and terrain.active.size() <= 24 and terrain.peak_resident_meshes <= 1536 and terrain._collision_pending.size() <= 24, "Streaming exceeded its existing object/upload budgets.")
 		for tile: Dictionary in terrain._staging.values():
 			if tile.has("collider") and terrain.active.get(tile.id) != tile.collider:
@@ -141,6 +153,28 @@ func _drain(start: Array) -> void:
 		_expect(terrain.ground_ready(start), "Job handoff removed the walker's attached floor.")
 		if Time.get_ticks_msec() > deadline: _expect(false, "Latest terrain intent did not finish."); return
 		await process_frame
+	_check_residency()
+
+func _check_residency() -> void:
+	# Independently inventory real mesh resources through every lifecycle step.
+	# The production ledger must agree before/after cache transfer, partial
+	# upload, sharing, handoff, retirement and generation cancellation.
+	var staged: int = 0
+	for tile: Dictionary in terrain._staging.values():
+		if not tile.has("mesh"): continue
+		if terrain.leaves.has(tile.id) and terrain.leaves[tile.id].get("node") == tile.get("node"):
+			residency_states["shared"] = true
+			continue
+		staged += 1
+		if not tile.has("node"): residency_states["mesh_before_node"] = true
+	if not terrain._retired.is_empty(): residency_states["retired"] = true
+	if not terrain._cache.is_empty(): residency_states["cache"] = true
+	if terrain._staging.is_empty(): residency_states["empty"] = true
+	var total: int = terrain.leaves.size() + terrain._retired.size() + staged + terrain._cache.size()
+	_expect(terrain._staging_mesh_count == staged, "Staging mesh ledger differs from actual mesh owners.")
+	_expect(total <= terrain.MAX_RESIDENT and terrain._cache.size() <= terrain.MAX_CACHED, "Actual terrain/cache residency exceeds its limits.")
+	_expect(terrain.peak_resident_meshes >= total, "Residency peak omits live mesh owners.")
+	residency_checks += 1
 
 func _expect(ok: bool, message: String) -> void:
 	if not ok and message not in failures: failures.append(message)
