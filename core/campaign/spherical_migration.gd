@@ -12,6 +12,8 @@ const MAX_SOURCE_BYTES: int = 16 * 1024 * 1024
 
 static func blockers(source: Dictionary) -> Array[String]:
 	var result: Array[String] = []
+	if source.get("progression", {}).get("creature_encounters", {}).get("schema", 1) != 1:
+		result.append("Dieser Quellstand enthält bereits ein Kugel-Begegnungsarchiv und wird nicht erneut umgezogen.")
 	if int(source.get("schema", 0)) < 3:
 		return ["Diesen alten Stand zuerst laden und speichern, damit Identitäten und Entwürfe eingebettet sind."]
 	var state: Dictionary = source.game_state

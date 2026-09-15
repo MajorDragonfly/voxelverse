@@ -69,6 +69,63 @@ class RegionBackupTest(unittest.TestCase):
         body[field] = atlas
         return snapshot
 
+    def encounter_snapshot(self, payload=None):
+        key = "encounter:test"
+        entry = {"object_id": key, "species_id": "species:test", "body_id": "body:test", "region_id": "region:test",
+                 "relation": "ally", "trust": 100, "health_ratio": 0.625, "carcass_food": 0,
+                 "need_origin": "environment", "player_harmed": False, "conflict_relation": "",
+                 "conflict_reason": "", "dead": False}
+        if payload is None:
+            payload = {"schema": 1, "entry": entry}
+        digest = self.blob({"schema": 1, "key": key, "value": payload})
+        snapshot = self.snapshot("")
+        snapshot["progression"] = {"schema": 6, "creature_encounters": {"schema": 2, "storage": {
+            "schema": 1, "format": backup.STORE_FORMAT, "root": self.index({key: digest})}}}
+        return snapshot, digest
+
+    def test_encounter_archive_closure_history_and_missing_payload(self):
+        old, old_blob = self.encounter_snapshot()
+        current, current_blob = self.encounter_snapshot({"schema": 1, "entry": {}})
+        self.save(current)
+        self.save(old, Path(str(self.slot) + ".bak"))
+        self.save(old, Path(str(self.slot) + ".history/snapshot_0001_old.json"))
+        stats = backup.export_bundle([self.slot], self.regions, self.output)
+        self.assertEqual(stats["roots"], 3)
+        self.assertEqual(stats["copied_blobs"], 4)
+        self.assertEqual(backup.verify_bundle(self.output)["roots"], 3)
+        for digest in (old_blob, current_blob):
+            self.assertEqual(backup._blob_path(self.regions, digest).read_bytes(),
+                             backup._blob_path(self.output / "regions/blobs", digest).read_bytes())
+        backup._blob_path(self.output / "regions/blobs", old_blob).unlink()
+        with self.assertRaises(OSError):
+            backup.verify_bundle(self.output)
+
+    def test_encounter_future_identity_and_semantic_corruption_block_publication(self):
+        valid, digest = self.encounter_snapshot()
+        payload = backup._object(backup._blob_path(self.regions, digest).read_bytes())["value"]
+        malformed = ({**payload, "schema": 2}, {**payload, "next_storage": {}},
+                     {**payload, "entry": {**payload["entry"], "object_id": "another"}},
+                     {**payload, "entry": {**payload["entry"], "trust": 3}},
+                     {**payload, "entry": {**payload["entry"], "dead": True}},
+                     {**payload, "entry": {**payload["entry"], "health_ratio": True}})
+        for value in malformed:
+            with self.subTest(payload=value):
+                candidate, _ = self.encounter_snapshot(value)
+                self.save(candidate)
+                with self.assertRaises(backup.BackupError):
+                    backup.export_bundle([self.slot], self.regions, self.output)
+                self.assertFalse(self.output.exists())
+        for change in ({"schema": 3}, {"storage": {"schema": 2, "format": backup.STORE_FORMAT, "root": ""}},
+                       {"entries": {}}, {"storage": {"schema": 1, "format": "future", "root": ""}}):
+            with self.subTest(header=change):
+                candidate = copy.deepcopy(valid)
+                candidate["progression"]["creature_encounters"].update(change)
+                self.save(valid)
+                self.save(candidate, Path(str(self.slot) + ".bak"))
+                with self.assertRaises(backup.BackupError):
+                    backup.export_bundle([self.slot], self.regions, self.output)
+                self.assertFalse(self.output.exists())
+
     def test_atlas_closure_preserves_history_archive_overlay_and_independent_bodies(self):
         old, _ = self.atlas(bits=1)
         current, entries = self.atlas()
@@ -425,6 +482,35 @@ class GodotRegionBackupTest(unittest.TestCase):
             self.assertEqual(restored["body_id"], created["body_id"])
             self.assertGreaterEqual(stats["copied_blobs"], 1200)
             print("ARCH13_NATIVE_RESULT", json.dumps({"export": stats, "restart": restored}), flush=True)
+
+    def test_encounter_archive_restores_in_fresh_user_directory(self):
+        with tempfile.TemporaryDirectory(prefix="arch14-native-") as temporary, \
+                validation_editor(os.environ["GODOT_BINARY"]) as editor:
+            base = Path(temporary)
+
+            def run(mode, env):
+                result = subprocess.run([str(editor), "--headless", "--path", str(PROJECT), "--script",
+                    "res://tests/encounter_archive_test.gd", "--", mode], env=env,
+                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=120)
+                self.assertEqual(result.returncode, 0, result.stdout[-6000:])
+                self.assertNotIn("ERROR:", result.stdout)
+                self.assertIn("ENCOUNTER_ARCHIVE_PASSED", result.stdout)
+                return next(json.loads(line.removeprefix("ENCOUNTER_ARCHIVE_METRICS "))
+                            for line in result.stdout.splitlines() if line.startswith("ENCOUNTER_ARCHIVE_METRICS "))
+
+            created = run("--backup-create", isolated_env(base / "source"))
+            restored_env = isolated_env(base / "restored")
+            destination = Path(restored_env["XDG_DATA_HOME"]) / "godot/app_userdata/Voxelverse"
+            stats = backup.export_bundle([Path(created["slot"])], Path(created["regions"]), destination)
+            self.assertEqual(backup.verify_bundle(destination)["roots"], stats["roots"])
+            Path(created["regions"]).rename(base / "source-blobs-unavailable")
+            restored = run("--backup-verify", restored_env)
+            self.assertEqual(restored["campaign_id"], created["campaign_id"])
+            self.assertEqual(restored["encounters"], 1202)
+            self.assertLessEqual(restored["peak_cache"], 96)
+            self.assertLessEqual(restored["pages"], 128)
+            self.assertGreaterEqual(stats["copied_blobs"], 1202)
+            print("ARCH14_NATIVE_BACKUP_RESULT", json.dumps({"export": stats, "restart": restored}), flush=True)
 
 
 @unittest.skipUnless(os.environ.get("GODOT_BINARY") and os.environ.get("ATLAS_BACKUP_PROJECT"),

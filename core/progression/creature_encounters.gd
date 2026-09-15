@@ -3,30 +3,121 @@ class_name CreatureEncounters
 
 const Rules = preload("res://core/progression/behavior_catalog.gd")
 const SCHEMA: int = 1
-# Only touched individuals are stored. Paid identities are never evicted.
+const PAGED_SCHEMA: int = 2
+const Store = preload("res://core/persistence/region_store.gd")
+# Legacy planar saves retain their inline format. The spherical campaign pages
+# touched individuals; cache eviction never deletes an encounter or paid identity.
 const MAX_ENTRIES: int = 32768
 var entries: Dictionary = {}
+var store = null
+var last_error: String = ""
+
+
+func reset() -> void:
+	entries.clear()
+	store = null
+	last_error = ""
+
+
+func enable_paging() -> bool:
+	if store != null:
+		last_error = store.last_error
+		return last_error.is_empty()
+	# Write the complete old ledger before relinquishing it. The last on-disk
+	# campaign still owns its inline copy until the shared save commits.
+	var candidate := Store.new()
+	candidate.validate_value = payload_problem
+	for key: String in entries:
+		if not candidate.put(key, {"schema": 1, "entry": entries[key].duplicate(true)}):
+			last_error = candidate.last_error
+			return false
+	if candidate.checkpoint().is_empty():
+		last_error = candidate.last_error
+		return false
+	store = candidate
+	entries.clear()
+	last_error = ""
+	return true
 
 
 func export_state() -> Dictionary:
-	return {"schema": SCHEMA, "entries": entries.duplicate(true)}
+	if store == null: return {"schema": SCHEMA, "entries": entries.duplicate(true)}
+	var manifest: Dictionary = store.checkpoint()
+	last_error = store.last_error
+	if manifest.is_empty(): return {}
+	return {"schema": PAGED_SCHEMA, "storage": manifest}
 
 
 func import_state(value: Dictionary) -> bool:
-	if not validate_state(value).is_empty():
-		return false
+	if not validate_state(value).is_empty(): return false
+	if value.schema == PAGED_SCHEMA:
+		var candidate := Store.new()
+		candidate.validate_value = payload_problem
+		if not candidate.open(value.storage):
+			last_error = candidate.last_error
+			return false
+		reset()
+		store = candidate
+		return true
+	reset()
 	entries = value["entries"].duplicate(true)
-	for entry in entries.values():
-		if entry.has("habitat"):
-			entry["habitat"]["species_seed"] = int(entry["habitat"]["species_seed"])
-			entry["habitat"]["individual_seed"] = int(entry["habitat"]["individual_seed"])
+	for entry in entries.values(): _normalize(entry)
 	return true
+
+
+func saved(key: String) -> Dictionary:
+	if store == null: return entries.get(key, {}).duplicate(true)
+	var payload: Dictionary = store.get_value(key)
+	if not payload.is_empty():
+		var problem: String = payload_problem(key, payload)
+		if not problem.is_empty(): store._fail(problem)
+	last_error = store.last_error
+	if payload.is_empty() or not last_error.is_empty(): return {}
+	var result: Dictionary = payload.entry.duplicate(true)
+	_normalize(result)
+	return result
+
+
+func erase(key: String) -> bool:
+	if store == null:
+		entries.erase(key)
+		return true
+	# Tombstones preserve immutable historical roots; no archive file is deleted.
+	var ok: bool = store.put(key, {"schema": 1, "entry": {}})
+	last_error = store.last_error
+	return ok
+
+
+func restore(key: String, before: Dictionary) -> void:
+	if store == null:
+		if before.is_empty(): entries.erase(key)
+		else: entries[key] = before.duplicate(true)
+		return
+	# The transaction pins its key. Undo must restore RAM even after a failed
+	# blob write; the storage error continues to block publication.
+	store.cache[key] = {"schema": 1, "entry": before.duplicate(true)}
+	store.dirty[key] = true
+
+
+static func _normalize(entry: Dictionary) -> void:
+	if entry.has("habitat"):
+		entry.habitat.species_seed = int(entry.habitat.species_seed)
+		entry.habitat.individual_seed = int(entry.habitat.individual_seed)
+
+
+static func payload_problem(key: String, value: Dictionary) -> String:
+	if value.get("schema") != 1 or not value.get("entry") is Dictionary or value.size() != 2:
+		return "Unsupported encounter archive payload."
+	if value.entry.is_empty(): return "" # Explicit removal, never an absent/corrupt blob.
+	if value.entry.get("object_id") != key: return "Encounter archive identity mismatch."
+	return validate_entry(value.entry)
 
 
 func get_entry(identity: Dictionary, role: String, individual_seed: int) -> Dictionary:
 	var key: String = str(identity.get("object_id", ""))
-	if entries.has(key):
-		return entries[key].duplicate(true)
+	var stored: Dictionary = saved(key)
+	if not stored.is_empty(): return stored
+	if not last_error.is_empty(): return {}
 	# A deterministic environmental injury gives helping a genuine, finite need.
 	# Merely spawning an animal does not grow the persistent encounter ledger.
 	var injured: bool = role != "predator" and posmod(individual_seed, 5) == 0
@@ -46,6 +137,10 @@ func put(entry: Dictionary) -> bool:
 	if not validate_entry(entry).is_empty():
 		return false
 	var key: String = entry["object_id"]
+	if store != null:
+		var ok: bool = store.put(key, {"schema": 1, "entry": entry.duplicate(true)})
+		last_error = store.last_error
+		return ok
 	if not entries.has(key) and entries.size() >= MAX_ENTRIES:
 		return false
 	entries[key] = entry.duplicate(true)
@@ -53,13 +148,27 @@ func put(entry: Dictionary) -> bool:
 
 
 static func has_unsupported_contract(value: Variant) -> bool:
-	return value is Dictionary and Rules.is_newer_version(value.get("schema"), SCHEMA)
+	if not value is Dictionary: return false
+	if Rules.is_newer_version(value.get("schema"), PAGED_SCHEMA): return true
+	var fields: Array = ["schema", "storage"] if value.get("schema") == PAGED_SCHEMA else ["schema", "entries"]
+	for key in value:
+		if key not in fields: return true
+	if value.get("schema") == PAGED_SCHEMA and value.get("storage") is Dictionary:
+		for key in value.storage:
+			if key not in ["schema", "format", "root"]: return true
+		var reader := Store.new()
+		reader.open(value.storage)
+		return reader.unsupported
+	return false
 
 
 static func validate_state(value: Variant) -> String:
+	if value is Dictionary and Rules.is_integer(value.get("schema"), PAGED_SCHEMA, PAGED_SCHEMA):
+		if value.size() != 2 or not value.has("storage"): return "Invalid encounter archive envelope."
+		return Store.manifest_problem(value.storage)
 	if not value is Dictionary or not Rules.is_integer(value.get("schema"), SCHEMA, SCHEMA):
 		return "Unsupported creature encounter schema."
-	if not value.get("entries") is Dictionary or value["entries"].size() > MAX_ENTRIES:
+	if value.size() != 2 or not value.get("entries") is Dictionary or value["entries"].size() > MAX_ENTRIES:
 		return "Invalid creature encounter ledger."
 	for key in value["entries"]:
 		var entry: Variant = value["entries"][key]

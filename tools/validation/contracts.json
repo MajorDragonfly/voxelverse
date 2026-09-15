@@ -42,6 +42,7 @@
         "performance_measurement_test",
         "region_store_test",
         "population_register_test",
+        "encounter_archive_test",
         "regional_transport_test",
         "village_navigation_budget_test"
       ]
