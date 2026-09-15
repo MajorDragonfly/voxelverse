@@ -21,7 +21,6 @@ integriert. `main` bleibt außerhalb dieser Zusammenführung.
 | [#120](https://github.com/MajorDragonfly/voxelverse/pull/120) | `365c402d4e5635c024e96f4299e8b85561c35cd0` | Quellnachweise im Prüfläufer |
 | [#121](https://github.com/MajorDragonfly/voxelverse/pull/121) | `aed0f9a24cb78dceedbe536aa0d2686bc8669e76` | Vier weitere Schwanzfamilien |
 | [#123](https://github.com/MajorDragonfly/voxelverse/pull/123) | `4385501d05491da8f514a3397738dadd65082ef0` | Zwei gleichartige Arbeitsplätze pro Ort |
-
 | [#124](https://github.com/MajorDragonfly/voxelverse/pull/124) | `535bf4d7c585d79c9144d1cc7ec3c3c80135ff29` | Export-Quellnachweise und ZIP-Freigabe |
 
 PR #122 (`3689bddb01117984e0cc5609e2958b4feb8f7b21`) ist eine alternative
@@ -53,6 +52,10 @@ zu dieser festen Paketliste.
   vergleicht dieselben Individuen. Neustartwerkzeuge nutzen isolierte Daten auch
   bei einer selbstenthaltenen Godot-Installation.
 - Durch den erfolgreichen Import erzeugte Skript-UIDs sind mit versioniert.
+- Gemeinsame Neustart-Prüffälle berücksichtigen jetzt explizite Modellrevisionen
+  und die beiden neuen, vom bereits freigeschalteten Balanceschwanz abgeleiteten
+  Formen. Vorhandene Fußtransformationen, historische Freischaltungen,
+  Entdeckungen und Punkte werden weiterhin vollständig verglichen.
 
 ## Prüflage bei Vorbereitung
 

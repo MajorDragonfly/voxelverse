@@ -109,8 +109,8 @@ func _run() -> void:
 func _check_legacy_progression(before: Dictionary) -> void:
 	var after: Dictionary = tree.root.get_node("ProgressionService").export_state()
 	# This genuine old fixture has no encounters. ARCH-14 now migrates that
-	# inline ledger to an empty paged root; every other progression field must
-	# remain identical, including discoveries, points, unlocks and research.
+	# inline ledger to an empty paged root. Tail-family models also inherit the
+	# already earned balance-tail unlock, without awarding discovery points.
 	var old_ledger: Dictionary = before.get("creature_encounters", {})
 	var new_ledger: Dictionary = after.get("creature_encounters", {})
 	_expect(old_ledger.get("schema") == 1 and old_ledger.get("entries") == {}, "Legacy fixture encounter ledger changed")
@@ -120,6 +120,13 @@ func _check_legacy_progression(before: Dictionary) -> void:
 	var new_progression: Dictionary = after.duplicate(true)
 	old_progression.erase("creature_encounters")
 	new_progression.erase("creature_encounters")
+	var old_unlocks: Dictionary = old_progression.unlocked_parts
+	_expect(old_unlocks.has("tail_balance") and not old_unlocks.has("tail_fin"), "Legacy fixture tail unlocks changed")
+	for id: String in ["tail_stump", "tail_reptile"]:
+		_expect(not old_unlocks.has(id), "Legacy fixture already contains new tail model: " + id)
+		old_unlocks[id] = {"reason": "Model variant", "source_part": "tail_balance", "order": old_unlocks.size()}
+	# Exact comparison still protects every historical unlock, discovery,
+	# reward, research field and the two specific additive model references.
 	_expect(_same(new_progression, old_progression), "Migration changed existing discoveries, points or other progression")
 
 func _extract_fixture() -> void:
