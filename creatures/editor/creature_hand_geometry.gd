@@ -4,6 +4,26 @@ extends RefCounted
 const Catalog = preload("res://creatures/catalog/creature_hand_catalog.gd")
 
 
+static func articulation(id: String, revision: int = 1) -> Array[Dictionary]:
+	if Catalog.get_profile(id, revision).is_empty(): return []
+	if id == "hands_crab_claws":
+		return [
+			_joint(["FixedFinger", "FixedTip", "FixedTooth"], Vector3(-0.15, -0.17, 0), -20.0),
+			_joint(["MovableFinger", "MovableTip", "MovableTooth"], Vector3(0.16, -0.17, 0), 26.0),
+		]
+	if id == "hands_pincers":
+		return [
+			_joint(["Pincer-1"], Vector3(-0.10, -0.09, 0), -24.0),
+			_joint(["Pincer1"], Vector3(0.10, -0.09, 0), 24.0),
+		]
+	return []
+
+
+static func _joint(prefixes: Array, pivot: Vector3, degrees: float) -> Dictionary:
+	return {"channel": "grip", "prefixes": prefixes, "pivot": pivot,
+		"axis": Vector3.BACK, "degrees": degrees}
+
+
 static func recipe(id: String, skin: Color, horn: Color, revision: int = 1) -> Array[Dictionary]:
 	if Catalog.get_profile(id, revision).is_empty(): return []
 	if id == "hands_crab_claws": return _crab(skin, horn)

@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	if _bite_elapsed >= BITE_SECONDS:
 		_bite_elapsed = 0.0
 		var amount: float = _food.consume_food(self, minf(BITE_AMOUNT, 100.0 - satiety))
+		if amount > 0.0 and is_instance_valid(_preview): _preview.play_part_action("eat")
 		satiety = minf(100.0, satiety + amount)
 		_needs["satiety"] = satiety
 		if satiety >= 75.0:

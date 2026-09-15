@@ -22,6 +22,8 @@ func _ready() -> void:
 
 func trigger_bite() -> void:
 	_bite_time_remaining = maxf(bite_duration, 0.08)
+	if is_instance_valid(_preview) and _preview.has_method("play_part_action"):
+		_preview.play_part_action("bite", _bite_time_remaining)
 
 
 func _physics_process(delta: float) -> void:
@@ -67,7 +69,9 @@ func _apply_bite_animation() -> void:
 			continue
 		if str(part_root.get_meta("creature_part_category", "")) != "mouth":
 			continue
-		part_root.rotation.x += deg_to_rad(bite_mouth_rotation_degrees) * snap
+		# Sculpted mouths now open their jaws; legacy renderers keep their fallback.
+		if not part_root.has_meta("part_articulation") or part_root.get_meta("part_articulation").is_empty():
+			part_root.rotation.x += deg_to_rad(bite_mouth_rotation_degrees) * snap
 		part_root.position.z -= bite_lunge_distance * 0.16 * envelope
 
 	if _camera != null:

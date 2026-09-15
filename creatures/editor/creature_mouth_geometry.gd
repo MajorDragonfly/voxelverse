@@ -1,7 +1,30 @@
 extends RefCounted
 ## Authored mouth recipes shared by workshop, journal and runtime. Opening is a
-## fixed model pose; it grants no underwater breathing or independent jaw action.
+## authored rest pose. Cosmetic joints do not grant new gameplay capabilities.
 const Catalog = preload("res://creatures/catalog/creature_mouth_catalog.gd")
+
+
+static func articulation(id: String, revision: int = 1) -> Array[Dictionary]:
+	if revision != 1: return []
+	if id == "mouth_octopus_beak":
+		return [
+			_joint(["UpperBeak"], Vector3(0, 0.09, -0.14), 12.0),
+			_joint(["LowerBeak"], Vector3(0, -0.10, -0.13), -20.0),
+		]
+	if id == "mouth_broad_beak":
+		return [_joint(["LowerBeak"], Vector3(0, -0.095, 0.02), -24.0)]
+	if id in Catalog.LEGACY_IDS:
+		return [_joint(["LowerJaw"], Vector3(0, -0.145, 0.025), -25.0)]
+	if id == "mouth_canine_snout":
+		return [_joint(["LowerJaw"], Vector3(0, -0.17, -0.015), -28.0)]
+	if id == "mouth_crocodile_snout":
+		return [_joint(["LowerJaw", "LowerTooth"], Vector3(0, -0.19, -0.015), -28.0)]
+	return []
+
+
+static func _joint(prefixes: Array, pivot: Vector3, degrees: float) -> Dictionary:
+	return {"channel": "mouth", "prefixes": prefixes, "pivot": pivot,
+		"axis": Vector3.RIGHT, "degrees": degrees}
 
 
 static func recipe(id: String, skin: Color, accent: Color, horn: Color, revision: int = 1) -> Array[Dictionary]:
