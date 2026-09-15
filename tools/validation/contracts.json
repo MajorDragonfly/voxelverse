@@ -31,12 +31,13 @@
     {
       "id": "regions_simulation",
       "title": "Regionsspeicher, Fernarbeit und Budgets",
-      "work": "M1h / ARCH-13–18",
+      "work": "M1h / ARCH-13–18; ARCH-27 regional transport contract",
       "tests": [
         "campaign_scaling_test",
         "far_simulation_test",
         "performance_measurement_test",
         "region_store_test",
+        "regional_transport_test",
         "village_navigation_budget_test"
       ]
     },
