@@ -18,6 +18,9 @@ class TerrainFixture:
 func _initialize() -> void: call_deferred("_run")
 
 func _run() -> void:
+	if "--terrain" in OS.get_cmdline_user_args():
+		await preload("res://tools/benchmark_terrain_publication.gd").new().run(self)
+		return
 	root.get_node("SaveGameService").autosave_enabled = false
 	var host := Node3D.new()
 	root.add_child(host)
