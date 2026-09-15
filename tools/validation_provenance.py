@@ -19,6 +19,7 @@ MAX_FILES = 200_000
 MAX_FILE_BYTES = 512 * 1024 * 1024
 MAX_TOTAL_BYTES = 4 * 1024 * 1024 * 1024
 UID = re.compile(rb"uid://[a-z0-9]+\r?\n?\Z")
+WINDOWS = os.name == "nt"
 
 
 def _json(value):
@@ -31,6 +32,15 @@ def _digest(value):
 
 def _signature(info):
     return (info.st_dev, info.st_ino, info.st_mode, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def _same_open_file(path_signature, descriptor_signature):
+    # Windows can report creation time through lstat() and metadata-change
+    # time through fstat(). Compare their common file identity here. Keep both
+    # full signatures for same-API checks before/after reading and at boundaries.
+    if WINDOWS:
+        return path_signature[:-1] == descriptor_signature[:-1]
+    return path_signature == descriptor_signature
 
 
 class SourceRun:
@@ -96,10 +106,12 @@ class SourceRun:
         else:
             if before.st_size > MAX_FILE_BYTES:
                 raise ValueError("Source file byte budget exceeded: " + path)
-            flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+            flags = (os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+                     | getattr(os, "O_NONBLOCK", 0) | getattr(os, "O_BINARY", 0))
             digest, prefix, read = hashlib.sha256(), b"", 0
             with os.fdopen(os.open(file, flags), "rb") as stream:
-                if _signature(os.fstat(stream.fileno())) != signature:
+                opened_signature = _signature(os.fstat(stream.fileno()))
+                if not _same_open_file(signature, opened_signature):
                     raise ValueError("Source changed while opening: " + path)
                 for chunk in iter(lambda: stream.read(1024 * 1024), b""):
                     read += len(chunk)
@@ -107,7 +119,7 @@ class SourceRun:
                         raise ValueError("Source file byte budget exceeded: " + path)
                     digest.update(chunk)
                     if len(prefix) < 128: prefix += chunk[:128 - len(prefix)]
-                if _signature(os.fstat(stream.fileno())) != signature:
+                if _signature(os.fstat(stream.fileno())) != opened_signature:
                     raise ValueError("Source changed while hashing: " + path)
             record.update(bytes=read, sha256=digest.hexdigest())
             if path.endswith(".uid"):

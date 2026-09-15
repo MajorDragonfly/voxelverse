@@ -7,11 +7,13 @@ permissions:
 jobs:
   source:
     runs-on: windows-latest
-    timeout-minutes: 4
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Inspect source observation and Windows stat identity
-        run: python tools/diagnose_windows_source.py
+      - name: Install pinned Windows editor
+        run: python tools/install_godot.py --directory "${{ runner.temp }}/godot-provenance" --platform windows --editor-only
+      - name: Verify Windows identity guards and real Godot import
+        run: python tools/diagnose_windows_source.py "${{ runner.temp }}/godot-provenance/editor/Godot_v4.6.3-stable_win64_console.exe"
