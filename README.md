@@ -2,7 +2,7 @@
 
 Ein Spore-inspiriertes Einzelspielerspiel in Voxelgrafik: eine eigene Kreatur gestalten und die Spezies langfristig über Stamm, Antike/Mittelalter und Weltmacht bis in den Weltraum führen.
 
-**Zentrale Projektplanung: [ROADMAP.md](ROADMAP.md).** Sie unterscheidet vorhandene Funktionen von geplanten Phasen, beschreibt die Grundlagen für echte Planeten/Sternsysteme und hält die Reihenfolge der nächsten Arbeiten fest. Vor neuen Entwicklungspaketen lesen und nach der Umsetzung aktualisieren.
+**Entwicklung starten:** [AGENTS.md](AGENTS.md) → [aktueller Projektstand](docs/PROJECT_STATUS.md) → eigener Teilauftrag (`python3 tools/work_packet.py list`). Die [Roadmap](ROADMAP.md) bewahrt Zielbild und Meilensteine; Fachchats lesen nur passende Abschnitte und übergeben Änderungen über ihren PR.
 
 Der integrierte Stand enthält Kreaturensteuerung und Überleben, einen gemeinsamen Entdeckungs-/Entwicklungsbuch-Einstieg, Scans und Körperteilfreischaltungen, einen wirkenden Verhaltens-Skilltree, Heimatgefährten sowie den bestätigten Wechsel in ein erstes spielbares Stammesdorf. Hinzu kommen gestreamte Landschaften, Kreaturen- und Gebäudeeditor, Start-/Pausenmenüs und Audio. Das separate M1/M1b-Planetenlabor ergänzt begehbare Kugeloberflächen bis 12.742 km Durchmesser, ein kleines Testsystem, Doppelsterne und Orbit-/Systemansichten. Mittelalter, Neuzeit und Weltraum sind noch keine freigegebenen Spielphasen. Neue parallele Fachpakete gelten erst nach ihrer Integration als gemeinsamer Stand.
 

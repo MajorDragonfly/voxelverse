@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "packets": [
+    {
+      "id": "ARCH-17-PUBLISH",
+      "title": "Kalte Terrainpublikation begrenzen",
+      "goal": "Teuersten Mesh-/Kollisionsupload auf der vorhandenen Messroute messen und begrenzen; vollständigen Boden bei Übergabe erhalten.",
+      "write_groups": [
+        "terrain"
+      ],
+      "files": [
+        "world/planet_lab/adaptive_sphere_tiles.gd",
+        "world/planet_lab/planet_patch_job.gd",
+        "world/planet_lab/planet_patch_mesh.gd",
+        "tools/benchmark_surface_publication.gd"
+      ],
+      "read": [
+        "docs/WORK_ARCH17_TERRAIN_LOOKAHEAD.md"
+      ],
+      "contracts": [
+        "surface"
+      ],
+      "acceptance": "Kalter Aufbau, Richtungswechsel und Abbau; echte Bodenbereitschaft, Uploadspitze und Queuegrenzen vor/nach derselben Änderung belegen.",
+      "limits": "Kein zweiter Streamer. Bestehende Vorausschau und Generationen sind integriert. Keine globale Framerate aus Headless-Zeiten ableiten."
+    },
+    {
+      "id": "ARCH-13-MANIFEST",
+      "title": "Lebensdauer der Regionsarchive",
+      "goal": "Gemeinsames Generationenmanifest mit vollständig erreichbaren Blobs abgrenzen; zunächst eine überprüfbare Aufbewahrungsplanung ohne Löschung liefern.",
+      "write_groups": [
+        "persistence",
+        "population"
+      ],
+      "files": [
+        "core/persistence/region_store.gd",
+        "core/persistence/slot_history.gd",
+        "autoload/save_game_service.gd",
+        "world/surface/campaign_region_storage.gd",
+        "tools/region_backup.py"
+      ],
+      "read": [
+        "docs/WORK_ARCH13_USERDATA_BACKUPS.md"
+      ],
+      "contracts": [
+        "campaign",
+        "regions_simulation"
+      ],
+      "acceptance": "Aktiver Save, Backup, Slothistorie, Kopien und Migration erhalten alle erreichbaren Blobs; Schreibabbruch veröffentlicht keine unvollständige Generation.",
+      "limits": "Vollständige Benutzer-/Laborbackups sind integriert. Bereinigung erst nach nachgewiesener Erreichbarkeit; keine fremden oder realen Nutzerdaten löschen."
+    },
+    {
+      "id": "ARCH-14-ENCOUNTERS",
+      "title": "Dauerhafte Begegnungen auslagern",
+      "goal": "Einen noch unbeschränkt wachsenden Begegnungsbestand über den vorhandenen Regionsspeicher begrenzen und mit Neustart erhalten.",
+      "write_groups": [
+        "persistence",
+        "population",
+        "progression"
+      ],
+      "files": [
+        "core/progression/creature_encounters.gd",
+        "autoload/progression_service.gd",
+        "world/surface/campaign_population_state.gd",
+        "world/surface/campaign_region_storage.gd"
+      ],
+      "read": [
+        "docs/WORK_ARCH14_JOURNAL_PAGING.md"
+      ],
+      "contracts": [
+        "regions_simulation",
+        "discovery_map",
+        "campaign"
+      ],
+      "acceptance": "Cachefreigabe und Neustart verlieren weder Gesundheit, Beziehung noch Entdeckungsbelege; aktiver Speicher bleibt messbar begrenzt.",
+      "limits": "Journal-Seiten und Tierzustandsschutz sind integriert. Nicht parallel mit ARCH-13-MANIFEST in dieselben Speicheranschlüsse schreiben."
+    },
+    {
+      "id": "ARCH-24-TRUNK",
+      "title": "Rüssel als eigenes Kopfmodul",
+      "goal": "Eine Rüsselform über den vorhandenen Geometrieanbieter mit getrenntem Mundanschluss ergänzen.",
+      "write_groups": [
+        "creature_editor",
+        "progression"
+      ],
+      "files": [
+        "creatures/catalog/creature_mouth_catalog.gd",
+        "creatures/editor/creature_mouth_geometry.gd",
+        "creatures/editor/creature_editor_studio.gd",
+        "autoload/progression_service.gd"
+      ],
+      "read": [
+        "docs/WORK_ARCH24_MOUTH_MODELS.md",
+        "docs/CREATURE_PARTS_CATALOG_PLAN.md"
+      ],
+      "contracts": [
+        "creature_body",
+        "blueprints"
+      ],
+      "acceptance": "Vorschau, Körperanschluss und bestehende Entwürfe nach Save/Load erhalten; Modell auf einem echten Kreaturenkörper grafisch zeigen.",
+      "limits": "Hund, Krokodil und Oktopus sind integriert. Keine parallele Neuerfindung von Katalog, Mundanbieter oder Freischaltsystem."
+    },
+    {
+      "id": "ARCH-25-EDITOR",
+      "title": "Einen Editorbereich auf DE/EN anschließen",
+      "goal": "Einen klar benannten Bereich des Kreatureneditors vollständig auf die vorhandene Sprachverwaltung umstellen.",
+      "write_groups": [
+        "creature_editor",
+        "localization"
+      ],
+      "files": [
+        "creatures/editor/creature_editor_studio.gd",
+        "localization/catalog.json",
+        "tools/localization/catalog.py"
+      ],
+      "read": [
+        "docs/VOXELVERSE_DESIGN.md"
+      ],
+      "contracts": [
+        "frontend_locale",
+        "creature_body"
+      ],
+      "acceptance": "Sprachwechsel erhält die laufende Editorsitzung; kurze und lange Texte bei kleiner Auflösung sichtbar prüfen.",
+      "limits": "Bereich vor Beginn benennen. Fähigkeiten DE/EN sind integriert. Sprachkatalog und Editor werden pro Runde nur einem Fachchat zugeteilt."
+    },
+    {
+      "id": "ARCH-26-SECOND-SITE",
+      "title": "Zweiten Siedlungsort produktiv anschließen",
+      "goal": "Den integrierten Siedlungsvertrag an einen zweiten echten Arbeitsplatz mit eigener Identität, Vorrat und gespeicherten Aufträgen anbinden.",
+      "write_groups": [
+        "village",
+        "persistence"
+      ],
+      "files": [
+        "world/tribe/settlement_collection.gd",
+        "world/tribe/tribe_controller.gd",
+        "autoload/save_game_service.gd"
+      ],
+      "read": [
+        "docs/ARCHITECTURE_BACKLOG.md"
+      ],
+      "contracts": [
+        "village",
+        "regions_simulation",
+        "campaign"
+      ],
+      "acceptance": "Zwei getrennte Orte mit erhaltenen IDs und genau einmal verbuchter Fracht über Nah/Fern und Neustart; Instanzgrenzen erst nach Messung erhöhen.",
+      "limits": "Vertragsmodell ist integriert, spielbare Gründung noch offen. Mit ARCH-27 und allen Save-Schreibern nacheinander integrieren."
+    },
+    {
+      "id": "ARCH-19-TARGET-PC",
+      "title": "Gemeinsamen Kandidaten auf Zielhardware messen",
+      "goal": "Einen festen Build auf Lars' Referenz-PC aus docs/PROJECT_STATUS.md bei 1080p prüfen und die nächste Engstelle bestimmen.",
+      "write_groups": [
+        "acceptance"
+      ],
+      "files": [
+        "tools/profile_performance.py",
+        "tools/performance_route_probe.gd",
+        "tools/performance_save_probe.gd"
+      ],
+      "read": [
+        "docs/WINDOWS_TEST_2026-09-15.md",
+        "docs/ARCH02_MEASUREMENTS_2026-09-10.md"
+      ],
+      "contracts": [
+        "spherical_gameplay",
+        "campaign",
+        "regions_simulation"
+      ],
+      "acceptance": "Begehbare Hin-/Rückroute, Save/Neustart, Stamm, laufende Fracht und A-B-A; p95/p99, Spitzen, RAM und verfügbare GPU-Werte protokollieren.",
+      "limits": "Referenzhardware ist in docs/PROJECT_STATUS.md benannt; Preset und Treiber beim Lauf protokollieren. Automatische oder Headless-Prüfung ersetzt Lars' visuellen Windows-Spieltest nicht."
+    }
+  ]
+}

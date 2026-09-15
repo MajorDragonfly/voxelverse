@@ -42,6 +42,44 @@ class ValidationContractsTest(unittest.TestCase):
     def save_manifest(self):
         (self.project / contracts.MANIFEST).write_text(json.dumps(self.manifest), encoding="utf-8")
 
+    def test_contract_selection_rejects_unknown_and_deduplicates(self):
+        self.assertEqual(validate_godot.select_contract_tests(self.project, ["example", "example"]),
+                         ["example_test"])
+        with self.assertRaisesRegex(ValueError, "Unknown contracts"):
+            validate_godot.select_contract_tests(self.project, ["example", "typo"])
+        with self.assertRaisesRegex(ValueError, "at least one"):
+            validate_godot.select_contract_tests(self.project, [])
+
+    def test_contract_selection_includes_later_registered_tests(self):
+        (self.project / "tests/later_test.gd").write_text("extends SceneTree\n")
+        self.manifest["contracts"][0]["tests"].append("later_test")
+        self.save_manifest()
+        self.assertEqual(validate_godot.select_contract_tests(self.project, ["example"]),
+                         ["example_test", "later_test"])
+
+    def test_list_selection_does_not_start_engine_or_create_output(self):
+        output = self.project / "must-not-exist"
+        argv = ["validate_godot", "--project", str(self.project), "--contracts", "example",
+                "--list-tests", "--output", str(output)]
+        with patch.object(sys, "argv", argv), patch.object(validate_godot, "validation_editor") as editor:
+            with contextlib.redirect_stdout(io.StringIO()) as stream:
+                self.assertEqual(validate_godot.main(), 0)
+            editor.assert_not_called()
+        self.assertEqual(stream.getvalue().strip(), "example_test")
+        self.assertFalse(output.exists())
+
+    def test_invalid_selection_stops_before_engine(self):
+        cases = [["--contracts", "typo"], ["--tests", "missing_test", "--list-tests"],
+                 ["--contracts", "example", "--tests", "example_test"]]
+        for flags in cases:
+            with self.subTest(flags=flags):
+                with patch.object(sys, "argv", ["validate_godot", "--project", str(self.project), *flags]):
+                    with patch.object(validate_godot, "validation_editor") as editor:
+                        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as raised:
+                            validate_godot.main()
+                        self.assertEqual(raised.exception.code, 2)
+                        editor.assert_not_called()
+
     def save_catalog(self):
         (self.project / "localization/catalog.json").write_text(json.dumps(self.catalog), encoding="utf-8")
 

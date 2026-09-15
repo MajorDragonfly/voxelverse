@@ -1,12 +1,10 @@
-> **Aktueller Integrationsbranch, 11. September 2026:** PR #78–#83 sind auf `agent/integration-sphere-acceptance-2026-09-11` zusammengeführt, noch nicht als gemeinsame Laufzeit-/Ziel-PC-Abnahme freigegeben. ARCH-06-Präzision, ARCH-07-Save-Teilnehmer, ARCH-14-Zustandsschutz, ARCH-22-Eierkette, ARCH-24-Mundmodelle und ARCH-25-Fähigkeiten DE/EN nicht doppelt beginnen. Maßgeblich sind `docs/INTEGRATION_2026-09-11.md` und die exakten Quellcommits. Ältere „nächste Aufgabe“-Zeilen unten sind für diese sechs Lieferungen historisch. Nächster Vorrang: gemeinsame Kugel-/Vegetations-/Rückreiseprüfung, dann verbleibende ARCH-13/14/17/19-Aufträge.
-
 # Voxelverse – ausführbare Architekturaufgaben
 
-Stand: 9. September 2026. Grundlage der Codeprüfung: `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7` auf veröffentlichtem `main`. [Befunde und Grenzen](ARCHITECTURE_SCALABILITY_AUDIT.md), [Roadmap](../ROADMAP.md), [Kugelumzug](SPHERICAL_CAMPAIGN_MIGRATION.md) und [Arbeitsverteilung](NEXT_PARALLEL_WORK.md) zusammen lesen.
+Ursprünglicher Aufgabenkatalog vom 9. September 2026. Grundlage der damaligen Codeprüfung: `d94d1e5f8a85b3e1a77d46984f381d14d84a8cf7` auf veröffentlichtem `main`. Aktueller Lieferstand: [PROJECT_STATUS](PROJECT_STATUS.md). Arbeitsbeginn über [AGENTS](../AGENTS.md) und den eigenen Paketbrief; anschließend nur den betroffenen ARCH-Abschnitt lesen.
 
-**Das ursprüngliche Audit plante die ARCH-Aufgaben; aktuelle Lieferstände stehen bei den jeweiligen Aufträgen und in der Zuordnung unten.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Vor Arbeitsbeginn den aktuellen veröffentlichten Stand vergleichen: Bereits durch einen Fachchat gelieferte Arbeit mit Commit und Nachweis zuordnen, nicht nochmals implementieren. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
+**Das ursprüngliche Audit plante die ARCH-Aufgaben; aktuelle Lieferstände stehen bei den jeweiligen Aufträgen und in der Zuordnung unten.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Der Integrationschat ordnet veröffentlichte Lieferungen einmal je Runde zu; Fachchats übernehmen diese Basis und ihre konkrete Teilauftrags-ID. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
 
-## Aktueller Integrationsstand vom 10. September
+## Historische Integrationsrunde vom 10. September
 
 28 Übergaben sind in diesem Stand zusammengeführt. [Bericht, Prüfungen und Veröffentlichung](INTEGRATION_2026-09-10.md), [Quellcommits](integration-sources-2026-09-10.json) und [nächste Teilaufträge](NEXT_PARALLEL_WORK.md) gelten vor den historischen Startaufträgen. ARCH-01/05/20/21/23 sind geliefert; ARCH-02/13/14/17/24/25/28/29/30 enthalten die unten genannten Teilabschlüsse. Die noch offenen Punkte bleiben offen.
 
@@ -350,6 +348,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 - **Fertig:** Vertragsprüfung verhindert doppelt angedockte Schiffe/mehrfach vorhandene Fracht. Die spätere M9-Abnahme verlangt wirkliche Landung, Untersuchung, Rückflug und einen wirksamen Ausbau nach Neustart; ein Schiffeditor allein erfüllt sie nicht.
 
 ## Übergabeformat für jeden Folgechat
+
+Eine kurze PR-Übergabe gemäß [PARALLEL_WORKFLOW](PARALLEL_WORKFLOW.md) genügt. Zentrale Statusdateien pflegt der Integrationschat einmal je Runde.
 
 1. **Auftrag:** ARCH-ID plus bestehende Fach-ID; Basiskommit und bereits integrierte Vorarbeiten nennen.
 2. **Umfang:** konkret übernommene Dateien/Schnittstellen, Vertragsversionen, Datenbesitzer und Abhängigkeiten angeben. Gemeinsame Schreibbereiche vorher der Integration zuordnen.

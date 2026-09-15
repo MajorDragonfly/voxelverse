@@ -6,6 +6,8 @@ Die ausführbaren Folgeaufträge stehen im [Architektur-Backlog](ARCHITECTURE_BA
 
 Nachfolgender Implementierungsstand: [WORK_CAMPAIGN_SCALING.md](WORK_CAMPAIGN_SCALING.md). Dieses Audit bleibt eine historische Bewertung des oben genannten Commits; bereits gelieferte Anschlüsse nicht erneut implementieren.
 
+Aktuelle Neubewertung: [Godot und Skalierung, 15. September](GODOT_TECHNICAL_DIRECTION.md). Die Befunde darunter bleiben historische Nachweise und werden nicht erneut als offene Aufgaben vergeben.
+
 ## Ergebnis
 
 Die vorhandene Basis kann weiterverwendet werden. Für Koordinaten, prozedurale Weltgenerierung, Körperidentitäten und begrenzte Terrainlaufzeit bestehen geeignete Grundlagen.
