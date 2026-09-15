@@ -13,9 +13,11 @@ import time
 if __package__:
     from .check_validation_contracts import discover_tests, read_contracts, revision
     from .validation_support import isolated_env, validation_editor
+    from .validation_plan import build_plan
 else:
     from check_validation_contracts import discover_tests, read_contracts, revision
     from validation_support import isolated_env, validation_editor
+    from validation_plan import build_plan
 
 # These acceptance flows include real 300-second production or 90-second growth
 # plus transport and restart. Keep short checks bounded independently.
@@ -44,11 +46,28 @@ def main():
     selection = parser.add_mutually_exclusive_group()
     selection.add_argument("--tests", nargs="*", help="Test basenames; omit to discover all tests")
     selection.add_argument("--contracts", nargs="+", help="Contract IDs from tools/validation/contracts.json")
+    selection.add_argument("--changed-since", metavar="REF", help="Plan tests from the checkout versus this exact local Git commit, including staged/unstaged/untracked files")
+    parser.add_argument("--plan", action="store_true", help="Print the --changed-since plan as JSON without starting tests or creating output")
     parser.add_argument("--list-tests", action="store_true", help="Print selection without starting Godot; not test evidence")
     parser.add_argument("--skip-import", action="store_true")
     parser.add_argument("--skip-main", action="store_true")
     args = parser.parse_args()
     args.project = args.project.expanduser().resolve()
+    args.change_plan = None
+    if args.plan and (args.changed_since is None or args.list_tests):
+        parser.error("--plan requires --changed-since and cannot be combined with --list-tests")
+    if args.changed_since is not None:
+        try:
+            args.change_plan = build_plan(args.project, args.changed_since)
+        except (OSError, ValueError, subprocess.SubprocessError) as error:
+            parser.error(str(error))
+        args.tests = args.change_plan["selected_tests"]
+        if args.plan:
+            print(json.dumps(args.change_plan, ensure_ascii=True, indent=2))
+            return 0
+        if args.skip_main and args.change_plan["requires_main"] and not args.list_tests:
+            parser.error("This change plan requires full main checks; inspect --plan. Use an explicit --contracts selection for a separately scoped diagnosis.")
+        args.skip_main = not args.change_plan["requires_main"]
     if args.contracts is not None or args.list_tests:
         try:
             if args.contracts is not None:
@@ -67,7 +86,14 @@ def main():
         return 0
     args.output = (args.output.expanduser().resolve() if args.output is not None
                    else Path(tempfile.mkdtemp(prefix="voxelverse-validation-")))
+    if args.change_plan is not None:
+        if args.output.is_relative_to(args.project):
+            parser.error("Change-plan reports must be outside the project to avoid changing their own source inputs")
+        if args.output.exists() and (not args.output.is_dir() or any(args.output.iterdir())):
+            parser.error("Choose a new output directory to preserve previous check evidence")
     print(f"Validation output: {args.output}", flush=True)
+    if args.change_plan is not None and not args.tests:
+        return validate(args)
     with validation_editor(args.godot) as editor:
         args.godot = str(editor)
         return validate(args)
@@ -75,12 +101,14 @@ def main():
 
 def validate(args):
     args.output.mkdir(parents=True, exist_ok=True)
-    version = subprocess.check_output([args.godot, "--version"], text=True).strip()
-    if not version.startswith("4.6.3."):
+    change_plan = getattr(args, "change_plan", None)
+    source_only = change_plan is not None and not args.tests
+    version = None if source_only else subprocess.check_output([args.godot, "--version"], text=True).strip()
+    if version is not None and not version.startswith("4.6.3."):
         sys.exit(f"Expected Godot 4.6.3, got {version}")
     tests = args.tests if args.tests is not None else discover_tests(args.project)
     commands = [("source_contracts", [], 45)]
-    if not args.skip_import:
+    if not args.skip_import and not source_only:
         commands.append(("import", ["--import"], 180))
         commands.append(("art_sources", [], 120))
     # SceneTree tests load gameplay scenes after autoloads exist, like the game.
@@ -88,7 +116,7 @@ def validate(args):
     # animal, cold terrain loads and fresh processes on both sides of the trip.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
                   900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 120) for name in tests]
-    if not args.skip_main:
+    if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:
             name = "main" if frames == 300 else f"main_shutdown_{frames}"
@@ -149,7 +177,8 @@ def validate(args):
                 print(json.dumps(results[-1]), flush=True)
                 break
     (args.output / "results.json").write_text(json.dumps({"godot": version, "source": revision(args.project),
-        "execution": "headless_source_project", "selected_tests": tests, "checks": results}, indent=2) + "\n", encoding="utf-8")
+        "execution": "source_only" if source_only else "headless_source_project", "selected_tests": tests,
+        "change_plan": change_plan, "checks": results}, indent=2) + "\n", encoding="utf-8")
     return 1 if any(not r["passed"] for r in results) else 0
 
 

@@ -82,6 +82,8 @@ def brief(packet):
         "", "Prüfauswahl aus der bestehenden Registry (Umfang nach Änderung festlegen):",
         "python3 tools/validate_godot.py --contracts " + " ".join(packet["contracts"]) + " --list-tests",
         "Ausführung: --list-tests entfernen; bei reinem Fachumfang ggf. --skip-main ergänzen.",
+        "Nach Änderungen den tatsächlichen Diff planen: python3 tools/validate_godot.py --changed-since BASIS_SHA --plan",
+        "Der lokale Plan erfasst auch neue Dateien; unbekannte/gemeinsame Bereiche erweitern die Auswahl. --plan entfernen führt sie aus.",
         "", "Vor Start: zentrale Zuweisung, Basis-SHA und Branch aus dem Integrationschat übernehmen.",
         "Dieser Katalog reserviert nichts. Keine Netzwerkabfrage oder Prüfung wurde ausgeführt.",
     ])
