@@ -1,0 +1,54 @@
+{
+  "packet": "ARCH-24-ARTICULATION",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "source_commit": "027861c61fa452773e200ec267b2d88b0caa4745",
+  "source_tree": "901b60124dfc36cec7f4f8ba5d1df9e31ad5de42",
+  "source_files_sha256": {
+    "creatures/ai/foraging_brain.gd": "29189db6a6197e1d42dc5ac5c61a37f29b73e4d4895f0be03bb69110fde5ab28",
+    "creatures/editor/creature_hand_geometry.gd": "309335bbbba00e9abe707cde401a340acbeee1cde35cd7f967038863bc8b2d86",
+    "creatures/editor/creature_mouth_geometry.gd": "5515a193aca29d2c01c8688b96e86578156c655b3507bdb1d2d1e09bb945bd9a",
+    "creatures/editor/creature_part_geometry.gd": "66e39ac838db8a82ec8b51024a59ca891d7a4a018d2f990bb63701d723825289",
+    "creatures/player/player_controller_v2.gd": "52b8efabaf5d0af07cf3e92a3b0011d8f3a9eb92e70107a9ea4709a6826d7570",
+    "creatures/runtime/adaptive_locomotion_animator_v2.gd": "0287f78939887eaab0bdd247b3a449b63d03ff12388e852d78cacbb58668135b",
+    "creatures/runtime/creature_part_articulation.gd": "d6376b343fcc69d905da0da1b2a693a6e390ed91945cdfb1358a1eb05a6a3da1",
+    "creatures/runtime/creature_part_articulation.gd.uid": "4c9d1d3af5fe28f745aca6893263c87fc7bf7004f776bfc811074073349de4b9",
+    "creatures/runtime/creature_runtime_preview.gd": "0b4a9f3daec2494332342ecc8476e9f45c601a07159fa68ac619b6c28181bdce",
+    "creatures/wildlife/procedural_wildlife_v7.gd": "3db13170ce4615aecac12d7f1b079a67e16ce6132a1737610171c9a499a4d0c4",
+    "tests/creature_part_articulation_test.gd": "f6da0a220ce6c92abea59a4e5db115ac3580b1526ea853ed17178bae416c861e",
+    "tests/creature_part_articulation_test.gd.uid": "d3b42bf0eee517efd59b04843301a5a9eec4916019d244fa3f4915ee4be8b887",
+    "tools/capture_part_articulation.gd": "bc08fb859464484afcee29e234808742ec41fbee8226571a12415e7cdbfdd8b8",
+    "tools/render_part_articulation.py": "def27209c6436605807e274b9fb3231ea77ae62aa07b6624be77503176c945f8",
+    "tools/validation/contracts.json": "b2226ab1a85184913ee2b308553188615ee9be7308f264c3972eb709fc98b8c8"
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux headless; isolated XDG/APPDATA via tools/validate_godot.py",
+  "tested_state": "Tests ran with identified worktree changes before source commit. Runtime files were unchanged between focused/actions runs and source commit. The actions run adds real accepted/rejected attack and mirror-axis assertions to the new test; other focused results reused. The two QA export/render tools were verified separately.",
+  "commands": [
+    "python3 tools/validate_godot.py --godot GODOT --tests creature_part_articulation_test --skip-main --output QA/first",
+    "python3 tools/validate_godot.py --godot GODOT --tests creature_part_articulation_test creature_mouth_provider_test creature_hand_provider_test creature_animation_continuity_test creature_body_contract_test wildlife_foraging_test --skip-import --skip-main --output QA/focused",
+    "python3 tools/validate_godot.py --godot GODOT --tests creature_part_articulation_test creature_behavior_gameplay_test --skip-import --skip-main --output QA/actions",
+    "GODOT --headless --path PROJECT --script res://tools/capture_part_articulation.gd -- QA/mesh",
+    "python3 tools/render_part_articulation.py QA/mesh/bodies.json QA/mesh/articulation-bodies.png"
+  ],
+  "results": {
+    "unique_godot_tests_passed": 7,
+    "latest_articulation_assertions": 6621,
+    "fresh_process_restart": true,
+    "initial_import_and_art_sources": "passed",
+    "tracked_source_after_commit": "clean"
+  },
+  "initial_failure": "The first new test expected a predator attack without entering its normal chase state. Fixture now supplies range, chase intent and elapsed warning; gameplay checks retained. Initial log kept.",
+  "visual_review": {
+    "kind": "CPU render of actual Godot full-body meshes",
+    "image": "articulation-bodies.png",
+    "inspected": true,
+    "scope": "Canine/crocodile/octopus mouths and mirrored crab claws at authored rest and maximum opening.",
+    "limits": "Native graphics window unavailable: Xvfb could not create a local listening socket. No game screenshot, shader/rendering acceptance, live animation video or FPS claim. First CPU layout had inconsistent plot scale; corrected with a copied aspect vector and re-rendered."
+  },
+  "limits": [
+    "No native Windows export or target-PC run",
+    "No shared merge-tree integration test",
+    "Cosmetic opening only; no new grabbing, damage, unlocks or gameplay capabilities",
+    "Default templates and legacy meshes retain authored rest poses; joint animations are not saved"
+  ]
+}
