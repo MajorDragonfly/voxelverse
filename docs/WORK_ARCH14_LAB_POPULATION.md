@@ -1,7 +1,7 @@
 # ARCH-14-LAB-POPULATION – dauerhaftes Wildtierarchiv im Planetenlabor
 
-Teilauftrag: `ARCH-14-LAB-POPULATION`  
-Basis: `d378ca0ecd7f03429a5150df6358e0646ec06689`  
+Teilauftrag: `ARCH-14-LAB-POPULATION`
+Basis: `d378ca0ecd7f03429a5150df6358e0646ec06689`
 Branch: `agent/arch14-lab-population-20260915`
 
 Das separate lebende Planetenlabor hat bisher nach 256 gespeicherten Wildtieren

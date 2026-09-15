@@ -27,7 +27,10 @@ func _run() -> void:
 		var stored: Dictionary = Save.read().data
 		_expect(not stored.is_empty() and stored.body_id == world.body_id, "Restart lost body")
 		_expect(_distance(stored.bodies[world.body_id].player.location, world.walker.location(), world) < 0.001, "Restart lost player location")
-		_expect(JSON.stringify(stored.bodies[world.body_id].fauna_archive) == JSON.stringify(world.ecosystem.fauna.checkpoint()), "Restart changed individual anatomy or saved animal state")
+		var expected_manifest: Dictionary = stored.bodies[world.body_id].fauna_archive
+		var actual_manifest: Dictionary = world.ecosystem.fauna.checkpoint()
+		_expect(preload("res://tests/fixtures/domestic_native_comparison.gd").native_equal(expected_manifest, actual_manifest),
+			"Restart changed archive manifest: " + JSON.stringify(expected_manifest) + " -> " + JSON.stringify(actual_manifest))
 		# Load real runtime visuals in the fresh process, not just JSON records.
 		world.set_paused(false)
 		for frame in range(900):
