@@ -3,6 +3,7 @@
   "documentation": ["AGENTS.md", "README.md", "ROADMAP.md", "docs/*.md"],
   "full": ["project.godot", "export_presets.cfg", "autoload/*", "main/*", "core/campaign/*", "core/persistence/*", "core/runtime_shutdown.gd*", "core/diagnostics/*", "world/surface/*", "localization/*", ".github/*", "tools/*"],
   "rules": [
+    {"id": "weather", "paths": ["world/weather/*"], "contracts": ["weather"], "tests": ["underwater_view_test"]},
     {"id": "audio", "paths": ["audio/*"], "contracts": ["audio", "wildlife", "spherical_gameplay"]},
     {"id": "creature-body", "paths": ["creatures/catalog/*", "creatures/editor/*", "creatures/runtime/*", "creatures/parts/*"], "contracts": ["creature_body", "blueprints", "domestic_fauna", "domestication", "discovery_map", "spherical_gameplay"]},
     {"id": "blueprints", "paths": ["assembly/*", "civilization/buildings/*"], "contracts": ["blueprints", "creature_body", "expedition_design", "campaign", "spherical_gameplay"]},

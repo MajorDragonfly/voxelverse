@@ -140,6 +140,28 @@ Der zusammengeführte D1-Grundvertrag mit drei Pflichtarten bleibt als eigene Li
 - **Minimap als geprüftes Fachpaket:** unten rechts, gemeinsames Gelände-/Wasserraster, Blickrichtung, Heimat und eigene Gruppenmitglieder. Der bestätigte Phasenwechsel erweitert den Maßstab automatisch; manuell +/− und Rückkehr zum Phasenmaßstab. Körpergebundene Projektion für V9 und Kugelplaneten, Save/Load sowie getrennte Dorfbedienung bei 1280 × 720 und 800 × 600 geprüft. Details und Grenzen: [WORK_MINIMAP.md](docs/WORK_MINIMAP.md). In der zweiten Integrationsrunde samt dauerhafter Weltkarte übernommen. Offen bleiben gespeicherte Wegpunkte, eigene gezähmte Tiere aus D2 und später passende Orbit-/Systemkarten; unbekannte Arten und Rohstoffe werden nicht verraten.
 - **Abnahme auf dem Ziel-PC:** Lesbarkeit der Bücher und Silhouetten, neue Beerenstrauchform, E als einziger Art-/Wertezugriff und passende Drehrichtung im Editor. Die lokale automatische Funktionsprüfung ersetzt die optische Abnahme nicht.
 
+## Planetenwetter – friedliche Heimat und spätere Extremwelten
+
+**Nutzerauftrag vom 15.09.2026:** Der Startplanet bleibt beim Wetter friedlich und
+erdähnlich: freundlicher Himmel, Wolken, sanfter Wind, Nieselregen und normale
+Regenschauer. Keine Feuer-/Sandstürme oder wetterbedingter Überlebenszwang auf der
+Heimatwelt. Spätere Extremplaneten können gefährliche Sand-, Feuer- und
+Schneestürme erhalten; Vorwarnung und erreichbarer Schutz gehören dazu.
+
+**WEATHER-01 – Fachlieferung auf eigenem Branch:** deterministische Wetterfronten
+an der gespeicherten Kampagnenzeit, weiche Übergänge, radiale Voxelwolken und
+begrenzter Nahregen, Pause/Laden sowie Unterwasser-/Dachunterdrückung. Aktuell
+bleiben alle Kampagnenkörper mild. Rendering und Shader erhalten einen gemeinsamen
+lesbaren Wetteranschluss; native Grafik-/Leistungsabnahme steht aus.
+
+**Geplant:** WEATHER-02 versioniert planetare Klimazonen und den dauerhaften
+Schutz der Startwelt; WEATHER-03 setzt Sand-/Feuerstürme mit Vorwarnung um;
+WEATHER-04 verbindet Schutz, Hitze-/Staubexposition und Deckungsverhalten von
+Tieren/Bewohnern mit bestehenden Fachbesitzern; WEATHER-05 ergänzt Shader, Ton,
+Warnungen, Qualitätsregler und den gemeinsamen Ziel-PC-Spieltest. Extremprofile
+bleiben bis zur sicheren Reise-/Schutzkette deaktiviert. Details, Abnahmen und
+Übergabe an die parallelen Rendering-/Shader-Arbeiten: [Wetterplan](docs/WEATHER_PLAN.md).
+
 ## Weltraumphase – mobile Expeditionsbasis
 
 Das erste Expeditionsschiff ist bereits deutlich größer als sein Landungs-/Erkundungsschiff. Die Basis bleibt beim Planeten im Weltraum, während der Spieler mit einem konkreten Beiboot landet, aussteigt und die Oberfläche untersucht. Schiffwechsel sind Kontroll-/Ortswechsel innerhalb derselben Kampagne und Epoche.

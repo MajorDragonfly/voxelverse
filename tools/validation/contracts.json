@@ -299,6 +299,15 @@
         "expedition_contract_test",
         "shipyard_test"
       ]
+    },
+    {
+      "id": "weather",
+      "title": "Sanftes Planetenwetter und Darstellungsanschluss",
+      "work": "WEATHER-01",
+      "tests": [
+        "weather_model_test",
+        "weather_runtime_test"
+      ]
     }
   ],
   "scenarios": [

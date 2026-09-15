@@ -1,0 +1,68 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "execution": "headless_source_project",
+  "base_commit": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+  "final_source_commit": "41dbeb9e8e91bc084e6f2331ffc33c6dbcf872f6",
+  "final_source_tree": "867e71dc22616931cb581c9563e6bf49d80dc10e",
+  "checks": [
+    {
+      "name": "weather_model_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.473,
+      "contract": "weather",
+      "source": {
+        "commit": "9a87fff3e0d80a7cc456a6587f03b74c67fef4df",
+        "tracked_worktree_dirty": false
+      },
+      "log": "weather_model_test.log"
+    },
+    {
+      "name": "underwater_view_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.802,
+      "contract": "terrain_art",
+      "source": {
+        "commit": "9a87fff3e0d80a7cc456a6587f03b74c67fef4df",
+        "tracked_worktree_dirty": false
+      },
+      "log": "underwater_view_test.log"
+    },
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.167,
+      "source": {
+        "commit": "41dbeb9e8e91bc084e6f2331ffc33c6dbcf872f6",
+        "tracked_worktree_dirty": false
+      },
+      "log": "source_contracts.log"
+    },
+    {
+      "name": "weather_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 33.212,
+      "contract": "weather",
+      "source": {
+        "commit": "41dbeb9e8e91bc084e6f2331ffc33c6dbcf872f6",
+        "tracked_worktree_dirty": false
+      },
+      "log": "weather_runtime_test.log"
+    }
+  ],
+  "limits": [
+    "No native Windows rendering or target-PC FPS evidence",
+    "Import reused after successful initial import; no added asset files"
+  ],
+  "corrections": [
+    "Cold-process comparison uses lossless Variant bytes instead of JSON-rounded float values",
+    "Rebase assertion observes presentation after Node._process; original pre-presentation comparison was timing-dependent"
+  ]
+}
