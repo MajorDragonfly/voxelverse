@@ -8,10 +8,15 @@ var player: CharacterBody3D
 var metrics: Dictionary = {}
 var residency_checks: int = 0
 var residency_states: Dictionary = {}
+var completed: bool = false
+
+func _finalize() -> void:
+	if not completed: printerr("ERROR: Terrain lookahead exited before its completion marker.")
 
 func _initialize() -> void: call_deferred("_run")
 
 func _run() -> void:
+	print("TERRAIN_LOOKAHEAD_STAGE campaign_start")
 	var saves: Node = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
 	var flow: Node = root.get_node("SessionFlow")
@@ -26,12 +31,14 @@ func _run() -> void:
 		_expect(false, "Campaign failed to become playable.")
 		await _finish(); return
 	terrain = current_scene.terrain
+	print("TERRAIN_LOOKAHEAD_STAGE campaign_ready")
 	player = current_scene.player
 	# Pause actors while driving only the real terrain lifecycle explicitly.
 	paused = true
 	var address: Dictionary = Cube.address(terrain.surface.body.id, 0, 0.999997, 0.79)
 	address.height = terrain.surface.sample(address).height + 0.1
 	player.place(address)
+	print("TERRAIN_LOOKAHEAD_STAGE seam_ready")
 	var up: Vector3 = player.up_direction
 	var tangent: Vector3 = Cube.frame(up).x
 	var start: Array = Cube.cartesian(player.location(), terrain.surface.body.radius)
@@ -69,6 +76,7 @@ func _run() -> void:
 	for index in range(4): await process_frame
 	_expect(terrain.updates == published and terrain._job == old_job, "Paused terrain published or advanced a job.")
 	await _drain(start)
+	print("TERRAIN_LOOKAHEAD_STAGE first_drain")
 	_expect(terrain.discarded_jobs > 0 and old_job._tasks.is_empty() and old_job._selection_task == -1, "Obsolete worker survived or was published.")
 	old_job = null
 	# Start the opposite cover and abandon a fully prepared, inactive collider.
@@ -123,6 +131,7 @@ func _run() -> void:
 	_expect(reference.get_ref() == null, "Discarded staged node remained allocated.")
 	_expect(body_reference.get_ref() == null, "Discarded staged physics body remained allocated.")
 	await _drain(start)
+	print("TERRAIN_LOOKAHEAD_STAGE discard_drain")
 	_expect(terrain.cache_hits > 0, "Reversal fixture never reused a cached mesh.")
 	for state in ["shared", "mesh_before_node", "retired", "cache", "empty"]:
 		_expect(residency_states.has(state), "Residency fixture missed state: " + state)
@@ -181,6 +190,7 @@ func _expect(ok: bool, message: String) -> void:
 
 func _finish() -> void:
 	paused = false
+	completed = true
 	for failure in failures: push_error(failure)
 	print("TERRAIN_LOOKAHEAD ", JSON.stringify({"passed": failures.is_empty(), "failures": failures, "metrics": metrics}))
 	await Shutdown.finish(self, 0 if failures.is_empty() else 1)
