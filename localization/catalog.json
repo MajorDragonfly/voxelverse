@@ -2846,6 +2846,1776 @@
       "key": "SKILLS_PHASE_5_NEXT",
       "de": "Langfristiger Entwurf; konkrete Spielregeln erst nach der Weltraumphase festlegen.",
       "en": "Long-term concept; concrete gameplay rules will be defined after the space phase."
+    },
+    {
+      "key": "EDITOR_TITLE",
+      "de": "VOXELVERSE  /  KREATUREN",
+      "en": "VOXELVERSE  /  CREATURES"
+    },
+    {
+      "key": "EDITOR_WELCOME",
+      "de": "Deine Kreatur. Deine Form.",
+      "en": "Your creature. Your shape."
+    },
+    {
+      "key": "EDITOR_TAB_BODY",
+      "de": "01  Formen",
+      "en": "01  Shape"
+    },
+    {
+      "key": "EDITOR_TAB_PARTS",
+      "de": "02  Teile",
+      "en": "02  Parts"
+    },
+    {
+      "key": "EDITOR_TAB_PAINT",
+      "de": "03  Farbe",
+      "en": "03  Color"
+    },
+    {
+      "key": "EDITOR_TAB_TEST",
+      "de": "04  Testen",
+      "en": "04  Test"
+    },
+    {
+      "key": "EDITOR_PLAY",
+      "de": "In die Welt  →",
+      "en": "Into the world  →"
+    },
+    {
+      "key": "EDITOR_PALETTE_BODY",
+      "de": "KÖRPER FORMEN",
+      "en": "SHAPE THE BODY"
+    },
+    {
+      "key": "EDITOR_PALETTE_PARTS",
+      "de": "TEILE ANBAUEN",
+      "en": "ATTACH PARTS"
+    },
+    {
+      "key": "EDITOR_PALETTE_PAINT",
+      "de": "FARBE & MUSTER",
+      "en": "COLOR & PATTERN"
+    },
+    {
+      "key": "EDITOR_PALETTE_TEST",
+      "de": "LEBENDIG WERDEN",
+      "en": "BRING IT TO LIFE"
+    },
+    {
+      "key": "EDITOR_PALETTE_DEFAULT",
+      "de": "TEILE",
+      "en": "PARTS"
+    },
+    {
+      "key": "EDITOR_INSPECTOR",
+      "de": "DEINE KREATUR",
+      "en": "YOUR CREATURE"
+    },
+    {
+      "key": "EDITOR_ATTACHED",
+      "de": "ANGEBAUTE TEILE",
+      "en": "ATTACHED PARTS"
+    },
+    {
+      "key": "EDITOR_SELECT_POINT",
+      "de": "Körperpunkt wählen",
+      "en": "Select a body point"
+    },
+    {
+      "key": "EDITOR_WIDTH",
+      "de": "Breite",
+      "en": "Width"
+    },
+    {
+      "key": "EDITOR_HEIGHT",
+      "de": "Höhe",
+      "en": "Height"
+    },
+    {
+      "key": "EDITOR_CURVATURE",
+      "de": "Krümmung",
+      "en": "Curvature"
+    },
+    {
+      "key": "EDITOR_LENGTH",
+      "de": "Körperlänge",
+      "en": "Body length"
+    },
+    {
+      "key": "EDITOR_BASE_COLOR",
+      "de": "Hautfarbe",
+      "en": "Skin color"
+    },
+    {
+      "key": "EDITOR_ACCENT_COLOR",
+      "de": "Musterfarbe",
+      "en": "Pattern color"
+    },
+    {
+      "key": "EDITOR_BELLY_COLOR",
+      "de": "Bauchfarbe",
+      "en": "Belly color"
+    },
+    {
+      "key": "EDITOR_EYE_COLOR",
+      "de": "Irisfarbe",
+      "en": "Iris color"
+    },
+    {
+      "key": "EDITOR_HORN_COLOR",
+      "de": "Hörner & Krallen",
+      "en": "Horns & claws"
+    },
+    {
+      "key": "EDITOR_DUPLICATE",
+      "de": "Kopie",
+      "en": "Duplicate"
+    },
+    {
+      "key": "EDITOR_REMOVE",
+      "de": "Entfernen",
+      "en": "Remove"
+    },
+    {
+      "key": "EDITOR_FRAME",
+      "de": "Ansicht einpassen  ·  F",
+      "en": "Fit view  ·  F"
+    },
+    {
+      "key": "EDITOR_TARGET_LIMB",
+      "de": "Ganze Gliedmaße",
+      "en": "Whole limb"
+    },
+    {
+      "key": "EDITOR_TARGET_END",
+      "de": "Fuß / Hand",
+      "en": "Foot / hand"
+    },
+    {
+      "key": "EDITOR_TARGET_FOOT",
+      "de": "Fuß bearbeiten",
+      "en": "Edit foot"
+    },
+    {
+      "key": "EDITOR_TARGET_HAND",
+      "de": "Hand bearbeiten",
+      "en": "Edit hand"
+    },
+    {
+      "key": "EDITOR_SINGLE",
+      "de": "Einzeln",
+      "en": "Single"
+    },
+    {
+      "key": "EDITOR_PAIRED",
+      "de": "Paar",
+      "en": "Pair"
+    },
+    {
+      "key": "EDITOR_CENTER",
+      "de": "Mitte",
+      "en": "Center"
+    },
+    {
+      "key": "EDITOR_POSITION",
+      "de": "Ort",
+      "en": "Position"
+    },
+    {
+      "key": "EDITOR_ROTATION",
+      "de": "Drehen",
+      "en": "Rotate"
+    },
+    {
+      "key": "EDITOR_SHAPE",
+      "de": "Form",
+      "en": "Shape"
+    },
+    {
+      "key": "EDITOR_AXIS_X",
+      "de": "X: seitlich / Breite",
+      "en": "X: sideways / width"
+    },
+    {
+      "key": "EDITOR_AXIS_Y",
+      "de": "Y: Höhe / Länge",
+      "en": "Y: height / length"
+    },
+    {
+      "key": "EDITOR_AXIS_Z",
+      "de": "Z: vor und zurück / Tiefe",
+      "en": "Z: forward and back / depth"
+    },
+    {
+      "key": "EDITOR_DEGREES",
+      "de": " · Grad",
+      "en": " · degrees"
+    },
+    {
+      "key": "EDITOR_SIZE",
+      "de": "Gesamtgröße",
+      "en": "Overall size"
+    },
+    {
+      "key": "EDITOR_RESET_SHAPE",
+      "de": "Drehung & Form zurücksetzen",
+      "en": "Reset rotation & shape"
+    },
+    {
+      "key": "EDITOR_DEFAULT_END",
+      "de": "Standard-Fuß / -Hand",
+      "en": "Default foot / hand"
+    },
+    {
+      "key": "EDITOR_SKIN_TYPE",
+      "de": "Hauttyp · nur Oberfläche",
+      "en": "Skin type · surface only"
+    },
+    {
+      "key": "EDITOR_SKIN_STRENGTH",
+      "de": "Strukturstärke",
+      "en": "Texture strength"
+    },
+    {
+      "key": "EDITOR_SKIN_SCALE",
+      "de": "Feinheit der Struktur",
+      "en": "Texture detail"
+    },
+    {
+      "key": "EDITOR_PATTERN_STRENGTH",
+      "de": "Musterstärke",
+      "en": "Pattern strength"
+    },
+    {
+      "key": "EDITOR_SWATCH_SKIN",
+      "de": "Farbfelder → Haut",
+      "en": "Swatches → Skin"
+    },
+    {
+      "key": "EDITOR_SWATCH_PATTERN",
+      "de": "Farbfelder → Muster",
+      "en": "Swatches → Pattern"
+    },
+    {
+      "key": "EDITOR_SWATCH_BELLY",
+      "de": "Farbfelder → Bauch",
+      "en": "Swatches → Belly"
+    },
+    {
+      "key": "EDITOR_SWATCH_IRIS",
+      "de": "Farbfelder → Iris",
+      "en": "Swatches → Iris"
+    },
+    {
+      "key": "EDITOR_SWATCH_HORNS",
+      "de": "Farbfelder → Hörner",
+      "en": "Swatches → Horns"
+    },
+    {
+      "key": "EDITOR_NAME_HINT",
+      "de": "Name deiner Kreatur",
+      "en": "Your creature's name"
+    },
+    {
+      "key": "EDITOR_UNDO_HINT",
+      "de": "Rückgängig · Strg+Z",
+      "en": "Undo · Ctrl+Z"
+    },
+    {
+      "key": "EDITOR_REDO_HINT",
+      "de": "Wiederholen · Strg+Y",
+      "en": "Redo · Ctrl+Y"
+    },
+    {
+      "key": "EDITOR_SYMMETRY",
+      "de": "Symmetrie",
+      "en": "Symmetry"
+    },
+    {
+      "key": "EDITOR_SNAP",
+      "de": "Andocken",
+      "en": "Surface snap"
+    },
+    {
+      "key": "EDITOR_NEW",
+      "de": "Neu",
+      "en": "New"
+    },
+    {
+      "key": "EDITOR_LOAD",
+      "de": "Laden",
+      "en": "Load"
+    },
+    {
+      "key": "EDITOR_SAVE",
+      "de": "Speichern",
+      "en": "Save"
+    },
+    {
+      "key": "EDITOR_MOTION_IDLE",
+      "de": "Stehen & Atmen",
+      "en": "Stand & breathe"
+    },
+    {
+      "key": "EDITOR_MOTION_WALK",
+      "de": "Gehen",
+      "en": "Walk"
+    },
+    {
+      "key": "EDITOR_MOTION_RUN",
+      "de": "Laufen",
+      "en": "Run"
+    },
+    {
+      "key": "EDITOR_PRESET_UPRIGHT",
+      "de": "Aufrecht",
+      "en": "Upright"
+    },
+    {
+      "key": "EDITOR_PRESET_GRAZER",
+      "de": "Langhals",
+      "en": "Long neck"
+    },
+    {
+      "key": "EDITOR_PRESET_CRAWLER",
+      "de": "Kriecher",
+      "en": "Crawler"
+    },
+    {
+      "key": "EDITOR_PRESET_ROUND",
+      "de": "Kugelbauch",
+      "en": "Round belly"
+    },
+    {
+      "key": "EDITOR_PRESET_HINT",
+      "de": "Nur den Körper umformen. Deine Teile bleiben erhalten. Rückgängig mit Strg+Z.",
+      "en": "Reshape the body only. Your parts stay attached. Undo with Ctrl+Z."
+    },
+    {
+      "key": "EDITOR_SELECT_PART",
+      "de": "Teil auswählen",
+      "en": "Select a part"
+    },
+    {
+      "key": "EDITOR_YOUR_PALETTE",
+      "de": "Deine Farbpalette",
+      "en": "Your color palette"
+    },
+    {
+      "key": "EDITOR_MOTION_PREVIEW",
+      "de": "Bewegungsvorschau",
+      "en": "Motion preview"
+    },
+    {
+      "key": "EDITOR_FOOT",
+      "de": "Fuß",
+      "en": "Foot"
+    },
+    {
+      "key": "EDITOR_HAND",
+      "de": "Hand",
+      "en": "Hand"
+    },
+    {
+      "key": "EDITOR_PART",
+      "de": "Teil",
+      "en": "Part"
+    },
+    {
+      "key": "EDITOR_CAPTION_BODY",
+      "de": "Ziehen, strecken, formen.",
+      "en": "Drag, stretch, shape."
+    },
+    {
+      "key": "EDITOR_CAPTION_PARTS",
+      "de": "Was soll deine Kreatur können?",
+      "en": "What should your creature do?"
+    },
+    {
+      "key": "EDITOR_CAPTION_PAINT",
+      "de": "Gib ihr einen eigenen Charakter.",
+      "en": "Give it its own character."
+    },
+    {
+      "key": "EDITOR_CAPTION_TEST",
+      "de": "Eine Form wird lebendig.",
+      "en": "A shape comes to life."
+    },
+    {
+      "key": "EDITOR_STATUS_CENTER",
+      "de": "Mittellinie: sieben feste Andockpunkte.",
+      "en": "Centerline: seven fixed attachment points."
+    },
+    {
+      "key": "EDITOR_STATUS_PAIRED",
+      "de": "Linke und rechte Seite werden gemeinsam bearbeitet.",
+      "en": "Left and right sides are edited together."
+    },
+    {
+      "key": "EDITOR_STATUS_SINGLE",
+      "de": "Einzelnes Teil bearbeiten.",
+      "en": "Editing a single part."
+    },
+    {
+      "key": "EDITOR_STATUS_LEG_FIRST",
+      "de": "Wähle zuerst das gewünschte Bein.",
+      "en": "Select the intended leg first."
+    },
+    {
+      "key": "EDITOR_STATUS_ARM_FIRST",
+      "de": "Wähle zuerst den gewünschten Arm.",
+      "en": "Select the intended arm first."
+    },
+    {
+      "key": "EDITOR_STATUS_END_COST",
+      "de": "Nicht genug Formpunkte für dieses Endstück.",
+      "en": "Not enough shape points for this foot or hand."
+    },
+    {
+      "key": "EDITOR_STATUS_END_ADDED",
+      "de": "Endstück angebaut · Größe, Form und Drehung rechts einstellen.",
+      "en": "Foot or hand attached · Adjust size, shape and rotation in Properties."
+    },
+    {
+      "key": "EDITOR_STATUS_COPY_COST",
+      "de": "Nicht genug Formpunkte für eine Kopie.",
+      "en": "Not enough shape points for a duplicate."
+    },
+    {
+      "key": "EDITOR_STATUS_LOCKED",
+      "de": "Dieses Teil wird durch Entdecken freigeschaltet.",
+      "en": "Discover species to unlock this part."
+    },
+    {
+      "key": "EDITOR_STATUS_COST",
+      "de": "Nicht genug Formpunkte. Entferne zuerst ein Teil.",
+      "en": "Not enough shape points. Remove a part first."
+    },
+    {
+      "key": "EDITOR_STATUS_SELECTED",
+      "de": "Teil ausgewählt · Rechts: Drehen X/Y/Z, Form und Größe · Goldene Punkte: Mittellinie.",
+      "en": "Part selected · Properties: rotation X/Y/Z, shape and size · Gold points: centerline."
+    },
+    {
+      "key": "EDITOR_STATUS_PRESET",
+      "de": "Körperform angewendet · Deine Anbauteile bleiben erhalten · Strg+Z macht es rückgängig.",
+      "en": "Body shape applied · Your parts stay attached · Ctrl+Z to undo."
+    },
+    {
+      "key": "EDITOR_STATUS_TOO_MANY",
+      "de": "Zu viele Formpunkte. Entferne zuerst ein Teil.",
+      "en": "Too many shape points. Remove a part first."
+    },
+    {
+      "key": "EDITOR_STATUS_ADDED",
+      "de": "Teil angebaut · Mausrad: Größe · Alt + Ziehen: drehen · Strg+Z: rückgängig",
+      "en": "Part attached · Wheel: size · Alt + drag: rotate · Ctrl+Z: undo"
+    },
+    {
+      "key": "EDITOR_STATUS_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Dein Entwurf bleibt hier geöffnet.",
+      "en": "Save failed. Your design remains open here."
+    },
+    {
+      "key": "EDITOR_STATUS_WORLD_FAILED",
+      "de": "Die Welt konnte nicht geöffnet werden. Dein Entwurf ist gespeichert.",
+      "en": "The world could not be opened. Your design has been saved."
+    },
+    {
+      "key": "EDITOR_STATUS_NEW",
+      "de": "Neue Kreatur · Deinen vorherigen Entwurf erhältst du mit Strg+Z zurück.",
+      "en": "New creature · Restore your previous design with Ctrl+Z."
+    },
+    {
+      "key": "EDITOR_STATUS_LOADED",
+      "de": "Gespeicherte Kreatur geladen · Strg+Z stellt deine vorherige Bearbeitung wieder her.",
+      "en": "Saved creature loaded · Ctrl+Z restores your previous edits."
+    },
+    {
+      "key": "EDITOR_HELP_INITIAL",
+      "de": "Ziehe an den Körperpunkten. Das Mausrad macht die gewählte Stelle dicker oder dünner.",
+      "en": "Drag the body points. Use the wheel to make the selected point thicker or thinner."
+    },
+    {
+      "key": "EDITOR_HELP_BODY",
+      "de": "Punkt ziehen: Körper formen.\nMausrad: Stelle dicker / dünner.\nStrg + Mausrad: Körperlänge.",
+      "en": "Drag a point: shape the body.\nWheel: thicker / thinner.\nCtrl + wheel: body length."
+    },
+    {
+      "key": "EDITOR_HELP_PARTS",
+      "de": "Teile auf den Körper ziehen.\nMausrad: Größe · Alt + Ziehen: drehen.\nRechts ziehen: Ansicht drehen.",
+      "en": "Drag parts onto the body.\nWheel: size · Alt + drag: rotate.\nRight drag: orbit the view."
+    },
+    {
+      "key": "EDITOR_HELP_PAINT",
+      "de": "Wähle Hautfarbe, Akzent und ein Muster. Alle Änderungen siehst du sofort.",
+      "en": "Choose a skin color, accent and pattern. Preview every change immediately."
+    },
+    {
+      "key": "EDITOR_HELP_TEST",
+      "de": "Teste deine Form in Bewegung.\nDie Vorschau verändert deinen Entwurf nicht.",
+      "en": "Test your shape in motion.\nThe preview keeps your design unchanged."
+    },
+    {
+      "key": "EDITOR_HELP_END",
+      "de": "Wähle ein Bein oder einen Arm.\nEndstück anklicken oder auf die Gliedmaße ziehen.\nGröße und Drehung rechts einstellen.",
+      "en": "Select a leg or arm.\nClick a foot or hand, or drag it onto the limb.\nAdjust size and rotation in Properties."
+    },
+    {
+      "key": "EDITOR_HELP_SKIN",
+      "de": "Hauttyp, Muster und fünf Farben kombinieren. Hauttypen ändern nur die Oberfläche.",
+      "en": "Combine skin type, pattern and five colors. Skin types affect only the surface."
+    },
+    {
+      "key": "EDITOR_CATEGORY_BODY",
+      "de": "Körper",
+      "en": "Body"
+    },
+    {
+      "key": "EDITOR_CATEGORY_MOUTH",
+      "de": "Mäuler",
+      "en": "Mouths"
+    },
+    {
+      "key": "EDITOR_CATEGORY_EYES",
+      "de": "Augen",
+      "en": "Eyes"
+    },
+    {
+      "key": "EDITOR_CATEGORY_LEGS",
+      "de": "Beine",
+      "en": "Legs"
+    },
+    {
+      "key": "EDITOR_CATEGORY_ARMS",
+      "de": "Arme",
+      "en": "Arms"
+    },
+    {
+      "key": "EDITOR_CATEGORY_FEET",
+      "de": "Füße",
+      "en": "Feet"
+    },
+    {
+      "key": "EDITOR_CATEGORY_HANDS",
+      "de": "Hände",
+      "en": "Hands"
+    },
+    {
+      "key": "EDITOR_CATEGORY_TAIL",
+      "de": "Schwänze",
+      "en": "Tails"
+    },
+    {
+      "key": "EDITOR_CATEGORY_HORNS",
+      "de": "Hörner",
+      "en": "Horns"
+    },
+    {
+      "key": "EDITOR_CATEGORY_PLATES",
+      "de": "Panzer",
+      "en": "Armor"
+    },
+    {
+      "key": "EDITOR_CATEGORY_SPIKES",
+      "de": "Stacheln",
+      "en": "Spikes"
+    },
+    {
+      "key": "EDITOR_CATEGORY_DECOR",
+      "de": "Details",
+      "en": "Details"
+    },
+    {
+      "key": "EDITOR_CATEGORY_PAINT",
+      "de": "Muster",
+      "en": "Patterns"
+    },
+    {
+      "key": "EDITOR_SKIN_SMOOTH",
+      "de": "Glatt",
+      "en": "Smooth"
+    },
+    {
+      "key": "EDITOR_SKIN_SCALES",
+      "de": "Schuppen",
+      "en": "Scales"
+    },
+    {
+      "key": "EDITOR_SKIN_FUR",
+      "de": "Kurzes Fell",
+      "en": "Short fur"
+    },
+    {
+      "key": "EDITOR_SKIN_LEATHER",
+      "de": "Leder",
+      "en": "Leather"
+    },
+    {
+      "key": "EDITOR_SKIN_CHITIN",
+      "de": "Chitin",
+      "en": "Chitin"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_0",
+      "de": "Wald",
+      "en": "Forest"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_1",
+      "de": "Wüste",
+      "en": "Desert"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_2",
+      "de": "Ozean",
+      "en": "Ocean"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_3",
+      "de": "Glut",
+      "en": "Ember"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_4",
+      "de": "Dämmerung",
+      "en": "Twilight"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_5",
+      "de": "Polar",
+      "en": "Polar"
+    },
+    {
+      "key": "EDITOR_STATS",
+      "de": "{used} / {limit} Formpunkte\n\nTempo  {speed}     Kraft  {attack}\nSchutz  {defense}     Sinne  {perception}",
+      "en": "{used} / {limit} shape points\n\nSpeed  {speed}     Power  {attack}\nArmor  {defense}     Senses  {perception}"
+    },
+    {
+      "key": "EDITOR_POINT",
+      "de": "Punkt {point} / 7",
+      "en": "Point {point} / 7"
+    },
+    {
+      "key": "EDITOR_STATUS_SAVED",
+      "de": "Gespeichert · {name} · Revision {revision}",
+      "en": "Saved · {name} · Revision {revision}"
+    },
+    {
+      "key": "EDITOR_SHOW_INSPECTOR",
+      "de": "Eigenschaften",
+      "en": "Properties"
+    },
+    {
+      "key": "EDITOR_SHOW_PALETTE",
+      "de": "Teileauswahl",
+      "en": "Palette"
+    },
+    {
+      "key": "EDITOR_CARD_LOCKED",
+      "de": "Gesperrt",
+      "en": "Locked"
+    },
+    {
+      "key": "EDITOR_CARD_COST",
+      "de": "{count} Formpunkte",
+      "en": "{count} shape points"
+    },
+    {
+      "key": "EDITOR_CARD_HINT",
+      "de": "Zur Kreatur ziehen oder anklicken.",
+      "en": "Drag onto the creature or click."
+    },
+    {
+      "key": "EDITOR_CARD_UNLOCK",
+      "de": "Durch das Entdecken von Arten freischalten.",
+      "en": "Discover species to unlock."
+    },
+    {
+      "key": "EDITOR_STATUS_UNDO_EMPTY",
+      "de": "Nichts zum Rückgängigmachen.",
+      "en": "Nothing to undo."
+    },
+    {
+      "key": "EDITOR_STATUS_REDO_EMPTY",
+      "de": "Nichts zum Wiederholen.",
+      "en": "Nothing to redo."
+    },
+    {
+      "key": "EDITOR_STATUS_UNDO",
+      "de": "Bearbeitung rückgängig gemacht.",
+      "en": "Undo applied."
+    },
+    {
+      "key": "EDITOR_STATUS_REDO",
+      "de": "Bearbeitung wiederhergestellt.",
+      "en": "Redo applied."
+    },
+    {
+      "key": "EDITOR_STATUS_SNAP_ON",
+      "de": "Andocken eingeschaltet.",
+      "en": "Surface snap enabled."
+    },
+    {
+      "key": "EDITOR_STATUS_SNAP_OFF",
+      "de": "Andocken ausgeschaltet.",
+      "en": "Surface snap disabled."
+    },
+    {
+      "key": "EDITOR_STATUS_ATTACH_SELECT",
+      "de": "Wähle zuerst ein Teil.",
+      "en": "Select a modular part first."
+    },
+    {
+      "key": "EDITOR_STATUS_ATTACHED",
+      "de": "Teil an der Körperoberfläche befestigt.",
+      "en": "Selected part attached to the body surface."
+    },
+    {
+      "key": "EDITOR_PART_BODY_BALANCED_CORE_NAME",
+      "de": "Ausgewogener Körper",
+      "en": "Balanced Core"
+    },
+    {
+      "key": "EDITOR_PART_BODY_BALANCED_CORE_DESCRIPTION",
+      "de": "Mittelgroßer Kreaturenkörper.",
+      "en": "Middle-sized creature body."
+    },
+    {
+      "key": "EDITOR_PART_BODY_LONG_GRAZER_NAME",
+      "de": "Langer Weidekörper",
+      "en": "Long Grazer Core"
+    },
+    {
+      "key": "EDITOR_PART_BODY_LONG_GRAZER_DESCRIPTION",
+      "de": "Langer Körper für standfeste Pflanzenfresser.",
+      "en": "Long body for stable herbivores."
+    },
+    {
+      "key": "EDITOR_PART_BODY_HEAVY_SHELL_NAME",
+      "de": "Schwerer Panzerkörper",
+      "en": "Heavy Shell"
+    },
+    {
+      "key": "EDITOR_PART_BODY_HEAVY_SHELL_DESCRIPTION",
+      "de": "Breiter, geschützter Körper.",
+      "en": "Wide protected body."
+    },
+    {
+      "key": "EDITOR_PART_BODY_INSECTOID_NAME",
+      "de": "Insektenkörper",
+      "en": "Insectoid Thorax"
+    },
+    {
+      "key": "EDITOR_PART_BODY_INSECTOID_DESCRIPTION",
+      "de": "Gegliederter Körper für viele Beine.",
+      "en": "Segmented body for many legs."
+    },
+    {
+      "key": "EDITOR_PART_BODY_SERPENT_BASE_NAME",
+      "de": "Schlangenkörper",
+      "en": "Serpent Base"
+    },
+    {
+      "key": "EDITOR_PART_BODY_SERPENT_BASE_DESCRIPTION",
+      "de": "Flexibler, lang gestreckter Körper.",
+      "en": "Flexible stretched body."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_PLAIN_NAME",
+      "de": "Schlichte Haut",
+      "en": "Plain Skin"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_PLAIN_DESCRIPTION",
+      "de": "Natürliche Grundfarbe.",
+      "en": "Natural base color."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_FOREST_SPOTS_NAME",
+      "de": "Waldflecken",
+      "en": "Forest Spots"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_FOREST_SPOTS_DESCRIPTION",
+      "de": "Grüne Tarnflecken.",
+      "en": "Green camouflage spots."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_SAND_STRIPES_NAME",
+      "de": "Sandstreifen",
+      "en": "Sand Stripes"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_SAND_STRIPES_DESCRIPTION",
+      "de": "Streifen für trockene Biome.",
+      "en": "Dry biome stripes."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_WARNING_MARKS_NAME",
+      "de": "Warnzeichnung",
+      "en": "Warning Marks"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_WARNING_MARKS_DESCRIPTION",
+      "de": "Leuchtende Giftwarnzeichnung.",
+      "en": "Bright poisonous markings."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_CRYSTAL_BLOOM_NAME",
+      "de": "Kristallblüte",
+      "en": "Crystal Bloom"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_CRYSTAL_BLOOM_DESCRIPTION",
+      "de": "Bunte außerirdische Platten.",
+      "en": "Colorful alien plates."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_GRAZER_NAME",
+      "de": "Weidemaul",
+      "en": "Grazer Mouth"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_GRAZER_DESCRIPTION",
+      "de": "Gut für pflanzliche Nahrung.",
+      "en": "Good for plant food."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_BROAD_BEAK_NAME",
+      "de": "Breiter Schnabel",
+      "en": "Broad Beak"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_BROAD_BEAK_DESCRIPTION",
+      "de": "Einfacher, harter Schnabel.",
+      "en": "Simple hard beak."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_PREDATOR_JAWS_NAME",
+      "de": "Raubkiefer",
+      "en": "Predator Jaws"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_PREDATOR_JAWS_DESCRIPTION",
+      "de": "Kräftige Kiefer zum Beißen.",
+      "en": "Strong biting jaws."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_FILTER_SNOUT_NAME",
+      "de": "Filterschnauze",
+      "en": "Filter Snout"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_FILTER_SNOUT_DESCRIPTION",
+      "de": "Lange Schnauze zur Nahrungssuche im flachen Wasser.",
+      "en": "Long snout for shallow water feeding."
+    },
+    {
+      "key": "EDITOR_PART_EYES_BEADY_NAME",
+      "de": "Knopfaugen",
+      "en": "Beady Eyes"
+    },
+    {
+      "key": "EDITOR_PART_EYES_BEADY_DESCRIPTION",
+      "de": "Einfache Sicht für wenige Formpunkte.",
+      "en": "Cheap basic vision."
+    },
+    {
+      "key": "EDITOR_PART_EYES_WIDE_NAME",
+      "de": "Große Augen",
+      "en": "Wide Watchers"
+    },
+    {
+      "key": "EDITOR_PART_EYES_WIDE_DESCRIPTION",
+      "de": "Große, ausdrucksstarke Augen.",
+      "en": "Large expressive eyes."
+    },
+    {
+      "key": "EDITOR_PART_EYES_STALKS_NAME",
+      "de": "Stielaugen",
+      "en": "Eye Stalks"
+    },
+    {
+      "key": "EDITOR_PART_EYES_STALKS_DESCRIPTION",
+      "de": "Erhöhte Augen für sicheres Erkunden.",
+      "en": "Raised eyes for safer scanning."
+    },
+    {
+      "key": "EDITOR_PART_EYES_CLUSTER_NAME",
+      "de": "Augenbüschel",
+      "en": "Cluster Eyes"
+    },
+    {
+      "key": "EDITOR_PART_EYES_CLUSTER_DESCRIPTION",
+      "de": "Mehrere kleine Sinnesaugen.",
+      "en": "Multiple small sensor eyes."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_STUBBY_NAME",
+      "de": "Stummelbeine",
+      "en": "Stubby Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_STUBBY_DESCRIPTION",
+      "de": "Standfest, aber langsam.",
+      "en": "Stable but slow."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_WALKER_NAME",
+      "de": "Laufbeine",
+      "en": "Walker Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_WALKER_DESCRIPTION",
+      "de": "Ausgewogene Fortbewegung.",
+      "en": "Balanced movement."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_SPRINTER_NAME",
+      "de": "Sprintbeine",
+      "en": "Sprinter Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_SPRINTER_DESCRIPTION",
+      "de": "Schnell, aber hungrig.",
+      "en": "Fast but hungry."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_SPIDER_NAME",
+      "de": "Spinnenbeine",
+      "en": "Spider Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_SPIDER_DESCRIPTION",
+      "de": "Seitliche Beine mit vielen Gelenken.",
+      "en": "Many-jointed side legs."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_HOOF_NAME",
+      "de": "Hufbeine",
+      "en": "Hoof Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_HOOF_DESCRIPTION",
+      "de": "Schnelle Steppenbeine.",
+      "en": "Fast steppe legs."
+    },
+    {
+      "key": "EDITOR_PART_ARMS_GRASPING_NAME",
+      "de": "Greifarme",
+      "en": "Grasping Arms"
+    },
+    {
+      "key": "EDITOR_PART_ARMS_GRASPING_DESCRIPTION",
+      "de": "Einfache Handhabung von Gegenständen.",
+      "en": "Basic manipulation."
+    },
+    {
+      "key": "EDITOR_PART_ARMS_CLIMBER_NAME",
+      "de": "Kletterarme",
+      "en": "Climber Arms"
+    },
+    {
+      "key": "EDITOR_PART_ARMS_CLIMBER_DESCRIPTION",
+      "de": "Lange Arme mit kräftigem Griff.",
+      "en": "Long arms with strong grip."
+    },
+    {
+      "key": "EDITOR_PART_ARMS_CLAWS_NAME",
+      "de": "Krallenarme",
+      "en": "Claw Arms"
+    },
+    {
+      "key": "EDITOR_PART_ARMS_CLAWS_DESCRIPTION",
+      "de": "Krallenbewehrte Arme zum Angreifen.",
+      "en": "Offensive clawed arms."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BALANCE_NAME",
+      "de": "Balanceschwanz",
+      "en": "Balance Tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BALANCE_DESCRIPTION",
+      "de": "Hilft bei der Fortbewegung.",
+      "en": "Helps with movement."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_CLUB_NAME",
+      "de": "Keulenschwanz",
+      "en": "Club Tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_CLUB_DESCRIPTION",
+      "de": "Schwerer Schwanz zur Verteidigung.",
+      "en": "Heavy defensive tail."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_FIN_NAME",
+      "de": "Flossenschwanz",
+      "en": "Fin Tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_FIN_DESCRIPTION",
+      "de": "Unterstützt die Bewegung im Wasser.",
+      "en": "Water movement helper."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STINGER_NAME",
+      "de": "Stachelschwanz",
+      "en": "Stinger Tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STINGER_DESCRIPTION",
+      "de": "Gefährlicher, spitzer Schwanz.",
+      "en": "Dangerous pointed tail."
+    },
+    {
+      "key": "EDITOR_PART_HORNS_SMALL_NAME",
+      "de": "Kleine Hörner",
+      "en": "Small Horns"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_SMALL_DESCRIPTION",
+      "de": "Kleine Hörner zur Verteidigung.",
+      "en": "Small defensive horns."
+    },
+    {
+      "key": "EDITOR_PART_HORNS_CREST_NAME",
+      "de": "Kammhörner",
+      "en": "Crest Horns"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_CREST_DESCRIPTION",
+      "de": "Zum Imponieren und Verteidigen.",
+      "en": "Visual display and defense."
+    },
+    {
+      "key": "EDITOR_PART_HORNS_ANTLERS_NAME",
+      "de": "Astgeweih",
+      "en": "Branch Antlers"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_ANTLERS_DESCRIPTION",
+      "de": "Großes, verzweigtes Geweih zum Imponieren.",
+      "en": "Large branching display horns."
+    },
+    {
+      "key": "EDITOR_PART_PLATES_DORSAL_NAME",
+      "de": "Rückenplatten",
+      "en": "Dorsal Plates"
+    },
+    {
+      "key": "EDITOR_PART_PLATES_DORSAL_DESCRIPTION",
+      "de": "Panzerplatten auf dem Rücken.",
+      "en": "Back armor plates."
+    },
+    {
+      "key": "EDITOR_PART_PLATES_SHELL_NAME",
+      "de": "Schalenpanzer",
+      "en": "Shell Plates"
+    },
+    {
+      "key": "EDITOR_PART_PLATES_SHELL_DESCRIPTION",
+      "de": "Mehrlagiger Schalenpanzer.",
+      "en": "Layered shell armor."
+    },
+    {
+      "key": "EDITOR_PART_SPIKES_BACK_NAME",
+      "de": "Rückenstacheln",
+      "en": "Back Spikes"
+    },
+    {
+      "key": "EDITOR_PART_SPIKES_BACK_DESCRIPTION",
+      "de": "Einfache Stacheln zur Verteidigung.",
+      "en": "Simple defensive spikes."
+    },
+    {
+      "key": "EDITOR_PART_SPIKES_SIDE_NAME",
+      "de": "Seitenstacheln",
+      "en": "Side Spikes"
+    },
+    {
+      "key": "EDITOR_PART_SPIKES_SIDE_DESCRIPTION",
+      "de": "Schutz an den Seiten.",
+      "en": "Side protection."
+    },
+    {
+      "key": "EDITOR_PART_DECOR_FEATHERS_NAME",
+      "de": "Federkamm",
+      "en": "Feather Crest"
+    },
+    {
+      "key": "EDITOR_PART_DECOR_FEATHERS_DESCRIPTION",
+      "de": "Bunte Federn zum Imponieren.",
+      "en": "Colorful social display."
+    },
+    {
+      "key": "EDITOR_PART_DECOR_CRYSTALS_NAME",
+      "de": "Kristallwuchs",
+      "en": "Crystal Growths"
+    },
+    {
+      "key": "EDITOR_PART_DECOR_CRYSTALS_DESCRIPTION",
+      "de": "Leuchtender außerirdischer Schmuck.",
+      "en": "Bright alien decoration."
+    },
+    {
+      "key": "EDITOR_PART_FEET_PADS_NAME",
+      "de": "Ballenfüße",
+      "en": "Padded feet"
+    },
+    {
+      "key": "EDITOR_PART_FEET_PADS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_CLAWS_NAME",
+      "de": "Krallenfüße",
+      "en": "Clawed feet"
+    },
+    {
+      "key": "EDITOR_PART_FEET_CLAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_HOOVES_NAME",
+      "de": "Spalthufe",
+      "en": "Cloven hooves"
+    },
+    {
+      "key": "EDITOR_PART_FEET_HOOVES_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_WEBBED_NAME",
+      "de": "Schwimmfüße",
+      "en": "Webbed feet"
+    },
+    {
+      "key": "EDITOR_PART_FEET_WEBBED_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_FELINE_PAWS_NAME",
+      "de": "Katzenpfoten",
+      "en": "Cat paws"
+    },
+    {
+      "key": "EDITOR_PART_FEET_FELINE_PAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_BEAR_PAWS_NAME",
+      "de": "Bärentatzen",
+      "en": "Bear paws"
+    },
+    {
+      "key": "EDITOR_PART_FEET_BEAR_PAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_HORSE_HOOVES_NAME",
+      "de": "Pferdehufe",
+      "en": "Horse hooves"
+    },
+    {
+      "key": "EDITOR_PART_FEET_HORSE_HOOVES_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_HANDS_GRASP_NAME",
+      "de": "Greifhände",
+      "en": "Grasping hands"
+    },
+    {
+      "key": "EDITOR_PART_HANDS_GRASP_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_HANDS_CLAWS_NAME",
+      "de": "Krallenhände",
+      "en": "Clawed hands"
+    },
+    {
+      "key": "EDITOR_PART_HANDS_CLAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_HANDS_PINCERS_NAME",
+      "de": "Scherenhände",
+      "en": "Pincers"
+    },
+    {
+      "key": "EDITOR_PART_HANDS_PINCERS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_HANDS_CRAB_CLAWS_NAME",
+      "de": "Krebsscheren",
+      "en": "Crab claws"
+    },
+    {
+      "key": "EDITOR_PART_HANDS_CRAB_CLAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_CANINE_SNOUT_NAME",
+      "de": "Hundeschnauze",
+      "en": "Canine snout"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_CANINE_SNOUT_DESCRIPTION",
+      "de": "Spitze Schnauze mit Nasenspiegel und Fangzähnen. Werte und Freischaltung wie Raubkiefer.",
+      "en": "Tapered snout with a nose pad and fangs. Stats and unlock match Predator Jaws."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_CROCODILE_SNOUT_NAME",
+      "de": "Krokodilschnauze",
+      "en": "Crocodile snout"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_CROCODILE_SNOUT_DESCRIPTION",
+      "de": "Lange, flache Schnauze mit zwei Zahnreihen. Werte und Freischaltung wie Raubkiefer.",
+      "en": "Long, flat snout with two rows of teeth. Stats and unlock match Predator Jaws."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_OCTOPUS_BEAK_NAME",
+      "de": "Oktopusmund",
+      "en": "Octopus mouth"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_OCTOPUS_BEAK_DESCRIPTION",
+      "de": "Runde Mundöffnung mit innenliegendem Schnabel. Werte und Freischaltung wie Raubkiefer.",
+      "en": "Round mouth opening with an inner beak. Stats and unlock match Predator Jaws."
+    },
+    {
+      "key": "EDITOR_TOOL_MOVE",
+      "de": "Verschieben · W",
+      "en": "Move · W"
+    },
+    {
+      "key": "EDITOR_TOOL_ROTATE",
+      "de": "Drehen · E",
+      "en": "Rotate · E"
+    },
+    {
+      "key": "EDITOR_TOOL_SCALE",
+      "de": "Größe · R",
+      "en": "Scale · R"
+    },
+    {
+      "key": "EDITOR_TOOL_JOINT",
+      "de": "Gelenk · J",
+      "en": "Joint · J"
+    },
+    {
+      "key": "EDITOR_JOINT_HELP",
+      "de": "Gelenkpunkt ziehen · Umschalt: Raster",
+      "en": "Drag joint point · Shift: snap"
+    },
+    {
+      "key": "EDITOR_JOINT_UPPER",
+      "de": "Oberes Segment",
+      "en": "Upper segment"
+    },
+    {
+      "key": "EDITOR_JOINT_LOWER",
+      "de": "Unteres Segment",
+      "en": "Lower segment"
+    },
+    {
+      "key": "EDITOR_JOINT_OFFSET",
+      "de": "Gelenkversatz · X / Y / Z",
+      "en": "Joint offset · X / Y / Z"
+    },
+    {
+      "key": "EDITOR_JOINT_RESET",
+      "de": "Gelenk zurücksetzen",
+      "en": "Reset joint"
+    },
+    {
+      "key": "EDITOR_TOOL_MOVE_HINT",
+      "de": "Pfeil ziehen: eine Achse verschieben · Andocken bleibt wirksam.",
+      "en": "Drag an arrow: move along one axis · Surface snap stays active."
+    },
+    {
+      "key": "EDITOR_TOOL_ROTATE_HINT",
+      "de": "Farbring ziehen: lokal drehen · Umschalt: 15°-Schritte.",
+      "en": "Drag a colored ring: rotate locally · Shift: 15° steps."
+    },
+    {
+      "key": "EDITOR_TOOL_SCALE_HINT",
+      "de": "Quadrat ziehen: Proportion ändern · Mitte: Gesamtgröße.",
+      "en": "Drag a square: change proportions · Center: overall size."
+    },
+    {
+      "key": "EDITOR_TOOL_JOINT_HINT",
+      "de": "Goldenen Gelenkpunkt oder Achsen ziehen · Rechts: Segmentlängen.",
+      "en": "Drag the gold joint point or axes · Properties: segment lengths."
+    },
+    {
+      "key": "EDITOR_EDIT_CANCELLED",
+      "de": "Bearbeitung abgebrochen.",
+      "en": "Edit cancelled."
+    },
+    {
+      "key": "EDITOR_COURSE_TITLE",
+      "de": "TESTSTRECKE",
+      "en": "TEST COURSE"
+    },
+    {
+      "key": "EDITOR_COURSE_FLAT",
+      "de": "Arbeitsfläche",
+      "en": "Workbench"
+    },
+    {
+      "key": "EDITOR_COURSE_SLOPE",
+      "de": "Steigung",
+      "en": "Slope"
+    },
+    {
+      "key": "EDITOR_COURSE_STEPS",
+      "de": "Stufen",
+      "en": "Steps"
+    },
+    {
+      "key": "EDITOR_COURSE_RESUME",
+      "de": "Weiter",
+      "en": "Resume"
+    },
+    {
+      "key": "EDITOR_COURSE_PAUSE",
+      "de": "Pause",
+      "en": "Pause"
+    },
+    {
+      "key": "EDITOR_COURSE_RESTART",
+      "de": "Neu starten",
+      "en": "Restart"
+    },
+    {
+      "key": "EDITOR_COURSE_SPEED",
+      "de": "Tempo der Vorschau",
+      "en": "Preview speed"
+    },
+    {
+      "key": "EDITOR_COURSE_HELP",
+      "de": "Teste Haltung und Schritte auf der Arbeitsfläche, an einer Steigung oder auf Stufen.",
+      "en": "Test posture and steps on the workbench, a slope or steps."
+    },
+    {
+      "key": "EDITOR_COURSE_FINISHED",
+      "de": "Ziel erreicht · Neu starten",
+      "en": "Destination reached · Restart"
+    },
+    {
+      "key": "EDITOR_COURSE_PAUSED",
+      "de": "Angehalten",
+      "en": "Paused"
+    },
+    {
+      "key": "EDITOR_COURSE_DESIGN_SAFE",
+      "de": "Entwurf bleibt erhalten",
+      "en": "Your design stays unchanged"
+    },
+    {
+      "key": "EDITOR_FITTINGS",
+      "de": "Sattel & Geschirr prüfen",
+      "en": "Check saddle & harness"
+    },
+    {
+      "key": "EDITOR_FIT_CHECK",
+      "de": "Anhalten & jetzt prüfen",
+      "en": "Pause & check now"
+    },
+    {
+      "key": "EDITOR_FIT_FIND",
+      "de": "Freiraum am Anschluss suchen",
+      "en": "Find attachment clearance"
+    },
+    {
+      "key": "EDITOR_FIT_APPLY",
+      "de": "Vorschlag übernehmen",
+      "en": "Apply proposal"
+    },
+    {
+      "key": "EDITOR_SOCKET_SADDLE",
+      "de": "Sattel / Reitersitz",
+      "en": "Saddle / rider seat"
+    },
+    {
+      "key": "EDITOR_SOCKET_LEFT",
+      "de": "Geschirr links",
+      "en": "Left harness"
+    },
+    {
+      "key": "EDITOR_SOCKET_RIGHT",
+      "de": "Geschirr rechts",
+      "en": "Right harness"
+    },
+    {
+      "key": "EDITOR_SOCKET_ENABLED",
+      "de": "Anschluss aktiv",
+      "en": "Attachment enabled"
+    },
+    {
+      "key": "EDITOR_SOCKET_POSITION",
+      "de": "Lage am Rücken",
+      "en": "Position on back"
+    },
+    {
+      "key": "EDITOR_SOCKET_OFFSET_X",
+      "de": "Versatz rechts",
+      "en": "Offset right"
+    },
+    {
+      "key": "EDITOR_SOCKET_OFFSET_Y",
+      "de": "Versatz oben",
+      "en": "Offset up"
+    },
+    {
+      "key": "EDITOR_SOCKET_OFFSET_Z",
+      "de": "Versatz hinten",
+      "en": "Offset back"
+    },
+    {
+      "key": "EDITOR_SOCKET_TILT",
+      "de": "Neigung",
+      "en": "Pitch"
+    },
+    {
+      "key": "EDITOR_SOCKET_ROTATION",
+      "de": "Drehung",
+      "en": "Yaw"
+    },
+    {
+      "key": "EDITOR_SOCKET_ROLL",
+      "de": "Seitneigung",
+      "en": "Roll"
+    },
+    {
+      "key": "EDITOR_SOCKET_MIRROR",
+      "de": "Geschirr auf Gegenseite spiegeln",
+      "en": "Mirror harness to other side"
+    },
+    {
+      "key": "EDITOR_FIT_MOVING",
+      "de": "Passprobe in Bewegung. Anhalten & jetzt prüfen untersucht die aktuelle Pose.",
+      "en": "Fit preview in motion. Pause & check now inspects the current pose."
+    },
+    {
+      "key": "EDITOR_FIT_CLEAR",
+      "de": "Keine Überschneidung",
+      "en": "No overlap"
+    },
+    {
+      "key": "EDITOR_FIT_INCOMPLETE",
+      "de": "Prüfung unvollständig · Anschlusslage oder Geometrie prüfen",
+      "en": "Check incomplete · Inspect attachment position or geometry"
+    },
+    {
+      "key": "EDITOR_FIT_NO_SOCKETS",
+      "de": "Keine aktiven Anschlüsse geprüft",
+      "en": "No active attachments checked"
+    },
+    {
+      "key": "EDITOR_REST_POSE",
+      "de": "Ruhepose",
+      "en": "Rest pose"
+    },
+    {
+      "key": "EDITOR_STILL_POSE",
+      "de": "angehaltene Momentaufnahme",
+      "en": "paused snapshot"
+    },
+    {
+      "key": "EDITOR_SOCKET_RIDER",
+      "de": "Sattel / Reiter",
+      "en": "Saddle / rider"
+    },
+    {
+      "key": "EDITOR_BODY_TARGET",
+      "de": "Rumpf",
+      "en": "Body"
+    },
+    {
+      "key": "EDITOR_PART_TARGET",
+      "de": "Anbauteil",
+      "en": "Attached part"
+    },
+    {
+      "key": "EDITOR_FIT_LEG_LENGTHS",
+      "de": "Segmentlängen übernehmen",
+      "en": "Apply segment lengths"
+    },
+    {
+      "key": "EDITOR_FIT_ALREADY_CLEAR",
+      "de": "Gewählte Passprobe ist in dieser Pose bereits frei.",
+      "en": "The selected fitting already has clearance in this pose."
+    },
+    {
+      "key": "EDITOR_FIT_NO_PROPOSAL",
+      "de": "Kein freier Vorschlag im Suchbereich. Lage/Drehung oder das markierte Anbauteil bearbeiten.",
+      "en": "No clear placement found in the search range. Edit position, rotation or the highlighted part."
+    },
+    {
+      "key": "EDITOR_FIT_BODY_HINT",
+      "de": "Rückenform oder Anschlusslage ändern; rote Passprobe erneut prüfen.",
+      "en": "Edit back shape or attachment position; check the red fitting again."
+    },
+    {
+      "key": "EDITOR_FIT_LEG_LIMIT",
+      "de": "Segmentgrenze erreicht. Gelenk, Größe oder Beinansatz dieses Paars bearbeiten.",
+      "en": "Segment limit reached. Edit this pair's joint, size or leg attachment."
+    },
+    {
+      "key": "EDITOR_FIT_LEG_UNSAFE",
+      "de": "Keine sichere Längenanpassung gefunden. Gelenk und Beinansatz dieses Paars bearbeiten.",
+      "en": "No safe length adjustment found. Edit this pair's joint and leg attachment."
+    },
+    {
+      "key": "EDITOR_FIT_LEG_APPLIED",
+      "de": "Segmentlängen dieses Paars übernommen · Fußkontakt erneut geprüft.",
+      "en": "Segment lengths applied for this pair · Foot contact checked again."
+    },
+    {
+      "key": "EDITOR_RIDER_DIMENSIONS",
+      "de": "Reitermaße",
+      "en": "Rider dimensions"
+    },
+    {
+      "key": "EDITOR_RIDER_SCALE",
+      "de": "Reitergröße",
+      "en": "Rider size"
+    },
+    {
+      "key": "EDITOR_RIDER_SPACING",
+      "de": "Beinabstand",
+      "en": "Leg spacing"
+    },
+    {
+      "key": "EDITOR_RIDER_HEIGHT",
+      "de": "Sitzhöhe",
+      "en": "Seat height"
+    },
+    {
+      "key": "EDITOR_SEAT_FIND",
+      "de": "Sitz an Rücken anpassen",
+      "en": "Fit seat to back"
+    },
+    {
+      "key": "EDITOR_SEAT_APPLY",
+      "de": "Sitzvorschlag übernehmen",
+      "en": "Apply seat proposal"
+    },
+    {
+      "key": "EDITOR_REVIEW_START",
+      "de": "Laufen, Rampe & Stufen prüfen",
+      "en": "Check walking, slope & steps"
+    },
+    {
+      "key": "EDITOR_SEAT_NO_PROPOSAL",
+      "de": "Keine passende Auflage gefunden. Rückenform, Anschlussneigung oder markierte Anbauteile bearbeiten.",
+      "en": "No supported seat found. Edit back shape, attachment tilt or highlighted parts."
+    },
+    {
+      "key": "EDITOR_REVIEW_CANCEL",
+      "de": "Prüfung abbrechen",
+      "en": "Cancel check"
+    },
+    {
+      "key": "EDITOR_REVIEW_INCOMPLETE",
+      "de": "Prüfung abgebrochen oder unvollständig · keine Freigabe.",
+      "en": "Check cancelled or incomplete · No approval."
+    },
+    {
+      "key": "EDITOR_REVIEW_FLAT",
+      "de": "Ebene",
+      "en": "Flat"
+    },
+    {
+      "key": "EDITOR_REVIEW_SLOPE",
+      "de": "Rampe",
+      "en": "Slope"
+    },
+    {
+      "key": "EDITOR_REVIEW_WALK",
+      "de": "Laufen",
+      "en": "Walk"
+    },
+    {
+      "key": "EDITOR_REVIEW_RUN",
+      "de": "Rennen",
+      "en": "Run"
+    },
+    {
+      "key": "EDITOR_REVIEW_BODY_HIT",
+      "de": "Rumpftreffer",
+      "en": "Body collision"
+    },
+    {
+      "key": "EDITOR_REVIEW_PART_HIT",
+      "de": "Anbauteiltreffer",
+      "en": "Part collision"
+    },
+    {
+      "key": "EDITOR_STATUS_CAMPAIGN_SAVE_FAILED",
+      "de": "Kreatur gespeichert; Spielstand konnte nicht gespeichert werden. Bitte erneut versuchen.",
+      "en": "Creature saved; the campaign could not be saved. Please try again."
+    },
+    {
+      "key": "EDITOR_COURSE_STATUS",
+      "de": "%s · %d Beine\n%s",
+      "en": "%s · %d legs\n%s"
+    },
+    {
+      "key": "EDITOR_FIT_COLLISIONS",
+      "de": "%d Überschneidungen · rot markiert",
+      "en": "%d overlaps · marked red"
+    },
+    {
+      "key": "EDITOR_FIT_REPORT",
+      "de": "%s\nFeste Probereitergröße · %s · %d stark gestreckte Beine (>20%%).",
+      "en": "%s\nFixed test rider size · %s · %d overstretched legs (>20%%)."
+    },
+    {
+      "key": "EDITOR_FIT_FEET",
+      "de": "\n%d Füße · Bodenabweichung %.3f",
+      "en": "\n%d feet · Ground deviation %.3f"
+    },
+    {
+      "key": "EDITOR_FIT_STRETCH",
+      "de": "Beinpaar +%.0f%% · Gelenk bearbeiten",
+      "en": "Leg pair +%.0f%% · Edit joint"
+    },
+    {
+      "key": "EDITOR_FIT_PROPOSAL",
+      "de": "Freiraumvorschlag: Rücken %.0f%% · Versatz %.0f / %.0f / %.0f%%.\nFür die feste Passprobe geprüft; Sattelauflage anschließend ansehen.",
+      "en": "Clearance proposal: back %.0f%% · Offset %.0f / %.0f / %.0f%%.\nChecked for the fixed fitting; inspect saddle support afterwards."
+    },
+    {
+      "key": "EDITOR_SEAT_UNAVAILABLE",
+      "de": "\nSitzprüfung nicht verfügbar: Anschluss oder Reitermaße prüfen.",
+      "en": "\nSeat check unavailable: inspect attachment or rider dimensions."
+    },
+    {
+      "key": "EDITOR_SEAT_DISABLED",
+      "de": "\nSattel deaktiviert.",
+      "en": "\nSaddle disabled."
+    },
+    {
+      "key": "EDITOR_SEAT_SUPPORT",
+      "de": "\nAuflage %d/9 · größter Abstand %.1f%%",
+      "en": "\nSupport %d/9 · Largest gap %.1f%%"
+    },
+    {
+      "key": "EDITOR_SEAT_ADJUST",
+      "de": " · Sitz an Rücken anpassen",
+      "en": " · Fit seat to back"
+    },
+    {
+      "key": "EDITOR_SEAT_CONTACT",
+      "de": "\nReiterkontakt prüfen · Abstand %.1f%%",
+      "en": "\nCheck rider contact · Gap %.1f%%"
+    },
+    {
+      "key": "EDITOR_SEAT_PROPOSAL",
+      "de": "Sitzvorschlag: Rücken %.0f%% · Höhe %+.1f%%\nBeinabstand %.0f%% · Sitzhöhe %.0f%%\n9/9 Auflagepunkte und Freiraum in Ruhe geprüft.",
+      "en": "Seat proposal: back %.0f%% · Height %+.1f%%\nLeg spacing %.0f%% · Seat height %.0f%%\n9/9 support points and clearance checked at rest."
+    },
+    {
+      "key": "EDITOR_REVIEW_RUNNING",
+      "de": "Prüfe an einer Kopie · %d Posen · %d/6 Strecken fertig",
+      "en": "Checking a copy · %d poses · %d/6 courses complete"
+    },
+    {
+      "key": "EDITOR_REVIEW_DONE",
+      "de": "%d Posen geprüft · keine durchgehende Bewegungsfreigabe.",
+      "en": "%d poses checked · No continuous motion approval."
+    },
+    {
+      "key": "EDITOR_REVIEW_HITS",
+      "de": " · %d Trefferposen",
+      "en": " · %d collision poses"
+    },
+    {
+      "key": "EDITOR_REVIEW_SEE_HIT",
+      "de": " bei %.2f s ansehen",
+      "en": " at %.2f s · View"
+    },
+    {
+      "key": "EDITOR_REVIEW_NO_HITS",
+      "de": " · keine Treffer in %d Posen",
+      "en": " · No collisions in %d poses"
+    },
+    {
+      "key": "EDITOR_REVIEW_GROUND",
+      "de": "Bodenkontakt ≥%d Füße · Dehnung bis +%.0f%%",
+      "en": "Ground contact ≥%d feet · Stretch up to +%.0f%%"
+    },
+    {
+      "key": "EDITOR_REVIEW_POSE",
+      "de": "Trefferpose bei %.2f s · %s",
+      "en": "Collision pose at %.2f s · %s"
+    },
+    {
+      "key": "EDITOR_FIT_TARGET",
+      "de": "%s ↔ %s",
+      "en": "%s ↔ %s"
+    },
+    {
+      "key": "EDITOR_REVIEW_SCENARIO",
+      "de": "%s · %s",
+      "en": "%s · %s"
+    },
+    {
+      "key": "EDITOR_REVIEW_RESULT_HIT",
+      "de": "%s · %d Trefferposen",
+      "en": "%s · %d collision poses"
+    },
+    {
+      "key": "EDITOR_REVIEW_RESULT_CLEAR",
+      "de": "%s · keine Treffer in %d Posen",
+      "en": "%s · No collisions in %d poses"
+    },
+    {
+      "key": "EDITOR_REVIEW_RESULT_POSE",
+      "de": "%s bei %.2f s ansehen",
+      "en": "%s at %.2f s · View"
+    },
+    {
+      "key": "EDITOR_GAIT_TWO",
+      "de": "Zweibeinig",
+      "en": "Biped"
+    },
+    {
+      "key": "EDITOR_GAIT_FOUR",
+      "de": "Vierbeinig",
+      "en": "Quadruped"
+    },
+    {
+      "key": "EDITOR_GAIT_SIX",
+      "de": "Dreipunktgang",
+      "en": "Tripod gait"
+    },
+    {
+      "key": "EDITOR_GAIT_FREE",
+      "de": "Freier Körperbau",
+      "en": "Free body plan"
     }
   ]
 }

@@ -7,7 +7,8 @@ const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
 const PartCard = preload("res://creatures/editor/creature_part_card.gd")
 const Canvas = preload("res://creatures/editor/creature_editor_canvas.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
-const CATEGORY_NAMES: Dictionary = {"body": "Körper", "mouth": "Mäuler", "eyes": "Augen", "legs": "Beine", "arms": "Arme", "feet": "Füße", "hands": "Hände", "tail": "Schwänze", "horns": "Hörner", "plates": "Panzer", "spikes": "Stacheln", "decor": "Details", "paint": "Muster"}
+const CATEGORY_NAMES: Dictionary = {"body": "EDITOR_CATEGORY_BODY", "mouth": "EDITOR_CATEGORY_MOUTH", "eyes": "EDITOR_CATEGORY_EYES", "legs": "EDITOR_CATEGORY_LEGS", "arms": "EDITOR_CATEGORY_ARMS", "feet": "EDITOR_CATEGORY_FEET", "hands": "EDITOR_CATEGORY_HANDS", "tail": "EDITOR_CATEGORY_TAIL", "horns": "EDITOR_CATEGORY_HORNS", "plates": "EDITOR_CATEGORY_PLATES", "spikes": "EDITOR_CATEGORY_SPIKES", "decor": "EDITOR_CATEGORY_DECOR", "paint": "EDITOR_CATEGORY_PAINT"}
+const EditorText = preload("res://creatures/editor/creature_editor_text.gd")
 const MINT := Color("a6ebcc")
 const INK := Color("0d202b")
 
@@ -45,19 +46,30 @@ var _paint_fields: Dictionary = {}
 var _extra_pickers: Dictionary = {}
 var _color_target: OptionButton
 var _active_color_field: String = "base_color"
+var _status_key: String = ""
+var _status_values: Dictionary = {}
+var _pane_toggle: Button
+var _inspector_open: bool = false
+var _compact_workshop: bool = false
+var _layout_scale: float = -1.0
+var _layout_queued: bool = false
+var _status_message: Dictionary = {}
+var _fit_frame_key: Array = []
 
 
 func _ready() -> void:
 	super._ready()
-	_title_label.text = "VOXELVERSE  /  KREATUREN"
-	_help_label.text = "Ziehe an den Körperpunkten. Das Mausrad macht die gewählte Stelle dicker oder dünner."
+	EditorText.bind(_title_label, "text", "EDITOR_TITLE")
 	_studio_mode = "body"
 	current_category = "body"
 	_preview_pivot.rotation_degrees.y = 145.0
 	_saved_fingerprint = _fingerprint()
 	_saved_revisions[str(blueprint.get("design_id", ""))] = AssemblyV7.get_revision(blueprint)
 	_set_mode("body")
-	_set_builder_status("Deine Kreatur. Deine Form.")
+	_set_builder_status("EDITOR_WELCOME")
+	get_node("/root/LocaleManager").language_changed.connect(_on_workshop_language)
+	get_viewport().size_changed.connect(_queue_workshop_layout)
+	_on_workshop_language("")
 	call_deferred("_frame_creature")
 
 
@@ -213,17 +225,19 @@ func _panel(node_name: String, anchor_left_value: float, anchor_top_value: float
 	return panel
 
 
-func _label(parent: Node, value: String, font_size: int = 16) -> Label:
+func _label(parent: Node, value: Variant, font_size: int = 16) -> Label:
 	var label := Label.new()
-	label.text = value
-	label.add_theme_font_size_override("font_size", font_size)
+	EditorText.bind(label, "text", value)
+	label.add_theme_font_size_override("font_size", maxi(14, font_size))
+	label.set_meta("editor_font_size", maxi(14, font_size))
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	parent.add_child(label)
 	return label
 
 
-func _button(parent: Node, value: String, action: Callable) -> Button:
+func _button(parent: Node, value: Variant, action: Callable) -> Button:
 	var button := Button.new()
-	button.text = value
+	EditorText.bind(button, "text", value)
 	button.custom_minimum_size.y = 40
 	button.pressed.connect(action)
 	parent.add_child(button)
@@ -232,44 +246,50 @@ func _button(parent: Node, value: String, action: Callable) -> Button:
 
 func _build_header() -> void:
 	_header = _panel("WorkshopHeader", 0, 0, 1, 0, Vector4(16, 14, -16, 88))
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 18)
-	_header.add_child(row)
-	_title_label = _label(row, "VOXELVERSE  /  KREATUREN", 18)
+	var column := VBoxContainer.new()
+	_header.add_child(column)
+	var top := HBoxContainer.new()
+	column.add_child(top)
+	_title_label = _label(top, "EDITOR_TITLE", 18)
 	_title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	for entry in [["body", "01  Formen"], ["parts", "02  Teile"], ["paint", "03  Farbe"], ["test", "04  Testen"]]:
+	_title_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_title_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_pane_toggle = _button(top, "EDITOR_SHOW_INSPECTOR", _toggle_workshop_pane)
+	_pane_toggle.name = "WorkshopPaneToggle"
+	_button(top, "EDITOR_PLAY", _play_test_placeholder).name = "PlayCreature"
+	var row := HBoxContainer.new()
+	column.add_child(row)
+	for entry in [["body", "EDITOR_TAB_BODY"], ["parts", "EDITOR_TAB_PARTS"], ["paint", "EDITOR_TAB_PAINT"], ["test", "EDITOR_TAB_TEST"]]:
 		var button := _button(row, entry[1], _set_mode.bind(entry[0]))
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.toggle_mode = true
 		_mode_buttons[entry[0]] = button
-	var spacer := Control.new()
-	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(spacer)
-	_button(row, "In die Welt  →", _play_test_placeholder).name = "PlayCreature"
 
 
 func _build_palette() -> void:
 	_left_panel = _panel("LeftPartPalette", 0, 0, 0, 1, Vector4(16, 104, 312, -126))
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 12)
-	_left_panel.add_child(column)
-	_palette_title = _label(column, "KÖRPER FORMEN", 20)
+	var scroll := ScrollContainer.new()
+	scroll.name = "PaletteScroll"
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_left_panel.add_child(scroll)
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(column)
+	_palette_title = _label(column, "EDITOR_PALETTE_BODY", 20)
 	_help_label = _label(column, "", 14)
 	_help_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_category_grid = GridContainer.new()
-	_category_grid.columns = 3
+	_category_grid.columns = 2
 	column.add_child(_category_grid)
-	var scroll := ScrollContainer.new()
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	column.add_child(scroll)
 	_part_grid = GridContainer.new()
 	_part_grid.name = "PartGrid"
 	_part_grid.columns = 2
 	_part_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_part_grid.add_theme_constant_override("h_separation", 8)
 	_part_grid.add_theme_constant_override("v_separation", 8)
-	scroll.add_child(_part_grid)
+	column.add_child(_part_grid)
 
 
 func _build_inspector() -> void:
@@ -282,22 +302,22 @@ func _build_inspector() -> void:
 	_inspector.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_inspector.add_theme_constant_override("separation", 11)
 	scroll.add_child(_inspector)
-	_label(_inspector, "DEINE KREATUR", 18)
+	_label(_inspector, "EDITOR_INSPECTOR", 18)
 	_complexity_bar = ProgressBar.new()
 	_complexity_bar.max_value = Blueprint.COMPLEXITY_LIMIT
 	_complexity_bar.show_percentage = false
 	_complexity_bar.custom_minimum_size.y = 8
 	_inspector.add_child(_complexity_bar)
 	_stats_label = _label(_inspector, "", 15)
-	_label(_inspector, "ANGEBAUTE TEILE", 12).name = "AttachedPartsTitle"
+	_label(_inspector, "EDITOR_ATTACHED", 12).name = "AttachedPartsTitle"
 	_part_list = ItemList.new()
 	_part_list.name = "AttachedParts"
 	_part_list.custom_minimum_size = Vector2(0, 125)
 	_part_list.item_selected.connect(_select_part_by_index)
 	_inspector.add_child(_part_list)
-	_selection_label = _label(_inspector, "Körperpunkt wählen", 18)
+	_selection_label = _label(_inspector, "EDITOR_SELECT_POINT", 18)
 	_selection_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	for field in [["width_scale", "Breite", 0.22, 2.6], ["height_scale", "Höhe", 0.22, 2.6], ["y_offset", "Krümmung", -1.8, 1.8], ["length", "Körperlänge", 0.45, 3.0]]:
+	for field in [["width_scale", "EDITOR_WIDTH", 0.22, 2.6], ["height_scale", "EDITOR_HEIGHT", 0.22, 2.6], ["y_offset", "EDITOR_CURVATURE", -1.8, 1.8], ["length", "EDITOR_LENGTH", 0.45, 3.0]]:
 		var container := VBoxContainer.new()
 		_inspector.add_child(container)
 		_label(container, field[1], 13)
@@ -312,15 +332,15 @@ func _build_inspector() -> void:
 		container.add_child(slider)
 		_sliders[field[0]] = slider
 	_build_paint_controls()
-	_base_picker = _color_picker("Hautfarbe", "base_color")
-	_accent_picker = _color_picker("Musterfarbe", "accent_color")
-	for entry in [["belly_color", "Bauchfarbe"], ["eye_color", "Irisfarbe"], ["horn_color", "Hörner & Krallen"]]:
+	_base_picker = _color_picker("EDITOR_BASE_COLOR", "base_color")
+	_accent_picker = _color_picker("EDITOR_ACCENT_COLOR", "accent_color")
+	for entry in [["belly_color", "EDITOR_BELLY_COLOR"], ["eye_color", "EDITOR_EYE_COLOR"], ["horn_color", "EDITOR_HORN_COLOR"]]:
 		_extra_pickers[entry[0]] = _color_picker(entry[1], entry[0])
 	var part_actions := HBoxContainer.new()
 	part_actions.name = "PartActions"
 	_inspector.add_child(part_actions)
-	_button(part_actions, "Kopie", _duplicate_selected_part)
-	_button(part_actions, "Entfernen", _delete_selected_part)
+	_button(part_actions, "EDITOR_DUPLICATE", _duplicate_selected_part)
+	_button(part_actions, "EDITOR_REMOVE", _delete_selected_part)
 	var transforms := HBoxContainer.new()
 	transforms.name = "PartTransforms"
 	_inspector.add_child(transforms)
@@ -329,7 +349,7 @@ func _build_inspector() -> void:
 	_button(transforms, "↶", _rotate_negative).name = "PartRotateLeft"
 	_button(transforms, "↷", _rotate_positive).name = "PartRotateRight"
 	_build_part_controls()
-	_button(_inspector, "Ansicht einpassen  ·  F", _frame_creature)
+	_button(_inspector, "EDITOR_FRAME", _frame_creature)
 
 
 func _color_picker(label: String, field: String) -> ColorPickerButton:
@@ -338,7 +358,7 @@ func _color_picker(label: String, field: String) -> ColorPickerButton:
 	_label(column, label, 13)
 	var picker := ColorPickerButton.new()
 	picker.name = "Color_" + field
-	picker.text = label
+	EditorText.bind(picker, "text", label)
 	picker.edit_alpha = false
 	picker.custom_minimum_size.y = 42
 	picker.popup_closed.connect(_end_gesture)
@@ -355,14 +375,14 @@ func _build_part_controls() -> void:
 	_inspector.add_child(_part_controls)
 	_part_target = OptionButton.new()
 	_part_target.name = "TransformTarget"
-	_part_target.add_item("Ganze Gliedmaße")
-	_part_target.add_item("Fuß / Hand")
+	EditorText.add_option(_part_target, "EDITOR_TARGET_LIMB")
+	EditorText.add_option(_part_target, "EDITOR_TARGET_END")
 	_part_target.item_selected.connect(_choose_transform_target)
 	_part_controls.add_child(_part_target)
 	var placement_row := HBoxContainer.new()
 	placement_row.name = "PlacementModes"
 	_part_controls.add_child(placement_row)
-	for entry in [["single", "Einzeln"], ["paired", "Paar"], ["center", "Mitte"]]:
+	for entry in [["single", "EDITOR_SINGLE"], ["paired", "EDITOR_PAIRED"], ["center", "EDITOR_CENTER"]]:
 		var button := _button(placement_row, entry[1], _set_placement_mode.bind(entry[0]))
 		button.name = "Placement_" + str(entry[0])
 		button.toggle_mode = true
@@ -377,9 +397,11 @@ func _build_part_controls() -> void:
 	for axis in ["X", "Y", "Z"]:
 		_label(grid, axis, 12)
 	for field in ["position", "rotation", "shape"]:
-		_label(grid, {"position": "Ort", "rotation": "Drehen", "shape": "Form"}[field], 12)
+		_label(grid, {"position": "EDITOR_POSITION", "rotation": "EDITOR_ROTATION", "shape": "EDITOR_SHAPE"}[field], 12)
 		for axis in range(3):
 			var spin := SpinBox.new()
+			spin.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+			spin.get_line_edit().auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 			spin.name = "Part_%s_%d" % [field, axis]
 			spin.min_value = 0.4 if field == "shape" else (-180.0 if field == "rotation" else -10.0)
 			spin.max_value = 2.5 if field == "shape" else (180.0 if field == "rotation" else 10.0)
@@ -390,10 +412,11 @@ func _build_part_controls() -> void:
 			spin.get_line_edit().focus_entered.connect(_begin_gesture)
 			spin.get_line_edit().focus_exited.connect(_end_gesture)
 			spin.value_changed.connect(_change_part_field.bind(field, axis))
-			spin.tooltip_text = ["X: seitlich / Breite", "Y: Höhe / Länge", "Z: vor und zurück / Tiefe"][axis] + (" · Grad" if field == "rotation" else "")
+			spin.set_meta("editor_axis", axis)
+			spin.set_meta("editor_degrees", field == "rotation")
 			grid.add_child(spin)
 			_part_fields["%s_%d" % [field, axis]] = spin
-	_label(_part_controls, "Gesamtgröße", 12)
+	_label(_part_controls, "EDITOR_SIZE", 12)
 	var size := HSlider.new()
 	size.name = "PartSize"
 	size.min_value = 0.25
@@ -405,8 +428,8 @@ func _build_part_controls() -> void:
 	size.value_changed.connect(_change_part_field.bind("scale", 0))
 	_part_controls.add_child(size)
 	_part_fields["scale"] = size
-	_button(_part_controls, "Drehung & Form zurücksetzen", _reset_part_shape).add_theme_font_size_override("font_size", 12)
-	_button(_part_controls, "Standard-Fuß / -Hand", _remove_terminal).name = "DefaultTerminal"
+	_button(_part_controls, "EDITOR_RESET_SHAPE", _reset_part_shape).add_theme_font_size_override("font_size", 12)
+	_button(_part_controls, "EDITOR_DEFAULT_END", _remove_terminal).name = "DefaultTerminal"
 
 
 func _build_paint_controls() -> void:
@@ -414,14 +437,14 @@ func _build_paint_controls() -> void:
 	_paint_controls.name = "SkinSettings"
 	_paint_controls.add_theme_constant_override("separation", 8)
 	_inspector.add_child(_paint_controls)
-	_label(_paint_controls, "Hauttyp · nur Oberfläche", 13)
+	_label(_paint_controls, "EDITOR_SKIN_TYPE", 13)
 	_skin_choice = OptionButton.new()
 	_skin_choice.name = "SkinType"
-	for name: String in SkinStyle.TYPES.values():
-		_skin_choice.add_item(name)
+	for id: String in SkinStyle.TYPES:
+		EditorText.add_option(_skin_choice, "EDITOR_SKIN_" + id.to_upper())
 	_skin_choice.item_selected.connect(_choose_skin_type)
 	_paint_controls.add_child(_skin_choice)
-	for entry in [["skin_strength", "Strukturstärke", 0.0, 1.0], ["skin_scale", "Feinheit der Struktur", 0.4, 2.5], ["pattern_strength", "Musterstärke", 0.0, 1.0]]:
+	for entry in [["skin_strength", "EDITOR_SKIN_STRENGTH", 0.0, 1.0], ["skin_scale", "EDITOR_SKIN_SCALE", 0.4, 2.5], ["pattern_strength", "EDITOR_PATTERN_STRENGTH", 0.0, 1.0]]:
 		_label(_paint_controls, entry[1], 12)
 		var slider := HSlider.new()
 		slider.name = str(entry[0])
@@ -436,8 +459,8 @@ func _build_paint_controls() -> void:
 		_paint_fields[entry[0]] = slider
 	_color_target = OptionButton.new()
 	_color_target.name = "SwatchTarget"
-	for name in ["Farbfelder → Haut", "Farbfelder → Muster", "Farbfelder → Bauch", "Farbfelder → Iris", "Farbfelder → Hörner"]:
-		_color_target.add_item(name)
+	for name in ["EDITOR_SWATCH_SKIN", "EDITOR_SWATCH_PATTERN", "EDITOR_SWATCH_BELLY", "EDITOR_SWATCH_IRIS", "EDITOR_SWATCH_HORNS"]:
+		EditorText.add_option(_color_target, name)
 	_color_target.item_selected.connect(func(index: int) -> void: _active_color_field = ["base_color", "accent_color", "belly_color", "eye_color", "horn_color"][index])
 	_paint_controls.add_child(_color_target)
 	var grid := GridContainer.new()
@@ -473,7 +496,8 @@ func _refresh_design_controls() -> void:
 	var limb: bool = str(part.get("category", "")) in ["legs", "arms"]
 	_editing_terminal = _editing_terminal and limb
 	_part_target.visible = limb
-	_part_target.set_item_text(1, "Fuß bearbeiten" if str(part.get("category", "")) == "legs" else "Hand bearbeiten")
+	_part_target.set_item_metadata(1, "EDITOR_TARGET_FOOT" if str(part.get("category", "")) == "legs" else "EDITOR_TARGET_HAND")
+	_part_target.set_item_text(1, EditorText.text(_part_target.get_item_metadata(1)))
 	_part_target.select(1 if _editing_terminal else 0)
 	_part_controls.get_node("DefaultTerminal").visible = limb and _editing_terminal
 	_part_controls.get_node("PlacementModes").visible = not _editing_terminal
@@ -571,7 +595,7 @@ func _set_placement_mode(mode: String) -> void:
 	part["manual_offset"] = Vector3.ZERO
 	_snap_to_shape(selected_part_index, point)
 	_refresh_all()
-	_set_builder_status("Mittellinie: sieben feste Andockpunkte." if mode == "center" else ("Linke und rechte Seite werden gemeinsam bearbeitet." if mode == "paired" else "Einzelnes Teil bearbeiten."))
+	_set_builder_status("EDITOR_STATUS_CENTER" if mode == "center" else ("EDITOR_STATUS_PAIRED" if mode == "paired" else "EDITOR_STATUS_SINGLE"))
 
 
 func _toggle_builder_symmetry() -> void:
@@ -633,18 +657,18 @@ func _accepts_terminal(index: int, id: String) -> bool:
 
 func _set_terminal(id: String) -> void:
 	if not _accepts_terminal(selected_part_index, id) or PartLibrary.get_part(id).is_empty():
-		_set_builder_status("Wähle zuerst das gewünschte Bein." if id.begins_with("feet_") else "Wähle zuerst den gewünschten Arm.")
+		_set_builder_status("EDITOR_STATUS_LEG_FIRST" if id.begins_with("feet_") else "EDITOR_STATUS_ARM_FIRST")
 		return
 	var candidate: Dictionary = blueprint.duplicate(true)
 	candidate["parts"][selected_part_index]["end_part_id"] = id
 	if Blueprint.calculate_complexity(candidate) > Blueprint.COMPLEXITY_LIMIT:
-		_set_builder_status("Nicht genug Formpunkte für dieses Endstück.")
+		_set_builder_status("EDITOR_STATUS_END_COST")
 		return
 	_record_before_edit("Fuß oder Hand anbauen", true)
 	blueprint = candidate
 	_editing_terminal = true
 	_refresh_all()
-	_set_builder_status("Endstück angebaut · Größe, Form und Drehung rechts einstellen.")
+	_set_builder_status("EDITOR_STATUS_END_ADDED")
 
 
 func _remove_terminal() -> void:
@@ -665,7 +689,7 @@ func _duplicate_selected_part() -> void:
 	if index < 0:
 		return
 	if Blueprint.calculate_complexity(candidate) > Blueprint.COMPLEXITY_LIMIT:
-		_set_builder_status("Nicht genug Formpunkte für eine Kopie.")
+		_set_builder_status("EDITOR_STATUS_COPY_COST")
 		return
 	_record_before_edit("Teil kopieren", true)
 	blueprint = candidate
@@ -682,7 +706,7 @@ func _on_part_button_pressed(id: String) -> void:
 		return
 	var progression := get_node_or_null("/root/ProgressionService")
 	if progression != null and not bool(progression.call("is_part_unlocked", id)):
-		_set_builder_status("Dieses Teil wird durch Entdecken freigeschaltet.")
+		_set_builder_status("EDITOR_STATUS_LOCKED")
 		return
 	if _studio_mode in ["body", "paint"]:
 		super._on_part_button_pressed(id)
@@ -690,7 +714,7 @@ func _on_part_button_pressed(id: String) -> void:
 	var candidate: Dictionary = blueprint.duplicate(true)
 	var index: int = Blueprint.add_part(candidate, id)
 	if index < 0 or Blueprint.calculate_complexity(candidate) > Blueprint.COMPLEXITY_LIMIT:
-		_set_builder_status("Nicht genug Formpunkte. Entferne zuerst ein Teil.")
+		_set_builder_status("EDITOR_STATUS_COST")
 		return
 	_record_before_edit("Teil anbauen", true)
 	blueprint = candidate
@@ -703,7 +727,7 @@ func _on_part_button_pressed(id: String) -> void:
 	if str(part["category"]) not in ["mouth", "tail"]:
 		_snap_to_shape(index, part["position"])
 	_refresh_all()
-	_set_builder_status("Teil ausgewählt · Rechts: Drehen X/Y/Z, Form und Größe · Goldene Punkte: Mittellinie.")
+	_set_builder_status("EDITOR_STATUS_SELECTED")
 
 
 func _choose_skin_type(index: int) -> void:
@@ -750,32 +774,31 @@ func _build_footer() -> void:
 	_bottom_panel = _panel("BottomBar", 0, 1, 1, 1, Vector4(16, -110, -16, -14))
 	var column := VBoxContainer.new()
 	_bottom_panel.add_child(column)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 12)
+	var row := HFlowContainer.new()
+	row.add_theme_constant_override("h_separation", 8)
 	column.add_child(row)
 	_creature_name_edit = LineEdit.new()
-	_creature_name_edit.custom_minimum_size.x = 226
-	_creature_name_edit.placeholder_text = "Name deiner Kreatur"
+	_creature_name_edit.custom_minimum_size = Vector2(210, 40)
+	EditorText.bind(_creature_name_edit, "placeholder_text", "EDITOR_NAME_HINT")
+	_creature_name_edit.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_creature_name_edit.text_changed.connect(_on_name_changed)
 	_creature_name_edit.focus_entered.connect(_begin_gesture)
 	_creature_name_edit.focus_exited.connect(_end_gesture)
 	row.add_child(_creature_name_edit)
 	_undo_button = _button(row, "↶", _undo_edit)
-	_undo_button.tooltip_text = "Rückgängig · Strg+Z"
+	EditorText.bind(_undo_button, "tooltip_text", "EDITOR_UNDO_HINT")
 	_redo_button = _button(row, "↷", _redo_edit)
-	_redo_button.tooltip_text = "Wiederholen · Strg+Y"
-	_assembly_symmetry_button = _button(row, "Symmetrie", _toggle_builder_symmetry)
+	EditorText.bind(_redo_button, "tooltip_text", "EDITOR_REDO_HINT")
+	_assembly_symmetry_button = _button(row, "EDITOR_SYMMETRY", _toggle_builder_symmetry)
 	_assembly_symmetry_button.toggle_mode = true
-	_snap_button = _button(row, "Andocken", _toggle_surface_snap)
+	_snap_button = _button(row, "EDITOR_SNAP", _toggle_surface_snap)
 	_snap_button.toggle_mode = true
-	var spacer := Control.new()
-	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(spacer)
-	_button(row, "Neu", _reset_blueprint)
-	_button(row, "Laden", _load_blueprint)
-	_button(row, "Speichern", _save_blueprint).name = "SaveCreature"
+	_button(row, "EDITOR_NEW", _reset_blueprint)
+	_button(row, "EDITOR_LOAD", _load_blueprint)
+	_button(row, "EDITOR_SAVE", _save_blueprint).name = "SaveCreature"
 	_builder_status_label = _label(column, "", 13)
-	_builder_status_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_builder_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_builder_status_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_builder_status_label.modulate = MINT
 
 
@@ -829,11 +852,11 @@ func _refresh_part_palette() -> void:
 	if _part_grid == null:
 		return
 	_clear_control_children(_part_grid)
-	_palette_title.text = {"body": "KÖRPER FORMEN", "parts": "TEILE ANBAUEN", "paint": "FARBE & MUSTER", "test": "LEBENDIG WERDEN"}.get(_studio_mode, "TEILE")
-	_help_label.text = {"body": "Punkt ziehen: Körper formen.\nMausrad: Stelle dicker / dünner.\nStrg + Mausrad: Körperlänge.", "parts": "Teile auf den Körper ziehen.\nMausrad: Größe · Alt + Ziehen: drehen.\nRechts ziehen: Ansicht drehen.", "paint": "Wähle Hautfarbe, Akzent und ein Muster. Alle Änderungen siehst du sofort.", "test": "Teste deine Form in Bewegung.\nDie Vorschau verändert deinen Entwurf nicht."}.get(_studio_mode, "")
+	_refresh_workshop_copy()
+	_queue_workshop_layout()
 	_part_grid.columns = 1 if _studio_mode == "test" else 2
 	if _studio_mode == "test":
-		for entry in [["idle", "Stehen & Atmen"], ["walk", "Gehen"], ["run", "Laufen"]]:
+		for entry in [["idle", "EDITOR_MOTION_IDLE"], ["walk", "EDITOR_MOTION_WALK"], ["run", "EDITOR_MOTION_RUN"]]:
 			var button := _button(_part_grid, entry[1], _choose_motion.bind(entry[0]))
 			button.toggle_mode = true
 			button.set_pressed_no_signal(_motion_choice == entry[0])
@@ -846,16 +869,12 @@ func _refresh_part_palette() -> void:
 		card.name = "Card_" + str(part["id"])
 		card.pressed.connect(_on_part_button_pressed.bind(str(part["id"])))
 		_part_grid.add_child(card)
-	if _studio_mode == "parts" and current_category in ["feet", "hands"]:
-		_help_label.text = "Wähle ein Bein oder einen Arm.\nEndstück anklicken oder auf die Gliedmaße ziehen.\nGröße und Drehung rechts einstellen."
 	if _studio_mode == "paint":
-		_help_label.text = "Hauttyp, Muster und fünf Farben kombinieren. Hauttypen ändern nur die Oberfläche."
 		for index in range(SkinStyle.PALETTES.size()):
-			var palette: Dictionary = SkinStyle.PALETTES[index]
-			_button(_part_grid, str(palette["name"]), _apply_color_palette.bind(index)).name = "ColorPalette%d" % index
+			_button(_part_grid, "EDITOR_COLOR_PALETTE_" + str(index), _apply_color_palette.bind(index)).name = "ColorPalette%d" % index
 	if _studio_mode == "body":
-		for entry in [["upright", "Aufrecht"], ["grazer", "Langhals"], ["crawler", "Kriecher"], ["round", "Kugelbauch"]]:
-			_button(_part_grid, entry[1], _apply_body_preset.bind(entry[0])).tooltip_text = "Nur den Körper umformen. Deine Teile bleiben erhalten. Rückgängig mit Strg+Z."
+		for entry in [["upright", "EDITOR_PRESET_UPRIGHT"], ["grazer", "EDITOR_PRESET_GRAZER"], ["crawler", "EDITOR_PRESET_CRAWLER"], ["round", "EDITOR_PRESET_ROUND"]]:
+			EditorText.bind(_button(_part_grid, entry[1], _apply_body_preset.bind(entry[0])), "tooltip_text", "EDITOR_PRESET_HINT")
 
 
 func _refresh_preview() -> void:
@@ -873,9 +892,7 @@ func _refresh_stats_panel() -> void:
 	if _stats_label == null:
 		return
 	_syncing_ui = true
-	var stats: Dictionary = Blueprint.calculate_stats(blueprint)
 	_complexity_bar.value = Blueprint.calculate_complexity(blueprint)
-	_stats_label.text = "%d / %d Formpunkte\n\nTempo  %.1f     Kraft  %.1f\nSchutz  %.1f     Sinne  %.1f" % [int(_complexity_bar.value), Blueprint.COMPLEXITY_LIMIT, float(stats.get("speed", 0)), float(stats.get("attack", 0)), float(stats.get("defense", 0)), float(stats.get("perception", 0))]
 	var segment: Dictionary = SpineProfile.get_segment(blueprint, selected_body_segment)
 	for field: String in _sliders:
 		var slider: HSlider = _sliders[field]
@@ -894,25 +911,17 @@ func _refresh_stats_panel() -> void:
 	_refresh_design_controls()
 	_part_list.visible = _studio_mode != "paint"
 	_inspector.get_node("AttachedPartsTitle").visible = _studio_mode != "paint"
-	_selection_label.text = "Punkt %d / 7" % (selected_body_segment + 1) if selected_body_segment >= 0 else "Körperpunkt wählen"
-	if _studio_mode != "body":
-		_selection_label.text = "Teil auswählen" if _studio_mode == "parts" else ("Deine Farbpalette" if _studio_mode == "paint" else "Bewegungsvorschau")
-	if selected_part_index >= 0 and _studio_mode == "parts":
-		var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
-		var id: String = str(part.get("end_part_id" if _editing_terminal else "part_id", ""))
-		_selection_label.text = str(PartLibrary.get_part(id).get("name", "Fuß" if str(part.get("category", "")) == "legs" else "Hand"))
 	_inspector.get_node("PartActions").visible = _studio_mode == "parts"
 	_inspector.get_node("PartTransforms").visible = _studio_mode == "parts"
 	_part_list.clear()
 	for part: Dictionary in blueprint.get("parts", []):
-		_part_list.add_item(("↔  " if bool(part.get("mirrored", false)) else "•  ") + str(PartLibrary.get_part(str(part.get("part_id", ""))).get("name", "Teil")))
-		_part_list.set_item_tooltip(_part_list.item_count - 1, str(PartLibrary.get_part(str(part.get("end_part_id", ""))).get("name", "")))
+		_part_list.add_item(("↔  " if bool(part.get("mirrored", false)) else "•  ") + EditorText.part(PartLibrary.get_part(str(part.get("part_id", "")))))
+		_part_list.set_item_tooltip(_part_list.item_count - 1, EditorText.part(PartLibrary.get_part(str(part.get("end_part_id", "")))) if not str(part.get("end_part_id", "")).is_empty() else "")
 	if selected_part_index >= 0 and selected_part_index < _part_list.item_count:
 		_part_list.select(selected_part_index)
 	_syncing_ui = false
 	_update_builder_toolbar()
-	if _stage_caption != null:
-		_stage_caption.text = {"body": "Ziehen, strecken, formen.", "parts": "Was soll deine Kreatur können?", "paint": "Gib ihr einen eigenen Charakter.", "test": "Eine Form wird lebendig."}.get(_studio_mode, "")
+	_refresh_workshop_copy()
 
 
 func _update_builder_toolbar() -> void:
@@ -1052,7 +1061,7 @@ func _apply_body_preset(preset: String) -> void:
 	AnatomyV7.rebind_all_parts(blueprint)
 	_refresh_all()
 	_frame_creature()
-	_set_builder_status("Körperform angewendet · Deine Anbauteile bleiben erhalten · Strg+Z macht es rückgängig.")
+	_set_builder_status("EDITOR_STATUS_PRESET")
 
 
 func _input(event: InputEvent) -> void:
@@ -1221,7 +1230,7 @@ func drop_part(part_id: String, screen_position: Vector2) -> void:
 	var candidate: Dictionary = blueprint.duplicate(true)
 	var index: int = Blueprint.add_part(candidate, part_id)
 	if index < 0 or Blueprint.calculate_complexity(candidate) > Blueprint.COMPLEXITY_LIMIT:
-		_set_builder_status("Zu viele Formpunkte. Entferne zuerst ein Teil.")
+		_set_builder_status("EDITOR_STATUS_TOO_MANY")
 		return
 	_record_before_edit("Teil anbauen", true)
 	blueprint = candidate
@@ -1232,7 +1241,7 @@ func drop_part(part_id: String, screen_position: Vector2) -> void:
 	_place_on_hit(index, hit)
 	current_category = str(blueprint["parts"][index]["category"])
 	_refresh_all()
-	_set_builder_status("Teil angebaut · Mausrad: Größe · Alt + Ziehen: drehen · Strg+Z: rückgängig")
+	_set_builder_status("EDITOR_STATUS_ADDED")
 
 
 func _place_on_hit(index: int, hit: Dictionary) -> void:
@@ -1326,7 +1335,7 @@ func _save_blueprint() -> void:
 	AssemblyV7.increment_revision(candidate)
 	var result: Error = AssemblyV7.save_to_file(candidate)
 	if result != OK:
-		_set_builder_status("Speichern fehlgeschlagen. Dein Entwurf bleibt hier geöffnet.")
+		_set_builder_status("EDITOR_STATUS_SAVE_FAILED")
 		return
 	blueprint = candidate
 	_saved_revisions[design_id] = AssemblyV7.get_revision(candidate)
@@ -1334,7 +1343,7 @@ func _save_blueprint() -> void:
 	_saved_fingerprint = _fingerprint()
 	# The canonical V7 design is authoritative. Keep undo history after save.
 	_refresh_stats_panel()
-	_set_builder_status("Gespeichert · %s · Revision %d" % [str(blueprint.get("name", "Kreatur")), AssemblyV7.get_revision(blueprint)])
+	_set_workshop_status("EDITOR_STATUS_SAVED", {"name": str(blueprint.get("name", "Kreatur")), "revision": AssemblyV7.get_revision(blueprint)})
 
 
 func _play_test_placeholder() -> void:
@@ -1347,7 +1356,7 @@ func _play_test_placeholder() -> void:
 	else:
 		result = get_tree().change_scene_to_file(MAIN_SCENE_PATH)
 	if result != OK:
-		_set_builder_status("Die Welt konnte nicht geöffnet werden. Dein Entwurf ist gespeichert.")
+		_set_builder_status("EDITOR_STATUS_WORLD_FAILED")
 
 
 func _fingerprint() -> String:
@@ -1362,8 +1371,11 @@ func _frame_creature() -> void:
 	var shape: Vector3 = Blueprint.get_body_shape(blueprint) * Blueprint.get_body_scale(blueprint)
 	shape.z *= SpineProfile.get_body_length_scale(blueprint)
 	var radius: float = maxf(shape.z * 0.65, maxf(shape.x, shape.y) * 1.5)
-	var available: float = maxf(0.25, (get_viewport().get_visible_rect().size.x - 704.0) / get_viewport().get_visible_rect().size.x)
-	_camera.position = Vector3(0, 1.3, clampf(radius / tan(deg_to_rad(_camera.fov * 0.5)) / sqrt(available), 5.6, 18.0))
+	var available: float = maxf(0.25, (get_viewport().get_visible_rect().size.x - (_left_panel.size.x if _left_panel.visible else 0.0) - (_right_panel.size.x if _right_panel.visible else 0.0)) / get_viewport().get_visible_rect().size.x)
+	var bounds := _geometry_bounds(_preview)
+	var vertical: float = maxf(0.15, _left_panel.size.y / get_viewport().get_visible_rect().size.y)
+	var distance: float = maxf(radius / sqrt(available), bounds.size.y * 0.62 / vertical) / tan(deg_to_rad(_camera.fov * 0.5))
+	_camera.position = Vector3(0, 1.3, clampf(distance, 5.6, 24.0))
 	_camera.look_at(Vector3(0, 0.05, 0))
 
 
@@ -1429,7 +1441,7 @@ func _reset_blueprint() -> void:
 	super._reset_blueprint()
 	_set_mode("body")
 	_frame_creature()
-	_set_builder_status("Neue Kreatur · Deinen vorherigen Entwurf erhältst du mit Strg+Z zurück.")
+	_set_builder_status("EDITOR_STATUS_NEW")
 
 
 func _load_blueprint() -> void:
@@ -1438,4 +1450,151 @@ func _load_blueprint() -> void:
 	_saved_revisions[design_id] = maxi(AssemblyV7.get_revision(blueprint), int(_saved_revisions.get(design_id, 0)))
 	_set_mode("body")
 	_frame_creature()
-	_set_builder_status("Gespeicherte Kreatur geladen · Strg+Z stellt deine vorherige Bearbeitung wieder her.")
+	_set_builder_status("EDITOR_STATUS_LOADED")
+
+
+func _on_workshop_language(_language: String) -> void:
+	EditorText.refresh(_ui_root)
+	_refresh_workshop_copy()
+	_queue_workshop_layout()
+
+
+func _refresh_workshop_copy() -> void:
+	if _palette_title == null:
+		return
+	_palette_title.text = EditorText.text("EDITOR_PALETTE_" + _studio_mode.to_upper())
+	var help_key := "EDITOR_COURSE_HELP" if _studio_mode == "test" else "EDITOR_HELP_" + _studio_mode.to_upper()
+	if _studio_mode == "paint":
+		help_key = "EDITOR_HELP_SKIN"
+	elif _studio_mode == "parts" and current_category in ["feet", "hands"]:
+		help_key = "EDITOR_HELP_END"
+	_help_label.text = EditorText.text(help_key)
+	if _stage_caption != null:
+		_stage_caption.text = EditorText.text("EDITOR_CAPTION_" + _studio_mode.to_upper())
+	if _stats_label == null:
+		return
+	var values: Dictionary = {"used": Blueprint.calculate_complexity(blueprint), "limit": Blueprint.COMPLEXITY_LIMIT}
+	var stats := Blueprint.calculate_stats(blueprint)
+	for field: String in ["speed", "attack", "defense", "perception"]:
+		values[field] = EditorText.Text.number(float(stats.get(field, 0)), 1)
+	_stats_label.text = EditorText.format_text("EDITOR_STATS", values)
+	_selection_label.text = EditorText.format_text("EDITOR_POINT", {"point": selected_body_segment + 1}) if selected_body_segment >= 0 else EditorText.text("EDITOR_SELECT_POINT")
+	if _studio_mode != "body":
+		_selection_label.text = EditorText.text({"parts": "EDITOR_SELECT_PART", "paint": "EDITOR_YOUR_PALETTE", "test": "EDITOR_MOTION_PREVIEW"}[_studio_mode])
+	var selected: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	if not selected.is_empty() and _studio_mode == "parts":
+		var id := str(selected.get("end_part_id" if _editing_terminal else "part_id", ""))
+		_selection_label.text = EditorText.part(PartLibrary.get_part(id)) if not id.is_empty() else EditorText.text("EDITOR_FOOT" if str(selected.get("category", "")) == "legs" else "EDITOR_HAND")
+	for index in mini(_part_list.item_count, blueprint.get("parts", []).size()):
+		var placement: Dictionary = blueprint["parts"][index]
+		var definition: Dictionary = PartLibrary.get_part(str(placement.get("part_id", "")))
+		_part_list.set_item_text(index, ("↔  " if bool(placement.get("mirrored", false)) else "•  ") + EditorText.part(definition))
+		var end_id := str(placement.get("end_part_id", ""))
+		_part_list.set_item_tooltip(index, EditorText.part(PartLibrary.get_part(end_id)) if not end_id.is_empty() else "")
+	for field: String in _part_fields:
+		var control: Control = _part_fields[field]
+		if control.has_meta("editor_axis"):
+			control.tooltip_text = EditorText.text(["EDITOR_AXIS_X", "EDITOR_AXIS_Y", "EDITOR_AXIS_Z"][int(control.get_meta("editor_axis"))]) + (EditorText.text("EDITOR_DEGREES") if control.get_meta("editor_degrees") else "")
+	if _builder_status_label != null:
+		_builder_status_label.text = EditorText.render(_status_message) if not _status_message.is_empty() else ""
+	if _pane_toggle != null:
+		EditorText.bind(_pane_toggle, "text", "EDITOR_SHOW_PALETTE" if _inspector_open else "EDITOR_SHOW_INSPECTOR")
+
+
+func _set_builder_status(status_text: String) -> void:
+	_set_workshop_status(str(EditorText.LEGACY_STATUS.get(status_text, status_text)), {})
+
+
+func _set_workshop_status(key: String, values: Dictionary) -> void:
+	_status_key = key
+	_status_values = values.duplicate(true)
+	_status_message = {"key": key, "values": _status_values}
+	if _builder_status_label != null:
+		_builder_status_label.text = EditorText.format_text(key, values)
+		_queue_workshop_layout()
+
+
+func _toggle_workshop_pane() -> void:
+	_inspector_open = not _inspector_open
+	_refresh_workshop_copy()
+	_queue_workshop_layout()
+
+
+func _queue_workshop_layout() -> void:
+	if _layout_queued or not is_inside_tree():
+		return
+	_layout_queued = true
+	call_deferred("_layout_workshop")
+
+
+func _layout_workshop() -> void:
+	if _header == null or _bottom_panel == null:
+		return
+	var viewport_size := get_viewport().get_visible_rect().size
+	# DisplaySettings already scales the root in a normal game. Only apply the
+	# remaining scale here (also supports embedded editor hosts and review scenes).
+	var setting := float(get_node("/root/DisplaySettings").ui_scale)
+	var font_scale := clampf(setting / get_tree().root.content_scale_factor, 1.0, 1.5)
+	if not is_equal_approx(_layout_scale, font_scale):
+		_layout_scale = font_scale
+		_ui_root.theme.default_font_size = roundi(16 * font_scale)
+	_scale_workshop_fonts(_ui_root, font_scale)
+	var left_width := 300.0 * font_scale
+	var right_width := minf(354.0 * font_scale, maxf(320.0, viewport_size.x - 320.0))
+	_compact_workshop = viewport_size.x < left_width + right_width + 300.0
+	_pane_toggle.visible = _compact_workshop
+	_left_panel.visible = not _compact_workshop or not _inspector_open
+	_right_panel.visible = not _compact_workshop or _inspector_open
+	_part_grid.columns = 1 if _studio_mode == "test" or font_scale > 1.2 else 2
+	# Header/footer heights follow wrapping text. Resolve container sorting before
+	# measuring, without changing any controls or the editor's operation history.
+	get_tree().process_frame.connect(_place_workshop_panels, CONNECT_ONE_SHOT)
+
+
+func _place_workshop_panels() -> void:
+	_layout_queued = false
+	var viewport_size := get_viewport().get_visible_rect().size
+	var left_width := 300.0 * _layout_scale
+	var right_width := minf(354.0 * _layout_scale, maxf(320.0, viewport_size.x - 320.0))
+	var header_height := _header.get_combined_minimum_size().y
+	var footer_height := _bottom_panel.get_combined_minimum_size().y
+	_header.offset_bottom = 14 + header_height
+	_bottom_panel.offset_top = -14 - footer_height
+	_left_panel.offset_top = 26 + header_height
+	_left_panel.offset_bottom = -26 - footer_height
+	_left_panel.offset_right = 16 + left_width
+	_right_panel.offset_top = 26 + header_height
+	_right_panel.offset_bottom = -26 - footer_height
+	_right_panel.offset_left = -16 - right_width
+	if _stage_caption != null:
+		_stage_caption.visible = not _compact_workshop
+		_stage_caption.offset_left = left_width + 32
+		_stage_caption.offset_right = -right_width - 32
+		_stage_caption.offset_top = 32 + header_height
+		_stage_caption.offset_bottom = 74 + header_height
+	if _camera != null:
+		var frame_key: Array = [viewport_size, _layout_scale, _compact_workshop, _inspector_open]
+		if frame_key != _fit_frame_key:
+			_fit_frame_key = frame_key
+			_frame_creature()
+		var shift := ((_left_panel.size.x if _left_panel.visible else 0.0) - (_right_panel.size.x if _right_panel.visible else 0.0)) / maxf(viewport_size.x, 1.0)
+		_camera.h_offset = -shift * _camera.position.length() * tan(deg_to_rad(_camera.fov * 0.5)) * viewport_size.x / maxf(viewport_size.y, 1.0)
+		_camera.v_offset = (header_height - footer_height) / maxf(viewport_size.y, 1.0) * _camera.position.length() * tan(deg_to_rad(_camera.fov * 0.5))
+
+
+func _scale_workshop_fonts(node: Node, font_scale: float) -> void:
+	if node is Control and node.has_theme_font_size_override("font_size"):
+		if not node.has_meta("editor_font_size"):
+			node.set_meta("editor_font_size", maxi(14, node.get_theme_font_size("font_size")))
+		node.add_theme_font_size_override("font_size", roundi(int(node.get_meta("editor_font_size")) * font_scale))
+	if node is PartCard:
+		node.set_text_scale(font_scale)
+	for child in node.get_children():
+		_scale_workshop_fonts(child, font_scale)
+
+
+func _set_formatted_status(message: Dictionary) -> void:
+	_status_message = message.duplicate(true)
+	if _builder_status_label != null:
+		_builder_status_label.text = EditorText.render(_status_message)
+		_queue_workshop_layout()

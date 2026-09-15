@@ -257,7 +257,8 @@
         "localization_test",
         "menu_input_test",
         "onboarding_test",
-        "ui_visual_refresh_test"
+        "ui_visual_refresh_test",
+        "editor_localization_test"
       ]
     },
     {

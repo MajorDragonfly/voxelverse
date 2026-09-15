@@ -12,7 +12,7 @@ var _library_panel: Control
 
 func _build_palette() -> void:
 	super._build_palette()
-	var column: Node = _left_panel.get_child(0)
+	var column: Node = _part_grid.get_parent()
 	var button: Button = _button(column, "BP_TEMPLATES", _open_blueprint_library)
 	button.name = "OpenBlueprintLibrary"
 	column.move_child(button, 1)
@@ -40,7 +40,7 @@ func _adopt_library_template(package: Dictionary) -> void:
 		return
 	_end_gesture()
 	_record_before_edit("Import creature template", true)
-	_apply_restored_blueprint(result.blueprint, BlueprintLibraryPanel.Text.text("BP_ADOPTED"))
+	_apply_restored_blueprint(result.blueprint, "BP_ADOPTED")
 	_set_mode("body")
 	_frame_creature()
 	_library_panel._close()
@@ -82,7 +82,7 @@ func _save_blueprint() -> void:
 	if _last_save_ok and save_service != null and save_service.has_method("save_now"):
 		if not bool(save_service.call("save_now")):
 			_last_save_ok = false
-			_set_builder_status("Kreatur gespeichert; Spielstand konnte nicht gespeichert werden. Bitte erneut versuchen.")
+			_set_builder_status("EDITOR_STATUS_CAMPAIGN_SAVE_FAILED")
 
 
 func _refresh_stats_panel() -> void:

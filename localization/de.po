@@ -1706,3 +1706,1065 @@ msgstr "Universenübergreifende Bedrohungen mit definiertem Ziel abwehren."
 
 msgid "SKILLS_PHASE_5_NEXT"
 msgstr "Langfristiger Entwurf; konkrete Spielregeln erst nach der Weltraumphase festlegen."
+
+msgid "EDITOR_TITLE"
+msgstr "VOXELVERSE  /  KREATUREN"
+
+msgid "EDITOR_WELCOME"
+msgstr "Deine Kreatur. Deine Form."
+
+msgid "EDITOR_TAB_BODY"
+msgstr "01  Formen"
+
+msgid "EDITOR_TAB_PARTS"
+msgstr "02  Teile"
+
+msgid "EDITOR_TAB_PAINT"
+msgstr "03  Farbe"
+
+msgid "EDITOR_TAB_TEST"
+msgstr "04  Testen"
+
+msgid "EDITOR_PLAY"
+msgstr "In die Welt  →"
+
+msgid "EDITOR_PALETTE_BODY"
+msgstr "KÖRPER FORMEN"
+
+msgid "EDITOR_PALETTE_PARTS"
+msgstr "TEILE ANBAUEN"
+
+msgid "EDITOR_PALETTE_PAINT"
+msgstr "FARBE & MUSTER"
+
+msgid "EDITOR_PALETTE_TEST"
+msgstr "LEBENDIG WERDEN"
+
+msgid "EDITOR_PALETTE_DEFAULT"
+msgstr "TEILE"
+
+msgid "EDITOR_INSPECTOR"
+msgstr "DEINE KREATUR"
+
+msgid "EDITOR_ATTACHED"
+msgstr "ANGEBAUTE TEILE"
+
+msgid "EDITOR_SELECT_POINT"
+msgstr "Körperpunkt wählen"
+
+msgid "EDITOR_WIDTH"
+msgstr "Breite"
+
+msgid "EDITOR_HEIGHT"
+msgstr "Höhe"
+
+msgid "EDITOR_CURVATURE"
+msgstr "Krümmung"
+
+msgid "EDITOR_LENGTH"
+msgstr "Körperlänge"
+
+msgid "EDITOR_BASE_COLOR"
+msgstr "Hautfarbe"
+
+msgid "EDITOR_ACCENT_COLOR"
+msgstr "Musterfarbe"
+
+msgid "EDITOR_BELLY_COLOR"
+msgstr "Bauchfarbe"
+
+msgid "EDITOR_EYE_COLOR"
+msgstr "Irisfarbe"
+
+msgid "EDITOR_HORN_COLOR"
+msgstr "Hörner & Krallen"
+
+msgid "EDITOR_DUPLICATE"
+msgstr "Kopie"
+
+msgid "EDITOR_REMOVE"
+msgstr "Entfernen"
+
+msgid "EDITOR_FRAME"
+msgstr "Ansicht einpassen  ·  F"
+
+msgid "EDITOR_TARGET_LIMB"
+msgstr "Ganze Gliedmaße"
+
+msgid "EDITOR_TARGET_END"
+msgstr "Fuß / Hand"
+
+msgid "EDITOR_TARGET_FOOT"
+msgstr "Fuß bearbeiten"
+
+msgid "EDITOR_TARGET_HAND"
+msgstr "Hand bearbeiten"
+
+msgid "EDITOR_SINGLE"
+msgstr "Einzeln"
+
+msgid "EDITOR_PAIRED"
+msgstr "Paar"
+
+msgid "EDITOR_CENTER"
+msgstr "Mitte"
+
+msgid "EDITOR_POSITION"
+msgstr "Ort"
+
+msgid "EDITOR_ROTATION"
+msgstr "Drehen"
+
+msgid "EDITOR_SHAPE"
+msgstr "Form"
+
+msgid "EDITOR_AXIS_X"
+msgstr "X: seitlich / Breite"
+
+msgid "EDITOR_AXIS_Y"
+msgstr "Y: Höhe / Länge"
+
+msgid "EDITOR_AXIS_Z"
+msgstr "Z: vor und zurück / Tiefe"
+
+msgid "EDITOR_DEGREES"
+msgstr " · Grad"
+
+msgid "EDITOR_SIZE"
+msgstr "Gesamtgröße"
+
+msgid "EDITOR_RESET_SHAPE"
+msgstr "Drehung & Form zurücksetzen"
+
+msgid "EDITOR_DEFAULT_END"
+msgstr "Standard-Fuß / -Hand"
+
+msgid "EDITOR_SKIN_TYPE"
+msgstr "Hauttyp · nur Oberfläche"
+
+msgid "EDITOR_SKIN_STRENGTH"
+msgstr "Strukturstärke"
+
+msgid "EDITOR_SKIN_SCALE"
+msgstr "Feinheit der Struktur"
+
+msgid "EDITOR_PATTERN_STRENGTH"
+msgstr "Musterstärke"
+
+msgid "EDITOR_SWATCH_SKIN"
+msgstr "Farbfelder → Haut"
+
+msgid "EDITOR_SWATCH_PATTERN"
+msgstr "Farbfelder → Muster"
+
+msgid "EDITOR_SWATCH_BELLY"
+msgstr "Farbfelder → Bauch"
+
+msgid "EDITOR_SWATCH_IRIS"
+msgstr "Farbfelder → Iris"
+
+msgid "EDITOR_SWATCH_HORNS"
+msgstr "Farbfelder → Hörner"
+
+msgid "EDITOR_NAME_HINT"
+msgstr "Name deiner Kreatur"
+
+msgid "EDITOR_UNDO_HINT"
+msgstr "Rückgängig · Strg+Z"
+
+msgid "EDITOR_REDO_HINT"
+msgstr "Wiederholen · Strg+Y"
+
+msgid "EDITOR_SYMMETRY"
+msgstr "Symmetrie"
+
+msgid "EDITOR_SNAP"
+msgstr "Andocken"
+
+msgid "EDITOR_NEW"
+msgstr "Neu"
+
+msgid "EDITOR_LOAD"
+msgstr "Laden"
+
+msgid "EDITOR_SAVE"
+msgstr "Speichern"
+
+msgid "EDITOR_MOTION_IDLE"
+msgstr "Stehen & Atmen"
+
+msgid "EDITOR_MOTION_WALK"
+msgstr "Gehen"
+
+msgid "EDITOR_MOTION_RUN"
+msgstr "Laufen"
+
+msgid "EDITOR_PRESET_UPRIGHT"
+msgstr "Aufrecht"
+
+msgid "EDITOR_PRESET_GRAZER"
+msgstr "Langhals"
+
+msgid "EDITOR_PRESET_CRAWLER"
+msgstr "Kriecher"
+
+msgid "EDITOR_PRESET_ROUND"
+msgstr "Kugelbauch"
+
+msgid "EDITOR_PRESET_HINT"
+msgstr "Nur den Körper umformen. Deine Teile bleiben erhalten. Rückgängig mit Strg+Z."
+
+msgid "EDITOR_SELECT_PART"
+msgstr "Teil auswählen"
+
+msgid "EDITOR_YOUR_PALETTE"
+msgstr "Deine Farbpalette"
+
+msgid "EDITOR_MOTION_PREVIEW"
+msgstr "Bewegungsvorschau"
+
+msgid "EDITOR_FOOT"
+msgstr "Fuß"
+
+msgid "EDITOR_HAND"
+msgstr "Hand"
+
+msgid "EDITOR_PART"
+msgstr "Teil"
+
+msgid "EDITOR_CAPTION_BODY"
+msgstr "Ziehen, strecken, formen."
+
+msgid "EDITOR_CAPTION_PARTS"
+msgstr "Was soll deine Kreatur können?"
+
+msgid "EDITOR_CAPTION_PAINT"
+msgstr "Gib ihr einen eigenen Charakter."
+
+msgid "EDITOR_CAPTION_TEST"
+msgstr "Eine Form wird lebendig."
+
+msgid "EDITOR_STATUS_CENTER"
+msgstr "Mittellinie: sieben feste Andockpunkte."
+
+msgid "EDITOR_STATUS_PAIRED"
+msgstr "Linke und rechte Seite werden gemeinsam bearbeitet."
+
+msgid "EDITOR_STATUS_SINGLE"
+msgstr "Einzelnes Teil bearbeiten."
+
+msgid "EDITOR_STATUS_LEG_FIRST"
+msgstr "Wähle zuerst das gewünschte Bein."
+
+msgid "EDITOR_STATUS_ARM_FIRST"
+msgstr "Wähle zuerst den gewünschten Arm."
+
+msgid "EDITOR_STATUS_END_COST"
+msgstr "Nicht genug Formpunkte für dieses Endstück."
+
+msgid "EDITOR_STATUS_END_ADDED"
+msgstr "Endstück angebaut · Größe, Form und Drehung rechts einstellen."
+
+msgid "EDITOR_STATUS_COPY_COST"
+msgstr "Nicht genug Formpunkte für eine Kopie."
+
+msgid "EDITOR_STATUS_LOCKED"
+msgstr "Dieses Teil wird durch Entdecken freigeschaltet."
+
+msgid "EDITOR_STATUS_COST"
+msgstr "Nicht genug Formpunkte. Entferne zuerst ein Teil."
+
+msgid "EDITOR_STATUS_SELECTED"
+msgstr "Teil ausgewählt · Rechts: Drehen X/Y/Z, Form und Größe · Goldene Punkte: Mittellinie."
+
+msgid "EDITOR_STATUS_PRESET"
+msgstr "Körperform angewendet · Deine Anbauteile bleiben erhalten · Strg+Z macht es rückgängig."
+
+msgid "EDITOR_STATUS_TOO_MANY"
+msgstr "Zu viele Formpunkte. Entferne zuerst ein Teil."
+
+msgid "EDITOR_STATUS_ADDED"
+msgstr "Teil angebaut · Mausrad: Größe · Alt + Ziehen: drehen · Strg+Z: rückgängig"
+
+msgid "EDITOR_STATUS_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Dein Entwurf bleibt hier geöffnet."
+
+msgid "EDITOR_STATUS_WORLD_FAILED"
+msgstr "Die Welt konnte nicht geöffnet werden. Dein Entwurf ist gespeichert."
+
+msgid "EDITOR_STATUS_NEW"
+msgstr "Neue Kreatur · Deinen vorherigen Entwurf erhältst du mit Strg+Z zurück."
+
+msgid "EDITOR_STATUS_LOADED"
+msgstr "Gespeicherte Kreatur geladen · Strg+Z stellt deine vorherige Bearbeitung wieder her."
+
+msgid "EDITOR_HELP_INITIAL"
+msgstr "Ziehe an den Körperpunkten. Das Mausrad macht die gewählte Stelle dicker oder dünner."
+
+msgid "EDITOR_HELP_BODY"
+msgstr "Punkt ziehen: Körper formen.\nMausrad: Stelle dicker / dünner.\nStrg + Mausrad: Körperlänge."
+
+msgid "EDITOR_HELP_PARTS"
+msgstr "Teile auf den Körper ziehen.\nMausrad: Größe · Alt + Ziehen: drehen.\nRechts ziehen: Ansicht drehen."
+
+msgid "EDITOR_HELP_PAINT"
+msgstr "Wähle Hautfarbe, Akzent und ein Muster. Alle Änderungen siehst du sofort."
+
+msgid "EDITOR_HELP_TEST"
+msgstr "Teste deine Form in Bewegung.\nDie Vorschau verändert deinen Entwurf nicht."
+
+msgid "EDITOR_HELP_END"
+msgstr "Wähle ein Bein oder einen Arm.\nEndstück anklicken oder auf die Gliedmaße ziehen.\nGröße und Drehung rechts einstellen."
+
+msgid "EDITOR_HELP_SKIN"
+msgstr "Hauttyp, Muster und fünf Farben kombinieren. Hauttypen ändern nur die Oberfläche."
+
+msgid "EDITOR_CATEGORY_BODY"
+msgstr "Körper"
+
+msgid "EDITOR_CATEGORY_MOUTH"
+msgstr "Mäuler"
+
+msgid "EDITOR_CATEGORY_EYES"
+msgstr "Augen"
+
+msgid "EDITOR_CATEGORY_LEGS"
+msgstr "Beine"
+
+msgid "EDITOR_CATEGORY_ARMS"
+msgstr "Arme"
+
+msgid "EDITOR_CATEGORY_FEET"
+msgstr "Füße"
+
+msgid "EDITOR_CATEGORY_HANDS"
+msgstr "Hände"
+
+msgid "EDITOR_CATEGORY_TAIL"
+msgstr "Schwänze"
+
+msgid "EDITOR_CATEGORY_HORNS"
+msgstr "Hörner"
+
+msgid "EDITOR_CATEGORY_PLATES"
+msgstr "Panzer"
+
+msgid "EDITOR_CATEGORY_SPIKES"
+msgstr "Stacheln"
+
+msgid "EDITOR_CATEGORY_DECOR"
+msgstr "Details"
+
+msgid "EDITOR_CATEGORY_PAINT"
+msgstr "Muster"
+
+msgid "EDITOR_SKIN_SMOOTH"
+msgstr "Glatt"
+
+msgid "EDITOR_SKIN_SCALES"
+msgstr "Schuppen"
+
+msgid "EDITOR_SKIN_FUR"
+msgstr "Kurzes Fell"
+
+msgid "EDITOR_SKIN_LEATHER"
+msgstr "Leder"
+
+msgid "EDITOR_SKIN_CHITIN"
+msgstr "Chitin"
+
+msgid "EDITOR_COLOR_PALETTE_0"
+msgstr "Wald"
+
+msgid "EDITOR_COLOR_PALETTE_1"
+msgstr "Wüste"
+
+msgid "EDITOR_COLOR_PALETTE_2"
+msgstr "Ozean"
+
+msgid "EDITOR_COLOR_PALETTE_3"
+msgstr "Glut"
+
+msgid "EDITOR_COLOR_PALETTE_4"
+msgstr "Dämmerung"
+
+msgid "EDITOR_COLOR_PALETTE_5"
+msgstr "Polar"
+
+msgid "EDITOR_STATS"
+msgstr "{used} / {limit} Formpunkte\n\nTempo  {speed}     Kraft  {attack}\nSchutz  {defense}     Sinne  {perception}"
+
+msgid "EDITOR_POINT"
+msgstr "Punkt {point} / 7"
+
+msgid "EDITOR_STATUS_SAVED"
+msgstr "Gespeichert · {name} · Revision {revision}"
+
+msgid "EDITOR_SHOW_INSPECTOR"
+msgstr "Eigenschaften"
+
+msgid "EDITOR_SHOW_PALETTE"
+msgstr "Teileauswahl"
+
+msgid "EDITOR_CARD_LOCKED"
+msgstr "Gesperrt"
+
+msgid "EDITOR_CARD_COST"
+msgstr "{count} Formpunkte"
+
+msgid "EDITOR_CARD_HINT"
+msgstr "Zur Kreatur ziehen oder anklicken."
+
+msgid "EDITOR_CARD_UNLOCK"
+msgstr "Durch das Entdecken von Arten freischalten."
+
+msgid "EDITOR_STATUS_UNDO_EMPTY"
+msgstr "Nichts zum Rückgängigmachen."
+
+msgid "EDITOR_STATUS_REDO_EMPTY"
+msgstr "Nichts zum Wiederholen."
+
+msgid "EDITOR_STATUS_UNDO"
+msgstr "Bearbeitung rückgängig gemacht."
+
+msgid "EDITOR_STATUS_REDO"
+msgstr "Bearbeitung wiederhergestellt."
+
+msgid "EDITOR_STATUS_SNAP_ON"
+msgstr "Andocken eingeschaltet."
+
+msgid "EDITOR_STATUS_SNAP_OFF"
+msgstr "Andocken ausgeschaltet."
+
+msgid "EDITOR_STATUS_ATTACH_SELECT"
+msgstr "Wähle zuerst ein Teil."
+
+msgid "EDITOR_STATUS_ATTACHED"
+msgstr "Teil an der Körperoberfläche befestigt."
+
+msgid "EDITOR_PART_BODY_BALANCED_CORE_NAME"
+msgstr "Ausgewogener Körper"
+
+msgid "EDITOR_PART_BODY_BALANCED_CORE_DESCRIPTION"
+msgstr "Mittelgroßer Kreaturenkörper."
+
+msgid "EDITOR_PART_BODY_LONG_GRAZER_NAME"
+msgstr "Langer Weidekörper"
+
+msgid "EDITOR_PART_BODY_LONG_GRAZER_DESCRIPTION"
+msgstr "Langer Körper für standfeste Pflanzenfresser."
+
+msgid "EDITOR_PART_BODY_HEAVY_SHELL_NAME"
+msgstr "Schwerer Panzerkörper"
+
+msgid "EDITOR_PART_BODY_HEAVY_SHELL_DESCRIPTION"
+msgstr "Breiter, geschützter Körper."
+
+msgid "EDITOR_PART_BODY_INSECTOID_NAME"
+msgstr "Insektenkörper"
+
+msgid "EDITOR_PART_BODY_INSECTOID_DESCRIPTION"
+msgstr "Gegliederter Körper für viele Beine."
+
+msgid "EDITOR_PART_BODY_SERPENT_BASE_NAME"
+msgstr "Schlangenkörper"
+
+msgid "EDITOR_PART_BODY_SERPENT_BASE_DESCRIPTION"
+msgstr "Flexibler, lang gestreckter Körper."
+
+msgid "EDITOR_PART_PAINT_PLAIN_NAME"
+msgstr "Schlichte Haut"
+
+msgid "EDITOR_PART_PAINT_PLAIN_DESCRIPTION"
+msgstr "Natürliche Grundfarbe."
+
+msgid "EDITOR_PART_PAINT_FOREST_SPOTS_NAME"
+msgstr "Waldflecken"
+
+msgid "EDITOR_PART_PAINT_FOREST_SPOTS_DESCRIPTION"
+msgstr "Grüne Tarnflecken."
+
+msgid "EDITOR_PART_PAINT_SAND_STRIPES_NAME"
+msgstr "Sandstreifen"
+
+msgid "EDITOR_PART_PAINT_SAND_STRIPES_DESCRIPTION"
+msgstr "Streifen für trockene Biome."
+
+msgid "EDITOR_PART_PAINT_WARNING_MARKS_NAME"
+msgstr "Warnzeichnung"
+
+msgid "EDITOR_PART_PAINT_WARNING_MARKS_DESCRIPTION"
+msgstr "Leuchtende Giftwarnzeichnung."
+
+msgid "EDITOR_PART_PAINT_CRYSTAL_BLOOM_NAME"
+msgstr "Kristallblüte"
+
+msgid "EDITOR_PART_PAINT_CRYSTAL_BLOOM_DESCRIPTION"
+msgstr "Bunte außerirdische Platten."
+
+msgid "EDITOR_PART_MOUTH_GRAZER_NAME"
+msgstr "Weidemaul"
+
+msgid "EDITOR_PART_MOUTH_GRAZER_DESCRIPTION"
+msgstr "Gut für pflanzliche Nahrung."
+
+msgid "EDITOR_PART_MOUTH_BROAD_BEAK_NAME"
+msgstr "Breiter Schnabel"
+
+msgid "EDITOR_PART_MOUTH_BROAD_BEAK_DESCRIPTION"
+msgstr "Einfacher, harter Schnabel."
+
+msgid "EDITOR_PART_MOUTH_PREDATOR_JAWS_NAME"
+msgstr "Raubkiefer"
+
+msgid "EDITOR_PART_MOUTH_PREDATOR_JAWS_DESCRIPTION"
+msgstr "Kräftige Kiefer zum Beißen."
+
+msgid "EDITOR_PART_MOUTH_FILTER_SNOUT_NAME"
+msgstr "Filterschnauze"
+
+msgid "EDITOR_PART_MOUTH_FILTER_SNOUT_DESCRIPTION"
+msgstr "Lange Schnauze zur Nahrungssuche im flachen Wasser."
+
+msgid "EDITOR_PART_EYES_BEADY_NAME"
+msgstr "Knopfaugen"
+
+msgid "EDITOR_PART_EYES_BEADY_DESCRIPTION"
+msgstr "Einfache Sicht für wenige Formpunkte."
+
+msgid "EDITOR_PART_EYES_WIDE_NAME"
+msgstr "Große Augen"
+
+msgid "EDITOR_PART_EYES_WIDE_DESCRIPTION"
+msgstr "Große, ausdrucksstarke Augen."
+
+msgid "EDITOR_PART_EYES_STALKS_NAME"
+msgstr "Stielaugen"
+
+msgid "EDITOR_PART_EYES_STALKS_DESCRIPTION"
+msgstr "Erhöhte Augen für sicheres Erkunden."
+
+msgid "EDITOR_PART_EYES_CLUSTER_NAME"
+msgstr "Augenbüschel"
+
+msgid "EDITOR_PART_EYES_CLUSTER_DESCRIPTION"
+msgstr "Mehrere kleine Sinnesaugen."
+
+msgid "EDITOR_PART_LEGS_STUBBY_NAME"
+msgstr "Stummelbeine"
+
+msgid "EDITOR_PART_LEGS_STUBBY_DESCRIPTION"
+msgstr "Standfest, aber langsam."
+
+msgid "EDITOR_PART_LEGS_WALKER_NAME"
+msgstr "Laufbeine"
+
+msgid "EDITOR_PART_LEGS_WALKER_DESCRIPTION"
+msgstr "Ausgewogene Fortbewegung."
+
+msgid "EDITOR_PART_LEGS_SPRINTER_NAME"
+msgstr "Sprintbeine"
+
+msgid "EDITOR_PART_LEGS_SPRINTER_DESCRIPTION"
+msgstr "Schnell, aber hungrig."
+
+msgid "EDITOR_PART_LEGS_SPIDER_NAME"
+msgstr "Spinnenbeine"
+
+msgid "EDITOR_PART_LEGS_SPIDER_DESCRIPTION"
+msgstr "Seitliche Beine mit vielen Gelenken."
+
+msgid "EDITOR_PART_LEGS_HOOF_NAME"
+msgstr "Hufbeine"
+
+msgid "EDITOR_PART_LEGS_HOOF_DESCRIPTION"
+msgstr "Schnelle Steppenbeine."
+
+msgid "EDITOR_PART_ARMS_GRASPING_NAME"
+msgstr "Greifarme"
+
+msgid "EDITOR_PART_ARMS_GRASPING_DESCRIPTION"
+msgstr "Einfache Handhabung von Gegenständen."
+
+msgid "EDITOR_PART_ARMS_CLIMBER_NAME"
+msgstr "Kletterarme"
+
+msgid "EDITOR_PART_ARMS_CLIMBER_DESCRIPTION"
+msgstr "Lange Arme mit kräftigem Griff."
+
+msgid "EDITOR_PART_ARMS_CLAWS_NAME"
+msgstr "Krallenarme"
+
+msgid "EDITOR_PART_ARMS_CLAWS_DESCRIPTION"
+msgstr "Krallenbewehrte Arme zum Angreifen."
+
+msgid "EDITOR_PART_TAIL_BALANCE_NAME"
+msgstr "Balanceschwanz"
+
+msgid "EDITOR_PART_TAIL_BALANCE_DESCRIPTION"
+msgstr "Hilft bei der Fortbewegung."
+
+msgid "EDITOR_PART_TAIL_CLUB_NAME"
+msgstr "Keulenschwanz"
+
+msgid "EDITOR_PART_TAIL_CLUB_DESCRIPTION"
+msgstr "Schwerer Schwanz zur Verteidigung."
+
+msgid "EDITOR_PART_TAIL_FIN_NAME"
+msgstr "Flossenschwanz"
+
+msgid "EDITOR_PART_TAIL_FIN_DESCRIPTION"
+msgstr "Unterstützt die Bewegung im Wasser."
+
+msgid "EDITOR_PART_TAIL_STINGER_NAME"
+msgstr "Stachelschwanz"
+
+msgid "EDITOR_PART_TAIL_STINGER_DESCRIPTION"
+msgstr "Gefährlicher, spitzer Schwanz."
+
+msgid "EDITOR_PART_HORNS_SMALL_NAME"
+msgstr "Kleine Hörner"
+
+msgid "EDITOR_PART_HORNS_SMALL_DESCRIPTION"
+msgstr "Kleine Hörner zur Verteidigung."
+
+msgid "EDITOR_PART_HORNS_CREST_NAME"
+msgstr "Kammhörner"
+
+msgid "EDITOR_PART_HORNS_CREST_DESCRIPTION"
+msgstr "Zum Imponieren und Verteidigen."
+
+msgid "EDITOR_PART_HORNS_ANTLERS_NAME"
+msgstr "Astgeweih"
+
+msgid "EDITOR_PART_HORNS_ANTLERS_DESCRIPTION"
+msgstr "Großes, verzweigtes Geweih zum Imponieren."
+
+msgid "EDITOR_PART_PLATES_DORSAL_NAME"
+msgstr "Rückenplatten"
+
+msgid "EDITOR_PART_PLATES_DORSAL_DESCRIPTION"
+msgstr "Panzerplatten auf dem Rücken."
+
+msgid "EDITOR_PART_PLATES_SHELL_NAME"
+msgstr "Schalenpanzer"
+
+msgid "EDITOR_PART_PLATES_SHELL_DESCRIPTION"
+msgstr "Mehrlagiger Schalenpanzer."
+
+msgid "EDITOR_PART_SPIKES_BACK_NAME"
+msgstr "Rückenstacheln"
+
+msgid "EDITOR_PART_SPIKES_BACK_DESCRIPTION"
+msgstr "Einfache Stacheln zur Verteidigung."
+
+msgid "EDITOR_PART_SPIKES_SIDE_NAME"
+msgstr "Seitenstacheln"
+
+msgid "EDITOR_PART_SPIKES_SIDE_DESCRIPTION"
+msgstr "Schutz an den Seiten."
+
+msgid "EDITOR_PART_DECOR_FEATHERS_NAME"
+msgstr "Federkamm"
+
+msgid "EDITOR_PART_DECOR_FEATHERS_DESCRIPTION"
+msgstr "Bunte Federn zum Imponieren."
+
+msgid "EDITOR_PART_DECOR_CRYSTALS_NAME"
+msgstr "Kristallwuchs"
+
+msgid "EDITOR_PART_DECOR_CRYSTALS_DESCRIPTION"
+msgstr "Leuchtender außerirdischer Schmuck."
+
+msgid "EDITOR_PART_FEET_PADS_NAME"
+msgstr "Ballenfüße"
+
+msgid "EDITOR_PART_FEET_PADS_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_FEET_CLAWS_NAME"
+msgstr "Krallenfüße"
+
+msgid "EDITOR_PART_FEET_CLAWS_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_FEET_HOOVES_NAME"
+msgstr "Spalthufe"
+
+msgid "EDITOR_PART_FEET_HOOVES_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_FEET_WEBBED_NAME"
+msgstr "Schwimmfüße"
+
+msgid "EDITOR_PART_FEET_WEBBED_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_FEET_FELINE_PAWS_NAME"
+msgstr "Katzenpfoten"
+
+msgid "EDITOR_PART_FEET_FELINE_PAWS_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_FEET_BEAR_PAWS_NAME"
+msgstr "Bärentatzen"
+
+msgid "EDITOR_PART_FEET_BEAR_PAWS_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_FEET_HORSE_HOOVES_NAME"
+msgstr "Pferdehufe"
+
+msgid "EDITOR_PART_FEET_HORSE_HOOVES_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_HANDS_GRASP_NAME"
+msgstr "Greifhände"
+
+msgid "EDITOR_PART_HANDS_GRASP_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_HANDS_CLAWS_NAME"
+msgstr "Krallenhände"
+
+msgid "EDITOR_PART_HANDS_CLAWS_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_HANDS_PINCERS_NAME"
+msgstr "Scherenhände"
+
+msgid "EDITOR_PART_HANDS_PINCERS_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_HANDS_CRAB_CLAWS_NAME"
+msgstr "Krebsscheren"
+
+msgid "EDITOR_PART_HANDS_CRAB_CLAWS_DESCRIPTION"
+msgstr "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen."
+
+msgid "EDITOR_PART_MOUTH_CANINE_SNOUT_NAME"
+msgstr "Hundeschnauze"
+
+msgid "EDITOR_PART_MOUTH_CANINE_SNOUT_DESCRIPTION"
+msgstr "Spitze Schnauze mit Nasenspiegel und Fangzähnen. Werte und Freischaltung wie Raubkiefer."
+
+msgid "EDITOR_PART_MOUTH_CROCODILE_SNOUT_NAME"
+msgstr "Krokodilschnauze"
+
+msgid "EDITOR_PART_MOUTH_CROCODILE_SNOUT_DESCRIPTION"
+msgstr "Lange, flache Schnauze mit zwei Zahnreihen. Werte und Freischaltung wie Raubkiefer."
+
+msgid "EDITOR_PART_MOUTH_OCTOPUS_BEAK_NAME"
+msgstr "Oktopusmund"
+
+msgid "EDITOR_PART_MOUTH_OCTOPUS_BEAK_DESCRIPTION"
+msgstr "Runde Mundöffnung mit innenliegendem Schnabel. Werte und Freischaltung wie Raubkiefer."
+
+msgid "EDITOR_TOOL_MOVE"
+msgstr "Verschieben · W"
+
+msgid "EDITOR_TOOL_ROTATE"
+msgstr "Drehen · E"
+
+msgid "EDITOR_TOOL_SCALE"
+msgstr "Größe · R"
+
+msgid "EDITOR_TOOL_JOINT"
+msgstr "Gelenk · J"
+
+msgid "EDITOR_JOINT_HELP"
+msgstr "Gelenkpunkt ziehen · Umschalt: Raster"
+
+msgid "EDITOR_JOINT_UPPER"
+msgstr "Oberes Segment"
+
+msgid "EDITOR_JOINT_LOWER"
+msgstr "Unteres Segment"
+
+msgid "EDITOR_JOINT_OFFSET"
+msgstr "Gelenkversatz · X / Y / Z"
+
+msgid "EDITOR_JOINT_RESET"
+msgstr "Gelenk zurücksetzen"
+
+msgid "EDITOR_TOOL_MOVE_HINT"
+msgstr "Pfeil ziehen: eine Achse verschieben · Andocken bleibt wirksam."
+
+msgid "EDITOR_TOOL_ROTATE_HINT"
+msgstr "Farbring ziehen: lokal drehen · Umschalt: 15°-Schritte."
+
+msgid "EDITOR_TOOL_SCALE_HINT"
+msgstr "Quadrat ziehen: Proportion ändern · Mitte: Gesamtgröße."
+
+msgid "EDITOR_TOOL_JOINT_HINT"
+msgstr "Goldenen Gelenkpunkt oder Achsen ziehen · Rechts: Segmentlängen."
+
+msgid "EDITOR_EDIT_CANCELLED"
+msgstr "Bearbeitung abgebrochen."
+
+msgid "EDITOR_COURSE_TITLE"
+msgstr "TESTSTRECKE"
+
+msgid "EDITOR_COURSE_FLAT"
+msgstr "Arbeitsfläche"
+
+msgid "EDITOR_COURSE_SLOPE"
+msgstr "Steigung"
+
+msgid "EDITOR_COURSE_STEPS"
+msgstr "Stufen"
+
+msgid "EDITOR_COURSE_RESUME"
+msgstr "Weiter"
+
+msgid "EDITOR_COURSE_PAUSE"
+msgstr "Pause"
+
+msgid "EDITOR_COURSE_RESTART"
+msgstr "Neu starten"
+
+msgid "EDITOR_COURSE_SPEED"
+msgstr "Tempo der Vorschau"
+
+msgid "EDITOR_COURSE_HELP"
+msgstr "Teste Haltung und Schritte auf der Arbeitsfläche, an einer Steigung oder auf Stufen."
+
+msgid "EDITOR_COURSE_FINISHED"
+msgstr "Ziel erreicht · Neu starten"
+
+msgid "EDITOR_COURSE_PAUSED"
+msgstr "Angehalten"
+
+msgid "EDITOR_COURSE_DESIGN_SAFE"
+msgstr "Entwurf bleibt erhalten"
+
+msgid "EDITOR_FITTINGS"
+msgstr "Sattel & Geschirr prüfen"
+
+msgid "EDITOR_FIT_CHECK"
+msgstr "Anhalten & jetzt prüfen"
+
+msgid "EDITOR_FIT_FIND"
+msgstr "Freiraum am Anschluss suchen"
+
+msgid "EDITOR_FIT_APPLY"
+msgstr "Vorschlag übernehmen"
+
+msgid "EDITOR_SOCKET_SADDLE"
+msgstr "Sattel / Reitersitz"
+
+msgid "EDITOR_SOCKET_LEFT"
+msgstr "Geschirr links"
+
+msgid "EDITOR_SOCKET_RIGHT"
+msgstr "Geschirr rechts"
+
+msgid "EDITOR_SOCKET_ENABLED"
+msgstr "Anschluss aktiv"
+
+msgid "EDITOR_SOCKET_POSITION"
+msgstr "Lage am Rücken"
+
+msgid "EDITOR_SOCKET_OFFSET_X"
+msgstr "Versatz rechts"
+
+msgid "EDITOR_SOCKET_OFFSET_Y"
+msgstr "Versatz oben"
+
+msgid "EDITOR_SOCKET_OFFSET_Z"
+msgstr "Versatz hinten"
+
+msgid "EDITOR_SOCKET_TILT"
+msgstr "Neigung"
+
+msgid "EDITOR_SOCKET_ROTATION"
+msgstr "Drehung"
+
+msgid "EDITOR_SOCKET_ROLL"
+msgstr "Seitneigung"
+
+msgid "EDITOR_SOCKET_MIRROR"
+msgstr "Geschirr auf Gegenseite spiegeln"
+
+msgid "EDITOR_FIT_MOVING"
+msgstr "Passprobe in Bewegung. Anhalten & jetzt prüfen untersucht die aktuelle Pose."
+
+msgid "EDITOR_FIT_CLEAR"
+msgstr "Keine Überschneidung"
+
+msgid "EDITOR_FIT_INCOMPLETE"
+msgstr "Prüfung unvollständig · Anschlusslage oder Geometrie prüfen"
+
+msgid "EDITOR_FIT_NO_SOCKETS"
+msgstr "Keine aktiven Anschlüsse geprüft"
+
+msgid "EDITOR_REST_POSE"
+msgstr "Ruhepose"
+
+msgid "EDITOR_STILL_POSE"
+msgstr "angehaltene Momentaufnahme"
+
+msgid "EDITOR_SOCKET_RIDER"
+msgstr "Sattel / Reiter"
+
+msgid "EDITOR_BODY_TARGET"
+msgstr "Rumpf"
+
+msgid "EDITOR_PART_TARGET"
+msgstr "Anbauteil"
+
+msgid "EDITOR_FIT_LEG_LENGTHS"
+msgstr "Segmentlängen übernehmen"
+
+msgid "EDITOR_FIT_ALREADY_CLEAR"
+msgstr "Gewählte Passprobe ist in dieser Pose bereits frei."
+
+msgid "EDITOR_FIT_NO_PROPOSAL"
+msgstr "Kein freier Vorschlag im Suchbereich. Lage/Drehung oder das markierte Anbauteil bearbeiten."
+
+msgid "EDITOR_FIT_BODY_HINT"
+msgstr "Rückenform oder Anschlusslage ändern; rote Passprobe erneut prüfen."
+
+msgid "EDITOR_FIT_LEG_LIMIT"
+msgstr "Segmentgrenze erreicht. Gelenk, Größe oder Beinansatz dieses Paars bearbeiten."
+
+msgid "EDITOR_FIT_LEG_UNSAFE"
+msgstr "Keine sichere Längenanpassung gefunden. Gelenk und Beinansatz dieses Paars bearbeiten."
+
+msgid "EDITOR_FIT_LEG_APPLIED"
+msgstr "Segmentlängen dieses Paars übernommen · Fußkontakt erneut geprüft."
+
+msgid "EDITOR_RIDER_DIMENSIONS"
+msgstr "Reitermaße"
+
+msgid "EDITOR_RIDER_SCALE"
+msgstr "Reitergröße"
+
+msgid "EDITOR_RIDER_SPACING"
+msgstr "Beinabstand"
+
+msgid "EDITOR_RIDER_HEIGHT"
+msgstr "Sitzhöhe"
+
+msgid "EDITOR_SEAT_FIND"
+msgstr "Sitz an Rücken anpassen"
+
+msgid "EDITOR_SEAT_APPLY"
+msgstr "Sitzvorschlag übernehmen"
+
+msgid "EDITOR_REVIEW_START"
+msgstr "Laufen, Rampe & Stufen prüfen"
+
+msgid "EDITOR_SEAT_NO_PROPOSAL"
+msgstr "Keine passende Auflage gefunden. Rückenform, Anschlussneigung oder markierte Anbauteile bearbeiten."
+
+msgid "EDITOR_REVIEW_CANCEL"
+msgstr "Prüfung abbrechen"
+
+msgid "EDITOR_REVIEW_INCOMPLETE"
+msgstr "Prüfung abgebrochen oder unvollständig · keine Freigabe."
+
+msgid "EDITOR_REVIEW_FLAT"
+msgstr "Ebene"
+
+msgid "EDITOR_REVIEW_SLOPE"
+msgstr "Rampe"
+
+msgid "EDITOR_REVIEW_WALK"
+msgstr "Laufen"
+
+msgid "EDITOR_REVIEW_RUN"
+msgstr "Rennen"
+
+msgid "EDITOR_REVIEW_BODY_HIT"
+msgstr "Rumpftreffer"
+
+msgid "EDITOR_REVIEW_PART_HIT"
+msgstr "Anbauteiltreffer"
+
+msgid "EDITOR_STATUS_CAMPAIGN_SAVE_FAILED"
+msgstr "Kreatur gespeichert; Spielstand konnte nicht gespeichert werden. Bitte erneut versuchen."
+
+msgid "EDITOR_COURSE_STATUS"
+msgstr "%s · %d Beine\n%s"
+
+msgid "EDITOR_FIT_COLLISIONS"
+msgstr "%d Überschneidungen · rot markiert"
+
+msgid "EDITOR_FIT_REPORT"
+msgstr "%s\nFeste Probereitergröße · %s · %d stark gestreckte Beine (>20%%)."
+
+msgid "EDITOR_FIT_FEET"
+msgstr "\n%d Füße · Bodenabweichung %.3f"
+
+msgid "EDITOR_FIT_STRETCH"
+msgstr "Beinpaar +%.0f%% · Gelenk bearbeiten"
+
+msgid "EDITOR_FIT_PROPOSAL"
+msgstr "Freiraumvorschlag: Rücken %.0f%% · Versatz %.0f / %.0f / %.0f%%.\nFür die feste Passprobe geprüft; Sattelauflage anschließend ansehen."
+
+msgid "EDITOR_SEAT_UNAVAILABLE"
+msgstr "\nSitzprüfung nicht verfügbar: Anschluss oder Reitermaße prüfen."
+
+msgid "EDITOR_SEAT_DISABLED"
+msgstr "\nSattel deaktiviert."
+
+msgid "EDITOR_SEAT_SUPPORT"
+msgstr "\nAuflage %d/9 · größter Abstand %.1f%%"
+
+msgid "EDITOR_SEAT_ADJUST"
+msgstr " · Sitz an Rücken anpassen"
+
+msgid "EDITOR_SEAT_CONTACT"
+msgstr "\nReiterkontakt prüfen · Abstand %.1f%%"
+
+msgid "EDITOR_SEAT_PROPOSAL"
+msgstr "Sitzvorschlag: Rücken %.0f%% · Höhe %+.1f%%\nBeinabstand %.0f%% · Sitzhöhe %.0f%%\n9/9 Auflagepunkte und Freiraum in Ruhe geprüft."
+
+msgid "EDITOR_REVIEW_RUNNING"
+msgstr "Prüfe an einer Kopie · %d Posen · %d/6 Strecken fertig"
+
+msgid "EDITOR_REVIEW_DONE"
+msgstr "%d Posen geprüft · keine durchgehende Bewegungsfreigabe."
+
+msgid "EDITOR_REVIEW_HITS"
+msgstr " · %d Trefferposen"
+
+msgid "EDITOR_REVIEW_SEE_HIT"
+msgstr " bei %.2f s ansehen"
+
+msgid "EDITOR_REVIEW_NO_HITS"
+msgstr " · keine Treffer in %d Posen"
+
+msgid "EDITOR_REVIEW_GROUND"
+msgstr "Bodenkontakt ≥%d Füße · Dehnung bis +%.0f%%"
+
+msgid "EDITOR_REVIEW_POSE"
+msgstr "Trefferpose bei %.2f s · %s"
+
+msgid "EDITOR_FIT_TARGET"
+msgstr "%s ↔ %s"
+
+msgid "EDITOR_REVIEW_SCENARIO"
+msgstr "%s · %s"
+
+msgid "EDITOR_REVIEW_RESULT_HIT"
+msgstr "%s · %d Trefferposen"
+
+msgid "EDITOR_REVIEW_RESULT_CLEAR"
+msgstr "%s · keine Treffer in %d Posen"
+
+msgid "EDITOR_REVIEW_RESULT_POSE"
+msgstr "%s bei %.2f s ansehen"
+
+msgid "EDITOR_GAIT_TWO"
+msgstr "Zweibeinig"
+
+msgid "EDITOR_GAIT_FOUR"
+msgstr "Vierbeinig"
+
+msgid "EDITOR_GAIT_SIX"
+msgstr "Dreipunktgang"
+
+msgid "EDITOR_GAIT_FREE"
+msgstr "Freier Körperbau"
