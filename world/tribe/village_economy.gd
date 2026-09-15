@@ -268,7 +268,9 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 			return "Ungültiger Arbeitsplatz."
 		if station not in STATIONS:
 			if e.schema != SCHEMA or not e.stations.has(kind) or not integer(site.get("remaining"), 0, CAPACITY) or not number(site.get("clock"), 0, INTERVALS[STATIONS[kind]]): return "Ungültige Arbeitsplatzinstanz."
-			if Home.distance(site.position, e.stations[kind].position) < 3.0: return "Arbeitsplätze überlagern sich."
+			var first: Variant = e.stations[kind]
+			if not first is Dictionary or not local_point(first.get("position"), data.anchor): return "Ungültiger ursprünglicher Arbeitsplatz."
+			if Home.distance(site.position, first.position) < 3.0: return "Arbeitsplätze überlagern sich."
 		elif site["position"] != data["deposits"][STATIONS[station]]["position"]:
 			return "Arbeitsplatz und Rohstoffquelle widersprechen sich."
 		elif site.has("remaining") or site.has("clock"):

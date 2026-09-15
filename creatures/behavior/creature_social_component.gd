@@ -15,6 +15,9 @@ var _save_service: Node
 func _ready() -> void:
 	creature = get_parent()
 	_restore()
+
+
+func _enter_tree() -> void:
 	_save_service = get_node("/root/SaveGameService")
 	_save_service.game_loaded.connect(_on_game_loaded)
 

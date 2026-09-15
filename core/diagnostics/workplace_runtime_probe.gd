@@ -15,6 +15,15 @@ func _run() -> void:
 	var path: String = saves.create_slot("Zwei Forstplätze", 15838, Cube.MODE)
 	await _open(path)
 	if not _expect_world(): await _done(); return
+	var social_nodes: Array[Node] = tree.current_scene.find_children("SocialBehavior", "Node", true, false)
+	_expect(not social_nodes.is_empty(), "No live social component for load lifecycle check.")
+	if not social_nodes.is_empty():
+		var social: Node = social_nodes[0]
+		var parent: Node = social.get_parent()
+		parent.remove_child(social)
+		_expect(not saves.game_loaded.is_connected(social._on_game_loaded), "Detached social component retained its load listener.")
+		parent.add_child(social)
+		_expect(saves.game_loaded.is_connected(social._on_game_loaded), "Re-entered social component lost its load listener.")
 	var home: Node = tree.current_scene.get_node("Nest/HomeGroup")
 	_expect(home.establish_home().get("ok", false), "Home founding failed.")
 	await _until(func() -> bool: return home.actors.size() == 2, 10000)
@@ -69,6 +78,7 @@ func _run() -> void:
 		var id: String = first if index == 1 else second
 		tribe.panel._workplaces._rows[id].pressed.emit()
 		_expect(tribe.member_record(identities[index]).get("workplace_id") == id, "Workplace UI did not assign its own source.")
+		_expect(tribe.issue_order("wait"), "Cannot hold the assigned worker during UI checks.")
 	var button: Button = tribe.panel._workplaces._rows[second]
 	TranslationServer.set_locale("en")
 	tribe.panel.refresh()
@@ -80,6 +90,8 @@ func _run() -> void:
 	# Move surplus to a valid test sink, retaining the unchanged production proof.
 	tribe.village().stock.wood = 0
 	for index in [1, 2]:
+		tribe.select_member(identities[index])
+		_expect(tribe.issue_order("resume"), "Assigned worker did not resume after UI checks.")
 		await _until(func() -> bool: return tribe.member_record(identities[index]).cargo == "wood", 25000)
 		tribe.select_member(identities[index])
 		var worker: Dictionary = tribe.member_record(identities[index])

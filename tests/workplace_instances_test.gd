@@ -159,7 +159,7 @@ func _build(data: Dictionary, kind: String, offset: Vector3) -> void:
 	_expect(data.project.is_empty(), "Construction did not finish: " + kind)
 
 func _reject_instances(body: Dictionary, campaign: Dictionary) -> void:
-	for mode: String in ["foreign_id", "third", "missing_first", "overlap", "negative", "fractional", "overfull", "clock", "nan", "owner", "cargo", "duplicate_stock", "downgrade", "future"]:
+	for mode: String in ["foreign_id", "third", "missing_first", "invalid_first", "overlap", "negative", "fractional", "overfull", "clock", "nan", "owner", "cargo", "duplicate_stock", "downgrade", "future"]:
 		var copy: Dictionary = body.duplicate(true)
 		var data: Dictionary = copy.tribe
 		var site: Dictionary = data.economy.stations["well:2"]
@@ -167,6 +167,9 @@ func _reject_instances(body: Dictionary, campaign: Dictionary) -> void:
 			"foreign_id": site.id = "foreign-workplace"
 			"third": data.economy.stations["well:3"] = site.duplicate(true)
 			"missing_first": data.economy.stations.erase("well")
+			"invalid_first":
+				data.economy.stations.erase("well")
+				data.economy.stations["well"] = "invalid"
 			"overlap": site.position = data.economy.stations.well.position
 			"negative": site.remaining = -1
 			"fractional": site.remaining = 1.5
