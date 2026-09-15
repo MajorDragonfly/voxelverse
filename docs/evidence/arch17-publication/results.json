@@ -1,0 +1,199 @@
+{
+  "packet": "ARCH-17-PUBLISH",
+  "date": "2026-09-15",
+  "base_commit": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "source_commit": "378e4cfd90cdbe9b4a5010abf83775b075c11a24",
+  "source_tree": "7ec7b0935a6fe8c5f91a671ea61c0c693cdee36e",
+  "source_sha256": {
+    "tests/terrain_lookahead_test.gd": "c90113befe88c05f07dea08a19f793482ee70b979a4d369416a057c89f09293d",
+    "tools/benchmark_surface_publication.gd": "b57fed58f215b9bbcc08ef31ce126c537840e1edf67fd813eea7fcbee5ce6292",
+    "tools/benchmark_terrain_publication.gd": "a3536a211ce21c9d48d4681012d97a8df65f25af9aa5191da972c8a7b1f9c00d",
+    "world/planet_lab/adaptive_sphere_tiles.gd": "3a7583b647df122e67502d940ef03142d92787f5a7f2eb72fdf5302515b93526",
+    "world/planet_lab/planet_mesh_batch.gd": "4fbeb7ce0a5b7b705870896b670aa105d42d64794835b627679bd2554f5bb38a",
+    "world/planet_lab/planet_patch_mesh.gd": "4319bd605110a1e777771034d7a0597921b6c35c7d9f33041b7baaae03fa6a84"
+  },
+  "execution": "Linux, Godot 4.6.3, AMD EPYC 9V74, headless, shared development machine, isolated userdata per process",
+  "qualification": "One before/after pair on identical fixed 32 m lookahead route, no statistical, GPU, FPS or target-PC acceptance. Preliminary dynamic-lookahead probes excluded. All tracked implementation files clean during final tests and comparison; documentation added separately.",
+  "benchmark_command": "godot --headless --path PROJECT --script res://tools/benchmark_surface_publication.gd -- --terrain",
+  "benchmark_overlay_on_base": [
+    "tools/benchmark_surface_publication.gd",
+    "tools/benchmark_terrain_publication.gd"
+  ],
+  "benchmark_probe_sha256": {
+    "tools/benchmark_surface_publication.gd": "b57fed58f215b9bbcc08ef31ce126c537840e1edf67fd813eea7fcbee5ce6292",
+    "tools/benchmark_terrain_publication.gd": "a3536a211ce21c9d48d4681012d97a8df65f25af9aa5191da972c8a7b1f9c00d"
+  },
+  "validation_command": "python3 tools/validate_godot.py --godot /workspace/scratch/866c41791224/bin/godot --skip-import --skip-main --tests terrain_lookahead_test adaptive_planet_test large_planet_runtime_test --output /workspace/scratch/ac8cc9bf5dbc/checks/final-targeted",
+  "import": "Successful source/art/import run on the same local resource set; GDScript edits were loaded by the targeted test processes. No graphical resources changed.",
+  "before": {
+    "collisions": 24,
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "diagnostics": {
+      "discarded_jobs": 0,
+      "discarded_publications": 1,
+      "generation": 11,
+      "lookahead_m": 31.9072993661393,
+      "pending_uploads": 0,
+      "published_generation": 11,
+      "refresh_queued": false,
+      "worker_active": false
+    },
+    "drains": [
+      {
+        "elapsed_ms": 10928,
+        "publications": 1,
+        "stage": "cold"
+      },
+      {
+        "elapsed_ms": 2043,
+        "publications": 1,
+        "stage": "turn_1.0"
+      },
+      {
+        "elapsed_ms": 4588,
+        "publications": 1,
+        "stage": "turn_-1.0"
+      },
+      {
+        "elapsed_ms": 1019,
+        "publications": 1,
+        "stage": "turn_1.0"
+      },
+      {
+        "elapsed_ms": 453,
+        "publications": 1,
+        "stage": "discard"
+      }
+    ],
+    "failures": [],
+    "godot": "4.6.3-stable (official)",
+    "max_handoff_ms": 11.141,
+    "max_prepare_ms": 0.686,
+    "max_upload_ms": 19.589,
+    "passed": true,
+    "queue_peak": 412,
+    "resident_peak": 651,
+    "scope": "Headless CPU; cold revision-4 Earth terrain, fixed cube seam, turns and teardown; no GPU/FPS",
+    "step_max_ms": 19.622,
+    "step_p95_ms": 0.821,
+    "steps": 2747,
+    "teardown_ms": 535.283,
+    "tiles": 429
+  },
+  "after": {
+    "collisions": 24,
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "diagnostics": {
+      "discarded_jobs": 0,
+      "discarded_publications": 1,
+      "generation": 11,
+      "lookahead_m": 31.9072993661393,
+      "max_operation_usec": {
+        "collider": 1206,
+        "land": 418,
+        "node": 2147,
+        "shape": 62,
+        "water": 1591
+      },
+      "operations": {
+        "collider": 59,
+        "land": 651,
+        "node": 823,
+        "shape": 41,
+        "water": 651
+      },
+      "pending_collisions": 0,
+      "pending_uploads": 0,
+      "published_generation": 11,
+      "refresh_queued": false,
+      "worker_active": false
+    },
+    "drains": [
+      {
+        "elapsed_ms": 14927,
+        "publications": 1,
+        "stage": "cold"
+      },
+      {
+        "elapsed_ms": 2580,
+        "publications": 1,
+        "stage": "turn_1.0"
+      },
+      {
+        "elapsed_ms": 6465,
+        "publications": 1,
+        "stage": "turn_-1.0"
+      },
+      {
+        "elapsed_ms": 1054,
+        "publications": 1,
+        "stage": "turn_1.0"
+      },
+      {
+        "elapsed_ms": 483,
+        "publications": 1,
+        "stage": "discard"
+      }
+    ],
+    "failures": [],
+    "godot": "4.6.3-stable (official)",
+    "max_handoff_ms": 4.676,
+    "max_prepare_ms": 2.153,
+    "max_upload_ms": 2.933,
+    "passed": true,
+    "queue_peak": 414,
+    "resident_peak": 651,
+    "scope": "Headless CPU; cold revision-4 Earth terrain, fixed cube seam, turns and teardown; no GPU/FPS",
+    "step_max_ms": 10.575,
+    "step_p95_ms": 0.766,
+    "steps": 3696,
+    "teardown_ms": 527.786,
+    "tiles": 429
+  },
+  "validation": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "source": {
+      "commit": "378e4cfd90cdbe9b4a5010abf83775b075c11a24",
+      "tracked_worktree_dirty": false
+    },
+    "execution": "headless_source_project",
+    "selected_tests": [
+      "terrain_lookahead_test",
+      "adaptive_planet_test",
+      "large_planet_runtime_test"
+    ],
+    "checks": [
+      {
+        "name": "source_contracts",
+        "kind": "source_contract",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.115
+      },
+      {
+        "name": "terrain_lookahead_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 32.867,
+        "contract": "surface"
+      },
+      {
+        "name": "adaptive_planet_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 13.577,
+        "contract": "surface"
+      },
+      {
+        "name": "large_planet_runtime_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 52.173,
+        "contract": "surface"
+      }
+    ]
+  }
+}
