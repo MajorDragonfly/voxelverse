@@ -187,6 +187,7 @@
       "work": "M6/D3 / ARCH-10,11,20–22",
       "tests": [
         "resource_production_contract_test",
+        "settlement_collection_test",
         "tribal_age_economy_contract_test",
         "tribal_age_economy_test",
         "tribal_age_growth_contract_test",
@@ -331,6 +332,15 @@
       ],
       "scope": "8.205 Kacheln und 3.105 Orte mit begrenzten Caches, Migration, vollständigen Seiten, offenem Puffer, Schreibfehlern und frischem SaveGameService-Prozess. Sprachwechsel auf der vorhandenen Kartensitzung.",
       "limits": "Kein räumlicher Vollindex und kein Ziel-PC-Nachweis; Backup-/Archivprüfungen laufen zusätzlich im Python-Gate."
+    },
+    {
+      "id": "settlement_instances",
+      "scope": "ARCH-26.1: isolated settlement contract and lossless legacy copy; two instances use the existing work core.",
+      "status": "partial",
+      "tests": [
+        "settlement_collection_test"
+      ],
+      "limits": "No live SaveGameService registration, founding UI, physical navigation certification, regional paging or transports. Fixture validates model work, held cargo and fresh process only."
     }
   ]
 }

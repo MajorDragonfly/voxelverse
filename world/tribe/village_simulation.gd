@@ -21,13 +21,22 @@ static func create(body_id: String, cursor: float, roads: Dictionary, attending:
 		"roads": roads, "attending": attending, "legs": {}, "traveler": traveler}
 
 static func validate(value: Variant, body: Dictionary, clock: float) -> String:
+	return _validate(value, body, clock)
+
+## A secondary settlement need not contain the traveling player. Its explicit
+## campaign identity still prevents a worker being silently excluded instead.
+static func validate_settlement(value: Variant, body: Dictionary, clock: float, traveler_id: String) -> String:
+	if not Economy.text_id(traveler_id): return "Ungültige Reisendenkennung."
+	return _validate(value, body, clock, traveler_id)
+
+static func _validate(value: Variant, body: Dictionary, clock: float, traveler_id: String = "") -> String:
 	if not value is Dictionary or value.get("schema") != 1 or value.get("body_id") != body.id or value.get("owner") not in ["near", "far"]: return "Ungültiger Simulationsbesitzer."
 	if not Economy.number(value.get("cursor"), 0, clock + 0.000001) or not value.get("roads") is Dictionary or value.roads.size() > MAX_ROADS or not value.get("legs") is Dictionary or value.legs.size() > 8 or not value.get("attending") is Array or value.attending.size() > H.MAX_PENS or not value.get("traveler") is String: return "Ungültiger Simulationscursor oder Arbeitsvorrat."
 	var village: Dictionary = body.get("tribe", {})
 	if village.is_empty(): return "Fernsimulation ohne eigenes Dorf."
 	var members: Array = []
 	for member: Dictionary in village.members: members.append(member.id)
-	if value.traveler not in members: return "Abwesender Spieler gehört nicht zum Dorf."
+	if (traveler_id.is_empty() and value.traveler not in members) or (not traveler_id.is_empty() and value.traveler != traveler_id): return "Abwesender Spieler gehört nicht zum Dorf."
 	for member: Dictionary in body.get("tribal_neighbor", {}).get("members", []): members.append(member.id)
 	for id in value.attending:
 		if not id is String or not village.husbandry.records.has(id): return "Unbekanntes fernversorgtes Tier."
