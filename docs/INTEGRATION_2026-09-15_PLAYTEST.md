@@ -56,20 +56,36 @@ zu dieser festen Paketliste.
   und die beiden neuen, vom bereits freigeschalteten Balanceschwanz abgeleiteten
   Formen. Vorhandene Fußtransformationen, historische Freischaltungen,
   Entdeckungen und Punkte werden weiterhin vollständig verglichen.
+- Windows-Quellprüfung: Pfad- und Dateideskriptor-APIs liefern unterschiedliche
+  Bedeutungen für `ctime`. Ihr Vergleich nutzt deshalb die gemeinsame
+  Dateiidentität; vollständige Zeitstempel bleiben innerhalb derselben API vor
+  und nach dem Lesen sowie an den Prüfgrenzen erhalten. Dateiaustausch und
+  Änderungen während des Lesens bleiben harte Fehler.
 
-## Prüflage bei Vorbereitung
+## Prüflage
 
 Godot 4.6.3, Linux/headless, synthetische isolierte Nutzerdaten.
 Import, Art-/Quellgate, Atmosphäre, Arbeitsplatzmodell sowie Transport inklusive
-Mehrfach-Arbeitsplätzen erfolgreich. Forschungsziel- und Eierrollen-Nachprüfung
-bestehen. Die Originalbefunde der Basis-CI werden durch diese gezielten lokalen
-Nachläufe nicht rückwirkend als bestanden erklärt.
+Mehrfach-Arbeitsplätzen erfolgreich. Vollständiger lokaler Lauf auf `1f0b292`:
+191 von 194 Godot-Tests bestanden. Zwei alte Neustartorakel wurden an die neuen
+Modellverweise angepasst und bestehen im gezielten Nachlauf. Der Wettertest
+erfüllte seine Funktionsprüfungen, meldete einmal ein RefCounted-Objekt beim
+Beenden und bestand den unveränderten Wiederholungslauf. Dieser einzelne Hinweis
+ist nicht als behobener Programmfehler deklariert. Alle Originalbefunde bleiben
+im begleitenden Prüfarchiv erhalten.
 
-Die vollständige Suite, gemeinsame Laufzeit und nativen Windows-/Linux-Exporte
-werden am veröffentlichten Integrations-PR geprüft. Maßgeblich sind dessen
-abgeschlossene Actions-Läufe und jeweilige Quellrevisionen. Ein lokaler Export
-oder grüner Fachtest ersetzt die native Windows-Abnahme nicht. Ziel-PC-Grafik,
-Spielgefühl und FPS bleiben Lars' Spieltest.
+Die Milch- und Eierketten mit Tier/Fracht über A–B–A, 25 zusätzliche Prüfungen
+zu Start/Laden/Beenden und Quellintegrität sowie der historische D1.2-Fall in
+zwei Prozessen bestehen. 149 Python-Fälle: 142 bestanden, 7 optionale ausgelassen.
+Menü und Kugelkampagnenstart wurden im exportierten Linux-Spiel geprüft. Die
+GitHub-Menüprüfung auf `84e7e8f` ist erfolgreich.
+
+Die nativen Windows-/Linux-Exporte werden am veröffentlichten Integrations-PR
+geprüft. Ein erster Windows-Lauf stoppte am oben korrigierten Quellzeitstempel-
+Vergleich, noch vor dem Export. Maßgeblich sind abgeschlossene Actions-Läufe
+und ihre Quellrevisionen. Das lokal unter Linux exportierte Windows-Paket ist
+ein vorläufiger Spieltest; es ersetzt die native Windows-Abnahme nicht.
+Ziel-PC-Grafik, Spielgefühl und FPS bleiben Lars' Spieltest.
 
 ## Spieltest
 

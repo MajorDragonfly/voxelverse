@@ -10,6 +10,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -70,6 +71,50 @@ class SourceObservationTest(unittest.TestCase):
         other = self.base / "other"
         self.git("worktree", "add", "--detach", str(other), "HEAD")
         self.assertEqual(provenance.SourceRun(other).start["source_sha256"], run.start["source_sha256"])
+
+    def _handle_stat(self, real, **changes):
+        names = ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns", "st_ctime_ns")
+        return SimpleNamespace(**{**{name: getattr(real, name) for name in names}, **changes})
+
+    def test_windows_path_and_handle_ctime_can_use_different_clocks(self):
+        # Explicit bytes make the oracle independent of write_text's native
+        # newline translation and verify that hashing preserves CRLF as well.
+        expected = b"extends Node\r\n"
+        (self.project / "src/example.gd").write_bytes(expected)
+        real_fstat = os.fstat
+        def handle_stat(fd):
+            real = real_fstat(fd)
+            return self._handle_stat(real, st_ctime_ns=real.st_ctime_ns + 2_000_000)
+        with patch.object(provenance, "WINDOWS", True), patch.object(os, "fstat", side_effect=handle_stat):
+            run = provenance.SourceRun(self.project)
+            self.assertFalse(run.blocked, run.start)
+            run.observe("finish", force=True)
+            self.assertFalse(run.blocked, run.current)
+        row = next(row for row in run.current["files"] if row["path"] == "src/example.gd")
+        self.assertEqual(row["sha256"], hashlib.sha256(expected).hexdigest())
+
+    def test_windows_different_file_handle_is_still_rejected(self):
+        real_fstat = os.fstat
+        def handle_stat(fd):
+            real = real_fstat(fd)
+            return self._handle_stat(real, st_ino=real.st_ino + 1)
+        with patch.object(provenance, "WINDOWS", True), patch.object(os, "fstat", side_effect=handle_stat):
+            run = provenance.SourceRun(self.project)
+        self.assertTrue(run.blocked)
+        self.assertIn("changed while opening", run.start["error"])
+
+    def test_windows_handle_ctime_change_during_read_is_still_rejected(self):
+        real_fstat = os.fstat
+        calls = 0
+        def handle_stat(fd):
+            nonlocal calls
+            calls += 1
+            real = real_fstat(fd)
+            return self._handle_stat(real, st_ctime_ns=real.st_ctime_ns + calls)
+        with patch.object(provenance, "WINDOWS", True), patch.object(os, "fstat", side_effect=handle_stat):
+            run = provenance.SourceRun(self.project)
+        self.assertTrue(run.blocked)
+        self.assertIn("changed while hashing", run.start["error"])
 
     def test_staged_unstaged_untracked_and_deleted_sources_are_captured(self):
         self.write("src/example.gd", "staged\n")
