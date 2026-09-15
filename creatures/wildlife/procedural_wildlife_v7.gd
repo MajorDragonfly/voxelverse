@@ -291,6 +291,7 @@ func _try_predator_attack(target: Node) -> void:
 		return
 	_attack_timer = predator_attack_cooldown
 	target.call("receive_damage", predator_attack_damage)
+	if is_instance_valid(_preview): _preview.play_part_action("bite")
 	_show_actor_message(
 		target,
 		"A predator hit you for %d." % roundi(predator_attack_damage)
@@ -301,6 +302,7 @@ func _die(killer: Node = null) -> void:
 	if is_dead:
 		return
 	is_dead = true
+	if is_instance_valid(_preview): _preview.reset_part_actions()
 	current_health = 0.0
 	velocity = Vector3.ZERO
 	carcass_food_remaining = clampf(maximum_health * 0.55, 20.0, 90.0)

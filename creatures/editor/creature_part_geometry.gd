@@ -34,6 +34,7 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 			else:
 				_eye(root, Vector3.ZERO, size, blueprint, "Eye")
 		"mouth", "head":
+			root.set_meta("part_articulation", MouthGeometry.articulation(id))
 			if id not in MouthGeometry.Catalog.LEGACY_IDS:
 				for piece: Dictionary in MouthGeometry.recipe(id, skin, accent, horn):
 					if piece.kind == "cone":
@@ -162,6 +163,7 @@ static func _terminal(root: Node3D, id: String, skin: Color, horn: Color) -> voi
 				"cone": _cone(root, piece.name, piece.start, piece.end, piece.width, piece.color)
 				"bone": _bone(root, piece.name, piece.start, piece.end, piece.width, piece.color, piece.skin)
 				"piece": _piece(root, piece.name, piece.position, piece.size, piece.color, piece.skin)
+		root.set_meta("part_articulation", HandGeometry.articulation(id))
 
 
 static func _point(root: Node3D, point: Vector3) -> Vector3:

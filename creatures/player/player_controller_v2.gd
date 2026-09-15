@@ -308,6 +308,15 @@ func _resolve_interaction_target(collider_value: Variant) -> Node:
 	return null
 
 
+func consume_food(food_type: String, base_nutrition: float) -> bool:
+	var consumed: bool = super.consume_food(food_type, base_nutrition)
+	if consumed:
+		var visual := get_node_or_null("CreatureRuntimeVisual/BlueprintCreatureVisual")
+		if visual != null and visual.has_method("play_part_action"):
+			visual.play_part_action("eat")
+	return consumed
+
+
 func _trigger_bite_animation() -> void:
 	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
 	if animator != null and animator.has_method("trigger_bite"):
