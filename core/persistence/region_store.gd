@@ -8,6 +8,8 @@ const PAGE_LIMIT: int = 128
 const LEAF_LIMIT: int = 32
 const MAX_BYTES: int = 2 * 1024 * 1024
 const Atomic = preload("res://core/persistence/atomic_json.gd")
+const Access = preload("res://core/persistence/userdata_access.gd")
+var _userdata_lease: RefCounted
 var directory: String = DIRECTORY
 var root: String = ""
 var last_error: String = ""
@@ -50,6 +52,7 @@ func manifest() -> Dictionary:
 	return {"schema": 1, "format": FORMAT, "root": root}
 
 func get_value(key: String, writable: bool = false) -> Dictionary:
+	if writable and not _acquire_writer(): return {}
 	if not last_error.is_empty(): return {}
 	if cache.has(key):
 		var value: Dictionary = cache[key]
@@ -70,6 +73,7 @@ func get_value(key: String, writable: bool = false) -> Dictionary:
 	return cache[key]
 
 func put(key: String, value: Dictionary) -> bool:
+	if not _acquire_writer(): return false
 	if key.is_empty() or key.length() > 400: return _fail("Ungültiger Regionsschlüssel.")
 	if not last_error.is_empty() or (not cache.has(key) and not _room()): return false
 	cache[key] = value
@@ -188,6 +192,7 @@ func _read(hash_value: String) -> Dictionary:
 	return value
 
 func _write(value: Dictionary) -> String:
+	if not _acquire_writer(): return ""
 	if not last_error.is_empty(): return ""
 	var started: int = Time.get_ticks_usec()
 	# Hash the exact bytes written. Older blobs retain their original hashes
@@ -215,3 +220,8 @@ func _path(hash_value: String) -> String:
 func _fail(message: String) -> bool:
 	if last_error.is_empty(): last_error = message
 	return false
+
+
+func _acquire_writer() -> bool:
+	if _userdata_lease == null: _userdata_lease = Access.acquire()
+	return _userdata_lease != null or _fail("User data is in use; region changes were not committed.")

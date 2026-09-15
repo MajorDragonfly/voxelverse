@@ -6,6 +6,11 @@ on:
       - "tools/region_backup.py"
       - "tools/region_backup_userdata.py"
       - "tools/region_retention.py"
+      - "tools/userdata_access.py"
+      - "tools/userdata_access_probe.gd"
+      - "tests/tooling/userdata_access_test.py"
+      - "core/persistence/userdata_access.gd"
+      - "core/persistence/atomic_json.gd"
       - "tools/userdata_backup_probe.gd"
       - "tools/region_backup_probe.gd"
       - "tools/atlas_backup_probe.gd"
@@ -66,6 +71,10 @@ jobs:
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
         run: python -m unittest discover -s tests/tooling -p 'region_backup_userdata_test.py' -v
+      - name: Verify writer admission, crash recovery and native archive exclusion
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: python -m unittest discover -s tests/tooling -p 'userdata_access_test.py' -v
       - name: Verify generation manifest and retain-only failure paths
         run: python -m unittest discover -s tests/tooling -p 'region_retention_test.py' -v
       - name: Restore paged laboratory fauna without its original user directory

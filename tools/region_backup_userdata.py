@@ -16,8 +16,10 @@ import stat
 import tempfile
 
 if __package__:
+    from .userdata_access import access
     from .region_backup import BackupError, _object, _read, _require, _write_new
 else:
+    from userdata_access import access
     from region_backup import BackupError, _object, _read, _require, _write_new
 
 FORMAT = "voxelverse_userdata_backup_v1"
@@ -140,6 +142,11 @@ def verify_userdata(directory: Path) -> dict:
 
 
 def export_userdata(source: Path, output: Path) -> dict:
+    with access(source):
+        return _export_userdata(source, output)
+
+
+def _export_userdata(source: Path, output: Path) -> dict:
     source = source.absolute()
     _directory(source)
     source = source.resolve()
