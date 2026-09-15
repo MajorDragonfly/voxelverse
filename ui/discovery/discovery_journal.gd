@@ -710,6 +710,8 @@ func _render_entry_text() -> void:
 	_title.text = Text.name(row, _tabs.current_tab)
 	_parts_label.text = ""
 	_status_badge.text = ""
+	_status_badge.visible = _tabs.current_tab == 1
+	_parts_label.visible = (_tabs.current_tab == 0 and not _comparison.visible) or (_tabs.current_tab == 1 and row.unlocked and row.category != "missing")
 	if _tabs.current_tab == ANIMALS_TAB: return
 	if _tabs.current_tab == 0:
 		var profile: Dictionary = Suitability.read(row, _animal_contract)
@@ -764,6 +766,8 @@ func _row_tooltip(row: Dictionary) -> String:
 
 
 func _render_empty() -> void:
+	_status_badge.hide()
+	_parts_label.hide()
 	if _tabs.current_tab == 3:
 		_title.text = Text.text("Dein nächster Schritt")
 		_description.text = _current_hint()

@@ -40,6 +40,13 @@ func _capture(label: String) -> void:
 	journal._page = 1
 	journal._apply_filters()
 	await _settle()
+	# Native thumbnails legitimately read anatomy in the background. Finish the
+	# existing queue before measuring whether a language switch causes new reads.
+	if DisplayServer.get_name() != "headless":
+		for frame in range(600):
+			if not journal._thumbnail_running: break
+			await process_frame
+		_check(not journal._thumbnail_running, "Native thumbnail queue reaches idle before language measurement")
 	_check(journal._page == 1 and journal._selected_key == "locale-150", "Synthetic collection reaches second page")
 	journal._search.grab_focus()
 	journal._search.caret_column = 8
