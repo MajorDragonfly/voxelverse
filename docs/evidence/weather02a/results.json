@@ -1,0 +1,89 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "execution": "headless_source_project",
+  "source_commit": "3f57f7f8435cabe0487a852d8422819f9fd851b2",
+  "source_tree": "b12135ae21222186704a50d85c63e90360009b17",
+  "checks": [
+    {
+      "name": "weather_model_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.734,
+      "contract": "weather",
+      "source": {
+        "commit": "57cb7e831a3409594ea4fd161d50df3709a72910",
+        "tracked_worktree_dirty": true
+      },
+      "log": "weather_model_test.log"
+    },
+    {
+      "name": "regional_weather_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.532,
+      "contract": "weather",
+      "source": {
+        "commit": "57cb7e831a3409594ea4fd161d50df3709a72910",
+        "tracked_worktree_dirty": true
+      },
+      "log": "regional_weather_test.log"
+    },
+    {
+      "name": "weather_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 30.385,
+      "contract": "weather",
+      "source": {
+        "commit": "57cb7e831a3409594ea4fd161d50df3709a72910",
+        "tracked_worktree_dirty": true
+      },
+      "log": "weather_runtime_test.log"
+    },
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115,
+      "source": {
+        "commit": "57cb7e831a3409594ea4fd161d50df3709a72910",
+        "tracked_worktree_dirty": true
+      },
+      "log": "source_contracts.log"
+    },
+    {
+      "name": "underwater_view_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.52,
+      "contract": "terrain_art",
+      "source": {
+        "commit": "57cb7e831a3409594ea4fd161d50df3709a72910",
+        "tracked_worktree_dirty": true
+      },
+      "log": "underwater_view_test.log"
+    }
+  ],
+  "tested_files_sha256": {
+    "tests/regional_weather_test.gd": "75938168889db6c232c49cd784825f92f1576f72d15d9b982e496e2442c3388c",
+    "tests/underwater_view_test.gd": "5955808f6cbfbcd6a549bc5f0f8214fca2ea8f578bd4c3fbb6161eb0b6d559e9",
+    "tests/weather_model_test.gd": "2727df8fe237d19a06743fd6538620b7447d8c0fdff0ac7b900ed22987ec4756",
+    "tests/weather_runtime_test.gd": "4ba84b84ee6ec1cfa3517d0ad0499a5ddd7d4ff93888ee6e13c499c636243a9d",
+    "tools/validation/contracts.json": "259093897837433ec2f15e2415a1d3f7691f667cd5a2bd2c830e5d9b08ba1930",
+    "world/weather/campaign_weather.gd": "e8813c49d9ebcef84e626b28e64bb7728b2b317473594cf88175fb8df7885b97",
+    "world/weather/regional_weather.gd": "b66e7c2d580614d172f42de1024070d38b3554a04ce87624dd6be1bec2494759",
+    "world/weather/weather_model.gd": "5975d51021344f2f88969608a4ee2bddeaf989795aff6e3ef11baeaab602cd81",
+    "world/weather/weather_view.gd": "1284fa502cd4a0cc8fa0c1c8ab37aad0b0b0015cf199c4803fa69db5a529e111"
+  },
+  "scope": "Tests ran on the working tree based on local 57cb7e8; exact final code recorded in source_commit and hashes. Only evidence added afterwards.",
+  "limits": [
+    "No GPU readback in headless: particle assertions inspect the exact bounded draw submissions",
+    "No native Windows graphics or target-PC FPS acceptance",
+    "All current planets safe; extreme climate and damage activation remain planned"
+  ]
+}

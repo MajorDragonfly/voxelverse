@@ -3,6 +3,7 @@ extends Node
 ## Group `campaign_weather`, snapshot() and weather_changed are the presentation port.
 signal weather_changed(snapshot: Dictionary)
 const Model = preload("res://world/weather/weather_model.gd")
+const Regional = preload("res://world/weather/regional_weather.gd")
 const View = preload("res://world/weather/weather_view.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 @export var clouds_enabled: bool = true
@@ -15,6 +16,9 @@ var _probe_elapsed: float = 1.0
 var _notice_elapsed: float = 1.0
 var _covered: bool = false
 var _underwater: bool = false
+var _climate_sample: Dictionary = {}
+var _forecast_context: Dictionary = {}
+var _last_camera: Camera3D
 
 func _ready() -> void:
 	process_priority = 110 # Camera-owned underwater presentation samples first.
@@ -30,6 +34,11 @@ func _ready() -> void:
 func snapshot() -> Dictionary:
 	return _snapshot.duplicate(true)
 
+func forecast() -> Array[Dictionary]:
+	if _snapshot.is_empty() or _forecast_context.is_empty(): return []
+	return Regional.forecast(_body_id, int(_snapshot.seed), float(_snapshot.elapsed_seconds),
+		_forecast_context.address, float(_forecast_context.radius), _forecast_context.climate)
+
 func _available() -> bool:
 	var host: Node = get_parent()
 	var flow: Node = get_node("/root/SessionFlow")
@@ -40,6 +49,7 @@ func _process(delta: float) -> void:
 	if not _available() or camera == null:
 		_view.hide_weather()
 		_snapshot = {}
+		_forecast_context = {}
 		return
 	var state: Node = get_node("/root/GameState")
 	var body: Dictionary = state.get_current_body_record()
@@ -48,13 +58,25 @@ func _process(delta: float) -> void:
 		_view.configure(int(body.seed))
 		_probe_elapsed = 1.0
 		_covered = true
+		_climate_sample = Space.sample(self, camera.global_position)
+	if camera != _last_camera:
+		_last_camera = camera
+		_probe_elapsed = 1.0
+		_covered = true
+		_view.invalidate_cover()
 	var previous_condition: String = str(_snapshot.get("condition", ""))
-	# All current campaign bodies remain safe; no inference of hazards from color,
-	# seed or planet index. Permanent home designation belongs to WEATHER-02.
-	_snapshot = Model.sample(_body_id, int(body.seed), float(state.campaign.data.elapsed_seconds))
+	# Read existing biome climate only; no new body/save fields or inferred hazards.
+	var adapter: RefCounted = Space.adapter(self)
+	var climate: Dictionary = _climate_sample.duplicate()
+	climate.atmosphere = adapter.terrain.surface.body.get("atmosphere", "temperate")
+	var address: Dictionary = Space.address(self, camera.global_position)
+	var radius: float = float(adapter.terrain.surface.body.radius)
+	_snapshot = Regional.sample(_body_id, int(body.seed), float(state.campaign.data.elapsed_seconds), address, radius, climate)
+	_forecast_context = {"address": address, "radius": radius, "climate": climate}
 	if not _preview_condition.is_empty():
-		_snapshot.merge(Model.preset(_preview_condition), true)
-		_snapshot.preview = true
+		_snapshot = Regional.preview(_snapshot, _preview_condition)
+	_snapshot.sheltered = _covered
+	_snapshot.underwater = _underwater
 	_view.clouds_enabled = clouds_enabled
 	_view.precipitation_enabled = precipitation_enabled
 	_view.position_at(camera.global_position, Space.up(self, camera.global_position))
@@ -70,6 +92,7 @@ func _physics_process(delta: float) -> void:
 	if camera == null: return
 	_view.position_at(camera.global_position, Space.up(self, camera.global_position))
 	var water: Dictionary = Space.sample(self, camera.global_position)
+	_climate_sample = water
 	_underwater = bool(water.water) and float(water.altitude) < float(water.water_level)
 	_probe_elapsed += delta
 	if _probe_elapsed < 0.5: return

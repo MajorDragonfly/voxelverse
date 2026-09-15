@@ -154,7 +154,13 @@ begrenzter Nahregen, Pause/Laden sowie Unterwasser-/Dachunterdrückung. Aktuell
 bleiben alle Kampagnenkörper mild. Rendering und Shader erhalten einen gemeinsamen
 lesbaren Wetteranschluss; native Grafik-/Leistungsabnahme steht aus.
 
-**Geplant:** WEATHER-02 versioniert planetare Klimazonen und den dauerhaften
+**WEATHER-02A – Vertiefung im selben Fach-PR:** regionale Schauer-/Wolkenbänder,
+Temperatur-/Feuchteanpassung, sanfter Schnee/Schneeregen, Windböen und ein lesbarer
+Drei-Minuten-Ausblick. Cube-Kanten und Pole verwenden ein gemeinsames stetiges
+Feld; atmosphärenlose Deskriptoren unterdrücken Wetter. Alle aktuellen Körper
+bleiben ungefährlich.
+
+**Weiter geplant:** WEATHER-02 versioniert planetare Klimazonen und den dauerhaften
 Schutz der Startwelt; WEATHER-03 setzt Sand-/Feuerstürme mit Vorwarnung um;
 WEATHER-04 verbindet Schutz, Hitze-/Staubexposition und Deckungsverhalten von
 Tieren/Bewohnern mit bestehenden Fachbesitzern; WEATHER-05 ergänzt Shader, Ton,

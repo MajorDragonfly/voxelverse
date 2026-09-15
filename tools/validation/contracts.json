@@ -303,10 +303,11 @@
     {
       "id": "weather",
       "title": "Sanftes Planetenwetter und Darstellungsanschluss",
-      "work": "WEATHER-01",
+      "work": "WEATHER-01 / WEATHER-02A",
       "tests": [
         "weather_model_test",
-        "weather_runtime_test"
+        "weather_runtime_test",
+        "regional_weather_test"
       ]
     }
   ],

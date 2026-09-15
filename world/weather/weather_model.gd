@@ -9,9 +9,10 @@ const CONDITIONS: Dictionary = {
 	"overcast": {"cloud_cover": 0.86, "precipitation": 0.0, "wind_mps": 2.5, "visibility_m": 12000.0},
 	"drizzle": {"cloud_cover": 0.88, "precipitation": 0.28, "wind_mps": 2.8, "visibility_m": 10000.0},
 	"rain": {"cloud_cover": 0.96, "precipitation": 0.65, "wind_mps": 4.8, "visibility_m": 8000.0},
+	"snow": {"cloud_cover": 0.88, "precipitation": 0.45, "wind_mps": 2.0, "visibility_m": 9000.0},
 }
 const CLIMATES: Dictionary = {
-	"earth_temperate": {"implemented": true, "hazards": [], "conditions": ["clear", "breeze", "overcast", "drizzle", "rain"]},
+	"earth_temperate": {"implemented": true, "hazards": [], "conditions": ["clear", "breeze", "overcast", "drizzle", "rain", "snow"]},
 	"arid_extreme": {"implemented": false, "hazards": ["sandstorm"], "conditions": []},
 	"volcanic_extreme": {"implemented": false, "hazards": ["firestorm"], "conditions": []},
 	"frozen_extreme": {"implemented": false, "hazards": ["blizzard"], "conditions": []},
