@@ -9,12 +9,24 @@ const Space = preload("res://world/surface/gameplay_space.gd")
 var creature: CharacterBody3D
 var attention_remaining: float = 0.0
 var help_cooldown: float = 0.0
+var _save_service: Node
 
 
 func _ready() -> void:
 	creature = get_parent()
 	_restore()
-	get_node("/root/SaveGameService").game_loaded.connect(func(_path: String) -> void: _restore())
+	_save_service = get_node("/root/SaveGameService")
+	_save_service.game_loaded.connect(_on_game_loaded)
+
+
+func _on_game_loaded(_path: String) -> void:
+	# A previous listener can detach this actor during the same load emission.
+	if is_inside_tree() and not is_queued_for_deletion(): _restore()
+
+
+func _exit_tree() -> void:
+	if is_instance_valid(_save_service) and _save_service.game_loaded.is_connected(_on_game_loaded):
+		_save_service.game_loaded.disconnect(_on_game_loaded)
 
 
 func _process(delta: float) -> void:

@@ -18,10 +18,14 @@ func rebuild(data: Dictionary) -> void:
 	var center: Vector3 = Home.vector(data["anchor"])
 	_box(center + Vector3(0, 0.16, -1.3), Vector3(2.2, 0.32, 0.8), Color("765130"))
 	_label(center + Vector3(0, 2.8, 0), "Dorfplatz · Lager & Werkbank", Color("ead19a"))
-	for kind: String in data["deposits"]:
+	var sources: Dictionary = data.deposits.duplicate()
+	for key: String in data.economy.stations:
+		if key not in Economy.STATIONS: sources[key] = data.economy.stations[key]
+	for source_key: String in sources:
+		var kind: String = source_key if data.deposits.has(source_key) else str(Economy.STATIONS[Economy.station_kind(source_key)])
 		if kind in ["water", "fiber"] and not data["economy"]["stations"].has("well" if kind == "water" else "fiberbed"):
 			continue
-		var deposit: Dictionary = data["deposits"][kind]
+		var deposit: Dictionary = sources[source_key]
 		var location: Vector3 = Home.vector(deposit["position"])
 		var amount: int = int(deposit["remaining"])
 		if kind == "food" and int(data["garden"]) == 1:
@@ -40,9 +44,10 @@ func rebuild(data: Dictionary) -> void:
 		if kind == "food" and int(data["garden"]) == 1:
 			title = "Wurzelgarten · erntereif"
 		for station: String in data["economy"]["stations"]:
-			if Economy.STATIONS[station] == kind:
-				title = {"well": "Brunnen", "forester": "Forstplatz", "quarry": "Steinbruch", "fiberbed": "Faserbeet"}[station]
-				if station == "well":
+			if (station in Economy.STATIONS and source_key == Economy.STATIONS[station]) or source_key == station:
+				var station_type: String = Economy.station_kind(station)
+				title = "%s %d" % [{"well": "Brunnen", "forester": "Forstplatz", "quarry": "Steinbruch", "fiberbed": "Faserbeet"}[station_type], 1 if station in Economy.STATIONS else 2]
+				if station_type == "well":
 					for side in [-1, 1]:
 						_box(location + Vector3(side * 0.7, 0.4, 0), Vector3(0.2, 0.8, 1.5), Color("a7b1b4"))
 					_box(location + Vector3(0, 0.2, 0), Vector3(1.2, 0.15, 1.2), Color("438fa9"))

@@ -38,6 +38,7 @@ var _jobs: OptionButton
 var _tabs: TabContainer
 var _orders_page: VBoxContainer
 var _work_page: VBoxContainer
+var _workplaces: VBoxContainer
 var _hud_scroll: ScrollContainer:
 	get: return _scroll
 var _orders_scroll: ScrollContainer:
@@ -162,6 +163,9 @@ func _build() -> void:
 	professions.add_child(back)
 	back.pressed.connect(func() -> void: controller.issue_order("profession"))
 	_work_page.add_child(_local_label("TRIBE_PROFESSION_HINT", 15, Style.MUTED))
+	_workplaces = preload("res://ui/tribe/workplace_panel.gd").new()
+	_workplaces.controller = controller
+	_work_page.add_child(_workplaces)
 	_build_husbandry()
 	_tabs.add_child(_neighbors)
 	_feedback = preload("res://ui/frontend/group_feedback.gd").new()
@@ -346,7 +350,7 @@ func refresh() -> void:
 				activity = Text.text("TRIBE_RESERVE_READY")
 			elif Economy.Resources.uses_batches(resource) and Economy.pickup(data, resource).is_empty():
 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
-			elif not Economy.Resources.uses_batches(resource) and int(data["deposits"][resource]["remaining"]) == 0:
+			elif not Economy.Resources.uses_batches(resource) and int(Economy.source(data, member, resource)["remaining"]) == 0:
 				activity = Text.format_text("TRIBE_WAIT_RESOURCE", {"resource": Presentation.resource_title(resource)})
 		if member["stage"] == "meal":
 			activity = Text.text("TRIBE_MEAL")
@@ -359,6 +363,9 @@ func refresh() -> void:
 		if member["construction_id"] != "":
 			activity = Text.text("TRIBE_STOPPED_CARGO") if member["order"] == "wait" else Text.text("TRIBE_BUILD_CARGO")
 		button.text = Text.format_text("TRIBE_RESIDENT", {"name": member["name"], "profession": Presentation.job_title(member["profession"]), "food": roundi(float(member["hunger"])), "water": roundi(float(member["hydration"])), "activity": Text.format_text("TRIBE_CARRYING", {"resource": Presentation.resource_title(member["cargo"])}) if member["cargo"] != "" and member["construction_id"] == "" else activity})
+		var workplace: String = Economy.station_key(data, str(member.get("workplace_id", "")))
+		if not workplace.is_empty():
+			button.text += "\n" + Text.format_text("WORKPLACE_ASSIGNED", {"name": Text.text(Presentation.PROJECTS[Economy.station_kind(workplace)]), "number": 1 if workplace in Economy.STATIONS else 2})
 		var logical_width: float = get_viewport().get_visible_rect().size.x / _scale_factor
 		var columns: int = 2 if logical_width < 1000 else 3
 		button.custom_minimum_size.x = maxf(180.0, (_hud.size.x - 56.0) / columns)
@@ -366,6 +373,8 @@ func refresh() -> void:
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
+		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty(): _buttons[order].disabled = true
+	_workplaces.refresh(data)
 	_buttons["milk"].visible = not data["economy"]["receipts"].is_empty()
 	_refresh_husbandry(data)
 	_neighbors.refresh()

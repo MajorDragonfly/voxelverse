@@ -176,8 +176,15 @@ static func _validate(value: Variant, body: Dictionary, campaign: Dictionary, se
 		if project["kind"] == "garden" and (not renewable or int(value["tools"]) != 1 or int(value["garden"]) != 0):
 			return "Ungültiger Gartenbau."
 		if expanded and project["kind"] in Economy.STATIONS:
-			if int(value["tools"]) != 1 or not local_point(project.get("position"), value["anchor"]) or value.get("economy", {}).get("stations", {}).has(project["kind"]):
+			var key: String = str(project.get("station_key", project.kind))
+			if int(value["tools"]) != 1 or not local_point(project.get("position"), value["anchor"]) or key != Economy.next_station(value, project.kind):
 				return "Ungültige Arbeitsplatzbaustelle."
+			if project.has("station_key"):
+				if value.economy.get("schema") != Economy.SCHEMA or project.get("id") != Ids.scoped("workplace", value.id, key) or project.get("entrance") != project.position: return "Ungültige Arbeitsplatzbaustellenkennung."
+				for site: Variant in value.economy.stations.values():
+					if not site is Dictionary or not local_point(site.get("position"), value.anchor): return "Ungültiger Arbeitsplatz."
+					if Home.distance(project.position, site.position) < 3.0: return "Arbeitsplatzbaustelle überlagert einen bestehenden Platz."
+			elif key not in Economy.STATIONS: return "Arbeitsplatzinstanz ohne Baumaterialvertrag."
 	if expanded:
 		var resource_owner: String = settlement_id if instanced and settlement_id != origin_id else str(home.id)
 		var problem: String = Economy.validate(value, resource_owner)

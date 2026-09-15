@@ -3863,3 +3863,27 @@ msgstr "Zurück · Esc"
 
 msgid "Kopfmodule"
 msgstr "Kopfmodule"
+
+msgid "WORKPLACE_HINT"
+msgstr "Bis zu zwei Arbeitsplätze je Typ. Wähle Bewohner und anschließend den gewünschten Platz."
+
+msgid "WORKPLACE_ROW"
+msgstr "{name} {number} · {ready} abholbereit · {assigned} zugeordnet"
+
+msgid "WORKPLACE_ASSIGNED"
+msgstr "Arbeitsplatz: {name} {number}"
+
+msgid "WORKPLACE_ASSIGN_HINT"
+msgstr "Ausgewählte Bewohner sammeln an genau diesem Platz. Getragene Ware wird zuerst abgeliefert."
+
+msgid "WORKPLACE_SELECT_RESIDENT"
+msgstr "Wähle zuerst mindestens einen Bewohner aus."
+
+msgid "WORKPLACE_UNKNOWN"
+msgstr "Dieser Arbeitsplatz gehört nicht zum ausgewählten Ort."
+
+msgid "WORKPLACE_UNREACHABLE"
+msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
+
+msgid "WORKPLACE_LIMIT"
+msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."

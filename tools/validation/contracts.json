@@ -219,7 +219,9 @@
         "egg_production_contract_test",
         "egg_husbandry_ui_test",
         "settlement_runtime_test",
-        "settlement_save_test"
+        "settlement_save_test",
+        "workplace_instances_test",
+        "workplace_runtime_test"
       ]
     },
     {

@@ -370,6 +370,10 @@ func screen_command(position: Vector2) -> void:
 		if issue_order(placement, target):
 			placement = ""
 		return
+	for site: Dictionary in village().economy.stations.values():
+		if target.distance_to(Space.resolve(self, site.position)) < 1.8:
+			issue_workplace(site.id)
+			return
 	for kind: String in village()["deposits"]:
 		if kind in ["water", "fiber"] and not village()["economy"]["stations"].has("well" if kind == "water" else "fiberbed"):
 			continue
@@ -404,7 +408,31 @@ func _resolve_order(order: String, success: bool) -> void:
 	order_resolved.emit(StringName(order), "%d:%d" % [get_instance_id(), _order_sequence], success)
 	panel.refresh()
 
-func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
+func issue_workplace(identity: String) -> bool:
+	if not is_active() or selected.is_empty():
+		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_SELECT_RESIDENT")
+		_resolve_order("workplace", false)
+		return false
+	var key: String = Economy.station_key(village(), identity)
+	if key.is_empty():
+		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNKNOWN")
+		_resolve_order("workplace", false)
+		return false
+	var destination: Vector3 = Space.resolve(self, village().economy.stations[key].position)
+	if not navigation.is_ready() or navigation.route(anchor(), destination).is_empty():
+		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNREACHABLE")
+		_resolve_order("workplace", false)
+		return false
+	for identity_selected: String in selected:
+		if not actors.has(identity_selected) or navigation.route(actors[identity_selected].global_position, destination).is_empty():
+			status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNREACHABLE")
+			_resolve_order("workplace", false)
+			return false
+	var success: bool = _commit_order(Economy.STATIONS[Economy.station_kind(key)], Vector3.ZERO, 18.0, identity)
+	_resolve_order("workplace", success)
+	return success
+
+func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0, workplace_id: String = "") -> bool:
 	if not navigation.is_ready() and order in ["move"] + Economy.STATIONS.keys() + Housing.BUILDS:
 		status = "Die Dorfwege werden geprüft. Bitte einen Moment warten."
 		return false
@@ -423,7 +451,10 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 				return false
 	var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
 	if order in costs:
-		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or (order in Housing.ANIMAL_SITES and data["husbandry"]["pens"].size() >= Husbandry.MAX_PENS) or data["economy"]["stations"].has(order):
+		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty():
+			status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_LIMIT")
+			return false
+		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or (order in Housing.ANIMAL_SITES and data["husbandry"]["pens"].size() >= Husbandry.MAX_PENS):
 			status = "Dieser Ausbau ist bereits abgeschlossen."
 			return false
 		if order != "tool" and int(data["tools"]) == 0:
@@ -458,7 +489,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 				for kind: String in costs[order]:
 					data["project"]["delivered_materials"][kind] = 0
 			elif order in Economy.STATIONS:
-				data["project"]["position"] = Space.encode(self, destination)
+				data["project"] = Economy.station_project(data, order, Space.encode(self, destination))
 	for identity: String in selected:
 		var member: Dictionary = member_record(identity)
 		var next: String = order
@@ -475,6 +506,8 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 			member["paused_order"] = ""
 			member["work"] = 0.0
 			member["task"] = ""
+			member.erase("workplace_id")
+			if not workplace_id.is_empty(): member["workplace_id"] = workplace_id
 		member["order"] = next
 		member["blocked"] = false
 		# Changing tasks never discards a carried unit of material.
@@ -551,10 +584,10 @@ func _physics_process(delta: float) -> void:
 			target = Space.resolve(self, batch.position) if not batch.is_empty() and not Economy.at_target(village(), member, order) else anchor()
 		elif order in Economy.RESOURCES or order in ["supply", "provision"]:
 			var kind: String = Economy.gather_kind(village(), member)
-			target = Space.resolve(self, village()["deposits"][kind]["position"]) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
+			target = Space.resolve(self, Economy.source(village(), member, kind).position) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
 		elif order in ["feed", "drink", "tool", "build", "tend"]:
 			target = anchor()
-		elif order in Housing.BUILDS and village()["project"].get("kind") == order:
+		elif Housing.material_project(village().project) and village()["project"].get("kind") == order:
 			construction = not Housing.pending(village()["project"])
 			target = Space.resolve(self, village()["project"]["entrance"]) if construction else anchor()
 		elif order == "garden":
@@ -710,6 +743,7 @@ func assign_profession(profession: String) -> bool:
 		member["paused_order"] = ""
 		member["work"] = 0.0
 		member["task"] = ""
+		member.erase("workplace_id")
 		member["stage"] = "return" if member["cargo"] != "" else "outbound"
 	var success: bool = _save_economy(before)
 	if success:
@@ -788,6 +822,7 @@ func prepare_far_simulation() -> Dictionary:
 	var data: Dictionary = village()
 	var places: Array = [data.anchor]
 	for deposit: Dictionary in data.deposits.values(): places.append(deposit.position)
+	for site: Dictionary in data.economy.stations.values(): places.append(site.position)
 	for member: Dictionary in data.members:
 		places.append(member.position)
 		places.append(member.destination)

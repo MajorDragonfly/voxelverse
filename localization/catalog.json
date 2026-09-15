@@ -6441,6 +6441,46 @@
       "key": "Kopfmodule",
       "de": "Kopfmodule",
       "en": "Head modules"
+    },
+    {
+      "key": "WORKPLACE_HINT",
+      "de": "Bis zu zwei Arbeitsplätze je Typ. Wähle Bewohner und anschließend den gewünschten Platz.",
+      "en": "Up to two workplaces of each type. Select residents, then choose their workplace."
+    },
+    {
+      "key": "WORKPLACE_ROW",
+      "de": "{name} {number} · {ready} abholbereit · {assigned} zugeordnet",
+      "en": "{name} {number} · {ready} ready · {assigned} assigned"
+    },
+    {
+      "key": "WORKPLACE_ASSIGNED",
+      "de": "Arbeitsplatz: {name} {number}",
+      "en": "Workplace: {name} {number}"
+    },
+    {
+      "key": "WORKPLACE_ASSIGN_HINT",
+      "de": "Ausgewählte Bewohner sammeln an genau diesem Platz. Getragene Ware wird zuerst abgeliefert.",
+      "en": "Selected residents gather at this workplace. Carried goods are delivered first."
+    },
+    {
+      "key": "WORKPLACE_SELECT_RESIDENT",
+      "de": "Wähle zuerst mindestens einen Bewohner aus.",
+      "en": "Select at least one resident first."
+    },
+    {
+      "key": "WORKPLACE_UNKNOWN",
+      "de": "Dieser Arbeitsplatz gehört nicht zum ausgewählten Ort.",
+      "en": "This workplace does not belong to the selected settlement."
+    },
+    {
+      "key": "WORKPLACE_UNREACHABLE",
+      "de": "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar.",
+      "en": "This workplace cannot be reached using the verified village paths."
+    },
+    {
+      "key": "WORKPLACE_LIMIT",
+      "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
+      "en": "This settlement already has two workplaces of this type."
     }
   ]
 }

@@ -3863,3 +3863,27 @@ msgstr "Back · Esc"
 
 msgid "Kopfmodule"
 msgstr "Head modules"
+
+msgid "WORKPLACE_HINT"
+msgstr "Up to two workplaces of each type. Select residents, then choose their workplace."
+
+msgid "WORKPLACE_ROW"
+msgstr "{name} {number} · {ready} ready · {assigned} assigned"
+
+msgid "WORKPLACE_ASSIGNED"
+msgstr "Workplace: {name} {number}"
+
+msgid "WORKPLACE_ASSIGN_HINT"
+msgstr "Selected residents gather at this workplace. Carried goods are delivered first."
+
+msgid "WORKPLACE_SELECT_RESIDENT"
+msgstr "Select at least one resident first."
+
+msgid "WORKPLACE_UNKNOWN"
+msgstr "This workplace does not belong to the selected settlement."
+
+msgid "WORKPLACE_UNREACHABLE"
+msgstr "This workplace cannot be reached using the verified village paths."
+
+msgid "WORKPLACE_LIMIT"
+msgstr "This settlement already has two workplaces of this type."

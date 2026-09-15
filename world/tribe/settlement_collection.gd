@@ -69,7 +69,7 @@ static func workplaces(body: Dictionary, settlement_id: String) -> Dictionary:
 	for kind: String in village.deposits:
 		_add_place(result, village.deposits[kind], settlement_id, "deposit", kind)
 	for kind: String in village.economy.stations:
-		_add_place(result, village.economy.stations[kind], settlement_id, "station", kind)
+		_add_place(result, village.economy.stations[kind], settlement_id, "station", Economy.station_kind(kind))
 	for shelter: Dictionary in village.housing.homes:
 		_add_place(result, shelter, settlement_id, "shelter", shelter.kind)
 	for pen: Dictionary in village.husbandry.pens:
@@ -225,7 +225,7 @@ static func found(body: Dictionary, campaign: Dictionary, member_id: String, anc
 	var founder: Dictionary = {}
 	for member: Dictionary in source.members:
 		if member.id == member_id: founder = member
-	if founder.is_empty() or founder.cargo != "" or founder.construction_id != "" or founder.care_pen_id != "" or founder.order != "wait" or founder.paused_order != "": return _failure("settlements.founder_busy")
+	if founder.is_empty() or founder.cargo != "" or founder.construction_id != "" or founder.care_pen_id != "" or founder.order != "wait" or founder.paused_order != "" or founder.get("workplace_id", "") != "": return _failure("settlements.founder_busy")
 	for animal: Dictionary in result.get("domesticated_animals", {}).get("registry", {}).get("animals", {}).values():
 		if animal.handler_id == member_id or animal.get("pending", {}).get("actor_id") == member_id: return _failure("settlements.founder_busy")
 	if member_id in result.get("tribal_neighbor", {}).get("aid", {}).get("carriers", []): return _failure("settlements.founder_busy")

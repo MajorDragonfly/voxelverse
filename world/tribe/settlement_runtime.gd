@@ -190,7 +190,13 @@ func refresh_visuals() -> void:
 			get_tree().current_scene.add_child(buildings)
 			far_visuals[id] = {"props": props, "buildings": buildings, "signature": ""}
 		var visible: Dictionary = far_visuals[id]
-		var signature: String = JSON.stringify([data.stock, data.project, data.economy.stations, data.housing.homes, data.husbandry.pens])
+		var stations: Array = []
+		for key: String in data.economy.stations:
+			var site: Dictionary = data.economy.stations[key]
+			stations.append([site.id, site.position, Collection.Economy.station_source(data, key).remaining])
+		# Partial production clocks are not visible geometry. Only publish changes
+		# to location, identity or the actual ready amount for either instance.
+		var signature: String = JSON.stringify([data.stock, data.project, stations, data.housing.homes, data.husbandry.pens])
 		if signature != visible.signature:
 			visible.signature = signature
 			visible.props.rebuild(data)

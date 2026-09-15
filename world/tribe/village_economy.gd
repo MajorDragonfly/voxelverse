@@ -5,7 +5,8 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Resources = preload("res://world/tribe/resource_catalog.gd")
 const Batch = preload("res://world/tribe/resource_batch.gd")
 const RESOURCES: Array[String] = Resources.IDS
-const SCHEMA: int = 2
+const SCHEMA: int = 3
+const MAX_PER_KIND: int = 2
 const EXTRA: Array[String] = ["water", "fiber", "milk", "eggs"]
 const STATIONS: Dictionary = {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}
 const COSTS: Dictionary = {"well": {"wood": 3, "stone": 2}, "forester": {"wood": 4, "stone": 1}, "quarry": {"wood": 4, "stone": 2}, "fiberbed": {"wood": 2, "stone": 1}}
@@ -31,12 +32,67 @@ static func install(data: Dictionary) -> void:
 		member.merge({"hydration": 100.0, "profession": "none", "paused_order": "", "task": "", "blocked": false}, true)
 
 static func upgrade(data: Dictionary) -> bool:
-	if data.get("economy", {}).get("schema") != 1: return false
+	var version: int = int(data.get("economy", {}).get("schema", 0))
+	if version not in [1, 2]: return false
+	if version == 1:
+		data.economy["eggs_received"] = 0
+		data.economy["eggs_meals"] = 0
+		data.stock["eggs"] = 0
+	# The first workplace keeps its original ID, source and clock. Paid legacy
+	# projects remain paid; migration never refills or moves a resource.
 	data.economy.schema = SCHEMA
-	data.economy["eggs_received"] = 0
-	data.economy["eggs_meals"] = 0
-	data.stock["eggs"] = 0
 	return true
+
+static func station_kind(key: String) -> String:
+	return key if key in STATIONS else key.trim_suffix(":2") if key.ends_with(":2") and key.trim_suffix(":2") in STATIONS else ""
+
+static func next_station(data: Dictionary, kind: String) -> String:
+	if kind not in STATIONS: return ""
+	for index in range(MAX_PER_KIND):
+		var key: String = kind if index == 0 else kind + ":2"
+		if not data.economy.stations.has(key): return key
+	return ""
+
+static func station_key(data: Dictionary, identity: String) -> String:
+	for key: String in data.economy.stations:
+		if data.economy.stations[key].id == identity: return key
+	return ""
+
+static func station_source(data: Dictionary, key: String) -> Dictionary:
+	# One shared writer: the original source is retained in deposits; the new
+	# instance owns its source next to its position. Callers never copy this view.
+	return data.deposits[STATIONS[key]] if key in STATIONS else data.economy.stations.get(key, {})
+
+static func source(data: Dictionary, member: Dictionary, resource: String) -> Dictionary:
+	var key: String = station_key(data, str(member.get("workplace_id", "")))
+	if not key.is_empty() and STATIONS[station_kind(key)] == resource:
+		return station_source(data, key)
+	return data.deposits.get(resource, {})
+
+static func remaining(data: Dictionary, resource: String) -> int:
+	var total: int = int(data.deposits.get(resource, {}).get("remaining", 0))
+	for key: String in data.economy.stations:
+		if key not in STATIONS and STATIONS.get(station_kind(key)) == resource:
+			total += int(data.economy.stations[key].remaining)
+	return total
+
+static func station_project(data: Dictionary, kind: String, position: Variant) -> Dictionary:
+	var key: String = next_station(data, kind)
+	if key.is_empty(): return {}
+	var delivered: Dictionary = {}
+	for resource: String in COSTS[kind]: delivered[resource] = 0
+	return {"kind": kind, "station_key": key, "id": Ids.scoped("workplace", data.id, key),
+		"position": position.duplicate(true), "entrance": position.duplicate(true),
+		"progress": 0.0, "materials": COSTS[kind].duplicate(), "delivered_materials": delivered}
+
+static func complete_station(data: Dictionary, project: Dictionary) -> void:
+	var key: String = str(project.get("station_key", project.kind))
+	var site: Dictionary = {"id": Ids.scoped("workplace", data.id, key), "position": project.position.duplicate(true)}
+	if key in STATIONS:
+		data.deposits[STATIONS[key]].position = project.position.duplicate(true)
+	else:
+		site.merge({"clock": 0.0, "remaining": 0})
+	data.economy.stations[key] = site
 
 static func tick(data: Dictionary, delta: float) -> bool:
 	if delta <= 0 or not is_finite(delta):
@@ -44,19 +100,21 @@ static func tick(data: Dictionary, delta: float) -> bool:
 	var economy: Dictionary = data["economy"]
 	var changed: bool = false
 	for station: String in economy["stations"]:
-		var kind: String = STATIONS[station]
-		var deposit: Dictionary = data["deposits"][kind]
+		var kind: String = STATIONS[station_kind(station)]
+		var deposit: Dictionary = station_source(data, station)
+		var clocks: Dictionary = economy.clocks if station in STATIONS else deposit
+		var clock_key: String = kind if station in STATIONS else "clock"
 		if int(deposit["remaining"]) >= CAPACITY:
-			economy["clocks"][kind] = 0.0
+			clocks[clock_key] = 0.0
 			continue
-		economy["clocks"][kind] += delta
-		while float(economy["clocks"][kind]) >= float(INTERVALS[kind]) and int(deposit["remaining"]) < CAPACITY:
-			economy["clocks"][kind] -= INTERVALS[kind]
+		clocks[clock_key] = minf(float(INTERVALS[kind]) * CAPACITY, float(clocks[clock_key]) + delta)
+		while float(clocks[clock_key]) >= float(INTERVALS[kind]) and int(deposit["remaining"]) < CAPACITY and int(economy.produced[kind]) < 1000000000:
+			clocks[clock_key] -= INTERVALS[kind]
 			economy["produced"][kind] += 1
 			deposit["remaining"] += 1
 			changed = true
-		if int(deposit["remaining"]) >= CAPACITY:
-			economy["clocks"][kind] = 0.0
+		if int(deposit["remaining"]) >= CAPACITY or int(economy.produced[kind]) >= 1000000000:
+			clocks[clock_key] = 0.0
 	return changed
 
 static func carried(data: Dictionary, kind: String) -> int:
@@ -92,13 +150,13 @@ static func gather_kind(data: Dictionary, member: Dictionary) -> String:
 	# Persist the selected leg while walking/working; concurrent workers still
 	# check the shared target at pickup, so neither food nor water overshoots.
 	var task: String = member["task"]
-	if task in ["food", "water"] and reserve(data, task) < target(data, task) and int(data["deposits"][task]["remaining"]) > 0:
+	if task in ["food", "water"] and reserve(data, task) < target(data, task) and int(source(data, member, task)["remaining"]) > 0:
 		return task
 	var food_ratio: float = float(reserve(data, "food")) / target(data, "food")
 	var water_ratio: float = float(reserve(data, "water")) / target(data, "water")
 	var choices: Array = ["water", "food"] if water_ratio <= food_ratio else ["food", "water"]
 	for kind: String in choices:
-		if reserve(data, kind) < target(data, kind) and int(data["deposits"][kind]["remaining"]) > 0:
+		if reserve(data, kind) < target(data, kind) and int(source(data, member, kind)["remaining"]) > 0:
 			member["task"] = kind
 			return kind
 	member["task"] = ""
@@ -144,7 +202,7 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
 	var batch: Dictionary = Batch.canonical(data, value)
 	if batch.is_empty(): return "Ungültiger Ressourcenbatch oder unbekannte Revision."
 	var kind: String = batch.resource_id
-	if kind == "eggs" and data.economy.schema != SCHEMA: return "Eier benötigen das aktuelle Wirtschaftsformat."
+	if kind == "eggs" and data.economy.schema < 2: return "Eier benötigen das aktuelle Wirtschaftsformat."
 	if not Resources.uses_batches(kind): return "Diese Ressource besitzt keinen Produktionsanschluss."
 	var receipts: Dictionary = data.economy.receipts
 	var identity: String = batch.source_id
@@ -166,7 +224,10 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
 
 static func has_unsupported_contract(value: Variant) -> bool:
 	if not value is Dictionary: return false
-	if (value.get("schema") != 1 and value.get("schema") != SCHEMA): return true
+	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != SCHEMA: return true
+	if value.get("schema") != SCHEMA and value.get("stations") is Dictionary:
+		for key: Variant in value.stations:
+			if key not in STATIONS: return true
 	if value.get("receipts") is Dictionary:
 		for receipt: Variant in value.receipts.values():
 			if Batch.unsupported(receipt): return true
@@ -178,14 +239,14 @@ static func has_unsupported_contract(value: Variant) -> bool:
 static func validate(data: Dictionary, resource_owner: String = "") -> String:
 	if resource_owner.is_empty(): resource_owner = str(data.get("home_group_id", ""))
 	var e: Variant = data.get("economy")
-	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != SCHEMA):
+	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != SCHEMA):
 		return "Ungültige Dorfwirtschaft."
 	for field in ["stations", "clocks", "produced", "receipts"]:
 		if not e.get(field) is Dictionary:
 			return "Ungültiger Wirtschaftsvertrag."
 	if not integer(e.get("milk_received"), 0, 1000000000) or not integer(e.get("drinks"), 0, 1000000000) or not integer(e.get("milk_meals"), 0, 1000000000):
 		return "Ungültiger Verbrauch."
-	if e.schema == SCHEMA:
+	if e.schema >= 2:
 		for counter in ["eggs_received", "eggs_meals"]:
 			if not integer(e.get(counter), 0, 1000000000): return "Ungültige Eierbilanz."
 	elif data.stock.has("eggs") or e.has("eggs_received") or e.has("eggs_meals"):
@@ -200,19 +261,35 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 		var deposit: Variant = data["deposits"].get(kind)
 		if not deposit is Dictionary or deposit.get("id") != Ids.scoped("resource", resource_owner, kind) or not local_point(deposit.get("position"), data["anchor"]) or not integer(deposit.get("remaining"), 0, 48):
 			return "Ungültiger Rohstoffplatz."
-		if int(deposit["remaining"]) + reserve(data, kind) > (48 if kind in ["wood", "stone"] else 0) + int(e["produced"][kind]):
-			return "Rohstoff wurde vervielfacht."
 	for station: String in e["stations"]:
 		var site: Variant = e["stations"][station]
-		if station not in STATIONS or not site is Dictionary or site.get("id") != Ids.scoped("workplace", data["id"], station) or not local_point(site.get("position"), data["anchor"]) or int(data["tools"]) != 1:
+		var kind: String = station_kind(station)
+		if kind.is_empty() or not site is Dictionary or site.get("id") != Ids.scoped("workplace", data["id"], station) or not local_point(site.get("position"), data["anchor"]) or int(data["tools"]) != 1:
 			return "Ungültiger Arbeitsplatz."
-		if site["position"] != data["deposits"][STATIONS[station]]["position"]:
+		if station not in STATIONS:
+			if e.schema != SCHEMA or not e.stations.has(kind) or not integer(site.get("remaining"), 0, CAPACITY) or not number(site.get("clock"), 0, INTERVALS[STATIONS[kind]]): return "Ungültige Arbeitsplatzinstanz."
+			if Home.distance(site.position, e.stations[kind].position) < 3.0: return "Arbeitsplätze überlagern sich."
+		elif site["position"] != data["deposits"][STATIONS[station]]["position"]:
 			return "Arbeitsplatz und Rohstoffquelle widersprechen sich."
+		elif site.has("remaining") or site.has("clock"):
+			return "Ursprünglicher Arbeitsplatz besitzt bereits eine Rohstoffquelle."
 	for kind: String in INTERVALS:
+		if remaining(data, kind) + reserve(data, kind) > (48 if kind in ["wood", "stone"] else 0) + int(e.produced[kind]): return "Rohstoff wurde vervielfacht."
 		var built: bool = e["stations"].has(STATIONS.find_key(kind))
 		if not built and (float(e["clocks"][kind]) != 0 or int(e["produced"][kind]) != 0):
 			return "Rohstoffe entstehen erst nach dem Arbeitsplatzbau."
 	for member: Dictionary in data["members"]:
+		for field: String in ["workplace_id", "cargo_source_id"]:
+			if not member.get(field, "") is String: return "Ungültige Arbeitsplatzzuordnung."
+			if member.get(field, "") != "" and e.schema != SCHEMA: return "Arbeitsplatzzuordnung benötigt Wirtschaftsformat 3."
+		if member.get("workplace_id", "") != "" and station_key(data, member.workplace_id).is_empty(): return "Arbeitsplatz gehört nicht zu dieser Siedlung."
+		if member.get("cargo_source_id", "") != "":
+			var resource: String = ""
+			for key: String in e.stations:
+				if station_source(data, key).id == member.cargo_source_id: resource = STATIONS[station_kind(key)]
+			for key: String in data.deposits:
+				if data.deposits[key].id == member.cargo_source_id: resource = key
+			if resource.is_empty() or member.cargo != resource or member.get("construction_id", "") != "" or member.get("care_pen_id", "") != "": return "Fracht und Rohstoffquelle widersprechen sich."
 		if not number(member.get("hydration"), 0, 100) or member.get("profession") not in JOBS or not member.get("paused_order") is String or (member["paused_order"] != "" and member["paused_order"] not in (["wait", "move", "wood", "stone", "food", "tool", "hut", "tent", "pen", "feed", "garden", "supply"] + ORDERS)) or member.get("task") not in ["", "water", "food"] or not member.get("blocked") is bool:
 			return "Ungültiger Beruf oder unterbrochener Auftrag."
 		if e.schema == 1 and (member.get("order") in ["eggs", "laying_site"] or member.get("paused_order") in ["eggs", "laying_site"] or member.get("cargo") == "eggs" or member.get("profession") == "egg_carrier"): return "Eierauftrag benötigt Wirtschaftsformat 2."

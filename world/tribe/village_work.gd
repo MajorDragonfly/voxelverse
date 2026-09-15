@@ -30,6 +30,10 @@ static func snapshot(data: Dictionary, member: Dictionary) -> Dictionary:
 		if data.deposits.has(resource):
 			before.deposits = data.deposits.duplicate()
 			before.deposits[resource] = data.deposits[resource].duplicate()
+			var key: String = Economy.station_key(data, str(member.get("workplace_id", "")))
+			if not key.is_empty() and key not in Economy.STATIONS:
+				before.economy.stations = data.economy.stations.duplicate()
+				before.economy.stations[key] = data.economy.stations[key].duplicate()
 		elif resource in Economy.RESOURCES:
 			# Batch resources have no deposit. Preserve remaining units/removal;
 			# receipt payloads themselves are immutable during arrived work.
@@ -72,8 +76,8 @@ static func target(data: Dictionary, member: Dictionary) -> Variant:
 		return batch.position if not batch.is_empty() and not Economy.at_target(data, member, order) else data.anchor
 	if order in Economy.RESOURCES or order in ["supply", "provision"]:
 		var kind: String = Economy.gather_kind(data, member)
-		return data.deposits[kind].position if not kind.is_empty() and not Economy.at_target(data, member, kind) else data.anchor
-	if order in Housing.BUILDS and data.project.get("kind") == order:
+		return Economy.source(data, member, kind).position if not kind.is_empty() and not Economy.at_target(data, member, kind) else data.anchor
+	if Housing.material_project(data.project) and data.project.get("kind") == order:
 		return data.anchor if Housing.pending(data.project) else data.project.entrance
 	if order == "garden": return data.deposits.food.position
 	if order in Economy.STATIONS and not data.project.is_empty(): return data.project.position
@@ -101,6 +105,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 		data["stock"][kind] += 1
 		data["delivered"] += 1
 		member["cargo"] = ""
+		member.erase("cargo_source_id")
 		member["stage"] = "outbound"
 		effects.append({"kind": "delivery", "data": {"resource": kind, "amount": 1, "member_id": member["id"], "sequence": data["delivered"], "tribe_id": data["id"]}})
 		effects.append({"kind": "changed"})
@@ -121,7 +126,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 		var kind: String = Economy.gather_kind(data, member)
 		if kind.is_empty() or Economy.at_target(data, member, kind):
 			return
-		var deposit: Dictionary = data["deposits"][kind]
+		var deposit: Dictionary = Economy.source(data, member, kind)
 		if int(deposit["remaining"]) == 0:
 			return # Keep ownership of work across empty sources and full stores.
 		if Home.distance(member["position"], deposit["position"]) > 3.0:
@@ -130,6 +135,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 		if float(member["work"]) >= 3.0:
 			deposit["remaining"] -= 1
 			member["cargo"] = kind
+			if data.economy.schema == Economy.SCHEMA: member["cargo_source_id"] = deposit.id
 			member["stage"] = "return"
 			member["work"] = 0.0
 			effects.append({"kind": "changed"})
@@ -143,7 +149,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 			if member["order"] != "build":
 				member["order"] = "wait"
 			return
-		if order in Housing.BUILDS:
+		if Housing.material_project(project):
 			if Housing.pending(project):
 				if Home.distance(member["position"], data["anchor"]) <= 3.0:
 					for kind: String in project["materials"]:
@@ -168,8 +174,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 				p.merge({"animal_id": "", "food": 0.0, "water": 0.0})
 				data["husbandry"]["pens"].append(p)
 			elif order in Economy.STATIONS:
-				data["economy"]["stations"][order] = {"id": Model.Ids.scoped("workplace", data["id"], order), "position": project["position"].duplicate()}
-				data["deposits"][Economy.STATIONS[order]]["position"] = project["position"].duplicate()
+				Economy.complete_station(data, project)
 			else:
 				data[{"tool": "tools", "hut": "huts", "garden": "garden"}[order]] += 1
 			var completed_id: String = str(project.get("id", Model.Ids.scoped("workplace", data["id"], order)))
