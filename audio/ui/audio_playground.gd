@@ -176,7 +176,9 @@ func _ready() -> void:
 	for item in [["Gras", "step_grass"], ["Sand", "step_sand"], ["Stein", "step_stone"],
 		["Schnee", "step_snow"], ["Holz", "step_wood"], ["Waten", "step_water"],
 		["Springen", "jump"], ["Landen", "land"], ["Wassereintritt", "splash"],
-		["Wasserbewegung", "swim"], ["Bestätigen", "ui_confirm"], ["Entdeckung", "discovery"]]:
+		["Schwimmzug", "swim"], ["Wasser verlassen", "water_exit"],
+		["Eintauchen", "water_dive"], ["Auftauchen", "water_surface"],
+		["Blasenbewegung", "underwater_bubbles"], ["Bestätigen", "ui_confirm"], ["Entdeckung", "discovery"]]:
 		var event := StringName(item[1])
 		button(grid, item[0], func():
 			_status.text = "Klang: " + String(event)

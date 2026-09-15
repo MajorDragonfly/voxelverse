@@ -1,0 +1,180 @@
+{
+  "revision": 1,
+  "rate": 22050,
+  "assets": {
+    "step_grass_0": {
+      "sha256": "a3ae1e42173a2a2eadf0d1123c7008b574187b8546df0c16e2ac47df55a8bf4e",
+      "frames": 8379,
+      "channels": 1,
+      "peak": 0.205573
+    },
+    "step_grass_1": {
+      "sha256": "f7cf655f3413d219930d91a923f01bd79589205b64c3147ef96cfe7dba64b38a",
+      "frames": 8379,
+      "channels": 1,
+      "peak": 0.222968
+    },
+    "step_grass_2": {
+      "sha256": "486a281fc454b27e812bead6c5638102e1683f04d7371155daf620a76e374013",
+      "frames": 8379,
+      "channels": 1,
+      "peak": 0.177404
+    },
+    "step_sand_0": {
+      "sha256": "6721af8493c133892bd9870a45853c02cdf32eefc62e0863a50843db71000958",
+      "frames": 9261,
+      "channels": 1,
+      "peak": 0.184362
+    },
+    "step_sand_1": {
+      "sha256": "1df91fa34dbe3251069704b00913e307beeed70f71a867ef1e94d09fff704718",
+      "frames": 9261,
+      "channels": 1,
+      "peak": 0.146001
+    },
+    "step_sand_2": {
+      "sha256": "8427939fdac27ddfbeb5043185d4ee54c3f1b84ddf9f8cdf5c676c8da15fa395",
+      "frames": 9261,
+      "channels": 1,
+      "peak": 0.149998
+    },
+    "step_stone_0": {
+      "sha256": "c1eb7ea1030a3e870f4797f7e00b621b5a64270f16f254c3801888fc67d8c67c",
+      "frames": 6615,
+      "channels": 1,
+      "peak": 0.160161
+    },
+    "step_stone_1": {
+      "sha256": "14582ddd14c117aafa9c72cf94af26e84cb63b9d5936b80650d70bfca561a4e4",
+      "frames": 6615,
+      "channels": 1,
+      "peak": 0.193426
+    },
+    "step_stone_2": {
+      "sha256": "444d8fe84fa0b5227ed8ecb129fe484821d6bb413610e37db4d1bcc37b997bdb",
+      "frames": 6615,
+      "channels": 1,
+      "peak": 0.205573
+    },
+    "step_snow_0": {
+      "sha256": "b35dc1fe6a18d8ebc54edb4ae9fe9096a7488fe95a9334bc421863f067e1198e",
+      "frames": 10584,
+      "channels": 1,
+      "peak": 0.22602
+    },
+    "step_snow_1": {
+      "sha256": "404d9fe740e79c858646cfae1a6b57ad03d8051a616d3e09aacb681121cfd3b6",
+      "frames": 10584,
+      "channels": 1,
+      "peak": 0.26487
+    },
+    "step_snow_2": {
+      "sha256": "93f3fc15ed9eb3770c3ddf506a6299574feeb332bd464cbc4707fd35b62e0cc7",
+      "frames": 10584,
+      "channels": 1,
+      "peak": 0.233406
+    },
+    "step_wood_0": {
+      "sha256": "784ac29075103de0201c109a6216ca501db16c2803db05ab2a829383bb1a5882",
+      "frames": 8158,
+      "channels": 1,
+      "peak": 0.125889
+    },
+    "step_wood_1": {
+      "sha256": "48c53989fe4850d5171bba53a949626745ce9a9d619d94d294155a3ba1903993",
+      "frames": 8158,
+      "channels": 1,
+      "peak": 0.153569
+    },
+    "step_wood_2": {
+      "sha256": "c658124ada99b816246475d654a7647735a6d79b6e2e90da0b8e61b8b82ceb83",
+      "frames": 8158,
+      "channels": 1,
+      "peak": 0.167455
+    },
+    "step_water_0": {
+      "sha256": "92d3722a67930a0f941b7a3900ef1f959f9182d9b454d0cfd8ab2e642d5c2393",
+      "frames": 12348,
+      "channels": 1,
+      "peak": 0.165807
+    },
+    "step_water_1": {
+      "sha256": "784d3688578d55eb0f43c708efad01cbb5581fede83a2f0032c3533fc11b42a7",
+      "frames": 12348,
+      "channels": 1,
+      "peak": 0.194067
+    },
+    "step_water_2": {
+      "sha256": "795d3724faac81e039a5594036898bd1f231641f71e8c4d0d88d1229c130cd5b",
+      "frames": 12348,
+      "channels": 1,
+      "peak": 0.170415
+    },
+    "splash": {
+      "sha256": "f38e71ebc53b1fe1d634a5ec0ee901b531dbf9e83354a26709ff377f6dde9d13",
+      "frames": 18081,
+      "channels": 1,
+      "peak": 0.246986
+    },
+    "swim": {
+      "sha256": "2833884b2940848c85f769005f44ce9a0e3063042be415dee34982dd05c665a6",
+      "frames": 17199,
+      "channels": 1,
+      "peak": 0.104038
+    },
+    "water_exit": {
+      "sha256": "37a35e912851fb7a3fb55baf60e5c0ca045b6a93c6a2aa509f1da4bd8d06ad28",
+      "frames": 14332,
+      "channels": 1,
+      "peak": 0.117038
+    },
+    "water_dive": {
+      "sha256": "e29af4206fd251a1ce40e1e04ce0507e5a587abd1b1c87c9e93904e8134a5882",
+      "frames": 16537,
+      "channels": 1,
+      "peak": 0.150578
+    },
+    "water_surface": {
+      "sha256": "8a19d9a1b9177976f99f6ac87d6b098d2b53f2cc3c485b2996841892712a9b9e",
+      "frames": 18081,
+      "channels": 1,
+      "peak": 0.231819
+    },
+    "underwater_bubbles_0": {
+      "sha256": "e6e9067435afad5cbb39d83f37a2a89e8ce9ec9885ee6f0feaffa12ee07eb263",
+      "frames": 19845,
+      "channels": 1,
+      "peak": 0.047792
+    },
+    "underwater_bubbles_1": {
+      "sha256": "d83505a8c788e32d50761d5e0d4991afe2698a8675a6bf24d22f5c60160b0985",
+      "frames": 19845,
+      "channels": 1,
+      "peak": 0.060244
+    },
+    "underwater_bubbles_2": {
+      "sha256": "9729c30533e0716d273ddfd46aa8001fed54a46e2c5251e31d6068d976dafad5",
+      "frames": 19845,
+      "channels": 1,
+      "peak": 0.079989
+    },
+    "land": {
+      "sha256": "b1ecb0923f6f60e8c7509d46904b565be826281108fc145ff75c9d7e01932f50",
+      "frames": 9702,
+      "channels": 1,
+      "peak": 0.257546
+    },
+    "water_loop": {
+      "sha256": "7b34e31e148e3dadf9d126aa103af10d3cf5f9779aa10722068b8f39e58fc018",
+      "frames": 176400,
+      "channels": 1,
+      "peak": 0.104282
+    },
+    "underwater_loop": {
+      "sha256": "64d52f65f1c5e17d28f54818393af054bbc8298defd2502808c775c8a63647a6",
+      "frames": 176400,
+      "channels": 2,
+      "peak": 0.084902
+    }
+  }
+}

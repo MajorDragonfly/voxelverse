@@ -14,6 +14,10 @@ jobs:
       XDG_DATA_HOME: /tmp/voxelverse-audio-test-user
     steps:
       - uses: actions/checkout@v4
+      - name: Inspect committed foley signals
+        run: |
+          python3 -m pip install numpy==2.3.5
+          python3 tools/audio/check_foley.py --output /tmp/audio-foley-signals.json
       - name: Install pinned Godot
         run: |
           curl -L --fail --retry 3 -o /tmp/godot.zip https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip

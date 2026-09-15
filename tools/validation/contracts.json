@@ -3,7 +3,7 @@
   "contracts": [
     {
       "id": "campaign",
-      "title": "Kampagne, K\u00f6rperidentit\u00e4t und Speichern",
+      "title": "Kampagne, Körperidentität und Speichern",
       "work": "M1e / ARCH-03,04,06,07,12,18",
       "tests": [
         "body_identity_test",
@@ -25,7 +25,7 @@
     {
       "id": "spherical_gameplay",
       "title": "Gemeinsame Kugel-Spielschleife",
-      "work": "M1f/M1g / ARCH-08\u201311,19",
+      "work": "M1f/M1g / ARCH-08–11,19",
       "tests": [
         "spherical_creature_test",
         "spherical_gameplay_test",
@@ -35,7 +35,7 @@
     {
       "id": "regions_simulation",
       "title": "Regionsspeicher, Fernarbeit und Budgets",
-      "work": "M1h / ARCH-13\u201318; ARCH-27 regional transport contract",
+      "work": "M1h / ARCH-13–18; ARCH-27 regional transport contract",
       "tests": [
         "campaign_scaling_test",
         "far_simulation_test",
@@ -49,7 +49,7 @@
     },
     {
       "id": "surface",
-      "title": "Planeten, Oberfl\u00e4chenadapter und Streaming",
+      "title": "Planeten, Oberflächenadapter und Streaming",
       "work": "M1 / ARCH-05",
       "tests": [
         "adaptive_planet_test",
@@ -78,7 +78,7 @@
     },
     {
       "id": "terrain_art",
-      "title": "Gel\u00e4nde, Vegetation, Wasser und Assetanschluss",
+      "title": "Gelände, Vegetation, Wasser und Assetanschluss",
       "work": "M1/M10",
       "tests": [
         "asset_pipeline_test",
@@ -99,7 +99,7 @@
     },
     {
       "id": "creature_body",
-      "title": "Kreaturenentwurf, K\u00f6rperanschl\u00fcsse und Animation",
+      "title": "Kreaturenentwurf, Körperanschlüsse und Animation",
       "work": "M2/M3 / ARCH-24",
       "tests": [
         "creature_animal_feet_test",
@@ -124,7 +124,7 @@
     },
     {
       "id": "blueprints",
-      "title": "Gemeinsame Baupl\u00e4ne und Designregister",
+      "title": "Gemeinsame Baupläne und Designregister",
       "work": "M2B / ARCH-23",
       "tests": [
         "blueprint_contract_test",
@@ -136,7 +136,7 @@
     },
     {
       "id": "domestic_fauna",
-      "title": "Pflichtarten, K\u00f6rperrollen und Vorkommen",
+      "title": "Pflichtarten, Körperrollen und Vorkommen",
       "work": "D1",
       "tests": [
         "domestic_body_evidence_test",
@@ -152,7 +152,7 @@
     },
     {
       "id": "domestication",
-      "title": "Individueller Tierbesitz und Z\u00e4hmung",
+      "title": "Individueller Tierbesitz und Zähmung",
       "work": "D2",
       "tests": [
         "domestication_campaign_test",
@@ -199,7 +199,7 @@
     {
       "id": "village",
       "title": "Dorf, Versorgung, Wachstum und Milchfracht",
-      "work": "M6/D3 / ARCH-10,11,20\u201322",
+      "work": "M6/D3 / ARCH-10,11,20–22",
       "tests": [
         "resource_production_contract_test",
         "settlement_collection_test",
@@ -223,7 +223,7 @@
     },
     {
       "id": "neighbors",
-      "title": "Nachbarst\u00e4mme und Hilfe",
+      "title": "Nachbarstämme und Hilfe",
       "work": "M6 / ARCH-25",
       "tests": [
         "neighbor_localization_test",
@@ -234,7 +234,7 @@
     },
     {
       "id": "discovery_map",
-      "title": "Scanner, gemeinsame B\u00fccher und Karten",
+      "title": "Scanner, gemeinsame Bücher und Karten",
       "work": "M4/M10",
       "tests": [
         "atlas_paging_test",
@@ -256,7 +256,7 @@
     },
     {
       "id": "frontend_locale",
-      "title": "Men\u00fcs, Eingaben und Sprachwechsel",
+      "title": "Menüs, Eingaben und Sprachwechsel",
       "work": "L1/M10 / ARCH-25",
       "tests": [
         "frontend_test",
@@ -285,12 +285,13 @@
         "audio/music_runtime_test",
         "audio/runtime_shutdown_test",
         "audio/spherical_water_audio_test",
-        "audio/creature_audio_budget_test"
+        "audio/creature_audio_budget_test",
+        "audio/foley_runtime_test"
       ]
     },
     {
       "id": "expedition_design",
-      "title": "Expedition: Orts- und \u00dcbergabenentwurf",
+      "title": "Expedition: Orts- und Übergabenentwurf",
       "work": "ARCH-30 / Vorbereitung M9-EXPEDITION",
       "tests": [
         "expedition_contract_test",
@@ -306,8 +307,8 @@
         "body_identity_test",
         "body_travel_test"
       ],
-      "scope": "Gleicher Seed in zwei Systemen; getrennte Entdeckungen/Vorr\u00e4te; A\u2013B\u2013A; Altformat, Schreibfehler und frischer Prozess.",
-      "limits": "Quell-/Headless-Ausf\u00fchrung allein belegt weder native Pakete noch Ziel-PC-Darstellung."
+      "scope": "Gleicher Seed in zwei Systemen; getrennte Entdeckungen/Vorräte; A–B–A; Altformat, Schreibfehler und frischer Prozess.",
+      "limits": "Quell-/Headless-Ausführung allein belegt weder native Pakete noch Ziel-PC-Darstellung."
     },
     {
       "id": "over_96_regions",
@@ -315,8 +316,8 @@
       "tests": [
         "region_store_test"
       ],
-      "scope": "1.200 Regionsdatens\u00e4tze, begrenzte Caches, Eviction, alter Commit, neuer Leser, besch\u00e4digte und zuk\u00fcnftige Wurzeln.",
-      "limits": "Store-Pr\u00fcfstand; kein vollst\u00e4ndiger Kampagnensnapshot mit >96 bespielten Regionen und kein Prozessneustart. Globales Manifest/segmentierte Fachbest\u00e4nde bleiben ARCH-13/14."
+      "scope": "1.200 Regionsdatensätze, begrenzte Caches, Eviction, alter Commit, neuer Leser, beschädigte und zukünftige Wurzeln.",
+      "limits": "Store-Prüfstand; kein vollständiger Kampagnensnapshot mit >96 bespielten Regionen und kein Prozessneustart. Globales Manifest/segmentierte Fachbestände bleiben ARCH-13/14."
     },
     {
       "id": "over_256_animals",
@@ -324,8 +325,8 @@
       "tests": [
         "population_register_test"
       ],
-      "scope": "384 ver\u00e4nderte Tieridentit\u00e4ten und Nahrungsquellen plus ein weiteres Tier \u00fcber regionale Kampagnen-/Fortschrittsanschl\u00fcsse; aktive Referenzen, Regionswechsel, Cache-Eviction, Altformat, Schreibfehler und frischer SaveGameService-Prozess.",
-      "limits": "Headless-Fachabnahme ohne gerenderte Reise/Physik; separates Planetlabor beh\u00e4lt sein 256-Tier-Register. Ziel-PC und Labormigration bleiben offen."
+      "scope": "384 veränderte Tieridentitäten und Nahrungsquellen plus ein weiteres Tier über regionale Kampagnen-/Fortschrittsanschlüsse; aktive Referenzen, Regionswechsel, Cache-Eviction, Altformat, Schreibfehler und frischer SaveGameService-Prozess.",
+      "limits": "Headless-Fachabnahme ohne gerenderte Reise/Physik; separates Planetlabor behält sein 256-Tier-Register. Ziel-PC und Labormigration bleiben offen."
     },
     {
       "id": "future_blueprints",
@@ -335,8 +336,8 @@
         "community_blueprint_package_test",
         "creature_design_library_test"
       ],
-      "scope": "Unbekannte neuere Bauplanversion bei Import, Vorschau, Speichern und R\u00fcckimport unver\u00e4ndert sch\u00fctzen.",
-      "limits": "Original-/Zukunftsschutz f\u00fcr vorhandene Kreaturen- und Geb\u00e4udeverbraucher; sp\u00e4tere Fahrzeug-/Schiffsverbraucher und Online-Dienst bleiben eigene Arbeit."
+      "scope": "Unbekannte neuere Bauplanversion bei Import, Vorschau, Speichern und Rückimport unverändert schützen.",
+      "limits": "Original-/Zukunftsschutz für vorhandene Kreaturen- und Gebäudeverbraucher; spätere Fahrzeug-/Schiffsverbraucher und Online-Dienst bleiben eigene Arbeit."
     },
     {
       "id": "near_far_cargo",
@@ -346,7 +347,7 @@
         "body_travel_test",
         "spherical_gameplay_test"
       ],
-      "scope": "Ein Simulationsbesitzer, tats\u00e4chliches D1\u2192D2\u2192D3-Tier mit Gehege und geladener Milch bei A\u2013B\u2013A; Versorgung, Pause, blockierte Fracht, Schreibfehler, frische Prozesse und tats\u00e4chliche Einlagerung.",
+      "scope": "Ein Simulationsbesitzer, tatsächliches D1→D2→D3-Tier mit Gehege und geladener Milch bei A–B–A; Versorgung, Pause, blockierte Fracht, Schreibfehler, frische Prozesse und tatsächliche Einlagerung.",
       "limits": "Lange Abwesenheit, mehrere spielbare eigene Siedlungen und Ziel-PC-Abnahme bleiben offen."
     },
     {
@@ -357,8 +358,8 @@
         "atlas_places_test",
         "world_map_localization_test"
       ],
-      "scope": "8.205 Kacheln und 3.105 Orte mit begrenzten Caches, Migration, vollst\u00e4ndigen Seiten, offenem Puffer, Schreibfehlern und frischem SaveGameService-Prozess. Sprachwechsel auf der vorhandenen Kartensitzung.",
-      "limits": "Kein r\u00e4umlicher Vollindex und kein Ziel-PC-Nachweis; Backup-/Archivpr\u00fcfungen laufen zus\u00e4tzlich im Python-Gate."
+      "scope": "8.205 Kacheln und 3.105 Orte mit begrenzten Caches, Migration, vollständigen Seiten, offenem Puffer, Schreibfehlern und frischem SaveGameService-Prozess. Sprachwechsel auf der vorhandenen Kartensitzung.",
+      "limits": "Kein räumlicher Vollindex und kein Ziel-PC-Nachweis; Backup-/Archivprüfungen laufen zusätzlich im Python-Gate."
     },
     {
       "id": "settlement_instances",

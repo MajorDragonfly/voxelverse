@@ -1,0 +1,47 @@
+{
+  "baseline": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "duration": 38,
+  "note": "Actual assets, equal 0.85 gain on old/new steps; no per-clip normalization. Water mix is an audition, not a gameplay recording.",
+  "timeline": [
+    {
+      "seconds": 0.0,
+      "material": "grass",
+      "order": "three old steps, then three revised steps"
+    },
+    {
+      "seconds": 4.2,
+      "material": "sand",
+      "order": "three old steps, then three revised steps"
+    },
+    {
+      "seconds": 8.4,
+      "material": "stone",
+      "order": "three old steps, then three revised steps"
+    },
+    {
+      "seconds": 12.6,
+      "material": "snow",
+      "order": "three old steps, then three revised steps"
+    },
+    {
+      "seconds": 16.8,
+      "material": "wood",
+      "order": "three old steps, then three revised steps"
+    },
+    {
+      "seconds": 21.0,
+      "material": "water",
+      "order": "three old steps, then three revised steps"
+    },
+    {
+      "seconds": 25.5,
+      "material": "water",
+      "order": "shore, entry, stroke, exit"
+    },
+    {
+      "seconds": 30,
+      "material": "underwater",
+      "order": "dive, bed and bubble movement, emerge"
+    }
+  ]
+}
