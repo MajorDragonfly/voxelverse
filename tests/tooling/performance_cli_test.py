@@ -29,7 +29,7 @@ class PerformanceCliTest(unittest.TestCase):
                 self.assertNotIn("Godot executable not found", result.stderr)
 
     def test_preserves_previous_report(self):
-        for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture"):
+        for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture", "summary.md", "cycle_0_far_restart-capture.json"):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary:
                 output = Path(temporary)
                 previous = output / name
@@ -38,6 +38,15 @@ class PerformanceCliTest(unittest.TestCase):
                                          "--godot", "missing-engine"], capture_output=True, text=True)
                 self.assertEqual(result.returncode, 2)
                 self.assertEqual(previous.read_text(), '"previous evidence"')
+
+
+    def test_developed_rejects_unsupported_recipes(self):
+        for arguments in [["--seed", "12"], ["--cycles", "0"], ["--cycles", "4"], ["--replay", "/missing"]]:
+            with self.subTest(arguments=arguments):
+                result = subprocess.run([sys.executable, str(RUNNER), "--mode", "developed",
+                                         "--godot", "missing-engine", *arguments], capture_output=True, text=True)
+                self.assertEqual(result.returncode, 2)
+                self.assertIn("Developed", result.stderr)
 
 
 if __name__ == "__main__":

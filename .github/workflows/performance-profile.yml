@@ -2,12 +2,19 @@ name: Performance route diagnostics
 
 on:
   workflow_dispatch:
+    inputs:
+      developed:
+        description: "Optional full developed campaign measurement"
+        type: choice
+        default: none
+        options: [none, milk, eggs]
   pull_request:
     paths:
       - "tools/profile_performance.py"
       - "tools/performance_route_probe.gd"
       - "tools/performance_save_probe.gd"
       - "tools/performance_stats.gd"
+      - "tools/performance_developed*"
       - "tests/performance_measurement_test.gd"
       - "tools/validation_support.py"
       - "tools/benchmark_streaming.gd"
@@ -24,7 +31,7 @@ concurrency:
 jobs:
   profile:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-godot-editor
@@ -48,6 +55,14 @@ jobs:
         run: >-
           python tools/profile_performance.py --godot "${{ steps.engine.outputs.godot }}"
           --mode saves --output "${{ runner.temp }}/performance-saves"
+      - name: Measure developed village, freight and cold travel restarts
+        if: github.event_name == 'workflow_dispatch' && inputs.developed != 'none'
+        env:
+          PRODUCTION_KIND: ${{ inputs.developed }}
+        run: >-
+          python tools/profile_performance.py --godot "${{ steps.engine.outputs.godot }}"
+          --mode developed --production "$PRODUCTION_KIND"
+          --output "${{ runner.temp }}/performance-developed"
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,4 +73,5 @@ jobs:
             ${{ runner.temp }}/performance-import
             ${{ runner.temp }}/performance-tests
             ${{ runner.temp }}/performance-saves
+            ${{ runner.temp }}/performance-developed
           retention-days: 7

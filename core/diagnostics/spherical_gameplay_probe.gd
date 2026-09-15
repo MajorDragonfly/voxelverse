@@ -35,6 +35,7 @@ func _run() -> void:
 	await _until(func() -> bool: return home.actors.size() == 2, 10000)
 	if home.actors.size() != 2: await _finish(); return
 	var tribe: Node = scene.get_node("Nest/Tribe")
+	_stage("village_handoff")
 	# Shared interface constructs the same reversible handoff as the regular UI.
 	var reason: String = tribe.prepare_confirmation()
 	_expect(reason.is_empty(), "Radial village preparation failed: " + reason)
@@ -48,6 +49,7 @@ func _run() -> void:
 	var ids: Array = tribe.village().members.map(func(m: Dictionary) -> String: return m.id)
 	_expect(tribe.actors.size() == 3 and home.actors.is_empty(), "Handoff duplicated home residents.")
 	tribe.select_member(ids[0])
+	_stage("wood_freight")
 	_expect(tribe.issue_order("wood"), "Radial resident could not accept work.")
 	await _until(func() -> bool: return tribe.member_record(ids[0]).cargo == "wood", 16000)
 	_expect(tribe.member_record(ids[0]).cargo == "wood", "Resident did not collect real wood: " + tribe.status)
@@ -57,6 +59,7 @@ func _run() -> void:
 	_expect(not tribe.body().get("tribal_neighbor", {}).is_empty(), "Neighbor missing.")
 	print("SPHERE_VILLAGE_ACTIVE ", tribe.actors.size(), " ", cargo, " ", tribe.neighbors.actors.size())
 	var before: Dictionary = state.get_current_body().home_group.duplicate(true)
+	_stage("village_save_reload")
 	flow.toggle_pause()
 	_expect(saves.save_now(), "Home/population save failed: " + saves.last_error)
 	var raw: Dictionary = saves._read_save(path)
@@ -291,7 +294,7 @@ func _animal_chain(tribe: Node) -> void:
 	if OS.has_feature("editor"): arguments.append_array(["--path", ProjectSettings.globalize_path("res://")])
 	arguments.append_array(["--", "--sphere-gameplay-smoke", "--sphere-gameplay-restart"])
 	if production_kind == "eggs": arguments.append("--egg-production")
-	var code: int = OS.execute(OS.get_executable_path(), arguments, output, true)
+	var code: int = _run_fresh_process(arguments, output)
 	_stage("fresh_process_returned")
 	_expect(code == 0 and str(output).contains("SPHERE_GAMEPLAY_FRESH_PROCESS_PASSED"), "Fresh production process failed: " + str(output))
 	await _open(path, true)
@@ -302,6 +305,7 @@ func _animal_chain(tribe: Node) -> void:
 	tribe.select_member(carrier)
 	_expect(tribe.member_record(carrier).cargo == production_kind, "Reload lost real resource cargo.")
 	var stored_products: int = tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"]
+	_stage("freight_delivery")
 	tribe.issue_order("resume")
 	await _until(func() -> bool: return (tribe.member_record(carrier).cargo != production_kind
 		and tribe.village().stock[production_kind] + tribe.village().economy[production_kind + "_meals"] > stored_products), 18000)
@@ -312,6 +316,7 @@ func _animal_chain(tribe: Node) -> void:
 	_stage(production_kind + "_delivered")
 	if production_kind == "eggs":
 		# Ordinary need/meal command consumes the physically delivered unit.
+		_stage("egg_meal")
 		var meals: int = tribe.village().economy.eggs_meals
 		tribe.select_member(carrier)
 		_expect(tribe.issue_order("feed"), "Egg carrier could not accept a meal order.")
