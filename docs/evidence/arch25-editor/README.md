@@ -1,8 +1,18 @@
 # Prüfnachweise ARCH-25-EDITOR
 
 Godot **4.6.3.stable.official.7d41c59c4**, Linux, getrennte synthetische Nutzerdaten.
-Das Paket wurde lokal auf einem eigenen Branch umgesetzt. Der GitHub-Push wurde
-von der automatischen Freigabeprüfung blockiert; Branch/PR sind noch nicht veröffentlicht.
+Das Paket wurde auf dem eigenen Branch `agent/arch25-editor-20260915` umgesetzt.
+Lars hat die Veröffentlichung als GitHub-Branch mit Entwurfs-PR ausdrücklich
+freigegeben. Ein Merge ist nicht Teil dieser Übergabe.
+
+Die Veröffentlichung über die GitHub-App erzeugt neue Commit-IDs. Die Git-Trees
+wurden bei der Übertragung auf exakte Übereinstimmung mit den geprüften lokalen
+Commits kontrolliert; Quellcode und Nachweise sind unverändert.
+
+| Geprüfter lokaler Commit | Veröffentlichter Commit | Identischer Git-Tree |
+|---|---|---|
+| `71db7458a53fe8b611b46f05d785f3487e39fed6` | `d926166321642b17fd20a29e405c15fcc8ab89c2` | `cb2fb3ef02a4c6e35c5d4e13d8c4e87e40da8763` |
+| `bdc922d14b617e10189b09b55ad6f3e41dc6a874` | `9e3fb7523793b5bfe57380cd46343eea0305c105` | `ad2f3d1587abfc4d2ffb87b57e057c13b9e8d0ae` |
 
 | Quellstand | Prüfungen | Ergebnis |
 |---|---|---|

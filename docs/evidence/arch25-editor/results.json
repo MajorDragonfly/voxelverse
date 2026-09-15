@@ -165,10 +165,10 @@
     "transforms/transform-de-800x600-150.png"
   ],
   "publication": {
-    "state": "blocked_pending_explicit_user_approval",
+    "state": "explicitly_authorized_by_user",
     "destination": "MajorDragonfly/voxelverse",
     "action": "Push new feature branch and create draft PR; no merge",
-    "reason": "Automatic approval review rejected transmission of repository code without explicit push authorization."
+    "reason": "User explicitly approved pushing this branch to MajorDragonfly/voxelverse and creating a draft PR."
   },
   "limits": [
     "No Windows export",

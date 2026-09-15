@@ -38,6 +38,5 @@ Integration. Keine Änderungen an Saveformaten, kanonischen Körperdaten oder
 Spielregeln. Unbekannte technische Kompatibilitätsdiagnosen und native
 Farbwahldialoge behalten ihre bestehende Darstellung.
 
-Veröffentlichung steht aus: Automatische Freigabeprüfung verlangt Lars'
-ausdrückliche Erlaubnis für den Push zu `MajorDragonfly/voxelverse` und den
-anschließenden Entwurfs-PR. Kein Merge vorgesehen.
+Lars hat den Push zu `MajorDragonfly/voxelverse` und den anschließenden
+Entwurfs-PR ausdrücklich freigegeben. Kein Merge vorgesehen.
