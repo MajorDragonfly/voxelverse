@@ -77,6 +77,10 @@ class SourceObservationTest(unittest.TestCase):
         return SimpleNamespace(**{**{name: getattr(real, name) for name in names}, **changes})
 
     def test_windows_path_and_handle_ctime_can_use_different_clocks(self):
+        # Explicit bytes make the oracle independent of write_text's native
+        # newline translation and verify that hashing preserves CRLF as well.
+        expected = b"extends Node\r\n"
+        (self.project / "src/example.gd").write_bytes(expected)
         real_fstat = os.fstat
         def handle_stat(fd):
             real = real_fstat(fd)
@@ -87,7 +91,7 @@ class SourceObservationTest(unittest.TestCase):
             run.observe("finish", force=True)
             self.assertFalse(run.blocked, run.current)
         row = next(row for row in run.current["files"] if row["path"] == "src/example.gd")
-        self.assertEqual(row["sha256"], hashlib.sha256(b"extends Node\n").hexdigest())
+        self.assertEqual(row["sha256"], hashlib.sha256(expected).hexdigest())
 
     def test_windows_different_file_handle_is_still_rejected(self):
         real_fstat = os.fstat
