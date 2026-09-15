@@ -113,7 +113,15 @@ func _run() -> void:
 		file.store_string(JSON.stringify(signatures))
 		file.close()
 		var output: Array = []
-		var status: int = OS.execute(OS.get_executable_path(),["--headless","--path",ProjectSettings.globalize_path("res://"),"--script","res://tests/resource_visuals_test.gd","--","--resource-restart"],output,true)
+		var arguments: PackedStringArray = OS.get_cmdline_user_args()
+		var pack_index: int = arguments.find("--resource-restart-pack")
+		var restart: PackedStringArray = ["--headless"]
+		if pack_index >= 0:
+			restart.append_array(["--main-pack",arguments[pack_index+1],"--script",get_script().resource_path])
+		else:
+			restart.append_array(["--path",ProjectSettings.globalize_path("res://"),"--script","res://tests/resource_visuals_test.gd"])
+		restart.append_array(["--","--resource-restart"])
+		var status: int = OS.execute(OS.get_executable_path(),restart,output,true)
 		check(status == 0 and str(output).contains("RESOURCE_VISUALS_PASSED") and not str(output).contains("SCRIPT ERROR"), "Native restart failed: " + str(output))
 	for failure: String in failures: push_error(failure)
 	if failures.is_empty(): print("RESOURCE_VISUALS_PASSED: six forms, twelve identities, cold restart, palette, food lifecycle and radial nest")

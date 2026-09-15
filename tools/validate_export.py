@@ -16,7 +16,7 @@ from validate_godot import ERROR
 from check_validation_contracts import revision
 from validation_support import isolated_env
 
-PACKAGED_TESTS = ['body_identity_test', 'far_simulation_test', 'village_navigation_budget_test', 'campaign_scaling_test', 'creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test']
+PACKAGED_TESTS = ['body_identity_test', 'far_simulation_test', 'village_navigation_budget_test', 'campaign_scaling_test', 'creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test', 'resource_visuals_test']
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
 
@@ -144,6 +144,8 @@ def main():
                     # Godot consumes --main-pack before exposing runtime args.
                     # Pass the exact PCK to the independent reload process too.
                     probe_args += ["--", "--research-pack", str(executable.with_suffix(".pck"))]
+                if name == "resource_visuals_test":
+                    probe_args += ["--", "--resource-restart-pack", str(executable.with_suffix(".pck"))]
                 run(f"packaged_{name}", [*pack_command, *probe_args],
                     package, isolated_env(root / name))
                 if name == "tribal_age_world_test":
