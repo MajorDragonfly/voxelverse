@@ -155,4 +155,5 @@ func _refresh_hud() -> void:
 	elif data["relation"] == "wild":
 		_hud.text += "\nF halten · Befreunden"
 	elif data["relation"] == "ally":
-		_hud.text += "\nDiese Kreatur vertraut dir."
+		_hud.text += "\n" + preload("res://core/localization/ui_text.gd").format_text("EXPRESSION_GREET_HINT", {
+			"key": preload("res://core/input_preferences.gd").binding_label("primary_action")})

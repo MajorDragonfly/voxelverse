@@ -6441,6 +6441,21 @@
       "key": "Kopfmodule",
       "de": "Kopfmodule",
       "en": "Head modules"
+    },
+    {
+      "key": "EXPRESSION_GREET_HINT",
+      "de": "{key} · Begrüßen (nah herangehen)",
+      "en": "{key} · Greet (move closer)"
+    },
+    {
+      "key": "EXPRESSION_GREET_OK",
+      "de": "Dein Tierfreund erwidert die Begrüßung.",
+      "en": "Your animal friend returns your greeting."
+    },
+    {
+      "key": "EXPRESSION_GREET_UNAVAILABLE",
+      "de": "Begrüßen: nah herangehen, Sichtkontakt halten und einen ruhigen Moment abwarten.",
+      "en": "To greet: move closer, keep line of sight and wait for a calm moment."
     }
   ]
 }

@@ -175,7 +175,8 @@
         "wildlife_drinking_test",
         "wildlife_drinking_world_test",
         "wildlife_foraging_test",
-        "wildlife_foraging_world_test"
+        "wildlife_foraging_world_test",
+        "creature_expression_test"
       ]
     },
     {

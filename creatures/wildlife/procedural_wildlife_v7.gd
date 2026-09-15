@@ -94,6 +94,9 @@ func _ready() -> void:
 	var social := preload("res://creatures/behavior/creature_social_component.gd").new()
 	social.name = "SocialBehavior"
 	add_child(social)
+	var expression := preload("res://creatures/behavior/creature_expression_driver.gd").new()
+	expression.name = "ExpressionBehavior"
+	add_child(expression)
 	_choose_wander_state()
 
 
@@ -218,8 +221,35 @@ func interact(actor: Node) -> void:
 	if actor.has_method("can_perform_action"):
 		if not bool(actor.call("can_perform_action", &"socialize")):
 			return
+	var social: Node = get_node("SocialBehavior")
+	if social.entry().get("relation", "wild") == "ally":
+		var response: Dictionary = social.greet(actor)
+		_show_actor_message(actor, response["message"])
+		return
 	var key_hints = preload("res://core/input_preferences.gd")
 	_show_actor_message(actor, "%s · Scanmodus öffnen und das Tier im Fadenkreuz halten." % key_hints.binding_label("inspection_mode"))
+
+
+func react_expression(event: String) -> void:
+	var expression: Node = get_node_or_null("ExpressionBehavior")
+	if expression != null: expression.react(event)
+
+
+func get_expression_context() -> Dictionary:
+	var social: Node = get_node_or_null("SocialBehavior")
+	var presentation: Dictionary = social.expression_context(_player) if social != null and social.has_method("expression_context") else {}
+	var attention: bool = presentation.get("attention", false)
+	var near: bool = presentation.get("friendly_near", false)
+	var target: Node3D = presentation.get("target")
+	if _threat_timer > 0.0 and is_instance_valid(_threat): target = _threat
+	var yaw: float = 0.0
+	if is_instance_valid(target):
+		var offset: Vector3 = _visual_root.global_basis.inverse() * (target.global_position - global_position)
+		yaw = atan2(-offset.x, -offset.z)
+	return {"active": true, "dead": is_dead, "health": get_health_ratio(),
+		"intent": "wander" if _wander_direction.length_squared() > 0.01 else "rest",
+		"threat": _threat_timer > 0.0, "attention": attention,
+		"friendly_near": near, "look_yaw": yaw}
 
 
 func receive_creature_attack(damage: float, attacker: Node = null) -> void:
@@ -232,6 +262,7 @@ func receive_creature_attack(damage: float, attacker: Node = null) -> void:
 		_threat = attacker as Node3D
 		_threat_timer = threat_memory_seconds
 	current_health = maxf(current_health - damage, 0.0)
+	react_expression("hurt")
 	if attacker != null:
 		_show_actor_message(
 			attacker,

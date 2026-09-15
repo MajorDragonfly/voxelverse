@@ -122,12 +122,18 @@ func set_motion(mode: String) -> void:
 		set_process(true)
 		return
 	_motion.unbind()
+	_motion.expression_pose = {}
 	motion_mode = next
 	_motion_time = 0.0
 	_articulation.reset()
 	if motion_mode != "edit":
 		_motion.bind(self)
 	set_process(motion_mode != "edit")
+
+
+func set_expression_pose(pose: Dictionary) -> void:
+	# Editors/player avatars opt out unless a live animal explicitly supplies it.
+	_motion.expression_pose = pose if motion_mode != "edit" else {}
 
 
 func _process(delta: float) -> void:
