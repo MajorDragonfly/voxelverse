@@ -397,7 +397,8 @@ func _build_part_controls() -> void:
 	for axis in ["X", "Y", "Z"]:
 		_label(grid, axis, 12)
 	for field in ["position", "rotation", "shape"]:
-		_label(grid, {"position": "EDITOR_POSITION", "rotation": "EDITOR_ROTATION", "shape": "EDITOR_SHAPE"}[field], 12)
+		var field_label := _label(grid, {"position": "EDITOR_POSITION", "rotation": "EDITOR_ROTATION", "shape": "EDITOR_SHAPE"}[field], 12)
+		field_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 		for axis in range(3):
 			var spin := SpinBox.new()
 			spin.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED

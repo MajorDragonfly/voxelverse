@@ -234,6 +234,12 @@ func _layouts() -> void:
 						await _click(editor._pane_toggle)
 					for tab: Button in editor._mode_buttons.values():
 						_expect(viewport.encloses(tab.get_global_rect()), "Mode tab leaves viewport")
+					if mode == "parts":
+						var fields_scroll: ScrollContainer = editor._right_panel.get_child(0)
+						fields_scroll.ensure_control_visible(editor._part_fields.rotation_1)
+						await _settle()
+						for field: String in ["position_0", "rotation_1", "shape_2"]:
+							_expect(editor._part_fields[field].size.y < 80 * scale_value, "Transform label collapsed into a vertical column")
 					if not capture_dir.is_empty() and ((size_value.x == 800 and scale_value == 1.5) or (size_value.x == 1920 and scale_value == 1.0)):
 						await RenderingServer.frame_post_draw
 						var name := "editor-%s-%dx%d-%d-%s.png" % [language, size_value.x, size_value.y, roundi(scale_value * 100), mode]
