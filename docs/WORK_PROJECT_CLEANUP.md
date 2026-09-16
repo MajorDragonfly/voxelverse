@@ -51,5 +51,42 @@ Die Löschliste ist im Git-Diff vollständig nachvollziehbar. Einzeldateien kön
 mit `git restore --source=7c10e7fb910566000f5bf01913396016197c8c55 -- DATEIPFAD`
 wiederhergestellt werden. Kein gemessener FPS- oder Kompressionsgewinn behauptet.
 
-Prüfbefehle, geprüfter Commit/Tree und Ergebnisse stehen in der PR-Übergabe.
-Linux-/Headless-Prüfungen ersetzen keine native Windows-/Ziel-PC-Abnahme.
+## Geprüfter Stand
+
+Quellcommit `c53b5b843fb74b74bf8934bbe6e7358c534c360f`, Tree
+`9cbbde1a54b41d3641595369ca58a810f3f584eb`; sauberer Arbeitsstand.
+Godot `4.6.3.stable.official.7d41c59c4`, Linux, isolierte Nutzerdaten.
+
+- Neun vorhandene Godot-Tests bestanden: Asset-Pipeline, Umgebungsproduktion
+  (alle 63 LOD-Modelle), Umgebungscluster, Terrainübergänge, Animationskontinuität,
+  Ressourcenoptik, Kugelkampagne mit Prozessneustart, V2-Regressionsfälle und
+  Frontend. Zusätzlich Import, Art-Quellabgleich, Testverträge und Quellintegrität
+  bestanden; der Runner bestätigt unveränderte Quellen und verwertbare Nachweise.
+- Sechs Fehlerfalltests für die neue Hygieneprüfung bestanden. Hygieneprüfung,
+  Paketbriefe und erzeugte Dashboard-Ansichten konsistent.
+- Linux-Ressourcenpaket mit `--export-pack "Linux Desktop"` erzeugt und außerhalb
+  des Quellverzeichnisses über `--main-pack` geprüft. Alle 63 importierten
+  Farbpaletten sind pixelgenau gleich der Basis. Keine entfernte Ressource und
+  keine Datei aus den sechs Entwicklungsverzeichnissen im Paket auffindbar.
+  Die unveränderten GLBs verwenden weiterhin Nearest-Sampling ohne Mipmaps.
+- Nach Import/Export keine neuen Palettendateien und keine Änderungen an den
+  eingecheckten Quellen. M4-Navigation, Population, Fortschrittsservice, zentrale
+  Statusquelle und Godot-Testregistry stimmen mit der Basis überein.
+
+Reproduzierbarer Fachlauf:
+
+```bash
+python3 tools/validate_godot.py --godot GODOT_4_6_3 --skip-main \
+  --tests asset_pipeline_test environment_production_test \
+  environment_cluster_test terrain_transition_test \
+  creature_animation_continuity_test resource_visuals_test \
+  spherical_campaign_runtime_test world_evolution_v2_ci_test frontend_test \
+  --output ABSOLUTER_NEUER_ORDNER_AUSSERHALB_DES_CHECKOUTS
+python3 -m unittest discover -s tests/tooling -p project_hygiene_test.py
+python3 tools/check_project_hygiene.py
+```
+
+Die unveränderten Originalprotokolle und SHA-Inventare liegen lokal neben der
+Arbeitskopie in `../checks/source/`, die Paketprüfung in `../checks/package/`.
+Sie werden nicht nochmals als große Laufprotokolle ins Repository kopiert.
+Die Paketprüfung ist kein nativer Windows-Export oder Ziel-PC-Spieltest.
