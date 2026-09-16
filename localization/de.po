@@ -4886,3 +4886,36 @@ msgstr "Beide Wege lassen sich kombinieren."
 
 msgid "SKILLS_EARNING_COMPACT"
 msgstr "Sozial: befreunden und helfen. Aggressiv: jagen und Konflikte abschließen."
+
+msgid "SKILLS_ERA_HINT"
+msgstr "Jedes Zeitalter hat eigene Fähigkeiten und Punkte. Vermächtnisse wirken wie angegeben weiter."
+
+msgid "SKILLS_ERA_PLANNED"
+msgstr "Dieses Zeitalter erhält einen eigenen Fähigkeitenbaum. Die konkreten Freischaltungen folgen mit seinen Spielsystemen."
+
+msgid "SKILLS_ERA_CURRENT"
+msgstr "Aktuell"
+
+msgid "SKILLS_ERA_PREVIOUS"
+msgstr "Früheres Zeitalter"
+
+msgid "SKILLS_ERA_PREVIEW"
+msgstr "Vorschau"
+
+msgid "SKILLS_ERA_0_NAME"
+msgstr "Kreatur"
+
+msgid "SKILLS_ERA_1_NAME"
+msgstr "Stamm"
+
+msgid "SKILLS_ERA_2_NAME"
+msgstr "Mittelalter"
+
+msgid "SKILLS_ERA_3_NAME"
+msgstr "Neuzeit"
+
+msgid "SKILLS_ERA_4_NAME"
+msgstr "Weltraum"
+
+msgid "SKILLS_ERA_5_NAME"
+msgstr "Multiversum"

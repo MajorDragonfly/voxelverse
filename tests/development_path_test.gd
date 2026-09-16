@@ -145,7 +145,11 @@ func _snapshot() -> Dictionary:
 
 
 func _choose_phase(index: int) -> void:
-	ui._scroll.ensure_control_visible(ui._phase_choice)
+	if ui._phase_strip.visible:
+		ui._phase_buttons[index].grab_focus()
+		await _key(KEY_ENTER)
+		_expect(ui._phase_choice.selected == index, "Chapter keyboard activation did not select phase %d." % index)
+		return
 	await _frames()
 	ui._phase_choice.grab_focus()
 	var distance: int = index - ui._phase_choice.selected

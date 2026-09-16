@@ -8146,6 +8146,61 @@
       "key": "SKILLS_EARNING_COMPACT",
       "de": "Sozial: befreunden und helfen. Aggressiv: jagen und Konflikte abschließen.",
       "en": "Social: befriend and help. Aggressive: hunt and resolve conflicts."
+    },
+    {
+      "key": "SKILLS_ERA_HINT",
+      "de": "Jedes Zeitalter hat eigene Fähigkeiten und Punkte. Vermächtnisse wirken wie angegeben weiter.",
+      "en": "Each era has its own skills and points. Legacies carry forward where specified."
+    },
+    {
+      "key": "SKILLS_ERA_PLANNED",
+      "de": "Dieses Zeitalter erhält einen eigenen Fähigkeitenbaum. Die konkreten Freischaltungen folgen mit seinen Spielsystemen.",
+      "en": "This era will have its own skill tree. Individual unlocks will arrive with its gameplay systems."
+    },
+    {
+      "key": "SKILLS_ERA_CURRENT",
+      "de": "Aktuell",
+      "en": "Current"
+    },
+    {
+      "key": "SKILLS_ERA_PREVIOUS",
+      "de": "Früheres Zeitalter",
+      "en": "Earlier era"
+    },
+    {
+      "key": "SKILLS_ERA_PREVIEW",
+      "de": "Vorschau",
+      "en": "Preview"
+    },
+    {
+      "key": "SKILLS_ERA_0_NAME",
+      "de": "Kreatur",
+      "en": "Creature"
+    },
+    {
+      "key": "SKILLS_ERA_1_NAME",
+      "de": "Stamm",
+      "en": "Tribe"
+    },
+    {
+      "key": "SKILLS_ERA_2_NAME",
+      "de": "Mittelalter",
+      "en": "Medieval"
+    },
+    {
+      "key": "SKILLS_ERA_3_NAME",
+      "de": "Neuzeit",
+      "en": "Modern"
+    },
+    {
+      "key": "SKILLS_ERA_4_NAME",
+      "de": "Weltraum",
+      "en": "Space"
+    },
+    {
+      "key": "SKILLS_ERA_5_NAME",
+      "de": "Multiversum",
+      "en": "Multiverse"
     }
   ]
 }

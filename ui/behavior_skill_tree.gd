@@ -51,6 +51,10 @@ var _last_result: Dictionary = {}
 var _last_purchase_id: String = ""
 var _language_revision: int = 0
 var _frame: PanelContainer
+var _phase_navigation: VBoxContainer
+var _phase_strip: HBoxContainer
+var _phase_buttons: Array[Button] = []
+var _era_hint: Label
 
 
 func _ready() -> void:
@@ -198,6 +202,18 @@ func _build() -> void:
 	tabs.add_child(_development_tab)
 	for tab: Button in [_tree_tab, _journal_tab, _development_tab]:
 		tab.size_flags_horizontal = Control.SIZE_FILL
+	_phase_navigation = Style.column(content, 5)
+	_phase_strip = HBoxContainer.new()
+	_phase_strip.add_theme_constant_override("separation", 6)
+	_phase_navigation.add_child(_phase_strip)
+	for index in range(PHASES.size()):
+		var chapter := _button("")
+		chapter.name = "EraChapter%d" % index
+		chapter.set_meta("skills_font_size", 12)
+		chapter.pressed.connect(_select_phase.bind(index))
+		_phase_strip.add_child(chapter)
+		_phase_buttons.append(chapter)
+	_era_hint = _label("SKILLS_ERA_HINT", 12, Style.MUTED)
 	_scroll = ScrollContainer.new()
 	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -212,9 +228,10 @@ func _build() -> void:
 	_phase_choice.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	_phase_choice.add_theme_font_size_override("font_size", 14)
 	for index in range(PHASES.size()):
-		_phase_choice.add_item(Presentation.phase_name(index) + (Text.text("SKILLS_PLAYABLE_CHOICE") if index <= 1 else Text.text("SKILLS_PLANNED_CHOICE")), index)
+		_phase_choice.add_item(Presentation.phase_name(index) + Text.text("SKILLS_PLAYABLE_CHOICE" if PHASES[index]["implemented"] else "SKILLS_PLANNED_CHOICE"), index)
 	_phase_choice.item_selected.connect(_select_phase)
-	pages.add_child(_phase_choice)
+	_phase_navigation.add_child(_phase_choice)
+	_phase_navigation.add_child(_era_hint)
 	_body = BoxContainer.new()
 	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_body.add_theme_constant_override("separation", 16)
@@ -283,7 +300,10 @@ func _build_branch(track: String) -> void:
 	info.add_child(balance)
 	_wallet_labels[track] = balance
 	var progression := get_node("/root/ProgressionService")
-	for definition: Dictionary in progression.get_behavior_nodes(0) + progression.get_behavior_nodes(1):
+	var definitions: Array[Dictionary] = []
+	for phase in range(PHASES.size()):
+		definitions.append_array(progression.get_behavior_nodes(phase))
+	for definition: Dictionary in definitions:
 		if definition["track"] != track:
 			continue
 		var id: String = definition["id"]
@@ -331,13 +351,16 @@ func refresh(refresh_development: bool = true) -> void:
 		return
 	var progression := get_node("/root/ProgressionService")
 	_refresh_view_label()
+	_refresh_chapters()
 	var wallet: Dictionary = progression.call("get_behavior_wallet", _view_phase)
+	var definitions: Array[Dictionary] = progression.get_behavior_nodes(_view_phase)
 	_tree_heading.text = Text.text("SKILLS_OPEN_PATH") if _view_phase == 0 else Text.text("SKILLS_TRIBE_PATH") if _view_phase == 1 else Presentation.phase_name(_view_phase) + Text.text("SKILLS_FUTURE_PATH")
-	_wallet_context.text = Text.text("SKILLS_COMBINE")
+	_wallet_context.text = Text.text("SKILLS_ERA_PLANNED") if definitions.is_empty() else Text.text("SKILLS_COMBINE")
 	_wallet_context.tooltip_text = Text.text("SKILLS_WALLET_CONTEXT") % Presentation.phase_name(_view_phase)
 	if _view_phase > 0: _wallet_context.tooltip_text += Text.text("SKILLS_OLD_POINTS")
 	_availability.visible = _view_phase == 0
-	_details.get_parent().visible = _view_phase <= 1
+	_details.get_parent().visible = not definitions.is_empty()
+	_branches.visible = not definitions.is_empty()
 	for card in _cards.values():
 		card["button"].visible = int(card["phase"]) == _view_phase
 		card["container"].visible = int(card["phase"]) == _view_phase
@@ -351,7 +374,7 @@ func refresh(refresh_development: bool = true) -> void:
 		_planned_earning["social"].text = Text.text("SKILLS_TRIBE_EARNING")
 		_planned_earning["aggression"].text = Text.text("SKILLS_TRIBE_CONFLICT")
 	_nodes.clear()
-	for definition: Dictionary in progression.call("get_behavior_nodes", _view_phase):
+	for definition: Dictionary in definitions:
 		var id: String = definition["id"]
 		_nodes[id] = definition
 		if not _cards.has(id):
@@ -399,14 +422,14 @@ func _update_details() -> void:
 	if _view_phase == 1:
 		_effect.text = Text.text("SKILLS_TRIBE_EFFECT") + (Text.text("SKILLS_ACTIVE_PURCHASE") if definition["purchased"] and phase == 1 else "")
 	var status: Dictionary = definition["purchase_status"]
-	_purchase.disabled = not status["ok"] or _purchase_active or _view_phase > 1
+	_purchase.disabled = not status["ok"] or _purchase_active
 	_purchase.text = Text.text("SKILLS_UNLOCKED") if definition["purchased"] else Text.text("SKILLS_UNLOCK") % [int(definition["cost"]), Text.text("SKILLS_SOCIAL_POINTS") if definition["track"] == "social" else Text.text("SKILLS_AGGRESSION_POINTS")]
 	if not status["ok"] and not definition["purchased"]:
 		_requirements.text += "\n" + _reason(str(status.get("reason", "")))
 
 
 func _buy_selected() -> void:
-	if _purchase_active or not visible or _view_phase > 1 or not _body.visible:
+	if _purchase_active or not visible or not _nodes.has(_selected) or not _body.visible:
 		return
 	_purchase_active = true
 	_purchase.disabled = true
@@ -451,6 +474,9 @@ func _select_phase(index: int) -> void:
 		return
 	_view_phase = index
 	_selected = _phase_selection.get(index, "")
+	if _selected.is_empty():
+		var definitions: Array[Dictionary] = get_node("/root/ProgressionService").get_behavior_nodes(index)
+		if not definitions.is_empty(): _selected = str(definitions[0]["id"])
 	_phase_choice.select(index)
 	_clear_message()
 	refresh()
@@ -462,7 +488,7 @@ func _show_tab(show_journal: bool) -> void:
 		_open_journal()
 		return
 	_body.visible = not show_journal
-	_phase_choice.visible = not show_journal
+	_phase_navigation.visible = not show_journal
 	_development.visible = false
 	_style_tabs(_tree_tab)
 	if _message != null:
@@ -473,7 +499,7 @@ func _show_tab(show_journal: bool) -> void:
 
 func _show_development() -> void:
 	_body.visible = false
-	_phase_choice.visible = false
+	_phase_navigation.visible = false
 	_development.visible = true
 	_style_tabs(_development_tab)
 	_clear_message()
@@ -513,6 +539,8 @@ func _layout() -> void:
 	_apply_fonts(_panel)
 	_phase_choice.add_theme_font_size_override("font_size", roundi(14 * _font_scale))
 	_phase_choice.custom_minimum_size.y = 34 * _font_scale
+	_phase_strip.visible = width >= 920 * _font_scale
+	_phase_choice.visible = not _phase_strip.visible
 	_header.vertical = false
 	_body.vertical = width < 920 * _font_scale
 	_branches.vertical = width < 540 * _font_scale
@@ -545,6 +573,20 @@ func _style_tabs(active: Button) -> void:
 	for tab: Button in [_tree_tab, _journal_tab, _development_tab]:
 		tab.add_theme_stylebox_override("normal", Style.box(Color("2b4149") if tab == active else Color("162630"), Style.SOCIAL if tab == active else Color("354750"), 8))
 		tab.add_theme_color_override("font_color", Style.TEXT if tab == active else Style.MUTED)
+
+
+func _refresh_chapters() -> void:
+	var current: int = get_node("/root/GameState").current_phase
+	for index in range(_phase_buttons.size()):
+		var chapter := _phase_buttons[index]
+		var status_key := "SKILLS_ERA_PREVIEW"
+		if index == current: status_key = "SKILLS_ERA_CURRENT"
+		elif index < current: status_key = "SKILLS_ERA_PREVIOUS"
+		elif bool(PHASES[index]["implemented"]): status_key = "SKILLS_LOCKED"
+		chapter.text = Text.text("SKILLS_ERA_%d_NAME" % index) + "\n" + Text.text(status_key)
+		chapter.tooltip_text = Presentation.phase_name(index) + " · " + Text.text(status_key)
+		chapter.add_theme_stylebox_override("normal", Style.box(Color("2b4149") if index == _view_phase else Color("162630"), Style.SOCIAL if index == _view_phase else Color("354750"), 6))
+		chapter.add_theme_color_override("font_color", Style.TEXT if index == _view_phase else Style.MUTED)
 
 
 func _label(key: String, size_value: int = 18, color: Color = Style.TEXT) -> Label:
@@ -593,7 +635,7 @@ func _refresh_language() -> void:
 	var scroll_before := _scroll.scroll_vertical
 	_refresh_static(_panel)
 	for index in range(PHASES.size()):
-		_phase_choice.set_item_text(index, Presentation.phase_name(index) + Text.text("SKILLS_PLAYABLE_CHOICE" if index <= 1 else "SKILLS_PLANNED_CHOICE"))
+		_phase_choice.set_item_text(index, Presentation.phase_name(index) + Text.text("SKILLS_PLAYABLE_CHOICE" if PHASES[index]["implemented"] else "SKILLS_PLANNED_CHOICE"))
 	refresh(false)
 	_refresh_message()
 	_layout()

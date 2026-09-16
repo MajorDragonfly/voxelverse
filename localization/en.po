@@ -4886,3 +4886,36 @@ msgstr "Both paths can be combined."
 
 msgid "SKILLS_EARNING_COMPACT"
 msgstr "Social: befriend and help. Aggressive: hunt and resolve conflicts."
+
+msgid "SKILLS_ERA_HINT"
+msgstr "Each era has its own skills and points. Legacies carry forward where specified."
+
+msgid "SKILLS_ERA_PLANNED"
+msgstr "This era will have its own skill tree. Individual unlocks will arrive with its gameplay systems."
+
+msgid "SKILLS_ERA_CURRENT"
+msgstr "Current"
+
+msgid "SKILLS_ERA_PREVIOUS"
+msgstr "Earlier era"
+
+msgid "SKILLS_ERA_PREVIEW"
+msgstr "Preview"
+
+msgid "SKILLS_ERA_0_NAME"
+msgstr "Creature"
+
+msgid "SKILLS_ERA_1_NAME"
+msgstr "Tribe"
+
+msgid "SKILLS_ERA_2_NAME"
+msgstr "Medieval"
+
+msgid "SKILLS_ERA_3_NAME"
+msgstr "Modern"
+
+msgid "SKILLS_ERA_4_NAME"
+msgstr "Space"
+
+msgid "SKILLS_ERA_5_NAME"
+msgstr "Multiverse"
