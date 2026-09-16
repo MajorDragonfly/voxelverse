@@ -4211,3 +4211,15 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "WILDLIFE_PLAY_APPROACH"
+msgstr "Nähert sich Artgenossen"
+
+msgid "WILDLIFE_PLAY_GREET"
+msgstr "Begrüßt Artgenossen"
+
+msgid "WILDLIFE_PLAY_ACTIVE"
+msgstr "Spielt mit Artgenossen"
+
+msgid "WILDLIFE_PLAY_REST"
+msgstr "Ruht mit Artgenossen"

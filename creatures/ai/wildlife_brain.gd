@@ -37,6 +37,7 @@ var _side: float = 1.0
 var _progress_time: float = 0.0
 var _progress_position := Vector3.ZERO
 var _label: Label3D
+var _sensed_neighbors: Array[Node3D] = []
 
 func _ready() -> void:
 	super._ready()
@@ -163,6 +164,7 @@ func _sense() -> void:
 		if neighbors.size() >= NEIGHBOR_LIMIT:
 			break
 	_separation = _separation.slide(up_direction)
+	_sensed_neighbors = neighbors
 	_separation = _separation.limit_length(1.0)
 	var perceived: Node3D = null
 	if _threat_timer > 0.0 and is_instance_valid(_threat) and not (_ignore_player and _threat.is_in_group(&"player")):

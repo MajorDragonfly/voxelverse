@@ -7021,6 +7021,26 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "WILDLIFE_PLAY_APPROACH",
+      "de": "Nähert sich Artgenossen",
+      "en": "Approaching companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_GREET",
+      "de": "Begrüßt Artgenossen",
+      "en": "Greeting companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_ACTIVE",
+      "de": "Spielt mit Artgenossen",
+      "en": "Playing with companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_REST",
+      "de": "Ruht mit Artgenossen",
+      "en": "Resting with companion"
     }
   ]
 }

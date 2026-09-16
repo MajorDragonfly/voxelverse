@@ -4211,3 +4211,15 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "WILDLIFE_PLAY_APPROACH"
+msgstr "Approaching companion"
+
+msgid "WILDLIFE_PLAY_GREET"
+msgstr "Greeting companion"
+
+msgid "WILDLIFE_PLAY_ACTIVE"
+msgstr "Playing with companion"
+
+msgid "WILDLIFE_PLAY_REST"
+msgstr "Resting with companion"
