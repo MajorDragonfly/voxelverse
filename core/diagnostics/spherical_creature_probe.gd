@@ -115,7 +115,9 @@ func _water(scene: Node3D) -> void:
 	_expect(not lake.is_empty(), "No versioned freshwater basin found.")
 	if lake.is_empty(): return
 	var address: Dictionary = Cube.from_cartesian(surface.body.id, [lake.direction[0] * surface.body.radius, lake.direction[1] * surface.body.radius, lake.direction[2] * surface.body.radius], surface.body.radius)
-	address.height = lake.level - 0.5
+	# The source head may have drained to a lower escape saddle. Place the
+	# creature relative to the canonical surface used by mesh/view/audio.
+	address.height = surface.water_level_precise(lake.direction) - 0.5
 	scene.player.place(address)
 	await _until(func() -> bool: return Space.ground_ready(self, scene.player.global_position), 25000)
 	var water: Node = scene.get_node("Water")

@@ -1,34 +1,17 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_never, cull_disabled, diffuse_lambert;
+render_mode depth_draw_opaque, cull_disabled, diffuse_lambert;
 #include "res://world/surface/visuals/surface_detail.gdshaderinc"
 uniform vec3 deep_color : source_color = vec3(0.035, 0.22, 0.31);
 uniform vec3 shallow_color : source_color = vec3(0.16, 0.52, 0.53);
 uniform vec3 foam_color : source_color = vec3(0.72, 0.84, 0.80);
-uniform sampler2D scene_depth : hint_depth_texture, repeat_disable, filter_nearest;
-
-vec3 bed_position(vec2 screen_uv, mat4 inverse_projection) {
-	float depth = texture(scene_depth, screen_uv).r;
-#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
-	vec3 ndc = vec3(screen_uv, depth) * 2.0 - 1.0;
-#else
-	vec3 ndc = vec3(screen_uv * 2.0 - 1.0, depth);
-#endif
-	vec4 view = inverse_projection * vec4(ndc, 1.0);
-	return view.xyz / view.w;
-}
 
 void fragment() {
 	if (!covered(FRAGCOORD.xy)) { discard; }
 	vec3 up = normalize(surface_up);
-	// A zero-height voxel terrace shares the sea plane. Reject that contact
-	// using the real opaque floor instead of lifting the water or its collider.
-	// View-space subtraction retains centimetres; the underside never samples
-	// unrelated sky geometry as a seabed.
-	if (FRONT_FACING && camera_distance < 250.0) {
-		vec3 bed = bed_position(SCREEN_UV, INV_PROJECTION_MATRIX);
-		float clearance = dot(VERTEX - bed, (VIEW_MATRIX * vec4(up, 0.0)).xyz);
-		if (clearance < 0.025) { discard; }
-	}
+	// The surface owns depth, so underwater geometry and its screen-space
+	// shadows cannot be composited over it. Terrain still occludes dry banks.
+	// Signed procedural depth rejects dry/coincident water on both sides.
+	if (UV.x < 0.025) { discard; }
 	float detail = 1.0 - smoothstep(60.0, 160.0, camera_distance);
 	// Depth comes from the same terrain samples as the mesh, not screen depth.
 	// It remains valid below water, across a cube edge and in Compatibility.
@@ -55,7 +38,4 @@ void fragment() {
 	ALBEDO = mix(pigment, foam_color, foam * 0.35);
 	ROUGHNESS = 0.72;
 	SPECULAR = FRONT_FACING ? 0.12 : 0.0;
-	// Draw after opaque terrain, at full coverage. The depth query must not
-	// include this water itself in a renderer's optional depth prepass.
-	ALPHA = 1.0;
 }

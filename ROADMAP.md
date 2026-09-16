@@ -93,6 +93,13 @@ Die nachfolgenden Meilensteine bewahren Zielumfang und detaillierte Geschichte.
 
 ### Welt und Simulation
 
+**Wasser-Spieltest, 16.09.2026:** Wasserwände an festen Seegrenzen und fehlende
+Oberflächentiefe werden in `WATER-SHORE-DEPTH` korrigiert. **WATER-FLOW-01 bleibt
+offen:** sichtbare, geländegeführte Abflüsse bis zum nächsten Becken/Meer,
+gerichtete Strömung und Wasserfälle statt frei endender Wasserflächen. Die
+Pegelsenkung auf einen gehaltenen See ist noch keine Flusssimulation.
+[Korrektur, Prüfbelege und Abnahme des Folgepakets](docs/WORK_WATER_SHORE_FIX.md).
+
 Universum → Galaxie → Sektor → System → Himmelskörper → Oberflächenregion → Objekt. IDs sind stabil und werden nicht aus der Reihenfolge von Listen abgeleitet. Die Cube-Sphere-Adresse mit kleinem lokalem Ursprung ist die Grundlage für große Kugeln. Höhe, Wasserspiegel, Biom, Bodennormale und Routen greifen auf dieselbe Oberflächenquelle zu.
 
 Der reguläre Spielweg ist `main/spherical_campaign.tscn`; `legacy_plane_v9` bleibt nur ein lesbares Altformat mit geschützter Kopiermigration. Fauna, Häuser, Audio, Reiter und Pflüge dürfen beim Kugelausbau nicht dauerhaft Welt-Y als „oben“ voraussetzen. Ein begrenzter Weltadapter muss das gemeinsam lösen. Die gesamte alte Ebene lässt sich nicht verlustfrei auf einen endlichen Planeten übertragen; dafür wird kein stilles Versprechen gegeben.
