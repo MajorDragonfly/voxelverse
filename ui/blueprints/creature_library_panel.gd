@@ -29,6 +29,10 @@ var _requirements: Label
 var _status: Label
 var _search: LineEdit
 var _filter: OptionButton
+var _favorites_only: CheckButton
+var _favorite: Button
+var _favorites: Array = []
+var _library_writable: bool = true
 var _use: Button
 var _export: Button
 var _remove: Button
@@ -108,6 +112,14 @@ func _ready() -> void:
 		_clear_success()
 		_build_list())
 	list_content.add_child(_filter)
+	_favorites_only = CheckButton.new()
+	_favorites_only.name = "FavoriteTemplatesOnly"
+	_favorites_only.custom_minimum_size.y = 48
+	_bind_text(_favorites_only, "BP_FAVORITES_ONLY")
+	_favorites_only.toggled.connect(func(_enabled: bool):
+		_clear_success()
+		_build_list())
+	list_content.add_child(_favorites_only)
 	_list = VBoxContainer.new()
 	_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	list_content.add_child(_list)
@@ -143,6 +155,8 @@ func _ready() -> void:
 	_origin = Style.paragraph(details, "", 18)
 	_requirements = Style.paragraph(details, "", 20)
 	_requirements.name = "TemplateRequirements"
+	_favorite = _button(_detail, "BP_FAVORITE_ADD", _toggle_favorite, "ToggleTemplateFavorite")
+	_favorite.toggle_mode = true
 	_use = _button(_detail, "BP_USE", _choose, "UseBlueprint", true)
 	_file = FileDialog.new()
 	_file.name = "BlueprintFileDialog"
@@ -164,9 +178,12 @@ func _ready() -> void:
 func reload(preferred_key: String = "") -> void:
 	_entries.clear()
 	for package in Starter.packages():
-		_entries.append({"key": "builtin:" + Library.key_of(package), "builtin": true, "package": package})
+		_entries.append({"key": "builtin/" + Library.key_of(package), "builtin": true, "package": package})
 	var stored: Dictionary = Library.read(library_path)
+	_library_writable = stored.ok
+	_favorites.clear()
 	if stored.ok:
+		_favorites.assign(stored.favorites)
 		for package: Dictionary in stored.packages:
 			_entries.append({"key": Library.key_of(package), "builtin": false, "package": package})
 	else: show_result(stored)
@@ -196,15 +213,17 @@ func _build_list() -> void:
 	for entry: Dictionary in _entries:
 		if _filter.selected == 1 and not entry.builtin: continue
 		if _filter.selected == 2 and entry.builtin: continue
-		if not _search.text.strip_edges().is_empty() and not (_title(entry) + " " + str(entry.package.author)).to_lower().contains(_search.text.strip_edges().to_lower()): continue
+		if _favorites_only.button_pressed and not entry.key in _favorites: continue
+		var searchable: String = _title(entry) + " " + str(entry.package.author) + " " + str(entry.package.description) + " " + " ".join(entry.package.tags)
+		if not _search.text.strip_edges().is_empty() and not searchable.to_lower().contains(_search.text.strip_edges().to_lower()): continue
 		count += 1
 		var button: Button = _button(_list, "", _select.bind(str(entry.key)), "Template_" + str(count))
-		button.text = _title(entry) + "\n" + Text.text("BP_BUILTIN" if entry.builtin else "BP_LOCAL")
+		button.text = ("★ " if entry.key in _favorites else "") + _title(entry) + "\n" + Text.text("BP_BUILTIN" if entry.builtin else "BP_LOCAL")
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		button.toggle_mode = true
 		button.set_pressed_no_signal(entry.key == _selected)
 		button.set_meta("template_key", entry.key)
-	if count == 0: Style.paragraph(_list, Text.text("BP_NO_RESULTS"), 18)
+	if count == 0: Style.paragraph(_list, Text.text("BP_NO_FAVORITES" if _favorites_only.button_pressed else "BP_NO_RESULTS"), 18)
 
 
 func _select(key: String) -> void:
@@ -220,6 +239,7 @@ func _select(key: String) -> void:
 
 func _refresh_details() -> void:
 	var entry: Dictionary = _entry()
+	_refresh_favorite()
 	_use.disabled = true
 	_export.disabled = entry.is_empty()
 	_remove.disabled = entry.is_empty() or entry.get("builtin", true)
@@ -243,6 +263,27 @@ func _refresh_details() -> void:
 	var result: Dictionary = prepare_template.call(entry.package) if prepare_template.is_valid() else {"ok": false, "code": "no_campaign"}
 	_requirements.text = Text.format_text("BP_COMPLEXITY", {"count": checked.stats.complexity, "limit": checked.stats.complexity_limit}) + "\n" + (Text.text("BP_AVAILABLE_START" if start_mode else "BP_AVAILABLE") if result.ok else error_text(result))
 	_use.disabled = not result.ok
+
+
+func _refresh_favorite() -> void:
+	var marked: bool = _selected in _favorites
+	_favorite.disabled = _entry().is_empty() or not _library_writable
+	_favorite.set_pressed_no_signal(marked)
+	_favorite.text = Text.text("BP_FAVORITE_REMOVE" if marked else "BP_FAVORITE_ADD")
+	_favorite.tooltip_text = Text.text("BP_FAVORITE_TOOLTIP")
+
+
+func _toggle_favorite() -> void:
+	var enabled: bool = _favorite.button_pressed
+	var result: Dictionary = Library.set_favorite(_selected, enabled, library_path)
+	if result.ok:
+		_favorites.assign(result.favorites)
+		var scroll: ScrollContainer = find_child("TemplateListScroll", true, false)
+		var position: int = scroll.scroll_vertical
+		_build_list()
+		_restore_scroll.call_deferred(position)
+	_refresh_favorite()
+	show_result(result, "BP_FAVORITE_SAVED" if enabled else "BP_FAVORITE_CLEARED")
 
 
 func _choose() -> void:
@@ -293,6 +334,7 @@ func _save_variant() -> void:
 	var result: Dictionary = Library.save_variant(capture_current.call(), _variant_name.text.strip_edges(), library_path)
 	if result.ok:
 		_filter.select(2)
+		_favorites_only.set_pressed_no_signal(false)
 		_search.clear()
 		reload(result.key)
 	show_result(result, "BP_VARIANT_SAVED")
@@ -334,6 +376,7 @@ static func error_text(result: Dictionary) -> String:
 			names.append(Text.text(str(part.get("name", ""))))
 		return Text.format_text("BP_LOCKED", {"parts": ", ".join(names)})
 	var key: String = {"library_unreadable": "BP_ERROR_LIBRARY", "library_full": "BP_ERROR_FULL",
+		"favorites_full": "BP_ERROR_FAVORITES_FULL",
 		"editor_incompatible": "BP_ERROR_EDITOR",
 		"revision_conflict": "BP_ERROR_CONFLICT", "destination_conflict": "BP_ERROR_DESTINATION",
 		"protected_destination": "BP_ERROR_DESTINATION", "write_failed": "BP_ERROR_WRITE",

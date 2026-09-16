@@ -818,7 +818,7 @@ msgid "BP_ERROR_EDITOR"
 msgstr "This template uses attachments incompatible with the current editor. It will not be applied with altered geometry."
 
 msgid "BP_SEARCH"
-msgstr "Search templates"
+msgstr "Search name, author, description or tags …"
 
 msgid "BP_ALL"
 msgstr "All templates"
@@ -4211,3 +4211,27 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "BP_FAVORITES_ONLY"
+msgstr "Favorites only"
+
+msgid "BP_FAVORITE_ADD"
+msgstr "☆ Add to favorites"
+
+msgid "BP_FAVORITE_REMOVE"
+msgstr "★ Remove favorite"
+
+msgid "BP_FAVORITE_TOOLTIP"
+msgstr "Bookmarks this exact template revision on this device. Your campaign and exported template stay unchanged."
+
+msgid "BP_FAVORITE_SAVED"
+msgstr "This template is now a favorite."
+
+msgid "BP_FAVORITE_CLEARED"
+msgstr "The favorite bookmark was removed."
+
+msgid "BP_NO_FAVORITES"
+msgstr "No matching favorites. Mark a template as a favorite or change the search and filters."
+
+msgid "BP_ERROR_FAVORITES_FULL"
+msgstr "The favorites list is full. Remove a bookmark first."

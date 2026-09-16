@@ -1366,8 +1366,8 @@
     },
     {
       "key": "BP_SEARCH",
-      "de": "Vorlagen suchen",
-      "en": "Search templates"
+      "de": "Name, Autor, Beschreibung oder Tags suchen …",
+      "en": "Search name, author, description or tags …"
     },
     {
       "key": "BP_ALL",
@@ -7021,6 +7021,46 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "BP_FAVORITES_ONLY",
+      "de": "Nur Favoriten",
+      "en": "Favorites only"
+    },
+    {
+      "key": "BP_FAVORITE_ADD",
+      "de": "☆ Als Favorit merken",
+      "en": "☆ Add to favorites"
+    },
+    {
+      "key": "BP_FAVORITE_REMOVE",
+      "de": "★ Favorit entfernen",
+      "en": "★ Remove favorite"
+    },
+    {
+      "key": "BP_FAVORITE_TOOLTIP",
+      "de": "Merkt genau diese Vorlagenrevision auf diesem Gerät. Spielstand und exportierte Vorlage bleiben unverändert.",
+      "en": "Bookmarks this exact template revision on this device. Your campaign and exported template stay unchanged."
+    },
+    {
+      "key": "BP_FAVORITE_SAVED",
+      "de": "Diese Vorlage ist jetzt ein Favorit.",
+      "en": "This template is now a favorite."
+    },
+    {
+      "key": "BP_FAVORITE_CLEARED",
+      "de": "Die Favoritenmarkierung wurde entfernt.",
+      "en": "The favorite bookmark was removed."
+    },
+    {
+      "key": "BP_NO_FAVORITES",
+      "de": "Keine passenden Favoriten. Markiere eine Vorlage als Favorit oder ändere Suche und Filter.",
+      "en": "No matching favorites. Mark a template as a favorite or change the search and filters."
+    },
+    {
+      "key": "BP_ERROR_FAVORITES_FULL",
+      "de": "Die Favoritenliste ist voll. Entferne zuerst eine Markierung.",
+      "en": "The favorites list is full. Remove a bookmark first."
     }
   ]
 }

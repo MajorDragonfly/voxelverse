@@ -11,7 +11,14 @@ erreichbar. Sie benötigt keine Verbindung zu einem Dienst.
   vorgefertigte Körper mit den regulären Startteilen. Alle lassen sich später
   im vorhandenen Editor verändern. Ohne Auswahl bleibt der normale Spielstart.
 - **Suchen und filtern:** Alle Vorlagen, Startvorlagen oder die lokale Bibliothek.
-  Eigene Namen bleiben beim Wechsel zwischen Deutsch und Englisch erhalten.
+  Gesucht wird in Name, Autor, Beschreibung und Tags. Eigene Namen bleiben beim
+  Wechsel zwischen Deutsch und Englisch erhalten.
+- **Favoriten:** Im Vorlagendetail **Als Favorit merken** wählen. Ein Stern
+  kennzeichnet die Vorlage; **Nur Favoriten** lässt sich mit Suche und Herkunft
+  kombinieren. Die Markierung gilt auf diesem Gerät für die genaue Revision,
+  auch für Startvorlagen. Neue Revisionen und Varianten werden separat behandelt.
+  Entfernen einer lokalen Vorlage entfernt zugleich ihre Markierung. Ein späterer
+  Import derselben Vorlage setzt den Favoriten nicht automatisch wieder.
 - **Vorschau:** derselbe Voxelrenderer wie im Entdeckungsbuch und in der Laufzeit;
   linke Maustaste dreht, Mausrad zoomt. Autor, Herkunftsanzahl, Formbudget und
   fehlende Freischaltungen erklären die Verwendbarkeit.
@@ -41,7 +48,7 @@ und Vorschaukamera.
 Vorlagen in `user://creature_library.json`:
 
 ```json
-{"schema": 1, "packages": []}
+{"schema": 2, "packages": [], "favorites": []}
 ```
 
 Ein Eintrag ist ein vollständiges geprüftes BP-COMMUNITY.1-Paket. Der Schlüssel
@@ -58,6 +65,19 @@ Schreibabschluss erhält die bisherige Datei. Der erste lokale Umfang ist auf
 128 Pakete und 16 MiB begrenzt. Das sind Grenzen dieses lokalen Katalogs, keine
 Grenzen für Kampagnen, Tiere oder Weltregionen. Die Bibliothek ist kein zusätzlicher
 Kampagnenspeicher und kein paralleler Synchronisationsdienst.
+
+Schema 1 wird ohne Schreibzugriff gelesen; Favoriten sind dabei zunächst leer.
+Die nächste tatsächliche Änderung schreibt Schema 2 und erhält das bisherige
+Original als Backup. Unveränderte Importe und erneutes Setzen desselben
+Favoritenzustands schreiben nicht. Eine Markierung wird zusammen mit den Paketen
+atomar gespeichert und niemals in ein portables Paket exportiert. Sie verändert
+weder Freischaltungen noch die Verwendbarkeit der Vorlage.
+
+Lokale Favoriten verwenden `design_id@revision`. Startvorlagen erhalten das
+Präfix `builtin/`; der Schrägstrich ist in portablen Designkennungen unzulässig
+und verhindert Namensraumkollisionen. Aktuell nicht angebotene alte Revisionen
+bekannter Startvorlagen können als Markierung erhalten bleiben. Die
+Metadatenobergrenze beträgt 256 Markierungen, der lokale Katalog weiter 128 Pakete.
 
 `creature_start_templates.gd` erzeugt drei deterministische Vorlagen aus dem
 bestehenden Teilekatalog. Die Startfreischaltungen stammen aus einem frisch
@@ -107,3 +127,5 @@ Die Aufnahmen sind eine Darstellungs- und Bedienungsprüfung, keine Messung des
 60-FPS-Ziels auf einem Gaming-PC. Windows- und Zielhardware-Abnahmen stehen aus.
 Onlinekatalog, Anmeldung, Bewertungen und automatischer Austausch sind kein Teil
 dieses Pakets.
+
+Folgelieferung: [Favoriten, Metadatenvertrag und Prüfungen](WORK_COMMUNITY_LIBRARY_FAVORITES.md).

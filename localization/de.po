@@ -818,7 +818,7 @@ msgid "BP_ERROR_EDITOR"
 msgstr "Die Anschlüsse dieser Vorlage passen nicht zum aktuellen Editor. Die Form wird nicht verändert übernommen."
 
 msgid "BP_SEARCH"
-msgstr "Vorlagen suchen"
+msgstr "Name, Autor, Beschreibung oder Tags suchen …"
 
 msgid "BP_ALL"
 msgstr "Alle Vorlagen"
@@ -4211,3 +4211,27 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "BP_FAVORITES_ONLY"
+msgstr "Nur Favoriten"
+
+msgid "BP_FAVORITE_ADD"
+msgstr "☆ Als Favorit merken"
+
+msgid "BP_FAVORITE_REMOVE"
+msgstr "★ Favorit entfernen"
+
+msgid "BP_FAVORITE_TOOLTIP"
+msgstr "Merkt genau diese Vorlagenrevision auf diesem Gerät. Spielstand und exportierte Vorlage bleiben unverändert."
+
+msgid "BP_FAVORITE_SAVED"
+msgstr "Diese Vorlage ist jetzt ein Favorit."
+
+msgid "BP_FAVORITE_CLEARED"
+msgstr "Die Favoritenmarkierung wurde entfernt."
+
+msgid "BP_NO_FAVORITES"
+msgstr "Keine passenden Favoriten. Markiere eine Vorlage als Favorit oder ändere Suche und Filter."
+
+msgid "BP_ERROR_FAVORITES_FULL"
+msgstr "Die Favoritenliste ist voll. Entferne zuerst eine Markierung."
