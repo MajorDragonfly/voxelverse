@@ -209,7 +209,7 @@ static func unsupported(body: Dictionary) -> bool:
 		if not entry is Dictionary: continue
 		if entry.get("schema") != SCHEMA: return true
 		var data: Variant = entry.get("village")
-		if data is Dictionary and (data.get("schema") != Tribe.SCHEMA or Economy.has_unsupported_contract(data.get("economy")) or Tribe.Husbandry.has_unsupported_contract(data.get("husbandry"))): return true
+		if data is Dictionary and (Tribe.Construction.unsupported(data) or data.get("schema") != Tribe.SCHEMA or Economy.has_unsupported_contract(data.get("economy")) or Tribe.Husbandry.has_unsupported_contract(data.get("husbandry"))): return true
 		var simulation: Variant = entry.get("simulation")
 		if simulation is Dictionary and not simulation.is_empty() and simulation.get("schema") != 1: return true
 	return false

@@ -57,7 +57,7 @@ func rebuild(data: Dictionary) -> void:
 	if not data["project"].is_empty() and data["project"]["kind"] in Economy.STATIONS:
 		var site: Vector3 = Home.vector(data["project"]["position"])
 		_box(site + Vector3(0, 0.08, 0), Vector3(2.1, 0.16, 2.1), Color("b6a46a"))
-		_label(site + Vector3(0, 2.3, 0), "Arbeitsplatz im Bau", Color("edd5a8"))
+		_label(site + Vector3(0, 2.3, 0), _construction_title(data.project), Color("edd5a8"))
 	for batch: Dictionary in data["economy"]["incoming"]:
 		var site: Vector3 = Home.vector(batch["position"])
 		var kind: String = Economy.Batch.resource_id(batch)
@@ -80,7 +80,7 @@ func rebuild(data: Dictionary) -> void:
 		for kind: String in project["delivered_materials"]:
 			delivered += int(project["delivered_materials"][kind])
 			required += int(preload("res://world/tribe/village_housing.gd").COSTS[project["kind"]][kind])
-		_label(location + Vector3(0, 2.8, 0), "%s im Bau · Material %d / %d" % [{"hut": "Hütte", "tent": "Zelt", "pen": "Tierplatz", "laying_site": "Legestelle"}[project["kind"]], delivered, required], Color("edd5a8"))
+		_label(location + Vector3(0, 2.8, 0), _construction_title(project) + " · %d / %d" % [delivered, required], Color("edd5a8"))
 	for p: Dictionary in data.get("husbandry", {}).get("pens", []):
 		var location: Vector3 = Home.vector(p["position"])
 		if p.get("kind", "pen") == "laying_site":
@@ -142,3 +142,8 @@ func _label(location: Vector3, text: String, color: Color) -> void:
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(label)
 	label.position = location
+
+func _construction_title(project: Dictionary) -> String:
+	var text = preload("res://core/localization/ui_text.gd")
+	var presentation = preload("res://ui/tribe/tribe_presentation.gd")
+	return text.format_text("CONSTRUCTION_TITLE", {"name": text.text(presentation.PROJECTS.get(project.kind, "TRIBE_COMMAND")), "state": text.text("CONSTRUCTION_STATE_" + str(project.get("control", {}).get("state", "active")).to_upper())})

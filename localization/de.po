@@ -4211,3 +4211,84 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "CONSTRUCTION_NONE"
+msgstr "Es gibt keine laufende Baustelle."
+
+msgid "CONSTRUCTION_INVALID"
+msgstr "Unbekannter Baustellenauftrag."
+
+msgid "CONSTRUCTION_UNCHANGED"
+msgstr "Die Baustelle hat diesen Zustand bereits."
+
+msgid "CONSTRUCTION_RECOVERING"
+msgstr "Der Rückbau läuft bereits. Weise Bewohner für den Rücktransport zu."
+
+msgid "CONSTRUCTION_STORAGE_FULL"
+msgstr "Für die vollständige Materialrückgabe fehlt Lagerplatz. Schaffe zuerst Platz im Lager."
+
+msgid "CONSTRUCTION_PAUSED"
+msgstr "Baustelle pausiert. Laufende Materiallieferungen werden noch beendet."
+
+msgid "CONSTRUCTION_RESUMED"
+msgstr "Baustelle fortgesetzt. Zugewiesene Bewohner arbeiten weiter."
+
+msgid "CONSTRUCTION_RECOVERED"
+msgstr "Rückbau abgeschlossen. Alle Baumaterialien sind zurück im Lager."
+
+msgid "CONSTRUCTION_RECOVERY_STARTED"
+msgstr "Bau abgebrochen. Bewohner bringen angelieferte Materialien zurück."
+
+msgid "CONSTRUCTION_INACTIVE"
+msgstr "Baustellen können nur im laufenden Stammesmodus geändert werden."
+
+msgid "CONSTRUCTION_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Baustelle, Materialien und Aufträge bleiben unverändert."
+
+msgid "CONSTRUCTION_TITLE"
+msgstr "{name} · {state}"
+
+msgid "CONSTRUCTION_STATE_ACTIVE"
+msgstr "Im Bau"
+
+msgid "CONSTRUCTION_STATE_PAUSED"
+msgstr "Pausiert"
+
+msgid "CONSTRUCTION_STATE_RECOVERING"
+msgstr "Materialrückgabe"
+
+msgid "CONSTRUCTION_WORKERS"
+msgstr "Zugewiesen: {count} · gestoppt oder ohne Weg: {blocked}"
+
+msgid "CONSTRUCTION_MATERIAL_ROW"
+msgstr "{resource}: {delivered}/{required} am Bau · {carried} unterwegs · {reserved} reserviert"
+
+msgid "CONSTRUCTION_RETURN_ROW"
+msgstr "{resource}: {returned}/{required} zurück · {carried} getragen · {delivered} am Bau"
+
+msgid "CONSTRUCTION_PAUSE"
+msgstr "Bau pausieren"
+
+msgid "CONSTRUCTION_RESUME"
+msgstr "Bau fortsetzen"
+
+msgid "CONSTRUCTION_ASSIGN"
+msgstr "Auswahl zur Baustelle"
+
+msgid "CONSTRUCTION_CANCEL"
+msgstr "Bau abbrechen …"
+
+msgid "CONSTRUCTION_CONFIRM_CANCEL"
+msgstr "Abbrechen und Material zurückholen"
+
+msgid "CONSTRUCTION_KEEP"
+msgstr "Weiterbauen"
+
+msgid "CONSTRUCTION_CONFIRM_HINT"
+msgstr "Baufortschritt geht verloren. Reservierte Materialien werden freigegeben; angelieferte und getragene Waren müssen Bewohner zurückbringen. Der Bauplatz bleibt bis dahin belegt."
+
+msgid "CONSTRUCTION_RECOVERY_HINT"
+msgstr "Weise Bewohner zu oder setze gestoppte Bewohner fort. Material kommt erst bei Ankunft im Lager an. Für die Rückgabe wird Lagerplatz freigehalten."
+
+msgid "CONSTRUCTION_PAUSE_HINT"
+msgstr "Pausieren stoppt neue Abholungen und Bauarbeit. Bereits getragene Waren dürfen ankommen; andere Berufe arbeiten weiter."

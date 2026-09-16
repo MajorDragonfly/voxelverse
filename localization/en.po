@@ -4211,3 +4211,84 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "CONSTRUCTION_NONE"
+msgstr "There is no active construction project."
+
+msgid "CONSTRUCTION_INVALID"
+msgstr "Unknown construction command."
+
+msgid "CONSTRUCTION_UNCHANGED"
+msgstr "The project is already in this state."
+
+msgid "CONSTRUCTION_RECOVERING"
+msgstr "Recovery is already underway. Assign residents to bring materials back."
+
+msgid "CONSTRUCTION_STORAGE_FULL"
+msgstr "There is not enough warehouse space for all materials. Free up storage first."
+
+msgid "CONSTRUCTION_PAUSED"
+msgstr "Construction paused. Material already in transit can still arrive."
+
+msgid "CONSTRUCTION_RESUMED"
+msgstr "Construction resumed. Assigned residents continue their work."
+
+msgid "CONSTRUCTION_RECOVERED"
+msgstr "Recovery complete. All construction materials are back in storage."
+
+msgid "CONSTRUCTION_RECOVERY_STARTED"
+msgstr "Construction cancelled. Residents will bring delivered materials back."
+
+msgid "CONSTRUCTION_INACTIVE"
+msgstr "Construction can only be managed while tribal play is active."
+
+msgid "CONSTRUCTION_SAVE_FAILED"
+msgstr "Saving failed. The project, materials and orders remain unchanged."
+
+msgid "CONSTRUCTION_TITLE"
+msgstr "{name} · {state}"
+
+msgid "CONSTRUCTION_STATE_ACTIVE"
+msgstr "Building"
+
+msgid "CONSTRUCTION_STATE_PAUSED"
+msgstr "Paused"
+
+msgid "CONSTRUCTION_STATE_RECOVERING"
+msgstr "Material recovery"
+
+msgid "CONSTRUCTION_WORKERS"
+msgstr "Assigned: {count} · stopped or blocked: {blocked}"
+
+msgid "CONSTRUCTION_MATERIAL_ROW"
+msgstr "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+
+msgid "CONSTRUCTION_RETURN_ROW"
+msgstr "{resource}: {returned}/{required} returned · {carried} carried · {delivered} on site"
+
+msgid "CONSTRUCTION_PAUSE"
+msgstr "Pause construction"
+
+msgid "CONSTRUCTION_RESUME"
+msgstr "Resume construction"
+
+msgid "CONSTRUCTION_ASSIGN"
+msgstr "Assign selected residents"
+
+msgid "CONSTRUCTION_CANCEL"
+msgstr "Cancel construction…"
+
+msgid "CONSTRUCTION_CONFIRM_CANCEL"
+msgstr "Cancel and recover materials"
+
+msgid "CONSTRUCTION_KEEP"
+msgstr "Keep project"
+
+msgid "CONSTRUCTION_CONFIRM_HINT"
+msgstr "Construction progress will be lost. Reserved materials are released; residents must return delivered and carried goods. The site stays occupied until recovery finishes."
+
+msgid "CONSTRUCTION_RECOVERY_HINT"
+msgstr "Assign residents or resume stopped residents. Materials reach storage only on arrival. Storage space is reserved for their return."
+
+msgid "CONSTRUCTION_PAUSE_HINT"
+msgstr "Pausing stops new pickups and building work. Carried goods may still arrive; other professions continue."

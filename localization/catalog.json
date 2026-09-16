@@ -7021,6 +7021,141 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "CONSTRUCTION_NONE",
+      "de": "Es gibt keine laufende Baustelle.",
+      "en": "There is no active construction project."
+    },
+    {
+      "key": "CONSTRUCTION_INVALID",
+      "de": "Unbekannter Baustellenauftrag.",
+      "en": "Unknown construction command."
+    },
+    {
+      "key": "CONSTRUCTION_UNCHANGED",
+      "de": "Die Baustelle hat diesen Zustand bereits.",
+      "en": "The project is already in this state."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERING",
+      "de": "Der Rückbau läuft bereits. Weise Bewohner für den Rücktransport zu.",
+      "en": "Recovery is already underway. Assign residents to bring materials back."
+    },
+    {
+      "key": "CONSTRUCTION_STORAGE_FULL",
+      "de": "Für die vollständige Materialrückgabe fehlt Lagerplatz. Schaffe zuerst Platz im Lager.",
+      "en": "There is not enough warehouse space for all materials. Free up storage first."
+    },
+    {
+      "key": "CONSTRUCTION_PAUSED",
+      "de": "Baustelle pausiert. Laufende Materiallieferungen werden noch beendet.",
+      "en": "Construction paused. Material already in transit can still arrive."
+    },
+    {
+      "key": "CONSTRUCTION_RESUMED",
+      "de": "Baustelle fortgesetzt. Zugewiesene Bewohner arbeiten weiter.",
+      "en": "Construction resumed. Assigned residents continue their work."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERED",
+      "de": "Rückbau abgeschlossen. Alle Baumaterialien sind zurück im Lager.",
+      "en": "Recovery complete. All construction materials are back in storage."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERY_STARTED",
+      "de": "Bau abgebrochen. Bewohner bringen angelieferte Materialien zurück.",
+      "en": "Construction cancelled. Residents will bring delivered materials back."
+    },
+    {
+      "key": "CONSTRUCTION_INACTIVE",
+      "de": "Baustellen können nur im laufenden Stammesmodus geändert werden.",
+      "en": "Construction can only be managed while tribal play is active."
+    },
+    {
+      "key": "CONSTRUCTION_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Baustelle, Materialien und Aufträge bleiben unverändert.",
+      "en": "Saving failed. The project, materials and orders remain unchanged."
+    },
+    {
+      "key": "CONSTRUCTION_TITLE",
+      "de": "{name} · {state}",
+      "en": "{name} · {state}"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_ACTIVE",
+      "de": "Im Bau",
+      "en": "Building"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_PAUSED",
+      "de": "Pausiert",
+      "en": "Paused"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_RECOVERING",
+      "de": "Materialrückgabe",
+      "en": "Material recovery"
+    },
+    {
+      "key": "CONSTRUCTION_WORKERS",
+      "de": "Zugewiesen: {count} · gestoppt oder ohne Weg: {blocked}",
+      "en": "Assigned: {count} · stopped or blocked: {blocked}"
+    },
+    {
+      "key": "CONSTRUCTION_MATERIAL_ROW",
+      "de": "{resource}: {delivered}/{required} am Bau · {carried} unterwegs · {reserved} reserviert",
+      "en": "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+    },
+    {
+      "key": "CONSTRUCTION_RETURN_ROW",
+      "de": "{resource}: {returned}/{required} zurück · {carried} getragen · {delivered} am Bau",
+      "en": "{resource}: {returned}/{required} returned · {carried} carried · {delivered} on site"
+    },
+    {
+      "key": "CONSTRUCTION_PAUSE",
+      "de": "Bau pausieren",
+      "en": "Pause construction"
+    },
+    {
+      "key": "CONSTRUCTION_RESUME",
+      "de": "Bau fortsetzen",
+      "en": "Resume construction"
+    },
+    {
+      "key": "CONSTRUCTION_ASSIGN",
+      "de": "Auswahl zur Baustelle",
+      "en": "Assign selected residents"
+    },
+    {
+      "key": "CONSTRUCTION_CANCEL",
+      "de": "Bau abbrechen …",
+      "en": "Cancel construction…"
+    },
+    {
+      "key": "CONSTRUCTION_CONFIRM_CANCEL",
+      "de": "Abbrechen und Material zurückholen",
+      "en": "Cancel and recover materials"
+    },
+    {
+      "key": "CONSTRUCTION_KEEP",
+      "de": "Weiterbauen",
+      "en": "Keep project"
+    },
+    {
+      "key": "CONSTRUCTION_CONFIRM_HINT",
+      "de": "Baufortschritt geht verloren. Reservierte Materialien werden freigegeben; angelieferte und getragene Waren müssen Bewohner zurückbringen. Der Bauplatz bleibt bis dahin belegt.",
+      "en": "Construction progress will be lost. Reserved materials are released; residents must return delivered and carried goods. The site stays occupied until recovery finishes."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERY_HINT",
+      "de": "Weise Bewohner zu oder setze gestoppte Bewohner fort. Material kommt erst bei Ankunft im Lager an. Für die Rückgabe wird Lagerplatz freigehalten.",
+      "en": "Assign residents or resume stopped residents. Materials reach storage only on arrival. Storage space is reserved for their return."
+    },
+    {
+      "key": "CONSTRUCTION_PAUSE_HINT",
+      "de": "Pausieren stoppt neue Abholungen und Bauarbeit. Bereits getragene Waren dürfen ankommen; andere Berufe arbeiten weiter.",
+      "en": "Pausing stops new pickups and building work. Carried goods may still arrive; other professions continue."
     }
   ]
 }

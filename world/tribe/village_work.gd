@@ -17,10 +17,11 @@ static func snapshot(data: Dictionary, member: Dictionary) -> Dictionary:
 	var order: String = effective_order(data, member)
 	var building: bool = not data.project.is_empty() and data.project.kind == order \
 		and (order in Model.COSTS or order in Economy.STATIONS or order in Housing.BUILDS)
+	var recovering: bool = Model.Construction.state(data.project) == "recovering" and member.construction_id != ""
 	var before: Dictionary = data.duplicate()
 	before.members = data.members.duplicate()
 	for index in range(data.members.size()):
-		if building or data.members[index].id == member.id:
+		if building or recovering or data.members[index].id == member.id:
 			before.members[index] = data.members[index].duplicate(true)
 	before.stock = data.stock.duplicate()
 	before.economy = data.economy.duplicate()
@@ -69,7 +70,7 @@ static func prepare(data: Dictionary, member: Dictionary, delta: float) -> void:
 static func target(data: Dictionary, member: Dictionary) -> Variant:
 	var order: String = effective_order(data, member)
 	if order == "wait": return member.position
-	if member.construction_id != "": return data.project.entrance
+	if member.construction_id != "": return data.anchor if Model.Construction.state(data.project) == "recovering" else data.project.entrance
 	if member.cargo != "" or member.stage in ["meal", "drink"]: return data.anchor
 	if Economy.Resources.uses_batches(order):
 		var batch: Dictionary = Economy.pickup(data, order)
@@ -77,6 +78,8 @@ static func target(data: Dictionary, member: Dictionary) -> Variant:
 	if order in Economy.RESOURCES or order in ["supply", "provision"]:
 		var kind: String = Economy.gather_kind(data, member)
 		return Economy.source(data, member, kind).position if not kind.is_empty() and not Economy.at_target(data, member, kind) else data.anchor
+	if Model.Construction.idle(data, member): return member.position
+	if Model.Construction.state(data.project) == "recovering" and data.project.get("kind") == order: return Model.Construction.recovery_target(data, member)
 	if Housing.material_project(data.project) and data.project.get("kind") == order:
 		return data.anchor if Housing.pending(data.project) else data.project.entrance
 	if order == "garden": return data.deposits.food.position
@@ -87,6 +90,9 @@ static func target(data: Dictionary, member: Dictionary) -> Variant:
 static func step(data: Dictionary, member: Dictionary, delta: float, rate: float, effects: Array) -> void:
 	var order: String = effective_order(data, member)
 	if order == "wait":
+		return
+	if member["construction_id"] != "" and Model.Construction.state(data.project) == "recovering":
+		Model.Construction.recovery_step(data, member, effects)
 		return
 	if member["construction_id"] != "":
 		var project: Dictionary = data["project"]
@@ -135,7 +141,7 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 		if float(member["work"]) >= 3.0:
 			deposit["remaining"] -= 1
 			member["cargo"] = kind
-			if data.economy.schema == Economy.SCHEMA: member["cargo_source_id"] = deposit.id
+			if data.economy.schema >= 3: member["cargo_source_id"] = deposit.id
 			member["stage"] = "return"
 			member["work"] = 0.0
 			effects.append({"kind": "changed"})
@@ -148,6 +154,10 @@ static func step(data: Dictionary, member: Dictionary, delta: float, rate: float
 		if project.is_empty() or project["kind"] != order:
 			if member["order"] != "build":
 				member["order"] = "wait"
+			return
+		if Model.Construction.state(project) == "paused": return
+		if Model.Construction.state(project) == "recovering":
+			Model.Construction.recovery_step(data, member, effects)
 			return
 		if Housing.material_project(project):
 			if Housing.pending(project):

@@ -438,6 +438,32 @@ func issue_workplace(identity: String) -> bool:
 	_resolve_order("workplace", success)
 	return success
 
+func control_construction(action: String) -> Dictionary:
+	var text = preload("res://core/localization/ui_text.gd")
+	if not is_active(): return {"ok": false, "code": "CONSTRUCTION_INACTIVE"}
+	var before: Dictionary = village().duplicate(true)
+	var result: Dictionary = Model.Construction.command(village(), action)
+	if not result.ok:
+		status = text.text(result.code)
+		panel.refresh()
+		return result
+	_transaction = true
+	var success: bool = _saves.save_now()
+	if not success:
+		replace_village(before)
+		result = {"ok": false, "code": "CONSTRUCTION_SAVE_FAILED"}
+	_transaction = false
+	_routes.clear()
+	_goals.clear()
+	if success:
+		placement = ""
+		_visuals.rebuild(village())
+		if village().project.is_empty() and before.project.get("kind") in Housing.BUILDS:
+			navigation.begin(home, anchor(), village(), navigation_extent())
+	status = text.text(result.code)
+	panel.refresh()
+	return result
+
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0, workplace_id: String = "") -> bool:
 	for id: String in selected:
 		if SiteTransport.bound(body(), id):
@@ -461,6 +487,9 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 				return false
 	var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
 	if order in costs:
+		if Model.Construction.state(data.project) == "recovering":
+			status = preload("res://core/localization/ui_text.gd").text("CONSTRUCTION_RECOVERING")
+			return false
 		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty():
 			status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_LIMIT")
 			return false
@@ -500,6 +529,7 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 					data["project"]["delivered_materials"][kind] = 0
 			elif order in Economy.STATIONS:
 				data["project"] = Economy.station_project(data, order, Space.encode(self, destination))
+			data["project"]["attempt_id"] = Model.Ids.create("construction")
 	for identity: String in selected:
 		var member: Dictionary = member_record(identity)
 		var next: String = order
@@ -583,8 +613,8 @@ func _physics_process(delta: float) -> void:
 		var target: Vector3 = actor.global_position
 		var construction: bool = false
 		if member["construction_id"] != "" and order != "wait":
-			target = Space.resolve(self, village()["project"]["entrance"])
-			construction = true
+			target = anchor() if Model.Construction.state(village().project) == "recovering" else Space.resolve(self, village()["project"]["entrance"])
+			construction = Model.Construction.state(village().project) != "recovering"
 		elif member["care_pen_id"] != "" and order != "wait":
 			target = husbandry.cargo_target(member)
 			construction = target.distance_to(anchor()) > 0.1
@@ -598,6 +628,11 @@ func _physics_process(delta: float) -> void:
 		elif order in Economy.RESOURCES or order in ["supply", "provision"]:
 			var kind: String = Economy.gather_kind(village(), member)
 			target = Space.resolve(self, Economy.source(village(), member, kind).position) if not kind.is_empty() and not Economy.at_target(village(), member, kind) else anchor()
+		elif Model.Construction.idle(village(), member):
+			target = actor.global_position
+		elif Model.Construction.state(village().project) == "recovering" and village().project.get("kind") == order:
+			target = Space.resolve(self, Model.Construction.recovery_target(village(), member))
+			construction = target.distance_to(anchor()) > 0.1
 		elif order in ["feed", "drink", "tool", "build", "tend"]:
 			target = anchor()
 		elif Housing.material_project(village().project) and village()["project"].get("kind") == order:
@@ -612,7 +647,7 @@ func _physics_process(delta: float) -> void:
 		var neighbor_target: Vector3 = neighbors.target(member)
 		if neighbor_target.is_finite():
 			target = neighbor_target
-		if order != "wait" and (neighbor_target.is_finite() or member["cargo"] != "" or order != "move"):
+		if not Model.Construction.idle(village(), member) and order != "wait" and (neighbor_target.is_finite() or member["cargo"] != "" or order != "move"):
 			var index: int = village()["members"].find(member)
 			target = _construction_workplace(target, index) if construction else _workplace(target, index)
 		var arrived: bool = _walk(actor, str(member["id"]), target, delta, minf(float(member["hunger"]), float(member["hydration"])))
@@ -716,7 +751,14 @@ func _perform_work(member: Dictionary, delta: float) -> void:
 func _apply_work_effects(member: Dictionary, effects: Array) -> void:
 	var changed: bool = false
 	for effect: Dictionary in effects:
-		if effect.kind == "care_delivery": husbandry.deliver(member)
+		if effect.kind == "construction_recovered":
+			_visuals.rebuild(village())
+			if effect.data.kind in Housing.BUILDS:
+				navigation.begin(home, anchor(), village(), navigation_extent())
+			_routes.clear()
+			_goals.clear()
+			status = preload("res://core/localization/ui_text.gd").text("CONSTRUCTION_RECOVERED")
+		elif effect.kind == "care_delivery": husbandry.deliver(member)
 		elif effect.kind == "care_pickup": husbandry.pickup(member)
 		elif effect.kind == "changed": changed = true
 		else:
