@@ -18,6 +18,7 @@
         "save_slots_test",
         "spherical_campaign_contract_test",
         "spherical_campaign_runtime_test",
+        "startup_trace_test",
         "spherical_developed_migration_test",
         "frozen_body_serialization_test"
       ]

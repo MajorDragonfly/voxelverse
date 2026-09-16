@@ -25,11 +25,11 @@ def main():
     parser.add_argument("--output", type=Path, help="New report directory outside the project; defaults to a unique temporary directory")
     parser.add_argument("--renderer", choices=["headless", "gl_compatibility", "forward_plus"], default="headless")
     parser.add_argument("--seed", type=int, default=15838)
-    parser.add_argument("--cycles", type=int, help="Developed: 1–3 complete chains (default 1); route/saves: 2–10 (default 2)")
-    parser.add_argument("--mode", choices=["route", "saves", "developed"], default="route")
+    parser.add_argument("--cycles", type=int, help="Developed: 1–3 complete chains (default 1); route/saves/startup: 2–10 (default 2)")
+    parser.add_argument("--mode", choices=["route", "saves", "developed", "startup"], default="route")
     parser.add_argument("--production", choices=["milk", "eggs"], default="milk", help="Developed profile's real production chain")
     parser.add_argument("--compare", type=Path, help="Compare a developed report directory with the same recipe/hardware")
-    parser.add_argument("--replay", type=Path, help="Prior route report directory: reuse its exact initial save and immutable region blobs")
+    parser.add_argument("--replay", type=Path, help="Prior route/startup report directory: reuse its exact initial save and immutable region blobs")
     parser.add_argument("--walk-seconds", type=float, default=600.0, help="Outward walking with heading changes, followed by a separate physical return; 10 minutes outward by default")
     parser.add_argument("--frame-cap", type=int, default=60)
     parser.add_argument("--settle-frames", type=int, default=60)
@@ -56,7 +56,7 @@ def main():
     output = args.output.expanduser().resolve() if args.output else Path(tempfile.mkdtemp(prefix="voxelverse-performance-"))
     if output.is_relative_to(project):
         parser.error("Performance reports must be outside the source project")
-    if any((output / name).exists() for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture", "summary.md")) or list(output.glob("cycle_*-*.json")):
+    if any((output / name).exists() for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture", "summary.md", "startup-fixture.json", "startup-progress.json", "prepare.log")) or list(output.glob("cycle_*-*.json")):
         parser.error("Choose a new output directory to preserve earlier measurements")
     output.mkdir(parents=True, exist_ok=True)
     recipe = {"protocol": 2, "mode": args.mode, "seed": args.seed, "cycles": args.cycles,
@@ -69,6 +69,9 @@ def main():
                   "scenario": "spherical_gameplay_probe", "scenario_simulation_speed": 4.0,
                   "far_debt_frame_cap": 2, "far_production_seconds": 5.0}
     source = source_version(project)
+    if args.mode == "startup":
+        from performance_startup_report import run_startup
+        return run_startup(args, project, output, source, lambda: source_version(project))
     config = {"output": str(output), "recipe": recipe, "source": source}
     print(f"Performance output: {output}", flush=True)
     summary = {"passed": False, "recipe": recipe, "host": {"system": platform.system(),

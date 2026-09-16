@@ -171,7 +171,7 @@ func _open(path: String, pause_when_ready: bool = false) -> void:
 		await tree.process_frame
 	print("SPHERE_LOAD ", JSON.stringify({"milliseconds": Time.get_ticks_msec() - start,
 		"loading": flow.loading, "scene": tree.current_scene.scene_file_path if tree.current_scene != null else "",
-		"error": saves.last_error}))
+		"error": saves.last_error, "startup": flow.startup_diagnostics()}))
 	saves.autosave_enabled = false
 
 func _load_timeout_ms() -> int:
@@ -179,7 +179,7 @@ func _load_timeout_ms() -> int:
 
 func _expect_world() -> bool:
 	var valid: bool = tree.current_scene != null and tree.current_scene.scene_file_path == Surface.SCENE and tree.current_scene.world_initialized and not flow.loading
-	_expect(valid, "Sphere campaign did not finish loading: " + str(saves.last_error))
+	_expect(valid, "Sphere campaign did not finish loading in phase %s: %s" % [flow.startup_diagnostics().last_phase, saves.last_error])
 	return valid
 
 func _expect(condition: bool, message: String) -> void:
