@@ -39,6 +39,7 @@ const REMOVED_GENETIC_FIELDS: Array[String] = [
 
 static func create_default() -> Dictionary:
 	var blueprint: Dictionary = BaseBlueprint.create_default()
+	for part: Dictionary in blueprint.parts: Contract.PartRevisions.update_mouth(part)
 	normalize(blueprint)
 	return blueprint
 

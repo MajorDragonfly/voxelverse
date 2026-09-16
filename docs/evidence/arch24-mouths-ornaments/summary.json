@@ -1,0 +1,163 @@
+{
+  "base": "176d088d34324de14952bc7506fe9763a22cf4b0",
+  "source": "59c2a6b21d5fb70a292be15976acab31300b3fb8",
+  "tree": "9dbf143dde7f680a974a995bb7a3823d4991723d",
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "runs": [
+    {
+      "name": "01-initial",
+      "source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+      "tree": "6cb5a1b6b5ea2f3cfa18d7a1e2670e736213fb1c",
+      "passed_tests": [
+        "creature_foot_provider_test",
+        "creature_part_articulation_test",
+        "discovery_journal_test",
+        "journal_localization_test",
+        "community_blueprint_package_test",
+        "creature_design_library_test",
+        "blueprint_contract_test"
+      ],
+      "all_selected_passed": false
+    },
+    {
+      "name": "02-corrections",
+      "source": "4d396274f96e620393644851d88e1654f95be964",
+      "tree": "ce7bc549ef422bd71fa5b2355e6110aff4490069",
+      "passed_tests": [
+        "creature_mouth_provider_test",
+        "creature_snout_family_test",
+        "creature_parts_studio_test",
+        "creature_body_contract_test",
+        "creature_part_revisions_test",
+        "creature_editor_v7_runtime_test",
+        "editor_localization_test"
+      ],
+      "all_selected_passed": false
+    },
+    {
+      "name": "03-family-final",
+      "source": "59c2a6b21d5fb70a292be15976acab31300b3fb8",
+      "tree": "9dbf143dde7f680a974a995bb7a3823d4991723d",
+      "passed_tests": [
+        "creature_mouth_refresh_test",
+        "creature_ornament_families_test"
+      ],
+      "all_selected_passed": true
+    }
+  ],
+  "successful_scoped_checks": {
+    "creature_foot_provider_test": {
+      "source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+      "tree": "6cb5a1b6b5ea2f3cfa18d7a1e2670e736213fb1c",
+      "seconds": 3.637,
+      "report": "01-initial-results.json",
+      "log_sha256": "ccf1b88abe11df2e3db2d057bebf1aff5cfbfdd1b86ba61fcb54ee992a399150"
+    },
+    "creature_part_articulation_test": {
+      "source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+      "tree": "6cb5a1b6b5ea2f3cfa18d7a1e2670e736213fb1c",
+      "seconds": 6.742,
+      "report": "01-initial-results.json",
+      "log_sha256": "a10df409aa6a5dab52be5d49f7a9743cdab97975745fb361cf3832a7e2cc52f7"
+    },
+    "discovery_journal_test": {
+      "source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+      "tree": "6cb5a1b6b5ea2f3cfa18d7a1e2670e736213fb1c",
+      "seconds": 6.441,
+      "report": "01-initial-results.json",
+      "log_sha256": "c837d51f9c7eedd19adfd413b4fcfce029873fa8a8641d27071cac1dcd7dc4a4"
+    },
+    "journal_localization_test": {
+      "source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+      "tree": "6cb5a1b6b5ea2f3cfa18d7a1e2670e736213fb1c",
+      "seconds": 28.657,
+      "report": "01-initial-results.json",
+      "log_sha256": "828beaafd3ec28dfb314a2d15d3d419c005a74994d854fb392984daadb8bc8f2"
+    },
+    "community_blueprint_package_test": {
+      "source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+      "tree": "6cb5a1b6b5ea2f3cfa18d7a1e2670e736213fb1c",
+      "seconds": 9.657,
+      "report": "01-initial-results.json",
+      "log_sha256": "723d87aa51e3dcaffb901faa308c0696f495802d9cf05ba9dc20764ea90a9e0a"
+    },
+    "creature_design_library_test": {
+      "source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+      "tree": "6cb5a1b6b5ea2f3cfa18d7a1e2670e736213fb1c",
+      "seconds": 5.88,
+      "report": "01-initial-results.json",
+      "log_sha256": "0faf983cbfe298383a1f40a58e6149d98598295c6737ca2e5a9d7933bffa9232"
+    },
+    "blueprint_contract_test": {
+      "source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+      "tree": "6cb5a1b6b5ea2f3cfa18d7a1e2670e736213fb1c",
+      "seconds": 4.079,
+      "report": "01-initial-results.json",
+      "log_sha256": "ca335abaa71e91e1f010d392f5a7d87f74c85b57d18101cc35c27f02f3c4b596"
+    },
+    "creature_mouth_provider_test": {
+      "source": "4d396274f96e620393644851d88e1654f95be964",
+      "tree": "ce7bc549ef422bd71fa5b2355e6110aff4490069",
+      "seconds": 14.525,
+      "report": "02-corrections-results.json",
+      "log_sha256": "f2d6558fa8296a3cd361b43f122b43530cbc0dfc35cd8ae6b885b2fe2d23678b"
+    },
+    "creature_snout_family_test": {
+      "source": "4d396274f96e620393644851d88e1654f95be964",
+      "tree": "ce7bc549ef422bd71fa5b2355e6110aff4490069",
+      "seconds": 18.91,
+      "report": "02-corrections-results.json",
+      "log_sha256": "b7f0d62de54c0006e1e380baff4015993191abaef0d775fc83f3a7a096be56d4"
+    },
+    "creature_parts_studio_test": {
+      "source": "4d396274f96e620393644851d88e1654f95be964",
+      "tree": "ce7bc549ef422bd71fa5b2355e6110aff4490069",
+      "seconds": 14.365,
+      "report": "02-corrections-results.json",
+      "log_sha256": "4cb4a39e6133f84fb1d73671cb1076dc835051160bdf5d7a59c354459a090345"
+    },
+    "creature_body_contract_test": {
+      "source": "4d396274f96e620393644851d88e1654f95be964",
+      "tree": "ce7bc549ef422bd71fa5b2355e6110aff4490069",
+      "seconds": 9.047,
+      "report": "02-corrections-results.json",
+      "log_sha256": "3a2922d230f6a8f5a5d3f9343fad4ac3726da2fc6e11d8fdcbe45ae03b8c0fb4"
+    },
+    "creature_part_revisions_test": {
+      "source": "4d396274f96e620393644851d88e1654f95be964",
+      "tree": "ce7bc549ef422bd71fa5b2355e6110aff4490069",
+      "seconds": 9.19,
+      "report": "02-corrections-results.json",
+      "log_sha256": "78ad0d7958313ca17f6dabc1dbbc45032db62fc656f8dda18303b5de40c79786"
+    },
+    "creature_editor_v7_runtime_test": {
+      "source": "4d396274f96e620393644851d88e1654f95be964",
+      "tree": "ce7bc549ef422bd71fa5b2355e6110aff4490069",
+      "seconds": 4.278,
+      "report": "02-corrections-results.json",
+      "log_sha256": "5bdaf6c004b74a5dfc255c114475efd105b66812094ca307110c8778337d91d3"
+    },
+    "editor_localization_test": {
+      "source": "4d396274f96e620393644851d88e1654f95be964",
+      "tree": "ce7bc549ef422bd71fa5b2355e6110aff4490069",
+      "seconds": 36.268,
+      "report": "02-corrections-results.json",
+      "log_sha256": "71846bae44acc856ae8e6edff731d303f2076648da76fc965bcfd641b86428b6"
+    },
+    "creature_mouth_refresh_test": {
+      "source": "59c2a6b21d5fb70a292be15976acab31300b3fb8",
+      "tree": "9dbf143dde7f680a974a995bb7a3823d4991723d",
+      "seconds": 85.525,
+      "report": "03-family-final-results.json",
+      "log_sha256": "69c1ad3d8803bf410ae2b3073273ff93bf81be79d39b00457cfaec07204e3063"
+    },
+    "creature_ornament_families_test": {
+      "source": "59c2a6b21d5fb70a292be15976acab31300b3fb8",
+      "tree": "9dbf143dde7f680a974a995bb7a3823d4991723d",
+      "seconds": 38.269,
+      "report": "03-family-final-results.json",
+      "log_sha256": "7c61a22ddb14597cb88662a0ed5ddebabc3d8ab525a11968da7725b005102159"
+    }
+  },
+  "whole_suite_or_native_acceptance": false
+}

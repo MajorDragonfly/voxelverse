@@ -8131,6 +8131,71 @@
       "key": "WILDLIFE_EAT_CARCASS",
       "de": "Frisst Aas",
       "en": "Eating carrion"
+    },
+    {
+      "key": "EDITOR_UPDATE_MOUTH",
+      "de": "Neue Mundform übernehmen",
+      "en": "Use updated mouth shape"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_STAG_ANTLERS_NAME",
+      "de": "Hirschgeweih",
+      "en": "Stag antlers"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_STAG_ANTLERS_DESCRIPTION",
+      "de": "Verzweigte Geweihstange mit mehreren nach oben gerichteten Sprossen. Werte und Freischaltung wie Geweih.",
+      "en": "Branched antler beam with several upward tines. Stats and unlock match Antlers."
+    },
+    {
+      "key": "EDITOR_PART_HORNS_MOOSE_ANTLERS_NAME",
+      "de": "Schaufelgeweih",
+      "en": "Palmate antlers"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_MOOSE_ANTLERS_DESCRIPTION",
+      "de": "Breite Geweihschaufel mit abgesetzten Randspitzen. Werte und Freischaltung wie Geweih.",
+      "en": "Broad antler palm with separate edge tines. Stats and unlock match Antlers."
+    },
+    {
+      "key": "EDITOR_PART_DECOR_LOW_CREST_NAME",
+      "de": "Flacher Rückenkamm",
+      "en": "Low dorsal crest"
+    },
+    {
+      "key": "EDITOR_PART_DECOR_LOW_CREST_DESCRIPTION",
+      "de": "Niedriger durchgehender Kamm entlang des Rückens. Werte und Freischaltung wie Federkamm.",
+      "en": "Low continuous crest along the back. Stats and unlock match Feather Crest."
+    },
+    {
+      "key": "EDITOR_PART_DECOR_SAW_CREST_NAME",
+      "de": "Gezackter Rückenkamm",
+      "en": "Serrated dorsal crest"
+    },
+    {
+      "key": "EDITOR_PART_DECOR_SAW_CREST_DESCRIPTION",
+      "de": "Hoher Rückenkamm mit vier deutlich getrennten Zacken. Werte und Freischaltung wie Federkamm.",
+      "en": "Tall dorsal crest with four distinct points. Stats and unlock match Feather Crest."
+    },
+    {
+      "key": "EDITOR_PART_DECOR_HEAD_CREST_NAME",
+      "de": "Kopfkamm",
+      "en": "Head crest"
+    },
+    {
+      "key": "EDITOR_PART_DECOR_HEAD_CREST_DESCRIPTION",
+      "de": "Kompakter nach hinten auslaufender Kamm auf dem Kopf. Werte und Freischaltung wie Federkamm.",
+      "en": "Compact crest sweeping back from the head. Stats and unlock match Feather Crest."
+    },
+    {
+      "key": "EDITOR_PART_DECOR_FRILL_NAME",
+      "de": "Nackenschild",
+      "en": "Neck frill"
+    },
+    {
+      "key": "EDITOR_PART_DECOR_FRILL_DESCRIPTION",
+      "de": "Breiter fächerförmiger Nackenschild mit kräftigem Mittelansatz. Werte und Freischaltung wie Federkamm.",
+      "en": "Broad fan-shaped neck frill with a thick central root. Stats and unlock match Feather Crest."
     }
   ]
 }

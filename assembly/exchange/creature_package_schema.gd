@@ -31,7 +31,7 @@ const APPEARANCE: Dictionary = {
 	"eye_color?": "color", "horn_color?": "color",
 }
 const PART: Dictionary = {
-	"part_revision?": ["int", 1, 1], "catalog_revision?": ["int", 1, 1],
+	"part_revision?": ["int", 1, 2], "catalog_revision?": ["int", 1, 1],
 	"end_part_revision?": ["int", 1, 1], "end_catalog_revision?": ["int", 1, 1],
 	"uid": "id", "part_id": "id", "category": ["enum", "mouth", "head", "eyes", "legs",
 		"arms", "tail", "horns", "plates", "spikes", "decor"],

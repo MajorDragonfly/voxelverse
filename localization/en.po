@@ -4877,3 +4877,42 @@ msgstr "Seeking carrion"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Eating carrion"
+
+msgid "EDITOR_UPDATE_MOUTH"
+msgstr "Use updated mouth shape"
+
+msgid "EDITOR_PART_HORNS_STAG_ANTLERS_NAME"
+msgstr "Stag antlers"
+
+msgid "EDITOR_PART_HORNS_STAG_ANTLERS_DESCRIPTION"
+msgstr "Branched antler beam with several upward tines. Stats and unlock match Antlers."
+
+msgid "EDITOR_PART_HORNS_MOOSE_ANTLERS_NAME"
+msgstr "Palmate antlers"
+
+msgid "EDITOR_PART_HORNS_MOOSE_ANTLERS_DESCRIPTION"
+msgstr "Broad antler palm with separate edge tines. Stats and unlock match Antlers."
+
+msgid "EDITOR_PART_DECOR_LOW_CREST_NAME"
+msgstr "Low dorsal crest"
+
+msgid "EDITOR_PART_DECOR_LOW_CREST_DESCRIPTION"
+msgstr "Low continuous crest along the back. Stats and unlock match Feather Crest."
+
+msgid "EDITOR_PART_DECOR_SAW_CREST_NAME"
+msgstr "Serrated dorsal crest"
+
+msgid "EDITOR_PART_DECOR_SAW_CREST_DESCRIPTION"
+msgstr "Tall dorsal crest with four distinct points. Stats and unlock match Feather Crest."
+
+msgid "EDITOR_PART_DECOR_HEAD_CREST_NAME"
+msgstr "Head crest"
+
+msgid "EDITOR_PART_DECOR_HEAD_CREST_DESCRIPTION"
+msgstr "Compact crest sweeping back from the head. Stats and unlock match Feather Crest."
+
+msgid "EDITOR_PART_DECOR_FRILL_NAME"
+msgstr "Neck frill"
+
+msgid "EDITOR_PART_DECOR_FRILL_DESCRIPTION"
+msgstr "Broad fan-shaped neck frill with a thick central root. Stats and unlock match Feather Crest."

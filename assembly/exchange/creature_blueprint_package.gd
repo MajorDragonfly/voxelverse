@@ -23,8 +23,7 @@ static func export_blueprint(blueprint: Dictionary, metadata: Dictionary = {}) -
 	# Missing part fallbacks cannot be represented as the original design.
 	for section in [serialized, serialized.body, serialized.paint] + serialized.parts:
 		if not str(section.get("missing_part_id", "")).is_empty(): return _fail("missing_part")
-		for revision_field in ["catalog_revision", "part_revision"]:
-			if int(section.get(revision_field, 1)) != 1: return _fail("unsupported_catalog")
+		if not Creature.Contract.PartRevisions.reference_error(section).is_empty(): return _fail("unsupported_catalog")
 	if not Schema.problem(serialized.appearance, Schema.APPEARANCE).is_empty(): return _fail("unsupported_appearance")
 	var attachment_problem: String = Schema.problem(serialized.assembly.body_attachments, Schema.ATTACHMENTS)
 	if not attachment_problem.is_empty(): return _fail("unsupported_attachments", attachment_problem)
@@ -49,6 +48,7 @@ static func inspect(package: Variant) -> Dictionary:
 	if JSON.stringify(package).to_utf8_buffer().size() > Schema.MAX_BYTES: return _fail("package_too_large")
 	if package.title.strip_edges().is_empty(): return _fail("missing_title")
 	var data: Dictionary = package.blueprint
+	if not Creature.Contract.PartRevisions.version_error(data).is_empty(): return _fail("unsupported_catalog")
 	if package.required_parts != _requirements(data): return _fail("requirements_mismatch")
 	for id: String in package.required_parts:
 		if Parts.get_part(id).is_empty(): return _fail("unknown_part", id)

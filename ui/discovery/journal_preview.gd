@@ -106,7 +106,7 @@ func show_part(part_id: String, unlocked: bool = true) -> void:
 		if category in ["feet", "hands"]:
 			Geometry._terminal(_model, part_id, Surface.colors(blueprint)[0], Color("e3d5b0"))
 		else:
-			Geometry.build(_model, definition, {"part_id": part_id, "category": category}, blueprint)
+			Geometry.build(_model, definition, {"part_id": part_id, "category": category, "part_revision": Geometry.Revisions.current_revision(part_id)}, blueprint)
 	if not unlocked:
 		_silhouette(_model)
 	_fit_model()

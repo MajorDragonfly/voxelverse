@@ -4877,3 +4877,42 @@ msgstr "Sucht Aas"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Frisst Aas"
+
+msgid "EDITOR_UPDATE_MOUTH"
+msgstr "Neue Mundform übernehmen"
+
+msgid "EDITOR_PART_HORNS_STAG_ANTLERS_NAME"
+msgstr "Hirschgeweih"
+
+msgid "EDITOR_PART_HORNS_STAG_ANTLERS_DESCRIPTION"
+msgstr "Verzweigte Geweihstange mit mehreren nach oben gerichteten Sprossen. Werte und Freischaltung wie Geweih."
+
+msgid "EDITOR_PART_HORNS_MOOSE_ANTLERS_NAME"
+msgstr "Schaufelgeweih"
+
+msgid "EDITOR_PART_HORNS_MOOSE_ANTLERS_DESCRIPTION"
+msgstr "Breite Geweihschaufel mit abgesetzten Randspitzen. Werte und Freischaltung wie Geweih."
+
+msgid "EDITOR_PART_DECOR_LOW_CREST_NAME"
+msgstr "Flacher Rückenkamm"
+
+msgid "EDITOR_PART_DECOR_LOW_CREST_DESCRIPTION"
+msgstr "Niedriger durchgehender Kamm entlang des Rückens. Werte und Freischaltung wie Federkamm."
+
+msgid "EDITOR_PART_DECOR_SAW_CREST_NAME"
+msgstr "Gezackter Rückenkamm"
+
+msgid "EDITOR_PART_DECOR_SAW_CREST_DESCRIPTION"
+msgstr "Hoher Rückenkamm mit vier deutlich getrennten Zacken. Werte und Freischaltung wie Federkamm."
+
+msgid "EDITOR_PART_DECOR_HEAD_CREST_NAME"
+msgstr "Kopfkamm"
+
+msgid "EDITOR_PART_DECOR_HEAD_CREST_DESCRIPTION"
+msgstr "Kompakter nach hinten auslaufender Kamm auf dem Kopf. Werte und Freischaltung wie Federkamm."
+
+msgid "EDITOR_PART_DECOR_FRILL_NAME"
+msgstr "Nackenschild"
+
+msgid "EDITOR_PART_DECOR_FRILL_DESCRIPTION"
+msgstr "Breiter fächerförmiger Nackenschild mit kräftigem Mittelansatz. Werte und Freischaltung wie Federkamm."

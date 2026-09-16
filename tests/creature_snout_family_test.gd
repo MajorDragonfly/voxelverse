@@ -60,7 +60,7 @@ func _new_models() -> void:
 		check(profile.supported_actions.is_empty() and profile.capabilities.is_empty(), "Cosmetic shape granted capabilities")
 		profile.features.clear()
 		check(Mouths.get_profile(id).features.size() == 4, "Caller changed catalog")
-		check(MouthGeometry.recipe(id, Color.WHITE, Color.WHITE, Color.WHITE, 2).is_empty() and MouthGeometry.articulation(id, 2).is_empty(), "Future model revision downgraded")
+		check(MouthGeometry.recipe(id, Color.WHITE, Color.WHITE, Color.WHITE, 2).is_empty() and MouthGeometry.articulation(id, 3).is_empty(), "Future model revision downgraded")
 		for shape: Vector3 in [Vector3.ONE, Vector3(0.8, 1.1, 1.4), Vector3(1.7, 0.6, 0.9)]:
 			var pair: Array[Node3D] = [_model(id, shape, 1), _model(id, shape, -1)]
 			var joints: Array = [Joints.new(), Joints.new()]
