@@ -30,7 +30,8 @@ def main():
                                      stderr=subprocess.STDOUT, timeout=180)
     log = (output / 'render.log').read_text()
     images = sorted(p.name for p in output.glob('recovery-*.png'))
-    passed = process.returncode == 0 and not ERROR.search(log) and len(images) == 32
+    passed = (process.returncode == 0 and not ERROR.search(log) and len(images) == 32
+              and "RECOVERY_FRESH_PROCESS_PASSED" in log and "PLAYER_RECOVERY_WORLD_PASSED" in log)
     result = {'passed': passed, 'command': command, 'images': images,
               'renderer': 'gl_compatibility', 'isolated_userdata': True}
     (output / 'results.json').write_text(json.dumps(result, indent=2) + '\n')

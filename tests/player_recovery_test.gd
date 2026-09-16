@@ -156,6 +156,10 @@ func _layout_review() -> void:
 					check(view.panel.get_global_rect().size.x <= root.get_visible_rect().size.x, "Recovery width exceeds viewport")
 					check(root.get_visible_rect().encloses(view.panel.get_global_rect()), "Recovery card outside viewport")
 					check(view.heading.get_theme_font_size("font_size") == roundi(24 * font_scale), "Recovery ignores text scale")
+	root.get_node("GameState").current_phase = 1
+	view.refresh()
+	check(not view.visible, "Recovery card remained visible after tribal handoff")
+	root.get_node("GameState").current_phase = 0
 	root.size = old_size
 	root.get_node("DisplaySettings").ui_scale = 1.0
 	TranslationServer.set_locale(old_locale)

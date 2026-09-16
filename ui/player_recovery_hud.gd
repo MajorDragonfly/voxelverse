@@ -35,7 +35,7 @@ func _process(_delta: float) -> void:
 func refresh() -> void:
 	var recovery: Node = get_parent()
 	var flow := get_node_or_null("/root/SessionFlow")
-	visible = recovery.stage != "inactive" and not get_tree().paused and (flow == null or not flow.loading)
+	visible = recovery.stage != "inactive" and int(get_node("/root/GameState").current_phase) == 0 and not get_tree().paused and (flow == null or not flow.loading)
 	if not visible: return
 	var font_scale: float = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
 	heading.add_theme_font_size_override("font_size", roundi(24 * font_scale))
