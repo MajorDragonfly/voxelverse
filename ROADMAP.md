@@ -8,6 +8,30 @@ Die Lieferungen #78–89 sind über PR #90 in `main` enthalten. Für Fachchats g
 Der Integrationschat aktualisiert gemeinsame Lieferstände einmal je Runde.
 Historische Berichte belegen ihren damaligen Commit, keine heutige Abnahme.
 
+## Spieltest vom 16. September: Stammesphase bedienbar machen
+
+Lars bewertet die Stammesphase positiv, meldet aber lange Wartezeiten beim
+Zuweisen, eine zu große und unübersichtliche Oberfläche, fehlende sichtbare
+Lagermengen sowie unverständliche Zuweisungen und eine stark begrenzte Kamera.
+Die Draufsicht soll außerdem besser zur Kugellandschaft passen. Diese Rückmeldung
+ist eine offene M6-/M10-Abnahme; vorhandene Fachtests schließen sie nicht ab.
+
+| Reihenfolge | Paket | Geplantes Ergebnis |
+|---|---|---|
+| P0, zuerst | M6-ORDER-LATENCY | Eingabe, Routen, Speichern und Darstellung getrennt messen; Aufträge ohne blockierende Wartezeiten und mit sicherem Speicherabschluss zuweisen. |
+| P1 | M6-TRIBE-HUD | Kompakte Vorratsleiste, Bewohnerauswahl und kontextbezogene Befehle; Details nur bei Bedarf, deutlich mehr freie Spielfläche. |
+| P1 | M6-TRIBE-CAMERA | Drehung, Neigung, Zoom, Geschwindigkeit und Dorfzentrierung; größere, oberflächengebundene Bewegung unabhängig vom Arbeitsradius. |
+| P1 | M6-STOCKPILE-VISUALS | Echte eingelagerte Ressourcen als wachsende/schrumpfende Holz-, Stein- und Vorratsgruppen; Reservierungen und Fracht eindeutig unterscheiden. |
+| P1, nach Bedienkonzept | M10-TRIBE-TUTORIAL | Optionale Schrittfolge für Auswahl, Einzel-/Gruppenaufträge, Berufe, Transport, Versorgung, Bauen und Kamera; über Esc erneut aufrufbar. |
+| P2, nach Kamera | M6-PLANET-PRESENTATION | Dorf, Ressourcen, Beschriftungen und Nah-/Fernlandschaft aus mehreren Kamerawinkeln stimmig zur Kugeloberfläche darstellen. |
+
+[Codebefunde, Abhängigkeiten und konkrete Abnahmekriterien](docs/TRIBAL_PLAYTEST_PLAN_2026-09-16.md).
+Alle sechs Pakete sind **geplant**, auch im Katalog `tools/workflow/packets.json`;
+eine Aufnahme ist weder Implementierung noch Reservierung eines Fachchats.
+Gemeinsame Controller-/UI-/Speicherbereiche nacheinander zuweisen. Die laufende
+M4-Navigation und ihre Besitzer bleiben berücksichtigt; diese Planung ändert
+keinen Spielcode, keinen Spielstand und keinen Fortschrittsprozentsatz.
+
 ## Zweite Integration am 15. September
 
 Der gemeinsame Kandidat auf `agent/integration-vegetation-nest-20260915` vereinigt
