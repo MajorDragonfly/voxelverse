@@ -5,7 +5,10 @@ Eigener Branch: `agent/atmosphere-settings-detail-20260916`.
 
 ## Bedienung
 
-Hauptmenü → Einstellungen oder im Spiel F8 → **Grafik**.
+Hauptmenü → Einstellungen → **Grafik** oder im Spiel **Esc → Einstellungen → Grafik**.
+Anzeige, Steuerung, Sprache und Grafik liegen im gemeinsamen Dialog;
+**Anzeige → Ton und Musik …** öffnet sämtliche Audioeinstellungen.
+F8 bleibt ein optionaler Direktzugriff, kein erforderlicher Spielschritt.
 18 Einzelwerte in sieben Gruppen:
 
 | Bereich | Regler |
@@ -20,7 +23,7 @@ Hauptmenü → Einstellungen oder im Spiel F8 → **Grafik**.
 
 Basis/Atmosphärisch/Cineastisch setzen jeweils einen vollständigen, reproduzierbaren
 Wertesatz. Eine Einzeländerung zeigt **Benutzerdefiniert**. Übernehmen aktiviert und
-speichert; Zurück/Esc/F8 verwerfen den Entwurf. **Grafikstandard wiederherstellen**
+speichert; Zurück/Esc verwerfen den Entwurf. **Grafikstandard wiederherstellen**
 setzt den Entwurf auf Atmosphärisch, ebenfalls erst nach Übernehmen wirksam.
 Schieberegler, Zahleneingabe und Tastatur sind verbunden. Fokus scrollt auch nach
 einem verzögerten Containerlayout in den sichtbaren Bereich. DE/EN sind vorhanden.

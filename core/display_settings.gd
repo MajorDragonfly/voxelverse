@@ -252,7 +252,7 @@ func _build_settings_menu() -> void:
 	content.add_child(title)
 
 	var subtitle := Label.new()
-	subtitle.text = "Esc / F8 Menü · F11 Vollbild"
+	subtitle.text = "Esc Zurück · F11 Vollbild"
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	subtitle.add_theme_color_override("font_color", Color(0.58, 0.70, 0.72, 1.0))
 	content.add_child(subtitle)

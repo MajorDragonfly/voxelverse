@@ -61,8 +61,8 @@ msgstr "Discover worlds. Shape life."
 msgid "ENTWICKLUNGSVERSION    /    KREATURENPHASE"
 msgstr "DEVELOPMENT BUILD    /    CREATURE STAGE"
 
-msgid "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen"
-msgstr "Tab  Select    ·    Enter  Confirm    ·    F8  Settings"
+msgid "Tab  Auswahl    ·    Enter  Bestätigen"
+msgstr "Tab  Select    ·    Enter  Confirm"
 
 msgid "Fortsetzen"
 msgstr "Continue"
@@ -334,8 +334,8 @@ msgstr "Skip introduction"
 msgid "VOXELVERSE · EINSTELLUNGEN"
 msgstr "VOXELVERSE · SETTINGS"
 
-msgid "Esc / F8 Menü · F11 Vollbild"
-msgstr "Esc / F8 Menu · F11 Fullscreen"
+msgid "Esc Zurück · F11 Vollbild"
+msgstr "Esc Back · F11 Fullscreen"
 
 msgid "Anzeige"
 msgstr "Display"
@@ -571,8 +571,8 @@ msgstr "Test sound"
 msgid "Standardwerte"
 msgstr "Defaults"
 
-msgid "Zurück · F7 / Esc"
-msgstr "Back · F7 / Esc"
+msgid "Zurück · Esc"
+msgstr "Back · Esc"
 
 msgid "Entdeckungsbuch"
 msgstr "Discovery journal"
@@ -703,8 +703,8 @@ msgstr "The original is fully preserved. Transfer to a spherical planet still ne
 msgid "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten."
 msgstr "Continue the adventure on a spherical planet. Your previous save is preserved as the original."
 
-msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
 
 msgid "BP_LIBRARY_TITLE"
 msgstr "Creature templates"

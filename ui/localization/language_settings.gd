@@ -1,5 +1,5 @@
 extends VBoxContainer
-## Hosted by the existing F8 menu; it does not own pause or mouse state.
+## Hosted by the shared settings menu; it does not own pause or mouse state.
 var choice: OptionButton
 var _manager: Node
 var _problem: Label

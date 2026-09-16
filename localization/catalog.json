@@ -105,9 +105,9 @@
       "en": "DEVELOPMENT BUILD    /    CREATURE STAGE"
     },
     {
-      "key": "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen",
-      "de": "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen",
-      "en": "Tab  Select    ·    Enter  Confirm    ·    F8  Settings"
+      "key": "Tab  Auswahl    ·    Enter  Bestätigen",
+      "de": "Tab  Auswahl    ·    Enter  Bestätigen",
+      "en": "Tab  Select    ·    Enter  Confirm"
     },
     {
       "key": "Fortsetzen",
@@ -560,9 +560,9 @@
       "en": "VOXELVERSE · SETTINGS"
     },
     {
-      "key": "Esc / F8 Menü · F11 Vollbild",
-      "de": "Esc / F8 Menü · F11 Vollbild",
-      "en": "Esc / F8 Menu · F11 Fullscreen"
+      "key": "Esc Zurück · F11 Vollbild",
+      "de": "Esc Zurück · F11 Vollbild",
+      "en": "Esc Back · F11 Fullscreen"
     },
     {
       "key": "Anzeige",
@@ -955,9 +955,9 @@
       "en": "Defaults"
     },
     {
-      "key": "Zurück · F7 / Esc",
-      "de": "Zurück · F7 / Esc",
-      "en": "Back · F7 / Esc"
+      "key": "Zurück · Esc",
+      "de": "Zurück · Esc",
+      "en": "Back · Esc"
     },
     {
       "key": "Entdeckungsbuch",
@@ -1175,9 +1175,9 @@
       "en": "Continue the adventure on a spherical planet. Your previous save is preserved as the original."
     },
     {
-      "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+      "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
     },
     {
       "key": "BP_LIBRARY_TITLE",

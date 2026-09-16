@@ -108,7 +108,7 @@ func _build() -> void:
 	footer.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
 	footer.anchor_left = 0.075
 	footer.offset_top = -57
-	var keys := Style.label(self, "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen", 16, Style.MUTED)
+	var keys := Style.label(self, "Tab  Auswahl    ·    Enter  Bestätigen", 16, Style.MUTED)
 	keys.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 	keys.offset_left = -610
 	keys.offset_right = -100
