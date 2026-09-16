@@ -1,0 +1,49 @@
+name: Abgegrenztes Arbeitspaket
+description: Eine Lieferung mit Basis, Besitzer, Schreibbereichen und Abnahme planen.
+title: '[PAKET-ID] Konkretes Ergebnis'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bestehende Zuordnung zuerst in [der zentralen Runde](https://github.com/MajorDragonfly/voxelverse/issues/137) prüfen.
+        Neue Issues sind keine automatische Reservierung. Direkte Nutzeraufträge bleiben gültig.
+  - type: input
+    id: packet
+    attributes:
+      label: Eindeutige Paket-ID
+      placeholder: M4-RECOVERY-FOLLOWUP
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Besitzer oder Chat
+    validations:
+      required: true
+  - type: input
+    id: base
+    attributes:
+      label: Feste Basis-SHA und Vorgänger-PRs
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Ergebnis und Umfangsgrenze
+      description: Was kann der Spieler danach konkret tun? Welche Folgearbeit bleibt offen?
+    validations:
+      required: true
+  - type: textarea
+    id: writes
+    attributes:
+      label: Dateien und gemeinsame Schreibbereiche
+      description: Eigene Dateien, geteilte Anschlüsse und betroffene direkte Verbraucher.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Abnahme
+      description: Bestehende Prüfverträge, echte Fehler-/Neustartfälle und erforderlicher Spieltest. Keine zweite Testregistry.
+    validations:
+      required: true
