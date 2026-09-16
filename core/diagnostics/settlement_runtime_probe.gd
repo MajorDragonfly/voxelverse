@@ -36,7 +36,7 @@ func _run() -> void:
 	print("SECOND_SITE candidate ", candidate, " distance ", candidate.distance_to(tribe.anchor()))
 	tribe.select_member(residents[2])
 	_expect(tribe.issue_order("move", candidate), "Founder movement was rejected.")
-	await _until(func() -> bool: return tribe.member_record(residents[2]).order == "wait", 20000)
+	await _until_work(func() -> bool: return tribe.member_record(residents[2]).order == "wait", 20.0, "founder walk")
 	if not tribe.settlements.founding_reason().is_empty(): _expect(false, "Founder failed to arrive: " + tribe.settlements.founding_reason()); await _done(); return
 	var location: Dictionary = tribe.member_record(residents[2]).position.duplicate(true)
 	var home_before: Dictionary = tribe.body().home_group.duplicate(true)
@@ -53,7 +53,7 @@ func _run() -> void:
 	# Two real controllers' jobs are retained under a failed selection save.
 	tribe.select_member(residents[1])
 	_expect(tribe.issue_order("wood"), "Origin work was rejected.")
-	await _until(func() -> bool: return tribe.member_record(residents[1]).cargo == "wood", 18000)
+	await _until_work(func() -> bool: return tribe.member_record(residents[1]).cargo == "wood", 18.0, "origin pickup")
 	_expect(tribe.member_record(residents[1]).cargo == "wood", "Origin carrier never picked up wood.")
 	_expect(tribe.issue_order("wait"), "Could not hold cargo.")
 	var held: Dictionary = tribe.member_record(residents[1]).duplicate(true)
@@ -70,8 +70,12 @@ func _run() -> void:
 	_expect(a.members[1].cargo == "wood", "Held origin cargo was remotely credited.")
 	tribe.select_all()
 	_expect(tribe.issue_order("stone"), "Secondary stone order failed.")
-	await _until(func() -> bool: return tribe.village().stock.stone > 0, 20000)
-	_expect(tribe.village().stock.stone > 0 and a.stock.stone == 0, "Secondary physical delivery did not stay in its own stock.")
+	var previous_fps: int = Engine.max_fps
+	if "--slow-settlement-work" in OS.get_cmdline_user_args(): Engine.max_fps = 2
+	await _until_work(func() -> bool: return tribe.village().stock.stone > 0, 20.0, "secondary delivery")
+	Engine.max_fps = previous_fps
+	_expect(tribe.village().stock.stone > 0, "Secondary physical delivery did not reach its stock: " + JSON.stringify(tribe.village().members[0]))
+	_expect(Collection.village(tribe.body(), origin).stock.stone == 0, "Secondary physical delivery changed the origin stock.")
 	# Resume the same origin work through its real UI/controller, then leave it
 	# active remotely while the second site's stone order continues physically.
 	_expect(await tribe.settlements.select(origin), "Return to origin failed.")
@@ -79,7 +83,7 @@ func _run() -> void:
 	tribe.select_member(residents[1])
 	_expect(tribe.issue_order("resume"), "Held carrier could not resume.")
 	_expect(await tribe.settlements.select(second), "Second return failed.")
-	await _until(func() -> bool: return Collection.village(tribe.body(), origin).stock.wood > 0, 15000)
+	await _until_work(func() -> bool: return Collection.village(tribe.body(), origin).stock.wood > 0, 15.0, "origin remote delivery")
 	_expect(Collection.village(tribe.body(), origin).stock.wood > 0, "Same-body far work failed to deliver held cargo.")
 	_expect(Collection.village(tribe.body(), second).stock.wood == 0, "Origin freight appeared in the second store.")
 	_expect(Collection.validate(tribe.body(), state.campaign.data).is_empty(), "Live collection invalid: " + Collection.validate(tribe.body(), state.campaign.data))
@@ -151,6 +155,19 @@ func _restart_sites() -> void:
 func _until(predicate: Callable, milliseconds: int) -> void:
 	var start: int = Time.get_ticks_msec()
 	while not predicate.call() and Time.get_ticks_msec() - start < milliseconds: await tree.process_frame
+
+func _until_work(predicate: Callable, seconds: float, label: String) -> void:
+	# Software rendering can exhaust the per-frame physics budget. A wall-clock
+	# wait then observes less walking/work than the same test at normal FPS.
+	# Keep the original simulation budget and a separate finite wall-time cap;
+	# residents still have to walk, gather and deliver through the live runtime.
+	var started: int = Time.get_ticks_msec()
+	var first_frame: int = Engine.get_physics_frames()
+	var physics_seconds: float = 0.0
+	while not predicate.call() and physics_seconds < seconds and Time.get_ticks_msec() - started < 120000:
+		await tree.physics_frame
+		physics_seconds = float(Engine.get_physics_frames() - first_frame) / Engine.physics_ticks_per_second
+	print("SECOND_SITE_WORK ", JSON.stringify({"step": label, "complete": predicate.call(), "physics_seconds": physics_seconds, "wall_seconds": (Time.get_ticks_msec() - started) / 1000.0}))
 
 func _capture() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
