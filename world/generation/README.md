@@ -1,9 +1,12 @@
 # Aktive Weltgenerierung
 
-Die bestehende Kampagne verwendet `legacy_plane_v9`. Der globale Autoload
-`WorldGenerator` zeigt in `project.godot` auf `world_generator_planetary_v9.gd`.
-Kugelplaneten und deren Kampagnenanbindung sind ein getrenntes Arbeitspaket;
-maßgeblich sind [ROADMAP.md](../../ROADMAP.md) und die jeweilige Fachübergabe.
+Der reguläre Spielweg führt vom Startmenü zur Kugelkampagne
+`main/spherical_campaign.tscn`. Deren Terrain verwendet
+`world/surface/surface_terrain.gd` mit radialem Oberflächenadapter.
+Der globale Autoload `WorldGenerator` zeigt weiterhin auf
+`world_generator_planetary_v9.gd`: Die planare Generatorlinie wird für vorhandene
+Verbraucher, historische Spielstände und Diagnoseprüfungen benötigt.
+Aktueller Lieferstand: [PROJECT_STATUS.md](../../docs/PROJECT_STATUS.md).
 
 ## Benötigte ältere Grundlagen
 
@@ -14,7 +17,7 @@ Bestandteil der Laufzeit. Auch ältere Terrain- und Kreaturendateien können
 weiterhin Grundlagen oder gezielte Testfälle sein; ihre Versionsnummer
 ist kein Löschkriterium.
 
-## Laufzeit und Verträge
+## Planare Diagnose und gemeinsame Grundlagen
 
 - `world/world_manager.gd` verwaltet Chunks, Aufbau und Entladen.
 - Die Terrain-Szene nutzt die vorhandene V8-Vererbung mit V7/V4/V3/V2-Grundlagen.
@@ -26,6 +29,7 @@ ist kein Löschkriterium.
   über die vorhandenen Generator-Methoden erreichbar. Seed und gespeicherte
   Weltidentität werden durch Bereinigungen nicht geändert.
 
-Nicht mehr angebundene Prototypen sind mit Pfadliste und Wiederherstellungspunkt
-in [WORK_PROJECT_MAINTENANCE.md](../../docs/WORK_PROJECT_MAINTENANCE.md) dokumentiert.
+Die unbenutzten V1-/V3-Einstiege wurden entfernt; die oben genannte Vererbung
+bleibt erhalten. Weitere Bereinigungsdetails stehen in
+[WORK_PROJECT_CLEANUP.md](../../docs/WORK_PROJECT_CLEANUP.md).
 Historische Grafikberichte und bearbeitbare Modellquellen bleiben erhalten.
