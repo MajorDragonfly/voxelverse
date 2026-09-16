@@ -8141,6 +8141,21 @@
       "key": "TRIBE_RESIDENT_COMPACT",
       "de": "{name} · {profession}\n{activity}",
       "en": "{name} · {profession}\n{activity}"
+    },
+    {
+      "key": "TRIBE_PREVIEW_FREE",
+      "de": "Bauplatz frei",
+      "en": "Site available"
+    },
+    {
+      "key": "TRIBE_PREVIEW_BLOCKED",
+      "de": "Hier nicht baubar",
+      "en": "Cannot build here"
+    },
+    {
+      "key": "TRIBE_PREVIEW_CONFIRM",
+      "de": "Rechtsklick: bauen · Esc: abbrechen",
+      "en": "Right-click: build · Esc: cancel"
     }
   ]
 }

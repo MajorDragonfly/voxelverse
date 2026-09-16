@@ -4883,3 +4883,12 @@ msgstr "Bauen"
 
 msgid "TRIBE_RESIDENT_COMPACT"
 msgstr "{name} · {profession}\n{activity}"
+
+msgid "TRIBE_PREVIEW_FREE"
+msgstr "Bauplatz frei"
+
+msgid "TRIBE_PREVIEW_BLOCKED"
+msgstr "Hier nicht baubar"
+
+msgid "TRIBE_PREVIEW_CONFIRM"
+msgstr "Rechtsklick: bauen · Esc: abbrechen"

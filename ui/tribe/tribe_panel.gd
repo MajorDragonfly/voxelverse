@@ -260,7 +260,9 @@ func _layout() -> void:
 	var fixed_height: float = _hud.get_combined_minimum_size().y - _scroll.get_combined_minimum_size().y
 	var available_height: float = maxf(0.0, viewport_size.y - 36.0 - fixed_height)
 	var height_fraction: float = 0.25 if _tabs.get_current_tab_control() == _orders_page and font_scale <= 1.0 and viewport_size.y >= 900 else 0.36
-	_scroll.custom_minimum_size.y = minf(_hud_content.get_combined_minimum_size().y, minf(viewport_size.y * height_fraction, available_height)) if _hud_content.visible else 0.0
+	# Scroll offsets are integer pixels. A fractional viewport height can leave
+	# the last button clipped at enlarged canvas scales after ensure_control_visible.
+	_scroll.custom_minimum_size.y = ceilf(minf(_hud_content.get_combined_minimum_size().y, minf(viewport_size.y * height_fraction, available_height))) if _hud_content.visible else 0.0
 	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
 	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
 	_hud.size = Vector2(maxf(viewport_size.x - 36 - reserve, 280.0), 0)
@@ -455,6 +457,8 @@ func _input(event: InputEvent) -> void:
 	if not controller.placement.is_empty() and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		controller.placement = ""
 		controller.status = "Platzierung abgebrochen."
+		controller.building_preview.clear_preview()
+		refresh()
 		get_viewport().set_input_as_handled()
 		return
 	if _dragging:

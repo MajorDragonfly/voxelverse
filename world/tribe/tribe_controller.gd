@@ -61,6 +61,7 @@ var last_order_metrics: Dictionary = {}
 var _timer: float = 0.0
 var _transaction: bool = false
 var placement: String = ""
+var building_preview: Node3D
 var _route_retry: float = 0.0
 var _stalls: Dictionary = {}
 signal community_event(kind: StringName, details: Dictionary)
@@ -78,6 +79,9 @@ func _ready() -> void:
 	panel = TribePanel.new()
 	panel.controller = self
 	add_child(panel)
+	building_preview = preload("res://world/tribe/building_placement_preview.gd").new()
+	building_preview.controller = self
+	add_child(building_preview)
 	_saves.game_loaded.connect(_invalidate)
 	_state.phase_changed.connect(_invalidate)
 	_state.world_seed_changed.connect(_invalidate)
@@ -364,11 +368,15 @@ func screen_select(rect: Rect2, additive: bool) -> void:
 			selected.append(identity)
 	panel.refresh()
 
-func screen_command(position: Vector2) -> void:
+func ground_hit(position: Vector2) -> Dictionary:
+	if not is_instance_valid(camera) or not is_instance_valid(player): return {}
 	var origin: Vector3 = camera.project_ray_origin(position)
 	var ray := PhysicsRayQueryParameters3D.create(origin, origin + camera.project_ray_normal(position) * 200, 1)
 	ray.exclude = [player.get_rid()]
-	var hit: Dictionary = player.get_world_3d().direct_space_state.intersect_ray(ray)
+	return player.get_world_3d().direct_space_state.intersect_ray(ray)
+
+func screen_command(position: Vector2) -> void:
+	var hit: Dictionary = ground_hit(position)
 	if hit.is_empty():
 		status = "Hier ist kein geladener Boden."
 		_resolve_order("move", false)
@@ -479,6 +487,62 @@ func control_construction(action: String) -> Dictionary:
 	panel.refresh()
 	return result
 
+## Shared, non-committing preflight for the ghost and the actual click.
+## The writer always checks again; a previously green ghost is not authorization.
+func placement_check(kind: String, target: Vector3) -> Dictionary:
+	var result := {"ok": false, "position": target, "reason": ""}
+	if not is_active() or selected.is_empty():
+		result.reason = "Wähle zuerst mindestens einen Bewohner aus." if selected.is_empty() else "Die Gruppe kann gerade keine Befehle annehmen."
+		return result
+	if kind not in Economy.STATIONS.keys() + Housing.BUILDS or not target.is_finite():
+		result.reason = "Hier ist kein geladener Boden."
+		return result
+	for identity: String in selected:
+		if SiteTransport.bound(body(), identity):
+			result.reason = preload("res://core/localization/ui_text.gd").text("SITE_FREIGHT_BUSY")
+			return result
+	if not navigation.is_ready():
+		result.reason = "Die Dorfwege werden geprüft. Bitte einen Moment warten."
+		return result
+	var data: Dictionary = village()
+	result.reason = _construction_problem(kind, data)
+	if not result.reason.is_empty(): return result
+	if not data.project.is_empty():
+		result.reason = "Schließe zuerst die laufende Arbeit ab."
+		return result
+	var snapped: Vector3 = navigation.snap(target)
+	if not snapped.is_finite() or snapped.distance_to(target) > 1.8:
+		result.reason = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
+		return result
+	result.position = snapped
+	if neighbors.occupies(snapped) or (settlements != null and settlements.occupies(snapped)) or not (navigation.free_shelter(snapped, data, kind) if kind in Housing.BUILDS else navigation.free_workplace(snapped, data, kind)):
+		result.reason = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
+		return result
+	for identity: String in selected:
+		if not actors.has(identity) or navigation.route(actors[identity].global_position, snapped).is_empty():
+			result.reason = "Ein ausgewählter Bewohner erreicht diesen Bauplatz nicht."
+			return result
+	result.ok = true
+	return result
+
+func _construction_problem(order: String, data: Dictionary) -> String:
+	if Model.Construction.state(data.project) == "recovering":
+		return preload("res://core/localization/ui_text.gd").text("CONSTRUCTION_RECOVERING")
+	if order in Economy.STATIONS and Economy.next_station(data, order).is_empty():
+		return preload("res://core/localization/ui_text.gd").text("WORKPLACE_LIMIT")
+	if (order == "tool" and int(data.tools) == 1) or (order in Housing.KINDS and data.housing.homes.size() >= Housing.MAX_HOMES) or (order == "garden" and int(data.garden) == 1) or (order in Housing.ANIMAL_SITES and data.husbandry.pens.size() >= Husbandry.MAX_PENS):
+		return "Dieser Ausbau ist bereits abgeschlossen."
+	if order != "tool" and int(data.tools) == 0:
+		return "Stelle zuerst ein Steinwerkzeug her."
+	if not data.project.is_empty() and data.project.kind != order:
+		return "Schließe zuerst die laufende Arbeit ab."
+	if data.project.is_empty():
+		var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
+		for resource: String in costs[order]:
+			if int(data.stock[resource]) < int(costs[order][resource]):
+				return "Es fehlen eingelagerte Materialien: %d %s." % [costs[order][resource], Economy.TITLES[resource]]
+	return ""
+
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0, workplace_id: String = "") -> bool:
 	var started: int = Time.get_ticks_usec()
 	for id: String in selected:
@@ -503,36 +567,17 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 				return false
 	var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
 	if order in costs:
-		if Model.Construction.state(data.project) == "recovering":
-			status = preload("res://core/localization/ui_text.gd").text("CONSTRUCTION_RECOVERING")
-			return false
-		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty():
-			status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_LIMIT")
-			return false
-		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or (order in Housing.ANIMAL_SITES and data["husbandry"]["pens"].size() >= Husbandry.MAX_PENS):
-			status = "Dieser Ausbau ist bereits abgeschlossen."
-			return false
-		if order != "tool" and int(data["tools"]) == 0:
-			status = "Stelle zuerst ein Steinwerkzeug her."
-			return false
-		if not data["project"].is_empty() and data["project"]["kind"] != order:
-			status = "Schließe zuerst die laufende Arbeit ab."
+		var problem: String = _construction_problem(order, data)
+		if not problem.is_empty():
+			status = problem
 			return false
 		if data["project"].is_empty():
 			if order in Economy.STATIONS.keys() + Housing.BUILDS:
-				var snapped: Vector3 = navigation.snap(destination)
-				if snapped.distance_to(destination) > 1.8 or neighbors.occupies(snapped) or (settlements != null and settlements.occupies(snapped)) or not (navigation.free_shelter(snapped, data, order) if order in Housing.BUILDS else navigation.free_workplace(snapped, data, order)):
-					status = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
+				var checked: Dictionary = placement_check(order, destination)
+				if not checked.ok:
+					status = checked.reason
 					return false
-				destination = snapped
-				for identity: String in selected:
-					if navigation.route(actors[identity].global_position, destination).is_empty():
-						status = "Ein ausgewählter Bewohner erreicht diesen Bauplatz nicht."
-						return false
-			for kind: String in costs[order]:
-				if int(data["stock"][kind]) < int(costs[order][kind]):
-					status = "Es fehlen eingelagerte Materialien: %d %s." % [costs[order][kind], Economy.TITLES[kind]]
-					return false
+				destination = checked.position
 			for kind: String in costs[order]:
 				data["stock"][kind] -= costs[order][kind]
 			data["project"] = {"kind": order, "progress": 0.0}

@@ -4883,3 +4883,12 @@ msgstr "Build"
 
 msgid "TRIBE_RESIDENT_COMPACT"
 msgstr "{name} · {profession}\n{activity}"
+
+msgid "TRIBE_PREVIEW_FREE"
+msgstr "Site available"
+
+msgid "TRIBE_PREVIEW_BLOCKED"
+msgstr "Cannot build here"
+
+msgid "TRIBE_PREVIEW_CONFIRM"
+msgstr "Right-click: build · Esc: cancel"

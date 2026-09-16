@@ -238,7 +238,9 @@
         "workplace_runtime_test",
         "construction_control_test",
         "construction_runtime_test",
-        "tribal_order_latency_test"
+        "tribal_order_latency_test",
+        "tribal_building_preview_test",
+        "tribal_building_preview_world_test"
       ]
     },
     {
