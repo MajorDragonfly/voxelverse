@@ -1,0 +1,20 @@
+{
+  "source_map": [
+    {
+      "local": "93dd55d6bc3f71c38215a9ebe906c4e693a40595",
+      "published": "b0021437a04f1c043254ea0c9bdf4fbebd878e64",
+      "tree": "2c70b5b2a30aa97972172ed2200a3c68c4b8c5ff"
+    },
+    {
+      "local": "10736af",
+      "published": "1111567a06223ff8692fb5a71596d488e4f8c183",
+      "tree": "6585016fc078282f1402979283a7e6ccd38e929b"
+    }
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "initial": "13 of 14 Godot tests passed; frontend timed out because the expanded help requires scrolling. Import and source gates passed.",
+  "followup": "frontend_test and species_comparison_test passed on clean unchanged source after reachability/language fixture corrections.",
+  "tooling": "167 cases: 160 passed, 7 optional skips",
+  "ci": "https://github.com/MajorDragonfly/voxelverse/pull/141/checks",
+  "limits": "No complete local suite, native export, visual or target-PC/FPS acceptance. CI belongs to its exact published head."
+}

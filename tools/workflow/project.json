@@ -11,10 +11,10 @@
     "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/92"
   },
   "candidate": {
-    "branch": "agent/playtest-latest-20260915",
-    "sha": "d57b1ef385728728b132518a1ea05683888dcae0",
-    "pr": 125,
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/125"
+    "branch": "agent/integration-dashboard-20260916",
+    "sha": "1111567a06223ff8692fb5a71596d488e4f8c183",
+    "pr": 141,
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/141"
   },
   "areas": [
     {
@@ -73,7 +73,7 @@
       "weight": 20,
       "low": 10,
       "high": 20,
-      "achieved": "Schiffseditor; veröffentlichte Instanz-/Hangarverwaltung",
+      "achieved": "Schiffseditor und integrierter Flottentest mit Instanz-/Hangarverwaltung",
       "remaining": "Flug, Landung, vollständige Expedition, Forschung und Kolonien",
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/129"
     },
@@ -83,7 +83,7 @@
       "weight": 10,
       "low": 10,
       "high": 20,
-      "achieved": "Lokale Vorlagen, DE/EN, Audio und automatische Prüfungen",
+      "achieved": "Lokale Vorlagen/Favoriten, DE/EN, Audio, Kapitel-Einführung und Projekt-Dashboard",
       "remaining": "Online-Austausch, Gesamtbalancing, Langzeit-/Release-Abnahme",
       "evidence": "https://github.com/MajorDragonfly/voxelverse/blob/d57b1ef385728728b132518a1ea05683888dcae0/docs/COMMUNITY_DESIGNS_PLAN.md"
     }
@@ -218,103 +218,111 @@
       "id": "WEATHER-02B",
       "title": "WEATHER-02B: Planetenklimata speichern und die Heimat dauerhaft schützen",
       "area": "foundation",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 126,
       "head": "1ce00d33705b83643ec90ef26385a912541cd273",
       "branch": "agent/weather02-planet-climates-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/126",
-      "limits": "Gemeinsame Integration, Windows-Sichtprüfung und weitere Extremwetter-Spielregeln"
+      "limits": "Native Sichtprüfung; Feuer-/Sandstürme und Wetterfolgen bleiben Folgearbeit.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "ATMOSPHERE-SETTINGS-DETAIL",
       "title": "ATMOSPHERE-SETTINGS-DETAIL: 18 Grafikregler mit eigenen gespeicherten Werten",
       "area": "foundation",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 127,
       "head": "97adbc1e875ca4dbd3c8b4bcfd03d9383e897319",
       "branch": "agent/atmosphere-settings-detail-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/127",
-      "limits": "Gemeinsame Integration und visuelle Ziel-PC-Abnahme"
+      "limits": "Visuelle Ziel-PC-Abnahme und eigene Grafik-/FPS-Messung.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "M4-SOCIAL-PLAY",
       "title": "M4-SOCIAL-PLAY: gegenseitiges Spielverhalten der Wildtiere",
       "area": "creature",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 128,
       "head": "df3aab820a92fa0f62ae52ccf557a6c70e6f1851",
       "branch": "agent/m4-social-play-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/128",
-      "limits": "Gemeinsame Integration und Windows-Spieltest"
+      "limits": "Native Beobachtungs-/Hörabnahme und Langzeitbalance.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "ARCH-30-SHIP-INSTANCES",
       "title": "ARCH-30: Schiffsinstanzen, Hangarverwaltung und gespeicherter Flottentest",
       "area": "space",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 129,
       "head": "9b7164fea92832fcf152b448a0f4eef5e15f40e8",
       "branch": "agent/arch30-ship-instances-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/129",
-      "limits": "Verwaltungs-/Speichertest; Flug, Landung und normale Weltraumepoche folgen"
+      "limits": "Verwaltungs-/Speichertest; Flug, Landung und normale Weltraumepoche folgen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "ARCH-26-CONSTRUCTION-CONTROL",
       "title": "ARCH-26: Baustellen pausieren, abbrechen und Material sicher zurückführen",
       "area": "tribe",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 130,
       "head": "71fb50582f7783484fb34966b788a863d6d4d5c0",
       "branch": "agent/arch26-construction-control-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/130",
-      "limits": "Integration; eine Baustelle pro Ort, zwei Orte und sechs Bewohner"
+      "limits": "Eine Baustelle pro Ort, zwei Orte und sechs Bewohner; Ziel-PC-Abnahme offen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "ARCH-14-ATLAS-SEARCH",
       "title": "ARCH-14: Bekannte Orte im Atlas suchen und gefiltert durchblättern",
       "area": "foundation",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 131,
       "head": "f51bdd023b1d239d392fa6d9bc38340d49ab406b",
       "branch": "agent/arch14-atlas-search-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/131",
-      "limits": "Gemeinsame Integration und native Bedien-/Sichtprüfung"
+      "limits": "Native Bedien-/Sichtprüfung; einzelne synchrone Archivzugriffe bleiben.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "BP-COMMUNITY-LIBRARY-FAVORITES",
       "title": "BP-COMMUNITY: Favoriten und erweiterte Suche für Kreaturenvorlagen",
       "area": "release",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 132,
       "head": "13ad4f33e9e93ca6a698aede54996c714c860e3e",
       "branch": "agent/community-library-favorites-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/132",
-      "limits": "Gemeinsame Integration; Online-Austausch bleibt offen"
+      "limits": "Native Bedienabnahme; Online-Austausch bleibt offen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "M4-RECOVERY",
       "title": "M4-RECOVERY: Sichere Rückkehr zur Heimat nach dem Tod",
       "area": "creature",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 133,
       "head": "1aa1609602cededc80856c3bdc7f7ecf4b8b11ee",
       "branch": "agent/m4-recovery-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/133",
-      "limits": "Gemeinsame Integration und native Bild-/Windows-Abnahme"
+      "limits": "Native Bild-/Windows-Abnahme und zusammenhängender Spieltest.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "UI-MENU-REBIND",
       "title": "UI: Menütasten für Weltkarte, Entdeckungsbuch und Entwicklung belegen",
       "area": "release",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 134,
       "head": "002a63fe88c251b9acb7f86e9fb01cab672ad1bd",
       "branch": "agent/ui-menu-rebind-20260916",
@@ -322,46 +330,92 @@
         "ARCH-14-ATLAS-SEARCH"
       ],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/134",
-      "limits": "Integration nach Atlas-Suche; Windows-Tastaturlayout/Optik offen"
+      "limits": "Windows-Tastaturlayout und optische Abnahme.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "UI-SAVE-BROWSER-SEARCH",
       "title": "UI: Spielstände suchen, filtern und seitenweise verwalten",
       "area": "release",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 135,
       "head": "7f2d4ebbf8da1af84b0ae48f93de34e817290277",
       "branch": "agent/save-browser-search-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/135",
-      "limits": "Integration; Metadatenlesen aller Slotdateien bleibt Folgearbeit"
+      "limits": "Mit #138 schrittweise Prüfung; Einzeldateien und Fortsetzen bleiben synchron.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     },
     {
       "id": "M10-GUIDANCE",
       "title": "M10-GUIDANCE: Einführung von der Kreatur bis zum ersten Stamm",
       "area": "release",
-      "status": "delivered",
+      "status": "integrated",
       "pr": 136,
       "head": "ea14f5a704b4bf5b862d7fff7a1d5c506d15d0b4",
       "branch": "agent/m10-guidance-20260916",
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/136",
-      "limits": "Gemeinsame Integration und Einstiegsspieltest auf Ziel-PC"
+      "limits": "Zusammenhängender Einstiegsspieltest auf dem Ziel-PC.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "ARCH-13-SLOT-BROWSE-BUDGET",
+      "title": "ARCH-13: Spielstände und Sicherungen schrittweise prüfen",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 138,
+      "head": "75b2656078ec80f0babbf526e41ab59a889895ca",
+      "branch": "agent/slot-browse-budget-20260916",
+      "depends_on": [
+        "UI-SAVE-BROWSER-SEARCH"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/138",
+      "limits": "Einzelne Datei-/Blobprüfungen bleiben synchron; Ziel-PC-Abnahme offen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "PROJECT-DASHBOARD",
+      "title": "Projekt-Dashboard und zentrale Koordination für parallele Chats",
+      "area": "release",
+      "status": "integrated",
+      "pr": 139,
+      "head": "d7b1c04c63e9e68142cf04df89c5db8e0e3d9b16",
+      "branch": "agent/project-dashboard-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/139",
+      "limits": "Planungsschätzung bleibt manuell begründet; Ziel-PC-Abnahme getrennt.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "M4-WILDLIFE-HUNTING",
+      "title": "M4: Wildtierjagd und endliches Aasfressen",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 140,
+      "head": "ad3648312ad8b33bacb872ac453bcdca906aaea1",
+      "branch": "agent/m4-wildlife-hunting-20260916",
+      "depends_on": [
+        "M4-SOCIAL-PLAY"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/140",
+      "limits": "Langzeitbalance, viele gleichzeitige Mahlzeiten und native Sichtprüfung offen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
     }
   ],
   "priorities": [
-    "Gemeinsamen Spieltest-Kandidaten abschließen: native CI/Exports auf exaktem Quellstand prüfen und den Windows-Test mit Lars protokollieren.",
-    "Bereits veröffentlichte Folgepakete in einer zugeordneten Runde integrieren; ARCH-14-ATLAS-SEARCH (#131) vor UI-MENU-REBIND (#134), gemeinsame Save-/UI-/Sprachanschlüsse einmal zusammenführen.",
-    "Aus dem Spieltest die nächste Engstelle wählen; vorhandene Besitzer und offene Pakete im Koordinationsticket erfassen, bevor weitere parallele Arbeit vergeben wird."
+    "Gemeinsame Vollsuite und native Exporte von PR #141 abschließen; danach den konkreten Windows-Build mit Lars auf Bedienung, Grafik und Spielablauf prüfen.",
+    "Neue Fachpakete auf dem festen gemeinsamen Quellstand beginnen; laufende Besitzer und unveröffentlichte Nachlieferungen in #137 erhalten.",
+    "Nach dem Ziel-PC-Spieltest die nächste fachliche Engstelle auswählen; Fortschritt nur anhand belegter Funktionen und Abnahme neu bewerten."
   ],
   "blockers": [
     "Eine zusammenhängende Ziel-PC-/Langzeitabnahme ist noch nicht als abgeschlossen dokumentiert.",
     "Mittelalter, Neuzeit und Weltraum sind noch keine vollständig spielbaren Epochen.",
-    "Offene PRs können bereits im Kandidaten enthalten sein. Nur feste Lieferköpfe vergleichen; nachträgliche Commits sind neue Arbeit.",
-    "Die Rundenliste beginnt mit diesem Dashboard-Auftrag. Frühere laufende Chats müssen durch den Integrationsbesitzer übernommen werden; fehlende Einträge bedeuten nicht frei."
+    "Die letzte Basis #125 hatte rote native Windows-/Siedlungsgates und einen abgebrochenen Quellshard. Maßgeblich ist die erneute vollständige CI von #141, nicht die alten Fachprüfungen.",
+    "Spätere Branchänderungen und unveröffentlichte Folgearbeiten sind nicht automatisch Bestandteil dieser festen Eingangsliste."
   ],
-  "campaign_summary": "Kugelkampagne mit Kreatur, Heimat, Stamm, vier Nutztierspezies, Milch/Eiern, zwei Siedlungsorten und Lagertransporten. Der Kandidat enthält außerdem prozedurale Beeren/Nest, Körperteilrevisionen, Tieremotionen, Wetter/Atmosphäre und einen modularen Schiffseditor.",
-  "coordination_note": "Vorhandene Fachbesitzer behalten ihre Aufträge. Die Übernahme älterer laufender Chats in die zentrale Liste ist noch offen; fehlende Zeilen sind keine Freigabe.",
+  "campaign_summary": "Die bisherige Kugelkampagne aus #125 und 14 neue Lieferungen sind gemeinsam integriert: gespeicherte Planetenklimata, Esc-Einstellungen mit 18 Grafikreglern, Tier-Sozialspiel/Jagd, Todesrückkehr, Kapitel-Einführung, Baustellensteuerung, Flottentest, Atlas-/Spielstandsuche, Vorlagenfavoriten und frei belegbare Menütasten. Dashboard, zentrale Rundenliste und kurze Paketübergaben sind Teil desselben Kandidaten.",
+  "coordination_note": "Die bekannten Fachlieferungen sind dieser Runde zugeordnet. ARCH-24, Musik, ARCH-27 und noch unveröffentlichte Folgeschritte bleiben bei ihren bisherigen Besitzern; eine fehlende oder ungenaue Paket-ID ist keine Freigabe. Maßgeblich bleibt die aktuelle Beschreibung von Issue #137.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
@@ -373,6 +427,10 @@
     {
       "pr": 110,
       "head": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8"
+    },
+    {
+      "pr": 125,
+      "head": "d57b1ef385728728b132518a1ea05683888dcae0"
     }
   ]
 }

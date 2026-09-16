@@ -1,0 +1,114 @@
+[
+  {
+    "pr": 126,
+    "title": "WEATHER-02B: Planetenklimata speichern und die Heimat dauerhaft schützen",
+    "branch": "agent/weather02-planet-climates-20260916",
+    "sha": "1ce00d33705b83643ec90ef26385a912541cd273",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 127,
+    "title": "ATMOSPHERE-SETTINGS-DETAIL: 18 Grafikregler mit eigenen gespeicherten Werten",
+    "branch": "agent/atmosphere-settings-detail-20260916",
+    "sha": "97adbc1e875ca4dbd3c8b4bcfd03d9383e897319",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 128,
+    "title": "M4-SOCIAL-PLAY: gegenseitiges Spielverhalten der Wildtiere",
+    "branch": "agent/m4-social-play-20260916",
+    "sha": "df3aab820a92fa0f62ae52ccf557a6c70e6f1851",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 129,
+    "title": "ARCH-30: Schiffsinstanzen, Hangarverwaltung und gespeicherter Flottentest",
+    "branch": "agent/arch30-ship-instances-20260916",
+    "sha": "9b7164fea92832fcf152b448a0f4eef5e15f40e8",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 130,
+    "title": "ARCH-26: Baustellen pausieren, abbrechen und Material sicher zurückführen",
+    "branch": "agent/arch26-construction-control-20260916",
+    "sha": "71fb50582f7783484fb34966b788a863d6d4d5c0",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 131,
+    "title": "ARCH-14: Bekannte Orte im Atlas suchen und gefiltert durchblättern",
+    "branch": "agent/arch14-atlas-search-20260916",
+    "sha": "f51bdd023b1d239d392fa6d9bc38340d49ab406b",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 132,
+    "title": "BP-COMMUNITY: Favoriten und erweiterte Suche für Kreaturenvorlagen",
+    "branch": "agent/community-library-favorites-20260916",
+    "sha": "13ad4f33e9e93ca6a698aede54996c714c860e3e",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 133,
+    "title": "M4-RECOVERY: Sichere Rückkehr zur Heimat nach dem Tod",
+    "branch": "agent/m4-recovery-20260916",
+    "sha": "1aa1609602cededc80856c3bdc7f7ecf4b8b11ee",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 134,
+    "title": "UI: Menütasten für Weltkarte, Entdeckungsbuch und Entwicklung belegen",
+    "branch": "agent/ui-menu-rebind-20260916",
+    "sha": "002a63fe88c251b9acb7f86e9fb01cab672ad1bd",
+    "base": "agent/arch14-atlas-search-20260916",
+    "base_sha": "f51bdd023b1d239d392fa6d9bc38340d49ab406b"
+  },
+  {
+    "pr": 135,
+    "title": "UI: Spielstände suchen, filtern und seitenweise verwalten",
+    "branch": "agent/save-browser-search-20260916",
+    "sha": "7f2d4ebbf8da1af84b0ae48f93de34e817290277",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 136,
+    "title": "M10-GUIDANCE: Einführung von der Kreatur bis zum ersten Stamm",
+    "branch": "agent/m10-guidance-20260916",
+    "sha": "ea14f5a704b4bf5b862d7fff7a1d5c506d15d0b4",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 138,
+    "title": "ARCH-13: Spielstände und Sicherungen schrittweise prüfen",
+    "branch": "agent/slot-browse-budget-20260916",
+    "sha": "75b2656078ec80f0babbf526e41ab59a889895ca",
+    "base": "agent/save-browser-search-20260916",
+    "base_sha": "7f2d4ebbf8da1af84b0ae48f93de34e817290277"
+  },
+  {
+    "pr": 139,
+    "title": "Projekt-Dashboard und zentrale Koordination für parallele Chats",
+    "branch": "agent/project-dashboard-20260916",
+    "sha": "d7b1c04c63e9e68142cf04df89c5db8e0e3d9b16",
+    "base": "agent/playtest-latest-20260915",
+    "base_sha": "d57b1ef385728728b132518a1ea05683888dcae0"
+  },
+  {
+    "pr": 140,
+    "title": "M4: Wildtierjagd und endliches Aasfressen",
+    "branch": "agent/m4-wildlife-hunting-20260916",
+    "sha": "ad3648312ad8b33bacb872ac453bcdca906aaea1",
+    "base": "agent/m4-social-play-20260916",
+    "base_sha": "df3aab820a92fa0f62ae52ccf557a6c70e6f1851"
+  }
+]

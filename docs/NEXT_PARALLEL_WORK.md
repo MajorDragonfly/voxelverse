@@ -5,13 +5,13 @@ Bewertet am 2026-09-16. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Prioritäten
 
-1. Gemeinsamen Spieltest-Kandidaten abschließen: native CI/Exports auf exaktem Quellstand prüfen und den Windows-Test mit Lars protokollieren.
-2. Bereits veröffentlichte Folgepakete in einer zugeordneten Runde integrieren; ARCH-14-ATLAS-SEARCH (#131) vor UI-MENU-REBIND (#134), gemeinsame Save-/UI-/Sprachanschlüsse einmal zusammenführen.
-3. Aus dem Spieltest die nächste Engstelle wählen; vorhandene Besitzer und offene Pakete im Koordinationsticket erfassen, bevor weitere parallele Arbeit vergeben wird.
+1. Gemeinsame Vollsuite und native Exporte von PR #141 abschließen; danach den konkreten Windows-Build mit Lars auf Bedienung, Grafik und Spielablauf prüfen.
+2. Neue Fachpakete auf dem festen gemeinsamen Quellstand beginnen; laufende Besitzer und unveröffentlichte Nachlieferungen in #137 erhalten.
+3. Nach dem Ziel-PC-Spieltest die nächste fachliche Engstelle auswählen; Fortschritt nur anhand belegter Funktionen und Abnahme neu bewerten.
 
 ## Abgegrenzte Zuweisung
 
-Die verbindliche Runde wird in [Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137) geführt. Vorhandene Fachbesitzer behalten ihre Aufträge. Die Übernahme älterer laufender Chats in die zentrale Liste ist noch offen; fehlende Zeilen sind keine Freigabe.
+Die verbindliche Runde wird in [Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137) geführt. Die bekannten Fachlieferungen sind dieser Runde zugeordnet. ARCH-24, Musik, ARCH-27 und noch unveröffentlichte Folgeschritte bleiben bei ihren bisherigen Besitzern; eine fehlende oder ungenaue Paket-ID ist keine Freigabe. Maßgeblich bleibt die aktuelle Beschreibung von Issue #137.
 
 `python3 tools/work_packet.py list` zeigt den aktuellen ausführbaren Katalog; `show PAKET-ID` oder `start PAKET-ID --owner CHAT` liefert Dateien, Grenzen und Prüfverträge. Der Integrationsbesitzer ergänzt neue kleine Briefe und prüft `conflicts` vor paralleler Zuweisung.
 

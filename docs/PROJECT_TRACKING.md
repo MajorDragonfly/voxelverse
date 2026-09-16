@@ -57,8 +57,8 @@ verantwortet der Integrationsbesitzer. Ziel-PC-Freigaben benötigen reale Belege
 Die verbindliche Rundenliste ist [GitHub-Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137).
 Genau ein Integrationsbesitzer pflegt dort die aktuellen Zuweisungen und deren
 gemeinsame Schreibbereiche. Frühere Nutzerzuweisungen gelten weiterhin. Die
-erste Tabelle erfasst nur den Dashboard-Auftrag; der nächste Integrationschat
-übernimmt die bereits laufenden Chats einmal. Fehlende Einträge bedeuten nicht frei.
+Rundenliste erfasst die bekannten Fachlieferungen und weiterlaufenden Zuständigkeiten
+der Integration vom 16. September. Fehlende oder ungenaue Einträge bedeuten nicht frei.
 
 ```sh
 python3 tools/project_dashboard.py round
