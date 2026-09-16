@@ -240,7 +240,9 @@
         "construction_runtime_test",
         "tribal_order_latency_test",
         "tribal_building_preview_test",
-        "tribal_building_preview_world_test"
+        "tribal_building_preview_world_test",
+        "tribal_stockpile_test",
+        "tribal_stockpile_world_test"
       ]
     },
     {

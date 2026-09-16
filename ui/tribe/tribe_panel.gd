@@ -91,6 +91,7 @@ func _build() -> void:
 	column.add_child(header)
 	_stock = Style.label("", 17, Style.SOCIAL)
 	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_stock.mouse_filter = Control.MOUSE_FILTER_STOP
 	header.add_child(_stock)
 	_collapse = _local_button("TRIBE_COLLAPSE")
 	header.add_child(_collapse)
@@ -350,6 +351,7 @@ func refresh() -> void:
 	_supply.visible = true
 	var stock: Dictionary = data["stock"]
 	_stock.text = Text.format_text("TRIBE_STOCK", stock.merged({"eggs": stock.get("eggs", 0), "residents": data["members"].size(), "capacity": Housing.MAX_RESIDENTS, "beds": Housing.beds(data)}, true))
+	_stock.tooltip_text = preload("res://world/tribe/village_inventory_view.gd").tooltip(data)
 	_supply.text = Text.text("TRIBE_STORE_HINT")
 	if int(data["garden"]) == 1:
 		_supply.text = Text.format_text("TRIBE_GARDEN_STATUS", {"ready": data["deposits"]["food"]["remaining"], "growth": Text.text("TRIBE_GARDEN_FULL") if int(data["deposits"]["food"]["remaining"]) >= Model.GARDEN_CAPACITY else Text.format_text("TRIBE_GARDEN_NEXT", {"seconds": ceili(Model.GROW_SECONDS - float(data["growth"]))})})

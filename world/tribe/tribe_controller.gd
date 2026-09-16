@@ -120,6 +120,7 @@ func _process(delta: float) -> void:
 	_timer -= delta
 	if _timer <= 0:
 		_timer = 0.2
+		if _active and is_instance_valid(_visuals): _visuals.update_stock(village())
 		panel.refresh()
 
 func _invalidate(_value: Variant) -> void:

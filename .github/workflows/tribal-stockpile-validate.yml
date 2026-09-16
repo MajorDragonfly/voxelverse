@@ -1,0 +1,76 @@
+name: Tribal stockpile visuals
+
+on:
+  pull_request:
+    paths:
+      - 'world/tribe/**'
+      - 'ui/tribe/**'
+      - 'localization/**'
+      - 'tests/tribal_stockpile*'
+      - 'core/diagnostics/*stockpile*'
+      - 'core/diagnostics/construction_runtime_probe.gd'
+      - 'core/diagnostics/body_travel_probe.gd'
+      - 'tools/review_tribal_stockpiles.py'
+      - '.github/workflows/tribal-stockpile-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tribal-stockpile-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  stockpiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Validate inventory flow and storage stages
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests tribal_stockpile_test tribal_stockpile_world_test tribal_order_latency_test tribe_localization_test --skip-main
+          --output "${{ runner.temp }}/tribal-stockpile-validation"
+      - name: Install software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Render storage stages and the public spherical village
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1080x24'
+          python3 tools/review_tribal_stockpiles.py --godot "${{ steps.engine.outputs.godot }}"
+          --output "${{ runner.temp }}/tribal-stockpile-render"
+      - name: Upload validation logs and native screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-stockpile-review
+          path: |
+            ${{ runner.temp }}/tribal-stockpile-validation
+            ${{ runner.temp }}/tribal-stockpile-render
+          retention-days: 14
+
+  resource-flows:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Check construction refunds and planetary A-B-A storage
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests construction_runtime_test body_travel_test --skip-main
+          --output "${{ runner.temp }}/tribal-stockpile-flows"
+      - name: Upload conservation checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-stockpile-flows
+          path: ${{ runner.temp }}/tribal-stockpile-flows
+          retention-days: 14

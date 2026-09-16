@@ -8156,6 +8156,51 @@
       "key": "TRIBE_PREVIEW_CONFIRM",
       "de": "Rechtsklick: bauen · Esc: abbrechen",
       "en": "Right-click: build · Esc: cancel"
+    },
+    {
+      "key": "TRIBE_STORAGE_TITLE",
+      "de": "Lager am Dorfplatz",
+      "en": "Village storage"
+    },
+    {
+      "key": "TRIBE_STORAGE_AMOUNT",
+      "de": "{resource}: {stored}/{capacity} frei",
+      "en": "{resource}: {stored}/{capacity} available"
+    },
+    {
+      "key": "TRIBE_STORAGE_COMPACT",
+      "de": "{resource}: {stored}/{capacity} frei · Bau {reserved} · getragen {carried}",
+      "en": "{resource}: {stored}/{capacity} available · building {reserved} · carried {carried}"
+    },
+    {
+      "key": "TRIBE_STORAGE_RESERVED",
+      "de": "{amount} im Lager für Bau reserviert (goldfarben)",
+      "en": "{amount} reserved for construction in storage (gold)"
+    },
+    {
+      "key": "TRIBE_STORAGE_CARRIED",
+      "de": "{amount} von Bewohnern getragen",
+      "en": "{amount} carried by residents"
+    },
+    {
+      "key": "TRIBE_STORAGE_DELIVERED",
+      "de": "{amount} bereits am Bau / in Verarbeitung",
+      "en": "{amount} already at the site / in use"
+    },
+    {
+      "key": "TRIBE_STORAGE_PENDING",
+      "de": "{amount} an Abholstellen bereit",
+      "en": "{amount} ready at pickup points"
+    },
+    {
+      "key": "TRIBE_STORAGE_FREIGHT_CAPACITY",
+      "de": "{amount} Lagerplätze für Siedlungstransporte freigehalten",
+      "en": "{amount} storage spaces held for settlement freight"
+    },
+    {
+      "key": "TRIBE_STORAGE_HINT",
+      "de": "Haufen zeigen freie Vorräte und goldfarbene Baureservierungen.\nDie Größe wächst in Mengenstufen; Zahlen sind exakt.\nVorkommen und Ware unterwegs gehören nicht zum freien Lager.",
+      "en": "Piles show available stock and gold-marked building reservations.\nSize grows in quantity steps; numbers are exact.\nDeposits and goods in transit are not available storage."
     }
   ]
 }

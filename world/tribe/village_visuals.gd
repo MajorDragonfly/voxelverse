@@ -6,8 +6,21 @@ const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 var _drawn_state: Dictionary = {}
 var rebuild_count: int = 0
+var stockpiles: Node3D
+
+func update_stock(data: Dictionary) -> void:
+	if Space.adapter(self) != null:
+		global_position = Space.resolve(self, data.anchor)
+		global_basis = Space.frame(self, global_position)
+		Space.track(self, str(data.id) + ":props")
+	if not is_instance_valid(stockpiles):
+		stockpiles = preload("res://world/tribe/village_stockpiles.gd").new()
+		add_child(stockpiles)
+	stockpiles.sync(data)
 
 func rebuild(data: Dictionary) -> void:
+	# Stock has an independent persistent pool, including stock-only changes.
+	update_stock(data)
 	# Orders, resident movement and hunger do not change these props. Keep the
 	# existing meshes/materials when the actual visual inputs are unchanged.
 	var view := {"id": data.id, "anchor": data.anchor, "deposits": data.deposits,
@@ -19,12 +32,10 @@ func rebuild(data: Dictionary) -> void:
 	_drawn_state = view.duplicate(true)
 	rebuild_count += 1
 	if Space.adapter(self) != null:
-		global_position = Space.resolve(self, data.anchor)
-		global_basis = Space.frame(self, global_position)
-		Space.track(self, str(data.id) + ":props")
 		data = Space.visual_data(self, data)
 
 	for child: Node in get_children():
+		if child == stockpiles: continue
 		remove_child(child)
 		child.queue_free()
 	var center: Vector3 = Home.vector(data["anchor"])

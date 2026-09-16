@@ -4892,3 +4892,30 @@ msgstr "Hier nicht baubar"
 
 msgid "TRIBE_PREVIEW_CONFIRM"
 msgstr "Rechtsklick: bauen · Esc: abbrechen"
+
+msgid "TRIBE_STORAGE_TITLE"
+msgstr "Lager am Dorfplatz"
+
+msgid "TRIBE_STORAGE_AMOUNT"
+msgstr "{resource}: {stored}/{capacity} frei"
+
+msgid "TRIBE_STORAGE_COMPACT"
+msgstr "{resource}: {stored}/{capacity} frei · Bau {reserved} · getragen {carried}"
+
+msgid "TRIBE_STORAGE_RESERVED"
+msgstr "{amount} im Lager für Bau reserviert (goldfarben)"
+
+msgid "TRIBE_STORAGE_CARRIED"
+msgstr "{amount} von Bewohnern getragen"
+
+msgid "TRIBE_STORAGE_DELIVERED"
+msgstr "{amount} bereits am Bau / in Verarbeitung"
+
+msgid "TRIBE_STORAGE_PENDING"
+msgstr "{amount} an Abholstellen bereit"
+
+msgid "TRIBE_STORAGE_FREIGHT_CAPACITY"
+msgstr "{amount} Lagerplätze für Siedlungstransporte freigehalten"
+
+msgid "TRIBE_STORAGE_HINT"
+msgstr "Haufen zeigen freie Vorräte und goldfarbene Baureservierungen.\nDie Größe wächst in Mengenstufen; Zahlen sind exakt.\nVorkommen und Ware unterwegs gehören nicht zum freien Lager."

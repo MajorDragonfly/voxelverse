@@ -4892,3 +4892,30 @@ msgstr "Cannot build here"
 
 msgid "TRIBE_PREVIEW_CONFIRM"
 msgstr "Right-click: build · Esc: cancel"
+
+msgid "TRIBE_STORAGE_TITLE"
+msgstr "Village storage"
+
+msgid "TRIBE_STORAGE_AMOUNT"
+msgstr "{resource}: {stored}/{capacity} available"
+
+msgid "TRIBE_STORAGE_COMPACT"
+msgstr "{resource}: {stored}/{capacity} available · building {reserved} · carried {carried}"
+
+msgid "TRIBE_STORAGE_RESERVED"
+msgstr "{amount} reserved for construction in storage (gold)"
+
+msgid "TRIBE_STORAGE_CARRIED"
+msgstr "{amount} carried by residents"
+
+msgid "TRIBE_STORAGE_DELIVERED"
+msgstr "{amount} already at the site / in use"
+
+msgid "TRIBE_STORAGE_PENDING"
+msgstr "{amount} ready at pickup points"
+
+msgid "TRIBE_STORAGE_FREIGHT_CAPACITY"
+msgstr "{amount} storage spaces held for settlement freight"
+
+msgid "TRIBE_STORAGE_HINT"
+msgstr "Piles show available stock and gold-marked building reservations.\nSize grows in quantity steps; numbers are exact.\nDeposits and goods in transit are not available storage."
