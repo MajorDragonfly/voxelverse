@@ -381,8 +381,22 @@ def fetch_live(data, get=api_get):
         raise ValueError("More than 2000 open PRs; refusing an incomplete inventory")
     main = get(repo, "branches/" + quote(data["main"]["branch"], safe=""))
     candidate = get(repo, "pulls/" + str(data["candidate"]["pr"]))
+    expected, actual = data["candidate"]["sha"], candidate["head"]["sha"]
+    metadata_only = False
+    if actual != expected:
+        # A status commit cannot embed its own hash. Verify the exact forward
+        # comparison before accepting a later status/evidence-only publication.
+        comparison = get(repo, "compare/" + expected + "..." + actual)
+        files = comparison.get("files", [])
+        metadata_only = (comparison.get("status") == "ahead"
+                         and comparison.get("merge_base_commit", {}).get("sha") == expected
+                         and 0 < len(files) < 300  # GitHub truncates at 300 files.
+                         and all(tracking_path(f.get("filename", ""))
+                                 and tracking_path(f.get("previous_filename", f.get("filename", "")))
+                                 for f in files))
     return {"observed_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "main_sha": main["commit"]["sha"], "candidate_sha": candidate["head"]["sha"],
+            "candidate_metadata_only": metadata_only,
             "candidate_state": candidate["state"], "candidate_merged": candidate.get("merged", False),
             "pulls": [{"number": p["number"], "title": p["title"], "draft": p["draft"],
                        "head": p["head"]["sha"], "branch": p["head"]["ref"],
@@ -390,14 +404,28 @@ def fetch_live(data, get=api_get):
                        "base": p["base"]["ref"]} for p in pulls]}
 
 
+def tracking_path(path):
+    if path in {"README.md", "tools/workflow/project.json"}:
+        return True
+    return (path.startswith("docs/") and ".." not in path.split("/")
+            and Path(path).suffix.lower() in {".md", ".json", ".svg", ".gz", ".zip"})
+
+
 def live_markdown(data, live):
     require(isinstance(live.get("pulls"), list), "Missing live pull request list")
     included = {i["pr"]: i["head"] for i in data["included"] + data.get("integration_inputs", [])}
-    candidate_matches = live["candidate_sha"] == data["candidate"]["sha"]
+    included.update({i["pr"]: i["head"] for i in data.get("deliveries", [])
+                     if i["status"] in ("integrated", "accepted")})
+    candidate_matches = (live["candidate_sha"] == data["candidate"]["sha"]
+                         or live.get("candidate_metadata_only", False))
     lines = ["# Voxelverse – Live-Lieferübersicht", "", "Abgerufen: " + md(live["observed_at"]), "",
              f"Offene PRs: **{len(live['pulls'])}**. Dies ist kein Fertigstellungsprozentsatz und keine Reservierung.", "",
              f"main: `{live['main_sha']}` · Kandidat #{data['candidate']['pr']}: `{live['candidate_sha']}` "
              f"({md(live['candidate_state'])}, merged={live['candidate_merged']}).", ""]
+    if live.get("candidate_metadata_only", False):
+        lines += ["Der aktuelle Kandidatenkopf ergänzt ausschließlich Status-/Nachweisdateien "
+                  "gegenüber dem festen Quellstand. Vorwärtsabstammung und vollständiger "
+                  "Dateivergleich wurden gelesen; Spielcode und Abnahmestatus bleiben unverändert.", ""]
     if live["main_sha"] != data["main"]["sha"] or not candidate_matches:
         lines += ["**Basis hat sich geändert.** Der Integrationsbesitzer muss die feste Statusbewertung "
                   "abgleichen. Prozentwerte und Abnahmen werden nicht automatisch hochgesetzt.", ""]

@@ -194,6 +194,48 @@ class ProjectDashboardTest(unittest.TestCase):
         report = dashboard.live_markdown(self.data, live)
         self.assertIn("| Entwurf | parent |", report)
 
+    def test_detailed_integrations_are_included_but_deliveries_are_not(self):
+        item = self.data["deliveries"][0]
+        live = dashboard.fetch_live(self.data, self.fake_api)
+        live["pulls"] = [{"number": item["pr"], "head": item["head"], "title": "Detailed",
+                          "draft": True, "branch": "detail", "base": "main"}]
+        self.assertNotIn("Im festen Kandidaten enthalten", dashboard.live_markdown(self.data, live))
+        item.update(status="integrated", integrated_sha=self.data["candidate"]["sha"])
+        self.assertIn("Im festen Kandidaten enthalten", dashboard.live_markdown(self.data, live))
+        live["pulls"][0]["head"] = "f" * 40
+        self.assertIn("Nachlieferung / Kandidatenabgleich nötig", dashboard.live_markdown(self.data, live))
+
+    def test_metadata_followup_requires_verified_ancestry_and_complete_safe_diff(self):
+        expected = self.data["candidate"]["sha"]
+        comparison = {"status": "ahead", "merge_base_commit": {"sha": expected},
+                      "files": [{"filename": "tools/workflow/project.json"},
+                                {"filename": "docs/PROJECT_DASHBOARD.md"}]}
+        def api(repo, path):
+            if path.startswith("compare/"):
+                self.assertEqual(path, "compare/" + expected + "..." + "f" * 40)
+                return comparison
+            result = self.fake_api(repo, path)
+            if path.startswith("pulls/"):
+                result["head"]["sha"] = "f" * 40
+            return result
+        before = copy.deepcopy(self.data)
+        live = dashboard.fetch_live(self.data, api)
+        self.assertTrue(live["candidate_metadata_only"])
+        self.assertNotIn("Basis hat sich geändert", dashboard.live_markdown(self.data, live))
+        self.assertEqual(self.data, before)
+        for files in ([{"filename": "main/spherical_campaign.gd"}],
+                      [{"filename": "docs/moved.md", "previous_filename": "main/game.gd"}],
+                      [{"filename": "docs/readme.md"}] * 300, [],
+                      [{"filename": "docs/../main/game.gd"}]):
+            comparison["files"] = files
+            self.assertFalse(dashboard.fetch_live(self.data, api)["candidate_metadata_only"])
+        comparison["files"] = [{"filename": "README.md"}]
+        comparison["status"] = "diverged"
+        self.assertFalse(dashboard.fetch_live(self.data, api)["candidate_metadata_only"])
+        comparison["status"] = "ahead"
+        comparison["merge_base_commit"]["sha"] = "e" * 40
+        self.assertFalse(dashboard.fetch_live(self.data, api)["candidate_metadata_only"])
+
     def test_real_project_data_is_valid(self):
         dashboard.read_project()
 
