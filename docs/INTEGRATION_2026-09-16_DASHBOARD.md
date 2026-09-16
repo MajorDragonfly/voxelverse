@@ -2,7 +2,7 @@
 
 [PR #141](https://github.com/MajorDragonfly/voxelverse/pull/141) führt die vollständige
 Spieltestbasis #125 und **14 neue feste Fachlieferungen** zusammen. Der gemeinsame
-Quellstand ist `1111567a06223ff8692fb5a71596d488e4f8c183`; nachfolgende Status- und
+Spielcode-Quellstand ist `1111567a06223ff8692fb5a71596d488e4f8c183`; nachfolgende Status-, Werkzeug- und
 Nachweisdateien ändern den Spielcode nicht. Branch: `agent/integration-dashboard-20260916`.
 
 ## Umfang
@@ -86,3 +86,11 @@ erhalten; die neue Übersicht erklärt keine unvollständige Belegung zu freien 
 Für den Spieltest: Esc → Einstellungen; Hauptmenü → Stammeszeitalter testen
 oder Flottentest; im regulären Kreaturenspiel die Einführung, Tiere, Atlas und
 Speicher-/Ladevorgänge gemeinsam ausprobieren. Ein Merge ersetzt diesen Test nicht.
+
+Nachtrag zur Live-Übersicht: Detaillierte `integrated`-Lieferungen zählen jetzt
+eben der kompakten Eingangsliste. Ein zusätzlicher Statuscommit kann seine eigene
+SHA nicht enthalten; deshalb prüft der Live-Abgleich den exakten vorwärts
+führenden GitHub-Dateivergleich. Ausschließlich bekannte Dokumentations-/Statuspfade
+sind zulässig. Geänderter Spielcode, unsichere Umbenennungen, divergierende Historie
+und ein möglicherweise bei 300 Dateien gekürzter Vergleich bleiben abgleichpflichtig.
+15 Dashboard-Werkzeugtests einschließlich zwei neuer Regressionen bestanden.

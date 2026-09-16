@@ -16,5 +16,13 @@
   "followup": "frontend_test and species_comparison_test passed on clean unchanged source after reachability/language fixture corrections.",
   "tooling": "167 cases: 160 passed, 7 optional skips",
   "ci": "https://github.com/MajorDragonfly/voxelverse/pull/141/checks",
-  "limits": "No complete local suite, native export, visual or target-PC/FPS acceptance. CI belongs to its exact published head."
+  "limits": "No complete local suite, native export, visual or target-PC/FPS acceptance. CI belongs to its exact published head.",
+  "tracking_followup": {
+    "local": "322e022",
+    "published": "169766947a1f593f900872e6fc4b280d6c7d3087",
+    "tree": "b6d9d00bd11f1db90528eea8eef64ed674cb6a99",
+    "command": "python3 -m unittest discover -s tests/tooling -p 'project_dashboard_test.py'",
+    "result": "15 tests passed; two added regressions for detailed integrations and verified tracking-only forward diffs.",
+    "log": "dashboard-live-fix.log.gz"
+  }
 }

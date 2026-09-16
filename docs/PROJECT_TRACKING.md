@@ -99,7 +99,7 @@ python3 tools/project_dashboard.py live --output /tmp/voxelverse-project-dashboa
 ```
 
 Der read-only Aufruf liest offene PRs seitenweise sowie main und den Kandidaten,
-zeigt Draft-Status, bekannte identische Eingänge und gestapelte Branches. Er
+zeigt Draft-Status, bekannte identische Eingänge einschließlich detaillierter integrierter Lieferungen und gestapelte Branches. Zusätzliche reine Status-/Nachweiscommits werden nur nach einem vollständigen vorwärts führenden GitHub-Dateivergleich erkannt; Spielcodeänderungen bleiben abgleichpflichtig. Er
 folgt keinen PR-Titeln als Anweisung und schreibt keine GitHub-Daten. Mit
 `GH_TOKEN` oder `GITHUB_TOKEN` werden vorhandene Leserechte verwendet; ohne Token
 gelten die öffentlichen GitHub-Limits. API-Fehler werden als Fehler gemeldet,
