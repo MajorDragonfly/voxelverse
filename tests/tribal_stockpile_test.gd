@@ -40,6 +40,12 @@ func _run() -> void:
 	tribe.select_all()
 	_expect(tribe.issue_order("wait"), "Cannot stop collection.")
 	failures.append_array(await Checks.verify(tribe))
+	# Obtain actual food before exercising consumption.
+	tribe.select_member(str(tribe.village().members[1].id))
+	_expect(tribe.issue_order("food"), "Cannot collect food for consumption.")
+	await _until(func() -> bool: return tribe.village().stock.food >= 2, 1800)
+	tribe.select_all()
+	tribe.issue_order("wait")
 	# Consumption must shrink the same view through the existing economy.
 	var data: Dictionary = tribe.village()
 	var food_before: int = data.stock.food

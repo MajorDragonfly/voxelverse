@@ -41,7 +41,7 @@ func _run() -> void:
 	for kind: String in piles.lots:
 		var lot: Node3D = piles.lots[kind].root
 		_expect(lot.global_basis.y.dot(Space.up(tribe, lot.global_position)) > 0.9999, "Stockpile ignores surface normal: " + kind)
-		var hit: Dictionary = Space.floor_hit(tribe, lot.global_position, 2.0, 4.0)
+		var hit: Dictionary = Space.floor_hit(piles, lot.global_position, 2.0, 4.0)
 		_expect(not hit.is_empty() and lot.global_position.distance_to(hit.position) < 0.03, "Floating or buried stockpile: " + kind)
 	var before: Dictionary = data.duplicate(true)
 	var bytes: String = FileAccess.get_file_as_string(saves.save_path)
