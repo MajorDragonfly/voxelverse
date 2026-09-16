@@ -4,8 +4,20 @@ extends Node3D
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
+var _drawn_state: Dictionary = {}
+var rebuild_count: int = 0
 
 func rebuild(data: Dictionary) -> void:
+	# Orders, resident movement and hunger do not change these props. Keep the
+	# existing meshes/materials when the actual visual inputs are unchanged.
+	var view := {"id": data.id, "anchor": data.anchor, "deposits": data.deposits,
+		"stations": data.economy.stations, "incoming": data.economy.incoming,
+		"garden": data.garden, "project": data.project, "tools": data.tools,
+		"pens": data.husbandry.pens, "records": data.husbandry.records}
+	if _drawn_state == view and get_child_count() > 0:
+		return
+	_drawn_state = view.duplicate(true)
+	rebuild_count += 1
 	if Space.adapter(self) != null:
 		global_position = Space.resolve(self, data.anchor)
 		global_basis = Space.frame(self, global_position)

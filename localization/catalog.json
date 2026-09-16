@@ -8131,6 +8131,16 @@
       "key": "WILDLIFE_EAT_CARCASS",
       "de": "Frisst Aas",
       "en": "Eating carrion"
+    },
+    {
+      "key": "TRIBE_BUILD_TAB",
+      "de": "Bauen",
+      "en": "Build"
+    },
+    {
+      "key": "TRIBE_RESIDENT_COMPACT",
+      "de": "{name} · {profession}\n{activity}",
+      "en": "{name} · {profession}\n{activity}"
     }
   ]
 }

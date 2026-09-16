@@ -73,6 +73,19 @@ func _atomic_checks() -> void:
 	var legacy: String = '{"schema":1,"position":[123.25,-71,0.125]}'
 	_expect(Atomic._write_text(PATH, legacy) == OK and Atomic.write(PATH, first) == OK, "Legacy replacement failed.")
 	_expect(FileAccess.get_file_as_string(PATH + ".bak") == legacy, "Legacy backup was re-encoded.")
+	# Prepared save bytes must be the exact validated bytes on disk, while the
+	# same atomic staging/failure/backup protections apply.
+	var prepared: String = Atomic.stringify(second)
+	var previous: String = FileAccess.get_file_as_string(PATH)
+	_expect(Atomic.write_serialized(PATH, prepared) == OK, "Prepared JSON write failed.")
+	_expect(FileAccess.get_file_as_string(PATH) == prepared and FileAccess.get_file_as_string(PATH + ".bak") == previous, "Prepared bytes or backup were changed.")
+	for invalid: String in ["broken", "[]", "null"]:
+		_expect(Atomic.write_serialized(PATH, invalid) != OK, "Non-object JSON was accepted.")
+	_expect(FileAccess.get_file_as_string(PATH) == prepared and FileAccess.get_file_as_string(PATH + ".bak") == previous, "Rejected JSON changed saved data.")
+	_expect(DirAccess.make_dir_absolute(PATH + ".tmp") == OK, "Prepared-write failure fixture failed.")
+	_expect(Atomic.write_serialized(PATH, Atomic.stringify(first)) != OK, "Prepared write ignored blocked staging.")
+	_expect(FileAccess.get_file_as_string(PATH) == prepared and FileAccess.get_file_as_string(PATH + ".bak") == previous, "Failed prepared write changed live/backup.")
+	DirAccess.remove_absolute(PATH + ".tmp")
 
 func _region_checks() -> Dictionary:
 	var store := Store.new()

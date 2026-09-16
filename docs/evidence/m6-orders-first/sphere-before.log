@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+M6_SPHERE_ROW {"command_ms":55.371,"separate_save_ms":61.319,"separate_ui_ms":1.237,"separate_visual_ms":1.532}
+M6_SPHERE_ROW {"command_ms":54.512,"separate_save_ms":44.181,"separate_ui_ms":0.933,"separate_visual_ms":1.092}
+M6_SPHERE_ROW {"command_ms":50.921,"separate_save_ms":43.149,"separate_ui_ms":0.914,"separate_visual_ms":1.104}
+M6_SPHERE_ROW {"command_ms":49.277,"separate_save_ms":43.005,"separate_ui_ms":1.113,"separate_visual_ms":1.414}
+M6_SPHERE_ROW {"command_ms":52.774,"separate_save_ms":47.157,"separate_ui_ms":1.326,"separate_visual_ms":1.385}
+M6_SPHERE_BASELINE [{"command_ms":55.371,"separate_save_ms":61.319,"separate_ui_ms":1.237,"separate_visual_ms":1.532},{"command_ms":54.512,"separate_save_ms":44.181,"separate_ui_ms":0.933,"separate_visual_ms":1.092},{"command_ms":50.921,"separate_save_ms":43.149,"separate_ui_ms":0.914,"separate_visual_ms":1.104},{"command_ms":49.277,"separate_save_ms":43.005,"separate_ui_ms":1.113,"separate_visual_ms":1.414},{"command_ms":52.774,"separate_save_ms":47.157,"separate_ui_ms":1.326,"separate_visual_ms":1.385}]
+{"failures":[],"passed":true,"test":"tribal_playtest"}

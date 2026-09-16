@@ -56,6 +56,8 @@ var _player_visible_before: bool = true
 var _original_camera: Camera3D
 var _focus := Vector3.ZERO
 var _zoom: float = 26.0
+## Last command diagnostics, independent from the campaign/save state.
+var last_order_metrics: Dictionary = {}
 var _timer: float = 0.0
 var _transaction: bool = false
 var placement: String = ""
@@ -389,24 +391,33 @@ func screen_command(position: Vector2) -> void:
 	issue_order("move", target)
 
 func issue_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
+	var started: int = Time.get_ticks_usec()
+	last_order_metrics = {"order": order, "ok": false, "committed": false}
 	if not is_active() or selected.is_empty():
 		status = "Wähle zuerst mindestens einen Bewohner aus." if selected.is_empty() else "Die Gruppe kann gerade keine Befehle annehmen."
 		_resolve_order(order, false)
-		return false
+		return _finish_order_timing(started, false)
 	if order in Economy.STATIONS.keys() + Housing.BUILDS and destination == Vector3.ZERO and is_active():
 		if int(village()["tools"]) == 0:
 			status = "Zuerst ein Steinwerkzeug herstellen."
 			_resolve_order(order, false)
-			return false
+			return _finish_order_timing(started, false)
 		if not village()["project"].is_empty() and village()["project"]["kind"] == order:
 			destination = Space.resolve(self, village()["project"]["position"])
 		else:
 			placement = order
 			status = "Rechtsklick auf einen freien Bauplatz · Esc bricht die Platzierung ab."
 			panel.refresh()
-			return true
+			return _finish_order_timing(started, true)
 	var success: bool = _commit_order(order, destination, movement_limit)
+	var feedback_started: int = Time.get_ticks_usec()
 	_resolve_order(order, success)
+	last_order_metrics["feedback_ms"] = (Time.get_ticks_usec() - feedback_started) / 1000.0
+	return _finish_order_timing(started, success)
+
+func _finish_order_timing(started: int, success: bool) -> bool:
+	last_order_metrics["total_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+	last_order_metrics["ok"] = success
 	return success
 
 func _resolve_order(order: String, success: bool) -> void:
@@ -415,28 +426,32 @@ func _resolve_order(order: String, success: bool) -> void:
 	panel.refresh()
 
 func issue_workplace(identity: String) -> bool:
+	var started: int = Time.get_ticks_usec()
+	last_order_metrics = {"order": "workplace", "ok": false, "committed": false}
 	if not is_active() or selected.is_empty():
 		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_SELECT_RESIDENT")
 		_resolve_order("workplace", false)
-		return false
+		return _finish_order_timing(started, false)
 	var key: String = Economy.station_key(village(), identity)
 	if key.is_empty():
 		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNKNOWN")
 		_resolve_order("workplace", false)
-		return false
+		return _finish_order_timing(started, false)
 	var destination: Vector3 = Space.resolve(self, village().economy.stations[key].position)
 	if not navigation.is_ready() or navigation.route(anchor(), destination).is_empty():
 		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNREACHABLE")
 		_resolve_order("workplace", false)
-		return false
+		return _finish_order_timing(started, false)
 	for identity_selected: String in selected:
 		if not actors.has(identity_selected) or navigation.route(actors[identity_selected].global_position, destination).is_empty():
 			status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNREACHABLE")
 			_resolve_order("workplace", false)
-			return false
+			return _finish_order_timing(started, false)
 	var success: bool = _commit_order(Economy.STATIONS[Economy.station_kind(key)], Vector3.ZERO, 18.0, identity)
+	var feedback_started: int = Time.get_ticks_usec()
 	_resolve_order("workplace", success)
-	return success
+	last_order_metrics["feedback_ms"] = (Time.get_ticks_usec() - feedback_started) / 1000.0
+	return _finish_order_timing(started, success)
 
 func control_construction(action: String) -> Dictionary:
 	var text = preload("res://core/localization/ui_text.gd")
@@ -465,6 +480,7 @@ func control_construction(action: String) -> Dictionary:
 	return result
 
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0, workplace_id: String = "") -> bool:
+	var started: int = Time.get_ticks_usec()
 	for id: String in selected:
 		if SiteTransport.bound(body(), id):
 			status = preload("res://core/localization/ui_text.gd").text("SITE_FREIGHT_BUSY")
@@ -554,20 +570,26 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 		member["stage"] = "return" if member["cargo"] != "" else "outbound"
 		if order == "move":
 			member["destination"] = Space.encode(self, _workplace(destination, selected.find(identity)) if selected.size() > 1 else destination)
+	last_order_metrics["prepare_ms"] = (Time.get_ticks_usec() - started) / 1000.0
 	_transaction = true
+	started = Time.get_ticks_usec()
 	var success: bool = _saves.save_now()
+	last_order_metrics["save_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+	last_order_metrics["committed"] = success
 	if not success:
 		replace_village(before)
 	_transaction = false
 	_routes.clear()
 	_goals.clear()
 	status = "Auftrag gespeichert." if success else "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten."
+	started = Time.get_ticks_usec()
 	if success:
 		placement = ""
 		_visuals.rebuild(village())
 		if Housing.obstacles(before) != Housing.obstacles(village()):
 			navigation.begin(home, anchor(), village(), navigation_extent())
-	panel.refresh()
+	last_order_metrics["visuals_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+	# The public command emits its receipt and refreshes once in _resolve_order.
 	return success
 
 func _physics_process(delta: float) -> void:
@@ -803,7 +825,7 @@ func assign_profession(profession: String) -> bool:
 		member.erase("workplace_id")
 		member["stage"] = "return" if member["cargo"] != "" else "outbound"
 	var success: bool = _save_economy(before)
-	if success:
+	if success and not placement.is_empty():
 		placement = ""
 		panel.refresh()
 	return success

@@ -43,7 +43,23 @@ static func write(path: String, data: Dictionary, keep_backup: bool = true) -> E
 
 
 static func _write_owned(path: String, data: Dictionary, keep_backup: bool) -> Error:
-	var text: String = stringify(data)
+	return _write_encoded_owned(path, stringify(data), keep_backup)
+
+
+## Commit the exact bytes already checked by the save service. Object syntax is
+## checked here too; schema validation still belongs to the calling owner.
+static func write_serialized(path: String, text: String, keep_backup: bool = true) -> Error:
+	var parser := JSON.new()
+	if parser.parse(text) != OK or not parser.data is Dictionary:
+		return ERR_INVALID_DATA
+	var lease: RefCounted = Access.acquire()
+	if lease == null: return ERR_BUSY
+	var result: Error = _write_encoded_owned(path, text, keep_backup)
+	lease.release()
+	return result
+
+
+static func _write_encoded_owned(path: String, text: String, keep_backup: bool) -> Error:
 	var temporary: String = path + ".tmp"
 	var error: Error = _write_text(temporary, text)
 	if error != OK:

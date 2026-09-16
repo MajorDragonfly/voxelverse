@@ -4877,3 +4877,9 @@ msgstr "Sucht Aas"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Frisst Aas"
+
+msgid "TRIBE_BUILD_TAB"
+msgstr "Bauen"
+
+msgid "TRIBE_RESIDENT_COMPACT"
+msgstr "{name} · {profession}\n{activity}"

@@ -144,7 +144,7 @@ func _layouts() -> void:
 			root.get_node("DisplaySettings").ui_scale = scale
 			for language: String in ["de", "en"]:
 				root.get_node("LocaleManager")._apply(language)
-				for tab in [0, 1]:
+				for tab in [0, 1, panel._build_page.get_index()]:
 					panel._tabs.current_tab = tab
 					panel.refresh()
 					await _frames(5)
@@ -153,7 +153,7 @@ func _layouts() -> void:
 					_expect(Rect2(Vector2.ZERO, Vector2(root.size)).grow(1).encloses(_physical_rect(panel._hud)), "HUD outside screen %s/%s/%s: %s" % [resolution, language, tab, _physical_rect(panel._hud)])
 					if not capture_dir.is_empty() and DisplayServer.get_name() != "headless":
 						await _capture("tribe-%s-%dx%d-tab%d-scale%d-top" % [language, resolution.x, resolution.y, tab, roundi(scale * 100)])
-					var page: Control = panel._orders_page if tab == 0 else panel._work_page
+					var page: Control = panel._tabs.get_current_tab_control()
 					for button: Button in page.find_children("*", "Button", true, false):
 						if not button.is_visible_in_tree(): continue
 						panel._scroll.ensure_control_visible(button)

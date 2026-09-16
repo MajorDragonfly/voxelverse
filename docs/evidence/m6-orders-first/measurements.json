@@ -1,0 +1,2591 @@
+{
+  "before": {
+    "samples": [
+      {
+        "command_ms": 55.371,
+        "separate_save_ms": 61.319,
+        "separate_ui_ms": 1.237,
+        "separate_visual_ms": 1.532
+      },
+      {
+        "command_ms": 54.512,
+        "separate_save_ms": 44.181,
+        "separate_ui_ms": 0.933,
+        "separate_visual_ms": 1.092
+      },
+      {
+        "command_ms": 50.921,
+        "separate_save_ms": 43.149,
+        "separate_ui_ms": 0.914,
+        "separate_visual_ms": 1.104
+      },
+      {
+        "command_ms": 49.277,
+        "separate_save_ms": 43.005,
+        "separate_ui_ms": 1.113,
+        "separate_visual_ms": 1.414
+      },
+      {
+        "command_ms": 52.774,
+        "separate_save_ms": 47.157,
+        "separate_ui_ms": 1.326,
+        "separate_visual_ms": 1.385
+      }
+    ],
+    "median_ms": {
+      "command_ms": 52.774,
+      "separate_save_ms": 44.181,
+      "separate_ui_ms": 1.113,
+      "separate_visual_ms": 1.385
+    },
+    "log_sha256": "8436139e9bcd394a263f0a2db978ecfdf7fff7e86c6e790263d30e643f6aab18"
+  },
+  "after": {
+    "samples": [
+      {
+        "command_ms": 51.005,
+        "separate_save_ms": 45.775,
+        "separate_ui_ms": 0.7,
+        "separate_visual_ms": 0.065
+      },
+      {
+        "command_ms": 46.651,
+        "separate_save_ms": 44.072,
+        "separate_ui_ms": 0.625,
+        "separate_visual_ms": 0.071
+      },
+      {
+        "command_ms": 52.282,
+        "separate_save_ms": 46.513,
+        "separate_ui_ms": 0.634,
+        "separate_visual_ms": 0.058
+      },
+      {
+        "command_ms": 46.622,
+        "separate_save_ms": 45.98,
+        "separate_ui_ms": 0.839,
+        "separate_visual_ms": 0.096
+      },
+      {
+        "command_ms": 50.314,
+        "separate_save_ms": 45.643,
+        "separate_ui_ms": 0.741,
+        "separate_visual_ms": 0.07
+      }
+    ],
+    "median_ms": {
+      "command_ms": 50.314,
+      "separate_save_ms": 45.775,
+      "separate_ui_ms": 0.7,
+      "separate_visual_ms": 0.07
+    },
+    "log_sha256": "fdce4fedaa9bbc19434c57b5e1f4046884117cc8240b14081cb044164ae8172b"
+  },
+  "fixture_100_orders": {
+    "samples": [
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.392,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.097,
+          "save_ms": 4.74,
+          "total_ms": 6.327,
+          "visuals_ms": 0.068
+        },
+        "save": {
+          "capture_ms": 0.05,
+          "history_ms": 0.005,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.043,
+          "serialize_ms": 0.691,
+          "snapshot_ms": 0.652,
+          "total_ms": 4.732,
+          "validate_ms": 0.543,
+          "validate_serialized_ms": 0.521,
+          "write_ms": 1.1
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.282,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.143,
+          "save_ms": 4.78,
+          "total_ms": 6.271,
+          "visuals_ms": 0.038
+        },
+        "save": {
+          "capture_ms": 0.04,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.097,
+          "serialize_ms": 0.691,
+          "snapshot_ms": 0.632,
+          "total_ms": 4.775,
+          "validate_ms": 0.602,
+          "validate_serialized_ms": 0.458,
+          "write_ms": 1.13
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.21,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.068,
+          "save_ms": 4.819,
+          "total_ms": 6.175,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.138,
+          "history_ms": 0.004,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 0.965,
+          "serialize_ms": 0.725,
+          "snapshot_ms": 0.807,
+          "total_ms": 4.815,
+          "validate_ms": 0.497,
+          "validate_serialized_ms": 0.444,
+          "write_ms": 1.128
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.484,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.081,
+          "save_ms": 4.497,
+          "total_ms": 6.154,
+          "visuals_ms": 0.063
+        },
+        "save": {
+          "capture_ms": 0.032,
+          "history_ms": 0.004,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.02,
+          "serialize_ms": 0.653,
+          "snapshot_ms": 0.586,
+          "total_ms": 4.492,
+          "validate_ms": 0.483,
+          "validate_serialized_ms": 0.43,
+          "write_ms": 1.073
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.25,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.067,
+          "save_ms": 4.842,
+          "total_ms": 6.22,
+          "visuals_ms": 0.035
+        },
+        "save": {
+          "capture_ms": 0.083,
+          "history_ms": 0.003,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.156,
+          "serialize_ms": 0.848,
+          "snapshot_ms": 0.518,
+          "total_ms": 4.838,
+          "validate_ms": 0.47,
+          "validate_serialized_ms": 0.675,
+          "write_ms": 0.992
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.339,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.071,
+          "save_ms": 4.258,
+          "total_ms": 5.781,
+          "visuals_ms": 0.088
+        },
+        "save": {
+          "capture_ms": 0.026,
+          "history_ms": 0.003,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.001,
+          "serialize_ms": 0.665,
+          "snapshot_ms": 0.548,
+          "total_ms": 4.253,
+          "validate_ms": 0.464,
+          "validate_serialized_ms": 0.419,
+          "write_ms": 0.924
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.055,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.111,
+          "save_ms": 4.481,
+          "total_ms": 5.737,
+          "visuals_ms": 0.035
+        },
+        "save": {
+          "capture_ms": 0.027,
+          "history_ms": 0.003,
+          "notify_ms": 0.151,
+          "ok": true,
+          "previous_ms": 0.937,
+          "serialize_ms": 0.657,
+          "snapshot_ms": 0.516,
+          "total_ms": 4.477,
+          "validate_ms": 0.561,
+          "validate_serialized_ms": 0.447,
+          "write_ms": 0.986
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.179,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.103,
+          "save_ms": 4.668,
+          "total_ms": 6.007,
+          "visuals_ms": 0.034
+        },
+        "save": {
+          "capture_ms": 0.026,
+          "history_ms": 0.004,
+          "notify_ms": 0.19,
+          "ok": true,
+          "previous_ms": 1.019,
+          "serialize_ms": 0.683,
+          "snapshot_ms": 0.55,
+          "total_ms": 4.663,
+          "validate_ms": 0.558,
+          "validate_serialized_ms": 0.413,
+          "write_ms": 1.027
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.255,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.06,
+          "save_ms": 4.999,
+          "total_ms": 6.404,
+          "visuals_ms": 0.04
+        },
+        "save": {
+          "capture_ms": 0.026,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 0.952,
+          "serialize_ms": 0.708,
+          "snapshot_ms": 0.622,
+          "total_ms": 4.995,
+          "validate_ms": 0.495,
+          "validate_serialized_ms": 0.524,
+          "write_ms": 1.327
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 0.992,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.066,
+          "save_ms": 4.712,
+          "total_ms": 5.926,
+          "visuals_ms": 0.133
+        },
+        "save": {
+          "capture_ms": 0.024,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 0.945,
+          "serialize_ms": 0.939,
+          "snapshot_ms": 0.537,
+          "total_ms": 4.708,
+          "validate_ms": 0.594,
+          "validate_serialized_ms": 0.432,
+          "write_ms": 1.053
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.138,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.057,
+          "save_ms": 4.175,
+          "total_ms": 5.423,
+          "visuals_ms": 0.029
+        },
+        "save": {
+          "capture_ms": 0.024,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.008,
+          "serialize_ms": 0.636,
+          "snapshot_ms": 0.49,
+          "total_ms": 4.171,
+          "validate_ms": 0.496,
+          "validate_serialized_ms": 0.421,
+          "write_ms": 0.904
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.201,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.065,
+          "save_ms": 4.905,
+          "total_ms": 6.222,
+          "visuals_ms": 0.029
+        },
+        "save": {
+          "capture_ms": 0.022,
+          "history_ms": 0.003,
+          "notify_ms": 0.081,
+          "ok": true,
+          "previous_ms": 1.243,
+          "serialize_ms": 0.654,
+          "snapshot_ms": 0.504,
+          "total_ms": 4.902,
+          "validate_ms": 0.432,
+          "validate_serialized_ms": 0.541,
+          "write_ms": 1.314
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.073,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.055,
+          "save_ms": 4.651,
+          "total_ms": 5.828,
+          "visuals_ms": 0.028
+        },
+        "save": {
+          "capture_ms": 0.021,
+          "history_ms": 0.002,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 0.948,
+          "serialize_ms": 0.985,
+          "snapshot_ms": 0.535,
+          "total_ms": 4.648,
+          "validate_ms": 0.612,
+          "validate_serialized_ms": 0.501,
+          "write_ms": 0.958
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.055,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.062,
+          "save_ms": 4.379,
+          "total_ms": 5.544,
+          "visuals_ms": 0.028
+        },
+        "save": {
+          "capture_ms": 0.062,
+          "history_ms": 0.002,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 0.922,
+          "serialize_ms": 0.753,
+          "snapshot_ms": 0.477,
+          "total_ms": 4.376,
+          "validate_ms": 0.429,
+          "validate_serialized_ms": 0.465,
+          "write_ms": 1.178
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.35,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.062,
+          "save_ms": 4.704,
+          "total_ms": 6.176,
+          "visuals_ms": 0.034
+        },
+        "save": {
+          "capture_ms": 0.026,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.051,
+          "serialize_ms": 0.835,
+          "snapshot_ms": 0.57,
+          "total_ms": 4.701,
+          "validate_ms": 0.485,
+          "validate_serialized_ms": 0.438,
+          "write_ms": 1.197
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.168,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.098,
+          "save_ms": 4.71,
+          "total_ms": 6.037,
+          "visuals_ms": 0.033
+        },
+        "save": {
+          "capture_ms": 0.034,
+          "history_ms": 0.004,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.036,
+          "serialize_ms": 0.758,
+          "snapshot_ms": 0.772,
+          "total_ms": 4.706,
+          "validate_ms": 0.547,
+          "validate_serialized_ms": 0.505,
+          "write_ms": 0.958
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.212,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.06,
+          "save_ms": 5.415,
+          "total_ms": 6.765,
+          "visuals_ms": 0.032
+        },
+        "save": {
+          "capture_ms": 0.03,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.587,
+          "serialize_ms": 1.065,
+          "snapshot_ms": 0.755,
+          "total_ms": 5.411,
+          "validate_ms": 0.477,
+          "validate_serialized_ms": 0.467,
+          "write_ms": 0.935
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.395,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.071,
+          "save_ms": 4.411,
+          "total_ms": 5.935,
+          "visuals_ms": 0.034
+        },
+        "save": {
+          "capture_ms": 0.028,
+          "history_ms": 0.004,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 0.936,
+          "serialize_ms": 0.661,
+          "snapshot_ms": 0.725,
+          "total_ms": 4.407,
+          "validate_ms": 0.496,
+          "validate_serialized_ms": 0.41,
+          "write_ms": 1.055
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.294,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.057,
+          "save_ms": 5.368,
+          "total_ms": 6.802,
+          "visuals_ms": 0.058
+        },
+        "save": {
+          "capture_ms": 0.127,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.346,
+          "serialize_ms": 0.633,
+          "snapshot_ms": 0.514,
+          "total_ms": 5.365,
+          "validate_ms": 0.595,
+          "validate_serialized_ms": 0.591,
+          "write_ms": 1.457
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.207,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.075,
+          "save_ms": 4.413,
+          "total_ms": 5.75,
+          "visuals_ms": 0.032
+        },
+        "save": {
+          "capture_ms": 0.027,
+          "history_ms": 0.004,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.252,
+          "serialize_ms": 0.66,
+          "snapshot_ms": 0.541,
+          "total_ms": 4.41,
+          "validate_ms": 0.463,
+          "validate_serialized_ms": 0.402,
+          "write_ms": 0.97
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.051,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.057,
+          "save_ms": 4.594,
+          "total_ms": 5.758,
+          "visuals_ms": 0.033
+        },
+        "save": {
+          "capture_ms": 0.023,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.169,
+          "serialize_ms": 0.67,
+          "snapshot_ms": 0.504,
+          "total_ms": 4.591,
+          "validate_ms": 0.737,
+          "validate_serialized_ms": 0.437,
+          "write_ms": 0.938
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.155,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.082,
+          "save_ms": 4.512,
+          "total_ms": 5.829,
+          "visuals_ms": 0.054
+        },
+        "save": {
+          "capture_ms": 0.03,
+          "history_ms": 0.004,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 0.937,
+          "serialize_ms": 0.771,
+          "snapshot_ms": 0.612,
+          "total_ms": 4.506,
+          "validate_ms": 0.559,
+          "validate_serialized_ms": 0.478,
+          "write_ms": 1.012
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.466,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.086,
+          "save_ms": 5.914,
+          "total_ms": 7.529,
+          "visuals_ms": 0.034
+        },
+        "save": {
+          "capture_ms": 0.036,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.899,
+          "serialize_ms": 0.784,
+          "snapshot_ms": 0.805,
+          "total_ms": 5.909,
+          "validate_ms": 0.686,
+          "validate_serialized_ms": 0.537,
+          "write_ms": 1.052
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.196,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.069,
+          "save_ms": 5.491,
+          "total_ms": 6.82,
+          "visuals_ms": 0.039
+        },
+        "save": {
+          "capture_ms": 0.027,
+          "history_ms": 0.003,
+          "notify_ms": 0.015,
+          "ok": true,
+          "previous_ms": 1.107,
+          "serialize_ms": 0.925,
+          "snapshot_ms": 0.674,
+          "total_ms": 5.485,
+          "validate_ms": 0.579,
+          "validate_serialized_ms": 0.667,
+          "write_ms": 1.103
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.101,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.061,
+          "save_ms": 5.67,
+          "total_ms": 6.923,
+          "visuals_ms": 0.065
+        },
+        "save": {
+          "capture_ms": 0.027,
+          "history_ms": 0.005,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.26,
+          "serialize_ms": 1.071,
+          "snapshot_ms": 0.546,
+          "total_ms": 5.666,
+          "validate_ms": 0.569,
+          "validate_serialized_ms": 0.767,
+          "write_ms": 1.291
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.352,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.069,
+          "save_ms": 5.945,
+          "total_ms": 7.433,
+          "visuals_ms": 0.038
+        },
+        "save": {
+          "capture_ms": 0.025,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.613,
+          "serialize_ms": 1.14,
+          "snapshot_ms": 0.522,
+          "total_ms": 5.942,
+          "validate_ms": 0.642,
+          "validate_serialized_ms": 0.677,
+          "write_ms": 1.158
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.447,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.07,
+          "save_ms": 6.155,
+          "total_ms": 7.764,
+          "visuals_ms": 0.064
+        },
+        "save": {
+          "capture_ms": 0.032,
+          "history_ms": 0.005,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.54,
+          "serialize_ms": 0.772,
+          "snapshot_ms": 0.659,
+          "total_ms": 6.152,
+          "validate_ms": 0.998,
+          "validate_serialized_ms": 0.619,
+          "write_ms": 1.394
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.593,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.078,
+          "save_ms": 6.542,
+          "total_ms": 8.291,
+          "visuals_ms": 0.046
+        },
+        "save": {
+          "capture_ms": 0.037,
+          "history_ms": 0.003,
+          "notify_ms": 0.016,
+          "ok": true,
+          "previous_ms": 1.315,
+          "serialize_ms": 0.841,
+          "snapshot_ms": 0.929,
+          "total_ms": 6.538,
+          "validate_ms": 0.62,
+          "validate_serialized_ms": 0.491,
+          "write_ms": 1.851
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.334,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.086,
+          "save_ms": 5.451,
+          "total_ms": 7.0,
+          "visuals_ms": 0.099
+        },
+        "save": {
+          "capture_ms": 0.039,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.156,
+          "serialize_ms": 0.781,
+          "snapshot_ms": 0.831,
+          "total_ms": 5.447,
+          "validate_ms": 0.874,
+          "validate_serialized_ms": 0.51,
+          "write_ms": 1.122
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.238,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.072,
+          "save_ms": 5.646,
+          "total_ms": 7.048,
+          "visuals_ms": 0.065
+        },
+        "save": {
+          "capture_ms": 0.029,
+          "history_ms": 0.003,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.291,
+          "serialize_ms": 0.924,
+          "snapshot_ms": 0.574,
+          "total_ms": 5.642,
+          "validate_ms": 0.801,
+          "validate_serialized_ms": 0.765,
+          "write_ms": 1.124
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 0.954,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.06,
+          "save_ms": 4.531,
+          "total_ms": 5.626,
+          "visuals_ms": 0.059
+        },
+        "save": {
+          "capture_ms": 0.027,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.027,
+          "serialize_ms": 0.745,
+          "snapshot_ms": 0.562,
+          "total_ms": 4.528,
+          "validate_ms": 0.527,
+          "validate_serialized_ms": 0.494,
+          "write_ms": 1.017
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.304,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.086,
+          "save_ms": 5.674,
+          "total_ms": 7.151,
+          "visuals_ms": 0.037
+        },
+        "save": {
+          "capture_ms": 0.024,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.435,
+          "serialize_ms": 0.743,
+          "snapshot_ms": 0.801,
+          "total_ms": 5.671,
+          "validate_ms": 0.594,
+          "validate_serialized_ms": 0.538,
+          "write_ms": 1.4
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.36,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.058,
+          "save_ms": 4.949,
+          "total_ms": 6.455,
+          "visuals_ms": 0.038
+        },
+        "save": {
+          "capture_ms": 0.027,
+          "history_ms": 0.004,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.354,
+          "serialize_ms": 0.751,
+          "snapshot_ms": 0.529,
+          "total_ms": 4.946,
+          "validate_ms": 0.562,
+          "validate_serialized_ms": 0.55,
+          "write_ms": 1.039
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.191,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.074,
+          "save_ms": 5.135,
+          "total_ms": 6.493,
+          "visuals_ms": 0.064
+        },
+        "save": {
+          "capture_ms": 0.028,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.517,
+          "serialize_ms": 0.813,
+          "snapshot_ms": 0.551,
+          "total_ms": 5.132,
+          "validate_ms": 0.573,
+          "validate_serialized_ms": 0.502,
+          "write_ms": 1.014
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.027,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.062,
+          "save_ms": 4.83,
+          "total_ms": 5.98,
+          "visuals_ms": 0.037
+        },
+        "save": {
+          "capture_ms": 0.027,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.088,
+          "serialize_ms": 0.847,
+          "snapshot_ms": 0.575,
+          "total_ms": 4.825,
+          "validate_ms": 0.554,
+          "validate_serialized_ms": 0.547,
+          "write_ms": 1.017
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.96,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.07,
+          "save_ms": 5.869,
+          "total_ms": 7.969,
+          "visuals_ms": 0.042
+        },
+        "save": {
+          "capture_ms": 0.026,
+          "history_ms": 0.003,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.473,
+          "serialize_ms": 0.756,
+          "snapshot_ms": 0.658,
+          "total_ms": 5.865,
+          "validate_ms": 0.576,
+          "validate_serialized_ms": 0.684,
+          "write_ms": 1.46
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.082,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.068,
+          "save_ms": 4.977,
+          "total_ms": 6.195,
+          "visuals_ms": 0.04
+        },
+        "save": {
+          "capture_ms": 0.029,
+          "history_ms": 0.004,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.216,
+          "serialize_ms": 0.865,
+          "snapshot_ms": 0.568,
+          "total_ms": 4.973,
+          "validate_ms": 0.59,
+          "validate_serialized_ms": 0.503,
+          "write_ms": 1.027
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.14,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.105,
+          "save_ms": 5.542,
+          "total_ms": 6.856,
+          "visuals_ms": 0.04
+        },
+        "save": {
+          "capture_ms": 0.032,
+          "history_ms": 0.003,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.174,
+          "serialize_ms": 0.829,
+          "snapshot_ms": 0.621,
+          "total_ms": 5.537,
+          "validate_ms": 0.869,
+          "validate_serialized_ms": 0.531,
+          "write_ms": 1.305
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.159,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.059,
+          "save_ms": 5.246,
+          "total_ms": 6.529,
+          "visuals_ms": 0.04
+        },
+        "save": {
+          "capture_ms": 0.028,
+          "history_ms": 0.003,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.156,
+          "serialize_ms": 0.753,
+          "snapshot_ms": 0.576,
+          "total_ms": 5.242,
+          "validate_ms": 0.551,
+          "validate_serialized_ms": 0.571,
+          "write_ms": 1.453
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.118,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.079,
+          "save_ms": 4.801,
+          "total_ms": 6.08,
+          "visuals_ms": 0.038
+        },
+        "save": {
+          "capture_ms": 0.03,
+          "history_ms": 0.004,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.076,
+          "serialize_ms": 0.821,
+          "snapshot_ms": 0.572,
+          "total_ms": 4.796,
+          "validate_ms": 0.596,
+          "validate_serialized_ms": 0.504,
+          "write_ms": 1.023
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.676,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.062,
+          "save_ms": 4.704,
+          "total_ms": 6.501,
+          "visuals_ms": 0.034
+        },
+        "save": {
+          "capture_ms": 0.028,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.03,
+          "serialize_ms": 0.748,
+          "snapshot_ms": 0.586,
+          "total_ms": 4.7,
+          "validate_ms": 0.526,
+          "validate_serialized_ms": 0.497,
+          "write_ms": 1.108
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 3.916,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.087,
+          "save_ms": 7.06,
+          "total_ms": 11.139,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.033,
+          "history_ms": 0.005,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.126,
+          "serialize_ms": 0.796,
+          "snapshot_ms": 0.66,
+          "total_ms": 7.054,
+          "validate_ms": 0.81,
+          "validate_serialized_ms": 2.334,
+          "write_ms": 1.113
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.199,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.082,
+          "save_ms": 5.615,
+          "total_ms": 6.97,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.041,
+          "history_ms": 0.004,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.21,
+          "serialize_ms": 0.757,
+          "snapshot_ms": 0.64,
+          "total_ms": 5.608,
+          "validate_ms": 0.676,
+          "validate_serialized_ms": 0.764,
+          "write_ms": 1.309
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.658,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.078,
+          "save_ms": 6.716,
+          "total_ms": 8.538,
+          "visuals_ms": 0.047
+        },
+        "save": {
+          "capture_ms": 0.033,
+          "history_ms": 0.004,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.114,
+          "serialize_ms": 2.54,
+          "snapshot_ms": 0.582,
+          "total_ms": 6.71,
+          "validate_ms": 0.587,
+          "validate_serialized_ms": 0.585,
+          "write_ms": 1.079
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.233,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.077,
+          "save_ms": 5.134,
+          "total_ms": 6.516,
+          "visuals_ms": 0.042
+        },
+        "save": {
+          "capture_ms": 0.037,
+          "history_ms": 0.004,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.368,
+          "serialize_ms": 0.759,
+          "snapshot_ms": 0.608,
+          "total_ms": 5.129,
+          "validate_ms": 0.615,
+          "validate_serialized_ms": 0.554,
+          "write_ms": 1.047
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.148,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.075,
+          "save_ms": 4.744,
+          "total_ms": 6.039,
+          "visuals_ms": 0.045
+        },
+        "save": {
+          "capture_ms": 0.031,
+          "history_ms": 0.004,
+          "notify_ms": 0.01,
+          "ok": true,
+          "previous_ms": 1.045,
+          "serialize_ms": 0.731,
+          "snapshot_ms": 0.596,
+          "total_ms": 4.739,
+          "validate_ms": 0.594,
+          "validate_serialized_ms": 0.494,
+          "write_ms": 1.043
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.263,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.062,
+          "save_ms": 4.742,
+          "total_ms": 6.143,
+          "visuals_ms": 0.046
+        },
+        "save": {
+          "capture_ms": 0.029,
+          "history_ms": 0.002,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.082,
+          "serialize_ms": 0.75,
+          "snapshot_ms": 0.58,
+          "total_ms": 4.738,
+          "validate_ms": 0.534,
+          "validate_serialized_ms": 0.518,
+          "write_ms": 1.02
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.423,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.083,
+          "save_ms": 5.345,
+          "total_ms": 6.935,
+          "visuals_ms": 0.05
+        },
+        "save": {
+          "capture_ms": 0.032,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.202,
+          "serialize_ms": 0.749,
+          "snapshot_ms": 0.666,
+          "total_ms": 5.34,
+          "validate_ms": 0.637,
+          "validate_serialized_ms": 0.627,
+          "write_ms": 1.139
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.175,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.075,
+          "save_ms": 5.216,
+          "total_ms": 6.542,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.036,
+          "history_ms": 0.004,
+          "notify_ms": 0.048,
+          "ok": true,
+          "previous_ms": 1.105,
+          "serialize_ms": 0.762,
+          "snapshot_ms": 0.708,
+          "total_ms": 5.211,
+          "validate_ms": 0.637,
+          "validate_serialized_ms": 0.523,
+          "write_ms": 1.233
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.184,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.08,
+          "save_ms": 5.053,
+          "total_ms": 6.392,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.033,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.188,
+          "serialize_ms": 0.736,
+          "snapshot_ms": 0.589,
+          "total_ms": 5.023,
+          "validate_ms": 0.565,
+          "validate_serialized_ms": 0.516,
+          "write_ms": 1.16
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 2.34,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.069,
+          "save_ms": 5.74,
+          "total_ms": 8.223,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.038,
+          "history_ms": 0.005,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.248,
+          "serialize_ms": 1.065,
+          "snapshot_ms": 0.604,
+          "total_ms": 5.735,
+          "validate_ms": 0.593,
+          "validate_serialized_ms": 0.612,
+          "write_ms": 1.347
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.533,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.091,
+          "save_ms": 5.472,
+          "total_ms": 7.175,
+          "visuals_ms": 0.046
+        },
+        "save": {
+          "capture_ms": 0.131,
+          "history_ms": 0.005,
+          "notify_ms": 0.014,
+          "ok": true,
+          "previous_ms": 1.228,
+          "serialize_ms": 0.771,
+          "snapshot_ms": 0.652,
+          "total_ms": 5.466,
+          "validate_ms": 0.669,
+          "validate_serialized_ms": 0.627,
+          "write_ms": 1.161
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.408,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.082,
+          "save_ms": 5.685,
+          "total_ms": 7.259,
+          "visuals_ms": 0.049
+        },
+        "save": {
+          "capture_ms": 0.04,
+          "history_ms": 0.004,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.273,
+          "serialize_ms": 0.825,
+          "snapshot_ms": 0.712,
+          "total_ms": 5.679,
+          "validate_ms": 0.636,
+          "validate_serialized_ms": 0.616,
+          "write_ms": 1.301
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.405,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.086,
+          "save_ms": 5.893,
+          "total_ms": 7.484,
+          "visuals_ms": 0.066
+        },
+        "save": {
+          "capture_ms": 0.038,
+          "history_ms": 0.004,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.196,
+          "serialize_ms": 0.784,
+          "snapshot_ms": 0.766,
+          "total_ms": 5.887,
+          "validate_ms": 0.816,
+          "validate_serialized_ms": 0.559,
+          "write_ms": 1.522
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.27,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.121,
+          "save_ms": 5.412,
+          "total_ms": 6.884,
+          "visuals_ms": 0.047
+        },
+        "save": {
+          "capture_ms": 0.04,
+          "history_ms": 0.005,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.192,
+          "serialize_ms": 0.775,
+          "snapshot_ms": 0.624,
+          "total_ms": 5.407,
+          "validate_ms": 0.708,
+          "validate_serialized_ms": 0.548,
+          "write_ms": 1.293
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.67,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.108,
+          "save_ms": 5.648,
+          "total_ms": 7.5,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.039,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.132,
+          "serialize_ms": 0.85,
+          "snapshot_ms": 0.774,
+          "total_ms": 5.643,
+          "validate_ms": 0.621,
+          "validate_serialized_ms": 0.644,
+          "write_ms": 1.378
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.29,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.071,
+          "save_ms": 5.507,
+          "total_ms": 6.945,
+          "visuals_ms": 0.045
+        },
+        "save": {
+          "capture_ms": 0.036,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.134,
+          "serialize_ms": 0.806,
+          "snapshot_ms": 0.713,
+          "total_ms": 5.501,
+          "validate_ms": 0.629,
+          "validate_serialized_ms": 0.578,
+          "write_ms": 1.376
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.28,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.078,
+          "save_ms": 5.027,
+          "total_ms": 6.457,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.032,
+          "history_ms": 0.003,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.111,
+          "serialize_ms": 0.779,
+          "snapshot_ms": 0.577,
+          "total_ms": 5.022,
+          "validate_ms": 0.598,
+          "validate_serialized_ms": 0.562,
+          "write_ms": 1.17
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.197,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.064,
+          "save_ms": 5.008,
+          "total_ms": 6.34,
+          "visuals_ms": 0.045
+        },
+        "save": {
+          "capture_ms": 0.03,
+          "history_ms": 0.004,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.175,
+          "serialize_ms": 0.734,
+          "snapshot_ms": 0.609,
+          "total_ms": 5.003,
+          "validate_ms": 0.559,
+          "validate_serialized_ms": 0.597,
+          "write_ms": 1.105
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.289,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.08,
+          "save_ms": 5.433,
+          "total_ms": 6.878,
+          "visuals_ms": 0.046
+        },
+        "save": {
+          "capture_ms": 0.035,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.413,
+          "serialize_ms": 0.785,
+          "snapshot_ms": 0.63,
+          "total_ms": 5.428,
+          "validate_ms": 0.607,
+          "validate_serialized_ms": 0.539,
+          "write_ms": 1.169
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.305,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.069,
+          "save_ms": 5.422,
+          "total_ms": 6.871,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.035,
+          "history_ms": 0.003,
+          "notify_ms": 0.043,
+          "ok": true,
+          "previous_ms": 1.227,
+          "serialize_ms": 0.777,
+          "snapshot_ms": 0.912,
+          "total_ms": 5.419,
+          "validate_ms": 0.58,
+          "validate_serialized_ms": 0.564,
+          "write_ms": 1.119
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.244,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.083,
+          "save_ms": 4.98,
+          "total_ms": 6.381,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.034,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.093,
+          "serialize_ms": 0.738,
+          "snapshot_ms": 0.646,
+          "total_ms": 4.975,
+          "validate_ms": 0.586,
+          "validate_serialized_ms": 0.522,
+          "write_ms": 1.136
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.322,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.093,
+          "save_ms": 4.936,
+          "total_ms": 6.442,
+          "visuals_ms": 0.06
+        },
+        "save": {
+          "capture_ms": 0.038,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.105,
+          "serialize_ms": 0.832,
+          "snapshot_ms": 0.594,
+          "total_ms": 4.932,
+          "validate_ms": 0.589,
+          "validate_serialized_ms": 0.528,
+          "write_ms": 1.072
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.281,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.079,
+          "save_ms": 5.05,
+          "total_ms": 6.503,
+          "visuals_ms": 0.06
+        },
+        "save": {
+          "capture_ms": 0.036,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.167,
+          "serialize_ms": 0.74,
+          "snapshot_ms": 0.642,
+          "total_ms": 5.047,
+          "validate_ms": 0.602,
+          "validate_serialized_ms": 0.532,
+          "write_ms": 1.103
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.229,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.07,
+          "save_ms": 5.067,
+          "total_ms": 6.478,
+          "visuals_ms": 0.079
+        },
+        "save": {
+          "capture_ms": 0.033,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.108,
+          "serialize_ms": 0.79,
+          "snapshot_ms": 0.623,
+          "total_ms": 5.062,
+          "validate_ms": 0.648,
+          "validate_serialized_ms": 0.55,
+          "write_ms": 1.083
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.527,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.091,
+          "save_ms": 7.492,
+          "total_ms": 9.199,
+          "visuals_ms": 0.052
+        },
+        "save": {
+          "capture_ms": 0.037,
+          "history_ms": 0.005,
+          "notify_ms": 0.014,
+          "ok": true,
+          "previous_ms": 2.857,
+          "serialize_ms": 1.111,
+          "snapshot_ms": 0.623,
+          "total_ms": 7.487,
+          "validate_ms": 0.627,
+          "validate_serialized_ms": 0.64,
+          "write_ms": 1.331
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.409,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.073,
+          "save_ms": 5.19,
+          "total_ms": 6.751,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.042,
+          "history_ms": 0.003,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.118,
+          "serialize_ms": 0.896,
+          "snapshot_ms": 0.647,
+          "total_ms": 5.185,
+          "validate_ms": 0.608,
+          "validate_serialized_ms": 0.554,
+          "write_ms": 1.079
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.491,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.08,
+          "save_ms": 5.238,
+          "total_ms": 6.897,
+          "visuals_ms": 0.052
+        },
+        "save": {
+          "capture_ms": 0.032,
+          "history_ms": 0.003,
+          "notify_ms": 0.016,
+          "ok": true,
+          "previous_ms": 1.13,
+          "serialize_ms": 0.819,
+          "snapshot_ms": 0.627,
+          "total_ms": 5.232,
+          "validate_ms": 0.571,
+          "validate_serialized_ms": 0.68,
+          "write_ms": 1.076
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 2.283,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.102,
+          "save_ms": 8.35,
+          "total_ms": 10.881,
+          "visuals_ms": 0.104
+        },
+        "save": {
+          "capture_ms": 0.037,
+          "history_ms": 0.005,
+          "notify_ms": 0.019,
+          "ok": true,
+          "previous_ms": 2.337,
+          "serialize_ms": 0.82,
+          "snapshot_ms": 0.608,
+          "total_ms": 8.345,
+          "validate_ms": 1.633,
+          "validate_serialized_ms": 1.18,
+          "write_ms": 1.491
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.649,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.098,
+          "save_ms": 6.376,
+          "total_ms": 8.258,
+          "visuals_ms": 0.047
+        },
+        "save": {
+          "capture_ms": 0.043,
+          "history_ms": 0.005,
+          "notify_ms": 0.015,
+          "ok": true,
+          "previous_ms": 1.338,
+          "serialize_ms": 1.175,
+          "snapshot_ms": 0.73,
+          "total_ms": 6.37,
+          "validate_ms": 0.941,
+          "validate_serialized_ms": 0.707,
+          "write_ms": 1.17
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.332,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.076,
+          "save_ms": 5.523,
+          "total_ms": 7.008,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.042,
+          "history_ms": 0.036,
+          "notify_ms": 0.015,
+          "ok": true,
+          "previous_ms": 1.236,
+          "serialize_ms": 0.818,
+          "snapshot_ms": 0.667,
+          "total_ms": 5.517,
+          "validate_ms": 0.6,
+          "validate_serialized_ms": 0.811,
+          "write_ms": 1.079
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.564,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.082,
+          "save_ms": 5.869,
+          "total_ms": 7.592,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.036,
+          "history_ms": 0.004,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.438,
+          "serialize_ms": 0.766,
+          "snapshot_ms": 0.697,
+          "total_ms": 5.863,
+          "validate_ms": 0.638,
+          "validate_serialized_ms": 0.791,
+          "write_ms": 1.265
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.535,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.069,
+          "save_ms": 5.056,
+          "total_ms": 6.741,
+          "visuals_ms": 0.046
+        },
+        "save": {
+          "capture_ms": 0.036,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.104,
+          "serialize_ms": 0.853,
+          "snapshot_ms": 0.631,
+          "total_ms": 5.049,
+          "validate_ms": 0.56,
+          "validate_serialized_ms": 0.578,
+          "write_ms": 1.063
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.5,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.079,
+          "save_ms": 5.161,
+          "total_ms": 6.826,
+          "visuals_ms": 0.049
+        },
+        "save": {
+          "capture_ms": 0.034,
+          "history_ms": 0.004,
+          "notify_ms": 0.014,
+          "ok": true,
+          "previous_ms": 1.179,
+          "serialize_ms": 0.771,
+          "snapshot_ms": 0.634,
+          "total_ms": 5.154,
+          "validate_ms": 0.559,
+          "validate_serialized_ms": 0.525,
+          "write_ms": 1.114
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.294,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.071,
+          "save_ms": 5.456,
+          "total_ms": 6.896,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.038,
+          "history_ms": 0.003,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.142,
+          "serialize_ms": 0.769,
+          "snapshot_ms": 0.739,
+          "total_ms": 5.45,
+          "validate_ms": 0.589,
+          "validate_serialized_ms": 0.792,
+          "write_ms": 1.158
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.35,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.079,
+          "save_ms": 5.055,
+          "total_ms": 6.56,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.037,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.094,
+          "serialize_ms": 0.754,
+          "snapshot_ms": 0.631,
+          "total_ms": 5.051,
+          "validate_ms": 0.553,
+          "validate_serialized_ms": 0.611,
+          "write_ms": 1.157
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.181,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.071,
+          "save_ms": 5.001,
+          "total_ms": 6.384,
+          "visuals_ms": 0.098
+        },
+        "save": {
+          "capture_ms": 0.034,
+          "history_ms": 0.004,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.151,
+          "serialize_ms": 0.773,
+          "snapshot_ms": 0.63,
+          "total_ms": 4.996,
+          "validate_ms": 0.636,
+          "validate_serialized_ms": 0.525,
+          "write_ms": 1.042
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.32,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.078,
+          "save_ms": 5.13,
+          "total_ms": 6.597,
+          "visuals_ms": 0.037
+        },
+        "save": {
+          "capture_ms": 0.031,
+          "history_ms": 0.004,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.183,
+          "serialize_ms": 0.752,
+          "snapshot_ms": 0.792,
+          "total_ms": 5.125,
+          "validate_ms": 0.596,
+          "validate_serialized_ms": 0.518,
+          "write_ms": 1.09
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.217,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.064,
+          "save_ms": 5.224,
+          "total_ms": 6.574,
+          "visuals_ms": 0.041
+        },
+        "save": {
+          "capture_ms": 0.033,
+          "history_ms": 0.004,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.122,
+          "serialize_ms": 0.77,
+          "snapshot_ms": 0.596,
+          "total_ms": 5.219,
+          "validate_ms": 0.562,
+          "validate_serialized_ms": 0.504,
+          "write_ms": 1.415
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.327,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.077,
+          "save_ms": 4.871,
+          "total_ms": 6.343,
+          "visuals_ms": 0.039
+        },
+        "save": {
+          "capture_ms": 0.032,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.078,
+          "serialize_ms": 0.758,
+          "snapshot_ms": 0.602,
+          "total_ms": 4.865,
+          "validate_ms": 0.595,
+          "validate_serialized_ms": 0.515,
+          "write_ms": 1.024
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.355,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.067,
+          "save_ms": 5.084,
+          "total_ms": 6.577,
+          "visuals_ms": 0.042
+        },
+        "save": {
+          "capture_ms": 0.031,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.104,
+          "serialize_ms": 0.864,
+          "snapshot_ms": 0.581,
+          "total_ms": 5.078,
+          "validate_ms": 0.578,
+          "validate_serialized_ms": 0.593,
+          "write_ms": 1.103
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.368,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.085,
+          "save_ms": 5.372,
+          "total_ms": 6.901,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.034,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.089,
+          "serialize_ms": 0.854,
+          "snapshot_ms": 0.788,
+          "total_ms": 5.367,
+          "validate_ms": 0.603,
+          "validate_serialized_ms": 0.558,
+          "write_ms": 1.213
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.391,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.078,
+          "save_ms": 5.462,
+          "total_ms": 7.01,
+          "visuals_ms": 0.046
+        },
+        "save": {
+          "capture_ms": 0.037,
+          "history_ms": 0.004,
+          "notify_ms": 0.014,
+          "ok": true,
+          "previous_ms": 1.223,
+          "serialize_ms": 0.867,
+          "snapshot_ms": 0.629,
+          "total_ms": 5.456,
+          "validate_ms": 0.63,
+          "validate_serialized_ms": 0.596,
+          "write_ms": 1.179
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.483,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.085,
+          "save_ms": 5.092,
+          "total_ms": 6.742,
+          "visuals_ms": 0.047
+        },
+        "save": {
+          "capture_ms": 0.038,
+          "history_ms": 0.004,
+          "notify_ms": 0.014,
+          "ok": true,
+          "previous_ms": 1.155,
+          "serialize_ms": 0.758,
+          "snapshot_ms": 0.609,
+          "total_ms": 5.087,
+          "validate_ms": 0.602,
+          "validate_serialized_ms": 0.597,
+          "write_ms": 1.084
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.357,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.073,
+          "save_ms": 5.266,
+          "total_ms": 6.776,
+          "visuals_ms": 0.047
+        },
+        "save": {
+          "capture_ms": 0.04,
+          "history_ms": 0.004,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.123,
+          "serialize_ms": 0.767,
+          "snapshot_ms": 0.766,
+          "total_ms": 5.259,
+          "validate_ms": 0.595,
+          "validate_serialized_ms": 0.56,
+          "write_ms": 1.169
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.92,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.077,
+          "save_ms": 4.924,
+          "total_ms": 6.996,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.035,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.086,
+          "serialize_ms": 0.813,
+          "snapshot_ms": 0.607,
+          "total_ms": 4.919,
+          "validate_ms": 0.546,
+          "validate_serialized_ms": 0.542,
+          "write_ms": 1.06
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.281,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.093,
+          "save_ms": 5.04,
+          "total_ms": 6.491,
+          "visuals_ms": 0.042
+        },
+        "save": {
+          "capture_ms": 0.035,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.094,
+          "serialize_ms": 0.75,
+          "snapshot_ms": 0.688,
+          "total_ms": 5.035,
+          "validate_ms": 0.614,
+          "validate_serialized_ms": 0.535,
+          "write_ms": 1.104
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.304,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.084,
+          "save_ms": 5.156,
+          "total_ms": 6.62,
+          "visuals_ms": 0.044
+        },
+        "save": {
+          "capture_ms": 0.035,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.162,
+          "serialize_ms": 0.76,
+          "snapshot_ms": 0.609,
+          "total_ms": 5.149,
+          "validate_ms": 0.613,
+          "validate_serialized_ms": 0.515,
+          "write_ms": 1.225
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.298,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.068,
+          "save_ms": 5.171,
+          "total_ms": 6.611,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.033,
+          "history_ms": 0.004,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.261,
+          "serialize_ms": 0.763,
+          "snapshot_ms": 0.739,
+          "total_ms": 5.166,
+          "validate_ms": 0.553,
+          "validate_serialized_ms": 0.533,
+          "write_ms": 1.064
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.42,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.1,
+          "save_ms": 4.949,
+          "total_ms": 6.576,
+          "visuals_ms": 0.076
+        },
+        "save": {
+          "capture_ms": 0.033,
+          "history_ms": 0.003,
+          "notify_ms": 0.012,
+          "ok": true,
+          "previous_ms": 1.101,
+          "serialize_ms": 0.825,
+          "snapshot_ms": 0.58,
+          "total_ms": 4.945,
+          "validate_ms": 0.556,
+          "validate_serialized_ms": 0.524,
+          "write_ms": 1.112
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.789,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.075,
+          "save_ms": 4.936,
+          "total_ms": 6.887,
+          "visuals_ms": 0.052
+        },
+        "save": {
+          "capture_ms": 0.034,
+          "history_ms": 0.004,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.11,
+          "serialize_ms": 0.742,
+          "snapshot_ms": 0.645,
+          "total_ms": 4.931,
+          "validate_ms": 0.605,
+          "validate_serialized_ms": 0.515,
+          "write_ms": 1.1
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.505,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.078,
+          "save_ms": 5.729,
+          "total_ms": 7.386,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.032,
+          "history_ms": 0.004,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.413,
+          "serialize_ms": 0.851,
+          "snapshot_ms": 0.904,
+          "total_ms": 5.724,
+          "validate_ms": 0.605,
+          "validate_serialized_ms": 0.611,
+          "write_ms": 1.097
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.56,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.086,
+          "save_ms": 5.402,
+          "total_ms": 7.128,
+          "visuals_ms": 0.043
+        },
+        "save": {
+          "capture_ms": 0.041,
+          "history_ms": 0.004,
+          "notify_ms": 0.013,
+          "ok": true,
+          "previous_ms": 1.098,
+          "serialize_ms": 0.754,
+          "snapshot_ms": 0.895,
+          "total_ms": 5.396,
+          "validate_ms": 0.765,
+          "validate_serialized_ms": 0.526,
+          "write_ms": 1.115
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.155,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.069,
+          "save_ms": 4.98,
+          "total_ms": 6.268,
+          "visuals_ms": 0.037
+        },
+        "save": {
+          "capture_ms": 0.028,
+          "history_ms": 0.003,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.075,
+          "serialize_ms": 0.784,
+          "snapshot_ms": 0.581,
+          "total_ms": 4.977,
+          "validate_ms": 0.537,
+          "validate_serialized_ms": 0.512,
+          "write_ms": 1.265
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.194,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.065,
+          "save_ms": 5.46,
+          "total_ms": 6.785,
+          "visuals_ms": 0.038
+        },
+        "save": {
+          "capture_ms": 0.027,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.263,
+          "serialize_ms": 1.075,
+          "snapshot_ms": 0.594,
+          "total_ms": 5.456,
+          "validate_ms": 0.548,
+          "validate_serialized_ms": 0.754,
+          "write_ms": 1.009
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.152,
+          "ok": true,
+          "order": "wood",
+          "prepare_ms": 0.073,
+          "save_ms": 4.713,
+          "total_ms": 5.998,
+          "visuals_ms": 0.037
+        },
+        "save": {
+          "capture_ms": 0.029,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.043,
+          "serialize_ms": 0.753,
+          "snapshot_ms": 0.573,
+          "total_ms": 4.709,
+          "validate_ms": 0.555,
+          "validate_serialized_ms": 0.481,
+          "write_ms": 1.048
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.085,
+          "ok": true,
+          "order": "stone",
+          "prepare_ms": 0.054,
+          "save_ms": 4.558,
+          "total_ms": 5.754,
+          "visuals_ms": 0.033
+        },
+        "save": {
+          "capture_ms": 0.022,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.031,
+          "serialize_ms": 0.753,
+          "snapshot_ms": 0.54,
+          "total_ms": 4.555,
+          "validate_ms": 0.548,
+          "validate_serialized_ms": 0.498,
+          "write_ms": 0.976
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.162,
+          "ok": true,
+          "order": "food",
+          "prepare_ms": 0.064,
+          "save_ms": 5.451,
+          "total_ms": 6.736,
+          "visuals_ms": 0.036
+        },
+        "save": {
+          "capture_ms": 0.022,
+          "history_ms": 0.003,
+          "notify_ms": 0.014,
+          "ok": true,
+          "previous_ms": 1.117,
+          "serialize_ms": 0.925,
+          "snapshot_ms": 0.518,
+          "total_ms": 5.448,
+          "validate_ms": 0.89,
+          "validate_serialized_ms": 0.536,
+          "write_ms": 1.188
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.127,
+          "ok": true,
+          "order": "wait",
+          "prepare_ms": 0.066,
+          "save_ms": 4.84,
+          "total_ms": 6.097,
+          "visuals_ms": 0.038
+        },
+        "save": {
+          "capture_ms": 0.028,
+          "history_ms": 0.003,
+          "notify_ms": 0.009,
+          "ok": true,
+          "previous_ms": 1.053,
+          "serialize_ms": 0.777,
+          "snapshot_ms": 0.592,
+          "total_ms": 4.835,
+          "validate_ms": 0.644,
+          "validate_serialized_ms": 0.516,
+          "write_ms": 1.039
+        }
+      },
+      {
+        "order": {
+          "committed": true,
+          "feedback_ms": 1.217,
+          "ok": true,
+          "order": "resume",
+          "prepare_ms": 0.067,
+          "save_ms": 4.852,
+          "total_ms": 6.2,
+          "visuals_ms": 0.038
+        },
+        "save": {
+          "capture_ms": 0.023,
+          "history_ms": 0.003,
+          "notify_ms": 0.011,
+          "ok": true,
+          "previous_ms": 1.033,
+          "serialize_ms": 0.752,
+          "snapshot_ms": 0.563,
+          "total_ms": 4.848,
+          "validate_ms": 0.534,
+          "validate_serialized_ms": 0.49,
+          "write_ms": 1.218
+        }
+      }
+    ],
+    "target_pc_acceptance": false
+  },
+  "environment": "Godot 4.6.3.stable.official.7d41c59c4, Linux scratch container, headless; no target-PC or frame-time acceptance.",
+  "base_commit": "176d088d34324de14952bc7506fe9763a22cf4b0"
+}

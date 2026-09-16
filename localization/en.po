@@ -4877,3 +4877,9 @@ msgstr "Seeking carrion"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Eating carrion"
+
+msgid "TRIBE_BUILD_TAB"
+msgstr "Build"
+
+msgid "TRIBE_RESIDENT_COMPACT"
+msgstr "{name} · {profession}\n{activity}"

@@ -101,6 +101,7 @@ func _construction_point(tribe: Node) -> Vector3:
 	return Vector3.INF
 
 func _construction_layout(tribe: Node) -> void:
+	tribe.panel._tabs.current_tab = tribe.panel._build_page.get_index()
 	var ui: VBoxContainer = tribe.panel._construction
 	var original: Vector2i = tree.root.size
 	var display: Node = tree.root.get_node("DisplaySettings")

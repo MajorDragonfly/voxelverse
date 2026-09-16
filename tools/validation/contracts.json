@@ -237,7 +237,8 @@
         "workplace_instances_test",
         "workplace_runtime_test",
         "construction_control_test",
-        "construction_runtime_test"
+        "construction_runtime_test",
+        "tribal_order_latency_test"
       ]
     },
     {

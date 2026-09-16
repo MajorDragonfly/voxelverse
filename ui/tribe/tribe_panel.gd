@@ -42,6 +42,7 @@ var animal_panel_open: bool = false
 var _jobs: OptionButton
 var _tabs: TabContainer
 var _orders_page: VBoxContainer
+var _build_page: VBoxContainer
 var _work_page: VBoxContainer
 var _workplaces: VBoxContainer
 var _construction: VBoxContainer
@@ -60,6 +61,7 @@ var _care_status: Label
 var _bind_animal: Button
 var _release_animal: Button
 var _change_site: Button
+var _font_scale: float = -1.0
 
 func _ready() -> void:
 	layer = 40
@@ -82,12 +84,12 @@ func _build() -> void:
 	_hud = PanelContainer.new()
 	_hud.resized.connect(_place_hud)
 	_hud.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
-	_hud.add_theme_stylebox_override("panel", Style.box())
+	_hud.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Color("354750"), 10))
 	add_child(_hud)
 	var column := Style.column(_hud, 7)
 	var header := HBoxContainer.new()
 	column.add_child(header)
-	_stock = Style.label("", 20, Style.SOCIAL)
+	_stock = Style.label("", 17, Style.SOCIAL)
 	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(_stock)
 	_collapse = _local_button("TRIBE_COLLAPSE")
@@ -111,7 +113,6 @@ func _build() -> void:
 	_goal = Style.label("", 17)
 	column.add_child(_goal)
 	_supply = Style.label("", 16, Style.MUTED)
-	column.add_child(_supply)
 	_residents = HFlowContainer.new()
 	column.add_child(_residents)
 	_tabs = TabContainer.new()
@@ -122,15 +123,22 @@ func _build() -> void:
 	_tabs.add_child(_orders_page)
 	_construction = preload("res://ui/tribe/construction_panel.gd").new()
 	_construction.controller = controller
-	_orders_page.add_child(_construction)
+	_build_page = VBoxContainer.new()
+	_build_page.name = "Bauen"
+	_build_page.add_child(_construction)
 	_work_page = VBoxContainer.new()
 	_work_page.name = "Arbeitsplätze & Berufe"
 	_tabs.add_child(_work_page)
+	_work_page.add_child(_supply)
 	_neighbors = Neighbors.new()
 	_neighbors.controller = controller
 	_neighbors.name = "Nachbarn"
 	var orders := HFlowContainer.new()
 	_orders_page.add_child(orders)
+	var builds := HFlowContainer.new()
+	_build_page.add_child(builds)
+	var care := HFlowContainer.new()
+	_work_page.add_child(care)
 	var all := _local_button("TRIBE_SELECT_ALL")
 	all.name = "SelectAll"
 	orders.add_child(all)
@@ -139,7 +147,12 @@ func _build() -> void:
 	for order: String in titles:
 		var button := Style.button(Presentation.order_title(order))
 		button.name = "Order_" + order
-		orders.add_child(button)
+		if order in ["tool", "hut", "tent", "garden"]:
+			builds.add_child(button)
+		elif order in ["supply", "feed", "drink"]:
+			care.add_child(button)
+		else:
+			orders.add_child(button)
 		button.pressed.connect(func() -> void: controller.issue_order(order))
 		_buttons[order] = button
 	_buttons["supply"].tooltip_text = Text.text("TRIBE_SUPPLY_HINT")
@@ -175,14 +188,18 @@ func _build() -> void:
 	_work_page.add_child(_local_label("TRIBE_PROFESSION_HINT", 15, Style.MUTED))
 	_workplaces = preload("res://ui/tribe/workplace_panel.gd").new()
 	_workplaces.controller = controller
+	# A completed station creates a new row even when the display scale did not change.
+	_workplaces.child_entered_tree.connect(func(_row: Node) -> void: _font_scale = -1.0)
 	_work_page.add_child(_workplaces)
 	_build_husbandry()
 	_tabs.add_child(_neighbors)
+	_tabs.add_child(_build_page)
 	_feedback = preload("res://ui/frontend/group_feedback.gd").new()
 	_feedback.controller = controller
 	_hud.get_child(0).add_child(_feedback)
 	_message = _feedback.result
-	column.add_child(_local_label("TRIBE_CONTROLS", 15, Style.MUTED))
+	_residents.tooltip_text = Text.text("TRIBE_CONTROLS")
+	_compact_controls(_hud)
 	_shade = ColorRect.new()
 	_shade.color = Color(0.015, 0.025, 0.035, 0.78)
 	_shade.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -221,9 +238,12 @@ func _build() -> void:
 func _layout() -> void:
 	if not is_inside_tree() or is_queued_for_deletion():
 		return
-	_apply_hud_fonts(_hud, clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5))
-	_apply_hud_fonts(_dialog, clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5))
-	_apply_hud_fonts(entry, clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5))
+	var font_scale: float = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
+	if font_scale != _font_scale:
+		_font_scale = font_scale
+		_apply_hud_fonts(_hud, font_scale)
+		_apply_hud_fonts(_dialog, font_scale)
+		_apply_hud_fonts(entry, font_scale)
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	_scale_factor = viewport_size.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
@@ -239,7 +259,8 @@ func _layout() -> void:
 	_scroll.visible = _hud_content.visible
 	var fixed_height: float = _hud.get_combined_minimum_size().y - _scroll.get_combined_minimum_size().y
 	var available_height: float = maxf(0.0, viewport_size.y - 36.0 - fixed_height)
-	_scroll.custom_minimum_size.y = minf(_hud_content.get_combined_minimum_size().y, minf(viewport_size.y * 0.44, available_height)) if _hud_content.visible else 0.0
+	var height_fraction: float = 0.25 if _tabs.get_current_tab_control() == _orders_page and font_scale <= 1.0 and viewport_size.y >= 900 else 0.36
+	_scroll.custom_minimum_size.y = minf(_hud_content.get_combined_minimum_size().y, minf(viewport_size.y * height_fraction, available_height)) if _hud_content.visible else 0.0
 	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
 	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
 	_hud.size = Vector2(maxf(viewport_size.x - 36 - reserve, 280.0), 0)
@@ -323,8 +344,8 @@ func refresh() -> void:
 	if data.is_empty():
 		return
 	_construction.refresh(data)
-	_goal.visible = _tabs.current_tab != 2
-	_supply.visible = _tabs.current_tab != 2
+	_goal.visible = _tabs.get_current_tab_control() == _orders_page
+	_supply.visible = true
 	var stock: Dictionary = data["stock"]
 	_stock.text = Text.format_text("TRIBE_STOCK", stock.merged({"eggs": stock.get("eggs", 0), "residents": data["members"].size(), "capacity": Housing.MAX_RESIDENTS, "beds": Housing.beds(data)}, true))
 	_supply.text = Text.text("TRIBE_STORE_HINT")
@@ -367,6 +388,7 @@ func refresh() -> void:
 			button.name = "Resident_" + str(member["id"])
 			button.pressed.connect(func() -> void: controller.select_member(member["id"], Input.is_key_pressed(KEY_SHIFT)))
 			_residents.add_child(button)
+			_apply_hud_fonts(button, maxf(1.0, _font_scale))
 	for i in range(data["members"].size()):
 		var member: Dictionary = data["members"][i]
 		var button: Button = _residents.get_child(i)
@@ -393,22 +415,27 @@ func refresh() -> void:
 			activity = Text.text("TRIBE_STOPPED")
 		if member["construction_id"] != "":
 			activity = Text.text("TRIBE_STOPPED_CARGO") if member["order"] == "wait" else Text.text("TRIBE_BUILD_CARGO")
-		button.text = Text.format_text("TRIBE_RESIDENT", {"name": member["name"], "profession": Presentation.job_title(member["profession"]), "food": roundi(float(member["hunger"])), "water": roundi(float(member["hydration"])), "activity": Text.format_text("TRIBE_CARRYING", {"resource": Presentation.resource_title(member["cargo"])}) if member["cargo"] != "" and member["construction_id"] == "" else activity})
+		var description := {"name": member["name"], "profession": Presentation.job_title(member["profession"]), "food": roundi(float(member["hunger"])), "water": roundi(float(member["hydration"])), "activity": Text.format_text("TRIBE_CARRYING", {"resource": Presentation.resource_title(member["cargo"])}) if member["cargo"] != "" and member["construction_id"] == "" else activity}
+		button.text = Text.format_text("TRIBE_RESIDENT_COMPACT", description)
+		button.tooltip_text = Text.format_text("TRIBE_RESIDENT", description)
 		var workplace: String = Economy.station_key(data, str(member.get("workplace_id", "")))
 		if not workplace.is_empty():
-			button.text += "\n" + Text.format_text("WORKPLACE_ASSIGNED", {"name": Text.text(Presentation.PROJECTS[Economy.station_kind(workplace)]), "number": 1 if workplace in Economy.STATIONS else 2})
+			button.tooltip_text += "\n" + Text.format_text("WORKPLACE_ASSIGNED", {"name": Text.text(Presentation.PROJECTS[Economy.station_kind(workplace)]), "number": 1 if workplace in Economy.STATIONS else 2})
 		var logical_width: float = get_viewport().get_visible_rect().size.x / _scale_factor
 		var columns: int = 2 if logical_width < 1000 else 3
 		button.custom_minimum_size.x = maxf(180.0, (_hud.size.x - 56.0) / columns)
-		button.tooltip_text = button.text
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
 		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty(): _buttons[order].disabled = true
 	_workplaces.refresh(data)
 	_buttons["milk"].visible = not data["economy"]["receipts"].is_empty()
-	_refresh_husbandry(data)
-	_neighbors.refresh()
+	# Hidden detail pages do not need to scan/validate the animal registry five
+	# times per second. Tab changes refresh them before the player interacts.
+	if _tabs.get_current_tab_control() == _husbandry_page:
+		_refresh_husbandry(data)
+	if _tabs.get_current_tab_control() == _neighbors:
+		_neighbors.refresh()
 	_feedback.refresh()
 	_layout()
 
@@ -488,6 +515,7 @@ func _exit_tree() -> void:
 func add_extension(control: Control) -> void:
 	control.name = "Zähmung"
 	_tabs.add_child(control)
+	_font_scale = -1.0
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(control), Text.text("TRIBE_TAMING_TAB"))
 	_tabs.tab_changed.connect(func(index: int) -> void:
 		animal_panel_open = _tabs.get_tab_control(index) == control
@@ -610,14 +638,16 @@ func _refresh_language() -> void:
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_orders_page), Text.text("TRIBE_ORDERS_TAB"))
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_work_page), Text.text("TRIBE_WORK_TAB"))
 	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_husbandry_page), Text.text("TRIBE_HUSBANDRY_TAB"))
+	_tabs.set_tab_title(_tabs.get_tab_idx_from_control(_build_page), Text.text("TRIBE_BUILD_TAB"))
+	_residents.tooltip_text = Text.text("TRIBE_CONTROLS")
 	for i in range(_tabs.get_tab_count()):
 		if _tabs.get_tab_control(i).name == "Zähmung":
 			_tabs.set_tab_title(i, Text.text("TRIBE_TAMING_TAB"))
 	for order: String in _buttons:
-		if _buttons[order].get_parent().get_parent() in [_orders_page, _work_page]:
+		if _buttons[order].get_parent().get_parent() in [_orders_page, _work_page, _build_page]:
 			_buttons[order].text = Presentation.order_title(order)
 			_buttons[order].autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			_buttons[order].custom_minimum_size.x = 200
+			_buttons[order].custom_minimum_size.x = 150
 	for i in range(_jobs.item_count):
 		_jobs.set_item_text(i, Presentation.job_title(Economy.JOBS.keys()[i]))
 	_buttons["supply"].tooltip_text = Text.text("TRIBE_SUPPLY_HINT")
@@ -639,7 +669,23 @@ func _apply_hud_fonts(node: Node, font_scale: float) -> void:
 	for child: Node in node.get_children(true):
 		_apply_hud_fonts(child, font_scale)
 
+func _compact_controls(node: Node) -> void:
+	if node is Button:
+		node.custom_minimum_size.y = 34
+		node.set_meta("tribe_base_font_size", 16)
+		node.add_theme_font_size_override("font_size", 16)
+		for state: String in ["normal", "hover", "pressed", "disabled"]:
+			var style: StyleBox = node.get_theme_stylebox(state).duplicate()
+			style.content_margin_top = 6
+			style.content_margin_bottom = 6
+			style.content_margin_left = 9
+			style.content_margin_right = 9
+			node.add_theme_stylebox_override(state, style)
+	for child: Node in node.get_children():
+		_compact_controls(child)
+
 func add_settlements(runtime: Node) -> void:
 	var page := preload("res://ui/tribe/settlement_panel.gd").new()
 	page.runtime = runtime
 	_tabs.add_child(page)
+	_font_scale = -1.0
