@@ -1,13 +1,24 @@
 extends RefCounted
 
-## Optional UI progress, independent of gameplay rewards and campaign events.
-const SCHEMA: int = 1
-const STEPS: Array[String] = ["look", "move", "jump", "inspect"]
-const GOALS: Dictionary = {"look": 0.55, "move": 4.0, "jump": 1.0, "inspect": 1.0}
-var data: Dictionary = {"schema": SCHEMA, "skipped": true, "progress": {"look": 0.0, "move": 0.0, "jump": 0.0, "inspect": 0.0}}
+## Optional UI progress only. Never grants rewards or changes the campaign phase.
+const SCHEMA: int = 2
+const CHAPTERS: Array[String] = ["explore", "survive", "home", "tribe"]
+const CHAPTER_STEPS: Dictionary = {
+	"explore": ["look", "move", "jump", "inspect"],
+	"survive": ["eat", "drink"], "home": ["home", "command"], "tribe": ["tribe"],
+}
+const STEPS: Array[String] = ["look", "move", "jump", "inspect", "eat", "drink", "home", "command", "tribe"]
+const GOALS: Dictionary = {"look": 0.55, "move": 4.0, "jump": 1.0, "inspect": 1.0,
+	"eat": 1.0, "drink": 1.0, "home": 1.0, "command": 1.0, "tribe": 1.0}
+var data: Dictionary
+
+func _init() -> void:
+	reset()
 
 func reset(enabled: bool = false) -> void:
-	data = {"schema": SCHEMA, "skipped": not enabled, "progress": {"look": 0.0, "move": 0.0, "jump": 0.0, "inspect": 0.0}}
+	data = {"schema": SCHEMA, "skipped": not enabled, "focus": "explore", "progress": {}}
+	for step in STEPS:
+		data.progress[step] = 0.0
 
 func import_state(value: Variant) -> void:
 	reset()
@@ -16,23 +27,29 @@ func import_state(value: Variant) -> void:
 	var version: Variant = value.get("schema")
 	if not (version is float or version is int) or not is_finite(float(version)):
 		return
-	# Preserve optional data from a later guide version without changing it.
-	if int(version) > SCHEMA:
+	# Do not round unknown fractional versions down to a supported contract.
+	if float(version) > SCHEMA:
 		data = value.duplicate(true)
 		return
-	if float(version) != float(SCHEMA) or not value.get("progress") is Dictionary:
+	if float(version) not in [1.0, float(SCHEMA)] or not value.get("progress") is Dictionary:
 		return
-	data.skipped = bool(value.get("skipped", true))
-	for step in STEPS:
-		var amount: Variant = value.progress.get(step, 0.0)
-		if (amount is float or amount is int) and is_finite(float(amount)):
-			data.progress[step] = clampf(float(amount), 0.0, GOALS[step])
+	data.skipped = value.get("skipped", true) != false
+	if value.get("focus") is String and value.focus in CHAPTERS:
+		data.focus = value.focus
+	var available: Array = CHAPTER_STEPS.explore if float(version) == 1.0 else STEPS
+	for step: String in available:
+		var amount_value: Variant = value.progress.get(step, 0.0)
+		if (amount_value is float or amount_value is int) and is_finite(float(amount_value)):
+			data.progress[step] = clampf(float(amount_value), 0.0, GOALS[step])
+	# An old finished introduction stays quiet. Expanded help is opt-in there.
+	if float(version) == 1.0 and chapter_completed("explore") == 4:
+		data.skipped = true
 
 func export_state() -> Dictionary:
 	return data.duplicate(true)
 
 func supported() -> bool:
-	return int(data.schema) == SCHEMA
+	return data.get("schema") == SCHEMA
 
 func amount(step: String) -> float:
 	return float(data.progress.get(step, 0.0)) if supported() and step in STEPS else 0.0
@@ -46,12 +63,35 @@ func completed_count() -> int:
 		count += int(done(step))
 	return count
 
-func current_step() -> String:
-	if supported() and not bool(data.skipped):
-		for step in STEPS:
-			if not done(step):
-				return step
+func chapter_completed(chapter: String) -> int:
+	var count: int = 0
+	for step: String in CHAPTER_STEPS.get(chapter, []):
+		count += int(done(step))
+	return count
+
+func chapter_for(step: String) -> String:
+	for chapter in CHAPTERS:
+		if step in CHAPTER_STEPS[chapter]:
+			return chapter
 	return ""
+
+func current_step() -> String:
+	# Reaching the tribe ends the introduction, even if optional exercises remain.
+	if not supported() or bool(data.skipped) or done("tribe"):
+		return ""
+	var ordered: Array = CHAPTER_STEPS[data.focus].duplicate()
+	ordered.append_array(STEPS)
+	for step: String in ordered:
+		if not done(step):
+			return step
+	return ""
+
+func select_chapter(chapter: String) -> bool:
+	if not supported() or chapter not in CHAPTERS or done("tribe"):
+		return false
+	data.focus = chapter
+	data.skipped = false
+	return true
 
 func record(step: String, value: float = 1.0) -> bool:
 	if current_step().is_empty() or step not in STEPS or not is_finite(value) or value <= 0.0 or done(step):

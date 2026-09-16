@@ -4211,3 +4211,147 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "GUIDE_TITLE"
+msgstr "DEIN WEG ZUM STAMM"
+
+msgid "GUIDE_INTRO"
+msgstr "Vier Kapitel begleiten dich vom Erkunden bis zum ersten Stamm. Wähle, was du als Nächstes lernen möchtest. Die Hilfe ist freiwillig und verändert keine Spielziele."
+
+msgid "GUIDE_CHAPTER_EXPLORE"
+msgstr "Erkunden"
+
+msgid "GUIDE_CHAPTER_SURVIVE"
+msgstr "Versorgen"
+
+msgid "GUIDE_CHAPTER_HOME"
+msgstr "Zusammenleben"
+
+msgid "GUIDE_CHAPTER_TRIBE"
+msgstr "Stamm gründen"
+
+msgid "GUIDE_STEP_LOOK"
+msgstr "Schau dich um"
+
+msgid "GUIDE_STEP_MOVE"
+msgstr "Erkunde deine Umgebung"
+
+msgid "GUIDE_STEP_JUMP"
+msgstr "Mach einen Sprung"
+
+msgid "GUIDE_STEP_INSPECT"
+msgstr "Scanne eine Kreatur"
+
+msgid "GUIDE_STEP_EAT"
+msgstr "Finde passende Nahrung"
+
+msgid "GUIDE_STEP_DRINK"
+msgstr "Trinke Süßwasser"
+
+msgid "GUIDE_STEP_HOME"
+msgstr "Lege eine Heimat fest"
+
+msgid "GUIDE_STEP_COMMAND"
+msgstr "Führe deine Gefährten"
+
+msgid "GUIDE_STEP_TRIBE"
+msgstr "Beginne das Stammeszeitalter"
+
+msgid "GUIDE_HINT_LOOK"
+msgstr "Bewege die Maus und schau dich in deiner Welt um."
+
+msgid "GUIDE_HINT_MOVE"
+msgstr "{forward} / {left} / {back} / {right} · Lege ein paar Meter zurück."
+
+msgid "GUIDE_HINT_JUMP"
+msgstr "{jump} · Springe von festem Boden ab."
+
+msgid "GUIDE_HINT_INSPECT"
+msgstr "{scan} · Halte eine Kreatur im Scanmodus im Fadenkreuz, bis der Kreis voll ist."
+
+msgid "GUIDE_HINT_EAT"
+msgstr "{interact} · Nähere dich Nahrung und interagiere mit ihr. Dein Mund bestimmt, was du verträgst."
+
+msgid "GUIDE_HINT_DRINK"
+msgstr "{interact} · Trinke an einem erreichbaren Süßwasserufer. Meerwasser hilft nicht."
+
+msgid "GUIDE_HINT_HOME"
+msgstr "N · Öffne deine Nestgruppe und lege auf freiem, ebenem, trockenem Boden eine Heimat fest."
+
+msgid "GUIDE_HINT_COMMAND"
+msgstr "N · Gib einem Gefährten oder der ganzen Gruppe den Befehl Folgen oder Heimkehren."
+
+msgid "GUIDE_HINT_TRIBE"
+msgstr "Rufe beide Gefährten heim. Öffne an der Heimat „Stammeszeitalter …“ und bestätige den Wechsel."
+
+msgid "GUIDE_DETAIL_LOOK"
+msgstr "Beim Spielen folgt die Kamera deiner Kreatur. Empfindlichkeit und invertierte Y-Achse findest du unter Esc → Steuerung."
+
+msgid "GUIDE_DETAIL_MOVE"
+msgstr "Nur tatsächlich zurückgelegte Strecke zählt. An Hindernissen stehen zu bleiben erfüllt die Aufgabe nicht."
+
+msgid "GUIDE_DETAIL_JUMP"
+msgstr "Im Wasser steigst du mit derselben Taste auf. Für diese Aufgabe brauchst du einen Sprung vom Boden."
+
+msgid "GUIDE_DETAIL_INSPECT"
+msgstr "Ein neuer Scan dauert 2,5 Sekunden; bereits bekannte Arten erkennst du sofort. Das Entdeckungsbuch ist über die Schaltfläche im HUD erreichbar."
+
+msgid "GUIDE_DETAIL_EAT"
+msgstr "Pflanzen liefern unter anderem Früchte und Pflanzenkost. Fleisch erhältst du von Beute. Bei vollem Magen oder ungeeigneter Nahrung zählt der Versuch nicht. Du musst für die Einführung keinen bestimmten Ernährungsstil wählen."
+
+msgid "GUIDE_DETAIL_DRINK"
+msgstr "Suche Flüsse oder Seen und gehe nah genug ans Wasser. Ein erfolgreicher Schluck füllt Durst auf. Mit vollem Durstbalken brauchst du noch nichts zu trinken."
+
+msgid "GUIDE_DETAIL_HOME"
+msgstr "Zwei Gefährten deiner eigenen Spezies gehören dauerhaft zur Heimat. Bäume, Wasser, Steilkanten oder zu wenig Platz verhindern das Anlegen. In der Nähe deiner Heimat regeneriert Gesundheit, wenn Hunger und Durst ausreichend gefüllt sind."
+
+msgid "GUIDE_DETAIL_COMMAND"
+msgstr "Befehle werden gespeichert. Folgen bringt die Gefährten zu dir; Heimkehren führt sie zurück zum Nest. Mit Warten hältst du sie an. Fremde Wildtiere werden dadurch nicht zu Gruppenmitgliedern."
+
+msgid "GUIDE_DETAIL_TRIBE"
+msgstr "Du und beide Gefährten müssen an der Heimat sein. Vor der Bestätigung prüft das Spiel sichere Wege und Arbeitsplätze. Abbrechen bleibt möglich. Nach dem Wechsel führst du Bewohner und verteilst Dorfaufgaben. Die Einführung bestätigt den Wechsel niemals für dich."
+
+msgid "GUIDE_CARD_COUNT"
+msgstr "{chapter} · {done}/{total}"
+
+msgid "GUIDE_FOOTER"
+msgstr "Esc → Erste Schritte: Kapitel und Hilfe"
+
+msgid "GUIDE_CHOOSE"
+msgstr "Weiter mit: {chapter}"
+
+msgid "GUIDE_TOTAL"
+msgstr "{done}/{total} Übungen erledigt. Der Fortschritt gehört zu diesem Abenteuer."
+
+msgid "GUIDE_FUTURE"
+msgstr "Diese Einführung stammt aus einer neueren Spielversion. Ihre Daten bleiben erhalten; die Hilfe kannst du weiterhin lesen."
+
+msgid "GUIDE_DISABLED"
+msgstr "Die Hinweise sind ausgeschaltet."
+
+msgid "GUIDE_RESTART"
+msgstr "Einführung neu beginnen"
+
+msgid "GUIDE_SKIP"
+msgstr "Hinweise ausschalten"
+
+msgid "GUIDE_FINISHED"
+msgstr "EINFÜHRUNG ABGESCHLOSSEN"
+
+msgid "GUIDE_TRIBE_NEXT"
+msgstr "Wähle Bewohner aus und verteile im Dorf Arbeitsaufträge. Die Kapitel bleiben als Hilfe im Pausemenü erreichbar."
+
+msgid "GUIDE_CONTEXT_WORLD"
+msgstr "Die Hinweise werden in der geladenen Spielwelt fortgesetzt."
+
+msgid "GUIDE_CONTEXT_FULL"
+msgstr "Dein Magen ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du wieder Nahrung brauchst."
+
+msgid "GUIDE_CONTEXT_HYDRATED"
+msgstr "Dein Durstbalken ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du trinken musst."
+
+msgid "GUIDE_CONTEXT_READY"
+msgstr "Deine Gruppe ist bereit. Öffne „Stammeszeitalter …“, um die Dorfwege prüfen zu lassen."
+
+msgid "GUIDE_CONTEXT_ANY_ORDER"
+msgstr "Aktionen zählen auch vor ihrem Kapitel. Du kannst Kapitel frei wählen oder die Hinweise ausschalten."

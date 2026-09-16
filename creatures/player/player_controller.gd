@@ -294,6 +294,7 @@ func _try_drink_water(point: Vector3 = Vector3.INF) -> void:
 		return
 	restore_thirst(water_drink_amount)
 	show_gameplay_message("Drank water.")
+	guidance_action.emit("drink", 1.0)
 
 
 func can_perform_action(action: StringName) -> bool:
@@ -335,9 +336,12 @@ func heal(amount: float) -> void:
 func restore_hunger(amount: float) -> void:
 	if is_dead or amount <= 0.0:
 		return
+	var previous: float = current_hunger
 	current_hunger = minf(current_hunger + amount, maximum_hunger)
 	_starvation_damage_timer = 0.0
 	_update_hud()
+	if current_hunger > previous:
+		guidance_action.emit("eat", 1.0)
 
 
 func restore_thirst(amount: float) -> void:

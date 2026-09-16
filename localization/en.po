@@ -4211,3 +4211,147 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "GUIDE_TITLE"
+msgstr "YOUR PATH TO A TRIBE"
+
+msgid "GUIDE_INTRO"
+msgstr "Four chapters guide you from exploration to your first tribe. Choose what you want to learn next. Guidance is optional and does not change game objectives."
+
+msgid "GUIDE_CHAPTER_EXPLORE"
+msgstr "Explore"
+
+msgid "GUIDE_CHAPTER_SURVIVE"
+msgstr "Survive"
+
+msgid "GUIDE_CHAPTER_HOME"
+msgstr "Live together"
+
+msgid "GUIDE_CHAPTER_TRIBE"
+msgstr "Found a tribe"
+
+msgid "GUIDE_STEP_LOOK"
+msgstr "Look around"
+
+msgid "GUIDE_STEP_MOVE"
+msgstr "Explore your surroundings"
+
+msgid "GUIDE_STEP_JUMP"
+msgstr "Take a jump"
+
+msgid "GUIDE_STEP_INSPECT"
+msgstr "Scan a creature"
+
+msgid "GUIDE_STEP_EAT"
+msgstr "Find suitable food"
+
+msgid "GUIDE_STEP_DRINK"
+msgstr "Drink fresh water"
+
+msgid "GUIDE_STEP_HOME"
+msgstr "Establish a home"
+
+msgid "GUIDE_STEP_COMMAND"
+msgstr "Lead your companions"
+
+msgid "GUIDE_STEP_TRIBE"
+msgstr "Begin the tribal age"
+
+msgid "GUIDE_HINT_LOOK"
+msgstr "Move the mouse to look around your world."
+
+msgid "GUIDE_HINT_MOVE"
+msgstr "{forward} / {left} / {back} / {right} · Walk a few metres."
+
+msgid "GUIDE_HINT_JUMP"
+msgstr "{jump} · Jump from solid ground."
+
+msgid "GUIDE_HINT_INSPECT"
+msgstr "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+
+msgid "GUIDE_HINT_EAT"
+msgstr "{interact} · Approach food and interact with it. Your mouth determines what you can eat."
+
+msgid "GUIDE_HINT_DRINK"
+msgstr "{interact} · Drink at a reachable freshwater shore. Sea water will not help."
+
+msgid "GUIDE_HINT_HOME"
+msgstr "N · Open your nest group and establish a home on clear, level, dry ground."
+
+msgid "GUIDE_HINT_COMMAND"
+msgstr "N · Tell a companion or the whole group to Follow or Return home."
+
+msgid "GUIDE_HINT_TRIBE"
+msgstr "Call both companions home. At your home, open “Tribal age …” and confirm the transition."
+
+msgid "GUIDE_DETAIL_LOOK"
+msgstr "The camera follows your creature during play. Mouse sensitivity and inverted Y are available under Esc → Controls."
+
+msgid "GUIDE_DETAIL_MOVE"
+msgstr "Only distance actually travelled counts. Pushing against an obstacle does not complete this task."
+
+msgid "GUIDE_DETAIL_JUMP"
+msgstr "The same key moves you upwards in water. This task requires a jump from the ground."
+
+msgid "GUIDE_DETAIL_INSPECT"
+msgstr "A new scan takes 2.5 seconds; known species are recognised immediately. Open the discovery journal using its HUD button."
+
+msgid "GUIDE_DETAIL_EAT"
+msgstr "Plants provide foods such as fruit and vegetation. Prey provides meat. Attempts with a full stomach or unsuitable food do not count. The guide does not require a particular diet."
+
+msgid "GUIDE_DETAIL_DRINK"
+msgstr "Find a river or lake and approach the water. A successful drink restores thirst. With a full thirst bar you do not need to drink yet."
+
+msgid "GUIDE_DETAIL_HOME"
+msgstr "Two companions of your own species permanently belong to your home. Trees, water, steep edges or insufficient space prevent founding it. Near home, health regenerates when hunger and thirst are sufficiently replenished."
+
+msgid "GUIDE_DETAIL_COMMAND"
+msgstr "Orders are saved. Follow brings companions to you; Return home sends them back to the nest. Wait stops them. Wild animals of other species do not become group members through these orders."
+
+msgid "GUIDE_DETAIL_TRIBE"
+msgstr "You and both companions must be at home. Before confirmation, the game checks safe routes and workplaces. You can still cancel. After the transition you lead residents and assign village tasks. Guidance never confirms the transition for you."
+
+msgid "GUIDE_CARD_COUNT"
+msgstr "{chapter} · {done}/{total}"
+
+msgid "GUIDE_FOOTER"
+msgstr "Esc → First steps: chapters and help"
+
+msgid "GUIDE_CHOOSE"
+msgstr "Continue with: {chapter}"
+
+msgid "GUIDE_TOTAL"
+msgstr "{done}/{total} exercises completed. Progress belongs to this adventure."
+
+msgid "GUIDE_FUTURE"
+msgstr "This guide was saved by a newer game version. Its data is preserved; you can still read the help."
+
+msgid "GUIDE_DISABLED"
+msgstr "Guidance is turned off."
+
+msgid "GUIDE_RESTART"
+msgstr "Restart introduction"
+
+msgid "GUIDE_SKIP"
+msgstr "Turn off guidance"
+
+msgid "GUIDE_FINISHED"
+msgstr "INTRODUCTION COMPLETE"
+
+msgid "GUIDE_TRIBE_NEXT"
+msgstr "Select residents and assign work in your village. The chapters remain available as help in the pause menu."
+
+msgid "GUIDE_CONTEXT_WORLD"
+msgstr "Guidance resumes in the loaded game world."
+
+msgid "GUIDE_CONTEXT_FULL"
+msgstr "Your stomach is full. Keep exploring or choose another chapter until you need food again."
+
+msgid "GUIDE_CONTEXT_HYDRATED"
+msgstr "Your thirst bar is full. Keep exploring or choose another chapter until you need a drink."
+
+msgid "GUIDE_CONTEXT_READY"
+msgstr "Your group is ready. Open “Tribal age …” to check the village routes."
+
+msgid "GUIDE_CONTEXT_ANY_ORDER"
+msgstr "Actions count even before their chapter. You can choose chapters freely or turn guidance off."

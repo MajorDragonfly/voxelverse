@@ -7021,6 +7021,246 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "GUIDE_TITLE",
+      "de": "DEIN WEG ZUM STAMM",
+      "en": "YOUR PATH TO A TRIBE"
+    },
+    {
+      "key": "GUIDE_INTRO",
+      "de": "Vier Kapitel begleiten dich vom Erkunden bis zum ersten Stamm. Wähle, was du als Nächstes lernen möchtest. Die Hilfe ist freiwillig und verändert keine Spielziele.",
+      "en": "Four chapters guide you from exploration to your first tribe. Choose what you want to learn next. Guidance is optional and does not change game objectives."
+    },
+    {
+      "key": "GUIDE_CHAPTER_EXPLORE",
+      "de": "Erkunden",
+      "en": "Explore"
+    },
+    {
+      "key": "GUIDE_CHAPTER_SURVIVE",
+      "de": "Versorgen",
+      "en": "Survive"
+    },
+    {
+      "key": "GUIDE_CHAPTER_HOME",
+      "de": "Zusammenleben",
+      "en": "Live together"
+    },
+    {
+      "key": "GUIDE_CHAPTER_TRIBE",
+      "de": "Stamm gründen",
+      "en": "Found a tribe"
+    },
+    {
+      "key": "GUIDE_STEP_LOOK",
+      "de": "Schau dich um",
+      "en": "Look around"
+    },
+    {
+      "key": "GUIDE_STEP_MOVE",
+      "de": "Erkunde deine Umgebung",
+      "en": "Explore your surroundings"
+    },
+    {
+      "key": "GUIDE_STEP_JUMP",
+      "de": "Mach einen Sprung",
+      "en": "Take a jump"
+    },
+    {
+      "key": "GUIDE_STEP_INSPECT",
+      "de": "Scanne eine Kreatur",
+      "en": "Scan a creature"
+    },
+    {
+      "key": "GUIDE_STEP_EAT",
+      "de": "Finde passende Nahrung",
+      "en": "Find suitable food"
+    },
+    {
+      "key": "GUIDE_STEP_DRINK",
+      "de": "Trinke Süßwasser",
+      "en": "Drink fresh water"
+    },
+    {
+      "key": "GUIDE_STEP_HOME",
+      "de": "Lege eine Heimat fest",
+      "en": "Establish a home"
+    },
+    {
+      "key": "GUIDE_STEP_COMMAND",
+      "de": "Führe deine Gefährten",
+      "en": "Lead your companions"
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE",
+      "de": "Beginne das Stammeszeitalter",
+      "en": "Begin the tribal age"
+    },
+    {
+      "key": "GUIDE_HINT_LOOK",
+      "de": "Bewege die Maus und schau dich in deiner Welt um.",
+      "en": "Move the mouse to look around your world."
+    },
+    {
+      "key": "GUIDE_HINT_MOVE",
+      "de": "{forward} / {left} / {back} / {right} · Lege ein paar Meter zurück.",
+      "en": "{forward} / {left} / {back} / {right} · Walk a few metres."
+    },
+    {
+      "key": "GUIDE_HINT_JUMP",
+      "de": "{jump} · Springe von festem Boden ab.",
+      "en": "{jump} · Jump from solid ground."
+    },
+    {
+      "key": "GUIDE_HINT_INSPECT",
+      "de": "{scan} · Halte eine Kreatur im Scanmodus im Fadenkreuz, bis der Kreis voll ist.",
+      "en": "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+    },
+    {
+      "key": "GUIDE_HINT_EAT",
+      "de": "{interact} · Nähere dich Nahrung und interagiere mit ihr. Dein Mund bestimmt, was du verträgst.",
+      "en": "{interact} · Approach food and interact with it. Your mouth determines what you can eat."
+    },
+    {
+      "key": "GUIDE_HINT_DRINK",
+      "de": "{interact} · Trinke an einem erreichbaren Süßwasserufer. Meerwasser hilft nicht.",
+      "en": "{interact} · Drink at a reachable freshwater shore. Sea water will not help."
+    },
+    {
+      "key": "GUIDE_HINT_HOME",
+      "de": "N · Öffne deine Nestgruppe und lege auf freiem, ebenem, trockenem Boden eine Heimat fest.",
+      "en": "N · Open your nest group and establish a home on clear, level, dry ground."
+    },
+    {
+      "key": "GUIDE_HINT_COMMAND",
+      "de": "N · Gib einem Gefährten oder der ganzen Gruppe den Befehl Folgen oder Heimkehren.",
+      "en": "N · Tell a companion or the whole group to Follow or Return home."
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE",
+      "de": "Rufe beide Gefährten heim. Öffne an der Heimat „Stammeszeitalter …“ und bestätige den Wechsel.",
+      "en": "Call both companions home. At your home, open “Tribal age …” and confirm the transition."
+    },
+    {
+      "key": "GUIDE_DETAIL_LOOK",
+      "de": "Beim Spielen folgt die Kamera deiner Kreatur. Empfindlichkeit und invertierte Y-Achse findest du unter Esc → Steuerung.",
+      "en": "The camera follows your creature during play. Mouse sensitivity and inverted Y are available under Esc → Controls."
+    },
+    {
+      "key": "GUIDE_DETAIL_MOVE",
+      "de": "Nur tatsächlich zurückgelegte Strecke zählt. An Hindernissen stehen zu bleiben erfüllt die Aufgabe nicht.",
+      "en": "Only distance actually travelled counts. Pushing against an obstacle does not complete this task."
+    },
+    {
+      "key": "GUIDE_DETAIL_JUMP",
+      "de": "Im Wasser steigst du mit derselben Taste auf. Für diese Aufgabe brauchst du einen Sprung vom Boden.",
+      "en": "The same key moves you upwards in water. This task requires a jump from the ground."
+    },
+    {
+      "key": "GUIDE_DETAIL_INSPECT",
+      "de": "Ein neuer Scan dauert 2,5 Sekunden; bereits bekannte Arten erkennst du sofort. Das Entdeckungsbuch ist über die Schaltfläche im HUD erreichbar.",
+      "en": "A new scan takes 2.5 seconds; known species are recognised immediately. Open the discovery journal using its HUD button."
+    },
+    {
+      "key": "GUIDE_DETAIL_EAT",
+      "de": "Pflanzen liefern unter anderem Früchte und Pflanzenkost. Fleisch erhältst du von Beute. Bei vollem Magen oder ungeeigneter Nahrung zählt der Versuch nicht. Du musst für die Einführung keinen bestimmten Ernährungsstil wählen.",
+      "en": "Plants provide foods such as fruit and vegetation. Prey provides meat. Attempts with a full stomach or unsuitable food do not count. The guide does not require a particular diet."
+    },
+    {
+      "key": "GUIDE_DETAIL_DRINK",
+      "de": "Suche Flüsse oder Seen und gehe nah genug ans Wasser. Ein erfolgreicher Schluck füllt Durst auf. Mit vollem Durstbalken brauchst du noch nichts zu trinken.",
+      "en": "Find a river or lake and approach the water. A successful drink restores thirst. With a full thirst bar you do not need to drink yet."
+    },
+    {
+      "key": "GUIDE_DETAIL_HOME",
+      "de": "Zwei Gefährten deiner eigenen Spezies gehören dauerhaft zur Heimat. Bäume, Wasser, Steilkanten oder zu wenig Platz verhindern das Anlegen. In der Nähe deiner Heimat regeneriert Gesundheit, wenn Hunger und Durst ausreichend gefüllt sind.",
+      "en": "Two companions of your own species permanently belong to your home. Trees, water, steep edges or insufficient space prevent founding it. Near home, health regenerates when hunger and thirst are sufficiently replenished."
+    },
+    {
+      "key": "GUIDE_DETAIL_COMMAND",
+      "de": "Befehle werden gespeichert. Folgen bringt die Gefährten zu dir; Heimkehren führt sie zurück zum Nest. Mit Warten hältst du sie an. Fremde Wildtiere werden dadurch nicht zu Gruppenmitgliedern.",
+      "en": "Orders are saved. Follow brings companions to you; Return home sends them back to the nest. Wait stops them. Wild animals of other species do not become group members through these orders."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE",
+      "de": "Du und beide Gefährten müssen an der Heimat sein. Vor der Bestätigung prüft das Spiel sichere Wege und Arbeitsplätze. Abbrechen bleibt möglich. Nach dem Wechsel führst du Bewohner und verteilst Dorfaufgaben. Die Einführung bestätigt den Wechsel niemals für dich.",
+      "en": "You and both companions must be at home. Before confirmation, the game checks safe routes and workplaces. You can still cancel. After the transition you lead residents and assign village tasks. Guidance never confirms the transition for you."
+    },
+    {
+      "key": "GUIDE_CARD_COUNT",
+      "de": "{chapter} · {done}/{total}",
+      "en": "{chapter} · {done}/{total}"
+    },
+    {
+      "key": "GUIDE_FOOTER",
+      "de": "Esc → Erste Schritte: Kapitel und Hilfe",
+      "en": "Esc → First steps: chapters and help"
+    },
+    {
+      "key": "GUIDE_CHOOSE",
+      "de": "Weiter mit: {chapter}",
+      "en": "Continue with: {chapter}"
+    },
+    {
+      "key": "GUIDE_TOTAL",
+      "de": "{done}/{total} Übungen erledigt. Der Fortschritt gehört zu diesem Abenteuer.",
+      "en": "{done}/{total} exercises completed. Progress belongs to this adventure."
+    },
+    {
+      "key": "GUIDE_FUTURE",
+      "de": "Diese Einführung stammt aus einer neueren Spielversion. Ihre Daten bleiben erhalten; die Hilfe kannst du weiterhin lesen.",
+      "en": "This guide was saved by a newer game version. Its data is preserved; you can still read the help."
+    },
+    {
+      "key": "GUIDE_DISABLED",
+      "de": "Die Hinweise sind ausgeschaltet.",
+      "en": "Guidance is turned off."
+    },
+    {
+      "key": "GUIDE_RESTART",
+      "de": "Einführung neu beginnen",
+      "en": "Restart introduction"
+    },
+    {
+      "key": "GUIDE_SKIP",
+      "de": "Hinweise ausschalten",
+      "en": "Turn off guidance"
+    },
+    {
+      "key": "GUIDE_FINISHED",
+      "de": "EINFÜHRUNG ABGESCHLOSSEN",
+      "en": "INTRODUCTION COMPLETE"
+    },
+    {
+      "key": "GUIDE_TRIBE_NEXT",
+      "de": "Wähle Bewohner aus und verteile im Dorf Arbeitsaufträge. Die Kapitel bleiben als Hilfe im Pausemenü erreichbar.",
+      "en": "Select residents and assign work in your village. The chapters remain available as help in the pause menu."
+    },
+    {
+      "key": "GUIDE_CONTEXT_WORLD",
+      "de": "Die Hinweise werden in der geladenen Spielwelt fortgesetzt.",
+      "en": "Guidance resumes in the loaded game world."
+    },
+    {
+      "key": "GUIDE_CONTEXT_FULL",
+      "de": "Dein Magen ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du wieder Nahrung brauchst.",
+      "en": "Your stomach is full. Keep exploring or choose another chapter until you need food again."
+    },
+    {
+      "key": "GUIDE_CONTEXT_HYDRATED",
+      "de": "Dein Durstbalken ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du trinken musst.",
+      "en": "Your thirst bar is full. Keep exploring or choose another chapter until you need a drink."
+    },
+    {
+      "key": "GUIDE_CONTEXT_READY",
+      "de": "Deine Gruppe ist bereit. Öffne „Stammeszeitalter …“, um die Dorfwege prüfen zu lassen.",
+      "en": "Your group is ready. Open “Tribal age …” to check the village routes."
+    },
+    {
+      "key": "GUIDE_CONTEXT_ANY_ORDER",
+      "de": "Aktionen zählen auch vor ihrem Kapitel. Du kannst Kapitel frei wählen oder die Hinweise ausschalten.",
+      "en": "Actions count even before their chapter. You can choose chapters freely or turn guidance off."
     }
   ]
 }
