@@ -7021,6 +7021,121 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "SAVE_BROWSER_BACK",
+      "de": "Startmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "SAVE_VIEW_DETAILS",
+      "de": "Details",
+      "en": "Details"
+    },
+    {
+      "key": "SAVE_VIEW_RESULTS",
+      "de": "Ergebnisliste",
+      "en": "Results"
+    },
+    {
+      "key": "SAVE_SEARCH_PLACEHOLDER",
+      "de": "Name oder Weltseed suchen …",
+      "en": "Search name or world seed …"
+    },
+    {
+      "key": "SAVE_SEARCH_HINT",
+      "de": "Mehrere Suchwörter kombinieren · Strg+F / Cmd+F",
+      "en": "Combine search terms · Ctrl+F / Cmd+F"
+    },
+    {
+      "key": "SAVE_FILTER_RESET",
+      "de": "Zurücksetzen",
+      "en": "Reset"
+    },
+    {
+      "key": "SAVE_PHASE_HINT",
+      "de": "Nach Epoche filtern",
+      "en": "Filter by era"
+    },
+    {
+      "key": "SAVE_STATE_HINT",
+      "de": "Nach Zustand filtern",
+      "en": "Filter by condition"
+    },
+    {
+      "key": "SAVE_SORT_HINT",
+      "de": "Sortierung der Spielstände",
+      "en": "Save sorting"
+    },
+    {
+      "key": "SAVE_PHASE_ALL",
+      "de": "Alle Epochen",
+      "en": "All eras"
+    },
+    {
+      "key": "SAVE_FILTER_ALL",
+      "de": "Alle Zustände",
+      "en": "All conditions"
+    },
+    {
+      "key": "SAVE_FILTER_READY",
+      "de": "Intakte Spielstände",
+      "en": "Intact saves"
+    },
+    {
+      "key": "SAVE_FILTER_ATTENTION",
+      "de": "Prüfung / Sicherung",
+      "en": "Review / backup"
+    },
+    {
+      "key": "SAVE_SORT_RECENT",
+      "de": "Zuletzt gespeichert",
+      "en": "Recently saved"
+    },
+    {
+      "key": "SAVE_SORT_NAME",
+      "de": "Name A–Z",
+      "en": "Name A–Z"
+    },
+    {
+      "key": "SAVE_SORT_PLAYTIME",
+      "de": "Meiste Spielzeit",
+      "en": "Most playtime"
+    },
+    {
+      "key": "SAVE_LIST_SEED",
+      "de": "Weltseed {seed}",
+      "en": "World seed {seed}"
+    },
+    {
+      "key": "SAVE_LIST_BACKUP",
+      "de": "Letzte Sicherung verfügbar",
+      "en": "Last backup available"
+    },
+    {
+      "key": "SAVE_PAGE",
+      "de": "Seite {page}/{pages} · {count} von {total}",
+      "en": "Page {page}/{pages} · {count} of {total}"
+    },
+    {
+      "key": "SAVE_PAGE_PREVIOUS",
+      "de": "Vorherige Spielstände",
+      "en": "Previous saves"
+    },
+    {
+      "key": "SAVE_PAGE_NEXT",
+      "de": "Weitere Spielstände",
+      "en": "More saves"
+    },
+    {
+      "key": "SAVE_NO_RESULTS",
+      "de": "Keine passenden Abenteuer. Ändere die Suche oder setze die Filter zurück.",
+      "en": "No matching adventures. Change your search or reset the filters."
+    },
+    {
+      "key": "SAVE_SELECT_RESULT",
+      "de": "Wähle ein Abenteuer aus der Ergebnisliste.",
+      "en": "Select an adventure from the results."
     }
   ]
 }

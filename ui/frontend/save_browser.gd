@@ -1,5 +1,6 @@
 extends Control
 
+const Query = preload("res://ui/frontend/slot_browser_query.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 signal back_requested
 const Style = preload("res://ui/frontend/menu_style.gd")
@@ -15,6 +16,37 @@ var _restore_button: Button
 var selected_path: String = ""
 var _slots: Array = []
 var _entries: Array = []
+var _filtered: Array[Dictionary] = []
+var _page: int = 0
+var _search: LineEdit
+var _phase_filter: OptionButton
+var _state_filter: OptionButton
+var _sort: OptionButton
+var _reset: Button
+var _page_label: Label
+var _previous: Button
+var _next: Button
+var _margin: MarginContainer
+var _toolbar: HBoxContainer
+var _brand: Label
+var _heading: Label
+var _tools: VBoxContainer
+var _left: VBoxContainer
+var _slot_scroll: ScrollContainer
+var _right: ScrollContainer
+var _details_toggle: Button
+var _overview: BoxContainer
+var _detail_picture: Control
+var _detail_summary: VBoxContainer
+var _compact: bool = false
+var _show_details: bool = false
+var _query_pending: bool = false
+var _query_delay: float = 0.0
+var _selection_memory: Dictionary = {}
+const STATUS_KEYS := ["SAVE_FILTER_ALL", "SAVE_FILTER_READY", "SAVE_FILTER_ATTENTION"]
+const STATUS_IDS := ["all", "ready", "attention"]
+const SORT_KEYS := ["SAVE_SORT_RECENT", "SAVE_SORT_NAME", "SAVE_SORT_PLAYTIME"]
+const SORT_IDS := ["recent", "name", "playtime"]
 
 func _ready() -> void:
 	name = "SaveBrowser"
@@ -26,64 +58,166 @@ func _ready() -> void:
 	background.color = Style.INK
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(background)
-	var margin := MarginContainer.new()
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	margin.offset_left = 80
-	margin.offset_top = 36
-	margin.offset_right = -80
-	margin.offset_bottom = -30
-	add_child(margin)
+	_margin = MarginContainer.new()
+	_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(_margin)
 	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 20)
-	margin.add_child(column)
-	var toolbar := HBoxContainer.new()
-	column.add_child(toolbar)
-	Style.label(toolbar, "VOXELVERSE", 30, Style.ACCENT)
+	column.add_theme_constant_override("separation", 12)
+	_margin.add_child(column)
+	_toolbar = HBoxContainer.new()
+	column.add_child(_toolbar)
+	_brand = Style.label(_toolbar, "VOXELVERSE", 26, Style.ACCENT)
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	toolbar.add_child(spacer)
-	Style.button(toolbar, "Zurück zum Startmenü", func(): back_requested.emit(), "BackFromSaves")
-	Style.label(column, "DEINE ABENTEUER", 27)
+	_toolbar.add_child(spacer)
+	_details_toggle = _button(_toolbar, "SAVE_VIEW_DETAILS", func() -> void: _show_details = not _show_details; _layout(), "SaveDetailsToggle")
+	_button(_toolbar, "SAVE_BROWSER_BACK", func() -> void: back_requested.emit(), "BackFromSaves")
+	_heading = Style.label(column, "DEINE ABENTEUER", 27)
+	_tools = VBoxContainer.new()
+	column.add_child(_tools)
+	var search_row := HBoxContainer.new()
+	_tools.add_child(search_row)
+	_search = LineEdit.new()
+	_search.name = "SearchSaves"
+	_search.placeholder_text = "SAVE_SEARCH_PLACEHOLDER"
+	_search.tooltip_text = "SAVE_SEARCH_HINT"
+	_search.clear_button_enabled = true
+	_search.max_length = 128
+	_search.custom_minimum_size.y = 48
+	_search.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_search.text_changed.connect(func(_value: String) -> void: _query_pending = true; _query_delay = 0.18)
+	search_row.add_child(_search)
+	_reset = _button(search_row, "SAVE_FILTER_RESET", _reset_filters, "ResetSaveFilters")
+	var filters := HFlowContainer.new()
+	filters.add_theme_constant_override("h_separation", 8)
+	filters.add_theme_constant_override("v_separation", 8)
+	_tools.add_child(filters)
+	_phase_filter = _choice(filters, "SavePhase", "SAVE_PHASE_HINT")
+	_state_filter = _choice(filters, "SaveState", "SAVE_STATE_HINT")
+	_sort = _choice(filters, "SaveSort", "SAVE_SORT_HINT")
+	_translate_filters()
 	var panes := HBoxContainer.new()
-	panes.add_theme_constant_override("separation", 24)
+	panes.add_theme_constant_override("separation", 20)
 	panes.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	column.add_child(panes)
-	var left := ScrollContainer.new()
-	left.name = "SlotScroll"
-	left.custom_minimum_size.x = 470
-	left.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	left.follow_focus = true
-	panes.add_child(left)
+	_left = VBoxContainer.new()
+	panes.add_child(_left)
+	_slot_scroll = ScrollContainer.new()
+	_slot_scroll.name = "SlotScroll"
+	_slot_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_slot_scroll.follow_focus = true
+	_slot_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_left.add_child(_slot_scroll)
 	_list = VBoxContainer.new()
 	_list.name = "SlotList"
 	_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	left.add_child(_list)
-	var right := ScrollContainer.new()
-	right.name = "DetailsScroll"
-	right.custom_minimum_size.x = 540
-	right.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	right.follow_focus = true
-	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panes.add_child(right)
+	_slot_scroll.add_child(_list)
+	var pager := HBoxContainer.new()
+	pager.name = "SavePages"
+	_left.add_child(pager)
+	_previous = _button(pager, "←", func() -> void: _turn_page(-1), "PreviousSavePage")
+	_page_label = Style.label(pager, "", 17)
+	_page_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_page_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_page_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_page_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_next = _button(pager, "→", func() -> void: _turn_page(1), "NextSavePage")
+	_right = ScrollContainer.new()
+	_right.name = "DetailsScroll"
+	_right.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_right.follow_focus = true
+	_right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panes.add_child(_right)
 	_details = VBoxContainer.new()
 	_details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_details.add_theme_constant_override("separation", 12)
-	right.add_child(_details)
+	_right.add_child(_details)
 	_status = Style.paragraph(column, "", 19)
 	_status.name = "SlotStatus"
-	_status.custom_minimum_size.y = 52
 	_status.add_theme_color_override("font_color", Style.ACCENT)
+	get_viewport().size_changed.connect(_layout)
+	resized.connect(_layout)
+	_right.resized.connect(_layout)
 	refresh()
 
 func refresh(preferred_path: String = "") -> void:
+	_remember_selection()
 	_slots = _saves.list_slots()
+	var paths: Array = _slots.map(func(slot: Dictionary) -> String: return str(slot.path))
+	for path: String in _selection_memory.keys():
+		if path not in paths: _selection_memory.erase(path)
+	_apply_query(preferred_path, true)
+
+func _choice(parent: Node, id: String, hint: String) -> OptionButton:
+	var choice := OptionButton.new()
+	choice.name = id
+	choice.tooltip_text = hint
+	choice.custom_minimum_size = Vector2(205, 44)
+	choice.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	choice.fit_to_longest_item = false
+	choice.item_selected.connect(func(_index: int) -> void: _apply_query())
+	parent.add_child(choice)
+	return choice
+
+func _translate_filters() -> void:
+	var indices := [_phase_filter.selected, _state_filter.selected, _sort.selected]
+	_phase_filter.clear()
+	_phase_filter.add_item(Text.text("SAVE_PHASE_ALL"), -1)
+	for phase in range(6): _phase_filter.add_item(Dates._phase(phase), phase)
+	_state_filter.clear()
+	for key: String in STATUS_KEYS: _state_filter.add_item(Text.text(key))
+	_sort.clear()
+	for key: String in SORT_KEYS: _sort.add_item(Text.text(key))
+	_phase_filter.select(maxi(indices[0], 0))
+	_state_filter.select(maxi(indices[1], 0))
+	_sort.select(maxi(indices[2], 0))
+
+func _process(delta: float) -> void:
+	_status.visible = not _status.text.is_empty()
+	if not _query_pending: return
+	_query_delay -= delta
+	if _query_delay <= 0.0: _apply_query()
+
+func _clear_filters() -> void:
+	_search.clear()
+	_phase_filter.select(0)
+	_state_filter.select(0)
+
+func _reset_filters() -> void:
+	_clear_filters()
+	_apply_query()
+
+func _apply_query(preferred_path: String = "", force_details: bool = false) -> void:
+	_query_pending = false
+	_filtered = Query.select(_slots, _search.text, _phase_filter.selected - 1, STATUS_IDS[_state_filter.selected], SORT_IDS[_sort.selected])
+	if not preferred_path.is_empty() and Query.page_for(_filtered, preferred_path) < 0 and Query.page_for(_slots, preferred_path) >= 0:
+		# After copy/restore/rename the acted-on slot must remain visible.
+		_clear_filters()
+		_filtered = Query.select(_slots, "", -1, "all", SORT_IDS[_sort.selected])
+	var desired := preferred_path if not preferred_path.is_empty() else selected_path
+	var found := Query.page_for(_filtered, desired)
+	_page = found if found >= 0 else 0
+	_query_pending = false
+	_render_page(desired, force_details)
+
+func _turn_page(direction: int) -> void:
+	if _query_pending:
+		_apply_query()
+		return
+	_page = clampi(_page + direction, 0, maxi(ceili(float(_filtered.size()) / Query.PAGE_SIZE) - 1, 0))
+	_render_page()
+	_slot_scroll.scroll_vertical = 0
+
+func _render_page(preferred_path: String = "", force_details: bool = false) -> void:
 	_clear_children(_list)
-	for slot: Dictionary in _slots:
+	var visible_slots := Query.page(_filtered, _page)
+	for slot: Dictionary in visible_slots:
 		var button := Button.new()
 		button.name = "Slot_" + str(slot.path).get_file().trim_suffix(".json")
 		button.toggle_mode = true
 		button.set_meta("slot_path", slot.path)
-		button.custom_minimum_size = Vector2(450, 128)
+		button.custom_minimum_size = Vector2(0, 120)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.pressed.connect(func(): select_slot(str(slot.path)))
 		_list.add_child(button)
 		var margin := MarginContainer.new()
@@ -97,7 +231,7 @@ func refresh(preferred_path: String = "") -> void:
 		row.add_theme_constant_override("separation", 12)
 		margin.add_child(row)
 		var picture: Control = _preview(slot.preview, 98, false)
-		picture.custom_minimum_size.x = 150
+		picture.custom_minimum_size.x = 120
 		row.add_child(picture)
 		var text_column := VBoxContainer.new()
 		text_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -105,33 +239,73 @@ func refresh(preferred_path: String = "") -> void:
 		var label := Style.label(text_column, str(slot.name), 21)
 		label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-		label.custom_minimum_size.x = 220
-		Style.label(text_column, Dates._phase(int(slot.phase)) + Text.text(" · %d Min.") % int(float(slot.seconds) / 60.0), 17, Style.MUTED)
-		Style.label(text_column, Text.text("Planet %d") % (int(slot.planet_index) + 1) if slot.valid else "Wiederherstellung prüfen", 17, Style.ACCENT)
+		label.custom_minimum_size.x = 0
+		var phase_label := Style.label(text_column, Dates._phase(int(slot.phase)) + Text.text(" · %d Min.") % int(float(slot.seconds) / 60.0), 17, Style.MUTED)
+		phase_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		var summary := Style.label(text_column, Text.format_text("SAVE_LIST_SEED", {"seed": slot.seed}) if slot.valid and not slot.recovered else Text.text("SAVE_LIST_BACKUP" if slot.recovered else "Wiederherstellung prüfen"), 17, Style.ACCENT)
+		summary.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		_ignore_mouse(margin)
-	if _slots.is_empty():
-		Style.paragraph(_list, "Dein erstes Abenteuer beginnt mit „Neues Spiel“.")
+	_previous.disabled = _page <= 0
+	_next.disabled = (_page + 1) * Query.PAGE_SIZE >= _filtered.size()
+	_page_label.text = Text.format_text("SAVE_PAGE", {"page": _page + 1, "pages": maxi(ceili(float(_filtered.size()) / Query.PAGE_SIZE), 1), "count": _filtered.size(), "total": _slots.size()})
+	_previous.tooltip_text = "SAVE_PAGE_PREVIOUS"
+	_next.tooltip_text = "SAVE_PAGE_NEXT"
+	if visible_slots.is_empty():
+		_remember_selection()
+		selected_path = ""
 		_clear_children(_details)
-		return
-	var chosen: String = preferred_path if not preferred_path.is_empty() else selected_path
-	if not _slots.any(func(slot: Dictionary): return str(slot.path) == chosen):
-		chosen = str(_slots[0].path)
-	select_slot(chosen)
+		_name_input = null
+		_history = null
+		_entries = []
+		Style.paragraph(_list, "Dein erstes Abenteuer beginnt mit „Neues Spiel“." if _slots.is_empty() else "SAVE_NO_RESULTS")
+		Style.paragraph(_details, "SAVE_SELECT_RESULT")
+		_show_details = false
+	else:
+		var chosen := preferred_path if not preferred_path.is_empty() else selected_path
+		if Query.page_for(visible_slots, chosen) < 0: chosen = str(visible_slots[0].path)
+		if force_details or chosen != selected_path: _show_slot(chosen)
+		_mark_selection()
+	_layout()
 
 func select_slot(path: String) -> void:
+	if Query.page_for(_slots, path) < 0: return
+	if Query.page_for(_filtered, path) != _page:
+		_apply_query(path)
+	else:
+		_show_slot(path)
+	_show_details = true
+	_layout()
+
+func _mark_selection() -> void:
+	for child in _list.get_children():
+		if child is Button: child.set_pressed_no_signal(str(child.get_meta("slot_path")) == selected_path)
+
+func _remember_selection() -> void:
+	if selected_path.is_empty() or not is_instance_valid(_name_input) or not _name_input.is_inside_tree(): return
+	var source := ""
+	if is_instance_valid(_history) and _history.is_inside_tree() and _history.selected >= 0 and _history.selected < _entries.size():
+		source = str(_entries[_history.selected].source)
+	_selection_memory[selected_path] = {"name": _name_input.text, "history": source}
+
+func _show_slot(path: String) -> void:
+	_remember_selection()
 	selected_path = path
 	_clear_children(_details)
+	_name_input = null
+	_history = null
 	var slot: Dictionary = _saves.inspect_slot(path)
-	for child: Button in _list.get_children():
-		child.set_pressed_no_signal(str(child.get_meta("slot_path")) == path)
-	var overview := HBoxContainer.new()
+	_mark_selection()
+	var overview := BoxContainer.new()
+	_overview = overview
 	overview.add_theme_constant_override("separation", 18)
 	_details.add_child(overview)
 	var picture: Control = _preview(slot.preview, 190)
-	picture.custom_minimum_size.x = 340
+	_detail_picture = picture
+	picture.custom_minimum_size.x = 300
 	overview.add_child(picture)
 	var summary := VBoxContainer.new()
-	summary.custom_minimum_size.x = 180
+	_detail_summary = summary
+	summary.custom_minimum_size.x = 0
 	summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	overview.add_child(summary)
 	var heading := Style.label(summary, str(slot.name), 27)
@@ -145,28 +319,28 @@ func select_slot(path: String) -> void:
 	elif slot.recovered:
 		text += Text.text("\nDie letzte Sicherung ist verfügbar.")
 	Style.paragraph(summary, text, 19)
-	var load_button := Style.button(_details, "Auf Kugelwelt fortsetzen" if slot.surface_mode == "legacy_plane_v9" else "Abenteuer laden", func(): get_node("/root/SessionFlow").load_game(selected_path), "LoadAdventure", true)
+	var load_button := _button(_details, "Auf Kugelwelt fortsetzen" if slot.surface_mode == "legacy_plane_v9" else "Abenteuer laden", func(): get_node("/root/SessionFlow").load_game(selected_path), "LoadAdventure", true)
 	load_button.disabled = not slot.valid
 	var rename_row := HBoxContainer.new()
 	_details.add_child(rename_row)
 	_name_input = LineEdit.new()
 	_name_input.name = "SlotName"
-	_name_input.text = str(slot.name)
+	_name_input.text = str(_selection_memory.get(path, {}).get("name", slot.name))
 	_name_input.max_length = 48
 	_name_input.placeholder_text = "Name des Abenteuers"
 	_name_input.custom_minimum_size.y = 50
 	_name_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_name_input.editable = slot.valid
 	rename_row.add_child(_name_input)
-	var rename := Style.button(rename_row, "Umbenennen", _rename, "RenameSlot")
+	var rename := _button(rename_row, "Umbenennen", _rename, "RenameSlot")
 	rename.disabled = not slot.valid
-	var copy := Style.button(_details, "Spielstand kopieren", _copy, "CopySlot")
+	var copy := _button(_details, "Spielstand kopieren", _copy, "CopySlot")
 	copy.disabled = not slot.valid or int(slot.schema) < 3
 	Style.paragraph(_details, "Kugelwelt" if slot.surface_mode == "cube_sphere_m1_v1" else "Älterer Spielstand · beim Fortsetzen wird eine Kugelkopie angelegt. Das Original bleibt erhalten.", 17)
 	if slot.valid and slot.surface_mode == "legacy_plane_v9":
-		Style.button(_details, "Kugelumzug prüfen", _preview_migration, "PreviewSphereMigration")
+		_button(_details, "Kugelumzug prüfen", _preview_migration, "PreviewSphereMigration")
 	if slot.valid and slot.has_migration_archive:
-		Style.button(_details, "Originalarchiv als Kopie sichern", func() -> void:
+		_button(_details, "Originalarchiv als Kopie sichern", func() -> void:
 			var restored: String = _saves.restore_spherical_source(selected_path)
 			if restored.is_empty(): _status.text = _saves.last_error
 			else:
@@ -190,12 +364,18 @@ func select_slot(path: String) -> void:
 		_history.add_item(label)
 	_history.disabled = _entries.is_empty()
 	_history.visible = not _entries.is_empty()
-	_restore_button = Style.button(_details, "Sicherung als Kopie wiederherstellen", _restore, "RestoreSlot")
+	_restore_button = _button(_details, "Sicherung als Kopie wiederherstellen", _restore, "RestoreSlot")
 	_restore_button.visible = not _entries.is_empty()
 	_history_preview = VBoxContainer.new()
 	_details.add_child(_history_preview)
 	_history.item_selected.connect(_select_history)
-	_select_history(0)
+	var remembered: String = str(_selection_memory.get(path, {}).get("history", ""))
+	var history_index := 0
+	for index in _entries.size():
+		if str(_entries[index].source) == remembered: history_index = index; break
+	if not _entries.is_empty(): _history.select(history_index)
+	_select_history(history_index)
+	_layout()
 
 func _select_history(index: int) -> void:
 	_clear_children(_history_preview)
@@ -216,7 +396,7 @@ func _preview_migration() -> void:
 		Style.label(_details, "UMZUG NOCH NICHT MÖGLICH", 25)
 		for problem in preview.blockers:
 			Style.paragraph(_details, str(problem), 18)
-		Style.button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "BackFromMigrationBlockers")
+		_button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "BackFromMigrationBlockers")
 		_status.text = "Das Original bleibt vollständig erhalten. Für diesen Spielstand muss der Kugelumzug noch ergänzt werden."
 		return
 	_clear_children(_details)
@@ -226,13 +406,13 @@ func _preview_migration() -> void:
 	var manifest: Dictionary = preview.manifest
 	Style.paragraph(_details, "Körper: %d · Entwurfsdateien: %d\nQuell-Hash: %s\nManifest: %s\nOriginal und vollständiges Quellarchiv bleiben erhalten." % [
 		manifest.inventory.body_count, preview.data.design_files.size(), str(manifest.source_sha256).left(16), str(manifest.id).left(16)], 17)
-	Style.button(_details, "Geprüfte Kugelkopie anlegen", func() -> void:
+	_button(_details, "Geprüfte Kugelkopie anlegen", func() -> void:
 		var target: String = _saves.migrate_slot_to_sphere(source, manifest.source_sha256)
 		if target.is_empty(): _status.text = _saves.last_error
 		else:
 			refresh(target)
 			_status.text = "Kugelkopie geschrieben, zurückgelesen und geprüft. Das Original ist weiterhin verfügbar.", "CommitSphereMigration", true)
-	Style.button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "CancelSphereMigration")
+	_button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "CancelSphereMigration")
 
 func _rename() -> void:
 	var renamed: bool = _saves.rename_slot(selected_path, _name_input.text)
@@ -299,12 +479,66 @@ static func _reason(reason: String) -> String:
 	return Text.text({"automatic": "Auto", "manual": "Speichern", "rename": "Vor Umbenennen", "backup": "Letzte Sicherung"}.get(reason, "Sicherung"))
 
 func _language_changed(_locale: String) -> void:
-	# Preserve an unsaved rename and the selected backup while rebuilding dates.
-	var draft: String = _name_input.text if is_instance_valid(_name_input) else ""
-	var history_index: int = _history.selected if is_instance_valid(_history) else -1
-	refresh(selected_path)
-	if is_instance_valid(_name_input):
-		_name_input.text = draft
-	if is_instance_valid(_history) and history_index >= 0 and history_index < _history.item_count:
-		_history.select(history_index)
-		_select_history(history_index)
+	var focus := get_viewport().gui_get_focus_owner()
+	var editing_name: bool = focus == _name_input and is_instance_valid(_name_input)
+	var caret: int = _name_input.caret_column if editing_name else 0
+	var list_scroll := _slot_scroll.scroll_vertical
+	var detail_scroll := _right.scroll_vertical
+	_translate_filters()
+	_render_page(selected_path, true)
+	if editing_name and is_instance_valid(_name_input):
+		_name_input.grab_focus()
+		_name_input.caret_column = caret
+	_slot_scroll.scroll_vertical = list_scroll
+	_right.scroll_vertical = detail_scroll
+
+func _input(event: InputEvent) -> void:
+	if not is_visible_in_tree() or not event is InputEventKey or not event.pressed or event.echo: return
+	if (event.ctrl_pressed or event.meta_pressed) and event.keycode == KEY_F:
+		_show_details = false
+		_layout()
+		_search.grab_focus()
+		_search.select_all()
+		get_viewport().set_input_as_handled()
+	elif event.keycode == KEY_ESCAPE and _search.has_focus():
+		_search.release_focus()
+		get_viewport().set_input_as_handled()
+
+func _layout() -> void:
+	if not is_instance_valid(_right): return
+	var extent := get_viewport_rect().size
+	_compact = extent.x < 1200
+	var short_window: bool = extent.y < 500
+	var inset: int = 20 if _compact else 48
+	var column := _margin.get_child(0) as VBoxContainer
+	column.add_theme_constant_override("separation", 8 if short_window else 12)
+	for child in _toolbar.get_children():
+		if child is Button: child.custom_minimum_size.y = 44 if short_window else 56
+	for button: Button in [_reset, _previous, _next]:
+		button.custom_minimum_size.y = 44 if short_window else 56
+	for choice: OptionButton in [_phase_filter, _state_filter, _sort]:
+		choice.custom_minimum_size.x = minf(205, floorf((extent.x - inset * 2 - 16) / 3.0))
+	_margin.offset_left = inset
+	_margin.offset_right = -inset
+	_margin.offset_top = 8 if short_window else 16
+	_margin.offset_bottom = -8 if short_window else -16
+	_brand.visible = extent.x >= 650
+	_heading.visible = extent.y >= 650 and not _compact
+	_details_toggle.visible = _compact
+	_details_toggle.disabled = selected_path.is_empty()
+	_details_toggle.text = "SAVE_VIEW_RESULTS" if _show_details else "SAVE_VIEW_DETAILS"
+	_tools.visible = not (_compact and _show_details)
+	_left.visible = not (_compact and _show_details)
+	_right.visible = not _compact or _show_details
+	_left.custom_minimum_size.x = 0 if _compact else 440
+	_left.size_flags_horizontal = Control.SIZE_EXPAND_FILL if _compact else Control.SIZE_FILL
+	if is_instance_valid(_overview) and _overview.is_inside_tree():
+		_overview.vertical = _compact or _right.size.x < 780
+		_detail_picture.custom_minimum_size = Vector2(0 if _overview.vertical else 300, 135 if _overview.vertical else 190)
+		_detail_summary.custom_minimum_size.x = 0
+
+static func _button(parent: Node, text: String, action: Callable, id: String = "", primary: bool = false) -> Button:
+	var button := Style.button(parent, text, action, id, primary)
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	return button

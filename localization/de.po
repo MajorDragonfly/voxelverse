@@ -4211,3 +4211,72 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "SAVE_BROWSER_BACK"
+msgstr "Startmenü"
+
+msgid "SAVE_VIEW_DETAILS"
+msgstr "Details"
+
+msgid "SAVE_VIEW_RESULTS"
+msgstr "Ergebnisliste"
+
+msgid "SAVE_SEARCH_PLACEHOLDER"
+msgstr "Name oder Weltseed suchen …"
+
+msgid "SAVE_SEARCH_HINT"
+msgstr "Mehrere Suchwörter kombinieren · Strg+F / Cmd+F"
+
+msgid "SAVE_FILTER_RESET"
+msgstr "Zurücksetzen"
+
+msgid "SAVE_PHASE_HINT"
+msgstr "Nach Epoche filtern"
+
+msgid "SAVE_STATE_HINT"
+msgstr "Nach Zustand filtern"
+
+msgid "SAVE_SORT_HINT"
+msgstr "Sortierung der Spielstände"
+
+msgid "SAVE_PHASE_ALL"
+msgstr "Alle Epochen"
+
+msgid "SAVE_FILTER_ALL"
+msgstr "Alle Zustände"
+
+msgid "SAVE_FILTER_READY"
+msgstr "Intakte Spielstände"
+
+msgid "SAVE_FILTER_ATTENTION"
+msgstr "Prüfung / Sicherung"
+
+msgid "SAVE_SORT_RECENT"
+msgstr "Zuletzt gespeichert"
+
+msgid "SAVE_SORT_NAME"
+msgstr "Name A–Z"
+
+msgid "SAVE_SORT_PLAYTIME"
+msgstr "Meiste Spielzeit"
+
+msgid "SAVE_LIST_SEED"
+msgstr "Weltseed {seed}"
+
+msgid "SAVE_LIST_BACKUP"
+msgstr "Letzte Sicherung verfügbar"
+
+msgid "SAVE_PAGE"
+msgstr "Seite {page}/{pages} · {count} von {total}"
+
+msgid "SAVE_PAGE_PREVIOUS"
+msgstr "Vorherige Spielstände"
+
+msgid "SAVE_PAGE_NEXT"
+msgstr "Weitere Spielstände"
+
+msgid "SAVE_NO_RESULTS"
+msgstr "Keine passenden Abenteuer. Ändere die Suche oder setze die Filter zurück."
+
+msgid "SAVE_SELECT_RESULT"
+msgstr "Wähle ein Abenteuer aus der Ergebnisliste."

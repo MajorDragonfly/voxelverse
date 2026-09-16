@@ -4211,3 +4211,72 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "SAVE_BROWSER_BACK"
+msgstr "Main menu"
+
+msgid "SAVE_VIEW_DETAILS"
+msgstr "Details"
+
+msgid "SAVE_VIEW_RESULTS"
+msgstr "Results"
+
+msgid "SAVE_SEARCH_PLACEHOLDER"
+msgstr "Search name or world seed …"
+
+msgid "SAVE_SEARCH_HINT"
+msgstr "Combine search terms · Ctrl+F / Cmd+F"
+
+msgid "SAVE_FILTER_RESET"
+msgstr "Reset"
+
+msgid "SAVE_PHASE_HINT"
+msgstr "Filter by era"
+
+msgid "SAVE_STATE_HINT"
+msgstr "Filter by condition"
+
+msgid "SAVE_SORT_HINT"
+msgstr "Save sorting"
+
+msgid "SAVE_PHASE_ALL"
+msgstr "All eras"
+
+msgid "SAVE_FILTER_ALL"
+msgstr "All conditions"
+
+msgid "SAVE_FILTER_READY"
+msgstr "Intact saves"
+
+msgid "SAVE_FILTER_ATTENTION"
+msgstr "Review / backup"
+
+msgid "SAVE_SORT_RECENT"
+msgstr "Recently saved"
+
+msgid "SAVE_SORT_NAME"
+msgstr "Name A–Z"
+
+msgid "SAVE_SORT_PLAYTIME"
+msgstr "Most playtime"
+
+msgid "SAVE_LIST_SEED"
+msgstr "World seed {seed}"
+
+msgid "SAVE_LIST_BACKUP"
+msgstr "Last backup available"
+
+msgid "SAVE_PAGE"
+msgstr "Page {page}/{pages} · {count} of {total}"
+
+msgid "SAVE_PAGE_PREVIOUS"
+msgstr "Previous saves"
+
+msgid "SAVE_PAGE_NEXT"
+msgstr "More saves"
+
+msgid "SAVE_NO_RESULTS"
+msgstr "No matching adventures. Change your search or reset the filters."
+
+msgid "SAVE_SELECT_RESULT"
+msgstr "Select an adventure from the results."
