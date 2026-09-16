@@ -61,8 +61,17 @@ func _run() -> void:
 	_check(_icon_count(panel.stats_grid) == 6, "Every compared value has its pictogram")
 	_check(panel.own_preview._model.blueprint["body"] == player_before["body"], "Own preview uses the current player's anatomy")
 	_check(panel.species_preview._model.blueprint["body"] == anatomy["body"], "Observed preview uses the discovery snapshot")
-	_check(Data.formatted(Data.stats_for(player_before)["attack"]) == panel.stats_grid.get_child(5).text, "Displayed own attack matches the actual anatomy")
+	_check(("%.2f" % Data.stats_for(player_before)["attack"]).replace(".", ",") == panel.stats_grid.get_child(5).text, "Displayed own attack matches the actual anatomy at fixed precision")
+	_check_stat_layout(panel)
 	await _capture("comparison")
+	root.content_scale_size = Vector2i(1920, 1080)
+	root.size = Vector2i(1920, 1080)
+	await _frames()
+	_check_stat_layout(panel)
+	await _capture("comparison-wide")
+	root.content_scale_size = Vector2i(1280, 720)
+	root.size = Vector2i(1280, 720)
+	await _frames()
 	var angle: float = panel.own_preview._angle
 	var other_angle: float = panel.species_preview._angle
 	var hold := InputEventMouseButton.new()
@@ -104,6 +113,7 @@ func _run() -> void:
 	_check(root.get_visible_rect().encloses(journal._close.get_global_rect()), "Compact layout retains a reachable close button")
 	_check(root.get_visible_rect().encloses(panel.wish_button.get_global_rect()), "Compact layout retains a reachable wishlist button")
 	_check(panel.size.x <= journal._detail_scroll.size.x, "Comparison stays within the compact horizontal viewport")
+	_check_stat_layout(panel)
 	await _capture("compact")
 	await _click(journal._compare_button)
 	_check(journal._list.is_visible_in_tree() and journal._preview.visible, "Return restores the selected species browser")
@@ -119,6 +129,23 @@ func _run() -> void:
 		push_error(failure)
 	print("SPECIES_COMPARISON_TEST ", JSON.stringify({"passed": failures.is_empty(), "failures": failures}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+
+func _check_stat_layout(panel: VBoxContainer) -> void:
+	var grid: GridContainer = panel.stats_grid
+	_check(grid.size.x <= panel.size.x, "Comparison table fits its panel")
+	_check(grid.size.x < 600, "Comparison values stay grouped on wide screens")
+	for column in range(1, 4):
+		var heading: Label = grid.get_child(column)
+		_check(heading.horizontal_alignment == HORIZONTAL_ALIGNMENT_RIGHT, "Numeric heading aligns with its values")
+		for row in range(1, 7):
+			var value: Label = grid.get_child(row * 4 + column)
+			var metric: Control = grid.get_child(row * 4)
+			_check(is_equal_approx(heading.get_rect().end.x, value.get_rect().end.x), "Heading and value share a column edge")
+			_check(is_equal_approx(metric.get_rect().get_center().y, value.get_rect().get_center().y), "Metric and value share a row center")
+			_check(value.get_line_count() == 1, "Numeric values never wrap")
+			var separator := "," if TranslationServer.get_locale().begins_with("de") else "."
+			_check(value.text.get_slice(separator, 1).length() == 2, "Table values use two decimal places")
 
 
 func _test_projection() -> void:

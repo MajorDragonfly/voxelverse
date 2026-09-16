@@ -126,6 +126,7 @@ func _comparison_languages() -> void:
 		_check(panel.stats_grid.get_children() == stats and panel.part_values.get_children() == parts and panel._selected_part == part, "Comparison preserves stats, contribution controls and chosen part")
 		_check(panel.stats_grid.get_child(4).get_child(1).text == ("Attack" if language == "en" else "Angriff"), "Comparison metric labels translate")
 		_check(Copy.number(2.7, true) == ("+2.7" if language == "en" else "+2,7"), "Decimal separator follows language")
+		_check_stat_layout(panel)
 
 func _content_and_layouts() -> void:
 	for size: Vector2i in [Vector2i(800, 600), Vector2i(1280, 720), Vector2i(1920, 1080)]:
@@ -153,6 +154,7 @@ func _content_and_layouts() -> void:
 				await _settle()
 				_layout_check(size, 6, scale, language)
 				_check(journal._comparison.size.x <= journal._detail_scroll.size.x + 1, "Comparison fits horizontally")
+				_check_stat_layout(journal._comparison)
 				if (size.x == 800 and scale == 1.5) or (size.x == 1920 and scale == 1.0):
 					await _image("journal-%s-%dx%d-%d-compare" % [language, size.x, size.y, roundi(scale * 100)])
 				journal._comparison_mode = false
