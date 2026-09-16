@@ -1,6 +1,8 @@
 extends RefCounted
 class_name CreaturePartLibrary
 
+const WingCatalog = preload("res://creatures/catalog/creature_wing_catalog.gd")
+const WingGeometry = preload("res://creatures/editor/creature_wing_geometry.gd")
 const TailCatalog = preload("res://creatures/catalog/creature_tail_catalog.gd")
 const TailGeometry = preload("res://creatures/editor/creature_tail_geometry.gd")
 const MouthCatalog = preload("res://creatures/catalog/creature_mouth_catalog.gd")
@@ -21,6 +23,7 @@ const CATEGORY_HORNS: String = "horns"
 const CATEGORY_PLATES: String = "plates"
 const CATEGORY_SPIKES: String = "spikes"
 const CATEGORY_DECOR: String = "decor"
+const CATEGORY_WINGS: String = "wings"
 const CATEGORY_PAINT: String = "paint"
 const CATEGORY_FEET: String = "feet"
 const CATEGORY_HANDS: String = "hands"
@@ -58,6 +61,7 @@ static func get_categories() -> Array:
 			"name": "Arms",
 			"icon": "╋",
 		},
+		{"id": CATEGORY_WINGS, "name": "Wings", "icon": "⋔"},
 		{
 			"id": CATEGORY_TAIL,
 			"name": "Tail",
@@ -314,6 +318,8 @@ static func get_default_position(
 			return Vector3(0.48, -body_shape.y * 0.56, 0.18)
 		CATEGORY_ARMS:
 			return Vector3(0.72, -0.05, -body_shape.z * 0.18)
+		CATEGORY_WINGS:
+			return Vector3(body_shape.x * 0.48, body_shape.y * 0.30, -body_shape.z * 0.12)
 		CATEGORY_TAIL:
 			return Vector3(0.0, -0.05, body_shape.z * 0.58)
 		CATEGORY_HORNS:
@@ -335,6 +341,7 @@ static func is_default_mirrored(category_id: String) -> bool:
 		or category_id == CATEGORY_ARMS
 		or category_id == CATEGORY_HORNS
 		or category_id == CATEGORY_SPIKES
+		or category_id == CATEGORY_WINGS
 	)
 
 
@@ -889,14 +896,15 @@ static func _get_placeable_parts() -> Array:
 	]
 
 	# Add models after the frozen legacy catalog; copy existing gameplay values.
-	for model: Dictionary in MouthCatalog.get_parts() + TailCatalog.get_parts():
+	for model: Dictionary in MouthCatalog.get_parts() + TailCatalog.get_parts() + WingCatalog.get_parts():
 		for source: Dictionary in result:
 			if source.id == model.stats_source:
 				model["stats"] = source.stats.duplicate(true)
 				model["complexity"] = source.complexity
 				model["default_scale"] = source.default_scale
 				break
-		model["voxels"] = TailGeometry.legacy_voxels(model.id, model.geometry_revision) if model.category == CATEGORY_TAIL else MouthGeometry.legacy_voxels(model.id, model.geometry_revision)
+		if model.category == CATEGORY_WINGS: model["voxels"] = WingGeometry.legacy_voxels(model.id)
+		else: model["voxels"] = TailGeometry.legacy_voxels(model.id, model.geometry_revision) if model.category == CATEGORY_TAIL else MouthGeometry.legacy_voxels(model.id, model.geometry_revision)
 		result.append(model)
 	return result
 

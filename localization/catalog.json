@@ -8131,6 +8131,61 @@
       "key": "WILDLIFE_EAT_CARCASS",
       "de": "Frisst Aas",
       "en": "Eating carrion"
+    },
+    {
+      "key": "EDITOR_CATEGORY_WINGS",
+      "de": "Flügel",
+      "en": "Wings"
+    },
+    {
+      "key": "Flügel",
+      "de": "Flügel",
+      "en": "Wings"
+    },
+    {
+      "key": "EDITOR_WING_STRETCH",
+      "de": "Flügel strecken",
+      "en": "Stretch wings"
+    },
+    {
+      "key": "EDITOR_PART_WINGS_BROAD_FEATHER_NAME",
+      "de": "Breiter Federflügel",
+      "en": "Broad feathered wing"
+    },
+    {
+      "key": "EDITOR_PART_WINGS_BROAD_FEATHER_DESCRIPTION",
+      "de": "Gerundete Schwingen mit breitem Federfächer und sichtbaren Federlagen.",
+      "en": "Rounded wing with a broad fan and visible feather layers."
+    },
+    {
+      "key": "EDITOR_PART_WINGS_SLENDER_FEATHER_NAME",
+      "de": "Schmaler Federflügel",
+      "en": "Slender feathered wing"
+    },
+    {
+      "key": "EDITOR_PART_WINGS_SLENDER_FEATHER_DESCRIPTION",
+      "de": "Lange, schmale Schwingen mit zurückgezogenen Schwungfedern.",
+      "en": "Long, slender wing with swept flight feathers."
+    },
+    {
+      "key": "EDITOR_PART_WINGS_BAT_MEMBRANE_NAME",
+      "de": "Fledermausflügel",
+      "en": "Bat wing"
+    },
+    {
+      "key": "EDITOR_PART_WINGS_BAT_MEMBRANE_DESCRIPTION",
+      "de": "Ausgespannte Haut zwischen vier sichtbaren Trägern mit gebuchtetem Rand.",
+      "en": "Skin stretched between four visible struts with a scalloped edge."
+    },
+    {
+      "key": "EDITOR_PART_WINGS_LONG_INSECT_NAME",
+      "de": "Langer Insektenflügel",
+      "en": "Long insect wing"
+    },
+    {
+      "key": "EDITOR_PART_WINGS_LONG_INSECT_DESCRIPTION",
+      "de": "Schmale, gerundete Flügelfläche mit verzweigten Adern und hellem Saum.",
+      "en": "Slender rounded wing with branching veins and a pale membrane."
     }
   ]
 }

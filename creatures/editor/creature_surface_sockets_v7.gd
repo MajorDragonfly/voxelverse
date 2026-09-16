@@ -105,6 +105,7 @@ static func apply_symmetry(
 		PartLibrary.CATEGORY_SPIKES,
 		PartLibrary.CATEGORY_PLATES,
 		PartLibrary.CATEGORY_DECOR,
+		PartLibrary.CATEGORY_WINGS,
 	]
 	placement["mirrored"] = enabled and supports_pair
 	if enabled and supports_pair:
@@ -126,7 +127,7 @@ static func _get_socket_type(category_id: String) -> String:
 			return "rear"
 		PartLibrary.CATEGORY_LEGS:
 			return "lower_side"
-		PartLibrary.CATEGORY_ARMS:
+		PartLibrary.CATEGORY_ARMS, PartLibrary.CATEGORY_WINGS:
 			return "side"
 		PartLibrary.CATEGORY_HEAD, PartLibrary.CATEGORY_EYES, PartLibrary.CATEGORY_HORNS:
 			return "upper_front"

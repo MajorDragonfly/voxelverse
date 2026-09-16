@@ -6,7 +6,7 @@ const KeyHints = preload("res://core/input_preferences.gd")
 const ROLES := {"grazer": "Pflanzenfresser", "predator": "Räuber", "forager": "Sammler",
 	"scavenger": "Aasfresser", "climber": "Kletterer", "swimmer": "Wasserbewohner"}
 const CATEGORIES := {"body": "Körper", "mouth": "Mäuler", "head": "Kopfmodule", "eyes": "Augen", "legs": "Beine",
-	"arms": "Arme", "tail": "Schwänze", "horns": "Hörner", "plates": "Panzerplatten",
+	"wings": "Flügel", "arms": "Arme", "tail": "Schwänze", "horns": "Hörner", "plates": "Panzerplatten",
 	"spikes": "Stacheln", "decor": "Verzierungen", "paint": "Farben", "feet": "Füße", "hands": "Hände"}
 
 

@@ -322,6 +322,12 @@ static func _apply_default_anchor_fields(
 			placement["anchor_vertical"] = -0.05
 			placement["anchor_surface_offset"] = Vector3.ZERO
 
+		PartLibrary.CATEGORY_WINGS:
+			placement["anchor_t"] = lerpf(0.30, 0.58, distribution)
+			placement["anchor_side"] = 0.72
+			placement["anchor_vertical"] = 0.38
+			placement["anchor_surface_offset"] = Vector3.ZERO
+
 		PartLibrary.CATEGORY_TAIL:
 			placement["anchor_t"] = 1.0
 			placement["anchor_side"] = 0.0

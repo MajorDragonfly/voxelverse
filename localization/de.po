@@ -4877,3 +4877,36 @@ msgstr "Sucht Aas"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Frisst Aas"
+
+msgid "EDITOR_CATEGORY_WINGS"
+msgstr "Flügel"
+
+msgid "Flügel"
+msgstr "Flügel"
+
+msgid "EDITOR_WING_STRETCH"
+msgstr "Flügel strecken"
+
+msgid "EDITOR_PART_WINGS_BROAD_FEATHER_NAME"
+msgstr "Breiter Federflügel"
+
+msgid "EDITOR_PART_WINGS_BROAD_FEATHER_DESCRIPTION"
+msgstr "Gerundete Schwingen mit breitem Federfächer und sichtbaren Federlagen."
+
+msgid "EDITOR_PART_WINGS_SLENDER_FEATHER_NAME"
+msgstr "Schmaler Federflügel"
+
+msgid "EDITOR_PART_WINGS_SLENDER_FEATHER_DESCRIPTION"
+msgstr "Lange, schmale Schwingen mit zurückgezogenen Schwungfedern."
+
+msgid "EDITOR_PART_WINGS_BAT_MEMBRANE_NAME"
+msgstr "Fledermausflügel"
+
+msgid "EDITOR_PART_WINGS_BAT_MEMBRANE_DESCRIPTION"
+msgstr "Ausgespannte Haut zwischen vier sichtbaren Trägern mit gebuchtetem Rand."
+
+msgid "EDITOR_PART_WINGS_LONG_INSECT_NAME"
+msgstr "Langer Insektenflügel"
+
+msgid "EDITOR_PART_WINGS_LONG_INSECT_DESCRIPTION"
+msgstr "Schmale, gerundete Flügelfläche mit verzweigten Adern und hellem Saum."

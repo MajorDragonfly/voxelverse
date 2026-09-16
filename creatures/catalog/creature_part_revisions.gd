@@ -1,6 +1,7 @@
 extends RefCounted
 ## Persisted part references. Missing fields mean the frozen shipped revision 1,
 ## never the latest model. Assembly/design revisions are a separate contract.
+const Wings = preload("res://creatures/catalog/creature_wing_catalog.gd")
 const Mouths = preload("res://creatures/catalog/creature_mouth_catalog.gd")
 const Hands = preload("res://creatures/catalog/creature_hand_catalog.gd")
 const Tails = preload("res://creatures/catalog/creature_tail_catalog.gd")
@@ -65,7 +66,10 @@ static func resolve(id: String, reference: Dictionary, prefix: String = "") -> D
 	if not reference_error(reference).is_empty(): return {}
 	var revision: int = int(reference.get(prefix + "part_revision", LEGACY_REVISION))
 	var profile: Dictionary = {}
-	if id.begins_with("feet_"):
+	if id.begins_with("wings_"):
+		profile = Wings.get_profile(id, revision)
+		if profile.is_empty(): return {}
+	elif id.begins_with("feet_"):
 		profile = Feet.get_profile(id, revision)
 		if profile.is_empty(): return {}
 	elif id.begins_with("hands_"):

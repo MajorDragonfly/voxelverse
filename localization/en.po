@@ -4877,3 +4877,36 @@ msgstr "Seeking carrion"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Eating carrion"
+
+msgid "EDITOR_CATEGORY_WINGS"
+msgstr "Wings"
+
+msgid "Flügel"
+msgstr "Wings"
+
+msgid "EDITOR_WING_STRETCH"
+msgstr "Stretch wings"
+
+msgid "EDITOR_PART_WINGS_BROAD_FEATHER_NAME"
+msgstr "Broad feathered wing"
+
+msgid "EDITOR_PART_WINGS_BROAD_FEATHER_DESCRIPTION"
+msgstr "Rounded wing with a broad fan and visible feather layers."
+
+msgid "EDITOR_PART_WINGS_SLENDER_FEATHER_NAME"
+msgstr "Slender feathered wing"
+
+msgid "EDITOR_PART_WINGS_SLENDER_FEATHER_DESCRIPTION"
+msgstr "Long, slender wing with swept flight feathers."
+
+msgid "EDITOR_PART_WINGS_BAT_MEMBRANE_NAME"
+msgstr "Bat wing"
+
+msgid "EDITOR_PART_WINGS_BAT_MEMBRANE_DESCRIPTION"
+msgstr "Skin stretched between four visible struts with a scalloped edge."
+
+msgid "EDITOR_PART_WINGS_LONG_INSECT_NAME"
+msgstr "Long insect wing"
+
+msgid "EDITOR_PART_WINGS_LONG_INSECT_DESCRIPTION"
+msgstr "Slender rounded wing with branching veins and a pale membrane."
