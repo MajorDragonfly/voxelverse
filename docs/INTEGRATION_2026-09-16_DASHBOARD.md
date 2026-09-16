@@ -115,3 +115,18 @@ ein Headless-Lauf beansprucht keine Grafik- oder Ziel-PC-Freigabe.
 
 [Diagnoselog](evidence/integration-20260916/settlement-clock-diagnostic.log.gz) ·
 [genaue Instrumentierung](evidence/integration-20260916/settlement-clock-diagnostic.patch.gz).
+
+
+Der gezielt auf 2 FPS gedrosselte Quelltest besteht auf sauberem, unverändertem
+Quellstand einschließlich Save-Fehler, Pause und Prozessneustart (214,865 Sekunden).
+Die Steinlieferung benötigt 6,567 Sekunden Physikzeit bzw. 24,865 Sekunden Echtzeit.
+
+Die Vollsuite meldete außerdem eine vorübergehend unerreichbare Baustellenaktion
+nach Wechsel von Schriftgröße und Fensterbreite. Der Prüfablauf wartet jetzt
+begrenzt auf stabile Container-Geometrie, bevor er die bestehende Erreichbarkeits-
+prüfung ausführt; Fehler enthalten die tatsächlichen Rechtecke. Der vollständige
+Bauablauf mit zwölf DE/EN-Darstellungen, Materialrückholung, Schreibfehlern und
+Save/Load besteht auf sauberem, unverändertem Quellstand
+`76b4dfee8e83a1c128d30ddae73ed2b306bed761`.
+
+[Beide unveränderten Prüfberichte, Logs und Quellmanifeste](evidence/integration-20260916/settlement-and-construction-regressions.tar.gz).

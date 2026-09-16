@@ -38,6 +38,16 @@
       "settlement-clock-diagnostic.patch.gz"
     ],
     "fix": "Keep original physics-time work budgets, cap each wait at 120 wall seconds, and retain physical delivery and separate stock assertions. --slow-settlement-work reproduces the low-FPS case.",
-    "validation": "Exact published-head CI and source regression details are recorded in PR #141."
-  }
+    "validation": "Exact published-head CI and source regression details are recorded in PR #141.",
+    "regression_result": "Passed on clean unchanged b47cb3a at 2 FPS, including held cargo, failed write, pause and fresh process. 214.865 seconds total."
+  },
+  "construction_layout_followup": {
+    "local": "445d5e1cfd6d6e871406fb9ea22067b964ce8aa4",
+    "published": "76b4dfee8e83a1c128d30ddae73ed2b306bed761",
+    "tree": "4a380ad8feada936754a4142b86700f0e8dc05a2",
+    "original_failure": "https://github.com/MajorDragonfly/voxelverse/actions/runs/35091549538/job/104780162063",
+    "fix": "Wait for stable deferred container geometry before the existing accessibility assertion. Thirty-frame bound; report exact rectangles on failure.",
+    "result": "Physical pickup, pause, rollback, cancellation/recovery, save/load/rebuild and twelve DE/EN layouts passed on clean unchanged source."
+  },
+  "regression_evidence": "settlement-and-construction-regressions.tar.gz"
 }
