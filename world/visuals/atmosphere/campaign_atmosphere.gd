@@ -1,12 +1,14 @@
 extends Node3D
 ## Presentation-only owner. Reads the campaign clock and canonical radial frame;
 ## never writes terrain, saves, camera overrides or simulation state.
+const GraphicsPreferences = preload("res://core/graphics_preferences.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const SKY_SHADER = preload("res://world/visuals/atmosphere/campaign_sky.gdshader")
 var environment: Environment
 var sun: DirectionalLight3D
 var sky_material: ShaderMaterial
 var quality: int = 1
+var graphics_values: Dictionary = GraphicsPreferences.preset(1)
 var source: Callable
 var _profile: Dictionary = {}
 var _seed: int = 0
@@ -69,7 +71,10 @@ func _ready() -> void:
 	sun.light_angular_distance = 0.6
 	add_child(sun)
 	var settings := get_node_or_null("/root/DisplaySettings")
-	set_quality(settings.atmosphere_quality if settings != null else 1)
+	if settings != null:
+		apply_graphics(settings.graphics_values, settings.atmosphere_quality)
+	else:
+		set_quality(1)
 
 func configure(profile: Dictionary, seed_value: int, anchor_up: Vector3, sampler: Callable) -> void:
 	_profile = profile.get("atmosphere", {}).duplicate(true)
@@ -95,15 +100,26 @@ func _exit_tree() -> void:
 		_weather.clouds_enabled = _previous_weather_clouds
 
 func set_quality(value: int) -> void:
-	quality = clampi(value, 0, 2)
+	apply_graphics(GraphicsPreferences.preset(clampi(value, 0, 2)), clampi(value, 0, 2))
+
+func apply_graphics(values: Dictionary, preset_index: int = GraphicsPreferences.CUSTOM) -> void:
+	graphics_values = GraphicsPreferences.normalize(values)
+	quality = clampi(preset_index, 0, GraphicsPreferences.CUSTOM)
 	if environment == null: return
 	_forward_plus = RenderingServer.get_current_rendering_method() == "forward_plus"
-	environment.ssao_enabled = quality >= 1 and _forward_plus
-	environment.glow_enabled = quality >= 1 and _forward_plus
-	environment.volumetric_fog_enabled = quality == 2 and _forward_plus
-	sun.light_angular_distance = 0.6 if quality >= 1 else 0.0
-	sun.directional_shadow_max_distance = 300.0 if quality == 2 else 220.0
-	sky_material.set_shader_parameter("cloud_octaves", 5 if quality == 2 else (4 if quality == 1 else 2))
+	environment.ssao_enabled = graphics_values.ssao_enabled and _forward_plus
+	environment.ssao_intensity = graphics_values.ssao_strength
+	environment.glow_enabled = graphics_values.bloom_enabled and _forward_plus
+	environment.glow_intensity = graphics_values.bloom_strength
+	environment.volumetric_fog_enabled = graphics_values.fog_enabled and _forward_plus
+	environment.fog_enabled = float(graphics_values.haze_strength) > 0.0
+	sun.shadow_enabled = graphics_values.shadows_enabled
+	sun.light_angular_distance = graphics_values.shadow_softness
+	sun.directional_shadow_max_distance = graphics_values.shadow_distance
+	sky_material.set_shader_parameter("clouds_enabled", graphics_values.clouds_enabled)
+	sky_material.set_shader_parameter("cloud_octaves", [2, 4, 5][int(graphics_values.cloud_quality)])
+	GraphicsPreferences.apply_image(environment, graphics_values)
+	if _configured: update_view(0.0, true) # Settings also take effect while paused.
 
 func _process(delta: float) -> void:
 	if not _configured: return
@@ -123,10 +139,17 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	_elapsed = float(sample.get("seconds", _elapsed))
 	var wet: float = clampf(float(sample.get("moisture", 0.5)), 0.0, 1.0)
 	var weather: Dictionary = sample.get("weather", {})
+	var atmosphere_present: bool = bool(weather.get("atmosphere_present", true))
+	# Weather owns the persisted climate. Apply its vacuum flag to this sky owner,
+	# including when settings change while paused or after returning from space.
+	environment.fog_enabled = atmosphere_present and float(graphics_values.haze_strength) > 0.0
+	environment.volumetric_fog_enabled = atmosphere_present and graphics_values.fog_enabled and _forward_plus
+	sky_material.set_shader_parameter("atmosphere_present", atmosphere_present)
+	sky_material.set_shader_parameter("clouds_enabled", atmosphere_present and graphics_values.clouds_enabled)
 	var precipitation: float = clampf(float(weather.get("precipitation", 0.0)), 0.0, 1.0)
 	_moisture = wet if immediate else lerpf(_moisture, wet, 1.0-exp(-maxf(delta,0.0)*0.5))
 	var altitude: float = float(sample.get("height", 0.0))
-	var air: float = exp(-maxf(altitude, 0.0)/6000.0)
+	var air: float = exp(-maxf(altitude, 0.0)/6000.0) if atmosphere_present else 0.0
 	var elevation: float = up.dot(_sun_direction)
 	var daylight: float = smoothstep(-0.16, 0.12, elevation)
 	var sunset: float = (1.0-smoothstep(0.05,0.55,absf(elevation))) * daylight
@@ -143,6 +166,7 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	sky_material.set_shader_parameter("daylight", daylight)
 	sky_material.set_shader_parameter("sunset", sunset)
 	var cloud_cover: float = clampf(float(weather.get("cloud_cover", clampf(float(_profile.get("cloud_density",0.5))*0.75+_moisture*0.22,0.15,0.78))),0.0,1.0)
+	if not atmosphere_present: cloud_cover = 0.0
 	sky_material.set_shader_parameter("cloud_cover", cloud_cover*air)
 	# Smooth bounded loop; explicit campaign time freezes with pause/loading.
 	var phase: float = fposmod(_elapsed, 7200.0) / 7200.0 * TAU
@@ -162,7 +186,8 @@ func update_view(delta: float, immediate: bool = false) -> void:
 		environment.fog_depth_end = minf(environment.fog_depth_end, maxf(float(weather.get("visibility_m",18000.0)),500.0))
 		environment.fog_depth_end *= lerpf(1.0,0.65,precipitation)
 		environment.fog_density *= lerpf(1.0,1.3,precipitation)
-	environment.volumetric_fog_density = lerpf(0.00012,0.0007,_moisture)*air
+	environment.fog_density *= float(graphics_values.haze_strength)
+	environment.volumetric_fog_density = lerpf(0.00012,0.0007,_moisture)*air*float(graphics_values.fog_strength)
 	environment.volumetric_fog_albedo = horizon
 
 func campaign_sample() -> Dictionary:

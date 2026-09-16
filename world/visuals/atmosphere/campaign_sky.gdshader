@@ -12,6 +12,8 @@ uniform float daylight = 1.0;
 uniform float sunset = 0.0;
 uniform float cloud_cover = 0.5;
 uniform vec3 cloud_offset = vec3(0.0);
+uniform bool clouds_enabled = true;
+uniform bool atmosphere_present = true;
 uniform int cloud_octaves = 4;
 uniform float star_seed = 0.0;
 
@@ -48,18 +50,18 @@ void sky() {
 	float sun_dot = clamp(dot(ray, sun_direction), 0.0, 1.0);
 	vec3 night = mix(vec3(0.017,0.025,0.055), vec3(0.003,0.007,0.023), max(elevation,0.0));
 	vec3 day = mix(horizon_color, zenith_color, pow(max(elevation,0.0),0.42));
-	vec3 color = mix(night, day, daylight);
+	vec3 color = atmosphere_present ? mix(night, day, daylight) : vec3(0.0);
 	float horizon_band = exp(-abs(elevation) * 5.5);
-	color = mix(color, sunlight_color * 0.85, sunset * horizon_band * pow(sun_dot,3.0) * 0.72);
+	if (atmosphere_present) { color = mix(color, sunlight_color * 0.85, sunset * horizon_band * pow(sun_dot,3.0) * 0.72); }
 	if (elevation < 0.0) { color = mix(color, color * 0.28, smoothstep(0.0,0.5,-elevation)); }
 	if (!AT_CUBEMAP_PASS) {
-		color += sunlight_color * pow(sun_dot,48.0) * 0.18 * daylight;
+		if (atmosphere_present) { color += sunlight_color * pow(sun_dot,48.0) * 0.18 * daylight; }
 		float disc = smoothstep(cos(0.012), cos(0.009), sun_dot);
 		color += sunlight_color * disc * 5.0 * smoothstep(-0.025,0.01,dot(sun_direction,radial_up));
 		vec3 star_cell = floor(ray * 700.0);
 		float star = step(0.9985,hash31(star_cell + vec3(star_seed))) * pow(max(0.0,1.0-length(fract(ray*700.0)-0.5)*2.0),4.0);
-		color += vec3(star) * (1.0-daylight) * smoothstep(0.0,0.2,elevation);
-		if (elevation > 0.015) {
+		color += vec3(star) * (atmosphere_present ? 1.0-daylight : 1.0) * smoothstep(0.0,0.2,elevation);
+		if (atmosphere_present && clouds_enabled && elevation > 0.015) {
 			float field = clouds(ray * 5.5 + cloud_offset);
 			float threshold = mix(0.72,0.38,cloud_cover);
 			float opacity = smoothstep(threshold,threshold+0.16,field) * smoothstep(0.015,0.16,elevation);

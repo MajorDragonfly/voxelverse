@@ -1,6 +1,7 @@
 extends CanvasLayer
-## Shared discovery book, installed once by ProgressionHUD for J and the skilltree.
+## Shared discovery book, installed once by ProgressionHUD for shortcuts and the skilltree.
 
+const Keys = preload("res://core/input_preferences.gd")
 const Text = preload("res://ui/discovery/journal_presentation.gd")
 const Records = preload("res://core/discovery/discovery_records.gd")
 const Preview = preload("res://ui/discovery/journal_preview.gd")
@@ -106,6 +107,7 @@ func _ready() -> void:
 		_progression.connect("region_discovered", func(_key: String) -> void: _on_points(0))
 		_progression.connect("part_unlocked", func(_id: String, _reason: String) -> void: _on_points(0))
 		_progression.connect("research_changed", _on_research_changed)
+	get_node("/root/DisplaySettings").input_preferences.bindings_changed.connect(_refresh_language)
 	_update_hint()
 	_update_research_hud()
 
@@ -137,7 +139,7 @@ func _input(event: InputEvent) -> void:
 	if event.pressed and not event.echo and key == KEY_ESCAPE:
 		close_journal()
 		get_viewport().set_input_as_handled()
-	elif key == KEY_J and not _search.has_focus():
+	elif Keys.menu_event(event, "open_journal") and not _search.has_focus():
 		if event.pressed and not event.echo:
 			close_journal()
 		get_viewport().set_input_as_handled()
@@ -154,7 +156,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.ctrl_pressed or event.alt_pressed or event.meta_pressed:
 		return
-	if event.keycode == KEY_J or event.physical_keycode == KEY_J:
+	if Keys.menu_event(event, "open_journal"):
 		if open_journal():
 			get_viewport().set_input_as_handled()
 
@@ -532,7 +534,7 @@ func _build_hud() -> void:
 	layout.add_child(_pinned_button)
 	# Standalone book hosts retain an entry button; the player has the shared dock.
 	if player == null or player.get_node_or_null("ProgressionHUD") == null:
-		var open_button := _button("Entdeckungsbuch · J", func() -> void: open_journal())
+		var open_button := _button("BIND_JOURNAL_BUTTON", func() -> void: open_journal())
 		open_button.name = "OpenJournal"
 		open_button.size_flags_horizontal = Control.SIZE_SHRINK_END
 		layout.add_child(open_button)
@@ -776,7 +778,7 @@ func _render_empty() -> void:
 	if _tabs.current_tab == 3:
 		_title.text = Text.text("Dein nächster Schritt")
 		_description.text = _current_hint()
-		_guide.text = Text.Text.format_text("JOURNAL_GUIDE", {"scan": Records.KeyHints.binding_label("inspection_mode")})
+		_guide.text = Keys.hint("JOURNAL_GUIDE", {"scan": Records.KeyHints.binding_label("inspection_mode")})
 	elif _tabs.current_tab == ANIMALS_TAB:
 		_title.text = AnimalText.text("Eigene Tiere")
 		_description.text = AnimalText.result_text(_animals_result_code)
@@ -890,7 +892,7 @@ func _current_hint() -> String:
 	if _progression == null:
 		return Text.text("Entdecke deine Welt.")
 	if int(get_node("/root/GameState").current_phase) == 1:
-		return Text.text("Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen.")
+		return Keys.hint("BIND_TRIBE_HINT")
 	var state := {"discovered_species": _progression.get("discovered_species")}
 	var active_player := player if player != null else get_tree().get_first_node_in_group(&"player")
 	if active_player != null and active_player.has_method("get_health_ratio"):

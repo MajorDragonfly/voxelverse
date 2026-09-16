@@ -74,6 +74,10 @@ func advance(delta: float, context: Dictionary) -> Dictionary:
 	elif danger: state = "afraid"
 	elif _remaining > 0.0: state = _reaction
 	elif intent in ["eat", "drink"]: state = "feeding"
+	elif intent == "play_play": state = "playful"
+	elif intent == "play_greet": state = "affectionate"
+	elif intent == "play_rest": state = "content"
+	elif intent == "play_approach": state = "curious"
 	elif bool(context.get("attention", false)) or intent in ["social", "search", "forage", "seek_water", "herd"]: state = "curious"
 	elif float(context.get("health", 1.0)) < 0.35: state = "tired"
 	elif bool(context.get("friendly_near", false)): state = "affectionate"

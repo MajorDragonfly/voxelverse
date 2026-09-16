@@ -61,9 +61,6 @@ msgstr "Entdecke Welten. Gestalte Leben."
 msgid "ENTWICKLUNGSVERSION    /    KREATURENPHASE"
 msgstr "ENTWICKLUNGSVERSION    /    KREATURENPHASE"
 
-msgid "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen"
-msgstr "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen"
-
 msgid "Fortsetzen"
 msgstr "Fortsetzen"
 
@@ -334,9 +331,6 @@ msgstr "Einführung überspringen"
 msgid "VOXELVERSE · EINSTELLUNGEN"
 msgstr "VOXELVERSE · EINSTELLUNGEN"
 
-msgid "Esc / F8 Menü · F11 Vollbild"
-msgstr "Esc / F8 Menü · F11 Vollbild"
-
 msgid "Anzeige"
 msgstr "Anzeige"
 
@@ -571,9 +565,6 @@ msgstr "Testton"
 msgid "Standardwerte"
 msgstr "Standardwerte"
 
-msgid "Zurück · F7 / Esc"
-msgstr "Zurück · F7 / Esc"
-
 msgid "Entdeckungsbuch"
 msgstr "Entdeckungsbuch"
 
@@ -703,9 +694,6 @@ msgstr "Das Original bleibt vollständig erhalten. Für diesen Spielstand muss d
 msgid "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten."
 msgstr "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten."
 
-msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
-msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
-
 msgid "BP_LIBRARY_TITLE"
 msgstr "Kreaturenvorlagen"
 
@@ -818,7 +806,7 @@ msgid "BP_ERROR_EDITOR"
 msgstr "Die Anschlüsse dieser Vorlage passen nicht zum aktuellen Editor. Die Form wird nicht verändert übernommen."
 
 msgid "BP_SEARCH"
-msgstr "Vorlagen suchen"
+msgstr "Name, Autor, Beschreibung oder Tags suchen …"
 
 msgid "BP_ALL"
 msgstr "Alle Vorlagen"
@@ -1330,7 +1318,7 @@ msgid "SKILLS_TAB"
 msgstr "Fähigkeiten"
 
 msgid "SKILLS_JOURNAL"
-msgstr "Entdeckungsbuch · J"
+msgstr "Entdeckungsbuch · {journal}"
 
 msgid "SKILLS_PATH"
 msgstr "Entwicklungspfad"
@@ -2182,10 +2170,10 @@ msgid "HUD_THIRST"
 msgstr "Durst"
 
 msgid "HUD_DEVELOPMENT"
-msgstr "Entwicklung · K"
+msgstr "Entwicklung · {development}"
 
 msgid "HUD_JOURNAL"
-msgstr "Buch · J"
+msgstr "Buch · {journal}"
 
 msgid "HUD_PROGRESS"
 msgstr "{species} Arten · {parts} Teile · {points} EP"
@@ -3808,7 +3796,7 @@ msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 msgstr "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 
 msgid "JOURNAL_GUIDE"
-msgstr "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Esc schließt es wieder."
+msgstr "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder."
 
 msgid "JOURNAL_UNSCANNED"
 msgstr "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht."
@@ -4211,3 +4199,681 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "WILDLIFE_PLAY_APPROACH"
+msgstr "Nähert sich Artgenossen"
+
+msgid "WILDLIFE_PLAY_GREET"
+msgstr "Begrüßt Artgenossen"
+
+msgid "WILDLIFE_PLAY_ACTIVE"
+msgstr "Spielt mit Artgenossen"
+
+msgid "WILDLIFE_PLAY_REST"
+msgstr "Ruht mit Artgenossen"
+
+msgid "SAVE_BROWSER_BACK"
+msgstr "Startmenü"
+
+msgid "SAVE_VIEW_DETAILS"
+msgstr "Details"
+
+msgid "SAVE_VIEW_RESULTS"
+msgstr "Ergebnisliste"
+
+msgid "SAVE_SEARCH_PLACEHOLDER"
+msgstr "Name oder Weltseed suchen …"
+
+msgid "SAVE_SEARCH_HINT"
+msgstr "Mehrere Suchwörter kombinieren · Strg+F / Cmd+F"
+
+msgid "SAVE_FILTER_RESET"
+msgstr "Zurücksetzen"
+
+msgid "SAVE_PHASE_HINT"
+msgstr "Nach Epoche filtern"
+
+msgid "SAVE_STATE_HINT"
+msgstr "Nach Zustand filtern"
+
+msgid "SAVE_SORT_HINT"
+msgstr "Sortierung der Spielstände"
+
+msgid "SAVE_PHASE_ALL"
+msgstr "Alle Epochen"
+
+msgid "SAVE_FILTER_ALL"
+msgstr "Alle Zustände"
+
+msgid "SAVE_FILTER_READY"
+msgstr "Intakte Spielstände"
+
+msgid "SAVE_FILTER_ATTENTION"
+msgstr "Prüfung / Sicherung"
+
+msgid "SAVE_SORT_RECENT"
+msgstr "Zuletzt gespeichert"
+
+msgid "SAVE_SORT_NAME"
+msgstr "Name A–Z"
+
+msgid "SAVE_SORT_PLAYTIME"
+msgstr "Meiste Spielzeit"
+
+msgid "SAVE_LIST_SEED"
+msgstr "Weltseed {seed}"
+
+msgid "SAVE_LIST_BACKUP"
+msgstr "Letzte Sicherung verfügbar"
+
+msgid "SAVE_PAGE"
+msgstr "Seite {page}/{pages} · {count} von {total}"
+
+msgid "SAVE_PAGE_PREVIOUS"
+msgstr "Vorherige Spielstände"
+
+msgid "SAVE_PAGE_NEXT"
+msgstr "Weitere Spielstände"
+
+msgid "SAVE_NO_RESULTS"
+msgstr "Keine passenden Abenteuer. Ändere die Suche oder setze die Filter zurück."
+
+msgid "SAVE_SELECT_RESULT"
+msgstr "Wähle ein Abenteuer aus der Ergebnisliste."
+
+msgid "ATLAS_SEARCH_PLACEHOLDER"
+msgstr "Orte suchen …"
+
+msgid "ATLAS_SEARCH_TOOLTIP"
+msgstr "Bekannte Orte auf diesem Planeten suchen · Strg+F\nEsc: Texteingabe verlassen; erneut Esc: Karte schließen"
+
+msgid "ATLAS_SEARCH_PREVIOUS"
+msgstr "Vorherige Ortsseite"
+
+msgid "ATLAS_SEARCH_NEXT"
+msgstr "Nächste Ortsseite"
+
+msgid "ATLAS_SEARCH_WAITING"
+msgstr "Suche wird vorbereitet …"
+
+msgid "ATLAS_SEARCH_PROGRESS"
+msgstr "Suche … {scanned} / {total} Orte geprüft"
+
+msgid "ATLAS_SEARCH_NO_RESULTS"
+msgstr "Keine passenden bekannten Orte. Suchtext oder Filter ändern."
+
+msgid "ATLAS_SEARCH_FAILED"
+msgstr "Orte konnten nicht gelesen werden. Die gespeicherten Daten bleiben geschützt."
+
+msgid "ATLAS_SEARCH_RESULTS"
+msgstr "Treffer auf dieser Seite: {count}"
+
+msgid "ATLAS_SEARCH_PAGE"
+msgstr "Seite {page}"
+
+msgid "Tab  Auswahl    ·    Enter  Bestätigen"
+msgstr "Tab  Auswahl    ·    Enter  Bestätigen"
+
+msgid "Esc Zurück · F11 Vollbild"
+msgstr "Esc Zurück · F11 Vollbild"
+
+msgid "Zurück · Esc"
+msgstr "Zurück · Esc"
+
+msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+
+msgid "GRAPHICS_CUSTOM"
+msgstr "Benutzerdefiniert"
+
+msgid "GRAPHICS_CUSTOM_DESCRIPTION"
+msgstr "Deine eigenen Grafikwerte. Ein Preset ersetzt alle Einzelwerte."
+
+msgid "GRAPHICS_DRAFT_HINT"
+msgstr "Änderungen werden erst mit „Übernehmen & speichern“ aktiv. „Zurück“ verwirft sie. Höhere Qualität und Reichweite benötigen mehr Grafikleistung."
+
+msgid "GRAPHICS_RESET"
+msgstr "Grafikstandard wiederherstellen"
+
+msgid "GRAPHICS_UNAVAILABLE"
+msgstr "In diesem Grafikmodus nicht verfügbar. Deine Werte bleiben für Forward+ gespeichert."
+
+msgid "GRAPHICS_SOFT_SHADOW_UNAVAILABLE"
+msgstr "Weiche Sonnenschatten sind im Kompatibilitätsmodus nicht verfügbar."
+
+msgid "GRAPHICS_NEWER_SETTINGS"
+msgstr "Die Grafikdatei stammt aus einer neueren Version und wird nicht überschrieben."
+
+msgid "GRAPHICS_QUALITY_LOW"
+msgstr "Niedrig"
+
+msgid "GRAPHICS_QUALITY_MEDIUM"
+msgstr "Mittel"
+
+msgid "GRAPHICS_QUALITY_HIGH"
+msgstr "Hoch"
+
+msgid "GRAPHICS_GROUP_CLOUDS"
+msgstr "Wolken"
+
+msgid "GRAPHICS_GROUP_HAZE"
+msgstr "Entfernungsdunst"
+
+msgid "GRAPHICS_GROUP_FOG"
+msgstr "Volumetrischer Nebel und Lichtstrahlen"
+
+msgid "GRAPHICS_GROUP_SHADOWS"
+msgstr "Sonnenschatten"
+
+msgid "GRAPHICS_GROUP_SSAO"
+msgstr "Kontaktschatten (SSAO)"
+
+msgid "GRAPHICS_GROUP_BLOOM"
+msgstr "Bloom und Leuchteffekte"
+
+msgid "GRAPHICS_GROUP_IMAGE"
+msgstr "Bildhelligkeit und Farben"
+
+msgid "GRAPHICS_CLOUDS_ENABLED"
+msgstr "Wolken anzeigen"
+
+msgid "GRAPHICS_CLOUD_QUALITY"
+msgstr "Wolkendetails"
+
+msgid "GRAPHICS_HAZE_STRENGTH"
+msgstr "Dunststärke"
+
+msgid "GRAPHICS_FOG_ENABLED"
+msgstr "Volumetrischen Nebel anzeigen"
+
+msgid "GRAPHICS_FOG_QUALITY"
+msgstr "Nebelqualität"
+
+msgid "GRAPHICS_FOG_STRENGTH"
+msgstr "Nebelstärke"
+
+msgid "GRAPHICS_SHADOWS_ENABLED"
+msgstr "Sonnenschatten anzeigen"
+
+msgid "GRAPHICS_SHADOW_QUALITY"
+msgstr "Schattenqualität"
+
+msgid "GRAPHICS_SHADOW_SOFTNESS"
+msgstr "Schattenweichheit"
+
+msgid "GRAPHICS_SHADOW_DISTANCE"
+msgstr "Schattenreichweite"
+
+msgid "GRAPHICS_SSAO_ENABLED"
+msgstr "Kontaktschatten anzeigen"
+
+msgid "GRAPHICS_SSAO_QUALITY"
+msgstr "Kontaktschattenqualität"
+
+msgid "GRAPHICS_SSAO_STRENGTH"
+msgstr "Kontaktschattenstärke"
+
+msgid "GRAPHICS_BLOOM_ENABLED"
+msgstr "Leuchteffekte anzeigen"
+
+msgid "GRAPHICS_BLOOM_STRENGTH"
+msgstr "Leuchtstärke"
+
+msgid "GRAPHICS_EXPOSURE"
+msgstr "Belichtung"
+
+msgid "GRAPHICS_CONTRAST"
+msgstr "Kontrast"
+
+msgid "GRAPHICS_SATURATION"
+msgstr "Sättigung"
+
+msgid "FLEET_ENTRY"
+msgstr "Flottentest"
+
+msgid "FLEET_TITLE"
+msgstr "FLOTTENTEST  /  HANGAR & FRACHT"
+
+msgid "FLEET_INTRO"
+msgstr "Expedition und Beiboot verwalten, andocken und Testfracht umladen. Jede erfolgreiche Aktion wird gespeichert. Ein neuer Test erhält einen eigenen Spielstand; vorhandene Abenteuer bleiben erhalten. Flug und Weltraumfortschritt folgen später."
+
+msgid "FLEET_NEW"
+msgstr "Neuer Flottentest"
+
+msgid "FLEET_LOAD"
+msgstr "Test laden"
+
+msgid "FLEET_SHIPYARD"
+msgstr "Schiffswerft"
+
+msgid "FLEET_HOME"
+msgstr "Hauptmenü"
+
+msgid "FLEET_EMPTY"
+msgstr "Zuerst einen neuen Test anlegen oder einen vorhandenen Test laden."
+
+msgid "FLEET_DOCK"
+msgstr "Andocken"
+
+msgid "FLEET_UNDOCK"
+msgstr "Abdocken"
+
+msgid "FLEET_CARGO_TITLE"
+msgstr "TESTFRACHT / PROBEN"
+
+msgid "FLEET_TRANSFER"
+msgstr "Ausgewählte Fracht zum Zielschiff umladen"
+
+msgid "FLEET_DESIGN_TITLE"
+msgstr "EIGENEN GESPEICHERTEN ENTWURF TESTEN"
+
+msgid "FLEET_SEARCH"
+msgstr "Entwürfe suchen …"
+
+msgid "FLEET_FIRST"
+msgstr "Erste Seite"
+
+msgid "FLEET_MORE"
+msgstr "Weitere Entwürfe"
+
+msgid "FLEET_INSTANTIATE"
+msgstr "Weitere Schiffsinstanz neben dem Zielschiff erzeugen"
+
+msgid "FLEET_NEW_FAILED"
+msgstr "Test konnte nicht vorbereitet werden. Der bisherige Spielstand bleibt erhalten."
+
+msgid "FLEET_NEW_READY"
+msgstr "Neuer Flottentest gespeichert. Beiboot wählen, Expedition als Ziel auswählen und andocken."
+
+msgid "FLEET_LOAD_FAILED"
+msgstr "Dieser Teststand kann nicht geladen werden."
+
+msgid "FLEET_LOADED"
+msgstr "Flottentest geladen."
+
+msgid "FLEET_HANGAR"
+msgstr "Hangar"
+
+msgid "FLEET_SYSTEM"
+msgstr "Systemraum"
+
+msgid "FLEET_FREE"
+msgstr "frei"
+
+msgid "FLEET_BAY"
+msgstr "Hangar %d · %s"
+
+msgid "FLEET_SAMPLE"
+msgstr "Probe"
+
+msgid "FLEET_CARGO"
+msgstr "Testfracht"
+
+msgid "FLEET_SPACE"
+msgstr " · %d Lagerplätze"
+
+msgid "FLEET_DETAIL"
+msgstr "%s  |  Entwurf Revision %d  |  Fracht %d / %d  |  Energie %d / %d\nSchiff-ID: %s\n%s"
+
+msgid "FLEET_DOCKED"
+msgstr "Angedockt an: "
+
+msgid "FLEET_READY"
+msgstr "Bereit im Systemraum"
+
+msgid "FLEET_SAVED"
+msgstr "Änderung gespeichert."
+
+msgid "FLEET_ERROR"
+msgstr "Aktion nicht ausgeführt. Der gespeicherte Stand bleibt erhalten."
+
+msgid "FLEET_ERROR_STALE"
+msgstr "Die Ansicht ist veraltet. Bitte die Aktion mit dem aktuellen Stand wiederholen."
+
+msgid "FLEET_ERROR_OCCUPIED"
+msgstr "Dieser Hangar ist bereits belegt."
+
+msgid "FLEET_ERROR_DISTANCE"
+msgstr "Beide Schiffe müssen im selben System nahe beieinander stehen."
+
+msgid "FLEET_ERROR_CONNECTED"
+msgstr "Zum Umladen muss das Beiboot am Zielschiff angedockt sein."
+
+msgid "FLEET_ERROR_CAPACITY"
+msgstr "Im Zielschiff ist nicht genug Frachtraum frei."
+
+msgid "FLEET_ERROR_DESIGN"
+msgstr "Dieser Entwurf ist unvollständig oder nicht kompatibel. Bitte in der Schiffswerft prüfen."
+
+msgid "FLEET_ERROR_LIMIT"
+msgstr "Der Flottentest unterstützt bis zu 16 Schiffe."
+
+msgid "CONSTRUCTION_NONE"
+msgstr "Es gibt keine laufende Baustelle."
+
+msgid "CONSTRUCTION_INVALID"
+msgstr "Unbekannter Baustellenauftrag."
+
+msgid "CONSTRUCTION_UNCHANGED"
+msgstr "Die Baustelle hat diesen Zustand bereits."
+
+msgid "CONSTRUCTION_RECOVERING"
+msgstr "Der Rückbau läuft bereits. Weise Bewohner für den Rücktransport zu."
+
+msgid "CONSTRUCTION_STORAGE_FULL"
+msgstr "Für die vollständige Materialrückgabe fehlt Lagerplatz. Schaffe zuerst Platz im Lager."
+
+msgid "CONSTRUCTION_PAUSED"
+msgstr "Baustelle pausiert. Laufende Materiallieferungen werden noch beendet."
+
+msgid "CONSTRUCTION_RESUMED"
+msgstr "Baustelle fortgesetzt. Zugewiesene Bewohner arbeiten weiter."
+
+msgid "CONSTRUCTION_RECOVERED"
+msgstr "Rückbau abgeschlossen. Alle Baumaterialien sind zurück im Lager."
+
+msgid "CONSTRUCTION_RECOVERY_STARTED"
+msgstr "Bau abgebrochen. Bewohner bringen angelieferte Materialien zurück."
+
+msgid "CONSTRUCTION_INACTIVE"
+msgstr "Baustellen können nur im laufenden Stammesmodus geändert werden."
+
+msgid "CONSTRUCTION_SAVE_FAILED"
+msgstr "Speichern fehlgeschlagen. Baustelle, Materialien und Aufträge bleiben unverändert."
+
+msgid "CONSTRUCTION_TITLE"
+msgstr "{name} · {state}"
+
+msgid "CONSTRUCTION_STATE_ACTIVE"
+msgstr "Im Bau"
+
+msgid "CONSTRUCTION_STATE_PAUSED"
+msgstr "Pausiert"
+
+msgid "CONSTRUCTION_STATE_RECOVERING"
+msgstr "Materialrückgabe"
+
+msgid "CONSTRUCTION_WORKERS"
+msgstr "Zugewiesen: {count} · gestoppt oder ohne Weg: {blocked}"
+
+msgid "CONSTRUCTION_MATERIAL_ROW"
+msgstr "{resource}: {delivered}/{required} am Bau · {carried} unterwegs · {reserved} reserviert"
+
+msgid "CONSTRUCTION_RETURN_ROW"
+msgstr "{resource}: {returned}/{required} zurück · {carried} getragen · {delivered} am Bau"
+
+msgid "CONSTRUCTION_PAUSE"
+msgstr "Bau pausieren"
+
+msgid "CONSTRUCTION_RESUME"
+msgstr "Bau fortsetzen"
+
+msgid "CONSTRUCTION_ASSIGN"
+msgstr "Auswahl zur Baustelle"
+
+msgid "CONSTRUCTION_CANCEL"
+msgstr "Bau abbrechen …"
+
+msgid "CONSTRUCTION_CONFIRM_CANCEL"
+msgstr "Abbrechen und Material zurückholen"
+
+msgid "CONSTRUCTION_KEEP"
+msgstr "Weiterbauen"
+
+msgid "CONSTRUCTION_CONFIRM_HINT"
+msgstr "Baufortschritt geht verloren. Reservierte Materialien werden freigegeben; angelieferte und getragene Waren müssen Bewohner zurückbringen. Der Bauplatz bleibt bis dahin belegt."
+
+msgid "CONSTRUCTION_RECOVERY_HINT"
+msgstr "Weise Bewohner zu oder setze gestoppte Bewohner fort. Material kommt erst bei Ankunft im Lager an. Für die Rückgabe wird Lagerplatz freigehalten."
+
+msgid "CONSTRUCTION_PAUSE_HINT"
+msgstr "Pausieren stoppt neue Abholungen und Bauarbeit. Bereits getragene Waren dürfen ankommen; andere Berufe arbeiten weiter."
+
+msgid "BP_FAVORITES_ONLY"
+msgstr "Nur Favoriten"
+
+msgid "BP_FAVORITE_ADD"
+msgstr "☆ Als Favorit merken"
+
+msgid "BP_FAVORITE_REMOVE"
+msgstr "★ Favorit entfernen"
+
+msgid "BP_FAVORITE_TOOLTIP"
+msgstr "Merkt genau diese Vorlagenrevision auf diesem Gerät. Spielstand und exportierte Vorlage bleiben unverändert."
+
+msgid "BP_FAVORITE_SAVED"
+msgstr "Diese Vorlage ist jetzt ein Favorit."
+
+msgid "BP_FAVORITE_CLEARED"
+msgstr "Die Favoritenmarkierung wurde entfernt."
+
+msgid "BP_NO_FAVORITES"
+msgstr "Keine passenden Favoriten. Markiere eine Vorlage als Favorit oder ändere Suche und Filter."
+
+msgid "BP_ERROR_FAVORITES_FULL"
+msgstr "Die Favoritenliste ist voll. Entferne zuerst eine Markierung."
+
+msgid "RECOVERY_TITLE"
+msgstr "Deine Kreatur ist gestorben"
+
+msgid "RECOVERY_COUNTDOWN"
+msgstr "Rückkehr zur Heimat in {seconds} Sek."
+
+msgid "RECOVERY_PREPARING"
+msgstr "Deine Heimat wird vorbereitet. Du kehrst zurück, sobald ein sicherer Platz frei ist."
+
+msgid "RECOVERY_BLOCKED"
+msgstr "Der Rückkehrort ist noch blockiert. Wir suchen weiter. Mit Esc erreichst du das Pausemenü."
+
+msgid "RECOVERY_KEEP"
+msgstr "Entdeckungen, Fähigkeiten und Gefährten bleiben erhalten."
+
+msgid "RECOVERY_SAFE"
+msgstr "Wieder auf den Beinen"
+
+msgid "RECOVERY_PROTECTION"
+msgstr "Leben, Nahrung und Wasser aufgefüllt. Noch {seconds} Sek. Schutz vor Schaden."
+
+msgid "RECOVERY_ATTACK"
+msgstr "Ein eigener Angriff beendet den Schutz."
+
+msgid "BIND_JOURNAL"
+msgstr "Entdeckungsbuch"
+
+msgid "BIND_DEVELOPMENT"
+msgstr "Entwicklung"
+
+msgid "BIND_WORLD_MAP"
+msgstr "Weltkarte"
+
+msgid "BIND_ALL_CONTROLS"
+msgstr "SPIEL & MENÜS · HAUPT- UND ZWEITBELEGUNG"
+
+msgid "BIND_MENUS_NOTE"
+msgstr "Menütasten: einzelne Buchstaben oder Ziffern. F, H, N und P sind für feste Spielaktionen belegt. Esc schließt ein Menü weiterhin."
+
+msgid "BIND_FIXED_PLAY_KEY"
+msgstr "Diese Taste ist bereits durch eine feste Spielaktion belegt (F, H, N oder P)."
+
+msgid "BIND_MENU_KEY_REQUIRED"
+msgstr "Für Menüs bitte eine Buchstaben- oder Zifferntaste wählen."
+
+msgid "BIND_MENUS_ADDED"
+msgstr "Deine Spieltasten bleiben erhalten. Neue Menütasten wurden auf freie Tasten gelegt; prüfe die Belegung unten."
+
+msgid "BIND_JOURNAL_BUTTON"
+msgstr "Entdeckungsbuch · {journal}"
+
+msgid "BIND_TRIBE_HINT"
+msgstr "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. {journal} öffnet eure gemeinsamen Entdeckungen."
+
+msgid "BIND_SCAN_RECOGNIZED"
+msgstr "Art erkannt · {journal} öffnet das Entdeckungsbuch"
+
+msgid "BIND_FIRST_SCAN"
+msgstr "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit {journal} im Entdeckungsbuch."
+
+msgid "BIND_CONTROLS_HELP"
+msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\n{journal}   Entdeckungsbuch\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+
+msgid "GUIDE_TITLE"
+msgstr "DEIN WEG ZUM STAMM"
+
+msgid "GUIDE_INTRO"
+msgstr "Vier Kapitel begleiten dich vom Erkunden bis zum ersten Stamm. Wähle, was du als Nächstes lernen möchtest. Die Hilfe ist freiwillig und verändert keine Spielziele."
+
+msgid "GUIDE_CHAPTER_EXPLORE"
+msgstr "Erkunden"
+
+msgid "GUIDE_CHAPTER_SURVIVE"
+msgstr "Versorgen"
+
+msgid "GUIDE_CHAPTER_HOME"
+msgstr "Zusammenleben"
+
+msgid "GUIDE_CHAPTER_TRIBE"
+msgstr "Stamm gründen"
+
+msgid "GUIDE_STEP_LOOK"
+msgstr "Schau dich um"
+
+msgid "GUIDE_STEP_MOVE"
+msgstr "Erkunde deine Umgebung"
+
+msgid "GUIDE_STEP_JUMP"
+msgstr "Mach einen Sprung"
+
+msgid "GUIDE_STEP_INSPECT"
+msgstr "Scanne eine Kreatur"
+
+msgid "GUIDE_STEP_EAT"
+msgstr "Finde passende Nahrung"
+
+msgid "GUIDE_STEP_DRINK"
+msgstr "Trinke Süßwasser"
+
+msgid "GUIDE_STEP_HOME"
+msgstr "Lege eine Heimat fest"
+
+msgid "GUIDE_STEP_COMMAND"
+msgstr "Führe deine Gefährten"
+
+msgid "GUIDE_STEP_TRIBE"
+msgstr "Beginne das Stammeszeitalter"
+
+msgid "GUIDE_HINT_LOOK"
+msgstr "Bewege die Maus und schau dich in deiner Welt um."
+
+msgid "GUIDE_HINT_MOVE"
+msgstr "{forward} / {left} / {back} / {right} · Lege ein paar Meter zurück."
+
+msgid "GUIDE_HINT_JUMP"
+msgstr "{jump} · Springe von festem Boden ab."
+
+msgid "GUIDE_HINT_INSPECT"
+msgstr "{scan} · Halte eine Kreatur im Scanmodus im Fadenkreuz, bis der Kreis voll ist."
+
+msgid "GUIDE_HINT_EAT"
+msgstr "{interact} · Nähere dich Nahrung und interagiere mit ihr. Dein Mund bestimmt, was du verträgst."
+
+msgid "GUIDE_HINT_DRINK"
+msgstr "{interact} · Trinke an einem erreichbaren Süßwasserufer. Meerwasser hilft nicht."
+
+msgid "GUIDE_HINT_HOME"
+msgstr "N · Öffne deine Nestgruppe und lege auf freiem, ebenem, trockenem Boden eine Heimat fest."
+
+msgid "GUIDE_HINT_COMMAND"
+msgstr "N · Gib einem Gefährten oder der ganzen Gruppe den Befehl Folgen oder Heimkehren."
+
+msgid "GUIDE_HINT_TRIBE"
+msgstr "Rufe beide Gefährten heim. Öffne an der Heimat „Stammeszeitalter …“ und bestätige den Wechsel."
+
+msgid "GUIDE_DETAIL_LOOK"
+msgstr "Beim Spielen folgt die Kamera deiner Kreatur. Empfindlichkeit und invertierte Y-Achse findest du unter Esc → Steuerung."
+
+msgid "GUIDE_DETAIL_MOVE"
+msgstr "Nur tatsächlich zurückgelegte Strecke zählt. An Hindernissen stehen zu bleiben erfüllt die Aufgabe nicht."
+
+msgid "GUIDE_DETAIL_JUMP"
+msgstr "Im Wasser steigst du mit derselben Taste auf. Für diese Aufgabe brauchst du einen Sprung vom Boden."
+
+msgid "GUIDE_DETAIL_INSPECT"
+msgstr "Ein neuer Scan dauert 2,5 Sekunden; bereits bekannte Arten erkennst du sofort. Das Entdeckungsbuch ist über die Schaltfläche im HUD erreichbar."
+
+msgid "GUIDE_DETAIL_EAT"
+msgstr "Pflanzen liefern unter anderem Früchte und Pflanzenkost. Fleisch erhältst du von Beute. Bei vollem Magen oder ungeeigneter Nahrung zählt der Versuch nicht. Du musst für die Einführung keinen bestimmten Ernährungsstil wählen."
+
+msgid "GUIDE_DETAIL_DRINK"
+msgstr "Suche Flüsse oder Seen und gehe nah genug ans Wasser. Ein erfolgreicher Schluck füllt Durst auf. Mit vollem Durstbalken brauchst du noch nichts zu trinken."
+
+msgid "GUIDE_DETAIL_HOME"
+msgstr "Zwei Gefährten deiner eigenen Spezies gehören dauerhaft zur Heimat. Bäume, Wasser, Steilkanten oder zu wenig Platz verhindern das Anlegen. In der Nähe deiner Heimat regeneriert Gesundheit, wenn Hunger und Durst ausreichend gefüllt sind."
+
+msgid "GUIDE_DETAIL_COMMAND"
+msgstr "Befehle werden gespeichert. Folgen bringt die Gefährten zu dir; Heimkehren führt sie zurück zum Nest. Mit Warten hältst du sie an. Fremde Wildtiere werden dadurch nicht zu Gruppenmitgliedern."
+
+msgid "GUIDE_DETAIL_TRIBE"
+msgstr "Du und beide Gefährten müssen an der Heimat sein. Vor der Bestätigung prüft das Spiel sichere Wege und Arbeitsplätze. Abbrechen bleibt möglich. Nach dem Wechsel führst du Bewohner und verteilst Dorfaufgaben. Die Einführung bestätigt den Wechsel niemals für dich."
+
+msgid "GUIDE_CARD_COUNT"
+msgstr "{chapter} · {done}/{total}"
+
+msgid "GUIDE_FOOTER"
+msgstr "Esc → Erste Schritte: Kapitel und Hilfe"
+
+msgid "GUIDE_CHOOSE"
+msgstr "Weiter mit: {chapter}"
+
+msgid "GUIDE_TOTAL"
+msgstr "{done}/{total} Übungen erledigt. Der Fortschritt gehört zu diesem Abenteuer."
+
+msgid "GUIDE_FUTURE"
+msgstr "Diese Einführung stammt aus einer neueren Spielversion. Ihre Daten bleiben erhalten; die Hilfe kannst du weiterhin lesen."
+
+msgid "GUIDE_DISABLED"
+msgstr "Die Hinweise sind ausgeschaltet."
+
+msgid "GUIDE_RESTART"
+msgstr "Einführung neu beginnen"
+
+msgid "GUIDE_SKIP"
+msgstr "Hinweise ausschalten"
+
+msgid "GUIDE_FINISHED"
+msgstr "EINFÜHRUNG ABGESCHLOSSEN"
+
+msgid "GUIDE_TRIBE_NEXT"
+msgstr "Wähle Bewohner aus und verteile im Dorf Arbeitsaufträge. Die Kapitel bleiben als Hilfe im Pausemenü erreichbar."
+
+msgid "GUIDE_CONTEXT_WORLD"
+msgstr "Die Hinweise werden in der geladenen Spielwelt fortgesetzt."
+
+msgid "GUIDE_CONTEXT_FULL"
+msgstr "Dein Magen ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du wieder Nahrung brauchst."
+
+msgid "GUIDE_CONTEXT_HYDRATED"
+msgstr "Dein Durstbalken ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du trinken musst."
+
+msgid "GUIDE_CONTEXT_READY"
+msgstr "Deine Gruppe ist bereit. Öffne „Stammeszeitalter …“, um die Dorfwege prüfen zu lassen."
+
+msgid "GUIDE_CONTEXT_ANY_ORDER"
+msgstr "Aktionen zählen auch vor ihrem Kapitel. Du kannst Kapitel frei wählen oder die Hinweise ausschalten."
+
+msgid "SAVE_SCAN_DISCOVER"
+msgstr "Spielstände werden gesucht …"
+
+msgid "SAVE_SCAN_PROGRESS"
+msgstr "Spielstände werden geprüft: {done} von {total} …"
+
+msgid "SAVE_HISTORY_LOADING"
+msgstr "Sicherungen werden geprüft …"
+
+msgid "WILDLIFE_HUNT"
+msgstr "Jagt Beute"
+
+msgid "WILDLIFE_CARRION"
+msgstr "Sucht Aas"
+
+msgid "WILDLIFE_EAT_CARCASS"
+msgstr "Frisst Aas"

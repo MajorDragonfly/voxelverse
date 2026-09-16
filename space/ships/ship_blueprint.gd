@@ -146,7 +146,10 @@ static func find_hangar_fit(host: Dictionary, guest: Dictionary) -> Dictionary:
 static func pin_saved(path: String) -> Dictionary:
 	var loaded: Dictionary = load_design(path)
 	if not loaded.ok: return loaded
-	var data: Dictionary = loaded.blueprint
+	return pin(loaded.blueprint)
+
+## Used for self-contained campaign pins; never trusts stored capability totals.
+static func pin(data: Dictionary) -> Dictionary:
 	var result: Dictionary = evaluate(data)
 	if not result.ok or int(data.get("revision", 0)) < 1: return _result("ship.not_ready_to_pin")
 	var bays: Dictionary = {}

@@ -6,6 +6,7 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
 const Husbandry = preload("res://world/tribe/village_husbandry.gd")
+const Construction = preload("res://world/tribe/village_construction.gd")
 const SCHEMA: int = 6
 const LEGACY_SCHEMA: int = 5
 const KINDS: Array[String] = ["wood", "stone", "food"]
@@ -68,7 +69,7 @@ static func cargo_count(data: Dictionary, kind: String) -> int:
 	return count
 
 static func available_storage(data: Dictionary, kind: String) -> int:
-	return STORAGE - int(data["stock"][kind]) - cargo_count(data, kind) - Economy.Freight.amount(data, "held", kind)
+	return STORAGE - int(data["stock"][kind]) - cargo_count(data, kind) - Economy.Freight.amount(data, "held", kind) - Economy.recovery_reserved(data, kind)
 
 static func grow(data: Dictionary, delta: float) -> bool:
 	# Simulation time only: no harvest on load, wall clock or while paused.
@@ -155,7 +156,7 @@ static func _validate(value: Variant, body: Dictionary, campaign: Dictionary, se
 		var produced: int = int(value.get("grown", 0)) if kind == "food" and renewable else 0
 		if expanded and kind in ["wood", "stone"]:
 			produced = int(value.get("economy", {}).get("produced", {}).get(kind, 0))
-		if int(deposit["remaining"]) + int(value["stock"][kind]) + carried > 48 + produced + Economy.Freight.net(value, kind) or int(value["stock"][kind]) + cargo_count(value, kind) + Economy.Freight.amount(value, "held", kind) > STORAGE:
+		if int(deposit["remaining"]) + int(value["stock"][kind]) + carried > 48 + produced + Economy.Freight.net(value, kind) or int(value["stock"][kind]) + cargo_count(value, kind) + Economy.Freight.amount(value, "held", kind) + Economy.recovery_reserved(value, kind) > STORAGE:
 			return "Material wurde vervielfacht."
 	for key in ["tools", "huts", "delivered", "meals"]:
 		if not integer(value.get(key), 0, 1000000000 if renewable else 144):
@@ -182,11 +183,13 @@ static func _validate(value: Variant, body: Dictionary, campaign: Dictionary, se
 			if int(value["tools"]) != 1 or not local_point(project.get("position"), value["anchor"]) or key != Economy.next_station(value, project.kind):
 				return "Ungültige Arbeitsplatzbaustelle."
 			if project.has("station_key"):
-				if value.economy.get("schema") != Economy.SCHEMA or project.get("id") != Ids.scoped("workplace", value.id, key) or project.get("entrance") != project.position: return "Ungültige Arbeitsplatzbaustellenkennung."
+				if int(value.economy.get("schema", 0)) < 3 or project.get("id") != Ids.scoped("workplace", value.id, key) or project.get("entrance") != project.position: return "Ungültige Arbeitsplatzbaustellenkennung."
 				for site: Variant in value.economy.stations.values():
 					if not site is Dictionary or not local_point(site.get("position"), value.anchor): return "Ungültiger Arbeitsplatz."
 					if Home.distance(project.position, site.position) < 3.0: return "Arbeitsplatzbaustelle überlagert einen bestehenden Platz."
 			elif key not in Economy.STATIONS: return "Arbeitsplatzinstanz ohne Baumaterialvertrag."
+	var control_problem: String = Construction.validate(value)
+	if not control_problem.is_empty(): return control_problem
 	if expanded:
 		var resource_owner: String = settlement_id if instanced and settlement_id != origin_id else str(home.id)
 		var problem: String = Economy.validate(value, resource_owner)

@@ -63,12 +63,28 @@ der Diagnosevorschau. Der aktuelle Kampagnengenerator liefert noch durchgehend
 Herkunftsplanet-Kennung bleiben WEATHER-02. Es wird keine neue Save-Struktur
 angelegt und kein Startplanet anhand von Listenposition oder Seed erraten.
 
+## WEATHER-02B – gespeicherte Klimaprofile und geschützte Heimat
+
+Fachlieferung auf der Basis von Spieltest-PR #125. Neue Kampagnen speichern den
+Herkunftsplaneten bei seiner erfolgreichen Anlage. Versionierte, körpergebundene
+Profile steuern gemäßigtes, trockenes, eisiges, vulkanisches oder atmosphärenloses
+Basiswetter; die Heimat bleibt dauerhaft mild. Bestehende Kampagnen behalten
+mildes Wetter auf allen bereits besuchten Körpern und markieren die historische
+Herkunft ausdrücklich als unbekannt. Reise, Slotkopie, Kugelmigration und Neustart
+erhalten diese Referenzen. Unbekannte Versionen und Profile sperren den Writer
+vor Backup-Rückfall. [Vertrag und Integrationsübergabe](WORK_WEATHER02_PLANET_CLIMATES.md).
+
+Terrain-/Biome-/Biosphärengeneration und die vollständige Vakuum-Himmelsdarstellung
+bleiben bei ihren Fachbesitzern. Diese Lieferung aktiviert keine Extremstürme
+oder Schäden; WEATHER-03/04 bleiben offen.
+
 ## Daten- und Darstellungsvertrag
 
 `world/weather/weather_model.gd` und `regional_weather.gd` sind reine Ableitungen. Eingaben sind stabile
-`body_id`, Planetenseed und die bereits gespeicherte `campaign.elapsed_seconds`.
-Keine neue Save-Datei, kein Timer mit Echtzeitdatum, keine Offlineproduktion,
-keine Migration und kein zweiter autoritativer Kampagnenzustand. Laden und
+`body_id`, Planetenseed, gespeicherte Klimareferenz und die bereits gespeicherte
+`campaign.elapsed_seconds`. Keine neue Save-Datei, kein Timer mit Echtzeitdatum,
+keine Offlineproduktion und kein zweiter autoritativer Kampagnenzustand. Die
+additive Klimamigration gehört zum vorhandenen Registerimport, nicht zur Wetterabfrage. Laden und
 Wiederbesuch rekonstruieren das Wetter zur gemeinsamen Spielzeit; Abwesenheit
 bei weiterlaufender Kampagne darf somit eine andere Front ergeben. Pause,
 Geschwindigkeit null, Menü und geschlossenes Spiel erzeugen keine zusätzliche Zeit.
@@ -82,7 +98,8 @@ Besitzer akzeptieren und sich nach Szenenwechsel neu binden.
 
 | Feld | Bedeutung / Einheit |
 |---|---|
-| `schema`, `climate_id` | Darstellungsvertrag 1, aktuell `earth_temperate` |
+| `schema`, `climate_id`, `climate_revision` | Darstellungsvertrag 1; versioniertes Basisprofil (`earth_temperate`, `arid`, `frozen`, `volcanic`, `airless`) |
+| `home_protected` | Gespeicherter milder Schutz für Heimat bzw. historische besuchte Körper |
 | `body_id`, `seed`, `elapsed_seconds` | Körperbindung und gespeicherte Kampagnenzeit |
 | `condition`, `previous_condition`, `transition` | Zielzustand, vorige Front und weicher Fortschritt 0–1 |
 | `cloud_cover`, `precipitation`, `wetness` | Normierte Bewölkung, gesamte Niederschlagsstärke, abklingende Oberflächennässe |
@@ -121,7 +138,7 @@ aus dem regionalen Feld; sie sind keine einzeln gespeicherten Weltobjekte.
 
 | Paket | Lieferung | Abnahme vor Freigabe |
 |---|---|---|
-| WEATHER-02 – planetare Klimazonen (teilweise: 02A geliefert) | **02A:** regionale Fronten, Regen/Schnee, Böen und Prognose. **Offen:** versionierte Klimaprofile pro stabiler Körper-ID; Herkunftsplanet dauerhaft identifizieren und mild schützen; atmosphärenlose, trockene, eisige, vulkanische Welten; Integration weiterer Klimatypen | Startplanet bleibt bei allen Seeds, Migration, Körperreise und Neustart ungefährlich; kein Regen im Vakuum; kein Wetterwechsel an Cube-Nähten; unbekannte Save-Version geschützt |
+| WEATHER-02 – planetare Klimazonen (teilweise: 02A geliefert) | **02A:** regionale Fronten, Regen/Schnee, Böen und Prognose. **02B geliefert:** versionierte körpergebundene Basisprofile, explizite Herkunft neuer Kampagnen und konservativer Heimatschutz alter Stände; Wetter für trockene/eisige/vulkanische/atmosphärenlose Körper. **Offen:** passende Terrain-/Biosphären- und Vakuum-Himmelsdarstellung | Startplanet bleibt bei allen Seeds, Migration, Körperreise und Neustart ungefährlich; kein Regen im Vakuum; kein Wetterwechsel an Cube-Nähten; unbekannte Save-Version geschützt |
 | WEATHER-03 – Extremstürme | Sandstürme mit Staub/Sichtverlust/Wind, Feuerstürme mit Hitze/Asche/Glut, danach Schneestürme; Ablauf Ruhe → Vorwarnung → Anstieg → Sturm → Abklingen | Keine Extremprofile auf dem Startplaneten; Sturm vor Eintritt erkennbar; passende Farbe/Partikel/Audio; keine blinkenden Vollbildblitze; klare räumliche Grenzen und begrenzte Last |
 | WEATHER-04 – Schutz und Auswirkungen | Gemeinsamer Expositions-/Schutzvertrag für Kreaturen, Bewohner, Gebäude und Ausrüstung; Tiere suchen Deckung; Arbeit/Transport können pausieren; sichere Landestelle; keine pauschale Terrainzerstörung | Schaden/Verbrauch genau einmal über bestehende Besitzer; Dach/Höhle/Schiff schützen nachvollziehbar; Save während Vorwarnung/Sturm und A–B–A ohne doppelten Schaden oder gefangene Bewohner; Rückkehr/Erholung möglich |
 | WEATHER-05 – Inszenierung und Abnahme | Shader für Nässe/Staub, Wolken-/Nebel-/Lichtkomposition, Wetterklänge, UI-Warnung DE/EN, Intensitäts-/Qualitätsregler, Ziel-PC-Balancing | Gemeinsamer Rendering-/Shader-/Audio-Stand, Unterwasser und Kameras geprüft; Windows-Spieltest und 1080p60 auf Ziel-PC; keine ungemessenen FPS-Versprechen |

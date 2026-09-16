@@ -105,11 +105,6 @@
       "en": "DEVELOPMENT BUILD    /    CREATURE STAGE"
     },
     {
-      "key": "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen",
-      "de": "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen",
-      "en": "Tab  Select    ·    Enter  Confirm    ·    F8  Settings"
-    },
-    {
       "key": "Fortsetzen",
       "de": "Fortsetzen",
       "en": "Continue"
@@ -560,11 +555,6 @@
       "en": "VOXELVERSE · SETTINGS"
     },
     {
-      "key": "Esc / F8 Menü · F11 Vollbild",
-      "de": "Esc / F8 Menü · F11 Vollbild",
-      "en": "Esc / F8 Menu · F11 Fullscreen"
-    },
-    {
       "key": "Anzeige",
       "de": "Anzeige",
       "en": "Display"
@@ -955,11 +945,6 @@
       "en": "Defaults"
     },
     {
-      "key": "Zurück · F7 / Esc",
-      "de": "Zurück · F7 / Esc",
-      "en": "Back · F7 / Esc"
-    },
-    {
       "key": "Entdeckungsbuch",
       "de": "Entdeckungsbuch",
       "en": "Discovery journal"
@@ -1175,11 +1160,6 @@
       "en": "Continue the adventure on a spherical planet. Your previous save is preserved as the original."
     },
     {
-      "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
-    },
-    {
       "key": "BP_LIBRARY_TITLE",
       "de": "Kreaturenvorlagen",
       "en": "Creature templates"
@@ -1366,8 +1346,8 @@
     },
     {
       "key": "BP_SEARCH",
-      "de": "Vorlagen suchen",
-      "en": "Search templates"
+      "de": "Name, Autor, Beschreibung oder Tags suchen …",
+      "en": "Search name, author, description or tags …"
     },
     {
       "key": "BP_ALL",
@@ -2219,8 +2199,8 @@
     },
     {
       "key": "SKILLS_JOURNAL",
-      "de": "Entdeckungsbuch · J",
-      "en": "Discovery journal · J"
+      "de": "Entdeckungsbuch · {journal}",
+      "en": "Discovery journal · {journal}"
     },
     {
       "key": "SKILLS_PATH",
@@ -3639,13 +3619,13 @@
     },
     {
       "key": "HUD_DEVELOPMENT",
-      "de": "Entwicklung · K",
-      "en": "Evolution · K"
+      "de": "Entwicklung · {development}",
+      "en": "Evolution · {development}"
     },
     {
       "key": "HUD_JOURNAL",
-      "de": "Buch · J",
-      "en": "Journal · J"
+      "de": "Buch · {journal}",
+      "en": "Journal · {journal}"
     },
     {
       "key": "HUD_PROGRESS",
@@ -6349,8 +6329,8 @@
     },
     {
       "key": "JOURNAL_GUIDE",
-      "de": "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Esc schließt es wieder.",
-      "en": "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\nJ opens this book. Esc closes it."
+      "de": "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder.",
+      "en": "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
     },
     {
       "key": "JOURNAL_UNSCANNED",
@@ -7021,6 +7001,1136 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "WILDLIFE_PLAY_APPROACH",
+      "de": "Nähert sich Artgenossen",
+      "en": "Approaching companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_GREET",
+      "de": "Begrüßt Artgenossen",
+      "en": "Greeting companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_ACTIVE",
+      "de": "Spielt mit Artgenossen",
+      "en": "Playing with companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_REST",
+      "de": "Ruht mit Artgenossen",
+      "en": "Resting with companion"
+    },
+    {
+      "key": "SAVE_BROWSER_BACK",
+      "de": "Startmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "SAVE_VIEW_DETAILS",
+      "de": "Details",
+      "en": "Details"
+    },
+    {
+      "key": "SAVE_VIEW_RESULTS",
+      "de": "Ergebnisliste",
+      "en": "Results"
+    },
+    {
+      "key": "SAVE_SEARCH_PLACEHOLDER",
+      "de": "Name oder Weltseed suchen …",
+      "en": "Search name or world seed …"
+    },
+    {
+      "key": "SAVE_SEARCH_HINT",
+      "de": "Mehrere Suchwörter kombinieren · Strg+F / Cmd+F",
+      "en": "Combine search terms · Ctrl+F / Cmd+F"
+    },
+    {
+      "key": "SAVE_FILTER_RESET",
+      "de": "Zurücksetzen",
+      "en": "Reset"
+    },
+    {
+      "key": "SAVE_PHASE_HINT",
+      "de": "Nach Epoche filtern",
+      "en": "Filter by era"
+    },
+    {
+      "key": "SAVE_STATE_HINT",
+      "de": "Nach Zustand filtern",
+      "en": "Filter by condition"
+    },
+    {
+      "key": "SAVE_SORT_HINT",
+      "de": "Sortierung der Spielstände",
+      "en": "Save sorting"
+    },
+    {
+      "key": "SAVE_PHASE_ALL",
+      "de": "Alle Epochen",
+      "en": "All eras"
+    },
+    {
+      "key": "SAVE_FILTER_ALL",
+      "de": "Alle Zustände",
+      "en": "All conditions"
+    },
+    {
+      "key": "SAVE_FILTER_READY",
+      "de": "Intakte Spielstände",
+      "en": "Intact saves"
+    },
+    {
+      "key": "SAVE_FILTER_ATTENTION",
+      "de": "Prüfung / Sicherung",
+      "en": "Review / backup"
+    },
+    {
+      "key": "SAVE_SORT_RECENT",
+      "de": "Zuletzt gespeichert",
+      "en": "Recently saved"
+    },
+    {
+      "key": "SAVE_SORT_NAME",
+      "de": "Name A–Z",
+      "en": "Name A–Z"
+    },
+    {
+      "key": "SAVE_SORT_PLAYTIME",
+      "de": "Meiste Spielzeit",
+      "en": "Most playtime"
+    },
+    {
+      "key": "SAVE_LIST_SEED",
+      "de": "Weltseed {seed}",
+      "en": "World seed {seed}"
+    },
+    {
+      "key": "SAVE_LIST_BACKUP",
+      "de": "Letzte Sicherung verfügbar",
+      "en": "Last backup available"
+    },
+    {
+      "key": "SAVE_PAGE",
+      "de": "Seite {page}/{pages} · {count} von {total}",
+      "en": "Page {page}/{pages} · {count} of {total}"
+    },
+    {
+      "key": "SAVE_PAGE_PREVIOUS",
+      "de": "Vorherige Spielstände",
+      "en": "Previous saves"
+    },
+    {
+      "key": "SAVE_PAGE_NEXT",
+      "de": "Weitere Spielstände",
+      "en": "More saves"
+    },
+    {
+      "key": "SAVE_NO_RESULTS",
+      "de": "Keine passenden Abenteuer. Ändere die Suche oder setze die Filter zurück.",
+      "en": "No matching adventures. Change your search or reset the filters."
+    },
+    {
+      "key": "SAVE_SELECT_RESULT",
+      "de": "Wähle ein Abenteuer aus der Ergebnisliste.",
+      "en": "Select an adventure from the results."
+    },
+    {
+      "key": "ATLAS_SEARCH_PLACEHOLDER",
+      "de": "Orte suchen …",
+      "en": "Search places …"
+    },
+    {
+      "key": "ATLAS_SEARCH_TOOLTIP",
+      "de": "Bekannte Orte auf diesem Planeten suchen · Strg+F\nEsc: Texteingabe verlassen; erneut Esc: Karte schließen",
+      "en": "Search known places on this planet · Ctrl+F\nEsc: leave text input; Esc again: close map"
+    },
+    {
+      "key": "ATLAS_SEARCH_PREVIOUS",
+      "de": "Vorherige Ortsseite",
+      "en": "Previous page of places"
+    },
+    {
+      "key": "ATLAS_SEARCH_NEXT",
+      "de": "Nächste Ortsseite",
+      "en": "Next page of places"
+    },
+    {
+      "key": "ATLAS_SEARCH_WAITING",
+      "de": "Suche wird vorbereitet …",
+      "en": "Preparing search …"
+    },
+    {
+      "key": "ATLAS_SEARCH_PROGRESS",
+      "de": "Suche … {scanned} / {total} Orte geprüft",
+      "en": "Searching … {scanned} / {total} places checked"
+    },
+    {
+      "key": "ATLAS_SEARCH_NO_RESULTS",
+      "de": "Keine passenden bekannten Orte. Suchtext oder Filter ändern.",
+      "en": "No matching known places. Change the search or filters."
+    },
+    {
+      "key": "ATLAS_SEARCH_FAILED",
+      "de": "Orte konnten nicht gelesen werden. Die gespeicherten Daten bleiben geschützt.",
+      "en": "Places could not be read. Saved data remains protected."
+    },
+    {
+      "key": "ATLAS_SEARCH_RESULTS",
+      "de": "Treffer auf dieser Seite: {count}",
+      "en": "Matches on this page: {count}"
+    },
+    {
+      "key": "ATLAS_SEARCH_PAGE",
+      "de": "Seite {page}",
+      "en": "Page {page}"
+    },
+    {
+      "key": "Tab  Auswahl    ·    Enter  Bestätigen",
+      "de": "Tab  Auswahl    ·    Enter  Bestätigen",
+      "en": "Tab  Select    ·    Enter  Confirm"
+    },
+    {
+      "key": "Esc Zurück · F11 Vollbild",
+      "de": "Esc Zurück · F11 Vollbild",
+      "en": "Esc Back · F11 Fullscreen"
+    },
+    {
+      "key": "Zurück · Esc",
+      "de": "Zurück · Esc",
+      "en": "Back · Esc"
+    },
+    {
+      "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "GRAPHICS_CUSTOM",
+      "de": "Benutzerdefiniert",
+      "en": "Custom"
+    },
+    {
+      "key": "GRAPHICS_CUSTOM_DESCRIPTION",
+      "de": "Deine eigenen Grafikwerte. Ein Preset ersetzt alle Einzelwerte.",
+      "en": "Your own graphics values. Selecting a preset replaces all individual values."
+    },
+    {
+      "key": "GRAPHICS_DRAFT_HINT",
+      "de": "Änderungen werden erst mit „Übernehmen & speichern“ aktiv. „Zurück“ verwirft sie. Höhere Qualität und Reichweite benötigen mehr Grafikleistung.",
+      "en": "Changes take effect with “Apply & save”. “Back” discards them. Higher quality and distance require more graphics performance."
+    },
+    {
+      "key": "GRAPHICS_RESET",
+      "de": "Grafikstandard wiederherstellen",
+      "en": "Restore graphics defaults"
+    },
+    {
+      "key": "GRAPHICS_UNAVAILABLE",
+      "de": "In diesem Grafikmodus nicht verfügbar. Deine Werte bleiben für Forward+ gespeichert.",
+      "en": "Unavailable in this rendering mode. Your preferences are kept for Forward+."
+    },
+    {
+      "key": "GRAPHICS_SOFT_SHADOW_UNAVAILABLE",
+      "de": "Weiche Sonnenschatten sind im Kompatibilitätsmodus nicht verfügbar.",
+      "en": "Soft sun shadows are unavailable in Compatibility mode."
+    },
+    {
+      "key": "GRAPHICS_NEWER_SETTINGS",
+      "de": "Die Grafikdatei stammt aus einer neueren Version und wird nicht überschrieben.",
+      "en": "The graphics settings come from a newer version and will not be overwritten."
+    },
+    {
+      "key": "GRAPHICS_QUALITY_LOW",
+      "de": "Niedrig",
+      "en": "Low"
+    },
+    {
+      "key": "GRAPHICS_QUALITY_MEDIUM",
+      "de": "Mittel",
+      "en": "Medium"
+    },
+    {
+      "key": "GRAPHICS_QUALITY_HIGH",
+      "de": "Hoch",
+      "en": "High"
+    },
+    {
+      "key": "GRAPHICS_GROUP_CLOUDS",
+      "de": "Wolken",
+      "en": "Clouds"
+    },
+    {
+      "key": "GRAPHICS_GROUP_HAZE",
+      "de": "Entfernungsdunst",
+      "en": "Distance haze"
+    },
+    {
+      "key": "GRAPHICS_GROUP_FOG",
+      "de": "Volumetrischer Nebel und Lichtstrahlen",
+      "en": "Volumetric fog and light shafts"
+    },
+    {
+      "key": "GRAPHICS_GROUP_SHADOWS",
+      "de": "Sonnenschatten",
+      "en": "Sun shadows"
+    },
+    {
+      "key": "GRAPHICS_GROUP_SSAO",
+      "de": "Kontaktschatten (SSAO)",
+      "en": "Contact shadows (SSAO)"
+    },
+    {
+      "key": "GRAPHICS_GROUP_BLOOM",
+      "de": "Bloom und Leuchteffekte",
+      "en": "Bloom and glow"
+    },
+    {
+      "key": "GRAPHICS_GROUP_IMAGE",
+      "de": "Bildhelligkeit und Farben",
+      "en": "Brightness and colours"
+    },
+    {
+      "key": "GRAPHICS_CLOUDS_ENABLED",
+      "de": "Wolken anzeigen",
+      "en": "Show clouds"
+    },
+    {
+      "key": "GRAPHICS_CLOUD_QUALITY",
+      "de": "Wolkendetails",
+      "en": "Cloud detail"
+    },
+    {
+      "key": "GRAPHICS_HAZE_STRENGTH",
+      "de": "Dunststärke",
+      "en": "Haze strength"
+    },
+    {
+      "key": "GRAPHICS_FOG_ENABLED",
+      "de": "Volumetrischen Nebel anzeigen",
+      "en": "Show volumetric fog"
+    },
+    {
+      "key": "GRAPHICS_FOG_QUALITY",
+      "de": "Nebelqualität",
+      "en": "Fog quality"
+    },
+    {
+      "key": "GRAPHICS_FOG_STRENGTH",
+      "de": "Nebelstärke",
+      "en": "Fog strength"
+    },
+    {
+      "key": "GRAPHICS_SHADOWS_ENABLED",
+      "de": "Sonnenschatten anzeigen",
+      "en": "Show sun shadows"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_QUALITY",
+      "de": "Schattenqualität",
+      "en": "Shadow quality"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_SOFTNESS",
+      "de": "Schattenweichheit",
+      "en": "Shadow softness"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_DISTANCE",
+      "de": "Schattenreichweite",
+      "en": "Shadow distance"
+    },
+    {
+      "key": "GRAPHICS_SSAO_ENABLED",
+      "de": "Kontaktschatten anzeigen",
+      "en": "Show contact shadows"
+    },
+    {
+      "key": "GRAPHICS_SSAO_QUALITY",
+      "de": "Kontaktschattenqualität",
+      "en": "Contact shadow quality"
+    },
+    {
+      "key": "GRAPHICS_SSAO_STRENGTH",
+      "de": "Kontaktschattenstärke",
+      "en": "Contact shadow strength"
+    },
+    {
+      "key": "GRAPHICS_BLOOM_ENABLED",
+      "de": "Leuchteffekte anzeigen",
+      "en": "Show glow"
+    },
+    {
+      "key": "GRAPHICS_BLOOM_STRENGTH",
+      "de": "Leuchtstärke",
+      "en": "Glow intensity"
+    },
+    {
+      "key": "GRAPHICS_EXPOSURE",
+      "de": "Belichtung",
+      "en": "Exposure"
+    },
+    {
+      "key": "GRAPHICS_CONTRAST",
+      "de": "Kontrast",
+      "en": "Contrast"
+    },
+    {
+      "key": "GRAPHICS_SATURATION",
+      "de": "Sättigung",
+      "en": "Saturation"
+    },
+    {
+      "key": "FLEET_ENTRY",
+      "de": "Flottentest",
+      "en": "Fleet trial"
+    },
+    {
+      "key": "FLEET_TITLE",
+      "de": "FLOTTENTEST  /  HANGAR & FRACHT",
+      "en": "FLEET TRIAL  /  HANGAR & CARGO"
+    },
+    {
+      "key": "FLEET_INTRO",
+      "de": "Expedition und Beiboot verwalten, andocken und Testfracht umladen. Jede erfolgreiche Aktion wird gespeichert. Ein neuer Test erhält einen eigenen Spielstand; vorhandene Abenteuer bleiben erhalten. Flug und Weltraumfortschritt folgen später.",
+      "en": "Manage an expedition ship and lander, dock and transfer trial cargo. Each successful action is saved. A new trial uses its own save slot and preserves existing adventures. Flight and space progression will follow later."
+    },
+    {
+      "key": "FLEET_NEW",
+      "de": "Neuer Flottentest",
+      "en": "New fleet trial"
+    },
+    {
+      "key": "FLEET_LOAD",
+      "de": "Test laden",
+      "en": "Load trial"
+    },
+    {
+      "key": "FLEET_SHIPYARD",
+      "de": "Schiffswerft",
+      "en": "Shipyard"
+    },
+    {
+      "key": "FLEET_HOME",
+      "de": "Hauptmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "FLEET_EMPTY",
+      "de": "Zuerst einen neuen Test anlegen oder einen vorhandenen Test laden.",
+      "en": "Create a new trial or load an existing one first."
+    },
+    {
+      "key": "FLEET_DOCK",
+      "de": "Andocken",
+      "en": "Dock"
+    },
+    {
+      "key": "FLEET_UNDOCK",
+      "de": "Abdocken",
+      "en": "Undock"
+    },
+    {
+      "key": "FLEET_CARGO_TITLE",
+      "de": "TESTFRACHT / PROBEN",
+      "en": "TRIAL CARGO / SAMPLES"
+    },
+    {
+      "key": "FLEET_TRANSFER",
+      "de": "Ausgewählte Fracht zum Zielschiff umladen",
+      "en": "Transfer selected cargo to target ship"
+    },
+    {
+      "key": "FLEET_DESIGN_TITLE",
+      "de": "EIGENEN GESPEICHERTEN ENTWURF TESTEN",
+      "en": "TRY YOUR SAVED DESIGN"
+    },
+    {
+      "key": "FLEET_SEARCH",
+      "de": "Entwürfe suchen …",
+      "en": "Search designs …"
+    },
+    {
+      "key": "FLEET_FIRST",
+      "de": "Erste Seite",
+      "en": "First page"
+    },
+    {
+      "key": "FLEET_MORE",
+      "de": "Weitere Entwürfe",
+      "en": "More designs"
+    },
+    {
+      "key": "FLEET_INSTANTIATE",
+      "de": "Weitere Schiffsinstanz neben dem Zielschiff erzeugen",
+      "en": "Create another ship instance near the target"
+    },
+    {
+      "key": "FLEET_NEW_FAILED",
+      "de": "Test konnte nicht vorbereitet werden. Der bisherige Spielstand bleibt erhalten.",
+      "en": "The trial could not be prepared. The previous save is preserved."
+    },
+    {
+      "key": "FLEET_NEW_READY",
+      "de": "Neuer Flottentest gespeichert. Beiboot wählen, Expedition als Ziel auswählen und andocken.",
+      "en": "New trial saved. Select the lander, choose the expedition ship as target and dock."
+    },
+    {
+      "key": "FLEET_LOAD_FAILED",
+      "de": "Dieser Teststand kann nicht geladen werden.",
+      "en": "This trial save cannot be loaded."
+    },
+    {
+      "key": "FLEET_LOADED",
+      "de": "Flottentest geladen.",
+      "en": "Fleet trial loaded."
+    },
+    {
+      "key": "FLEET_HANGAR",
+      "de": "Hangar",
+      "en": "Hangar"
+    },
+    {
+      "key": "FLEET_SYSTEM",
+      "de": "Systemraum",
+      "en": "System space"
+    },
+    {
+      "key": "FLEET_FREE",
+      "de": "frei",
+      "en": "free"
+    },
+    {
+      "key": "FLEET_BAY",
+      "de": "Hangar %d · %s",
+      "en": "Bay %d · %s"
+    },
+    {
+      "key": "FLEET_SAMPLE",
+      "de": "Probe",
+      "en": "Sample"
+    },
+    {
+      "key": "FLEET_CARGO",
+      "de": "Testfracht",
+      "en": "Trial cargo"
+    },
+    {
+      "key": "FLEET_SPACE",
+      "de": " · %d Lagerplätze",
+      "en": " · %d cargo spaces"
+    },
+    {
+      "key": "FLEET_DETAIL",
+      "de": "%s  |  Entwurf Revision %d  |  Fracht %d / %d  |  Energie %d / %d\nSchiff-ID: %s\n%s",
+      "en": "%s  |  Design revision %d  |  Cargo %d / %d  |  Energy %d / %d\nShip ID: %s\n%s"
+    },
+    {
+      "key": "FLEET_DOCKED",
+      "de": "Angedockt an: ",
+      "en": "Docked at: "
+    },
+    {
+      "key": "FLEET_READY",
+      "de": "Bereit im Systemraum",
+      "en": "Ready in system space"
+    },
+    {
+      "key": "FLEET_SAVED",
+      "de": "Änderung gespeichert.",
+      "en": "Change saved."
+    },
+    {
+      "key": "FLEET_ERROR",
+      "de": "Aktion nicht ausgeführt. Der gespeicherte Stand bleibt erhalten.",
+      "en": "Action not completed. The saved state is preserved."
+    },
+    {
+      "key": "FLEET_ERROR_STALE",
+      "de": "Die Ansicht ist veraltet. Bitte die Aktion mit dem aktuellen Stand wiederholen.",
+      "en": "The view is out of date. Please retry using the current state."
+    },
+    {
+      "key": "FLEET_ERROR_OCCUPIED",
+      "de": "Dieser Hangar ist bereits belegt.",
+      "en": "This bay is already occupied."
+    },
+    {
+      "key": "FLEET_ERROR_DISTANCE",
+      "de": "Beide Schiffe müssen im selben System nahe beieinander stehen.",
+      "en": "Both ships must be nearby in the same system."
+    },
+    {
+      "key": "FLEET_ERROR_CONNECTED",
+      "de": "Zum Umladen muss das Beiboot am Zielschiff angedockt sein.",
+      "en": "To transfer cargo, the lander must be docked at the target ship."
+    },
+    {
+      "key": "FLEET_ERROR_CAPACITY",
+      "de": "Im Zielschiff ist nicht genug Frachtraum frei.",
+      "en": "The target ship does not have enough free cargo space."
+    },
+    {
+      "key": "FLEET_ERROR_DESIGN",
+      "de": "Dieser Entwurf ist unvollständig oder nicht kompatibel. Bitte in der Schiffswerft prüfen.",
+      "en": "This design is incomplete or incompatible. Please check it in the shipyard."
+    },
+    {
+      "key": "FLEET_ERROR_LIMIT",
+      "de": "Der Flottentest unterstützt bis zu 16 Schiffe.",
+      "en": "The fleet trial supports up to 16 ships."
+    },
+    {
+      "key": "CONSTRUCTION_NONE",
+      "de": "Es gibt keine laufende Baustelle.",
+      "en": "There is no active construction project."
+    },
+    {
+      "key": "CONSTRUCTION_INVALID",
+      "de": "Unbekannter Baustellenauftrag.",
+      "en": "Unknown construction command."
+    },
+    {
+      "key": "CONSTRUCTION_UNCHANGED",
+      "de": "Die Baustelle hat diesen Zustand bereits.",
+      "en": "The project is already in this state."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERING",
+      "de": "Der Rückbau läuft bereits. Weise Bewohner für den Rücktransport zu.",
+      "en": "Recovery is already underway. Assign residents to bring materials back."
+    },
+    {
+      "key": "CONSTRUCTION_STORAGE_FULL",
+      "de": "Für die vollständige Materialrückgabe fehlt Lagerplatz. Schaffe zuerst Platz im Lager.",
+      "en": "There is not enough warehouse space for all materials. Free up storage first."
+    },
+    {
+      "key": "CONSTRUCTION_PAUSED",
+      "de": "Baustelle pausiert. Laufende Materiallieferungen werden noch beendet.",
+      "en": "Construction paused. Material already in transit can still arrive."
+    },
+    {
+      "key": "CONSTRUCTION_RESUMED",
+      "de": "Baustelle fortgesetzt. Zugewiesene Bewohner arbeiten weiter.",
+      "en": "Construction resumed. Assigned residents continue their work."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERED",
+      "de": "Rückbau abgeschlossen. Alle Baumaterialien sind zurück im Lager.",
+      "en": "Recovery complete. All construction materials are back in storage."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERY_STARTED",
+      "de": "Bau abgebrochen. Bewohner bringen angelieferte Materialien zurück.",
+      "en": "Construction cancelled. Residents will bring delivered materials back."
+    },
+    {
+      "key": "CONSTRUCTION_INACTIVE",
+      "de": "Baustellen können nur im laufenden Stammesmodus geändert werden.",
+      "en": "Construction can only be managed while tribal play is active."
+    },
+    {
+      "key": "CONSTRUCTION_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Baustelle, Materialien und Aufträge bleiben unverändert.",
+      "en": "Saving failed. The project, materials and orders remain unchanged."
+    },
+    {
+      "key": "CONSTRUCTION_TITLE",
+      "de": "{name} · {state}",
+      "en": "{name} · {state}"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_ACTIVE",
+      "de": "Im Bau",
+      "en": "Building"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_PAUSED",
+      "de": "Pausiert",
+      "en": "Paused"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_RECOVERING",
+      "de": "Materialrückgabe",
+      "en": "Material recovery"
+    },
+    {
+      "key": "CONSTRUCTION_WORKERS",
+      "de": "Zugewiesen: {count} · gestoppt oder ohne Weg: {blocked}",
+      "en": "Assigned: {count} · stopped or blocked: {blocked}"
+    },
+    {
+      "key": "CONSTRUCTION_MATERIAL_ROW",
+      "de": "{resource}: {delivered}/{required} am Bau · {carried} unterwegs · {reserved} reserviert",
+      "en": "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+    },
+    {
+      "key": "CONSTRUCTION_RETURN_ROW",
+      "de": "{resource}: {returned}/{required} zurück · {carried} getragen · {delivered} am Bau",
+      "en": "{resource}: {returned}/{required} returned · {carried} carried · {delivered} on site"
+    },
+    {
+      "key": "CONSTRUCTION_PAUSE",
+      "de": "Bau pausieren",
+      "en": "Pause construction"
+    },
+    {
+      "key": "CONSTRUCTION_RESUME",
+      "de": "Bau fortsetzen",
+      "en": "Resume construction"
+    },
+    {
+      "key": "CONSTRUCTION_ASSIGN",
+      "de": "Auswahl zur Baustelle",
+      "en": "Assign selected residents"
+    },
+    {
+      "key": "CONSTRUCTION_CANCEL",
+      "de": "Bau abbrechen …",
+      "en": "Cancel construction…"
+    },
+    {
+      "key": "CONSTRUCTION_CONFIRM_CANCEL",
+      "de": "Abbrechen und Material zurückholen",
+      "en": "Cancel and recover materials"
+    },
+    {
+      "key": "CONSTRUCTION_KEEP",
+      "de": "Weiterbauen",
+      "en": "Keep project"
+    },
+    {
+      "key": "CONSTRUCTION_CONFIRM_HINT",
+      "de": "Baufortschritt geht verloren. Reservierte Materialien werden freigegeben; angelieferte und getragene Waren müssen Bewohner zurückbringen. Der Bauplatz bleibt bis dahin belegt.",
+      "en": "Construction progress will be lost. Reserved materials are released; residents must return delivered and carried goods. The site stays occupied until recovery finishes."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERY_HINT",
+      "de": "Weise Bewohner zu oder setze gestoppte Bewohner fort. Material kommt erst bei Ankunft im Lager an. Für die Rückgabe wird Lagerplatz freigehalten.",
+      "en": "Assign residents or resume stopped residents. Materials reach storage only on arrival. Storage space is reserved for their return."
+    },
+    {
+      "key": "CONSTRUCTION_PAUSE_HINT",
+      "de": "Pausieren stoppt neue Abholungen und Bauarbeit. Bereits getragene Waren dürfen ankommen; andere Berufe arbeiten weiter.",
+      "en": "Pausing stops new pickups and building work. Carried goods may still arrive; other professions continue."
+    },
+    {
+      "key": "BP_FAVORITES_ONLY",
+      "de": "Nur Favoriten",
+      "en": "Favorites only"
+    },
+    {
+      "key": "BP_FAVORITE_ADD",
+      "de": "☆ Als Favorit merken",
+      "en": "☆ Add to favorites"
+    },
+    {
+      "key": "BP_FAVORITE_REMOVE",
+      "de": "★ Favorit entfernen",
+      "en": "★ Remove favorite"
+    },
+    {
+      "key": "BP_FAVORITE_TOOLTIP",
+      "de": "Merkt genau diese Vorlagenrevision auf diesem Gerät. Spielstand und exportierte Vorlage bleiben unverändert.",
+      "en": "Bookmarks this exact template revision on this device. Your campaign and exported template stay unchanged."
+    },
+    {
+      "key": "BP_FAVORITE_SAVED",
+      "de": "Diese Vorlage ist jetzt ein Favorit.",
+      "en": "This template is now a favorite."
+    },
+    {
+      "key": "BP_FAVORITE_CLEARED",
+      "de": "Die Favoritenmarkierung wurde entfernt.",
+      "en": "The favorite bookmark was removed."
+    },
+    {
+      "key": "BP_NO_FAVORITES",
+      "de": "Keine passenden Favoriten. Markiere eine Vorlage als Favorit oder ändere Suche und Filter.",
+      "en": "No matching favorites. Mark a template as a favorite or change the search and filters."
+    },
+    {
+      "key": "BP_ERROR_FAVORITES_FULL",
+      "de": "Die Favoritenliste ist voll. Entferne zuerst eine Markierung.",
+      "en": "The favorites list is full. Remove a bookmark first."
+    },
+    {
+      "key": "RECOVERY_TITLE",
+      "de": "Deine Kreatur ist gestorben",
+      "en": "Your creature has died"
+    },
+    {
+      "key": "RECOVERY_COUNTDOWN",
+      "de": "Rückkehr zur Heimat in {seconds} Sek.",
+      "en": "Returning home in {seconds} sec."
+    },
+    {
+      "key": "RECOVERY_PREPARING",
+      "de": "Deine Heimat wird vorbereitet. Du kehrst zurück, sobald ein sicherer Platz frei ist.",
+      "en": "Preparing your home. You will return as soon as a safe spot is available."
+    },
+    {
+      "key": "RECOVERY_BLOCKED",
+      "de": "Der Rückkehrort ist noch blockiert. Wir suchen weiter. Mit Esc erreichst du das Pausemenü.",
+      "en": "The return location is still blocked. Searching continues. Press Esc for the pause menu."
+    },
+    {
+      "key": "RECOVERY_KEEP",
+      "de": "Entdeckungen, Fähigkeiten und Gefährten bleiben erhalten.",
+      "en": "Your discoveries, abilities and companions are preserved."
+    },
+    {
+      "key": "RECOVERY_SAFE",
+      "de": "Wieder auf den Beinen",
+      "en": "Back on your feet"
+    },
+    {
+      "key": "RECOVERY_PROTECTION",
+      "de": "Leben, Nahrung und Wasser aufgefüllt. Noch {seconds} Sek. Schutz vor Schaden.",
+      "en": "Health, food and water restored. Protected from damage for {seconds} more sec."
+    },
+    {
+      "key": "RECOVERY_ATTACK",
+      "de": "Ein eigener Angriff beendet den Schutz.",
+      "en": "Attacking ends your protection."
+    },
+    {
+      "key": "BIND_JOURNAL",
+      "de": "Entdeckungsbuch",
+      "en": "Discovery journal"
+    },
+    {
+      "key": "BIND_DEVELOPMENT",
+      "de": "Entwicklung",
+      "en": "Development"
+    },
+    {
+      "key": "BIND_WORLD_MAP",
+      "de": "Weltkarte",
+      "en": "World map"
+    },
+    {
+      "key": "BIND_ALL_CONTROLS",
+      "de": "SPIEL & MENÜS · HAUPT- UND ZWEITBELEGUNG",
+      "en": "GAME & MENUS · PRIMARY AND SECONDARY BINDINGS"
+    },
+    {
+      "key": "BIND_MENUS_NOTE",
+      "de": "Menütasten: einzelne Buchstaben oder Ziffern. F, H, N und P sind für feste Spielaktionen belegt. Esc schließt ein Menü weiterhin.",
+      "en": "Menu shortcuts: single letters or digits. F, H, N and P are used by fixed game actions. Esc still closes a menu."
+    },
+    {
+      "key": "BIND_FIXED_PLAY_KEY",
+      "de": "Diese Taste ist bereits durch eine feste Spielaktion belegt (F, H, N oder P).",
+      "en": "This key is already used by a fixed game action (F, H, N or P)."
+    },
+    {
+      "key": "BIND_MENU_KEY_REQUIRED",
+      "de": "Für Menüs bitte eine Buchstaben- oder Zifferntaste wählen.",
+      "en": "Please choose a letter or digit key for menus."
+    },
+    {
+      "key": "BIND_MENUS_ADDED",
+      "de": "Deine Spieltasten bleiben erhalten. Neue Menütasten wurden auf freie Tasten gelegt; prüfe die Belegung unten.",
+      "en": "Your game bindings are preserved. New menu shortcuts have been assigned unused keys; review them below."
+    },
+    {
+      "key": "BIND_JOURNAL_BUTTON",
+      "de": "Entdeckungsbuch · {journal}",
+      "en": "Discovery journal · {journal}"
+    },
+    {
+      "key": "BIND_TRIBE_HINT",
+      "de": "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. {journal} öffnet eure gemeinsamen Entdeckungen.",
+      "en": "Your tribe · select villagers and give the group an order. {journal} opens your shared discoveries."
+    },
+    {
+      "key": "BIND_SCAN_RECOGNIZED",
+      "de": "Art erkannt · {journal} öffnet das Entdeckungsbuch",
+      "en": "Species recognised · {journal} opens the discovery journal"
+    },
+    {
+      "key": "BIND_FIRST_SCAN",
+      "de": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit {journal} im Entdeckungsbuch.",
+      "en": "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+    },
+    {
+      "key": "BIND_CONTROLS_HELP",
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\n{journal}   Entdeckungsbuch\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "GUIDE_TITLE",
+      "de": "DEIN WEG ZUM STAMM",
+      "en": "YOUR PATH TO A TRIBE"
+    },
+    {
+      "key": "GUIDE_INTRO",
+      "de": "Vier Kapitel begleiten dich vom Erkunden bis zum ersten Stamm. Wähle, was du als Nächstes lernen möchtest. Die Hilfe ist freiwillig und verändert keine Spielziele.",
+      "en": "Four chapters guide you from exploration to your first tribe. Choose what you want to learn next. Guidance is optional and does not change game objectives."
+    },
+    {
+      "key": "GUIDE_CHAPTER_EXPLORE",
+      "de": "Erkunden",
+      "en": "Explore"
+    },
+    {
+      "key": "GUIDE_CHAPTER_SURVIVE",
+      "de": "Versorgen",
+      "en": "Survive"
+    },
+    {
+      "key": "GUIDE_CHAPTER_HOME",
+      "de": "Zusammenleben",
+      "en": "Live together"
+    },
+    {
+      "key": "GUIDE_CHAPTER_TRIBE",
+      "de": "Stamm gründen",
+      "en": "Found a tribe"
+    },
+    {
+      "key": "GUIDE_STEP_LOOK",
+      "de": "Schau dich um",
+      "en": "Look around"
+    },
+    {
+      "key": "GUIDE_STEP_MOVE",
+      "de": "Erkunde deine Umgebung",
+      "en": "Explore your surroundings"
+    },
+    {
+      "key": "GUIDE_STEP_JUMP",
+      "de": "Mach einen Sprung",
+      "en": "Take a jump"
+    },
+    {
+      "key": "GUIDE_STEP_INSPECT",
+      "de": "Scanne eine Kreatur",
+      "en": "Scan a creature"
+    },
+    {
+      "key": "GUIDE_STEP_EAT",
+      "de": "Finde passende Nahrung",
+      "en": "Find suitable food"
+    },
+    {
+      "key": "GUIDE_STEP_DRINK",
+      "de": "Trinke Süßwasser",
+      "en": "Drink fresh water"
+    },
+    {
+      "key": "GUIDE_STEP_HOME",
+      "de": "Lege eine Heimat fest",
+      "en": "Establish a home"
+    },
+    {
+      "key": "GUIDE_STEP_COMMAND",
+      "de": "Führe deine Gefährten",
+      "en": "Lead your companions"
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE",
+      "de": "Beginne das Stammeszeitalter",
+      "en": "Begin the tribal age"
+    },
+    {
+      "key": "GUIDE_HINT_LOOK",
+      "de": "Bewege die Maus und schau dich in deiner Welt um.",
+      "en": "Move the mouse to look around your world."
+    },
+    {
+      "key": "GUIDE_HINT_MOVE",
+      "de": "{forward} / {left} / {back} / {right} · Lege ein paar Meter zurück.",
+      "en": "{forward} / {left} / {back} / {right} · Walk a few metres."
+    },
+    {
+      "key": "GUIDE_HINT_JUMP",
+      "de": "{jump} · Springe von festem Boden ab.",
+      "en": "{jump} · Jump from solid ground."
+    },
+    {
+      "key": "GUIDE_HINT_INSPECT",
+      "de": "{scan} · Halte eine Kreatur im Scanmodus im Fadenkreuz, bis der Kreis voll ist.",
+      "en": "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+    },
+    {
+      "key": "GUIDE_HINT_EAT",
+      "de": "{interact} · Nähere dich Nahrung und interagiere mit ihr. Dein Mund bestimmt, was du verträgst.",
+      "en": "{interact} · Approach food and interact with it. Your mouth determines what you can eat."
+    },
+    {
+      "key": "GUIDE_HINT_DRINK",
+      "de": "{interact} · Trinke an einem erreichbaren Süßwasserufer. Meerwasser hilft nicht.",
+      "en": "{interact} · Drink at a reachable freshwater shore. Sea water will not help."
+    },
+    {
+      "key": "GUIDE_HINT_HOME",
+      "de": "N · Öffne deine Nestgruppe und lege auf freiem, ebenem, trockenem Boden eine Heimat fest.",
+      "en": "N · Open your nest group and establish a home on clear, level, dry ground."
+    },
+    {
+      "key": "GUIDE_HINT_COMMAND",
+      "de": "N · Gib einem Gefährten oder der ganzen Gruppe den Befehl Folgen oder Heimkehren.",
+      "en": "N · Tell a companion or the whole group to Follow or Return home."
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE",
+      "de": "Rufe beide Gefährten heim. Öffne an der Heimat „Stammeszeitalter …“ und bestätige den Wechsel.",
+      "en": "Call both companions home. At your home, open “Tribal age …” and confirm the transition."
+    },
+    {
+      "key": "GUIDE_DETAIL_LOOK",
+      "de": "Beim Spielen folgt die Kamera deiner Kreatur. Empfindlichkeit und invertierte Y-Achse findest du unter Esc → Steuerung.",
+      "en": "The camera follows your creature during play. Mouse sensitivity and inverted Y are available under Esc → Controls."
+    },
+    {
+      "key": "GUIDE_DETAIL_MOVE",
+      "de": "Nur tatsächlich zurückgelegte Strecke zählt. An Hindernissen stehen zu bleiben erfüllt die Aufgabe nicht.",
+      "en": "Only distance actually travelled counts. Pushing against an obstacle does not complete this task."
+    },
+    {
+      "key": "GUIDE_DETAIL_JUMP",
+      "de": "Im Wasser steigst du mit derselben Taste auf. Für diese Aufgabe brauchst du einen Sprung vom Boden.",
+      "en": "The same key moves you upwards in water. This task requires a jump from the ground."
+    },
+    {
+      "key": "GUIDE_DETAIL_INSPECT",
+      "de": "Ein neuer Scan dauert 2,5 Sekunden; bereits bekannte Arten erkennst du sofort. Das Entdeckungsbuch ist über die Schaltfläche im HUD erreichbar.",
+      "en": "A new scan takes 2.5 seconds; known species are recognised immediately. Open the discovery journal using its HUD button."
+    },
+    {
+      "key": "GUIDE_DETAIL_EAT",
+      "de": "Pflanzen liefern unter anderem Früchte und Pflanzenkost. Fleisch erhältst du von Beute. Bei vollem Magen oder ungeeigneter Nahrung zählt der Versuch nicht. Du musst für die Einführung keinen bestimmten Ernährungsstil wählen.",
+      "en": "Plants provide foods such as fruit and vegetation. Prey provides meat. Attempts with a full stomach or unsuitable food do not count. The guide does not require a particular diet."
+    },
+    {
+      "key": "GUIDE_DETAIL_DRINK",
+      "de": "Suche Flüsse oder Seen und gehe nah genug ans Wasser. Ein erfolgreicher Schluck füllt Durst auf. Mit vollem Durstbalken brauchst du noch nichts zu trinken.",
+      "en": "Find a river or lake and approach the water. A successful drink restores thirst. With a full thirst bar you do not need to drink yet."
+    },
+    {
+      "key": "GUIDE_DETAIL_HOME",
+      "de": "Zwei Gefährten deiner eigenen Spezies gehören dauerhaft zur Heimat. Bäume, Wasser, Steilkanten oder zu wenig Platz verhindern das Anlegen. In der Nähe deiner Heimat regeneriert Gesundheit, wenn Hunger und Durst ausreichend gefüllt sind.",
+      "en": "Two companions of your own species permanently belong to your home. Trees, water, steep edges or insufficient space prevent founding it. Near home, health regenerates when hunger and thirst are sufficiently replenished."
+    },
+    {
+      "key": "GUIDE_DETAIL_COMMAND",
+      "de": "Befehle werden gespeichert. Folgen bringt die Gefährten zu dir; Heimkehren führt sie zurück zum Nest. Mit Warten hältst du sie an. Fremde Wildtiere werden dadurch nicht zu Gruppenmitgliedern.",
+      "en": "Orders are saved. Follow brings companions to you; Return home sends them back to the nest. Wait stops them. Wild animals of other species do not become group members through these orders."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE",
+      "de": "Du und beide Gefährten müssen an der Heimat sein. Vor der Bestätigung prüft das Spiel sichere Wege und Arbeitsplätze. Abbrechen bleibt möglich. Nach dem Wechsel führst du Bewohner und verteilst Dorfaufgaben. Die Einführung bestätigt den Wechsel niemals für dich.",
+      "en": "You and both companions must be at home. Before confirmation, the game checks safe routes and workplaces. You can still cancel. After the transition you lead residents and assign village tasks. Guidance never confirms the transition for you."
+    },
+    {
+      "key": "GUIDE_CARD_COUNT",
+      "de": "{chapter} · {done}/{total}",
+      "en": "{chapter} · {done}/{total}"
+    },
+    {
+      "key": "GUIDE_FOOTER",
+      "de": "Esc → Erste Schritte: Kapitel und Hilfe",
+      "en": "Esc → First steps: chapters and help"
+    },
+    {
+      "key": "GUIDE_CHOOSE",
+      "de": "Weiter mit: {chapter}",
+      "en": "Continue with: {chapter}"
+    },
+    {
+      "key": "GUIDE_TOTAL",
+      "de": "{done}/{total} Übungen erledigt. Der Fortschritt gehört zu diesem Abenteuer.",
+      "en": "{done}/{total} exercises completed. Progress belongs to this adventure."
+    },
+    {
+      "key": "GUIDE_FUTURE",
+      "de": "Diese Einführung stammt aus einer neueren Spielversion. Ihre Daten bleiben erhalten; die Hilfe kannst du weiterhin lesen.",
+      "en": "This guide was saved by a newer game version. Its data is preserved; you can still read the help."
+    },
+    {
+      "key": "GUIDE_DISABLED",
+      "de": "Die Hinweise sind ausgeschaltet.",
+      "en": "Guidance is turned off."
+    },
+    {
+      "key": "GUIDE_RESTART",
+      "de": "Einführung neu beginnen",
+      "en": "Restart introduction"
+    },
+    {
+      "key": "GUIDE_SKIP",
+      "de": "Hinweise ausschalten",
+      "en": "Turn off guidance"
+    },
+    {
+      "key": "GUIDE_FINISHED",
+      "de": "EINFÜHRUNG ABGESCHLOSSEN",
+      "en": "INTRODUCTION COMPLETE"
+    },
+    {
+      "key": "GUIDE_TRIBE_NEXT",
+      "de": "Wähle Bewohner aus und verteile im Dorf Arbeitsaufträge. Die Kapitel bleiben als Hilfe im Pausemenü erreichbar.",
+      "en": "Select residents and assign work in your village. The chapters remain available as help in the pause menu."
+    },
+    {
+      "key": "GUIDE_CONTEXT_WORLD",
+      "de": "Die Hinweise werden in der geladenen Spielwelt fortgesetzt.",
+      "en": "Guidance resumes in the loaded game world."
+    },
+    {
+      "key": "GUIDE_CONTEXT_FULL",
+      "de": "Dein Magen ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du wieder Nahrung brauchst.",
+      "en": "Your stomach is full. Keep exploring or choose another chapter until you need food again."
+    },
+    {
+      "key": "GUIDE_CONTEXT_HYDRATED",
+      "de": "Dein Durstbalken ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du trinken musst.",
+      "en": "Your thirst bar is full. Keep exploring or choose another chapter until you need a drink."
+    },
+    {
+      "key": "GUIDE_CONTEXT_READY",
+      "de": "Deine Gruppe ist bereit. Öffne „Stammeszeitalter …“, um die Dorfwege prüfen zu lassen.",
+      "en": "Your group is ready. Open “Tribal age …” to check the village routes."
+    },
+    {
+      "key": "GUIDE_CONTEXT_ANY_ORDER",
+      "de": "Aktionen zählen auch vor ihrem Kapitel. Du kannst Kapitel frei wählen oder die Hinweise ausschalten.",
+      "en": "Actions count even before their chapter. You can choose chapters freely or turn guidance off."
+    },
+    {
+      "key": "SAVE_SCAN_DISCOVER",
+      "de": "Spielstände werden gesucht …",
+      "en": "Finding adventures …"
+    },
+    {
+      "key": "SAVE_SCAN_PROGRESS",
+      "de": "Spielstände werden geprüft: {done} von {total} …",
+      "en": "Checking adventures: {done} of {total} …"
+    },
+    {
+      "key": "SAVE_HISTORY_LOADING",
+      "de": "Sicherungen werden geprüft …",
+      "en": "Checking backups …"
+    },
+    {
+      "key": "WILDLIFE_HUNT",
+      "de": "Jagt Beute",
+      "en": "Hunting prey"
+    },
+    {
+      "key": "WILDLIFE_CARRION",
+      "de": "Sucht Aas",
+      "en": "Seeking carrion"
+    },
+    {
+      "key": "WILDLIFE_EAT_CARCASS",
+      "de": "Frisst Aas",
+      "en": "Eating carrion"
     }
   ]
 }

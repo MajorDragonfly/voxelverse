@@ -1,0 +1,65 @@
+{
+  "base": "d57b1ef385728728b132518a1ea05683888dcae0",
+  "source_commit": "ff0bdf618595fd9fd463845f6c0aa363fb1038e6",
+  "source_tree": "14b66f45b540f3dd5ae33353979131adb6fb310c",
+  "run": "focused/results.json",
+  "tested_before_commit": true,
+  "tested_source_sha256": "031a9b1b2277fd0377b2aca9e7c9d1354077ab0e51271b64b5c640f241c7af99",
+  "all_3411_observed_paths_verified_before_commit": true,
+  "source_file_manifest_sha256": "5957887fd1fd90d239ad5ca1bf70f78c272ba6c0350d49b306bbe995944966f9",
+  "start_end_manifests_identical": true,
+  "changes": [
+    {
+      "path": "creatures/ai/social_play_brain.gd",
+      "sha256": "ff4c2153f9fdf85b250639583b4f7326c975d08dd6e658270abce144329fafa3"
+    },
+    {
+      "path": "creatures/ai/social_play_brain.gd.uid",
+      "sha256": "82b693a97f02e75aae902905982b15b21e5d295d72766d72038543f5d1bdd7c6"
+    },
+    {
+      "path": "creatures/ai/wildlife_brain.gd",
+      "sha256": "d1deed6dcb26e9f21c11f7358de64d2fb2efb0db8055353d88025a5558d286c4"
+    },
+    {
+      "path": "creatures/ai/wildlife_play_session.gd",
+      "sha256": "3464f12955bf045e7021c7ee362816b1a8ad6f916bdfdde1dd2a36fbaaf5ecef"
+    },
+    {
+      "path": "creatures/ai/wildlife_play_session.gd.uid",
+      "sha256": "140c98450c15ebeac0a2bd7a43cb65e2f62bc727d47c07c00d0bf95d6d239edb"
+    },
+    {
+      "path": "creatures/behavior/creature_emotion.gd",
+      "sha256": "dd300896d476f4f639ced482a66e22aa264fb231e15bb36324f7f8d38064dc51"
+    },
+    {
+      "path": "creatures/wildlife/procedural_wildlife_v7.tscn",
+      "sha256": "5fe8b68f0f093b070d1da7f925775f56ad25b2f95a206c5863f3e619db372ced"
+    },
+    {
+      "path": "localization/catalog.json",
+      "sha256": "3a5b862b51ee058d2db2cc8800bfc2cccad2e851db6ebd9409d9139d57cd4662"
+    },
+    {
+      "path": "localization/de.po",
+      "sha256": "55d33496aa650ca821d1fc73c9fa440b2f6a474d5c4ffae4dcbeb5d1c1a21341"
+    },
+    {
+      "path": "localization/en.po",
+      "sha256": "15b0c3c88b0bccc0de3b70aa4cb4e2e201b4b00ccbaae4817d5e0fb6ed2334df"
+    },
+    {
+      "path": "tests/wildlife_social_play_test.gd",
+      "sha256": "50700e7bd8f377cd8c6032a8ca428bc5e990926f9f91d48a0af6c84bd3c032a7"
+    },
+    {
+      "path": "tests/wildlife_social_play_test.gd.uid",
+      "sha256": "a0d00ae5f98f2da75ab74385c9c01af529771d4da12c613a1fc9a0d236ca0808"
+    },
+    {
+      "path": "tools/validation/contracts.json",
+      "sha256": "65217c8402a0c3a4c61301be0e9c3d64e95ef9fd49d2307d8f6c7ca2f1e1d1e4"
+    }
+  ]
+}

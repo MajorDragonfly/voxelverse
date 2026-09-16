@@ -6,7 +6,7 @@ const Ids = preload("res://core/campaign/campaign_ids.gd")
 const Resources = preload("res://world/tribe/resource_catalog.gd")
 const Batch = preload("res://world/tribe/resource_batch.gd")
 const RESOURCES: Array[String] = Resources.IDS
-const SCHEMA: int = 3
+const SCHEMA: int = 4
 const MAX_PER_KIND: int = 2
 const EXTRA: Array[String] = ["water", "fiber", "milk", "eggs"]
 const STATIONS: Dictionary = {"well": "water", "forester": "wood", "quarry": "stone", "fiberbed": "fiber"}
@@ -34,11 +34,12 @@ static func install(data: Dictionary) -> void:
 
 static func upgrade(data: Dictionary) -> bool:
 	var version: int = int(data.get("economy", {}).get("schema", 0))
-	if version not in [1, 2]: return false
+	if version not in [1, 2, 3]: return false
 	if version == 1:
 		data.economy["eggs_received"] = 0
 		data.economy["eggs_meals"] = 0
 		data.stock["eggs"] = 0
+	# Schema 4 protects construction-control saves from older clients.
 	# The first workplace keeps its original ID, source and clock. Paid legacy
 	# projects remain paid; migration never refills or moves a resource.
 	data.economy.schema = SCHEMA
@@ -125,7 +126,17 @@ static func carried(data: Dictionary, kind: String) -> int:
 	return count
 
 static func reserve(data: Dictionary, kind: String) -> int:
-	return int(data["stock"].get(kind, 0)) + carried(data, kind) + Freight.amount(data, "held", kind)
+	return int(data["stock"].get(kind, 0)) + carried(data, kind) + Freight.amount(data, "held", kind) + recovery_reserved(data, kind)
+
+static func recovery_reserved(data: Dictionary, kind: String) -> int:
+	var project: Variant = data.get("project", {})
+	if not project is Dictionary or not project.get("control") is Dictionary or project.control.get("state") != "recovering": return 0
+	var delivered: Variant = project.get("delivered_materials", {})
+	if not delivered is Dictionary: return 0
+	var count: int = int(delivered.get(kind, 0))
+	for member: Dictionary in data.members:
+		if member.get("construction_id", "") != "" and member.get("cargo") == kind: count += 1
+	return count
 
 static func goods(data: Dictionary, kind: String) -> int:
 	return int(data["stock"].get(kind, 0)) + carried(data, kind)
@@ -228,8 +239,8 @@ static func receive_batch(data: Dictionary, value: Dictionary) -> String:
 
 static func has_unsupported_contract(value: Variant) -> bool:
 	if not value is Dictionary: return false
-	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != SCHEMA: return true
-	if value.get("schema") != SCHEMA and value.get("stations") is Dictionary:
+	if value.get("schema") != 1 and value.get("schema") != 2 and value.get("schema") != 3 and value.get("schema") != SCHEMA: return true
+	if int(value.get("schema", 0)) < 3 and value.get("stations") is Dictionary:
 		for key: Variant in value.stations:
 			if key not in STATIONS: return true
 	if value.get("freight") is Dictionary and value.freight.get("schema") != 1: return true
@@ -245,7 +256,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 	if resource_owner.is_empty(): resource_owner = str(data.get("home_group_id", ""))
 	var e: Variant = data.get("economy")
 	if e is Dictionary and e.has("freight") and not Freight.valid(e.freight): return "Ungültige Lagertransportbilanz."
-	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != SCHEMA):
+	if not e is Dictionary or (e.get("schema") != 1 and e.get("schema") != 2 and e.get("schema") != 3 and e.get("schema") != SCHEMA):
 		return "Ungültige Dorfwirtschaft."
 	for field in ["stations", "clocks", "produced", "receipts"]:
 		if not e.get(field) is Dictionary:
@@ -273,7 +284,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 		if kind.is_empty() or not site is Dictionary or site.get("id") != Ids.scoped("workplace", data["id"], station) or not local_point(site.get("position"), data["anchor"]) or int(data["tools"]) != 1:
 			return "Ungültiger Arbeitsplatz."
 		if station not in STATIONS:
-			if e.schema != SCHEMA or not e.stations.has(kind) or not integer(site.get("remaining"), 0, CAPACITY) or not number(site.get("clock"), 0, INTERVALS[STATIONS[kind]]): return "Ungültige Arbeitsplatzinstanz."
+			if e.schema < 3 or not e.stations.has(kind) or not integer(site.get("remaining"), 0, CAPACITY) or not number(site.get("clock"), 0, INTERVALS[STATIONS[kind]]): return "Ungültige Arbeitsplatzinstanz."
 			var first: Variant = e.stations[kind]
 			if not first is Dictionary or not local_point(first.get("position"), data.anchor): return "Ungültiger ursprünglicher Arbeitsplatz."
 			if Home.distance(site.position, first.position) < 3.0: return "Arbeitsplätze überlagern sich."
@@ -289,7 +300,7 @@ static func validate(data: Dictionary, resource_owner: String = "") -> String:
 	for member: Dictionary in data["members"]:
 		for field: String in ["workplace_id", "cargo_source_id"]:
 			if not member.get(field, "") is String: return "Ungültige Arbeitsplatzzuordnung."
-			if member.get(field, "") != "" and e.schema != SCHEMA: return "Arbeitsplatzzuordnung benötigt Wirtschaftsformat 3."
+			if member.get(field, "") != "" and e.schema < 3: return "Arbeitsplatzzuordnung benötigt Wirtschaftsformat 3."
 		if member.get("workplace_id", "") != "" and station_key(data, member.workplace_id).is_empty(): return "Arbeitsplatz gehört nicht zu dieser Siedlung."
 		if member.get("cargo_source_id", "") != "":
 			var resource: String = ""

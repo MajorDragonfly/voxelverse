@@ -1,0 +1,20 @@
+Xvfb konnte in dieser Ausführung keine lokalen Sockets öffnen. Kein gerenderter Lauf und keine Bilder entstanden.
+
+_XSERVTransSocketOpenCOTSServer: Unable to open socket for local
+_XSERVTransOpen: transport open failed for local/localhost:0
+_XSERVTransMakeAllCOTSServerListeners: failed to open listener for local
+_XSERVTransSocketOpenCOTSServer: Unable to open socket for unix
+_XSERVTransOpen: transport open failed for unix/localhost:0
+_XSERVTransMakeAllCOTSServerListeners: failed to open listener for unix
+_XSERVTransSocketOpenCOTSServer: Unable to open socket for local
+_XSERVTransOpen: transport open failed for local/localhost:1
+_XSERVTransMakeAllCOTSServerListeners: failed to open listener for local
+_XSERVTransSocketOpenCOTSServer: Unable to open socket for unix
+_XSERVTransOpen: transport open failed for unix/localhost:1
+_XSERVTransMakeAllCOTSServerListeners: failed to open listener for unix
+[wiederholte Socketfehler ausgelassen]
+_XSERVTransOpen: transport open failed for unix/localhost:59535
+_XSERVTransMakeAllCOTSServerListeners: failed to open listener for unix
+(EE) 
+Fatal server error:
+(EE) Failed to find a socket to listen on(EE) 

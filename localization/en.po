@@ -61,9 +61,6 @@ msgstr "Discover worlds. Shape life."
 msgid "ENTWICKLUNGSVERSION    /    KREATURENPHASE"
 msgstr "DEVELOPMENT BUILD    /    CREATURE STAGE"
 
-msgid "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen"
-msgstr "Tab  Select    ·    Enter  Confirm    ·    F8  Settings"
-
 msgid "Fortsetzen"
 msgstr "Continue"
 
@@ -334,9 +331,6 @@ msgstr "Skip introduction"
 msgid "VOXELVERSE · EINSTELLUNGEN"
 msgstr "VOXELVERSE · SETTINGS"
 
-msgid "Esc / F8 Menü · F11 Vollbild"
-msgstr "Esc / F8 Menu · F11 Fullscreen"
-
 msgid "Anzeige"
 msgstr "Display"
 
@@ -571,9 +565,6 @@ msgstr "Test sound"
 msgid "Standardwerte"
 msgstr "Defaults"
 
-msgid "Zurück · F7 / Esc"
-msgstr "Back · F7 / Esc"
-
 msgid "Entdeckungsbuch"
 msgstr "Discovery journal"
 
@@ -703,9 +694,6 @@ msgstr "The original is fully preserved. Transfer to a spherical planet still ne
 msgid "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten."
 msgstr "Continue the adventure on a spherical planet. Your previous save is preserved as the original."
 
-msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
-
 msgid "BP_LIBRARY_TITLE"
 msgstr "Creature templates"
 
@@ -818,7 +806,7 @@ msgid "BP_ERROR_EDITOR"
 msgstr "This template uses attachments incompatible with the current editor. It will not be applied with altered geometry."
 
 msgid "BP_SEARCH"
-msgstr "Search templates"
+msgstr "Search name, author, description or tags …"
 
 msgid "BP_ALL"
 msgstr "All templates"
@@ -1330,7 +1318,7 @@ msgid "SKILLS_TAB"
 msgstr "Skills"
 
 msgid "SKILLS_JOURNAL"
-msgstr "Discovery journal · J"
+msgstr "Discovery journal · {journal}"
 
 msgid "SKILLS_PATH"
 msgstr "Development path"
@@ -2182,10 +2170,10 @@ msgid "HUD_THIRST"
 msgstr "Thirst"
 
 msgid "HUD_DEVELOPMENT"
-msgstr "Evolution · K"
+msgstr "Evolution · {development}"
 
 msgid "HUD_JOURNAL"
-msgstr "Journal · J"
+msgstr "Journal · {journal}"
 
 msgid "HUD_PROGRESS"
 msgstr "{species} species · {parts} parts · {points} DP"
@@ -3808,7 +3796,7 @@ msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 msgstr "Hold the left mouse button to rotate · use the mouse wheel to zoom"
 
 msgid "JOURNAL_GUIDE"
-msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\nJ opens this book. Esc closes it."
+msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
 
 msgid "JOURNAL_UNSCANNED"
 msgstr "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
@@ -4211,3 +4199,681 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "WILDLIFE_PLAY_APPROACH"
+msgstr "Approaching companion"
+
+msgid "WILDLIFE_PLAY_GREET"
+msgstr "Greeting companion"
+
+msgid "WILDLIFE_PLAY_ACTIVE"
+msgstr "Playing with companion"
+
+msgid "WILDLIFE_PLAY_REST"
+msgstr "Resting with companion"
+
+msgid "SAVE_BROWSER_BACK"
+msgstr "Main menu"
+
+msgid "SAVE_VIEW_DETAILS"
+msgstr "Details"
+
+msgid "SAVE_VIEW_RESULTS"
+msgstr "Results"
+
+msgid "SAVE_SEARCH_PLACEHOLDER"
+msgstr "Search name or world seed …"
+
+msgid "SAVE_SEARCH_HINT"
+msgstr "Combine search terms · Ctrl+F / Cmd+F"
+
+msgid "SAVE_FILTER_RESET"
+msgstr "Reset"
+
+msgid "SAVE_PHASE_HINT"
+msgstr "Filter by era"
+
+msgid "SAVE_STATE_HINT"
+msgstr "Filter by condition"
+
+msgid "SAVE_SORT_HINT"
+msgstr "Save sorting"
+
+msgid "SAVE_PHASE_ALL"
+msgstr "All eras"
+
+msgid "SAVE_FILTER_ALL"
+msgstr "All conditions"
+
+msgid "SAVE_FILTER_READY"
+msgstr "Intact saves"
+
+msgid "SAVE_FILTER_ATTENTION"
+msgstr "Review / backup"
+
+msgid "SAVE_SORT_RECENT"
+msgstr "Recently saved"
+
+msgid "SAVE_SORT_NAME"
+msgstr "Name A–Z"
+
+msgid "SAVE_SORT_PLAYTIME"
+msgstr "Most playtime"
+
+msgid "SAVE_LIST_SEED"
+msgstr "World seed {seed}"
+
+msgid "SAVE_LIST_BACKUP"
+msgstr "Last backup available"
+
+msgid "SAVE_PAGE"
+msgstr "Page {page}/{pages} · {count} of {total}"
+
+msgid "SAVE_PAGE_PREVIOUS"
+msgstr "Previous saves"
+
+msgid "SAVE_PAGE_NEXT"
+msgstr "More saves"
+
+msgid "SAVE_NO_RESULTS"
+msgstr "No matching adventures. Change your search or reset the filters."
+
+msgid "SAVE_SELECT_RESULT"
+msgstr "Select an adventure from the results."
+
+msgid "ATLAS_SEARCH_PLACEHOLDER"
+msgstr "Search places …"
+
+msgid "ATLAS_SEARCH_TOOLTIP"
+msgstr "Search known places on this planet · Ctrl+F\nEsc: leave text input; Esc again: close map"
+
+msgid "ATLAS_SEARCH_PREVIOUS"
+msgstr "Previous page of places"
+
+msgid "ATLAS_SEARCH_NEXT"
+msgstr "Next page of places"
+
+msgid "ATLAS_SEARCH_WAITING"
+msgstr "Preparing search …"
+
+msgid "ATLAS_SEARCH_PROGRESS"
+msgstr "Searching … {scanned} / {total} places checked"
+
+msgid "ATLAS_SEARCH_NO_RESULTS"
+msgstr "No matching known places. Change the search or filters."
+
+msgid "ATLAS_SEARCH_FAILED"
+msgstr "Places could not be read. Saved data remains protected."
+
+msgid "ATLAS_SEARCH_RESULTS"
+msgstr "Matches on this page: {count}"
+
+msgid "ATLAS_SEARCH_PAGE"
+msgstr "Page {page}"
+
+msgid "Tab  Auswahl    ·    Enter  Bestätigen"
+msgstr "Tab  Select    ·    Enter  Confirm"
+
+msgid "Esc Zurück · F11 Vollbild"
+msgstr "Esc Back · F11 Fullscreen"
+
+msgid "Zurück · Esc"
+msgstr "Back · Esc"
+
+msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "GRAPHICS_CUSTOM"
+msgstr "Custom"
+
+msgid "GRAPHICS_CUSTOM_DESCRIPTION"
+msgstr "Your own graphics values. Selecting a preset replaces all individual values."
+
+msgid "GRAPHICS_DRAFT_HINT"
+msgstr "Changes take effect with “Apply & save”. “Back” discards them. Higher quality and distance require more graphics performance."
+
+msgid "GRAPHICS_RESET"
+msgstr "Restore graphics defaults"
+
+msgid "GRAPHICS_UNAVAILABLE"
+msgstr "Unavailable in this rendering mode. Your preferences are kept for Forward+."
+
+msgid "GRAPHICS_SOFT_SHADOW_UNAVAILABLE"
+msgstr "Soft sun shadows are unavailable in Compatibility mode."
+
+msgid "GRAPHICS_NEWER_SETTINGS"
+msgstr "The graphics settings come from a newer version and will not be overwritten."
+
+msgid "GRAPHICS_QUALITY_LOW"
+msgstr "Low"
+
+msgid "GRAPHICS_QUALITY_MEDIUM"
+msgstr "Medium"
+
+msgid "GRAPHICS_QUALITY_HIGH"
+msgstr "High"
+
+msgid "GRAPHICS_GROUP_CLOUDS"
+msgstr "Clouds"
+
+msgid "GRAPHICS_GROUP_HAZE"
+msgstr "Distance haze"
+
+msgid "GRAPHICS_GROUP_FOG"
+msgstr "Volumetric fog and light shafts"
+
+msgid "GRAPHICS_GROUP_SHADOWS"
+msgstr "Sun shadows"
+
+msgid "GRAPHICS_GROUP_SSAO"
+msgstr "Contact shadows (SSAO)"
+
+msgid "GRAPHICS_GROUP_BLOOM"
+msgstr "Bloom and glow"
+
+msgid "GRAPHICS_GROUP_IMAGE"
+msgstr "Brightness and colours"
+
+msgid "GRAPHICS_CLOUDS_ENABLED"
+msgstr "Show clouds"
+
+msgid "GRAPHICS_CLOUD_QUALITY"
+msgstr "Cloud detail"
+
+msgid "GRAPHICS_HAZE_STRENGTH"
+msgstr "Haze strength"
+
+msgid "GRAPHICS_FOG_ENABLED"
+msgstr "Show volumetric fog"
+
+msgid "GRAPHICS_FOG_QUALITY"
+msgstr "Fog quality"
+
+msgid "GRAPHICS_FOG_STRENGTH"
+msgstr "Fog strength"
+
+msgid "GRAPHICS_SHADOWS_ENABLED"
+msgstr "Show sun shadows"
+
+msgid "GRAPHICS_SHADOW_QUALITY"
+msgstr "Shadow quality"
+
+msgid "GRAPHICS_SHADOW_SOFTNESS"
+msgstr "Shadow softness"
+
+msgid "GRAPHICS_SHADOW_DISTANCE"
+msgstr "Shadow distance"
+
+msgid "GRAPHICS_SSAO_ENABLED"
+msgstr "Show contact shadows"
+
+msgid "GRAPHICS_SSAO_QUALITY"
+msgstr "Contact shadow quality"
+
+msgid "GRAPHICS_SSAO_STRENGTH"
+msgstr "Contact shadow strength"
+
+msgid "GRAPHICS_BLOOM_ENABLED"
+msgstr "Show glow"
+
+msgid "GRAPHICS_BLOOM_STRENGTH"
+msgstr "Glow intensity"
+
+msgid "GRAPHICS_EXPOSURE"
+msgstr "Exposure"
+
+msgid "GRAPHICS_CONTRAST"
+msgstr "Contrast"
+
+msgid "GRAPHICS_SATURATION"
+msgstr "Saturation"
+
+msgid "FLEET_ENTRY"
+msgstr "Fleet trial"
+
+msgid "FLEET_TITLE"
+msgstr "FLEET TRIAL  /  HANGAR & CARGO"
+
+msgid "FLEET_INTRO"
+msgstr "Manage an expedition ship and lander, dock and transfer trial cargo. Each successful action is saved. A new trial uses its own save slot and preserves existing adventures. Flight and space progression will follow later."
+
+msgid "FLEET_NEW"
+msgstr "New fleet trial"
+
+msgid "FLEET_LOAD"
+msgstr "Load trial"
+
+msgid "FLEET_SHIPYARD"
+msgstr "Shipyard"
+
+msgid "FLEET_HOME"
+msgstr "Main menu"
+
+msgid "FLEET_EMPTY"
+msgstr "Create a new trial or load an existing one first."
+
+msgid "FLEET_DOCK"
+msgstr "Dock"
+
+msgid "FLEET_UNDOCK"
+msgstr "Undock"
+
+msgid "FLEET_CARGO_TITLE"
+msgstr "TRIAL CARGO / SAMPLES"
+
+msgid "FLEET_TRANSFER"
+msgstr "Transfer selected cargo to target ship"
+
+msgid "FLEET_DESIGN_TITLE"
+msgstr "TRY YOUR SAVED DESIGN"
+
+msgid "FLEET_SEARCH"
+msgstr "Search designs …"
+
+msgid "FLEET_FIRST"
+msgstr "First page"
+
+msgid "FLEET_MORE"
+msgstr "More designs"
+
+msgid "FLEET_INSTANTIATE"
+msgstr "Create another ship instance near the target"
+
+msgid "FLEET_NEW_FAILED"
+msgstr "The trial could not be prepared. The previous save is preserved."
+
+msgid "FLEET_NEW_READY"
+msgstr "New trial saved. Select the lander, choose the expedition ship as target and dock."
+
+msgid "FLEET_LOAD_FAILED"
+msgstr "This trial save cannot be loaded."
+
+msgid "FLEET_LOADED"
+msgstr "Fleet trial loaded."
+
+msgid "FLEET_HANGAR"
+msgstr "Hangar"
+
+msgid "FLEET_SYSTEM"
+msgstr "System space"
+
+msgid "FLEET_FREE"
+msgstr "free"
+
+msgid "FLEET_BAY"
+msgstr "Bay %d · %s"
+
+msgid "FLEET_SAMPLE"
+msgstr "Sample"
+
+msgid "FLEET_CARGO"
+msgstr "Trial cargo"
+
+msgid "FLEET_SPACE"
+msgstr " · %d cargo spaces"
+
+msgid "FLEET_DETAIL"
+msgstr "%s  |  Design revision %d  |  Cargo %d / %d  |  Energy %d / %d\nShip ID: %s\n%s"
+
+msgid "FLEET_DOCKED"
+msgstr "Docked at: "
+
+msgid "FLEET_READY"
+msgstr "Ready in system space"
+
+msgid "FLEET_SAVED"
+msgstr "Change saved."
+
+msgid "FLEET_ERROR"
+msgstr "Action not completed. The saved state is preserved."
+
+msgid "FLEET_ERROR_STALE"
+msgstr "The view is out of date. Please retry using the current state."
+
+msgid "FLEET_ERROR_OCCUPIED"
+msgstr "This bay is already occupied."
+
+msgid "FLEET_ERROR_DISTANCE"
+msgstr "Both ships must be nearby in the same system."
+
+msgid "FLEET_ERROR_CONNECTED"
+msgstr "To transfer cargo, the lander must be docked at the target ship."
+
+msgid "FLEET_ERROR_CAPACITY"
+msgstr "The target ship does not have enough free cargo space."
+
+msgid "FLEET_ERROR_DESIGN"
+msgstr "This design is incomplete or incompatible. Please check it in the shipyard."
+
+msgid "FLEET_ERROR_LIMIT"
+msgstr "The fleet trial supports up to 16 ships."
+
+msgid "CONSTRUCTION_NONE"
+msgstr "There is no active construction project."
+
+msgid "CONSTRUCTION_INVALID"
+msgstr "Unknown construction command."
+
+msgid "CONSTRUCTION_UNCHANGED"
+msgstr "The project is already in this state."
+
+msgid "CONSTRUCTION_RECOVERING"
+msgstr "Recovery is already underway. Assign residents to bring materials back."
+
+msgid "CONSTRUCTION_STORAGE_FULL"
+msgstr "There is not enough warehouse space for all materials. Free up storage first."
+
+msgid "CONSTRUCTION_PAUSED"
+msgstr "Construction paused. Material already in transit can still arrive."
+
+msgid "CONSTRUCTION_RESUMED"
+msgstr "Construction resumed. Assigned residents continue their work."
+
+msgid "CONSTRUCTION_RECOVERED"
+msgstr "Recovery complete. All construction materials are back in storage."
+
+msgid "CONSTRUCTION_RECOVERY_STARTED"
+msgstr "Construction cancelled. Residents will bring delivered materials back."
+
+msgid "CONSTRUCTION_INACTIVE"
+msgstr "Construction can only be managed while tribal play is active."
+
+msgid "CONSTRUCTION_SAVE_FAILED"
+msgstr "Saving failed. The project, materials and orders remain unchanged."
+
+msgid "CONSTRUCTION_TITLE"
+msgstr "{name} · {state}"
+
+msgid "CONSTRUCTION_STATE_ACTIVE"
+msgstr "Building"
+
+msgid "CONSTRUCTION_STATE_PAUSED"
+msgstr "Paused"
+
+msgid "CONSTRUCTION_STATE_RECOVERING"
+msgstr "Material recovery"
+
+msgid "CONSTRUCTION_WORKERS"
+msgstr "Assigned: {count} · stopped or blocked: {blocked}"
+
+msgid "CONSTRUCTION_MATERIAL_ROW"
+msgstr "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+
+msgid "CONSTRUCTION_RETURN_ROW"
+msgstr "{resource}: {returned}/{required} returned · {carried} carried · {delivered} on site"
+
+msgid "CONSTRUCTION_PAUSE"
+msgstr "Pause construction"
+
+msgid "CONSTRUCTION_RESUME"
+msgstr "Resume construction"
+
+msgid "CONSTRUCTION_ASSIGN"
+msgstr "Assign selected residents"
+
+msgid "CONSTRUCTION_CANCEL"
+msgstr "Cancel construction…"
+
+msgid "CONSTRUCTION_CONFIRM_CANCEL"
+msgstr "Cancel and recover materials"
+
+msgid "CONSTRUCTION_KEEP"
+msgstr "Keep project"
+
+msgid "CONSTRUCTION_CONFIRM_HINT"
+msgstr "Construction progress will be lost. Reserved materials are released; residents must return delivered and carried goods. The site stays occupied until recovery finishes."
+
+msgid "CONSTRUCTION_RECOVERY_HINT"
+msgstr "Assign residents or resume stopped residents. Materials reach storage only on arrival. Storage space is reserved for their return."
+
+msgid "CONSTRUCTION_PAUSE_HINT"
+msgstr "Pausing stops new pickups and building work. Carried goods may still arrive; other professions continue."
+
+msgid "BP_FAVORITES_ONLY"
+msgstr "Favorites only"
+
+msgid "BP_FAVORITE_ADD"
+msgstr "☆ Add to favorites"
+
+msgid "BP_FAVORITE_REMOVE"
+msgstr "★ Remove favorite"
+
+msgid "BP_FAVORITE_TOOLTIP"
+msgstr "Bookmarks this exact template revision on this device. Your campaign and exported template stay unchanged."
+
+msgid "BP_FAVORITE_SAVED"
+msgstr "This template is now a favorite."
+
+msgid "BP_FAVORITE_CLEARED"
+msgstr "The favorite bookmark was removed."
+
+msgid "BP_NO_FAVORITES"
+msgstr "No matching favorites. Mark a template as a favorite or change the search and filters."
+
+msgid "BP_ERROR_FAVORITES_FULL"
+msgstr "The favorites list is full. Remove a bookmark first."
+
+msgid "RECOVERY_TITLE"
+msgstr "Your creature has died"
+
+msgid "RECOVERY_COUNTDOWN"
+msgstr "Returning home in {seconds} sec."
+
+msgid "RECOVERY_PREPARING"
+msgstr "Preparing your home. You will return as soon as a safe spot is available."
+
+msgid "RECOVERY_BLOCKED"
+msgstr "The return location is still blocked. Searching continues. Press Esc for the pause menu."
+
+msgid "RECOVERY_KEEP"
+msgstr "Your discoveries, abilities and companions are preserved."
+
+msgid "RECOVERY_SAFE"
+msgstr "Back on your feet"
+
+msgid "RECOVERY_PROTECTION"
+msgstr "Health, food and water restored. Protected from damage for {seconds} more sec."
+
+msgid "RECOVERY_ATTACK"
+msgstr "Attacking ends your protection."
+
+msgid "BIND_JOURNAL"
+msgstr "Discovery journal"
+
+msgid "BIND_DEVELOPMENT"
+msgstr "Development"
+
+msgid "BIND_WORLD_MAP"
+msgstr "World map"
+
+msgid "BIND_ALL_CONTROLS"
+msgstr "GAME & MENUS · PRIMARY AND SECONDARY BINDINGS"
+
+msgid "BIND_MENUS_NOTE"
+msgstr "Menu shortcuts: single letters or digits. F, H, N and P are used by fixed game actions. Esc still closes a menu."
+
+msgid "BIND_FIXED_PLAY_KEY"
+msgstr "This key is already used by a fixed game action (F, H, N or P)."
+
+msgid "BIND_MENU_KEY_REQUIRED"
+msgstr "Please choose a letter or digit key for menus."
+
+msgid "BIND_MENUS_ADDED"
+msgstr "Your game bindings are preserved. New menu shortcuts have been assigned unused keys; review them below."
+
+msgid "BIND_JOURNAL_BUTTON"
+msgstr "Discovery journal · {journal}"
+
+msgid "BIND_TRIBE_HINT"
+msgstr "Your tribe · select villagers and give the group an order. {journal} opens your shared discoveries."
+
+msgid "BIND_SCAN_RECOGNIZED"
+msgstr "Species recognised · {journal} opens the discovery journal"
+
+msgid "BIND_FIRST_SCAN"
+msgstr "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+
+msgid "BIND_CONTROLS_HELP"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "GUIDE_TITLE"
+msgstr "YOUR PATH TO A TRIBE"
+
+msgid "GUIDE_INTRO"
+msgstr "Four chapters guide you from exploration to your first tribe. Choose what you want to learn next. Guidance is optional and does not change game objectives."
+
+msgid "GUIDE_CHAPTER_EXPLORE"
+msgstr "Explore"
+
+msgid "GUIDE_CHAPTER_SURVIVE"
+msgstr "Survive"
+
+msgid "GUIDE_CHAPTER_HOME"
+msgstr "Live together"
+
+msgid "GUIDE_CHAPTER_TRIBE"
+msgstr "Found a tribe"
+
+msgid "GUIDE_STEP_LOOK"
+msgstr "Look around"
+
+msgid "GUIDE_STEP_MOVE"
+msgstr "Explore your surroundings"
+
+msgid "GUIDE_STEP_JUMP"
+msgstr "Take a jump"
+
+msgid "GUIDE_STEP_INSPECT"
+msgstr "Scan a creature"
+
+msgid "GUIDE_STEP_EAT"
+msgstr "Find suitable food"
+
+msgid "GUIDE_STEP_DRINK"
+msgstr "Drink fresh water"
+
+msgid "GUIDE_STEP_HOME"
+msgstr "Establish a home"
+
+msgid "GUIDE_STEP_COMMAND"
+msgstr "Lead your companions"
+
+msgid "GUIDE_STEP_TRIBE"
+msgstr "Begin the tribal age"
+
+msgid "GUIDE_HINT_LOOK"
+msgstr "Move the mouse to look around your world."
+
+msgid "GUIDE_HINT_MOVE"
+msgstr "{forward} / {left} / {back} / {right} · Walk a few metres."
+
+msgid "GUIDE_HINT_JUMP"
+msgstr "{jump} · Jump from solid ground."
+
+msgid "GUIDE_HINT_INSPECT"
+msgstr "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+
+msgid "GUIDE_HINT_EAT"
+msgstr "{interact} · Approach food and interact with it. Your mouth determines what you can eat."
+
+msgid "GUIDE_HINT_DRINK"
+msgstr "{interact} · Drink at a reachable freshwater shore. Sea water will not help."
+
+msgid "GUIDE_HINT_HOME"
+msgstr "N · Open your nest group and establish a home on clear, level, dry ground."
+
+msgid "GUIDE_HINT_COMMAND"
+msgstr "N · Tell a companion or the whole group to Follow or Return home."
+
+msgid "GUIDE_HINT_TRIBE"
+msgstr "Call both companions home. At your home, open “Tribal age …” and confirm the transition."
+
+msgid "GUIDE_DETAIL_LOOK"
+msgstr "The camera follows your creature during play. Mouse sensitivity and inverted Y are available under Esc → Controls."
+
+msgid "GUIDE_DETAIL_MOVE"
+msgstr "Only distance actually travelled counts. Pushing against an obstacle does not complete this task."
+
+msgid "GUIDE_DETAIL_JUMP"
+msgstr "The same key moves you upwards in water. This task requires a jump from the ground."
+
+msgid "GUIDE_DETAIL_INSPECT"
+msgstr "A new scan takes 2.5 seconds; known species are recognised immediately. Open the discovery journal using its HUD button."
+
+msgid "GUIDE_DETAIL_EAT"
+msgstr "Plants provide foods such as fruit and vegetation. Prey provides meat. Attempts with a full stomach or unsuitable food do not count. The guide does not require a particular diet."
+
+msgid "GUIDE_DETAIL_DRINK"
+msgstr "Find a river or lake and approach the water. A successful drink restores thirst. With a full thirst bar you do not need to drink yet."
+
+msgid "GUIDE_DETAIL_HOME"
+msgstr "Two companions of your own species permanently belong to your home. Trees, water, steep edges or insufficient space prevent founding it. Near home, health regenerates when hunger and thirst are sufficiently replenished."
+
+msgid "GUIDE_DETAIL_COMMAND"
+msgstr "Orders are saved. Follow brings companions to you; Return home sends them back to the nest. Wait stops them. Wild animals of other species do not become group members through these orders."
+
+msgid "GUIDE_DETAIL_TRIBE"
+msgstr "You and both companions must be at home. Before confirmation, the game checks safe routes and workplaces. You can still cancel. After the transition you lead residents and assign village tasks. Guidance never confirms the transition for you."
+
+msgid "GUIDE_CARD_COUNT"
+msgstr "{chapter} · {done}/{total}"
+
+msgid "GUIDE_FOOTER"
+msgstr "Esc → First steps: chapters and help"
+
+msgid "GUIDE_CHOOSE"
+msgstr "Continue with: {chapter}"
+
+msgid "GUIDE_TOTAL"
+msgstr "{done}/{total} exercises completed. Progress belongs to this adventure."
+
+msgid "GUIDE_FUTURE"
+msgstr "This guide was saved by a newer game version. Its data is preserved; you can still read the help."
+
+msgid "GUIDE_DISABLED"
+msgstr "Guidance is turned off."
+
+msgid "GUIDE_RESTART"
+msgstr "Restart introduction"
+
+msgid "GUIDE_SKIP"
+msgstr "Turn off guidance"
+
+msgid "GUIDE_FINISHED"
+msgstr "INTRODUCTION COMPLETE"
+
+msgid "GUIDE_TRIBE_NEXT"
+msgstr "Select residents and assign work in your village. The chapters remain available as help in the pause menu."
+
+msgid "GUIDE_CONTEXT_WORLD"
+msgstr "Guidance resumes in the loaded game world."
+
+msgid "GUIDE_CONTEXT_FULL"
+msgstr "Your stomach is full. Keep exploring or choose another chapter until you need food again."
+
+msgid "GUIDE_CONTEXT_HYDRATED"
+msgstr "Your thirst bar is full. Keep exploring or choose another chapter until you need a drink."
+
+msgid "GUIDE_CONTEXT_READY"
+msgstr "Your group is ready. Open “Tribal age …” to check the village routes."
+
+msgid "GUIDE_CONTEXT_ANY_ORDER"
+msgstr "Actions count even before their chapter. You can choose chapters freely or turn guidance off."
+
+msgid "SAVE_SCAN_DISCOVER"
+msgstr "Finding adventures …"
+
+msgid "SAVE_SCAN_PROGRESS"
+msgstr "Checking adventures: {done} of {total} …"
+
+msgid "SAVE_HISTORY_LOADING"
+msgstr "Checking backups …"
+
+msgid "WILDLIFE_HUNT"
+msgstr "Hunting prey"
+
+msgid "WILDLIFE_CARRION"
+msgstr "Seeking carrion"
+
+msgid "WILDLIFE_EAT_CARCASS"
+msgstr "Eating carrion"

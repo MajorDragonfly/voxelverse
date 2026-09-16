@@ -3,6 +3,7 @@ extends Node
 const PartLibrary = preload("res://creatures/editor/creature_part_library.gd")
 const SkillTree = preload("res://ui/behavior_skill_tree.gd")
 const Style = preload("res://ui/progression_style.gd")
+const Keys = preload("res://core/input_preferences.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Journal = preload("res://ui/discovery/discovery_journal.gd")
 
@@ -11,6 +12,7 @@ var _hud: CanvasLayer
 var _progress_label: Label
 var _notification_label: Label
 var _notification_timer: float = 0.0
+var _shortcut_buttons: Dictionary = {}
 var _skill_tree: CanvasLayer
 var _discovery_journal: CanvasLayer
 
@@ -86,7 +88,9 @@ func _install() -> void:
 	column.add_child(shortcuts)
 	for entry: Array in [["HUD_DEVELOPMENT", "OpenPlayerProgression", _skill_tree.open_panel],
 		["HUD_JOURNAL", "OpenDiscoveryJournal", _discovery_journal.open_journal]]:
-		var button := Style.button(entry[0])
+		var button := Style.button(Keys.hint(entry[0]))
+		button.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		_shortcut_buttons[entry[0]] = button
 		button.name = entry[1]
 		button.custom_minimum_size = Vector2(0, 32)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -95,6 +99,7 @@ func _install() -> void:
 			button.get_theme_stylebox(state).set_content_margin_all(6)
 		button.pressed.connect(entry[2])
 		shortcuts.add_child(button)
+	get_node("/root/DisplaySettings").input_preferences.bindings_changed.connect(_refresh_summary)
 	get_node("/root/LocaleManager").language_changed.connect(func(_locale: String) -> void: _refresh_summary())
 
 	var progression := get_node_or_null("/root/ProgressionService")
@@ -112,6 +117,7 @@ func _install() -> void:
 
 
 func _refresh_summary() -> void:
+	for key: String in _shortcut_buttons: _shortcut_buttons[key].text = Keys.hint(key)
 	if _progress_label == null:
 		return
 	var progression := get_node_or_null("/root/ProgressionService")

@@ -1,0 +1,65 @@
+name: Project dashboard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft, closed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: project-dashboard-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dashboard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check central data and generated views
+        run: python3 tools/project_dashboard.py check
+      - name: Check progress, dependency and handoff failure paths
+        run: |
+          python3 -m unittest discover -s tests/tooling -p 'project_dashboard_test.py'
+          python3 -m unittest discover -s tests/tooling -p 'work_packet_test.py'
+      - name: Add reviewed dashboard to job summary
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import re
+          from urllib.parse import urljoin
+          base = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/blob/{os.environ['GITHUB_SHA']}/docs/"
+          report = Path('docs/PROJECT_DASHBOARD.md').read_text(encoding='utf-8')
+          report = re.sub(r'\]\(([^)]+)\)', lambda m: '](' + urljoin(base, m.group(1)) + ')', report)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
+              out.write(report)
+          PY
+      - name: Read live PR inventory once for this update
+        # This request is read-only. API failure must be visible, not an empty queue.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/project_dashboard.py live --output "$RUNNER_TEMP/project-dashboard"
+      - name: Add live delivery state to job summary
+        run: cat "$RUNNER_TEMP/project-dashboard/live.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve live snapshot and reviewed dashboard
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-dashboard-${{ github.run_id }}
+          path: |
+            docs/PROJECT_DASHBOARD.md
+            docs/dashboard/progress.svg
+            tools/workflow/project.json
+            ${{ runner.temp }}/project-dashboard
+          retention-days: 14

@@ -1,6 +1,8 @@
 # Voxelverse – gemeinsame Entwicklungsroadmap
 
 Aktueller Lieferstand und feste Basis: [PROJECT_STATUS](docs/PROJECT_STATUS.md).
+Gewichteter Fortschritt, Folgepakete und Prioritäten: [Dashboard](docs/PROJECT_DASHBOARD.md).
+Diese Statusansichten entstehen aus einer gemeinsamen Datei; historische Abschnitte unten sind keine Live-Belegung.
 Die Lieferungen #78–89 sind über PR #90 in `main` enthalten. Für Fachchats gilt
 [AGENTS.md](AGENTS.md); die Roadmap wird nach Bedarf abschnittsweise gelesen.
 Der Integrationschat aktualisiert gemeinsame Lieferstände einmal je Runde.
@@ -109,7 +111,7 @@ Punkte kommen aus abgeschlossenen, identifizierbaren Spielereignissen. Käufe, V
 
 ## Neu: planetare Tierrollen und Zähmung
 
-**Status: D1–D3 sind zusammengeführt; die Kampagne auf der Ebene und der begrenzte Kugelbereich bleiben getrennte Laufzeiten.** Vorhandenes Befreunden und Heimgefährten sind nicht mit Tierhaltung gleichzusetzen.
+**Status: D1–D3 und die Eierproduktion sind in der gemeinsamen Kugelkampagne angebunden.** Vorhandenes Befreunden und Heimgefährten sind nicht mit Tierhaltung gleichzusetzen.
 
 | Rolle | Mindestfunktion | Erforderliche Artmerkmale | Spielbarer Nachweis |
 |---|---|---|---|
@@ -213,7 +215,10 @@ Schiffe, angedockte Beiboote, Fracht und Proben besitzen eindeutige Eigentümer 
 
 Die sechs Unterpakete, Modulgruppen, Fortschrittsstufen und Abnahmen stehen im [Expeditionsplan](docs/SPACE_EXPEDITION_PLAN.md). Diese Ergänzung plant die spätere Phase und startet keine konkurrierende Weltraumimplementierung während des Kugelumzugs.
 
-## Meilensteine mit tatsächlichem Status
+## Meilensteine und Abnahmeziele
+
+Aktuelle gemeinsame Quellen und neue Fachlieferungen stehen im [Dashboard](docs/PROJECT_DASHBOARD.md).
+Die folgende Gliederung bewahrt Ziele und bisherige Teillieferungen; sie ist keine zweite Prozent- oder Belegungsliste.
 
 | ID | Status und nächstes Ergebnis | Voraussetzung | Abnahme |
 |---|---|---|---|
@@ -234,13 +239,13 @@ Die sechs Unterpakete, Modulgruppen, Fortschrittsstufen und Abnahmen stehen im [
 | D1-EIER | **Integriert:** vierte Eierart mit additiver Katalogmigration und erreichbarem Kugelhabitat | Geprüfter D1-Grundvertrag und versionierte Katalogmigration | Vierte geeignete Art deterministisch und erreichbar; bestehende Arten/Individuen bleiben erhalten; Mehr-Seed-/Neustartprüfung |
 | D2 | Kampagnenzähmung, dauerhafte Befehle und radialer Host zusammengeführt | D1, M5 | Eignung/Kosten/Phase prüfen; Tier folgt/wartet/kehrt zurück; Unterbrechung, Tod, Laden und Besitz geprüft |
 | D3 | Tierpflege, Milch und Transport zusammengeführt; produktiver D2-Leseanschluss ergänzt | D2, gemeinsame Dorfvorräte | Betreuung → Produktion → Transport → Verbrauch, keine Doppelernte; Futter/Wasser/Haltungskosten wirken |
-| D3-EIER | **Geplant:** Eier sammeln, transportieren und als Nahrung nutzen | D1-EIER, D2, gemeinsame D3-Haltungs-/Produktionsbasis und Dorfaufträge | Versorgung → Legestelle → Sammelauftrag → Lager → Verbrauch; genau ein Produktionsbesitzer, Save/Load und unterbrochener Transport ohne Verlust/Dopplung |
+| D3-EIER | **Integriert über #90:** Eier sammeln, transportieren und als Nahrung nutzen | D1-EIER, D2, gemeinsame D3-Haltungs-/Produktionsbasis und Dorfaufträge | Versorgung → Legestelle → Sammelauftrag → Lager → Verbrauch; genau ein Produktionsbesitzer, Save/Load und unterbrochener Transport ohne Verlust/Dopplung |
 | D4 | **Neu:** Reiten und Pflügen | D2, M2B, Feld-/Routenmodell | Passender Reitsitz, sichere Auf-/Abstiege; Zugtier mit Pflug bearbeitet reale Felder, Arbeitsfortschritt speicherbar |
-| M6 | Erneuerbare Wirtschaft, Berufe, Hütten/Zelte, sechs Bewohner, Tierhaltung und erste Nachbarhilfe; radiale Migration offen | M5, D1–D4 schrittweise | Erneuerbare Versorgung, Wasser, weitere Rohstoffe, Berufe, Wachstum, frei gebaute Häuser, Tiere und Nachbargruppen |
+| M6 | Erneuerbare Wirtschaft, Berufe, Hütten/Zelte, sechs Bewohner, Tierhaltung und erste Nachbarhilfe auf der Kugel; weiterer Gesellschaftsausbau offen | M5, D1–D4 schrittweise | Erneuerbare Versorgung, Wasser, weitere Rohstoffe, Berufe, Wachstum, frei gebaute Häuser, Tiere und Nachbargruppen |
 | M7 | **Geplant:** Antike/Mittelalter | Belastbares M6 | Landwirtschaft, Handwerk, Lager/Transport/Handel, Wege und mehrere Siedlungen; eigene Spezies bleibt Träger aller Fraktionen; bestätigter Wechsel |
 | M8 | **Geplant:** Neuzeit/Weltmacht | M7, globale Orte/Simulation | Industrie/Energie, Ressourcenketten, Staaten, Diplomatie/Armeen, globale Karte; Tiere/Bestände werden übernommen; bestätigter Wechsel |
 | M9 | **Geplant:** Weltraum mit modularer Expeditionsbasis und Beibooten | M8, vollständige Kugelkampagne auf M1b/M1c/M1d und Folgeadaptern | Großes Schiff steuern → Beiboot abdocken → Planetenanflug/Landung/Ausstieg → untersuchen → zurückkehren/andocken → Schiff ausbauen; danach weitere Systeme und versorgte Kolonien |
-| M9.1 | **Geplant:** Schiffvertrag und erster modularer Editor für Expeditionsschiff/Beiboot | Bauplanfundament, Weltadressen, M8-Wirtschaft | Zwei eigene Entwürfe mit wirkenden Modulen, Größen-/Kapazitätsprüfung, Hangareignung und Save/Load |
+| M9.1 | **Teilweise:** Schiffvertrag und modularer Editor im Kandidaten #125; Schiffsinstanzen als Fachlieferung #129. Produktiver Bau-/Wirtschaftsanschluss offen | Bauplanfundament, Weltadressen, M8-Wirtschaft | Zwei eigene Entwürfe mit wirkenden Modulen, Größen-/Kapazitätsprüfung, Hangareignung und Save/Load |
 | M9.2 | **Geplant:** vollständige erste Expedition in einem System | M9.1, Flug/Kollision/Übergaben, Kugelkampagne | Beide Schiffe direkt steuern; abdocken, landen, aussteigen, untersuchen und zur mobilen Basis zurückkehren |
 | M9.3 | **Geplant:** Forschung, Proben und planetare Untersuchung | M9.2, vorhandene Entdeckungs-/Kartendienste | Erkenntnisse erhalten, Proben transportieren und einmalig auswerten |
 | M9.4 | **Geplant:** größere Rümpfe, Ausstattung und Fracht-/Modulkapazität | M9.3, Technologie, Ressourcen, Bau-/Leistungsbudget | Größeren Baubereich erschließen und tatsächlich umbauen; Schiffe/Fracht bleiben erhalten |

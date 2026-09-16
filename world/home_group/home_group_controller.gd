@@ -1,5 +1,7 @@
 extends Node
 
+signal order_committed(order: String)
+
 const State = preload("res://world/home_group/home_group_state.gd")
 const Companion = preload("res://world/home_group/home_companion.gd")
 const GroupPanel = preload("res://ui/home_group/home_group_panel.gd")
@@ -204,7 +206,10 @@ func issue_order(order: String, identity: String = "") -> Dictionary:
 			found = true
 	if not found:
 		return _result(false, "home.member_unavailable", "Dieses Gruppenmitglied ist nicht verfügbar.")
-	return _commit(candidate)
+	var result: Dictionary = _commit(candidate)
+	if result.ok:
+		order_committed.emit(order)
+	return result
 
 func _commit(candidate: Dictionary) -> Dictionary:
 	var body: Dictionary = _body_record()

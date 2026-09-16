@@ -1,0 +1,15 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+{"failures":[],"observations":{"meal":{"food":25.0,"moved":2.78731989860535,"satiety":39.7740000000001,"up":"(0.750713, -0.660629, -0.0)"},"restart_exit":0},"passed":true,"test":"wildlife_hunting_world"}
+
+WARNING: Could not commit save: user://unavailable_hunt_world/failure.json (File not found)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1137)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:174)
+         [2] save_now (res://autoload/save_game_service.gd:117)
+         [3] store_creature_encounter (res://autoload/progression_service.gd:617)
+         [4] store_carcass (res://creatures/behavior/creature_social_component.gd:254)
+         [5] _consume_carcass (res://creatures/ai/hunting_brain.gd:164)
+         [6] _run (res://core/diagnostics/wildlife_hunting_world_probe.gd:71)
+         [7] _until (res://core/diagnostics/spherical_creature_probe.gd:148)

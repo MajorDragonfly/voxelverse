@@ -1,5 +1,17 @@
 # Voxelverse
 
+<!-- PROJECT-DASHBOARD:START -->
+### Projektfortschritt
+
+[![Geschätzter Entwicklungsumfang](docs/dashboard/progress.svg)](docs/PROJECT_DASHBOARD.md)
+
+**Rund 35 % entwickelt** · Schätzkorridor 30–39,5 % · Bewertet am 2026-09-16 · Zielumfang v1.
+
+Die Schätzung umfasst veröffentlichte Fachlieferungen. Integration und Spieltest-Abnahme werden separat geführt; PR-Zahl und Testanzahl erhöhen den Prozentwert nicht.
+
+[Dashboard und nächste Prioritäten](docs/PROJECT_DASHBOARD.md) · [Zentrale Chat-Koordination](https://github.com/MajorDragonfly/voxelverse/issues/137) · [Spieltest-Kandidat #125](https://github.com/MajorDragonfly/voxelverse/pull/125)
+<!-- PROJECT-DASHBOARD:END -->
+
 Ein Spore-inspiriertes Einzelspielerspiel in Voxelgrafik: eine eigene Kreatur gestalten und die Spezies langfristig über Stamm, Antike/Mittelalter und Weltmacht bis in den Weltraum führen.
 
 **Entwicklung starten:** [AGENTS.md](AGENTS.md) → [aktueller Projektstand](docs/PROJECT_STATUS.md) → eigener Teilauftrag (`python3 tools/work_packet.py list`). Die [Roadmap](ROADMAP.md) bewahrt Zielbild und Meilensteine; Fachchats lesen nur passende Abschnitte und übergeben Änderungen über ihren PR.

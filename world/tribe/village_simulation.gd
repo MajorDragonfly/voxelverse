@@ -102,7 +102,7 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
 		for effect: Dictionary in effects:
 			if effect.kind == "care_pickup": _pickup(body, member)
 			elif effect.kind == "care_delivery": _deliver(body, member)
-			elif effect.kind == "construction" and effect.data.kind in Work.Housing.BUILDS:
+			elif effect.kind in ["construction_recovered", "construction"] and effect.data.kind in Work.Housing.BUILDS:
 				# New obstacles need physical recertification; existing cargo stays.
 				simulation.roads.clear()
 				simulation.legs.clear()

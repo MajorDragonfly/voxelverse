@@ -1,6 +1,7 @@
 extends RefCounted
 ## WEATHER-02A: continuous body-fixed fronts and benign regional precipitation.
 ## All current climates remain safe. This is derived presentation, never exposure damage.
+const Climate = preload("res://world/weather/planet_climate.gd")
 const Model = preload("res://world/weather/weather_model.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Field = preload("res://world/space/scalar_noise.gd")
@@ -20,10 +21,21 @@ static func sample(body_id: String, seed_value: int, clock: float, address: Dict
 	var advected: Array = [point[0] - flow.x * clock * 2.5, point[1] - flow.y * clock * 2.5, point[2] - flow.z * clock * 2.5]
 	var front: float = Field.sample(advected, FRONT_SPACING_M, seed_value + 7919)
 	var local_clock: float = clock + front * 95.0 * smoothstep(180.0, 360.0, clock)
-	var result: Dictionary = Model.sample(body_id, seed_value, local_clock)
+	var profile_id: String = "earth_temperate"
+	var home_protected: bool = false
+	if climate.has(Climate.FIELD):
+		var body: Dictionary = {"id": body_id, Climate.FIELD: climate[Climate.FIELD]}
+		if Climate.profile_for(body).is_empty(): return {}
+		profile_id = str(body[Climate.FIELD].profile_id)
+		home_protected = bool(body[Climate.FIELD].get("home_protected", false))
+		if home_protected and profile_id != "earth_temperate": return {}
+	var profile: Dictionary = Climate.CATALOG[profile_id]
+	var result: Dictionary = Model.sample(body_id, seed_value, local_clock, profile_id)
 	if result.is_empty(): return {}
 	var moisture: float = _unit(climate.get("moisture", 0.5), 0.5)
 	var temperature: float = _unit(climate.get("temperature", 0.6), 0.6)
+	moisture *= float(profile.moisture_scale)
+	temperature = clampf(temperature * float(profile.temperature_scale) + float(profile.temperature_offset), 0.0, 1.0)
 	var cloud_band: float = 0.5 + 0.5 * Field.sample(advected, FRONT_SPACING_M * 0.6, seed_value + 31337)
 	var wet_factor: float = smoothstep(0.08, 0.6, moisture) * lerpf(0.35, 1.0, cloud_band)
 	var snow_fraction: float = 1.0 - smoothstep(0.10, 0.30, temperature)
@@ -34,7 +46,8 @@ static func sample(body_id: String, seed_value: int, clock: float, address: Dict
 		"region_strength": cloud_band, "temperature_factor": temperature, "moisture_factor": moisture,
 		"rain_intensity": float(result.precipitation) * (1.0 - snow_fraction),
 		"snow_intensity": float(result.precipitation) * snow_fraction,
-		"snow_fraction": snow_fraction, "atmosphere_present": str(climate.get("atmosphere", "temperate")) != "none"}, true)
+		"snow_fraction": snow_fraction, "home_protected": home_protected,
+		"atmosphere_present": profile.atmosphere != "none" and str(climate.get("atmosphere", "temperate")) != "none"}, true)
 	if result.precipitation > 0.01 and snow_fraction > 0.65: result.condition = "snow"
 	elif result.precipitation > 0.01 and snow_fraction > 0.05: result.condition = "sleet"
 	elif result.precipitation <= 0.01 and result.condition in ["rain", "drizzle"]:
@@ -59,6 +72,7 @@ static func sample(body_id: String, seed_value: int, clock: float, address: Dict
 	if not result.atmosphere_present:
 		for key in ["cloud_cover", "precipitation", "wetness", "rain_intensity", "snow_intensity", "wind_mps", "gust_strength"]: result[key] = 0.0
 		result.wind_velocity = [0.0, 0.0, 0.0]
+		result.wind_offset = [0.0, 0.0, 0.0]
 		result.condition = "clear"
 	return result
 
@@ -75,7 +89,7 @@ static func forecast(body_id: String, seed_value: int, clock: float, address: Di
 
 static func preview(snapshot: Dictionary, condition: String) -> Dictionary:
 	if snapshot.is_empty(): return {}
-	var preset: Dictionary = Model.preset(condition)
+	var preset: Dictionary = Model.preset(condition, str(snapshot.get("climate_id", "earth_temperate")))
 	if preset.is_empty(): return snapshot.duplicate(true)
 	var result: Dictionary = snapshot.duplicate(true)
 	# Even diagnostic snow/rain must respect the absence of an atmosphere.

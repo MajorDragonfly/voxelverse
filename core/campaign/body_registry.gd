@@ -2,6 +2,7 @@ extends RefCounted
 ## Stable identities own state; generator seeds are only scoped lookup inputs.
 ## This adapter is pure: reads never create bodies or import a campaign.
 const Ids = preload("res://core/campaign/campaign_ids.gd")
+const Climate = preload("res://world/weather/planet_climate.gd")
 const CAMPAIGN_SCHEMA: int = 3
 const STATE_SCHEMA: int = 4
 const SAVE_SCHEMA: int = 9
@@ -65,7 +66,7 @@ static func validate(campaign: Dictionary) -> String:
 		identities[body.id] = true
 		lookup[address] = body.id
 	if campaign.schema == CAMPAIGN_SCHEMA and (not campaign.get("body_lookup") is Dictionary or campaign.body_lookup != lookup): return "Körperindex stimmt nicht mit seinen Identitäten überein."
-	return ""
+	return Climate.validate_campaign(campaign)
 
 static func ambiguous(campaign: Dictionary) -> bool:
 	if not campaign.get("bodies") is Dictionary: return false
@@ -92,6 +93,7 @@ static func upgrade_campaign(source: Dictionary) -> Dictionary:
 		result.body_lookup[context_key(body.system_id, int(body.seed))] = body.id
 	if not result.has("surface_policy"): result.surface_policy = "legacy_plane_v9"
 	if not result.has("surface_migration"): result.surface_migration = {}
+	Climate.migrate(result)
 	return {"ok": true, "data": result, "error": ""}
 
 static func regions_field(save: Dictionary) -> String:

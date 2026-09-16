@@ -1,6 +1,7 @@
 extends RefCounted
 ## WEATHER-01. Pure presentation contract derived from the existing campaign clock.
-## No wall clock, global RNG, save fields, simulation catch-up or gameplay damage.
+## No wall clock, global RNG, simulation catch-up or gameplay damage.
+const Climate = preload("res://world/weather/planet_climate.gd")
 const SCHEMA: int = 1
 const TRANSITION_SECONDS: float = 35.0
 const CONDITIONS: Dictionary = {
@@ -19,13 +20,16 @@ const CLIMATES: Dictionary = {
 }
 
 static func climate_catalog() -> Dictionary:
-	return CLIMATES.duplicate(true)
+	var result: Dictionary = CLIMATES.duplicate(true)
+	for id in Climate.CATALOG:
+		result[id] = {"implemented": true, "hazards": [], "revision": Climate.REVISION, "conditions": CONDITIONS.keys()}
+	return result
 
 static func sample(body_id: String, seed_value: int, elapsed_seconds: float,
 		climate_id: String = "earth_temperate") -> Dictionary:
 	# Reserved extreme profiles cannot silently become active without their gates.
 	if body_id.is_empty() or seed_value < 1 or not is_finite(elapsed_seconds) \
-			or climate_id != "earth_temperate": return {}
+			or seed_value > 2147483647 or not Climate.CATALOG.has(climate_id): return {}
 	var clock: float = maxf(elapsed_seconds, 0.0)
 	var duration: float = 210.0 + float(posmod(seed_value, 4)) * 30.0
 	var slot: int = int(floor(clock / duration))
@@ -44,14 +48,28 @@ static func sample(body_id: String, seed_value: int, elapsed_seconds: float,
 		"seconds_to_next_front": duration - within,
 		"wind_bearing": float(posmod(seed_value, 360)) * PI / 180.0,
 		"preview": false}, true)
+	_apply_climate(result, climate_id)
 	return result
 
-static func preset(condition: String) -> Dictionary:
-	if not CONDITIONS.has(condition): return {}
+static func preset(condition: String, climate_id: String = "earth_temperate") -> Dictionary:
+	if not CONDITIONS.has(condition) or not Climate.CATALOG.has(climate_id): return {}
 	var result: Dictionary = CONDITIONS[condition].duplicate(true)
 	result.merge({"schema": SCHEMA, "climate_id": "earth_temperate", "condition": condition,
 		"wetness": float(result.precipitation), "hazard_kind": "none", "hazard_intensity": 0.0})
+	_apply_climate(result, climate_id)
 	return result
+
+static func _apply_climate(result: Dictionary, id: String) -> void:
+	var profile: Dictionary = Climate.CATALOG[id]
+	result.climate_id = id
+	result.climate_revision = Climate.REVISION
+	result.cloud_cover *= float(profile.cloud_scale)
+	result.precipitation *= float(profile.precipitation_scale)
+	result.wetness *= float(profile.precipitation_scale)
+	if profile.atmosphere == "none":
+		result.wind_mps = 0.0
+		result.condition = "clear"
+		result.previous_condition = "clear"
 
 static func _condition(seed_value: int, slot: int) -> String:
 	# A peaceful opening followed by a visible first shower, independently of FPS.

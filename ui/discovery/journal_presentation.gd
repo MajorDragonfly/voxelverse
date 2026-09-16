@@ -7,7 +7,7 @@ const Research = preload("res://core/discovery/research_goals.gd")
 
 static func text(key: String, locale: String = "") -> String:
 	var translated := Language.text(key, locale)
-	return key if translated.is_empty() else translated
+	return key if translated.is_empty() else Text._substitute(translated, {"journal": Records.KeyHints.binding_label("open_journal")})
 
 static func bind(control: Control, property: String, key: String) -> void:
 	control.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED

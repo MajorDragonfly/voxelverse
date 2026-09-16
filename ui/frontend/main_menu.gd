@@ -108,7 +108,7 @@ func _build() -> void:
 	footer.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
 	footer.anchor_left = 0.075
 	footer.offset_top = -57
-	var keys := Style.label(self, "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen", 16, Style.MUTED)
+	var keys := Style.label(self, "Tab  Auswahl    ·    Enter  Bestätigen", 16, Style.MUTED)
 	keys.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 	keys.offset_left = -610
 	keys.offset_right = -100
@@ -136,6 +136,7 @@ func _show_home() -> void:
 		_latest_summary.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	var start := Style.button(_body, "Neues Spiel", _show_new, "NewGame", last.is_empty())
 	Style.button(_body, "TRIBAL_TEST_ENTRY", _show_tribal_test, "TribalPlaytest")
+	Style.button(_body, "FLEET_ENTRY", func(): get_tree().change_scene_to_file("res://space/fleet/fleet_trial.tscn"), "FleetTrial")
 	Style.button(_body, "Spielstände", _show_slots, "Saves")
 	Style.button(_body, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "Settings")
 	Style.button(_body, "Steuerung", _show_help, "Controls")

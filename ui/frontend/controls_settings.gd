@@ -62,7 +62,7 @@ func setup(source: RefCounted) -> void:
 	var separator := HSeparator.new()
 	add_child(separator)
 	label = Label.new()
-	label.text = "SPIELTASTEN · HAUPT- UND ZWEITBELEGUNG"
+	label.text = "BIND_ALL_CONTROLS"
 	label.add_theme_font_size_override("font_size", 18)
 	add_child(label)
 	var grid := GridContainer.new()
@@ -85,6 +85,11 @@ func setup(source: RefCounted) -> void:
 			button.pressed.connect(func(): begin_binding(action, slot))
 			grid.add_child(button)
 			_buttons[button.name] = button
+	label = Label.new()
+	label.text = "BIND_MENUS_NOTE"
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.add_theme_font_size_override("font_size", 16)
+	add_child(label)
 	message = Label.new()
 	message.custom_minimum_size = Vector2(0, 58)
 	message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

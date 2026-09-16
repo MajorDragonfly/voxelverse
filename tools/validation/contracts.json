@@ -29,7 +29,9 @@
       "tests": [
         "spherical_creature_test",
         "spherical_gameplay_test",
-        "spherical_egg_production_test"
+        "spherical_egg_production_test",
+        "player_recovery_test",
+        "player_recovery_world_test"
       ]
     },
     {
@@ -96,7 +98,8 @@
         "world_layered_v7_test",
         "world_runtime_continuity_test",
         "resource_visuals_test",
-        "campaign_atmosphere_test"
+        "campaign_atmosphere_test",
+        "graphics_settings_test"
       ]
     },
     {
@@ -135,6 +138,7 @@
         "blueprint_contract_test",
         "community_blueprint_package_test",
         "creature_design_library_test",
+        "creature_library_favorites_test",
         "creature_library_ui_test",
         "modular_assembly_framework_test"
       ]
@@ -180,7 +184,10 @@
         "wildlife_drinking_world_test",
         "wildlife_foraging_test",
         "wildlife_foraging_world_test",
-        "creature_expression_test"
+        "creature_expression_test",
+        "wildlife_social_play_test",
+        "wildlife_hunting_test",
+        "wildlife_hunting_world_test"
       ]
     },
     {
@@ -228,7 +235,9 @@
         "site_transport_test",
         "site_transport_runtime_test",
         "workplace_instances_test",
-        "workplace_runtime_test"
+        "workplace_runtime_test",
+        "construction_control_test",
+        "construction_runtime_test"
       ]
     },
     {
@@ -249,6 +258,7 @@
       "tests": [
         "atlas_paging_test",
         "atlas_places_test",
+        "atlas_search_test",
         "creature_scan_test",
         "discovery_journal_test",
         "domestic_fauna_journal_test",
@@ -280,7 +290,11 @@
         "editor_localization_test",
         "journal_localization_test",
         "husbandry_localization_test",
-        "tribal_playtest_test"
+        "tribal_playtest_test",
+        "menu_rebinding_test",
+        "save_browser_search_test",
+        "onboarding_guidance_world_test",
+        "slot_scan_test"
       ]
     },
     {
@@ -308,7 +322,8 @@
       "work": "ARCH-30 / Vorbereitung M9-EXPEDITION",
       "tests": [
         "expedition_contract_test",
-        "shipyard_test"
+        "shipyard_test",
+        "fleet_runtime_test"
       ]
     },
     {
@@ -318,7 +333,8 @@
       "tests": [
         "weather_model_test",
         "weather_runtime_test",
-        "regional_weather_test"
+        "regional_weather_test",
+        "planet_climate_test"
       ]
     }
   ],

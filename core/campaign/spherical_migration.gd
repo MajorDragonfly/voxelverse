@@ -31,7 +31,7 @@ static func blockers(source: Dictionary) -> Array[String]:
 		# Unknown body extensions may contain ownership or places. A whitelist is
 		# intentional: adding a consumer requires an explicit migration adapter.
 		for field in body:
-			if field not in ["id", "system_id", "seed", "generator_version", "surface_mode", "exploration_atlas",
+			if field not in ["id", "system_id", "seed", "generator_version", "surface_mode", "exploration_atlas", "weather_climate",
 					"home_group", "tribe", "tribal_neighbor", "domesticated_animals", "fauna_catalog", "wildlife_foraging", "wildlife_drinking", "legacy_population"]:
 				result.append(id + "/" + str(field) + ": unbekannte Körperdaten; Übernahme muss ausdrücklich geprüft werden.")
 	for key in source.get(Registry.regions_field(source), {}):

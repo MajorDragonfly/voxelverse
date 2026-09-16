@@ -161,8 +161,9 @@ func observe(before: Dictionary, after: Dictionary, actor_id: String, body: Dict
 		var done: bool = after["project"].is_empty() and int(after[counter]) == int(before[counter]) + 1
 		var progress: float = float(Tribe.WORK[kind]) if done else float(after["project"].get("progress", 0.0))
 		if progress > float(project["progress"]) and int(entry["cursors"][counter]) <= int(before[counter]):
-			if entry["project"].get("id", "") != project_id:
+			if entry["project"].get("id", "") != project_id or entry["project"].get("attempt_id", "") != project.get("attempt_id", ""):
 				entry["project"] = {"id": project_id, "progress": float(project["progress"]), "contributors": {}}
+				if project.has("attempt_id"): entry["project"]["attempt_id"] = project.attempt_id
 			if progress > float(entry["project"]["progress"]):
 				entry["project"]["progress"] = progress
 				entry["project"]["contributors"][actor_id] = 1
@@ -282,6 +283,7 @@ static func validate(value: Variant) -> String:
 		if not project is Dictionary:
 			return "Ungültiger Arbeitsnachweis."
 		if not project.is_empty():
+			if project.has("attempt_id") and not Tribe.Economy.text_id(project.attempt_id): return "Ungültiger Bauversuch."
 			if project.get("id") not in ["tool:0", "hut:0", "hut:1", "garden:0"] or not Tribe.number(project.get("progress"), 0, 20) or not _valid_contributions(project.get("contributors"), unique, 1):
 				return "Ungültige Gemeinschaftsbaustelle."
 	var earned: int = 0

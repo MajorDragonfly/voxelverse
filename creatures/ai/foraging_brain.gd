@@ -4,6 +4,7 @@ extends "res://creatures/ai/wildlife_brain.gd"
 
 const ForagingState = preload("res://world/resources/plants/foraging_state.gd")
 const PLANT_EATERS: Array[String] = ["grazer", "forager", "climber"]
+const MEAT_EATERS: Array[String] = ["predator", "scavenger"]
 const HUNGER_PER_SECOND: float = 0.12
 const FOOD_SIGHT: float = 16.0
 const BITE_SECONDS: float = 0.8
@@ -36,7 +37,7 @@ func _load_needs(_path: String) -> void:
 	_avoided.clear()
 	_meal_rest = 0.0
 	_needs = {}
-	if ecological_role in PLANT_EATERS:
+	if ecological_role in PLANT_EATERS or ecological_role in MEAT_EATERS:
 		_needs = ForagingState.animal(GameState, str(_campaign_identity.get("body_id", "")), str(_campaign_identity.get("object_id", "")), 35.0 + float(posmod(individual_seed, 51)))
 		if not _needs.is_empty():
 			satiety = float(_needs["satiety"])
@@ -72,7 +73,7 @@ func _physics_process(delta: float) -> void:
 func _sense() -> void:
 	super._sense()
 	# Threats, territory return and the existing social attention hook win.
-	if _intent not in ["rest", "wander", "herd"] or _needs.is_empty() or GameState.simulation_delta(1.0) <= 0.0:
+	if ecological_role not in PLANT_EATERS or _intent not in ["rest", "wander", "herd"] or _needs.is_empty() or GameState.simulation_delta(1.0) <= 0.0:
 		_drop_food(false)
 		return
 	if _meal_rest > 0.0:
@@ -150,7 +151,7 @@ func get_ai_debug_state() -> Dictionary:
 
 func get_inspection_data() -> Dictionary:
 	var data: Dictionary = super.get_inspection_data()
-	if ecological_role in PLANT_EATERS:
+	if ecological_role in PLANT_EATERS or ecological_role in MEAT_EATERS:
 		data["satiety"] = satiety
 		data["ai_description"] = "Frisst" if ai_state == "eat" else ("Sucht Nahrung" if ai_state == "forage" else data["ai_description"])
 	return data

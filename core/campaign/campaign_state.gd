@@ -24,6 +24,7 @@ func reset(identity: String = "") -> void:
 		"bodies": {}, "body_lookup": {}, "design_refs": {}, "event_cursors": {}, "recent_events": [],
 		"elapsed_seconds": 0.0, "time_scale": 1.0, "pending_transition": {},
 		"completed_transitions": {},
+		Registry.Climate.POLICY: Registry.Climate.new_policy(),
 		"surface_policy": SURFACE_MODE, "surface_migration": {},
 	}
 
@@ -78,12 +79,14 @@ func ensure_body(world_seed: int, system_seed: int, system_id: String = "") -> D
 		return {}
 	var record: Dictionary = {"id": key, "system_id": system_id, "seed": world_seed,
 		"generator_version": GENERATOR_VERSION, "surface_mode": SURFACE_MODE}
+	record = Registry.Climate.prepare_body(data, record)
 	if data.get("surface_policy", SURFACE_MODE) == Surface.Cube.MODE:
 		record = Surface.create(record)
 		if record.is_empty():
 			last_error = "Kein geeigneter Startbereich auf diesem Körper."
 			return {}
 	bodies[key] = record
+	Registry.Climate.commit_origin(data, record)
 	data.body_lookup[Registry.context_key(system_id, world_seed)] = key
 	last_error = ""
 	return bodies[key].duplicate(true)

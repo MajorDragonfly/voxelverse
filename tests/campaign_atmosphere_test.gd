@@ -73,6 +73,17 @@ func _run() -> void:
 	air.update_view(0.1,true)
 	_expect(float(air.sky_material.get_shader_parameter("cloud_cover")) > 0.9, "Rain weather did not reach the shader sky.")
 	_expect(air.sun.light_energy < clear_energy and air.environment.fog_depth_end < clear_distance, "Rain did not soften light and visibility.")
+	# The persisted climate's vacuum flag must reach the shared sky, not only rain.
+	sample.weather = {"atmosphere_present": false, "cloud_cover": 0.0, "precipitation": 0.0}
+	for quality in [0, 1, 2]:
+		air.set_quality(quality)
+		_expect(not air.environment.fog_enabled and not air.environment.volumetric_fog_enabled, "Vacuum retained atmospheric fog after graphics change.")
+		_expect(is_zero_approx(air.environment.fog_density) and is_zero_approx(air.environment.volumetric_fog_density), "Vacuum retained fog density.")
+		_expect(not air.sky_material.get_shader_parameter("atmosphere_present") and not air.sky_material.get_shader_parameter("clouds_enabled"), "Vacuum retained sky scattering/clouds.")
+		_expect(air.sun.light_energy > 0.0, "Vacuum incorrectly extinguished the sun.")
+	sample.weather = {"atmosphere_present": true, "cloud_cover": 0.5}
+	air.update_view(0.1, true)
+	_expect(air.environment.fog_enabled and air.sky_material.get_shader_parameter("atmosphere_present") and air.sky_material.get_shader_parameter("clouds_enabled"), "Returning to an atmosphere did not restore the sky.")
 	sample.erase("weather")
 	for quality in [2,0,1,2,0]:
 		air.set_quality(quality)
@@ -82,7 +93,7 @@ func _run() -> void:
 		_expect(air.environment.glow_enabled == (quality >= 1 and supported), "Glow quality switch is sticky.")
 	# Actual settings control, persistence and group broadcast while paused.
 	var option: OptionButton = settings._menu_layer.find_child("AtmosphereQuality",true,false)
-	_expect(option != null and option.item_count == 3, "F8 has no usable atmosphere choice.")
+	_expect(option != null and option.item_count == 4, "F8 has no usable atmosphere choice.")
 	settings.open_menu()
 	settings._tabs.current_tab = settings._tabs.get_node("GRAPHICS_TAB").get_index()
 	option.select(2)

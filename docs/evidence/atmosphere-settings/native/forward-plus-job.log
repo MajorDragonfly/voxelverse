@@ -1,0 +1,382 @@
+﻿2026-09-16T07:21:15.8191811Z Current runner version: '2.337.0'
+2026-09-16T07:21:15.8213714Z ##[group]Runner Image Provisioner
+2026-09-16T07:21:15.8214429Z Hosted Compute Agent
+2026-09-16T07:21:15.8214926Z Version: 20260828.587
+2026-09-16T07:21:15.8215511Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-16T07:21:15.8216111Z Build Date: 2026-08-28T16:44:25Z
+2026-09-16T07:21:15.8216735Z Worker ID: {5a740478-1cd6-4479-9306-f100875c0864}
+2026-09-16T07:21:15.8217338Z Azure Region: westus3
+2026-09-16T07:21:15.8217819Z ##[endgroup]
+2026-09-16T07:21:15.8218999Z ##[group]Operating System
+2026-09-16T07:21:15.8219510Z Ubuntu
+2026-09-16T07:21:15.8219983Z 24.04.5
+2026-09-16T07:21:15.8220423Z LTS
+2026-09-16T07:21:15.8220898Z ##[endgroup]
+2026-09-16T07:21:15.8221398Z ##[group]Runner Image
+2026-09-16T07:21:15.8221922Z Image: ubuntu-24.04
+2026-09-16T07:21:15.8222455Z Version: 20260907.300.1
+2026-09-16T07:21:15.8223597Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-16T07:21:15.8224918Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+2026-09-16T07:21:15.8225723Z ##[endgroup]
+2026-09-16T07:21:15.8226751Z ##[group]GITHUB_TOKEN Permissions
+2026-09-16T07:21:15.8228356Z Contents: read
+2026-09-16T07:21:15.8228895Z Metadata: read
+2026-09-16T07:21:15.8229366Z Packages: read
+2026-09-16T07:21:15.8229820Z ##[endgroup]
+2026-09-16T07:21:15.8231633Z Secret source: Actions
+2026-09-16T07:21:15.8232429Z Cache mode: write
+2026-09-16T07:21:15.8233148Z Prepare workflow directory
+2026-09-16T07:21:15.8501139Z Prepare all required actions
+2026-09-16T07:21:15.8539467Z Getting action download info
+2026-09-16T07:21:16.1555058Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-16T07:21:16.6882146Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-09-16T07:21:17.1184064Z Complete job name: graphics (forward_plus)
+2026-09-16T07:21:17.1942281Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-16T07:21:17.1951435Z ##[group]Run actions/checkout@v4
+2026-09-16T07:21:17.1952548Z with:
+2026-09-16T07:21:17.1953439Z   repository: MajorDragonfly/voxelverse
+2026-09-16T07:21:17.1960108Z   token: ***
+2026-09-16T07:21:17.1960821Z   ssh-strict: true
+2026-09-16T07:21:17.1961553Z   ssh-user: git
+2026-09-16T07:21:17.1962293Z   persist-credentials: true
+2026-09-16T07:21:17.1963251Z   clean: true
+2026-09-16T07:21:17.1963999Z   sparse-checkout-cone-mode: true
+2026-09-16T07:21:17.1964881Z   fetch-depth: 1
+2026-09-16T07:21:17.1965611Z   fetch-tags: false
+2026-09-16T07:21:17.1966370Z   show-progress: true
+2026-09-16T07:21:17.1967126Z   lfs: false
+2026-09-16T07:21:17.1967898Z   submodules: false
+2026-09-16T07:21:17.1968658Z   set-safe-directory: true
+2026-09-16T07:21:17.1969510Z   allow-unsafe-pr-checkout: false
+2026-09-16T07:21:17.1970608Z ##[endgroup]
+2026-09-16T07:21:17.2837433Z Syncing repository: MajorDragonfly/voxelverse
+2026-09-16T07:21:17.2840987Z ##[group]Getting Git version info
+2026-09-16T07:21:17.2842632Z Working directory is '/home/runner/work/voxelverse/voxelverse'
+2026-09-16T07:21:17.2854311Z [command]/usr/bin/git version
+2026-09-16T07:21:17.3445623Z git version 2.55.0
+2026-09-16T07:21:17.3460699Z ##[endgroup]
+2026-09-16T07:21:17.3474755Z Temporarily overriding HOME='/home/runner/work/_temp/f8e46ce4-657e-4f5a-9131-51f91c7f8bfb' before making global git config changes
+2026-09-16T07:21:17.3478440Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-16T07:21:17.3481265Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-09-16T07:21:17.3642689Z Deleting the contents of '/home/runner/work/voxelverse/voxelverse'
+2026-09-16T07:21:17.3646614Z ##[group]Initializing the repository
+2026-09-16T07:21:17.3650270Z [command]/usr/bin/git init /home/runner/work/voxelverse/voxelverse
+2026-09-16T07:21:17.3738858Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-16T07:21:17.3740583Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-16T07:21:17.3742126Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-16T07:21:17.3743831Z hint: call:
+2026-09-16T07:21:17.3744512Z hint:
+2026-09-16T07:21:17.3745379Z hint: 	git config --global init.defaultBranch <name>
+2026-09-16T07:21:17.3746388Z hint:
+2026-09-16T07:21:17.3747335Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-16T07:21:17.3748865Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-16T07:21:17.3750077Z hint:
+2026-09-16T07:21:17.3750776Z hint: 	git branch -m <name>
+2026-09-16T07:21:17.3751627Z hint:
+2026-09-16T07:21:17.3752662Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-16T07:21:17.3758317Z Initialized empty Git repository in /home/runner/work/voxelverse/voxelverse/.git/
+2026-09-16T07:21:17.3766304Z [command]/usr/bin/git remote add origin https://github.com/MajorDragonfly/voxelverse
+2026-09-16T07:21:17.3808073Z ##[endgroup]
+2026-09-16T07:21:17.3809490Z ##[group]Disabling automatic garbage collection
+2026-09-16T07:21:17.3810826Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-16T07:21:17.3839626Z ##[endgroup]
+2026-09-16T07:21:17.3840833Z ##[group]Setting up auth
+2026-09-16T07:21:17.3844658Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-16T07:21:17.3875801Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-16T07:21:17.6108336Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-16T07:21:17.6142481Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-16T07:21:17.6341831Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-16T07:21:17.6375809Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-16T07:21:17.6576248Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-16T07:21:18.0184187Z ##[endgroup]
+2026-09-16T07:21:18.0192686Z ##[group]Fetching the repository
+2026-09-16T07:21:18.0195212Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +e003c4972cc519cac878bba2f5aea1c8c7f80d3e:refs/remotes/pull/127/merge
+2026-09-16T07:21:23.0271236Z From https://github.com/MajorDragonfly/voxelverse
+2026-09-16T07:21:23.0272732Z  * [new ref]         e003c4972cc519cac878bba2f5aea1c8c7f80d3e -> pull/127/merge
+2026-09-16T07:21:23.0275164Z ##[endgroup]
+2026-09-16T07:21:23.0275714Z ##[group]Determining the checkout info
+2026-09-16T07:21:23.0277027Z ##[endgroup]
+2026-09-16T07:21:23.0283538Z [command]/usr/bin/git sparse-checkout disable
+2026-09-16T07:21:23.0340024Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-16T07:21:23.0396798Z ##[group]Checking out the ref
+2026-09-16T07:21:23.0400334Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/127/merge
+2026-09-16T07:21:23.4458893Z Note: switching to 'refs/remotes/pull/127/merge'.
+2026-09-16T07:21:23.4459402Z 
+2026-09-16T07:21:23.4459695Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-09-16T07:21:23.4460262Z changes and commit them, and you can discard any commits you make in this
+2026-09-16T07:21:23.4460936Z state without impacting any branches by switching back to a branch.
+2026-09-16T07:21:23.4461719Z 
+2026-09-16T07:21:23.4462008Z If you want to create a new branch to retain commits you create, you may
+2026-09-16T07:21:23.4462539Z do so (now or later) by using -c with the switch command. Example:
+2026-09-16T07:21:23.4462847Z 
+2026-09-16T07:21:23.4463221Z   git switch -c <new-branch-name>
+2026-09-16T07:21:23.4463439Z 
+2026-09-16T07:21:23.4463568Z Or undo this operation with:
+2026-09-16T07:21:23.4463789Z 
+2026-09-16T07:21:23.4463914Z   git switch -
+2026-09-16T07:21:23.4464102Z 
+2026-09-16T07:21:23.4464307Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-09-16T07:21:23.4464572Z 
+2026-09-16T07:21:23.4464873Z HEAD is now at e003c49 Merge a1cc86b4d05e2e6b2eca47ba97d7ba4d976fff91 into d57b1ef385728728b132518a1ea05683888dcae0
+2026-09-16T07:21:23.4482630Z ##[endgroup]
+2026-09-16T07:21:23.4525892Z [command]/usr/bin/git log -1 --format=%H
+2026-09-16T07:21:23.4550172Z e003c4972cc519cac878bba2f5aea1c8c7f80d3e
+2026-09-16T07:21:23.4791450Z Prepare all required actions
+2026-09-16T07:21:23.4791982Z Getting action download info
+2026-09-16T07:21:23.6489127Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-09-16T07:21:24.2162800Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+2026-09-16T07:21:24.9701873Z ##[group]Run ./.github/actions/setup-godot-editor
+2026-09-16T07:21:24.9702148Z ##[endgroup]
+2026-09-16T07:21:24.9749361Z ##[start-action display=Run actions/setup-python@v5;id=engine.__actions_setup-python]
+2026-09-16T07:21:24.9829036Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-16T07:21:24.9830512Z ##[group]Run actions/setup-python@v5
+2026-09-16T07:21:24.9830813Z with:
+2026-09-16T07:21:24.9830985Z   python-version: 3.12
+2026-09-16T07:21:24.9831175Z   check-latest: false
+2026-09-16T07:21:24.9832931Z   token: ***
+2026-09-16T07:21:24.9833230Z   update-environment: true
+2026-09-16T07:21:24.9833436Z   allow-prereleases: false
+2026-09-16T07:21:24.9833637Z   freethreaded: false
+2026-09-16T07:21:24.9833821Z ##[endgroup]
+2026-09-16T07:21:25.0912296Z ##[group]Installed versions
+2026-09-16T07:21:25.2224051Z (node:2038) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-16T07:21:25.2224623Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-16T07:21:25.2226001Z Successfully set up CPython (3.12.14)
+2026-09-16T07:21:25.2226584Z ##[endgroup]
+2026-09-16T07:21:25.2336658Z ##[end-action id=engine.__actions_setup-python;outcome=success;conclusion=success;duration_ms=258]
+2026-09-16T07:21:25.2339060Z ##[start-action display=Run actions/cache@v4;id=engine.__actions_cache]
+2026-09-16T07:21:25.2879804Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-16T07:21:25.2880793Z ##[group]Run actions/cache@v4
+2026-09-16T07:21:25.2881002Z with:
+2026-09-16T07:21:25.2881224Z   path: /home/runner/work/_temp/godot-editor-toolchain/*.zip
+2026-09-16T07:21:25.2881663Z   key: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-09-16T07:21:25.2882072Z   enableCrossOsArchive: false
+2026-09-16T07:21:25.2882278Z   fail-on-cache-miss: false
+2026-09-16T07:21:25.2882472Z   lookup-only: false
+2026-09-16T07:21:25.2882646Z   save-always: false
+2026-09-16T07:21:25.2882804Z env:
+2026-09-16T07:21:25.2883237Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:25.2883802Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-16T07:21:25.2884140Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:25.2884433Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:25.2884730Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:25.2885019Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-16T07:21:25.2885271Z ##[endgroup]
+2026-09-16T07:21:25.3774283Z (node:2059) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-16T07:21:25.3775049Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-16T07:21:25.5807675Z Cache hit for: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-09-16T07:21:25.5856924Z (node:2059) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-16T07:21:26.7872902Z Received 41943040 of 71777733 (58.4%), 40.0 MBs/sec
+2026-09-16T07:21:27.0364788Z Received 71777733 of 71777733 (100.0%), 54.8 MBs/sec
+2026-09-16T07:21:27.0366796Z Cache Size: ~68 MB (71777733 B)
+2026-09-16T07:21:27.0425429Z [command]/usr/bin/tar -xf /home/runner/work/_temp/9a14e748-fa53-4710-a55b-f583fac42463/cache.tzst -P -C /home/runner/work/voxelverse/voxelverse --use-compress-program unzstd
+2026-09-16T07:21:27.2213835Z Cache restored successfully
+2026-09-16T07:21:27.2309228Z Cache restored from key: godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1
+2026-09-16T07:21:27.2378366Z ##[end-action id=engine.__actions_cache;outcome=success;conclusion=success;duration_ms=2003]
+2026-09-16T07:21:27.2380643Z ##[start-action display=Verify and install editor only;id=engine.install]
+2026-09-16T07:21:27.2408042Z ##[group]Run python tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only
+2026-09-16T07:21:27.2408804Z [36;1mpython tools/install_godot.py --directory "$RUNNER_TEMP/godot-editor-toolchain" --platform linux --editor-only[0m
+2026-09-16T07:21:27.2409246Z [36;1mpython - <<'PY'[0m
+2026-09-16T07:21:27.2409458Z [36;1mimport json, os[0m
+2026-09-16T07:21:27.2409683Z [36;1mfrom pathlib import Path[0m
+2026-09-16T07:21:27.2410123Z [36;1mmetadata = json.loads((Path(os.environ['RUNNER_TEMP']) / 'godot-editor-toolchain/editor-toolchain.json').read_text())[0m
+2026-09-16T07:21:27.2410651Z [36;1mwith open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:[0m
+2026-09-16T07:21:27.2411017Z [36;1m    output.write('godot=' + metadata['editor'] + '\n')[0m
+2026-09-16T07:21:27.2411269Z [36;1mPY[0m
+2026-09-16T07:21:27.2450781Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-16T07:21:27.2451084Z env:
+2026-09-16T07:21:27.2451328Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:27.2451696Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-16T07:21:27.2452035Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:27.2452348Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:27.2452648Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:27.2453202Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-16T07:21:27.2453465Z ##[endgroup]
+2026-09-16T07:21:28.5546096Z {"version": "4.6.3", "editor": "/home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64", "templates": null}
+2026-09-16T07:21:28.6455799Z ##[end-action id=engine.install;outcome=success;conclusion=success;duration_ms=1407]
+2026-09-16T07:21:28.6503433Z ##[group]Run sudo apt-get update -qq
+2026-09-16T07:21:28.6503728Z [36;1msudo apt-get update -qq[0m
+2026-09-16T07:21:28.6504113Z [36;1msudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers[0m
+2026-09-16T07:21:28.6537997Z shell: /usr/bin/bash -e {0}
+2026-09-16T07:21:28.6538219Z env:
+2026-09-16T07:21:28.6538461Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:28.6538827Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-16T07:21:28.6539182Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:28.6539498Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:28.6539794Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:28.6540099Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-16T07:21:28.6540361Z ##[endgroup]
+2026-09-16T07:21:37.6530964Z Reading package lists...
+2026-09-16T07:21:37.8568431Z Building dependency tree...
+2026-09-16T07:21:37.8575024Z Reading state information...
+2026-09-16T07:21:38.0348252Z xvfb is already the newest version (2:21.1.12-1ubuntu1.6).
+2026-09-16T07:21:38.0348852Z xauth is already the newest version (1:1.1.2-1build1).
+2026-09-16T07:21:38.0349346Z xauth set to manually installed.
+2026-09-16T07:21:38.0349880Z libgl1-mesa-dri is already the newest version (25.2.8-0ubuntu0.24.04.2).
+2026-09-16T07:21:38.0350455Z libgl1-mesa-dri set to manually installed.
+2026-09-16T07:21:38.0350902Z The following NEW packages will be installed:
+2026-09-16T07:21:38.0351315Z   mesa-vulkan-drivers
+2026-09-16T07:21:38.0499774Z 0 upgraded, 1 newly installed, 0 to remove and 64 not upgraded.
+2026-09-16T07:21:38.0500294Z Need to get 17.5 MB of archives.
+2026-09-16T07:21:38.0500735Z After this operation, 98.5 MB of additional disk space will be used.
+2026-09-16T07:21:38.0501397Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-09-16T07:21:38.1680074Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 mesa-vulkan-drivers amd64 25.2.8-0ubuntu0.24.04.2 [17.5 MB]
+2026-09-16T07:21:39.3098743Z Fetched 17.5 MB in 1s (22.1 MB/s)
+2026-09-16T07:21:39.6245784Z Selecting previously unselected package mesa-vulkan-drivers:amd64.
+2026-09-16T07:21:39.9737759Z (Reading database ... 
+2026-09-16T07:21:39.9738521Z (Reading database ... 5%
+2026-09-16T07:21:39.9738938Z (Reading database ... 10%
+2026-09-16T07:21:39.9739252Z (Reading database ... 15%
+2026-09-16T07:21:39.9739589Z (Reading database ... 20%
+2026-09-16T07:21:39.9739894Z (Reading database ... 25%
+2026-09-16T07:21:39.9740209Z (Reading database ... 30%
+2026-09-16T07:21:39.9740414Z (Reading database ... 35%
+2026-09-16T07:21:39.9740607Z (Reading database ... 40%
+2026-09-16T07:21:39.9740788Z (Reading database ... 45%
+2026-09-16T07:21:39.9740982Z (Reading database ... 50%
+2026-09-16T07:21:39.9793393Z (Reading database ... 55%
+2026-09-16T07:21:40.9348103Z (Reading database ... 60%
+2026-09-16T07:21:41.9889728Z (Reading database ... 65%
+2026-09-16T07:21:42.3331375Z (Reading database ... 70%
+2026-09-16T07:21:42.9089243Z (Reading database ... 75%
+2026-09-16T07:21:43.4158690Z (Reading database ... 80%
+2026-09-16T07:21:43.7444575Z (Reading database ... 85%
+2026-09-16T07:21:43.9222535Z (Reading database ... 90%
+2026-09-16T07:21:44.2859642Z (Reading database ... 95%
+2026-09-16T07:21:44.2859941Z (Reading database ... 100%
+2026-09-16T07:21:44.2860250Z (Reading database ... 201818 files and directories currently installed.)
+2026-09-16T07:21:44.2903301Z Preparing to unpack .../mesa-vulkan-drivers_25.2.8-0ubuntu0.24.04.2_amd64.deb ...
+2026-09-16T07:21:44.3036598Z Unpacking mesa-vulkan-drivers:amd64 (25.2.8-0ubuntu0.24.04.2) ...
+2026-09-16T07:21:44.9836501Z Setting up mesa-vulkan-drivers:amd64 (25.2.8-0ubuntu0.24.04.2) ...
+2026-09-16T07:21:44.9876155Z Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
+2026-09-16T07:21:47.9831327Z 
+2026-09-16T07:21:47.9831796Z Running kernel seems to be up-to-date.
+2026-09-16T07:21:47.9832029Z 
+2026-09-16T07:21:47.9832482Z No services need to be restarted.
+2026-09-16T07:21:47.9832638Z 
+2026-09-16T07:21:47.9832723Z No containers need to be restarted.
+2026-09-16T07:21:47.9832872Z 
+2026-09-16T07:21:47.9833160Z No user sessions are running outdated binaries.
+2026-09-16T07:21:47.9833505Z 
+2026-09-16T07:21:47.9833671Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-09-16T07:21:48.9443722Z ##[group]Run "$GODOT_BINARY" --headless --path . --import > /tmp/graphics-import.log 2>&1
+2026-09-16T07:21:48.9444267Z [36;1m"$GODOT_BINARY" --headless --path . --import > /tmp/graphics-import.log 2>&1[0m
+2026-09-16T07:21:48.9444956Z [36;1mxvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_graphics_settings.py --godot "$GODOT_BINARY" --renderer "forward_plus" --output /tmp/graphics-settings-review[0m
+2026-09-16T07:21:48.9478514Z shell: /usr/bin/bash -e {0}
+2026-09-16T07:21:48.9478739Z env:
+2026-09-16T07:21:48.9478967Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:48.9479321Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-16T07:21:48.9479669Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:48.9479974Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:48.9480295Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:21:48.9480641Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-16T07:21:48.9480915Z   LIBGL_ALWAYS_SOFTWARE: 1
+2026-09-16T07:21:48.9481269Z   GODOT_BINARY: /home/runner/work/_temp/godot-editor-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64
+2026-09-16T07:21:48.9481646Z ##[endgroup]
+2026-09-16T07:24:37.5309264Z {
+2026-09-16T07:24:37.5309690Z   "commit": "e003c4972cc519cac878bba2f5aea1c8c7f80d3e",
+2026-09-16T07:24:37.5310107Z   "tree": "a80534483af3fe55f9b04331eb6d461579a33879",
+2026-09-16T07:24:37.5310498Z   "dirty": false,
+2026-09-16T07:24:37.5310760Z   "passed": true,
+2026-09-16T07:24:37.5311012Z   "renderer": "forward_plus",
+2026-09-16T07:24:37.5311308Z   "command": [
+2026-09-16T07:24:37.5311740Z     "/tmp/voxelverse-validation-editor-478x9b7k/Godot_v4.6.3-stable_linux.x86_64",
+2026-09-16T07:24:37.5312233Z     "--path",
+2026-09-16T07:24:37.5312517Z     "/home/runner/work/voxelverse/voxelverse",
+2026-09-16T07:24:37.5312897Z     "--rendering-method",
+2026-09-16T07:24:37.5313586Z     "forward_plus",
+2026-09-16T07:24:37.5313852Z     "--audio-driver",
+2026-09-16T07:24:37.5314106Z     "Dummy",
+2026-09-16T07:24:37.5314324Z     "--script",
+2026-09-16T07:24:37.5314611Z     "res://tests/graphics_settings_test.gd",
+2026-09-16T07:24:37.5314937Z     "--",
+2026-09-16T07:24:37.5315170Z     "--graphics-capture",
+2026-09-16T07:24:37.5315462Z     "/tmp/graphics-settings-review"
+2026-09-16T07:24:37.5315759Z   ],
+2026-09-16T07:24:37.5315981Z   "source_unchanged": true,
+2026-09-16T07:24:37.5316253Z   "images": [
+2026-09-16T07:24:37.5316492Z     "custom-world",
+2026-09-16T07:24:37.5316664Z     "preset-world",
+2026-09-16T07:24:37.5316824Z     "underwater",
+2026-09-16T07:24:37.5317000Z     "settings-800x600-de-top",
+2026-09-16T07:24:37.5317209Z     "settings-800x600-de-bottom",
+2026-09-16T07:24:37.5317410Z     "settings-800x600-en-top",
+2026-09-16T07:24:37.5317604Z     "settings-800x600-en-bottom",
+2026-09-16T07:24:37.5317808Z     "settings-1280x720-de-top",
+2026-09-16T07:24:37.5318012Z     "settings-1280x720-de-bottom",
+2026-09-16T07:24:37.5318219Z     "settings-1280x720-en-top",
+2026-09-16T07:24:37.5318410Z     "settings-1280x720-en-bottom",
+2026-09-16T07:24:37.5318744Z     "settings-1920x1080-de-top",
+2026-09-16T07:24:37.5318993Z     "settings-1920x1080-de-bottom",
+2026-09-16T07:24:37.5319211Z     "settings-1920x1080-en-top",
+2026-09-16T07:24:37.5319405Z     "settings-1920x1080-en-bottom"
+2026-09-16T07:24:37.5319589Z   ],
+2026-09-16T07:24:37.5320168Z   "scope": "Real settings input, persistence/restart, two languages, three sizes at 130% UI scale; rendered atmosphere fixture and water. Campaign/travel separately headless; no target-PC/FPS acceptance."
+2026-09-16T07:24:37.5320789Z }
+2026-09-16T07:24:37.5439210Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-16T07:24:37.5440360Z ##[group]Run actions/upload-artifact@v4
+2026-09-16T07:24:37.5440580Z with:
+2026-09-16T07:24:37.5440764Z   name: graphics-settings-forward_plus
+2026-09-16T07:24:37.5441061Z   path: /tmp/graphics-settings-review
+/tmp/graphics-import.log
+
+2026-09-16T07:24:37.5441341Z   retention-days: 14
+2026-09-16T07:24:37.5441526Z   if-no-files-found: warn
+2026-09-16T07:24:37.5441716Z   compression-level: 6
+2026-09-16T07:24:37.5441909Z   overwrite: false
+2026-09-16T07:24:37.5442091Z   include-hidden-files: false
+2026-09-16T07:24:37.5442282Z env:
+2026-09-16T07:24:37.5442483Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:24:37.5442861Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-16T07:24:37.5443378Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:24:37.5443710Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:24:37.5444022Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-16T07:24:37.5444322Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-16T07:24:37.5444580Z ##[endgroup]
+2026-09-16T07:24:37.6778814Z (node:2714) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-16T07:24:37.6779397Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-16T07:24:37.6863998Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-09-16T07:24:37.6865788Z The least common ancestor is /tmp. This will be the root directory of the artifact
+2026-09-16T07:24:37.6866438Z With the provided path, there will be 18 files uploaded
+2026-09-16T07:24:37.6870780Z Artifact name is valid!
+2026-09-16T07:24:37.6871425Z Root directory input is valid!
+2026-09-16T07:24:38.0185991Z Beginning upload of artifact content to blob storage
+2026-09-16T07:24:38.1041736Z (node:2714) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-16T07:24:38.6978665Z Uploaded bytes 2048227
+2026-09-16T07:24:38.7617054Z Finished uploading artifact content to blob storage!
+2026-09-16T07:24:38.7617835Z SHA256 digest of uploaded artifact zip is 5339bae7b60b4fba09904822204adadb04e987f5900e72e8a2783b970db0a576
+2026-09-16T07:24:38.7618542Z Finalizing artifact upload
+2026-09-16T07:24:39.0143087Z Artifact graphics-settings-forward_plus.zip successfully finalized. Artifact ID 10434674457
+2026-09-16T07:24:39.0145019Z Artifact graphics-settings-forward_plus has been successfully uploaded! Final size is 2048227 bytes. Artifact ID is 10434674457
+2026-09-16T07:24:39.0157736Z Artifact download URL: https://github.com/MajorDragonfly/voxelverse/actions/runs/35068063587/artifacts/10434674457
+2026-09-16T07:24:39.0404581Z Post job cleanup.
+2026-09-16T07:24:39.0415054Z ##[start-action display=Run actions/cache@v4;id=__af1a1c98-49b7-4528-b9f3-b9f4e1e92f85.__actions_cache]
+2026-09-16T07:24:39.0997192Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-16T07:24:39.0998168Z Post job cleanup.
+2026-09-16T07:24:39.1930783Z Cache hit occurred on the primary key godot-editor-Linux-X64-5885d59645dadd285929dd7d5f6cfe84ff5d5f764de43c4d9f092dad44c58ac1, not saving cache.
+2026-09-16T07:24:39.1931875Z (node:2737) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-16T07:24:39.1932412Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-16T07:24:39.1983208Z ##[end-action id=__af1a1c98-49b7-4528-b9f3-b9f4e1e92f85.__actions_cache;outcome=success;conclusion=success;duration_ms=156]
+2026-09-16T07:24:39.1985943Z ##[start-action display=Run actions/setup-python@v5;id=__af1a1c98-49b7-4528-b9f3-b9f4e1e92f85.__actions_setup-python]
+2026-09-16T07:24:39.2075725Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-16T07:24:39.2076639Z Post job cleanup.
+2026-09-16T07:24:39.3063947Z (node:2745) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-16T07:24:39.3064592Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-16T07:24:39.3149605Z ##[end-action id=__af1a1c98-49b7-4528-b9f3-b9f4e1e92f85.__actions_setup-python;outcome=success;conclusion=success;duration_ms=116]
+2026-09-16T07:24:39.3234561Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-16T07:24:39.3235506Z Post job cleanup.
+2026-09-16T07:24:39.3985853Z [command]/usr/bin/git version
+2026-09-16T07:24:39.4023223Z git version 2.55.0
+2026-09-16T07:24:39.4054912Z Temporarily overriding HOME='/home/runner/work/_temp/e240b991-fa62-4d34-aab2-94fc47509623' before making global git config changes
+2026-09-16T07:24:39.4056032Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-16T07:24:39.4060605Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/voxelverse/voxelverse
+2026-09-16T07:24:39.4097724Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-16T07:24:39.4132197Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-16T07:24:39.4354143Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-16T07:24:39.6882175Z http.https://github.com/.extraheader
+2026-09-16T07:24:39.6892850Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-16T07:24:39.6927353Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-16T07:24:39.7134881Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-16T07:24:39.7167611Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-16T07:24:39.7490054Z Cleaning up orphan processes
+2026-09-16T07:24:39.7741707Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@v4, actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

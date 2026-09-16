@@ -69,15 +69,19 @@ static func known_places(player: Node3D, tree: SceneTree, snapshot: Dictionary) 
 
 static func visible_places(record: Dictionary, tree: SceneTree) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
-	var progression := tree.root.get_node("ProgressionService")
 	for place: Dictionary in record.get("places", {}).values():
-		if not place.own:
-			var entry: Dictionary = progression.get_saved_creature_encounter(place.object_id)
-			if entry.get("body_id") != record.body_id or entry.get("relation") != "ally" or entry.get("dead", true): continue
+		if not place_is_visible(place, record.body_id, tree): continue
 		result.append(place)
 	result.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		return bool(a.own) if a.own != b.own else str(a.name).naturalnocasecmp_to(str(b.name)) < 0)
 	return result
+
+static func place_is_visible(place: Dictionary, body_id: String, tree: SceneTree) -> bool:
+	if place.get("address", {}).get("body_id") != body_id: return false
+	if place.own: return true
+	var progression := tree.root.get_node("ProgressionService")
+	var entry: Dictionary = progression.get_saved_creature_encounter(place.object_id)
+	return entry.get("body_id") == body_id and entry.get("relation") == "ally" and not entry.get("dead", true)
 
 static func visible_place_page(atlas: RefCounted, tree: SceneTree, offset: int = 0) -> Dictionary:
 	var page: Dictionary = atlas.place_page(offset)

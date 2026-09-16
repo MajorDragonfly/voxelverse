@@ -141,10 +141,53 @@ func _campaign_contract() -> void:
 		for key in ["precipitation", "cloud_cover", "wind_mps", "snow_intensity"]:
 			_expect(absf(float(restored[key]) - float(expected[key])) < 0.003, "Save/load changed local weather: " + key)
 		_expect(get_nodes_in_group(&"campaign_weather").size() == 1, "Reload duplicated weather owners.")
+		await _travel_climates()
 		flow.return_to_title()
 		await scene_changed
 	else: _expect(false, "Weather reload failed.")
 	_expect(get_nodes_in_group(&"campaign_weather").is_empty(), "Weather leaked into main menu.")
+
+func _travel_climates() -> void:
+	var state: Node = root.get_node("GameState")
+	var saves: Node = root.get_node("SaveGameService")
+	var flow: Node = root.get_node("SessionFlow")
+	var climate = preload("res://world/weather/planet_climate.gd")
+	var home: String = state.active_body_id
+	var policy: Dictionary = state.campaign.data.weather_policy.duplicate(true)
+	var home_reference: Dictionary = state.get_current_body_record().weather_climate.duplicate(true)
+	var away: Dictionary = state.campaign.ensure_body(23757, 15838)
+	# Fixed synthetic destination exercises the live vacuum path on every run,
+	# independent of the random campaign identity used for normal selection.
+	state.campaign.body_record(away.id).weather_climate = climate.make_reference(away.id, "airless")
+	var path: String = saves.save_path
+	saves.save_path = "user://missing-weather-parent/blocked.json"
+	_expect(not await flow.travel_to_planet(15838, 1, 23757, away.id), "Failed climate departure reported success.")
+	_expect(state.active_body_id == home and state.campaign.data.weather_policy == policy, "Failed departure changed origin.")
+	saves.save_path = path
+	_expect(await flow.travel_to_planet(15838, 1, 23757, away.id), "Climate destination request failed: " + saves.last_error)
+	await _wait_for_arrival()
+	if flow.loading or current_scene.scene_file_path != Surface.SCENE: return
+	for i in range(3): await process_frame
+	var weather: Node = current_scene.get_node("Weather")
+	var snap: Dictionary = weather.snapshot()
+	_expect(snap.get("climate_id") == "airless" and not snap.get("atmosphere_present", true), "Live weather ignored destination's stored climate.")
+	_expect(snap.get("cloud_cover", -1) == 0 and snap.get("precipitation", -1) == 0 and snap.get("wind_mps", -1) == 0, "Live vacuum weather was nonzero.")
+	_expect(current_scene.terrain.surface.body.atmosphere == "none", "Descriptor disagrees with weather profile.")
+	for forecast in weather.forecast(): _expect(forecast.precipitation == 0 and forecast.wind_mps == 0, "Live forecast ignored vacuum.")
+	_expect(state.campaign.data.weather_policy == policy and get_nodes_in_group(&"campaign_weather").size() == 1, "Travel changed home or duplicated weather owner.")
+	_expect(await flow.travel_to_planet(15838, 0, 15838, home), "Climate home return failed.")
+	await _wait_for_arrival()
+	if flow.loading or current_scene.scene_file_path != Surface.SCENE: return
+	for i in range(3): await process_frame
+	snap = current_scene.get_node("Weather").snapshot()
+	_expect(snap.get("climate_id") == "earth_temperate" and snap.get("home_protected", false), "A-B-A did not restore protected home weather.")
+	_expect(state.get_current_body_record().weather_climate == home_reference and state.campaign.data.weather_policy == policy, "A-B-A mutated stored origin/profile.")
+	_expect(saves.save_now(), "Climate return checkpoint failed.")
+
+func _wait_for_arrival() -> void:
+	var started: int = Time.get_ticks_msec()
+	while root.get_node("SessionFlow").loading and Time.get_ticks_msec() - started < 50000: await process_frame
+	_expect(not root.get_node("SessionFlow").loading, "Climate travel timed out.")
 
 func _open(path: String) -> void:
 	var flow: Node = root.get_node("SessionFlow")

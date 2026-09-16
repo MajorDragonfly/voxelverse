@@ -246,6 +246,8 @@ func record_external_damage(attacker: Node) -> void:
 
 
 func store_carcass() -> bool:
+	if get_node("/root/GameState").current_phase == 1:
+		return get_node("/root/ProgressionService").store_fauna_health(creature.get_campaign_identity()["object_id"], creature.get_health_ratio(), creature.is_dead, creature.carcass_food_remaining, true)
 	var data: Dictionary = entry()
 	if data.is_empty(): return false
 	data["carcass_food"] = creature.carcass_food_remaining

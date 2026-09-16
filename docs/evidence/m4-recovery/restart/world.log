@@ -1,0 +1,17 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+RECOVERY_STAGE: start 6 []
+RECOVERY_STAGE: opened
+RECOVERY_STAGE: home established
+RECOVERY_STAGE: returned 1 failures []
+RECOVERY_STAGE: fresh process starting
+RECOVERY_STAGE: fresh process exited 0 output ["Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nRECOVERY_STAGE: start 21 [\"--recovery-restart\"]\nRECOVERY_FRESH_PROCESS_PASSED\nPLAYER_RECOVERY_WORLD_PASSED: canonical home, pause, collision, failed save and fresh process\n"]
+PLAYER_RECOVERY_WORLD_PASSED: canonical home, pause, collision, failed save and fresh process
+WARNING: Could not commit save: user://blocked_recovery_save (Failed)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1137)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:174)
+         [2] save_now (res://autoload/save_game_service.gd:117)
+         [3] _run (res://core/diagnostics/player_recovery_probe.gd:60)
+         [4] _until (res://core/diagnostics/spherical_creature_probe.gd:148)

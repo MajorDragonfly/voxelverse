@@ -1,6 +1,7 @@
 extends RefCounted
 ## Versioned body geometry. Persistent positions use Cube addresses; scene
 ## Vector3 values are only local, after subtracting the body's floating origin.
+const Climate = preload("res://world/weather/planet_climate.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Profile = preload("res://world/space/celestial_body_profile.gd")
 const Factory = preload("res://world/surface/planet_surface_factory.gd")
@@ -18,6 +19,9 @@ static func descriptor(body: Dictionary) -> Dictionary:
 	var result: Dictionary = Profile.create(body.id, "planet", int(body.seed), float(context.radius))
 	result.merge({"surface_generation": context.generation, "terrain_revision": context.terrain_revision,
 		"gravity": context.gravity, "adaptive": true, "inhabited": true}, true)
+	var weather: Dictionary = Climate.profile_for(body)
+	if not weather.is_empty(): result.atmosphere = weather.atmosphere
+	if body.has(Climate.FIELD): result[Climate.FIELD] = body[Climate.FIELD].duplicate(true)
 	return result
 
 static func create(body: Dictionary, radius: float = DEFAULT_RADIUS) -> Dictionary:

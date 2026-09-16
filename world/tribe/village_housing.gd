@@ -150,11 +150,12 @@ static func validate(data: Dictionary) -> String:
 			var cargo: int = 0
 			for member: Dictionary in data["members"]:
 				cargo += 1 if member["construction_id"] == project["id"] and member["cargo"] == kind else 0
-			if int(project["materials"][kind]) + int(project["delivered_materials"][kind]) + cargo != int(costs[kind]):
+			var refunded: int = int(project.get("control", {}).get("refunded", {}).get(kind, 0))
+			if int(project["materials"][kind]) + int(project["delivered_materials"][kind]) + cargo + refunded != int(costs[kind]):
 				return "Baumaterial fehlt oder wurde vervielfacht."
 			var budget: int = (48 if kind in ["wood", "stone"] else 0) + int(data["economy"]["produced"][kind])
-			if Economy.remaining(data, kind) + Economy.reserve(data, kind) + int(costs[kind]) > budget:
+			if Economy.remaining(data, kind) + Economy.goods(data, kind) + int(costs[kind]) - refunded > budget + Economy.Freight.net(data, kind):
 				return "Reserviertes Baumaterial wurde zusätzlich ins Lager gebucht."
-		if float(project["progress"]) > 0 and not supplied(project):
+		if float(project["progress"]) > 0 and project.get("control", {}).get("state") != "recovering" and not supplied(project):
 			return "Baufortschritt ohne angelieferte Materialien."
 	return ""

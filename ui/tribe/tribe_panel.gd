@@ -43,6 +43,7 @@ var _tabs: TabContainer
 var _orders_page: VBoxContainer
 var _work_page: VBoxContainer
 var _workplaces: VBoxContainer
+var _construction: VBoxContainer
 var _hud_scroll: ScrollContainer:
 	get: return _scroll
 var _orders_scroll: ScrollContainer:
@@ -118,6 +119,9 @@ func _build() -> void:
 	_orders_page = VBoxContainer.new()
 	_orders_page.name = "Aufträge"
 	_tabs.add_child(_orders_page)
+	_construction = preload("res://ui/tribe/construction_panel.gd").new()
+	_construction.controller = controller
+	_orders_page.add_child(_construction)
 	_work_page = VBoxContainer.new()
 	_work_page.name = "Arbeitsplätze & Berufe"
 	_tabs.add_child(_work_page)
@@ -318,6 +322,7 @@ func refresh() -> void:
 	var data: Dictionary = controller.village()
 	if data.is_empty():
 		return
+	_construction.refresh(data)
 	_goal.visible = _tabs.current_tab != 2
 	_supply.visible = _tabs.current_tab != 2
 	var stock: Dictionary = data["stock"]

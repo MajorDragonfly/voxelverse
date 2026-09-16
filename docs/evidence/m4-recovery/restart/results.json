@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "code": 0,
+  "command": [
+    "/workspace/scratch/2c2866d70564/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/176ae31ef22c/voxelverse",
+    "--script",
+    "res://tests/player_recovery_world_test.gd"
+  ],
+  "seconds": 39.46878009299871,
+  "source_commit": "cd3b3e89ad76a19c8825facb71a043638a15aedb",
+  "source_tree": "8ae36bac17ae4cc565e941fd033176f916cbc3db",
+  "log_sha256": "8bf5af13237fed83ca1c7eb5326e767c54b85982296b9dd37eced90ebadb7ac5"
+}
