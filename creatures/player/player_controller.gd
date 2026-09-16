@@ -50,6 +50,7 @@ var current_hunger: float = 100.0
 var current_thirst: float = 100.0
 var is_dead: bool = false
 var is_swimming: bool = false
+var recovery: Node
 
 var _starvation_damage_timer: float = 0.0
 var _dehydration_damage_timer: float = 0.0
@@ -89,9 +90,15 @@ func _ready() -> void:
 	var behavior := preload("res://creatures/behavior/player_behavior_controller.gd").new()
 	behavior.name = "BehaviorController"
 	add_child(behavior)
+	recovery = preload("res://creatures/player/player_recovery.gd").new()
+	recovery.name = "Recovery"
+	add_child(recovery)
 
 
 func _process(delta: float) -> void:
+	var recovering: bool = is_dead
+	recovery.advance(delta)
+	if recovering: return
 	_bite_cooldown_timer = maxf(_bite_cooldown_timer - delta, 0.0)
 	if not is_dead:
 		_update_survival(delta)
@@ -99,6 +106,7 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_dead: return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var previous_rotation: Vector3 = camera_pivot.rotation
 		var settings := get_node_or_null("/root/DisplaySettings")
@@ -124,7 +132,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	Space.orient(self)
 	if is_dead:
-		_process_dead_movement(delta)
+		velocity = Vector3.ZERO
 		return
 	var input_vector := Input.get_vector(
 		"move_left",
@@ -203,11 +211,6 @@ func _attempt_step_up(delta: float) -> bool:
 	return Space.step(self, velocity.slide(up_direction) * delta, maximum_step_height, step_floor_probe)
 
 
-func _process_dead_movement(delta: float) -> void:
-	velocity = up_direction * (0.0 if is_on_floor() else velocity.dot(up_direction) - fall_acceleration * delta)
-	move_and_slide()
-
-
 func _update_survival(delta: float) -> void:
 	current_hunger = maxf(current_hunger - hunger_loss_per_second * delta, 0.0)
 	current_thirst = maxf(current_thirst - thirst_loss_per_second * delta, 0.0)
@@ -275,6 +278,7 @@ func _try_bite_action() -> void:
 		return
 	_bite_cooldown_timer = bite_cooldown
 	var damage: float = clampf(attack_power * bite_damage_scale, 2.0, 80.0)
+	recovery.end_protection()
 	collider.call("receive_creature_attack", damage, self)
 	creature_attacked.emit(collider, damage)
 
@@ -297,7 +301,7 @@ func _try_drink_water(point: Vector3 = Vector3.INF) -> void:
 
 
 func can_perform_action(action: StringName) -> bool:
-	return GameState.has_ability(action)
+	return not is_dead and GameState.has_ability(action)
 
 
 func get_behavior_multiplier(effect_id: String) -> float:
@@ -315,8 +319,10 @@ func receive_damage(damage: float) -> void:
 	var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
 	if tribe != null and tribe.is_active():
 		return
-	if is_dead or damage <= 0.0:
+	if is_dead or damage <= 0.0 or get_tree().paused or recovery.protected():
 		return
+	var flow := get_node_or_null("/root/SessionFlow")
+	if flow != null and flow.loading: return
 	var mitigation: float = 1.0 + maxf(defense_rating, 0.0) * 0.12
 	var effective_damage: float = maxf(damage / mitigation, damage * 0.25)
 	current_health = maxf(current_health - effective_damage, 0.0)
@@ -411,6 +417,12 @@ func export_runtime_state() -> Dictionary:
 
 
 func import_runtime_state(data: Dictionary) -> void:
+	recovery.reset()
+	_starvation_damage_timer = 0.0
+	_dehydration_damage_timer = 0.0
+	_bite_cooldown_timer = 0.0
+	is_swimming = false
+	_message_label.hide()
 	var position_value: Variant = data.get("position", [])
 	if position_value is Array and position_value.size() >= 3:
 		global_position = Vector3(
@@ -432,6 +444,7 @@ func import_runtime_state(data: Dictionary) -> void:
 	is_dead = false
 	get_node("BehaviorController").import_state(data.get("behavior_runtime", {}))
 	_update_hud()
+	if current_health <= 0.0: _die()
 
 
 func _die() -> void:
@@ -441,18 +454,12 @@ func _die() -> void:
 	current_health = 0.0
 	velocity = Vector3.ZERO
 	_update_hud()
-	show_gameplay_message("You died.", respawn_delay)
+	_message_label.hide()
+	recovery.begin()
 	died.emit()
-	await get_tree().create_timer(respawn_delay).timeout
-	_respawn_at_nest()
 
 
-func _respawn_at_nest() -> void:
-	var nest := get_tree().get_first_node_in_group(&"player_nest")
-	if nest == null or not nest.has_method("get_respawn_position"):
-		push_error("Respawn failed: player nest is unavailable.")
-		return
-	global_position = nest.call("get_respawn_position")
+func _finish_recovery() -> void:
 	velocity = Vector3.ZERO
 	current_health = maximum_health
 	current_hunger = maximum_hunger
@@ -460,12 +467,14 @@ func _respawn_at_nest() -> void:
 	_starvation_damage_timer = 0.0
 	_dehydration_damage_timer = 0.0
 	is_dead = false
+	is_swimming = false
+	floor_snap_length = maximum_step_height + 0.12
+	_bite_cooldown_timer = 0.0
 	_update_hud()
-	show_gameplay_message("Respawned at the nest.")
 	respawned.emit()
 	var save_service := get_node_or_null("/root/SaveGameService")
-	if save_service != null and save_service.has_method("save_now"):
-		save_service.call_deferred("save_now")
+	if save_service != null and save_service.has_method("schedule_autosave"):
+		save_service.schedule_autosave(0.1)
 
 
 func _initialize_hud() -> void:

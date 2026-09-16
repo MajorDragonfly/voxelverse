@@ -29,7 +29,9 @@
       "tests": [
         "spherical_creature_test",
         "spherical_gameplay_test",
-        "spherical_egg_production_test"
+        "spherical_egg_production_test",
+        "player_recovery_test",
+        "player_recovery_world_test"
       ]
     },
     {

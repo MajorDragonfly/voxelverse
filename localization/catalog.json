@@ -7021,6 +7021,46 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "RECOVERY_TITLE",
+      "de": "Deine Kreatur ist gestorben",
+      "en": "Your creature has died"
+    },
+    {
+      "key": "RECOVERY_COUNTDOWN",
+      "de": "Rückkehr zur Heimat in {seconds} Sek.",
+      "en": "Returning home in {seconds} sec."
+    },
+    {
+      "key": "RECOVERY_PREPARING",
+      "de": "Deine Heimat wird vorbereitet. Du kehrst zurück, sobald ein sicherer Platz frei ist.",
+      "en": "Preparing your home. You will return as soon as a safe spot is available."
+    },
+    {
+      "key": "RECOVERY_BLOCKED",
+      "de": "Der Rückkehrort ist noch blockiert. Wir suchen weiter. Mit Esc erreichst du das Pausemenü.",
+      "en": "The return location is still blocked. Searching continues. Press Esc for the pause menu."
+    },
+    {
+      "key": "RECOVERY_KEEP",
+      "de": "Entdeckungen, Fähigkeiten und Gefährten bleiben erhalten.",
+      "en": "Your discoveries, abilities and companions are preserved."
+    },
+    {
+      "key": "RECOVERY_SAFE",
+      "de": "Wieder auf den Beinen",
+      "en": "Back on your feet"
+    },
+    {
+      "key": "RECOVERY_PROTECTION",
+      "de": "Leben, Nahrung und Wasser aufgefüllt. Noch {seconds} Sek. Schutz vor Schaden.",
+      "en": "Health, food and water restored. Protected from damage for {seconds} more sec."
+    },
+    {
+      "key": "RECOVERY_ATTACK",
+      "de": "Ein eigener Angriff beendet den Schutz.",
+      "en": "Attacking ends your protection."
     }
   ]
 }

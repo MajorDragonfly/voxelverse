@@ -4211,3 +4211,27 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "RECOVERY_TITLE"
+msgstr "Deine Kreatur ist gestorben"
+
+msgid "RECOVERY_COUNTDOWN"
+msgstr "Rückkehr zur Heimat in {seconds} Sek."
+
+msgid "RECOVERY_PREPARING"
+msgstr "Deine Heimat wird vorbereitet. Du kehrst zurück, sobald ein sicherer Platz frei ist."
+
+msgid "RECOVERY_BLOCKED"
+msgstr "Der Rückkehrort ist noch blockiert. Wir suchen weiter. Mit Esc erreichst du das Pausemenü."
+
+msgid "RECOVERY_KEEP"
+msgstr "Entdeckungen, Fähigkeiten und Gefährten bleiben erhalten."
+
+msgid "RECOVERY_SAFE"
+msgstr "Wieder auf den Beinen"
+
+msgid "RECOVERY_PROTECTION"
+msgstr "Leben, Nahrung und Wasser aufgefüllt. Noch {seconds} Sek. Schutz vor Schaden."
+
+msgid "RECOVERY_ATTACK"
+msgstr "Ein eigener Angriff beendet den Schutz."

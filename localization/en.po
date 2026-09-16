@@ -4211,3 +4211,27 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "RECOVERY_TITLE"
+msgstr "Your creature has died"
+
+msgid "RECOVERY_COUNTDOWN"
+msgstr "Returning home in {seconds} sec."
+
+msgid "RECOVERY_PREPARING"
+msgstr "Preparing your home. You will return as soon as a safe spot is available."
+
+msgid "RECOVERY_BLOCKED"
+msgstr "The return location is still blocked. Searching continues. Press Esc for the pause menu."
+
+msgid "RECOVERY_KEEP"
+msgstr "Your discoveries, abilities and companions are preserved."
+
+msgid "RECOVERY_SAFE"
+msgstr "Back on your feet"
+
+msgid "RECOVERY_PROTECTION"
+msgstr "Health, food and water restored. Protected from damage for {seconds} more sec."
+
+msgid "RECOVERY_ATTACK"
+msgstr "Attacking ends your protection."

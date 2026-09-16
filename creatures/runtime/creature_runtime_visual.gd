@@ -27,6 +27,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if bool(get_parent().get("is_dead")): return
 	if not (event is InputEventKey):
 		return
 	if not event.pressed or event.echo or event.keycode != KEY_F2:
