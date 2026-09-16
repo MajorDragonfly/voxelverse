@@ -50,6 +50,13 @@ art/source/blockbench/
 
 Export GLB files into their runtime pack under `assets/packs/`.
 
+The benchmark GLBs already contain their semantic palette images. Keep
+`gltf/embedded_image_handling=3` in their `.glb.import` files to retain these
+images losslessly inside the imported scenes. Do not commit extracted
+`*_0.png` copies or their import metadata. `tools/check_project_hygiene.py`
+checks this policy alongside orphan metadata and development export boundaries.
+See [Godot's image handling modes](https://docs.godotengine.org/en/4.6/classes/class_gltfstate.html#enum-gltfstate-handlebinaryimagemode).
+
 Example:
 
 ```text
