@@ -4223,3 +4223,12 @@ msgstr "Playing with companion"
 
 msgid "WILDLIFE_PLAY_REST"
 msgstr "Resting with companion"
+
+msgid "WILDLIFE_HUNT"
+msgstr "Hunting prey"
+
+msgid "WILDLIFE_CARRION"
+msgstr "Seeking carrion"
+
+msgid "WILDLIFE_EAT_CARCASS"
+msgstr "Eating carrion"

@@ -552,11 +552,12 @@ func _report_encounter_error() -> void:
 
 ## Phase-1 compatibility for the existing fauna lifecycle. Health only:
 ## never grant behavior rewards or change friendship, species or ownership.
-func store_fauna_health(identity: String, ratio: float, dead: bool, food: float) -> bool:
+func store_fauna_health(identity: String, ratio: float, dead: bool, food: float, immediate: bool = false) -> bool:
 	var state := get_node("/root/GameState")
 	if int(state.current_phase) != 1 or is_behavior_transaction_active() or not is_finite(ratio) or ratio < 0 or ratio > 1 or not is_finite(food) or food < 0 or food > 1000 or dead != (ratio == 0.0):
 		return false
 	var entry: Dictionary = get_saved_creature_encounter(identity)
+	var before: Dictionary = entry.duplicate(true)
 	if entry.is_empty():
 		var population: Node = get_tree().get_first_node_in_group(&"campaign_surface_population")
 		if population != null:
@@ -568,6 +569,14 @@ func store_fauna_health(identity: String, ratio: float, dead: bool, food: float)
 	entry["dead"] = dead
 	entry["carcass_food"] = food
 	if not _put_encounter(entry): return false
+	if immediate:
+		if _encounters.store != null: _encounters.store.pinned[identity] = true
+		_encounter_commit_active = true
+		var saved: bool = get_node("/root/SaveGameService").save_now()
+		if not saved: _restore_encounter_entry(identity, before)
+		_encounter_commit_active = false
+		if _encounters.store != null: _encounters.store.pinned.erase(identity)
+		return saved
 	get_node("/root/SaveGameService").schedule_autosave()
 	return true
 
@@ -608,8 +617,11 @@ func store_creature_encounter(entry: Dictionary, immediate: bool = false, outcom
 	var saved: bool = saves.save_now()
 	if not saved:
 		_restore_encounter_entry(key, before_entry)
-		_behavior.import_state(before_behavior)
-		campaign.import_state(before_campaign)
+		# A plain health/food save has no campaign event to undo. Replacing the
+		# campaign here would detach every live needs reference after an I/O failure.
+		if event != null:
+			_behavior.import_state(before_behavior)
+			campaign.import_state(before_campaign)
 	_encounter_commit_active = false
 	if _encounters.store != null: _encounters.store.pinned.erase(key)
 	if not saved:

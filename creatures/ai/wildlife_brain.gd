@@ -38,6 +38,7 @@ var _progress_time: float = 0.0
 var _progress_position := Vector3.ZERO
 var _label: Label3D
 var _sensed_neighbors: Array[Node3D] = []
+var _sensed_carcasses: Array[Node3D] = []
 
 func _ready() -> void:
 	super._ready()
@@ -148,12 +149,17 @@ func _update_role_direction() -> void:
 func _sense() -> void:
 	var old_intent: String = _intent
 	var neighbors: Array[Node3D] = []
+	_sensed_carcasses.clear()
 	_separation = Vector3.ZERO
 	for node in get_tree().get_nodes_in_group(&"wildlife"):
-		if node == self or not node is Node3D or bool(node.get("is_dead")):
+		if node == self or not node is Node3D:
 			continue
 		var distance: float = global_position.distance_to(node.global_position)
 		if distance > 13.0:
+			continue
+		if bool(node.get("is_dead")):
+			if float(node.get("carcass_food_remaining")) > 0.0: _sensed_carcasses.append(node)
+			if neighbors.size() + _sensed_carcasses.size() >= NEIGHBOR_LIMIT: break
 			continue
 		neighbors.append(node)
 		if distance < 1.8 and distance > 0.01:
@@ -161,7 +167,7 @@ func _sense() -> void:
 		elif distance <= 0.01:
 			var angle: float = float(posmod(individual_seed, 31)) / 31.0 * TAU
 			_separation += global_basis * Vector3(cos(angle), 0.0, sin(angle))
-		if neighbors.size() >= NEIGHBOR_LIMIT:
+		if neighbors.size() + _sensed_carcasses.size() >= NEIGHBOR_LIMIT:
 			break
 	_separation = _separation.slide(up_direction)
 	_sensed_neighbors = neighbors

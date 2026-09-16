@@ -181,7 +181,9 @@
         "wildlife_foraging_test",
         "wildlife_foraging_world_test",
         "creature_expression_test",
-        "wildlife_social_play_test"
+        "wildlife_social_play_test",
+        "wildlife_hunting_test",
+        "wildlife_hunting_world_test"
       ]
     },
     {

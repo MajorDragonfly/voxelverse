@@ -1,4 +1,4 @@
-extends "res://creatures/ai/drinking_brain.gd"
+extends "res://creatures/ai/hunting_brain.gd"
 ## Ambient same-species play after danger, needs and explicit player attention.
 ## Uses the existing sensing batch; no new population owner or global search.
 const PlaySession = preload("res://creatures/ai/wildlife_play_session.gd")
@@ -28,6 +28,7 @@ func _exit_tree() -> void:
 	_stop_play("removed")
 	if is_instance_valid(_play_saves) and _play_saves.game_loaded.is_connected(_reset_play):
 		_play_saves.game_loaded.disconnect(_reset_play)
+	super._exit_tree()
 
 func _reset_play(_path: String) -> void:
 	_stop_play("loaded")

@@ -4223,3 +4223,12 @@ msgstr "Spielt mit Artgenossen"
 
 msgid "WILDLIFE_PLAY_REST"
 msgstr "Ruht mit Artgenossen"
+
+msgid "WILDLIFE_HUNT"
+msgstr "Jagt Beute"
+
+msgid "WILDLIFE_CARRION"
+msgstr "Sucht Aas"
+
+msgid "WILDLIFE_EAT_CARCASS"
+msgstr "Frisst Aas"

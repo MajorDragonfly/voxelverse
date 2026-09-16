@@ -7041,6 +7041,21 @@
       "key": "WILDLIFE_PLAY_REST",
       "de": "Ruht mit Artgenossen",
       "en": "Resting with companion"
+    },
+    {
+      "key": "WILDLIFE_HUNT",
+      "de": "Jagt Beute",
+      "en": "Hunting prey"
+    },
+    {
+      "key": "WILDLIFE_CARRION",
+      "de": "Sucht Aas",
+      "en": "Seeking carrion"
+    },
+    {
+      "key": "WILDLIFE_EAT_CARCASS",
+      "de": "Frisst Aas",
+      "en": "Eating carrion"
     }
   ]
 }
