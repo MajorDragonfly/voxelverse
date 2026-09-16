@@ -4,6 +4,10 @@ extends RefCounted
 const MARGIN := 16.0
 const GAP := 10.0
 
+static func gameplay_entries_visible(context: Node, player: Node) -> bool:
+	# Poll from always-processing UI nodes: gameplay controllers stop during a modal pause.
+	return not context.get_tree().paused and is_instance_valid(player) and not bool(player.get("inspection_mode_enabled"))
+
 static func canvas_scale(control: Node) -> float:
 	return control.get_viewport().get_visible_rect().size.x / maxf(control.get_window().size.x, 1.0)
 

@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+const Layout = preload("res://ui/hud_layout.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/home_group/home_group_presentation.gd")
 
@@ -208,8 +209,14 @@ func _result(result: Dictionary) -> void:
 	_refresh_members()
 	_close.grab_focus()
 
+func _update_hud_visibility() -> void:
+	_hud.visible = not is_open and controller.can_use_panel() and Layout.gameplay_entries_visible(self, controller.player)
+
+func _process(_delta: float) -> void:
+	_update_hud_visibility()
+
 func refresh_status() -> void:
-	_hud.visible = controller.can_use_panel() and not is_open
+	_update_hud_visibility()
 	if not controller.problem.is_empty():
 		_hud.text = Text.text("HOME_HUD_INVALID")
 		return
