@@ -1,0 +1,223 @@
+{
+  "qa-initial": {
+    "source": {
+      "available": true,
+      "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+      "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+      "source_sha256": "a590eb94e9d822ac0423c2af0367e810ea0ff7622006e043601f9f6770c87348",
+      "complete": true,
+      "file_count": 3406,
+      "bytes": 101857558,
+      "bytes_hashed": 101857558,
+      "seconds": 1.5232
+    },
+    "passed": false,
+    "checks": [
+      {
+        "name": "source_contracts",
+        "passed": true,
+        "seconds": 1.916,
+        "log_sha256": "b47e08c108e8fb975f15f17955b587abedbd91b020af86d41afb0815b7e5ab68"
+      },
+      {
+        "name": "import",
+        "passed": false,
+        "seconds": 22.357,
+        "log_sha256": "fd72274f494d055f00ec4527c02ecd5013b514870f39ef8191228f81acf00103"
+      },
+      {
+        "name": "source_integrity",
+        "passed": true
+      }
+    ]
+  },
+  "qa-contracts": {
+    "source": {
+      "available": true,
+      "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+      "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+      "source_sha256": "b845c0579f8ebf0636027f2c3eb3886820204fe959cf0180fe65d75a4a490512",
+      "complete": true,
+      "file_count": 3408,
+      "bytes": 101870635,
+      "bytes_hashed": 101870635,
+      "seconds": 0.2834
+    },
+    "passed": false,
+    "checks": [
+      {
+        "name": "source_contracts",
+        "passed": true,
+        "seconds": 0.115,
+        "log_sha256": "7587249c494bf50dafd4588bf60943376726e939ccc3e4594bd5789aebebe410"
+      },
+      {
+        "name": "import",
+        "passed": true,
+        "seconds": 6.147,
+        "log_sha256": "0e41c6d62766c3d3f3ae8a820b758e7b0e64db64b754f8ead29155377413b684"
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "seconds": 1.77,
+        "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+      },
+      {
+        "name": "planet_climate_test",
+        "passed": false,
+        "seconds": 3.326,
+        "log_sha256": "2d77589934dc757360106b14b2a050037d6236a3725268693ebf243145418bc8"
+      },
+      {
+        "name": "weather_model_test",
+        "passed": true,
+        "seconds": 3.343,
+        "log_sha256": "b64675f0030e1eb820f15f6f17b05546f63925c7220c4e765a23936404111c96"
+      },
+      {
+        "name": "regional_weather_test",
+        "passed": true,
+        "seconds": 3.091,
+        "log_sha256": "294b10190fd7d60ff766aa0f8ef7ea35f4ca0505dd4ed6aee6895dbefb592301"
+      },
+      {
+        "name": "body_identity_test",
+        "passed": true,
+        "seconds": 3.077,
+        "log_sha256": "b5fe9eccc57f5daaeb4d5247a640876ddb6d23035a909264230910e6b2b35af7"
+      },
+      {
+        "name": "save_participants_test",
+        "passed": true,
+        "seconds": 3.234,
+        "log_sha256": "5a93912bb1fa87b60644f47e00d22a11086bb2cf38f328c98d79a6a9d9416ae5"
+      },
+      {
+        "name": "source_integrity",
+        "passed": true
+      }
+    ]
+  },
+  "qa-runtime": {
+    "source": {
+      "available": true,
+      "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+      "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+      "source_sha256": "5efed646316f71448f2d77992dae32b1f3fb61a0e50278a8eb2e99c69f59d824",
+      "complete": true,
+      "file_count": 3409,
+      "bytes": 101874391,
+      "bytes_hashed": 101874391,
+      "seconds": 0.2844
+    },
+    "passed": false,
+    "checks": [
+      {
+        "name": "source_contracts",
+        "passed": true,
+        "seconds": 0.115,
+        "log_sha256": "7587249c494bf50dafd4588bf60943376726e939ccc3e4594bd5789aebebe410"
+      },
+      {
+        "name": "planet_climate_test",
+        "passed": false,
+        "seconds": 4.929,
+        "log_sha256": "a00c2403c4ffd253fa53e0edfe1c6e71983ec8d6b861b52c0dd578018c84504a"
+      },
+      {
+        "name": "weather_runtime_test",
+        "passed": true,
+        "seconds": 53.494,
+        "log_sha256": "fc2f5c912c69c8fe811f968caefcdf824dbf2c7e6a9d20489aadfc6769976c36"
+      },
+      {
+        "name": "spherical_campaign_contract_test",
+        "passed": true,
+        "seconds": 2.031,
+        "log_sha256": "ee0c5993baf9cb18cc268cfb544b84780114dc99a2301717fc9ca8b32d8bded6"
+      },
+      {
+        "name": "spherical_developed_migration_test",
+        "passed": true,
+        "seconds": 55.893,
+        "log_sha256": "45789c60c16bc95fab8c0b32460af0eb5d8ad5e6a7f7e0186227992f5334ec2f"
+      },
+      {
+        "name": "save_slots_test",
+        "passed": true,
+        "seconds": 1.661,
+        "log_sha256": "9e61e543efe0b8802416225b970a9abd1158cea77891a8e8ebc71fef2e676443"
+      },
+      {
+        "name": "campaign_atmosphere_test",
+        "passed": true,
+        "seconds": 3.081,
+        "log_sha256": "621ecde1f1fe23036c416e433e462d029139f6975de41ed1ff8af098b0ad8157"
+      },
+      {
+        "name": "source_integrity",
+        "passed": true
+      }
+    ]
+  },
+  "qa-final": {
+    "source": {
+      "available": true,
+      "commit": "42d774a5c0b689a771f7eba20ef46a79159d93c6",
+      "tree": "d6168242f251bbd94962e371303b772074309469",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "4f44e54a9843e0b56e7ceef5bd732ba55d1aec92e7d8c07e8df0ca99a12e7377",
+      "source_sha256": "1764e1794f956c2aa403754ab3d992753b82a009e2dcf546a079689c4a5df85e",
+      "complete": true,
+      "file_count": 3410,
+      "bytes": 101880804,
+      "bytes_hashed": 101880804,
+      "seconds": 0.2647
+    },
+    "passed": true,
+    "checks": [
+      {
+        "name": "source_contracts",
+        "passed": true,
+        "seconds": 0.115,
+        "log_sha256": "7587249c494bf50dafd4588bf60943376726e939ccc3e4594bd5789aebebe410"
+      },
+      {
+        "name": "planet_climate_test",
+        "passed": true,
+        "seconds": 4.728,
+        "log_sha256": "60bfe951dc727e98f4b63f3d47a201df7cad6a2f7e1224dd7b83d82871f766af"
+      },
+      {
+        "name": "campaign_foundation_test",
+        "passed": true,
+        "seconds": 3.63,
+        "log_sha256": "5f2d331248ad6cda9bdd5dfe78bc4e1046ee145e44bf0f6d3abacdf30be86501"
+      },
+      {
+        "name": "source_integrity",
+        "passed": true
+      }
+    ]
+  },
+  "differences_to_final": {
+    "qa-contracts": [
+      "docs/WEATHER_PLAN.md",
+      "docs/WORK_WEATHER02_PLANET_CLIMATES.md",
+      "tests/planet_climate_test.gd",
+      "tests/weather_runtime_test.gd"
+    ],
+    "qa-runtime": [
+      "docs/WEATHER_PLAN.md",
+      "docs/WORK_WEATHER02_PLANET_CLIMATES.md",
+      "tests/planet_climate_test.gd"
+    ]
+  }
+}
