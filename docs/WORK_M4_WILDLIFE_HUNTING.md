@@ -79,3 +79,7 @@ weiter beim Integrationschat. Der neue Merge-Tree braucht seine Integrationsprü
 Offen bleiben gerenderte/native Ziel-PC-Abnahme, Langzeitbalance der Population
 und Messung der Snapshotkosten bei vielen gleichzeitig fressenden Tieren.
 Headless-Fachprüfungen sind keine Export-, Gesamt- oder FPS-Freigabe.
+
+Abgeschlossen: alle sieben gezielten Tests bestanden, inklusive 42 neuer
+Jagdprüfungen und vollständigem Kugel-Neustartnachweis. Details und unveränderte
+Logs: [evidence/m4-wildlife-hunting](../evidence/m4-wildlife-hunting/README.md).
