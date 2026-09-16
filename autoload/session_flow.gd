@@ -87,6 +87,12 @@ func load_game(path: String) -> void:
 	if playable.is_empty() or not bool(saves.select_slot(playable)):
 		_fail_loading("Laden fehlgeschlagen. " + str(saves.last_error))
 		return
+	if get_node("/root/GameState").campaign.data.has(preload("res://space/fleet/fleet_state.gd").FIELD):
+		loading = false
+		_layer.hide()
+		if get_tree().change_scene_to_file("res://space/fleet/fleet_trial.tscn") != OK:
+			_fail_loading("Flottentest konnte nicht geöffnet werden.")
+		return
 	await _request_world()
 
 func return_from_editor() -> Error:
@@ -369,6 +375,9 @@ func request_quit() -> void:
 		await preload("res://core/runtime_shutdown.gd").finish(get_tree())
 		return
 	var scene := get_tree().current_scene
+	if scene != null and scene.scene_file_path == "res://space/fleet/fleet_trial.tscn":
+		await preload("res://core/runtime_shutdown.gd").finish(get_tree())
+		return
 	if scene != null and scene.has_method("save_lab"):
 		if bool(scene.call("save_lab")):
 			await preload("res://core/runtime_shutdown.gd").finish(get_tree())

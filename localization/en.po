@@ -4211,3 +4211,123 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "FLEET_ENTRY"
+msgstr "Fleet trial"
+
+msgid "FLEET_TITLE"
+msgstr "FLEET TRIAL  /  HANGAR & CARGO"
+
+msgid "FLEET_INTRO"
+msgstr "Manage an expedition ship and lander, dock and transfer trial cargo. Each successful action is saved. A new trial uses its own save slot and preserves existing adventures. Flight and space progression will follow later."
+
+msgid "FLEET_NEW"
+msgstr "New fleet trial"
+
+msgid "FLEET_LOAD"
+msgstr "Load trial"
+
+msgid "FLEET_SHIPYARD"
+msgstr "Shipyard"
+
+msgid "FLEET_HOME"
+msgstr "Main menu"
+
+msgid "FLEET_EMPTY"
+msgstr "Create a new trial or load an existing one first."
+
+msgid "FLEET_DOCK"
+msgstr "Dock"
+
+msgid "FLEET_UNDOCK"
+msgstr "Undock"
+
+msgid "FLEET_CARGO_TITLE"
+msgstr "TRIAL CARGO / SAMPLES"
+
+msgid "FLEET_TRANSFER"
+msgstr "Transfer selected cargo to target ship"
+
+msgid "FLEET_DESIGN_TITLE"
+msgstr "TRY YOUR SAVED DESIGN"
+
+msgid "FLEET_SEARCH"
+msgstr "Search designs …"
+
+msgid "FLEET_FIRST"
+msgstr "First page"
+
+msgid "FLEET_MORE"
+msgstr "More designs"
+
+msgid "FLEET_INSTANTIATE"
+msgstr "Create another ship instance near the target"
+
+msgid "FLEET_NEW_FAILED"
+msgstr "The trial could not be prepared. The previous save is preserved."
+
+msgid "FLEET_NEW_READY"
+msgstr "New trial saved. Select the lander, choose the expedition ship as target and dock."
+
+msgid "FLEET_LOAD_FAILED"
+msgstr "This trial save cannot be loaded."
+
+msgid "FLEET_LOADED"
+msgstr "Fleet trial loaded."
+
+msgid "FLEET_HANGAR"
+msgstr "Hangar"
+
+msgid "FLEET_SYSTEM"
+msgstr "System space"
+
+msgid "FLEET_FREE"
+msgstr "free"
+
+msgid "FLEET_BAY"
+msgstr "Bay %d · %s"
+
+msgid "FLEET_SAMPLE"
+msgstr "Sample"
+
+msgid "FLEET_CARGO"
+msgstr "Trial cargo"
+
+msgid "FLEET_SPACE"
+msgstr " · %d cargo spaces"
+
+msgid "FLEET_DETAIL"
+msgstr "%s  |  Design revision %d  |  Cargo %d / %d  |  Energy %d / %d\nShip ID: %s\n%s"
+
+msgid "FLEET_DOCKED"
+msgstr "Docked at: "
+
+msgid "FLEET_READY"
+msgstr "Ready in system space"
+
+msgid "FLEET_SAVED"
+msgstr "Change saved."
+
+msgid "FLEET_ERROR"
+msgstr "Action not completed. The saved state is preserved."
+
+msgid "FLEET_ERROR_STALE"
+msgstr "The view is out of date. Please retry using the current state."
+
+msgid "FLEET_ERROR_OCCUPIED"
+msgstr "This bay is already occupied."
+
+msgid "FLEET_ERROR_DISTANCE"
+msgstr "Both ships must be nearby in the same system."
+
+msgid "FLEET_ERROR_CONNECTED"
+msgstr "To transfer cargo, the lander must be docked at the target ship."
+
+msgid "FLEET_ERROR_CAPACITY"
+msgstr "The target ship does not have enough free cargo space."
+
+msgid "FLEET_ERROR_DESIGN"
+msgstr "This design is incomplete or incompatible. Please check it in the shipyard."
+
+msgid "FLEET_ERROR_LIMIT"
+msgstr "The fleet trial supports up to 16 ships."

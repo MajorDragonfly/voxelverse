@@ -21,6 +21,7 @@ const Drinking = preload("res://creatures/ai/drinking_state.gd")
 const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Settlements = preload("res://world/tribe/settlement_collection.gd")
 const Onboarding = preload("res://core/onboarding_progress.gd")
+const Fleet = preload("res://space/fleet/fleet_state.gd")
 
 # Order also defines import order: designs, then GameState, then progression,
 # then pending runtime state. Hosts are notified only by the central service.
@@ -116,6 +117,9 @@ static func _validate_section(id: String, data: Dictionary) -> String:
 				if key not in ["stamina", "recovery_delay"] or not (value is int or value is float) or not is_finite(float(value)) or float(value) < 0.0 or float(value) > (100.0 if key == "stamina" else 0.8): return "Invalid player stamina state."
 		"game_state":
 			if int(data.game_state.get("world_seed", 0)) <= 0 or int(data.game_state.get("phase", -1)) not in range(6): return "Invalid world seed or phase."
+			if data.game_state.get("campaign") is Dictionary:
+				var problem: String = Fleet.validate(data.game_state.campaign)
+				if not problem.is_empty(): return problem
 		"regions":
 			if not data.get(Registry.regions_field(data), {}) is Dictionary: return "Invalid region state."
 			if schema >= Registry.SAVE_SCHEMA and (not data.has("regions_by_body") or data.has("regions_by_world")): return "Invalid body-scoped region storage."
@@ -139,7 +143,9 @@ static func unsupported_sections(data: Dictionary) -> bool:
 				if Progression.has_unsupported_contract(data.get("progression", {})): return true
 			"designs":
 				if data.get("design_files") is Dictionary and Designs.has_unsupported_blueprints(data.design_files): return true
-			"metadata", "game_state", "regions", "player", "onboarding":
+			"game_state":
+				if data.get("game_state") is Dictionary and data.game_state.get("campaign") is Dictionary and Fleet.unsupported(data.game_state.campaign): return true
+			"metadata", "regions", "player", "onboarding":
 				# Envelope versions stay central; onboarding preserves future UI data.
 				pass
 			_: return true

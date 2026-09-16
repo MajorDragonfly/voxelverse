@@ -7021,6 +7021,206 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "FLEET_ENTRY",
+      "de": "Flottentest",
+      "en": "Fleet trial"
+    },
+    {
+      "key": "FLEET_TITLE",
+      "de": "FLOTTENTEST  /  HANGAR & FRACHT",
+      "en": "FLEET TRIAL  /  HANGAR & CARGO"
+    },
+    {
+      "key": "FLEET_INTRO",
+      "de": "Expedition und Beiboot verwalten, andocken und Testfracht umladen. Jede erfolgreiche Aktion wird gespeichert. Ein neuer Test erhält einen eigenen Spielstand; vorhandene Abenteuer bleiben erhalten. Flug und Weltraumfortschritt folgen später.",
+      "en": "Manage an expedition ship and lander, dock and transfer trial cargo. Each successful action is saved. A new trial uses its own save slot and preserves existing adventures. Flight and space progression will follow later."
+    },
+    {
+      "key": "FLEET_NEW",
+      "de": "Neuer Flottentest",
+      "en": "New fleet trial"
+    },
+    {
+      "key": "FLEET_LOAD",
+      "de": "Test laden",
+      "en": "Load trial"
+    },
+    {
+      "key": "FLEET_SHIPYARD",
+      "de": "Schiffswerft",
+      "en": "Shipyard"
+    },
+    {
+      "key": "FLEET_HOME",
+      "de": "Hauptmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "FLEET_EMPTY",
+      "de": "Zuerst einen neuen Test anlegen oder einen vorhandenen Test laden.",
+      "en": "Create a new trial or load an existing one first."
+    },
+    {
+      "key": "FLEET_DOCK",
+      "de": "Andocken",
+      "en": "Dock"
+    },
+    {
+      "key": "FLEET_UNDOCK",
+      "de": "Abdocken",
+      "en": "Undock"
+    },
+    {
+      "key": "FLEET_CARGO_TITLE",
+      "de": "TESTFRACHT / PROBEN",
+      "en": "TRIAL CARGO / SAMPLES"
+    },
+    {
+      "key": "FLEET_TRANSFER",
+      "de": "Ausgewählte Fracht zum Zielschiff umladen",
+      "en": "Transfer selected cargo to target ship"
+    },
+    {
+      "key": "FLEET_DESIGN_TITLE",
+      "de": "EIGENEN GESPEICHERTEN ENTWURF TESTEN",
+      "en": "TRY YOUR SAVED DESIGN"
+    },
+    {
+      "key": "FLEET_SEARCH",
+      "de": "Entwürfe suchen …",
+      "en": "Search designs …"
+    },
+    {
+      "key": "FLEET_FIRST",
+      "de": "Erste Seite",
+      "en": "First page"
+    },
+    {
+      "key": "FLEET_MORE",
+      "de": "Weitere Entwürfe",
+      "en": "More designs"
+    },
+    {
+      "key": "FLEET_INSTANTIATE",
+      "de": "Weitere Schiffsinstanz neben dem Zielschiff erzeugen",
+      "en": "Create another ship instance near the target"
+    },
+    {
+      "key": "FLEET_NEW_FAILED",
+      "de": "Test konnte nicht vorbereitet werden. Der bisherige Spielstand bleibt erhalten.",
+      "en": "The trial could not be prepared. The previous save is preserved."
+    },
+    {
+      "key": "FLEET_NEW_READY",
+      "de": "Neuer Flottentest gespeichert. Beiboot wählen, Expedition als Ziel auswählen und andocken.",
+      "en": "New trial saved. Select the lander, choose the expedition ship as target and dock."
+    },
+    {
+      "key": "FLEET_LOAD_FAILED",
+      "de": "Dieser Teststand kann nicht geladen werden.",
+      "en": "This trial save cannot be loaded."
+    },
+    {
+      "key": "FLEET_LOADED",
+      "de": "Flottentest geladen.",
+      "en": "Fleet trial loaded."
+    },
+    {
+      "key": "FLEET_HANGAR",
+      "de": "Hangar",
+      "en": "Hangar"
+    },
+    {
+      "key": "FLEET_SYSTEM",
+      "de": "Systemraum",
+      "en": "System space"
+    },
+    {
+      "key": "FLEET_FREE",
+      "de": "frei",
+      "en": "free"
+    },
+    {
+      "key": "FLEET_BAY",
+      "de": "Hangar %d · %s",
+      "en": "Bay %d · %s"
+    },
+    {
+      "key": "FLEET_SAMPLE",
+      "de": "Probe",
+      "en": "Sample"
+    },
+    {
+      "key": "FLEET_CARGO",
+      "de": "Testfracht",
+      "en": "Trial cargo"
+    },
+    {
+      "key": "FLEET_SPACE",
+      "de": " · %d Lagerplätze",
+      "en": " · %d cargo spaces"
+    },
+    {
+      "key": "FLEET_DETAIL",
+      "de": "%s  |  Entwurf Revision %d  |  Fracht %d / %d  |  Energie %d / %d\nSchiff-ID: %s\n%s",
+      "en": "%s  |  Design revision %d  |  Cargo %d / %d  |  Energy %d / %d\nShip ID: %s\n%s"
+    },
+    {
+      "key": "FLEET_DOCKED",
+      "de": "Angedockt an: ",
+      "en": "Docked at: "
+    },
+    {
+      "key": "FLEET_READY",
+      "de": "Bereit im Systemraum",
+      "en": "Ready in system space"
+    },
+    {
+      "key": "FLEET_SAVED",
+      "de": "Änderung gespeichert.",
+      "en": "Change saved."
+    },
+    {
+      "key": "FLEET_ERROR",
+      "de": "Aktion nicht ausgeführt. Der gespeicherte Stand bleibt erhalten.",
+      "en": "Action not completed. The saved state is preserved."
+    },
+    {
+      "key": "FLEET_ERROR_STALE",
+      "de": "Die Ansicht ist veraltet. Bitte die Aktion mit dem aktuellen Stand wiederholen.",
+      "en": "The view is out of date. Please retry using the current state."
+    },
+    {
+      "key": "FLEET_ERROR_OCCUPIED",
+      "de": "Dieser Hangar ist bereits belegt.",
+      "en": "This bay is already occupied."
+    },
+    {
+      "key": "FLEET_ERROR_DISTANCE",
+      "de": "Beide Schiffe müssen im selben System nahe beieinander stehen.",
+      "en": "Both ships must be nearby in the same system."
+    },
+    {
+      "key": "FLEET_ERROR_CONNECTED",
+      "de": "Zum Umladen muss das Beiboot am Zielschiff angedockt sein.",
+      "en": "To transfer cargo, the lander must be docked at the target ship."
+    },
+    {
+      "key": "FLEET_ERROR_CAPACITY",
+      "de": "Im Zielschiff ist nicht genug Frachtraum frei.",
+      "en": "The target ship does not have enough free cargo space."
+    },
+    {
+      "key": "FLEET_ERROR_DESIGN",
+      "de": "Dieser Entwurf ist unvollständig oder nicht kompatibel. Bitte in der Schiffswerft prüfen.",
+      "en": "This design is incomplete or incompatible. Please check it in the shipyard."
+    },
+    {
+      "key": "FLEET_ERROR_LIMIT",
+      "de": "Der Flottentest unterstützt bis zu 16 Schiffe.",
+      "en": "The fleet trial supports up to 16 ships."
     }
   ]
 }

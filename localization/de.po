@@ -4211,3 +4211,123 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "FLEET_ENTRY"
+msgstr "Flottentest"
+
+msgid "FLEET_TITLE"
+msgstr "FLOTTENTEST  /  HANGAR & FRACHT"
+
+msgid "FLEET_INTRO"
+msgstr "Expedition und Beiboot verwalten, andocken und Testfracht umladen. Jede erfolgreiche Aktion wird gespeichert. Ein neuer Test erhält einen eigenen Spielstand; vorhandene Abenteuer bleiben erhalten. Flug und Weltraumfortschritt folgen später."
+
+msgid "FLEET_NEW"
+msgstr "Neuer Flottentest"
+
+msgid "FLEET_LOAD"
+msgstr "Test laden"
+
+msgid "FLEET_SHIPYARD"
+msgstr "Schiffswerft"
+
+msgid "FLEET_HOME"
+msgstr "Hauptmenü"
+
+msgid "FLEET_EMPTY"
+msgstr "Zuerst einen neuen Test anlegen oder einen vorhandenen Test laden."
+
+msgid "FLEET_DOCK"
+msgstr "Andocken"
+
+msgid "FLEET_UNDOCK"
+msgstr "Abdocken"
+
+msgid "FLEET_CARGO_TITLE"
+msgstr "TESTFRACHT / PROBEN"
+
+msgid "FLEET_TRANSFER"
+msgstr "Ausgewählte Fracht zum Zielschiff umladen"
+
+msgid "FLEET_DESIGN_TITLE"
+msgstr "EIGENEN GESPEICHERTEN ENTWURF TESTEN"
+
+msgid "FLEET_SEARCH"
+msgstr "Entwürfe suchen …"
+
+msgid "FLEET_FIRST"
+msgstr "Erste Seite"
+
+msgid "FLEET_MORE"
+msgstr "Weitere Entwürfe"
+
+msgid "FLEET_INSTANTIATE"
+msgstr "Weitere Schiffsinstanz neben dem Zielschiff erzeugen"
+
+msgid "FLEET_NEW_FAILED"
+msgstr "Test konnte nicht vorbereitet werden. Der bisherige Spielstand bleibt erhalten."
+
+msgid "FLEET_NEW_READY"
+msgstr "Neuer Flottentest gespeichert. Beiboot wählen, Expedition als Ziel auswählen und andocken."
+
+msgid "FLEET_LOAD_FAILED"
+msgstr "Dieser Teststand kann nicht geladen werden."
+
+msgid "FLEET_LOADED"
+msgstr "Flottentest geladen."
+
+msgid "FLEET_HANGAR"
+msgstr "Hangar"
+
+msgid "FLEET_SYSTEM"
+msgstr "Systemraum"
+
+msgid "FLEET_FREE"
+msgstr "frei"
+
+msgid "FLEET_BAY"
+msgstr "Hangar %d · %s"
+
+msgid "FLEET_SAMPLE"
+msgstr "Probe"
+
+msgid "FLEET_CARGO"
+msgstr "Testfracht"
+
+msgid "FLEET_SPACE"
+msgstr " · %d Lagerplätze"
+
+msgid "FLEET_DETAIL"
+msgstr "%s  |  Entwurf Revision %d  |  Fracht %d / %d  |  Energie %d / %d\nSchiff-ID: %s\n%s"
+
+msgid "FLEET_DOCKED"
+msgstr "Angedockt an: "
+
+msgid "FLEET_READY"
+msgstr "Bereit im Systemraum"
+
+msgid "FLEET_SAVED"
+msgstr "Änderung gespeichert."
+
+msgid "FLEET_ERROR"
+msgstr "Aktion nicht ausgeführt. Der gespeicherte Stand bleibt erhalten."
+
+msgid "FLEET_ERROR_STALE"
+msgstr "Die Ansicht ist veraltet. Bitte die Aktion mit dem aktuellen Stand wiederholen."
+
+msgid "FLEET_ERROR_OCCUPIED"
+msgstr "Dieser Hangar ist bereits belegt."
+
+msgid "FLEET_ERROR_DISTANCE"
+msgstr "Beide Schiffe müssen im selben System nahe beieinander stehen."
+
+msgid "FLEET_ERROR_CONNECTED"
+msgstr "Zum Umladen muss das Beiboot am Zielschiff angedockt sein."
+
+msgid "FLEET_ERROR_CAPACITY"
+msgstr "Im Zielschiff ist nicht genug Frachtraum frei."
+
+msgid "FLEET_ERROR_DESIGN"
+msgstr "Dieser Entwurf ist unvollständig oder nicht kompatibel. Bitte in der Schiffswerft prüfen."
+
+msgid "FLEET_ERROR_LIMIT"
+msgstr "Der Flottentest unterstützt bis zu 16 Schiffe."

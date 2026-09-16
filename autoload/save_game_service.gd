@@ -506,6 +506,8 @@ func _write_slot_copy(source: Dictionary, title: String, kind: String) -> String
 	var campaign: Dictionary = data["game_state"]["campaign"]
 	var old_identity: String = campaign["id"]
 	campaign["id"] = Ids.create("campaign")
+	if campaign.has(Participants.Fleet.FIELD):
+		campaign[Participants.Fleet.FIELD].snapshot.campaign_id = campaign.id
 	# Preserve opaque object/design/body IDs and paid-target ledgers: the copy
 	# branches an existing history, rather than recreating its discovered world.
 	for event: Dictionary in campaign["recent_events"]:
@@ -1226,3 +1228,59 @@ func _snapshot_onboarding(_files: Dictionary) -> Dictionary:
 
 func _restore_onboarding(data: Dictionary) -> void:
 	guidance.import_state(data.get("onboarding"))
+
+
+## ARCH-30 trial transactions. The ordinary snapshot remains the only writer.
+## No generic candidate admission or writable second fleet owner is exposed.
+func request_fleet_command(command: Dictionary, expected_revision: int) -> bool:
+	if _fleet_busy(): return false
+	if not command.get("kind") is String:
+		_report_failure("fleet.command")
+		return false
+	var campaign: Dictionary = get_node("/root/GameState").campaign.data
+	var design: Dictionary = {}
+	if command.get("kind") == "instantiate":
+		if not command.get("path") is String: return false
+		var loaded: Dictionary = Participants.Fleet.Ship.load_design(command.path)
+		if not loaded.ok:
+			_report_failure(str(loaded.code))
+			return false
+		design = loaded.blueprint
+	var prepared: Dictionary = Participants.Fleet.apply(campaign, command, expected_revision, design)
+	if not prepared.ok:
+		_report_failure(str(prepared.code))
+		return false
+	return _commit_fleet(prepared.data)
+
+
+func initialize_fleet_trial() -> bool:
+	if _fleet_busy(): return false
+	var state: Node = get_node("/root/GameState")
+	# Diagnostic preparation is explicit, limited to a fresh dedicated trial slot.
+	if slot_name != "Flottentest" or not is_slot_path(save_path) or state.campaign.data.elapsed_seconds != 0 or state.current_phase != 0:
+		_report_failure("fleet.trial_context")
+		return false
+	var prepared: Dictionary = Participants.Fleet.trial(state.campaign.data, state.get_current_body())
+	if not prepared.ok:
+		_report_failure(str(prepared.code))
+		return false
+	return _commit_fleet(prepared.data)
+
+
+func _fleet_busy() -> bool:
+	return _saving or _transition_busy or _write_blocked or not _body_transfer.is_empty() or not session_active or get_tree().paused
+
+
+func _commit_fleet(candidate: Dictionary) -> bool:
+	var campaign: Dictionary = get_node("/root/GameState").campaign.data
+	var field: String = Participants.Fleet.FIELD
+	var present: bool = campaign.has(field)
+	var before: Dictionary = campaign.get(field, {})
+	_transition_busy = true
+	campaign[field] = candidate
+	var ok: bool = save_now()
+	if not ok:
+		if present: campaign[field] = before
+		else: campaign.erase(field)
+	_transition_busy = false
+	return ok

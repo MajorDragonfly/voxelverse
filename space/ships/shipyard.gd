@@ -153,6 +153,7 @@ func _build_ui() -> void:
 	_button(toolbar, "Speichern", save_current)
 	_button(toolbar, "Als Kopie", save_as_copy)
 	_button(toolbar, "Entwürfe öffnen", _open_library)
+	_button(toolbar, tr("FLEET_ENTRY"), func() -> void: _guard(func() -> void: get_tree().change_scene_to_file("res://space/fleet/fleet_trial.tscn")))
 	_undo_button = _button(toolbar, "Rückgängig", undo)
 	_redo_button = _button(toolbar, "Wiederholen", redo)
 	var columns := HBoxContainer.new()
