@@ -2,6 +2,7 @@ extends SubViewportContainer
 ## One selected creature, using the same renderer as wildlife. No world actors.
 
 const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
+const ORBIT_ELEVATION: float = 0.30
 
 var viewport: SubViewport
 var _pivot: Node3D
@@ -147,24 +148,35 @@ func _collect_bounds(node: Node, parent_transform: Transform3D, boxes: Array[AAB
 func _frame_camera() -> void:
 	if _camera == null:
 		return
-	var aspect: float = maxf(size.x / maxf(size.y, 1.0), 0.3)
+	var aspect: float = maxf(size.x, 1.0) / maxf(size.y, 1.0)
 	var tangent: float = tan(deg_to_rad(_camera.fov * 0.5))
-	var direction := Vector3(sin(_angle), 0.30, cos(_angle)).normalized()
-	var right: Vector3 = Vector3.UP.cross(direction).normalized()
-	var up: Vector3 = direction.cross(right).normalized()
-	# Fit projected bounds, not an oversized sphere around a long, narrow body.
-	var distance: float = 0.5
-	for corner in range(8):
-		var offset: Vector3 = _bounds.get_endpoint(corner) - _center
-		var depth: float = offset.dot(direction)
-		distance = maxf(distance, absf(offset.dot(right)) / (tangent * aspect) + depth)
-		distance = maxf(distance, absf(offset.dot(up)) / tangent + depth)
-	distance *= 1.12 * _zoom
+	var direction := Vector3(sin(_angle), ORBIT_ELEVATION, cos(_angle)).normalized()
+	# Fit the whole yaw orbit: dragging changes direction, never the zoom.
+	var distance: float = _orbit_fit_distance(aspect, tangent) * 1.12 * _zoom
 	_camera.position = _center + direction * distance
 	_camera.far = maxf(distance + _radius * 4.0, 100.0)
 	_camera.look_at(_center)
 	if is_instance_valid(_model) and is_visible_in_tree():
 		viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+
+
+func _orbit_fit_distance(aspect: float, tangent: float) -> float:
+	# Each corner sweeps a horizontal circle. Maximize its perspective-frustum
+	# requirements over that circle, independent of the current viewing angle.
+	# This stays tighter than a sphere, especially for long bodies in wide panels.
+	var elevation := Vector2(1.0, ORBIT_ELEVATION).normalized()
+	var horizontal_factor: float = Vector2(1.0 / (tangent * aspect), elevation.x).length()
+	var distance: float = 0.5
+	for corner in range(8):
+		var offset: Vector3 = _bounds.get_endpoint(corner) - _center
+		var radius: float = Vector2(offset.x, offset.z).length()
+		distance = maxf(distance, radius * horizontal_factor + offset.y * elevation.y)
+		# Both vertical frustum planes; height and camera depth share the yaw.
+		for side in [-1.0, 1.0]:
+			var height: float = offset.y * (elevation.y + side * elevation.x / tangent)
+			var sweep: float = radius * absf(elevation.x - side * elevation.y / tangent)
+			distance = maxf(distance, height + sweep)
+	return distance
 
 
 func _update_rendering() -> void:
