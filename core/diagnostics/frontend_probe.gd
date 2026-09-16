@@ -199,7 +199,7 @@ func _exercise_first_steps(player: Node) -> void:
 	player.guidance_action.emit("move", 50.0)
 	_expect(not guide.visible and saves.guidance.export_state() == paused_progress, "Paused play advanced or showed the guide.")
 	await _capture("first_steps_help")
-	_click(flow._overlay.find_child("SkipFirstSteps", true, false))
+	await _click_first_steps_action(flow, "SkipFirstSteps")
 	await _frames(2)
 	_expect(not flow.pause_open and not guide.visible and bool(saves.guidance.data.skipped), "Skip did not resume and hide the introduction.")
 	await _restart_first_steps(flow)
@@ -313,8 +313,21 @@ func _restart_first_steps(flow: Node) -> void:
 	await _frames(2)
 	_click(flow._overlay.find_child("PauseFirstSteps", true, false))
 	await _frames(2)
-	_click(flow._overlay.find_child("RestartFirstSteps", true, false))
+	await _click_first_steps_action(flow, "RestartFirstSteps")
 	await _frames(2)
+
+func _click_first_steps_action(flow: Node, control_name: String) -> void:
+	# The expanded chapter help scrolls. Exercise an actual reachable click,
+	# just as the save-browser probe scrolls actions into view before pressing.
+	var button: Control = flow._overlay.find_child(control_name, true, false)
+	if button == null:
+		_expect(false, "Missing guidance control: " + control_name)
+		return
+	var scroll: ScrollContainer = flow.get_node("FirstSteps")._help_scroll
+	scroll.ensure_control_visible(button)
+	await _frames(3)
+	_expect(scroll.get_global_rect().encloses(button.get_global_rect()), "Guidance action is outside its scroll viewport: " + control_name)
+	_click(button)
 
 func _hold_key(code: Key, pressed: bool) -> void:
 	var event := InputEventKey.new()
