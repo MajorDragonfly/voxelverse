@@ -41,7 +41,9 @@ static func build_arrays(tile: Dictionary, surface: RefCounted) -> Dictionary:
 			for x in range(STRIDE):
 				var dx: Vector3 = vertices[y * STRIDE + mini(x + 1, CELLS)] - vertices[y * STRIDE + maxi(x - 1, 0)]
 				var dz: Vector3 = vertices[mini(y + 1, CELLS) * STRIDE + x] - vertices[maxi(y - 1, 0) * STRIDE + x]
-				normals[y * STRIDE + x] = dz.cross(dx).normalized()
+				# UV axes point around the outside of every cube face. The reverse
+				# cross product lit distant slopes from inside the planet.
+				normals[y * STRIDE + x] = dx.cross(dz).normalized()
 	# Fine boundary vertices collapse onto the coarse neighbor's actual straight
 	# segments. Even samples are shared exactly, including across cube faces.
 	for edge in range(4):

@@ -13,6 +13,7 @@ var cell: Dictionary
 var result: Dictionary = {}
 var elapsed_usec: int = 0
 var surface: RefCounted
+var scenery_only: bool = false
 
 func prepare() -> void:
 	surface = Factory.create(body)
@@ -56,6 +57,9 @@ func run() -> void:
 	var instances: int = 0
 	for recipe in RECIPES:
 		var asset: String = recipe[0]
+		# Same RNG sequence and placements as the nearby patch, but no small
+		# ground cover or animal preparation for the visual distance layer.
+		if scenery_only and asset == "grass_tuft_v2": break
 		var species: Dictionary = Flora.create_species_variant(surface.terrain, biome, asset, 0)
 		var batch: Dictionary = {"asset_id": asset, "species": species, "transforms": [], "custom": []}
 		var chance: float = clampf(composition.families.get(asset, 0.0), 0.0, 0.95)
@@ -87,7 +91,7 @@ func run() -> void:
 		if not batch.transforms.is_empty():
 			batches.append(batch)
 	var actor: Dictionary = {}
-	if center.height > 2.0 and center.height < 95.0 and composition.fauna_weights.grazer > 0.1:
+	if not scenery_only and center.height > 2.0 and center.height < 95.0 and composition.fauna_weights.grazer > 0.1:
 		center.height += 1.1
 		actor = {"id": cell.id + ":animal", "location": center, "species_seed": int(body.seed + cell.face * 971 + (cell.x / 8) * 193 + (cell.y / 8) * 389) & 0x7fffffff,
 			"role": "grazer" if composition.fauna_weights.grazer > composition.fauna_weights.forager else "forager"}

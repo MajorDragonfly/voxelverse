@@ -70,6 +70,8 @@
         "surface_adapter_entry_test",
         "surface_adapter_test",
         "surface_population_budget_test",
+        "surface_distance_test",
+        "surface_distance_world_test",
         "surface_scale_contract_test",
         "surface_support_test",
         "radial_step_test",
