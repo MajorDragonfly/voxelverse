@@ -1,4 +1,5 @@
 extends CanvasLayer
+const Layout = preload("res://ui/hud_layout.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/tribe/tribe_presentation.gd")
 const Housing = preload("res://world/tribe/village_housing.gd")
@@ -312,8 +313,7 @@ func _refresh_confirmation_text() -> void:
 func refresh() -> void:
 	if entry == null:
 		return
-	entry.visible = not confirmation_open and not get_tree().paused and int(get_node("/root/GameState").current_phase) == 0 and is_instance_valid(controller.player)
-	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
+	_update_hud_visibility()
 	_hud_content.visible = not _collapsed and controller.placement.is_empty()
 	_feedback.visible = not _collapsed
 	_collapse.text = Text.text("TRIBE_ORDERS_TAB" if not _hud_content.visible else "TRIBE_COLLAPSE")
@@ -412,9 +412,13 @@ func refresh() -> void:
 	_feedback.refresh()
 	_layout()
 
+func _update_hud_visibility() -> void:
+	entry.visible = not confirmation_open and int(get_node("/root/GameState").current_phase) == 0 and Layout.gameplay_entries_visible(self, controller.player)
+	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
+
 func _process(_delta: float) -> void:
 	# Other modals own their pause. Never draw/capture input above the shared book.
-	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
+	_update_hud_visibility()
 	if get_tree().paused and not _owns_pause:
 		_dragging = false
 		_selection.hide()

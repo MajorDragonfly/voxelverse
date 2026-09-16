@@ -25,11 +25,17 @@ def main():
                 stderr=subprocess.STDOUT, timeout=120)
     log_text = (output/'render.log').read_text()
     images = sorted(p.name for p in output.glob('hud-*.png'))
-    passed = result.returncode == 0 and not ERROR.search(log_text) and 'HUD_LAYOUT_OK' in log_text and len(images) >= 3
+    expected = {
+        'hud-1920x1080.png', 'hud-1280x720.png', 'hud-800x600.png',
+        'hud-sphere-1280x720.png', 'hud-scan-1280x720.png', 'hud-scan-800x600.png',
+        'hud-journal-1600x900.png', 'hud-journal-1280x720.png', 'hud-journal-800x600.png',
+    }
+    missing = sorted(expected - set(images))
+    passed = result.returncode == 0 and not ERROR.search(log_text) and 'HUD_LAYOUT_OK' in log_text and not missing
     source_commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=project, text=True).strip()
     source_tree = subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], cwd=project, text=True).strip()
     (output/'results.json').write_text(json.dumps({'passed': passed, 'renderer': 'gl_compatibility', 'source_commit': source_commit, 'source_tree': source_tree, 'screenshots': images}, indent=2)+'\n')
-    print(json.dumps({'passed': passed, 'screenshots': images}), flush=True)
+    print(json.dumps({'passed': passed, 'screenshots': images, 'missing': missing}), flush=True)
     if not passed: print(log_text[-6000:])
     return 0 if passed else 1
 

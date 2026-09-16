@@ -6,6 +6,11 @@ on:
   pull_request:
     paths:
       - "ui/frontend/**"
+      - "ui/hud_layout.gd"
+      - "ui/home_group/**"
+      - "ui/tribe/**"
+      - "tests/hud_layout_test.gd"
+      - "tools/review_hud.py"
       - "autoload/session_flow.gd"
       - "autoload/save_game_service.gd"
       - "core/display_settings.gd"
@@ -55,6 +60,12 @@ jobs:
           assert not re.search(r'SCRIPT ERROR|(?:^|\n)ERROR:|ObjectDB instances leaked', log)
           assert all((root/(name+'.png')).is_file() for name in ['title','new_game','settings','controls','bindings','pause','save_status','save_slots','save_copy','save_history','first_steps','first_steps_help','first_steps_jump','first_steps_complete','scan_progress','scan_known','scan_journal'])
           PY
+      - name: Check campaign HUD dialogs at normal and small resolutions
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_hud.py --godot "$GODOT" --output "${{ runner.temp }}/frontend-review/hud"
       - name: Upload game screenshots and logs
         if: always()
         uses: actions/upload-artifact@v4
