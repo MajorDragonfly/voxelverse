@@ -120,3 +120,12 @@ func _run() -> void:
 	if failures.is_empty(): print("TRIBAL_STOCKPILE_PASSED")
 	await _cleanup()
 	await _finish()
+
+func _capture(label: String) -> void:
+	await super._capture(label)
+	# Two bounded inline previews allow visual review when artifact extraction
+	# is unavailable. Full-resolution evidence remains in the PNG artifact.
+	if not capture_dir.is_empty() and label == "stockpile-48":
+		var image: Image = Image.load_from_file(capture_dir.path_join(label + ".png"))
+		image.resize(960, 600, Image.INTERPOLATE_LANCZOS)
+		print("STOCKPILE_IMAGE:" + label + ":" + Marshalls.raw_to_base64(image.save_jpg_to_buffer(0.8)))

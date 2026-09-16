@@ -32,6 +32,9 @@ def main():
                 except subprocess.TimeoutExpired:
                     code = 124
         content = log_path.read_text()
+        for line in content.splitlines():
+            if line.startswith('STOCKPILE_IMAGE:'):
+                print(line, flush=True)
         passed = code == 0 and marker in content and not ERROR.search(content)
         checks.append({'test': test, 'passed': passed, 'exit_code': code})
         if not passed:

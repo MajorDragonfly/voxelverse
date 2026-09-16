@@ -58,6 +58,9 @@ func _run() -> void:
 		var directory: String = args[args.find("--capture") + 1]
 		DirAccess.make_dir_recursive_absolute(directory)
 		await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png(directory.path_join("stockpile-sphere.png"))
+		var image: Image = root.get_texture().get_image()
+		image.save_png(directory.path_join("stockpile-sphere.png"))
+		image.resize(960, 540, Image.INTERPOLATE_LANCZOS)
+		print("STOCKPILE_IMAGE:stockpile-sphere:" + Marshalls.raw_to_base64(image.save_jpg_to_buffer(0.8)))
 	if failures.is_empty(): print("TRIBAL_STOCKPILE_WORLD_PASSED")
 	await _finish()
