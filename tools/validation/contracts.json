@@ -318,7 +318,8 @@
       "tests": [
         "weather_model_test",
         "weather_runtime_test",
-        "regional_weather_test"
+        "regional_weather_test",
+        "planet_climate_test"
       ]
     }
   ],

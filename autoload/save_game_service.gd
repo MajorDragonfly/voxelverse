@@ -233,6 +233,9 @@ func load_now(custom_path: String = "") -> bool:
 			for section in ["discovered_species", "discovered_regions"]:
 				for entry: Dictionary in data.progression.get(section, {}).values():
 					model.ensure_body(int(entry.get("world_seed", data.game_state.world_seed)), system_seed)
+			# Pre-campaign saves have no historical origin evidence either.
+			model.data.erase(Registry.Climate.POLICY)
+			Registry.Climate.migrate(model.data)
 			data["game_state"]["campaign"] = model.export_state()
 			data.game_state.body_id = active.id
 			data.game_state.system_id = active.system_id

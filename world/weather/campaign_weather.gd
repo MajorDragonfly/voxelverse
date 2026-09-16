@@ -2,6 +2,7 @@ extends Node
 ## Independent campaign child: does not own Environment, sun, shader or audio state.
 ## Group `campaign_weather`, snapshot() and weather_changed are the presentation port.
 signal weather_changed(snapshot: Dictionary)
+const Climate = preload("res://world/weather/planet_climate.gd")
 const Model = preload("res://world/weather/weather_model.gd")
 const Regional = preload("res://world/weather/regional_weather.gd")
 const View = preload("res://world/weather/weather_view.gd")
@@ -65,13 +66,18 @@ func _process(delta: float) -> void:
 		_covered = true
 		_view.invalidate_cover()
 	var previous_condition: String = str(_snapshot.get("condition", ""))
-	# Read existing biome climate only; no new body/save fields or inferred hazards.
+	# Combine saved body climate with local biome samples; never infer hazards.
 	var adapter: RefCounted = Space.adapter(self)
 	var climate: Dictionary = _climate_sample.duplicate()
 	climate.atmosphere = adapter.terrain.surface.body.get("atmosphere", "temperate")
+	if body.has(Climate.FIELD): climate[Climate.FIELD] = body[Climate.FIELD].duplicate(true)
 	var address: Dictionary = Space.address(self, camera.global_position)
 	var radius: float = float(adapter.terrain.surface.body.radius)
 	_snapshot = Regional.sample(_body_id, int(body.seed), float(state.campaign.data.elapsed_seconds), address, radius, climate)
+	if _snapshot.is_empty():
+		_forecast_context = {}
+		_view.hide_weather()
+		return
 	_forecast_context = {"address": address, "radius": radius, "climate": climate}
 	if not _preview_condition.is_empty():
 		_snapshot = Regional.preview(_snapshot, _preview_condition)

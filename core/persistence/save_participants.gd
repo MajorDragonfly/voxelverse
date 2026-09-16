@@ -20,6 +20,7 @@ const Foraging = preload("res://world/resources/plants/foraging_state.gd")
 const Drinking = preload("res://creatures/ai/drinking_state.gd")
 const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Settlements = preload("res://world/tribe/settlement_collection.gd")
+const Climate = preload("res://world/weather/planet_climate.gd")
 const Onboarding = preload("res://core/onboarding_progress.gd")
 
 # Order also defines import order: designs, then GameState, then progression,
@@ -34,6 +35,7 @@ const SECTIONS: Array = [
 	{"id": "player", "fields": ["player"], "schema": 0},
 ]
 const BODY_SECTIONS: Array = [
+	{"id": Climate.FIELD, "schema": Climate.SCHEMA},
 	{"id": "settlements", "schema": Settlements.SCHEMA},
 	{"id": SiteTransport.FIELD, "schema": 1},
 	{"id": "village_simulation", "schema": 1},
@@ -139,7 +141,10 @@ static func unsupported_sections(data: Dictionary) -> bool:
 				if Progression.has_unsupported_contract(data.get("progression", {})): return true
 			"designs":
 				if data.get("design_files") is Dictionary and Designs.has_unsupported_blueprints(data.design_files): return true
-			"metadata", "game_state", "regions", "player", "onboarding":
+			"game_state":
+				var state: Variant = data.get("game_state")
+				if state is Dictionary and state.get("campaign") is Dictionary and Climate.unsupported_campaign(state.campaign): return true
+			"metadata", "regions", "player", "onboarding":
 				# Envelope versions stay central; onboarding preserves future UI data.
 				pass
 			_: return true
@@ -170,6 +175,7 @@ static func unknown_body_section(body: Dictionary) -> String:
 
 static func _validate_body_section(id: String, body: Dictionary, campaign: Dictionary, tribal: Dictionary) -> String:
 	match id:
+		Climate.FIELD: return Climate.validate_body(body, campaign)
 		"site_transport": return SiteTransport.validate(body, campaign)
 		"settlements": return Settlements.validate(body, campaign)
 		"village_simulation": return VillageSimulation.validate(body[id], body, float(campaign.get("elapsed_seconds", 0)))
@@ -216,6 +222,7 @@ static func unsupported_body(body: Dictionary) -> bool:
 static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 	var value: Variant = body.get(id)
 	match id:
+		Climate.FIELD: return Climate.unsupported_body(body)
 		"site_transport": return SiteTransport.unsupported(body)
 		"settlements": return Settlements.unsupported(body)
 		"village_simulation", "visit", "legacy_population", "wildlife_foraging", "wildlife_drinking", "surface_ecology":
