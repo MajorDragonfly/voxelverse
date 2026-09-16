@@ -80,6 +80,21 @@ inspection_mode={
 ]
 }
 
+open_journal={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":74)]
+}
+
+open_development={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":75)]
+}
+
+open_world_map={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":77)]
+}
+
 [internationalization]
 
 locale/fallback="de"

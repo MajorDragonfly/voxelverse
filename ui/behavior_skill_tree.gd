@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+const Keys = preload("res://core/input_preferences.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/skills_presentation.gd")
 const Symbols = preload("res://ui/catalog/development_symbols.gd")
@@ -65,6 +66,7 @@ func _ready() -> void:
 	progression.part_unlocked.connect(func(_id: String, _reason: String) -> void: _refresh_journal())
 	get_node("/root/GameState").phase_changed.connect(func(_phase: int) -> void: refresh())
 	get_node("/root/SaveGameService").game_loaded.connect(func(_path: String) -> void: refresh(); _refresh_journal())
+	get_node("/root/DisplaySettings").input_preferences.bindings_changed.connect(func() -> void: _refresh_static(_panel))
 	get_viewport().size_changed.connect(_layout)
 	_layout()
 
@@ -126,14 +128,15 @@ func _input(event: InputEvent) -> void:
 	if not event is InputEventKey:
 		return
 	var key: int = event.keycode if event.keycode != 0 else event.physical_keycode
-	# K remains ordinary text while searching the journal.
-	var typing: bool = get_viewport().gui_get_focus_owner() is LineEdit
-	if event.pressed and not event.echo and ((key == KEY_K and not typing and not event.ctrl_pressed and not event.alt_pressed and not event.meta_pressed) or (visible and key == KEY_ESCAPE)):
+	# Text entry and settings capture keep their input before any menu opens.
+	var focus := get_viewport().gui_get_focus_owner()
+	var typing: bool = focus is LineEdit or focus is TextEdit
+	if event.pressed and not event.echo and ((Keys.menu_event(event, "open_development") and not typing) or (visible and key == KEY_ESCAPE)):
 		if visible:
 			close_panel()
-		else:
-			open_panel()
-		get_viewport().set_input_as_handled()
+			get_viewport().set_input_as_handled()
+		elif open_panel():
+			get_viewport().set_input_as_handled()
 	elif visible and key >= KEY_F1 and key <= KEY_F35:
 		# DisplaySettings handles F8 in _input on the parallel planet branch.
 		# Block competing menus before their handlers run, including key repeats.
@@ -500,7 +503,7 @@ func _layout() -> void:
 
 
 func _label(key: String, size_value: int = 18, color: Color = Style.TEXT) -> Label:
-	var label := Style.label(Text.text(key) if key.begins_with("SKILLS_") else key, size_value, color)
+	var label := Style.label(Keys.hint(key) if key.begins_with("SKILLS_") else key, size_value, color)
 	label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	label.set_meta("skills_font_size", size_value)
 	if key.begins_with("SKILLS_"): label.set_meta("skills_text_key", key)
@@ -508,7 +511,7 @@ func _label(key: String, size_value: int = 18, color: Color = Style.TEXT) -> Lab
 
 
 func _button(key: String, color: Color = Style.SOCIAL) -> Button:
-	var button := Style.button(Text.text(key) if key.begins_with("SKILLS_") else key, color)
+	var button := Style.button(Keys.hint(key) if key.begins_with("SKILLS_") else key, color)
 	button.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -556,7 +559,7 @@ func _refresh_language() -> void:
 
 func _refresh_static(node: Node) -> void:
 	if node.has_meta("skills_text_key"):
-		node.text = Text.text(str(node.get_meta("skills_text_key")))
+		node.text = Keys.hint(str(node.get_meta("skills_text_key")))
 	for child in node.get_children(): _refresh_static(child)
 
 

@@ -1330,7 +1330,7 @@ msgid "SKILLS_TAB"
 msgstr "Fähigkeiten"
 
 msgid "SKILLS_JOURNAL"
-msgstr "Entdeckungsbuch · J"
+msgstr "Entdeckungsbuch · {journal}"
 
 msgid "SKILLS_PATH"
 msgstr "Entwicklungspfad"
@@ -2182,10 +2182,10 @@ msgid "HUD_THIRST"
 msgstr "Durst"
 
 msgid "HUD_DEVELOPMENT"
-msgstr "Entwicklung · K"
+msgstr "Entwicklung · {development}"
 
 msgid "HUD_JOURNAL"
-msgstr "Buch · J"
+msgstr "Buch · {journal}"
 
 msgid "HUD_PROGRESS"
 msgstr "{species} Arten · {parts} Teile · {points} EP"
@@ -3808,7 +3808,7 @@ msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 msgstr "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 
 msgid "JOURNAL_GUIDE"
-msgstr "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Esc schließt es wieder."
+msgstr "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder."
 
 msgid "JOURNAL_UNSCANNED"
 msgstr "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht."
@@ -4241,3 +4241,42 @@ msgstr "Treffer auf dieser Seite: {count}"
 
 msgid "ATLAS_SEARCH_PAGE"
 msgstr "Seite {page}"
+
+msgid "BIND_JOURNAL"
+msgstr "Entdeckungsbuch"
+
+msgid "BIND_DEVELOPMENT"
+msgstr "Entwicklung"
+
+msgid "BIND_WORLD_MAP"
+msgstr "Weltkarte"
+
+msgid "BIND_ALL_CONTROLS"
+msgstr "SPIEL & MENÜS · HAUPT- UND ZWEITBELEGUNG"
+
+msgid "BIND_MENUS_NOTE"
+msgstr "Menütasten: einzelne Buchstaben oder Ziffern. F, H, N und P sind für feste Spielaktionen belegt. Esc schließt ein Menü weiterhin."
+
+msgid "BIND_FIXED_PLAY_KEY"
+msgstr "Diese Taste ist bereits durch eine feste Spielaktion belegt (F, H, N oder P)."
+
+msgid "BIND_MENU_KEY_REQUIRED"
+msgstr "Für Menüs bitte eine Buchstaben- oder Zifferntaste wählen."
+
+msgid "BIND_MENUS_ADDED"
+msgstr "Deine Spieltasten bleiben erhalten. Neue Menütasten wurden auf freie Tasten gelegt; prüfe die Belegung unten."
+
+msgid "BIND_JOURNAL_BUTTON"
+msgstr "Entdeckungsbuch · {journal}"
+
+msgid "BIND_TRIBE_HINT"
+msgstr "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. {journal} öffnet eure gemeinsamen Entdeckungen."
+
+msgid "BIND_SCAN_RECOGNIZED"
+msgstr "Art erkannt · {journal} öffnet das Entdeckungsbuch"
+
+msgid "BIND_FIRST_SCAN"
+msgstr "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit {journal} im Entdeckungsbuch."
+
+msgid "BIND_CONTROLS_HELP"
+msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\n{journal}   Entdeckungsbuch\\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"

@@ -2219,8 +2219,8 @@
     },
     {
       "key": "SKILLS_JOURNAL",
-      "de": "Entdeckungsbuch · J",
-      "en": "Discovery journal · J"
+      "de": "Entdeckungsbuch · {journal}",
+      "en": "Discovery journal · {journal}"
     },
     {
       "key": "SKILLS_PATH",
@@ -3639,13 +3639,13 @@
     },
     {
       "key": "HUD_DEVELOPMENT",
-      "de": "Entwicklung · K",
-      "en": "Evolution · K"
+      "de": "Entwicklung · {development}",
+      "en": "Evolution · {development}"
     },
     {
       "key": "HUD_JOURNAL",
-      "de": "Buch · J",
-      "en": "Journal · J"
+      "de": "Buch · {journal}",
+      "en": "Journal · {journal}"
     },
     {
       "key": "HUD_PROGRESS",
@@ -6349,8 +6349,8 @@
     },
     {
       "key": "JOURNAL_GUIDE",
-      "de": "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\nJ öffnet dieses Buch. Esc schließt es wieder.",
-      "en": "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\nJ opens this book. Esc closes it."
+      "de": "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder.",
+      "en": "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
     },
     {
       "key": "JOURNAL_UNSCANNED",
@@ -7071,6 +7071,71 @@
       "key": "ATLAS_SEARCH_PAGE",
       "de": "Seite {page}",
       "en": "Page {page}"
+    },
+    {
+      "key": "BIND_JOURNAL",
+      "de": "Entdeckungsbuch",
+      "en": "Discovery journal"
+    },
+    {
+      "key": "BIND_DEVELOPMENT",
+      "de": "Entwicklung",
+      "en": "Development"
+    },
+    {
+      "key": "BIND_WORLD_MAP",
+      "de": "Weltkarte",
+      "en": "World map"
+    },
+    {
+      "key": "BIND_ALL_CONTROLS",
+      "de": "SPIEL & MENÜS · HAUPT- UND ZWEITBELEGUNG",
+      "en": "GAME & MENUS · PRIMARY AND SECONDARY BINDINGS"
+    },
+    {
+      "key": "BIND_MENUS_NOTE",
+      "de": "Menütasten: einzelne Buchstaben oder Ziffern. F, H, N und P sind für feste Spielaktionen belegt. Esc schließt ein Menü weiterhin.",
+      "en": "Menu shortcuts: single letters or digits. F, H, N and P are used by fixed game actions. Esc still closes a menu."
+    },
+    {
+      "key": "BIND_FIXED_PLAY_KEY",
+      "de": "Diese Taste ist bereits durch eine feste Spielaktion belegt (F, H, N oder P).",
+      "en": "This key is already used by a fixed game action (F, H, N or P)."
+    },
+    {
+      "key": "BIND_MENU_KEY_REQUIRED",
+      "de": "Für Menüs bitte eine Buchstaben- oder Zifferntaste wählen.",
+      "en": "Please choose a letter or digit key for menus."
+    },
+    {
+      "key": "BIND_MENUS_ADDED",
+      "de": "Deine Spieltasten bleiben erhalten. Neue Menütasten wurden auf freie Tasten gelegt; prüfe die Belegung unten.",
+      "en": "Your game bindings are preserved. New menu shortcuts have been assigned unused keys; review them below."
+    },
+    {
+      "key": "BIND_JOURNAL_BUTTON",
+      "de": "Entdeckungsbuch · {journal}",
+      "en": "Discovery journal · {journal}"
+    },
+    {
+      "key": "BIND_TRIBE_HINT",
+      "de": "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. {journal} öffnet eure gemeinsamen Entdeckungen.",
+      "en": "Your tribe · select villagers and give the group an order. {journal} opens your shared discoveries."
+    },
+    {
+      "key": "BIND_SCAN_RECOGNIZED",
+      "de": "Art erkannt · {journal} öffnet das Entdeckungsbuch",
+      "en": "Species recognised · {journal} opens the discovery journal"
+    },
+    {
+      "key": "BIND_FIRST_SCAN",
+      "de": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit {journal} im Entdeckungsbuch.",
+      "en": "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+    },
+    {
+      "key": "BIND_CONTROLS_HELP",
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\n{journal}   Entdeckungsbuch\\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
     }
   ]
 }

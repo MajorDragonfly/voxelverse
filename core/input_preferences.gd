@@ -1,6 +1,7 @@
 extends RefCounted
 
 const Text = preload("res://core/localization/ui_text.gd")
+signal bindings_changed
 
 ## Local comfort settings, independent of campaigns and creature statistics.
 const CONFIG_PATH := "user://input_preferences.cfg"
@@ -9,7 +10,11 @@ const ACTIONS := {
 	"move_left": "Nach links", "move_right": "Nach rechts",
 	"jump": "Springen / aufsteigen", "primary_action": "Interagieren",
 	"bite_action": "Beißen", "inspection_mode": "Untersuchen",
+	"open_journal": "BIND_JOURNAL", "open_development": "BIND_DEVELOPMENT",
+	"open_world_map": "BIND_WORLD_MAP",
 }
+const MENU_ACTIONS := ["open_journal", "open_development", "open_world_map"]
+const FIXED_PLAY_KEYS := [KEY_F, KEY_H, KEY_N, KEY_P]
 const FPS_OPTIONS := [0, 30, 60, 90, 120, 144, 165, 240]
 var bindings: Dictionary = {}
 var sensitivity: float = 1.0
@@ -64,11 +69,20 @@ static func binding_label(action: String) -> String:
 			names.append(code_label(code))
 	return " / ".join(names)
 
+static func menu_event(event: InputEvent, action: String) -> bool:
+	if not event is InputEventKey or event.ctrl_pressed or event.alt_pressed or event.meta_pressed or event.shift_pressed:
+		return false
+	for binding: InputEvent in InputMap.action_get_events(action):
+		if event_code(binding) == event_code(event): return true
+	return false
+
+static func hint(key: String, values: Dictionary = {}) -> String:
+	var arguments := values.duplicate()
+	for name: String in ["journal", "development", "world_map"]:
+		arguments[name] = binding_label("open_" + name)
+	return Text.format_text(key, arguments)
+
 static func reserved_reason(code: int) -> String:
-	if code == KEY_J:
-		return "J ist für das Entdeckungsbuch reserviert."
-	if code == KEY_K:
-		return "K ist für den Skilltree reserviert."
 	if code in [KEY_ESCAPE, KEY_ENTER, KEY_KP_ENTER, KEY_TAB] or (code >= KEY_F1 and code <= KEY_F35):
 		return "Diese Taste bleibt für Menüs und Spieloberflächen reserviert."
 	if code == 0 or code in [-1, -2, -3, -8, -9]:
@@ -92,6 +106,11 @@ static func validate(candidate: Dictionary) -> String:
 				return reason
 			if code == 0:
 				continue
+			if action in MENU_ACTIONS:
+				if code in FIXED_PLAY_KEYS:
+					return Text.text("BIND_FIXED_PLAY_KEY")
+				if not ((code >= KEY_A and code <= KEY_Z) or (code >= KEY_0 and code <= KEY_9)):
+					return Text.text("BIND_MENU_KEY_REQUIRED")
 			if occupied.has(code):
 				return Text.format_text("BIND_CONFLICT", {"key": code_label(code), "action": Text.text(ACTIONS[occupied[code]])})
 			occupied[code] = action
@@ -118,8 +137,28 @@ func load_saved(path: String = CONFIG_PATH) -> void:
 	var candidate := defaults()
 	for action: String in ACTIONS:
 		candidate[action] = config.get_value("bindings", action, candidate[action])
+	# Older profiles have no menu actions. Preserve every existing game binding,
+	# including M, and add only missing menu bindings using unoccupied keys.
+	var occupied := {}
+	for action: String in ACTIONS:
+		if action in MENU_ACTIONS and not config.has_section_key("bindings", action): continue
+		if candidate[action] is Array:
+			for code: Variant in candidate[action]:
+				if code is int and code != 0: occupied[code] = true
+	var adjusted: bool = false
+	for action: String in MENU_ACTIONS:
+		if config.has_section_key("bindings", action): continue
+		var preferred: int = candidate[action][0]
+		var choices: Array = [preferred] + range(KEY_A, KEY_Z + 1) + range(KEY_0, KEY_9 + 1)
+		for code: int in choices:
+			if occupied.has(code) or code in FIXED_PLAY_KEYS: continue
+			candidate[action] = [code, 0]
+			occupied[code] = true
+			adjusted = adjusted or code != preferred
+			break
 	if validate(candidate).is_empty():
 		bindings = candidate
+		if adjusted: load_message = Text.text("BIND_MENUS_ADDED")
 	else:
 		load_message = "Ungültige Tastenbelegung; Standardtasten sind aktiv."
 	var speed: Variant = config.get_value("camera", "sensitivity", 1.0)
@@ -171,6 +210,7 @@ func apply_runtime() -> void:
 				mouse.button_index = -code as MouseButton
 				InputMap.action_add_event(action, mouse)
 	Engine.max_fps = fps_limit
+	bindings_changed.emit()
 
 func camera_motion(motion: Vector2, base_sensitivity: float) -> Vector2:
 	return motion * base_sensitivity * sensitivity * Vector2(1.0, -1.0 if invert_y else 1.0)

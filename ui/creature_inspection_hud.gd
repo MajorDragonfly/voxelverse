@@ -110,7 +110,7 @@ func _process(_delta: float) -> void:
 	if target == null:
 		_scan_label.text = "Ziele auf eine Kreatur in deiner Nähe."
 	elif _scanner.known:
-		_scan_label.text = "Art erkannt · J öffnet das Entdeckungsbuch"
+		_scan_label.text = KeyHints.hint("BIND_SCAN_RECOGNIZED")
 		_show_target(target)
 	else:
 		_scan_label.text = "Unbekannte Art · Scannen %d %%\nHalte das Tier im Fadenkreuz." % floori(_scanner.ratio() * 100.0)

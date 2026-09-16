@@ -1330,7 +1330,7 @@ msgid "SKILLS_TAB"
 msgstr "Skills"
 
 msgid "SKILLS_JOURNAL"
-msgstr "Discovery journal · J"
+msgstr "Discovery journal · {journal}"
 
 msgid "SKILLS_PATH"
 msgstr "Development path"
@@ -2182,10 +2182,10 @@ msgid "HUD_THIRST"
 msgstr "Thirst"
 
 msgid "HUD_DEVELOPMENT"
-msgstr "Evolution · K"
+msgstr "Evolution · {development}"
 
 msgid "HUD_JOURNAL"
-msgstr "Journal · J"
+msgstr "Journal · {journal}"
 
 msgid "HUD_PROGRESS"
 msgstr "{species} species · {parts} parts · {points} DP"
@@ -3808,7 +3808,7 @@ msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 msgstr "Hold the left mouse button to rotate · use the mouse wheel to zoom"
 
 msgid "JOURNAL_GUIDE"
-msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\nJ opens this book. Esc closes it."
+msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
 
 msgid "JOURNAL_UNSCANNED"
 msgstr "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
@@ -4241,3 +4241,42 @@ msgstr "Matches on this page: {count}"
 
 msgid "ATLAS_SEARCH_PAGE"
 msgstr "Page {page}"
+
+msgid "BIND_JOURNAL"
+msgstr "Discovery journal"
+
+msgid "BIND_DEVELOPMENT"
+msgstr "Development"
+
+msgid "BIND_WORLD_MAP"
+msgstr "World map"
+
+msgid "BIND_ALL_CONTROLS"
+msgstr "GAME & MENUS · PRIMARY AND SECONDARY BINDINGS"
+
+msgid "BIND_MENUS_NOTE"
+msgstr "Menu shortcuts: single letters or digits. F, H, N and P are used by fixed game actions. Esc still closes a menu."
+
+msgid "BIND_FIXED_PLAY_KEY"
+msgstr "This key is already used by a fixed game action (F, H, N or P)."
+
+msgid "BIND_MENU_KEY_REQUIRED"
+msgstr "Please choose a letter or digit key for menus."
+
+msgid "BIND_MENUS_ADDED"
+msgstr "Your game bindings are preserved. New menu shortcuts have been assigned unused keys; review them below."
+
+msgid "BIND_JOURNAL_BUTTON"
+msgstr "Discovery journal · {journal}"
+
+msgid "BIND_TRIBE_HINT"
+msgstr "Your tribe · select villagers and give the group an order. {journal} opens your shared discoveries."
+
+msgid "BIND_SCAN_RECOGNIZED"
+msgstr "Species recognised · {journal} opens the discovery journal"
+
+msgid "BIND_FIRST_SCAN"
+msgstr "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+
+msgid "BIND_CONTROLS_HELP"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"

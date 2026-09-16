@@ -281,7 +281,8 @@
         "editor_localization_test",
         "journal_localization_test",
         "husbandry_localization_test",
-        "tribal_playtest_test"
+        "tribal_playtest_test",
+        "menu_rebinding_test"
       ]
     },
     {

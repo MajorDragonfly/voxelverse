@@ -105,7 +105,7 @@ func hint(step: String) -> String:
 		"inspect":
 			if is_instance_valid(_player) and bool(_player.get("inspection_mode_enabled")):
 				return "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort."
-			return Text.text("%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch.") % Keys.binding_label("inspection_mode")
+			return Keys.hint("BIND_FIRST_SCAN") % Keys.binding_label("inspection_mode")
 	return ""
 
 func build_help(parent: VBoxContainer) -> void:

@@ -1,4 +1,5 @@
 extends CanvasLayer
+const Keys = preload("res://core/input_preferences.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const Presentation = preload("res://ui/world_map/atlas_presentation.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
@@ -77,14 +78,7 @@ func _ready() -> void:
 	_layout()
 
 func shortcut_text() -> String:
-	return "M" if _plain_m_available() else Text.text("ATLAS_SHIFT_M")
-
-func _plain_m_available() -> bool:
-	for action: StringName in InputMap.get_actions():
-		if str(action).begins_with("ui_"): continue
-		for event: InputEvent in InputMap.action_get_events(action):
-			if event is InputEventKey and (event.keycode == KEY_M or event.physical_keycode == KEY_M): return false
-	return true
+	return Keys.binding_label("open_world_map")
 
 func _build() -> void:
 	var shade := ColorRect.new()
@@ -286,8 +280,12 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event.pressed and not event.echo:
+		if Keys.menu_event(event, "open_world_map"):
+			close_map()
+			get_viewport().set_input_as_handled()
+			return
 		match key:
-			KEY_M, KEY_ESCAPE: close_map()
+			KEY_ESCAPE: close_map()
 			KEY_PLUS, KEY_EQUAL, KEY_KP_ADD: zoom(-1)
 			KEY_MINUS, KEY_KP_SUBTRACT: zoom(1)
 			KEY_HOME: focus_player()
@@ -298,9 +296,8 @@ func _input(event: InputEvent) -> void:
 	if key not in [KEY_TAB, KEY_ENTER, KEY_KP_ENTER, KEY_SPACE]: get_viewport().set_input_as_handled()
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if not event is InputEventKey or not event.pressed or event.echo or event.ctrl_pressed or event.alt_pressed or event.meta_pressed: return
-	if event.keycode == KEY_M or event.physical_keycode == KEY_M:
-		if (_plain_m_available() or event.shift_pressed) and open_map(): get_viewport().set_input_as_handled()
+	if event.is_pressed() and not event.is_echo() and Keys.menu_event(event, "open_world_map"):
+		if open_map(): get_viewport().set_input_as_handled()
 
 func _process(delta: float) -> void:
 	if not is_open: return
