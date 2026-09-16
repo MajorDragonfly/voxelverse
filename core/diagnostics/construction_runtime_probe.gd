@@ -113,17 +113,31 @@ func _construction_layout(tribe: Node) -> void:
 				display.ui_scale = scale_value
 				tribe.panel.refresh()
 				tribe.panel._layout()
-				for frame in range(4): await tree.process_frame
-				tribe.panel._scroll.ensure_control_visible(ui._cancel)
-				for frame in range(3): await tree.process_frame
+				await _reveal_action(tribe.panel._scroll, ui._cancel)
 				var area: Rect2 = tribe.panel._scroll.get_global_rect()
 				var rect: Rect2 = ui._cancel.get_global_rect()
-				_expect(area.has_point(rect.get_center()) and rect.size.x <= area.size.x + 1, "Construction action inaccessible: %s %s %.1f" % [locale, size, scale_value])
+				_expect(area.has_point(rect.get_center()) and rect.size.x <= area.size.x + 1, "Construction action inaccessible: %s %s %.1f area=%s button=%s" % [locale, size, scale_value, area, rect])
 				_expect(ui._confirming and not ui._details.text.contains("CONSTRUCTION_"), "Layout refresh lost confirmation or localization.")
 	tree.root.size = original
 	display.ui_scale = original_scale
 	TranslationServer.set_locale("de")
 	tribe.panel.refresh()
+
+func _reveal_action(scroll: ScrollContainer, button: Control) -> void:
+	# Font wrapping and feedback reparenting need several deferred container
+	# passes after a resize. Scroll against the settled geometry, retaining a
+	# bounded failure if the action never becomes reachable.
+	var previous: Array = []
+	var stable: int = 0
+	for frame in range(30):
+		await tree.process_frame
+		scroll.ensure_control_visible(button)
+		var area: Rect2 = scroll.get_global_rect()
+		var rect: Rect2 = button.get_global_rect()
+		var current: Array = [area, rect, scroll.scroll_vertical]
+		stable = stable + 1 if current == previous else 0
+		previous = current
+		if stable >= 3 and area.has_point(rect.get_center()) and rect.size.x <= area.size.x + 1: return
 
 func _done() -> void:
 	Engine.time_scale = 1.0

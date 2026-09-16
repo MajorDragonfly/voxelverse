@@ -24,5 +24,20 @@
     "command": "python3 -m unittest discover -s tests/tooling -p 'project_dashboard_test.py'",
     "result": "15 tests passed; two added regressions for detailed integrations and verified tracking-only forward diffs.",
     "log": "dashboard-live-fix.log.gz"
+  },
+  "settlement_wait_followup": {
+    "local": "b47cb3ab9338d844ff6264f187d7ab210d976623",
+    "published": "bc8fd6e5bb809359a384d412b2fde49feb01019c",
+    "tree": "a0a741a2d4506efbadda884a8f7f589b14626451",
+    "baseline": "26d8fd29cee8ddb6cd19fbb923f5d6dd553615c6",
+    "failed_ci_job": "https://github.com/MajorDragonfly/voxelverse/actions/runs/35091549359/job/104778901559",
+    "diagnosis": "At 2 FPS the previous 20-second wall deadline allowed only 5.467 seconds of physics. The carrier still held stone on its return path; after 6.55 seconds of physics only the secondary stock received it. Exit 0, both restart and final markers.",
+    "diagnostic_source": "db219a7 plus the archived instrumentation patch; deliberately modified diagnostic worktree",
+    "logs": [
+      "settlement-clock-diagnostic.log.gz",
+      "settlement-clock-diagnostic.patch.gz"
+    ],
+    "fix": "Keep original physics-time work budgets, cap each wait at 120 wall seconds, and retain physical delivery and separate stock assertions. --slow-settlement-work reproduces the low-FPS case.",
+    "validation": "Exact published-head CI and source regression details are recorded in PR #141."
   }
 }

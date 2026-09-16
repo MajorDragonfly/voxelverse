@@ -94,3 +94,24 @@ führenden GitHub-Dateivergleich. Ausschließlich bekannte Dokumentations-/Statu
 sind zulässig. Geänderter Spielcode, unsichere Umbenennungen, divergierende Historie
 und ein möglicherweise bei 300 Dateien gekürzter Vergleich bleiben abgleichpflichtig.
 15 Dashboard-Werkzeugtests einschließlich zwei neuer Regressionen bestanden.
+
+
+## Siedlungsprüfung bei langsamer Softwaregrafik
+
+Der Grafiklauf reproduzierte denselben Lieferungsfehler wie #125. Die gezielte
+Diagnose mit 2 FPS zeigt die Ursache: Nach 20,413 Sekunden Echtzeit waren erst
+5,467 Sekunden Physikzeit vergangen. Der Bewohner trug den Stein noch zurück;
+beide Lager enthielten weiterhin null Steine. Nach 6,55 Sekunden Physikzeit lag
+der Stein korrekt nur im zweiten Lager. Die Simulation und Lagerzuordnung
+brauchten dafür keine Änderung.
+
+Der Prüfablauf misst die bisherigen Geh-/Arbeitsbudgets jetzt in Physikzeit,
+begrenzt jeden Wartevorgang zusätzlich auf 120 Sekunden Echtzeit und meldet beide
+Zeiten. Ankunft und unverändertes Ursprungslager werden separat geprüft. Mit
+`--slow-settlement-work` lässt sich derselbe Ablauf bei 2 FPS wiederholen.
+Quellstand der Korrektur: `bc8fd6e5bb809359a384d412b2fde49feb01019c`.
+Der veröffentlichte Grafiklauf bleibt der entscheidende Renderer-Nachweis;
+ein Headless-Lauf beansprucht keine Grafik- oder Ziel-PC-Freigabe.
+
+[Diagnoselog](evidence/integration-20260916/settlement-clock-diagnostic.log.gz) ·
+[genaue Instrumentierung](evidence/integration-20260916/settlement-clock-diagnostic.patch.gz).
