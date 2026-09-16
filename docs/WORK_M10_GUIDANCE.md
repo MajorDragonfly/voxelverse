@@ -68,3 +68,8 @@ die übrigen gemeinsamen Verbraucher.
 Ein erfolgreicher Prozess-Exit allein ist kein Vollständigkeitsbeleg: Die Logs
 müssen den abschließenden Testmarker enthalten. Kopflose Tests sind keine native
 Windows-/Export-/FPS-/gerenderte Sichtfreigabe.
+
+Abgeschlossen: vier gezielte Tests mit vollständigen Abschlussmarkern, einschließlich
+frischem Prozess, plus Import-/Quellenprüfungen. Alle neun Karten wurden in 72
+Sprach-/Auflösungs-/Textgrößenkombinationen geprüft. Befehle, Umgebung, sauberer
+Quell-Tree, unveränderte Logs und Grenzen: [evidence/m10-guidance](../evidence/m10-guidance/README.md).
