@@ -249,6 +249,7 @@
       "tests": [
         "atlas_paging_test",
         "atlas_places_test",
+        "atlas_search_test",
         "creature_scan_test",
         "discovery_journal_test",
         "domestic_fauna_journal_test",

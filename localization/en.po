@@ -4211,3 +4211,33 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "ATLAS_SEARCH_PLACEHOLDER"
+msgstr "Search places …"
+
+msgid "ATLAS_SEARCH_TOOLTIP"
+msgstr "Search known places on this planet · Ctrl+F\nEsc: leave text input; Esc again: close map"
+
+msgid "ATLAS_SEARCH_PREVIOUS"
+msgstr "Previous page of places"
+
+msgid "ATLAS_SEARCH_NEXT"
+msgstr "Next page of places"
+
+msgid "ATLAS_SEARCH_WAITING"
+msgstr "Preparing search …"
+
+msgid "ATLAS_SEARCH_PROGRESS"
+msgstr "Searching … {scanned} / {total} places checked"
+
+msgid "ATLAS_SEARCH_NO_RESULTS"
+msgstr "No matching known places. Change the search or filters."
+
+msgid "ATLAS_SEARCH_FAILED"
+msgstr "Places could not be read. Saved data remains protected."
+
+msgid "ATLAS_SEARCH_RESULTS"
+msgstr "Matches on this page: {count}"
+
+msgid "ATLAS_SEARCH_PAGE"
+msgstr "Page {page}"

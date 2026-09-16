@@ -4211,3 +4211,33 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "ATLAS_SEARCH_PLACEHOLDER"
+msgstr "Orte suchen …"
+
+msgid "ATLAS_SEARCH_TOOLTIP"
+msgstr "Bekannte Orte auf diesem Planeten suchen · Strg+F\nEsc: Texteingabe verlassen; erneut Esc: Karte schließen"
+
+msgid "ATLAS_SEARCH_PREVIOUS"
+msgstr "Vorherige Ortsseite"
+
+msgid "ATLAS_SEARCH_NEXT"
+msgstr "Nächste Ortsseite"
+
+msgid "ATLAS_SEARCH_WAITING"
+msgstr "Suche wird vorbereitet …"
+
+msgid "ATLAS_SEARCH_PROGRESS"
+msgstr "Suche … {scanned} / {total} Orte geprüft"
+
+msgid "ATLAS_SEARCH_NO_RESULTS"
+msgstr "Keine passenden bekannten Orte. Suchtext oder Filter ändern."
+
+msgid "ATLAS_SEARCH_FAILED"
+msgstr "Orte konnten nicht gelesen werden. Die gespeicherten Daten bleiben geschützt."
+
+msgid "ATLAS_SEARCH_RESULTS"
+msgstr "Treffer auf dieser Seite: {count}"
+
+msgid "ATLAS_SEARCH_PAGE"
+msgstr "Seite {page}"

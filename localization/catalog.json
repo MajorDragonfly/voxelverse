@@ -7021,6 +7021,56 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "ATLAS_SEARCH_PLACEHOLDER",
+      "de": "Orte suchen …",
+      "en": "Search places …"
+    },
+    {
+      "key": "ATLAS_SEARCH_TOOLTIP",
+      "de": "Bekannte Orte auf diesem Planeten suchen · Strg+F\nEsc: Texteingabe verlassen; erneut Esc: Karte schließen",
+      "en": "Search known places on this planet · Ctrl+F\nEsc: leave text input; Esc again: close map"
+    },
+    {
+      "key": "ATLAS_SEARCH_PREVIOUS",
+      "de": "Vorherige Ortsseite",
+      "en": "Previous page of places"
+    },
+    {
+      "key": "ATLAS_SEARCH_NEXT",
+      "de": "Nächste Ortsseite",
+      "en": "Next page of places"
+    },
+    {
+      "key": "ATLAS_SEARCH_WAITING",
+      "de": "Suche wird vorbereitet …",
+      "en": "Preparing search …"
+    },
+    {
+      "key": "ATLAS_SEARCH_PROGRESS",
+      "de": "Suche … {scanned} / {total} Orte geprüft",
+      "en": "Searching … {scanned} / {total} places checked"
+    },
+    {
+      "key": "ATLAS_SEARCH_NO_RESULTS",
+      "de": "Keine passenden bekannten Orte. Suchtext oder Filter ändern.",
+      "en": "No matching known places. Change the search or filters."
+    },
+    {
+      "key": "ATLAS_SEARCH_FAILED",
+      "de": "Orte konnten nicht gelesen werden. Die gespeicherten Daten bleiben geschützt.",
+      "en": "Places could not be read. Saved data remains protected."
+    },
+    {
+      "key": "ATLAS_SEARCH_RESULTS",
+      "de": "Treffer auf dieser Seite: {count}",
+      "en": "Matches on this page: {count}"
+    },
+    {
+      "key": "ATLAS_SEARCH_PAGE",
+      "de": "Seite {page}",
+      "en": "Page {page}"
     }
   ]
 }
