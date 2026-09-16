@@ -1,0 +1,310 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+    "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+    "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+    "complete": true,
+    "file_count": 3466,
+    "bytes": 102738716,
+    "bytes_hashed": 102738716,
+    "seconds": 0.2973
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "frontend_test",
+    "localization_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+      "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+      "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+      "complete": true,
+      "file_count": 3466,
+      "bytes": 102738716,
+      "bytes_hashed": 102738716,
+      "seconds": 0.2973
+    },
+    "end": {
+      "available": true,
+      "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+      "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+      "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+      "complete": true,
+      "file_count": 3466,
+      "bytes": 102738716,
+      "bytes_hashed": 102738716,
+      "seconds": 0.2742
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "2cbb014f7eb744b100d8bc67dcab1713f466cb92d7642a9c1259ba04c4619c98"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "2cbb014f7eb744b100d8bc67dcab1713f466cb92d7642a9c1259ba04c4619c98"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+          "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+          "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+          "complete": true,
+          "file_count": 3466,
+          "bytes": 102738716,
+          "bytes_hashed": 0,
+          "seconds": 0.1524
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+          "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+          "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+          "complete": true,
+          "file_count": 3466,
+          "bytes": 102738716,
+          "bytes_hashed": 0,
+          "seconds": 0.1372
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "import",
+        "source": {
+          "available": true,
+          "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+          "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+          "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+          "complete": true,
+          "file_count": 3466,
+          "bytes": 102738716,
+          "bytes_hashed": 0,
+          "seconds": 0.1395
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "art_sources",
+        "source": {
+          "available": true,
+          "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+          "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+          "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+          "complete": true,
+          "file_count": 3466,
+          "bytes": 102738716,
+          "bytes_hashed": 0,
+          "seconds": 0.1666
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "frontend_test",
+        "source": {
+          "available": true,
+          "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+          "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+          "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+          "complete": true,
+          "file_count": 3466,
+          "bytes": 102738716,
+          "bytes_hashed": 0,
+          "seconds": 0.1605
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "localization_test",
+        "source": {
+          "available": true,
+          "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+          "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+          "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+          "complete": true,
+          "file_count": 3466,
+          "bytes": 102738716,
+          "bytes_hashed": 0,
+          "seconds": 0.1434
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "57e31e770ecfffa0b13f7e7e86b28249f33c3a56",
+          "tree": "d76c74d30c780596cd2bef381c45dee5aa3d30d4",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "d6f804a1f3894d805485184e889f6b7ef122dcfed9b56f1fa68787a34f26132a",
+          "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+          "complete": true,
+          "file_count": 3466,
+          "bytes": 102738716,
+          "bytes_hashed": 102738716,
+          "seconds": 0.2742
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/3ef607099754/voxelverse/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/3ef607099754/voxelverse",
+        "--output",
+        "/workspace/scratch/3ef607099754/qa/escape-settings/contracts.json"
+      ],
+      "log_sha256": "8e1525d1013f6a68c0f1dcd42920c206986439942f0c90496126ac1257fb5c78",
+      "process_passed": true,
+      "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.833,
+      "command": [
+        "/tmp/voxelverse-validation-editor-swkghb4l/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/3ef607099754/voxelverse",
+        "--import"
+      ],
+      "log_sha256": "44acb48586d24c23dade31fdb31c7565d01c6735c678558ac285b625d8e9dca9",
+      "process_passed": true,
+      "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.82,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/3ef607099754/voxelverse/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "frontend_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 66.111,
+      "command": [
+        "/tmp/voxelverse-validation-editor-swkghb4l/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/3ef607099754/voxelverse",
+        "--script",
+        "res://tests/frontend_test.gd"
+      ],
+      "log_sha256": "6196a6c60b5d89e77f4831da89753c0cf2799d7ede3f5a1908e38c1e5dc43936",
+      "contract": "frontend_locale",
+      "process_passed": true,
+      "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.029,
+      "command": [
+        "/tmp/voxelverse-validation-editor-swkghb4l/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/3ef607099754/voxelverse",
+        "--script",
+        "res://tests/localization_test.gd"
+      ],
+      "log_sha256": "526d00b06e915f707b400417468f7114a1b6fac8ea9d765f44237c2c65e9c54e",
+      "contract": "frontend_locale",
+      "process_passed": true,
+      "source_sha256": "f5cb4657de3b792aa907d3458e415b54d46e0f1781dc3c02dd382ba6972ba007",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": true
+    }
+  ]
+}

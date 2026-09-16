@@ -68,3 +68,28 @@ Der Grafikrunner prüft vor/nach dem Lauf einen sauberen, unveränderten Commit 
 Tree. Je Renderer: 15 Aufnahmen, zwei Sprachen, drei Größen bei 130 %, Eingabe,
 Neustart, Darstellung der echten Atmosphären-/Unterwassercontroller in einer festen
 Voxelszene. Kampagnenreise wird separat im Fachlauf geprüft.
+
+
+## Nachtrag: Einstellungen standardmäßig über Esc
+
+Der reguläre Weg ist **Esc → Einstellungen**. Der bestehende gemeinsame Dialog
+enthält Anzeige, Steuerung, Sprache und Grafik; unter Anzeige öffnet **Ton und
+Musik …** alle Audioeinstellungen. Die Spielhilfe und DE/EN-Menühinweise wurden
+entsprechend korrigiert. F8 bleibt nur ein optionaler Direktzugriff.
+
+Der vorhandene Frontend-Test prüft jetzt den Weg mit echten Eingabeereignissen:
+Esc pausiert die laufende Kugelkampagne, der Einstellungen-Button öffnet denselben
+Dialog, alle vier Reiter sind erreichbar, die 18 Grafikwerte und sieben
+Audiopräferenzen sind vorhanden. Esc führt aus Audio zurück zu Einstellungen,
+zur Pause und schließlich ins Spiel; die Welt läuft erst beim letzten Schritt weiter.
+
+`frontend_test` und `localization_test` sowie Import und Quellgates bestanden mit
+Godot 4.6.3 unter Linux/headless und isolierten Nutzerdaten. Sauberer, unveränderter
+lokaler Quellcommit `57e31e770ecfffa0b13f7e7e86b28249f33c3a56`, veröffentlicht als
+`dac852c97f4e8a74ca050916c97b87db030be0d7`; identischer Tree
+`d76c74d30c780596cd2bef381c45dee5aa3d30d4`.
+[Exakter Befehl, Fingerabdruck und Ergebnisse](escape-settings/results.json),
+[Frontend-Protokoll](escape-settings/frontend_test.log) und
+[Sprachprotokoll](escape-settings/localization_test.log).
+Dieser Nachtrag erweitert den Bediennachweis; die oben genannte native Grafikprüfung
+bezieht sich weiterhin auf ihren dort angegebenen früheren Quellstand.
