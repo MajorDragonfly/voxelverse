@@ -26,11 +26,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-godot-editor
         id: engine
-      - name: Validate placement and enlarged economy controls
+      - name: Validate placement inputs and sphere alignment
         run: >-
           python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
-          --tests tribal_building_preview_test tribal_building_preview_world_test
-          tribal_age_economy_test tribal_economy_progress_world_test --skip-main
+          --tests tribal_building_preview_test tribal_building_preview_world_test --skip-main
           --output "${{ runner.temp }}/tribal-placement-validation"
       - name: Install software display
         run: |
@@ -51,4 +50,24 @@ jobs:
           path: |
             ${{ runner.temp }}/tribal-placement-validation
             ${{ runner.temp }}/tribal-placement-render
+          retention-days: 14
+
+  economy-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Check enlarged economy controls and work receipts
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests tribal_age_economy_test tribal_economy_progress_world_test --skip-main
+          --output "${{ runner.temp }}/tribal-economy-controls"
+      - name: Upload economy control checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-economy-controls
+          path: ${{ runner.temp }}/tribal-economy-controls
           retention-days: 14
