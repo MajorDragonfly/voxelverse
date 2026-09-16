@@ -34,7 +34,7 @@ func _run() -> void:
 	browser = Browser.new()
 	root.add_child(browser)
 	browser.back_requested.connect(func() -> void: back_count += 1)
-	await _frames(4)
+	await _idle()
 	_expect(browser._slots.size() == 31, "Browser lost real, damaged, backup-only or history-only slots")
 	_expect(browser._list.get_child_count() == 12 and not browser._next.disabled, "Initial list built an unbounded number of previews")
 	await _queries()
@@ -105,6 +105,7 @@ func _queries() -> void:
 	browser._sort.select(1)
 	browser._sort.item_selected.emit(1)
 	browser.select_slot(original)
+	await _idle()
 	await _frames(3)
 	await _click(browser._next)
 	_expect(browser._page == 1 and browser._list.get_child_count() == 12, "Real Next click did not advance the result page")
@@ -139,6 +140,7 @@ func _queries() -> void:
 	browser._state_filter.item_selected.emit(1)
 	_expect(browser._filtered.size() == 27, "Intact filter retained backups or unreadable slots")
 	browser.select_slot(original)
+	await _idle()
 	var history_index: int = browser._entries.size() - 1
 	browser._history.select(history_index)
 	browser._history.item_selected.emit(history_index)
@@ -147,7 +149,7 @@ func _queries() -> void:
 	browser._name_input.grab_focus()
 	browser._name_input.caret_column = 4
 	root.get_node("LocaleManager")._apply("en")
-	await _frames(3)
+	await _idle()
 	_expect(browser.selected_path == original and browser._name_input.text == "Entwurf {key}" and browser._name_input.has_focus() and browser._name_input.caret_column == 4, "Language switch lost identity, literal draft or text focus")
 	_expect(browser._entries[browser._history.selected].source == history_source and browser._state_filter.selected == 1, "Language switch changed history selection or filters")
 	browser._reset_filters()
@@ -160,6 +162,8 @@ func _queries() -> void:
 	_expect(back_count == 0 and not browser._search.has_focus(), "Escape exited before releasing search focus")
 	await _key(KEY_ESCAPE)
 	_expect(back_count == 1, "Second Escape did not return to the title menu")
+	browser.refresh()
+	await _idle()
 	browser._reset_filters()
 	await _frames(3)
 
@@ -209,6 +213,7 @@ func _actions() -> void:
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(paths[14]))
 	_expect(copied.game_state.campaign.id != source.game_state.campaign.id, "Browser copy reused the source campaign identity")
 	browser.select_slot(original)
+	await _idle()
 	browser._history.select(browser._entries.size() - 1)
 	browser._history.item_selected.emit(browser._history.selected)
 	var historical: String = browser._entries[browser._history.selected].source
@@ -223,6 +228,7 @@ func _actions() -> void:
 	var blocked: String = saves.duplicate_slot(original, "Blocked")
 	_write(blocked + ".history", "not a directory")
 	browser.refresh(blocked)
+	await _idle()
 	var protected_bytes: String = FileAccess.get_file_as_string(blocked)
 	browser._name_input.text = "Cannot save"
 	await _detail_click("RenameSlot")
@@ -246,7 +252,7 @@ func _detail_click(id: String) -> void:
 	browser._right.ensure_control_visible(button)
 	await _frames(3)
 	await _click(button)
-	await _frames(3)
+	await _idle()
 
 func _click(control: Control) -> void:
 	var point: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
@@ -290,3 +296,10 @@ func _frames(count: int) -> void:
 func _expect(condition: bool, message: String) -> void:
 	checks += 1
 	if not condition: failures.append(message)
+
+func _idle() -> void:
+	for frame in range(2000):
+		if not browser.is_loading(): break
+		await process_frame
+	_expect(not browser.is_loading(), "Browser scan did not finish")
+	await _frames(3)

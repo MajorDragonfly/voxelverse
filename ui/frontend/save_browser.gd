@@ -43,6 +43,13 @@ var _show_details: bool = false
 var _query_pending: bool = false
 var _query_delay: float = 0.0
 var _selection_memory: Dictionary = {}
+var _scan: RefCounted
+var _history_scan: RefCounted
+var _preferred_path: String = ""
+var _scan_label: Label
+var _history_label: Label
+var _history_loaded: bool = false
+var _left_view: bool = false
 const STATUS_KEYS := ["SAVE_FILTER_ALL", "SAVE_FILTER_READY", "SAVE_FILTER_ATTENTION"]
 const STATUS_IDS := ["all", "ready", "attention"]
 const SORT_KEYS := ["SAVE_SORT_RECENT", "SAVE_SORT_NAME", "SAVE_SORT_PLAYTIME"]
@@ -71,7 +78,7 @@ func _ready() -> void:
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_toolbar.add_child(spacer)
 	_details_toggle = _button(_toolbar, "SAVE_VIEW_DETAILS", func() -> void: _show_details = not _show_details; _layout(), "SaveDetailsToggle")
-	_button(_toolbar, "SAVE_BROWSER_BACK", func() -> void: back_requested.emit(), "BackFromSaves")
+	_button(_toolbar, "SAVE_BROWSER_BACK", _leave, "BackFromSaves")
 	_heading = Style.label(column, "DEINE ABENTEUER", 27)
 	_tools = VBoxContainer.new()
 	column.add_child(_tools)
@@ -138,15 +145,74 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_layout)
 	resized.connect(_layout)
 	_right.resized.connect(_layout)
+	visibility_changed.connect(_visibility_changed)
 	refresh()
 
 func refresh(preferred_path: String = "") -> void:
 	_remember_selection()
-	_slots = _saves.list_slots()
-	var paths: Array = _slots.map(func(slot: Dictionary) -> String: return str(slot.path))
-	for path: String in _selection_memory.keys():
-		if path not in paths: _selection_memory.erase(path)
-	_apply_query(preferred_path, true)
+	_preferred_path = preferred_path if not preferred_path.is_empty() else (selected_path if not selected_path.is_empty() else _preferred_path)
+	_cancel_scans()
+	_left_view = false
+	_slots = []
+	_filtered = []
+	selected_path = ""
+	_entries = []
+	_name_input = null
+	_history = null
+	_clear_children(_list)
+	_clear_children(_details)
+	_scan_label = Style.paragraph(_list, "SAVE_SCAN_DISCOVER")
+	_previous.disabled = true
+	_next.disabled = true
+	_page_label.text = ""
+	_show_details = false
+	_scan = _saves.begin_slot_scan()
+	_layout()
+
+func is_loading() -> bool:
+	return _scan != null or _history_scan != null
+
+func _cancel_scans() -> void:
+	if _scan != null: _scan.cancel()
+	if _history_scan != null: _history_scan.cancel()
+	_scan = null
+	_history_scan = null
+
+func _exit_tree() -> void:
+	_cancel_scans()
+
+func _leave() -> void:
+	_cancel_scans()
+	_left_view = true
+	back_requested.emit()
+
+func _visibility_changed() -> void:
+	if not is_visible_in_tree():
+		_remember_selection()
+		_cancel_scans()
+	elif is_node_ready():
+		refresh(_preferred_path if selected_path.is_empty() else selected_path)
+
+func _scan_progress() -> void:
+	if _scan == null: return
+	_scan_label.text = Text.text("SAVE_SCAN_DISCOVER") if _scan.discovering else Text.format_text("SAVE_SCAN_PROGRESS", {"done": _scan.inspected, "total": _scan.paths.size()})
+
+func _advance_scan() -> void:
+	if _scan != null:
+		if not _scan.advance():
+			_scan_progress()
+			return
+		_slots = _scan.result
+		_scan = null
+		var paths: Array = _slots.map(func(slot: Dictionary) -> String: return str(slot.path))
+		for path: String in _selection_memory.keys():
+			if path not in paths: _selection_memory.erase(path)
+		_apply_query(_preferred_path, true)
+		_preferred_path = ""
+	elif _history_scan != null and _history_scan.advance():
+		_entries = _history_scan.result
+		_history_scan = null
+		_finish_history()
 
 func _choice(parent: Node, id: String, hint: String) -> OptionButton:
 	var choice := OptionButton.new()
@@ -174,6 +240,8 @@ func _translate_filters() -> void:
 
 func _process(delta: float) -> void:
 	_status.visible = not _status.text.is_empty()
+	if not is_visible_in_tree() or _left_view: return
+	_advance_scan()
 	if not _query_pending: return
 	_query_delay -= delta
 	if _query_delay <= 0.0: _apply_query()
@@ -189,6 +257,7 @@ func _reset_filters() -> void:
 
 func _apply_query(preferred_path: String = "", force_details: bool = false) -> void:
 	_query_pending = false
+	if _scan != null: return
 	_filtered = Query.select(_slots, _search.text, _phase_filter.selected - 1, STATUS_IDS[_state_filter.selected], SORT_IDS[_sort.selected])
 	if not preferred_path.is_empty() and Query.page_for(_filtered, preferred_path) < 0 and Query.page_for(_slots, preferred_path) >= 0:
 		# After copy/restore/rename the acted-on slot must remain visible.
@@ -252,6 +321,8 @@ func _render_page(preferred_path: String = "", force_details: bool = false) -> v
 	_next.tooltip_text = "SAVE_PAGE_NEXT"
 	if visible_slots.is_empty():
 		_remember_selection()
+		if _history_scan != null: _history_scan.cancel()
+		_history_scan = null
 		selected_path = ""
 		_clear_children(_details)
 		_name_input = null
@@ -282,8 +353,8 @@ func _mark_selection() -> void:
 
 func _remember_selection() -> void:
 	if selected_path.is_empty() or not is_instance_valid(_name_input) or not _name_input.is_inside_tree(): return
-	var source := ""
-	if is_instance_valid(_history) and _history.is_inside_tree() and _history.selected >= 0 and _history.selected < _entries.size():
+	var source: String = str(_selection_memory.get(selected_path, {}).get("history", ""))
+	if _history_loaded and is_instance_valid(_history) and _history.is_inside_tree() and _history.selected >= 0 and _history.selected < _entries.size():
 		source = str(_entries[_history.selected].source)
 	_selection_memory[selected_path] = {"name": _name_input.text, "history": source}
 
@@ -293,7 +364,14 @@ func _show_slot(path: String) -> void:
 	_clear_children(_details)
 	_name_input = null
 	_history = null
-	var slot: Dictionary = _saves.inspect_slot(path)
+	if _history_scan != null: _history_scan.cancel()
+	_history_scan = null
+	_history_loaded = false
+	_entries = []
+	var slot: Dictionary = {}
+	for candidate: Dictionary in _slots:
+		if candidate.path == path: slot = candidate; break
+	if slot.is_empty(): return
 	_mark_selection()
 	var overview := BoxContainer.new()
 	_overview = overview
@@ -349,27 +427,36 @@ func _show_slot(path: String) -> void:
 	if slot.valid and int(slot.schema) < 3:
 		Style.paragraph(_details, "Prüfe den Kugelumzug dieses älteren Spielstands. Seine Originaldaten bleiben erhalten.", 17)
 	_details.add_child(HSeparator.new())
-	_entries = _saves.list_slot_history(selected_path)
-	Style.label(_details, Text.plural("SAVE_BACKUPS", "SAVE_BACKUPS_PLURAL", _entries.size()), 21, Style.ACCENT)
+	_history_label = Style.label(_details, "SAVE_HISTORY_LOADING", 21, Style.ACCENT)
 	Style.paragraph(_details, "Bis zu acht frühere Speicherstände. Eine Wiederherstellung legt ein neues Abenteuer an.", 17)
 	_history = OptionButton.new()
 	_history.name = "HistoryChoice"
 	_history.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	_history.custom_minimum_size.y = 48
 	_details.add_child(_history)
-	for entry: Dictionary in _entries:
-		var label: String = Text.format_text("SAVE_HISTORY_ENTRY", {"time": _date(int(entry.saved_time)), "minutes": int(float(entry.seconds) / 60.0), "reason": _reason(str(entry.reason))})
-		if not entry.can_copy:
-			label += Text.text(" · nicht ladbar")
-		_history.add_item(label)
-	_history.disabled = _entries.is_empty()
-	_history.visible = not _entries.is_empty()
+	_history.disabled = true
+	_history.visible = false
 	_restore_button = _button(_details, "Sicherung als Kopie wiederherstellen", _restore, "RestoreSlot")
-	_restore_button.visible = not _entries.is_empty()
+	_restore_button.disabled = true
+	_restore_button.visible = false
 	_history_preview = VBoxContainer.new()
 	_details.add_child(_history_preview)
 	_history.item_selected.connect(_select_history)
-	var remembered: String = str(_selection_memory.get(path, {}).get("history", ""))
+	_history_scan = _saves.begin_history_scan(path)
+	_layout()
+
+func _finish_history() -> void:
+	_history_loaded = true
+	_history_label.text = Text.plural("SAVE_BACKUPS", "SAVE_BACKUPS_PLURAL", _entries.size())
+	_history.clear()
+	for entry: Dictionary in _entries:
+		var label: String = Text.format_text("SAVE_HISTORY_ENTRY", {"time": _date(int(entry.saved_time)), "minutes": int(float(entry.seconds) / 60.0), "reason": _reason(str(entry.reason))})
+		if not entry.can_copy: label += Text.text(" · nicht ladbar")
+		_history.add_item(label)
+	_history.disabled = _entries.is_empty()
+	_history.visible = not _entries.is_empty()
+	_restore_button.visible = not _entries.is_empty()
+	var remembered: String = str(_selection_memory.get(selected_path, {}).get("history", ""))
 	var history_index := 0
 	for index in _entries.size():
 		if str(_entries[index].source) == remembered: history_index = index; break
@@ -378,6 +465,7 @@ func _show_slot(path: String) -> void:
 	_layout()
 
 func _select_history(index: int) -> void:
+	if not _history_loaded: return
 	_clear_children(_history_preview)
 	_restore_button.disabled = _entries.is_empty() or index < 0 or index >= _entries.size() or not bool(_entries[index].can_copy)
 	if _entries.is_empty():
@@ -389,6 +477,9 @@ func _select_history(index: int) -> void:
 		Style.paragraph(_history_preview, str(entry.problem), 17)
 
 func _preview_migration() -> void:
+	_remember_selection()
+	if _history_scan != null: _history_scan.cancel()
+	_history_scan = null
 	var source: String = selected_path
 	var preview: Dictionary = _saves.preview_spherical_migration(source)
 	if not preview.ok:
@@ -415,18 +506,21 @@ func _preview_migration() -> void:
 	_button(_details, "Zurück zum Spielstand", func() -> void: select_slot(source), "CancelSphereMigration")
 
 func _rename() -> void:
+	if selected_path.is_empty() or _scan != null: return
 	var renamed: bool = _saves.rename_slot(selected_path, _name_input.text)
 	if renamed:
 		refresh(selected_path)
 	_status.text = "Abenteuer umbenannt." if renamed else _saves.last_error
 
 func _copy() -> void:
+	if selected_path.is_empty() or _scan != null: return
 	var copied: String = _saves.duplicate_slot(selected_path)
 	if not copied.is_empty():
 		refresh(copied)
 	_status.text = "Kopie angelegt. Wähle „Abenteuer laden“, um sie weiterzuspielen." if not copied.is_empty() else _saves.last_error
 
 func _restore() -> void:
+	if not _history_loaded or _history_scan != null or not is_instance_valid(_history): return
 	var index: int = _history.selected
 	if index < 0 or index >= _entries.size():
 		return
@@ -436,9 +530,10 @@ func _restore() -> void:
 	_status.text = "Sicherung als neues Abenteuer wiederhergestellt. Der bisherige Stand bleibt erhalten." if not copied.is_empty() else _saves.last_error
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if not is_visible_in_tree() or _left_view: return
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
-		back_requested.emit()
+		_leave()
 
 static func _preview(value: Dictionary, height: int, explain: bool = true) -> Control:
 	var panel := PanelContainer.new()
@@ -479,6 +574,10 @@ static func _reason(reason: String) -> String:
 	return Text.text({"automatic": "Auto", "manual": "Speichern", "rename": "Vor Umbenennen", "backup": "Letzte Sicherung"}.get(reason, "Sicherung"))
 
 func _language_changed(_locale: String) -> void:
+	if _scan != null:
+		_translate_filters()
+		_scan_progress()
+		return
 	var focus := get_viewport().gui_get_focus_owner()
 	var editing_name: bool = focus == _name_input and is_instance_valid(_name_input)
 	var caret: int = _name_input.caret_column if editing_name else 0

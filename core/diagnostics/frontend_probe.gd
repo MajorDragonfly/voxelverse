@@ -306,6 +306,7 @@ func _exercise_save_browser(original: String) -> void:
 	var saves: Node = get_node("/root/SaveGameService")
 	var flow: Node = get_node("/root/SessionFlow")
 	var browser: Node = tree.current_scene.get_node("SaveBrowser")
+	await _browser_idle(browser)
 	for button: Button in browser._list.get_children():
 		if str(button.get_meta("slot_path")) == original:
 			browser._list.get_parent().ensure_control_visible(button)
@@ -321,6 +322,7 @@ func _exercise_save_browser(original: String) -> void:
 	browser._details.get_parent().ensure_control_visible(rename)
 	await _frames(2)
 	_click(rename)
+	await _browser_idle(browser)
 	await _frames(2)
 	_expect(saves.inspect_slot(original).name == "Erste Schritte – Basis", "Rename button did not update the selected slot.")
 	var original_bytes: String = FileAccess.get_file_as_string(original)
@@ -328,6 +330,7 @@ func _exercise_save_browser(original: String) -> void:
 	browser._details.get_parent().ensure_control_visible(copy)
 	await _frames(2)
 	_click(copy)
+	await _browser_idle(browser)
 	await _frames(2)
 	var copied: String = browser.selected_path
 	_expect(copied != original and FileAccess.get_file_as_string(original) == original_bytes, "Copy button altered the original slot.")
@@ -348,7 +351,9 @@ func _exercise_save_browser(original: String) -> void:
 	_click(tree.current_scene.find_child("Saves", true, false))
 	await _frames(3)
 	browser = tree.current_scene.get_node("SaveBrowser")
+	await _browser_idle(browser)
 	browser.select_slot(original)
+	await _browser_idle(browser)
 	await _frames(2)
 	var source: String = browser._entries[0].source
 	var source_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(source))
@@ -357,6 +362,7 @@ func _exercise_save_browser(original: String) -> void:
 	await _frames(3)
 	await _capture("save_history")
 	_click(restore)
+	await _browser_idle(browser)
 	await _frames(3)
 	_expect(browser.selected_path not in [original, copied], "Restore button did not select a new adventure.")
 	var restored: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(browser.selected_path))
@@ -475,3 +481,9 @@ func _click_position(point: Vector2) -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		failures.append(message)
+
+func _browser_idle(browser: Node) -> void:
+	var deadline := Time.get_ticks_msec() + 15000
+	while browser.is_loading() and Time.get_ticks_msec() < deadline:
+		await get_tree().process_frame
+	_expect(not browser.is_loading(), "Save browser did not finish loading.")

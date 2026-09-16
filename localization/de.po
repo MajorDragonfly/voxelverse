@@ -4280,3 +4280,12 @@ msgstr "Keine passenden Abenteuer. Ändere die Suche oder setze die Filter zurü
 
 msgid "SAVE_SELECT_RESULT"
 msgstr "Wähle ein Abenteuer aus der Ergebnisliste."
+
+msgid "SAVE_SCAN_DISCOVER"
+msgstr "Spielstände werden gesucht …"
+
+msgid "SAVE_SCAN_PROGRESS"
+msgstr "Spielstände werden geprüft: {done} von {total} …"
+
+msgid "SAVE_HISTORY_LOADING"
+msgstr "Sicherungen werden geprüft …"

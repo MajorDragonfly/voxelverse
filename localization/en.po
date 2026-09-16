@@ -4280,3 +4280,12 @@ msgstr "No matching adventures. Change your search or reset the filters."
 
 msgid "SAVE_SELECT_RESULT"
 msgstr "Select an adventure from the results."
+
+msgid "SAVE_SCAN_DISCOVER"
+msgstr "Finding adventures …"
+
+msgid "SAVE_SCAN_PROGRESS"
+msgstr "Checking adventures: {done} of {total} …"
+
+msgid "SAVE_HISTORY_LOADING"
+msgstr "Checking backups …"

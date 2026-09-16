@@ -25,6 +25,7 @@ const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 const SLOT_DIRECTORY: String = "user://saves"
 const Access = preload("res://core/persistence/userdata_access.gd")
 var _userdata_lease: RefCounted
+const SlotScan = preload("res://core/persistence/slot_scan.gd")
 const History = preload("res://core/persistence/slot_history.gd")
 
 @export_range(5.0, 300.0, 5.0) var autosave_interval: float = 45.0
@@ -268,31 +269,18 @@ func load_now(custom_path: String = "") -> bool:
 
 
 ## Listing is read-only: validation and backup inspection never import a world.
+func begin_slot_scan() -> RefCounted:
+	return SlotScan.new(self)
+
+func begin_history_scan(path: String) -> RefCounted:
+	return SlotScan.new(self, path, true)
+
+## Synchronous adapter for existing callers and tools. Interactive browsers
+## advance the same job across frames and cancel it on leaving the view.
 func list_slots() -> Array[Dictionary]:
-	var paths: Array[String] = []
-	if FileAccess.file_exists(DEFAULT_SAVE_PATH) or FileAccess.file_exists(DEFAULT_SAVE_PATH + ".bak"):
-		paths.append(DEFAULT_SAVE_PATH)
-	if DirAccess.dir_exists_absolute(SLOT_DIRECTORY):
-		for filename in DirAccess.get_files_at(SLOT_DIRECTORY):
-			var candidate: String = filename.trim_suffix(".bak")
-			if candidate.begins_with("slot_") and candidate.ends_with(".json"):
-				var path: String = SLOT_DIRECTORY + "/" + candidate
-				if path not in paths:
-					paths.append(path)
-		for directory in DirAccess.get_directories_at(SLOT_DIRECTORY):
-			var path: String = SLOT_DIRECTORY.path_join(directory.trim_suffix(".history"))
-			if directory.ends_with(".history") and is_slot_path(path) and path not in paths:
-				paths.append(path)
-	if DirAccess.dir_exists_absolute(History.directory(DEFAULT_SAVE_PATH)) and DEFAULT_SAVE_PATH not in paths:
-		paths.append(DEFAULT_SAVE_PATH)
-	var result: Array[Dictionary] = []
-	for path in paths:
-		result.append(inspect_slot(path))
-	result.sort_custom(func(a: Dictionary, b: Dictionary):
-		if int(a.saved_time) == int(b.saved_time):
-			return str(a.path) > str(b.path)
-		return int(a.saved_time) > int(b.saved_time))
-	return result
+	var scan := begin_slot_scan()
+	while scan.pending: scan.advance()
+	return scan.result
 
 
 func inspect_slot(path: String) -> Dictionary:
@@ -457,29 +445,24 @@ func restore_spherical_source(path: String) -> String:
 
 
 func list_slot_history(path: String) -> Array[Dictionary]:
-	var result: Array[Dictionary] = []
-	if not is_slot_path(path):
-		return result
-	var sources := History.paths(path)
-	if FileAccess.file_exists(path + ".bak"):
-		sources.append(path + ".bak")
-	var seen := {}
-	for source: String in sources:
-		var data := _read_save(source)
-		var meta: Dictionary = _dict(data.get("slot_history", {}))
-		data.erase("slot_history")
-		var identity: String = JSON.stringify(data).sha256_text()
-		if seen.has(identity):
-			continue
-		seen[identity] = true
-		var newer: bool = _has_unsupported_contract(data)
-		var valid: bool = not newer and _validate_save(data).is_empty()
-		var entry: Dictionary = _slot_summary(path, data, valid, false, newer)
-		entry["source"] = source
-		entry["reason"] = str(meta.get("reason", "backup"))
-		entry["can_copy"] = valid and int(data.get("schema", 0)) >= 3
-		result.append(entry)
-	return result
+	if not is_slot_path(path): return []
+	var scan := begin_history_scan(path)
+	while scan.pending: scan.advance()
+	return scan.result
+
+## Read port for the cooperative history scan. No import, repair or write.
+func inspect_history_source(path: String, source: String) -> Dictionary:
+	var data := _read_save(source)
+	var meta: Dictionary = _dict(data.get("slot_history", {}))
+	data.erase("slot_history")
+	var identity: String = JSON.stringify(data).sha256_text()
+	var newer: bool = _has_unsupported_contract(data)
+	var valid: bool = not newer and _validate_save(data).is_empty()
+	var entry: Dictionary = _slot_summary(path, data, valid, false, newer)
+	entry["source"] = source
+	entry["reason"] = str(meta.get("reason", "backup"))
+	entry["can_copy"] = valid and int(data.get("schema", 0)) >= 3
+	return {"identity": identity, "entry": entry}
 
 
 func restore_slot_copy(path: String, source_path: String, title: String = "") -> String:
@@ -613,12 +596,7 @@ func prepare_playable_slot(path: String) -> String:
 
 
 func select_slot(path: String) -> bool:
-	var known: bool = false
-	for slot in list_slots():
-		if slot.path == path and slot.valid:
-			known = true
-			break
-	if not known:
+	if not is_slot_path(path) or not bool(inspect_slot(path).valid):
 		last_error = "Dieser Spielstand kann nicht geladen werden."
 		return false
 	var previous_path: String = save_path

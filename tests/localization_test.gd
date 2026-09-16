@@ -118,6 +118,10 @@ func _run() -> void:
 	expect(not paused, "Closing settings restores the previous pause state")
 	menu._show_slots()
 	var browser: Control = menu._save_browser
+	var scan_deadline := Time.get_ticks_msec() + 15000
+	while browser.is_loading() and Time.get_ticks_msec() < scan_deadline:
+		await process_frame
+	expect(not browser.is_loading(), "Save browser finishes before editing its selected slot")
 	browser.select_slot(slot_path)
 	browser._name_input.text = "Unfertiger Name {key}"
 	manager.save_preference("de")

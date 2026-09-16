@@ -7136,6 +7136,21 @@
       "key": "SAVE_SELECT_RESULT",
       "de": "Wähle ein Abenteuer aus der Ergebnisliste.",
       "en": "Select an adventure from the results."
+    },
+    {
+      "key": "SAVE_SCAN_DISCOVER",
+      "de": "Spielstände werden gesucht …",
+      "en": "Finding adventures …"
+    },
+    {
+      "key": "SAVE_SCAN_PROGRESS",
+      "de": "Spielstände werden geprüft: {done} von {total} …",
+      "en": "Checking adventures: {done} of {total} …"
+    },
+    {
+      "key": "SAVE_HISTORY_LOADING",
+      "de": "Sicherungen werden geprüft …",
+      "en": "Checking backups …"
     }
   ]
 }
