@@ -5,9 +5,20 @@ Bewertet am 2026-09-16. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Prioritäten
 
-1. Gemeinsame Vollsuite und native Exporte von PR #141 abschließen; danach den konkreten Windows-Build mit Lars auf Bedienung, Grafik und Spielablauf prüfen.
-2. Neue Fachpakete auf dem festen gemeinsamen Quellstand beginnen; laufende Besitzer und unveröffentlichte Nachlieferungen in #137 erhalten.
-3. Nach dem Ziel-PC-Spieltest die nächste fachliche Engstelle auswählen; Fortschritt nur anhand belegter Funktionen und Abnahme neu bewerten.
+1. Gemeinsamen main-Stand nach #142/#143 vollständig prüfen und den festen Windows-Build auf dem Ziel-PC abnehmen.
+2. Vorbereitete Pakete aus dem Katalog zuweisen; laufende M4-/ARCH-/Audio-Besitzer in #137 erhalten.
+3. Kaltstart und Darstellung an festen Szenen messen; Aufgabenabhängigkeiten und aktuelle CI zentral verfolgen.
+
+## Vorbereitete Pakete
+
+| Paket | Ergebnis | Voraussetzung |
+|---|---|---|
+| `ARCH-19-TARGET-PC` | Gemeinsamen Kandidaten auf Zielhardware messen | Zuweisung in #137 |
+| `PERF-COLD-START` | Kalten Kampagnenstart in messbare Abschnitte zerlegen | Zuweisung in #137 |
+| `RENDER-DISTANT-FOREST` | Übergang zwischen naher Vegetation und fernem Wald prüfen | Zuweisung in #137 |
+| `WEATHER-03-STORM-PREVIEW` | Deterministische Sturmphasen in der Diagnosevorschau | Zuweisung in #137 |
+| `WEATHER-05-FORECAST-UI` | Wetterprognose und Vorwarnung verständlich anzeigen | WEATHER-03-STORM-PREVIEW |
+| `BP-COMMUNITY-SERVICE-CONTRACT` | Begrenzten Kataloganschluss für Community-Entwürfe vorbereiten | Zuweisung in #137 |
 
 ## Abgegrenzte Zuweisung
 

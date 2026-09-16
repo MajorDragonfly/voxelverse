@@ -1,0 +1,61 @@
+name: Project live status
+
+on:
+  workflow_run:
+    workflows: [Godot validation, Desktop export validation, Environment render validation]
+    types: [completed]
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft, closed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+  issues: write
+
+concurrency:
+  group: project-live-status
+  cancel-in-progress: false
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      # This privileged report executes ONLY the default branch. Never check out
+      # PR code, execute PR text, or download artifacts from the triggering run.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read current PR checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/project_dashboard.py live --checks --output "$RUNNER_TEMP/project-live"
+      - name: Refresh one status comment in the coordination issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const data = JSON.parse(fs.readFileSync('tools/workflow/project.json', 'utf8'));
+            if (data.repository !== `${context.repo.owner}/${context.repo.repo}` || data.coordination_issue !== 137) {
+              throw new Error('Unexpected coordination target');
+            }
+            const marker = '<!-- voxelverse-live-status -->';
+            const report = fs.readFileSync(path.join(process.env.RUNNER_TEMP, 'project-live/live.md'), 'utf8');
+            const body = marker + '\n' + report + '\nAutomatisch beobachteter Prüfstatus; Vergabe bleibt in der Ticketbeschreibung. Grün ist keine Ziel-PC-Abnahme.';
+            if (body.length > 60000) throw new Error('Status report exceeds comment budget');
+            const comments = await github.paginate(github.rest.issues.listComments, {...context.repo, issue_number: 137, per_page: 100});
+            const existing = comments.filter(c => c.user?.login === 'github-actions[bot]' && c.body.startsWith(marker));
+            if (existing.length > 1) throw new Error('Duplicate status comments require consolidation');
+            if (existing.length) {
+              await github.rest.issues.updateComment({...context.repo, comment_id: existing[0].id, body});
+            } else {
+              await github.rest.issues.createComment({...context.repo, issue_number: 137, body});
+            }
+            await core.summary.addRaw(report).write();

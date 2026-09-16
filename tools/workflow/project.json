@@ -7,14 +7,14 @@
   "coordination_issue": 137,
   "main": {
     "branch": "main",
-    "sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/92"
+    "sha": "c2e81883ac62855a511652fd0de47d29856491ec",
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/142"
   },
   "candidate": {
-    "branch": "agent/integration-dashboard-20260916",
-    "sha": "76b4dfee8e83a1c128d30ddae73ed2b306bed761",
-    "pr": 141,
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/141"
+    "branch": "agent/project-cleanup-20260916",
+    "sha": "5d8e14070b484064ef70b6f3d3d20c18f3f0713c",
+    "pr": 142,
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/142"
   },
   "areas": [
     {
@@ -401,20 +401,69 @@
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/140",
       "limits": "Langzeitbalance, viele gleichzeitige Mahlzeiten und native Sichtprüfung offen.",
       "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "ARCH-19-TARGET-PC",
+      "title": "Gemeinsamen Kandidaten auf Zielhardware messen",
+      "area": "foundation",
+      "status": "planned",
+      "depends_on": [],
+      "limits": "Referenzhardware ist in docs/PROJECT_STATUS.md benannt; Preset und Treiber beim Lauf protokollieren. Automatische oder Headless-Prüfung ersetzt Lars' visuellen Windows-Spieltest nicht."
+    },
+    {
+      "id": "PERF-COLD-START",
+      "title": "Kalten Kampagnenstart in messbare Abschnitte zerlegen",
+      "area": "foundation",
+      "status": "planned",
+      "depends_on": [],
+      "limits": "Instrumentierung und Auswertung; keine neuen Grafikdefaults oder pauschalen Timeout-Erhöhungen. Ziel-PC-Werte erst nach tatsächlicher Messung."
+    },
+    {
+      "id": "RENDER-DISTANT-FOREST",
+      "title": "Übergang zwischen naher Vegetation und fernem Wald prüfen",
+      "area": "foundation",
+      "status": "planned",
+      "depends_on": [],
+      "limits": "Keine Terrain-/Save-Umstrukturierung oder Änderungen an M4-Tiernavigation. Native Leistungsfreigabe benötigt Ziel-PC."
+    },
+    {
+      "id": "WEATHER-03-STORM-PREVIEW",
+      "title": "Deterministische Sturmphasen in der Diagnosevorschau",
+      "area": "foundation",
+      "status": "planned",
+      "depends_on": [],
+      "limits": "Kein Wetterschaden, kein M4-Deckungsverhalten und keine Aktivierung gefährlicher regulärer Reiseziele vor Schutz-/Reisekette."
+    },
+    {
+      "id": "WEATHER-05-FORECAST-UI",
+      "title": "Wetterprognose und Vorwarnung verständlich anzeigen",
+      "area": "release",
+      "status": "planned",
+      "depends_on": [
+        "WEATHER-03-STORM-PREVIEW"
+      ],
+      "limits": "Nach WEATHER-03-STORM-PREVIEW. HUD-Anschluss mit abgeschlossenem Issue-91-Stand abstimmen. Kein zweiter Wettersimulator und keine Aufgabenübernahme vom Audio-Chat."
+    },
+    {
+      "id": "BP-COMMUNITY-SERVICE-CONTRACT",
+      "title": "Begrenzten Kataloganschluss für Community-Entwürfe vorbereiten",
+      "area": "release",
+      "status": "planned",
+      "depends_on": [],
+      "limits": "Kein kostenpflichtiger Anbieter, kein öffentlicher Dienst und keine Konten-/Deploymententscheidung. Lokaler Prüfstand ist keine fertige Online-Veröffentlichung; Freischaltung bleibt Folgeabnahme."
     }
   ],
   "priorities": [
-    "Gemeinsame Vollsuite und native Exporte von PR #141 abschließen; danach den konkreten Windows-Build mit Lars auf Bedienung, Grafik und Spielablauf prüfen.",
-    "Neue Fachpakete auf dem festen gemeinsamen Quellstand beginnen; laufende Besitzer und unveröffentlichte Nachlieferungen in #137 erhalten.",
-    "Nach dem Ziel-PC-Spieltest die nächste fachliche Engstelle auswählen; Fortschritt nur anhand belegter Funktionen und Abnahme neu bewerten."
+    "Gemeinsamen main-Stand nach #142/#143 vollständig prüfen und den festen Windows-Build auf dem Ziel-PC abnehmen.",
+    "Vorbereitete Pakete aus dem Katalog zuweisen; laufende M4-/ARCH-/Audio-Besitzer in #137 erhalten.",
+    "Kaltstart und Darstellung an festen Szenen messen; Aufgabenabhängigkeiten und aktuelle CI zentral verfolgen."
   ],
   "blockers": [
     "Eine zusammenhängende Ziel-PC-/Langzeitabnahme ist noch nicht als abgeschlossen dokumentiert.",
     "Mittelalter, Neuzeit und Weltraum sind noch keine vollständig spielbaren Epochen.",
-    "Die letzte Basis #125 hatte rote native Windows-/Siedlungsgates und einen abgebrochenen Quellshard. Maßgeblich ist die erneute vollständige CI von #141, nicht die alten Fachprüfungen.",
     "Spätere Branchänderungen und unveröffentlichte Folgearbeiten sind nicht automatisch Bestandteil dieser festen Eingangsliste."
   ],
-  "campaign_summary": "Die bisherige Kugelkampagne aus #125 und 14 neue Lieferungen sind gemeinsam integriert: gespeicherte Planetenklimata, Esc-Einstellungen mit 18 Grafikreglern, Tier-Sozialspiel/Jagd, Todesrückkehr, Kapitel-Einführung, Baustellensteuerung, Flottentest, Atlas-/Spielstandsuche, Vorlagenfavoriten und frei belegbare Menütasten. Dashboard, zentrale Rundenliste und kurze Paketübergaben sind Teil desselben Kandidaten.",
+  "campaign_summary": "Die bisherige Kugelkampagne aus #125 und 14 neue Lieferungen sind gemeinsam integriert: gespeicherte Planetenklimata, Esc-Einstellungen mit 18 Grafikreglern, Tier-Sozialspiel/Jagd, Todesrückkehr, Kapitel-Einführung, Baustellensteuerung, Flottentest, Atlas-/Spielstandsuche, Vorlagenfavoriten und frei belegbare Menütasten. Dashboard, zentrale Rundenliste und kurze Paketübergaben sind Teil desselben Kandidaten. Die Projektbereinigung #142 und HUD-Korrektur #143 sind inzwischen in main; dessen erneute gemeinsame CI ist maßgeblich.",
   "coordination_note": "Die bekannten Fachlieferungen sind dieser Runde zugeordnet. ARCH-24, Musik, ARCH-27 und noch unveröffentlichte Folgeschritte bleiben bei ihren bisherigen Besitzern; eine fehlende oder ungenaue Paket-ID ist keine Freigabe. Maßgeblich bleibt die aktuelle Beschreibung von Issue #137.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",

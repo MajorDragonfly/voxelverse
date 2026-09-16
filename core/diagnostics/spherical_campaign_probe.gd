@@ -167,9 +167,15 @@ func _open(path: String, pause_when_ready: bool = false) -> void:
 	if pause_when_ready: flow.world_started.connect(flow.toggle_pause, CONNECT_ONE_SHOT)
 	flow.load_game(path)
 	var start: int = Time.get_ticks_msec()
-	while flow.loading and Time.get_ticks_msec() - start < 50000:
+	while flow.loading and Time.get_ticks_msec() - start < _load_timeout_ms():
 		await tree.process_frame
+	print("SPHERE_LOAD ", JSON.stringify({"milliseconds": Time.get_ticks_msec() - start,
+		"loading": flow.loading, "scene": tree.current_scene.scene_file_path if tree.current_scene != null else "",
+		"error": saves.last_error}))
 	saves.autosave_enabled = false
+
+func _load_timeout_ms() -> int:
+	return 50000
 
 func _expect_world() -> bool:
 	var valid: bool = tree.current_scene != null and tree.current_scene.scene_file_path == Surface.SCENE and tree.current_scene.world_initialized and not flow.loading

@@ -24,6 +24,118 @@
       ],
       "acceptance": "Begehbare Hin-/Rückroute, Save/Neustart, Stamm, laufende Fracht und A-B-A; p95/p99, Spitzen, RAM und verfügbare GPU-Werte protokollieren.",
       "limits": "Referenzhardware ist in docs/PROJECT_STATUS.md benannt; Preset und Treiber beim Lauf protokollieren. Automatische oder Headless-Prüfung ersetzt Lars' visuellen Windows-Spieltest nicht."
+    },
+    {
+      "id": "PERF-COLD-START",
+      "title": "Kalten Kampagnenstart in messbare Abschnitte zerlegen",
+      "goal": "Thread-Laden, Szenenaufbau und Startgelände getrennt messen und eine reproduzierbare Kalt-/Warmstart-Auswertung im vorhandenen Profilwerkzeug anbieten.",
+      "write_groups": [
+        "startup_diagnostics"
+      ],
+      "files": [
+        "tools/profile_performance.py",
+        "core/diagnostics/spherical_campaign_probe.gd",
+        "autoload/session_flow.gd"
+      ],
+      "read": [
+        "docs/WORK_ARCH02_PERFORMANCE.md"
+      ],
+      "contracts": [
+        "campaign",
+        "spherical_gameplay"
+      ],
+      "acceptance": "Derselbe Seed und Build liefern getrennte Zeitabschnitte; Timeout nennt den letzten Abschnitt. Messung verändert keinen Spielstand und startet keinen zweiten Weltaufbau.",
+      "limits": "Instrumentierung und Auswertung; keine neuen Grafikdefaults oder pauschalen Timeout-Erhöhungen. Ziel-PC-Werte erst nach tatsächlicher Messung."
+    },
+    {
+      "id": "RENDER-DISTANT-FOREST",
+      "title": "Übergang zwischen naher Vegetation und fernem Wald prüfen",
+      "goal": "Die dunkle mittlere Distanz an festen Beobachtungspunkten reproduzieren und den Übergang zwischen aktiven Pflanzen, Clustern und Fernwald sichtbar angleichen.",
+      "write_groups": [
+        "scenery_lod"
+      ],
+      "files": [
+        "world/visuals/scenery/distant_forest.gd",
+        "world/visuals/scenery/environment_cluster_builder.gd",
+        "tools/profile_environment.py"
+      ],
+      "read": [
+        "docs/ENVIRONMENT_REVIEW.md"
+      ],
+      "contracts": [
+        "terrain_art",
+        "surface"
+      ],
+      "acceptance": "Vergleichsaufnahmen bei identischem Seed, Position, Blick und Preset; keine Waldlücke oder harte Farbfläche beim Vor-/Rückweg. Objektzahl und Laufzeitgrenzen belegen.",
+      "limits": "Keine Terrain-/Save-Umstrukturierung oder Änderungen an M4-Tiernavigation. Native Leistungsfreigabe benötigt Ziel-PC."
+    },
+    {
+      "id": "WEATHER-03-STORM-PREVIEW",
+      "title": "Deterministische Sturmphasen in der Diagnosevorschau",
+      "goal": "Sand-/Aschesturm mit Ruhe, Vorwarnung, Anstieg und Abklingen zunächst im vorhandenen Wettermodell und einer begrenzten Vorschau darstellen.",
+      "write_groups": [
+        "weather_model",
+        "weather_view"
+      ],
+      "files": [
+        "world/weather/weather_model.gd",
+        "world/weather/campaign_weather.gd",
+        "world/weather/weather_view.gd"
+      ],
+      "read": [
+        "docs/WEATHER_PLAN.md"
+      ],
+      "contracts": [
+        "weather",
+        "terrain_art"
+      ],
+      "acceptance": "Heimat bleibt mild; gleicher Körper und Kampagnenzeit ergeben gleiche Phasen, auch nach Pause/Neustart. Begrenzte Partikel und lesbare Vorwarnung.",
+      "limits": "Kein Wetterschaden, kein M4-Deckungsverhalten und keine Aktivierung gefährlicher regulärer Reiseziele vor Schutz-/Reisekette."
+    },
+    {
+      "id": "WEATHER-05-FORECAST-UI",
+      "title": "Wetterprognose und Vorwarnung verständlich anzeigen",
+      "goal": "Den vorhandenen forecast()-Leseanschluss mit einer kompakten DE/EN-Anzeige verbinden; Sturmwarnung aus der Diagnosevorschau lesbar übernehmen.",
+      "write_groups": [
+        "weather_ui",
+        "localization"
+      ],
+      "files": [
+        "world/weather/campaign_weather.gd",
+        "core/localization/ui_text.gd",
+        "tools/review_graphics_settings.py"
+      ],
+      "read": [
+        "docs/WEATHER_PLAN.md",
+        "docs/WORK_ATMOSPHERE_SETTINGS_DETAIL.md"
+      ],
+      "contracts": [
+        "weather",
+        "frontend_locale"
+      ],
+      "acceptance": "Prognose folgt dem aktuellen Körper und der Kampagnenzeit; Wechsel/Pause/fehlender Wetterbesitzer bleiben korrekt. Lesbarkeit bei kleinen Fenstern und zwei Sprachen prüfen.",
+      "limits": "Nach WEATHER-03-STORM-PREVIEW. HUD-Anschluss mit abgeschlossenem Issue-91-Stand abstimmen. Kein zweiter Wettersimulator und keine Aufgabenübernahme vom Audio-Chat."
+    },
+    {
+      "id": "BP-COMMUNITY-SERVICE-CONTRACT",
+      "title": "Begrenzten Kataloganschluss für Community-Entwürfe vorbereiten",
+      "goal": "Einen testbaren Clientanschluss für seitenweisen Katalog, konkrete Revisionen und begrenzte Paketdownloads definieren und gegen einen lokalen Dienst-Prüfstand integrieren.",
+      "write_groups": [
+        "community_catalog"
+      ],
+      "files": [
+        "ui/blueprints/creature_library_panel.gd",
+        "tests/community_blueprint_package_test.gd"
+      ],
+      "read": [
+        "docs/COMMUNITY_DESIGNS_PLAN.md"
+      ],
+      "contracts": [
+        "blueprints",
+        "frontend_locale"
+      ],
+      "acceptance": "Seiten-/Downloadlimits, Abbruch, manipuliertes Paket, unbekannte Version und Offline-Wiederverwendung prüfen. Lokale Entwürfe werden durch neue Online-Revisionen nicht verändert.",
+      "limits": "Kein kostenpflichtiger Anbieter, kein öffentlicher Dienst und keine Konten-/Deploymententscheidung. Lokaler Prüfstand ist keine fertige Online-Veröffentlichung; Freischaltung bleibt Folgeabnahme."
     }
   ]
 }

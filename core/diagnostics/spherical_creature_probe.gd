@@ -58,7 +58,7 @@ func _run() -> void:
 	editor._creature_name_edit.text = "Kugelheimat erhalten"
 	editor._creature_name_edit.text_changed.emit("Kugelheimat erhalten")
 	editor._play_test_placeholder()
-	await _until(func() -> bool: return not flow.loading and tree.current_scene.scene_file_path == Surface.SCENE, 50000)
+	await _until(func() -> bool: return not flow.loading and tree.current_scene.scene_file_path == Surface.SCENE, _load_timeout_ms())
 	if not _expect_world(): await _finish(); return
 	scene = tree.current_scene
 	player = scene.player
@@ -142,6 +142,15 @@ func _radius(place: Dictionary) -> Dictionary:
 	var result: Dictionary = place.duplicate(true)
 	result.radius = Surface.DEFAULT_RADIUS
 	return result
+
+func _load_timeout_ms() -> int:
+	# CPU-rendered cold shader compilation on CI can exceed the headless 50 s
+	# budget (PR #142 failed once, then passed with the identical source tree).
+	# Let SessionFlow's existing 180 s world-preparation deadline report failure.
+	# This only changes graphical capture allowance, never production or headless.
+	if "--capture" in OS.get_cmdline_user_args() and DisplayServer.get_name() != "headless":
+		return 190000
+	return super._load_timeout_ms()
 
 func _until(predicate: Callable, milliseconds: int) -> void:
 	var started: int = Time.get_ticks_msec()

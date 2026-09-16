@@ -4,14 +4,34 @@ on:
   push:
     branches: [main]
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: desktop-export-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      mode: ${{ steps.plan.outputs.mode }}
+      acceptance: ${{ steps.plan.outputs.acceptance }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/plan-validation
+        id: plan
+
   export:
+    needs: plan
+    if: needs.plan.outputs.acceptance == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -70,3 +90,19 @@ jobs:
             ${{ runner.temp }}/voxelverse-export/logs
             ${{ runner.temp }}/voxelverse-export/results.json
           retention-days: 14
+
+  validate:
+    name: ${{ needs.plan.outputs.mode == 'draft' && 'Desktop draft plan' || 'Desktop export gate' }}
+    needs: [plan, export]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify planned export acceptance
+        env:
+          PLAN_RESULT: ${{ needs.plan.result }}
+          REQUIRED: ${{ needs.plan.outputs.acceptance }}
+          RESULT: ${{ needs.export.result }}
+        run: |
+          test "$PLAN_RESULT" = success
+          if [ "$REQUIRED" = true ]; then test "$RESULT" = success; else test "$RESULT" = skipped; fi
