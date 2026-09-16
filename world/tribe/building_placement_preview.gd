@@ -15,10 +15,12 @@ var _caption: Label3D
 var _material: StandardMaterial3D
 var _elapsed: float = CHECK_INTERVAL
 var _checked_point := Vector3.INF
+var _pointer := Vector2.ZERO
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	top_level = true
+	_pointer = get_viewport().get_mouse_position()
 	_material = StandardMaterial3D.new()
 	_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -34,7 +36,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_elapsed += delta
-	update_screen(get_viewport().get_mouse_position())
+	update_screen(_pointer)
+
+func _input(event: InputEvent) -> void:
+	# Use the same viewport coordinates as screen_command, including forwarded
+	# input and scaled windows. The OS pointer can differ from pushed input.
+	if event is InputEventMouse:
+		_pointer = event.position
 
 func update_screen(point: Vector2) -> void:
 	if not controller.is_active() or controller.placement.is_empty() or not get_viewport().get_visible_rect().has_point(point):
