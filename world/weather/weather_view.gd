@@ -113,7 +113,9 @@ func present(snapshot: Dictionary, underwater: bool, covered: bool) -> void:
 	var drift: Vector3 = direction * clock * wind
 	if snapshot.has("wind_offset"): drift = Cube.vector(snapshot.wind_offset)
 	var snow_fraction: float = float(snapshot.get("snow_fraction", 0.0))
-	var count: int = int(round(float(snapshot.precipitation) * RAIN_COUNT))
+	var storm: bool = snapshot.get("storm_preview_schema") == 1 and bool(snapshot.get("preview", false))
+	var intensity: float = float(snapshot.get("storm_particle_intensity", 0.0)) if storm else float(snapshot.precipitation)
+	var count: int = clampi(int(round(intensity * RAIN_COUNT)), 0, RAIN_COUNT)
 	_rain.visible = precipitation_enabled and not underwater and not covered and count > 0
 	_rain.multimesh.visible_instance_count = count if _rain.visible else 0
 	if _rain.visible:
@@ -121,17 +123,18 @@ func present(snapshot: Dictionary, underwater: bool, covered: bool) -> void:
 		var streak: Basis = Cube.frame(-velocity.normalized()).scaled(Vector3(0.018, 0.48, 0.018))
 		for i in range(count):
 			var drop: Vector3 = _drops[i]
-			var snow: bool = drop.y < snow_fraction
-			var flutter := Vector3(sin(clock * 1.3 + i) * 0.4, 0.0, cos(clock + i) * 0.3) if snow else Vector3.ZERO
+			var snow: bool = not storm and drop.y < snow_fraction
+			var flutter := Vector3(sin(clock * 1.3 + i) * 0.4, 0.0, cos(clock + i) * 0.3) if snow or storm else Vector3.ZERO
 			var point := Vector3(wrapf(drop.x + drift.x + flutter.x, -PATCH_RADIUS, PATCH_RADIUS),
-				wrapf(drop.y * 40.0 - clock * (1.6 if snow else 17.0), -20.0, 20.0),
+				wrapf(drop.y * 40.0 - clock * (0.45 if storm else (1.6 if snow else 17.0)), -20.0, 20.0),
 				wrapf(drop.z + drift.z + flutter.z, -PATCH_RADIUS, PATCH_RADIUS))
 			var gx: int = clampi(int(round((point.x + PATCH_RADIUS) / GRID_STEP)), 0, GRID_SIDE - 1)
 			var gz: int = clampi(int(round((point.z + PATCH_RADIUS) / GRID_STEP)), 0, GRID_SIDE - 1)
 			var hidden: bool = point.y < _floors[gz * GRID_SIDE + gx] or point.length_squared() < 1.0
 			var shape: Basis = Basis.IDENTITY.scaled(Vector3(0.075, 0.045, 0.075)) if snow else streak
+			if storm: shape = Basis.IDENTITY.scaled(Vector3(0.055, 0.04, 0.055) * (0.8 + drop.y * 0.7))
 			_submit_particle(i, Transform3D(Basis.IDENTITY.scaled(Vector3.ZERO) if hidden else shape, point),
-				Color("e8f0f2") if snow else Color("9bbac7"))
+				snapshot.storm_particle_color if storm else (Color("e8f0f2") if snow else Color("9bbac7")))
 	_clouds.visible = clouds_enabled and not underwater and bool(snapshot.get("atmosphere_present", true))
 	_clouds.multimesh.visible_instance_count = CLOUD_COUNT if _clouds.visible else 0
 	if _clouds.visible:
@@ -145,5 +148,9 @@ func present(snapshot: Dictionary, underwater: bool, covered: bool) -> void:
 			_clouds.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY.scaled(Vector3(92, 22, 65) * scale_factor), point))
 
 func hide_weather() -> void:
-	if is_instance_valid(_rain): _rain.visible = false
-	if is_instance_valid(_clouds): _clouds.visible = false
+	if is_instance_valid(_rain):
+		_rain.visible = false
+		_rain.multimesh.visible_instance_count = 0
+	if is_instance_valid(_clouds):
+		_clouds.visible = false
+		_clouds.multimesh.visible_instance_count = 0

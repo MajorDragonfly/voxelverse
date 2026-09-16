@@ -59,10 +59,13 @@ static func sample(body_id: String, seed_value: int, clock: float, address: Dict
 	var gust: float = 0.5 + 0.5 * sin(clock / 7.0 + phase + front)
 	var velocity: Vector3 = tangent * float(result.wind_mps) * lerpf(0.85, 1.12, gust)
 	var frame: Basis = Cube.frame(up)
-	var local_wind: Vector3 = frame.inverse() * velocity
+	# Derive direction before scaling by gusts. Otherwise float rounding changes
+	# the angle with speed and amplifies into dust jumps after long sessions.
+	var local_wind: Vector3 = frame.inverse() * tangent
 	result.wind_mps = velocity.length()
 	result.wind_bearing = atan2(local_wind.z, local_wind.x)
 	result.wind_velocity = [velocity.x, velocity.y, velocity.z]
+	result.wind_projection_strength = tangent.length()
 	result.gust_strength = gust
 	# Analytic gust displacement; never clock * changing instantaneous speed.
 	# Large absolute time can alter phase, but not amplify a frame-to-frame gust.
@@ -89,6 +92,7 @@ static func forecast(body_id: String, seed_value: int, clock: float, address: Di
 
 static func preview(snapshot: Dictionary, condition: String) -> Dictionary:
 	if snapshot.is_empty(): return {}
+	if Model.StormPreview.PROFILES.has(condition): return Model.preview_storm(snapshot, condition)
 	var preset: Dictionary = Model.preset(condition, str(snapshot.get("climate_id", "earth_temperate")))
 	if preset.is_empty(): return snapshot.duplicate(true)
 	var result: Dictionary = snapshot.duplicate(true)

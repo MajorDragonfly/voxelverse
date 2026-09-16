@@ -8131,6 +8131,51 @@
       "key": "WILDLIFE_EAT_CARCASS",
       "de": "Frisst Aas",
       "en": "Eating carrion"
+    },
+    {
+      "key": "WEATHER_STORM_SAND",
+      "de": "Sandsturm",
+      "en": "Sandstorm"
+    },
+    {
+      "key": "WEATHER_STORM_ASH",
+      "de": "Aschesturm",
+      "en": "Ash storm"
+    },
+    {
+      "key": "WEATHER_STORM_WARNING",
+      "de": "Wettervorschau · {kind} in {seconds} s",
+      "en": "Weather preview · {kind} in {seconds} s"
+    },
+    {
+      "key": "WEATHER_STORM_STATUS",
+      "de": "Wettervorschau · {kind}\n{phase}",
+      "en": "Weather preview · {kind}\n{phase}"
+    },
+    {
+      "key": "WEATHER_STORM_PHASE_CALM",
+      "de": "Ruhephase",
+      "en": "Calm"
+    },
+    {
+      "key": "WEATHER_STORM_PHASE_WARNING",
+      "de": "Vorwarnung",
+      "en": "Warning"
+    },
+    {
+      "key": "WEATHER_STORM_PHASE_RISING",
+      "de": "Sturm nimmt zu",
+      "en": "Storm building"
+    },
+    {
+      "key": "WEATHER_STORM_PHASE_PEAK",
+      "de": "Sturm am Höhepunkt",
+      "en": "Storm at its peak"
+    },
+    {
+      "key": "WEATHER_STORM_PHASE_FALLING",
+      "de": "Sturm klingt ab",
+      "en": "Storm easing"
     }
   ]
 }

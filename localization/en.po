@@ -4877,3 +4877,30 @@ msgstr "Seeking carrion"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Eating carrion"
+
+msgid "WEATHER_STORM_SAND"
+msgstr "Sandstorm"
+
+msgid "WEATHER_STORM_ASH"
+msgstr "Ash storm"
+
+msgid "WEATHER_STORM_WARNING"
+msgstr "Weather preview · {kind} in {seconds} s"
+
+msgid "WEATHER_STORM_STATUS"
+msgstr "Weather preview · {kind}\n{phase}"
+
+msgid "WEATHER_STORM_PHASE_CALM"
+msgstr "Calm"
+
+msgid "WEATHER_STORM_PHASE_WARNING"
+msgstr "Warning"
+
+msgid "WEATHER_STORM_PHASE_RISING"
+msgstr "Storm building"
+
+msgid "WEATHER_STORM_PHASE_PEAK"
+msgstr "Storm at its peak"
+
+msgid "WEATHER_STORM_PHASE_FALLING"
+msgstr "Storm easing"

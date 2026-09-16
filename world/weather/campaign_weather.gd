@@ -6,10 +6,12 @@ const Climate = preload("res://world/weather/planet_climate.gd")
 const Model = preload("res://world/weather/weather_model.gd")
 const Regional = preload("res://world/weather/regional_weather.gd")
 const View = preload("res://world/weather/weather_view.gd")
+const StormNotice = preload("res://world/weather/storm_preview_notice.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 @export var clouds_enabled: bool = true
 @export var precipitation_enabled: bool = true
 var _view: Node3D
+var _storm_notice: CanvasLayer
 var _snapshot: Dictionary = {}
 var _body_id: String = ""
 var _preview_condition: String = ""
@@ -27,10 +29,17 @@ func _ready() -> void:
 	_view = View.new()
 	_view.name = "WeatherView"
 	add_child(_view)
+	_storm_notice = StormNotice.new()
+	_storm_notice.name = "StormPreviewNotice"
+	add_child(_storm_notice)
 	for argument: String in OS.get_cmdline_user_args():
 		if argument.begins_with("--weather-preview="):
-			_preview_condition = argument.trim_prefix("--weather-preview=")
-			if Model.preset(_preview_condition).is_empty(): _preview_condition = ""
+			set_preview_condition(argument.trim_prefix("--weather-preview="))
+
+## Session-only diagnostic selection. Never stored in the campaign or climate.
+func set_preview_condition(condition: String) -> void:
+	_preview_condition = condition if Model.supports_preview(condition) else ""
+	if is_instance_valid(_storm_notice): _storm_notice.present({}, null)
 
 func snapshot() -> Dictionary:
 	return _snapshot.duplicate(true)
@@ -51,6 +60,7 @@ func _process(delta: float) -> void:
 		_view.hide_weather()
 		_snapshot = {}
 		_forecast_context = {}
+		_storm_notice.present({}, null)
 		return
 	var state: Node = get_node("/root/GameState")
 	var body: Dictionary = state.get_current_body_record()
@@ -77,6 +87,7 @@ func _process(delta: float) -> void:
 	if _snapshot.is_empty():
 		_forecast_context = {}
 		_view.hide_weather()
+		_storm_notice.present({}, null)
 		return
 	_forecast_context = {"address": address, "radius": radius, "climate": climate}
 	if not _preview_condition.is_empty():
@@ -87,6 +98,7 @@ func _process(delta: float) -> void:
 	_view.precipitation_enabled = precipitation_enabled
 	_view.position_at(camera.global_position, Space.up(self, camera.global_position))
 	_view.present(_snapshot, _underwater, _covered)
+	_storm_notice.present(_snapshot, get_parent().get("player"))
 	_notice_elapsed += delta
 	if previous_condition != str(_snapshot.condition) or _notice_elapsed >= 0.25:
 		_notice_elapsed = 0.0
@@ -110,5 +122,5 @@ func _physics_process(delta: float) -> void:
 		camera.global_position + Space.up(self, camera.global_position) * 22.0, 1 | 2 | 4)
 	query.exclude = excluded
 	_covered = not camera.get_world_3d().direct_space_state.intersect_ray(query).is_empty()
-	if not _underwater and not _covered and float(_snapshot.precipitation) > 0.0:
+	if not _underwater and not _covered and maxf(float(_snapshot.precipitation), float(_snapshot.get("storm_particle_intensity", 0.0))) > 0.0:
 		_view.probe_cover(excluded)

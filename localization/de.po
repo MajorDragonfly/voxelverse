@@ -4877,3 +4877,30 @@ msgstr "Sucht Aas"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Frisst Aas"
+
+msgid "WEATHER_STORM_SAND"
+msgstr "Sandsturm"
+
+msgid "WEATHER_STORM_ASH"
+msgstr "Aschesturm"
+
+msgid "WEATHER_STORM_WARNING"
+msgstr "Wettervorschau · {kind} in {seconds} s"
+
+msgid "WEATHER_STORM_STATUS"
+msgstr "Wettervorschau · {kind}\n{phase}"
+
+msgid "WEATHER_STORM_PHASE_CALM"
+msgstr "Ruhephase"
+
+msgid "WEATHER_STORM_PHASE_WARNING"
+msgstr "Vorwarnung"
+
+msgid "WEATHER_STORM_PHASE_RISING"
+msgstr "Sturm nimmt zu"
+
+msgid "WEATHER_STORM_PHASE_PEAK"
+msgstr "Sturm am Höhepunkt"
+
+msgid "WEATHER_STORM_PHASE_FALLING"
+msgstr "Sturm klingt ab"

@@ -95,6 +95,11 @@ func _campaign_contract() -> void:
 	var weather: Node = current_scene.get_node("Weather")
 	for i in range(3): await process_frame
 	var expected: Dictionary = weather.snapshot()
+	weather.set_preview_condition("sandstorm")
+	for i in range(3): await process_frame
+	_expect(not weather.snapshot().has("storm_phase") and not weather._storm_notice._panel.visible, "Storm preview bypassed live home protection.")
+	weather.set_preview_condition("")
+	expected = weather.snapshot() # Capture after the camera/preview guard frames.
 	_expect(not expected.is_empty() and expected.body_id == state.active_body_id, "Weather child did not join campaign.")
 	_expect(expected.get("regional_schema") == 1 and weather.forecast().size() == 3, "Campaign lacks regional weather/forecast port.")
 	var copy: Dictionary = weather.snapshot()
@@ -174,6 +179,7 @@ func _travel_climates() -> void:
 	_expect(snap.get("cloud_cover", -1) == 0 and snap.get("precipitation", -1) == 0 and snap.get("wind_mps", -1) == 0, "Live vacuum weather was nonzero.")
 	_expect(current_scene.terrain.surface.body.atmosphere == "none", "Descriptor disagrees with weather profile.")
 	for forecast in weather.forecast(): _expect(forecast.precipitation == 0 and forecast.wind_mps == 0, "Live forecast ignored vacuum.")
+	await _storm_campaign_contract(weather)
 	_expect(state.campaign.data.weather_policy == policy and get_nodes_in_group(&"campaign_weather").size() == 1, "Travel changed home or duplicated weather owner.")
 	_expect(await flow.travel_to_planet(15838, 0, 15838, home), "Climate home return failed.")
 	await _wait_for_arrival()
@@ -183,6 +189,51 @@ func _travel_climates() -> void:
 	_expect(snap.get("climate_id") == "earth_temperate" and snap.get("home_protected", false), "A-B-A did not restore protected home weather.")
 	_expect(state.get_current_body_record().weather_climate == home_reference and state.campaign.data.weather_policy == policy, "A-B-A mutated stored origin/profile.")
 	_expect(saves.save_now(), "Climate return checkpoint failed.")
+
+func _storm_campaign_contract(weather: Node) -> void:
+	var state: Node = root.get_node("GameState")
+	var flow: Node = root.get_node("SessionFlow")
+	var climate = preload("res://world/weather/planet_climate.gd")
+	var storm = preload("res://world/weather/storm_preview.gd")
+	var body: Dictionary = state.campaign.body_record(state.active_body_id)
+	var original: Dictionary = body.weather_climate.duplicate(true)
+	var atmosphere: String = current_scene.terrain.surface.body.atmosphere
+	var clock: float = state.campaign.data.elapsed_seconds
+	weather.set_preview_condition("sandstorm")
+	for i in range(3): await process_frame
+	_expect(not weather.snapshot().has("storm_phase"), "Live vacuum accepted a sandstorm.")
+	# The destination fixture stays outside the protected origin. Exercise both
+	# diagnostic climates in the real controller without enabling normal extremes.
+	for kind: String in ["sandstorm", "ashstorm"]:
+		body.weather_climate = climate.make_reference(body.id, storm.PROFILES[kind].climate)
+		current_scene.terrain.surface.body.atmosphere = "temperate"
+		var cycle: Dictionary = storm.schedule(body.id, int(body.seed), kind)
+		state.campaign.data.elapsed_seconds = cycle.calm + 5.0
+		weather.set_preview_condition(kind)
+		for i in range(3): await process_frame
+		var warning: Dictionary = weather.snapshot()
+		_expect(warning.get("storm_phase") == "warning" and weather._storm_notice._panel.visible, "Live storm warning missing.")
+		flow.toggle_pause()
+		for i in range(3): await process_frame
+		_expect(weather.snapshot() == warning and not weather._storm_notice._panel.visible, "Pause advanced storm or left warning over modal.")
+		flow.resume()
+		state.campaign.data.elapsed_seconds = cycle.calm + cycle.warning + cycle.rising + 5.0
+		for i in range(3): await process_frame
+		_expect(weather.snapshot().get("storm_phase") == "peak", "Live preview never reached peak.")
+		var saves: Node = root.get_node("SaveGameService")
+		_expect(saves.save_now(), "Saving during diagnostic storm failed.")
+		var saved: String = FileAccess.get_file_as_string(saves.save_path)
+		_expect("storm_phase" not in saved and "storm_preview_schema" not in saved, "Diagnostic storm became persisted state.")
+		weather.set_preview_condition("")
+		for i in range(3): await process_frame
+		_expect(not weather.snapshot().has("storm_phase") and not weather._storm_notice._panel.visible, "Turning preview off left storm state.")
+	body.weather_climate = original
+	current_scene.terrain.surface.body.atmosphere = atmosphere
+	state.campaign.data.elapsed_seconds = clock
+	weather.set_preview_condition("sandstorm")
+	for i in range(3): await process_frame
+	_expect(not weather.snapshot().has("storm_phase") and not weather._storm_notice._panel.visible, "Vacuum switch retained storm/warning.")
+	weather.set_preview_condition("")
 
 func _wait_for_arrival() -> void:
 	var started: int = Time.get_ticks_msec()
