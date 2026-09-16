@@ -133,7 +133,9 @@ func update(stream: Node) -> void:
 			animal.free()
 			return
 		if not victim.is_empty():
-			stream._capture_animal(victim)
+			if not stream._capture_animal(victim):
+				animal.free()
+				return
 			_remove(stream, victim)
 		individuals[id] = saved
 		if not habitat.has("spawn_position"): habitat.spawn_position = placed.duplicate(true)

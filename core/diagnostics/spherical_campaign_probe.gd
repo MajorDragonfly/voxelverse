@@ -179,6 +179,10 @@ func _expect_world() -> bool:
 func _expect(condition: bool, message: String) -> void:
 	if not condition: failures.append(message)
 
+func _run_fresh_process(arguments: PackedStringArray, output: Array) -> int:
+	# Diagnostic extension point; ordinary runtime checks keep their own process.
+	return OS.execute(OS.get_executable_path(), arguments, output, true)
+
 func _finish() -> void:
 	tree.paused = false
 	for failure in failures: push_error(failure)

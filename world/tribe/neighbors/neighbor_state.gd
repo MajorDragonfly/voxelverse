@@ -110,6 +110,7 @@ static func work(data: Dictionary, village: Dictionary, member: Dictionary) -> b
 			shipment["resource"] = ""
 			shipment["leg"] = "collect"
 		member["cargo"] = ""
+		member.erase("cargo_source_id")
 		member["stage"] = "outbound"
 		if _received_all(aid):
 			aid["status"] = "building"

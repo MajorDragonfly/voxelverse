@@ -16,7 +16,7 @@ func clear() -> void:
 	_matches.clear()
 	_query_key.clear()
 
-func bind(source: Node, profile_reader: Callable) -> void:
+func bind(source: Node, profile_reader: Callable, search_reader: Callable = Callable()) -> void:
 	clear()
 	_source = weakref(source)
 	state = {"discovery_points": source.get("discovery_points"),
@@ -33,12 +33,14 @@ func bind(source: Node, profile_reader: Callable) -> void:
 				if value is String or value is int or value is float or value is bool: row[field] = value
 			row.key = str(key)
 			row.location = Records.location_for(entry)
+			row.location_generated = not Records.as_dictionary(entry.get("journal", {})).has("location")
 			row.journal = {"location": row.location}
 			if section == "discovered_species":
 				row.role_label = Records.ROLES.get(str(row.get("role", "")), "Noch nicht bekannt")
 				row.domestic_roles = _roles(entry, profile_reader)
 			else:
 				row.name = "Region %s / %s" % [Records.saved_integer(row.get("x", "?")), Records.saved_integer(row.get("z", "?"))]
+			if search_reader.is_valid(): row.search_aliases = search_reader.call(row)
 			state[section][str(key)] = row
 
 func _roles(entry: Dictionary, reader: Callable) -> Array:
@@ -68,6 +70,7 @@ func page(kind: String, query: String, role: String, requested_page: int, role_l
 					if role.trim_prefix("domestic:") not in row.domestic_roles: continue
 				elif not role.is_empty() and role != row.get("role", ""): continue
 			var searchable: String = "%s %s %s" % [row.get("name", ""), row.location, row.get("role_label", "")]
+			searchable += " " + str(row.get("search_aliases", ""))
 			for ability in row.get("domestic_roles", []): searchable += " " + str(role_labels.get(ability, ability))
 			if not normalized.is_empty() and not searchable.to_lower().contains(normalized): continue
 			_matches.append(key)

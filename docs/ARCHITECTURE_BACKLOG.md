@@ -4,6 +4,44 @@ Ursprünglicher Aufgabenkatalog vom 9. September 2026. Grundlage der damaligen C
 
 **Das ursprüngliche Audit plante die ARCH-Aufgaben; aktuelle Lieferstände stehen bei den jeweiligen Aufträgen und in der Zuordnung unten.** ARCH-IDs zerlegen bestehende M1–M9-/D-Aufträge; sie sind keine zusätzlichen Spielphasen. Der Integrationschat ordnet veröffentlichte Lieferungen einmal je Runde zu; Fachchats übernehmen diese Basis und ihre konkrete Teilauftrags-ID. Laufende Änderungen in fremden Checkouts bleiben unangetastet.
 
+## Dritte Integration am 15. September
+
+[Spieltest-Kandidat](INTEGRATION_2026-09-15_PLAYTEST.md):
+
+- [x] ARCH-13: kooperativer Zugangsvertrag für Archivierung und aktive Schreiber.
+- [x] ARCH-17: fortlaufende Zählung vorbereiteter Terrainmeshes.
+- [x] ARCH-24: gespeicherte Teilrevisionen und vier zusätzliche Schwanzfamilien.
+- [x] ARCH-25: Tierhaltung/Epochenbestätigung DE/EN und isolierter Stammes-Teststart.
+- [x] ARCH-26: zwei gleichartige Arbeitsplätze je Ort mit separaten Quellen.
+- [x] ARCH-27: physische/fernsimulierte Lagertransporte einschließlich gemeinsamer Bilanz.
+- [x] ARCH-29: Quellenbeobachtung mit Dateihashes und exklusiven Prüfausgaben (#120).
+- [x] M4/Atmosphäre/Wetter: Tierausdruck und Lider, Shader-/Grafikpresets, mildes
+  regionales Wetter; gemeinsame Anschlüsse im Kandidaten.
+- [ ] ARCH-19: optische und FPS-Abnahme auf Lars' Ziel-PC.
+
+Die Häkchen bezeichnen integrierten Umfang. Vollsuite und native Builds richten
+sich nach der CI des gemeinsamen PR; keine pauschale Epochenfreigabe.
+
+## Historische zweite Integration am 15. September
+
+#93–109 sind im aktuellen gemeinsamen Kandidaten vereinigt. Lieferung und genaue
+Grenzen: [Integrationsbericht](INTEGRATION_2026-09-15_RESOURCES.md). Datierte
+Fachtexte unten bleiben Nachweise ihrer damaligen Quellen. Folgende Teilpunkte
+sind zusätzlich geliefert; kein vollständiger ARCH-/Epochenabschluss daraus:
+
+- [x] ARCH-13: Offline-Generationenmanifest und Aufbewahrungsplanung; getrennte
+  Kampagnen-/Labortierverzeichnisse, alle Dateien behalten.
+- [x] ARCH-14: Begegnungsarchiv und Labortierhistorie über 256 Individuen mit
+  begrenztem Cache und erhaltenem Neustart; keine lebenslange 256er-Grenze.
+- [x] ARCH-17: Erste portionierte Terrain-/Kollisionspublikation und begrenzte
+  Audiobeobachter samt Quellenwechsel.
+- [x] ARCH-24: Rüssel als Kopfmodul, aktive Kiefer/Scheren und Katze/Bär/Schwein.
+- [x] ARCH-25: Kreaturenwerkstatt, Dorfaufträge/Berufe und Entdeckungsbuch DE/EN sowie HUD-Überarbeitung.
+- [x] ARCH-26: Erste verlustfreie Ortsübernahme und zwei produktive eigene Lager;
+  mehrere gleichartige Arbeitsstellen im selben Ort bleiben offen.
+- [x] ARCH-29/02: Fachtestplan aus Git-Diff und entwickelte Messroute mit Neustarts.
+- [x] ARCH-30/M9.1: Autoren-Schiffseditor; Kampagneninstanz und Flug bleiben offen.
+
 ## Historische Integrationsrunde vom 10. September
 
 28 Übergaben sind in diesem Stand zusammengeführt. [Bericht, Prüfungen und Veröffentlichung](INTEGRATION_2026-09-10.md), [Quellcommits](integration-sources-2026-09-10.json) und [nächste Teilaufträge](NEXT_PARALLEL_WORK.md) gelten vor den historischen Startaufträgen. ARCH-01/05/20/21/23 sind geliefert; ARCH-02/13/14/17/24/25/28/29/30 enthalten die unten genannten Teilabschlüsse. Die noch offenen Punkte bleiben offen.
@@ -172,7 +210,7 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 - **Ortsregister-Teilpaket geliefert am 10. September 2026:** `feature/arch-14-place-register`, [PR #65](https://github.com/MajorDragonfly/voxelverse/pull/65), aufbauend auf PR #59. 3.105 Orte einschließlich Änderungen/Neustart geprüft; 96 offene Orte und 64 Einträge je UI-Seite. Schema 1/2 wird verlustfrei übernommen. [Vertrag und Integrationshinweise](WORK_ARCH14_PLACE_REGISTER.md), insbesondere zusätzlicher ARCH-13-Archivadapter für Schema 3 vor gemeinsamer Freigabe. Weitere Register bleiben offen.
 - **Atlas-Teilpaket geliefert am 10. September 2026:** `feature/arch-14-atlas-paging`, Basis `ea900f2`, [PR #59](https://github.com/MajorDragonfly/voxelverse/pull/59). Kartenwissen wächst über 8.192 Kacheln hinaus; höchstens 96 offene Kacheln plus begrenzter RegionStore-Cache. Vollständige Schema-1-Übernahme, unveränderliche alte Wurzeln und echte Neustart-/Fehlerprüfungen. [Vertrag, Registerinventar und Übergabe](WORK_ARCH14_ATLAS_PAGING.md). Gesamtpaket und übrige Register bleiben offen.
 - **Zuordnung:** M1h/M1f, Karten/D1. **Vorher:** ARCH-13, für Tierlaufzeit ARCH-09. **Bereich:** Ecosystem, Begegnungen, Nahrung, Atlas.
-- [ ] Die 256 `animal_records` von der Zahl aktiver Tiere trennen und regionsweise auslagern. Geänderte, gezähmte und anderweitig referenzierte Individuen behalten Identität.
+- [x] Die 256 `animal_records` von der Zahl aktiver Tiere trennen und regionsweise auslagern. Geänderte, gezähmte und anderweitig referenzierte Individuen behalten Identität.
 - [ ] Karten-/Orts-, Foraging- und Begegnungsgrenzen inventarisieren: Spielregel mit sichtbarer Grenze oder technischer Cache mit Paging. Kein stilles Verwerfen von Wissen oder Belohnungssperren.
 - [ ] Unveränderte prozedurale Objekte dürfen deterministisch rekonstruiert werden; Tod, Entnahme und Besitz bleiben als Deltas erhalten.
 - **Fertig:** Mehr als 256 unterschiedliche Wildtieridentitäten können nacheinander besucht werden; neue Tiere erscheinen weiter. Frühe geänderte Tiere und Kartenkenntnisse bleiben nach Cachewechsel/Neustart korrekt; Nahobjektzahl bleibt begrenzt.
@@ -302,8 +340,8 @@ Die Tabelle ist eine Übersicht. Die Abhängigkeiten im jeweiligen Auftrag sind 
 ### ARCH-26 – Siedlungen und Arbeitsplätze als Instanzen
 
 - **Zuordnung:** M6 → M7. **Vorher:** ARCH-04/06/13/15/16/20. **Bereich:** Dorfzustand, Arbeitsplätze und Auftragsregister.
-- [ ] Bestehendes `body.tribe` verlustfrei als erste Siedlung mit stabiler `settlement_id` migrieren. Fraktion, Spezies, Ort und aktuell ausgewählter Ort getrennt halten.
-- [ ] Zwei eigene Siedlungen mit getrennten Vorräten/Aufträgen als erste Größenstufe liefern; Nachbarfraktionen bleiben eigenständige Gesellschaften derselben Spezies.
+- [x] Bestehendes `body.tribe` verlustfrei als erste Siedlung mit stabiler `settlement_id` migrieren. Fraktion, Spezies, Ort und aktuell ausgewählter Ort getrennt halten.
+- [x] Zwei eigene Siedlungen mit getrennten Vorräten/Aufträgen als erste Größenstufe liefern; Nachbarfraktionen bleiben eigenständige Gesellschaften derselben Spezies.
 - [ ] Zwei gleichartige Arbeitsplätze bzw. zwei Baustellen mit eigenen IDs, Wegen, Reservierungen und Arbeitsfortschritten unterstützen. Bewohner-/Baugrenzen erst nach ARCH-02 erhöhen.
 - **Fertig:** Zwei Orte arbeiten unabhängig nah/fern weiter; Speichern während gleichzeitig laufender Arbeiten bewahrt jede Ladung und Reservierung genau einmal.
 

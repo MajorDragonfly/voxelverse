@@ -1,0 +1,37 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_part_articulation_test",
+    "creature_behavior_gameplay_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.128
+    },
+    {
+      "name": "creature_part_articulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.474,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.628,
+      "contract": "wildlife"
+    }
+  ]
+}

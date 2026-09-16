@@ -1,0 +1,51 @@
+name: Graphics settings review
+
+on:
+  pull_request:
+    paths:
+      - "core/display_settings.gd"
+      - "core/graphics_preferences.gd"
+      - "ui/frontend/graphics_settings.gd"
+      - "world/visuals/atmosphere/**"
+      - "world/visuals/underwater_view.gd"
+      - "tests/graphics_settings_test.gd"
+      - "tools/review_graphics_settings.py"
+      - ".github/workflows/graphics-settings-validate.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: graphics-settings-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  graphics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [forward_plus, gl_compatibility]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software graphics
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Import and capture graphics controls
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          "$GODOT_BINARY" --headless --path . --import > /tmp/graphics-import.log 2>&1
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_graphics_settings.py --godot "$GODOT_BINARY" --renderer "${{ matrix.renderer }}" --output /tmp/graphics-settings-review
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: graphics-settings-${{ matrix.renderer }}
+          path: |
+            /tmp/graphics-settings-review
+            /tmp/graphics-import.log
+          retention-days: 14

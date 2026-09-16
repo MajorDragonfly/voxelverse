@@ -4,6 +4,7 @@ const Style = preload("res://ui/frontend/menu_style.gd")
 const Planet = preload("res://ui/frontend/menu_planet.gd")
 const Text = preload("res://core/localization/ui_text.gd")
 const BlueprintLibraryPanel = preload("res://ui/blueprints/creature_library_panel.gd")
+const TribalPlaytest = preload("res://ui/frontend/tribal_playtest.gd")
 var _creature_template: Dictionary = {}
 var _creature_template_builtin: bool = false
 var _template_summary: Label
@@ -107,7 +108,7 @@ func _build() -> void:
 	footer.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
 	footer.anchor_left = 0.075
 	footer.offset_top = -57
-	var keys := Style.label(self, "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen", 16, Style.MUTED)
+	var keys := Style.label(self, "Tab  Auswahl    ·    Enter  Bestätigen", 16, Style.MUTED)
 	keys.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 	keys.offset_left = -610
 	keys.offset_right = -100
@@ -134,6 +135,8 @@ func _show_home() -> void:
 		_latest_summary = Style.paragraph(_body, str(last.name) + "  ·  " + _date(int(last.saved_time)), 17)
 		_latest_summary.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	var start := Style.button(_body, "Neues Spiel", _show_new, "NewGame", last.is_empty())
+	Style.button(_body, "TRIBAL_TEST_ENTRY", _show_tribal_test, "TribalPlaytest")
+	Style.button(_body, "FLEET_ENTRY", func(): get_tree().change_scene_to_file("res://space/fleet/fleet_trial.tscn"), "FleetTrial")
 	Style.button(_body, "Spielstände", _show_slots, "Saves")
 	Style.button(_body, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "Settings")
 	Style.button(_body, "Steuerung", _show_help, "Controls")
@@ -169,6 +172,14 @@ func _show_new() -> void:
 	Style.button(_body, "Abenteuer beginnen", _begin, "Begin", true)
 	Style.button(_body, "Zurück", _show_home, "Back")
 	_title_input.grab_focus()
+
+func _show_tribal_test() -> void:
+	_clear("tribal_test")
+	Style.paragraph(_body, "TRIBAL_TEST_ENTRY", 27)
+	Style.paragraph(_body, "TRIBAL_TEST_DESCRIPTION")
+	Style.paragraph(_body, "TRIBAL_TEST_CONTROLS", 17)
+	Style.button(_body, "TRIBAL_TEST_PREPARE", func(): TribalPlaytest.start(_flow), "BeginTribalPlaytest", true)
+	Style.button(_body, "Zurück", _show_home, "Back").grab_focus()
 
 func _begin() -> void:
 	var seed_text: String = _seed_input.text.strip_edges()

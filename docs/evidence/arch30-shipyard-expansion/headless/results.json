@@ -1,0 +1,46 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "f6d487db76649d964be37f433cb1ae85357abe4f",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "shipyard_test",
+    "expedition_contract_test",
+    "modular_assembly_framework_test"
+  ],
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "shipyard_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.99,
+      "contract": "expedition_design"
+    },
+    {
+      "name": "expedition_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.849,
+      "contract": "expedition_design"
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.89,
+      "contract": "blueprints"
+    }
+  ]
+}

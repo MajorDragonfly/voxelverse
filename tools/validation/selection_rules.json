@@ -1,0 +1,200 @@
+{
+  "schema": 1,
+  "documentation": [
+    "AGENTS.md",
+    "README.md",
+    "ROADMAP.md",
+    "docs/*.md"
+  ],
+  "full": [
+    "project.godot",
+    "export_presets.cfg",
+    "autoload/*",
+    "main/*",
+    "core/campaign/*",
+    "core/persistence/*",
+    "core/runtime_shutdown.gd*",
+    "core/diagnostics/*",
+    "world/surface/*",
+    "localization/*",
+    ".github/*",
+    "tools/*"
+  ],
+  "rules": [
+    {
+      "id": "weather",
+      "paths": [
+        "world/weather/*"
+      ],
+      "contracts": [
+        "weather",
+        "terrain_art"
+      ]
+    },
+    {
+      "id": "audio",
+      "paths": [
+        "audio/*"
+      ],
+      "contracts": [
+        "audio",
+        "wildlife",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "creature-body",
+      "paths": [
+        "creatures/catalog/*",
+        "creatures/editor/*",
+        "creatures/runtime/*",
+        "creatures/parts/*"
+      ],
+      "contracts": [
+        "creature_body",
+        "blueprints",
+        "domestic_fauna",
+        "domestication",
+        "discovery_map",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "blueprints",
+      "paths": [
+        "assembly/*",
+        "civilization/buildings/*"
+      ],
+      "contracts": [
+        "blueprints",
+        "creature_body",
+        "expedition_design",
+        "campaign",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "behavior",
+      "paths": [
+        "creatures/behavior/*",
+        "world/wildlife/*",
+        "world/fauna/*"
+      ],
+      "contracts": [
+        "wildlife",
+        "domestic_fauna",
+        "domestication",
+        "home_progression",
+        "discovery_map",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "animal-ownership",
+      "paths": [
+        "world/domestication/*"
+      ],
+      "contracts": [
+        "domestication",
+        "domestic_fauna",
+        "village",
+        "regions_simulation",
+        "campaign",
+        "discovery_map",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "village",
+      "paths": [
+        "world/tribe/*",
+        "ui/tribe/*"
+      ],
+      "contracts": [
+        "village",
+        "neighbors",
+        "regions_simulation",
+        "home_progression",
+        "campaign",
+        "domestication",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "home-progression",
+      "paths": [
+        "world/home_group/*",
+        "core/progression/*"
+      ],
+      "contracts": [
+        "home_progression",
+        "village",
+        "neighbors",
+        "campaign",
+        "discovery_map",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "discovery-map",
+      "paths": [
+        "core/map/*",
+        "core/discovery/*",
+        "ui/discovery/*",
+        "ui/world_map/*"
+      ],
+      "contracts": [
+        "discovery_map",
+        "home_progression",
+        "domestic_fauna",
+        "frontend_locale",
+        "campaign",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "terrain",
+      "paths": [
+        "world/streaming/*",
+        "world/space/*",
+        "world/generation/*",
+        "world/planet_lab/*",
+        "world/visuals/*",
+        "world/resources/*",
+        "world/simulation/*",
+        "art/*",
+        "shaders/*"
+      ],
+      "contracts": [
+        "surface",
+        "terrain_art",
+        "regions_simulation",
+        "domestic_fauna",
+        "wildlife",
+        "audio",
+        "campaign",
+        "spherical_gameplay"
+      ]
+    },
+    {
+      "id": "presentation",
+      "paths": [
+        "ui/*",
+        "core/display_settings.gd*",
+        "core/input_preferences.gd*",
+        "core/onboarding_progress.gd*"
+      ],
+      "contracts": [
+        "frontend_locale",
+        "discovery_map",
+        "home_progression",
+        "village",
+        "neighbors",
+        "blueprints",
+        "creature_body",
+        "audio",
+        "spherical_gameplay"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "2c1c3f4e2da40506f329332b102eb056f7b2f5d8",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115
+    },
+    {
+      "name": "planet_lab_entry",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.407
+    },
+    {
+      "name": "main_shutdown_45",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.655
+    },
+    {
+      "name": "main_shutdown_150",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.065
+    },
+    {
+      "name": "main",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.011
+    },
+    {
+      "name": "shutdown_15838_terrain",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.886
+    },
+    {
+      "name": "shutdown_15838_placement",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.512
+    },
+    {
+      "name": "shutdown_15838_resources",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.063
+    },
+    {
+      "name": "shutdown_15838_complete",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.007
+    },
+    {
+      "name": "shutdown_15838_cluster_build",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.198
+    },
+    {
+      "name": "shutdown_15838_cluster_complete",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.579
+    },
+    {
+      "name": "shutdown_63352_terrain",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.313
+    },
+    {
+      "name": "shutdown_63352_placement",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.394
+    },
+    {
+      "name": "shutdown_63352_resources",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.736
+    },
+    {
+      "name": "shutdown_63352_complete",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.229
+    },
+    {
+      "name": "shutdown_63352_cluster_build",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.169
+    },
+    {
+      "name": "shutdown_63352_cluster_complete",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.997
+    },
+    {
+      "name": "shutdown_23757_terrain",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.181
+    },
+    {
+      "name": "shutdown_23757_placement",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.951
+    },
+    {
+      "name": "shutdown_23757_resources",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.703
+    },
+    {
+      "name": "shutdown_23757_complete",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.53
+    },
+    {
+      "name": "shutdown_23757_cluster_build",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 20.035
+    },
+    {
+      "name": "shutdown_23757_cluster_complete",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.688
+    },
+    {
+      "name": "streaming_cpu",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.701
+    }
+  ]
+}

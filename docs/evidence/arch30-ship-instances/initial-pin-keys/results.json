@@ -1,0 +1,1551 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+    "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+    "tracked_worktree_dirty": true,
+    "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+    "source_sha256": "449ee2639a1cddf176624ca526f1af6597d9ecc0df4abc0d451f456463e0c67a",
+    "complete": true,
+    "file_count": 3410,
+    "bytes": 101886502,
+    "bytes_hashed": 101886502,
+    "seconds": 0.4615
+  },
+  "passed": false,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "fleet_runtime_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+      "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+      "source_sha256": "449ee2639a1cddf176624ca526f1af6597d9ecc0df4abc0d451f456463e0c67a",
+      "complete": true,
+      "file_count": 3410,
+      "bytes": 101886502,
+      "bytes_hashed": 101886502,
+      "seconds": 0.4615
+    },
+    "end": {
+      "available": true,
+      "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+      "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+      "source_sha256": "30a27f80d553438155989331976593a83be0223b6ccd9d66b1efb159fcc3ab03",
+      "complete": true,
+      "file_count": 3414,
+      "bytes": 101886581,
+      "bytes_hashed": 101886581,
+      "seconds": 0.3617
+    },
+    "status": "prepared",
+    "reusable": false,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "3967f687d693ef63357817ff5e6235f1dd2ee392a83afc879e72c93a362d92c5"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "eccaccf071b5f921ebecf129db53afd66b2eb62d796239939474c435883d4f85"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+          "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+          "source_sha256": "449ee2639a1cddf176624ca526f1af6597d9ecc0df4abc0d451f456463e0c67a",
+          "complete": true,
+          "file_count": 3410,
+          "bytes": 101886502,
+          "bytes_hashed": 0,
+          "seconds": 0.1524
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+          "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+          "source_sha256": "449ee2639a1cddf176624ca526f1af6597d9ecc0df4abc0d451f456463e0c67a",
+          "complete": true,
+          "file_count": 3410,
+          "bytes": 101886502,
+          "bytes_hashed": 0,
+          "seconds": 0.1544
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "import",
+        "source": {
+          "available": true,
+          "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+          "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+          "source_sha256": "30a27f80d553438155989331976593a83be0223b6ccd9d66b1efb159fcc3ab03",
+          "complete": true,
+          "file_count": 3414,
+          "bytes": 101886581,
+          "bytes_hashed": 213408,
+          "seconds": 0.1775
+        },
+        "changes": [
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a66c8abb99de7a59833b12e6c42e91ae1eace5c2f6e5954931df692ce0bd01c7"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "88287f9dd571e655a3e52674ae45af521c4b4394fb62e057af193c279501c80c"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3f7e066e23f80297e613e5a44dd74b1b09db6778a34cea52d69ef9171efb88ab"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "18210c93b05b075a6cb875c0c38fa7cafc48bd217dd1d8a4482efe5eceb11cbf"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "4cbe23c3e4f243364e98af4b12fb879cf986cbeb1bbdd310d84cf43d24f0342e"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "dade0826d032dfd5d9e9ff7e5f4101dda8ece6592ed93bdedc06127ea9f9ca56"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "afc7c7fca22a80d03478805d558fea638e14600d12b8a17402daae53d20eab31"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "70935d6bcfbc489167278f5943a603404a0f1aab3ec210047102ecbbabae5ee3"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "00d32264b1cd6c3393ab97c79c2884e1bdae9e05d873b4fb8ba685b61853fa51"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f754d6397553e9fe004ad02bb3558305de2044ecc493b0072069995fca9f95d0"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "cc7d0a79afac9a1ca0f0bd019ad69804d62cbd6dc97ec2a0f8dfdfa9ea3fd1ef"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species1_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "40dda753b4be02191985f0d5ae8fb68f1241671de5b017fe8dfaba27ae5b27b1"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "87c4345e6e2f7b1722c35451cd0afa81711805dd5782ada30260691ebdebff8c"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ccac9a4c12ab55b123facd05163e59d69ecce1221164bef92ac76aeada487eca"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "879f1b4442b6cdeb0ad453f0db23f4e4199beb2ce07abcc43db97742ec2dfbc9"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "bb1ff4f2cfa0cd50fbf4bff3be2394d9ee44ed51468a5e4111a38dbe6a9493de"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0c560dadf4ea41a91111e827b09eccb62a0d9cf40e26913f4347b26e92ebd7f8"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_species2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "54d828126b3beabfe4f7a724a01a397b8b36995bda393835a8754715a75ff81a"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "2272e80d8990483d855b853cda3c6f791ecfdc062ca49c392627b694e1e7fa78"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "8c6907f3d2a59fcad66aed670d9f465319f86df2ffa853ebf7557520ac6acd82"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3b5fa057554a5d5d0d1d7def4e7552957e06b314192a48578e1583f5a1c887da"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "fbe1fcff8ed8ec3faf01d6769909ed55330da5fab2ee5735f4112fd7e964d817"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "760fa4f4d1b1320e966da0e2091a2eabd4b2a9c57a6d4448006da24c163bfa16"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ca4727668daff0f16c97eb6187231fb2136875ea2553e9fe778aead81bf858a3"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "c8cdbf4c0aa84fed8ec13452083845bf8647b4fda039d172a67030b57a2753a1"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "470ea1277606025bc82748e224ada5bbd92cfc5f59adcf48178bc450faede58a"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f0dad57158b58eb6aa4a09691a3b5d2afa164b172e0307f8e960efcf6ea231a1"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7c77904ca87a68b92d435f6286d336d2aa5b43cf8255cf46046bc81edd15a534"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "2881446a3faab66d32caa8b3d31437f951144dfea61065dc01019e4046318385"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species1_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a33539842f013e14495b2681b820af6609ea58b09ad842eaa7ef43c83827566f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "42f5b71995dc3f6c2cd3363e64517f9dc9c3627f452088263d31cc3c440dd082"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7f042489fdd1f92c60be368e76a738baca2ca7ecbdbe86169966b24ec5668782"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "66c91dccf7b9188eab404be53fe08bb6ee473aa359ea2d3c560ac3d21713eb56"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "1802bd68ec966ab0e8a4c5d6bcc51bac999aedbda9bb525f8deafe4b8ee28d68"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "1b1b70e908cae07df2a73a96518c1dd420d3e7c71ecf8175492915da2f267741"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/dense_bush_v2_species2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "bd2e19e489a25d89bbff9ba5a28a46fac5dc0c3be68177d104d12d1f7abfa4dd"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3c5cb05a8d17867709fc9177f3c0855e501ff5b68e2916a325d4d4644714b33f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "42bf9bee6d1610e34cc92b1be45705dbcce1160b8350f449e68b112703191b1d"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "859a50c71fd2e529a90da6cd76e823074a1d1ed8c517b1dffc772d73d6d3a192"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "daafc163153ffc9305a45d222559ccdd153436ffc37acd1a4e3c6e91bd8c0cbe"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "9532d873a4c54f3865e403b9dbd312fdcdb5102f870cc9542cb9990f519af7e1"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "77b76fa00d7eff9548da461560ef28120899d5f5c3a4cd9cb484f68566fd6105"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a1e73dc4ecbd9049533b62489579da29b9087af97852aa70fa4011fd92d96d72"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3d8d6e23301fb1240f6f1df903228d7f5e255de4ff40dbc45b1c2995a903cd2d"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "eaff557da2f41016188c4cd2255869f87e0a23aab62b14c0f8f6dc23ea4ac165"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e8f4eb6d8c5a7b205db549efd3fdcd2aa4c1faebeefe54b92f9fb9c3bcbce4d7"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "1adb604630e40b913c22f44a9ea40884c4927b271740b46b2be61affc593386c"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species1_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e8c80842dc80d81dd40874bd17267fbb7258f95b3cc59d32c784feb6bb17758f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "00d6894f9cf41636bca4ee6f6d008f7fb16f1ddebbdab88a3f935bccc05a1588"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "17d6ded4f59d3dd45182fd420b6a9bb932866b576d7904e7b8f12e05daaa2408"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "98cfa95b8f72eab3fc8abe6d6e27864bdbed9ee778d3a8a5a984fcf3cf64eff0"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "b65da6e9ab521f7e0700df86a9a3d46dc251dbf1061fd46c7e0614676706b2ac"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "257cd034c20f80969f55661ca0da86e3cd8b0390da5c4d0228f22818adf749c4"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/fern_cluster_v2_species2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ff8258a0813646ae57e82ec325a0031ed11d2c2fb3c367f7ee30fa31f3b7df1f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0ea0f5d3bb7f6f52385720e81165ac71bb2e542a31a7c79927bbc25418f7d1a3"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a622e8288c5ff74a0fd42e570e0876e59524072066be89e6e85647f432029f05"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "96f08292ff2f2f4f2967acf419c899555bd55b8bc3c80e11eb27c0d51467f524"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "c2961c88c5db3bd70a4a52cf68d4019bfeccd003310999282d095fb928bb2890"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "389d5a8c8d3e3bcc5fee6208f95413d6d6aa245aca6bf7b90d75869a9568e9a1"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "bdfb71648cc8f83df51105921b4f86bdd8ca91a32fd19cbbed23083c63273c9c"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f84400a7e8cb1956605b6ffad0c666bca5bb9a0a8ab0acda7db8e0bc18e82a84"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "4c024f075332c2c05ee9c534d328b26bc7645acfc7d5933cfba39ad142bef647"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "b2ee5f06275236d0336cabc76425b9f5e11f4ef75d6f46cc37ba5a5a00a7bcb9"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ddd337be5397f362fc0b4e924084a1fc700dce212fa21659f5799a658e54b630"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e466fa2499304c43266bae309aff36764fcc0803748690111395c14935a64df6"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species1_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3e5ee620bbb54123aca0b517eccbb841421f3dadd58e429acbfb263c0e36cb1b"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a507324e2d288d29667a53d879eba7d96cd37be78212dc434c446519330b76f7"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "29c62cabfea3a1fd3fcf94ce7442e9e690288016574bc51905a26b4f64e27917"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "50740ace383e0bab37ceb03b60997144de3947c518e11dcfd5b68c0c44578790"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3681966e591a07f8527e33008e17ba2224e684b6fed20c3587a15ceb536ccdd1"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a6584231c30116358867906843615cf2c230a145417ee905a803bf5b1734209b"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/flower_cluster_v2_species2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f57ecedbbbe649cc77cd0de91e84ad66594a9e5d5931cf0a168f1c0a8a2cb724"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "74c63cef786347419881964ebab30c849275dc1d70175bcca91cb2874734079f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7d96c80f6352626e22291a5d4d36ef5550a96d81a9d51186ee73436034fba28a"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "d3b0173f5922b68a58e7d116e449752adce655703ae9fa1a47d3eb1c69bcbf61"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "98a2adddc6c153533a791c6f129af9e2cb62a9a8ee4f0041ffded9090b04512e"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "acb9e421ca011ecf05a79c40b4da42f4b999fb81992f26068dc6b9b65f3c9790"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "9644ca7f6ef8540f54a58b77150cfc4a6008486eb456725ed8fe8e074da33bf6"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "154ce30af1f698d38750ec1112faf70025610cb8353f58b5b32980f2aa1d08fb"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3bc28a1fac1b448d7eccb1e202ef46ec02482bc2cbca212980ef6add58b1a556"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6ac97922fafe6f287e7c6c85bcc313e8d0645a9960c1fb8583509122147cec21"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "2d2fb77c0b2cb87d664f9fc76cac3ccf060a330da506cc1adc05665d0593c8f8"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "b5434229bff1436e6670b91dd168afa0666df5328fe70a44b038942e74fe68c0"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species1_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "4e7274f4aa60194f18cb8172967a305ecc77e93168cdd57a030ee0568f6fc49f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "63d466eeadff63ed73c5e2bd7b639aa74f9db8ef7cfc0e28ebb0f3608ea39ddb"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0fb7f8ee732cbd325a1385a4f463858dcc61098e81aa6b6ae7ef637218016f06"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "745814c06a5ea6167af29e5801d1b7e08d738495bb395deb9f18fd45e0174827"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "cb86c119e472b81e8d7b870b8937625982b09fa048f16a6ef63d1366948ef83f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "36feab53f3cbec24dafeb2f2e4bf75129f7ae601dd0defd5e710d3fcad4d2966"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/grass_tuft_v2_species2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "1dd2a4851b0f7e83180e8e00b9b3139eecb58ed4f4271ff8a925b4f8248a5a18"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "852cf8601a8afa33a428414e261752ddd2313f90fa5230b225a9ea6f53a12932"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "452baa72286801abaec80a1383284abba5c61eacce4da647e94fa0d8276b48d7"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0297b0eee456c7e20c1dc1bf6332ebdedcdc1642b55eec30527f6d4bc301006e"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "4606bdd8493e566b967d6d6c1f06b134db00f95020d9c7a7661f7e28fe3d9fa0"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "d690cbabd6bfc0e5b78af44f34206d00ba092074720dae0b8cb436b5aa892a46"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a83c45a2bdd2ff066577f34571bcd58189c5d2754c535d956ede09a6c1c9521a"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "5cb87197938d1a8c8eabd0ac47f5f1ab4642b7bcf1a708fd0f0ba9224133ebb4"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "646fc19f4242d598e612372c769aa1538d98f117cf586b7ee7c40e483dad8ddb"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "b1c8b4f9f4f12aad07e7e52ae3e458c9b9152b8f4fda34342973fb0472e0bfd0"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "2ddeaef28de74fff056a3f002737b9e5b62da3d85c31353f640b7a9f320e7157"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "2bf2dab1af43fb159e0a5ad9fc6f8fe084707d10ba3c57c8f97626ba455828b5"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species1_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ffe1fb374ac00bfdb9f68d4a290c9660ec12e7a1f2345d967042f8bfe413f014"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f6b133f37e6b7b81c0ce9000ab8b121e7777e7be0551309281049b35f25cdd75"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "35fa635c9a6e31c8d9130d3997fbd846be3fe5deeae298abfc64ae3450f89b0d"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "fe9843d30707d1255db74e0ccdd260744ff85a1d55974f539661a6a380f79f65"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7df45e0d5c4149327a333902386355f6ce26b4118257804efbab0d97352471f1"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "195433120421e4b27dc324f07081878c73030739fbadbd7220fde0a9c82100c2"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/layered_rock_v2_species2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "af1b1a85dc9bcc849b055fc1f1ab53fd7fa5fc8db7dab90d82950c47fd53d514"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "83921e3865a74940133cd13762ecfd6ec8cfc3af2f7a2324485a0a3b4fcaccee"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "b4a74e027c30bb48d5740545467e6faaa9bf07ccf76e47cc7e0fb1fd4734cc9d"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "2e1204e16dfb8a7f879cab2ec501972a1a3b8d264549568ade27559c8b89cc3f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "476c484701d6e4383a4c79b950f721eea1243930fcebd947c28b7bbc572f1086"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f1848ec5a8b5604b955a8547e546e70c83a076e7a1c84e5ad4e85046cea0cc3c"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "745d2bb11b95f0ea05b1def3b1ee4b9355c628a4670b9fb851d0f22e66cf8aa4"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "b718411ebe8054844b9d8339383edcab587791a1764c2ee90e1b714b680139dd"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "37c95472d4c40fcde1ecf94a3392b40154ace682a21cecffa889a61dd21017e0"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0222769b70c94f5948b7585c15560e8400931bbda957cb312c37298545857b54"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "21158c541e9173da3e921dbd7421c278c47318826cf8157f8efabd174b4c452d"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "cec8d197d6478c0cedde6aa8559c292c8f2d16517a1b1f5b5ad3b15516db17c6"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species1_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "63c5b8982ff26a71c427c3039ff5d7bc11126a9548d357839252199aefa3ae4c"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_far.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7db3ad95acef6433ba49b98392eec07123d939aff37e962e5f91c6004bf54875"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_far_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "693c553247e18bac963cafa2b1de831c4243bc7acb483874b4d367e8ed40a4ca"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_mid.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "373af993f1321a97d83d4ca4499715b8bdc7df230fc4b006e3d980068288e67f"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_mid_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "922fe1bd72b82cbe60eae2a79300b39d3fb216d10f59c4f235e1014f58fb57cd"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_near.glb.import",
+            "kind": "touched_or_replaced",
+            "sha256": "146311d21817a13fa46dcae0b5d90b0eea0a93db17045f623cf0fc1b3deeb83a"
+          },
+          {
+            "path": "assets/packs/temperate_forest_v1/environment/benchmark_v2/tall_pine_v2_species2_near_0.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3cbf9cf9935152be765c7e8df45f0e8d462594b0fd733dbc9637195e36d80446"
+          },
+          {
+            "path": "audio/assets/actions/drink_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ffd96bbce8fb83a57b6370c6cc3f0f9a1961bce3943909725432e1d310bd760a"
+          },
+          {
+            "path": "audio/assets/actions/drink_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6fdbbc9b8387e2deddfc6ce016f7a012fd1b9bc981fdb5e9c8bf5165c1373c76"
+          },
+          {
+            "path": "audio/assets/actions/drink_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6b676956d7247bf835c07290dc5063fea27d1cc18701bc94d0c45a6ad740b6fc"
+          },
+          {
+            "path": "audio/assets/actions/eat_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "815009787574581b9bcc90f6c7e7899bff57d452229c420a99f4f5074f721cbd"
+          },
+          {
+            "path": "audio/assets/actions/eat_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "5665c2d4f3fa276d3ac37aff099191411229c439e34014da581c8ccc03ce1a0e"
+          },
+          {
+            "path": "audio/assets/actions/eat_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "553de0f94b869facdef1805ca62548ec7c4f2824a4d0b1071478a62629df1a91"
+          },
+          {
+            "path": "audio/assets/actions/evolve_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a5a3e8a7021f58e9c773e81a2ad738671c540e8ae69f32be564d533b2af6f400"
+          },
+          {
+            "path": "audio/assets/actions/evolve_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e38bdc6bbdad4371b3f9b170e7a2618ee965ca6d47b8ef594922517b264c64ec"
+          },
+          {
+            "path": "audio/assets/actions/evolve_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e841e2af0a07fb4b7d37a6f10a9781189c49ccfe00b62f079a7e53094b8731c7"
+          },
+          {
+            "path": "audio/assets/actions/gather_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a67345e13126d8c30b1c3635962724f3e6984e263fa6dead357ca6fca3527de8"
+          },
+          {
+            "path": "audio/assets/actions/gather_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6f3679b6a84974f76d99fa47a4fe92ab990c84279dc7b969b9e071bbc934ff01"
+          },
+          {
+            "path": "audio/assets/actions/gather_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "73496c0d4cb70fe5d66cdcf7e664a0ae1f4205f70bc84e8ff5fb6eefd92244c5"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_attack_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "fe9f48a73b73658e65d0fde88d5d6ed3483f6fd071f5e530900c23ad8d2dfe14"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_attack_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "439fd0bc84bb2194f9b21b344520e556660f3285c93661956583aae08da2a557"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_contact_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "c2198e84cf0df1fae82831667c62f24f527c48ce499cbd730088113128c7887c"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_contact_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "930c373dfceda051ab1e305d7243eb18ab587e3057cb168385a12cbab43c6c54"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_death_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7dbae61827ca4bd10725850746a064d575dafa1b8bd515ef6064dbe08f607962"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_death_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "57f176bb67f5ac5343ecb4589531ec91097abb01e453e35885e30d561a777525"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_friend_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "13c5b4afdc6c859c361aa2601c81b51d8fc177ac23bdb292c1bcd9007cc5adf3"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_friend_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "dbb4a8b3acb0d690cf759ba2657c6771bdf3d3df4be818735f6b6cfd79f0554f"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_hurt_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0f8c11ab256d61bded8ffa1c4998bcda4a30b8c16b7cf1f4c3c3c653825e471b"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_hurt_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "703a0a37531186e750cb707a9de2c25268e9c7ccc4fbfe9788bb165b7da5ce4c"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_warn_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "03623ca2c62b49d970138697cd9d6ef00f6c9f74d17d3ae2f53ceb2396830978"
+          },
+          {
+            "path": "audio/assets/creatures/chirp_warn_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "dca3400a1b598998c49d0ae8c0986841d89674b0056018362e0442fe882b38eb"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_attack_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e71f118ce2be4741ea7dad2f7cd97d4b771d90e63c40b66c477a49a19886913b"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_attack_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0ee3e80b653ebdd875845e8862c0a6e2432c3628fe66759c0fd47443cfc143e2"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_contact_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "57e0635a932a66c367e4b4acfc47b8a89d5ff99cc790933268270e6bf6549c56"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_contact_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "4d6ab3b8551a773c2d9780560c1df7df9b1ddae0215a044eab0e2d41c6c9bb18"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_death_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "52fb4eb1c65ba4fedb6858338f5848a9734bc79c42b2393e2cdfea4dfe957ce0"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_death_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f3a5b6df65554459eaf945c28367856b23f4937e40bd448088b5a6c55185141e"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_friend_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "8607de85385e9a099480052d65aa4fcf14ab3fb28ed03a092614945a66e58643"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_friend_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e41eba66b9cb71e19b85d44da94d71835fa78c4761f5dafabcfb572b8931a19c"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_hurt_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "4f7e76116f60fe5c0f753db1cf1b1d3b7d457aef981507fa20d6018a7c426dc2"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_hurt_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6f0bfcfdb601cbd66fad809c99497663dede5ec52812967b78779d2d8ba00521"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_warn_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "49cf96ab1409124f535943539b980bf0fac8f530105a5f000aaecdd86189cfec"
+          },
+          {
+            "path": "audio/assets/creatures/rasp_warn_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "5c5e8dca4829b3660f0ceb5b0e359115ec6525bf19bd7f6cd5f279813d0bd6c7"
+          },
+          {
+            "path": "audio/assets/creatures/throat_attack_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "753c128be20249d846102f67318c6a8359425f6b7c9c84666cc209c4d2e7781e"
+          },
+          {
+            "path": "audio/assets/creatures/throat_attack_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "149f5a5646101833af245e55906a454c8ba21f71495079980b302cdc19d3d465"
+          },
+          {
+            "path": "audio/assets/creatures/throat_contact_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "465086c0581d7b8493f0a8e9704e0e45962edc4e30f061c47eb1cc903985d962"
+          },
+          {
+            "path": "audio/assets/creatures/throat_contact_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "33c5c867ffcaf4a4f127bd93fa2ddf5feedbd8cba02d4631cd1f393ccc460e14"
+          },
+          {
+            "path": "audio/assets/creatures/throat_death_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "699b90d9fa07534a021bf4990185facdcdbae13598742a7b230395c200a4d19b"
+          },
+          {
+            "path": "audio/assets/creatures/throat_death_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6dc328668b34e8b4c6cd2b2d0f6f2156f5da93b8440732f45e86d684dcac7d45"
+          },
+          {
+            "path": "audio/assets/creatures/throat_friend_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "291aaa3a8a24f87f338f171b51e863b3a6075ed1224b956eefe999428e4f6149"
+          },
+          {
+            "path": "audio/assets/creatures/throat_friend_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f9629bc84784a3a2cefadfff4a97a6d620e8a8b978905b74d27eebd90edf1e6e"
+          },
+          {
+            "path": "audio/assets/creatures/throat_hurt_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f3026ab89c88db8da77124720dcd835c9da570ea3ec793d6a003d0028ba31810"
+          },
+          {
+            "path": "audio/assets/creatures/throat_hurt_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7a07224fea6ea19c84ee6d5c29cf1ea77915627d4c78878b11693ca217a3295b"
+          },
+          {
+            "path": "audio/assets/creatures/throat_warn_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "caeebc75af9652c9b8c8ec6f9ebe5e723c25d7e206f41ecf0e831c6300022734"
+          },
+          {
+            "path": "audio/assets/creatures/throat_warn_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "98226cdd93faa87aefb28a850856e90ed24d7eb9f9dea18bec598a40429ac793"
+          },
+          {
+            "path": "audio/assets/discovery.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "20a8c731c3aa3c46ace2297580c447f7b13c3e4b04706f6a2633c1b0fce5626c"
+          },
+          {
+            "path": "audio/assets/foliage_loop.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f7e58672e0b23e53d4d82a962f30b4cc054d38330520786f46808241b5934a02"
+          },
+          {
+            "path": "audio/assets/interface/order_attack.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "1d3f9a19c158255106c79ab51db7f11fda7bd71c6bf6532edac431d5c317965e"
+          },
+          {
+            "path": "audio/assets/interface/order_build.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6e65fa25b2e3913cb055b8395b0fee9d8f6d6b89c240ecb59d0244f3a4f14e9b"
+          },
+          {
+            "path": "audio/assets/interface/order_feed.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3402545f93599fc4f7416cbedbdc1dc11c71d2c4a11a82ed5444a7aed1c0ca6c"
+          },
+          {
+            "path": "audio/assets/interface/order_gather.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "2a823ef70321e91ccaeb70eddc45deddcbd2f395e98902860bb50dee6cae754e"
+          },
+          {
+            "path": "audio/assets/interface/order_move.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "b2043586724caad9314d2e9782044b82d881a4a7c8c83caa98cbd64fe31bdfa0"
+          },
+          {
+            "path": "audio/assets/interface/order_reject.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "752af9bec57db7aedbcafdbbf9549f34fd45c87ac5d13812159d2965ed4882bc"
+          },
+          {
+            "path": "audio/assets/interface/order_wait.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ef20859cc47df813c065403b5c2d1c9c368ff71a280aae1182bfaa4ec5519f07"
+          },
+          {
+            "path": "audio/assets/interface/scan_abort.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "af40bdc4f46c20839a7c875f719ca1d20d92962bf6d08c055d29dfb6c0aab420"
+          },
+          {
+            "path": "audio/assets/interface/scan_acquire.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "df53c5021a951c04692d1349a1b642d997144356d1d76701acf91e1f20b9c175"
+          },
+          {
+            "path": "audio/assets/interface/scan_loop.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "c4086cd15576bd65aaa644ba1b7f2768845137e9cd7f277854c12197735ec2d3"
+          },
+          {
+            "path": "audio/assets/jump.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "21f621c6f603905c2d5c29af7b9750b60fbf404acbdf09be27729449573d7db2"
+          },
+          {
+            "path": "audio/assets/land.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e1edcc140b914988611d6d825d62345663e5dfd10659c0d42233e5a127816e17"
+          },
+          {
+            "path": "audio/assets/music/danger.ogg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "8862bab84497c56a0d70e99efa60e37d693de034f1a8cbdaae94481c8e79d741"
+          },
+          {
+            "path": "audio/assets/music/exploration.ogg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "abc1a9c2321fa925bad07ac88c59405493156ffe7f3b34e75ecb2b28ce30979d"
+          },
+          {
+            "path": "audio/assets/music/menu.ogg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3da4afb88d67e52cf959ba29c94b6cd65ded0d902a60b18270fac239e331ffa6"
+          },
+          {
+            "path": "audio/assets/splash.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "53da3f9b0073fe2aab6e0f198336efdd7cddca7e0d22fef807e662a37a3e2205"
+          },
+          {
+            "path": "audio/assets/step_grass_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "24dceb70b674631275ec61c7e2cffcfc708edff177cf31584403395193404b69"
+          },
+          {
+            "path": "audio/assets/step_grass_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ed137e1641959980689a6359d5ce24de1b649f45ed442a1f10edad8a24153151"
+          },
+          {
+            "path": "audio/assets/step_grass_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "36c892a55ab731d2b28111ce4ebbf95f1bf780da23552edcdd4499e1da16bd8b"
+          },
+          {
+            "path": "audio/assets/step_sand_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "1dda37cf1017712ff13baa261787ad0607f5a61c10c4cbd1216207474ca7e02f"
+          },
+          {
+            "path": "audio/assets/step_sand_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a234db3ca2d814fe918f30b43f0f0041fe109439de5244c6f5487fc0bbd9936d"
+          },
+          {
+            "path": "audio/assets/step_sand_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e7f7a3beaae114dd8eaf0e9eab015231ca6dcae493b0db9cfea5f987de68502f"
+          },
+          {
+            "path": "audio/assets/step_snow_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "34e8b669bcb85180c22956585010ee08b8fe31686dea8ecea4c4eba9a1038945"
+          },
+          {
+            "path": "audio/assets/step_snow_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "17a2a8c84c5ee2fa4f62e27801b359dd926f5a7e69faf1a7cdb46633b7ef4007"
+          },
+          {
+            "path": "audio/assets/step_snow_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6cfa0d610cbafe9008db4ad826d221b090ceb2977a1279310f2ee7ce6c538539"
+          },
+          {
+            "path": "audio/assets/step_stone_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a5d905b3e18322eb4a1e3bbdb1eb6417bfe91c5e51828c7df3b72cb070ba7e81"
+          },
+          {
+            "path": "audio/assets/step_stone_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "09cc7106a2bfe341fe1ed51c46e77b920fcddba862f9acdf7c05996e5dbdb4ea"
+          },
+          {
+            "path": "audio/assets/step_stone_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0b40e0cf3435e0ca8dfdb3d464d1bd4ee2cf0cc88b112567c991d65cf346d2c5"
+          },
+          {
+            "path": "audio/assets/step_water_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "c6974cc4dd75027375c088024979bf2e33c825a82382966e92c15620d5ce6932"
+          },
+          {
+            "path": "audio/assets/step_water_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "dbeff7f8047ffc5e723da31b1380ddb6383b7e63fc157a619dda986da47bdc06"
+          },
+          {
+            "path": "audio/assets/step_water_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7e6863c3125089ab564888496f1377b7585392f95590bfa4df35b633ee624df7"
+          },
+          {
+            "path": "audio/assets/step_wood_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "b4e77c430a367b0d564ab726cd5a152b2e8f0289eddc426563f9137ffad4f203"
+          },
+          {
+            "path": "audio/assets/step_wood_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3cc434d6f4bb8e55da3e98343bb438f3b06ff25c96b2b70a0f0d2845920b6533"
+          },
+          {
+            "path": "audio/assets/step_wood_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "86355b3bc0545cc8d2f7b86765d8e7dfd8f98bb380d1f10cc28d47e598c3b645"
+          },
+          {
+            "path": "audio/assets/swim.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a38294193655662f50285eba4472e4f7a46c46725ad427c506d63808cd7176bf"
+          },
+          {
+            "path": "audio/assets/ui_back.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "cd78ab288a6b112ba4b60e69b9bc237a48c7ad17b5cea4859b9a78fb0db4d32b"
+          },
+          {
+            "path": "audio/assets/ui_confirm.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "458764359b3e23c4f218d9624a19db30a2cef6de6e108b618e39bc38e7ff672c"
+          },
+          {
+            "path": "audio/assets/underwater_bubbles_0.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "3aa1ae88fbc450d701a6e82c579bb198e144c747ce0964b6e3e3a36e8207bc7f"
+          },
+          {
+            "path": "audio/assets/underwater_bubbles_1.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "f2c5a5622343b157e569f6ee6bd2eb7abbb5d87b454e053bc1e32503d0211e0d"
+          },
+          {
+            "path": "audio/assets/underwater_bubbles_2.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "7cc263939360dbc9c6fece900913ea98e975388efec65a87a7c4a718b77d8fba"
+          },
+          {
+            "path": "audio/assets/underwater_loop.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6da4d526981e64b77912e1b1a3d6a1f444ddab2ea20be65f51cff6804b5c1a7b"
+          },
+          {
+            "path": "audio/assets/water_dive.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "143633f342b1781170dbf69244d5ea26f76fb8a719e8ef4fdd3b0f2ab7dd489c"
+          },
+          {
+            "path": "audio/assets/water_exit.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "56d36d4e377ded7bc32936c8c816ff01657d77f8d93e88eaf085c41837f065a2"
+          },
+          {
+            "path": "audio/assets/water_loop.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0276147999a2ff58541c6342f6a253d0ead67e6c610484fb782e129de6d0d1e7"
+          },
+          {
+            "path": "audio/assets/water_surface.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "479f8527be22a012b4b12cbfc0565d2f929d1095e7abc7a2b7f1d16fe7e7ddd8"
+          },
+          {
+            "path": "audio/assets/wind_loop.wav.import",
+            "kind": "touched_or_replaced",
+            "sha256": "68cdd5790ef2fe233baa6aa1143cc4f331d4a572d2c16ad4a1d65b5b6cbf4f7d"
+          },
+          {
+            "path": "icon.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "fb0e12dbaebc025cb84376cc30af87db50b7b0955c94c075d234faa0e794994f"
+          },
+          {
+            "path": "space/fleet/expedition_contract.gd.uid",
+            "kind": "content_or_membership",
+            "before": null,
+            "after": {
+              "path": "space/fleet/expedition_contract.gd.uid",
+              "kind": "file",
+              "executable": false,
+              "bytes": 20,
+              "sha256": "6abefc8363989bc32f407239d66631fed545baf802d586ac6f672294249d9e3c",
+              "godot_uid": true,
+              "tracked": false
+            }
+          },
+          {
+            "path": "space/fleet/fleet_state.gd.uid",
+            "kind": "content_or_membership",
+            "before": null,
+            "after": {
+              "path": "space/fleet/fleet_state.gd.uid",
+              "kind": "file",
+              "executable": false,
+              "bytes": 20,
+              "sha256": "66b132fab8361a6b0360b2befce91abccf6ac252144a9e3e2b2c2c7273ca57a4",
+              "godot_uid": true,
+              "tracked": false
+            }
+          },
+          {
+            "path": "space/fleet/fleet_trial.gd.uid",
+            "kind": "content_or_membership",
+            "before": null,
+            "after": {
+              "path": "space/fleet/fleet_trial.gd.uid",
+              "kind": "file",
+              "executable": false,
+              "bytes": 20,
+              "sha256": "fe202c4a3b432cc422e5398fec0bfabf9e06ec7e5f04ec427d895aefe8f939fd",
+              "godot_uid": true,
+              "tracked": false
+            }
+          },
+          {
+            "path": "tests/fleet_runtime_test.gd.uid",
+            "kind": "content_or_membership",
+            "before": null,
+            "after": {
+              "path": "tests/fleet_runtime_test.gd.uid",
+              "kind": "file",
+              "executable": false,
+              "bytes": 19,
+              "sha256": "0e03bbfe8295a5a5f2114821acd3b6db9fd0ed94acda710f8f353f87d8ac8c5b",
+              "godot_uid": true,
+              "tracked": false
+            }
+          },
+          {
+            "path": "ui/discovery/icons/attack.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6e8526bab3d0c54d2204d59145f15d09a834a1d5b6c9cbc7bc1815bb6c0d2506"
+          },
+          {
+            "path": "ui/discovery/icons/defense.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "e856d5274db368f12bb35ce6f7bce17ef2d156442975e77782dce791925ed0ab"
+          },
+          {
+            "path": "ui/discovery/icons/diet_meat.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "af655915046e22d758b7d5d3d77f680ae44619053807f9fc62acf8bf025d8521"
+          },
+          {
+            "path": "ui/discovery/icons/diet_plant.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "fc6dd5c50a3df0b9314fe9b50c645ff47939a0697f4fc28a977f3e904dd5a4c4"
+          },
+          {
+            "path": "ui/discovery/icons/flight.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "d71f9f69237600db9aaebf20e3977e16871926cfae73bc6174f56d1ab944303e"
+          },
+          {
+            "path": "ui/discovery/icons/grip.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "65ec378cbaa8359af8dccd29bf2d54f2a963dac7caa31d33bea3b2bddb66b06b"
+          },
+          {
+            "path": "ui/discovery/icons/health.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "4b6a93d2332551036b5c8e86be4fd34f7b36f1d67ec3c6ae87ebe2ba6f381a36"
+          },
+          {
+            "path": "ui/discovery/icons/hunger_drain.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "67efd8edc9e9eb37ce1f8ec267fa043416f6bc02a98284037799f4c0578ae19b"
+          },
+          {
+            "path": "ui/discovery/icons/jump.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "c4f8f30fa00561965c936ccf4b2d6e79995c235e6a9feae64323594896815308"
+          },
+          {
+            "path": "ui/discovery/icons/perception.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "5ead65ef80f50c867198929422ab7523df12c510d1bfd5380657e0f9e86e6a1f"
+          },
+          {
+            "path": "ui/discovery/icons/speed.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "6c319addbfb6b055be39a3a27dc68c1c2b7c65e7c93ed1a41b0cd9bc023eb69d"
+          },
+          {
+            "path": "ui/discovery/icons/swim.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "ea156ad6cb8f88af6ce2fbbda9deb46ef0db6d5c04dbf45124a6595fa654c8bf"
+          },
+          {
+            "path": "ui/discovery/icons/thirst.svg.import",
+            "kind": "touched_or_replaced",
+            "sha256": "73063d5fdf11290949875f6ae602b693a0f85ca45567daefdfd9bba61d208ef8"
+          },
+          {
+            "path": "world/visuals/voxel/textures/bark_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "84e05055d98fde90c037b9ce7392f6848a3539270897e84ffc61beb4132ebc4d"
+          },
+          {
+            "path": "world/visuals/voxel/textures/dirt_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "fbb04553f7ae7d2fc9722cffb176bd8e166f07adc2c53e086da3f18fb0d2bbd2"
+          },
+          {
+            "path": "world/visuals/voxel/textures/grass_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "671c109001a803d1cad2f7ca6c04974a4fbcef4adb10bc0c51eeb2ea0a48abd3"
+          },
+          {
+            "path": "world/visuals/voxel/textures/leaves_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "a1df5b7dd54896f1713500f2f6617d39db1f4c10e00560e0660d471d1b27f528"
+          },
+          {
+            "path": "world/visuals/voxel/textures/nest_fiber_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "848e145b4f3f6e12bd81ae5d11bd3a0564473e8203407a14fea6e4b6e6b87d20"
+          },
+          {
+            "path": "world/visuals/voxel/textures/ruin_stone_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "48749331553e68a05df021a39078a9b70a2e333f3e39df119ec5caea9bccaa7b"
+          },
+          {
+            "path": "world/visuals/voxel/textures/sand_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "d141e554cf30a15792ff4d9a02cf3bb3b5fca00952ff3b922401b27ab5b2a0a5"
+          },
+          {
+            "path": "world/visuals/voxel/textures/stone_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "944f8f13224ec2631cedbef1adbca7bd3844247d5a05acd35002d24411bcf078"
+          },
+          {
+            "path": "world/visuals/voxel/textures/white_01.png.import",
+            "kind": "touched_or_replaced",
+            "sha256": "0bb03aa7c947c8559f06cf60e986d055c7448366e21b2ece4ff4d83a5b4e8f23"
+          }
+        ],
+        "git_changes": [],
+        "status": "import_preparation"
+      },
+      {
+        "after": "art_sources",
+        "source": {
+          "available": true,
+          "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+          "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+          "source_sha256": "30a27f80d553438155989331976593a83be0223b6ccd9d66b1efb159fcc3ab03",
+          "complete": true,
+          "file_count": 3414,
+          "bytes": 101886581,
+          "bytes_hashed": 0,
+          "seconds": 0.1549
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "fleet_runtime_test",
+        "source": {
+          "available": true,
+          "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+          "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+          "source_sha256": "30a27f80d553438155989331976593a83be0223b6ccd9d66b1efb159fcc3ab03",
+          "complete": true,
+          "file_count": 3414,
+          "bytes": 101886581,
+          "bytes_hashed": 0,
+          "seconds": 0.1347
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "d57b1ef385728728b132518a1ea05683888dcae0",
+          "tree": "47a9a27beb0ebdbf7e6b4f487f871a28bc8811c1",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "d85ac8eb917291dbb2aec7b5d3b4ffa63d20b88a0fbabba9bcb6af6412167628",
+          "source_sha256": "30a27f80d553438155989331976593a83be0223b6ccd9d66b1efb159fcc3ab03",
+          "complete": true,
+          "file_count": 3414,
+          "bytes": 101886581,
+          "bytes_hashed": 101886581,
+          "seconds": 0.3617
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.117,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/2c2866d70564/voxelverse/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/2c2866d70564/voxelverse",
+        "--output",
+        "/workspace/scratch/2c2866d70564/fleet-first/contracts.json"
+      ],
+      "log_sha256": "7587249c494bf50dafd4588bf60943376726e939ccc3e4594bd5789aebebe410",
+      "process_passed": true,
+      "source_sha256": "449ee2639a1cddf176624ca526f1af6597d9ecc0df4abc0d451f456463e0c67a",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.792,
+      "command": [
+        "/workspace/scratch/2c2866d70564/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/2c2866d70564/voxelverse",
+        "--import"
+      ],
+      "log_sha256": "1cf7d517441857c0f572d1fc8b12000e150ebcd43a1f7889f0c01ca5e58c2345",
+      "process_passed": true,
+      "source_sha256": "30a27f80d553438155989331976593a83be0223b6ccd9d66b1efb159fcc3ab03",
+      "source_status": "import_preparation"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.93,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/2c2866d70564/voxelverse/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "30a27f80d553438155989331976593a83be0223b6ccd9d66b1efb159fcc3ab03",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "fleet_runtime_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 1.671,
+      "command": [
+        "/workspace/scratch/2c2866d70564/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/2c2866d70564/voxelverse",
+        "--script",
+        "res://tests/fleet_runtime_test.gd"
+      ],
+      "log_sha256": "a6cb906aaa65360a44b4522e78ef25e1061d00f59f0ea9b1bcfcd432661c251b",
+      "contract": "expedition_design",
+      "process_passed": false,
+      "source_sha256": "30a27f80d553438155989331976593a83be0223b6ccd9d66b1efb159fcc3ab03",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "prepared",
+      "reusable_source": false
+    }
+  ]
+}

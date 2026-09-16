@@ -12,6 +12,7 @@ const PartGeometry = preload("res://creatures/editor/creature_part_geometry.gd")
 const LimbRig = preload("res://creatures/runtime/creature_limb_rig.gd")
 const BodyContract = preload("res://creatures/runtime/creature_body_contract.gd")
 const BodyGuides = preload("res://creatures/runtime/creature_body_attachment_guides.gd")
+const PartArticulation = preload("res://creatures/runtime/creature_part_articulation.gd")
 
 # Kept for compatibility: true selects the editable, cubic surface; false
 # selects the original independently batched slice renderer.
@@ -25,6 +26,7 @@ var body_attachment_errors: Array[String] = []
 var _motion := Motion.new()
 var _motion_time: float = 0.0
 var _locomotion_speed_ratio: float = -1.0
+var _articulation := PartArticulation.new()
 
 # Runtime-only batching preserves body-slice and attachment roots. Leg meshes
 # remain individual because the adaptive animator reparents them into knee rigs.
@@ -35,6 +37,8 @@ static var _shared_box_material: StandardMaterial3D
 
 
 func rebuild() -> void:
+	if not Blueprint.Contract.version_error(blueprint, "creature").is_empty(): return
+	_articulation.unbind()
 	_motion.unbind()
 	_pending_boxes.clear()
 	super.rebuild()
@@ -73,6 +77,7 @@ func rebuild() -> void:
 		parent.add_child(node)
 	_pending_boxes.clear()
 	_rebuild_body_sockets()
+	_articulation.bind(self)
 	if motion_mode != "edit":
 		_motion.bind(self)
 	set_process(motion_mode != "edit")
@@ -118,16 +123,43 @@ func set_motion(mode: String) -> void:
 		set_process(true)
 		return
 	_motion.unbind()
+	_motion.expression_pose = {}
 	motion_mode = next
 	_motion_time = 0.0
+	_articulation.reset()
 	if motion_mode != "edit":
 		_motion.bind(self)
 	set_process(motion_mode != "edit")
 
 
+func set_expression_pose(pose: Dictionary) -> void:
+	# Editors/player avatars opt out unless a live animal explicitly supplies it.
+	_motion.expression_pose = pose if motion_mode != "edit" else {}
+
+
 func _process(delta: float) -> void:
-	_motion_time += delta * motion_speed_scale
-	_motion.advance(motion_mode, _motion_time, delta * motion_speed_scale, _locomotion_speed_ratio)
+	var step: float = delta * maxf(motion_speed_scale, 0.0)
+	if not is_finite(step) or step <= 0.0: return
+	_motion_time += step
+	if motion_mode != "edit":
+		_motion.advance(motion_mode, _motion_time, step, _locomotion_speed_ratio)
+	_articulation.advance(step, _motion_time if motion_mode == "idle" else -1.0)
+	if motion_mode == "edit" and not _articulation.is_active(): set_process(false)
+
+
+func play_part_action(action: String, duration: float = -1.0) -> bool:
+	var accepted: bool = _articulation.play(action, duration)
+	if accepted: set_process(true)
+	return accepted
+
+
+func set_articulation_pose(mouth: float, grip: float) -> void:
+	_articulation.set_pose(mouth, grip)
+
+
+func reset_part_actions() -> void:
+	_articulation.reset()
+	set_process(motion_mode != "edit")
 
 
 func set_locomotion_speed(speed: float, reference_speed: float) -> void:

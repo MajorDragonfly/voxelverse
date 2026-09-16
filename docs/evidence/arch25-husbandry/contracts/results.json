@@ -1,0 +1,79 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "b038fecf476825e99f8c405af640f2bd3ff0a1da",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "egg_husbandry_ui_test",
+    "tribe_localization_test",
+    "tribal_age_test",
+    "phase_handoff_test",
+    "localization_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.835
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.77
+    },
+    {
+      "name": "egg_husbandry_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.917,
+      "contract": "village"
+    },
+    {
+      "name": "tribe_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.597,
+      "contract": "frontend_locale"
+    },
+    {
+      "name": "tribal_age_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 66.435,
+      "contract": "village"
+    },
+    {
+      "name": "phase_handoff_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.253,
+      "contract": "campaign"
+    },
+    {
+      "name": "localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.771,
+      "contract": "frontend_locale"
+    }
+  ]
+}

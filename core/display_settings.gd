@@ -2,6 +2,8 @@ extends Node
 
 const CONFIG_PATH: String = "user://display_settings.cfg"
 const BASE_VIEWPORT_SIZE := Vector2i(1920, 1080)
+const GraphicsPreferences = preload("res://core/graphics_preferences.gd")
+const GraphicsPanel = preload("res://ui/frontend/graphics_settings.gd")
 const InputPreferences = preload("res://core/input_preferences.gd")
 var input_preferences := InputPreferences.new()
 var _control_settings: VBoxContainer
@@ -25,6 +27,12 @@ var display_mode: int = MODE_BORDERLESS
 var resolution: Vector2i = Vector2i(1600, 900)
 var ui_scale: float = 1.0
 var vsync_enabled: bool = true
+var atmosphere_quality: int = 1
+var graphics_values: Dictionary = GraphicsPreferences.preset(1)
+var _graphics_settings: VBoxContainer
+var _graphics_read_only: bool = false
+var _atmosphere_option: OptionButton
+var _atmosphere_description: Label
 
 var _menu_layer: CanvasLayer
 var _menu_panel: PanelContainer
@@ -126,16 +134,35 @@ func _load_settings() -> void:
 		1.35
 	)
 	vsync_enabled = bool(config.get_value("display", "vsync", true))
+	var legacy_quality: Variant = config.get_value("display", "atmosphere_quality", 1)
+	atmosphere_quality = clampi(legacy_quality, 0, 2) if legacy_quality is int else 1
+	graphics_values = GraphicsPreferences.preset(atmosphere_quality)
+	var schema: Variant = config.get_value("graphics", "schema", 0)
+	_graphics_read_only = not schema is int or schema < 0 or schema > GraphicsPreferences.SCHEMA
+	if schema == GraphicsPreferences.SCHEMA:
+		var saved_preset: Variant = config.get_value("graphics", "preset", atmosphere_quality)
+		if saved_preset is int: atmosphere_quality = clampi(saved_preset, 0, GraphicsPreferences.CUSTOM)
+		graphics_values = GraphicsPreferences.normalize(config.get_value("graphics", "values", {}), atmosphere_quality)
+		if atmosphere_quality != GraphicsPreferences.CUSTOM:
+			graphics_values = GraphicsPreferences.preset(atmosphere_quality)
 
 
 func _save_settings() -> bool:
 	var config := ConfigFile.new()
+	config.load(CONFIG_PATH) # Preserve unrelated/future sections during display shortcuts.
 	config.set_value("display", "mode", display_mode)
 	config.set_value("display", "width", resolution.x)
 	config.set_value("display", "height", resolution.y)
 	config.set_value("display", "ui_scale", ui_scale)
 	config.set_value("display", "vsync", vsync_enabled)
-	var save_error: Error = config.save(CONFIG_PATH)
+	config.set_value("display", "atmosphere_quality", atmosphere_quality)
+	if not _graphics_read_only:
+		config.set_value("graphics", "schema", GraphicsPreferences.SCHEMA)
+		config.set_value("graphics", "preset", atmosphere_quality)
+		config.set_value("graphics", "values", graphics_values)
+	var save_error: Error = config.save(CONFIG_PATH + ".tmp")
+	if save_error == OK:
+		save_error = DirAccess.rename_absolute(CONFIG_PATH + ".tmp", CONFIG_PATH)
 	if save_error != OK:
 		push_warning("Display settings could not be saved: %s" % save_error)
 	return save_error == OK
@@ -158,6 +185,9 @@ func _apply_settings(save_after_apply: bool) -> bool:
 		MODE_EXCLUSIVE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 
+	GraphicsPreferences.apply_renderer(graphics_values)
+	get_tree().call_group(&"campaign_atmosphere", "apply_graphics", graphics_values, atmosphere_quality)
+	get_tree().call_group(&"underwater_view", "update_view")
 	_sync_menu_controls()
 	if save_after_apply:
 		return _save_settings()
@@ -222,7 +252,7 @@ func _build_settings_menu() -> void:
 	content.add_child(title)
 
 	var subtitle := Label.new()
-	subtitle.text = "Esc / F8 Menü · F11 Vollbild"
+	subtitle.text = "Esc Zurück · F11 Vollbild"
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	subtitle.add_theme_color_override("font_color", Color(0.58, 0.70, 0.72, 1.0))
 	content.add_child(subtitle)
@@ -298,6 +328,17 @@ func _build_settings_menu() -> void:
 	_language_settings = preload("res://ui/localization/language_settings.gd").new()
 	_language_settings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	language_scroll.add_child(_language_settings)
+	var graphics_scroll := ScrollContainer.new()
+	graphics_scroll.name = "GRAPHICS_TAB"
+	graphics_scroll.custom_minimum_size = Vector2(600, 440)
+	graphics_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	graphics_scroll.follow_focus = true
+	_tabs.add_child(graphics_scroll)
+	_graphics_settings = GraphicsPanel.new()
+	_graphics_settings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	graphics_scroll.add_child(_graphics_settings)
+	_atmosphere_option = _graphics_settings.option
+	_atmosphere_description = _graphics_settings.description
 	_tabs.tab_changed.connect(func(_tab: int): _control_settings.cancel_binding())
 	_message = _control_settings.message
 	_message.name = "Status"
@@ -352,6 +393,9 @@ func _add_option_row(parent: VBoxContainer, label_text: String) -> OptionButton:
 
 
 func _apply_menu_selection() -> void:
+	if _graphics_read_only:
+		_message.text = "GRAPHICS_NEWER_SETTINGS"
+		return
 	if not _control_settings.listening_action.is_empty():
 		_message.text = "Bitte zuerst die Tastenauswahl beenden."
 		return
@@ -372,6 +416,8 @@ func _apply_menu_selection() -> void:
 	if _scale_option != null:
 		ui_scale = float(_scale_option.get_selected_metadata())
 	vsync_enabled = _vsync_option.button_pressed
+	atmosphere_quality = _graphics_settings.preset_index
+	graphics_values = GraphicsPreferences.normalize(_graphics_settings.draft)
 
 	var saved: bool = _apply_settings(true)
 	_control_settings.refresh()
@@ -379,6 +425,8 @@ func _apply_menu_selection() -> void:
 
 
 func _sync_menu_controls() -> void:
+	if _graphics_settings != null:
+		_graphics_settings.refresh(atmosphere_quality, graphics_values)
 	if _mode_option != null:
 		for index in range(_mode_option.item_count):
 			if _mode_option.get_item_id(index) == display_mode:
@@ -445,8 +493,9 @@ func open_menu() -> void:
 func close_menu() -> void:
 	if not is_menu_open():
 		return
-	for option: OptionButton in [_mode_option, _resolution_option, _scale_option]:
+	for option: OptionButton in [_mode_option, _resolution_option, _scale_option, _atmosphere_option]:
 		option.get_popup().hide()
+	_graphics_settings.close_popups()
 	_control_settings.fps.get_popup().hide()
 	_language_settings.close_popup()
 	_control_settings.cancel_binding()

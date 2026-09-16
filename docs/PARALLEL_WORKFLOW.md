@@ -6,6 +6,11 @@ Teilaufträge bearbeiten. Einstieg und verbindliche Kurzregeln stehen in
 
 ## Runde vorbereiten
 
+Jeder Checkout braucht eigenständige Git-Objekte. Keine dauerhafte Abhängigkeit
+von Objektverzeichnissen fremder temporärer Checkouts: Wird deren Verzeichnis
+entfernt, können sonst Historie und Merge-Basis fehlen, obwohl Arbeitsdateien
+noch vorhanden sind. Nach lokalem Klonen diese Unabhängigkeit sicherstellen.
+
 Ein Integrationschat legt den Basiscommit und zunächst drei Fachaufträge fest.
 Er prüft aktuelle Lieferungen/Belegungen einmal und führt genau eine Rundenliste:
 
@@ -13,20 +18,23 @@ Er prüft aktuelle Lieferungen/Belegungen einmal und führt genau eine Rundenlis
 |---|---|---|---|---|---|
 | Eindeutige ID | Eine Zuordnung | Eigener Branch | Fester Commit | Aus Paketbrief, ggf. ergänzt | Zugewiesen → geliefert → integriert |
 
-Die Liste lebt im Integrationschat oder einem bereits verwendeten gemeinsamen
-Ticket. Ein Fachchat braucht nur seine Zuweisung. Das ist eine organisatorische
+Die Liste lebt in [Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137).
+Der nächste Integrationschat übernimmt dort bestehende Nutzerzuweisungen einmal;
+die anfängliche Liste ist keine vollständige Belegungsübersicht. Ein Fachchat
+braucht nur seine Zuweisung. Das ist eine organisatorische
 Vergabe durch einen Besitzer; der lokale Katalog ist **kein verteilter Lock**.
 Keine mehreren unabhängigen „Reservierungsdateien“ auf Fachbranches anlegen.
 Neue externe Tickets/Nachrichten nur im Rahmen des autorisierten Auftrags erzeugen.
 
 ```sh
 python3 tools/work_packet.py list
-python3 tools/work_packet.py conflicts ARCH-17-PUBLISH ARCH-13-MANIFEST ARCH-24-TRUNK
-python3 tools/work_packet.py show ARCH-17-PUBLISH
+python3 tools/project_dashboard.py round
+python3 tools/work_packet.py start ARCH-19-TARGET-PC --owner Ziel-PC-Chat
 ```
 
-Der Konfliktprüfer vergleicht deklarierte Schreibbereiche und gleiche
-Einstiegsdateien. Er meldet beispielsweise ARCH-13/14 sowie ARCH-24/25 als
+`python3 tools/work_packet.py conflicts ID_A ID_B` vergleicht für tatsächlich
+vorhandene Paket-IDs deklarierte Schreibbereiche und gleiche
+Einstiegsdateien. Er meldet beispielsweise ARCH-13/26/27 sowie ARCH-24/25 als
 Kollision. Neue Dateien, indirekte Verbraucher und nicht deklarierte Änderungen
 muss der Integrationsbesitzer zusätzlich zuordnen. Parallel gelesene Dateien
 sind keine Schreibkonflikte. Die Paketbriefe sind begrenzte Vorschläge aus den
@@ -36,7 +44,7 @@ offenen ARCH-Aufgaben und werden nach ihrer Lieferung ersetzt oder entfernt.
 
 Ein geeigneter Startauftrag ist:
 
-> Übernimm ARCH-17-PUBLISH auf Basis des zugewiesenen Commits in einem eigenen
+> Übernimm die zugewiesene Paket-ID auf Basis des festen Commits in einem eigenen
 > Branch. Lies AGENTS.md, PROJECT_STATUS.md und den Paketbrief. Bearbeite nur
 > diesen Umfang, prüfe die betroffenen Verträge und übergib einen PR mit kurzer
 > Testevidenz. Zentrale Planung und Gesamtintegration übernimmt der Integrationschat.
@@ -91,10 +99,17 @@ Godot-Shards, Neustarts, Exporte und die bestehenden PR-Gates bleiben erhalten.
 Kleine lokale Commits bündeln und einen fachlich prüfbaren Stand pushen.
 Der Integrationschat übernimmt abgegrenzte Lieferungen, löst gemeinsame
 Anschlüsse, lässt den tatsächlichen Kandidaten prüfen und aktualisiert den
-Status einmal. Ein Merge in `main` bleibt von der jeweiligen Nutzerfreigabe
+Status einmal in `tools/workflow/project.json` und erzeugt mit
+`python3 tools/project_dashboard.py render` alle fünf Ansichten. Die datenbasierten
+Dateien werden nicht einzeln redigiert. [Fortschrittsmodell und Live-Abgleich](PROJECT_TRACKING.md).
+Ein Merge in `main` bleibt von der jeweiligen Nutzerfreigabe
 abhängig; dieser Arbeitsablauf erteilt keine pauschale Merge-Freigabe.
 
 Kurze Übergabe im PR genügt:
+
+`python3 tools/work_packet.py handoff PAKET-ID --base VOLLE_BASIS_SHA` erzeugt
+Commit/Tree/Dateiumfang auf einem sauberen Fachbranch. Tatsächliche Testergebnisse
+ergänzen; bei einer anderen veröffentlichten Commit-ID die Tree-Gleichheit belegen.
 
 ```text
 Paket / Basis-SHA / Liefer-SHA / Tree / sauberer oder identifizierter Arbeitsstand

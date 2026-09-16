@@ -50,6 +50,7 @@ static func set_name(
 	blueprint: Dictionary,
 	new_name: String
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	blueprint["name"] = new_name.strip_edges()
 
 
@@ -57,6 +58,7 @@ static func set_body_part(
 	blueprint: Dictionary,
 	body_part_id: String
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var body_part: Dictionary = PartLibrary.get_part(body_part_id)
 
 	if body_part.is_empty():
@@ -77,6 +79,7 @@ static func set_paint_part(
 	blueprint: Dictionary,
 	paint_part_id: String
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var paint_part: Dictionary = PartLibrary.get_part(paint_part_id)
 
 	if paint_part.is_empty():
@@ -96,6 +99,7 @@ static func set_body_shape(
 	blueprint: Dictionary,
 	new_shape: Vector3
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var safe_shape := Vector3(
 		clampf(new_shape.x, 0.55, 3.00),
 		clampf(new_shape.y, 0.45, 2.40),
@@ -111,6 +115,7 @@ static func set_body_scale(
 	blueprint: Dictionary,
 	new_scale: float
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var body: Dictionary = blueprint.get("body", {})
 	body["scale"] = clampf(new_scale, 0.45, 2.25)
 	blueprint["body"] = body
@@ -150,6 +155,7 @@ static func set_paint_intensity(
 	blueprint: Dictionary,
 	new_intensity: float
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var paint: Dictionary = blueprint.get("paint", {})
 	paint["intensity"] = clampf(new_intensity, 0.0, 1.0)
 	blueprint["paint"] = paint
@@ -159,6 +165,7 @@ static func add_part(
 	blueprint: Dictionary,
 	part_id: String
 ) -> int:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return -1
 	var part_definition: Dictionary = PartLibrary.get_part(part_id)
 
 	if part_definition.is_empty():
@@ -199,6 +206,7 @@ static func duplicate_part(
 	blueprint: Dictionary,
 	part_index: int
 ) -> int:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return -1
 	var parts: Array = blueprint.get("parts", [])
 
 	if part_index < 0 or part_index >= parts.size():
@@ -221,6 +229,7 @@ static func remove_part(
 	blueprint: Dictionary,
 	part_index: int
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var parts: Array = blueprint.get("parts", [])
 
 	if part_index < 0 or part_index >= parts.size():
@@ -231,6 +240,7 @@ static func remove_part(
 
 
 static func clear_parts(blueprint: Dictionary) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	blueprint["parts"] = []
 
 
@@ -256,6 +266,7 @@ static func set_part_placement(
 	part_index: int,
 	placement: Dictionary
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var parts: Array = blueprint.get("parts", [])
 
 	if part_index < 0 or part_index >= parts.size():
@@ -270,6 +281,7 @@ static func nudge_part(
 	part_index: int,
 	offset: Vector3
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var placement: Dictionary = get_part_placement(
 		blueprint,
 		part_index
@@ -295,6 +307,7 @@ static func rotate_part(
 	part_index: int,
 	rotation_offset: Vector3
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var placement: Dictionary = get_part_placement(
 		blueprint,
 		part_index
@@ -317,6 +330,7 @@ static func scale_part(
 	part_index: int,
 	scale_delta: float
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var placement: Dictionary = get_part_placement(
 		blueprint,
 		part_index
@@ -339,6 +353,7 @@ static func set_part_mirrored(
 	part_index: int,
 	mirrored: bool
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var placement: Dictionary = get_part_placement(
 		blueprint,
 		part_index
@@ -356,6 +371,7 @@ static func reset_part_transform(
 	blueprint: Dictionary,
 	part_index: int
 ) -> void:
+	if not Contract.version_error(blueprint, "creature").is_empty(): return
 	var placement: Dictionary = get_part_placement(
 		blueprint,
 		part_index
@@ -464,7 +480,9 @@ static func save_to_file(
 	save_path: String
 ) -> Error:
 	if not Contract.inspect(blueprint, "creature").ok: return ERR_INVALID_DATA
-	return Store.write(save_path, _serialize_blueprint(blueprint))
+	var candidate: Dictionary = blueprint.duplicate(true)
+	Contract.PartRevisions.pin_legacy(candidate)
+	return Store.write(save_path, _serialize_blueprint(candidate))
 
 
 static func load_from_file(save_path: String) -> Dictionary:
@@ -522,8 +540,9 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 			"end_rotation": _serialize_vector3(_as_vector3(placement.get("end_rotation", Vector3.ZERO))),
 			"joint": JointProfile.encode(placement.get("joint", {})),
 		})
+		Contract.PartRevisions.copy_fields(placement, serialized_parts[-1])
 
-	return {
+	var result: Dictionary = {
 		"version": SAVE_VERSION,
 		"name": str(blueprint.get("name", "New Creature")),
 		"design_id": str(blueprint.get("design_id", "")),
@@ -543,11 +562,16 @@ static func _serialize_blueprint(blueprint: Dictionary) -> Dictionary:
 		"parts": serialized_parts,
 		"next_part_uid": int(blueprint.get("next_part_uid", serialized_parts.size() + 1)),
 	}
+	Contract.PartRevisions.copy_fields(blueprint, result)
+	Contract.PartRevisions.copy_fields(body, result.body)
+	Contract.PartRevisions.copy_fields(paint, result.paint)
+	return result
 
 
 static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 	if not Contract.inspect(data, "creature").ok: return {}
 	var blueprint: Dictionary = create_default()
+	Contract.PartRevisions.copy_fields(data, blueprint)
 	blueprint["name"] = str(data.get("name", "New Creature"))
 	if not str(data.get("design_id", "")).is_empty():
 		blueprint["design_id"] = data["design_id"]
@@ -564,6 +588,7 @@ static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 		"scale": clampf(float(body_data.get("scale", 1.0)), 0.45, 2.25),
 	}
 	blueprint["body"] = body
+	Contract.PartRevisions.copy_fields(body_data, body)
 
 	var paint_data: Dictionary = data.get("paint", {})
 	blueprint["paint"] = {
@@ -571,6 +596,7 @@ static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 		"missing_part_id": str(paint_data.get("missing_part_id", "")),
 		"intensity": clampf(float(paint_data.get("intensity", 1.0)), 0.0, 1.0),
 	}
+	Contract.PartRevisions.copy_fields(paint_data, blueprint.paint)
 
 	var loaded_parts: Array = data.get("parts", [])
 	var parts: Array = []
@@ -602,6 +628,7 @@ static func _deserialize_blueprint(data: Dictionary) -> Dictionary:
 			"end_rotation": _deserialize_vector3(item.get("end_rotation", [0.0, 0.0, 0.0]), Vector3.ZERO),
 			"joint": JointProfile.read(item.get("joint", {})),
 		}
+		Contract.PartRevisions.copy_fields(item, placement)
 
 		if placement["part_id"] == "":
 			continue

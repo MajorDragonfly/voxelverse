@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "repository": "MajorDragonfly/voxelverse",
+  "branch": "agent/integration-vegetation-nest-20260915",
+  "method": "Connected GitHub app; original local commits retained, ordered parents preserved, every published Git tree verified identical.",
+  "local_delivery": "9b960523cf25dc30db0f8392e3d709b39c69cc88",
+  "published_delivery": "e18907d9848e69e40d21db27b6311db7725076a7",
+  "commits": [
+    {
+      "local": "a93e48cf9832c70fa7195383e51a5ee708b448b2",
+      "published": "a040fac497c25d0c73d3f57a07deeb4241e03241",
+      "tree": "c36ed5f59e02dc619a147cb4a510f8d6ed25ad14"
+    },
+    {
+      "local": "353f4216cb9876d1f32bcd1cb745ec30c2d2ee17",
+      "published": "71df47b947d655b8d3e4ee4ea1cef81fed2f98e2",
+      "tree": "9016c9c95fe31282b0bc968905ff947e0f55ca21"
+    },
+    {
+      "local": "1e5c9b29cb8e16c54486c0a9f5bfd16c1e21523f",
+      "published": "a7f35f63dc93b6a7caa918416dc5cb9c9c3ad31d",
+      "tree": "b2ce32190fd83f97f37b2a6217f655674c3743df"
+    },
+    {
+      "local": "2f48c7aa8cc804f05015c14adda9687b6a64ba50",
+      "published": "c30d027cb50273ab6b7b5a63b02d3960c9a59316",
+      "tree": "61a989e32f455deb99aea17440e99390ea093e58"
+    },
+    {
+      "local": "fbaf59135345d270c278816fcfb1cc645d565e9a",
+      "published": "aaf14b508f129a5fe1285e614b2546dc95b50903",
+      "tree": "b5c4f05e695204db656dcb1ef2ccbaa7da696d43"
+    },
+    {
+      "local": "7f154d0bd867b0786f482f9e3b71a286141f5664",
+      "published": "3a39643daa208ea2519865f6666cd170438d62f1",
+      "tree": "7087c281eee42c07e581083a3baff70d7dcec300"
+    },
+    {
+      "local": "ba0027bee8adbb270f38250869bef4eb2e4e4330",
+      "published": "d600bbe0ffbe068643eba58761247e3f2afa80a6",
+      "tree": "323a579c6a9db99f56fef644ab78ff85f4e2435b"
+    },
+    {
+      "local": "e55bbb6b8cc2b4cdc73fe09df6d5535a89838f5f",
+      "published": "f64691b5c5505f74836ad62899ba0248280cd06c",
+      "tree": "ffdb2d785ed2504424bb7f50d04e4638a4609258"
+    },
+    {
+      "local": "8ac1645084aedcb48c49237606129a7462df23a4",
+      "published": "f92ac61ab44356ddc91788c63456ec7eba23d2c8",
+      "tree": "8d5ca338e57f11e87cd47c86929c5e5e76bd2c6d"
+    },
+    {
+      "local": "c3486f607d97d886b262fde167708de5812778ef",
+      "published": "71108efa97bd5c4bc4654b56b54b256608c3ee03",
+      "tree": "ec4096adbaa1e346f6bf17b8c950d3cae75e2d7f"
+    },
+    {
+      "local": "5d683f0c18a9da986d42383fc6c8efff7bc8136e",
+      "published": "1d5c990648d6d288988713ccaf31c3054ee9bd33",
+      "tree": "0073827df328954f87c6d3d760a5f086bccf9828"
+    },
+    {
+      "local": "d76252f6bd25f2f415a62c2b3178109c775e29eb",
+      "published": "d48bfee9d594e28892834b7051a03f992ecbafad",
+      "tree": "19df6c032c67a844492654f52b99e057d0ac9076"
+    },
+    {
+      "local": "d38d019a9c102e49b9216cdafa7272bc386a26d9",
+      "published": "62124d692f2382c43f89250e7e436b51a310a4ac",
+      "tree": "8db54b6bd8181780f08224c2da8051a3ffe03dbe"
+    },
+    {
+      "local": "8e2fc4a666dccfb95eec151ca79453cbb1190c4c",
+      "published": "0e13cef466579e8cc45592c9f26da795499f1d34",
+      "tree": "5b6e6dc9bba92117a038fcb8377b00635df62673"
+    },
+    {
+      "local": "12cca77848bda0cd9564bfb833e3a2a6ca73c71c",
+      "published": "b7130d2dc51fe0c33a9ddb2e4a2b41b098dbe3b8",
+      "tree": "ddb8a33bc83a4708f499bec51aa178b22faad74e"
+    },
+    {
+      "local": "a0dbfe915bcc31ffbf8d97a7b937d60ce78b1808",
+      "published": "f3bb372251a212a38f17b74e4f61b2ee053b04c0",
+      "tree": "97a653d1d702781dc25a0fc836acf148b94159a5"
+    },
+    {
+      "local": "a867ffab5e9a86d2e91e3f952de389707b8f6b83",
+      "published": "d848b50ab66f8f617a9e40fa10f8a46e5f8a49ef",
+      "tree": "64941dfc30e2f30ae6e600aa63b25415290be679"
+    },
+    {
+      "local": "41deb8c27f028eec4d765035bf04b640d54cf1bd",
+      "published": "a402be97f653823613195f0283638af83ed2ebe1",
+      "tree": "19eee91f1372a87dfed76db312d0ee970f527e36"
+    },
+    {
+      "local": "2c1c3f4e2da40506f329332b102eb056f7b2f5d8",
+      "published": "920f08c936427201c0ba5a6db1082e813524172f",
+      "tree": "3b6efc49398928d60b32f5327c4fa31d2b995711"
+    },
+    {
+      "local": "c1b1478dfdab1b9197cb344cea21e9482f55ceb9",
+      "published": "0356fdd4969b39673ca5a4f821745160ec95c2c8",
+      "tree": "3bed50c2ea4de438d04e8dc43abc0bbe81287aea"
+    },
+    {
+      "local": "2f551d0f3b73240e706e05a5c447376a878420fd",
+      "published": "10fd44efbcab5858dc5b15f244f3117b103aceb2",
+      "tree": "ce442946ce6debf388fb70db64afe95c655dac54"
+    },
+    {
+      "local": "d3d9ed6f73b2d85d11fd673af422659f5bb38744",
+      "published": "f4531b1a0d2271a1835d7ef2e96dd4df1e98dbdb",
+      "tree": "12063206cf34f58297be3edf8fb8760f28ee36c5"
+    },
+    {
+      "local": "4648ae9a0f3f3f418889da57e806cffba1f24c7d",
+      "published": "a295bcd573ff2e5aa152523e5aa355f6c482447e",
+      "tree": "05afb484def6078486e2f06f60cf9f636aaf6c46"
+    },
+    {
+      "local": "b9ffcaacaebc0cd4516e567b43f4ddeb415ad8dd",
+      "published": "279d31847680069f40d23d0f4b17c6ff61b01a92",
+      "tree": "7c19e3d6463527c780d128fb2935d2db2d8eec68"
+    },
+    {
+      "local": "d1f92fec1a1c4945bff0dc1481ab0aeb3a5074ae",
+      "published": "753a15d07d660df9a297baf4ed1cb9704dae2dab",
+      "tree": "bb89eb8ad567b56c1062ea89543b5cb1930efe15"
+    },
+    {
+      "local": "9b960523cf25dc30db0f8392e3d709b39c69cc88",
+      "published": "e18907d9848e69e40d21db27b6311db7725076a7",
+      "tree": "b9afa518b5974f3d0744749e3024080dea504db2"
+    }
+  ]
+}

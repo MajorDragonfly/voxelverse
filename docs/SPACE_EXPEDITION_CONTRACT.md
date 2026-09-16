@@ -1,10 +1,12 @@
 # ARCH-30 — Reise- und Schiffsvertrag, Datenentwurf v1
 
-Dieser Entwurf bereitet **M9-EXPEDITION / M9.1–M9.6** vor. Er beschreibt Besitz,
-Orte und gemeinsame Übergaben und enthält einen ausführbaren Vertragsnachweis.
-Er registriert keinen Save-Teilnehmer, erzeugt keine Schiffe in einer Kampagne
-und gibt keine Epoche frei. Das Referenzmodell liegt ausschließlich unter
-`tests/fixtures/`; es ist kein neuer Laufzeitdienst.
+Historischer Datenentwurf für **M9-EXPEDITION / M9.1–M9.6**. Seit
+[ARCH-30-SHIP-INSTANCES](WORK_ARCH30_SHIP_INSTANCES.md) verwendet der getrennte
+Flottentest diesen Vertrag als gemeinsamen Laufzeitprüfer. Der Implementierungspfad
+ist `space/fleet/expedition_contract.gd`; die ursprüngliche Fixture erbt davon.
+Der Flottentest speichert Instanzen und Baupläne über den vorhandenen SaveService,
+gibt aber keine reguläre Weltraumepoche frei. Die nachfolgenden Angaben beschreiben
+den ursprünglichen Entwurfsstand; der neue Fachbericht beschreibt dessen Anschluss.
 
 Basis ist `ea900f2e09946660694a9e59399b4680a5655a85`. ARCH-04 ist darin enthalten;
 die vorhandenen radialen Ortsanschlüsse aus ARCH-06 werden verwendet. Der

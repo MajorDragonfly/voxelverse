@@ -28,6 +28,7 @@ func set_editor_state(
 	new_selected_body_segment: int,
 	new_show_spine_handles: bool
 ) -> void:
+	if not BaseBlueprint.Contract.version_error(new_blueprint, "creature").is_empty(): return
 	blueprint = new_blueprint
 	selected_part_index = new_selected_part_index
 	selected_body_segment = new_selected_body_segment

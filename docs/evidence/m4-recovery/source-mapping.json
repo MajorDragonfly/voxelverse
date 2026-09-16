@@ -1,0 +1,15 @@
+{
+  "base": "d57b1ef385728728b132518a1ea05683888dcae0",
+  "mapping": [
+    {
+      "local": "cd3b3e89ad76a19c8825facb71a043638a15aedb",
+      "published": "7e899d9cf79fb59d61d0fb3dec9d2d4f0a06c20b",
+      "tree": "8ae36bac17ae4cc565e941fd033176f916cbc3db"
+    },
+    {
+      "local": "1eb4c10c2f7147cb2b1d6aa0a1d9fac9830843f1",
+      "published": "a9fbd4a2c3f10e7f89975936fa7807c6e6fee506",
+      "tree": "46dddae24f9db0bd5df50f507bd1940a6e12865e"
+    }
+  ]
+}

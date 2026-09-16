@@ -1,0 +1,24 @@
+{
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "execution": "headless_source_project; validate_godot isolated user data; native backup restored into separate isolated directory",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "sources": [
+    {
+      "local": "a1515e623a650b862b28f09d9e7ac7ef9dce24c0",
+      "github": "69ad1beff45b2f1946f6011949cafffab5c083e0",
+      "tree": "84592c5a0ddf19b55c1702589a0f3a494aa433a1"
+    },
+    {
+      "local": "f58509f45b0181f5f08c164f62a7b688605d1a94",
+      "github": "d37c15e64cc1342610692ab7dc71a968812d1f41",
+      "tree": "e9255fa4a6df79cb94890a27d390a111b96313a5"
+    },
+    {
+      "local": "f8a32838ae0867f823458fe1729309ab08189924",
+      "github": "8438a25112c1535730ad2d46857a1582f8691539",
+      "tree": "a2764f2c7ab8f653e153c97204ea23a05e674252"
+    }
+  ]
+}

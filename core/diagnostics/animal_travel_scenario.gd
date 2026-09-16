@@ -85,11 +85,13 @@ func run(tribe: Node, identity: String, carrier: String) -> Node:
 	# load to exceed the scheduler's 0.25-second slice. This caps only this probe's
 	# real played frames; it does not edit the clock or call a second simulation.
 	var previous_max_fps: int = Engine.max_fps
+	probe._stage("animal_travel_far_work")
 	Engine.max_fps = 2
 	flow.resume()
 	await probe._until(func() -> bool: return _serviced(state.campaign.body_record(a).tribe.husbandry.records[identity]) >= service_before + 5.0, 18000)
 	flow.toggle_pause()
 	Engine.max_fps = previous_max_fps
+	probe._stage("animal_travel_pause_save")
 	remote = state.campaign.body_record(a)
 	if not _check(float(state.campaign.data.elapsed_seconds) - float(remote.village_simulation.cursor) > 0.25,
 			"Slow played frames did not exercise pending far simulation time."): return null
@@ -115,7 +117,7 @@ func run(tribe: Node, identity: String, carrier: String) -> Node:
 	if OS.has_feature("editor"): args.append_array(["--path", ProjectSettings.globalize_path("res://")])
 	args.append_array(["--", "--sphere-gameplay-smoke", "--animal-travel-restart"])
 	if resource == "eggs": args.append("--egg-production")
-	var code: int = OS.execute(OS.get_executable_path(), args, output, true)
+	var code: int = probe._run_fresh_process(args, output)
 	if not _check(code == 0 and str(output).contains("ANIMAL_TRAVEL_FRESH_PROCESS_PASSED")
 			and not str(output).contains("SCRIPT ERROR") and not str(output).contains("ERROR:"),
 			"Fresh process lost or replayed the remote held animal: " + str(output)): return null

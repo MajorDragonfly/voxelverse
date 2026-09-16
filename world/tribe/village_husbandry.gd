@@ -214,7 +214,7 @@ static func validate(data: Dictionary) -> String:
 		if int(h["withdrawn"][kind]) != int(h["returned"][kind]) + int(h["delivered"][kind]) + cargo or absf(float(h["delivered"][kind]) - float(h["consumed"][kind]) - stores) > 0.0001:
 			return "Tierfutter wurde verloren oder doppelt gebucht."
 		var produced: int = 48 + int(data["grown"]) if kind == "food" else int(data["economy"]["produced"]["water"])
-		if float(h["consumed"][kind]) + stores + E.reserve(data, kind) + int(data["deposits"][kind]["remaining"]) > produced + 0.0001:
+		if float(h["consumed"][kind]) + stores + E.goods(data, kind) + E.remaining(data, kind) > produced + E.Freight.net(data, kind) + 0.0001:
 			return "Tierfutter wurde zusätzlich ins Lager gebucht."
 	var handed: Dictionary = {"milk": 0, "eggs": 0}
 	var required_food: float = 0.0

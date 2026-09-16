@@ -1,0 +1,78 @@
+{
+  "packet": "ARCH-30-SHIPYARD",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "source_commit": "0fde3d02c8e06390973f852b19dc6f9a363e9c9e",
+  "source_tree": "0ef680b560d962c33ca69b7ea15d29e2e8a08248",
+  "tracked_worktree_clean": true,
+  "source_sha256": {
+    "docs/WORK_ARCH30_SHIPYARD.md": "a6fd48d325d8582cbf4a4a489585e42b8c2da0448a6b5c348bda4ef300b6f678",
+    "space/ships/ship_blueprint.gd": "f7b4da6136ef5654f23e907e8c285358932999a05d39aa731d37535a4fa3c081",
+    "space/ships/ship_blueprint.gd.uid": "15c82ea228b16d45c9066b0e96759669701139063de113b49cd17baf23b7da99",
+    "space/ships/ship_module_catalog.gd": "0da3da46a269ab695c63a5505b1f25b2e792d1bdab99691281da3e1a2c6ccc32",
+    "space/ships/ship_module_catalog.gd.uid": "0fd3115252f805f45f6230a3e16b0f002a6b743bbdc88e08a946279ebdb89035",
+    "space/ships/shipyard.gd": "431009312672a7c8dc53a7ba6622fd90182f26f4800fe26fe869fe6d56b7332f",
+    "space/ships/shipyard.gd.uid": "6cdb3c5880969387e9dc5513b86609803f86b4fb7e72c83d78df3a9a110ac878",
+    "space/ships/shipyard.tscn": "cadfcfe305424c94a7e851961b2bfaa4c0243a990271dd319ab7a57fbf4307a8",
+    "tests/shipyard_test.gd": "78e126aa8fc3ca7504178d286b858bf1707b869e1ef8a99474ee63e5e16b2523",
+    "tests/shipyard_test.gd.uid": "b9acb46a890f706c00d19f6784ff3c8b23f7691f10e0a4a927f09156966b999a",
+    "tools/review_shipyard.py": "418fbfdcfc10f98614f819c357b1298cc6181a187e999583c53aa8fdc7d19eb6",
+    "tools/validation/contracts.json": "2bbacf673c5f12ad989d350c48d7c9ec2ca5b6dccdc6c415ec7bd784ad806bb7"
+  },
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "engine": "4.6.3.stable.official.7d41c59c4",
+    "renderer": "OpenGL Compatibility / Mesa llvmpipe",
+    "user_data": "isolated by existing validation_support"
+  },
+  "passed": true,
+  "commands": [
+    "python3 tools/validate_godot.py --godot /workspace/scratch/866c41791224/bin/godot --tests shipyard_test expedition_contract_test modular_assembly_framework_test --skip-import --skip-main --output /workspace/scratch/78eb01499f8e/shipyard-final-check",
+    "python3 tools/review_shipyard.py --godot /workspace/scratch/866c41791224/bin/godot --output /workspace/scratch/78eb01499f8e/shipyard-final-render (Xvfb display, isolated user data)"
+  ],
+  "headless": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.117
+    },
+    {
+      "name": "shipyard_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.826,
+      "contract": "expedition_design"
+    },
+    {
+      "name": "expedition_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.063,
+      "contract": "expedition_design"
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.786,
+      "contract": "blueprints"
+    }
+  ],
+  "native_report": "native/results.json",
+  "initial_findings": [
+    "Initial import and art source gate passed; later runs reused the same local imported resource set.",
+    "Initial shipyard test failed strict log checking because Godot does not support %g; replaced with %.1f.",
+    "Initial native test exposed an initially visible Window that intercepted pointer input; new library window now starts hidden.",
+    "Initial layout assertions used a canvas scaled by deferred DisplaySettings; native test now resets after that existing initialization and checks actual pixel layouts."
+  ],
+  "limits": [
+    "Standalone authoring scene, not a playable M9 campaign or flight loop.",
+    "No Windows export, merged full-suite run or target-PC/FPS acceptance.",
+    "German UI; full localization remains an independent follow-up.",
+    "Local authoring library is not registered as campaign-owned ship state; integrated save/backup inventory and immutable campaign pins are future work."
+  ]
+}

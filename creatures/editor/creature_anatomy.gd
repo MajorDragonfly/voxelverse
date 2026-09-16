@@ -292,6 +292,12 @@ static func _apply_default_anchor_fields(
 		)
 
 	match category_id:
+		PartLibrary.CATEGORY_HEAD:
+			placement["anchor_t"] = 0.025
+			placement["anchor_side"] = 0.0
+			placement["anchor_vertical"] = 0.78
+			placement["anchor_surface_offset"] = Vector3.ZERO
+
 		PartLibrary.CATEGORY_MOUTH:
 			placement["anchor_t"] = 0.0
 			placement["anchor_side"] = 0.0

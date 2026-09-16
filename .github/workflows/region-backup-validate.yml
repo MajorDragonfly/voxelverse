@@ -5,6 +5,12 @@ on:
     paths:
       - "tools/region_backup.py"
       - "tools/region_backup_userdata.py"
+      - "tools/region_retention.py"
+      - "tools/userdata_access.py"
+      - "tools/userdata_access_probe.gd"
+      - "tests/tooling/userdata_access_test.py"
+      - "core/persistence/userdata_access.gd"
+      - "core/persistence/atomic_json.gd"
       - "tools/userdata_backup_probe.gd"
       - "tools/region_backup_probe.gd"
       - "tools/atlas_backup_probe.gd"
@@ -12,7 +18,16 @@ on:
       - "tests/tooling/region_backup_test.py"
       - "tests/tooling/region_backup_places_test.py"
       - "tests/tooling/region_backup_userdata_test.py"
+      - "tests/tooling/region_retention_test.py"
+      - "tests/tooling/lab_fauna_backup_test.py"
+      - "tests/living_fauna_archive_test.gd"
+      - "world/surface/living_fauna_archive.gd"
+      - "world/surface/living_planet_store.gd"
+      - "world/planet_lab/living_planet.gd"
       - "core/persistence/region_store.gd"
+      - "core/progression/creature_encounters.gd"
+      - "autoload/progression_service.gd"
+      - "tests/encounter_archive_test.gd"
       - "core/persistence/slot_history.gd"
       - "autoload/save_game_service.gd"
       - "world/surface/campaign_population_state.gd"
@@ -56,3 +71,13 @@ jobs:
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
         run: python -m unittest discover -s tests/tooling -p 'region_backup_userdata_test.py' -v
+      - name: Verify writer admission, crash recovery and native archive exclusion
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: python -m unittest discover -s tests/tooling -p 'userdata_access_test.py' -v
+      - name: Verify generation manifest and retain-only failure paths
+        run: python -m unittest discover -s tests/tooling -p 'region_retention_test.py' -v
+      - name: Restore paged laboratory fauna without its original user directory
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: python -m unittest discover -s tests/tooling -p 'lab_fauna_backup_test.py' -v

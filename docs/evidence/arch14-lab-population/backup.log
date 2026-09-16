@@ -1,0 +1,7 @@
+test_paged_animals_restore_without_original_directory (lab_fauna_backup_test.LabFaunaBackupTest.test_paged_animals_restore_without_original_directory) ... ARCH14_LAB_BACKUP_RESULT {"archive": {"files": 1172, "directories": 257, "bytes": 6568511, "entries": 1429, "index_sha256": "dbe9ece49b07306a8f3c1c93370ef063bb3d66d2ea4ce21d184fc683c1bac4de"}, "history": 388, "active": 4, "peak_cache": 96}
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 25.397s
+
+OK

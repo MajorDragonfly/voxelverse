@@ -25,6 +25,7 @@ var _visual_root: Node3D
 var _preview: Node3D
 var _side: float = 1.0
 var _fear_origin := Vector3.ZERO
+var _expression_context: Dictionary = {"active": false}
 
 func setup(host: Node, record: Dictionary, appearance: Dictionary) -> void:
 	runtime = host
@@ -66,6 +67,21 @@ func _ready() -> void:
 	_disable_collisions(_preview)
 	add_to_group(&"domesticated_animals")
 	add_to_group(&"wildlife")
+	var expression := preload("res://creatures/behavior/creature_expression_driver.gd").new()
+	expression.name = "ExpressionBehavior"
+	add_child(expression)
+
+func get_expression_context() -> Dictionary:
+	var context: Dictionary = _expression_context.duplicate()
+	context["dead"] = is_dead
+	context["health"] = get_health_ratio()
+	var target: Variant = context.get("look_target")
+	if context.get("friendly_near", false) and (not is_instance_valid(target) or not Steering.clear_sight(self, target)):
+		context["friendly_near"] = false
+		context["look_yaw"] = 0.0
+	context.erase("look_target")
+	context["active"] = is_instance_valid(runtime) and runtime.is_active() and runtime.animal_is_near(object_id) and bool(context.get("active", false))
+	return context
 
 func apply_record(record: Dictionary) -> void:
 	current_health = float(record["health"]) * maximum_health / 100.0
@@ -76,7 +92,8 @@ func apply_record(record: Dictionary) -> void:
 		if _preview.motion_mode != "edit": _preview.set_motion("edit")
 
 func _physics_process(delta: float) -> void:
-	if not is_instance_valid(runtime) or not runtime.is_active(): return
+	_expression_context = {"active": false}
+	if not is_instance_valid(runtime) or not runtime.is_active() or not runtime.animal_is_near(object_id): return
 	var record: Dictionary = runtime.controller.record(object_id)
 	if record.is_empty(): return
 	apply_record(record)
@@ -93,6 +110,7 @@ func _physics_process(delta: float) -> void:
 	var desired := Vector3.ZERO
 	steer_distance = 1.1
 	var fear: bool = runtime.frightened(object_id)
+	_expression_context = {"active": true, "intent": "flee" if fear else "rest"}
 	status = "Wartet"
 	if fear:
 		desired = global_position - _fear_origin
@@ -100,12 +118,18 @@ func _physics_process(delta: float) -> void:
 		status = "Flieht"
 	elif not record["pending"].is_empty():
 		status = "Nimmt Futter an"
+		_expression_context["intent"] = "eat"
 	elif record["status"] == "tamed":
 		if record["order"] == "follow":
 			var handler: Node3D = runtime.handler_actor(record["handler_id"])
 			if handler != null:
 				target = handler.global_position
 				status = "Folgt / bei dir"
+				_expression_context["friendly_near"] = global_position.distance_to(target) < 3.6
+				_expression_context["look_target"] = handler
+				if _expression_context["friendly_near"]:
+					var local: Vector3 = _visual_root.global_basis.inverse() * (target - global_position)
+					_expression_context["look_yaw"] = atan2(-local.x, -local.z)
 			else: status = "Betreuer nicht verfügbar"
 		elif record["order"] == "home":
 			target = Space.resolve(self, record["home"])
@@ -146,6 +170,7 @@ func receive_creature_attack(damage: float, attacker: Node = null) -> void:
 	if attacker != null and attacker.is_in_group(&"player"): return
 	var was_alive: bool = not is_dead
 	if runtime.damage_animal(object_id, damage * 100.0 / maximum_health):
+		get_node("ExpressionBehavior").react("hurt")
 		if attacker is Node3D: _fear_origin = attacker.global_position
 		apply_record(runtime.controller.record(object_id))
 		health_changed.emit(current_health, maximum_health)

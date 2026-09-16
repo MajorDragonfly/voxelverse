@@ -1,0 +1,187 @@
+{
+  "packet": "M10-FOLEY",
+  "date": "2026-09-15",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "source": {
+    "commit": "95d66322c97d9820bd890011e2be23a615519583",
+    "tree": "4d49c07e4aed489c041d6f9e28f049b3ec52e9b6",
+    "files": {
+      ".github/workflows/audio-validate.yml": "d76049d17617ec812587180d9236f3ca1efbff9510f31b3114bde1d01a1dc3e8",
+      "audio/README.md": "0959046b0b2fc2b9279472b45acaff655a719b45f19c329a871aa443b56ab5bc",
+      "audio/assets/PROVENANCE.md": "9ef52e4aa9a0e3c5338a0b789695c0ccc4cf9d3afae1bfbf98825c25b866acd1",
+      "audio/assets/foley-manifest.json": "002fff328e95eb51e9193bc6865167fb91977a39106aa112ed4028115897a249",
+      "audio/assets/land.wav": "b1ecb0923f6f60e8c7509d46904b565be826281108fc145ff75c9d7e01932f50",
+      "audio/assets/splash.wav": "f38e71ebc53b1fe1d634a5ec0ee901b531dbf9e83354a26709ff377f6dde9d13",
+      "audio/assets/step_grass_0.wav": "a3ae1e42173a2a2eadf0d1123c7008b574187b8546df0c16e2ac47df55a8bf4e",
+      "audio/assets/step_grass_1.wav": "f7cf655f3413d219930d91a923f01bd79589205b64c3147ef96cfe7dba64b38a",
+      "audio/assets/step_grass_2.wav": "486a281fc454b27e812bead6c5638102e1683f04d7371155daf620a76e374013",
+      "audio/assets/step_sand_0.wav": "6721af8493c133892bd9870a45853c02cdf32eefc62e0863a50843db71000958",
+      "audio/assets/step_sand_1.wav": "1df91fa34dbe3251069704b00913e307beeed70f71a867ef1e94d09fff704718",
+      "audio/assets/step_sand_2.wav": "8427939fdac27ddfbeb5043185d4ee54c3f1b84ddf9f8cdf5c676c8da15fa395",
+      "audio/assets/step_snow_0.wav": "b35dc1fe6a18d8ebc54edb4ae9fe9096a7488fe95a9334bc421863f067e1198e",
+      "audio/assets/step_snow_1.wav": "404d9fe740e79c858646cfae1a6b57ad03d8051a616d3e09aacb681121cfd3b6",
+      "audio/assets/step_snow_2.wav": "93f3fc15ed9eb3770c3ddf506a6299574feeb332bd464cbc4707fd35b62e0cc7",
+      "audio/assets/step_stone_0.wav": "c1eb7ea1030a3e870f4797f7e00b621b5a64270f16f254c3801888fc67d8c67c",
+      "audio/assets/step_stone_1.wav": "14582ddd14c117aafa9c72cf94af26e84cb63b9d5936b80650d70bfca561a4e4",
+      "audio/assets/step_stone_2.wav": "444d8fe84fa0b5227ed8ecb129fe484821d6bb413610e37db4d1bcc37b997bdb",
+      "audio/assets/step_water_0.wav": "92d3722a67930a0f941b7a3900ef1f959f9182d9b454d0cfd8ab2e642d5c2393",
+      "audio/assets/step_water_1.wav": "784d3688578d55eb0f43c708efad01cbb5581fede83a2f0032c3533fc11b42a7",
+      "audio/assets/step_water_2.wav": "795d3724faac81e039a5594036898bd1f231641f71e8c4d0d88d1229c130cd5b",
+      "audio/assets/step_wood_0.wav": "784ac29075103de0201c109a6216ca501db16c2803db05ab2a829383bb1a5882",
+      "audio/assets/step_wood_1.wav": "48c53989fe4850d5171bba53a949626745ce9a9d619d94d294155a3ba1903993",
+      "audio/assets/step_wood_2.wav": "c658124ada99b816246475d654a7647735a6d79b6e2e90da0b8e61b8b82ceb83",
+      "audio/assets/swim.wav": "2833884b2940848c85f769005f44ce9a0e3063042be415dee34982dd05c665a6",
+      "audio/assets/underwater_bubbles_0.wav": "e6e9067435afad5cbb39d83f37a2a89e8ce9ec9885ee6f0feaffa12ee07eb263",
+      "audio/assets/underwater_bubbles_0.wav.import": "3aa1ae88fbc450d701a6e82c579bb198e144c747ce0964b6e3e3a36e8207bc7f",
+      "audio/assets/underwater_bubbles_1.wav": "d83505a8c788e32d50761d5e0d4991afe2698a8675a6bf24d22f5c60160b0985",
+      "audio/assets/underwater_bubbles_1.wav.import": "f2c5a5622343b157e569f6ee6bd2eb7abbb5d87b454e053bc1e32503d0211e0d",
+      "audio/assets/underwater_bubbles_2.wav": "9729c30533e0716d273ddfd46aa8001fed54a46e2c5251e31d6068d976dafad5",
+      "audio/assets/underwater_bubbles_2.wav.import": "7cc263939360dbc9c6fece900913ea98e975388efec65a87a7c4a718b77d8fba",
+      "audio/assets/underwater_loop.wav": "64d52f65f1c5e17d28f54818393af054bbc8298defd2502808c775c8a63647a6",
+      "audio/assets/water_dive.wav": "e29af4206fd251a1ce40e1e04ce0507e5a587abd1b1c87c9e93904e8134a5882",
+      "audio/assets/water_dive.wav.import": "143633f342b1781170dbf69244d5ea26f76fb8a719e8ef4fdd3b0f2ab7dd489c",
+      "audio/assets/water_exit.wav": "37a35e912851fb7a3fb55baf60e5c0ca045b6a93c6a2aa509f1da4bd8d06ad28",
+      "audio/assets/water_exit.wav.import": "56d36d4e377ded7bc32936c8c816ff01657d77f8d93e88eaf085c41837f065a2",
+      "audio/assets/water_loop.wav": "7b34e31e148e3dadf9d126aa103af10d3cf5f9779aa10722068b8f39e58fc018",
+      "audio/assets/water_surface.wav": "8a19d9a1b9177976f99f6ac87d6b098d2b53f2cc3c485b2996841892712a9b9e",
+      "audio/assets/water_surface.wav.import": "479f8527be22a012b4b12cbfc0565d2f929d1095e7abc7a2b7f1d16fe7e7ddd8",
+      "audio/runtime/sound_library.gd": "e4779c21feafec42497622ccd5d880db776af9ff7f8acb2a8360ae538d2a7349",
+      "audio/runtime/water_foley.gd": "f23753fb4123a7d2d1a581731dd632a9a541f3d4b1e28562512b6dcb6321b6b1",
+      "audio/runtime/water_foley.gd.uid": "099b2999d40756e66eb9b3738b108fe7c5440abbf9ec6b70d74fb08ad70ede8e",
+      "audio/runtime/world_audio.gd": "e0924e644c0f9b8ad00f8368820235d1dba205607e5899cc09f3f734d6a1ebf2",
+      "audio/ui/audio_playground.gd": "45397d23ac86df90b47ca51236986ff99079f2411c73d549c393d58abdea6763",
+      "docs/WORK_M10_FOLEY.md": "f6ebb72dedab3277a77799ac6634b95fd1223c395ee4f4e796194a8280ee7b95",
+      "docs/evidence/m10-foley/foley-preview.json": "f101d808955c3d01c0b9dde924ce50cd0391ec1bf87ffaa4a3c536cedf06680d",
+      "docs/evidence/m10-foley/foley-preview.ogg": "2f150b82723c6a6446a7419e2ab1324e4c21efe74173c70b2108821dec7888f4",
+      "tests/audio/foley_runtime_test.gd": "66608e3795165339710e716cc133a7bce5d6a0502ffa5c8d9f81bb0076cfb8a3",
+      "tests/audio/foley_runtime_test.gd.uid": "e698e7ea87b9b783cc6d91869607e38c9bd9129ffad95499457697f766d65424",
+      "tools/audio/check_foley.py": "fb110398064db6dcde22b98e24f122ad0f676763d821149b4a8f9a36170b1b6f",
+      "tools/audio/generate_foley.py": "c7ec9eac7fc7b8587a516f2c2904873460ad4d3cb4f4b46f70a6187bfa201192",
+      "tools/audio/generate_sounds.py": "cb41d2b0d6909e3e42a6338db1fc125709e512c1a8331518a3416c759f960ede",
+      "tools/audio/render_foley_preview.py": "e0b222ea4f7bc4cc45bc4c32c59bfca0c4548062833c8e47ae09a92a91d0ffa2",
+      "tools/validation/contracts.json": "d6c8274df75fdfc9701a9d7114b91fde8eed1b675b927c3738da07d75a32563f"
+    }
+  },
+  "environment": {
+    "engine": "4.6.3.stable.official.7d41c59c4",
+    "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "mode": "Linux/headless with isolated user-data directories; no real user saves",
+    "numpy": "2.3.5"
+  },
+  "validation": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "source": {
+      "commit": "95d66322c97d9820bd890011e2be23a615519583",
+      "tracked_worktree_dirty": false
+    },
+    "execution": "headless_source_project",
+    "selected_tests": [
+      "audio/foley_runtime_test",
+      "audio/audio_runtime_test",
+      "audio/audio_expansion_test",
+      "audio/audio_scene_lifecycle_test",
+      "audio/audio_shutdown_test",
+      "audio/spherical_water_audio_test"
+    ],
+    "checks": [
+      {
+        "name": "source_contracts",
+        "kind": "source_contract",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.115
+      },
+      {
+        "name": "audio/foley_runtime_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 12.501,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/audio_runtime_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 15.066,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/audio_expansion_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 32.88,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/audio_scene_lifecycle_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.472,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/audio_shutdown_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.082,
+        "contract": "audio"
+      },
+      {
+        "name": "audio/spherical_water_audio_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 1.371,
+        "contract": "audio"
+      }
+    ]
+  },
+  "runtime_summary": {
+    "checks": 24,
+    "event_counts": {
+      "step_water": 7,
+      "swim": 18,
+      "underwater_bubbles": 2,
+      "water_dive": 2,
+      "water_exit": 1,
+      "water_surface": 1
+    },
+    "failures": [],
+    "passed": true,
+    "query_peak": 4
+  },
+  "commands": [
+    "python3 tools/audio/generate_foley.py",
+    "python3 tools/audio/check_foley.py --baseline-ref d378ca0ecd7f03429a5150df6358e0646ec06689 --output QA/final-signals.json",
+    "python3 tools/audio/render_foley_preview.py --baseline-ref d378ca0ecd7f03429a5150df6358e0646ec06689 --output docs/evidence/m10-foley/foley-preview.ogg",
+    "python3 tools/validate_godot.py --godot GODOT_4_6_3 --skip-main --skip-import --tests audio/foley_runtime_test audio/audio_runtime_test audio/audio_expansion_test audio/audio_scene_lifecycle_test audio/audio_shutdown_test audio/spherical_water_audio_test --output QA/final"
+  ],
+  "import": "raw-logs.tar.gz: initial/import.log; same changed PCM and imported resources, no later asset changes; final uses --skip-import",
+  "determinism": "Regenerated all 29 assets in a fresh temporary directory using generate_foley.write; returned PCM hashes and file metadata exactly equal committed foley-manifest.json.",
+  "signals": {
+    "path": "signals.json",
+    "passed": true,
+    "assets": 29
+  },
+  "raw_logs": {
+    "path": "raw-logs.tar.gz",
+    "sha256": "4df5a10060fb531002afdf52f93a6c2f7bfff325b97b0d399045b4a33a8357de"
+  },
+  "corrected_failure": {
+    "run": "initial",
+    "message": "Deleted player retained underwater state",
+    "cause": "The freed player skipped the valid-reference removal guard; ambient state survived until the next bind timer. Reset immediately when a former bound source has been freed. Focused and final lifecycle tests pass."
+  },
+  "limits": [
+    "No subjective listening approval, target-PC mix, graphical check, complete campaign chain or native/Windows export.",
+    "The before/after preview is assembled from actual assets at equal per-step gain; it is not gameplay capture.",
+    "Signal metrics describe source PCM. Imported assets and their existing Godot settings were exercised in the runtime tests.",
+    "Independent of PR #102; integration should preserve both once-only audio test registrations."
+  ]
+}

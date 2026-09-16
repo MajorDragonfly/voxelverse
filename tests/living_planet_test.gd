@@ -27,7 +27,10 @@ func _run() -> void:
 		var stored: Dictionary = Save.read().data
 		_expect(not stored.is_empty() and stored.body_id == world.body_id, "Restart lost body")
 		_expect(_distance(stored.bodies[world.body_id].player.location, world.walker.location(), world) < 0.001, "Restart lost player location")
-		_expect(JSON.stringify(stored.bodies[world.body_id].fauna) == JSON.stringify(world.ecosystem.animal_records), "Restart changed individual anatomy or saved animal state")
+		var expected_manifest: Dictionary = stored.bodies[world.body_id].fauna_archive
+		var actual_manifest: Dictionary = world.ecosystem.fauna.checkpoint()
+		_expect(preload("res://tests/fixtures/domestic_native_comparison.gd").native_equal(expected_manifest, actual_manifest),
+			"Restart changed archive manifest: " + JSON.stringify(expected_manifest) + " -> " + JSON.stringify(actual_manifest))
 		# Load real runtime visuals in the fresh process, not just JSON records.
 		world.set_paused(false)
 		for frame in range(900):
@@ -127,6 +130,7 @@ func _run() -> void:
 	world.set_paused(true)
 	world._capture()
 	var before: Dictionary = world.snapshot()
+	var before_fauna: Dictionary = world.ecosystem.fauna.store.cache.duplicate(true)
 	world.walker.place(target)
 	world.stream_objects()
 	world.set_paused(false)
@@ -155,8 +159,8 @@ func _run() -> void:
 	world.return_to_marker()
 	world.set_paused(true)
 	_expect(_distance(before.bodies[world.body_id].spawn, world.walker.location(), world) < 0.001, "Return-to-place failed")
-	for id in before.bodies[world.body_id].fauna:
-		_expect(world.ecosystem.animal_records.has(id) and world.ecosystem.animal_records[id].design == before.bodies[world.body_id].fauna[id].design, "Return regenerated an existing animal's body")
+	for id in before_fauna:
+		_expect(preload("res://tests/fixtures/domestic_native_comparison.gd").native_equal(world.ecosystem.fauna.get_state(id).get("design"), before_fauna[id].design), "Return regenerated an existing animal's body")
 	# Finish one reloaded individual and retain the native runtime anatomy for
 	# an independent binary comparison after JSON save and a new engine process.
 	world.set_paused(false)
@@ -166,8 +170,8 @@ func _run() -> void:
 			break
 	world.set_paused(true)
 	var native_designs: Dictionary = {}
-	for id: String in world.ecosystem.animal_records:
-		native_designs[id] = JSON.to_native(world.ecosystem.animal_records[id].design, false)
+	for id: String in world.ecosystem.fauna.store.cache:
+		native_designs[id] = JSON.to_native(world.ecosystem.fauna.store.cache[id].design, false)
 	for id: String in world.ecosystem.animals:
 		native_designs[id] = world.ecosystem.animals[id].design.duplicate(true)
 	var expected_file := FileAccess.open("user://living_test_native.bin", FileAccess.WRITE)

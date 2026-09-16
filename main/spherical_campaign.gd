@@ -15,7 +15,7 @@ var player: CharacterBody3D
 var flora: Node
 var population: Node
 var world_initialized: bool = false
-var _sun: DirectionalLight3D
+var _atmosphere: Node3D
 
 func _ready() -> void:
 	var state := get_node("/root/GameState")
@@ -72,6 +72,9 @@ func _ready() -> void:
 	var nest: Node3D = preload("res://world/resources/nests/nest.tscn").instantiate()
 	nest.name = "Nest"
 	nest.snap_to_terrain = false
+	nest.persistent_visual_key = str(body.id) + ":nest"
+	nest.visual_profile = terrain.surface.terrain
+	nest.visual_biome = str(terrain.surface.sample(body.get("home_group", {}).get("anchor", body.surface_context.spawn)).biome)
 	# The campaign population supplies radial food; do not start the plane streamer.
 	nest.get_node("PlantFoodStreamer").free()
 	add_child(nest)
@@ -92,14 +95,13 @@ func _ready() -> void:
 	var ecology := preload("res://world/surface/campaign_ecology.gd").new()
 	ecology.population = population
 	add_child(ecology)
-	var map := preload("res://ui/minimap/minimap_hud.gd").new()
-	map.player = player
-	add_child(map)
+	# ProgressionHUD on the shared player owns the single campaign minimap.
 	var development := preload("res://core/development_tools.gd").new()
 	development.name = "DevelopmentTools"
 	add_child(development)
-	var frame: Basis = Cube.frame(player.up_direction)
-	_sun.basis = frame.rotated(frame.x, -0.65)
+	var anchor: Dictionary = body.surface_context.spawn
+	_atmosphere.configure(terrain.surface.terrain, int(terrain.surface.body.seed),
+		Cube.vector(Cube.direction(anchor.face, anchor.u, anchor.v)), _atmosphere.campaign_sample)
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(player) and not world_initialized:
@@ -117,8 +119,11 @@ func map_snapshot() -> Dictionary:
 	var explorers: Array[Dictionary] = []
 	var home: Dictionary = body.get("home_group", {})
 	if not home.is_empty(): markers.append({"kind": "home", "address": home.anchor, "name": "Heimat"})
+	var Settlements = preload("res://world/tribe/settlement_collection.gd")
+	for id: String in Settlements.ids(body):
+		if id != Settlements.origin_id(body): markers.append({"kind": "home", "address": Settlements.village(body, id).anchor, "name": "Außenlager"})
 	var owner: Node = tribe if in_tribe else get_node("Nest/HomeGroup")
-	var group: Dictionary = body.get("tribe", {}) if in_tribe else home
+	var group: Dictionary = tribe.village() if in_tribe else home
 	for member: Dictionary in group.get("members", []):
 		var place: Dictionary = member.position
 		var actor: Node3D = owner.actors.get(member.id)
@@ -141,6 +146,9 @@ func known_map_places() -> Array[Dictionary]:
 	var home: Dictionary = body.get("home_group", {})
 	places.append(Source._place(str(body.id) + ":nest", "Eigenes Nest", "nest", state.campaign.data.player_species_id, "", true, Space.encode(self, get_node("Nest").global_position)))
 	if not home.is_empty(): places.append(Source._place(home.id, "Heimat deiner Spezies", "home", home.species_id, "", true, home.anchor))
+	var Settlements = preload("res://world/tribe/settlement_collection.gd")
+	for id: String in Settlements.ids(body):
+		if id != Settlements.origin_id(body): places.append(Source._place(id, TranslationServer.translate("SETTLEMENT_OUTPOST"), "home", state.campaign.data.player_species_id, "", true, Settlements.village(body, id).anchor))
 	if population != null:
 		for record: Dictionary in population.records.values():
 			var encounter: Dictionary = get_node("/root/ProgressionService").get_saved_creature_encounter(record.id)
@@ -153,22 +161,5 @@ func _exit_tree() -> void:
 	if adapter != null: adapter.close()
 
 func _build_environment() -> void:
-	var environment := Environment.new()
-	environment.background_mode = Environment.BG_COLOR
-	environment.background_color = Color("83b4ce")
-	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_color = Color("c4d8e4")
-	environment.ambient_light_energy = 0.22
-	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.fog_enabled = true
-	environment.fog_mode = Environment.FOG_MODE_DEPTH
-	environment.fog_light_color = Color("83b4ce")
-	environment.fog_depth_begin = 1500.0
-	environment.fog_depth_end = 18000.0
-	var world := WorldEnvironment.new()
-	world.environment = environment
-	add_child(world)
-	_sun = DirectionalLight3D.new()
-	_sun.light_energy = 0.8
-	_sun.shadow_enabled = true
-	add_child(_sun)
+	_atmosphere = preload("res://world/visuals/atmosphere/campaign_atmosphere.gd").new()
+	add_child(_atmosphere)

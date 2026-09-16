@@ -95,6 +95,13 @@ def main():
             channels.append(noise(n, low, high) * envelope * gain)
         samples = channels[0] if len(channels) == 1 else np.column_stack(channels)
         save(name, samples, loop=True)
+    # Keep the original UI/wind generator reproducible; use the refined asset
+    # owner for foot contacts and water, also on a full regeneration.
+    if __package__:
+        from .generate_foley import write
+    else:
+        from generate_foley import write
+    write(OUT)
     print(f"Generated {len(list(OUT.glob('*.wav')))} original WAV files in {OUT}")
 
 

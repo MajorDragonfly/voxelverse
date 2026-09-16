@@ -19,6 +19,8 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	# This fixture asserts German text and decimal commas on every host OS.
+	TranslationServer.set_locale("de")
 	saves = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
 	saves._loaded_once = true

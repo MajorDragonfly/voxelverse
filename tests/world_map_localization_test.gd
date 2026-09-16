@@ -39,6 +39,11 @@ func _layouts() -> void:
 	await _frames(5)
 	var friends: Button = map._panel.find_child("AtlasFriendFilter", true, false)
 	friends.button_pressed = false
+	# Filtered pages now scan the archive incrementally before creating Controls.
+	for frame in range(1000):
+		if not map._place_query.active: break
+		await process_frame
+	_expect(not map._place_query.active, "Filtered place page did not finish")
 	await _frames(3)
 	# Stop unrelated queued raster work while checking that translation does not
 	# schedule another terrain request or rebuild the list's actual Controls.

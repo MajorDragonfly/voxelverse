@@ -5,6 +5,7 @@ const Layout = preload("res://world/planet_lab/planet_tile_layout.gd")
 const PatchMesh = preload("res://world/planet_lab/planet_patch_mesh.gd")
 const PatchJob = preload("res://world/planet_lab/planet_patch_job.gd")
 const Support = preload("res://world/surface/surface_support.gd")
+## At most two indivisible engine operations, not two complete patches.
 const BUILDS_PER_FRAME: int = 2
 const BUILD_BUDGET_USEC: int = 4000
 const MAX_CACHED: int = 256
@@ -15,7 +16,13 @@ const MAX_LOOKAHEAD_METERS: float = 32.0
 var layout: RefCounted
 var leaves: Dictionary = {}
 var _staging: Dictionary = {}
+## Meshes owned only by staging; reused live leaves are counted by leaves.
+## Updated on cache transfer/upload and reset when staging publishes/discards.
+var _staging_mesh_count: int = 0
 var _pending: Array[String] = []
+var _collision_pending: Array[String] = []
+var publication_operations: Dictionary = {}
+var max_operation_usec: Dictionary = {}
 var _requested_direction: Vector3 = Vector3.ZERO
 var _collision_direction: Vector3 = Vector3.ZERO
 var ocean_material: ShaderMaterial
@@ -106,9 +113,9 @@ func stream_at(direction: Vector3, force: bool = false) -> void:
 	if force:
 		_job.advance(true)
 		_collect_job()
-		while not _pending.is_empty():
-			_build_next()
-		_publish()
+		while not _staging.is_empty():
+			while not _pending.is_empty(): _build_next()
+			_publish()
 		_finish_transition()
 	if direction.distance_to(_collision_direction) * float(surface.body.radius) >= 4.0 or force:
 		_update_collisions(direction)
@@ -141,6 +148,7 @@ func _collect_job() -> void:
 	if _job == null:
 		return
 	_staging = _job.result
+	_staging_mesh_count = 0
 	_staging_generation = _job_generation
 	last_worker_seconds = _job.duration_usec / 1000000.0
 	max_worker_usec = maxi(max_worker_usec, _job.duration_usec)
@@ -156,11 +164,10 @@ func _collect_job() -> void:
 			if _cache.has(key):
 				tile.merge(_cache[key])
 				_cache.erase(key)
+				_staging_mesh_count += 1
 				cache_hits += 1
 			_pending.append(id)
-	_prepared_near = _staging.keys()
-	_prepared_near.sort_custom(func(a: String, b: String): return _staging[a].direction.distance_squared_to(_requested_direction) < _staging[b].direction.distance_squared_to(_requested_direction))
-	_prepared_near = _prepared_near.slice(0, MAX_NEAR)
+	_queue_near_preparation()
 	_trim_cache()
 	_pending.sort_custom(func(a: String, b: String): return _staging[a].direction.distance_squared_to(_last_direction) > _staging[b].direction.distance_squared_to(_last_direction))
 	if not job_samples.is_empty():
@@ -174,46 +181,73 @@ func _process(delta: float) -> void:
 	if not _retired.is_empty():
 		_transition += delta / TRANSITION_SECONDS
 		_set_phase(minf(1.0, _transition))
-		if _transition >= 1.0:
-			_finish_transition()
+		if _transition >= 1.0: _finish_transition()
+	var staging_current: bool = _advance_job()
+	# Planning/retirement and handoff retain separate timings. Only actual
+	# upload/preparation work consumes this cooperative publication budget.
+	var started: int = Time.get_ticks_usec()
+	while not _collision_pending.is_empty() and last_build_count < BUILDS_PER_FRAME:
+		var id: String = _collision_pending[-1]
+		if not leaves.has(id) or _prepare_collision(leaves[id]): _collision_pending.pop_back()
+		last_build_count += 1
+		if Time.get_ticks_usec() - started >= BUILD_BUDGET_USEC: break
+	if last_build_count > 0 and _collision_pending.is_empty(): _update_collisions(_requested_direction)
+	while staging_current and not _pending.is_empty() and last_build_count < BUILDS_PER_FRAME and Time.get_ticks_usec() - started < BUILD_BUDGET_USEC:
+		_build_next()
+		last_build_count += 1
+	if last_build_count > 0:
+		var elapsed: int = Time.get_ticks_usec() - started
+		max_build_usec = maxi(max_build_usec, elapsed)
+		if upload_samples.size() < 2048: upload_samples.append(elapsed / 1000.0)
+	if staging_current and _pending.is_empty(): _publish()
+
+
+func _advance_job() -> bool:
 	if _job != null:
 		if _job_generation != _generation or _job_body_id != str(surface.body.id):
-			# A turn only replaces the queued intent; never join unfinished work
-			# on the frame thread or start mesh batches for obsolete selection.
-			if not _job.try_join(): return
+			# Never join unfinished work or start obsolete mesh batches here.
+			if not _job.try_join(): return false
 			_job = null
 			discarded_jobs += 1
 			_request(_focus_direction)
-			return
-		if not _job.advance():
-			return
+			return false
+		if not _job.advance(): return false
 		_collect_job()
 	if not _staging.is_empty() and _staging_generation != _generation:
 		discarded_publications += 1
 		_request(_focus_direction)
-		return
-	var started: int = Time.get_ticks_usec()
-	while not _pending.is_empty() and last_build_count < BUILDS_PER_FRAME:
-		_build_next()
-		last_build_count += 1
-		if Time.get_ticks_usec() - started >= BUILD_BUDGET_USEC:
-			break
-	if last_build_count > 0:
-		var elapsed: int = Time.get_ticks_usec() - started
-		max_build_usec = maxi(max_build_usec, elapsed)
-		if upload_samples.size() < 2048:
-			upload_samples.append(elapsed / 1000.0)
-		if _pending.is_empty():
-			_publish()
+		return false
+	return true
 
 
 func _build_next() -> void:
 	var started: int = Time.get_ticks_usec()
-	var id: String = _pending.pop_back()
+	var id: String = _pending[-1]
 	var tile: Dictionary = _staging[id]
+	var operation: String
 	if not tile.has("mesh"):
-		tile.merge(PatchMesh.upload(tile.arrays))
-		tile.erase("arrays")
+		operation = "land"
+		tile["mesh"] = PatchMesh.upload_surface(tile.arrays.land_arrays)
+		_staging_mesh_count += 1
+		# Empty water needs no separate upload or frame.
+		if tile.arrays.water_arrays.is_empty(): tile["water"] = null
+	elif not tile.has("water"):
+		operation = "water"
+		tile["water"] = PatchMesh.upload_surface(tile.arrays.water_arrays)
+	elif not tile.has("node"):
+		operation = "node"
+		_build_node(tile)
+	elif id in _prepared_near:
+		_prepare_collision(tile)
+	if not operation.is_empty(): _record_operation(operation, started)
+	if tile.has("mesh") and tile.has("water"): tile.erase("arrays")
+	if tile.has("node") and (id not in _prepared_near or tile.has("collider")):
+		_pending.pop_back()
+	max_prepare_usec = maxi(max_prepare_usec, Time.get_ticks_usec() - started)
+	_trim_cache()
+
+
+func _build_node(tile: Dictionary) -> void:
 	var node := MeshInstance3D.new()
 	node.name = "Patch_" + str(tile.id).replace("/", "_")
 	node.mesh = tile.mesh
@@ -229,10 +263,61 @@ func _build_next() -> void:
 		sea.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		node.add_child(sea)
 		tile["sea"] = sea
-	if id in _prepared_near and not tile.has("shape"):
-		tile["shape"] = _collision_shape(tile.mesh)
-	max_prepare_usec = maxi(max_prepare_usec, Time.get_ticks_usec() - started)
-	_trim_cache()
+
+
+func _prepare_collision(tile: Dictionary) -> bool:
+	var started: int = Time.get_ticks_usec()
+	if not tile.has("shape"):
+		var shape := ConcavePolygonShape3D.new()
+		shape.backface_collision = true
+		shape.set_faces(tile.collision_faces)
+		tile["shape"] = shape
+		tile.erase("collision_faces")
+		_record_operation("shape", started)
+		return false
+	if not tile.has("collider"):
+		var collision := StaticBody3D.new()
+		# Register with physics incrementally, without becoming a floor before
+		# the complete cover is ready. No ray or moving body can hit this layer.
+		collision.collision_layer = 0
+		collision.collision_mask = 0
+		var shape_node := CollisionShape3D.new()
+		shape_node.shape = tile.shape
+		collision.add_child(shape_node)
+		tile.node.add_child(collision)
+		tile["collider"] = collision
+		_record_operation("collider", started)
+	return true
+
+
+func _record_operation(operation: String, started: int) -> void:
+	publication_operations[operation] = int(publication_operations.get(operation, 0)) + 1
+	max_operation_usec[operation] = maxi(int(max_operation_usec.get(operation, 0)), Time.get_ticks_usec() - started)
+
+
+func _nearest(cover: Dictionary, direction: Vector3) -> Array:
+	var sorted: Array = cover.keys()
+	sorted.sort_custom(func(a: String, b: String): return cover[a].direction.distance_squared_to(direction) < cover[b].direction.distance_squared_to(direction))
+	return sorted.slice(0, MAX_NEAR)
+
+
+func _queue_near_preparation() -> void:
+	_prepared_near = _nearest(_staging, _requested_direction)
+	for id: String in _prepared_near:
+		if not _staging[id].has("collider") and id not in _pending: _pending.append(id)
+	# A changing observer may no longer need a previously prepared collider.
+	# Bound dormant physics bodies to the 24 nearest staging owners.
+	for id: String in _staging:
+		if id not in _prepared_near and _staging[id].has("collider") and active.get(id) != _staging[id].collider:
+			_drop_collider(_staging[id])
+
+
+func _drop_collider(tile: Dictionary) -> void:
+	if not tile.has("collider"): return
+	var collider: StaticBody3D = tile.collider
+	collider.get_parent().remove_child(collider)
+	collider.queue_free()
+	tile.erase("collider")
 
 
 func _publish() -> void:
@@ -254,6 +339,10 @@ func _publish() -> void:
 			_generation += 1
 			_request(_requested_direction)
 			return
+	# Movement during uploads can change the physical owners. Prepare those
+	# through the same bounded queue, never build 24 bodies during handoff.
+	_queue_near_preparation()
+	if not _pending.is_empty(): return
 	var started: int = Time.get_ticks_usec()
 	var retired: Array[Dictionary] = []
 	for tile: Dictionary in leaves.values():
@@ -265,17 +354,16 @@ func _publish() -> void:
 		tile.node.visible = true
 		if not retired.is_empty():
 			_arriving.append(tile)
+	for id: String in active.keys():
+		if not _staging.has(id) or active[id].get_parent() != _staging[id].node:
+			_drop_collider(leaves[id])
+			active.erase(id)
 	leaves = _staging
 	_published_generation = _staging_generation
 	_staging = {}
+	_staging_mesh_count = 0
 	tiles.assign(leaves.values())
-	# Rebuild changed physical owners before retiring old surfaces. There is
-	# always a complete rendered covering set and collision under the walker.
-	for id: String in active.keys():
-		if not leaves.has(id) or active[id].get_parent() != leaves[id].node:
-			active[id].get_parent().remove_child(active[id])
-			active[id].queue_free()
-			active.erase(id)
+	_collision_pending.clear()
 	_update_collisions(_requested_direction)
 	_retired = retired
 	_transition = 0.0
@@ -293,29 +381,25 @@ func _publish() -> void:
 
 
 func _update_collisions(direction: Vector3) -> void:
-	if leaves.is_empty():
-		return
+	if leaves.is_empty(): return
 	_collision_direction = direction
-	var sorted: Array = leaves.keys()
-	# Dot products round to 1 for thousands of distinct nearby points at Earth
-	# radius. Subtract first so ordering retains their small angular distances.
-	sorted.sort_custom(func(a: String, b: String): return leaves[a].direction.distance_squared_to(direction) < leaves[b].direction.distance_squared_to(direction))
-	var wanted: Array = sorted.slice(0, MAX_NEAR)
+	var wanted: Array = _nearest(leaves, direction)
+	_collision_pending.clear()
+	for id: String in wanted:
+		if not leaves[id].has("collider"): _collision_pending.append(id)
+	# Keep the current physical cover until the next neighbourhood is ready.
+	for id: String in leaves:
+		if id not in wanted and not active.has(id): _drop_collider(leaves[id])
+	if not _collision_pending.is_empty(): return
 	for id: String in active.keys():
 		if id not in wanted:
-			active[id].get_parent().remove_child(active[id])
-			active[id].queue_free()
+			_drop_collider(leaves[id])
 			active.erase(id)
 	for id: String in wanted:
-		if active.has(id):
-			continue
-		var collision := StaticBody3D.new()
-		var shape := CollisionShape3D.new()
-		if not leaves[id].has("shape"):
-			leaves[id]["shape"] = _collision_shape(leaves[id].mesh)
-		shape.shape = leaves[id].shape
-		collision.add_child(shape)
-		leaves[id].node.add_child(collision)
+		if active.has(id): continue
+		var collision: StaticBody3D = leaves[id].collider
+		collision.collision_layer = 1
+		collision.collision_mask = 1
 		active[id] = collision
 
 
@@ -327,7 +411,9 @@ func streaming_diagnostics() -> Dictionary:
 	return {"generation": _generation, "published_generation": _published_generation,
 		"refresh_queued": _refresh_requested,
 		"discarded_jobs": discarded_jobs, "discarded_publications": discarded_publications,
-		"pending_uploads": _pending.size(), "worker_active": _job != null,
+		"pending_uploads": _pending.size(), "pending_collisions": _collision_pending.size(), "worker_active": _job != null,
+		"staging_meshes": _staging_mesh_count,
+		"operations": publication_operations.duplicate(), "max_operation_usec": max_operation_usec.duplicate(),
 		"lookahead_m": lookahead_direction.distance_to(_requested_direction) * float(surface.body.radius)}
 
 
@@ -356,6 +442,8 @@ func _finish_transition() -> void:
 		var data: Dictionary = {"mesh": tile.mesh, "water": tile.water, "anchor": tile.anchor}
 		if tile.has("shape"):
 			data["shape"] = tile.shape
+		elif tile.has("collision_faces"):
+			data["collision_faces"] = tile.collision_faces
 		_cache[PatchJob.variant_key(tile)] = data
 		remove_child(tile.node)
 		tile.node.queue_free()
@@ -364,12 +452,14 @@ func _finish_transition() -> void:
 
 
 func _trim_cache() -> void:
-	var resident: int = leaves.size() + _retired.size()
-	for tile: Dictionary in _staging.values():
-		if tile.has("mesh") and (not leaves.has(tile.id) or leaves[tile.id].get("node") != tile.get("node")):
-			resident += 1
-	while not _cache.is_empty() and (_cache.size() > MAX_CACHED or resident + _cache.size() > MAX_RESIDENT):
-		_cache.erase(_cache.keys()[0])
+	# This runs after every indivisible upload step. Do not scan the entire
+	# staging cover (up to 768 tiles) again for water, nodes, shapes and bodies.
+	var resident: int = leaves.size() + _retired.size() + _staging_mesh_count
+	var excess: int = maxi(_cache.size() - MAX_CACHED, resident + _cache.size() - MAX_RESIDENT)
+	if excess > 0:
+		# Preserve oldest-first eviction, with one key snapshot for the batch.
+		var keys: Array = _cache.keys()
+		for index in range(mini(excess, keys.size())): _cache.erase(keys[index])
 	peak_resident_meshes = maxi(peak_resident_meshes, resident + _cache.size())
 
 
@@ -378,7 +468,10 @@ func _discard_staging() -> void:
 		if tile.has("node") and (not leaves.has(tile.id) or leaves[tile.id].node != tile.node):
 			remove_child(tile.node)
 			tile.node.queue_free()
+		elif tile.has("collider") and active.get(tile.id) != tile.collider:
+			_drop_collider(tile)
 	_staging.clear()
+	_staging_mesh_count = 0
 	_pending.clear()
 
 
@@ -401,28 +494,6 @@ func ground_ready(point: Array) -> bool:
 	return false
 
 
-func _collision_shape(mesh: ArrayMesh) -> ConcavePolygonShape3D:
-	var arrays: Array = mesh.surface_get_arrays(0)
-	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX].duplicate()
-	if vertices.size() <= 289:
-		return super._collision_shape(mesh)
-	# Flat voxel faces duplicate vertices. Exact rays can miss their internal
-	# joins after independent float transforms as well as outer tile seams.
-	# Overlap each physical triangle by at most half a millimetre in its own
-	# plane; visual geometry and the radial ground height remain unchanged.
-	var faces := PackedVector3Array()
-	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
-	for i in range(0, indices.size(), 3):
-		var center: Vector3 = (vertices[indices[i]] + vertices[indices[i + 1]] + vertices[indices[i + 2]]) / 3.0
-		for corner in range(3):
-			var point: Vector3 = vertices[indices[i + corner]]
-			faces.append(point + (point - center).normalized() * COLLISION_EDGE_GUARD)
-	var shape := ConcavePolygonShape3D.new()
-	shape.backface_collision = true
-	shape.set_faces(faces)
-	return shape
-
-
 func _exit_tree() -> void:
 	# A worker owns no scene nodes/resources. Join before releasing its inputs;
 	# body switches and quitting while generating must not leave live jobs.
@@ -430,7 +501,9 @@ func _exit_tree() -> void:
 		_job.join()
 	_job = null
 	_staging.clear()
+	_staging_mesh_count = 0
 	_pending.clear()
+	_collision_pending.clear()
 	_cache.clear()
 	_retired.clear()
 	_arriving.clear()

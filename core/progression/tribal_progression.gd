@@ -100,7 +100,7 @@ func goals() -> Array[Dictionary]:
 ## before/after must enclose ONE resident's arrived work step. A UI action is not evidence.
 func observe(before: Dictionary, after: Dictionary, actor_id: String, body: Dictionary, campaign: Dictionary, phase: int) -> Dictionary:
 	var rejected: Dictionary = {"changed": false, "rewards": []}
-	if phase != 1 or before.get("id") != after.get("id") or not Tribe.validate(before, body, campaign).is_empty() or not Tribe.validate(after, body, campaign).is_empty():
+	if phase != 1 or before.get("id") != after.get("id") or not _village_problem(before, body, campaign).is_empty() or not _village_problem(after, body, campaign).is_empty():
 		return rejected
 	if not data["campaign_id"].is_empty() and not matches_campaign(campaign):
 		return rejected
@@ -161,8 +161,9 @@ func observe(before: Dictionary, after: Dictionary, actor_id: String, body: Dict
 		var done: bool = after["project"].is_empty() and int(after[counter]) == int(before[counter]) + 1
 		var progress: float = float(Tribe.WORK[kind]) if done else float(after["project"].get("progress", 0.0))
 		if progress > float(project["progress"]) and int(entry["cursors"][counter]) <= int(before[counter]):
-			if entry["project"].get("id", "") != project_id:
+			if entry["project"].get("id", "") != project_id or entry["project"].get("attempt_id", "") != project.get("attempt_id", ""):
 				entry["project"] = {"id": project_id, "progress": float(project["progress"]), "contributors": {}}
+				if project.has("attempt_id"): entry["project"]["attempt_id"] = project.attempt_id
 			if progress > float(entry["project"]["progress"]):
 				entry["project"]["progress"] = progress
 				entry["project"]["contributors"][actor_id] = 1
@@ -188,7 +189,7 @@ func observe(before: Dictionary, after: Dictionary, actor_id: String, body: Dict
 ## Called once per active simulation step, after the village has updated.
 func observe_supply(village: Dictionary, body: Dictionary, campaign: Dictionary, phase: int, delta: float) -> Dictionary:
 	var result: Dictionary = {"changed": false, "rewards": []}
-	if phase != 1 or not is_finite(delta) or delta <= 0.0 or not EconomyProgress.supported(village) or not Tribe.validate(village, body, campaign).is_empty() or not matches_campaign(campaign):
+	if phase != 1 or not is_finite(delta) or delta <= 0.0 or not EconomyProgress.supported(village) or not _village_problem(village, body, campaign).is_empty() or not matches_campaign(campaign):
 		return result
 	# Work observations own the resident identities and initialize from real counters.
 	var entry: Dictionary = data["villages"].get(village["id"], {})
@@ -282,6 +283,7 @@ static func validate(value: Variant) -> String:
 		if not project is Dictionary:
 			return "Ungültiger Arbeitsnachweis."
 		if not project.is_empty():
+			if project.has("attempt_id") and not Tribe.Economy.text_id(project.attempt_id): return "Ungültiger Bauversuch."
 			if project.get("id") not in ["tool:0", "hut:0", "hut:1", "garden:0"] or not Tribe.number(project.get("progress"), 0, 20) or not _valid_contributions(project.get("contributors"), unique, 1):
 				return "Ungültige Gemeinschaftsbaustelle."
 	var earned: int = 0
@@ -312,3 +314,7 @@ static func _valid_contributions(value: Variant, members: Dictionary, maximum: i
 		if not members.has(id) or not Rules.is_integer(value[id], 1, maximum):
 			return false
 	return true
+
+static func _village_problem(village: Dictionary, body: Dictionary, campaign: Dictionary) -> String:
+	var id: String = str(body.get("_settlement_id", ""))
+	return Tribe.validate(village, body, campaign) if id.is_empty() else Tribe.validate_settlement(village, body, campaign, id)

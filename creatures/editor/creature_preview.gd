@@ -20,6 +20,7 @@ func _ready() -> void:
 
 
 func set_blueprint(new_blueprint: Dictionary) -> void:
+	if not Blueprint.Contract.version_error(new_blueprint, "creature").is_empty(): return
 	blueprint = new_blueprint
 	rebuild()
 
@@ -30,6 +31,7 @@ func set_selected_part_index(new_selected_part_index: int) -> void:
 
 
 func rebuild() -> void:
+	if not Blueprint.Contract.version_error(blueprint, "creature").is_empty(): return
 	_clear_preview()
 
 	if blueprint.is_empty():

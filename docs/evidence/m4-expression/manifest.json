@@ -1,0 +1,48 @@
+{
+  "package": "M4-EXPRESSION",
+  "base": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+  "local_source_commit": "1d8a9e9e3776b80d9d9d5e6063c9ebf50980f360",
+  "published_source_commit": "f425744148c242ec55d64f2a55f989655501e1e0",
+  "identical_source_tree": "a3a1ee9cccf257b718ff2d3ca9c608bcc5515022",
+  "environment": {
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "user_data": "isolated synthetic data via tools/validation_support.py",
+    "mode": "Linux/headless"
+  },
+  "source_sha256": {
+    "creatures/ai/foraging_brain.gd": "2ba187837b8b006af47f975bee7444ce6ef1370bf2cbf6a76163f7c1a9b42125",
+    "creatures/ai/wildlife_brain.gd": "4ed9eda34f780504e32492077a56ff958408cffd83030f5d800de5a6e096dc11",
+    "creatures/behavior/creature_emotion.gd": "af7f06fd7ffbe7d16e672a4b18f68cd2a4e35c535acfceac15aa7e8bf4e2bc7b",
+    "creatures/behavior/creature_emotion.gd.uid": "ccf730bfa43e1210639fe3e5e87459b4ed1920ca799b6d726ed9b4599d0d3934",
+    "creatures/behavior/creature_expression_driver.gd": "85f65be84d3acd51eaf5e4c4f259a9c9e4500c0a3c74acb97180765099b41abc",
+    "creatures/behavior/creature_expression_driver.gd.uid": "66f30caca9b60c9cb0d7fb9c88014487757bd51a35cb77cda2076e2df8101105",
+    "creatures/behavior/creature_social_component.gd": "a61444cd66e5cc8100868ffbd8f670ba8bc324ef91c39785c81fc043aee61f51",
+    "creatures/behavior/player_behavior_controller.gd": "3a1b65fdaefa25dc6d247b71b4a143a99fe31f2bf5796bf55f4756428b1852ca",
+    "creatures/runtime/creature_expression_pose.gd": "f463598dcf60a9724e3f3b6972cca48fd27b66485280baac31772141b70e942a",
+    "creatures/runtime/creature_expression_pose.gd.uid": "e4d7ad50b1af974ffe36196c019f0348d7bce2de68353715e94d3dc99cfdd068",
+    "creatures/runtime/creature_runtime_preview.gd": "9385ef625c66ce60d99f4a058b8d36389e78bec35be06fdfcd92be75deb97c59",
+    "creatures/runtime/creature_sculpt_motion.gd": "6ef231d830448a2c97a03894c58fed0cfef12f3555609d3890bfc595a3dcf5f1",
+    "creatures/wildlife/procedural_wildlife_v7.gd": "f6317496102f6356341ede60c64b5eefad0f7e4aee6929ecd55ee449d4c8f081",
+    "docs/WORK_M4_EXPRESSION.md": "b38fbca93d27a557b1c6f66f67a3a3ebcb08775b4b32fc5865d190381139f504",
+    "localization/catalog.json": "d2f2b858264ba29586afa8a2dd488458e2bbe09ef8d42253912b24ac7ab6c71e",
+    "localization/de.po": "f235d9e0fbcac4da19fd46dd135e9a4fe831f3bac81998f96f775c9d5f7321f0",
+    "localization/en.po": "4b7ce9f0fa5c2a34cebd53fd781c3e99494420871460712e87e23352ba475608",
+    "tests/creature_expression_test.gd": "366962ad62a9f6c70dd77ba68b967a199cf92861ceba711cf1a53ba4cf916e0f",
+    "tools/export_creature_expressions.gd": "25b07a34d9c94406850d1cfce3af63073cfb69f9a2f885588de77aeb6b9c7537",
+    "tools/render_creature_expressions.py": "e8124367784d3943b3390e318c470710738b7d9128cc87a1a4ab5e760a1cba35",
+    "tools/validation/contracts.json": "22c22b73316d41ebf115eee9ae2570fb2f5e38078423331280fdb1a5fdf428ca",
+    "world/domestication/campaign_animal.gd": "27a6440d5f457034d270d2d2f9c21d2ac6fd533d64af9fd806a5c8be90adef85"
+  },
+  "preview": {
+    "kind": "CPU projection of posed Godot Mesh/MultiMesh triangles",
+    "source_json_sha256": "7359fca1cfcc75368fc2c2e2ff74925e101cb936f13c6116937b867cb202ba7c",
+    "png_sha256": "889e16bd3c8de279430816fa0d149f94aab1b30e0c4187bd184ee77879c09d9f",
+    "native_rendered": false
+  },
+  "limits": [
+    "No native display: sandbox denies local socket creation",
+    "No Windows export or target PC/FPS acceptance",
+    "No full integration suite"
+  ]
+}

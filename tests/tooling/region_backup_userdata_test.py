@@ -12,6 +12,7 @@ from unittest.mock import patch
 PROJECT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT))
 from tools import region_backup_userdata as full
+from tools import region_retention as retention
 from tools.validation_support import isolated_env, validation_editor
 
 
@@ -201,6 +202,11 @@ class NativeUserdataBackupTest(unittest.TestCase):
             created = run("region_backup_probe", "create", source_env)
             run("userdata_backup_probe", "create", source_env)
             source = Path(created["regions"]).parents[1]
+            plan = base / "retention-plan"
+            generation = retention.plan_retention(source, plan)
+            self.assertEqual(retention.verify_retention(source, plan), generation)
+            self.assertGreater(generation["stats"]["reachable_blobs"], 2400)
+            self.assertFalse(generation["deletion_allowed"])
             archive = base / "archive"
             stats = full.export_userdata(source, archive)
             self.assertEqual(full.verify_userdata(archive), stats)
@@ -208,11 +214,14 @@ class NativeUserdataBackupTest(unittest.TestCase):
             restored_env = isolated_env(base / "restored")
             restored = Path(restored_env["XDG_DATA_HOME"]) / "godot/app_userdata/Voxelverse"
             shutil.copytree(archive / full.PAYLOAD, restored)
+            # Identical bytes at another location are the same generation.
+            # Recheck before the native reader writes its own logs/settings.
+            self.assertEqual(retention.verify_retention(restored, plan), generation)
             region_result = run("region_backup_probe", "verify", restored_env)
             lab_result = run("userdata_backup_probe", "verify", restored_env)
             self.assertEqual(region_result["campaign_id"], created["campaign_id"])
             self.assertGreaterEqual(region_result["checked_regions"], 2400)
-            print("ARCH13_USERDATA_NATIVE_RESULT", json.dumps({"archive": stats,
+            print("ARCH13_USERDATA_NATIVE_RESULT", json.dumps({"archive": stats, "retention": generation["stats"],
                   "regions": region_result, "labs": lab_result}), flush=True)
 
 

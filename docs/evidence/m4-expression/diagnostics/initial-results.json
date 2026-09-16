@@ -1,0 +1,56 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_expression_test",
+    "creature_part_articulation_test",
+    "creature_behavior_gameplay_test",
+    "domestication_campaign_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.118
+    },
+    {
+      "name": "creature_expression_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 7.397,
+      "contract": "wildlife"
+    },
+    {
+      "name": "creature_part_articulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.26,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.664,
+      "contract": "wildlife"
+    },
+    {
+      "name": "domestication_campaign_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 37.412,
+      "contract": "domestication"
+    }
+  ]
+}

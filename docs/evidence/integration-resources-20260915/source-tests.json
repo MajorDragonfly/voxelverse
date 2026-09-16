@@ -1,0 +1,1626 @@
+{
+  "registered_count": 179,
+  "resolved_pass_count": 179,
+  "initial_failures": [
+    "creature_parts_studio_test",
+    "egg_species_campaign_test"
+  ],
+  "corrected_reruns": {
+    "creature_parts_studio_test": "studio-integration-corrected",
+    "egg_species_campaign_test": "egg-integration-corrected"
+  },
+  "late_visual_correction": "resource-winding-negative proves the old face order wrong against Godot BoxMesh; resource-winding-corrected and final release-delta checks verify the fixed order, restart, home and campaign.",
+  "checks": [
+    {
+      "name": "adaptive_planet_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.399,
+      "contract": "surface",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "asset_pipeline_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.671,
+      "contract": "terrain_art",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "atlas_paging_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 26.618,
+      "contract": "discovery_map",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "atlas_places_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 20.049,
+      "contract": "discovery_map",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "audio/animal_action_feedback_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.295,
+      "contract": "audio",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "audio/audio_expansion_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 32.771,
+      "contract": "audio",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "audio/audio_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.801,
+      "contract": "audio",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "audio/audio_scene_lifecycle_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.579,
+      "contract": "audio",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "audio/audio_shutdown_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.084,
+      "contract": "audio",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "audio/creature_audio_budget_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.556,
+      "contract": "audio",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "audio/creature_audio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.003,
+      "contract": "audio",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "audio/foley_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.878,
+      "contract": "audio",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "audio/interface_audio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.986,
+      "contract": "audio",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "audio/music_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 29.509,
+      "contract": "audio",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "audio/runtime_shutdown_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.082,
+      "contract": "audio",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "audio/spherical_water_audio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.375,
+      "contract": "audio",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "behavior_progression_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.182,
+      "contract": "home_progression",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "behavior_skill_tree_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.746,
+      "contract": "home_progression",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.78,
+      "contract": "blueprints",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "body_identity_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.987,
+      "contract": "campaign",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "body_travel_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 140.616,
+      "contract": "campaign",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "campaign_foundation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.953,
+      "contract": "campaign",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "campaign_scaling_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.256,
+      "contract": "regions_simulation",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "community_blueprint_package_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.029,
+      "contract": "blueprints",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "coordinate_persistence_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.442,
+      "contract": "campaign",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "creature_animal_feet_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.27,
+      "contract": "creature_body",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "creature_animation_continuity_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.894,
+      "contract": "creature_body",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "creature_behavior_gameplay_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.357,
+      "contract": "wildlife",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "creature_body_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.437,
+      "contract": "creature_body",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "creature_body_fit_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 15.21,
+      "contract": "creature_body",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "creature_builder_v7_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.026,
+      "contract": "creature_body",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "creature_design_library_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.732,
+      "contract": "blueprints",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "creature_editor_v7_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.869,
+      "contract": "creature_body",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "creature_foot_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.228,
+      "contract": "creature_body",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "creature_hand_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.161,
+      "contract": "creature_body",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "creature_joint_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.741,
+      "contract": "creature_body",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "creature_library_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 31.212,
+      "contract": "blueprints",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "creature_mouth_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.36,
+      "contract": "creature_body",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "creature_part_articulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.988,
+      "contract": "creature_body",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.053,
+      "contract": "creature_body",
+      "evidence": "studio-integration-corrected"
+    },
+    {
+      "name": "creature_scan_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.787,
+      "contract": "discovery_map",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "creature_seat_fit_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.003,
+      "contract": "creature_body",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "creature_snout_family_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.252,
+      "contract": "creature_body",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "creature_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.058,
+      "contract": "creature_body",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "creature_trunk_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.61,
+      "contract": "creature_body",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "creature_v5_smoke_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.037,
+      "contract": "creature_body",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "development_path_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.437,
+      "contract": "home_progression",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "discovery_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.91,
+      "contract": "discovery_map",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "distant_forest_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.951,
+      "contract": "terrain_art",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "domestic_body_evidence_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 54.242,
+      "contract": "domestic_fauna",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "domestic_fauna_catalog_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 55.572,
+      "contract": "domestic_fauna",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "domestic_fauna_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.119,
+      "contract": "discovery_map",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "domestic_fauna_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.533,
+      "contract": "domestic_fauna",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "domestic_habitat_recovery_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.703,
+      "contract": "domestic_fauna",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "domestic_habitat_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.11,
+      "contract": "domestic_fauna",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "domestic_surface_catalog_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.779,
+      "contract": "domestic_fauna",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "domestic_surface_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 43.822,
+      "contract": "domestic_fauna",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "domestication_campaign_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.209,
+      "contract": "domestication",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "domestication_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.813,
+      "contract": "domestication",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "domestication_d1_adapter_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.663,
+      "contract": "domestication",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "domestication_lab_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.365,
+      "contract": "domestication",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "domestication_state_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.956,
+      "contract": "domestication",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "domestication_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 59.827,
+      "contract": "domestication",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "drainage_network_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.756,
+      "contract": "terrain_art",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "editor_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 33.93,
+      "contract": "frontend_locale",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "egg_husbandry_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 20.93,
+      "contract": "village",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "egg_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.081,
+      "contract": "village",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "egg_species_campaign_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 53.33,
+      "contract": "domestic_fauna",
+      "evidence": "egg-integration-corrected"
+    },
+    {
+      "name": "egg_species_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.315,
+      "contract": "domestic_fauna",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "encounter_archive_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.309,
+      "contract": "regions_simulation",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "environment_cluster_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.154,
+      "contract": "terrain_art",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "environment_playtest_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 17.345,
+      "contract": "terrain_art",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "environment_production_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.21,
+      "contract": "terrain_art",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "expedition_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.849,
+      "contract": "expedition_design",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "far_simulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.638,
+      "contract": "regions_simulation",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "frontend_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 70.084,
+      "contract": "frontend_locale",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "frozen_body_serialization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.652,
+      "contract": "campaign",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "galaxy_catalog_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.095,
+      "contract": "campaign",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "galaxy_visits_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 26.762,
+      "contract": "campaign",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "gameplay_acceptance_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.653,
+      "contract": "home_progression",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "home_group_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 24.567,
+      "contract": "home_progression",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "home_group_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 15.749,
+      "contract": "home_progression",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "home_group_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.718,
+      "contract": "home_progression",
+      "evidence": "resource-winding-corrected"
+    },
+    {
+      "name": "hud_layout_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 21.493,
+      "contract": "frontend_locale",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "input_preferences_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.677,
+      "contract": "frontend_locale",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "interface_task7_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.956,
+      "contract": "discovery_map",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "journal_paging_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.621,
+      "contract": "discovery_map",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "large_planet_geometry_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.877,
+      "contract": "surface",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "large_planet_lab_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 21.797,
+      "contract": "surface",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "large_planet_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 59.256,
+      "contract": "surface",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "living_fauna_archive_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 40.589,
+      "contract": "surface",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "living_planet_entry_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 34.431,
+      "contract": "surface",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "living_planet_map_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 19.661,
+      "contract": "discovery_map",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "living_planet_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.82,
+      "contract": "surface",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "living_surface_materials_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.44,
+      "contract": "surface",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.016,
+      "contract": "frontend_locale",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "menu_input_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 29.582,
+      "contract": "frontend_locale",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "meta_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.143,
+      "contract": "campaign",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "minimap_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.209,
+      "contract": "discovery_map",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.079,
+      "contract": "blueprints",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "neighbor_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.056,
+      "contract": "neighbors",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "onboarding_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.674,
+      "contract": "frontend_locale",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "owned_animal_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.707,
+      "contract": "discovery_map",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "owned_animal_register_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.728,
+      "contract": "discovery_map",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "performance_measurement_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.676,
+      "contract": "regions_simulation",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "phase_handoff_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.159,
+      "contract": "campaign",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "planet_diversity_v9_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.586,
+      "contract": "terrain_art",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "planet_generation_acceptance_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.918,
+      "contract": "terrain_art",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "planet_scale_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.695,
+      "contract": "surface",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "planet_sphere_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.831,
+      "contract": "surface",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "planet_sphere_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 50.105,
+      "contract": "surface",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "planet_streaming_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.473,
+      "contract": "surface",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "planet_transition_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 24.556,
+      "contract": "surface",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "population_register_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.957,
+      "contract": "regions_simulation",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "radial_step_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 27.338,
+      "contract": "surface",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "region_store_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.849,
+      "contract": "regions_simulation",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "regional_transport_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.4,
+      "contract": "regions_simulation",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "research_goals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.236,
+      "contract": "discovery_map",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "resource_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.878,
+      "contract": "village",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "resource_visuals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.288,
+      "contract": "terrain_art",
+      "evidence": "resource-winding-corrected"
+    },
+    {
+      "name": "runtime_geometry_batch_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.685,
+      "contract": "creature_body",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "save_participants_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.38,
+      "contract": "campaign",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "save_slots_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.876,
+      "contract": "campaign",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "settlement_collection_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.806,
+      "contract": "village",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "settlement_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 220.405,
+      "contract": "village",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "settlement_save_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.282,
+      "contract": "village",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "shipyard_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.602,
+      "contract": "expedition_design",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "skills_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.992,
+      "contract": "home_progression",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "species_comparison_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.796,
+      "contract": "discovery_map",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "spherical_campaign_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.978,
+      "contract": "campaign",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "spherical_campaign_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 59.838,
+      "contract": "campaign",
+      "evidence": "resource-winding-corrected"
+    },
+    {
+      "name": "spherical_creature_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 42.98,
+      "contract": "spherical_gameplay",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "spherical_developed_migration_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 57.444,
+      "contract": "campaign",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "spherical_egg_production_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 444.326,
+      "contract": "spherical_gameplay",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "spherical_gameplay_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 438.175,
+      "contract": "spherical_gameplay",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "surface_adapter_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.677,
+      "contract": "surface",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "surface_adapter_entry_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.796,
+      "contract": "surface",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "surface_adapter_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 40.458,
+      "contract": "surface",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "surface_population_budget_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.087,
+      "contract": "surface",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "surface_scale_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.384,
+      "contract": "surface",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "surface_support_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 64.798,
+      "contract": "surface",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "terrain_lookahead_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 35.051,
+      "contract": "surface",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "terrain_transition_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.027,
+      "contract": "surface",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.464,
+      "contract": "village",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "tribal_age_economy_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 106.333,
+      "contract": "village",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "tribal_age_growth_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.575,
+      "contract": "village",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "tribal_age_growth_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 187.853,
+      "contract": "village",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "tribal_age_housing_recovery_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.82,
+      "contract": "village",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.472,
+      "contract": "village",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "tribal_age_husbandry_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 139.787,
+      "contract": "village",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "tribal_age_supply_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 36.435,
+      "contract": "village",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "tribal_age_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 70.706,
+      "contract": "village",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "tribal_age_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 28.419,
+      "contract": "village",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "tribal_economy_progress_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.722,
+      "contract": "home_progression",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "tribal_economy_progress_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 108.703,
+      "contract": "home_progression",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "tribal_neighbors_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.625,
+      "contract": "neighbors",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "tribal_neighbors_generated_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 45.423,
+      "contract": "neighbors",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "tribal_neighbors_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 38.465,
+      "contract": "neighbors",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "tribal_progression_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.786,
+      "contract": "home_progression",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "tribal_progression_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 76.03,
+      "contract": "home_progression",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "tribe_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.678,
+      "contract": "frontend_locale",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "ui_visual_refresh_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.101,
+      "contract": "frontend_locale",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "underwater_view_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.473,
+      "contract": "terrain_art",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "village_navigation_budget_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.774,
+      "contract": "regions_simulation",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "village_work_observation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.972,
+      "contract": "village",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "village_work_snapshot_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.942,
+      "contract": "village",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "water_continuity_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 18.483,
+      "contract": "terrain_art",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "water_depth_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.504,
+      "contract": "terrain_art",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "wildlife_ai_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 25.569,
+      "contract": "wildlife",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "wildlife_ai_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 16.926,
+      "contract": "wildlife",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "wildlife_drinking_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 41.177,
+      "contract": "wildlife",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "wildlife_drinking_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 22.357,
+      "contract": "wildlife",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "wildlife_foraging_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 21.586,
+      "contract": "wildlife",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "wildlife_foraging_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.444,
+      "contract": "wildlife",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "world_evolution_v2_ci_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.037,
+      "contract": "terrain_art",
+      "evidence": "full-source-2"
+    },
+    {
+      "name": "world_layered_v7_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.932,
+      "contract": "terrain_art",
+      "evidence": "full-source-3"
+    },
+    {
+      "name": "world_map_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.01,
+      "contract": "discovery_map",
+      "evidence": "full-source-0"
+    },
+    {
+      "name": "world_map_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.79,
+      "contract": "discovery_map",
+      "evidence": "full-source-1"
+    },
+    {
+      "name": "world_runtime_continuity_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.629,
+      "contract": "terrain_art",
+      "evidence": "full-source-2"
+    }
+  ]
+}

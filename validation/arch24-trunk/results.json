@@ -1,0 +1,153 @@
+{
+  "packet": "ARCH-24-TRUNK",
+  "base_commit": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "implementation_commit": "6fbfa36ca1ce0536c878bb969285f0d99c38b668",
+  "implementation_tree": "abd09bdbddd5deda8835b54a03c65546d162bcf6",
+  "clean_after_commit": true,
+  "test_worktree": "Tests ran on base plus identified changes before committing. Gameplay sources were unchanged across all runs. Only the new test setup was corrected between runs; review tooling/docs were added afterwards.",
+  "source_sha256": {
+    "core/discovery/discovery_records.gd": "a3d92475e3048812de1d34f47959d5dbc0ba556c3bae777fd4a383e3b99eb405",
+    "creatures/catalog/creature_mouth_catalog.gd": "ac54de52e3c77fb0e783ea1cdd672fdadc75ae266492f24d69b5407b35766772",
+    "creatures/editor/creature_anatomy.gd": "e014f3080135490b50f32b8c71cf163075ff9734039246dd549122c96190c01a",
+    "creatures/editor/creature_editor_studio.gd": "81cf4ccae4c66a8aa4e03d64fab2c14a39373abc1dddc775c238a1b6ea57916c",
+    "creatures/editor/creature_mouth_geometry.gd": "3142706d9d6f5a70dd7f4461793dd177a0e0363f515da228ff6e1fbc1970e79d",
+    "creatures/editor/creature_part_geometry.gd": "b656d0620d5ef04417f038e3fb317ec03a30695186d11e421f4b1b316512fec7",
+    "creatures/editor/creature_part_library.gd": "479924c9192060a9fccd6881c42ae7912cefafdded996504f1300c3d94f9d941",
+    "creatures/editor/creature_surface_sockets_v7.gd": "80475f919c50770a0da592643eaf7175040d6cd6b57e09ebda4d3f137bcf61f4",
+    "creatures/runtime/adaptive_locomotion_animator.gd": "c652ccc0cb6457bf63a648029f86b4f90edc852e283a8691eed6017a00a2488d",
+    "creatures/runtime/creature_sculpt_motion.gd": "fb359ed67e0ff814b65a47df78b2436a84cfe159fe57741f850ce1bede3fb46f",
+    "tests/creature_foot_provider_test.gd": "b860c10ec12f70aeec4affef6cd97dfdd82bc60bde60c59c07d478fdcd50adc9",
+    "tests/creature_parts_studio_test.gd": "5b39052fdba879a3cfdfa477a11a10895c680256734dd54ca7b342a0871120da",
+    "tests/creature_trunk_provider_test.gd": "3adb031c40bccfd2013fdb3608f807b3db69ac3040e53d142a9de91df95918f4",
+    "tools/export_trunk_review.gd": "b600dd5edbdb4f826bfcbd5d503095eeec672d3bd0f768738b3126c1e2522b18",
+    "tools/render_animal_foot_meshes.py": "fe440e49c78ef67bb3a851db74c7dbff46d33ba2e4d985da1833fc8d66780605",
+    "tools/validation/contracts.json": "c42c314d8d5b083aeda5aa8ce0c3cc1ccfd8f34d3ca8c86702faca601b782248"
+  },
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux; headless; isolated user data through tools/validation_support.py",
+  "commands": [
+    "python3 tools/validate_godot.py --godot /workspace/scratch/391d67669cd0/godot-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64 --tests creature_trunk_provider_test creature_mouth_provider_test creature_parts_studio_test creature_body_contract_test blueprint_contract_test community_blueprint_package_test discovery_journal_test research_goals_test --skip-main --output /workspace/scratch/1b123da1f09f/trunk-validation",
+    "python3 tools/validate_godot.py --godot /workspace/scratch/391d67669cd0/godot-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64 --tests creature_trunk_provider_test --skip-main --skip-import --output /workspace/scratch/1b123da1f09f/trunk-final-check",
+    "python3 tools/validate_godot.py --godot /workspace/scratch/391d67669cd0/godot-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64 --tests creature_animation_continuity_test --skip-main --skip-import --output /workspace/scratch/1b123da1f09f/trunk-animation-check"
+  ],
+  "latest_checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.117,
+      "log": "logs.zip/trunk-animation-check/source_contracts.log"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.844,
+      "log": "logs.zip/trunk-validation/import.log"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.823,
+      "log": "logs.zip/trunk-validation/art_sources.log"
+    },
+    {
+      "name": "creature_trunk_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.792,
+      "contract": "creature_body",
+      "log": "logs.zip/trunk-final-check/creature_trunk_provider_test.log"
+    },
+    {
+      "name": "creature_mouth_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.305,
+      "contract": "creature_body",
+      "log": "logs.zip/trunk-validation/creature_mouth_provider_test.log"
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.453,
+      "contract": "creature_body",
+      "log": "logs.zip/trunk-validation/creature_parts_studio_test.log"
+    },
+    {
+      "name": "creature_body_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.146,
+      "contract": "creature_body",
+      "log": "logs.zip/trunk-validation/creature_body_contract_test.log"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.278,
+      "contract": "blueprints",
+      "log": "logs.zip/trunk-validation/blueprint_contract_test.log"
+    },
+    {
+      "name": "community_blueprint_package_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.241,
+      "contract": "blueprints",
+      "log": "logs.zip/trunk-validation/community_blueprint_package_test.log"
+    },
+    {
+      "name": "discovery_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.033,
+      "contract": "discovery_map",
+      "log": "logs.zip/trunk-validation/discovery_journal_test.log"
+    },
+    {
+      "name": "research_goals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.579,
+      "contract": "discovery_map",
+      "log": "logs.zip/trunk-validation/research_goals_test.log"
+    },
+    {
+      "name": "creature_animation_continuity_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.647,
+      "contract": "creature_body",
+      "log": "logs.zip/trunk-animation-check/creature_animation_continuity_test.log"
+    }
+  ],
+  "godot_tests_passed": 9,
+  "initial_test_failures": "New test initially treated complexity as gameplay stats, assumed mouth at index 0 (eyes), and bypassed the existing editor attachment migration. Corrected test setup now uses the real restore path; full earlier logs are retained. No production logic changed to mask these failures.",
+  "visual_review": {
+    "image": "art/review/arch24_trunk/trunk_review.png",
+    "source": "tools/export_trunk_review.gd; actual shared recipe and complete CreatureRuntimePreview meshes",
+    "method": "Matplotlib CPU triangle rendering; inspected front/side views",
+    "native_renderer_acceptance": false
+  },
+  "limits": [
+    "No global suite or full campaign/export rerun locally",
+    "No native renderer or target-PC FPS acceptance",
+    "Independent trunk joints/grasping and procedural distribution remain separate work"
+  ]
+}

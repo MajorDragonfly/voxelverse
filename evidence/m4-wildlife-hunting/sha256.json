@@ -1,0 +1,18 @@
+{
+  "art_sources.log": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+  "capture_world.py": "78c4ad16d227a68d2ef6c1f461e433d4a492d350ad23bef3635a8f3e4aaab78d",
+  "contracts.json": "4c48e6e98f7fde8457d3caaf6df43fd824fe49dbb41f4f161ff4d8bc7f2cc815",
+  "creature_behavior_gameplay_test.log": "03c20d1112632b8e715d1e1d2a8e3819253efb609e205c0ea9b0e3d4f750e69c",
+  "import.log": "8a744e62ca35bf60b4bfaad73d313cd057a8f6eec8dbd00a74ed2f43e16b6b2f",
+  "results.json": "325dc65de9f39122d6db15bb47b409144eae00c5bc7ad6c55238b0e1e26516f5",
+  "source-manifest.jsonl.gz": "ca7a233200e120f51e0deba051821fa20c7d0823d42551927d113b1ac4afd477",
+  "source_contracts.log": "63c1d9b4e3ab10bb293127c750eadb8b1f4b460569f761becf5b22949b6a1b97",
+  "wildlife_ai_test.log": "4e40ea4dd5fa5178466b1c0c82871f4179e39b3049381d9734b5024308e18401",
+  "wildlife_drinking_test.log": "ecc0d0bbd9460eb90f03cf2fa5491786bfa1b32cf1f06aad3f9e405a0a61b722",
+  "wildlife_foraging_test.log": "70d13913d338fc53074f102bc6198a902ef37b31f3a73c557f75984f3918f58d",
+  "wildlife_hunting_test.log": "c767aff00d5b6d9f0d155b239d209f0996bb9bf739eb7b8ce8e08baf7dd036a0",
+  "wildlife_hunting_world_test.log": "a49f45e26eac632768cd4f76f04982fbc7afd04f0eff9f30e65c99ff8f35ca09",
+  "wildlife_social_play_test.log": "fce1b9520b6c5df9d8d68b202854ec40184c5f66eb72d08ecafe2ab320185b18",
+  "world-complete-report.json": "4c46db87e99d64b4672e4a61075f901dd3fb570de184ea9308c71358d9fdfc04",
+  "world-complete.log": "dbb6eef58800363d5c4509822ca0cfa3e8330fa92981fe5754058dbc3501979a"
+}

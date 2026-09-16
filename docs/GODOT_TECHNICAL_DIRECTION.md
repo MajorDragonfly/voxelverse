@@ -3,6 +3,17 @@
 Bewertung vom 15. September 2026 auf `main` `c8b83f4` (PR #90). Statische
 Codeprüfung und vorhandene Messnachweise; kein neuer GPU-/Windows-Benchmark.
 
+## Fortschreibung nach der zweiten Integrationsrunde
+
+Der gemeinsame Kandidat #93–108 ergänzt die erste aufgeteilte Publikation,
+Aufbewahrungsplanung, die Begegnungs-/Labortierarchive und zwei produktive Orte.
+Die unten datierten offenen Punkte sind daher teilweise geliefert. Konkret
+verbleiben einzelne Engineaufrufe/Coverwechsel, Schreiberkoordination und spätere
+Bereinigung, Arbeitsplatzinstanzen innerhalb eines Ortes sowie Warenwege zwischen
+Lagern. Die Integration korrigiert zusätzlich die Zuordnung des separaten
+Labortier-Blobverzeichnisses und ersetzt den Mesh-/Colliderneubau bei Ernte durch
+eine Fruchtsichtbarkeit. [Aktueller Umfang](INTEGRATION_2026-09-15_RESOURCES.md).
+
 ## Entscheidung
 
 **Godot bleibt die Engine.** Der vereinbarte Singleplayer-Umfang mit festen

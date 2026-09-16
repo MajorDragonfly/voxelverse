@@ -1,0 +1,81 @@
+{
+  "packet": "ARCH-29-CHECK-PLAN",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "source_commit": "167b4df8acb4b8b65f8b1de1a89a409b8ae8d0c2",
+  "source_tree": "e3a1f74c42bd6e6a98451a566949b020cd6a0b4f",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux headless; native Windows run not performed",
+  "source_note": "Implementation committed cleanly; detached verification worktree at the same commit. Fixtures appended one documentation line or one comment to an existing registered test and were restored after execution. Exact fixture file hashes are in the recorded change plans.",
+  "checks": [
+    {
+      "name": "validation tooling",
+      "passed": true,
+      "tests": 34,
+      "command": "python3 -m unittest discover -s tests/tooling -p 'validation*_test.py' -v"
+    },
+    {
+      "name": "packet briefs",
+      "passed": true,
+      "tests": 4,
+      "command": "python3 -m unittest discover -s tests/tooling -p 'work_packet_test.py' -v"
+    },
+    {
+      "name": "documentation execution",
+      "passed": true,
+      "godot_started": false,
+      "command": "python3 tools/validate_godot.py --changed-since HEAD --godot intentionally-missing-godot --output OUTPUT",
+      "result": "documentation/results.json"
+    },
+    {
+      "name": "targeted native execution",
+      "passed": true,
+      "command": "python3 tools/validate_godot.py --changed-since HEAD --godot GODOT --output OUTPUT",
+      "result": "targeted/results.json",
+      "checks": [
+        "source_contracts",
+        "import",
+        "art_sources",
+        "performance_measurement_test"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "file": "audio-plan.json",
+      "selected": 20,
+      "registered": 165,
+      "executed": false
+    },
+    {
+      "file": "shared-plan.json",
+      "selected": 165,
+      "registered": 165,
+      "executed": false
+    }
+  ],
+  "limits": [
+    "Path rules are conservative domain mappings, not a complete dependency graph.",
+    "Integration CI remains full; no full suite, export, graphics, target-PC or FPS claim.",
+    "No saved plans are loaded and no previous test results are reused automatically.",
+    "Implementation source is fixed; fixture comments deliberately make the verification worktree dirty and are identified by the plan."
+  ],
+  "evidence_sha256": {
+    "audio-plan.json": "2dc922035f926b7f0886483bae7cbcc42f783f08b32c60a0ec1d9939f00165ff",
+    "documentation-runner.log": "7e60d2509bf4f32376dbeddb0a0ec158d470bd514dd8c6cb6b5d647140ca2e5f",
+    "arch29-python-validation.log": "5ec6895350157964308194741e4a0477911de79b894cd846c1d14bc27d2e57a6",
+    "targeted-runner.log": "1ebbe708683648c35b5a51cbd37f5aa9502e290e630f912674aad2ec49acf6f9",
+    "arch29-python-packets.log": "028f209f4dad85fc269eb9f345478074c55cf9f3f63a9060213544c3e0abde7f",
+    "shared-plan.json": "52468fcc0787b438a38257affa0be3e7add81c31d821f8a9d15cca98e4cca391",
+    "documentation/contracts.json": "c74dd79338f4be56828b9990f9f8ec5dfc67412f6676d688e1c142d73831136f",
+    "documentation/results.json": "ef2fd67f533a1a2c5c065da9f749f95b3e82bb0555366a5928030f2b4d4d6351",
+    "documentation/source_contracts.log": "9dae093ce90aa2c26425b12f6fa78e74f1fdf4fe5e5c978cd48b4f8a9861ee4f",
+    "targeted/contracts.json": "c74dd79338f4be56828b9990f9f8ec5dfc67412f6676d688e1c142d73831136f",
+    "targeted/art_sources.log": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+    "targeted/performance_measurement_test.log": "12601de465d9ad3746aa02745885949c1184e32454627327a26ec6008fad2bff",
+    "targeted/import.log": "1b358c6e6f6f837e6e28092b0bb034214bc3dbe1f289877f83f3e6ed3b84c828",
+    "targeted/results.json": "159780ad130f6e46265ea4168c6580624fd692b0e1895981256e94ca421c903d",
+    "targeted/source_contracts.log": "9dae093ce90aa2c26425b12f6fa78e74f1fdf4fe5e5c978cd48b4f8a9861ee4f"
+  },
+  "raw_archive": "raw-evidence.tar.gz",
+  "archive_sha256": "5340e47ee98e37423951eb481da6f719a40250582ebc9cb9dcba91855bc4858c"
+}

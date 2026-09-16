@@ -3,10 +3,11 @@ extends RefCounted
 const Base = preload("res://world/surface/surface_lab_store.gd")
 const Atomic = preload("res://core/persistence/atomic_json.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
-const SCHEMA: int = 3
+const SCHEMA: int = 4
 const GENERATION: String = "living_planet_v1"
 const Domestic = preload("res://world/fauna/domestication/domestic_surface_store.gd")
 const Atlas = preload("res://core/map/exploration_atlas.gd")
+const Fauna = preload("res://world/surface/living_fauna_archive.gd")
 const PATH: String = "user://living_planet_v1.json"
 
 
@@ -27,25 +28,14 @@ static func valid(data: Dictionary) -> bool:
 	for id: String in data.bodies:
 		# Header 3 adds maps; the D1.2 payload remains the reviewed header-2 contract.
 		if not Domestic.valid(data.bodies[id], system.bodies[id], mini(int(data.schema), 2)): return false
-		var fauna: Variant = data.bodies[id].get("fauna")
-		if not fauna is Dictionary or fauna.size() > 256:
-			return false
-		for key: Variant in fauna:
-			if not key is String or not key.begins_with(id + ":land1:") or not key.ends_with(":animal"):
-				return false
-			var state: Variant = fauna[key]
-			if not Base.pose_valid(state, id) or not state.get("returning") is bool:
-				return false
-			if not Cube.valid(state.get("home"), id) or not Cube.valid(state.get("goal"), id):
-				return false
-			if absf(state.home.height) > 20000.0 or absf(state.goal.height) > 20000.0:
-				return false
-			if not state.get("design") is Dictionary or state.design.get("type") != "Dictionary" or JSON.stringify(state.design).length() > 262144:
-				return false
-			var design: Variant = JSON.to_native(state.design, false)
-			if not design is Dictionary or design.get("version") != 7 or not design.get("body") is Dictionary \
-				or not design.get("parts") is Array or not design.get("design_id") is String:
-				return false
+		var record: Dictionary = data.bodies[id]
+		if record.has("fauna_archive"):
+			if int(data.schema) < 4 or record.has("fauna") or not Fauna.manifest_valid(record.fauna_archive, id): return false
+		else:
+			var fauna: Variant = record.get("fauna")
+			if not fauna is Dictionary or fauna.size() > 256: return false
+			for key: Variant in fauna:
+				if not Fauna.state_valid(key, fauna[key], id): return false
 	return JSON.stringify(data).length() <= 16777216
 
 

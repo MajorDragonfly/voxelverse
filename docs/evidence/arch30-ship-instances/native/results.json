@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "source": {
+    "commit": "843aa6858b8465a3e1df6d5b7e97c9be0aebab6b",
+    "tracked_worktree_dirty": false
+  },
+  "source_after": {
+    "commit": "843aa6858b8465a3e1df6d5b7e97c9be0aebab6b",
+    "tracked_worktree_dirty": false
+  },
+  "command": [
+    "/workspace/scratch/2c2866d70564/godot",
+    "--path",
+    "/workspace/scratch/2c2866d70564/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/fleet_runtime_test.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/2c2866d70564/fleet-native-2/fleet-de.png"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility / Xvfb / Mesa",
+  "isolated_user_data": true,
+  "exit_code": 0
+}

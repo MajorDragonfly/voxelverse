@@ -37,6 +37,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_dead: return
 	super._unhandled_input(event)
 	if _is_inspection_toggle_event(event):
 		toggle_inspection_mode()
@@ -44,6 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func toggle_inspection_mode() -> bool:
+	if is_dead: return inspection_mode_enabled
 	inspection_mode_enabled = not inspection_mode_enabled
 	inspection_mode_changed.emit(inspection_mode_enabled)
 	show_gameplay_message(
@@ -136,6 +138,7 @@ func perform_bite_on_target(target: Node) -> bool:
 			return false
 	else:
 		target.call("receive_creature_attack", damage, self)
+	recovery.end_protection()
 	_bite_cooldown_timer = bite_cooldown
 	_trigger_bite_animation()
 	creature_attacked.emit(target, damage)
@@ -308,7 +311,24 @@ func _resolve_interaction_target(collider_value: Variant) -> Node:
 	return null
 
 
+func consume_food(food_type: String, base_nutrition: float) -> bool:
+	var consumed: bool = super.consume_food(food_type, base_nutrition)
+	if consumed:
+		var visual := get_node_or_null("CreatureRuntimeVisual/BlueprintCreatureVisual")
+		if visual != null and visual.has_method("play_part_action"):
+			visual.play_part_action("eat")
+	return consumed
+
+
 func _trigger_bite_animation() -> void:
 	var animator := get_node_or_null("AdaptiveLocomotionAnimator")
 	if animator != null and animator.has_method("trigger_bite"):
 		animator.call("trigger_bite")
+
+
+func _die() -> void:
+	if is_dead: return
+	if inspection_mode_enabled:
+		inspection_mode_enabled = false
+		inspection_mode_changed.emit(false)
+	super._die()

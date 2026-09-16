@@ -1,6 +1,7 @@
 extends RefCounted
 ## One persisted owner and simulation cursor per village. Far work follows the
 ## last physically verified paths; absence of a route never produces arrival.
+const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
 const Work = preload("res://world/tribe/village_work.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
@@ -70,7 +71,7 @@ static func path_to(data: Dictionary, simulation: Dictionary, from: Variant, to:
 	path.append_array(last)
 	return path
 
-static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, observer: Callable = Callable()) -> bool:
+static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, observer: Callable = Callable(), include_player: bool = false) -> bool:
 	var simulation: Dictionary = body.get("village_simulation", {})
 	if simulation.is_empty() or simulation.owner != "far": return false
 	var delta: float = minf(STEP, clock - float(simulation.cursor))
@@ -81,7 +82,8 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
 	Economy.tick(data, delta)
 	for member: Dictionary in data.members:
 		# The traveling player cannot simultaneously work on another planet.
-		if member.id == simulation.traveler: continue
+		if member.id == simulation.traveler and not include_player: continue
+		if SiteTransport.bound(body, member.id): continue
 		Work.prepare(data, member, delta)
 		if member.order == "wait" or member.blocked: continue
 		var target: Variant = Work.target(data, member)
@@ -100,7 +102,7 @@ static func advance(body: Dictionary, clock: float, cooperation: float = 1.0, ob
 		for effect: Dictionary in effects:
 			if effect.kind == "care_pickup": _pickup(body, member)
 			elif effect.kind == "care_delivery": _deliver(body, member)
-			elif effect.kind == "construction" and effect.data.kind in Work.Housing.BUILDS:
+			elif effect.kind in ["construction_recovered", "construction"] and effect.data.kind in Work.Housing.BUILDS:
 				# New obstacles need physical recertification; existing cargo stays.
 				simulation.roads.clear()
 				simulation.legs.clear()

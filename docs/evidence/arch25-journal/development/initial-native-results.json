@@ -1,0 +1,74 @@
+{
+  "passed": false,
+  "screenshots": [
+    "journal-de-1920x1080-100-compare.png",
+    "journal-de-1920x1080-100-tab0.png",
+    "journal-de-1920x1080-100-tab1.png",
+    "journal-de-800x600-150-compare.png",
+    "journal-de-800x600-150-tab0.png",
+    "journal-de-800x600-150-tab1.png",
+    "journal-de-800x600-150-tab2.png",
+    "journal-de-800x600-150-tab3.png",
+    "journal-de-800x600-150-tab4.png",
+    "journal-en-1920x1080-100-compare.png",
+    "journal-en-1920x1080-100-tab0.png",
+    "journal-en-1920x1080-100-tab1.png",
+    "journal-en-800x600-150-compare.png",
+    "journal-en-800x600-150-tab0.png",
+    "journal-en-800x600-150-tab1.png",
+    "journal-en-800x600-150-tab2.png",
+    "journal-en-800x600-150-tab3.png",
+    "journal-en-800x600-150-tab4.png"
+  ],
+  "renderer": "gl_compatibility",
+  "command": [
+    "/workspace/scratch/866c41791224/bin/godot",
+    "--path",
+    "/workspace/scratch/b39a60ca41f5/voxelverse-journal",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/journal_localization_test.gd",
+    "--",
+    "--capture",
+    "/tmp/journal-review-9mlwiyet"
+  ],
+  "scope": "Real journal: 72 layouts, DE/EN, 800/1280/1920, 100/150% text, five tabs plus comparison; 18 captures",
+  "test_results": [
+    {
+      "checks": 652,
+      "failures": [
+        "Language does not refilter or reread full discoveries",
+        "Language does not refilter or reread full discoveries",
+        "Language does not refilter or reread full discoveries"
+      ],
+      "layouts": 72,
+      "passed": false,
+      "screenshots": [
+        "journal-de-800x600-150-tab0.png",
+        "journal-de-800x600-150-tab1.png",
+        "journal-de-800x600-150-tab2.png",
+        "journal-de-800x600-150-tab3.png",
+        "journal-de-800x600-150-tab4.png",
+        "journal-de-800x600-150-compare.png",
+        "journal-en-800x600-150-tab0.png",
+        "journal-en-800x600-150-tab1.png",
+        "journal-en-800x600-150-tab2.png",
+        "journal-en-800x600-150-tab3.png",
+        "journal-en-800x600-150-tab4.png",
+        "journal-en-800x600-150-compare.png",
+        "journal-de-1920x1080-100-tab0.png",
+        "journal-de-1920x1080-100-tab1.png",
+        "journal-de-1920x1080-100-compare.png",
+        "journal-en-1920x1080-100-tab0.png",
+        "journal-en-1920x1080-100-tab1.png",
+        "journal-en-1920x1080-100-compare.png"
+      ]
+    }
+  ],
+  "source_commit": "e1e01a160df4a68e1a82ac3c830d112d3cd5e169",
+  "tree": "5f35123bc55af5ffa242b548903254aa6c65da9c",
+  "dirty": false
+}

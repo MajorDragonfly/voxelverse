@@ -1,0 +1,124 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "86a9a9c08828faf7710540ec12f8439f56ef0753",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_tail_family_test",
+    "creature_parts_studio_test",
+    "creature_mouth_provider_test",
+    "creature_part_revisions_test",
+    "community_blueprint_package_test",
+    "creature_body_contract_test",
+    "creature_scan_test",
+    "discovery_journal_test",
+    "research_goals_test",
+    "editor_localization_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.037
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.223
+    },
+    {
+      "name": "creature_tail_family_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 18.972,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_parts_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.846,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_mouth_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 12.963,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_part_revisions_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 9.861,
+      "contract": "creature_body"
+    },
+    {
+      "name": "community_blueprint_package_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.66,
+      "contract": "blueprints"
+    },
+    {
+      "name": "creature_body_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.592,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_scan_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.075,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "discovery_journal_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.833,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "research_goals_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.988,
+      "contract": "discovery_map"
+    },
+    {
+      "name": "editor_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 34.645,
+      "contract": "frontend_locale"
+    }
+  ]
+}

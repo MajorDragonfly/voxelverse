@@ -120,6 +120,9 @@ func _check_editor_forms() -> void:
 
 func _save_design() -> void:
 	var design: Dictionary = _design(3)
+	# The restart oracle includes the explicit revision-1 references that the
+	# current save codec writes for these newly authored models.
+	Assembly.Contract.PartRevisions.pin_legacy(design)
 	check(Assembly.save_to_file(design, SAVE) == OK, "Could not save new animal feet")
 	var file := FileAccess.open("user://animal_feet_expected.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify({"design_id": design.design_id, "parts": Assembly.BaseBlueprint._serialize_blueprint(design).parts}))

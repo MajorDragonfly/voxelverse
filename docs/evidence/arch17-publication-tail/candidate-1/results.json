@@ -1,0 +1,133 @@
+{
+  "source": {
+    "commit": "6dcddc09aa0f6f46363ef377058ed79725a48a9d",
+    "tracked_worktree_dirty": false,
+    "files": {
+      "tools/benchmark_terrain_publication.gd": "cea068acd878ad6d174292c7d1bd87b51a7467223a84f426e42cb476d3d02bfd",
+      "world/planet_lab/adaptive_sphere_tiles.gd": "0f8a982215f139315c94af4ceac440dee9418d867c3d1ef3fcc2e5389787c37c"
+    }
+  },
+  "command": [
+    "/tmp/voxelverse-validation-editor-l79zdq6c/Godot_v4.6.3-stable_linux.x86_64",
+    "--headless",
+    "--path",
+    "/workspace/scratch/cbe9275ecc60/voxelverse",
+    "--script",
+    "res://tools/benchmark_surface_publication.gd",
+    "--",
+    "--terrain"
+  ],
+  "exit_code": 0,
+  "seconds": 27.646701608999138,
+  "metrics": {
+    "cache_peak": 222,
+    "collision_queue_peak": 0,
+    "collisions": 24,
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "diagnostics": {
+      "discarded_jobs": 0,
+      "discarded_publications": 1,
+      "generation": 11,
+      "lookahead_m": 31.9072993661393,
+      "max_operation_usec": {
+        "collider": 1145,
+        "land": 396,
+        "node": 693,
+        "shape": 70,
+        "water": 323
+      },
+      "operations": {
+        "collider": 59,
+        "land": 651,
+        "node": 823,
+        "shape": 41,
+        "water": 651
+      },
+      "pending_collisions": 0,
+      "pending_uploads": 0,
+      "published_generation": 11,
+      "refresh_queued": false,
+      "staging_meshes": 0,
+      "worker_active": false
+    },
+    "drains": [
+      {
+        "elapsed_ms": 13932,
+        "publications": 1,
+        "stage": "cold",
+        "step_max_ms": 5.511
+      },
+      {
+        "elapsed_ms": 2704,
+        "publications": 1,
+        "stage": "turn_1.0",
+        "step_max_ms": 6.867
+      },
+      {
+        "elapsed_ms": 6879,
+        "publications": 1,
+        "stage": "turn_-1.0",
+        "step_max_ms": 7.902
+      },
+      {
+        "elapsed_ms": 1048,
+        "publications": 1,
+        "stage": "turn_1.0",
+        "step_max_ms": 7.31
+      },
+      {
+        "elapsed_ms": 470,
+        "publications": 1,
+        "stage": "discard",
+        "step_max_ms": 9.514
+      }
+    ],
+    "failures": [],
+    "godot": "4.6.3-stable (official)",
+    "max_handoff_ms": 4.825,
+    "max_prepare_ms": 1.163,
+    "max_upload_ms": 1.336,
+    "passed": true,
+    "phase_timings": {
+      "collect_job": {
+        "calls": 6,
+        "max_usec": 8725,
+        "total_usec": 32721
+      },
+      "discard_staging": {
+        "calls": 6,
+        "max_usec": 2350,
+        "total_usec": 2365
+      },
+      "finish_transition": {
+        "calls": 9,
+        "max_usec": 2950,
+        "total_usec": 6255
+      },
+      "publish": {
+        "calls": 39,
+        "max_usec": 7826,
+        "total_usec": 32506
+      },
+      "trim_cache": {
+        "calls": 2240,
+        "max_usec": 161,
+        "total_usec": 4652
+      },
+      "update_collisions": {
+        "calls": 6,
+        "max_usec": 2889,
+        "total_usec": 12061
+      }
+    },
+    "queue_peak": 414,
+    "resident_peak": 651,
+    "scope": "Headless CPU; cold revision-4 Earth terrain, fixed cube seam, turns and teardown; no GPU/FPS",
+    "step_max_ms": 9.514,
+    "step_p95_ms": 0.191,
+    "steps": 3627,
+    "teardown_ms": 517.516,
+    "tiles": 429
+  },
+  "passed": true
+}

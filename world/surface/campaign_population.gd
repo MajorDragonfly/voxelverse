@@ -200,6 +200,9 @@ func _generate(cell: Dictionary) -> void:
 	var seed_value: int = maxi(1, int((cell.id + ":species:" + str(descriptor.seed)).sha256_text().left(7).hex_to_int()))
 	var individual: int = int((cell.id + ":animal").sha256_text().left(7).hex_to_int())
 	var role: String = "grazer" if posmod(seed_value, 4) != 0 else "predator"
+	# Only newly generated regions receive this minority role. Existing records,
+	# frozen bodies and species identities remain the authoritative population.
+	if posmod(seed_value, 16) == 1: role = "scavenger"
 	var blueprint: Dictionary = Species.create_species(seed_value, Vector2i.ZERO, role)
 	var region_id: String = Habitat.region_id(descriptor.id, point)
 	var id: String = Ids.scoped("object", region_id, cell.id + ":resident")
@@ -273,6 +276,8 @@ func _spawn_plant(record: Dictionary) -> bool:
 	var bush: Node3D = preload("res://world/resources/plants/berry_bush.tscn").instantiate()
 	bush.snap_to_terrain = false
 	bush.persistent_food_key = record.food_key
+	bush.visual_profile = adapter.terrain.surface.terrain
+	bush.visual_biome = str(adapter.terrain.surface.sample(record.location).biome)
 	bush.position = point
 	get_parent().add_child(bush)
 	Space.track(bush, record.id)

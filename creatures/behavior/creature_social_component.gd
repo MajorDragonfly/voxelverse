@@ -6,33 +6,60 @@ const HELP_COST: float = 12.0
 const HELP_HEALTH: float = 0.30
 const Space = preload("res://world/surface/gameplay_space.gd")
 
+const Text = preload("res://core/localization/ui_text.gd")
+
 var creature: CharacterBody3D
 var attention_remaining: float = 0.0
 var help_cooldown: float = 0.0
+var greet_cooldown: float = 0.0
+var attention_actor: Node3D
+var presentation_relation: String = "wild"
+var _save_service: Node
 
 
 func _ready() -> void:
 	creature = get_parent()
 	_restore()
-	get_node("/root/SaveGameService").game_loaded.connect(func(_path: String) -> void: _restore())
+
+
+func _enter_tree() -> void:
+	_save_service = get_node("/root/SaveGameService")
+	_save_service.game_loaded.connect(_on_game_loaded)
+
+
+func _on_game_loaded(_path: String) -> void:
+	# A previous listener can detach this actor during the same load emission.
+	if is_inside_tree() and not is_queued_for_deletion(): _restore()
+
+
+func _exit_tree() -> void:
+	if is_instance_valid(_save_service) and _save_service.game_loaded.is_connected(_on_game_loaded):
+		_save_service.game_loaded.disconnect(_on_game_loaded)
 
 
 func _process(delta: float) -> void:
 	attention_remaining = maxf(attention_remaining - delta, 0.0)
 	help_cooldown = maxf(help_cooldown - delta, 0.0)
+	greet_cooldown = maxf(greet_cooldown - delta, 0.0)
 
 
 func entry() -> Dictionary:
-	return get_node("/root/ProgressionService").get_creature_encounter(
+	var data: Dictionary = get_node("/root/ProgressionService").get_creature_encounter(
 		creature.get_campaign_identity(), creature.ecological_role, creature.individual_seed)
+	presentation_relation = str(data.get("relation", "wild"))
+	return data
 
 
 func _restore() -> void:
 	var data: Dictionary = entry()
+	if data.is_empty(): return
 	creature.current_health = creature.maximum_health * float(data["health_ratio"])
 	creature.is_dead = data["dead"]
 	creature.carcass_food_remaining = data["carcass_food"]
 	attention_remaining = 0.0
+	attention_actor = null
+	greet_cooldown = 0.0
+	help_cooldown = 0.0
 	creature._threat_timer = 0.0
 	if creature.is_dead:
 		creature.velocity = Vector3.ZERO
@@ -55,6 +82,7 @@ func befriend(actor: Node, delta: float) -> Dictionary:
 	if not can_reach(actor) or not is_finite(delta) or delta <= 0.0 or delta > 0.25:
 		return _failure("Komm näher und halte Sichtkontakt.")
 	var data: Dictionary = entry()
+	if data.is_empty(): return _failure("Begegnungsdaten konnten nicht geladen werden.")
 	if data["relation"] == "ally":
 		return _failure("Diese Kreatur ist bereits mit dir befreundet.")
 	if data["relation"] == "hostile" or data["player_harmed"] or creature._threat_timer > 0.0:
@@ -70,8 +98,11 @@ func befriend(actor: Node, delta: float) -> Dictionary:
 		data, completed, "befriended" if completed else "", context)
 	if not result["ok"]:
 		return _failure("Speichern fehlgeschlagen. Befreunden kann erneut versucht werden.")
+	attention_actor = actor as Node3D
+	presentation_relation = str(data["relation"])
 	if completed:
 		creature._threat_timer = 0.0
+		creature.react_expression("friend")
 		creature.audio_event.emit(&"friend")
 		actor.show_gameplay_message("Befreundet · Beziehung gespeichert.")
 	return {"ok": true, "completed": completed, "trust": data["trust"], "multiplier": multiplier}
@@ -81,6 +112,7 @@ func help(actor: Node) -> Dictionary:
 	if not can_reach(actor, 3.6):
 		return _failure("Zum Helfen näher herangehen und Sichtkontakt halten.")
 	var data: Dictionary = entry()
+	if data.is_empty(): return _failure("Begegnungsdaten konnten nicht geladen werden.")
 	if help_cooldown > 0.0:
 		return _failure("Einen Moment warten.")
 	if data["relation"] == "hostile" or data["player_harmed"]:
@@ -105,9 +137,33 @@ func help(actor: Node) -> Dictionary:
 	creature.current_health = creature.maximum_health * float(data["health_ratio"])
 	help_cooldown = 0.8
 	attention_remaining = 1.2
+	attention_actor = actor as Node3D
+	creature.react_expression("help")
 	actor._update_hud()
 	actor.show_gameplay_message("Versorgt · %d %% Gesundheit · −12 Sättigung%s" % [roundi(float(data["health_ratio"]) * 100.0), " · Hilfe abgeschlossen" if completed else ""])
 	return {"ok": true, "completed": completed, "health_ratio": data["health_ratio"]}
+
+
+func expression_context(player: Node3D) -> Dictionary:
+	var attention: bool = attention_remaining > 0.0 and is_instance_valid(attention_actor) and can_reach(attention_actor)
+	var near: bool = presentation_relation == "ally" and is_instance_valid(player) and can_reach(player, 3.6)
+	return {"attention": attention, "friendly_near": near, "target": attention_actor if attention else player if near else null}
+
+
+func greet(actor: Node) -> Dictionary:
+	# A repeatable gesture, with no extra trust, healing or point payout.
+	if not can_reach(actor, 3.6) or greet_cooldown > 0.0 or creature._threat_timer > 0.0 or get_node("/root/GameState").simulation_delta(1.0) <= 0.0:
+		return _failure(Text.text("EXPRESSION_GREET_UNAVAILABLE"))
+	if creature.get_expression_context().get("intent", "rest") in ["flee", "alert", "chase"]:
+		return _failure(Text.text("EXPRESSION_GREET_UNAVAILABLE"))
+	if entry().get("relation", "wild") != "ally":
+		return _failure(Text.text("EXPRESSION_GREET_UNAVAILABLE"))
+	greet_cooldown = 3.0
+	attention_remaining = 1.4
+	attention_actor = actor as Node3D
+	creature.react_expression("greet")
+	creature.audio_event.emit(&"friend")
+	return {"ok": true, "message": Text.text("EXPRESSION_GREET_OK")}
 
 
 ## The first attack freezes its cause. Betrayal can never become a rewarded hunt.
@@ -115,6 +171,7 @@ func receive_player_attack(damage: float, actor: Node) -> bool:
 	if not can_reach(actor, actor.bite_reach + 0.35) or not is_finite(damage) or damage <= 0.0:
 		return false
 	var data: Dictionary = entry()
+	if data.is_empty(): return false
 	if str(data["conflict_relation"]).is_empty():
 		if data["relation"] == "hostile":
 			data["conflict_relation"] = "hostile"
@@ -142,6 +199,8 @@ func receive_player_attack(damage: float, actor: Node) -> bool:
 	creature._threat = actor
 	creature._threat_timer = creature.threat_memory_seconds
 	attention_remaining = 0.0
+	presentation_relation = "hostile"
+	creature.react_expression("hurt")
 	if data["dead"]:
 		creature._die(actor)
 		get_node("/root/SaveGameService").schedule_autosave(0.1)
@@ -158,7 +217,7 @@ func controls_movement() -> bool:
 	if attention_remaining > 0.0:
 		creature._wander_direction = Vector3.ZERO
 		return true
-	if entry()["relation"] != "ally":
+	if entry().get("relation") != "ally":
 		return false
 	if creature._threat_timer > 0.0 and is_instance_valid(creature._threat) and not creature._threat.is_in_group(&"player"):
 		return false
@@ -175,6 +234,7 @@ func record_external_damage(attacker: Node) -> void:
 	if get_node("/root/GameState").current_phase != 0:
 		return
 	var data: Dictionary = entry()
+	if data.is_empty(): return
 	data["health_ratio"] = creature.get_health_ratio()
 	data["dead"] = creature.is_dead
 	data["carcass_food"] = creature.carcass_food_remaining
@@ -186,7 +246,10 @@ func record_external_damage(attacker: Node) -> void:
 
 
 func store_carcass() -> bool:
+	if get_node("/root/GameState").current_phase == 1:
+		return get_node("/root/ProgressionService").store_fauna_health(creature.get_campaign_identity()["object_id"], creature.get_health_ratio(), creature.is_dead, creature.carcass_food_remaining, true)
 	var data: Dictionary = entry()
+	if data.is_empty(): return false
 	data["carcass_food"] = creature.carcass_food_remaining
 	return get_node("/root/ProgressionService").store_creature_encounter(data, true).get("ok", false)
 

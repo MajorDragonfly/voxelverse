@@ -1,0 +1,56 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "f1a7e6c7f4ff5e2f5567e91628a012394bf654e9",
+    "tracked_worktree_dirty": true
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_eye_expression_test",
+    "creature_expression_test",
+    "creature_studio_test",
+    "creature_part_articulation_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "creature_eye_expression_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 2.522,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_expression_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.144,
+      "contract": "wildlife"
+    },
+    {
+      "name": "creature_studio_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.645,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_part_articulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.684,
+      "contract": "creature_body"
+    }
+  ]
+}

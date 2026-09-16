@@ -1,0 +1,58 @@
+{
+  "source_commit": "d903f7d7be344a16ea2272559713db9f80cd8254",
+  "note": "Actual mesh export preceded the test-only correction and UID commit; runtime/catalog/geometry and exporter contents are identical. CPU mesh review, not a screenshot or FPS acceptance.",
+  "mesh_export_sha256": "7d10965a62e2494fe7d1a8b63a5f9d96c875ecb8538ce8afe7b68ea8a23fefe1",
+  "source_bytes": 90548683,
+  "models": [
+    {
+      "id": "tail_stump",
+      "meshes": 2,
+      "vertices": 1920,
+      "triangles": 960
+    },
+    {
+      "id": "tail_reptile",
+      "meshes": 9,
+      "vertices": 15328,
+      "triangles": 7664
+    },
+    {
+      "id": "tail_beaver_paddle",
+      "meshes": 11,
+      "vertices": 83328,
+      "triangles": 41664
+    },
+    {
+      "id": "tail_horizontal_fluke",
+      "meshes": 8,
+      "vertices": 26592,
+      "triangles": 13296
+    }
+  ],
+  "bodies": [
+    {
+      "id": "tail_stump",
+      "meshes": 46,
+      "vertices": 127552,
+      "triangles": 63776
+    },
+    {
+      "id": "tail_reptile",
+      "meshes": 53,
+      "vertices": 140960,
+      "triangles": 70480
+    },
+    {
+      "id": "tail_beaver_paddle",
+      "meshes": 55,
+      "vertices": 208960,
+      "triangles": 104480
+    },
+    {
+      "id": "tail_horizontal_fluke",
+      "meshes": 52,
+      "vertices": 152224,
+      "triangles": 76112
+    }
+  ]
+}

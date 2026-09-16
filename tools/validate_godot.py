@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Run real Godot entry points with timeouts, isolated saves and strict log checks."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
+import platform
 import re
 import subprocess
 import sys
@@ -11,15 +13,19 @@ import tempfile
 import time
 
 if __package__:
-    from .check_validation_contracts import discover_tests, read_contracts, revision
+    from .check_validation_contracts import discover_tests, read_contracts
     from .validation_support import isolated_env, validation_editor
+    from .validation_plan import build_plan
+    from .validation_provenance import SourceRun
 else:
-    from check_validation_contracts import discover_tests, read_contracts, revision
+    from check_validation_contracts import discover_tests, read_contracts
     from validation_support import isolated_env, validation_editor
+    from validation_plan import build_plan
+    from validation_provenance import SourceRun
 
 # These acceptance flows include real 300-second production or 90-second growth
 # plus transport and restart. Keep short checks bounded independently.
-LONG_TESTS = {"body_travel_test", "spherical_gameplay_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+LONG_TESTS = {"settlement_runtime_test", "body_travel_test", "spherical_gameplay_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
@@ -44,11 +50,31 @@ def main():
     selection = parser.add_mutually_exclusive_group()
     selection.add_argument("--tests", nargs="*", help="Test basenames; omit to discover all tests")
     selection.add_argument("--contracts", nargs="+", help="Contract IDs from tools/validation/contracts.json")
+    selection.add_argument("--changed-since", metavar="REF", help="Plan tests from the checkout versus this exact local Git commit, including staged/unstaged/untracked files")
+    parser.add_argument("--plan", action="store_true", help="Print the --changed-since plan as JSON without starting tests or creating output")
     parser.add_argument("--list-tests", action="store_true", help="Print selection without starting Godot; not test evidence")
     parser.add_argument("--skip-import", action="store_true")
     parser.add_argument("--skip-main", action="store_true")
     args = parser.parse_args()
     args.project = args.project.expanduser().resolve()
+    args.change_plan = None
+    if args.plan and (args.changed_since is None or args.list_tests):
+        parser.error("--plan requires --changed-since and cannot be combined with --list-tests")
+    # Capture before automatic selection reads contracts and paths. A changed
+    # plan must never be executed against a later, differently scoped checkout.
+    args.source_run = None if args.plan or args.list_tests else SourceRun(args.project)
+    if args.changed_since is not None:
+        try:
+            args.change_plan = build_plan(args.project, args.changed_since)
+        except (OSError, ValueError, subprocess.SubprocessError) as error:
+            parser.error(str(error))
+        args.tests = args.change_plan["selected_tests"]
+        if args.plan:
+            print(json.dumps(args.change_plan, ensure_ascii=True, indent=2))
+            return 0
+        if args.skip_main and args.change_plan["requires_main"] and not args.list_tests:
+            parser.error("This change plan requires full main checks; inspect --plan. Use an explicit --contracts selection for a separately scoped diagnosis.")
+        args.skip_main = not args.change_plan["requires_main"]
     if args.contracts is not None or args.list_tests:
         try:
             if args.contracts is not None:
@@ -67,20 +93,44 @@ def main():
         return 0
     args.output = (args.output.expanduser().resolve() if args.output is not None
                    else Path(tempfile.mkdtemp(prefix="voxelverse-validation-")))
+    if args.output.is_relative_to(args.project):
+        parser.error("Validation reports must be outside the project to avoid changing their own source inputs")
+    if args.output.exists() and (not args.output.is_dir() or any(args.output.iterdir())):
+        parser.error("Choose a new output directory to preserve previous check evidence")
     print(f"Validation output: {args.output}", flush=True)
+    args.source_run.observe("selection")
+    if args.source_run.blocked or (args.change_plan is not None and not args.tests):
+        return validate(args)
     with validation_editor(args.godot) as editor:
         args.godot = str(editor)
         return validate(args)
 
 
 def validate(args):
+    if args.output.resolve().is_relative_to(args.project.resolve()):
+        raise ValueError("Validation output must be outside the project")
     args.output.mkdir(parents=True, exist_ok=True)
-    version = subprocess.check_output([args.godot, "--version"], text=True).strip()
-    if not version.startswith("4.6.3."):
-        sys.exit(f"Expected Godot 4.6.3, got {version}")
+    if any(args.output.iterdir()):
+        raise ValueError("Choose a new output directory to preserve previous check evidence")
+    # Exclusive ownership also closes the race between two runners selecting
+    # the same previously empty report directory.
+    with (args.output / "run-owner.json").open("x", encoding="utf-8") as stream:
+        json.dump({"pid": os.getpid(), "started_unix": time.time()}, stream)
+    source_run = getattr(args, "source_run", None) or SourceRun(args.project)
+    source_run.begin_report(args.output)
+    change_plan = getattr(args, "change_plan", None)
+    source_only = change_plan is not None and not args.tests
+    results, version = [], None
+    if not source_only and not source_run.blocked:
+        try:
+            version = subprocess.check_output([args.godot, "--version"], text=True, timeout=20).strip()
+            if not version.startswith("4.6.3."):
+                raise ValueError(f"Expected Godot 4.6.3, got {version}")
+        except (OSError, ValueError, subprocess.SubprocessError) as error:
+            results.append({"name": "engine_version", "kind": "configuration", "passed": False, "error": str(error)})
     tests = args.tests if args.tests is not None else discover_tests(args.project)
     commands = [("source_contracts", [], 45)]
-    if not args.skip_import:
+    if not args.skip_import and not source_only:
         commands.append(("import", ["--import"], 180))
         commands.append(("art_sources", [], 120))
     # SceneTree tests load gameplay scenes after autoloads exist, like the game.
@@ -88,7 +138,7 @@ def validate(args):
     # animal, cold terrain loads and fresh processes on both sides of the trip.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
                   900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 120) for name in tests]
-    if not args.skip_main:
+    if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:
             name = "main" if frames == 300 else f"main_shutdown_{frames}"
@@ -102,8 +152,10 @@ def validate(args):
                                         "--", str(seed), stage], 120))
         commands.append(("streaming_cpu", ["--script", "res://tools/benchmark_streaming.gd", "--",
                                            "--report", str(args.output / "streaming_cpu_measurements.json")], 120))
-    results, owners = [], {}
+    owners = {}
     for name, command, timeout in commands:
+        if source_run.blocked or (results and results[0]["name"] == "engine_version"):
+            break
         started = time.monotonic()
         log_path = args.output / f"{name.replace(chr(47), chr(95))}.log"
         with tempfile.TemporaryDirectory(prefix="voxelverse-test-") as userdata:
@@ -126,18 +178,30 @@ def validate(args):
                 with log_path.open("ab") as stream:
                     stream.write(b"\nERROR: validation timed out\n")
                 status = 124
+            except (OSError, KeyboardInterrupt) as error:
+                with log_path.open("ab") as stream:
+                    stream.write(("\nERROR: validation interrupted: " + str(error) + "\n").encode())
+                status = 130 if isinstance(error, KeyboardInterrupt) else 127
         log = log_path.read_text(encoding="utf-8", errors="replace")
         failed = status != 0 or ERROR.search(log) is not None
         kind = ("source_contract" if name in {"source_contracts", "art_sources"} else
                 "editor_import" if name == "import" else "headless_godot")
         result = {"name": name, "kind": kind, "passed": not failed, "exit_code": status,
-                  "seconds": round(time.monotonic() - started, 3)}
+                  "seconds": round(time.monotonic() - started, 3), "command": argv,
+                  "log_sha256": hashlib.sha256(log_path.read_bytes()).hexdigest()}
         if name in owners:
             result["contract"] = owners[name]
         results.append(result)
+        observation = source_run.observe(name)
+        result["process_passed"] = not failed
+        result["passed"] = not failed and not source_run.blocked
+        result["source_sha256"] = observation["source"].get("source_sha256")
+        result["source_status"] = observation["status"]
         print(json.dumps(result), flush=True)
         if failed or name == "streaming_cpu":
             print(log[-12000:], flush=True)
+        if source_run.blocked or status in (127, 130):
+            break
         if name in {"source_contracts", "import"} and failed:
             break
         if name == "source_contracts":
@@ -148,8 +212,20 @@ def validate(args):
                                 "error": "Unknown tests: " + ", ".join(unknown)})
                 print(json.dumps(results[-1]), flush=True)
                 break
-    (args.output / "results.json").write_text(json.dumps({"godot": version, "source": revision(args.project),
-        "execution": "headless_source_project", "selected_tests": tests, "checks": results}, indent=2) + "\n", encoding="utf-8")
+    source_run.observe("finish", force=True)
+    provenance = source_run.write_report(args.output)
+    provenance["reusable"] = provenance["reusable"] and all(r["passed"] for r in results)
+    results.append({"name": "source_integrity", "kind": "source_provenance", "passed": not source_run.blocked,
+                    "status": provenance["status"], "reusable_source": provenance["reusable"]})
+    print(json.dumps(results[-1]), flush=True)
+    # A start record without this atomically published completion is incomplete.
+    temporary = args.output / "results.json.tmp"
+    temporary.write_text(json.dumps({"godot": version, "source": provenance["start"],
+        "passed": all(r["passed"] for r in results),
+        "execution": "source_only" if source_only else "headless_source_project", "selected_tests": tests,
+        "environment": {"platform": platform.platform(), "python": sys.version, "user_data": "isolated_per_check"},
+        "provenance": provenance, "change_plan": change_plan, "checks": results}, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(args.output / "results.json")
     return 1 if any(not r["passed"] for r in results) else 0
 
 

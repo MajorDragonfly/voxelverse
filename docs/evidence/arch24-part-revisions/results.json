@@ -1,0 +1,178 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "f68d50ada84aea4f5987a74afea5b0e177a87a83",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "creature_part_revisions_test",
+    "blueprint_contract_test",
+    "community_blueprint_package_test",
+    "creature_design_library_test",
+    "creature_library_ui_test",
+    "creature_mouth_provider_test",
+    "creature_foot_provider_test",
+    "creature_hand_provider_test",
+    "creature_snout_family_test",
+    "creature_trunk_provider_test",
+    "creature_part_articulation_test",
+    "creature_body_contract_test",
+    "creature_editor_v7_runtime_test",
+    "campaign_foundation_test",
+    "save_slots_test",
+    "frozen_body_serialization_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.116
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.984
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.275
+    },
+    {
+      "name": "creature_part_revisions_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.063,
+      "contract": "creature_body"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.424,
+      "contract": "blueprints"
+    },
+    {
+      "name": "community_blueprint_package_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.914,
+      "contract": "blueprints"
+    },
+    {
+      "name": "creature_design_library_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.742,
+      "contract": "blueprints"
+    },
+    {
+      "name": "creature_library_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 23.584,
+      "contract": "blueprints"
+    },
+    {
+      "name": "creature_mouth_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.648,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_foot_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.979,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_hand_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.639,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_snout_family_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 15.466,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_trunk_provider_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.086,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_part_articulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.33,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_body_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 8.188,
+      "contract": "creature_body"
+    },
+    {
+      "name": "creature_editor_v7_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.727,
+      "contract": "creature_body"
+    },
+    {
+      "name": "campaign_foundation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.731,
+      "contract": "campaign"
+    },
+    {
+      "name": "save_slots_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.47,
+      "contract": "campaign"
+    },
+    {
+      "name": "frozen_body_serialization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.885,
+      "contract": "campaign"
+    }
+  ]
+}

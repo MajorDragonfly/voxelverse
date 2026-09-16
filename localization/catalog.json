@@ -105,11 +105,6 @@
       "en": "DEVELOPMENT BUILD    /    CREATURE STAGE"
     },
     {
-      "key": "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen",
-      "de": "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen",
-      "en": "Tab  Select    ·    Enter  Confirm    ·    F8  Settings"
-    },
-    {
       "key": "Fortsetzen",
       "de": "Fortsetzen",
       "en": "Continue"
@@ -560,11 +555,6 @@
       "en": "VOXELVERSE · SETTINGS"
     },
     {
-      "key": "Esc / F8 Menü · F11 Vollbild",
-      "de": "Esc / F8 Menü · F11 Vollbild",
-      "en": "Esc / F8 Menu · F11 Fullscreen"
-    },
-    {
       "key": "Anzeige",
       "de": "Anzeige",
       "en": "Display"
@@ -955,11 +945,6 @@
       "en": "Defaults"
     },
     {
-      "key": "Zurück · F7 / Esc",
-      "de": "Zurück · F7 / Esc",
-      "en": "Back · F7 / Esc"
-    },
-    {
       "key": "Entdeckungsbuch",
       "de": "Entdeckungsbuch",
       "en": "Discovery journal"
@@ -1175,11 +1160,6 @@
       "en": "Continue the adventure on a spherical planet. Your previous save is preserved as the original."
     },
     {
-      "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
-      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
-    },
-    {
       "key": "BP_LIBRARY_TITLE",
       "de": "Kreaturenvorlagen",
       "en": "Creature templates"
@@ -1366,8 +1346,8 @@
     },
     {
       "key": "BP_SEARCH",
-      "de": "Vorlagen suchen",
-      "en": "Search templates"
+      "de": "Name, Autor, Beschreibung oder Tags suchen …",
+      "en": "Search name, author, description or tags …"
     },
     {
       "key": "BP_ALL",
@@ -2219,8 +2199,8 @@
     },
     {
       "key": "SKILLS_JOURNAL",
-      "de": "Entdeckungsbuch · J",
-      "en": "Discovery journal · J"
+      "de": "Entdeckungsbuch · {journal}",
+      "en": "Discovery journal · {journal}"
     },
     {
       "key": "SKILLS_PATH",
@@ -2846,6 +2826,5311 @@
       "key": "SKILLS_PHASE_5_NEXT",
       "de": "Langfristiger Entwurf; konkrete Spielregeln erst nach der Weltraumphase festlegen.",
       "en": "Long-term concept; concrete gameplay rules will be defined after the space phase."
+    },
+    {
+      "key": "TRIBE_ORDER_WOOD",
+      "de": "Holz sammeln",
+      "en": "Gather wood"
+    },
+    {
+      "key": "TRIBE_ORDER_STONE",
+      "de": "Stein sammeln",
+      "en": "Gather stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FOOD",
+      "de": "Nahrung sammeln",
+      "en": "Gather food"
+    },
+    {
+      "key": "TRIBE_ORDER_SUPPLY",
+      "de": "Versorgung sichern",
+      "en": "Maintain food supply"
+    },
+    {
+      "key": "TRIBE_ORDER_TOOL",
+      "de": "Werkzeug · 3 Holz / 2 Stein",
+      "en": "Tool · 3 wood / 2 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_HUT",
+      "de": "Hütte setzen · 6 Holz / 3 Stein",
+      "en": "Place hut · 6 wood / 3 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_TENT",
+      "de": "Zelt setzen · 3 Holz / 2 Fasern",
+      "en": "Place tent · 3 wood / 2 fiber"
+    },
+    {
+      "key": "TRIBE_ORDER_GARDEN",
+      "de": "Wurzelgarten · 4 Holz / 1 Stein",
+      "en": "Root garden · 4 wood / 1 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FEED",
+      "de": "Jetzt essen",
+      "en": "Eat now"
+    },
+    {
+      "key": "TRIBE_ORDER_WAIT",
+      "de": "Anhalten",
+      "en": "Stop"
+    },
+    {
+      "key": "TRIBE_ORDER_RESUME",
+      "de": "Fortsetzen",
+      "en": "Resume"
+    },
+    {
+      "key": "TRIBE_ORDER_WATER",
+      "de": "Wasser holen",
+      "en": "Fetch water"
+    },
+    {
+      "key": "TRIBE_ORDER_PROVISION",
+      "de": "Nahrung & Wasser sichern",
+      "en": "Maintain food & water"
+    },
+    {
+      "key": "TRIBE_ORDER_DRINK",
+      "de": "Jetzt trinken",
+      "en": "Drink now"
+    },
+    {
+      "key": "TRIBE_ORDER_WELL",
+      "de": "Brunnen · 3 Holz / 2 Stein",
+      "en": "Well · 3 wood / 2 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FORESTER",
+      "de": "Forstplatz · 4 Holz / 1 Stein",
+      "en": "Forestry · 4 wood / 1 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_QUARRY",
+      "de": "Steinbruch · 4 Holz / 2 Stein",
+      "en": "Quarry · 4 wood / 2 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FIBERBED",
+      "de": "Faserbeet · 2 Holz / 1 Stein",
+      "en": "Fiber bed · 2 wood / 1 stone"
+    },
+    {
+      "key": "TRIBE_ORDER_FIBER",
+      "de": "Fasern sammeln",
+      "en": "Gather fiber"
+    },
+    {
+      "key": "TRIBE_ORDER_MILK",
+      "de": "Milch abholen",
+      "en": "Collect milk"
+    },
+    {
+      "key": "TRIBE_ORDER_MOVE",
+      "de": "Laufen",
+      "en": "Move"
+    },
+    {
+      "key": "TRIBE_ORDER_PROFESSION",
+      "de": "Beruf fortsetzen",
+      "en": "Resume profession"
+    },
+    {
+      "key": "TRIBE_ORDER_PEN",
+      "de": "Milchtierplatz bauen",
+      "en": "Build milk pen"
+    },
+    {
+      "key": "TRIBE_ORDER_LAYING_SITE",
+      "de": "Legestelle bauen",
+      "en": "Build laying site"
+    },
+    {
+      "key": "TRIBE_ORDER_TEND",
+      "de": "Tiere versorgen",
+      "en": "Care for animals"
+    },
+    {
+      "key": "TRIBE_ORDER_EGGS",
+      "de": "Eier abholen",
+      "en": "Collect eggs"
+    },
+    {
+      "key": "TRIBE_JOB_NONE",
+      "de": "Ohne Beruf",
+      "en": "No profession"
+    },
+    {
+      "key": "TRIBE_JOB_PROVIDER",
+      "de": "Versorger",
+      "en": "Provider"
+    },
+    {
+      "key": "TRIBE_JOB_FORESTER",
+      "de": "Holzarbeiter",
+      "en": "Woodworker"
+    },
+    {
+      "key": "TRIBE_JOB_MASON",
+      "de": "Steinmetz",
+      "en": "Stoneworker"
+    },
+    {
+      "key": "TRIBE_JOB_WEAVER",
+      "de": "Fasersammler",
+      "en": "Fiber gatherer"
+    },
+    {
+      "key": "TRIBE_JOB_BUILDER",
+      "de": "Baumeister",
+      "en": "Builder"
+    },
+    {
+      "key": "TRIBE_JOB_MILK_CARRIER",
+      "de": "Milchträger",
+      "en": "Milk carrier"
+    },
+    {
+      "key": "TRIBE_JOB_KEEPER",
+      "de": "Tierpfleger",
+      "en": "Animal keeper"
+    },
+    {
+      "key": "TRIBE_JOB_EGG_CARRIER",
+      "de": "Eierträger",
+      "en": "Egg carrier"
+    },
+    {
+      "key": "TRIBE_RESOURCE_WOOD",
+      "de": "Holz",
+      "en": "wood"
+    },
+    {
+      "key": "TRIBE_RESOURCE_STONE",
+      "de": "Stein",
+      "en": "stone"
+    },
+    {
+      "key": "TRIBE_RESOURCE_FOOD",
+      "de": "Nahrung",
+      "en": "food"
+    },
+    {
+      "key": "TRIBE_RESOURCE_WATER",
+      "de": "Wasser",
+      "en": "water"
+    },
+    {
+      "key": "TRIBE_RESOURCE_FIBER",
+      "de": "Fasern",
+      "en": "fiber"
+    },
+    {
+      "key": "TRIBE_RESOURCE_MILK",
+      "de": "Milch",
+      "en": "milk"
+    },
+    {
+      "key": "TRIBE_RESOURCE_EGGS",
+      "de": "Eier",
+      "en": "eggs"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_WAIT",
+      "de": "wartet",
+      "en": "waiting"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_MOVE",
+      "de": "unterwegs",
+      "en": "moving"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_WOOD",
+      "de": "sammelt Holz",
+      "en": "gathering wood"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_STONE",
+      "de": "sammelt Stein",
+      "en": "gathering stone"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FOOD",
+      "de": "sammelt Nahrung",
+      "en": "gathering food"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_TOOL",
+      "de": "stellt Werkzeug her",
+      "en": "making a tool"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_HUT",
+      "de": "baut Hütte",
+      "en": "building a hut"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_TENT",
+      "de": "baut Zelt",
+      "en": "building a tent"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_PEN",
+      "de": "baut Tierplatz",
+      "en": "building an animal pen"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_LAYING_SITE",
+      "de": "baut Legestelle",
+      "en": "building a laying site"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_EGGS",
+      "de": "holt Eier",
+      "en": "collecting eggs"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_TEND",
+      "de": "versorgt Tiere",
+      "en": "caring for animals"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_GARDEN",
+      "de": "legt Garten an",
+      "en": "planting a garden"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_SUPPLY",
+      "de": "sichert Nahrung",
+      "en": "maintaining food supply"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FEED",
+      "de": "isst",
+      "en": "eating"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_WATER",
+      "de": "holt Wasser",
+      "en": "fetching water"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FIBER",
+      "de": "sammelt Fasern",
+      "en": "gathering fiber"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_MILK",
+      "de": "holt Milch",
+      "en": "collecting milk"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_DRINK",
+      "de": "trinkt",
+      "en": "drinking"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_PROVISION",
+      "de": "sichert Nahrung und Wasser",
+      "en": "maintaining food and water"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_BUILD",
+      "de": "bereit für Bauarbeiten",
+      "en": "ready to build"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_WELL",
+      "de": "baut Brunnen",
+      "en": "building a well"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FORESTER",
+      "de": "baut Forstplatz",
+      "en": "building a forestry station"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_QUARRY",
+      "de": "baut Steinbruch",
+      "en": "building a quarry"
+    },
+    {
+      "key": "TRIBE_ACTIVITY_FIBERBED",
+      "de": "legt Faserbeet an",
+      "en": "planting a fiber bed"
+    },
+    {
+      "key": "TRIBE_PROJECT_TOOL",
+      "de": "Werkzeugherstellung",
+      "en": "Tool crafting"
+    },
+    {
+      "key": "TRIBE_PROJECT_HUT",
+      "de": "Hüttenbau",
+      "en": "Hut construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_TENT",
+      "de": "Zeltbau",
+      "en": "Tent construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_PEN",
+      "de": "Tierplatzbau",
+      "en": "Animal pen construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_LAYING_SITE",
+      "de": "Legestellenbau",
+      "en": "Laying site construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_GARDEN",
+      "de": "Gartenbau",
+      "en": "Garden planting"
+    },
+    {
+      "key": "TRIBE_PROJECT_WELL",
+      "de": "Brunnenbau",
+      "en": "Well construction"
+    },
+    {
+      "key": "TRIBE_PROJECT_FORESTER",
+      "de": "Forstplatz",
+      "en": "Forestry station"
+    },
+    {
+      "key": "TRIBE_PROJECT_QUARRY",
+      "de": "Steinbruch",
+      "en": "Quarry"
+    },
+    {
+      "key": "TRIBE_PROJECT_FIBERBED",
+      "de": "Faserbeet",
+      "en": "Fiber bed"
+    },
+    {
+      "key": "TRIBE_COLLAPSE",
+      "de": "Einklappen",
+      "en": "Collapse"
+    },
+    {
+      "key": "TRIBE_ORDERS_TAB",
+      "de": "Aufträge",
+      "en": "Orders"
+    },
+    {
+      "key": "TRIBE_WORK_TAB",
+      "de": "Arbeitsplätze & Berufe",
+      "en": "Workplaces & professions"
+    },
+    {
+      "key": "TRIBE_HUSBANDRY_TAB",
+      "de": "Tierhaltung",
+      "en": "Animal husbandry"
+    },
+    {
+      "key": "TRIBE_SELECT_ALL",
+      "de": "Alle auswählen",
+      "en": "Select all"
+    },
+    {
+      "key": "TRIBE_PROFESSION_LABEL",
+      "de": "Beruf für die Auswahl:",
+      "en": "Profession for selection:"
+    },
+    {
+      "key": "TRIBE_ASSIGN_PROFESSION",
+      "de": "Beruf zuweisen",
+      "en": "Assign profession"
+    },
+    {
+      "key": "TRIBE_RESUME_PROFESSION",
+      "de": "Beruf fortsetzen",
+      "en": "Resume profession"
+    },
+    {
+      "key": "TRIBE_PROFESSION_HINT",
+      "de": "Versorger halten Nahrung und Wasser bereit. Baumeister helfen an der laufenden Baustelle. Manuelle Befehle ändern den Beruf nicht.",
+      "en": "Providers maintain food and water. Builders help at the active construction site. Manual orders do not change professions."
+    },
+    {
+      "key": "TRIBE_CONTROLS",
+      "de": "Linksklick / Rahmen: auswählen · Umschalt: Auswahl ändern · Rechtsklick: laufen oder sammeln · WASD: Kamera · Mausrad: Zoom · Leertaste: Pause",
+      "en": "Left click / drag: select · Shift: change selection · Right click: move or gather · WASD: camera · Wheel: zoom · Space: pause"
+    },
+    {
+      "key": "TRIBE_SUPPLY_HINT",
+      "de": "Dauerauftrag: Nahrung ernten und einlagern, bis vier Portionen je Bewohner vorrätig oder unterwegs sind. Danach am Dorfplatz warten und bei Bedarf weiterarbeiten.",
+      "en": "Ongoing order: harvest and store food until four portions per resident are stored or in transit. Then wait at the village and resume when needed."
+    },
+    {
+      "key": "TRIBE_HOUSING_HINT",
+      "de": "Festes Stammesmodell. Rechtsklick: freien Platz wählen. Material wird aus dem Lager zum Eingang getragen. Hütte: zwei Schlafplätze; Zelt: ein Schlafplatz.",
+      "en": "Fixed tribal design. Right click to choose an open site. Materials are carried from storage to the entrance. Hut: two beds; tent: one bed."
+    },
+    {
+      "key": "TRIBE_GARDEN_HINT",
+      "de": "Benötigt ein Steinwerkzeug. Baut die Wurzelfundstelle zum Garten aus. Alle 20 Spielsekunden wächst eine Wurzel nach, bis dort acht bereitliegen.",
+      "en": "Requires a stone tool. Upgrades the root patch to a garden. One root regrows every 20 gameplay seconds, up to eight ready to harvest."
+    },
+    {
+      "key": "TRIBE_STATION_HINT",
+      "de": "Steinwerkzeug erforderlich. Anklicken, dann mit Rechtsklick einen freien, erreichbaren Platz wählen.",
+      "en": "Requires a stone tool. Click, then right click an open, reachable site."
+    },
+    {
+      "key": "TRIBE_TRANSPORT_HINT",
+      "de": "Dauerauftrag mit Transport zum gemeinsamen Lager.",
+      "en": "Ongoing order with delivery to shared storage."
+    },
+    {
+      "key": "TRIBE_STOCK",
+      "de": "STAMM · Holz {wood} · Stein {stone} · Nahrung {food} · Wasser {water} · Fasern {fiber} · Milch {milk} · Eier {eggs}   |   Bewohner {residents} / {capacity} · Schlafplätze {beds}",
+      "en": "TRIBE · Wood {wood} · Stone {stone} · Food {food} · Water {water} · Fiber {fiber} · Milk {milk} · Eggs {eggs}   |   Residents {residents} / {capacity} · Beds {beds}"
+    },
+    {
+      "key": "TRIBE_STORE_HINT",
+      "de": "Lager: je 48 Einheiten. Arbeitende Bewohner essen und trinken selbstständig; ihr Auftrag bleibt erhalten.",
+      "en": "Storage: 48 units each. Working residents eat and drink automatically while keeping their orders."
+    },
+    {
+      "key": "TRIBE_GARDEN_STATUS",
+      "de": "Wurzelgarten · {ready} erntereif · {growth} · Essens- und Trinkpausen erfolgen selbstständig.",
+      "en": "Root garden · {ready} ready to harvest · {growth} · Residents take meal and water breaks automatically."
+    },
+    {
+      "key": "TRIBE_GARDEN_FULL",
+      "de": "Garten gefüllt",
+      "en": "Garden full"
+    },
+    {
+      "key": "TRIBE_GARDEN_NEXT",
+      "de": "Nächste Wurzel in {seconds} s",
+      "en": "Next root in {seconds} s"
+    },
+    {
+      "key": "TRIBE_GOAL_START",
+      "de": "Erster Schritt: Bewohner auswählen und Holz, Stein und Nahrung einlagern.",
+      "en": "First step: select residents and store wood, stone and food."
+    },
+    {
+      "key": "TRIBE_GOAL_TOOL",
+      "de": "Steinwerkzeug bereit · Setze Hütten oder Zelte auf freie Plätze und sichere Nahrung und Wasser.",
+      "en": "Stone tool ready · Place huts or tents on open sites and secure food and water."
+    },
+    {
+      "key": "TRIBE_GOAL_MATERIAL",
+      "de": "Material bereit · Weise Bewohner an, das erste Steinwerkzeug herzustellen.",
+      "en": "Materials ready · Order residents to craft the first stone tool."
+    },
+    {
+      "key": "TRIBE_GOAL_PROJECT",
+      "de": "{project} · {percent} % · Weitere Bewohner können mitarbeiten.",
+      "en": "{project} · {percent} % · More residents can help."
+    },
+    {
+      "key": "TRIBE_GOAL_GARDEN",
+      "de": "Dein Dorf steht · Lege einen Wurzelgarten für dauerhafte Nahrung an.",
+      "en": "Your village is ready · Plant a root garden for a steady food supply."
+    },
+    {
+      "key": "TRIBE_GOAL_WELL",
+      "de": "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsplätze & Berufe.",
+      "en": "Food regrows · Build a well under Workplaces & professions."
+    },
+    {
+      "key": "TRIBE_GOAL_SUPPLY",
+      "de": "Nahrung und Wasser sichern · Forstplatz, Steinbruch und Faserbeet erweitern die Rohstoffversorgung.",
+      "en": "Secure food and water · Forestry, quarry and fiber bed expand your resource supply."
+    },
+    {
+      "key": "TRIBE_GROWTH_READY",
+      "de": "Dorfwachstum · noch {seconds} s gute Versorgung · danach 2 Nahrung und 2 Wasser für den neuen Bewohner.",
+      "en": "Village growth · {seconds} s of good provision remaining · then 2 food and 2 water for the new resident."
+    },
+    {
+      "key": "TRIBE_ACTIVITY_UNKNOWN",
+      "de": "Auftrag läuft",
+      "en": "Order in progress"
+    },
+    {
+      "key": "TRIBE_RESERVE_READY",
+      "de": "Vorrat bereit · bleibt zuständig",
+      "en": "Supply ready · remains responsible"
+    },
+    {
+      "key": "TRIBE_WAIT_ROOTS",
+      "de": "wartet auf reife Wurzeln",
+      "en": "waiting for ripe roots"
+    },
+    {
+      "key": "TRIBE_WAIT_RESOURCE",
+      "de": "wartet auf {resource}",
+      "en": "waiting for {resource}"
+    },
+    {
+      "key": "TRIBE_MEAL",
+      "de": "Essenspause · kehrt zur Arbeit zurück",
+      "en": "Meal break · will return to work"
+    },
+    {
+      "key": "TRIBE_DRINK",
+      "de": "Trinkpause · kehrt zur Arbeit zurück",
+      "en": "Water break · will return to work"
+    },
+    {
+      "key": "TRIBE_BLOCKED",
+      "de": "Weg blockiert · prüft neuen Weg",
+      "en": "Route blocked · checking another route"
+    },
+    {
+      "key": "TRIBE_STOPPED",
+      "de": "angehalten · Fortsetzen möglich",
+      "en": "stopped · can resume"
+    },
+    {
+      "key": "TRIBE_STOPPED_CARGO",
+      "de": "angehalten · trägt Baumaterial",
+      "en": "stopped · carrying building materials"
+    },
+    {
+      "key": "TRIBE_BUILD_CARGO",
+      "de": "trägt Baumaterial zum Eingang",
+      "en": "carrying building materials to the entrance"
+    },
+    {
+      "key": "TRIBE_CARRYING",
+      "de": "trägt {resource}",
+      "en": "carrying {resource}"
+    },
+    {
+      "key": "TRIBE_RESIDENT",
+      "de": "{name} · {profession}\nSatt {food} % · Wasser {water} %\n{activity}",
+      "en": "{name} · {profession}\nFood {food} % · Water {water} %\n{activity}"
+    },
+    {
+      "key": "TRIBE_UNKNOWN_JOB",
+      "de": "Unbekannter Beruf",
+      "en": "Unknown profession"
+    },
+    {
+      "key": "TRIBE_UNKNOWN_RESOURCE",
+      "de": "Material",
+      "en": "material"
+    },
+    {
+      "key": "TRIBE_COMMAND",
+      "de": "Gruppenbefehl",
+      "en": "Group command"
+    },
+    {
+      "key": "TRIBE_BOOK",
+      "de": "Buch · J",
+      "en": "Journal · J"
+    },
+    {
+      "key": "TRIBE_ORDER_ACCEPTED",
+      "de": "✓ {order} · Auftrag für {count} Bewohner gespeichert.",
+      "en": "✓ {order} · Order saved for {count} residents."
+    },
+    {
+      "key": "TRIBE_ORDER_REJECTED",
+      "de": "Nicht ausgeführt · {reason}",
+      "en": "Not carried out · {reason}"
+    },
+    {
+      "key": "TRIBE_GROWTH_MAX",
+      "de": "Dein Stamm zählt sechs Bewohner.",
+      "en": "Your tribe has six residents."
+    },
+    {
+      "key": "TRIBE_GROWTH_BEDS",
+      "de": "Dorfwachstum: Baue zusätzliche Schlafplätze.",
+      "en": "Village growth: build more beds."
+    },
+    {
+      "key": "TRIBE_GROWTH_STATIONS",
+      "de": "Dorfwachstum: Wurzelgarten und Brunnen werden benötigt.",
+      "en": "Village growth: a root garden and a well are required."
+    },
+    {
+      "key": "TRIBE_GROWTH_NEEDS",
+      "de": "Dorfwachstum: Alle Bewohner müssen mindestens halb satt und mit Wasser versorgt sein.",
+      "en": "Village growth: all residents need at least 50% food and water."
+    },
+    {
+      "key": "TRIBE_STATUS_SELECT",
+      "de": "Wähle Bewohner und erteile gemeinsame oder einzelne Aufträge.",
+      "en": "Select residents and issue group or individual orders."
+    },
+    {
+      "key": "TRIBE_STATUS_NO_GROUND",
+      "de": "Hier ist kein geladener Boden.",
+      "en": "The ground here is not loaded."
+    },
+    {
+      "key": "TRIBE_STATUS_NO_SELECTION",
+      "de": "Wähle zuerst mindestens einen Bewohner aus.",
+      "en": "Select at least one resident first."
+    },
+    {
+      "key": "TRIBE_STATUS_UNAVAILABLE",
+      "de": "Die Gruppe kann gerade keine Befehle annehmen.",
+      "en": "The group cannot accept orders right now."
+    },
+    {
+      "key": "TRIBE_STATUS_TOOL",
+      "de": "Zuerst ein Steinwerkzeug herstellen.",
+      "en": "Craft a stone tool first."
+    },
+    {
+      "key": "TRIBE_STATUS_TOOL_FIRST",
+      "de": "Stelle zuerst ein Steinwerkzeug her.",
+      "en": "Craft a stone tool first."
+    },
+    {
+      "key": "TRIBE_STATUS_PLACEMENT",
+      "de": "Rechtsklick auf einen freien Bauplatz · Esc bricht die Platzierung ab.",
+      "en": "Right click an open building site · Esc cancels placement."
+    },
+    {
+      "key": "TRIBE_STATUS_CANCEL",
+      "de": "Platzierung abgebrochen.",
+      "en": "Placement cancelled."
+    },
+    {
+      "key": "TRIBE_STATUS_PATHS",
+      "de": "Die Dorfwege werden geprüft. Bitte einen Moment warten.",
+      "en": "Checking village routes. Please wait a moment."
+    },
+    {
+      "key": "TRIBE_STATUS_RANGE",
+      "de": "Befehle bleiben zunächst in der sicheren Umgebung des Dorfes.",
+      "en": "Orders are currently limited to the safe area around the village."
+    },
+    {
+      "key": "TRIBE_STATUS_ROUTE",
+      "de": "Mindestens ein ausgewählter Bewohner erreicht diesen Ort nicht.",
+      "en": "At least one selected resident cannot reach this location."
+    },
+    {
+      "key": "TRIBE_STATUS_DONE",
+      "de": "Dieser Ausbau ist bereits abgeschlossen.",
+      "en": "This upgrade is already complete."
+    },
+    {
+      "key": "TRIBE_STATUS_BUSY",
+      "de": "Schließe zuerst die laufende Arbeit ab.",
+      "en": "Finish the current project first."
+    },
+    {
+      "key": "TRIBE_STATUS_SITE",
+      "de": "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager.",
+      "en": "This site needs space, dry ground and a clear route to storage."
+    },
+    {
+      "key": "TRIBE_STATUS_SITE_ROUTE",
+      "de": "Ein ausgewählter Bewohner erreicht diesen Bauplatz nicht.",
+      "en": "A selected resident cannot reach this building site."
+    },
+    {
+      "key": "TRIBE_STATUS_SAVED",
+      "de": "Auftrag gespeichert.",
+      "en": "Order saved."
+    },
+    {
+      "key": "TRIBE_STATUS_SAVE_ORDER",
+      "de": "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten.",
+      "en": "Saving failed. The previous order is preserved."
+    },
+    {
+      "key": "TRIBE_STATUS_SAVE_STATE",
+      "de": "Speichern fehlgeschlagen. Der bisherige Stand bleibt erhalten.",
+      "en": "Saving failed. The previous state is preserved."
+    },
+    {
+      "key": "TRIBE_STATUS_GROUND",
+      "de": "Ein Bewohner wartet auf geladenen Boden.",
+      "en": "A resident is waiting for the ground to load."
+    },
+    {
+      "key": "TRIBE_STATUS_BLOCKED",
+      "de": "Weg blockiert · der Auftrag bleibt erhalten; neue Wege werden geprüft.",
+      "en": "Route blocked · the order is preserved; checking new routes."
+    },
+    {
+      "key": "TRIBE_STATUS_RESUME",
+      "de": "Die Bewohner setzen ihre Aufträge fort.",
+      "en": "Residents are resuming their orders."
+    },
+    {
+      "key": "TRIBE_STATUS_BUILT",
+      "de": "Ausbau fertig · Bewohner mit Beruf setzen ihre Zuständigkeit fort.",
+      "en": "Upgrade complete · residents with professions resume their duties."
+    },
+    {
+      "key": "TRIBE_STATUS_GROWTH_SITE",
+      "de": "Dorfwachstum wartet auf einen freien, erreichbaren Eingang.",
+      "en": "Village growth is waiting for an open, reachable entrance."
+    },
+    {
+      "key": "TRIBE_STATUS_PICKUP",
+      "de": "Die Abholstelle ist nicht erreichbar.",
+      "en": "The pickup point is not reachable."
+    },
+    {
+      "key": "TRIBE_GROWTH_RESERVE",
+      "de": "Dorfwachstum: Halte je {count} Nahrung und Wasser im Lager bereit.",
+      "en": "Village growth: keep {count} units each of food and water in storage."
+    },
+    {
+      "key": "TRIBE_STATUS_MATERIAL",
+      "de": "Es fehlen eingelagerte Materialien: {count} {resource}.",
+      "en": "Required stored materials: {count} {resource}."
+    },
+    {
+      "key": "TRIBE_STATUS_JOINED",
+      "de": "{name} gehört jetzt zu deinem Stamm. Wähle einen Beruf oder Auftrag.",
+      "en": "{name} has joined your tribe. Choose a profession or order."
+    },
+    {
+      "key": "TRIBE_TAMING_TAB",
+      "de": "Zähmung",
+      "en": "Taming"
+    },
+    {
+      "key": "HUD_HEALTH",
+      "de": "Leben",
+      "en": "Health"
+    },
+    {
+      "key": "HUD_FOOD",
+      "de": "Nahrung",
+      "en": "Food"
+    },
+    {
+      "key": "HUD_THIRST",
+      "de": "Durst",
+      "en": "Thirst"
+    },
+    {
+      "key": "HUD_DEVELOPMENT",
+      "de": "Entwicklung · {development}",
+      "en": "Evolution · {development}"
+    },
+    {
+      "key": "HUD_JOURNAL",
+      "de": "Buch · {journal}",
+      "en": "Journal · {journal}"
+    },
+    {
+      "key": "HUD_PROGRESS",
+      "de": "{species} Arten · {parts} Teile · {points} EP",
+      "en": "{species} species · {parts} parts · {points} DP"
+    },
+    {
+      "key": "HUD_BEHAVIOR",
+      "de": "Sozial {social} · Aggressiv {aggression}",
+      "en": "Social {social} · Aggression {aggression}"
+    },
+    {
+      "key": "HUD_MAP",
+      "de": "Weltkarte",
+      "en": "World map"
+    },
+    {
+      "key": "HUD_MAP_HELP",
+      "de": "Norden ist oben. Dreieck: Blickrichtung · Haus: Heimat · Punkte: eigene Gruppe.\nTasten + / −: Kartenmaßstab ändern.",
+      "en": "North is up. Triangle: heading · House: home · Dots: your group.\nKeys + / −: change map scale."
+    },
+    {
+      "key": "HUD_MAP_SCALE",
+      "de": "Maßstabsbalken: %s",
+      "en": "Scale bar: %s"
+    },
+    {
+      "key": "HUD_IDENTIFIED",
+      "de": "ART ERKANNT",
+      "en": "SPECIES IDENTIFIED"
+    },
+    {
+      "key": "HUD_SCAN_CONTROLS",
+      "de": "%s · Scan schließen\nJ · Alle Werte im Entdeckungsbuch",
+      "en": "%s · Close scanner\nJ · All stats in the journal"
+    },
+    {
+      "key": "SETTLEMENT_NOT_READY",
+      "de": "Der Ort ist noch nicht bereit.",
+      "en": "This site is not ready yet."
+    },
+    {
+      "key": "SETTLEMENT_SPHERE_REQUIRED",
+      "de": "Ein Außenlager benötigt eine Kugelwelt.",
+      "en": "An outpost requires a spherical world."
+    },
+    {
+      "key": "SETTLEMENT_LIMIT",
+      "de": "Beide Siedlungsorte sind gegründet.",
+      "en": "Both settlement sites have been founded."
+    },
+    {
+      "key": "SETTLEMENT_SELECT_FOUNDER",
+      "de": "Wähle einen einzelnen Gefährten als Gründer.",
+      "en": "Select one companion to found the outpost."
+    },
+    {
+      "key": "SETTLEMENT_KEEP_PLAYER",
+      "de": "Deine Kreatur bleibt im Heimatdorf; wähle einen Gefährten.",
+      "en": "Your creature stays in the home village; choose a companion."
+    },
+    {
+      "key": "SETTLEMENT_FOUNDER_BUSY",
+      "de": "Der Gründer muss seinen Auftrag abschließen und ohne Fracht warten.",
+      "en": "The founder must finish their job and wait without cargo."
+    },
+    {
+      "key": "SETTLEMENT_WALK_FIRST",
+      "de": "Schicke den Gründer per Rechtsklick 14–18 m vom Dorfplatz weg. Gründe nach seiner Ankunft hier ein Außenlager.",
+      "en": "Right-click to send the founder 14–18 m from the village center. Found the outpost here after they arrive."
+    },
+    {
+      "key": "SETTLEMENT_ROUTE_MISSING",
+      "de": "Zum neuen Platz fehlt ein sicherer Weg.",
+      "en": "There is no safe route to the new site."
+    },
+    {
+      "key": "SETTLEMENT_GROUND_MISSING",
+      "de": "Am neuen Ort fehlen geladener Boden und sichere Wege.",
+      "en": "The new site lacks loaded ground and safe routes."
+    },
+    {
+      "key": "SETTLEMENT_OVERLAP",
+      "de": "Der Platz überlappt bestehende Arbeitsstellen oder bietet zu wenig freie Fläche.",
+      "en": "This site overlaps existing workplaces or has too little free space."
+    },
+    {
+      "key": "SETTLEMENT_ROUTES_BUSY",
+      "de": "Die bisherigen Dorfwege sind noch nicht bereit.",
+      "en": "The current village routes are not ready yet."
+    },
+    {
+      "key": "SETTLEMENT_CERTIFY_FAILED",
+      "de": "Die bisherigen Arbeitswege konnten nicht gesichert werden.",
+      "en": "The existing work routes could not be secured."
+    },
+    {
+      "key": "SETTLEMENT_FOUND_FAILED",
+      "de": "Der Gründer ist noch gebunden oder der Platz ist nicht mehr gültig.",
+      "en": "The founder is still assigned elsewhere or the site is no longer valid."
+    },
+    {
+      "key": "SETTLEMENT_FOUND_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Bewohner und bisheriger Ort bleiben erhalten.",
+      "en": "Saving failed. The resident and the existing site are preserved."
+    },
+    {
+      "key": "SETTLEMENT_FOUNDED",
+      "de": "Außenlager gegründet. Wähle den Ort im Reiter Siedlungen und erteile dort Aufträge.",
+      "en": "Outpost founded. Choose it in Settlements to assign jobs there."
+    },
+    {
+      "key": "SETTLEMENT_ROUTES_PENDING",
+      "de": "Die Dorfwege sind noch nicht bereit.",
+      "en": "The village routes are not ready yet."
+    },
+    {
+      "key": "SETTLEMENT_WORK_CHECKPOINT",
+      "de": "Die laufenden Aufträge konnten nicht für den Ortswechsel gesichert werden.",
+      "en": "The current jobs could not be secured for the site switch."
+    },
+    {
+      "key": "SETTLEMENT_TARGET_ROUTES",
+      "de": "Der Zielort hat noch keine sicheren geladenen Wege.",
+      "en": "The destination does not yet have safe loaded routes."
+    },
+    {
+      "key": "SETTLEMENT_SWITCH_FAILED",
+      "de": "Speichern fehlgeschlagen. Ansicht, Vorräte und Aufträge bleiben am bisherigen Ort.",
+      "en": "Saving failed. The view, stock and jobs remain at the current site."
+    },
+    {
+      "key": "SETTLEMENT_SWITCHED",
+      "de": "Ort gewechselt. Jeder Ort behält seine Bewohner, Vorräte und Aufträge.",
+      "en": "Site switched. Each site keeps its own residents, stock and jobs."
+    },
+    {
+      "key": "SETTLEMENT_TAB",
+      "de": "Siedlungen",
+      "en": "Settlements"
+    },
+    {
+      "key": "SETTLEMENT_HELP",
+      "de": "Jeder Ort besitzt eigene Bewohner, Vorräte und Arbeitsaufträge. Der andere Ort arbeitet während des laufenden Spiels vereinfacht weiter. Pause und geschlossenes Spiel erzeugen nichts.",
+      "en": "Each site has its own residents, stock and jobs. The other site keeps working through simplified simulation while you play. Pausing or closing the game produces nothing."
+    },
+    {
+      "key": "SETTLEMENT_MANAGE",
+      "de": "Diesen Ort verwalten",
+      "en": "Manage this site"
+    },
+    {
+      "key": "SETTLEMENT_FOUND",
+      "de": "Außenlager am Standort des Gründers errichten",
+      "en": "Found an outpost at the founder’s location"
+    },
+    {
+      "key": "SETTLEMENT_HOME",
+      "de": "Heimatdorf",
+      "en": "Home village"
+    },
+    {
+      "key": "SETTLEMENT_OUTPOST",
+      "de": "Außenlager",
+      "en": "Outpost"
+    },
+    {
+      "key": "SETTLEMENT_NEAR",
+      "de": "In der Ansicht",
+      "en": "In view"
+    },
+    {
+      "key": "SETTLEMENT_FAR",
+      "de": "Arbeitet im Hintergrund",
+      "en": "Working in the background"
+    },
+    {
+      "key": "SETTLEMENT_ARRIVED",
+      "de": "Gründer angekommen. Der neue Ort beginnt mit einem eigenen leeren Lager.",
+      "en": "Founder arrived. The new site starts with its own empty store."
+    },
+    {
+      "key": "SETTLEMENT_DETAIL",
+      "de": "%s · %d Bewohner\nHolz %d · Stein %d · Nahrung %d · Wasser %d\n\n%s",
+      "en": "%s · %d residents\nWood %d · Stone %d · Food %d · Water %d\n\n%s"
+    },
+    {
+      "key": "EDITOR_TITLE",
+      "de": "VOXELVERSE  /  KREATUREN",
+      "en": "VOXELVERSE  /  CREATURES"
+    },
+    {
+      "key": "EDITOR_WELCOME",
+      "de": "Deine Kreatur. Deine Form.",
+      "en": "Your creature. Your shape."
+    },
+    {
+      "key": "EDITOR_TAB_BODY",
+      "de": "01  Formen",
+      "en": "01  Shape"
+    },
+    {
+      "key": "EDITOR_TAB_PARTS",
+      "de": "02  Teile",
+      "en": "02  Parts"
+    },
+    {
+      "key": "EDITOR_TAB_PAINT",
+      "de": "03  Farbe",
+      "en": "03  Color"
+    },
+    {
+      "key": "EDITOR_TAB_TEST",
+      "de": "04  Testen",
+      "en": "04  Test"
+    },
+    {
+      "key": "EDITOR_PLAY",
+      "de": "In die Welt  →",
+      "en": "Into the world  →"
+    },
+    {
+      "key": "EDITOR_PALETTE_BODY",
+      "de": "KÖRPER FORMEN",
+      "en": "SHAPE THE BODY"
+    },
+    {
+      "key": "EDITOR_PALETTE_PARTS",
+      "de": "TEILE ANBAUEN",
+      "en": "ATTACH PARTS"
+    },
+    {
+      "key": "EDITOR_PALETTE_PAINT",
+      "de": "FARBE & MUSTER",
+      "en": "COLOR & PATTERN"
+    },
+    {
+      "key": "EDITOR_PALETTE_TEST",
+      "de": "LEBENDIG WERDEN",
+      "en": "BRING IT TO LIFE"
+    },
+    {
+      "key": "EDITOR_PALETTE_DEFAULT",
+      "de": "TEILE",
+      "en": "PARTS"
+    },
+    {
+      "key": "EDITOR_INSPECTOR",
+      "de": "DEINE KREATUR",
+      "en": "YOUR CREATURE"
+    },
+    {
+      "key": "EDITOR_ATTACHED",
+      "de": "ANGEBAUTE TEILE",
+      "en": "ATTACHED PARTS"
+    },
+    {
+      "key": "EDITOR_SELECT_POINT",
+      "de": "Körperpunkt wählen",
+      "en": "Select a body point"
+    },
+    {
+      "key": "EDITOR_WIDTH",
+      "de": "Breite",
+      "en": "Width"
+    },
+    {
+      "key": "EDITOR_HEIGHT",
+      "de": "Höhe",
+      "en": "Height"
+    },
+    {
+      "key": "EDITOR_CURVATURE",
+      "de": "Krümmung",
+      "en": "Curvature"
+    },
+    {
+      "key": "EDITOR_LENGTH",
+      "de": "Körperlänge",
+      "en": "Body length"
+    },
+    {
+      "key": "EDITOR_BASE_COLOR",
+      "de": "Hautfarbe",
+      "en": "Skin color"
+    },
+    {
+      "key": "EDITOR_ACCENT_COLOR",
+      "de": "Musterfarbe",
+      "en": "Pattern color"
+    },
+    {
+      "key": "EDITOR_BELLY_COLOR",
+      "de": "Bauchfarbe",
+      "en": "Belly color"
+    },
+    {
+      "key": "EDITOR_EYE_COLOR",
+      "de": "Irisfarbe",
+      "en": "Iris color"
+    },
+    {
+      "key": "EDITOR_HORN_COLOR",
+      "de": "Hörner & Krallen",
+      "en": "Horns & claws"
+    },
+    {
+      "key": "EDITOR_DUPLICATE",
+      "de": "Kopie",
+      "en": "Duplicate"
+    },
+    {
+      "key": "EDITOR_REMOVE",
+      "de": "Entfernen",
+      "en": "Remove"
+    },
+    {
+      "key": "EDITOR_FRAME",
+      "de": "Ansicht einpassen  ·  F",
+      "en": "Fit view  ·  F"
+    },
+    {
+      "key": "EDITOR_TARGET_LIMB",
+      "de": "Ganze Gliedmaße",
+      "en": "Whole limb"
+    },
+    {
+      "key": "EDITOR_TARGET_END",
+      "de": "Fuß / Hand",
+      "en": "Foot / hand"
+    },
+    {
+      "key": "EDITOR_TARGET_FOOT",
+      "de": "Fuß bearbeiten",
+      "en": "Edit foot"
+    },
+    {
+      "key": "EDITOR_TARGET_HAND",
+      "de": "Hand bearbeiten",
+      "en": "Edit hand"
+    },
+    {
+      "key": "EDITOR_SINGLE",
+      "de": "Einzeln",
+      "en": "Single"
+    },
+    {
+      "key": "EDITOR_PAIRED",
+      "de": "Paar",
+      "en": "Pair"
+    },
+    {
+      "key": "EDITOR_CENTER",
+      "de": "Mitte",
+      "en": "Center"
+    },
+    {
+      "key": "EDITOR_POSITION",
+      "de": "Ort",
+      "en": "Position"
+    },
+    {
+      "key": "EDITOR_ROTATION",
+      "de": "Drehen",
+      "en": "Rotate"
+    },
+    {
+      "key": "EDITOR_SHAPE",
+      "de": "Form",
+      "en": "Shape"
+    },
+    {
+      "key": "EDITOR_AXIS_X",
+      "de": "X: seitlich / Breite",
+      "en": "X: sideways / width"
+    },
+    {
+      "key": "EDITOR_AXIS_Y",
+      "de": "Y: Höhe / Länge",
+      "en": "Y: height / length"
+    },
+    {
+      "key": "EDITOR_AXIS_Z",
+      "de": "Z: vor und zurück / Tiefe",
+      "en": "Z: forward and back / depth"
+    },
+    {
+      "key": "EDITOR_DEGREES",
+      "de": " · Grad",
+      "en": " · degrees"
+    },
+    {
+      "key": "EDITOR_SIZE",
+      "de": "Gesamtgröße",
+      "en": "Overall size"
+    },
+    {
+      "key": "EDITOR_RESET_SHAPE",
+      "de": "Drehung & Form zurücksetzen",
+      "en": "Reset rotation & shape"
+    },
+    {
+      "key": "EDITOR_DEFAULT_END",
+      "de": "Standard-Fuß / -Hand",
+      "en": "Default foot / hand"
+    },
+    {
+      "key": "EDITOR_SKIN_TYPE",
+      "de": "Hauttyp · nur Oberfläche",
+      "en": "Skin type · surface only"
+    },
+    {
+      "key": "EDITOR_SKIN_STRENGTH",
+      "de": "Strukturstärke",
+      "en": "Texture strength"
+    },
+    {
+      "key": "EDITOR_SKIN_SCALE",
+      "de": "Feinheit der Struktur",
+      "en": "Texture detail"
+    },
+    {
+      "key": "EDITOR_PATTERN_STRENGTH",
+      "de": "Musterstärke",
+      "en": "Pattern strength"
+    },
+    {
+      "key": "EDITOR_SWATCH_SKIN",
+      "de": "Farbfelder → Haut",
+      "en": "Swatches → Skin"
+    },
+    {
+      "key": "EDITOR_SWATCH_PATTERN",
+      "de": "Farbfelder → Muster",
+      "en": "Swatches → Pattern"
+    },
+    {
+      "key": "EDITOR_SWATCH_BELLY",
+      "de": "Farbfelder → Bauch",
+      "en": "Swatches → Belly"
+    },
+    {
+      "key": "EDITOR_SWATCH_IRIS",
+      "de": "Farbfelder → Iris",
+      "en": "Swatches → Iris"
+    },
+    {
+      "key": "EDITOR_SWATCH_HORNS",
+      "de": "Farbfelder → Hörner",
+      "en": "Swatches → Horns"
+    },
+    {
+      "key": "EDITOR_NAME_HINT",
+      "de": "Name deiner Kreatur",
+      "en": "Your creature's name"
+    },
+    {
+      "key": "EDITOR_UNDO_HINT",
+      "de": "Rückgängig · Strg+Z",
+      "en": "Undo · Ctrl+Z"
+    },
+    {
+      "key": "EDITOR_REDO_HINT",
+      "de": "Wiederholen · Strg+Y",
+      "en": "Redo · Ctrl+Y"
+    },
+    {
+      "key": "EDITOR_SYMMETRY",
+      "de": "Symmetrie",
+      "en": "Symmetry"
+    },
+    {
+      "key": "EDITOR_SNAP",
+      "de": "Andocken",
+      "en": "Surface snap"
+    },
+    {
+      "key": "EDITOR_NEW",
+      "de": "Neu",
+      "en": "New"
+    },
+    {
+      "key": "EDITOR_LOAD",
+      "de": "Laden",
+      "en": "Load"
+    },
+    {
+      "key": "EDITOR_SAVE",
+      "de": "Speichern",
+      "en": "Save"
+    },
+    {
+      "key": "EDITOR_MOTION_IDLE",
+      "de": "Stehen & Atmen",
+      "en": "Stand & breathe"
+    },
+    {
+      "key": "EDITOR_MOTION_WALK",
+      "de": "Gehen",
+      "en": "Walk"
+    },
+    {
+      "key": "EDITOR_MOTION_RUN",
+      "de": "Laufen",
+      "en": "Run"
+    },
+    {
+      "key": "EDITOR_PRESET_UPRIGHT",
+      "de": "Aufrecht",
+      "en": "Upright"
+    },
+    {
+      "key": "EDITOR_PRESET_GRAZER",
+      "de": "Langhals",
+      "en": "Long neck"
+    },
+    {
+      "key": "EDITOR_PRESET_CRAWLER",
+      "de": "Kriecher",
+      "en": "Crawler"
+    },
+    {
+      "key": "EDITOR_PRESET_ROUND",
+      "de": "Kugelbauch",
+      "en": "Round belly"
+    },
+    {
+      "key": "EDITOR_PRESET_HINT",
+      "de": "Nur den Körper umformen. Deine Teile bleiben erhalten. Rückgängig mit Strg+Z.",
+      "en": "Reshape the body only. Your parts stay attached. Undo with Ctrl+Z."
+    },
+    {
+      "key": "EDITOR_SELECT_PART",
+      "de": "Teil auswählen",
+      "en": "Select a part"
+    },
+    {
+      "key": "EDITOR_YOUR_PALETTE",
+      "de": "Deine Farbpalette",
+      "en": "Your color palette"
+    },
+    {
+      "key": "EDITOR_MOTION_PREVIEW",
+      "de": "Bewegungsvorschau",
+      "en": "Motion preview"
+    },
+    {
+      "key": "EDITOR_FOOT",
+      "de": "Fuß",
+      "en": "Foot"
+    },
+    {
+      "key": "EDITOR_HAND",
+      "de": "Hand",
+      "en": "Hand"
+    },
+    {
+      "key": "EDITOR_PART",
+      "de": "Teil",
+      "en": "Part"
+    },
+    {
+      "key": "EDITOR_CAPTION_BODY",
+      "de": "Ziehen, strecken, formen.",
+      "en": "Drag, stretch, shape."
+    },
+    {
+      "key": "EDITOR_CAPTION_PARTS",
+      "de": "Was soll deine Kreatur können?",
+      "en": "What should your creature do?"
+    },
+    {
+      "key": "EDITOR_CAPTION_PAINT",
+      "de": "Gib ihr einen eigenen Charakter.",
+      "en": "Give it its own character."
+    },
+    {
+      "key": "EDITOR_CAPTION_TEST",
+      "de": "Eine Form wird lebendig.",
+      "en": "A shape comes to life."
+    },
+    {
+      "key": "EDITOR_STATUS_CENTER",
+      "de": "Mittellinie: sieben feste Andockpunkte.",
+      "en": "Centerline: seven fixed attachment points."
+    },
+    {
+      "key": "EDITOR_STATUS_PAIRED",
+      "de": "Linke und rechte Seite werden gemeinsam bearbeitet.",
+      "en": "Left and right sides are edited together."
+    },
+    {
+      "key": "EDITOR_STATUS_SINGLE",
+      "de": "Einzelnes Teil bearbeiten.",
+      "en": "Editing a single part."
+    },
+    {
+      "key": "EDITOR_STATUS_LEG_FIRST",
+      "de": "Wähle zuerst das gewünschte Bein.",
+      "en": "Select the intended leg first."
+    },
+    {
+      "key": "EDITOR_STATUS_ARM_FIRST",
+      "de": "Wähle zuerst den gewünschten Arm.",
+      "en": "Select the intended arm first."
+    },
+    {
+      "key": "EDITOR_STATUS_END_COST",
+      "de": "Nicht genug Formpunkte für dieses Endstück.",
+      "en": "Not enough shape points for this foot or hand."
+    },
+    {
+      "key": "EDITOR_STATUS_END_ADDED",
+      "de": "Endstück angebaut · Größe, Form und Drehung rechts einstellen.",
+      "en": "Foot or hand attached · Adjust size, shape and rotation in Properties."
+    },
+    {
+      "key": "EDITOR_STATUS_COPY_COST",
+      "de": "Nicht genug Formpunkte für eine Kopie.",
+      "en": "Not enough shape points for a duplicate."
+    },
+    {
+      "key": "EDITOR_STATUS_LOCKED",
+      "de": "Dieses Teil wird durch Entdecken freigeschaltet.",
+      "en": "Discover species to unlock this part."
+    },
+    {
+      "key": "EDITOR_STATUS_COST",
+      "de": "Nicht genug Formpunkte. Entferne zuerst ein Teil.",
+      "en": "Not enough shape points. Remove a part first."
+    },
+    {
+      "key": "EDITOR_STATUS_SELECTED",
+      "de": "Teil ausgewählt · Rechts: Drehen X/Y/Z, Form und Größe · Goldene Punkte: Mittellinie.",
+      "en": "Part selected · Properties: rotation X/Y/Z, shape and size · Gold points: centerline."
+    },
+    {
+      "key": "EDITOR_STATUS_PRESET",
+      "de": "Körperform angewendet · Deine Anbauteile bleiben erhalten · Strg+Z macht es rückgängig.",
+      "en": "Body shape applied · Your parts stay attached · Ctrl+Z to undo."
+    },
+    {
+      "key": "EDITOR_STATUS_TOO_MANY",
+      "de": "Zu viele Formpunkte. Entferne zuerst ein Teil.",
+      "en": "Too many shape points. Remove a part first."
+    },
+    {
+      "key": "EDITOR_STATUS_ADDED",
+      "de": "Teil angebaut · Mausrad: Größe · Alt + Ziehen: drehen · Strg+Z: rückgängig",
+      "en": "Part attached · Wheel: size · Alt + drag: rotate · Ctrl+Z: undo"
+    },
+    {
+      "key": "EDITOR_STATUS_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Dein Entwurf bleibt hier geöffnet.",
+      "en": "Save failed. Your design remains open here."
+    },
+    {
+      "key": "EDITOR_STATUS_WORLD_FAILED",
+      "de": "Die Welt konnte nicht geöffnet werden. Dein Entwurf ist gespeichert.",
+      "en": "The world could not be opened. Your design has been saved."
+    },
+    {
+      "key": "EDITOR_STATUS_NEW",
+      "de": "Neue Kreatur · Deinen vorherigen Entwurf erhältst du mit Strg+Z zurück.",
+      "en": "New creature · Restore your previous design with Ctrl+Z."
+    },
+    {
+      "key": "EDITOR_STATUS_LOADED",
+      "de": "Gespeicherte Kreatur geladen · Strg+Z stellt deine vorherige Bearbeitung wieder her.",
+      "en": "Saved creature loaded · Ctrl+Z restores your previous edits."
+    },
+    {
+      "key": "EDITOR_HELP_INITIAL",
+      "de": "Ziehe an den Körperpunkten. Das Mausrad macht die gewählte Stelle dicker oder dünner.",
+      "en": "Drag the body points. Use the wheel to make the selected point thicker or thinner."
+    },
+    {
+      "key": "EDITOR_HELP_BODY",
+      "de": "Punkt ziehen: Körper formen.\nMausrad: Stelle dicker / dünner.\nStrg + Mausrad: Körperlänge.",
+      "en": "Drag a point: shape the body.\nWheel: thicker / thinner.\nCtrl + wheel: body length."
+    },
+    {
+      "key": "EDITOR_HELP_PARTS",
+      "de": "Teile auf den Körper ziehen.\nMausrad: Größe · Alt + Ziehen: drehen.\nRechts ziehen: Ansicht drehen.",
+      "en": "Drag parts onto the body.\nWheel: size · Alt + drag: rotate.\nRight drag: orbit the view."
+    },
+    {
+      "key": "EDITOR_HELP_PAINT",
+      "de": "Wähle Hautfarbe, Akzent und ein Muster. Alle Änderungen siehst du sofort.",
+      "en": "Choose a skin color, accent and pattern. Preview every change immediately."
+    },
+    {
+      "key": "EDITOR_HELP_TEST",
+      "de": "Teste deine Form in Bewegung.\nDie Vorschau verändert deinen Entwurf nicht.",
+      "en": "Test your shape in motion.\nThe preview keeps your design unchanged."
+    },
+    {
+      "key": "EDITOR_HELP_END",
+      "de": "Wähle ein Bein oder einen Arm.\nEndstück anklicken oder auf die Gliedmaße ziehen.\nGröße und Drehung rechts einstellen.",
+      "en": "Select a leg or arm.\nClick a foot or hand, or drag it onto the limb.\nAdjust size and rotation in Properties."
+    },
+    {
+      "key": "EDITOR_HELP_SKIN",
+      "de": "Hauttyp, Muster und fünf Farben kombinieren. Hauttypen ändern nur die Oberfläche.",
+      "en": "Combine skin type, pattern and five colors. Skin types affect only the surface."
+    },
+    {
+      "key": "EDITOR_CATEGORY_BODY",
+      "de": "Körper",
+      "en": "Body"
+    },
+    {
+      "key": "EDITOR_CATEGORY_MOUTH",
+      "de": "Mäuler",
+      "en": "Mouths"
+    },
+    {
+      "key": "EDITOR_CATEGORY_EYES",
+      "de": "Augen",
+      "en": "Eyes"
+    },
+    {
+      "key": "EDITOR_CATEGORY_LEGS",
+      "de": "Beine",
+      "en": "Legs"
+    },
+    {
+      "key": "EDITOR_CATEGORY_ARMS",
+      "de": "Arme",
+      "en": "Arms"
+    },
+    {
+      "key": "EDITOR_CATEGORY_FEET",
+      "de": "Füße",
+      "en": "Feet"
+    },
+    {
+      "key": "EDITOR_CATEGORY_HANDS",
+      "de": "Hände",
+      "en": "Hands"
+    },
+    {
+      "key": "EDITOR_CATEGORY_TAIL",
+      "de": "Schwänze",
+      "en": "Tails"
+    },
+    {
+      "key": "EDITOR_CATEGORY_HORNS",
+      "de": "Hörner",
+      "en": "Horns"
+    },
+    {
+      "key": "EDITOR_CATEGORY_PLATES",
+      "de": "Panzer",
+      "en": "Armor"
+    },
+    {
+      "key": "EDITOR_CATEGORY_SPIKES",
+      "de": "Stacheln",
+      "en": "Spikes"
+    },
+    {
+      "key": "EDITOR_CATEGORY_DECOR",
+      "de": "Details",
+      "en": "Details"
+    },
+    {
+      "key": "EDITOR_CATEGORY_PAINT",
+      "de": "Muster",
+      "en": "Patterns"
+    },
+    {
+      "key": "EDITOR_SKIN_SMOOTH",
+      "de": "Glatt",
+      "en": "Smooth"
+    },
+    {
+      "key": "EDITOR_SKIN_SCALES",
+      "de": "Schuppen",
+      "en": "Scales"
+    },
+    {
+      "key": "EDITOR_SKIN_FUR",
+      "de": "Kurzes Fell",
+      "en": "Short fur"
+    },
+    {
+      "key": "EDITOR_SKIN_LEATHER",
+      "de": "Leder",
+      "en": "Leather"
+    },
+    {
+      "key": "EDITOR_SKIN_CHITIN",
+      "de": "Chitin",
+      "en": "Chitin"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_0",
+      "de": "Wald",
+      "en": "Forest"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_1",
+      "de": "Wüste",
+      "en": "Desert"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_2",
+      "de": "Ozean",
+      "en": "Ocean"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_3",
+      "de": "Glut",
+      "en": "Ember"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_4",
+      "de": "Dämmerung",
+      "en": "Twilight"
+    },
+    {
+      "key": "EDITOR_COLOR_PALETTE_5",
+      "de": "Polar",
+      "en": "Polar"
+    },
+    {
+      "key": "EDITOR_STATS",
+      "de": "{used} / {limit} Formpunkte\n\nTempo  {speed}     Kraft  {attack}\nSchutz  {defense}     Sinne  {perception}",
+      "en": "{used} / {limit} shape points\n\nSpeed  {speed}     Power  {attack}\nArmor  {defense}     Senses  {perception}"
+    },
+    {
+      "key": "EDITOR_POINT",
+      "de": "Punkt {point} / 7",
+      "en": "Point {point} / 7"
+    },
+    {
+      "key": "EDITOR_STATUS_SAVED",
+      "de": "Gespeichert · {name} · Revision {revision}",
+      "en": "Saved · {name} · Revision {revision}"
+    },
+    {
+      "key": "EDITOR_SHOW_INSPECTOR",
+      "de": "Eigenschaften",
+      "en": "Properties"
+    },
+    {
+      "key": "EDITOR_SHOW_PALETTE",
+      "de": "Teileauswahl",
+      "en": "Palette"
+    },
+    {
+      "key": "EDITOR_CARD_LOCKED",
+      "de": "Gesperrt",
+      "en": "Locked"
+    },
+    {
+      "key": "EDITOR_CARD_COST",
+      "de": "{count} Formpunkte",
+      "en": "{count} shape points"
+    },
+    {
+      "key": "EDITOR_CARD_HINT",
+      "de": "Zur Kreatur ziehen oder anklicken.",
+      "en": "Drag onto the creature or click."
+    },
+    {
+      "key": "EDITOR_CARD_UNLOCK",
+      "de": "Durch das Entdecken von Arten freischalten.",
+      "en": "Discover species to unlock."
+    },
+    {
+      "key": "EDITOR_STATUS_UNDO_EMPTY",
+      "de": "Nichts zum Rückgängigmachen.",
+      "en": "Nothing to undo."
+    },
+    {
+      "key": "EDITOR_STATUS_REDO_EMPTY",
+      "de": "Nichts zum Wiederholen.",
+      "en": "Nothing to redo."
+    },
+    {
+      "key": "EDITOR_STATUS_UNDO",
+      "de": "Bearbeitung rückgängig gemacht.",
+      "en": "Undo applied."
+    },
+    {
+      "key": "EDITOR_STATUS_REDO",
+      "de": "Bearbeitung wiederhergestellt.",
+      "en": "Redo applied."
+    },
+    {
+      "key": "EDITOR_STATUS_SNAP_ON",
+      "de": "Andocken eingeschaltet.",
+      "en": "Surface snap enabled."
+    },
+    {
+      "key": "EDITOR_STATUS_SNAP_OFF",
+      "de": "Andocken ausgeschaltet.",
+      "en": "Surface snap disabled."
+    },
+    {
+      "key": "EDITOR_STATUS_ATTACH_SELECT",
+      "de": "Wähle zuerst ein Teil.",
+      "en": "Select a modular part first."
+    },
+    {
+      "key": "EDITOR_STATUS_ATTACHED",
+      "de": "Teil an der Körperoberfläche befestigt.",
+      "en": "Selected part attached to the body surface."
+    },
+    {
+      "key": "EDITOR_PART_BODY_BALANCED_CORE_NAME",
+      "de": "Ausgewogener Körper",
+      "en": "Balanced Core"
+    },
+    {
+      "key": "EDITOR_PART_BODY_BALANCED_CORE_DESCRIPTION",
+      "de": "Mittelgroßer Kreaturenkörper.",
+      "en": "Middle-sized creature body."
+    },
+    {
+      "key": "EDITOR_PART_BODY_LONG_GRAZER_NAME",
+      "de": "Langer Weidekörper",
+      "en": "Long Grazer Core"
+    },
+    {
+      "key": "EDITOR_PART_BODY_LONG_GRAZER_DESCRIPTION",
+      "de": "Langer Körper für standfeste Pflanzenfresser.",
+      "en": "Long body for stable herbivores."
+    },
+    {
+      "key": "EDITOR_PART_BODY_HEAVY_SHELL_NAME",
+      "de": "Schwerer Panzerkörper",
+      "en": "Heavy Shell"
+    },
+    {
+      "key": "EDITOR_PART_BODY_HEAVY_SHELL_DESCRIPTION",
+      "de": "Breiter, geschützter Körper.",
+      "en": "Wide protected body."
+    },
+    {
+      "key": "EDITOR_PART_BODY_INSECTOID_NAME",
+      "de": "Insektenkörper",
+      "en": "Insectoid Thorax"
+    },
+    {
+      "key": "EDITOR_PART_BODY_INSECTOID_DESCRIPTION",
+      "de": "Gegliederter Körper für viele Beine.",
+      "en": "Segmented body for many legs."
+    },
+    {
+      "key": "EDITOR_PART_BODY_SERPENT_BASE_NAME",
+      "de": "Schlangenkörper",
+      "en": "Serpent Base"
+    },
+    {
+      "key": "EDITOR_PART_BODY_SERPENT_BASE_DESCRIPTION",
+      "de": "Flexibler, lang gestreckter Körper.",
+      "en": "Flexible stretched body."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_PLAIN_NAME",
+      "de": "Schlichte Haut",
+      "en": "Plain Skin"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_PLAIN_DESCRIPTION",
+      "de": "Natürliche Grundfarbe.",
+      "en": "Natural base color."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_FOREST_SPOTS_NAME",
+      "de": "Waldflecken",
+      "en": "Forest Spots"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_FOREST_SPOTS_DESCRIPTION",
+      "de": "Grüne Tarnflecken.",
+      "en": "Green camouflage spots."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_SAND_STRIPES_NAME",
+      "de": "Sandstreifen",
+      "en": "Sand Stripes"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_SAND_STRIPES_DESCRIPTION",
+      "de": "Streifen für trockene Biome.",
+      "en": "Dry biome stripes."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_WARNING_MARKS_NAME",
+      "de": "Warnzeichnung",
+      "en": "Warning Marks"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_WARNING_MARKS_DESCRIPTION",
+      "de": "Leuchtende Giftwarnzeichnung.",
+      "en": "Bright poisonous markings."
+    },
+    {
+      "key": "EDITOR_PART_PAINT_CRYSTAL_BLOOM_NAME",
+      "de": "Kristallblüte",
+      "en": "Crystal Bloom"
+    },
+    {
+      "key": "EDITOR_PART_PAINT_CRYSTAL_BLOOM_DESCRIPTION",
+      "de": "Bunte außerirdische Platten.",
+      "en": "Colorful alien plates."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_GRAZER_NAME",
+      "de": "Weidemaul",
+      "en": "Grazer Mouth"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_GRAZER_DESCRIPTION",
+      "de": "Gut für pflanzliche Nahrung.",
+      "en": "Good for plant food."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_BROAD_BEAK_NAME",
+      "de": "Breiter Schnabel",
+      "en": "Broad Beak"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_BROAD_BEAK_DESCRIPTION",
+      "de": "Einfacher, harter Schnabel.",
+      "en": "Simple hard beak."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_PREDATOR_JAWS_NAME",
+      "de": "Raubkiefer",
+      "en": "Predator Jaws"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_PREDATOR_JAWS_DESCRIPTION",
+      "de": "Kräftige Kiefer zum Beißen.",
+      "en": "Strong biting jaws."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_FILTER_SNOUT_NAME",
+      "de": "Filterschnauze",
+      "en": "Filter Snout"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_FILTER_SNOUT_DESCRIPTION",
+      "de": "Lange Schnauze zur Nahrungssuche im flachen Wasser.",
+      "en": "Long snout for shallow water feeding."
+    },
+    {
+      "key": "EDITOR_PART_EYES_BEADY_NAME",
+      "de": "Knopfaugen",
+      "en": "Beady Eyes"
+    },
+    {
+      "key": "EDITOR_PART_EYES_BEADY_DESCRIPTION",
+      "de": "Einfache Sicht für wenige Formpunkte.",
+      "en": "Cheap basic vision."
+    },
+    {
+      "key": "EDITOR_PART_EYES_WIDE_NAME",
+      "de": "Große Augen",
+      "en": "Wide Watchers"
+    },
+    {
+      "key": "EDITOR_PART_EYES_WIDE_DESCRIPTION",
+      "de": "Große, ausdrucksstarke Augen.",
+      "en": "Large expressive eyes."
+    },
+    {
+      "key": "EDITOR_PART_EYES_STALKS_NAME",
+      "de": "Stielaugen",
+      "en": "Eye Stalks"
+    },
+    {
+      "key": "EDITOR_PART_EYES_STALKS_DESCRIPTION",
+      "de": "Erhöhte Augen für sicheres Erkunden.",
+      "en": "Raised eyes for safer scanning."
+    },
+    {
+      "key": "EDITOR_PART_EYES_CLUSTER_NAME",
+      "de": "Augenbüschel",
+      "en": "Cluster Eyes"
+    },
+    {
+      "key": "EDITOR_PART_EYES_CLUSTER_DESCRIPTION",
+      "de": "Mehrere kleine Sinnesaugen.",
+      "en": "Multiple small sensor eyes."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_STUBBY_NAME",
+      "de": "Stummelbeine",
+      "en": "Stubby Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_STUBBY_DESCRIPTION",
+      "de": "Standfest, aber langsam.",
+      "en": "Stable but slow."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_WALKER_NAME",
+      "de": "Laufbeine",
+      "en": "Walker Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_WALKER_DESCRIPTION",
+      "de": "Ausgewogene Fortbewegung.",
+      "en": "Balanced movement."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_SPRINTER_NAME",
+      "de": "Sprintbeine",
+      "en": "Sprinter Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_SPRINTER_DESCRIPTION",
+      "de": "Schnell, aber hungrig.",
+      "en": "Fast but hungry."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_SPIDER_NAME",
+      "de": "Spinnenbeine",
+      "en": "Spider Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_SPIDER_DESCRIPTION",
+      "de": "Seitliche Beine mit vielen Gelenken.",
+      "en": "Many-jointed side legs."
+    },
+    {
+      "key": "EDITOR_PART_LEGS_HOOF_NAME",
+      "de": "Hufbeine",
+      "en": "Hoof Legs"
+    },
+    {
+      "key": "EDITOR_PART_LEGS_HOOF_DESCRIPTION",
+      "de": "Schnelle Steppenbeine.",
+      "en": "Fast steppe legs."
+    },
+    {
+      "key": "EDITOR_PART_ARMS_GRASPING_NAME",
+      "de": "Greifarme",
+      "en": "Grasping Arms"
+    },
+    {
+      "key": "EDITOR_PART_ARMS_GRASPING_DESCRIPTION",
+      "de": "Einfache Handhabung von Gegenständen.",
+      "en": "Basic manipulation."
+    },
+    {
+      "key": "EDITOR_PART_ARMS_CLIMBER_NAME",
+      "de": "Kletterarme",
+      "en": "Climber Arms"
+    },
+    {
+      "key": "EDITOR_PART_ARMS_CLIMBER_DESCRIPTION",
+      "de": "Lange Arme mit kräftigem Griff.",
+      "en": "Long arms with strong grip."
+    },
+    {
+      "key": "EDITOR_PART_ARMS_CLAWS_NAME",
+      "de": "Krallenarme",
+      "en": "Claw Arms"
+    },
+    {
+      "key": "EDITOR_PART_ARMS_CLAWS_DESCRIPTION",
+      "de": "Krallenbewehrte Arme zum Angreifen.",
+      "en": "Offensive clawed arms."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BALANCE_NAME",
+      "de": "Balanceschwanz",
+      "en": "Balance Tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BALANCE_DESCRIPTION",
+      "de": "Hilft bei der Fortbewegung.",
+      "en": "Helps with movement."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_CLUB_NAME",
+      "de": "Keulenschwanz",
+      "en": "Club Tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_CLUB_DESCRIPTION",
+      "de": "Schwerer Schwanz zur Verteidigung.",
+      "en": "Heavy defensive tail."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_FIN_NAME",
+      "de": "Flossenschwanz",
+      "en": "Fin Tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_FIN_DESCRIPTION",
+      "de": "Unterstützt die Bewegung im Wasser.",
+      "en": "Water movement helper."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STINGER_NAME",
+      "de": "Stachelschwanz",
+      "en": "Stinger Tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STINGER_DESCRIPTION",
+      "de": "Gefährlicher, spitzer Schwanz.",
+      "en": "Dangerous pointed tail."
+    },
+    {
+      "key": "EDITOR_PART_HORNS_SMALL_NAME",
+      "de": "Kleine Hörner",
+      "en": "Small Horns"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_SMALL_DESCRIPTION",
+      "de": "Kleine Hörner zur Verteidigung.",
+      "en": "Small defensive horns."
+    },
+    {
+      "key": "EDITOR_PART_HORNS_CREST_NAME",
+      "de": "Kammhörner",
+      "en": "Crest Horns"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_CREST_DESCRIPTION",
+      "de": "Zum Imponieren und Verteidigen.",
+      "en": "Visual display and defense."
+    },
+    {
+      "key": "EDITOR_PART_HORNS_ANTLERS_NAME",
+      "de": "Astgeweih",
+      "en": "Branch Antlers"
+    },
+    {
+      "key": "EDITOR_PART_HORNS_ANTLERS_DESCRIPTION",
+      "de": "Großes, verzweigtes Geweih zum Imponieren.",
+      "en": "Large branching display horns."
+    },
+    {
+      "key": "EDITOR_PART_PLATES_DORSAL_NAME",
+      "de": "Rückenplatten",
+      "en": "Dorsal Plates"
+    },
+    {
+      "key": "EDITOR_PART_PLATES_DORSAL_DESCRIPTION",
+      "de": "Panzerplatten auf dem Rücken.",
+      "en": "Back armor plates."
+    },
+    {
+      "key": "EDITOR_PART_PLATES_SHELL_NAME",
+      "de": "Schalenpanzer",
+      "en": "Shell Plates"
+    },
+    {
+      "key": "EDITOR_PART_PLATES_SHELL_DESCRIPTION",
+      "de": "Mehrlagiger Schalenpanzer.",
+      "en": "Layered shell armor."
+    },
+    {
+      "key": "EDITOR_PART_SPIKES_BACK_NAME",
+      "de": "Rückenstacheln",
+      "en": "Back Spikes"
+    },
+    {
+      "key": "EDITOR_PART_SPIKES_BACK_DESCRIPTION",
+      "de": "Einfache Stacheln zur Verteidigung.",
+      "en": "Simple defensive spikes."
+    },
+    {
+      "key": "EDITOR_PART_SPIKES_SIDE_NAME",
+      "de": "Seitenstacheln",
+      "en": "Side Spikes"
+    },
+    {
+      "key": "EDITOR_PART_SPIKES_SIDE_DESCRIPTION",
+      "de": "Schutz an den Seiten.",
+      "en": "Side protection."
+    },
+    {
+      "key": "EDITOR_PART_DECOR_FEATHERS_NAME",
+      "de": "Federkamm",
+      "en": "Feather Crest"
+    },
+    {
+      "key": "EDITOR_PART_DECOR_FEATHERS_DESCRIPTION",
+      "de": "Bunte Federn zum Imponieren.",
+      "en": "Colorful social display."
+    },
+    {
+      "key": "EDITOR_PART_DECOR_CRYSTALS_NAME",
+      "de": "Kristallwuchs",
+      "en": "Crystal Growths"
+    },
+    {
+      "key": "EDITOR_PART_DECOR_CRYSTALS_DESCRIPTION",
+      "de": "Leuchtender außerirdischer Schmuck.",
+      "en": "Bright alien decoration."
+    },
+    {
+      "key": "EDITOR_PART_FEET_PADS_NAME",
+      "de": "Ballenfüße",
+      "en": "Padded feet"
+    },
+    {
+      "key": "EDITOR_PART_FEET_PADS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_CLAWS_NAME",
+      "de": "Krallenfüße",
+      "en": "Clawed feet"
+    },
+    {
+      "key": "EDITOR_PART_FEET_CLAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_HOOVES_NAME",
+      "de": "Spalthufe",
+      "en": "Cloven hooves"
+    },
+    {
+      "key": "EDITOR_PART_FEET_HOOVES_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_WEBBED_NAME",
+      "de": "Schwimmfüße",
+      "en": "Webbed feet"
+    },
+    {
+      "key": "EDITOR_PART_FEET_WEBBED_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_FELINE_PAWS_NAME",
+      "de": "Katzenpfoten",
+      "en": "Cat paws"
+    },
+    {
+      "key": "EDITOR_PART_FEET_FELINE_PAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_BEAR_PAWS_NAME",
+      "de": "Bärentatzen",
+      "en": "Bear paws"
+    },
+    {
+      "key": "EDITOR_PART_FEET_BEAR_PAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_FEET_HORSE_HOOVES_NAME",
+      "de": "Pferdehufe",
+      "en": "Horse hooves"
+    },
+    {
+      "key": "EDITOR_PART_FEET_HORSE_HOOVES_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_HANDS_GRASP_NAME",
+      "de": "Greifhände",
+      "en": "Grasping hands"
+    },
+    {
+      "key": "EDITOR_PART_HANDS_GRASP_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_HANDS_CLAWS_NAME",
+      "de": "Krallenhände",
+      "en": "Clawed hands"
+    },
+    {
+      "key": "EDITOR_PART_HANDS_CLAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_HANDS_PINCERS_NAME",
+      "de": "Scherenhände",
+      "en": "Pincers"
+    },
+    {
+      "key": "EDITOR_PART_HANDS_PINCERS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_HANDS_CRAB_CLAWS_NAME",
+      "de": "Krebsscheren",
+      "en": "Crab claws"
+    },
+    {
+      "key": "EDITOR_PART_HANDS_CRAB_CLAWS_DESCRIPTION",
+      "de": "Am passenden Bein oder Arm befestigen. Größe und Drehung separat einstellen.",
+      "en": "Attach to the matching leg or arm. Adjust size and rotation separately."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_CANINE_SNOUT_NAME",
+      "de": "Hundeschnauze",
+      "en": "Canine snout"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_CANINE_SNOUT_DESCRIPTION",
+      "de": "Spitze Schnauze mit Nasenspiegel und Fangzähnen. Werte und Freischaltung wie Raubkiefer.",
+      "en": "Tapered snout with a nose pad and fangs. Stats and unlock match Predator Jaws."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_CROCODILE_SNOUT_NAME",
+      "de": "Krokodilschnauze",
+      "en": "Crocodile snout"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_CROCODILE_SNOUT_DESCRIPTION",
+      "de": "Lange, flache Schnauze mit zwei Zahnreihen. Werte und Freischaltung wie Raubkiefer.",
+      "en": "Long, flat snout with two rows of teeth. Stats and unlock match Predator Jaws."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_OCTOPUS_BEAK_NAME",
+      "de": "Oktopusmund",
+      "en": "Octopus mouth"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_OCTOPUS_BEAK_DESCRIPTION",
+      "de": "Runde Mundöffnung mit innenliegendem Schnabel. Werte und Freischaltung wie Raubkiefer.",
+      "en": "Round mouth opening with an inner beak. Stats and unlock match Predator Jaws."
+    },
+    {
+      "key": "EDITOR_TOOL_MOVE",
+      "de": "Verschieben · W",
+      "en": "Move · W"
+    },
+    {
+      "key": "EDITOR_TOOL_ROTATE",
+      "de": "Drehen · E",
+      "en": "Rotate · E"
+    },
+    {
+      "key": "EDITOR_TOOL_SCALE",
+      "de": "Größe · R",
+      "en": "Scale · R"
+    },
+    {
+      "key": "EDITOR_TOOL_JOINT",
+      "de": "Gelenk · J",
+      "en": "Joint · J"
+    },
+    {
+      "key": "EDITOR_JOINT_HELP",
+      "de": "Gelenkpunkt ziehen · Umschalt: Raster",
+      "en": "Drag joint point · Shift: snap"
+    },
+    {
+      "key": "EDITOR_JOINT_UPPER",
+      "de": "Oberes Segment",
+      "en": "Upper segment"
+    },
+    {
+      "key": "EDITOR_JOINT_LOWER",
+      "de": "Unteres Segment",
+      "en": "Lower segment"
+    },
+    {
+      "key": "EDITOR_JOINT_OFFSET",
+      "de": "Gelenkversatz · X / Y / Z",
+      "en": "Joint offset · X / Y / Z"
+    },
+    {
+      "key": "EDITOR_JOINT_RESET",
+      "de": "Gelenk zurücksetzen",
+      "en": "Reset joint"
+    },
+    {
+      "key": "EDITOR_TOOL_MOVE_HINT",
+      "de": "Pfeil ziehen: eine Achse verschieben · Andocken bleibt wirksam.",
+      "en": "Drag an arrow: move along one axis · Surface snap stays active."
+    },
+    {
+      "key": "EDITOR_TOOL_ROTATE_HINT",
+      "de": "Farbring ziehen: lokal drehen · Umschalt: 15°-Schritte.",
+      "en": "Drag a colored ring: rotate locally · Shift: 15° steps."
+    },
+    {
+      "key": "EDITOR_TOOL_SCALE_HINT",
+      "de": "Quadrat ziehen: Proportion ändern · Mitte: Gesamtgröße.",
+      "en": "Drag a square: change proportions · Center: overall size."
+    },
+    {
+      "key": "EDITOR_TOOL_JOINT_HINT",
+      "de": "Goldenen Gelenkpunkt oder Achsen ziehen · Rechts: Segmentlängen.",
+      "en": "Drag the gold joint point or axes · Properties: segment lengths."
+    },
+    {
+      "key": "EDITOR_EDIT_CANCELLED",
+      "de": "Bearbeitung abgebrochen.",
+      "en": "Edit cancelled."
+    },
+    {
+      "key": "EDITOR_COURSE_TITLE",
+      "de": "TESTSTRECKE",
+      "en": "TEST COURSE"
+    },
+    {
+      "key": "EDITOR_COURSE_FLAT",
+      "de": "Arbeitsfläche",
+      "en": "Workbench"
+    },
+    {
+      "key": "EDITOR_COURSE_SLOPE",
+      "de": "Steigung",
+      "en": "Slope"
+    },
+    {
+      "key": "EDITOR_COURSE_STEPS",
+      "de": "Stufen",
+      "en": "Steps"
+    },
+    {
+      "key": "EDITOR_COURSE_RESUME",
+      "de": "Weiter",
+      "en": "Resume"
+    },
+    {
+      "key": "EDITOR_COURSE_PAUSE",
+      "de": "Pause",
+      "en": "Pause"
+    },
+    {
+      "key": "EDITOR_COURSE_RESTART",
+      "de": "Neu starten",
+      "en": "Restart"
+    },
+    {
+      "key": "EDITOR_COURSE_SPEED",
+      "de": "Tempo der Vorschau",
+      "en": "Preview speed"
+    },
+    {
+      "key": "EDITOR_COURSE_HELP",
+      "de": "Teste Haltung und Schritte auf der Arbeitsfläche, an einer Steigung oder auf Stufen.",
+      "en": "Test posture and steps on the workbench, a slope or steps."
+    },
+    {
+      "key": "EDITOR_COURSE_FINISHED",
+      "de": "Ziel erreicht · Neu starten",
+      "en": "Destination reached · Restart"
+    },
+    {
+      "key": "EDITOR_COURSE_PAUSED",
+      "de": "Angehalten",
+      "en": "Paused"
+    },
+    {
+      "key": "EDITOR_COURSE_DESIGN_SAFE",
+      "de": "Entwurf bleibt erhalten",
+      "en": "Your design stays unchanged"
+    },
+    {
+      "key": "EDITOR_FITTINGS",
+      "de": "Sattel & Geschirr prüfen",
+      "en": "Check saddle & harness"
+    },
+    {
+      "key": "EDITOR_FIT_CHECK",
+      "de": "Anhalten & jetzt prüfen",
+      "en": "Pause & check now"
+    },
+    {
+      "key": "EDITOR_FIT_FIND",
+      "de": "Freiraum am Anschluss suchen",
+      "en": "Find attachment clearance"
+    },
+    {
+      "key": "EDITOR_FIT_APPLY",
+      "de": "Vorschlag übernehmen",
+      "en": "Apply proposal"
+    },
+    {
+      "key": "EDITOR_SOCKET_SADDLE",
+      "de": "Sattel / Reitersitz",
+      "en": "Saddle / rider seat"
+    },
+    {
+      "key": "EDITOR_SOCKET_LEFT",
+      "de": "Geschirr links",
+      "en": "Left harness"
+    },
+    {
+      "key": "EDITOR_SOCKET_RIGHT",
+      "de": "Geschirr rechts",
+      "en": "Right harness"
+    },
+    {
+      "key": "EDITOR_SOCKET_ENABLED",
+      "de": "Anschluss aktiv",
+      "en": "Attachment enabled"
+    },
+    {
+      "key": "EDITOR_SOCKET_POSITION",
+      "de": "Lage am Rücken",
+      "en": "Position on back"
+    },
+    {
+      "key": "EDITOR_SOCKET_OFFSET_X",
+      "de": "Versatz rechts",
+      "en": "Offset right"
+    },
+    {
+      "key": "EDITOR_SOCKET_OFFSET_Y",
+      "de": "Versatz oben",
+      "en": "Offset up"
+    },
+    {
+      "key": "EDITOR_SOCKET_OFFSET_Z",
+      "de": "Versatz hinten",
+      "en": "Offset back"
+    },
+    {
+      "key": "EDITOR_SOCKET_TILT",
+      "de": "Neigung",
+      "en": "Pitch"
+    },
+    {
+      "key": "EDITOR_SOCKET_ROTATION",
+      "de": "Drehung",
+      "en": "Yaw"
+    },
+    {
+      "key": "EDITOR_SOCKET_ROLL",
+      "de": "Seitneigung",
+      "en": "Roll"
+    },
+    {
+      "key": "EDITOR_SOCKET_MIRROR",
+      "de": "Geschirr auf Gegenseite spiegeln",
+      "en": "Mirror harness to other side"
+    },
+    {
+      "key": "EDITOR_FIT_MOVING",
+      "de": "Passprobe in Bewegung. Anhalten & jetzt prüfen untersucht die aktuelle Pose.",
+      "en": "Fit preview in motion. Pause & check now inspects the current pose."
+    },
+    {
+      "key": "EDITOR_FIT_CLEAR",
+      "de": "Keine Überschneidung",
+      "en": "No overlap"
+    },
+    {
+      "key": "EDITOR_FIT_INCOMPLETE",
+      "de": "Prüfung unvollständig · Anschlusslage oder Geometrie prüfen",
+      "en": "Check incomplete · Inspect attachment position or geometry"
+    },
+    {
+      "key": "EDITOR_FIT_NO_SOCKETS",
+      "de": "Keine aktiven Anschlüsse geprüft",
+      "en": "No active attachments checked"
+    },
+    {
+      "key": "EDITOR_REST_POSE",
+      "de": "Ruhepose",
+      "en": "Rest pose"
+    },
+    {
+      "key": "EDITOR_STILL_POSE",
+      "de": "angehaltene Momentaufnahme",
+      "en": "paused snapshot"
+    },
+    {
+      "key": "EDITOR_SOCKET_RIDER",
+      "de": "Sattel / Reiter",
+      "en": "Saddle / rider"
+    },
+    {
+      "key": "EDITOR_BODY_TARGET",
+      "de": "Rumpf",
+      "en": "Body"
+    },
+    {
+      "key": "EDITOR_PART_TARGET",
+      "de": "Anbauteil",
+      "en": "Attached part"
+    },
+    {
+      "key": "EDITOR_FIT_LEG_LENGTHS",
+      "de": "Segmentlängen übernehmen",
+      "en": "Apply segment lengths"
+    },
+    {
+      "key": "EDITOR_FIT_ALREADY_CLEAR",
+      "de": "Gewählte Passprobe ist in dieser Pose bereits frei.",
+      "en": "The selected fitting already has clearance in this pose."
+    },
+    {
+      "key": "EDITOR_FIT_NO_PROPOSAL",
+      "de": "Kein freier Vorschlag im Suchbereich. Lage/Drehung oder das markierte Anbauteil bearbeiten.",
+      "en": "No clear placement found in the search range. Edit position, rotation or the highlighted part."
+    },
+    {
+      "key": "EDITOR_FIT_BODY_HINT",
+      "de": "Rückenform oder Anschlusslage ändern; rote Passprobe erneut prüfen.",
+      "en": "Edit back shape or attachment position; check the red fitting again."
+    },
+    {
+      "key": "EDITOR_FIT_LEG_LIMIT",
+      "de": "Segmentgrenze erreicht. Gelenk, Größe oder Beinansatz dieses Paars bearbeiten.",
+      "en": "Segment limit reached. Edit this pair's joint, size or leg attachment."
+    },
+    {
+      "key": "EDITOR_FIT_LEG_UNSAFE",
+      "de": "Keine sichere Längenanpassung gefunden. Gelenk und Beinansatz dieses Paars bearbeiten.",
+      "en": "No safe length adjustment found. Edit this pair's joint and leg attachment."
+    },
+    {
+      "key": "EDITOR_FIT_LEG_APPLIED",
+      "de": "Segmentlängen dieses Paars übernommen · Fußkontakt erneut geprüft.",
+      "en": "Segment lengths applied for this pair · Foot contact checked again."
+    },
+    {
+      "key": "EDITOR_RIDER_DIMENSIONS",
+      "de": "Reitermaße",
+      "en": "Rider dimensions"
+    },
+    {
+      "key": "EDITOR_RIDER_SCALE",
+      "de": "Reitergröße",
+      "en": "Rider size"
+    },
+    {
+      "key": "EDITOR_RIDER_SPACING",
+      "de": "Beinabstand",
+      "en": "Leg spacing"
+    },
+    {
+      "key": "EDITOR_RIDER_HEIGHT",
+      "de": "Sitzhöhe",
+      "en": "Seat height"
+    },
+    {
+      "key": "EDITOR_SEAT_FIND",
+      "de": "Sitz an Rücken anpassen",
+      "en": "Fit seat to back"
+    },
+    {
+      "key": "EDITOR_SEAT_APPLY",
+      "de": "Sitzvorschlag übernehmen",
+      "en": "Apply seat proposal"
+    },
+    {
+      "key": "EDITOR_REVIEW_START",
+      "de": "Laufen, Rampe & Stufen prüfen",
+      "en": "Check walking, slope & steps"
+    },
+    {
+      "key": "EDITOR_SEAT_NO_PROPOSAL",
+      "de": "Keine passende Auflage gefunden. Rückenform, Anschlussneigung oder markierte Anbauteile bearbeiten.",
+      "en": "No supported seat found. Edit back shape, attachment tilt or highlighted parts."
+    },
+    {
+      "key": "EDITOR_REVIEW_CANCEL",
+      "de": "Prüfung abbrechen",
+      "en": "Cancel check"
+    },
+    {
+      "key": "EDITOR_REVIEW_INCOMPLETE",
+      "de": "Prüfung abgebrochen oder unvollständig · keine Freigabe.",
+      "en": "Check cancelled or incomplete · No approval."
+    },
+    {
+      "key": "EDITOR_REVIEW_FLAT",
+      "de": "Ebene",
+      "en": "Flat"
+    },
+    {
+      "key": "EDITOR_REVIEW_SLOPE",
+      "de": "Rampe",
+      "en": "Slope"
+    },
+    {
+      "key": "EDITOR_REVIEW_WALK",
+      "de": "Laufen",
+      "en": "Walk"
+    },
+    {
+      "key": "EDITOR_REVIEW_RUN",
+      "de": "Rennen",
+      "en": "Run"
+    },
+    {
+      "key": "EDITOR_REVIEW_BODY_HIT",
+      "de": "Rumpftreffer",
+      "en": "Body collision"
+    },
+    {
+      "key": "EDITOR_REVIEW_PART_HIT",
+      "de": "Anbauteiltreffer",
+      "en": "Part collision"
+    },
+    {
+      "key": "EDITOR_STATUS_CAMPAIGN_SAVE_FAILED",
+      "de": "Kreatur gespeichert; Spielstand konnte nicht gespeichert werden. Bitte erneut versuchen.",
+      "en": "Creature saved; the campaign could not be saved. Please try again."
+    },
+    {
+      "key": "EDITOR_COURSE_STATUS",
+      "de": "%s · %d Beine\n%s",
+      "en": "%s · %d legs\n%s"
+    },
+    {
+      "key": "EDITOR_FIT_COLLISIONS",
+      "de": "%d Überschneidungen · rot markiert",
+      "en": "%d overlaps · marked red"
+    },
+    {
+      "key": "EDITOR_FIT_REPORT",
+      "de": "%s\nFeste Probereitergröße · %s · %d stark gestreckte Beine (>20%%).",
+      "en": "%s\nFixed test rider size · %s · %d overstretched legs (>20%%)."
+    },
+    {
+      "key": "EDITOR_FIT_FEET",
+      "de": "\n%d Füße · Bodenabweichung %.3f",
+      "en": "\n%d feet · Ground deviation %.3f"
+    },
+    {
+      "key": "EDITOR_FIT_STRETCH",
+      "de": "Beinpaar +%.0f%% · Gelenk bearbeiten",
+      "en": "Leg pair +%.0f%% · Edit joint"
+    },
+    {
+      "key": "EDITOR_FIT_PROPOSAL",
+      "de": "Freiraumvorschlag: Rücken %.0f%% · Versatz %.0f / %.0f / %.0f%%.\nFür die feste Passprobe geprüft; Sattelauflage anschließend ansehen.",
+      "en": "Clearance proposal: back %.0f%% · Offset %.0f / %.0f / %.0f%%.\nChecked for the fixed fitting; inspect saddle support afterwards."
+    },
+    {
+      "key": "EDITOR_SEAT_UNAVAILABLE",
+      "de": "\nSitzprüfung nicht verfügbar: Anschluss oder Reitermaße prüfen.",
+      "en": "\nSeat check unavailable: inspect attachment or rider dimensions."
+    },
+    {
+      "key": "EDITOR_SEAT_DISABLED",
+      "de": "\nSattel deaktiviert.",
+      "en": "\nSaddle disabled."
+    },
+    {
+      "key": "EDITOR_SEAT_SUPPORT",
+      "de": "\nAuflage %d/9 · größter Abstand %.1f%%",
+      "en": "\nSupport %d/9 · Largest gap %.1f%%"
+    },
+    {
+      "key": "EDITOR_SEAT_ADJUST",
+      "de": " · Sitz an Rücken anpassen",
+      "en": " · Fit seat to back"
+    },
+    {
+      "key": "EDITOR_SEAT_CONTACT",
+      "de": "\nReiterkontakt prüfen · Abstand %.1f%%",
+      "en": "\nCheck rider contact · Gap %.1f%%"
+    },
+    {
+      "key": "EDITOR_SEAT_PROPOSAL",
+      "de": "Sitzvorschlag: Rücken %.0f%% · Höhe %+.1f%%\nBeinabstand %.0f%% · Sitzhöhe %.0f%%\n9/9 Auflagepunkte und Freiraum in Ruhe geprüft.",
+      "en": "Seat proposal: back %.0f%% · Height %+.1f%%\nLeg spacing %.0f%% · Seat height %.0f%%\n9/9 support points and clearance checked at rest."
+    },
+    {
+      "key": "EDITOR_REVIEW_RUNNING",
+      "de": "Prüfe an einer Kopie · %d Posen · %d/6 Strecken fertig",
+      "en": "Checking a copy · %d poses · %d/6 courses complete"
+    },
+    {
+      "key": "EDITOR_REVIEW_DONE",
+      "de": "%d Posen geprüft · keine durchgehende Bewegungsfreigabe.",
+      "en": "%d poses checked · No continuous motion approval."
+    },
+    {
+      "key": "EDITOR_REVIEW_HITS",
+      "de": " · %d Trefferposen",
+      "en": " · %d collision poses"
+    },
+    {
+      "key": "EDITOR_REVIEW_SEE_HIT",
+      "de": " bei %.2f s ansehen",
+      "en": " at %.2f s · View"
+    },
+    {
+      "key": "EDITOR_REVIEW_NO_HITS",
+      "de": " · keine Treffer in %d Posen",
+      "en": " · No collisions in %d poses"
+    },
+    {
+      "key": "EDITOR_REVIEW_GROUND",
+      "de": "Bodenkontakt ≥%d Füße · Dehnung bis +%.0f%%",
+      "en": "Ground contact ≥%d feet · Stretch up to +%.0f%%"
+    },
+    {
+      "key": "EDITOR_REVIEW_POSE",
+      "de": "Trefferpose bei %.2f s · %s",
+      "en": "Collision pose at %.2f s · %s"
+    },
+    {
+      "key": "EDITOR_FIT_TARGET",
+      "de": "%s ↔ %s",
+      "en": "%s ↔ %s"
+    },
+    {
+      "key": "EDITOR_REVIEW_SCENARIO",
+      "de": "%s · %s",
+      "en": "%s · %s"
+    },
+    {
+      "key": "EDITOR_REVIEW_RESULT_HIT",
+      "de": "%s · %d Trefferposen",
+      "en": "%s · %d collision poses"
+    },
+    {
+      "key": "EDITOR_REVIEW_RESULT_CLEAR",
+      "de": "%s · keine Treffer in %d Posen",
+      "en": "%s · No collisions in %d poses"
+    },
+    {
+      "key": "EDITOR_REVIEW_RESULT_POSE",
+      "de": "%s bei %.2f s ansehen",
+      "en": "%s at %.2f s · View"
+    },
+    {
+      "key": "EDITOR_GAIT_TWO",
+      "de": "Zweibeinig",
+      "en": "Biped"
+    },
+    {
+      "key": "EDITOR_GAIT_FOUR",
+      "de": "Vierbeinig",
+      "en": "Quadruped"
+    },
+    {
+      "key": "EDITOR_GAIT_SIX",
+      "de": "Dreipunktgang",
+      "en": "Tripod gait"
+    },
+    {
+      "key": "EDITOR_GAIT_FREE",
+      "de": "Freier Körperbau",
+      "en": "Free body plan"
+    },
+    {
+      "key": "EDITOR_CATEGORY_HEAD",
+      "de": "Kopfmodule",
+      "en": "Head modules"
+    },
+    {
+      "key": "EDITOR_PART_HEAD_ELEPHANT_TRUNK_NAME",
+      "de": "Elefantenrüssel",
+      "en": "Elephant trunk"
+    },
+    {
+      "key": "EDITOR_PART_HEAD_ELEPHANT_TRUNK_DESCRIPTION",
+      "de": "Gebogener Rüssel über dem separat wählbaren Mund. Freischaltung mit der Filterschnauze; reines Gestaltungsteil.",
+      "en": "Curved trunk above a separately selectable mouth. Unlocked with the filter snout; cosmetic part."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_FELINE_SNOUT_NAME",
+      "de": "Katzenschnauze",
+      "en": "Feline muzzle"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_FELINE_SNOUT_DESCRIPTION",
+      "de": "Kurze Schnauze mit zwei Schnurrhaarkissen, kleiner Nase und Fangzähnen. Werte und Freischaltung wie Raubkiefer.",
+      "en": "Short muzzle with whisker pads, a small nose and fangs. Shares the predator jaws profile and unlock."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_BEAR_SNOUT_NAME",
+      "de": "Bärenschnauze",
+      "en": "Bear muzzle"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_BEAR_SNOUT_DESCRIPTION",
+      "de": "Breite, kräftige Schnauze mit großem Nasenspiegel und Mahlzähnen. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels.",
+      "en": "Broad, strong muzzle with a large nose and molars. Shares the broad beak omnivore profile and unlock."
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_PIG_SNOUT_NAME",
+      "de": "Schweineschnauze",
+      "en": "Pig snout"
+    },
+    {
+      "key": "EDITOR_PART_MOUTH_PIG_SNOUT_DESCRIPTION",
+      "de": "Kurze Schnauze mit flacher Rüsselscheibe und zwei Nasenlöchern. Bestehendes Allesfresserprofil und Freischaltung des breiten Schnabels.",
+      "en": "Short snout with a flat nose disc and two nostrils. Shares the broad beak omnivore profile and unlock."
+    },
+    {
+      "key": "Alle Teile",
+      "de": "Alle Teile",
+      "en": "All parts"
+    },
+    {
+      "key": "Noch gesperrt",
+      "de": "Noch gesperrt",
+      "en": "Still locked"
+    },
+    {
+      "key": "Merkliste",
+      "de": "Merkliste",
+      "en": "Wishlist"
+    },
+    {
+      "key": "Tierrollen ansehen",
+      "de": "Tierrollen ansehen",
+      "en": "View animal roles"
+    },
+    {
+      "key": "Mit meiner Kreatur vergleichen",
+      "de": "Mit meiner Kreatur vergleichen",
+      "en": "Compare with my creature"
+    },
+    {
+      "key": "Im Spiel verfolgen",
+      "de": "Im Spiel verfolgen",
+      "en": "Track in game"
+    },
+    {
+      "key": "Alle Lebensweisen / Tierrollen",
+      "de": "Alle Lebensweisen / Tierrollen",
+      "en": "All lifestyles / animal roles"
+    },
+    {
+      "key": "Alle Kategorien",
+      "de": "Alle Kategorien",
+      "en": "All categories"
+    },
+    {
+      "key": "Tierrolle: %s",
+      "de": "Tierrolle: %s",
+      "en": "Animal role: %s"
+    },
+    {
+      "key": "Teil oder Herkunft suchen …",
+      "de": "Teil oder Herkunft suchen …",
+      "en": "Search part or origin…"
+    },
+    {
+      "key": "Forschungsziel suchen …",
+      "de": "Forschungsziel suchen …",
+      "en": "Search research goals…"
+    },
+    {
+      "key": "Dein nächster Schritt",
+      "de": "Dein nächster Schritt",
+      "en": "Your next step"
+    },
+    {
+      "key": "Unbekannte Art",
+      "de": "Unbekannte Art",
+      "en": "Unknown species"
+    },
+    {
+      "key": " · gemerkt",
+      "de": " · gemerkt",
+      "en": " · wished"
+    },
+    {
+      "key": "Noch keine Arten entdeckt",
+      "de": "Noch keine Arten entdeckt",
+      "en": "No species discovered yet"
+    },
+    {
+      "key": "Keine passenden Einträge",
+      "de": "Keine passenden Einträge",
+      "en": "No matching entries"
+    },
+    {
+      "key": "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier.",
+      "de": "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier.",
+      "en": "Open scan mode and keep an animal in the crosshair for 2.5 seconds. When the circle fills, its species appears here."
+    },
+    {
+      "key": "Ändere die Suche oder den Filter, um weitere Einträge zu sehen.",
+      "de": "Ändere die Suche oder den Filter, um weitere Einträge zu sehen.",
+      "en": "Change your search or filter to see more entries."
+    },
+    {
+      "key": "Deine Teile-Merkliste",
+      "de": "Deine Teile-Merkliste",
+      "en": "Your body-part wishlist"
+    },
+    {
+      "key": "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen.",
+      "de": "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen.",
+      "en": "Choose a body part under “Still locked” and add it to your wishlist. You can track one wished part as a goal in the game."
+    },
+    {
+      "key": "Tierrollen · %s",
+      "de": "Tierrollen · %s",
+      "en": "Animal roles · %s"
+    },
+    {
+      "key": "noch nicht bekannt",
+      "de": "noch nicht bekannt",
+      "en": "not yet known"
+    },
+    {
+      "key": "Noch nicht bekannt",
+      "de": "Noch nicht bekannt",
+      "en": "Not yet known"
+    },
+    {
+      "key": "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz.",
+      "de": "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz.",
+      "en": "Show or hide recorded species suitability. This does not indicate ownership."
+    },
+    {
+      "key": "Dein Körperbau ist noch nicht verfügbar.",
+      "de": "Dein Körperbau ist noch nicht verfügbar.",
+      "en": "Your creature's anatomy is not available yet."
+    },
+    {
+      "key": "Körperbauwerte und beobachtete Teile vergleichen.",
+      "de": "Körperbauwerte und beobachtete Teile vergleichen.",
+      "en": "Compare anatomy values and observed parts."
+    },
+    {
+      "key": "Zur Artenansicht",
+      "de": "Zur Artenansicht",
+      "en": "Back to species view"
+    },
+    {
+      "key": "KÖRPERTEILE DIESER ART",
+      "de": "KÖRPERTEILE DIESER ART",
+      "en": "BODY PARTS OF THIS SPECIES"
+    },
+    {
+      "key": "Ziel erreicht",
+      "de": "Ziel erreicht",
+      "en": "Goal complete"
+    },
+    {
+      "key": "In Arbeit",
+      "de": "In Arbeit",
+      "en": "In progress"
+    },
+    {
+      "key": "FREIGESCHALTET",
+      "de": "FREIGESCHALTET",
+      "en": "UNLOCKED"
+    },
+    {
+      "key": "GESPERRT · SILHOUETTE",
+      "de": "GESPERRT · SILHOUETTE",
+      "en": "LOCKED · SILHOUETTE"
+    },
+    {
+      "key": "Teil",
+      "de": "Teil",
+      "en": "Part"
+    },
+    {
+      "key": "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken.",
+      "de": "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken.",
+      "en": "Available in the creature editor · close the book and press F2."
+    },
+    {
+      "key": "Von Merkliste entfernen",
+      "de": "Von Merkliste entfernen",
+      "en": "Remove from wishlist"
+    },
+    {
+      "key": "Nicht mehr verfolgen",
+      "de": "Nicht mehr verfolgen",
+      "en": "Stop tracking"
+    },
+    {
+      "key": "Auswahl gespeichert.",
+      "de": "Auswahl gespeichert.",
+      "en": "Selection saved."
+    },
+    {
+      "key": "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil.",
+      "de": "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil.",
+      "en": "Your wishlist is full (32 parts). Remove another part first."
+    },
+    {
+      "key": "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog.",
+      "de": "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog.",
+      "en": "This part is already available or missing from the catalog."
+    },
+    {
+      "key": "Es wird gerade gespeichert. Versuche es gleich erneut.",
+      "de": "Es wird gerade gespeichert. Versuche es gleich erneut.",
+      "en": "Saving is in progress. Try again shortly."
+    },
+    {
+      "key": "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen.",
+      "de": "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen.",
+      "en": "Saving failed. Your previous selection is preserved; you can try again."
+    },
+    {
+      "key": "Dein Forschungsziel",
+      "de": "Dein Forschungsziel",
+      "en": "Your research goal"
+    },
+    {
+      "key": "Ziel nicht verfügbar",
+      "de": "Ziel nicht verfügbar",
+      "en": "Goal unavailable"
+    },
+    {
+      "key": "Entdecke deine Welt.",
+      "de": "Entdecke deine Welt.",
+      "en": "Discover your world."
+    },
+    {
+      "key": "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen.",
+      "de": "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen.",
+      "en": "Your tribe · select residents and give the group an order. J opens your shared discoveries."
+    },
+    {
+      "key": "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden.",
+      "de": "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden.",
+      "en": "The display was changed, but the preference could not be saved for next time."
+    },
+    {
+      "key": "Verfügbar",
+      "de": "Verfügbar",
+      "en": "Available"
+    },
+    {
+      "key": "Deine Kreatur",
+      "de": "Deine Kreatur",
+      "en": "Your creature"
+    },
+    {
+      "key": "Entdeckte Art",
+      "de": "Entdeckte Art",
+      "en": "Observed species"
+    },
+    {
+      "key": "Ansichten einzeln drehen: ziehen · Zoom: Mausrad",
+      "de": "Ansichten einzeln drehen: ziehen · Zoom: Mausrad",
+      "en": "Rotate each view: drag · Zoom: mouse wheel"
+    },
+    {
+      "key": "KÖRPERTEILE DER ENTDECKTEN ART",
+      "de": "KÖRPERTEILE DER ENTDECKTEN ART",
+      "en": "BODY PARTS OF THE OBSERVED SPECIES"
+    },
+    {
+      "key": "Körperbau",
+      "de": "Körperbau",
+      "en": "Anatomy"
+    },
+    {
+      "key": "Du",
+      "de": "Du",
+      "en": "You"
+    },
+    {
+      "key": "Art",
+      "de": "Art",
+      "en": "Species"
+    },
+    {
+      "key": "Art − Du",
+      "de": "Art − Du",
+      "en": "Species − you"
+    },
+    {
+      "key": "Wert der entdeckten Art minus dein Körperbauwert.",
+      "de": "Wert der entdeckten Art minus dein Körperbauwert.",
+      "en": "Observed species value minus your anatomy value."
+    },
+    {
+      "key": "Keine gespeicherten Körperteile.",
+      "de": "Keine gespeicherten Körperteile.",
+      "en": "No recorded body parts."
+    },
+    {
+      "key": "Freigeschaltet · im Editor verfügbar",
+      "de": "Freigeschaltet · im Editor verfügbar",
+      "en": "Unlocked · available in the editor"
+    },
+    {
+      "key": "Dieses frühere Teil fehlt im aktuellen Katalog.",
+      "de": "Dieses frühere Teil fehlt im aktuellen Katalog.",
+      "en": "This legacy part is missing from the current catalog."
+    },
+    {
+      "key": "Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile.",
+      "de": "Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile.",
+      "en": "Values unavailable: a saved anatomy is incomplete or contains legacy parts."
+    },
+    {
+      "key": "Pflanzenfresser",
+      "de": "Pflanzenfresser",
+      "en": "Grazer"
+    },
+    {
+      "key": "Räuber",
+      "de": "Räuber",
+      "en": "Predator"
+    },
+    {
+      "key": "Sammler",
+      "de": "Sammler",
+      "en": "Forager"
+    },
+    {
+      "key": "Aasfresser",
+      "de": "Aasfresser",
+      "en": "Scavenger"
+    },
+    {
+      "key": "Kletterer",
+      "de": "Kletterer",
+      "en": "Climber"
+    },
+    {
+      "key": "Wasserbewohner",
+      "de": "Wasserbewohner",
+      "en": "Aquatic species"
+    },
+    {
+      "key": "Körper",
+      "de": "Körper",
+      "en": "Body"
+    },
+    {
+      "key": "Mäuler",
+      "de": "Mäuler",
+      "en": "Mouths"
+    },
+    {
+      "key": "Augen",
+      "de": "Augen",
+      "en": "Eyes"
+    },
+    {
+      "key": "Beine",
+      "de": "Beine",
+      "en": "Legs"
+    },
+    {
+      "key": "Arme",
+      "de": "Arme",
+      "en": "Arms"
+    },
+    {
+      "key": "Schwänze",
+      "de": "Schwänze",
+      "en": "Tails"
+    },
+    {
+      "key": "Hörner",
+      "de": "Hörner",
+      "en": "Horns"
+    },
+    {
+      "key": "Panzerplatten",
+      "de": "Panzerplatten",
+      "en": "Armor plates"
+    },
+    {
+      "key": "Stacheln",
+      "de": "Stacheln",
+      "en": "Spikes"
+    },
+    {
+      "key": "Verzierungen",
+      "de": "Verzierungen",
+      "en": "Decorations"
+    },
+    {
+      "key": "Farben",
+      "de": "Farben",
+      "en": "Colors"
+    },
+    {
+      "key": "Füße",
+      "de": "Füße",
+      "en": "Feet"
+    },
+    {
+      "key": "Hände",
+      "de": "Hände",
+      "en": "Hands"
+    },
+    {
+      "key": "Milchtier",
+      "de": "Milchtier",
+      "en": "Milk animal"
+    },
+    {
+      "key": "Zugtier",
+      "de": "Zugtier",
+      "en": "Draught animal"
+    },
+    {
+      "key": "Reittier",
+      "de": "Reittier",
+      "en": "Riding animal"
+    },
+    {
+      "key": "Begleittier",
+      "de": "Begleittier",
+      "en": "Companion animal"
+    },
+    {
+      "key": "Eiertier",
+      "de": "Eiertier",
+      "en": "Egg animal"
+    },
+    {
+      "key": "Pflanzen",
+      "de": "Pflanzen",
+      "en": "Plants"
+    },
+    {
+      "key": "Fleisch",
+      "de": "Fleisch",
+      "en": "Meat"
+    },
+    {
+      "key": "ruhiges Temperament",
+      "de": "ruhiges Temperament",
+      "en": "calm temperament"
+    },
+    {
+      "key": "soziales Temperament",
+      "de": "soziales Temperament",
+      "en": "social temperament"
+    },
+    {
+      "key": "TIERROLLEN · GESCANNTE ART",
+      "de": "TIERROLLEN · GESCANNTE ART",
+      "en": "ANIMAL ROLES · SCANNED SPECIES"
+    },
+    {
+      "key": "Grundsätzlich zähmbar · %s",
+      "de": "Grundsätzlich zähmbar · %s",
+      "en": "Tameable species · %s"
+    },
+    {
+      "key": "Nahrung: %s · Wasser: %s l je 300 Spielsekunden",
+      "de": "Nahrung: %s · Wasser: %s l je 300 Spielsekunden",
+      "en": "Food: %s · water: %s l per 300 game seconds"
+    },
+    {
+      "key": "Lernfähigkeit: %d %% · Sozialverträglichkeit: %d %% · Bindungsfähigkeit: %d %%",
+      "de": "Lernfähigkeit: %d %% · Sozialverträglichkeit: %d %% · Bindungsfähigkeit: %d %%",
+      "en": "Trainability: %d %% · sociability: %d %% · bonding: %d %%"
+    },
+    {
+      "key": "Ausdauer bei Nennlast: %s s · Bodentempo: %s m/s",
+      "de": "Ausdauer bei Nennlast: %s s · Bodentempo: %s m/s",
+      "en": "Stamina at rated load: %s s · ground speed: %s m/s"
+    },
+    {
+      "key": "Wahrnehmung: %s m",
+      "de": "Wahrnehmung: %s m",
+      "en": "Perception: %s m"
+    },
+    {
+      "key": "Milcheignung: %s l je %s aktive Spielsekunden",
+      "de": "Milcheignung: %s l je %s aktive Spielsekunden",
+      "en": "Milk suitability: %s l per %s active game seconds"
+    },
+    {
+      "key": "Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich.",
+      "de": "Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich.",
+      "en": "Egg husbandry in the tribal age requires an owned animal, a nesting site and supplies."
+    },
+    {
+      "key": "Zugkraft: %s N · benötigt passenden Geschirr-Anschluss",
+      "de": "Zugkraft: %s N · benötigt passenden Geschirr-Anschluss",
+      "en": "Pulling force: %s N · requires a compatible harness attachment"
+    },
+    {
+      "key": "Zusätzliche Traglast: %s kg · benötigt passenden Sattel-Anschluss",
+      "de": "Zusätzliche Traglast: %s kg · benötigt passenden Sattel-Anschluss",
+      "en": "Additional carrying capacity: %s kg · requires a compatible saddle attachment"
+    },
+    {
+      "key": "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar.",
+      "de": "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar.",
+      "en": "This saved part is unavailable in the current part catalog."
+    },
+    {
+      "key": "Noch gesperrt · weitere Arten beobachten",
+      "de": "Noch gesperrt · weitere Arten beobachten",
+      "en": "Still locked · observe more species"
+    },
+    {
+      "key": "Entdeckt bei %s · %s",
+      "de": "Entdeckt bei %s · %s",
+      "en": "Discovered from %s · %s"
+    },
+    {
+      "key": "unbekannter Art",
+      "de": "unbekannter Art",
+      "en": "unknown species"
+    },
+    {
+      "key": "Von Beginn an verfügbar",
+      "de": "Von Beginn an verfügbar",
+      "en": "Available from the start"
+    },
+    {
+      "key": "Durch Artenentdeckung · ursprüngliche Art nicht vermerkt",
+      "de": "Durch Artenentdeckung · ursprüngliche Art nicht vermerkt",
+      "en": "Unlocked by discovering a species · original species not recorded"
+    },
+    {
+      "key": "Aus deinem bisherigen Kreaturenentwurf übernommen",
+      "de": "Aus deinem bisherigen Kreaturenentwurf übernommen",
+      "en": "Imported from your previous creature design"
+    },
+    {
+      "key": "Bereits freigeschaltet",
+      "de": "Bereits freigeschaltet",
+      "en": "Already unlocked"
+    },
+    {
+      "key": "Welt %s",
+      "de": "Welt %s",
+      "en": "World %s"
+    },
+    {
+      "key": "unbekannt",
+      "de": "unbekannt",
+      "en": "unknown"
+    },
+    {
+      "key": "Region %s / %s",
+      "de": "Region %s / %s",
+      "en": "Region %s / %s"
+    },
+    {
+      "key": "Zurück zum Nest · nach der Erholung kannst du weiter erkunden.",
+      "de": "Zurück zum Nest · nach der Erholung kannst du weiter erkunden.",
+      "en": "Return to the nest · continue exploring after recovering."
+    },
+    {
+      "key": "Wasser suchen · gehe ans Wasser und trinke mit Linksklick.",
+      "de": "Wasser suchen · gehe ans Wasser und trinke mit Linksklick.",
+      "en": "Find water · approach it and drink with left click."
+    },
+    {
+      "key": "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt.",
+      "de": "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt.",
+      "en": "Find food · left-click food suited to your creature."
+    },
+    {
+      "key": "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
+      "de": "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
+      "en": "Your first species · %s opens scan mode. Keep an animal in the crosshair until the circle fills."
+    },
+    {
+      "key": "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2.",
+      "de": "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2.",
+      "en": "Keep exploring · use %s to scan unknown species. Find new parts in the editor with F2."
+    },
+    {
+      "key": "Erste Begegnung",
+      "de": "Erste Begegnung",
+      "en": "First encounter"
+    },
+    {
+      "key": "Artenvielfalt",
+      "de": "Artenvielfalt",
+      "en": "Species diversity"
+    },
+    {
+      "key": "Leben im Wasser",
+      "de": "Leben im Wasser",
+      "en": "Life in water"
+    },
+    {
+      "key": "Neue Horizonte",
+      "de": "Neue Horizonte",
+      "en": "New horizons"
+    },
+    {
+      "key": "Feldforscher",
+      "de": "Feldforscher",
+      "en": "Field researcher"
+    },
+    {
+      "key": "Wasserart",
+      "de": "Wasserart",
+      "en": "Aquatic species"
+    },
+    {
+      "key": "Ziel nicht mehr verfügbar",
+      "de": "Ziel nicht mehr verfügbar",
+      "en": "Goal no longer available"
+    },
+    {
+      "key": "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen.",
+      "de": "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen.",
+      "en": "This tracked goal belongs to an earlier version. Stop tracking it or choose another goal."
+    },
+    {
+      "key": "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
+      "de": "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist.",
+      "en": "Discover your first species. Open scan mode with %s and keep an animal in the crosshair until the circle fills."
+    },
+    {
+      "key": "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal.",
+      "de": "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal.",
+      "en": "Discover three different species. Observing known species again does not count twice."
+    },
+    {
+      "key": "Entdecke eine wasserbewohnende Tierart. Suche an Gewässern und scanne sie mit %s.",
+      "de": "Entdecke eine wasserbewohnende Tierart. Suche an Gewässern und scanne sie mit %s.",
+      "en": "Discover an aquatic species. Search near water and scan it with %s."
+    },
+    {
+      "key": "Erkunde drei verschiedene Regionen. Neu betretene Regionen werden vom Spiel erfasst; wiederholte Besuche zählen nicht mehrfach.",
+      "de": "Erkunde drei verschiedene Regionen. Neu betretene Regionen werden vom Spiel erfasst; wiederholte Besuche zählen nicht mehrfach.",
+      "en": "Explore three different regions. Newly entered regions are recorded automatically; repeat visits do not count again."
+    },
+    {
+      "key": "Entdecke zehn verschiedene Tierarten. Die Entdeckungen deiner gesamten Kampagne zählen mit.",
+      "de": "Entdecke zehn verschiedene Tierarten. Die Entdeckungen deiner gesamten Kampagne zählen mit.",
+      "en": "Discover ten different species. Discoveries from your entire campaign count."
+    },
+    {
+      "key": "Angriffswert des Körperbaus; kein garantierter Schaden pro Biss.",
+      "de": "Angriffswert des Körperbaus; kein garantierter Schaden pro Biss.",
+      "en": "Anatomy attack value; not guaranteed damage per bite."
+    },
+    {
+      "key": "Verteidigungswert durch Körper und angesetzte Teile.",
+      "de": "Verteidigungswert durch Körper und angesetzte Teile.",
+      "en": "Defense value from the body and attached parts."
+    },
+    {
+      "key": "Körperbauwert für Gesundheit, einschließlich Körpergröße; keine aktuelle Gesundheit.",
+      "de": "Körperbauwert für Gesundheit, einschließlich Körpergröße; keine aktuelle Gesundheit.",
+      "en": "Anatomical health value, including body size; not current health."
+    },
+    {
+      "key": "Tempo des Körperbaus einschließlich Masse; Bewegung im Spiel kann begrenzt sein.",
+      "de": "Tempo des Körperbaus einschließlich Masse; Bewegung im Spiel kann begrenzt sein.",
+      "en": "Anatomical speed including mass; movement in the game may be limited."
+    },
+    {
+      "key": "Sprungwert des Körperbaus; keine Höhenangabe in Metern.",
+      "de": "Sprungwert des Körperbaus; keine Höhenangabe in Metern.",
+      "en": "Anatomical jump value; not a height in meters."
+    },
+    {
+      "key": "Anatomischer Schwimmwert. Daraus folgt keine bestimmte Schwimmgeschwindigkeit.",
+      "de": "Anatomischer Schwimmwert. Daraus folgt keine bestimmte Schwimmgeschwindigkeit.",
+      "en": "Anatomical swimming value. This does not specify a swimming speed."
+    },
+    {
+      "key": "Wahrnehmungswert durch Körperteile.",
+      "de": "Wahrnehmungswert durch Körperteile.",
+      "en": "Perception value from body parts."
+    },
+    {
+      "key": "Greifwert durch Körperteile.",
+      "de": "Greifwert durch Körperteile.",
+      "en": "Grip value from body parts."
+    },
+    {
+      "key": "Eignung des Körperbaus für pflanzliche Nahrung.",
+      "de": "Eignung des Körperbaus für pflanzliche Nahrung.",
+      "en": "Anatomical suitability for plant food."
+    },
+    {
+      "key": "Eignung des Körperbaus für tierische Nahrung.",
+      "de": "Eignung des Körperbaus für tierische Nahrung.",
+      "en": "Anatomical suitability for animal food."
+    },
+    {
+      "key": "Anatomischer Flugwert; schaltet allein keinen Flugmodus frei.",
+      "de": "Anatomischer Flugwert; schaltet allein keinen Flugmodus frei.",
+      "en": "Anatomical flight value; does not unlock flight on its own."
+    },
+    {
+      "key": "Grundverbrauch des Körperbaus. Ein kleinerer Wert bedeutet weniger Verbrauch.",
+      "de": "Grundverbrauch des Körperbaus. Ein kleinerer Wert bedeutet weniger Verbrauch.",
+      "en": "Base anatomical consumption. A lower value means less consumption."
+    },
+    {
+      "key": "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen",
+      "de": "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen",
+      "en": "Hold the left mouse button to rotate · use the mouse wheel to zoom"
+    },
+    {
+      "key": "JOURNAL_GUIDE",
+      "de": "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder.",
+      "en": "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
+    },
+    {
+      "key": "JOURNAL_UNSCANNED",
+      "de": "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht.",
+      "en": "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
+    },
+    {
+      "key": "JOURNAL_SPECIES_DETAIL",
+      "de": "%s\nEntdeckt auf %s",
+      "en": "%s\nDiscovered on %s"
+    },
+    {
+      "key": "JOURNAL_MISSING_VIEW",
+      "de": "\n\nFür diese frühere Entdeckung fehlt eine gespeicherte Ansicht. Beobachte die Art erneut, um sie zu ergänzen.",
+      "en": "\n\nThis earlier discovery has no saved view. Observe the species again to add one."
+    },
+    {
+      "key": "JOURNAL_VIEW_HINT",
+      "de": "\n\nAnsicht drehen: ziehen · Zoom: Mausrad",
+      "en": "\n\nRotate view: drag · Zoom: mouse wheel"
+    },
+    {
+      "key": "JOURNAL_AWARDED",
+      "de": "\n\nBei dieser Entdeckung freigeschaltet: %s",
+      "en": "\n\nUnlocked by this discovery: %s"
+    },
+    {
+      "key": "JOURNAL_GOAL_DETAIL",
+      "de": "%s\n\n%d / %d %s · %s\n\nBereits gespeicherte Entdeckungen zählen mit.",
+      "en": "%s\n\n%d / %d %s · %s\n\nPreviously saved discoveries count."
+    },
+    {
+      "key": "JOURNAL_REGION_DETAIL",
+      "de": "Entdeckt auf %s\n\nGespeicherte Regionskoordinaten: %s / %s",
+      "en": "Discovered on %s\n\nRecorded region coordinates: %s / %s"
+    },
+    {
+      "key": "JOURNAL_WISH_COMPLETE",
+      "de": "\n\nSammelziel erreicht.",
+      "en": "\n\nCollection goal complete."
+    },
+    {
+      "key": "JOURNAL_WISH_HINT",
+      "de": "\n\nWeitere neue Arten beobachten. Pro neuer Art wird höchstens ein Teil freigeschaltet; erneutes Beobachten bekannter Arten gibt kein weiteres Teil.",
+      "en": "\n\nObserve more new species. Each new species unlocks at most one part; observing a known species again gives no additional part."
+    },
+    {
+      "key": "JOURNAL_PINNED",
+      "de": "%s · %s\n%d / %d %s · Im Buch ansehen",
+      "en": "%s · %s\n%d / %d %s · View in book"
+    },
+    {
+      "key": "JOURNAL_ANATOMY_NOTE",
+      "de": "Körperbauwerte ohne Skillboni.\nDie Spielwerte können abweichen.",
+      "en": "Anatomy values without skill bonuses.\nIn-game values may differ."
+    },
+    {
+      "key": "JOURNAL_PART_LEGACY",
+      "de": "\nWerte nicht verfügbar: Der gespeicherte Körperbau enthält frühere Teile.",
+      "en": "\nValues unavailable: the saved anatomy contains legacy parts."
+    },
+    {
+      "key": "JOURNAL_PART_NEUTRAL",
+      "de": "\nDieses Teil verändert die berechneten Körperbauwerte nicht.",
+      "en": "\nThis part does not change the calculated anatomy values."
+    },
+    {
+      "key": "JOURNAL_PART_CONTRIBUTION",
+      "de": "\nBeitrag in diesem Körperbau · %d× verbaut",
+      "en": "\nContribution to this anatomy · used %d×"
+    },
+    {
+      "key": "JOURNAL_ROLES_EMPTY",
+      "de": "TIERROLLEN\nFür diese Beobachtung sind keine lesbaren Eignungsdaten vorhanden.\n\nEin Artenscan oder eine Freundschaft bedeutet keine Zähmung.",
+      "en": "ANIMAL ROLES\nNo readable suitability data exists for this observation.\n\nScanning a species or befriending it does not tame an animal."
+    },
+    {
+      "key": "JOURNAL_ROLES_NOTICE",
+      "de": "\nArt-Eignung ist kein Tierbesitz. Zähmung beginnt im Stammeszeitalter. Reiten, Pflügen und Milchgewinnung benötigen ein eigenes Tier und die passende Versorgung und Ausrüstung.",
+      "en": "\nSpecies suitability is not ownership. Taming begins in the tribal age. Riding, ploughing and milking require an owned animal with suitable supplies and equipment."
+    },
+    {
+      "key": "JOURNAL_CLOSE_COMPACT",
+      "de": "Zurück · Esc",
+      "en": "Back · Esc"
+    },
+    {
+      "key": "Kopfmodule",
+      "de": "Kopfmodule",
+      "en": "Head modules"
+    },
+    {
+      "key": "HUSBANDRY_ASSIGN_KEEPER",
+      "de": "Tierpfleger zuweisen",
+      "en": "Assign animal keeper"
+    },
+    {
+      "key": "HUSBANDRY_HINT",
+      "de": "Ein eigenes Tier pro Platz: Milchtierplatz oder Legestelle. Tierpfleger liefern Futter und Wasser. Eier werden abgeholt, eingelagert und gegessen.",
+      "en": "One owned animal per dairy pen or laying site. Animal keepers deliver feed and water. Eggs are collected, stored and eaten."
+    },
+    {
+      "key": "HUSBANDRY_ASSIGN",
+      "de": "Tier zuordnen",
+      "en": "Assign animal"
+    },
+    {
+      "key": "HUSBANDRY_RELEASE",
+      "de": "Zuordnung lösen",
+      "en": "Release assignment"
+    },
+    {
+      "key": "HUSBANDRY_CHANGE_SITE",
+      "de": "Freien Platz umstellen",
+      "en": "Convert empty site"
+    },
+    {
+      "key": "HUSBANDRY_CHANGE_HINT",
+      "de": "Wechselt einen freien Milchtierplatz zur Legestelle oder zurück. Vorräte und fertige Produkte bleiben erhalten.",
+      "en": "Convert an empty dairy pen to a laying site or back. Supplies and finished products are retained."
+    },
+    {
+      "key": "HUSBANDRY_BUILD_HINT",
+      "de": "Baue einen Milchtierplatz oder eine Legestelle auf trockenem, frei erreichbarem Boden.",
+      "en": "Build a dairy pen or laying site on dry, accessible ground."
+    },
+    {
+      "key": "HUSBANDRY_PEN",
+      "de": "Milchtierplatz {number}",
+      "en": "Dairy pen {number}"
+    },
+    {
+      "key": "HUSBANDRY_LAYING_SITE",
+      "de": "Legestelle {number}",
+      "en": "Laying site {number}"
+    },
+    {
+      "key": "HUSBANDRY_MILK_ANIMAL",
+      "de": "Milchtier {number}",
+      "en": "Dairy animal {number}"
+    },
+    {
+      "key": "HUSBANDRY_EGG_ANIMAL",
+      "de": "Eierlieferant {number}",
+      "en": "Egg-laying animal {number}"
+    },
+    {
+      "key": "HUSBANDRY_SUPPLIES",
+      "de": "Futter {food} / 4 · Wasser {water} / 8 Liter\n{status}",
+      "en": "Feed {food} / 4 · Water {water} / 8 litres\n{status}"
+    },
+    {
+      "key": "HUSBANDRY_STORAGE",
+      "de": "{resource} bereit · Abholung wartet auf Lagerplatz.",
+      "en": "{resource} ready · Collection is waiting for storage space."
+    },
+    {
+      "key": "HUSBANDRY_WAIT_SUPPLIES",
+      "de": "Produktion ({resource}) wartet auf Futter und Wasser.",
+      "en": "Production ({resource}) is waiting for feed and water."
+    },
+    {
+      "key": "HUSBANDRY_PRODUCTION",
+      "de": "{resource} in {seconds} s · {amount} je Intervall.",
+      "en": "{resource} in {seconds} s · {amount} per interval."
+    },
+    {
+      "key": "HUSBANDRY_EGG_AMOUNT",
+      "de": "{count} Stück",
+      "en": "{count} eggs"
+    },
+    {
+      "key": "HUSBANDRY_MILK_AMOUNT",
+      "de": "{count} Liter",
+      "en": "{count} litres"
+    },
+    {
+      "key": "TRIBE_AGE_ENTRY",
+      "de": "Stammeszeitalter …",
+      "en": "Tribal age …"
+    },
+    {
+      "key": "TRIBE_AGE_TITLE",
+      "de": "Ein neues Zeitalter beginnt",
+      "en": "A new age begins"
+    },
+    {
+      "key": "TRIBE_AGE_CONFIRM",
+      "de": "Jetzt ins Stammeszeitalter fortschreiten",
+      "en": "Advance to the tribal age now"
+    },
+    {
+      "key": "TRIBE_AGE_CANCEL",
+      "de": "In der Kreaturenphase bleiben",
+      "en": "Stay in the creature phase"
+    },
+    {
+      "key": "TRIBE_AGE_RETURN",
+      "de": "Zur Kreatur zurück",
+      "en": "Return to your creature"
+    },
+    {
+      "key": "TRIBE_AGE_DETAIL",
+      "de": "Du führst künftig die Gruppe aus der Übersicht. Deine Kreatur und ihre beiden Gefährten bleiben dieselben Mitglieder. Eure Spezies, Heimat, Beziehungen und gekauften Fähigkeiten bleiben erhalten.\n\nSammelt Material, stellt ein Steinwerkzeug her, baut Hütten und versorgt eure Bewohner. Der Wechsel wird gespeichert; die direkte Einzelsteuerung endet. Nachbarstämme könnt ihr bereits treffen und unterstützen. Stammeskämpfe folgen später.",
+      "en": "You will lead the group from the overview. Your creature and its two companions remain the same members. Your species, home, relationships and purchased abilities are retained.\n\nGather materials, craft a stone tool, build huts and provide for your residents. The transition is saved and direct control of an individual ends. You can already meet and support neighbouring tribes. Tribal combat will follow later."
+    },
+    {
+      "key": "TRIBE_AGE_BLOCKED",
+      "de": "{reason}\n\nDer Wechsel beginnt erst, wenn du ihn hier ausdrücklich bestätigst.",
+      "en": "{reason}\n\nThe transition only begins after you explicitly confirm it here."
+    },
+    {
+      "key": "TRIBE_AGE_SAVE_FAILED",
+      "de": "Der Wechsel konnte nicht gespeichert werden. Du bleibst in der Kreaturenphase.\n\n{reason}",
+      "en": "The transition could not be saved. You remain in the creature phase.\n\n{reason}"
+    },
+    {
+      "key": "HUSBANDRY_NEED_ANIMAL",
+      "de": "Führe ein passendes gezähmtes Tier hierher und ordne es zu.",
+      "en": "Bring a suitable tamed animal here and assign it."
+    },
+    {
+      "key": "HUSBANDRY_CHANGED_ANIMAL",
+      "de": "Art oder Körper des Tieres hat sich geändert.",
+      "en": "The animal’s species or body has changed."
+    },
+    {
+      "key": "HUSBANDRY_STAY",
+      "de": "Das Tier muss am Tierplatz bleiben.",
+      "en": "The animal must stay at its assigned site."
+    },
+    {
+      "key": "HUSBANDRY_ACCESS",
+      "de": "Tierplatz oder Zugang ist momentan nicht erreichbar.",
+      "en": "The animal site or its entrance is currently inaccessible."
+    },
+    {
+      "key": "HUSBANDRY_RELEASE_FIRST",
+      "de": "Löse zuerst die Tierzuordnung.",
+      "en": "Release the animal assignment first."
+    },
+    {
+      "key": "HUSBANDRY_RETURN_SUPPLIES",
+      "de": "Warte, bis Futter und Wasser zurückgebracht wurden.",
+      "en": "Wait until feed and water have been returned."
+    },
+    {
+      "key": "HUSBANDRY_UNAVAILABLE",
+      "de": "Das Tier ist zurzeit nicht verfügbar.",
+      "en": "The animal is currently unavailable."
+    },
+    {
+      "key": "HUSBANDRY_WRONG_REGISTER",
+      "de": "Das Tierregister gehört nicht zu diesem Dorf.",
+      "en": "The animal registry does not belong to this village."
+    },
+    {
+      "key": "HUSBANDRY_OWNED_ANIMAL",
+      "de": "Wähle ein lebendes, gezähmtes Nutztier deines Stammes.",
+      "en": "Choose a living, tamed livestock animal owned by your tribe."
+    },
+    {
+      "key": "HUSBANDRY_UNSUITABLE",
+      "de": "Dieses Tier eignet sich nicht für diesen Haltungsplatz mit Pflanzenfutter.",
+      "en": "This animal is unsuitable for this site with plant feed."
+    },
+    {
+      "key": "HUSBANDRY_NOT_LOADED",
+      "de": "Das Tier muss in der geladenen Dorfumgebung sein.",
+      "en": "The animal must be in the loaded area around the village."
+    },
+    {
+      "key": "HUSBANDRY_WRONG_SITE",
+      "de": "Dieses Tier passt nicht zu diesem Haltungsplatz.",
+      "en": "This animal is unsuitable for this site."
+    },
+    {
+      "key": "HUSBANDRY_OCCUPIED",
+      "de": "Dieser Tierplatz ist bereits belegt.",
+      "en": "This animal site is already occupied."
+    },
+    {
+      "key": "HUSBANDRY_ALREADY_ASSIGNED",
+      "de": "Dieses Tier hat bereits einen Tierplatz.",
+      "en": "This animal already has an assigned site."
+    },
+    {
+      "key": "HUSBANDRY_CHANGED_RECORD",
+      "de": "Art oder Körper des gespeicherten Tieres hat sich geändert.",
+      "en": "The saved animal’s species or body has changed."
+    },
+    {
+      "key": "HUSBANDRY_RECORD_LIMIT",
+      "de": "Für dieses Tier ist kein freier Produktionsnachweis verfügbar.",
+      "en": "No free production record is available for this animal."
+    },
+    {
+      "key": "HUSBANDRY_COLLECT_FIRST",
+      "de": "Hole zuerst die fertigen Produkte ab und schaffe Lagerplatz.",
+      "en": "Collect the finished products and free up storage space first."
+    },
+    {
+      "key": "HUSBANDRY_DELIVER_FIRST",
+      "de": "Warte, bis unterwegs befindliches Tierfutter und Wasser abgeliefert sind.",
+      "en": "Wait until the feed and water in transit have been delivered."
+    },
+    {
+      "key": "TRIBE_AGE_OTHER",
+      "de": "Dein Stamm befindet sich bereits in einem anderen Zeitalter.",
+      "en": "Your tribe is already in another age."
+    },
+    {
+      "key": "TRIBE_AGE_WORLD",
+      "de": "Kehre zuerst mit deiner Kreatur in die geladene Welt zurück.",
+      "en": "Return to the loaded world with your creature first."
+    },
+    {
+      "key": "TRIBE_AGE_HOME",
+      "de": "Kehre zum Heimatplatz zurück, um mit deiner Gruppe fortzuschreiten.",
+      "en": "Return home to advance with your group."
+    },
+    {
+      "key": "TRIBE_AGE_PENDING",
+      "de": "Ein anderer Übergang wird noch abgeschlossen.",
+      "en": "Another transition is still being completed."
+    },
+    {
+      "key": "TRIBE_AGE_SPACE",
+      "de": "Für das erste Dorf fehlen sichere Wege und fünf freie Arbeitsplätze. Verlege den Heimatplatz auf eine größere trockene Fläche.",
+      "en": "Your first village needs safe paths and five free work sites. Move your home to a larger dry area."
+    },
+    {
+      "key": "TRIBE_AGE_COMPANION",
+      "de": "Ein Gefährte erreicht den Dorfplatz noch nicht. Hole ihn näher heran.",
+      "en": "A companion cannot yet reach the village site. Bring it closer."
+    },
+    {
+      "key": "TRIBE_AGE_PLAYER",
+      "de": "Deine Kreatur erreicht den Dorfplatz noch nicht.",
+      "en": "Your creature cannot yet reach the village site."
+    },
+    {
+      "key": "TRIBE_AGE_ESTABLISH",
+      "de": "Lege mit {key} einen Heimatplatz für deine Nestgruppe fest.",
+      "en": "Use {key} to establish a home for your nest group."
+    },
+    {
+      "key": "TRIBE_AGE_RECALL",
+      "de": "Rufe beide Gefährten mit {key} → Heimkehren zum Heimatplatz.",
+      "en": "Call both companions home with {key} → Return home."
+    },
+    {
+      "key": "HUSBANDRY_BUILD_PEN",
+      "de": "Milchtierplatz · 4 Holz / 2 Fasern",
+      "en": "Dairy pen · 4 wood / 2 fibre"
+    },
+    {
+      "key": "HUSBANDRY_BUILD_LAYING",
+      "de": "Legestelle · 4 Holz / 2 Fasern",
+      "en": "Laying site · 4 wood / 2 fibre"
+    },
+    {
+      "key": "EXPRESSION_GREET_HINT",
+      "de": "{key} · Begrüßen (nah herangehen)",
+      "en": "{key} · Greet (move closer)"
+    },
+    {
+      "key": "EXPRESSION_GREET_OK",
+      "de": "Dein Tierfreund erwidert die Begrüßung.",
+      "en": "Your animal friend returns your greeting."
+    },
+    {
+      "key": "EXPRESSION_GREET_UNAVAILABLE",
+      "de": "Begrüßen: nah herangehen, Sichtkontakt halten und einen ruhigen Moment abwarten.",
+      "en": "To greet: move closer, keep line of sight and wait for a calm moment."
+    },
+    {
+      "key": "TRIBAL_TEST_ENTRY",
+      "de": "Stammeszeitalter testen",
+      "en": "Try the tribal age"
+    },
+    {
+      "key": "TRIBAL_TEST_DESCRIPTION",
+      "de": "Eine eigene Testwelt startet mit deiner Kreatur und zwei Gefährten an einem vorbereiteten Heimatplatz. Danach bestätigst du den Wechsel ins Stammeszeitalter. Deine bisherigen Spielstände bleiben erhalten.",
+      "en": "A separate test world starts with your creature and two companions at a prepared home. You then confirm the transition to the tribal age. Your existing saves are preserved."
+    },
+    {
+      "key": "TRIBAL_TEST_CONTROLS",
+      "de": "Im Stammeszeitalter steuerst du drei Bewohner aus der Übersicht: auswählen, Rohstoffe sammeln und ein Dorf aufbauen. Die Testwelt lässt sich speichern und fortsetzen. Brichst du den Wechsel ab, bleibst du in ihrer Kreaturenphase.",
+      "en": "In the tribal age, control three residents from an overhead view: select them, gather resources and build a village. You can save and resume the test world. Cancel the transition to stay in its creature phase."
+    },
+    {
+      "key": "TRIBAL_TEST_PREPARE",
+      "de": "Testwelt vorbereiten",
+      "en": "Prepare test world"
+    },
+    {
+      "key": "TRIBAL_TEST_SAVE_NAME",
+      "de": "Stammeszeitalter – Testwelt",
+      "en": "Tribal age – test world"
+    },
+    {
+      "key": "TRIBAL_TEST_LOADING",
+      "de": "Dein Heimatplatz und deine Gefährten werden vorbereitet … Anschließend kannst du den Wechsel bestätigen.",
+      "en": "Preparing your home and companions … You can then confirm the transition."
+    },
+    {
+      "key": "TRIBAL_TEST_CANCEL_SETUP",
+      "de": "Vorbereitung abbrechen · als Kreatur spielen",
+      "en": "Cancel preparation · play as a creature"
+    },
+    {
+      "key": "TRIBAL_TEST_SETUP_FAILED",
+      "de": "Der Heimatplatz konnte nicht vollständig vorbereitet werden. Du kannst in dieser Testwelt als Kreatur spielen und mit N einen Heimatplatz anlegen. Öffne danach „Stammeszeitalter …“, um den Wechsel zu bestätigen.",
+      "en": "The home could not be fully prepared. You can play as a creature in this test world and press N to establish a home. Then open “Tribal age …” to confirm the transition."
+    },
+    {
+      "key": "ATMOSPHERE_LABEL",
+      "de": "Atmosphäre",
+      "en": "Atmosphere"
+    },
+    {
+      "key": "ATMOSPHERE_LOW",
+      "de": "Basis · Himmel und Dunst",
+      "en": "Basic · sky and haze"
+    },
+    {
+      "key": "ATMOSPHERE_STANDARD",
+      "de": "Atmosphärisch · Schatten und Leuchten",
+      "en": "Atmospheric · shadows and glow"
+    },
+    {
+      "key": "ATMOSPHERE_CINEMATIC",
+      "de": "Cineastisch · Licht im Nebel",
+      "en": "Cinematic · light in mist"
+    },
+    {
+      "key": "ATMOSPHERE_HINT",
+      "de": "Gilt für die Kugelwelt. Die Auswahl wird mit „Übernehmen & speichern“ aktiviert und für den nächsten Spielstart gespeichert. „Zurück“ verwirft eine noch nicht übernommene Auswahl.",
+      "en": "Applies to the spherical world. “Apply & save” activates your selection and keeps it for the next launch. “Back” discards a selection that has not been applied."
+    },
+    {
+      "key": "GRAPHICS_TAB",
+      "de": "Grafik",
+      "en": "Graphics"
+    },
+    {
+      "key": "ATMOSPHERE_TITLE",
+      "de": "Atmosphäre und Licht",
+      "en": "Atmosphere and lighting"
+    },
+    {
+      "key": "ATMOSPHERE_LOW_DESCRIPTION",
+      "de": "Himmel, einfache bewegte Wolken, Sonnenlicht und Entfernungsdunst. Die sparsamste Stufe.",
+      "en": "Sky, simple moving clouds, sunlight and distance haze. The lightest preset."
+    },
+    {
+      "key": "ATMOSPHERE_STANDARD_DESCRIPTION",
+      "de": "Detailliertere Wolken, weichere Sonnenschatten, Kontaktschatten und dezente Leuchteffekte. Die Standardstufe.",
+      "en": "More detailed clouds, softer sun shadows, contact shadows and subtle glow. The default preset."
+    },
+    {
+      "key": "ATMOSPHERE_CINEMATIC_DESCRIPTION",
+      "de": "Alle Effekte der Standardstufe sowie Lichtstrahlen im volumetrischen Nebel, weitere Wolkendetails und größere Schattenreichweite. Benötigt mehr Grafikleistung.",
+      "en": "All default effects plus light shafts in volumetric fog, additional cloud detail and greater shadow distance. Requires more graphics performance."
+    },
+    {
+      "key": "ATMOSPHERE_FALLBACK",
+      "de": "Erweiterte Licht- und Nebeleffekte sind in deinem aktuellen Grafikmodus nicht verfügbar. Himmel, Wolken und Entfernungsdunst bleiben aktiv.",
+      "en": "Advanced lighting and fog effects are unavailable in your current graphics mode. Sky, clouds and distance haze remain active."
+    },
+    {
+      "key": "SITE_FREIGHT_TITLE",
+      "de": "Warentransport → %s",
+      "en": "Shipment → %s"
+    },
+    {
+      "key": "SITE_FREIGHT_SEND",
+      "de": "Mit ausgewähltem Bewohner versenden",
+      "en": "Send with selected resident"
+    },
+    {
+      "key": "SITE_FREIGHT_CANCEL",
+      "de": "Abbrechen / Ware zurückbringen",
+      "en": "Cancel / return cargo"
+    },
+    {
+      "key": "SITE_FREIGHT_AMOUNT",
+      "de": "Menge (1–4 Einheiten)",
+      "en": "Amount (1–4 units)"
+    },
+    {
+      "key": "SITE_FREIGHT_HELP",
+      "de": "Ein freier Bewohner am Lager trägt bis zu vier Einheiten. Gebucht wird erst bei Ankunft.",
+      "en": "An idle resident at the store carries up to four units. Stock is credited on arrival."
+    },
+    {
+      "key": "SITE_FREIGHT_NOT_READY",
+      "de": "Dorf und geladene Wege müssen bereit sein.",
+      "en": "The village and loaded paths must be ready."
+    },
+    {
+      "key": "SITE_FREIGHT_DESTINATION",
+      "de": "Gründe zuerst ein zweites Lager.",
+      "en": "Found a second settlement first."
+    },
+    {
+      "key": "SITE_FREIGHT_BUSY",
+      "de": "Ein Lagertransport läuft. Der Träger bleibt bis zum Abschluss gebunden.",
+      "en": "A shipment is in progress. Its carrier stays assigned until completion."
+    },
+    {
+      "key": "SITE_FREIGHT_CARRIER",
+      "de": "Wähle einen freien Gefährten, der ohne Ladung direkt am Lager wartet. Deine Kreatur bleibt im Dorf.",
+      "en": "Select an idle companion waiting at the store without cargo. Your creature stays in the village."
+    },
+    {
+      "key": "SITE_FREIGHT_ROUTE",
+      "de": "Kein sicherer geladener Transportweg verfügbar.",
+      "en": "No safe loaded transport route is available."
+    },
+    {
+      "key": "SITE_FREIGHT_CAPACITY",
+      "de": "Im Ziellager ist nicht genug ungebundener Platz.",
+      "en": "The destination has insufficient unreserved storage space."
+    },
+    {
+      "key": "SITE_FREIGHT_STOCK",
+      "de": "Diese Menge ist im Ausgangslager nicht verfügbar.",
+      "en": "This amount is unavailable at the source store."
+    },
+    {
+      "key": "SITE_FREIGHT_SENT",
+      "de": "Auftrag gespeichert. Ware und Lagerplätze sind gebunden.",
+      "en": "Shipment saved. Goods and storage space are reserved."
+    },
+    {
+      "key": "SITE_FREIGHT_RETURN_REQUESTED",
+      "de": "Rückkehr angefordert. Unterwegs wird am nächsten Wegpunkt umgekehrt.",
+      "en": "Return requested. The carrier turns back at the next waypoint."
+    },
+    {
+      "key": "SITE_FREIGHT_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Der bisherige Auftrag und Bestand bleiben erhalten.",
+      "en": "Save failed. The previous shipment and stock are preserved."
+    },
+    {
+      "key": "SITE_FREIGHT_DETAIL",
+      "de": "%s · %d × %s",
+      "en": "%s · %d × %s"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RESERVED",
+      "de": "Zur Abholung bereit",
+      "en": "Ready for pickup"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_MOVING",
+      "de": "Unterwegs",
+      "en": "In transit"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_ARRIVED",
+      "de": "Angekommen – Einlagerung ausstehend",
+      "en": "Arrived – awaiting storage"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_DELIVERED",
+      "de": "Eingelagert",
+      "en": "Delivered"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RETURNED",
+      "de": "Zurück im Ausgangslager",
+      "en": "Returned to source"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_CANCELLED",
+      "de": "Abgebrochen",
+      "en": "Cancelled"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_BLOCKED",
+      "de": "Weg gesperrt – Fracht bleibt beim Träger",
+      "en": "Route blocked – cargo stays with the carrier"
+    },
+    {
+      "key": "SITE_FREIGHT_STATUS_RETURNING",
+      "de": "Rückkehr angefordert / unterwegs zurück",
+      "en": "Return requested / returning"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STUMP_NAME",
+      "de": "Stummelschwanz",
+      "en": "Stump tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_STUMP_DESCRIPTION",
+      "de": "Kurzer, runder Schwanz. Werte und Freischaltung wie Balanceschwanz.",
+      "en": "Short, rounded tail. Shares the balance tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_REPTILE_NAME",
+      "de": "Reptilienschwanz",
+      "en": "Reptile tail"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_REPTILE_DESCRIPTION",
+      "de": "Kräftiger Ansatz mit langem, gebogenem Ende und Rückenschuppen. Werte und Freischaltung wie Balanceschwanz.",
+      "en": "Thick root with a long, curved tip and dorsal scales. Shares the balance tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BEAVER_PADDLE_NAME",
+      "de": "Biberpaddel",
+      "en": "Beaver paddle"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_BEAVER_PADDLE_DESCRIPTION",
+      "de": "Breiter, flacher Paddelschwanz mit Schuppen. Werte und Freischaltung wie Flossenschwanz.",
+      "en": "Broad, flat paddle tail with scales. Shares the fin tail’s stats and unlock."
+    },
+    {
+      "key": "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_NAME",
+      "de": "Horizontale Schwanzflosse",
+      "en": "Horizontal tail fluke"
+    },
+    {
+      "key": "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_DESCRIPTION",
+      "de": "Zwei seitliche Flossenlappen mit schmalem Ansatz. Werte und Freischaltung wie Flossenschwanz.",
+      "en": "Two lateral flukes on a narrow root. Shares the fin tail’s stats and unlock."
+    },
+    {
+      "key": "WORKPLACE_HINT",
+      "de": "Bis zu zwei Arbeitsplätze je Typ. Wähle Bewohner und anschließend den gewünschten Platz.",
+      "en": "Up to two workplaces of each type. Select residents, then choose their workplace."
+    },
+    {
+      "key": "WORKPLACE_ROW",
+      "de": "{name} {number} · {ready} abholbereit · {assigned} zugeordnet",
+      "en": "{name} {number} · {ready} ready · {assigned} assigned"
+    },
+    {
+      "key": "WORKPLACE_ASSIGNED",
+      "de": "Arbeitsplatz: {name} {number}",
+      "en": "Workplace: {name} {number}"
+    },
+    {
+      "key": "WORKPLACE_ASSIGN_HINT",
+      "de": "Ausgewählte Bewohner sammeln an genau diesem Platz. Getragene Ware wird zuerst abgeliefert.",
+      "en": "Selected residents gather at this workplace. Carried goods are delivered first."
+    },
+    {
+      "key": "WORKPLACE_SELECT_RESIDENT",
+      "de": "Wähle zuerst mindestens einen Bewohner aus.",
+      "en": "Select at least one resident first."
+    },
+    {
+      "key": "WORKPLACE_UNKNOWN",
+      "de": "Dieser Arbeitsplatz gehört nicht zum ausgewählten Ort.",
+      "en": "This workplace does not belong to the selected settlement."
+    },
+    {
+      "key": "WORKPLACE_UNREACHABLE",
+      "de": "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar.",
+      "en": "This workplace cannot be reached using the verified village paths."
+    },
+    {
+      "key": "WORKPLACE_LIMIT",
+      "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
+      "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "WILDLIFE_PLAY_APPROACH",
+      "de": "Nähert sich Artgenossen",
+      "en": "Approaching companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_GREET",
+      "de": "Begrüßt Artgenossen",
+      "en": "Greeting companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_ACTIVE",
+      "de": "Spielt mit Artgenossen",
+      "en": "Playing with companion"
+    },
+    {
+      "key": "WILDLIFE_PLAY_REST",
+      "de": "Ruht mit Artgenossen",
+      "en": "Resting with companion"
+    },
+    {
+      "key": "SAVE_BROWSER_BACK",
+      "de": "Startmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "SAVE_VIEW_DETAILS",
+      "de": "Details",
+      "en": "Details"
+    },
+    {
+      "key": "SAVE_VIEW_RESULTS",
+      "de": "Ergebnisliste",
+      "en": "Results"
+    },
+    {
+      "key": "SAVE_SEARCH_PLACEHOLDER",
+      "de": "Name oder Weltseed suchen …",
+      "en": "Search name or world seed …"
+    },
+    {
+      "key": "SAVE_SEARCH_HINT",
+      "de": "Mehrere Suchwörter kombinieren · Strg+F / Cmd+F",
+      "en": "Combine search terms · Ctrl+F / Cmd+F"
+    },
+    {
+      "key": "SAVE_FILTER_RESET",
+      "de": "Zurücksetzen",
+      "en": "Reset"
+    },
+    {
+      "key": "SAVE_PHASE_HINT",
+      "de": "Nach Epoche filtern",
+      "en": "Filter by era"
+    },
+    {
+      "key": "SAVE_STATE_HINT",
+      "de": "Nach Zustand filtern",
+      "en": "Filter by condition"
+    },
+    {
+      "key": "SAVE_SORT_HINT",
+      "de": "Sortierung der Spielstände",
+      "en": "Save sorting"
+    },
+    {
+      "key": "SAVE_PHASE_ALL",
+      "de": "Alle Epochen",
+      "en": "All eras"
+    },
+    {
+      "key": "SAVE_FILTER_ALL",
+      "de": "Alle Zustände",
+      "en": "All conditions"
+    },
+    {
+      "key": "SAVE_FILTER_READY",
+      "de": "Intakte Spielstände",
+      "en": "Intact saves"
+    },
+    {
+      "key": "SAVE_FILTER_ATTENTION",
+      "de": "Prüfung / Sicherung",
+      "en": "Review / backup"
+    },
+    {
+      "key": "SAVE_SORT_RECENT",
+      "de": "Zuletzt gespeichert",
+      "en": "Recently saved"
+    },
+    {
+      "key": "SAVE_SORT_NAME",
+      "de": "Name A–Z",
+      "en": "Name A–Z"
+    },
+    {
+      "key": "SAVE_SORT_PLAYTIME",
+      "de": "Meiste Spielzeit",
+      "en": "Most playtime"
+    },
+    {
+      "key": "SAVE_LIST_SEED",
+      "de": "Weltseed {seed}",
+      "en": "World seed {seed}"
+    },
+    {
+      "key": "SAVE_LIST_BACKUP",
+      "de": "Letzte Sicherung verfügbar",
+      "en": "Last backup available"
+    },
+    {
+      "key": "SAVE_PAGE",
+      "de": "Seite {page}/{pages} · {count} von {total}",
+      "en": "Page {page}/{pages} · {count} of {total}"
+    },
+    {
+      "key": "SAVE_PAGE_PREVIOUS",
+      "de": "Vorherige Spielstände",
+      "en": "Previous saves"
+    },
+    {
+      "key": "SAVE_PAGE_NEXT",
+      "de": "Weitere Spielstände",
+      "en": "More saves"
+    },
+    {
+      "key": "SAVE_NO_RESULTS",
+      "de": "Keine passenden Abenteuer. Ändere die Suche oder setze die Filter zurück.",
+      "en": "No matching adventures. Change your search or reset the filters."
+    },
+    {
+      "key": "SAVE_SELECT_RESULT",
+      "de": "Wähle ein Abenteuer aus der Ergebnisliste.",
+      "en": "Select an adventure from the results."
+    },
+    {
+      "key": "ATLAS_SEARCH_PLACEHOLDER",
+      "de": "Orte suchen …",
+      "en": "Search places …"
+    },
+    {
+      "key": "ATLAS_SEARCH_TOOLTIP",
+      "de": "Bekannte Orte auf diesem Planeten suchen · Strg+F\nEsc: Texteingabe verlassen; erneut Esc: Karte schließen",
+      "en": "Search known places on this planet · Ctrl+F\nEsc: leave text input; Esc again: close map"
+    },
+    {
+      "key": "ATLAS_SEARCH_PREVIOUS",
+      "de": "Vorherige Ortsseite",
+      "en": "Previous page of places"
+    },
+    {
+      "key": "ATLAS_SEARCH_NEXT",
+      "de": "Nächste Ortsseite",
+      "en": "Next page of places"
+    },
+    {
+      "key": "ATLAS_SEARCH_WAITING",
+      "de": "Suche wird vorbereitet …",
+      "en": "Preparing search …"
+    },
+    {
+      "key": "ATLAS_SEARCH_PROGRESS",
+      "de": "Suche … {scanned} / {total} Orte geprüft",
+      "en": "Searching … {scanned} / {total} places checked"
+    },
+    {
+      "key": "ATLAS_SEARCH_NO_RESULTS",
+      "de": "Keine passenden bekannten Orte. Suchtext oder Filter ändern.",
+      "en": "No matching known places. Change the search or filters."
+    },
+    {
+      "key": "ATLAS_SEARCH_FAILED",
+      "de": "Orte konnten nicht gelesen werden. Die gespeicherten Daten bleiben geschützt.",
+      "en": "Places could not be read. Saved data remains protected."
+    },
+    {
+      "key": "ATLAS_SEARCH_RESULTS",
+      "de": "Treffer auf dieser Seite: {count}",
+      "en": "Matches on this page: {count}"
+    },
+    {
+      "key": "ATLAS_SEARCH_PAGE",
+      "de": "Seite {page}",
+      "en": "Page {page}"
+    },
+    {
+      "key": "Tab  Auswahl    ·    Enter  Bestätigen",
+      "de": "Tab  Auswahl    ·    Enter  Bestätigen",
+      "en": "Tab  Select    ·    Enter  Confirm"
+    },
+    {
+      "key": "Esc Zurück · F11 Vollbild",
+      "de": "Esc Zurück · F11 Vollbild",
+      "en": "Esc Back · F11 Fullscreen"
+    },
+    {
+      "key": "Zurück · Esc",
+      "de": "Zurück · Esc",
+      "en": "Back · Esc"
+    },
+    {
+      "key": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "GRAPHICS_CUSTOM",
+      "de": "Benutzerdefiniert",
+      "en": "Custom"
+    },
+    {
+      "key": "GRAPHICS_CUSTOM_DESCRIPTION",
+      "de": "Deine eigenen Grafikwerte. Ein Preset ersetzt alle Einzelwerte.",
+      "en": "Your own graphics values. Selecting a preset replaces all individual values."
+    },
+    {
+      "key": "GRAPHICS_DRAFT_HINT",
+      "de": "Änderungen werden erst mit „Übernehmen & speichern“ aktiv. „Zurück“ verwirft sie. Höhere Qualität und Reichweite benötigen mehr Grafikleistung.",
+      "en": "Changes take effect with “Apply & save”. “Back” discards them. Higher quality and distance require more graphics performance."
+    },
+    {
+      "key": "GRAPHICS_RESET",
+      "de": "Grafikstandard wiederherstellen",
+      "en": "Restore graphics defaults"
+    },
+    {
+      "key": "GRAPHICS_UNAVAILABLE",
+      "de": "In diesem Grafikmodus nicht verfügbar. Deine Werte bleiben für Forward+ gespeichert.",
+      "en": "Unavailable in this rendering mode. Your preferences are kept for Forward+."
+    },
+    {
+      "key": "GRAPHICS_SOFT_SHADOW_UNAVAILABLE",
+      "de": "Weiche Sonnenschatten sind im Kompatibilitätsmodus nicht verfügbar.",
+      "en": "Soft sun shadows are unavailable in Compatibility mode."
+    },
+    {
+      "key": "GRAPHICS_NEWER_SETTINGS",
+      "de": "Die Grafikdatei stammt aus einer neueren Version und wird nicht überschrieben.",
+      "en": "The graphics settings come from a newer version and will not be overwritten."
+    },
+    {
+      "key": "GRAPHICS_QUALITY_LOW",
+      "de": "Niedrig",
+      "en": "Low"
+    },
+    {
+      "key": "GRAPHICS_QUALITY_MEDIUM",
+      "de": "Mittel",
+      "en": "Medium"
+    },
+    {
+      "key": "GRAPHICS_QUALITY_HIGH",
+      "de": "Hoch",
+      "en": "High"
+    },
+    {
+      "key": "GRAPHICS_GROUP_CLOUDS",
+      "de": "Wolken",
+      "en": "Clouds"
+    },
+    {
+      "key": "GRAPHICS_GROUP_HAZE",
+      "de": "Entfernungsdunst",
+      "en": "Distance haze"
+    },
+    {
+      "key": "GRAPHICS_GROUP_FOG",
+      "de": "Volumetrischer Nebel und Lichtstrahlen",
+      "en": "Volumetric fog and light shafts"
+    },
+    {
+      "key": "GRAPHICS_GROUP_SHADOWS",
+      "de": "Sonnenschatten",
+      "en": "Sun shadows"
+    },
+    {
+      "key": "GRAPHICS_GROUP_SSAO",
+      "de": "Kontaktschatten (SSAO)",
+      "en": "Contact shadows (SSAO)"
+    },
+    {
+      "key": "GRAPHICS_GROUP_BLOOM",
+      "de": "Bloom und Leuchteffekte",
+      "en": "Bloom and glow"
+    },
+    {
+      "key": "GRAPHICS_GROUP_IMAGE",
+      "de": "Bildhelligkeit und Farben",
+      "en": "Brightness and colours"
+    },
+    {
+      "key": "GRAPHICS_CLOUDS_ENABLED",
+      "de": "Wolken anzeigen",
+      "en": "Show clouds"
+    },
+    {
+      "key": "GRAPHICS_CLOUD_QUALITY",
+      "de": "Wolkendetails",
+      "en": "Cloud detail"
+    },
+    {
+      "key": "GRAPHICS_HAZE_STRENGTH",
+      "de": "Dunststärke",
+      "en": "Haze strength"
+    },
+    {
+      "key": "GRAPHICS_FOG_ENABLED",
+      "de": "Volumetrischen Nebel anzeigen",
+      "en": "Show volumetric fog"
+    },
+    {
+      "key": "GRAPHICS_FOG_QUALITY",
+      "de": "Nebelqualität",
+      "en": "Fog quality"
+    },
+    {
+      "key": "GRAPHICS_FOG_STRENGTH",
+      "de": "Nebelstärke",
+      "en": "Fog strength"
+    },
+    {
+      "key": "GRAPHICS_SHADOWS_ENABLED",
+      "de": "Sonnenschatten anzeigen",
+      "en": "Show sun shadows"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_QUALITY",
+      "de": "Schattenqualität",
+      "en": "Shadow quality"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_SOFTNESS",
+      "de": "Schattenweichheit",
+      "en": "Shadow softness"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_DISTANCE",
+      "de": "Schattenreichweite",
+      "en": "Shadow distance"
+    },
+    {
+      "key": "GRAPHICS_SSAO_ENABLED",
+      "de": "Kontaktschatten anzeigen",
+      "en": "Show contact shadows"
+    },
+    {
+      "key": "GRAPHICS_SSAO_QUALITY",
+      "de": "Kontaktschattenqualität",
+      "en": "Contact shadow quality"
+    },
+    {
+      "key": "GRAPHICS_SSAO_STRENGTH",
+      "de": "Kontaktschattenstärke",
+      "en": "Contact shadow strength"
+    },
+    {
+      "key": "GRAPHICS_BLOOM_ENABLED",
+      "de": "Leuchteffekte anzeigen",
+      "en": "Show glow"
+    },
+    {
+      "key": "GRAPHICS_BLOOM_STRENGTH",
+      "de": "Leuchtstärke",
+      "en": "Glow intensity"
+    },
+    {
+      "key": "GRAPHICS_EXPOSURE",
+      "de": "Belichtung",
+      "en": "Exposure"
+    },
+    {
+      "key": "GRAPHICS_CONTRAST",
+      "de": "Kontrast",
+      "en": "Contrast"
+    },
+    {
+      "key": "GRAPHICS_SATURATION",
+      "de": "Sättigung",
+      "en": "Saturation"
+    },
+    {
+      "key": "FLEET_ENTRY",
+      "de": "Flottentest",
+      "en": "Fleet trial"
+    },
+    {
+      "key": "FLEET_TITLE",
+      "de": "FLOTTENTEST  /  HANGAR & FRACHT",
+      "en": "FLEET TRIAL  /  HANGAR & CARGO"
+    },
+    {
+      "key": "FLEET_INTRO",
+      "de": "Expedition und Beiboot verwalten, andocken und Testfracht umladen. Jede erfolgreiche Aktion wird gespeichert. Ein neuer Test erhält einen eigenen Spielstand; vorhandene Abenteuer bleiben erhalten. Flug und Weltraumfortschritt folgen später.",
+      "en": "Manage an expedition ship and lander, dock and transfer trial cargo. Each successful action is saved. A new trial uses its own save slot and preserves existing adventures. Flight and space progression will follow later."
+    },
+    {
+      "key": "FLEET_NEW",
+      "de": "Neuer Flottentest",
+      "en": "New fleet trial"
+    },
+    {
+      "key": "FLEET_LOAD",
+      "de": "Test laden",
+      "en": "Load trial"
+    },
+    {
+      "key": "FLEET_SHIPYARD",
+      "de": "Schiffswerft",
+      "en": "Shipyard"
+    },
+    {
+      "key": "FLEET_HOME",
+      "de": "Hauptmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "FLEET_EMPTY",
+      "de": "Zuerst einen neuen Test anlegen oder einen vorhandenen Test laden.",
+      "en": "Create a new trial or load an existing one first."
+    },
+    {
+      "key": "FLEET_DOCK",
+      "de": "Andocken",
+      "en": "Dock"
+    },
+    {
+      "key": "FLEET_UNDOCK",
+      "de": "Abdocken",
+      "en": "Undock"
+    },
+    {
+      "key": "FLEET_CARGO_TITLE",
+      "de": "TESTFRACHT / PROBEN",
+      "en": "TRIAL CARGO / SAMPLES"
+    },
+    {
+      "key": "FLEET_TRANSFER",
+      "de": "Ausgewählte Fracht zum Zielschiff umladen",
+      "en": "Transfer selected cargo to target ship"
+    },
+    {
+      "key": "FLEET_DESIGN_TITLE",
+      "de": "EIGENEN GESPEICHERTEN ENTWURF TESTEN",
+      "en": "TRY YOUR SAVED DESIGN"
+    },
+    {
+      "key": "FLEET_SEARCH",
+      "de": "Entwürfe suchen …",
+      "en": "Search designs …"
+    },
+    {
+      "key": "FLEET_FIRST",
+      "de": "Erste Seite",
+      "en": "First page"
+    },
+    {
+      "key": "FLEET_MORE",
+      "de": "Weitere Entwürfe",
+      "en": "More designs"
+    },
+    {
+      "key": "FLEET_INSTANTIATE",
+      "de": "Weitere Schiffsinstanz neben dem Zielschiff erzeugen",
+      "en": "Create another ship instance near the target"
+    },
+    {
+      "key": "FLEET_NEW_FAILED",
+      "de": "Test konnte nicht vorbereitet werden. Der bisherige Spielstand bleibt erhalten.",
+      "en": "The trial could not be prepared. The previous save is preserved."
+    },
+    {
+      "key": "FLEET_NEW_READY",
+      "de": "Neuer Flottentest gespeichert. Beiboot wählen, Expedition als Ziel auswählen und andocken.",
+      "en": "New trial saved. Select the lander, choose the expedition ship as target and dock."
+    },
+    {
+      "key": "FLEET_LOAD_FAILED",
+      "de": "Dieser Teststand kann nicht geladen werden.",
+      "en": "This trial save cannot be loaded."
+    },
+    {
+      "key": "FLEET_LOADED",
+      "de": "Flottentest geladen.",
+      "en": "Fleet trial loaded."
+    },
+    {
+      "key": "FLEET_HANGAR",
+      "de": "Hangar",
+      "en": "Hangar"
+    },
+    {
+      "key": "FLEET_SYSTEM",
+      "de": "Systemraum",
+      "en": "System space"
+    },
+    {
+      "key": "FLEET_FREE",
+      "de": "frei",
+      "en": "free"
+    },
+    {
+      "key": "FLEET_BAY",
+      "de": "Hangar %d · %s",
+      "en": "Bay %d · %s"
+    },
+    {
+      "key": "FLEET_SAMPLE",
+      "de": "Probe",
+      "en": "Sample"
+    },
+    {
+      "key": "FLEET_CARGO",
+      "de": "Testfracht",
+      "en": "Trial cargo"
+    },
+    {
+      "key": "FLEET_SPACE",
+      "de": " · %d Lagerplätze",
+      "en": " · %d cargo spaces"
+    },
+    {
+      "key": "FLEET_DETAIL",
+      "de": "%s  |  Entwurf Revision %d  |  Fracht %d / %d  |  Energie %d / %d\nSchiff-ID: %s\n%s",
+      "en": "%s  |  Design revision %d  |  Cargo %d / %d  |  Energy %d / %d\nShip ID: %s\n%s"
+    },
+    {
+      "key": "FLEET_DOCKED",
+      "de": "Angedockt an: ",
+      "en": "Docked at: "
+    },
+    {
+      "key": "FLEET_READY",
+      "de": "Bereit im Systemraum",
+      "en": "Ready in system space"
+    },
+    {
+      "key": "FLEET_SAVED",
+      "de": "Änderung gespeichert.",
+      "en": "Change saved."
+    },
+    {
+      "key": "FLEET_ERROR",
+      "de": "Aktion nicht ausgeführt. Der gespeicherte Stand bleibt erhalten.",
+      "en": "Action not completed. The saved state is preserved."
+    },
+    {
+      "key": "FLEET_ERROR_STALE",
+      "de": "Die Ansicht ist veraltet. Bitte die Aktion mit dem aktuellen Stand wiederholen.",
+      "en": "The view is out of date. Please retry using the current state."
+    },
+    {
+      "key": "FLEET_ERROR_OCCUPIED",
+      "de": "Dieser Hangar ist bereits belegt.",
+      "en": "This bay is already occupied."
+    },
+    {
+      "key": "FLEET_ERROR_DISTANCE",
+      "de": "Beide Schiffe müssen im selben System nahe beieinander stehen.",
+      "en": "Both ships must be nearby in the same system."
+    },
+    {
+      "key": "FLEET_ERROR_CONNECTED",
+      "de": "Zum Umladen muss das Beiboot am Zielschiff angedockt sein.",
+      "en": "To transfer cargo, the lander must be docked at the target ship."
+    },
+    {
+      "key": "FLEET_ERROR_CAPACITY",
+      "de": "Im Zielschiff ist nicht genug Frachtraum frei.",
+      "en": "The target ship does not have enough free cargo space."
+    },
+    {
+      "key": "FLEET_ERROR_DESIGN",
+      "de": "Dieser Entwurf ist unvollständig oder nicht kompatibel. Bitte in der Schiffswerft prüfen.",
+      "en": "This design is incomplete or incompatible. Please check it in the shipyard."
+    },
+    {
+      "key": "FLEET_ERROR_LIMIT",
+      "de": "Der Flottentest unterstützt bis zu 16 Schiffe.",
+      "en": "The fleet trial supports up to 16 ships."
+    },
+    {
+      "key": "CONSTRUCTION_NONE",
+      "de": "Es gibt keine laufende Baustelle.",
+      "en": "There is no active construction project."
+    },
+    {
+      "key": "CONSTRUCTION_INVALID",
+      "de": "Unbekannter Baustellenauftrag.",
+      "en": "Unknown construction command."
+    },
+    {
+      "key": "CONSTRUCTION_UNCHANGED",
+      "de": "Die Baustelle hat diesen Zustand bereits.",
+      "en": "The project is already in this state."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERING",
+      "de": "Der Rückbau läuft bereits. Weise Bewohner für den Rücktransport zu.",
+      "en": "Recovery is already underway. Assign residents to bring materials back."
+    },
+    {
+      "key": "CONSTRUCTION_STORAGE_FULL",
+      "de": "Für die vollständige Materialrückgabe fehlt Lagerplatz. Schaffe zuerst Platz im Lager.",
+      "en": "There is not enough warehouse space for all materials. Free up storage first."
+    },
+    {
+      "key": "CONSTRUCTION_PAUSED",
+      "de": "Baustelle pausiert. Laufende Materiallieferungen werden noch beendet.",
+      "en": "Construction paused. Material already in transit can still arrive."
+    },
+    {
+      "key": "CONSTRUCTION_RESUMED",
+      "de": "Baustelle fortgesetzt. Zugewiesene Bewohner arbeiten weiter.",
+      "en": "Construction resumed. Assigned residents continue their work."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERED",
+      "de": "Rückbau abgeschlossen. Alle Baumaterialien sind zurück im Lager.",
+      "en": "Recovery complete. All construction materials are back in storage."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERY_STARTED",
+      "de": "Bau abgebrochen. Bewohner bringen angelieferte Materialien zurück.",
+      "en": "Construction cancelled. Residents will bring delivered materials back."
+    },
+    {
+      "key": "CONSTRUCTION_INACTIVE",
+      "de": "Baustellen können nur im laufenden Stammesmodus geändert werden.",
+      "en": "Construction can only be managed while tribal play is active."
+    },
+    {
+      "key": "CONSTRUCTION_SAVE_FAILED",
+      "de": "Speichern fehlgeschlagen. Baustelle, Materialien und Aufträge bleiben unverändert.",
+      "en": "Saving failed. The project, materials and orders remain unchanged."
+    },
+    {
+      "key": "CONSTRUCTION_TITLE",
+      "de": "{name} · {state}",
+      "en": "{name} · {state}"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_ACTIVE",
+      "de": "Im Bau",
+      "en": "Building"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_PAUSED",
+      "de": "Pausiert",
+      "en": "Paused"
+    },
+    {
+      "key": "CONSTRUCTION_STATE_RECOVERING",
+      "de": "Materialrückgabe",
+      "en": "Material recovery"
+    },
+    {
+      "key": "CONSTRUCTION_WORKERS",
+      "de": "Zugewiesen: {count} · gestoppt oder ohne Weg: {blocked}",
+      "en": "Assigned: {count} · stopped or blocked: {blocked}"
+    },
+    {
+      "key": "CONSTRUCTION_MATERIAL_ROW",
+      "de": "{resource}: {delivered}/{required} am Bau · {carried} unterwegs · {reserved} reserviert",
+      "en": "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+    },
+    {
+      "key": "CONSTRUCTION_RETURN_ROW",
+      "de": "{resource}: {returned}/{required} zurück · {carried} getragen · {delivered} am Bau",
+      "en": "{resource}: {returned}/{required} returned · {carried} carried · {delivered} on site"
+    },
+    {
+      "key": "CONSTRUCTION_PAUSE",
+      "de": "Bau pausieren",
+      "en": "Pause construction"
+    },
+    {
+      "key": "CONSTRUCTION_RESUME",
+      "de": "Bau fortsetzen",
+      "en": "Resume construction"
+    },
+    {
+      "key": "CONSTRUCTION_ASSIGN",
+      "de": "Auswahl zur Baustelle",
+      "en": "Assign selected residents"
+    },
+    {
+      "key": "CONSTRUCTION_CANCEL",
+      "de": "Bau abbrechen …",
+      "en": "Cancel construction…"
+    },
+    {
+      "key": "CONSTRUCTION_CONFIRM_CANCEL",
+      "de": "Abbrechen und Material zurückholen",
+      "en": "Cancel and recover materials"
+    },
+    {
+      "key": "CONSTRUCTION_KEEP",
+      "de": "Weiterbauen",
+      "en": "Keep project"
+    },
+    {
+      "key": "CONSTRUCTION_CONFIRM_HINT",
+      "de": "Baufortschritt geht verloren. Reservierte Materialien werden freigegeben; angelieferte und getragene Waren müssen Bewohner zurückbringen. Der Bauplatz bleibt bis dahin belegt.",
+      "en": "Construction progress will be lost. Reserved materials are released; residents must return delivered and carried goods. The site stays occupied until recovery finishes."
+    },
+    {
+      "key": "CONSTRUCTION_RECOVERY_HINT",
+      "de": "Weise Bewohner zu oder setze gestoppte Bewohner fort. Material kommt erst bei Ankunft im Lager an. Für die Rückgabe wird Lagerplatz freigehalten.",
+      "en": "Assign residents or resume stopped residents. Materials reach storage only on arrival. Storage space is reserved for their return."
+    },
+    {
+      "key": "CONSTRUCTION_PAUSE_HINT",
+      "de": "Pausieren stoppt neue Abholungen und Bauarbeit. Bereits getragene Waren dürfen ankommen; andere Berufe arbeiten weiter.",
+      "en": "Pausing stops new pickups and building work. Carried goods may still arrive; other professions continue."
+    },
+    {
+      "key": "BP_FAVORITES_ONLY",
+      "de": "Nur Favoriten",
+      "en": "Favorites only"
+    },
+    {
+      "key": "BP_FAVORITE_ADD",
+      "de": "☆ Als Favorit merken",
+      "en": "☆ Add to favorites"
+    },
+    {
+      "key": "BP_FAVORITE_REMOVE",
+      "de": "★ Favorit entfernen",
+      "en": "★ Remove favorite"
+    },
+    {
+      "key": "BP_FAVORITE_TOOLTIP",
+      "de": "Merkt genau diese Vorlagenrevision auf diesem Gerät. Spielstand und exportierte Vorlage bleiben unverändert.",
+      "en": "Bookmarks this exact template revision on this device. Your campaign and exported template stay unchanged."
+    },
+    {
+      "key": "BP_FAVORITE_SAVED",
+      "de": "Diese Vorlage ist jetzt ein Favorit.",
+      "en": "This template is now a favorite."
+    },
+    {
+      "key": "BP_FAVORITE_CLEARED",
+      "de": "Die Favoritenmarkierung wurde entfernt.",
+      "en": "The favorite bookmark was removed."
+    },
+    {
+      "key": "BP_NO_FAVORITES",
+      "de": "Keine passenden Favoriten. Markiere eine Vorlage als Favorit oder ändere Suche und Filter.",
+      "en": "No matching favorites. Mark a template as a favorite or change the search and filters."
+    },
+    {
+      "key": "BP_ERROR_FAVORITES_FULL",
+      "de": "Die Favoritenliste ist voll. Entferne zuerst eine Markierung.",
+      "en": "The favorites list is full. Remove a bookmark first."
+    },
+    {
+      "key": "RECOVERY_TITLE",
+      "de": "Deine Kreatur ist gestorben",
+      "en": "Your creature has died"
+    },
+    {
+      "key": "RECOVERY_COUNTDOWN",
+      "de": "Rückkehr zur Heimat in {seconds} Sek.",
+      "en": "Returning home in {seconds} sec."
+    },
+    {
+      "key": "RECOVERY_PREPARING",
+      "de": "Deine Heimat wird vorbereitet. Du kehrst zurück, sobald ein sicherer Platz frei ist.",
+      "en": "Preparing your home. You will return as soon as a safe spot is available."
+    },
+    {
+      "key": "RECOVERY_BLOCKED",
+      "de": "Der Rückkehrort ist noch blockiert. Wir suchen weiter. Mit Esc erreichst du das Pausemenü.",
+      "en": "The return location is still blocked. Searching continues. Press Esc for the pause menu."
+    },
+    {
+      "key": "RECOVERY_KEEP",
+      "de": "Entdeckungen, Fähigkeiten und Gefährten bleiben erhalten.",
+      "en": "Your discoveries, abilities and companions are preserved."
+    },
+    {
+      "key": "RECOVERY_SAFE",
+      "de": "Wieder auf den Beinen",
+      "en": "Back on your feet"
+    },
+    {
+      "key": "RECOVERY_PROTECTION",
+      "de": "Leben, Nahrung und Wasser aufgefüllt. Noch {seconds} Sek. Schutz vor Schaden.",
+      "en": "Health, food and water restored. Protected from damage for {seconds} more sec."
+    },
+    {
+      "key": "RECOVERY_ATTACK",
+      "de": "Ein eigener Angriff beendet den Schutz.",
+      "en": "Attacking ends your protection."
+    },
+    {
+      "key": "BIND_JOURNAL",
+      "de": "Entdeckungsbuch",
+      "en": "Discovery journal"
+    },
+    {
+      "key": "BIND_DEVELOPMENT",
+      "de": "Entwicklung",
+      "en": "Development"
+    },
+    {
+      "key": "BIND_WORLD_MAP",
+      "de": "Weltkarte",
+      "en": "World map"
+    },
+    {
+      "key": "BIND_ALL_CONTROLS",
+      "de": "SPIEL & MENÜS · HAUPT- UND ZWEITBELEGUNG",
+      "en": "GAME & MENUS · PRIMARY AND SECONDARY BINDINGS"
+    },
+    {
+      "key": "BIND_MENUS_NOTE",
+      "de": "Menütasten: einzelne Buchstaben oder Ziffern. F, H, N und P sind für feste Spielaktionen belegt. Esc schließt ein Menü weiterhin.",
+      "en": "Menu shortcuts: single letters or digits. F, H, N and P are used by fixed game actions. Esc still closes a menu."
+    },
+    {
+      "key": "BIND_FIXED_PLAY_KEY",
+      "de": "Diese Taste ist bereits durch eine feste Spielaktion belegt (F, H, N oder P).",
+      "en": "This key is already used by a fixed game action (F, H, N or P)."
+    },
+    {
+      "key": "BIND_MENU_KEY_REQUIRED",
+      "de": "Für Menüs bitte eine Buchstaben- oder Zifferntaste wählen.",
+      "en": "Please choose a letter or digit key for menus."
+    },
+    {
+      "key": "BIND_MENUS_ADDED",
+      "de": "Deine Spieltasten bleiben erhalten. Neue Menütasten wurden auf freie Tasten gelegt; prüfe die Belegung unten.",
+      "en": "Your game bindings are preserved. New menu shortcuts have been assigned unused keys; review them below."
+    },
+    {
+      "key": "BIND_JOURNAL_BUTTON",
+      "de": "Entdeckungsbuch · {journal}",
+      "en": "Discovery journal · {journal}"
+    },
+    {
+      "key": "BIND_TRIBE_HINT",
+      "de": "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. {journal} öffnet eure gemeinsamen Entdeckungen.",
+      "en": "Your tribe · select villagers and give the group an order. {journal} opens your shared discoveries."
+    },
+    {
+      "key": "BIND_SCAN_RECOGNIZED",
+      "de": "Art erkannt · {journal} öffnet das Entdeckungsbuch",
+      "en": "Species recognised · {journal} opens the discovery journal"
+    },
+    {
+      "key": "BIND_FIRST_SCAN",
+      "de": "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit {journal} im Entdeckungsbuch.",
+      "en": "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+    },
+    {
+      "key": "BIND_CONTROLS_HELP",
+      "de": "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\n{journal}   Entdeckungsbuch\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)",
+      "en": "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+    },
+    {
+      "key": "GUIDE_TITLE",
+      "de": "DEIN WEG ZUM STAMM",
+      "en": "YOUR PATH TO A TRIBE"
+    },
+    {
+      "key": "GUIDE_INTRO",
+      "de": "Vier Kapitel begleiten dich vom Erkunden bis zum ersten Stamm. Wähle, was du als Nächstes lernen möchtest. Die Hilfe ist freiwillig und verändert keine Spielziele.",
+      "en": "Four chapters guide you from exploration to your first tribe. Choose what you want to learn next. Guidance is optional and does not change game objectives."
+    },
+    {
+      "key": "GUIDE_CHAPTER_EXPLORE",
+      "de": "Erkunden",
+      "en": "Explore"
+    },
+    {
+      "key": "GUIDE_CHAPTER_SURVIVE",
+      "de": "Versorgen",
+      "en": "Survive"
+    },
+    {
+      "key": "GUIDE_CHAPTER_HOME",
+      "de": "Zusammenleben",
+      "en": "Live together"
+    },
+    {
+      "key": "GUIDE_CHAPTER_TRIBE",
+      "de": "Stamm gründen",
+      "en": "Found a tribe"
+    },
+    {
+      "key": "GUIDE_STEP_LOOK",
+      "de": "Schau dich um",
+      "en": "Look around"
+    },
+    {
+      "key": "GUIDE_STEP_MOVE",
+      "de": "Erkunde deine Umgebung",
+      "en": "Explore your surroundings"
+    },
+    {
+      "key": "GUIDE_STEP_JUMP",
+      "de": "Mach einen Sprung",
+      "en": "Take a jump"
+    },
+    {
+      "key": "GUIDE_STEP_INSPECT",
+      "de": "Scanne eine Kreatur",
+      "en": "Scan a creature"
+    },
+    {
+      "key": "GUIDE_STEP_EAT",
+      "de": "Finde passende Nahrung",
+      "en": "Find suitable food"
+    },
+    {
+      "key": "GUIDE_STEP_DRINK",
+      "de": "Trinke Süßwasser",
+      "en": "Drink fresh water"
+    },
+    {
+      "key": "GUIDE_STEP_HOME",
+      "de": "Lege eine Heimat fest",
+      "en": "Establish a home"
+    },
+    {
+      "key": "GUIDE_STEP_COMMAND",
+      "de": "Führe deine Gefährten",
+      "en": "Lead your companions"
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE",
+      "de": "Beginne das Stammeszeitalter",
+      "en": "Begin the tribal age"
+    },
+    {
+      "key": "GUIDE_HINT_LOOK",
+      "de": "Bewege die Maus und schau dich in deiner Welt um.",
+      "en": "Move the mouse to look around your world."
+    },
+    {
+      "key": "GUIDE_HINT_MOVE",
+      "de": "{forward} / {left} / {back} / {right} · Lege ein paar Meter zurück.",
+      "en": "{forward} / {left} / {back} / {right} · Walk a few metres."
+    },
+    {
+      "key": "GUIDE_HINT_JUMP",
+      "de": "{jump} · Springe von festem Boden ab.",
+      "en": "{jump} · Jump from solid ground."
+    },
+    {
+      "key": "GUIDE_HINT_INSPECT",
+      "de": "{scan} · Halte eine Kreatur im Scanmodus im Fadenkreuz, bis der Kreis voll ist.",
+      "en": "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+    },
+    {
+      "key": "GUIDE_HINT_EAT",
+      "de": "{interact} · Nähere dich Nahrung und interagiere mit ihr. Dein Mund bestimmt, was du verträgst.",
+      "en": "{interact} · Approach food and interact with it. Your mouth determines what you can eat."
+    },
+    {
+      "key": "GUIDE_HINT_DRINK",
+      "de": "{interact} · Trinke an einem erreichbaren Süßwasserufer. Meerwasser hilft nicht.",
+      "en": "{interact} · Drink at a reachable freshwater shore. Sea water will not help."
+    },
+    {
+      "key": "GUIDE_HINT_HOME",
+      "de": "N · Öffne deine Nestgruppe und lege auf freiem, ebenem, trockenem Boden eine Heimat fest.",
+      "en": "N · Open your nest group and establish a home on clear, level, dry ground."
+    },
+    {
+      "key": "GUIDE_HINT_COMMAND",
+      "de": "N · Gib einem Gefährten oder der ganzen Gruppe den Befehl Folgen oder Heimkehren.",
+      "en": "N · Tell a companion or the whole group to Follow or Return home."
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE",
+      "de": "Rufe beide Gefährten heim. Öffne an der Heimat „Stammeszeitalter …“ und bestätige den Wechsel.",
+      "en": "Call both companions home. At your home, open “Tribal age …” and confirm the transition."
+    },
+    {
+      "key": "GUIDE_DETAIL_LOOK",
+      "de": "Beim Spielen folgt die Kamera deiner Kreatur. Empfindlichkeit und invertierte Y-Achse findest du unter Esc → Steuerung.",
+      "en": "The camera follows your creature during play. Mouse sensitivity and inverted Y are available under Esc → Controls."
+    },
+    {
+      "key": "GUIDE_DETAIL_MOVE",
+      "de": "Nur tatsächlich zurückgelegte Strecke zählt. An Hindernissen stehen zu bleiben erfüllt die Aufgabe nicht.",
+      "en": "Only distance actually travelled counts. Pushing against an obstacle does not complete this task."
+    },
+    {
+      "key": "GUIDE_DETAIL_JUMP",
+      "de": "Im Wasser steigst du mit derselben Taste auf. Für diese Aufgabe brauchst du einen Sprung vom Boden.",
+      "en": "The same key moves you upwards in water. This task requires a jump from the ground."
+    },
+    {
+      "key": "GUIDE_DETAIL_INSPECT",
+      "de": "Ein neuer Scan dauert 2,5 Sekunden; bereits bekannte Arten erkennst du sofort. Das Entdeckungsbuch ist über die Schaltfläche im HUD erreichbar.",
+      "en": "A new scan takes 2.5 seconds; known species are recognised immediately. Open the discovery journal using its HUD button."
+    },
+    {
+      "key": "GUIDE_DETAIL_EAT",
+      "de": "Pflanzen liefern unter anderem Früchte und Pflanzenkost. Fleisch erhältst du von Beute. Bei vollem Magen oder ungeeigneter Nahrung zählt der Versuch nicht. Du musst für die Einführung keinen bestimmten Ernährungsstil wählen.",
+      "en": "Plants provide foods such as fruit and vegetation. Prey provides meat. Attempts with a full stomach or unsuitable food do not count. The guide does not require a particular diet."
+    },
+    {
+      "key": "GUIDE_DETAIL_DRINK",
+      "de": "Suche Flüsse oder Seen und gehe nah genug ans Wasser. Ein erfolgreicher Schluck füllt Durst auf. Mit vollem Durstbalken brauchst du noch nichts zu trinken.",
+      "en": "Find a river or lake and approach the water. A successful drink restores thirst. With a full thirst bar you do not need to drink yet."
+    },
+    {
+      "key": "GUIDE_DETAIL_HOME",
+      "de": "Zwei Gefährten deiner eigenen Spezies gehören dauerhaft zur Heimat. Bäume, Wasser, Steilkanten oder zu wenig Platz verhindern das Anlegen. In der Nähe deiner Heimat regeneriert Gesundheit, wenn Hunger und Durst ausreichend gefüllt sind.",
+      "en": "Two companions of your own species permanently belong to your home. Trees, water, steep edges or insufficient space prevent founding it. Near home, health regenerates when hunger and thirst are sufficiently replenished."
+    },
+    {
+      "key": "GUIDE_DETAIL_COMMAND",
+      "de": "Befehle werden gespeichert. Folgen bringt die Gefährten zu dir; Heimkehren führt sie zurück zum Nest. Mit Warten hältst du sie an. Fremde Wildtiere werden dadurch nicht zu Gruppenmitgliedern.",
+      "en": "Orders are saved. Follow brings companions to you; Return home sends them back to the nest. Wait stops them. Wild animals of other species do not become group members through these orders."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE",
+      "de": "Du und beide Gefährten müssen an der Heimat sein. Vor der Bestätigung prüft das Spiel sichere Wege und Arbeitsplätze. Abbrechen bleibt möglich. Nach dem Wechsel führst du Bewohner und verteilst Dorfaufgaben. Die Einführung bestätigt den Wechsel niemals für dich.",
+      "en": "You and both companions must be at home. Before confirmation, the game checks safe routes and workplaces. You can still cancel. After the transition you lead residents and assign village tasks. Guidance never confirms the transition for you."
+    },
+    {
+      "key": "GUIDE_CARD_COUNT",
+      "de": "{chapter} · {done}/{total}",
+      "en": "{chapter} · {done}/{total}"
+    },
+    {
+      "key": "GUIDE_FOOTER",
+      "de": "Esc → Erste Schritte: Kapitel und Hilfe",
+      "en": "Esc → First steps: chapters and help"
+    },
+    {
+      "key": "GUIDE_CHOOSE",
+      "de": "Weiter mit: {chapter}",
+      "en": "Continue with: {chapter}"
+    },
+    {
+      "key": "GUIDE_TOTAL",
+      "de": "{done}/{total} Übungen erledigt. Der Fortschritt gehört zu diesem Abenteuer.",
+      "en": "{done}/{total} exercises completed. Progress belongs to this adventure."
+    },
+    {
+      "key": "GUIDE_FUTURE",
+      "de": "Diese Einführung stammt aus einer neueren Spielversion. Ihre Daten bleiben erhalten; die Hilfe kannst du weiterhin lesen.",
+      "en": "This guide was saved by a newer game version. Its data is preserved; you can still read the help."
+    },
+    {
+      "key": "GUIDE_DISABLED",
+      "de": "Die Hinweise sind ausgeschaltet.",
+      "en": "Guidance is turned off."
+    },
+    {
+      "key": "GUIDE_RESTART",
+      "de": "Einführung neu beginnen",
+      "en": "Restart introduction"
+    },
+    {
+      "key": "GUIDE_SKIP",
+      "de": "Hinweise ausschalten",
+      "en": "Turn off guidance"
+    },
+    {
+      "key": "GUIDE_FINISHED",
+      "de": "EINFÜHRUNG ABGESCHLOSSEN",
+      "en": "INTRODUCTION COMPLETE"
+    },
+    {
+      "key": "GUIDE_TRIBE_NEXT",
+      "de": "Wähle Bewohner aus und verteile im Dorf Arbeitsaufträge. Die Kapitel bleiben als Hilfe im Pausemenü erreichbar.",
+      "en": "Select residents and assign work in your village. The chapters remain available as help in the pause menu."
+    },
+    {
+      "key": "GUIDE_CONTEXT_WORLD",
+      "de": "Die Hinweise werden in der geladenen Spielwelt fortgesetzt.",
+      "en": "Guidance resumes in the loaded game world."
+    },
+    {
+      "key": "GUIDE_CONTEXT_FULL",
+      "de": "Dein Magen ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du wieder Nahrung brauchst.",
+      "en": "Your stomach is full. Keep exploring or choose another chapter until you need food again."
+    },
+    {
+      "key": "GUIDE_CONTEXT_HYDRATED",
+      "de": "Dein Durstbalken ist voll. Erkunde weiter oder wähle ein anderes Kapitel, bis du trinken musst.",
+      "en": "Your thirst bar is full. Keep exploring or choose another chapter until you need a drink."
+    },
+    {
+      "key": "GUIDE_CONTEXT_READY",
+      "de": "Deine Gruppe ist bereit. Öffne „Stammeszeitalter …“, um die Dorfwege prüfen zu lassen.",
+      "en": "Your group is ready. Open “Tribal age …” to check the village routes."
+    },
+    {
+      "key": "GUIDE_CONTEXT_ANY_ORDER",
+      "de": "Aktionen zählen auch vor ihrem Kapitel. Du kannst Kapitel frei wählen oder die Hinweise ausschalten.",
+      "en": "Actions count even before their chapter. You can choose chapters freely or turn guidance off."
+    },
+    {
+      "key": "SAVE_SCAN_DISCOVER",
+      "de": "Spielstände werden gesucht …",
+      "en": "Finding adventures …"
+    },
+    {
+      "key": "SAVE_SCAN_PROGRESS",
+      "de": "Spielstände werden geprüft: {done} von {total} …",
+      "en": "Checking adventures: {done} of {total} …"
+    },
+    {
+      "key": "SAVE_HISTORY_LOADING",
+      "de": "Sicherungen werden geprüft …",
+      "en": "Checking backups …"
+    },
+    {
+      "key": "WILDLIFE_HUNT",
+      "de": "Jagt Beute",
+      "en": "Hunting prey"
+    },
+    {
+      "key": "WILDLIFE_CARRION",
+      "de": "Sucht Aas",
+      "en": "Seeking carrion"
+    },
+    {
+      "key": "WILDLIFE_EAT_CARCASS",
+      "de": "Frisst Aas",
+      "en": "Eating carrion"
     }
   ]
 }

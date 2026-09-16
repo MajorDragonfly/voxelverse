@@ -1,0 +1,108 @@
+diff --git a/tests/creature_parts_studio_test.gd b/tests/creature_parts_studio_test.gd
+index 0da5f3f..43c45fa 100644
+--- a/tests/creature_parts_studio_test.gd
++++ b/tests/creature_parts_studio_test.gd
+@@ -32 +32 @@ func _run() -> void:
+-		print("Creature parts studio passed: 33 part recipes, 11 end pieces, XYZ controls, undo, mirrored spikes, center sockets, 2/4/6-leg soles, terrain IK, wildlife floor alignment, cosmetic skins and save roundtrip.")
++		print("Creature parts studio passed: 36 part recipes, 11 end pieces, XYZ controls, undo, mirrored spikes, center sockets, 2/4/6-leg soles, terrain IK, wildlife floor alignment, cosmetic skins and save roundtrip.")
+@@ -68 +68,4 @@ func _check_catalog_and_pairs() -> void:
+-	_expect(count == 33 and Library.get_terminal_parts().size() == 11, "Part or end-piece catalog incomplete.")
++	# The integrated catalogue adds feline, bear and pig mouths to the 33
++	# already covered recipes (including the independent trunk). Every recipe
++	# above must still produce real voxel geometry in the shared preview.
++	_expect(count == 36 and Library.get_terminal_parts().size() == 11, "Part or end-piece catalog incomplete.")
+diff --git a/tests/resource_visuals_test.gd b/tests/resource_visuals_test.gd
+index bb89ab8..09e0da3 100644
+--- a/tests/resource_visuals_test.gd
++++ b/tests/resource_visuals_test.gd
+@@ -46,0 +47,8 @@ func _run() -> void:
++	# Anchor the convention in Godot's own primitive, not in this mesher.
++	# Godot front faces wind clockwise, opposite to (b-a) cross (c-a).
++	var native: Array = BoxMesh.new().get_mesh_arrays()
++	var native_indices: PackedInt32Array = native[Mesh.ARRAY_INDEX]
++	var native_vertices: PackedVector3Array = native[Mesh.ARRAY_VERTEX]
++	var native_a: int = native_indices[0]
++	var native_winding: float = (native_vertices[native_indices[1]]-native_vertices[native_a]).cross(native_vertices[native_indices[2]]-native_vertices[native_a]).dot(native[Mesh.ARRAY_NORMAL][native_a])
++	check(native_winding < 0.0, "Unexpected Godot primitive front-face convention")
+@@ -51 +59,2 @@ func _run() -> void:
+-		check((arrays[Mesh.ARRAY_VERTEX][b]-arrays[Mesh.ARRAY_VERTEX][a]).cross(arrays[Mesh.ARRAY_VERTEX][c]-arrays[Mesh.ARRAY_VERTEX][a]).dot(arrays[Mesh.ARRAY_NORMAL][a]) > 0, "Incorrect exterior face winding")
++		var winding: float = (arrays[Mesh.ARRAY_VERTEX][b]-arrays[Mesh.ARRAY_VERTEX][a]).cross(arrays[Mesh.ARRAY_VERTEX][c]-arrays[Mesh.ARRAY_VERTEX][a]).dot(arrays[Mesh.ARRAY_NORMAL][a])
++		check(winding * native_winding > 0.0, "Resource front face disagrees with Godot BoxMesh")
+@@ -107 +116,9 @@ func _run() -> void:
+-		var status: int = OS.execute(OS.get_executable_path(),["--headless","--path",ProjectSettings.globalize_path("res://"),"--script","res://tests/resource_visuals_test.gd","--","--resource-restart"],output,true)
++		var arguments: PackedStringArray = OS.get_cmdline_user_args()
++		var pack_index: int = arguments.find("--resource-restart-pack")
++		var restart: PackedStringArray = ["--headless"]
++		if pack_index >= 0:
++			restart.append_array(["--main-pack",arguments[pack_index+1],"--script",get_script().resource_path])
++		else:
++			restart.append_array(["--path",ProjectSettings.globalize_path("res://"),"--script","res://tests/resource_visuals_test.gd"])
++		restart.append_array(["--","--resource-restart"])
++		var status: int = OS.execute(OS.get_executable_path(),restart,output,true)
+diff --git a/tools/egg_species_campaign_probe.gd b/tools/egg_species_campaign_probe.gd
+index 0404914..f3702c2 100644
+--- a/tools/egg_species_campaign_probe.gd
++++ b/tools/egg_species_campaign_probe.gd
+@@ -6,0 +7 @@ const Space = preload("res://world/surface/gameplay_space.gd")
++const Encounters = preload("res://core/progression/creature_encounters.gd")
+@@ -40 +41 @@ func _run() -> void:
+-	_expect(_same(tree.root.get_node("ProgressionService").export_state(), legacy.saved.progression), "Migration changed existing discoveries or points")
++	_check_legacy_progression(legacy.saved.progression)
+@@ -107,0 +109,16 @@ func _run() -> void:
++func _check_legacy_progression(before: Dictionary) -> void:
++	var after: Dictionary = tree.root.get_node("ProgressionService").export_state()
++	# This genuine old fixture has no encounters. ARCH-14 now migrates that
++	# inline ledger to an empty paged root; every other progression field must
++	# remain identical, including discoveries, points, unlocks and research.
++	var old_ledger: Dictionary = before.get("creature_encounters", {})
++	var new_ledger: Dictionary = after.get("creature_encounters", {})
++	_expect(old_ledger.get("schema") == 1 and old_ledger.get("entries") == {}, "Legacy fixture encounter ledger changed")
++	_expect(new_ledger.get("schema") == 2 and Encounters.validate_state(new_ledger).is_empty(), "Migration did not produce a valid paged encounter ledger")
++	_expect(new_ledger.get("storage", {}).get("root", "missing") == "", "Migration added encounters to the empty legacy ledger")
++	var old_progression: Dictionary = before.duplicate(true)
++	var new_progression: Dictionary = after.duplicate(true)
++	old_progression.erase("creature_encounters")
++	new_progression.erase("creature_encounters")
++	_expect(_same(new_progression, old_progression), "Migration changed existing discoveries, points or other progression")
++
+diff --git a/tools/validate_export.py b/tools/validate_export.py
+index 48c54a3..f28c344 100644
+--- a/tools/validate_export.py
++++ b/tools/validate_export.py
+@@ -19 +19 @@ from validation_support import isolated_env
+-PACKAGED_TESTS = ['body_identity_test', 'far_simulation_test', 'village_navigation_budget_test', 'campaign_scaling_test', 'creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test']
++PACKAGED_TESTS = ['body_identity_test', 'far_simulation_test', 'village_navigation_budget_test', 'campaign_scaling_test', 'creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test', 'resource_visuals_test']
+@@ -146,0 +147,2 @@ def main():
++                if name == "resource_visuals_test":
++                    probe_args += ["--", "--resource-restart-pack", str(executable.with_suffix(".pck"))]
+diff --git a/tools/workflow/packets.json b/tools/workflow/packets.json
+index 11233c5..f6640da 100644
+--- a/tools/workflow/packets.json
++++ b/tools/workflow/packets.json
+@@ -85 +85,2 @@
+-        "progression"
++        "blueprints",
++        "persistence"
+@@ -109 +110 @@
+-        "creature_editor",
++        "village",
+@@ -123 +124,2 @@
+-        "creature_body"
++        "village",
++        "domestic_fauna"
+diff --git a/world/resources/plants/berry_bush.gd b/world/resources/plants/berry_bush.gd
+index 972de89..657e83f 100644
+--- a/world/resources/plants/berry_bush.gd
++++ b/world/resources/plants/berry_bush.gd
+@@ -104,2 +104 @@ func _harvest_berries() -> void:
+-	# Der Busch wird mit demselben Seed erneut generiert,
+-	# dieses Mal jedoch ohne Beeren.
++	# Nur die Früchte ausblenden; Form und Kollision bleiben erhalten.
+diff --git a/world/visuals/scenery/resource_voxel_mesh.gd b/world/visuals/scenery/resource_voxel_mesh.gd
+index bad87c9..b66b1be 100644
+--- a/world/visuals/scenery/resource_voxel_mesh.gd
++++ b/world/visuals/scenery/resource_voxel_mesh.gd
+@@ -41 +41,2 @@ static func build(cells: Dictionary, cell: Vector3) -> ArrayMesh:
+-			for index in [0, 1, 2, 0, 2, 3]: indices.append(offset + index)
++			# Clockwise front faces, matching Godot's native primitive meshes.
++			for index in [0, 2, 1, 0, 3, 2]: indices.append(offset + index)

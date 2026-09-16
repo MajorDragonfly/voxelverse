@@ -1,0 +1,173 @@
+{
+  "base_commit": "365c402d4e5635c024e96f4299e8b85561c35cd0",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "cwd": "/workspace/scratch/3e3efb2408e2/voxelverse-export-provenance",
+  "engine_execution": "Explicit Python engine/package fixtures only; no native Voxelverse export claimed",
+  "runs": [
+    {
+      "name": "export-regressions",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/tooling",
+        "-p",
+        "export_provenance_test.py",
+        "-v"
+      ],
+      "seconds": 11.154,
+      "exit_code": 0
+    },
+    {
+      "name": "validation-regressions",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/tooling",
+        "-p",
+        "validation*_test.py",
+        "-v"
+      ],
+      "seconds": 4.528,
+      "exit_code": 0
+    },
+    {
+      "name": "source-contracts",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tools/check_validation_contracts.py",
+        "--output",
+        "/workspace/scratch/3e3efb2408e2/qa-arch29-export/contracts.json"
+      ],
+      "seconds": 0.119,
+      "exit_code": 0
+    }
+  ],
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "d9ca33bbc76f876426a409bbdb469ff318ced8df",
+      "tree": "cbab04e09f8a09f3576df083535f783c37916824",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "84a66fce7e69f8bc86ef39856f1766ff3b2cb158b9a11f27951aa9ac4e7e2123",
+      "source_sha256": "7292ccfc3b899ce19b8991988855ddf00fd146636de9ae788ac22aa852f814a4",
+      "complete": true,
+      "file_count": 2838,
+      "bytes": 94364025,
+      "bytes_hashed": 94364025,
+      "seconds": 0.2606
+    },
+    "end": {
+      "available": true,
+      "commit": "d9ca33bbc76f876426a409bbdb469ff318ced8df",
+      "tree": "cbab04e09f8a09f3576df083535f783c37916824",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "84a66fce7e69f8bc86ef39856f1766ff3b2cb158b9a11f27951aa9ac4e7e2123",
+      "source_sha256": "7292ccfc3b899ce19b8991988855ddf00fd146636de9ae788ac22aa852f814a4",
+      "complete": true,
+      "file_count": 2838,
+      "bytes": 94364025,
+      "bytes_hashed": 94364025,
+      "seconds": 0.2754
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "fe0107c1ad715aad87a35bd9e24c43357a724e225cc09aaa33285da2ace3bf8a"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "fe0107c1ad715aad87a35bd9e24c43357a724e225cc09aaa33285da2ace3bf8a"
+      }
+    },
+    "observations": [
+      {
+        "after": "export-regressions",
+        "source": {
+          "available": true,
+          "commit": "d9ca33bbc76f876426a409bbdb469ff318ced8df",
+          "tree": "cbab04e09f8a09f3576df083535f783c37916824",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "84a66fce7e69f8bc86ef39856f1766ff3b2cb158b9a11f27951aa9ac4e7e2123",
+          "source_sha256": "7292ccfc3b899ce19b8991988855ddf00fd146636de9ae788ac22aa852f814a4",
+          "complete": true,
+          "file_count": 2838,
+          "bytes": 94364025,
+          "bytes_hashed": 0,
+          "seconds": 0.1232
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "validation-regressions",
+        "source": {
+          "available": true,
+          "commit": "d9ca33bbc76f876426a409bbdb469ff318ced8df",
+          "tree": "cbab04e09f8a09f3576df083535f783c37916824",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "84a66fce7e69f8bc86ef39856f1766ff3b2cb158b9a11f27951aa9ac4e7e2123",
+          "source_sha256": "7292ccfc3b899ce19b8991988855ddf00fd146636de9ae788ac22aa852f814a4",
+          "complete": true,
+          "file_count": 2838,
+          "bytes": 94364025,
+          "bytes_hashed": 0,
+          "seconds": 0.1456
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source-contracts",
+        "source": {
+          "available": true,
+          "commit": "d9ca33bbc76f876426a409bbdb469ff318ced8df",
+          "tree": "cbab04e09f8a09f3576df083535f783c37916824",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "84a66fce7e69f8bc86ef39856f1766ff3b2cb158b9a11f27951aa9ac4e7e2123",
+          "source_sha256": "7292ccfc3b899ce19b8991988855ddf00fd146636de9ae788ac22aa852f814a4",
+          "complete": true,
+          "file_count": 2838,
+          "bytes": 94364025,
+          "bytes_hashed": 0,
+          "seconds": 0.1404
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "d9ca33bbc76f876426a409bbdb469ff318ced8df",
+          "tree": "cbab04e09f8a09f3576df083535f783c37916824",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "84a66fce7e69f8bc86ef39856f1766ff3b2cb158b9a11f27951aa9ac4e7e2123",
+          "source_sha256": "7292ccfc3b899ce19b8991988855ddf00fd146636de9ae788ac22aa852f814a4",
+          "complete": true,
+          "file_count": 2838,
+          "bytes": 94364025,
+          "bytes_hashed": 94364025,
+          "seconds": 0.2754
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "passed": true
+}

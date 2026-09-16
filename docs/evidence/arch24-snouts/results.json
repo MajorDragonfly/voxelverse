@@ -1,0 +1,43 @@
+{
+  "packet": "ARCH-24-SNOUTS",
+  "depends_on": "PR #100 / ARCH-24-ARTICULATION",
+  "base_remote": "5d3d6321425f2072daafcb70b3b9c0b968252daf",
+  "base_local": "4c4e2d5c3c0c78bc0dffa4d50b24d684c95545b6",
+  "base_tree": "7226a971518cae8ca79b394f8343fb45a4761780",
+  "source_commit": "b6cb30e4989bb3289efc653f1059d230706e1e5a",
+  "source_tree": "ecbb692098033ce8b32bd95c4ebcfa539a2c4650",
+  "source_files_sha256": {
+    "creatures/catalog/creature_mouth_catalog.gd": "680dc0befc4bb1064d6ce0531d3f6b4e36bd98fa3ffb76f6558f9dee4fd97e7d",
+    "creatures/editor/creature_mouth_geometry.gd": "37ec3940fca3e6d775a26bd06d0921a265864cda59818038893ef5b954a08632",
+    "tests/creature_foot_provider_test.gd": "d90ecac3db363128157a40ff2464f272eb3fef907fbea1b42f52b2ea2dfa42a3",
+    "tests/creature_mouth_provider_test.gd": "b5a0a8c6bef94bb806efe3382228938488152cd87af3f43789ba261443cfbbc2",
+    "tests/creature_snout_family_test.gd": "d015ef117264833179eeb4be87845fce9a4534b835b689c0c6d7502d72f4d304",
+    "tests/creature_snout_family_test.gd.uid": "1e97e1c3da085c4bfb611fec4cac5ee8a5f53f835d39e3af495e24c8e213f1d7",
+    "tests/fixtures/creature_mouths_before_snouts.json": "c475c113a7d99293867c60a1713d4fc22b66981ef6c311fd8655d46077ba2aca",
+    "tools/capture_part_articulation.gd": "b8d8276d2c67190d9f196d2e712092943c037c5701d65d5c6e3dcce7c0480862",
+    "tools/render_animal_foot_meshes.py": "5b561d999976d6b84f2e0e7d3c9df9fa70ea7dda72cff5ea7bdea31c5649ec92",
+    "tools/validation/contracts.json": "8fe4b3b42358ba917472030ee54d24f49297ae9d3bde19f1470f2046f25bcf8e"
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux, headless, isolated XDG/APPDATA via standard runner",
+  "checks": "Four distinct Godot tests passed; import/source/art gates passed. New family test covers actual editor/history/unlocks, 42 frozen prior mesh cases, 3 poses families at mirrored/nonuniform scales, native process restart, saved blueprints and offline local library reuse.",
+  "commands": [
+    "python3 tools/validate_godot.py --godot GODOT --tests creature_snout_family_test creature_mouth_provider_test creature_part_articulation_test community_blueprint_package_test --skip-main --output QA/checks",
+    "python3 tools/validate_godot.py --godot GODOT --tests creature_snout_family_test --skip-main --skip-import --output QA/family",
+    "GODOT --headless --path PROJECT --script res://tools/export_animal_foot_meshes.gd -- QA/meshes/mouths.json mouth_feline_snout mouth_bear_snout mouth_pig_snout",
+    "GODOT --headless --path PROJECT --script res://tools/capture_part_articulation.gd -- QA/meshes mouth_feline_snout mouth_bear_snout mouth_pig_snout",
+    "python3 tools/render_animal_foot_meshes.py QA/meshes/mouths.json QA/meshes/snouts-detail.png --mouths",
+    "python3 tools/render_part_articulation.py QA/meshes/bodies.json QA/meshes/snouts-bodies.png"
+  ],
+  "tested_state": "Tests ran with identified worktree changes before commit. Runtime unchanged after first four-test run. Only the new test was corrected to use the actual receiving progression unlocks; other three test results reused. QA tools verified separately.",
+  "initial_failure": "New test referenced a nonexistent get_all_parts helper; corrected to the real ProgressionService.get_unlocked_part_ids, which also checks the receiving campaign rules. No gameplay fix or weakened assertion.",
+  "baseline": "42 mesh hashes captured before model edits on base tree 7226a971518cae8ca79b394f8343fb45a4761780. Existing legacy catalog and 30 deterministic species fixtures remain tested.",
+  "visuals": "Exact Godot meshes rendered by existing CPU tools; full bodies in rest/open pose plus front/side detail views. Both inspected. Native display socket restriction established in PR #100 remains; no repeated window-server attempt.",
+  "limits": [
+    "No native renderer/Windows/target-PC acceptance",
+    "Stacked package: integrate PR #100 first",
+    "No automatic redistribution of old wildlife species",
+    "Provider names/descriptions follow existing German strings; full DE/EN part-name integration remains with localization owner",
+    "No new gameplay capabilities or base-profile stats"
+  ]
+}

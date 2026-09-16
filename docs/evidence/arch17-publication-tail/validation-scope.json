@@ -1,0 +1,14 @@
+{
+  "source_commit": "6dcddc09aa0f6f46363ef377058ed79725a48a9d",
+  "source_tree": "843b0121be4fb21c22cad0cdac49c24d4e6a5360",
+  "selected_tests": [
+    "terrain_lookahead_test",
+    "adaptive_planet_test",
+    "large_planet_runtime_test"
+  ],
+  "reason": "Changed only terrain mesh residency accounting; real campaign lifecycle and direct adaptive/large-planet consumers cover forced loads, partial uploads, cache reuse, generation discard, rebase, physical cube-seam crossing and outstanding-worker teardown.",
+  "change_plan_scope": "full",
+  "change_plan_explanation": "The conservative planner treats tools/benchmark_terrain_publication.gd as shared infrastructure and expands to all 180 tests. The package follows AGENTS.md scoped specialist verification; full suite and exports remain integration work. No planner or registry rules were changed.",
+  "skip_import_reason": "Same local assets imported successfully before benchmark instrumentation and GDScript changes; no new scripts or assets.",
+  "environment": "Godot 4.6.3, Linux headless, existing validation runner with isolated temporary user data. No simultaneous local benchmark and test process."
+}

@@ -23,6 +23,9 @@ const GameEvent = preload("res://core/campaign/game_event.gd")
 const PhaseHandoff = preload("res://core/campaign/phase_handoff.gd")
 const DEFAULT_SAVE_PATH: String = "user://voxelverse_save.json"
 const SLOT_DIRECTORY: String = "user://saves"
+const Access = preload("res://core/persistence/userdata_access.gd")
+var _userdata_lease: RefCounted
+const SlotScan = preload("res://core/persistence/slot_scan.gd")
 const History = preload("res://core/persistence/slot_history.gd")
 
 @export_range(5.0, 300.0, 5.0) var autosave_interval: float = 45.0
@@ -41,6 +44,7 @@ var _write_blocked: bool = false
 var last_migration_report: Array[String] = []
 var last_error: String = ""
 var _body_transfer: Dictionary = {}
+const Settlements = preload("res://world/tribe/settlement_collection.gd")
 const VillageSimulation = preload("res://world/tribe/village_simulation.gd")
 var _saving: bool = false
 var _transition_busy: bool = false
@@ -55,9 +59,16 @@ var guidance := preload("res://core/onboarding_progress.gd").new()
 
 
 func _ready() -> void:
+	_userdata_lease = Access.acquire()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_autosave_timer = autosave_interval
 	call_deferred("load_if_present")
+
+
+func _exit_tree() -> void:
+	if _userdata_lease != null:
+		_userdata_lease.release()
+		_userdata_lease = null
 
 
 func _process(delta: float) -> void:
@@ -91,7 +102,16 @@ func load_if_present() -> bool:
 	return load_now()
 
 
+func _acquire_userdata() -> bool:
+	if _userdata_lease == null: _userdata_lease = Access.acquire()
+	if _userdata_lease == null:
+		_report_failure("User data is in use by an archive tool. Close it and retry saving.")
+		return false
+	return true
+
+
 func save_now(custom_path: String = "") -> bool:
+	if not _acquire_userdata(): return false
 	if _saving:
 		return false
 	_saving = true
@@ -165,6 +185,7 @@ func _save_snapshot(custom_path: String = "") -> bool:
 
 
 func load_now(custom_path: String = "") -> bool:
+	if not _acquire_userdata(): return false
 	if _transition_busy or _saving:
 		return false
 	var registration_problem: String = Participants.registration_problem(self)
@@ -213,6 +234,9 @@ func load_now(custom_path: String = "") -> bool:
 			for section in ["discovered_species", "discovered_regions"]:
 				for entry: Dictionary in data.progression.get(section, {}).values():
 					model.ensure_body(int(entry.get("world_seed", data.game_state.world_seed)), system_seed)
+			# Pre-campaign saves have no historical origin evidence either.
+			model.data.erase(Registry.Climate.POLICY)
+			Registry.Climate.migrate(model.data)
 			data["game_state"]["campaign"] = model.export_state()
 			data.game_state.body_id = active.id
 			data.game_state.system_id = active.system_id
@@ -248,31 +272,18 @@ func load_now(custom_path: String = "") -> bool:
 
 
 ## Listing is read-only: validation and backup inspection never import a world.
+func begin_slot_scan() -> RefCounted:
+	return SlotScan.new(self)
+
+func begin_history_scan(path: String) -> RefCounted:
+	return SlotScan.new(self, path, true)
+
+## Synchronous adapter for existing callers and tools. Interactive browsers
+## advance the same job across frames and cancel it on leaving the view.
 func list_slots() -> Array[Dictionary]:
-	var paths: Array[String] = []
-	if FileAccess.file_exists(DEFAULT_SAVE_PATH) or FileAccess.file_exists(DEFAULT_SAVE_PATH + ".bak"):
-		paths.append(DEFAULT_SAVE_PATH)
-	if DirAccess.dir_exists_absolute(SLOT_DIRECTORY):
-		for filename in DirAccess.get_files_at(SLOT_DIRECTORY):
-			var candidate: String = filename.trim_suffix(".bak")
-			if candidate.begins_with("slot_") and candidate.ends_with(".json"):
-				var path: String = SLOT_DIRECTORY + "/" + candidate
-				if path not in paths:
-					paths.append(path)
-		for directory in DirAccess.get_directories_at(SLOT_DIRECTORY):
-			var path: String = SLOT_DIRECTORY.path_join(directory.trim_suffix(".history"))
-			if directory.ends_with(".history") and is_slot_path(path) and path not in paths:
-				paths.append(path)
-	if DirAccess.dir_exists_absolute(History.directory(DEFAULT_SAVE_PATH)) and DEFAULT_SAVE_PATH not in paths:
-		paths.append(DEFAULT_SAVE_PATH)
-	var result: Array[Dictionary] = []
-	for path in paths:
-		result.append(inspect_slot(path))
-	result.sort_custom(func(a: Dictionary, b: Dictionary):
-		if int(a.saved_time) == int(b.saved_time):
-			return str(a.path) > str(b.path)
-		return int(a.saved_time) > int(b.saved_time))
-	return result
+	var scan := begin_slot_scan()
+	while scan.pending: scan.advance()
+	return scan.result
 
 
 func inspect_slot(path: String) -> Dictionary:
@@ -322,6 +333,7 @@ func _read_compatible_slot(path: String) -> Dictionary:
 
 
 func _can_manage_slots() -> bool:
+	if not _acquire_userdata(): return false
 	if session_active:
 		_report_failure("Bitte zuerst zum Hauptmenü zurückkehren.")
 		return false
@@ -436,29 +448,24 @@ func restore_spherical_source(path: String) -> String:
 
 
 func list_slot_history(path: String) -> Array[Dictionary]:
-	var result: Array[Dictionary] = []
-	if not is_slot_path(path):
-		return result
-	var sources := History.paths(path)
-	if FileAccess.file_exists(path + ".bak"):
-		sources.append(path + ".bak")
-	var seen := {}
-	for source: String in sources:
-		var data := _read_save(source)
-		var meta: Dictionary = _dict(data.get("slot_history", {}))
-		data.erase("slot_history")
-		var identity: String = JSON.stringify(data).sha256_text()
-		if seen.has(identity):
-			continue
-		seen[identity] = true
-		var newer: bool = _has_unsupported_contract(data)
-		var valid: bool = not newer and _validate_save(data).is_empty()
-		var entry: Dictionary = _slot_summary(path, data, valid, false, newer)
-		entry["source"] = source
-		entry["reason"] = str(meta.get("reason", "backup"))
-		entry["can_copy"] = valid and int(data.get("schema", 0)) >= 3
-		result.append(entry)
-	return result
+	if not is_slot_path(path): return []
+	var scan := begin_history_scan(path)
+	while scan.pending: scan.advance()
+	return scan.result
+
+## Read port for the cooperative history scan. No import, repair or write.
+func inspect_history_source(path: String, source: String) -> Dictionary:
+	var data := _read_save(source)
+	var meta: Dictionary = _dict(data.get("slot_history", {}))
+	data.erase("slot_history")
+	var identity: String = JSON.stringify(data).sha256_text()
+	var newer: bool = _has_unsupported_contract(data)
+	var valid: bool = not newer and _validate_save(data).is_empty()
+	var entry: Dictionary = _slot_summary(path, data, valid, false, newer)
+	entry["source"] = source
+	entry["reason"] = str(meta.get("reason", "backup"))
+	entry["can_copy"] = valid and int(data.get("schema", 0)) >= 3
+	return {"identity": identity, "entry": entry}
 
 
 func restore_slot_copy(path: String, source_path: String, title: String = "") -> String:
@@ -485,6 +492,8 @@ func _write_slot_copy(source: Dictionary, title: String, kind: String) -> String
 	var campaign: Dictionary = data["game_state"]["campaign"]
 	var old_identity: String = campaign["id"]
 	campaign["id"] = Ids.create("campaign")
+	if campaign.has(Participants.Fleet.FIELD):
+		campaign[Participants.Fleet.FIELD].snapshot.campaign_id = campaign.id
 	# Preserve opaque object/design/body IDs and paid-target ledgers: the copy
 	# branches an existing history, rather than recreating its discovered world.
 	for event: Dictionary in campaign["recent_events"]:
@@ -519,6 +528,7 @@ func cache_slot_preview(png: PackedByteArray, world_seed: int) -> void:
 
 
 func create_slot(title: String, seed_value: int = 0, surface_mode: String = Surface.Cube.MODE, creature_template: Dictionary = {}) -> String:
+	if not _acquire_userdata(): return ""
 	if surface_mode not in [Surface.LEGACY, Surface.Cube.MODE]:
 		_report_failure("Unbekannter Oberflächentyp.")
 		return ""
@@ -591,12 +601,7 @@ func prepare_playable_slot(path: String) -> String:
 
 
 func select_slot(path: String) -> bool:
-	var known: bool = false
-	for slot in list_slots():
-		if slot.path == path and slot.valid:
-			known = true
-			break
-	if not known:
+	if not is_slot_path(path) or not bool(inspect_slot(path).valid):
 		last_error = "Dieser Spielstand kann nicht geladen werden."
 		return false
 	var previous_path: String = save_path
@@ -889,6 +894,7 @@ func reset_runtime_for_new_game() -> void:
 
 
 func clear_save() -> bool:
+	if not _acquire_userdata(): return false
 	if _transition_busy or _saving:
 		return false
 	reset_runtime_for_new_game()
@@ -921,7 +927,7 @@ func prepare_body_departure(controller: Node) -> bool:
 	var player: Dictionary = _export_player_state()
 	var checkpoint: Dictionary = {"state": state.export_state(), "progression": get_node("/root/ProgressionService").export_state(),
 		"player": player.duplicate(true), "regions": _regions_by_body.duplicate(true)}
-	if body.has("tribe"):
+	if not Settlements.ids(body).is_empty():
 		if controller == null or not controller._active or controller._body_id != body.id:
 			last_error = "Bitte warten, bis das Dorf und seine Wege bereit sind."
 			return false
@@ -929,7 +935,10 @@ func prepare_body_departure(controller: Node) -> bool:
 		if simulation.is_empty():
 			last_error = "Die Dorfwege konnten noch nicht vollständig gesichert werden."
 			return false
-		body.village_simulation = simulation
+		if Settlements.SiteTransport.active(body) and not Settlements.SiteTransport.handoff(body, "far"):
+			last_error = "Der Träger muss seinen geprüften Transportweg erreichen."
+			return false
+		Settlements.set_simulation(body, simulation)
 	body.visit = {"schema": 1, "system_seed": state.system_seed, "planet_index": state.current_planet_index, "player": player.duplicate(true)}
 	if not save_now():
 		body.clear()
@@ -954,13 +963,22 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 	target = state.campaign.body_record(target.id)
 	# Drain only active campaign time already owed to this returning village.
 	# The bounded slices yield while the loading overlay keeps gameplay frozen.
-	var simulation: Dictionary = target.get("village_simulation", {})
-	while simulation.get("owner") == "far" and float(simulation.cursor) + 0.000001 < float(state.campaign.data.elapsed_seconds):
-		var started: int = Time.get_ticks_usec()
-		for index in range(32):
-			if not VillageSimulation.advance(target, float(state.campaign.data.elapsed_seconds), float(get_node("/root/ProgressionService").get_behavior_effect("group_cooperation", 1).value), get_node("/root/ProgressionService").record_far_work.bind(state)): break
-			if Time.get_ticks_usec() - started >= 2000: break
+	# Settle every local cursor while the traveler is still absent. Otherwise
+	# origin debt could incorrectly let the player work during the return trip
+	# when the selected destination is the secondary settlement.
+	for settlement_id: String in Settlements.ids(target):
+		var instance: Dictionary = Settlements.view(target, settlement_id)
+		var pending: Dictionary = instance.get("village_simulation", {})
+		while pending.get("owner") == "far" and float(pending.cursor) + 0.000001 < float(state.campaign.data.elapsed_seconds):
+			var started: int = Time.get_ticks_usec()
+			for index in range(32):
+				if not VillageSimulation.advance(instance, float(state.campaign.data.elapsed_seconds), float(get_node("/root/ProgressionService").get_behavior_effect("group_cooperation", 1).value), get_node("/root/ProgressionService").record_far_work.bind(state)): break
+				if Settlements.SiteTransport.active(target): Settlements.SiteTransport.advance(target, float(state.campaign.data.elapsed_seconds))
+				if Time.get_ticks_usec() - started >= 2000: break
+			await get_tree().process_frame
+	while Settlements.SiteTransport.active(target) and Settlements.SiteTransport.advance(target, float(state.campaign.data.elapsed_seconds)):
 		await get_tree().process_frame
+	var simulation: Dictionary = Settlements.view(target).get("village_simulation", {})
 	if not simulation.is_empty():
 		simulation.owner = "near"
 		simulation.legs.clear()
@@ -976,11 +994,12 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 		var address: Dictionary = player.surface_address
 		var forward: Vector3 = -Surface.Cube.frame(Surface.Cube.vector(Surface.Cube.direction(address.face, address.u, address.v))).z
 		player.surface_forward = [forward.x, forward.y, forward.z]
-	if target.has("tribe"):
+	var resident: Dictionary = Settlements.player_member(target, state.campaign.data)
+	if not resident.is_empty():
 		# The player traveled; remote residents retained their own needs and cargo.
-		target.tribe.members[0].hunger = float(player.get("hunger_ratio", 1.0)) * 100.0
-		target.tribe.members[0].hydration = float(player.get("thirst_ratio", 1.0)) * 100.0
-		player.surface_address = target.tribe.members[0].position.duplicate(true)
+		resident.hunger = float(player.get("hunger_ratio", 1.0)) * 100.0
+		resident.hydration = float(player.get("thirst_ratio", 1.0)) * 100.0
+		player.surface_address = resident.position.duplicate(true)
 	var player_problem: String = Surface.player_problem(player, target)
 	if not player_problem.is_empty():
 		last_error = player_problem
@@ -993,7 +1012,7 @@ func prepare_body_target(system_seed: int, planet_index: int, world_seed: int, b
 
 func complete_body_arrival() -> bool:
 	var state: Node = get_node("/root/GameState")
-	var simulation: Dictionary = state.get_current_body_record().get("village_simulation", {})
+	var simulation: Dictionary = Settlements.view(state.get_current_body_record()).get("village_simulation", {})
 	var changed: bool = not simulation.is_empty() and simulation.owner != "near"
 	if changed:
 		simulation.owner = "near"
@@ -1064,6 +1083,14 @@ func _export_player_state() -> Dictionary:
 	if player != null and player.has_method("export_runtime_state"):
 		var value: Variant = player.call("export_runtime_state")
 		_last_player_state = _dict(value)
+	var state: Node = get_node("/root/GameState")
+	var body: Dictionary = state.get_current_body_record()
+	if body.has("settlements"):
+		var resident: Dictionary = Settlements.player_member(body, state.campaign.data)
+		if not resident.is_empty():
+			_last_player_state.surface_address = resident.position.duplicate(true)
+			_last_player_state.hunger_ratio = float(resident.hunger) / 100.0
+			_last_player_state.thirst_ratio = float(resident.hydration) / 100.0
 	return _last_player_state.duplicate(true)
 
 
@@ -1182,3 +1209,59 @@ func _snapshot_onboarding(_files: Dictionary) -> Dictionary:
 
 func _restore_onboarding(data: Dictionary) -> void:
 	guidance.import_state(data.get("onboarding"))
+
+
+## ARCH-30 trial transactions. The ordinary snapshot remains the only writer.
+## No generic candidate admission or writable second fleet owner is exposed.
+func request_fleet_command(command: Dictionary, expected_revision: int) -> bool:
+	if _fleet_busy(): return false
+	if not command.get("kind") is String:
+		_report_failure("fleet.command")
+		return false
+	var campaign: Dictionary = get_node("/root/GameState").campaign.data
+	var design: Dictionary = {}
+	if command.get("kind") == "instantiate":
+		if not command.get("path") is String: return false
+		var loaded: Dictionary = Participants.Fleet.Ship.load_design(command.path)
+		if not loaded.ok:
+			_report_failure(str(loaded.code))
+			return false
+		design = loaded.blueprint
+	var prepared: Dictionary = Participants.Fleet.apply(campaign, command, expected_revision, design)
+	if not prepared.ok:
+		_report_failure(str(prepared.code))
+		return false
+	return _commit_fleet(prepared.data)
+
+
+func initialize_fleet_trial() -> bool:
+	if _fleet_busy(): return false
+	var state: Node = get_node("/root/GameState")
+	# Diagnostic preparation is explicit, limited to a fresh dedicated trial slot.
+	if slot_name != "Flottentest" or not is_slot_path(save_path) or state.campaign.data.elapsed_seconds != 0 or state.current_phase != 0:
+		_report_failure("fleet.trial_context")
+		return false
+	var prepared: Dictionary = Participants.Fleet.trial(state.campaign.data, state.get_current_body())
+	if not prepared.ok:
+		_report_failure(str(prepared.code))
+		return false
+	return _commit_fleet(prepared.data)
+
+
+func _fleet_busy() -> bool:
+	return _saving or _transition_busy or _write_blocked or not _body_transfer.is_empty() or not session_active or get_tree().paused
+
+
+func _commit_fleet(candidate: Dictionary) -> bool:
+	var campaign: Dictionary = get_node("/root/GameState").campaign.data
+	var field: String = Participants.Fleet.FIELD
+	var present: bool = campaign.has(field)
+	var before: Dictionary = campaign.get(field, {})
+	_transition_busy = true
+	campaign[field] = candidate
+	var ok: bool = save_now()
+	if not ok:
+		if present: campaign[field] = before
+		else: campaign.erase(field)
+	_transition_busy = false
+	return ok

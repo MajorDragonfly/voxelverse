@@ -37,6 +37,8 @@ var _side: float = 1.0
 var _progress_time: float = 0.0
 var _progress_position := Vector3.ZERO
 var _label: Label3D
+var _sensed_neighbors: Array[Node3D] = []
+var _sensed_carcasses: Array[Node3D] = []
 
 func _ready() -> void:
 	super._ready()
@@ -56,6 +58,16 @@ func _ready() -> void:
 func _choose_wander_state() -> void:
 	super._choose_wander_state()
 	_ambient_heading = _wander_direction
+
+func get_expression_context() -> Dictionary:
+	var context: Dictionary = super.get_expression_context()
+	context["intent"] = _intent if ai_state == "blocked" else ai_state
+	context["active"] = ai_state != "unloaded" and get_node("/root/GameState").current_phase in [0, 1]
+	if not context.get("attention", false) and _intent in ["alert", "chase", "search", "herd"]:
+		var point: Vector3 = _goal if _intent == "herd" else _last_seen
+		var local: Vector3 = _visual_root.global_basis.inverse() * (point - global_position)
+		context["look_yaw"] = atan2(-local.x, -local.z)
+	return context
 
 func _physics_process(delta: float) -> void:
 	Space.orient(self)
@@ -137,12 +149,17 @@ func _update_role_direction() -> void:
 func _sense() -> void:
 	var old_intent: String = _intent
 	var neighbors: Array[Node3D] = []
+	_sensed_carcasses.clear()
 	_separation = Vector3.ZERO
 	for node in get_tree().get_nodes_in_group(&"wildlife"):
-		if node == self or not node is Node3D or bool(node.get("is_dead")):
+		if node == self or not node is Node3D:
 			continue
 		var distance: float = global_position.distance_to(node.global_position)
 		if distance > 13.0:
+			continue
+		if bool(node.get("is_dead")):
+			if float(node.get("carcass_food_remaining")) > 0.0: _sensed_carcasses.append(node)
+			if neighbors.size() + _sensed_carcasses.size() >= NEIGHBOR_LIMIT: break
 			continue
 		neighbors.append(node)
 		if distance < 1.8 and distance > 0.01:
@@ -150,9 +167,10 @@ func _sense() -> void:
 		elif distance <= 0.01:
 			var angle: float = float(posmod(individual_seed, 31)) / 31.0 * TAU
 			_separation += global_basis * Vector3(cos(angle), 0.0, sin(angle))
-		if neighbors.size() >= NEIGHBOR_LIMIT:
+		if neighbors.size() + _sensed_carcasses.size() >= NEIGHBOR_LIMIT:
 			break
 	_separation = _separation.slide(up_direction)
+	_sensed_neighbors = neighbors
 	_separation = _separation.limit_length(1.0)
 	var perceived: Node3D = null
 	if _threat_timer > 0.0 and is_instance_valid(_threat) and not (_ignore_player and _threat.is_in_group(&"player")):

@@ -1,0 +1,212 @@
+{
+  "package": "ARCH-25-EDITOR",
+  "base_commit": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "branch": "agent/arch25-editor-20260915",
+  "source_commit": "bdc922d14b617e10189b09b55ad6f3e41dc6a874",
+  "source_tree": "ad2f3d1587abfc4d2ffb87b57e057c13b9e8d0ae",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "source_files_sha256": {
+    "creatures/editor/creature_editor_attachment_studio.gd": "c86fd2577da74f5f194b1e0bb6de946134067c08922fb33e2bc782de79385a50",
+    "creatures/editor/creature_editor_joint_studio.gd": "363b7dbb117d61a1f61e7805c025872f180739b56c1d6976b34cef8ebfd4357f",
+    "creatures/editor/creature_editor_runtime.gd": "ec853a5b35e263a684e758ce7e0a4afae1e831465ee5527e62ee4ff3fbab34d7",
+    "creatures/editor/creature_editor_seat_studio.gd": "7fec0c0baf667f23efb1b026259738ad063055d125400e4f0f0fbd425bfec6a2",
+    "creatures/editor/creature_editor_studio.gd": "b04377691fb9c4ba478c0384c2680ffd93a67a82fb02b9ea2558f4edcbbf3e88",
+    "creatures/editor/creature_editor_text.gd": "9cf3c62fb177779f79d69478abc8af85a8a3eb6505b0e45d42dd49304c358bf0",
+    "creatures/editor/creature_part_card.gd": "5648d86555b3382800b9a6c920867caa0d530ab3d816f50aa8778aa3d8ea4639",
+    "docs/WORK_ARCH25_EDITOR.md": "4592237a583d0259f4e859720263ba3c2c09ea55855dfaf875e147f7ac9068ad",
+    "localization/catalog.json": "d32d33216377c8ce9f6ead43fce56854d540ccb06d152c59fb51d52e6cac575e",
+    "localization/de.po": "fb0a39d222b782236c50844c866175b61adf8fb60743f58066bd00e7276bb5e2",
+    "localization/en.po": "1cc6635f07d3693042c4a5f2ddcc8b03a4ac0dafff6f9711ea3346523ab4e7ab",
+    "tests/editor_localization_test.gd": "0a98221d7f78fa70d95de3437dfb13fb3f9b7f97043966eaac6f3adf26be8b8e",
+    "tools/review_editor_localization.py": "ac030fafe39b0ba0daef7584fb21c29b3091307d07d9f9ab716218c6b6d2667c",
+    "tools/validation/contracts.json": "db8b4cd36d1f0e2fc6898c05dafe5a9b6d10ca4117041d0b1a4019ab2da713e1"
+  },
+  "runs": [
+    {
+      "path": "headless/results.json",
+      "source": {
+        "commit": "71db7458a53fe8b611b46f05d785f3487e39fed6",
+        "tracked_worktree_dirty": false
+      },
+      "checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.115
+        },
+        {
+          "name": "import",
+          "kind": "editor_import",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 4.83
+        },
+        {
+          "name": "art_sources",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.92
+        },
+        {
+          "name": "editor_localization_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 28.208,
+          "contract": "frontend_locale"
+        },
+        {
+          "name": "creature_studio_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 7.232,
+          "contract": "creature_body"
+        },
+        {
+          "name": "creature_parts_studio_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 11.914,
+          "contract": "creature_body"
+        },
+        {
+          "name": "creature_joint_studio_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 7.399,
+          "contract": "creature_body"
+        },
+        {
+          "name": "creature_body_fit_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 8.834,
+          "contract": "creature_body"
+        },
+        {
+          "name": "creature_seat_fit_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 15.436,
+          "contract": "creature_body"
+        },
+        {
+          "name": "creature_library_ui_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 22.518,
+          "contract": "blueprints"
+        },
+        {
+          "name": "localization_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.78,
+          "contract": "frontend_locale"
+        }
+      ]
+    },
+    {
+      "path": "layout-final/results.json",
+      "source": {
+        "commit": "bdc922d14b617e10189b09b55ad6f3e41dc6a874",
+        "tracked_worktree_dirty": false
+      },
+      "checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.115
+        },
+        {
+          "name": "editor_localization_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 28.405,
+          "contract": "frontend_locale"
+        },
+        {
+          "name": "creature_parts_studio_test",
+          "kind": "headless_godot",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 10.564,
+          "contract": "creature_body"
+        }
+      ]
+    },
+    {
+      "path": "matrix/results.json",
+      "passed": true
+    },
+    {
+      "path": "transforms/results.json",
+      "passed": true
+    }
+  ],
+  "visual_review": [
+    "matrix/editor-en-1920x1080-100-paint.png",
+    "matrix/editor-de-800x600-150-paint.png",
+    "matrix/editor-en-800x600-150-test.png",
+    "transforms/transform-en-1920x1080-100.png",
+    "transforms/transform-de-800x600-150.png"
+  ],
+  "publication": {
+    "state": "explicitly_authorized_by_user",
+    "destination": "MajorDragonfly/voxelverse",
+    "action": "Push new feature branch and create draft PR; no merge",
+    "reason": "User explicitly approved pushing this branch to MajorDragonfly/voxelverse and creating a draft PR."
+  },
+  "limits": [
+    "No Windows export",
+    "No combined spherical campaign validation",
+    "No target-PC FPS validation",
+    "Native color dialogs and unknown technical diagnostics retain existing presentation"
+  ],
+  "evidence_sha256": {
+    ".gdignore": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "README.md": "6a1d5cc49a3b669a6c33aa9d5a295c010dd54e0c7a3f22e713eaac2fbb2a1871",
+    "headless/art_sources.log": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+    "headless/contracts.json": "5a5af6cfa7849eb4576acaadec624b9937b9da0804496f975899dc8ef57c8d35",
+    "headless/creature_body_fit_test.log": "17d0ddf88a3712ab48dd7605b0e51bc04f096968e381a69e3e67123754c9b22f",
+    "headless/creature_joint_studio_test.log": "ba75140e991cf89cf4c2cd94f6331b7ffa60c8be285d5015889779d37fbe61be",
+    "headless/creature_library_ui_test.log": "d6d5c284727542d7bf03fe5700f7b51168e83572e8411327089a7496cb1f8b9f",
+    "headless/creature_parts_studio_test.log": "a2fc94a8f0c9f88c0f24e6839da1a1f49bb207cd55e10cd4e4ee7c7235086b80",
+    "headless/creature_seat_fit_test.log": "22e1115c57d47d976c9d232113364365b1aeb86b179b1e556c18a9665e945ed6",
+    "headless/creature_studio_test.log": "5f669953ad2b6e0b156e1f629aa749ded13998264fb977ee7ca25394c273bc58",
+    "headless/editor_localization_test.log": "9f72d0b1b251c4451d561b017ae5cc07c04f68a8be07f91c49e6d42f999409d3",
+    "headless/import.log": "bfb8266d79403e5ea40181a99fb0fd4601a4e6b51b7b86df39cd376867c911b1",
+    "headless/localization_test.log": "dde802bd39e4bd843407a8cf63d787dbdcb5ae16f43f6f8fd50cd2c566a2931f",
+    "headless/source_contracts.log": "8c7226bcbc76a43be75851b089e88d2fa8dd4f144e4c3829a706e886f4d2a0b0",
+    "layout-final/contracts.json": "57294292f0a5b34a517256e82fb63efa189d4b0c3a061f0bf702d6dc3efe4683",
+    "layout-final/creature_parts_studio_test.log": "a2fc94a8f0c9f88c0f24e6839da1a1f49bb207cd55e10cd4e4ee7c7235086b80",
+    "layout-final/editor_localization_test.log": "5d7e5c7fea0991b4dda0e3358429ee148f1a4d71d2e7e70a39c585baa0364432",
+    "layout-final/source_contracts.log": "8c7226bcbc76a43be75851b089e88d2fa8dd4f144e4c3829a706e886f4d2a0b0",
+    "matrix/editor-de-1920x1080-100-body.png": "2e9718f5ffe3895f8634356335406bc48644dd0691ae12b4987c8269037089cf",
+    "matrix/editor-de-800x600-150-paint.png": "dea4bcddf7f66652a1eb757e9b0fc64d5423e40187ce05cfa5cfa55561997c29",
+    "matrix/editor-en-1920x1080-100-paint.png": "d05f49696ccbf6c5368ac10516ceeaec9150025b1ecc965ad5464628b4298c78",
+    "matrix/editor-en-800x600-150-body.png": "0db8c3ac7dbe5324c8f5c65e6c28742019f503554197211794af1071070fb91e",
+    "matrix/editor-en-800x600-150-test.png": "bd005038816c65b9d98097e08a04aceb9d2dce0dc60172e41da0f83d6a9a2748",
+    "matrix/render.log": "852a068a8da06addd46407a60ad5cf2d12b002a2512e674fd7ae60f0f02ad256",
+    "matrix-source.json": "ab6a15a2a78b0e5186cb49986dd2c29f4fe4ba8464caeb9c37224e4ca74594c7",
+    "transforms/capture_editor_transform_layout.gd": "dba34c72dd2dfa74f4c545c7150dc7e4cfb08aa8decdc0679d2ce95e7e551f83",
+    "transforms/render.log": "90ed7943113d0714fc4fba4405b9c3481b47eec81192cf6c17e6bad13997f92a",
+    "transforms/transform-de-1920x1080-100.png": "8f555a7198581a6ca9bfe9301a1f3aa4533fd8624f784de78f4b09bc97a69c58",
+    "transforms/transform-de-800x600-150.png": "60fe7c374d765ab3910e605c4e6ab4131870a68137a56518ae8bb12c07e7b401",
+    "transforms/transform-en-1920x1080-100.png": "321c4df3e265ad9e7b88267b867a277d13d53851257000b29fd60a8c396bdd78",
+    "transforms/transform-en-800x600-150.png": "d2e81b6417816b31c08237a2d8408280184f5a088ca8b618d5e0342d764c1813"
+  }
+}

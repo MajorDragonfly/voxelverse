@@ -13,10 +13,10 @@ import time
 import zipfile
 
 from validate_godot import ERROR
-from check_validation_contracts import revision
+from validation_provenance import SourceRun
 from validation_support import isolated_env
 
-PACKAGED_TESTS = ['body_identity_test', 'far_simulation_test', 'village_navigation_budget_test', 'campaign_scaling_test', 'creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test']
+PACKAGED_TESTS = ['body_identity_test', 'far_simulation_test', 'village_navigation_budget_test', 'campaign_scaling_test', 'creature_builder_v7_test', 'modular_assembly_framework_test', 'gameplay_acceptance_test', 'meta_runtime_test', 'planet_sphere_contract_test', 'behavior_skill_tree_test', 'creature_behavior_gameplay_test', 'development_path_test', 'tribal_age_test', 'tribal_age_supply_test', 'tribal_age_world_test', 'creature_parts_studio_test', 'creature_joint_studio_test', 'research_goals_test', 'species_comparison_test', 'input_preferences_test', 'save_slots_test', 'onboarding_test', 'creature_scan_test', 'resource_visuals_test']
 PRESETS = {"linux": ("Linux Desktop", "voxelverse.x86_64"),
            "windows": ("Windows Desktop", "voxelverse.exe")}
 
@@ -29,21 +29,41 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--skip-import", action="store_true")
     args = parser.parse_args()
+    try:
+        return validate(args)
+    except ValueError as error:
+        parser.error(str(error))
+
+
+def validate(args):
     args.godot = str(Path(shutil.which(args.godot) or args.godot).expanduser().resolve())
-    args.project = args.project.resolve()
-    args.output = args.output.resolve()
+    args.project = args.project.expanduser().resolve()
+    args.output = args.output.expanduser().resolve()
+    if args.output.is_relative_to(args.project):
+        raise ValueError("Export reports must be outside the source project")
+    if args.output.exists() and (not args.output.is_dir() or any(args.output.iterdir())):
+        raise ValueError("Choose a new output directory to preserve previous export evidence")
     args.output.mkdir(parents=True, exist_ok=True)
+    with (args.output / "run-owner.json").open("x", encoding="utf-8") as stream:
+        json.dump({"pid": os.getpid(), "started_unix": time.time()}, stream)
     logs = args.output / "logs"
-    logs.mkdir(exist_ok=True)
-    version = subprocess.check_output([args.godot, "--version"], text=True).strip()
-    if not version.startswith("4.6.3."):
-        sys.exit(f"Expected Godot 4.6.3, got {version}")
-    native_platform = "windows" if os.name == "nt" else "linux"
-    if args.platform != native_platform:
-        sys.exit("Export acceptance must run the target platform's native binary.")
+    logs.mkdir()
+    source_run = SourceRun(args.project)
+    source_run.begin_report(args.output)
     results = []
+    summary = {"godot": None, "platform": args.platform, "source": SourceRun.summary(source_run.start),
+               "checks": results, "probes": [], "complete": False, "passed": False}
+    archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"
+    pending_archive = archive_path.with_suffix(".zip.pending")
+
+    def observe(phase, force=False):
+        observation = source_run.observe(phase, force=force)
+        if source_run.blocked:
+            raise RuntimeError(f"Export source changed or became unavailable: {phase}")
+        return observation
 
     def run(name, command, cwd, env=None, timeout=120):
+        observe("before_" + name)
         started = time.monotonic()
         try:
             process = subprocess.run(command, cwd=cwd, env=env, stdout=subprocess.PIPE,
@@ -55,19 +75,35 @@ def main():
             text = data.decode(errors="replace") if isinstance(data, bytes) else data
             text += "\nERROR: exported runtime timed out\n"
             status = 124
+        except (OSError, KeyboardInterrupt) as error:
+            text = f"ERROR: export process interrupted: {error}\n"
+            status = 130 if isinstance(error, KeyboardInterrupt) else 127
         failed = status != 0 or ERROR.search(text) is not None
-        result = {"name": name, "passed": not failed, "exit_code": status,
-                  "seconds": round(time.monotonic() - started, 3)}
+        log_path = logs / f"{name}.log"
+        log_path.write_text(text, encoding="utf-8")
+        observation = source_run.observe(name)
+        result = {"name": name, "process_passed": not failed, "passed": not failed and not source_run.blocked,
+                  "exit_code": status, "seconds": round(time.monotonic() - started, 3),
+                  "command": command, "source_status": observation["status"],
+                  "source_sha256": observation["source"].get("source_sha256"),
+                  "log_sha256": hashlib.sha256(log_path.read_bytes()).hexdigest()}
         results.append(result)
-        (logs / f"{name}.log").write_text(text, encoding="utf-8")
         print(json.dumps(result), flush=True)
-        if failed:
+        if not result["passed"]:
             print(text[-12000:], flush=True)
             raise RuntimeError(f"Export validation failed: {name}")
 
-    summary = {"godot": version, "platform": args.platform, "source": revision(args.project),
-               "checks": results, "probes": []}
     try:
+        if source_run.blocked:
+            raise RuntimeError("Export source identity unavailable before validation")
+        version = subprocess.check_output([args.godot, "--version"], text=True, timeout=20).strip()
+        summary["godot"] = version
+        if not version.startswith("4.6.3."):
+            raise ValueError(f"Expected Godot 4.6.3, got {version}")
+        native_platform = "windows" if os.name == "nt" else "linux"
+        if args.platform != native_platform:
+            raise ValueError("Export acceptance must run the target platform's native binary.")
+        observe("engine_version")
         with tempfile.TemporaryDirectory(prefix="voxelverse-export-") as temporary:
             root = Path(temporary).resolve()
             if root.is_relative_to(args.project):
@@ -85,6 +121,7 @@ def main():
             executable = package / executable_name
             run("release_export", [args.godot, "--headless", "--path", str(args.project),
                                     "--export-release", preset, str(executable)], args.project, timeout=240)
+            summary["export_source"] = SourceRun.summary(source_run.current)
             if not executable.is_file() or not executable.with_suffix(".pck").is_file():
                 raise RuntimeError("Export did not produce both executable and PCK.")
             # No project.godot, source paths or project --path are supplied here.
@@ -144,6 +181,8 @@ def main():
                     # Godot consumes --main-pack before exposing runtime args.
                     # Pass the exact PCK to the independent reload process too.
                     probe_args += ["--", "--research-pack", str(executable.with_suffix(".pck"))]
+                if name == "resource_visuals_test":
+                    probe_args += ["--", "--resource-restart-pack", str(executable.with_suffix(".pck"))]
                 run(f"packaged_{name}", [*pack_command, *probe_args],
                     package, isolated_env(root / name))
                 if name == "tribal_age_world_test":
@@ -168,6 +207,7 @@ def main():
                     raise RuntimeError("Probe ran an unexpected Godot installation.")
                 summary["probes"].append(data)
             shutil.copy2(notices_path, package / "GODOT_NOTICES.txt")
+            observe("package_acceptance", force=True)
             (package / "README.txt").write_text(
                 "Voxelverse development build\n\n"
                 f"Start {executable_name} with its .pck and any adjacent libraries kept together.\n"
@@ -179,24 +219,48 @@ def main():
                 "This build passed headless release acceptance. Visual/GPU acceptance is still pending.\n",
                 encoding="utf-8")
             (package / "BUILD_INFO.json").write_text(json.dumps({
-                "source": summary["source"], "godot": version, "platform": args.platform,
+                "source": summary["source"], "export_source": summary["export_source"],
+                "validation_source": SourceRun.summary(source_run.current),
+                "source_inputs_complete": source_run.start["complete"] and source_run.current["complete"],
+                "godot": version, "platform": args.platform,
                 "acceptance": "native_headless_release_and_exact_pck", "checks_passed": len(results),
                 "target_pc_acceptance": False}, indent=2) + "\n", encoding="utf-8")
-            archive_path = args.output / f"voxelverse-{args.platform}-x86_64.zip"
-            with zipfile.ZipFile(archive_path, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+            # Publish a named release archive only after the final source gate.
+            with zipfile.ZipFile(pending_archive, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
                 for path in sorted(package.rglob("*")):
                     if path.is_file():
                         archive.write(path, Path("voxelverse") / path.relative_to(package))
-            with archive_path.open("rb") as archive:
+            with pending_archive.open("rb") as archive:
                 checksum = hashlib.file_digest(archive, "sha256").hexdigest()
-            (args.output / "SHA256SUMS.txt").write_text(f"{checksum}  {archive_path.name}\n")
-            summary["archive"] = {"name": archive_path.name, "bytes": archive_path.stat().st_size,
-                                  "sha256": checksum}
-    except (OSError, RuntimeError, ValueError, KeyError) as error:
+            summary["complete"] = True
+    except (OSError, RuntimeError, ValueError, KeyError, subprocess.SubprocessError, KeyboardInterrupt) as error:
         summary["error"] = str(error)
         print(str(error), file=sys.stderr)
-    summary["passed"] = "error" not in summary and all(result["passed"] for result in results)
-    (args.output / "results.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    finally:
+        source_run.observe("finish", force=True)
+        summary["provenance"] = source_run.write_report(args.output)
+        summary["passed"] = (summary["complete"] and "error" not in summary and not source_run.blocked
+                             and all(result["passed"] for result in results))
+        summary["provenance"]["reusable"] &= summary["passed"]
+        results.append({"name": "source_integrity", "kind": "source_provenance", "passed": not source_run.blocked,
+                        "status": summary["provenance"]["status"]})
+        try:
+            if summary["passed"]:
+                pending_archive.replace(archive_path)
+                (args.output / "SHA256SUMS.txt").write_text(f"{checksum}  {archive_path.name}\n")
+                summary["archive"] = {"name": archive_path.name, "bytes": archive_path.stat().st_size,
+                                      "sha256": checksum}
+        except OSError as error:
+            summary.update(passed=False, error=str(error))
+            summary["provenance"]["reusable"] = False
+            archive_path.unlink(missing_ok=True)
+            (args.output / "SHA256SUMS.txt").unlink(missing_ok=True)
+        finally:
+            pending_archive.unlink(missing_ok=True)
+            temporary_report = args.output / "results.json.tmp"
+            temporary_report.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+            temporary_report.replace(args.output / "results.json")
+        print(json.dumps({"source_integrity": summary["provenance"]["status"], "passed": summary["passed"]}), flush=True)
     return 0 if summary["passed"] else 1
 
 

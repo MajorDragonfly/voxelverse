@@ -8,7 +8,7 @@ const JOBS: Dictionary = {"provider": ["food", "water"], "forester": ["wood"], "
 const SOURCES: Dictionary = {"water": "well", "wood": "forester", "stone": "quarry", "fiber": "fiberbed"}
 
 static func supported(village: Dictionary) -> bool:
-	return Rules.is_integer(village.get("schema"), 3, 6) and village.get("economy") is Dictionary and int(village["economy"].get("schema", 0)) in [1, Economy.SCHEMA]
+	return Rules.is_integer(village.get("schema"), 3, 6) and village.get("economy") is Dictionary and int(village["economy"].get("schema", 0)) in [1, 2, 3, Economy.SCHEMA]
 
 static func create(village: Dictionary) -> Dictionary:
 	return {"schema": SCHEMA, "delivery_cursor": int(village["delivered"]), "meal_cursor": int(village["meals"]),
@@ -23,8 +23,9 @@ static func observe_work(record: Dictionary, before: Dictionary, after: Dictiona
 	# and later delivery. Legacy cargo and changing professions earn no free work.
 	if int(after["delivered"]) >= int(record["delivery_cursor"]) and cargo.is_empty() and not picked.is_empty() and picked in Economy.RESOURCES and not Economy.Resources.uses_batches(picked):
 		var profession: String = previous["profession"]
-		if JOBS.has(profession) and picked in JOBS[profession] and previous["order"] == Economy.JOB_ORDER[profession] and _renewable(after, picked) and int(after["deposits"][picked]["remaining"]) == int(before["deposits"][picked]["remaining"]) - 1:
-			record["pending"][actor] = {"resource": picked, "profession": profession, "source_id": after["deposits"][picked]["id"]}
+		var assigned: bool = previous.order == picked and not Economy.station_key(before, str(previous.get("workplace_id", ""))).is_empty()
+		if JOBS.has(profession) and picked in JOBS[profession] and (previous["order"] == Economy.JOB_ORDER[profession] or assigned) and _renewable(after, picked) and int(Economy.source(after, member, picked).remaining) == int(Economy.source(before, previous, picked).remaining) - 1:
+			record["pending"][actor] = {"resource": picked, "profession": profession, "source_id": Economy.source(after, member, picked).id}
 	var sequence: int = int(after["delivered"])
 	if sequence == int(before["delivered"]) + 1 and sequence > int(record["delivery_cursor"]) and not cargo.is_empty() and picked.is_empty() and int(after["stock"][cargo]) == int(before["stock"][cargo]) + 1:
 		record["delivery_cursor"] = sequence

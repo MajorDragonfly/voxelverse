@@ -43,7 +43,7 @@ func _run() -> void:
 	_expect(world.map_atlases.size() == 2 and world.map_atlases.has(body), "Body switch lost first atlas")
 	_expect(world.save_lab(), "Second body atlas cannot save")
 	var stored: Dictionary = Store.read(world.store_path).data
-	_expect(stored.schema == 3, "Map-bearing saves do not protect against pre-map readers")
+	_expect(stored.schema == Store.SCHEMA, "Map-bearing saves do not protect against pre-map readers")
 	var future: Dictionary = stored.duplicate(true)
 	future.map_atlases[body].schema = 99
 	Atomic.write("user://map-future.json", future, false)
@@ -52,6 +52,9 @@ func _run() -> void:
 	var legacy: Dictionary = stored.duplicate(true)
 	legacy.erase("map_atlases")
 	legacy.schema = 2
+	for record: Dictionary in legacy.bodies.values():
+		record.erase("fauna_archive")
+		record.fauna = {}
 	_expect(Store.valid(legacy), "Existing living save without atlas is no longer readable")
 	var output: Array = []
 	var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", "res://tests/living_planet_map_test.gd", "--", "--map-restart"], output, true)

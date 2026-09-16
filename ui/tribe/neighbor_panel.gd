@@ -51,7 +51,7 @@ func refresh() -> void:
 		var index := tabs.get_tab_idx_from_control(self)
 		if index >= 0 and index < tabs.get_tab_bar().tab_count:
 			tabs.set_tab_title(index, Text.text("NEIGHBOR_TAB"))
-	var data: Dictionary = controller.body().get("tribal_neighbor", {})
+	var data: Dictionary = controller.neighbors.data()
 	contact_button.visible = data.is_empty()
 	aid_button.visible = not data.is_empty() and data["aid"]["status"] in ["offered", "active"]
 	focus_button.visible = not data.is_empty()

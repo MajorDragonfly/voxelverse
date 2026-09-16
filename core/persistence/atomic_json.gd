@@ -1,6 +1,8 @@
 extends RefCounted
 class_name AtomicJson
 
+const Access = preload("res://core/persistence/userdata_access.gd")
+
 ## Persistent scalar doubles must survive JSON unchanged. This also applies
 ## to tiny Cube-Sphere face offsets, not just astronomical Cartesian values.
 ## Keep ordinary JSON numbers and sorted keys; existing readers still work.
@@ -33,6 +35,14 @@ static func _collect_frozen_blueprints(value: Variant, frozen: Dictionary) -> vo
 ## Stage and verify before replacing. Never remove the live file first.
 ## DirAccess.rename_absolute overwrites an existing writable file.
 static func write(path: String, data: Dictionary, keep_backup: bool = true) -> Error:
+	var lease: RefCounted = Access.acquire()
+	if lease == null: return ERR_BUSY
+	var result: Error = _write_owned(path, data, keep_backup)
+	lease.release()
+	return result
+
+
+static func _write_owned(path: String, data: Dictionary, keep_backup: bool) -> Error:
 	var text: String = stringify(data)
 	var temporary: String = path + ".tmp"
 	var error: Error = _write_text(temporary, text)

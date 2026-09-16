@@ -1,0 +1,128 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "bdbef8fe36e1addd8a71de0138045bc3d3817dfa",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "site_transport_test",
+    "site_transport_runtime_test",
+    "regional_transport_test",
+    "settlement_collection_test",
+    "settlement_save_test",
+    "far_simulation_test",
+    "tribal_age_economy_contract_test",
+    "tribal_age_husbandry_contract_test",
+    "egg_production_contract_test",
+    "save_participants_test",
+    "body_travel_test",
+    "tribe_localization_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.168
+    },
+    {
+      "name": "site_transport_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.413,
+      "contract": "village"
+    },
+    {
+      "name": "site_transport_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 113.812,
+      "contract": "village"
+    },
+    {
+      "name": "regional_transport_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.448,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "settlement_collection_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.738,
+      "contract": "village"
+    },
+    {
+      "name": "settlement_save_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.33,
+      "contract": "village"
+    },
+    {
+      "name": "far_simulation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.552,
+      "contract": "regions_simulation"
+    },
+    {
+      "name": "tribal_age_economy_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.079,
+      "contract": "village"
+    },
+    {
+      "name": "tribal_age_husbandry_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.783,
+      "contract": "village"
+    },
+    {
+      "name": "egg_production_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.06,
+      "contract": "village"
+    },
+    {
+      "name": "save_participants_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.152,
+      "contract": "campaign"
+    },
+    {
+      "name": "body_travel_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 127.682,
+      "contract": "campaign"
+    },
+    {
+      "name": "tribe_localization_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 26.563,
+      "contract": "frontend_locale"
+    }
+  ]
+}

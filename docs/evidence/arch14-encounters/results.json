@@ -1,0 +1,111 @@
+{
+  "packet": "ARCH-14-ENCOUNTERS",
+  "base": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+  "source_commit": "ba379b6e3cae67ffaea43697afee206ad11a268c",
+  "source_tree": "be8342e144210e0e48efa5c65fb547e68e7c7147",
+  "tracked_worktree_dirty": false,
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": "Linux headless; validation runner with isolated synthetic userdata; native restore in independent userdata with original blob directory made unavailable",
+  "commands": [
+    "python3 tools/validate_godot.py --godot GODOT --skip-main --tests encounter_archive_test population_register_test creature_behavior_gameplay_test spherical_developed_migration_test --output OUTPUT",
+    "GODOT_BINARY=GODOT python3 -m unittest discover -s tests/tooling -p region_backup_test.py -v"
+  ],
+  "results": {
+    "godot_tests_passed": 4,
+    "import_and_source_gates_passed": true,
+    "python_tests_passed": 20,
+    "python_tests_skipped": 1,
+    "skip_reason": "Optional external historical atlas project is not configured; both native tests for this source tree ran successfully."
+  },
+  "native_results": [
+    {
+      "export": {
+        "snapshots": 7,
+        "roots": 6,
+        "verified_blobs": 7371,
+        "copied_blobs": 1477,
+        "copied_bytes": 849331,
+        "peak_pending": 35,
+        "peak_blob_bytes": 1673,
+        "place_records": 0,
+        "index_reads": 0,
+        "peak_index_pages": 0
+      },
+      "restart": {
+        "campaign_id": "campaign_4114393d569176982c5ff38e5ba93a70",
+        "encounters": 1202,
+        "pages": 128,
+        "peak_cache": 96,
+        "regions": "/tmp/arch14-native-xna2a3qd/restored/xdg_data_home/godot/app_userdata/Voxelverse/regions/blobs",
+        "slot": "/tmp/arch14-native-xna2a3qd/restored/xdg_data_home/godot/app_userdata/Voxelverse/saves/slot_encounter_archive.json"
+      }
+    },
+    {
+      "export": {
+        "ok": true,
+        "snapshots": 4,
+        "roots": 3,
+        "verified_blobs": 4416,
+        "copied_blobs": 2944,
+        "copied_bytes": 467860,
+        "peak_pending": 35,
+        "peak_blob_bytes": 1179,
+        "place_records": 0,
+        "index_reads": 0,
+        "peak_index_pages": 0
+      },
+      "restart": {
+        "body_id": "body_1069eff16da24ad0c0d0f84327cb669b",
+        "campaign_id": "campaign_16ccd92218430753b6441dfe126b0940",
+        "checked_regions": 3600,
+        "passed": true,
+        "peak_cache": 96
+      }
+    }
+  ],
+  "source_sha256": {
+    ".github/workflows/region-backup-validate.yml": "3c367e3a045b5e0fbe9eee047b2e238f063466774a880f7385c79af464b00532",
+    "autoload/progression_service.gd": "d796f06086b541bbc36e52e88c3241d22afb148c3eedb5e50160fdd6b11d9cca",
+    "core/campaign/spherical_migration.gd": "66fa11b30b99ff7595852a7cd801eef9ec7738670bd8201fc874ac569159aece",
+    "core/progression/creature_encounters.gd": "4228ff5d66314517fb12033efdf907e594d6b283b41afabbf8cd8b1fb7aed557",
+    "creatures/behavior/creature_social_component.gd": "e13ad64ae71b80d590e89bacb3459a3ba7050d5c8d29413c65d54cce15f8c378",
+    "docs/MODULE_CONTRACTS.md": "35be41a6837ca170f725f78874ac6ea96d5715e63cfdb9e40e018046dede1679",
+    "docs/WORK_ARCH14_ENCOUNTERS.md": "2b265b9b0fee11af43017df9c76188ed81b96525cb6e1aa83b6e47ec4acf0e52",
+    "tests/encounter_archive_test.gd": "17800ce3db7b095a30af4ff6f20dc3eb0d5ae5efb626646b785ee3be5e317f6d",
+    "tests/tooling/region_backup_test.py": "832c6beb3182cbe49db5b6f46b6d34767fa9d48a988fbfe808f2334e967b8de1",
+    "tools/region_backup.py": "b7dbb491f115ca28eccef3d869a46485b94ef764718957e8bb1836291e725d2e",
+    "tools/validation/contracts.json": "c5ce67adabf5e19b72f2b12961ab704d2eacd77038fbb969d284ca703ae01c3c",
+    "world/surface/campaign_region_storage.gd": "e908a3235e60dbbdd6f423d0de7a12c0358d663ab6ccf9f3fc663b105133022e"
+  },
+  "development_diagnostics": [
+    {
+      "run": "check-archive",
+      "result": "failed",
+      "cause": "New test fixture did not create its slot directory."
+    },
+    {
+      "run": "check-archive-2",
+      "result": "failed",
+      "cause": "New regional fixture lacked its radius; expected filesystem error output needed scoped suppression."
+    },
+    {
+      "run": "check-archive-3",
+      "result": "failed",
+      "cause": "Regional encounter reads retained JSON float seeds. Fixed normalization in ProgressionService before delivering copies."
+    },
+    {
+      "run": "check-archive-4",
+      "result": "passed"
+    },
+    {
+      "run": "check-archive-5",
+      "result": "passed",
+      "coverage_added": "Actual inline snapshot preservation and independent same-seed A-B-A archive bodies."
+    }
+  ],
+  "limits": [
+    "No Windows export, graphical playtest, full integration suite, production travel route or target-PC/FPS acceptance.",
+    "Historical planar tooling remains inline; normal spherical campaigns use the archive.",
+    "First migration is synchronous; discovery/reward ledgers are separate work."
+  ]
+}

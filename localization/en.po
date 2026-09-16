@@ -61,9 +61,6 @@ msgstr "Discover worlds. Shape life."
 msgid "ENTWICKLUNGSVERSION    /    KREATURENPHASE"
 msgstr "DEVELOPMENT BUILD    /    CREATURE STAGE"
 
-msgid "Tab  Auswahl    ·    Enter  Bestätigen    ·    F8  Einstellungen"
-msgstr "Tab  Select    ·    Enter  Confirm    ·    F8  Settings"
-
 msgid "Fortsetzen"
 msgstr "Continue"
 
@@ -334,9 +331,6 @@ msgstr "Skip introduction"
 msgid "VOXELVERSE · EINSTELLUNGEN"
 msgstr "VOXELVERSE · SETTINGS"
 
-msgid "Esc / F8 Menü · F11 Vollbild"
-msgstr "Esc / F8 Menu · F11 Fullscreen"
-
 msgid "Anzeige"
 msgstr "Display"
 
@@ -571,9 +565,6 @@ msgstr "Test sound"
 msgid "Standardwerte"
 msgstr "Defaults"
 
-msgid "Zurück · F7 / Esc"
-msgstr "Back · F7 / Esc"
-
 msgid "Entdeckungsbuch"
 msgstr "Discovery journal"
 
@@ -703,9 +694,6 @@ msgstr "The original is fully preserved. Transfer to a spherical planet still ne
 msgid "Du setzt das Abenteuer auf einem Kugelplaneten fort. Dein bisheriger Spielstand bleibt als Original erhalten."
 msgstr "Continue the adventure on a spherical planet. Your previous save is preserved as the original."
 
-msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
-
 msgid "BP_LIBRARY_TITLE"
 msgstr "Creature templates"
 
@@ -818,7 +806,7 @@ msgid "BP_ERROR_EDITOR"
 msgstr "This template uses attachments incompatible with the current editor. It will not be applied with altered geometry."
 
 msgid "BP_SEARCH"
-msgstr "Search templates"
+msgstr "Search name, author, description or tags …"
 
 msgid "BP_ALL"
 msgstr "All templates"
@@ -1330,7 +1318,7 @@ msgid "SKILLS_TAB"
 msgstr "Skills"
 
 msgid "SKILLS_JOURNAL"
-msgstr "Discovery journal · J"
+msgstr "Discovery journal · {journal}"
 
 msgid "SKILLS_PATH"
 msgstr "Development path"
@@ -1706,3 +1694,3186 @@ msgstr "Defeat threats across universes with a defined objective."
 
 msgid "SKILLS_PHASE_5_NEXT"
 msgstr "Long-term concept; concrete gameplay rules will be defined after the space phase."
+
+msgid "TRIBE_ORDER_WOOD"
+msgstr "Gather wood"
+
+msgid "TRIBE_ORDER_STONE"
+msgstr "Gather stone"
+
+msgid "TRIBE_ORDER_FOOD"
+msgstr "Gather food"
+
+msgid "TRIBE_ORDER_SUPPLY"
+msgstr "Maintain food supply"
+
+msgid "TRIBE_ORDER_TOOL"
+msgstr "Tool · 3 wood / 2 stone"
+
+msgid "TRIBE_ORDER_HUT"
+msgstr "Place hut · 6 wood / 3 stone"
+
+msgid "TRIBE_ORDER_TENT"
+msgstr "Place tent · 3 wood / 2 fiber"
+
+msgid "TRIBE_ORDER_GARDEN"
+msgstr "Root garden · 4 wood / 1 stone"
+
+msgid "TRIBE_ORDER_FEED"
+msgstr "Eat now"
+
+msgid "TRIBE_ORDER_WAIT"
+msgstr "Stop"
+
+msgid "TRIBE_ORDER_RESUME"
+msgstr "Resume"
+
+msgid "TRIBE_ORDER_WATER"
+msgstr "Fetch water"
+
+msgid "TRIBE_ORDER_PROVISION"
+msgstr "Maintain food & water"
+
+msgid "TRIBE_ORDER_DRINK"
+msgstr "Drink now"
+
+msgid "TRIBE_ORDER_WELL"
+msgstr "Well · 3 wood / 2 stone"
+
+msgid "TRIBE_ORDER_FORESTER"
+msgstr "Forestry · 4 wood / 1 stone"
+
+msgid "TRIBE_ORDER_QUARRY"
+msgstr "Quarry · 4 wood / 2 stone"
+
+msgid "TRIBE_ORDER_FIBERBED"
+msgstr "Fiber bed · 2 wood / 1 stone"
+
+msgid "TRIBE_ORDER_FIBER"
+msgstr "Gather fiber"
+
+msgid "TRIBE_ORDER_MILK"
+msgstr "Collect milk"
+
+msgid "TRIBE_ORDER_MOVE"
+msgstr "Move"
+
+msgid "TRIBE_ORDER_PROFESSION"
+msgstr "Resume profession"
+
+msgid "TRIBE_ORDER_PEN"
+msgstr "Build milk pen"
+
+msgid "TRIBE_ORDER_LAYING_SITE"
+msgstr "Build laying site"
+
+msgid "TRIBE_ORDER_TEND"
+msgstr "Care for animals"
+
+msgid "TRIBE_ORDER_EGGS"
+msgstr "Collect eggs"
+
+msgid "TRIBE_JOB_NONE"
+msgstr "No profession"
+
+msgid "TRIBE_JOB_PROVIDER"
+msgstr "Provider"
+
+msgid "TRIBE_JOB_FORESTER"
+msgstr "Woodworker"
+
+msgid "TRIBE_JOB_MASON"
+msgstr "Stoneworker"
+
+msgid "TRIBE_JOB_WEAVER"
+msgstr "Fiber gatherer"
+
+msgid "TRIBE_JOB_BUILDER"
+msgstr "Builder"
+
+msgid "TRIBE_JOB_MILK_CARRIER"
+msgstr "Milk carrier"
+
+msgid "TRIBE_JOB_KEEPER"
+msgstr "Animal keeper"
+
+msgid "TRIBE_JOB_EGG_CARRIER"
+msgstr "Egg carrier"
+
+msgid "TRIBE_RESOURCE_WOOD"
+msgstr "wood"
+
+msgid "TRIBE_RESOURCE_STONE"
+msgstr "stone"
+
+msgid "TRIBE_RESOURCE_FOOD"
+msgstr "food"
+
+msgid "TRIBE_RESOURCE_WATER"
+msgstr "water"
+
+msgid "TRIBE_RESOURCE_FIBER"
+msgstr "fiber"
+
+msgid "TRIBE_RESOURCE_MILK"
+msgstr "milk"
+
+msgid "TRIBE_RESOURCE_EGGS"
+msgstr "eggs"
+
+msgid "TRIBE_ACTIVITY_WAIT"
+msgstr "waiting"
+
+msgid "TRIBE_ACTIVITY_MOVE"
+msgstr "moving"
+
+msgid "TRIBE_ACTIVITY_WOOD"
+msgstr "gathering wood"
+
+msgid "TRIBE_ACTIVITY_STONE"
+msgstr "gathering stone"
+
+msgid "TRIBE_ACTIVITY_FOOD"
+msgstr "gathering food"
+
+msgid "TRIBE_ACTIVITY_TOOL"
+msgstr "making a tool"
+
+msgid "TRIBE_ACTIVITY_HUT"
+msgstr "building a hut"
+
+msgid "TRIBE_ACTIVITY_TENT"
+msgstr "building a tent"
+
+msgid "TRIBE_ACTIVITY_PEN"
+msgstr "building an animal pen"
+
+msgid "TRIBE_ACTIVITY_LAYING_SITE"
+msgstr "building a laying site"
+
+msgid "TRIBE_ACTIVITY_EGGS"
+msgstr "collecting eggs"
+
+msgid "TRIBE_ACTIVITY_TEND"
+msgstr "caring for animals"
+
+msgid "TRIBE_ACTIVITY_GARDEN"
+msgstr "planting a garden"
+
+msgid "TRIBE_ACTIVITY_SUPPLY"
+msgstr "maintaining food supply"
+
+msgid "TRIBE_ACTIVITY_FEED"
+msgstr "eating"
+
+msgid "TRIBE_ACTIVITY_WATER"
+msgstr "fetching water"
+
+msgid "TRIBE_ACTIVITY_FIBER"
+msgstr "gathering fiber"
+
+msgid "TRIBE_ACTIVITY_MILK"
+msgstr "collecting milk"
+
+msgid "TRIBE_ACTIVITY_DRINK"
+msgstr "drinking"
+
+msgid "TRIBE_ACTIVITY_PROVISION"
+msgstr "maintaining food and water"
+
+msgid "TRIBE_ACTIVITY_BUILD"
+msgstr "ready to build"
+
+msgid "TRIBE_ACTIVITY_WELL"
+msgstr "building a well"
+
+msgid "TRIBE_ACTIVITY_FORESTER"
+msgstr "building a forestry station"
+
+msgid "TRIBE_ACTIVITY_QUARRY"
+msgstr "building a quarry"
+
+msgid "TRIBE_ACTIVITY_FIBERBED"
+msgstr "planting a fiber bed"
+
+msgid "TRIBE_PROJECT_TOOL"
+msgstr "Tool crafting"
+
+msgid "TRIBE_PROJECT_HUT"
+msgstr "Hut construction"
+
+msgid "TRIBE_PROJECT_TENT"
+msgstr "Tent construction"
+
+msgid "TRIBE_PROJECT_PEN"
+msgstr "Animal pen construction"
+
+msgid "TRIBE_PROJECT_LAYING_SITE"
+msgstr "Laying site construction"
+
+msgid "TRIBE_PROJECT_GARDEN"
+msgstr "Garden planting"
+
+msgid "TRIBE_PROJECT_WELL"
+msgstr "Well construction"
+
+msgid "TRIBE_PROJECT_FORESTER"
+msgstr "Forestry station"
+
+msgid "TRIBE_PROJECT_QUARRY"
+msgstr "Quarry"
+
+msgid "TRIBE_PROJECT_FIBERBED"
+msgstr "Fiber bed"
+
+msgid "TRIBE_COLLAPSE"
+msgstr "Collapse"
+
+msgid "TRIBE_ORDERS_TAB"
+msgstr "Orders"
+
+msgid "TRIBE_WORK_TAB"
+msgstr "Workplaces & professions"
+
+msgid "TRIBE_HUSBANDRY_TAB"
+msgstr "Animal husbandry"
+
+msgid "TRIBE_SELECT_ALL"
+msgstr "Select all"
+
+msgid "TRIBE_PROFESSION_LABEL"
+msgstr "Profession for selection:"
+
+msgid "TRIBE_ASSIGN_PROFESSION"
+msgstr "Assign profession"
+
+msgid "TRIBE_RESUME_PROFESSION"
+msgstr "Resume profession"
+
+msgid "TRIBE_PROFESSION_HINT"
+msgstr "Providers maintain food and water. Builders help at the active construction site. Manual orders do not change professions."
+
+msgid "TRIBE_CONTROLS"
+msgstr "Left click / drag: select · Shift: change selection · Right click: move or gather · WASD: camera · Wheel: zoom · Space: pause"
+
+msgid "TRIBE_SUPPLY_HINT"
+msgstr "Ongoing order: harvest and store food until four portions per resident are stored or in transit. Then wait at the village and resume when needed."
+
+msgid "TRIBE_HOUSING_HINT"
+msgstr "Fixed tribal design. Right click to choose an open site. Materials are carried from storage to the entrance. Hut: two beds; tent: one bed."
+
+msgid "TRIBE_GARDEN_HINT"
+msgstr "Requires a stone tool. Upgrades the root patch to a garden. One root regrows every 20 gameplay seconds, up to eight ready to harvest."
+
+msgid "TRIBE_STATION_HINT"
+msgstr "Requires a stone tool. Click, then right click an open, reachable site."
+
+msgid "TRIBE_TRANSPORT_HINT"
+msgstr "Ongoing order with delivery to shared storage."
+
+msgid "TRIBE_STOCK"
+msgstr "TRIBE · Wood {wood} · Stone {stone} · Food {food} · Water {water} · Fiber {fiber} · Milk {milk} · Eggs {eggs}   |   Residents {residents} / {capacity} · Beds {beds}"
+
+msgid "TRIBE_STORE_HINT"
+msgstr "Storage: 48 units each. Working residents eat and drink automatically while keeping their orders."
+
+msgid "TRIBE_GARDEN_STATUS"
+msgstr "Root garden · {ready} ready to harvest · {growth} · Residents take meal and water breaks automatically."
+
+msgid "TRIBE_GARDEN_FULL"
+msgstr "Garden full"
+
+msgid "TRIBE_GARDEN_NEXT"
+msgstr "Next root in {seconds} s"
+
+msgid "TRIBE_GOAL_START"
+msgstr "First step: select residents and store wood, stone and food."
+
+msgid "TRIBE_GOAL_TOOL"
+msgstr "Stone tool ready · Place huts or tents on open sites and secure food and water."
+
+msgid "TRIBE_GOAL_MATERIAL"
+msgstr "Materials ready · Order residents to craft the first stone tool."
+
+msgid "TRIBE_GOAL_PROJECT"
+msgstr "{project} · {percent} % · More residents can help."
+
+msgid "TRIBE_GOAL_GARDEN"
+msgstr "Your village is ready · Plant a root garden for a steady food supply."
+
+msgid "TRIBE_GOAL_WELL"
+msgstr "Food regrows · Build a well under Workplaces & professions."
+
+msgid "TRIBE_GOAL_SUPPLY"
+msgstr "Secure food and water · Forestry, quarry and fiber bed expand your resource supply."
+
+msgid "TRIBE_GROWTH_READY"
+msgstr "Village growth · {seconds} s of good provision remaining · then 2 food and 2 water for the new resident."
+
+msgid "TRIBE_ACTIVITY_UNKNOWN"
+msgstr "Order in progress"
+
+msgid "TRIBE_RESERVE_READY"
+msgstr "Supply ready · remains responsible"
+
+msgid "TRIBE_WAIT_ROOTS"
+msgstr "waiting for ripe roots"
+
+msgid "TRIBE_WAIT_RESOURCE"
+msgstr "waiting for {resource}"
+
+msgid "TRIBE_MEAL"
+msgstr "Meal break · will return to work"
+
+msgid "TRIBE_DRINK"
+msgstr "Water break · will return to work"
+
+msgid "TRIBE_BLOCKED"
+msgstr "Route blocked · checking another route"
+
+msgid "TRIBE_STOPPED"
+msgstr "stopped · can resume"
+
+msgid "TRIBE_STOPPED_CARGO"
+msgstr "stopped · carrying building materials"
+
+msgid "TRIBE_BUILD_CARGO"
+msgstr "carrying building materials to the entrance"
+
+msgid "TRIBE_CARRYING"
+msgstr "carrying {resource}"
+
+msgid "TRIBE_RESIDENT"
+msgstr "{name} · {profession}\nFood {food} % · Water {water} %\n{activity}"
+
+msgid "TRIBE_UNKNOWN_JOB"
+msgstr "Unknown profession"
+
+msgid "TRIBE_UNKNOWN_RESOURCE"
+msgstr "material"
+
+msgid "TRIBE_COMMAND"
+msgstr "Group command"
+
+msgid "TRIBE_BOOK"
+msgstr "Journal · J"
+
+msgid "TRIBE_ORDER_ACCEPTED"
+msgstr "✓ {order} · Order saved for {count} residents."
+
+msgid "TRIBE_ORDER_REJECTED"
+msgstr "Not carried out · {reason}"
+
+msgid "TRIBE_GROWTH_MAX"
+msgstr "Your tribe has six residents."
+
+msgid "TRIBE_GROWTH_BEDS"
+msgstr "Village growth: build more beds."
+
+msgid "TRIBE_GROWTH_STATIONS"
+msgstr "Village growth: a root garden and a well are required."
+
+msgid "TRIBE_GROWTH_NEEDS"
+msgstr "Village growth: all residents need at least 50% food and water."
+
+msgid "TRIBE_STATUS_SELECT"
+msgstr "Select residents and issue group or individual orders."
+
+msgid "TRIBE_STATUS_NO_GROUND"
+msgstr "The ground here is not loaded."
+
+msgid "TRIBE_STATUS_NO_SELECTION"
+msgstr "Select at least one resident first."
+
+msgid "TRIBE_STATUS_UNAVAILABLE"
+msgstr "The group cannot accept orders right now."
+
+msgid "TRIBE_STATUS_TOOL"
+msgstr "Craft a stone tool first."
+
+msgid "TRIBE_STATUS_TOOL_FIRST"
+msgstr "Craft a stone tool first."
+
+msgid "TRIBE_STATUS_PLACEMENT"
+msgstr "Right click an open building site · Esc cancels placement."
+
+msgid "TRIBE_STATUS_CANCEL"
+msgstr "Placement cancelled."
+
+msgid "TRIBE_STATUS_PATHS"
+msgstr "Checking village routes. Please wait a moment."
+
+msgid "TRIBE_STATUS_RANGE"
+msgstr "Orders are currently limited to the safe area around the village."
+
+msgid "TRIBE_STATUS_ROUTE"
+msgstr "At least one selected resident cannot reach this location."
+
+msgid "TRIBE_STATUS_DONE"
+msgstr "This upgrade is already complete."
+
+msgid "TRIBE_STATUS_BUSY"
+msgstr "Finish the current project first."
+
+msgid "TRIBE_STATUS_SITE"
+msgstr "This site needs space, dry ground and a clear route to storage."
+
+msgid "TRIBE_STATUS_SITE_ROUTE"
+msgstr "A selected resident cannot reach this building site."
+
+msgid "TRIBE_STATUS_SAVED"
+msgstr "Order saved."
+
+msgid "TRIBE_STATUS_SAVE_ORDER"
+msgstr "Saving failed. The previous order is preserved."
+
+msgid "TRIBE_STATUS_SAVE_STATE"
+msgstr "Saving failed. The previous state is preserved."
+
+msgid "TRIBE_STATUS_GROUND"
+msgstr "A resident is waiting for the ground to load."
+
+msgid "TRIBE_STATUS_BLOCKED"
+msgstr "Route blocked · the order is preserved; checking new routes."
+
+msgid "TRIBE_STATUS_RESUME"
+msgstr "Residents are resuming their orders."
+
+msgid "TRIBE_STATUS_BUILT"
+msgstr "Upgrade complete · residents with professions resume their duties."
+
+msgid "TRIBE_STATUS_GROWTH_SITE"
+msgstr "Village growth is waiting for an open, reachable entrance."
+
+msgid "TRIBE_STATUS_PICKUP"
+msgstr "The pickup point is not reachable."
+
+msgid "TRIBE_GROWTH_RESERVE"
+msgstr "Village growth: keep {count} units each of food and water in storage."
+
+msgid "TRIBE_STATUS_MATERIAL"
+msgstr "Required stored materials: {count} {resource}."
+
+msgid "TRIBE_STATUS_JOINED"
+msgstr "{name} has joined your tribe. Choose a profession or order."
+
+msgid "TRIBE_TAMING_TAB"
+msgstr "Taming"
+
+msgid "HUD_HEALTH"
+msgstr "Health"
+
+msgid "HUD_FOOD"
+msgstr "Food"
+
+msgid "HUD_THIRST"
+msgstr "Thirst"
+
+msgid "HUD_DEVELOPMENT"
+msgstr "Evolution · {development}"
+
+msgid "HUD_JOURNAL"
+msgstr "Journal · {journal}"
+
+msgid "HUD_PROGRESS"
+msgstr "{species} species · {parts} parts · {points} DP"
+
+msgid "HUD_BEHAVIOR"
+msgstr "Social {social} · Aggression {aggression}"
+
+msgid "HUD_MAP"
+msgstr "World map"
+
+msgid "HUD_MAP_HELP"
+msgstr "North is up. Triangle: heading · House: home · Dots: your group.\nKeys + / −: change map scale."
+
+msgid "HUD_MAP_SCALE"
+msgstr "Scale bar: %s"
+
+msgid "HUD_IDENTIFIED"
+msgstr "SPECIES IDENTIFIED"
+
+msgid "HUD_SCAN_CONTROLS"
+msgstr "%s · Close scanner\nJ · All stats in the journal"
+
+msgid "SETTLEMENT_NOT_READY"
+msgstr "This site is not ready yet."
+
+msgid "SETTLEMENT_SPHERE_REQUIRED"
+msgstr "An outpost requires a spherical world."
+
+msgid "SETTLEMENT_LIMIT"
+msgstr "Both settlement sites have been founded."
+
+msgid "SETTLEMENT_SELECT_FOUNDER"
+msgstr "Select one companion to found the outpost."
+
+msgid "SETTLEMENT_KEEP_PLAYER"
+msgstr "Your creature stays in the home village; choose a companion."
+
+msgid "SETTLEMENT_FOUNDER_BUSY"
+msgstr "The founder must finish their job and wait without cargo."
+
+msgid "SETTLEMENT_WALK_FIRST"
+msgstr "Right-click to send the founder 14–18 m from the village center. Found the outpost here after they arrive."
+
+msgid "SETTLEMENT_ROUTE_MISSING"
+msgstr "There is no safe route to the new site."
+
+msgid "SETTLEMENT_GROUND_MISSING"
+msgstr "The new site lacks loaded ground and safe routes."
+
+msgid "SETTLEMENT_OVERLAP"
+msgstr "This site overlaps existing workplaces or has too little free space."
+
+msgid "SETTLEMENT_ROUTES_BUSY"
+msgstr "The current village routes are not ready yet."
+
+msgid "SETTLEMENT_CERTIFY_FAILED"
+msgstr "The existing work routes could not be secured."
+
+msgid "SETTLEMENT_FOUND_FAILED"
+msgstr "The founder is still assigned elsewhere or the site is no longer valid."
+
+msgid "SETTLEMENT_FOUND_SAVE_FAILED"
+msgstr "Saving failed. The resident and the existing site are preserved."
+
+msgid "SETTLEMENT_FOUNDED"
+msgstr "Outpost founded. Choose it in Settlements to assign jobs there."
+
+msgid "SETTLEMENT_ROUTES_PENDING"
+msgstr "The village routes are not ready yet."
+
+msgid "SETTLEMENT_WORK_CHECKPOINT"
+msgstr "The current jobs could not be secured for the site switch."
+
+msgid "SETTLEMENT_TARGET_ROUTES"
+msgstr "The destination does not yet have safe loaded routes."
+
+msgid "SETTLEMENT_SWITCH_FAILED"
+msgstr "Saving failed. The view, stock and jobs remain at the current site."
+
+msgid "SETTLEMENT_SWITCHED"
+msgstr "Site switched. Each site keeps its own residents, stock and jobs."
+
+msgid "SETTLEMENT_TAB"
+msgstr "Settlements"
+
+msgid "SETTLEMENT_HELP"
+msgstr "Each site has its own residents, stock and jobs. The other site keeps working through simplified simulation while you play. Pausing or closing the game produces nothing."
+
+msgid "SETTLEMENT_MANAGE"
+msgstr "Manage this site"
+
+msgid "SETTLEMENT_FOUND"
+msgstr "Found an outpost at the founder’s location"
+
+msgid "SETTLEMENT_HOME"
+msgstr "Home village"
+
+msgid "SETTLEMENT_OUTPOST"
+msgstr "Outpost"
+
+msgid "SETTLEMENT_NEAR"
+msgstr "In view"
+
+msgid "SETTLEMENT_FAR"
+msgstr "Working in the background"
+
+msgid "SETTLEMENT_ARRIVED"
+msgstr "Founder arrived. The new site starts with its own empty store."
+
+msgid "SETTLEMENT_DETAIL"
+msgstr "%s · %d residents\nWood %d · Stone %d · Food %d · Water %d\n\n%s"
+
+msgid "EDITOR_TITLE"
+msgstr "VOXELVERSE  /  CREATURES"
+
+msgid "EDITOR_WELCOME"
+msgstr "Your creature. Your shape."
+
+msgid "EDITOR_TAB_BODY"
+msgstr "01  Shape"
+
+msgid "EDITOR_TAB_PARTS"
+msgstr "02  Parts"
+
+msgid "EDITOR_TAB_PAINT"
+msgstr "03  Color"
+
+msgid "EDITOR_TAB_TEST"
+msgstr "04  Test"
+
+msgid "EDITOR_PLAY"
+msgstr "Into the world  →"
+
+msgid "EDITOR_PALETTE_BODY"
+msgstr "SHAPE THE BODY"
+
+msgid "EDITOR_PALETTE_PARTS"
+msgstr "ATTACH PARTS"
+
+msgid "EDITOR_PALETTE_PAINT"
+msgstr "COLOR & PATTERN"
+
+msgid "EDITOR_PALETTE_TEST"
+msgstr "BRING IT TO LIFE"
+
+msgid "EDITOR_PALETTE_DEFAULT"
+msgstr "PARTS"
+
+msgid "EDITOR_INSPECTOR"
+msgstr "YOUR CREATURE"
+
+msgid "EDITOR_ATTACHED"
+msgstr "ATTACHED PARTS"
+
+msgid "EDITOR_SELECT_POINT"
+msgstr "Select a body point"
+
+msgid "EDITOR_WIDTH"
+msgstr "Width"
+
+msgid "EDITOR_HEIGHT"
+msgstr "Height"
+
+msgid "EDITOR_CURVATURE"
+msgstr "Curvature"
+
+msgid "EDITOR_LENGTH"
+msgstr "Body length"
+
+msgid "EDITOR_BASE_COLOR"
+msgstr "Skin color"
+
+msgid "EDITOR_ACCENT_COLOR"
+msgstr "Pattern color"
+
+msgid "EDITOR_BELLY_COLOR"
+msgstr "Belly color"
+
+msgid "EDITOR_EYE_COLOR"
+msgstr "Iris color"
+
+msgid "EDITOR_HORN_COLOR"
+msgstr "Horns & claws"
+
+msgid "EDITOR_DUPLICATE"
+msgstr "Duplicate"
+
+msgid "EDITOR_REMOVE"
+msgstr "Remove"
+
+msgid "EDITOR_FRAME"
+msgstr "Fit view  ·  F"
+
+msgid "EDITOR_TARGET_LIMB"
+msgstr "Whole limb"
+
+msgid "EDITOR_TARGET_END"
+msgstr "Foot / hand"
+
+msgid "EDITOR_TARGET_FOOT"
+msgstr "Edit foot"
+
+msgid "EDITOR_TARGET_HAND"
+msgstr "Edit hand"
+
+msgid "EDITOR_SINGLE"
+msgstr "Single"
+
+msgid "EDITOR_PAIRED"
+msgstr "Pair"
+
+msgid "EDITOR_CENTER"
+msgstr "Center"
+
+msgid "EDITOR_POSITION"
+msgstr "Position"
+
+msgid "EDITOR_ROTATION"
+msgstr "Rotate"
+
+msgid "EDITOR_SHAPE"
+msgstr "Shape"
+
+msgid "EDITOR_AXIS_X"
+msgstr "X: sideways / width"
+
+msgid "EDITOR_AXIS_Y"
+msgstr "Y: height / length"
+
+msgid "EDITOR_AXIS_Z"
+msgstr "Z: forward and back / depth"
+
+msgid "EDITOR_DEGREES"
+msgstr " · degrees"
+
+msgid "EDITOR_SIZE"
+msgstr "Overall size"
+
+msgid "EDITOR_RESET_SHAPE"
+msgstr "Reset rotation & shape"
+
+msgid "EDITOR_DEFAULT_END"
+msgstr "Default foot / hand"
+
+msgid "EDITOR_SKIN_TYPE"
+msgstr "Skin type · surface only"
+
+msgid "EDITOR_SKIN_STRENGTH"
+msgstr "Texture strength"
+
+msgid "EDITOR_SKIN_SCALE"
+msgstr "Texture detail"
+
+msgid "EDITOR_PATTERN_STRENGTH"
+msgstr "Pattern strength"
+
+msgid "EDITOR_SWATCH_SKIN"
+msgstr "Swatches → Skin"
+
+msgid "EDITOR_SWATCH_PATTERN"
+msgstr "Swatches → Pattern"
+
+msgid "EDITOR_SWATCH_BELLY"
+msgstr "Swatches → Belly"
+
+msgid "EDITOR_SWATCH_IRIS"
+msgstr "Swatches → Iris"
+
+msgid "EDITOR_SWATCH_HORNS"
+msgstr "Swatches → Horns"
+
+msgid "EDITOR_NAME_HINT"
+msgstr "Your creature's name"
+
+msgid "EDITOR_UNDO_HINT"
+msgstr "Undo · Ctrl+Z"
+
+msgid "EDITOR_REDO_HINT"
+msgstr "Redo · Ctrl+Y"
+
+msgid "EDITOR_SYMMETRY"
+msgstr "Symmetry"
+
+msgid "EDITOR_SNAP"
+msgstr "Surface snap"
+
+msgid "EDITOR_NEW"
+msgstr "New"
+
+msgid "EDITOR_LOAD"
+msgstr "Load"
+
+msgid "EDITOR_SAVE"
+msgstr "Save"
+
+msgid "EDITOR_MOTION_IDLE"
+msgstr "Stand & breathe"
+
+msgid "EDITOR_MOTION_WALK"
+msgstr "Walk"
+
+msgid "EDITOR_MOTION_RUN"
+msgstr "Run"
+
+msgid "EDITOR_PRESET_UPRIGHT"
+msgstr "Upright"
+
+msgid "EDITOR_PRESET_GRAZER"
+msgstr "Long neck"
+
+msgid "EDITOR_PRESET_CRAWLER"
+msgstr "Crawler"
+
+msgid "EDITOR_PRESET_ROUND"
+msgstr "Round belly"
+
+msgid "EDITOR_PRESET_HINT"
+msgstr "Reshape the body only. Your parts stay attached. Undo with Ctrl+Z."
+
+msgid "EDITOR_SELECT_PART"
+msgstr "Select a part"
+
+msgid "EDITOR_YOUR_PALETTE"
+msgstr "Your color palette"
+
+msgid "EDITOR_MOTION_PREVIEW"
+msgstr "Motion preview"
+
+msgid "EDITOR_FOOT"
+msgstr "Foot"
+
+msgid "EDITOR_HAND"
+msgstr "Hand"
+
+msgid "EDITOR_PART"
+msgstr "Part"
+
+msgid "EDITOR_CAPTION_BODY"
+msgstr "Drag, stretch, shape."
+
+msgid "EDITOR_CAPTION_PARTS"
+msgstr "What should your creature do?"
+
+msgid "EDITOR_CAPTION_PAINT"
+msgstr "Give it its own character."
+
+msgid "EDITOR_CAPTION_TEST"
+msgstr "A shape comes to life."
+
+msgid "EDITOR_STATUS_CENTER"
+msgstr "Centerline: seven fixed attachment points."
+
+msgid "EDITOR_STATUS_PAIRED"
+msgstr "Left and right sides are edited together."
+
+msgid "EDITOR_STATUS_SINGLE"
+msgstr "Editing a single part."
+
+msgid "EDITOR_STATUS_LEG_FIRST"
+msgstr "Select the intended leg first."
+
+msgid "EDITOR_STATUS_ARM_FIRST"
+msgstr "Select the intended arm first."
+
+msgid "EDITOR_STATUS_END_COST"
+msgstr "Not enough shape points for this foot or hand."
+
+msgid "EDITOR_STATUS_END_ADDED"
+msgstr "Foot or hand attached · Adjust size, shape and rotation in Properties."
+
+msgid "EDITOR_STATUS_COPY_COST"
+msgstr "Not enough shape points for a duplicate."
+
+msgid "EDITOR_STATUS_LOCKED"
+msgstr "Discover species to unlock this part."
+
+msgid "EDITOR_STATUS_COST"
+msgstr "Not enough shape points. Remove a part first."
+
+msgid "EDITOR_STATUS_SELECTED"
+msgstr "Part selected · Properties: rotation X/Y/Z, shape and size · Gold points: centerline."
+
+msgid "EDITOR_STATUS_PRESET"
+msgstr "Body shape applied · Your parts stay attached · Ctrl+Z to undo."
+
+msgid "EDITOR_STATUS_TOO_MANY"
+msgstr "Too many shape points. Remove a part first."
+
+msgid "EDITOR_STATUS_ADDED"
+msgstr "Part attached · Wheel: size · Alt + drag: rotate · Ctrl+Z: undo"
+
+msgid "EDITOR_STATUS_SAVE_FAILED"
+msgstr "Save failed. Your design remains open here."
+
+msgid "EDITOR_STATUS_WORLD_FAILED"
+msgstr "The world could not be opened. Your design has been saved."
+
+msgid "EDITOR_STATUS_NEW"
+msgstr "New creature · Restore your previous design with Ctrl+Z."
+
+msgid "EDITOR_STATUS_LOADED"
+msgstr "Saved creature loaded · Ctrl+Z restores your previous edits."
+
+msgid "EDITOR_HELP_INITIAL"
+msgstr "Drag the body points. Use the wheel to make the selected point thicker or thinner."
+
+msgid "EDITOR_HELP_BODY"
+msgstr "Drag a point: shape the body.\nWheel: thicker / thinner.\nCtrl + wheel: body length."
+
+msgid "EDITOR_HELP_PARTS"
+msgstr "Drag parts onto the body.\nWheel: size · Alt + drag: rotate.\nRight drag: orbit the view."
+
+msgid "EDITOR_HELP_PAINT"
+msgstr "Choose a skin color, accent and pattern. Preview every change immediately."
+
+msgid "EDITOR_HELP_TEST"
+msgstr "Test your shape in motion.\nThe preview keeps your design unchanged."
+
+msgid "EDITOR_HELP_END"
+msgstr "Select a leg or arm.\nClick a foot or hand, or drag it onto the limb.\nAdjust size and rotation in Properties."
+
+msgid "EDITOR_HELP_SKIN"
+msgstr "Combine skin type, pattern and five colors. Skin types affect only the surface."
+
+msgid "EDITOR_CATEGORY_BODY"
+msgstr "Body"
+
+msgid "EDITOR_CATEGORY_MOUTH"
+msgstr "Mouths"
+
+msgid "EDITOR_CATEGORY_EYES"
+msgstr "Eyes"
+
+msgid "EDITOR_CATEGORY_LEGS"
+msgstr "Legs"
+
+msgid "EDITOR_CATEGORY_ARMS"
+msgstr "Arms"
+
+msgid "EDITOR_CATEGORY_FEET"
+msgstr "Feet"
+
+msgid "EDITOR_CATEGORY_HANDS"
+msgstr "Hands"
+
+msgid "EDITOR_CATEGORY_TAIL"
+msgstr "Tails"
+
+msgid "EDITOR_CATEGORY_HORNS"
+msgstr "Horns"
+
+msgid "EDITOR_CATEGORY_PLATES"
+msgstr "Armor"
+
+msgid "EDITOR_CATEGORY_SPIKES"
+msgstr "Spikes"
+
+msgid "EDITOR_CATEGORY_DECOR"
+msgstr "Details"
+
+msgid "EDITOR_CATEGORY_PAINT"
+msgstr "Patterns"
+
+msgid "EDITOR_SKIN_SMOOTH"
+msgstr "Smooth"
+
+msgid "EDITOR_SKIN_SCALES"
+msgstr "Scales"
+
+msgid "EDITOR_SKIN_FUR"
+msgstr "Short fur"
+
+msgid "EDITOR_SKIN_LEATHER"
+msgstr "Leather"
+
+msgid "EDITOR_SKIN_CHITIN"
+msgstr "Chitin"
+
+msgid "EDITOR_COLOR_PALETTE_0"
+msgstr "Forest"
+
+msgid "EDITOR_COLOR_PALETTE_1"
+msgstr "Desert"
+
+msgid "EDITOR_COLOR_PALETTE_2"
+msgstr "Ocean"
+
+msgid "EDITOR_COLOR_PALETTE_3"
+msgstr "Ember"
+
+msgid "EDITOR_COLOR_PALETTE_4"
+msgstr "Twilight"
+
+msgid "EDITOR_COLOR_PALETTE_5"
+msgstr "Polar"
+
+msgid "EDITOR_STATS"
+msgstr "{used} / {limit} shape points\n\nSpeed  {speed}     Power  {attack}\nArmor  {defense}     Senses  {perception}"
+
+msgid "EDITOR_POINT"
+msgstr "Point {point} / 7"
+
+msgid "EDITOR_STATUS_SAVED"
+msgstr "Saved · {name} · Revision {revision}"
+
+msgid "EDITOR_SHOW_INSPECTOR"
+msgstr "Properties"
+
+msgid "EDITOR_SHOW_PALETTE"
+msgstr "Palette"
+
+msgid "EDITOR_CARD_LOCKED"
+msgstr "Locked"
+
+msgid "EDITOR_CARD_COST"
+msgstr "{count} shape points"
+
+msgid "EDITOR_CARD_HINT"
+msgstr "Drag onto the creature or click."
+
+msgid "EDITOR_CARD_UNLOCK"
+msgstr "Discover species to unlock."
+
+msgid "EDITOR_STATUS_UNDO_EMPTY"
+msgstr "Nothing to undo."
+
+msgid "EDITOR_STATUS_REDO_EMPTY"
+msgstr "Nothing to redo."
+
+msgid "EDITOR_STATUS_UNDO"
+msgstr "Undo applied."
+
+msgid "EDITOR_STATUS_REDO"
+msgstr "Redo applied."
+
+msgid "EDITOR_STATUS_SNAP_ON"
+msgstr "Surface snap enabled."
+
+msgid "EDITOR_STATUS_SNAP_OFF"
+msgstr "Surface snap disabled."
+
+msgid "EDITOR_STATUS_ATTACH_SELECT"
+msgstr "Select a modular part first."
+
+msgid "EDITOR_STATUS_ATTACHED"
+msgstr "Selected part attached to the body surface."
+
+msgid "EDITOR_PART_BODY_BALANCED_CORE_NAME"
+msgstr "Balanced Core"
+
+msgid "EDITOR_PART_BODY_BALANCED_CORE_DESCRIPTION"
+msgstr "Middle-sized creature body."
+
+msgid "EDITOR_PART_BODY_LONG_GRAZER_NAME"
+msgstr "Long Grazer Core"
+
+msgid "EDITOR_PART_BODY_LONG_GRAZER_DESCRIPTION"
+msgstr "Long body for stable herbivores."
+
+msgid "EDITOR_PART_BODY_HEAVY_SHELL_NAME"
+msgstr "Heavy Shell"
+
+msgid "EDITOR_PART_BODY_HEAVY_SHELL_DESCRIPTION"
+msgstr "Wide protected body."
+
+msgid "EDITOR_PART_BODY_INSECTOID_NAME"
+msgstr "Insectoid Thorax"
+
+msgid "EDITOR_PART_BODY_INSECTOID_DESCRIPTION"
+msgstr "Segmented body for many legs."
+
+msgid "EDITOR_PART_BODY_SERPENT_BASE_NAME"
+msgstr "Serpent Base"
+
+msgid "EDITOR_PART_BODY_SERPENT_BASE_DESCRIPTION"
+msgstr "Flexible stretched body."
+
+msgid "EDITOR_PART_PAINT_PLAIN_NAME"
+msgstr "Plain Skin"
+
+msgid "EDITOR_PART_PAINT_PLAIN_DESCRIPTION"
+msgstr "Natural base color."
+
+msgid "EDITOR_PART_PAINT_FOREST_SPOTS_NAME"
+msgstr "Forest Spots"
+
+msgid "EDITOR_PART_PAINT_FOREST_SPOTS_DESCRIPTION"
+msgstr "Green camouflage spots."
+
+msgid "EDITOR_PART_PAINT_SAND_STRIPES_NAME"
+msgstr "Sand Stripes"
+
+msgid "EDITOR_PART_PAINT_SAND_STRIPES_DESCRIPTION"
+msgstr "Dry biome stripes."
+
+msgid "EDITOR_PART_PAINT_WARNING_MARKS_NAME"
+msgstr "Warning Marks"
+
+msgid "EDITOR_PART_PAINT_WARNING_MARKS_DESCRIPTION"
+msgstr "Bright poisonous markings."
+
+msgid "EDITOR_PART_PAINT_CRYSTAL_BLOOM_NAME"
+msgstr "Crystal Bloom"
+
+msgid "EDITOR_PART_PAINT_CRYSTAL_BLOOM_DESCRIPTION"
+msgstr "Colorful alien plates."
+
+msgid "EDITOR_PART_MOUTH_GRAZER_NAME"
+msgstr "Grazer Mouth"
+
+msgid "EDITOR_PART_MOUTH_GRAZER_DESCRIPTION"
+msgstr "Good for plant food."
+
+msgid "EDITOR_PART_MOUTH_BROAD_BEAK_NAME"
+msgstr "Broad Beak"
+
+msgid "EDITOR_PART_MOUTH_BROAD_BEAK_DESCRIPTION"
+msgstr "Simple hard beak."
+
+msgid "EDITOR_PART_MOUTH_PREDATOR_JAWS_NAME"
+msgstr "Predator Jaws"
+
+msgid "EDITOR_PART_MOUTH_PREDATOR_JAWS_DESCRIPTION"
+msgstr "Strong biting jaws."
+
+msgid "EDITOR_PART_MOUTH_FILTER_SNOUT_NAME"
+msgstr "Filter Snout"
+
+msgid "EDITOR_PART_MOUTH_FILTER_SNOUT_DESCRIPTION"
+msgstr "Long snout for shallow water feeding."
+
+msgid "EDITOR_PART_EYES_BEADY_NAME"
+msgstr "Beady Eyes"
+
+msgid "EDITOR_PART_EYES_BEADY_DESCRIPTION"
+msgstr "Cheap basic vision."
+
+msgid "EDITOR_PART_EYES_WIDE_NAME"
+msgstr "Wide Watchers"
+
+msgid "EDITOR_PART_EYES_WIDE_DESCRIPTION"
+msgstr "Large expressive eyes."
+
+msgid "EDITOR_PART_EYES_STALKS_NAME"
+msgstr "Eye Stalks"
+
+msgid "EDITOR_PART_EYES_STALKS_DESCRIPTION"
+msgstr "Raised eyes for safer scanning."
+
+msgid "EDITOR_PART_EYES_CLUSTER_NAME"
+msgstr "Cluster Eyes"
+
+msgid "EDITOR_PART_EYES_CLUSTER_DESCRIPTION"
+msgstr "Multiple small sensor eyes."
+
+msgid "EDITOR_PART_LEGS_STUBBY_NAME"
+msgstr "Stubby Legs"
+
+msgid "EDITOR_PART_LEGS_STUBBY_DESCRIPTION"
+msgstr "Stable but slow."
+
+msgid "EDITOR_PART_LEGS_WALKER_NAME"
+msgstr "Walker Legs"
+
+msgid "EDITOR_PART_LEGS_WALKER_DESCRIPTION"
+msgstr "Balanced movement."
+
+msgid "EDITOR_PART_LEGS_SPRINTER_NAME"
+msgstr "Sprinter Legs"
+
+msgid "EDITOR_PART_LEGS_SPRINTER_DESCRIPTION"
+msgstr "Fast but hungry."
+
+msgid "EDITOR_PART_LEGS_SPIDER_NAME"
+msgstr "Spider Legs"
+
+msgid "EDITOR_PART_LEGS_SPIDER_DESCRIPTION"
+msgstr "Many-jointed side legs."
+
+msgid "EDITOR_PART_LEGS_HOOF_NAME"
+msgstr "Hoof Legs"
+
+msgid "EDITOR_PART_LEGS_HOOF_DESCRIPTION"
+msgstr "Fast steppe legs."
+
+msgid "EDITOR_PART_ARMS_GRASPING_NAME"
+msgstr "Grasping Arms"
+
+msgid "EDITOR_PART_ARMS_GRASPING_DESCRIPTION"
+msgstr "Basic manipulation."
+
+msgid "EDITOR_PART_ARMS_CLIMBER_NAME"
+msgstr "Climber Arms"
+
+msgid "EDITOR_PART_ARMS_CLIMBER_DESCRIPTION"
+msgstr "Long arms with strong grip."
+
+msgid "EDITOR_PART_ARMS_CLAWS_NAME"
+msgstr "Claw Arms"
+
+msgid "EDITOR_PART_ARMS_CLAWS_DESCRIPTION"
+msgstr "Offensive clawed arms."
+
+msgid "EDITOR_PART_TAIL_BALANCE_NAME"
+msgstr "Balance Tail"
+
+msgid "EDITOR_PART_TAIL_BALANCE_DESCRIPTION"
+msgstr "Helps with movement."
+
+msgid "EDITOR_PART_TAIL_CLUB_NAME"
+msgstr "Club Tail"
+
+msgid "EDITOR_PART_TAIL_CLUB_DESCRIPTION"
+msgstr "Heavy defensive tail."
+
+msgid "EDITOR_PART_TAIL_FIN_NAME"
+msgstr "Fin Tail"
+
+msgid "EDITOR_PART_TAIL_FIN_DESCRIPTION"
+msgstr "Water movement helper."
+
+msgid "EDITOR_PART_TAIL_STINGER_NAME"
+msgstr "Stinger Tail"
+
+msgid "EDITOR_PART_TAIL_STINGER_DESCRIPTION"
+msgstr "Dangerous pointed tail."
+
+msgid "EDITOR_PART_HORNS_SMALL_NAME"
+msgstr "Small Horns"
+
+msgid "EDITOR_PART_HORNS_SMALL_DESCRIPTION"
+msgstr "Small defensive horns."
+
+msgid "EDITOR_PART_HORNS_CREST_NAME"
+msgstr "Crest Horns"
+
+msgid "EDITOR_PART_HORNS_CREST_DESCRIPTION"
+msgstr "Visual display and defense."
+
+msgid "EDITOR_PART_HORNS_ANTLERS_NAME"
+msgstr "Branch Antlers"
+
+msgid "EDITOR_PART_HORNS_ANTLERS_DESCRIPTION"
+msgstr "Large branching display horns."
+
+msgid "EDITOR_PART_PLATES_DORSAL_NAME"
+msgstr "Dorsal Plates"
+
+msgid "EDITOR_PART_PLATES_DORSAL_DESCRIPTION"
+msgstr "Back armor plates."
+
+msgid "EDITOR_PART_PLATES_SHELL_NAME"
+msgstr "Shell Plates"
+
+msgid "EDITOR_PART_PLATES_SHELL_DESCRIPTION"
+msgstr "Layered shell armor."
+
+msgid "EDITOR_PART_SPIKES_BACK_NAME"
+msgstr "Back Spikes"
+
+msgid "EDITOR_PART_SPIKES_BACK_DESCRIPTION"
+msgstr "Simple defensive spikes."
+
+msgid "EDITOR_PART_SPIKES_SIDE_NAME"
+msgstr "Side Spikes"
+
+msgid "EDITOR_PART_SPIKES_SIDE_DESCRIPTION"
+msgstr "Side protection."
+
+msgid "EDITOR_PART_DECOR_FEATHERS_NAME"
+msgstr "Feather Crest"
+
+msgid "EDITOR_PART_DECOR_FEATHERS_DESCRIPTION"
+msgstr "Colorful social display."
+
+msgid "EDITOR_PART_DECOR_CRYSTALS_NAME"
+msgstr "Crystal Growths"
+
+msgid "EDITOR_PART_DECOR_CRYSTALS_DESCRIPTION"
+msgstr "Bright alien decoration."
+
+msgid "EDITOR_PART_FEET_PADS_NAME"
+msgstr "Padded feet"
+
+msgid "EDITOR_PART_FEET_PADS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_CLAWS_NAME"
+msgstr "Clawed feet"
+
+msgid "EDITOR_PART_FEET_CLAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_HOOVES_NAME"
+msgstr "Cloven hooves"
+
+msgid "EDITOR_PART_FEET_HOOVES_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_WEBBED_NAME"
+msgstr "Webbed feet"
+
+msgid "EDITOR_PART_FEET_WEBBED_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_FELINE_PAWS_NAME"
+msgstr "Cat paws"
+
+msgid "EDITOR_PART_FEET_FELINE_PAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_BEAR_PAWS_NAME"
+msgstr "Bear paws"
+
+msgid "EDITOR_PART_FEET_BEAR_PAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_FEET_HORSE_HOOVES_NAME"
+msgstr "Horse hooves"
+
+msgid "EDITOR_PART_FEET_HORSE_HOOVES_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_HANDS_GRASP_NAME"
+msgstr "Grasping hands"
+
+msgid "EDITOR_PART_HANDS_GRASP_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_HANDS_CLAWS_NAME"
+msgstr "Clawed hands"
+
+msgid "EDITOR_PART_HANDS_CLAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_HANDS_PINCERS_NAME"
+msgstr "Pincers"
+
+msgid "EDITOR_PART_HANDS_PINCERS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_HANDS_CRAB_CLAWS_NAME"
+msgstr "Crab claws"
+
+msgid "EDITOR_PART_HANDS_CRAB_CLAWS_DESCRIPTION"
+msgstr "Attach to the matching leg or arm. Adjust size and rotation separately."
+
+msgid "EDITOR_PART_MOUTH_CANINE_SNOUT_NAME"
+msgstr "Canine snout"
+
+msgid "EDITOR_PART_MOUTH_CANINE_SNOUT_DESCRIPTION"
+msgstr "Tapered snout with a nose pad and fangs. Stats and unlock match Predator Jaws."
+
+msgid "EDITOR_PART_MOUTH_CROCODILE_SNOUT_NAME"
+msgstr "Crocodile snout"
+
+msgid "EDITOR_PART_MOUTH_CROCODILE_SNOUT_DESCRIPTION"
+msgstr "Long, flat snout with two rows of teeth. Stats and unlock match Predator Jaws."
+
+msgid "EDITOR_PART_MOUTH_OCTOPUS_BEAK_NAME"
+msgstr "Octopus mouth"
+
+msgid "EDITOR_PART_MOUTH_OCTOPUS_BEAK_DESCRIPTION"
+msgstr "Round mouth opening with an inner beak. Stats and unlock match Predator Jaws."
+
+msgid "EDITOR_TOOL_MOVE"
+msgstr "Move · W"
+
+msgid "EDITOR_TOOL_ROTATE"
+msgstr "Rotate · E"
+
+msgid "EDITOR_TOOL_SCALE"
+msgstr "Scale · R"
+
+msgid "EDITOR_TOOL_JOINT"
+msgstr "Joint · J"
+
+msgid "EDITOR_JOINT_HELP"
+msgstr "Drag joint point · Shift: snap"
+
+msgid "EDITOR_JOINT_UPPER"
+msgstr "Upper segment"
+
+msgid "EDITOR_JOINT_LOWER"
+msgstr "Lower segment"
+
+msgid "EDITOR_JOINT_OFFSET"
+msgstr "Joint offset · X / Y / Z"
+
+msgid "EDITOR_JOINT_RESET"
+msgstr "Reset joint"
+
+msgid "EDITOR_TOOL_MOVE_HINT"
+msgstr "Drag an arrow: move along one axis · Surface snap stays active."
+
+msgid "EDITOR_TOOL_ROTATE_HINT"
+msgstr "Drag a colored ring: rotate locally · Shift: 15° steps."
+
+msgid "EDITOR_TOOL_SCALE_HINT"
+msgstr "Drag a square: change proportions · Center: overall size."
+
+msgid "EDITOR_TOOL_JOINT_HINT"
+msgstr "Drag the gold joint point or axes · Properties: segment lengths."
+
+msgid "EDITOR_EDIT_CANCELLED"
+msgstr "Edit cancelled."
+
+msgid "EDITOR_COURSE_TITLE"
+msgstr "TEST COURSE"
+
+msgid "EDITOR_COURSE_FLAT"
+msgstr "Workbench"
+
+msgid "EDITOR_COURSE_SLOPE"
+msgstr "Slope"
+
+msgid "EDITOR_COURSE_STEPS"
+msgstr "Steps"
+
+msgid "EDITOR_COURSE_RESUME"
+msgstr "Resume"
+
+msgid "EDITOR_COURSE_PAUSE"
+msgstr "Pause"
+
+msgid "EDITOR_COURSE_RESTART"
+msgstr "Restart"
+
+msgid "EDITOR_COURSE_SPEED"
+msgstr "Preview speed"
+
+msgid "EDITOR_COURSE_HELP"
+msgstr "Test posture and steps on the workbench, a slope or steps."
+
+msgid "EDITOR_COURSE_FINISHED"
+msgstr "Destination reached · Restart"
+
+msgid "EDITOR_COURSE_PAUSED"
+msgstr "Paused"
+
+msgid "EDITOR_COURSE_DESIGN_SAFE"
+msgstr "Your design stays unchanged"
+
+msgid "EDITOR_FITTINGS"
+msgstr "Check saddle & harness"
+
+msgid "EDITOR_FIT_CHECK"
+msgstr "Pause & check now"
+
+msgid "EDITOR_FIT_FIND"
+msgstr "Find attachment clearance"
+
+msgid "EDITOR_FIT_APPLY"
+msgstr "Apply proposal"
+
+msgid "EDITOR_SOCKET_SADDLE"
+msgstr "Saddle / rider seat"
+
+msgid "EDITOR_SOCKET_LEFT"
+msgstr "Left harness"
+
+msgid "EDITOR_SOCKET_RIGHT"
+msgstr "Right harness"
+
+msgid "EDITOR_SOCKET_ENABLED"
+msgstr "Attachment enabled"
+
+msgid "EDITOR_SOCKET_POSITION"
+msgstr "Position on back"
+
+msgid "EDITOR_SOCKET_OFFSET_X"
+msgstr "Offset right"
+
+msgid "EDITOR_SOCKET_OFFSET_Y"
+msgstr "Offset up"
+
+msgid "EDITOR_SOCKET_OFFSET_Z"
+msgstr "Offset back"
+
+msgid "EDITOR_SOCKET_TILT"
+msgstr "Pitch"
+
+msgid "EDITOR_SOCKET_ROTATION"
+msgstr "Yaw"
+
+msgid "EDITOR_SOCKET_ROLL"
+msgstr "Roll"
+
+msgid "EDITOR_SOCKET_MIRROR"
+msgstr "Mirror harness to other side"
+
+msgid "EDITOR_FIT_MOVING"
+msgstr "Fit preview in motion. Pause & check now inspects the current pose."
+
+msgid "EDITOR_FIT_CLEAR"
+msgstr "No overlap"
+
+msgid "EDITOR_FIT_INCOMPLETE"
+msgstr "Check incomplete · Inspect attachment position or geometry"
+
+msgid "EDITOR_FIT_NO_SOCKETS"
+msgstr "No active attachments checked"
+
+msgid "EDITOR_REST_POSE"
+msgstr "Rest pose"
+
+msgid "EDITOR_STILL_POSE"
+msgstr "paused snapshot"
+
+msgid "EDITOR_SOCKET_RIDER"
+msgstr "Saddle / rider"
+
+msgid "EDITOR_BODY_TARGET"
+msgstr "Body"
+
+msgid "EDITOR_PART_TARGET"
+msgstr "Attached part"
+
+msgid "EDITOR_FIT_LEG_LENGTHS"
+msgstr "Apply segment lengths"
+
+msgid "EDITOR_FIT_ALREADY_CLEAR"
+msgstr "The selected fitting already has clearance in this pose."
+
+msgid "EDITOR_FIT_NO_PROPOSAL"
+msgstr "No clear placement found in the search range. Edit position, rotation or the highlighted part."
+
+msgid "EDITOR_FIT_BODY_HINT"
+msgstr "Edit back shape or attachment position; check the red fitting again."
+
+msgid "EDITOR_FIT_LEG_LIMIT"
+msgstr "Segment limit reached. Edit this pair's joint, size or leg attachment."
+
+msgid "EDITOR_FIT_LEG_UNSAFE"
+msgstr "No safe length adjustment found. Edit this pair's joint and leg attachment."
+
+msgid "EDITOR_FIT_LEG_APPLIED"
+msgstr "Segment lengths applied for this pair · Foot contact checked again."
+
+msgid "EDITOR_RIDER_DIMENSIONS"
+msgstr "Rider dimensions"
+
+msgid "EDITOR_RIDER_SCALE"
+msgstr "Rider size"
+
+msgid "EDITOR_RIDER_SPACING"
+msgstr "Leg spacing"
+
+msgid "EDITOR_RIDER_HEIGHT"
+msgstr "Seat height"
+
+msgid "EDITOR_SEAT_FIND"
+msgstr "Fit seat to back"
+
+msgid "EDITOR_SEAT_APPLY"
+msgstr "Apply seat proposal"
+
+msgid "EDITOR_REVIEW_START"
+msgstr "Check walking, slope & steps"
+
+msgid "EDITOR_SEAT_NO_PROPOSAL"
+msgstr "No supported seat found. Edit back shape, attachment tilt or highlighted parts."
+
+msgid "EDITOR_REVIEW_CANCEL"
+msgstr "Cancel check"
+
+msgid "EDITOR_REVIEW_INCOMPLETE"
+msgstr "Check cancelled or incomplete · No approval."
+
+msgid "EDITOR_REVIEW_FLAT"
+msgstr "Flat"
+
+msgid "EDITOR_REVIEW_SLOPE"
+msgstr "Slope"
+
+msgid "EDITOR_REVIEW_WALK"
+msgstr "Walk"
+
+msgid "EDITOR_REVIEW_RUN"
+msgstr "Run"
+
+msgid "EDITOR_REVIEW_BODY_HIT"
+msgstr "Body collision"
+
+msgid "EDITOR_REVIEW_PART_HIT"
+msgstr "Part collision"
+
+msgid "EDITOR_STATUS_CAMPAIGN_SAVE_FAILED"
+msgstr "Creature saved; the campaign could not be saved. Please try again."
+
+msgid "EDITOR_COURSE_STATUS"
+msgstr "%s · %d legs\n%s"
+
+msgid "EDITOR_FIT_COLLISIONS"
+msgstr "%d overlaps · marked red"
+
+msgid "EDITOR_FIT_REPORT"
+msgstr "%s\nFixed test rider size · %s · %d overstretched legs (>20%%)."
+
+msgid "EDITOR_FIT_FEET"
+msgstr "\n%d feet · Ground deviation %.3f"
+
+msgid "EDITOR_FIT_STRETCH"
+msgstr "Leg pair +%.0f%% · Edit joint"
+
+msgid "EDITOR_FIT_PROPOSAL"
+msgstr "Clearance proposal: back %.0f%% · Offset %.0f / %.0f / %.0f%%.\nChecked for the fixed fitting; inspect saddle support afterwards."
+
+msgid "EDITOR_SEAT_UNAVAILABLE"
+msgstr "\nSeat check unavailable: inspect attachment or rider dimensions."
+
+msgid "EDITOR_SEAT_DISABLED"
+msgstr "\nSaddle disabled."
+
+msgid "EDITOR_SEAT_SUPPORT"
+msgstr "\nSupport %d/9 · Largest gap %.1f%%"
+
+msgid "EDITOR_SEAT_ADJUST"
+msgstr " · Fit seat to back"
+
+msgid "EDITOR_SEAT_CONTACT"
+msgstr "\nCheck rider contact · Gap %.1f%%"
+
+msgid "EDITOR_SEAT_PROPOSAL"
+msgstr "Seat proposal: back %.0f%% · Height %+.1f%%\nLeg spacing %.0f%% · Seat height %.0f%%\n9/9 support points and clearance checked at rest."
+
+msgid "EDITOR_REVIEW_RUNNING"
+msgstr "Checking a copy · %d poses · %d/6 courses complete"
+
+msgid "EDITOR_REVIEW_DONE"
+msgstr "%d poses checked · No continuous motion approval."
+
+msgid "EDITOR_REVIEW_HITS"
+msgstr " · %d collision poses"
+
+msgid "EDITOR_REVIEW_SEE_HIT"
+msgstr " at %.2f s · View"
+
+msgid "EDITOR_REVIEW_NO_HITS"
+msgstr " · No collisions in %d poses"
+
+msgid "EDITOR_REVIEW_GROUND"
+msgstr "Ground contact ≥%d feet · Stretch up to +%.0f%%"
+
+msgid "EDITOR_REVIEW_POSE"
+msgstr "Collision pose at %.2f s · %s"
+
+msgid "EDITOR_FIT_TARGET"
+msgstr "%s ↔ %s"
+
+msgid "EDITOR_REVIEW_SCENARIO"
+msgstr "%s · %s"
+
+msgid "EDITOR_REVIEW_RESULT_HIT"
+msgstr "%s · %d collision poses"
+
+msgid "EDITOR_REVIEW_RESULT_CLEAR"
+msgstr "%s · No collisions in %d poses"
+
+msgid "EDITOR_REVIEW_RESULT_POSE"
+msgstr "%s at %.2f s · View"
+
+msgid "EDITOR_GAIT_TWO"
+msgstr "Biped"
+
+msgid "EDITOR_GAIT_FOUR"
+msgstr "Quadruped"
+
+msgid "EDITOR_GAIT_SIX"
+msgstr "Tripod gait"
+
+msgid "EDITOR_GAIT_FREE"
+msgstr "Free body plan"
+
+msgid "EDITOR_CATEGORY_HEAD"
+msgstr "Head modules"
+
+msgid "EDITOR_PART_HEAD_ELEPHANT_TRUNK_NAME"
+msgstr "Elephant trunk"
+
+msgid "EDITOR_PART_HEAD_ELEPHANT_TRUNK_DESCRIPTION"
+msgstr "Curved trunk above a separately selectable mouth. Unlocked with the filter snout; cosmetic part."
+
+msgid "EDITOR_PART_MOUTH_FELINE_SNOUT_NAME"
+msgstr "Feline muzzle"
+
+msgid "EDITOR_PART_MOUTH_FELINE_SNOUT_DESCRIPTION"
+msgstr "Short muzzle with whisker pads, a small nose and fangs. Shares the predator jaws profile and unlock."
+
+msgid "EDITOR_PART_MOUTH_BEAR_SNOUT_NAME"
+msgstr "Bear muzzle"
+
+msgid "EDITOR_PART_MOUTH_BEAR_SNOUT_DESCRIPTION"
+msgstr "Broad, strong muzzle with a large nose and molars. Shares the broad beak omnivore profile and unlock."
+
+msgid "EDITOR_PART_MOUTH_PIG_SNOUT_NAME"
+msgstr "Pig snout"
+
+msgid "EDITOR_PART_MOUTH_PIG_SNOUT_DESCRIPTION"
+msgstr "Short snout with a flat nose disc and two nostrils. Shares the broad beak omnivore profile and unlock."
+
+msgid "Alle Teile"
+msgstr "All parts"
+
+msgid "Noch gesperrt"
+msgstr "Still locked"
+
+msgid "Merkliste"
+msgstr "Wishlist"
+
+msgid "Tierrollen ansehen"
+msgstr "View animal roles"
+
+msgid "Mit meiner Kreatur vergleichen"
+msgstr "Compare with my creature"
+
+msgid "Im Spiel verfolgen"
+msgstr "Track in game"
+
+msgid "Alle Lebensweisen / Tierrollen"
+msgstr "All lifestyles / animal roles"
+
+msgid "Alle Kategorien"
+msgstr "All categories"
+
+msgid "Tierrolle: %s"
+msgstr "Animal role: %s"
+
+msgid "Teil oder Herkunft suchen …"
+msgstr "Search part or origin…"
+
+msgid "Forschungsziel suchen …"
+msgstr "Search research goals…"
+
+msgid "Dein nächster Schritt"
+msgstr "Your next step"
+
+msgid "Unbekannte Art"
+msgstr "Unknown species"
+
+msgid " · gemerkt"
+msgstr " · wished"
+
+msgid "Noch keine Arten entdeckt"
+msgstr "No species discovered yet"
+
+msgid "Keine passenden Einträge"
+msgstr "No matching entries"
+
+msgid "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier."
+msgstr "Open scan mode and keep an animal in the crosshair for 2.5 seconds. When the circle fills, its species appears here."
+
+msgid "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
+msgstr "Change your search or filter to see more entries."
+
+msgid "Deine Teile-Merkliste"
+msgstr "Your body-part wishlist"
+
+msgid "Wähle unter »Noch gesperrt« ein Körperteil und setze es auf deine Merkliste. Du kannst ein Wunschteil als Ziel im Spiel verfolgen."
+msgstr "Choose a body part under “Still locked” and add it to your wishlist. You can track one wished part as a goal in the game."
+
+msgid "Tierrollen · %s"
+msgstr "Animal roles · %s"
+
+msgid "noch nicht bekannt"
+msgstr "not yet known"
+
+msgid "Noch nicht bekannt"
+msgstr "Not yet known"
+
+msgid "Gespeicherte Art-Eignung ein- oder ausblenden. Kein Tierbesitz."
+msgstr "Show or hide recorded species suitability. This does not indicate ownership."
+
+msgid "Dein Körperbau ist noch nicht verfügbar."
+msgstr "Your creature's anatomy is not available yet."
+
+msgid "Körperbauwerte und beobachtete Teile vergleichen."
+msgstr "Compare anatomy values and observed parts."
+
+msgid "Zur Artenansicht"
+msgstr "Back to species view"
+
+msgid "KÖRPERTEILE DIESER ART"
+msgstr "BODY PARTS OF THIS SPECIES"
+
+msgid "Ziel erreicht"
+msgstr "Goal complete"
+
+msgid "In Arbeit"
+msgstr "In progress"
+
+msgid "FREIGESCHALTET"
+msgstr "UNLOCKED"
+
+msgid "GESPERRT · SILHOUETTE"
+msgstr "LOCKED · SILHOUETTE"
+
+msgid "Teil"
+msgstr "Part"
+
+msgid "Im Kreatureneditor verfügbar · Buch schließen und F2 drücken."
+msgstr "Available in the creature editor · close the book and press F2."
+
+msgid "Von Merkliste entfernen"
+msgstr "Remove from wishlist"
+
+msgid "Nicht mehr verfolgen"
+msgstr "Stop tracking"
+
+msgid "Auswahl gespeichert."
+msgstr "Selection saved."
+
+msgid "Deine Merkliste ist voll (32 Teile). Entferne zuerst ein anderes Teil."
+msgstr "Your wishlist is full (32 parts). Remove another part first."
+
+msgid "Dieses Teil ist bereits verfügbar oder fehlt im Teilekatalog."
+msgstr "This part is already available or missing from the catalog."
+
+msgid "Es wird gerade gespeichert. Versuche es gleich erneut."
+msgstr "Saving is in progress. Try again shortly."
+
+msgid "Speichern fehlgeschlagen. Deine bisherige Auswahl bleibt erhalten; du kannst es erneut versuchen."
+msgstr "Saving failed. Your previous selection is preserved; you can try again."
+
+msgid "Dein Forschungsziel"
+msgstr "Your research goal"
+
+msgid "Ziel nicht verfügbar"
+msgstr "Goal unavailable"
+
+msgid "Entdecke deine Welt."
+msgstr "Discover your world."
+
+msgid "Dein Stamm · wähle Bewohner aus und gib der Gruppe einen Auftrag. J öffnet eure gemeinsamen Entdeckungen."
+msgstr "Your tribe · select residents and give the group an order. J opens your shared discoveries."
+
+msgid "Die Anzeige wurde geändert, konnte aber nicht für den nächsten Start gespeichert werden."
+msgstr "The display was changed, but the preference could not be saved for next time."
+
+msgid "Verfügbar"
+msgstr "Available"
+
+msgid "Deine Kreatur"
+msgstr "Your creature"
+
+msgid "Entdeckte Art"
+msgstr "Observed species"
+
+msgid "Ansichten einzeln drehen: ziehen · Zoom: Mausrad"
+msgstr "Rotate each view: drag · Zoom: mouse wheel"
+
+msgid "KÖRPERTEILE DER ENTDECKTEN ART"
+msgstr "BODY PARTS OF THE OBSERVED SPECIES"
+
+msgid "Körperbau"
+msgstr "Anatomy"
+
+msgid "Du"
+msgstr "You"
+
+msgid "Art"
+msgstr "Species"
+
+msgid "Art − Du"
+msgstr "Species − you"
+
+msgid "Wert der entdeckten Art minus dein Körperbauwert."
+msgstr "Observed species value minus your anatomy value."
+
+msgid "Keine gespeicherten Körperteile."
+msgstr "No recorded body parts."
+
+msgid "Freigeschaltet · im Editor verfügbar"
+msgstr "Unlocked · available in the editor"
+
+msgid "Dieses frühere Teil fehlt im aktuellen Katalog."
+msgstr "This legacy part is missing from the current catalog."
+
+msgid "Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile."
+msgstr "Values unavailable: a saved anatomy is incomplete or contains legacy parts."
+
+msgid "Pflanzenfresser"
+msgstr "Grazer"
+
+msgid "Räuber"
+msgstr "Predator"
+
+msgid "Sammler"
+msgstr "Forager"
+
+msgid "Aasfresser"
+msgstr "Scavenger"
+
+msgid "Kletterer"
+msgstr "Climber"
+
+msgid "Wasserbewohner"
+msgstr "Aquatic species"
+
+msgid "Körper"
+msgstr "Body"
+
+msgid "Mäuler"
+msgstr "Mouths"
+
+msgid "Augen"
+msgstr "Eyes"
+
+msgid "Beine"
+msgstr "Legs"
+
+msgid "Arme"
+msgstr "Arms"
+
+msgid "Schwänze"
+msgstr "Tails"
+
+msgid "Hörner"
+msgstr "Horns"
+
+msgid "Panzerplatten"
+msgstr "Armor plates"
+
+msgid "Stacheln"
+msgstr "Spikes"
+
+msgid "Verzierungen"
+msgstr "Decorations"
+
+msgid "Farben"
+msgstr "Colors"
+
+msgid "Füße"
+msgstr "Feet"
+
+msgid "Hände"
+msgstr "Hands"
+
+msgid "Milchtier"
+msgstr "Milk animal"
+
+msgid "Zugtier"
+msgstr "Draught animal"
+
+msgid "Reittier"
+msgstr "Riding animal"
+
+msgid "Begleittier"
+msgstr "Companion animal"
+
+msgid "Eiertier"
+msgstr "Egg animal"
+
+msgid "Pflanzen"
+msgstr "Plants"
+
+msgid "Fleisch"
+msgstr "Meat"
+
+msgid "ruhiges Temperament"
+msgstr "calm temperament"
+
+msgid "soziales Temperament"
+msgstr "social temperament"
+
+msgid "TIERROLLEN · GESCANNTE ART"
+msgstr "ANIMAL ROLES · SCANNED SPECIES"
+
+msgid "Grundsätzlich zähmbar · %s"
+msgstr "Tameable species · %s"
+
+msgid "Nahrung: %s · Wasser: %s l je 300 Spielsekunden"
+msgstr "Food: %s · water: %s l per 300 game seconds"
+
+msgid "Lernfähigkeit: %d %% · Sozialverträglichkeit: %d %% · Bindungsfähigkeit: %d %%"
+msgstr "Trainability: %d %% · sociability: %d %% · bonding: %d %%"
+
+msgid "Ausdauer bei Nennlast: %s s · Bodentempo: %s m/s"
+msgstr "Stamina at rated load: %s s · ground speed: %s m/s"
+
+msgid "Wahrnehmung: %s m"
+msgstr "Perception: %s m"
+
+msgid "Milcheignung: %s l je %s aktive Spielsekunden"
+msgstr "Milk suitability: %s l per %s active game seconds"
+
+msgid "Eierhaltung im Stammeszeitalter: eigenes Tier, Legestelle und Versorgung erforderlich."
+msgstr "Egg husbandry in the tribal age requires an owned animal, a nesting site and supplies."
+
+msgid "Zugkraft: %s N · benötigt passenden Geschirr-Anschluss"
+msgstr "Pulling force: %s N · requires a compatible harness attachment"
+
+msgid "Zusätzliche Traglast: %s kg · benötigt passenden Sattel-Anschluss"
+msgstr "Additional carrying capacity: %s kg · requires a compatible saddle attachment"
+
+msgid "Dieses gespeicherte Teil ist im aktuellen Teilekatalog nicht verfügbar."
+msgstr "This saved part is unavailable in the current part catalog."
+
+msgid "Noch gesperrt · weitere Arten beobachten"
+msgstr "Still locked · observe more species"
+
+msgid "Entdeckt bei %s · %s"
+msgstr "Discovered from %s · %s"
+
+msgid "unbekannter Art"
+msgstr "unknown species"
+
+msgid "Von Beginn an verfügbar"
+msgstr "Available from the start"
+
+msgid "Durch Artenentdeckung · ursprüngliche Art nicht vermerkt"
+msgstr "Unlocked by discovering a species · original species not recorded"
+
+msgid "Aus deinem bisherigen Kreaturenentwurf übernommen"
+msgstr "Imported from your previous creature design"
+
+msgid "Bereits freigeschaltet"
+msgstr "Already unlocked"
+
+msgid "Welt %s"
+msgstr "World %s"
+
+msgid "unbekannt"
+msgstr "unknown"
+
+msgid "Region %s / %s"
+msgstr "Region %s / %s"
+
+msgid "Zurück zum Nest · nach der Erholung kannst du weiter erkunden."
+msgstr "Return to the nest · continue exploring after recovering."
+
+msgid "Wasser suchen · gehe ans Wasser und trinke mit Linksklick."
+msgstr "Find water · approach it and drink with left click."
+
+msgid "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt."
+msgstr "Find food · left-click food suited to your creature."
+
+msgid "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+msgstr "Your first species · %s opens scan mode. Keep an animal in the crosshair until the circle fills."
+
+msgid "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2."
+msgstr "Keep exploring · use %s to scan unknown species. Find new parts in the editor with F2."
+
+msgid "Erste Begegnung"
+msgstr "First encounter"
+
+msgid "Artenvielfalt"
+msgstr "Species diversity"
+
+msgid "Leben im Wasser"
+msgstr "Life in water"
+
+msgid "Neue Horizonte"
+msgstr "New horizons"
+
+msgid "Feldforscher"
+msgstr "Field researcher"
+
+msgid "Wasserart"
+msgstr "Aquatic species"
+
+msgid "Ziel nicht mehr verfügbar"
+msgstr "Goal no longer available"
+
+msgid "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen."
+msgstr "This tracked goal belongs to an earlier version. Stop tracking it or choose another goal."
+
+msgid "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+msgstr "Discover your first species. Open scan mode with %s and keep an animal in the crosshair until the circle fills."
+
+msgid "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal."
+msgstr "Discover three different species. Observing known species again does not count twice."
+
+msgid "Entdecke eine wasserbewohnende Tierart. Suche an Gewässern und scanne sie mit %s."
+msgstr "Discover an aquatic species. Search near water and scan it with %s."
+
+msgid "Erkunde drei verschiedene Regionen. Neu betretene Regionen werden vom Spiel erfasst; wiederholte Besuche zählen nicht mehrfach."
+msgstr "Explore three different regions. Newly entered regions are recorded automatically; repeat visits do not count again."
+
+msgid "Entdecke zehn verschiedene Tierarten. Die Entdeckungen deiner gesamten Kampagne zählen mit."
+msgstr "Discover ten different species. Discoveries from your entire campaign count."
+
+msgid "Angriffswert des Körperbaus; kein garantierter Schaden pro Biss."
+msgstr "Anatomy attack value; not guaranteed damage per bite."
+
+msgid "Verteidigungswert durch Körper und angesetzte Teile."
+msgstr "Defense value from the body and attached parts."
+
+msgid "Körperbauwert für Gesundheit, einschließlich Körpergröße; keine aktuelle Gesundheit."
+msgstr "Anatomical health value, including body size; not current health."
+
+msgid "Tempo des Körperbaus einschließlich Masse; Bewegung im Spiel kann begrenzt sein."
+msgstr "Anatomical speed including mass; movement in the game may be limited."
+
+msgid "Sprungwert des Körperbaus; keine Höhenangabe in Metern."
+msgstr "Anatomical jump value; not a height in meters."
+
+msgid "Anatomischer Schwimmwert. Daraus folgt keine bestimmte Schwimmgeschwindigkeit."
+msgstr "Anatomical swimming value. This does not specify a swimming speed."
+
+msgid "Wahrnehmungswert durch Körperteile."
+msgstr "Perception value from body parts."
+
+msgid "Greifwert durch Körperteile."
+msgstr "Grip value from body parts."
+
+msgid "Eignung des Körperbaus für pflanzliche Nahrung."
+msgstr "Anatomical suitability for plant food."
+
+msgid "Eignung des Körperbaus für tierische Nahrung."
+msgstr "Anatomical suitability for animal food."
+
+msgid "Anatomischer Flugwert; schaltet allein keinen Flugmodus frei."
+msgstr "Anatomical flight value; does not unlock flight on its own."
+
+msgid "Grundverbrauch des Körperbaus. Ein kleinerer Wert bedeutet weniger Verbrauch."
+msgstr "Base anatomical consumption. A lower value means less consumption."
+
+msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
+msgstr "Hold the left mouse button to rotate · use the mouse wheel to zoom"
+
+msgid "JOURNAL_GUIDE"
+msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
+
+msgid "JOURNAL_UNSCANNED"
+msgstr "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
+
+msgid "JOURNAL_SPECIES_DETAIL"
+msgstr "%s\nDiscovered on %s"
+
+msgid "JOURNAL_MISSING_VIEW"
+msgstr "\n\nThis earlier discovery has no saved view. Observe the species again to add one."
+
+msgid "JOURNAL_VIEW_HINT"
+msgstr "\n\nRotate view: drag · Zoom: mouse wheel"
+
+msgid "JOURNAL_AWARDED"
+msgstr "\n\nUnlocked by this discovery: %s"
+
+msgid "JOURNAL_GOAL_DETAIL"
+msgstr "%s\n\n%d / %d %s · %s\n\nPreviously saved discoveries count."
+
+msgid "JOURNAL_REGION_DETAIL"
+msgstr "Discovered on %s\n\nRecorded region coordinates: %s / %s"
+
+msgid "JOURNAL_WISH_COMPLETE"
+msgstr "\n\nCollection goal complete."
+
+msgid "JOURNAL_WISH_HINT"
+msgstr "\n\nObserve more new species. Each new species unlocks at most one part; observing a known species again gives no additional part."
+
+msgid "JOURNAL_PINNED"
+msgstr "%s · %s\n%d / %d %s · View in book"
+
+msgid "JOURNAL_ANATOMY_NOTE"
+msgstr "Anatomy values without skill bonuses.\nIn-game values may differ."
+
+msgid "JOURNAL_PART_LEGACY"
+msgstr "\nValues unavailable: the saved anatomy contains legacy parts."
+
+msgid "JOURNAL_PART_NEUTRAL"
+msgstr "\nThis part does not change the calculated anatomy values."
+
+msgid "JOURNAL_PART_CONTRIBUTION"
+msgstr "\nContribution to this anatomy · used %d×"
+
+msgid "JOURNAL_ROLES_EMPTY"
+msgstr "ANIMAL ROLES\nNo readable suitability data exists for this observation.\n\nScanning a species or befriending it does not tame an animal."
+
+msgid "JOURNAL_ROLES_NOTICE"
+msgstr "\nSpecies suitability is not ownership. Taming begins in the tribal age. Riding, ploughing and milking require an owned animal with suitable supplies and equipment."
+
+msgid "JOURNAL_CLOSE_COMPACT"
+msgstr "Back · Esc"
+
+msgid "Kopfmodule"
+msgstr "Head modules"
+
+msgid "HUSBANDRY_ASSIGN_KEEPER"
+msgstr "Assign animal keeper"
+
+msgid "HUSBANDRY_HINT"
+msgstr "One owned animal per dairy pen or laying site. Animal keepers deliver feed and water. Eggs are collected, stored and eaten."
+
+msgid "HUSBANDRY_ASSIGN"
+msgstr "Assign animal"
+
+msgid "HUSBANDRY_RELEASE"
+msgstr "Release assignment"
+
+msgid "HUSBANDRY_CHANGE_SITE"
+msgstr "Convert empty site"
+
+msgid "HUSBANDRY_CHANGE_HINT"
+msgstr "Convert an empty dairy pen to a laying site or back. Supplies and finished products are retained."
+
+msgid "HUSBANDRY_BUILD_HINT"
+msgstr "Build a dairy pen or laying site on dry, accessible ground."
+
+msgid "HUSBANDRY_PEN"
+msgstr "Dairy pen {number}"
+
+msgid "HUSBANDRY_LAYING_SITE"
+msgstr "Laying site {number}"
+
+msgid "HUSBANDRY_MILK_ANIMAL"
+msgstr "Dairy animal {number}"
+
+msgid "HUSBANDRY_EGG_ANIMAL"
+msgstr "Egg-laying animal {number}"
+
+msgid "HUSBANDRY_SUPPLIES"
+msgstr "Feed {food} / 4 · Water {water} / 8 litres\n{status}"
+
+msgid "HUSBANDRY_STORAGE"
+msgstr "{resource} ready · Collection is waiting for storage space."
+
+msgid "HUSBANDRY_WAIT_SUPPLIES"
+msgstr "Production ({resource}) is waiting for feed and water."
+
+msgid "HUSBANDRY_PRODUCTION"
+msgstr "{resource} in {seconds} s · {amount} per interval."
+
+msgid "HUSBANDRY_EGG_AMOUNT"
+msgstr "{count} eggs"
+
+msgid "HUSBANDRY_MILK_AMOUNT"
+msgstr "{count} litres"
+
+msgid "TRIBE_AGE_ENTRY"
+msgstr "Tribal age …"
+
+msgid "TRIBE_AGE_TITLE"
+msgstr "A new age begins"
+
+msgid "TRIBE_AGE_CONFIRM"
+msgstr "Advance to the tribal age now"
+
+msgid "TRIBE_AGE_CANCEL"
+msgstr "Stay in the creature phase"
+
+msgid "TRIBE_AGE_RETURN"
+msgstr "Return to your creature"
+
+msgid "TRIBE_AGE_DETAIL"
+msgstr "You will lead the group from the overview. Your creature and its two companions remain the same members. Your species, home, relationships and purchased abilities are retained.\n\nGather materials, craft a stone tool, build huts and provide for your residents. The transition is saved and direct control of an individual ends. You can already meet and support neighbouring tribes. Tribal combat will follow later."
+
+msgid "TRIBE_AGE_BLOCKED"
+msgstr "{reason}\n\nThe transition only begins after you explicitly confirm it here."
+
+msgid "TRIBE_AGE_SAVE_FAILED"
+msgstr "The transition could not be saved. You remain in the creature phase.\n\n{reason}"
+
+msgid "HUSBANDRY_NEED_ANIMAL"
+msgstr "Bring a suitable tamed animal here and assign it."
+
+msgid "HUSBANDRY_CHANGED_ANIMAL"
+msgstr "The animal’s species or body has changed."
+
+msgid "HUSBANDRY_STAY"
+msgstr "The animal must stay at its assigned site."
+
+msgid "HUSBANDRY_ACCESS"
+msgstr "The animal site or its entrance is currently inaccessible."
+
+msgid "HUSBANDRY_RELEASE_FIRST"
+msgstr "Release the animal assignment first."
+
+msgid "HUSBANDRY_RETURN_SUPPLIES"
+msgstr "Wait until feed and water have been returned."
+
+msgid "HUSBANDRY_UNAVAILABLE"
+msgstr "The animal is currently unavailable."
+
+msgid "HUSBANDRY_WRONG_REGISTER"
+msgstr "The animal registry does not belong to this village."
+
+msgid "HUSBANDRY_OWNED_ANIMAL"
+msgstr "Choose a living, tamed livestock animal owned by your tribe."
+
+msgid "HUSBANDRY_UNSUITABLE"
+msgstr "This animal is unsuitable for this site with plant feed."
+
+msgid "HUSBANDRY_NOT_LOADED"
+msgstr "The animal must be in the loaded area around the village."
+
+msgid "HUSBANDRY_WRONG_SITE"
+msgstr "This animal is unsuitable for this site."
+
+msgid "HUSBANDRY_OCCUPIED"
+msgstr "This animal site is already occupied."
+
+msgid "HUSBANDRY_ALREADY_ASSIGNED"
+msgstr "This animal already has an assigned site."
+
+msgid "HUSBANDRY_CHANGED_RECORD"
+msgstr "The saved animal’s species or body has changed."
+
+msgid "HUSBANDRY_RECORD_LIMIT"
+msgstr "No free production record is available for this animal."
+
+msgid "HUSBANDRY_COLLECT_FIRST"
+msgstr "Collect the finished products and free up storage space first."
+
+msgid "HUSBANDRY_DELIVER_FIRST"
+msgstr "Wait until the feed and water in transit have been delivered."
+
+msgid "TRIBE_AGE_OTHER"
+msgstr "Your tribe is already in another age."
+
+msgid "TRIBE_AGE_WORLD"
+msgstr "Return to the loaded world with your creature first."
+
+msgid "TRIBE_AGE_HOME"
+msgstr "Return home to advance with your group."
+
+msgid "TRIBE_AGE_PENDING"
+msgstr "Another transition is still being completed."
+
+msgid "TRIBE_AGE_SPACE"
+msgstr "Your first village needs safe paths and five free work sites. Move your home to a larger dry area."
+
+msgid "TRIBE_AGE_COMPANION"
+msgstr "A companion cannot yet reach the village site. Bring it closer."
+
+msgid "TRIBE_AGE_PLAYER"
+msgstr "Your creature cannot yet reach the village site."
+
+msgid "TRIBE_AGE_ESTABLISH"
+msgstr "Use {key} to establish a home for your nest group."
+
+msgid "TRIBE_AGE_RECALL"
+msgstr "Call both companions home with {key} → Return home."
+
+msgid "HUSBANDRY_BUILD_PEN"
+msgstr "Dairy pen · 4 wood / 2 fibre"
+
+msgid "HUSBANDRY_BUILD_LAYING"
+msgstr "Laying site · 4 wood / 2 fibre"
+
+msgid "EXPRESSION_GREET_HINT"
+msgstr "{key} · Greet (move closer)"
+
+msgid "EXPRESSION_GREET_OK"
+msgstr "Your animal friend returns your greeting."
+
+msgid "EXPRESSION_GREET_UNAVAILABLE"
+msgstr "To greet: move closer, keep line of sight and wait for a calm moment."
+
+msgid "TRIBAL_TEST_ENTRY"
+msgstr "Try the tribal age"
+
+msgid "TRIBAL_TEST_DESCRIPTION"
+msgstr "A separate test world starts with your creature and two companions at a prepared home. You then confirm the transition to the tribal age. Your existing saves are preserved."
+
+msgid "TRIBAL_TEST_CONTROLS"
+msgstr "In the tribal age, control three residents from an overhead view: select them, gather resources and build a village. You can save and resume the test world. Cancel the transition to stay in its creature phase."
+
+msgid "TRIBAL_TEST_PREPARE"
+msgstr "Prepare test world"
+
+msgid "TRIBAL_TEST_SAVE_NAME"
+msgstr "Tribal age – test world"
+
+msgid "TRIBAL_TEST_LOADING"
+msgstr "Preparing your home and companions … You can then confirm the transition."
+
+msgid "TRIBAL_TEST_CANCEL_SETUP"
+msgstr "Cancel preparation · play as a creature"
+
+msgid "TRIBAL_TEST_SETUP_FAILED"
+msgstr "The home could not be fully prepared. You can play as a creature in this test world and press N to establish a home. Then open “Tribal age …” to confirm the transition."
+
+msgid "ATMOSPHERE_LABEL"
+msgstr "Atmosphere"
+
+msgid "ATMOSPHERE_LOW"
+msgstr "Basic · sky and haze"
+
+msgid "ATMOSPHERE_STANDARD"
+msgstr "Atmospheric · shadows and glow"
+
+msgid "ATMOSPHERE_CINEMATIC"
+msgstr "Cinematic · light in mist"
+
+msgid "ATMOSPHERE_HINT"
+msgstr "Applies to the spherical world. “Apply & save” activates your selection and keeps it for the next launch. “Back” discards a selection that has not been applied."
+
+msgid "GRAPHICS_TAB"
+msgstr "Graphics"
+
+msgid "ATMOSPHERE_TITLE"
+msgstr "Atmosphere and lighting"
+
+msgid "ATMOSPHERE_LOW_DESCRIPTION"
+msgstr "Sky, simple moving clouds, sunlight and distance haze. The lightest preset."
+
+msgid "ATMOSPHERE_STANDARD_DESCRIPTION"
+msgstr "More detailed clouds, softer sun shadows, contact shadows and subtle glow. The default preset."
+
+msgid "ATMOSPHERE_CINEMATIC_DESCRIPTION"
+msgstr "All default effects plus light shafts in volumetric fog, additional cloud detail and greater shadow distance. Requires more graphics performance."
+
+msgid "ATMOSPHERE_FALLBACK"
+msgstr "Advanced lighting and fog effects are unavailable in your current graphics mode. Sky, clouds and distance haze remain active."
+
+msgid "SITE_FREIGHT_TITLE"
+msgstr "Shipment → %s"
+
+msgid "SITE_FREIGHT_SEND"
+msgstr "Send with selected resident"
+
+msgid "SITE_FREIGHT_CANCEL"
+msgstr "Cancel / return cargo"
+
+msgid "SITE_FREIGHT_AMOUNT"
+msgstr "Amount (1–4 units)"
+
+msgid "SITE_FREIGHT_HELP"
+msgstr "An idle resident at the store carries up to four units. Stock is credited on arrival."
+
+msgid "SITE_FREIGHT_NOT_READY"
+msgstr "The village and loaded paths must be ready."
+
+msgid "SITE_FREIGHT_DESTINATION"
+msgstr "Found a second settlement first."
+
+msgid "SITE_FREIGHT_BUSY"
+msgstr "A shipment is in progress. Its carrier stays assigned until completion."
+
+msgid "SITE_FREIGHT_CARRIER"
+msgstr "Select an idle companion waiting at the store without cargo. Your creature stays in the village."
+
+msgid "SITE_FREIGHT_ROUTE"
+msgstr "No safe loaded transport route is available."
+
+msgid "SITE_FREIGHT_CAPACITY"
+msgstr "The destination has insufficient unreserved storage space."
+
+msgid "SITE_FREIGHT_STOCK"
+msgstr "This amount is unavailable at the source store."
+
+msgid "SITE_FREIGHT_SENT"
+msgstr "Shipment saved. Goods and storage space are reserved."
+
+msgid "SITE_FREIGHT_RETURN_REQUESTED"
+msgstr "Return requested. The carrier turns back at the next waypoint."
+
+msgid "SITE_FREIGHT_SAVE_FAILED"
+msgstr "Save failed. The previous shipment and stock are preserved."
+
+msgid "SITE_FREIGHT_DETAIL"
+msgstr "%s · %d × %s"
+
+msgid "SITE_FREIGHT_STATUS_RESERVED"
+msgstr "Ready for pickup"
+
+msgid "SITE_FREIGHT_STATUS_MOVING"
+msgstr "In transit"
+
+msgid "SITE_FREIGHT_STATUS_ARRIVED"
+msgstr "Arrived – awaiting storage"
+
+msgid "SITE_FREIGHT_STATUS_DELIVERED"
+msgstr "Delivered"
+
+msgid "SITE_FREIGHT_STATUS_RETURNED"
+msgstr "Returned to source"
+
+msgid "SITE_FREIGHT_STATUS_CANCELLED"
+msgstr "Cancelled"
+
+msgid "SITE_FREIGHT_STATUS_BLOCKED"
+msgstr "Route blocked – cargo stays with the carrier"
+
+msgid "SITE_FREIGHT_STATUS_RETURNING"
+msgstr "Return requested / returning"
+
+msgid "EDITOR_PART_TAIL_STUMP_NAME"
+msgstr "Stump tail"
+
+msgid "EDITOR_PART_TAIL_STUMP_DESCRIPTION"
+msgstr "Short, rounded tail. Shares the balance tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_REPTILE_NAME"
+msgstr "Reptile tail"
+
+msgid "EDITOR_PART_TAIL_REPTILE_DESCRIPTION"
+msgstr "Thick root with a long, curved tip and dorsal scales. Shares the balance tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_BEAVER_PADDLE_NAME"
+msgstr "Beaver paddle"
+
+msgid "EDITOR_PART_TAIL_BEAVER_PADDLE_DESCRIPTION"
+msgstr "Broad, flat paddle tail with scales. Shares the fin tail’s stats and unlock."
+
+msgid "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_NAME"
+msgstr "Horizontal tail fluke"
+
+msgid "EDITOR_PART_TAIL_HORIZONTAL_FLUKE_DESCRIPTION"
+msgstr "Two lateral flukes on a narrow root. Shares the fin tail’s stats and unlock."
+
+msgid "WORKPLACE_HINT"
+msgstr "Up to two workplaces of each type. Select residents, then choose their workplace."
+
+msgid "WORKPLACE_ROW"
+msgstr "{name} {number} · {ready} ready · {assigned} assigned"
+
+msgid "WORKPLACE_ASSIGNED"
+msgstr "Workplace: {name} {number}"
+
+msgid "WORKPLACE_ASSIGN_HINT"
+msgstr "Selected residents gather at this workplace. Carried goods are delivered first."
+
+msgid "WORKPLACE_SELECT_RESIDENT"
+msgstr "Select at least one resident first."
+
+msgid "WORKPLACE_UNKNOWN"
+msgstr "This workplace does not belong to the selected settlement."
+
+msgid "WORKPLACE_UNREACHABLE"
+msgstr "This workplace cannot be reached using the verified village paths."
+
+msgid "WORKPLACE_LIMIT"
+msgstr "This settlement already has two workplaces of this type."
+
+msgid "WILDLIFE_PLAY_APPROACH"
+msgstr "Approaching companion"
+
+msgid "WILDLIFE_PLAY_GREET"
+msgstr "Greeting companion"
+
+msgid "WILDLIFE_PLAY_ACTIVE"
+msgstr "Playing with companion"
+
+msgid "WILDLIFE_PLAY_REST"
+msgstr "Resting with companion"
+
+msgid "SAVE_BROWSER_BACK"
+msgstr "Main menu"
+
+msgid "SAVE_VIEW_DETAILS"
+msgstr "Details"
+
+msgid "SAVE_VIEW_RESULTS"
+msgstr "Results"
+
+msgid "SAVE_SEARCH_PLACEHOLDER"
+msgstr "Search name or world seed …"
+
+msgid "SAVE_SEARCH_HINT"
+msgstr "Combine search terms · Ctrl+F / Cmd+F"
+
+msgid "SAVE_FILTER_RESET"
+msgstr "Reset"
+
+msgid "SAVE_PHASE_HINT"
+msgstr "Filter by era"
+
+msgid "SAVE_STATE_HINT"
+msgstr "Filter by condition"
+
+msgid "SAVE_SORT_HINT"
+msgstr "Save sorting"
+
+msgid "SAVE_PHASE_ALL"
+msgstr "All eras"
+
+msgid "SAVE_FILTER_ALL"
+msgstr "All conditions"
+
+msgid "SAVE_FILTER_READY"
+msgstr "Intact saves"
+
+msgid "SAVE_FILTER_ATTENTION"
+msgstr "Review / backup"
+
+msgid "SAVE_SORT_RECENT"
+msgstr "Recently saved"
+
+msgid "SAVE_SORT_NAME"
+msgstr "Name A–Z"
+
+msgid "SAVE_SORT_PLAYTIME"
+msgstr "Most playtime"
+
+msgid "SAVE_LIST_SEED"
+msgstr "World seed {seed}"
+
+msgid "SAVE_LIST_BACKUP"
+msgstr "Last backup available"
+
+msgid "SAVE_PAGE"
+msgstr "Page {page}/{pages} · {count} of {total}"
+
+msgid "SAVE_PAGE_PREVIOUS"
+msgstr "Previous saves"
+
+msgid "SAVE_PAGE_NEXT"
+msgstr "More saves"
+
+msgid "SAVE_NO_RESULTS"
+msgstr "No matching adventures. Change your search or reset the filters."
+
+msgid "SAVE_SELECT_RESULT"
+msgstr "Select an adventure from the results."
+
+msgid "ATLAS_SEARCH_PLACEHOLDER"
+msgstr "Search places …"
+
+msgid "ATLAS_SEARCH_TOOLTIP"
+msgstr "Search known places on this planet · Ctrl+F\nEsc: leave text input; Esc again: close map"
+
+msgid "ATLAS_SEARCH_PREVIOUS"
+msgstr "Previous page of places"
+
+msgid "ATLAS_SEARCH_NEXT"
+msgstr "Next page of places"
+
+msgid "ATLAS_SEARCH_WAITING"
+msgstr "Preparing search …"
+
+msgid "ATLAS_SEARCH_PROGRESS"
+msgstr "Searching … {scanned} / {total} places checked"
+
+msgid "ATLAS_SEARCH_NO_RESULTS"
+msgstr "No matching known places. Change the search or filters."
+
+msgid "ATLAS_SEARCH_FAILED"
+msgstr "Places could not be read. Saved data remains protected."
+
+msgid "ATLAS_SEARCH_RESULTS"
+msgstr "Matches on this page: {count}"
+
+msgid "ATLAS_SEARCH_PAGE"
+msgstr "Page {page}"
+
+msgid "Tab  Auswahl    ·    Enter  Bestätigen"
+msgstr "Tab  Select    ·    Enter  Confirm"
+
+msgid "Esc Zurück · F11 Vollbild"
+msgstr "Esc Back · F11 Fullscreen"
+
+msgid "Zurück · Esc"
+msgstr "Back · Esc"
+
+msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "GRAPHICS_CUSTOM"
+msgstr "Custom"
+
+msgid "GRAPHICS_CUSTOM_DESCRIPTION"
+msgstr "Your own graphics values. Selecting a preset replaces all individual values."
+
+msgid "GRAPHICS_DRAFT_HINT"
+msgstr "Changes take effect with “Apply & save”. “Back” discards them. Higher quality and distance require more graphics performance."
+
+msgid "GRAPHICS_RESET"
+msgstr "Restore graphics defaults"
+
+msgid "GRAPHICS_UNAVAILABLE"
+msgstr "Unavailable in this rendering mode. Your preferences are kept for Forward+."
+
+msgid "GRAPHICS_SOFT_SHADOW_UNAVAILABLE"
+msgstr "Soft sun shadows are unavailable in Compatibility mode."
+
+msgid "GRAPHICS_NEWER_SETTINGS"
+msgstr "The graphics settings come from a newer version and will not be overwritten."
+
+msgid "GRAPHICS_QUALITY_LOW"
+msgstr "Low"
+
+msgid "GRAPHICS_QUALITY_MEDIUM"
+msgstr "Medium"
+
+msgid "GRAPHICS_QUALITY_HIGH"
+msgstr "High"
+
+msgid "GRAPHICS_GROUP_CLOUDS"
+msgstr "Clouds"
+
+msgid "GRAPHICS_GROUP_HAZE"
+msgstr "Distance haze"
+
+msgid "GRAPHICS_GROUP_FOG"
+msgstr "Volumetric fog and light shafts"
+
+msgid "GRAPHICS_GROUP_SHADOWS"
+msgstr "Sun shadows"
+
+msgid "GRAPHICS_GROUP_SSAO"
+msgstr "Contact shadows (SSAO)"
+
+msgid "GRAPHICS_GROUP_BLOOM"
+msgstr "Bloom and glow"
+
+msgid "GRAPHICS_GROUP_IMAGE"
+msgstr "Brightness and colours"
+
+msgid "GRAPHICS_CLOUDS_ENABLED"
+msgstr "Show clouds"
+
+msgid "GRAPHICS_CLOUD_QUALITY"
+msgstr "Cloud detail"
+
+msgid "GRAPHICS_HAZE_STRENGTH"
+msgstr "Haze strength"
+
+msgid "GRAPHICS_FOG_ENABLED"
+msgstr "Show volumetric fog"
+
+msgid "GRAPHICS_FOG_QUALITY"
+msgstr "Fog quality"
+
+msgid "GRAPHICS_FOG_STRENGTH"
+msgstr "Fog strength"
+
+msgid "GRAPHICS_SHADOWS_ENABLED"
+msgstr "Show sun shadows"
+
+msgid "GRAPHICS_SHADOW_QUALITY"
+msgstr "Shadow quality"
+
+msgid "GRAPHICS_SHADOW_SOFTNESS"
+msgstr "Shadow softness"
+
+msgid "GRAPHICS_SHADOW_DISTANCE"
+msgstr "Shadow distance"
+
+msgid "GRAPHICS_SSAO_ENABLED"
+msgstr "Show contact shadows"
+
+msgid "GRAPHICS_SSAO_QUALITY"
+msgstr "Contact shadow quality"
+
+msgid "GRAPHICS_SSAO_STRENGTH"
+msgstr "Contact shadow strength"
+
+msgid "GRAPHICS_BLOOM_ENABLED"
+msgstr "Show glow"
+
+msgid "GRAPHICS_BLOOM_STRENGTH"
+msgstr "Glow intensity"
+
+msgid "GRAPHICS_EXPOSURE"
+msgstr "Exposure"
+
+msgid "GRAPHICS_CONTRAST"
+msgstr "Contrast"
+
+msgid "GRAPHICS_SATURATION"
+msgstr "Saturation"
+
+msgid "FLEET_ENTRY"
+msgstr "Fleet trial"
+
+msgid "FLEET_TITLE"
+msgstr "FLEET TRIAL  /  HANGAR & CARGO"
+
+msgid "FLEET_INTRO"
+msgstr "Manage an expedition ship and lander, dock and transfer trial cargo. Each successful action is saved. A new trial uses its own save slot and preserves existing adventures. Flight and space progression will follow later."
+
+msgid "FLEET_NEW"
+msgstr "New fleet trial"
+
+msgid "FLEET_LOAD"
+msgstr "Load trial"
+
+msgid "FLEET_SHIPYARD"
+msgstr "Shipyard"
+
+msgid "FLEET_HOME"
+msgstr "Main menu"
+
+msgid "FLEET_EMPTY"
+msgstr "Create a new trial or load an existing one first."
+
+msgid "FLEET_DOCK"
+msgstr "Dock"
+
+msgid "FLEET_UNDOCK"
+msgstr "Undock"
+
+msgid "FLEET_CARGO_TITLE"
+msgstr "TRIAL CARGO / SAMPLES"
+
+msgid "FLEET_TRANSFER"
+msgstr "Transfer selected cargo to target ship"
+
+msgid "FLEET_DESIGN_TITLE"
+msgstr "TRY YOUR SAVED DESIGN"
+
+msgid "FLEET_SEARCH"
+msgstr "Search designs …"
+
+msgid "FLEET_FIRST"
+msgstr "First page"
+
+msgid "FLEET_MORE"
+msgstr "More designs"
+
+msgid "FLEET_INSTANTIATE"
+msgstr "Create another ship instance near the target"
+
+msgid "FLEET_NEW_FAILED"
+msgstr "The trial could not be prepared. The previous save is preserved."
+
+msgid "FLEET_NEW_READY"
+msgstr "New trial saved. Select the lander, choose the expedition ship as target and dock."
+
+msgid "FLEET_LOAD_FAILED"
+msgstr "This trial save cannot be loaded."
+
+msgid "FLEET_LOADED"
+msgstr "Fleet trial loaded."
+
+msgid "FLEET_HANGAR"
+msgstr "Hangar"
+
+msgid "FLEET_SYSTEM"
+msgstr "System space"
+
+msgid "FLEET_FREE"
+msgstr "free"
+
+msgid "FLEET_BAY"
+msgstr "Bay %d · %s"
+
+msgid "FLEET_SAMPLE"
+msgstr "Sample"
+
+msgid "FLEET_CARGO"
+msgstr "Trial cargo"
+
+msgid "FLEET_SPACE"
+msgstr " · %d cargo spaces"
+
+msgid "FLEET_DETAIL"
+msgstr "%s  |  Design revision %d  |  Cargo %d / %d  |  Energy %d / %d\nShip ID: %s\n%s"
+
+msgid "FLEET_DOCKED"
+msgstr "Docked at: "
+
+msgid "FLEET_READY"
+msgstr "Ready in system space"
+
+msgid "FLEET_SAVED"
+msgstr "Change saved."
+
+msgid "FLEET_ERROR"
+msgstr "Action not completed. The saved state is preserved."
+
+msgid "FLEET_ERROR_STALE"
+msgstr "The view is out of date. Please retry using the current state."
+
+msgid "FLEET_ERROR_OCCUPIED"
+msgstr "This bay is already occupied."
+
+msgid "FLEET_ERROR_DISTANCE"
+msgstr "Both ships must be nearby in the same system."
+
+msgid "FLEET_ERROR_CONNECTED"
+msgstr "To transfer cargo, the lander must be docked at the target ship."
+
+msgid "FLEET_ERROR_CAPACITY"
+msgstr "The target ship does not have enough free cargo space."
+
+msgid "FLEET_ERROR_DESIGN"
+msgstr "This design is incomplete or incompatible. Please check it in the shipyard."
+
+msgid "FLEET_ERROR_LIMIT"
+msgstr "The fleet trial supports up to 16 ships."
+
+msgid "CONSTRUCTION_NONE"
+msgstr "There is no active construction project."
+
+msgid "CONSTRUCTION_INVALID"
+msgstr "Unknown construction command."
+
+msgid "CONSTRUCTION_UNCHANGED"
+msgstr "The project is already in this state."
+
+msgid "CONSTRUCTION_RECOVERING"
+msgstr "Recovery is already underway. Assign residents to bring materials back."
+
+msgid "CONSTRUCTION_STORAGE_FULL"
+msgstr "There is not enough warehouse space for all materials. Free up storage first."
+
+msgid "CONSTRUCTION_PAUSED"
+msgstr "Construction paused. Material already in transit can still arrive."
+
+msgid "CONSTRUCTION_RESUMED"
+msgstr "Construction resumed. Assigned residents continue their work."
+
+msgid "CONSTRUCTION_RECOVERED"
+msgstr "Recovery complete. All construction materials are back in storage."
+
+msgid "CONSTRUCTION_RECOVERY_STARTED"
+msgstr "Construction cancelled. Residents will bring delivered materials back."
+
+msgid "CONSTRUCTION_INACTIVE"
+msgstr "Construction can only be managed while tribal play is active."
+
+msgid "CONSTRUCTION_SAVE_FAILED"
+msgstr "Saving failed. The project, materials and orders remain unchanged."
+
+msgid "CONSTRUCTION_TITLE"
+msgstr "{name} · {state}"
+
+msgid "CONSTRUCTION_STATE_ACTIVE"
+msgstr "Building"
+
+msgid "CONSTRUCTION_STATE_PAUSED"
+msgstr "Paused"
+
+msgid "CONSTRUCTION_STATE_RECOVERING"
+msgstr "Material recovery"
+
+msgid "CONSTRUCTION_WORKERS"
+msgstr "Assigned: {count} · stopped or blocked: {blocked}"
+
+msgid "CONSTRUCTION_MATERIAL_ROW"
+msgstr "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+
+msgid "CONSTRUCTION_RETURN_ROW"
+msgstr "{resource}: {returned}/{required} returned · {carried} carried · {delivered} on site"
+
+msgid "CONSTRUCTION_PAUSE"
+msgstr "Pause construction"
+
+msgid "CONSTRUCTION_RESUME"
+msgstr "Resume construction"
+
+msgid "CONSTRUCTION_ASSIGN"
+msgstr "Assign selected residents"
+
+msgid "CONSTRUCTION_CANCEL"
+msgstr "Cancel construction…"
+
+msgid "CONSTRUCTION_CONFIRM_CANCEL"
+msgstr "Cancel and recover materials"
+
+msgid "CONSTRUCTION_KEEP"
+msgstr "Keep project"
+
+msgid "CONSTRUCTION_CONFIRM_HINT"
+msgstr "Construction progress will be lost. Reserved materials are released; residents must return delivered and carried goods. The site stays occupied until recovery finishes."
+
+msgid "CONSTRUCTION_RECOVERY_HINT"
+msgstr "Assign residents or resume stopped residents. Materials reach storage only on arrival. Storage space is reserved for their return."
+
+msgid "CONSTRUCTION_PAUSE_HINT"
+msgstr "Pausing stops new pickups and building work. Carried goods may still arrive; other professions continue."
+
+msgid "BP_FAVORITES_ONLY"
+msgstr "Favorites only"
+
+msgid "BP_FAVORITE_ADD"
+msgstr "☆ Add to favorites"
+
+msgid "BP_FAVORITE_REMOVE"
+msgstr "★ Remove favorite"
+
+msgid "BP_FAVORITE_TOOLTIP"
+msgstr "Bookmarks this exact template revision on this device. Your campaign and exported template stay unchanged."
+
+msgid "BP_FAVORITE_SAVED"
+msgstr "This template is now a favorite."
+
+msgid "BP_FAVORITE_CLEARED"
+msgstr "The favorite bookmark was removed."
+
+msgid "BP_NO_FAVORITES"
+msgstr "No matching favorites. Mark a template as a favorite or change the search and filters."
+
+msgid "BP_ERROR_FAVORITES_FULL"
+msgstr "The favorites list is full. Remove a bookmark first."
+
+msgid "RECOVERY_TITLE"
+msgstr "Your creature has died"
+
+msgid "RECOVERY_COUNTDOWN"
+msgstr "Returning home in {seconds} sec."
+
+msgid "RECOVERY_PREPARING"
+msgstr "Preparing your home. You will return as soon as a safe spot is available."
+
+msgid "RECOVERY_BLOCKED"
+msgstr "The return location is still blocked. Searching continues. Press Esc for the pause menu."
+
+msgid "RECOVERY_KEEP"
+msgstr "Your discoveries, abilities and companions are preserved."
+
+msgid "RECOVERY_SAFE"
+msgstr "Back on your feet"
+
+msgid "RECOVERY_PROTECTION"
+msgstr "Health, food and water restored. Protected from damage for {seconds} more sec."
+
+msgid "RECOVERY_ATTACK"
+msgstr "Attacking ends your protection."
+
+msgid "BIND_JOURNAL"
+msgstr "Discovery journal"
+
+msgid "BIND_DEVELOPMENT"
+msgstr "Development"
+
+msgid "BIND_WORLD_MAP"
+msgstr "World map"
+
+msgid "BIND_ALL_CONTROLS"
+msgstr "GAME & MENUS · PRIMARY AND SECONDARY BINDINGS"
+
+msgid "BIND_MENUS_NOTE"
+msgstr "Menu shortcuts: single letters or digits. F, H, N and P are used by fixed game actions. Esc still closes a menu."
+
+msgid "BIND_FIXED_PLAY_KEY"
+msgstr "This key is already used by a fixed game action (F, H, N or P)."
+
+msgid "BIND_MENU_KEY_REQUIRED"
+msgstr "Please choose a letter or digit key for menus."
+
+msgid "BIND_MENUS_ADDED"
+msgstr "Your game bindings are preserved. New menu shortcuts have been assigned unused keys; review them below."
+
+msgid "BIND_JOURNAL_BUTTON"
+msgstr "Discovery journal · {journal}"
+
+msgid "BIND_TRIBE_HINT"
+msgstr "Your tribe · select villagers and give the group an order. {journal} opens your shared discoveries."
+
+msgid "BIND_SCAN_RECOGNIZED"
+msgstr "Species recognised · {journal} opens the discovery journal"
+
+msgid "BIND_FIRST_SCAN"
+msgstr "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+
+msgid "BIND_CONTROLS_HELP"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+
+msgid "GUIDE_TITLE"
+msgstr "YOUR PATH TO A TRIBE"
+
+msgid "GUIDE_INTRO"
+msgstr "Four chapters guide you from exploration to your first tribe. Choose what you want to learn next. Guidance is optional and does not change game objectives."
+
+msgid "GUIDE_CHAPTER_EXPLORE"
+msgstr "Explore"
+
+msgid "GUIDE_CHAPTER_SURVIVE"
+msgstr "Survive"
+
+msgid "GUIDE_CHAPTER_HOME"
+msgstr "Live together"
+
+msgid "GUIDE_CHAPTER_TRIBE"
+msgstr "Found a tribe"
+
+msgid "GUIDE_STEP_LOOK"
+msgstr "Look around"
+
+msgid "GUIDE_STEP_MOVE"
+msgstr "Explore your surroundings"
+
+msgid "GUIDE_STEP_JUMP"
+msgstr "Take a jump"
+
+msgid "GUIDE_STEP_INSPECT"
+msgstr "Scan a creature"
+
+msgid "GUIDE_STEP_EAT"
+msgstr "Find suitable food"
+
+msgid "GUIDE_STEP_DRINK"
+msgstr "Drink fresh water"
+
+msgid "GUIDE_STEP_HOME"
+msgstr "Establish a home"
+
+msgid "GUIDE_STEP_COMMAND"
+msgstr "Lead your companions"
+
+msgid "GUIDE_STEP_TRIBE"
+msgstr "Begin the tribal age"
+
+msgid "GUIDE_HINT_LOOK"
+msgstr "Move the mouse to look around your world."
+
+msgid "GUIDE_HINT_MOVE"
+msgstr "{forward} / {left} / {back} / {right} · Walk a few metres."
+
+msgid "GUIDE_HINT_JUMP"
+msgstr "{jump} · Jump from solid ground."
+
+msgid "GUIDE_HINT_INSPECT"
+msgstr "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+
+msgid "GUIDE_HINT_EAT"
+msgstr "{interact} · Approach food and interact with it. Your mouth determines what you can eat."
+
+msgid "GUIDE_HINT_DRINK"
+msgstr "{interact} · Drink at a reachable freshwater shore. Sea water will not help."
+
+msgid "GUIDE_HINT_HOME"
+msgstr "N · Open your nest group and establish a home on clear, level, dry ground."
+
+msgid "GUIDE_HINT_COMMAND"
+msgstr "N · Tell a companion or the whole group to Follow or Return home."
+
+msgid "GUIDE_HINT_TRIBE"
+msgstr "Call both companions home. At your home, open “Tribal age …” and confirm the transition."
+
+msgid "GUIDE_DETAIL_LOOK"
+msgstr "The camera follows your creature during play. Mouse sensitivity and inverted Y are available under Esc → Controls."
+
+msgid "GUIDE_DETAIL_MOVE"
+msgstr "Only distance actually travelled counts. Pushing against an obstacle does not complete this task."
+
+msgid "GUIDE_DETAIL_JUMP"
+msgstr "The same key moves you upwards in water. This task requires a jump from the ground."
+
+msgid "GUIDE_DETAIL_INSPECT"
+msgstr "A new scan takes 2.5 seconds; known species are recognised immediately. Open the discovery journal using its HUD button."
+
+msgid "GUIDE_DETAIL_EAT"
+msgstr "Plants provide foods such as fruit and vegetation. Prey provides meat. Attempts with a full stomach or unsuitable food do not count. The guide does not require a particular diet."
+
+msgid "GUIDE_DETAIL_DRINK"
+msgstr "Find a river or lake and approach the water. A successful drink restores thirst. With a full thirst bar you do not need to drink yet."
+
+msgid "GUIDE_DETAIL_HOME"
+msgstr "Two companions of your own species permanently belong to your home. Trees, water, steep edges or insufficient space prevent founding it. Near home, health regenerates when hunger and thirst are sufficiently replenished."
+
+msgid "GUIDE_DETAIL_COMMAND"
+msgstr "Orders are saved. Follow brings companions to you; Return home sends them back to the nest. Wait stops them. Wild animals of other species do not become group members through these orders."
+
+msgid "GUIDE_DETAIL_TRIBE"
+msgstr "You and both companions must be at home. Before confirmation, the game checks safe routes and workplaces. You can still cancel. After the transition you lead residents and assign village tasks. Guidance never confirms the transition for you."
+
+msgid "GUIDE_CARD_COUNT"
+msgstr "{chapter} · {done}/{total}"
+
+msgid "GUIDE_FOOTER"
+msgstr "Esc → First steps: chapters and help"
+
+msgid "GUIDE_CHOOSE"
+msgstr "Continue with: {chapter}"
+
+msgid "GUIDE_TOTAL"
+msgstr "{done}/{total} exercises completed. Progress belongs to this adventure."
+
+msgid "GUIDE_FUTURE"
+msgstr "This guide was saved by a newer game version. Its data is preserved; you can still read the help."
+
+msgid "GUIDE_DISABLED"
+msgstr "Guidance is turned off."
+
+msgid "GUIDE_RESTART"
+msgstr "Restart introduction"
+
+msgid "GUIDE_SKIP"
+msgstr "Turn off guidance"
+
+msgid "GUIDE_FINISHED"
+msgstr "INTRODUCTION COMPLETE"
+
+msgid "GUIDE_TRIBE_NEXT"
+msgstr "Select residents and assign work in your village. The chapters remain available as help in the pause menu."
+
+msgid "GUIDE_CONTEXT_WORLD"
+msgstr "Guidance resumes in the loaded game world."
+
+msgid "GUIDE_CONTEXT_FULL"
+msgstr "Your stomach is full. Keep exploring or choose another chapter until you need food again."
+
+msgid "GUIDE_CONTEXT_HYDRATED"
+msgstr "Your thirst bar is full. Keep exploring or choose another chapter until you need a drink."
+
+msgid "GUIDE_CONTEXT_READY"
+msgstr "Your group is ready. Open “Tribal age …” to check the village routes."
+
+msgid "GUIDE_CONTEXT_ANY_ORDER"
+msgstr "Actions count even before their chapter. You can choose chapters freely or turn guidance off."
+
+msgid "SAVE_SCAN_DISCOVER"
+msgstr "Finding adventures …"
+
+msgid "SAVE_SCAN_PROGRESS"
+msgstr "Checking adventures: {done} of {total} …"
+
+msgid "SAVE_HISTORY_LOADING"
+msgstr "Checking backups …"
+
+msgid "WILDLIFE_HUNT"
+msgstr "Hunting prey"
+
+msgid "WILDLIFE_CARRION"
+msgstr "Seeking carrion"
+
+msgid "WILDLIFE_EAT_CARCASS"
+msgstr "Eating carrion"

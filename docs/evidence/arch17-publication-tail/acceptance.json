@@ -1,0 +1,277 @@
+{
+  "source_commit": "2569690ed47547727520bd1bacc59f391d3747a0",
+  "source_tree": "ce7a673342208199a5c65da69750d9b0543de858",
+  "terrain_source_sha256": "0f8a982215f139315c94af4ceac440dee9418d867c3d1ef3fcc2e5389787c37c",
+  "lookahead": {
+    "failures": [],
+    "metrics": {
+      "collisions": 24,
+      "discarded_jobs": 1,
+      "discarded_publications": 1,
+      "generation": 14,
+      "lookahead_m": 31.9072993661393,
+      "max_operation_usec": {
+        "collider": 4390,
+        "land": 395,
+        "node": 297,
+        "shape": 95,
+        "water": 269
+      },
+      "operations": {
+        "collider": 54,
+        "land": 955,
+        "node": 955,
+        "shape": 54,
+        "water": 780
+      },
+      "pending_collisions": 0,
+      "pending_uploads": 0,
+      "published_generation": 14,
+      "refresh_queued": false,
+      "residency_checks": 520,
+      "residency_states": {
+        "cache": true,
+        "empty": true,
+        "mesh_before_node": true,
+        "retired": true,
+        "shared": true
+      },
+      "resident_peak": 888,
+      "staging_meshes": 0,
+      "tiles": 429,
+      "worker_active": false
+    },
+    "passed": true
+  },
+  "large_planets": [
+    {
+      "body": "m1b:terra",
+      "cache_hits": 0,
+      "contacts": 794,
+      "faces": 2,
+      "frames": 795,
+      "initial_publish_ms": 4.91,
+      "jobs": [
+        {
+          "mesh_ms": 2571.592,
+          "selection_ms": 538.748,
+          "tiles": 489,
+          "uploads": 489,
+          "worker_ms": 3110.403,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1451.875,
+          "selection_ms": 549.841,
+          "tiles": 579,
+          "uploads": 262,
+          "worker_ms": 2006.655,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 2074.001,
+          "selection_ms": 452.977,
+          "tiles": 495,
+          "uploads": 431,
+          "worker_ms": 2528.447,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 0.856,
+          "selection_ms": 470.033,
+          "tiles": 495,
+          "uploads": 2,
+          "worker_ms": 475.688,
+          "workers": 0
+        },
+        {
+          "mesh_ms": 0.743,
+          "selection_ms": 467.028,
+          "tiles": 495,
+          "uploads": 2,
+          "worker_ms": 469.371,
+          "workers": 0
+        },
+        {
+          "mesh_ms": 415.159,
+          "selection_ms": 520.377,
+          "tiles": 519,
+          "uploads": 42,
+          "worker_ms": 937.931,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 1.956,
+      "max_publish_ms": 5.678,
+      "max_upload_ms": 5.093,
+      "max_worker_ms": 3110.403,
+      "maximum_cell_width_m": 3.03792953491211,
+      "minimum_clearance_m": 1.00028675238082,
+      "peak_engine_static_bytes": 147646800,
+      "peak_resident_terrain_meshes": 1182,
+      "peak_tiles": 579,
+      "publish_deferrals": 0,
+      "publishes": 6,
+      "rays": 2024,
+      "rebases": 3,
+      "simulated_seconds": 13.25,
+      "terrain_ready_ms": 3166.571,
+      "waiting_frames": 377,
+      "walk_m": 167.121863216162
+    },
+    {
+      "body": "m1b:100",
+      "cache_hits": 0,
+      "contacts": 574,
+      "faces": 2,
+      "frames": 575,
+      "initial_publish_ms": 1.939,
+      "jobs": [
+        {
+          "mesh_ms": 1630.906,
+          "selection_ms": 144.631,
+          "tiles": 321,
+          "uploads": 321,
+          "worker_ms": 1775.604,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 798.501,
+          "selection_ms": 162.039,
+          "tiles": 369,
+          "uploads": 164,
+          "worker_ms": 961.778,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1086.704,
+          "selection_ms": 175.807,
+          "tiles": 369,
+          "uploads": 209,
+          "worker_ms": 1266.159,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1362.194,
+          "selection_ms": 160.706,
+          "tiles": 327,
+          "uploads": 154,
+          "worker_ms": 1526.921,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 2.074,
+      "max_publish_ms": 3.905,
+      "max_upload_ms": 6.645,
+      "max_worker_ms": 1775.604,
+      "maximum_cell_width_m": 3.0517578125,
+      "minimum_clearance_m": 1.00015985416701,
+      "peak_engine_static_bytes": 136417124,
+      "peak_resident_terrain_meshes": 779,
+      "peak_tiles": 369,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1495,
+      "rebases": 3,
+      "simulated_seconds": 9.58333333333333,
+      "terrain_ready_ms": 1810.627,
+      "waiting_frames": 157,
+      "walk_m": 167.35952720046
+    },
+    {
+      "body": "m1b:1000",
+      "cache_hits": 0,
+      "contacts": 681,
+      "faces": 2,
+      "frames": 682,
+      "initial_publish_ms": 4.876,
+      "jobs": [
+        {
+          "mesh_ms": 2141.898,
+          "selection_ms": 238.433,
+          "tiles": 375,
+          "uploads": 375,
+          "worker_ms": 2380.443,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1072.311,
+          "selection_ms": 473.736,
+          "tiles": 459,
+          "uploads": 192,
+          "worker_ms": 1550.888,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 1835.869,
+          "selection_ms": 339.452,
+          "tiles": 393,
+          "uploads": 341,
+          "worker_ms": 2175.939,
+          "workers": 4
+        },
+        {
+          "mesh_ms": 592.453,
+          "selection_ms": 258.245,
+          "tiles": 399,
+          "uploads": 66,
+          "worker_ms": 858.129,
+          "workers": 4
+        }
+      ],
+      "max_prepare_ms": 4.526,
+      "max_publish_ms": 4.784,
+      "max_upload_ms": 4.791,
+      "max_worker_ms": 2380.443,
+      "maximum_cell_width_m": 3.814697265625,
+      "minimum_clearance_m": 0.999734788852209,
+      "peak_engine_static_bytes": 142100300,
+      "peak_resident_terrain_meshes": 908,
+      "peak_tiles": 459,
+      "publish_deferrals": 0,
+      "publishes": 4,
+      "rays": 1718,
+      "rebases": 3,
+      "simulated_seconds": 11.3666666666667,
+      "terrain_ready_ms": 2459.51,
+      "waiting_frames": 263,
+      "walk_m": 167.318238347769
+    }
+  ],
+  "adaptive_planet": {
+    "contacts": 599,
+    "cross_face_probes": 2244,
+    "cube_faces": 2,
+    "maximum_clearance_m": 1.06685253105115,
+    "maximum_initial_publish_ms": 1.063,
+    "maximum_layout_tiles": 204,
+    "maximum_mesh_upload_ms": 2.862,
+    "maximum_publish_ms": 2.078,
+    "maximum_seam_m": 7.71703125792556e-05,
+    "maximum_water_seam_m": 7.6534939580597e-05,
+    "maximum_worker_ms": 559.707,
+    "p95_mesh_upload_ms": 1.1,
+    "peak_resident_terrain_meshes": 527,
+    "peak_tiles": 282,
+    "physics_edge_rays": 756,
+    "publishes": 17,
+    "rebases": 4,
+    "seam_probes": 12852,
+    "voxel_patches": 60,
+    "voxel_walls": 12824,
+    "walk_m": 246.395287573338
+  },
+  "accepted_tests": [
+    "terrain_lookahead_test at 2569690",
+    "adaptive_planet_test at 6dcddc0",
+    "large_planet_runtime_test at 6dcddc0"
+  ],
+  "incomplete_attempt": {
+    "log": "fachtests/terrain_lookahead_test.log",
+    "runner_exit_code": 0,
+    "accepted": false,
+    "reason": "No completion marker. Its runner success is not accepted as lifecycle evidence. Cause not reproduced; original report/log retained unchanged."
+  },
+  "reuse_basis": "Only terrain_lookahead_test.gd changed from 6dcddc0 to 2569690 (completion guard/progress). Terrain, benchmark and both other tests remain byte-identical.",
+  "scope": "Specialist checks only. Full integration/export/native graphics/target-PC acceptance remains open."
+}

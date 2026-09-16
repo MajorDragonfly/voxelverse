@@ -20,6 +20,8 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	# The assertions below deliberately exercise the German copy on every OS.
+	root.get_node("LocaleManager")._apply("de")
 	saves = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
 	saves._loaded_once = true

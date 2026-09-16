@@ -6,8 +6,12 @@
    im selben Chat nutze den vorhandenen Kontext; wiederhole den Einstieg nur bei
    einer neuen Basis, einem Konflikt oder einer geänderten Anforderung.
 2. `python3 tools/work_packet.py list` zeigt vorbereitete Teilaufträge.
-   `python3 tools/work_packet.py show ARCH-17-PUBLISH` gibt einen kleinen Kontext
+   `python3 tools/work_packet.py show ARCH-19-TARGET-PC` gibt einen kleinen Kontext
    mit Dateien, Schreibbereichen und relevanten Prüfverträgen aus.
+   `start PAKET-ID --owner CHAT` bündelt den Brief mit der datierten Basis.
+   Die aktuelle Vergabe steht in [Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137);
+   einmal zum Paketstart lesen (`python3 tools/project_dashboard.py round`). Eine
+   neuere ausdrückliche Zuweisung hat Vorrang; fehlende Einträge bedeuten nicht frei.
 3. Lies danach nur die betroffenen Implementierungen und die passenden Abschnitte
    in `docs/MODULE_CONTRACTS.md`. ROADMAP, alte Audits, alle PRs, alle Branches und
    fremde Checkouts gehören nicht zum Pflichtprogramm jedes Fachchats.
@@ -19,7 +23,8 @@
 
 - Eine Runde hat einen Integrationschat. Er ordnet Teilauftrags-ID, Besitzer,
   Branch, Basis-SHA und gemeinsame Schreibbereiche zu und hält die Belegung
-  zentral in **einer** Rundenliste im Integrationschat oder einem bestehenden Ticket.
+  zentral in **einer** Rundenliste in Issue #137. Bereits laufende Chats einmal
+  übernehmen; keine zweite Liste auf einem Fachbranch als Live-Belegung führen.
 - Eine ARCH-Nummer allein ist keine Reservierung: ARCH-14 enthält mehrere
   unterschiedliche Lieferungen. Nutze eindeutige IDs wie `ARCH-14-ENCOUNTERS`.
 - Der Paketkatalog ist ein Planungsvorschlag, keine Live-Sperre. Weder ein lokaler
@@ -30,8 +35,13 @@
 - Gemeinsame Schreibbereiche werden nacheinander bearbeitet oder ausdrücklich
   einem Integrationsbesitzer zugeteilt. Den nötigen Anschluss im Auftrag mitführen.
   Unerwartete Änderungen daran sind ein Anlass zur Abstimmung, kein Nebenprojekt.
-- Fachchats schreiben ihre kurze Übergabe im PR. Der Integrationschat aktualisiert
-  PROJECT_STATUS, NEXT_PARALLEL_WORK und zentrale Backlog-Häkchen einmal je Runde.
+- Fachchats schreiben ihre kurze Übergabe im PR; `work_packet.py handoff PAKET-ID
+  --base BASIS_SHA` liefert Commit/Tree/Diff vom sauberen Fachbranch, ohne Tests
+  zu wiederholen. Ergebnis, Prüfbeleg und Grenzen ergänzen.
+- Der Integrationschat aktualisiert `tools/workflow/project.json` einmal je Runde
+  und führt `python3 tools/project_dashboard.py render` aus. README, Dashboard,
+  PROJECT_STATUS und NEXT_PARALLEL_WORK werden daraus erzeugt. Fachchats pflegen
+  keine Kopien der zentralen Statusdaten; historische Backlogs sind Ziel-/Kontextquellen.
   Historische Messberichte bleiben Nachweise ihres jeweiligen Stands.
 
 ## Einmal gezielt prüfen
@@ -66,4 +76,4 @@ erst Mittelalter. Keine allgemeine Terrainzerstörung; kurze Orbitübergänge si
 erlaubt. Bestehende Nutzerdaten und Zukunftsversionsschutz erhalten.
 
 Details nur bei Bedarf: `docs/PARALLEL_WORKFLOW.md`,
-`docs/GODOT_TECHNICAL_DIRECTION.md`, `docs/ARCHITECTURE_BACKLOG.md`.
+`docs/PROJECT_TRACKING.md`, `docs/GODOT_TECHNICAL_DIRECTION.md`, `docs/ARCHITECTURE_BACKLOG.md`.

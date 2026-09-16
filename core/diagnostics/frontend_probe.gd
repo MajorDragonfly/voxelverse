@@ -94,9 +94,31 @@ func _run() -> void:
 	await _capture("pause")
 	_click(flow._overlay.find_child("PauseSettings", true, false))
 	await _frames(2)
+	_expect(settings.is_menu_open(), "Esc → Settings did not open the shared settings dialog.")
+	var tabs: TabContainer = settings._tabs
+	var bar: TabBar = tabs.get_tab_bar()
+	for tab in [1, 2, 3, 0]:
+		_click_position(bar.get_global_rect().position + bar.get_tab_rect(tab).get_center())
+		await _frames(2)
+		_expect(tabs.current_tab == tab and tabs.get_tab_control(tab).is_visible_in_tree(), "Settings tab %d is inaccessible from the pause menu." % tab)
+	_expect(settings._graphics_settings.controls.size() == 18, "Pause settings did not include every graphics control.")
+	_click(settings._menu_panel.find_child("AudioSettings", true, false))
+	await _frames(2)
+	var audio := get_node("/root/AudioManager")
+	_expect(is_instance_valid(audio._panel), "Audio settings are inaccessible from the pause menu.")
+	if is_instance_valid(audio._panel):
+		_expect(audio._panel._sliders.size() == 5 and audio._panel._preferences.size() == 2, "Pause settings did not include every audio preference.")
 	_key(KEY_ESCAPE)
 	await _frames(2)
-	_expect(tree.paused and flow.pause_open and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Settings close resumed underneath pause.")
+	_expect(not is_instance_valid(audio._panel) and settings.is_menu_open() and tree.paused and flow.pause_open, "Esc from audio did not return to settings while keeping the world paused.")
+	_key(KEY_ESCAPE)
+	await _frames(2)
+	_expect(not settings.is_menu_open() and tree.paused and flow.pause_open and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Settings close resumed underneath pause.")
+	_key(KEY_ESCAPE)
+	await _frames(2)
+	_expect(not tree.paused and not flow.pause_open, "Esc from the pause menu did not resume the world.")
+	_key(KEY_ESCAPE)
+	await _frames(2)
 	saves.record_design("user://building_designs/frontend_sentinel.json", '{"name":"First campaign only"}')
 	_click(flow._overlay.find_child("SaveGame", true, false))
 	await _frames(2)
@@ -177,7 +199,7 @@ func _exercise_first_steps(player: Node) -> void:
 	player.guidance_action.emit("move", 50.0)
 	_expect(not guide.visible and saves.guidance.export_state() == paused_progress, "Paused play advanced or showed the guide.")
 	await _capture("first_steps_help")
-	_click(flow._overlay.find_child("SkipFirstSteps", true, false))
+	await _click_first_steps_action(flow, "SkipFirstSteps")
 	await _frames(2)
 	_expect(not flow.pause_open and not guide.visible and bool(saves.guidance.data.skipped), "Skip did not resume and hide the introduction.")
 	await _restart_first_steps(flow)
@@ -291,8 +313,21 @@ func _restart_first_steps(flow: Node) -> void:
 	await _frames(2)
 	_click(flow._overlay.find_child("PauseFirstSteps", true, false))
 	await _frames(2)
-	_click(flow._overlay.find_child("RestartFirstSteps", true, false))
+	await _click_first_steps_action(flow, "RestartFirstSteps")
 	await _frames(2)
+
+func _click_first_steps_action(flow: Node, control_name: String) -> void:
+	# The expanded chapter help scrolls. Exercise an actual reachable click,
+	# just as the save-browser probe scrolls actions into view before pressing.
+	var button: Control = flow._overlay.find_child(control_name, true, false)
+	if button == null:
+		_expect(false, "Missing guidance control: " + control_name)
+		return
+	var scroll: ScrollContainer = flow.get_node("FirstSteps")._help_scroll
+	scroll.ensure_control_visible(button)
+	await _frames(3)
+	_expect(scroll.get_global_rect().encloses(button.get_global_rect()), "Guidance action is outside its scroll viewport: " + control_name)
+	_click(button)
 
 func _hold_key(code: Key, pressed: bool) -> void:
 	var event := InputEventKey.new()
@@ -306,6 +341,7 @@ func _exercise_save_browser(original: String) -> void:
 	var saves: Node = get_node("/root/SaveGameService")
 	var flow: Node = get_node("/root/SessionFlow")
 	var browser: Node = tree.current_scene.get_node("SaveBrowser")
+	await _browser_idle(browser)
 	for button: Button in browser._list.get_children():
 		if str(button.get_meta("slot_path")) == original:
 			browser._list.get_parent().ensure_control_visible(button)
@@ -321,6 +357,7 @@ func _exercise_save_browser(original: String) -> void:
 	browser._details.get_parent().ensure_control_visible(rename)
 	await _frames(2)
 	_click(rename)
+	await _browser_idle(browser)
 	await _frames(2)
 	_expect(saves.inspect_slot(original).name == "Erste Schritte – Basis", "Rename button did not update the selected slot.")
 	var original_bytes: String = FileAccess.get_file_as_string(original)
@@ -328,6 +365,7 @@ func _exercise_save_browser(original: String) -> void:
 	browser._details.get_parent().ensure_control_visible(copy)
 	await _frames(2)
 	_click(copy)
+	await _browser_idle(browser)
 	await _frames(2)
 	var copied: String = browser.selected_path
 	_expect(copied != original and FileAccess.get_file_as_string(original) == original_bytes, "Copy button altered the original slot.")
@@ -348,7 +386,9 @@ func _exercise_save_browser(original: String) -> void:
 	_click(tree.current_scene.find_child("Saves", true, false))
 	await _frames(3)
 	browser = tree.current_scene.get_node("SaveBrowser")
+	await _browser_idle(browser)
 	browser.select_slot(original)
+	await _browser_idle(browser)
 	await _frames(2)
 	var source: String = browser._entries[0].source
 	var source_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(source))
@@ -357,6 +397,7 @@ func _exercise_save_browser(original: String) -> void:
 	await _frames(3)
 	await _capture("save_history")
 	_click(restore)
+	await _browser_idle(browser)
 	await _frames(3)
 	_expect(browser.selected_path not in [original, copied], "Restore button did not select a new adventure.")
 	var restored: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(browser.selected_path))
@@ -475,3 +516,9 @@ func _click_position(point: Vector2) -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		failures.append(message)
+
+func _browser_idle(browser: Node) -> void:
+	var deadline := Time.get_ticks_msec() + 15000
+	while browser.is_loading() and Time.get_ticks_msec() < deadline:
+		await get_tree().process_frame
+	_expect(not browser.is_loading(), "Save browser did not finish loading.")

@@ -7,6 +7,10 @@ const SCHEMA: int = 1
 
 
 static func resolve(blueprint: Dictionary, skin: ArrayMesh = null) -> Dictionary:
+	var revision_error: String = Surface.Blueprint.Contract.version_error(blueprint, "creature")
+	if not revision_error.is_empty():
+		return {"schema": SCHEMA, "frame": "BodyV4", "forward": "-Z", "up": "+Y",
+			"source": "unsupported", "sockets": {}, "errors": [revision_error]}
 	var data: Dictionary = Data.read(blueprint)
 	var errors: Array[String] = Data.validate(data)
 	var result: Dictionary = {"schema": SCHEMA, "frame": "BodyV4", "forward": "-Z", "up": "+Y",

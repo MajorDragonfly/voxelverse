@@ -161,7 +161,9 @@ func _check_editor_and_unlocks() -> void:
 	for row: Dictionary in Records.part_rows(state, "", "mouth"):
 		if row.id in MODELS: check(row.unlocked, "Journal disagrees with editor unlock")
 	var source_state: Dictionary = state.duplicate(true)
-	for id: String in MODELS: source_state.unlocked_parts.erase(id)
+	# A pre-model save has none of the variants of its earned source profile.
+	for model: Dictionary in Mouths.get_parts():
+		if model.unlock_source == "mouth_predator_jaws": source_state.unlocked_parts.erase(model.id)
 	var original: String = JSON.stringify(source_state)
 	check(progress.import_state(source_state), "Old earned mouth state rejected")
 	check(JSON.stringify(source_state) == original, "Migration rewrote input snapshot")
@@ -190,7 +192,7 @@ func _check_editor_and_unlocks() -> void:
 	_check_runtime(design)
 	check(Assembly.save_to_file(design, SAVE) == OK, "Mouth save failed")
 	var file := FileAccess.open("user://mouth_models_expected.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify({"design_id": design.design_id, "parts": Assembly.BaseBlueprint._serialize_blueprint(design).parts, "progression": state, "game": root.get_node("GameState").export_state()}))
+	file.store_string(JSON.stringify({"design_id": design.design_id, "parts": Assembly.serialize_snapshot(design).parts, "progression": state, "game": root.get_node("GameState").export_state()}))
 	file.close()
 
 
@@ -199,7 +201,7 @@ func _verify_restart() -> void:
 	root.get_node("GameState").import_state(expected.game, false)
 	var loaded: Dictionary = Assembly.load_from_file(SAVE)
 	check(loaded.get("design_id") == expected.design_id, "Restart changed design identity")
-	check(JSON.parse_string(JSON.stringify(Assembly.BaseBlueprint._serialize_blueprint(loaded).parts)) == expected.parts, "Restart changed mouth IDs, UIDs or transforms")
+	check(JSON.parse_string(JSON.stringify(Assembly.serialize_snapshot(loaded).parts)) == expected.parts, "Restart changed mouth IDs, UIDs or transforms")
 	var progress: Node = root.get_node("ProgressionService")
 	check(progress.import_state(expected.progression), "Restart rejected mouth progression")
 	for id: String in MODELS: check(progress.is_part_unlocked(id), "Restart lost model unlock")

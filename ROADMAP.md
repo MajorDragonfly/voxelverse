@@ -1,10 +1,22 @@
 # Voxelverse – gemeinsame Entwicklungsroadmap
 
 Aktueller Lieferstand und feste Basis: [PROJECT_STATUS](docs/PROJECT_STATUS.md).
+Gewichteter Fortschritt, Folgepakete und Prioritäten: [Dashboard](docs/PROJECT_DASHBOARD.md).
+Diese Statusansichten entstehen aus einer gemeinsamen Datei; historische Abschnitte unten sind keine Live-Belegung.
 Die Lieferungen #78–89 sind über PR #90 in `main` enthalten. Für Fachchats gilt
 [AGENTS.md](AGENTS.md); die Roadmap wird nach Bedarf abschnittsweise gelesen.
 Der Integrationschat aktualisiert gemeinsame Lieferstände einmal je Runde.
 Historische Berichte belegen ihren damaligen Commit, keine heutige Abnahme.
+
+## Zweite Integration am 15. September
+
+Der gemeinsame Kandidat auf `agent/integration-vegetation-nest-20260915` vereinigt
+#93–109: Terrain-/Audioarbeit, Archive, neue Teile/Gelenke, DE/EN-Werkstatt, Dorf und Entdeckungsbuch,
+HUD, zwei eigene Siedlungen, Schiffseditor und bessere Fachtestauswahl. Hinzu kommen
+sechs prozedurale Beerenformen und ein neu aufgebautes Voxelzweignest mit stabiler
+Identität. [Lieferliste, Korrekturen und Abnahme](docs/INTEGRATION_2026-09-15_RESOURCES.md).
+Schiffsflug, weitere Epochen, automatische Archivbereinigung und Ziel-PC-FPS
+bleiben eigenständige Folgeziele. Ältere Abschnitte behalten ihren datierten Kontext.
 
 ## Lieferhistorie: 10. September
 
@@ -99,7 +111,7 @@ Punkte kommen aus abgeschlossenen, identifizierbaren Spielereignissen. Käufe, V
 
 ## Neu: planetare Tierrollen und Zähmung
 
-**Status: D1–D3 sind zusammengeführt; die Kampagne auf der Ebene und der begrenzte Kugelbereich bleiben getrennte Laufzeiten.** Vorhandenes Befreunden und Heimgefährten sind nicht mit Tierhaltung gleichzusetzen.
+**Status: D1–D3 und die Eierproduktion sind in der gemeinsamen Kugelkampagne angebunden.** Vorhandenes Befreunden und Heimgefährten sind nicht mit Tierhaltung gleichzusetzen.
 
 | Rolle | Mindestfunktion | Erforderliche Artmerkmale | Spielbarer Nachweis |
 |---|---|---|---|
@@ -130,6 +142,69 @@ Der zusammengeführte D1-Grundvertrag mit drei Pflichtarten bleibt als eigene Li
 - **Minimap als geprüftes Fachpaket:** unten rechts, gemeinsames Gelände-/Wasserraster, Blickrichtung, Heimat und eigene Gruppenmitglieder. Der bestätigte Phasenwechsel erweitert den Maßstab automatisch; manuell +/− und Rückkehr zum Phasenmaßstab. Körpergebundene Projektion für V9 und Kugelplaneten, Save/Load sowie getrennte Dorfbedienung bei 1280 × 720 und 800 × 600 geprüft. Details und Grenzen: [WORK_MINIMAP.md](docs/WORK_MINIMAP.md). In der zweiten Integrationsrunde samt dauerhafter Weltkarte übernommen. Offen bleiben gespeicherte Wegpunkte, eigene gezähmte Tiere aus D2 und später passende Orbit-/Systemkarten; unbekannte Arten und Rohstoffe werden nicht verraten.
 - **Abnahme auf dem Ziel-PC:** Lesbarkeit der Bücher und Silhouetten, neue Beerenstrauchform, E als einziger Art-/Wertezugriff und passende Drehrichtung im Editor. Die lokale automatische Funktionsprüfung ersetzt die optische Abnahme nicht.
 
+### Grafik- und Atmosphäreneinstellungen · Auftrag vom 15. September 2026
+
+**ATMOSPHERE-SHADERS:** [PR #117](https://github.com/MajorDragonfly/voxelverse/pull/117)
+ist im [gemeinsamen Spieltest-Kandidaten](docs/INTEGRATION_2026-09-15_PLAYTEST.md)
+enthalten; native CI und Ziel-PC-Abnahme sind gesondert zu prüfen. [Paket und Bedienung](docs/WORK_ATMOSPHERE_SHADERS.md).
+
+- [x] Im Fachbranch umgesetzt: gemeinsamer Reiter **Einstellungen → Grafik** mit
+  **Basis / Atmosphärisch / Cineastisch**, verständlicher Erklärung pro Stufe,
+  Übernehmen/Speichern und Wiederherstellung nach Neustart. Hauptmenü und
+  Spielpause verwenden denselben Einstellungsdialog; F8 öffnet ihn direkt.
+- [ ] **ATMOSPHERE-SETTINGS-DETAIL:** Im selben Grafikreiter die Effekte einzeln
+  einstellbar machen; nach eigener Änderung das Preset als „Benutzerdefiniert“
+  anzeigen und die Werte unabhängig vom gewählten Spielstand speichern.
+
+| Geplanter Einzelregler | Bedienung / Wirkung |
+|---|---|
+| Wolken | Darstellung ein/aus und Detailqualität; planetare Bewölkung bleibt beim Wettermodell |
+| Entfernungsdunst | Darstellungsstärke; Klima, Sichtbedingungen und Gefahren bleiben beim Wettermodell |
+| Volumetrischer Nebel / Lichtstrahlen | Ein/aus, Darstellungsqualität und Stärke |
+| Sonnenschatten | Ein/aus, Qualität, Weichheit und Reichweite |
+| Kontaktschatten (SSAO) | Ein/aus, Stärke und Qualität |
+| Bloom / Leuchteffekte | Ein/aus und Stärke |
+| Bildhelligkeit und Farben | Belichtung, Kontrast und Sättigung mit begrenzten, rücksetzbaren Werten |
+
+**Abnahme des Folgepakets:** Presets setzen reproduzierbare Werte; eigener Reglerstand
+übersteht Menüwechsel, Neustart, Laden und Planetenwechsel. „Übernehmen“ aktiviert,
+„Zurück“ verwirft unübernommene Werte, „Standard wiederherstellen“ bietet eine klare
+Rückkehr. Nicht unterstützte Effekte werden verständlich gekennzeichnet. DE/EN,
+Tastatur/Maus, kleine Fenster und größere UI-Skalierung bleiben bedienbar.
+Darstellung vor/nach dem Wechsel, Unterwasserübergänge und Leistung auf dem Ziel-PC
+prüfen. Grafikregler verändern weder Wettergefahren noch die Simulationsregeln.
+
+Der Wetterchat besitzt Klima/Wetterereignisse; der Planeten-Renderchat besitzt
+Terrain, Materialien und Ladebereitschaft. Die individuellen Grafikregler nutzen
+den vorhandenen Atmosphärencontroller und den gemeinsamen Einstellungsdialog.
+## Planetenwetter – friedliche Heimat und spätere Extremwelten
+
+**Nutzerauftrag vom 15.09.2026:** Der Startplanet bleibt beim Wetter friedlich und
+erdähnlich: freundlicher Himmel, Wolken, sanfter Wind, Nieselregen und normale
+Regenschauer. Keine Feuer-/Sandstürme oder wetterbedingter Überlebenszwang auf der
+Heimatwelt. Spätere Extremplaneten können gefährliche Sand-, Feuer- und
+Schneestürme erhalten; Vorwarnung und erreichbarer Schutz gehören dazu.
+
+**WEATHER-01 – im gemeinsamen Spieltest-Kandidaten:** deterministische Wetterfronten
+an der gespeicherten Kampagnenzeit, weiche Übergänge, radiale Voxelwolken und
+begrenzter Nahregen, Pause/Laden sowie Unterwasser-/Dachunterdrückung. Aktuell
+bleiben alle Kampagnenkörper mild. Rendering und Shader erhalten einen gemeinsamen
+lesbaren Wetteranschluss; native Grafik-/Leistungsabnahme steht aus.
+
+**WEATHER-02A – im gemeinsamen Spieltest-Kandidaten:** regionale Schauer-/Wolkenbänder,
+Temperatur-/Feuchteanpassung, sanfter Schnee/Schneeregen, Windböen und ein lesbarer
+Drei-Minuten-Ausblick. Cube-Kanten und Pole verwenden ein gemeinsames stetiges
+Feld; atmosphärenlose Deskriptoren unterdrücken Wetter. Alle aktuellen Körper
+bleiben ungefährlich.
+
+**Weiter geplant:** WEATHER-02 versioniert planetare Klimazonen und den dauerhaften
+Schutz der Startwelt; WEATHER-03 setzt Sand-/Feuerstürme mit Vorwarnung um;
+WEATHER-04 verbindet Schutz, Hitze-/Staubexposition und Deckungsverhalten von
+Tieren/Bewohnern mit bestehenden Fachbesitzern; WEATHER-05 ergänzt Shader, Ton,
+Warnungen, Qualitätsregler und den gemeinsamen Ziel-PC-Spieltest. Extremprofile
+bleiben bis zur sicheren Reise-/Schutzkette deaktiviert. Details, Abnahmen und
+Übergabe an die parallelen Rendering-/Shader-Arbeiten: [Wetterplan](docs/WEATHER_PLAN.md).
+
 ## Weltraumphase – mobile Expeditionsbasis
 
 Das erste Expeditionsschiff ist bereits deutlich größer als sein Landungs-/Erkundungsschiff. Die Basis bleibt beim Planeten im Weltraum, während der Spieler mit einem konkreten Beiboot landet, aussteigt und die Oberfläche untersucht. Schiffwechsel sind Kontroll-/Ortswechsel innerhalb derselben Kampagne und Epoche.
@@ -140,7 +215,10 @@ Schiffe, angedockte Beiboote, Fracht und Proben besitzen eindeutige Eigentümer 
 
 Die sechs Unterpakete, Modulgruppen, Fortschrittsstufen und Abnahmen stehen im [Expeditionsplan](docs/SPACE_EXPEDITION_PLAN.md). Diese Ergänzung plant die spätere Phase und startet keine konkurrierende Weltraumimplementierung während des Kugelumzugs.
 
-## Meilensteine mit tatsächlichem Status
+## Meilensteine und Abnahmeziele
+
+Aktuelle gemeinsame Quellen und neue Fachlieferungen stehen im [Dashboard](docs/PROJECT_DASHBOARD.md).
+Die folgende Gliederung bewahrt Ziele und bisherige Teillieferungen; sie ist keine zweite Prozent- oder Belegungsliste.
 
 | ID | Status und nächstes Ergebnis | Voraussetzung | Abnahme |
 |---|---|---|---|
@@ -161,13 +239,13 @@ Die sechs Unterpakete, Modulgruppen, Fortschrittsstufen und Abnahmen stehen im [
 | D1-EIER | **Integriert:** vierte Eierart mit additiver Katalogmigration und erreichbarem Kugelhabitat | Geprüfter D1-Grundvertrag und versionierte Katalogmigration | Vierte geeignete Art deterministisch und erreichbar; bestehende Arten/Individuen bleiben erhalten; Mehr-Seed-/Neustartprüfung |
 | D2 | Kampagnenzähmung, dauerhafte Befehle und radialer Host zusammengeführt | D1, M5 | Eignung/Kosten/Phase prüfen; Tier folgt/wartet/kehrt zurück; Unterbrechung, Tod, Laden und Besitz geprüft |
 | D3 | Tierpflege, Milch und Transport zusammengeführt; produktiver D2-Leseanschluss ergänzt | D2, gemeinsame Dorfvorräte | Betreuung → Produktion → Transport → Verbrauch, keine Doppelernte; Futter/Wasser/Haltungskosten wirken |
-| D3-EIER | **Geplant:** Eier sammeln, transportieren und als Nahrung nutzen | D1-EIER, D2, gemeinsame D3-Haltungs-/Produktionsbasis und Dorfaufträge | Versorgung → Legestelle → Sammelauftrag → Lager → Verbrauch; genau ein Produktionsbesitzer, Save/Load und unterbrochener Transport ohne Verlust/Dopplung |
+| D3-EIER | **Integriert über #90:** Eier sammeln, transportieren und als Nahrung nutzen | D1-EIER, D2, gemeinsame D3-Haltungs-/Produktionsbasis und Dorfaufträge | Versorgung → Legestelle → Sammelauftrag → Lager → Verbrauch; genau ein Produktionsbesitzer, Save/Load und unterbrochener Transport ohne Verlust/Dopplung |
 | D4 | **Neu:** Reiten und Pflügen | D2, M2B, Feld-/Routenmodell | Passender Reitsitz, sichere Auf-/Abstiege; Zugtier mit Pflug bearbeitet reale Felder, Arbeitsfortschritt speicherbar |
-| M6 | Erneuerbare Wirtschaft, Berufe, Hütten/Zelte, sechs Bewohner, Tierhaltung und erste Nachbarhilfe; radiale Migration offen | M5, D1–D4 schrittweise | Erneuerbare Versorgung, Wasser, weitere Rohstoffe, Berufe, Wachstum, frei gebaute Häuser, Tiere und Nachbargruppen |
+| M6 | Erneuerbare Wirtschaft, Berufe, Hütten/Zelte, sechs Bewohner, Tierhaltung und erste Nachbarhilfe auf der Kugel; weiterer Gesellschaftsausbau offen | M5, D1–D4 schrittweise | Erneuerbare Versorgung, Wasser, weitere Rohstoffe, Berufe, Wachstum, frei gebaute Häuser, Tiere und Nachbargruppen |
 | M7 | **Geplant:** Antike/Mittelalter | Belastbares M6 | Landwirtschaft, Handwerk, Lager/Transport/Handel, Wege und mehrere Siedlungen; eigene Spezies bleibt Träger aller Fraktionen; bestätigter Wechsel |
 | M8 | **Geplant:** Neuzeit/Weltmacht | M7, globale Orte/Simulation | Industrie/Energie, Ressourcenketten, Staaten, Diplomatie/Armeen, globale Karte; Tiere/Bestände werden übernommen; bestätigter Wechsel |
 | M9 | **Geplant:** Weltraum mit modularer Expeditionsbasis und Beibooten | M8, vollständige Kugelkampagne auf M1b/M1c/M1d und Folgeadaptern | Großes Schiff steuern → Beiboot abdocken → Planetenanflug/Landung/Ausstieg → untersuchen → zurückkehren/andocken → Schiff ausbauen; danach weitere Systeme und versorgte Kolonien |
-| M9.1 | **Geplant:** Schiffvertrag und erster modularer Editor für Expeditionsschiff/Beiboot | Bauplanfundament, Weltadressen, M8-Wirtschaft | Zwei eigene Entwürfe mit wirkenden Modulen, Größen-/Kapazitätsprüfung, Hangareignung und Save/Load |
+| M9.1 | **Teilweise:** Schiffvertrag und modularer Editor im Kandidaten #125; Schiffsinstanzen als Fachlieferung #129. Produktiver Bau-/Wirtschaftsanschluss offen | Bauplanfundament, Weltadressen, M8-Wirtschaft | Zwei eigene Entwürfe mit wirkenden Modulen, Größen-/Kapazitätsprüfung, Hangareignung und Save/Load |
 | M9.2 | **Geplant:** vollständige erste Expedition in einem System | M9.1, Flug/Kollision/Übergaben, Kugelkampagne | Beide Schiffe direkt steuern; abdocken, landen, aussteigen, untersuchen und zur mobilen Basis zurückkehren |
 | M9.3 | **Geplant:** Forschung, Proben und planetare Untersuchung | M9.2, vorhandene Entdeckungs-/Kartendienste | Erkenntnisse erhalten, Proben transportieren und einmalig auswerten |
 | M9.4 | **Geplant:** größere Rümpfe, Ausstattung und Fracht-/Modulkapazität | M9.3, Technologie, Ressourcen, Bau-/Leistungsbudget | Größeren Baubereich erschließen und tatsächlich umbauen; Schiffe/Fracht bleiben erhalten |

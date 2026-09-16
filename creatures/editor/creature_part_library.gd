@@ -1,6 +1,8 @@
 extends RefCounted
 class_name CreaturePartLibrary
 
+const TailCatalog = preload("res://creatures/catalog/creature_tail_catalog.gd")
+const TailGeometry = preload("res://creatures/editor/creature_tail_geometry.gd")
 const MouthCatalog = preload("res://creatures/catalog/creature_mouth_catalog.gd")
 const MouthGeometry = preload("res://creatures/editor/creature_mouth_geometry.gd")
 const HandCatalog = preload("res://creatures/catalog/creature_hand_catalog.gd")
@@ -10,6 +12,7 @@ const FootGeometry = preload("res://creatures/editor/creature_foot_geometry.gd")
 
 const CATEGORY_BODY: String = "body"
 const CATEGORY_MOUTH: String = "mouth"
+const CATEGORY_HEAD: String = "head"
 const CATEGORY_EYES: String = "eyes"
 const CATEGORY_LEGS: String = "legs"
 const CATEGORY_ARMS: String = "arms"
@@ -34,6 +37,11 @@ static func get_categories() -> Array:
 			"id": CATEGORY_MOUTH,
 			"name": "Mouth",
 			"icon": "▸",
+		},
+		{
+			"id": CATEGORY_HEAD,
+			"name": "Head modules",
+			"icon": "↝",
 		},
 		{
 			"id": CATEGORY_EYES,
@@ -298,6 +306,8 @@ static func get_default_position(
 	match category_id:
 		CATEGORY_MOUTH:
 			return Vector3(0.0, 0.08, -body_shape.z * 0.56)
+		CATEGORY_HEAD:
+			return Vector3(0.0, body_shape.y * 0.38, -body_shape.z * 0.49)
 		CATEGORY_EYES:
 			return Vector3(0.34, body_shape.y * 0.35, -body_shape.z * 0.42)
 		CATEGORY_LEGS:
@@ -879,14 +889,14 @@ static func _get_placeable_parts() -> Array:
 	]
 
 	# Add models after the frozen legacy catalog; copy existing gameplay values.
-	for model: Dictionary in MouthCatalog.get_parts():
+	for model: Dictionary in MouthCatalog.get_parts() + TailCatalog.get_parts():
 		for source: Dictionary in result:
 			if source.id == model.stats_source:
 				model["stats"] = source.stats.duplicate(true)
 				model["complexity"] = source.complexity
 				model["default_scale"] = source.default_scale
 				break
-		model["voxels"] = MouthGeometry.legacy_voxels(model.id, model.geometry_revision)
+		model["voxels"] = TailGeometry.legacy_voxels(model.id, model.geometry_revision) if model.category == CATEGORY_TAIL else MouthGeometry.legacy_voxels(model.id, model.geometry_revision)
 		result.append(model)
 	return result
 

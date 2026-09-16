@@ -16,18 +16,18 @@ func _ready() -> void:
 	_saves = get_node("/root/SaveGameService")
 	_flow = get_node("/root/SessionFlow")
 	var margin := MarginContainer.new()
-	margin.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	margin.offset_left = -460
-	margin.offset_top = -74
-	margin.offset_right = -28
-	margin.offset_bottom = -24
+	margin.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
+	margin.offset_left = -220
+	margin.offset_top = 84
+	margin.offset_right = 220
+	margin.offset_bottom = 106
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(margin)
 	_label = Label.new()
 	_label.name = "SaveStatus"
-	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_label.add_theme_font_size_override("font_size", 20)
+	_label.add_theme_font_size_override("font_size", 14)
 	_label.add_theme_color_override("font_color", Style.TEXT)
 	_label.add_theme_color_override("font_shadow_color", Style.INK)
 	_label.add_theme_constant_override("shadow_offset_x", 2)

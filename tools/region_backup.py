@@ -52,6 +52,11 @@ class Stats:
 
 
 @dataclass(frozen=True)
+class EncounterReference:
+    pass
+
+
+@dataclass(frozen=True)
 class PlaceReference:
     atlas: dict
 
@@ -204,7 +209,41 @@ def _atlas_root(atlas, body_id: str) -> str:
     return _storage_root(atlas.get("storage"))
 
 
-def _roots(snapshot: dict, depth: int = 0) -> Iterator[tuple[str, dict | PlaceReference | None]]:
+def _encounter_payload(key: str, value: dict) -> None:
+    _require(set(value) == {"schema", "entry"}, "Unsupported encounter payload fields")
+    _version(value.get("schema"), (1,), "encounter payload")
+    entry = value.get("entry")
+    _require(isinstance(entry, dict), "Invalid encounter payload")
+    if not entry:  # An explicit tombstone retains earlier immutable snapshots.
+        return
+    fields = {"object_id", "species_id", "body_id", "region_id", "relation", "trust", "health_ratio",
+              "need_origin", "player_harmed", "conflict_relation", "conflict_reason", "dead", "carcass_food"}
+    _require(fields <= set(entry) <= fields | {"habitat"}, "Unsupported encounter entry fields")
+    _require(entry["object_id"] == key, "Encounter identity mismatch")
+    for field in ("object_id", "species_id", "body_id", "region_id"):
+        _require(isinstance(entry[field], str) and 0 < len(entry[field]) <= 256, "Invalid encounter identity")
+    for field in ("trust", "health_ratio", "carcass_food"):
+        number = entry[field]
+        _require(type(number) in (int, float) and math.isfinite(number)
+                 and 0 <= number <= (1 if field == "health_ratio" else 100), "Invalid encounter value")
+    _require(entry["relation"] in ("wild", "ally", "hostile")
+             and entry["need_origin"] in ("none", "environment", "third_party", "player")
+             and entry["conflict_relation"] in ("", "prey", "hostile", "ally", "wild")
+             and entry["conflict_reason"] in ("", "hunt", "self_defense", "unprovoked"), "Invalid encounter evidence")
+    _require(type(entry["dead"]) is bool and type(entry["player_harmed"]) is bool
+             and entry["dead"] == (entry["health_ratio"] == 0)
+             and (entry["relation"] != "ally" or entry["trust"] == 100), "Invalid encounter flags")
+    if "habitat" in entry:
+        habitat = entry["habitat"]
+        _require(isinstance(habitat, dict) and set(habitat) == {"cell", "role", "species_seed", "individual_seed"},
+                 "Unsupported encounter habitat")
+        _require(isinstance(habitat["cell"], str) and 0 < len(habitat["cell"]) <= 64
+                 and habitat["role"] in ("forager", "grazer", "scavenger", "predator", "climber", "swimmer")
+                 and _integer(habitat["species_seed"], 0, 9007199254740991)
+                 and _integer(habitat["individual_seed"], 0, 2147483647), "Invalid encounter habitat")
+
+
+def _roots(snapshot: dict, depth: int = 0) -> Iterator[tuple[str, dict | PlaceReference | EncounterReference | None]]:
     _require(depth <= MAX_ARCHIVE_DEPTH, "Migration archive nesting exceeds the backup budget")
     # Versions 1/2 refer to loose editor files; claiming a self-contained export
     # for them would silently omit those designs. Use the existing migration.
@@ -215,6 +254,20 @@ def _roots(snapshot: dict, depth: int = 0) -> Iterator[tuple[str, dict | PlaceRe
     campaign = state.get("campaign")
     _require(isinstance(campaign, dict), "Missing campaign")
     _version(campaign.get("schema"), range(1, 4), "campaign")
+    progression = snapshot.get("progression", {})
+    _require(isinstance(progression, dict), "Invalid progression snapshot")
+    encounters = progression.get("creature_encounters")
+    if encounters is not None:
+        _require(isinstance(encounters, dict), "Invalid encounter ledger")
+        _version(encounters.get("schema"), (1, 2), "creature encounters")
+        if encounters["schema"] == 2:
+            _require(set(encounters) == {"schema", "storage"}, "Unsupported encounter archive fields")
+            root = _storage_root(encounters.get("storage"))
+            if root:
+                yield root, EncounterReference()
+        else:
+            _require(set(encounters) == {"schema", "entries"}
+                     and isinstance(encounters.get("entries"), dict), "Invalid inline encounter ledger")
     bodies = campaign.get("bodies")
     _require(isinstance(bodies, dict), "Missing body register")
     for body in bodies.values():
@@ -263,7 +316,7 @@ def _blob_path(directory: Path, digest: str) -> Path:
     return shard / (digest + ".json")
 
 
-def _walk(directory: Path, root: str, stats: Stats, atlas: dict | PlaceReference | None = None) -> Iterator[tuple[str, bytes]]:
+def _walk(directory: Path, root: str, stats: Stats, atlas: dict | PlaceReference | EncounterReference | None = None) -> Iterator[tuple[str, bytes]]:
     if isinstance(atlas, PlaceReference):
         yield from _walk_places(directory, root, stats, atlas.atlas)
         return
@@ -280,7 +333,9 @@ def _walk(directory: Path, root: str, stats: Stats, atlas: dict | PlaceReference
         if key is not None:
             _require(value.get("key") == key and isinstance(value.get("value"), dict),
                      f"Region payload belongs to a different index key: {key}")
-            if atlas is not None:
+            if isinstance(atlas, EncounterReference):
+                _encounter_payload(key, value["value"])
+            elif atlas is not None:
                 _atlas_key(key, atlas)
                 tile = value["value"]
                 _version(tile.get("schema"), (1,), "atlas tile")
@@ -547,9 +602,22 @@ def main(argv=None) -> int:
     userdata.add_argument("--output", type=Path, required=True)
     full_verify = commands.add_parser("verify-user-data", help="Verify all bytes of a complete user-data archive")
     full_verify.add_argument("directory", type=Path)
+    retention = commands.add_parser("plan-retention", help="Inventory a stopped game and retain every blob; never delete")
+    retention.add_argument("--user-data", type=Path, required=True)
+    retention.add_argument("--output", type=Path, required=True)
+    retention_verify = commands.add_parser("verify-retention", help="Recheck a retain-only plan against its exact source generation")
+    retention_verify.add_argument("directory", type=Path)
+    retention_verify.add_argument("--user-data", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
-        if args.command in ("export-user-data", "verify-user-data"):
+        if args.command in ("plan-retention", "verify-retention"):
+            if __package__:
+                from .region_retention import plan_retention, verify_retention
+            else:
+                from region_retention import plan_retention, verify_retention
+            result = (plan_retention(args.user_data, args.output) if args.command == "plan-retention"
+                      else verify_retention(args.user_data, args.directory))
+        elif args.command in ("export-user-data", "verify-user-data"):
             if __package__:
                 from .region_backup_userdata import export_userdata, verify_userdata
             else:

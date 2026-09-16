@@ -1,0 +1,40 @@
+{
+  "command": [
+    "/workspace/scratch/2c2866d70564/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/176ae31ef22c/voxelverse-hunting",
+    "--script",
+    "res://tests/wildlife_hunting_world_test.gd"
+  ],
+  "exit_code": 0,
+  "seconds": 33.592961839000054,
+  "source_before": {
+    "commit": "4731c25b85e54217966b3bbd481a8781b014ed56",
+    "tree": "b312ae37b04d7b4fc32c46c737aa2eded9647bee",
+    "status": ""
+  },
+  "source_after": {
+    "commit": "4731c25b85e54217966b3bbd481a8781b014ed56",
+    "tree": "b312ae37b04d7b4fc32c46c737aa2eded9647bee",
+    "status": ""
+  },
+  "environment": "Linux headless; isolated XDG/APPDATA directories; stdout/stderr captured via pipes",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "log_sha256": "dbb6eef58800363d5c4509822ca0cfa3e8330fa92981fe5754058dbc3501979a",
+  "complete_result": {
+    "failures": [],
+    "observations": {
+      "meal": {
+        "food": 25.0,
+        "moved": 2.78731989860535,
+        "satiety": 39.7740000000001,
+        "up": "(0.750713, -0.660629, -0.0)"
+      },
+      "restart_exit": 0
+    },
+    "passed": true,
+    "test": "wildlife_hunting_world"
+  },
+  "passed": true
+}

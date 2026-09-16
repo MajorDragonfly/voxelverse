@@ -58,6 +58,7 @@ func _process(delta: float) -> void:
 	if not _ready_runtime and tribe.is_active(): _activate()
 	if not is_active(): return
 	for id: String in controller.registry.get("animals", {}):
+		if not animal_is_near(id): continue
 		var a: Dictionary = controller.record(id)
 		if not a["pending"].is_empty():
 			var handler_id: String = a["pending"]["actor_id"]
@@ -151,7 +152,7 @@ func context(id: String, handler_id: String) -> Dictionary:
 	return {"campaign_id": campaign["id"], "body_id": _state.get_current_body_record()["id"], "phase": _state.current_phase,
 		"player_species_id": campaign["player_species_id"], "faction_id": campaign["player_faction_id"],
 		"actor_id": handler_id, "actor_alive": handler != null, "paused": not is_active(),
-		"handler_available": tribe.member_record(handler_id).get("order") == "wait" and tribe.member_record(handler_id).get("cargo") == "",
+		"handler_available": not tribe.SiteTransport.bound(tribe.body(), handler_id) and tribe.member_record(handler_id).get("order") == "wait" and tribe.member_record(handler_id).get("cargo") == "",
 		"actor_position": Space.encode(self, handler.global_position) if handler != null else Vector3.INF, "home": Space.encode(self, tribe.anchor()),
 		"capacity": Saved.CAPACITY, "stock": tribe.village()["stock"].duplicate(),
 		"line_of_sight": handler != null and target != null and Steering.clear_sight(handler, target),
@@ -162,7 +163,7 @@ func offer(id: String) -> Dictionary:
 	var handler_id: String = chosen_handler()
 	var member: Dictionary = tribe.member_record(handler_id)
 	if member.is_empty(): return _show({"ok": false, "code": "choose_one_handler"}, id)
-	if member["order"] != "wait" or member["cargo"] != "": return _show({"ok": false, "code": "handler_busy"}, id)
+	if tribe.SiteTransport.bound(tribe.body(), handler_id) or member["order"] != "wait" or member["cargo"] != "": return _show({"ok": false, "code": "handler_busy"}, id)
 	var target: Node3D = actor_for(id)
 	if target == null: return _show({"ok": false, "code": "unknown_animal"}, id)
 	var fresh: bool = not controller.registry["animals"].has(id)
@@ -217,6 +218,7 @@ func approach(id: String) -> bool:
 	return tribe.issue_order("move", best, 20.0)
 
 func issue_command(id: String, order: String) -> Dictionary:
+	if tribe.SiteTransport.bound(tribe.body(), chosen_handler()): return _show({"ok": false, "code": "handler_busy"}, id)
 	if not is_active(): return _show({"ok": false, "code": "tribal_age_required"}, id)
 	return _show(controller.command(id, order, context(id, chosen_handler())), id)
 
@@ -356,3 +358,15 @@ func surface_origin_shifted(shift: Vector3) -> void:
 		var route: PackedVector3Array = _routes[id]
 		for i in range(route.size()): route[i] += shift
 		_routes[id] = route
+
+func animal_is_near(id: String) -> bool:
+	if not tribe.body().has("settlements"): return true
+	for site_id: String in tribe.Settlements.ids(tribe.body()):
+		if site_id == tribe.village().get("id"): continue
+		var data: Dictionary = tribe.Settlements.village(tribe.body(), site_id)
+		for pen: Dictionary in data.husbandry.pens:
+			if pen.animal_id == id: return false
+		var animal: Dictionary = controller.record(id)
+		for member: Dictionary in data.members:
+			if animal.get("handler_id") == member.id: return false
+	return true

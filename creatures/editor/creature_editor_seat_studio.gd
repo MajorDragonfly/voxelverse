@@ -18,7 +18,7 @@ func _build_inspector() -> void:
 	var section := VBoxContainer.new()
 	_attachment_fields.add_child(section)
 	_attachment_fields.move_child(section, 2)
-	var toggle := _button(section, "Reitermaße", func() -> void: _rider_fields.visible = not _rider_fields.visible)
+	var toggle := _button(section, "EDITOR_RIDER_DIMENSIONS", func() -> void: _rider_fields.visible = not _rider_fields.visible)
 	toggle.toggle_mode = true
 	toggle.name = "ShowRiderDimensions"
 	_rider_fields = VBoxContainer.new()
@@ -27,7 +27,7 @@ func _build_inspector() -> void:
 	for field in ["rider_scale", "leg_spacing", "seat_height"]:
 		var row := HBoxContainer.new()
 		_rider_fields.add_child(row)
-		_label(row, {"rider_scale": "Reitergröße", "leg_spacing": "Beinabstand", "seat_height": "Sitzhöhe"}[field], 12).size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_label(row, {"rider_scale": "EDITOR_RIDER_SCALE", "leg_spacing": "EDITOR_RIDER_SPACING", "seat_height": "EDITOR_RIDER_HEIGHT"}[field], 12).size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var spin := SpinBox.new()
 		spin.name = "Rider_" + field
 		spin.min_value = float(RiderProfile.LIMITS[field][0]) * 100
@@ -40,14 +40,14 @@ func _build_inspector() -> void:
 		spin.value_changed.connect(_change_rider.bind(field))
 		row.add_child(spin)
 		_rider_spins[field] = spin
-	var fit := _button(_fit_actions, "Sitz an Rücken anpassen", _find_seat_proposal)
+	var fit := _button(_fit_actions, "EDITOR_SEAT_FIND", _find_seat_proposal)
 	fit.name = "FindSupportedSeat"
 	_fit_actions.move_child(fit, 1)
-	_seat_apply = _button(_fit_actions, "Sitzvorschlag übernehmen", _apply_seat_proposal)
+	_seat_apply = _button(_fit_actions, "EDITOR_SEAT_APPLY", _apply_seat_proposal)
 	_seat_apply.name = "ApplySupportedSeat"
 	_seat_apply.visible = false
 	_fit_actions.move_child(_seat_apply, 2)
-	_review_button = _button(_fit_actions, "Laufen, Rampe & Stufen prüfen", _start_motion_review)
+	_review_button = _button(_fit_actions, "EDITOR_REVIEW_START", _start_motion_review)
 	_review_button.name = "ReviewBodyMotion"
 	_review_label = _label(_fit_actions, "", 12)
 	_review_label.name = "BodyMotionStatus"
@@ -88,16 +88,16 @@ func _show_fit_report() -> void:
 		return
 	var support: Dictionary = SaddleSupport.inspect(blueprint, skin.mesh)
 	if not support["complete"]:
-		_attachment_status.text += "\nSitzprüfung nicht verfügbar: Anschluss oder Reitermaße prüfen."
+		EditorText.append(_attachment_status, "EDITOR_SEAT_UNAVAILABLE")
 		return
 	if not support["active"]:
-		_attachment_status.text += "\nSattel deaktiviert."
+		EditorText.append(_attachment_status, "EDITOR_SEAT_DISABLED")
 		return
-	_attachment_status.text += "\nAuflage %d/9 · größter Abstand %.1f%%" % [support["supported_samples"], float(support["max_gap"]) * 100]
+	EditorText.append(_attachment_status, EditorText.formatted("EDITOR_SEAT_SUPPORT", [support["supported_samples"], float(support["max_gap"]) * 100]))
 	if not support["supported"]:
-		_attachment_status.text += " · Sitz an Rücken anpassen"
+		EditorText.append(_attachment_status, "EDITOR_SEAT_ADJUST")
 	if not support["rider_seated"]:
-		_attachment_status.text += "\nReiterkontakt prüfen · Abstand %.1f%%" % (float(support["rider_seat_gap"]) * 100)
+		EditorText.append(_attachment_status, EditorText.formatted("EDITOR_SEAT_CONTACT", [(float(support["rider_seat_gap"]) * 100)]))
 	var marks: Node3D = _preview.get_node_or_null("BodyFitFindings")
 	if marks != null:
 		var body: Node3D = _preview.get_node("BodyV4")
@@ -119,8 +119,8 @@ func _clear_seat_review() -> void:
 		_review = null
 	_review_report.clear()
 	if is_instance_valid(_review_label):
-		_review_label.text = ""
-		_review_button.text = "Laufen, Rampe & Stufen prüfen"
+		EditorText.bind(_review_label, "text", "")
+		EditorText.bind(_review_button, "text", "EDITOR_REVIEW_START")
 		for child in _review_results.get_children():
 			_review_results.remove_child(child)
 			child.queue_free()
@@ -132,13 +132,13 @@ func _find_seat_proposal() -> void:
 	_seat_proposal = SaddleSupport.proposal(_preview)
 	_seat_apply.visible = not _seat_proposal.is_empty()
 	if _seat_proposal.is_empty():
-		_attachment_status.text = "Keine passende Auflage gefunden. Rückenform, Anschlussneigung oder markierte Anbauteile bearbeiten."
+		EditorText.bind(_attachment_status, "text", "EDITOR_SEAT_NO_PROPOSAL")
 		return
 	_seat_proposal["source"] = var_to_str(blueprint)
 	var socket: Dictionary = _seat_proposal["socket"]
 	var profile: Dictionary = _seat_proposal["rider_profile"]
-	_attachment_status.text = "Sitzvorschlag: Rücken %.0f%% · Höhe %+.1f%%\nBeinabstand %.0f%% · Sitzhöhe %.0f%%\n9/9 Auflagepunkte und Freiraum in Ruhe geprüft." % [float(socket["t"]) * 100, float(socket["offset"][1]) * 100,
-		float(profile["leg_spacing"]) * 100, float(profile["seat_height"]) * 100]
+	EditorText.bind(_attachment_status, "text", EditorText.formatted("EDITOR_SEAT_PROPOSAL", [float(socket["t"]) * 100, float(socket["offset"][1]) * 100,
+		float(profile["leg_spacing"]) * 100, float(profile["seat_height"]) * 100]))
 
 
 func _apply_seat_proposal() -> void:
@@ -161,7 +161,7 @@ func _start_motion_review() -> void:
 	_clear_seat_review()
 	_review = MotionReview.new()
 	_review.start(self, blueprint)
-	_review_button.text = "Prüfung abbrechen"
+	EditorText.bind(_review_button, "text", "EDITOR_REVIEW_CANCEL")
 	_show_motion_review()
 
 
@@ -178,16 +178,16 @@ func _process(delta: float) -> void:
 func _show_motion_review() -> void:
 	_review_report = _review.report.duplicate(true)
 	if _review_report["status"] == "running":
-		_review_label.text = "Prüfe an einer Kopie · %d Posen · %d/6 Strecken fertig" % [_review_report["samples_checked"], _review_report["scenarios"].size()]
+		EditorText.bind(_review_label, "text", EditorText.formatted("EDITOR_REVIEW_RUNNING", [_review_report["samples_checked"], _review_report["scenarios"].size()]))
 		return
-	_review_button.text = "Laufen, Rampe & Stufen prüfen"
-	_review_label.text = "%d Posen geprüft · keine durchgehende Bewegungsfreigabe." % _review_report["samples_checked"]
+	EditorText.bind(_review_button, "text", "EDITOR_REVIEW_START")
+	EditorText.bind(_review_label, "text", EditorText.formatted("EDITOR_REVIEW_DONE", [_review_report["samples_checked"]]))
 	if not _review_report["complete"]:
-		_review_label.text = "Prüfung abgebrochen oder unvollständig · keine Freigabe."
+		EditorText.bind(_review_label, "text", "EDITOR_REVIEW_INCOMPLETE")
 	for scenario: Dictionary in _review_report["scenarios"]:
-		var label: String = {"flat": "Ebene", "slope": "Rampe", "steps": "Stufen"}[scenario["course"]] + " · " + ("Laufen" if scenario["mode"] == "walk" else "Rennen")
+		var label: Dictionary = EditorText.formatted("EDITOR_REVIEW_SCENARIO", [{"flat": "EDITOR_REVIEW_FLAT", "slope": "EDITOR_REVIEW_SLOPE", "steps": "EDITOR_COURSE_STEPS"}[scenario["course"]], "EDITOR_REVIEW_WALK" if scenario["mode"] == "walk" else "EDITOR_REVIEW_RUN"])
 		if not scenario["first_collision"].is_empty():
-			_label(_review_results, label + " · %d Trefferposen" % scenario["collision_samples"], 12)
+			_label(_review_results, EditorText.formatted("EDITOR_REVIEW_RESULT_HIT", [label, scenario["collision_samples"]]), 12)
 			var seen: Dictionary = {}
 			for finding: Dictionary in scenario["findings"]:
 				var uid: String = finding["collision"]["part_uid"]
@@ -196,10 +196,10 @@ func _show_motion_review() -> void:
 				seen[uid] = true
 				var pose: Dictionary = scenario.duplicate(true)
 				pose["first_collision"] = {"time": finding["time"]}
-				_button(_review_results, ("Rumpftreffer" if uid == "body" else "Anbauteiltreffer") + " bei %.2f s ansehen" % finding["time"], _show_motion_collision.bind(pose)).add_theme_font_size_override("font_size", 12)
+				_button(_review_results, EditorText.formatted("EDITOR_REVIEW_RESULT_POSE", ["EDITOR_REVIEW_BODY_HIT" if uid == "body" else "EDITOR_REVIEW_PART_HIT", finding["time"]]), _show_motion_collision.bind(pose)).add_theme_font_size_override("font_size", 12)
 		else:
-			_label(_review_results, label + " · keine Treffer in %d Posen" % scenario["sample_count"], 12).autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		_label(_review_results, "Bodenkontakt ≥%d Füße · Dehnung bis +%.0f%%" % [scenario["minimum_supporting_feet"], (float(scenario["max_total_stretch"]) - 1.0) * 100], 12)
+			_label(_review_results, EditorText.formatted("EDITOR_REVIEW_RESULT_CLEAR", [label, scenario["sample_count"]]), 12).autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		_label(_review_results, EditorText.formatted("EDITOR_REVIEW_GROUND", [scenario["minimum_supporting_feet"], (float(scenario["max_total_stretch"]) - 1.0) * 100]), 12)
 
 
 func _show_motion_collision(scenario: Dictionary) -> void:
@@ -213,7 +213,7 @@ func _show_motion_collision(scenario: Dictionary) -> void:
 	_preview.get("_motion").sample(scenario["mode"], time)
 	_refresh_part_palette()
 	_check_fit_now()
-	_set_builder_status("Trefferpose bei %.2f s · %s" % [time, scenario["course"]])
+	_set_formatted_status(EditorText.formatted("EDITOR_REVIEW_POSE", [time, "EDITOR_COURSE_" + str(scenario["course"]).to_upper()]))
 
 
 func _exit_tree() -> void:

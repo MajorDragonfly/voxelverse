@@ -1,0 +1,40 @@
+{
+  "commit": "e003c4972cc519cac878bba2f5aea1c8c7f80d3e",
+  "tree": "a80534483af3fe55f9b04331eb6d461579a33879",
+  "dirty": false,
+  "passed": true,
+  "renderer": "gl_compatibility",
+  "command": [
+    "/tmp/voxelverse-validation-editor-ag39rj_h/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/graphics_settings_test.gd",
+    "--",
+    "--graphics-capture",
+    "/tmp/graphics-settings-review"
+  ],
+  "source_unchanged": true,
+  "images": [
+    "custom-world",
+    "preset-world",
+    "underwater",
+    "settings-800x600-de-top",
+    "settings-800x600-de-bottom",
+    "settings-800x600-en-top",
+    "settings-800x600-en-bottom",
+    "settings-1280x720-de-top",
+    "settings-1280x720-de-bottom",
+    "settings-1280x720-en-top",
+    "settings-1280x720-en-bottom",
+    "settings-1920x1080-de-top",
+    "settings-1920x1080-de-bottom",
+    "settings-1920x1080-en-top",
+    "settings-1920x1080-en-bottom"
+  ],
+  "scope": "Real settings input, persistence/restart, two languages, three sizes at 130% UI scale; rendered atmosphere fixture and water. Campaign/travel separately headless; no target-PC/FPS acceptance."
+}

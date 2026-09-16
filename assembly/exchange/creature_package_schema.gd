@@ -16,12 +16,14 @@ const ATTACHMENTS: Dictionary = {
 		"leg_spacing": ["num", 0.28, 2.4], "seat_height": ["num", 0.12, 0.6]},
 }
 const BODY: Dictionary = {
+	"part_revision?": ["int", 1, 1], "catalog_revision?": ["int", 1, 1],
 	"part_id": "id", "shape": ["vec", 0.45, 4.5], "scale": ["num", 0.45, 2.25],
 	"spine_length_scale": ["num", 0.45, 3],
 	"spine": ["list", {"t": ["num", 0, 1], "width_scale": ["num", 0.22, 2.6],
 		"height_scale": ["num", 0.22, 2.6], "y_offset": ["num", -1.8, 1.8]}, 7],
 }
-const PAINT: Dictionary = {"part_id": "id", "intensity": ["num", 0, 1]}
+const PAINT: Dictionary = {"part_id": "id", "intensity": ["num", 0, 1],
+	"part_revision?": ["int", 1, 1], "catalog_revision?": ["int", 1, 1]}
 const APPEARANCE: Dictionary = {
 	"skin_type": ["enum", "smooth", "scales", "fur", "leather", "chitin"],
 	"skin_strength": ["num", 0, 1], "skin_scale": ["num", 0.4, 2.5],
@@ -29,7 +31,9 @@ const APPEARANCE: Dictionary = {
 	"eye_color?": "color", "horn_color?": "color",
 }
 const PART: Dictionary = {
-	"uid": "id", "part_id": "id", "category": ["enum", "mouth", "eyes", "legs",
+	"part_revision?": ["int", 1, 1], "catalog_revision?": ["int", 1, 1],
+	"end_part_revision?": ["int", 1, 1], "end_catalog_revision?": ["int", 1, 1],
+	"uid": "id", "part_id": "id", "category": ["enum", "mouth", "head", "eyes", "legs",
 		"arms", "tail", "horns", "plates", "spikes", "decor"],
 	"position": ["vec", -32, 32], "rotation": ["vec", -36000, 36000],
 	"scale": ["num", 0.25, 3], "mirrored": "bool", "center_locked": "bool",

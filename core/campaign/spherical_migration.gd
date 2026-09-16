@@ -12,6 +12,8 @@ const MAX_SOURCE_BYTES: int = 16 * 1024 * 1024
 
 static func blockers(source: Dictionary) -> Array[String]:
 	var result: Array[String] = []
+	if source.get("progression", {}).get("creature_encounters", {}).get("schema", 1) != 1:
+		result.append("Dieser Quellstand enthält bereits ein Kugel-Begegnungsarchiv und wird nicht erneut umgezogen.")
 	if int(source.get("schema", 0)) < 3:
 		return ["Diesen alten Stand zuerst laden und speichern, damit Identitäten und Entwürfe eingebettet sind."]
 	var state: Dictionary = source.game_state
@@ -29,7 +31,7 @@ static func blockers(source: Dictionary) -> Array[String]:
 		# Unknown body extensions may contain ownership or places. A whitelist is
 		# intentional: adding a consumer requires an explicit migration adapter.
 		for field in body:
-			if field not in ["id", "system_id", "seed", "generator_version", "surface_mode", "exploration_atlas",
+			if field not in ["id", "system_id", "seed", "generator_version", "surface_mode", "exploration_atlas", "weather_climate",
 					"home_group", "tribe", "tribal_neighbor", "domesticated_animals", "fauna_catalog", "wildlife_foraging", "wildlife_drinking", "legacy_population"]:
 				result.append(id + "/" + str(field) + ": unbekannte Körperdaten; Übernahme muss ausdrücklich geprüft werden.")
 	for key in source.get(Registry.regions_field(source), {}):

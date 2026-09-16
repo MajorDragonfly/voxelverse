@@ -1,0 +1,53 @@
+{
+  "source_map": [
+    {
+      "local": "93dd55d6bc3f71c38215a9ebe906c4e693a40595",
+      "published": "b0021437a04f1c043254ea0c9bdf4fbebd878e64",
+      "tree": "2c70b5b2a30aa97972172ed2200a3c68c4b8c5ff"
+    },
+    {
+      "local": "10736af",
+      "published": "1111567a06223ff8692fb5a71596d488e4f8c183",
+      "tree": "6585016fc078282f1402979283a7e6ccd38e929b"
+    }
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "initial": "13 of 14 Godot tests passed; frontend timed out because the expanded help requires scrolling. Import and source gates passed.",
+  "followup": "frontend_test and species_comparison_test passed on clean unchanged source after reachability/language fixture corrections.",
+  "tooling": "167 cases: 160 passed, 7 optional skips",
+  "ci": "https://github.com/MajorDragonfly/voxelverse/pull/141/checks",
+  "limits": "No complete local suite, native export, visual or target-PC/FPS acceptance. CI belongs to its exact published head.",
+  "tracking_followup": {
+    "local": "322e022",
+    "published": "169766947a1f593f900872e6fc4b280d6c7d3087",
+    "tree": "b6d9d00bd11f1db90528eea8eef64ed674cb6a99",
+    "command": "python3 -m unittest discover -s tests/tooling -p 'project_dashboard_test.py'",
+    "result": "15 tests passed; two added regressions for detailed integrations and verified tracking-only forward diffs.",
+    "log": "dashboard-live-fix.log.gz"
+  },
+  "settlement_wait_followup": {
+    "local": "b47cb3ab9338d844ff6264f187d7ab210d976623",
+    "published": "bc8fd6e5bb809359a384d412b2fde49feb01019c",
+    "tree": "a0a741a2d4506efbadda884a8f7f589b14626451",
+    "baseline": "26d8fd29cee8ddb6cd19fbb923f5d6dd553615c6",
+    "failed_ci_job": "https://github.com/MajorDragonfly/voxelverse/actions/runs/35091549359/job/104778901559",
+    "diagnosis": "At 2 FPS the previous 20-second wall deadline allowed only 5.467 seconds of physics. The carrier still held stone on its return path; after 6.55 seconds of physics only the secondary stock received it. Exit 0, both restart and final markers.",
+    "diagnostic_source": "db219a7 plus the archived instrumentation patch; deliberately modified diagnostic worktree",
+    "logs": [
+      "settlement-clock-diagnostic.log.gz",
+      "settlement-clock-diagnostic.patch.gz"
+    ],
+    "fix": "Keep original physics-time work budgets, cap each wait at 120 wall seconds, and retain physical delivery and separate stock assertions. --slow-settlement-work reproduces the low-FPS case.",
+    "validation": "Exact published-head CI and source regression details are recorded in PR #141.",
+    "regression_result": "Passed on clean unchanged b47cb3a at 2 FPS, including held cargo, failed write, pause and fresh process. 214.865 seconds total."
+  },
+  "construction_layout_followup": {
+    "local": "445d5e1cfd6d6e871406fb9ea22067b964ce8aa4",
+    "published": "76b4dfee8e83a1c128d30ddae73ed2b306bed761",
+    "tree": "4a380ad8feada936754a4142b86700f0e8dc05a2",
+    "original_failure": "https://github.com/MajorDragonfly/voxelverse/actions/runs/35091549538/job/104780162063",
+    "fix": "Wait for stable deferred container geometry before the existing accessibility assertion. Thirty-frame bound; report exact rectangles on failure.",
+    "result": "Physical pickup, pause, rollback, cancellation/recovery, save/load/rebuild and twelve DE/EN layouts passed on clean unchanged source."
+  },
+  "regression_evidence": "settlement-and-construction-regressions.tar.gz"
+}

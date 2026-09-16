@@ -18,7 +18,11 @@ const Ecology = preload("res://world/surface/campaign_ecology_state.gd")
 const LegacyPopulation = preload("res://world/fauna/legacy_population_state.gd")
 const Foraging = preload("res://world/resources/plants/foraging_state.gd")
 const Drinking = preload("res://creatures/ai/drinking_state.gd")
+const SiteTransport = preload("res://world/tribe/transport/site_transport_state.gd")
+const Settlements = preload("res://world/tribe/settlement_collection.gd")
+const Climate = preload("res://world/weather/planet_climate.gd")
 const Onboarding = preload("res://core/onboarding_progress.gd")
+const Fleet = preload("res://space/fleet/fleet_state.gd")
 
 # Order also defines import order: designs, then GameState, then progression,
 # then pending runtime state. Hosts are notified only by the central service.
@@ -32,6 +36,9 @@ const SECTIONS: Array = [
 	{"id": "player", "fields": ["player"], "schema": 0},
 ]
 const BODY_SECTIONS: Array = [
+	{"id": Climate.FIELD, "schema": Climate.SCHEMA},
+	{"id": "settlements", "schema": Settlements.SCHEMA},
+	{"id": SiteTransport.FIELD, "schema": 1},
 	{"id": "village_simulation", "schema": 1},
 	{"id": "visit", "schema": 1},
 	{"id": "home_group", "schema": Home.SCHEMA},
@@ -112,6 +119,9 @@ static func _validate_section(id: String, data: Dictionary) -> String:
 				if key not in ["stamina", "recovery_delay"] or not (value is int or value is float) or not is_finite(float(value)) or float(value) < 0.0 or float(value) > (100.0 if key == "stamina" else 0.8): return "Invalid player stamina state."
 		"game_state":
 			if int(data.game_state.get("world_seed", 0)) <= 0 or int(data.game_state.get("phase", -1)) not in range(6): return "Invalid world seed or phase."
+			if data.game_state.get("campaign") is Dictionary:
+				var problem: String = Fleet.validate(data.game_state.campaign)
+				if not problem.is_empty(): return problem
 		"regions":
 			if not data.get(Registry.regions_field(data), {}) is Dictionary: return "Invalid region state."
 			if schema >= Registry.SAVE_SCHEMA and (not data.has("regions_by_body") or data.has("regions_by_world")): return "Invalid body-scoped region storage."
@@ -135,13 +145,18 @@ static func unsupported_sections(data: Dictionary) -> bool:
 				if Progression.has_unsupported_contract(data.get("progression", {})): return true
 			"designs":
 				if data.get("design_files") is Dictionary and Designs.has_unsupported_blueprints(data.design_files): return true
-			"metadata", "game_state", "regions", "player", "onboarding":
+			"game_state":
+				var state: Variant = data.get("game_state")
+				if state is Dictionary and state.get("campaign") is Dictionary and Climate.unsupported_campaign(state.campaign): return true
+				if data.get("game_state") is Dictionary and data.game_state.get("campaign") is Dictionary and Fleet.unsupported(data.game_state.campaign): return true
+			"metadata", "regions", "player", "onboarding":
 				# Envelope versions stay central; onboarding preserves future UI data.
 				pass
 			_: return true
 	return false
 
 static func validate_body(body: Dictionary, campaign: Dictionary, tribal: Dictionary) -> String:
+	if body.has("_settlement_id"): return "A settlement work view cannot be saved as a body."
 	var unknown: String = unknown_body_section(body)
 	if not unknown.is_empty(): return "Unregistered body save section: " + unknown
 	for section: Dictionary in BODY_SECTIONS:
@@ -165,6 +180,9 @@ static func unknown_body_section(body: Dictionary) -> String:
 
 static func _validate_body_section(id: String, body: Dictionary, campaign: Dictionary, tribal: Dictionary) -> String:
 	match id:
+		Climate.FIELD: return Climate.validate_body(body, campaign)
+		"site_transport": return SiteTransport.validate(body, campaign)
+		"settlements": return Settlements.validate(body, campaign)
 		"village_simulation": return VillageSimulation.validate(body[id], body, float(campaign.get("elapsed_seconds", 0)))
 		"visit":
 			var visit: Variant = body[id]
@@ -196,7 +214,7 @@ static func _validate_body_section(id: String, body: Dictionary, campaign: Dicti
 		"tribe": return Tribe.validate(body[id], body, campaign)
 		"tribal_neighbor":
 			if int(tribal.get("schema", 0)) < 3: return "Nachbarlager benötigt Stammesfortschrittformat 3."
-			return Neighbor.validate(body[id], body.get("tribe", {}), campaign)
+			return Neighbor.validate(body[id], Settlements.village(body, Settlements.origin_id(body)), campaign)
 		_: return "Missing body participant validator: " + id
 	return ""
 
@@ -209,6 +227,9 @@ static func unsupported_body(body: Dictionary) -> bool:
 static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 	var value: Variant = body.get(id)
 	match id:
+		Climate.FIELD: return Climate.unsupported_body(body)
+		"site_transport": return SiteTransport.unsupported(body)
+		"settlements": return Settlements.unsupported(body)
 		"village_simulation", "visit", "legacy_population", "wildlife_foraging", "wildlife_drinking", "surface_ecology":
 			return value is Dictionary and value.get("schema") != 1
 		"home_group":
@@ -226,7 +247,7 @@ static func _unsupported_body_section(id: String, body: Dictionary) -> bool:
 		"tribal_neighbor": return Neighbor.has_unsupported_contract(value)
 		"fauna_catalog": return body.has(id) and FaunaCatalog.has_unsupported(value)
 		"tribe":
-			return value is Dictionary and (Tribe.Economy.has_unsupported_contract(value.get("economy")) or Tribe.Husbandry.has_unsupported_contract(value.get("husbandry")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
+			return value is Dictionary and (Tribe.Construction.unsupported(value) or Tribe.Economy.has_unsupported_contract(value.get("economy")) or Tribe.Husbandry.has_unsupported_contract(value.get("husbandry")) or int(value.get("schema", 0)) > Tribe.SCHEMA or (value.get("schema") == Tribe.SCHEMA and not value.get("anchor") is Dictionary))
 		_: return true
 	return false
 

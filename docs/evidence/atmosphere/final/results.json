@@ -1,0 +1,56 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "commit": "84d42fa8841ca0b12ca38d68e9f4dd11db4ebbf5",
+    "tracked_worktree_dirty": false
+  },
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "campaign_atmosphere_test",
+    "underwater_view_test",
+    "spherical_campaign_runtime_test",
+    "frontend_test"
+  ],
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.168
+    },
+    {
+      "name": "campaign_atmosphere_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.878,
+      "contract": "terrain_art"
+    },
+    {
+      "name": "underwater_view_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.714,
+      "contract": "terrain_art"
+    },
+    {
+      "name": "spherical_campaign_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 70.382,
+      "contract": "campaign"
+    },
+    {
+      "name": "frontend_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 72.706,
+      "contract": "frontend_locale"
+    }
+  ]
+}

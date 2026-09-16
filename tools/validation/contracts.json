@@ -29,7 +29,9 @@
       "tests": [
         "spherical_creature_test",
         "spherical_gameplay_test",
-        "spherical_egg_production_test"
+        "spherical_egg_production_test",
+        "player_recovery_test",
+        "player_recovery_world_test"
       ]
     },
     {
@@ -42,6 +44,7 @@
         "performance_measurement_test",
         "region_store_test",
         "population_register_test",
+        "encounter_archive_test",
         "regional_transport_test",
         "village_navigation_budget_test"
       ]
@@ -71,7 +74,8 @@
         "surface_support_test",
         "radial_step_test",
         "terrain_lookahead_test",
-        "terrain_transition_test"
+        "terrain_transition_test",
+        "living_fauna_archive_test"
       ]
     },
     {
@@ -92,7 +96,10 @@
         "water_depth_test",
         "world_evolution_v2_ci_test",
         "world_layered_v7_test",
-        "world_runtime_continuity_test"
+        "world_runtime_continuity_test",
+        "resource_visuals_test",
+        "campaign_atmosphere_test",
+        "graphics_settings_test"
       ]
     },
     {
@@ -110,11 +117,17 @@
         "creature_hand_provider_test",
         "creature_joint_studio_test",
         "creature_mouth_provider_test",
+        "creature_part_articulation_test",
+        "creature_part_revisions_test",
         "creature_parts_studio_test",
         "creature_seat_fit_test",
+        "creature_snout_family_test",
         "creature_studio_test",
+        "creature_trunk_provider_test",
         "creature_v5_smoke_test",
-        "runtime_geometry_batch_test"
+        "runtime_geometry_batch_test",
+        "creature_eye_expression_test",
+        "creature_tail_family_test"
       ]
     },
     {
@@ -125,6 +138,7 @@
         "blueprint_contract_test",
         "community_blueprint_package_test",
         "creature_design_library_test",
+        "creature_library_favorites_test",
         "creature_library_ui_test",
         "modular_assembly_framework_test"
       ]
@@ -169,7 +183,11 @@
         "wildlife_drinking_test",
         "wildlife_drinking_world_test",
         "wildlife_foraging_test",
-        "wildlife_foraging_world_test"
+        "wildlife_foraging_world_test",
+        "creature_expression_test",
+        "wildlife_social_play_test",
+        "wildlife_hunting_test",
+        "wildlife_hunting_world_test"
       ]
     },
     {
@@ -211,7 +229,15 @@
         "village_work_observation_test",
         "village_work_snapshot_test",
         "egg_production_contract_test",
-        "egg_husbandry_ui_test"
+        "egg_husbandry_ui_test",
+        "settlement_runtime_test",
+        "settlement_save_test",
+        "site_transport_test",
+        "site_transport_runtime_test",
+        "workplace_instances_test",
+        "workplace_runtime_test",
+        "construction_control_test",
+        "construction_runtime_test"
       ]
     },
     {
@@ -232,6 +258,7 @@
       "tests": [
         "atlas_paging_test",
         "atlas_places_test",
+        "atlas_search_test",
         "creature_scan_test",
         "discovery_journal_test",
         "domestic_fauna_journal_test",
@@ -257,7 +284,17 @@
         "localization_test",
         "menu_input_test",
         "onboarding_test",
-        "ui_visual_refresh_test"
+        "ui_visual_refresh_test",
+        "tribe_localization_test",
+        "hud_layout_test",
+        "editor_localization_test",
+        "journal_localization_test",
+        "husbandry_localization_test",
+        "tribal_playtest_test",
+        "menu_rebinding_test",
+        "save_browser_search_test",
+        "onboarding_guidance_world_test",
+        "slot_scan_test"
       ]
     },
     {
@@ -274,7 +311,9 @@
         "audio/interface_audio_test",
         "audio/music_runtime_test",
         "audio/runtime_shutdown_test",
-        "audio/spherical_water_audio_test"
+        "audio/spherical_water_audio_test",
+        "audio/creature_audio_budget_test",
+        "audio/foley_runtime_test"
       ]
     },
     {
@@ -282,7 +321,20 @@
       "title": "Expedition: Orts- und Übergabenentwurf",
       "work": "ARCH-30 / Vorbereitung M9-EXPEDITION",
       "tests": [
-        "expedition_contract_test"
+        "expedition_contract_test",
+        "shipyard_test",
+        "fleet_runtime_test"
+      ]
+    },
+    {
+      "id": "weather",
+      "title": "Sanftes Planetenwetter und Darstellungsanschluss",
+      "work": "WEATHER-01 / WEATHER-02A",
+      "tests": [
+        "weather_model_test",
+        "weather_runtime_test",
+        "regional_weather_test",
+        "planet_climate_test"
       ]
     }
   ],

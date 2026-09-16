@@ -1,5 +1,5 @@
 extends CanvasLayer
-## Standalone F7 panel. The menu workstream can instead reuse AudioManager's API.
+## Audio panel opened from the shared settings menu. F7 remains an optional shortcut.
 
 var _audio: Node
 var _sliders: Dictionary = {}
@@ -82,7 +82,7 @@ func _ready() -> void:
 	rows.add_child(buttons)
 	_add_button(buttons, "Testton", func(): _audio.play_ui())
 	_add_button(buttons, "Standardwerte", func(): _audio.reset_settings())
-	var close := _add_button(buttons, "Zurück · F7 / Esc", func(): _audio.close_settings())
+	var close := _add_button(buttons, "Zurück · Esc", func(): _audio.close_settings())
 	close.grab_focus()
 	_audio.settings_changed.connect(_sync)
 

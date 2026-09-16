@@ -37,8 +37,9 @@ jobs:
   source:
     needs: contracts
     runs-on: ubuntu-latest
-    # Two shards include full production/travel chains; retain per-test deadlines.
-    timeout-minutes: 30
+    # Real production/travel checks exceeded the old 30-minute shard envelope.
+    # Preserve their individual deadlines and every test; allow the full shard.
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:

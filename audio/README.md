@@ -565,3 +565,25 @@ Prüfung mit dem unveränderten D2-Paket und genauer Integrationsstand:
 [`docs/WORK_INTERFACE_AUDIO.md`](../docs/WORK_INTERFACE_AUDIO.md).
 Die normale Kampagne benötigt weiterhin den produktiven D2-Host; bis dahin ist
 `tests/fixtures/animal_feedback_d2_preview.tscn` die klar markierte gemeinsame Prüfansicht.
+
+## M10-FOLEY: weichere Schritte und differenzierte Wassergeräusche
+
+23 Klänge überarbeitet, sechs WAV-Dateien ergänzt: 18 Schrittvarianten, Landung,
+Ufer und Unterwasserbett sowie Wassereintritt, Schwimmzug, Wasseraustritt,
+Ein-/Auftauchen und Blasenbewegung. Jetzt 93 WAV-Dateien plus drei Musikstücke.
+[Umfang und Prüfung](../docs/WORK_M10_FOLEY.md).
+
+Die vorhandene Hörtest-Szene bietet alle neuen Klänge als eigene Tasten an.
+Waten/Schwimmen folgt dem tatsächlichen `is_swimming`-Zustand, sofern der
+Spielercontroller ihn anbietet; ältere Diagnosefiguren behalten den Tiefenfallback.
+Auch vertikale Schwimmbewegung kann einen Schwimmzug auslösen. Blickhöhe und
+vorhandene Wasserhysterese bestimmen Ein-/Auftauchen. Bewegen unter Wasser löst
+gelegentlich einen leisen Blasenlaut aus. Die Klanggestaltung simuliert keine
+Atmung und ergänzt kein Sauerstoff-/Tauchphysiksystem.
+
+Alle Effekte nutzen den bestehenden 16-Stimmen-Pool. Es gibt keine zusätzlichen
+Player oder Oberflächenabfragen. Pause, Teleport, Spawn und Quellenwechsel
+initialisieren ohne künstlichen Wassereintritt; eine gelöschte Figur beendet ihr
+Wasserambiente sofort. Die eigentliche Klang-/Lautstärkeabnahme auf dem Zielgerät
+bleibt offen. Die [Hörprobe](../docs/evidence/m10-foley/foley-preview.ogg) stellt
+zunächst je Material drei alte und dann drei neue Schritte gegenüber.

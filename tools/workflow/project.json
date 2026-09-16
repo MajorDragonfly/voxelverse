@@ -1,0 +1,436 @@
+{
+  "schema": 1,
+  "repository": "MajorDragonfly/voxelverse",
+  "reviewed_on": "2026-09-16",
+  "scope_version": 1,
+  "scope": "Vollständige Singleplayer-Zielvision: Kreatur → Stamm → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum; gemeinsame Editoren, Community-Vorlagen und ausgereifte Veröffentlichung. Gewichtung und Schätzintervalle sind die anfängliche Planungsbewertung, keine gemessene Fertigquote.",
+  "coordination_issue": 137,
+  "main": {
+    "branch": "main",
+    "sha": "d378ca0ecd7f03429a5150df6358e0646ec06689",
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/92"
+  },
+  "candidate": {
+    "branch": "agent/integration-dashboard-20260916",
+    "sha": "76b4dfee8e83a1c128d30ddae73ed2b306bed761",
+    "pr": 141,
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/141"
+  },
+  "areas": [
+    {
+      "id": "foundation",
+      "title": "Kugelwelten, Speicherung, Streaming",
+      "weight": 15,
+      "low": 70,
+      "high": 80,
+      "achieved": "Kugelkampagne, IDs, Archive und begrenzte Simulation",
+      "remaining": "Langzeitbetrieb, Lade-/Darstellungsspitzen und Ziel-PC",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/blob/d57b1ef385728728b132518a1ea05683888dcae0/docs/PROJECT_STATUS.md"
+    },
+    {
+      "id": "creature",
+      "title": "Kreaturenphase und Editor",
+      "weight": 15,
+      "low": 60,
+      "high": 70,
+      "achieved": "Scan, Fähigkeiten, Körperbaukasten und Bedürfnis-KI",
+      "remaining": "Weitere Teile, Ökologie, Bewegung und zusammenhängendes Spielgefühl",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/blob/d57b1ef385728728b132518a1ea05683888dcae0/ROADMAP.md"
+    },
+    {
+      "id": "tribe",
+      "title": "Stamm, Dorfwirtschaft, Tierhaltung",
+      "weight": 15,
+      "low": 45,
+      "high": 60,
+      "achieved": "Milch/Eier, Berufe, zwei Orte und Lagertransporte",
+      "remaining": "Größere Gesellschaft, Reiten/Pflügen und lange Wirtschaftsketten",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/blob/d57b1ef385728728b132518a1ea05683888dcae0/docs/PROJECT_STATUS.md"
+    },
+    {
+      "id": "medieval",
+      "title": "Antike und Mittelalter",
+      "weight": 15,
+      "low": 5,
+      "high": 10,
+      "achieved": "Gemeinsame Bauplan-/Orts-/Epochenverträge",
+      "remaining": "Spielbare Epoche, Handel, Wege und mehrere entwickelte Siedlungen",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/blob/d57b1ef385728728b132518a1ea05683888dcae0/ROADMAP.md"
+    },
+    {
+      "id": "modern",
+      "title": "Neuzeit und Weltmacht",
+      "weight": 10,
+      "low": 0,
+      "high": 5,
+      "achieved": "Gemeinsame technische Grundlagen",
+      "remaining": "Industrie, Energie, Staaten, Diplomatie und globale Spielschleife",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/blob/d57b1ef385728728b132518a1ea05683888dcae0/ROADMAP.md"
+    },
+    {
+      "id": "space",
+      "title": "Weltraum und Expeditionen",
+      "weight": 20,
+      "low": 10,
+      "high": 20,
+      "achieved": "Schiffseditor und integrierter Flottentest mit Instanz-/Hangarverwaltung",
+      "remaining": "Flug, Landung, vollständige Expedition, Forschung und Kolonien",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/129"
+    },
+    {
+      "id": "release",
+      "title": "Community, Feinschliff, Veröffentlichung",
+      "weight": 10,
+      "low": 10,
+      "high": 20,
+      "achieved": "Lokale Vorlagen/Favoriten, DE/EN, Audio, Kapitel-Einführung und Projekt-Dashboard",
+      "remaining": "Online-Austausch, Gesamtbalancing, Langzeit-/Release-Abnahme",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/blob/d57b1ef385728728b132518a1ea05683888dcae0/docs/COMMUNITY_DESIGNS_PLAN.md"
+    }
+  ],
+  "included": [
+    {
+      "pr": 93,
+      "head": "bc7ab45c4bd0a41bc67101d61200f5d3ac38e57f"
+    },
+    {
+      "pr": 94,
+      "head": "f67853c110b705d5e7b7ecb0af86e8959de1b7e6"
+    },
+    {
+      "pr": 95,
+      "head": "c77be299bb3d3aa4cedb31e1873905a4395a25d5"
+    },
+    {
+      "pr": 96,
+      "head": "3846da5d55b59d91b99b95c985a31bf952371049"
+    },
+    {
+      "pr": 97,
+      "head": "bb42e7485a380edd85b7da1ac1bd889549a84989"
+    },
+    {
+      "pr": 98,
+      "head": "c0b49ecd17e981a5f01881830727fa9f580d333e"
+    },
+    {
+      "pr": 99,
+      "head": "816fa73d8abdc6fd342486ad0950714dbabb07a5"
+    },
+    {
+      "pr": 100,
+      "head": "5d3d6321425f2072daafcb70b3b9c0b968252daf"
+    },
+    {
+      "pr": 101,
+      "head": "70e135a17053d11f7a57e516950b06f2211e5703"
+    },
+    {
+      "pr": 102,
+      "head": "a89860bd1f96ae7c55c1949f74ec06fcca68e0f6"
+    },
+    {
+      "pr": 103,
+      "head": "38c1687655e2edaf5c4ea436ab4000ef5aa251b6"
+    },
+    {
+      "pr": 104,
+      "head": "58e31d5a29c1751d971b83d958ed5ddb35422d90"
+    },
+    {
+      "pr": 105,
+      "head": "1442aa13a5681cbd1eb3e42ee218a1a2c85e47f6"
+    },
+    {
+      "pr": 106,
+      "head": "5c675ec56dc3eabe2dfb3ee1022133792243f98b"
+    },
+    {
+      "pr": 107,
+      "head": "0012e49a549b15523b87cd9314ec526181645457"
+    },
+    {
+      "pr": 108,
+      "head": "51d4b95ed426569ec7810ae273aec6816a883a7e"
+    },
+    {
+      "pr": 109,
+      "head": "1e850040e7384ac4a077fbb5e253979bf7408421"
+    },
+    {
+      "pr": 111,
+      "head": "cc25427d028e92435de989b06c48cd8150d05afa"
+    },
+    {
+      "pr": 112,
+      "head": "9b502ef121a49bcdf2e7c0d0995b8075b61469c9"
+    },
+    {
+      "pr": 113,
+      "head": "122a7eb380d87fdaab07a9d1ec849906f2999ce9"
+    },
+    {
+      "pr": 114,
+      "head": "69eed2823fb3aa7276547552b01938545446374f"
+    },
+    {
+      "pr": 115,
+      "head": "943be0a232c2d1ff3ec161b84698986d1a31892f"
+    },
+    {
+      "pr": 116,
+      "head": "77eb3c0d99180615056c10e74e06f6b8a3b3fc9c"
+    },
+    {
+      "pr": 117,
+      "head": "bf1afe856a2eff56a7d881f15f7bba50098ce21d"
+    },
+    {
+      "pr": 118,
+      "head": "fec14052265223b08caf9f28187bf23a231ea61d"
+    },
+    {
+      "pr": 119,
+      "head": "faf6b5d53be052bb36cdb0bff582b967a7140b2a"
+    },
+    {
+      "pr": 120,
+      "head": "365c402d4e5635c024e96f4299e8b85561c35cd0"
+    },
+    {
+      "pr": 121,
+      "head": "aed0f9a24cb78dceedbe536aa0d2686bc8669e76"
+    },
+    {
+      "pr": 123,
+      "head": "4385501d05491da8f514a3397738dadd65082ef0"
+    },
+    {
+      "pr": 124,
+      "head": "535bf4d7c585d79c9144d1cc7ec3c3c80135ff29"
+    }
+  ],
+  "alternatives": [
+    122
+  ],
+  "deliveries": [
+    {
+      "id": "WEATHER-02B",
+      "title": "WEATHER-02B: Planetenklimata speichern und die Heimat dauerhaft schützen",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 126,
+      "head": "1ce00d33705b83643ec90ef26385a912541cd273",
+      "branch": "agent/weather02-planet-climates-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/126",
+      "limits": "Native Sichtprüfung; Feuer-/Sandstürme und Wetterfolgen bleiben Folgearbeit.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "ATMOSPHERE-SETTINGS-DETAIL",
+      "title": "ATMOSPHERE-SETTINGS-DETAIL: 18 Grafikregler mit eigenen gespeicherten Werten",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 127,
+      "head": "97adbc1e875ca4dbd3c8b4bcfd03d9383e897319",
+      "branch": "agent/atmosphere-settings-detail-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/127",
+      "limits": "Visuelle Ziel-PC-Abnahme und eigene Grafik-/FPS-Messung.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "M4-SOCIAL-PLAY",
+      "title": "M4-SOCIAL-PLAY: gegenseitiges Spielverhalten der Wildtiere",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 128,
+      "head": "df3aab820a92fa0f62ae52ccf557a6c70e6f1851",
+      "branch": "agent/m4-social-play-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/128",
+      "limits": "Native Beobachtungs-/Hörabnahme und Langzeitbalance.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "ARCH-30-SHIP-INSTANCES",
+      "title": "ARCH-30: Schiffsinstanzen, Hangarverwaltung und gespeicherter Flottentest",
+      "area": "space",
+      "status": "integrated",
+      "pr": 129,
+      "head": "9b7164fea92832fcf152b448a0f4eef5e15f40e8",
+      "branch": "agent/arch30-ship-instances-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/129",
+      "limits": "Verwaltungs-/Speichertest; Flug, Landung und normale Weltraumepoche folgen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "ARCH-26-CONSTRUCTION-CONTROL",
+      "title": "ARCH-26: Baustellen pausieren, abbrechen und Material sicher zurückführen",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 130,
+      "head": "71fb50582f7783484fb34966b788a863d6d4d5c0",
+      "branch": "agent/arch26-construction-control-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/130",
+      "limits": "Eine Baustelle pro Ort, zwei Orte und sechs Bewohner; Ziel-PC-Abnahme offen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "ARCH-14-ATLAS-SEARCH",
+      "title": "ARCH-14: Bekannte Orte im Atlas suchen und gefiltert durchblättern",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 131,
+      "head": "f51bdd023b1d239d392fa6d9bc38340d49ab406b",
+      "branch": "agent/arch14-atlas-search-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/131",
+      "limits": "Native Bedien-/Sichtprüfung; einzelne synchrone Archivzugriffe bleiben.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "BP-COMMUNITY-LIBRARY-FAVORITES",
+      "title": "BP-COMMUNITY: Favoriten und erweiterte Suche für Kreaturenvorlagen",
+      "area": "release",
+      "status": "integrated",
+      "pr": 132,
+      "head": "13ad4f33e9e93ca6a698aede54996c714c860e3e",
+      "branch": "agent/community-library-favorites-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/132",
+      "limits": "Native Bedienabnahme; Online-Austausch bleibt offen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "M4-RECOVERY",
+      "title": "M4-RECOVERY: Sichere Rückkehr zur Heimat nach dem Tod",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 133,
+      "head": "1aa1609602cededc80856c3bdc7f7ecf4b8b11ee",
+      "branch": "agent/m4-recovery-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/133",
+      "limits": "Native Bild-/Windows-Abnahme und zusammenhängender Spieltest.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "UI-MENU-REBIND",
+      "title": "UI: Menütasten für Weltkarte, Entdeckungsbuch und Entwicklung belegen",
+      "area": "release",
+      "status": "integrated",
+      "pr": 134,
+      "head": "002a63fe88c251b9acb7f86e9fb01cab672ad1bd",
+      "branch": "agent/ui-menu-rebind-20260916",
+      "depends_on": [
+        "ARCH-14-ATLAS-SEARCH"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/134",
+      "limits": "Windows-Tastaturlayout und optische Abnahme.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "UI-SAVE-BROWSER-SEARCH",
+      "title": "UI: Spielstände suchen, filtern und seitenweise verwalten",
+      "area": "release",
+      "status": "integrated",
+      "pr": 135,
+      "head": "7f2d4ebbf8da1af84b0ae48f93de34e817290277",
+      "branch": "agent/save-browser-search-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/135",
+      "limits": "Mit #138 schrittweise Prüfung; Einzeldateien und Fortsetzen bleiben synchron.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "M10-GUIDANCE",
+      "title": "M10-GUIDANCE: Einführung von der Kreatur bis zum ersten Stamm",
+      "area": "release",
+      "status": "integrated",
+      "pr": 136,
+      "head": "ea14f5a704b4bf5b862d7fff7a1d5c506d15d0b4",
+      "branch": "agent/m10-guidance-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/136",
+      "limits": "Zusammenhängender Einstiegsspieltest auf dem Ziel-PC.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "ARCH-13-SLOT-BROWSE-BUDGET",
+      "title": "ARCH-13: Spielstände und Sicherungen schrittweise prüfen",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 138,
+      "head": "75b2656078ec80f0babbf526e41ab59a889895ca",
+      "branch": "agent/slot-browse-budget-20260916",
+      "depends_on": [
+        "UI-SAVE-BROWSER-SEARCH"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/138",
+      "limits": "Einzelne Datei-/Blobprüfungen bleiben synchron; Ziel-PC-Abnahme offen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "PROJECT-DASHBOARD",
+      "title": "Projekt-Dashboard und zentrale Koordination für parallele Chats",
+      "area": "release",
+      "status": "integrated",
+      "pr": 139,
+      "head": "d7b1c04c63e9e68142cf04df89c5db8e0e3d9b16",
+      "branch": "agent/project-dashboard-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/139",
+      "limits": "Planungsschätzung bleibt manuell begründet; Ziel-PC-Abnahme getrennt.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    },
+    {
+      "id": "M4-WILDLIFE-HUNTING",
+      "title": "M4: Wildtierjagd und endliches Aasfressen",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 140,
+      "head": "ad3648312ad8b33bacb872ac453bcdca906aaea1",
+      "branch": "agent/m4-wildlife-hunting-20260916",
+      "depends_on": [
+        "M4-SOCIAL-PLAY"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/140",
+      "limits": "Langzeitbalance, viele gleichzeitige Mahlzeiten und native Sichtprüfung offen.",
+      "integrated_sha": "1111567a06223ff8692fb5a71596d488e4f8c183"
+    }
+  ],
+  "priorities": [
+    "Gemeinsame Vollsuite und native Exporte von PR #141 abschließen; danach den konkreten Windows-Build mit Lars auf Bedienung, Grafik und Spielablauf prüfen.",
+    "Neue Fachpakete auf dem festen gemeinsamen Quellstand beginnen; laufende Besitzer und unveröffentlichte Nachlieferungen in #137 erhalten.",
+    "Nach dem Ziel-PC-Spieltest die nächste fachliche Engstelle auswählen; Fortschritt nur anhand belegter Funktionen und Abnahme neu bewerten."
+  ],
+  "blockers": [
+    "Eine zusammenhängende Ziel-PC-/Langzeitabnahme ist noch nicht als abgeschlossen dokumentiert.",
+    "Mittelalter, Neuzeit und Weltraum sind noch keine vollständig spielbaren Epochen.",
+    "Die letzte Basis #125 hatte rote native Windows-/Siedlungsgates und einen abgebrochenen Quellshard. Maßgeblich ist die erneute vollständige CI von #141, nicht die alten Fachprüfungen.",
+    "Spätere Branchänderungen und unveröffentlichte Folgearbeiten sind nicht automatisch Bestandteil dieser festen Eingangsliste."
+  ],
+  "campaign_summary": "Die bisherige Kugelkampagne aus #125 und 14 neue Lieferungen sind gemeinsam integriert: gespeicherte Planetenklimata, Esc-Einstellungen mit 18 Grafikreglern, Tier-Sozialspiel/Jagd, Todesrückkehr, Kapitel-Einführung, Baustellensteuerung, Flottentest, Atlas-/Spielstandsuche, Vorlagenfavoriten und frei belegbare Menütasten. Dashboard, zentrale Rundenliste und kurze Paketübergaben sind Teil desselben Kandidaten.",
+  "coordination_note": "Die bekannten Fachlieferungen sind dieser Runde zugeordnet. ARCH-24, Musik, ARCH-27 und noch unveröffentlichte Folgeschritte bleiben bei ihren bisherigen Besitzern; eine fehlende oder ungenaue Paket-ID ist keine Freigabe. Maßgeblich bleibt die aktuelle Beschreibung von Issue #137.",
+  "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
+  "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
+  "acceptance": {
+    "status": "pending",
+    "summary": "Nicht als abgeschlossen dokumentiert; zusammenhängenden Spieltest, Langzeitbetrieb und Grafik/Leistung am festen Build nachweisen."
+  },
+  "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
+  "integration_inputs": [
+    {
+      "pr": 110,
+      "head": "1d6573d9551c3f24bf1dd6fa64e5c301583a26c8"
+    },
+    {
+      "pr": 125,
+      "head": "d57b1ef385728728b132518a1ea05683888dcae0"
+    }
+  ]
+}

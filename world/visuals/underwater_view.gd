@@ -1,5 +1,6 @@
 extends Node
 class_name UnderwaterView
+const GraphicsPreferences = preload("res://core/graphics_preferences.gd")
 const Immersion = preload("res://world/surface/water_immersion.gd")
 
 ## Camera-owned water atmosphere. Sampling follows the eye, including an
@@ -68,6 +69,11 @@ func update_view() -> void:
 	_water_environment.tonemap_exposure = lerpf(0.85, 0.50, deep)
 	_water_environment.glow_enabled = false
 	_water_environment.ssao_intensity = 0.35
+	var settings := get_node_or_null("/root/DisplaySettings")
+	if settings != null:
+		GraphicsPreferences.apply_image(_water_environment, settings.graphics_values, lerpf(0.85, 0.50, deep))
+		_water_environment.ssao_enabled = settings.graphics_values.ssao_enabled and RenderingServer.get_current_rendering_method() == "forward_plus"
+		_water_environment.ssao_intensity = minf(0.35, float(settings.graphics_values.ssao_strength))
 
 
 func _restore() -> void:
