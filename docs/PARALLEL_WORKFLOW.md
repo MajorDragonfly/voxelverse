@@ -92,8 +92,11 @@ Die fünf projektweiten Workflows (Godot, Desktopexport, Rendering, Baugruppen,
 Planetendiversität) laufen für Facharbeit über PR-Ereignisse. Frühe Arbeit kann
 einen Draft-PR verwenden; ohne PR ist ein manueller Workflowstart möglich.
 `main` bleibt als Push-Ereignis geprüft. Dadurch entfällt bei neuen Fachbranches
-der zusätzliche vollständige Push-Lauf neben dem PR-Lauf. Jobinhalte, vier
-Godot-Shards, Neustarts, Exporte und die bestehenden PR-Gates bleiben erhalten.
+der zusätzliche vollständige Push-Lauf neben dem PR-Lauf. Die vorhandenen
+Prüfungen bleiben erhalten; ihr Zeitpunkt folgt dem [Entwicklungsablauf](DEVELOPMENT_WORKFLOW.md):
+Entwürfe nutzen die konservative Diff-Auswahl, fertige Code-PRs die Vollabnahme.
+Dokumentations-PRs behalten die schnellen Strukturprüfungen. Vier disjunkte
+Quellshards werden bei Bedarf erzeugt.
 Ältere Spezialworkflows mit konkreten historischen Branchnamen bleiben unverändert.
 
 Kleine lokale Commits bündeln und einen fachlich prüfbaren Stand pushen.
@@ -102,8 +105,10 @@ Anschlüsse, lässt den tatsächlichen Kandidaten prüfen und aktualisiert den
 Status einmal in `tools/workflow/project.json` und erzeugt mit
 `python3 tools/project_dashboard.py render` alle fünf Ansichten. Die datenbasierten
 Dateien werden nicht einzeln redigiert. [Fortschrittsmodell und Live-Abgleich](PROJECT_TRACKING.md).
-Ein Merge in `main` bleibt von der jeweiligen Nutzerfreigabe
-abhängig; dieser Arbeitsablauf erteilt keine pauschale Merge-Freigabe.
+Für beauftragte Routinelieferungen gilt der von Lars am 16.09.2026 freigegebene
+Arbeitsrahmen in AGENTS.md. Erneute Einzelbestätigungen für Commit, Push, PR und
+regelkonforme Übernahme sind damit nicht nötig. Aufgaben außerhalb dieses Rahmens
+und technische Berechtigungsgrenzen bleiben getrennte Entscheidungen.
 
 Kurze Übergabe im PR genügt:
 

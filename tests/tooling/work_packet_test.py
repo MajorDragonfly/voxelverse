@@ -73,6 +73,19 @@ class WorkPacketTest(unittest.TestCase):
     def test_real_catalog_keeps_source_and_contract_links_current(self):
         work_packet.read_packets(work_packet.ROOT)
 
+    def test_start_uses_main_and_rejects_unintegrated_dependencies(self):
+        from project_dashboard import read_project
+        data = read_project()
+        packets = work_packet.read_packets(work_packet.ROOT)
+        packet = packets['WEATHER-05-FORECAST-UI']
+        with self.assertRaisesRegex(ValueError, 'blocked'):
+            work_packet.start_brief(packet, data, 'fixture')
+        for item in data['deliveries']:
+            if item['id'] == 'WEATHER-03-STORM-PREVIEW': item['status'] = 'integrated'
+        text = work_packet.start_brief(packet, data, 'fixture')
+        self.assertIn(data['main']['sha'], text)
+        self.assertNotIn(data['candidate']['sha'], text)
+
     def test_non_arch_packets_use_the_same_registry_and_brief(self):
         for key in ["M4-SOCIAL-PLAY", "WEATHER-02B", "UI-MENU-REBIND", "PROJECT-DASHBOARD"]:
             packet = copy.deepcopy(self.packet)

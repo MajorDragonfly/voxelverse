@@ -1,0 +1,32 @@
+name: Plan validation
+description: Plan the actual PR merge tree with the existing contract selector.
+outputs:
+  source:
+    description: Whether source tests are required
+    value: ${{ steps.plan.outputs.source }}
+  runtime:
+    description: Whether runtime checks are required
+    value: ${{ steps.plan.outputs.runtime }}
+  acceptance:
+    description: Whether full graphics and export acceptance is required
+    value: ${{ steps.plan.outputs.acceptance }}
+  matrix:
+    description: Disjoint source test shards
+    value: ${{ steps.plan.outputs.matrix }}
+  mode:
+    description: Documentation, draft or full validation
+    value: ${{ steps.plan.outputs.mode }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - id: plan
+      shell: bash
+      run: python3 tools/ci_plan.py --output "$RUNNER_TEMP/ci-plan.json"
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ci-plan-${{ github.job }}-${{ github.run_id }}-${{ github.run_attempt }}
+        path: ${{ runner.temp }}/ci-plan.json
+        retention-days: 7

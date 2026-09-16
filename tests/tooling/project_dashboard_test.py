@@ -239,6 +239,33 @@ class ProjectDashboardTest(unittest.TestCase):
     def test_real_project_data_is_valid(self):
         dashboard.read_project()
 
+    def test_ci_status_handles_pending_failed_and_empty_without_false_green(self):
+        def status(checks):
+            return dashboard.check_summary("owner/repo", "a" * 40,
+                lambda *_: {"total_count": len(checks), "check_runs": checks})
+        self.assertEqual(status([])["status"], "Ausstehend")
+        success = {"name": "source", "status": "completed", "conclusion": "success"}
+        self.assertEqual(status([success])["status"], "Grün")
+        for conclusion in ("failure", "cancelled", "timed_out", "action_required"):
+            result = status([success, {"name": "render", "status": "completed", "conclusion": conclusion}])
+            self.assertEqual(result["status"], "Fehlgeschlagen")
+            self.assertEqual(result["failed"], ["render"])
+        for conclusion in (None, "unknown_future_status"):
+            self.assertEqual(status([success | {"conclusion": conclusion}])["status"], "Läuft")
+
+    def test_ci_pagination_and_api_failure_remain_visible(self):
+        calls = []
+        def get(repo, path):
+            calls.append(path)
+            return {"total_count": 101, "check_runs": [
+                {"name": "ok", "status": "completed", "conclusion": "success"}
+            ] * (100 if path.endswith("page=1") else 1)}
+        result = dashboard.check_summary("owner/repo", "a" * 40, get)
+        self.assertEqual(result["count"], 101)
+        self.assertEqual(len(calls), 2)
+        with self.assertRaisesRegex(ValueError, "Incomplete check"):
+            dashboard.check_summary("owner/repo", "a" * 40, lambda *_: {"total_count": 1, "check_runs": []})
+
 
 if __name__ == "__main__":
     unittest.main()

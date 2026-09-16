@@ -4,7 +4,11 @@ on:
   push:
     branches: [main]
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 # Validate PR merge trees once; keep main and manual checks independently cancellable.
 concurrency:
@@ -15,8 +19,18 @@ jobs:
   contracts:
     runs-on: ubuntu-latest
     timeout-minutes: 3
+    outputs:
+      mode: ${{ steps.plan.outputs.mode }}
+      source: ${{ steps.plan.outputs.source }}
+      runtime: ${{ steps.plan.outputs.runtime }}
+      matrix: ${{ steps.plan.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/plan-validation
+        id: plan
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -38,14 +52,14 @@ jobs:
 
   source:
     needs: contracts
+    if: needs.contracts.outputs.source == 'true'
     runs-on: ubuntu-latest
     # Real production/travel checks exceeded the old 30-minute shard envelope.
     # Preserve their individual deadlines and every test; allow the full shard.
     timeout-minutes: 45
     strategy:
       fail-fast: false
-      matrix:
-        shard: [0, 1, 2, 3]
+      matrix: ${{ fromJSON(needs.contracts.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-godot-editor
@@ -54,19 +68,18 @@ jobs:
         env:
           GODOT_BINARY: ${{ steps.engine.outputs.godot }}
           VALIDATION_SHARD: ${{ matrix.shard }}
+          VALIDATION_TESTS: ${{ toJSON(matrix.tests) }}
         run: |
           python3 - <<'PY'
           import os
-          from pathlib import Path
+          import json
           import sys
           from tools.validate_godot import main
-          from tools.check_validation_contracts import discover_tests
 
-          tests = discover_tests(Path.cwd())
           shard = int(os.environ["VALIDATION_SHARD"])
-          selected = tests[shard::4]
+          selected = json.loads(os.environ["VALIDATION_TESTS"])
           assert selected, "Source shard unexpectedly contains no tests"
-          print(f"Source shard {shard}: {len(selected)} of {len(tests)} tests", flush=True)
+          print(f"Source shard {shard}: {len(selected)} planned tests", flush=True)
           sys.argv = ["validate_godot", "--godot", os.environ["GODOT_BINARY"],
                       "--skip-main", "--output", "/tmp/validation-validate",
                       "--tests", *selected]
@@ -82,6 +95,7 @@ jobs:
 
   runtime:
     needs: contracts
+    if: needs.contracts.outputs.runtime == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -103,6 +117,7 @@ jobs:
           retention-days: 7
 
   validate:
+    name: ${{ needs.contracts.outputs.mode == 'draft' && 'Godot draft feedback' || 'Godot validation gate' }}
     needs: [contracts, source, runtime]
     if: always()
     runs-on: ubuntu-latest
@@ -113,7 +128,9 @@ jobs:
           CONTRACTS_RESULT: ${{ needs.contracts.result }}
           SOURCE_RESULT: ${{ needs.source.result }}
           RUNTIME_RESULT: ${{ needs.runtime.result }}
+          SOURCE_REQUIRED: ${{ needs.contracts.outputs.source }}
+          RUNTIME_REQUIRED: ${{ needs.contracts.outputs.runtime }}
         run: |
           test "$CONTRACTS_RESULT" = success
-          test "$SOURCE_RESULT" = success
-          test "$RUNTIME_RESULT" = success
+          if [ "$SOURCE_REQUIRED" = true ]; then test "$SOURCE_RESULT" = success; else test "$SOURCE_RESULT" = skipped; fi
+          if [ "$RUNTIME_REQUIRED" = true ]; then test "$RUNTIME_RESULT" = success; else test "$RUNTIME_RESULT" = skipped; fi

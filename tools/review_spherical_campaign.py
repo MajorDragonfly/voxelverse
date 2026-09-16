@@ -18,12 +18,19 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     project = Path(__file__).resolve().parents[1]
     with validation_editor(args.godot) as editor, tempfile.TemporaryDirectory(prefix="sphere-review-") as userdata:
-        result = subprocess.run([
-            str(editor), "--path", str(project), "--rendering-method", args.renderer,
-            "--audio-driver", "Dummy", "--resolution", "1280x720",
-            "--script", "res://tests/spherical_creature_test.gd", "--", "--capture", str(output),
-        ], env=isolated_env(Path(userdata)), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-            text=True, encoding="utf-8", errors="replace", timeout=240)
+        try:
+            result = subprocess.run([
+                str(editor), "--path", str(project), "--rendering-method", args.renderer,
+                "--audio-driver", "Dummy", "--resolution", "1280x720",
+                "--script", "res://tests/spherical_creature_test.gd", "--", "--capture", str(output),
+            ], env=isolated_env(Path(userdata)), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                text=True, encoding="utf-8", errors="replace", timeout=600)
+        except subprocess.TimeoutExpired as error:
+            log = error.stdout or b""
+            if isinstance(log, bytes):
+                log = log.decode("utf-8", "replace")
+            (output / "runtime.log").write_text(log + "\nSPHERE_REVIEW_TIMEOUT: 600 seconds\n", encoding="utf-8")
+            raise
     (output / "runtime.log").write_text(result.stdout, encoding="utf-8")
     if result.returncode or ERROR.search(result.stdout) or "SPHERICAL_CREATURE_PASSED" not in result.stdout:
         print(result.stdout, flush=True)

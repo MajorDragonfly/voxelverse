@@ -4,14 +4,34 @@ on:
   push:
     branches: [main]
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: environment-render-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      mode: ${{ steps.plan.outputs.mode }}
+      acceptance: ${{ steps.plan.outputs.acceptance }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/plan-validation
+        id: plan
+
   capture:
+    needs: plan
+    if: needs.plan.outputs.acceptance == 'true'
     runs-on: ubuntu-latest
     # The complete forest review uses CPU Vulkan on hosted runners.
     timeout-minutes: ${{ matrix.review == 'environment' && matrix.renderer == 'forward_plus' && 30 || 20 }}
@@ -22,34 +42,28 @@ jobs:
         review: [planets, environment, spherical_campaign, resources]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - uses: actions/cache@v4
-        with:
-          path: ${{ runner.temp }}/godot-export-toolchain
-          key: godot-4.6.3-desktop-v1-${{ runner.os }}
-      - name: Install software renderer and verified Godot
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install software renderer
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
-          python tools/install_godot.py --directory "${{ runner.temp }}/godot-export-toolchain" --platform linux
       - name: Import project
         run: |
-          python tools/validate_godot.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --tests environment_production_test --skip-main --output "${{ runner.temp }}/render-import"
+          python tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}" --tests environment_production_test --skip-main --output "${{ runner.temp }}/render-import"
       - name: Render underwater optics, voxel planets, orbit and system
         if: matrix.review == 'planets'
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
-          xvfb-run -a -s '-screen 0 1280x720x24' python tools/profile_environment.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/planet-lab-review" --cases underwater planet_lab large_planet galaxy galaxy_visit --seeds 12345 --size 1280 720 --frames 4 --warmup 4 --fast-setup
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/profile_environment.py --godot "${{ steps.engine.outputs.godot }}" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/planet-lab-review" --cases underwater planet_lab large_planet galaxy galaxy_visit --seeds 12345 --size 1280 720 --frames 4 --warmup 4 --fast-setup
       - name: Render procedural food and home meshes
         if: matrix.review == 'resources'
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
-          xvfb-run -a -s '-screen 0 1600x1000x24' python tools/review_resource_visuals.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/resource-review"
+          xvfb-run -a -s '-screen 0 1600x1000x24' python tools/review_resource_visuals.py --godot "${{ steps.engine.outputs.godot }}" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/resource-review"
       - name: Upload resource captures
         if: always() && matrix.review == 'resources'
         uses: actions/upload-artifact@v4
@@ -70,7 +84,7 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
-          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review_spherical_campaign.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/spherical-campaign-review"
+          xvfb-run -a -s '-screen 0 1280x720x24' python tools/review_spherical_campaign.py --godot "${{ steps.engine.outputs.godot }}" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/spherical-campaign-review"
       - name: Upload shared spherical campaign captures
         if: always() && matrix.review == 'spherical_campaign'
         uses: actions/upload-artifact@v4
@@ -84,7 +98,7 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           export VK_ICD_FILENAMES="$(python -c 'from pathlib import Path; paths = sorted(Path("/usr/share/vulkan/icd.d").glob("lvp_icd*.json")); assert len(paths) == 1, paths; print(paths[0])')"
-          xvfb-run -a -s '-screen 0 960x540x24' python tools/profile_environment.py --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/environment-review" --size 960 540 --frames 4 --warmup 4 --fast-setup
+          xvfb-run -a -s '-screen 0 960x540x24' python tools/profile_environment.py --godot "${{ steps.engine.outputs.godot }}" --renderer ${{ matrix.renderer }} --output "${{ runner.temp }}/environment-review" --size 960 540 --frames 4 --warmup 4 --fast-setup
       - name: Upload rendered review and measurements
         if: always() && matrix.review == 'environment'
         uses: actions/upload-artifact@v4
@@ -95,3 +109,19 @@ jobs:
             ${{ runner.temp }}/render-import
             ${{ runner.temp }}/planet-lab-review
           retention-days: 14
+
+  validate:
+    name: ${{ needs.plan.outputs.mode == 'draft' && 'Render draft plan' || 'Environment render gate' }}
+    needs: [plan, capture]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify planned render acceptance
+        env:
+          PLAN_RESULT: ${{ needs.plan.result }}
+          REQUIRED: ${{ needs.plan.outputs.acceptance }}
+          RESULT: ${{ needs.capture.result }}
+        run: |
+          test "$PLAN_RESULT" = success
+          if [ "$REQUIRED" = true ]; then test "$RESULT" = success; else test "$RESULT" = skipped; fi

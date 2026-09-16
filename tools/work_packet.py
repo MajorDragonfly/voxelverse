@@ -131,11 +131,17 @@ def handoff(project, packet_id, base):
 
 
 def start_brief(packet, data, owner):
-    candidate = data["candidate"]
+    # Start from the latest recorded integrated main, not an older PR head.
+    candidate = data["main"]
+    deliveries = {item["id"]: item for item in data["deliveries"]}
+    dependencies = deliveries.get(packet["id"], {}).get("depends_on", [])
+    blocked = [key for key in dependencies if deliveries[key]["status"] not in ("integrated", "accepted")]
+    if blocked:
+        raise ValueError("Packet blocked by unintegrated dependencies: " + ", ".join(blocked))
     return "\n".join([
         f"Besitzer/Chat: {owner}",
         f"Basisvorschlag aus Statusabgleich {data['reviewed_on']}: {candidate['sha']}",
-        f"Gemeinsamer Kandidat: {candidate['branch']} (PR #{candidate['pr']})",
+        f"Integrierte Basis: {candidate['branch']}; Nachweis: {candidate['evidence']}",
         f"Zentrale Vergabe: https://github.com/{data['repository']}/issues/{data['coordination_issue']}",
         "Eine neuere explizite Zuweisung hat Vorrang. Aktuelles Ticket einmal lesen:",
         "python3 tools/project_dashboard.py round", "",

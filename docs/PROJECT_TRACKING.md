@@ -112,9 +112,22 @@ PR-Ereignissen und main-Updates; ein manueller Start wird nach Übernahme des
 Workflows in den Standardbranch verfügbar. Er hat ausschließlich Leserechte.
 README und Fortschrittsgrafik ändern sich erst mit einer geprüften Aktualisierung
 der zentralen Daten und erneuter Generierung. Es gibt keine stillen Bot-Commits,
-keine automatischen Merges und keine aus PR-Ereignissen erfundene Abnahme.
+keine aus PR-Ereignissen erfundene Abnahme. Routinemerges folgen dem freigegebenen Arbeitsrahmen in AGENTS.md.
 
 Die bestehenden Spiel-, Export- und Render-Gates bleiben erhalten. Reine
 Statuspflege startet lokal keine Engine; CI wird nicht durch Skip-Marker umgangen.
 Bei Fortsetzung desselben Auftrags keine erneute globale Inventur: eigener
 Paketkontext plus aktuelle konkrete Änderung reichen.
+
+## Automatischer Prüfstatus und vorbereitete Pakete
+
+Der Workflow `Project live status` aktualisiert nach PR-Änderungen und abgeschlossenen
+Prüfläufen genau einen Bot-Kommentar in #137 mit den Checks am aktuellen Kopf.
+Die manuelle Vergabe bleibt in der Ticketbeschreibung. `live --checks` liefert
+dieselben Daten lokal; Fehler, ausstehende und laufende Prüfungen bleiben unterscheidbar.
+
+Vorbereitete Briefe stehen in `packets.json`, ihre Abhängigkeiten und ihr bewerteter
+Lieferstatus ausschließlich in `project.json`. `work_packet.py start` verwendet
+dessen dokumentierten main-Stand und stoppt bei nicht integrierten Voraussetzungen.
+Die erzeugte nächste Runde zeigt die vorbereitete Reihenfolge. CI- und GitHub-Einrichtung:
+[Entwicklungsablauf](DEVELOPMENT_WORKFLOW.md).

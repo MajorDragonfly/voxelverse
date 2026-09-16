@@ -1,5 +1,27 @@
 # Voxelverse: effizient zusammenarbeiten
 
+## Freigegebener Arbeitsrahmen (Lars, 16.09.2026)
+
+Lars hat die vorgeschlagenen Verbesserungen einschließlich dieses Arbeitsrahmens
+mit „ok setz das um“ beauftragt. Für zugewiesene Voxelverse-Pakete sind Bearbeiten,
+Prüfen, Committen, Push auf eigenem Branch, PR-Erstellung und zugehörige CI-Fixes
+freigegeben; dafür nicht erneut um dieselbe Bestätigung bitten. „Nächstes Paket“
+erlaubt die Auswahl eines passenden unbesetzten Pakets nach der zentralen Runde.
+Bestehende Besitzer und bekannte Abhängigkeiten berücksichtigen.
+
+Abgeschlossene Routinelieferungen dürfen konfliktfrei nach `main` übernommen
+werden, wenn die vier Pflichtprüfungen aus `tools/workflow/main-ruleset.json`
+für den aktuellen Stand erfolgreich sind, der Branch aktuell ist und alle
+Abhängigkeiten integriert sind. Native Auto-Merge dafür aktivieren. Entwürfe,
+ausdrückliche Merge-Sperren und fremde laufende Pakete nicht übernehmen. Solange
+der Ruleset noch nicht aktiv ist, dieselben Kriterien vor einem Merge selbst
+prüfen; kein grüner Entwurfsplan ersetzt die vollständige Code-Abnahme.
+
+Neue Kosten, externe Dienste, Änderungen an Zugriffsrechten oder destruktive
+Aktionen außerhalb des beauftragten Umfangs brauchen eine eigene Entscheidung.
+Dieser Rahmen umgeht keine technischen Berechtigungen oder automatische Prüfung.
+Ein Merge ist keine Ziel-PC-/Spielspaß-Abnahme. Einrichtung: [Entwicklungsablauf](docs/DEVELOPMENT_WORKFLOW.md).
+
 ## Einstieg und Fortsetzung
 
 1. Lies `docs/PROJECT_STATUS.md` und den konkreten Auftrag. Bei einer Fortsetzung
