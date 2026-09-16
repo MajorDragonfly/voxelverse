@@ -4877,3 +4877,12 @@ msgstr "Seeking carrion"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Eating carrion"
+
+msgid "SKILLS_POINTS_COMPACT"
+msgstr "%d points available"
+
+msgid "SKILLS_COMBINE"
+msgstr "Both paths can be combined."
+
+msgid "SKILLS_EARNING_COMPACT"
+msgstr "Social: befriend and help. Aggressive: hunt and resolve conflicts."

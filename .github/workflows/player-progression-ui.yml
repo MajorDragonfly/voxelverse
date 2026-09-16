@@ -46,6 +46,18 @@ jobs:
           python3 tools/review_player_progression.py
           --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
           --output /tmp/player-progression-review
+      - name: Capture compact book in DE and EN at three sizes and two font scales
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1080x24'
+          python3 tools/review_skills_localization.py
+          --godot /tmp/progression-godot/Godot_v4.6.3-stable_linux.x86_64
+          --output /tmp/skills-book-review
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: skills-book-review-${{ github.event_name }}
+          path: /tmp/skills-book-review
+          retention-days: 14
       - name: Exercise real social gameplay and earned purchases
         run: >-
           xvfb-run -a -s '-screen 0 1920x1080x24'

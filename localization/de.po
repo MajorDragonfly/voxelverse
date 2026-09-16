@@ -4877,3 +4877,12 @@ msgstr "Sucht Aas"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Frisst Aas"
+
+msgid "SKILLS_POINTS_COMPACT"
+msgstr "%d Punkte verfügbar"
+
+msgid "SKILLS_COMBINE"
+msgstr "Beide Wege lassen sich kombinieren."
+
+msgid "SKILLS_EARNING_COMPACT"
+msgstr "Sozial: befreunden und helfen. Aggressiv: jagen und Konflikte abschließen."

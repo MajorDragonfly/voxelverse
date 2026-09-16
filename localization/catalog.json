@@ -8131,6 +8131,21 @@
       "key": "WILDLIFE_EAT_CARCASS",
       "de": "Frisst Aas",
       "en": "Eating carrion"
+    },
+    {
+      "key": "SKILLS_POINTS_COMPACT",
+      "de": "%d Punkte verfügbar",
+      "en": "%d points available"
+    },
+    {
+      "key": "SKILLS_COMBINE",
+      "de": "Beide Wege lassen sich kombinieren.",
+      "en": "Both paths can be combined."
+    },
+    {
+      "key": "SKILLS_EARNING_COMPACT",
+      "de": "Sozial: befreunden und helfen. Aggressiv: jagen und Konflikte abschließen.",
+      "en": "Social: befriend and help. Aggressive: hunt and resolve conflicts."
     }
   ]
 }
