@@ -117,7 +117,9 @@ func _show_detail(kind: String) -> void:
 	hovered_resource = kind
 	_caption.text = Inventory.detail(snapshot[kind])
 	var lot: Node3D = lots[kind].root
-	_caption.global_position = lot.global_position + lot.global_basis.y * 1.8
+	# Keep the lower text edge above the permanent village/source captions.
+	var half_text_height: float = (_caption.text.count("\n") + 1) * _caption.font_size * _caption.pixel_size * 0.65
+	_caption.global_position = lot.global_position + lot.global_basis.y * (4.3 + half_text_height)
 	_caption.show()
 
 func _hide_detail() -> void:
