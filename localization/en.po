@@ -4211,3 +4211,108 @@ msgstr "This workplace cannot be reached using the verified village paths."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "This settlement already has two workplaces of this type."
+
+msgid "GRAPHICS_CUSTOM"
+msgstr "Custom"
+
+msgid "GRAPHICS_CUSTOM_DESCRIPTION"
+msgstr "Your own graphics values. Selecting a preset replaces all individual values."
+
+msgid "GRAPHICS_DRAFT_HINT"
+msgstr "Changes take effect with “Apply & save”. “Back” discards them. Higher quality and distance require more graphics performance."
+
+msgid "GRAPHICS_RESET"
+msgstr "Restore graphics defaults"
+
+msgid "GRAPHICS_UNAVAILABLE"
+msgstr "Unavailable in this rendering mode. Your preferences are kept for Forward+."
+
+msgid "GRAPHICS_SOFT_SHADOW_UNAVAILABLE"
+msgstr "Soft sun shadows are unavailable in Compatibility mode."
+
+msgid "GRAPHICS_NEWER_SETTINGS"
+msgstr "The graphics settings come from a newer version and will not be overwritten."
+
+msgid "GRAPHICS_QUALITY_LOW"
+msgstr "Low"
+
+msgid "GRAPHICS_QUALITY_MEDIUM"
+msgstr "Medium"
+
+msgid "GRAPHICS_QUALITY_HIGH"
+msgstr "High"
+
+msgid "GRAPHICS_GROUP_CLOUDS"
+msgstr "Clouds"
+
+msgid "GRAPHICS_GROUP_HAZE"
+msgstr "Distance haze"
+
+msgid "GRAPHICS_GROUP_FOG"
+msgstr "Volumetric fog and light shafts"
+
+msgid "GRAPHICS_GROUP_SHADOWS"
+msgstr "Sun shadows"
+
+msgid "GRAPHICS_GROUP_SSAO"
+msgstr "Contact shadows (SSAO)"
+
+msgid "GRAPHICS_GROUP_BLOOM"
+msgstr "Bloom and glow"
+
+msgid "GRAPHICS_GROUP_IMAGE"
+msgstr "Brightness and colours"
+
+msgid "GRAPHICS_CLOUDS_ENABLED"
+msgstr "Show clouds"
+
+msgid "GRAPHICS_CLOUD_QUALITY"
+msgstr "Cloud detail"
+
+msgid "GRAPHICS_HAZE_STRENGTH"
+msgstr "Haze strength"
+
+msgid "GRAPHICS_FOG_ENABLED"
+msgstr "Show volumetric fog"
+
+msgid "GRAPHICS_FOG_QUALITY"
+msgstr "Fog quality"
+
+msgid "GRAPHICS_FOG_STRENGTH"
+msgstr "Fog strength"
+
+msgid "GRAPHICS_SHADOWS_ENABLED"
+msgstr "Show sun shadows"
+
+msgid "GRAPHICS_SHADOW_QUALITY"
+msgstr "Shadow quality"
+
+msgid "GRAPHICS_SHADOW_SOFTNESS"
+msgstr "Shadow softness"
+
+msgid "GRAPHICS_SHADOW_DISTANCE"
+msgstr "Shadow distance"
+
+msgid "GRAPHICS_SSAO_ENABLED"
+msgstr "Show contact shadows"
+
+msgid "GRAPHICS_SSAO_QUALITY"
+msgstr "Contact shadow quality"
+
+msgid "GRAPHICS_SSAO_STRENGTH"
+msgstr "Contact shadow strength"
+
+msgid "GRAPHICS_BLOOM_ENABLED"
+msgstr "Show glow"
+
+msgid "GRAPHICS_BLOOM_STRENGTH"
+msgstr "Glow intensity"
+
+msgid "GRAPHICS_EXPOSURE"
+msgstr "Exposure"
+
+msgid "GRAPHICS_CONTRAST"
+msgstr "Contrast"
+
+msgid "GRAPHICS_SATURATION"
+msgstr "Saturation"

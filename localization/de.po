@@ -4211,3 +4211,108 @@ msgstr "Der Arbeitsplatz ist über die geprüften Dorfwege nicht erreichbar."
 
 msgid "WORKPLACE_LIMIT"
 msgstr "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden."
+
+msgid "GRAPHICS_CUSTOM"
+msgstr "Benutzerdefiniert"
+
+msgid "GRAPHICS_CUSTOM_DESCRIPTION"
+msgstr "Deine eigenen Grafikwerte. Ein Preset ersetzt alle Einzelwerte."
+
+msgid "GRAPHICS_DRAFT_HINT"
+msgstr "Änderungen werden erst mit „Übernehmen & speichern“ aktiv. „Zurück“ verwirft sie. Höhere Qualität und Reichweite benötigen mehr Grafikleistung."
+
+msgid "GRAPHICS_RESET"
+msgstr "Grafikstandard wiederherstellen"
+
+msgid "GRAPHICS_UNAVAILABLE"
+msgstr "In diesem Grafikmodus nicht verfügbar. Deine Werte bleiben für Forward+ gespeichert."
+
+msgid "GRAPHICS_SOFT_SHADOW_UNAVAILABLE"
+msgstr "Weiche Sonnenschatten sind im Kompatibilitätsmodus nicht verfügbar."
+
+msgid "GRAPHICS_NEWER_SETTINGS"
+msgstr "Die Grafikdatei stammt aus einer neueren Version und wird nicht überschrieben."
+
+msgid "GRAPHICS_QUALITY_LOW"
+msgstr "Niedrig"
+
+msgid "GRAPHICS_QUALITY_MEDIUM"
+msgstr "Mittel"
+
+msgid "GRAPHICS_QUALITY_HIGH"
+msgstr "Hoch"
+
+msgid "GRAPHICS_GROUP_CLOUDS"
+msgstr "Wolken"
+
+msgid "GRAPHICS_GROUP_HAZE"
+msgstr "Entfernungsdunst"
+
+msgid "GRAPHICS_GROUP_FOG"
+msgstr "Volumetrischer Nebel und Lichtstrahlen"
+
+msgid "GRAPHICS_GROUP_SHADOWS"
+msgstr "Sonnenschatten"
+
+msgid "GRAPHICS_GROUP_SSAO"
+msgstr "Kontaktschatten (SSAO)"
+
+msgid "GRAPHICS_GROUP_BLOOM"
+msgstr "Bloom und Leuchteffekte"
+
+msgid "GRAPHICS_GROUP_IMAGE"
+msgstr "Bildhelligkeit und Farben"
+
+msgid "GRAPHICS_CLOUDS_ENABLED"
+msgstr "Wolken anzeigen"
+
+msgid "GRAPHICS_CLOUD_QUALITY"
+msgstr "Wolkendetails"
+
+msgid "GRAPHICS_HAZE_STRENGTH"
+msgstr "Dunststärke"
+
+msgid "GRAPHICS_FOG_ENABLED"
+msgstr "Volumetrischen Nebel anzeigen"
+
+msgid "GRAPHICS_FOG_QUALITY"
+msgstr "Nebelqualität"
+
+msgid "GRAPHICS_FOG_STRENGTH"
+msgstr "Nebelstärke"
+
+msgid "GRAPHICS_SHADOWS_ENABLED"
+msgstr "Sonnenschatten anzeigen"
+
+msgid "GRAPHICS_SHADOW_QUALITY"
+msgstr "Schattenqualität"
+
+msgid "GRAPHICS_SHADOW_SOFTNESS"
+msgstr "Schattenweichheit"
+
+msgid "GRAPHICS_SHADOW_DISTANCE"
+msgstr "Schattenreichweite"
+
+msgid "GRAPHICS_SSAO_ENABLED"
+msgstr "Kontaktschatten anzeigen"
+
+msgid "GRAPHICS_SSAO_QUALITY"
+msgstr "Kontaktschattenqualität"
+
+msgid "GRAPHICS_SSAO_STRENGTH"
+msgstr "Kontaktschattenstärke"
+
+msgid "GRAPHICS_BLOOM_ENABLED"
+msgstr "Leuchteffekte anzeigen"
+
+msgid "GRAPHICS_BLOOM_STRENGTH"
+msgstr "Leuchtstärke"
+
+msgid "GRAPHICS_EXPOSURE"
+msgstr "Belichtung"
+
+msgid "GRAPHICS_CONTRAST"
+msgstr "Kontrast"
+
+msgid "GRAPHICS_SATURATION"
+msgstr "Sättigung"

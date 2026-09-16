@@ -96,7 +96,8 @@
         "world_layered_v7_test",
         "world_runtime_continuity_test",
         "resource_visuals_test",
-        "campaign_atmosphere_test"
+        "campaign_atmosphere_test",
+        "graphics_settings_test"
       ]
     },
     {

@@ -82,7 +82,7 @@ func _run() -> void:
 		_expect(air.environment.glow_enabled == (quality >= 1 and supported), "Glow quality switch is sticky.")
 	# Actual settings control, persistence and group broadcast while paused.
 	var option: OptionButton = settings._menu_layer.find_child("AtmosphereQuality",true,false)
-	_expect(option != null and option.item_count == 3, "F8 has no usable atmosphere choice.")
+	_expect(option != null and option.item_count == 4, "F8 has no usable atmosphere choice.")
 	settings.open_menu()
 	settings._tabs.current_tab = settings._tabs.get_node("GRAPHICS_TAB").get_index()
 	option.select(2)

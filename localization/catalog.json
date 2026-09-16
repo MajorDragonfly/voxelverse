@@ -7021,6 +7021,181 @@
       "key": "WORKPLACE_LIMIT",
       "de": "An diesem Ort sind bereits zwei Arbeitsplätze dieses Typs vorhanden.",
       "en": "This settlement already has two workplaces of this type."
+    },
+    {
+      "key": "GRAPHICS_CUSTOM",
+      "de": "Benutzerdefiniert",
+      "en": "Custom"
+    },
+    {
+      "key": "GRAPHICS_CUSTOM_DESCRIPTION",
+      "de": "Deine eigenen Grafikwerte. Ein Preset ersetzt alle Einzelwerte.",
+      "en": "Your own graphics values. Selecting a preset replaces all individual values."
+    },
+    {
+      "key": "GRAPHICS_DRAFT_HINT",
+      "de": "Änderungen werden erst mit „Übernehmen & speichern“ aktiv. „Zurück“ verwirft sie. Höhere Qualität und Reichweite benötigen mehr Grafikleistung.",
+      "en": "Changes take effect with “Apply & save”. “Back” discards them. Higher quality and distance require more graphics performance."
+    },
+    {
+      "key": "GRAPHICS_RESET",
+      "de": "Grafikstandard wiederherstellen",
+      "en": "Restore graphics defaults"
+    },
+    {
+      "key": "GRAPHICS_UNAVAILABLE",
+      "de": "In diesem Grafikmodus nicht verfügbar. Deine Werte bleiben für Forward+ gespeichert.",
+      "en": "Unavailable in this rendering mode. Your preferences are kept for Forward+."
+    },
+    {
+      "key": "GRAPHICS_SOFT_SHADOW_UNAVAILABLE",
+      "de": "Weiche Sonnenschatten sind im Kompatibilitätsmodus nicht verfügbar.",
+      "en": "Soft sun shadows are unavailable in Compatibility mode."
+    },
+    {
+      "key": "GRAPHICS_NEWER_SETTINGS",
+      "de": "Die Grafikdatei stammt aus einer neueren Version und wird nicht überschrieben.",
+      "en": "The graphics settings come from a newer version and will not be overwritten."
+    },
+    {
+      "key": "GRAPHICS_QUALITY_LOW",
+      "de": "Niedrig",
+      "en": "Low"
+    },
+    {
+      "key": "GRAPHICS_QUALITY_MEDIUM",
+      "de": "Mittel",
+      "en": "Medium"
+    },
+    {
+      "key": "GRAPHICS_QUALITY_HIGH",
+      "de": "Hoch",
+      "en": "High"
+    },
+    {
+      "key": "GRAPHICS_GROUP_CLOUDS",
+      "de": "Wolken",
+      "en": "Clouds"
+    },
+    {
+      "key": "GRAPHICS_GROUP_HAZE",
+      "de": "Entfernungsdunst",
+      "en": "Distance haze"
+    },
+    {
+      "key": "GRAPHICS_GROUP_FOG",
+      "de": "Volumetrischer Nebel und Lichtstrahlen",
+      "en": "Volumetric fog and light shafts"
+    },
+    {
+      "key": "GRAPHICS_GROUP_SHADOWS",
+      "de": "Sonnenschatten",
+      "en": "Sun shadows"
+    },
+    {
+      "key": "GRAPHICS_GROUP_SSAO",
+      "de": "Kontaktschatten (SSAO)",
+      "en": "Contact shadows (SSAO)"
+    },
+    {
+      "key": "GRAPHICS_GROUP_BLOOM",
+      "de": "Bloom und Leuchteffekte",
+      "en": "Bloom and glow"
+    },
+    {
+      "key": "GRAPHICS_GROUP_IMAGE",
+      "de": "Bildhelligkeit und Farben",
+      "en": "Brightness and colours"
+    },
+    {
+      "key": "GRAPHICS_CLOUDS_ENABLED",
+      "de": "Wolken anzeigen",
+      "en": "Show clouds"
+    },
+    {
+      "key": "GRAPHICS_CLOUD_QUALITY",
+      "de": "Wolkendetails",
+      "en": "Cloud detail"
+    },
+    {
+      "key": "GRAPHICS_HAZE_STRENGTH",
+      "de": "Dunststärke",
+      "en": "Haze strength"
+    },
+    {
+      "key": "GRAPHICS_FOG_ENABLED",
+      "de": "Volumetrischen Nebel anzeigen",
+      "en": "Show volumetric fog"
+    },
+    {
+      "key": "GRAPHICS_FOG_QUALITY",
+      "de": "Nebelqualität",
+      "en": "Fog quality"
+    },
+    {
+      "key": "GRAPHICS_FOG_STRENGTH",
+      "de": "Nebelstärke",
+      "en": "Fog strength"
+    },
+    {
+      "key": "GRAPHICS_SHADOWS_ENABLED",
+      "de": "Sonnenschatten anzeigen",
+      "en": "Show sun shadows"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_QUALITY",
+      "de": "Schattenqualität",
+      "en": "Shadow quality"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_SOFTNESS",
+      "de": "Schattenweichheit",
+      "en": "Shadow softness"
+    },
+    {
+      "key": "GRAPHICS_SHADOW_DISTANCE",
+      "de": "Schattenreichweite",
+      "en": "Shadow distance"
+    },
+    {
+      "key": "GRAPHICS_SSAO_ENABLED",
+      "de": "Kontaktschatten anzeigen",
+      "en": "Show contact shadows"
+    },
+    {
+      "key": "GRAPHICS_SSAO_QUALITY",
+      "de": "Kontaktschattenqualität",
+      "en": "Contact shadow quality"
+    },
+    {
+      "key": "GRAPHICS_SSAO_STRENGTH",
+      "de": "Kontaktschattenstärke",
+      "en": "Contact shadow strength"
+    },
+    {
+      "key": "GRAPHICS_BLOOM_ENABLED",
+      "de": "Leuchteffekte anzeigen",
+      "en": "Show glow"
+    },
+    {
+      "key": "GRAPHICS_BLOOM_STRENGTH",
+      "de": "Leuchtstärke",
+      "en": "Glow intensity"
+    },
+    {
+      "key": "GRAPHICS_EXPOSURE",
+      "de": "Belichtung",
+      "en": "Exposure"
+    },
+    {
+      "key": "GRAPHICS_CONTRAST",
+      "de": "Kontrast",
+      "en": "Contrast"
+    },
+    {
+      "key": "GRAPHICS_SATURATION",
+      "de": "Sättigung",
+      "en": "Saturation"
     }
   ]
 }

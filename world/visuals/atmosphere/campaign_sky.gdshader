@@ -12,6 +12,7 @@ uniform float daylight = 1.0;
 uniform float sunset = 0.0;
 uniform float cloud_cover = 0.5;
 uniform vec3 cloud_offset = vec3(0.0);
+uniform bool clouds_enabled = true;
 uniform int cloud_octaves = 4;
 uniform float star_seed = 0.0;
 
@@ -59,7 +60,7 @@ void sky() {
 		vec3 star_cell = floor(ray * 700.0);
 		float star = step(0.9985,hash31(star_cell + vec3(star_seed))) * pow(max(0.0,1.0-length(fract(ray*700.0)-0.5)*2.0),4.0);
 		color += vec3(star) * (1.0-daylight) * smoothstep(0.0,0.2,elevation);
-		if (elevation > 0.015) {
+		if (clouds_enabled && elevation > 0.015) {
 			float field = clouds(ray * 5.5 + cloud_offset);
 			float threshold = mix(0.72,0.38,cloud_cover);
 			float opacity = smoothstep(threshold,threshold+0.16,field) * smoothstep(0.015,0.16,elevation);
