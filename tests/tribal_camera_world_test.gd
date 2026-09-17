@@ -45,7 +45,7 @@ func _run() -> void:
 	var ground: Array = Cube.global_position(tribe.anchor(), terrain.origin)
 	await _capture("camera-sphere-home")
 	_press(KEY_D, true)
-	await _until(func() -> bool: return tribe._focus.distance_to(tribe.anchor()) > 108.0, 20000)
+	await _camera_until(func() -> bool: return tribe._focus.distance_to(tribe.anchor()) > 108.0, 20.0)
 	_press(KEY_D, false)
 	_expect(tribe._focus.distance_to(tribe.anchor()) >= 100.0, "WASD still stops near the village instead of panning at least 100 m.")
 	var address: Dictionary = Space.address(tribe, tribe._focus)
@@ -72,15 +72,15 @@ func _run() -> void:
 	_expect(tribe._focus.distance_to(tribe.anchor()) < 0.01, "Return to village failed after distant rebase.")
 	_press(KEY_RIGHT, true)
 	_press(KEY_PAGEDOWN, true)
-	await _until(func() -> bool: return rig.tilt <= 30.0, 5000)
+	await _camera_until(func() -> bool: return rig.tilt <= 30.0, 5.0)
 	_press(KEY_RIGHT, false)
 	_press(KEY_PAGEDOWN, false)
 	tribe.zoom(1000.0)
-	await _until(func() -> bool: return tribe.camera.size == 72.0, 5000)
+	await _camera_until(func() -> bool: return tribe.camera.size == 72.0, 5.0)
 	_check_surface()
 	await _capture("camera-sphere-wide")
 	tribe.zoom(-1000.0)
-	await _until(func() -> bool: return tribe.camera.size == 12.0, 5000)
+	await _camera_until(func() -> bool: return tribe.camera.size == 12.0, 5.0)
 	_check_surface()
 	_expect(tribe.camera.size == 12.0 and rig.tilt == 30.0, "Zoom/tilt failed to clamp and settle.")
 	# Live load replaces the transient rig and observer, retaining local controls.
@@ -94,6 +94,15 @@ func _run() -> void:
 	print("CAMERA_METRICS ", JSON.stringify({"pan_m": Cube.local_position(before, ground).length(), "tiles": terrain.leaves.size(), "colliders": terrain.active.size(), "peak_meshes": terrain.peak_resident_meshes}))
 	if failures.is_empty(): print("TRIBAL_CAMERA_WORLD_PASSED")
 	await _finish()
+
+func _camera_until(predicate: Callable, motion_seconds: float) -> void:
+	# Camera motion bounds each frame to 0.1 s. Count that observed motion time
+	# instead of mistaking a slow software renderer for a camera range limit.
+	# The enclosing native/headless runner retains its wall-clock deadline.
+	var elapsed: float = 0.0
+	while not predicate.call() and elapsed < motion_seconds:
+		await process_frame
+		elapsed += minf(root.get_process_delta_time(), 0.1)
 
 func _check_surface() -> void:
 	var sample: Dictionary = Space.sample(tribe, tribe._focus)

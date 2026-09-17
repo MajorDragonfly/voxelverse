@@ -42,7 +42,9 @@ func _run() -> void:
 	var bytes: String = FileAccess.get_file_as_string(SAVE)
 	await _capture("camera-default")
 	_press(KEY_RIGHT, true)
-	await _frames(40)
+	# Observe the turn before it wraps; software rendering does not provide a
+	# fixed frame duration and forty rendered frames can exceed a full turn.
+	await _until(func() -> bool: return rig.yaw > 15.0, 240)
 	_press(KEY_RIGHT, false)
 	_expect(rig.yaw > 15.0, "Real rotation key never reached the camera.")
 	var start: Vector3 = tribe._focus
@@ -67,7 +69,7 @@ func _run() -> void:
 	var old_zoom: float = tribe.camera.size
 	_mouse(MOUSE_BUTTON_WHEEL_DOWN, true, Vector2(500, 220))
 	_expect(tribe._zoom == old_zoom + 2.0 and tribe.camera.size == old_zoom, "Wheel bypassed the smooth zoom target.")
-	await _frames(15)
+	await _until(func() -> bool: return tribe.camera.size > old_zoom, 120)
 	_expect(tribe.camera.size > old_zoom and tribe.camera.size < tribe._zoom, "Zoom is not interpolated.")
 	var target: float = tribe._zoom
 	_mouse(MOUSE_BUTTON_WHEEL_DOWN, true, hud)
