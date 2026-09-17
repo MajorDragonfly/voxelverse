@@ -48,7 +48,11 @@ Der Beobachter erzeugt weder Rohstoffe, Belohnungen noch Kampagnenfortschritt.
   Opt-in in einem bereits ausgebauten Dorf ohne erfundene Lieferungen.
   Bauvorräte werden im Test begrenzt aus endlichen Vorkommen ins Lager übertragen;
   Herstellung, Bau und Lieferwege laufen regulär. Kein Tutorialmarker wird dafür
-  gesetzt. Layout: DE/EN, 720p/1080p und 100/125/150 % Schriftgröße.
+  gesetzt. Layout: DE/EN, 720p/1080p und 100/125/150 % Schriftgröße vollständig
+  headless; nativ DE/EN bei 1080p/100 % sowie DE bei 720p/150 %.
+  Die Bauprüfung behält 45 Sekunden tatsächlicher Physikarbeit als Grenze;
+  langsames Software-Rendering erhält dafür höchstens 180 Sekunden Wandzeit.
+  Protokolliert werden beide Zeiten sowie Bau-/Arbeiterzustand.
 - Direkte Verbraucher: vorhandene Einführung einschließlich Kugelwelt,
   Save-Teilnehmer, Stammeslokalisierung, Kamera und Bauvorschau.
 - `.github/workflows/tribal-tutorial-validate.yml` führt acht gezielte Tests und

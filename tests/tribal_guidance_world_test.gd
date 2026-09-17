@@ -138,9 +138,23 @@ func _run() -> void:
 	await _world_click(tribe.camera.unproject_position(site), MOUSE_BUTTON_RIGHT)
 	_expect(saves.guidance.tribal_done("tribe_place") and not saves.guidance.tribal_done("tribe_finish"), "Confirmed construction did not separate placement and completion.")
 	tribe.set_physics_process(true)
-	await _until(func() -> bool: return tribe.village().economy.stations.has("forester"), 45000)
+	var first_tick: int = Engine.get_physics_frames()
+	var started: int = Time.get_ticks_msec()
+	# llvmpipe can draw fewer frames than the physics catch-up limit supports.
+	# Keep the 45 seconds of actual physics work, with a bounded wall watchdog.
+	await _until(func() -> bool:
+		return tribe.village().economy.stations.has("forester") or Engine.get_physics_frames() - first_tick >= 45 * Engine.physics_ticks_per_second,
+		45000 if capture_dir.is_empty() else 180000)
+	print("TRIBAL_TUTORIAL_CONSTRUCTION ", JSON.stringify({"wall_ms": Time.get_ticks_msec() - started,
+		"physics_s": float(Engine.get_physics_frames() - first_tick) / Engine.physics_ticks_per_second,
+		"project": tribe.village().project, "status": tribe.status,
+		"workers": tribe.village().members.map(func(m: Dictionary) -> Dictionary:
+			return {"order": m.order, "blocked": m.blocked, "stage": m.stage, "cargo": m.cargo, "work": m.work})}))
 	_expect(tribe.village().economy.stations.has("forester") and saves.guidance.tribal_done("tribe_finish"), "Real station construction failed or did not count.")
-	if not tribe.village().economy.stations.has("forester"): await _finish(); return
+	if not tribe.village().economy.stations.has("forester"):
+		await _capture("tutorial-construction-state")
+		await _finish()
+		return
 	tribe.set_physics_process(false)
 	saves.save_path = "user://tutorial-write-blocker/save.json"
 	_expect(not tribe.assign_profession("forester") and not saves.guidance.tribal_done("tribe_profession"), "Failed profession save counted.")
@@ -195,6 +209,9 @@ func _ui() -> void:
 		for dimensions: Vector2i in [Vector2i(1920, 1080), Vector2i(1280, 720)]:
 			root.size = dimensions
 			for scaling: float in [1.0, 1.25, 1.5]:
+				# The complete 12-case layout matrix runs headless. Native review
+				# renders the three representative cases used by the screenshots.
+				if not capture_dir.is_empty() and not ((dimensions.y == 1080 and scaling == 1.0) or (locale == "de" and dimensions.y == 720 and scaling == 1.5)): continue
 				root.get_node("DisplaySettings").ui_scale = scaling
 				await _frames(6)
 				var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
