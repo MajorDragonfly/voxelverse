@@ -22,7 +22,7 @@ def main():
             result = subprocess.run([str(editor), '--path', str(project), '--rendering-method',
                 'gl_compatibility', '--audio-driver', 'Dummy', '--script', 'res://tests/hud_layout_test.gd',
                 '--', '--capture', str(output)], env=isolated_env(Path(temporary)), stdout=log,
-                stderr=subprocess.STDOUT, timeout=120)
+                stderr=subprocess.STDOUT, timeout=240)
     log_text = (output/'render.log').read_text()
     images = sorted(p.name for p in output.glob('hud-*.png'))
     expected = {

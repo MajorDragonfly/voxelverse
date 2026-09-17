@@ -112,8 +112,12 @@ func _sphere() -> void:
 	await scene_changed
 	flow.load_game(path)
 	var started := Time.get_ticks_msec()
-	while flow.loading and Time.get_ticks_msec() - started < 45000: await process_frame
+	# Full distant terrain initialization can exceed 45 s on the native software
+	# renderer. Match the campaign probes while retaining a bounded load wait.
+	var load_limit: int = 90000 if DisplayServer.get_name() == "headless" else 150000
+	while flow.loading and Time.get_ticks_msec() - started < load_limit: await process_frame
 	if current_scene == null or current_scene.scene_file_path != "res://main/spherical_campaign.tscn" or not current_scene.world_initialized:
+		print("HUD_STARTUP ", JSON.stringify(flow.startup_diagnostics()))
 		_expect(false, "Real spherical campaign failed to load: " + saves.last_error)
 		return
 	_expect(get_nodes_in_group(&"minimap_hud").size() == 1, "Spherical campaign installed more than one minimap.")
