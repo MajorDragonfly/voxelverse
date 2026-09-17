@@ -110,6 +110,10 @@ func _run() -> void:
 	_expect(saves.guidance.tribal_done("tribe_tool"), "Finished tool did not count.")
 	tribe.set_physics_process(false)
 	await _click(tribe.panel._buttons.forester)
+	if tribe.placement != "forester":
+		_expect(false, "The forestry action did not start placement: " + tribe.status)
+		await _finish()
+		return
 	var site := Vector3.INF
 	for saved_site: Variant in tribe.village().sites:
 		var candidate: Vector3 = Space.resolve(tribe, saved_site)
@@ -253,17 +257,32 @@ func _click(button: BaseButton) -> void:
 				await _frames(3)
 				var bar: TabBar = tabs.get_tab_bar()
 				bar.ensure_tab_visible(index)
-				await _world_click(bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center(), MOUSE_BUTTON_LEFT)
 				await _frames(3)
-				_expect(tabs.current_tab == index, "Cannot open the action's tab.")
+				await _pointer(bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center())
+				# A completed action can replace the hint and resize the HUD while
+				# the pointer is moving. Click the current rect, not a stale point.
+				_mouse_click(bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center(), MOUSE_BUTTON_LEFT)
+				await _frames(3)
+				_expect(tabs.current_tab == index, "Cannot open the action's tab: " + str({"wanted": index, "actual": tabs.current_tab, "bar": _physical(bar), "scroll": _physical(tribe.panel._scroll), "hover": root.gui_get_hovered_control()}))
+				if tabs.current_tab != index: return
 	if tribe.panel._scroll.is_ancestor_of(button): tribe.panel._scroll.ensure_control_visible(button)
 	if tribe.panel._hud_scroll.is_ancestor_of(button): tribe.panel._hud_scroll.ensure_control_visible(button)
 	await _frames(3)
 	_expect(button.is_visible_in_tree() and not button.disabled, "Required control is not available: " + str(button.name))
-	await _world_click(button.get_global_transform_with_canvas() * (button.size * 0.5), MOUSE_BUTTON_LEFT)
+	if not button.is_visible_in_tree() or button.disabled: return
+	await _pointer(button.get_global_transform_with_canvas() * (button.size * 0.5))
+	_mouse_click(button.get_global_transform_with_canvas() * (button.size * 0.5), MOUSE_BUTTON_LEFT)
+	await process_frame
 
 func _world_click(point: Vector2, button: MouseButton) -> void:
 	await _pointer(point)
+	_mouse_click(point, button)
+	await process_frame
+
+func _mouse_click(point: Vector2, button: MouseButton) -> void:
+	var motion := InputEventMouseMotion.new()
+	motion.position = point
+	root.push_input(motion, true)
 	var event := InputEventMouseButton.new()
 	event.position = point
 	event.button_index = button
@@ -272,7 +291,6 @@ func _world_click(point: Vector2, button: MouseButton) -> void:
 	event = event.duplicate()
 	event.pressed = false
 	root.push_input(event, true)
-	await process_frame
 
 func _pointer(point: Vector2) -> void:
 	var motion := InputEventMouseMotion.new()
