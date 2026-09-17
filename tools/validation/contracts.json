@@ -187,7 +187,10 @@
         "creature_expression_test",
         "wildlife_social_play_test",
         "wildlife_hunting_test",
-        "wildlife_hunting_world_test"
+        "wildlife_hunting_world_test",
+        "living_creature_ai_test",
+        "wildlife_colony_test",
+        "living_creatures_world_test"
       ]
     },
     {
@@ -206,7 +209,8 @@
         "tribal_economy_progress_world_test",
         "tribal_progression_test",
         "tribal_progression_world_test",
-        "skills_localization_test"
+        "skills_localization_test",
+        "living_companion_test"
       ]
     },
     {

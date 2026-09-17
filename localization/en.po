@@ -4877,3 +4877,36 @@ msgstr "Seeking carrion"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Eating carrion"
+
+msgid "LIVING_WINDUP"
+msgstr "Preparing to bite"
+
+msgid "LIVING_RETREAT"
+msgstr "Retreating"
+
+msgid "LIVING_DEFENDING"
+msgstr "Protecting the group"
+
+msgid "LIVING_ASSISTING"
+msgstr "Helping in combat"
+
+msgid "LIVING_RECOVERING"
+msgstr "Recovering"
+
+msgid "LIVING_SCOUTING"
+msgstr "Pointing out food"
+
+msgid "LIVING_PATROLLING"
+msgstr "Exploring the nest grounds"
+
+msgid "LIVING_GUARDIAN"
+msgstr "Watchful"
+
+msgid "LIVING_SCOUT"
+msgstr "Curious"
+
+msgid "LIVING_FOUND_FOOD"
+msgstr "Your curious companion has found food nearby."
+
+msgid "LIVING_NEST"
+msgstr "Nest: {species} · {count} residents"

@@ -74,7 +74,8 @@ func _perception_and_combat() -> void:
 	await _frames(15)
 	_expect(predator.ai_state == "alert" and player.health == 100.0, "Predator skipped its warning and attacked immediately.")
 	await _capture("01_warning")
-	await _frames(65)
+	# Includes the cancellable bite wind-up after the existing warning.
+	await _frames(90)
 	_expect(player.health < 100.0, "Visible target in actual bite range was never attacked.")
 	var health: float = player.health
 	wall = _box(Vector3(0.16, 4, 7), Vector3(0.65, 101.8, 0))
@@ -90,7 +91,8 @@ func _perception_and_combat() -> void:
 	_expect(predator.get_ai_debug_state()["intent"] == "search", "Predator did not search its last visible target position.")
 	await _capture("02_occluded")
 	predator.maximum_chase_seconds = 2.0
-	await _frames(90)
+	# Contact now resets pursuit time. Allow a full budget after sight is lost.
+	await _frames(ceili(predator.maximum_chase_seconds * 60.0) + 15)
 	_expect(predator.get_ai_debug_state()["intent"] not in ["chase", "search", "alert"], "Predator pursued beyond its time budget.")
 	wall.queue_free()
 	predator.queue_free()

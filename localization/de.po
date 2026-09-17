@@ -4877,3 +4877,36 @@ msgstr "Sucht Aas"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Frisst Aas"
+
+msgid "LIVING_WINDUP"
+msgstr "Setzt zum Biss an"
+
+msgid "LIVING_RETREAT"
+msgstr "Zieht sich zurück"
+
+msgid "LIVING_DEFENDING"
+msgstr "Beschützt die Gruppe"
+
+msgid "LIVING_ASSISTING"
+msgstr "Hilft im Kampf"
+
+msgid "LIVING_RECOVERING"
+msgstr "Erholt sich"
+
+msgid "LIVING_SCOUTING"
+msgstr "Zeigt Nahrung"
+
+msgid "LIVING_PATROLLING"
+msgstr "Erkundet den Nestplatz"
+
+msgid "LIVING_GUARDIAN"
+msgstr "Wachsam"
+
+msgid "LIVING_SCOUT"
+msgstr "Neugierig"
+
+msgid "LIVING_FOUND_FOOD"
+msgstr "Dein neugieriger Gefährte hat Nahrung in der Nähe entdeckt."
+
+msgid "LIVING_NEST"
+msgstr "Nest: {species} · {count} Bewohner"

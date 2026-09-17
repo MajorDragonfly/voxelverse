@@ -8131,6 +8131,61 @@
       "key": "WILDLIFE_EAT_CARCASS",
       "de": "Frisst Aas",
       "en": "Eating carrion"
+    },
+    {
+      "key": "LIVING_WINDUP",
+      "de": "Setzt zum Biss an",
+      "en": "Preparing to bite"
+    },
+    {
+      "key": "LIVING_RETREAT",
+      "de": "Zieht sich zurück",
+      "en": "Retreating"
+    },
+    {
+      "key": "LIVING_DEFENDING",
+      "de": "Beschützt die Gruppe",
+      "en": "Protecting the group"
+    },
+    {
+      "key": "LIVING_ASSISTING",
+      "de": "Hilft im Kampf",
+      "en": "Helping in combat"
+    },
+    {
+      "key": "LIVING_RECOVERING",
+      "de": "Erholt sich",
+      "en": "Recovering"
+    },
+    {
+      "key": "LIVING_SCOUTING",
+      "de": "Zeigt Nahrung",
+      "en": "Pointing out food"
+    },
+    {
+      "key": "LIVING_PATROLLING",
+      "de": "Erkundet den Nestplatz",
+      "en": "Exploring the nest grounds"
+    },
+    {
+      "key": "LIVING_GUARDIAN",
+      "de": "Wachsam",
+      "en": "Watchful"
+    },
+    {
+      "key": "LIVING_SCOUT",
+      "de": "Neugierig",
+      "en": "Curious"
+    },
+    {
+      "key": "LIVING_FOUND_FOOD",
+      "de": "Dein neugieriger Gefährte hat Nahrung in der Nähe entdeckt.",
+      "en": "Your curious companion has found food nearby."
+    },
+    {
+      "key": "LIVING_NEST",
+      "de": "Nest: {species} · {count} Bewohner",
+      "en": "Nest: {species} · {count} residents"
     }
   ]
 }
