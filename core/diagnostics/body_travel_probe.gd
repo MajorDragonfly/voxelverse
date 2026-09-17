@@ -1,5 +1,6 @@
 extends "res://core/diagnostics/spherical_campaign_probe.gd"
 const Home = preload("res://world/home_group/home_group_state.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
 
 func _run() -> void:
 	saves = tree.root.get_node("SaveGameService")
@@ -20,7 +21,16 @@ func _run() -> void:
 	await _open(path)
 	if not _expect_world(): await _finish(); return
 	var home: Node = tree.current_scene.get_node("Nest/HomeGroup")
-	_expect(home.establish_home().ok, "Could not establish original home.")
+	# Arrival releases the player before every neighboring collider is ready.
+	# Use the same full-footprint readiness as the public tribal launcher.
+	await _until(func() -> bool:
+		if not home.can_use_panel(): return false
+		for x: int in [-12, 0, 12]:
+			for z: int in [-12, 0, 12]:
+				if not Space.ground_ready(home, Space.offset(home, home.player.global_position, Vector3(x, 0, z))): return false
+		return true, 12000)
+	var home_result: Dictionary = home.establish_home()
+	_expect(home_result.ok, "Could not establish original home: " + str(home_result))
 	await _until(func() -> bool: return home.actors.size() == 2, 12000)
 	var tribe: Node = tree.current_scene.get_node("Nest/Tribe")
 	_expect(tribe.prepare_confirmation().is_empty() and tribe.panel.open_confirmation(), "Could not prepare real village handoff.")

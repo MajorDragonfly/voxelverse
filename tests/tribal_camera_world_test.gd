@@ -49,9 +49,11 @@ func _run() -> void:
 	_press(KEY_D, false)
 	_expect(tribe._focus.distance_to(tribe.anchor()) >= 100.0, "WASD still stops near the village instead of panning at least 100 m.")
 	var address: Dictionary = Space.address(tribe, tribe._focus)
+	# Native software rendering publishes only two mesh operations per drawn
+	# frame. Allow that bounded queue to drain without changing any LOD limit.
 	await _until(func() -> bool:
 		var tile: Dictionary = terrain.layout.find_at(address.face, address.u, address.v, terrain.leaves)
-		return not tile.is_empty() and float(tile.width) * terrain.surface.body.radius <= 32.0 and terrain._job == null and terrain._pending.is_empty(), 25000)
+		return not tile.is_empty() and float(tile.width) * terrain.surface.body.radius <= 32.0 and terrain._job == null and terrain._pending.is_empty(), 90000 if not capture_dir.is_empty() else 25000)
 	var focus_tile: Dictionary = terrain.layout.find_at(address.face, address.u, address.v, terrain.leaves)
 	_expect(float(focus_tile.width) * terrain.surface.body.radius <= 32.0, "Distant camera did not receive detailed visual terrain.")
 	_expect(terrain.ground_ready(ground), "Camera streaming stole collision from the village.")
