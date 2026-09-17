@@ -4919,3 +4919,51 @@ msgstr "{amount} storage spaces held for settlement freight"
 
 msgid "TRIBE_STORAGE_HINT"
 msgstr "Piles show available stock and gold-marked building reservations.\nSize grows in quantity steps; numbers are exact.\nDeposits and goods in transit are not available storage."
+
+msgid "TRIBE_CAMERA_SETTINGS"
+msgstr "Tribal camera"
+
+msgid "TRIBE_CAMERA_SPEED"
+msgstr "Movement speed"
+
+msgid "TRIBE_CAMERA_TILT"
+msgstr "Starting tilt"
+
+msgid "TRIBE_CAMERA_SETTINGS_HINT"
+msgstr "Movement keys pan relative to the view. Mouse wheel: zoom. All camera bindings can be changed below. These settings are independent of the campaign."
+
+msgid "TRIBE_CAMERA_LEFT"
+msgstr "Rotate camera left"
+
+msgid "TRIBE_CAMERA_RIGHT"
+msgstr "Rotate camera right"
+
+msgid "TRIBE_CAMERA_UP"
+msgstr "Increase camera tilt"
+
+msgid "TRIBE_CAMERA_DOWN"
+msgstr "Decrease camera tilt"
+
+msgid "TRIBE_CAMERA_HOME"
+msgstr "Focus village"
+
+msgid "TRIBE_CAMERA_SELECTION"
+msgstr "Focus selection"
+
+msgid "TRIBE_CAMERA_ORBIT"
+msgstr "Orbit/tilt camera (hold)"
+
+msgid "TRIBE_CAMERA_VIEW"
+msgstr "View"
+
+msgid "TRIBE_CAMERA_RESET"
+msgstr "Reset view"
+
+msgid "TRIBE_CAMERA_OPEN_SETTINGS"
+msgstr "Camera settings …"
+
+msgid "TRIBE_CAMERA_INVALID"
+msgstr "Invalid tribal camera setting."
+
+msgid "TRIBE_CAMERA_HINT"
+msgstr "Pan: {move_forward} / {move_back} / {move_left} / {move_right}\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nThe camera can look beyond the residents’ working area."

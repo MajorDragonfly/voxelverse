@@ -51,6 +51,7 @@ var _hud_scroll: ScrollContainer:
 var _orders_scroll: ScrollContainer:
 	get: return _scroll
 var _scroll: ScrollContainer
+var _camera_menu: MenuButton
 var _collapse: Button
 var _collapsed: bool = false
 var _husbandry_page: VBoxContainer
@@ -69,6 +70,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build()
 	_refresh_language()
+	get_node("/root/DisplaySettings").input_preferences.bindings_changed.connect(_refresh_camera_menu)
 	# Tab-dependent headings affect the scroll layout. Update them with the tab,
 	# before callers scroll to an action, instead of waiting for the next village tick.
 	_tabs.tab_changed.connect(func(_index: int) -> void: refresh())
@@ -93,6 +95,12 @@ func _build() -> void:
 	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_stock.mouse_filter = Control.MOUSE_FILTER_STOP
 	header.add_child(_stock)
+	_camera_menu = MenuButton.new()
+	_camera_menu.name = "TribeCameraMenu"
+	_camera_menu.text = Text.text("TRIBE_CAMERA_VIEW")
+	_camera_menu.about_to_popup.connect(_refresh_camera_menu)
+	_camera_menu.get_popup().id_pressed.connect(_camera_action)
+	header.add_child(_camera_menu)
 	_collapse = _local_button("TRIBE_COLLAPSE")
 	header.add_child(_collapse)
 	_collapse.pressed.connect(func() -> void:
@@ -448,6 +456,9 @@ func _update_hud_visibility() -> void:
 	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
 
 func _process(_delta: float) -> void:
+	if controller.camera_rig != null and not controller.is_active():
+		controller.camera_rig.cancel_input()
+		_camera_menu.get_popup().hide()
 	# Other modals own their pause. Never draw/capture input above the shared book.
 	_update_hud_visibility()
 	if get_tree().paused and not _owns_pause:
@@ -461,6 +472,9 @@ func _input(event: InputEvent) -> void:
 		controller.status = "Platzierung abgebrochen."
 		controller.building_preview.clear_preview()
 		refresh()
+		get_viewport().set_input_as_handled()
+		return
+	if controller.camera_rig != null and controller.camera_rig.handle_input(event):
 		get_viewport().set_input_as_handled()
 		return
 	if _dragging:
@@ -493,6 +507,14 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not controller.is_active():
+		return
+	# Wheel events can propagate through buttons even when ordinary clicks stop.
+	if event is InputEventMouseButton and get_viewport().gui_get_hovered_control() != null:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		get_viewport().gui_release_focus()
+	if not _dragging and controller.camera_rig.handle_unhandled(event):
+		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -623,6 +645,8 @@ func _local_label(key: String, font_size: int, color: Color = Style.TEXT) -> Lab
 	return label
 
 func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT and controller != null and controller.camera_rig != null:
+		controller.camera_rig.cancel_input()
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready() and _scroll != null:
 		# Keep the session, resident nodes, profession selection, focus and tab.
 		var old_scroll: int = _scroll.scroll_vertical
@@ -638,6 +662,7 @@ func _restore_language_scroll(value: int, dialog_value: int) -> void:
 		_dialog_scroll.scroll_vertical = dialog_value
 
 func _refresh_language() -> void:
+	_refresh_camera_menu()
 	for control: Node in find_children("*", "Control", true, false):
 		if control.has_meta("tribe_text_key"):
 			control.text = Text.text(control.get_meta("tribe_text_key"))
@@ -695,3 +720,31 @@ func add_settlements(runtime: Node) -> void:
 	page.runtime = runtime
 	_tabs.add_child(page)
 	_font_scale = -1.0
+
+func _refresh_camera_menu() -> void:
+	var keys = preload("res://core/input_preferences.gd")
+	_camera_menu.text = Text.text("TRIBE_CAMERA_VIEW")
+	var values: Dictionary = {}
+	for action: String in ["move_forward", "move_back", "move_left", "move_right", "tribe_turn_left", "tribe_turn_right", "tribe_tilt_up", "tribe_tilt_down", "tribe_focus_home", "tribe_focus_selection", "tribe_orbit"]:
+		values[action] = keys.binding_label(action)
+	_camera_menu.tooltip_text = Text.format_text("TRIBE_CAMERA_HINT", values)
+	var menu: PopupMenu = _camera_menu.get_popup()
+	menu.clear()
+	menu.add_item(Text.text("TRIBE_CAMERA_HOME") + " · " + values.tribe_focus_home, 0)
+	menu.add_item(Text.text("TRIBE_CAMERA_SELECTION") + " · " + values.tribe_focus_selection, 1)
+	menu.add_item(Text.text("TRIBE_CAMERA_RESET"), 2)
+	menu.add_separator()
+	menu.add_item(Text.text("TRIBE_CAMERA_OPEN_SETTINGS"), 3)
+	menu.set_item_disabled(1, controller.selected.is_empty())
+	if controller.camera_rig != null: controller.camera_rig.cancel_input()
+
+func _camera_action(id: int) -> void:
+	if not controller.is_active(): return
+	match id:
+		0: controller.camera_rig.focus_home()
+		1: controller.camera_rig.focus_selection()
+		2: controller.camera_rig.reset_view()
+		3:
+			var settings: Node = get_node("/root/DisplaySettings")
+			settings.open_menu()
+			settings._tabs.current_tab = settings._control_settings.get_parent().get_index()

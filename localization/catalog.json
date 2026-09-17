@@ -8201,6 +8201,86 @@
       "key": "TRIBE_STORAGE_HINT",
       "de": "Haufen zeigen freie Vorräte und goldfarbene Baureservierungen.\nDie Größe wächst in Mengenstufen; Zahlen sind exakt.\nVorkommen und Ware unterwegs gehören nicht zum freien Lager.",
       "en": "Piles show available stock and gold-marked building reservations.\nSize grows in quantity steps; numbers are exact.\nDeposits and goods in transit are not available storage."
+    },
+    {
+      "key": "TRIBE_CAMERA_SETTINGS",
+      "de": "Stammeskamera",
+      "en": "Tribal camera"
+    },
+    {
+      "key": "TRIBE_CAMERA_SPEED",
+      "de": "Bewegungsgeschwindigkeit",
+      "en": "Movement speed"
+    },
+    {
+      "key": "TRIBE_CAMERA_TILT",
+      "de": "Startneigung",
+      "en": "Starting tilt"
+    },
+    {
+      "key": "TRIBE_CAMERA_SETTINGS_HINT",
+      "de": "Bewegungstasten verschieben die Ansicht in Blickrichtung. Mausrad: Zoom. Alle Kameratasten lassen sich unten ändern. Diese Einstellungen gelten unabhängig vom Spielstand.",
+      "en": "Movement keys pan relative to the view. Mouse wheel: zoom. All camera bindings can be changed below. These settings are independent of the campaign."
+    },
+    {
+      "key": "TRIBE_CAMERA_LEFT",
+      "de": "Kamera nach links drehen",
+      "en": "Rotate camera left"
+    },
+    {
+      "key": "TRIBE_CAMERA_RIGHT",
+      "de": "Kamera nach rechts drehen",
+      "en": "Rotate camera right"
+    },
+    {
+      "key": "TRIBE_CAMERA_UP",
+      "de": "Kamera steiler neigen",
+      "en": "Increase camera tilt"
+    },
+    {
+      "key": "TRIBE_CAMERA_DOWN",
+      "de": "Kamera flacher neigen",
+      "en": "Decrease camera tilt"
+    },
+    {
+      "key": "TRIBE_CAMERA_HOME",
+      "de": "Zum Dorfplatz",
+      "en": "Focus village"
+    },
+    {
+      "key": "TRIBE_CAMERA_SELECTION",
+      "de": "Zur Auswahl",
+      "en": "Focus selection"
+    },
+    {
+      "key": "TRIBE_CAMERA_ORBIT",
+      "de": "Kamera drehen/neigen (halten)",
+      "en": "Orbit/tilt camera (hold)"
+    },
+    {
+      "key": "TRIBE_CAMERA_VIEW",
+      "de": "Ansicht",
+      "en": "View"
+    },
+    {
+      "key": "TRIBE_CAMERA_RESET",
+      "de": "Blick zurücksetzen",
+      "en": "Reset view"
+    },
+    {
+      "key": "TRIBE_CAMERA_OPEN_SETTINGS",
+      "de": "Kameraeinstellungen …",
+      "en": "Camera settings …"
+    },
+    {
+      "key": "TRIBE_CAMERA_INVALID",
+      "de": "Ungültige Einstellung der Stammeskamera.",
+      "en": "Invalid tribal camera setting."
+    },
+    {
+      "key": "TRIBE_CAMERA_HINT",
+      "de": "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right}\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nDie Kamera kann weiter schauen als Bewohner arbeiten können.",
+      "en": "Pan: {move_forward} / {move_back} / {move_left} / {move_right}\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nThe camera can look beyond the residents’ working area."
     }
   ]
 }

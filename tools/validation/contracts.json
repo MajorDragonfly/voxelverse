@@ -242,7 +242,9 @@
         "tribal_building_preview_test",
         "tribal_building_preview_world_test",
         "tribal_stockpile_test",
-        "tribal_stockpile_world_test"
+        "tribal_stockpile_world_test",
+        "tribal_camera_test",
+        "tribal_camera_world_test"
       ]
     },
     {
@@ -299,7 +301,8 @@
         "menu_rebinding_test",
         "save_browser_search_test",
         "onboarding_guidance_world_test",
-        "slot_scan_test"
+        "slot_scan_test",
+        "tribal_camera_preferences_test"
       ]
     },
     {

@@ -30,6 +30,7 @@ var neighbors: Node3D
 var home: Node
 var player: CharacterBody3D
 var panel: CanvasLayer
+var camera_rig: RefCounted
 var camera: Camera3D
 var actors: Dictionary = {}
 var selected: Array[String] = []
@@ -111,12 +112,7 @@ func _process(delta: float) -> void:
 	if not _active and int(_state.current_phase) == 1 and not village().is_empty():
 		_activate()
 	if is_active():
-		var pan := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), 0, float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
-		_focus += Space.frame(self, anchor()) * pan * delta * 10.0
-		var offset: Vector3 = _focus - anchor()
-		offset = offset.slide(Space.up(self, anchor()))
-		_focus = anchor() + offset.limit_length(NeighborRuntime.Model.SITE_RADIUS if village_body().has("tribal_neighbor") else 10.0)
-		_update_camera()
+		camera_rig.advance(delta)
 	_timer -= delta
 	if _timer <= 0:
 		_timer = 0.2
@@ -261,9 +257,11 @@ func _activate() -> void:
 	camera = Camera3D.new()
 	get_parent().get_parent().add_child(camera)
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera.far = 400.0
+	camera.near = 0.1
+	camera.far = 1200.0
 	_focus = anchor()
-	_update_camera()
+	camera_rig = preload("res://world/tribe/tribe_camera.gd").new()
+	camera_rig.setup(self)
 	camera.make_current()
 	_visuals = Visuals.new()
 	get_parent().get_parent().add_child(_visuals)
@@ -299,6 +297,9 @@ func _deactivate() -> void:
 	_goals.clear()
 	placement = ""
 	_stalls.clear()
+	if camera_rig != null:
+		camera_rig.close()
+		camera_rig = null
 	if is_instance_valid(camera):
 		Space.untrack(camera)
 		camera.queue_free()
@@ -328,14 +329,12 @@ func _deactivate() -> void:
 		_original_camera.make_current()
 
 func _update_camera() -> void:
-	camera.size = _zoom
-	camera.v_offset = -_zoom * 0.16
-	camera.global_position = Space.offset(self, _focus, Vector3(0, 22, 17))
-	camera.look_at(_focus, Space.up(self, _focus))
+	if camera_rig != null: camera_rig.update_camera()
 
 func zoom(amount: float) -> void:
-	_zoom = clampf(_zoom + amount, 16.0, 40.0)
-	_update_camera()
+	if not is_active(): return
+	_zoom = clampf(_zoom + amount, camera_rig.MIN_ZOOM, camera_rig.MAX_ZOOM)
+
 
 func member_record(identity: String) -> Dictionary:
 	for member: Dictionary in village().get("members", []):

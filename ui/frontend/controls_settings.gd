@@ -8,6 +8,7 @@ var listening_action: String = ""
 var listening_slot: int = 0
 var sensitivity: HSlider
 var invert_y: CheckButton
+var tribe_camera: VBoxContainer
 var fps: OptionButton
 var message: Label
 var _speed_label: Label
@@ -59,6 +60,9 @@ func setup(source: RefCounted) -> void:
 	label.text = "VSync kann die Bildrate zusätzlich begrenzen."
 	label.add_theme_font_size_override("font_size", 16)
 	add_child(label)
+	tribe_camera = preload("res://ui/frontend/tribe_camera_settings.gd").new()
+	add_child(tribe_camera)
+	tribe_camera.changed.connect(_mark_changed)
 	var separator := HSeparator.new()
 	add_child(separator)
 	label = Label.new()
@@ -108,6 +112,7 @@ func refresh() -> void:
 	_speed_label.text = "%d%%" % roundi(sensitivity.value * 100.0)
 	invert_y.set_pressed_no_signal(preferences.invert_y)
 	fps.select(fps.get_item_index(preferences.fps_limit))
+	tribe_camera.refresh(preferences.tribe_camera)
 	_update_buttons()
 	message.text = preferences.load_message if not preferences.load_message.is_empty() else "Belegung anklicken, dann eine Taste drücken. Änderungen mit „Übernehmen & speichern“ sichern."
 
@@ -159,7 +164,7 @@ func _mark_changed() -> void:
 func apply() -> String:
 	if not listening_action.is_empty():
 		return "Bitte zuerst die Tastenauswahl beenden."
-	return preferences.save_and_apply(draft, sensitivity.value, invert_y.button_pressed, fps.get_selected_id())
+	return preferences.save_and_apply(draft, sensitivity.value, invert_y.button_pressed, fps.get_selected_id(), Preferences.CONFIG_PATH, tribe_camera.values())
 
 func _reset() -> void:
 	listening_action = ""
@@ -167,6 +172,7 @@ func _reset() -> void:
 	sensitivity.value = 1.0
 	invert_y.set_pressed_no_signal(false)
 	fps.select(fps.get_item_index(0))
+	tribe_camera.refresh(Preferences.TRIBE_CAMERA_DEFAULTS)
 	_update_buttons()
 	message.text = "Standardwerte vorgemerkt. Mit „Übernehmen & speichern“ aktivieren."
 

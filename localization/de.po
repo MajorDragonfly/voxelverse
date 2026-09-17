@@ -4919,3 +4919,51 @@ msgstr "{amount} Lagerplätze für Siedlungstransporte freigehalten"
 
 msgid "TRIBE_STORAGE_HINT"
 msgstr "Haufen zeigen freie Vorräte und goldfarbene Baureservierungen.\nDie Größe wächst in Mengenstufen; Zahlen sind exakt.\nVorkommen und Ware unterwegs gehören nicht zum freien Lager."
+
+msgid "TRIBE_CAMERA_SETTINGS"
+msgstr "Stammeskamera"
+
+msgid "TRIBE_CAMERA_SPEED"
+msgstr "Bewegungsgeschwindigkeit"
+
+msgid "TRIBE_CAMERA_TILT"
+msgstr "Startneigung"
+
+msgid "TRIBE_CAMERA_SETTINGS_HINT"
+msgstr "Bewegungstasten verschieben die Ansicht in Blickrichtung. Mausrad: Zoom. Alle Kameratasten lassen sich unten ändern. Diese Einstellungen gelten unabhängig vom Spielstand."
+
+msgid "TRIBE_CAMERA_LEFT"
+msgstr "Kamera nach links drehen"
+
+msgid "TRIBE_CAMERA_RIGHT"
+msgstr "Kamera nach rechts drehen"
+
+msgid "TRIBE_CAMERA_UP"
+msgstr "Kamera steiler neigen"
+
+msgid "TRIBE_CAMERA_DOWN"
+msgstr "Kamera flacher neigen"
+
+msgid "TRIBE_CAMERA_HOME"
+msgstr "Zum Dorfplatz"
+
+msgid "TRIBE_CAMERA_SELECTION"
+msgstr "Zur Auswahl"
+
+msgid "TRIBE_CAMERA_ORBIT"
+msgstr "Kamera drehen/neigen (halten)"
+
+msgid "TRIBE_CAMERA_VIEW"
+msgstr "Ansicht"
+
+msgid "TRIBE_CAMERA_RESET"
+msgstr "Blick zurücksetzen"
+
+msgid "TRIBE_CAMERA_OPEN_SETTINGS"
+msgstr "Kameraeinstellungen …"
+
+msgid "TRIBE_CAMERA_INVALID"
+msgstr "Ungültige Einstellung der Stammeskamera."
+
+msgid "TRIBE_CAMERA_HINT"
+msgstr "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right}\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nDie Kamera kann weiter schauen als Bewohner arbeiten können."

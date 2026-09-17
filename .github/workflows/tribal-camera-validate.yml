@@ -1,0 +1,77 @@
+name: Tribal camera
+
+on:
+  pull_request:
+    paths:
+      - 'world/tribe/**'
+      - 'ui/tribe/**'
+      - 'world/planet_lab/**'
+      - 'core/input_preferences.gd'
+      - 'ui/frontend/**'
+      - 'localization/**'
+      - 'tests/tribal_camera*'
+      - 'tools/review_tribal_camera.py'
+      - '.github/workflows/tribal-camera-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tribal-camera-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  camera:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Check camera inputs, settings, building preview and localization
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests tribal_camera_preferences_test tribal_camera_test tribal_camera_world_test
+          tribal_building_preview_test tribal_building_preview_world_test tribe_localization_test --skip-main
+          --output "${{ runner.temp }}/tribal-camera-validation"
+      - name: Install software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Render camera controls and distant spherical view
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1080x24'
+          python3 tools/review_tribal_camera.py --godot "${{ steps.engine.outputs.godot }}"
+          --output "${{ runner.temp }}/tribal-camera-render"
+      - name: Upload logs and native screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-camera-review
+          path: |
+            ${{ runner.temp }}/tribal-camera-validation
+            ${{ runner.temp }}/tribal-camera-render
+          retention-days: 14
+
+  terrain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Check physical streaming ownership and planetary transitions
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests adaptive_planet_test terrain_lookahead_test terrain_transition_test body_travel_test --skip-main
+          --output "${{ runner.temp }}/tribal-camera-terrain"
+      - name: Upload surface checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-camera-terrain
+          path: ${{ runner.temp }}/tribal-camera-terrain
+          retention-days: 14

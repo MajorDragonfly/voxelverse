@@ -12,7 +12,16 @@ const ACTIONS := {
 	"bite_action": "Beißen", "inspection_mode": "Untersuchen",
 	"open_journal": "BIND_JOURNAL", "open_development": "BIND_DEVELOPMENT",
 	"open_world_map": "BIND_WORLD_MAP",
+	"tribe_turn_left": "TRIBE_CAMERA_LEFT", "tribe_turn_right": "TRIBE_CAMERA_RIGHT",
+	"tribe_tilt_up": "TRIBE_CAMERA_UP", "tribe_tilt_down": "TRIBE_CAMERA_DOWN",
+	"tribe_focus_home": "TRIBE_CAMERA_HOME", "tribe_focus_selection": "TRIBE_CAMERA_SELECTION",
+	"tribe_orbit": "TRIBE_CAMERA_ORBIT",
 }
+const CAMERA_DEFAULTS := {"tribe_turn_left": KEY_LEFT, "tribe_turn_right": KEY_RIGHT,
+	"tribe_tilt_up": KEY_PAGEUP, "tribe_tilt_down": KEY_PAGEDOWN,
+	"tribe_focus_home": KEY_HOME, "tribe_focus_selection": KEY_END, "tribe_orbit": -3}
+const TRIBE_CAMERA_DEFAULTS := {"pan_speed": 1.0, "tilt": 55.0}
+var tribe_camera: Dictionary = TRIBE_CAMERA_DEFAULTS.duplicate()
 const MENU_ACTIONS := ["open_journal", "open_development", "open_world_map"]
 const FIXED_PLAY_KEYS := [KEY_F, KEY_H, KEY_N, KEY_P]
 const FPS_OPTIONS := [0, 30, 60, 90, 120, 144, 165, 240]
@@ -28,6 +37,9 @@ func _init() -> void:
 static func defaults() -> Dictionary:
 	var result := {}
 	for action: String in ACTIONS:
+		if action in CAMERA_DEFAULTS:
+			result[action] = [CAMERA_DEFAULTS[action], 0]
+			continue
 		var codes: Array = []
 		for event: InputEvent in ProjectSettings.get_setting("input/" + action, {}).get("events", []):
 			var code: int = event_code(event)
@@ -125,6 +137,7 @@ func load_saved(path: String = CONFIG_PATH) -> void:
 	invert_y = false
 	fps_limit = 0
 	load_message = ""
+	tribe_camera = TRIBE_CAMERA_DEFAULTS.duplicate()
 	var config := ConfigFile.new()
 	var error := config.load(path)
 	if error == ERR_FILE_NOT_FOUND:
@@ -141,12 +154,12 @@ func load_saved(path: String = CONFIG_PATH) -> void:
 	# including M, and add only missing menu bindings using unoccupied keys.
 	var occupied := {}
 	for action: String in ACTIONS:
-		if action in MENU_ACTIONS and not config.has_section_key("bindings", action): continue
+		if (action in MENU_ACTIONS or action in CAMERA_DEFAULTS) and not config.has_section_key("bindings", action): continue
 		if candidate[action] is Array:
 			for code: Variant in candidate[action]:
 				if code is int and code != 0: occupied[code] = true
 	var adjusted: bool = false
-	for action: String in MENU_ACTIONS:
+	for action: String in MENU_ACTIONS + CAMERA_DEFAULTS.keys():
 		if config.has_section_key("bindings", action): continue
 		var preferred: int = candidate[action][0]
 		var choices: Array = [preferred] + range(KEY_A, KEY_Z + 1) + range(KEY_0, KEY_9 + 1)
@@ -169,15 +182,27 @@ func load_saved(path: String = CONFIG_PATH) -> void:
 	var limit: Variant = config.get_value("display", "fps_limit", 0)
 	if limit is int and limit in FPS_OPTIONS:
 		fps_limit = limit
+	for field: String in TRIBE_CAMERA_DEFAULTS:
+		var value: Variant = config.get_value("tribe_camera", field, TRIBE_CAMERA_DEFAULTS[field])
+		if (value is float or value is int) and is_finite(float(value)):
+			tribe_camera[field] = clampf(float(value), 0.5 if field == "pan_speed" else 30.0, 3.0 if field == "pan_speed" else 80.0)
 	apply_runtime()
 
-func save_and_apply(candidate: Dictionary, speed: float, inverted: bool, limit: int, path: String = CONFIG_PATH) -> String:
+func save_and_apply(candidate: Dictionary, speed: float, inverted: bool, limit: int, path: String = CONFIG_PATH, camera_options: Dictionary = {}) -> String:
 	var reason := validate(candidate)
 	if not reason.is_empty():
 		return reason
 	if not is_finite(speed) or speed < 0.2 or speed > 3.0 or not limit in FPS_OPTIONS:
 		return "Ungültige Kamera- oder Bildrateneinstellung."
+	var camera_candidate: Dictionary = tribe_camera if camera_options.is_empty() else camera_options
+	for field: String in TRIBE_CAMERA_DEFAULTS:
+		var value: Variant = camera_candidate.get(field)
+		if not (value is float or value is int) or not is_finite(float(value)):
+			return Text.text("TRIBE_CAMERA_INVALID")
+		if float(value) < (0.5 if field == "pan_speed" else 30.0) or float(value) > (3.0 if field == "pan_speed" else 80.0):
+			return Text.text("TRIBE_CAMERA_INVALID")
 	var config := ConfigFile.new()
+	for field: String in TRIBE_CAMERA_DEFAULTS: config.set_value("tribe_camera", field, camera_candidate[field])
 	for action: String in ACTIONS:
 		config.set_value("bindings", action, candidate[action])
 	config.set_value("camera", "sensitivity", speed)
@@ -189,6 +214,7 @@ func save_and_apply(candidate: Dictionary, speed: float, inverted: bool, limit: 
 	if error != OK:
 		return "Steuerung konnte nicht gespeichert werden. Die bisherigen Werte bleiben aktiv."
 	bindings = candidate.duplicate(true)
+	tribe_camera = camera_candidate.duplicate(true)
 	sensitivity = speed
 	invert_y = inverted
 	fps_limit = limit
@@ -198,6 +224,7 @@ func save_and_apply(candidate: Dictionary, speed: float, inverted: bool, limit: 
 
 func apply_runtime() -> void:
 	for action: String in ACTIONS:
+		if not InputMap.has_action(action): InputMap.add_action(action)
 		Input.action_release(action)
 		InputMap.action_erase_events(action)
 		for code: int in bindings[action]:
