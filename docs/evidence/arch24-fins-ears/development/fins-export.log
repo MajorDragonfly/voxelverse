@@ -1,0 +1,25 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Identifier "category_id" not declared in the current scope.
+          at: GDScript::reload (res://creatures/editor/creature_blueprint.gd:223)
+SCRIPT ERROR: Parse Error: Identifier "placement" not declared in the current scope.
+          at: GDScript::reload (res://creatures/editor/creature_blueprint.gd:224)
+SCRIPT ERROR: Parse Error: Identifier "placement" not declared in the current scope.
+          at: GDScript::reload (res://creatures/editor/creature_blueprint.gd:224)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+          at: GDScript::reload (res://creatures/editor/creature_assembly_blueprint_v7.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+          at: GDScript::reload (res://tools/export_trunk_review.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+          at: GDScript::reload (res://tools/export_fin_review.gd:0)
+ERROR: Failed to load script "res://tools/export_fin_review.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript.cpp:2907)
+SCRIPT ERROR: Invalid call. Nonexistent function 'create_default' in base 'GDScript'.
+          at: create_default (res://creatures/editor/creature_assembly_blueprint_v7.gd:41)
+          GDScript backtrace (most recent call first):
+              [0] create_default (res://creatures/editor/creature_assembly_blueprint_v7.gd:41)
+              [1] _run (res://tools/export_fin_review.gd:15)
+SCRIPT ERROR: Invalid access to property or key 'parts' on a base object of type 'Dictionary'.
+          at: _run (res://tools/export_fin_review.gd:16)
+          GDScript backtrace (most recent call first):
+              [0] _run (res://tools/export_fin_review.gd:16)

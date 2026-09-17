@@ -33,19 +33,8 @@ func sync(data: Dictionary, actors: Dictionary) -> void:
 		if _occupied(shelter, actors):
 			building.collision_layer = 0
 			_waiting_clear[building] = shelter
+		add_model(building, shelter["kind"])
 		var tent: bool = shelter["kind"] == "tent"
-		var wall: Color = Color("c5ab7c") if tent else Color("957049")
-		_part(building, Vector3(-1, 0.85, 0), Vector3(0.15, 1.7, 2.1), wall, true)
-		_part(building, Vector3(1, 0.85, 0), Vector3(0.15, 1.7, 2.1), wall, true)
-		_part(building, Vector3(0, 0.85, -1), Vector3(2.1, 1.7, 0.15), wall, true)
-		# Open 1.6m doorway, facing +Z; walls and lintel agree with the model.
-		for side in [-1, 1]:
-			_part(building, Vector3(side * 0.95, 0.85, 1), Vector3(0.3, 1.7, 0.15), wall, true)
-		_part(building, Vector3(0, 2.0, 1), Vector3(2.1, 0.3, 0.15), wall, true)
-		for layer in range(5):
-			_part(building, Vector3(0, 2.25 + layer * 0.2, 0), Vector3(2.5 - layer * 0.45, 0.23, 2.4), Color("d4bb89") if tent else Color("9a975a"), false)
-		_part(building, Vector3(0, 2.25, 0), Vector3(2.5, 0.23, 2.4), wall, true, false)
-		_part(building, Vector3(0, 0.02, 1.75), Vector3(1.3, 0.04, 1.5), Color("c9b080"), false)
 		var label := Label3D.new()
 		label.text = "Zelt · 1 Schlafplatz" if tent else "Hütte · 2 Schlafplätze"
 		label.position = Vector3(0, 3.8, 0)
@@ -54,6 +43,22 @@ func sync(data: Dictionary, actors: Dictionary) -> void:
 		label.modulate = Color("edd5a8")
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		building.add_child(label)
+
+## Shared by finished homes and the collision-free placement ghost.
+func add_model(building: Node3D, kind: String, with_collision: bool = true) -> void:
+	var tent: bool = kind == "tent"
+	var wall: Color = Color("c5ab7c") if tent else Color("957049")
+	_part(building, Vector3(-1, 0.85, 0), Vector3(0.15, 1.7, 2.1), wall, with_collision)
+	_part(building, Vector3(1, 0.85, 0), Vector3(0.15, 1.7, 2.1), wall, with_collision)
+	_part(building, Vector3(0, 0.85, -1), Vector3(2.1, 1.7, 0.15), wall, with_collision)
+	# Open 1.6m doorway, facing +Z; walls and lintel agree with the model.
+	for side in [-1, 1]:
+		_part(building, Vector3(side * 0.95, 0.85, 1), Vector3(0.3, 1.7, 0.15), wall, with_collision)
+	_part(building, Vector3(0, 2.0, 1), Vector3(2.1, 0.3, 0.15), wall, with_collision)
+	for layer in range(5):
+		_part(building, Vector3(0, 2.25 + layer * 0.2, 0), Vector3(2.5 - layer * 0.45, 0.23, 2.4), Color("d4bb89") if tent else Color("9a975a"), false)
+	_part(building, Vector3(0, 2.25, 0), Vector3(2.5, 0.23, 2.4), wall, with_collision, false)
+	_part(building, Vector3(0, 0.02, 1.75), Vector3(1.3, 0.04, 1.5), Color("c9b080"), false)
 
 func clear_entrances(actors: Dictionary) -> void:
 	for building: StaticBody3D in _waiting_clear.keys():

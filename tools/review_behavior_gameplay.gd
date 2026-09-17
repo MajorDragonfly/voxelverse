@@ -92,12 +92,15 @@ func _run() -> void:
 	await _click(ui._purchase)
 	_expect(root.get_node("ProgressionService").get_behavior_wallet(0)["available"]["social"] == 1, "Real click did not purchase Offenheit with earned points.")
 	await _capture("earned_skill.png")
-	# Navigate the separate phase views through the actual OptionButton keyboard popup.
-	ui._scroll.ensure_control_visible(ui._phase_choice)
-	ui._phase_choice.grab_focus()
-	await _tap(KEY_SPACE)
-	await _tap(KEY_DOWN)
-	await _tap(KEY_ENTER)
+	# Navigate the actual chapter strip or its compact keyboard popup.
+	if ui._phase_strip.visible:
+		ui._phase_buttons[1].grab_focus()
+		await _tap(KEY_ENTER)
+	else:
+		ui._phase_choice.grab_focus()
+		await _tap(KEY_SPACE)
+		await _tap(KEY_DOWN)
+		await _tap(KEY_ENTER)
 	_expect(ui._phase_choice.selected == 1 and ui._phase_preview.text.contains("Aktueller Spielablauf") and ui._phase_preview.text.contains("Dorfeinstieg"), "Phase view did not show the implemented village separately from creature purchases.")
 	ui._scroll.ensure_control_visible(ui._phase_preview)
 	await _frames()

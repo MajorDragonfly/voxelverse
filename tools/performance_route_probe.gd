@@ -135,8 +135,11 @@ func _ready_world() -> bool:
 	while Time.get_ticks_msec() < deadline:
 		await _tick()
 		if _is_world() and not flow.loading and current_scene.world_initialized:
+			if not report.has("startup_loads"): report.startup_loads = []
+			report.startup_loads.append({"cycle": cycle, "trace": flow.startup_diagnostics()})
 			return true
-	failures.append("Spherical collision/start timed out: " + saves.last_error)
+	report.startup_timeout = flow.startup_diagnostics()
+	failures.append("Spherical start timed out in phase %s: %s" % [report.startup_timeout.last_phase, saves.last_error])
 	return false
 
 func _is_world() -> bool:

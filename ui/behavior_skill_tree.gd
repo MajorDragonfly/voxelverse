@@ -50,6 +50,11 @@ var _font_scale: float = 1.0
 var _last_result: Dictionary = {}
 var _last_purchase_id: String = ""
 var _language_revision: int = 0
+var _frame: PanelContainer
+var _phase_navigation: VBoxContainer
+var _phase_strip: HBoxContainer
+var _phase_buttons: Array[Button] = []
+var _era_hint: Label
 
 
 func _ready() -> void:
@@ -57,6 +62,7 @@ func _ready() -> void:
 	layer = 95
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build()
+	_panel.minimum_size_changed.connect(_fit_window, CONNECT_DEFERRED)
 	visible = false
 	var progression := get_node("/root/ProgressionService")
 	progression.behavior_changed.connect(refresh)
@@ -84,6 +90,7 @@ func open_panel() -> bool:
 	visible = true
 	_clear_message()
 	_select_phase(clampi(int(get_node("/root/GameState").current_phase), 0, PHASES.size() - 1))
+	_layout()
 	_refresh_journal()
 	_development.refresh()
 	_tree_tab.grab_focus()
@@ -151,21 +158,23 @@ func _unhandled_input(_event: InputEvent) -> void:
 func _build() -> void:
 	var backdrop := ColorRect.new()
 	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	backdrop.color = Color(0.025, 0.042, 0.057, 1.0)
+	backdrop.color = Color(0.015, 0.025, 0.035, 0.88)
 	backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(backdrop)
 	_panel = MarginContainer.new()
-	_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for side in ["left", "right", "top", "bottom"]:
-		_panel.add_theme_constant_override("margin_" + side, 32)
+		_panel.add_theme_constant_override("margin_" + side, 0)
 	add_child(_panel)
-	var content := Style.column(_panel, 10)
+	_frame = PanelContainer.new()
+	_frame.add_theme_stylebox_override("panel", Style.box(Color("101c25"), Color("40535c"), 20))
+	_panel.add_child(_frame)
+	var content := Style.column(_frame, 10)
 	var header := BoxContainer.new()
 	_header = header
 	content.add_child(header)
 	var heading := Style.column(header, 2)
-	heading.add_child(_label("SKILLS_SPECIES", 15, Style.SOCIAL))
-	heading.add_child(_label("SKILLS_TITLE", 32))
+	heading.add_child(_label("SKILLS_SPECIES", 11, Style.SOCIAL))
+	heading.add_child(_label("SKILLS_TITLE", 25))
 	_close = _button("SKILLS_CLOSE")
 	_close.name = "Close"
 	_close.custom_minimum_size.x = 150
@@ -173,11 +182,11 @@ func _build() -> void:
 	_close.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_close.pressed.connect(close_panel)
 	header.add_child(_close)
-	_phase_label = _label("", 17, Style.MUTED)
-	content.add_child(_phase_label)
+	_phase_label = _label("", 12, Style.MUTED)
+	heading.add_child(_phase_label)
 	var tabs := HFlowContainer.new()
-	tabs.add_theme_constant_override("h_separation", 12)
-	tabs.add_theme_constant_override("v_separation", 8)
+	tabs.add_theme_constant_override("h_separation", 6)
+	tabs.add_theme_constant_override("v_separation", 4)
 	content.add_child(tabs)
 	_tree_tab = _button("SKILLS_TAB")
 	_tree_tab.name = "SkilltreeTab"
@@ -191,70 +200,89 @@ func _build() -> void:
 	_development_tab.name = "DevelopmentTab"
 	_development_tab.pressed.connect(_show_development)
 	tabs.add_child(_development_tab)
+	for tab: Button in [_tree_tab, _journal_tab, _development_tab]:
+		tab.size_flags_horizontal = Control.SIZE_FILL
+	_phase_navigation = Style.column(content, 5)
+	_phase_strip = HBoxContainer.new()
+	_phase_strip.add_theme_constant_override("separation", 6)
+	_phase_navigation.add_child(_phase_strip)
+	for index in range(PHASES.size()):
+		var chapter := _button("")
+		chapter.name = "EraChapter%d" % index
+		chapter.set_meta("skills_font_size", 12)
+		chapter.pressed.connect(_select_phase.bind(index))
+		_phase_strip.add_child(chapter)
+		_phase_buttons.append(chapter)
+	_era_hint = _label("SKILLS_ERA_HINT", 12, Style.MUTED)
 	_scroll = ScrollContainer.new()
 	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_scroll.follow_focus = true
 	content.add_child(_scroll)
-	var pages := Style.column(_scroll)
+	var pages := Style.column(_scroll, 10)
 	_phase_choice = OptionButton.new()
 	_phase_choice.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_phase_choice.name = "PhasePreviewChoice"
-	_phase_choice.custom_minimum_size.y = 46
+	_phase_choice.custom_minimum_size.y = 34
 	_phase_choice.fit_to_longest_item = false
 	_phase_choice.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	_phase_choice.add_theme_font_size_override("font_size", 18)
+	_phase_choice.add_theme_font_size_override("font_size", 14)
 	for index in range(PHASES.size()):
-		_phase_choice.add_item(Presentation.phase_name(index) + (Text.text("SKILLS_PLAYABLE_CHOICE") if index <= 1 else Text.text("SKILLS_PLANNED_CHOICE")), index)
+		_phase_choice.add_item(Presentation.phase_name(index) + Text.text("SKILLS_PLAYABLE_CHOICE" if PHASES[index]["implemented"] else "SKILLS_PLANNED_CHOICE"), index)
 	_phase_choice.item_selected.connect(_select_phase)
-	pages.add_child(_phase_choice)
+	_phase_navigation.add_child(_phase_choice)
+	_phase_navigation.add_child(_era_hint)
 	_body = BoxContainer.new()
 	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_body.add_theme_constant_override("separation", 24)
+	_body.add_theme_constant_override("separation", 16)
 	pages.add_child(_body)
 	var tree_area := Style.column(_body, 10)
-	tree_area.size_flags_stretch_ratio = 2.0
-	_tree_heading = _label("SKILLS_HEADING", 24)
+	tree_area.size_flags_stretch_ratio = 1.65
+	_tree_heading = _label("SKILLS_HEADING", 16)
 	tree_area.add_child(_tree_heading)
-	_wallet_context = _label("", 18, Style.MUTED)
+	_wallet_context = _label("", 12, Style.MUTED)
 	tree_area.add_child(_wallet_context)
 	_branches = BoxContainer.new()
-	_branches.add_theme_constant_override("separation", 16)
+	_branches.add_theme_constant_override("separation", 10)
 	tree_area.add_child(_branches)
 	for track in ["social", "aggression"]:
 		_build_branch(track)
-	_availability = _label("SKILLS_EARNING", 17, Style.MUTED)
+	_availability = _label("SKILLS_EARNING_COMPACT", 12, Style.MUTED)
 	_availability.name = "GameplayAvailability"
-	_availability.set_meta("skills_font_size", 14)
 	tree_area.add_child(_availability)
-	_phase_preview = _label("", 17, Style.MUTED)
+	_phase_preview = _label("", 14, Style.MUTED)
 	_phase_preview.name = "PhasePreview"
 	tree_area.add_child(_phase_preview)
 	var detail_panel := PanelContainer.new()
 	detail_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	detail_panel.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	detail_panel.add_theme_stylebox_override("panel", Style.box())
+	detail_panel.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Color("40535c"), 16))
 	_body.add_child(detail_panel)
-	_details = Style.column(detail_panel, 12)
-	_detail_icon = Symbols.view("social", false, 94)
-	_details.add_child(_detail_icon)
-	_details.add_child(_label("SKILLS_DETAIL", 13, Style.MUTED))
-	_title = _label("", 25)
-	_details.add_child(_title)
-	_description = _label("")
+	_details = Style.column(detail_panel, 10)
+	var detail_heading := HBoxContainer.new()
+	detail_heading.add_theme_constant_override("separation", 10)
+	_details.add_child(detail_heading)
+	_detail_icon = Symbols.view("social", false, 44)
+	_detail_icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	detail_heading.add_child(_detail_icon)
+	var detail_titles := Style.column(detail_heading, 2)
+	detail_titles.add_child(_label("SKILLS_DETAIL", 11, Style.MUTED))
+	_title = _label("", 21)
+	detail_titles.add_child(_title)
+	_description = _label("", 15)
 	_details.add_child(_description)
-	_requirements = _label("", 17, Style.MUTED)
+	_requirements = _label("", 13, Style.MUTED)
 	_details.add_child(_requirements)
-	_effect = _label("", 17, Style.SOCIAL)
+	_effect = _label("", 13, Style.SOCIAL)
 	_details.add_child(_effect)
 	_purchase = _button("")
 	_purchase.name = "Purchase"
 	_purchase.pressed.connect(_buy_selected)
 	_details.add_child(_purchase)
-	_details.add_child(_label("SKILLS_SAVE_HINT", 16, Style.MUTED))
+	_details.add_child(_label("SKILLS_SAVE_HINT", 11, Style.MUTED))
 	_development = Development.new()
 	pages.add_child(_development)
-	_message = _label("", 18, Style.SOCIAL)
+	_message = _label("", 13, Style.SOCIAL)
 	_message.name = "PurchaseMessage"
 	content.add_child(_message)
 	_show_tab(false)
@@ -262,46 +290,57 @@ func _build() -> void:
 
 func _build_branch(track: String) -> void:
 	var color: Color = Style.SOCIAL if track == "social" else Style.AGGRESSION
-	var column := Style.column(_branches, 10)
+	var column := Style.column(_branches, 8)
 	var wallet := PanelContainer.new()
-	wallet.add_theme_stylebox_override("panel", Style.box(Style.PANEL, color))
+	wallet.add_theme_stylebox_override("panel", Style.box(Color("162630"), color, 10))
 	column.add_child(wallet)
-	var info := Style.column(wallet, 6)
-	info.add_child(_label("SKILLS_SOCIAL" if track == "social" else "SKILLS_AGGRESSION", 17, color))
-	var balance := _label("", 24)
+	var info := Style.column(wallet, 4)
+	info.add_child(_label("SKILLS_SOCIAL" if track == "social" else "SKILLS_AGGRESSION", 12, color))
+	var balance := _label("", 16)
 	info.add_child(balance)
 	_wallet_labels[track] = balance
 	var progression := get_node("/root/ProgressionService")
-	for definition: Dictionary in progression.get_behavior_nodes(0) + progression.get_behavior_nodes(1):
+	var definitions: Array[Dictionary] = []
+	for phase in range(PHASES.size()):
+		definitions.append_array(progression.get_behavior_nodes(phase))
+	for definition: Dictionary in definitions:
 		if definition["track"] != track:
 			continue
 		var id: String = definition["id"]
+		# The container measures the content. Measuring wrapped labels inside an
+		# anchored child of a Button feeds its old width back into its minimum
+		# height and can leave cards hundreds of pixels tall after UI relayout.
+		var card_frame := PanelContainer.new()
+		card_frame.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+		column.add_child(card_frame)
 		var card := _button("", color)
 		card.name = id.replace(".", "_")
-		card.custom_minimum_size.y = 94
-		column.add_child(card)
+		card.set_meta("skill_card", true)
+		card.custom_minimum_size.y = 76
+		card_frame.add_child(card)
 		var margin := MarginContainer.new()
-		margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		for side in ["left", "right", "top", "bottom"]:
-			margin.add_theme_constant_override("margin_" + side, 14)
-		card.add_child(margin)
+			margin.add_theme_constant_override("margin_" + side, 10)
+		card_frame.add_child(margin)
 		var row := HBoxContainer.new()
 		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		row.add_theme_constant_override("separation", 10)
+		row.add_theme_constant_override("separation", 8)
 		margin.add_child(row)
-		var icon := Symbols.view(id.get_slice(".", 2), false, 56)
+		var icon := Symbols.view(id.get_slice(".", 2), false, 32)
+		icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		row.add_child(icon)
 		var labels := Style.column(row, 3)
 		labels.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		var name_label := _label(Presentation.node_text(id, "name"), 19, color)
+		var name_label := _label(Presentation.node_text(id, "name"), 15, color)
 		labels.add_child(name_label)
-		var state_label := _label("", 17)
+		var state_label := _label("", 12)
 		labels.add_child(state_label)
-		labels.add_child(_label("SKILLS_LEGACY_CAPTION" if not definition["legacy"].is_empty() else "SKILLS_TRIBE_CAPTION" if int(definition["phase"]) == 1 else "SKILLS_CREATURE_CAPTION", 15, Style.MUTED))
+		if not definition["legacy"].is_empty():
+			labels.add_child(_label("SKILLS_LEGACY_CAPTION", 11, Style.MUTED))
 		card.pressed.connect(_select.bind(id))
-		_cards[id] = {"button": card, "status": state_label, "phase": definition["phase"], "icon": icon, "name": name_label, "content": margin}
-	var planned := _label("", 18, Style.MUTED)
+		_cards[id] = {"button": card, "container": card_frame, "status": state_label, "phase": definition["phase"], "icon": icon, "name": name_label, "content": margin}
+	var planned := _label("", 13, Style.MUTED)
 	planned.visible = false
 	column.add_child(planned)
 	_planned_earning[track] = planned
@@ -312,25 +351,30 @@ func refresh(refresh_development: bool = true) -> void:
 		return
 	var progression := get_node("/root/ProgressionService")
 	_refresh_view_label()
+	_refresh_chapters()
 	var wallet: Dictionary = progression.call("get_behavior_wallet", _view_phase)
-	var preview: Dictionary = progression.get_phase_progression_preview(_view_phase)
+	var definitions: Array[Dictionary] = progression.get_behavior_nodes(_view_phase)
 	_tree_heading.text = Text.text("SKILLS_OPEN_PATH") if _view_phase == 0 else Text.text("SKILLS_TRIBE_PATH") if _view_phase == 1 else Presentation.phase_name(_view_phase) + Text.text("SKILLS_FUTURE_PATH")
-	_wallet_context.text = Text.text("SKILLS_WALLET_CONTEXT") % Presentation.phase_name(_view_phase)
-	if _view_phase > 0:
-		_wallet_context.text += Text.text("SKILLS_OLD_POINTS")
+	_wallet_context.text = Text.text("SKILLS_ERA_PLANNED") if definitions.is_empty() else Text.text("SKILLS_COMBINE")
+	_wallet_context.tooltip_text = Text.text("SKILLS_WALLET_CONTEXT") % Presentation.phase_name(_view_phase)
+	if _view_phase > 0: _wallet_context.tooltip_text += Text.text("SKILLS_OLD_POINTS")
 	_availability.visible = _view_phase == 0
-	_details.get_parent().visible = _view_phase <= 1
+	_details.get_parent().visible = not definitions.is_empty()
+	_branches.visible = not definitions.is_empty()
 	for card in _cards.values():
 		card["button"].visible = int(card["phase"]) == _view_phase
+		card["container"].visible = int(card["phase"]) == _view_phase
 	for track: String in _wallet_labels:
-		_wallet_labels[track].text = Text.text("SKILLS_WALLET") % [int(wallet["available"][track]), int(wallet["earned"][track]), int(wallet["spent"][track])]
+		_wallet_labels[track].text = Text.text("SKILLS_POINTS_COMPACT") % int(wallet["available"][track])
+		_wallet_labels[track].tooltip_text = Text.text("SKILLS_WALLET") % [int(wallet["available"][track]), int(wallet["earned"][track]), int(wallet["spent"][track])]
+		_wallet_labels[track].mouse_filter = Control.MOUSE_FILTER_PASS
 		_planned_earning[track].visible = _view_phase > 0
 		_planned_earning[track].text = Text.text("SKILLS_PLANNED_EARNING") + Presentation.phase_text(_view_phase, track) + Text.text("SKILLS_PLANNED_SKILLS")
 	if _view_phase == 1:
 		_planned_earning["social"].text = Text.text("SKILLS_TRIBE_EARNING")
 		_planned_earning["aggression"].text = Text.text("SKILLS_TRIBE_CONFLICT")
 	_nodes.clear()
-	for definition: Dictionary in progression.call("get_behavior_nodes", _view_phase):
+	for definition: Dictionary in definitions:
 		var id: String = definition["id"]
 		_nodes[id] = definition
 		if not _cards.has(id):
@@ -340,6 +384,7 @@ func refresh(refresh_development: bool = true) -> void:
 		_cards[id]["icon"].texture = Symbols.texture(id.get_slice(".", 2), bool(definition["purchased"]))
 		_cards[id]["status"].text = Text.text("SKILLS_UNLOCKED") if definition["purchased"] else Text.text("SKILLS_CARD_COST") % [int(definition["cost"]), Text.text("SKILLS_AVAILABLE") if status["ok"] else Text.text("SKILLS_LOCKED")]
 		var color: Color = Style.SOCIAL if definition["track"] == "social" else Style.AGGRESSION
+		_cards[id]["status"].add_theme_color_override("font_color", color if status["ok"] or definition["purchased"] else Style.MUTED)
 		_cards[id]["button"].add_theme_stylebox_override("normal", Style.box(Color("2b4149") if id == _selected else Style.PANEL, color if id == _selected else Color("40535c"), 12))
 	_update_details()
 	_refresh_phase_preview()
@@ -353,6 +398,8 @@ func _select(id: String) -> void:
 	_phase_selection[_view_phase] = id
 	_clear_message()
 	refresh()
+	if _body.vertical:
+		_scroll.ensure_control_visible.call_deferred(_details.get_parent())
 
 
 func _update_details() -> void:
@@ -375,14 +422,14 @@ func _update_details() -> void:
 	if _view_phase == 1:
 		_effect.text = Text.text("SKILLS_TRIBE_EFFECT") + (Text.text("SKILLS_ACTIVE_PURCHASE") if definition["purchased"] and phase == 1 else "")
 	var status: Dictionary = definition["purchase_status"]
-	_purchase.disabled = not status["ok"] or _purchase_active or _view_phase > 1
+	_purchase.disabled = not status["ok"] or _purchase_active
 	_purchase.text = Text.text("SKILLS_UNLOCKED") if definition["purchased"] else Text.text("SKILLS_UNLOCK") % [int(definition["cost"]), Text.text("SKILLS_SOCIAL_POINTS") if definition["track"] == "social" else Text.text("SKILLS_AGGRESSION_POINTS")]
 	if not status["ok"] and not definition["purchased"]:
 		_requirements.text += "\n" + _reason(str(status.get("reason", "")))
 
 
 func _buy_selected() -> void:
-	if _purchase_active or not visible or _view_phase > 1 or not _body.visible:
+	if _purchase_active or not visible or not _nodes.has(_selected) or not _body.visible:
 		return
 	_purchase_active = true
 	_purchase.disabled = true
@@ -427,6 +474,9 @@ func _select_phase(index: int) -> void:
 		return
 	_view_phase = index
 	_selected = _phase_selection.get(index, "")
+	if _selected.is_empty():
+		var definitions: Array[Dictionary] = get_node("/root/ProgressionService").get_behavior_nodes(index)
+		if not definitions.is_empty(): _selected = str(definitions[0]["id"])
 	_phase_choice.select(index)
 	_clear_message()
 	refresh()
@@ -438,11 +488,9 @@ func _show_tab(show_journal: bool) -> void:
 		_open_journal()
 		return
 	_body.visible = not show_journal
-	_phase_choice.visible = not show_journal
+	_phase_navigation.visible = not show_journal
 	_development.visible = false
-	_tree_tab.modulate = Color.WHITE if not show_journal else Style.MUTED
-	_journal_tab.modulate = Color.WHITE if show_journal else Style.MUTED
-	_development_tab.modulate = Style.MUTED
+	_style_tabs(_tree_tab)
 	if _message != null:
 		_clear_message()
 	_scroll.scroll_vertical = 0
@@ -451,11 +499,9 @@ func _show_tab(show_journal: bool) -> void:
 
 func _show_development() -> void:
 	_body.visible = false
-	_phase_choice.visible = false
+	_phase_navigation.visible = false
 	_development.visible = true
-	_tree_tab.modulate = Style.MUTED
-	_journal_tab.modulate = Style.MUTED
-	_development_tab.modulate = Color.WHITE
+	_style_tabs(_development_tab)
 	_clear_message()
 	_development.refresh()
 	_scroll.scroll_vertical = 0
@@ -483,23 +529,64 @@ func _open_journal() -> void:
 
 
 func _layout() -> void:
-	var width: float = get_viewport().get_visible_rect().size.x
+	var viewport_size := get_viewport().get_visible_rect().size
 	_font_scale = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
+	var inset := 12.0 if viewport_size.x < 1000 else 24.0
+	var book_size := Vector2(minf(1180 * _font_scale, viewport_size.x - inset * 2), minf(680 * _font_scale, viewport_size.y - inset * 2))
+	_panel.position = (viewport_size - book_size) * 0.5
+	_panel.size = book_size
+	var width: float = book_size.x - 40
 	_apply_fonts(_panel)
-	_phase_choice.add_theme_font_size_override("font_size", roundi(18 * _font_scale))
-	_phase_choice.custom_minimum_size.y = 46 * _font_scale
-	_header.vertical = width < 650
-	_body.vertical = width < 1100 * _font_scale
-	_branches.vertical = width < 620 * _font_scale
-	_close.custom_minimum_size.x = 150 * _font_scale
+	_phase_choice.add_theme_font_size_override("font_size", roundi(14 * _font_scale))
+	_phase_choice.custom_minimum_size.y = 34 * _font_scale
+	_phase_strip.visible = width >= 920 * _font_scale
+	_phase_choice.visible = not _phase_strip.visible
+	_header.vertical = false
+	_body.vertical = width < 920 * _font_scale
+	_branches.vertical = width < 540 * _font_scale
+	_close.custom_minimum_size.x = 135 * _font_scale
 	# Flow whole navigation buttons onto another row before breaking a word.
 	for tab: Button in [_tree_tab, _journal_tab, _development_tab]:
 		var font := tab.get_theme_font("font")
 		var font_size := tab.get_theme_font_size("font_size")
 		tab.custom_minimum_size.x = minf(width - 32, font.get_string_size(tab.text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x + 32)
-	for side in ["left", "right", "top", "bottom"]:
-		_panel.add_theme_constant_override("margin_" + side, 16 if width < 1000 else 32)
-	call_deferred("_fit_cards")
+	for card: Dictionary in _cards.values():
+		card.button.custom_minimum_size.y = 76 * _font_scale
+		card.icon.custom_minimum_size = Vector2.ONE * 32 * _font_scale
+	_detail_icon.custom_minimum_size = Vector2.ONE * 44 * _font_scale
+	# Breakpoints follow the actual book width, including on ultrawide displays.
+	_development._stages.vertical = width < 840 * _font_scale
+	_development._future.vertical = width < 540 * _font_scale
+	_fit_window.call_deferred()
+
+
+func _fit_window() -> void:
+	# Container minimums settle after text wrapping. Reapply the bounded window
+	# when they shrink as well, instead of retaining the initial one-word width.
+	var viewport_size := get_viewport().get_visible_rect().size
+	var inset := 12.0 if viewport_size.x < 1000 else 24.0
+	_panel.size = Vector2(minf(1180 * _font_scale, viewport_size.x - inset * 2), minf(680 * _font_scale, viewport_size.y - inset * 2))
+	_panel.position = (viewport_size - _panel.size) * 0.5
+
+
+func _style_tabs(active: Button) -> void:
+	for tab: Button in [_tree_tab, _journal_tab, _development_tab]:
+		tab.add_theme_stylebox_override("normal", Style.box(Color("2b4149") if tab == active else Color("162630"), Style.SOCIAL if tab == active else Color("354750"), 8))
+		tab.add_theme_color_override("font_color", Style.TEXT if tab == active else Style.MUTED)
+
+
+func _refresh_chapters() -> void:
+	var current: int = get_node("/root/GameState").current_phase
+	for index in range(_phase_buttons.size()):
+		var chapter := _phase_buttons[index]
+		var status_key := "SKILLS_ERA_PREVIEW"
+		if index == current: status_key = "SKILLS_ERA_CURRENT"
+		elif index < current: status_key = "SKILLS_ERA_PREVIOUS"
+		elif bool(PHASES[index]["implemented"]): status_key = "SKILLS_LOCKED"
+		chapter.text = Text.text("SKILLS_ERA_%d_NAME" % index) + "\n" + Text.text(status_key)
+		chapter.tooltip_text = Presentation.phase_name(index) + " · " + Text.text(status_key)
+		chapter.add_theme_stylebox_override("normal", Style.box(Color("2b4149") if index == _view_phase else Color("162630"), Style.SOCIAL if index == _view_phase else Color("354750"), 6))
+		chapter.add_theme_color_override("font_color", Style.TEXT if index == _view_phase else Style.MUTED)
 
 
 func _label(key: String, size_value: int = 18, color: Color = Style.TEXT) -> Label:
@@ -515,7 +602,7 @@ func _button(key: String, color: Color = Style.SOCIAL) -> Button:
 	button.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	button.set_meta("skills_font_size", 18)
+	button.set_meta("skills_font_size", 14)
 	if key.begins_with("SKILLS_"): button.set_meta("skills_text_key", key)
 	return button
 
@@ -524,9 +611,11 @@ func _clear_message() -> void:
 	_last_result = {}
 	_last_purchase_id = ""
 	_message.text = ""
+	_message.visible = false
 
 
 func _refresh_message() -> void:
+	_message.visible = not _last_result.is_empty()
 	if _last_result.is_empty():
 		_message.text = ""
 		return
@@ -546,7 +635,7 @@ func _refresh_language() -> void:
 	var scroll_before := _scroll.scroll_vertical
 	_refresh_static(_panel)
 	for index in range(PHASES.size()):
-		_phase_choice.set_item_text(index, Presentation.phase_name(index) + Text.text("SKILLS_PLAYABLE_CHOICE" if index <= 1 else "SKILLS_PLANNED_CHOICE"))
+		_phase_choice.set_item_text(index, Presentation.phase_name(index) + Text.text("SKILLS_PLAYABLE_CHOICE" if PHASES[index]["implemented"] else "SKILLS_PLANNED_CHOICE"))
 	refresh(false)
 	_refresh_message()
 	_layout()
@@ -566,10 +655,5 @@ func _refresh_static(node: Node) -> void:
 func _apply_fonts(node: Node) -> void:
 	if node.has_meta("skills_font_size"):
 		node.add_theme_font_size_override("font_size", roundi(float(node.get_meta("skills_font_size")) * _font_scale))
-		if node is Button: node.custom_minimum_size.y = 46 * _font_scale
+		if node is Button and not node.has_meta("skill_card"): node.custom_minimum_size.y = 36 * _font_scale
 	for child in node.get_children(): _apply_fonts(child)
-
-
-func _fit_cards() -> void:
-	for card: Dictionary in _cards.values():
-		card.button.custom_minimum_size.y = maxf(94 * _font_scale, card.content.get_combined_minimum_size().y)

@@ -182,6 +182,8 @@ static func _add_random_part(
 		parts = parts.filter(func(part: Dictionary) -> bool: return part.id in PartLibrary.MouthCatalog.LEGACY_IDS)
 	elif category_id == PartLibrary.CATEGORY_TAIL:
 		parts = parts.filter(func(part: Dictionary) -> bool: return part.id in PartLibrary.TailCatalog.LEGACY_IDS)
+	if category_id in [PartLibrary.CATEGORY_HORNS, PartLibrary.CATEGORY_DECOR]:
+		parts = parts.filter(func(part: Dictionary) -> bool: return PartLibrary.OrnamentCatalog.get_profile(part.id).is_empty())
 	if parts.is_empty():
 		return
 	if not required and random.randf() < 0.12:

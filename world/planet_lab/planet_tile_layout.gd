@@ -7,6 +7,8 @@ const MAX_LEVEL: int = 24
 const MAX_LEAVES: int = 768
 const TARGET_WIDTH: float = 32.0
 const NEAR_RADIUS_METERS: float = 64.0
+const SCENERY_RADIUS_METERS: float = 256.0
+const SCENERY_PATCH_METERS: float = 128.0
 var radius: float
 var max_level: int
 var root_level: int
@@ -29,7 +31,7 @@ static func patch(face: int, level: int, x: int, y: int) -> Dictionary:
 		"direction": Cube.vector(Cube.direction(face, -1.0 + (x + 0.5) * width, -1.0 + (y + 0.5) * width))}
 
 
-func choose(direction: Vector3, previous_masks: Dictionary = {}) -> Dictionary:
+func choose(direction: Vector3, previous_masks: Dictionary = {}, view_direction: Vector3 = Vector3.ZERO) -> Dictionary:
 	var retained: Dictionary = {}
 	for id: String in previous_masks:
 		var parts: PackedStringArray = id.split("/")
@@ -42,7 +44,8 @@ func choose(direction: Vector3, previous_masks: Dictionary = {}) -> Dictionary:
 		for history: Dictionary in ([{}] if retained.is_empty() else [retained, {}]):
 			var leaves: Dictionary = {}
 			for face in range(6):
-				var focus: Array = _project_focus(face, direction)
+				var focus: Array = [_project_focus(face, direction)]
+				if view_direction != Vector3.ZERO: focus.append(_project_focus(face, view_direction))
 				for y in range(1 << root_level):
 					for x in range(1 << root_level):
 						_select(patch(face, root_level, x, y), focus, depth, leaves, history)
@@ -67,14 +70,28 @@ func _project_focus(face: int, d: Vector3) -> Array:
 
 
 func _select(tile: Dictionary, focus: Array, depth: int, leaves: Dictionary, retained: Dictionary) -> void:
-	var distance: float = maxf(absf(float(tile.uv.x) + tile.width * 0.5 - focus[0]),
-		absf(float(tile.uv.y) + tile.width * 0.5 - focus[1]))
+	var distance: float = INF
+	for point: Array in focus:
+		distance = minf(distance, maxf(absf(float(tile.uv.x) + tile.width * 0.5 - point[0]),
+			absf(float(tile.uv.y) + tile.width * 0.5 - point[1])))
 	var reach: float = maxf(float(tile.width) * 0.8, float(tile.width) * 0.5 + NEAR_RADIUS_METERS / radius)
+	# Retain terrain silhouettes beneath the visible tree/rock layer. Collision
+	# detail still refines only near the observer; the existing leaf cap applies.
+	var scenery: bool = false
+	if float(tile.width) * radius > SCENERY_PATCH_METERS and is_finite(focus[0]):
+		# UV metres shrink near cube edges/corners. Measure this band in physical
+		# space so the same 200 m view is covered on every face.
+		var nearest: Array = Cube.direction(tile.face,
+			clampf(focus[0], tile.uv.x, float(tile.uv.x) + tile.width),
+			clampf(focus[1], tile.uv.y, float(tile.uv.y) + tile.width))
+		var focus_direction: Array = Cube.direction(tile.face, focus[0], focus[1])
+		var band: float = SCENERY_RADIUS_METERS * (1.15 if retained.has(tile.id) else 1.0)
+		scenery = Cube.local_position(nearest, focus_direction).length() * radius < band
 	# Keep existing subdivisions longer than the threshold that creates them.
 	# Otherwise crossing a face can discard and rebuild hundreds of far tiles.
 	if retained.has(tile.id):
 		reach *= 1.35
-	if tile.level < depth and distance < reach:
+	if tile.level < depth and (distance < reach or scenery):
 		for child: Dictionary in children(tile):
 			_select(child, focus, depth, leaves, retained)
 	else:

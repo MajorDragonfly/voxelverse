@@ -31,10 +31,10 @@ const APPEARANCE: Dictionary = {
 	"eye_color?": "color", "horn_color?": "color",
 }
 const PART: Dictionary = {
-	"part_revision?": ["int", 1, 1], "catalog_revision?": ["int", 1, 1],
+	"part_revision?": ["int", 1, 2], "catalog_revision?": ["int", 1, 1],
 	"end_part_revision?": ["int", 1, 1], "end_catalog_revision?": ["int", 1, 1],
 	"uid": "id", "part_id": "id", "category": ["enum", "mouth", "head", "eyes", "legs",
-		"arms", "tail", "horns", "plates", "spikes", "decor"],
+		"arms", "tail", "horns", "plates", "spikes", "decor", "wings", "fins", "ears"],
 	"position": ["vec", -32, 32], "rotation": ["vec", -36000, 36000],
 	"scale": ["num", 0.25, 3], "mirrored": "bool", "center_locked": "bool",
 	"shape_scale": ["vec", 0.4, 2.5], "end_part_id": "optional_id",

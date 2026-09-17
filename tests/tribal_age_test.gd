@@ -361,6 +361,19 @@ func _key(code: int) -> void:
 	root.push_input(event, true)
 
 func _click(button: Button) -> void:
+	# Construction now has its own detail tab. Navigate through the real tab
+	# bar before locating an action, just as a player would.
+	if tribe != null and button != null and tribe.panel._tabs.is_ancestor_of(button):
+		var tabs: TabContainer = tribe.panel._tabs
+		for index in range(tabs.get_tab_count()):
+			if tabs.get_tab_control(index).is_ancestor_of(button) and tabs.current_tab != index:
+				tribe.panel._scroll.ensure_control_visible(tabs.get_tab_bar())
+				await _frames(3)
+				var bar: TabBar = tabs.get_tab_bar()
+				bar.ensure_tab_visible(index)
+				await _world_click(bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center(), MOUSE_BUTTON_LEFT)
+				await _frames(3)
+				_expect(tabs.current_tab == index, "Cannot open the action's tab.")
 	if tribe != null and tribe.panel._scroll.is_ancestor_of(button):
 		tribe.panel._scroll.ensure_control_visible(button)
 		await _frames(3)
@@ -412,9 +425,11 @@ func _finish() -> void:
 func _check_scrolled_actions() -> void:
 	for button: Button in tribe.panel._buttons.values():
 		tribe.panel._tabs.current_tab = button.get_parent().get_parent().get_index()
-		var show_context: bool = tribe.panel._tabs.current_tab != 2
-		_expect(tribe.panel._goal.visible == show_context and tribe.panel._supply.visible == show_context, "Tab context waits for a simulation tick and can shift a scrolled action")
+		var page: Control = tribe.panel._tabs.get_current_tab_control()
+		_expect(tribe.panel._goal.visible == (page == tribe.panel._orders_page) and tribe.panel._supply.visible, "Tab context waits for a simulation tick and can shift a scrolled action")
 		await _frames(3)
+		# TabContainer applies page visibility in its deferred container pass.
+		_expect(tribe.panel._supply.is_visible_in_tree() == (page == tribe.panel._work_page), "Supply details escaped their workplace page.")
 		if not button.is_visible_in_tree():
 			continue # Milk pickup appears only when a delivery exists.
 		tribe.panel._scroll.ensure_control_visible(button)

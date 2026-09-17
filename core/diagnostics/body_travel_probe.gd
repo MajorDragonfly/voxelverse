@@ -27,6 +27,7 @@ func _run() -> void:
 	tribe.panel.confirm.pressed.emit()
 	await _until(func() -> bool: return tribe.is_active() and not tribe.navigation.pending, 18000)
 	if not tribe.is_active(): _expect(false, "Village did not activate."); await _finish(); return
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
 	var a: String = state.active_body_id
 	var member_id: String = tribe.village().members[1].id
 	tribe.select_member(member_id)
@@ -82,6 +83,7 @@ func _run() -> void:
 	_expect(absf(float(tribe.village().members[0].hunger) - 46.0) < 0.5 and absf(float(tribe.village().members[0].hydration) - 41.0) < 0.5, "Return restored stale local food/water needs instead of the traveler's current state.")
 	tribe.select_all()
 	tribe.issue_order("wait")
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
 	flow.toggle_pause()
 	var before: Dictionary = state.export_state()
 	var original_path: String = saves.save_path

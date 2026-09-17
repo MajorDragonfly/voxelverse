@@ -169,7 +169,7 @@ func _water(scene: Node3D) -> void:
 	_expect(not lake.is_empty(), "No freshwater found.")
 	if lake.is_empty(): return
 	var address: Dictionary = Cube.from_cartesian(surface.body.id, [lake.direction[0] * surface.body.radius, lake.direction[1] * surface.body.radius, lake.direction[2] * surface.body.radius], surface.body.radius)
-	address.height = lake.level - 0.5
+	address.height = surface.water_level_precise(lake.direction) - 0.5
 	scene.player.place(address)
 	await _until(func() -> bool: return Space.ground_ready(scene.player, scene.player.global_position), 25000)
 	scene.player.current_thirst = scene.player.maximum_thirst

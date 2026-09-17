@@ -66,8 +66,11 @@ func _ready() -> void:
 	stats_grid = GridContainer.new()
 	stats_grid.name = "ComparisonStats"
 	stats_grid.columns = 4
-	stats_grid.add_theme_constant_override("h_separation", 12)
-	stats_grid.add_theme_constant_override("v_separation", 7)
+	stats_grid.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	stats_grid.add_theme_constant_override("h_separation", 16)
+	stats_grid.add_theme_constant_override("v_separation", 0)
+	stats_grid.draw.connect(_draw_stat_rows)
+	stats_grid.sort_children.connect(stats_grid.queue_redraw)
 	values.add_child(stats_grid)
 	stats_notice = _label("Werte nicht verfügbar: Ein gespeicherter Körperbau ist unvollständig oder enthält frühere Teile.", 14)
 	stats_notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -114,20 +117,24 @@ func present(own: Dictionary, observed: Dictionary, state: Dictionary) -> void:
 	for title in ["Körperbau", "Du", "Art", "Art − Du"]:
 		var label := _label(title, 14)
 		label.modulate = Color("bdcebf")
+		label.custom_minimum_size.y = 34
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		if title != "Körperbau": _numeric_cell(label)
 		stats_grid.add_child(label)
 	for metric in Data.METRICS:
 		var id: String = metric["id"]
 		if id not in Data.MAIN_METRICS:
 			continue
-		stats_grid.add_child(_metric(metric))
+		var metric_label := _metric(metric)
+		metric_label.custom_minimum_size = Vector2(142, 36)
+		stats_grid.add_child(metric_label)
 		stats_grid.add_child(_number(own_stats, id))
 		stats_grid.add_child(_number(observed_stats, id))
-		var difference := _label("—", 16)
-		difference.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		var difference := _label("—", 17)
+		_numeric_cell(difference)
 		if not own_stats.is_empty() and not observed_stats.is_empty():
 			var delta: float = float(observed_stats[id]) - float(own_stats[id])
-			difference.set_meta("journal_number", [delta, true])
-			difference.text = Text.number(delta, true)
+			_set_table_number(difference, delta, true)
 			difference.modulate = Color("a8ddba") if delta > 0.005 else (Color("e8b7a1") if delta < -0.005 else Color("bdcebf"))
 		Text.bind(difference, "tooltip_text", "Wert der entdeckten Art minus dein Körperbauwert.")
 		stats_grid.add_child(difference)
@@ -187,11 +194,41 @@ func _wish() -> void:
 
 
 func _number(stats: Dictionary, id: String) -> Label:
-	var label := _label("—" if stats.is_empty() else Text.number(float(stats[id])), 17)
-	if not stats.is_empty(): label.set_meta("journal_number", [float(stats[id]), false])
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	var label := _label("—", 17)
+	if not stats.is_empty(): _set_table_number(label, float(stats[id]))
+	_numeric_cell(label)
 	label.name = "Value_" + id
 	return label
+
+
+func _numeric_cell(label: Label) -> void:
+	# Headers and values share a right edge; only the metric column may wrap.
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	label.size_flags_horizontal = Control.SIZE_FILL
+	label.size_flags_vertical = Control.SIZE_FILL
+	label.custom_minimum_size.x = 72
+
+
+func _set_table_number(label: Label, value: float, signed_value: bool = false) -> void:
+	label.set_meta("comparison_number", [value, signed_value])
+	if not is_finite(value):
+		label.text = "—"
+		return
+	if absf(value) < 0.005: value = 0.0
+	var formatted := ("+" if signed_value and value > 0.0 else "") + ("%.2f" % value)
+	label.text = formatted.replace(".", ",") if TranslationServer.get_locale().begins_with("de") else formatted
+
+
+func _draw_stat_rows() -> void:
+	# Draw behind the existing grid cells so every row keeps the same columns.
+	for start in range(0, stats_grid.get_child_count(), 4):
+		var cell: Control = stats_grid.get_child(start)
+		var row := Rect2(0, cell.position.y, stats_grid.size.x, cell.size.y)
+		if start % 8 == 0:
+			stats_grid.draw_rect(row, Color(0.7, 0.85, 0.9, 0.06 if start > 0 else 0.10))
+		stats_grid.draw_line(Vector2(0, row.end.y), row.end, Color(0.7, 0.85, 0.9, 0.12))
 
 
 func _label(text: String, size_value: int) -> Label:
@@ -235,6 +272,10 @@ func _render_part_text() -> void:
 
 func refresh_language() -> void:
 	Text.refresh(self)
+	for label in stats_grid.get_children():
+		if label.has_meta("comparison_number"):
+			var value: Array = label.get_meta("comparison_number")
+			_set_table_number(label, value[0], value[1])
 	for index in _parts.size():
 		part_choice.set_item_text(index, "%s · %d×" % [Text.part(_parts[index].id), _parts[index].count])
 	_render_part_text()

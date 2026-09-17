@@ -3,6 +3,7 @@ extends Node
 const Text = preload("res://core/localization/ui_text.gd")
 signal menu_error(message: String)
 signal world_started
+signal startup_phase_changed(snapshot: Dictionary)
 
 const Style = preload("res://ui/frontend/menu_style.gd")
 const TITLE_SCENE: String = "res://ui/frontend/main_menu.tscn"
@@ -30,6 +31,7 @@ var _player_mode: int = Node.PROCESS_MODE_INHERIT
 var _resume_focus: Control
 var _help_label: Label
 var _travel_recovery: String = ""
+var _startup_trace := preload("res://core/diagnostics/startup_trace.gd").new()
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -92,6 +94,8 @@ func load_game(path: String) -> void:
 		_layer.hide()
 		if get_tree().change_scene_to_file("res://space/fleet/fleet_trial.tscn") != OK:
 			_fail_loading("Flottentest konnte nicht geöffnet werden.")
+		else:
+			_finish_startup_trace("redirected")
 		return
 	await _request_world()
 
@@ -144,6 +148,7 @@ func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body
 		scene.process_mode = previous_mode
 		saves.autosave_enabled = previous_autosave
 		loading = false
+		_finish_startup_trace("failed", saves.last_error)
 		pause_open = true
 		get_tree().paused = true
 		_show_pause()
@@ -173,12 +178,17 @@ func _release_world() -> void:
 
 func _request_world() -> void:
 	# GameState defers its generator rebuild. Finish it before scene _ready.
+	_startup_phase("state_settle")
 	await get_tree().process_frame
 	_loading_label.text = "Welt wird geladen …"
 	_world_scene = get_node("/root/GameState").campaign_scene()
 	if _world_scene != SPHERE_SCENE:
 		_fail_loading("Dieser ältere Spielstand muss zuerst auf einen Kugelplaneten übertragen werden. Das Original bleibt erhalten.")
 		return
+	var state: Node = get_node("/root/GameState")
+	_startup_trace.set_context({"scene": _world_scene, "seed": state.world_seed,
+		"body_id": state.active_body_id, "resource_cached": ResourceLoader.has_cached(_world_scene)})
+	_startup_phase("threaded_load")
 	var error: Error = ResourceLoader.load_threaded_request(_world_scene, "PackedScene")
 	if error != OK:
 		_fail_loading("Die Spielwelt konnte nicht geladen werden: " + error_string(error))
@@ -207,9 +217,12 @@ func _process(_delta: float) -> void:
 				return
 			_loading_label.text = "Gelände am Startpunkt wird aufgebaut …"
 			_loading_bar.hide()
+			_startup_phase("scene_instantiation")
 			var error: Error = get_tree().change_scene_to_packed(scene)
 			if error != OK:
 				_fail_loading("Die Spielwelt konnte nicht geöffnet werden: " + error_string(error))
+			else:
+				_startup_phase("scene_ready")
 		return
 	var scene := get_tree().current_scene
 	if scene != null and scene.scene_file_path == _world_scene:
@@ -226,6 +239,7 @@ func _scene_changed() -> void:
 	settings.close_menu()
 	var scene := get_tree().current_scene
 	if loading and scene != null and scene.scene_file_path == _world_scene:
+		_startup_phase("start_terrain")
 		_player = get_tree().get_first_node_in_group(&"player")
 		if _player != null:
 			_player_mode = _player.process_mode
@@ -235,6 +249,7 @@ func _scene_changed() -> void:
 	# selected campaign without turning the title screen into an active save.
 
 func _finish_loading() -> void:
+	_startup_phase("arrival")
 	var saves := get_node("/root/SaveGameService")
 	if not saves.complete_body_arrival():
 		_fail_loading("Die Ankunft konnte nicht gespeichert werden. " + saves.last_error)
@@ -251,9 +266,11 @@ func _finish_loading() -> void:
 	if not _travel_recovery.is_empty():
 		get_node("SaveFeedback")._show_status("Reise abgebrochen · dein Ausgangsort wurde wiederhergestellt.", Color("f2b09b"), 10.0)
 		_travel_recovery = ""
+	_finish_startup_trace("ready")
 	world_started.emit()
 
 func _fail_loading(message: String) -> void:
+	_finish_startup_trace("failed", message)
 	var saves: Node = get_node("/root/SaveGameService")
 	if not saves._body_transfer.is_empty():
 		_loading_scene = false
@@ -263,6 +280,8 @@ func _fail_loading(message: String) -> void:
 			_travel_recovery = message
 			_loading_label.text = "Die Reise wurde abgebrochen. Dein Ausgangsort wird wiederhergestellt …"
 			_load_started = Time.get_ticks_msec()
+			_startup_trace.begin()
+			startup_phase_changed.emit(startup_diagnostics())
 			await _request_world()
 			return
 	loading = false
@@ -410,6 +429,8 @@ func _show_loading(text: String) -> void:
 	loading = true
 	_preparing_world = true
 	_load_started = Time.get_ticks_msec()
+	_startup_trace.begin()
+	startup_phase_changed.emit(startup_diagnostics())
 	_prepare_overlay()
 	Style.label(_content, "VOXELVERSE", 37, Style.ACCENT)
 	_loading_label = Style.paragraph(_content, text, 25)
@@ -418,6 +439,17 @@ func _show_loading(text: String) -> void:
 	_loading_bar.custom_minimum_size.y = 8
 	_content.add_child(_loading_bar)
 	Style.paragraph(_content, "Deine Welt entsteht Schritt für Schritt.\nMit Esc erreichst du im Spiel jederzeit das Pausemenü.", 19)
+
+func startup_diagnostics() -> Dictionary:
+	return _startup_trace.snapshot()
+
+func _startup_phase(id: String) -> void:
+	_startup_trace.phase(id)
+	startup_phase_changed.emit(startup_diagnostics())
+
+func _finish_startup_trace(status: String, error: String = "") -> void:
+	_startup_trace.finish(status, error)
+	startup_phase_changed.emit(startup_diagnostics())
 
 func _prepare_overlay() -> void:
 	if not is_instance_valid(_layer):

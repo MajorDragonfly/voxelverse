@@ -18,6 +18,7 @@
         "save_slots_test",
         "spherical_campaign_contract_test",
         "spherical_campaign_runtime_test",
+        "startup_trace_test",
         "spherical_developed_migration_test",
         "frozen_body_serialization_test"
       ]
@@ -61,6 +62,7 @@
         "living_planet_entry_test",
         "living_planet_test",
         "living_surface_materials_test",
+        "living_lake_water_test",
         "planet_scale_migration_test",
         "planet_sphere_contract_test",
         "planet_sphere_runtime_test",
@@ -70,6 +72,8 @@
         "surface_adapter_entry_test",
         "surface_adapter_test",
         "surface_population_budget_test",
+        "surface_distance_test",
+        "surface_distance_world_test",
         "surface_scale_contract_test",
         "surface_support_test",
         "radial_step_test",
@@ -127,7 +131,12 @@
         "creature_v5_smoke_test",
         "runtime_geometry_batch_test",
         "creature_eye_expression_test",
-        "creature_tail_family_test"
+        "creature_tail_family_test",
+        "creature_wing_family_test",
+        "creature_fin_family_test",
+        "creature_ear_family_test",
+        "creature_mouth_refresh_test",
+        "creature_ornament_families_test"
       ]
     },
     {
@@ -137,6 +146,7 @@
       "tests": [
         "blueprint_contract_test",
         "community_blueprint_package_test",
+        "community_catalog_client_test",
         "creature_design_library_test",
         "creature_library_favorites_test",
         "creature_library_ui_test",
@@ -187,7 +197,10 @@
         "creature_expression_test",
         "wildlife_social_play_test",
         "wildlife_hunting_test",
-        "wildlife_hunting_world_test"
+        "wildlife_hunting_world_test",
+        "living_creature_ai_test",
+        "wildlife_colony_test",
+        "living_creatures_world_test"
       ]
     },
     {
@@ -206,7 +219,8 @@
         "tribal_economy_progress_world_test",
         "tribal_progression_test",
         "tribal_progression_world_test",
-        "skills_localization_test"
+        "skills_localization_test",
+        "living_companion_test"
       ]
     },
     {
@@ -237,7 +251,14 @@
         "workplace_instances_test",
         "workplace_runtime_test",
         "construction_control_test",
-        "construction_runtime_test"
+        "construction_runtime_test",
+        "tribal_order_latency_test",
+        "tribal_building_preview_test",
+        "tribal_building_preview_world_test",
+        "tribal_stockpile_test",
+        "tribal_stockpile_world_test",
+        "tribal_camera_test",
+        "tribal_camera_world_test"
       ]
     },
     {
@@ -264,6 +285,7 @@
         "domestic_fauna_journal_test",
         "interface_task7_test",
         "journal_paging_test",
+        "journal_preview_rotation_test",
         "living_planet_map_test",
         "minimap_test",
         "owned_animal_localization_test",
@@ -294,7 +316,10 @@
         "menu_rebinding_test",
         "save_browser_search_test",
         "onboarding_guidance_world_test",
-        "slot_scan_test"
+        "slot_scan_test",
+        "tribal_camera_preferences_test",
+        "tribal_guidance_test",
+        "tribal_guidance_world_test"
       ]
     },
     {
@@ -329,12 +354,13 @@
     {
       "id": "weather",
       "title": "Sanftes Planetenwetter und Darstellungsanschluss",
-      "work": "WEATHER-01 / WEATHER-02A",
+      "work": "WEATHER-01 / WEATHER-02A / WEATHER-03-STORM-PREVIEW",
       "tests": [
         "weather_model_test",
         "weather_runtime_test",
         "regional_weather_test",
-        "planet_climate_test"
+        "planet_climate_test",
+        "weather_storm_test"
       ]
     }
   ],

@@ -2,10 +2,12 @@ extends "res://world/surface/living_planet_surface.gd"
 ## Versioned freshwater basins. Old v1 terrain remains byte-for-byte procedural.
 ## Candidate cells and centers are canonical across cube seams; bounded cache.
 const VERSION: String = "living_planet_v2"
+const LakeWater = preload("res://world/surface/living_lake_water.gd")
 var _lakes: Dictionary = {}
 var _neighborhoods: Dictionary = {}
+var _water_basins: Dictionary = {}
 
-func _feature(d: Array) -> Dictionary:
+func _feature(d: Array, reach: float = 22.0) -> Dictionary:
 	var center: Dictionary = Cube.from_cartesian(body.id, [d[0] * body.radius, d[1] * body.radius, d[2] * body.radius], body.radius)
 	var level: int = ceili(log(body.radius * 2.0 / 256.0) / log(2.0))
 	var count: int = 1 << level
@@ -17,7 +19,7 @@ func _feature(d: Array) -> Dictionary:
 		if _neighborhoods.size() >= 32: _neighborhoods.erase(_neighborhoods.keys()[0])
 		_neighborhoods[key] = _candidates(center.face, cx, cy, count, step)
 	var closest: Dictionary = {}
-	var nearest: float = 22.0
+	var nearest: float = reach
 	for lake: Dictionary in _neighborhoods[key]:
 		var delta := Vector3((d[0] - lake.direction[0]) * body.radius, (d[1] - lake.direction[1]) * body.radius, (d[2] - lake.direction[2]) * body.radius)
 		var distance: float = delta.length()
@@ -54,8 +56,12 @@ func height_precise(d: Array) -> float:
 	return lerpf(lake.level - 2.0, original, smoothstep(8.0, 22.0, lake.distance))
 
 func water_level_precise(d: Array) -> float:
-	var lake: Dictionary = _feature(d)
-	return lake.get("level", 0.0)
+	var lake: Dictionary = _feature(d, LakeWater.REACH)
+	if lake.is_empty(): return 0.0
+	if not _water_basins.has(lake.key):
+		if _water_basins.size() >= 32: _water_basins.erase(_water_basins.keys()[0])
+		_water_basins[lake.key] = LakeWater.new(self, lake)
+	return _water_basins[lake.key].level_at(d)
 
 func _sample(d: Array) -> Dictionary:
 	var result: Dictionary = super._sample(d)

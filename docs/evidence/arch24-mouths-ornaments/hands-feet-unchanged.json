@@ -1,0 +1,26 @@
+{
+  "base": "176d088d34324de14952bc7506fe9763a22cf4b0",
+  "files": [
+    {
+      "path": "creatures/catalog/creature_foot_catalog.gd",
+      "sha256": "9e408f1a0e83057ff2fc4df6fdf7d2b2d339934f882a5473fede386ab481825c",
+      "identical_to_base": true
+    },
+    {
+      "path": "creatures/catalog/creature_hand_catalog.gd",
+      "sha256": "f4ac57eddb622640ee1fb174e28ce6b48dd128b09933ee67c3a1923095147d3a",
+      "identical_to_base": true
+    },
+    {
+      "path": "creatures/editor/creature_foot_geometry.gd",
+      "sha256": "a6dec2fd68b6dcd3b5bf25e7afdc62bb8a0f0932aa14fa5626444f9e94d51e06",
+      "identical_to_base": true
+    },
+    {
+      "path": "creatures/editor/creature_hand_geometry.gd",
+      "sha256": "309335bbbba00e9abe707cde401a340acbeee1cde35cd7f967038863bc8b2d86",
+      "identical_to_base": true
+    }
+  ],
+  "all_identical": true
+}

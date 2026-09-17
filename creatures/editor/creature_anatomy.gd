@@ -291,6 +291,13 @@ static func _apply_default_anchor_fields(
 			/ float(category_count - 1)
 		)
 
+	var ornament: Dictionary = PartLibrary.OrnamentCatalog.get_profile(str(placement.get("part_id", "")))
+	if not ornament.is_empty() and ornament.attachment in ["upper_front", "neck"] and category_id == PartLibrary.CATEGORY_DECOR:
+		placement["anchor_t"] = 0.13 if ornament.attachment == "upper_front" else 0.27
+		placement["anchor_side"] = 0.0
+		placement["anchor_vertical"] = 0.68
+		placement["anchor_surface_offset"] = Vector3.ZERO
+		return
 	match category_id:
 		PartLibrary.CATEGORY_HEAD:
 			placement["anchor_t"] = 0.025
@@ -320,6 +327,23 @@ static func _apply_default_anchor_fields(
 			placement["anchor_t"] = lerpf(0.18, 0.42, distribution)
 			placement["anchor_side"] = 0.60
 			placement["anchor_vertical"] = -0.05
+			placement["anchor_surface_offset"] = Vector3.ZERO
+
+		PartLibrary.CATEGORY_FINS:
+			var dorsal: bool = PartLibrary.FinCatalog.get_profile(str(placement.get("part_id", ""))).get("layout", "side") == "dorsal"
+			placement["anchor_t"] = lerpf(0.42, 0.65, distribution)
+			placement["anchor_side"] = 0.0 if dorsal else 0.72
+			placement["anchor_vertical"] = 1.0 if dorsal else -0.15
+			placement["anchor_surface_offset"] = Vector3.ZERO
+		PartLibrary.CATEGORY_EARS:
+			placement["anchor_t"] = lerpf(0.10, 0.24, distribution)
+			placement["anchor_side"] = 0.62
+			placement["anchor_vertical"] = 0.7
+			placement["anchor_surface_offset"] = Vector3.ZERO
+		PartLibrary.CATEGORY_WINGS:
+			placement["anchor_t"] = lerpf(0.30, 0.58, distribution)
+			placement["anchor_side"] = 0.72
+			placement["anchor_vertical"] = 0.38
 			placement["anchor_surface_offset"] = Vector3.ZERO
 
 		PartLibrary.CATEGORY_TAIL:

@@ -2,6 +2,185 @@
   "schema": 1,
   "packets": [
     {
+      "id": "M6-ORDER-LATENCY",
+      "title": "P0: Lange Wartezeiten bei Stammesaufträgen beseitigen",
+      "goal": "Klick, Validierung/Routen, Snapshot, dauerhaften Abschluss und Visuals/UI getrennt messen; den belegten Engpass ohne Verlust der Transaktionssicherheit beheben.",
+      "write_groups": [
+        "tribe_controller",
+        "save_service",
+        "village_visuals",
+        "tribe_ui",
+        "acceptance"
+      ],
+      "files": [
+        "world/tribe/tribe_controller.gd",
+        "autoload/save_game_service.gd",
+        "world/tribe/village_visuals.gd",
+        "ui/tribe/tribe_panel.gd",
+        "tools/profile_performance.py"
+      ],
+      "read": [
+        "docs/TRIBAL_PLAYTEST_PLAN_2026-09-16.md",
+        "docs/MODULE_CONTRACTS.md"
+      ],
+      "contracts": [
+        "village",
+        "campaign",
+        "regions_simulation",
+        "spherical_gameplay"
+      ],
+      "acceptance": "3/6 Bewohner, kleiner/gewachsener Stand, 100 gemischte Zuweisungen. Vorläufige Zielwerte auf Referenz-PC: sichtbare Rückmeldung p95 <= 100 ms, warme einfache Zuweisung p95 <= 250 ms bis Abschluss, keine befehlsbedingte Hauptthread-Blockade > 50 ms. Savefehler, Folgebefehle, Fracht, Pause, Neustart und Reise ohne Verlust/Dopplung prüfen; reale Werte und p99/Maximum berichten.",
+      "limits": "Zuerst messen; keine bereits bewiesene Ursache oder Leistungsfreigabe. Atomaren Save/Rollback nicht durch ungeprüften Autosave ersetzen. ARCH-13/ARCH-27-Anschlüsse abstimmen; Controller/UI/Visuals vor den folgenden M6-Paketen integrieren. Keine M4-Navigationsänderung."
+    },
+    {
+      "id": "M6-TRIBE-HUD",
+      "title": "P1: Stammesoberfläche kompakt und kontextbezogen gestalten",
+      "goal": "Schmale Ressourcenleiste, kompakte Bewohnerauswahl und zur Auswahl passende Befehle; Beruf, Auftrag und Arbeitsplatz verständlich unterscheiden.",
+      "write_groups": [
+        "tribe_ui",
+        "hud_layout",
+        "localization"
+      ],
+      "files": [
+        "ui/tribe/tribe_panel.gd",
+        "ui/tribe/tribe_presentation.gd",
+        "ui/tribe/construction_panel.gd",
+        "ui/hud_layout.gd",
+        "core/localization/ui_text.gd"
+      ],
+      "read": [
+        "docs/TRIBAL_PLAYTEST_PLAN_2026-09-16.md",
+        "docs/MODULE_CONTRACTS.md"
+      ],
+      "contracts": [
+        "village",
+        "frontend_locale",
+        "home_progression"
+      ],
+      "acceptance": "Bei 1080p/100 % mindestens 70 % zusammenhängende freie Spielfläche in der Standardansicht; 720p, DE/EN und 100/125/150 % bedienbar. Auswahl, Zuordnung, Sperrgründe, verfügbare/reservierte/unterwegs befindliche Vorräte klar. Buch, Esc, Karte und Bauvorschau ohne Überlagerung oder durchgereichte Klicks.",
+      "limits": "Nach M6-ORDER-LATENCY-Anschlüssen; kein bloßes Verkleinern aller Schriften. Issue-91-Modalschutz erhalten. Gemeinsame Lokalisierung mit Wetter-UI und Tutorial nacheinander integrieren."
+    },
+    {
+      "id": "M6-TRIBE-CAMERA",
+      "title": "P1: Stammeskamera drehen, neigen und weiter bewegen",
+      "goal": "Kamerabezogenes WASD, Drehung, Neigung, weicher Zoom, Geschwindigkeit und Dorfzentrierung mit oberflächengebundenem Fokus und Esc-Einstellungen.",
+      "write_groups": [
+        "tribe_controller",
+        "tribe_ui",
+        "camera_settings",
+        "localization",
+        "surface_view"
+      ],
+      "files": [
+        "world/tribe/tribe_controller.gd",
+        "ui/tribe/tribe_panel.gd",
+        "ui/frontend/controls_settings.gd",
+        "world/surface/gameplay_space.gd",
+        "main/spherical_campaign.gd",
+        "core/localization/ui_text.gd"
+      ],
+      "read": [
+        "docs/TRIBAL_PLAYTEST_PLAN_2026-09-16.md",
+        "docs/MODULE_CONTRACTS.md"
+      ],
+      "contracts": [
+        "village",
+        "spherical_gameplay",
+        "surface",
+        "discovery_map",
+        "frontend_locale"
+      ],
+      "acceptance": "Mindestens 100 m zusammenhängender Schwenkweg abseits des Dorfplatzes über geladene Oberfläche, Rückkehr/Einheitenfokus, gespeicherte Einstellungen. Neigung/Zoom, Hang, Gelände/Wasser, Ursprung- und Körperwechsel ohne Sprünge. Kameraschwenk schaltet keine Erkundung frei; Arbeits- und Kameraradius bleiben getrennt.",
+      "limits": "Nach M6-ORDER-LATENCY und abgestimmtem HUD-Anschluss; begrenztes Streaming statt pauschal größerer Nahsimulation. Vorhandene Weg-/Bau-/Save-Grenzen nicht nur hochsetzen; M4-Navigation bleibt beim Besitzer."
+    },
+    {
+      "id": "M6-STOCKPILE-VISUALS",
+      "title": "P1: Eingelagerte Ressourcen als wachsende Vorräte zeigen",
+      "goal": "Holzstapel, Steinhaufen und passende Vorratsbehälter am Dorfplatz aus echten Beständen ableiten; Vorkommen, Lager, Reservierungen und Fracht unterscheiden.",
+      "write_groups": [
+        "village_visuals",
+        "tribe_ui",
+        "localization"
+      ],
+      "files": [
+        "world/tribe/village_visuals.gd",
+        "world/tribe/resource_catalog.gd",
+        "world/tribe/village_construction.gd",
+        "ui/tribe/tribe_panel.gd",
+        "core/localization/ui_text.gd"
+      ],
+      "read": [
+        "docs/TRIBAL_PLAYTEST_PLAN_2026-09-16.md",
+        "docs/MODULE_CONTRACTS.md"
+      ],
+      "contracts": [
+        "village",
+        "spherical_gameplay",
+        "terrain_art"
+      ],
+      "acceptance": "Je Ressource 0/1/mittlerer Bestand/Katalogkapazität sichtbar verschieden. Sammeln, Lieferung, Verbrauch, Reservierung, Abbruch/Rückgabe und Save/Load/A-B-A ohne Doppelzählung. Getragene und gelieferte Bauware nicht im freien Lager zeichnen; begrenzte Instanzzahl und Änderungen nur bei Mengenstufen.",
+      "limits": "Nach M6-ORDER-LATENCY-Visualanschluss und M6-TRIBE-HUD; keine neuen Vorrats-Savefelder, zweite Wirtschaft oder Simulation pro Klotz. Materialgruppen für Reservierungen aus vorhandenen Verträgen ableiten."
+    },
+    {
+      "id": "M10-TRIBE-TUTORIAL",
+      "title": "P1: Auswahl und Dorfarbeit Schritt für Schritt erklären",
+      "goal": "Die bestehende optionale Einführung um echte Stammeslernziele zu Kamera, Einzel-/Gruppenauswahl, Aufträgen, Berufen, Arbeitsplätzen, Lager/Transport, Versorgung und Bauen erweitern.",
+      "write_groups": [
+        "onboarding",
+        "tribe_controller",
+        "tribe_ui",
+        "localization"
+      ],
+      "files": [
+        "core/onboarding_progress.gd",
+        "ui/frontend/first_steps.gd",
+        "ui/frontend/guidance_text.gd",
+        "world/tribe/tribe_controller.gd",
+        "ui/tribe/tribe_panel.gd",
+        "core/localization/ui_text.gd"
+      ],
+      "read": [
+        "docs/TRIBAL_PLAYTEST_PLAN_2026-09-16.md",
+        "docs/MODULE_CONTRACTS.md"
+      ],
+      "contracts": [
+        "frontend_locale",
+        "home_progression",
+        "village",
+        "campaign"
+      ],
+      "acceptance": "Neue und bestehende Stämme können einsteigen, überspringen und unter Esc fortsetzen. Nur tatsächliche erfolgreiche Aktionen/Lieferungen schließen Schritte ab. DE/EN, Neubelegung, blockierte Wege, Speicherausfall sowie Save/Neustart/Anleitungsversionen prüfen; keine überdeckten Pflichtaktionen.",
+      "limits": "Nach M6-TRIBE-HUD und M6-TRIBE-CAMERA sowie abgestimmter Lagerdarstellung. Bestehende M10-GUIDANCE erweitern; kein zweiter Fortschrittsbesitzer, keine bloße Klickbestätigung und keine Wirtschaftsbelohnung durch Tutorialklicks."
+    },
+    {
+      "id": "M6-PLANET-PRESENTATION",
+      "title": "P2: Dorfansicht mit der Kugellandschaft abstimmen",
+      "goal": "Kamera, Gelände, Dorfobjekte, Schatten und Weltbeschriftungen an festen Ansichten auf kleinen/großen Kugeln visuell prüfen und konkrete Ausrichtungs-/LOD-/Lesbarkeitsprobleme korrigieren.",
+      "write_groups": [
+        "village_visuals",
+        "surface_view",
+        "scenery_lod",
+        "acceptance"
+      ],
+      "files": [
+        "world/tribe/village_visuals.gd",
+        "world/surface/gameplay_space.gd",
+        "main/spherical_campaign.gd",
+        "tools/review_spherical_campaign.py"
+      ],
+      "read": [
+        "docs/TRIBAL_PLAYTEST_PLAN_2026-09-16.md",
+        "docs/ENVIRONMENT_REVIEW.md"
+      ],
+      "contracts": [
+        "terrain_art",
+        "surface",
+        "spherical_gameplay"
+      ],
+      "acceptance": "Vorher/Nachher bei gleichem Seed, Ort, Zeit und Preset; Nah-/Fernzoom, mehrere Neigungen, Hang und Ursprungswechsel. Kein Schweben/Versinken, lesbare gezielte Labels, stimmige Übergänge; Framezeiten und Objektzahlen belegen.",
+      "limits": "Nach M6-TRIBE-CAMERA und M6-STOCKPILE-VISUALS. Mit RENDER-DISTANT-FOREST abstimmen. Screenshot ist kein Nachweis falscher Kugelgeometrie; keine künstliche Kurve, Terrainneugenerierung oder pauschal unbeschränkte Sichtweite."
+    },
+    {
       "id": "ARCH-19-TARGET-PC",
       "title": "Gemeinsamen Kandidaten auf Zielhardware messen",
       "goal": "Einen festen Build auf Lars' Referenz-PC aus docs/PROJECT_STATUS.md bei 1080p prüfen und die nächste Engstelle bestimmen.",

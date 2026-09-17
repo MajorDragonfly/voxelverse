@@ -120,9 +120,20 @@ func _layouts() -> void:
 				_expect(ui._panel.size.x <= size_value.x + 1 and ui._panel.size.y <= size_value.y + 1, "Book exceeds viewport")
 				_expect(ui._close.get_global_rect().end.x <= size_value.x + 1, "Close button leaves viewport")
 				_expect(ui._scroll.size.y >= 80, "No usable scroll viewport remains")
+				_expect(root.get_visible_rect().encloses(ui._panel.get_global_rect()), "Book is not centered within the viewport")
 				for card: Dictionary in ui._cards.values():
 					if card.button.visible:
 						_expect(card.content.get_combined_minimum_size().y <= card.button.size.y + 1, "Skill text overflows its card")
+						_expect(card.button.size.y <= 160 * scale_value, "Wrapped skill content retains an oversized height")
+				# After repeated language, phase and size changes, return to the
+				# overview and require every desktop skill plus its action to fit.
+				if size_value.x >= 1280 and scale_value == 1.0:
+					ui._scroll.scroll_vertical = 0
+					await _settle()
+					for card: Dictionary in ui._cards.values():
+						if card.button.visible:
+							_expect(ui._scroll.get_global_rect().encloses(card.button.get_global_rect()), "Desktop skills overflow after relayout")
+					_expect(ui._scroll.get_global_rect().encloses(ui._purchase.get_global_rect()), "Desktop purchase requires scrolling after relayout")
 				await _image("skills-%s-%dx%d-%d" % [language, size_value.x, size_value.y, roundi(scale_value * 100)])
 				ui._purchase.grab_focus()
 				await _settle()

@@ -92,13 +92,16 @@ func _physics_process(delta: float) -> void:
 		target = Space.offset(self, player.global_position, Vector3(_turn_sign * 2.3, 0.0, 2.3))
 	elif order == "home":
 		target = Space.offset(self, controller.home_position(), Vector3(_turn_sign * 2.3, 0.0, 2.3))
+	var behavior: Dictionary = _activity(delta, member, target)
+	target = behavior.target
+	var activity_speed: float = float(behavior.get("speed", move_speed))
 	var offset: Vector3 = target - global_position
 	offset = offset.slide(up_direction)
 	var direction := Vector3.ZERO
-	_set_status("waiting" if order == "wait" else "at_home" if order == "home" else "near_player")
-	if order != "wait" and offset.length() > 1.1:
+	_set_status(behavior.idle)
+	if behavior.move and offset.length() > float(behavior.get("stop_distance", 1.1)):
 		direction = offset.normalized()
-		_set_status("following" if order == "follow" else "returning")
+		_set_status(behavior.moving)
 		# Small local avoidance, not global pathfinding. Never cross unknown floor,
 		# a steep drop or deep water; waiting is preferable to teleporting a member.
 		var chosen := Vector3.ZERO
@@ -110,9 +113,9 @@ func _physics_process(delta: float) -> void:
 		direction = chosen
 		if direction == Vector3.ZERO:
 			_set_status("blocked")
-	velocity = direction * move_speed + up_direction * (-0.5 if is_on_floor() else maxf(-12.0, velocity.dot(up_direction) - 20.0 * delta))
+	velocity = direction * activity_speed + up_direction * (-0.5 if is_on_floor() else maxf(-12.0, velocity.dot(up_direction) - 20.0 * delta))
 	if is_on_floor() and direction != Vector3.ZERO:
-		_step_up(direction * move_speed * delta)
+		_step_up(direction * activity_speed * delta)
 	move_and_slide()
 	if is_on_floor():
 		apply_floor_snap()
@@ -120,6 +123,12 @@ func _physics_process(delta: float) -> void:
 		var local_direction: Vector3 = global_basis.inverse() * direction
 		_visual.rotation.y = lerp_angle(_visual.rotation.y, atan2(-local_direction.x, -local_direction.z), minf(delta * 7.0, 1.0))
 	controller.record_position(member_id, global_position)
+
+func _activity(_delta: float, member: Dictionary, target: Vector3) -> Dictionary:
+	var order: String = member.order
+	return {"target": target, "move": order != "wait",
+		"idle": "waiting" if order == "wait" else "at_home" if order == "home" else "near_player",
+		"moving": "following" if order == "follow" else "returning"}
 
 func _step_up(motion: Vector3) -> void:
 	Space.step(self, motion, 0.55, 0.15)

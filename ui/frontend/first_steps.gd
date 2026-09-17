@@ -7,6 +7,7 @@ const Progress = preload("res://core/onboarding_progress.gd")
 const Copy = preload("res://ui/frontend/guidance_text.gd")
 const Development = preload("res://core/progression/development_path.gd")
 const TribeText = preload("res://ui/tribe/tribe_presentation.gd")
+var _tribal: RefCounted
 var _saves: Node
 var _flow: Node
 var _player: Node
@@ -28,6 +29,7 @@ func _ready() -> void:
 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_saves = get_node("/root/SaveGameService")
 	_flow = get_parent()
+	_tribal = preload("res://ui/frontend/tribal_guidance.gd").new(self)
 	_saves.game_loaded.connect(func(_path: String):
 		_observe_timer = 0.0)
 	get_node("/root/LocaleManager").language_changed.connect(_language_changed)
@@ -60,6 +62,8 @@ func _process(delta: float) -> void:
 	var home: Node = get_tree().get_first_node_in_group(&"home_group_controller")
 	if home != _home:
 		_bind_home(home)
+	_tribal.bind(get_tree().get_first_node_in_group(&"tribe_controller"))
+	_tribal.refresh()
 	if not _live_session() or get_tree().paused:
 		hide()
 		return
@@ -147,7 +151,7 @@ func context_hint() -> String:
 		return Text.text("GUIDE_CONTEXT_WORLD")
 	var state: Node = get_node("/root/GameState")
 	if int(state.current_phase) != 0:
-		return Text.text("GUIDE_TRIBE_NEXT")
+		return Text.text("GUIDE_TRIBAL_INTRO")
 	var step: String = _saves.guidance.current_step()
 	if step == "eat" and _player.get_hunger_ratio() >= 0.99:
 		return Text.text("GUIDE_CONTEXT_FULL")
@@ -163,11 +167,12 @@ func context_hint() -> String:
 
 func build_help(parent: VBoxContainer) -> void:
 	_help_parent = parent
+	var creature_phase: bool = int(get_node("/root/GameState").current_phase) == 0
 	var body := VBoxContainer.new()
 	body.name = "GuidanceHelp"
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	parent.add_child(body)
-	Style.paragraph(body, Text.text("GUIDE_TITLE"), 26)
+	Style.paragraph(body, Text.text("GUIDE_TITLE" if creature_phase else "GUIDE_TRIBAL_TITLE"), 26)
 	var scroll := ScrollContainer.new()
 	scroll.name = "GuidanceChapters"
 	_help_scroll = scroll
@@ -178,29 +183,34 @@ func build_help(parent: VBoxContainer) -> void:
 	var list := VBoxContainer.new()
 	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(list)
-	Style.paragraph(list, Text.text("GUIDE_INTRO"), 18)
-	Style.paragraph(list, context_hint(), 18)
+	Style.paragraph(list, Text.text("GUIDE_INTRO" if creature_phase else "GUIDE_TRIBAL_INTRO"), 18)
+	if creature_phase: Style.paragraph(list, context_hint(), 18)
 	var supported: bool = _saves.guidance.supported()
-	var creature_phase: bool = int(get_node("/root/GameState").current_phase) == 0
-	for chapter_id in Progress.CHAPTERS:
-		var heading: String = Text.format_text("GUIDE_CARD_COUNT", {"chapter": Copy.chapter(chapter_id), "done": _saves.guidance.chapter_completed(chapter_id), "total": Progress.CHAPTER_STEPS[chapter_id].size()})
+	var chapters: Array = Progress.CHAPTERS if creature_phase else Progress.TRIBE_CHAPTERS
+	for chapter_id: String in chapters:
+		var steps: Array = Progress.CHAPTER_STEPS[chapter_id] if creature_phase else Progress.TRIBE_CHAPTER_STEPS[chapter_id]
+		var done: int = _saves.guidance.chapter_completed(chapter_id) if creature_phase else _saves.guidance.tribal_completed(chapter_id)
+		var heading: String = Text.format_text("GUIDE_CARD_COUNT", {"chapter": Copy.chapter(chapter_id), "done": done, "total": steps.size()})
 		Style.paragraph(list, heading, 22)
 		var choose := Style.button(list, Text.format_text("GUIDE_CHOOSE", {"chapter": Copy.chapter(chapter_id)}), select_chapter.bind(chapter_id), "GuideChapter_" + chapter_id)
 		choose.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		choose.disabled = not supported or not creature_phase or _saves.guidance.chapter_completed(chapter_id) == Progress.CHAPTER_STEPS[chapter_id].size()
-		for step: String in Progress.CHAPTER_STEPS[chapter_id]:
-			Style.paragraph(list, ("✓ " if _saves.guidance.done(step) else "○ ") + Copy.title(step), 20)
+		choose.disabled = not supported or done == steps.size()
+		for step: String in steps:
+			var complete: bool = _saves.guidance.done(step) if creature_phase else _saves.guidance.tribal_done(step)
+			Style.paragraph(list, ("✓ " if complete else "○ ") + Copy.title(step), 20)
 			Style.paragraph(list, Copy.hint(step, true), 18)
-	var message: String = Text.format_text("GUIDE_TOTAL", {"done": _saves.guidance.completed_count(), "total": Progress.STEPS.size()})
+	var completed: int = _saves.guidance.completed_count() if creature_phase else _saves.guidance.tribal_completed()
+	var total: int = Progress.STEPS.size() if creature_phase else Progress.TRIBE_STEPS.size()
+	var message: String = Text.format_text("GUIDE_TOTAL", {"done": completed, "total": total})
 	if not supported:
 		message = Text.text("GUIDE_FUTURE")
-	elif _saves.guidance.done("tribe"):
+	elif (_saves.guidance.done("tribe") if creature_phase else completed == total):
 		message = Text.text("GUIDE_FINISHED") + " · " + message
-	elif bool(_saves.guidance.data.skipped):
+	elif bool(_saves.guidance.data.skipped if creature_phase else _saves.guidance.data.tribal.skipped):
 		message += " " + Text.text("GUIDE_DISABLED")
 	Style.paragraph(list, message, 18)
-	Style.button(list, Text.text("GUIDE_RESTART"), restart, "RestartFirstSteps").disabled = not supported or not creature_phase
-	Style.button(list, Text.text("GUIDE_SKIP"), skip, "SkipFirstSteps").disabled = not supported or _saves.guidance.current_step().is_empty()
+	Style.button(list, Text.text("GUIDE_RESTART"), restart, "RestartFirstSteps").disabled = not supported
+	Style.button(list, Text.text("GUIDE_SKIP"), skip, "SkipFirstSteps").disabled = not supported or (_saves.guidance.current_step().is_empty() if creature_phase else _saves.guidance.tribal_step().is_empty())
 
 	_layout_help()
 
@@ -231,24 +241,33 @@ func _language_changed(_locale: String) -> void:
 			_help_parent.move_child(_help_parent.get_node("GuidanceHelp"), 0)
 
 func select_chapter(chapter_id: String) -> void:
-	if int(get_node("/root/GameState").current_phase) != 0 or not _saves.guidance.select_chapter(chapter_id):
-		return
+	var tribal: bool = int(get_node("/root/GameState").current_phase) == 1
+	var accepted: bool = _saves.guidance.select_tribal(chapter_id) if tribal else _saves.guidance.select_chapter(chapter_id)
+	if not accepted: return
 	_observe_timer = 0.0
 	_saves.schedule_autosave(0.2)
 	_flow.resume()
 
 func restart() -> void:
-	if not _saves.guidance.supported() or int(get_node("/root/GameState").current_phase) != 0:
-		return
-	_saves.guidance.reset(true)
+	if not _saves.guidance.supported(): return
+	if int(get_node("/root/GameState").current_phase) == 1:
+		_saves.guidance.restart_tribal()
+	else:
+		_saves.guidance.reset(true)
 	_observe_timer = 0.0
 	_saves.schedule_autosave(0.2)
 	_flow.resume()
 
 func skip() -> void:
-	_saves.guidance.skip()
+	if int(get_node("/root/GameState").current_phase) == 1:
+		_saves.guidance.skip_tribal()
+	else:
+		_saves.guidance.skip()
 	_saves.schedule_autosave(0.2)
 	_flow.resume()
+
+func _exit_tree() -> void:
+	if _tribal != null: _tribal.bind(null)
 
 func _ignore_mouse(node: Node) -> void:
 	if node is Control:

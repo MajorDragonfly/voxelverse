@@ -1,10 +1,12 @@
 extends RefCounted
 ## Authored mouth recipes shared by workshop, journal and runtime. Opening is a
 ## authored rest pose. Cosmetic joints do not grant new gameplay capabilities.
+const SurfaceV2 = preload("res://creatures/editor/creature_mouth_surface_v2.gd")
 const Catalog = preload("res://creatures/catalog/creature_mouth_catalog.gd")
 
 
 static func articulation(id: String, revision: int = 1) -> Array[Dictionary]:
+	if revision == 2: return SurfaceV2.articulation(id)
 	if revision != 1: return []
 	if id == "mouth_octopus_beak":
 		return [
@@ -34,7 +36,7 @@ static func _joint(prefixes: Array, pivot: Vector3, degrees: float) -> Dictionar
 
 
 static func recipe(id: String, skin: Color, accent: Color, horn: Color, revision: int = 1) -> Array[Dictionary]:
-	if Catalog.get_profile(id, revision).is_empty(): return []
+	if revision != 1 or Catalog.get_profile(id, revision).is_empty(): return []
 	match id:
 		"mouth_canine_snout": return _canine(skin, accent, horn)
 		"mouth_crocodile_snout": return _crocodile(skin, accent, horn)

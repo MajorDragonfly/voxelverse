@@ -55,6 +55,8 @@ var _slot_preview: Dictionary = {}
 var _slot_origin: Dictionary = {}
 var _save_reason: String = "manual"
 var last_saved_unix_time: int = 0
+## Last synchronous save only; diagnostic timings are never persisted.
+var last_save_metrics: Dictionary = {}
 var guidance := preload("res://core/onboarding_progress.gd").new()
 
 
@@ -115,9 +117,19 @@ func save_now(custom_path: String = "") -> bool:
 	if _saving:
 		return false
 	_saving = true
+	var started: int = Time.get_ticks_usec()
+	last_save_metrics = {}
 	var result: bool = _save_snapshot(custom_path)
+	last_save_metrics["total_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+	last_save_metrics["ok"] = result
 	_saving = false
 	return result
+
+
+func _save_stage(name: String, started: int) -> int:
+	var now: int = Time.get_ticks_usec()
+	last_save_metrics[name + "_ms"] = (now - started) / 1000.0
+	return now
 
 
 func _save_snapshot(custom_path: String = "") -> bool:
@@ -127,11 +139,13 @@ func _save_snapshot(custom_path: String = "") -> bool:
 		_report_failure("Saving is blocked after an unreadable or newer save. Load a compatible save first.")
 		return false
 	var target_path: String = save_path if custom_path.is_empty() else custom_path
+	var stage: int = Time.get_ticks_usec()
 	save_started.emit(target_path)
 	if _write_blocked:
 		_report_failure("Die Regionssicherung ist fehlgeschlagen. Der bisherige Spielstand bleibt erhalten.")
 		return false
 	_capture_current_region_state()
+	stage = _save_stage("capture", stage)
 	var files: Dictionary = Designs.capture()
 	_upgrade_design_ids(files)
 	_update_design_references(files)
@@ -141,16 +155,21 @@ func _save_snapshot(custom_path: String = "") -> bool:
 		return false
 	var save_data: Dictionary = snapshot.data
 	_annotate_world_state(save_data)
+	stage = _save_stage("snapshot", stage)
 	var problem: String = _validate_save(save_data)
 	if not problem.is_empty():
 		_report_failure(problem)
 		return false
+	stage = _save_stage("validate", stage)
 	# Validate what the reader will actually see BEFORE any live file moves.
-	var readback: Dictionary = Atomic.parse_dictionary(Atomic.stringify(save_data))
+	var serialized: String = Atomic.stringify(save_data)
+	var readback: Dictionary = Atomic.parse_dictionary(serialized)
+	stage = _save_stage("serialize", stage)
 	var readback_problem: String = _validate_save(readback)
 	if not readback_problem.is_empty():
 		_report_failure("Serialized save failed validation; previous snapshot retained: " + readback_problem)
 		return false
+	stage = _save_stage("validate_serialized", stage)
 	var previous: Dictionary = _read_save(target_path)
 	if _has_unsupported_contract(previous):
 		_write_blocked = true
@@ -159,21 +178,24 @@ func _save_snapshot(custom_path: String = "") -> bool:
 	# The first migrated backup must also contain the editor bytes. The exact
 	# original schema-1/2 files remain in the immutable migration backup.
 	var keep_previous: bool = _validate_save(previous).is_empty()
+	stage = _save_stage("previous", stage)
 	if keep_previous and is_slot_path(target_path):
 		var history_error: Error = History.capture(target_path, previous, _save_reason)
 		if history_error != OK:
 			_report_failure("Sicherungshistorie konnte nicht geschrieben werden. Der bisherige Spielstand bleibt erhalten.")
 			return false
+	stage = _save_stage("history", stage)
 	if keep_previous and int(previous.get("schema", 0)) < SAVE_SCHEMA:
-		var backup_error: Error = Atomic.write(target_path + ".bak", save_data, false)
+		var backup_error: Error = Atomic.write_serialized(target_path + ".bak", serialized, false)
 		if backup_error != OK:
 			_report_failure("Could not commit complete migration recovery snapshot.")
 			return false
 		keep_previous = false
-	var error: Error = Atomic.write(target_path, save_data, keep_previous)
+	var error: Error = Atomic.write_serialized(target_path, serialized, keep_previous)
 	if error != OK:
 		_report_failure("Could not commit save: %s (%s)" % [target_path, error_string(error)])
 		return false
+	stage = _save_stage("write", stage)
 	_design_files = files
 	_design_snapshot_active = true
 	last_error = ""
@@ -181,6 +203,7 @@ func _save_snapshot(custom_path: String = "") -> bool:
 	if is_slot_path(target_path):
 		History.trim(target_path)
 	game_saved.emit(target_path)
+	_save_stage("notify", stage)
 	return true
 
 

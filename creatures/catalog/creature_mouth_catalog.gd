@@ -1,6 +1,7 @@
 extends RefCounted
 ## Shared mouth/head model provider. Legacy identities and species stay frozen.
 const REVISION: int = 1
+const REFRESHED_IDS: Array[String] = ["mouth_grazer", "mouth_broad_beak", "mouth_predator_jaws", "mouth_filter_snout", "mouth_canine_snout", "mouth_crocodile_snout", "mouth_octopus_beak", "mouth_feline_snout", "mouth_bear_snout", "mouth_pig_snout"]
 const LEGACY_IDS: Array[String] = ["mouth_grazer", "mouth_broad_beak", "mouth_predator_jaws", "mouth_filter_snout"]
 const DEFINITIONS: Array = [
 	{"id": "mouth_canine_snout", "name": "Hundeschnauze",
@@ -33,6 +34,10 @@ const DEFINITIONS: Array = [
 
 
 static func get_profile(part_id: String, revision: int = REVISION) -> Dictionary:
+	if revision == 2 and part_id in REFRESHED_IDS:
+		return {"id": part_id, "category": "mouth", "revision": 2, "geometry_id": part_id,
+			"geometry_revision": 2, "attachment": "body_surface", "forward": "-Z",
+			"features": ["continuous_jaws", "oral_cavity"], "capabilities": [], "supported_actions": []}
 	if revision != REVISION: return {}
 	for entry: Dictionary in DEFINITIONS:
 		if entry.id == part_id:

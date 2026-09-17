@@ -70,7 +70,7 @@ func _check_profiles_and_geometry() -> void:
 		check(definition.stats == source.stats and definition.complexity == source.complexity and definition.default_scale == source.default_scale, "Model invented new gameplay values")
 		definition.stats.attack = 900
 		check(Library.get_part(id).stats == source.stats, "Caller mutated inherited mouth stats")
-		check(Mouths.get_profile(id, 2).is_empty() and MouthGeometry.recipe(id, Color.WHITE, Color.WHITE, Color.WHITE, 2).is_empty() and MouthGeometry.legacy_voxels(id, 2).is_empty(), "Future revision silently downgraded")
+		check(Mouths.get_profile(id, 3).is_empty() and MouthGeometry.recipe(id, Color.WHITE, Color.WHITE, Color.WHITE, 2).is_empty() and MouthGeometry.legacy_voxels(id, 2).is_empty(), "Future revision silently downgraded")
 		for shape: Vector3 in [Vector3.ONE, Vector3(0.8, 1.1, 1.4), Vector3(1.7, 0.6, 0.9)]:
 			var left: Node3D = _model(id, shape, 1)
 			var right: Node3D = _model(id, shape, -1)
