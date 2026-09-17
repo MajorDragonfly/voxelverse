@@ -139,8 +139,10 @@ def validate(args):
     # SceneTree tests load gameplay scenes after autoloads exist, like the game.
     # The full sphere chain includes real taming/production, A-B-A with the held
     # animal, cold terrain loads and fresh processes on both sides of the trip.
+    # The complete mouth matrix/editor/save/restart check measured 158.8 s on
+    # the integrated catalog. Bound that test at 240 s; keep other short limits.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 120) for name in tests]
+                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 240 if name == "creature_mouth_refresh_test" else 120) for name in tests]
     if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:
