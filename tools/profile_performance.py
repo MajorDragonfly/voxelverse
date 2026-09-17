@@ -94,7 +94,9 @@ def main():
             version = subprocess.check_output([str(editor), "--version"], text=True).strip()
             if not version.startswith("4.6.3."):
                 raise RuntimeError(f"Expected Godot 4.6.3, got {version}")
-            command = [str(editor), "--path", str(project), "--audio-driver", "Dummy"]
+            # Include leaked object classes in failure logs, matching the other
+            # Godot validation runners; an exit-code-only report cannot diagnose them.
+            command = [str(editor), "--verbose", "--path", str(project), "--audio-driver", "Dummy"]
             command += ["--headless"] if args.renderer == "headless" else ["--rendering-method", args.renderer]
             script = {"route": "performance_route_probe.gd", "saves": "performance_save_probe.gd",
                       "developed": "performance_developed_probe.gd"}[args.mode]

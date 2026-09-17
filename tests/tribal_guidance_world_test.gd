@@ -32,9 +32,7 @@ func _run() -> void:
 		return
 	saves.autosave_enabled = false
 	tribe.panel.confirm.pressed.emit()
-	await _until(func() -> bool: return tribe.is_active() and not tribe.navigation.pending, 20000)
-	if not tribe.is_active():
-		_expect(false, "Sphere tribe did not activate.")
+	if not await _wait_for_tribe("initial activation"):
 		await _finish()
 		return
 	guide = flow.get_node("FirstSteps")
@@ -175,7 +173,9 @@ func _run() -> void:
 	var completed: Dictionary = saves.guidance.export_state()
 	tribe.set_physics_process(true)
 	_expect(saves.load_now(), "Cannot reload completed sphere guide.")
-	await _until(func() -> bool: return tribe.is_active() and not tribe.navigation.pending, 20000)
+	if not await _wait_for_tribe("completed village reload"):
+		await _finish()
+		return
 	tribe.set_physics_process(false)
 	_expect(saves.guidance.export_state() == completed and guide._tribal.tribe == tribe, "Reload lost progress or bound the wrong tribe observer.")
 	# Existing saves are quiet until opt-in, then acknowledge the actual tool
@@ -200,6 +200,20 @@ func _run() -> void:
 	flow.resume()
 	if failures.is_empty(): print("TRIBAL_GUIDANCE_WORLD_PASSED: 11 real-action milestones, rollback, transport, remapping, bilingual layout, pause, resume and save/load.")
 	await _finish()
+
+func _wait_for_tribe(context: String) -> bool:
+	# Reload rebuilds the collision-sampled graph. Freezing physics after an
+	# unchecked 20 s wait stranded native captures with an inactive observer.
+	# Use the bounded settlement navigation watchdog on slow native renderers.
+	await _until(func() -> bool: return tribe.is_active() and not tribe.navigation.pending,
+		60000 if capture_dir.is_empty() else 240000)
+	var ready: bool = tribe.is_active() and not tribe.navigation.pending
+	if not ready:
+		print("TRIBAL_TUTORIAL_ACTIVATION ", JSON.stringify({"context": context,
+			"status": tribe.status, "active": tribe.is_active(), "navigation_pending": tribe.navigation.pending,
+			"loading": flow.loading, "paused": paused, "player_dead": tribe.player.is_dead}))
+		_expect(false, "Sphere tribe did not become ready after " + context)
+	return ready
 
 func _ui() -> void:
 	var partial: Dictionary = saves.guidance.export_state()

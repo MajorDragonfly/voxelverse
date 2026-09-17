@@ -24,7 +24,7 @@ def main():
                 result = subprocess.run([str(editor), '--path', str(project), '--rendering-method',
                     'gl_compatibility', '--audio-driver', 'Dummy', '--script',
                     'res://tests/tribal_guidance_world_test.gd', '--', '--capture', str(output)],
-                    env=isolated_env(Path(temporary)), stdout=log, stderr=subprocess.STDOUT, timeout=480)
+                    env=isolated_env(Path(temporary)), stdout=log, stderr=subprocess.STDOUT, timeout=900)
                 code = result.returncode
             except subprocess.TimeoutExpired:
                 code = 124
