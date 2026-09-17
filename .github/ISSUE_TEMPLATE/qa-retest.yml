@@ -1,0 +1,121 @@
+name: QA-Nachtest und Abnahmebeleg
+description: Einen konkreten Build gegen vorhandene Befunde oder Abnahmekriterien prüfen und Grenzen festhalten.
+title: '[NACHTEST][ROLLE] Befund und geprüfter Build'
+body:
+- type: markdown
+  attributes:
+    value: |-
+      Titel um die fachliche Rollen-ID ergänzen. Bei kurzem Ergebnis bevorzugt einen datierten Statuskommentar im Original-Issue verwenden; dieses Formular eignet sich für einen eigenständigen Testbericht.
+      Ein Nachtest schließt das Original-Issue nicht automatisch. Nur vollständig geprüfte Abnahmekriterien bestätigen. Integration und Ziel-PC-Spieltest getrennt dokumentieren.
+- type: input
+  id: capture_id
+  attributes:
+    label: Erfassungskennung
+    description: Kennung bei Ergänzungen und erneuten Übertragungen desselben Eintrags beibehalten.
+    placeholder: QA-20260917-SITZUNG-01
+  validations:
+    required: true
+- type: dropdown
+  id: main_role
+  attributes:
+    label: Vorgeschlagene Hauptrolle
+    description: Eine fachliche Zuständigkeit wählen. Das ist keine Reservierung und kein GitHub-Assignee.
+    options:
+    - 01 Projektleitung & Integration
+    - 02 Gameplay & Fortschritt
+    - 03 Kreaturen-KI & Sozialverhalten
+    - 04 UI/UX & Tutorials
+    - 05 Kreaturendesign & Animation
+    - 06 Welt, Grafik & Effekte
+    - 07 Musik & Sound
+    - 08 Technik, Performance & Werkzeuge
+    - 09 Spieletest & Fehleraufnahme
+    - 10 Roadmap & Ideen
+    - 11 Qualitätssicherung & Releases
+  validations:
+    required: true
+- type: textarea
+  id: original
+  attributes:
+    label: Original-Issue, PR und Testauftrag
+    description: Mindestens das Original-Issue oder den PR verlinken. Die konkret zu prüfenden Abnahmekriterien
+      nennen.
+    value: |
+      Original-Issue: unbekannt
+      PR: unbekannt
+      Zu prüfende Abnahmekriterien:
+  validations:
+    required: true
+- type: textarea
+  id: environment
+  attributes:
+    label: Tatsächlich geprüfter Stand und Umgebung
+    description: Build/Commit nicht aus einem PR-Titel ableiten. Unbekannte Angaben benennen; ohne passenden Stand
+      keinen Fix bestätigen.
+    value: |-
+      Aufnahmestatus: erfasst
+      Typ: NACHTEST
+      Tester / Quelle / Datum: unbekannt
+      Build-ID / Commit-SHA / Tree: unbekannt
+      Epoche / Seed / Planet / Spielstand: unbekannt
+      Engine / Betriebssystem / Hardware / Einstellungen: unbekannt
+  validations:
+    required: true
+- type: textarea
+  id: steps_results
+  attributes:
+    label: Prüfschritte, Erwartung und tatsächliches Ergebnis
+    description: Jedes geprüfte Kriterium mit Handlung und beobachtetem Ergebnis verbinden. Bei technischen Prüfungen
+      den tatsächlichen Befehl nennen.
+    value: |
+      Kriterium / Prüfschritt 1:
+      Erwartet:
+      Beobachtet:
+
+      Weitere Schritte / Wiederholungen:
+
+      Technischer Prüfbefehl, falls verwendet:
+  validations:
+    required: true
+- type: dropdown
+  id: result
+  attributes:
+    label: Ergebnis dieses Nachtests
+    options:
+    - Bestätigt – alle hier vereinbarten Kriterien geprüft und erfüllt
+    - Teilweise erfüllt – offene Kriterien bleiben
+    - Fehler besteht weiterhin oder Regression beobachtet
+    - Nicht reproduziert – Fix damit noch nicht bestätigt
+    - Blockiert / nicht ausreichend prüfbar
+  validations:
+    required: true
+- type: textarea
+  id: evidence
+  attributes:
+    label: Prüfbelege
+    description: Erreichbare Logs, CI-Läufe, Bilder oder Videozeitmarken verlinken. Fehlende Anhänge markieren;
+      lokale sandbox-Links sind kein geteilter Nachweis.
+    placeholder: |-
+      Beleg / Link: ...
+      Zugehöriger Schritt / sichtbares Ergebnis: ...
+- type: textarea
+  id: hypothesis
+  attributes:
+    label: Ursachenvermutung bei offenem Fehler (optional)
+    description: Hypothesen von den tatsächlich beobachteten Testergebnissen getrennt halten.
+- type: textarea
+  id: limits
+  attributes:
+    label: Offene Grenzen und nächster Schritt
+    description: Ungeprüfte Kriterien und verbleibenden Ziel-PC-/Lars-Nachtest nennen. Kein automatisches Schließen
+      des Original-Issues aus diesem Bericht ableiten.
+    value: |-
+      Nicht geprüft / Grenzen:
+
+      Weitere Befunde / verknüpfte Issues:
+
+      Nachtest durch Lars: ungeklärt
+      Nächste Zuständigkeit / Schritt: unbekannt
+      Vorgeschlagene Statusmeldung im Original-Issue: ungeklärt
+  validations:
+    required: true

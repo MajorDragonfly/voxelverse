@@ -1,5 +1,10 @@
 # Fortschritt und gemeinsame Chat-Arbeit
 
+Spieletest-Aufnahme, neue Ideen und die elf spezialisierten Rollen sind in
+[GPT-Team](gpt-team/README.md) beschrieben. Ihr
+[Übergabeprotokoll](gpt-team/ZUSAMMENARBEIT.md) verwendet dieselben Issues,
+dieselbe zentrale Vergabe und die nachstehenden Statusquellen.
+
 Die [Projektübersicht](PROJECT_DASHBOARD.md) wird aus
 `tools/workflow/project.json` erzeugt. Das ist die einzige Quelle für Gewichte,
 Schätzintervalle, feste Statusreferenzen und die ausgewiesenen Folgepakete.

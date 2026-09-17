@@ -43,6 +43,13 @@ Ein Merge ist keine Ziel-PC-/Spielspaß-Abnahme. Einrichtung: [Entwicklungsablau
 
 ## Eine Zuständigkeit pro Teilauftrag
 
+Für spezialisierte GPT-/Codex-Rollen gelten zusätzlich die
+[Rollenübersicht](docs/gpt-team/README.md) und das
+[Übergabeprotokoll](docs/gpt-team/ZUSAMMENARBEIT.md).
+Spieletests und Ideen landen nach Duplikatprüfung in verlinkten Issues;
+Rollenprofile vergeben selbst keine Pakete. Die zentrale Runde in #137,
+bestehende Fachbesitzer und die nachfolgenden Prüf-/Integrationsregeln bleiben maßgeblich.
+
 - Eine Runde hat einen Integrationschat. Er ordnet Teilauftrags-ID, Besitzer,
   Branch, Basis-SHA und gemeinsame Schreibbereiche zu und hält die Belegung
   zentral in **einer** Rundenliste in Issue #137. Bereits laufende Chats einmal
