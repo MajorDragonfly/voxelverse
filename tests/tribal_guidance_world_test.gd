@@ -188,7 +188,7 @@ func _run() -> void:
 	flow._show_first_steps()
 	flow._content.find_child("GuideChapter_tribe_build", true, false).pressed.emit()
 	await _frames(3)
-	_expect(saves.guidance.tribal_completed() == 3 and saves.guidance.tribal_done("tribe_tool") and saves.guidance.tribal_done("tribe_place") and saves.guidance.tribal_done("tribe_finish"), "Existing construction prerequisites block opt-in help.")
+	_expect(saves.guidance.tribal_completed() == 3 and saves.guidance.tribal_done("tribe_tool") and saves.guidance.tribal_done("tribe_place") and saves.guidance.tribal_done("tribe_finish"), "Existing construction prerequisites block opt-in help: " + str({"guidance": saves.guidance.export_state(), "observer_active": guide._tribal.active(), "paused": paused, "tools": tribe.village().tools, "stations": tribe.village().economy.stations.keys()}))
 	_expect(not saves.guidance.tribal_done("tribe_delivery") and not saves.guidance.tribal_done("tribe_supply") and tribe.village() == existing, "Reading completed buildings fabricated work or changed the village.")
 	saves.guidance.import_state(completed)
 	flow.toggle_pause()

@@ -173,9 +173,29 @@ func _open(path: String, pause_when_ready: bool = false) -> void:
 		"loading": flow.loading, "scene": tree.current_scene.scene_file_path if tree.current_scene != null else "",
 		"error": saves.last_error, "startup": flow.startup_diagnostics()}))
 	saves.autosave_enabled = false
+	if not flow.loading and not pause_when_ready and tree.current_scene != null and tree.current_scene.scene_file_path == Surface.SCENE:
+		# The public tribal launcher waits for its controller and neighboring
+		# collision. Immediate home actions in these shared probes must too.
+		var home: Node = tree.current_scene.get_node_or_null("Nest/HomeGroup")
+		if home != null and int(state.current_phase) == 0:
+			await _wait_for_home_controls(home)
+
+func _wait_for_home_controls(home: Node) -> void:
+	var deadline: int = Time.get_ticks_msec() + 12000
+	var space = preload("res://world/surface/gameplay_space.gd")
+	while Time.get_ticks_msec() < deadline:
+		var ready: bool = home.can_use_panel()
+		if ready:
+			for x: int in [-12, 0, 12]:
+				for z: int in [-12, 0, 12]:
+					if not space.ground_ready(home, space.offset(home, home.player.global_position, Vector3(x, 0, z))): ready = false
+		if ready: return
+		await tree.process_frame
 
 func _load_timeout_ms() -> int:
-	return 50000
+	# Software OpenGL also draws every bounded terrain upload frame. Its native
+	# visual check keeps a separate load watchdog; headless acceptance is unchanged.
+	return 50000 if DisplayServer.get_name() == "headless" else 150000
 
 func _expect_world() -> bool:
 	var valid: bool = tree.current_scene != null and tree.current_scene.scene_file_path == Surface.SCENE and tree.current_scene.world_initialized and not flow.loading

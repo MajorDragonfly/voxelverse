@@ -247,6 +247,7 @@ func select_chapter(chapter_id: String) -> void:
 	_observe_timer = 0.0
 	_saves.schedule_autosave(0.2)
 	_flow.resume()
+	if tribal: _tribal.refresh()
 
 func restart() -> void:
 	if not _saves.guidance.supported(): return
