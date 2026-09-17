@@ -261,6 +261,21 @@ func _blocked_saved_animal() -> void:
 		_expect(actor._anchor.is_equal_approx(Vector3(0, 1000, 0)), "Restoration moved the animal's home")
 	_expect(JSON.stringify(record) == original, "Finding a free position rewrote saved identity, body, home or state")
 	if population.animals.has(record.id): population._remove(population.animals, record.id)
+	# A moved saved record starts from its new location, even if its previous
+	# blocked location already has a pending neighbor attempt. The old +2 m
+	# retry would move this known-clear point straight back into the obstacle.
+	_expect(not population._restore_position(record, {}).is_finite(), "Retry fixture did not start at the blocked original point")
+	record.location = [-2.0, 1000.0, 0.0]
+	_expect(population._spawn_position(Vector3(-2, 1000, 0)).is_finite(), "Moved-record fixture is not physically clear")
+	_expect(population._spawn_animal(record), "A relocated record reused the blocked location's stale spawn attempt")
+	if population.animals.has(record.id):
+		var relocated: CharacterBody3D = population.animals[record.id]
+		relocated.set_physics_process(false)
+		_expect(relocated.global_position.distance_to(Vector3(-2, 1000.03, 0)) < 0.01, "A relocated record skipped its clear exact location")
+		population._remove(population.animals, record.id)
+	record.location = [0.0, 1000.0, 0.0]
+	await physics_frame
+	await process_frame
 	# Every nearby point blocked: keep the saved record and retry later. Never
 	# bypass collision or widen the search until an animal appears somewhere.
 	barrier.size = Vector3(20, 4, 20)
@@ -272,7 +287,7 @@ func _blocked_saved_animal() -> void:
 		if population.animals.has(record.id): break
 	_expect(not population.animals.has(record.id) and JSON.stringify(record) == original, "Fully blocked restoration escaped its neighborhood or changed the save")
 	population._spawn_candidates(no_plants, no_plants)
-	_expect(population._spawn_offsets.is_empty(), "Leaving a region retained obsolete restoration retries")
+	_expect(population._spawn_offsets.is_empty() and population._spawn_origins.is_empty(), "Leaving a region retained obsolete restoration retries")
 	fixture.free()
 	await process_frame
 

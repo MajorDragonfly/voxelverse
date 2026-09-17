@@ -8,6 +8,7 @@ func _run() -> void:
 	saves.session_managed = true
 	saves.autosave_enabled = false
 	var path: String = saves.create_slot("Lebendige Kreaturen", 15838, Cube.MODE)
+	_stage("living_creatures_open")
 	await _open(path)
 	if not _expect_world(): await _finish(); return
 	var scene: Node3D = tree.current_scene
@@ -21,6 +22,7 @@ func _run() -> void:
 			if not actor.colony_id.is_empty(): members[actor.colony_id] = int(members.get(actor.colony_id, 0)) + 1
 		return members.values().any(func(count: int) -> bool: return count >= 3), 25000)
 	_expect(members.values().any(func(count: int) -> bool: return count >= 3), "No nest had three physical residents: " + str(members))
+	_stage("living_creatures_colonies")
 	_expect(population.animals.size() <= population.MAX_ANIMALS and population.nests.size() <= population.MAX_NESTS, "Family generation exceeded live simulation budgets")
 	for nest: Node3D in population.nests.values():
 		_expect(not nest.is_in_group(&"player_nest") and not nest.has_node("HomeGroup"), "Wild nest claimed player respawn/group ownership")
@@ -40,6 +42,7 @@ func _run() -> void:
 		_expect(preload("res://world/home_group/home_group_state.gd").distance(before[id], after) < 0.02, "Origin shift moved a nest on the planet")
 	flow.return_to_title()
 	await tree.scene_changed
+	_stage("living_creatures_reload")
 	await _open(path)
 	if _expect_world():
 		population = tree.current_scene.population
@@ -48,12 +51,16 @@ func _run() -> void:
 			if counts.has(nest.colony.id): _expect(counts[nest.colony.id] == nest.colony.members, "World reload changed nest identities")
 		flow.return_to_title()
 		await tree.scene_changed
+	_stage("living_creatures_complete")
 	await _finish()
 
 func _until(predicate: Callable, milliseconds: int) -> void:
 	var started: int = Time.get_ticks_msec()
 	while not predicate.call() and Time.get_ticks_msec() - started < milliseconds:
 		await tree.process_frame
+
+func _stage(label: String) -> void:
+	print("LIVING_CREATURES_STAGE ", label, " elapsed_seconds=", Time.get_ticks_msec() / 1000.0)
 
 func _finish() -> void:
 	tree.paused = false

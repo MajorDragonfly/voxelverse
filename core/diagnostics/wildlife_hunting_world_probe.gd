@@ -32,7 +32,7 @@ func _run() -> void:
 		for cell: Dictionary in cells.values():
 			population._generate(cell)
 			for record: Dictionary in population.storage.region(cell.id).objects.values():
-				if record.get("catalog_species_id", "").is_empty() and not records.has(record.role): records[record.role] = record
+				if record.get("catalog_species_id", "").is_empty() and not record.get("encounter", {}).get("dead", false) and not records.has(record.role): records[record.role] = record
 		if records.has("scavenger") and records.has("grazer"): break
 	_expect(records.has("scavenger") and records.has("grazer"), "Generated region set lacks scavenger/prey roles")
 	if not records.has("scavenger") or not records.has("grazer"): await _finish(); return
@@ -127,7 +127,8 @@ func _stage(scene: Node3D, record: Dictionary, offset: float) -> CharacterBody3D
 		return null
 	population.storage.move(record, point)
 	record.home = point.duplicate(true)
-	_expect(population._spawn_animal(record), "Generated identity could not spawn on loaded radial terrain")
+	_expect(population._spawn_animal(record), "Generated identity could not spawn on loaded radial terrain: " + str({"id": record.id,
+		"location": record.location, "encounter": record.get("encounter", {}), "retry": population._spawn_offsets.get(record.id, 0)}))
 	var actor: CharacterBody3D = population.animals.get(record.id)
 	if actor != null: actor.set_physics_process(false)
 	return actor

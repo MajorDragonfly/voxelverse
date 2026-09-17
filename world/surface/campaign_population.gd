@@ -24,6 +24,7 @@ const MAX_SPAWN_ATTEMPTS: int = 2
 # One point per existing spawn attempt: saved point, then two nearby rings.
 const RESTORE_POINTS: int = 17
 var _spawn_offsets: Dictionary = {}
+var _spawn_origins: Dictionary = {}
 var animals: Dictionary = {}
 var plants: Dictionary = {}
 var nests: Dictionary = {}
@@ -138,7 +139,9 @@ func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Di
 	var pending: Dictionary = {}
 	for record: Dictionary in candidates: pending[record.id] = true
 	for id: String in _spawn_offsets.keys():
-		if not pending.has(id): _spawn_offsets.erase(id)
+		if not pending.has(id):
+			_spawn_offsets.erase(id)
+			_spawn_origins.erase(id)
 	if animals.size() >= MAX_ANIMALS: candidates = []
 	if plants.size() >= MAX_PLANTS: plant_candidates = []
 	var animal_attempts: int = 0
@@ -283,15 +286,23 @@ func _restore_position(record: Dictionary, species: Dictionary) -> Vector3:
 	# Scenery or a building may now occupy a saved animal's exact position.
 	# Retry within four metres without changing its identity, body or home.
 	# Never scan the whole neighborhood in a single quarter-second update.
-	var attempt: int = int(_spawn_offsets.get(record.id, 0))
+	# A changed canonical location invalidates the previous search. Retrying
+	# an old offset can skip the now-clear exact point and hit another obstacle.
+	# Store canonical coordinates so an origin rebase does not reset progress.
+	var same_origin: bool = _spawn_origins.get(record.id) == record.location
+	var attempt: int = int(_spawn_offsets.get(record.id, 0)) if same_origin else 0
 	var candidate: Vector3 = Space.resolve(self, record.location)
 	if attempt > 0:
 		var angle: float = float((attempt - 1) % 8) * TAU / 8.0
 		var distance: float = 2.0 if attempt <= 8 else 4.0
 		candidate = Space.offset(self, candidate, Vector3(cos(angle), 0, sin(angle)) * distance)
 	var point: Vector3 = _spawn_position(candidate, species, {}, attempt > 0)
-	if point.is_finite(): _spawn_offsets.erase(record.id)
-	else: _spawn_offsets[record.id] = (attempt + 1) % RESTORE_POINTS
+	if point.is_finite():
+		_spawn_offsets.erase(record.id)
+		_spawn_origins.erase(record.id)
+	else:
+		_spawn_offsets[record.id] = (attempt + 1) % RESTORE_POINTS
+		if not same_origin: _spawn_origins[record.id] = record.location.duplicate(true)
 	return point
 
 func _spawn_position(saved: Vector3, species: Dictionary = {}, diagnostic: Dictionary = {}, relocated: bool = false) -> Vector3:
@@ -349,6 +360,7 @@ func _remove(collection: Dictionary, id: String) -> void:
 func _loaded(_path: String) -> void:
 	_animal_cursor = 0
 	_spawn_offsets.clear()
+	_spawn_origins.clear()
 	_plant_cursor = 0
 	_prefer_plant = true
 	last_spawn_attempts = 0
