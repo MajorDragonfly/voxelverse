@@ -53,6 +53,7 @@ func _ready() -> void:
 	player.terrain = terrain
 	player.adapter = adapter
 	player.creature_design = design
+	player.initial_placement = true
 	# Blueprint.load_best_available reads SaveGameService's authoritative slot
 	# snapshot; it cannot inherit another campaign's editor files.
 	add_child(player)
@@ -60,6 +61,11 @@ func _ready() -> void:
 	player.collision_mask = 1 | 2 | 4
 	player.place(body.surface_context.spawn)
 	get_node("/root/SaveGameService")._apply_pending_runtime_state()
+	# Restore the final saved address before building terrain. Previously both
+	# the default spawn and saved pose forced a complete synchronous load.
+	# The existing loading guard waits for terrain/collisions and scenery.
+	player.initial_placement = false
+	terrain.stream_at(player.up_direction)
 	adapter.bind(str(state.campaign.data.player_object_id), player, player.location(), player.forward)
 	player.camera.near = 0.2
 	player.camera.far = 30000.0

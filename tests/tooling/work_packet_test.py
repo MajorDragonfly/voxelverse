@@ -78,6 +78,10 @@ class WorkPacketTest(unittest.TestCase):
         data = read_project()
         packets = work_packet.read_packets(work_packet.ROOT)
         packet = packets['WEATHER-05-FORECAST-UI']
+        # The real dashboard progresses; this failure-path fixture must still
+        # begin with an explicitly unfinished prerequisite.
+        for item in data['deliveries']:
+            if item['id'] == 'WEATHER-03-STORM-PREVIEW': item['status'] = 'planned'
         with self.assertRaisesRegex(ValueError, 'blocked'):
             work_packet.start_brief(packet, data, 'fixture')
         for item in data['deliveries']:
