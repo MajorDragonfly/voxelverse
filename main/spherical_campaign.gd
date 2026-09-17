@@ -13,6 +13,7 @@ var terrain: Node3D
 var adapter: RefCounted
 var player: CharacterBody3D
 var flora: Node
+var scenery: Node
 var population: Node
 var world_initialized: bool = false
 var _atmosphere: Node3D
@@ -52,6 +53,7 @@ func _ready() -> void:
 	player.terrain = terrain
 	player.adapter = adapter
 	player.creature_design = design
+	player.initial_placement = true
 	# Blueprint.load_best_available reads SaveGameService's authoritative slot
 	# snapshot; it cannot inherit another campaign's editor files.
 	add_child(player)
@@ -59,6 +61,13 @@ func _ready() -> void:
 	player.collision_mask = 1 | 2 | 4
 	player.place(body.surface_context.spawn)
 	get_node("/root/SaveGameService")._apply_pending_runtime_state()
+	# Restore the final saved address before building terrain. Previously both
+	# the default spawn and saved pose forced a complete synchronous load.
+	# The initial floor must publish in one load operation: distributing its
+	# hundreds of patches over rendered frames can exhaust the loading guard.
+	# Normal movement keeps the bounded asynchronous streaming path.
+	player.initial_placement = false
+	terrain.stream_at(player.up_direction, true)
 	adapter.bind(str(state.campaign.data.player_object_id), player, player.location(), player.forward)
 	player.camera.near = 0.2
 	player.camera.far = 30000.0
@@ -87,6 +96,11 @@ func _ready() -> void:
 	flora.spawn = body.surface_context.spawn.duplicate(true)
 	flora.wildlife_enabled = false
 	add_child(flora)
+	scenery = preload("res://world/surface/surface_distant_scenery.gd").new()
+	scenery.adapter = adapter
+	scenery.player = player
+	scenery.nearby = flora
+	add_child(scenery)
 	population = preload("res://world/surface/campaign_population.gd").new()
 	population.adapter = adapter
 	population.player = player
@@ -105,7 +119,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(player) and not world_initialized:
-		world_initialized = terrain.ground_ready(Cube.global_position(player.position, terrain.origin))
+		world_initialized = terrain.ground_ready(Cube.global_position(player.position, terrain.origin)) and scenery.generation_complete
 
 func map_snapshot() -> Dictionary:
 	if not world_initialized or not is_instance_valid(player) or get_node("/root/SessionFlow").loading: return {}
@@ -157,6 +171,7 @@ func known_map_places() -> Array[Dictionary]:
 	return places
 
 func _exit_tree() -> void:
+	if is_instance_valid(scenery): scenery.close()
 	if is_instance_valid(flora): flora.close()
 	if adapter != null: adapter.close()
 

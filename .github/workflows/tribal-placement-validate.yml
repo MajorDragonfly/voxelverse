@@ -1,0 +1,73 @@
+name: Tribal building preview
+
+on:
+  pull_request:
+    paths:
+      - 'world/tribe/**'
+      - 'ui/tribe/**'
+      - 'localization/**'
+      - 'tests/tribal_building_preview*'
+      - 'tools/review_tribal_placement.py'
+      - '.github/workflows/tribal-placement-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tribal-placement-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  placement:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Validate placement inputs and sphere alignment
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests tribal_building_preview_test tribal_building_preview_world_test --skip-main
+          --output "${{ runner.temp }}/tribal-placement-validation"
+      - name: Install software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Render actual placement inputs on fixture and sphere
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1080x24'
+          python3 tools/review_tribal_placement.py --godot "${{ steps.engine.outputs.godot }}"
+          --output "${{ runner.temp }}/tribal-placement-render"
+      - name: Upload validation logs and native screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-placement-review
+          path: |
+            ${{ runner.temp }}/tribal-placement-validation
+            ${{ runner.temp }}/tribal-placement-render
+          retention-days: 14
+
+  economy-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Check enlarged economy controls and work receipts
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests tribal_age_economy_test tribal_economy_progress_world_test --skip-main
+          --output "${{ runner.temp }}/tribal-economy-controls"
+      - name: Upload economy control checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-economy-controls
+          path: ${{ runner.temp }}/tribal-economy-controls
+          retention-days: 14

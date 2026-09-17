@@ -24,6 +24,11 @@ Ein Merge ist keine Ziel-PC-/Spielspaß-Abnahme. Einrichtung: [Entwicklungsablau
 
 ## Einstieg und Fortsetzung
 
+Kompakter Paketstart: `python3 tools/work_context.py next --live --limit 3`.
+Der Helfer trennt den aktuellen lokalen/Remote-Stand vom datierten Dashboard und
+zeigt Kandidaten, keine Reservierungen. Details und wiederverwendbarer Abruf:
+[Skill und Paketstart](docs/DEVELOPMENT_WORKFLOW.md#skill-und-kompakter-paketstart).
+
 1. Lies `docs/PROJECT_STATUS.md` und den konkreten Auftrag. Bei einer Fortsetzung
    im selben Chat nutze den vorhandenen Kontext; wiederhole den Einstieg nur bei
    einer neuen Basis, einem Konflikt oder einer geänderten Anforderung.
@@ -71,6 +76,9 @@ Ein Merge ist keine Ziel-PC-/Spielspaß-Abnahme. Einrichtung: [Entwicklungsablau
 - Verwende `tools/validation/contracts.json` als einzige Testzuordnung. Neue
   Godot-Tests genau einmal dort registrieren. `--contracts` wählt vorhandene Tests,
   zum Beispiel `python3 tools/validate_godot.py --contracts creature_body --skip-main`.
+  Für den kurzen Änderungsplan: `python3 tools/validate_godot.py --changed-since
+  BASIS_SHA --plan --summary`. Ohne `--summary` erscheinen die vollständigen
+  Dateientscheidungen; die Testauswahl ist identisch. Ein Plan führt nichts aus.
 - Ein Fachchat prüft den geänderten Ablauf und betroffene direkte Verbraucher.
   Umfang nach tatsächlichem Risiko wählen; `--skip-main` eignet sich nur für ein
   abgegrenztes Paket. Save-/ID-/Körper-/Lebenszyklusänderungen brauchen ihre echten

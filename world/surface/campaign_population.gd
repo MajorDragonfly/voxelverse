@@ -12,14 +12,22 @@ const Encoding = preload("res://world/fauna/domestication/domestication_contract
 const Species = preload("res://creatures/wildlife/species_assembly_factory_v7.gd")
 const Wildlife = preload("res://creatures/wildlife/procedural_wildlife_v7.gd")
 const Ids = preload("res://core/campaign/campaign_ids.gd")
+const Colony = preload("res://world/surface/wildlife_colony.gd")
+const WildNest = preload("res://world/resources/nests/wildlife_nest.gd")
+const MAX_NESTS: int = 6
 const MAX_ANIMALS: int = 12
 const MAX_PLANTS: int = 16
 const ACTIVE_DISTANCE: float = 82.0
 # Failed floor/shape checks are work too. Rotate blocked candidates instead
 # of scanning every stored individual in the same quarter-second update.
 const MAX_SPAWN_ATTEMPTS: int = 2
+# One point per existing spawn attempt: saved point, then two nearby rings.
+const RESTORE_POINTS: int = 17
+var _spawn_offsets: Dictionary = {}
+var _spawn_origins: Dictionary = {}
 var animals: Dictionary = {}
 var plants: Dictionary = {}
+var nests: Dictionary = {}
 var records: Dictionary = {}
 var adapter: RefCounted
 var player: CharacterBody3D
@@ -123,10 +131,17 @@ func _tick() -> void:
 				plant_candidates.append(record)
 	_prioritize_catalog(candidates)
 	_spawn_candidates(candidates, plant_candidates)
+	_sync_nests(wanted)
 	peak_animals = maxi(peak_animals, animals.size())
 
 func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Dictionary]) -> void:
 	last_spawn_attempts = 0
+	var pending: Dictionary = {}
+	for record: Dictionary in candidates: pending[record.id] = true
+	for id: String in _spawn_offsets.keys():
+		if not pending.has(id):
+			_spawn_offsets.erase(id)
+			_spawn_origins.erase(id)
 	if animals.size() >= MAX_ANIMALS: candidates = []
 	if plants.size() >= MAX_PLANTS: plant_candidates = []
 	var animal_attempts: int = 0
@@ -174,7 +189,11 @@ func _prioritize_catalog(candidates: Array[Dictionary]) -> void:
 	# A full old population must not starve the additive fourth role. Preserve
 	# the sole nearby representative of each other role; unload one ordinary
 	# animal or duplicate through the existing capture/streaming path.
+	# Keep the animal under the player's camera stable through scanning and
+	# returning from its journal. Another ordinary animal can release the slot.
+	var focused: Node = player.get_scan_target() if is_instance_valid(player) and player.has_method("get_scan_target") else null
 	for id: String in animals:
+		if animals[id] == focused: continue
 		var species_id: String = str(animals[id].catalog_species.get("id", ""))
 		if not species_id.is_empty() and int(represented.get(species_id, 0)) <= 1: continue
 		_capture_one(id)
@@ -191,7 +210,14 @@ func _place_value(point: Dictionary) -> Dictionary:
 
 func _generate(cell: Dictionary) -> void:
 	var region: Dictionary = storage.region(cell.id)
-	if region.is_empty() or region.generated: return
+	if region.is_empty(): return
+	if region.generated:
+		# Upgrade only the original ordinary resident, even after it migrated.
+		if not region.has("colony"):
+			var center: Dictionary = Cube.address(descriptor.id, cell.face, -1.0 + (cell.x + 0.5) * cell.step, -1.0 + (cell.y + 0.5) * cell.step)
+			var original_id: String = Ids.scoped("object", Habitat.region_id(descriptor.id, center), cell.id + ":resident")
+			Colony.ensure(self, region, storage.record(original_id))
+		return
 	region.generated = true
 	var point: Dictionary = Cube.address(descriptor.id, cell.face, -1.0 + (cell.x + 0.5) * cell.step, -1.0 + (cell.y + 0.5) * cell.step)
 	point.height = adapter.sample(point).height
@@ -211,6 +237,7 @@ func _generate(cell: Dictionary) -> void:
 		"design_ref": {"design_id": blueprint.get("design_id", ""), "revision": 0}}
 	storage.put({"id": id, "identity": identity, "location": point, "home": point.duplicate(true),
 		"species_seed": seed_value, "individual_seed": individual, "role": role, "blueprint": Encoding.encode(blueprint)})
+	Colony.ensure(self, region, storage.record(id))
 	var food: Dictionary = adapter.offset(point, adapter.frame_at(point).x * 5.0)
 	if Planner.dry(adapter.terrain.surface, food):
 		var food_id: String = id + ":food"
@@ -224,12 +251,13 @@ func _spawn_animal(record: Dictionary) -> bool:
 	var encounter: Dictionary = record.get("encounter", {})
 	if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0: return false
 	var species: Dictionary = Catalog.species_for(body().fauna_catalog, str(record.get("catalog_species_id", "")))
-	var point: Vector3 = _spawn_position(Space.resolve(self, record.location), species)
+	var point: Vector3 = _restore_position(record, species) if not encounter.get("dead", false) else _spawn_position(Space.resolve(self, record.location), species)
 	if not point.is_finite(): return false
 	var actor: CharacterBody3D = preload("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
 	actor.configure(int(record.species_seed), int(record.individual_seed), Vector2i.ZERO, record.role, record.identity.get("habitat_cell", ""), species)
 	actor.supplied_identity = record.identity.duplicate(true)
 	actor.frozen_blueprint = Encoding.decode(record.blueprint)
+	actor.colony_id = str(record.get("colony_id", ""))
 	actor.position = point
 	actor.collision_mask = 1 | 2
 	get_parent().add_child(actor)
@@ -254,12 +282,40 @@ func _spawn_animal(record: Dictionary) -> bool:
 	animals[record.id] = actor
 	return true
 
-func _spawn_position(saved: Vector3, species: Dictionary = {}) -> Vector3:
-	if not Space.ground_ready(self, saved): return Vector3.INF
+func _restore_position(record: Dictionary, species: Dictionary) -> Vector3:
+	# Scenery or a building may now occupy a saved animal's exact position.
+	# Retry within four metres without changing its identity, body or home.
+	# Never scan the whole neighborhood in a single quarter-second update.
+	# A changed canonical location invalidates the previous search. Retrying
+	# an old offset can skip the now-clear exact point and hit another obstacle.
+	# Store canonical coordinates so an origin rebase does not reset progress.
+	var same_origin: bool = _spawn_origins.get(record.id) == record.location
+	var attempt: int = int(_spawn_offsets.get(record.id, 0)) if same_origin else 0
+	var candidate: Vector3 = Space.resolve(self, record.location)
+	if attempt > 0:
+		var angle: float = float((attempt - 1) % 8) * TAU / 8.0
+		var distance: float = 2.0 if attempt <= 8 else 4.0
+		candidate = Space.offset(self, candidate, Vector3(cos(angle), 0, sin(angle)) * distance)
+	var point: Vector3 = _spawn_position(candidate, species, {}, attempt > 0)
+	if point.is_finite():
+		_spawn_offsets.erase(record.id)
+		_spawn_origins.erase(record.id)
+	else:
+		_spawn_offsets[record.id] = (attempt + 1) % RESTORE_POINTS
+		if not same_origin: _spawn_origins[record.id] = record.location.duplicate(true)
+	return point
+
+func _spawn_position(saved: Vector3, species: Dictionary = {}, diagnostic: Dictionary = {}, relocated: bool = false) -> Vector3:
+	var inspect: bool = not diagnostic.is_empty()
+	var ready: bool = Space.ground_ready(self, saved)
+	if inspect: diagnostic.ground_ready = ready
+	if not ready: return Vector3.INF
 	var hit: Dictionary = Space.floor_hit(player, saved)
+	if inspect: diagnostic.floor_found = not hit.is_empty()
 	if hit.is_empty(): return Vector3.INF
 	var up: Vector3 = Space.up(self, hit.position)
 	var floor_point: Vector3 = hit.position + up * 0.03
+	if relocated and (not Space.dry(self, floor_point) or hit.normal.dot(up) < 0.94): return Vector3.INF
 	var geometry: Dictionary = Wildlife.collision_geometry(species)
 	var shape := CapsuleShape3D.new()
 	shape.radius = geometry.radius
@@ -268,7 +324,9 @@ func _spawn_position(saved: Vector3, species: Dictionary = {}) -> Vector3:
 	query.shape = shape
 	query.collision_mask = 1 | 2 | 4 | 8
 	query.transform = Transform3D(Space.frame(self, floor_point), floor_point + up * float(geometry.center))
-	return floor_point if player.get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty() else Vector3.INF
+	var collisions: Array[Dictionary] = player.get_world_3d().direct_space_state.intersect_shape(query, 4 if inspect else 1)
+	if inspect: diagnostic.obstacles = collisions.map(func(value: Dictionary) -> String: return str(value.collider.get_path()))
+	return floor_point if collisions.is_empty() else Vector3.INF
 
 func _spawn_plant(record: Dictionary) -> bool:
 	var point: Vector3 = Space.resolve(self, record.location)
@@ -301,11 +359,14 @@ func _remove(collection: Dictionary, id: String) -> void:
 
 func _loaded(_path: String) -> void:
 	_animal_cursor = 0
+	_spawn_offsets.clear()
+	_spawn_origins.clear()
 	_plant_cursor = 0
 	_prefer_plant = true
 	last_spawn_attempts = 0
 	for id in animals.keys(): _remove(animals, id)
 	for id in plants.keys(): _remove(plants, id)
+	for id in nests.keys(): _remove(nests, id)
 	records.clear()
 	storage = preload("res://world/surface/campaign_region_storage.gd").new()
 	storage_error = ""
@@ -335,11 +396,12 @@ func _upgrade_catalog() -> bool:
 func _exit_tree() -> void:
 	# The scene owns these siblings and is already removing them. Only detach
 	# their origin bindings here; normal eviction removes physical nodes earlier.
-	for collection in [animals, plants]:
+	for collection in [animals, plants, nests]:
 		for actor in collection.values():
 			if is_instance_valid(actor): Space.untrack(actor)
 	animals.clear()
 	plants.clear()
+	nests.clear()
 	records.clear()
 
 func _storage_failed() -> void:
@@ -364,3 +426,29 @@ func store_encounter(id: String, entry: Dictionary) -> bool:
 	if entry.is_empty(): record.erase("encounter")
 	else: record.encounter = entry.duplicate(true)
 	return true
+
+func _sync_nests(wanted: Dictionary) -> void:
+	for id: String in nests.keys():
+		if nests[id].global_position.distance_to(player.global_position) > ACTIVE_DISTANCE + 12.0: _remove(nests, id)
+	var created: bool = false
+	for key: String in wanted:
+		var colony: Dictionary = storage.region(key, false).get("colony", {})
+		if colony.is_empty(): continue
+		var point: Vector3 = Space.resolve(self, colony.anchor)
+		if point.distance_to(player.global_position) > ACTIVE_DISTANCE: continue
+		if not nests.has(colony.id):
+			if created or nests.size() >= MAX_NESTS or not Space.ground_ready(self, point): continue
+			var hit: Dictionary = Space.floor_hit(player, point)
+			if hit.is_empty(): continue
+			var nest := WildNest.new()
+			nest.position = hit.position + Space.up(self, point) * 0.03
+			get_parent().add_child(nest)
+			Space.orient(nest)
+			nest.setup(colony, adapter.terrain.surface.terrain, str(adapter.sample(colony.anchor).biome))
+			Space.track(nest, colony.id)
+			nests[colony.id] = nest
+			created = true
+		var living: int = 0
+		for member: String in colony.members:
+			if not storage.record(member).get("encounter", {}).get("dead", false): living += 1
+		nests[colony.id].refresh(player, living)

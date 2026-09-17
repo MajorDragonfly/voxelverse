@@ -36,15 +36,18 @@ func _run() -> void:
 	ui._pause.pressed.emit()
 	_expect(Work.Model.Construction.state(tribe.village().project) == "paused", "Pause button did not pause the project.")
 	var reserved: Dictionary = tribe.village().project.materials.duplicate()
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
 	await _until(func() -> bool: return tribe.village().members.all(func(member: Dictionary) -> bool: return member.construction_id == ""), 15000)
 	_expect(tribe.village().project.materials == reserved and tribe.village().project.progress == 0, "Paused project took new goods or performed work.")
 	_expect(tribe.village().members.all(func(member: Dictionary) -> bool: return member.construction_id == ""), "Paused in-flight cargo did not arrive.")
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
 	# Real writer failure must restore the entire project and leave its UI bound.
 	var before: Dictionary = tribe.village().duplicate(true)
 	DirAccess.make_dir_absolute(path + ".tmp")
 	_expect(not tribe.control_construction("resume").ok and tribe.village() == before, "Failed pause transaction changed village data.")
 	DirAccess.remove_absolute(path + ".tmp")
 	tribe.panel.refresh()
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
 	# Cancelling is explicitly confirmed, and changing language keeps that choice.
 	ui._cancel.pressed.emit()
 	_expect(ui._confirming and Work.Model.Construction.state(tribe.village().project) == "paused", "First cancel click changed the project.")
@@ -75,6 +78,7 @@ func _run() -> void:
 	_expect(tribe.village().project.is_empty() and tribe.village().stock.wood == 16 and tribe.village().stock.stone == 16, "Physical recovery did not restore the initial stock: " + str(tribe.village().project))
 	_expect(tribe.village().delivered == deliveries and not tribe.village().economy.stations.has("forester"), "Recovery earned a delivery or created a workplace.")
 	print("CONSTRUCTION_RUNTIME: recovery complete")
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
 	await _until(func() -> bool: return not tribe.navigation.pending, 15000)
 	_expect(tribe.navigation.free_workplace(point, tribe.village(), "forester"), "Recovered site is still occupied.")
 	_expect(tribe.issue_order("forester", point), "Recovered site cannot be rebuilt: " + tribe.status)
@@ -87,10 +91,12 @@ func _run() -> void:
 	_expect(tribe.is_active(), "Loaded tribal controller did not reactivate.")
 	tribe.panel.refresh()
 	ui._pause.pressed.emit()
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
 	print("CONSTRUCTION_RUNTIME: resumed after load; ", ui._result, " ", tribe.is_active(), " ", Work.Model.Construction.state(tribe.village().project))
 	await _until(func() -> bool: return tribe.village().economy.stations.has("forester"), 40000)
 	_expect(tribe.village().economy.stations.has("forester") and tribe.village().project.is_empty(), "Resumed physical construction failed: " + str(tribe.village().project) + " members=" + str(tribe.village().members) + " navigation=" + str(tribe.navigation.pending) + "/" + str(tribe.navigation.is_ready()) + " active=" + str(tribe.is_active()))
 	_expect(tribe.village().stock.wood == 12 and tribe.village().stock.stone == 15, "Rebuilt project cost was not charged exactly once.")
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
 	await _done()
 
 func _construction_point(tribe: Node) -> Vector3:
@@ -101,6 +107,7 @@ func _construction_point(tribe: Node) -> Vector3:
 	return Vector3.INF
 
 func _construction_layout(tribe: Node) -> void:
+	tribe.panel._tabs.current_tab = tribe.panel._build_page.get_index()
 	var ui: VBoxContainer = tribe.panel._construction
 	var original: Vector2i = tree.root.size
 	var display: Node = tree.root.get_node("DisplaySettings")

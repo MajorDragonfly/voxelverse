@@ -26,6 +26,18 @@ func _run() -> void:
 			maximum = maxi(maximum, leaves.size())
 			_verify_cover(layout, leaves)
 	measurements["maximum_layout_tiles"] = maximum
+	# A distant camera refines a second view without making the resident's floor
+	# coarse, opening cube seams, or expanding the fixed planet tile budget.
+	for radius: float in [16384.0, 6371000.0]:
+		var dual := Layout.new(radius)
+		for direction: Vector3 in [Vector3.UP, Vector3(1, 1, 0.1).normalized(), Vector3(1, 1, 1).normalized()]:
+			var view: Vector3 = (direction * radius + Cube.frame(direction).x * 128.0).normalized()
+			var cover: Dictionary = dual.choose(direction, {}, view)
+			_verify_cover(dual, cover)
+			for focus: Vector3 in [direction, view]:
+				var address: Dictionary = Cube.from_direction("test", [focus.x, focus.y, focus.z])
+				var owner: Dictionary = dual.find_at(address.face, address.u, address.v, cover)
+				_expect(not owner.is_empty() and float(owner.width) * radius <= 32.0, "Second camera observer coarsened the physical or visual focus.")
 	_mesh_seams(body, layout)
 	await _walk_and_stream(body)
 	print("ADAPTIVE_PLANET ", JSON.stringify(measurements))

@@ -32,7 +32,7 @@ func _run() -> void:
 		for cell: Dictionary in cells.values():
 			population._generate(cell)
 			for record: Dictionary in population.storage.region(cell.id).objects.values():
-				if record.get("catalog_species_id", "").is_empty() and not records.has(record.role): records[record.role] = record
+				if record.get("catalog_species_id", "").is_empty() and not record.get("encounter", {}).get("dead", false) and not records.has(record.role): records[record.role] = record
 		if records.has("scavenger") and records.has("grazer"): break
 	_expect(records.has("scavenger") and records.has("grazer"), "Generated region set lacks scavenger/prey roles")
 	if not records.has("scavenger") or not records.has("grazer"): await _finish(); return
@@ -105,15 +105,30 @@ func _stage(scene: Node3D, record: Dictionary, offset: float) -> CharacterBody3D
 	var population: Node = scene.population
 	if population.animals.has(record.id): population._remove(population.animals, record.id)
 	var point: Dictionary = scene.adapter.offset(scene.player.location(), scene.adapter.frame_at(scene.player.location()).x * offset)
-	point.height = scene.adapter.sample(point).height + 0.03
-	point.radius = population.descriptor.radius
-	_expect(not scene.adapter.sample(point).water, "Fixture needs dry spherical terrain")
-	population.storage.move(record, point)
-	record.home = point.duplicate(true)
 	await _until(func() -> bool: return Space.ground_ready(self, Space.resolve(self, point)), 12000)
 	await tree.physics_frame
 	await tree.physics_frame
-	_expect(population._spawn_animal(record), "Generated identity could not spawn on loaded radial terrain")
+	# The fixed 4/8 m points may contain streamed trees, rocks or another actor.
+	# Find a nearby dry, loaded spot through the production clearance query;
+	# retain collisions and the generated animal's identity and frozen body.
+	var frame: Basis = scene.adapter.frame_at(scene.player.location())
+	var found: bool = false
+	for shift: Vector2 in [Vector2.ZERO, Vector2(0, 1.5), Vector2(0, -1.5), Vector2(1.5, 0), Vector2(-1.5, 0), Vector2(1.5, 1.5), Vector2(-1.5, -1.5), Vector2(0, 3), Vector2(0, -3), Vector2(3, 0), Vector2(-3, 0)]:
+		var candidate: Dictionary = scene.adapter.offset(scene.player.location(), frame.x * (offset + shift.x) + frame.z * shift.y)
+		var sample: Dictionary = scene.adapter.sample(candidate)
+		candidate.height = sample.height + 0.03
+		candidate.radius = population.descriptor.radius
+		if sample.water or not population._spawn_position(Space.resolve(self, candidate)).is_finite(): continue
+		point = candidate
+		found = true
+		break
+	if not found:
+		_expect(false, "No clear dry staging point on loaded radial terrain")
+		return null
+	population.storage.move(record, point)
+	record.home = point.duplicate(true)
+	_expect(population._spawn_animal(record), "Generated identity could not spawn on loaded radial terrain: " + str({"id": record.id,
+		"location": record.location, "encounter": record.get("encounter", {}), "retry": population._spawn_offsets.get(record.id, 0)}))
 	var actor: CharacterBody3D = population.animals.get(record.id)
 	if actor != null: actor.set_physics_process(false)
 	return actor

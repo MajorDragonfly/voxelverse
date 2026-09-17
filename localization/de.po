@@ -4877,3 +4877,477 @@ msgstr "Sucht Aas"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Frisst Aas"
+
+msgid "SKILLS_POINTS_COMPACT"
+msgstr "%d Punkte verfügbar"
+
+msgid "SKILLS_COMBINE"
+msgstr "Beide Wege lassen sich kombinieren."
+
+msgid "SKILLS_EARNING_COMPACT"
+msgstr "Sozial: befreunden und helfen. Aggressiv: jagen und Konflikte abschließen."
+
+msgid "SKILLS_ERA_HINT"
+msgstr "Jedes Zeitalter hat eigene Fähigkeiten und Punkte. Vermächtnisse wirken wie angegeben weiter."
+
+msgid "SKILLS_ERA_PLANNED"
+msgstr "Dieses Zeitalter erhält einen eigenen Fähigkeitenbaum. Die konkreten Freischaltungen folgen mit seinen Spielsystemen."
+
+msgid "SKILLS_ERA_CURRENT"
+msgstr "Aktuell"
+
+msgid "SKILLS_ERA_PREVIOUS"
+msgstr "Früheres Zeitalter"
+
+msgid "SKILLS_ERA_PREVIEW"
+msgstr "Vorschau"
+
+msgid "SKILLS_ERA_0_NAME"
+msgstr "Kreatur"
+
+msgid "SKILLS_ERA_1_NAME"
+msgstr "Stamm"
+
+msgid "SKILLS_ERA_2_NAME"
+msgstr "Mittelalter"
+
+msgid "SKILLS_ERA_3_NAME"
+msgstr "Neuzeit"
+
+msgid "SKILLS_ERA_4_NAME"
+msgstr "Weltraum"
+
+msgid "SKILLS_ERA_5_NAME"
+msgstr "Multiversum"
+
+msgid "WEATHER_STORM_SAND"
+msgstr "Sandsturm"
+
+msgid "WEATHER_STORM_ASH"
+msgstr "Aschesturm"
+
+msgid "WEATHER_STORM_WARNING"
+msgstr "Wettervorschau · {kind} in {seconds} s"
+
+msgid "WEATHER_STORM_STATUS"
+msgstr "Wettervorschau · {kind}\n{phase}"
+
+msgid "WEATHER_STORM_PHASE_CALM"
+msgstr "Ruhephase"
+
+msgid "WEATHER_STORM_PHASE_WARNING"
+msgstr "Vorwarnung"
+
+msgid "WEATHER_STORM_PHASE_RISING"
+msgstr "Sturm nimmt zu"
+
+msgid "WEATHER_STORM_PHASE_PEAK"
+msgstr "Sturm am Höhepunkt"
+
+msgid "WEATHER_STORM_PHASE_FALLING"
+msgstr "Sturm klingt ab"
+
+msgid "TRIBE_BUILD_TAB"
+msgstr "Bauen"
+
+msgid "TRIBE_RESIDENT_COMPACT"
+msgstr "{name} · {profession}\n{activity}"
+
+msgid "TRIBE_PREVIEW_FREE"
+msgstr "Bauplatz frei"
+
+msgid "TRIBE_PREVIEW_BLOCKED"
+msgstr "Hier nicht baubar"
+
+msgid "TRIBE_PREVIEW_CONFIRM"
+msgstr "Rechtsklick: bauen · Esc: abbrechen"
+
+msgid "TRIBE_STORAGE_TITLE"
+msgstr "Lager am Dorfplatz"
+
+msgid "TRIBE_STORAGE_AMOUNT"
+msgstr "{resource}: {stored}/{capacity} frei"
+
+msgid "TRIBE_STORAGE_COMPACT"
+msgstr "{resource}: {stored}/{capacity} frei · Bau {reserved} · getragen {carried}"
+
+msgid "TRIBE_STORAGE_RESERVED"
+msgstr "{amount} im Lager für Bau reserviert (goldfarben)"
+
+msgid "TRIBE_STORAGE_CARRIED"
+msgstr "{amount} von Bewohnern getragen"
+
+msgid "TRIBE_STORAGE_DELIVERED"
+msgstr "{amount} bereits am Bau / in Verarbeitung"
+
+msgid "TRIBE_STORAGE_PENDING"
+msgstr "{amount} an Abholstellen bereit"
+
+msgid "TRIBE_STORAGE_FREIGHT_CAPACITY"
+msgstr "{amount} Lagerplätze für Siedlungstransporte freigehalten"
+
+msgid "TRIBE_STORAGE_HINT"
+msgstr "Haufen zeigen freie Vorräte und goldfarbene Baureservierungen.\nDie Größe wächst in Mengenstufen; Zahlen sind exakt.\nVorkommen und Ware unterwegs gehören nicht zum freien Lager."
+
+msgid "TRIBE_CAMERA_SETTINGS"
+msgstr "Stammeskamera"
+
+msgid "TRIBE_CAMERA_SPEED"
+msgstr "Bewegungsgeschwindigkeit"
+
+msgid "TRIBE_CAMERA_TILT"
+msgstr "Startneigung"
+
+msgid "TRIBE_CAMERA_SETTINGS_HINT"
+msgstr "Bewegungstasten verschieben die Ansicht in Blickrichtung. Mausrad: Zoom. Alle Kameratasten lassen sich unten ändern. Diese Einstellungen gelten unabhängig vom Spielstand."
+
+msgid "TRIBE_CAMERA_LEFT"
+msgstr "Kamera nach links drehen"
+
+msgid "TRIBE_CAMERA_RIGHT"
+msgstr "Kamera nach rechts drehen"
+
+msgid "TRIBE_CAMERA_UP"
+msgstr "Kamera steiler neigen"
+
+msgid "TRIBE_CAMERA_DOWN"
+msgstr "Kamera flacher neigen"
+
+msgid "TRIBE_CAMERA_HOME"
+msgstr "Zum Dorfplatz"
+
+msgid "TRIBE_CAMERA_SELECTION"
+msgstr "Zur Auswahl"
+
+msgid "TRIBE_CAMERA_ORBIT"
+msgstr "Kamera drehen/neigen (halten)"
+
+msgid "TRIBE_CAMERA_VIEW"
+msgstr "Ansicht"
+
+msgid "TRIBE_CAMERA_RESET"
+msgstr "Blick zurücksetzen"
+
+msgid "TRIBE_CAMERA_OPEN_SETTINGS"
+msgstr "Kameraeinstellungen …"
+
+msgid "TRIBE_CAMERA_INVALID"
+msgstr "Ungültige Einstellung der Stammeskamera."
+
+msgid "TRIBE_CAMERA_HINT"
+msgstr "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right}\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nDie Kamera kann weiter schauen als Bewohner arbeiten können."
+
+msgid "GUIDE_TRIBAL_CARD"
+msgstr "Anleitung {done}/{total} · {hint}"
+
+msgid "GUIDE_TRIBAL_HELP"
+msgstr "Hilfe"
+
+msgid "GUIDE_TRIBAL_INTRO"
+msgstr "Drei Kapitel erklären Kamera, Aufträge und Dorfaufbau. Wähle ein Kapitel für kurze Hinweise im Dorf. Ausschalten, Fortsetzen und Neubeginn sind jederzeit möglich; vorhandene Werkzeuge und fertige Gebäude werden angerechnet."
+
+msgid "GUIDE_CHAPTER_TRIBE_VIEW"
+msgstr "Blick und Auswahl"
+
+msgid "GUIDE_CHAPTER_TRIBE_WORK"
+msgstr "Aufträge und Vorräte"
+
+msgid "GUIDE_CHAPTER_TRIBE_BUILD"
+msgstr "Bauen und Berufe"
+
+msgid "GUIDE_STEP_TRIBE_CAMERA"
+msgstr "Die Dorfkamera bewegen"
+
+msgid "GUIDE_HINT_TRIBE_CAMERA"
+msgstr "Bewege die Ansicht mit {forward}/{left}/{back}/{right}."
+
+msgid "GUIDE_DETAIL_TRIBE_CAMERA"
+msgstr "Du bewegst die Kamera, nicht die Bewohner. Ziehe mit {orbit} zum Drehen und Neigen; das Mausrad zoomt. {home} zeigt das Dorf, {selection} die Auswahl. Tempo, Startneigung und Tasten findest du unter Esc → Einstellungen → Steuerung. Die Kamera vergrößert weder Arbeitsgebiet noch erkundete Karte."
+
+msgid "GUIDE_STEP_TRIBE_SINGLE"
+msgstr "Einen Bewohner auswählen"
+
+msgid "GUIDE_HINT_TRIBE_SINGLE"
+msgstr "Klicke eine Bewohnerkarte an, um nur diesem Bewohner Aufgaben zu geben."
+
+msgid "GUIDE_DETAIL_TRIBE_SINGLE"
+msgstr "Du kannst auch direkt auf die Kreatur klicken. Die markierten Karten und Ringe zeigen die Auswahl. Ein späterer Auftrag gilt nur für diese Bewohner; die übrigen arbeiten weiter."
+
+msgid "GUIDE_STEP_TRIBE_GROUP"
+msgstr "Eine Gruppe auswählen"
+
+msgid "GUIDE_HINT_TRIBE_GROUP"
+msgstr "Wähle mehrere Bewohner: Umschalt + Klick, Auswahlrahmen oder „Alle auswählen“."
+
+msgid "GUIDE_DETAIL_TRIBE_GROUP"
+msgstr "Ziehe mit der linken Maustaste im Spielfeld einen Rahmen. Umschalt fügt Bewohner zur Auswahl hinzu oder entfernt sie über ihre Karte. Die Auswahl allein erteilt noch keinen Auftrag."
+
+msgid "GUIDE_STEP_TRIBE_ORDER"
+msgstr "Einen Sammelauftrag erteilen"
+
+msgid "GUIDE_HINT_TRIBE_ORDER"
+msgstr "Wähle Bewohner und klicke unter „Aufträge“ auf „Holz sammeln“."
+
+msgid "GUIDE_DETAIL_TRIBE_ORDER"
+msgstr "Alternativ: Rechtsklick auf ein Rohstoffvorkommen. Der Auftrag bleibt bestehen, bis du ihn änderst. „Anhalten“ merkt ihn sich; „Fortsetzen“ nimmt ihn wieder auf. Ein blockierter Weg hält die Arbeit auf. Bei einem Speicherfehler bleibt der vorherige Auftrag erhalten."
+
+msgid "GUIDE_STEP_TRIBE_DELIVERY"
+msgstr "Die erste Lieferung abwarten"
+
+msgid "GUIDE_HINT_TRIBE_DELIVERY"
+msgstr "Warte, bis ein Bewohner seine gesammelte Ware am Dorfplatz abliefert."
+
+msgid "GUIDE_DETAIL_TRIBE_DELIVERY"
+msgstr "Vorkommen sind noch kein Lagerbestand. Getragene Ware ist unterwegs und wird erst bei Ankunft eingelagert. Die Lagerhaufen wachsen mit den freien Vorräten. Goldfarbene Bauware ist reserviert; am Bau angelieferte Ware gehört zur Baustelle. Fahre über Haufen oder Ressourcenleiste für genaue Mengen."
+
+msgid "GUIDE_STEP_TRIBE_SUPPLY"
+msgstr "Einen Bewohner versorgen"
+
+msgid "GUIDE_HINT_TRIBE_SUPPLY"
+msgstr "Sammle Nahrung und lasse einen hungrigen Bewohner „Jetzt essen“."
+
+msgid "GUIDE_DETAIL_TRIBE_SUPPLY"
+msgstr "Die Versorgungsbefehle stehen unter „Arbeitsplätze & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab."
+
+msgid "GUIDE_STEP_TRIBE_TOOL"
+msgstr "Ein Steinwerkzeug herstellen"
+
+msgid "GUIDE_HINT_TRIBE_TOOL"
+msgstr "Lagere 3 Holz und 2 Stein ein. Beauftrage dann im Reiter „Bauen“ das Werkzeug."
+
+msgid "GUIDE_DETAIL_TRIBE_TOOL"
+msgstr "Wähle mindestens einen Bewohner als Arbeiter aus. Die Herstellung findet am Dorfplatz statt; warte auf den Abschluss. Das fertige Werkzeug wird für Gebäude benötigt. Ein Klick ohne Material oder ein nur begonnener Auftrag genügt nicht."
+
+msgid "GUIDE_STEP_TRIBE_PLACE"
+msgstr "Ein Gebäude platzieren"
+
+msgid "GUIDE_HINT_TRIBE_PLACE"
+msgstr "Wähle einen Bauauftrag, prüfe die Vorschau und bestätige einen freien Platz mit Rechtsklick."
+
+msgid "GUIDE_DETAIL_TRIBE_PLACE"
+msgstr "Zum Beispiel: Hütte für 6 Holz / 3 Stein, oder Forstplatz für 4 Holz / 1 Stein. Wähle Bewohner als Bauarbeiter. Grün bedeutet gültig, Rot erklärt ein Hindernis; Esc bricht ohne Kosten ab. Erst der erfolgreiche Rechtsklick legt die Baustelle an und reserviert Material. Der Arbeitsbereich bleibt nahe am Dorf."
+
+msgid "GUIDE_STEP_TRIBE_FINISH"
+msgstr "Den Bau fertigstellen"
+
+msgid "GUIDE_HINT_TRIBE_FINISH"
+msgstr "Lasse die zugewiesenen Bewohner das Gebäude fertigstellen."
+
+msgid "GUIDE_DETAIL_TRIBE_FINISH"
+msgstr "Zuerst transportieren die Bewohner die reservierten Materialien zur Baustelle. Danach steigt der Baufortschritt. Weitere Bewohner können mitarbeiten. Pausierte oder blockierte Arbeit zählt noch nicht als Abschluss; Gründe und Materialstand stehen im Baureiter."
+
+msgid "GUIDE_STEP_TRIBE_PROFESSION"
+msgstr "Einen Beruf zuweisen"
+
+msgid "GUIDE_HINT_TRIBE_PROFESSION"
+msgstr "Wähle einen Bewohner und weise unter „Arbeitsplätze & Berufe“ einen Beruf zu."
+
+msgid "GUIDE_DETAIL_TRIBE_PROFESSION"
+msgstr "Ein Beruf ist die dauerhafte Zuständigkeit, etwa Holzarbeiter oder Versorger. Ein einzelner Auftrag kann diese Arbeit vorübergehend ersetzen. Der Beruf bleibt auf der Bewohnerkarte sichtbar. Er ist noch keine Bindung an einen bestimmten Arbeitsplatz."
+
+msgid "GUIDE_STEP_TRIBE_WORKPLACE"
+msgstr "Einen Arbeitsplatz zuordnen"
+
+msgid "GUIDE_HINT_TRIBE_WORKPLACE"
+msgstr "Baue einen Forstplatz oder Brunnen und ordne ausgewählte Bewohner über dessen Arbeitsplatzzeile zu."
+
+msgid "GUIDE_DETAIL_TRIBE_WORKPLACE"
+msgstr "Die fertigen Arbeitsplätze stehen unter „Arbeitsplätze & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen."
+
+msgid "GUIDE_TRIBAL_TITLE"
+msgstr "DEIN DORF SCHRITT FÜR SCHRITT"
+
+msgid "EDITOR_CATEGORY_WINGS"
+msgstr "Flügel"
+
+msgid "Flügel"
+msgstr "Flügel"
+
+msgid "EDITOR_WING_STRETCH"
+msgstr "Flügel strecken"
+
+msgid "EDITOR_PART_WINGS_BROAD_FEATHER_NAME"
+msgstr "Breiter Federflügel"
+
+msgid "EDITOR_PART_WINGS_BROAD_FEATHER_DESCRIPTION"
+msgstr "Gerundete Schwingen mit breitem Federfächer und sichtbaren Federlagen."
+
+msgid "EDITOR_PART_WINGS_SLENDER_FEATHER_NAME"
+msgstr "Schmaler Federflügel"
+
+msgid "EDITOR_PART_WINGS_SLENDER_FEATHER_DESCRIPTION"
+msgstr "Lange, schmale Schwingen mit zurückgezogenen Schwungfedern."
+
+msgid "EDITOR_PART_WINGS_BAT_MEMBRANE_NAME"
+msgstr "Fledermausflügel"
+
+msgid "EDITOR_PART_WINGS_BAT_MEMBRANE_DESCRIPTION"
+msgstr "Ausgespannte Haut zwischen vier sichtbaren Trägern mit gebuchtetem Rand."
+
+msgid "EDITOR_PART_WINGS_LONG_INSECT_NAME"
+msgstr "Langer Insektenflügel"
+
+msgid "EDITOR_PART_WINGS_LONG_INSECT_DESCRIPTION"
+msgstr "Schmale, gerundete Flügelfläche mit verzweigten Adern und hellem Saum."
+
+msgid "EDITOR_CATEGORY_FINS"
+msgstr "Flossen"
+
+msgid "Flossen"
+msgstr "Flossen"
+
+msgid "EDITOR_FIN_FLEX"
+msgstr "Flossen bewegen"
+
+msgid "EDITOR_CATEGORY_EARS"
+msgstr "Ohren"
+
+msgid "Ohren"
+msgstr "Ohren"
+
+msgid "EDITOR_EAR_PERK"
+msgstr "Ohren bewegen"
+
+msgid "EDITOR_PART_FINS_BROAD_PADDLE_NAME"
+msgstr "Breite Paddelflosse"
+
+msgid "EDITOR_PART_FINS_BROAD_PADDLE_DESCRIPTION"
+msgstr "Breite, abgerundete Seitenflosse mit kräftigem Ansatz und feinen Flossenstrahlen."
+
+msgid "EDITOR_PART_FINS_SLENDER_STEERING_NAME"
+msgstr "Schmale Steuerflosse"
+
+msgid "EDITOR_PART_FINS_SLENDER_STEERING_DESCRIPTION"
+msgstr "Lange, nach hinten gezogene Seitenflosse mit schmal zulaufender Spitze."
+
+msgid "EDITOR_PART_FINS_ROUND_SIDE_NAME"
+msgstr "Kleine Rundflosse"
+
+msgid "EDITOR_PART_FINS_ROUND_SIDE_DESCRIPTION"
+msgstr "Kompakte, fächerförmige Seitenflosse mit rundem Rand."
+
+msgid "EDITOR_PART_FINS_TALL_DORSAL_NAME"
+msgstr "Hohe Rückenflosse"
+
+msgid "EDITOR_PART_FINS_TALL_DORSAL_DESCRIPTION"
+msgstr "Hohe dreieckige Rückenflosse mit breitem Ansatz und sichtbaren Stützstrahlen."
+
+msgid "EDITOR_PART_FINS_LONG_FRINGE_NAME"
+msgstr "Langer Flossensaum"
+
+msgid "EDITOR_PART_FINS_LONG_FRINGE_DESCRIPTION"
+msgstr "Flacher, langgezogener Flossensaum mit weicher Wellenkontur."
+
+msgid "EDITOR_PART_FINS_SMALL_STABILIZER_NAME"
+msgstr "Kleine Stabilisatorflosse"
+
+msgid "EDITOR_PART_FINS_SMALL_STABILIZER_DESCRIPTION"
+msgstr "Kurze, nach hinten geneigte Flosse für Rücken- oder Bauchplatzierung."
+
+msgid "EDITOR_PART_EARS_CAT_POINTED_NAME"
+msgstr "Spitzes Katzenohr"
+
+msgid "EDITOR_PART_EARS_CAT_POINTED_DESCRIPTION"
+msgstr "Spitzes, leicht nach außen gestelltes Ohr mit sichtbarer Innenmuschel."
+
+msgid "EDITOR_PART_EARS_BEAR_ROUND_NAME"
+msgstr "Rundes Bärenohr"
+
+msgid "EDITOR_PART_EARS_BEAR_ROUND_DESCRIPTION"
+msgstr "Kompaktes, rundes Ohr mit breitem Rand und vertiefter Innenfläche."
+
+msgid "EDITOR_PART_EARS_RABBIT_LONG_NAME"
+msgstr "Langes Hasenohr"
+
+msgid "EDITOR_PART_EARS_RABBIT_LONG_DESCRIPTION"
+msgstr "Lange, schmale Ohrmuschel mit abgerundeter Spitze."
+
+msgid "EDITOR_PART_EARS_DOG_FLOPPY_NAME"
+msgstr "Hängendes Hundeohr"
+
+msgid "EDITOR_PART_EARS_DOG_FLOPPY_DESCRIPTION"
+msgstr "Weiches, nach außen gewölbtes Hängeohr mit rundem Ende."
+
+msgid "EDITOR_PART_EARS_ELEPHANT_BROAD_NAME"
+msgstr "Breites Elefantenohr"
+
+msgid "EDITOR_PART_EARS_ELEPHANT_BROAD_DESCRIPTION"
+msgstr "Breite, fächerförmige Ohrmuschel mit gewelltem Außenrand."
+
+msgid "EDITOR_PART_EARS_BAT_LARGE_NAME"
+msgstr "Großes Fledermausohr"
+
+msgid "EDITOR_PART_EARS_BAT_LARGE_DESCRIPTION"
+msgstr "Hohe, weit geöffnete Ohrmuschel mit spitzer Kontur und breitem Innenraum."
+
+msgid "EDITOR_UPDATE_MOUTH"
+msgstr "Neue Mundform übernehmen"
+
+msgid "EDITOR_PART_HORNS_STAG_ANTLERS_NAME"
+msgstr "Hirschgeweih"
+
+msgid "EDITOR_PART_HORNS_STAG_ANTLERS_DESCRIPTION"
+msgstr "Verzweigte Geweihstange mit mehreren nach oben gerichteten Sprossen. Werte und Freischaltung wie Geweih."
+
+msgid "EDITOR_PART_HORNS_MOOSE_ANTLERS_NAME"
+msgstr "Schaufelgeweih"
+
+msgid "EDITOR_PART_HORNS_MOOSE_ANTLERS_DESCRIPTION"
+msgstr "Breite Geweihschaufel mit abgesetzten Randspitzen. Werte und Freischaltung wie Geweih."
+
+msgid "EDITOR_PART_DECOR_LOW_CREST_NAME"
+msgstr "Flacher Rückenkamm"
+
+msgid "EDITOR_PART_DECOR_LOW_CREST_DESCRIPTION"
+msgstr "Niedriger durchgehender Kamm entlang des Rückens. Werte und Freischaltung wie Federkamm."
+
+msgid "EDITOR_PART_DECOR_SAW_CREST_NAME"
+msgstr "Gezackter Rückenkamm"
+
+msgid "EDITOR_PART_DECOR_SAW_CREST_DESCRIPTION"
+msgstr "Hoher Rückenkamm mit vier deutlich getrennten Zacken. Werte und Freischaltung wie Federkamm."
+
+msgid "EDITOR_PART_DECOR_HEAD_CREST_NAME"
+msgstr "Kopfkamm"
+
+msgid "EDITOR_PART_DECOR_HEAD_CREST_DESCRIPTION"
+msgstr "Kompakter nach hinten auslaufender Kamm auf dem Kopf. Werte und Freischaltung wie Federkamm."
+
+msgid "EDITOR_PART_DECOR_FRILL_NAME"
+msgstr "Nackenschild"
+
+msgid "EDITOR_PART_DECOR_FRILL_DESCRIPTION"
+msgstr "Breiter fächerförmiger Nackenschild mit kräftigem Mittelansatz. Werte und Freischaltung wie Federkamm."
+
+msgid "LIVING_WINDUP"
+msgstr "Setzt zum Biss an"
+
+msgid "LIVING_RETREAT"
+msgstr "Zieht sich zurück"
+
+msgid "LIVING_DEFENDING"
+msgstr "Beschützt die Gruppe"
+
+msgid "LIVING_ASSISTING"
+msgstr "Hilft im Kampf"
+
+msgid "LIVING_RECOVERING"
+msgstr "Erholt sich"
+
+msgid "LIVING_SCOUTING"
+msgstr "Zeigt Nahrung"
+
+msgid "LIVING_PATROLLING"
+msgstr "Erkundet den Nestplatz"
+
+msgid "LIVING_GUARDIAN"
+msgstr "Wachsam"
+
+msgid "LIVING_SCOUT"
+msgstr "Neugierig"
+
+msgid "LIVING_FOUND_FOOD"
+msgstr "Dein neugieriger Gefährte hat Nahrung in der Nähe entdeckt."
+
+msgid "LIVING_NEST"
+msgstr "Nest: {species} · {count} Bewohner"

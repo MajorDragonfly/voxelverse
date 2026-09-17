@@ -1,0 +1,64 @@
+{
+  "geometry_source": "a18e98ffcf20271ebaad4e37472cadc9f0f5bb20",
+  "verified_at_source": "59c2a6b21d5fb70a292be15976acab31300b3fb8",
+  "unit_shapes": [
+    {
+      "fixture": "creature_mouth_refresh_v2.json",
+      "unit_shape_signatures_unchanged": [
+        "mouth_bear_snout:(1.0, 1.0, 1.0):-1",
+        "mouth_bear_snout:(1.0, 1.0, 1.0):1",
+        "mouth_broad_beak:(1.0, 1.0, 1.0):-1",
+        "mouth_broad_beak:(1.0, 1.0, 1.0):1",
+        "mouth_canine_snout:(1.0, 1.0, 1.0):-1",
+        "mouth_canine_snout:(1.0, 1.0, 1.0):1",
+        "mouth_crocodile_snout:(1.0, 1.0, 1.0):-1",
+        "mouth_crocodile_snout:(1.0, 1.0, 1.0):1",
+        "mouth_feline_snout:(1.0, 1.0, 1.0):-1",
+        "mouth_feline_snout:(1.0, 1.0, 1.0):1",
+        "mouth_filter_snout:(1.0, 1.0, 1.0):-1",
+        "mouth_filter_snout:(1.0, 1.0, 1.0):1",
+        "mouth_grazer:(1.0, 1.0, 1.0):-1",
+        "mouth_grazer:(1.0, 1.0, 1.0):1",
+        "mouth_octopus_beak:(1.0, 1.0, 1.0):-1",
+        "mouth_octopus_beak:(1.0, 1.0, 1.0):1",
+        "mouth_pig_snout:(1.0, 1.0, 1.0):-1",
+        "mouth_pig_snout:(1.0, 1.0, 1.0):1",
+        "mouth_predator_jaws:(1.0, 1.0, 1.0):-1",
+        "mouth_predator_jaws:(1.0, 1.0, 1.0):1"
+      ]
+    },
+    {
+      "fixture": "creature_ornament_families_v1.json",
+      "unit_shape_signatures_unchanged": [
+        "decor_frill:(1.0, 1.0, 1.0):-1",
+        "decor_frill:(1.0, 1.0, 1.0):1",
+        "decor_head_crest:(1.0, 1.0, 1.0):-1",
+        "decor_head_crest:(1.0, 1.0, 1.0):1",
+        "decor_low_crest:(1.0, 1.0, 1.0):-1",
+        "decor_low_crest:(1.0, 1.0, 1.0):1",
+        "decor_saw_crest:(1.0, 1.0, 1.0):-1",
+        "decor_saw_crest:(1.0, 1.0, 1.0):1",
+        "horns_moose_antlers:(1.0, 1.0, 1.0):-1",
+        "horns_moose_antlers:(1.0, 1.0, 1.0):1",
+        "horns_stag_antlers:(1.0, 1.0, 1.0):-1",
+        "horns_stag_antlers:(1.0, 1.0, 1.0):1"
+      ]
+    }
+  ],
+  "method": "CPU projection of exported shared Godot ArrayMesh vertices and vertex colors; not native gameplay capture",
+  "datasets": {
+    "mouth-refresh-review-v2.json": "bbd93e8821bb2852c1a732343b231527a082f2de188d75120648d856a4d20f20",
+    "ornament-review.json": "441d5e63bf657bb31ab85d5cf5fcf5d65652656b45db284cf2e7d13488b3fc50"
+  },
+  "images": {
+    "mouths-comparison-3.png": "92b4bd093614c79840533ccef57bca527a96f88040ffdf13242f4034d1d2c054",
+    "mouths-side.png": "fbc697c894936466b93fca55c8e76b50dc86b9f231613af7ef8c07a44b20858f",
+    "ornaments-bodies.png": "5a1ed9e4f16146c366d1b1a3df1c0d99cc417ca36bd95ea11a2913b679e96cdb",
+    "mouths-comparison-1.png": "b9b8253fa45b187f45ca1885f40d72ec5e8975e15c9a4c646d33c80b6f2eb586",
+    "mouths-bodies-3.png": "ba362511f080802d58243cd5ad9ca0d976bbde749ba08a280835c5a1fddb2012",
+    "mouths-comparison-2.png": "d8a94968326e9ee5b96df6f41605640d79520b97b8cfd8b97365ad93180724b9",
+    "mouths-bodies-1.png": "6d809db52741aa56bc23dd0373f01403b47ef63bca1181a846e468ddb5d9c56b",
+    "mouths-bodies-2.png": "1acee7f9d6d1c5120350fb20eb34908b541f8f778dbad783fa6f78ead5c053f4",
+    "ornaments-models.png": "f87945e6cfa75b660e4c0ba9d867be36b171467c279f1d6c2206a4ba7c769a83"
+  }
+}

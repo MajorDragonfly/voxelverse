@@ -14,6 +14,10 @@ var measurements: Array = []
 class ActorStub extends Node:
 	var catalog_species: Dictionary = {}
 
+class ObserverStub extends CharacterBody3D:
+	var focus: Node
+	func get_scan_target() -> Node: return focus
+
 func _initialize() -> void: call_deferred("run")
 func run() -> void:
 	root.get_node("LocaleManager")._apply("de")
@@ -135,6 +139,11 @@ func capacity_check() -> void:
 			if index < 3: actor.catalog_species = {"id": ["milk", "work", "companion"][index]}
 			elif duplicates: actor.catalog_species = {"id": "milk"}
 			population.animals[str(index)] = actor
+		var observer := ObserverStub.new()
+		population.player = observer
+		# Focus the first animal that the former eviction order would remove.
+		var focused_id: String = "0" if duplicates else "3"
+		observer.focus = population.animals[focused_id]
 		var exhausted: Array[Dictionary] = [{"id": "dead-egg", "catalog_species_id": "eggs", "encounter": {"dead": true, "carcass_food": 0.0}}]
 		population._prioritize_catalog(exhausted)
 		expect(population.animals.size() == population.MAX_ANIMALS and population.captured.is_empty(), "Exhausted corpse evicted a live animal")
@@ -143,6 +152,7 @@ func capacity_check() -> void:
 		population._prioritize_catalog(candidates)
 		expect(candidates[0].id == "new-egg" and population.animals.size() == population.MAX_ANIMALS - 1, "Full population starved missing fourth role")
 		expect(population.captured.size() == 1 and population.animals.has("1") and population.animals.has("2"), "Eviction skipped capture or removed sole work/companion role")
+		expect(population.animals.has(focused_id) and focused_id not in population.captured, "Catalog expansion evicted the animal being scanned")
 		var milk: int = 0
 		for actor: Node in population.animals.values(): milk += int(actor.catalog_species.get("id") == "milk")
 		expect(milk > 0, "Eviction removed the only milk representative")
@@ -153,3 +163,4 @@ func capacity_check() -> void:
 		for actor: Node in population.animals.values(): actor.free()
 		population.animals.clear()
 		population.free()
+		observer.free()

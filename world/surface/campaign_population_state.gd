@@ -47,6 +47,9 @@ static func validate(value: Variant, body: Dictionary) -> String:
 	for key in value.regions:
 		var region: Variant = value.regions[key]
 		if not region is Dictionary or region.get("schema") != 1 or region.get("key") != key or not region.get("generated") is bool: return "Ungültige Kugelregion."
+		if region.has("colony"):
+			var colony_problem: String = preload("res://world/surface/wildlife_colony.gd").problem(region.colony, body)
+			if not colony_problem.is_empty(): return colony_problem
 		for section in ["objects", "plants"]:
 			if not region.get(section) is Dictionary or region[section].size() > MAX_OBJECTS_PER_REGION: return "Kugelregion überschreitet ihr Objektbudget."
 			for id in region[section]:

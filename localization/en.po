@@ -4877,3 +4877,477 @@ msgstr "Seeking carrion"
 
 msgid "WILDLIFE_EAT_CARCASS"
 msgstr "Eating carrion"
+
+msgid "SKILLS_POINTS_COMPACT"
+msgstr "%d points available"
+
+msgid "SKILLS_COMBINE"
+msgstr "Both paths can be combined."
+
+msgid "SKILLS_EARNING_COMPACT"
+msgstr "Social: befriend and help. Aggressive: hunt and resolve conflicts."
+
+msgid "SKILLS_ERA_HINT"
+msgstr "Each era has its own skills and points. Legacies carry forward where specified."
+
+msgid "SKILLS_ERA_PLANNED"
+msgstr "This era will have its own skill tree. Individual unlocks will arrive with its gameplay systems."
+
+msgid "SKILLS_ERA_CURRENT"
+msgstr "Current"
+
+msgid "SKILLS_ERA_PREVIOUS"
+msgstr "Earlier era"
+
+msgid "SKILLS_ERA_PREVIEW"
+msgstr "Preview"
+
+msgid "SKILLS_ERA_0_NAME"
+msgstr "Creature"
+
+msgid "SKILLS_ERA_1_NAME"
+msgstr "Tribe"
+
+msgid "SKILLS_ERA_2_NAME"
+msgstr "Medieval"
+
+msgid "SKILLS_ERA_3_NAME"
+msgstr "Modern"
+
+msgid "SKILLS_ERA_4_NAME"
+msgstr "Space"
+
+msgid "SKILLS_ERA_5_NAME"
+msgstr "Multiverse"
+
+msgid "WEATHER_STORM_SAND"
+msgstr "Sandstorm"
+
+msgid "WEATHER_STORM_ASH"
+msgstr "Ash storm"
+
+msgid "WEATHER_STORM_WARNING"
+msgstr "Weather preview · {kind} in {seconds} s"
+
+msgid "WEATHER_STORM_STATUS"
+msgstr "Weather preview · {kind}\n{phase}"
+
+msgid "WEATHER_STORM_PHASE_CALM"
+msgstr "Calm"
+
+msgid "WEATHER_STORM_PHASE_WARNING"
+msgstr "Warning"
+
+msgid "WEATHER_STORM_PHASE_RISING"
+msgstr "Storm building"
+
+msgid "WEATHER_STORM_PHASE_PEAK"
+msgstr "Storm at its peak"
+
+msgid "WEATHER_STORM_PHASE_FALLING"
+msgstr "Storm easing"
+
+msgid "TRIBE_BUILD_TAB"
+msgstr "Build"
+
+msgid "TRIBE_RESIDENT_COMPACT"
+msgstr "{name} · {profession}\n{activity}"
+
+msgid "TRIBE_PREVIEW_FREE"
+msgstr "Site available"
+
+msgid "TRIBE_PREVIEW_BLOCKED"
+msgstr "Cannot build here"
+
+msgid "TRIBE_PREVIEW_CONFIRM"
+msgstr "Right-click: build · Esc: cancel"
+
+msgid "TRIBE_STORAGE_TITLE"
+msgstr "Village storage"
+
+msgid "TRIBE_STORAGE_AMOUNT"
+msgstr "{resource}: {stored}/{capacity} available"
+
+msgid "TRIBE_STORAGE_COMPACT"
+msgstr "{resource}: {stored}/{capacity} available · building {reserved} · carried {carried}"
+
+msgid "TRIBE_STORAGE_RESERVED"
+msgstr "{amount} reserved for construction in storage (gold)"
+
+msgid "TRIBE_STORAGE_CARRIED"
+msgstr "{amount} carried by residents"
+
+msgid "TRIBE_STORAGE_DELIVERED"
+msgstr "{amount} already at the site / in use"
+
+msgid "TRIBE_STORAGE_PENDING"
+msgstr "{amount} ready at pickup points"
+
+msgid "TRIBE_STORAGE_FREIGHT_CAPACITY"
+msgstr "{amount} storage spaces held for settlement freight"
+
+msgid "TRIBE_STORAGE_HINT"
+msgstr "Piles show available stock and gold-marked building reservations.\nSize grows in quantity steps; numbers are exact.\nDeposits and goods in transit are not available storage."
+
+msgid "TRIBE_CAMERA_SETTINGS"
+msgstr "Tribal camera"
+
+msgid "TRIBE_CAMERA_SPEED"
+msgstr "Movement speed"
+
+msgid "TRIBE_CAMERA_TILT"
+msgstr "Starting tilt"
+
+msgid "TRIBE_CAMERA_SETTINGS_HINT"
+msgstr "Movement keys pan relative to the view. Mouse wheel: zoom. All camera bindings can be changed below. These settings are independent of the campaign."
+
+msgid "TRIBE_CAMERA_LEFT"
+msgstr "Rotate camera left"
+
+msgid "TRIBE_CAMERA_RIGHT"
+msgstr "Rotate camera right"
+
+msgid "TRIBE_CAMERA_UP"
+msgstr "Increase camera tilt"
+
+msgid "TRIBE_CAMERA_DOWN"
+msgstr "Decrease camera tilt"
+
+msgid "TRIBE_CAMERA_HOME"
+msgstr "Focus village"
+
+msgid "TRIBE_CAMERA_SELECTION"
+msgstr "Focus selection"
+
+msgid "TRIBE_CAMERA_ORBIT"
+msgstr "Orbit/tilt camera (hold)"
+
+msgid "TRIBE_CAMERA_VIEW"
+msgstr "View"
+
+msgid "TRIBE_CAMERA_RESET"
+msgstr "Reset view"
+
+msgid "TRIBE_CAMERA_OPEN_SETTINGS"
+msgstr "Camera settings …"
+
+msgid "TRIBE_CAMERA_INVALID"
+msgstr "Invalid tribal camera setting."
+
+msgid "TRIBE_CAMERA_HINT"
+msgstr "Pan: {move_forward} / {move_back} / {move_left} / {move_right}\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nThe camera can look beyond the residents’ working area."
+
+msgid "GUIDE_TRIBAL_CARD"
+msgstr "Guide {done}/{total} · {hint}"
+
+msgid "GUIDE_TRIBAL_HELP"
+msgstr "Help"
+
+msgid "GUIDE_TRIBAL_INTRO"
+msgstr "Three chapters explain the camera, orders and village building. Choose a chapter for short village hints. Turn them off, resume or restart at any time; existing tools and completed buildings are recognised."
+
+msgid "GUIDE_CHAPTER_TRIBE_VIEW"
+msgstr "View and selection"
+
+msgid "GUIDE_CHAPTER_TRIBE_WORK"
+msgstr "Orders and supplies"
+
+msgid "GUIDE_CHAPTER_TRIBE_BUILD"
+msgstr "Building and professions"
+
+msgid "GUIDE_STEP_TRIBE_CAMERA"
+msgstr "Move the village camera"
+
+msgid "GUIDE_HINT_TRIBE_CAMERA"
+msgstr "Move the view with {forward}/{left}/{back}/{right}."
+
+msgid "GUIDE_DETAIL_TRIBE_CAMERA"
+msgstr "You move the camera, not the residents. Drag with {orbit} to rotate and tilt; use the wheel to zoom. {home} shows the village and {selection} the selection. Find speed, starting tilt and bindings under Esc → Settings → Controls. Moving the camera does not expand the work area or explored map."
+
+msgid "GUIDE_STEP_TRIBE_SINGLE"
+msgstr "Select one resident"
+
+msgid "GUIDE_HINT_TRIBE_SINGLE"
+msgstr "Click a resident card to give orders to just that resident."
+
+msgid "GUIDE_DETAIL_TRIBE_SINGLE"
+msgstr "You can also click the creature itself. Highlighted cards and rings show the selection. Your next order applies only to those residents; everyone else keeps working."
+
+msgid "GUIDE_STEP_TRIBE_GROUP"
+msgstr "Select a group"
+
+msgid "GUIDE_HINT_TRIBE_GROUP"
+msgstr "Select several residents: Shift + click, drag a selection box, or choose “Select all”."
+
+msgid "GUIDE_DETAIL_TRIBE_GROUP"
+msgstr "Drag a box in the world with the left mouse button. Shift adds residents, or toggles them when clicking their cards. Selecting residents does not issue an order."
+
+msgid "GUIDE_STEP_TRIBE_ORDER"
+msgstr "Issue a gathering order"
+
+msgid "GUIDE_HINT_TRIBE_ORDER"
+msgstr "Select residents, then choose “Gather wood” under “Orders”."
+
+msgid "GUIDE_DETAIL_TRIBE_ORDER"
+msgstr "Alternatively, right-click a resource deposit. An order stays active until you change it. “Stop” remembers it; “Resume” continues it. A blocked route holds up work. If saving fails, the previous order remains in place."
+
+msgid "GUIDE_STEP_TRIBE_DELIVERY"
+msgstr "Wait for the first delivery"
+
+msgid "GUIDE_HINT_TRIBE_DELIVERY"
+msgstr "Wait for a resident to deliver gathered goods to the village square."
+
+msgid "GUIDE_DETAIL_TRIBE_DELIVERY"
+msgstr "Deposits are not stored goods. Carried goods are in transit and enter storage only on arrival. Stockpiles grow with available supplies. Gold construction goods are reserved; delivered building materials belong to the site. Hover over piles or the resource bar for exact amounts."
+
+msgid "GUIDE_STEP_TRIBE_SUPPLY"
+msgstr "Supply a resident"
+
+msgid "GUIDE_HINT_TRIBE_SUPPLY"
+msgstr "Gather food, then let a hungry resident “Eat now”."
+
+msgid "GUIDE_DETAIL_TRIBE_SUPPLY"
+msgstr "Supply commands are under “Workplaces & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
+
+msgid "GUIDE_STEP_TRIBE_TOOL"
+msgstr "Make a stone tool"
+
+msgid "GUIDE_HINT_TRIBE_TOOL"
+msgstr "Store 3 wood and 2 stone, then order the tool under “Build”."
+
+msgid "GUIDE_DETAIL_TRIBE_TOOL"
+msgstr "Select at least one resident as a worker. Crafting happens at the village square; wait for it to finish. The completed tool is required for buildings. Clicking without materials or merely starting the order is not enough."
+
+msgid "GUIDE_STEP_TRIBE_PLACE"
+msgstr "Place a building"
+
+msgid "GUIDE_HINT_TRIBE_PLACE"
+msgstr "Choose a building, check its preview, then confirm a free site with right-click."
+
+msgid "GUIDE_DETAIL_TRIBE_PLACE"
+msgstr "For example: a hut costs 6 wood / 3 stone, or a forestry station 4 wood / 1 stone. Select residents as builders. Green means valid; red indicates a problem. Esc cancels without cost. Only a successful right-click creates the site and reserves materials. The work area remains close to the village."
+
+msgid "GUIDE_STEP_TRIBE_FINISH"
+msgstr "Finish construction"
+
+msgid "GUIDE_HINT_TRIBE_FINISH"
+msgstr "Let the assigned residents finish the building."
+
+msgid "GUIDE_DETAIL_TRIBE_FINISH"
+msgstr "Residents first carry the reserved materials to the site. Construction progress then increases. More residents can help. Paused or blocked work does not count as completion; the Build tab shows reasons and material status."
+
+msgid "GUIDE_STEP_TRIBE_PROFESSION"
+msgstr "Assign a profession"
+
+msgid "GUIDE_HINT_TRIBE_PROFESSION"
+msgstr "Select a resident and assign a profession under “Workplaces & professions”."
+
+msgid "GUIDE_DETAIL_TRIBE_PROFESSION"
+msgstr "A profession is a lasting responsibility, such as woodworker or provider. An individual order can temporarily replace that work. The profession remains visible on the resident card. It does not yet bind the resident to a specific workplace."
+
+msgid "GUIDE_STEP_TRIBE_WORKPLACE"
+msgstr "Assign a workplace"
+
+msgid "GUIDE_HINT_TRIBE_WORKPLACE"
+msgstr "Build a forestry station or well and assign selected residents using its workplace row."
+
+msgid "GUIDE_DETAIL_TRIBE_WORKPLACE"
+msgstr "Completed workplaces appear under “Workplaces & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
+
+msgid "GUIDE_TRIBAL_TITLE"
+msgstr "YOUR VILLAGE, STEP BY STEP"
+
+msgid "EDITOR_CATEGORY_WINGS"
+msgstr "Wings"
+
+msgid "Flügel"
+msgstr "Wings"
+
+msgid "EDITOR_WING_STRETCH"
+msgstr "Stretch wings"
+
+msgid "EDITOR_PART_WINGS_BROAD_FEATHER_NAME"
+msgstr "Broad feathered wing"
+
+msgid "EDITOR_PART_WINGS_BROAD_FEATHER_DESCRIPTION"
+msgstr "Rounded wing with a broad fan and visible feather layers."
+
+msgid "EDITOR_PART_WINGS_SLENDER_FEATHER_NAME"
+msgstr "Slender feathered wing"
+
+msgid "EDITOR_PART_WINGS_SLENDER_FEATHER_DESCRIPTION"
+msgstr "Long, slender wing with swept flight feathers."
+
+msgid "EDITOR_PART_WINGS_BAT_MEMBRANE_NAME"
+msgstr "Bat wing"
+
+msgid "EDITOR_PART_WINGS_BAT_MEMBRANE_DESCRIPTION"
+msgstr "Skin stretched between four visible struts with a scalloped edge."
+
+msgid "EDITOR_PART_WINGS_LONG_INSECT_NAME"
+msgstr "Long insect wing"
+
+msgid "EDITOR_PART_WINGS_LONG_INSECT_DESCRIPTION"
+msgstr "Slender rounded wing with branching veins and a pale membrane."
+
+msgid "EDITOR_CATEGORY_FINS"
+msgstr "Fins"
+
+msgid "Flossen"
+msgstr "Fins"
+
+msgid "EDITOR_FIN_FLEX"
+msgstr "Flex fins"
+
+msgid "EDITOR_CATEGORY_EARS"
+msgstr "Ears"
+
+msgid "Ohren"
+msgstr "Ears"
+
+msgid "EDITOR_EAR_PERK"
+msgstr "Move ears"
+
+msgid "EDITOR_PART_FINS_BROAD_PADDLE_NAME"
+msgstr "Broad paddle fin"
+
+msgid "EDITOR_PART_FINS_BROAD_PADDLE_DESCRIPTION"
+msgstr "Broad rounded side fin with a strong base and fine fin rays."
+
+msgid "EDITOR_PART_FINS_SLENDER_STEERING_NAME"
+msgstr "Slender steering fin"
+
+msgid "EDITOR_PART_FINS_SLENDER_STEERING_DESCRIPTION"
+msgstr "Long swept side fin with a slender tapered tip."
+
+msgid "EDITOR_PART_FINS_ROUND_SIDE_NAME"
+msgstr "Small round fin"
+
+msgid "EDITOR_PART_FINS_ROUND_SIDE_DESCRIPTION"
+msgstr "Compact fan-shaped side fin with a rounded edge."
+
+msgid "EDITOR_PART_FINS_TALL_DORSAL_NAME"
+msgstr "Tall dorsal fin"
+
+msgid "EDITOR_PART_FINS_TALL_DORSAL_DESCRIPTION"
+msgstr "Tall triangular dorsal fin with a broad base and visible supporting rays."
+
+msgid "EDITOR_PART_FINS_LONG_FRINGE_NAME"
+msgstr "Long fin fringe"
+
+msgid "EDITOR_PART_FINS_LONG_FRINGE_DESCRIPTION"
+msgstr "Low elongated fin fringe with a gently undulating outline."
+
+msgid "EDITOR_PART_FINS_SMALL_STABILIZER_NAME"
+msgstr "Small stabilizer fin"
+
+msgid "EDITOR_PART_FINS_SMALL_STABILIZER_DESCRIPTION"
+msgstr "Short swept fin for placement on the back or belly."
+
+msgid "EDITOR_PART_EARS_CAT_POINTED_NAME"
+msgstr "Pointed cat ear"
+
+msgid "EDITOR_PART_EARS_CAT_POINTED_DESCRIPTION"
+msgstr "Pointed, slightly outward-facing ear with a visible inner cup."
+
+msgid "EDITOR_PART_EARS_BEAR_ROUND_NAME"
+msgstr "Round bear ear"
+
+msgid "EDITOR_PART_EARS_BEAR_ROUND_DESCRIPTION"
+msgstr "Compact rounded ear with a broad rim and recessed inner surface."
+
+msgid "EDITOR_PART_EARS_RABBIT_LONG_NAME"
+msgstr "Long rabbit ear"
+
+msgid "EDITOR_PART_EARS_RABBIT_LONG_DESCRIPTION"
+msgstr "Long slender ear cup with a rounded tip."
+
+msgid "EDITOR_PART_EARS_DOG_FLOPPY_NAME"
+msgstr "Floppy dog ear"
+
+msgid "EDITOR_PART_EARS_DOG_FLOPPY_DESCRIPTION"
+msgstr "Soft outward-curved drooping ear with a rounded end."
+
+msgid "EDITOR_PART_EARS_ELEPHANT_BROAD_NAME"
+msgstr "Broad elephant ear"
+
+msgid "EDITOR_PART_EARS_ELEPHANT_BROAD_DESCRIPTION"
+msgstr "Broad fan-shaped ear cup with an undulating outer edge."
+
+msgid "EDITOR_PART_EARS_BAT_LARGE_NAME"
+msgstr "Large bat ear"
+
+msgid "EDITOR_PART_EARS_BAT_LARGE_DESCRIPTION"
+msgstr "Tall open ear cup with a pointed outline and broad inner surface."
+
+msgid "EDITOR_UPDATE_MOUTH"
+msgstr "Use updated mouth shape"
+
+msgid "EDITOR_PART_HORNS_STAG_ANTLERS_NAME"
+msgstr "Stag antlers"
+
+msgid "EDITOR_PART_HORNS_STAG_ANTLERS_DESCRIPTION"
+msgstr "Branched antler beam with several upward tines. Stats and unlock match Antlers."
+
+msgid "EDITOR_PART_HORNS_MOOSE_ANTLERS_NAME"
+msgstr "Palmate antlers"
+
+msgid "EDITOR_PART_HORNS_MOOSE_ANTLERS_DESCRIPTION"
+msgstr "Broad antler palm with separate edge tines. Stats and unlock match Antlers."
+
+msgid "EDITOR_PART_DECOR_LOW_CREST_NAME"
+msgstr "Low dorsal crest"
+
+msgid "EDITOR_PART_DECOR_LOW_CREST_DESCRIPTION"
+msgstr "Low continuous crest along the back. Stats and unlock match Feather Crest."
+
+msgid "EDITOR_PART_DECOR_SAW_CREST_NAME"
+msgstr "Serrated dorsal crest"
+
+msgid "EDITOR_PART_DECOR_SAW_CREST_DESCRIPTION"
+msgstr "Tall dorsal crest with four distinct points. Stats and unlock match Feather Crest."
+
+msgid "EDITOR_PART_DECOR_HEAD_CREST_NAME"
+msgstr "Head crest"
+
+msgid "EDITOR_PART_DECOR_HEAD_CREST_DESCRIPTION"
+msgstr "Compact crest sweeping back from the head. Stats and unlock match Feather Crest."
+
+msgid "EDITOR_PART_DECOR_FRILL_NAME"
+msgstr "Neck frill"
+
+msgid "EDITOR_PART_DECOR_FRILL_DESCRIPTION"
+msgstr "Broad fan-shaped neck frill with a thick central root. Stats and unlock match Feather Crest."
+
+msgid "LIVING_WINDUP"
+msgstr "Preparing to bite"
+
+msgid "LIVING_RETREAT"
+msgstr "Retreating"
+
+msgid "LIVING_DEFENDING"
+msgstr "Protecting the group"
+
+msgid "LIVING_ASSISTING"
+msgstr "Helping in combat"
+
+msgid "LIVING_RECOVERING"
+msgstr "Recovering"
+
+msgid "LIVING_SCOUTING"
+msgstr "Pointing out food"
+
+msgid "LIVING_PATROLLING"
+msgstr "Exploring the nest grounds"
+
+msgid "LIVING_GUARDIAN"
+msgstr "Watchful"
+
+msgid "LIVING_SCOUT"
+msgstr "Curious"
+
+msgid "LIVING_FOUND_FOOD"
+msgstr "Your curious companion has found food nearby."
+
+msgid "LIVING_NEST"
+msgstr "Nest: {species} · {count} residents"

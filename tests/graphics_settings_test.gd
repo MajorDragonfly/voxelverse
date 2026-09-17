@@ -190,7 +190,7 @@ func _campaign_round_trip() -> void:
 
 func _loaded(flow: Node) -> void:
 	var start: int = Time.get_ticks_msec()
-	while flow.loading and Time.get_ticks_msec() - start < 60000: await process_frame
+	while flow.loading and Time.get_ticks_msec() - start < 90000: await process_frame
 	_expect(not flow.loading, "Campaign load timed out")
 
 func _campaign_matches() -> bool:

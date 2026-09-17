@@ -57,6 +57,15 @@ func _run() -> void:
 	_expect(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Opening did not release the mouse.")
 	_expect(ui._cards.values().filter(func(card: Dictionary) -> bool: return card["button"].is_visible_in_tree()).size() == 6, "Not all six creature nodes are visible in the creature view.")
 	_expect(ui._purchase.disabled, "Empty wallet permits a purchase.")
+	# First opening must already fit: language/resize events must not be needed
+	# to recover from the initial narrow-label layout seen in the player report.
+	_expect(ui._panel.size.x <= 1180 and ui._panel.size.y <= 680, "Development book is not bounded on desktop.")
+	_expect(root.get_visible_rect().encloses(ui._panel.get_global_rect()), "Book opened outside the viewport.")
+	for card: Dictionary in ui._cards.values():
+		if card.button.visible:
+			_expect(card.button.size.y <= 110, "A skill card grew into a giant panel.")
+			_expect(ui._scroll.get_global_rect().encloses(card.button.get_global_rect()), "Desktop skill overview requires scrolling.")
+	_expect(ui._scroll.get_global_rect().encloses(ui._purchase.get_global_rect()), "Unlock action is not visible beside the skill overview.")
 	await _screenshot("skilltree_empty.png")
 	var time_before: float = state.campaign.data["elapsed_seconds"]
 	var position_before := player.position

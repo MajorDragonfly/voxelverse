@@ -3,7 +3,7 @@ extends Node
 signal order_committed(order: String)
 
 const State = preload("res://world/home_group/home_group_state.gd")
-const Companion = preload("res://world/home_group/home_companion.gd")
+const Companion = preload("res://world/home_group/living_companion.gd")
 const GroupPanel = preload("res://ui/home_group/home_group_panel.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")

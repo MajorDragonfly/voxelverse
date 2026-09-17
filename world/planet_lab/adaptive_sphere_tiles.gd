@@ -23,6 +23,7 @@ var _pending: Array[String] = []
 var _collision_pending: Array[String] = []
 var publication_operations: Dictionary = {}
 var max_operation_usec: Dictionary = {}
+var view_direction := Vector3.ZERO
 var _requested_direction: Vector3 = Vector3.ZERO
 var _collision_direction: Vector3 = Vector3.ZERO
 var ocean_material: ShaderMaterial
@@ -62,6 +63,16 @@ var _published_generation: int = -1
 var _job_body_id: String = ""
 var discarded_jobs: int = 0
 var discarded_publications: int = 0
+
+
+func set_view_focus(direction: Vector3) -> void:
+	# An optional visual observer shares the existing tile/worker/cache budgets.
+	# _requested_direction remains the sole physical collision owner.
+	if not direction.is_finite(): return
+	if direction == Vector3.ZERO or view_direction == Vector3.ZERO or direction.distance_to(view_direction) * float(surface.body.radius) >= REFOCUS_METERS:
+		if direction == view_direction: return
+		view_direction = direction.normalized()
+		_refresh_requested = true
 
 
 func set_motion_hint(direction: Vector3, desired_velocity: Vector3) -> void:
@@ -134,6 +145,7 @@ func _request(direction: Vector3) -> void:
 	_job = PatchJob.new()
 	_job.body = surface.body.duplicate(true)
 	_job.direction = direction
+	_job.view_direction = view_direction
 	_job_generation = _generation
 	_job_body_id = str(surface.body.id)
 	for id: String in leaves:

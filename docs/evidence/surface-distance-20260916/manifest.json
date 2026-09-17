@@ -1,0 +1,111 @@
+{
+  "base_commit": "176d088d34324de14952bc7506fe9763a22cf4b0",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "files": [
+    {
+      "path": "core/diagnostics/surface_distance_probe.gd",
+      "sha256": "36e00f16ae690855ba05f40b78e5218a57977cd186bb7d06ab8e1d965958d141"
+    },
+    {
+      "path": "core/diagnostics/surface_distance_probe.gd.uid",
+      "sha256": "15a34f3953034ade63cb5d330890fbc7368e92396d6b79c0ef34c4151ad7bbbd"
+    },
+    {
+      "path": "main/spherical_campaign.gd",
+      "sha256": "ebca9593efd6c7fb8f1a5557381b88da5dbc5e74aae5bb2a87f99e59443531a6"
+    },
+    {
+      "path": "tests/surface_distance_test.gd",
+      "sha256": "1fe1a1e538727ee3cd0ee31ce894e221ecf0746c4ddb9d24324cad1a5cc47f35"
+    },
+    {
+      "path": "tests/surface_distance_test.gd.uid",
+      "sha256": "99373fb25ba10460ee59cabc4e6ba81a30c5f1f8fb27651926e31b29b3cbafef"
+    },
+    {
+      "path": "tests/surface_distance_world_test.gd",
+      "sha256": "7aae8bbe399b287bd7423688f599e5c14b761b7af79a2e504383b2b72d94960a"
+    },
+    {
+      "path": "tests/surface_distance_world_test.gd.uid",
+      "sha256": "394a148ec8b119de853a15a97e1436460f120a69a2a0ca7d524b56ab81b73164"
+    },
+    {
+      "path": "tools/validation/contracts.json",
+      "sha256": "02eba34f7bd0af0902c01a5951f5a4b61e7f2ce753d0459430b0fea4e4ed527b"
+    },
+    {
+      "path": "world/planet_lab/planet_patch_mesh.gd",
+      "sha256": "766f6150a1a7b0c7fdfceb043871f01bb9d62f65a36a1beff24c785506a25e5e"
+    },
+    {
+      "path": "world/planet_lab/planet_tile_layout.gd",
+      "sha256": "56029d6017bf7dccfc8caa731fc92322c0c379b95b669d131073cbb7285b2dbd"
+    },
+    {
+      "path": "world/surface/surface_distant_scenery.gd",
+      "sha256": "a993590285d2de40d106465aee3bebeed35539fcd2540ef431b258335afd9d67"
+    },
+    {
+      "path": "world/surface/surface_distant_scenery.gd.uid",
+      "sha256": "630d2909456387a125304983c0420cb593257f73bfeaf36d2f9ab81e199b195a"
+    },
+    {
+      "path": "world/surface/surface_ecosystem.gd",
+      "sha256": "892826050372294eca7e478a311586f03bf16c809806e4f9a5d649517b86d78e"
+    },
+    {
+      "path": "world/surface/surface_population_job.gd",
+      "sha256": "ad05f21d02f3525efb1e47de9a21efcb6676ec5d3ac71235b7b9bb08def98b23"
+    },
+    {
+      "path": "world/surface/surface_scenery_job.gd",
+      "sha256": "5c3ab6893595d5a14bb0b1d690b3184a2c60dc33ac1d428729bf1fa1a6f8e1e2"
+    },
+    {
+      "path": "world/surface/surface_scenery_job.gd.uid",
+      "sha256": "89a6b18ae6be9339b79942ef764c233cf1ba55bb3f84532cd6938d453315e42d"
+    },
+    {
+      "path": "world/surface/visuals/surface_scenery.gdshader",
+      "sha256": "05cb4cd3c245115f0891d21158caecac4e7ebfc626df7000f2464345322fbb6a"
+    },
+    {
+      "path": "world/surface/visuals/surface_scenery.gdshader.uid",
+      "sha256": "ae1116561a3f492deaac7cdefbc3ddaf1effbbebf3e7caf8ceea20cb5d643965"
+    }
+  ],
+  "runs": {
+    "distance": {
+      "source_sha256": "041f92d29d36a6ca1976b9411b33b532890ff4093c1569424baa4ed447c95919",
+      "passed": true,
+      "tests": [
+        "surface_distance_test",
+        "surface_distance_world_test"
+      ]
+    },
+    "consumers": {
+      "source_sha256": "7820f39402771f5fdd6ef2264616b683335ff84dbc6d333c9880fb9dadb16ca0",
+      "passed": true,
+      "tests": [
+        "planet_streaming_test",
+        "large_planet_geometry_test",
+        "spherical_campaign_runtime_test"
+      ]
+    },
+    "budgets": {
+      "source_sha256": "7820f39402771f5fdd6ef2264616b683335ff84dbc6d333c9880fb9dadb16ca0",
+      "passed": true,
+      "tests": [
+        "surface_distance_test",
+        "surface_distance_world_test",
+        "surface_scale_contract_test",
+        "surface_population_budget_test"
+      ]
+    }
+  },
+  "notes": [
+    "Consumer and budget runs preceded a precise cell-index encoding improvement and extra diagnostic coverage. Final distance runs exercise the changed worker/shader/probe. Terrain, main entry and near-flora code stayed unchanged between these runs.",
+    "Software OpenGL capture; no Windows or hardware FPS acceptance."
+  ]
+}

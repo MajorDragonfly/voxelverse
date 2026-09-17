@@ -1,6 +1,14 @@
 extends RefCounted
 class_name CreaturePartLibrary
 
+const FinCatalog = preload("res://creatures/catalog/creature_fin_catalog.gd")
+const FinGeometry = preload("res://creatures/editor/creature_fin_geometry.gd")
+const EarCatalog = preload("res://creatures/catalog/creature_ear_catalog.gd")
+const EarGeometry = preload("res://creatures/editor/creature_ear_geometry.gd")
+const WingCatalog = preload("res://creatures/catalog/creature_wing_catalog.gd")
+const WingGeometry = preload("res://creatures/editor/creature_wing_geometry.gd")
+const OrnamentCatalog = preload("res://creatures/catalog/creature_ornament_catalog.gd")
+const OrnamentGeometry = preload("res://creatures/editor/creature_ornament_geometry.gd")
 const TailCatalog = preload("res://creatures/catalog/creature_tail_catalog.gd")
 const TailGeometry = preload("res://creatures/editor/creature_tail_geometry.gd")
 const MouthCatalog = preload("res://creatures/catalog/creature_mouth_catalog.gd")
@@ -21,6 +29,9 @@ const CATEGORY_HORNS: String = "horns"
 const CATEGORY_PLATES: String = "plates"
 const CATEGORY_SPIKES: String = "spikes"
 const CATEGORY_DECOR: String = "decor"
+const CATEGORY_FINS: String = "fins"
+const CATEGORY_EARS: String = "ears"
+const CATEGORY_WINGS: String = "wings"
 const CATEGORY_PAINT: String = "paint"
 const CATEGORY_FEET: String = "feet"
 const CATEGORY_HANDS: String = "hands"
@@ -58,6 +69,9 @@ static func get_categories() -> Array:
 			"name": "Arms",
 			"icon": "╋",
 		},
+		{"id": CATEGORY_FINS, "name": "Fins", "icon": "◭"},
+		{"id": CATEGORY_EARS, "name": "Ears", "icon": "◖"},
+		{"id": CATEGORY_WINGS, "name": "Wings", "icon": "⋔"},
 		{
 			"id": CATEGORY_TAIL,
 			"name": "Tail",
@@ -301,7 +315,8 @@ static func get_default_paint_id() -> String:
 
 static func get_default_position(
 	category_id: String,
-	body_shape: Vector3
+	body_shape: Vector3,
+	part_id: String = ""
 ) -> Vector3:
 	match category_id:
 		CATEGORY_MOUTH:
@@ -314,6 +329,14 @@ static func get_default_position(
 			return Vector3(0.48, -body_shape.y * 0.56, 0.18)
 		CATEGORY_ARMS:
 			return Vector3(0.72, -0.05, -body_shape.z * 0.18)
+		CATEGORY_FINS:
+			if FinCatalog.get_profile(part_id).get("layout", "side") == "dorsal":
+				return Vector3(0, body_shape.y * 0.52, body_shape.z * 0.04)
+			return Vector3(body_shape.x * 0.5, -body_shape.y * 0.1, -body_shape.z * 0.04)
+		CATEGORY_EARS:
+			return Vector3(body_shape.x * 0.36, body_shape.y * 0.48, -body_shape.z * 0.33)
+		CATEGORY_WINGS:
+			return Vector3(body_shape.x * 0.48, body_shape.y * 0.30, -body_shape.z * 0.12)
 		CATEGORY_TAIL:
 			return Vector3(0.0, -0.05, body_shape.z * 0.58)
 		CATEGORY_HORNS:
@@ -328,13 +351,16 @@ static func get_default_position(
 			return Vector3.ZERO
 
 
-static func is_default_mirrored(category_id: String) -> bool:
+static func is_default_mirrored(category_id: String, part_id: String = "") -> bool:
+	if category_id == CATEGORY_FINS: return FinCatalog.get_profile(part_id).get("default_mirrored", true)
 	return (
 		category_id == CATEGORY_EYES
 		or category_id == CATEGORY_LEGS
 		or category_id == CATEGORY_ARMS
 		or category_id == CATEGORY_HORNS
 		or category_id == CATEGORY_SPIKES
+		or category_id == CATEGORY_EARS
+		or category_id == CATEGORY_WINGS
 	)
 
 
@@ -889,14 +915,18 @@ static func _get_placeable_parts() -> Array:
 	]
 
 	# Add models after the frozen legacy catalog; copy existing gameplay values.
-	for model: Dictionary in MouthCatalog.get_parts() + TailCatalog.get_parts():
+	for model: Dictionary in MouthCatalog.get_parts() + TailCatalog.get_parts() + OrnamentCatalog.get_parts() + WingCatalog.get_parts() + FinCatalog.get_parts() + EarCatalog.get_parts():
 		for source: Dictionary in result:
 			if source.id == model.stats_source:
 				model["stats"] = source.stats.duplicate(true)
 				model["complexity"] = source.complexity
 				model["default_scale"] = source.default_scale
 				break
-		model["voxels"] = TailGeometry.legacy_voxels(model.id, model.geometry_revision) if model.category == CATEGORY_TAIL else MouthGeometry.legacy_voxels(model.id, model.geometry_revision)
+		if model.category == CATEGORY_FINS: model["voxels"] = FinGeometry.legacy_voxels(model.id)
+		elif model.category == CATEGORY_EARS: model["voxels"] = EarGeometry.legacy_voxels(model.id)
+		elif model.category == CATEGORY_WINGS: model["voxels"] = WingGeometry.legacy_voxels(model.id)
+		elif model.category in [CATEGORY_HORNS, CATEGORY_DECOR]: model["voxels"] = OrnamentGeometry.legacy_voxels(model.id)
+		else: model["voxels"] = TailGeometry.legacy_voxels(model.id, model.geometry_revision) if model.category == CATEGORY_TAIL else MouthGeometry.legacy_voxels(model.id, model.geometry_revision)
 		result.append(model)
 	return result
 

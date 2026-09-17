@@ -1,5 +1,7 @@
 extends Node
 
+signal patches_changed
+
 const Job = preload("res://world/surface/surface_population_job.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Assets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
@@ -42,6 +44,7 @@ var discarded_results: int = 0
 var last_publish_units: int = 0
 var max_publish_units: int = 0
 var publication_steps: int = 0
+var _scenery_frame: int = -1
 
 
 func _ready() -> void:
@@ -51,9 +54,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	last_publish_units = 0
 	if _closed: return
+	if _scenery_frame == Engine.get_process_frames(): return
 	var started: int = Time.get_ticks_usec()
 	_tick(delta)
 	max_frame_work_ms = maxf(max_frame_work_ms, (Time.get_ticks_usec() - started) / 1000.0)
+
+
+func reserve_scenery_frame() -> void:
+	_scenery_frame = Engine.get_process_frames()
 
 
 func _tick(delta: float) -> void:
@@ -128,6 +136,7 @@ func _refresh() -> void:
 			patches[id].node.queue_free()
 			patches.erase(id)
 			unloaded += 1
+			patches_changed.emit()
 	for data: Dictionary in patches.values():
 		var distance: float = data.node.position.distance_to(player.position)
 		data.node.collision_layer = 2 if distance < 90.0 else 0
@@ -172,6 +181,7 @@ func _step_publication() -> void:
 		data.node = patch_root
 		data.erase("batches")
 		patches[data.cell.id] = data
+		patches_changed.emit()
 		loaded += 1
 		peak_instances = maxi(peak_instances, instance_count())
 		_publication = {}

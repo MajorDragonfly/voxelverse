@@ -109,5 +109,7 @@ static func validation_code(value: Variant, body_id: String, species_id: String)
 			return "home.invalid_member_order"
 		if not member.get("name") is String or member["name"].is_empty() or member["name"].length() > 32 or not place_valid(member.get("position"), mode, body_id):
 			return "home.invalid_member_place"
+		if member.has("health") and (not (member.health is float or member.health is int) or not is_finite(float(member.health)) or float(member.health) < 0.0 or float(member.health) > 100.0):
+			return "home.invalid_member_record"
 		ids.append(expected)
 	return ""

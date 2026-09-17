@@ -1,0 +1,178 @@
+[
+  {
+    "run": "first",
+    "name": "coordinate_persistence_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 3.649,
+    "command": [
+      "/workspace/scratch/2c2866d70564/godot",
+      "--headless",
+      "--verbose",
+      "--path",
+      "/workspace/scratch/1212f3937c16/voxelverse-review",
+      "--script",
+      "res://tests/coordinate_persistence_test.gd"
+    ],
+    "log_sha256": "ff627973a3f34719f4411448f9d233b15d282950befb6e175ff87098ed40392b",
+    "contract": "campaign",
+    "process_passed": true,
+    "source_sha256": "534e7317074a5b4bcc7dea65f329db0bfa024058c72b2a56950c2f8195b6cda8",
+    "source_status": "unchanged"
+  },
+  {
+    "run": "first",
+    "name": "frozen_body_serialization_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 6.333,
+    "command": [
+      "/workspace/scratch/2c2866d70564/godot",
+      "--headless",
+      "--verbose",
+      "--path",
+      "/workspace/scratch/1212f3937c16/voxelverse-review",
+      "--script",
+      "res://tests/frozen_body_serialization_test.gd"
+    ],
+    "log_sha256": "643898e6b85d108405e29dce378a2bba961ed8dd11bbe2b66c2be5c29d57e506",
+    "contract": "campaign",
+    "process_passed": true,
+    "source_sha256": "534e7317074a5b4bcc7dea65f329db0bfa024058c72b2a56950c2f8195b6cda8",
+    "source_status": "unchanged"
+  },
+  {
+    "run": "targeted",
+    "name": "tribal_age_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 66.539,
+    "command": [
+      "/workspace/scratch/2c2866d70564/godot",
+      "--headless",
+      "--verbose",
+      "--path",
+      "/workspace/scratch/1212f3937c16/voxelverse-review",
+      "--script",
+      "res://tests/tribal_age_test.gd"
+    ],
+    "log_sha256": "0c6569a00f16332eac8726f68a9ba135125a88a444d6f2c876ce85d7e4e5981d",
+    "contract": "village",
+    "process_passed": true,
+    "source_sha256": "c9f9b7454bdee6adc4523b57d2c77950a3aed899aa46a177de3bc9a0d7910722",
+    "source_status": "unchanged"
+  },
+  {
+    "run": "targeted",
+    "name": "save_slots_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 1.772,
+    "command": [
+      "/workspace/scratch/2c2866d70564/godot",
+      "--headless",
+      "--verbose",
+      "--path",
+      "/workspace/scratch/1212f3937c16/voxelverse-review",
+      "--script",
+      "res://tests/save_slots_test.gd"
+    ],
+    "log_sha256": "a0cdfea4758ec2c42748ab4e6e88a9eec2db204260fc74c1154a3d06afeaaef1",
+    "contract": "campaign",
+    "process_passed": true,
+    "source_sha256": "c9f9b7454bdee6adc4523b57d2c77950a3aed899aa46a177de3bc9a0d7910722",
+    "source_status": "unchanged"
+  },
+  {
+    "run": "final-ui",
+    "name": "tribal_order_latency_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 7.539,
+    "command": [
+      "/workspace/scratch/2c2866d70564/godot",
+      "--headless",
+      "--verbose",
+      "--path",
+      "/workspace/scratch/1212f3937c16/voxelverse-review",
+      "--script",
+      "res://tests/tribal_order_latency_test.gd"
+    ],
+    "log_sha256": "e05e922e47a5fc1ecefc47e6ce89d3318f89275d72f582b3754c97ccf8dd43d8",
+    "contract": "village",
+    "process_passed": true,
+    "source_sha256": "bd1c6dc9f100ed0b4aae6a80c9386c6c0e625db8a222266ce088b9bf6bc063e9",
+    "source_status": "unchanged"
+  },
+  {
+    "run": "final-ui",
+    "name": "tribe_localization_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 27.055,
+    "command": [
+      "/workspace/scratch/2c2866d70564/godot",
+      "--headless",
+      "--verbose",
+      "--path",
+      "/workspace/scratch/1212f3937c16/voxelverse-review",
+      "--script",
+      "res://tests/tribe_localization_test.gd"
+    ],
+    "log_sha256": "ad657cfb30f57f16148d5f52922ba9304d92e7a5eb88c440125212e18fdf3e01",
+    "contract": "frontend_locale",
+    "process_passed": true,
+    "source_sha256": "bd1c6dc9f100ed0b4aae6a80c9386c6c0e625db8a222266ce088b9bf6bc063e9",
+    "source_status": "unchanged"
+  },
+  {
+    "run": "final-ui",
+    "name": "construction_runtime_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 42.097,
+    "command": [
+      "/workspace/scratch/2c2866d70564/godot",
+      "--headless",
+      "--verbose",
+      "--path",
+      "/workspace/scratch/1212f3937c16/voxelverse-review",
+      "--script",
+      "res://tests/construction_runtime_test.gd"
+    ],
+    "log_sha256": "97716754e8e070efa612e6deb1ce744e54896f8aa1c08288fd340d13baf9e36e",
+    "contract": "village",
+    "process_passed": true,
+    "source_sha256": "bd1c6dc9f100ed0b4aae6a80c9386c6c0e625db8a222266ce088b9bf6bc063e9",
+    "source_status": "unchanged"
+  },
+  {
+    "run": "supply-final",
+    "name": "tribal_age_supply_test",
+    "kind": "headless_godot",
+    "passed": true,
+    "exit_code": 0,
+    "seconds": 36.629,
+    "command": [
+      "/workspace/scratch/2c2866d70564/godot",
+      "--headless",
+      "--verbose",
+      "--path",
+      "/workspace/scratch/1212f3937c16/voxelverse-review",
+      "--script",
+      "res://tests/tribal_age_supply_test.gd"
+    ],
+    "log_sha256": "2fdc9b8ad891ef5e1cb59caa6169d33f9ce9613f78c82bce4f7db445dd7111d6",
+    "contract": "village",
+    "process_passed": true,
+    "source_sha256": "c761c9bc19d4e8308d4400d1b0b37b457a37f972d262fadf90ece4c1f9eb9f7b",
+    "source_status": "unchanged"
+  }
+]

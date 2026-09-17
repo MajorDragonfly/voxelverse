@@ -136,9 +136,10 @@ func _restore(body: Dictionary, before: Dictionary, progression: Dictionary) -> 
 	get_node("/root/ProgressionService").import_state(progression)
 
 func _navigation(nav: RefCounted, body_id: String) -> bool:
-	# A fresh 20 m graph needs thousands of collision samples. Keep the 2 ms /
-	# 128-cell slice even on slow renderers; do not mistake low FPS for no ground.
-	var deadline: int = Time.get_ticks_msec() + 120000
+	# A fresh 20 m graph needs thousands of collision samples. At 2 FPS the
+	# return graph can exceed 120 s even while every slice makes progress.
+	# Retain the 2 ms / 128-cell slice and a bounded transaction watchdog.
+	var deadline: int = Time.get_ticks_msec() + 240000
 	while nav.pending:
 		if Time.get_ticks_msec() > deadline or controller._state.active_body_id != body_id:
 			nav.cancel()

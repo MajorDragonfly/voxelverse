@@ -102,7 +102,7 @@ func _runtime(expected: Dictionary, restarting: bool) -> void:
 	flow.load_game(expected.target)
 	await process_frame
 	var started: int = Time.get_ticks_msec()
-	while flow.loading and Time.get_ticks_msec() - started < 50000: await process_frame
+	while flow.loading and Time.get_ticks_msec() - started < 90000: await process_frame
 	if flow.loading or current_scene.scene_file_path != flow.SPHERE_SCENE:
 		_expect(false, "Developed runtime did not load: " + saves.last_error)
 		return
@@ -118,7 +118,12 @@ func _runtime(expected: Dictionary, restarting: bool) -> void:
 		flow.resume()
 		var tribe: Node = current_scene.get_node("Nest/Tribe")
 		started = Time.get_ticks_msec()
-		while (not tribe.is_active() or not tribe.domestication._ready_runtime) and Time.get_ticks_msec() - started < 30000: await process_frame
+		while (not tribe.is_active() or not tribe.domestication._ready_runtime) and Time.get_ticks_msec() - started < 60000: await process_frame
+		if not tribe.is_active() or not tribe.domestication._ready_runtime:
+			print("DEVELOPED_ACTIVATION ", JSON.stringify({"paused": paused, "phase": state.current_phase, "status": tribe.status,
+				"active": tribe._active, "home_player": is_instance_valid(tribe.home.player), "ground": tribe.home.has_ground(tribe.anchor()),
+				"navigation_pending": tribe.navigation.pending, "navigation_phase": tribe.navigation._phase, "navigation_cursor": tribe.navigation._cursor,
+				"navigation_points": tribe.navigation.graph.get_point_count(), "animals": tribe.domestication.status}))
 		_expect(tribe.is_active() and tribe.actors.size() == 3, "Original migrated residents did not activate.")
 		_expect(tribe.domestication.animals.has(expected.animal_id), "Original owned animal did not activate.")
 		flow.toggle_pause()

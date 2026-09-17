@@ -13,8 +13,10 @@ static func hint(step: String, detailed: bool = false) -> String:
 	var values := {"interact": Keys.binding_label("primary_action"),
 		"scan": Keys.binding_label("inspection_mode"), "jump": Keys.binding_label("jump"),
 		"forward": Keys.binding_label("move_forward"), "left": Keys.binding_label("move_left"),
-		"back": Keys.binding_label("move_back"), "right": Keys.binding_label("move_right")}
+		"back": Keys.binding_label("move_back"), "right": Keys.binding_label("move_right"),
+		"orbit": Keys.binding_label("tribe_orbit"), "home": Keys.binding_label("tribe_focus_home"),
+		"selection": Keys.binding_label("tribe_focus_selection")}
 	var result := Text.format_text("GUIDE_HINT_" + step.to_upper(), values)
 	if detailed:
-		result += "\n" + Text.text("GUIDE_DETAIL_" + step.to_upper())
+		result += "\n" + Text.format_text("GUIDE_DETAIL_" + step.to_upper(), values)
 	return result

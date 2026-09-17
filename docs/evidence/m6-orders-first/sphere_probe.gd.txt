@@ -1,0 +1,41 @@
+extends "res://tests/tribal_playtest_test.gd"
+
+func _run() -> void:
+	flow = root.get_node("SessionFlow")
+	saves = root.get_node("SaveGameService")
+	state = root.get_node("GameState")
+	change_scene_to_file(flow.TITLE_SCENE)
+	await scene_changed
+	_expect(Playtest.start(flow), "Start failed")
+	await _until(func() -> bool:
+		var tribe: Node = current_scene.get_node_or_null("Nest/Tribe")
+		return tribe != null and tribe.panel.confirmation_open, 120000)
+	var tribe: Node = current_scene.get_node_or_null("Nest/Tribe")
+	if tribe == null or not tribe.panel.confirmation_open:
+		_expect(false, "Village not ready")
+		await _finish()
+		return
+	saves.autosave_enabled = false
+	tribe.panel._confirm()
+	await _until(func() -> bool: return tribe.is_active() and not tribe.navigation.pending, 30000)
+	tribe.select_all()
+	tribe.set_physics_process(false)
+	tribe.set_process(false)
+	var rows: Array = []
+	for iteration in range(5):
+		var start: int = Time.get_ticks_usec()
+		_expect(tribe.issue_order("wood" if iteration % 2 == 0 else "stone"), "Order failed")
+		var command_ms: float = (Time.get_ticks_usec() - start) / 1000.0
+		start = Time.get_ticks_usec()
+		_expect(saves.save_now(), "Save failed")
+		var save_ms: float = (Time.get_ticks_usec() - start) / 1000.0
+		start = Time.get_ticks_usec()
+		tribe._visuals.rebuild(tribe.village())
+		var visual_ms: float = (Time.get_ticks_usec() - start) / 1000.0
+		start = Time.get_ticks_usec()
+		tribe.panel.refresh()
+		rows.append({"command_ms": command_ms, "separate_save_ms": save_ms, "separate_visual_ms": visual_ms, "separate_ui_ms": (Time.get_ticks_usec()-start)/1000.0})
+		print("M6_SPHERE_ROW ", JSON.stringify(rows.back()))
+		await process_frame
+	print("M6_SPHERE_BASELINE ", JSON.stringify(rows))
+	await _finish()

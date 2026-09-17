@@ -40,6 +40,8 @@ func _run() -> void:
 
 func _versions() -> void:
 	var legacy: Dictionary = Base._serialize_blueprint(Creature.create_default())
+	for part: Dictionary in legacy.parts:
+		for field: String in Revisions.FIELDS: part.erase(field)
 	var original: String = var_to_str(legacy)
 	var migrated: Dictionary = Creature.migrate_snapshot(legacy, "revision-legacy")
 	var encoded: Dictionary = Creature.serialize_snapshot(migrated)
@@ -82,7 +84,7 @@ func _geometry() -> void:
 		Geometry.build(pinned, definition, placement, design)
 		check(Snapshot.describe(old) == Snapshot.describe(pinned), "Pinned geometry changed: " + id)
 		check(pinned.get_meta("geometry_id") == id and pinned.get_meta("geometry_revision") == 1, "Mouth resolver lost reference")
-		placement.part_revision = 2
+		placement.part_revision = Revisions.current_revision(id) + 1
 		var rejected := Node3D.new()
 		Geometry.build(rejected, definition, placement, design)
 		check(rejected.get_child_count() == 0, "Future mouth rendered current geometry")
@@ -119,6 +121,7 @@ func _geometry() -> void:
 
 func _editor() -> Dictionary:
 	var design: Dictionary = Creature.create_default()
+	for part: Dictionary in design.parts: part.part_revision = 1
 	preload("res://creatures/editor/creature_anatomy.gd").reset_all_anchors(design)
 	design = Creature.migrate_snapshot(Creature.serialize_snapshot(design))
 	design.name = "Pinned creature"

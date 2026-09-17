@@ -8,6 +8,7 @@ var adapter: RefCounted
 var creature_design: Dictionary = {}
 var traveled: float = 0.0
 var waiting_for_terrain: bool = false
+var initial_placement: bool = false
 var camera: Camera3D
 var preview: Node3D:
 	get: return get_node("CreatureRuntimeVisual")._preview
@@ -36,7 +37,8 @@ func place(value: Dictionary, heading: Vector3 = Vector3.FORWARD) -> void:
 	up_direction = adapter.up_at(value)
 	global_basis = Cube.frame(up_direction, heading)
 	velocity = Vector3.ZERO
-	terrain.stream_at(up_direction, true)
+	if not initial_placement:
+		terrain.stream_at(up_direction, true)
 
 func export_runtime_state() -> Dictionary:
 	var result: Dictionary = _runtime.duplicate(true)

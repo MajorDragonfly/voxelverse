@@ -1,0 +1,17 @@
+{
+  "autoload/save_game_service.gd": "352f30c50fe3cbeb35ae89fdfd5387a769f88399ad14450fad6a6cf02a3583b5",
+  "core/diagnostics/construction_runtime_probe.gd": "560cb6f2d7215db7846ff9beb3eb75713b7df62b46669a5ec6afe86db6a04257",
+  "core/persistence/atomic_json.gd": "130814d44ad923ee1d479d60be0f35fd46d2ed9aaa03217d7a3c03e0c7a4fbed",
+  "localization/catalog.json": "02558454c55076ae04fe904dd9aedd7446db1076c4f4764004ac8e41f2a6d3bf",
+  "localization/de.po": "247aeb8383ce4956bc3296b3d35f3dd610e07d5473fa9071a6dda2cb866fa99c",
+  "localization/en.po": "162a16344e919d644248fdcababfe4eda854f22fbad2151281dc70512e803ebf",
+  "tests/coordinate_persistence_test.gd": "d7702892e340c1b743be92b43c1d5b19ceddffb6efe2c5c5f67d28d3730dcce5",
+  "tests/tribal_age_test.gd": "2b011d52c828dfc6aa5af11d67fe619fc7f69d4a439c30a666d529c88f159255",
+  "tests/tribe_localization_test.gd": "0f1134c13d645cefcdcd1efe8c676eb583bb86d831991dc5b6b74af9c2102333",
+  "tools/validation/contracts.json": "4450c67924b7ba31fcbb7cac1fb33a8dd39f82b04604292e193c9b41d3b51a93",
+  "ui/tribe/tribe_panel.gd": "9f90785442386bd5fd61da0463dad495e1f7f379f9a309e634dba043b760d065",
+  "world/tribe/tribe_controller.gd": "642f7830e2f5ac566085e2371470f0752e5c04f611a338014be4a90ab19fa704",
+  "world/tribe/village_visuals.gd": "75b7aee65df3d8640640a3184967e2adbca1eeb7da3f2b7473cb306d859c725e",
+  "tests/tribal_order_latency_test.gd": "3e7226327b4f3c3bc9b9e93d65e057c1aae9c0e3bb6e299991f5b237beb1cb46",
+  "tests/tribal_order_latency_test.gd.uid": "3e35ce0423c41f6a2763e148cf0a7c9a49d0058cffe6ecdff71d6ca336efec23"
+}

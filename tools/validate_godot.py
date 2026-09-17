@@ -15,17 +15,28 @@ import time
 if __package__:
     from .check_validation_contracts import discover_tests, read_contracts
     from .validation_support import isolated_env, validation_editor
-    from .validation_plan import build_plan
+    from .validation_plan import build_plan, summarize_plan
     from .validation_provenance import SourceRun
 else:
     from check_validation_contracts import discover_tests, read_contracts
     from validation_support import isolated_env, validation_editor
-    from validation_plan import build_plan
+    from validation_plan import build_plan, summarize_plan
     from validation_provenance import SourceRun
 
 # These acceptance flows include real 300-second production or 90-second growth
 # plus transport and restart. Keep short checks bounded independently.
-LONG_TESTS = {"settlement_runtime_test", "body_travel_test", "spherical_gameplay_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+# The two campaign migration flows also reload three cold spherical worlds;
+# their combined far-scenery loads measured 42–48 seconds each in integration.
+LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "site_transport_runtime_test", "workplace_runtime_test", "spherical_developed_migration_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+LONG_TESTS.update({"surface_support_test", "weather_runtime_test", "graphics_settings_test", "tribal_playtest_test"})
+# This world check opens two cold campaigns (each bounded at 90 s), then
+# observes real colony streaming and reload. CI reached the second load at
+# the old 120 s aggregate cutoff; use the existing bounded world-test budget.
+LONG_TESTS.add("living_creatures_world_test")
+# These also include a second campaign load (editor or fresh process).
+# Their current short-budget CI measurements reached 98.8/106.7 seconds;
+# the two 90 s load watchdogs plus real work must fit the aggregate budget.
+LONG_TESTS.update({"spherical_creature_test", "player_recovery_world_test", "wildlife_hunting_world_test"})
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
@@ -52,6 +63,7 @@ def main():
     selection.add_argument("--contracts", nargs="+", help="Contract IDs from tools/validation/contracts.json")
     selection.add_argument("--changed-since", metavar="REF", help="Plan tests from the checkout versus this exact local Git commit, including staged/unstaged/untracked files")
     parser.add_argument("--plan", action="store_true", help="Print the --changed-since plan as JSON without starting tests or creating output")
+    parser.add_argument("--summary", action="store_true", help="With --plan, print a compact summary of the same selection instead of full JSON")
     parser.add_argument("--list-tests", action="store_true", help="Print selection without starting Godot; not test evidence")
     parser.add_argument("--skip-import", action="store_true")
     parser.add_argument("--skip-main", action="store_true")
@@ -60,6 +72,8 @@ def main():
     args.change_plan = None
     if args.plan and (args.changed_since is None or args.list_tests):
         parser.error("--plan requires --changed-since and cannot be combined with --list-tests")
+    if args.summary and not args.plan:
+        parser.error("--summary requires --plan; it does not run tests")
     # Capture before automatic selection reads contracts and paths. A changed
     # plan must never be executed against a later, differently scoped checkout.
     args.source_run = None if args.plan or args.list_tests else SourceRun(args.project)
@@ -70,7 +84,7 @@ def main():
             parser.error(str(error))
         args.tests = args.change_plan["selected_tests"]
         if args.plan:
-            print(json.dumps(args.change_plan, ensure_ascii=True, indent=2))
+            print(summarize_plan(args.change_plan) if args.summary else json.dumps(args.change_plan, ensure_ascii=True, indent=2))
             return 0
         if args.skip_main and args.change_plan["requires_main"] and not args.list_tests:
             parser.error("This change plan requires full main checks; inspect --plan. Use an explicit --contracts selection for a separately scoped diagnosis.")
@@ -136,8 +150,10 @@ def validate(args):
     # SceneTree tests load gameplay scenes after autoloads exist, like the game.
     # The full sphere chain includes real taming/production, A-B-A with the held
     # animal, cold terrain loads and fresh processes on both sides of the trip.
+    # The complete mouth matrix/editor/save/restart check measured 158.8 s on
+    # the integrated catalog. Bound that test at 240 s; keep other short limits.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 120) for name in tests]
+                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test"} else 120) for name in tests]
     if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:

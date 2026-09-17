@@ -2,6 +2,7 @@ extends RefCounted
 ## WEATHER-01. Pure presentation contract derived from the existing campaign clock.
 ## No wall clock, global RNG, simulation catch-up or gameplay damage.
 const Climate = preload("res://world/weather/planet_climate.gd")
+const StormPreview = preload("res://world/weather/storm_preview.gd")
 const SCHEMA: int = 1
 const TRANSITION_SECONDS: float = 35.0
 const CONDITIONS: Dictionary = {
@@ -24,6 +25,12 @@ static func climate_catalog() -> Dictionary:
 	for id in Climate.CATALOG:
 		result[id] = {"implemented": true, "hazards": [], "revision": Climate.REVISION, "conditions": CONDITIONS.keys()}
 	return result
+
+static func supports_preview(condition: String) -> bool:
+	return CONDITIONS.has(condition) or StormPreview.PROFILES.has(condition)
+
+static func preview_storm(snapshot: Dictionary, kind: String) -> Dictionary:
+	return StormPreview.apply(snapshot, kind)
 
 static func sample(body_id: String, seed_value: int, elapsed_seconds: float,
 		climate_id: String = "earth_temperate") -> Dictionary:

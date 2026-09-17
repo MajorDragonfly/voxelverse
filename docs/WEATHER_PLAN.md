@@ -76,7 +76,36 @@ vor Backup-Rückfall. [Vertrag und Integrationsübergabe](WORK_WEATHER02_PLANET_
 
 Terrain-/Biome-/Biosphärengeneration und die vollständige Vakuum-Himmelsdarstellung
 bleiben bei ihren Fachbesitzern. Diese Lieferung aktiviert keine Extremstürme
-oder Schäden; WEATHER-03/04 bleiben offen.
+oder Schäden. Die begrenzte Diagnosevorschau aus WEATHER-03 folgt unten;
+reguläre Extremstürme und WEATHER-04 bleiben offen.
+
+## WEATHER-03-STORM-PREVIEW – Sand und Asche als Diagnosevorschau
+
+Die expliziten Startparameter `--weather-preview=sandstorm` bzw.
+`--weather-preview=ashstorm` zeigen auf **ungeschützten** Körpern mit gespeichertem
+Profil `arid` bzw. `volcanic` einen deterministischen Sturmzyklus. Heimat,
+historisch geschützte Planeten, Vakuum und unpassende Profile bleiben ausgeschlossen.
+Ohne Parameter bleibt das normale Wetter aktiv. Es werden keine regulären
+Extremprofile freigeschaltet und keine Vorschauwerte gespeichert.
+
+Ruhe (75–105 s) → Vorwarnung (30 s) → Anstieg (30 s) → Höhepunkt (45–60 s) →
+Abklingen (45 s). Körper-ID, Seed, Sturmart und gespeicherte Kampagnenzeit bestimmen
+die Phase. Ein analytisch integrierter Windversatz hält Partikelbewegungen auch
+nach langen Sitzungen stetig. Der Sichtweitenwunsch sinkt im Höhepunkt auf
+500 m für Sand bzw. 700 m für Asche; Wind erreicht vor Tangentialprojektion
+höchstens 18 bzw. 12 m/s. Der vorhandene Atmosphärenbesitzer liest diese Werte.
+
+Ockerfarbene Sand- und graue Aschepartikel teilen sich den bestehenden
+384-Instanzen-Pool; im Höhepunkt werden 346 Instanzen eingereicht, zusätzlich
+durch Boden, Dach und Kameranähe begrenzt. Unter Wasser bleibt die Darstellung
+ausgeblendet. Die reine Diagnoseanzeige benennt Vorschau, Sturmart und Phase
+auf Deutsch/Englisch, mit Countdown während der Vorwarnung. Sie verdeckt keine
+Pausenmenüs oder Inspektionsansicht. Ein reguläres Prognose-HUD bleibt WEATHER-05.
+
+`hazard_kind = none` und `hazard_intensity = 0` bleiben erhalten. Asche bedeutet
+hier weder Feuer, Glut noch Hitze-/Atemschaden. Schutzmechanik, Audio, räumlich
+begrenzte Sturmfronten und reguläre Freigabe bleiben Folgearbeit.
+[Schnittstelle und Prüfumfang](WORK_WEATHER03_STORM_PREVIEW.md).
 
 ## Daten- und Darstellungsvertrag
 
@@ -108,6 +137,10 @@ Besitzer akzeptieren und sich nach Szenenwechsel neu binden.
 | `front_index`, `seconds_to_next_front` | Deterministische Frontnummer und Restzeit im örtlichen Grundtakt; konkrete Prognosen über `forecast()` |
 | `hazard_kind`, `hazard_intensity` | Aktuell immer `none` / `0.0`; keine wirksame Schadensberechnung |
 | `preview` | Nur lokale Startparameter-Vorschau; wird nicht gespeichert |
+| `storm_preview_schema`, `storm_kind`, `storm_phase` | Nur in freigegebener Diagnose: Version 1, `sandstorm`/`ashstorm`, `calm`/`warning`/`rising`/`peak`/`falling` |
+| `storm_intensity`, `storm_particle_intensity`, `storm_particle_color` | Glatte normierte Sturmstärke, Staubanteil im bestehenden Pool, Godot-Color; kein Regen-/Schneeanteil |
+| `storm_warning`, `storm_phase_remaining`, `storm_phase_progress`, `storm_cycle` | Vorwarnflag, verbleibende Kampagnensekunden, Phasenfortschritt 0–1, Zyklusnummer |
+| `wind_projection_strength` | Länge des körperfesten Windes nach Tangentialprojektion, 0–1 |
 | `regional_schema`, `regional_seconds`, `region_strength` | Additiver Regionalvertrag 1, örtliche Frontzeit, Stärke des lokalen Wolkenbandes |
 | `rain_intensity`, `snow_intensity`, `snow_fraction` | Regen-/Schneeanteile; beide Intensitäten zusammen ergeben `precipitation` |
 | `wind_velocity`, `wind_offset`, `gust_strength` | Körperfester Windvektor in m/s, analytischer Versatz in lokalen Tangentialmetern, Böenstärke 0–1 |
@@ -155,8 +188,12 @@ Epoche und kein Pflicht-Hindernis auf der friedlichen Heimatwelt.
 Normal starten und in einem feuchten Gebiet ungefähr 6–12 Kampagnenminuten spielen; trockene Regionen können regenfrei bleiben. Für unmittelbare Sichtprüfung
 kann der native Build mit `-- --weather-preview=rain` gestartet werden, zum
 Beispiel `Voxelverse.exe -- --weather-preview=rain`. Erlaubte Vorschauen:
-`clear`, `breeze`, `overcast`, `drizzle`, `rain`, `snow`. Schneevorschau: `Voxelverse.exe -- --weather-preview=snow`. Unbekannte oder extreme Namen
-werden ignoriert. Die Vorschau endet beim Neustart ohne Parameter und verändert
+`clear`, `breeze`, `overcast`, `drizzle`, `rain`, `snow`, zusätzlich die oben
+beschränkten `sandstorm` und `ashstorm`. Schneevorschau:
+`Voxelverse.exe -- --weather-preview=snow`. Unbekannte Namen werden ignoriert.
+Eine Sturmvorschau startet am gespeicherten Zykluszeitpunkt, nicht automatisch
+am Höhepunkt. Auf der geschützten Heimat ist sie absichtlich nicht sichtbar.
+Die Vorschau endet beim Neustart ohne Parameter und verändert
 weder Save noch Wetterzeit. Kamera nach oben drehen, freies Feld, Dach,
 Wasserlinie, Pause und Stammeskamera prüfen.
 

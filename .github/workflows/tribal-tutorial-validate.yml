@@ -1,0 +1,60 @@
+name: Tribal tutorial
+
+on:
+  pull_request:
+    paths:
+      - 'core/onboarding_progress.gd'
+      - 'ui/frontend/first_steps.gd'
+      - 'ui/frontend/guidance_text.gd'
+      - 'ui/frontend/tribal_guidance.gd'
+      - 'ui/tribe/tribe_panel.gd'
+      - 'world/tribe/tribe_controller.gd'
+      - 'world/tribe/tribe_camera.gd'
+      - 'localization/**'
+      - 'tests/tribal_guidance*'
+      - 'tools/review_tribal_tutorial.py'
+      - '.github/workflows/tribal-tutorial-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tribal-tutorial-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tutorial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Check tutorial actions, persistence and existing consumers
+        run: >-
+          python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
+          --tests tribal_guidance_test tribal_guidance_world_test onboarding_test
+          onboarding_guidance_world_test save_participants_test tribe_localization_test
+          tribal_camera_test tribal_building_preview_test --skip-main
+          --output "${{ runner.temp }}/tribal-tutorial-validation"
+      - name: Install software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Render the tutorial on the sphere
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: >-
+          xvfb-run -a -s '-screen 0 1920x1080x24'
+          python3 tools/review_tribal_tutorial.py --godot "${{ steps.engine.outputs.godot }}"
+          --output "${{ runner.temp }}/tribal-tutorial-render"
+      - name: Upload tutorial logs and native screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribal-tutorial-review
+          path: |
+            ${{ runner.temp }}/tribal-tutorial-validation
+            ${{ runner.temp }}/tribal-tutorial-render
+          retention-days: 14

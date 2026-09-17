@@ -225,8 +225,14 @@ func _gameplay_actions() -> void:
 	wildlife._warning = 0.0
 	wildlife._ignore_player = false
 	wildlife._attack_timer = 0.0
+	var health_before: float = player.current_health
 	wildlife._try_predator_attack(player)
+	check(wildlife._bite_target != null and wildlife._preview._articulation.debug_state().action != "bite" and player.current_health == health_before, "Predator skipped its cancellable wind-up")
+	# The living-creature controller lands its bite after the warning motion.
+	# Advance the real controller while this fixture holds both actors in place.
+	for tick in range(20): wildlife._physics_process(1.0 / 60.0)
 	check(wildlife._preview._articulation.debug_state().action == "bite", "Predator attack did not animate")
+	check(player.current_health < health_before, "Predator bite animated without damage")
 	wildlife._die()
 	check(wildlife._preview._articulation.debug_state().action == "", "Death retained an attack")
 	wildlife.free()

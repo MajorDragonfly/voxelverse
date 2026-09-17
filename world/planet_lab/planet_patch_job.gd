@@ -5,6 +5,7 @@ const Batch = preload("res://world/planet_lab/planet_mesh_batch.gd")
 const MAX_WORKERS: int = 4
 var body: Dictionary
 var direction: Vector3
+var view_direction := Vector3.ZERO
 var previous_masks: Dictionary = {}
 var available: Dictionary = {}
 var result: Dictionary = {}
@@ -29,7 +30,7 @@ func start() -> void:
 
 
 func _select() -> void:
-	result = Layout.new(body.radius).choose(direction, previous_masks)
+	result = Layout.new(body.radius).choose(direction, previous_masks, view_direction)
 	selection_usec = Time.get_ticks_usec() - _started
 
 

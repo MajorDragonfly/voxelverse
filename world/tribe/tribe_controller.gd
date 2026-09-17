@@ -1,5 +1,6 @@
 extends Node
 
+signal guidance_action(action: String, amount: float)
 signal order_resolved(order: StringName, command_id: String, accepted: bool)
 var _order_sequence: int = 0
 
@@ -30,6 +31,7 @@ var neighbors: Node3D
 var home: Node
 var player: CharacterBody3D
 var panel: CanvasLayer
+var camera_rig: RefCounted
 var camera: Camera3D
 var actors: Dictionary = {}
 var selected: Array[String] = []
@@ -56,9 +58,12 @@ var _player_visible_before: bool = true
 var _original_camera: Camera3D
 var _focus := Vector3.ZERO
 var _zoom: float = 26.0
+## Last command diagnostics, independent from the campaign/save state.
+var last_order_metrics: Dictionary = {}
 var _timer: float = 0.0
 var _transaction: bool = false
 var placement: String = ""
+var building_preview: Node3D
 var _route_retry: float = 0.0
 var _stalls: Dictionary = {}
 signal community_event(kind: StringName, details: Dictionary)
@@ -76,6 +81,9 @@ func _ready() -> void:
 	panel = TribePanel.new()
 	panel.controller = self
 	add_child(panel)
+	building_preview = preload("res://world/tribe/building_placement_preview.gd").new()
+	building_preview.controller = self
+	add_child(building_preview)
 	_saves.game_loaded.connect(_invalidate)
 	_state.phase_changed.connect(_invalidate)
 	_state.world_seed_changed.connect(_invalidate)
@@ -105,15 +113,11 @@ func _process(delta: float) -> void:
 	if not _active and int(_state.current_phase) == 1 and not village().is_empty():
 		_activate()
 	if is_active():
-		var pan := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), 0, float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
-		_focus += Space.frame(self, anchor()) * pan * delta * 10.0
-		var offset: Vector3 = _focus - anchor()
-		offset = offset.slide(Space.up(self, anchor()))
-		_focus = anchor() + offset.limit_length(NeighborRuntime.Model.SITE_RADIUS if village_body().has("tribal_neighbor") else 10.0)
-		_update_camera()
+		camera_rig.advance(delta)
 	_timer -= delta
 	if _timer <= 0:
 		_timer = 0.2
+		if _active and is_instance_valid(_visuals): _visuals.update_stock(village())
 		panel.refresh()
 
 func _invalidate(_value: Variant) -> void:
@@ -254,9 +258,11 @@ func _activate() -> void:
 	camera = Camera3D.new()
 	get_parent().get_parent().add_child(camera)
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera.far = 400.0
+	camera.near = 0.1
+	camera.far = 1200.0
 	_focus = anchor()
-	_update_camera()
+	camera_rig = preload("res://world/tribe/tribe_camera.gd").new()
+	camera_rig.setup(self)
 	camera.make_current()
 	_visuals = Visuals.new()
 	get_parent().get_parent().add_child(_visuals)
@@ -292,6 +298,9 @@ func _deactivate() -> void:
 	_goals.clear()
 	placement = ""
 	_stalls.clear()
+	if camera_rig != null:
+		camera_rig.close()
+		camera_rig = null
 	if is_instance_valid(camera):
 		Space.untrack(camera)
 		camera.queue_free()
@@ -321,14 +330,12 @@ func _deactivate() -> void:
 		_original_camera.make_current()
 
 func _update_camera() -> void:
-	camera.size = _zoom
-	camera.v_offset = -_zoom * 0.16
-	camera.global_position = Space.offset(self, _focus, Vector3(0, 22, 17))
-	camera.look_at(_focus, Space.up(self, _focus))
+	if camera_rig != null: camera_rig.update_camera()
 
 func zoom(amount: float) -> void:
-	_zoom = clampf(_zoom + amount, 16.0, 40.0)
-	_update_camera()
+	if not is_active(): return
+	_zoom = clampf(_zoom + amount, camera_rig.MIN_ZOOM, camera_rig.MAX_ZOOM)
+
 
 func member_record(identity: String) -> Dictionary:
 	for member: Dictionary in village().get("members", []):
@@ -345,12 +352,16 @@ func select_member(identity: String, additive: bool = false) -> void:
 		selected.erase(identity)
 	else:
 		selected.append(identity)
+	if is_active() and not selected.is_empty():
+		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
 
 func select_all() -> void:
 	selected.clear()
 	for identity: String in actors:
 		selected.append(identity)
+	if is_active() and not selected.is_empty():
+		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
 
 func screen_select(rect: Rect2, additive: bool) -> void:
@@ -360,13 +371,19 @@ func screen_select(rect: Rect2, additive: bool) -> void:
 		var actor: Node3D = actors[identity]
 		if not camera.is_position_behind(actor.global_position) and rect.has_point(camera.unproject_position(actor.global_position + Space.up(self, actor.global_position))) and identity not in selected:
 			selected.append(identity)
+	if is_active() and not selected.is_empty():
+		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
 
-func screen_command(position: Vector2) -> void:
+func ground_hit(position: Vector2) -> Dictionary:
+	if not is_instance_valid(camera) or not is_instance_valid(player): return {}
 	var origin: Vector3 = camera.project_ray_origin(position)
 	var ray := PhysicsRayQueryParameters3D.create(origin, origin + camera.project_ray_normal(position) * 200, 1)
 	ray.exclude = [player.get_rid()]
-	var hit: Dictionary = player.get_world_3d().direct_space_state.intersect_ray(ray)
+	return player.get_world_3d().direct_space_state.intersect_ray(ray)
+
+func screen_command(position: Vector2) -> void:
+	var hit: Dictionary = ground_hit(position)
 	if hit.is_empty():
 		status = "Hier ist kein geladener Boden."
 		_resolve_order("move", false)
@@ -389,24 +406,33 @@ func screen_command(position: Vector2) -> void:
 	issue_order("move", target)
 
 func issue_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0) -> bool:
+	var started: int = Time.get_ticks_usec()
+	last_order_metrics = {"order": order, "ok": false, "committed": false}
 	if not is_active() or selected.is_empty():
 		status = "Wähle zuerst mindestens einen Bewohner aus." if selected.is_empty() else "Die Gruppe kann gerade keine Befehle annehmen."
 		_resolve_order(order, false)
-		return false
+		return _finish_order_timing(started, false)
 	if order in Economy.STATIONS.keys() + Housing.BUILDS and destination == Vector3.ZERO and is_active():
 		if int(village()["tools"]) == 0:
 			status = "Zuerst ein Steinwerkzeug herstellen."
 			_resolve_order(order, false)
-			return false
+			return _finish_order_timing(started, false)
 		if not village()["project"].is_empty() and village()["project"]["kind"] == order:
 			destination = Space.resolve(self, village()["project"]["position"])
 		else:
 			placement = order
 			status = "Rechtsklick auf einen freien Bauplatz · Esc bricht die Platzierung ab."
 			panel.refresh()
-			return true
+			return _finish_order_timing(started, true)
 	var success: bool = _commit_order(order, destination, movement_limit)
+	var feedback_started: int = Time.get_ticks_usec()
 	_resolve_order(order, success)
+	last_order_metrics["feedback_ms"] = (Time.get_ticks_usec() - feedback_started) / 1000.0
+	return _finish_order_timing(started, success)
+
+func _finish_order_timing(started: int, success: bool) -> bool:
+	last_order_metrics["total_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+	last_order_metrics["ok"] = success
 	return success
 
 func _resolve_order(order: String, success: bool) -> void:
@@ -415,28 +441,32 @@ func _resolve_order(order: String, success: bool) -> void:
 	panel.refresh()
 
 func issue_workplace(identity: String) -> bool:
+	var started: int = Time.get_ticks_usec()
+	last_order_metrics = {"order": "workplace", "ok": false, "committed": false}
 	if not is_active() or selected.is_empty():
 		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_SELECT_RESIDENT")
 		_resolve_order("workplace", false)
-		return false
+		return _finish_order_timing(started, false)
 	var key: String = Economy.station_key(village(), identity)
 	if key.is_empty():
 		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNKNOWN")
 		_resolve_order("workplace", false)
-		return false
+		return _finish_order_timing(started, false)
 	var destination: Vector3 = Space.resolve(self, village().economy.stations[key].position)
 	if not navigation.is_ready() or navigation.route(anchor(), destination).is_empty():
 		status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNREACHABLE")
 		_resolve_order("workplace", false)
-		return false
+		return _finish_order_timing(started, false)
 	for identity_selected: String in selected:
 		if not actors.has(identity_selected) or navigation.route(actors[identity_selected].global_position, destination).is_empty():
 			status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_UNREACHABLE")
 			_resolve_order("workplace", false)
-			return false
+			return _finish_order_timing(started, false)
 	var success: bool = _commit_order(Economy.STATIONS[Economy.station_kind(key)], Vector3.ZERO, 18.0, identity)
+	var feedback_started: int = Time.get_ticks_usec()
 	_resolve_order("workplace", success)
-	return success
+	last_order_metrics["feedback_ms"] = (Time.get_ticks_usec() - feedback_started) / 1000.0
+	return _finish_order_timing(started, success)
 
 func control_construction(action: String) -> Dictionary:
 	var text = preload("res://core/localization/ui_text.gd")
@@ -464,7 +494,64 @@ func control_construction(action: String) -> Dictionary:
 	panel.refresh()
 	return result
 
+## Shared, non-committing preflight for the ghost and the actual click.
+## The writer always checks again; a previously green ghost is not authorization.
+func placement_check(kind: String, target: Vector3) -> Dictionary:
+	var result := {"ok": false, "position": target, "reason": ""}
+	if not is_active() or selected.is_empty():
+		result.reason = "Wähle zuerst mindestens einen Bewohner aus." if selected.is_empty() else "Die Gruppe kann gerade keine Befehle annehmen."
+		return result
+	if kind not in Economy.STATIONS.keys() + Housing.BUILDS or not target.is_finite():
+		result.reason = "Hier ist kein geladener Boden."
+		return result
+	for identity: String in selected:
+		if SiteTransport.bound(body(), identity):
+			result.reason = preload("res://core/localization/ui_text.gd").text("SITE_FREIGHT_BUSY")
+			return result
+	if not navigation.is_ready():
+		result.reason = "Die Dorfwege werden geprüft. Bitte einen Moment warten."
+		return result
+	var data: Dictionary = village()
+	result.reason = _construction_problem(kind, data)
+	if not result.reason.is_empty(): return result
+	if not data.project.is_empty():
+		result.reason = "Schließe zuerst die laufende Arbeit ab."
+		return result
+	var snapped: Vector3 = navigation.snap(target)
+	if not snapped.is_finite() or snapped.distance_to(target) > 1.8:
+		result.reason = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
+		return result
+	result.position = snapped
+	if neighbors.occupies(snapped) or (settlements != null and settlements.occupies(snapped)) or not (navigation.free_shelter(snapped, data, kind) if kind in Housing.BUILDS else navigation.free_workplace(snapped, data, kind)):
+		result.reason = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
+		return result
+	for identity: String in selected:
+		if not actors.has(identity) or navigation.route(actors[identity].global_position, snapped).is_empty():
+			result.reason = "Ein ausgewählter Bewohner erreicht diesen Bauplatz nicht."
+			return result
+	result.ok = true
+	return result
+
+func _construction_problem(order: String, data: Dictionary) -> String:
+	if Model.Construction.state(data.project) == "recovering":
+		return preload("res://core/localization/ui_text.gd").text("CONSTRUCTION_RECOVERING")
+	if order in Economy.STATIONS and Economy.next_station(data, order).is_empty():
+		return preload("res://core/localization/ui_text.gd").text("WORKPLACE_LIMIT")
+	if (order == "tool" and int(data.tools) == 1) or (order in Housing.KINDS and data.housing.homes.size() >= Housing.MAX_HOMES) or (order == "garden" and int(data.garden) == 1) or (order in Housing.ANIMAL_SITES and data.husbandry.pens.size() >= Husbandry.MAX_PENS):
+		return "Dieser Ausbau ist bereits abgeschlossen."
+	if order != "tool" and int(data.tools) == 0:
+		return "Stelle zuerst ein Steinwerkzeug her."
+	if not data.project.is_empty() and data.project.kind != order:
+		return "Schließe zuerst die laufende Arbeit ab."
+	if data.project.is_empty():
+		var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
+		for resource: String in costs[order]:
+			if int(data.stock[resource]) < int(costs[order][resource]):
+				return "Es fehlen eingelagerte Materialien: %d %s." % [costs[order][resource], Economy.TITLES[resource]]
+	return ""
+
 func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_limit: float = 18.0, workplace_id: String = "") -> bool:
+	var started: int = Time.get_ticks_usec()
 	for id: String in selected:
 		if SiteTransport.bound(body(), id):
 			status = preload("res://core/localization/ui_text.gd").text("SITE_FREIGHT_BUSY")
@@ -487,36 +574,17 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 				return false
 	var costs: Dictionary = Model.COSTS.merged(Economy.COSTS)
 	if order in costs:
-		if Model.Construction.state(data.project) == "recovering":
-			status = preload("res://core/localization/ui_text.gd").text("CONSTRUCTION_RECOVERING")
-			return false
-		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty():
-			status = preload("res://core/localization/ui_text.gd").text("WORKPLACE_LIMIT")
-			return false
-		if (order == "tool" and int(data["tools"]) == 1) or (order in Housing.KINDS and data["housing"]["homes"].size() >= Housing.MAX_HOMES) or (order == "garden" and int(data["garden"]) == 1) or (order in Housing.ANIMAL_SITES and data["husbandry"]["pens"].size() >= Husbandry.MAX_PENS):
-			status = "Dieser Ausbau ist bereits abgeschlossen."
-			return false
-		if order != "tool" and int(data["tools"]) == 0:
-			status = "Stelle zuerst ein Steinwerkzeug her."
-			return false
-		if not data["project"].is_empty() and data["project"]["kind"] != order:
-			status = "Schließe zuerst die laufende Arbeit ab."
+		var problem: String = _construction_problem(order, data)
+		if not problem.is_empty():
+			status = problem
 			return false
 		if data["project"].is_empty():
 			if order in Economy.STATIONS.keys() + Housing.BUILDS:
-				var snapped: Vector3 = navigation.snap(destination)
-				if snapped.distance_to(destination) > 1.8 or neighbors.occupies(snapped) or (settlements != null and settlements.occupies(snapped)) or not (navigation.free_shelter(snapped, data, order) if order in Housing.BUILDS else navigation.free_workplace(snapped, data, order)):
-					status = "Hier fehlen Platz, trockener Boden oder ein freier Weg zum Lager."
+				var checked: Dictionary = placement_check(order, destination)
+				if not checked.ok:
+					status = checked.reason
 					return false
-				destination = snapped
-				for identity: String in selected:
-					if navigation.route(actors[identity].global_position, destination).is_empty():
-						status = "Ein ausgewählter Bewohner erreicht diesen Bauplatz nicht."
-						return false
-			for kind: String in costs[order]:
-				if int(data["stock"][kind]) < int(costs[order][kind]):
-					status = "Es fehlen eingelagerte Materialien: %d %s." % [costs[order][kind], Economy.TITLES[kind]]
-					return false
+				destination = checked.position
 			for kind: String in costs[order]:
 				data["stock"][kind] -= costs[order][kind]
 			data["project"] = {"kind": order, "progress": 0.0}
@@ -554,20 +622,26 @@ func _commit_order(order: String, destination: Vector3 = Vector3.ZERO, movement_
 		member["stage"] = "return" if member["cargo"] != "" else "outbound"
 		if order == "move":
 			member["destination"] = Space.encode(self, _workplace(destination, selected.find(identity)) if selected.size() > 1 else destination)
+	last_order_metrics["prepare_ms"] = (Time.get_ticks_usec() - started) / 1000.0
 	_transaction = true
+	started = Time.get_ticks_usec()
 	var success: bool = _saves.save_now()
+	last_order_metrics["save_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+	last_order_metrics["committed"] = success
 	if not success:
 		replace_village(before)
 	_transaction = false
 	_routes.clear()
 	_goals.clear()
 	status = "Auftrag gespeichert." if success else "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten."
+	started = Time.get_ticks_usec()
 	if success:
 		placement = ""
 		_visuals.rebuild(village())
 		if Housing.obstacles(before) != Housing.obstacles(village()):
 			navigation.begin(home, anchor(), village(), navigation_extent())
-	panel.refresh()
+	last_order_metrics["visuals_ms"] = (Time.get_ticks_usec() - started) / 1000.0
+	# The public command emits its receipt and refreshes once in _resolve_order.
 	return success
 
 func _physics_process(delta: float) -> void:
@@ -803,9 +877,10 @@ func assign_profession(profession: String) -> bool:
 		member.erase("workplace_id")
 		member["stage"] = "return" if member["cargo"] != "" else "outbound"
 	var success: bool = _save_economy(before)
-	if success:
+	if success and not placement.is_empty():
 		placement = ""
 		panel.refresh()
+	if success and profession != "none": guidance_action.emit("tribe_profession", 1.0)
 	return success
 
 func receive_milk(batch: Dictionary) -> bool:
