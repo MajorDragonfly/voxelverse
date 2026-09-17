@@ -88,6 +88,62 @@ python3 tools/work_packet.py start PERF-COLD-START --owner MEIN-CHAT
 integrierten Voraussetzungen zurück. Die sechs vorbereiteten Briefe sind Vorschläge;
 die laufenden M4-/ARCH-/Audio-Zuweisungen in #137 bleiben maßgeblich.
 
+## Skill und kompakter Paketstart
+
+Der persönliche Skill **Voxelverse** führt die vorhandenen Helfer zusammen.
+„Setze das nächste Arbeitspaket um“ und konkrete Änderungswünsche bleiben die
+Arbeitsaufträge. Der Skill nutzt die aktuellen Repository-Regeln und kopiert
+weder den Paketkatalog noch Testlisten oder den Projektstatus. Bereits installierte
+Fachrollen und ihre Zuständigkeiten können denselben Einstieg verwenden.
+
+```sh
+python3 tools/work_context.py next --live --limit 3 --save-snapshot ../voxelverse-start.json --context-id paketstart-1
+python3 tools/work_context.py show PERF-COLD-START --snapshot ../voxelverse-start.json --context-id paketstart-1
+```
+
+Der erste Befehl liest aktuellen main, das Koordinationsticket und die paginierte
+Liste offener PRs. Er zeigt tatsächlichen lokalen HEAD/Branch, den **datierten**
+Dashboard-Stand und höchstens drei Planungskandidaten in Katalogreihenfolge.
+Die Priorität und Auswahl folgen weiterhin dem konkreten Nutzerauftrag und der
+zentralen Runde. Aktive, gelieferte, integrierte, unbekannte oder von nicht
+integrierten Voraussetzungen abhängige Katalogeinträge werden nicht vorgeschlagen.
+Exakte Paketverweise in offenen PRs oder im Koordinationsticket schließen weitere
+Kandidaten vorsorglich zur manuellen Einordnung aus; daraus wird kein konkreter
+Bearbeitungsstatus abgeleitet. Abweichend benannte PRs und Zuweisungen brauchen
+den gezielten Abgleich. Bei einem Umsetzungsauftrag einen tatsächlich bearbeitbaren
+Kandidaten wählen; eine nur auf Lars' Referenz-PC mögliche Abnahme hält unabhängige
+Entwicklungsarbeit nicht auf.
+
+Den vollständigen Tickettext einmal aus `observation.issue.body` im Snapshot
+lesen. Dadurch benötigt der zweite Befehl keinen weiteren Abruf. Der Snapshot
+liegt außerhalb des Checkouts, ist maximal 30 Minuten für denselben Paketstart
+gültig und an Repository, HEAD und die zugrunde liegenden Planungsdateien gebunden.
+Er ist eine datierte Beobachtung, keine Sperre und keine zweite Statusquelle.
+Einen eigenen Dateinamen und eine eigene Kontext-ID je Paketstart verwenden.
+
+Ohne `--live` oder `--snapshot` bleibt der Helfer vollständig offline und
+kennzeichnet die fehlende Live-Prüfung. `--busy ID ...` berücksichtigt bekannte
+belegte Katalogpakete und ihre deklarierten Datei-/Bereichskonflikte;
+`--exclude ID ...` entfernt explizit ausgeschlossene Vorschläge. Beide Optionen
+reservieren nichts. Unbekannte Zuweisungen gelten niemals als frei. Mit `--json`
+stehen dieselben Angaben maschinenlesbar zur Verfügung. API-Fehler und veraltete
+Snapshots brechen sichtbar ab. Fehlt direkter API-Zugang, dieselben begrenzten
+Quellen über den verfügbaren GitHub-Connector lesen; keinen Offline-Bericht als
+aktuellen Live-Stand ausgeben.
+
+Für die Testplanung gibt es eine kurze Ansicht des unveränderten Auswahlplans:
+
+```sh
+python3 tools/validate_godot.py --changed-since BASIS_SHA --plan --summary
+```
+
+`BASIS_SHA` ist der volle vereinbarte Basiscommit. Die Ausgabe enthält Quellstand,
+Umfang, Testanzahl, Verträge und Gründe für eine Erweiterung zur Vollsuite.
+`--summary` weglassen zeigt den vollständigen JSON-Plan; beide Plan-Optionen
+weglassen führt die Prüfungen aus. Es werden weder Tests noch Import-/Merge-Gates
+abgeschwächt. Das bestehende `work_packet.py handoff` erzeugt anschließend die
+Übergabe. Plan, Testnachweis, Integration und Ziel-PC-Abnahme bleiben unterscheidbar.
+
 ## Grafikfehler aus PR #142
 
 Der Forward+-Kugelfluss scheiterte einmal am bisherigen 50-Sekunden-Ladelimit.

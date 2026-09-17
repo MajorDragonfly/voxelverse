@@ -3,6 +3,7 @@
 Rules describe domain boundaries and direct consumers, not a complete static
 dependency graph. Unknown paths or shared infrastructure require the full suite.
 """
+from collections import Counter
 from fnmatch import fnmatchcase
 import hashlib
 import json
@@ -157,3 +158,30 @@ def build_plan(project, reference):
                 rules_sha256=hashlib.sha256((project / RULES).read_bytes()).hexdigest(),
                 limits="Conservative path rules, not a complete dependency graph or test result. Unknown paths expand to all tests. Default integration CI remains full; exports, graphics and target-PC checks stay separate.")
     return plan
+
+
+def summarize_plan(plan):
+    """Render the existing plan compactly; never change its selection or execute it."""
+    source = plan["source"]
+    reasons = Counter(item["reason"] for item in plan["decisions"])
+    contracts = plan["contracts"]
+    shown = ", ".join(contracts[:8]) or "none"
+    if len(contracts) > 8:
+        shown += f" (+{len(contracts) - 8} more; see full JSON plan)"
+    # Aggregate path decisions instead of printing thousands of paths/test names.
+    # Preserve the exact source IDs and the reason for widening to a full suite.
+    return "\n".join([
+        "VALIDATION PLAN — no tests executed",
+        f"Base: {source['base_commit']}",
+        f"HEAD: {source['head_commit']}",
+        f"Committed tree: {source['head_tree']} (checkout changes included below)",
+        f"Changed paths: {len(source['changes'])}",
+        f"Scope: {plan['scope']}",
+        f"Selected tests: {plan['selected_test_count']}/{plan['registered_test_count']}",
+        f"Main/runtime checks required: {'yes' if plan['requires_main'] else 'no'}",
+        f"Contracts: {shown}",
+        "Reasons: " + (", ".join(f"{key}={count}" for key, count in sorted(reasons.items())) or "unchanged"),
+        "Remove --summary to inspect the complete JSON plan and per-file hashes.",
+        "Remove --plan and --summary to run this selection against the then-current checkout.",
+        "Integration CI, native exports, graphics and target-PC acceptance remain separate.",
+    ])

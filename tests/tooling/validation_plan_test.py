@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
 import validate_godot
 from check_validation_contracts import read_contracts
-from validation_plan import build_plan, read_rules, select_changes
+from validation_plan import build_plan, read_rules, select_changes, summarize_plan
 
 
 class ValidationPlanTest(unittest.TestCase):
@@ -136,6 +136,48 @@ class ValidationPlanTest(unittest.TestCase):
             self.assertEqual(text.strip(), "")
             engine.assert_not_called()
         self.assertFalse(destination.exists())
+
+    def test_summary_keeps_full_selection_and_source_without_running_checks(self):
+        self.write("core/save.gd", "changed writer\n")
+        destination = self.project.parent / "not-created"
+        plan = self.plan()
+        before = copy.deepcopy(plan)
+        summary = summarize_plan(plan)
+        self.assertEqual(plan, before)
+        self.assertIn("Scope: full", summary)
+        self.assertIn("Selected tests: 3/3", summary)
+        self.assertIn("Main/runtime checks required: yes", summary)
+        self.assertIn("shared_infrastructure_requires_full=1", summary)
+        self.assertIn(self.base, summary)
+        self.assertIn(plan["source"]["head_tree"], summary)
+        self.assertIn("no tests executed", summary)
+        with patch.object(validate_godot, "validation_editor") as engine, patch.object(validate_godot, "SourceRun") as source:
+            code, output = self.cli(["--changed-since", self.base, "--plan", "--summary", "--output", str(destination)])
+            self.assertEqual(code, 0)
+            self.assertEqual(output.strip(), summary)
+            engine.assert_not_called()
+            source.assert_not_called()
+        self.assertFalse(destination.exists())
+
+    def test_summary_remains_bounded_for_many_files_and_contracts(self):
+        plan = self.plan()
+        plan["source"]["changes"] = [{"path": f"unknown/{i}.gd"} for i in range(10000)]
+        plan["decisions"] = [{"reason": "unmapped_path_requires_full"} for _ in range(10000)]
+        plan["contracts"] = [f"contract_{i}" for i in range(200)]
+        summary = summarize_plan(plan)
+        self.assertIn("Changed paths: 10000", summary)
+        self.assertIn("unmapped_path_requires_full=10000", summary)
+        self.assertIn("+192 more", summary)
+        self.assertLess(len(summary), 1600)
+
+    def test_summary_rejects_execution_and_list_modes(self):
+        for flags in [["--summary"], ["--changed-since", self.base, "--summary"],
+                      ["--changed-since", self.base, "--plan", "--summary", "--list-tests"]]:
+            with self.subTest(flags=flags), patch.object(validate_godot, "validation_editor") as engine:
+                with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
+                    self.cli(flags)
+                self.assertEqual(caught.exception.code, 2)
+                engine.assert_not_called()
 
     def test_invalid_ref_and_conflicting_selectors_stop_before_engine(self):
         for flags in [["--changed-since", "missing-ref"], ["--changed-since", "--help"],

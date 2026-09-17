@@ -15,12 +15,12 @@ import time
 if __package__:
     from .check_validation_contracts import discover_tests, read_contracts
     from .validation_support import isolated_env, validation_editor
-    from .validation_plan import build_plan
+    from .validation_plan import build_plan, summarize_plan
     from .validation_provenance import SourceRun
 else:
     from check_validation_contracts import discover_tests, read_contracts
     from validation_support import isolated_env, validation_editor
-    from validation_plan import build_plan
+    from validation_plan import build_plan, summarize_plan
     from validation_provenance import SourceRun
 
 # These acceptance flows include real 300-second production or 90-second growth
@@ -52,6 +52,7 @@ def main():
     selection.add_argument("--contracts", nargs="+", help="Contract IDs from tools/validation/contracts.json")
     selection.add_argument("--changed-since", metavar="REF", help="Plan tests from the checkout versus this exact local Git commit, including staged/unstaged/untracked files")
     parser.add_argument("--plan", action="store_true", help="Print the --changed-since plan as JSON without starting tests or creating output")
+    parser.add_argument("--summary", action="store_true", help="With --plan, print a compact summary of the same selection instead of full JSON")
     parser.add_argument("--list-tests", action="store_true", help="Print selection without starting Godot; not test evidence")
     parser.add_argument("--skip-import", action="store_true")
     parser.add_argument("--skip-main", action="store_true")
@@ -60,6 +61,8 @@ def main():
     args.change_plan = None
     if args.plan and (args.changed_since is None or args.list_tests):
         parser.error("--plan requires --changed-since and cannot be combined with --list-tests")
+    if args.summary and not args.plan:
+        parser.error("--summary requires --plan; it does not run tests")
     # Capture before automatic selection reads contracts and paths. A changed
     # plan must never be executed against a later, differently scoped checkout.
     args.source_run = None if args.plan or args.list_tests else SourceRun(args.project)
@@ -70,7 +73,7 @@ def main():
             parser.error(str(error))
         args.tests = args.change_plan["selected_tests"]
         if args.plan:
-            print(json.dumps(args.change_plan, ensure_ascii=True, indent=2))
+            print(summarize_plan(args.change_plan) if args.summary else json.dumps(args.change_plan, ensure_ascii=True, indent=2))
             return 0
         if args.skip_main and args.change_plan["requires_main"] and not args.list_tests:
             parser.error("This change plan requires full main checks; inspect --plan. Use an explicit --contracts selection for a separately scoped diagnosis.")
