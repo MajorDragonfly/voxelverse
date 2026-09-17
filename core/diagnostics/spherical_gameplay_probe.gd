@@ -148,7 +148,7 @@ func _animal_chain(tribe: Node) -> void:
 	# ready. Observe a live D1 individual, including its bounded return to view.
 	await _until(func() -> bool: return _production_animal(runtime) != null, 30000)
 	var animal: Node3D = _production_animal(runtime)
-	_expect(animal != null, "No live D1 production animal: " + str(_population_status(tribe)))
+	_expect(animal != null, "No live D1 production animal for " + production_kind + ": " + str(_population_status(tribe)))
 	if animal == null: return
 	var id: String = animal.get_campaign_identity().object_id
 	var species_id: String = animal.get_campaign_identity().species_id
@@ -363,13 +363,18 @@ func _population_status(tribe: Node) -> Dictionary:
 	for actor: Node3D in population.animals.values():
 		live.append({"id": actor.get_campaign_identity().object_id, "dead": actor.is_dead,
 			"distance": actor.global_position.distance_to(tribe.anchor()),
-			"milk": actor.blueprint.get("species", {}).get("domestication", {}).get("milk_yield", 0.0)})
+			"milk": actor.blueprint.get("species", {}).get("domestication", {}).get("milk_yield", 0.0),
+			"eggs": actor.blueprint.get("species", {}).get("domestication", {}).get("egg_yield", 0.0)})
 	var habitats: Array = []
 	for habitat: Dictionary in catalog.habitats:
 		var id: String = population.Habitat.object_id(habitat)
 		var saved: Dictionary = population.storage.record(id)
+		var spawn: Dictionary = {"next_offset": population._spawn_offsets.get(id, 0)}
+		if not population.animals.has(id) and saved.has("location"):
+			population._spawn_position(Space.resolve(self, saved.location), population.Catalog.species_for(catalog, habitat.species_id), spawn)
 		habitats.append({"id": id, "species_id": habitat.species_id, "generation": habitat.generation,
 			"replacement_at": habitat.replacement_at, "saved": not saved.is_empty(),
+			"spawn": spawn,
 			"encounter": population.saved_encounter(id), "reserved": population._reserved(id),
 			"distance": Space.resolve(self, saved.location).distance_to(tribe.anchor()) if saved.has("location") else -1.0})
 	return {"habitat_status": catalog.habitat_status, "clock": state.campaign.data.elapsed_seconds, "habitats": habitats,

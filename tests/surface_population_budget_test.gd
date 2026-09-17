@@ -39,6 +39,7 @@ func _run() -> void:
 	await _cancel_and_reenter()
 	await _worker_pause_and_close()
 	_spawn_fairness()
+	await _blocked_saved_animal()
 	adapter.close()
 	host.free()
 	await process_frame
@@ -212,6 +213,68 @@ func _remove_patch(id: String) -> void:
 	adapter.unbind(id)
 	eco.patches[id].node.free()
 	eco.patches.erase(id)
+
+func _blocked_saved_animal() -> void:
+	var fixture := Node3D.new()
+	root.add_child(fixture)
+	var barrier: BoxShape3D
+	# A saved position can be occupied when scenery/buildings return first.
+	for obstacle: bool in [false, true]:
+		var solid := StaticBody3D.new()
+		solid.collision_layer = 2 if obstacle else 1
+		var collider := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = Vector3(2, 4, 2) if obstacle else Vector3(30, 1, 30)
+		if obstacle: barrier = shape
+		collider.shape = shape
+		solid.position = Vector3(0, 1001.8 if obstacle else 999.5, 0)
+		solid.add_child(collider)
+		fixture.add_child(solid)
+	var observer := CharacterBody3D.new()
+	fixture.add_child(observer)
+	observer.position = Vector3(0, 1000, 8)
+	var population: Node = load("res://tests/fixtures/surface_restore_population_fixture.gd").new()
+	population.player = observer
+	fixture.add_child(population)
+	var design: Dictionary = population.Species.create_species(15838, Vector2i.ZERO, "grazer")
+	var record := {"id": "restore-fixture", "identity": {"object_id": "restore-fixture", "species_id": "restore-species", "body_id": "restore-body"},
+		"species_seed": 15838, "individual_seed": 12, "role": "grazer", "blueprint": population.Encoding.encode(design),
+		"location": [0.0, 1000.0, 0.0], "home": [0.0, 1000.0, 0.0]}
+	var original: String = JSON.stringify(record)
+	await physics_frame
+	await process_frame
+	var candidates: Array[Dictionary] = [record]
+	var no_plants: Array[Dictionary] = []
+	for attempt in range(20):
+		population._spawn_candidates(candidates, no_plants)
+		_expect(population.last_spawn_attempts <= population.MAX_SPAWN_ATTEMPTS, "Blocked restoration exceeded the existing spawn budget")
+		if population.animals.has(record.id): break
+		await physics_frame
+		await process_frame
+	_expect(population.animals.has(record.id), "A blocked saved position permanently hid a living individual")
+	if population.animals.has(record.id):
+		var actor: CharacterBody3D = population.animals[record.id]
+		actor.set_physics_process(false)
+		var distance: float = actor.position.distance_to(Vector3(0, 1000, 0))
+		_expect(distance > 1.3 and distance <= 4.1, "Restoration intersected the obstacle or left the saved neighborhood")
+		_expect(actor.get_campaign_identity().object_id == record.id and is_same(population.records[record.id], record), "Restoration replaced the saved individual")
+		_expect(actor._anchor.is_equal_approx(Vector3(0, 1000, 0)), "Restoration moved the animal's home")
+	_expect(JSON.stringify(record) == original, "Finding a free position rewrote saved identity, body, home or state")
+	if population.animals.has(record.id): population._remove(population.animals, record.id)
+	# Every nearby point blocked: keep the saved record and retry later. Never
+	# bypass collision or widen the search until an animal appears somewhere.
+	barrier.size = Vector3(20, 4, 20)
+	await physics_frame
+	await process_frame
+	for attempt in range(20):
+		population._spawn_candidates(candidates, no_plants)
+		_expect(population.last_spawn_attempts <= population.MAX_SPAWN_ATTEMPTS, "Fully blocked restoration exceeded the spawn budget")
+		if population.animals.has(record.id): break
+	_expect(not population.animals.has(record.id) and JSON.stringify(record) == original, "Fully blocked restoration escaped its neighborhood or changed the save")
+	population._spawn_candidates(no_plants, no_plants)
+	_expect(population._spawn_offsets.is_empty(), "Leaving a region retained obsolete restoration retries")
+	fixture.free()
+	await process_frame
 
 func _expect(value: bool, message: String) -> void:
 	if not value and message not in failures: failures.append(message)

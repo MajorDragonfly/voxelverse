@@ -21,6 +21,9 @@ const ACTIVE_DISTANCE: float = 82.0
 # Failed floor/shape checks are work too. Rotate blocked candidates instead
 # of scanning every stored individual in the same quarter-second update.
 const MAX_SPAWN_ATTEMPTS: int = 2
+# One point per existing spawn attempt: saved point, then two nearby rings.
+const RESTORE_POINTS: int = 17
+var _spawn_offsets: Dictionary = {}
 var animals: Dictionary = {}
 var plants: Dictionary = {}
 var nests: Dictionary = {}
@@ -132,6 +135,10 @@ func _tick() -> void:
 
 func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Dictionary]) -> void:
 	last_spawn_attempts = 0
+	var pending: Dictionary = {}
+	for record: Dictionary in candidates: pending[record.id] = true
+	for id: String in _spawn_offsets.keys():
+		if not pending.has(id): _spawn_offsets.erase(id)
 	if animals.size() >= MAX_ANIMALS: candidates = []
 	if plants.size() >= MAX_PLANTS: plant_candidates = []
 	var animal_attempts: int = 0
@@ -241,7 +248,7 @@ func _spawn_animal(record: Dictionary) -> bool:
 	var encounter: Dictionary = record.get("encounter", {})
 	if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0: return false
 	var species: Dictionary = Catalog.species_for(body().fauna_catalog, str(record.get("catalog_species_id", "")))
-	var point: Vector3 = _spawn_position(Space.resolve(self, record.location), species)
+	var point: Vector3 = _restore_position(record, species) if not encounter.get("dead", false) else _spawn_position(Space.resolve(self, record.location), species)
 	if not point.is_finite(): return false
 	var actor: CharacterBody3D = preload("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
 	actor.configure(int(record.species_seed), int(record.individual_seed), Vector2i.ZERO, record.role, record.identity.get("habitat_cell", ""), species)
@@ -272,12 +279,32 @@ func _spawn_animal(record: Dictionary) -> bool:
 	animals[record.id] = actor
 	return true
 
-func _spawn_position(saved: Vector3, species: Dictionary = {}) -> Vector3:
-	if not Space.ground_ready(self, saved): return Vector3.INF
+func _restore_position(record: Dictionary, species: Dictionary) -> Vector3:
+	# Scenery or a building may now occupy a saved animal's exact position.
+	# Retry within four metres without changing its identity, body or home.
+	# Never scan the whole neighborhood in a single quarter-second update.
+	var attempt: int = int(_spawn_offsets.get(record.id, 0))
+	var candidate: Vector3 = Space.resolve(self, record.location)
+	if attempt > 0:
+		var angle: float = float((attempt - 1) % 8) * TAU / 8.0
+		var distance: float = 2.0 if attempt <= 8 else 4.0
+		candidate = Space.offset(self, candidate, Vector3(cos(angle), 0, sin(angle)) * distance)
+	var point: Vector3 = _spawn_position(candidate, species, {}, attempt > 0)
+	if point.is_finite(): _spawn_offsets.erase(record.id)
+	else: _spawn_offsets[record.id] = (attempt + 1) % RESTORE_POINTS
+	return point
+
+func _spawn_position(saved: Vector3, species: Dictionary = {}, diagnostic: Dictionary = {}, relocated: bool = false) -> Vector3:
+	var inspect: bool = not diagnostic.is_empty()
+	var ready: bool = Space.ground_ready(self, saved)
+	if inspect: diagnostic.ground_ready = ready
+	if not ready: return Vector3.INF
 	var hit: Dictionary = Space.floor_hit(player, saved)
+	if inspect: diagnostic.floor_found = not hit.is_empty()
 	if hit.is_empty(): return Vector3.INF
 	var up: Vector3 = Space.up(self, hit.position)
 	var floor_point: Vector3 = hit.position + up * 0.03
+	if relocated and (not Space.dry(self, floor_point) or hit.normal.dot(up) < 0.94): return Vector3.INF
 	var geometry: Dictionary = Wildlife.collision_geometry(species)
 	var shape := CapsuleShape3D.new()
 	shape.radius = geometry.radius
@@ -286,7 +313,9 @@ func _spawn_position(saved: Vector3, species: Dictionary = {}) -> Vector3:
 	query.shape = shape
 	query.collision_mask = 1 | 2 | 4 | 8
 	query.transform = Transform3D(Space.frame(self, floor_point), floor_point + up * float(geometry.center))
-	return floor_point if player.get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty() else Vector3.INF
+	var collisions: Array[Dictionary] = player.get_world_3d().direct_space_state.intersect_shape(query, 4 if inspect else 1)
+	if inspect: diagnostic.obstacles = collisions.map(func(value: Dictionary) -> String: return str(value.collider.get_path()))
+	return floor_point if collisions.is_empty() else Vector3.INF
 
 func _spawn_plant(record: Dictionary) -> bool:
 	var point: Vector3 = Space.resolve(self, record.location)
@@ -319,6 +348,7 @@ func _remove(collection: Dictionary, id: String) -> void:
 
 func _loaded(_path: String) -> void:
 	_animal_cursor = 0
+	_spawn_offsets.clear()
 	_plant_cursor = 0
 	_prefer_plant = true
 	last_spawn_attempts = 0
