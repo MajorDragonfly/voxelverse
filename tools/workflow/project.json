@@ -12,7 +12,7 @@
   },
   "candidate": {
     "branch": "agent/integration-playtest-20260917",
-    "sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40",
+    "sha": "561b6da33f42f00564157937212e1c4bd87d7164",
     "pr": 165,
     "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/165"
   },
@@ -421,7 +421,7 @@
       "head": "7d1fad4b23e22e33a50c0583dd4f3df10ad81c18",
       "branch": "agent/perf-cold-start-20260916",
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/152",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "RENDER-DISTANT-FOREST",
@@ -434,7 +434,7 @@
       "head": "c3cf494b3dd5bf72464264c355d32cd295ab543e",
       "branch": "fix/surface-distance-visibility",
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/150",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "WEATHER-03-STORM-PREVIEW",
@@ -447,7 +447,7 @@
       "head": "e3a4ca14af9a80622e5be408ee128ac4c9d91549",
       "branch": "agent/weather03-storm-preview-20260916",
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/151",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "WEATHER-05-FORECAST-UI",
@@ -470,7 +470,7 @@
       "head": "2fe6cd051ccea75f43dba8c3208ebe5c13013608",
       "branch": "agent/community-service-contract-20260917",
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/164",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "M6-PLAYTEST-PLAN",
@@ -483,7 +483,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/145",
       "limits": "Planung; noch offene Wirtschafts- und Navigationsfolgen bleiben eigene Arbeit.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "UI-PREVIEW-STABLE-ROTATION",
@@ -496,7 +496,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/146",
       "limits": "Native Bedienabnahme im gemeinsamen Spieltest.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "UI-CREATURE-COMPARISON-ALIGNMENT",
@@ -509,7 +509,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/147",
       "limits": "Optische Abnahme auf dem Ziel-PC.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "WATER-SHORE-DEPTH",
@@ -522,7 +522,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/148",
       "limits": "Keine sichtbare Strömungssimulation; Wasserbewegung bleibt Folgearbeit.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "UI-DEVELOPMENT-BOOK-COMPACT",
@@ -535,7 +535,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/149",
       "limits": "Bedien- und Lesbarkeitsabnahme offen.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "M6-ORDERS-BUILDING-PREVIEW",
@@ -548,7 +548,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/153",
       "limits": "Gemeinsame Bauprüfung; Wegfindung, Wirtschaftslatenz und Langzeitbalance weiter beobachten.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "ARCH-24-MOUTHS-ORNAMENTS",
@@ -561,7 +561,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/154",
       "limits": "Revision 1 bleibt erhalten; Altentwürfe nur ausdrücklich im Editor aktualisieren.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "ARCH-24-WING-FAMILIES",
@@ -574,7 +574,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/155",
       "limits": "Körperteile und Animation; keine neue Flugfähigkeit.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "M6-STOCKPILE-VISUALS",
@@ -589,7 +589,7 @@
       ],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/156",
       "limits": "Darstellung tatsächlicher Bestände; keine getrennte Wirtschaftssimulation.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "M6-TRIBE-CAMERA",
@@ -604,7 +604,7 @@
       ],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/157",
       "limits": "128 m Kamerabereich; keine zusätzliche Kartenerkundung oder versetzte Kollisionssimulation.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "ARCH-24-FINS-EARS",
@@ -619,7 +619,7 @@
       ],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/158",
       "limits": "Gemeinsam mit Geweihen/Kämmen 62 platzierbare Teile und elf Endstücke.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "M4-LIVING-CREATURES",
@@ -632,7 +632,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/159",
       "limits": "Balance und zusammenhängende Beobachtung offen; unveröffentlichte Navigationsfolgen fehlen.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "M10-TRIBE-TUTORIAL",
@@ -647,7 +647,7 @@
       ],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/160",
       "limits": "Tatsächlich ausgeführte Befehle und Arbeit zählen; Ziel-PC-Einstiegstest offen.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     },
     {
       "id": "DEV-SKILL-WORKFLOW",
@@ -660,7 +660,7 @@
       "depends_on": [],
       "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/163",
       "limits": "Bestehende Skill-/Skripthelfer; das Custom-GPT-Team ist gestrichen.",
-      "integrated_sha": "c20a868e5054f2fcad057a5356a586b2ee9bce40"
+      "integrated_sha": "561b6da33f42f00564157937212e1c4bd87d7164"
     }
   ],
   "priorities": [
