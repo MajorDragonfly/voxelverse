@@ -5,6 +5,8 @@ const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
 const Blueprint = preload("res://creatures/editor/creature_blueprint.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
 const Rig = preload("res://creatures/runtime/creature_limb_rig.gd")
+const FinGeometry = preload("res://creatures/editor/creature_fin_geometry.gd")
+const EarGeometry = preload("res://creatures/editor/creature_ear_geometry.gd")
 const WingGeometry = preload("res://creatures/editor/creature_wing_geometry.gd")
 const MouthGeometry = preload("res://creatures/editor/creature_mouth_geometry.gd")
 const HandGeometry = preload("res://creatures/editor/creature_hand_geometry.gd")
@@ -26,6 +28,26 @@ static func build(root: Node3D, definition: Dictionary, placement: Dictionary, b
 	var skin: Color = Surface.colors(blueprint)[0]
 	var accent: Color = Surface.colors(blueprint)[1]
 	var horn: Color = SkinStyle.color(blueprint, "horn_color", Color("e3d5b0"))
+	if category == "fins":
+		root.set_meta("part_articulation", FinGeometry.articulation(id, revision))
+		var surfaces: Array[ArrayMesh] = FinGeometry.meshes(id, skin, accent, Blueprint.get_part_shape(placement), float(root.get_meta("creature_part_side", 1.0)), revision)
+		for index in range(surfaces.size()):
+			var surface := MeshInstance3D.new()
+			surface.name = "FinSocket" if index == 0 else "FinSurface"
+			surface.mesh = surfaces[index]
+			surface.material_override = Surface.material(Color.WHITE, true, blueprint)
+			root.add_child(surface)
+		return
+	if category == "ears":
+		root.set_meta("part_articulation", EarGeometry.articulation(id, revision))
+		var surfaces: Array[ArrayMesh] = EarGeometry.meshes(id, skin, accent, Blueprint.get_part_shape(placement), float(root.get_meta("creature_part_side", 1.0)), revision)
+		for index in range(surfaces.size()):
+			var surface := MeshInstance3D.new()
+			surface.name = "EarSocket" if index == 0 else "EarSurface"
+			surface.mesh = surfaces[index]
+			surface.material_override = Surface.material(Color.WHITE, true, blueprint)
+			root.add_child(surface)
+		return
 	if category == "wings":
 		root.set_meta("part_articulation", WingGeometry.articulation(id))
 		var surfaces: Array[ArrayMesh] = WingGeometry.meshes(id, skin, accent, Blueprint.get_part_shape(placement), float(root.get_meta("creature_part_side", 1.0)), revision)

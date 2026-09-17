@@ -4910,3 +4910,93 @@ msgstr "Langer Insektenflügel"
 
 msgid "EDITOR_PART_WINGS_LONG_INSECT_DESCRIPTION"
 msgstr "Schmale, gerundete Flügelfläche mit verzweigten Adern und hellem Saum."
+
+msgid "EDITOR_CATEGORY_FINS"
+msgstr "Flossen"
+
+msgid "Flossen"
+msgstr "Flossen"
+
+msgid "EDITOR_FIN_FLEX"
+msgstr "Flossen bewegen"
+
+msgid "EDITOR_CATEGORY_EARS"
+msgstr "Ohren"
+
+msgid "Ohren"
+msgstr "Ohren"
+
+msgid "EDITOR_EAR_PERK"
+msgstr "Ohren bewegen"
+
+msgid "EDITOR_PART_FINS_BROAD_PADDLE_NAME"
+msgstr "Breite Paddelflosse"
+
+msgid "EDITOR_PART_FINS_BROAD_PADDLE_DESCRIPTION"
+msgstr "Breite, abgerundete Seitenflosse mit kräftigem Ansatz und feinen Flossenstrahlen."
+
+msgid "EDITOR_PART_FINS_SLENDER_STEERING_NAME"
+msgstr "Schmale Steuerflosse"
+
+msgid "EDITOR_PART_FINS_SLENDER_STEERING_DESCRIPTION"
+msgstr "Lange, nach hinten gezogene Seitenflosse mit schmal zulaufender Spitze."
+
+msgid "EDITOR_PART_FINS_ROUND_SIDE_NAME"
+msgstr "Kleine Rundflosse"
+
+msgid "EDITOR_PART_FINS_ROUND_SIDE_DESCRIPTION"
+msgstr "Kompakte, fächerförmige Seitenflosse mit rundem Rand."
+
+msgid "EDITOR_PART_FINS_TALL_DORSAL_NAME"
+msgstr "Hohe Rückenflosse"
+
+msgid "EDITOR_PART_FINS_TALL_DORSAL_DESCRIPTION"
+msgstr "Hohe dreieckige Rückenflosse mit breitem Ansatz und sichtbaren Stützstrahlen."
+
+msgid "EDITOR_PART_FINS_LONG_FRINGE_NAME"
+msgstr "Langer Flossensaum"
+
+msgid "EDITOR_PART_FINS_LONG_FRINGE_DESCRIPTION"
+msgstr "Flacher, langgezogener Flossensaum mit weicher Wellenkontur."
+
+msgid "EDITOR_PART_FINS_SMALL_STABILIZER_NAME"
+msgstr "Kleine Stabilisatorflosse"
+
+msgid "EDITOR_PART_FINS_SMALL_STABILIZER_DESCRIPTION"
+msgstr "Kurze, nach hinten geneigte Flosse für Rücken- oder Bauchplatzierung."
+
+msgid "EDITOR_PART_EARS_CAT_POINTED_NAME"
+msgstr "Spitzes Katzenohr"
+
+msgid "EDITOR_PART_EARS_CAT_POINTED_DESCRIPTION"
+msgstr "Spitzes, leicht nach außen gestelltes Ohr mit sichtbarer Innenmuschel."
+
+msgid "EDITOR_PART_EARS_BEAR_ROUND_NAME"
+msgstr "Rundes Bärenohr"
+
+msgid "EDITOR_PART_EARS_BEAR_ROUND_DESCRIPTION"
+msgstr "Kompaktes, rundes Ohr mit breitem Rand und vertiefter Innenfläche."
+
+msgid "EDITOR_PART_EARS_RABBIT_LONG_NAME"
+msgstr "Langes Hasenohr"
+
+msgid "EDITOR_PART_EARS_RABBIT_LONG_DESCRIPTION"
+msgstr "Lange, schmale Ohrmuschel mit abgerundeter Spitze."
+
+msgid "EDITOR_PART_EARS_DOG_FLOPPY_NAME"
+msgstr "Hängendes Hundeohr"
+
+msgid "EDITOR_PART_EARS_DOG_FLOPPY_DESCRIPTION"
+msgstr "Weiches, nach außen gewölbtes Hängeohr mit rundem Ende."
+
+msgid "EDITOR_PART_EARS_ELEPHANT_BROAD_NAME"
+msgstr "Breites Elefantenohr"
+
+msgid "EDITOR_PART_EARS_ELEPHANT_BROAD_DESCRIPTION"
+msgstr "Breite, fächerförmige Ohrmuschel mit gewelltem Außenrand."
+
+msgid "EDITOR_PART_EARS_BAT_LARGE_NAME"
+msgstr "Großes Fledermausohr"
+
+msgid "EDITOR_PART_EARS_BAT_LARGE_DESCRIPTION"
+msgstr "Hohe, weit geöffnete Ohrmuschel mit spitzer Kontur und breitem Innenraum."

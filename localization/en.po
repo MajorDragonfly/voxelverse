@@ -4910,3 +4910,93 @@ msgstr "Long insect wing"
 
 msgid "EDITOR_PART_WINGS_LONG_INSECT_DESCRIPTION"
 msgstr "Slender rounded wing with branching veins and a pale membrane."
+
+msgid "EDITOR_CATEGORY_FINS"
+msgstr "Fins"
+
+msgid "Flossen"
+msgstr "Fins"
+
+msgid "EDITOR_FIN_FLEX"
+msgstr "Flex fins"
+
+msgid "EDITOR_CATEGORY_EARS"
+msgstr "Ears"
+
+msgid "Ohren"
+msgstr "Ears"
+
+msgid "EDITOR_EAR_PERK"
+msgstr "Move ears"
+
+msgid "EDITOR_PART_FINS_BROAD_PADDLE_NAME"
+msgstr "Broad paddle fin"
+
+msgid "EDITOR_PART_FINS_BROAD_PADDLE_DESCRIPTION"
+msgstr "Broad rounded side fin with a strong base and fine fin rays."
+
+msgid "EDITOR_PART_FINS_SLENDER_STEERING_NAME"
+msgstr "Slender steering fin"
+
+msgid "EDITOR_PART_FINS_SLENDER_STEERING_DESCRIPTION"
+msgstr "Long swept side fin with a slender tapered tip."
+
+msgid "EDITOR_PART_FINS_ROUND_SIDE_NAME"
+msgstr "Small round fin"
+
+msgid "EDITOR_PART_FINS_ROUND_SIDE_DESCRIPTION"
+msgstr "Compact fan-shaped side fin with a rounded edge."
+
+msgid "EDITOR_PART_FINS_TALL_DORSAL_NAME"
+msgstr "Tall dorsal fin"
+
+msgid "EDITOR_PART_FINS_TALL_DORSAL_DESCRIPTION"
+msgstr "Tall triangular dorsal fin with a broad base and visible supporting rays."
+
+msgid "EDITOR_PART_FINS_LONG_FRINGE_NAME"
+msgstr "Long fin fringe"
+
+msgid "EDITOR_PART_FINS_LONG_FRINGE_DESCRIPTION"
+msgstr "Low elongated fin fringe with a gently undulating outline."
+
+msgid "EDITOR_PART_FINS_SMALL_STABILIZER_NAME"
+msgstr "Small stabilizer fin"
+
+msgid "EDITOR_PART_FINS_SMALL_STABILIZER_DESCRIPTION"
+msgstr "Short swept fin for placement on the back or belly."
+
+msgid "EDITOR_PART_EARS_CAT_POINTED_NAME"
+msgstr "Pointed cat ear"
+
+msgid "EDITOR_PART_EARS_CAT_POINTED_DESCRIPTION"
+msgstr "Pointed, slightly outward-facing ear with a visible inner cup."
+
+msgid "EDITOR_PART_EARS_BEAR_ROUND_NAME"
+msgstr "Round bear ear"
+
+msgid "EDITOR_PART_EARS_BEAR_ROUND_DESCRIPTION"
+msgstr "Compact rounded ear with a broad rim and recessed inner surface."
+
+msgid "EDITOR_PART_EARS_RABBIT_LONG_NAME"
+msgstr "Long rabbit ear"
+
+msgid "EDITOR_PART_EARS_RABBIT_LONG_DESCRIPTION"
+msgstr "Long slender ear cup with a rounded tip."
+
+msgid "EDITOR_PART_EARS_DOG_FLOPPY_NAME"
+msgstr "Floppy dog ear"
+
+msgid "EDITOR_PART_EARS_DOG_FLOPPY_DESCRIPTION"
+msgstr "Soft outward-curved drooping ear with a rounded end."
+
+msgid "EDITOR_PART_EARS_ELEPHANT_BROAD_NAME"
+msgstr "Broad elephant ear"
+
+msgid "EDITOR_PART_EARS_ELEPHANT_BROAD_DESCRIPTION"
+msgstr "Broad fan-shaped ear cup with an undulating outer edge."
+
+msgid "EDITOR_PART_EARS_BAT_LARGE_NAME"
+msgstr "Large bat ear"
+
+msgid "EDITOR_PART_EARS_BAT_LARGE_DESCRIPTION"
+msgstr "Tall open ear cup with a pointed outline and broad inner surface."

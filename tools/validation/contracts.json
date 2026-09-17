@@ -128,7 +128,9 @@
         "runtime_geometry_batch_test",
         "creature_eye_expression_test",
         "creature_tail_family_test",
-        "creature_wing_family_test"
+        "creature_wing_family_test",
+        "creature_fin_family_test",
+        "creature_ear_family_test"
       ]
     },
     {

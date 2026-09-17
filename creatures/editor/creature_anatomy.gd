@@ -322,6 +322,17 @@ static func _apply_default_anchor_fields(
 			placement["anchor_vertical"] = -0.05
 			placement["anchor_surface_offset"] = Vector3.ZERO
 
+		PartLibrary.CATEGORY_FINS:
+			var dorsal: bool = PartLibrary.FinCatalog.get_profile(str(placement.get("part_id", ""))).get("layout", "side") == "dorsal"
+			placement["anchor_t"] = lerpf(0.42, 0.65, distribution)
+			placement["anchor_side"] = 0.0 if dorsal else 0.72
+			placement["anchor_vertical"] = 1.0 if dorsal else -0.15
+			placement["anchor_surface_offset"] = Vector3.ZERO
+		PartLibrary.CATEGORY_EARS:
+			placement["anchor_t"] = lerpf(0.10, 0.24, distribution)
+			placement["anchor_side"] = 0.62
+			placement["anchor_vertical"] = 0.7
+			placement["anchor_surface_offset"] = Vector3.ZERO
 		PartLibrary.CATEGORY_WINGS:
 			placement["anchor_t"] = lerpf(0.30, 0.58, distribution)
 			placement["anchor_side"] = 0.72

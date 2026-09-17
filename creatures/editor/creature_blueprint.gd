@@ -186,13 +186,15 @@ static func add_part(
 		"category": category_id,
 		"position": PartLibrary.get_default_position(
 			category_id,
-			body_shape
+			body_shape, part_id
 		),
 		"rotation": Vector3.ZERO,
 		"scale": float(part_definition.get("default_scale", 1.0)),
-		"mirrored": PartLibrary.is_default_mirrored(category_id),
+		"mirrored": PartLibrary.is_default_mirrored(category_id, part_id),
 	}
 
+	if category_id == PartLibrary.CATEGORY_FINS:
+		placement["center_locked"] = not placement.mirrored
 	blueprint["next_part_uid"] = next_uid + 1
 
 	var parts: Array = blueprint.get("parts", [])
@@ -388,11 +390,13 @@ static func reset_part_transform(
 
 	placement["position"] = PartLibrary.get_default_position(
 		category_id,
-		body_shape
+		body_shape, str(placement.get("part_id", ""))
 	)
 	placement["rotation"] = Vector3.ZERO
 	placement["scale"] = float(part_definition.get("default_scale", 1.0))
-	placement["mirrored"] = PartLibrary.is_default_mirrored(category_id)
+	placement["mirrored"] = PartLibrary.is_default_mirrored(category_id, str(placement.get("part_id", "")))
+	if category_id == PartLibrary.CATEGORY_FINS:
+		placement["center_locked"] = not placement.mirrored
 
 	set_part_placement(blueprint, part_index, placement)
 

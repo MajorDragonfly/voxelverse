@@ -8186,6 +8186,156 @@
       "key": "EDITOR_PART_WINGS_LONG_INSECT_DESCRIPTION",
       "de": "Schmale, gerundete Flügelfläche mit verzweigten Adern und hellem Saum.",
       "en": "Slender rounded wing with branching veins and a pale membrane."
+    },
+    {
+      "key": "EDITOR_CATEGORY_FINS",
+      "de": "Flossen",
+      "en": "Fins"
+    },
+    {
+      "key": "Flossen",
+      "de": "Flossen",
+      "en": "Fins"
+    },
+    {
+      "key": "EDITOR_FIN_FLEX",
+      "de": "Flossen bewegen",
+      "en": "Flex fins"
+    },
+    {
+      "key": "EDITOR_CATEGORY_EARS",
+      "de": "Ohren",
+      "en": "Ears"
+    },
+    {
+      "key": "Ohren",
+      "de": "Ohren",
+      "en": "Ears"
+    },
+    {
+      "key": "EDITOR_EAR_PERK",
+      "de": "Ohren bewegen",
+      "en": "Move ears"
+    },
+    {
+      "key": "EDITOR_PART_FINS_BROAD_PADDLE_NAME",
+      "de": "Breite Paddelflosse",
+      "en": "Broad paddle fin"
+    },
+    {
+      "key": "EDITOR_PART_FINS_BROAD_PADDLE_DESCRIPTION",
+      "de": "Breite, abgerundete Seitenflosse mit kräftigem Ansatz und feinen Flossenstrahlen.",
+      "en": "Broad rounded side fin with a strong base and fine fin rays."
+    },
+    {
+      "key": "EDITOR_PART_FINS_SLENDER_STEERING_NAME",
+      "de": "Schmale Steuerflosse",
+      "en": "Slender steering fin"
+    },
+    {
+      "key": "EDITOR_PART_FINS_SLENDER_STEERING_DESCRIPTION",
+      "de": "Lange, nach hinten gezogene Seitenflosse mit schmal zulaufender Spitze.",
+      "en": "Long swept side fin with a slender tapered tip."
+    },
+    {
+      "key": "EDITOR_PART_FINS_ROUND_SIDE_NAME",
+      "de": "Kleine Rundflosse",
+      "en": "Small round fin"
+    },
+    {
+      "key": "EDITOR_PART_FINS_ROUND_SIDE_DESCRIPTION",
+      "de": "Kompakte, fächerförmige Seitenflosse mit rundem Rand.",
+      "en": "Compact fan-shaped side fin with a rounded edge."
+    },
+    {
+      "key": "EDITOR_PART_FINS_TALL_DORSAL_NAME",
+      "de": "Hohe Rückenflosse",
+      "en": "Tall dorsal fin"
+    },
+    {
+      "key": "EDITOR_PART_FINS_TALL_DORSAL_DESCRIPTION",
+      "de": "Hohe dreieckige Rückenflosse mit breitem Ansatz und sichtbaren Stützstrahlen.",
+      "en": "Tall triangular dorsal fin with a broad base and visible supporting rays."
+    },
+    {
+      "key": "EDITOR_PART_FINS_LONG_FRINGE_NAME",
+      "de": "Langer Flossensaum",
+      "en": "Long fin fringe"
+    },
+    {
+      "key": "EDITOR_PART_FINS_LONG_FRINGE_DESCRIPTION",
+      "de": "Flacher, langgezogener Flossensaum mit weicher Wellenkontur.",
+      "en": "Low elongated fin fringe with a gently undulating outline."
+    },
+    {
+      "key": "EDITOR_PART_FINS_SMALL_STABILIZER_NAME",
+      "de": "Kleine Stabilisatorflosse",
+      "en": "Small stabilizer fin"
+    },
+    {
+      "key": "EDITOR_PART_FINS_SMALL_STABILIZER_DESCRIPTION",
+      "de": "Kurze, nach hinten geneigte Flosse für Rücken- oder Bauchplatzierung.",
+      "en": "Short swept fin for placement on the back or belly."
+    },
+    {
+      "key": "EDITOR_PART_EARS_CAT_POINTED_NAME",
+      "de": "Spitzes Katzenohr",
+      "en": "Pointed cat ear"
+    },
+    {
+      "key": "EDITOR_PART_EARS_CAT_POINTED_DESCRIPTION",
+      "de": "Spitzes, leicht nach außen gestelltes Ohr mit sichtbarer Innenmuschel.",
+      "en": "Pointed, slightly outward-facing ear with a visible inner cup."
+    },
+    {
+      "key": "EDITOR_PART_EARS_BEAR_ROUND_NAME",
+      "de": "Rundes Bärenohr",
+      "en": "Round bear ear"
+    },
+    {
+      "key": "EDITOR_PART_EARS_BEAR_ROUND_DESCRIPTION",
+      "de": "Kompaktes, rundes Ohr mit breitem Rand und vertiefter Innenfläche.",
+      "en": "Compact rounded ear with a broad rim and recessed inner surface."
+    },
+    {
+      "key": "EDITOR_PART_EARS_RABBIT_LONG_NAME",
+      "de": "Langes Hasenohr",
+      "en": "Long rabbit ear"
+    },
+    {
+      "key": "EDITOR_PART_EARS_RABBIT_LONG_DESCRIPTION",
+      "de": "Lange, schmale Ohrmuschel mit abgerundeter Spitze.",
+      "en": "Long slender ear cup with a rounded tip."
+    },
+    {
+      "key": "EDITOR_PART_EARS_DOG_FLOPPY_NAME",
+      "de": "Hängendes Hundeohr",
+      "en": "Floppy dog ear"
+    },
+    {
+      "key": "EDITOR_PART_EARS_DOG_FLOPPY_DESCRIPTION",
+      "de": "Weiches, nach außen gewölbtes Hängeohr mit rundem Ende.",
+      "en": "Soft outward-curved drooping ear with a rounded end."
+    },
+    {
+      "key": "EDITOR_PART_EARS_ELEPHANT_BROAD_NAME",
+      "de": "Breites Elefantenohr",
+      "en": "Broad elephant ear"
+    },
+    {
+      "key": "EDITOR_PART_EARS_ELEPHANT_BROAD_DESCRIPTION",
+      "de": "Breite, fächerförmige Ohrmuschel mit gewelltem Außenrand.",
+      "en": "Broad fan-shaped ear cup with an undulating outer edge."
+    },
+    {
+      "key": "EDITOR_PART_EARS_BAT_LARGE_NAME",
+      "de": "Großes Fledermausohr",
+      "en": "Large bat ear"
+    },
+    {
+      "key": "EDITOR_PART_EARS_BAT_LARGE_DESCRIPTION",
+      "de": "Hohe, weit geöffnete Ohrmuschel mit spitzer Kontur und breitem Innenraum.",
+      "en": "Tall open ear cup with a pointed outline and broad inner surface."
     }
   ]
 }

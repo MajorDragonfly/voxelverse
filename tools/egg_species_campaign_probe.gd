@@ -129,8 +129,11 @@ func _check_legacy_progression(before: Dictionary) -> void:
 	for id: String in ["wings_broad_feather", "wings_slender_feather", "wings_bat_membrane", "wings_long_insect"]:
 		_expect(not old_unlocks.has(id), "Legacy fixture already contains new wing model: " + id)
 		old_unlocks[id] = {"reason": "Model variant", "source_part": "decor_feathers", "order": old_unlocks.size()}
+	for id: String in ["ears_cat_pointed", "ears_bear_round", "ears_rabbit_long", "ears_dog_floppy", "ears_elephant_broad", "ears_bat_large"]:
+		_expect(not old_unlocks.has(id), "Legacy fixture already contains new ear model: " + id)
+		old_unlocks[id] = {"reason": "Model variant", "source_part": "decor_feathers", "order": old_unlocks.size()}
 	# Exact comparison still protects every historical unlock, discovery,
-	# reward, research field and the six specific additive model references.
+	# reward, research field and the twelve specific additive model references.
 	_expect(_same(new_progression, old_progression), "Migration changed existing discoveries, points or other progression")
 
 func _extract_fixture() -> void:

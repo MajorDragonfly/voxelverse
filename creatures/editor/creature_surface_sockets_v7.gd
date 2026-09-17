@@ -78,7 +78,7 @@ static func snap_part_to_surface(
 	placement["anchor_surface_offset"] = Vector3.ZERO
 	placement["manual_offset"] = Vector3.ZERO
 	placement["anchor_locked"] = true
-	placement["socket_type"] = _get_socket_type(category_id)
+	placement["socket_type"] = _get_socket_type(category_id, str(placement.get("part_id", "")))
 	parts[part_index] = placement
 	blueprint["parts"] = parts
 	Anatomy.rebind_part(blueprint, part_index)
@@ -105,6 +105,8 @@ static func apply_symmetry(
 		PartLibrary.CATEGORY_SPIKES,
 		PartLibrary.CATEGORY_PLATES,
 		PartLibrary.CATEGORY_DECOR,
+		PartLibrary.CATEGORY_FINS,
+		PartLibrary.CATEGORY_EARS,
 		PartLibrary.CATEGORY_WINGS,
 	]
 	placement["mirrored"] = enabled and supports_pair
@@ -119,17 +121,19 @@ static func apply_symmetry(
 	return supports_pair
 
 
-static func _get_socket_type(category_id: String) -> String:
+static func _get_socket_type(category_id: String, part_id: String = "") -> String:
 	match category_id:
 		PartLibrary.CATEGORY_MOUTH:
 			return "front"
 		PartLibrary.CATEGORY_TAIL:
 			return "rear"
+		PartLibrary.CATEGORY_FINS:
+			return "upper_spine" if PartLibrary.FinCatalog.get_profile(part_id).get("layout", "side") == "dorsal" else "side"
 		PartLibrary.CATEGORY_LEGS:
 			return "lower_side"
 		PartLibrary.CATEGORY_ARMS, PartLibrary.CATEGORY_WINGS:
 			return "side"
-		PartLibrary.CATEGORY_HEAD, PartLibrary.CATEGORY_EYES, PartLibrary.CATEGORY_HORNS:
+		PartLibrary.CATEGORY_EARS, PartLibrary.CATEGORY_HEAD, PartLibrary.CATEGORY_EYES, PartLibrary.CATEGORY_HORNS:
 			return "upper_front"
 		PartLibrary.CATEGORY_PLATES, PartLibrary.CATEGORY_SPIKES:
 			return "upper_spine"

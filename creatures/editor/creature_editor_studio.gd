@@ -7,7 +7,7 @@ const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
 const PartCard = preload("res://creatures/editor/creature_part_card.gd")
 const Canvas = preload("res://creatures/editor/creature_editor_canvas.gd")
 const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
-const CATEGORY_NAMES: Dictionary = {"body": "EDITOR_CATEGORY_BODY", "mouth": "EDITOR_CATEGORY_MOUTH", "head": "EDITOR_CATEGORY_HEAD", "eyes": "EDITOR_CATEGORY_EYES", "legs": "EDITOR_CATEGORY_LEGS", "arms": "EDITOR_CATEGORY_ARMS", "feet": "EDITOR_CATEGORY_FEET", "hands": "EDITOR_CATEGORY_HANDS", "tail": "EDITOR_CATEGORY_TAIL", "horns": "EDITOR_CATEGORY_HORNS", "plates": "EDITOR_CATEGORY_PLATES", "spikes": "EDITOR_CATEGORY_SPIKES", "decor": "EDITOR_CATEGORY_DECOR", "wings": "EDITOR_CATEGORY_WINGS", "paint": "EDITOR_CATEGORY_PAINT"}
+const CATEGORY_NAMES: Dictionary = {"body": "EDITOR_CATEGORY_BODY", "mouth": "EDITOR_CATEGORY_MOUTH", "head": "EDITOR_CATEGORY_HEAD", "eyes": "EDITOR_CATEGORY_EYES", "legs": "EDITOR_CATEGORY_LEGS", "arms": "EDITOR_CATEGORY_ARMS", "feet": "EDITOR_CATEGORY_FEET", "hands": "EDITOR_CATEGORY_HANDS", "tail": "EDITOR_CATEGORY_TAIL", "horns": "EDITOR_CATEGORY_HORNS", "plates": "EDITOR_CATEGORY_PLATES", "spikes": "EDITOR_CATEGORY_SPIKES", "decor": "EDITOR_CATEGORY_DECOR", "fins": "EDITOR_CATEGORY_FINS", "ears": "EDITOR_CATEGORY_EARS", "wings": "EDITOR_CATEGORY_WINGS", "paint": "EDITOR_CATEGORY_PAINT"}
 const EditorText = preload("res://creatures/editor/creature_editor_text.gd")
 const MINT := Color("a6ebcc")
 const INK := Color("0d202b")
@@ -379,6 +379,8 @@ func _build_part_controls() -> void:
 	EditorText.add_option(_part_target, "EDITOR_TARGET_END")
 	_part_target.item_selected.connect(_choose_transform_target)
 	_part_controls.add_child(_part_target)
+	_button(_part_controls, "EDITOR_FIN_FLEX", _flex_selected_fins).name = "FlexFins"
+	_button(_part_controls, "EDITOR_EAR_PERK", _perk_selected_ears).name = "PerkEars"
 	_button(_part_controls, "EDITOR_WING_STRETCH", _stretch_selected_wings).name = "StretchWings"
 	var placement_row := HBoxContainer.new()
 	placement_row.name = "PlacementModes"
@@ -503,6 +505,8 @@ func _refresh_design_controls() -> void:
 	_part_target.select(1 if _editing_terminal else 0)
 	_part_controls.get_node("DefaultTerminal").visible = limb and _editing_terminal
 	_part_controls.get_node("PlacementModes").visible = not _editing_terminal
+	_part_controls.get_node("FlexFins").visible = str(part.get("category", "")) == "fins"
+	_part_controls.get_node("PerkEars").visible = str(part.get("category", "")) == "ears"
 	_part_controls.get_node("StretchWings").visible = str(part.get("category", "")) == "wings"
 	var mode: String = "center" if bool(part.get("center_locked", false)) else ("paired" if bool(part.get("mirrored", false)) else "single")
 	for key: String in _placement_buttons:
@@ -727,10 +731,25 @@ func _on_part_button_pressed(id: String) -> void:
 	AnatomyV7.reset_part_anchor(blueprint, index)
 	SurfaceSocketsV7.apply_symmetry(blueprint, index, AssemblyV7.is_symmetry_enabled(blueprint))
 	var part: Dictionary = blueprint["parts"][index]
+	if part.category == "fins" and not PartLibrary.FinCatalog.get_profile(id).default_mirrored:
+		part["center_locked"] = true
+		part["mirrored"] = false
+		part["anchor_side"] = 0.0
+		AnatomyV7.rebind_part(blueprint, index)
 	if str(part["category"]) not in ["mouth", "head", "tail"]:
 		_snap_to_shape(index, part["position"])
 	_refresh_all()
 	_set_builder_status("EDITOR_STATUS_SELECTED")
+
+
+func _flex_selected_fins() -> void:
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	if part.get("category", "") == "fins": _preview.call("play_part_action", "fin_flex", 1.2)
+
+
+func _perk_selected_ears() -> void:
+	var part: Dictionary = Blueprint.get_part_placement(blueprint, selected_part_index)
+	if part.get("category", "") == "ears": _preview.call("play_part_action", "ear_perk", 1.2)
 
 
 func _stretch_selected_wings() -> void:
