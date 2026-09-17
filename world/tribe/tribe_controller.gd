@@ -1,5 +1,6 @@
 extends Node
 
+signal guidance_action(action: String, amount: float)
 signal order_resolved(order: StringName, command_id: String, accepted: bool)
 var _order_sequence: int = 0
 
@@ -351,12 +352,16 @@ func select_member(identity: String, additive: bool = false) -> void:
 		selected.erase(identity)
 	else:
 		selected.append(identity)
+	if is_active() and not selected.is_empty():
+		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
 
 func select_all() -> void:
 	selected.clear()
 	for identity: String in actors:
 		selected.append(identity)
+	if is_active() and not selected.is_empty():
+		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
 
 func screen_select(rect: Rect2, additive: bool) -> void:
@@ -366,6 +371,8 @@ func screen_select(rect: Rect2, additive: bool) -> void:
 		var actor: Node3D = actors[identity]
 		if not camera.is_position_behind(actor.global_position) and rect.has_point(camera.unproject_position(actor.global_position + Space.up(self, actor.global_position))) and identity not in selected:
 			selected.append(identity)
+	if is_active() and not selected.is_empty():
+		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
 
 func ground_hit(position: Vector2) -> Dictionary:
@@ -873,6 +880,7 @@ func assign_profession(profession: String) -> bool:
 	if success and not placement.is_empty():
 		placement = ""
 		panel.refresh()
+	if success and profession != "none": guidance_action.emit("tribe_profession", 1.0)
 	return success
 
 func receive_milk(batch: Dictionary) -> bool:

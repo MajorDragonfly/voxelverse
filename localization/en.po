@@ -4967,3 +4967,123 @@ msgstr "Invalid tribal camera setting."
 
 msgid "TRIBE_CAMERA_HINT"
 msgstr "Pan: {move_forward} / {move_back} / {move_left} / {move_right}\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nThe camera can look beyond the residents’ working area."
+
+msgid "GUIDE_TRIBAL_CARD"
+msgstr "Guide {done}/{total} · {hint}"
+
+msgid "GUIDE_TRIBAL_HELP"
+msgstr "Help"
+
+msgid "GUIDE_TRIBAL_INTRO"
+msgstr "Three chapters explain the camera, orders and village building. Choose a chapter for short village hints. Turn them off, resume or restart at any time; existing tools and completed buildings are recognised."
+
+msgid "GUIDE_CHAPTER_TRIBE_VIEW"
+msgstr "View and selection"
+
+msgid "GUIDE_CHAPTER_TRIBE_WORK"
+msgstr "Orders and supplies"
+
+msgid "GUIDE_CHAPTER_TRIBE_BUILD"
+msgstr "Building and professions"
+
+msgid "GUIDE_STEP_TRIBE_CAMERA"
+msgstr "Move the village camera"
+
+msgid "GUIDE_HINT_TRIBE_CAMERA"
+msgstr "Move the view with {forward}/{left}/{back}/{right}."
+
+msgid "GUIDE_DETAIL_TRIBE_CAMERA"
+msgstr "You move the camera, not the residents. Drag with {orbit} to rotate and tilt; use the wheel to zoom. {home} shows the village and {selection} the selection. Find speed, starting tilt and bindings under Esc → Settings → Controls. Moving the camera does not expand the work area or explored map."
+
+msgid "GUIDE_STEP_TRIBE_SINGLE"
+msgstr "Select one resident"
+
+msgid "GUIDE_HINT_TRIBE_SINGLE"
+msgstr "Click a resident card to give orders to just that resident."
+
+msgid "GUIDE_DETAIL_TRIBE_SINGLE"
+msgstr "You can also click the creature itself. Highlighted cards and rings show the selection. Your next order applies only to those residents; everyone else keeps working."
+
+msgid "GUIDE_STEP_TRIBE_GROUP"
+msgstr "Select a group"
+
+msgid "GUIDE_HINT_TRIBE_GROUP"
+msgstr "Select several residents: Shift + click, drag a selection box, or choose “Select all”."
+
+msgid "GUIDE_DETAIL_TRIBE_GROUP"
+msgstr "Drag a box in the world with the left mouse button. Shift adds residents, or toggles them when clicking their cards. Selecting residents does not issue an order."
+
+msgid "GUIDE_STEP_TRIBE_ORDER"
+msgstr "Issue a gathering order"
+
+msgid "GUIDE_HINT_TRIBE_ORDER"
+msgstr "Select residents, then choose “Gather wood” under “Orders”."
+
+msgid "GUIDE_DETAIL_TRIBE_ORDER"
+msgstr "Alternatively, right-click a resource deposit. An order stays active until you change it. “Stop” remembers it; “Resume” continues it. A blocked route holds up work. If saving fails, the previous order remains in place."
+
+msgid "GUIDE_STEP_TRIBE_DELIVERY"
+msgstr "Wait for the first delivery"
+
+msgid "GUIDE_HINT_TRIBE_DELIVERY"
+msgstr "Wait for a resident to deliver gathered goods to the village square."
+
+msgid "GUIDE_DETAIL_TRIBE_DELIVERY"
+msgstr "Deposits are not stored goods. Carried goods are in transit and enter storage only on arrival. Stockpiles grow with available supplies. Gold construction goods are reserved; delivered building materials belong to the site. Hover over piles or the resource bar for exact amounts."
+
+msgid "GUIDE_STEP_TRIBE_SUPPLY"
+msgstr "Supply a resident"
+
+msgid "GUIDE_HINT_TRIBE_SUPPLY"
+msgstr "Gather food, then let a hungry resident “Eat now”."
+
+msgid "GUIDE_DETAIL_TRIBE_SUPPLY"
+msgstr "Supply commands are under “Workplaces & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
+
+msgid "GUIDE_STEP_TRIBE_TOOL"
+msgstr "Make a stone tool"
+
+msgid "GUIDE_HINT_TRIBE_TOOL"
+msgstr "Store 3 wood and 2 stone, then order the tool under “Build”."
+
+msgid "GUIDE_DETAIL_TRIBE_TOOL"
+msgstr "Select at least one resident as a worker. Crafting happens at the village square; wait for it to finish. The completed tool is required for buildings. Clicking without materials or merely starting the order is not enough."
+
+msgid "GUIDE_STEP_TRIBE_PLACE"
+msgstr "Place a building"
+
+msgid "GUIDE_HINT_TRIBE_PLACE"
+msgstr "Choose a building, check its preview, then confirm a free site with right-click."
+
+msgid "GUIDE_DETAIL_TRIBE_PLACE"
+msgstr "For example: a hut costs 6 wood / 3 stone, or a forestry station 4 wood / 1 stone. Select residents as builders. Green means valid; red indicates a problem. Esc cancels without cost. Only a successful right-click creates the site and reserves materials. The work area remains close to the village."
+
+msgid "GUIDE_STEP_TRIBE_FINISH"
+msgstr "Finish construction"
+
+msgid "GUIDE_HINT_TRIBE_FINISH"
+msgstr "Let the assigned residents finish the building."
+
+msgid "GUIDE_DETAIL_TRIBE_FINISH"
+msgstr "Residents first carry the reserved materials to the site. Construction progress then increases. More residents can help. Paused or blocked work does not count as completion; the Build tab shows reasons and material status."
+
+msgid "GUIDE_STEP_TRIBE_PROFESSION"
+msgstr "Assign a profession"
+
+msgid "GUIDE_HINT_TRIBE_PROFESSION"
+msgstr "Select a resident and assign a profession under “Workplaces & professions”."
+
+msgid "GUIDE_DETAIL_TRIBE_PROFESSION"
+msgstr "A profession is a lasting responsibility, such as woodworker or provider. An individual order can temporarily replace that work. The profession remains visible on the resident card. It does not yet bind the resident to a specific workplace."
+
+msgid "GUIDE_STEP_TRIBE_WORKPLACE"
+msgstr "Assign a workplace"
+
+msgid "GUIDE_HINT_TRIBE_WORKPLACE"
+msgstr "Build a forestry station or well and assign selected residents using its workplace row."
+
+msgid "GUIDE_DETAIL_TRIBE_WORKPLACE"
+msgstr "Completed workplaces appear under “Workplaces & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
+
+msgid "GUIDE_TRIBAL_TITLE"
+msgstr "YOUR VILLAGE, STEP BY STEP"

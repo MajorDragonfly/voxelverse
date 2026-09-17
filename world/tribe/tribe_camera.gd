@@ -92,7 +92,9 @@ func advance(delta: float) -> void:
 	if not motion.is_zero_approx():
 		var frame: Basis = view_frame()
 		var speed: float = 12.0 * float(_preferences.tribe_camera.pan_speed)
+		var before: Vector3 = controller._focus
 		move_focus((frame.x * motion.x + frame.z * motion.y) * speed * dt)
+		controller.guidance_action.emit("tribe_camera", controller._focus.distance_to(before))
 	current_zoom = lerpf(current_zoom, controller._zoom, 1.0 - exp(-12.0 * dt))
 	if absf(current_zoom - controller._zoom) < 0.001: current_zoom = controller._zoom
 	update_camera()

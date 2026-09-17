@@ -51,6 +51,10 @@ var _hud_scroll: ScrollContainer:
 var _orders_scroll: ScrollContainer:
 	get: return _scroll
 var _scroll: ScrollContainer
+var _guidance_row: HBoxContainer
+var _guidance_hint: Label
+var _guidance_help: LinkButton
+var _guidance_text: String = ""
 var _camera_menu: MenuButton
 var _collapse: Button
 var _collapsed: bool = false
@@ -111,6 +115,22 @@ func _build() -> void:
 		else:
 			_collapsed = not _collapsed
 		refresh())
+	_guidance_row = HBoxContainer.new()
+	_guidance_row.name = "TribalGuidance"
+	column.add_child(_guidance_row)
+	_guidance_hint = Style.label("", 15, Style.SOCIAL)
+	_guidance_hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_guidance_hint.mouse_filter = Control.MOUSE_FILTER_STOP
+	_guidance_row.add_child(_guidance_hint)
+	_guidance_help = LinkButton.new()
+	_guidance_help.text = Text.text("GUIDE_TRIBAL_HELP")
+	_guidance_help.pressed.connect(func() -> void:
+		var flow: Node = get_node("/root/SessionFlow")
+		if not flow.can_pause(): return
+		if not flow.pause_open: flow.toggle_pause()
+		flow._show_first_steps())
+	_guidance_row.add_child(_guidance_help)
+	_guidance_row.hide()
 	_hud_content = VBoxContainer.new()
 	_hud_content.add_theme_constant_override("separation", 7)
 	_scroll = ScrollContainer.new()
@@ -355,7 +375,8 @@ func refresh() -> void:
 	if data.is_empty():
 		return
 	_construction.refresh(data)
-	_goal.visible = _tabs.get_current_tab_control() == _orders_page
+	_guidance_row.visible = not _guidance_text.is_empty() and not _collapsed
+	_goal.visible = _tabs.get_current_tab_control() == _orders_page and not _guidance_row.visible
 	_supply.visible = true
 	var stock: Dictionary = data["stock"]
 	_stock.text = Text.format_text("TRIBE_STOCK", stock.merged({"eggs": stock.get("eggs", 0), "residents": data["members"].size(), "capacity": Housing.MAX_RESIDENTS, "beds": Housing.beds(data)}, true))
@@ -691,7 +712,7 @@ func _refresh_language() -> void:
 	_refresh_confirmation_text()
 
 func _apply_hud_fonts(node: Node, font_scale: float) -> void:
-	if node is Label or node is Button or node is TabBar or node is PopupMenu:
+	if node is Label or node is BaseButton or node is TabBar or node is PopupMenu:
 		if not node.has_meta("tribe_base_font_size"):
 			node.set_meta("tribe_base_font_size", node.get_theme_font_size("font_size"))
 		var target: int = roundi(float(node.get_meta("tribe_base_font_size")) * font_scale)
@@ -720,6 +741,16 @@ func add_settlements(runtime: Node) -> void:
 	page.runtime = runtime
 	_tabs.add_child(page)
 	_font_scale = -1.0
+
+func set_guidance(caption: String, detail: String) -> void:
+	_guidance_help.text = Text.text("GUIDE_TRIBAL_HELP")
+	if caption == _guidance_text and detail == _guidance_hint.tooltip_text: return
+	_guidance_text = caption
+	_guidance_hint.text = caption
+	_guidance_hint.tooltip_text = detail
+	_guidance_row.visible = not caption.is_empty() and not _collapsed
+	_goal.visible = _tabs.get_current_tab_control() == _orders_page and not _guidance_row.visible
+	_layout()
 
 func _refresh_camera_menu() -> void:
 	var keys = preload("res://core/input_preferences.gd")

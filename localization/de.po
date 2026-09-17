@@ -4967,3 +4967,123 @@ msgstr "Ungültige Einstellung der Stammeskamera."
 
 msgid "TRIBE_CAMERA_HINT"
 msgstr "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right}\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nDie Kamera kann weiter schauen als Bewohner arbeiten können."
+
+msgid "GUIDE_TRIBAL_CARD"
+msgstr "Anleitung {done}/{total} · {hint}"
+
+msgid "GUIDE_TRIBAL_HELP"
+msgstr "Hilfe"
+
+msgid "GUIDE_TRIBAL_INTRO"
+msgstr "Drei Kapitel erklären Kamera, Aufträge und Dorfaufbau. Wähle ein Kapitel für kurze Hinweise im Dorf. Ausschalten, Fortsetzen und Neubeginn sind jederzeit möglich; vorhandene Werkzeuge und fertige Gebäude werden angerechnet."
+
+msgid "GUIDE_CHAPTER_TRIBE_VIEW"
+msgstr "Blick und Auswahl"
+
+msgid "GUIDE_CHAPTER_TRIBE_WORK"
+msgstr "Aufträge und Vorräte"
+
+msgid "GUIDE_CHAPTER_TRIBE_BUILD"
+msgstr "Bauen und Berufe"
+
+msgid "GUIDE_STEP_TRIBE_CAMERA"
+msgstr "Die Dorfkamera bewegen"
+
+msgid "GUIDE_HINT_TRIBE_CAMERA"
+msgstr "Bewege die Ansicht mit {forward}/{left}/{back}/{right}."
+
+msgid "GUIDE_DETAIL_TRIBE_CAMERA"
+msgstr "Du bewegst die Kamera, nicht die Bewohner. Ziehe mit {orbit} zum Drehen und Neigen; das Mausrad zoomt. {home} zeigt das Dorf, {selection} die Auswahl. Tempo, Startneigung und Tasten findest du unter Esc → Einstellungen → Steuerung. Die Kamera vergrößert weder Arbeitsgebiet noch erkundete Karte."
+
+msgid "GUIDE_STEP_TRIBE_SINGLE"
+msgstr "Einen Bewohner auswählen"
+
+msgid "GUIDE_HINT_TRIBE_SINGLE"
+msgstr "Klicke eine Bewohnerkarte an, um nur diesem Bewohner Aufgaben zu geben."
+
+msgid "GUIDE_DETAIL_TRIBE_SINGLE"
+msgstr "Du kannst auch direkt auf die Kreatur klicken. Die markierten Karten und Ringe zeigen die Auswahl. Ein späterer Auftrag gilt nur für diese Bewohner; die übrigen arbeiten weiter."
+
+msgid "GUIDE_STEP_TRIBE_GROUP"
+msgstr "Eine Gruppe auswählen"
+
+msgid "GUIDE_HINT_TRIBE_GROUP"
+msgstr "Wähle mehrere Bewohner: Umschalt + Klick, Auswahlrahmen oder „Alle auswählen“."
+
+msgid "GUIDE_DETAIL_TRIBE_GROUP"
+msgstr "Ziehe mit der linken Maustaste im Spielfeld einen Rahmen. Umschalt fügt Bewohner zur Auswahl hinzu oder entfernt sie über ihre Karte. Die Auswahl allein erteilt noch keinen Auftrag."
+
+msgid "GUIDE_STEP_TRIBE_ORDER"
+msgstr "Einen Sammelauftrag erteilen"
+
+msgid "GUIDE_HINT_TRIBE_ORDER"
+msgstr "Wähle Bewohner und klicke unter „Aufträge“ auf „Holz sammeln“."
+
+msgid "GUIDE_DETAIL_TRIBE_ORDER"
+msgstr "Alternativ: Rechtsklick auf ein Rohstoffvorkommen. Der Auftrag bleibt bestehen, bis du ihn änderst. „Anhalten“ merkt ihn sich; „Fortsetzen“ nimmt ihn wieder auf. Ein blockierter Weg hält die Arbeit auf. Bei einem Speicherfehler bleibt der vorherige Auftrag erhalten."
+
+msgid "GUIDE_STEP_TRIBE_DELIVERY"
+msgstr "Die erste Lieferung abwarten"
+
+msgid "GUIDE_HINT_TRIBE_DELIVERY"
+msgstr "Warte, bis ein Bewohner seine gesammelte Ware am Dorfplatz abliefert."
+
+msgid "GUIDE_DETAIL_TRIBE_DELIVERY"
+msgstr "Vorkommen sind noch kein Lagerbestand. Getragene Ware ist unterwegs und wird erst bei Ankunft eingelagert. Die Lagerhaufen wachsen mit den freien Vorräten. Goldfarbene Bauware ist reserviert; am Bau angelieferte Ware gehört zur Baustelle. Fahre über Haufen oder Ressourcenleiste für genaue Mengen."
+
+msgid "GUIDE_STEP_TRIBE_SUPPLY"
+msgstr "Einen Bewohner versorgen"
+
+msgid "GUIDE_HINT_TRIBE_SUPPLY"
+msgstr "Sammle Nahrung und lasse einen hungrigen Bewohner „Jetzt essen“."
+
+msgid "GUIDE_DETAIL_TRIBE_SUPPLY"
+msgstr "Die Versorgungsbefehle stehen unter „Arbeitsplätze & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab."
+
+msgid "GUIDE_STEP_TRIBE_TOOL"
+msgstr "Ein Steinwerkzeug herstellen"
+
+msgid "GUIDE_HINT_TRIBE_TOOL"
+msgstr "Lagere 3 Holz und 2 Stein ein. Beauftrage dann im Reiter „Bauen“ das Werkzeug."
+
+msgid "GUIDE_DETAIL_TRIBE_TOOL"
+msgstr "Wähle mindestens einen Bewohner als Arbeiter aus. Die Herstellung findet am Dorfplatz statt; warte auf den Abschluss. Das fertige Werkzeug wird für Gebäude benötigt. Ein Klick ohne Material oder ein nur begonnener Auftrag genügt nicht."
+
+msgid "GUIDE_STEP_TRIBE_PLACE"
+msgstr "Ein Gebäude platzieren"
+
+msgid "GUIDE_HINT_TRIBE_PLACE"
+msgstr "Wähle einen Bauauftrag, prüfe die Vorschau und bestätige einen freien Platz mit Rechtsklick."
+
+msgid "GUIDE_DETAIL_TRIBE_PLACE"
+msgstr "Zum Beispiel: Hütte für 6 Holz / 3 Stein, oder Forstplatz für 4 Holz / 1 Stein. Wähle Bewohner als Bauarbeiter. Grün bedeutet gültig, Rot erklärt ein Hindernis; Esc bricht ohne Kosten ab. Erst der erfolgreiche Rechtsklick legt die Baustelle an und reserviert Material. Der Arbeitsbereich bleibt nahe am Dorf."
+
+msgid "GUIDE_STEP_TRIBE_FINISH"
+msgstr "Den Bau fertigstellen"
+
+msgid "GUIDE_HINT_TRIBE_FINISH"
+msgstr "Lasse die zugewiesenen Bewohner das Gebäude fertigstellen."
+
+msgid "GUIDE_DETAIL_TRIBE_FINISH"
+msgstr "Zuerst transportieren die Bewohner die reservierten Materialien zur Baustelle. Danach steigt der Baufortschritt. Weitere Bewohner können mitarbeiten. Pausierte oder blockierte Arbeit zählt noch nicht als Abschluss; Gründe und Materialstand stehen im Baureiter."
+
+msgid "GUIDE_STEP_TRIBE_PROFESSION"
+msgstr "Einen Beruf zuweisen"
+
+msgid "GUIDE_HINT_TRIBE_PROFESSION"
+msgstr "Wähle einen Bewohner und weise unter „Arbeitsplätze & Berufe“ einen Beruf zu."
+
+msgid "GUIDE_DETAIL_TRIBE_PROFESSION"
+msgstr "Ein Beruf ist die dauerhafte Zuständigkeit, etwa Holzarbeiter oder Versorger. Ein einzelner Auftrag kann diese Arbeit vorübergehend ersetzen. Der Beruf bleibt auf der Bewohnerkarte sichtbar. Er ist noch keine Bindung an einen bestimmten Arbeitsplatz."
+
+msgid "GUIDE_STEP_TRIBE_WORKPLACE"
+msgstr "Einen Arbeitsplatz zuordnen"
+
+msgid "GUIDE_HINT_TRIBE_WORKPLACE"
+msgstr "Baue einen Forstplatz oder Brunnen und ordne ausgewählte Bewohner über dessen Arbeitsplatzzeile zu."
+
+msgid "GUIDE_DETAIL_TRIBE_WORKPLACE"
+msgstr "Die fertigen Arbeitsplätze stehen unter „Arbeitsplätze & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen."
+
+msgid "GUIDE_TRIBAL_TITLE"
+msgstr "DEIN DORF SCHRITT FÜR SCHRITT"

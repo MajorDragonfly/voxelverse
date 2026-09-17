@@ -302,7 +302,9 @@
         "save_browser_search_test",
         "onboarding_guidance_world_test",
         "slot_scan_test",
-        "tribal_camera_preferences_test"
+        "tribal_camera_preferences_test",
+        "tribal_guidance_test",
+        "tribal_guidance_world_test"
       ]
     },
     {

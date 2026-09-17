@@ -8281,6 +8281,206 @@
       "key": "TRIBE_CAMERA_HINT",
       "de": "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right}\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nDie Kamera kann weiter schauen als Bewohner arbeiten können.",
       "en": "Pan: {move_forward} / {move_back} / {move_left} / {move_right}\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nThe camera can look beyond the residents’ working area."
+    },
+    {
+      "key": "GUIDE_TRIBAL_CARD",
+      "de": "Anleitung {done}/{total} · {hint}",
+      "en": "Guide {done}/{total} · {hint}"
+    },
+    {
+      "key": "GUIDE_TRIBAL_HELP",
+      "de": "Hilfe",
+      "en": "Help"
+    },
+    {
+      "key": "GUIDE_TRIBAL_INTRO",
+      "de": "Drei Kapitel erklären Kamera, Aufträge und Dorfaufbau. Wähle ein Kapitel für kurze Hinweise im Dorf. Ausschalten, Fortsetzen und Neubeginn sind jederzeit möglich; vorhandene Werkzeuge und fertige Gebäude werden angerechnet.",
+      "en": "Three chapters explain the camera, orders and village building. Choose a chapter for short village hints. Turn them off, resume or restart at any time; existing tools and completed buildings are recognised."
+    },
+    {
+      "key": "GUIDE_CHAPTER_TRIBE_VIEW",
+      "de": "Blick und Auswahl",
+      "en": "View and selection"
+    },
+    {
+      "key": "GUIDE_CHAPTER_TRIBE_WORK",
+      "de": "Aufträge und Vorräte",
+      "en": "Orders and supplies"
+    },
+    {
+      "key": "GUIDE_CHAPTER_TRIBE_BUILD",
+      "de": "Bauen und Berufe",
+      "en": "Building and professions"
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_CAMERA",
+      "de": "Die Dorfkamera bewegen",
+      "en": "Move the village camera"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_CAMERA",
+      "de": "Bewege die Ansicht mit {forward}/{left}/{back}/{right}.",
+      "en": "Move the view with {forward}/{left}/{back}/{right}."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_CAMERA",
+      "de": "Du bewegst die Kamera, nicht die Bewohner. Ziehe mit {orbit} zum Drehen und Neigen; das Mausrad zoomt. {home} zeigt das Dorf, {selection} die Auswahl. Tempo, Startneigung und Tasten findest du unter Esc → Einstellungen → Steuerung. Die Kamera vergrößert weder Arbeitsgebiet noch erkundete Karte.",
+      "en": "You move the camera, not the residents. Drag with {orbit} to rotate and tilt; use the wheel to zoom. {home} shows the village and {selection} the selection. Find speed, starting tilt and bindings under Esc → Settings → Controls. Moving the camera does not expand the work area or explored map."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_SINGLE",
+      "de": "Einen Bewohner auswählen",
+      "en": "Select one resident"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_SINGLE",
+      "de": "Klicke eine Bewohnerkarte an, um nur diesem Bewohner Aufgaben zu geben.",
+      "en": "Click a resident card to give orders to just that resident."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_SINGLE",
+      "de": "Du kannst auch direkt auf die Kreatur klicken. Die markierten Karten und Ringe zeigen die Auswahl. Ein späterer Auftrag gilt nur für diese Bewohner; die übrigen arbeiten weiter.",
+      "en": "You can also click the creature itself. Highlighted cards and rings show the selection. Your next order applies only to those residents; everyone else keeps working."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_GROUP",
+      "de": "Eine Gruppe auswählen",
+      "en": "Select a group"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_GROUP",
+      "de": "Wähle mehrere Bewohner: Umschalt + Klick, Auswahlrahmen oder „Alle auswählen“.",
+      "en": "Select several residents: Shift + click, drag a selection box, or choose “Select all”."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_GROUP",
+      "de": "Ziehe mit der linken Maustaste im Spielfeld einen Rahmen. Umschalt fügt Bewohner zur Auswahl hinzu oder entfernt sie über ihre Karte. Die Auswahl allein erteilt noch keinen Auftrag.",
+      "en": "Drag a box in the world with the left mouse button. Shift adds residents, or toggles them when clicking their cards. Selecting residents does not issue an order."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_ORDER",
+      "de": "Einen Sammelauftrag erteilen",
+      "en": "Issue a gathering order"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_ORDER",
+      "de": "Wähle Bewohner und klicke unter „Aufträge“ auf „Holz sammeln“.",
+      "en": "Select residents, then choose “Gather wood” under “Orders”."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_ORDER",
+      "de": "Alternativ: Rechtsklick auf ein Rohstoffvorkommen. Der Auftrag bleibt bestehen, bis du ihn änderst. „Anhalten“ merkt ihn sich; „Fortsetzen“ nimmt ihn wieder auf. Ein blockierter Weg hält die Arbeit auf. Bei einem Speicherfehler bleibt der vorherige Auftrag erhalten.",
+      "en": "Alternatively, right-click a resource deposit. An order stays active until you change it. “Stop” remembers it; “Resume” continues it. A blocked route holds up work. If saving fails, the previous order remains in place."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_DELIVERY",
+      "de": "Die erste Lieferung abwarten",
+      "en": "Wait for the first delivery"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_DELIVERY",
+      "de": "Warte, bis ein Bewohner seine gesammelte Ware am Dorfplatz abliefert.",
+      "en": "Wait for a resident to deliver gathered goods to the village square."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_DELIVERY",
+      "de": "Vorkommen sind noch kein Lagerbestand. Getragene Ware ist unterwegs und wird erst bei Ankunft eingelagert. Die Lagerhaufen wachsen mit den freien Vorräten. Goldfarbene Bauware ist reserviert; am Bau angelieferte Ware gehört zur Baustelle. Fahre über Haufen oder Ressourcenleiste für genaue Mengen.",
+      "en": "Deposits are not stored goods. Carried goods are in transit and enter storage only on arrival. Stockpiles grow with available supplies. Gold construction goods are reserved; delivered building materials belong to the site. Hover over piles or the resource bar for exact amounts."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_SUPPLY",
+      "de": "Einen Bewohner versorgen",
+      "en": "Supply a resident"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_SUPPLY",
+      "de": "Sammle Nahrung und lasse einen hungrigen Bewohner „Jetzt essen“.",
+      "en": "Gather food, then let a hungry resident “Eat now”."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_SUPPLY",
+      "de": "Die Versorgungsbefehle stehen unter „Arbeitsplätze & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab.",
+      "en": "Supply commands are under “Workplaces & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_TOOL",
+      "de": "Ein Steinwerkzeug herstellen",
+      "en": "Make a stone tool"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_TOOL",
+      "de": "Lagere 3 Holz und 2 Stein ein. Beauftrage dann im Reiter „Bauen“ das Werkzeug.",
+      "en": "Store 3 wood and 2 stone, then order the tool under “Build”."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_TOOL",
+      "de": "Wähle mindestens einen Bewohner als Arbeiter aus. Die Herstellung findet am Dorfplatz statt; warte auf den Abschluss. Das fertige Werkzeug wird für Gebäude benötigt. Ein Klick ohne Material oder ein nur begonnener Auftrag genügt nicht.",
+      "en": "Select at least one resident as a worker. Crafting happens at the village square; wait for it to finish. The completed tool is required for buildings. Clicking without materials or merely starting the order is not enough."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_PLACE",
+      "de": "Ein Gebäude platzieren",
+      "en": "Place a building"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_PLACE",
+      "de": "Wähle einen Bauauftrag, prüfe die Vorschau und bestätige einen freien Platz mit Rechtsklick.",
+      "en": "Choose a building, check its preview, then confirm a free site with right-click."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_PLACE",
+      "de": "Zum Beispiel: Hütte für 6 Holz / 3 Stein, oder Forstplatz für 4 Holz / 1 Stein. Wähle Bewohner als Bauarbeiter. Grün bedeutet gültig, Rot erklärt ein Hindernis; Esc bricht ohne Kosten ab. Erst der erfolgreiche Rechtsklick legt die Baustelle an und reserviert Material. Der Arbeitsbereich bleibt nahe am Dorf.",
+      "en": "For example: a hut costs 6 wood / 3 stone, or a forestry station 4 wood / 1 stone. Select residents as builders. Green means valid; red indicates a problem. Esc cancels without cost. Only a successful right-click creates the site and reserves materials. The work area remains close to the village."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_FINISH",
+      "de": "Den Bau fertigstellen",
+      "en": "Finish construction"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_FINISH",
+      "de": "Lasse die zugewiesenen Bewohner das Gebäude fertigstellen.",
+      "en": "Let the assigned residents finish the building."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_FINISH",
+      "de": "Zuerst transportieren die Bewohner die reservierten Materialien zur Baustelle. Danach steigt der Baufortschritt. Weitere Bewohner können mitarbeiten. Pausierte oder blockierte Arbeit zählt noch nicht als Abschluss; Gründe und Materialstand stehen im Baureiter.",
+      "en": "Residents first carry the reserved materials to the site. Construction progress then increases. More residents can help. Paused or blocked work does not count as completion; the Build tab shows reasons and material status."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_PROFESSION",
+      "de": "Einen Beruf zuweisen",
+      "en": "Assign a profession"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_PROFESSION",
+      "de": "Wähle einen Bewohner und weise unter „Arbeitsplätze & Berufe“ einen Beruf zu.",
+      "en": "Select a resident and assign a profession under “Workplaces & professions”."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_PROFESSION",
+      "de": "Ein Beruf ist die dauerhafte Zuständigkeit, etwa Holzarbeiter oder Versorger. Ein einzelner Auftrag kann diese Arbeit vorübergehend ersetzen. Der Beruf bleibt auf der Bewohnerkarte sichtbar. Er ist noch keine Bindung an einen bestimmten Arbeitsplatz.",
+      "en": "A profession is a lasting responsibility, such as woodworker or provider. An individual order can temporarily replace that work. The profession remains visible on the resident card. It does not yet bind the resident to a specific workplace."
+    },
+    {
+      "key": "GUIDE_STEP_TRIBE_WORKPLACE",
+      "de": "Einen Arbeitsplatz zuordnen",
+      "en": "Assign a workplace"
+    },
+    {
+      "key": "GUIDE_HINT_TRIBE_WORKPLACE",
+      "de": "Baue einen Forstplatz oder Brunnen und ordne ausgewählte Bewohner über dessen Arbeitsplatzzeile zu.",
+      "en": "Build a forestry station or well and assign selected residents using its workplace row."
+    },
+    {
+      "key": "GUIDE_DETAIL_TRIBE_WORKPLACE",
+      "de": "Die fertigen Arbeitsplätze stehen unter „Arbeitsplätze & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen.",
+      "en": "Completed workplaces appear under “Workplaces & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
+    },
+    {
+      "key": "GUIDE_TRIBAL_TITLE",
+      "de": "DEIN DORF SCHRITT FÜR SCHRITT",
+      "en": "YOUR VILLAGE, STEP BY STEP"
     }
   ]
 }
