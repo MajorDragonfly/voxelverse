@@ -4,6 +4,7 @@ const Surface = preload("res://core/campaign/surface_context.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
 const Shutdown = preload("res://core/runtime_shutdown.gd")
 const Stats = preload("res://tools/performance_stats.gd")
+const Steering = preload("res://creatures/ai/wildlife_steering.gd")
 const TITLE: String = "res://ui/frontend/main_menu.tscn"
 var config: Dictionary
 var recipe: Dictionary
@@ -23,6 +24,8 @@ var cycle: int = -1
 var headless: bool
 var breadcrumbs: Array[Dictionary] = []
 var source_world: WeakRef
+var next_steer: int = 0
+var steered: Vector3 = Vector3.ZERO
 
 func _initialize() -> void: call_deferred("_run")
 
@@ -147,6 +150,7 @@ func _is_world() -> bool:
 
 func _walk_outward(player: CharacterBody3D) -> void:
 	breadcrumbs = [player.location()]
+	next_steer = 0
 	var initial_forward: Vector3 = player.forward
 	var begin: int = Time.get_ticks_msec()
 	var duration: float = recipe.walk_seconds
@@ -156,7 +160,7 @@ func _walk_outward(player: CharacterBody3D) -> void:
 		var elapsed: float = (Time.get_ticks_msec() - begin) / 1000.0
 		var leg: int = mini(2, int(elapsed / (duration / 3.0)))
 		var up: Vector3 = current_scene.adapter.up_at(player.location())
-		player.global_basis = Cube.frame(up, initial_forward.rotated(up, [0.0, PI / 4.0, -PI / 4.0][leg]))
+		_steer_route(player, initial_forward.rotated(up, [0.0, PI / 4.0, -PI / 4.0][leg]))
 		await _tick()
 		if player.is_dead: failures.append("Player died on the route; no survival overrides applied."); break
 		if _distance(player.location(), breadcrumbs[-1]) >= 0.75:
@@ -174,6 +178,7 @@ func _walk_return(player: CharacterBody3D) -> void:
 	Input.action_press("move_forward")
 	for index in range(breadcrumbs.size() - 1, -1, -1):
 		var destination: Dictionary = breadcrumbs[index]
+		next_steer = 0
 		while _distance(player.location(), destination) > 0.65:
 			if player.is_dead or Time.get_ticks_msec() > deadline:
 				report.blockage = {"actual": player.location(), "target": destination, "is_dead": player.is_dead,
@@ -194,10 +199,27 @@ func _walk_return(player: CharacterBody3D) -> void:
 				return
 			var up: Vector3 = current_scene.adapter.up_at(player.location())
 			var delta: Vector3 = current_scene.adapter.to_local(destination) - player.global_position
-			player.global_basis = Cube.frame(up, delta.slide(up).normalized())
+			_steer_route(player, delta.slide(up).normalized(), minf(0.9, delta.slide(up).length()))
 			await _tick()
 	Input.action_release("move_forward")
 	segments.append({"stage": "return_outcome", "cycle": cycle, "distance_from_start_m": _distance(player.location(), breadcrumbs[0])})
+
+func _steer_route(player: CharacterBody3D, desired: Vector3, lookahead: float = 0.9) -> void:
+	# A breadcrumb can become occupied by a moving animal after the outward
+	# walk. Use normal turning/input around physical bodies instead of walking
+	# into them until the observer dies. Collision, damage and speed stay real.
+	if Time.get_ticks_msec() >= next_steer:
+		next_steer = Time.get_ticks_msec() + 100
+		steered = Steering.choose(player, desired, player.maximum_step_height, 1.0, lookahead)
+		if steered == Vector3.ZERO:
+			steered = Steering.choose(player, -desired, player.maximum_step_height, 1.0, lookahead)
+		if steered != Vector3.ZERO and steered.dot(desired) < 0.99:
+			report["obstacle_avoidance_steps"] = int(report.get("obstacle_avoidance_steps", 0)) + 1
+	if steered == Vector3.ZERO:
+		Input.action_release("move_forward")
+	else:
+		player.global_basis = Cube.frame(current_scene.adapter.up_at(player.location()), steered)
+		Input.action_press("move_forward")
 
 func _distance(a: Dictionary, b: Dictionary) -> float:
 	# Directional displacement ignores standing-height oscillation on voxel steps.

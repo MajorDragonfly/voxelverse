@@ -62,6 +62,8 @@ def main():
     recipe = {"protocol": 2, "mode": args.mode, "seed": args.seed, "cycles": args.cycles,
               "walk_seconds": args.walk_seconds, "frame_cap": args.frame_cap, "settle_frames": args.settle_frames,
               "stage_timeout_seconds": args.stage_timeout, "resolution": args.size, "renderer": args.renderer}
+    if args.mode == "route":
+        recipe["steering"] = "local_collision_v1"
     if args.mode == "developed":
         recipe = {"protocol": 3, "mode": "developed", "seed": args.seed, "cycles": args.cycles,
                   "production": args.production, "frame_cap": args.frame_cap,
