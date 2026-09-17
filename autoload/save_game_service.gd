@@ -79,6 +79,12 @@ func _process(delta: float) -> void:
 	_apply_pending_runtime_state()
 	if not autosave_enabled or (session_managed and get_tree().paused):
 		return
+	if session_managed:
+		var flow: Node = get_node_or_null("/root/SessionFlow")
+		# Returning from the lab restores its previous autosave preference before
+		# terrain is ready. Preserve the checkpoint until arrival resets the timer.
+		if flow != null and flow.loading:
+			return
 	_autosave_timer -= delta
 	if _autosave_timer > 0.0:
 		return

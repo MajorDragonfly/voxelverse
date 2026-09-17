@@ -63,9 +63,11 @@ func _ready() -> void:
 	get_node("/root/SaveGameService")._apply_pending_runtime_state()
 	# Restore the final saved address before building terrain. Previously both
 	# the default spawn and saved pose forced a complete synchronous load.
-	# The existing loading guard waits for terrain/collisions and scenery.
+	# The initial floor must publish in one load operation: distributing its
+	# hundreds of patches over rendered frames can exhaust the loading guard.
+	# Normal movement keeps the bounded asynchronous streaming path.
 	player.initial_placement = false
-	terrain.stream_at(player.up_direction)
+	terrain.stream_at(player.up_direction, true)
 	adapter.bind(str(state.campaign.data.player_object_id), player, player.location(), player.forward)
 	player.camera.near = 0.2
 	player.camera.far = 30000.0
