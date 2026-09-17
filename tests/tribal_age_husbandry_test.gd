@@ -82,6 +82,20 @@ func _run() -> void:
 	lab.animal.visible = false
 	_expect(not tribe.husbandry.assign(pen_id, Lab.ANIMAL), "Unloaded/hidden animal accepted.")
 	lab.animal.visible = true
+	# A real follower can settle between 1.2 and 1.8 m from the pen origin.
+	# Exercise the production admission boundary before the normal UI binding.
+	var saved_position: Vector3 = lab.animal.global_position
+	var animal_record: Dictionary = lab.registry()["animals"][Lab.ANIMAL]
+	var saved_record_position: Array = animal_record["position"].duplicate()
+	var pen_point: Vector3 = Model.Home.vector(_pen()["position"])
+	lab.animal.global_position = pen_point + Vector3(1.7, 0, 0)
+	animal_record["position"] = Model.Home.vector_array(lab.animal.global_position)
+	_expect(tribe.husbandry.attendance(_pen(), Lab.ANIMAL)["error"].is_empty(), "Valid 1.7 m animal attendance was rejected")
+	lab.animal.global_position = pen_point + Vector3(1.9, 0, 0)
+	animal_record["position"] = Model.Home.vector_array(lab.animal.global_position)
+	_expect(not tribe.husbandry.attendance(_pen(), Lab.ANIMAL)["error"].is_empty(), "Animal outside the 1.8 m pen boundary was accepted")
+	lab.animal.global_position = saved_position
+	animal_record["position"] = saved_record_position
 	tribe.panel._tabs.current_tab = 2
 	tribe.panel.refresh()
 	await _frames(3)

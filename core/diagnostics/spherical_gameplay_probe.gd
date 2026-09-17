@@ -209,14 +209,14 @@ func _animal_chain(tribe: Node) -> void:
 	var through: Vector3 = site + (site - tribe.anchor()).slide(Space.up(self, site)).normalized() * 1.2
 	through = tribe.navigation.snap(through)
 	_expect(tribe.issue_order("move", through), "Handler cannot walk through pen.")
-	# Admission checks the real actor origin. The upright egg animal has a
-	# taller origin than the milk animal; use the unchanged 1.8 m game rule.
-	# Waiting and the later cold return both recheck actual pen attendance.
-	var admission_margin: float = 1.75 if production_kind == "eggs" else 1.2
-	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(site) < admission_margin, 24000)
-	if not _expect_step(runtime.actor_for(id).global_position.distance_to(site) < admission_margin, "Animal did not follow handler inside pen: " + str({"animal": runtime.actor_for(id).global_position, "handler": tribe.actors[handler].global_position, "site": site, "status": runtime.actor_for(id).status, "animal_route": runtime._routes.get(id), "handler_record": tribe.member_record(handler)})): return
-	runtime.issue_command(id, "wait")
+	# Follow stops 1.6 m behind the handler. Both species use the game's actual
+	# 1.8 m admission rule; a stricter probe-only radius rejects valid arrivals.
+	# The real assignment, production and cold return recheck attendance.
 	var pen: Dictionary = tribe.village().husbandry.pens[0]
+	var pen_point: Vector3 = Space.resolve(tribe, pen.position)
+	await _until(func() -> bool: return runtime.actor_for(id).global_position.distance_to(pen_point) <= 1.8, 24000)
+	if not _expect_step(runtime.actor_for(id).global_position.distance_to(pen_point) <= 1.8, "Animal did not follow handler inside pen: " + str({"animal": runtime.actor_for(id).global_position, "handler": tribe.actors[handler].global_position, "site": pen_point, "status": runtime.actor_for(id).status, "animal_route": runtime._routes.get(id), "handler_record": tribe.member_record(handler)})): return
+	runtime.issue_command(id, "wait")
 	_expect(tribe.husbandry.assign(pen.id, id), "D2->D3 admission failed: " + tribe.status)
 	if pen.animal_id != id: return
 	tribe.select_member(data.members[1].id)
@@ -230,8 +230,23 @@ func _animal_chain(tribe: Node) -> void:
 	_expect(tribe.village().husbandry.delivered.food > 0 and tribe.village().husbandry.delivered.water > 0, "Keeper did not physically supply pen: " + str({"delivered": tribe.village().husbandry.delivered, "members": tribe.village().members, "routes": tribe._routes, "status": tribe.status}))
 	var carrier: String = data.members[2].id
 	_stage("produce_and_collect_" + production_kind)
-	await _until(func() -> bool: return tribe.member_record(carrier).cargo == production_kind, 100000)
-	if not _expect_step(tribe.member_record(carrier).cargo == production_kind, "No real carrier collected the resource batch."): return
+	var production_start: int = Time.get_ticks_msec()
+	var production_first_frame: int = Engine.get_physics_frames()
+	var production_physics_seconds: float = 0.0
+	var production_diagnostic: int = production_start
+	# One batch needs 300 simulation seconds. At 4x this normally fits in
+	# 100 seconds, but a busy headless runner can exhaust its physics budget.
+	# Preserve those 100 seconds of actual physics, with a separate finite
+	# wall-time cap; attendance, supply, production and pickup remain real.
+	while tribe.member_record(carrier).cargo != production_kind and production_physics_seconds < 100.0 and Time.get_ticks_msec() - production_start < 240000:
+		if Time.get_ticks_msec() >= production_diagnostic:
+			production_diagnostic += 20000
+			print("SPHERE_PRODUCTION physics_seconds=", production_physics_seconds, " ", _production_status(tribe, id, carrier, pen))
+		await tree.physics_frame
+		production_physics_seconds = float(Engine.get_physics_frames() - production_first_frame) / Engine.physics_ticks_per_second
+	print("SPHERE_PRODUCTION_TIMING ", JSON.stringify({"physics_seconds": production_physics_seconds,
+		"wall_seconds": (Time.get_ticks_msec() - production_start) / 1000.0, "complete": tribe.member_record(carrier).cargo == production_kind}))
+	if not _expect_step(tribe.member_record(carrier).cargo == production_kind, "No real carrier collected the resource batch: " + str(_production_status(tribe, id, carrier, pen))): return
 	_stage("block_loaded_carrier")
 	tribe.select_member(carrier)
 	tribe.issue_order("wait")
@@ -348,6 +363,15 @@ func _site(tribe: Node, kind: String) -> Vector3:
 		var free: bool = tribe.navigation.free_shelter(candidate, tribe.village(), kind) if kind in ["pen", "laying_site"] else tribe.navigation.free_workplace(candidate, tribe.village(), kind)
 		if free and not tribe.neighbors.occupies(candidate): return candidate
 	return Vector3.INF
+
+func _production_status(tribe: Node, id: String, carrier: String, pen: Dictionary) -> Dictionary:
+	var animal: Node3D = tribe.domestication.actor_for(id)
+	return {"attendance": tribe.husbandry.attendance(pen).error,
+		"animal_distance": animal.global_position.distance_to(Space.resolve(tribe, pen.position)) if animal != null else -1.0,
+		"animal": tribe.domestication.controller.record(id), "pen": pen,
+		"production": tribe.village().husbandry.records.get(id),
+		"carrier": tribe.member_record(carrier), "route": tribe._routes.get(carrier),
+		"status": tribe.status, "navigation_pending": tribe.navigation.pending}
 
 func _production_animal(runtime: Node) -> Node3D:
 	# D1 exposes suitability; an ecology role alone is not proof of production yield.
