@@ -12,7 +12,7 @@
   },
   "candidate": {
     "branch": "agent/integration-playtest-20260917",
-    "sha": "f2e92d27dcb633963a9eb17974816c54b8df4427",
+    "sha": "fd8738b2a0e142f6c7e63e9cfdb467fdd7dad80d",
     "pr": 165,
     "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/165"
   },
