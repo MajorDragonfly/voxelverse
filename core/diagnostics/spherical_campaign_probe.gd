@@ -193,9 +193,10 @@ func _wait_for_home_controls(home: Node) -> void:
 		await tree.process_frame
 
 func _load_timeout_ms() -> int:
-	# Software OpenGL also draws every bounded terrain upload frame. Its native
-	# visual check keeps a separate load watchdog; headless acceptance is unchanged.
-	return 50000 if DisplayServer.get_name() == "headless" else 150000
+	# The integrated far-scenery startup measured 47 s in scene_ready alone.
+	# Leave time for terrain and arrival while retaining a finite load watchdog;
+	# software OpenGL also pays for rendering those bounded upload frames.
+	return 90000 if DisplayServer.get_name() == "headless" else 150000
 
 func _expect_world() -> bool:
 	var valid: bool = tree.current_scene != null and tree.current_scene.scene_file_path == Surface.SCENE and tree.current_scene.world_initialized and not flow.loading

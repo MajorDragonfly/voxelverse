@@ -25,6 +25,9 @@ func _run() -> void:
 	tribe.panel.confirm.pressed.emit()
 	await _until(func() -> bool: return tribe.is_active() and tribe.domestication.is_active() and not tribe.navigation.pending, 15000)
 	if not tribe.is_active(): _expect(false, "Tribe inactive: " + tribe.status); await _done(); return
+	# Reproduce a slow renderer through every ownership handoff, including far
+	# delivery; the ordinary test keeps the user's/default frame setting.
+	if "--slow-settlement-work" in OS.get_cmdline_user_args(): Engine.max_fps = 2
 	var residents: Array = tribe.village().members.map(func(m: Dictionary) -> String: return m.id)
 	var origin: String = tribe.village().id
 	# Evaluate a bounded set of real loaded ground points, using the exact live
@@ -78,13 +81,21 @@ func _run() -> void:
 	_expect(Collection.village(tribe.body(), origin).stock.stone == 0, "Secondary physical delivery changed the origin stock.")
 	# Resume the same origin work through its real UI/controller, then leave it
 	# active remotely while the second site's stone order continues physically.
-	_expect(await tribe.settlements.select(origin), "Return to origin failed.")
+	var returned: bool = await tribe.settlements.select(origin)
+	_expect(returned, "Return to origin failed: " + tribe.status + " / " + saves.last_error)
+	if not returned:
+		await _done()
+		return
 	await _until(func() -> bool: return tribe.domestication.is_active() and not tribe.navigation.pending, 8000)
 	tribe.select_member(residents[1])
 	_expect(tribe.issue_order("resume"), "Held carrier could not resume.")
 	_expect(await tribe.settlements.select(second), "Second return failed.")
 	await _until_work(func() -> bool: return Collection.village(tribe.body(), origin).stock.wood > 0, 15.0, "origin remote delivery")
-	_expect(Collection.village(tribe.body(), origin).stock.wood > 0, "Same-body far work failed to deliver held cargo.")
+	var far: Dictionary = Collection.view(tribe.body(), origin)
+	_expect(far.tribe.stock.wood > 0, "Same-body far work failed to deliver held cargo: " + JSON.stringify({"clock": state.campaign.data.elapsed_seconds, "owner": far.village_simulation.get("owner"), "cursor": far.village_simulation.get("cursor"), "roads": far.village_simulation.get("roads", {}).size(), "members": far.tribe.members.map(func(m: Dictionary) -> Dictionary: return {"id": m.id, "order": m.order, "paused_order": m.paused_order, "cargo": m.cargo, "stage": m.stage, "blocked": m.blocked, "position": m.position, "destination": m.destination}), "jobs": state.far_scheduler.queue, "paused": tree.paused}))
+	if Collection.village(tribe.body(), origin).stock.wood <= 0:
+		await _done()
+		return
 	_expect(Collection.village(tribe.body(), second).stock.wood == 0, "Origin freight appeared in the second store.")
 	_expect(Collection.validate(tribe.body(), state.campaign.data).is_empty(), "Live collection invalid: " + Collection.validate(tribe.body(), state.campaign.data))
 	print("SECOND_SITE both producing")
@@ -163,11 +174,12 @@ func _until_work(predicate: Callable, seconds: float, label: String) -> void:
 	# residents still have to walk, gather and deliver through the live runtime.
 	var started: int = Time.get_ticks_msec()
 	var first_frame: int = Engine.get_physics_frames()
+	var first_clock: float = state.campaign.data.elapsed_seconds
 	var physics_seconds: float = 0.0
 	while not predicate.call() and physics_seconds < seconds and Time.get_ticks_msec() - started < 120000:
 		await tree.physics_frame
 		physics_seconds = float(Engine.get_physics_frames() - first_frame) / Engine.physics_ticks_per_second
-	print("SECOND_SITE_WORK ", JSON.stringify({"step": label, "complete": predicate.call(), "physics_seconds": physics_seconds, "wall_seconds": (Time.get_ticks_msec() - started) / 1000.0}))
+	print("SECOND_SITE_WORK ", JSON.stringify({"step": label, "complete": predicate.call(), "physics_seconds": physics_seconds, "max_fps": Engine.max_fps, "campaign_seconds": state.campaign.data.elapsed_seconds - first_clock, "wall_seconds": (Time.get_ticks_msec() - started) / 1000.0}))
 
 func _capture() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()

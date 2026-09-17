@@ -179,7 +179,11 @@ func _prioritize_catalog(candidates: Array[Dictionary]) -> void:
 	# A full old population must not starve the additive fourth role. Preserve
 	# the sole nearby representative of each other role; unload one ordinary
 	# animal or duplicate through the existing capture/streaming path.
+	# Keep the animal under the player's camera stable through scanning and
+	# returning from its journal. Another ordinary animal can release the slot.
+	var focused: Node = player.get_scan_target() if is_instance_valid(player) and player.has_method("get_scan_target") else null
 	for id: String in animals:
+		if animals[id] == focused: continue
 		var species_id: String = str(animals[id].catalog_species.get("id", ""))
 		if not species_id.is_empty() and int(represented.get(species_id, 0)) <= 1: continue
 		_capture_one(id)

@@ -177,12 +177,18 @@ func _walk_return(player: CharacterBody3D) -> void:
 		while _distance(player.location(), destination) > 0.65:
 			if player.is_dead or Time.get_ticks_msec() > deadline:
 				report.blockage = {"actual": player.location(), "target": destination, "is_dead": player.is_dead,
-					"terrain_wait": player.waiting_for_terrain, "on_floor": player.is_on_floor(), "collisions": []}
+					"health": player.current_health, "hunger": player.current_hunger, "thirst": player.current_thirst,
+					"terrain_wait": player.waiting_for_terrain, "on_floor": player.is_on_floor(), "collisions": [], "wildlife": []}
+				for animal: Node3D in get_nodes_in_group(&"wildlife"):
+					if animal.global_position.distance_to(player.global_position) <= 8.0:
+						report.blockage.wildlife.append({"role": animal.ecological_role, "dead": animal.is_dead,
+							"distance": animal.global_position.distance_to(player.global_position), "intent": animal.get_ai_debug_state().get("intent", "")})
 				for hit_index in range(player.get_slide_collision_count()):
 					var hit: KinematicCollision3D = player.get_slide_collision(hit_index)
 					var collider: Object = hit.get_collider()
 					report.blockage.collisions.append({"normal": [hit.get_normal().x, hit.get_normal().y, hit.get_normal().z],
 						"collider": str(collider.get_path()) if collider is Node else str(collider)})
+				print("PERFORMANCE_BLOCKAGE ", JSON.stringify(report.blockage))
 				failures.append("Physical return blocked or player died; no teleport used.")
 				Input.action_release("move_forward")
 				return

@@ -1,5 +1,6 @@
 extends "tribal_age_test.gd"
 const Neighbor = preload("res://world/tribe/neighbors/neighbor_state.gd")
+const Atomic = preload("res://core/persistence/atomic_json.gd")
 var progression: Node
 var evidence: Dictionary = {}
 
@@ -12,9 +13,11 @@ func _run() -> void:
 	saves.save_path = SAVE
 	if "--verify-neighbors" in OS.get_cmdline_user_args():
 		_expect(saves.load_now(), "Fresh process cannot load neighbor snapshot")
-		var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("user://neighbors_expected.json"))
+		var expected: Dictionary = Atomic.parse_dictionary(FileAccess.get_file_as_string("user://neighbors_expected.json"))
 		var actual: Dictionary = {"village": state.get_current_body()["tribe"], "neighbor": state.get_current_body()["tribal_neighbor"], "progression": progression.export_state()["tribal"]}
-		_expect(JSON.parse_string(JSON.stringify(actual)) == expected, "Cold restart lost people, cargo, receipts or granted offline work")
+		actual = Atomic.parse_dictionary(Atomic.stringify(actual))
+		if actual != expected: print("NEIGHBOR_RESTART_DIFFERENCE ", JSON.stringify(_difference(actual, expected)))
+		_expect(actual == expected, "Cold restart lost people, cargo, receipts or granted offline work")
 		_finish()
 		return
 	Engine.time_scale = 3.0
@@ -182,11 +185,24 @@ func _cold_restart() -> void:
 	_expect(saves.save_now(), "Cannot save neighbor and courier state")
 	var expected: Dictionary = {"village": tribe.village(), "neighbor": _neighbor(), "progression": progression.export_state()["tribal"]}
 	var file: FileAccess = FileAccess.open("user://neighbors_expected.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify(expected))
+	file.store_string(Atomic.stringify(expected))
 	file.close()
 	var output: Array = []
 	var result: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", "res://tests/tribal_neighbors_world_test.gd", "--", "--verify-neighbors"], output, true)
 	_expect(result == 0 and not str(output).contains("SCRIPT ERROR"), "Fresh neighbor process failed: " + str(output))
+
+func _difference(actual: Variant, expected: Variant, path: String = "") -> Dictionary:
+	if actual == expected: return {}
+	if actual is Dictionary and expected is Dictionary:
+		for key: Variant in actual.keys() + expected.keys():
+			if not actual.has(key) or not expected.has(key): return {"path": path + "/" + str(key), "missing": true}
+			var child: Dictionary = _difference(actual[key], expected[key], path + "/" + str(key))
+			if not child.is_empty(): return child
+	if actual is Array and expected is Array and actual.size() == expected.size():
+		for index: int in actual.size():
+			var child: Dictionary = _difference(actual[index], expected[index], path + "/" + str(index))
+			if not child.is_empty(): return child
+	return {"path": path, "actual": actual, "expected": expected}
 
 func _expect(condition: bool, message: String) -> void:
 	if not condition:

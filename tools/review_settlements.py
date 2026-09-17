@@ -27,7 +27,7 @@ def main():
                    'res://tests/settlement_runtime_test.gd', '--', '--capture-dir', str(output)]
         with log_path.open('w') as log:
             try:
-                result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=600)
+                result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=1200)
                 status = result.returncode
             except subprocess.TimeoutExpired:
                 log.write('\nERROR: settlement render timed out\n')

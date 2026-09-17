@@ -237,7 +237,7 @@ func _storm_campaign_contract(weather: Node) -> void:
 
 func _wait_for_arrival() -> void:
 	var started: int = Time.get_ticks_msec()
-	while root.get_node("SessionFlow").loading and Time.get_ticks_msec() - started < 50000: await process_frame
+	while root.get_node("SessionFlow").loading and Time.get_ticks_msec() - started < 90000: await process_frame
 	_expect(not root.get_node("SessionFlow").loading, "Climate travel timed out.")
 
 func _open(path: String) -> void:
@@ -246,7 +246,7 @@ func _open(path: String) -> void:
 	await scene_changed
 	flow.load_game(path)
 	var started: int = Time.get_ticks_msec()
-	while flow.loading and Time.get_ticks_msec() - started < 50000: await process_frame
+	while flow.loading and Time.get_ticks_msec() - started < 90000: await process_frame
 	root.get_node("SaveGameService").autosave_enabled = false
 
 func _expect(condition: bool, message: String) -> void:

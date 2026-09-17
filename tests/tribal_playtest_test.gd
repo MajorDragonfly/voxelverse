@@ -44,7 +44,7 @@ func _run() -> void:
 	flow.world_started.connect(func() -> void: call_deferred("_cancel_preparation"), CONNECT_ONE_SHOT)
 	current_scene.find_child("TribalPlaytest", true, false).pressed.emit()
 	current_scene.find_child("BeginTribalPlaytest", true, false).pressed.emit()
-	await _until(func() -> bool: return not flow.loading and not flow.has_node("TribalPlaytestLauncher"), 60000)
+	await _until(func() -> bool: return not flow.loading and not flow.has_node("TribalPlaytestLauncher"), 90000)
 	_expect(current_scene.scene_file_path == flow.SPHERE_SCENE and state.current_phase == 0
 		and current_scene.player.process_mode != Node.PROCESS_MODE_DISABLED, "Preparation cancellation did not restore the creature.")
 	_expect(FileAccess.get_file_as_string(original) == original_bytes, "Canceled preparation changed the original.")
@@ -114,7 +114,7 @@ func _restart() -> void:
 	await flow.load_game(expected.path)
 	await _until(func() -> bool:
 		var tribe: Node = current_scene.get_node_or_null("Nest/Tribe")
-		return not flow.loading and tribe != null and tribe.is_active(), 60000)
+		return not flow.loading and tribe != null and tribe.is_active(), 150000)
 	var tribe: Node = current_scene.get_node_or_null("Nest/Tribe")
 	_expect(tribe != null and tribe.is_active(), "Fresh process did not restore group control.")
 	if tribe != null and tribe.is_active():

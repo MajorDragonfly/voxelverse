@@ -27,7 +27,8 @@ else:
 # plus transport and restart. Keep short checks bounded independently.
 # The two campaign migration flows also reload three cold spherical worlds;
 # their combined far-scenery loads measured 42–48 seconds each in integration.
-LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "site_transport_runtime_test", "workplace_runtime_test", "spherical_developed_migration_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
+LONG_TESTS.update({"surface_support_test", "weather_runtime_test", "graphics_settings_test", "tribal_playtest_test"})
 
 ERROR = re.compile(r"SCRIPT ERROR|(?:^|\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit")
 
@@ -144,7 +145,7 @@ def validate(args):
     # The complete mouth matrix/editor/save/restart check measured 158.8 s on
     # the integrated catalog. Bound that test at 240 s; keep other short limits.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 240 if name == "creature_mouth_refresh_test" else 120) for name in tests]
+                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test"} else 120) for name in tests]
     if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:

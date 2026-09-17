@@ -56,7 +56,7 @@ func setup(owner_node: Node, member: Dictionary, blueprint: Dictionary, index: i
 		controller.player.creature_attacked.connect(_player_attacked)
 
 func _physics_process(delta: float) -> void:
-	var dt: float = GameState.simulation_delta(delta)
+	var dt: float = get_node("/root/GameState").simulation_delta(delta)
 	if dt <= 0.0 or get_tree().paused: return
 	if not is_instance_valid(controller) or not controller.is_active():
 		_stop_play("inactive")
@@ -201,7 +201,7 @@ func receive_creature_attack(damage: float, _attacker: Node = null) -> void:
 	receive_damage(damage)
 
 func receive_damage(damage: float) -> void:
-	if not is_finite(damage) or damage <= 0.0 or not controller.is_active() or GameState.simulation_delta(1.0) <= 0.0: return
+	if not is_finite(damage) or damage <= 0.0 or not controller.is_active() or get_node("/root/GameState").simulation_delta(1.0) <= 0.0: return
 	current_health = maxf(0.0, current_health - damage)
 	controller.member_record(member_id).health = current_health
 	_recovering = current_health <= 30.0
