@@ -1,20 +1,20 @@
 {
   "schema": 1,
   "repository": "MajorDragonfly/voxelverse",
-  "reviewed_on": "2026-09-16",
+  "reviewed_on": "2026-09-17",
   "scope_version": 1,
   "scope": "Vollständige Singleplayer-Zielvision: Kreatur → Stamm → Antike/Mittelalter → Neuzeit/Weltmacht → Weltraum; gemeinsame Editoren, Community-Vorlagen und ausgereifte Veröffentlichung. Gewichtung und Schätzintervalle sind die anfängliche Planungsbewertung, keine gemessene Fertigquote.",
   "coordination_issue": 137,
   "main": {
     "branch": "main",
-    "sha": "c2e81883ac62855a511652fd0de47d29856491ec",
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/142"
+    "sha": "176d088d34324de14952bc7506fe9763a22cf4b0",
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/commit/176d088d34324de14952bc7506fe9763a22cf4b0"
   },
   "candidate": {
-    "branch": "agent/project-cleanup-20260916",
-    "sha": "5d8e14070b484064ef70b6f3d3d20c18f3f0713c",
-    "pr": 142,
-    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/142"
+    "branch": "agent/integration-playtest-20260917",
+    "sha": "91502b883df38608d15f3569769034110bfc5828",
+    "pr": 165,
+    "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/165"
   },
   "areas": [
     {
@@ -412,27 +412,42 @@
     },
     {
       "id": "PERF-COLD-START",
-      "title": "Kalten Kampagnenstart in messbare Abschnitte zerlegen",
+      "title": "Kaltstart in messbare Abschnitte zerlegen",
       "area": "foundation",
-      "status": "planned",
+      "status": "integrated",
       "depends_on": [],
-      "limits": "Instrumentierung und Auswertung; keine neuen Grafikdefaults oder pauschalen Timeout-Erhöhungen. Ziel-PC-Werte erst nach tatsächlicher Messung."
+      "limits": "Messinstrumentierung; Ziel-PC-Zeiten und FPS erst nach tatsächlicher Messung.",
+      "pr": 152,
+      "head": "7d1fad4b23e22e33a50c0583dd4f3df10ad81c18",
+      "branch": "agent/perf-cold-start-20260916",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/152",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
     },
     {
       "id": "RENDER-DISTANT-FOREST",
-      "title": "Übergang zwischen naher Vegetation und fernem Wald prüfen",
+      "title": "Vegetation und Terrain bis zur Fernsicht gemeinsam erhalten",
       "area": "foundation",
-      "status": "planned",
+      "status": "integrated",
       "depends_on": [],
-      "limits": "Keine Terrain-/Save-Umstrukturierung oder Änderungen an M4-Tiernavigation. Native Leistungsfreigabe benötigt Ziel-PC."
+      "limits": "Ziel-PC-Messung; unveränderte Streaming- und Kollisionsbudgets.",
+      "pr": 150,
+      "head": "c3cf494b3dd5bf72464264c355d32cd295ab543e",
+      "branch": "fix/surface-distance-visibility",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/150",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
     },
     {
       "id": "WEATHER-03-STORM-PREVIEW",
-      "title": "Deterministische Sturmphasen in der Diagnosevorschau",
+      "title": "Deterministische Sturmvorschau",
       "area": "foundation",
-      "status": "planned",
+      "status": "integrated",
       "depends_on": [],
-      "limits": "Kein Wetterschaden, kein M4-Deckungsverhalten und keine Aktivierung gefährlicher regulärer Reiseziele vor Schutz-/Reisekette."
+      "limits": "Diagnosevorschau; kein Wetterschaden, kein gefährliches reguläres Reiseziel.",
+      "pr": 151,
+      "head": "e3a4ca14af9a80622e5be408ee128ac4c9d91549",
+      "branch": "agent/weather03-storm-preview-20260916",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/151",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
     },
     {
       "id": "WEATHER-05-FORECAST-UI",
@@ -446,30 +461,225 @@
     },
     {
       "id": "BP-COMMUNITY-SERVICE-CONTRACT",
-      "title": "Begrenzten Kataloganschluss für Community-Entwürfe vorbereiten",
+      "title": "Begrenzter Community-Kataloganschluss",
       "area": "release",
-      "status": "planned",
+      "status": "integrated",
       "depends_on": [],
-      "limits": "Kein kostenpflichtiger Anbieter, kein öffentlicher Dienst und keine Konten-/Deploymententscheidung. Lokaler Prüfstand ist keine fertige Online-Veröffentlichung; Freischaltung bleibt Folgeabnahme."
+      "limits": "Kein aktivierter Online-Anbieter, kein öffentlicher Dienst und keine Kontenentscheidung.",
+      "pr": 164,
+      "head": "2fe6cd051ccea75f43dba8c3208ebe5c13013608",
+      "branch": "agent/community-service-contract-20260917",
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/164",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "M6-PLAYTEST-PLAN",
+      "title": "Stammes-Spieltest und Folgearbeit konkretisieren",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 145,
+      "head": "129ed576c0951fdba5800982ac75e3376cd0784c",
+      "branch": "agent/tribal-playtest-roadmap-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/145",
+      "limits": "Planung; noch offene Wirtschafts- und Navigationsfolgen bleiben eigene Arbeit.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "UI-PREVIEW-STABLE-ROTATION",
+      "title": "Stabile Drehachse für Kreaturenvorschauen",
+      "area": "release",
+      "status": "integrated",
+      "pr": 146,
+      "head": "6da3d8fe72a02b8a466adaebdca43ba5e04177f7",
+      "branch": "fix/creature-preview-stable-rotation-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/146",
+      "limits": "Native Bedienabnahme im gemeinsamen Spieltest.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "UI-CREATURE-COMPARISON-ALIGNMENT",
+      "title": "Vergleichswerte übersichtlich ausrichten",
+      "area": "release",
+      "status": "integrated",
+      "pr": 147,
+      "head": "b7c214bf9af62fe068e9f704cd61edc3a84beb4d",
+      "branch": "fix/creature-comparison-layout",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/147",
+      "limits": "Optische Abnahme auf dem Ziel-PC.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "WATER-SHORE-DEPTH",
+      "title": "Seepegel, Ufer und Wassertiefe korrigieren",
+      "area": "foundation",
+      "status": "integrated",
+      "pr": 148,
+      "head": "e14fa7c020394333d8a0e82ab9b03bcb93f263c5",
+      "branch": "agent/water-shore-flow-fix",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/148",
+      "limits": "Keine sichtbare Strömungssimulation; Wasserbewegung bleibt Folgearbeit.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "UI-DEVELOPMENT-BOOK-COMPACT",
+      "title": "Entwicklungsbuch mit kompakten Epochen",
+      "area": "release",
+      "status": "integrated",
+      "pr": 149,
+      "head": "d876906bf5b4255c3fbfbe2962e15fd359bc6ffe",
+      "branch": "agent/development-book-compact-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/149",
+      "limits": "Bedien- und Lesbarkeitsabnahme offen.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "M6-ORDERS-BUILDING-PREVIEW",
+      "title": "Kompakte Stammesbefehle und echte Bauvorschau",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 153,
+      "head": "0190ca599746ccf9984bb83deb0012459a9973f6",
+      "branch": "agent/m6-orders-first-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/153",
+      "limits": "Gemeinsame Bauprüfung; Wegfindung, Wirtschaftslatenz und Langzeitbalance weiter beobachten.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "ARCH-24-MOUTHS-ORNAMENTS",
+      "title": "Zehn Mundrevisionen, zwei Geweihe und vier Kämme",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 154,
+      "head": "1db2d4e43963e7c2250c6e31a13330325245a258",
+      "branch": "agent/arch24-mouths-antlers-crests-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/154",
+      "limits": "Revision 1 bleibt erhalten; Altentwürfe nur ausdrücklich im Editor aktualisieren.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "ARCH-24-WING-FAMILIES",
+      "title": "Vier Flügelformen mit Bewegungsvorschau",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 155,
+      "head": "724d475bfac1d1f4e5d575ddffb99d9ad12eec81",
+      "branch": "agent/arch24-wing-families-20260916",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/155",
+      "limits": "Körperteile und Animation; keine neue Flugfähigkeit.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "M6-STOCKPILE-VISUALS",
+      "title": "Tatsächliche Dorfvorräte sichtbar darstellen",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 156,
+      "head": "e7d6ec7e612fc84d75586995dcd0815e61b653d9",
+      "branch": "agent/m6-stockpile-visuals-20260916",
+      "depends_on": [
+        "M6-ORDERS-BUILDING-PREVIEW"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/156",
+      "limits": "Darstellung tatsächlicher Bestände; keine getrennte Wirtschaftssimulation.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "M6-TRIBE-CAMERA",
+      "title": "Stammeskamera frei bewegen, drehen, neigen und zoomen",
+      "area": "tribe",
+      "status": "integrated",
+      "pr": 157,
+      "head": "84841dd9b7b4e09bb500c5de704883606ddc4934",
+      "branch": "agent/m6-tribe-camera-20260917",
+      "depends_on": [
+        "M6-STOCKPILE-VISUALS"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/157",
+      "limits": "128 m Kamerabereich; keine zusätzliche Kartenerkundung oder versetzte Kollisionssimulation.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "ARCH-24-FINS-EARS",
+      "title": "Sechs Flossen und sechs Ohren",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 158,
+      "head": "c027c943e813e656c5ec44784e06d30d91c9d5a6",
+      "branch": "agent/arch24-fins-ears-20260917",
+      "depends_on": [
+        "ARCH-24-WING-FAMILIES"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/158",
+      "limits": "Gemeinsam mit Geweihen/Kämmen 62 platzierbare Teile und elf Endstücke.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "M4-LIVING-CREATURES",
+      "title": "Gegnerkolonien, laufender Kampf und aktive Begleiter",
+      "area": "creature",
+      "status": "integrated",
+      "pr": 159,
+      "head": "41f805ce1f4d85d08c32c40364314e42cdbc6905",
+      "branch": "agent/m4-living-creatures-20260917",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/159",
+      "limits": "Balance und zusammenhängende Beobachtung offen; unveröffentlichte Navigationsfolgen fehlen.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "M10-TRIBE-TUTORIAL",
+      "title": "Stammes-Einführung mit drei Kapiteln und elf Aufgaben",
+      "area": "release",
+      "status": "integrated",
+      "pr": 160,
+      "head": "7edf64e694dd149b5aa4fc526540164dc64703f6",
+      "branch": "agent/m10-tribe-tutorial-20260917",
+      "depends_on": [
+        "M6-TRIBE-CAMERA"
+      ],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/160",
+      "limits": "Tatsächlich ausgeführte Befehle und Arbeit zählen; Ziel-PC-Einstiegstest offen.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
+    },
+    {
+      "id": "DEV-SKILL-WORKFLOW",
+      "title": "Kompakter Paketstart und wiederverwendbare Prüfplanung",
+      "area": "release",
+      "status": "integrated",
+      "pr": 163,
+      "head": "14dfa43840e9b0da91ae4c98f15d506995144dad",
+      "branch": "agent/voxelverse-skill-workflow-20260917",
+      "depends_on": [],
+      "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/163",
+      "limits": "Bestehende Skill-/Skripthelfer; das Custom-GPT-Team ist gestrichen.",
+      "integrated_sha": "91502b883df38608d15f3569769034110bfc5828"
     }
   ],
   "priorities": [
-    "Gemeinsamen main-Stand nach #142/#143 vollständig prüfen und den festen Windows-Build auf dem Ziel-PC abnehmen.",
-    "Vorbereitete Pakete aus dem Katalog zuweisen; laufende M4-/ARCH-/Audio-Besitzer in #137 erhalten.",
-    "Kaltstart und Darstellung an festen Szenen messen; Aufgabenabhängigkeiten und aktuelle CI zentral verfolgen."
+    "Die 18 Lieferungen in #165 mit allen vier vollständigen Pflichtgates prüfen, anschließend den festen Windows-Build auf dem Ziel-PC spielen.",
+    "Stammesablauf, neue Körperteile, Fernsicht/Wasser und Speichern/Laden gemeinsam abnehmen.",
+    "Nur lokal gemeldete M4-Navigationsfolgen wiederfinden; offene Wirtschaftslatenz und sichtbare Wasserbewegung als Folgearbeit erhalten."
   ],
   "blockers": [
-    "Eine zusammenhängende Ziel-PC-/Langzeitabnahme ist noch nicht als abgeschlossen dokumentiert.",
-    "Mittelalter, Neuzeit und Weltraum sind noch keine vollständig spielbaren Epochen.",
-    "Spätere Branchänderungen und unveröffentlichte Folgearbeiten sind nicht automatisch Bestandteil dieser festen Eingangsliste."
+    "Die vollständigen Pflichtgates für den neuen gemeinsamen Kandidaten und die Windows-Spieltest-Abnahme stehen noch aus.",
+    "M4-WILDLIFE-NAVIGATION und M4-GROUP-NAVIGATION sind nur als lokale Übergaben gemeldet; ihre Commitobjekte sind in den verfügbaren Checkouts und Remote-Branches nicht auffindbar.",
+    "Mittelalter, Neuzeit und Weltraum sind noch keine vollständig spielbaren Epochen."
   ],
-  "campaign_summary": "Die bisherige Kugelkampagne aus #125 und 14 neue Lieferungen sind gemeinsam integriert: gespeicherte Planetenklimata, Esc-Einstellungen mit 18 Grafikreglern, Tier-Sozialspiel/Jagd, Todesrückkehr, Kapitel-Einführung, Baustellensteuerung, Flottentest, Atlas-/Spielstandsuche, Vorlagenfavoriten und frei belegbare Menütasten. Dashboard, zentrale Rundenliste und kurze Paketübergaben sind Teil desselben Kandidaten. Die Projektbereinigung #142 und HUD-Korrektur #143 sind inzwischen in main; dessen erneute gemeinsame CI ist maßgeblich.",
-  "coordination_note": "Die bekannten Fachlieferungen sind dieser Runde zugeordnet. ARCH-24, Musik, ARCH-27 und noch unveröffentlichte Folgeschritte bleiben bei ihren bisherigen Besitzern; eine fehlende oder ungenaue Paket-ID ist keine Freigabe. Maßgeblich bleibt die aktuelle Beschreibung von Issue #137.",
+  "campaign_summary": "18 feste Lieferungen aus #145–#160, #163 und #164 sind im Spieltest-Kandidaten #165 zusammengeführt: kompakter Stammesmodus mit Bauvorschau, echten Vorräten, freier Kamera und Einführung; lebendigere Kreaturen; 62 platzierbare Körperteile plus elf Endstücke; bessere Vorschau, Vergleich und Entwicklungsbuch; Ufer/Fernsicht sowie Kaltstart-/Sturmdiagnose und Community-Katalogvertrag. Die gemeinsame vollständige Prüfung läuft erst auf diesem Integrationsstand; Einzelprüfungen ersetzen sie nicht.",
+  "coordination_note": "Lars hat die Zusammenführung für den nächsten Spieltest beauftragt und das Custom-GPT-Dev-Team vorerst gestrichen. PR #162 und Issue #161 sind geschlossen. Die vorhandenen Skill-/Pakethelfer aus #163 bleiben nutzbar. Dieser Integrationschat pflegt die gemeinsamen Statusdaten; bestehende laufende Besitzer aus Issue #137 bleiben erhalten.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
     "status": "pending",
-    "summary": "Nicht als abgeschlossen dokumentiert; zusammenhängenden Spieltest, Langzeitbetrieb und Grafik/Leistung am festen Build nachweisen."
+    "summary": "Neuer gemeinsamer Windows-Spieltest noch offen; keine FPS-, Langzeit- oder Spielspaßfreigabe aus automatischen Prüfungen ableiten."
   },
   "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
   "integration_inputs": [
