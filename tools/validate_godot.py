@@ -29,6 +29,7 @@ else:
 # their combined far-scenery loads measured 42–48 seconds each in integration.
 LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "site_transport_runtime_test", "workplace_runtime_test", "spherical_developed_migration_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
 LONG_TESTS.update({"surface_support_test", "weather_runtime_test", "graphics_settings_test", "tribal_playtest_test"})
+LONG_TESTS.add("pause_menu_test")  # One cold sphere plus ordinary tribal handoff and input/layout matrix.
 # This world check opens two cold campaigns (each bounded at 90 s), then
 # observes real colony streaming and reload. CI reached the second load at
 # the old 120 s aggregate cutoff; use the existing bounded world-test budget.
@@ -199,12 +200,15 @@ def validate(args):
                     stream.write(("\nERROR: validation interrupted: " + str(error) + "\n").encode())
                 status = 130 if isinstance(error, KeyboardInterrupt) else 127
         log = log_path.read_text(encoding="utf-8", errors="replace")
-        failed = status != 0 or ERROR.search(log) is not None
+        missing_completion = name == "pause_menu_test" and "PAUSE_MENU_PASSED" not in log
+        failed = status != 0 or ERROR.search(log) is not None or missing_completion
         kind = ("source_contract" if name in {"source_contracts", "art_sources"} else
                 "editor_import" if name == "import" else "headless_godot")
         result = {"name": name, "kind": kind, "passed": not failed, "exit_code": status,
                   "seconds": round(time.monotonic() - started, 3), "command": argv,
                   "log_sha256": hashlib.sha256(log_path.read_bytes()).hexdigest()}
+        if missing_completion:
+            result["error"] = "Pause menu route exited without its completion marker"
         if name in owners:
             result["contract"] = owners[name]
         results.append(result)

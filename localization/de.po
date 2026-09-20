@@ -5351,3 +5351,42 @@ msgstr "Dein neugieriger Gefährte hat Nahrung in der Nähe entdeckt."
 
 msgid "LIVING_NEST"
 msgstr "Nest: {species} · {count} Bewohner"
+
+msgid "PT17_PAUSE_TITLE"
+msgstr "Zum Hauptmenü"
+
+msgid "PT17_PAUSE_QUIT"
+msgstr "Spiel beenden"
+
+msgid "PT17_PAUSE_SAVE_HINT"
+msgstr "Beim Verlassen wird dein Spiel gespeichert."
+
+msgid "PT17_AUDIO_TAB"
+msgstr "Audio"
+
+msgid "PT17_AUDIO_TITLE"
+msgstr "Ton und Musik"
+
+msgid "PT17_CONTROLS_HINT"
+msgstr "Tasten, Kreaturen- und Stammeskamera"
+
+msgid "PT17_SETTINGS_LIVE"
+msgstr "Alle Einstellungen wirken ohne Neustart. Audio wird automatisch gespeichert."
+
+msgid "PT17_CONTROLS_TAB"
+msgstr "Steuerung & Kamera"
+
+msgid "PT17_TRAVEL_CHOOSE"
+msgstr "Reiseziel wählen"
+
+msgid "PT17_TRAVEL_TITLE"
+msgstr "REISEZIEL"
+
+msgid "PT17_TRAVEL_HELP"
+msgstr "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort."
+
+msgid "PT17_TRAVEL_PLANET"
+msgstr "Planet %d"
+
+msgid "PT17_TRAVEL_CURRENT"
+msgstr " · aktueller Ort"

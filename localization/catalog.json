@@ -8921,6 +8921,71 @@
       "key": "LIVING_NEST",
       "de": "Nest: {species} · {count} Bewohner",
       "en": "Nest: {species} · {count} residents"
+    },
+    {
+      "key": "PT17_PAUSE_TITLE",
+      "de": "Zum Hauptmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "PT17_PAUSE_QUIT",
+      "de": "Spiel beenden",
+      "en": "Quit game"
+    },
+    {
+      "key": "PT17_PAUSE_SAVE_HINT",
+      "de": "Beim Verlassen wird dein Spiel gespeichert.",
+      "en": "Your game is saved before you leave."
+    },
+    {
+      "key": "PT17_AUDIO_TAB",
+      "de": "Audio",
+      "en": "Audio"
+    },
+    {
+      "key": "PT17_AUDIO_TITLE",
+      "de": "Ton und Musik",
+      "en": "Sound and music"
+    },
+    {
+      "key": "PT17_CONTROLS_HINT",
+      "de": "Tasten, Kreaturen- und Stammeskamera",
+      "en": "Keys, creature and tribal cameras"
+    },
+    {
+      "key": "PT17_SETTINGS_LIVE",
+      "de": "Alle Einstellungen wirken ohne Neustart. Audio wird automatisch gespeichert.",
+      "en": "All settings take effect without restarting. Audio saves automatically."
+    },
+    {
+      "key": "PT17_CONTROLS_TAB",
+      "de": "Steuerung & Kamera",
+      "en": "Controls & camera"
+    },
+    {
+      "key": "PT17_TRAVEL_CHOOSE",
+      "de": "Reiseziel wählen",
+      "en": "Choose destination"
+    },
+    {
+      "key": "PT17_TRAVEL_TITLE",
+      "de": "REISEZIEL",
+      "en": "DESTINATION"
+    },
+    {
+      "key": "PT17_TRAVEL_HELP",
+      "de": "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort.",
+      "en": "Explore other planets. Your residents continue work they can reach while you travel."
+    },
+    {
+      "key": "PT17_TRAVEL_PLANET",
+      "de": "Planet %d",
+      "en": "Planet %d"
+    },
+    {
+      "key": "PT17_TRAVEL_CURRENT",
+      "de": " · aktueller Ort",
+      "en": " · current location"
     }
   ]
 }

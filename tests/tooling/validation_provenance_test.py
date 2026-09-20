@@ -263,13 +263,14 @@ class RunnerProvenanceTest(unittest.TestCase):
         self.output = self.project.parent / (self.project.name + "-provenance")
         self.addCleanup(shutil.rmtree, self.output, True)
 
-    def run_case(self, action=None, skip_import=True):
-        args = Namespace(project=self.project, output=self.output, godot="fixture-engine", tests=["example_test"],
+    def run_case(self, action=None, skip_import=True, test_name="example_test", engine_log=""):
+        args = Namespace(project=self.project, output=self.output, godot="fixture-engine", tests=[test_name],
                          skip_import=skip_import, skip_main=True)
         real_run = subprocess.run
         def execute(argv, **kwargs):
             if argv[0] in ("git", sys.executable): return real_run(argv, **kwargs)
             if action is not None: action(argv)
+            if "--script" in argv: kwargs["stdout"].write(engine_log.encode())
             return subprocess.CompletedProcess(argv, 0)
         with patch.object(validate_godot.subprocess, "check_output", return_value="4.6.3.stable.fixture"), \
                 patch.object(validate_godot.subprocess, "run", side_effect=execute), \
@@ -298,6 +299,20 @@ class RunnerProvenanceTest(unittest.TestCase):
         self.assertFalse(test["passed"])
         self.assertFalse(report["provenance"]["reusable"])
         self.assertEqual(report["provenance"]["observations"][-2]["status"], "changed")
+
+    def test_pause_route_requires_completion_even_after_a_zero_exit(self):
+        (self.project / "tests/pause_menu_test.gd").write_text("extends SceneTree\n")
+        self.fixture.manifest["contracts"][0]["tests"].append("pause_menu_test")
+        self.fixture.save_manifest()
+        for log, passed in [("PAUSE_MENU_STAGE creature\n", False), ("PAUSE_MENU_PASSED checks=499\n", True)]:
+            with self.subTest(completed=passed):
+                code, report = self.run_case(test_name="pause_menu_test", engine_log=log)
+                result = next(r for r in report["checks"] if r["name"] == "pause_menu_test")
+                self.assertEqual(result["exit_code"], 0)
+                self.assertEqual(result["passed"], passed)
+                self.assertEqual(report["provenance"]["reusable"], passed)
+                self.assertEqual(code, 0 if passed else 1)
+                shutil.rmtree(self.output)
 
     def test_new_file_during_final_observation_also_invalidates_run(self):
         real_observe = provenance.SourceRun.observe

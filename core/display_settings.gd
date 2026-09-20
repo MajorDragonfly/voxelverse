@@ -9,6 +9,9 @@ var input_preferences := InputPreferences.new()
 var _control_settings: VBoxContainer
 var _tabs: TabContainer
 var _language_settings: VBoxContainer
+var _audio_modal: CanvasLayer
+var _audio_previous_focus: Control
+var _settings_tab_before_audio: int = 0
 
 const MODE_WINDOWED: int = 0
 const MODE_BORDERLESS: int = 1
@@ -72,7 +75,7 @@ func _input(event: InputEvent) -> void:
 	var key: int = event.keycode if event.keycode != 0 else event.physical_keycode
 	match key:
 		KEY_ESCAPE:
-			if not is_menu_open() and flow != null and bool(flow.managed) and get_tree().paused and not bool(flow.pause_open):
+			if not is_menu_open() and flow != null and bool(flow.managed) and get_tree().paused and not bool(flow.pause_open) and not bool(flow.can_open_pause()):
 				return # Another modal (for example the skill tree) owns Escape.
 			if not is_menu_open() and flow != null and bool(flow.can_pause()):
 				flow.toggle_pause()
@@ -261,7 +264,7 @@ func _build_settings_menu() -> void:
 	content.add_child(_tabs)
 	var display_scroll := ScrollContainer.new()
 	display_scroll.name = "Anzeige"
-	display_scroll.custom_minimum_size = Vector2(600, 440)
+	display_scroll.custom_minimum_size = Vector2(720, 400)
 	display_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	display_scroll.follow_focus = true
 	_tabs.add_child(display_scroll)
@@ -307,11 +310,11 @@ func _build_settings_menu() -> void:
 	audio_button.name = "AudioSettings"
 	audio_button.text = "Ton und Musik …"
 	audio_button.custom_minimum_size.y = 42
-	audio_button.pressed.connect(func() -> void: get_node("/root/AudioManager").open_settings())
+	audio_button.pressed.connect(_open_audio_settings)
 	display_content.add_child(audio_button)
 	var control_scroll := ScrollContainer.new()
-	control_scroll.name = "Steuerung"
-	control_scroll.custom_minimum_size = Vector2(600, 440)
+	control_scroll.name = "PT17_CONTROLS_TAB"
+	control_scroll.custom_minimum_size = Vector2(720, 400)
 	control_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	control_scroll.follow_focus = true
 	_tabs.add_child(control_scroll)
@@ -321,7 +324,7 @@ func _build_settings_menu() -> void:
 	_control_settings.setup(input_preferences)
 	var language_scroll := ScrollContainer.new()
 	language_scroll.name = "LANGUAGE_TAB"
-	language_scroll.custom_minimum_size = Vector2(600, 440)
+	language_scroll.custom_minimum_size = Vector2(720, 400)
 	language_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	language_scroll.follow_focus = true
 	_tabs.add_child(language_scroll)
@@ -330,7 +333,7 @@ func _build_settings_menu() -> void:
 	language_scroll.add_child(_language_settings)
 	var graphics_scroll := ScrollContainer.new()
 	graphics_scroll.name = "GRAPHICS_TAB"
-	graphics_scroll.custom_minimum_size = Vector2(600, 440)
+	graphics_scroll.custom_minimum_size = Vector2(720, 400)
 	graphics_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	graphics_scroll.follow_focus = true
 	_tabs.add_child(graphics_scroll)
@@ -339,7 +342,18 @@ func _build_settings_menu() -> void:
 	graphics_scroll.add_child(_graphics_settings)
 	_atmosphere_option = _graphics_settings.option
 	_atmosphere_description = _graphics_settings.description
-	_tabs.tab_changed.connect(func(_tab: int): _control_settings.cancel_binding())
+	var audio_scroll := ScrollContainer.new()
+	audio_scroll.name = "PT17_AUDIO_TAB"
+	audio_scroll.custom_minimum_size = Vector2(720, 400)
+	audio_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	audio_scroll.follow_focus = true
+	_tabs.add_child(audio_scroll)
+	_tabs.set_tab_tooltip(1, "PT17_CONTROLS_HINT")
+	_tabs.tab_changed.connect(_settings_tab_changed)
+	var live_hint := Label.new()
+	live_hint.text = "PT17_SETTINGS_LIVE"
+	live_hint.add_theme_font_size_override("font_size", 17)
+	content.add_child(live_hint)
 	_message = _control_settings.message
 	_message.name = "Status"
 	_message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -476,6 +490,8 @@ func _toggle_settings_menu() -> void:
 		_message.text = input_preferences.load_message if not input_preferences.load_message.is_empty() else "Änderungen mit „Übernehmen & speichern“ aktivieren. Zurück verwirft ungespeicherte Änderungen."
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_tree().paused = true
+		if flow != null:
+			flow.settings_visibility_changed(true)
 		_mode_option.grab_focus()
 	else:
 		close_menu()
@@ -484,15 +500,50 @@ func _toggle_settings_menu() -> void:
 func is_menu_open() -> bool:
 	return is_instance_valid(_menu_layer) and _menu_layer.visible
 
+func _settings_tab_changed(tab: int) -> void:
+	_control_settings.cancel_binding()
+	if tab == 4:
+		_tabs.get_tab_bar().grab_focus()
+		_open_audio_settings()
+	else:
+		_settings_tab_before_audio = tab
 
-func open_menu() -> void:
+func _open_audio_settings() -> void:
+	if is_instance_valid(_audio_modal):
+		return
+	_audio_previous_focus = get_viewport().gui_get_focus_owner()
+	var audio := get_node("/root/AudioManager")
+	audio.open_settings()
+	_audio_modal = audio._panel
+	if is_instance_valid(_audio_modal):
+		# PT17-15 owns the audio page. Only its existing modal API is hosted here.
+		_audio_modal.tree_exited.connect(_audio_settings_closed, CONNECT_ONE_SHOT)
+		_menu_panel.hide()
+
+func _audio_settings_closed() -> void:
+	_audio_modal = null
+	_tabs.current_tab = _settings_tab_before_audio
+	if is_menu_open():
+		_menu_panel.show()
+		if is_instance_valid(_audio_previous_focus) and _audio_previous_focus.is_visible_in_tree():
+			_audio_previous_focus.grab_focus()
+		else:
+			_tabs.get_tab_bar().grab_focus()
+	_audio_previous_focus = null
+
+func open_menu(tab: int = 0) -> void:
 	if not is_menu_open():
 		_toggle_settings_menu()
+		_tabs.current_tab = clampi(tab, 0, _tabs.get_tab_count() - 1)
+		if tab == 3:
+			_atmosphere_option.grab_focus()
 
 
 func close_menu() -> void:
 	if not is_menu_open():
 		return
+	if is_instance_valid(_audio_modal):
+		get_node("/root/AudioManager").close_settings()
 	for option: OptionButton in [_mode_option, _resolution_option, _scale_option, _atmosphere_option]:
 		option.get_popup().hide()
 	_graphics_settings.close_popups()
@@ -502,6 +553,9 @@ func close_menu() -> void:
 	_menu_layer.hide()
 	get_tree().paused = _previous_paused
 	Input.mouse_mode = _previous_mouse_mode
+	var flow := get_node_or_null("/root/SessionFlow")
+	if flow != null:
+		flow.settings_visibility_changed(false)
 	if is_instance_valid(_previous_focus) and _previous_focus.is_visible_in_tree():
 		_previous_focus.grab_focus()
 

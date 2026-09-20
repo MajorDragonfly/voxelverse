@@ -5351,3 +5351,42 @@ msgstr "Your curious companion has found food nearby."
 
 msgid "LIVING_NEST"
 msgstr "Nest: {species} · {count} residents"
+
+msgid "PT17_PAUSE_TITLE"
+msgstr "Main menu"
+
+msgid "PT17_PAUSE_QUIT"
+msgstr "Quit game"
+
+msgid "PT17_PAUSE_SAVE_HINT"
+msgstr "Your game is saved before you leave."
+
+msgid "PT17_AUDIO_TAB"
+msgstr "Audio"
+
+msgid "PT17_AUDIO_TITLE"
+msgstr "Sound and music"
+
+msgid "PT17_CONTROLS_HINT"
+msgstr "Keys, creature and tribal cameras"
+
+msgid "PT17_SETTINGS_LIVE"
+msgstr "All settings take effect without restarting. Audio saves automatically."
+
+msgid "PT17_CONTROLS_TAB"
+msgstr "Controls & camera"
+
+msgid "PT17_TRAVEL_CHOOSE"
+msgstr "Choose destination"
+
+msgid "PT17_TRAVEL_TITLE"
+msgstr "DESTINATION"
+
+msgid "PT17_TRAVEL_HELP"
+msgstr "Explore other planets. Your residents continue work they can reach while you travel."
+
+msgid "PT17_TRAVEL_PLANET"
+msgstr "Planet %d"
+
+msgid "PT17_TRAVEL_CURRENT"
+msgstr " · current location"

@@ -29,6 +29,8 @@ var _preparing_world: bool = false
 var _player: Node
 var _player_mode: int = Node.PROCESS_MODE_INHERIT
 var _resume_focus: Control
+var _pause_page: String = "pause"
+var _overlay_scroll: ScrollContainer
 var _help_label: Label
 var _travel_recovery: String = ""
 var _startup_trace := preload("res://core/diagnostics/startup_trace.gd").new()
@@ -302,10 +304,19 @@ func can_pause() -> bool:
 	var scene := get_tree().current_scene
 	return scene != null and scene.scene_file_path in [SPHERE_SCENE, LEGACY_TEST_SCENE]
 
+func can_open_pause() -> bool:
+	if not can_pause():
+		return false
+	if not get_tree().paused:
+		return true
+	# Tactical pause has no modal dialog. Keep it when the menu returns.
+	var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
+	return tribe != null and is_instance_valid(tribe.panel) and tribe.panel.owns_world_pause()
+
 func toggle_pause() -> void:
 	if pause_open:
-		resume()
-	elif can_pause() and not get_tree().paused:
+		back()
+	elif can_open_pause():
 		_previous_pause = get_tree().paused
 		_previous_mouse = Input.mouse_mode
 		pause_open = true
@@ -313,50 +324,81 @@ func toggle_pause() -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		_show_pause()
 
-func _show_pause() -> void:
+func back() -> void:
+	if _pause_page != "pause":
+		var origin := {"travel": "TravelDestinations", "help": "PauseControls", "first_steps": "PauseFirstSteps"}
+		var focus_name: String = origin.get(_pause_page, "ResumeGame")
+		_show_pause(focus_name)
+	else:
+		resume()
+
+func _show_pause(focus_name: String = "ResumeGame") -> void:
+	_pause_page = "pause"
 	_prepare_overlay()
 	Style.label(_content, "VOXELVERSE", 37, Style.ACCENT)
 	Style.label(_content, "Eine kurze Pause.", 26)
 	var slot_label := Style.paragraph(_content, get_node("/root/SaveGameService").slot_name, 19)
 	slot_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_resume_focus = Style.button(_content, "Weiterspielen", resume, "ResumeGame", true)
-	Style.button(_content, "Spiel speichern", _save, "SaveGame")
+	Style.button(_content, "Einstellungen", _show_settings, "PauseSettings")
+	var help := HBoxContainer.new()
+	help.add_theme_constant_override("separation", 12)
+	_content.add_child(help)
+	for item: Array in [["Steuerung", _show_help, "PauseControls"], ["Erste Schritte", _show_first_steps, "PauseFirstSteps"]]:
+		Style.button(help, item[0], item[1], item[2]).size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_content.add_child(HSeparator.new())
+	var actions := GridContainer.new()
+	actions.columns = 2
+	actions.add_theme_constant_override("h_separation", 12)
+	actions.add_theme_constant_override("v_separation", 12)
+	_content.add_child(actions)
+	Style.button(actions, "Spiel speichern", _save, "SaveGame").size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if get_tree().current_scene.scene_file_path == SPHERE_SCENE:
-		Style.button(_content, "Reiseziel wählen", _show_travel, "TravelDestinations")
-	Style.button(_content, "Einstellungen", func(): get_node("/root/DisplaySettings").open_menu(), "PauseSettings")
-	Style.button(_content, "Steuerung", _show_help, "PauseControls")
-	Style.button(_content, "Erste Schritte", _show_first_steps, "PauseFirstSteps")
-	Style.button(_content, "Speichern & zum Hauptmenü", return_to_title, "ReturnToTitle")
-	Style.button(_content, "Speichern & beenden", request_quit, "QuitGame")
+		Style.button(actions, "PT17_TRAVEL_CHOOSE", _show_travel, "TravelDestinations").size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	Style.button(actions, "PT17_PAUSE_TITLE", return_to_title, "ReturnToTitle").size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	Style.button(actions, "PT17_PAUSE_QUIT", request_quit, "QuitGame").size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	Style.paragraph(_content, "PT17_PAUSE_SAVE_HINT", 17)
 	_message = Style.paragraph(_content, "", 18)
-	_resume_focus.grab_focus()
+	_overlay.find_child(focus_name, true, false).grab_focus()
+
+func _show_settings() -> void:
+	get_node("/root/DisplaySettings").open_menu(3)
+
+func settings_visibility_changed(visible: bool) -> void:
+	# Keep one visible menu while retaining this owner's pause and focus.
+	if pause_open and is_instance_valid(_layer):
+		_layer.visible = not visible
 
 func _show_travel() -> void:
+	_pause_page = "travel"
 	_prepare_overlay()
-	Style.label(_content, "REISEZIEL", 32, Style.ACCENT)
-	Style.paragraph(_content, "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort.", 19)
+	Style.label(_content, "PT17_TRAVEL_TITLE", 32, Style.ACCENT)
+	Style.paragraph(_content, "PT17_TRAVEL_HELP", 19)
 	var state: Node = get_node("/root/GameState")
 	var catalog = preload("res://world/generation/planet_catalog_v7.gd")
 	var system: Dictionary = catalog.create_system(state.system_seed)
 	for index in range(catalog.get_planet_count(system)):
 		var planet: Dictionary = catalog.get_planet(system, index)
 		var seed_value: int = int(planet.planet_seed)
-		var button := Style.button(_content, "Planet %d%s" % [index + 1, " · aktueller Ort" if seed_value == state.world_seed else ""], func(): travel_to_planet(state.system_seed, index, seed_value), "TravelPlanet%d" % index)
+		var destination := tr("PT17_TRAVEL_PLANET") % (index + 1)
+		if seed_value == state.world_seed:
+			destination += tr("PT17_TRAVEL_CURRENT")
+		var button := Style.button(_content, destination, func(): travel_to_planet(state.system_seed, index, seed_value), "TravelPlanet%d" % index)
 		button.disabled = seed_value == state.world_seed
-	Style.button(_content, "Zurück zur Pause", _show_pause, "BackToPause").grab_focus()
+	Style.button(_content, "Zurück zur Pause", back, "BackToPause").grab_focus()
 
 func _show_help() -> void:
+	_pause_page = "help"
 	_prepare_overlay()
 	Style.label(_content, "STEUERUNG", 32, Style.ACCENT)
 	_help_label = Style.paragraph(_content, controls_text(), 22)
-	var back := Style.button(_content, "Zurück zur Pause", _show_pause, "BackToPause")
-	back.grab_focus()
+	Style.button(_content, "Zurück zur Pause", back, "BackToPause").grab_focus()
 
 func _show_first_steps() -> void:
+	_pause_page = "first_steps"
 	_prepare_overlay()
 	get_node("FirstSteps").build_help(_content)
-	var back := Style.button(_content, "Zurück zur Pause", _show_pause, "BackToPause")
-	back.grab_focus()
+	Style.button(_content, "Zurück zur Pause", back, "BackToPause").grab_focus()
 
 func resume() -> void:
 	if not pause_open:
@@ -462,6 +504,7 @@ func _prepare_overlay() -> void:
 		_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		_overlay.theme = Style.theme()
 		_layer.add_child(_overlay)
+		get_viewport().size_changed.connect(_layout_overlay)
 	for child in _overlay.get_children():
 		_overlay.remove_child(child)
 		child.queue_free()
@@ -475,11 +518,23 @@ func _prepare_overlay() -> void:
 	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_overlay.add_child(center)
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size.x = 600
 	center.add_child(panel)
+	_overlay_scroll = ScrollContainer.new()
+	_overlay_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_overlay_scroll.follow_focus = true
+	panel.add_child(_overlay_scroll)
 	_content = VBoxContainer.new()
-	panel.add_child(_content)
+	_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_overlay_scroll.add_child(_content)
+	_content.minimum_size_changed.connect(_layout_overlay)
+	_layout_overlay.call_deferred()
 	_layer.show()
+
+func _layout_overlay() -> void:
+	if not is_instance_valid(_overlay_scroll) or not is_instance_valid(_content):
+		return
+	var available := get_viewport().get_visible_rect().size - Vector2(96, 96)
+	_overlay_scroll.custom_minimum_size = Vector2(minf(680, available.x), minf(_content.get_combined_minimum_size().y, available.y))
 
 func controls_text() -> String:
 	var preferences = preload("res://core/input_preferences.gd")
