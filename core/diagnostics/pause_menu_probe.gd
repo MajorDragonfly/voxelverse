@@ -84,7 +84,7 @@ func _phase_route(phase: String) -> void:
 				settings.resolution = dimensions
 				settings.ui_scale = scaling
 				settings._apply_settings(false)
-				if DisplayServer.get_name() == "headless": tree.root.size = dimensions
+				tree.root.size = dimensions
 				await _frames(4)
 				var original_mouse := Input.mouse_mode
 				await _key(KEY_ESCAPE)
@@ -111,14 +111,18 @@ func _phase_route(phase: String) -> void:
 					_expect(settings._tabs.current_tab == tab, "Category click failed: " + str(tab))
 					_expect(tree.root.get_visible_rect().encloses(settings._menu_panel.get_global_rect()), "Settings clipped: " + str([phase, locale, dimensions, scaling, tab, settings._menu_panel.get_global_rect()]))
 					if tab == 4:
-						_expect(not is_instance_valid(audio._panel), "Audio opened a second settings window")
-						var slider: HSlider = settings._audio_settings._sliders[&"music"]
+						_expect(is_instance_valid(audio._panel) and not settings._menu_panel.visible, "Audio did not acquire the settings route")
+						var slider: HSlider = audio._panel._sliders[&"music"]
 						slider.grab_focus()
 						await _frames(2)
 						await _key(KEY_LEFT)
 						_expect(is_equal_approx(audio.get_volume(&"music"), slider.value / 100.0), "Keyboard audio value did not reach the existing mixer")
 					if dimensions.y == 720 and scaling == 1.3 and tab in [3, 4]:
 						await _capture(phase + "-" + locale + ("-graphics" if tab == 3 else "-audio"))
+					if tab == 4:
+						await _key(KEY_ESCAPE)
+						_expect(not is_instance_valid(audio._panel) and settings._menu_panel.visible and tree.paused, "Audio Esc did not return to paused settings")
+						_expect(settings._tabs.get_tab_bar().has_focus(), "Audio lost category keyboard focus")
 				await _key(KEY_ESCAPE)
 				_expect(not settings.is_menu_open() and flow.pause_open and tree.paused and flow._layer.visible, "Settings Esc failed to return to pause")
 				_expect(_focus_name() == "PauseSettings", "Settings lost its return focus")
@@ -192,7 +196,9 @@ func _until(predicate: Callable, milliseconds: int) -> void:
 func _capture(name: String) -> void:
 	if captures.is_empty(): return
 	await RenderingServer.frame_post_draw
-	_expect(get_viewport().get_texture().get_image().save_png(captures.path_join(name + ".png")) == OK, "Screenshot failed")
+	var picture := get_viewport().get_texture().get_image()
+	_expect(picture.get_size() == Vector2i(1280, 720), "Capture did not use the requested 720p window")
+	_expect(picture.save_png(captures.path_join(name + ".png")) == OK, "Screenshot failed")
 
 func _expect(ok: bool, message: String) -> void:
 	checks += 1

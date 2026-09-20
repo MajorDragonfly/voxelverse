@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 import subprocess
+import struct
 import tempfile
 from validation_support import isolated_env, validation_editor
 from validate_godot import ERROR
@@ -31,11 +32,18 @@ def main():
     log = (output / "render.log").read_text()
     images = [f"{phase}-{locale}-{page}.png" for phase in ["creature", "tribe"]
               for locale in ["de", "en"] for page in ["pause", "graphics", "audio"]]
+    sizes = {}
+    for name in images:
+        path = output / name
+        if path.is_file():
+            header = path.read_bytes()[:24]
+            if len(header) == 24 and header[:8] == b"\x89PNG\r\n\x1a\n":
+                sizes[name] = list(struct.unpack(">II", header[16:24]))
     unchanged = source["commit"] == git("rev-parse", "HEAD") and not git("status", "--porcelain")
     passed = (result.returncode == 0 and "PAUSE_MENU_PASSED" in log and not ERROR.search(log)
-              and all((output / name).is_file() for name in images) and unchanged and not source["dirty"])
+              and all(sizes.get(name) == [1280, 720] for name in images) and unchanged and not source["dirty"])
     report = {**source, "passed": passed, "source_unchanged": unchanged, "command": command,
-              "images": images, "scope": "Public entry, real sphere/tribal handoff; DE/EN, 720p/1080p, 80%/130% UI, keyboard/mouse, pause/focus/back and graphics apply/discard. Native Linux rendering; no target-PC acceptance."}
+              "images": images, "image_sizes": sizes, "scope": "Public entry, real sphere/tribal handoff; DE/EN, 720p/1080p, 80%/130% UI, keyboard/mouse, pause/focus/back and graphics apply/discard. Native Linux rendering; no target-PC acceptance."}
     (output / "results.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
     if not passed:

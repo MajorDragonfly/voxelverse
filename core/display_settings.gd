@@ -9,7 +9,9 @@ var input_preferences := InputPreferences.new()
 var _control_settings: VBoxContainer
 var _tabs: TabContainer
 var _language_settings: VBoxContainer
-var _audio_settings: VBoxContainer
+var _audio_modal: CanvasLayer
+var _audio_previous_focus: Control
+var _settings_tab_before_audio: int = 0
 
 const MODE_WINDOWED: int = 0
 const MODE_BORDERLESS: int = 1
@@ -304,6 +306,12 @@ func _build_settings_menu() -> void:
 	_lab_button.custom_minimum_size.y = 42
 	_lab_button.pressed.connect(_open_planet_lab)
 	display_content.add_child(_lab_button)
+	var audio_button := Button.new()
+	audio_button.name = "AudioSettings"
+	audio_button.text = "Ton und Musik …"
+	audio_button.custom_minimum_size.y = 42
+	audio_button.pressed.connect(_open_audio_settings)
+	display_content.add_child(audio_button)
 	var control_scroll := ScrollContainer.new()
 	control_scroll.name = "PT17_CONTROLS_TAB"
 	control_scroll.custom_minimum_size = Vector2(720, 400)
@@ -340,11 +348,8 @@ func _build_settings_menu() -> void:
 	audio_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	audio_scroll.follow_focus = true
 	_tabs.add_child(audio_scroll)
-	_audio_settings = preload("res://audio/ui/audio_settings_content.gd").new()
-	_audio_settings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	audio_scroll.add_child(_audio_settings)
 	_tabs.set_tab_tooltip(1, "PT17_CONTROLS_HINT")
-	_tabs.tab_changed.connect(func(_tab: int): _control_settings.cancel_binding())
+	_tabs.tab_changed.connect(_settings_tab_changed)
 	var live_hint := Label.new()
 	live_hint.text = "PT17_SETTINGS_LIVE"
 	live_hint.add_theme_font_size_override("font_size", 17)
@@ -495,6 +500,36 @@ func _toggle_settings_menu() -> void:
 func is_menu_open() -> bool:
 	return is_instance_valid(_menu_layer) and _menu_layer.visible
 
+func _settings_tab_changed(tab: int) -> void:
+	_control_settings.cancel_binding()
+	if tab == 4:
+		_tabs.get_tab_bar().grab_focus()
+		_open_audio_settings()
+	else:
+		_settings_tab_before_audio = tab
+
+func _open_audio_settings() -> void:
+	if is_instance_valid(_audio_modal):
+		return
+	_audio_previous_focus = get_viewport().gui_get_focus_owner()
+	var audio := get_node("/root/AudioManager")
+	audio.open_settings()
+	_audio_modal = audio._panel
+	if is_instance_valid(_audio_modal):
+		# PT17-15 owns the audio page. Only its existing modal API is hosted here.
+		_audio_modal.tree_exited.connect(_audio_settings_closed, CONNECT_ONE_SHOT)
+		_menu_panel.hide()
+
+func _audio_settings_closed() -> void:
+	_audio_modal = null
+	_tabs.current_tab = _settings_tab_before_audio
+	if is_menu_open():
+		_menu_panel.show()
+		if is_instance_valid(_audio_previous_focus) and _audio_previous_focus.is_visible_in_tree():
+			_audio_previous_focus.grab_focus()
+		else:
+			_tabs.get_tab_bar().grab_focus()
+	_audio_previous_focus = null
 
 func open_menu(tab: int = 0) -> void:
 	if not is_menu_open():
@@ -507,6 +542,8 @@ func open_menu(tab: int = 0) -> void:
 func close_menu() -> void:
 	if not is_menu_open():
 		return
+	if is_instance_valid(_audio_modal):
+		get_node("/root/AudioManager").close_settings()
 	for option: OptionButton in [_mode_option, _resolution_option, _scale_option, _atmosphere_option]:
 		option.get_popup().hide()
 	_graphics_settings.close_popups()
