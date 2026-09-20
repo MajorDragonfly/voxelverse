@@ -80,6 +80,12 @@ func _phase_route(phase: String) -> void:
 		get_node("/root/LocaleManager")._apply(locale)
 		for dimensions: Vector2i in [Vector2i(1280, 720), Vector2i(1920, 1080)]:
 			for scaling: float in [0.8, 1.3]:
+				# Keep the full 16-case input matrix headless. Software-rendered
+				# review covers eight representative cases: both phases/languages,
+				# 720p at 130% and 1080p at 80%, with all twelve requested images.
+				if not captures.is_empty() and ((dimensions.y == 720 and scaling < 1.0) or (dimensions.y == 1080 and scaling > 1.0)):
+					continue
+				print("PAUSE_MENU_CASE ", [phase, locale, dimensions, scaling], " at_ms=", Time.get_ticks_msec())
 				settings.display_mode = 0
 				settings.resolution = dimensions
 				settings.ui_scale = scaling
@@ -202,7 +208,9 @@ func _capture(name: String) -> void:
 
 func _expect(ok: bool, message: String) -> void:
 	checks += 1
-	if not ok: failures.append(message)
+	if not ok:
+		failures.append(message)
+		print("PAUSE_MENU_ASSERTION_FAILED ", message)
 
 func _finish() -> void:
 	for message: String in failures: push_error(message)

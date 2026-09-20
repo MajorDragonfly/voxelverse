@@ -203,8 +203,8 @@ func _layout_checks() -> void:
 		settings.resolution = viewport_size
 		settings.ui_scale = 1.3
 		settings._apply_settings(false)
-		# Headless Window does not receive OS resize events.
-		if DisplayServer.get_name() == "headless": root.size = viewport_size
+		# Set the actual Window as well; Xvfb can retain the previous native size.
+		root.size = viewport_size
 		for locale: String in ["de", "en"]:
 			root.get_node("LocaleManager").save_preference(locale)
 			settings.open_menu()
@@ -214,8 +214,8 @@ func _layout_checks() -> void:
 			var scroll: ScrollContainer = settings._tabs.get_child(3)
 			await _focus_control(settings._graphics_settings.controls.saturation)
 			_expect(scroll.scroll_vertical > 0, "Keyboard focus did not scroll to the last effect")
-			var rect: Rect2 = settings._graphics_settings.controls.saturation.get_global_rect()
-			_expect(scroll.get_global_rect().intersects(rect), "Last effect cannot be reached")
+			var rect: Rect2 = settings._graphics_settings.controls.saturation.get_parent().get_global_rect()
+			_expect(scroll.get_global_rect().grow(1.0).encloses(rect), "Last effect's slider/number row is clipped")
 			await _capture("settings-%dx%d-%s-bottom" % [viewport_size.x, viewport_size.y, locale])
 			scroll.scroll_vertical = 0
 			await _frames()
@@ -269,7 +269,11 @@ func _capture(filename: String) -> void:
 	if capture_dir.is_empty(): return
 	await _frames()
 	await RenderingServer.frame_post_draw
-	_expect(root.get_texture().get_image().save_png(capture_dir.path_join(filename + ".png")) == OK, "Screenshot failed")
+	var picture := root.get_texture().get_image()
+	if filename.begins_with("settings-"):
+		var dimensions := filename.get_slice("-", 1).split("x")
+		_expect(picture.get_size() == Vector2i(int(dimensions[0]), int(dimensions[1])), "Capture window size differs from its filename")
+	_expect(picture.save_png(capture_dir.path_join(filename + ".png")) == OK, "Screenshot failed")
 
 func _expect(value: bool, message: String) -> void:
 	checks += 1

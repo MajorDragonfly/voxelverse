@@ -109,7 +109,12 @@ func _reveal(control: Control) -> void:
 	if scroll != null and is_instance_valid(control):
 		var focused: Control = get_viewport().gui_get_focus_owner()
 		if focused == control or (focused != null and control.is_ancestor_of(focused)):
-			scroll.ensure_control_visible(control)
+			# Sliders and their taller number fields share a row. Reveal both,
+			# including when focus is inside the SpinBox's LineEdit.
+			var row := control
+			while row.get_parent() != self and row.get_parent() is Control:
+				row = row.get_parent() as Control
+			scroll.ensure_control_visible(row)
 
 func _label(key: String, heading: bool = false) -> Label:
 	var label := Label.new()
