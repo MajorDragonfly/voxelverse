@@ -87,6 +87,8 @@ func _check_handoff(scene: Node3D) -> void:
 	_expect(flora.patches[id].node == data.node, "Reversal rebuilt a still-resident patch")
 	flora._advance_scenery_transitions(flora.SCENERY_FADE_SECONDS)
 	_expect(flora.scenery_coverage()[id] == 1.0, "Recovered patch did not complete its blend")
+	for visual in data.node.get_children():
+		_expect(visual.material_override == visual.get_meta("scenery_settled_material"), "Settled scenery retained the expensive transition shader")
 	flora.set_process(true)
 
 func _capture(scene: Node3D, label: String) -> void:

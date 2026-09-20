@@ -191,7 +191,12 @@ func _advance_scenery_transitions(delta: float) -> void:
 
 func _set_patch_coverage(data: Dictionary, phase: float) -> void:
 	for visual: MultiMeshInstance3D in data.node.get_children():
-		visual.material_override.set_shader_parameter("patch_coverage", roundf(phase * 255.0) / 255.0)
+		# A discard-capable shader can prevent early depth rejection even at
+		# 100% coverage. Pay for the blend only during its 0.35-second lifetime;
+		# settled vegetation keeps the original shared opaque material/fast path.
+		var transition: ShaderMaterial = visual.get_meta("scenery_transition_material")
+		transition.set_shader_parameter("patch_coverage", roundf(phase * 255.0) / 255.0)
+		visual.material_override = visual.get_meta("scenery_settled_material") if phase >= 1.0 else transition
 
 
 func _release_patch(collection: Dictionary, id: String) -> void:
@@ -278,9 +283,11 @@ func _step_publication() -> void:
 			visual.material_override = Assets.get_material(adapter.terrain.surface.terrain, batch.species)
 			if scenery_transitions_enabled:
 				# Shared authored materials remain untouched for other worlds/assets.
+				visual.set_meta("scenery_settled_material", visual.material_override)
 				visual.material_override = visual.material_override.duplicate()
 				visual.material_override.shader = SceneryShader
 				visual.material_override.set_shader_parameter("detailed_patch", true)
+				visual.set_meta("scenery_transition_material", visual.material_override)
 			visual.set_meta("asset", batch.asset_id)
 			visual.set_meta("variant", batch.species.geometry_variant)
 			patch_root.add_child(visual)

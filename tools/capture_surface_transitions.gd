@@ -47,7 +47,7 @@ func _run() -> void:
 	report.renderer = RenderingServer.get_current_rendering_method()
 	report.adapter = RenderingServer.get_video_adapter_name()
 	report.resolution = [960, 540]
-	report.scope = "Fixed settled views, 12 frames/view on software GPU; no walking FPS or target-PC acceptance. Fast setup excluded. UI/actors hidden; wind and cloud clock frozen for comparison."
+	report.scope = "Fixed settled views, 12 frames/view on software GPU; no walking FPS or target-PC acceptance. Fast setup drains up to 64 existing flora publication steps per unmeasured frame; runtime budgets tested separately. UI/actors hidden; wind and cloud clock frozen for comparison."
 	report.geometry = _geometry_metrics()
 	# Same outward and return waypoints, including origin changes and recentering.
 	var route: Array[float] = [0.0, 40.0, 100.0, 200.0, 100.0, 0.0]
@@ -92,6 +92,13 @@ func _settle() -> void:
 	while Time.get_ticks_msec() < deadline:
 		await process_frame
 		var flora: Node = scene.flora
+		# Software Vulkan can spend a second servicing a viewport frame. The
+		# real one-shape-per-frame publisher then cannot warm 25 cells in 60 s,
+		# even on the unchanged baseline. Drain the existing bounded publisher
+		# only during unmeasured setup; no copied placements or runtime changes.
+		for step in range(64):
+			flora._tick(0.0)
+			if flora.patches.size() == flora.wanted.size() and flora._publication.is_empty(): break
 		if flora.patches.size() == flora.wanted.size() and flora._task < 0 and flora._publication.is_empty() and scene.scenery._task < 0 and scene.scenery._staging.is_empty():
 			if flora.has_method("_advance_scenery_transitions"): flora._advance_scenery_transitions(1.0)
 			return

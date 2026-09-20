@@ -27,6 +27,12 @@ aktive Kollision; beim Umkehren werden dieselben Kacheln wiederverwendet. Bei
 Ursprungwechseln folgen sie weiterhin ihrer kanonischen Bindung. Pause hält den
 Übergang an. Keine neue Speicherung oder Tier-/Wirtschaftssimulation.
 
+Nach vollständiger Einblendung wird das ursprüngliche gemeinsame, opake
+Vegetationsmaterial wiederverwendet. Der erste Software-Grafikvergleich zeigte
+Zusatzaufwand durch einen dauerhaft aktiven Discard-Shader. Der Übergangs-Shader
+ist deshalb nur während der tatsächlichen 0,35 Sekunden aktiv; beim Ausblenden
+wird dieselbe vorbereitete Materialinstanz wiederverwendet.
+
 Budgets: weiterhin 25 aktive Nahkacheln, ein Vegetationsupload pro Bild, ein ferner
 Worker und ein vorbereiteter Satz. Höchstens 25 zusätzliche ausblendende Kacheln
 für 0,35 Sekunden; bei großen Teleportfolgen werden ältere Ausblendungen freigegeben.
@@ -49,6 +55,11 @@ Diese Fachprüfung lief vor Ergänzung der Grafikmesswerkzeuge; die sechs geprü
 Runtime-/Testdateien sind über ihre SHA256 eindeutig zugeordnet. Gemeinsame
 Integration, Exporte und Grafik werden durch die PR-CI geprüft.
 
+Nach der Materialoptimierung wurde `surface_distance_world_test` erneut bestanden:
+`optimized-headless-results.json` und `optimized-tested-files.json` beziehen sich
+auf die beiden geänderten Dateien. Der Test verlangt nun auch die Rückkehr zum
+ursprünglichen opaken Material. Die übrigen vier Fachdateien bleiben unverändert.
+
 `tools/review_surface_transitions.py` rendert denselben Messcode auf dem festen
 PR-Basisstand und dem Kandidaten. Nur das Messskript wird in den temporären
 Basischeckout kopiert. Es verwendet Seed 15838, 960×540, Hin-/Rückweg bei
@@ -59,6 +70,15 @@ ein SHA256 der realen Kollisionsflächen werden gemeinsam hochgeladen. Der
 Runner verlangt identische Kollisionsflächen und korrekte Oberseitennormalen.
 Die Bilder müssen zusätzlich visuell beurteilt werden; die kurzen Messungen
 am Software-Grafiktreiber sind keine Leistungsabnahme auf Lars' PC.
+
+Der erste GL-Vergleich auf `d2984d5602002d79a69ebd6ca7a48817b4bb77d2` bestand;
+die maximale künstliche Oberseitennormalen-Abweichung sank von 0,2021865 auf 0,
+der Kollisions-Hash blieb identisch. Der Vulkan-Vergleich scheiterte bereits am
+unveränderten Basisstand: bei ungefähr einer Software-GPU-Sekunde je Bild konnte
+der reguläre Einzelschritt-Publisher nicht alle 25 Nahkacheln in 60 Sekunden
+bereitstellen. Der Messaufbau leert deshalb bis zu 64 vorhandene Flora-Schritte
+pro ungemessenem Vorbereitungsbild. Die nachfolgende Darstellung bleibt regulär;
+Laufzeitbudgets werden weiterhin im unveränderten echten Weltprüfablauf geprüft.
 
 ## Offene gemeinsame Abnahme
 
