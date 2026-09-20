@@ -29,6 +29,7 @@ else:
 # their combined far-scenery loads measured 42–48 seconds each in integration.
 LONG_TESTS = {"tribal_guidance_world_test", "settlement_runtime_test", "site_transport_runtime_test", "workplace_runtime_test", "spherical_developed_migration_test", "body_travel_test", "spherical_gameplay_test", "spherical_campaign_runtime_test", "egg_species_campaign_test", "tribal_age_husbandry_test", "tribal_age_growth_test", "tribal_age_economy_test", "tribal_economy_progress_world_test"}
 LONG_TESTS.update({"surface_support_test", "weather_runtime_test", "graphics_settings_test", "tribal_playtest_test"})
+LONG_TESTS.add("pause_menu_test")  # One cold sphere plus ordinary tribal handoff and input/layout matrix.
 # This world check opens two cold campaigns (each bounded at 90 s), then
 # observes real colony streaming and reload. CI reached the second load at
 # the old 120 s aggregate cutoff; use the existing bounded world-test budget.

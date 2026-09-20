@@ -305,6 +305,7 @@
         "input_preferences_test",
         "localization_test",
         "menu_input_test",
+        "pause_menu_test",
         "onboarding_test",
         "ui_visual_refresh_test",
         "tribe_localization_test",

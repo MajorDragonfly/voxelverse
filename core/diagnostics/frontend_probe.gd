@@ -97,20 +97,14 @@ func _run() -> void:
 	_expect(settings.is_menu_open(), "Esc → Settings did not open the shared settings dialog.")
 	var tabs: TabContainer = settings._tabs
 	var bar: TabBar = tabs.get_tab_bar()
-	for tab in [1, 2, 3, 0]:
+	for tab in [1, 2, 3, 0, 4]:
 		_click_position(bar.get_global_rect().position + bar.get_tab_rect(tab).get_center())
 		await _frames(2)
 		_expect(tabs.current_tab == tab and tabs.get_tab_control(tab).is_visible_in_tree(), "Settings tab %d is inaccessible from the pause menu." % tab)
 	_expect(settings._graphics_settings.controls.size() == 18, "Pause settings did not include every graphics control.")
-	_click(settings._menu_panel.find_child("AudioSettings", true, false))
-	await _frames(2)
 	var audio := get_node("/root/AudioManager")
-	_expect(is_instance_valid(audio._panel), "Audio settings are inaccessible from the pause menu.")
-	if is_instance_valid(audio._panel):
-		_expect(audio._panel._sliders.size() == 5 and audio._panel._preferences.size() == 2, "Pause settings did not include every audio preference.")
-	_key(KEY_ESCAPE)
-	await _frames(2)
-	_expect(not is_instance_valid(audio._panel) and settings.is_menu_open() and tree.paused and flow.pause_open, "Esc from audio did not return to settings while keeping the world paused.")
+	_expect(not is_instance_valid(audio._panel) and settings._audio_settings.is_visible_in_tree(), "Audio did not open in the shared settings window.")
+	_expect(settings._audio_settings._sliders.size() == 5 and settings._audio_settings._preferences.size() == 2, "Pause settings did not include every audio preference.")
 	_key(KEY_ESCAPE)
 	await _frames(2)
 	_expect(not settings.is_menu_open() and tree.paused and flow.pause_open and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Settings close resumed underneath pause.")
