@@ -2,9 +2,12 @@
 """Compare PT17-02 against the exact original controller with an identical fixture."""
 import argparse
 import hashlib
+import io
 import json
 from pathlib import Path
+import shutil
 import subprocess
+import tarfile
 import tempfile
 
 from validation_support import isolated_env, validation_editor
@@ -19,6 +22,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--baseline', default=BASE, help='Git revision of the complete before project')
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
@@ -27,32 +31,38 @@ def main():
     def git(*parts):
         return subprocess.check_output(['git', *parts], cwd=project)
 
-    before = git('show', f'{BASE}:{CONTROLLER}')
+    basis = git('rev-parse', '--verify', args.baseline + '^{commit}').decode().strip()
+    before = git('show', f'{basis}:{CONTROLLER}')
     source = {'head': git('rev-parse', 'HEAD').decode().strip(),
               'tree': git('rev-parse', 'HEAD^{tree}').decode().strip(),
-              'dirty': bool(git('status', '--porcelain')), 'basis': BASE,
+              'dirty': bool(git('status', '--porcelain')), 'basis': basis,
               'controller_before_sha256': hashlib.sha256(before).hexdigest(),
               'controller_after_sha256': hashlib.sha256((project / CONTROLLER).read_bytes()).hexdigest(),
               'fixture_sha256': hashlib.sha256((project / 'tools/review_light_balance.gd').read_bytes()).hexdigest()}
-    # This comparison intentionally substitutes only the changed controller.
-    # All of its preloaded production dependencies must still equal the basis.
-    for dependency in ['core/graphics_preferences.gd', 'world/visuals/atmosphere/campaign_sky.gdshader']:
-        if git('show', f'{BASE}:{dependency}') != (project / dependency).read_bytes():
-            raise RuntimeError('Baseline needs its own dependency snapshot: ' + dependency)
     passed = True
-    with validation_editor(args.godot) as godot:
+    # Replay the full original project, including preloaded shaders/preferences.
+    # Future graphics changes must neither contaminate the before image nor
+    # fail this shared workflow merely because a dependency has changed.
+    with validation_editor(args.godot) as godot, tempfile.TemporaryDirectory(prefix='light-baseline-') as snapshot:
+        baseline = Path(snapshot)
+        with tarfile.open(fileobj=io.BytesIO(git('archive', basis))) as archive:
+            archive.extractall(baseline, filter='data')
+        shutil.copy2(project / 'tools/review_light_balance.gd', baseline / 'tools/review_light_balance.gd')
         for label in ['before', 'after']:
             directory = output / label
             directory.mkdir()
             with tempfile.TemporaryDirectory(prefix='light-review-') as temporary:
                 userdata = Path(temporary)
-                command = [str(godot), '--path', str(project), '--rendering-method', args.renderer,
+                capture_project = baseline if label == 'before' else project
+                if label == 'before':
+                    with (directory / 'import.log').open('w') as log:
+                        imported = subprocess.run([str(godot), '--headless', '--path', str(baseline), '--import'],
+                                                  env=isolated_env(userdata), stdout=log, stderr=subprocess.STDOUT, timeout=120)
+                    if imported.returncode or ERROR.search((directory / 'import.log').read_text()):
+                        raise RuntimeError('Baseline import failed; see before/import.log')
+                command = [str(godot), '--path', str(capture_project), '--rendering-method', args.renderer,
                            '--audio-driver', 'Dummy', '--script', 'res://tools/review_light_balance.gd',
                            '--', '--capture', str(directory)]
-                if label == 'before':
-                    baseline = userdata / 'baseline_campaign_atmosphere.gd'
-                    baseline.write_bytes(before)
-                    command += ['--controller', str(baseline)]
                 with (directory / 'render.log').open('w') as log:
                     run = subprocess.run(command, env=isolated_env(userdata), stdout=log,
                                          stderr=subprocess.STDOUT, timeout=240)

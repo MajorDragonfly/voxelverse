@@ -1,6 +1,7 @@
 extends SceneTree
 ## PT17-02: fixed material/lighting fixture, not a procedural campaign screenshot.
-## The before controller is read verbatim from the recorded Git basis by Python.
+## Python replays the full before project from the recorded Git basis.
+const Atmosphere = preload("res://world/visuals/atmosphere/campaign_atmosphere.gd")
 const Profile = preload("res://world/generation/planet_profile_v9.gd")
 const Ground = preload("res://world/surface/visuals/living_ground.gdshader")
 const Water = preload("res://world/surface/visuals/living_water.gdshader")
@@ -21,8 +22,6 @@ func _run() -> void:
 	root.get_node("SaveGameService").autosave_enabled = false
 	var args := OS.get_cmdline_user_args()
 	output = args[args.find("--capture") + 1]
-	var controller := "res://world/visuals/atmosphere/campaign_atmosphere.gd"
-	if "--controller" in args: controller = args[args.find("--controller") + 1]
 	if DisplayServer.get_name() == "headless":
 		push_error("Light review requires a graphical renderer.")
 		quit(1)
@@ -31,10 +30,14 @@ func _run() -> void:
 	var settings := root.get_node("DisplaySettings")
 	settings.display_mode = 0
 	settings.resolution = Vector2i(960, 540)
+	settings.vsync_enabled = false
 	settings._apply_settings(false)
+	# Keep the Window resource in sync as well as DisplayServer: a bare Xvfb
+	# session can otherwise retain the project's 1600x900 window override.
+	root.size = Vector2i(960, 540)
 	scene = Node3D.new()
 	root.add_child(scene)
-	air = load(controller).new()
+	air = Atmosphere.new()
 	scene.add_child(air)
 	air.configure(Profile.create(15838), 15838, Vector3.UP, func(): return sample)
 	air.set_process(false)
@@ -65,6 +68,7 @@ func _run() -> void:
 	await _capture("forest-night", Vector3(-15, 4, 13), Vector3(-16, 3, -15), Vector3(-0.5, -0.8, -0.3).normalized())
 	var report := {"seed": 15838, "clock_seconds": sample.seconds, "renderer": RenderingServer.get_current_rendering_method(),
 		"adapter": RenderingServer.get_video_adapter_name(), "engine": Engine.get_version_info().string,
+		"image_size": str(root.get_texture().get_size()),
 		"scope": "Fixed voxel fixture with production ground/water shaders, tree asset and creature. No target-PC/FPS acceptance.", "captures": captures}
 	var file := FileAccess.open(output.path_join("captures.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "\t") + "\n")
@@ -74,17 +78,17 @@ func _run() -> void:
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0)
 
 func _fixture() -> void:
-	_box(Vector3(0, -1, -35), Vector3(120, 2, 150), Color("628449"), true)
+	_box(Vector3(0, -1, -35), Vector3(120, 2, 150), Color("628449"))
 	# Pale rock and snow terraces retain the real voxel shader's grain/strata.
 	for step in range(6):
-		_box(Vector3(12, float(step) * 1.5, -float(step) * 4.0 - 8.0), Vector3(18, 3, 14), Color("e9ece5"), true)
+		_box(Vector3(12, float(step) * 1.5, -float(step) * 4.0 - 8.0), Vector3(18, 3, 14), Color("e9ece5"))
 	for x in range(3):
 		for z in range(3):
 			var tree: Node3D = load("res://assets/packs/temperate_forest_v1/environment/benchmark_v2/ancient_oak_v2_near.glb").instantiate()
 			scene.add_child(tree)
 			tree.position = Vector3(-10.0 - x * 9.0, 0, -8.0 - z * 12.0)
 	for i in range(5):
-		_box(Vector3(float(i) * 150.0 - 300.0, 20.0, -600.0 - i * 170.0), Vector3(180, 100 + i * 35, 150), Color("849185"), true)
+		_box(Vector3(float(i) * 150.0 - 300.0, 20.0, -600.0 - i * 170.0), Vector3(180, 100 + i * 35, 150), Color("849185"))
 	# A pool uses the same opaque depth-aware water shader as the campaign.
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(11, 15)
@@ -109,7 +113,7 @@ func _fixture() -> void:
 		creature.position = at
 		if creature.has_meta("ground_y"): creature.position.y = -float(creature.get_meta("ground_y"))
 
-func _box(at: Vector3, size: Vector3, color: Color, ground: bool) -> void:
+func _box(at: Vector3, size: Vector3, color: Color) -> void:
 	var box := BoxMesh.new()
 	box.size = size
 	var arrays := box.get_mesh_arrays()
@@ -157,3 +161,4 @@ func _capture(id: String, at: Vector3, target: Vector3, sunlight: Vector3) -> vo
 		"clipped_fraction": float(clipped) / total, "black_fraction": float(dark) / total,
 		"mean_luminance": luminance / total, "draw_calls": Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
 		"primitives": Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)})
+	print("LIGHT_BALANCE_CAPTURE ", id, " ", picture.get_size())
