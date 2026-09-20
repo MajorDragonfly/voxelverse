@@ -12,6 +12,12 @@ const Species = preload("res://creatures/wildlife/species_assembly_factory_v7.gd
 const MAX_PATCHES: int = 25
 const MAX_ANIMALS: int = 4
 const Fauna = preload("res://world/surface/living_fauna_archive.gd")
+const SceneryShader = preload("res://world/surface/visuals/surface_scenery.gdshader")
+const SCENERY_FADE_SECONDS: float = 0.35
+var scenery_transitions_enabled: bool = false
+# Retiring visuals have no collisions, workers or simulation. At most one
+# previous near set survives a teleport; normal movement retires a narrow row.
+var _retiring_patches: Dictionary = {}
 var domestic: RefCounted
 var wildlife_enabled: bool = true
 var adapter: RefCounted
@@ -54,6 +60,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	last_publish_units = 0
 	if _closed: return
+	_advance_scenery_transitions(delta)
 	if _scenery_frame == Engine.get_process_frames(): return
 	var started: int = Time.get_ticks_usec()
 	_tick(delta)
@@ -122,6 +129,11 @@ func _refresh() -> void:
 	for id in ordered:
 		sorted[id] = wanted[id]
 	wanted = sorted
+	for id: String in _retiring_patches.keys():
+		if wanted.has(id):
+			# Reversal resumes the same canonical patch and the current blend.
+			patches[id] = _retiring_patches[id]
+			_retiring_patches.erase(id)
 	# Invalidate when leaving the requested region, including A -> B -> A
 	# while its worker is still running. Re-entry cannot revive the old job.
 	if (_task >= 0 or not _prepared.is_empty()) and not _ticket_current(_job_ticket):
@@ -131,9 +143,13 @@ func _refresh() -> void:
 		_discard_publication()
 	for id in patches.keys():
 		if not wanted.has(id):
-			adapter.unbind(id)
-			patches[id].node.get_parent().remove_child(patches[id].node)
-			patches[id].node.queue_free()
+			if scenery_transitions_enabled:
+				while _retiring_patches.size() >= MAX_PATCHES:
+					_release_patch(_retiring_patches, _retiring_patches.keys()[0])
+				patches[id].node.collision_layer = 0
+				_retiring_patches[id] = patches[id]
+			else:
+				_release_patch(patches, id)
 			patches.erase(id)
 			unloaded += 1
 			patches_changed.emit()
@@ -142,6 +158,52 @@ func _refresh() -> void:
 		data.node.collision_layer = 2 if distance < 90.0 else 0
 		for visual: MultiMeshInstance3D in data.node.get_children():
 			visual.multimesh.mesh = Assets.get_mesh(visual.get_meta("asset"), 0 if distance < 80.0 else 1, visual.get_meta("variant", 0))
+
+
+func scenery_coverage() -> Dictionary:
+	var result: Dictionary = {}
+	for collection: Dictionary in [patches, _retiring_patches]:
+		for id: String in collection:
+			# R8 quantization must match the detailed material at every phase.
+			result[id] = roundf(float(collection[id].get("coverage", 1.0)) * 255.0) / 255.0
+	return result
+
+
+func _advance_scenery_transitions(delta: float) -> void:
+	if not scenery_transitions_enabled: return
+	var changed: bool = false
+	for collection: Dictionary in [patches, _retiring_patches]:
+		for id: String in collection.keys():
+			var data: Dictionary = collection[id]
+			var target: float = 1.0 if patches.has(id) else 0.0
+			var previous: float = float(data.get("coverage", 1.0))
+			var phase: float = move_toward(previous, target, maxf(delta, 0.0) / SCENERY_FADE_SECONDS)
+			if phase == 0.0 and target == 0.0:
+				_release_patch(_retiring_patches, id)
+				changed = true
+				continue
+			if phase == previous: continue
+			data.coverage = phase
+			_set_patch_coverage(data, phase)
+			changed = true
+	if changed: patches_changed.emit()
+
+
+func _set_patch_coverage(data: Dictionary, phase: float) -> void:
+	for visual: MultiMeshInstance3D in data.node.get_children():
+		# A discard-capable shader can prevent early depth rejection even at
+		# 100% coverage. Pay for the blend only during its 0.35-second lifetime;
+		# settled vegetation keeps the original shared opaque material/fast path.
+		var transition: ShaderMaterial = visual.get_meta("scenery_transition_material")
+		transition.set_shader_parameter("patch_coverage", roundf(phase * 255.0) / 255.0)
+		visual.material_override = visual.get_meta("scenery_settled_material") if phase >= 1.0 else transition
+
+
+func _release_patch(collection: Dictionary, id: String) -> void:
+	adapter.unbind(id)
+	collection[id].node.get_parent().remove_child(collection[id].node)
+	collection[id].node.queue_free()
+	collection.erase(id)
 
 
 func _cell_distance(cell: Dictionary) -> float:
@@ -179,6 +241,9 @@ func _step_publication() -> void:
 		patch_root.basis = Basis.IDENTITY
 		patch_root.collision_layer = 2 if patch_root.position.distance_to(player.position) < 90.0 else 0
 		data.node = patch_root
+		if scenery_transitions_enabled:
+			data.coverage = 0.0
+			_set_patch_coverage(data, 0.0)
 		data.erase("batches")
 		patches[data.cell.id] = data
 		patches_changed.emit()
@@ -216,6 +281,13 @@ func _step_publication() -> void:
 			var visual := MultiMeshInstance3D.new()
 			visual.multimesh = multimesh
 			visual.material_override = Assets.get_material(adapter.terrain.surface.terrain, batch.species)
+			if scenery_transitions_enabled:
+				# Shared authored materials remain untouched for other worlds/assets.
+				visual.set_meta("scenery_settled_material", visual.material_override)
+				visual.material_override = visual.material_override.duplicate()
+				visual.material_override.shader = SceneryShader
+				visual.material_override.set_shader_parameter("detailed_patch", true)
+				visual.set_meta("scenery_transition_material", visual.material_override)
 			visual.set_meta("asset", batch.asset_id)
 			visual.set_meta("variant", batch.species.geometry_variant)
 			patch_root.add_child(visual)
@@ -383,11 +455,8 @@ func close() -> void:
 		animals[id].get_parent().remove_child(animals[id])
 		animals[id].queue_free()
 	animals.clear()
-	for id: String in patches:
-		adapter.unbind(id)
-		patches[id].node.get_parent().remove_child(patches[id].node)
-		patches[id].node.queue_free()
-	patches.clear()
+	for collection: Dictionary in [patches, _retiring_patches]:
+		for id: String in collection.keys(): _release_patch(collection, id)
 
 
 func _exit_tree() -> void:

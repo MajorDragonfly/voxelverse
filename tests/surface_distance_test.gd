@@ -14,6 +14,22 @@ func _run() -> void:
 	var campaign: Dictionary = Context.create({"id": "distance-fixture", "seed": 15838})
 	var body: Dictionary = Context.descriptor(campaign)
 	var surface: RefCounted = Factory.create(body)
+	var max_top_normal_error: float = 0.0
+	for face in range(6):
+		var level: int = Layout.new(body.radius).max_level - 2
+		var side: int = 1 << level
+		var tile: Dictionary = Layout.patch(face, level, side / 2, side / 2)
+		tile.mask = 5
+		tile.anchor = surface.point(face, tile.uv.x + tile.width * 0.5, tile.uv.y + tile.width * 0.5)
+		var mesh: Array = Patch.build_arrays(tile, surface).land_arrays
+		# The first 256 quads are column tops, including the stitched perimeter.
+		# Walls keep their geometric normals; collision uses unchanged positions.
+		for y in range(16):
+			for x in range(16):
+				var up: Vector3 = Cube.vector(Cube.direction(face, tile.uv.x + (x + 0.5) * tile.width / 16.0, tile.uv.y + (y + 0.5) * tile.width / 16.0))
+				var normal: Vector3 = mesh[Mesh.ARRAY_NORMAL][mesh[Mesh.ARRAY_INDEX][(y * 16 + x) * 6]]
+				max_top_normal_error = maxf(max_top_normal_error, normal.distance_to(up))
+	_expect(max_top_normal_error < 0.00001, "Stitched column tops introduce artificial slope lighting / patch grid")
 	# All six cube orientations: the sun above a coarse slope must light its
 	# outside, just as it lights the nearby voxel tops.
 	for face in range(6):
@@ -79,7 +95,8 @@ func _run() -> void:
 	_expect(maximum_error < 0.002, "Approaching a distant tree changes its position or shape")
 	_expect(distant > 20, "No actual trees, bushes or rocks populate the 150–224 metre ring")
 	print("SURFACE_DISTANCE ", JSON.stringify({"checks": checks, "max_cells": max_cells, "instances": job.result.instances,
-		"distant_instances": distant, "batches": job.result.batches.size(), "worker_ms": job.elapsed_usec / 1000.0, "near_far_error_m": maximum_error}))
+		"distant_instances": distant, "batches": job.result.batches.size(), "worker_ms": job.elapsed_usec / 1000.0, "near_far_error_m": maximum_error,
+		"max_top_normal_error": max_top_normal_error}))
 	for failure in failures: push_error(failure)
 	print("SURFACE_DISTANCE_PASSED ", failures.is_empty())
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)

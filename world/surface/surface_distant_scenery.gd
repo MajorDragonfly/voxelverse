@@ -26,6 +26,7 @@ var _closed: bool = false
 func _ready() -> void:
 	# Reserve individual visual submissions before the nearby publisher runs.
 	process_priority = -1
+	nearby.scenery_transitions_enabled = true
 	adapter.origin_shifted.connect(_rebase)
 	nearby.patches_changed.connect(_nearby_changed)
 
@@ -83,7 +84,7 @@ func _begin(data: Dictionary) -> void:
 	data["node"] = holder
 	data["next_batch"] = 0
 	data["ownership"] = ImageTexture.create_from_image(Image.create(Job.MAX_CELLS, 1, false, Image.FORMAT_R8))
-	data["near_ids"] = []
+	data["near_coverage"] = {}
 	_staging = data
 	_update_ownership(_staging, true)
 
@@ -125,13 +126,12 @@ func _publish_step() -> void:
 
 func _update_ownership(data: Dictionary, force: bool = false) -> void:
 	if data.is_empty(): return
-	var ids: Array = nearby.patches.keys()
-	ids.sort()
-	if not force and data.near_ids == ids: return
-	data.near_ids = ids
+	var coverage: Dictionary = nearby.scenery_coverage()
+	if not force and data.near_coverage == coverage: return
+	data.near_coverage = coverage
 	var image := Image.create(Job.MAX_CELLS, 1, false, Image.FORMAT_R8)
 	for index in range(data.cell_ids.size()):
-		if nearby.patches.has(data.cell_ids[index]): image.set_pixel(index, 0, Color.WHITE)
+		image.set_pixel(index, 0, Color(float(coverage.get(data.cell_ids[index], 0.0)), 0.0, 0.0))
 	data["ownership_image"] = image
 	data.ownership.update(image)
 
