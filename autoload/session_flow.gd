@@ -304,10 +304,19 @@ func can_pause() -> bool:
 	var scene := get_tree().current_scene
 	return scene != null and scene.scene_file_path in [SPHERE_SCENE, LEGACY_TEST_SCENE]
 
+func can_open_pause() -> bool:
+	if not can_pause():
+		return false
+	if not get_tree().paused:
+		return true
+	# Tactical pause has no modal dialog. Keep it when the menu returns.
+	var tribe := get_tree().get_first_node_in_group(&"tribe_controller")
+	return tribe != null and is_instance_valid(tribe.panel) and tribe.panel.owns_world_pause()
+
 func toggle_pause() -> void:
 	if pause_open:
 		back()
-	elif can_pause() and not get_tree().paused:
+	elif can_open_pause():
 		_previous_pause = get_tree().paused
 		_previous_mouse = Input.mouse_mode
 		pause_open = true

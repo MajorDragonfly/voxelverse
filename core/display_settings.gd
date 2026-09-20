@@ -73,7 +73,7 @@ func _input(event: InputEvent) -> void:
 	var key: int = event.keycode if event.keycode != 0 else event.physical_keycode
 	match key:
 		KEY_ESCAPE:
-			if not is_menu_open() and flow != null and bool(flow.managed) and get_tree().paused and not bool(flow.pause_open):
+			if not is_menu_open() and flow != null and bool(flow.managed) and get_tree().paused and not bool(flow.pause_open) and not bool(flow.can_open_pause()):
 				return # Another modal (for example the skill tree) owns Escape.
 			if not is_menu_open() and flow != null and bool(flow.can_pause()):
 				flow.toggle_pause()
