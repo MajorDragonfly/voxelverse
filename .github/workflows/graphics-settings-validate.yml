@@ -10,6 +10,7 @@ on:
       - "world/visuals/underwater_view.gd"
       - "tests/graphics_settings_test.gd"
       - "tools/review_graphics_settings.py"
+      - "tools/review_light_balance.*"
       - ".github/workflows/graphics-settings-validate.yml"
   workflow_dispatch:
 
@@ -27,6 +28,8 @@ jobs:
         renderer: [forward_plus, gl_compatibility]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: ./.github/actions/setup-godot-editor
         id: engine
       - name: Install native software graphics
@@ -40,6 +43,13 @@ jobs:
         run: |
           "$GODOT_BINARY" --headless --path . --import > /tmp/graphics-import.log 2>&1
           xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_graphics_settings.py --godot "$GODOT_BINARY" --renderer "${{ matrix.renderer }}" --output /tmp/graphics-settings-review
+      - name: Compare fixed light and material views against PT17 basis
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+          LIGHT_BASELINE: ${{ github.event.pull_request.base.sha || 'HEAD^' }}
+        run: |
+          xvfb-run -a -s '-screen 0 960x540x24' python3 tools/review_light_balance.py --godot "$GODOT_BINARY" --renderer "${{ matrix.renderer }}" --baseline "$LIGHT_BASELINE" --output /tmp/light-balance-review
       - name: Upload screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
@@ -48,4 +58,5 @@ jobs:
           path: |
             /tmp/graphics-settings-review
             /tmp/graphics-import.log
+            /tmp/light-balance-review
           retention-days: 14

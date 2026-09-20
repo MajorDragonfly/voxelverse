@@ -152,6 +152,10 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	var air: float = exp(-maxf(altitude, 0.0)/6000.0) if atmosphere_present else 0.0
 	var elevation: float = up.dot(_sun_direction)
 	var daylight: float = smoothstep(-0.16, 0.12, elevation)
+	# Filmic's default white point (1.0) clips sunlit pale materials. Give
+	# daylight highlights headroom without changing the saved exposure control
+	# or the existing night-side visibility. This uses the same tonemap pass.
+	environment.tonemap_white = lerpf(1.0, 2.0, daylight)
 	var sunset: float = (1.0-smoothstep(0.05,0.55,absf(elevation))) * daylight
 	var top: Color = _profile.get("sky_top", Color("418ac1"))
 	top = top.lerp(Color("287bc0"), 0.35)
@@ -173,7 +177,7 @@ func update_view(delta: float, immediate: bool = false) -> void:
 	var seed_phase: float = float(posmod(_seed, 4096)) * 0.013
 	sky_material.set_shader_parameter("cloud_offset", Vector3(cos(phase)*1.8+seed_phase, sin(phase)*1.8, seed_phase*0.7))
 	sun.light_color = warm
-	sun.light_energy = lerpf(0.0, 1.3 if _forward_plus else 0.85, smoothstep(-0.035,0.3,elevation)) * float(_profile.get("sun_energy_scale",1.0))
+	sun.light_energy = lerpf(0.0, 1.1 if _forward_plus else 0.72, smoothstep(-0.035,0.3,elevation)) * float(_profile.get("sun_energy_scale",1.0))
 	sun.light_energy *= lerpf(1.0, 0.6, smoothstep(0.4, 1.0, cloud_cover))
 	environment.ambient_light_color = Color("6582b0").lerp(horizon,daylight)
 	environment.ambient_light_energy = lerpf(0.12,0.34,daylight) * float(_profile.get("ambient_scale",1.0))
