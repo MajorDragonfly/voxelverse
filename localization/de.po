@@ -5375,3 +5375,18 @@ msgstr "Alle Einstellungen wirken ohne Neustart. Audio wird automatisch gespeich
 
 msgid "PT17_CONTROLS_TAB"
 msgstr "Steuerung & Kamera"
+
+msgid "PT17_TRAVEL_CHOOSE"
+msgstr "Reiseziel wählen"
+
+msgid "PT17_TRAVEL_TITLE"
+msgstr "REISEZIEL"
+
+msgid "PT17_TRAVEL_HELP"
+msgstr "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort."
+
+msgid "PT17_TRAVEL_PLANET"
+msgstr "Planet %d"
+
+msgid "PT17_TRAVEL_CURRENT"
+msgstr " · aktueller Ort"

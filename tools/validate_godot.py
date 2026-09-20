@@ -200,12 +200,15 @@ def validate(args):
                     stream.write(("\nERROR: validation interrupted: " + str(error) + "\n").encode())
                 status = 130 if isinstance(error, KeyboardInterrupt) else 127
         log = log_path.read_text(encoding="utf-8", errors="replace")
-        failed = status != 0 or ERROR.search(log) is not None
+        missing_completion = name == "pause_menu_test" and "PAUSE_MENU_PASSED" not in log
+        failed = status != 0 or ERROR.search(log) is not None or missing_completion
         kind = ("source_contract" if name in {"source_contracts", "art_sources"} else
                 "editor_import" if name == "import" else "headless_godot")
         result = {"name": name, "kind": kind, "passed": not failed, "exit_code": status,
                   "seconds": round(time.monotonic() - started, 3), "command": argv,
                   "log_sha256": hashlib.sha256(log_path.read_bytes()).hexdigest()}
+        if missing_completion:
+            result["error"] = "Pause menu route exited without its completion marker"
         if name in owners:
             result["contract"] = owners[name]
         results.append(result)

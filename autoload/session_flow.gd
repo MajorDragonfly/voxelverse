@@ -354,7 +354,7 @@ func _show_pause(focus_name: String = "ResumeGame") -> void:
 	_content.add_child(actions)
 	Style.button(actions, "Spiel speichern", _save, "SaveGame").size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if get_tree().current_scene.scene_file_path == SPHERE_SCENE:
-		Style.button(actions, "Reiseziel wählen", _show_travel, "TravelDestinations").size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		Style.button(actions, "PT17_TRAVEL_CHOOSE", _show_travel, "TravelDestinations").size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	Style.button(actions, "PT17_PAUSE_TITLE", return_to_title, "ReturnToTitle").size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	Style.button(actions, "PT17_PAUSE_QUIT", request_quit, "QuitGame").size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	Style.paragraph(_content, "PT17_PAUSE_SAVE_HINT", 17)
@@ -372,15 +372,18 @@ func settings_visibility_changed(visible: bool) -> void:
 func _show_travel() -> void:
 	_pause_page = "travel"
 	_prepare_overlay()
-	Style.label(_content, "REISEZIEL", 32, Style.ACCENT)
-	Style.paragraph(_content, "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort.", 19)
+	Style.label(_content, "PT17_TRAVEL_TITLE", 32, Style.ACCENT)
+	Style.paragraph(_content, "PT17_TRAVEL_HELP", 19)
 	var state: Node = get_node("/root/GameState")
 	var catalog = preload("res://world/generation/planet_catalog_v7.gd")
 	var system: Dictionary = catalog.create_system(state.system_seed)
 	for index in range(catalog.get_planet_count(system)):
 		var planet: Dictionary = catalog.get_planet(system, index)
 		var seed_value: int = int(planet.planet_seed)
-		var button := Style.button(_content, "Planet %d%s" % [index + 1, " · aktueller Ort" if seed_value == state.world_seed else ""], func(): travel_to_planet(state.system_seed, index, seed_value), "TravelPlanet%d" % index)
+		var destination := tr("PT17_TRAVEL_PLANET") % (index + 1)
+		if seed_value == state.world_seed:
+			destination += tr("PT17_TRAVEL_CURRENT")
+		var button := Style.button(_content, destination, func(): travel_to_planet(state.system_seed, index, seed_value), "TravelPlanet%d" % index)
 		button.disabled = seed_value == state.world_seed
 	Style.button(_content, "Zurück zur Pause", back, "BackToPause").grab_focus()
 

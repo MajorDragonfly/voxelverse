@@ -5375,3 +5375,18 @@ msgstr "All settings take effect without restarting. Audio saves automatically."
 
 msgid "PT17_CONTROLS_TAB"
 msgstr "Controls & camera"
+
+msgid "PT17_TRAVEL_CHOOSE"
+msgstr "Choose destination"
+
+msgid "PT17_TRAVEL_TITLE"
+msgstr "DESTINATION"
+
+msgid "PT17_TRAVEL_HELP"
+msgstr "Explore other planets. Your residents continue work they can reach while you travel."
+
+msgid "PT17_TRAVEL_PLANET"
+msgstr "Planet %d"
+
+msgid "PT17_TRAVEL_CURRENT"
+msgstr " · current location"

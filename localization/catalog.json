@@ -8961,6 +8961,31 @@
       "key": "PT17_CONTROLS_TAB",
       "de": "Steuerung & Kamera",
       "en": "Controls & camera"
+    },
+    {
+      "key": "PT17_TRAVEL_CHOOSE",
+      "de": "Reiseziel wählen",
+      "en": "Choose destination"
+    },
+    {
+      "key": "PT17_TRAVEL_TITLE",
+      "de": "REISEZIEL",
+      "en": "DESTINATION"
+    },
+    {
+      "key": "PT17_TRAVEL_HELP",
+      "de": "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort.",
+      "en": "Explore other planets. Your residents continue work they can reach while you travel."
+    },
+    {
+      "key": "PT17_TRAVEL_PLANET",
+      "de": "Planet %d",
+      "en": "Planet %d"
+    },
+    {
+      "key": "PT17_TRAVEL_CURRENT",
+      "de": " · aktueller Ort",
+      "en": " · current location"
     }
   ]
 }
