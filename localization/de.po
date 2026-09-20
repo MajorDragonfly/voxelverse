@@ -5351,3 +5351,51 @@ msgstr "Dein neugieriger Gefährte hat Nahrung in der Nähe entdeckt."
 
 msgid "LIVING_NEST"
 msgstr "Nest: {species} · {count} Bewohner"
+
+msgid "AUDIO_TITLE"
+msgstr "Audio"
+
+msgid "AUDIO_HINT"
+msgstr "Änderungen gelten sofort und werden automatisch gespeichert."
+
+msgid "AUDIO_MASTER"
+msgstr "Gesamtlautstärke"
+
+msgid "AUDIO_MUSIC"
+msgstr "Musik"
+
+msgid "AUDIO_AMBIENCE"
+msgstr "Umgebung"
+
+msgid "AUDIO_EFFECTS"
+msgstr "Spieleffekte"
+
+msgid "AUDIO_UI"
+msgstr "Menügeräusche"
+
+msgid "AUDIO_MUTE"
+msgstr "Stumm"
+
+msgid "AUDIO_TEST"
+msgstr "Anhören"
+
+msgid "AUDIO_NIGHT"
+msgstr "Nachtmodus: große Lautstärkeunterschiede verringern"
+
+msgid "AUDIO_BACKGROUND"
+msgstr "Stumm, wenn das Spielfenster im Hintergrund ist"
+
+msgid "AUDIO_RESET"
+msgstr "Standardwerte"
+
+msgid "AUDIO_BACK"
+msgstr "Zurück · Esc"
+
+msgid "AUDIO_TEST_HINT"
+msgstr "0 % schaltet einen Kanal stumm. Gesamtlautstärke gilt auch für Hörproben."
+
+msgid "AUDIO_TEST_PLAYING"
+msgstr "Hörprobe: {channel} · maximal 3 Sekunden"
+
+msgid "AUDIO_TEST_MUTED"
+msgstr "Hörprobe: {channel} · durch deine Einstellungen stumm"

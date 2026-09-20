@@ -5351,3 +5351,51 @@ msgstr "Your curious companion has found food nearby."
 
 msgid "LIVING_NEST"
 msgstr "Nest: {species} · {count} residents"
+
+msgid "AUDIO_TITLE"
+msgstr "Audio"
+
+msgid "AUDIO_HINT"
+msgstr "Changes apply immediately and are saved automatically."
+
+msgid "AUDIO_MASTER"
+msgstr "Master volume"
+
+msgid "AUDIO_MUSIC"
+msgstr "Music"
+
+msgid "AUDIO_AMBIENCE"
+msgstr "Ambience"
+
+msgid "AUDIO_EFFECTS"
+msgstr "Game effects"
+
+msgid "AUDIO_UI"
+msgstr "Menu sounds"
+
+msgid "AUDIO_MUTE"
+msgstr "Mute"
+
+msgid "AUDIO_TEST"
+msgstr "Preview"
+
+msgid "AUDIO_NIGHT"
+msgstr "Night mode: reduce large volume differences"
+
+msgid "AUDIO_BACKGROUND"
+msgstr "Mute when the game window is in the background"
+
+msgid "AUDIO_RESET"
+msgstr "Restore defaults"
+
+msgid "AUDIO_BACK"
+msgstr "Back · Esc"
+
+msgid "AUDIO_TEST_HINT"
+msgstr "0% mutes a channel. Master volume also applies to previews."
+
+msgid "AUDIO_TEST_PLAYING"
+msgstr "Preview: {channel} · up to 3 seconds"
+
+msgid "AUDIO_TEST_MUTED"
+msgstr "Preview: {channel} · muted by your settings"

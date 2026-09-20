@@ -8921,6 +8921,86 @@
       "key": "LIVING_NEST",
       "de": "Nest: {species} · {count} Bewohner",
       "en": "Nest: {species} · {count} residents"
+    },
+    {
+      "key": "AUDIO_TITLE",
+      "de": "Audio",
+      "en": "Audio"
+    },
+    {
+      "key": "AUDIO_HINT",
+      "de": "Änderungen gelten sofort und werden automatisch gespeichert.",
+      "en": "Changes apply immediately and are saved automatically."
+    },
+    {
+      "key": "AUDIO_MASTER",
+      "de": "Gesamtlautstärke",
+      "en": "Master volume"
+    },
+    {
+      "key": "AUDIO_MUSIC",
+      "de": "Musik",
+      "en": "Music"
+    },
+    {
+      "key": "AUDIO_AMBIENCE",
+      "de": "Umgebung",
+      "en": "Ambience"
+    },
+    {
+      "key": "AUDIO_EFFECTS",
+      "de": "Spieleffekte",
+      "en": "Game effects"
+    },
+    {
+      "key": "AUDIO_UI",
+      "de": "Menügeräusche",
+      "en": "Menu sounds"
+    },
+    {
+      "key": "AUDIO_MUTE",
+      "de": "Stumm",
+      "en": "Mute"
+    },
+    {
+      "key": "AUDIO_TEST",
+      "de": "Anhören",
+      "en": "Preview"
+    },
+    {
+      "key": "AUDIO_NIGHT",
+      "de": "Nachtmodus: große Lautstärkeunterschiede verringern",
+      "en": "Night mode: reduce large volume differences"
+    },
+    {
+      "key": "AUDIO_BACKGROUND",
+      "de": "Stumm, wenn das Spielfenster im Hintergrund ist",
+      "en": "Mute when the game window is in the background"
+    },
+    {
+      "key": "AUDIO_RESET",
+      "de": "Standardwerte",
+      "en": "Restore defaults"
+    },
+    {
+      "key": "AUDIO_BACK",
+      "de": "Zurück · Esc",
+      "en": "Back · Esc"
+    },
+    {
+      "key": "AUDIO_TEST_HINT",
+      "de": "0 % schaltet einen Kanal stumm. Gesamtlautstärke gilt auch für Hörproben.",
+      "en": "0% mutes a channel. Master volume also applies to previews."
+    },
+    {
+      "key": "AUDIO_TEST_PLAYING",
+      "de": "Hörprobe: {channel} · maximal 3 Sekunden",
+      "en": "Preview: {channel} · up to 3 seconds"
+    },
+    {
+      "key": "AUDIO_TEST_MUTED",
+      "de": "Hörprobe: {channel} · durch deine Einstellungen stumm",
+      "en": "Preview: {channel} · muted by your settings"
     }
   ]
 }
