@@ -195,7 +195,12 @@ func _layouts() -> void:
 		display.resolution = dimensions
 		display.ui_scale = 1.5
 		display._apply_settings(false)
-		if DisplayServer.get_name() == "headless": root.size = dimensions
+		# Window owns the viewport size. Raw DisplayServer calls alone can leave
+		# its cached render target unchanged under Xvfb without a window manager.
+		root.mode = Window.MODE_WINDOWED
+		root.size = dimensions
+		await _frames()
+		_expect(root.size == dimensions, "Window resize did not apply: " + str(dimensions))
 		for locale: String in ["de", "en"]:
 			root.get_node("LocaleManager").save_preference(locale)
 			audio.open_settings()
@@ -221,7 +226,9 @@ func _layouts() -> void:
 func _capture(filename: String) -> void:
 	if capture_dir.is_empty(): return
 	await RenderingServer.frame_post_draw
-	_expect(root.get_texture().get_image().save_png(capture_dir.path_join(filename + ".png")) == OK, "Screenshot failed")
+	var image := root.get_texture().get_image()
+	_expect(image.get_size() == root.size, "Capture size differs from actual window: " + filename)
+	_expect(image.save_png(capture_dir.path_join(filename + ".png")) == OK, "Screenshot failed")
 
 func _click(control: Control) -> void:
 	control.grab_focus()

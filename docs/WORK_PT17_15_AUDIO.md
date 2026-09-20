@@ -73,6 +73,15 @@ oben/unten) plus Log und Quellcommit/Tree. Seine konkreten Ergebnisse und die
 Sichtprüfung werden im PR nachgetragen; dieser Bericht behauptet keinen vorweg
 bestandenen Grafiklauf.
 
+Der erste native Lauf 35528323534 war formal grün, produzierte aber bei allen
+Größen 1600×900: Unter Xvfb aktualisierten die DisplayServer-Aufrufe die
+Window-/Renderzielgröße nicht. Diese Bilder zählen nicht als Nachweis der drei
+Größen. Die Aufnahmeprüfung setzt deshalb zusätzlich die tatsächliche
+`Window.size` und prüft sowohl das Renderziel als auch die PNG-Header gegen die
+angeforderte Größe. Erneuter Fachtest: 285 Kontrollen bestanden;
+[Nachweis](evidence/pt17-15/capture-size-fix.json). Der Produktionscode blieb
+bytegleich; der korrigierte native Lauf wird im PR separat verlinkt.
+
 ## Übergabegrenzen
 
 Die gemeinsame Endabnahme **Esc → Einstellungen → Audio** in Kreatur- und

@@ -2,6 +2,7 @@
 """Capture the real audio settings GUI and exercise its mixer and restart tests."""
 import argparse
 import json
+import struct
 import subprocess
 import tempfile
 from pathlib import Path
@@ -33,11 +34,20 @@ def main():
     log = (output / 'render.log').read_text()
     images = [f'audio-{size}-{locale}-{area}' for size in ['800x600', '1280x720', '1920x1080']
               for locale in ['de', 'en'] for area in ['top', 'bottom']]
+    dimensions = {}
+    for name in images:
+        path = output / (name + '.png')
+        if path.is_file():
+            data = path.read_bytes()
+            if data[:8] == b'\x89PNG\r\n\x1a\n' and len(data) >= 24:
+                dimensions[name] = list(struct.unpack('>II', data[16:24]))
+    correct_sizes = all(dimensions.get(name) == [int(n) for n in name.split('-')[1].split('x')]
+                        for name in images)
     unchanged = source['commit'] == git('rev-parse', 'HEAD') and not git('status', '--porcelain')
     passed = (result.returncode == 0 and not ERROR.search(log) and 'AUDIO_SETTINGS_PASSED' in log
-              and all((output / (name + '.png')).is_file() for name in images) and unchanged and not source['dirty'])
+              and correct_sizes and unchanged and not source['dirty'])
     report = {**source, 'passed': passed, 'renderer': 'gl_compatibility', 'command': command,
-              'source_unchanged': unchanged, 'images': images,
+              'source_unchanged': unchanged, 'images': images, 'image_dimensions': dimensions,
               'scope': 'Real mouse/keyboard input, mixer output, persistence/restart, DE/EN, three sizes at 150% UI scale. PT17-14 combined pause-menu and target-PC acceptance remain separate.'}
     (output / 'results.json').write_text(json.dumps(report, indent=2) + '\n')
     print(log)
