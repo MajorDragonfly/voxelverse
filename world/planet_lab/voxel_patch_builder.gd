@@ -47,7 +47,10 @@ func build(tile: Dictionary, surface: RefCounted, seam_arrays: Array) -> Array:
 			heights.append(height)
 			pigments.append(pigment)
 			directions.append(direction)
-			_quad(top, pigment, direction)
+			# The stitched perimeter bends to the neighbouring LOD. It is still
+			# the top of this column, not a new slope/material. Lighting it with
+			# that artificial ramp normal drew a bright grid around every patch.
+			_quad(top, pigment, direction, true)
 	for y in range(CELLS):
 		for x in range(CELLS):
 			var i: int = y * CELLS + x
@@ -70,7 +73,7 @@ func _wall(a: PackedVector3Array, b: PackedVector3Array, edge: Array, pigment: C
 	_quad(PackedVector3Array([a[edge[0]], a[edge[1]], b[edge[3]], b[edge[2]]]), pigment.darkened(0.16), outward * signf(difference))
 
 
-func _quad(points: PackedVector3Array, pigment: Color, outward: Vector3) -> void:
+func _quad(points: PackedVector3Array, pigment: Color, outward: Vector3, column_top: bool = false) -> void:
 	var normal: Vector3 = (points[2] - points[0]).cross(points[1] - points[0])
 	if normal.length_squared() < 0.00000001:
 		normal = (points[3] - points[0]).cross(points[2] - points[0])
@@ -79,7 +82,7 @@ func _quad(points: PackedVector3Array, pigment: Color, outward: Vector3) -> void
 	if normal.dot(outward) < 0.0:
 		points = PackedVector3Array([points[0], points[3], points[2], points[1]])
 		normal = -normal
-	normal = normal.normalized()
+	normal = outward.normalized() if column_top else normal.normalized()
 	var first: int = vertices.size()
 	vertices.append_array(points)
 	for corner in range(4):

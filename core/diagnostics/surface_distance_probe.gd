@@ -25,6 +25,7 @@ func _run() -> void:
 	var image: Image = scenery._active.ownership_image if DisplayServer.get_name() == "headless" else scenery._active.ownership.get_image()
 	for i in range(scenery._active.cell_ids.size()):
 		_expect((image.get_pixel(i, 0).r > 0.5) == scene.flora.patches.has(scenery._active.cell_ids[i]), "Near/distant ownership leaves holes or duplicate trees")
+	await _check_handoff(scene)
 	var anchor: Array = scenery._active.anchor
 	var before: Array = Cube.global_position(scenery._active.node.position, scene.terrain.origin)
 	scene.terrain.rebase([anchor[0] + 80.0, anchor[1] - 29.0, anchor[2] + 65.0])
@@ -54,6 +55,39 @@ func _run() -> void:
 	await tree.scene_changed
 	_expect(not is_instance_valid(scenery), "Returning to the menu retained scenery workers/nodes")
 	await _finish()
+
+func _check_handoff(scene: Node3D) -> void:
+	var flora: Node = scene.flora
+	flora.set_process(false)
+	var ids: Array = flora.patches.keys()
+	_expect(not ids.is_empty(), "No published near patch for the transition check")
+	if ids.is_empty(): return
+	var id: String = ids[0]
+	var data: Dictionary = flora.patches[id]
+	data.coverage = 0.0
+	flora._set_patch_coverage(data, 0.0)
+	flora._advance_scenery_transitions(flora.SCENERY_FADE_SECONDS * 0.5)
+	var half: float = flora.scenery_coverage()[id]
+	_expect(half > 0.4 and half < 0.6, "Near scenery popped in without an intermediate phase")
+	var scenery: Node = scene.scenery
+	var index: int = scenery._active.cell_ids.find(id)
+	_expect(index >= 0 and absf(scenery._active.ownership_image.get_pixel(index, 0).r - half) < 0.005, "Far mask is not complementary to the published near phase")
+	for visual in data.node.get_children():
+		_expect(visual.material_override.get_shader_parameter("patch_coverage") == half, "Near material differs from R8 far ownership")
+	# Retire and then immediately reverse: reuse the same nodes/colliders and
+	# resume from the current blend, with no regenerated identities or workers.
+	flora.patches.erase(id)
+	flora._retiring_patches[id] = data
+	data.node.collision_layer = 0
+	flora._advance_scenery_transitions(flora.SCENERY_FADE_SECONDS * 0.25)
+	var retreat: float = flora.scenery_coverage()[id]
+	_expect(retreat > 0.1 and retreat < half, "Retiring near patch did not fade back into distant scenery")
+	flora._refresh()
+	_expect(flora.patches.has(id) and not flora._retiring_patches.has(id), "Reversal did not recover its canonical patch")
+	_expect(flora.patches[id].node == data.node, "Reversal rebuilt a still-resident patch")
+	flora._advance_scenery_transitions(flora.SCENERY_FADE_SECONDS)
+	_expect(flora.scenery_coverage()[id] == 1.0, "Recovered patch did not complete its blend")
+	flora.set_process(true)
 
 func _capture(scene: Node3D, label: String) -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
