@@ -338,7 +338,8 @@
         "audio/runtime_shutdown_test",
         "audio/spherical_water_audio_test",
         "audio/creature_audio_budget_test",
-        "audio/foley_runtime_test"
+        "audio/foley_runtime_test",
+        "audio/audio_settings_test"
       ]
     },
     {

@@ -1,0 +1,44 @@
+name: Audio settings review
+
+on:
+  pull_request:
+    paths:
+      - "audio/ui/audio_settings.gd"
+      - "audio/runtime/audio_manager.gd"
+      - "tests/audio/audio_settings_test.gd"
+      - "tools/review_audio_settings.py"
+      - ".github/workflows/audio-settings-validate.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: audio-settings-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audio-settings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software graphics
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Import and capture audio controls
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          "$GODOT_BINARY" --headless --path . --import > /tmp/audio-settings-import.log 2>&1
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_audio_settings.py --godot "$GODOT_BINARY" --output /tmp/audio-settings-review
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audio-settings-review
+          path: |
+            /tmp/audio-settings-review
+            /tmp/audio-settings-import.log
+          retention-days: 14
