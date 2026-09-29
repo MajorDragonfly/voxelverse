@@ -161,6 +161,8 @@ func _compact_checks() -> void:
 				for chapter: String in ui._development.CHAPTERS:
 					var button: Button = ui._development._chapter_buttons[chapter]
 					_expect(not button.text.contains("PATH_"), "Untranslated chapter: " + chapter)
+				ui._development.select_chapter("creature")
+				await _frames()
 				await _capture_matrix(size_value, scale_value, language)
 				ui._development._chapter_buttons["tribe"].grab_focus()
 				await _key(KEY_ENTER)
