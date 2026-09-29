@@ -8921,6 +8921,86 @@
       "key": "LIVING_NEST",
       "de": "Nest: {species} · {count} Bewohner",
       "en": "Nest: {species} · {count} residents"
+    },
+    {
+      "key": "WILDLIFE_STATE_WANDER",
+      "de": "Wandert",
+      "en": "Wandering"
+    },
+    {
+      "key": "WILDLIFE_STATE_REST",
+      "de": "Ruht",
+      "en": "Resting"
+    },
+    {
+      "key": "WILDLIFE_STATE_HERD",
+      "de": "Sucht Anschluss",
+      "en": "Seeking the herd"
+    },
+    {
+      "key": "WILDLIFE_STATE_FLEE",
+      "de": "Flieht",
+      "en": "Fleeing"
+    },
+    {
+      "key": "WILDLIFE_STATE_ALERT",
+      "de": "Warnt",
+      "en": "Warning"
+    },
+    {
+      "key": "WILDLIFE_STATE_CHASE",
+      "de": "Verfolgt",
+      "en": "Pursuing"
+    },
+    {
+      "key": "WILDLIFE_STATE_SEARCH",
+      "de": "Sucht",
+      "en": "Searching"
+    },
+    {
+      "key": "WILDLIFE_STATE_RETURN",
+      "de": "Kehrt zurück",
+      "en": "Returning"
+    },
+    {
+      "key": "WILDLIFE_STATE_SOCIAL",
+      "de": "Ist aufmerksam",
+      "en": "Attentive"
+    },
+    {
+      "key": "WILDLIFE_STATE_BLOCKED",
+      "de": "Weg blockiert",
+      "en": "Path blocked"
+    },
+    {
+      "key": "WILDLIFE_STATE_UNLOADED",
+      "de": "Wartet auf Boden",
+      "en": "Waiting for terrain"
+    },
+    {
+      "key": "WILDLIFE_STATE_EAT",
+      "de": "Frisst",
+      "en": "Eating"
+    },
+    {
+      "key": "WILDLIFE_STATE_FORAGE",
+      "de": "Sucht Nahrung",
+      "en": "Seeking food"
+    },
+    {
+      "key": "WILDLIFE_STATE_DRINK",
+      "de": "Trinkt",
+      "en": "Drinking"
+    },
+    {
+      "key": "WILDLIFE_STATE_SEEK_WATER",
+      "de": "Sucht Wasser",
+      "en": "Seeking water"
+    },
+    {
+      "key": "HUD_CREATURE_BEHAVIOR",
+      "de": "Verhalten: {state}",
+      "en": "Behavior: {state}"
     }
   ]
 }

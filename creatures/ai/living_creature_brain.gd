@@ -129,13 +129,6 @@ func threatens_party(player_actor: Node3D, companions: Array) -> bool:
 	if is_dead or _intent != "chase" or not is_instance_valid(_target): return false
 	return _target == player_actor or _target in companions
 
-func _refresh_label() -> void:
-	super._refresh_label()
-	if is_instance_valid(_label) and _bite_target != null:
-		_label.text = PlayText.text("LIVING_WINDUP")
-	elif is_instance_valid(_label) and _recovering:
-		_label.text = PlayText.text("LIVING_RETREAT")
-
 func get_ai_debug_state() -> Dictionary:
 	var data: Dictionary = super.get_ai_debug_state()
 	data["colony_id"] = colony_id

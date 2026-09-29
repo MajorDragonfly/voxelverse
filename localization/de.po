@@ -5351,3 +5351,51 @@ msgstr "Dein neugieriger Gefährte hat Nahrung in der Nähe entdeckt."
 
 msgid "LIVING_NEST"
 msgstr "Nest: {species} · {count} Bewohner"
+
+msgid "WILDLIFE_STATE_WANDER"
+msgstr "Wandert"
+
+msgid "WILDLIFE_STATE_REST"
+msgstr "Ruht"
+
+msgid "WILDLIFE_STATE_HERD"
+msgstr "Sucht Anschluss"
+
+msgid "WILDLIFE_STATE_FLEE"
+msgstr "Flieht"
+
+msgid "WILDLIFE_STATE_ALERT"
+msgstr "Warnt"
+
+msgid "WILDLIFE_STATE_CHASE"
+msgstr "Verfolgt"
+
+msgid "WILDLIFE_STATE_SEARCH"
+msgstr "Sucht"
+
+msgid "WILDLIFE_STATE_RETURN"
+msgstr "Kehrt zurück"
+
+msgid "WILDLIFE_STATE_SOCIAL"
+msgstr "Ist aufmerksam"
+
+msgid "WILDLIFE_STATE_BLOCKED"
+msgstr "Weg blockiert"
+
+msgid "WILDLIFE_STATE_UNLOADED"
+msgstr "Wartet auf Boden"
+
+msgid "WILDLIFE_STATE_EAT"
+msgstr "Frisst"
+
+msgid "WILDLIFE_STATE_FORAGE"
+msgstr "Sucht Nahrung"
+
+msgid "WILDLIFE_STATE_DRINK"
+msgstr "Trinkt"
+
+msgid "WILDLIFE_STATE_SEEK_WATER"
+msgstr "Sucht Wasser"
+
+msgid "HUD_CREATURE_BEHAVIOR"
+msgstr "Verhalten: {state}"

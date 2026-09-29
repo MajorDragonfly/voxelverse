@@ -3,6 +3,7 @@ extends "res://creatures/ai/wildlife_brain.gd"
 ## never creates encounter records, rewards or relationships.
 
 const ForagingState = preload("res://world/resources/plants/foraging_state.gd")
+const ForageText = preload("res://core/localization/ui_text.gd")
 const PLANT_EATERS: Array[String] = ["grazer", "forager", "climber"]
 const MEAT_EATERS: Array[String] = ["predator", "scavenger"]
 const HUNGER_PER_SECOND: float = 0.12
@@ -139,11 +140,6 @@ func _desired_heading() -> Vector3:
 		return Vector3.ZERO
 	return super._desired_heading()
 
-func _refresh_label() -> void:
-	super._refresh_label()
-	if ai_state in ["forage", "eat"]:
-		_label.text = "Frisst" if ai_state == "eat" else "Sucht Nahrung"
-
 func get_ai_debug_state() -> Dictionary:
 	var data: Dictionary = super.get_ai_debug_state()
 	data.merge({"satiety": satiety, "seeking_food": bool(_needs.get("seeking", false)), "food_target": _food.get_instance_id() if is_instance_valid(_food) else 0, "needs_available": not _needs.is_empty()})
@@ -153,5 +149,6 @@ func get_inspection_data() -> Dictionary:
 	var data: Dictionary = super.get_inspection_data()
 	if ecological_role in PLANT_EATERS or ecological_role in MEAT_EATERS:
 		data["satiety"] = satiety
-		data["ai_description"] = "Frisst" if ai_state == "eat" else ("Sucht Nahrung" if ai_state == "forage" else data["ai_description"])
+		if ai_state in ["eat", "forage"]:
+			data["ai_description"] = ForageText.text("WILDLIFE_STATE_EAT" if ai_state == "eat" else "WILDLIFE_STATE_FORAGE")
 	return data

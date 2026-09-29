@@ -142,6 +142,11 @@ func _sphere() -> void:
 	var inspection: Node = player.get_node("CreatureInspectionHUD")
 	inspection.set_process(false)
 	inspection._show_target(creature)
+	_expect(inspection._detail.text.contains("Verhalten: "), "Known scan omitted the targeted behavior explanation.")
+	root.get_node("LocaleManager")._apply("en")
+	inspection._show_target(creature)
+	_expect(inspection._detail.text.contains("Behavior: "), "Scan behavior did not translate to English.")
+	root.get_node("LocaleManager")._apply("de")
 	inspection._controls.text = tr("HUD_SCAN_CONTROLS") % "E"
 	inspection._panel.show()
 	player.inspection_mode_enabled = true

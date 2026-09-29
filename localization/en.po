@@ -5351,3 +5351,51 @@ msgstr "Your curious companion has found food nearby."
 
 msgid "LIVING_NEST"
 msgstr "Nest: {species} · {count} residents"
+
+msgid "WILDLIFE_STATE_WANDER"
+msgstr "Wandering"
+
+msgid "WILDLIFE_STATE_REST"
+msgstr "Resting"
+
+msgid "WILDLIFE_STATE_HERD"
+msgstr "Seeking the herd"
+
+msgid "WILDLIFE_STATE_FLEE"
+msgstr "Fleeing"
+
+msgid "WILDLIFE_STATE_ALERT"
+msgstr "Warning"
+
+msgid "WILDLIFE_STATE_CHASE"
+msgstr "Pursuing"
+
+msgid "WILDLIFE_STATE_SEARCH"
+msgstr "Searching"
+
+msgid "WILDLIFE_STATE_RETURN"
+msgstr "Returning"
+
+msgid "WILDLIFE_STATE_SOCIAL"
+msgstr "Attentive"
+
+msgid "WILDLIFE_STATE_BLOCKED"
+msgstr "Path blocked"
+
+msgid "WILDLIFE_STATE_UNLOADED"
+msgstr "Waiting for terrain"
+
+msgid "WILDLIFE_STATE_EAT"
+msgstr "Eating"
+
+msgid "WILDLIFE_STATE_FORAGE"
+msgstr "Seeking food"
+
+msgid "WILDLIFE_STATE_DRINK"
+msgstr "Drinking"
+
+msgid "WILDLIFE_STATE_SEEK_WATER"
+msgstr "Seeking water"
+
+msgid "HUD_CREATURE_BEHAVIOR"
+msgstr "Behavior: {state}"

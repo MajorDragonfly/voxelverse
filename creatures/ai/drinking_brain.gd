@@ -3,6 +3,7 @@ extends "res://creatures/ai/foraging_brain.gd"
 
 const DrinkingState = preload("res://creatures/ai/drinking_state.gd")
 const Shore = preload("res://creatures/ai/shore_water_search.gd")
+const DrinkText = preload("res://core/localization/ui_text.gd")
 const LAND_ROLES: Array[String] = ["grazer", "forager", "climber", "predator", "scavenger"]
 const THIRST_PER_SECOND: float = 0.16
 
@@ -149,12 +150,6 @@ func _desired_heading() -> Vector3:
 		return direction.normalized() if direction.length() > 0.35 else Vector3.ZERO
 	return super._desired_heading()
 
-func _refresh_label() -> void:
-	super._refresh_label()
-	if ai_state in ["seek_water", "drink"]:
-		_label.text = "Trinkt" if ai_state == "drink" else "Sucht Wasser"
-		_label.modulate = Color(0.65, 0.87, 1.0)
-
 func surface_origin_shifted(shift: Vector3) -> void:
 	super.surface_origin_shifted(shift)
 	_water_origin += shift
@@ -170,5 +165,6 @@ func get_inspection_data() -> Dictionary:
 	var data: Dictionary = super.get_inspection_data()
 	if ecological_role in LAND_ROLES:
 		data["hydration"] = hydration
-		data["ai_description"] = "Trinkt" if ai_state == "drink" else ("Sucht Wasser" if ai_state == "seek_water" else data["ai_description"])
+		if ai_state in ["drink", "seek_water"]:
+			data["ai_description"] = DrinkText.text("WILDLIFE_STATE_DRINK" if ai_state == "drink" else "WILDLIFE_STATE_SEEK_WATER")
 	return data
