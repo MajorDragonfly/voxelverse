@@ -1,7 +1,7 @@
 shader_type spatial;
 render_mode diffuse_burley;
 
-uniform sampler2D planet_palette : source_color, filter_nearest, repeat_disable;
+#include "res://assets/catalog/planet_surface_detail.gdshaderinc"
 uniform sampler2D nearby_ownership : filter_nearest, repeat_disable;
 uniform float wind_strength = 0.025;
 uniform bool detailed_patch = false;
@@ -9,8 +9,10 @@ uniform float patch_coverage = 1.0;
 varying float shade;
 varying float distance_to_observer;
 varying float nearby_coverage;
+varying vec3 surface_position;
 
 void vertex() {
+	surface_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	vec3 root = MODEL_MATRIX[3].xyz;
 	distance_to_observer = distance(root, CAMERA_POSITION_WORLD);
 	shade = INSTANCE_CUSTOM.r > 0.0 ? INSTANCE_CUSTOM.r : 1.0;
@@ -40,6 +42,6 @@ void fragment() {
 	if (detailed_patch ? threshold >= nearby_coverage : threshold < nearby_coverage) { discard; }
 	float coverage = 1.0 - smoothstep(224.0, 256.0, distance_to_observer);
 	if (!detailed_patch && coverage < threshold) { discard; }
-	ALBEDO = texture(planet_palette, UV).rgb * shade;
+	ALBEDO = planet_surface_color(UV, surface_position) * shade;
 	ROUGHNESS = 0.92;
 }
