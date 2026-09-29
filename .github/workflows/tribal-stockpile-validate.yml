@@ -32,7 +32,7 @@ jobs:
       - name: Validate inventory flow and storage stages
         run: >-
           python3 tools/validate_godot.py --godot "${{ steps.engine.outputs.godot }}"
-          --tests tribal_stockpile_test tribal_stockpile_world_test tribal_order_latency_test tribe_localization_test --skip-main
+          --tests tribal_stockpile_test tribal_stockpile_grounding_test tribal_stockpile_world_test tribal_order_latency_test tribe_localization_test --skip-main
           --output "${{ runner.temp }}/tribal-stockpile-validation"
       - name: Install software display
         run: |
