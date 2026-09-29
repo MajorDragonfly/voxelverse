@@ -257,6 +257,7 @@
         "tribal_building_preview_world_test",
         "tribal_stockpile_test",
         "tribal_stockpile_world_test",
+        "tribal_shelter_labels_test",
         "tribal_camera_test",
         "tribal_camera_world_test"
       ]
