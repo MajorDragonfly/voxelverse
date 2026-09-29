@@ -1323,6 +1323,198 @@ msgstr "Entdeckungsbuch · {journal}"
 msgid "SKILLS_PATH"
 msgstr "Entwicklungspfad"
 
+msgid "PATH_TITLE"
+msgstr "Dein Entwicklungspfad"
+
+msgid "PATH_SUMMARY"
+msgstr "Jetzt: {stage} · {phase}"
+
+msgid "PATH_FUTURE"
+msgstr "SPÄTERE ZEITALTER · VORSCHAU"
+
+msgid "PATH_CURRENT"
+msgstr "Aktuell"
+
+msgid "PATH_PLAYABLE"
+msgstr "Spielbarer Wechsel"
+
+msgid "PATH_PAST"
+msgstr "Bisher"
+
+msgid "PATH_PRECURSOR"
+msgstr "Vorstufe"
+
+msgid "PATH_PLANNED"
+msgstr "In Vorbereitung"
+
+msgid "PATH_CREATURE_NAME"
+msgstr "Kreatur"
+
+msgid "PATH_CREATURE_CONTROL"
+msgstr "Steuere deine Kreatur direkt."
+
+msgid "PATH_CREATURE_DETAIL"
+msgstr "Erkunde, entwickle deinen Körper, befreunde oder jage. Fähigkeiten findest du unter Fähigkeiten."
+
+msgid "PATH_NEST_GROUP_NAME"
+msgstr "Nestgemeinschaft"
+
+msgid "PATH_NEST_GROUP_CONTROL"
+msgstr "Deine Kreatur und die Gefährten ihrer Art."
+
+msgid "PATH_NEST_GROUP_DETAIL"
+msgstr "Ein Heimatnest mit Folgen, Warten und Heimkehr. Noch keine Dorfwirtschaft."
+
+msgid "PATH_TRIBE_NAME"
+msgstr "Stamm"
+
+msgid "PATH_TRIBE_CONTROL"
+msgstr "Gruppen befehligen, Aufgaben verteilen und das Dorf versorgen."
+
+msgid "PATH_TRIBE_DETAIL"
+msgstr "Der Wechsel erfolgt nur nach bewusster Bestätigung im Spiel. Punkte allein lösen ihn nicht aus."
+
+msgid "PATH_MEDIEVAL_NAME"
+msgstr "Mittelalter"
+
+msgid "PATH_MEDIEVAL_CONTROL"
+msgstr "Siedlungen, Handwerk und Handel."
+
+msgid "PATH_MEDIEVAL_DETAIL"
+msgstr "Voraussetzungen sind sichtbar; der Spielablauf und die sichere Übergabe werden noch entwickelt."
+
+msgid "PATH_MODERN_NAME"
+msgstr "Neuzeit"
+
+msgid "PATH_MODERN_CONTROL"
+msgstr "Industrie, Energie und regionale Beziehungen."
+
+msgid "PATH_MODERN_DETAIL"
+msgstr "Diese Epoche ist eine Vorschau und noch nicht spielbar."
+
+msgid "PATH_SPACE_NAME"
+msgstr "Weltraum"
+
+msgid "PATH_SPACE_CONTROL"
+msgstr "Planeten, Sternensysteme und Expeditionen."
+
+msgid "PATH_SPACE_DETAIL"
+msgstr "Die Weltraumphase ist geplant. Fähigkeiten und Wechsel sind noch gesperrt."
+
+msgid "PATH_HOME_MEMBERS"
+msgstr "{count} eigene Gefährten und ein Heimatplatz sind gespeichert."
+
+msgid "PATH_HOME_MISSING"
+msgstr "Auf diesem Planeten ist noch keine eigene Nestgruppe gespeichert."
+
+msgid "PATH_HOME_INVALID"
+msgstr "Gespeicherte Gruppe kann nicht sicher zugeordnet werden. Daten bleiben erhalten."
+
+msgid "PATH_HOME_UNSUPPORTED"
+msgstr "Diese gespeicherte Gruppenversion kann noch nicht angezeigt werden. Daten bleiben erhalten."
+
+msgid "PATH_HOME_RUNTIME"
+msgstr "Nestgruppensteuerung ist in dieser Version noch nicht verfügbar."
+
+msgid "PATH_BONUSES"
+msgstr "Koordination +{cooperation} % · Verteidigung +{defense} %"
+
+msgid "PATH_BONUS_ACTIVE"
+msgstr "Koordination wirkt bei Dorfaufgaben; Verteidigung folgt mit Stammeskämpfen."
+
+msgid "PATH_BONUS_LATER"
+msgstr "In der Nestgruppe noch nicht aktiv. Koordination wirkt nach dem Wechsel; Verteidigung folgt mit Stammeskämpfen."
+
+msgid "PATH_TRIBE_ACTIVE"
+msgstr "Dein Stamm ist aktiv. Du führst die Gruppe und baust euer Dorf."
+
+msgid "PATH_TRIBE_READY"
+msgstr "Bereit: Öffne im Spiel „Stammeszeitalter“ und bestätige den Wechsel."
+
+msgid "PATH_TRIBE_BLOCKED"
+msgstr "Noch nicht bereit: Prüfe die Bedingungen im Stammeszeitalter. Kein automatischer Wechsel."
+
+msgid "PATH_TRIBE_POINTS"
+msgstr "Stammesfortschritt · {count} Sozialpunkte verfügbar"
+
+msgid "PATH_GOAL_COUNT"
+msgstr "{earned} von {total} Meilensteinen erreicht"
+
+msgid "PATH_FACTIONS"
+msgstr "Nachbarn deiner Spezies findest du unter Dorf → Nachbarn. Fremde Wildarten bleiben Tiere."
+
+msgid "PATH_REQUIREMENTS"
+msgstr "Voraussetzungen · ✓ erreicht / ○ offen"
+
+msgid "PATH_LOCKED_ACTION"
+msgstr "Epochenwechsel noch gesperrt"
+
+msgid "PATH_FUTURE_BLOCKED"
+msgstr "Spielablauf und sicherer Epochenwechsel sind noch nicht verfügbar."
+
+msgid "PATH_GOAL_NEIGHBOR"
+msgstr "Gute Nachbarn"
+
+msgid "PATH_GOAL_SUPPLY"
+msgstr "Dauerhaft versorgt"
+
+msgid "PATH_GOAL_PROFESSIONS"
+msgstr "Verlässliche Berufe"
+
+msgid "PATH_GOAL_STOCK"
+msgstr "Gemeinsame Vorräte"
+
+msgid "PATH_GOAL_TOOL"
+msgstr "Gemeinsames Handwerk"
+
+msgid "PATH_GOAL_HUT"
+msgstr "Ein Dach für die Gruppe"
+
+msgid "PATH_GOAL_GARDEN"
+msgstr "Gemeinsamer Anbau"
+
+msgid "PATH_GOAL_MEALS"
+msgstr "Die Gruppe versorgt"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_HOUSING"
+msgstr "Zwei fertige Hütten"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_CRAFT"
+msgstr "Ein Steinwerkzeug"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_FARMING"
+msgstr "Ein Wurzelgarten mit Nahrung"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_SUPPLY"
+msgstr "180 Spielsekunden Versorgung, Mahlzeiten und Vorräte"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_PROFESSIONS"
+msgstr "Zwei Berufe mit erneuerbarer Arbeit"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_NEIGHBORS"
+msgstr "Nachbarfraktion gemeinsam unterstützen"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_RUNTIME"
+msgstr "Spielbares Mittelalter mit sicherem Speichern/Laden"
+
+msgid "PATH_REQUIREMENT_MODERN_SETTLEMENTS"
+msgstr "Zwei versorgte Siedlungen"
+
+msgid "PATH_REQUIREMENT_MODERN_TRADE"
+msgstr "Warenverkehr zwischen Siedlungen"
+
+msgid "PATH_REQUIREMENT_MODERN_INDUSTRY"
+msgstr "Rohstoffkette bis zu Werkzeugen"
+
+msgid "PATH_REQUIREMENT_MODERN_ENERGY"
+msgstr "Energiequelle für einen Arbeitsplatz"
+
+msgid "PATH_REQUIREMENT_MODERN_INSTITUTIONS"
+msgstr "Regionaler Vertrag oder Verteidigungsziel"
+
+msgid "PATH_REQUIREMENT_MODERN_RUNTIME"
+msgstr "Spielbare Neuzeit mit sicherem Speichern/Laden"
+
 msgid "SKILLS_HEADING"
 msgstr "Deine Fähigkeiten"
 

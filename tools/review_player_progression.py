@@ -66,6 +66,12 @@ def main():
     elif args.development:
         expected = {name + ".png": (1600, 900) for name in ["development_empty", "development_saved", "tribe_wallet", "development_legacy"]}
         expected.update({name + ".png": (800, 900) for name in ["development_800x900", "tribe_800x900"]})
+        expected.update({
+            f"development-{language}-{width}x{height}-{scale}.png": (width, height)
+            for width, height in [(1920, 1080), (1280, 720)]
+            for scale in [100, 125, 150]
+            for language in ["de", "en"]
+        })
     if args.tribe:
         expected = {name + ".png": (1280, 800) for name in ["01_confirmation", "02_group", "03_transport", "04_tool", "05_village"]}
     elif args.tribe_world:

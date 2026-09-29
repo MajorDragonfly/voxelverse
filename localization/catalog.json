@@ -2208,6 +2208,326 @@
       "en": "Development path"
     },
     {
+      "key": "PATH_TITLE",
+      "de": "Dein Entwicklungspfad",
+      "en": "Your development path"
+    },
+    {
+      "key": "PATH_SUMMARY",
+      "de": "Jetzt: {stage} · {phase}",
+      "en": "Now: {stage} · {phase}"
+    },
+    {
+      "key": "PATH_FUTURE",
+      "de": "SPÄTERE ZEITALTER · VORSCHAU",
+      "en": "FUTURE ERAS · PREVIEW"
+    },
+    {
+      "key": "PATH_CURRENT",
+      "de": "Aktuell",
+      "en": "Current"
+    },
+    {
+      "key": "PATH_PLAYABLE",
+      "de": "Spielbarer Wechsel",
+      "en": "Playable transition"
+    },
+    {
+      "key": "PATH_PAST",
+      "de": "Bisher",
+      "en": "Earlier"
+    },
+    {
+      "key": "PATH_PRECURSOR",
+      "de": "Vorstufe",
+      "en": "Precursor"
+    },
+    {
+      "key": "PATH_PLANNED",
+      "de": "In Vorbereitung",
+      "en": "Planned"
+    },
+    {
+      "key": "PATH_CREATURE_NAME",
+      "de": "Kreatur",
+      "en": "Creature"
+    },
+    {
+      "key": "PATH_CREATURE_CONTROL",
+      "de": "Steuere deine Kreatur direkt.",
+      "en": "Control your creature directly."
+    },
+    {
+      "key": "PATH_CREATURE_DETAIL",
+      "de": "Erkunde, entwickle deinen Körper, befreunde oder jage. Fähigkeiten findest du unter Fähigkeiten.",
+      "en": "Explore, develop your body, befriend or hunt. Find upgrades under Skills."
+    },
+    {
+      "key": "PATH_NEST_GROUP_NAME",
+      "de": "Nestgemeinschaft",
+      "en": "Nest group"
+    },
+    {
+      "key": "PATH_NEST_GROUP_CONTROL",
+      "de": "Deine Kreatur und die Gefährten ihrer Art.",
+      "en": "Your creature and companions of its species."
+    },
+    {
+      "key": "PATH_NEST_GROUP_DETAIL",
+      "de": "Ein Heimatnest mit Folgen, Warten und Heimkehr. Noch keine Dorfwirtschaft.",
+      "en": "A home nest with follow, wait and return. No village economy yet."
+    },
+    {
+      "key": "PATH_TRIBE_NAME",
+      "de": "Stamm",
+      "en": "Tribe"
+    },
+    {
+      "key": "PATH_TRIBE_CONTROL",
+      "de": "Gruppen befehligen, Aufgaben verteilen und das Dorf versorgen.",
+      "en": "Command groups, assign tasks and provide for the village."
+    },
+    {
+      "key": "PATH_TRIBE_DETAIL",
+      "de": "Der Wechsel erfolgt nur nach bewusster Bestätigung im Spiel. Punkte allein lösen ihn nicht aus.",
+      "en": "The transition requires explicit confirmation in the game. Points alone do not trigger it."
+    },
+    {
+      "key": "PATH_MEDIEVAL_NAME",
+      "de": "Mittelalter",
+      "en": "Medieval era"
+    },
+    {
+      "key": "PATH_MEDIEVAL_CONTROL",
+      "de": "Siedlungen, Handwerk und Handel.",
+      "en": "Settlements, crafting and trade."
+    },
+    {
+      "key": "PATH_MEDIEVAL_DETAIL",
+      "de": "Voraussetzungen sind sichtbar; der Spielablauf und die sichere Übergabe werden noch entwickelt.",
+      "en": "Requirements are visible; the playable loop and safe transition are still in development."
+    },
+    {
+      "key": "PATH_MODERN_NAME",
+      "de": "Neuzeit",
+      "en": "Modern era"
+    },
+    {
+      "key": "PATH_MODERN_CONTROL",
+      "de": "Industrie, Energie und regionale Beziehungen.",
+      "en": "Industry, energy and regional relations."
+    },
+    {
+      "key": "PATH_MODERN_DETAIL",
+      "de": "Diese Epoche ist eine Vorschau und noch nicht spielbar.",
+      "en": "This era is a preview and is not yet playable."
+    },
+    {
+      "key": "PATH_SPACE_NAME",
+      "de": "Weltraum",
+      "en": "Space age"
+    },
+    {
+      "key": "PATH_SPACE_CONTROL",
+      "de": "Planeten, Sternensysteme und Expeditionen.",
+      "en": "Planets, star systems and expeditions."
+    },
+    {
+      "key": "PATH_SPACE_DETAIL",
+      "de": "Die Weltraumphase ist geplant. Fähigkeiten und Wechsel sind noch gesperrt.",
+      "en": "The space age is planned. Its skills and transition are still locked."
+    },
+    {
+      "key": "PATH_HOME_MEMBERS",
+      "de": "{count} eigene Gefährten und ein Heimatplatz sind gespeichert.",
+      "en": "{count} companions and a home location are saved."
+    },
+    {
+      "key": "PATH_HOME_MISSING",
+      "de": "Auf diesem Planeten ist noch keine eigene Nestgruppe gespeichert.",
+      "en": "No home nest group has been saved on this planet yet."
+    },
+    {
+      "key": "PATH_HOME_INVALID",
+      "de": "Gespeicherte Gruppe kann nicht sicher zugeordnet werden. Daten bleiben erhalten.",
+      "en": "The saved group cannot be matched safely. Its data remains intact."
+    },
+    {
+      "key": "PATH_HOME_UNSUPPORTED",
+      "de": "Diese gespeicherte Gruppenversion kann noch nicht angezeigt werden. Daten bleiben erhalten.",
+      "en": "This saved group version cannot be displayed yet. Its data remains intact."
+    },
+    {
+      "key": "PATH_HOME_RUNTIME",
+      "de": "Nestgruppensteuerung ist in dieser Version noch nicht verfügbar.",
+      "en": "Nest group controls are not yet available in this version."
+    },
+    {
+      "key": "PATH_BONUSES",
+      "de": "Koordination +{cooperation} % · Verteidigung +{defense} %",
+      "en": "Coordination +{cooperation}% · Defense +{defense}%"
+    },
+    {
+      "key": "PATH_BONUS_ACTIVE",
+      "de": "Koordination wirkt bei Dorfaufgaben; Verteidigung folgt mit Stammeskämpfen.",
+      "en": "Coordination affects village tasks; defense awaits tribal combat."
+    },
+    {
+      "key": "PATH_BONUS_LATER",
+      "de": "In der Nestgruppe noch nicht aktiv. Koordination wirkt nach dem Wechsel; Verteidigung folgt mit Stammeskämpfen.",
+      "en": "Not active in the nest group. Coordination takes effect after the transition; defense awaits tribal combat."
+    },
+    {
+      "key": "PATH_TRIBE_ACTIVE",
+      "de": "Dein Stamm ist aktiv. Du führst die Gruppe und baust euer Dorf.",
+      "en": "Your tribe is active. Lead your group and build the village."
+    },
+    {
+      "key": "PATH_TRIBE_READY",
+      "de": "Bereit: Öffne im Spiel „Stammeszeitalter“ und bestätige den Wechsel.",
+      "en": "Ready: open “Tribal age” in the game and confirm the transition."
+    },
+    {
+      "key": "PATH_TRIBE_BLOCKED",
+      "de": "Noch nicht bereit: Prüfe die Bedingungen im Stammeszeitalter. Kein automatischer Wechsel.",
+      "en": "Not ready yet: check the requirements in Tribal age. No automatic transition."
+    },
+    {
+      "key": "PATH_TRIBE_POINTS",
+      "de": "Stammesfortschritt · {count} Sozialpunkte verfügbar",
+      "en": "Tribal progress · {count} social points available"
+    },
+    {
+      "key": "PATH_GOAL_COUNT",
+      "de": "{earned} von {total} Meilensteinen erreicht",
+      "en": "{earned} of {total} milestones completed"
+    },
+    {
+      "key": "PATH_FACTIONS",
+      "de": "Nachbarn deiner Spezies findest du unter Dorf → Nachbarn. Fremde Wildarten bleiben Tiere.",
+      "en": "Find neighbors of your species under Village → Neighbors. Other wild species remain animals."
+    },
+    {
+      "key": "PATH_REQUIREMENTS",
+      "de": "Voraussetzungen · ✓ erreicht / ○ offen",
+      "en": "Requirements · ✓ met / ○ open"
+    },
+    {
+      "key": "PATH_LOCKED_ACTION",
+      "de": "Epochenwechsel noch gesperrt",
+      "en": "Era transition still locked"
+    },
+    {
+      "key": "PATH_FUTURE_BLOCKED",
+      "de": "Spielablauf und sicherer Epochenwechsel sind noch nicht verfügbar.",
+      "en": "The playable loop and safe era transition are not available yet."
+    },
+    {
+      "key": "PATH_GOAL_NEIGHBOR",
+      "de": "Gute Nachbarn",
+      "en": "Good neighbors"
+    },
+    {
+      "key": "PATH_GOAL_SUPPLY",
+      "de": "Dauerhaft versorgt",
+      "en": "Sustained supply"
+    },
+    {
+      "key": "PATH_GOAL_PROFESSIONS",
+      "de": "Verlässliche Berufe",
+      "en": "Reliable professions"
+    },
+    {
+      "key": "PATH_GOAL_STOCK",
+      "de": "Gemeinsame Vorräte",
+      "en": "Shared stores"
+    },
+    {
+      "key": "PATH_GOAL_TOOL",
+      "de": "Gemeinsames Handwerk",
+      "en": "Shared crafting"
+    },
+    {
+      "key": "PATH_GOAL_HUT",
+      "de": "Ein Dach für die Gruppe",
+      "en": "A roof for the group"
+    },
+    {
+      "key": "PATH_GOAL_GARDEN",
+      "de": "Gemeinsamer Anbau",
+      "en": "Shared gardening"
+    },
+    {
+      "key": "PATH_GOAL_MEALS",
+      "de": "Die Gruppe versorgt",
+      "en": "The group provides"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_HOUSING",
+      "de": "Zwei fertige Hütten",
+      "en": "Two finished huts"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_CRAFT",
+      "de": "Ein Steinwerkzeug",
+      "en": "One stone tool"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_FARMING",
+      "de": "Ein Wurzelgarten mit Nahrung",
+      "en": "A root garden with food"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_SUPPLY",
+      "de": "180 Spielsekunden Versorgung, Mahlzeiten und Vorräte",
+      "en": "180 game seconds of supply, meals and reserves"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_PROFESSIONS",
+      "de": "Zwei Berufe mit erneuerbarer Arbeit",
+      "en": "Two professions with renewable work"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_NEIGHBORS",
+      "de": "Nachbarfraktion gemeinsam unterstützen",
+      "en": "Help a neighboring faction together"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_RUNTIME",
+      "de": "Spielbares Mittelalter mit sicherem Speichern/Laden",
+      "en": "Playable medieval era with safe save/load"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_SETTLEMENTS",
+      "de": "Zwei versorgte Siedlungen",
+      "en": "Two supplied settlements"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_TRADE",
+      "de": "Warenverkehr zwischen Siedlungen",
+      "en": "Goods move between settlements"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_INDUSTRY",
+      "de": "Rohstoffkette bis zu Werkzeugen",
+      "en": "Resource chain leading to tools"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_ENERGY",
+      "de": "Energiequelle für einen Arbeitsplatz",
+      "en": "Energy source for a workplace"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_INSTITUTIONS",
+      "de": "Regionaler Vertrag oder Verteidigungsziel",
+      "en": "Regional treaty or defense goal"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_RUNTIME",
+      "de": "Spielbare Neuzeit mit sicherem Speichern/Laden",
+      "en": "Playable modern era with safe save/load"
+    },
+    {
       "key": "SKILLS_HEADING",
       "de": "Deine Fähigkeiten",
       "en": "Your skills"

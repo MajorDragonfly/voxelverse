@@ -1323,6 +1323,198 @@ msgstr "Discovery journal · {journal}"
 msgid "SKILLS_PATH"
 msgstr "Development path"
 
+msgid "PATH_TITLE"
+msgstr "Your development path"
+
+msgid "PATH_SUMMARY"
+msgstr "Now: {stage} · {phase}"
+
+msgid "PATH_FUTURE"
+msgstr "FUTURE ERAS · PREVIEW"
+
+msgid "PATH_CURRENT"
+msgstr "Current"
+
+msgid "PATH_PLAYABLE"
+msgstr "Playable transition"
+
+msgid "PATH_PAST"
+msgstr "Earlier"
+
+msgid "PATH_PRECURSOR"
+msgstr "Precursor"
+
+msgid "PATH_PLANNED"
+msgstr "Planned"
+
+msgid "PATH_CREATURE_NAME"
+msgstr "Creature"
+
+msgid "PATH_CREATURE_CONTROL"
+msgstr "Control your creature directly."
+
+msgid "PATH_CREATURE_DETAIL"
+msgstr "Explore, develop your body, befriend or hunt. Find upgrades under Skills."
+
+msgid "PATH_NEST_GROUP_NAME"
+msgstr "Nest group"
+
+msgid "PATH_NEST_GROUP_CONTROL"
+msgstr "Your creature and companions of its species."
+
+msgid "PATH_NEST_GROUP_DETAIL"
+msgstr "A home nest with follow, wait and return. No village economy yet."
+
+msgid "PATH_TRIBE_NAME"
+msgstr "Tribe"
+
+msgid "PATH_TRIBE_CONTROL"
+msgstr "Command groups, assign tasks and provide for the village."
+
+msgid "PATH_TRIBE_DETAIL"
+msgstr "The transition requires explicit confirmation in the game. Points alone do not trigger it."
+
+msgid "PATH_MEDIEVAL_NAME"
+msgstr "Medieval era"
+
+msgid "PATH_MEDIEVAL_CONTROL"
+msgstr "Settlements, crafting and trade."
+
+msgid "PATH_MEDIEVAL_DETAIL"
+msgstr "Requirements are visible; the playable loop and safe transition are still in development."
+
+msgid "PATH_MODERN_NAME"
+msgstr "Modern era"
+
+msgid "PATH_MODERN_CONTROL"
+msgstr "Industry, energy and regional relations."
+
+msgid "PATH_MODERN_DETAIL"
+msgstr "This era is a preview and is not yet playable."
+
+msgid "PATH_SPACE_NAME"
+msgstr "Space age"
+
+msgid "PATH_SPACE_CONTROL"
+msgstr "Planets, star systems and expeditions."
+
+msgid "PATH_SPACE_DETAIL"
+msgstr "The space age is planned. Its skills and transition are still locked."
+
+msgid "PATH_HOME_MEMBERS"
+msgstr "{count} companions and a home location are saved."
+
+msgid "PATH_HOME_MISSING"
+msgstr "No home nest group has been saved on this planet yet."
+
+msgid "PATH_HOME_INVALID"
+msgstr "The saved group cannot be matched safely. Its data remains intact."
+
+msgid "PATH_HOME_UNSUPPORTED"
+msgstr "This saved group version cannot be displayed yet. Its data remains intact."
+
+msgid "PATH_HOME_RUNTIME"
+msgstr "Nest group controls are not yet available in this version."
+
+msgid "PATH_BONUSES"
+msgstr "Coordination +{cooperation}% · Defense +{defense}%"
+
+msgid "PATH_BONUS_ACTIVE"
+msgstr "Coordination affects village tasks; defense awaits tribal combat."
+
+msgid "PATH_BONUS_LATER"
+msgstr "Not active in the nest group. Coordination takes effect after the transition; defense awaits tribal combat."
+
+msgid "PATH_TRIBE_ACTIVE"
+msgstr "Your tribe is active. Lead your group and build the village."
+
+msgid "PATH_TRIBE_READY"
+msgstr "Ready: open “Tribal age” in the game and confirm the transition."
+
+msgid "PATH_TRIBE_BLOCKED"
+msgstr "Not ready yet: check the requirements in Tribal age. No automatic transition."
+
+msgid "PATH_TRIBE_POINTS"
+msgstr "Tribal progress · {count} social points available"
+
+msgid "PATH_GOAL_COUNT"
+msgstr "{earned} of {total} milestones completed"
+
+msgid "PATH_FACTIONS"
+msgstr "Find neighbors of your species under Village → Neighbors. Other wild species remain animals."
+
+msgid "PATH_REQUIREMENTS"
+msgstr "Requirements · ✓ met / ○ open"
+
+msgid "PATH_LOCKED_ACTION"
+msgstr "Era transition still locked"
+
+msgid "PATH_FUTURE_BLOCKED"
+msgstr "The playable loop and safe era transition are not available yet."
+
+msgid "PATH_GOAL_NEIGHBOR"
+msgstr "Good neighbors"
+
+msgid "PATH_GOAL_SUPPLY"
+msgstr "Sustained supply"
+
+msgid "PATH_GOAL_PROFESSIONS"
+msgstr "Reliable professions"
+
+msgid "PATH_GOAL_STOCK"
+msgstr "Shared stores"
+
+msgid "PATH_GOAL_TOOL"
+msgstr "Shared crafting"
+
+msgid "PATH_GOAL_HUT"
+msgstr "A roof for the group"
+
+msgid "PATH_GOAL_GARDEN"
+msgstr "Shared gardening"
+
+msgid "PATH_GOAL_MEALS"
+msgstr "The group provides"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_HOUSING"
+msgstr "Two finished huts"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_CRAFT"
+msgstr "One stone tool"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_FARMING"
+msgstr "A root garden with food"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_SUPPLY"
+msgstr "180 game seconds of supply, meals and reserves"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_PROFESSIONS"
+msgstr "Two professions with renewable work"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_NEIGHBORS"
+msgstr "Help a neighboring faction together"
+
+msgid "PATH_REQUIREMENT_MEDIEVAL_RUNTIME"
+msgstr "Playable medieval era with safe save/load"
+
+msgid "PATH_REQUIREMENT_MODERN_SETTLEMENTS"
+msgstr "Two supplied settlements"
+
+msgid "PATH_REQUIREMENT_MODERN_TRADE"
+msgstr "Goods move between settlements"
+
+msgid "PATH_REQUIREMENT_MODERN_INDUSTRY"
+msgstr "Resource chain leading to tools"
+
+msgid "PATH_REQUIREMENT_MODERN_ENERGY"
+msgstr "Energy source for a workplace"
+
+msgid "PATH_REQUIREMENT_MODERN_INSTITUTIONS"
+msgstr "Regional treaty or defense goal"
+
+msgid "PATH_REQUIREMENT_MODERN_RUNTIME"
+msgstr "Playable modern era with safe save/load"
+
 msgid "SKILLS_HEADING"
 msgstr "Your skills"
 
