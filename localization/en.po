@@ -2124,6 +2124,18 @@ msgstr "Collapse"
 msgid "TRIBE_ORDERS_TAB"
 msgstr "Orders"
 
+msgid "TRIBE_ACTIONS_TITLE"
+msgstr "Village actions"
+
+msgid "TRIBE_PAUSE_TIME"
+msgstr "Pause"
+
+msgid "TRIBE_RESUME_TIME"
+msgstr "Resume"
+
+msgid "TRIBE_SPEED_HINT"
+msgstr "Village simulation speed (1×, 2× or 3×). Space also pauses."
+
 msgid "TRIBE_WORK_TAB"
 msgstr "Workplaces & professions"
 

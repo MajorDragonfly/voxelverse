@@ -3543,6 +3543,26 @@
       "en": "Orders"
     },
     {
+      "key": "TRIBE_ACTIONS_TITLE",
+      "de": "Dorfaktionen",
+      "en": "Village actions"
+    },
+    {
+      "key": "TRIBE_PAUSE_TIME",
+      "de": "Pause",
+      "en": "Pause"
+    },
+    {
+      "key": "TRIBE_RESUME_TIME",
+      "de": "Weiter",
+      "en": "Resume"
+    },
+    {
+      "key": "TRIBE_SPEED_HINT",
+      "de": "Geschwindigkeit der Dorfsimulation (1×, 2× oder 3×). Leertaste pausiert ebenfalls.",
+      "en": "Village simulation speed (1×, 2× or 3×). Space also pauses."
+    },
+    {
       "key": "TRIBE_WORK_TAB",
       "de": "Arbeitsplätze & Berufe",
       "en": "Workplaces & professions"

@@ -75,6 +75,27 @@ func _run() -> void:
 		return
 	_expect(absf(float(tribe.village()["members"][0]["hunger"]) - 61.0) < 0.5, "Transition did not preserve the original creature hunger ratio.")
 	_expect(not player.is_physics_processing() and tribe.camera.current and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Control did not switch from creature to group overview.")
+	_expect(tribe.panel._top_bar.visible and tribe.panel._stock_labels["wood"].is_visible_in_tree()
+		and tribe.panel._hud.visible and tribe.panel._tabs.is_visible_in_tree(),
+		"Tribal overview did not show resources above and actions below.")
+	_expect(tribe.panel._top_bar.size.x < 0.7 * root.size.x and tribe.panel._top_bar.position.y + tribe.panel._top_bar.size.y < tribe.panel._hud.position.y,
+		"Resource strip exceeded its top bar or overlapped the bottom actions: %s / %s" % [tribe.panel._top_bar.get_rect(), tribe.panel._hud.get_rect()])
+	var initial_speed: float = Engine.time_scale
+	tribe.panel._speed_selector.select(1)
+	tribe.panel._speed_selector.item_selected.emit(1)
+	_expect(is_equal_approx(Engine.time_scale, 2.0), "Village speed selection did not change the simulation rate.")
+	await _click(tribe.panel._speed_pause)
+	_expect(paused and tribe.panel._owns_pause and tribe.panel._speed_pause.text == "Weiter", "Pause button did not stop the village simulation.")
+	await _frames(3)
+	await _click(tribe.panel._speed_pause)
+	_expect(not paused and not tribe.panel._owns_pause, "Resume button left the village paused.")
+	tribe.panel._speed_selector.select(2)
+	tribe.panel._speed_selector.item_selected.emit(2)
+	_expect(is_equal_approx(Engine.time_scale, initial_speed), "Village speed did not restore the test's original rate.")
+	if "--speed-only" in args:
+		await _cleanup()
+		_finish()
+		return
 	_expect(home.actors.is_empty() and tribe.actors.size() == 3 and tribe.actors[state.campaign.data["player_object_id"]] == player, "Original creature was replaced or residents duplicated.")
 	for i in range(2):
 		_expect(tribe.village()["members"][i + 1]["id"] == original["members"][i]["id"], "Original companion identity changed.")
@@ -261,10 +282,14 @@ func _check_minimap() -> void:
 				await _frames(2)
 				var map_rect := _physical_rect(map._panel)
 				var commands := _physical_rect(tribe.panel._hud)
+				var resources := _physical_rect(tribe.panel._top_bar)
 				var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
 				var context := "%s/%s/%s" % [dimensions, scale, language]
 				_expect(screen.encloses(map_rect), "Tribal map escaped screen: " + context)
 				_expect(screen.encloses(commands), "Tribal commands escaped screen: " + context + " " + str(commands))
+				_expect(screen.encloses(resources) and not resources.intersects(commands) and not resources.intersects(map_rect),
+					"Resource bar escaped or overlapped the village HUD: " + context + " " + str(resources))
+				_expect(resources.has_point(_physical_rect(tribe.panel._speed_pause).get_center()), "Speed controls escaped resource bar: " + context)
 				_expect(not map_rect.intersects(commands), "Tribal orders cover the minimap: " + context)
 				tribe.panel._hud_scroll.ensure_control_visible(tribe.panel._buttons["wait"])
 				await _frames(2)

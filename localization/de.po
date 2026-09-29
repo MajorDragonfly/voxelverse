@@ -2124,6 +2124,18 @@ msgstr "Einklappen"
 msgid "TRIBE_ORDERS_TAB"
 msgstr "Aufträge"
 
+msgid "TRIBE_ACTIONS_TITLE"
+msgstr "Dorfaktionen"
+
+msgid "TRIBE_PAUSE_TIME"
+msgstr "Pause"
+
+msgid "TRIBE_RESUME_TIME"
+msgstr "Weiter"
+
+msgid "TRIBE_SPEED_HINT"
+msgstr "Geschwindigkeit der Dorfsimulation (1×, 2× oder 3×). Leertaste pausiert ebenfalls."
+
 msgid "TRIBE_WORK_TAB"
 msgstr "Arbeitsplätze & Berufe"
 

@@ -55,6 +55,7 @@ var _growth_retry: float = 0.0
 var _player_processing: Dictionary = {}
 var _hidden_layers: Array[CanvasLayer] = []
 var _player_visible_before: bool = true
+var _previous_time_scale: float = 1.0
 var _original_camera: Camera3D
 var _focus := Vector3.ZERO
 var _zoom: float = 26.0
@@ -270,6 +271,7 @@ func _activate() -> void:
 	_shelters = Shelters.new()
 	get_parent().get_parent().add_child(_shelters)
 	_shelters.sync(village(), actors)
+	_previous_time_scale = Engine.time_scale
 	_active = true
 	neighbors.refresh()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -287,6 +289,7 @@ func _deactivate() -> void:
 	if not _active:
 		return
 	_active = false
+	Engine.time_scale = _previous_time_scale
 	neighbors.clear_runtime()
 	for actor: Node in actors.values():
 		if is_instance_valid(actor) and actor != player:
@@ -335,6 +338,11 @@ func _update_camera() -> void:
 func zoom(amount: float) -> void:
 	if not is_active(): return
 	_zoom = clampf(_zoom + amount, camera_rig.MIN_ZOOM, camera_rig.MAX_ZOOM)
+
+func set_game_speed(multiplier: float) -> void:
+	if _active and not _transaction and multiplier in [1.0, 2.0, 3.0]:
+		Engine.time_scale = multiplier
+		panel.refresh()
 
 
 func member_record(identity: String) -> Dictionary:

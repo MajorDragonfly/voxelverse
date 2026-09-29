@@ -25,10 +25,13 @@ var _confirmation_problem: String = ""
 var _confirmation_error: String = ""
 var _message: Label
 var _hud: PanelContainer
+var _top_bar: PanelContainer
 var _hud_content: VBoxContainer
 var _stock: Label
-var _stock_items: HFlowContainer
+var _stock_items: GridContainer
 var _stock_labels: Dictionary = {}
+var _speed_selector: OptionButton
+var _speed_pause: Button
 var _goal: Label
 var _supply: Label
 var _residents: HFlowContainer
@@ -98,6 +101,41 @@ func _build() -> void:
 	entry.name = "TribalAgeEntry"
 	add_child(entry)
 	entry.pressed.connect(open_confirmation)
+	_top_bar = PanelContainer.new()
+	_top_bar.name = "TribeResourceBar"
+	_top_bar.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
+	_top_bar.add_theme_stylebox_override("panel", Style.box(Style.PANEL, Color("52706c"), 10))
+	add_child(_top_bar)
+	var top_column := Style.column(_top_bar, 5)
+	var top_header := HBoxContainer.new()
+	top_column.add_child(top_header)
+	_stock = Style.label("", 17, Style.SOCIAL)
+	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	top_header.add_child(_stock)
+	_speed_pause = Style.button("")
+	_speed_pause.name = "TribePause"
+	_speed_pause.pressed.connect(toggle_game_pause)
+	top_header.add_child(_speed_pause)
+	_speed_selector = OptionButton.new()
+	_speed_selector.name = "TribeSpeed"
+	for label: String in ["1×", "2×", "3×"]:
+		_speed_selector.add_item(label)
+	_speed_selector.item_selected.connect(func(index: int) -> void: controller.set_game_speed(float(index + 1)))
+	top_header.add_child(_speed_selector)
+	_stock_items = GridContainer.new()
+	_stock_items.name = "TribeStockStrip"
+	_stock_items.columns = 4
+	_stock_items.add_theme_constant_override("h_separation", 12)
+	_stock_items.add_theme_constant_override("v_separation", 2)
+	top_column.add_child(_stock_items)
+	for kind: String in Economy.Resources.IDS:
+		var amount := Style.label("", 14, Style.TEXT)
+		amount.name = "Stock_" + kind
+		amount.autowrap_mode = TextServer.AUTOWRAP_OFF
+		amount.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		amount.mouse_filter = Control.MOUSE_FILTER_STOP
+		_stock_items.add_child(amount)
+		_stock_labels[kind] = amount
 	_hud = PanelContainer.new()
 	_hud.resized.connect(_place_hud)
 	_hud.minimum_size_changed.connect(func() -> void: call_deferred("_layout"))
@@ -106,10 +144,9 @@ func _build() -> void:
 	var column := Style.column(_hud, 7)
 	var header := HBoxContainer.new()
 	column.add_child(header)
-	_stock = Style.label("", 17, Style.SOCIAL)
-	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_stock.mouse_filter = Control.MOUSE_FILTER_PASS
-	header.add_child(_stock)
+	var action_title := _local_label("TRIBE_ACTIONS_TITLE", 17, Style.SOCIAL)
+	action_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(action_title)
 	_camera_menu = MenuButton.new()
 	_camera_menu.name = "TribeCameraMenu"
 	_camera_menu.text = Text.text("TRIBE_CAMERA_VIEW")
@@ -126,19 +163,6 @@ func _build() -> void:
 		else:
 			_collapsed = not _collapsed
 		refresh())
-	_stock_items = HFlowContainer.new()
-	_stock_items.name = "TribeStockStrip"
-	_stock_items.add_theme_constant_override("h_separation", 12)
-	_stock_items.add_theme_constant_override("v_separation", 2)
-	column.add_child(_stock_items)
-	for kind: String in Economy.Resources.IDS:
-		var amount := Style.label("", 14, Style.TEXT)
-		amount.name = "Stock_" + kind
-		amount.autowrap_mode = TextServer.AUTOWRAP_OFF
-		amount.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-		amount.mouse_filter = Control.MOUSE_FILTER_STOP
-		_stock_items.add_child(amount)
-		_stock_labels[kind] = amount
 	_guidance_row = HBoxContainer.new()
 	_guidance_row.name = "TribalGuidance"
 	column.add_child(_guidance_row)
@@ -295,6 +319,7 @@ func _layout() -> void:
 	var font_scale: float = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
 	if font_scale != _font_scale:
 		_font_scale = font_scale
+		_apply_hud_fonts(_top_bar, font_scale)
 		_apply_hud_fonts(_hud, font_scale)
 		_apply_hud_fonts(_dialog, font_scale)
 		_apply_hud_fonts(entry, font_scale)
@@ -302,6 +327,7 @@ func _layout() -> void:
 	_scale_factor = viewport_size.x / maxf(float(get_window().size.x), 1.0)
 	transform = Transform2D(0.0, Vector2.ONE * _scale_factor, 0.0, Vector2.ZERO)
 	viewport_size /= _scale_factor
+	_stock_items.columns = 5 if viewport_size.x >= 1400 else 4 if viewport_size.x >= 900 else 2
 	# Large text in a short window needs the selection/result to scroll with the
 	# orders. Keep the same Controls; placement feedback stays outside the scroll.
 	var compact_feedback: bool = _hud_content.visible and float(get_node("/root/DisplaySettings").ui_scale) > 1.0 and (viewport_size.x < 1100 or viewport_size.y < 750)
@@ -310,6 +336,8 @@ func _layout() -> void:
 		_feedback.reparent(feedback_parent)
 	entry.position = Vector2(viewport_size.x - 282, 76)
 	entry.size = Vector2(260, 46)
+	_top_bar.position = Vector2(18, 18)
+	_top_bar.size = Vector2(minf(minf(760.0, maxf(280.0, viewport_size.x * 0.56)), viewport_size.x - 36.0), 0)
 	_scroll.visible = _hud_content.visible
 	var fixed_height: float = _hud.get_combined_minimum_size().y - _scroll.get_combined_minimum_size().y
 	var available_height: float = maxf(0.0, viewport_size.y - 36.0 - fixed_height)
@@ -446,6 +474,7 @@ func refresh() -> void:
 	if data.is_empty():
 		return
 	_construction.refresh(data)
+	_refresh_speed_controls()
 	_guidance_row.visible = not _guidance_text.is_empty() and not _collapsed
 	_goal.visible = _tabs.get_current_tab_control() == _orders_page and not _guidance_row.visible
 	_supply.visible = true
@@ -556,6 +585,20 @@ func refresh() -> void:
 func _update_hud_visibility() -> void:
 	entry.visible = not confirmation_open and int(get_node("/root/GameState").current_phase) == 0 and Layout.gameplay_entries_visible(self, controller.player)
 	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
+	_top_bar.visible = _hud.visible
+
+func _refresh_speed_controls() -> void:
+	_speed_pause.text = Text.text("TRIBE_RESUME_TIME" if _owns_pause and get_tree().paused else "TRIBE_PAUSE_TIME")
+	_speed_selector.tooltip_text = Text.text("TRIBE_SPEED_HINT")
+	var chosen: int = clampi(roundi(Engine.time_scale) - 1, 0, 2)
+	if _speed_selector.selected != chosen:
+		_speed_selector.select(chosen)
+
+func toggle_game_pause() -> void:
+	if not controller._active or (get_tree().paused and not _owns_pause): return
+	get_tree().paused = not get_tree().paused
+	_owns_pause = get_tree().paused
+	refresh()
 
 func _process(_delta: float) -> void:
 	if controller.camera_rig != null and not controller.is_active():
@@ -609,9 +652,7 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 		return
 	if controller._active and (not get_tree().paused or _owns_pause) and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
-		get_tree().paused = not get_tree().paused
-		_owns_pause = get_tree().paused
-		refresh()
+		toggle_game_pause()
 		get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
