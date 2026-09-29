@@ -16,6 +16,7 @@ import time
 from validate_godot import ERROR
 from validation_support import isolated_env, validation_editor
 from performance_developed_report import validate_developed, write_developed_summary
+from performance_route_report import write_route_summary
 
 
 def main():
@@ -28,7 +29,7 @@ def main():
     parser.add_argument("--cycles", type=int, help="Developed: 1–3 complete chains (default 1); route/saves/startup: 2–10 (default 2)")
     parser.add_argument("--mode", choices=["route", "saves", "developed", "startup"], default="route")
     parser.add_argument("--production", choices=["milk", "eggs"], default="milk", help="Developed profile's real production chain")
-    parser.add_argument("--compare", type=Path, help="Compare a developed report directory with the same recipe/hardware")
+    parser.add_argument("--compare", type=Path, help="Compare a route or developed report with the same recipe/hardware")
     parser.add_argument("--replay", type=Path, help="Prior route/startup report directory: reuse its exact initial save and immutable region blobs")
     parser.add_argument("--walk-seconds", type=float, default=600.0, help="Outward walking with heading changes, followed by a separate physical return; 10 minutes outward by default")
     parser.add_argument("--frame-cap", type=int, default=60)
@@ -44,8 +45,10 @@ def main():
         parser.error("Use 2–10 cycles and 4–600 walk seconds")
     if args.mode == "developed" and (args.seed != 15838 or args.replay):
         parser.error("Developed profiles use the existing seed 15838 scenario; --replay belongs to route mode")
-    if args.compare and args.mode != "developed":
-        parser.error("--compare requires --mode developed")
+    if args.compare and args.mode not in ("route", "developed"):
+        parser.error("--compare requires --mode route or developed")
+    if args.compare and args.mode == "route" and (args.replay is None or args.replay.expanduser().resolve() != args.compare.expanduser().resolve()):
+        parser.error("Route comparison requires --replay from the same baseline report")
     if not 1 <= args.seed <= 2147483647:
         parser.error("Seed must be between 1 and 2147483647")
     if not (1 <= args.frame_cap <= 240 and 30 <= args.settle_frames <= 600 and 10 <= args.stage_timeout <= 300):
@@ -56,7 +59,7 @@ def main():
     output = args.output.expanduser().resolve() if args.output else Path(tempfile.mkdtemp(prefix="voxelverse-performance-"))
     if output.is_relative_to(project):
         parser.error("Performance reports must be outside the source project")
-    if any((output / name).exists() for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture", "summary.md", "startup-fixture.json", "startup-progress.json", "prepare.log")) or list(output.glob("cycle_*-*.json")):
+    if any((output / name).exists() for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture", "summary.md", "route-summary.json", "startup-fixture.json", "startup-progress.json", "prepare.log")) or list(output.glob("cycle_*-*.json")):
         parser.error("Choose a new output directory to preserve earlier measurements")
     output.mkdir(parents=True, exist_ok=True)
     recipe = {"protocol": 2, "mode": args.mode, "seed": args.seed, "cycles": args.cycles,
@@ -96,6 +99,17 @@ def main():
             version = subprocess.check_output([str(editor), "--version"], text=True).strip()
             if not version.startswith("4.6.3."):
                 raise RuntimeError(f"Expected Godot 4.6.3, got {version}")
+            # A fresh checkout has no generated imports. Running the route
+            # directly otherwise leaves the campaign waiting at start_terrain
+            # while SVG/GLB preloads fail, producing a misleading timeout.
+            import_cache = project / ".godot" / "imported"
+            if not import_cache.is_dir() or not any(import_cache.iterdir()):
+                with (output / "prepare.log").open("w", encoding="utf-8") as import_log:
+                    prepared = subprocess.run([str(editor), "--headless", "--editor", "--path", str(project), "--import"],
+                                              env=isolated_env(root / "userdata"), stdout=import_log,
+                                              stderr=subprocess.STDOUT, timeout=300, check=False)
+                if prepared.returncode != 0:
+                    raise RuntimeError("Godot asset import failed; see prepare.log")
             # Include leaked object classes in failure logs, matching the other
             # Godot validation runners; an exit-code-only report cannot diagnose them.
             command = [str(editor), "--verbose", "--path", str(project), "--audio-driver", "Dummy"]
@@ -159,6 +173,8 @@ def main():
             summary["passed"] = True
             if args.mode == "developed":
                 write_developed_summary(output, summary, args.compare)
+            if args.mode == "route":
+                write_route_summary(output, capture, args.compare)
     except (OSError, ValueError, TypeError, KeyError, RuntimeError, subprocess.SubprocessError) as error:
         summary["passed"] = False
         summary["error"] = str(error)

@@ -282,6 +282,11 @@ func _world_snapshot() -> Dictionary:
 		"terrain_initial_publish_ms": terrain.max_initial_publish_usec / 1000.0, "terrain_publish_max_ms": terrain.max_publish_usec / 1000.0,
 		"terrain_upload_max_ms": terrain.max_build_usec / 1000.0, "terrain_worker_max_ms": terrain.max_worker_usec / 1000.0,
 		"flora_work_max_ms": flora.max_frame_work_ms, "population_work_max_ms": population.max_frame_work_ms,
+		"population_spawn_max_ms": population.max_spawn_attempt_ms,
+		"population_spawn_stage_max_ms": population.max_spawn_stage_ms.duplicate(),
+		"population_spawn_attempts": population.last_spawn_attempts,
+		"population_peak_spawn_attempts": population.peak_spawn_attempts,
+		"population_peak_animals": population.peak_animals,
 		"render_memory_bytes": null if headless else RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_VIDEO_MEM_USED)}
 
 func _settle() -> void:

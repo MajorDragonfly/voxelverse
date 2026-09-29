@@ -45,6 +45,10 @@ var _prefer_plant: bool = true
 var last_spawn_attempts: int = 0
 var peak_spawn_attempts: int = 0
 var max_spawn_attempt_ms: float = 0.0
+var max_spawn_stage_ms: Dictionary = {}
+
+func _record_spawn_stage(label: String, started: int) -> void:
+	max_spawn_stage_ms[label] = maxf(float(max_spawn_stage_ms.get(label, 0.0)), (Time.get_ticks_usec() - started) / 1000.0)
 
 func body() -> Dictionary:
 	var state := get_node("/root/GameState")
@@ -248,19 +252,26 @@ func _reserved(id: String) -> bool:
 	return own.get("registry", {}).get("animals", {}).has(id)
 
 func _spawn_animal(record: Dictionary) -> bool:
+	var stage_started: int = Time.get_ticks_usec()
 	var encounter: Dictionary = record.get("encounter", {})
 	if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0: return false
 	var species: Dictionary = Catalog.species_for(body().fauna_catalog, str(record.get("catalog_species_id", "")))
 	var point: Vector3 = _restore_position(record, species) if not encounter.get("dead", false) else _spawn_position(Space.resolve(self, record.location), species)
+	_record_spawn_stage("position", stage_started)
 	if not point.is_finite(): return false
+	stage_started = Time.get_ticks_usec()
 	var actor: CharacterBody3D = preload("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
 	actor.configure(int(record.species_seed), int(record.individual_seed), Vector2i.ZERO, record.role, record.identity.get("habitat_cell", ""), species)
 	actor.supplied_identity = record.identity.duplicate(true)
 	actor.frozen_blueprint = Encoding.decode(record.blueprint)
+	_record_spawn_stage("configure", stage_started)
+	stage_started = Time.get_ticks_usec()
 	actor.colony_id = str(record.get("colony_id", ""))
 	actor.position = point
 	actor.collision_mask = 1 | 2
 	get_parent().add_child(actor)
+	_record_spawn_stage("actor_ready", stage_started)
+	stage_started = Time.get_ticks_usec()
 	Space.track(actor, record.id)
 	if not species.is_empty():
 		for entry: Dictionary in body().fauna_catalog.species:
@@ -280,6 +291,7 @@ func _spawn_animal(record: Dictionary) -> bool:
 	actor._progress_position = point
 	records[record.id] = record
 	animals[record.id] = actor
+	_record_spawn_stage("post_ready", stage_started)
 	return true
 
 func _restore_position(record: Dictionary, species: Dictionary) -> Vector3:
