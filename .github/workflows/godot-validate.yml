@@ -54,9 +54,9 @@ jobs:
     needs: contracts
     if: needs.contracts.outputs.source == 'true'
     runs-on: ubuntu-latest
-    # Real production/travel checks exceeded the old 30-minute shard envelope.
-    # Preserve their individual deadlines and every test; allow the full shard.
-    timeout-minutes: 45
+    # The longest full shard completed all 66 checks at the 45-minute boundary
+    # and was cancelled during teardown. Keep every test and its own deadline.
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.contracts.outputs.matrix) }}
