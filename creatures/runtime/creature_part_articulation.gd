@@ -11,6 +11,7 @@ var _fin: float = 0.0
 var _ear: float = 0.0
 var _wing: float = 0.0
 var _manual: bool = false
+var _ambient_mouth: float = 0.0
 
 
 func bind(root: Node) -> void:
@@ -49,6 +50,7 @@ func reset() -> void:
 	_time = 0.0
 	_duration = 0.0
 	_manual = false
+	_ambient_mouth = 0.0
 	_mouth = 0.0
 	_grip = 0.0
 	_fin = 0.0
@@ -78,6 +80,12 @@ func set_pose(mouth: float, grip: float) -> void:
 	_mouth = clampf(mouth, 0.0, 1.0) if is_finite(mouth) else 0.0
 	_grip = clampf(grip, 0.0, 1.0) if is_finite(grip) else 0.0
 	_apply()
+
+
+func set_ambient_mouth(amount: float) -> void:
+	# AI feeding is a low-priority layer; a bite or authored action keeps its
+	# whole envelope and returns smoothly to the current feeding pose.
+	_ambient_mouth = clampf(amount, 0.0, 0.6) if is_finite(amount) else 0.0
 
 
 func set_fin_pose(amount: float) -> void:
@@ -133,6 +141,7 @@ func advance(delta: float, idle_time: float = -1.0) -> void:
 		wing_target = (0.5 - 0.5 * cos(idle_time * 1.25)) * 0.12
 		fin_target = (0.5 - 0.5 * cos(idle_time * 1.45)) * 0.1
 		ear_target = (0.5 - 0.5 * cos(idle_time * 1.2)) * 0.1
+	if _action.is_empty(): mouth_target = maxf(mouth_target, _ambient_mouth)
 	var blend: float = 1.0 - exp(-26.0 * delta)
 	_mouth = lerpf(_mouth, mouth_target, blend)
 	_grip = lerpf(_grip, grip_target, blend)

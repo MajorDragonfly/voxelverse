@@ -74,6 +74,18 @@ func _model() -> void:
 	for key: String in ["head_pitch", "body_drop", "tail_yaw", "eye_open", "look_yaw"]:
 		_expect(absf(float(frames[0][key]) - float(frames[2][key])) < 0.0001, "Frame-rate dependent " + key)
 	_expect(absf(float(frames[0].look_yaw)) <= 0.3, "Unbounded gaze")
+	var feeding := Emotion.new()
+	feeding.configure(21)
+	for tick in range(60): feeding.advance(1.0 / 60, {"intent": "eat"})
+	var chew: Dictionary = feeding.pose()
+	_expect(float(chew.mouth_open) > 0.0 and float(chew.arm_pitch) > 0.0, "Eating lacks jaw/forelimb motion")
+	feeding.advance(1.0 / 60, {"intent": "drink"})
+	_expect(feeding.state == "feeding" and feeding.pose().mouth_open > 0.0, "Drinking lacks jaw motion")
+	var last: Dictionary = feeding.pose()
+	feeding.advance(1.0 / 60, {"intent": "flee"})
+	_expect(feeding.state == "afraid" and absf(float(feeding.pose().arm_pitch) - float(last.arm_pitch)) < 0.10, "Danger pose jumped")
+	for tick in range(60): feeding.advance(1.0 / 60, {"intent": "flee"})
+	_expect(float(feeding.pose().mouth_open) < 0.01 and float(feeding.pose().arm_pitch) > 0.10, "Feeding pose persisted during escape")
 
 func _poses() -> void:
 	for pairs in [0, 1, 2, 3]:
@@ -117,6 +129,19 @@ func _poses() -> void:
 				preview._process(0.08)
 				_expect(preview._articulation.debug_state().action == "bite", "Emotion replaced bite")
 		_expect(node_count == preview.find_children("*", "", true, false).size(), "Expression allocates render nodes")
+		if pairs > 0:
+			var meal := Emotion.new()
+			meal.configure(19)
+			for tick in range(60): meal.advance(1.0 / 60, {"intent": "eat"})
+			preview.set_expression_pose(meal.pose())
+			preview._process(0.08)
+			_expect(preview._articulation.debug_state().mouth > 0.01, "AI meal did not move the sculpted jaw")
+			preview.play_part_action("bite")
+			preview._process(0.08)
+			_expect(preview._articulation.debug_state().action == "bite", "Feeding interrupted combat bite")
+			preview.set_expression_pose({})
+			preview._process(0.5)
+			_expect(preview._articulation.debug_state().action == "" and preview._articulation.debug_state().mouth < 0.01, "Jaw retained feeding after escape")
 		var rest: Array[Dictionary] = preview._motion._parts.duplicate()
 		preview.set_motion("edit")
 		for part: Dictionary in rest:
@@ -131,6 +156,13 @@ func _interactions() -> void:
 	var social: Node = await _spawn(11)
 	var driver: Node = wildlife.get_node("ExpressionBehavior")
 	driver.set_process(false)
+	var camera := Camera3D.new()
+	root.add_child(camera)
+	camera.current = true
+	for offset in [10.0, 50.0, 120.0]:
+		camera.global_position = wildlife.global_position + Vector3(offset, 0.0, 0.0)
+		_expect(is_equal_approx(driver._interval_for_camera(), 0.0 if offset < 25.0 else 0.12 if offset < 85.0 else 0.5), "Expression distance budget")
+	camera.free()
 	_expect(not social.greet(player).ok, "Unfamiliar animal accepted greeting")
 	_befriend(social)
 	driver._process(0.1)
