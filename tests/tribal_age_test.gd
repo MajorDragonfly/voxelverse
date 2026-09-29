@@ -1,7 +1,7 @@
 extends SceneTree
 const Registry = preload("res://core/campaign/body_registry.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
-const Space = preload("res://world/surface/gameplay_space.gd")
+const GameplaySpace = preload("res://world/surface/gameplay_space.gd")
 const SAVE: String = "user://tribal_age_test.json"
 class ReadyWorld:
 	extends Node
@@ -163,8 +163,8 @@ func _run() -> void:
 	var project_before: Dictionary = tribe.village().project.duplicate(true)
 	_expect(not project_before.is_empty(), "Hut placement did not create a site to inspect.")
 	if not project_before.is_empty():
-		var site: Vector3 = Space.resolve(tribe, project_before.position)
-		var construction_point: Vector2 = tribe.camera.unproject_position(site + Space.up(tribe, site) * 2.8)
+		var site: Vector3 = GameplaySpace.resolve(tribe, project_before.position)
+		var construction_point: Vector2 = tribe.camera.unproject_position(site + GameplaySpace.up(tribe, site) * 2.8)
 		_expect(tribe.project_at(construction_point), "The visible construction site cannot be picked by its label.")
 		await _world_click(construction_point, MOUSE_BUTTON_LEFT)
 		_expect(tribe.panel._tabs.get_current_tab_control() == tribe.panel._build_page and not tribe.panel._collapsed
