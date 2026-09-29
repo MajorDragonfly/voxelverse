@@ -44,6 +44,7 @@ jobs:
           grep '"passed":true' /tmp/water-flow/flow.log
           test -s /tmp/water-flow/current-off.png
           test -s /tmp/water-flow/current-on.png
+          test -s /tmp/water-flow/current-later.png
           test -s /tmp/water-flow/current-paused.png
       - name: Upload comparable scenes
         if: always()

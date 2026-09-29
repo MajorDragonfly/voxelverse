@@ -51,9 +51,12 @@ func _run() -> void:
 		var lake := Rect2i(485, 100, 465, 390)
 		_expect(still.get_region(ocean).get_data() != moving.get_region(ocean).get_data(), "Current did not affect ocean pixels.")
 		_expect(still.get_region(lake).get_data() == moving.get_region(lake).get_data(), "Lake received the sea current.")
+		material.set_shader_parameter("surface_time", 3.8)
+		var later: Image = await _capture(output, "current-later")
+		_expect(moving.get_region(ocean).get_data() != later.get_region(ocean).get_data(), "Sea current did not travel over time.")
 		paused = true
 		var frozen: Image = await _capture(output, "current-paused")
-		_expect(moving.get_data() == frozen.get_data(), "Paused water changed with a fixed surface clock.")
+		_expect(later.get_data() == frozen.get_data(), "Paused water changed with a fixed surface clock.")
 		paused = false
 		var base: Dictionary = await _profile(material, 0.0)
 		var flow: Dictionary = await _profile(material, 1.0)
