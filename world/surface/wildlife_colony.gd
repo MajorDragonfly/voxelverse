@@ -54,3 +54,27 @@ static func problem(value: Variant, body: Dictionary) -> String:
 		seen[id] = true
 	if not value.get("name") is String or not value.get("seed") is int and not value.get("seed") is float or value.get("role") not in ["grazer", "predator", "scavenger"]: return "Ungültige Nestbeschreibung."
 	return ""
+
+static func living_members(host: Node, colony: Dictionary) -> int:
+	var living: int = 0
+	for member: String in colony.members:
+		# Indexed records also find unloaded or migrated residents.
+		var record: Dictionary = host.storage.record(member)
+		if not record.is_empty() and not host._reserved(member) and not record.get("encounter", {}).get("dead", false): living += 1
+	return living
+
+static func display_name(host: Node, colony: Dictionary) -> String:
+	var name: String = str(colony.get("name", "")).strip_edges()
+	if not _role_label(name): return name
+	# Older colonies could save the dietary role in the name field. Recover
+	# the actual species from the frozen resident body, without rewriting it.
+	for member: String in colony.members:
+		var record: Dictionary = host.storage.record(member)
+		if record.is_empty(): continue
+		var design: Dictionary = Encoding.decode(record.get("blueprint", {}))
+		name = str(design.get("species", {}).get("display_name", design.get("name", ""))).strip_edges()
+		if not _role_label(name): return name
+	return ""
+
+static func _role_label(name: String) -> bool:
+	return name.to_lower() in ["", "grazer", "predator", "scavenger", "forager", "herbivore", "carnivore", "pflanzenfresser", "fleischfresser", "aggressiv"]

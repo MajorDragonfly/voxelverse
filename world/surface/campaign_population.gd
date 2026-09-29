@@ -444,11 +444,10 @@ func _sync_nests(wanted: Dictionary) -> void:
 			nest.position = hit.position + Space.up(self, point) * 0.03
 			get_parent().add_child(nest)
 			Space.orient(nest)
-			nest.setup(colony, adapter.terrain.surface.terrain, str(adapter.sample(colony.anchor).biome))
+			var presentation: Dictionary = colony.duplicate()
+			presentation.name = Colony.display_name(self, colony)
+			nest.setup(presentation, adapter.terrain.surface.terrain, str(adapter.sample(colony.anchor).biome))
 			Space.track(nest, colony.id)
 			nests[colony.id] = nest
 			created = true
-		var living: int = 0
-		for member: String in colony.members:
-			if not storage.record(member).get("encounter", {}).get("dead", false): living += 1
-		nests[colony.id].refresh(player, living)
+		nests[colony.id].refresh(player, Colony.living_members(self, colony))

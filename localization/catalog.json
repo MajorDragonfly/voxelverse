@@ -8921,6 +8921,26 @@
       "key": "LIVING_NEST",
       "de": "Nest: {species} · {count} Bewohner",
       "en": "Nest: {species} · {count} residents"
+    },
+    {
+      "key": "LIVING_NEST_UNKNOWN",
+      "de": "Unbekanntes Nest",
+      "en": "Unknown nest"
+    },
+    {
+      "key": "LIVING_NEST_SPECIES_UNKNOWN",
+      "de": "Unbekannte Art",
+      "en": "Unknown species"
+    },
+    {
+      "key": "LIVING_NEST_SCANNING",
+      "de": "Unbekanntes Nest · Scannen %d %%",
+      "en": "Unknown nest · Scanning %d %%"
+    },
+    {
+      "key": "LIVING_NEST_AIMED",
+      "de": "Entdecktes Nest",
+      "en": "Discovered nest"
     }
   ]
 }

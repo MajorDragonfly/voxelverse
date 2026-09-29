@@ -200,6 +200,7 @@
         "wildlife_hunting_world_test",
         "living_creature_ai_test",
         "wildlife_colony_test",
+        "nest_discovery_test",
         "living_creatures_world_test"
       ]
     },

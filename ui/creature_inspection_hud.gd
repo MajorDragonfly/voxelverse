@@ -98,7 +98,8 @@ func _process(_delta: float) -> void:
 		return
 	var enabled: bool = _scanner.active()
 	var target: Node = _scanner.target if is_instance_valid(_scanner.target) else null
-	_panel.visible = enabled and target != null and _scanner.known
+	var nest: bool = target != null and target.is_in_group(&"wildlife_nest")
+	_panel.visible = enabled and target != null and _scanner.known and not nest
 	_reticle.visible = enabled
 	_scan_label.visible = enabled
 	if not enabled:
@@ -109,6 +110,8 @@ func _process(_delta: float) -> void:
 	_reticle.queue_redraw()
 	if target == null:
 		_scan_label.text = "Ziele auf eine Kreatur in deiner Nähe."
+	elif nest:
+		_scan_label.text = tr("LIVING_NEST_AIMED") if _scanner.known else tr("LIVING_NEST_SCANNING") % floori(_scanner.ratio() * 100.0)
 	elif _scanner.known:
 		_scan_label.text = KeyHints.hint("BIND_SCAN_RECOGNIZED")
 		_show_target(target)

@@ -5351,3 +5351,15 @@ msgstr "Dein neugieriger Gefährte hat Nahrung in der Nähe entdeckt."
 
 msgid "LIVING_NEST"
 msgstr "Nest: {species} · {count} Bewohner"
+
+msgid "LIVING_NEST_UNKNOWN"
+msgstr "Unbekanntes Nest"
+
+msgid "LIVING_NEST_SPECIES_UNKNOWN"
+msgstr "Unbekannte Art"
+
+msgid "LIVING_NEST_SCANNING"
+msgstr "Unbekanntes Nest · Scannen %d %%"
+
+msgid "LIVING_NEST_AIMED"
+msgstr "Entdecktes Nest"
