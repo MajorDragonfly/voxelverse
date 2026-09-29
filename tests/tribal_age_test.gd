@@ -225,22 +225,34 @@ func _check_minimap() -> void:
 	_expect(not paused and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing the tribal atlas restored the wrong controls.")
 
 	var original_size: Vector2i = root.size
-	for dimensions in [Vector2i(1280, 720), Vector2i(800, 600)]:
-		root.size = dimensions
-		await _frames(5)
-		map._layout()
-		tribe.panel._layout()
-		await _frames(2)
-		var map_rect := _physical_rect(map._panel)
-		var commands := _physical_rect(tribe.panel._hud)
-		var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
-		_expect(screen.encloses(map_rect), "Tribal map escaped screen: " + str(dimensions))
-		_expect(screen.encloses(commands), "Tribal commands escaped screen: " + str(dimensions) + " " + str(commands))
-		_expect(not map_rect.intersects(commands), "Tribal orders cover the minimap: " + str(dimensions))
-		tribe.panel._hud_scroll.ensure_control_visible(tribe.panel._buttons["wait"])
-		await _frames(2)
-		_expect(commands.has_point(_physical_rect(tribe.panel._buttons["wait"]).get_center()), "Last tribal order cannot be reached by scrolling.")
+	var settings := root.get_node("DisplaySettings")
+	var original_scale: float = settings.ui_scale
+	var locale := root.get_node("LocaleManager")
+	var original_language: String = locale.locale
+	for dimensions in [Vector2i(1920, 1080), Vector2i(1280, 720), Vector2i(800, 600)]:
+		for scale in [1.0, 1.25, 1.5]:
+			for language in ["de", "en"]:
+				root.size = dimensions
+				settings.ui_scale = scale
+				locale._apply(language)
+				await _frames(5)
+				map._layout()
+				tribe.panel.refresh()
+				await _frames(2)
+				var map_rect := _physical_rect(map._panel)
+				var commands := _physical_rect(tribe.panel._hud)
+				var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
+				var context := "%s/%s/%s" % [dimensions, scale, language]
+				_expect(screen.encloses(map_rect), "Tribal map escaped screen: " + context)
+				_expect(screen.encloses(commands), "Tribal commands escaped screen: " + context + " " + str(commands))
+				_expect(not map_rect.intersects(commands), "Tribal orders cover the minimap: " + context)
+				tribe.panel._hud_scroll.ensure_control_visible(tribe.panel._buttons["wait"])
+				await _frames(2)
+				_expect(commands.has_point(_physical_rect(tribe.panel._buttons["wait"]).get_center()), "Last tribal order cannot be reached by scrolling: " + context)
+				_expect(tribe.panel._stock_labels.wood.tooltip_text.contains("/"), "Resource detail lost at " + context)
 	root.size = original_size
+	settings.ui_scale = original_scale
+	locale._apply(original_language)
 	await _frames(5)
 	var selected: Array = tribe.selected.duplicate()
 	var orders: Array = tribe.village()["members"].duplicate(true)
