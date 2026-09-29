@@ -4,7 +4,7 @@ Menü-Branch `agent/game-menus`, 9. September 2026.
 
 Neue Abenteuer erhalten eine kleine Einführung am unteren linken Bildschirmrand. Vier Grundlagen werden durch tatsächlich ausgeführte Aktionen erkannt: ungefähr 32 Grad mit der Spielkamera umschauen, vier Meter selbst gesteuert zurücklegen, vom Boden abspringen und eine Kreatur im Scanmodus vollständig scannen oder eine bereits bekannte Art anvisieren. Die Reihenfolge ist frei. Bereits erledigte Aufgaben müssen nicht wiederholt werden; die Karte zeigt jeweils die erste offene Aufgabe.
 
-Die Hinweise verwenden die aktuell gespeicherten Tastenbelegungen. Beim Scannen unterscheiden sie zwischen dem Öffnen des Modus und dem Halten des Tiers im Fadenkreuz. Die vorhandenen situationsabhängigen Hinweise für Kreaturen, Nahrung und Wasser bleiben an denselben Spielaktionen angeschlossen. Die Einführung ist eine Ergänzung der vorhandenen Hilfe.
+Die Hinweise verwenden die aktuell gespeicherten Tastenbelegungen. Beim Scannen unterscheiden sie zwischen dem Öffnen des Modus und dem Halten des Tiers im Scankreis. Die vorhandenen situationsabhängigen Hinweise für Kreaturen, Nahrung und Wasser bleiben an denselben Spielaktionen angeschlossen. Die Einführung ist eine Ergänzung der vorhandenen Hilfe.
 
 Über **Esc → Erste Schritte** lassen sich alle Aufgaben nachlesen, die Einführung überspringen oder neu starten. Die Welt bleibt während der Hilfe pausiert. Überspringen und Neustarten schließen die Pause und geben die bisherige Steuerung zurück. Neustarten setzt ausschließlich die Einführung zurück. Beim Abschluss erscheint eine kurze Bestätigung; die Hilfe bleibt danach verfügbar.
 

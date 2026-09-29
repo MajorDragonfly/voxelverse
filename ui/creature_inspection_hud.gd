@@ -18,6 +18,9 @@ var _reticle: Control
 var _scan_label: Label
 var _stats: Dictionary = {}
 
+func scan_circle() -> Dictionary:
+	return _reticle.scan_circle() if is_instance_valid(_reticle) else {}
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_player = get_parent()
@@ -72,6 +75,7 @@ func _install() -> void:
 	_reticle.offset_top = -36
 	_reticle.offset_right = 36
 	_reticle.offset_bottom = 36
+	_reticle.pivot_offset = Vector2(36, 36)
 	_reticle.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(_reticle)
 	_scan_label = Label.new()
@@ -108,16 +112,18 @@ func _process(_delta: float) -> void:
 	_reticle.progress = _scanner.ratio()
 	_reticle.known = _scanner.known
 	_reticle.has_target = target != null
+	if target != null:
+		_reticle.target_pixel = _reticle.get_global_transform_with_canvas().affine_inverse() * _player.get_scan_target_pixel()
 	_reticle.queue_redraw()
 	if target == null:
-		_scan_label.text = "Ziele auf eine Kreatur in deiner Nähe."
+		_scan_label.text = tr("HUD_SCAN_AIM")
 	elif nest:
 		_scan_label.text = tr("LIVING_NEST_AIMED") if _scanner.known else tr("LIVING_NEST_SCANNING") % floori(_scanner.ratio() * 100.0)
 	elif _scanner.known:
 		_scan_label.text = KeyHints.hint("BIND_SCAN_RECOGNIZED")
 		_show_target(target)
 	else:
-		_scan_label.text = "Unbekannte Art · Scannen %d %%\nHalte das Tier im Fadenkreuz." % floori(_scanner.ratio() * 100.0)
+		_scan_label.text = tr("HUD_SCAN_UNKNOWN") % floori(_scanner.ratio() * 100.0)
 	_controls.text = tr("HUD_SCAN_CONTROLS") % KeyHints.binding_label("inspection_mode")
 	_layout()
 

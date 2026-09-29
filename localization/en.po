@@ -302,10 +302,10 @@ msgid "%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf;
 msgstr "%s · Jump from the ground. The same key lets you rise in water; find solid ground for this task."
 
 msgid "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort."
-msgstr "Keep a creature in the crosshair until the circle fills. Known species are recognised immediately."
+msgstr "Keep a creature inside the scan circle until the circle fills. Known species are recognised immediately."
 
 msgid "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch."
-msgstr "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with J."
+msgstr "%s · Open scan mode. Keep a creature inside the scan circle for 2.5 seconds, then find it in the discovery journal with J."
 
 msgid "Die Grundlagen werden beim Spielen erkannt. Du kannst sie in beliebiger Reihenfolge ausprobieren."
 msgstr "The game tracks the basics as you play. Try them in any order."
@@ -659,7 +659,7 @@ msgid "Entdeckt"
 msgstr "Discovered"
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature in crosshair\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep creature inside the scan circle\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nEsc   Pause / back\nF8   Settings\nF11   Toggle fullscreen\n\nF4   Planet lab\nIn the lab: Tab Orbit · M Bodies · B Stars"
 
 msgid "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm."
 msgstr "Explore your planet, discover plants and animals, and develop your species from its first nest to its own tribe."
@@ -2388,6 +2388,15 @@ msgstr "SPECIES IDENTIFIED"
 msgid "HUD_SCAN_CONTROLS"
 msgstr "%s · Close scanner\nJ · All stats in the journal"
 
+msgid "HUD_SCAN_AIM"
+msgstr "Bring an animal or nest into the scan circle."
+
+msgid "HUD_SCAN_UNKNOWN"
+msgstr "Unknown species · Scanning %d %%\nKeep the animal inside the scan circle."
+
+msgid "SCAN_INTERACT_HINT"
+msgstr "%s · Open scan mode and keep the animal inside the scan circle."
+
 msgid "SETTLEMENT_NOT_READY"
 msgstr "This site is not ready yet."
 
@@ -3616,7 +3625,7 @@ msgid "Keine passenden Einträge"
 msgstr "No matching entries"
 
 msgid "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier."
-msgstr "Open scan mode and keep an animal in the crosshair for 2.5 seconds. When the circle fills, its species appears here."
+msgstr "Open scan mode and keep an animal inside the scan circle for 2.5 seconds. When the circle fills, its species appears here."
 
 msgid "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
 msgstr "Change your search or filter to see more entries."
@@ -3904,7 +3913,7 @@ msgid "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur pass
 msgstr "Find food · left-click food suited to your creature."
 
 msgid "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
-msgstr "Your first species · %s opens scan mode. Keep an animal in the crosshair until the circle fills."
+msgstr "Your first species · %s opens scan mode. Keep an animal inside the scan circle until the circle fills."
 
 msgid "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2."
 msgstr "Keep exploring · use %s to scan unknown species. Find new parts in the editor with F2."
@@ -3934,7 +3943,7 @@ msgid "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die V
 msgstr "This tracked goal belongs to an earlier version. Stop tracking it or choose another goal."
 
 msgid "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
-msgstr "Discover your first species. Open scan mode with %s and keep an animal in the crosshair until the circle fills."
+msgstr "Discover your first species. Open scan mode with %s and keep an animal inside the scan circle until the circle fills."
 
 msgid "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal."
 msgstr "Discover three different species. Observing known species again does not count twice."
@@ -3988,10 +3997,10 @@ msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 msgstr "Hold the left mouse button to rotate · use the mouse wheel to zoom"
 
 msgid "JOURNAL_GUIDE"
-msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal in the crosshair until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
+msgstr "OBSERVE\nOpen scan mode with {scan} and keep an animal inside the scan circle until the circle fills. Previously scanned species show their values immediately.\n\nDISCOVER\nA new species awards discovery points and can unlock one of its locked body parts. Known species do not grant another reward.\n\nCREATE\nOpen the creature editor with F2 in the game to attach available parts.\n\nSURVIVE\nLeft-click to eat and drink. Your creature’s anatomy determines which food it can eat.\n\nYOUR COLLECTION\n{journal} opens this book. Esc closes it."
 
 msgid "JOURNAL_UNSCANNED"
-msgstr "SPECIES NOT YET SCANNED\nKeep an animal in the crosshair in scan mode until the circle fills. Friendship does not replace a scan."
+msgstr "SPECIES NOT YET SCANNED\nKeep an animal inside the scan circle in scan mode until the circle fills. Friendship does not replace a scan."
 
 msgid "JOURNAL_SPECIES_DETAIL"
 msgstr "%s\nDiscovered on %s"
@@ -4513,7 +4522,7 @@ msgid "Zurück · Esc"
 msgstr "Back · Esc"
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal inside the scan circle\nJ   Discovery journal\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\nM   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
 
 msgid "GRAPHICS_CUSTOM"
 msgstr "Custom"
@@ -4909,10 +4918,10 @@ msgid "BIND_SCAN_RECOGNIZED"
 msgstr "Species recognised · {journal} opens the discovery journal"
 
 msgid "BIND_FIRST_SCAN"
-msgstr "%s · Open scan mode. Keep a creature in the crosshair for 2.5 seconds, then find it in the discovery journal with {journal}."
+msgstr "%s · Open scan mode. Keep a creature inside the scan circle for 2.5 seconds, then find it in the discovery journal with {journal}."
 
 msgid "BIND_CONTROLS_HELP"
-msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal in your sights\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
+msgstr "%s / %s / %s / %s   Move\nMouse   Look around\n%s   Jump / rise in water\n%s   Scan mode · keep the animal inside the scan circle\n{journal}   Discovery journal\n{development}   Development\n%s   Interact / eat / drink\n%s   Bite\nF2   Creature editor\n{world_map}   World map\nEsc   Pause / back\nEsc → Settings   All settings\nF11   Toggle fullscreen\n\nEsc → Choose destination   Visit another planet\nF4   Planet lab (technical test)"
 
 msgid "GUIDE_TITLE"
 msgstr "YOUR PATH TO A TRIBE"
@@ -4969,7 +4978,7 @@ msgid "GUIDE_HINT_JUMP"
 msgstr "{jump} · Jump from solid ground."
 
 msgid "GUIDE_HINT_INSPECT"
-msgstr "{scan} · In scan mode, keep a creature in your sights until the circle fills."
+msgstr "{scan} · In scan mode, keep a creature inside the scan circle until the circle fills."
 
 msgid "GUIDE_HINT_EAT"
 msgstr "{interact} · Approach food and interact with it. Your mouth determines what you can eat."

@@ -227,7 +227,7 @@ func interact(actor: Node) -> void:
 		_show_actor_message(actor, response["message"])
 		return
 	var key_hints = preload("res://core/input_preferences.gd")
-	_show_actor_message(actor, "%s · Scanmodus öffnen und das Tier im Fadenkreuz halten." % key_hints.binding_label("inspection_mode"))
+	_show_actor_message(actor, tr("SCAN_INTERACT_HINT") % key_hints.binding_label("inspection_mode"))
 
 
 func react_expression(event: String) -> void:

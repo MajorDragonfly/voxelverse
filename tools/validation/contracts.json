@@ -288,6 +288,7 @@
         "atlas_places_test",
         "atlas_search_test",
         "creature_scan_test",
+        "scan_circle_test",
         "discovery_journal_test",
         "domestic_fauna_journal_test",
         "interface_task7_test",

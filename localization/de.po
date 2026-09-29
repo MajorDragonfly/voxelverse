@@ -302,10 +302,10 @@ msgid "%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf;
 msgstr "%s · Springe vom Boden ab. Im Wasser steigst du mit derselben Taste auf; für diese Aufgabe suche festen Boden."
 
 msgid "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort."
-msgstr "Halte eine Kreatur im Fadenkreuz, bis der Kreis voll ist. Bekannte Arten erkennst du sofort."
+msgstr "Halte eine Kreatur im Scankreis, bis der Kreis voll ist. Bekannte Arten erkennst du sofort."
 
 msgid "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch."
-msgstr "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit J im Entdeckungsbuch."
+msgstr "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Scankreis; danach findest du sie mit J im Entdeckungsbuch."
 
 msgid "Die Grundlagen werden beim Spielen erkannt. Du kannst sie in beliebiger Reihenfolge ausprobieren."
 msgstr "Die Grundlagen werden beim Spielen erkannt. Du kannst sie in beliebiger Reihenfolge ausprobieren."
@@ -659,7 +659,7 @@ msgid "Entdeckt"
 msgstr "Entdeckt"
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
-msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
+msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Scankreis halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nEsc   Pause / zurück\nF8   Einstellungen\nF11   Vollbild umschalten\n\nF4   Planetenlabor\nIm Labor: Tab Orbit · M Körper · B Sonnen"
 
 msgid "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm."
 msgstr "Erkunde deinen Planeten, entdecke Pflanzen und Tiere und entwickle deine Spezies vom ersten Nest zum eigenen Stamm."
@@ -2388,6 +2388,15 @@ msgstr "ART ERKANNT"
 msgid "HUD_SCAN_CONTROLS"
 msgstr "%s · Scan schließen\nJ · Alle Werte im Entdeckungsbuch"
 
+msgid "HUD_SCAN_AIM"
+msgstr "Bringe ein Tier oder Nest in den Scankreis."
+
+msgid "HUD_SCAN_UNKNOWN"
+msgstr "Unbekannte Art · Scannen %d %%\nHalte das Tier im Scankreis."
+
+msgid "SCAN_INTERACT_HINT"
+msgstr "%s · Scanmodus öffnen und das Tier im Scankreis halten."
+
 msgid "SETTLEMENT_NOT_READY"
 msgstr "Der Ort ist noch nicht bereit."
 
@@ -3616,7 +3625,7 @@ msgid "Keine passenden Einträge"
 msgstr "Keine passenden Einträge"
 
 msgid "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier."
-msgstr "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Fadenkreuz. Sobald der Kreis voll ist, erscheint die Art hier."
+msgstr "Öffne den Scanmodus und halte ein Tier 2,5 Sekunden im Scankreis. Sobald der Kreis voll ist, erscheint die Art hier."
 
 msgid "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
 msgstr "Ändere die Suche oder den Filter, um weitere Einträge zu sehen."
@@ -3904,7 +3913,7 @@ msgid "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur pass
 msgstr "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt."
 
 msgid "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
-msgstr "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+msgstr "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Scankreis, bis der Kreis voll ist."
 
 msgid "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2."
 msgstr "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2."
@@ -3934,7 +3943,7 @@ msgid "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die V
 msgstr "Dieses vorgemerkte Ziel gehört zu einem früheren Stand. Du kannst die Vormerkung entfernen oder ein anderes Ziel wählen."
 
 msgid "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
-msgstr "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist."
+msgstr "Entdecke deine erste Tierart. Öffne mit %s den Scanmodus und halte ein Tier im Scankreis, bis der Kreis voll ist."
 
 msgid "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal."
 msgstr "Entdecke drei verschiedene Tierarten. Bereits bekannte Arten zählen beim erneuten Beobachten nicht noch einmal."
@@ -3988,10 +3997,10 @@ msgid "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 msgstr "Mit gedrückter linker Maustaste drehen · Mausrad zum Zoomen"
 
 msgid "JOURNAL_GUIDE"
-msgstr "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Fadenkreuz, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder."
+msgstr "BEOBACHTEN\nÖffne mit {scan} den Scanmodus und halte ein Tier im Scankreis, bis der Kreis voll ist. Bereits gescannte Arten zeigen ihre Werte sofort.\n\nENTDECKEN\nEine neue Art bringt Entdeckungspunkte und kann eines ihrer noch gesperrten Körperteile freischalten. Bereits bekannte Arten geben keine zweite Belohnung.\n\nGESTALTEN\nÖffne den Kreatureneditor mit F2 im Spiel. Dort kannst du deine verfügbaren Teile anbauen.\n\nÜBERLEBEN\nNutze Linksklick zum Fressen und Trinken. Welche Nahrung deine Kreatur verträgt, hängt von ihrem Körperbau ab.\n\nDEINE SAMMLUNG\n{journal} öffnet dieses Buch. Esc schließt es wieder."
 
 msgid "JOURNAL_UNSCANNED"
-msgstr "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Fadenkreuz, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht."
+msgstr "ART NOCH NICHT GESCANNT\nHalte ein Tier im Scanmodus im Scankreis, bis der Kreis voll ist. Eine Freundschaft ersetzt den Scan nicht."
 
 msgid "JOURNAL_SPECIES_DETAIL"
 msgstr "%s\nEntdeckt auf %s"
@@ -4513,7 +4522,7 @@ msgid "Zurück · Esc"
 msgstr "Zurück · Esc"
 
 msgid "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
-msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Scankreis halten\nJ   Entdeckungsbuch\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\nM   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 
 msgid "GRAPHICS_CUSTOM"
 msgstr "Benutzerdefiniert"
@@ -4909,10 +4918,10 @@ msgid "BIND_SCAN_RECOGNIZED"
 msgstr "Art erkannt · {journal} öffnet das Entdeckungsbuch"
 
 msgid "BIND_FIRST_SCAN"
-msgstr "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Fadenkreuz; danach findest du sie mit {journal} im Entdeckungsbuch."
+msgstr "%s · Öffne den Scanmodus. Halte eine Kreatur 2,5 Sekunden im Scankreis; danach findest du sie mit {journal} im Entdeckungsbuch."
 
 msgid "BIND_CONTROLS_HELP"
-msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Fadenkreuz halten\n{journal}   Entdeckungsbuch\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
+msgstr "%s / %s / %s / %s   Bewegen\nMaus   Umschauen\n%s   Springen / im Wasser steigen\n%s   Scanmodus · Tier im Scankreis halten\n{journal}   Entdeckungsbuch\n{development}   Entwicklung\n%s   Interagieren / essen / trinken\n%s   Beißen\nF2   Kreatureneditor\n{world_map}   Weltkarte\nEsc   Pause / zurück\nEsc → Einstellungen   Alle Einstellungen\nF11   Vollbild umschalten\n\nEsc → Reiseziel wählen   Anderen Planeten besuchen\nF4   Planetenlabor (Techniktest)"
 
 msgid "GUIDE_TITLE"
 msgstr "DEIN WEG ZUM STAMM"
@@ -4969,7 +4978,7 @@ msgid "GUIDE_HINT_JUMP"
 msgstr "{jump} · Springe von festem Boden ab."
 
 msgid "GUIDE_HINT_INSPECT"
-msgstr "{scan} · Halte eine Kreatur im Scanmodus im Fadenkreuz, bis der Kreis voll ist."
+msgstr "{scan} · Halte eine Kreatur im Scanmodus im Scankreis, bis der Kreis voll ist."
 
 msgid "GUIDE_HINT_EAT"
 msgstr "{interact} · Nähere dich Nahrung und interagiere mit ihr. Dein Mund bestimmt, was du verträgst."
