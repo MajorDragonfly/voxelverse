@@ -2208,6 +2208,326 @@
       "en": "Development path"
     },
     {
+      "key": "PATH_TITLE",
+      "de": "Dein Entwicklungspfad",
+      "en": "Your development path"
+    },
+    {
+      "key": "PATH_SUMMARY",
+      "de": "Jetzt: {stage} · {phase}",
+      "en": "Now: {stage} · {phase}"
+    },
+    {
+      "key": "PATH_FUTURE",
+      "de": "SPÄTERE ZEITALTER · VORSCHAU",
+      "en": "FUTURE ERAS · PREVIEW"
+    },
+    {
+      "key": "PATH_CURRENT",
+      "de": "Aktuell",
+      "en": "Current"
+    },
+    {
+      "key": "PATH_PLAYABLE",
+      "de": "Spielbarer Wechsel",
+      "en": "Playable transition"
+    },
+    {
+      "key": "PATH_PAST",
+      "de": "Bisher",
+      "en": "Earlier"
+    },
+    {
+      "key": "PATH_PRECURSOR",
+      "de": "Vorstufe",
+      "en": "Precursor"
+    },
+    {
+      "key": "PATH_PLANNED",
+      "de": "In Vorbereitung",
+      "en": "Planned"
+    },
+    {
+      "key": "PATH_CREATURE_NAME",
+      "de": "Kreatur",
+      "en": "Creature"
+    },
+    {
+      "key": "PATH_CREATURE_CONTROL",
+      "de": "Steuere deine Kreatur direkt.",
+      "en": "Control your creature directly."
+    },
+    {
+      "key": "PATH_CREATURE_DETAIL",
+      "de": "Erkunde, entwickle deinen Körper, befreunde oder jage. Fähigkeiten findest du unter Fähigkeiten.",
+      "en": "Explore, develop your body, befriend or hunt. Find upgrades under Skills."
+    },
+    {
+      "key": "PATH_NEST_GROUP_NAME",
+      "de": "Nestgemeinschaft",
+      "en": "Nest group"
+    },
+    {
+      "key": "PATH_NEST_GROUP_CONTROL",
+      "de": "Deine Kreatur und die Gefährten ihrer Art.",
+      "en": "Your creature and companions of its species."
+    },
+    {
+      "key": "PATH_NEST_GROUP_DETAIL",
+      "de": "Ein Heimatnest mit Folgen, Warten und Heimkehr. Noch keine Dorfwirtschaft.",
+      "en": "A home nest with follow, wait and return. No village economy yet."
+    },
+    {
+      "key": "PATH_TRIBE_NAME",
+      "de": "Stamm",
+      "en": "Tribe"
+    },
+    {
+      "key": "PATH_TRIBE_CONTROL",
+      "de": "Gruppen befehligen, Aufgaben verteilen und das Dorf versorgen.",
+      "en": "Command groups, assign tasks and provide for the village."
+    },
+    {
+      "key": "PATH_TRIBE_DETAIL",
+      "de": "Der Wechsel erfolgt nur nach bewusster Bestätigung im Spiel. Punkte allein lösen ihn nicht aus.",
+      "en": "The transition requires explicit confirmation in the game. Points alone do not trigger it."
+    },
+    {
+      "key": "PATH_MEDIEVAL_NAME",
+      "de": "Mittelalter",
+      "en": "Medieval era"
+    },
+    {
+      "key": "PATH_MEDIEVAL_CONTROL",
+      "de": "Siedlungen, Handwerk und Handel.",
+      "en": "Settlements, crafting and trade."
+    },
+    {
+      "key": "PATH_MEDIEVAL_DETAIL",
+      "de": "Voraussetzungen sind sichtbar; der Spielablauf und die sichere Übergabe werden noch entwickelt.",
+      "en": "Requirements are visible; the playable loop and safe transition are still in development."
+    },
+    {
+      "key": "PATH_MODERN_NAME",
+      "de": "Neuzeit",
+      "en": "Modern era"
+    },
+    {
+      "key": "PATH_MODERN_CONTROL",
+      "de": "Industrie, Energie und regionale Beziehungen.",
+      "en": "Industry, energy and regional relations."
+    },
+    {
+      "key": "PATH_MODERN_DETAIL",
+      "de": "Diese Epoche ist eine Vorschau und noch nicht spielbar.",
+      "en": "This era is a preview and is not yet playable."
+    },
+    {
+      "key": "PATH_SPACE_NAME",
+      "de": "Weltraum",
+      "en": "Space age"
+    },
+    {
+      "key": "PATH_SPACE_CONTROL",
+      "de": "Planeten, Sternensysteme und Expeditionen.",
+      "en": "Planets, star systems and expeditions."
+    },
+    {
+      "key": "PATH_SPACE_DETAIL",
+      "de": "Die Weltraumphase ist geplant. Fähigkeiten und Wechsel sind noch gesperrt.",
+      "en": "The space age is planned. Its skills and transition are still locked."
+    },
+    {
+      "key": "PATH_HOME_MEMBERS",
+      "de": "{count} eigene Gefährten und ein Heimatplatz sind gespeichert.",
+      "en": "{count} companions and a home location are saved."
+    },
+    {
+      "key": "PATH_HOME_MISSING",
+      "de": "Auf diesem Planeten ist noch keine eigene Nestgruppe gespeichert.",
+      "en": "No home nest group has been saved on this planet yet."
+    },
+    {
+      "key": "PATH_HOME_INVALID",
+      "de": "Gespeicherte Gruppe kann nicht sicher zugeordnet werden. Daten bleiben erhalten.",
+      "en": "The saved group cannot be matched safely. Its data remains intact."
+    },
+    {
+      "key": "PATH_HOME_UNSUPPORTED",
+      "de": "Diese gespeicherte Gruppenversion kann noch nicht angezeigt werden. Daten bleiben erhalten.",
+      "en": "This saved group version cannot be displayed yet. Its data remains intact."
+    },
+    {
+      "key": "PATH_HOME_RUNTIME",
+      "de": "Nestgruppensteuerung ist in dieser Version noch nicht verfügbar.",
+      "en": "Nest group controls are not yet available in this version."
+    },
+    {
+      "key": "PATH_BONUSES",
+      "de": "Koordination +{cooperation} % · Verteidigung +{defense} %",
+      "en": "Coordination +{cooperation}% · Defense +{defense}%"
+    },
+    {
+      "key": "PATH_BONUS_ACTIVE",
+      "de": "Koordination wirkt bei Dorfaufgaben; Verteidigung folgt mit Stammeskämpfen.",
+      "en": "Coordination affects village tasks; defense awaits tribal combat."
+    },
+    {
+      "key": "PATH_BONUS_LATER",
+      "de": "In der Nestgruppe noch nicht aktiv. Koordination wirkt nach dem Wechsel; Verteidigung folgt mit Stammeskämpfen.",
+      "en": "Not active in the nest group. Coordination takes effect after the transition; defense awaits tribal combat."
+    },
+    {
+      "key": "PATH_TRIBE_ACTIVE",
+      "de": "Dein Stamm ist aktiv. Du führst die Gruppe und baust euer Dorf.",
+      "en": "Your tribe is active. Lead your group and build the village."
+    },
+    {
+      "key": "PATH_TRIBE_READY",
+      "de": "Bereit: Öffne im Spiel „Stammeszeitalter“ und bestätige den Wechsel.",
+      "en": "Ready: open “Tribal age” in the game and confirm the transition."
+    },
+    {
+      "key": "PATH_TRIBE_BLOCKED",
+      "de": "Noch nicht bereit: Prüfe die Bedingungen im Stammeszeitalter. Kein automatischer Wechsel.",
+      "en": "Not ready yet: check the requirements in Tribal age. No automatic transition."
+    },
+    {
+      "key": "PATH_TRIBE_POINTS",
+      "de": "Stammesfortschritt · {count} Sozialpunkte verfügbar",
+      "en": "Tribal progress · {count} social points available"
+    },
+    {
+      "key": "PATH_GOAL_COUNT",
+      "de": "{earned} von {total} Meilensteinen erreicht",
+      "en": "{earned} of {total} milestones completed"
+    },
+    {
+      "key": "PATH_FACTIONS",
+      "de": "Nachbarn deiner Spezies findest du unter Dorf → Nachbarn. Fremde Wildarten bleiben Tiere.",
+      "en": "Find neighbors of your species under Village → Neighbors. Other wild species remain animals."
+    },
+    {
+      "key": "PATH_REQUIREMENTS",
+      "de": "Voraussetzungen · ✓ erreicht / ○ offen",
+      "en": "Requirements · ✓ met / ○ open"
+    },
+    {
+      "key": "PATH_LOCKED_ACTION",
+      "de": "Epochenwechsel noch gesperrt",
+      "en": "Era transition still locked"
+    },
+    {
+      "key": "PATH_FUTURE_BLOCKED",
+      "de": "Spielablauf und sicherer Epochenwechsel sind noch nicht verfügbar.",
+      "en": "The playable loop and safe era transition are not available yet."
+    },
+    {
+      "key": "PATH_GOAL_NEIGHBOR",
+      "de": "Gute Nachbarn",
+      "en": "Good neighbors"
+    },
+    {
+      "key": "PATH_GOAL_SUPPLY",
+      "de": "Dauerhaft versorgt",
+      "en": "Sustained supply"
+    },
+    {
+      "key": "PATH_GOAL_PROFESSIONS",
+      "de": "Verlässliche Berufe",
+      "en": "Reliable professions"
+    },
+    {
+      "key": "PATH_GOAL_STOCK",
+      "de": "Gemeinsame Vorräte",
+      "en": "Shared stores"
+    },
+    {
+      "key": "PATH_GOAL_TOOL",
+      "de": "Gemeinsames Handwerk",
+      "en": "Shared crafting"
+    },
+    {
+      "key": "PATH_GOAL_HUT",
+      "de": "Ein Dach für die Gruppe",
+      "en": "A roof for the group"
+    },
+    {
+      "key": "PATH_GOAL_GARDEN",
+      "de": "Gemeinsamer Anbau",
+      "en": "Shared gardening"
+    },
+    {
+      "key": "PATH_GOAL_MEALS",
+      "de": "Die Gruppe versorgt",
+      "en": "The group provides"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_HOUSING",
+      "de": "Zwei fertige Hütten",
+      "en": "Two finished huts"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_CRAFT",
+      "de": "Ein Steinwerkzeug",
+      "en": "One stone tool"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_FARMING",
+      "de": "Ein Wurzelgarten mit Nahrung",
+      "en": "A root garden with food"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_SUPPLY",
+      "de": "180 Spielsekunden Versorgung, Mahlzeiten und Vorräte",
+      "en": "180 game seconds of supply, meals and reserves"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_PROFESSIONS",
+      "de": "Zwei Berufe mit erneuerbarer Arbeit",
+      "en": "Two professions with renewable work"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_NEIGHBORS",
+      "de": "Nachbarfraktion gemeinsam unterstützen",
+      "en": "Help a neighboring faction together"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MEDIEVAL_RUNTIME",
+      "de": "Spielbares Mittelalter mit sicherem Speichern/Laden",
+      "en": "Playable medieval era with safe save/load"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_SETTLEMENTS",
+      "de": "Zwei versorgte Siedlungen",
+      "en": "Two supplied settlements"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_TRADE",
+      "de": "Warenverkehr zwischen Siedlungen",
+      "en": "Goods move between settlements"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_INDUSTRY",
+      "de": "Rohstoffkette bis zu Werkzeugen",
+      "en": "Resource chain leading to tools"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_ENERGY",
+      "de": "Energiequelle für einen Arbeitsplatz",
+      "en": "Energy source for a workplace"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_INSTITUTIONS",
+      "de": "Regionaler Vertrag oder Verteidigungsziel",
+      "en": "Regional treaty or defense goal"
+    },
+    {
+      "key": "PATH_REQUIREMENT_MODERN_RUNTIME",
+      "de": "Spielbare Neuzeit mit sicherem Speichern/Laden",
+      "en": "Playable modern era with safe save/load"
+    },
+    {
       "key": "SKILLS_HEADING",
       "de": "Deine Fähigkeiten",
       "en": "Your skills"
@@ -7263,6 +7583,16 @@
       "en": "Clouds"
     },
     {
+      "key": "GRAPHICS_GROUP_WORLD",
+      "de": "Weltbewegung",
+      "en": "World motion"
+    },
+    {
+      "key": "GRAPHICS_VEGETATION_MOTION",
+      "de": "Pflanzen im Wind bewegen",
+      "en": "Animate plants in the wind"
+    },
+    {
       "key": "GRAPHICS_GROUP_HAZE",
       "de": "Entfernungsdunst",
       "en": "Distance haze"
@@ -8208,6 +8538,56 @@
       "en": "Sandstorm"
     },
     {
+      "key": "WEATHER_FORECAST_TITLE",
+      "de": "Wetter · nächste 3 Min.",
+      "en": "Weather · next 3 min"
+    },
+    {
+      "key": "WEATHER_FORECAST_ROW",
+      "de": "+{minutes} Min. · {condition} · Wind {wind} m/s",
+      "en": "+{minutes} min · {condition} · wind {wind} m/s"
+    },
+    {
+      "key": "WEATHER_FORECAST_CLEAR",
+      "de": "Klar",
+      "en": "Clear"
+    },
+    {
+      "key": "WEATHER_FORECAST_BREEZE",
+      "de": "Leicht bewölkt",
+      "en": "Partly cloudy"
+    },
+    {
+      "key": "WEATHER_FORECAST_OVERCAST",
+      "de": "Bedeckt",
+      "en": "Overcast"
+    },
+    {
+      "key": "WEATHER_FORECAST_DRIZZLE",
+      "de": "Nieselregen",
+      "en": "Drizzle"
+    },
+    {
+      "key": "WEATHER_FORECAST_RAIN",
+      "de": "Regen",
+      "en": "Rain"
+    },
+    {
+      "key": "WEATHER_FORECAST_SNOW",
+      "de": "Schnee",
+      "en": "Snow"
+    },
+    {
+      "key": "WEATHER_FORECAST_SLEET",
+      "de": "Schneeregen",
+      "en": "Sleet"
+    },
+    {
+      "key": "WEATHER_FORECAST_UNKNOWN",
+      "de": "Unbekannt",
+      "en": "Unknown"
+    },
+    {
       "key": "WEATHER_STORM_ASH",
       "de": "Aschesturm",
       "en": "Ash storm"
@@ -8334,8 +8714,8 @@
     },
     {
       "key": "TRIBE_CAMERA_SETTINGS_HINT",
-      "de": "Bewegungstasten verschieben die Ansicht in Blickrichtung. Mausrad: Zoom. Alle Kameratasten lassen sich unten ändern. Diese Einstellungen gelten unabhängig vom Spielstand.",
-      "en": "Movement keys pan relative to the view. Mouse wheel: zoom. All camera bindings can be changed below. These settings are independent of the campaign."
+      "de": "WASD bewegt die Ansicht mit 32 m/s bei 100 %. Umschalt halten: doppelte Geschwindigkeit. Mausrad: Zoom. Die Minimap steuert den Blickwinkel. Einstellungen gelten unabhängig vom Spielstand.",
+      "en": "WASD pans at 32 m/s at 100%. Hold Shift for double speed. Mouse wheel: zoom. The minimap controls the view angle. Settings are independent of the campaign."
     },
     {
       "key": "TRIBE_CAMERA_LEFT",
@@ -8394,8 +8774,38 @@
     },
     {
       "key": "TRIBE_CAMERA_HINT",
-      "de": "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right}\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nDie Kamera kann weiter schauen als Bewohner arbeiten können.",
-      "en": "Pan: {move_forward} / {move_back} / {move_left} / {move_right}\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nThe camera can look beyond the residents’ working area."
+      "de": "Bewegen: {move_forward} / {move_back} / {move_left} / {move_right} · Umschalt: schnell\nDrehen: {tribe_turn_left} / {tribe_turn_right}\nNeigen: {tribe_tilt_up} / {tribe_tilt_down}\nDrehen & neigen: {tribe_orbit} halten und Maus bewegen\nZoom: Mausrad · Dorf: {tribe_focus_home} · Auswahl: {tribe_focus_selection}\nMinimap: Richtung anklicken oder Winkelknöpfe nutzen. Der Schwenk verändert keine Arbeitsgrenzen.",
+      "en": "Pan: {move_forward} / {move_back} / {move_left} / {move_right} · Shift: fast\nRotate: {tribe_turn_left} / {tribe_turn_right}\nTilt: {tribe_tilt_up} / {tribe_tilt_down}\nOrbit & tilt: hold {tribe_orbit} and move the mouse\nZoom: mouse wheel · Village: {tribe_focus_home} · Selection: {tribe_focus_selection}\nMinimap: click a direction or use angle buttons. Panning does not change work limits."
+    },
+    {
+      "key": "TRIBE_MAP_HEADING",
+      "de": "Richtung auf der Karte anklicken, um den Blick zu drehen",
+      "en": "Click a map direction to turn the view"
+    },
+    {
+      "key": "TRIBE_MAP_CENTER",
+      "de": "Kamera auf das Dorf zentrieren",
+      "en": "Center camera on village"
+    },
+    {
+      "key": "TRIBE_MAP_TURN_LEFT",
+      "de": "Blick nach links drehen",
+      "en": "Turn view left"
+    },
+    {
+      "key": "TRIBE_MAP_TURN_RIGHT",
+      "de": "Blick nach rechts drehen",
+      "en": "Turn view right"
+    },
+    {
+      "key": "TRIBE_MAP_TILT_LOW",
+      "de": "Blick auf Augenhöhe absenken",
+      "en": "Lower view toward eye level"
+    },
+    {
+      "key": "TRIBE_MAP_TILT_HIGH",
+      "de": "Blick von oben zeigen",
+      "en": "Show overhead view"
     },
     {
       "key": "GUIDE_TRIBAL_CARD",
@@ -8921,6 +9331,251 @@
       "key": "LIVING_NEST",
       "de": "Nest: {species} · {count} Bewohner",
       "en": "Nest: {species} · {count} residents"
+    },
+    {
+      "key": "AUDIO_TITLE",
+      "de": "Audio",
+      "en": "Audio"
+    },
+    {
+      "key": "AUDIO_HINT",
+      "de": "Änderungen gelten sofort und werden automatisch gespeichert.",
+      "en": "Changes apply immediately and are saved automatically."
+    },
+    {
+      "key": "AUDIO_MASTER",
+      "de": "Gesamtlautstärke",
+      "en": "Master volume"
+    },
+    {
+      "key": "AUDIO_MUSIC",
+      "de": "Musik",
+      "en": "Music"
+    },
+    {
+      "key": "AUDIO_AMBIENCE",
+      "de": "Umgebung",
+      "en": "Ambience"
+    },
+    {
+      "key": "AUDIO_EFFECTS",
+      "de": "Spieleffekte",
+      "en": "Game effects"
+    },
+    {
+      "key": "AUDIO_UI",
+      "de": "Menügeräusche",
+      "en": "Menu sounds"
+    },
+    {
+      "key": "AUDIO_MUTE",
+      "de": "Stumm",
+      "en": "Mute"
+    },
+    {
+      "key": "AUDIO_TEST",
+      "de": "Anhören",
+      "en": "Preview"
+    },
+    {
+      "key": "AUDIO_NIGHT",
+      "de": "Nachtmodus: große Lautstärkeunterschiede verringern",
+      "en": "Night mode: reduce large volume differences"
+    },
+    {
+      "key": "AUDIO_BACKGROUND",
+      "de": "Stumm, wenn das Spielfenster im Hintergrund ist",
+      "en": "Mute when the game window is in the background"
+    },
+    {
+      "key": "AUDIO_RESET",
+      "de": "Standardwerte",
+      "en": "Restore defaults"
+    },
+    {
+      "key": "AUDIO_BACK",
+      "de": "Zurück · Esc",
+      "en": "Back · Esc"
+    },
+    {
+      "key": "AUDIO_TEST_HINT",
+      "de": "0 % schaltet einen Kanal stumm. Gesamtlautstärke gilt auch für Hörproben.",
+      "en": "0% mutes a channel. Master volume also applies to previews."
+    },
+    {
+      "key": "AUDIO_TEST_PLAYING",
+      "de": "Hörprobe: {channel} · maximal 3 Sekunden",
+      "en": "Preview: {channel} · up to 3 seconds"
+    },
+    {
+      "key": "AUDIO_TEST_MUTED",
+      "de": "Hörprobe: {channel} · durch deine Einstellungen stumm",
+      "en": "Preview: {channel} · muted by your settings"
+    },
+    {
+      "key": "PT17_PAUSE_TITLE",
+      "de": "Zum Hauptmenü",
+      "en": "Main menu"
+    },
+    {
+      "key": "PT17_PAUSE_QUIT",
+      "de": "Spiel beenden",
+      "en": "Quit game"
+    },
+    {
+      "key": "PT17_PAUSE_SAVE_HINT",
+      "de": "Beim Verlassen wird dein Spiel gespeichert.",
+      "en": "Your game is saved before you leave."
+    },
+    {
+      "key": "PT17_AUDIO_TAB",
+      "de": "Audio",
+      "en": "Audio"
+    },
+    {
+      "key": "PT17_AUDIO_TITLE",
+      "de": "Ton und Musik",
+      "en": "Sound and music"
+    },
+    {
+      "key": "PT17_CONTROLS_HINT",
+      "de": "Tasten, Kreaturen- und Stammeskamera",
+      "en": "Keys, creature and tribal cameras"
+    },
+    {
+      "key": "PT17_SETTINGS_LIVE",
+      "de": "Alle Einstellungen wirken ohne Neustart. Audio wird automatisch gespeichert.",
+      "en": "All settings take effect without restarting. Audio saves automatically."
+    },
+    {
+      "key": "PT17_CONTROLS_TAB",
+      "de": "Steuerung & Kamera",
+      "en": "Controls & camera"
+    },
+    {
+      "key": "PT17_TRAVEL_CHOOSE",
+      "de": "Reiseziel wählen",
+      "en": "Choose destination"
+    },
+    {
+      "key": "PT17_TRAVEL_TITLE",
+      "de": "REISEZIEL",
+      "en": "DESTINATION"
+    },
+    {
+      "key": "PT17_TRAVEL_HELP",
+      "de": "Erkunde weitere Planeten. Deine Bewohner setzen erreichbare Arbeiten während deiner Reise fort.",
+      "en": "Explore other planets. Your residents continue work they can reach while you travel."
+    },
+    {
+      "key": "PT17_TRAVEL_PLANET",
+      "de": "Planet %d",
+      "en": "Planet %d"
+    },
+    {
+      "key": "PT17_TRAVEL_CURRENT",
+      "de": " · aktueller Ort",
+      "en": " · current location"
+    },
+    {
+      "key": "WILDLIFE_STATE_WANDER",
+      "de": "Wandert",
+      "en": "Wandering"
+    },
+    {
+      "key": "WILDLIFE_STATE_REST",
+      "de": "Ruht",
+      "en": "Resting"
+    },
+    {
+      "key": "WILDLIFE_STATE_HERD",
+      "de": "Sucht Anschluss",
+      "en": "Seeking the herd"
+    },
+    {
+      "key": "WILDLIFE_STATE_FLEE",
+      "de": "Flieht",
+      "en": "Fleeing"
+    },
+    {
+      "key": "WILDLIFE_STATE_ALERT",
+      "de": "Warnt",
+      "en": "Warning"
+    },
+    {
+      "key": "WILDLIFE_STATE_CHASE",
+      "de": "Verfolgt",
+      "en": "Pursuing"
+    },
+    {
+      "key": "WILDLIFE_STATE_SEARCH",
+      "de": "Sucht",
+      "en": "Searching"
+    },
+    {
+      "key": "WILDLIFE_STATE_RETURN",
+      "de": "Kehrt zurück",
+      "en": "Returning"
+    },
+    {
+      "key": "WILDLIFE_STATE_SOCIAL",
+      "de": "Ist aufmerksam",
+      "en": "Attentive"
+    },
+    {
+      "key": "WILDLIFE_STATE_BLOCKED",
+      "de": "Weg blockiert",
+      "en": "Path blocked"
+    },
+    {
+      "key": "WILDLIFE_STATE_UNLOADED",
+      "de": "Wartet auf Boden",
+      "en": "Waiting for terrain"
+    },
+    {
+      "key": "WILDLIFE_STATE_EAT",
+      "de": "Frisst",
+      "en": "Eating"
+    },
+    {
+      "key": "WILDLIFE_STATE_FORAGE",
+      "de": "Sucht Nahrung",
+      "en": "Seeking food"
+    },
+    {
+      "key": "WILDLIFE_STATE_DRINK",
+      "de": "Trinkt",
+      "en": "Drinking"
+    },
+    {
+      "key": "WILDLIFE_STATE_SEEK_WATER",
+      "de": "Sucht Wasser",
+      "en": "Seeking water"
+    },
+    {
+      "key": "HUD_CREATURE_BEHAVIOR",
+      "de": "Verhalten: {state}",
+      "en": "Behavior: {state}"
+    },
+    {
+      "key": "LIVING_NEST_UNKNOWN",
+      "de": "Unbekanntes Nest",
+      "en": "Unknown nest"
+    },
+    {
+      "key": "LIVING_NEST_SPECIES_UNKNOWN",
+      "de": "Unbekannte Art",
+      "en": "Unknown species"
+    },
+    {
+      "key": "LIVING_NEST_SCANNING",
+      "de": "Unbekanntes Nest · Scannen %d %%",
+      "en": "Unknown nest · Scanning %d %%"
+    },
+    {
+      "key": "LIVING_NEST_AIMED",
+      "de": "Entdecktes Nest",
+      "en": "Discovered nest"
     }
   ]
 }

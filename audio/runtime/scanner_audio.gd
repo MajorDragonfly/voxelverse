@@ -78,7 +78,9 @@ func _physics_process(delta: float) -> void:
 		if _scanner.is_queued_for_deletion() or not _scanner.active():
 			cancel_scan(false)
 			return
-		var target := _scanner.get("target") as Node3D
+		# Streaming may free a nest between scanner and audio physics ticks.
+		var target_value: Variant = _scanner.get("target")
+		var target: Node3D = target_value as Node3D if is_instance_valid(target_value) else null
 		if not is_instance_valid(target) or target.is_queued_for_deletion():
 			cancel_scan()
 		else:
@@ -141,7 +143,8 @@ func complete_scan(species_key: String) -> bool:
 
 func _on_completed(species_key: String) -> void:
 	# Only the bound scanner's current, observed target can complete this session.
-	var target := _scanner.get("target") as Node3D
+	var target_value: Variant = _scanner.get("target")
+	var target: Node3D = target_value as Node3D if is_instance_valid(target_value) else null
 	if is_instance_valid(target) and not target.is_queued_for_deletion() and target.get_instance_id() == _target_id:
 		complete_scan(species_key)
 

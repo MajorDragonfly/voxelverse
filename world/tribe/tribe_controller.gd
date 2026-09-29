@@ -813,8 +813,14 @@ func _effective_order(member: Dictionary) -> String:
 func _work(member: Dictionary, delta: float) -> void:
 	if member["order"] == "wait": return
 	var before: Dictionary = Work.snapshot(village(), member)
+	var before_work: float = float(member["work"])
+	var before_progress: float = float(village()["project"].get("progress", 0.0))
+	var work_kind: String = Work.effective_order(village(), member)
 	if not neighbors.work(member):
 		_perform_work(member, delta)
+	if float(member["work"]) > before_work or float(village()["project"].get("progress", 0.0)) > before_progress:
+		if is_instance_valid(_visuals) and actors.has(str(member["id"])):
+			_visuals.show_work(actors[member["id"]], work_kind)
 	get_node("/root/ProgressionService").record_tribal_work(before, str(member["id"]), self)
 
 func _perform_work(member: Dictionary, delta: float) -> void:

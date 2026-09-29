@@ -4,6 +4,7 @@ const SCHEMA := 1
 const CUSTOM := 3
 const FIELDS := {
 	"clouds_enabled": {"default": true},
+	"vegetation_motion": {"default": true},
 	"cloud_quality": {"default": 1, "min": 0, "max": 2},
 	"haze_strength": {"default": 1.0, "min": 0.0, "max": 2.0},
 	"fog_enabled": {"default": false},
@@ -28,6 +29,7 @@ static func preset(index: int) -> Dictionary:
 	for key: String in FIELDS:
 		result[key] = FIELDS[key].default
 	if index == 0:
+		result.vegetation_motion = false
 		for key: String in ["cloud_quality", "fog_quality", "shadow_quality", "ssao_quality"]:
 			result[key] = 0
 		result.ssao_enabled = false

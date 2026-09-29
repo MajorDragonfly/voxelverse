@@ -1,0 +1,57 @@
+name: Water flow review
+
+on:
+  pull_request:
+    paths:
+      - 'world/surface/visuals/living_water.gdshader'
+      - 'world/surface/visuals/living_water_depth.gd'
+      - 'world/planet_lab/planet_mesh_batch.gd'
+      - 'tests/water_flow_visual_test.gd'
+      - '.github/workflows/water-flow-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [forward_plus, gl_compatibility]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Import project
+        run: |
+          "${{ steps.engine.outputs.godot }}" --headless --path . --import > /tmp/water-import.log 2>&1
+      - name: Compare sea current and quiet lake
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          mkdir -p /tmp/water-flow
+          xvfb-run -a -s '-screen 0 960x540x24' \
+            "${{ steps.engine.outputs.godot }}" --path . --rendering-method '${{ matrix.renderer }}' \
+            --audio-driver Dummy --script res://tests/water_flow_visual_test.gd \
+            -- --capture /tmp/water-flow > /tmp/water-flow/flow.log 2>&1
+          grep '"passed":true' /tmp/water-flow/flow.log
+          test -s /tmp/water-flow/current-off.png
+          test -s /tmp/water-flow/current-on.png
+          test -s /tmp/water-flow/current-later.png
+          test -s /tmp/water-flow/current-paused.png
+      - name: Upload comparable scenes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: water-flow-${{ matrix.renderer }}
+          path: |
+            /tmp/water-flow
+            /tmp/water-import.log
+          retention-days: 14

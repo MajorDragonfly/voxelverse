@@ -50,6 +50,7 @@ func _run() -> void:
 	await _herd_and_social()
 	await _territory_return()
 	await _escape_and_ground()
+	await _marker_budget()
 	_expect(root.get_node("ProgressionService").export_state() == before_progression, "Ambient AI manufactured discoveries, rewards or relationship changes.")
 	scene.queue_free()
 	await _frames(4)
@@ -73,6 +74,7 @@ func _perception_and_combat() -> void:
 	player.position = Vector3(1.25, 100.05, 0)
 	await _frames(15)
 	_expect(predator.ai_state == "alert" and player.health == 100.0, "Predator skipped its warning and attacked immediately.")
+	_expect(predator._label.visible and predator._label.text == "!" and not predator._label.no_depth_test, "Live warning lacks a terrain-occluded danger sign: visible=%s text=%s emotion=%s intent=%s cue=%s" % [predator._label.visible, predator._label.text, predator.get_node("ExpressionBehavior").emotion.state, predator._intent, predator._emotion_cue._remaining])
 	await _capture("01_warning")
 	# Includes the cancellable bite wind-up after the existing warning.
 	await _frames(90)
@@ -182,6 +184,8 @@ func _escape_and_ground() -> void:
 	var grazer: CharacterBody3D = _animal("grazer", Vector3(0, 100.05, 0), 813)
 	grazer._visual_root.rotation.y = PI * 0.5
 	var wall: StaticBody3D = _box(Vector3(1, 4, 3.0), Vector3(3, 101.8, 0))
+	await _frames(12)
+	_expect(grazer._label.visible and grazer._label.text == "!!", "Live fleeing animal lacks a distinct fear sign.")
 	await _frames(180)
 	_expect(grazer.position.x > 4.0, "Fleeing animal did not navigate around a short wall: " + str(grazer.position))
 	_expect(grazer.is_on_floor(), "Navigating animal lost floor contact.")
@@ -210,6 +214,31 @@ func _escape_and_ground() -> void:
 	_expect(not Steering.safe_direction(grazer, Vector3.RIGHT, grazer.maximum_step_height), "Land animal steering accepted underwater floor.")
 	grazer.queue_free()
 	ground.queue_free()
+	await _frames(3)
+
+func _marker_budget() -> void:
+	player.position = Vector3(0, 100.05, 0)
+	var animals: Array[CharacterBody3D] = []
+	for index in range(6):
+		var animal: CharacterBody3D = _animal("grazer", Vector3(index * 0.6, 100.05, 4), 771)
+		animal.set_physics_process(false)
+		var driver: Node = animal.get_node("ExpressionBehavior")
+		driver.set_process(false)
+		driver.emotion.state = "curious"
+		animal._refresh_label(0.1)
+		animals.append(animal)
+	_expect(get_nodes_in_group(&"wildlife_emotion_marker").size() == 4, "Herd exceeded the shared icon budget.")
+	_expect(not animals[4]._label.visible and not animals[5]._label.visible, "Extra herd markers overlap the first four.")
+	animals[0].queue_free()
+	await _frames(3)
+	animals[4]._refresh_label(0.1)
+	_expect(animals[4]._label.visible and get_nodes_in_group(&"wildlife_emotion_marker").size() == 4, "Freed herd marker did not allow another animal to show its cue.")
+	player.position = Vector3(30, 100.05, 30)
+	for animal in animals:
+		if is_instance_valid(animal): animal._refresh_label(0.1)
+	_expect(get_nodes_in_group(&"wildlife_emotion_marker").is_empty(), "Distant herd left markers on screen.")
+	for animal in animals:
+		if is_instance_valid(animal): animal.queue_free()
 	await _frames(3)
 
 func _animal(role: String, point: Vector3, species: int) -> CharacterBody3D:

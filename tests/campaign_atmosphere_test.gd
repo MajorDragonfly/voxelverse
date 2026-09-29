@@ -28,6 +28,8 @@ func _run() -> void:
 	_expect(air.environment.background_mode == Environment.BG_SKY, "Campaign sky is not connected.")
 	_expect(air.sun.global_basis.z.dot(air._sun_direction) > 0.999, "Visible sun and actual light disagree.")
 	var day_energy: float = air.sun.light_energy
+	var day_white: float = air.environment.tonemap_white
+	_expect(day_white > 1.0, "Daylight clips pale materials at the default white point.")
 	for up: Vector3 in [Vector3.UP, Vector3.DOWN, Vector3.LEFT, Vector3.RIGHT, Vector3.FORWARD, Vector3.BACK]:
 		sample.up = up
 		air.update_view(0.1, true)
@@ -36,9 +38,15 @@ func _run() -> void:
 	sample.up = -air._sun_direction
 	air.update_view(0.1, true)
 	_expect(air.sun.light_energy == 0.0 and air.environment.ambient_light_energy > 0.0, "Night side has daylight or unreadable black shadows.")
+	_expect(is_equal_approx(air.environment.tonemap_white, 1.0), "Highlight protection darkened the night-side tonemap.")
+	var custom: Dictionary = air.graphics_values.duplicate(true)
+	custom.exposure = 1.18
+	air.apply_graphics(custom)
+	_expect(is_equal_approx(air.environment.tonemap_exposure, 1.18), "Night lighting replaced saved exposure.")
 	sample.up = Vector3.UP
 	air.update_view(0.1, true)
 	_expect(is_equal_approx(air.sun.light_energy, day_energy), "Returning to home changed sun energy.")
+	_expect(is_equal_approx(air.environment.tonemap_white, day_white) and is_equal_approx(air.environment.tonemap_exposure, 1.18), "Day/night travel lost highlight protection or custom exposure.")
 	var offset: Vector3 = air.sky_material.get_shader_parameter("cloud_offset")
 	paused = true
 	for i in range(5): await process_frame

@@ -1,0 +1,75 @@
+name: Creature reactions review
+on:
+  pull_request:
+    paths:
+      - "creatures/behavior/creature_emotion.gd"
+      - "creatures/behavior/creature_expression_driver.gd"
+      - "creatures/runtime/creature_expression_pose.gd"
+      - "creatures/runtime/creature_part_articulation.gd"
+      - "creatures/runtime/creature_runtime_preview.gd"
+      - "tests/creature_expression_test.gd"
+      - "tools/capture_creature_reactions.gd"
+      - ".github/workflows/creature-reactions-review.yml"
+  workflow_dispatch:
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [gl_compatibility, forward_plus]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Godot and software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth ffmpeg libgl1-mesa-dri mesa-vulkan-drivers
+          python - <<'PY'
+          import importlib.util, pathlib, zipfile
+          spec = importlib.util.spec_from_file_location('install', 'tools/install_godot.py')
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          folder = pathlib.Path('/tmp/reaction-godot')
+          folder.mkdir(exist_ok=True)
+          archive = module.download_verified(folder, module.ASSETS['linux'])
+          with zipfile.ZipFile(archive) as bundle:
+              bundle.extractall(folder)
+          (folder / 'Godot_v4.6.3-stable_linux.x86_64').chmod(0o755)
+          PY
+      - name: Import and check expression contract
+        run: |
+          python tools/validate_godot.py --godot /tmp/reaction-godot/Godot_v4.6.3-stable_linux.x86_64 --tests creature_expression_test --skip-main --output /tmp/reaction-review/validation
+      - name: Capture actual runtime poses and frame costs
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          XDG_DATA_HOME: /tmp/reaction-user
+        run: |
+          mkdir -p /tmp/reaction-review/baseline /tmp/reaction-review/candidate /tmp/reaction-review/stills
+          for mode in baseline candidate; do
+            xvfb-run -a -s '-screen 0 1280x720x24' /tmp/reaction-godot/Godot_v4.6.3-stable_linux.x86_64 --path . --rendering-method '${{ matrix.renderer }}' --audio-driver Dummy --script res://tools/capture_creature_reactions.gd -- /tmp/reaction-review/$mode $mode > /tmp/reaction-review/$mode/render.log 2>&1
+            cat /tmp/reaction-review/$mode/render.log
+            grep -q CREATURE_REACTIONS_CAPTURE_PASSED /tmp/reaction-review/$mode/render.log
+          done
+          for frame in 010 025 040 055 070 085 100 115; do
+            cp /tmp/reaction-review/candidate/frame_$frame.png /tmp/reaction-review/stills/
+          done
+          ffmpeg -loglevel error -y -framerate 30 -i /tmp/reaction-review/candidate/frame_%03d.png -c:v libx264 -pix_fmt yuv420p /tmp/reaction-review/reactions.mp4
+          rm /tmp/reaction-review/candidate/frame_*.png
+          python - <<'PY'
+          import json, pathlib, statistics
+          root = pathlib.Path('/tmp/reaction-review')
+          before, after = (json.loads((root / mode / 'metrics.json').read_text()) for mode in ('baseline', 'candidate'))
+          assert len(before['frame_ms']) == len(after['frame_ms']) == 120
+          print('software renderer:', '${{ matrix.renderer }}')
+          print('median frame ms:', statistics.median(before['frame_ms']), statistics.median(after['frame_ms']))
+          print('mean draw calls:', statistics.mean(before['draw_calls']), statistics.mean(after['draw_calls']))
+          assert max(after['draw_calls']) <= max(before['draw_calls']), 'expression added draw calls'
+          assert (root / 'reactions.mp4').stat().st_size > 10000
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: creature-reactions-${{ matrix.renderer }}
+          path: /tmp/reaction-review
+          retention-days: 14

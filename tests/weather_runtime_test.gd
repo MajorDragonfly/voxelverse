@@ -99,9 +99,14 @@ func _campaign_contract() -> void:
 	for i in range(3): await process_frame
 	_expect(not weather.snapshot().has("storm_phase") and not weather._storm_notice._panel.visible, "Storm preview bypassed live home protection.")
 	weather.set_preview_condition("")
+	for i in range(3): await process_frame
 	expected = weather.snapshot() # Capture after the camera/preview guard frames.
 	_expect(not expected.is_empty() and expected.body_id == state.active_body_id, "Weather child did not join campaign.")
 	_expect(expected.get("regional_schema") == 1 and weather.forecast().size() == 3, "Campaign lacks regional weather/forecast port.")
+	_expect(weather._forecast_panel._panel.visible and weather._forecast_panel._forecast.size() == 3
+		and weather._forecast_panel._snapshot.body_id == state.active_body_id
+		and weather._forecast_panel._forecast[0].in_seconds == 60.0,
+		"Live forecast UI did not show this body's local forecast windows.")
 	var copy: Dictionary = weather.snapshot()
 	copy.condition = "firestorm"
 	_expect(weather.snapshot().condition != "firestorm", "Snapshot exposes mutable weather state.")
@@ -111,6 +116,7 @@ func _campaign_contract() -> void:
 	flow.toggle_pause()
 	for i in range(5): await process_frame
 	_expect(weather.snapshot() == expected, "Paused weather advanced.")
+	_expect(not weather._forecast_panel._panel.visible, "Paused forecast covered the menu.")
 	_expect(saves.save_now(), "Weather pause save failed.")
 	flow.resume()
 	var camera: Camera3D = current_scene.get_viewport().get_camera_3d()
@@ -179,6 +185,8 @@ func _travel_climates() -> void:
 	_expect(snap.get("cloud_cover", -1) == 0 and snap.get("precipitation", -1) == 0 and snap.get("wind_mps", -1) == 0, "Live vacuum weather was nonzero.")
 	_expect(current_scene.terrain.surface.body.atmosphere == "none", "Descriptor disagrees with weather profile.")
 	for forecast in weather.forecast(): _expect(forecast.precipitation == 0 and forecast.wind_mps == 0, "Live forecast ignored vacuum.")
+	_expect(weather._forecast_panel._snapshot.body_id == away.id and weather._forecast_panel._forecast.size() == 3,
+		"Planet travel kept the previous body's forecast.")
 	await _storm_campaign_contract(weather)
 	_expect(state.campaign.data.weather_policy == policy and get_nodes_in_group(&"campaign_weather").size() == 1, "Travel changed home or duplicated weather owner.")
 	_expect(await flow.travel_to_planet(15838, 0, 15838, home), "Climate home return failed.")
@@ -213,6 +221,7 @@ func _storm_campaign_contract(weather: Node) -> void:
 		for i in range(3): await process_frame
 		var warning: Dictionary = weather.snapshot()
 		_expect(warning.get("storm_phase") == "warning" and weather._storm_notice._panel.visible, "Live storm warning missing.")
+		_expect(not weather._forecast_panel._panel.visible, "Diagnostic storm and normal forecast overlapped.")
 		flow.toggle_pause()
 		for i in range(3): await process_frame
 		_expect(weather.snapshot() == warning and not weather._storm_notice._panel.visible, "Pause advanced storm or left warning over modal.")

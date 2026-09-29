@@ -81,6 +81,15 @@ func _run() -> void:
 	await _frames(8)
 	print("TRIBAL_COMPACT_HUD ", JSON.stringify({"resolution": [1920, 1080], "height": _physical_rect(tribe.panel._hud).size.y, "ui_scale": 1.0}))
 	_expect(_physical_rect(tribe.panel._hud).size.y <= 324, "Standard commands exceed 30% of the 1080p screen.")
+	_expect(_physical_rect(tribe.panel._hud).size.x <= 660, "Everyday commands fill the whole screen width.")
+	var map: Node = get_first_node_in_group(&"minimap_hud")
+	var vitals: Control = player.find_child("CompactVitals", true, false)
+	var progression: Control = player.find_child("ProgressionDock", true, false)
+	var occupied := _physical_rect(tribe.panel._hud).get_area() + _physical_rect(map._panel).get_area() + _physical_rect(vitals).get_area() + _physical_rect(progression).get_area()
+	_expect(occupied <= 1920.0 * 1080.0 * 0.30, "Default HUD leaves less than 70% of the 1080p view unobstructed.")
+	for kind: String in ["wood", "stone", "food", "water"]:
+		var label: Label = tribe.panel._stock_labels[kind]
+		_expect(label.visible and label.text.contains(str(int(tribe.village().stock[kind]))) and label.tooltip_text.contains("/"), "Stored resource or available/reserved detail missing: " + kind)
 	_expect(not tribe.panel._construction.is_visible_in_tree(), "Construction details occupy the everyday command view.")
 	_expect(not tribe.panel._buttons.tool.is_visible_in_tree(), "Build actions were not separated from everyday orders.")
 	await _capture("m6-compact-orders")

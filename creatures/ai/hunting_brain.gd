@@ -206,11 +206,6 @@ func get_expression_context() -> Dictionary:
 		context.intent = "eat" if _intent == "eat_carcass" else "chase" if _intent == "hunt" else "forage"
 	return context
 
-func _refresh_label() -> void:
-	super._refresh_label()
-	if is_instance_valid(_label) and HUNT_LABELS.has(ai_state):
-		_label.text = HuntText.text(HUNT_LABELS[ai_state])
-
 func get_inspection_data() -> Dictionary:
 	var data: Dictionary = super.get_inspection_data()
 	if HUNT_LABELS.has(ai_state): data.ai_description = HuntText.text(HUNT_LABELS[ai_state])

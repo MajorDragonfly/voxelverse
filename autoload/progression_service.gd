@@ -29,6 +29,7 @@ var discovery_points: int = 0
 var unlocked_parts: Dictionary = {}
 var discovered_species: Dictionary = {}
 var discovered_regions: Dictionary = {}
+var discovered_nests: Dictionary = {}
 var _behavior := Behavior.new()
 var _tribal := Tribal.new()
 var _last_tribal_tick: int = -1
@@ -48,6 +49,7 @@ func reset_for_new_game() -> void:
 	unlocked_parts.clear()
 	discovered_species.clear()
 	discovered_regions.clear()
+	discovered_nests.clear()
 	_behavior.reset()
 	_tribal.reset()
 	_encounters.reset()
@@ -167,6 +169,23 @@ func register_species_scan(species_seed: int, blueprint: Dictionary, world_seed:
 	return result
 
 
+func has_nest_scan(nest_id: String, body_id: String, world_seed: int) -> bool:
+	var key: String = body_id + ":" + nest_id
+	var entry: Dictionary = _as_dictionary(discovered_nests.get(key, {}))
+	return not nest_id.is_empty() and not body_id.is_empty() and entry.get("id") == nest_id and entry.get("body_id") == body_id and entry.get("world_seed") == world_seed
+
+
+func register_nest_scan(nest_id: String, body_id: String, world_seed: int) -> bool:
+	if nest_id.is_empty() or body_id.is_empty() or world_seed <= 0: return false
+	var body: Dictionary = _discovery_body(world_seed, body_id)
+	if body.is_empty() or body.get("id") != body_id or body.get("seed") != world_seed: return false
+	if has_nest_scan(nest_id, body_id, world_seed): return true
+	discovered_nests[body_id + ":" + nest_id] = {"id": nest_id, "body_id": body_id, "world_seed": world_seed}
+	var saves := get_node_or_null("/root/SaveGameService")
+	if saves != null: saves.schedule_autosave(0.2)
+	return true
+
+
 func register_region_discovery(
 	coordinates: Vector2i,
 	world_seed: int = 0
@@ -202,6 +221,7 @@ func export_state() -> Dictionary:
 		"unlocked_parts": unlocked_parts.duplicate(true),
 		"discovered_species": discovered_species.duplicate(true),
 		"discovered_regions": discovered_regions.duplicate(true),
+		"discovered_nests": discovered_nests.duplicate(true),
 		"behavior": _behavior.export_state(),
 		"tribal": _tribal.export_state(),
 		"creature_encounters": encounters,
@@ -214,6 +234,7 @@ func import_state(data: Dictionary) -> bool:
 		return false
 	var imported_species: Dictionary = _as_dictionary(data.get("discovered_species", {}))
 	var imported_regions: Dictionary = _as_dictionary(data.get("discovered_regions", {}))
+	var imported_nests: Dictionary = _as_dictionary(data.get("discovered_nests", {}))
 	for entry: Dictionary in imported_species.values():
 		if not _annotate_discovery(entry, false): return false
 		if not entry.has("scan"): entry.scan = {"version": 1, "complete": true, "legacy": true}
@@ -232,6 +253,7 @@ func import_state(data: Dictionary) -> bool:
 	unlocked_parts = _as_dictionary(data.get("unlocked_parts", {}))
 	discovered_species = imported_species
 	discovered_regions = imported_regions
+	discovered_nests = imported_nests
 	_research = _as_dictionary(data.get("research", Research.defaults()))
 	_research["version"] = Research.VERSION
 	# Retain unlock IDs for unavailable parts so restored content is not lost.
@@ -245,6 +267,12 @@ func import_state(data: Dictionary) -> bool:
 static func validate_state(data: Dictionary) -> String:
 	if not BehaviorRules.is_integer(data.get("schema", 1), 1, SAVE_SCHEMA):
 		return "Unsupported progression schema."
+	var nests: Variant = data.get("discovered_nests", {})
+	if not nests is Dictionary: return "Invalid nest discovery index."
+	for key: Variant in nests:
+		var entry: Variant = nests[key]
+		if not key is String or not entry is Dictionary or not entry.get("id") is String or entry.id.is_empty() or not entry.get("body_id") is String or entry.body_id.is_empty() or not BehaviorRules.is_integer(entry.get("world_seed"), 1, 2147483647) or key != entry.body_id + ":" + entry.id:
+			return "Invalid nest discovery identity."
 	if data.has("tribal"):
 		var problem: String = Tribal.validate(data["tribal"])
 		if not problem.is_empty():

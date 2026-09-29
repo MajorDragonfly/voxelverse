@@ -6,6 +6,7 @@ const Housing = preload("res://world/tribe/village_housing.gd")
 const Style = preload("res://ui/progression_style.gd")
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
+const InventoryView = preload("res://world/tribe/village_inventory_view.gd")
 const Neighbors = preload("res://ui/tribe/neighbor_panel.gd")
 var _neighbors: VBoxContainer
 
@@ -26,6 +27,8 @@ var _message: Label
 var _hud: PanelContainer
 var _hud_content: VBoxContainer
 var _stock: Label
+var _stock_items: HFlowContainer
+var _stock_labels: Dictionary = {}
 var _goal: Label
 var _supply: Label
 var _residents: HFlowContainer
@@ -97,7 +100,7 @@ func _build() -> void:
 	column.add_child(header)
 	_stock = Style.label("", 17, Style.SOCIAL)
 	_stock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_stock.mouse_filter = Control.MOUSE_FILTER_STOP
+	_stock.mouse_filter = Control.MOUSE_FILTER_PASS
 	header.add_child(_stock)
 	_camera_menu = MenuButton.new()
 	_camera_menu.name = "TribeCameraMenu"
@@ -115,6 +118,19 @@ func _build() -> void:
 		else:
 			_collapsed = not _collapsed
 		refresh())
+	_stock_items = HFlowContainer.new()
+	_stock_items.name = "TribeStockStrip"
+	_stock_items.add_theme_constant_override("h_separation", 12)
+	_stock_items.add_theme_constant_override("v_separation", 2)
+	column.add_child(_stock_items)
+	for kind: String in Economy.Resources.IDS:
+		var amount := Style.label("", 14, Style.TEXT)
+		amount.name = "Stock_" + kind
+		amount.autowrap_mode = TextServer.AUTOWRAP_OFF
+		amount.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		amount.mouse_filter = Control.MOUSE_FILTER_STOP
+		_stock_items.add_child(amount)
+		_stock_labels[kind] = amount
 	_guidance_row = HBoxContainer.new()
 	_guidance_row.name = "TribalGuidance"
 	column.add_child(_guidance_row)
@@ -288,13 +304,13 @@ func _layout() -> void:
 	_scroll.visible = _hud_content.visible
 	var fixed_height: float = _hud.get_combined_minimum_size().y - _scroll.get_combined_minimum_size().y
 	var available_height: float = maxf(0.0, viewport_size.y - 36.0 - fixed_height)
-	var height_fraction: float = 0.25 if _tabs.get_current_tab_control() == _orders_page and font_scale <= 1.0 and viewport_size.y >= 900 else 0.36
+	var height_fraction: float = 0.135 if _tabs.get_current_tab_control() == _orders_page and font_scale <= 1.0 and viewport_size.y >= 900 else 0.36
 	# Scroll offsets are integer pixels. A fractional viewport height can leave
 	# the last button clipped at enlarged canvas scales after ensure_control_visible.
 	_scroll.custom_minimum_size.y = ceilf(minf(_hud_content.get_combined_minimum_size().y, minf(viewport_size.y * height_fraction, available_height))) if _hud_content.visible else 0.0
 	var minimap := get_tree().get_first_node_in_group(&"minimap_hud")
 	var reserve: float = minimap.reserved_width() if minimap != null else 0.0
-	_hud.size = Vector2(maxf(viewport_size.x - 36 - reserve, 280.0), 0)
+	_hud.size = Vector2(minf(660.0, maxf(viewport_size.x - 36 - reserve, 280.0)), 0)
 	_place_hud()
 	_shade.size = viewport_size
 	_dialog.custom_minimum_size.x = minf(viewport_size.x - 48, 670)
@@ -379,8 +395,15 @@ func refresh() -> void:
 	_goal.visible = _tabs.get_current_tab_control() == _orders_page and not _guidance_row.visible
 	_supply.visible = true
 	var stock: Dictionary = data["stock"]
-	_stock.text = Text.format_text("TRIBE_STOCK", stock.merged({"eggs": stock.get("eggs", 0), "residents": data["members"].size(), "capacity": Housing.MAX_RESIDENTS, "beds": Housing.beds(data)}, true))
-	_stock.tooltip_text = preload("res://world/tribe/village_inventory_view.gd").tooltip(data)
+	_stock.text = Text.text("TRIBE_STORAGE_TITLE") + " · %d/%d" % [data["members"].size(), Housing.MAX_RESIDENTS]
+	_stock.tooltip_text = Text.format_text("TRIBE_STOCK", stock.merged({"eggs": stock.get("eggs", 0), "residents": data["members"].size(), "capacity": Housing.MAX_RESIDENTS, "beds": Housing.beds(data)}, true)) + "\n" + InventoryView.tooltip(data)
+	var inventory: Dictionary = InventoryView.rows(data)
+	for kind: String in _stock_labels:
+		var row: Dictionary = inventory[kind]
+		var amount: Label = _stock_labels[kind]
+		amount.text = "%s %d" % [row.resource, row.stored]
+		amount.tooltip_text = InventoryView.detail(row)
+		amount.visible = kind in ["wood", "stone", "food", "water"] or row.stored > 0 or row.reserved > 0 or row.carried > 0 or row.pending > 0
 	_supply.text = Text.text("TRIBE_STORE_HINT")
 	if int(data["garden"]) == 1:
 		_supply.text = Text.format_text("TRIBE_GARDEN_STATUS", {"ready": data["deposits"]["food"]["remaining"], "growth": Text.text("TRIBE_GARDEN_FULL") if int(data["deposits"]["food"]["remaining"]) >= Model.GARDEN_CAPACITY else Text.format_text("TRIBE_GARDEN_NEXT", {"seconds": ceili(Model.GROW_SECONDS - float(data["growth"]))})})
@@ -454,8 +477,7 @@ func refresh() -> void:
 		var workplace: String = Economy.station_key(data, str(member.get("workplace_id", "")))
 		if not workplace.is_empty():
 			button.tooltip_text += "\n" + Text.format_text("WORKPLACE_ASSIGNED", {"name": Text.text(Presentation.PROJECTS[Economy.station_kind(workplace)]), "number": 1 if workplace in Economy.STATIONS else 2})
-		var logical_width: float = get_viewport().get_visible_rect().size.x / _scale_factor
-		var columns: int = 2 if logical_width < 1000 else 3
+		var columns: int = 1 if _hud.size.x < 460 else 2
 		button.custom_minimum_size.x = maxf(180.0, (_hud.size.x - 56.0) / columns)
 		button.set_pressed_no_signal(member["id"] in controller.selected)
 	for order: String in _buttons:
@@ -487,7 +509,14 @@ func _process(_delta: float) -> void:
 		_selection.hide()
 
 
+func owns_world_pause() -> bool:
+	return _owns_pause and not confirmation_open and controller._active
+
 func _input(event: InputEvent) -> void:
+	var flow := get_node_or_null("/root/SessionFlow")
+	var settings := get_node_or_null("/root/DisplaySettings")
+	if (flow != null and flow.pause_open) or (settings != null and settings.is_menu_open()):
+		return # A nested menu owns input, even over our tactical pause.
 	if not controller.placement.is_empty() and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		controller.placement = ""
 		controller.status = "Platzierung abgebrochen."

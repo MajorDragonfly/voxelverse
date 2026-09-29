@@ -1,6 +1,7 @@
 extends "res://tests/creature_behavior_gameplay_test.gd"
 ## Real social entry points and renderer plus isolated deterministic pose tests.
 const Emotion = preload("res://creatures/behavior/creature_emotion.gd")
+const EmotionCue = preload("res://creatures/behavior/creature_emotion_cue.gd")
 const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
 const Assembly = preload("res://creatures/editor/creature_assembly_blueprint_v7.gd")
 const Anatomy = preload("res://creatures/editor/creature_anatomy.gd")
@@ -14,6 +15,7 @@ func _run() -> void:
 	saves._loaded_once = true
 	saves.save_path = "user://expression_test.json"
 	_model()
+	_cues()
 	await _poses()
 	state.start_world_with_seed(12345)
 	await process_frame
@@ -74,6 +76,35 @@ func _model() -> void:
 	for key: String in ["head_pitch", "body_drop", "tail_yaw", "eye_open", "look_yaw"]:
 		_expect(absf(float(frames[0][key]) - float(frames[2][key])) < 0.0001, "Frame-rate dependent " + key)
 	_expect(absf(float(frames[0].look_yaw)) <= 0.3, "Unbounded gaze")
+	var feeding := Emotion.new()
+	feeding.configure(21)
+	for tick in range(60): feeding.advance(1.0 / 60, {"intent": "eat"})
+	var chew: Dictionary = feeding.pose()
+	_expect(float(chew.mouth_open) > 0.0 and float(chew.arm_pitch) > 0.0, "Eating lacks jaw/forelimb motion")
+	feeding.advance(1.0 / 60, {"intent": "drink"})
+	_expect(feeding.state == "feeding" and feeding.pose().mouth_open > 0.0, "Drinking lacks jaw motion")
+	var last: Dictionary = feeding.pose()
+	feeding.advance(1.0 / 60, {"intent": "flee"})
+	_expect(feeding.state == "afraid" and absf(float(feeding.pose().arm_pitch) - float(last.arm_pitch)) < 0.10, "Danger pose jumped")
+	for tick in range(60): feeding.advance(1.0 / 60, {"intent": "flee"})
+	_expect(float(feeding.pose().mouth_open) < 0.01 and float(feeding.pose().arm_pitch) > 0.10, "Feeding pose persisted during escape")
+
+func _cues() -> void:
+	var cue := EmotionCue.new()
+	_expect(cue.advance(0.1, "calm").is_empty(), "Calm animal displayed a permanent status.")
+	_expect(cue.advance(0.1, "curious").symbol == "?", "Curiosity missing its symbol.")
+	for tick in range(30): cue.advance(0.1, "curious")
+	_expect(cue.advance(0.1, "curious").is_empty(), "Held curiosity became a permanent icon.")
+	_expect(cue.advance(0.1, "afraid").symbol == "!!", "Fear did not interrupt curiosity.")
+	_expect(cue.advance(0.1, "angry").symbol == "!", "Threat did not override fear.")
+	_expect(cue.advance(0.1, "calm").is_empty(), "Calm retained a stale danger warning.")
+	_expect(cue.advance(0.1, "curious").is_empty(), "Routine mood changes bypassed the quiet period.")
+	cue.advance(2.5, "calm")
+	_expect(cue.advance(0.1, "affectionate").symbol == "♥", "Positive social feedback missing.")
+	_expect(cue.advance(0.1, "playful").symbol == "♪", "Play feedback missing.")
+	_expect(cue.advance(-1.0, "angry").is_empty(), "Invalid clock showed a cue.")
+	cue.reset()
+	_expect(cue.advance(0.1, "calm").is_empty(), "Load retained a world cue.")
 
 func _poses() -> void:
 	for pairs in [0, 1, 2, 3]:
@@ -117,6 +148,19 @@ func _poses() -> void:
 				preview._process(0.08)
 				_expect(preview._articulation.debug_state().action == "bite", "Emotion replaced bite")
 		_expect(node_count == preview.find_children("*", "", true, false).size(), "Expression allocates render nodes")
+		if pairs > 0:
+			var meal := Emotion.new()
+			meal.configure(19)
+			for tick in range(60): meal.advance(1.0 / 60, {"intent": "eat"})
+			preview.set_expression_pose(meal.pose())
+			preview._process(0.08)
+			_expect(preview._articulation.debug_state().mouth > 0.01, "AI meal did not move the sculpted jaw")
+			preview.play_part_action("bite")
+			preview._process(0.08)
+			_expect(preview._articulation.debug_state().action == "bite", "Feeding interrupted combat bite")
+			preview.set_expression_pose({})
+			preview._process(0.5)
+			_expect(preview._articulation.debug_state().action == "" and preview._articulation.debug_state().mouth < 0.01, "Jaw retained feeding after escape")
 		var rest: Array[Dictionary] = preview._motion._parts.duplicate()
 		preview.set_motion("edit")
 		for part: Dictionary in rest:
@@ -131,10 +175,19 @@ func _interactions() -> void:
 	var social: Node = await _spawn(11)
 	var driver: Node = wildlife.get_node("ExpressionBehavior")
 	driver.set_process(false)
+	var camera := Camera3D.new()
+	root.add_child(camera)
+	camera.current = true
+	for offset in [10.0, 50.0, 120.0]:
+		camera.global_position = wildlife.global_position + Vector3(offset, 0.0, 0.0)
+		_expect(is_equal_approx(driver._interval_for_camera(), 0.0 if offset < 25.0 else 0.12 if offset < 85.0 else 0.5), "Expression distance budget")
+	camera.free()
 	_expect(not social.greet(player).ok, "Unfamiliar animal accepted greeting")
 	_befriend(social)
 	driver._process(0.1)
 	_expect(driver.emotion.state == "affectionate", "Successful friendship missing expression")
+	wildlife._refresh_label(0.1)
+	_expect(wildlife._label.visible and wildlife._label.text == "♥" and not wildlife._label.no_depth_test, "Friendly encounter has no depth-tested symbol.")
 	var before: Dictionary = progression.export_state().duplicate(true)
 	wildlife.interact(player)
 	driver._process(0.1)
@@ -145,6 +198,15 @@ func _interactions() -> void:
 	_expect(not social.greet(player).ok, "Greeting interrupted escape")
 	driver._process(0.2)
 	_expect(driver.emotion.state == "afraid", "AI escape missing fear")
+	wildlife._refresh_label(0.1)
+	_expect(wildlife._label.visible and wildlife._label.text == "!!" and not wildlife._label.text.contains("Flieht"), "Escape leaked a technical AI label.")
+	_expect(wildlife.get_inspection_data().ai_description == "Flieht", "Targeted scan lost the actual cause of fear.")
+	root.get_node("LocaleManager")._apply("en")
+	_expect(wildlife.get_inspection_data().ai_description == "Fleeing", "Targeted behavior did not switch to English.")
+	for pair: Array in [["eat", "Eating"], ["forage", "Seeking food"], ["drink", "Drinking"], ["seek_water", "Seeking water"]]:
+		wildlife.ai_state = pair[0]
+		_expect(wildlife.get_inspection_data().ai_description == pair[1], "Needs behavior lost its English scan text: " + pair[0])
+	root.get_node("LocaleManager")._apply("de")
 	wildlife.ai_state = "rest"
 	paused = true
 	_expect(not social.greet(player).ok, "Paused greeting")
@@ -172,6 +234,7 @@ func _interactions() -> void:
 	await physics_frame
 	_expect(saves.save_now() and saves.load_now(), "Greeting save/load")
 	_expect(driver.emotion.clock == 0 and driver.emotion._reaction == "" and social.greet_cooldown == 0, "Load retained transient gesture")
+	_expect(not wildlife._label.visible and not wildlife._label.is_in_group(&"wildlife_emotion_marker"), "Load retained a world marker.")
 	_expect(social.entry().relation == "ally", "Load lost friendship")
 	var output: Array = []
 	var code: int = OS.execute(OS.get_executable_path(), ["--headless", "--path", ProjectSettings.globalize_path("res://"), "--script", "res://tests/creature_expression_test.gd", "--", "--expression-restart"], output, true)

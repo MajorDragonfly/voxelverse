@@ -44,6 +44,18 @@ func _physics_process(delta: float) -> void:
 	if target == null:
 		tracker.reset()
 		return
+	if target.is_in_group(&"wildlife_nest"):
+		var nest_id: String = str(target.colony.get("id", ""))
+		var body_id: String = str(state.get_current_body_record().get("id", ""))
+		known = _progression.has_nest_scan(nest_id, body_id, _world_seed)
+		if known:
+			tracker.reset()
+		elif tracker.advance(target.get_instance_id(), delta):
+			known = _progression.register_nest_scan(nest_id, body_id, _world_seed)
+			if known:
+				_player.guidance_action.emit("inspect", 1.0)
+				scan_completed.emit(body_id + ":" + nest_id)
+		return
 	var species_seed: int = int(target.get("species_seed"))
 	known = _progression.has_species_scan(species_seed, _world_seed)
 	if known:

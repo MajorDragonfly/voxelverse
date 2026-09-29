@@ -8,11 +8,9 @@ const RECOVERY_DELAY: float = 0.8
 var player: Node3D
 var stamina: float = MAX_STAMINA
 var recovery_delay: float = 0.0
-var _befriending: bool = false
 var _target: Node
 var _hud: Label
 var _hud_timer: float = 0.0
-var _feedback_timer: float = 0.0
 
 
 func _ready() -> void:
@@ -22,7 +20,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	player = get_parent()
 	player.respawned.connect(reset_stamina)
-	player.died.connect(func() -> void: _befriending = false)
+	player.died.connect(func() -> void: _target = null)
 	_hud = Label.new()
 	_hud.name = "BehaviorActions"
 	_hud.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
@@ -51,9 +49,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	var key: int = event.physical_keycode if event.physical_keycode != 0 else event.keycode
 	if key == KEY_F and not event.echo and not event.ctrl_pressed and not event.alt_pressed and not event.meta_pressed:
-		_befriending = event.pressed
 		if event.pressed:
 			_target = find_target()
+			if _target != null:
+				var result: Dictionary = _target.get_node("SocialBehavior").befriend(player, 0.1, event.shift_pressed)
+				if not result.get("ok", false):
+					player.show_gameplay_message(result.get("message", "Befreunden nicht möglich."))
 		get_viewport().set_input_as_handled()
 	elif key == KEY_H and event.pressed and not event.echo and not event.ctrl_pressed and not event.alt_pressed and not event.meta_pressed:
 		var target: Node = find_target()
@@ -68,25 +69,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	_hud.visible = _active()
-	if not _active():
-		_befriending = false
-		return
+	if not _active(): return
 	advance_recovery(delta)
-	_feedback_timer = maxf(_feedback_timer - delta, 0.0)
-	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED or not Input.is_physical_key_pressed(KEY_F) and not Input.is_key_pressed(KEY_F):
-		_befriending = false
-	if _befriending:
-		if not is_instance_valid(_target) or _target != find_target():
-			_befriending = false
-		else:
-			var result: Dictionary = _target.get_node("SocialBehavior").befriend(player, minf(delta, 0.25))
-			if not result.get("ok", false):
-				if _feedback_timer <= 0.0:
-					player.show_gameplay_message(result.get("message", "Befreunden nicht möglich."))
-					_feedback_timer = 2.0
-				_befriending = false
-			elif result.get("completed", false):
-				_befriending = false
 	_hud_timer -= delta
 	if _hud_timer <= 0.0:
 		_hud_timer = 0.12
@@ -124,7 +108,7 @@ func advance_recovery(delta: float) -> void:
 func reset_stamina() -> void:
 	stamina = MAX_STAMINA
 	recovery_delay = 0.0
-	_befriending = false
+	_target = null
 
 
 func export_state() -> Dictionary:
@@ -134,7 +118,6 @@ func export_state() -> Dictionary:
 func import_state(data: Dictionary) -> void:
 	stamina = clampf(float(data.get("stamina", MAX_STAMINA)), 0.0, MAX_STAMINA)
 	recovery_delay = clampf(float(data.get("recovery_delay", 0.0)), 0.0, RECOVERY_DELAY)
-	_befriending = false
 	_target = null
 
 
@@ -153,7 +136,11 @@ func _refresh_hud() -> void:
 	if data["need_origin"] in ["environment", "third_party"] and not data["player_harmed"]:
 		_hud.text += "\nVerletzt · H: Nahrung teilen"
 	elif data["relation"] == "wild":
-		_hud.text += "\nF halten · Befreunden"
+		var status: Dictionary = target.get_node("SocialBehavior").social_status(data)
+		var hint: String = "Reaktion abwarten" if not status.ready else ("Shift+F: " if status.playful else "F: ") + status.action
+		if status.ready and status.step == 1 and status.temperament == "neugierig":
+			hint += " / Shift+F: Spielgeste"
+		_hud.text += "\nTier %s · %s" % [status.temperament, hint]
 	elif data["relation"] == "ally":
 		_hud.text += "\n" + preload("res://core/localization/ui_text.gd").format_text("EXPRESSION_GREET_HINT", {
 			"key": preload("res://core/input_preferences.gd").binding_label("primary_action")})

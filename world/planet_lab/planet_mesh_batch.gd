@@ -19,4 +19,4 @@ func run() -> void:
 		tile["arrays"] = Patch.build_arrays(tile, surface)
 		tile["collision_faces"] = Patch.collision_faces(tile.arrays.land_arrays)
 		if body.get("surface_generation") in ["living_planet_v1", "living_planet_v2"]:
-			preload("res://world/surface/visuals/living_water_depth.gd").enrich(tile.arrays, tile)
+			preload("res://world/surface/visuals/living_water_depth.gd").enrich(tile.arrays, tile, float(body.radius))

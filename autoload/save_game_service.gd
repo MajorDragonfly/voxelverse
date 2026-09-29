@@ -714,6 +714,9 @@ func _validate_save(data: Dictionary) -> String:
 			if not discovery.has("body_id") and schema < SAVE_SCHEMA: continue
 			var owner: Dictionary = Registry.by_id(campaign, str(discovery.get("body_id", "")))
 			if owner.is_empty() or discovery.get("world_seed") != owner.seed: return "Discovery refers to an unknown or different body."
+	for discovery: Dictionary in data.progression.get("discovered_nests", {}).values():
+		var owner: Dictionary = Registry.by_id(campaign, str(discovery.get("body_id", "")))
+		if owner.is_empty() or discovery.get("world_seed") != owner.seed: return "Nest discovery refers to an unknown or different body."
 	if schema >= SAVE_SCHEMA:
 		for id in data.regions_by_body:
 			var region_body: Dictionary = Registry.by_id(campaign, str(id))

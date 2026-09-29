@@ -6,6 +6,7 @@ extends RefCounted
 static func apply(preview: Node3D, parts: Array[Dictionary], pose: Dictionary) -> void:
 	if pose.is_empty(): return
 	preview.position.y -= float(pose.get("body_drop", 0.0)) * preview.scale.y
+	preview.position.y += float(pose.get("breath", 0.0)) * preview.scale.y
 	preview.rotation.x += float(pose.get("body_pitch", 0.0))
 	var pivot := Vector3.ZERO
 	var count: int = 0
@@ -25,3 +26,5 @@ static func apply(preview: Node3D, parts: Array[Dictionary], pose: Dictionary) -
 		elif category == "tail":
 			# Replace the generic idle wag instead of adding a second oscillator.
 			node.rotation = part.rotation + Vector3(pose.get("tail_pitch", 0.0), pose.get("tail_yaw", 0.0), 0)
+		elif category == "arms":
+			node.rotation.x += float(pose.get("arm_pitch", 0.0))

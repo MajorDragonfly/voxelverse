@@ -143,6 +143,7 @@ func _process(delta: float) -> void:
 	_motion_time += step
 	if motion_mode != "edit":
 		_motion.advance(motion_mode, _motion_time, step, _locomotion_speed_ratio)
+	_articulation.set_ambient_mouth(float(_motion.expression_pose.get("mouth_open", 0.0)))
 	_articulation.advance(step, _motion_time if motion_mode == "idle" else -1.0)
 	if motion_mode == "edit" and not _articulation.is_active(): set_process(false)
 

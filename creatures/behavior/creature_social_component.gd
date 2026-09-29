@@ -1,7 +1,8 @@
 extends Node
 
 const FRIEND_RANGE: float = 6.0
-const TRUST_PER_SECOND: float = 12.5
+const SOCIAL_TRUST: Array[float] = [35.0, 70.0, 100.0]
+const SOCIAL_ACTIONS: Array[String] = ["Ruhig beobachten", "Behutsam annähern", "Auf das Tier antworten"]
 const HELP_COST: float = 12.0
 const HELP_HEALTH: float = 0.30
 const Space = preload("res://world/surface/gameplay_space.gd")
@@ -12,6 +13,7 @@ var creature: CharacterBody3D
 var attention_remaining: float = 0.0
 var help_cooldown: float = 0.0
 var greet_cooldown: float = 0.0
+var response_remaining: float = 0.0
 var attention_actor: Node3D
 var presentation_relation: String = "wild"
 var _save_service: Node
@@ -41,6 +43,7 @@ func _process(delta: float) -> void:
 	attention_remaining = maxf(attention_remaining - delta, 0.0)
 	help_cooldown = maxf(help_cooldown - delta, 0.0)
 	greet_cooldown = maxf(greet_cooldown - delta, 0.0)
+	response_remaining = maxf(response_remaining - get_node("/root/GameState").simulation_delta(delta), 0.0)
 
 
 func entry() -> Dictionary:
@@ -60,6 +63,7 @@ func _restore() -> void:
 	attention_actor = null
 	greet_cooldown = 0.0
 	help_cooldown = 0.0
+	response_remaining = 0.0
 	creature._threat_timer = 0.0
 	if creature.is_dead:
 		creature.velocity = Vector3.ZERO
@@ -78,7 +82,24 @@ func can_reach(actor: Node, reach: float = FRIEND_RANGE) -> bool:
 		creature.global_position + Space.up(creature, creature.global_position) * 0.7)
 
 
-func befriend(actor: Node, delta: float) -> Dictionary:
+func social_status(data: Dictionary = {}) -> Dictionary:
+	if data.is_empty(): data = entry()
+	var step: int = 0
+	while step < SOCIAL_TRUST.size() and float(data.get("trust", 0.0)) >= SOCIAL_TRUST[step]:
+		step += 1
+	var temperament: int = posmod(creature.individual_seed, 3)
+	var action: String = SOCIAL_ACTIONS[mini(step, 2)]
+	if step == 2 and temperament == 0: action = "Spielgeste erwidern"
+	return {"step": step, "action": action, "playful": step == 2 and temperament == 0,
+		"temperament": ["neugierig", "vorsichtig", "zurückhaltend"][temperament],
+		"ready": response_remaining <= 0.0,
+		"response_remaining": response_remaining}
+
+
+func befriend(actor: Node, delta: float = 0.1, playful: bool = false) -> Dictionary:
+	# One call is one deliberate action. Frame duration can never grow trust.
+	if get_node("/root/GameState").simulation_delta(1.0) <= 0.0:
+		return _failure("Die Welt ist gerade angehalten.")
 	if not can_reach(actor) or not is_finite(delta) or delta <= 0.0 or delta > 0.25:
 		return _failure("Komm näher und halte Sichtkontakt.")
 	var data: Dictionary = entry()
@@ -87,9 +108,21 @@ func befriend(actor: Node, delta: float) -> Dictionary:
 		return _failure("Diese Kreatur ist bereits mit dir befreundet.")
 	if data["relation"] == "hostile" or data["player_harmed"] or creature._threat_timer > 0.0:
 		return _failure("Diese Kreatur fühlt sich bedroht und lässt sich nicht befreunden.")
-	attention_remaining = 0.4
+	if creature.get_expression_context().get("intent", "rest") in ["flee", "alert", "chase"]:
+		return _failure("Warte, bis das Tier wieder ruhig ist.")
+	if response_remaining > 0.0:
+		return _failure("Das Tier reagiert noch. Beobachte es einen Moment.")
+	var status: Dictionary = social_status(data)
+	var step: int = status.step
+	if (step == 0 and playful) or (step == 2 and playful != status.playful) or (step == 1 and playful and status.temperament != "neugierig"):
+		# A rushed or mismatched gesture is rejected. The real threat state makes
+		# the refusal visible through the existing AI/expression pipeline.
+		creature._threat = actor
+		creature._threat_timer = 2.0
+		attention_remaining = 0.0
+		return _failure("Das Tier weicht zurück. Warte, bis es wieder ruhig ist.")
 	var multiplier: float = actor.get_behavior_multiplier("befriend_efficiency")
-	data["trust"] = minf(float(data["trust"]) + delta * TRUST_PER_SECOND * multiplier, 100.0)
+	data["trust"] = maxf(float(data["trust"]), SOCIAL_TRUST[step])
 	var completed: bool = float(data["trust"]) >= 100.0
 	var context := {"target_relation": data["relation"]}
 	if completed:
@@ -100,12 +133,19 @@ func befriend(actor: Node, delta: float) -> Dictionary:
 		return _failure("Speichern fehlgeschlagen. Befreunden kann erneut versucht werden.")
 	attention_actor = actor as Node3D
 	presentation_relation = str(data["relation"])
+	attention_remaining = 2.5
 	if completed:
 		creature._threat_timer = 0.0
 		creature.react_expression("friend")
 		creature.audio_event.emit(&"friend")
 		actor.show_gameplay_message("Befreundet · Beziehung gespeichert.")
-	return {"ok": true, "completed": completed, "trust": data["trust"], "multiplier": multiplier}
+	else:
+		# Individual temperament changes the observation interval; Offenheit
+		# shortens it without changing the number of meaningful actions.
+		response_remaining = (1.4 + 0.45 * float(posmod(creature.individual_seed, 3))) / maxf(multiplier, 0.1)
+		if step == 1: creature.react_expression("greet")
+		actor.show_gameplay_message("%s · Tier %s · Reaktion abwarten (%d/3)." % [status.action, status.temperament, step + 1])
+	return {"ok": true, "completed": completed, "trust": data["trust"], "step": step + 1}
 
 
 func help(actor: Node) -> Dictionary:
@@ -186,6 +226,7 @@ func receive_player_attack(damage: float, actor: Node) -> bool:
 	data["need_origin"] = "player"
 	data["relation"] = "hostile"
 	data["trust"] = 0.0
+	response_remaining = 0.0
 	data["health_ratio"] = maxf(float(data["health_ratio"]) - damage / creature.maximum_health, 0.0)
 	data["dead"] = float(data["health_ratio"]) == 0.0
 	if data["dead"]:

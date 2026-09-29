@@ -151,12 +151,6 @@ func get_expression_context() -> Dictionary:
 			context["look_yaw"] = atan2(-offset.x, -offset.z)
 	return context
 
-func _refresh_label() -> void:
-	super._refresh_label()
-	if is_instance_valid(_label) and PLAY_LABELS.has(ai_state):
-		_label.text = PlayText.text(PLAY_LABELS[ai_state])
-		_label.modulate = Color(0.68, 0.94, 0.79)
-
 func get_inspection_data() -> Dictionary:
 	var data: Dictionary = super.get_inspection_data()
 	if PLAY_LABELS.has(ai_state): data["ai_description"] = PlayText.text(PLAY_LABELS[ai_state])

@@ -495,6 +495,7 @@ func _show_tab(show_journal: bool) -> void:
 		_clear_message()
 	_scroll.scroll_vertical = 0
 	_refresh_view_label()
+	_layout()
 
 
 func _show_development() -> void:
@@ -506,6 +507,7 @@ func _show_development() -> void:
 	_development.refresh()
 	_scroll.scroll_vertical = 0
 	_refresh_view_label()
+	_layout()
 
 
 func _refresh_view_label() -> void:
@@ -532,7 +534,7 @@ func _layout() -> void:
 	var viewport_size := get_viewport().get_visible_rect().size
 	_font_scale = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
 	var inset := 12.0 if viewport_size.x < 1000 else 24.0
-	var book_size := Vector2(minf(1180 * _font_scale, viewport_size.x - inset * 2), minf(680 * _font_scale, viewport_size.y - inset * 2))
+	var book_size := Vector2(minf((920 * minf(_font_scale, 1.15)) if _development.visible else (1180 * _font_scale), viewport_size.x - inset * 2), minf((590 * minf(_font_scale, 1.1)) if _development.visible else (680 * _font_scale), viewport_size.y - inset * 2))
 	_panel.position = (viewport_size - book_size) * 0.5
 	_panel.size = book_size
 	var width: float = book_size.x - 40
@@ -565,7 +567,7 @@ func _fit_window() -> void:
 	# when they shrink as well, instead of retaining the initial one-word width.
 	var viewport_size := get_viewport().get_visible_rect().size
 	var inset := 12.0 if viewport_size.x < 1000 else 24.0
-	_panel.size = Vector2(minf(1180 * _font_scale, viewport_size.x - inset * 2), minf(680 * _font_scale, viewport_size.y - inset * 2))
+	_panel.size = Vector2(minf((920 * minf(_font_scale, 1.15)) if _development.visible else (1180 * _font_scale), viewport_size.x - inset * 2), minf((590 * minf(_font_scale, 1.1)) if _development.visible else (680 * _font_scale), viewport_size.y - inset * 2))
 	_panel.position = (viewport_size - _panel.size) * 0.5
 
 
@@ -637,6 +639,7 @@ func _refresh_language() -> void:
 	for index in range(PHASES.size()):
 		_phase_choice.set_item_text(index, Presentation.phase_name(index) + Text.text("SKILLS_PLAYABLE_CHOICE" if PHASES[index]["implemented"] else "SKILLS_PLANNED_CHOICE"))
 	refresh(false)
+	_development.refresh()
 	_refresh_message()
 	_layout()
 	# Container layout is deferred; restore pixels after translated text wraps.

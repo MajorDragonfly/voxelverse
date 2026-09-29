@@ -4,6 +4,7 @@ render_mode depth_draw_opaque, cull_disabled, diffuse_lambert;
 uniform vec3 deep_color : source_color = vec3(0.035, 0.22, 0.31);
 uniform vec3 shallow_color : source_color = vec3(0.16, 0.52, 0.53);
 uniform vec3 foam_color : source_color = vec3(0.72, 0.84, 0.80);
+uniform float current_strength : hint_range(0.0, 1.0) = 1.0;
 
 void fragment() {
 	if (!covered(FRAGCOORD.xy)) { discard; }
@@ -27,15 +28,27 @@ void fragment() {
 	float patch = (cell - 0.5) * 0.055 * detail;
 	float surge = sin(surface_time * 0.8 + dot(phase, vec3(1.0, 1.0, 1.0))) * 0.12;
 	float foam = (1.0 - smoothstep(0.1, 0.6 + surge, depth)) * smoothstep(0.55, 0.85, cell) * detail;
+	// Eight- and sixteen-metre periods remain identical when origin_phase
+	// wraps at 128 m. The moving highlights suggest flow without moving the
+	// water mesh or changing the physical lake/sea level.
+	float cross_phase = dot(surface_position, vec3(0.0, 1.0, -1.0)) * (6.28318530718 / 16.0);
+	float flow_phase = dot(surface_position, vec3(1.0, 0.0, -1.0)) * (6.28318530718 / 8.0)
+		- surface_time * 0.85 + sin(cross_phase) * 0.32;
+	float streak = smoothstep(0.48, 0.94, sin(flow_phase));
+	float sea_current = (1.0 - clamp(UV.y, 0.0, 1.0)) * current_strength * detail;
+	float current_glint = streak * sea_current * smoothstep(0.12, 1.2, depth)
+		* (1.0 - smoothstep(3.0, 7.0, depth));
+	foam += streak * sea_current * (1.0 - smoothstep(0.12, 0.8, depth)) * 0.23;
 	float facing = abs(dot(normalize(VIEW), normalize((VIEW_MATRIX * vec4(up, 0.0)).xyz)));
 	pigment = mix(pigment * (1.0 + patch), shallow_color, pow(1.0 - facing, 4.0) * 0.18);
 	if (!FRONT_FACING) {
 		water_normal = -water_normal;
 		foam = 0.0;
+		current_glint = 0.0;
 		pigment = mix(deep_color, shallow_color, 0.3);
 	}
 	NORMAL = normalize((VIEW_MATRIX * vec4(water_normal, 0.0)).xyz);
-	ALBEDO = mix(pigment, foam_color, foam * 0.35);
+	ALBEDO = mix(pigment + shallow_color * current_glint * 0.13, foam_color, foam * 0.35);
 	ROUGHNESS = 0.72;
 	SPECULAR = FRONT_FACING ? 0.12 : 0.0;
 }

@@ -1,0 +1,49 @@
+name: Weather forecast UI
+
+on:
+  pull_request:
+    paths:
+      - "world/weather/campaign_weather.gd"
+      - "world/weather/forecast_panel.gd"
+      - "tests/weather_forecast_ui_test.gd"
+      - "tests/weather_runtime_test.gd"
+      - "tools/review_weather_forecast.py"
+      - ".github/workflows/weather-forecast-validate.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: weather-forecast-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  forecast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [forward_plus, gl_compatibility]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install software renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Import and capture forecast
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          "$GODOT_BINARY" --headless --path . --import > /tmp/weather-forecast-import.log 2>&1
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_weather_forecast.py --godot "$GODOT_BINARY" --renderer "${{ matrix.renderer }}" --output /tmp/weather-forecast-review
+      - name: Upload pictures and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weather-forecast-${{ matrix.renderer }}
+          path: |
+            /tmp/weather-forecast-review
+            /tmp/weather-forecast-import.log
+          retention-days: 14

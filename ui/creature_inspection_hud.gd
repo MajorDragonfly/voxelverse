@@ -6,6 +6,7 @@ const ProgressStyle = preload("res://ui/progression_style.gd")
 const KeyHints = preload("res://core/input_preferences.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Reticle = preload("res://ui/discovery/scan_reticle.gd")
+const Text = preload("res://core/localization/ui_text.gd")
 # Retained scene property for compatibility with existing player scenes.
 @export_range(3, 12, 1) var maximum_listed_creatures: int = 6
 var _player: Node
@@ -98,7 +99,8 @@ func _process(_delta: float) -> void:
 		return
 	var enabled: bool = _scanner.active()
 	var target: Node = _scanner.target if is_instance_valid(_scanner.target) else null
-	_panel.visible = enabled and target != null and _scanner.known
+	var nest: bool = target != null and target.is_in_group(&"wildlife_nest")
+	_panel.visible = enabled and target != null and _scanner.known and not nest
 	_reticle.visible = enabled
 	_scan_label.visible = enabled
 	if not enabled:
@@ -109,6 +111,8 @@ func _process(_delta: float) -> void:
 	_reticle.queue_redraw()
 	if target == null:
 		_scan_label.text = "Ziele auf eine Kreatur in deiner Nähe."
+	elif nest:
+		_scan_label.text = tr("LIVING_NEST_AIMED") if _scanner.known else tr("LIVING_NEST_SCANNING") % floori(_scanner.ratio() * 100.0)
 	elif _scanner.known:
 		_scan_label.text = KeyHints.hint("BIND_SCAN_RECOGNIZED")
 		_show_target(target)
@@ -139,6 +143,9 @@ func _show_target(target: Node) -> void:
 	)
 	var life_state: String = "TOT" if not bool(data.get("alive", true)) else "LEBEND"
 	_detail.text = "%s\n%.1f m · %s\n%s" % [str(data.get("name", "Unknown Creature")), distance, life_state, diet_text]
+	var behavior: String = str(data.get("ai_description", ""))
+	if not behavior.is_empty():
+		_detail.text += "\n" + Text.format_text("HUD_CREATURE_BEHAVIOR", {"state": behavior})
 	_stats.health.text = "%d/%d" % [roundi(float(data.get("health", 0))), roundi(float(data.get("maximum_health", 0)))]
 	for metric: String in ["speed", "attack", "defense"]:
 		_stats[metric].text = "%.1f" % float(data.get(metric, 0))

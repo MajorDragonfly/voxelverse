@@ -171,6 +171,8 @@ func get_scan_target() -> Node3D:
 	if hit.is_empty():
 		return null
 	var creature: Node = _resolve_interaction_target(hit.get("collider"))
+	if creature is Node3D and creature.is_in_group(&"wildlife_nest"):
+		return creature if global_position.distance_to(creature.global_position) <= inspection_radius else null
 	if not creature is Node3D or not creature.is_in_group(&"wildlife") or not creature.has_method("get_inspection_data"):
 		return null
 	if bool(creature.get("is_dead")) or global_position.distance_to(creature.global_position) > inspection_radius:
@@ -304,6 +306,7 @@ func _resolve_interaction_target(collider_value: Variant) -> Node:
 			current.has_method("receive_creature_attack")
 			or current.has_method("interact")
 			or current.is_in_group(&"wildlife")
+			or current.is_in_group(&"wildlife_nest")
 		):
 			return current
 		current = current.get_parent()
