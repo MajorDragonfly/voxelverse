@@ -43,6 +43,7 @@ func _capture() -> void:
 	plane.material_override = floor_mat
 	stage.add_child(plane)
 	var actors: Array[Preview] = []
+	var mounts: Array[Node3D] = []
 	var emotions: Array[RefCounted] = []
 	for pairs in [1, 2, 3]:
 		var design: Dictionary = Assembly.create_default()
@@ -54,6 +55,7 @@ func _capture() -> void:
 		var mount := Node3D.new()
 		mount.position.x = (pairs - 2) * 3.8
 		stage.add_child(mount)
+		mounts.append(mount)
 		var actor := Preview.new()
 		mount.add_child(actor)
 		actor.set_editor_state(design, -1, -1, false)
@@ -66,10 +68,10 @@ func _capture() -> void:
 		emotions.append(emotion)
 	var camera := Camera3D.new()
 	stage.add_child(camera)
-	camera.position = Vector3(5.8, 3.9, 10.4)
+	camera.position = Vector3(3.8, 3.2, 10.0)
 	camera.look_at(Vector3(0, 0.9, 0))
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera.size = 12.5
+	camera.size = 8.4
 	var title := Label.new()
 	title.position = Vector2(20, 18)
 	title.add_theme_font_size_override("font_size", 23)
@@ -82,6 +84,9 @@ func _capture() -> void:
 		title.text = "Voxelverse · 2 / 4 / 6 Beine · " + LABELS[phase]
 		var start: int = Time.get_ticks_usec()
 		for index in range(actors.size()):
+			var social: bool = intent.begins_with("play_")
+			var facing: float = (-1.0 if index == 0 else 1.0) if social else 0.0
+			mounts[index].rotation.y = lerp_angle(mounts[index].rotation.y, facing, 1.0 - exp(-4.5 / 30.0))
 			var mode: String = "run" if intent == "flee" else "walk" if intent in ["social", "play_play"] else "idle"
 			actors[index].set_motion(mode)
 			actors[index].set_process(false)
