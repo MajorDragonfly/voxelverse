@@ -76,7 +76,9 @@ func _run() -> void:
 		_expect(paused and panel._owns_pause, "Language released pause")
 		_expect(panel._buttons.wood.text == ("Gather wood" if language == "en" else "Holz sammeln"), "Order label not translated")
 		_expect(panel._jobs.get_item_text(2) == ("Woodworker" if language == "en" else "Holzarbeiter"), "Profession not translated")
-		_expect(panel._stock.text.begins_with("TRIBE" if language == "en" else "STAMM"), "Stock not translated")
+		_expect(panel._stock.text.begins_with("Village storage" if language == "en" else "Lager am Dorfplatz"), "Storage heading not translated")
+		_expect(panel._stock.tooltip_text.begins_with("TRIBE" if language == "en" else "STAMM"), "Storage detail not translated")
+		_expect(panel._stock_labels.wood.text.begins_with("wood " if language == "en" else "Holz "), "Resource strip not translated")
 		_expect(panel._residents.get_child(0).text.begins_with("TRIBE_BOOK {count} · "), "Literal resident name translated or interpolated")
 		_expect(("Order saved for 3 residents" if language == "en" else "Auftrag für 3 Bewohner gespeichert") in panel._message.text, "Receipt did not change language")
 		for mapping: Dictionary in [Presentation.ORDERS, Presentation.JOBS, Presentation.RESOURCES, Presentation.ACTIVITIES, Presentation.PROJECTS, Presentation.LEGACY]:
