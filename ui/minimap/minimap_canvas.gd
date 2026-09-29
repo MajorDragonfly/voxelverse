@@ -1,6 +1,7 @@
 extends Control
 ## Screen-only drawing. Coordinates arrive in metres in a body-local map frame.
 const Style = preload("res://ui/progression_style.gd")
+signal heading_requested(direction: Vector2)
 var terrain: RefCounted
 var position_m := Vector2.ZERO
 var direction := Vector2.UP
@@ -12,7 +13,16 @@ func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	clip_contents = true
 	tooltip_text = "Norden ist oben. Dreieck: Blickrichtung · Haus: Heimat · Punkte: eigene Gruppe.\nTasten + / −: Kartenmaßstab ändern."
-	gui_input.connect(func(_event: InputEvent) -> void: accept_event())
+	gui_input.connect(_map_input)
+
+func _map_input(event: InputEvent) -> void:
+	accept_event()
+	if not group_view or not event is InputEventMouseButton or not event.pressed or event.button_index != MOUSE_BUTTON_LEFT:
+		return
+	if not map_rect().has_point(event.position): return
+	var offset: Vector2 = event.position - screen_point(position_m)
+	if offset.length() < 12.0: return # The separate center button moves the focus.
+	heading_requested.emit(offset.normalized())
 
 func map_rect() -> Rect2:
 	# A short HUD window may reduce height; do not stretch distances or headings.
@@ -54,7 +64,13 @@ func _draw() -> void:
 	if area.has_point(center):
 		var heading: Vector2 = direction if direction.length_squared() > 0.1 else Vector2.UP
 		var side := Vector2(-heading.y, heading.x)
-		if group_view: draw_arc(center, 7, 0, TAU, 20, Color.WHITE, 1.5)
+		if group_view:
+			var left: Vector2 = heading.rotated(-deg_to_rad(25.0)) * 25.0
+			var right: Vector2 = heading.rotated(deg_to_rad(25.0)) * 25.0
+			draw_colored_polygon(PackedVector2Array([center, center + left, center + right]), Color(0.48, 0.83, 0.95, 0.22))
+			draw_line(center, center + left, Color("91d9e8"), 1.5)
+			draw_line(center, center + right, Color("91d9e8"), 1.5)
+			draw_arc(center, 7, 0, TAU, 20, Color.WHITE, 1.5)
 		else:
 			draw_colored_polygon(PackedVector2Array([center + heading * 9, center - heading * 5 + side * 5, center - heading * 2, center - heading * 5 - side * 5]), Color("ffffff"))
 	# The bar is one quarter of the full width, in the same projection as terrain.
