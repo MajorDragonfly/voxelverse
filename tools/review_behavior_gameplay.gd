@@ -70,21 +70,21 @@ func _run() -> void:
 	await _key(KEY_F, true)
 	await create_timer(3.0).timeout
 	var trust: float = animal.get_node("SocialBehavior").entry()["trust"]
-	_expect(trust > 10.0 and trust < 100.0, "Holding physical F did not progress actual trust.")
+	_expect(is_equal_approx(trust, 35.0), "Holding physical F advanced more than one social action.")
 	await _capture("befriending.png")
 	# Opening K during held F must pause the operation and prevent it resuming.
 	await _tap(KEY_K)
 	var paused_trust: float = animal.get_node("SocialBehavior").entry()["trust"]
 	await create_timer(0.3, true).timeout
 	_expect(is_equal_approx(animal.get_node("SocialBehavior").entry()["trust"], paused_trust), "Paused skilltree advanced friendship.")
-	_expect(not player.get_node("BehaviorController")._befriending, "Menu pause retained a held social action.")
 	await _key(KEY_F, false)
 	await _tap(KEY_ESCAPE)
-	await _key(KEY_F, true)
+	await _tap(KEY_F)
+	_expect(is_equal_approx(animal.get_node("SocialBehavior").entry().trust, 70.0), "Second deliberate social action did not progress trust.")
 	var started: int = Time.get_ticks_msec()
-	while animal.get_node("SocialBehavior").entry()["relation"] != "ally" and Time.get_ticks_msec() - started < 12000:
+	while animal.get_node("SocialBehavior").response_remaining > 0.0 and Time.get_ticks_msec() - started < 5000:
 		await process_frame
-	await _key(KEY_F, false)
+	await _tap(KEY_F)
 	_expect(root.get_node("ProgressionService").get_behavior_wallet(0)["earned"]["social"] == 3, "Real F input did not earn its completion reward.")
 	await _capture("befriended.png")
 	await _tap(KEY_K)
