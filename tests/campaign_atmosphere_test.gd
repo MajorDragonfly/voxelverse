@@ -30,6 +30,17 @@ func _run() -> void:
 	var day_energy: float = air.sun.light_energy
 	var day_white: float = air.environment.tonemap_white
 	_expect(day_white > 1.0, "Daylight clips pale materials at the default white point.")
+	var first_sun: Vector3 = air._sun_direction
+	sample.seconds += Atmosphere.DAY_SECONDS * 0.5
+	air.update_view(0.1, true)
+	_expect(air._sun_direction.dot(first_sun) < -0.5 and air.sun.light_energy == 0.0,
+		"Campaign time did not move the sun to the home hemisphere's night side.")
+	_expect(air.sky_material.get_shader_parameter("sun_direction").is_equal_approx(air._sun_direction),
+		"Sky sun did not follow the real light.")
+	sample.seconds -= Atmosphere.DAY_SECONDS * 0.5
+	air.update_view(0.1, true)
+	_expect(air._sun_direction.is_equal_approx(first_sun) and is_equal_approx(air.sun.light_energy, day_energy),
+		"Returning to the saved time did not restore daylight deterministically.")
 	for up: Vector3 in [Vector3.UP, Vector3.DOWN, Vector3.LEFT, Vector3.RIGHT, Vector3.FORWARD, Vector3.BACK]:
 		sample.up = up
 		air.update_view(0.1, true)

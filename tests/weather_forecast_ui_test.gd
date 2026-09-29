@@ -3,6 +3,7 @@ const Forecast = preload("res://world/weather/forecast_panel.gd")
 const Notice = preload("res://world/weather/storm_preview_notice.gd")
 const Regional = preload("res://world/weather/regional_weather.gd")
 const Cube = preload("res://world/space/cube_sphere.gd")
+const Atmosphere = preload("res://world/visuals/atmosphere/campaign_atmosphere.gd")
 var failures: Array[String] = []
 var captures: String = ""
 
@@ -38,6 +39,18 @@ func _run() -> void:
 	_expect(values.size() == 3, "Model did not return three local forecast windows.")
 	var original: Array[Dictionary] = values.duplicate(true)
 	panel.present(weather, values, player)
+	await process_frame
+	await process_frame
+	_expect(panel._segments.size() == 4 and absf(panel._day_bar.value - Atmosphere.day_progress(580.0) * 100.0) < 0.05,
+		"Day/weather timeline does not read the supplied campaign snapshot.")
+	_expect(not panel._warning.visible, "Normal forecast displayed a storm warning.")
+	var later: Dictionary = weather.duplicate(true)
+	later.elapsed_seconds += 360.0
+	panel.present(later, values, player)
+	await process_frame
+	_expect(absf(panel._day_bar.value - Atmosphere.day_progress(940.0) * 100.0) < 0.05,
+		"Day marker did not advance with campaign time.")
+	panel.present(weather, values, player)
 	for language: String in ["de", "en"]:
 		root.get_node("LocaleManager")._apply(language)
 		for size: Vector2i in [Vector2i(800, 600), Vector2i(1280, 720), Vector2i(1920, 1080)]:
@@ -47,6 +60,8 @@ func _run() -> void:
 			_expect(panel._panel.visible, "Forecast missing in gameplay.")
 			_expect(("Wetter" if language == "de" else "Weather") in panel._title.text,
 				"Forecast title did not follow the selected language.")
+			_expect(("Tag" if language == "de" else "Day") in panel._day.text and ":" in panel._day.text,
+				"Day clock is untranslated or lacks a time.")
 			for index in range(3):
 				_expect("WEATHER_" not in panel._rows[index].text and str(index + 1) in panel._rows[index].text,
 					"Forecast row missing or untranslated.")
@@ -56,6 +71,12 @@ func _run() -> void:
 				_expect(label.get_line_count() == label.get_visible_line_count(), "Forecast text clipped.")
 			if not captures.is_empty(): await _capture("forecast-%dx%d-%s.png" % [size.x, size.y, language])
 		_expect(values == original, "Presentation changed the model's read-only forecast.")
+		var coming: Array[Dictionary] = values.duplicate(true)
+		coming[1].condition = "sandstorm"
+		panel.present(weather, coming, player)
+		_expect(panel._warning.visible and ("Sturm naht" if language == "de" else "Storm approaching") in panel._warning.text,
+			"A genuine upcoming storm has no visible warning.")
+		panel.present(weather, values, player)
 		var preview := weather.duplicate(true)
 		preview.merge({"preview": true, "storm_preview_schema": 1, "storm_kind": "sandstorm",
 			"storm_phase": "warning", "storm_phase_remaining": 23.0}, true)

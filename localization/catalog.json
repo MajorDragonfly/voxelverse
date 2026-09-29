@@ -8563,6 +8563,16 @@
       "en": "Weather · next 3 min"
     },
     {
+      "key": "WEATHER_DAY_CLOCK",
+      "de": "Tag {day} · {hour}:{minute}",
+      "en": "Day {day} · {hour}:{minute}"
+    },
+    {
+      "key": "WEATHER_STORM_APPROACHES",
+      "de": "⚠ Sturm naht · in {minutes} Min.",
+      "en": "⚠ Storm approaching · in {minutes} min"
+    },
+    {
       "key": "WEATHER_FORECAST_ROW",
       "de": "+{minutes} Min. · {condition} · Wind {wind} m/s",
       "en": "+{minutes} min · {condition} · wind {wind} m/s"
@@ -8601,6 +8611,26 @@
       "key": "WEATHER_FORECAST_SLEET",
       "de": "Schneeregen",
       "en": "Sleet"
+    },
+    {
+      "key": "WEATHER_FORECAST_SANDSTORM",
+      "de": "Sandsturm",
+      "en": "Sandstorm"
+    },
+    {
+      "key": "WEATHER_FORECAST_ASHSTORM",
+      "de": "Aschesturm",
+      "en": "Ash storm"
+    },
+    {
+      "key": "WEATHER_FORECAST_FIRESTORM",
+      "de": "Feuersturm",
+      "en": "Firestorm"
+    },
+    {
+      "key": "WEATHER_FORECAST_BLIZZARD",
+      "de": "Schneesturm",
+      "en": "Blizzard"
     },
     {
       "key": "WEATHER_FORECAST_UNKNOWN",

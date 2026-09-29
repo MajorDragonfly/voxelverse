@@ -5136,6 +5136,12 @@ msgstr "Sandstorm"
 msgid "WEATHER_FORECAST_TITLE"
 msgstr "Weather · next 3 min"
 
+msgid "WEATHER_DAY_CLOCK"
+msgstr "Day {day} · {hour}:{minute}"
+
+msgid "WEATHER_STORM_APPROACHES"
+msgstr "⚠ Storm approaching · in {minutes} min"
+
 msgid "WEATHER_FORECAST_ROW"
 msgstr "+{minutes} min · {condition} · wind {wind} m/s"
 
@@ -5159,6 +5165,18 @@ msgstr "Snow"
 
 msgid "WEATHER_FORECAST_SLEET"
 msgstr "Sleet"
+
+msgid "WEATHER_FORECAST_SANDSTORM"
+msgstr "Sandstorm"
+
+msgid "WEATHER_FORECAST_ASHSTORM"
+msgstr "Ash storm"
+
+msgid "WEATHER_FORECAST_FIRESTORM"
+msgstr "Firestorm"
+
+msgid "WEATHER_FORECAST_BLIZZARD"
+msgstr "Blizzard"
 
 msgid "WEATHER_FORECAST_UNKNOWN"
 msgstr "Unknown"
