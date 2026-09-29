@@ -25,11 +25,30 @@ Szenenlaufzeitwerte und keine Behauptung, dass sie im selben Frame wie ein
 bestimmtes Rohsample auftraten. Sie grenzen den nächsten Optimierungsschritt auf
 den Laufzeit-Körperaufbau beim `add_child(actor)` ein.
 
-PT17-10 besitzt die aktuelle Laufzeitpose und Artikulation. Deren Integration
-und eine gemessene Optimierung des Kreaturenaufbaus sind nötig, bevor PT17-01
-als behoben gelten kann. Diese Lieferung verändert keine Sichtweite,
-Kreaturenanzahl, Kollision oder Speicherdaten. Die kurzen Headless-Routen sind
-keine Ziel-PC- oder 10-Minuten-Abnahme.
+## Begrenzte Laufzeitkorrektur
+
+Die Tier-Vorschau baute beim Einhängen in die Szene zuerst einen Standardkörper
+und danach den gespeicherten Körper. Der Spawner setzt nun den vorhandenen
+Blueprint vor `_ready()`. Damit entsteht nur der gespeicherte Körper; ein
+Regressionstest prüft Anzahl, Geometrie und Farben. Im Voxelkörper werden
+unveränderliche Farbwerte einmal statt für jede Zelle aus dem Blueprint gelesen;
+drei generierte Körper hatten vor und nach dieser Änderung identische Mesh-Arrays
+und belegte Voxel.
+
+Ein kurzer Headless-Vergleich mit gleichem Rezept und Replay zeigte beim
+Tier-Aktivierungsmaximum im ersten Zyklus 215,7 → 182,5 ms, nach Laden
+176,9 → 99,9 ms. Der geladene Hinweg hatte p99 204,2 → 134,8 ms und
+13 → 10 Frames über 100 ms. Der erste Hinweg blieb uneinheitlich:
+p95 47,6 → 54,6 ms und 20 → 24 Frames über 100 ms, obwohl p99
+242,1 → 219,3 ms sank. Die kurzen Softwareläufe schwanken; daraus folgt
+keine allgemeine Leistungsfreigabe. Eine weitere Phasenmessung fand bis zu
+95,7 ms bei der erstmaligen Regionsgenerierung und 38,0 ms für Nester.
+
+PT17-10 besitzt die aktuelle Laufzeitpose und Artikulation. Diese Änderung
+bleibt im Spawner und in der unveränderten Geometrieerzeugung; die gemeinsame
+Animation muss nach der Integration geprüft werden. Sichtweite,
+Kreaturenanzahl, Kollision und Speicherdaten bleiben gleich. PT17-01 bleibt
+offen für die 10-Minuten-Messung und Vorher/Nachher-Abnahme auf dem Ziel-PC.
 
 ## Wiederholbarer Windows-Lauf
 

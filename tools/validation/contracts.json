@@ -189,6 +189,7 @@
       "tests": [
         "creature_behavior_gameplay_test",
         "wildlife_ai_test",
+        "wildlife_spawn_budget_test",
         "wildlife_ai_world_test",
         "wildlife_drinking_test",
         "wildlife_drinking_world_test",

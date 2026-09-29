@@ -46,9 +46,15 @@ var last_spawn_attempts: int = 0
 var peak_spawn_attempts: int = 0
 var max_spawn_attempt_ms: float = 0.0
 var max_spawn_stage_ms: Dictionary = {}
+var max_tick_stage_ms: Dictionary = {}
 
 func _record_spawn_stage(label: String, started: int) -> void:
 	max_spawn_stage_ms[label] = maxf(float(max_spawn_stage_ms.get(label, 0.0)), (Time.get_ticks_usec() - started) / 1000.0)
+
+func _record_tick_stage(label: String, started: int) -> int:
+	var now: int = Time.get_ticks_usec()
+	max_tick_stage_ms[label] = maxf(float(max_tick_stage_ms.get(label, 0.0)), (now - started) / 1000.0)
+	return now
 
 func body() -> Dictionary:
 	var state := get_node("/root/GameState")
@@ -84,6 +90,7 @@ func _process(delta: float) -> void:
 	max_frame_work_ms = maxf(max_frame_work_ms, (Time.get_ticks_usec() - started) / 1000.0)
 
 func _tick() -> void:
+	var stage_started: int = Time.get_ticks_usec()
 	var wanted: Dictionary = Model.Cells.nearby(descriptor, player.location())
 	var active_keys: Array = wanted.keys()
 	for record: Dictionary in records.values(): active_keys.append(Model.cell(descriptor, record.location).id)
@@ -109,11 +116,13 @@ func _tick() -> void:
 			"role": species.role, "blueprint": species.blueprint.duplicate(true), "catalog_species_id": species.id})
 		var food_id: String = id + ":food"
 		storage.put({"id": food_id, "location": _place_value(habitat.food_position), "food_key": food_id}, true)
+	stage_started = _record_tick_stage("pin_habitats", stage_started)
 	var keys: Array = wanted.keys()
 	if not keys.is_empty():
 		_generation_cursor %= keys.size()
 		_generate(wanted[keys[_generation_cursor]])
 		_generation_cursor += 1
+	stage_started = _record_tick_stage("generation", stage_started)
 	for id in animals.keys():
 		if not is_instance_valid(animals[id]): animals.erase(id); continue
 		if animals[id].global_position.distance_to(player.global_position) > ACTIVE_DISTANCE + 12.0 or _reserved(id):
@@ -122,6 +131,7 @@ func _tick() -> void:
 	for id in plants.keys():
 		if not is_instance_valid(plants[id]): plants.erase(id); continue
 		if plants[id].global_position.distance_to(player.global_position) > ACTIVE_DISTANCE + 12.0: _remove(plants, id)
+	stage_started = _record_tick_stage("retire", stage_started)
 	var candidates: Array[Dictionary] = []
 	var plant_candidates: Array[Dictionary] = []
 	for key in wanted:
@@ -133,9 +143,13 @@ func _tick() -> void:
 		for record: Dictionary in region.plants.values():
 			if not plants.has(record.id) and plants.size() < MAX_PLANTS and Space.resolve(self, record.location).distance_to(player.global_position) < ACTIVE_DISTANCE:
 				plant_candidates.append(record)
+	stage_started = _record_tick_stage("candidates", stage_started)
 	_prioritize_catalog(candidates)
+	stage_started = _record_tick_stage("prioritize", stage_started)
 	_spawn_candidates(candidates, plant_candidates)
+	stage_started = _record_tick_stage("spawn", stage_started)
 	_sync_nests(wanted)
+	_record_tick_stage("nests", stage_started)
 	peak_animals = maxi(peak_animals, animals.size())
 
 func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Dictionary]) -> void:

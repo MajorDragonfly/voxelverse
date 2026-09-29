@@ -284,6 +284,7 @@ func _world_snapshot() -> Dictionary:
 		"flora_work_max_ms": flora.max_frame_work_ms, "population_work_max_ms": population.max_frame_work_ms,
 		"population_spawn_max_ms": population.max_spawn_attempt_ms,
 		"population_spawn_stage_max_ms": population.max_spawn_stage_ms.duplicate(),
+		"population_tick_stage_max_ms": population.max_tick_stage_ms.duplicate(),
 		"population_spawn_attempts": population.last_spawn_attempts,
 		"population_peak_spawn_attempts": population.peak_spawn_attempts,
 		"population_peak_animals": population.peak_animals,
