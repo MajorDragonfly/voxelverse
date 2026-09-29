@@ -92,6 +92,15 @@ func _run() -> void:
 	await _click(ui._purchase)
 	_expect(root.get_node("ProgressionService").get_behavior_wallet(0)["available"]["social"] == 1, "Real click did not purchase Offenheit with earned points.")
 	await _capture("earned_skill.png")
+	await _tap(KEY_ESCAPE)
+	await _spawn(91)
+	await _tap(KEY_F)
+	await create_timer(2.0).timeout
+	await _tap(KEY_F, true)
+	_expect(animal.get_node("SocialBehavior").entry().trust == 35.0 and animal._threat_timer > 0.0,
+		"Inappropriate playful gesture did not produce refusal without trust gain.")
+	await _capture("refused.png")
+	await _tap(KEY_K)
 	# Navigate the actual chapter strip or its compact keyboard popup.
 	if ui._phase_strip.visible:
 		ui._phase_buttons[1].grab_focus()
@@ -138,18 +147,19 @@ func _spawn(seed: int) -> void:
 	await _frames()
 
 
-func _key(code: int, pressed_value: bool) -> void:
+func _key(code: int, pressed_value: bool, shifted: bool = false) -> void:
 	var event := InputEventKey.new()
 	event.keycode = code
 	event.physical_keycode = code
 	event.pressed = pressed_value
+	event.shift_pressed = shifted
 	Input.parse_input_event(event)
 	await _frames()
 
 
-func _tap(code: int) -> void:
-	await _key(code, true)
-	await _key(code, false)
+func _tap(code: int, shifted: bool = false) -> void:
+	await _key(code, true, shifted)
+	await _key(code, false, shifted)
 
 
 func _click(control: Control) -> void:

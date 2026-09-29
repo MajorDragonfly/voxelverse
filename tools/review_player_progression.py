@@ -62,7 +62,7 @@ def main():
                 "skilltree_1600x900.png": (1600, 900), "skilltree_1280x720.png": (1280, 720),
                 "skilltree_800x900.png": (800, 900), "journal.png": (1600, 900)}
     if args.gameplay:
-        expected = {name + ".png": (1600, 900) for name in ["befriending", "befriended", "earned_skill", "tribe_preview", "helped"]}
+        expected = {name + ".png": (1600, 900) for name in ["befriending", "befriended", "earned_skill", "refused", "tribe_preview", "helped"]}
     elif args.development:
         expected = {name + ".png": (1600, 900) for name in ["development_empty", "development_saved", "tribe_wallet", "development_legacy"]}
         expected.update({name + ".png": (800, 900) for name in ["development_800x900", "tribe_800x900"]})
