@@ -3564,8 +3564,43 @@
     },
     {
       "key": "TRIBE_WORK_TAB",
-      "de": "Arbeitsplätze & Berufe",
-      "en": "Workplaces & professions"
+      "de": "Arbeitsgebiete & Berufe",
+      "en": "Work areas & professions"
+    },
+    {
+      "key": "RESOURCE_AREA_TITLE",
+      "de": "Arbeitsgebiet · {resource}",
+      "en": "Work area · {resource}"
+    },
+    {
+      "key": "RESOURCE_AREA_AMOUNT",
+      "de": "Am Vorkommen: {available} · im Lager: {stored}",
+      "en": "At source: {available} · in storage: {stored}"
+    },
+    {
+      "key": "RESOURCE_AREA_WORKERS",
+      "de": "Zugewiesene Sammler: {assigned}/{total}",
+      "en": "Assigned gatherers: {assigned}/{total}"
+    },
+    {
+      "key": "RESOURCE_AREA_ADD",
+      "de": "+ 1 Sammler",
+      "en": "+ 1 gatherer"
+    },
+    {
+      "key": "RESOURCE_AREA_REMOVE",
+      "de": "− 1 Sammler",
+      "en": "− 1 gatherer"
+    },
+    {
+      "key": "RESOURCE_AREA_ADD_HINT",
+      "de": "Wählt zuerst einen wartenden Bewohner. Ein laufender Transport oder Bauauftrag wird nicht unterbrochen.",
+      "en": "Chooses an idle resident first. Active transport and construction are left in place."
+    },
+    {
+      "key": "RESOURCE_AREA_NO_WORKER",
+      "de": "Kein verfügbarer Bewohner für dieses Arbeitsgebiet.",
+      "en": "No available resident for this work area."
     },
     {
       "key": "TRIBE_HUSBANDRY_TAB",
@@ -3679,8 +3714,8 @@
     },
     {
       "key": "TRIBE_GOAL_WELL",
-      "de": "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsplätze & Berufe.",
-      "en": "Food regrows · Build a well under Workplaces & professions."
+      "de": "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsgebiete & Berufe.",
+      "en": "Food regrows · Build a well under Work areas & professions."
     },
     {
       "key": "TRIBE_GOAL_SUPPLY",
@@ -9019,8 +9054,8 @@
     },
     {
       "key": "GUIDE_DETAIL_TRIBE_SUPPLY",
-      "de": "Die Versorgungsbefehle stehen unter „Arbeitsplätze & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab.",
-      "en": "Supply commands are under “Workplaces & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
+      "de": "Die Versorgungsbefehle stehen unter „Arbeitsgebiete & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab.",
+      "en": "Supply commands are under “Work areas & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
     },
     {
       "key": "GUIDE_STEP_TRIBE_TOOL",
@@ -9074,8 +9109,8 @@
     },
     {
       "key": "GUIDE_HINT_TRIBE_PROFESSION",
-      "de": "Wähle einen Bewohner und weise unter „Arbeitsplätze & Berufe“ einen Beruf zu.",
-      "en": "Select a resident and assign a profession under “Workplaces & professions”."
+      "de": "Wähle einen Bewohner und weise unter „Arbeitsgebiete & Berufe“ einen Beruf zu.",
+      "en": "Select a resident and assign a profession under “Work areas & professions”."
     },
     {
       "key": "GUIDE_DETAIL_TRIBE_PROFESSION",
@@ -9094,8 +9129,8 @@
     },
     {
       "key": "GUIDE_DETAIL_TRIBE_WORKPLACE",
-      "de": "Die fertigen Arbeitsplätze stehen unter „Arbeitsplätze & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen.",
-      "en": "Completed workplaces appear under “Workplaces & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
+      "de": "Die fertigen Arbeitsplätze stehen unter „Arbeitsgebiete & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen.",
+      "en": "Completed workplaces appear under “Work areas & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
     },
     {
       "key": "GUIDE_TRIBAL_TITLE",

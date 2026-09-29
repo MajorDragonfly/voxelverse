@@ -238,6 +238,33 @@ func _run() -> void:
 		await _click(tribe.panel._residents.get_child(1))
 		_expect(tribe.selected == [str(tribe.village()["members"][1]["id"])], "New campaign's resident buttons still select the former campaign's IDs.")
 		_expect(tribe.panel._resident_detail.visible and tribe.panel._resident_name.text == tribe.village()["members"][1]["name"], "Resident detail retained the former campaign's identity.")
+		var source: Dictionary = tribe.village().deposits.wood
+		var location: Vector3 = GameplaySpace.resolve(tribe, source.position)
+		var source_point: Vector2 = tribe.camera.unproject_position(location + GameplaySpace.up(tribe, location) * 2.3)
+		_expect(tribe.resource_at(source_point).get("id", "") == source.id, "Visible wood source is not inspectable.")
+		await _world_click(source_point, MOUSE_BUTTON_LEFT)
+		_expect(tribe.panel._tabs.get_current_tab_control() == tribe.panel._work_page and tribe.panel._resource_area.visible
+			and tribe.panel._resource_area.source_id == source.id
+			and str(source.remaining) in tribe.panel._resource_area._amount.text,
+			"World click did not reveal the canonical source amount in the work area.")
+		var previous_size: Vector2i = root.size
+		var display: Node = root.get_node("DisplaySettings")
+		var previous_scale: float = display.ui_scale
+		root.size = Vector2i(800, 600)
+		display.ui_scale = 1.5
+		await _frames(4)
+		tribe.panel._scroll.ensure_control_visible(tribe.panel._resource_area._add)
+		await _frames(3)
+		_expect(_physical_rect(tribe.panel._hud).has_point(_physical_rect(tribe.panel._resource_area._add).get_center()),
+			"Work-area assignment cannot be reached at 800×600 with large UI text.")
+		root.size = previous_size
+		display.ui_scale = previous_scale
+		await _frames(4)
+		await _click(tribe.panel._resource_area._add)
+		_expect(tribe.resource_details(source.id).assigned == 1 and Model.validate(tribe.village(), tribe.body(), state.campaign.data).is_empty(),
+			"Adding a gatherer did not commit one valid work assignment.")
+		await _click(tribe.panel._resource_area._remove)
+		_expect(tribe.resource_details(source.id).assigned == 0, "Removing a gatherer left the work area assigned.")
 	else:
 		_expect(false, "Second campaign cannot enter its own tribe.")
 	await _cleanup()

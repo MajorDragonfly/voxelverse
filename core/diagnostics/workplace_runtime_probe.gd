@@ -67,6 +67,14 @@ func _run() -> void:
 	var first: String = data.economy.stations.forester.id
 	var second: String = data.economy.stations["forester:2"].id
 	_expect(first != second and E.next_station(data, "forester").is_empty(), "Instance IDs or limit failed.")
+	var second_area: Dictionary = tribe.resource_details(second)
+	_expect(second_area.station and second_area.remaining == data.economy.stations["forester:2"].remaining,
+		"Placed work area did not show its own canonical available amount.")
+	var prior_workers: int = int(second_area.assigned)
+	_expect(tribe.adjust_resource_workers(second, 1) and tribe.resource_details(second).assigned == prior_workers + 1,
+		"Adding one gatherer did not bind the placed work area.")
+	_expect(tribe.adjust_resource_workers(second, -1) and tribe.resource_details(second).assigned == prior_workers,
+		"Removing one gatherer did not leave the placed work area.")
 	var before: Dictionary = data.duplicate(true)
 	_expect(not tribe.issue_order("forester", positions[1]) and tribe.village() == before, "Third workplace was accepted.")
 	# Obtain work through the actual buttons. Assignment must preserve controls

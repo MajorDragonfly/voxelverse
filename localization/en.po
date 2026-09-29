@@ -2137,7 +2137,28 @@ msgid "TRIBE_SPEED_HINT"
 msgstr "Village simulation speed (1×, 2× or 3×). Space also pauses."
 
 msgid "TRIBE_WORK_TAB"
-msgstr "Workplaces & professions"
+msgstr "Work areas & professions"
+
+msgid "RESOURCE_AREA_TITLE"
+msgstr "Work area · {resource}"
+
+msgid "RESOURCE_AREA_AMOUNT"
+msgstr "At source: {available} · in storage: {stored}"
+
+msgid "RESOURCE_AREA_WORKERS"
+msgstr "Assigned gatherers: {assigned}/{total}"
+
+msgid "RESOURCE_AREA_ADD"
+msgstr "+ 1 gatherer"
+
+msgid "RESOURCE_AREA_REMOVE"
+msgstr "− 1 gatherer"
+
+msgid "RESOURCE_AREA_ADD_HINT"
+msgstr "Chooses an idle resident first. Active transport and construction are left in place."
+
+msgid "RESOURCE_AREA_NO_WORKER"
+msgstr "No available resident for this work area."
 
 msgid "TRIBE_HUSBANDRY_TAB"
 msgstr "Animal husbandry"
@@ -2206,7 +2227,7 @@ msgid "TRIBE_GOAL_GARDEN"
 msgstr "Your village is ready · Plant a root garden for a steady food supply."
 
 msgid "TRIBE_GOAL_WELL"
-msgstr "Food regrows · Build a well under Workplaces & professions."
+msgstr "Food regrows · Build a well under Work areas & professions."
 
 msgid "TRIBE_GOAL_SUPPLY"
 msgstr "Secure food and water · Forestry, quarry and fiber bed expand your resource supply."
@@ -5410,7 +5431,7 @@ msgid "GUIDE_HINT_TRIBE_SUPPLY"
 msgstr "Gather food, then let a hungry resident “Eat now”."
 
 msgid "GUIDE_DETAIL_TRIBE_SUPPLY"
-msgstr "Supply commands are under “Workplaces & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
+msgstr "Supply commands are under “Work areas & professions”. Food and water are actually consumed. Working residents meet their needs automatically when supplies are available and keep their orders. Build a well to obtain water. Full needs bars or empty stores do not complete this step."
 
 msgid "GUIDE_STEP_TRIBE_TOOL"
 msgstr "Make a stone tool"
@@ -5443,7 +5464,7 @@ msgid "GUIDE_STEP_TRIBE_PROFESSION"
 msgstr "Assign a profession"
 
 msgid "GUIDE_HINT_TRIBE_PROFESSION"
-msgstr "Select a resident and assign a profession under “Workplaces & professions”."
+msgstr "Select a resident and assign a profession under “Work areas & professions”."
 
 msgid "GUIDE_DETAIL_TRIBE_PROFESSION"
 msgstr "A profession is a lasting responsibility, such as woodworker or provider. An individual order can temporarily replace that work. The profession remains visible on the resident card. It does not yet bind the resident to a specific workplace."
@@ -5455,7 +5476,7 @@ msgid "GUIDE_HINT_TRIBE_WORKPLACE"
 msgstr "Build a forestry station or well and assign selected residents using its workplace row."
 
 msgid "GUIDE_DETAIL_TRIBE_WORKPLACE"
-msgstr "Completed workplaces appear under “Workplaces & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
+msgstr "Completed workplaces appear under “Work areas & professions”. Each row shows ready goods and assigned residents. Assignment sets the matching order and binds it to that site. A normal gathering order removes that binding. Unreachable workplaces are rejected."
 
 msgid "GUIDE_TRIBAL_TITLE"
 msgstr "YOUR VILLAGE, STEP BY STEP"

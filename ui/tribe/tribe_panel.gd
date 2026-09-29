@@ -60,6 +60,7 @@ var _build_page: VBoxContainer
 var _work_page: VBoxContainer
 var _workplaces: VBoxContainer
 var _construction: VBoxContainer
+var _resource_area: VBoxContainer
 var _hud_scroll: ScrollContainer:
 	get: return _scroll
 var _orders_scroll: ScrollContainer:
@@ -205,8 +206,11 @@ func _build() -> void:
 	_build_page.name = "Bauen"
 	_build_page.add_child(_construction)
 	_work_page = VBoxContainer.new()
-	_work_page.name = "Arbeitsplätze & Berufe"
+	_work_page.name = "Arbeitsgebiete & Berufe"
 	_tabs.add_child(_work_page)
+	_resource_area = preload("res://ui/tribe/resource_area_panel.gd").new()
+	_resource_area.controller = controller
+	_work_page.add_child(_resource_area)
 	_work_page.add_child(_supply)
 	_neighbors = Neighbors.new()
 	_neighbors.controller = controller
@@ -474,6 +478,7 @@ func refresh() -> void:
 	if data.is_empty():
 		return
 	_construction.refresh(data)
+	_resource_area.refresh(data)
 	_refresh_speed_controls()
 	_guidance_row.visible = not _guidance_text.is_empty() and not _collapsed
 	_goal.visible = _tabs.get_current_tab_control() == _orders_page and not _guidance_row.visible
@@ -683,8 +688,12 @@ func _finish_selection(event: InputEventMouseButton) -> void:
 	if click:
 		rect = Rect2(event.position - Vector2(22, 32), Vector2(44, 64))
 	var resident_hit: bool = controller.screen_select(rect, event.shift_pressed)
-	if click and not resident_hit and not event.shift_pressed and controller.project_at(event.position):
-		open_construction()
+	if click and not resident_hit and not event.shift_pressed:
+		if controller.project_at(event.position):
+			open_construction()
+		else:
+			var source: Dictionary = controller.resource_at(event.position)
+			if not source.is_empty(): open_resource_area(source.id)
 	_dragging = false
 	_selection.hide()
 
@@ -697,6 +706,17 @@ func open_construction() -> void:
 func _scroll_to_construction() -> void:
 	if _construction.is_visible_in_tree():
 		_scroll.ensure_control_visible(_construction.get_child(0) as Control)
+
+func open_resource_area(identity: String) -> void:
+	_resource_area.select_source(identity)
+	_collapsed = false
+	_tabs.current_tab = _tabs.get_tab_idx_from_control(_work_page)
+	refresh()
+	call_deferred("_scroll_to_resource_area")
+
+func _scroll_to_resource_area() -> void:
+	if _resource_area.is_visible_in_tree():
+		_scroll.ensure_control_visible(_resource_area.get_child(0) as Control)
 
 func _exit_tree() -> void:
 	if _owns_pause:

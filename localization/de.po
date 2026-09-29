@@ -2137,7 +2137,28 @@ msgid "TRIBE_SPEED_HINT"
 msgstr "Geschwindigkeit der Dorfsimulation (1×, 2× oder 3×). Leertaste pausiert ebenfalls."
 
 msgid "TRIBE_WORK_TAB"
-msgstr "Arbeitsplätze & Berufe"
+msgstr "Arbeitsgebiete & Berufe"
+
+msgid "RESOURCE_AREA_TITLE"
+msgstr "Arbeitsgebiet · {resource}"
+
+msgid "RESOURCE_AREA_AMOUNT"
+msgstr "Am Vorkommen: {available} · im Lager: {stored}"
+
+msgid "RESOURCE_AREA_WORKERS"
+msgstr "Zugewiesene Sammler: {assigned}/{total}"
+
+msgid "RESOURCE_AREA_ADD"
+msgstr "+ 1 Sammler"
+
+msgid "RESOURCE_AREA_REMOVE"
+msgstr "− 1 Sammler"
+
+msgid "RESOURCE_AREA_ADD_HINT"
+msgstr "Wählt zuerst einen wartenden Bewohner. Ein laufender Transport oder Bauauftrag wird nicht unterbrochen."
+
+msgid "RESOURCE_AREA_NO_WORKER"
+msgstr "Kein verfügbarer Bewohner für dieses Arbeitsgebiet."
 
 msgid "TRIBE_HUSBANDRY_TAB"
 msgstr "Tierhaltung"
@@ -2206,7 +2227,7 @@ msgid "TRIBE_GOAL_GARDEN"
 msgstr "Dein Dorf steht · Lege einen Wurzelgarten für dauerhafte Nahrung an."
 
 msgid "TRIBE_GOAL_WELL"
-msgstr "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsplätze & Berufe."
+msgstr "Nahrung wächst nach · Baue einen Brunnen unter Arbeitsgebiete & Berufe."
 
 msgid "TRIBE_GOAL_SUPPLY"
 msgstr "Nahrung und Wasser sichern · Forstplatz, Steinbruch und Faserbeet erweitern die Rohstoffversorgung."
@@ -5410,7 +5431,7 @@ msgid "GUIDE_HINT_TRIBE_SUPPLY"
 msgstr "Sammle Nahrung und lasse einen hungrigen Bewohner „Jetzt essen“."
 
 msgid "GUIDE_DETAIL_TRIBE_SUPPLY"
-msgstr "Die Versorgungsbefehle stehen unter „Arbeitsplätze & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab."
+msgstr "Die Versorgungsbefehle stehen unter „Arbeitsgebiete & Berufe“. Nahrung und Wasser werden wirklich verbraucht. Arbeitende Bewohner versorgen sich bei Bedarf selbst, wenn Vorräte da sind, und behalten ihren Auftrag. Für Wasser baust du zuerst einen Brunnen. Volle Bedürfnisleisten oder leere Vorräte schließen diesen Schritt nicht ab."
 
 msgid "GUIDE_STEP_TRIBE_TOOL"
 msgstr "Ein Steinwerkzeug herstellen"
@@ -5443,7 +5464,7 @@ msgid "GUIDE_STEP_TRIBE_PROFESSION"
 msgstr "Einen Beruf zuweisen"
 
 msgid "GUIDE_HINT_TRIBE_PROFESSION"
-msgstr "Wähle einen Bewohner und weise unter „Arbeitsplätze & Berufe“ einen Beruf zu."
+msgstr "Wähle einen Bewohner und weise unter „Arbeitsgebiete & Berufe“ einen Beruf zu."
 
 msgid "GUIDE_DETAIL_TRIBE_PROFESSION"
 msgstr "Ein Beruf ist die dauerhafte Zuständigkeit, etwa Holzarbeiter oder Versorger. Ein einzelner Auftrag kann diese Arbeit vorübergehend ersetzen. Der Beruf bleibt auf der Bewohnerkarte sichtbar. Er ist noch keine Bindung an einen bestimmten Arbeitsplatz."
@@ -5455,7 +5476,7 @@ msgid "GUIDE_HINT_TRIBE_WORKPLACE"
 msgstr "Baue einen Forstplatz oder Brunnen und ordne ausgewählte Bewohner über dessen Arbeitsplatzzeile zu."
 
 msgid "GUIDE_DETAIL_TRIBE_WORKPLACE"
-msgstr "Die fertigen Arbeitsplätze stehen unter „Arbeitsplätze & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen."
+msgstr "Die fertigen Arbeitsplätze stehen unter „Arbeitsgebiete & Berufe“. Ihre Zeile zeigt bereitliegende Ware und zugewiesene Bewohner. Die Zuordnung setzt den passenden Auftrag und bindet ihn an diesen Ort. Ein gewöhnlicher Sammelauftrag löst diese Bindung wieder. Nicht erreichbare Arbeitsplätze werden abgewiesen."
 
 msgid "GUIDE_TRIBAL_TITLE"
 msgstr "DEIN DORF SCHRITT FÜR SCHRITT"

@@ -404,6 +404,89 @@ func project_at(position: Vector2) -> bool:
 	var hit: Dictionary = ground_hit(position)
 	return not hit.is_empty() and hit.position.distance_to(site) < 5.0
 
+func resource_details(identity: String) -> Dictionary:
+	for site: Dictionary in _resource_sites():
+		if site.id != identity: continue
+		var assigned: int = 0
+		for member: Dictionary in village().members:
+			if _works_at_resource(member, site): assigned += 1
+		site.assigned = assigned
+		return site
+	return {}
+
+func _works_at_resource(member: Dictionary, site: Dictionary) -> bool:
+	if member.order != site.kind: return false
+	var assigned_id: String = str(member.get("workplace_id", ""))
+	return assigned_id == site.id or assigned_id.is_empty() and (not site.station or site.get("includes_base", false))
+
+func _resource_sites() -> Array[Dictionary]:
+	var data: Dictionary = village()
+	var result: Array[Dictionary] = []
+	if data.is_empty(): return result
+	for kind: String in data.deposits:
+		var primary: String = {"wood": "forester", "stone": "quarry", "water": "well", "fiber": "fiberbed"}.get(kind, "")
+		if kind in ["water", "fiber"] and not data.economy.stations.has(primary):
+			continue
+		if not primary.is_empty() and data.economy.stations.has(primary):
+			continue # The first station owns the same visible source.
+		var deposit: Dictionary = data.deposits[kind]
+		result.append({"id": deposit.id, "kind": kind, "position": deposit.position,
+			"remaining": int(deposit.remaining), "station": false})
+	for key: String in data.economy.stations:
+		var station: Dictionary = data.economy.stations[key]
+		result.append({"id": station.id, "kind": Economy.STATIONS[Economy.station_kind(key)],
+			"position": station.position, "remaining": int(Economy.station_source(data, key).remaining),
+			"station": true, "includes_base": key in Economy.STATIONS})
+	return result
+
+func resource_at(position: Vector2) -> Dictionary:
+	if not is_active() or not placement.is_empty() or not is_instance_valid(camera): return {}
+	var hit: Dictionary = ground_hit(position)
+	if hit.is_empty(): return {}
+	var best: Dictionary = {}
+	var nearest: float = INF
+	for site: Dictionary in _resource_sites():
+		var point: Vector3 = Space.resolve(self, site.position)
+		if camera.is_position_behind(point) or hit.position.distance_to(point) > 4.0: continue
+		var base: Vector2 = camera.unproject_position(point)
+		var span: Vector2 = camera.unproject_position(point + Space.up(self, point) * 2.3) - base
+		var t: float = clampf((position - base).dot(span) / maxf(span.length_squared(), 1.0), 0.0, 1.0)
+		var error: float = position.distance_to(base + span * t)
+		if error < 34.0 and error < nearest:
+			nearest = error
+			best = site
+	return best
+
+func adjust_resource_workers(identity: String, change: int) -> bool:
+	var site: Dictionary = resource_details(identity)
+	if not is_active() or site.is_empty() or change not in [-1, 1]: return false
+	var chosen: String = ""
+	if change > 0:
+		# Fill a free resident first; never steal a constructor or freight carrier.
+		for preferred: bool in [true, false]:
+			for member: Dictionary in village().members:
+				if SiteTransport.bound(body(), member.id) or member.construction_id != "" or member.cargo != "": continue
+				if _works_at_resource(member, site): continue
+				if (member.order in ["wait", "move"]) == preferred:
+					chosen = member.id
+					break
+			if not chosen.is_empty(): break
+	else:
+		for member: Dictionary in village().members:
+			if _works_at_resource(member, site) and not SiteTransport.bound(body(), member.id) and member.construction_id == "" and member.cargo == "":
+				chosen = member.id
+				break
+	if chosen.is_empty():
+		status = preload("res://core/localization/ui_text.gd").text("RESOURCE_AREA_NO_WORKER")
+		panel.refresh()
+		return false
+	var prior: Array[String] = selected.duplicate()
+	selected = [chosen]
+	var accepted: bool = issue_workplace(site.id) if change > 0 and site.station else issue_order(site.kind if change > 0 else "move", Vector3.ZERO if change > 0 else anchor())
+	selected = prior
+	panel.refresh()
+	return accepted
+
 func ground_hit(position: Vector2) -> Dictionary:
 	if not is_instance_valid(camera) or not is_instance_valid(player): return {}
 	var origin: Vector3 = camera.project_ray_origin(position)
