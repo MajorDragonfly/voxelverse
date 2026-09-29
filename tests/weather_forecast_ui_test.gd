@@ -72,11 +72,11 @@ func _run() -> void:
 		panel.present(weather, values, player)
 		notice.present({}, null)
 	paused = true
-	await process_frame
+	for index in range(3): await process_frame
 	_expect(not panel._panel.visible and not notice._panel.visible, "Pause left weather UI over a modal.")
 	paused = false
 	player.inspection_mode_enabled = true
-	await process_frame
+	for index in range(3): await process_frame
 	_expect(not panel._panel.visible, "Inspection left forecast on screen.")
 	player.inspection_mode_enabled = false
 	panel.present({}, [], null)
