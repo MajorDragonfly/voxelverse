@@ -398,12 +398,13 @@ func refresh() -> void:
 	_stock.text = Text.text("TRIBE_STORAGE_TITLE") + " · %d/%d" % [data["members"].size(), Housing.MAX_RESIDENTS]
 	_stock.tooltip_text = Text.format_text("TRIBE_STOCK", stock.merged({"eggs": stock.get("eggs", 0), "residents": data["members"].size(), "capacity": Housing.MAX_RESIDENTS, "beds": Housing.beds(data)}, true)) + "\n" + InventoryView.tooltip(data)
 	var inventory: Dictionary = InventoryView.rows(data)
+	var laying_site: bool = data["husbandry"]["pens"].any(func(pen: Dictionary) -> bool: return pen.get("kind") == "laying_site")
 	for kind: String in _stock_labels:
 		var row: Dictionary = inventory[kind]
 		var amount: Label = _stock_labels[kind]
 		amount.text = "%s %d" % [row.resource, row.stored]
 		amount.tooltip_text = InventoryView.detail(row)
-		amount.visible = kind in ["wood", "stone", "food", "water"] or row.stored > 0 or row.reserved > 0 or row.carried > 0 or row.pending > 0
+		amount.visible = kind in ["wood", "stone", "food", "water"] or (kind == "eggs" and laying_site) or row.stored > 0 or row.reserved > 0 or row.carried > 0 or row.pending > 0
 	_supply.text = Text.text("TRIBE_STORE_HINT")
 	if int(data["garden"]) == 1:
 		_supply.text = Text.format_text("TRIBE_GARDEN_STATUS", {"ready": data["deposits"]["food"]["remaining"], "growth": Text.text("TRIBE_GARDEN_FULL") if int(data["deposits"]["food"]["remaining"]) >= Model.GARDEN_CAPACITY else Text.format_text("TRIBE_GARDEN_NEXT", {"seconds": ceili(Model.GROW_SECONDS - float(data["growth"]))})})

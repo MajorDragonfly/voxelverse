@@ -76,7 +76,8 @@ func _run() -> void:
 			tribe.panel._hud_scroll.ensure_control_visible(control)
 			await _frames(3)
 			_expect(_physical_rect(tribe.panel._hud).has_point(_physical_rect(control).get_center()), "Egg action cannot be reached by scrolling: " + str(dimensions))
-	_expect(tribe.panel._stock.text.contains("Eier"), "Egg stock is absent from the shared HUD.")
+	var egg_stock: Label = tribe.panel._stock_labels["eggs"]
+	_expect(egg_stock.visible and egg_stock.text.contains("Eier"), "Egg stock is absent from the shared HUD.")
 	_expect(saves.save_now(), "Laying place did not save: " + saves.last_error)
 	if failures.is_empty(): print("EGG_HUSBANDRY_UI_PASSED: actual buttons, build, assignment, reuse, rollback and small-screen layout.")
 	await _cleanup()

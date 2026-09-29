@@ -181,7 +181,10 @@ func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Di
 		else:
 			_animal_cursor %= candidates.size()
 			spawned = _spawn_animal(candidates[_animal_cursor])
-			if not spawned: _animal_cursor += 1
+			# Sorting changes when a family gains a resident. Revisit its new
+			# highest-priority sibling on the next update; rotate only failures.
+			if spawned: _animal_cursor = 0
+			else: _animal_cursor += 1
 			animal_attempts += 1
 		_prefer_plant = not choose_plant
 		last_spawn_attempts += 1
@@ -192,16 +195,25 @@ func _spawn_candidates(candidates: Array[Dictionary], plant_candidates: Array[Di
 
 func _prioritize_catalog(candidates: Array[Dictionary]) -> void:
 	var represented: Dictionary = {}
+	var families: Dictionary = {}
 	for actor: Node in animals.values():
 		var species_id: String = str(actor.catalog_species.get("id", ""))
 		if not species_id.is_empty(): represented[species_id] = int(represented.get(species_id, 0)) + 1
+		var colony_id: String = str(actor.get("colony_id")) if actor.has_method("get_campaign_identity") else ""
+		if not colony_id.is_empty(): families[colony_id] = int(families.get(colony_id, 0)) + 1
 	var priority: Callable = func(record: Dictionary) -> int:
-		if not record.has("catalog_species_id"): return 2
 		var encounter: Dictionary = record.get("encounter", {})
-		if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0.0: return 2
-		return 1 if represented.has(record.catalog_species_id) else 0
+		if encounter.get("dead", false) and float(encounter.get("carcass_food", 0.0)) <= 0.0: return 3
+		if not record.has("catalog_species_id"): return 1
+		return 2 if represented.has(record.catalog_species_id) else 0
 	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		if priority.call(a) != priority.call(b): return priority.call(a) < priority.call(b)
+		if priority.call(a) == 1:
+			# Fill a visible family before spending the remaining bounded slots on
+			# another nest. The missing catalog role still always comes first.
+			var a_members: int = int(families.get(str(a.get("colony_id", "")), 0))
+			var b_members: int = int(families.get(str(b.get("colony_id", "")), 0))
+			if a_members != b_members: return a_members > b_members
 		return Space.resolve(self, a.location).distance_squared_to(player.global_position) < Space.resolve(self, b.location).distance_squared_to(player.global_position))
 	if animals.size() < MAX_ANIMALS or candidates.is_empty() or priority.call(candidates[0]) != 0: return
 	# A full old population must not starve the additive fourth role. Preserve
