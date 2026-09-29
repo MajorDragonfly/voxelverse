@@ -98,6 +98,8 @@ func social_status(data: Dictionary = {}) -> Dictionary:
 
 func befriend(actor: Node, delta: float = 0.1, playful: bool = false) -> Dictionary:
 	# One call is one deliberate action. Frame duration can never grow trust.
+	if get_node("/root/GameState").simulation_delta(1.0) <= 0.0:
+		return _failure("Die Welt ist gerade angehalten.")
 	if not can_reach(actor) or not is_finite(delta) or delta <= 0.0 or delta > 0.25:
 		return _failure("Komm näher und halte Sichtkontakt.")
 	var data: Dictionary = entry()

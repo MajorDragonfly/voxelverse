@@ -113,6 +113,11 @@ func _social_loop() -> void:
 	social = await _spawn(91)
 	_expect(social.befriend(player).ok and social.entry().trust == 35.0, "First deliberate action did not persist partial trust.")
 	_expect(not social.befriend(player).ok and social.entry().trust == 35.0, "Rapid input bypassed the animal response.")
+	_expect(state.set_simulation_speed(0.0), "Cannot pause simulation clock.")
+	social._process(10.0)
+	_expect(not social.befriend(player).ok and social.response_remaining > 0.0 and social.entry().trust == 35.0,
+		"Stopped simulation advanced the response or accepted an action.")
+	_expect(state.set_simulation_speed(1.0), "Cannot resume simulation clock.")
 	social._process(social.response_remaining + 0.01)
 	_expect(not social.befriend(player, 0.1, true).ok and social.entry().trust == 35.0 and wildlife._threat_timer > 0.0,
 		"Mismatched gesture did not trigger visible refusal without reward.")
