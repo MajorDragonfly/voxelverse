@@ -17,6 +17,10 @@ func setup(terrain: Node) -> void:
 	var slots: Dictionary = terrain.surface.terrain.material_slots
 	for material in ground:
 		material.shader = GROUND
+		material.set_shader_parameter("grass_color", slots.ground_base)
+		material.set_shader_parameter("dry_color", slots.ground_dry)
+		material.set_shader_parameter("coast_color", slots.coast)
+		material.set_shader_parameter("snow_color", terrain.surface.terrain.palette.snow)
 		material.set_shader_parameter("soil_color", slots.ground_dry.lerp(Color("71583d"), 0.6))
 		material.set_shader_parameter("rock_color", slots.rock_base)
 	for material in water:
