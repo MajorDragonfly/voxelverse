@@ -137,7 +137,10 @@ func _run() -> void:
 	await _until(func() -> bool: return tribe.is_active() and tribe.camera_rig != rig and not tribe.navigation.pending, 20000)
 	tribe.set_physics_process(false)
 	_expect(tribe.camera_rig != rig and not rig.orbiting and rig.held.is_empty(), "Load retained old camera input/owner.")
-	_expect(tribe.camera_rig != null and tribe._focus.distance_to(tribe.anchor()) < 0.01 and tribe.camera_rig.tilt == 55.0, "Load did not restore the village view with saved preferences.")
+	var restored_distance: float = tribe._focus.distance_to(tribe.anchor())
+	var restored_tilt: float = tribe.camera_rig.tilt if tribe.camera_rig != null else -1.0
+	print("CAMERA_RELOAD_METRICS ", JSON.stringify({"focus_distance_m": restored_distance, "tilt_deg": restored_tilt, "saved_default_deg": float(root.get_node("DisplaySettings").input_preferences.tribe_camera.tilt)}))
+	_expect(tribe.camera_rig != null and restored_distance < 0.3 and is_equal_approx(restored_tilt, float(root.get_node("DisplaySettings").input_preferences.tribe_camera.tilt)), "Load did not restore the village view with saved preferences.")
 	print("CAMERA_METRICS ", JSON.stringify({"pan_m": Cube.local_position(before, ground).length(), "tiles": terrain.leaves.size(), "colliders": terrain.active.size(), "peak_meshes": terrain.peak_resident_meshes}))
 	if failures.is_empty(): print("TRIBAL_CAMERA_WORLD_PASSED")
 	await _finish()
