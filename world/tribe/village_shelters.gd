@@ -5,6 +5,25 @@ const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
 var _signature: String = ""
 var _waiting_clear: Dictionary = {}
+const LABEL_HIDE_DISTANCE: float = 70.0
+const LABEL_SHOW_DISTANCE: float = 60.0
+var _captions: Dictionary = {}
+var _caption_clock: float = 0.0
+
+func _ready() -> void:
+	set_process(false)
+
+func _process(delta: float) -> void:
+	_caption_clock -= delta
+	if _caption_clock > 0.0: return
+	_caption_clock = 0.25
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if camera == null: return
+	for building: Node3D in _captions:
+		var label: Label3D = _captions[building]
+		var distance: float = camera.global_position.distance_to(building.global_position)
+		if label.visible and distance > LABEL_HIDE_DISTANCE: label.hide()
+		elif not label.visible and distance < LABEL_SHOW_DISTANCE: label.show()
 
 func sync(data: Dictionary, actors: Dictionary) -> void:
 	if Space.adapter(self) != null:
@@ -17,6 +36,7 @@ func sync(data: Dictionary, actors: Dictionary) -> void:
 		return
 	_signature = signature
 	_waiting_clear.clear()
+	_captions.clear()
 	for child: Node in get_children():
 		remove_child(child)
 		child.queue_free()
@@ -43,6 +63,9 @@ func sync(data: Dictionary, actors: Dictionary) -> void:
 		label.modulate = Color("edd5a8")
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		building.add_child(label)
+		_captions[building] = label
+	_caption_clock = 0.0
+	set_process(not _captions.is_empty())
 
 ## Shared by finished homes and the collision-free placement ghost.
 func add_model(building: Node3D, kind: String, with_collision: bool = true) -> void:
