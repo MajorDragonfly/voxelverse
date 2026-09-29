@@ -1,8 +1,8 @@
 extends RefCounted
 
-## Adds one depth channel to already sampled water; no additional height/noise
+## Adds depth and a lake mask to already sampled water; no additional height/noise
 ## calls, no added vertices/triangles and no displacement of the sea or floor.
-static func enrich(arrays: Dictionary, tile: Dictionary) -> Dictionary:
+static func enrich(arrays: Dictionary, tile: Dictionary, body_radius: float) -> Dictionary:
 	if arrays.water_arrays.is_empty():
 		return arrays
 	var land: PackedVector3Array = arrays.land_arrays[Mesh.ARRAY_VERTEX]
@@ -10,7 +10,11 @@ static func enrich(arrays: Dictionary, tile: Dictionary) -> Dictionary:
 	var uv := PackedVector2Array()
 	uv.resize(sea.size())
 	for index in range(sea.size()):
-		uv[index] = Vector2(_length(sea[index], tile.anchor) - _length(land[index], tile.anchor), 0.0)
+		var water_radius: float = _length(sea[index], tile.anchor)
+		# V2 freshwater sits above the global sea. Fade the current out at the
+		# basin rim using the surface vertices already prepared by the worker.
+		uv[index] = Vector2(water_radius - _length(land[index], tile.anchor),
+			smoothstep(0.1, 0.6, water_radius - body_radius))
 	arrays.water_arrays[Mesh.ARRAY_TEX_UV] = uv
 	return arrays
 

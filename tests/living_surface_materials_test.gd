@@ -47,7 +47,7 @@ func _run() -> void:
 			base_usec += Time.get_ticks_usec() - started
 			var enriched: Dictionary = original.duplicate(true)
 			started = Time.get_ticks_usec()
-			Depth.enrich(enriched, tile)
+			Depth.enrich(enriched, tile, float(body.radius))
 			depth_usec += Time.get_ticks_usec() - started
 			_expect(var_to_bytes(original.land_arrays) == var_to_bytes(enriched.land_arrays), "Presentation changed the physical terrain")
 			if not original.water_arrays.is_empty():
@@ -73,6 +73,20 @@ func _run() -> void:
 			count += 1
 	_expect(water_vertices > 2000 and max_depth_error < 0.001, "Depth no longer follows the actual spherical terrain")
 	_expect(max_phase_error < 0.0001, "Ground and water pattern slid during origin shift")
+	# Synthetic shallow sea and raised lake use only already prepared vertices.
+	var radius: float = 1000.0
+	var tile := {"anchor": [0.0, radius, 0.0]}
+	var water_arrays: Array = []
+	water_arrays.resize(Mesh.ARRAY_MAX)
+	water_arrays[Mesh.ARRAY_VERTEX] = PackedVector3Array([Vector3.ZERO, Vector3(0, 2, 0)])
+	var land_arrays: Array = []
+	land_arrays.resize(Mesh.ARRAY_MAX)
+	land_arrays[Mesh.ARRAY_VERTEX] = PackedVector3Array([Vector3(0, -2, 0), Vector3.ZERO])
+	var samples := {"water_arrays": water_arrays, "land_arrays": land_arrays}
+	Depth.enrich(samples, tile, radius)
+	var masks: PackedVector2Array = samples.water_arrays[Mesh.ARRAY_TEX_UV]
+	_expect(is_equal_approx(masks[0].x, 2.0) and is_zero_approx(masks[0].y), "Sea current mask or depth changed")
+	_expect(is_equal_approx(masks[1].x, 2.0) and is_equal_approx(masks[1].y, 1.0), "Raised lake received sea current")
 	print("SURFACE_MATERIAL_METRICS ", JSON.stringify({"patches": count, "water_vertices": water_vertices,
 		"max_depth_error_m": max_depth_error, "max_pattern_shift_m": max_phase_error,
 		"base_mesh_ms": base_usec / 1000.0, "depth_enrichment_ms": depth_usec / 1000.0}))

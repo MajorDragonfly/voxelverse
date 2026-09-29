@@ -62,6 +62,7 @@
         "living_planet_entry_test",
         "living_planet_test",
         "living_surface_materials_test",
+        "water_flow_visual_test",
         "living_lake_water_test",
         "planet_scale_migration_test",
         "planet_sphere_contract_test",
