@@ -140,16 +140,19 @@ func _render(surface: RefCounted, location: Dictionary, category: String, baseli
 		var distance: float = 12.0 if view == "near" else (45.0 if view == "middle" else 110.0)
 		_camera.look_at_from_position(up * (distance * 0.42) + frame.z * distance, up * 0.5, up)
 		var before: Image = await _capture(output, category + "_" + view + "_before")
-		var before_calls: int = RenderingServer.viewport_get_render_info(root.get_viewport_rid(), RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME)
+		var rid: RID = root.get_viewport_rid()
+		var before_calls: int = RenderingServer.viewport_get_render_info(rid, RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME)
+		var before_cpu: float = RenderingServer.viewport_get_measured_render_time_cpu(rid)
+		var before_gpu: float = RenderingServer.viewport_get_measured_render_time_gpu(rid)
 		for node: MeshInstance3D in meshes: node.material_override = candidate
 		var after: Image = await _capture(output, category + "_" + view + "_after")
-		var after_calls: int = RenderingServer.viewport_get_render_info(root.get_viewport_rid(), RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME)
+		var after_calls: int = RenderingServer.viewport_get_render_info(rid, RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE, RenderingServer.VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME)
 		if before_calls != after_calls: _failures.append("Material changed draw calls: " + category + "/" + view)
 		if before != null and after != null:
 			_report.samples.append({"category": category, "view": view, "distance_m": distance,
 				"mean_rgb_change": _difference(before, after), "draw_calls": after_calls,
-				"render_cpu_ms": RenderingServer.viewport_get_measured_render_time_cpu(root.get_viewport_rid()),
-				"render_gpu_ms": RenderingServer.viewport_get_measured_render_time_gpu(root.get_viewport_rid())})
+				"baseline_cpu_ms": before_cpu, "candidate_cpu_ms": RenderingServer.viewport_get_measured_render_time_cpu(rid),
+				"baseline_gpu_ms": before_gpu, "candidate_gpu_ms": RenderingServer.viewport_get_measured_render_time_gpu(rid)})
 		for node: MeshInstance3D in meshes: node.material_override = baseline
 	_scene.queue_free()
 	await process_frame

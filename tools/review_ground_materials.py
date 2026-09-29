@@ -44,7 +44,8 @@ def main():
         raise RuntimeError("Ground was not drawn in a review frame")
     print(json.dumps({"renderer": args.renderer, "views": len(samples),
                       "rgb_change": [round(sample["mean_rgb_change"], 5) for sample in samples],
-                      "draw_calls": [sample["draw_calls"] for sample in samples]}))
+                      "draw_calls": [sample["draw_calls"] for sample in samples],
+                      "gpu_ms_before_after": [[round(sample["baseline_gpu_ms"], 2), round(sample["candidate_gpu_ms"], 2)] for sample in samples]}))
 
 
 if __name__ == "__main__":
