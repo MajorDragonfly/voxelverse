@@ -41,7 +41,7 @@ def main():
         dimensions = struct.unpack(">II", data[16:24]) if data.startswith(b"\x89PNG") else None
         captured[name] = {"dimensions": dimensions, "passed": len(data) > 4096 and dimensions == expected}
     passed = (result.returncode == 0 and not ERROR.search(log)
-              and re.search(r"WEATHER_FORECAST_UI:.*True", log) is not None
+              and re.search(r"WEATHER_FORECAST_UI:.*\btrue\b", log, re.IGNORECASE) is not None
               and all(entry["passed"] for entry in captured.values()))
     (output / "review.json").write_text(json.dumps({"passed": passed, "renderer": args.renderer,
         "exit_code": result.returncode, "captures": captured}, indent=2) + "\n")
