@@ -8208,6 +8208,56 @@
       "en": "Sandstorm"
     },
     {
+      "key": "WEATHER_FORECAST_TITLE",
+      "de": "Wetter · nächste 3 Min.",
+      "en": "Weather · next 3 min"
+    },
+    {
+      "key": "WEATHER_FORECAST_ROW",
+      "de": "+{minutes} Min. · {condition} · Wind {wind} m/s",
+      "en": "+{minutes} min · {condition} · wind {wind} m/s"
+    },
+    {
+      "key": "WEATHER_FORECAST_CLEAR",
+      "de": "Klar",
+      "en": "Clear"
+    },
+    {
+      "key": "WEATHER_FORECAST_BREEZE",
+      "de": "Leicht bewölkt",
+      "en": "Partly cloudy"
+    },
+    {
+      "key": "WEATHER_FORECAST_OVERCAST",
+      "de": "Bedeckt",
+      "en": "Overcast"
+    },
+    {
+      "key": "WEATHER_FORECAST_DRIZZLE",
+      "de": "Nieselregen",
+      "en": "Drizzle"
+    },
+    {
+      "key": "WEATHER_FORECAST_RAIN",
+      "de": "Regen",
+      "en": "Rain"
+    },
+    {
+      "key": "WEATHER_FORECAST_SNOW",
+      "de": "Schnee",
+      "en": "Snow"
+    },
+    {
+      "key": "WEATHER_FORECAST_SLEET",
+      "de": "Schneeregen",
+      "en": "Sleet"
+    },
+    {
+      "key": "WEATHER_FORECAST_UNKNOWN",
+      "de": "Unbekannt",
+      "en": "Unknown"
+    },
+    {
       "key": "WEATHER_STORM_ASH",
       "de": "Aschesturm",
       "en": "Ash storm"

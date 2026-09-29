@@ -354,13 +354,14 @@
     {
       "id": "weather",
       "title": "Sanftes Planetenwetter und Darstellungsanschluss",
-      "work": "WEATHER-01 / WEATHER-02A / WEATHER-03-STORM-PREVIEW",
+      "work": "WEATHER-01 / WEATHER-02A / WEATHER-03-STORM-PREVIEW / WEATHER-05-FORECAST-UI",
       "tests": [
         "weather_model_test",
         "weather_runtime_test",
         "regional_weather_test",
         "planet_climate_test",
-        "weather_storm_test"
+        "weather_storm_test",
+        "weather_forecast_ui_test"
       ]
     }
   ],

@@ -4923,6 +4923,36 @@ msgstr "Multiverse"
 msgid "WEATHER_STORM_SAND"
 msgstr "Sandstorm"
 
+msgid "WEATHER_FORECAST_TITLE"
+msgstr "Weather · next 3 min"
+
+msgid "WEATHER_FORECAST_ROW"
+msgstr "+{minutes} min · {condition} · wind {wind} m/s"
+
+msgid "WEATHER_FORECAST_CLEAR"
+msgstr "Clear"
+
+msgid "WEATHER_FORECAST_BREEZE"
+msgstr "Partly cloudy"
+
+msgid "WEATHER_FORECAST_OVERCAST"
+msgstr "Overcast"
+
+msgid "WEATHER_FORECAST_DRIZZLE"
+msgstr "Drizzle"
+
+msgid "WEATHER_FORECAST_RAIN"
+msgstr "Rain"
+
+msgid "WEATHER_FORECAST_SNOW"
+msgstr "Snow"
+
+msgid "WEATHER_FORECAST_SLEET"
+msgstr "Sleet"
+
+msgid "WEATHER_FORECAST_UNKNOWN"
+msgstr "Unknown"
+
 msgid "WEATHER_STORM_ASH"
 msgstr "Ash storm"
 

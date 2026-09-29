@@ -7,16 +7,19 @@ const Model = preload("res://world/weather/weather_model.gd")
 const Regional = preload("res://world/weather/regional_weather.gd")
 const View = preload("res://world/weather/weather_view.gd")
 const StormNotice = preload("res://world/weather/storm_preview_notice.gd")
+const ForecastPanel = preload("res://world/weather/forecast_panel.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 @export var clouds_enabled: bool = true
 @export var precipitation_enabled: bool = true
 var _view: Node3D
 var _storm_notice: CanvasLayer
+var _forecast_panel: CanvasLayer
 var _snapshot: Dictionary = {}
 var _body_id: String = ""
 var _preview_condition: String = ""
 var _probe_elapsed: float = 1.0
 var _notice_elapsed: float = 1.0
+var _forecast_elapsed: float = 1.0
 var _covered: bool = false
 var _underwater: bool = false
 var _climate_sample: Dictionary = {}
@@ -32,6 +35,9 @@ func _ready() -> void:
 	_storm_notice = StormNotice.new()
 	_storm_notice.name = "StormPreviewNotice"
 	add_child(_storm_notice)
+	_forecast_panel = ForecastPanel.new()
+	_forecast_panel.name = "WeatherForecast"
+	add_child(_forecast_panel)
 	for argument: String in OS.get_cmdline_user_args():
 		if argument.begins_with("--weather-preview="):
 			set_preview_condition(argument.trim_prefix("--weather-preview="))
@@ -39,7 +45,9 @@ func _ready() -> void:
 ## Session-only diagnostic selection. Never stored in the campaign or climate.
 func set_preview_condition(condition: String) -> void:
 	_preview_condition = condition if Model.supports_preview(condition) else ""
+	_forecast_elapsed = 1.0
 	if is_instance_valid(_storm_notice): _storm_notice.present({}, null)
+	if is_instance_valid(_forecast_panel): _forecast_panel.present({}, [], null)
 
 func snapshot() -> Dictionary:
 	return _snapshot.duplicate(true)
@@ -60,7 +68,9 @@ func _process(delta: float) -> void:
 		_view.hide_weather()
 		_snapshot = {}
 		_forecast_context = {}
+		_forecast_elapsed = 1.0
 		_storm_notice.present({}, null)
+		_forecast_panel.present({}, [], null)
 		return
 	var state: Node = get_node("/root/GameState")
 	var body: Dictionary = state.get_current_body_record()
@@ -68,6 +78,7 @@ func _process(delta: float) -> void:
 		_body_id = str(body.id)
 		_view.configure(int(body.seed))
 		_probe_elapsed = 1.0
+		_forecast_elapsed = 1.0
 		_covered = true
 		_climate_sample = Space.sample(self, camera.global_position)
 	if camera != _last_camera:
@@ -75,6 +86,7 @@ func _process(delta: float) -> void:
 		_probe_elapsed = 1.0
 		_covered = true
 		_view.invalidate_cover()
+		_forecast_elapsed = 1.0
 	var previous_condition: String = str(_snapshot.get("condition", ""))
 	# Combine saved body climate with local biome samples; never infer hazards.
 	var adapter: RefCounted = Space.adapter(self)
@@ -86,8 +98,10 @@ func _process(delta: float) -> void:
 	_snapshot = Regional.sample(_body_id, int(body.seed), float(state.campaign.data.elapsed_seconds), address, radius, climate)
 	if _snapshot.is_empty():
 		_forecast_context = {}
+		_forecast_elapsed = 1.0
 		_view.hide_weather()
 		_storm_notice.present({}, null)
+		_forecast_panel.present({}, [], null)
 		return
 	_forecast_context = {"address": address, "radius": radius, "climate": climate}
 	if not _preview_condition.is_empty():
@@ -98,7 +112,12 @@ func _process(delta: float) -> void:
 	_view.precipitation_enabled = precipitation_enabled
 	_view.position_at(camera.global_position, Space.up(self, camera.global_position))
 	_view.present(_snapshot, _underwater, _covered)
-	_storm_notice.present(_snapshot, get_parent().get("player"))
+	var player: Node = get_parent().get("player")
+	_storm_notice.present(_snapshot, player)
+	_forecast_elapsed += delta
+	if _forecast_elapsed >= 1.0 or _forecast_panel._player != player:
+		_forecast_elapsed = 0.0
+		_forecast_panel.present(_snapshot, forecast(), player)
 	_notice_elapsed += delta
 	if previous_condition != str(_snapshot.condition) or _notice_elapsed >= 0.25:
 		_notice_elapsed = 0.0

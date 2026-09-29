@@ -4923,6 +4923,36 @@ msgstr "Multiversum"
 msgid "WEATHER_STORM_SAND"
 msgstr "Sandsturm"
 
+msgid "WEATHER_FORECAST_TITLE"
+msgstr "Wetter · nächste 3 Min."
+
+msgid "WEATHER_FORECAST_ROW"
+msgstr "+{minutes} Min. · {condition} · Wind {wind} m/s"
+
+msgid "WEATHER_FORECAST_CLEAR"
+msgstr "Klar"
+
+msgid "WEATHER_FORECAST_BREEZE"
+msgstr "Leicht bewölkt"
+
+msgid "WEATHER_FORECAST_OVERCAST"
+msgstr "Bedeckt"
+
+msgid "WEATHER_FORECAST_DRIZZLE"
+msgstr "Nieselregen"
+
+msgid "WEATHER_FORECAST_RAIN"
+msgstr "Regen"
+
+msgid "WEATHER_FORECAST_SNOW"
+msgstr "Schnee"
+
+msgid "WEATHER_FORECAST_SLEET"
+msgstr "Schneeregen"
+
+msgid "WEATHER_FORECAST_UNKNOWN"
+msgstr "Unbekannt"
+
 msgid "WEATHER_STORM_ASH"
 msgstr "Aschesturm"
 
