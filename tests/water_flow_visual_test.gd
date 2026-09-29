@@ -75,7 +75,7 @@ func _water_panel(lake_mask: float) -> ArrayMesh:
 	arrays[Mesh.ARRAY_TEX_UV] = PackedVector2Array([
 		Vector2(1.4, lake_mask), Vector2(1.4, lake_mask),
 		Vector2(1.4, lake_mask), Vector2(1.4, lake_mask)])
-	arrays[Mesh.ARRAY_INDEX] = PackedInt32Array([0, 1, 2, 2, 1, 3])
+	arrays[Mesh.ARRAY_INDEX] = PackedInt32Array([0, 2, 1, 2, 3, 1])
 	var mesh := ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return mesh
