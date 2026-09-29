@@ -34,6 +34,22 @@ var batch_runtime_boxes: bool = true
 var _pending_boxes: Dictionary = {}
 static var _shared_box: BoxMesh
 static var _shared_box_material: StandardMaterial3D
+# A species can have several individuals and can re-enter the streamed area.
+# The sculpted body is immutable after creation; cache only a few exact designs.
+const SKIN_CACHE_LIMIT: int = 8
+static var _skin_cache: Array[Dictionary] = []
+
+
+static func _species_skin(design: Dictionary) -> ArrayMesh:
+	for index in range(_skin_cache.size()):
+		if _skin_cache[index].design == design:
+			var entry: Dictionary = _skin_cache.pop_at(index)
+			_skin_cache.append(entry)
+			return entry.mesh
+	var mesh: ArrayMesh = SculptSurface.build_skin(design)
+	_skin_cache.append({"design": design.duplicate(true), "mesh": mesh})
+	if _skin_cache.size() > SKIN_CACHE_LIMIT: _skin_cache.pop_front()
+	return mesh
 
 
 func rebuild() -> void:
@@ -176,7 +192,7 @@ func _create_body() -> void:
 	add_child(root)
 	var skin := MeshInstance3D.new()
 	skin.name = "SculptedSkin"
-	skin.mesh = SculptSurface.build_skin(blueprint)
+	skin.mesh = _species_skin(blueprint)
 	skin.material_override = SculptSurface.material(Color.WHITE, true, blueprint)
 	root.add_child(skin)
 	if show_center_axis:

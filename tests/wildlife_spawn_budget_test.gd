@@ -30,6 +30,15 @@ func _run() -> void:
 	if skin != null:
 		var expected: Mesh = Surface.build_skin(actor.blueprint)
 		_expect(skin.mesh.surface_get_arrays(0) == expected.surface_get_arrays(0), "First build does not match frozen species geometry and colors.")
+		var sibling: CharacterBody3D = load("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
+		sibling.configure(15838, 22, Vector2i.ZERO, "grazer")
+		sibling.frozen_blueprint = actor.blueprint.duplicate(true)
+		sibling.position = Vector3(2.0, 100.0, 0.0)
+		scene.add_child(sibling)
+		var sibling_skin: MeshInstance3D = sibling._preview.get_node("BodyV4/SculptedSkin")
+		_expect(sibling_skin.mesh == skin.mesh and sibling.get_campaign_identity().object_id != actor.get_campaign_identity().object_id,
+			"Identical species rebuilt their body or shared individual identity.")
+		_expect(sibling._preview._skin_cache.size() <= sibling._preview.SKIN_CACHE_LIMIT, "Streamed body cache exceeded its bound.")
 	scene.queue_free()
 	await process_frame
 	print(JSON.stringify({"test": "wildlife_spawn_budget", "failures": failures}))

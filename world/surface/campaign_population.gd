@@ -21,6 +21,7 @@ const ACTIVE_DISTANCE: float = 82.0
 # Failed floor/shape checks are work too. Rotate blocked candidates instead
 # of scanning every stored individual in the same quarter-second update.
 const MAX_SPAWN_ATTEMPTS: int = 2
+const GENERATION_FRAME_BUDGET_USEC: int = 4000
 # One point per existing spawn attempt: saved point, then two nearby rings.
 const RESTORE_POINTS: int = 17
 var _spawn_offsets: Dictionary = {}
@@ -35,6 +36,7 @@ var descriptor: Dictionary
 var planner: RefCounted
 var _timer: float = 0.0
 var _generation_cursor: int = 0
+var _spawn_after_generation: bool = false
 var peak_animals: int = 0
 var max_frame_work_ms: float = 0.0
 var storage := preload("res://world/surface/campaign_region_storage.gd").new()
@@ -118,10 +120,20 @@ func _tick() -> void:
 		storage.put({"id": food_id, "location": _place_value(habitat.food_position), "food_key": food_id}, true)
 	stage_started = _record_tick_stage("pin_habitats", stage_started)
 	var keys: Array = wanted.keys()
-	if not keys.is_empty():
-		_generation_cursor %= keys.size()
-		_generate(wanted[keys[_generation_cursor]])
-		_generation_cursor += 1
+	var generation_debt: bool = _spawn_after_generation
+	_spawn_after_generation = false
+	if not generation_debt and not keys.is_empty():
+		var observer_cell: Dictionary = Model.cell(descriptor, player.location())
+		var central: Dictionary = storage.region(observer_cell.id, false)
+		if wanted.has(observer_cell.id) and (central.is_empty() or not bool(central.get("generated", false))):
+			# The player can cross into a new cell while a rotating outer-ring
+			# cursor still has many cells ahead of it. Prepare this cell now.
+			_generate(wanted[observer_cell.id])
+		else:
+			_generation_cursor %= keys.size()
+			_generate(wanted[keys[_generation_cursor]])
+			_generation_cursor += 1
+	var generation_usec: int = Time.get_ticks_usec() - stage_started
 	stage_started = _record_tick_stage("generation", stage_started)
 	for id in animals.keys():
 		if not is_instance_valid(animals[id]): animals.erase(id); continue
@@ -146,7 +158,16 @@ func _tick() -> void:
 	stage_started = _record_tick_stage("candidates", stage_started)
 	_prioritize_catalog(candidates)
 	stage_started = _record_tick_stage("prioritize", stage_started)
-	_spawn_candidates(candidates, plant_candidates)
+	plant_candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		return Space.resolve(self, a.location).distance_squared_to(player.global_position) < Space.resolve(self, b.location).distance_squared_to(player.global_position))
+	if generation_usec > GENERATION_FRAME_BUDGET_USEC and (not candidates.is_empty() or not plant_candidates.is_empty()):
+		# A freshly generated colony can take tens of milliseconds. Give the
+		# next process frame to its actor/plant instead of stacking both costs.
+		last_spawn_attempts = 0
+		_spawn_after_generation = true
+		_timer = 0.0
+	else:
+		_spawn_candidates(candidates, plant_candidates)
 	stage_started = _record_tick_stage("spawn", stage_started)
 	_sync_nests(wanted)
 	_record_tick_stage("nests", stage_started)
@@ -396,6 +417,7 @@ func _remove(collection: Dictionary, id: String) -> void:
 	records.erase(id)
 
 func _loaded(_path: String) -> void:
+	_spawn_after_generation = false
 	_animal_cursor = 0
 	_spawn_offsets.clear()
 	_spawn_origins.clear()
@@ -468,12 +490,19 @@ func store_encounter(id: String, entry: Dictionary) -> bool:
 func _sync_nests(wanted: Dictionary) -> void:
 	for id: String in nests.keys():
 		if nests[id].global_position.distance_to(player.global_position) > ACTIVE_DISTANCE + 12.0: _remove(nests, id)
-	var created: bool = false
+	var nearby: Array[Dictionary] = []
 	for key: String in wanted:
 		var colony: Dictionary = storage.region(key, false).get("colony", {})
 		if colony.is_empty(): continue
 		var point: Vector3 = Space.resolve(self, colony.anchor)
-		if point.distance_to(player.global_position) > ACTIVE_DISTANCE: continue
+		if point.distance_to(player.global_position) <= ACTIVE_DISTANCE:
+			nearby.append({"colony": colony, "point": point})
+	nearby.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		return a.point.distance_squared_to(player.global_position) < b.point.distance_squared_to(player.global_position))
+	var created: bool = false
+	for entry: Dictionary in nearby:
+		var colony: Dictionary = entry.colony
+		var point: Vector3 = entry.point
 		if not nests.has(colony.id):
 			if created or nests.size() >= MAX_NESTS or not Space.ground_ready(self, point): continue
 			var hit: Dictionary = Space.floor_hit(player, point)
