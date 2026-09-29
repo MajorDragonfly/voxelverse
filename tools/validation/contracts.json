@@ -78,6 +78,7 @@
         "surface_scale_contract_test",
         "surface_support_test",
         "radial_step_test",
+        "step_camera_test",
         "terrain_lookahead_test",
         "terrain_transition_test",
         "living_fauna_archive_test"

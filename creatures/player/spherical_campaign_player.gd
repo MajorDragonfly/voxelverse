@@ -34,6 +34,7 @@ func place(value: Dictionary, heading: Vector3 = Vector3.FORWARD) -> void:
 	var point: Array = Cube.cartesian(value, terrain.surface.body.radius)
 	terrain.rebase(point)
 	global_position = Vector3.ZERO
+	_reset_step_camera()
 	up_direction = adapter.up_at(value)
 	global_basis = Cube.frame(up_direction, heading)
 	velocity = Vector3.ZERO
