@@ -71,8 +71,10 @@ func _ready() -> void:
 		detail.add_child(title_row)
 		var icon := Symbols.view(stage_id, false, 40)
 		icon.custom_minimum_size = Vector2(40, 40)
+		icon.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		title_row.add_child(icon)
 		var title := Style.label("", 19, Style.SOCIAL)
+		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		title_row.add_child(title)
 		var status := Style.label("", 13, Style.MUTED)
 		detail.add_child(status)

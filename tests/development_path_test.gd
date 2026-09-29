@@ -162,7 +162,9 @@ func _compact_checks() -> void:
 					var button: Button = ui._development._chapter_buttons[chapter]
 					_expect(not button.text.contains("PATH_"), "Untranslated chapter: " + chapter)
 				ui._development.select_chapter("creature")
+				ui._development._chapter_buttons["creature"].grab_focus()
 				await _frames()
+				_expect(ui._development._stage_labels["creature"]["title"].size.x >= 120 * scale_value, "Selected chapter title is squeezed into a vertical column.")
 				await _capture_matrix(size_value, scale_value, language)
 				ui._development._chapter_buttons["tribe"].grab_focus()
 				await _key(KEY_ENTER)
