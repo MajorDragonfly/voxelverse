@@ -152,7 +152,9 @@ func _run() -> void:
 func _water(scene: Node3D) -> void:
 	var surface: RefCounted = scene.terrain.surface
 	var start: Dictionary = scene.player.location()
+	var context: Node = scene.player.get_node("ContextActionHUD")
 	scene.player.current_thirst = 20
+	_expect(scene.player.reachable_drink_source(scene.player.global_position).is_empty() and not context.drink_prompt_at(scene.player.global_position), "Dry spherical ground advertised drinking.")
 	scene.player._try_drink_water(scene.player.global_position)
 	_expect(not saves.guidance.done("drink"), "Dry land counted as drinking.")
 	var lake: Dictionary = {}
@@ -172,6 +174,7 @@ func _water(scene: Node3D) -> void:
 	address.height = surface.water_level_precise(lake.direction) - 0.5
 	scene.player.place(address)
 	await _until(func() -> bool: return Space.ground_ready(scene.player, scene.player.global_position), 25000)
+	_expect(not scene.player.reachable_drink_source(scene.player.global_position).is_empty() and context.drink_prompt_at(scene.player.global_position), "Reachable freshwater did not offer the drink action.")
 	scene.player.current_thirst = scene.player.maximum_thirst
 	scene.player._try_drink_water(scene.player.global_position)
 	_expect(not saves.guidance.done("drink"), "Full thirst bar counted as drinking.")

@@ -10,6 +10,13 @@ func _run() -> void:
 	var prefs := Preferences.new()
 	var path := "user://preferences-contract.cfg"
 	var candidate := Preferences.defaults()
+	_expect(Preferences.validate(candidate).is_empty() and candidate.tribe_turn_left == [KEY_Q, KEY_LEFT] and candidate.tribe_turn_right == [KEY_E, KEY_RIGHT], "Q/E tribe rotation conflicts with phase-specific creature controls.")
+	var unrelated := candidate.duplicate(true)
+	unrelated.move_left = [KEY_Q, 0]
+	_expect(not Preferences.validate(unrelated).is_empty(), "A movement key reused creature/tribe Q across the same phase.")
+	unrelated = candidate.duplicate(true)
+	unrelated.tribe_turn_right = [KEY_Q, KEY_RIGHT]
+	_expect(not Preferences.validate(unrelated).is_empty(), "Q was accepted for the wrong tribe action.")
 	candidate.inspection_mode = [KEY_R, 0]
 	candidate.move_forward = [KEY_UP, 0]
 	_expect(prefs.save_and_apply(candidate, 1.5, true, 120, path).is_empty(), "Could not save valid preferences.")

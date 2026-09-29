@@ -100,7 +100,10 @@ func _update_context() -> void:
 		)
 
 	if bool(_player.get("is_swimming")):
-		_label.text = "Schwimmen · %s trinken · %s auftauchen" % [KeyHints.binding_label("primary_action"), KeyHints.binding_label("jump")]
+		_label.text = "Schwimmen · %s auftauchen" % KeyHints.binding_label("jump")
+		var swim_source: Dictionary = _player.call("reachable_drink_source", _player.global_position)
+		if not swim_source.is_empty():
+			_label.text = "Schwimmen · %s trinken · %s auftauchen" % [KeyHints.binding_label("primary_action"), KeyHints.binding_label("jump")]
 		_label.visible = true
 		return
 	_ray.force_raycast_update()
@@ -114,20 +117,18 @@ func _update_context() -> void:
 		_label.text = "Beerenstrauch · abgeerntet" if depleted else "Beeren · %s fressen" % KeyHints.binding_label("primary_action")
 		_label.visible = true
 		return
-	var generator := get_node_or_null("/root/WorldGenerator")
-	if generator != null and generator.has_method("is_water_at"):
-		var interaction_range: float = 3.2
-		var range_value: Variant = _player.get("interaction_range")
-		if range_value != null:
-			interaction_range = float(range_value)
-		if (
-			_player.global_position.distance_to(point) <= interaction_range
-			and bool(generator.call("is_water_at", point.x, point.z))
-		):
-			_label.text = "Wasser · %s trinken" % KeyHints.binding_label("primary_action")
-			_label.visible = true
-			return
+	if drink_prompt_at(point):
+		_label.text = "Wasser · %s trinken" % KeyHints.binding_label("primary_action")
+		_label.visible = true
+		return
 	_label.visible = false
+
+
+func drink_prompt_at(point: Vector3) -> bool:
+	if _player == null or not _player.has_method("reachable_drink_source"):
+		return false
+	var source: Dictionary = _player.call("reachable_drink_source", point)
+	return not source.is_empty()
 
 
 func _show_wildlife_context(target: Node) -> void:

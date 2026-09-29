@@ -17,9 +17,10 @@ const ACTIONS := {
 	"tribe_focus_home": "TRIBE_CAMERA_HOME", "tribe_focus_selection": "TRIBE_CAMERA_SELECTION",
 	"tribe_orbit": "TRIBE_CAMERA_ORBIT",
 }
-const CAMERA_DEFAULTS := {"tribe_turn_left": KEY_LEFT, "tribe_turn_right": KEY_RIGHT,
+const CAMERA_DEFAULTS := {"tribe_turn_left": KEY_Q, "tribe_turn_right": KEY_E,
 	"tribe_tilt_up": KEY_PAGEUP, "tribe_tilt_down": KEY_PAGEDOWN,
 	"tribe_focus_home": KEY_HOME, "tribe_focus_selection": KEY_END, "tribe_orbit": -3}
+const CAMERA_SECONDARY := {"tribe_turn_left": KEY_LEFT, "tribe_turn_right": KEY_RIGHT}
 const TRIBE_CAMERA_DEFAULTS := {"pan_speed": 1.0, "tilt": 55.0}
 var tribe_camera: Dictionary = TRIBE_CAMERA_DEFAULTS.duplicate()
 const MENU_ACTIONS := ["open_journal", "open_development", "open_world_map"]
@@ -38,7 +39,7 @@ static func defaults() -> Dictionary:
 	var result := {}
 	for action: String in ACTIONS:
 		if action in CAMERA_DEFAULTS:
-			result[action] = [CAMERA_DEFAULTS[action], 0]
+			result[action] = [CAMERA_DEFAULTS[action], CAMERA_SECONDARY.get(action, 0)]
 			continue
 		var codes: Array = []
 		for event: InputEvent in ProjectSettings.get_setting("input/" + action, {}).get("events", []):
@@ -123,13 +124,19 @@ static func validate(candidate: Dictionary) -> String:
 					return Text.text("BIND_FIXED_PLAY_KEY")
 				if not ((code >= KEY_A and code <= KEY_Z) or (code >= KEY_0 and code <= KEY_9)):
 					return Text.text("BIND_MENU_KEY_REQUIRED")
-			if occupied.has(code):
+			if occupied.has(code) and not _phase_overlap(action, occupied[code], code):
 				return Text.format_text("BIND_CONFLICT", {"key": code_label(code), "action": Text.text(ACTIONS[occupied[code]])})
-			occupied[code] = action
+			if not occupied.has(code): occupied[code] = action
 			count += 1
 		if count == 0:
 			return Text.format_text("BIND_REQUIRED", {"action": Text.text(ACTIONS[action])})
 	return ""
+
+static func _phase_overlap(action: String, other: String, code: int) -> bool:
+	return (
+		(code == KEY_Q and action == "tribe_turn_left" and other == "bite_action")
+		or (code == KEY_E and action == "tribe_turn_right" and other == "inspection_mode")
+	)
 
 func load_saved(path: String = CONFIG_PATH) -> void:
 	bindings = defaults()
@@ -157,21 +164,36 @@ func load_saved(path: String = CONFIG_PATH) -> void:
 		if (action in MENU_ACTIONS or action in CAMERA_DEFAULTS) and not config.has_section_key("bindings", action): continue
 		if candidate[action] is Array:
 			for code: Variant in candidate[action]:
-				if code is int and code != 0: occupied[code] = true
+				if code is int and code != 0 and not occupied.has(code): occupied[code] = action
 	var adjusted: bool = false
+	var camera_upgraded: bool = false
 	for action: String in MENU_ACTIONS + CAMERA_DEFAULTS.keys():
 		if config.has_section_key("bindings", action): continue
 		var preferred: int = candidate[action][0]
 		var choices: Array = [preferred] + range(KEY_A, KEY_Z + 1) + range(KEY_0, KEY_9 + 1)
 		for code: int in choices:
-			if occupied.has(code) or code in FIXED_PLAY_KEYS: continue
-			candidate[action] = [code, 0]
-			occupied[code] = true
+			if (occupied.has(code) and not _phase_overlap(action, occupied[code], code)) or code in FIXED_PLAY_KEYS: continue
+			var secondary: int = int(CAMERA_SECONDARY.get(action, 0))
+			if occupied.has(secondary): secondary = 0
+			candidate[action] = [code, secondary]
+			if not occupied.has(code): occupied[code] = action
+			if secondary != 0: occupied[secondary] = action
 			adjusted = adjusted or code != preferred
 			break
+	# Profiles from the previous camera version used only arrow keys. Add the
+	# new phase-specific key while retaining the old arrow as an alternative.
+	for action: String in CAMERA_SECONDARY:
+		if not config.has_section_key("bindings", action): continue
+		var arrow: int = CAMERA_SECONDARY[action]
+		var preferred: int = CAMERA_DEFAULTS[action]
+		if candidate[action] == [arrow, 0] and (not occupied.has(preferred) or _phase_overlap(action, occupied[preferred], preferred)):
+			candidate[action] = [preferred, arrow]
+			if not occupied.has(preferred): occupied[preferred] = action
+			adjusted = true
+			camera_upgraded = true
 	if validate(candidate).is_empty():
 		bindings = candidate
-		if adjusted: load_message = Text.text("BIND_MENUS_ADDED")
+		if adjusted: load_message = Text.text("BIND_CAMERA_ADDED" if camera_upgraded else "BIND_MENUS_ADDED")
 	else:
 		load_message = "Ungültige Tastenbelegung; Standardtasten sind aktiv."
 	var speed: Variant = config.get_value("camera", "sensitivity", 1.0)

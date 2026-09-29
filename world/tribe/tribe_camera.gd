@@ -208,3 +208,21 @@ func update_camera() -> void:
 	camera.v_offset = -current_zoom * 0.16
 	camera.global_position = eye
 	camera.look_at(aim, frame.y)
+	if low_view > 0.01:
+		_clear_near_plane(camera, aim, frame.y)
+
+func _clear_near_plane(camera: Camera3D, aim: Vector3, up: Vector3) -> void:
+	# Orthographic rays begin across a tall screen plane, not at the eye node.
+	# At a shallow angle its lower edge can sit below the planet even while the
+	# eye itself passes the terrain check above (especially with v_offset).
+	var size: Vector2 = camera.get_viewport().get_visible_rect().size
+	if size.x <= 0.0 or size.y <= 0.0: return
+	for iteration in range(2):
+		var deficit: float = 0.0
+		for portion in [0.1, 0.5, 0.9]:
+			var origin: Vector3 = camera.project_ray_origin(Vector2(size.x * portion, size.y * 0.95))
+			var sample: Dictionary = Space.sample(controller, origin)
+			deficit = maxf(deficit, maxf(float(sample.height), float(sample.water_level)) + 1.0 - float(sample.altitude))
+		if deficit <= 0.0: return
+		camera.global_position += Space.up(controller, camera.global_position) * (deficit + 0.5)
+		camera.look_at(aim, up)

@@ -41,12 +41,17 @@ func _run() -> void:
 	var before: Dictionary = data.duplicate(true)
 	var bytes: String = FileAccess.get_file_as_string(SAVE)
 	await _capture("camera-default")
-	_press(KEY_RIGHT, true)
+	_press(KEY_E, true)
 	# Observe the turn before it wraps; software rendering does not provide a
 	# fixed frame duration and forty rendered frames can exceed a full turn.
 	await _until(func() -> bool: return rig.yaw > 15.0, 240)
-	_press(KEY_RIGHT, false)
-	_expect(rig.yaw > 15.0, "Real rotation key never reached the camera.")
+	_press(KEY_E, false)
+	_expect(rig.yaw > 15.0, "E rotation key never reached the camera.")
+	var right_yaw: float = rig.yaw
+	_press(KEY_Q, true)
+	await _until(func() -> bool: return rig.yaw < right_yaw - 10.0, 240)
+	_press(KEY_Q, false)
+	_expect(rig.yaw < right_yaw - 10.0, "Q rotation key never reached the camera.")
 	var start: Vector3 = tribe._focus
 	var expected: Vector3 = -rig.view_frame().z
 	_press(KEY_W, true)

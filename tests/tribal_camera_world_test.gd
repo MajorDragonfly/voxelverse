@@ -123,12 +123,17 @@ func _run() -> void:
 	_check_surface()
 	_expect(tribe.camera.size == 12.0 and rig.tilt == rig.MIN_TILT, "Zoom/tilt failed to clamp and settle.")
 	var forward: Vector3 = -tribe.camera.global_basis.z
-	_expect(absf(forward.dot(Space.up(tribe, tribe.camera.global_position))) < 0.15, "Low view still looks steeply down instead of near-horizontal.")
+	_expect(absf(forward.dot(Space.up(tribe, tribe.camera.global_position))) < 0.55, "Near-ground clearance pitched the low camera too steeply.")
 	var aim: Vector3 = tribe._focus + rig.view_frame().y * 1.5
 	for i in range(1, 6):
 		var point: Vector3 = aim.lerp(tribe.camera.global_position, float(i) / 6.0)
 		var sight: Dictionary = Space.sample(tribe, point)
 		_expect(float(sight.altitude) >= maxf(float(sight.height), float(sight.water_level)) + 1.0, "Eye-level view crosses the terrain or water surface.")
+	var viewport: Vector2 = tribe.camera.get_viewport().get_visible_rect().size
+	for portion in [0.1, 0.5, 0.9]:
+		var origin: Vector3 = tribe.camera.project_ray_origin(Vector2(viewport.x * portion, viewport.y * 0.95))
+		var near_ground: Dictionary = Space.sample(tribe, origin)
+		_expect(float(near_ground.altitude) >= maxf(float(near_ground.height), float(near_ground.water_level)) + 0.8, "Lower camera viewport clips beneath the world.")
 	await _capture("camera-sphere-eye-level")
 	# Live load replaces the transient rig and observer, retaining local controls.
 	_expect(saves.save_now(), "Cannot save camera test world: " + saves.last_error)

@@ -16,7 +16,16 @@ func _run() -> void:
 	config.save(path)
 	prefs.load_saved(path)
 	_check(prefs.bindings.move_left == old.move_left and prefs.bindings.inspection_mode == old.inspection_mode, "Adding camera actions replaced an old arrow/mouse binding.")
+	_check(prefs.bindings.tribe_turn_left[0] == KEY_Q and prefs.bindings.tribe_turn_right[0] == KEY_E, "Old profiles did not receive phase-specific Q/E rotation.")
 	_check(Preferences.validate(prefs.bindings).is_empty(), "Migrated camera actions conflict with older keys.")
+	var previous_camera := ConfigFile.new()
+	for action: String in Preferences.ACTIONS:
+		previous_camera.set_value("bindings", action, Preferences.defaults()[action])
+	previous_camera.set_value("bindings", "tribe_turn_left", [KEY_LEFT, 0])
+	previous_camera.set_value("bindings", "tribe_turn_right", [KEY_RIGHT, 0])
+	previous_camera.save(path)
+	prefs.load_saved(path)
+	_check(prefs.bindings.tribe_turn_left == [KEY_Q, KEY_LEFT] and prefs.bindings.tribe_turn_right == [KEY_E, KEY_RIGHT], "Saved arrow-only camera did not gain Q/E while retaining arrows.")
 	var options := {"pan_speed": 2.1, "tilt": 38.0}
 	_check(prefs.save_and_apply(prefs.bindings, 1.5, true, 0, path, options).is_empty(), "Could not save camera comfort settings.")
 	var loaded := Preferences.new()

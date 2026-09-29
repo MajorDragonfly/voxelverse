@@ -310,8 +310,7 @@ func _try_bite_action() -> void:
 func _try_drink_water(point: Vector3 = Vector3.INF) -> void:
 	if Space.adapter(self) != null:
 		if not point.is_finite(): point = global_position
-		var source: Dictionary = get_tree().current_scene.get_node("Water").freshwater_at(point)
-		if source.is_empty() or global_position.distance_to(source.point) > interaction_range or not Space.ground_ready(self, source.point):
+		if reachable_drink_source(point).is_empty():
 			show_gameplay_message("Zum Trinken brauchst du erreichbares Süßwasser.")
 			return
 	if not can_perform_action(&"drink"):
@@ -323,6 +322,18 @@ func _try_drink_water(point: Vector3 = Vector3.INF) -> void:
 	restore_thirst(water_drink_amount)
 	show_gameplay_message("Drank water.")
 	guidance_action.emit("drink", 1.0)
+
+
+func reachable_drink_source(point: Vector3) -> Dictionary:
+	if Space.adapter(self) == null:
+		return {"point": point} if global_position.distance_to(point) <= interaction_range and Space.sample(self, point).water else {}
+	var water: Node = get_tree().current_scene.get_node_or_null("Water")
+	if water == null:
+		return {}
+	var source: Dictionary = water.freshwater_at(point)
+	if source.is_empty() or global_position.distance_to(source.point) > interaction_range:
+		return {}
+	return source if Space.ground_ready(self, source.point) else {}
 
 
 func can_perform_action(action: StringName) -> bool:
