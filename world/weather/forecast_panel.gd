@@ -32,14 +32,14 @@ func _ready() -> void:
 	_panel.add_child(column)
 	_title = Label.new()
 	_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_title.add_theme_font_size_override("font_size", 14)
+	_title.add_theme_font_size_override("font_size", 15)
 	_title.add_theme_color_override("font_color", Color("87cab2"))
 	column.add_child(_title)
 	for index in range(3):
 		var row := Label.new()
 		row.name = "Forecast%d" % (index + 1)
 		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		row.add_theme_font_size_override("font_size", 13)
+		row.add_theme_font_size_override("font_size", 14)
 		row.add_theme_color_override("font_color", Color("d8e6e7"))
 		column.add_child(row)
 		_rows.append(row)
@@ -79,5 +79,5 @@ func _refresh() -> void:
 			"minutes": roundi(float(forecast.get("in_seconds", 0.0)) / 60.0),
 			"condition": Text.text(key), "wind": roundi(float(forecast.get("wind_mps", 0.0)))})
 	var screen: Vector2 = Layout.screen_size(self)
-	var width: float = minf(280.0 if screen.x >= 1000.0 else 248.0, screen.x - 32.0)
-	Layout.place(_panel, Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 104.0)))
+	var width: float = minf(292.0 if screen.x >= 1000.0 else 280.0, screen.x - 32.0)
+	Layout.place(_panel, Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 112.0)))
