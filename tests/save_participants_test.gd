@@ -50,6 +50,17 @@ func _run() -> void:
 		"behavior_runtime": {"stamina": 31.0, "recovery_delay": 0.2}}
 	_expect(saves.save_now(), "Joint participant snapshot failed: " + saves.last_error)
 	if not failures.is_empty(): await _finish(); return
+	# The single validation now runs on the serialized readback. Invalid live
+	# participant state must still be rejected before touching the saved bytes.
+	var committed_bytes: String = FileAccess.get_file_as_string(SAVE)
+	var backup_bytes: String = FileAccess.get_file_as_string(SAVE + ".bak") if FileAccess.file_exists(SAVE + ".bak") else ""
+	var resident_id: String = body.tribe.members[0].id
+	body.tribe.members[0].id = ""
+	_expect(not saves.save_now(), "Invalid resident was serialized as an accepted save.")
+	_expect(FileAccess.get_file_as_string(SAVE) == committed_bytes and
+		(FileAccess.get_file_as_string(SAVE + ".bak") if FileAccess.file_exists(SAVE + ".bak") else "") == backup_bytes,
+		"Rejected participant changed live save or backup bytes.")
+	body.tribe.members[0].id = resident_id
 	var expected: Dictionary = saves._read_save(SAVE)
 	var before: String = JSON.stringify(expected)
 	_expect(Participants.unknown_section(expected).is_empty(), "Exporter wrote an unregistered field.")

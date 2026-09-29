@@ -162,12 +162,9 @@ func _save_snapshot(custom_path: String = "") -> bool:
 	var save_data: Dictionary = snapshot.data
 	_annotate_world_state(save_data)
 	stage = _save_stage("snapshot", stage)
-	var problem: String = _validate_save(save_data)
-	if not problem.is_empty():
-		_report_failure(problem)
-		return false
-	stage = _save_stage("validate", stage)
-	# Validate what the reader will actually see BEFORE any live file moves.
+	# The serialized round trip is the only representation a loader can see.
+	# Validate it once before any live file moves; checking the source snapshot
+	# as well repeats the full campaign/participant traversal on every order.
 	var serialized: String = Atomic.stringify(save_data)
 	var readback: Dictionary = Atomic.parse_dictionary(serialized)
 	stage = _save_stage("serialize", stage)
