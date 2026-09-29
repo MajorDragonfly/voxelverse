@@ -23,8 +23,16 @@ func _run() -> void:
 	# Inspect the uploaded CPU image too: the headless dummy renderer cannot
 	# read ImageTextures back from a GPU. Graphical runs check the real texture.
 	var image: Image = scenery._active.ownership_image if DisplayServer.get_name() == "headless" else scenery._active.ownership.get_image()
+	var near_coverage: Dictionary = scene.flora.scenery_coverage()
 	for i in range(scenery._active.cell_ids.size()):
-		_expect((image.get_pixel(i, 0).r > 0.5) == scene.flora.patches.has(scenery._active.cell_ids[i]), "Near/distant ownership leaves holes or duplicate trees")
+		var cell_id: String = scenery._active.cell_ids[i]
+		var pixel: float = image.get_pixel(i, 0).r
+		# During the 0.35-second handoff, a published near patch can still
+		# have less than half coverage. Its far proxy supplies the complement.
+		_expect(absf(pixel - float(near_coverage.get(cell_id, 0.0))) < 0.005,
+			"Near/distant ownership mask differs from the published transition")
+		_expect(not (scene.flora.patches.has(cell_id) and scene.flora._retiring_patches.has(cell_id)),
+			"Near/distant ownership has duplicate patch state")
 	await _check_handoff(scene)
 	var anchor: Array = scenery._active.anchor
 	var before: Array = Cube.global_position(scenery._active.node.position, scene.terrain.origin)
