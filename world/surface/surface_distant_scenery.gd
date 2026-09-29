@@ -108,7 +108,9 @@ func _publish_step() -> void:
 		material.shader = SceneryShader
 		material.set_shader_parameter("planet_palette", Slots.create_texture(batch.species.palette))
 		material.set_shader_parameter("nearby_ownership", _staging.ownership)
-		if "rock" in batch.asset_id: material.set_shader_parameter("wind_strength", 0.0)
+		# Proxy scenery is beyond the near motion budget. Its geometry remains
+		# stable while the nearby authored meshes carry the weather response.
+		material.set_shader_parameter("wind_strength", 0.0)
 		visual.material_override = material
 		_staging.node.add_child(visual)
 		_staging.next_batch += 1

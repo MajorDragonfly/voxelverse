@@ -4356,6 +4356,12 @@ msgstr "High"
 msgid "GRAPHICS_GROUP_CLOUDS"
 msgstr "Clouds"
 
+msgid "GRAPHICS_GROUP_WORLD"
+msgstr "World motion"
+
+msgid "GRAPHICS_VEGETATION_MOTION"
+msgstr "Animate plants in the wind"
+
 msgid "GRAPHICS_GROUP_HAZE"
 msgstr "Distance haze"
 

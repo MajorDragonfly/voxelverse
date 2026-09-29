@@ -10,6 +10,7 @@ var description: Label
 var _refreshing: bool = false
 const GROUPS := {
 	"CLOUDS": ["clouds_enabled", "cloud_quality"],
+	"WORLD": ["vegetation_motion"],
 	"HAZE": ["haze_strength"],
 	"FOG": ["fog_enabled", "fog_quality", "fog_strength"],
 	"SHADOWS": ["shadows_enabled", "shadow_quality", "shadow_softness", "shadow_distance"],

@@ -16,6 +16,7 @@ func _initialize() -> void:
 func _custom() -> Dictionary:
 	var values := Preferences.preset(2)
 	values.clouds_enabled = false
+	values.vegetation_motion = false
 	values.haze_strength = 0.0
 	values.shadow_distance = 410.0
 	values.exposure = 1.18
@@ -52,6 +53,7 @@ func _run() -> void:
 	camera.make_current()
 	_fixture(scene)
 	var panel: VBoxContainer = settings._graphics_settings
+	_expect(panel.controls.has("vegetation_motion") and panel.controls.vegetation_motion is CheckButton, "World motion switch is missing in graphics settings.")
 	settings.open_menu()
 	settings._tabs.current_tab = 3
 	for index in [2, 0, 1, 2]:

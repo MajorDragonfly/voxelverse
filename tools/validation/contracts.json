@@ -103,7 +103,8 @@
         "world_runtime_continuity_test",
         "resource_visuals_test",
         "campaign_atmosphere_test",
-        "graphics_settings_test"
+        "graphics_settings_test",
+        "world_motion_visual_test"
       ]
     },
     {

@@ -1,0 +1,71 @@
+name: World motion review
+
+on:
+  pull_request:
+    paths:
+      - 'assets/catalog/planet_foliage.gdshader'
+      - 'world/visuals/scenery/**'
+      - 'world/tribe/village_work_motion.gd'
+      - 'world/tribe/village_visuals.gd'
+      - 'world/tribe/tribe_controller.gd'
+      - 'world/weather/campaign_weather.gd'
+      - 'tests/world_motion_visual_test.gd'
+      - 'tests/tribal_age_world_test.gd'
+      - '.github/workflows/world-motion-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  motion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        renderer: [forward_plus, gl_compatibility]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri mesa-vulkan-drivers
+      - name: Import project
+        run: |
+          "${{ steps.engine.outputs.godot }}" --headless --path . --import > /tmp/motion-import.log 2>&1
+      - name: Capture imported flora at two weather times
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          mkdir -p /tmp/world-motion
+          xvfb-run -a -s '-screen 0 960x540x24' \
+            "${{ steps.engine.outputs.godot }}" --path . --rendering-method '${{ matrix.renderer }}' \
+            --audio-driver Dummy --script res://tests/world_motion_visual_test.gd \
+            -- --capture /tmp/world-motion > /tmp/world-motion/motion.log 2>&1
+          grep '"passed":true' /tmp/world-motion/motion.log
+          test -s /tmp/world-motion/wind-0.png
+          test -s /tmp/world-motion/wind-1.png
+          test -s /tmp/world-motion/wind-paused.png
+      - name: Capture genuine gathering on sphere
+        if: matrix.renderer == 'gl_compatibility'
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          xvfb-run -a -s '-screen 0 1280x800x24' \
+            "${{ steps.engine.outputs.godot }}" --path . --rendering-method gl_compatibility \
+            --audio-driver Dummy --script res://tests/tribal_age_world_test.gd \
+            -- --capture-on-demand --capture /tmp/world-motion > /tmp/world-motion/village.log 2>&1
+          grep '"passed":true' /tmp/world-motion/village.log
+          test -s /tmp/world-motion/05_actual_work.png
+      - name: Upload comparable scenes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: world-motion-${{ matrix.renderer }}
+          path: |
+            /tmp/world-motion
+            /tmp/motion-import.log
+          retention-days: 14

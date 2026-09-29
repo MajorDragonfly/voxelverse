@@ -4356,6 +4356,12 @@ msgstr "Hoch"
 msgid "GRAPHICS_GROUP_CLOUDS"
 msgstr "Wolken"
 
+msgid "GRAPHICS_GROUP_WORLD"
+msgstr "Weltbewegung"
+
+msgid "GRAPHICS_VEGETATION_MOTION"
+msgstr "Pflanzen im Wind bewegen"
+
 msgid "GRAPHICS_GROUP_HAZE"
 msgstr "Entfernungsdunst"
 

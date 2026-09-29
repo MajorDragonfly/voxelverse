@@ -187,6 +187,7 @@ func _apply_settings(save_after_apply: bool) -> bool:
 
 	GraphicsPreferences.apply_renderer(graphics_values)
 	get_tree().call_group(&"campaign_atmosphere", "apply_graphics", graphics_values, atmosphere_quality)
+	get_tree().call_group(&"campaign_weather", "apply_graphics", graphics_values)
 	get_tree().call_group(&"underwater_view", "update_view")
 	_sync_menu_controls()
 	if save_after_apply:

@@ -4,9 +4,20 @@ extends Node3D
 const Economy = preload("res://world/tribe/village_economy.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 const Home = preload("res://world/home_group/home_group_state.gd")
+const WorkMotion = preload("res://world/tribe/village_work_motion.gd")
 var _drawn_state: Dictionary = {}
 var rebuild_count: int = 0
 var stockpiles: Node3D
+
+func show_work(actor: Node3D, kind: String) -> void:
+	if not is_instance_valid(actor): return
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if camera == null or actor.global_position.distance_squared_to(camera.global_position) > 55.0 * 55.0: return
+	var tool: Node3D = actor.get_node_or_null("TribeWorkTool")
+	if tool == null:
+		tool = WorkMotion.new()
+		actor.add_child(tool)
+	tool.pulse(kind)
 
 func update_stock(data: Dictionary) -> void:
 	if Space.adapter(self) != null:

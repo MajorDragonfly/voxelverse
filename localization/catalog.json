@@ -7263,6 +7263,16 @@
       "en": "Clouds"
     },
     {
+      "key": "GRAPHICS_GROUP_WORLD",
+      "de": "Weltbewegung",
+      "en": "World motion"
+    },
+    {
+      "key": "GRAPHICS_VEGETATION_MOTION",
+      "de": "Pflanzen im Wind bewegen",
+      "en": "Animate plants in the wind"
+    },
+    {
       "key": "GRAPHICS_GROUP_HAZE",
       "de": "Entfernungsdunst",
       "en": "Distance haze"

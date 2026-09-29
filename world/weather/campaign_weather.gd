@@ -8,6 +8,7 @@ const Regional = preload("res://world/weather/regional_weather.gd")
 const View = preload("res://world/weather/weather_view.gd")
 const StormNotice = preload("res://world/weather/storm_preview_notice.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
+const Assets = preload("res://world/visuals/scenery/authored_environment_assets.gd")
 @export var clouds_enabled: bool = true
 @export var precipitation_enabled: bool = true
 var _view: Node3D
@@ -22,10 +23,13 @@ var _underwater: bool = false
 var _climate_sample: Dictionary = {}
 var _forecast_context: Dictionary = {}
 var _last_camera: Camera3D
+var _vegetation_motion: bool = true
 
 func _ready() -> void:
 	process_priority = 110 # Camera-owned underwater presentation samples first.
 	add_to_group(&"campaign_weather")
+	var settings: Node = get_node_or_null("/root/DisplaySettings")
+	if settings != null: apply_graphics(settings.graphics_values)
 	_view = View.new()
 	_view.name = "WeatherView"
 	add_child(_view)
@@ -44,6 +48,14 @@ func set_preview_condition(condition: String) -> void:
 func snapshot() -> Dictionary:
 	return _snapshot.duplicate(true)
 
+func apply_graphics(values: Dictionary) -> void:
+	_vegetation_motion = bool(values.get("vegetation_motion", true))
+	Assets.set_weather_motion(_snapshot, _campaign_clock(), _vegetation_motion)
+
+func _campaign_clock() -> float:
+	var state: Node = get_node_or_null("/root/GameState")
+	return float(state.campaign.data.elapsed_seconds) if state != null and not state.campaign.data.is_empty() else 0.0
+
 func forecast() -> Array[Dictionary]:
 	if _snapshot.is_empty() or _forecast_context.is_empty(): return []
 	return Regional.forecast(_body_id, int(_snapshot.seed), float(_snapshot.elapsed_seconds),
@@ -59,6 +71,7 @@ func _process(delta: float) -> void:
 	if not _available() or camera == null:
 		_view.hide_weather()
 		_snapshot = {}
+		Assets.set_weather_motion({}, _campaign_clock(), false)
 		_forecast_context = {}
 		_storm_notice.present({}, null)
 		return
@@ -85,6 +98,7 @@ func _process(delta: float) -> void:
 	var radius: float = float(adapter.terrain.surface.body.radius)
 	_snapshot = Regional.sample(_body_id, int(body.seed), float(state.campaign.data.elapsed_seconds), address, radius, climate)
 	if _snapshot.is_empty():
+		Assets.set_weather_motion({}, _campaign_clock(), false)
 		_forecast_context = {}
 		_view.hide_weather()
 		_storm_notice.present({}, null)
@@ -92,6 +106,7 @@ func _process(delta: float) -> void:
 	_forecast_context = {"address": address, "radius": radius, "climate": climate}
 	if not _preview_condition.is_empty():
 		_snapshot = Regional.preview(_snapshot, _preview_condition)
+	Assets.set_weather_motion(_snapshot, _campaign_clock(), _vegetation_motion)
 	_snapshot.sheltered = _covered
 	_snapshot.underwater = _underwater
 	_view.clouds_enabled = clouds_enabled
