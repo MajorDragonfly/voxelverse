@@ -40,6 +40,9 @@ static func section(blueprint: Dictionary, t: float) -> Dictionary:
 static func build_skin(blueprint: Dictionary) -> ArrayMesh:
 	var palette: Array[Color] = colors(blueprint)
 	var pattern: String = str(Parts.get_part(Blueprint.get_paint_part_id(blueprint)).get("pattern", "plain"))
+	# These depend only on the blueprint, not on each sculpted row/cell.
+	var belly_color: Color = SkinStyle.color(blueprint, "belly_color", palette[0].lightened(0.26))
+	var paint_intensity: float = Blueprint.get_paint_intensity(blueprint)
 	var scale: float = Blueprint.get_body_scale(blueprint)
 	var shape: Vector3 = Blueprint.get_body_shape(blueprint) * scale
 	var length: float = shape.z * Spine.get_body_length_scale(blueprint)
@@ -89,7 +92,7 @@ static func build_skin(blueprint: Dictionary) -> ArrayMesh:
 		var radius: Vector2 = cross["radius"]
 		var radial_y: float = ((float(row.x) + 0.5) * step - float(cross["center_y"])) / radius.y
 		var belly: float = floorf(clampf(-radial_y, 0.0, 1.0) * 3.0) / 3.0
-		var row_color: Color = palette[0].lerp(SkinStyle.color(blueprint, "belly_color", palette[0].lightened(0.26)), belly * 0.7)
+		var row_color: Color = palette[0].lerp(belly_color, belly * 0.7)
 		for x in range(-extent, extent):
 			var cell := Vector3i(x, row.x, row.y)
 			if x >= -interior and x < interior:
@@ -105,7 +108,7 @@ static func build_skin(blueprint: Dictionary) -> ArrayMesh:
 				"warning": mask = sin(t * 36.0 + angle * 2.0) > 0.30
 				"crystal": mask = cos(t * 50.0) * sin(angle * 8.0) > 0.45
 			if mask and radial_y > -0.25:
-				color = color.lerp(palette[1], 0.86 * Blueprint.get_paint_intensity(blueprint))
+				color = color.lerp(palette[1], 0.86 * paint_intensity)
 			var variation: float = Voxels.shade(cell)
 			cells[cell] = color.lightened(variation) if variation > 0.0 else color.darkened(-variation)
 	return Voxels.from_cells(cells, step, true, surface_cells)

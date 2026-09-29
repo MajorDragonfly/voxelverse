@@ -29,7 +29,7 @@ class PerformanceCliTest(unittest.TestCase):
                 self.assertNotIn("Godot executable not found", result.stderr)
 
     def test_preserves_previous_report(self):
-        for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture", "summary.md", "cycle_0_far_restart-capture.json", "startup-fixture.json", "startup-progress.json", "prepare.log"):
+        for name in ("performance.json", "capture.json", "engine.log", "frames.csv", "process-memory.json", "fixture", "summary.md", "route-summary.json", "cycle_0_far_restart-capture.json", "startup-fixture.json", "startup-progress.json", "prepare.log"):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary:
                 output = Path(temporary)
                 previous = output / name
@@ -47,6 +47,12 @@ class PerformanceCliTest(unittest.TestCase):
                                          "--godot", "missing-engine", *arguments], capture_output=True, text=True)
                 self.assertEqual(result.returncode, 2)
                 self.assertIn("Developed", result.stderr)
+
+    def test_route_compare_requires_the_same_replay(self):
+        result = subprocess.run([sys.executable, str(RUNNER), "--mode", "route", "--compare", "/baseline",
+                                 "--replay", "/different", "--godot", "missing-engine"], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("same baseline report", result.stderr)
 
 
 if __name__ == "__main__":
