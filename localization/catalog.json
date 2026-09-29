@@ -3733,6 +3733,31 @@
       "en": "{name} · {profession}\nFood {food} % · Water {water} %\n{activity}"
     },
     {
+      "key": "TRIBE_RESIDENT_DETAIL_ACTIVITY",
+      "de": "{profession} · {activity}",
+      "en": "{profession} · {activity}"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_FOOD",
+      "de": "Nahrung · {percent} %",
+      "en": "Food · {percent}%"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_WATER",
+      "de": "Wasser · {percent} %",
+      "en": "Water · {percent}%"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_TOOLS",
+      "de": "Werkzeuge im Dorf: {count} · keines persönlich zugeteilt",
+      "en": "Village tools: {count} · none assigned personally"
+    },
+    {
+      "key": "TRIBE_RESIDENT_DETAIL_CLOTHING",
+      "de": "Kleidung: derzeit nicht verfügbar",
+      "en": "Clothing: not available yet"
+    },
+    {
       "key": "TRIBE_UNKNOWN_JOB",
       "de": "Unbekannter Beruf",
       "en": "Unknown profession"

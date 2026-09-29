@@ -2238,6 +2238,21 @@ msgstr "carrying {resource}"
 msgid "TRIBE_RESIDENT"
 msgstr "{name} · {profession}\nFood {food} % · Water {water} %\n{activity}"
 
+msgid "TRIBE_RESIDENT_DETAIL_ACTIVITY"
+msgstr "{profession} · {activity}"
+
+msgid "TRIBE_RESIDENT_DETAIL_FOOD"
+msgstr "Food · {percent}%"
+
+msgid "TRIBE_RESIDENT_DETAIL_WATER"
+msgstr "Water · {percent}%"
+
+msgid "TRIBE_RESIDENT_DETAIL_TOOLS"
+msgstr "Village tools: {count} · none assigned personally"
+
+msgid "TRIBE_RESIDENT_DETAIL_CLOTHING"
+msgstr "Clothing: not available yet"
+
 msgid "TRIBE_UNKNOWN_JOB"
 msgstr "Unknown profession"
 

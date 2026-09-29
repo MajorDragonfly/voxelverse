@@ -106,9 +106,15 @@ func _run() -> void:
 	var screen_point: Vector2 = tribe.camera.unproject_position(player.global_position + Vector3.UP)
 	await _world_click(screen_point, MOUSE_BUTTON_LEFT)
 	_expect(tribe.selected.size() == 1 and tribe.selected[0] == identity, "World click did not select the original creature.")
+	_expect(tribe.panel._resident_detail.visible and tribe.panel._resident_name.text == tribe.member_record(identity).name
+		and is_equal_approx(tribe.panel._resident_food.value, float(tribe.member_record(identity).hunger))
+		and is_equal_approx(tribe.panel._resident_water.value, float(tribe.member_record(identity).hydration))
+		and "Kleidung" in tribe.panel._resident_equipment.text,
+		"World selection did not show the resident's real name, needs and honest equipment status.")
 	var companion_id: String = str(tribe.village()["members"][1]["id"])
 	await _world_click(tribe.camera.unproject_position(tribe.actors[companion_id].global_position + Vector3.UP), MOUSE_BUTTON_LEFT, true)
 	_expect(tribe.selected.size() == 2, "Shift-click did not add the companion to the group.")
+	_expect(not tribe.panel._resident_detail.visible, "Multi-selection retained the wrong individual detail.")
 	var selection_rect := Rect2(screen_point, Vector2.ONE)
 	for actor: Node3D in tribe.actors.values():
 		selection_rect = selection_rect.expand(tribe.camera.unproject_position(actor.global_position + Vector3.UP))
@@ -197,6 +203,7 @@ func _run() -> void:
 	if tribe.is_active():
 		await _click(tribe.panel._residents.get_child(1))
 		_expect(tribe.selected == [str(tribe.village()["members"][1]["id"])], "New campaign's resident buttons still select the former campaign's IDs.")
+		_expect(tribe.panel._resident_detail.visible and tribe.panel._resident_name.text == tribe.village()["members"][1]["name"], "Resident detail retained the former campaign's identity.")
 	else:
 		_expect(false, "Second campaign cannot enter its own tribe.")
 	await _cleanup()

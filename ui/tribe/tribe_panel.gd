@@ -32,6 +32,14 @@ var _stock_labels: Dictionary = {}
 var _goal: Label
 var _supply: Label
 var _residents: HFlowContainer
+var _resident_detail: PanelContainer
+var _resident_name: Label
+var _resident_activity: Label
+var _resident_food_text: Label
+var _resident_water_text: Label
+var _resident_food: ProgressBar
+var _resident_water: ProgressBar
+var _resident_equipment: Label
 var _buttons: Dictionary = {}
 var _previous_mouse: int = Input.MOUSE_MODE_CAPTURED
 var _owns_pause: bool = false
@@ -160,6 +168,7 @@ func _build() -> void:
 	_supply = Style.label("", 16, Style.MUTED)
 	_residents = HFlowContainer.new()
 	column.add_child(_residents)
+	_build_resident_detail(column)
 	_tabs = TabContainer.new()
 	_tabs.use_hidden_tabs_for_min_size = false
 	column.add_child(_tabs)
@@ -323,6 +332,52 @@ func _place_hud() -> void:
 		return
 	_hud.position = Vector2(18, get_viewport().get_visible_rect().size.y / _scale_factor - _hud.size.y - 18)
 
+func _build_resident_detail(parent: VBoxContainer) -> void:
+	_resident_detail = PanelContainer.new()
+	_resident_detail.name = "SelectedResidentDetail"
+	_resident_detail.add_theme_stylebox_override("panel", Style.box(Color("223740"), Color("52706c"), 9))
+	parent.add_child(_resident_detail)
+	var content := Style.column(_resident_detail, 4)
+	_resident_name = Style.label("", 18, Style.SOCIAL)
+	content.add_child(_resident_name)
+	_resident_activity = Style.label("", 15, Style.TEXT)
+	content.add_child(_resident_activity)
+	_resident_food_text = Style.label("", 14, Style.MUTED)
+	content.add_child(_resident_food_text)
+	_resident_food = _resident_meter(content, Color("b5cc80"))
+	_resident_water_text = Style.label("", 14, Style.MUTED)
+	content.add_child(_resident_water_text)
+	_resident_water = _resident_meter(content, Color("78bad0"))
+	_resident_equipment = Style.label("", 14, Style.MUTED)
+	content.add_child(_resident_equipment)
+	_resident_detail.hide()
+
+func _resident_meter(parent: VBoxContainer, color: Color) -> ProgressBar:
+	var meter := ProgressBar.new()
+	meter.show_percentage = false
+	meter.custom_minimum_size.y = 9
+	meter.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var background := StyleBoxFlat.new()
+	background.bg_color = Color("14252d")
+	meter.add_theme_stylebox_override("background", background)
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = color
+	meter.add_theme_stylebox_override("fill", fill)
+	parent.add_child(meter)
+	return meter
+
+func _show_resident_detail(data: Dictionary, member: Dictionary, activity: String) -> void:
+	_resident_detail.show()
+	_resident_name.text = str(member.name)
+	_resident_activity.text = Text.format_text("TRIBE_RESIDENT_DETAIL_ACTIVITY", {
+		"profession": Presentation.job_title(str(member.profession)), "activity": activity})
+	_resident_food.value = float(member.hunger)
+	_resident_water.value = float(member.hydration)
+	_resident_food_text.text = Text.format_text("TRIBE_RESIDENT_DETAIL_FOOD", {"percent": roundi(float(member.hunger))})
+	_resident_water_text.text = Text.format_text("TRIBE_RESIDENT_DETAIL_WATER", {"percent": roundi(float(member.hydration))})
+	_resident_equipment.text = Text.format_text("TRIBE_RESIDENT_DETAIL_TOOLS", {"count": int(data.tools)}) \
+		+ "\n" + Text.text("TRIBE_RESIDENT_DETAIL_CLOTHING")
+
 
 func open_confirmation() -> bool:
 	if confirmation_open or get_tree().paused or controller._active:
@@ -427,6 +482,7 @@ func refresh() -> void:
 		var reason: String = Housing.growth_blocker(data)
 		_goal.text = Presentation.legacy_status(reason) if not reason.is_empty() else Text.format_text("TRIBE_GROWTH_READY", {"seconds": ceili(Housing.GROW_SECONDS - float(data["housing"]["clock"]))})
 	var identities: Array = data["members"].map(func(member: Dictionary) -> String: return str(member["id"]))
+	_resident_detail.visible = false
 	if _resident_ids != identities:
 		_resident_ids = identities
 		for child: Node in _residents.get_children():
@@ -481,6 +537,8 @@ func refresh() -> void:
 		var columns: int = 1 if _hud.size.x < 460 else 2
 		button.custom_minimum_size.x = maxf(180.0, (_hud.size.x - 56.0) / columns)
 		button.set_pressed_no_signal(member["id"] in controller.selected)
+		if controller.selected.size() == 1 and member["id"] == controller.selected[0]:
+			_show_resident_detail(data, member, description.activity)
 	for order: String in _buttons:
 		_buttons[order].disabled = controller.selected.is_empty() or get_tree().paused
 		if order in Economy.STATIONS and Economy.next_station(data, order).is_empty(): _buttons[order].disabled = true
