@@ -9,6 +9,8 @@ import tempfile
 from validation_support import isolated_env, validation_editor
 from validate_godot import ERROR
 
+NATIVE_TIMEOUT_SECONDS = 720  # Eight software-rendered phase/locale/size cases.
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -30,7 +32,7 @@ def main():
         timed_out = False
         with (output / "render.log").open("w") as log:
             try:
-                result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=480)
+                result = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=NATIVE_TIMEOUT_SECONDS)
                 exit_code = result.returncode
             except subprocess.TimeoutExpired:
                 timed_out = True
