@@ -185,7 +185,7 @@ func load_saved(path: String = CONFIG_PATH) -> void:
 	for field: String in TRIBE_CAMERA_DEFAULTS:
 		var value: Variant = config.get_value("tribe_camera", field, TRIBE_CAMERA_DEFAULTS[field])
 		if (value is float or value is int) and is_finite(float(value)):
-			tribe_camera[field] = clampf(float(value), 0.5 if field == "pan_speed" else 30.0, 3.0 if field == "pan_speed" else 80.0)
+			tribe_camera[field] = clampf(float(value), 0.5 if field == "pan_speed" else 3.0, 3.0 if field == "pan_speed" else 80.0)
 	apply_runtime()
 
 func save_and_apply(candidate: Dictionary, speed: float, inverted: bool, limit: int, path: String = CONFIG_PATH, camera_options: Dictionary = {}) -> String:
@@ -199,7 +199,7 @@ func save_and_apply(candidate: Dictionary, speed: float, inverted: bool, limit: 
 		var value: Variant = camera_candidate.get(field)
 		if not (value is float or value is int) or not is_finite(float(value)):
 			return Text.text("TRIBE_CAMERA_INVALID")
-		if float(value) < (0.5 if field == "pan_speed" else 30.0) or float(value) > (3.0 if field == "pan_speed" else 80.0):
+		if float(value) < (0.5 if field == "pan_speed" else 3.0) or float(value) > (3.0 if field == "pan_speed" else 80.0):
 			return Text.text("TRIBE_CAMERA_INVALID")
 	var config := ConfigFile.new()
 	for field: String in TRIBE_CAMERA_DEFAULTS: config.set_value("tribe_camera", field, camera_candidate[field])

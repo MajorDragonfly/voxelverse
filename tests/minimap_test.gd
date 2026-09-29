@@ -81,6 +81,9 @@ func _run() -> void:
 	paused = false
 	hud._process(1.0)
 	_expect(hud.visible, "Map did not return after pause.")
+	# Measure the taller tribal controls at compact resolutions as well.
+	hud._camera_controls.show()
+	hud._timer = 1000.0
 	for dimensions in [Vector2i(1280, 720), Vector2i(800, 600), Vector2i(800, 900)]:
 		root.size = dimensions
 		await _frames(4)

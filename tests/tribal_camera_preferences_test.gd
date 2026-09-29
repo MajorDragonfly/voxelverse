@@ -22,6 +22,12 @@ func _run() -> void:
 	var loaded := Preferences.new()
 	loaded.load_saved(path)
 	_check(loaded.tribe_camera == options and loaded.bindings == prefs.bindings, "Fresh preference instance lost saved camera values or keys.")
+	options.tilt = 3.0
+	_check(prefs.save_and_apply(prefs.bindings, 1.5, true, 0, path, options).is_empty(), "Eye-level tilt could not be saved.")
+	loaded.load_saved(path)
+	_check(loaded.tribe_camera.tilt == 3.0, "Eye-level tilt did not survive a fresh read.")
+	options.tilt = 38.0
+	prefs.save_and_apply(prefs.bindings, 1.5, true, 0, path, options)
 	var bytes: String = FileAccess.get_file_as_string(path)
 	for invalid: Dictionary in [{"pan_speed": NAN, "tilt": 55.0}, {"pan_speed": 0.0, "tilt": 55.0}, {"pan_speed": 1.0, "tilt": 90.0}]:
 		_check(not prefs.save_and_apply(prefs.bindings, 1.0, false, 0, path, invalid).is_empty(), "Invalid camera settings were accepted.")

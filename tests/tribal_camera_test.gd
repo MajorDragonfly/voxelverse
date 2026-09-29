@@ -54,6 +54,28 @@ func _run() -> void:
 	_press(KEY_W, false)
 	var movement: Vector3 = tribe._focus - start
 	_expect(movement.length() > 1.0 and movement.normalized().dot(expected) > 0.99, "WASD does not follow the camera heading.")
+	# Fixed simulated time makes the speed comparison independent of software FPS.
+	rig.focus_home()
+	rig.held.clear()
+	rig.held["move_forward"] = true
+	start = tribe._focus
+	for i in range(5): rig.advance(0.1)
+	var normal_metres: float = tribe._focus.distance_to(start)
+	start = tribe._focus
+	rig.fast_pan = true
+	for i in range(5): rig.advance(0.1)
+	var fast_metres: float = tribe._focus.distance_to(start)
+	rig.held.clear()
+	rig.fast_pan = false
+	_expect(normal_metres > 14.0 and fast_metres > normal_metres * 1.8, "New default pan and temporary fast mode did not cover the expected distance.")
+	print("TRIBAL_CAMERA_PAN_METRICS ", JSON.stringify({"default_m_in_half_second": normal_metres, "shift_m_in_half_second": fast_metres}))
+	rig.focus_home()
+	_press(KEY_SHIFT, true)
+	await _frames(1)
+	_expect(rig.fast_pan, "Holding Shift did not enable fast movement.")
+	_press(KEY_SHIFT, false)
+	await _frames(1)
+	_expect(not rig.fast_pan, "Releasing Shift kept fast movement active.")
 	_key(KEY_HOME)
 	await _frames(2)
 	_expect(tribe._focus.distance_to(tribe.anchor()) < 0.01, "Home did not return to the village.")
