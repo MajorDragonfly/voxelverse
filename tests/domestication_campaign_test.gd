@@ -83,17 +83,33 @@ func _run() -> void:
 	await _until(func(): return tribe._active and not tribe.navigation.pending, 1200)
 	var tabs: TabBar = tribe.panel._tabs.get_tab_bar()
 	var tab_index: int = d2.controls.get_index()
-	tribe.panel._scroll.ensure_control_visible(tribe.panel._tabs)
-	tabs.ensure_tab_visible(tab_index)
+	# The expandable resident/resource detail can be taller than the viewport.
+	# Scroll the actual tab bar into view, rather than the whole tab container.
+	tribe.panel._scroll.ensure_control_visible(tabs)
 	await _frames(3)
+	var bar_on_screen: Rect2 = _physical_rect(tabs)
+	var scroll_window: Rect2 = _physical_rect(tribe.panel._scroll)
+	if bar_on_screen.end.y > scroll_window.end.y:
+		tribe.panel._scroll.scroll_vertical += ceili(bar_on_screen.end.y - scroll_window.end.y + 8.0)
+		await _frames(3)
+	tabs.ensure_tab_visible(tab_index)
+	await _frames(2)
 	await _world_click(tabs.get_global_transform_with_canvas() * tabs.get_tab_rect(tab_index).get_center(), MOUSE_BUTTON_LEFT)
 	await _frames(18)
-	_expect(d2.controls.visible and d2.controls.selected_id() == animal_id, "Existing HUD did not open the actual animal controls")
+	var controls_open: bool = d2.controls.visible and d2.controls.selected_id() == animal_id
+	_expect(controls_open, "Existing HUD did not open the actual animal controls: tab=%d, target=%d, visible=%s, animal=%s" % [tribe.panel._tabs.current_tab, tab_index, d2.controls.visible, d2.controls.selected_id()])
+	if not controls_open:
+		await _done()
+		return
 	await _click(d2.controls.buttons["offer"])
 	_expect(d2.controller.last_result["ok"], "Cannot offer D1 animal food through HUD: " + d2.status)
+	if not d2.controller.last_result["ok"]:
+		await _done()
+		return
 	await _frames(25)
-	_expect(d2.animals.has(animal_id) and not d2.controller.record(animal_id)["pending"].is_empty(), "Animal not transferred during offering")
-	if d2.controller.record(animal_id)["pending"].is_empty():
+	var adopted: Dictionary = d2.controller.record(animal_id)
+	_expect(d2.animals.has(animal_id) and adopted.has("pending") and not adopted.pending.is_empty(), "Animal not transferred during offering")
+	if not adopted.has("pending") or adopted.pending.is_empty():
 		print({"record": d2.controller.record(animal_id), "context": d2.context(animal_id, members_before[0]), "last": d2.controller.last_result})
 		await _done()
 		return
