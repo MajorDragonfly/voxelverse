@@ -8034,8 +8034,8 @@
     },
     {
       "key": "CONSTRUCTION_MATERIAL_ROW",
-      "de": "{resource}: {delivered}/{required} am Bau · {carried} unterwegs · {reserved} reserviert",
-      "en": "{resource}: {delivered}/{required} on site · {carried} in transit · {reserved} reserved"
+      "de": "{resource}: {delivered}/{required} am Bau · {remaining} offen ({carried} unterwegs) · {reserved} reserviert",
+      "en": "{resource}: {delivered}/{required} on site · {remaining} remaining ({carried} in transit) · {reserved} reserved"
     },
     {
       "key": "CONSTRUCTION_RETURN_ROW",

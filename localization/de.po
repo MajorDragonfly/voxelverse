@@ -4819,7 +4819,7 @@ msgid "CONSTRUCTION_WORKERS"
 msgstr "Zugewiesen: {count} · gestoppt oder ohne Weg: {blocked}"
 
 msgid "CONSTRUCTION_MATERIAL_ROW"
-msgstr "{resource}: {delivered}/{required} am Bau · {carried} unterwegs · {reserved} reserviert"
+msgstr "{resource}: {delivered}/{required} am Bau · {remaining} offen ({carried} unterwegs) · {reserved} reserviert"
 
 msgid "CONSTRUCTION_RETURN_ROW"
 msgstr "{resource}: {returned}/{required} zurück · {carried} getragen · {delivered} am Bau"

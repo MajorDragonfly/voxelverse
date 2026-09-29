@@ -1,6 +1,7 @@
 extends SceneTree
 const Registry = preload("res://core/campaign/body_registry.gd")
 const Model = preload("res://world/tribe/tribe_state.gd")
+const Space = preload("res://world/surface/gameplay_space.gd")
 const SAVE: String = "user://tribal_age_test.json"
 class ReadyWorld:
 	extends Node
@@ -107,8 +108,8 @@ func _run() -> void:
 	await _world_click(screen_point, MOUSE_BUTTON_LEFT)
 	_expect(tribe.selected.size() == 1 and tribe.selected[0] == identity, "World click did not select the original creature.")
 	_expect(tribe.panel._resident_detail.visible and tribe.panel._resident_name.text == tribe.member_record(identity).name
-		and is_equal_approx(tribe.panel._resident_food.value, float(tribe.member_record(identity).hunger))
-		and is_equal_approx(tribe.panel._resident_water.value, float(tribe.member_record(identity).hydration))
+		and absf(tribe.panel._resident_food.value - float(tribe.member_record(identity).hunger)) < 0.01
+		and absf(tribe.panel._resident_water.value - float(tribe.member_record(identity).hydration)) < 0.01
 		and "Kleidung" in tribe.panel._resident_equipment.text,
 		"World selection did not show the resident's real name, needs and honest equipment status.")
 	var companion_id: String = str(tribe.village()["members"][1]["id"])
@@ -159,6 +160,18 @@ func _run() -> void:
 	await _capture("04_tool")
 	await _click(tribe.panel._buttons["hut"])
 	await _world_click(tribe.camera.unproject_position(Vector3(5, 100.06, 5)), MOUSE_BUTTON_RIGHT)
+	var project_before: Dictionary = tribe.village().project.duplicate(true)
+	_expect(not project_before.is_empty(), "Hut placement did not create a site to inspect.")
+	if not project_before.is_empty():
+		var site: Vector3 = Space.resolve(tribe, project_before.position)
+		var construction_point: Vector2 = tribe.camera.unproject_position(site + Space.up(tribe, site) * 2.8)
+		_expect(tribe.project_at(construction_point), "The visible construction site cannot be picked by its label.")
+		await _world_click(construction_point, MOUSE_BUTTON_LEFT)
+		_expect(tribe.panel._tabs.get_current_tab_control() == tribe.panel._build_page and not tribe.panel._collapsed
+			and tribe.panel._construction.visible and "offen" in tribe.panel._construction._details.text,
+			"Clicking the site did not reveal construction progress and materials.")
+		_expect(tribe.village().project == project_before, "Inspecting a construction site changed the project state.")
+		tribe.select_all()
 	await _until(func() -> bool: return int(tribe.village()["huts"]) == 1, 1600)
 	_expect(int(tribe.village()["huts"]) == 1, "Workers did not finish the first shelter.")
 	await _until(func() -> bool: return tribe.is_active() and not tribe.navigation.pending, 1200)

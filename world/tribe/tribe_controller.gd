@@ -364,16 +364,37 @@ func select_all() -> void:
 		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
 
-func screen_select(rect: Rect2, additive: bool) -> void:
+func screen_select(rect: Rect2, additive: bool) -> bool:
 	if not additive:
 		selected.clear()
+	var found: bool = false
 	for identity: String in actors:
 		var actor: Node3D = actors[identity]
-		if not camera.is_position_behind(actor.global_position) and rect.has_point(camera.unproject_position(actor.global_position + Space.up(self, actor.global_position))) and identity not in selected:
-			selected.append(identity)
+		if not camera.is_position_behind(actor.global_position) and rect.has_point(camera.unproject_position(actor.global_position + Space.up(self, actor.global_position))):
+			found = true
+			if identity not in selected:
+				selected.append(identity)
 	if is_active() and not selected.is_empty():
 		guidance_action.emit("tribe_single" if selected.size() == 1 else "tribe_group", 1.0)
 	panel.refresh()
+	return found
+
+func project_at(position: Vector2) -> bool:
+	if not is_active() or not placement.is_empty() or village().project.is_empty() or not is_instance_valid(camera):
+		return false
+	var site: Vector3 = Space.resolve(self, village().project.position)
+	if camera.is_position_behind(site): return false
+	var up: Vector3 = Space.up(self, site)
+	var base: Vector2 = camera.unproject_position(site)
+	var top: Vector2 = camera.unproject_position(site + up * 2.8)
+	# The model and its label occupy a short vertical span in the overview.
+	var segment: Vector2 = top - base
+	var t: float = clampf((position - base).dot(segment) / maxf(segment.length_squared(), 1.0), 0.0, 1.0)
+	if position.distance_to(base + segment * t) > 35.0: return false
+	# Reject projected sites hidden on the far side of terrain. Labels can sit
+	# above the ground, so allow the ray to land a few metres behind the site.
+	var hit: Dictionary = ground_hit(position)
+	return not hit.is_empty() and hit.position.distance_to(site) < 5.0
 
 func ground_hit(position: Vector2) -> Dictionary:
 	if not is_instance_valid(camera) or not is_instance_valid(player): return {}

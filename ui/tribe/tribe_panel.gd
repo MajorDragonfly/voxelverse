@@ -638,11 +638,24 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _finish_selection(event: InputEventMouseButton) -> void:
 	var rect := Rect2(_drag_start, event.position - _drag_start).abs()
-	if rect.size.length() < 8:
+	var click: bool = rect.size.length() < 8
+	if click:
 		rect = Rect2(event.position - Vector2(22, 32), Vector2(44, 64))
-	controller.screen_select(rect, event.shift_pressed)
+	var resident_hit: bool = controller.screen_select(rect, event.shift_pressed)
+	if click and not resident_hit and not event.shift_pressed and controller.project_at(event.position):
+		open_construction()
 	_dragging = false
 	_selection.hide()
+
+func open_construction() -> void:
+	_collapsed = false
+	_tabs.current_tab = _tabs.get_tab_idx_from_control(_build_page)
+	refresh()
+	call_deferred("_scroll_to_construction")
+
+func _scroll_to_construction() -> void:
+	if _construction.is_visible_in_tree():
+		_scroll.ensure_control_visible(_construction.get_child(0) as Control)
 
 func _exit_tree() -> void:
 	if _owns_pause:
