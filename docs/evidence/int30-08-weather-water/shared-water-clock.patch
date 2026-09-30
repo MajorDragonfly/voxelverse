@@ -1,0 +1,33 @@
+--- a/world/surface/visuals/living_surface_materials.gd
++++ b/world/surface/visuals/living_surface_materials.gd
+@@ -7,6 +7,7 @@
+ var water: Array[ShaderMaterial] = []
+ var time: float = 0.0
+ var frozen: bool = false
++var clock_source: Callable
+ var radius: float
+ 
+ 
+@@ -50,6 +51,9 @@
+ 
+ func advance(delta: float) -> void:
+ 	if not frozen:
+-		time += delta
++		if clock_source.is_valid():
++			time = maxf(float(clock_source.call()), 0.0)
++		else:
++			time += delta
+ 	for material in water:
+ 		material.set_shader_parameter("surface_time", time)
+--- a/main/spherical_campaign.gd
++++ b/main/spherical_campaign.gd
+@@ -41,6 +41,9 @@
+ 	terrain = Terrain.new()
+ 	add_child(terrain)
+ 	terrain.configure(Surface.descriptor(body))
++	if terrain.presentation != null:
++		terrain.presentation.clock_source = func() -> float: return float(state.campaign.data.elapsed_seconds)
++		terrain.presentation.advance(0.0)
+ 	adapter = Adapter.new(terrain)
+ 	set_meta("campaign_surface", adapter)
+ 	adapter.origin_shifted.connect(get_node("/root/AudioManager").director.surface_origin_shifted)

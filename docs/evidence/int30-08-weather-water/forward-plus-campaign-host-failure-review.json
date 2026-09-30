@@ -1,0 +1,104 @@
+{
+  "passed": false,
+  "renderer": "forward_plus",
+  "command": [
+    "/tmp/voxelverse-validation-editor-hgdpyigv/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/7644ddc06b68/voxelverse",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/weather_runtime_test.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/7644ddc06b68/v30-08-final-campaign-forward-plus",
+    "--capture-days-only"
+  ],
+  "exit_code": 1,
+  "seconds": 460.2964338179954,
+  "log_sha256": "d7602cff9d0411b15f0d4a1d5d789abf7a55330bac2eaa02dae56500b9ad5b2c",
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": false,
+      "commit": null,
+      "tree": null,
+      "tracked_worktree_dirty": null,
+      "error": "Git source state changed during observation",
+      "complete": false,
+      "seconds": 73.4021
+    },
+    "end": {
+      "available": true,
+      "commit": "d7cf7da16abf1b9b27c7d437711ae1e83730e0b6",
+      "tree": "b79c76b40cdcaba48ac2e977d0e28b753040f952",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "72c782e68a6082d9ebac9cd8467e8ee385a7b41e3f6d829e822cc32fc1295461",
+      "source_sha256": "f558192bc4842b48c78e4b81e2396d33a9c2e2f6cca3e8f29a57e032e3ca0d94",
+      "complete": true,
+      "file_count": 3958,
+      "bytes": 125293436,
+      "bytes_hashed": 125293436,
+      "seconds": 3.4699
+    },
+    "status": "changed_or_unavailable",
+    "reusable": false,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "2a0ccb1df4904f50520fe8d9e6d3967252d1235d644b4bd4929b037ffdf5990e"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_campaign",
+        "source": {
+          "available": true,
+          "commit": "d7cf7da16abf1b9b27c7d437711ae1e83730e0b6",
+          "tree": "b79c76b40cdcaba48ac2e977d0e28b753040f952",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "72c782e68a6082d9ebac9cd8467e8ee385a7b41e3f6d829e822cc32fc1295461",
+          "source_sha256": "f558192bc4842b48c78e4b81e2396d33a9c2e2f6cca3e8f29a57e032e3ca0d94",
+          "complete": true,
+          "file_count": 3958,
+          "bytes": 125293436,
+          "bytes_hashed": 125293436,
+          "seconds": 3.4699
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unavailable"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "captures": {
+    "campaign-dawn.png": {
+      "dimensions": null,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passed": false
+    },
+    "campaign-noon.png": {
+      "dimensions": null,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passed": false
+    },
+    "campaign-dusk.png": {
+      "dimensions": null,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passed": false
+    },
+    "campaign-night.png": {
+      "dimensions": null,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passed": false
+    }
+  },
+  "scope": "Native canonical day captures in actual spherical campaign. Pause/save/travel belong to the default weather_runtime contract, not this capture-only invocation."
+}

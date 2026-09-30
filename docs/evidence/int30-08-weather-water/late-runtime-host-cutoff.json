@@ -1,0 +1,237 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "4756af569c93effbd8ec0358807260b91dfa7471",
+    "tree": "87198e974ade3b8e0eab38b65f668a2a34f404e8",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "64791354e422b4972f0b76fe58bb29a68d11aaa1712983c8172fbc12bacd25af",
+    "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+    "complete": true,
+    "file_count": 3958,
+    "bytes": 125296567,
+    "bytes_hashed": 125296567,
+    "seconds": 2.871
+  },
+  "passed": false,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "weather_forecast_ui_test",
+    "weather_runtime_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "4756af569c93effbd8ec0358807260b91dfa7471",
+      "tree": "87198e974ade3b8e0eab38b65f668a2a34f404e8",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "64791354e422b4972f0b76fe58bb29a68d11aaa1712983c8172fbc12bacd25af",
+      "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+      "complete": true,
+      "file_count": 3958,
+      "bytes": 125296567,
+      "bytes_hashed": 125296567,
+      "seconds": 2.871
+    },
+    "end": {
+      "available": true,
+      "commit": "4756af569c93effbd8ec0358807260b91dfa7471",
+      "tree": "87198e974ade3b8e0eab38b65f668a2a34f404e8",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "64791354e422b4972f0b76fe58bb29a68d11aaa1712983c8172fbc12bacd25af",
+      "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+      "complete": true,
+      "file_count": 3958,
+      "bytes": 125296567,
+      "bytes_hashed": 125296567,
+      "seconds": 1.9017
+    },
+    "status": "stable",
+    "reusable": false,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "44a507b9cf4b8484df539626358ffde51e0744359863959794e5b73319072e0f"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "44a507b9cf4b8484df539626358ffde51e0744359863959794e5b73319072e0f"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "4756af569c93effbd8ec0358807260b91dfa7471",
+          "tree": "87198e974ade3b8e0eab38b65f668a2a34f404e8",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "64791354e422b4972f0b76fe58bb29a68d11aaa1712983c8172fbc12bacd25af",
+          "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+          "complete": true,
+          "file_count": 3958,
+          "bytes": 125296567,
+          "bytes_hashed": 0,
+          "seconds": 0.797
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "4756af569c93effbd8ec0358807260b91dfa7471",
+          "tree": "87198e974ade3b8e0eab38b65f668a2a34f404e8",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "64791354e422b4972f0b76fe58bb29a68d11aaa1712983c8172fbc12bacd25af",
+          "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+          "complete": true,
+          "file_count": 3958,
+          "bytes": 125296567,
+          "bytes_hashed": 0,
+          "seconds": 0.6437
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "weather_forecast_ui_test",
+        "source": {
+          "available": true,
+          "commit": "4756af569c93effbd8ec0358807260b91dfa7471",
+          "tree": "87198e974ade3b8e0eab38b65f668a2a34f404e8",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "64791354e422b4972f0b76fe58bb29a68d11aaa1712983c8172fbc12bacd25af",
+          "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+          "complete": true,
+          "file_count": 3958,
+          "bytes": 125296567,
+          "bytes_hashed": 0,
+          "seconds": 0.5804
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "weather_runtime_test",
+        "source": {
+          "available": true,
+          "commit": "4756af569c93effbd8ec0358807260b91dfa7471",
+          "tree": "87198e974ade3b8e0eab38b65f668a2a34f404e8",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "64791354e422b4972f0b76fe58bb29a68d11aaa1712983c8172fbc12bacd25af",
+          "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+          "complete": true,
+          "file_count": 3958,
+          "bytes": 125296567,
+          "bytes_hashed": 0,
+          "seconds": 0.3585
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "4756af569c93effbd8ec0358807260b91dfa7471",
+          "tree": "87198e974ade3b8e0eab38b65f668a2a34f404e8",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "64791354e422b4972f0b76fe58bb29a68d11aaa1712983c8172fbc12bacd25af",
+          "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+          "complete": true,
+          "file_count": 3958,
+          "bytes": 125296567,
+          "bytes_hashed": 125296567,
+          "seconds": 1.9017
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.446,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/7644ddc06b68/voxelverse/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--output",
+        "/workspace/scratch/7644ddc06b68/v30-08-hud-final/contracts.json"
+      ],
+      "log_sha256": "69b6a8f8335c909f968e0a2af582cefce0056872a8e3be5ce3afd8679e8adfd2",
+      "process_passed": true,
+      "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_forecast_ui_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 7.545,
+      "command": [
+        "/workspace/scratch/7644ddc06b68/godot-validation/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/weather_forecast_ui_test.gd"
+      ],
+      "log_sha256": "0182a93de147d15f9e8c3fa13c8838d285ed3e134d03fde66af169142fdba313",
+      "contract": "weather",
+      "process_passed": false,
+      "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_runtime_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 124,
+      "seconds": 420.099,
+      "command": [
+        "/workspace/scratch/7644ddc06b68/godot-validation/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/weather_runtime_test.gd"
+      ],
+      "log_sha256": "cf7ca343c44c83b33308306d0e04ef8ef0bc56b8c7508f2849c8b8ea1a53834b",
+      "contract": "weather",
+      "process_passed": false,
+      "source_sha256": "a9cff15864f7118a53d215230cdc2c55ced1ce3f5dbfc6ef48b386b6ebe6555d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": false
+    }
+  ]
+}

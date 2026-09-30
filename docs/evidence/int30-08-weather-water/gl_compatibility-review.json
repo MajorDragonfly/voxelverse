@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "renderer": "gl_compatibility",
+  "exit_code": 0,
+  "captures": {
+    "forecast-800x600-de.png": {
+      "dimensions": [
+        800,
+        600
+      ],
+      "passed": true
+    },
+    "forecast-1280x720-de.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "passed": true
+    },
+    "forecast-1920x1080-de.png": {
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "passed": true
+    },
+    "warning-800x600-de.png": {
+      "dimensions": [
+        800,
+        600
+      ],
+      "passed": true
+    },
+    "warning-1280x720-de.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "passed": true
+    },
+    "forecast-800x600-en.png": {
+      "dimensions": [
+        800,
+        600
+      ],
+      "passed": true
+    },
+    "forecast-1280x720-en.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "passed": true
+    },
+    "forecast-1920x1080-en.png": {
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "passed": true
+    },
+    "warning-800x600-en.png": {
+      "dimensions": [
+        800,
+        600
+      ],
+      "passed": true
+    },
+    "warning-1280x720-en.png": {
+      "dimensions": [
+        1280,
+        720
+      ],
+      "passed": true
+    }
+  }
+}

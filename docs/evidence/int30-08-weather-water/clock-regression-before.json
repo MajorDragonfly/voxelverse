@@ -1,0 +1,126 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "37c607d88174fdf2c3de3d3751f1c9899a8e5629",
+    "tree": "f64321bc71baf0884b0b8b15dff5d07e38bc6ada",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "2ef14b9be9954cf252a2cf75c864fc6b40a4dd301fbce058a574cfa7a7d127ec",
+    "source_sha256": "c9e7a33538a182a764f2da48c51b2d587ffcb35cc65194f43a9b0858d91a51ac",
+    "complete": true,
+    "file_count": 3957,
+    "bytes": 125279091,
+    "bytes_hashed": 125279091,
+    "seconds": 0.3342
+  },
+  "passed": false,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "weather_runtime_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.119,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/7644ddc06b68/v30-08-regression-before/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/7644ddc06b68/v30-08-regression-before",
+        "--output",
+        "/workspace/scratch/7644ddc06b68/v30-08-regression-before-run/contracts.json"
+      ],
+      "log_sha256": "69b6a8f8335c909f968e0a2af582cefce0056872a8e3be5ce3afd8679e8adfd2",
+      "process_passed": true,
+      "source_sha256": "c9e7a33538a182a764f2da48c51b2d587ffcb35cc65194f43a9b0858d91a51ac",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.904,
+      "command": [
+        "/tmp/voxelverse-validation-editor-m27epis6/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/v30-08-regression-before",
+        "--import"
+      ],
+      "log_sha256": "fa65d75204aaf951e307ee6ed3c64573b4451c300828996d8d248b848ba3c252",
+      "process_passed": true,
+      "source_sha256": "c9e7a33538a182a764f2da48c51b2d587ffcb35cc65194f43a9b0858d91a51ac",
+      "source_status": "import_preparation"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.327,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/7644ddc06b68/v30-08-regression-before/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "c9e7a33538a182a764f2da48c51b2d587ffcb35cc65194f43a9b0858d91a51ac",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_runtime_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 137.849,
+      "command": [
+        "/tmp/voxelverse-validation-editor-m27epis6/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/v30-08-regression-before",
+        "--script",
+        "res://tests/weather_runtime_test.gd"
+      ],
+      "log_sha256": "bf64a072ac93d9f57fe44fad10560a4f5cdec51a9787e2b6d569d9f9e840be38",
+      "contract": "weather",
+      "process_passed": false,
+      "source_sha256": "c9e7a33538a182a764f2da48c51b2d587ffcb35cc65194f43a9b0858d91a51ac",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "prepared",
+      "reusable_source": false
+    }
+  ],
+  "provenance": {
+    "status": "prepared",
+    "reusable": false,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "b29dfdb22e3070f2752b6d9eb6c88715d3ad08dc5753ce6377886e8316a4cb4b"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "b29dfdb22e3070f2752b6d9eb6c88715d3ad08dc5753ce6377886e8316a4cb4b"
+      }
+    },
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "original_results_sha256": "97c99694c7b54e1e8434855d46d5ede59bb2d7383b3162bb3d14ee6c30bffe06"
+}

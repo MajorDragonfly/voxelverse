@@ -1,0 +1,313 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"captures": [
+		{
+			"campaign_seconds": 900.0,
+			"cloud_cover": 0.24206957755672,
+			"day_fraction": 0.25,
+			"draw_calls": 52.0,
+			"id": "day-dawn",
+			"preview": false,
+			"primitives": 143574.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.120509743690491,
+				-0.928634405136108
+			],
+			"sun_energy": 0.390932351350784,
+			"water_time": 900.0
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.241026928527263,
+			"day_fraction": 0.5,
+			"draw_calls": 44.0,
+			"id": "day-noon",
+			"preview": false,
+			"primitives": 114930.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 1260.0
+		},
+		{
+			"campaign_seconds": 180.0,
+			"cloud_cover": 0.190793895634438,
+			"day_fraction": 0.75,
+			"draw_calls": 46.0,
+			"id": "day-dusk",
+			"preview": false,
+			"primitives": 114948.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				-0.120509773492813,
+				0.928634405136108
+			],
+			"sun_energy": 0.0,
+			"water_time": 180.0
+		},
+		{
+			"campaign_seconds": 540.0,
+			"cloud_cover": 0.652454297951137,
+			"day_fraction": 0.0,
+			"draw_calls": 43.0,
+			"id": "day-night",
+			"preview": false,
+			"primitives": 114948.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				-0.928634405136108,
+				-0.120509773492813
+			],
+			"sun_energy": 0.0,
+			"water_time": 540.0
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.16,
+			"day_fraction": 0.5,
+			"draw_calls": 37.0,
+			"id": "cover-clear",
+			"preview": true,
+			"primitives": 114392.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 1260.0
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.86,
+			"day_fraction": 0.5,
+			"draw_calls": 37.0,
+			"id": "cover-overcast",
+			"preview": true,
+			"primitives": 114392.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.573756754398346,
+			"water_time": 1260.0
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.241026928527263,
+			"day_fraction": 0.5,
+			"draw_calls": 16.0,
+			"id": "shadow-off",
+			"preview": false,
+			"primitives": 29138.0,
+			"shadows": false,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 1260.0
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.241026928527263,
+			"day_fraction": 0.5,
+			"draw_calls": 44.0,
+			"id": "shadow-on",
+			"preview": false,
+			"primitives": 114930.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 1260.0
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.241026928527263,
+			"day_fraction": 0.5,
+			"draw_calls": 37.0,
+			"id": "water-current-off",
+			"preview": false,
+			"primitives": 114392.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 1.8
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.241026928527263,
+			"day_fraction": 0.5,
+			"draw_calls": 37.0,
+			"id": "water-current-on",
+			"preview": false,
+			"primitives": 114392.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 1.8
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.241026928527263,
+			"day_fraction": 0.5,
+			"draw_calls": 37.0,
+			"id": "water-later",
+			"preview": false,
+			"primitives": 114392.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 3.8
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.241026928527263,
+			"day_fraction": 0.5,
+			"draw_calls": 37.0,
+			"id": "water-paused",
+			"preview": false,
+			"primitives": 114392.0,
+			"shadows": true,
+			"sun_direction": [
+				0.350878298282623,
+				0.928634405136108,
+				0.120509654283524
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 3.8
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.271365393982754,
+			"day_fraction": 0.5,
+			"draw_calls": 236.0,
+			"id": "procedural-sea",
+			"preview": false,
+			"primitives": 125544.0,
+			"shadows": true,
+			"sun_direction": [
+				-0.0394826233386993,
+				0.747789263725281,
+				0.662761211395264
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 1260.0
+		},
+		{
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.251254605745544,
+			"day_fraction": 0.5,
+			"draw_calls": 175.0,
+			"id": "procedural-lake",
+			"preview": false,
+			"primitives": 107646.0,
+			"shadows": true,
+			"sun_direction": [
+				0.458438217639923,
+				-0.884701430797577,
+				-0.084484875202179
+			],
+			"sun_energy": 0.875736713409424,
+			"water_time": 1260.0
+		}
+	],
+	"current_frame_costs": {
+		"0.0": {
+			"frames": 36,
+			"max_ms": 47.65,
+			"p50_ms": 35.312,
+			"p95_ms": 43.575
+		},
+		"1.0": {
+			"frames": 36,
+			"max_ms": 40.679,
+			"p50_ms": 33.346,
+			"p95_ms": 38.707
+		}
+	},
+	"engine": "4.6.3-stable (official)",
+	"failures": [],
+	"passed": true,
+	"procedural_water_sites": [
+		{
+			"address": {
+				"body_id": "int30-actual-water",
+				"face": 2,
+				"height": 0.0,
+				"mode": "cube_sphere_m1_v1",
+				"u": -0.6,
+				"v": -0.9
+			},
+			"camera": "[X: (0.599864, 0.703284, -0.381517), Y: (-0.694752, 0.694354, 0.187596), Z: (0.396841, 0.152527, 0.905126), O: (20.84833, 8.013105, 47.55142)]",
+			"kind": "sea",
+			"lake_mask_vertices": 0,
+			"origin": [
+				-2594949.96622072,
+				4324916.61036787,
+				3892424.94933109
+			],
+			"scope": "Actual version-4 production patch/depth pipeline, isolated from full campaign streaming.",
+			"tiles": 25,
+			"water_vertices": 7225,
+			"wet_vertices": 5127
+		},
+		{
+			"address": {
+				"body_id": "int30-actual-water",
+				"face": 0,
+				"height": 15.9889518413638,
+				"mode": "cube_sphere_m1_v1",
+				"u": 0.300003051757812,
+				"v": -0.900070190429688
+			},
+			"camera": "[X: (-0.66414, -0.581097, -0.470367), Y: (0.71979, -0.326978, -0.612362), Z: (0.202042, -0.745259, 0.635427), O: (10.61442, -39.15273, 33.3826)]",
+			"kind": "lake",
+			"lake_mask_vertices": 567,
+			"origin": [
+				4621864.89038772,
+				-4160002.81203156,
+				-1386573.5719286
+			],
+			"scope": "Actual version-4 production patch/depth pipeline, isolated from full campaign streaming.",
+			"tiles": 25,
+			"water_vertices": 3468,
+			"wet_vertices": 567
+		}
+	],
+	"renderer": "gl_compatibility",
+	"scope": "Fixed production-material fixture plus actual v2 sea/lake patches built by PlanetMeshBatch. No complete flora/population campaign image. Cover pair is diagnostic. Frame timings are software-runner evidence, not target-PC FPS. No normal storm exists in climate revision 1.",
+	"seed": 15838,
+	"size": [
+		960,
+		540
+	]
+}

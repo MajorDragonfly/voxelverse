@@ -1,0 +1,120 @@
+{
+  "passed": true,
+  "renderer": "forward_plus",
+  "command": [
+    "/workspace/scratch/7644ddc06b68/godot-validation/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/7644ddc06b68/voxelverse-hudfix",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/weather_runtime_test.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/7644ddc06b68/v30-08-checked-campaign-forward-plus",
+    "--capture-days-only"
+  ],
+  "exit_code": 0,
+  "seconds": 81.65644635799981,
+  "log_sha256": "7353fbd6f3784742c3fe6892b75f42a04f6d70d7635e12f652fdbc231186bf28",
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "90720d43c79424b766ba6c9b12c979f55127c6b7",
+      "tree": "7da5f1ad83c97a97b3343cd799b82a9e10aaa46f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7827751ccb294cdb2c548dfd253735c06790ff0b10fa68e0c1b9b99760e71acc",
+      "source_sha256": "17510e27edc25dd69694b325b0b2aa5c4488539633893b9bb2679983140e0432",
+      "complete": true,
+      "file_count": 3958,
+      "bytes": 125297595,
+      "bytes_hashed": 125297595,
+      "seconds": 0.3286
+    },
+    "end": {
+      "available": true,
+      "commit": "90720d43c79424b766ba6c9b12c979f55127c6b7",
+      "tree": "7da5f1ad83c97a97b3343cd799b82a9e10aaa46f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7827751ccb294cdb2c548dfd253735c06790ff0b10fa68e0c1b9b99760e71acc",
+      "source_sha256": "17510e27edc25dd69694b325b0b2aa5c4488539633893b9bb2679983140e0432",
+      "complete": true,
+      "file_count": 3958,
+      "bytes": 125297595,
+      "bytes_hashed": 125297595,
+      "seconds": 0.335
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "00445f5f91c15c42f888fd632ec3472e705aa0c94f96df3b59b1f6c86b73b21f"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "00445f5f91c15c42f888fd632ec3472e705aa0c94f96df3b59b1f6c86b73b21f"
+      }
+    },
+    "observations": [
+      {
+        "after": "native_campaign",
+        "source": {
+          "available": true,
+          "commit": "90720d43c79424b766ba6c9b12c979f55127c6b7",
+          "tree": "7da5f1ad83c97a97b3343cd799b82a9e10aaa46f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7827751ccb294cdb2c548dfd253735c06790ff0b10fa68e0c1b9b99760e71acc",
+          "source_sha256": "17510e27edc25dd69694b325b0b2aa5c4488539633893b9bb2679983140e0432",
+          "complete": true,
+          "file_count": 3958,
+          "bytes": 125297595,
+          "bytes_hashed": 125297595,
+          "seconds": 0.335
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "captures": {
+    "campaign-dawn.png": {
+      "dimensions": [
+        960,
+        540
+      ],
+      "sha256": "39e4711ad5c856792575c34514709086696f367b9698af14f3ba06a62aa3b286",
+      "passed": true
+    },
+    "campaign-noon.png": {
+      "dimensions": [
+        960,
+        540
+      ],
+      "sha256": "d5e9aedb8a44eb85550cd70b080d19dbf03a68bb0c1f721dbb73777d8fce76b1",
+      "passed": true
+    },
+    "campaign-dusk.png": {
+      "dimensions": [
+        960,
+        540
+      ],
+      "sha256": "8617f57b7fcf8d715e3b9c37e285c5799b4d666cc221536b7071d60f6e34254c",
+      "passed": true
+    },
+    "campaign-night.png": {
+      "dimensions": [
+        960,
+        540
+      ],
+      "sha256": "7a59b000aa9d36dda1d7cf2f442fd876543b3b807d01c2dcf9e3e6c5d5beae57",
+      "passed": true
+    }
+  },
+  "scope": "Native canonical day captures in actual spherical campaign. Pause/save/travel belong to the default weather_runtime contract, not this capture-only invocation."
+}
