@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "diagnosed_on": "2026-09-30",
+  "integration_pr": 221,
+  "failed_run": 36739514827,
+  "failed_gl_job": 109970281383,
+  "diagnostic_artifact": 11109133635,
+  "artifact_sha256": "e9ef3a1732f1868dd23e7f8619bd2d51ebe7fedc1cb55d95e921f2fc96a85519",
+  "failure_source": "baseline",
+  "baseline_commit": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+  "observation": "Eight captures and geometry/streaming report passed; ObjectDB leak at exit rejected by the unchanged strict error filter. No complete GL comparison accepted.",
+  "proposal_source_commit": "09d55f2a465b84ccc8b7d824a95ddfa3880b2412",
+  "proposal_source_tree": "cee4dd7791029900d5d29c66530a754d5d69ce36",
+  "changes": [
+    "Release the measurement scene and camera after every PNG/sample/report is complete; wait four ordinary process frames for exit handlers before Runtime.finish.",
+    "Add verbose renderer logs for concrete leaked-object diagnostics."
+  ],
+  "unchanged": [
+    "production runtime and materials",
+    "world-generation code",
+    "all measurement views and frames",
+    "geometry/collision assertions",
+    "error filters",
+    "900-second probe deadlines",
+    "same capture script applied to baseline and candidate"
+  ],
+  "local_parser_passed": true,
+  "local_gl_runtime_verified": false,
+  "local_gl_limitation": "X server could not create listening sockets; no local GL runtime result claimed.",
+  "actual_ci_gl_and_forward_plus_required": true,
+  "retry_policy": "Repeated baseline leak is diagnosed through teardown/verbose evidence rather than repeated unchanged retries."
+}

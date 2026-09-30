@@ -12,7 +12,7 @@
   },
   "candidate": {
     "branch": "agent/integration-pt19-20260930",
-    "sha": "6880ab345bc777c4e081a0e14968928c3eeb512c",
+    "sha": "09d55f2a465b84ccc8b7d824a95ddfa3880b2412",
     "pr": 221,
     "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/221"
   },
@@ -1050,6 +1050,7 @@
     "Neue Fachlieferungen der neun Chats stehen aus; aktuelle konfliktbehaftete ältere PR-Köpfe werden nicht pauschal als vollständig enthalten oder mergebereit bezeichnet.",
     "Die grünen Entwurfsprüfungen von #220 ersetzen die vier vollständigen Gates, nativen Exporte und Prüfung des neuen #221-Merge-Trees nicht.",
     "Windows-Portabilitätsfehler der deutschen Stammes-Testfixture ist mit englischer Startsprache reproduziert und durch explizite Fixture-Sprache behoben; vollständige Gates und native Exporte auf dem neuen gemeinsamen Tree bleiben erforderlich.",
+    "GL-Fernsichtvergleich scheiterte wiederholt erst beim Shutdown der alten main-Baseline. Messskript entlädt die Szene jetzt ausdrücklich nach allen Messungen; identische Baseline-/Kandidaten-Capture-SHA, unveränderte Fehlerfilter/Budgets und tatsächliche CI-Renderprüfung erforderlich.",
     "Ziel-PC-Performance #167 einschließlich Zehn-Minuten-Lauf und subjektive Windows-Spieltest-Abnahme bleiben offen.",
     "Nur lokal gemeldete frühere M4-Navigation und ursprüngliche PT17-05/-06-Fachbranches sind nicht als Originale übernommen; #9 und unbekannte ARCH-/Musik-Folgearbeit bleiben geschützt.",
     "Mittelalter, Neuzeit und Weltraum sind noch keine vollständig spielbaren Epochen."
@@ -1060,7 +1061,7 @@
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
     "status": "pending",
-    "summary": "INT30 / #221: Windows-RC1 und sämtliche FULL-Gates nach der gezielt geprüften Fixture-Sprachkorrektur erneut auf dem endgültigen Tree prüfen. Sichtabnahmen #171/#172, kombinierte Dorfansicht und PT18 sowie Ziel-PC-Leistung offen; kein main-Merge und keine PR-Schließung vor vollständiger Abnahme."
+    "summary": "INT30 / #221: Windows-RC1 und alle FULL-Gates nach Fixture-Sprachkorrektur und Messszenen-Abbau erneut auf dem endgültigen Tree prüfen. Sichtabnahmen #171/#172, kombinierte Dorfansicht/PT18 und Ziel-PC-Leistung offen; kein main-Merge und keine PR-Schließung vor vollständiger Abnahme."
   },
   "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
   "integration_inputs": [
