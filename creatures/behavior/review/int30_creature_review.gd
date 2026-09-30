@@ -152,6 +152,7 @@ func _encounters() -> void:
 	var camera: Camera3D = root.get_camera_3d()
 	camera.size = 7.0
 	for index in range(3):
+		camera.size = [4.5, 7.0, 9.0][index]
 		player.position = Vector3(0, 100.05, 2.0)
 		var actor: CharacterBody3D = _specimen(index, 501 + index * 3)
 		var social: Node = actor.get_node("SocialBehavior")

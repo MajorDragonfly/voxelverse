@@ -37,6 +37,7 @@ func _run() -> void:
 	else:
 		await _interactions()
 		await _interruption_and_clock()
+		await _marker_anchors()
 	await _dispose_wildlife()
 	player.free()
 	await process_frame
@@ -368,6 +369,32 @@ func _interruption_and_clock() -> void:
 	wildlife._threat = null
 	driver._process(3.0)
 	_expect(driver.emotion.state != "playful", "Interrupted gesture resumed after danger")
+
+func _marker_anchors() -> void:
+	var specimens = preload("res://creatures/behavior/review/int30_creature_shapes.gd")
+	var anchors: Array[Dictionary] = []
+	for index in range(3):
+		await _dispose_wildlife()
+		wildlife = load("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
+		wildlife.frozen_blueprint = specimens.design(index)
+		wildlife.visual_scale_min = specimens.SIZES[index]
+		wildlife.visual_scale_max = specimens.SIZES[index]
+		wildlife.configure(2771400 + index, 91 + index, Vector2i.ZERO, "grazer")
+		root.add_child(wildlife)
+		wildlife.position = player.position + Vector3(0, 0, -2.2)
+		wildlife.set_physics_process(false)
+		wildlife.get_node("SocialBehavior").set_process(false)
+		var driver: Node = wildlife.get_node("ExpressionBehavior")
+		driver.set_process(false)
+		driver.react("friend")
+		driver._process(0.1)
+		wildlife._refresh_label(0.1)
+		var skin: MeshInstance3D = wildlife._preview.get_node("BodyV4/SculptedSkin")
+		var body: AABB = wildlife._visual_root.transform * wildlife._preview.transform * skin.transform * skin.get_aabb()
+		_expect(wildlife._label.visible and wildlife._label.position.y > body.end.y + 0.2,
+			"Scaled creature concealed its cue inside the body: " + str(specimens.SIZES[index]))
+		anchors.append({"scale": specimens.SIZES[index], "body_top": body.end.y, "marker_y": wildlife._label.position.y})
+	print("INT30_MARKER_ANCHORS " + JSON.stringify(anchors))
 
 func _expect(condition: bool, message: String) -> void:
 	checks += 1
