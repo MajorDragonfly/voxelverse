@@ -1,0 +1,39 @@
+{
+  "source": {
+    "commit": "8e51ed0b5b8f3e53f3d5e4a6965831820f7898f4",
+    "tree": "fc615eb3798ba6280f95d3387f526065ba3fa6c2",
+    "tracked_worktree_dirty": false,
+    "source_sha256": "137919003be9c565b1a3218918206521747738c95897e984dc12784320326983",
+    "complete": true
+  },
+  "godot_sha256": "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3",
+  "command": [
+    "/workspace/scratch/dc65fa43e5e7/godot/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/dc65fa43e5e7/voxelverse",
+    "--display-driver",
+    "x11",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--fixed-fps",
+    "30",
+    "--script",
+    "res://creatures/behavior/review/int30_creature_review.gd",
+    "--",
+    "/workspace/scratch/dc65fa43e5e7/final-captures/v2/gl/poses-on",
+    "poses-on"
+  ],
+  "environment": {
+    "DISPLAY": "127.0.0.1:81",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NUM_THREADS": "4",
+    "XDG_DATA_HOME": "/workspace/scratch/dc65fa43e5e7/final-captures/v2/gl/poses-on/userdata/data",
+    "VK_DRIVER_FILES": "/workspace/scratch/dc65fa43e5e7/vulkan-runtime/usr/share/vulkan/icd.d/lvp_icd.json",
+    "LD_LIBRARY_PATH": "/workspace/scratch/dc65fa43e5e7/vulkan-runtime/usr/lib/x86_64-linux-gnu:/workspace/scratch/d4744bc0c1d8/int30-xvfb-runtime/usr/lib/x86_64-linux-gnu"
+  },
+  "exit": 0,
+  "seconds": 81.845,
+  "log_sha256": "7a518cf638ec62e929746d261a3bac450ee73c13c5e30ce1fd59657587433b5f"
+}
