@@ -1,6 +1,9 @@
 extends Node3D
 class_name BuildingBuilder
 
+const Text = preload("res://civilization/buildings/building_editor_text.gd")
+const UiText = preload("res://core/localization/ui_text.gd")
+
 const Assembly = preload("res://assembly/core/modular_assembly.gd")
 const History = preload("res://assembly/core/modular_assembly_history.gd")
 const Parts = preload("res://civilization/buildings/building_part_library.gd")
@@ -36,6 +39,18 @@ var _snap_button: Button
 var _undo_button: Button
 var _redo_button: Button
 var _design_option: OptionButton
+var _selection_label: Label
+var _identity_label: Label
+var _transform_fields: Dictionary = {}
+var _part_buttons: Dictionary = {}
+var _selection_actions: Array[Button] = []
+var _left_panel: PanelContainer
+var _right_panel: PanelContainer
+var _left_content: VBoxContainer
+var _right_content: VBoxContainer
+var _title: Label
+var _subtitle: Label
+var _ui_canvas: CanvasLayer
 
 
 func _ready() -> void:
@@ -48,6 +63,10 @@ func _ready() -> void:
 	_build_ui()
 	_refresh_all()
 	_show_compatibility_warnings()
+	get_node("/root/LocaleManager").language_changed.connect(_on_language_changed)
+	get_viewport().size_changed.connect(_layout_ui)
+	call_deferred("_layout_ui")
+	call_deferred("_translate_navigation")
 
 
 func _process(_delta: float) -> void:
@@ -75,6 +94,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		)
 		return
 	if not (event is InputEventKey) or not event.pressed or event.echo:
+		return
+	# Name and numeric drafts own their keys, including editor shortcuts.
+	var focus: Control = get_viewport().gui_get_focus_owner()
+	if focus is LineEdit or focus is TextEdit:
 		return
 	if event.ctrl_pressed and event.keycode == KEY_Z:
 		_undo()
@@ -161,150 +184,285 @@ func _build_world() -> void:
 
 
 func _build_ui() -> void:
-	var canvas := CanvasLayer.new()
-	canvas.name = "BuildingBuilderUI"
-	add_child(canvas)
+	_ui_canvas = CanvasLayer.new()
+	_ui_canvas.name = "BuildingBuilderUI"
+	add_child(_ui_canvas)
+	_title = Label.new()
+	_title.add_theme_font_size_override("font_size", 24)
+	Text.bind(_title, "text", "BEDITOR_TITLE")
+	_ui_canvas.add_child(_title)
+	_subtitle = Label.new()
+	_subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_subtitle.add_theme_color_override("font_color", Color(0.62, 0.74, 0.76))
+	Text.bind(_subtitle, "text", "BEDITOR_SUBTITLE")
+	_ui_canvas.add_child(_subtitle)
 
-	var title := Label.new()
-	title.text = "VOXELVERSE · BUILDING BUILDER"
-	title.offset_left = 24.0
-	title.offset_top = 18.0
-	title.offset_right = 620.0
-	title.offset_bottom = 52.0
-	title.add_theme_font_size_override("font_size", 24)
-	canvas.add_child(title)
-
-	var subtitle := Label.new()
-	subtitle.text = "Build the architecture your civilization will reuse and evolve."
-	subtitle.offset_left = 25.0
-	subtitle.offset_top = 50.0
-	subtitle.offset_right = 720.0
-	subtitle.offset_bottom = 78.0
-	subtitle.add_theme_color_override("font_color", Color(0.62, 0.74, 0.76, 1.0))
-	canvas.add_child(subtitle)
-
-	var left_panel := PanelContainer.new()
-	left_panel.anchor_left = 0.0
-	left_panel.anchor_top = 0.0
-	left_panel.anchor_right = 0.0
-	left_panel.anchor_bottom = 1.0
-	left_panel.offset_left = 20.0
-	left_panel.offset_top = 90.0
-	left_panel.offset_right = 350.0
-	left_panel.offset_bottom = -20.0
-	canvas.add_child(left_panel)
+	_left_panel = PanelContainer.new()
+	_left_panel.name = "PalettePanel"
+	_left_panel.anchor_bottom = 1.0
+	_ui_canvas.add_child(_left_panel)
 	var left_scroll := ScrollContainer.new()
-	left_panel.add_child(left_scroll)
-	var left_content := VBoxContainer.new()
-	left_content.custom_minimum_size = Vector2(305.0, 0.0)
-	left_content.add_theme_constant_override("separation", 8)
-	left_scroll.add_child(left_content)
+	left_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_left_panel.add_child(left_scroll)
+	_left_content = VBoxContainer.new()
+	_left_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_left_content.add_theme_constant_override("separation", 8)
+	left_scroll.add_child(_left_content)
 
 	_name_edit = LineEdit.new()
-	_name_edit.placeholder_text = "Building design name"
-	_name_edit.text = str(blueprint.get("name", "New Building"))
+	_name_edit.name = "DesignName"
+	Text.bind(_name_edit, "placeholder_text", "BEDITOR_NAME")
+	_name_edit.text = str(blueprint.get("name", ""))
 	_name_edit.text_changed.connect(_on_name_changed)
-	left_content.add_child(_name_edit)
-
+	_left_content.add_child(_name_edit)
 	_type_option = OptionButton.new()
+	_type_option.name = "BuildingType"
+	_type_option.fit_to_longest_item = false
 	for type_name in Blueprint.BUILDING_TYPES:
-		_type_option.add_item(type_name.capitalize())
+		var key: String = "BEDITOR_TYPE_" + type_name.to_upper()
+		_type_option.add_item(Text.render(key))
+		_type_option.set_meta("building_option_%d" % (_type_option.item_count - 1), key)
 		_type_option.set_item_metadata(_type_option.item_count - 1, type_name)
 	_type_option.item_selected.connect(_on_type_selected)
-	left_content.add_child(_type_option)
+	_left_content.add_child(_type_option)
 
-	_add_section_label(left_content, "PART CATEGORIES")
+	_add_section_label(_left_content, "BEDITOR_CATEGORIES")
 	_category_box = VBoxContainer.new()
-	left_content.add_child(_category_box)
+	_left_content.add_child(_category_box)
 	for category in Parts.get_categories():
 		var button := Button.new()
-		button.text = str(category.get("name", "Parts"))
-		button.pressed.connect(
-			Callable(self, "_select_category").bind(str(category.get("id", "")))
-		)
+		var id: String = str(category.id)
+		button.name = "Category_" + id
+		Text.bind(button, "text", "BEDITOR_CATEGORY_" + id.to_upper())
+		button.pressed.connect(Callable(self, "_select_category").bind(id))
 		_category_box.add_child(button)
-
-	_add_section_label(left_content, "PARTS")
+	_add_section_label(_left_content, "BEDITOR_PARTS")
 	_part_grid = GridContainer.new()
-	_part_grid.columns = 2
-	_part_grid.add_theme_constant_override("h_separation", 6)
+	_part_grid.columns = 1
+	_part_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_part_grid.add_theme_constant_override("v_separation", 6)
-	left_content.add_child(_part_grid)
+	_left_content.add_child(_part_grid)
 
-	var right_panel := PanelContainer.new()
-	right_panel.anchor_left = 1.0
-	right_panel.anchor_top = 0.0
-	right_panel.anchor_right = 1.0
-	right_panel.anchor_bottom = 1.0
-	right_panel.offset_left = -360.0
-	right_panel.offset_top = 90.0
-	right_panel.offset_right = -20.0
-	right_panel.offset_bottom = -20.0
-	canvas.add_child(right_panel)
+	_right_panel = PanelContainer.new()
+	_right_panel.name = "InspectorPanel"
+	_right_panel.anchor_left = 1.0
+	_right_panel.anchor_right = 1.0
+	_right_panel.anchor_bottom = 1.0
+	_ui_canvas.add_child(_right_panel)
 	var right_scroll := ScrollContainer.new()
-	right_panel.add_child(right_scroll)
-	var right_content := VBoxContainer.new()
-	right_content.custom_minimum_size = Vector2(315.0, 0.0)
-	right_content.add_theme_constant_override("separation", 8)
-	right_scroll.add_child(right_content)
+	right_scroll.name = "InspectorScroll"
+	right_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_right_panel.add_child(right_scroll)
+	_right_content = VBoxContainer.new()
+	_right_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_right_content.add_theme_constant_override("separation", 8)
+	right_scroll.add_child(_right_content)
 
-	_add_section_label(right_content, "ASSEMBLY")
-	var actions := GridContainer.new()
-	actions.columns = 2
-	right_content.add_child(actions)
-	_undo_button = _add_action(actions, "Undo", _undo)
-	_redo_button = _add_action(actions, "Redo", _redo)
-	_snap_button = _add_action(actions, "Grid Snap", _toggle_grid_snap)
-	_add_action(actions, "Duplicate", _duplicate_selected)
-	_add_action(actions, "Delete", _delete_selected)
-	_add_action(actions, "New", _new_building)
-	_add_action(actions, "Save Design", _save_design)
-	_add_action(actions, "Autosave", _save_autosave)
+	_add_section_label(_right_content, "BEDITOR_SELECTED")
+	_selection_label = Label.new()
+	_selection_label.name = "SelectedPart"
+	_selection_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_selection_label.add_theme_font_size_override("font_size", 18)
+	_right_content.add_child(_selection_label)
+	_identity_label = Label.new()
+	_identity_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_identity_label.add_theme_font_size_override("font_size", 12)
+	_identity_label.add_theme_color_override("font_color", Color(0.64, 0.74, 0.76))
+	_right_content.add_child(_identity_label)
+	for field: String in ["position", "rotation", "scale"]:
+		_add_transform_row(field)
+	_snap_button = _add_action(_right_content, "BEDITOR_SNAP", _toggle_grid_snap)
+	_snap_button.name = "GridSnap"
+	var selection_actions := GridContainer.new()
+	selection_actions.columns = 2
+	_right_content.add_child(selection_actions)
+	_selection_actions.append(_add_action(selection_actions, "BEDITOR_DUPLICATE", _duplicate_selected))
+	_selection_actions.append(_add_action(selection_actions, "BEDITOR_DELETE", _delete_selected))
 
-	_add_section_label(right_content, "SAVED DESIGNS")
-	_design_option = OptionButton.new()
-	right_content.add_child(_design_option)
-	_add_action(right_content, "Load Selected", _load_selected_design)
-
-	_add_section_label(right_content, "SELECTED PART")
-	var transform_help := Label.new()
-	transform_help.text = (
-		"Tab select · Arrows X/Z · PgUp/PgDn Y\n"
-		+ "Q/E yaw · Z/X pitch · [ / ] scale\n"
-		+ "D duplicate · Delete remove · G snap\n"
-		+ "MMB drag orbit · wheel zoom · Ctrl+Z/Y"
-	)
-	transform_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	transform_help.add_theme_color_override("font_color", Color(0.67, 0.72, 0.72, 1.0))
-	right_content.add_child(transform_help)
-
+	_add_section_label(_right_content, "BEDITOR_ASSEMBLY")
+	var list_scroll := ScrollContainer.new()
+	list_scroll.name = "AssemblyScroll"
+	list_scroll.custom_minimum_size.y = 116.0
+	list_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_right_content.add_child(list_scroll)
 	_assembly_list = VBoxContainer.new()
-	right_content.add_child(_assembly_list)
+	_assembly_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	list_scroll.add_child(_assembly_list)
+	var history_actions := GridContainer.new()
+	history_actions.columns = 2
+	_right_content.add_child(history_actions)
+	_undo_button = _add_action(history_actions, "BEDITOR_UNDO", _undo)
+	_redo_button = _add_action(history_actions, "BEDITOR_REDO", _redo)
+	var help := Label.new()
+	help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	help.add_theme_font_size_override("font_size", 12)
+	Text.bind(help, "text", "BEDITOR_SHORTCUTS")
+	_right_content.add_child(help)
 
-	_add_section_label(right_content, "BUILDING STATS")
+	_add_section_label(_right_content, "BEDITOR_DESIGNS")
+	_design_option = OptionButton.new()
+	_design_option.name = "SavedDesigns"
+	_design_option.fit_to_longest_item = false
+	_right_content.add_child(_design_option)
+	var file_actions := GridContainer.new()
+	file_actions.columns = 2
+	_right_content.add_child(file_actions)
+	_add_action(file_actions, "BEDITOR_LOAD", _load_selected_design)
+	_add_action(file_actions, "BEDITOR_SAVE", _save_design)
+	_add_action(file_actions, "BEDITOR_NEW", _new_building)
+	_add_action(file_actions, "BEDITOR_AUTOSAVE", _save_autosave)
+	_add_section_label(_right_content, "BEDITOR_STATS")
 	_stats_label = Label.new()
 	_stats_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	right_content.add_child(_stats_label)
+	_right_content.add_child(_stats_label)
 
 	_status_label = Label.new()
-	_status_label.anchor_left = 0.5
+	_status_label.name = "Status"
 	_status_label.anchor_top = 1.0
-	_status_label.anchor_right = 0.5
+	_status_label.anchor_right = 1.0
 	_status_label.anchor_bottom = 1.0
-	_status_label.offset_left = -360.0
-	_status_label.offset_top = -54.0
-	_status_label.offset_right = 360.0
-	_status_label.offset_bottom = -18.0
+	_status_label.offset_left = 20.0
+	_status_label.offset_top = -66.0
+	_status_label.offset_right = -20.0
+	_status_label.offset_bottom = -12.0
 	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_status_label.add_theme_color_override("font_color", Color(0.66, 0.90, 0.82, 1.0))
-	canvas.add_child(_status_label)
+	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_status_label.add_theme_color_override("font_color", Color(0.66, 0.90, 0.82))
+	_ui_canvas.add_child(_status_label)
+
+
+func _add_transform_row(field: String) -> void:
+	_add_section_label(_right_content, "BEDITOR_" + field.to_upper())
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 4)
+	_right_content.add_child(row)
+	for axis in range(3):
+		var column := VBoxContainer.new()
+		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(column)
+		var label := Label.new()
+		label.text = ["X", "Y", "Z"][axis]
+		column.add_child(label)
+		var spin := SpinBox.new()
+		spin.name = field.capitalize() + ["X", "Y", "Z"][axis]
+		spin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		spin.custom_minimum_size.x = 88.0
+		spin.min_value = 0.05 if field == "scale" else -10000.0
+		spin.max_value = 20.0 if field == "scale" else 10000.0
+		spin.allow_greater = field != "scale"
+		spin.allow_lesser = field != "scale"
+		spin.step = 0.000001
+		# Displaying unsnapped legacy placements must never quantize the draft.
+		spin.rounded = false
+		spin.value_changed.connect(Callable(self, "_on_transform_value").bind(field, axis))
+		column.add_child(spin)
+		_transform_fields[field + "_%d" % axis] = spin
+
+
+func _layout_ui() -> void:
+	if _left_panel == null:
+		return
+	var width: float = get_viewport().get_visible_rect().size.x
+	var left_width: float = clampf(width * 0.24, 200.0, 305.0)
+	var right_width: float = clampf(width * 0.29, 296.0, 350.0)
+	_left_panel.offset_left = 16.0
+	_left_panel.offset_right = 16.0 + left_width
+	_left_panel.offset_top = 102.0
+	_left_panel.offset_bottom = -80.0
+	_right_panel.offset_left = -16.0 - right_width
+	_right_panel.offset_right = -16.0
+	_right_panel.offset_top = 102.0
+	_right_panel.offset_bottom = -80.0
+	_left_content.custom_minimum_size.x = left_width - 18.0
+	_right_content.custom_minimum_size.x = right_width - 18.0
+	_title.position = Vector2(20.0, 16.0)
+	_title.size = Vector2(maxf(width - 225.0, 100.0), 32.0)
+	_title.add_theme_font_size_override("font_size", 18 if width < 1000.0 else 24)
+	_subtitle.position = Vector2(20.0, 52.0)
+	_subtitle.size = Vector2(width - 40.0, 46.0)
+
+
+func _translate_navigation() -> void:
+	var button := get_node_or_null("BuildingBuilderUI/BackToWorld") as Button
+	if button != null:
+		Text.bind(button, "text", "BEDITOR_BACK")
+
+
+func _on_language_changed(_locale: String) -> void:
+	# Re-label in place. Numeric drafts, focus, selection and history survive.
+	Text.refresh(_ui_canvas)
+	for id: String in _part_buttons:
+		Text.bind(_part_buttons[id], "text", Text.message("BEDITOR_PALETTE_PART", {
+			"name": Text.part(id), "stats": _stats_summary(Parts.get_part(id).get("stats", {})),
+		}))
+	_refresh_stats()
+	_refresh_toolbar()
+
+
+func _refresh_inspector() -> void:
+	var placement: Dictionary = Assembly.get_part(blueprint, selected_part_index)
+	var enabled: bool = not placement.is_empty()
+	if enabled:
+		Text.bind(_selection_label, "text", Text.message("BEDITOR_SELECTION", {
+			"name": Text.part(str(placement.part_id)),
+			"index": selected_part_index + 1, "count": blueprint.parts.size(),
+		}))
+		Text.bind(_identity_label, "text", Text.message("BEDITOR_IDENTITY", {
+			"id": placement.part_id, "uid": placement.uid,
+		}))
+	else:
+		Text.bind(_selection_label, "text", "BEDITOR_NO_SELECTION")
+		Text.bind(_identity_label, "text", "BEDITOR_SELECT_HINT")
+	for field: String in ["position", "rotation", "scale"]:
+		var value: Vector3 = placement.get(field, Vector3.ONE if field == "scale" else Vector3.ZERO)
+		for axis in range(3):
+			var spin: SpinBox = _transform_fields[field + "_%d" % axis]
+			spin.editable = enabled
+			spin.get_line_edit().focus_mode = Control.FOCUS_ALL if enabled else Control.FOCUS_NONE
+			spin.set_value_no_signal(value[axis])
+	for button: Button in _selection_actions:
+		button.disabled = not enabled
+
+
+func _on_transform_value(value: float, field: String, axis: int) -> void:
+	var placement: Dictionary = Assembly.get_part(blueprint, selected_part_index)
+	if placement.is_empty() or not is_finite(value):
+		return
+	var current: Vector3 = placement[field]
+	var requested: Vector3 = current
+	requested[axis] = value
+	var candidate: Dictionary = blueprint.duplicate(true)
+	match field:
+		"position": Assembly.transform_part(candidate, selected_part_index, requested - current)
+		"rotation": Assembly.transform_part(candidate, selected_part_index, Vector3.ZERO, requested - current)
+		"scale": Assembly.transform_part(candidate, selected_part_index, Vector3.ZERO, Vector3.ZERO, requested / current)
+	var edited: Dictionary = Assembly.get_part(candidate, selected_part_index)
+	var position: Vector3 = placement.position
+	if field == "position":
+		position[axis] = edited.position[axis]
+	edited.position = position
+	Assembly.set_part(candidate, selected_part_index, edited)
+	if not Blueprint.Contract.inspect(candidate, "building").ok:
+		_set_status(Text.message("BEDITOR_TRANSFORM_INVALID"))
+		_refresh_inspector()
+		return
+	if candidate == blueprint:
+		_refresh_inspector()
+		return
+	_record("BEDITOR_" + field.to_upper())
+	blueprint = candidate
+	_set_status(Text.message("BEDITOR_TRANSFORM_APPLIED"))
+	_refresh_all()
 
 
 func _refresh_all() -> void:
 	Blueprint.normalize(blueprint)
+	if _name_edit.text != str(blueprint.get("name", "")):
+		_name_edit.text = str(blueprint.get("name", ""))
 	_refresh_type()
 	_refresh_palette()
 	_refresh_assembly_list()
+	_refresh_inspector()
 	_refresh_stats()
 	_refresh_toolbar()
 	_refresh_designs()
@@ -323,18 +481,21 @@ func _refresh_type() -> void:
 
 func _refresh_palette() -> void:
 	_clear_children(_part_grid)
+	_part_buttons.clear()
 	for definition in Parts.get_parts_for_category(current_category):
 		var button := Button.new()
-		button.custom_minimum_size = Vector2(142.0, 66.0)
-		button.text = "%s\n%s" % [
-			str(definition.get("name", "Part")),
-			_stats_summary(definition.get("stats", {})),
-		]
-		button.tooltip_text = str(definition.get("description", ""))
-		button.pressed.connect(
-			Callable(self, "_add_part").bind(str(definition.get("id", "")))
-		)
+		var id: String = str(definition.id)
+		button.name = "Part_" + id
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.custom_minimum_size.y = 54.0
+		button.clip_text = true
+		Text.bind(button, "text", Text.message("BEDITOR_PALETTE_PART", {
+			"name": Text.part(id), "stats": _stats_summary(definition.get("stats", {})),
+		}))
+		Text.bind(button, "tooltip_text", Text.part(id, "description"))
+		button.pressed.connect(Callable(self, "_add_part").bind(id))
 		_part_grid.add_child(button)
+		_part_buttons[id] = button
 
 
 func _refresh_assembly_list() -> void:
@@ -344,47 +505,43 @@ func _refresh_assembly_list() -> void:
 		if not (parts[index] is Dictionary):
 			continue
 		var placement: Dictionary = parts[index]
-		var definition: Dictionary = Parts.get_part(str(placement.get("part_id", "")))
 		var button := Button.new()
-		button.text = "%s%s" % [
-			"▶ " if index == selected_part_index else "",
-			str(definition.get("name", placement.get("part_id", "Unknown"))),
-		]
+		button.name = "Placement_%d" % index
+		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		button.toggle_mode = true
+		button.button_pressed = index == selected_part_index
+		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		Text.bind(button, "text", Text.message("BEDITOR_LIST_PART", {
+			"index": index + 1, "name": Text.part(str(placement.part_id)),
+		}))
+		Text.bind(button, "tooltip_text", Text.message("BEDITOR_IDENTITY", {
+			"id": placement.part_id, "uid": placement.uid,
+		}))
 		button.pressed.connect(Callable(self, "_select_part").bind(index))
 		_assembly_list.add_child(button)
 
 
 func _refresh_stats() -> void:
 	var stats: Dictionary = Blueprint.calculate_stats(blueprint)
+	var text_value: String = Text.render(Text.message("BEDITOR_STATS_HEADER", {
+		"type": Text.message("BEDITOR_TYPE_" + Blueprint.get_building_type(blueprint).to_upper()),
+		"revision": blueprint.get("revision", 0), "count": blueprint.get("parts", []).size(),
+	}))
+	for key: String in ["housing", "commerce", "industry", "defense", "prestige", "energy", "pollution", "cost"]:
+		text_value += "\n" + Text.render("BEDITOR_STAT_" + key.to_upper()) + ": " + UiText.number(float(stats.get(key, 0.0)), 0)
 	var errors: Array[String] = Blueprint.validate(blueprint)
-	_stats_label.text = (
-		"Type: %s\nRevision: %d\nParts: %d\n\n"
-		+ "Housing: %.0f\nCommerce: %.0f\nIndustry: %.0f\n"
-		+ "Defense: %.0f\nPrestige: %.0f\nEnergy: %+.0f\n"
-		+ "Pollution: %.0f\nCost: %.0f"
-	) % [
-		Blueprint.get_building_type(blueprint).capitalize(),
-		int(blueprint.get("revision", 0)),
-		blueprint.get("parts", []).size(),
-		float(stats.get("housing", 0.0)),
-		float(stats.get("commerce", 0.0)),
-		float(stats.get("industry", 0.0)),
-		float(stats.get("defense", 0.0)),
-		float(stats.get("prestige", 0.0)),
-		float(stats.get("energy", 0.0)),
-		float(stats.get("pollution", 0.0)),
-		float(stats.get("cost", 0.0)),
-	]
 	if not errors.is_empty():
-		_stats_label.text += "\n\nVALIDATION\n• " + "\n• ".join(errors)
+		text_value += "\n\n" + Text.render("BEDITOR_VALIDATION") + "\n• " + Text.validation(errors)
+	_stats_label.text = text_value
 
 
 func _refresh_toolbar() -> void:
 	_undo_button.disabled = not _history.call("can_undo")
 	_redo_button.disabled = not _history.call("can_redo")
-	_snap_button.text = "Snap: %s" % (
-		"ON" if bool(blueprint.get("grid_snap", true)) else "OFF"
-	)
+	Text.bind(_snap_button, "text", Text.message("BEDITOR_SNAP_STATE", {
+		"state": Text.message("BEDITOR_ON" if bool(blueprint.get("grid_snap", true)) else "BEDITOR_OFF"),
+		"step": UiText.number(float(blueprint.get("grid_size", Assembly.DEFAULT_GRID_SIZE))),
+	}))
 
 
 func _refresh_designs() -> void:
@@ -393,7 +550,7 @@ func _refresh_designs() -> void:
 		selected_filename = str(_design_option.get_item_metadata(_design_option.selected))
 	_design_option.clear()
 	for filename in Blueprint.list_designs():
-		_design_option.add_item(filename.trim_suffix(".json").replace("_", " ").capitalize())
+		_design_option.add_item(filename.trim_suffix(".json"))
 		_design_option.set_item_metadata(_design_option.item_count - 1, filename)
 		if filename == selected_filename:
 			_design_option.select(_design_option.item_count - 1)
@@ -403,10 +560,16 @@ func _add_part(part_id: String) -> void:
 	var definition: Dictionary = Parts.get_part(part_id)
 	if definition.is_empty():
 		return
-	_record("Add %s" % str(definition.get("name", part_id)))
+	var candidate: Dictionary = blueprint.duplicate(true)
 	var position: Vector3 = _suggest_position(str(definition.get("category", "")))
-	selected_part_index = Assembly.add_part(blueprint, part_id, position)
-	_set_status("Added %s." % str(definition.get("name", part_id)))
+	var added: int = Assembly.add_part(candidate, part_id, position)
+	if added < 0:
+		_set_status("BEDITOR_PART_LIMIT")
+		return
+	_record("BEDITOR_PARTS")
+	blueprint = candidate
+	selected_part_index = added
+	_set_status(Text.message("BEDITOR_ADDED", {"name": Text.part(part_id)}))
 	_refresh_all()
 
 
@@ -433,6 +596,7 @@ func _select_category(category_id: String) -> void:
 func _select_part(index: int) -> void:
 	selected_part_index = index
 	_refresh_assembly_list()
+	_refresh_inspector()
 	if _visual != null:
 		_visual.call("set_selected_part", selected_part_index)
 
@@ -449,7 +613,7 @@ func _cycle_selection() -> void:
 func _move_selected(direction: Vector3) -> void:
 	if selected_part_index < 0:
 		return
-	_record("Move part")
+	_record("BEDITOR_POSITION")
 	var step: float = float(blueprint.get("grid_size", Assembly.DEFAULT_GRID_SIZE)) * MOVE_STEP_MULTIPLIER
 	Assembly.transform_part(blueprint, selected_part_index, direction * step)
 	_refresh_all()
@@ -458,15 +622,18 @@ func _move_selected(direction: Vector3) -> void:
 func _rotate_selected(rotation_delta: Vector3) -> void:
 	if selected_part_index < 0:
 		return
-	_record("Rotate part")
+	_record("BEDITOR_ROTATION")
+	var original_position: Vector3 = Assembly.get_part(blueprint, selected_part_index).position
 	Assembly.transform_part(blueprint, selected_part_index, Vector3.ZERO, rotation_delta)
+	Assembly.get_part(blueprint, selected_part_index).position = original_position
 	_refresh_all()
 
 
 func _scale_selected(multiplier: float) -> void:
 	if selected_part_index < 0:
 		return
-	_record("Scale part")
+	_record("BEDITOR_SCALE")
+	var original_position: Vector3 = Assembly.get_part(blueprint, selected_part_index).position
 	Assembly.transform_part(
 		blueprint,
 		selected_part_index,
@@ -474,14 +641,21 @@ func _scale_selected(multiplier: float) -> void:
 		Vector3.ZERO,
 		Vector3.ONE * multiplier
 	)
+	Assembly.get_part(blueprint, selected_part_index).position = original_position
 	_refresh_all()
 
 
 func _duplicate_selected() -> void:
 	if selected_part_index < 0:
 		return
-	_record("Duplicate part")
-	selected_part_index = Assembly.duplicate_part(blueprint, selected_part_index)
+	var candidate: Dictionary = blueprint.duplicate(true)
+	var duplicated: int = Assembly.duplicate_part(candidate, selected_part_index)
+	if duplicated < 0:
+		_set_status("BEDITOR_PART_LIMIT")
+		return
+	_record("BEDITOR_DUPLICATE")
+	blueprint = candidate
+	selected_part_index = duplicated
 	if selected_part_index >= 0:
 		Assembly.transform_part(
 			blueprint,
@@ -494,14 +668,14 @@ func _duplicate_selected() -> void:
 func _delete_selected() -> void:
 	if selected_part_index < 0:
 		return
-	_record("Delete part")
+	_record("BEDITOR_DELETE")
 	Assembly.remove_part(blueprint, selected_part_index)
 	selected_part_index = mini(selected_part_index, blueprint.get("parts", []).size() - 1)
 	_refresh_all()
 
 
 func _toggle_grid_snap() -> void:
-	_record("Toggle grid snap")
+	_record("BEDITOR_SNAP")
 	Assembly.set_grid_snap(blueprint, not bool(blueprint.get("grid_snap", true)))
 	_refresh_all()
 
@@ -511,7 +685,7 @@ func _undo() -> void:
 		return
 	blueprint = _history.call("undo", blueprint)
 	selected_part_index = mini(selected_part_index, blueprint.get("parts", []).size() - 1)
-	_set_status("Undo.")
+	_set_status("BEDITOR_UNDO_APPLIED")
 	_refresh_all()
 
 
@@ -520,16 +694,16 @@ func _redo() -> void:
 		return
 	blueprint = _history.call("redo", blueprint)
 	selected_part_index = mini(selected_part_index, blueprint.get("parts", []).size() - 1)
-	_set_status("Redo.")
+	_set_status("BEDITOR_REDO_APPLIED")
 	_refresh_all()
 
 
 func _new_building() -> void:
-	_record("New building")
+	_record("BEDITOR_NEW")
 	blueprint = Blueprint.create_default()
 	selected_part_index = -1
 	_name_edit.text = str(blueprint.get("name", "New Building"))
-	_set_status("Started a new building design.")
+	_set_status("BEDITOR_NEW_STARTED")
 	_refresh_all()
 
 
@@ -537,37 +711,37 @@ func _save_design() -> void:
 	blueprint["name"] = _name_edit.text.strip_edges()
 	var path: String = Blueprint.save_design(blueprint)
 	if path.is_empty():
-		_set_status("Could not save building design.")
+		_set_status("BEDITOR_SAVE_FAILED")
 		return
 	if not _commit_campaign():
-		_set_status("Design written, but the campaign snapshot could not be saved.")
+		_set_status("BEDITOR_CAMPAIGN_SAVE_FAILED")
 		return
-	_set_status("Saved design: %s" % path.get_file())
+	_set_status(Text.message("BEDITOR_SAVED", {"file": path.get_file()}))
 	_refresh_all()
 
 
 func _save_autosave() -> void:
 	var error: Error = Blueprint.save_autosave(blueprint)
 	if error == OK and not _commit_campaign():
-		_set_status("Design written, but the campaign snapshot could not be saved.")
+		_set_status("BEDITOR_CAMPAIGN_SAVE_FAILED")
 		return
-	_set_status("Autosave written." if error == OK else "Autosave failed: %s" % error)
+	_set_status("BEDITOR_AUTOSAVED" if error == OK else Text.message("BEDITOR_AUTOSAVE_FAILED", {"error": error}))
 
 
 func _load_selected_design() -> void:
 	if _design_option.selected < 0:
-		_set_status("No saved design selected.")
+		_set_status("BEDITOR_LOAD_NONE")
 		return
 	var filename: String = str(_design_option.get_item_metadata(_design_option.selected))
 	var loaded: Dictionary = Blueprint.load_from_file(Blueprint.get_design_path(filename))
 	if loaded.is_empty():
-		_set_status("Could not load selected design.")
+		_set_status("BEDITOR_LOAD_FAILED")
 		return
-	_record("Load design")
+	_record("BEDITOR_LOAD")
 	blueprint = loaded
 	selected_part_index = -1
 	_name_edit.text = str(blueprint.get("name", "Building"))
-	_set_status("Loaded %s." % filename)
+	_set_status(Text.message("BEDITOR_LOADED", {"file": filename}))
 	_refresh_all()
 	_show_compatibility_warnings()
 
@@ -578,7 +752,7 @@ func _on_name_changed(new_text: String) -> void:
 
 func _on_type_selected(index: int) -> void:
 	var type_name: String = str(_type_option.get_item_metadata(index))
-	_record("Change building type")
+	_record("BEDITOR_TYPE_CHANGE")
 	Blueprint.set_building_type(blueprint, type_name)
 	_refresh_all()
 
@@ -601,15 +775,15 @@ func _update_camera() -> void:
 
 func _stats_summary(stats: Dictionary) -> String:
 	var values: Array[String] = []
-	for key in ["housing", "commerce", "industry", "defense", "prestige"]:
+	for key: String in ["housing", "commerce", "industry", "defense", "prestige"]:
 		if absf(float(stats.get(key, 0.0))) > 0.01:
-			values.append("%s %+.0f" % [str(key).substr(0, 3).to_upper(), float(stats[key])])
-	return " · ".join(values) if not values.is_empty() else "visual"
+			values.append(Text.render("BEDITOR_STAT_" + key.to_upper()) + " " + UiText.number(float(stats[key]), 0))
+	return " · ".join(values) if not values.is_empty() else Text.render("BEDITOR_VISUAL")
 
 
 func _add_section_label(parent: Control, text_value: String) -> Label:
 	var label := Label.new()
-	label.text = text_value
+	Text.bind(label, "text", text_value)
 	label.add_theme_font_size_override("font_size", 15)
 	label.add_theme_color_override("font_color", Color(0.70, 0.88, 0.84, 1.0))
 	parent.add_child(label)
@@ -618,8 +792,10 @@ func _add_section_label(parent: Control, text_value: String) -> Label:
 
 func _add_action(parent: Control, text_value: String, callback: Callable) -> Button:
 	var button := Button.new()
-	button.text = text_value
-	button.custom_minimum_size = Vector2(145.0, 34.0)
+	button.name = text_value.trim_prefix("BEDITOR_").capitalize().replace(" ", "")
+	Text.bind(button, "text", text_value)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.custom_minimum_size = Vector2(125.0, 34.0)
 	button.pressed.connect(callback)
 	parent.add_child(button)
 	return button
@@ -627,17 +803,18 @@ func _add_action(parent: Control, text_value: String, callback: Callable) -> But
 
 func _clear_children(root: Node) -> void:
 	for child in root.get_children():
+		root.remove_child(child)
 		child.queue_free()
 
 
-func _set_status(text_value: String) -> void:
+func _set_status(copy: Variant) -> void:
 	if _status_label != null:
-		_status_label.text = text_value
+		Text.bind(_status_label, "text", copy)
 
 
 func _show_compatibility_warnings() -> void:
 	if not blueprint.get("compatibility_warnings", []).is_empty():
-		_set_status("\n".join(blueprint["compatibility_warnings"]))
+		_set_status(Text.message("BEDITOR_COMPATIBILITY", {"codes": ", ".join(blueprint["compatibility_warnings"])}))
 
 
 func _commit_campaign() -> bool:

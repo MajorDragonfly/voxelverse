@@ -1,0 +1,684 @@
+{
+  "messages": [
+    {
+      "key": "BEDITOR_TITLE",
+      "de": "VOXELVERSE · GEBÄUDEEDITOR",
+      "en": "VOXELVERSE · BUILDING EDITOR"
+    },
+    {
+      "key": "BEDITOR_SUBTITLE",
+      "de": "Eigene Architektur entwerfen · Gebäudeeditor ab der Mittelalterphase",
+      "en": "Design your own architecture · Building editor from the medieval age"
+    },
+    {
+      "key": "BEDITOR_NAME",
+      "de": "Name des Gebäudeentwurfs",
+      "en": "Building design name"
+    },
+    {
+      "key": "BEDITOR_CATEGORIES",
+      "de": "BAUTEILKATEGORIEN",
+      "en": "PART CATEGORIES"
+    },
+    {
+      "key": "BEDITOR_PARTS",
+      "de": "BAUTEILE",
+      "en": "PARTS"
+    },
+    {
+      "key": "BEDITOR_SELECTED",
+      "de": "AUSGEWÄHLTES BAUTEIL",
+      "en": "SELECTED PART"
+    },
+    {
+      "key": "BEDITOR_SELECTION",
+      "de": "{index}/{count} · {name}",
+      "en": "{index}/{count} · {name}"
+    },
+    {
+      "key": "BEDITOR_IDENTITY",
+      "de": "Bauteil: {id}\nInstanz: {uid}",
+      "en": "Part: {id}\nInstance: {uid}"
+    },
+    {
+      "key": "BEDITOR_NO_SELECTION",
+      "de": "Kein Bauteil ausgewählt",
+      "en": "No part selected"
+    },
+    {
+      "key": "BEDITOR_SELECT_HINT",
+      "de": "Wähle ein Bauteil aus der Liste.",
+      "en": "Choose a part from the list."
+    },
+    {
+      "key": "BEDITOR_POSITION",
+      "de": "Position (m)",
+      "en": "Position (m)"
+    },
+    {
+      "key": "BEDITOR_ROTATION",
+      "de": "Drehung (°)",
+      "en": "Rotation (°)"
+    },
+    {
+      "key": "BEDITOR_SCALE",
+      "de": "Größe (Faktor)",
+      "en": "Size (factor)"
+    },
+    {
+      "key": "BEDITOR_SNAP",
+      "de": "Raster",
+      "en": "Grid snap"
+    },
+    {
+      "key": "BEDITOR_SNAP_STATE",
+      "de": "Raster: {state} · {step} m",
+      "en": "Snap: {state} · {step} m"
+    },
+    {
+      "key": "BEDITOR_ON",
+      "de": "AN",
+      "en": "ON"
+    },
+    {
+      "key": "BEDITOR_OFF",
+      "de": "AUS",
+      "en": "OFF"
+    },
+    {
+      "key": "BEDITOR_DUPLICATE",
+      "de": "Duplizieren",
+      "en": "Duplicate"
+    },
+    {
+      "key": "BEDITOR_DELETE",
+      "de": "Löschen",
+      "en": "Delete"
+    },
+    {
+      "key": "BEDITOR_ASSEMBLY",
+      "de": "BAUTEILLISTE",
+      "en": "ASSEMBLY"
+    },
+    {
+      "key": "BEDITOR_LIST_PART",
+      "de": "{index} · {name}",
+      "en": "{index} · {name}"
+    },
+    {
+      "key": "BEDITOR_UNDO",
+      "de": "Rückgängig",
+      "en": "Undo"
+    },
+    {
+      "key": "BEDITOR_REDO",
+      "de": "Wiederholen",
+      "en": "Redo"
+    },
+    {
+      "key": "BEDITOR_SHORTCUTS",
+      "de": "Pfeile: X/Z · Bild↑/↓: Y · Q/E: Y-Drehung\nZ/X: X-Drehung · [ / ]: Größe · D: Duplizieren\nEntf: Löschen · G: Raster · Strg+Z/Y: Historie\nMittlere Maustaste: Kamera · Mausrad: Zoom",
+      "en": "Arrows: X/Z · PgUp/Dn: Y · Q/E: Y rotation\nZ/X: X rotation · [ / ]: size · D: duplicate\nDelete: remove · G: snap · Ctrl+Z/Y: history\nMiddle mouse: orbit · wheel: zoom"
+    },
+    {
+      "key": "BEDITOR_DESIGNS",
+      "de": "GESPEICHERTE ENTWÜRFE",
+      "en": "SAVED DESIGNS"
+    },
+    {
+      "key": "BEDITOR_LOAD",
+      "de": "Entwurf laden",
+      "en": "Load design"
+    },
+    {
+      "key": "BEDITOR_SAVE",
+      "de": "Entwurf speichern",
+      "en": "Save design"
+    },
+    {
+      "key": "BEDITOR_NEW",
+      "de": "Neuer Entwurf",
+      "en": "New design"
+    },
+    {
+      "key": "BEDITOR_AUTOSAVE",
+      "de": "Zwischenstand",
+      "en": "Autosave"
+    },
+    {
+      "key": "BEDITOR_STATS",
+      "de": "ENTWURFSWERTE",
+      "en": "DESIGN STATS"
+    },
+    {
+      "key": "BEDITOR_BACK",
+      "de": "Zurück zur Welt",
+      "en": "Back to World"
+    },
+    {
+      "key": "BEDITOR_STATS_HEADER",
+      "de": "Typ: {type}\nRevision: {revision} · Bauteile: {count}",
+      "en": "Type: {type}\nRevision: {revision} · Parts: {count}"
+    },
+    {
+      "key": "BEDITOR_VALIDATION",
+      "de": "VALIDIERUNG",
+      "en": "VALIDATION"
+    },
+    {
+      "key": "BEDITOR_VISUAL",
+      "de": "Optisches Bauteil",
+      "en": "Visual part"
+    },
+    {
+      "key": "BEDITOR_EMPTY",
+      "de": "Das Gebäude enthält keine Bauteile.",
+      "en": "Building contains no parts."
+    },
+    {
+      "key": "BEDITOR_NEEDS_STRUCTURE",
+      "de": "Das Gebäude benötigt mindestens einen Baukörper.",
+      "en": "Building needs at least one structural mass."
+    },
+    {
+      "key": "BEDITOR_TYPE_MISSING",
+      "de": "Der Bauplantyp fehlt.",
+      "en": "Assembly type is missing."
+    },
+    {
+      "key": "BEDITOR_UNKNOWN_PART",
+      "de": "Unbekanntes Bauteil „{id}“.",
+      "en": "Unknown part “{id}”."
+    },
+    {
+      "key": "BEDITOR_DUPLICATE_UID",
+      "de": "Doppelte Bauteilkennung „{id}“.",
+      "en": "Duplicate part UID “{id}”."
+    },
+    {
+      "key": "BEDITOR_INVALID_PART",
+      "de": "Bauteil {index} ist ungültig.",
+      "en": "Part {index} is invalid."
+    },
+    {
+      "key": "BEDITOR_VALIDATION_CODE",
+      "de": "Bauplanprüfung: {code}",
+      "en": "Blueprint check: {code}"
+    },
+    {
+      "key": "BEDITOR_COMPATIBILITY",
+      "de": "Kompatibilitätshinweise: {codes}",
+      "en": "Compatibility warnings: {codes}"
+    },
+    {
+      "key": "BEDITOR_TRANSFORM_INVALID",
+      "de": "Der eingegebene Bauteilwert ist ungültig.",
+      "en": "The entered part value is invalid."
+    },
+    {
+      "key": "BEDITOR_TRANSFORM_APPLIED",
+      "de": "Bauteilwert übernommen.",
+      "en": "Part value applied."
+    },
+    {
+      "key": "BEDITOR_ADDED",
+      "de": "{name} hinzugefügt.",
+      "en": "Added {name}."
+    },
+    {
+      "key": "BEDITOR_UNDO_APPLIED",
+      "de": "Änderung rückgängig gemacht.",
+      "en": "Undo applied."
+    },
+    {
+      "key": "BEDITOR_REDO_APPLIED",
+      "de": "Änderung wiederholt.",
+      "en": "Redo applied."
+    },
+    {
+      "key": "BEDITOR_NEW_STARTED",
+      "de": "Neuer Gebäudeentwurf begonnen.",
+      "en": "Started a new building design."
+    },
+    {
+      "key": "BEDITOR_SAVE_FAILED",
+      "de": "Der Gebäudeentwurf konnte nicht gespeichert werden.",
+      "en": "Could not save building design."
+    },
+    {
+      "key": "BEDITOR_CAMPAIGN_SAVE_FAILED",
+      "de": "Entwurf geschrieben, aber der Kampagnenspielstand konnte nicht gespeichert werden.",
+      "en": "Design written, but the campaign snapshot could not be saved."
+    },
+    {
+      "key": "BEDITOR_SAVED",
+      "de": "Entwurf gespeichert: {file}",
+      "en": "Saved design: {file}"
+    },
+    {
+      "key": "BEDITOR_AUTOSAVED",
+      "de": "Zwischenstand gespeichert.",
+      "en": "Autosave written."
+    },
+    {
+      "key": "BEDITOR_AUTOSAVE_FAILED",
+      "de": "Zwischenstand fehlgeschlagen: {error}",
+      "en": "Autosave failed: {error}"
+    },
+    {
+      "key": "BEDITOR_LOAD_NONE",
+      "de": "Kein gespeicherter Entwurf ausgewählt.",
+      "en": "No saved design selected."
+    },
+    {
+      "key": "BEDITOR_LOAD_FAILED",
+      "de": "Der ausgewählte Entwurf konnte nicht geladen werden.",
+      "en": "Could not load selected design."
+    },
+    {
+      "key": "BEDITOR_LOADED",
+      "de": "{file} geladen.",
+      "en": "Loaded {file}."
+    },
+    {
+      "key": "BEDITOR_TYPE_CHANGE",
+      "de": "Gebäudetyp ändern",
+      "en": "Change building type"
+    },
+    {
+      "key": "BEDITOR_TYPE_RESIDENTIAL",
+      "de": "Wohnen",
+      "en": "Residential"
+    },
+    {
+      "key": "BEDITOR_TYPE_COMMERCIAL",
+      "de": "Handel",
+      "en": "Commercial"
+    },
+    {
+      "key": "BEDITOR_TYPE_INDUSTRIAL",
+      "de": "Industrie",
+      "en": "Industrial"
+    },
+    {
+      "key": "BEDITOR_TYPE_CIVIC",
+      "de": "Öffentlich",
+      "en": "Civic"
+    },
+    {
+      "key": "BEDITOR_TYPE_MILITARY",
+      "de": "Militär",
+      "en": "Military"
+    },
+    {
+      "key": "BEDITOR_TYPE_HARBOR",
+      "de": "Hafen",
+      "en": "Harbor"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_MASS",
+      "de": "Baukörper",
+      "en": "Structure"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_ROOF",
+      "de": "Dächer",
+      "en": "Roofs"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_TOWER",
+      "de": "Türme",
+      "en": "Towers"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_OPENING",
+      "de": "Türen / Fenster",
+      "en": "Doors / Windows"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_BALCONY",
+      "de": "Balkone",
+      "en": "Balconies"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_SUPPORT",
+      "de": "Stützen",
+      "en": "Supports"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_UTILITY",
+      "de": "Versorgung",
+      "en": "Utility"
+    },
+    {
+      "key": "BEDITOR_CATEGORY_DECOR",
+      "de": "Dekoration",
+      "en": "Decor"
+    },
+    {
+      "key": "BEDITOR_STAT_HOUSING",
+      "de": "Wohnraum",
+      "en": "Housing"
+    },
+    {
+      "key": "BEDITOR_STAT_COMMERCE",
+      "de": "Handel",
+      "en": "Commerce"
+    },
+    {
+      "key": "BEDITOR_STAT_INDUSTRY",
+      "de": "Industrie",
+      "en": "Industry"
+    },
+    {
+      "key": "BEDITOR_STAT_DEFENSE",
+      "de": "Verteidigung",
+      "en": "Defense"
+    },
+    {
+      "key": "BEDITOR_STAT_PRESTIGE",
+      "de": "Prestige",
+      "en": "Prestige"
+    },
+    {
+      "key": "BEDITOR_STAT_ENERGY",
+      "de": "Energie",
+      "en": "Energy"
+    },
+    {
+      "key": "BEDITOR_STAT_POLLUTION",
+      "de": "Verschmutzung",
+      "en": "Pollution"
+    },
+    {
+      "key": "BEDITOR_STAT_COST",
+      "de": "Kosten",
+      "en": "Cost"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_HOUSE_CORE_NAME",
+      "de": "Hauskörper",
+      "en": "House Core"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_HOUSE_CORE_DESCRIPTION",
+      "de": "Ausgewogener Baukörper für Wohngebäude.",
+      "en": "Balanced residential volume."
+    },
+    {
+      "key": "BEDITOR_PART_MASS_LONG_HALL_NAME",
+      "de": "Lange Halle",
+      "en": "Long Hall"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_LONG_HALL_DESCRIPTION",
+      "de": "Breite Halle für Wohn- oder öffentliche Gebäude.",
+      "en": "Wide civic or residential hall."
+    },
+    {
+      "key": "BEDITOR_PART_MASS_TALL_BLOCK_NAME",
+      "de": "Hoher Baukörper",
+      "en": "Tall Block"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_TALL_BLOCK_DESCRIPTION",
+      "de": "Vertikaler städtischer Baukörper.",
+      "en": "Vertical urban building mass."
+    },
+    {
+      "key": "BEDITOR_PART_MASS_MARKET_WING_NAME",
+      "de": "Marktflügel",
+      "en": "Market Wing"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_MARKET_WING_DESCRIPTION",
+      "de": "Offener Seitenflügel für Handelsgebäude.",
+      "en": "Open commercial side wing."
+    },
+    {
+      "key": "BEDITOR_PART_MASS_WORKSHOP_NAME",
+      "de": "Werkstatt",
+      "en": "Workshop"
+    },
+    {
+      "key": "BEDITOR_PART_MASS_WORKSHOP_DESCRIPTION",
+      "de": "Baukörper für industrielle Produktion.",
+      "en": "Industrial production volume."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_GABLE_RED_NAME",
+      "de": "Rotes Satteldach",
+      "en": "Red Gable Roof"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_GABLE_RED_DESCRIPTION",
+      "de": "Gestuftes Dach aus warmen Ziegelfarben.",
+      "en": "Stepped warm tiled roof."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_GABLE_DARK_NAME",
+      "de": "Dunkles Satteldach",
+      "en": "Dark Gable Roof"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_GABLE_DARK_DESCRIPTION",
+      "de": "Gestuftes Dach in Schieferfarben.",
+      "en": "Stepped slate-like roof."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_FLAT_GARDEN_NAME",
+      "de": "Gartendach",
+      "en": "Garden Roof"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_FLAT_GARDEN_DESCRIPTION",
+      "de": "Flache, bepflanzte Dachplattform.",
+      "en": "Flat planted roof platform."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_PYRAMID_NAME",
+      "de": "Pyramidendach",
+      "en": "Pyramid Roof"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_PYRAMID_DESCRIPTION",
+      "de": "Vierseitiges gestuftes Dach.",
+      "en": "Four-sided stepped roof."
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_DOME_NAME",
+      "de": "Voxelkuppel",
+      "en": "Voxel Dome"
+    },
+    {
+      "key": "BEDITOR_PART_ROOF_DOME_DESCRIPTION",
+      "de": "Rundes Dach für repräsentative Gebäude.",
+      "en": "Rounded ceremonial roof."
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_SQUARE_NAME",
+      "de": "Viereckiger Turm",
+      "en": "Square Tower"
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_SQUARE_DESCRIPTION",
+      "de": "Hoher Verteidigungsturm.",
+      "en": "Tall defensive tower."
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_TIMBER_NAME",
+      "de": "Hölzerner Ausguck",
+      "en": "Timber Lookout"
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_TIMBER_DESCRIPTION",
+      "de": "Leichter hölzerner Aussichtsturm.",
+      "en": "Light wooden lookout tower."
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_ROUNDISH_NAME",
+      "de": "Achteckiger Turm",
+      "en": "Octagonal Tower"
+    },
+    {
+      "key": "BEDITOR_PART_TOWER_ROUNDISH_DESCRIPTION",
+      "de": "Voxelannäherung an einen runden Turm.",
+      "en": "Voxel approximation of a round tower."
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_DOOR_WOOD_NAME",
+      "de": "Holztür",
+      "en": "Wood Door"
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_DOOR_WOOD_DESCRIPTION",
+      "de": "Schwerer hölzerner Eingang.",
+      "en": "Heavy wooden entrance."
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_GATE_NAME",
+      "de": "Stadttor",
+      "en": "City Gate"
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_GATE_DESCRIPTION",
+      "de": "Großes verstärktes Tor.",
+      "en": "Large reinforced gateway."
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_WINDOW_SMALL_NAME",
+      "de": "Kleines Fenster",
+      "en": "Small Window"
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_WINDOW_SMALL_DESCRIPTION",
+      "de": "Einfaches Glasfenster.",
+      "en": "Simple glass window."
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_WINDOW_WIDE_NAME",
+      "de": "Breites Fenster",
+      "en": "Wide Window"
+    },
+    {
+      "key": "BEDITOR_PART_OPENING_WINDOW_WIDE_DESCRIPTION",
+      "de": "Glasöffnung für Handelsgebäude.",
+      "en": "Commercial glass opening."
+    },
+    {
+      "key": "BEDITOR_PART_BALCONY_WOOD_NAME",
+      "de": "Holzbalkon",
+      "en": "Wood Balcony"
+    },
+    {
+      "key": "BEDITOR_PART_BALCONY_WOOD_DESCRIPTION",
+      "de": "Vorgezogener hölzerner Balkon.",
+      "en": "Projected timber balcony."
+    },
+    {
+      "key": "BEDITOR_PART_BALCONY_STONE_NAME",
+      "de": "Steinbalkon",
+      "en": "Stone Balcony"
+    },
+    {
+      "key": "BEDITOR_PART_BALCONY_STONE_DESCRIPTION",
+      "de": "Schwerer Balkon für öffentliche Gebäude.",
+      "en": "Heavy civic balcony."
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_COLUMN_STONE_NAME",
+      "de": "Steinsäule",
+      "en": "Stone Column"
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_COLUMN_STONE_DESCRIPTION",
+      "de": "Vertikale Stütze aus Stein.",
+      "en": "Vertical stone support."
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_BUTTRESS_NAME",
+      "de": "Strebepfeiler",
+      "en": "Buttress"
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_BUTTRESS_DESCRIPTION",
+      "de": "Gestufte äußere Stütze.",
+      "en": "Stepped exterior support."
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_ARCH_NAME",
+      "de": "Bogen",
+      "en": "Arch"
+    },
+    {
+      "key": "BEDITOR_PART_SUPPORT_ARCH_DESCRIPTION",
+      "de": "Voxelbogen für Arkaden.",
+      "en": "Voxel arch for arcades."
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_CHIMNEY_NAME",
+      "de": "Schornstein",
+      "en": "Chimney"
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_CHIMNEY_DESCRIPTION",
+      "de": "Schornstein für Produktionsgebäude.",
+      "en": "Production chimney stack."
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_WATER_TANK_NAME",
+      "de": "Wassertank",
+      "en": "Water Tank"
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_WATER_TANK_DESCRIPTION",
+      "de": "Erhöhter Versorgungstank.",
+      "en": "Elevated utility tank."
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_ANTENNA_NAME",
+      "de": "Antenne",
+      "en": "Antenna"
+    },
+    {
+      "key": "BEDITOR_PART_UTILITY_ANTENNA_DESCRIPTION",
+      "de": "Kommunikationsmast für spätere Phasen.",
+      "en": "Future communication mast."
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_SIGN_NAME",
+      "de": "Hängeschild",
+      "en": "Hanging Sign"
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_SIGN_DESCRIPTION",
+      "de": "Hängendes Schild für Handelsgebäude.",
+      "en": "Commercial hanging sign."
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_AWNING_NAME",
+      "de": "Marktmarkise",
+      "en": "Market Awning"
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_AWNING_DESCRIPTION",
+      "de": "Helles Vordach für Marktgebäude.",
+      "en": "Bright market canopy."
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_BANNER_NAME",
+      "de": "Banner",
+      "en": "Banner"
+    },
+    {
+      "key": "BEDITOR_PART_DECOR_BANNER_DESCRIPTION",
+      "de": "Farbiges Banner für öffentliche Gebäude.",
+      "en": "Civic color banner."
+    },
+    {
+      "key": "BEDITOR_PART_LIMIT",
+      "de": "Kein weiteres Bauteil möglich. Der Entwurf bleibt erhalten.",
+      "en": "No further part can be added. The design is preserved."
+    }
+  ]
+}
