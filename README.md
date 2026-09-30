@@ -1,15 +1,15 @@
 # Voxelverse
 
 <!-- PROJECT-DASHBOARD:START -->
-### Projektfortschritt
+### Projekt-Dashboard
+
+**[Dashboard öffnen](docs/PROJECT_DASHBOARD.md)** · [Aufgaben & Zuständigkeiten](https://github.com/MajorDragonfly/voxelverse/issues/137) · [Offene Änderungen](https://github.com/MajorDragonfly/voxelverse/pulls)
 
 [![Geschätzter Entwicklungsumfang](docs/dashboard/progress.svg)](docs/PROJECT_DASHBOARD.md)
 
 **Rund 35 % entwickelt** · Schätzkorridor 30–39,5 % · Bewertet am 2026-09-17 · Zielumfang v1.
 
-Die Schätzung umfasst veröffentlichte Fachlieferungen. Integration und Spieltest-Abnahme werden separat geführt; PR-Zahl und Testanzahl erhöhen den Prozentwert nicht.
-
-[Dashboard und nächste Prioritäten](docs/PROJECT_DASHBOARD.md) · [Zentrale Chat-Koordination](https://github.com/MajorDragonfly/voxelverse/issues/137) · [Spieltest-Kandidat #165](https://github.com/MajorDragonfly/voxelverse/pull/165)
+Datierter Planungsstand, keine Live-Fertigquote. Integration und Spieltest-Abnahme werden separat geführt. Aktuelle Arbeit steht in der zentralen Aufgabenliste.
 <!-- PROJECT-DASHBOARD:END -->
 
 Ein Spore-inspiriertes Einzelspielerspiel in Voxelgrafik: eine eigene Kreatur gestalten und die Spezies langfristig über Stamm, Antike/Mittelalter und Weltmacht bis in den Weltraum führen.
