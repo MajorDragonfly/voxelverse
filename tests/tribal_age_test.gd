@@ -154,6 +154,9 @@ func _run() -> void:
 	tribe.select_all()
 	await _frames(3)
 	await _click(tribe.panel._buttons["wood"])
+	# Put the stop control in view before the first pickup. The delivery can
+	# complete while a long HUD scroll is still animating on a rendered runner.
+	await _show_in_scroll(tribe.panel._scroll, tribe.panel._buttons["wait"])
 	await _until(func() -> bool: return _has_cargo(), 350)
 	_expect(_has_cargo(), "Gatherers did not pick up material at a real deposit.")
 	await _capture("03_transport")
@@ -486,6 +489,8 @@ func _click(button: Button) -> void:
 	await process_frame
 
 func _show_in_scroll(scroll: ScrollContainer, control: Control) -> void:
+	if control is Button and _physical_rect(scroll).grow(1.0).encloses(_physical_rect(control)):
+		return
 	scroll.ensure_control_visible(control)
 	await _frames(3)
 	# ensure_control_visible can leave descendants of a TabContainer below the
