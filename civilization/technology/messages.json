@@ -1,0 +1,305 @@
+{
+  "schema": 1,
+  "messages": [
+    {
+      "key": "MEDTECH_TITLE",
+      "de": "Mittelalter · Technikskizze",
+      "en": "Medieval · technology sketch"
+    },
+    {
+      "key": "MEDTECH_SUBTITLE",
+      "de": "Eigenständige Vorschau für Siedlung und Fraktion",
+      "en": "Standalone preview for settlements and factions"
+    },
+    {
+      "key": "MEDTECH_NOTICE",
+      "de": "Nur Vorschau. Keine Punkte, Technologien oder Bauwerke werden vergeben.",
+      "en": "Preview only. No points, technologies or buildings are granted."
+    },
+    {
+      "key": "MEDTECH_EPOCH",
+      "de": "Epochenwechsel gesperrt · Mittelalter-Spielablauf und sichere Speicherübergabe fehlen.",
+      "en": "Era transition locked · medieval gameplay and a safe save handoff are missing."
+    },
+    {
+      "key": "MEDTECH_SCENARIO",
+      "de": "Beispielszenario",
+      "en": "Example scenario"
+    },
+    {
+      "key": "MEDTECH_EMPTY",
+      "de": "Ohne Stammesnachweise",
+      "en": "No tribal evidence"
+    },
+    {
+      "key": "MEDTECH_READY",
+      "de": "Versorgtes Stammesdorf",
+      "en": "Supplied tribal village"
+    },
+    {
+      "key": "MEDTECH_PLANNED",
+      "de": "Vollständiger Vorschauplan",
+      "en": "Complete preview plan"
+    },
+    {
+      "key": "MEDTECH_RESET",
+      "de": "Vorschau zurücksetzen",
+      "en": "Reset preview"
+    },
+    {
+      "key": "MEDTECH_EXIT",
+      "de": "Vorschau schließen",
+      "en": "Close preview"
+    },
+    {
+      "key": "MEDTECH_FOUNDATIONS",
+      "de": "Grundlagen",
+      "en": "Foundations"
+    },
+    {
+      "key": "MEDTECH_DEPENDENCIES",
+      "de": "Abhängigkeiten im Vorschauplan",
+      "en": "Dependencies in the preview plan"
+    },
+    {
+      "key": "MEDTECH_CONTRACT",
+      "de": "Voraussetzungen aus dem Produktvertrag",
+      "en": "Product contract prerequisites"
+    },
+    {
+      "key": "MEDTECH_NO_DEPS",
+      "de": "Keine Technikabhängigkeit.",
+      "en": "No technology dependency."
+    },
+    {
+      "key": "MEDTECH_LINKS",
+      "de": "Vorhandene Begriffe und Bauteile",
+      "en": "Existing terms and building parts"
+    },
+    {
+      "key": "MEDTECH_RESOURCES",
+      "de": "Ressourcen: {items}",
+      "en": "Resources: {items}"
+    },
+    {
+      "key": "MEDTECH_PARTS",
+      "de": "Bauteile: {items}",
+      "en": "Building parts: {items}"
+    },
+    {
+      "key": "MEDTECH_NO_PARTS",
+      "de": "Kein eigenes Bauteil im vorhandenen Katalog.",
+      "en": "No dedicated part in the existing catalog."
+    },
+    {
+      "key": "MEDTECH_PART_NOTICE",
+      "de": "Bauteilbezüge sind Entwurfshinweise; sie schalten keinen Editor und kein Gebäude frei.",
+      "en": "Part references are design hints; they unlock neither an editor nor a building."
+    },
+    {
+      "key": "MEDTECH_EFFECT",
+      "de": "Geplante Wirkung · noch nicht implementiert",
+      "en": "Planned effect · not implemented yet"
+    },
+    {
+      "key": "MEDTECH_BALANCE",
+      "de": "Balance vorläufig. Kosten, Forschungsdauer und Boni sind noch nicht festgelegt. Ressourcen sind Bezüge, keine Baukosten.",
+      "en": "Balance provisional. Costs, research time and bonuses are undecided. Resources are references, not construction costs."
+    },
+    {
+      "key": "MEDTECH_ORDER_NOTICE",
+      "de": "Die Technikreihenfolge ist ein vorläufiger Entwurf. Die Stammesnachweise stammen aus dem bestehenden Produktvertrag.",
+      "en": "Technology order is provisional. Tribal evidence follows the existing product contract."
+    },
+    {
+      "key": "MEDTECH_MARK",
+      "de": "Nur im Vorschauplan vormerken",
+      "en": "Mark in preview plan only"
+    },
+    {
+      "key": "MEDTECH_UNMARK",
+      "de": "Vormerkung entfernen",
+      "en": "Remove preview mark"
+    },
+    {
+      "key": "MEDTECH_MARKED",
+      "de": "Im Vorschauplan vorgemerkt",
+      "en": "Marked in preview plan"
+    },
+    {
+      "key": "MEDTECH_READY_STATUS",
+      "de": "Im Beispiel vormerkbar",
+      "en": "Can be marked in this example"
+    },
+    {
+      "key": "MEDTECH_LOCKED",
+      "de": "Beispielvoraussetzungen fehlen",
+      "en": "Example prerequisites missing"
+    },
+    {
+      "key": "MEDTECH_BLOCKERS",
+      "de": "Sperrgründe",
+      "en": "Lock reasons"
+    },
+    {
+      "key": "MEDTECH_DEP_MISSING",
+      "de": "Im Vorschauplan fehlt: {title}.",
+      "en": "Missing from preview plan: {title}."
+    },
+    {
+      "key": "MEDTECH_CONTRACT_MISSING",
+      "de": "Stammesnachweis fehlt: {text}",
+      "en": "Missing tribal evidence: {text}"
+    },
+    {
+      "key": "MEDTECH_PREVIEW_ONLY",
+      "de": "Die Mittelalterwirkung fehlt. Diese Technik ist im Spiel nicht freischaltbar.",
+      "en": "Medieval effects are missing. This technology cannot be unlocked in the game."
+    },
+    {
+      "key": "MEDTECH_FOOTER",
+      "de": "Beispielbedingungen und Vormerkungen gelten nur bis zum Schließen.",
+      "en": "Example conditions and marks last only until this preview closes."
+    },
+    {
+      "key": "MEDTECH_INVALID",
+      "de": "Der Technikkatalog ist ungültig. Die Vorschau bleibt gesperrt.",
+      "en": "The technology catalog is invalid. The preview stays locked."
+    },
+    {
+      "key": "MEDTECH_HOUSING",
+      "de": "Wohnbau",
+      "en": "Housing"
+    },
+    {
+      "key": "MEDTECH_HOUSING_DESCRIPTION",
+      "de": "Vom gemeinsamen Hüttenbau zu geplanten Wohngebäuden für die eigene Siedlung.",
+      "en": "From shared hut construction to planned housing for your own settlement."
+    },
+    {
+      "key": "MEDTECH_HOUSING_EFFECT",
+      "de": "Geplant: Wohngebäude über den Mittelalter-Gebäudeeditor entwerfen und in einer versorgten Siedlung errichten. Noch keine Bauplatz-, Kapazitäts- oder Bewohnerwirkung.",
+      "en": "Planned: design homes in the medieval building editor and construct them in a supplied settlement. No placement, capacity or resident effects yet."
+    },
+    {
+      "key": "MEDTECH_STORAGE",
+      "de": "Lagerung",
+      "en": "Storage"
+    },
+    {
+      "key": "MEDTECH_STORAGE_DESCRIPTION",
+      "de": "Gemeinsame Vorräte und ankommende Lieferungen bilden die Grundlage eines Siedlungslagers.",
+      "en": "Shared stock and arriving deliveries form the basis of settlement storage."
+    },
+    {
+      "key": "MEDTECH_STORAGE_EFFECT",
+      "de": "Geplant: Siedlungslager mit bilanzierten Lieferungen und Entnahmen. Keine zusätzlichen Vorräte, Lagerplätze oder Kapazitätsboni.",
+      "en": "Planned: settlement storage with accounted deliveries and withdrawals. No extra stock, warehouses or capacity bonuses."
+    },
+    {
+      "key": "MEDTECH_CRAFTING",
+      "de": "Handwerk",
+      "en": "Crafting"
+    },
+    {
+      "key": "MEDTECH_CRAFTING_DESCRIPTION",
+      "de": "Nachgewiesene Werkzeugherstellung und verlässliche Berufe werden zum Ausgangspunkt für Werkstätten.",
+      "en": "Proven tool making and reliable professions become the starting point for workshops."
+    },
+    {
+      "key": "MEDTECH_CRAFTING_EFFECT",
+      "de": "Geplant: Werkstattaufträge mit Rohstoffverbrauch, Arbeit und Lieferung. Der Werkstattbauteilbezug aktiviert keine Industrie oder Energieproduktion.",
+      "en": "Planned: workshop orders with resource consumption, work and delivery. The workshop part reference activates neither industry nor energy production."
+    },
+    {
+      "key": "MEDTECH_ROADS",
+      "de": "Wege",
+      "en": "Roads"
+    },
+    {
+      "key": "MEDTECH_ROADS_DESCRIPTION",
+      "de": "Siedlungen sollen durch tatsächlich begehbare Wege verbunden werden.",
+      "en": "Settlements should be connected by genuinely traversable paths."
+    },
+    {
+      "key": "MEDTECH_ROADS_EFFECT",
+      "de": "Geplant: geprüfte begehbare Siedlungsverbindungen. Noch kein Wegebauteil, Navigationsanschluss oder Bewegungsgeschwindigkeitsbonus.",
+      "en": "Planned: verified traversable settlement connections. No road part, navigation hook or movement speed bonus yet."
+    },
+    {
+      "key": "MEDTECH_TRADE",
+      "de": "Handel",
+      "en": "Trade"
+    },
+    {
+      "key": "MEDTECH_TRADE_DESCRIPTION",
+      "de": "Erfüllte Nachbarhilfe wird zur Grundlage von Handel zwischen Fraktionen der eigenen Spezies.",
+      "en": "Completed neighbor assistance becomes a basis for trade between factions of your own species."
+    },
+    {
+      "key": "MEDTECH_TRADE_EFFECT",
+      "de": "Geplant: Waren vom Ausgangslager über einen begehbaren Weg bis ins Ziellager transportieren. Keine Abkommen, Einnahmen oder kostenlosen Waren.",
+      "en": "Planned: transport goods from source stock over a traversable path into destination stock. No agreements, income or free goods."
+    },
+    {
+      "key": "MEDTECH_REQ_HOUSING",
+      "de": "Zwei fertige Hütten für die ursprünglichen drei Bewohner",
+      "en": "Two finished huts for the original three residents"
+    },
+    {
+      "key": "MEDTECH_REQ_CRAFT",
+      "de": "Ein fertig hergestelltes Steinwerkzeug",
+      "en": "One completed stone tool"
+    },
+    {
+      "key": "MEDTECH_REQ_FARMING",
+      "de": "Ein angelegter Wurzelgarten mit tatsächlich nachgewachsener Nahrung",
+      "en": "An established root garden with genuinely regrown food"
+    },
+    {
+      "key": "MEDTECH_REQ_SUPPLY",
+      "de": "Alle Bewohner 180 Spielsekunden mit erneuerbarer Nahrung und Wasser versorgen; jeder hat gegessen und getrunken; am Ende mindestens 12 Nahrung und 6 Wasser im Lager",
+      "en": "Supply every resident with renewable food and water for 180 game seconds; everyone has eaten and drunk; finish with at least 12 food and 6 water in stock"
+    },
+    {
+      "key": "MEDTECH_REQ_PROFESSIONS",
+      "de": "Mindestens zwei Bewohner erledigen in zwei Berufen jeweils drei erneuerbare Arbeits- und Lieferzyklen",
+      "en": "At least two residents complete three renewable work and delivery cycles each across two professions"
+    },
+    {
+      "key": "MEDTECH_REQ_NEIGHBORS",
+      "de": "Mit mindestens zwei Bewohnern 6 Nahrung und 4 Holz an eine Nachbarfraktion deiner Spezies liefern und deren Unterkunft fertigstellen lassen; später alternativ das Dorf in einem abgeschlossenen Gruppenkonflikt verteidigen",
+      "en": "At least two residents deliver 6 food and 4 wood to a neighboring faction of your species and let them finish their shelter; later, alternatively defend the village in a completed group conflict"
+    },
+    {
+      "key": "MEDTECH_REQ_RUNTIME",
+      "de": "Spielbares Mittelalter mit Siedlungsverwaltung, Handwerk, Wegen und Handel sowie geprüftem Speichern/Laden",
+      "en": "Playable medieval era with settlement management, crafting, paths and trade, plus verified saving/loading"
+    },
+    {
+      "key": "MEDTECH_PART_HOUSE",
+      "de": "Hauskern",
+      "en": "House core"
+    },
+    {
+      "key": "MEDTECH_PART_DOOR",
+      "de": "Holztür",
+      "en": "Wood door"
+    },
+    {
+      "key": "MEDTECH_PART_WORKSHOP",
+      "de": "Werkstatt",
+      "en": "Workshop"
+    },
+    {
+      "key": "MEDTECH_PART_MARKET",
+      "de": "Marktflügel",
+      "en": "Market wing"
+    },
+    {
+      "key": "MEDTECH_PART_AWNING",
+      "de": "Marktdach",
+      "en": "Market awning"
+    }
+  ]
+}

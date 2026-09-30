@@ -1,0 +1,106 @@
+{
+  "commit": "74ea354bd29a3a85be32623adf817f69413c194e",
+  "tree": "e66209981395ff5c11abfb1c769edad5dfc6ee9d",
+  "files": [
+    {
+      "path": "civilization/technology/README.md",
+      "sha256": "87b2c46ba94cec504ae26acebf4bfb232d27903a5a2471a858080a45867a2777",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/catalog.json",
+      "sha256": "451a07f2fb5c6fe8d982f5944fab750ab030351a2e73f3821d00a9ab13025f9d",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/messages.json",
+      "sha256": "28ace49c6373cdce527a7f5b4ee969c7e359e06f7d8ffd0279c3cda482abcf87",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/preview_host.gd",
+      "sha256": "ff5b8400aca61025b5c9442cf3222838253f3d971f9663cbe96678905c220b9d",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/preview_host.gd.uid",
+      "sha256": "bb51a98bdd9f74900044b4c4681b78320e2ae44a43e2c851c6a621dbd291549a",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/preview_host.tscn",
+      "sha256": "1a18d51a5e2baf4ac0af7519224e04be4b5300bcef565f19e6c25dbee32a6f38",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/preview_model.gd",
+      "sha256": "c241ae6a1df8bf90296ca008df17cbc984cbce492a2e2ae1294c7016301b1778",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/preview_model.gd.uid",
+      "sha256": "b83bb636d3a5e253ae472b1950c8006f7098f1f57bdf540f7369a3582e42e525",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/preview_text.gd",
+      "sha256": "ab2f9504e5c5eff8849a26b107e6f9e79eb6fc4b113e03aacb2f9d85361f93f2",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/preview_text.gd.uid",
+      "sha256": "e10c8eb52f297a668a90b289fd82ae348e3c57c62a8e1316673cd142f1763dc9",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/run_preview.py",
+      "sha256": "4f6cbcff1ba17080634c12b845b5f66c8e79002a51f62e89ff8afc19aec65832",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/technology_catalog.gd",
+      "sha256": "960e52b6efc24030c658aa1005165f16d76a3ddd67a9966f4c07824a88e62727",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/technology_catalog.gd.uid",
+      "sha256": "c0d2af95fe7322df0a415a102fb2ac7843ab7388aa78c4128f2388787ae0a8a5",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/technology_preview.gd",
+      "sha256": "bcf6a6cb240d7a6ca6490ed2aa463dc624dfed266d551cce79785329d4553272",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/technology_preview.gd.uid",
+      "sha256": "666d356a9128a9857c1081b9f565fa83fd5b82b5e37237157f55facedccafc31",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/technology_preview.tscn",
+      "sha256": "709db4aa74ac48b4d77772d20ee2e169f25beac1824259c042f272d5519a9ec4",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/tests/technology_catalog_test.gd",
+      "sha256": "03ba751f86d4a06870e04f9dc08f030a1df8a0855e8d86dc1e78094064dabd7e",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/tests/technology_catalog_test.gd.uid",
+      "sha256": "dfe057a02b9b33a3334cef40094c215238842abbf2342fe591391779f642acf1",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/tests/technology_preview_ui_test.gd",
+      "sha256": "89178c1258f5f8a13e04a467ac2a516ca4c9d76357a8a5cd67fe944dfc42fa17",
+      "registry_overlay_matches": true
+    },
+    {
+      "path": "civilization/technology/tests/technology_preview_ui_test.gd.uid",
+      "sha256": "3bc5c33dfe9b6dfc9768432b0c2df34e7cf1bbdd57cb3e34a6c3bd19d94596e1",
+      "registry_overlay_matches": true
+    }
+  ]
+}
