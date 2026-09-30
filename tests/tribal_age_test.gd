@@ -127,10 +127,12 @@ func _run() -> void:
 	var identity: String = str(tribe.village()["members"][0]["id"])
 	var screen_point: Vector2 = tribe.camera.unproject_position(player.global_position + Vector3.UP)
 	await _world_click(screen_point, MOUSE_BUTTON_LEFT)
+	# The detail refreshes every 0.2 simulation seconds while needs continue
+	# ticking each physics frame. Allow one refresh interval of meter drift.
 	_expect(tribe.selected.size() == 1 and tribe.selected[0] == identity, "World click did not select the original creature.")
 	_expect(tribe.panel._resident_detail.visible and tribe.panel._resident_name.text == tribe.member_record(identity).name
-		and absf(tribe.panel._resident_food.value - float(tribe.member_record(identity).hunger)) < 0.01
-		and absf(tribe.panel._resident_water.value - float(tribe.member_record(identity).hydration)) < 0.01
+		and absf(tribe.panel._resident_food.value - float(tribe.member_record(identity).hunger)) < 0.1
+		and absf(tribe.panel._resident_water.value - float(tribe.member_record(identity).hydration)) < 0.1
 		and preload("res://core/localization/ui_text.gd").text("TRIBE_RESIDENT_DETAIL_CLOTHING") in tribe.panel._resident_equipment.text,
 		"World selection did not show the resident's real name, needs and honest equipment status: %s" % JSON.stringify({"selected": tribe.selected, "visible": tribe.panel._resident_detail.visible, "name": tribe.panel._resident_name.text, "food": tribe.panel._resident_food.value, "expected_food": tribe.member_record(identity).hunger, "water": tribe.panel._resident_water.value, "expected_water": tribe.member_record(identity).hydration, "equipment": tribe.panel._resident_equipment.text, "locale": TranslationServer.get_locale()}))
 	var companion_id: String = str(tribe.village()["members"][1]["id"])
