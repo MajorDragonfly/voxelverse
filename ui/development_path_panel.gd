@@ -7,6 +7,8 @@ const Style = preload("res://ui/progression_style.gd")
 const Presentation = preload("res://ui/skills_presentation.gd")
 
 const CHAPTERS := ["creature", "nest_group", "tribe", "medieval", "modern", "space"]
+const MIN_TEXT_PIXELS := 12.0
+const MIN_CHAPTER_PIXELS := 13.0
 const GOAL_NAMES := {
 	"neighbor_help": "PATH_GOAL_NEIGHBOR", "sustained_supply": "PATH_GOAL_SUPPLY",
 	"working_professions": "PATH_GOAL_PROFESSIONS", "shared_stock": "PATH_GOAL_STOCK",
@@ -195,21 +197,30 @@ func _layout() -> void:
 		return
 	var width: float = get_viewport().get_visible_rect().size.x
 	var scale: float = clampf(float(get_node("/root/DisplaySettings").ui_scale), 1.0, 1.5)
+	# The settings host stretches a 1920x1080 canvas into small windows.
+	# Account for that final downscale as well as the requested UI scale.
+	var visible_size := get_viewport().get_visible_rect().size
+	var window_size := Vector2(get_window().size)
+	var pixel_scale := maxf(0.01, minf(window_size.x / visible_size.x, window_size.y / visible_size.y))
 	_stages.vertical = width < 780 * scale
 	_future.vertical = width < 780 * scale
 	for button: Button in _chapter_buttons.values():
-		button.add_theme_font_size_override("font_size", roundi(13 * scale))
-		button.custom_minimum_size.y = 36 * scale
-	_scale_labels(self, scale)
+		button.add_theme_font_size_override("font_size", maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
+		button.custom_minimum_size.y = maxf(36 * scale, 30.0 / pixel_scale)
+	for epoch: Dictionary in _epochs.values():
+		var action: Button = epoch["action"]
+		action.add_theme_font_size_override("font_size", maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
+		action.custom_minimum_size.y = maxf(38 * scale, 30.0 / pixel_scale)
+	_scale_labels(self, scale, ceili(MIN_TEXT_PIXELS / pixel_scale))
 
 
-func _scale_labels(node: Node, scale: float) -> void:
+func _scale_labels(node: Node, scale: float, minimum_font: int) -> void:
 	if node is Label:
 		if not node.has_meta("path_font_size"):
 			node.set_meta("path_font_size", node.get_theme_font_size("font_size"))
-		node.add_theme_font_size_override("font_size", roundi(int(node.get_meta("path_font_size")) * scale))
+		node.add_theme_font_size_override("font_size", maxi(roundi(int(node.get_meta("path_font_size")) * scale), minimum_font))
 	for child: Node in node.get_children():
-		_scale_labels(child, scale)
+		_scale_labels(child, scale, minimum_font)
 
 
 func _notification(what: int) -> void:
