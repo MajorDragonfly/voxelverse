@@ -56,7 +56,9 @@ def write_route_summary(directory, capture, compare=None):
         comparable = ("recipe", "cpu", "renderer", "adapter", "surface")
         old_address = previous.get("initial_address", {})
         new_address = capture.get("initial_address", {})
-        same_start = all(old_address.get(key) == new_address.get(key) for key in ("body_id", "face", "u", "v")) \
+        same_start = all(old_address.get(key) == new_address.get(key) for key in ("body_id", "face")) \
+            and all(math.isclose(float(old_address.get(key, 1e9)), float(new_address.get(key, -1e9)),
+                                 rel_tol=0.0, abs_tol=1e-12) for key in ("u", "v")) \
             and abs(float(old_address.get("height", 1e9)) - float(new_address.get("height", -1e9))) <= 0.1
         if any(previous.get(key) != capture.get(key) for key in comparable) or not same_start:
             raise ValueError("Route comparison requires the same recipe, host, renderer, start address and planet; use --replay")
@@ -69,6 +71,8 @@ def write_route_summary(directory, capture, compare=None):
     if baseline is not None:
         result["comparison"] = [{"cycle": new["cycle"], "stage": new["stage"],
                                   "baseline_p95_ms": old["p95_ms"], "current_p95_ms": new["p95_ms"],
+                                  "baseline_p99_ms": old["p99_ms"], "current_p99_ms": new["p99_ms"],
+                                  "baseline_max_ms": old["max_ms"], "current_max_ms": new["max_ms"],
                                   "baseline_spikes_over_ms": old["spikes_over_ms"],
                                   "current_spikes_over_ms": new["spikes_over_ms"]}
                                  for old, new in zip(baseline, rows)]
@@ -87,7 +91,9 @@ def write_route_summary(directory, capture, compare=None):
                   " inspect the raw frames and fixture before attributing a change.", ""]
         for row in result["comparison"]:
             lines.append(f'{row["cycle"]} {row["stage"]}: p95 {row["baseline_p95_ms"]:.1f} → '
-                         f'{row["current_p95_ms"]:.1f} ms; >100 ms '
+                         f'{row["current_p95_ms"]:.1f} ms; p99 {row["baseline_p99_ms"]:.1f} → '
+                         f'{row["current_p99_ms"]:.1f} ms; max {row["baseline_max_ms"]:.1f} → '
+                         f'{row["current_max_ms"]:.1f} ms; >100 ms '
                          f'{row["baseline_spikes_over_ms"]["100"]} → {row["current_spikes_over_ms"]["100"]}.')
     (directory / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return result

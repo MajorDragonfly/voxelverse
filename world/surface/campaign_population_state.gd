@@ -23,6 +23,21 @@ static func cell(body: Dictionary, point: Dictionary) -> Dictionary:
 	return {"id": "%s:land1:%d:%d:%d:%d" % [body.id, level, int(point.face), x, y],
 		"level": level, "face": int(point.face), "x": x, "y": y, "step": step}
 
+static func nearest_cell(body: Dictionary, observer: Dictionary, candidates: Array[Dictionary]) -> Dictionary:
+	var surface_point: Dictionary = observer.duplicate()
+	surface_point.height = 0.0
+	var origin: Array = Cube.cartesian(surface_point, body.radius)
+	var nearest: Dictionary = {}
+	var distance: float = INF
+	for candidate: Dictionary in candidates:
+		var center: Dictionary = Cube.address(body.id, candidate.face,
+			-1.0 + (candidate.x + 0.5) * candidate.step, -1.0 + (candidate.y + 0.5) * candidate.step)
+		var squared: float = Cube.local_position(Cube.cartesian(center, body.radius), origin).length_squared()
+		if squared < distance:
+			distance = squared
+			nearest = candidate
+	return nearest
+
 static func ensure_region(data: Dictionary, key: String) -> Dictionary:
 	if not data.regions.has(key):
 		if data.regions.size() >= MAX_REGIONS: return {}
