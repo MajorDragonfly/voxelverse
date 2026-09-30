@@ -66,11 +66,32 @@ func _run() -> void:
 						_expect(body.get_world_3d().direct_space_state.intersect_ray(query).is_empty(), "Trunk hull blocks empty off-core space")
 					rows.append({"asset": asset, "variant": variant, "scale": size, "up": str(up), "shapes": body.shape_count})
 					body.free()
+	await _independent_sizes(fixture)
 	fixture.free()
 	Assets.finish_pending_loads()
 	for failure in failures: push_error(failure)
 	print("INT30_SCENERY_COLLISION ", JSON.stringify({"passed": failures.is_empty(), "cases": rows.size(), "failures": failures.size()}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+func _independent_sizes(fixture: Node3D) -> void:
+	# Simultaneous sizes must not mutate a shared hull or inherit another owner.
+	var body := Obstacles.new()
+	body.collision_layer = 2
+	fixture.add_child(body)
+	body.add_batch({"asset_id": "tall_pine_v2", "species": {"geometry_variant": 0},
+		"transforms": [Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * 0.8), Vector3(0, 80, 0)),
+			Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * 1.2), Vector3(10, 80, 0))]})
+	await physics_frame
+	await process_frame
+	for index in range(2):
+		var point := Vector3(index * 10 + 0.4, 80.8, 0)
+		var ray := PhysicsRayQueryParameters3D.create(point + Vector3(0, 0, 3), point - Vector3(0, 0, 3), 2)
+		var hit: Dictionary = body.get_world_3d().direct_space_state.intersect_ray(ray)
+		_expect((hit.get("collider") == body) == (index == 1), "Concurrent small/large stem inherited another size")
+	var owners: PackedInt32Array = body.get_shape_owners()
+	_expect(body.shape_owner_get_shape(owners[0], 0) == body.shape_owner_get_shape(owners[1], 0),
+		"Different sizes rebuilt the same authored native hull")
+	body.free()
 
 func _has_visible_bark(mesh: Mesh, point: Vector3) -> bool:
 	var arrays: Array = mesh.surface_get_arrays(0)

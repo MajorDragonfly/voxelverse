@@ -1,0 +1,379 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"cpu": "AMD EPYC 9V74 80-Core Processor",
+	"engine": "4.6.3-stable (official)",
+	"passed": true,
+	"physics_monitor_ms": {
+		"count": 180,
+		"max": 13.334,
+		"median": 8.978,
+		"p95": 13.334,
+		"p99": 13.334
+	},
+	"physics_note": "Godot's coarse TIME_PHYSICS_PROCESS monitor, repeated between refreshes. Linux container measurement, not target-PC FPS.",
+	"publication_waits": [
+		{
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 0,
+				"generation": 0,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 25,
+				"prepared": 0,
+				"publication_steps": 356,
+				"staged_patches": 0,
+				"workers": 0
+			},
+			"milliseconds": 7722
+		},
+		{
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 3,
+				"generation": 0,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 25,
+				"prepared": 0,
+				"publication_steps": 914,
+				"staged_patches": 0,
+				"workers": 0
+			},
+			"milliseconds": 15239
+		},
+		{
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 3,
+				"generation": 0,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 25,
+				"prepared": 0,
+				"publication_steps": 1270,
+				"staged_patches": 0,
+				"workers": 0
+			},
+			"milliseconds": 5820
+		},
+		{
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 6,
+				"generation": 1,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 25,
+				"prepared": 0,
+				"publication_steps": 1355,
+				"staged_patches": 0,
+				"workers": 0
+			},
+			"milliseconds": 3071
+		}
+	],
+	"renderer": "gl_compatibility",
+	"seed": 15838,
+	"snapshots": [
+		{
+			"bodies": 25,
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 0,
+				"generation": 0,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 25,
+				"prepared": 0,
+				"publication_steps": 356,
+				"staged_patches": 0,
+				"workers": 0
+			},
+			"meshes": 116,
+			"shapes": 99,
+			"stage": "near"
+		},
+		{
+			"bodies": 21,
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 0,
+				"generation": 0,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 21,
+				"prepared": 0,
+				"publication_steps": 386,
+				"staged_patches": 1,
+				"workers": 0
+			},
+			"meshes": 98,
+			"shapes": 86,
+			"stage": "after-rebase"
+		},
+		{
+			"bodies": 22,
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 1,
+				"generation": 0,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 22,
+				"prepared": 0,
+				"publication_steps": 415,
+				"staged_patches": 0,
+				"workers": 0
+			},
+			"meshes": 102,
+			"shapes": 89,
+			"stage": "after-rebase"
+		},
+		{
+			"bodies": 19,
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 1,
+				"generation": 0,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 19,
+				"prepared": 0,
+				"publication_steps": 444,
+				"staged_patches": 1,
+				"workers": 0
+			},
+			"meshes": 88,
+			"shapes": 80,
+			"stage": "after-rebase"
+		},
+		{
+			"bodies": 15,
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 2,
+				"generation": 0,
+				"last_publish_units": 0,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 15,
+				"prepared": 0,
+				"publication_steps": 463,
+				"staged_patches": 1,
+				"workers": 0
+			},
+			"meshes": 72,
+			"shapes": 65,
+			"stage": "after-rebase"
+		},
+		{
+			"bodies": 25,
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 3,
+				"generation": 0,
+				"last_publish_units": 1,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 25,
+				"prepared": 0,
+				"publication_steps": 914,
+				"staged_patches": 0,
+				"workers": 0
+			},
+			"meshes": 142,
+			"shapes": 142,
+			"stage": "far"
+		},
+		{
+			"bodies": 19,
+			"diagnostics": {
+				"closed": false,
+				"discarded_results": 6,
+				"generation": 1,
+				"last_publish_units": 0,
+				"max_asset_prepare_ms": 11.303,
+				"max_publish_units": 1,
+				"patches": 19,
+				"prepared": 0,
+				"publication_steps": 1270,
+				"staged_patches": 0,
+				"workers": 1
+			},
+			"meshes": 89,
+			"shapes": 77,
+			"stage": "returned"
+		}
+	],
+	"targets": [
+		{
+			"asset": "dense_bush_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131071:15728",
+			"contacts": 19,
+			"ray": true,
+			"scale": 1.19009530544281,
+			"slope_degrees": 2.02477745720164,
+			"stage": "near",
+			"variant": 0
+		},
+		{
+			"asset": "dense_bush_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131071:15728",
+			"contacts": 1,
+			"ray": true,
+			"scale": 1.19009530544281,
+			"slope_degrees": 2.02477745720164,
+			"stage": "rebase",
+			"variant": 0
+		},
+		{
+			"asset": "dense_bush_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131071:15728",
+			"contacts": 1,
+			"ray": true,
+			"scale": 1.19009530544281,
+			"slope_degrees": 2.02477745720164,
+			"stage": "rebase",
+			"variant": 0
+		},
+		{
+			"asset": "layered_rock_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15728",
+			"contacts": 21,
+			"ray": true,
+			"scale": 0.80684220790863,
+			"slope_degrees": 3.25888568319807,
+			"stage": "near",
+			"variant": 0
+		},
+		{
+			"asset": "layered_rock_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15728",
+			"contacts": 1,
+			"ray": true,
+			"scale": 0.80684220790863,
+			"slope_degrees": 3.25888568319807,
+			"stage": "rebase",
+			"variant": 0
+		},
+		{
+			"asset": "layered_rock_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15728",
+			"contacts": 1,
+			"ray": true,
+			"scale": 0.80684220790863,
+			"slope_degrees": 3.25888568319807,
+			"stage": "rebase",
+			"variant": 0
+		},
+		{
+			"asset": "tall_pine_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15729",
+			"contacts": 18,
+			"ray": true,
+			"scale": 1.18008959293365,
+			"slope_degrees": 2.63945271793305,
+			"stage": "near",
+			"variant": 0
+		},
+		{
+			"asset": "tall_pine_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15729",
+			"contacts": 1,
+			"ray": true,
+			"scale": 1.18008959293365,
+			"slope_degrees": 2.63945271793305,
+			"stage": "rebase",
+			"variant": 0
+		},
+		{
+			"asset": "tall_pine_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15729",
+			"contacts": 1,
+			"ray": true,
+			"scale": 1.18008959293365,
+			"slope_degrees": 2.63945271793305,
+			"stage": "rebase",
+			"variant": 0
+		},
+		{
+			"asset": "ancient_oak_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15727",
+			"contacts": 18,
+			"ray": true,
+			"scale": 0.830828487873077,
+			"slope_degrees": 3.21375795545119,
+			"stage": "near",
+			"variant": 0
+		},
+		{
+			"asset": "ancient_oak_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15727",
+			"contacts": 1,
+			"ray": true,
+			"scale": 0.830828487873077,
+			"slope_degrees": 3.21375795545119,
+			"stage": "rebase",
+			"variant": 0
+		},
+		{
+			"asset": "ancient_oak_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15727",
+			"contacts": 1,
+			"ray": true,
+			"scale": 0.830828487873077,
+			"slope_degrees": 3.21375795545119,
+			"stage": "rebase",
+			"variant": 0
+		},
+		{
+			"asset": "dense_bush_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131071:15728",
+			"contacts": 1,
+			"ray": true,
+			"scale": 1.19009530544281,
+			"slope_degrees": 2.02477745720164,
+			"stage": "returned",
+			"variant": 0
+		},
+		{
+			"asset": "layered_rock_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15728",
+			"contacts": 1,
+			"ray": true,
+			"scale": 0.80684220790863,
+			"slope_degrees": 3.25888568319807,
+			"stage": "returned",
+			"variant": 0
+		},
+		{
+			"asset": "tall_pine_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15729",
+			"contacts": 1,
+			"ray": true,
+			"scale": 1.18008959293365,
+			"slope_degrees": 2.63945271793305,
+			"stage": "returned",
+			"variant": 0
+		},
+		{
+			"asset": "ancient_oak_v2",
+			"cell": "body_a88191d448f0dec803a9654386a883eb:land1:18:0:131072:15727",
+			"contacts": 1,
+			"ray": true,
+			"scale": 0.830828487873077,
+			"slope_degrees": 3.21375795545119,
+			"stage": "returned",
+			"variant": 0
+		}
+	]
+}

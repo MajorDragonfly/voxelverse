@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import secrets
 from pathlib import Path
 import shutil
 import socket
@@ -35,10 +36,13 @@ def main():
     if args.xvfb:
         executable = args.xvfb.resolve()
         env['LD_LIBRARY_PATH'] = str(executable.parent.parent / 'lib/x86_64-linux-gnu')
-        env['DISPLAY'] = '127.0.0.1:132'
+        display_number = 20000 + secrets.randbelow(20000)
+        while Path(f'/tmp/.X{display_number}-lock').exists():
+            display_number = 20000 + secrets.randbelow(20000)
+        env['DISPLAY'] = f'127.0.0.1:{display_number}'
         env['LIBGL_ALWAYS_SOFTWARE'] = '1'
         display_log = (output / 'display.log').open('w')
-        display = subprocess.Popen([str(executable), ':132', '-screen', '0', '960x540x24',
+        display = subprocess.Popen([str(executable), f':{display_number}', '-screen', '0', '960x540x24',
                                     '-nolisten', 'unix', '-listen', 'tcp', '-ac', '-xkbdir', '/usr/share/X11/xkb'],
                                    env=env, stdout=display_log, stderr=display_log)
         ready = False
@@ -47,7 +51,7 @@ def main():
             with socket.socket() as connection:
                 connection.settimeout(0.2)
                 try:
-                    connection.connect(('127.0.0.1', 6132))
+                    connection.connect(('127.0.0.1', 6000 + display_number))
                     ready = True
                     break
                 except OSError: time.sleep(0.1)
@@ -58,14 +62,19 @@ def main():
             raise RuntimeError('Portable display failed; see display.log')
     with validation_editor(args.godot) as editor, tempfile.TemporaryDirectory(prefix='int30-collision-') as temp:
         command = [str(editor), '--path', str(project), '--audio-driver', 'Dummy']
-        command += ['--headless'] if args.renderer == 'headless' else ['--rendering-method', args.renderer, '--resolution', '960x540']
+        command += ['--headless'] if args.renderer == 'headless' else ['--rendering-method', args.renderer, '--resolution', '960x540', '--disable-render-loop']
         command += ['--script', f'res://tests/{script}.gd']
         if args.renderer != 'headless': command += ['--', '--capture']
         try:
             engine_env = isolated_env(Path(temp))
-            engine_env.update({key: env[key] for key in ['DISPLAY', 'LD_LIBRARY_PATH', 'LIBGL_ALWAYS_SOFTWARE'] if key in env})
+            engine_env.update({key: env[key] for key in ['DISPLAY', 'LD_LIBRARY_PATH', 'LIBGL_ALWAYS_SOFTWARE', 'LP_NUM_THREADS'] if key in env})
+            if args.renderer != 'headless': engine_env.setdefault('LP_NUM_THREADS', '2')
             with (output / 'run.log').open('w') as log:
-                run = subprocess.run(command, env=engine_env, stdout=log, stderr=subprocess.STDOUT, timeout=360)
+                try:
+                    run = subprocess.run(command, env=engine_env, stdout=log, stderr=subprocess.STDOUT, timeout=360)
+                except subprocess.TimeoutExpired:
+                    log.write('\nERROR: collision capture exceeded its 360-second process guard\n')
+                    run = subprocess.CompletedProcess(command, 124)
         finally:
             if display:
                 display.terminate()
@@ -82,11 +91,11 @@ def main():
     if args.world and args.renderer != 'headless':
         for family in ['ancient_oak_v2', 'tall_pine_v2', 'dense_bush_v2', 'layered_rock_v2']:
             frames = sorted(output.glob(f'int30-collision-{family}-*.png'))
-            if len(frames) != 60:
+            if len(frames) != 30:
                 passed = False
                 continue
             video = output / f'{family}.mp4'
-            encoded = subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '20', '-i',
+            encoded = subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '10', '-i',
                                       str(output / f'int30-collision-{family}-%03d.png'), '-c:v', 'libx264',
                                       '-pix_fmt', 'yuv420p', str(video)], capture_output=True, text=True)
             if encoded.returncode:
@@ -95,11 +104,11 @@ def main():
             else:
                 videos.append(video.name)
                 for frame in frames:
-                    if frame.stem[-3:] not in {'000', '030', '059'}: frame.unlink()
+                    if frame.stem[-3:] not in {'000', '015', '029'}: frame.unlink()
     provenance['reusable'] = provenance['reusable'] and passed
     report = {'passed': passed, 'exit_code': run.returncode, 'command': command, 'renderer': args.renderer,
               'source': source, 'provenance': provenance, 'videos': videos,
-              'video_note': 'Rendered physical states, 60 frames per sweep played at 20 fps; not a live-FPS measurement.',
+              'video_note': '30 explicitly rendered physical states per sweep played at 10 fps; automatic loading renders disabled, simulation unchanged; not a live-FPS measurement.',
               'log_sha256': hashlib.sha256((output / 'run.log').read_bytes()).hexdigest()}
     (output / 'results.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report), flush=True)

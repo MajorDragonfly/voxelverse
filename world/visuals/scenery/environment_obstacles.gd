@@ -19,6 +19,9 @@ const STEMS: Dictionary = {
 		[[0, 0, 0, 0.32], [0.2, 1.5, 0, 0.25], [0.6, 3.2, 0, 0.18],
 			[1, 5, 0.12, 0.12], [1.35, 6.8, 0.2, 0.035]]]
 }
+# Six immutable native hulls for the six authored stems. Individual sizes live
+# on the shape owner, so streaming does not rebuild a convex hull per tree.
+static var _stem_cores: Dictionary = {}
 var shape_count: int = 0
 var instances: Array[Dictionary] = []
 
@@ -40,15 +43,9 @@ func add_batch(batch: Dictionary) -> void:
 		var shape: Shape3D
 		var center := Vector3.ZERO
 		if STEMS.has(batch["asset_id"]):
-			var hull := ConvexPolygonShape3D.new()
-			var points := PackedVector3Array()
-			for station: Array in STEMS[batch["asset_id"]][variant if variant in [0, 1, 2] else 0]:
-				var radius: float = (float(station[3]) + 0.0625) / cos(PI / 8.0)
-				for side in range(8):
-					var angle: float = side * TAU / 8.0
-					points.append(Vector3(station[0] + cos(angle) * radius, station[1], station[2] + sin(angle) * radius) * scale_value)
-			hull.points = points
-			shape = hull
+			var core: Dictionary = _stem_core(batch["asset_id"], variant)
+			shape = core.shape
+			center = core.center
 		elif recipe["type"] == "capsule":
 			var capsule := CapsuleShape3D.new()
 			capsule.radius = float(recipe["radius"]) * maxf(scale_value.x, scale_value.z)
@@ -65,7 +62,29 @@ func add_batch(batch: Dictionary) -> void:
 		var rotation: Basis = transform.basis.orthonormalized()
 		var owner_id: int = create_shape_owner(self)
 		var local_transform := Transform3D(rotation, transform.origin + rotation * center)
+		if STEMS.has(batch["asset_id"]):
+			local_transform = Transform3D(transform.basis, transform * center)
 		shape_owner_set_transform(owner_id, local_transform)
 		shape_owner_add_shape(owner_id, shape)
 		instances.append({"asset_id": batch["asset_id"], "owner": owner_id, "transform": local_transform})
 		shape_count += 1
+
+
+static func _stem_core(asset_id: String, variant: int) -> Dictionary:
+	variant = variant if variant in [0, 1, 2] else 0
+	var key: String = "%s/%d" % [asset_id, variant]
+	if _stem_cores.has(key): return _stem_cores[key]
+	var stations: Array = STEMS[asset_id][variant]
+	var first: Array = stations[0]
+	var last: Array = stations[-1]
+	var center := (Vector3(first[0], first[1], first[2]) + Vector3(last[0], last[1], last[2])) * 0.5
+	var points := PackedVector3Array()
+	for station: Array in stations:
+		var radius: float = (float(station[3]) + 0.0625) / cos(PI / 8.0)
+		for side in range(8):
+			var angle: float = side * TAU / 8.0
+			points.append(Vector3(station[0] + cos(angle) * radius, station[1], station[2] + sin(angle) * radius) - center)
+	var shape := ConvexPolygonShape3D.new()
+	shape.points = points
+	_stem_cores[key] = {"shape": shape, "center": center}
+	return _stem_cores[key]
