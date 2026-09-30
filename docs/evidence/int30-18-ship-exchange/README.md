@@ -120,3 +120,49 @@ Die Fachprüfung ist kein FULL-Merge-Gate, nativer Export, Render-/UI- oder
 Ziel-PC-Nachweis. Patches für Werft/Sprachen sind noch nicht produktiv angeschlossen.
 Normale Weltraumfreischaltung, Flug/Kollision, Preise, Crew-/Frachtabläufe und
 individuelle Schiffsbemalung bleiben bei ihren bestehenden Fachbesitzern.
+
+
+## Tatsächlicher Abschlussbeleg
+
+Geprüfter lokaler Quellkopf `a5d48c8227d1532ae473bbd3d19e8d73f101e676`;
+über die GitHub-Verbindung veröffentlichter Quellkopf
+`01ee9981fcab3ff56fd173ead7abc9fed14356c5`. Beide haben exakt Tree
+`8f9d3a18b24a54b45c228d6b4a2cd667dd01e9b4`. Nachfolgende Lieferänderungen
+sind ausschließlich dieser Prüfbeleg; Adapter-/Testbytes bleiben identisch.
+
+Godot `4.6.3.stable.official.7d41c59c4`, Linux, vom vorhandenen Runner
+getrennte Benutzerdaten je Prüfung. Die Prüffassung unterscheidet sich vom
+Quellkopf nur durch die gelieferte eine Registry-Zeile; Quellfingerprint
+`0a4dd62255b6b3f45efe18b4be2761ea6daaa73b2ad25cb891e61273e501a348`
+bleibt über alle drei Läufe konstant.
+
+- Neuer Schiffsadapter: **370 Kontrollen**, zusätzlich drei frische Prozesse
+  mit 6/17/9 Kontrollen; vollständig grün.
+- Bestehende Werft, Flottenlaufzeit, Expeditionsvertrag und modulare Assembly:
+  grün; ebenso Blueprint-Vertrag, Community-Paket/-Katalog und lokale Bibliothek.
+- Erster zusätzlicher Editorimport: Timeout bei 180 s, Originalbeleg erhalten.
+  Genau eine gezielte unveränderte Gegenprobe: Import grün bei 28,509 s,
+  Asset-Quellprüfung ebenfalls grün. Keine Budget-/Filteränderung.
+- Kreaturenbibliotheks-UI: erster Lauf Timeout bei 120 s; gezielte Gegenprobe
+  mit identischen Quellen grün bei 118,784 s. Diese geringe Zeitreserve wird
+  nicht als stabile Leistungsabnahme ausgegeben.
+- **Kreaturen-Favoritentest bleibt offen:** beide Läufe Timeout bei 120 s,
+  identischer Logdigest, letzter Ressourcenlogeintrag Audio/Musik. Daraus
+  wird keine belegte Ursachenbehauptung abgeleitet. Keine dritte Wiederholung,
+  keine ausgeblendete Erwartung, keine Änderung fremder Bibliotheks-/Audio-Dateien.
+  Diagnose/Abnahme an Chat 12/1; Gesamtprüfergebnisse bleiben `passed=false`.
+
+`validation-summary.json` listet jeden tatsächlichen Erfolg und Fehlschlag
+samt Zeit und Logdigest. `validation-raw.tar.gz` erhält die vollständigen
+Runnerberichte, Original-/Gegenprobelogs, Auswahlplan und Quellmanifest.
+Alle sechs Start-/Endmanifeste sind bytegleich und einmal unter
+`shared/source-files.jsonl` archiviert. Der konservative Plan verlangt für
+die spätere gemeinsame Integration weiterhin 248 Quelltests samt Mainchecks;
+es wurden keine Auswahldateien geändert und kein FULL-Gate behauptet.
+
+Verbraucherlauf: `--contracts blueprints expedition_design --skip-main
+--skip-import` (bereits erfolgreich importierte identische Ressourcen).
+Gezielte Timeout-Gegenprobe: `--tests creature_library_favorites_test
+creature_library_ui_test --skip-main`, einschließlich regulärem Editorimport
+und unveränderten 180-/120-s-Budgets. Vollständige Befehle/Umgebung stehen
+in den archivierten Runnerberichten.
