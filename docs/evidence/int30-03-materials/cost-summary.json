@@ -1,0 +1,56 @@
+[
+  {
+    "renderer": "gl",
+    "category": "forest",
+    "before_median_view_gpu_p50_ms": 176.4244995117185,
+    "after_median_view_gpu_p50_ms": 186.03450012207048,
+    "median_paired_gpu_p50_ratio": 0.9722949409764892,
+    "min_ratio": 0.7264531559098548,
+    "max_ratio": 1.0765194761584975
+  },
+  {
+    "renderer": "gl",
+    "category": "stone",
+    "before_median_view_gpu_p50_ms": 93.85100173950195,
+    "after_median_view_gpu_p50_ms": 103.50150299072254,
+    "median_paired_gpu_p50_ratio": 1.107327158295961,
+    "min_ratio": 0.9294606586658548,
+    "max_ratio": 1.250814763620044
+  },
+  {
+    "renderer": "gl",
+    "category": "ground",
+    "before_median_view_gpu_p50_ms": 107.89299774169939,
+    "after_median_view_gpu_p50_ms": 110.11100006103496,
+    "median_paired_gpu_p50_ratio": 1.0363142851454923,
+    "min_ratio": 0.8284443296873498,
+    "max_ratio": 1.2182942915082717
+  },
+  {
+    "renderer": "forward",
+    "category": "forest",
+    "before_median_view_gpu_p50_ms": 339.54750061035145,
+    "after_median_view_gpu_p50_ms": 311.6789932250975,
+    "median_paired_gpu_p50_ratio": 0.9972313069465528,
+    "min_ratio": 0.8337366501104058,
+    "max_ratio": 1.1909209184280718
+  },
+  {
+    "renderer": "forward",
+    "category": "stone",
+    "before_median_view_gpu_p50_ms": 146.20849609375,
+    "after_median_view_gpu_p50_ms": 181.857002258301,
+    "median_paired_gpu_p50_ratio": 1.1714199305211648,
+    "min_ratio": 0.9353936933353835,
+    "max_ratio": 1.3858238691924474
+  },
+  {
+    "renderer": "forward",
+    "category": "ground",
+    "before_median_view_gpu_p50_ms": 231.2684936523435,
+    "after_median_view_gpu_p50_ms": 220.34100341796898,
+    "median_paired_gpu_p50_ratio": 0.951676799609495,
+    "min_ratio": 0.8379861411434747,
+    "max_ratio": 1.1148240967936411
+  }
+]

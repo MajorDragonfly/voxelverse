@@ -1,0 +1,408 @@
+{
+  "final-materials-gl": {
+    "passed": true,
+    "probes": [
+      {
+        "mean_rgb_rebase_change": 0.00281571454695169,
+        "shift_m": "Vector3(83.25, -77.5, 129.125)",
+        "version": "before"
+      },
+      {
+        "mean_rgb_handoff_change": 0.0,
+        "version": "before"
+      },
+      {
+        "mean_rgb_rebase_change": 0.0,
+        "shift_m": "Vector3(83.25, -77.5, 129.125)",
+        "version": "after"
+      },
+      {
+        "mean_rgb_handoff_change": 0.0,
+        "version": "after"
+      }
+    ],
+    "shader_sha256": {
+      "after/include": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+      "after/planet_foliage": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+      "after/surface_scenery": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c",
+      "before/include": "2ce5753c88ca6dbf7c069438c43a1d18674c51e324ed8a212fdbd5505253e46f",
+      "before/planet_foliage": "7d9bb68c87a6af4ade0e7b594890714c6768628d78cca0e0e75782d3350923a5",
+      "before/surface_scenery": "9484b5e686ab06c7ba150e4eccdafc143e1eef17fcd084fd62a9a05de7a63881"
+    },
+    "views": 18
+  },
+  "campaign-gl": {
+    "passed": true,
+    "exact_pair_fields": [
+      "label",
+      "camera_transform",
+      "origin",
+      "campaign_seconds",
+      "sun_direction",
+      "sun_energy",
+      "ambient_energy"
+    ],
+    "geometry": {
+      "collision_sha256": "ec3dd66af91a5c486b2d014d27b7f08b49a8db007b08db84936dd541730f50ed",
+      "maximum_top_normal_error": 0.0,
+      "patches": 6
+    },
+    "views": 16,
+    "workload_differences": [
+      {
+        "view": "day-route-0-0m",
+        "field": "primitives",
+        "before": 2012836,
+        "after": 2057682
+      },
+      {
+        "view": "day-route-0-0m",
+        "field": "nodes",
+        "before": 2782,
+        "after": 2753
+      },
+      {
+        "view": "day-side-200m",
+        "field": "nodes",
+        "before": 2782,
+        "after": 2753
+      },
+      {
+        "view": "day-route-1-20m",
+        "field": "primitives",
+        "before": 1703504,
+        "after": 1744550
+      },
+      {
+        "view": "day-route-1-20m",
+        "field": "nodes",
+        "before": 2782,
+        "after": 2753
+      },
+      {
+        "view": "day-route-2-100m",
+        "field": "nodes",
+        "before": 2808,
+        "after": 2779
+      },
+      {
+        "view": "day-route-3-200m",
+        "field": "nodes",
+        "before": 2712,
+        "after": 2683
+      },
+      {
+        "view": "day-route-4-100m",
+        "field": "nodes",
+        "before": 2784,
+        "after": 2755
+      },
+      {
+        "view": "day-route-5-20m",
+        "field": "primitives",
+        "before": 1726152,
+        "after": 1767198
+      },
+      {
+        "view": "day-route-5-20m",
+        "field": "nodes",
+        "before": 2790,
+        "after": 2761
+      },
+      {
+        "view": "day-route-6-0m",
+        "field": "primitives",
+        "before": 2025778,
+        "after": 2070624
+      },
+      {
+        "view": "day-route-6-0m",
+        "field": "nodes",
+        "before": 2799,
+        "after": 2770
+      },
+      {
+        "view": "night-route-0-0m",
+        "field": "primitives",
+        "before": 2025778,
+        "after": 2070624
+      },
+      {
+        "view": "night-route-0-0m",
+        "field": "nodes",
+        "before": 2799,
+        "after": 2770
+      },
+      {
+        "view": "night-side-200m",
+        "field": "nodes",
+        "before": 2799,
+        "after": 2770
+      },
+      {
+        "view": "night-route-1-20m",
+        "field": "primitives",
+        "before": 1715572,
+        "after": 1756618
+      },
+      {
+        "view": "night-route-1-20m",
+        "field": "nodes",
+        "before": 2799,
+        "after": 2770
+      },
+      {
+        "view": "night-route-2-100m",
+        "field": "nodes",
+        "before": 2808,
+        "after": 2779
+      },
+      {
+        "view": "night-route-3-200m",
+        "field": "nodes",
+        "before": 2712,
+        "after": 2683
+      },
+      {
+        "view": "night-route-4-100m",
+        "field": "nodes",
+        "before": 2784,
+        "after": 2755
+      },
+      {
+        "view": "night-route-5-20m",
+        "field": "primitives",
+        "before": 1726152,
+        "after": 1767198
+      },
+      {
+        "view": "night-route-5-20m",
+        "field": "nodes",
+        "before": 2790,
+        "after": 2761
+      },
+      {
+        "view": "night-route-6-0m",
+        "field": "primitives",
+        "before": 2025778,
+        "after": 2070624
+      },
+      {
+        "view": "night-route-6-0m",
+        "field": "nodes",
+        "before": 2799,
+        "after": 2770
+      }
+    ],
+    "workload_identical": false,
+    "unique_origins": 4
+  },
+  "final-materials-forward": {
+    "passed": true,
+    "probes": [
+      {
+        "mean_rgb_rebase_change": 0.00133731165657873,
+        "shift_m": "Vector3(83.25, -77.5, 129.125)",
+        "version": "before"
+      },
+      {
+        "mean_rgb_handoff_change": 0.0,
+        "version": "before"
+      },
+      {
+        "mean_rgb_rebase_change": 0.0,
+        "shift_m": "Vector3(83.25, -77.5, 129.125)",
+        "version": "after"
+      },
+      {
+        "mean_rgb_handoff_change": 0.0,
+        "version": "after"
+      }
+    ],
+    "shader_sha256": {
+      "after/include": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+      "after/planet_foliage": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+      "after/surface_scenery": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c",
+      "before/include": "2ce5753c88ca6dbf7c069438c43a1d18674c51e324ed8a212fdbd5505253e46f",
+      "before/planet_foliage": "7d9bb68c87a6af4ade0e7b594890714c6768628d78cca0e0e75782d3350923a5",
+      "before/surface_scenery": "9484b5e686ab06c7ba150e4eccdafc143e1eef17fcd084fd62a9a05de7a63881"
+    },
+    "views": 18
+  },
+  "campaign-forward": {
+    "passed": true,
+    "exact_pair_fields": [
+      "label",
+      "camera_transform",
+      "origin",
+      "campaign_seconds",
+      "sun_direction",
+      "sun_energy",
+      "ambient_energy"
+    ],
+    "geometry": {
+      "collision_sha256": "ec3dd66af91a5c486b2d014d27b7f08b49a8db007b08db84936dd541730f50ed",
+      "maximum_top_normal_error": 0.0,
+      "patches": 6
+    },
+    "views": 16,
+    "workload_differences": [
+      {
+        "view": "day-route-0-0m",
+        "field": "primitives",
+        "before": 2012432,
+        "after": 2013948
+      },
+      {
+        "view": "day-route-0-0m",
+        "field": "nodes",
+        "before": 3274,
+        "after": 3307
+      },
+      {
+        "view": "day-side-200m",
+        "field": "primitives",
+        "before": 1841270,
+        "after": 1838666
+      },
+      {
+        "view": "day-side-200m",
+        "field": "nodes",
+        "before": 3274,
+        "after": 3307
+      },
+      {
+        "view": "day-route-1-20m",
+        "field": "nodes",
+        "before": 3274,
+        "after": 3307
+      },
+      {
+        "view": "day-route-2-100m",
+        "field": "nodes",
+        "before": 3300,
+        "after": 3333
+      },
+      {
+        "view": "day-route-3-200m",
+        "field": "nodes",
+        "before": 3204,
+        "after": 3237
+      },
+      {
+        "view": "day-route-4-100m",
+        "field": "nodes",
+        "before": 3276,
+        "after": 3309
+      },
+      {
+        "view": "day-route-5-20m",
+        "field": "nodes",
+        "before": 3282,
+        "after": 3315
+      },
+      {
+        "view": "day-route-6-0m",
+        "field": "primitives",
+        "before": 2025374,
+        "after": 2026890
+      },
+      {
+        "view": "day-route-6-0m",
+        "field": "nodes",
+        "before": 3291,
+        "after": 3324
+      },
+      {
+        "view": "night-route-0-0m",
+        "field": "primitives",
+        "before": 2025374,
+        "after": 2026890
+      },
+      {
+        "view": "night-route-0-0m",
+        "field": "nodes",
+        "before": 3291,
+        "after": 3324
+      },
+      {
+        "view": "night-side-200m",
+        "field": "primitives",
+        "before": 1846640,
+        "after": 1844036
+      },
+      {
+        "view": "night-side-200m",
+        "field": "nodes",
+        "before": 3291,
+        "after": 3324
+      },
+      {
+        "view": "night-route-1-20m",
+        "field": "nodes",
+        "before": 3291,
+        "after": 3324
+      },
+      {
+        "view": "night-route-2-100m",
+        "field": "nodes",
+        "before": 3300,
+        "after": 3333
+      },
+      {
+        "view": "night-route-3-200m",
+        "field": "nodes",
+        "before": 3204,
+        "after": 3237
+      },
+      {
+        "view": "night-route-4-100m",
+        "field": "nodes",
+        "before": 3276,
+        "after": 3309
+      },
+      {
+        "view": "night-route-5-20m",
+        "field": "nodes",
+        "before": 3282,
+        "after": 3315
+      },
+      {
+        "view": "night-route-6-0m",
+        "field": "primitives",
+        "before": 2025374,
+        "after": 2026890
+      },
+      {
+        "view": "night-route-6-0m",
+        "field": "nodes",
+        "before": 3291,
+        "after": 3324
+      }
+    ],
+    "workload_identical": false,
+    "unique_origins": 4
+  },
+  "motion-gl": {
+    "passed": true,
+    "frames": 128,
+    "scope": "64 fixed camera poses per version on palette planes; isolates material phase/frequency, not real walking, wind or silhouette LOD.",
+    "shader_sha256": {
+      "after/include": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+      "after/planet_foliage": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+      "before/include": "2ce5753c88ca6dbf7c069438c43a1d18674c51e324ed8a212fdbd5505253e46f",
+      "before/planet_foliage": "7d9bb68c87a6af4ade0e7b594890714c6768628d78cca0e0e75782d3350923a5"
+    }
+  },
+  "motion-forward": {
+    "passed": true,
+    "frames": 128,
+    "scope": "64 fixed camera poses per version on palette planes; isolates material phase/frequency, not real walking, wind or silhouette LOD.",
+    "shader_sha256": {
+      "after/include": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+      "after/planet_foliage": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+      "before/include": "2ce5753c88ca6dbf7c069438c43a1d18674c51e324ed8a212fdbd5505253e46f",
+      "before/planet_foliage": "7d9bb68c87a6af4ade0e7b594890714c6768628d78cca0e0e75782d3350923a5"
+    }
+  }
+}

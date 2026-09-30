@@ -1,0 +1,931 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"failures": [],
+	"geometry": {
+		"collision_sha256": "ec3dd66af91a5c486b2d014d27b7f08b49a8db007b08db84936dd541730f50ed",
+		"maximum_top_normal_error": 0.0,
+		"patches": 6
+	},
+	"passed": true,
+	"renderer": "gl_compatibility",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"ambient_energy": 0.368247628211975,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 0, -0.7507135, -0.66062784, 0, 0, 0, 1, 1.276213, -1.1230675, 0)",
+			"campaign_seconds": 0.0,
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 868,
+			"frame_ms": {
+				"count": 12,
+				"max": 3502.823,
+				"p50": 2484.362,
+				"p95": 3502.823,
+				"p99": 3502.823
+			},
+			"label": "day-route-0-0m",
+			"near_patches": 25,
+			"nodes": 2753,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 2057682,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 2669.5048828125,
+				"p50": 2063.97192382812,
+				"p95": 2669.5048828125,
+				"p99": 2669.5048828125
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 2663.79296875,
+				"p50": 2062.89990234375,
+				"p95": 2663.79296875,
+				"p99": 2663.79296875
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tiles": 543
+		},
+		{
+			"ambient_energy": 0.368247628211975,
+			"camera_transform": "Transform3D(1.09340846e-07, 0.7507135, 0.6606279, -5.7753926e-08, -0.6606279, 0.7507135, 1, -1.202375e-07, -2.8876963e-08, 1.276213, -1.1230675, 0)",
+			"campaign_seconds": 0.0,
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 584,
+			"frame_ms": {
+				"count": 12,
+				"max": 2932.656,
+				"p50": 2300.968,
+				"p95": 2932.656,
+				"p99": 2932.656
+			},
+			"label": "day-side-200m",
+			"near_patches": 25,
+			"nodes": 2753,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 1782946,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 2394.94506835938,
+				"p50": 1694.61096191406,
+				"p95": 2394.94506835938,
+				"p99": 2394.94506835938
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 2402.07592773438,
+				"p50": 1696.94396972656,
+				"p95": 2402.07592773438,
+				"p99": 2402.07592773438
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tiles": 543
+		},
+		{
+			"ambient_energy": 0.368247628211975,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 2.3567677e-06, -0.7507135, -0.66062784, -2.0736456e-06, 2.3248958e-10, -3.1391655e-06, 1, 1.276213, -1.1230675, -5.33666e-06)",
+			"campaign_seconds": 0.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				385,
+				620
+			],
+			"draw_calls": 772,
+			"frame_ms": {
+				"count": 12,
+				"max": 6298.281,
+				"p50": 2627.347,
+				"p95": 6298.281,
+				"p99": 6298.281
+			},
+			"label": "day-route-1-20m",
+			"near_patches": 25,
+			"nodes": 2753,
+			"origin": [
+				4782816.16403552,
+				-4208878.22435126,
+				-20.0000021846406
+			],
+			"primitives": 1744550,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 3328.77905273438,
+				"p50": 2696.3349609375,
+				"p95": 3328.77905273438,
+				"p99": 3328.77905273438
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 3316.90698242188,
+				"p50": 2676.73803710938,
+				"p95": 3316.90698242188,
+				"p99": 3316.90698242188
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tiles": 543
+		},
+		{
+			"ambient_energy": 0.368247628211975,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 1.1783242e-05, -0.7507135, -0.66062784, -1.036942e-05, -1.2641976e-10, -1.5696167e-05, 1, 1.276213, -1.1230675, -2.66833e-05)",
+			"campaign_seconds": 0.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				415,
+				590
+			],
+			"draw_calls": 593,
+			"frame_ms": {
+				"count": 12,
+				"max": 1318.595,
+				"p50": 709.035,
+				"p95": 1318.595,
+				"p99": 1318.595
+			},
+			"label": "day-route-2-100m",
+			"near_patches": 25,
+			"nodes": 2779,
+			"origin": [
+				4782813.97225518,
+				-4208876.29558456,
+				-99.9999650970518
+			],
+			"primitives": 879152,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 762.950988769531,
+				"p50": 692.35498046875,
+				"p95": 762.950988769531,
+				"p99": 762.950988769531
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 766.609985351562,
+				"p50": 688.052001953125,
+				"p95": 766.609985351562,
+				"p99": 766.609985351562
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tiles": 567
+		},
+		{
+			"ambient_energy": 0.368247628211975,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 2.3566485e-05, -0.7507135, -0.66062784, -2.0738244e-05, 1.9645086e-10, -3.1391937e-05, 1, 1.276213, -1.1230675, -5.33666e-05)",
+			"campaign_seconds": 0.0,
+			"distance_rings_20_100_200_outer": [
+				4,
+				136,
+				267,
+				728
+			],
+			"draw_calls": 481,
+			"frame_ms": {
+				"count": 12,
+				"max": 1249.428,
+				"p50": 531.622,
+				"p95": 1249.428,
+				"p99": 1249.428
+			},
+			"label": "day-route-3-200m",
+			"near_patches": 25,
+			"nodes": 2683,
+			"origin": [
+				4782813.92616781,
+				-4208876.25502767,
+				-199.999928266897
+			],
+			"primitives": 842808,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 682.880004882812,
+				"p50": 572.564025878906,
+				"p95": 682.880004882812,
+				"p99": 682.880004882812
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 692.10498046875,
+				"p50": 591.817016601562,
+				"p95": 692.10498046875,
+				"p99": 692.10498046875
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tiles": 507
+		},
+		{
+			"ambient_energy": 0.368247628211975,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 1.1783242e-05, -0.7507135, -0.66062784, -1.036942e-05, -1.2641976e-10, -1.5696167e-05, 1, 1.276213, -1.1230675, -2.66833e-05)",
+			"campaign_seconds": 0.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				415,
+				590
+			],
+			"draw_calls": 599,
+			"frame_ms": {
+				"count": 12,
+				"max": 1637.871,
+				"p50": 855.302,
+				"p95": 1637.871,
+				"p99": 1637.871
+			},
+			"label": "day-route-4-100m",
+			"near_patches": 25,
+			"nodes": 2755,
+			"origin": [
+				4782813.97225518,
+				-4208876.29558456,
+				-99.9999650970518
+			],
+			"primitives": 881788,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 911.150024414062,
+				"p50": 794.85498046875,
+				"p95": 911.150024414062,
+				"p99": 911.150024414062
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 910.422973632812,
+				"p50": 790.081970214844,
+				"p95": 910.422973632812,
+				"p99": 910.422973632812
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tiles": 546
+		},
+		{
+			"ambient_energy": 0.368247628211975,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 2.3567677e-06, -0.7507135, -0.66062784, -2.0736456e-06, 2.3248958e-10, -3.1391655e-06, 1, 1.276213, -1.1230675, -5.33666e-06)",
+			"campaign_seconds": 0.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				385,
+				620
+			],
+			"draw_calls": 849,
+			"frame_ms": {
+				"count": 12,
+				"max": 4216.135,
+				"p50": 1566.381,
+				"p95": 4216.135,
+				"p99": 4216.135
+			},
+			"label": "day-route-5-20m",
+			"near_patches": 25,
+			"nodes": 2761,
+			"origin": [
+				4782816.16403552,
+				-4208878.22435126,
+				-20.0000021846406
+			],
+			"primitives": 1767198,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 2165.86206054688,
+				"p50": 1712.50305175781,
+				"p95": 2165.86206054688,
+				"p99": 2165.86206054688
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 2176.05810546875,
+				"p50": 1712.80004882812,
+				"p95": 2176.05810546875,
+				"p99": 2176.05810546875
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tiles": 549
+		},
+		{
+			"ambient_energy": 0.368247628211975,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 0, -0.7507135, -0.66062784, 0, 0, 0, 1, 1.276213, -1.1230675, 0)",
+			"campaign_seconds": 0.0,
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 900,
+			"frame_ms": {
+				"count": 12,
+				"max": 4427.524,
+				"p50": 2106.69,
+				"p95": 4427.524,
+				"p99": 4427.524
+			},
+			"label": "day-route-6-0m",
+			"near_patches": 25,
+			"nodes": 2770,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 2070624,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 2686.98510742188,
+				"p50": 2308.49096679688,
+				"p95": 2686.98510742188,
+				"p99": 2686.98510742188
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 2677.333984375,
+				"p50": 2301.69409179688,
+				"p95": 2677.333984375,
+				"p99": 2677.333984375
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+			"sun_energy": 0.875736713409424,
+			"tiles": 558
+		},
+		{
+			"ambient_energy": 0.129969745874405,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 0, -0.7507135, -0.66062784, 0, 0, 0, 1, 1.276213, -1.1230675, 0)",
+			"campaign_seconds": 720.0,
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 794,
+			"frame_ms": {
+				"count": 12,
+				"max": 2858.331,
+				"p50": 1389.767,
+				"p95": 2858.331,
+				"p99": 2858.331
+			},
+			"label": "night-route-0-0m",
+			"near_patches": 25,
+			"nodes": 2770,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 2070624,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 1892.48901367188,
+				"p50": 1587.85705566406,
+				"p95": 1892.48901367188,
+				"p99": 1892.48901367188
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 1893.75903320312,
+				"p50": 1595.63195800781,
+				"p95": 1893.75903320312,
+				"p99": 1893.75903320312
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+			"sun_energy": 0.0,
+			"tiles": 558
+		},
+		{
+			"ambient_energy": 0.129969745874405,
+			"camera_transform": "Transform3D(1.09340846e-07, 0.7507135, 0.6606279, -5.7753926e-08, -0.6606279, 0.7507135, 1, -1.202375e-07, -2.8876963e-08, 1.276213, -1.1230675, 0)",
+			"campaign_seconds": 720.0,
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 619,
+			"frame_ms": {
+				"count": 12,
+				"max": 1852.92,
+				"p50": 1111.541,
+				"p95": 1852.92,
+				"p99": 1852.92
+			},
+			"label": "night-side-200m",
+			"near_patches": 25,
+			"nodes": 2770,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 1788316,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 1093.93005371094,
+				"p50": 910.304992675781,
+				"p95": 1093.93005371094,
+				"p99": 1093.93005371094
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 1096.01599121094,
+				"p50": 916.151000976562,
+				"p95": 1096.01599121094,
+				"p99": 1096.01599121094
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+			"sun_energy": 0.0,
+			"tiles": 558
+		},
+		{
+			"ambient_energy": 0.129969745874405,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 2.3567677e-06, -0.7507135, -0.66062784, -2.0736456e-06, 2.3248958e-10, -3.1391655e-06, 1, 1.276213, -1.1230675, -5.33666e-06)",
+			"campaign_seconds": 720.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				385,
+				620
+			],
+			"draw_calls": 695,
+			"frame_ms": {
+				"count": 12,
+				"max": 2324.857,
+				"p50": 1750.81,
+				"p95": 2324.857,
+				"p99": 2324.857
+			},
+			"label": "night-route-1-20m",
+			"near_patches": 25,
+			"nodes": 2770,
+			"origin": [
+				4782816.16403552,
+				-4208878.22435126,
+				-20.0000021846406
+			],
+			"primitives": 1756618,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 1871.17199707031,
+				"p50": 1480.01794433594,
+				"p95": 1871.17199707031,
+				"p99": 1871.17199707031
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 1870.91003417969,
+				"p50": 1480.32202148438,
+				"p95": 1870.91003417969,
+				"p99": 1870.91003417969
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+			"sun_energy": 0.0,
+			"tiles": 558
+		},
+		{
+			"ambient_energy": 0.129969745874405,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 1.1783242e-05, -0.7507135, -0.66062784, -1.036942e-05, -1.2641976e-10, -1.5696167e-05, 1, 1.276213, -1.1230675, -2.66833e-05)",
+			"campaign_seconds": 720.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				415,
+				590
+			],
+			"draw_calls": 490,
+			"frame_ms": {
+				"count": 12,
+				"max": 817.124,
+				"p50": 485.247,
+				"p95": 817.124,
+				"p99": 817.124
+			},
+			"label": "night-route-2-100m",
+			"near_patches": 25,
+			"nodes": 2779,
+			"origin": [
+				4782813.97225518,
+				-4208876.29558456,
+				-99.9999650970518
+			],
+			"primitives": 879152,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 758.372985839844,
+				"p50": 470.880004882812,
+				"p95": 758.372985839844,
+				"p99": 758.372985839844
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 760.1669921875,
+				"p50": 471.148010253906,
+				"p95": 760.1669921875,
+				"p99": 760.1669921875
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+			"sun_energy": 0.0,
+			"tiles": 567
+		},
+		{
+			"ambient_energy": 0.129969745874405,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 2.3566485e-05, -0.7507135, -0.66062784, -2.0738244e-05, 1.9645086e-10, -3.1391937e-05, 1, 1.276213, -1.1230675, -5.33666e-05)",
+			"campaign_seconds": 720.0,
+			"distance_rings_20_100_200_outer": [
+				4,
+				136,
+				267,
+				728
+			],
+			"draw_calls": 427,
+			"frame_ms": {
+				"count": 12,
+				"max": 1005.934,
+				"p50": 593.759,
+				"p95": 1005.934,
+				"p99": 1005.934
+			},
+			"label": "night-route-3-200m",
+			"near_patches": 25,
+			"nodes": 2683,
+			"origin": [
+				4782813.92616781,
+				-4208876.25502767,
+				-199.999928266897
+			],
+			"primitives": 842808,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 765.807983398438,
+				"p50": 565.171020507812,
+				"p95": 765.807983398438,
+				"p99": 765.807983398438
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 767.078002929688,
+				"p50": 564.008972167969,
+				"p95": 767.078002929688,
+				"p99": 767.078002929688
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+			"sun_energy": 0.0,
+			"tiles": 507
+		},
+		{
+			"ambient_energy": 0.129969745874405,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 1.1783242e-05, -0.7507135, -0.66062784, -1.036942e-05, -1.2641976e-10, -1.5696167e-05, 1, 1.276213, -1.1230675, -2.66833e-05)",
+			"campaign_seconds": 720.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				415,
+				590
+			],
+			"draw_calls": 496,
+			"frame_ms": {
+				"count": 12,
+				"max": 1142.512,
+				"p50": 570.035,
+				"p95": 1142.512,
+				"p99": 1142.512
+			},
+			"label": "night-route-4-100m",
+			"near_patches": 25,
+			"nodes": 2755,
+			"origin": [
+				4782813.97225518,
+				-4208876.29558456,
+				-99.9999650970518
+			],
+			"primitives": 881788,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 827.424011230469,
+				"p50": 584.122985839844,
+				"p95": 827.424011230469,
+				"p99": 827.424011230469
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 828.93701171875,
+				"p50": 585.64599609375,
+				"p95": 828.93701171875,
+				"p99": 828.93701171875
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+			"sun_energy": 0.0,
+			"tiles": 546
+		},
+		{
+			"ambient_energy": 0.129969745874405,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 2.3567677e-06, -0.7507135, -0.66062784, -2.0736456e-06, 2.3248958e-10, -3.1391655e-06, 1, 1.276213, -1.1230675, -5.33666e-06)",
+			"campaign_seconds": 720.0,
+			"distance_rings_20_100_200_outer": [
+				6,
+				124,
+				385,
+				620
+			],
+			"draw_calls": 744,
+			"frame_ms": {
+				"count": 12,
+				"max": 2393.939,
+				"p50": 1302.675,
+				"p95": 2393.939,
+				"p99": 2393.939
+			},
+			"label": "night-route-5-20m",
+			"near_patches": 25,
+			"nodes": 2761,
+			"origin": [
+				4782816.16403552,
+				-4208878.22435126,
+				-20.0000021846406
+			],
+			"primitives": 1767198,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 1891.51293945312,
+				"p50": 1277.99401855469,
+				"p95": 1891.51293945312,
+				"p99": 1891.51293945312
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 1894.5810546875,
+				"p50": 1283.18298339844,
+				"p95": 1894.5810546875,
+				"p99": 1894.5810546875
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+			"sun_energy": 0.0,
+			"tiles": 549
+		},
+		{
+			"ambient_energy": 0.129969745874405,
+			"camera_transform": "Transform3D(-0.66062784, 0.7507135, 0, -0.7507135, -0.66062784, 0, 0, 0, 1, 1.276213, -1.1230675, 0)",
+			"campaign_seconds": 720.0,
+			"distance_rings_20_100_200_outer": [
+				3,
+				128,
+				387,
+				617
+			],
+			"draw_calls": 794,
+			"frame_ms": {
+				"count": 12,
+				"max": 3108.689,
+				"p50": 2166.263,
+				"p95": 3108.689,
+				"p99": 3108.689
+			},
+			"label": "night-route-6-0m",
+			"near_patches": 25,
+			"nodes": 2770,
+			"origin": [
+				4782815.64159885,
+				-4208877.76460699,
+				0.0
+			],
+			"primitives": 2070624,
+			"render_cpu_ms": {
+				"count": 12,
+				"max": 2617.02001953125,
+				"p50": 1834.77795410156,
+				"p95": 2617.02001953125,
+				"p99": 2617.02001953125
+			},
+			"render_gpu_ms": {
+				"count": 12,
+				"max": 2615.95092773438,
+				"p50": 1837.77697753906,
+				"p95": 2615.95092773438,
+				"p99": 2615.95092773438
+			},
+			"scenery": {
+				"batches": 8,
+				"cells": 354,
+				"discarded": 0,
+				"instances": 1135,
+				"last_publish_units": 0,
+				"max_publish_ms": 2.336,
+				"max_worker_ms": 2019.005,
+				"ready": true,
+				"staged_sets": 0,
+				"workers": 0
+			},
+			"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+			"sun_energy": 0.0,
+			"tiles": 558
+		}
+	],
+	"scope": "Fixed settled views, 12 frames/view on software GPU; no walking FPS or target-PC acceptance. Fast setup drains up to 64 existing flora publication steps per unmeasured frame; runtime budgets tested separately. UI/actors hidden; wind and cloud clock frozen for comparison.",
+	"seed": 15838
+}

@@ -1,0 +1,23 @@
+--- a/tools/review_surface_transitions.py
++++ b/tools/review_surface_transitions.py
+@@ -19 +19 @@
+-def capture(project, godot, renderer, output):
++def capture(project, godot, renderer, output, injected_measurement_sha256=None):
+@@ -37 +37,11 @@
+-    source['unchanged'] = source['commit'] == git(project, 'rev-parse', 'HEAD') and not git(project, 'diff', '--name-only', 'HEAD')
++    changed = git(project, 'diff', '--name-only', 'HEAD').splitlines()
++    current_measurement = hashlib.sha256((project / 'tools/capture_surface_transitions.gd').read_bytes()).hexdigest()
++    valid_injection = (injected_measurement_sha256 is not None
++                       and source['capture_script_sha256'] == injected_measurement_sha256
++                       and current_measurement == injected_measurement_sha256
++                       and set(changed) <= {'tools/capture_surface_transitions.gd'})
++    source['measurement_injection_sha256'] = injected_measurement_sha256
++    source['tracked_changes'] = changed
++    source['unchanged'] = (source['commit'] == git(project, 'rev-parse', 'HEAD')
++                           and current_measurement == source['capture_script_sha256']
++                           and (not changed or valid_injection))
+@@ -63,0 +74 @@
++            measurement_sha256 = hashlib.sha256((project / 'tools/capture_surface_transitions.gd').read_bytes()).hexdigest()
+@@ -65 +76 @@
+-            before = capture(checkout, godot, args.renderer, output / 'before')
++            before = capture(checkout, godot, args.renderer, output / 'before', measurement_sha256)

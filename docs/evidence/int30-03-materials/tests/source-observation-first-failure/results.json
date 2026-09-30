@@ -1,0 +1,113 @@
+{
+  "godot": null,
+  "source": {
+    "available": true,
+    "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+    "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+    "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+    "complete": true,
+    "file_count": 3961,
+    "bytes": 125295731,
+    "bytes_hashed": 125295731,
+    "seconds": 1.1085
+  },
+  "passed": false,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "environment_production_test",
+    "environment_cluster_test",
+    "environment_playtest_test",
+    "living_surface_materials_test",
+    "surface_distance_test",
+    "surface_distance_world_test",
+    "large_planet_geometry_test",
+    "world_motion_visual_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+      "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "complete": true,
+      "file_count": 3961,
+      "bytes": 125295731,
+      "bytes_hashed": 125295731,
+      "seconds": 1.1085
+    },
+    "end": {
+      "available": false,
+      "commit": null,
+      "tree": null,
+      "tracked_worktree_dirty": null,
+      "error": "Git source state changed during observation",
+      "complete": false,
+      "seconds": 0.3976
+    },
+    "status": "changed_or_unavailable",
+    "reusable": false,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "eec5d00043aaf6e6ad529f4ba1e9988451df14078728691bfb1fee814d763c47"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": false,
+          "commit": null,
+          "tree": null,
+          "tracked_worktree_dirty": null,
+          "error": "Git source state changed during observation",
+          "complete": false,
+          "seconds": 0.1803
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unavailable"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": false,
+          "commit": null,
+          "tree": null,
+          "tracked_worktree_dirty": null,
+          "error": "Git source state changed during observation",
+          "complete": false,
+          "seconds": 0.3976
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unavailable"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": false,
+      "status": "changed_or_unavailable",
+      "reusable_source": false
+    }
+  ]
+}

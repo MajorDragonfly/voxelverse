@@ -1,0 +1,979 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"failures": [],
+	"godot": "4.6.3-stable (official)",
+	"passed": true,
+	"probes": [
+		{
+			"mean_rgb_rebase_change": 0.00281571454695169,
+			"shift_m": "Vector3(83.25, -77.5, 129.125)",
+			"version": "before"
+		},
+		{
+			"mean_rgb_handoff_change": 0.0,
+			"version": "before"
+		},
+		{
+			"mean_rgb_rebase_change": 0.0,
+			"shift_m": "Vector3(83.25, -77.5, 129.125)",
+			"version": "after"
+		},
+		{
+			"mean_rgb_handoff_change": 0.0,
+			"version": "after"
+		}
+	],
+	"renderer": "gl_compatibility",
+	"resolution": [
+		960,
+		540
+	],
+	"samples": [
+		{
+			"after": {
+				"draw_calls": 20,
+				"frame_ms": {
+					"count": 16,
+					"p50": 656.893,
+					"p95": 932.121
+				},
+				"primitives": 486948,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 630.343017578125,
+					"p95": 878.585998535156
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 633.294982910156,
+					"p95": 866.359008789062
+				}
+			},
+			"before": {
+				"draw_calls": 20,
+				"frame_ms": {
+					"count": 16,
+					"p50": 852.82,
+					"p95": 970.603
+				},
+				"primitives": 486948,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 872.568969726562,
+					"p95": 1268.61999511719
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 871.763000488281,
+					"p95": 1276.20104980469
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912766, 0.114791825, 0, 0.9634613, 0.2678476, -0.11914524, -0.26593968, 0.9565984, 1.44, 4.36, 12)",
+			"category": "forest",
+			"distance_m": 12.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.3508783, 0.5714304, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 18,
+				"frame_ms": {
+					"count": 16,
+					"p50": 191.793,
+					"p95": 259.855
+				},
+				"primitives": 88680,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 192.298004150391,
+					"p95": 252.666000366211
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 194.791000366211,
+					"p95": 253.203994750977
+				}
+			},
+			"before": {
+				"draw_calls": 18,
+				"frame_ms": {
+					"count": 16,
+					"p50": 206.565,
+					"p95": 407.745
+				},
+				"primitives": 88680,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 188.957000732422,
+					"p95": 370.390991210938
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 188.171997070312,
+					"p95": 372.766998291016
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912763, 0.11479182, 0, 0.9634613, 0.2678476, -0.11914523, -0.26593968, 0.9565984, 5.4, 13.6, 45)",
+			"category": "forest",
+			"distance_m": 45.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.3508783, 0.5714304, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 14,
+				"frame_ms": {
+					"count": 16,
+					"p50": 87.65,
+					"p95": 116.565
+				},
+				"primitives": 22800,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 65.7779998779297,
+					"p95": 890.317993164062
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 67.6640014648438,
+					"p95": 888.955017089844
+				}
+			},
+			"before": {
+				"draw_calls": 14,
+				"frame_ms": {
+					"count": 16,
+					"p50": 100.731,
+					"p95": 123.044
+				},
+				"primitives": 22800,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 88.4029998779297,
+					"p95": 1204.3310546875
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 85.5,
+					"p95": 1204.90795898438
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912763, 0.11479181, 0, 0.9634613, 0.2678476, -0.11914522, -0.26593968, 0.9565984, 13.2, 31.8, 110)",
+			"category": "forest",
+			"distance_m": 110.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.3508783, 0.5714304, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 20,
+				"frame_ms": {
+					"count": 16,
+					"p50": 570.523,
+					"p95": 706.935
+				},
+				"primitives": 486948,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 560.445007324219,
+					"p95": 680.901000976562
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 560.372985839844,
+					"p95": 682.965026855469
+				}
+			},
+			"before": {
+				"draw_calls": 20,
+				"frame_ms": {
+					"count": 16,
+					"p50": 573.12,
+					"p95": 871.532
+				},
+				"primitives": 486948,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 610.203979492188,
+					"p95": 850.68798828125
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 610.138977050781,
+					"p95": 854.044006347656
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912766, 0.114791825, 0, 0.9634613, 0.2678476, -0.11914524, -0.26593968, 0.9565984, 1.44, 4.36, 12)",
+			"category": "forest",
+			"distance_m": 12.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(0.3508783, -0.5714303, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		},
+		{
+			"after": {
+				"draw_calls": 20,
+				"frame_ms": {
+					"count": 16,
+					"p50": 173.844,
+					"p95": 223.89
+				},
+				"primitives": 88680,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 176.783996582031,
+					"p95": 618.208984375
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 177.27799987793,
+					"p95": 616.5009765625
+				}
+			},
+			"before": {
+				"draw_calls": 20,
+				"frame_ms": {
+					"count": 16,
+					"p50": 203.311,
+					"p95": 264.422
+				},
+				"primitives": 88680,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 165.287994384766,
+					"p95": 232.380004882812
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 164.677001953125,
+					"p95": 235.171005249023
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912763, 0.11479182, 0, 0.9634613, 0.2678476, -0.11914523, -0.26593968, 0.9565984, 5.4, 13.6, 45)",
+			"category": "forest",
+			"distance_m": 45.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(0.3508783, -0.5714303, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		},
+		{
+			"after": {
+				"draw_calls": 17,
+				"frame_ms": {
+					"count": 16,
+					"p50": 107.75,
+					"p95": 118.823
+				},
+				"primitives": 22800,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 82.1320037841797,
+					"p95": 103.656997680664
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 82.234001159668,
+					"p95": 103.944000244141
+				}
+			},
+			"before": {
+				"draw_calls": 17,
+				"frame_ms": {
+					"count": 16,
+					"p50": 101.332,
+					"p95": 134.957
+				},
+				"primitives": 22800,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 79.9550018310547,
+					"p95": 103.120002746582
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 80.1380004882812,
+					"p95": 102.98999786377
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912763, 0.11479181, 0, 0.9634613, 0.2678476, -0.11914522, -0.26593968, 0.9565984, 13.2, 31.8, 110)",
+			"category": "forest",
+			"distance_m": 110.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(0.3508783, -0.5714303, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		},
+		{
+			"after": {
+				"draw_calls": 10,
+				"frame_ms": {
+					"count": 16,
+					"p50": 154.97,
+					"p95": 175.305
+				},
+				"primitives": 16248,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 126.453002929688,
+					"p95": 156.419006347656
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 126.442001342773,
+					"p95": 157.007995605469
+				}
+			},
+			"before": {
+				"draw_calls": 10,
+				"frame_ms": {
+					"count": 16,
+					"p50": 124.397,
+					"p95": 177.443
+				},
+				"primitives": 16248,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 110.468002319336,
+					"p95": 180.712997436523
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 111.863998413086,
+					"p95": 184.287002563477
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912766, 0.114791825, 0, 0.9634613, 0.2678476, -0.11914524, -0.26593968, 0.9565984, 1.44, 4.36, 12)",
+			"category": "stone",
+			"distance_m": 12.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.3508783, 0.5714304, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 9,
+				"frame_ms": {
+					"count": 16,
+					"p50": 100.868,
+					"p95": 167.215
+				},
+				"primitives": 4350,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 79.3010025024414,
+					"p95": 146.279006958008
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 82.4980010986328,
+					"p95": 146.356994628906
+				}
+			},
+			"before": {
+				"draw_calls": 9,
+				"frame_ms": {
+					"count": 16,
+					"p50": 104.235,
+					"p95": 136.516
+				},
+				"primitives": 4350,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 85.322998046875,
+					"p95": 105.026000976562
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 88.7590026855469,
+					"p95": 107.848999023438
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912763, 0.11479182, 0, 0.9634613, 0.2678476, -0.11914523, -0.26593968, 0.9565984, 5.4, 13.6, 45)",
+			"category": "stone",
+			"distance_m": 45.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.3508783, 0.5714304, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 8,
+				"frame_ms": {
+					"count": 16,
+					"p50": 114.951,
+					"p95": 148.007
+				},
+				"primitives": 1020,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 88.4229965209961,
+					"p95": 225.910995483398
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 90.5790023803711,
+					"p95": 226.968994140625
+				}
+			},
+			"before": {
+				"draw_calls": 8,
+				"frame_ms": {
+					"count": 16,
+					"p50": 102.255,
+					"p95": 148.258
+				},
+				"primitives": 1020,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 67.2350006103516,
+					"p95": 99.4919967651367
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 72.4160003662109,
+					"p95": 105.487998962402
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912763, 0.11479181, 0, 0.9634613, 0.2678476, -0.11914522, -0.26593968, 0.9565984, 13.2, 31.8, 110)",
+			"category": "stone",
+			"distance_m": 110.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.3508783, 0.5714304, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 10,
+				"frame_ms": {
+					"count": 16,
+					"p50": 150.758,
+					"p95": 283.79
+				},
+				"primitives": 16248,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 122.672996520996,
+					"p95": 150.442001342773
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 116.424003601074,
+					"p95": 150.218002319336
+				}
+			},
+			"before": {
+				"draw_calls": 10,
+				"frame_ms": {
+					"count": 16,
+					"p50": 158.957,
+					"p95": 299.289
+				},
+				"primitives": 16248,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 105.555000305176,
+					"p95": 277.256988525391
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 107.369003295898,
+					"p95": 277.877014160156
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912766, 0.114791825, 0, 0.9634613, 0.2678476, -0.11914524, -0.26593968, 0.9565984, 1.44, 4.36, 12)",
+			"category": "stone",
+			"distance_m": 12.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(0.3508783, -0.5714303, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		},
+		{
+			"after": {
+				"draw_calls": 10,
+				"frame_ms": {
+					"count": 16,
+					"p50": 127.222,
+					"p95": 168.006
+				},
+				"primitives": 4350,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 118.249000549316,
+					"p95": 141.35400390625
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 117.462997436523,
+					"p95": 141.436004638672
+				}
+			},
+			"before": {
+				"draw_calls": 10,
+				"frame_ms": {
+					"count": 16,
+					"p50": 137.486,
+					"p95": 163.136
+				},
+				"primitives": 4350,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 99.3280029296875,
+					"p95": 144.531005859375
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 98.943000793457,
+					"p95": 157.694000244141
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912763, 0.11479182, 0, 0.9634613, 0.2678476, -0.11914523, -0.26593968, 0.9565984, 5.4, 13.6, 45)",
+			"category": "stone",
+			"distance_m": 45.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(0.3508783, -0.5714303, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		},
+		{
+			"after": {
+				"draw_calls": 9,
+				"frame_ms": {
+					"count": 16,
+					"p50": 81.097,
+					"p95": 129.362
+				},
+				"primitives": 1020,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 73.0289993286133,
+					"p95": 96.5500030517578
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 67.3789978027344,
+					"p95": 96.4769973754883
+				}
+			},
+			"before": {
+				"draw_calls": 9,
+				"frame_ms": {
+					"count": 16,
+					"p50": 93.728,
+					"p95": 131.282
+				},
+				"primitives": 1020,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 71.3140029907227,
+					"p95": 100.641998291016
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 71.9140014648438,
+					"p95": 97.588996887207
+				}
+			},
+			"camera_transform": "Transform3D(0.9928768, -0.031912763, 0.11479181, 0, 0.9634613, 0.2678476, -0.11914522, -0.26593968, 0.9565984, 13.2, 31.8, 110)",
+			"category": "stone",
+			"distance_m": 110.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(0.3508783, -0.5714303, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		},
+		{
+			"after": {
+				"draw_calls": 82,
+				"frame_ms": {
+					"count": 16,
+					"p50": 181.118,
+					"p95": 292.627
+				},
+				"primitives": 13934,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 163.453002929688,
+					"p95": 276.734985351562
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 162.384002685547,
+					"p95": 274.915008544922
+				}
+			},
+			"before": {
+				"draw_calls": 82,
+				"frame_ms": {
+					"count": 16,
+					"p50": 155.009,
+					"p95": 200.404
+				},
+				"primitives": 13934,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 135.123992919922,
+					"p95": 260.566986083984
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 133.287994384766,
+					"p95": 262.503997802734
+				}
+			},
+			"camera_transform": "Transform3D(-0.6559222, 0.74436593, 0.12524211, -0.7453661, -0.6125321, -0.26312336, -0.119145244, -0.26593965, 0.95659846, 2.321807, -3.9613652, 12)",
+			"category": "ground",
+			"distance_m": 12.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 83,
+				"frame_ms": {
+					"count": 16,
+					"p50": 199.834,
+					"p95": 257.985
+				},
+				"primitives": 15394,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 167.660003662109,
+					"p95": 192.589004516602
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 168.011993408203,
+					"p95": 190.832992553711
+				}
+			},
+			"before": {
+				"draw_calls": 83,
+				"frame_ms": {
+					"count": 16,
+					"p50": 167.484,
+					"p95": 201.061
+				},
+				"primitives": 15394,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 157.800994873047,
+					"p95": 216.354995727539
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 159.110000610352,
+					"p95": 203.389007568359
+				}
+			},
+			"camera_transform": "Transform3D(-0.6559222, 0.74436593, 0.12524214, -0.7453661, -0.6125321, -0.26312336, -0.11914523, -0.26593968, 0.95659846, 6.642314, -13.038393, 45)",
+			"category": "ground",
+			"distance_m": 45.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 77,
+				"frame_ms": {
+					"count": 16,
+					"p50": 153.882,
+					"p95": 180.704
+				},
+				"primitives": 19700,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 143.251007080078,
+					"p95": 168.335998535156
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 143.942001342773,
+					"p95": 167.947998046875
+				}
+			},
+			"before": {
+				"draw_calls": 77,
+				"frame_ms": {
+					"count": 16,
+					"p50": 179.926,
+					"p95": 268.136
+				},
+				"primitives": 19700,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 167.026992797852,
+					"p95": 210.25
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 169.985992431641,
+					"p95": 220.90299987793
+				}
+			},
+			"camera_transform": "Transform3D(-0.6559222, 0.74436593, 0.12524211, -0.7453661, -0.6125321, -0.26312336, -0.119145244, -0.26593965, 0.95659846, 15.152402, -30.917385, 110)",
+			"category": "ground",
+			"distance_m": 110.0,
+			"light": {
+				"ambient_energy": 0.368247628211975,
+				"cloud_cover": 0.2,
+				"seconds": 0.0,
+				"sun_direction": "Vector3(0.1971805, -0.64091194, 0.741857)",
+				"sun_energy": 0.875736713409424,
+				"tonemap_white": 2.0
+			},
+			"phase": "day"
+		},
+		{
+			"after": {
+				"draw_calls": 59,
+				"frame_ms": {
+					"count": 16,
+					"p50": 76.602,
+					"p95": 144.467
+				},
+				"primitives": 13934,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 69.1279983520508,
+					"p95": 130.983001708984
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 68.3450012207031,
+					"p95": 93.4029998779297
+				}
+			},
+			"before": {
+				"draw_calls": 59,
+				"frame_ms": {
+					"count": 16,
+					"p50": 98.726,
+					"p95": 143.036
+				},
+				"primitives": 13934,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 82.5790023803711,
+					"p95": 256.700012207031
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 82.4980010986328,
+					"p95": 256.777008056641
+				}
+			},
+			"camera_transform": "Transform3D(-0.6559222, 0.74436593, 0.12524211, -0.7453661, -0.6125321, -0.26312336, -0.119145244, -0.26593965, 0.95659846, 2.321807, -3.9613652, 12)",
+			"category": "ground",
+			"distance_m": 12.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		},
+		{
+			"after": {
+				"draw_calls": 68,
+				"frame_ms": {
+					"count": 16,
+					"p50": 91.927,
+					"p95": 130.093
+				},
+				"primitives": 15394,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 75.4919967651367,
+					"p95": 151.998992919922
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 76.2799987792969,
+					"p95": 151.953002929688
+				}
+			},
+			"before": {
+				"draw_calls": 68,
+				"frame_ms": {
+					"count": 16,
+					"p50": 84.533,
+					"p95": 115.435
+				},
+				"primitives": 15394,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 73.1880035400391,
+					"p95": 99.9280014038086
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 73.8730010986328,
+					"p95": 94.181999206543
+				}
+			},
+			"camera_transform": "Transform3D(-0.6559222, 0.74436593, 0.12524214, -0.7453661, -0.6125321, -0.26312336, -0.11914523, -0.26593968, 0.95659846, 6.642314, -13.038393, 45)",
+			"category": "ground",
+			"distance_m": 45.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		},
+		{
+			"after": {
+				"draw_calls": 85,
+				"frame_ms": {
+					"count": 16,
+					"p50": 74.36,
+					"p95": 95.608
+				},
+				"primitives": 19700,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 71.1989974975586,
+					"p95": 99.6259994506836
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 71.1880035400391,
+					"p95": 100.407997131348
+				}
+			},
+			"before": {
+				"draw_calls": 85,
+				"frame_ms": {
+					"count": 16,
+					"p50": 91.702,
+					"p95": 155.446
+				},
+				"primitives": 19700,
+				"render_cpu_ms": {
+					"count": 16,
+					"p50": 68.5619964599609,
+					"p95": 117.985000610352
+				},
+				"render_gpu_ms": {
+					"count": 16,
+					"p50": 68.4469985961914,
+					"p95": 112.28099822998
+				}
+			},
+			"camera_transform": "Transform3D(-0.6559222, 0.74436593, 0.12524211, -0.7453661, -0.6125321, -0.26312336, -0.119145244, -0.26593965, 0.95659846, 15.152402, -30.917385, 110)",
+			"category": "ground",
+			"distance_m": 110.0,
+			"light": {
+				"ambient_energy": 0.129969745874405,
+				"cloud_cover": 0.2,
+				"seconds": 720.0,
+				"sun_direction": "Vector3(-0.66078043, 0.114093676, -0.74185705)",
+				"sun_energy": 0.0,
+				"tonemap_white": 1.0
+			},
+			"phase": "night"
+		}
+	],
+	"scope": "Controlled production asset/terrain fixture; 16 render samples per side/view, frozen campaign-clock atmosphere. Real campaign horizon/streaming is a separate review. Software times are not target-PC FPS.",
+	"seed": 15838,
+	"shader_sha256": {
+		"after/include": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+		"after/planet_foliage": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+		"after/surface_scenery": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c",
+		"before/include": "2ce5753c88ca6dbf7c069438c43a1d18674c51e324ed8a212fdbd5505253e46f",
+		"before/planet_foliage": "7d9bb68c87a6af4ade0e7b594890714c6768628d78cca0e0e75782d3350923a5",
+		"before/surface_scenery": "9484b5e686ab06c7ba150e4eccdafc143e1eef17fcd084fd62a9a05de7a63881"
+	}
+}

@@ -1,0 +1,1778 @@
+{
+  "run": 36773077465,
+  "head_commit": "40b15e5556dd48e42a97eb430ba2c2e5aad9d41d",
+  "scope": "Actual247 disjoint source tests and actual runtime job on PR merge source, not just a draft plan; native rendering/export gates are separate.",
+  "artifacts": [
+    {
+      "artifact_id": 11127370797,
+      "artifact_zip_sha256": "2a54f2c9fa6b3368ec3758b7321bdb1301f00b6c0ae7b4a9d0b02a07fc6d54f5",
+      "passed": true,
+      "source_commit": "c9f443c777b58033e6df3cf79d4835dccc19ef9f",
+      "source_tree": "fe3f30637549991df2eefe99defef184a7fbf285",
+      "source_sha256": "dc59b9486aedbb6dc9af573ca565d94428aae22603df073415c799d355d8aa8e",
+      "reusable": true,
+      "selected_count": 62,
+      "execution": "headless_source_project",
+      "test_names": [
+        "adaptive_planet_test",
+        "atlas_search_test",
+        "audio/audio_scene_lifecycle_test",
+        "audio/creature_audio_test",
+        "audio/runtime_shutdown_test",
+        "blueprint_contract_test",
+        "campaign_foundation_test",
+        "construction_control_test",
+        "creature_animation_continuity_test",
+        "creature_builder_v7_test",
+        "creature_expression_test",
+        "creature_hand_provider_test",
+        "creature_mouth_provider_test",
+        "creature_part_revisions_test",
+        "creature_snout_family_test",
+        "creature_v5_smoke_test",
+        "distant_forest_test",
+        "domestic_fauna_runtime_test",
+        "domestic_surface_runtime_test",
+        "domestication_lab_test",
+        "editor_localization_test",
+        "egg_species_contract_test",
+        "environment_production_test",
+        "frontend_test",
+        "gameplay_acceptance_test",
+        "home_group_world_test",
+        "interface_task7_test",
+        "large_planet_geometry_test",
+        "living_creature_ai_test",
+        "living_planet_entry_test",
+        "localization_test",
+        "minimap_test",
+        "onboarding_guidance_world_test",
+        "pause_menu_test",
+        "planet_diversity_v9_test",
+        "planet_sphere_runtime_test",
+        "player_recovery_world_test",
+        "regional_transport_test",
+        "resource_visuals_test",
+        "save_slots_test",
+        "settlement_save_test",
+        "skills_localization_test",
+        "spherical_campaign_runtime_test",
+        "spherical_gameplay_test",
+        "surface_adapter_entry_test",
+        "surface_population_budget_test",
+        "terrain_transition_test",
+        "tribal_age_growth_test",
+        "tribal_age_supply_test",
+        "tribal_building_preview_world_test",
+        "tribal_economy_progress_test",
+        "tribal_neighbors_contract_test",
+        "tribal_playtest_test",
+        "tribal_stockpile_grounding_test",
+        "ui_visual_refresh_test",
+        "village_work_snapshot_test",
+        "weather_forecast_ui_test",
+        "wildlife_ai_test",
+        "wildlife_drinking_world_test",
+        "wildlife_hunting_world_test",
+        "workplace_runtime_test",
+        "world_map_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "seconds": 0.817
+        },
+        {
+          "name": "import",
+          "passed": true,
+          "seconds": 9.947
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "seconds": 2.771
+        },
+        {
+          "name": "adaptive_planet_test",
+          "passed": true,
+          "seconds": 20.67
+        },
+        {
+          "name": "atlas_search_test",
+          "passed": true,
+          "seconds": 22.105
+        },
+        {
+          "name": "audio/audio_scene_lifecycle_test",
+          "passed": true,
+          "seconds": 1.871
+        },
+        {
+          "name": "audio/creature_audio_test",
+          "passed": true,
+          "seconds": 6.334
+        },
+        {
+          "name": "audio/runtime_shutdown_test",
+          "passed": true,
+          "seconds": 2.223
+        },
+        {
+          "name": "blueprint_contract_test",
+          "passed": true,
+          "seconds": 4.58
+        },
+        {
+          "name": "campaign_foundation_test",
+          "passed": true,
+          "seconds": 4.831
+        },
+        {
+          "name": "construction_control_test",
+          "passed": true,
+          "seconds": 4.028
+        },
+        {
+          "name": "creature_animation_continuity_test",
+          "passed": true,
+          "seconds": 9.042
+        },
+        {
+          "name": "creature_builder_v7_test",
+          "passed": true,
+          "seconds": 2.774
+        },
+        {
+          "name": "creature_expression_test",
+          "passed": true,
+          "seconds": 8.691
+        },
+        {
+          "name": "creature_hand_provider_test",
+          "passed": true,
+          "seconds": 10.044
+        },
+        {
+          "name": "creature_mouth_provider_test",
+          "passed": true,
+          "seconds": 17.61
+        },
+        {
+          "name": "creature_part_revisions_test",
+          "passed": true,
+          "seconds": 11.848
+        },
+        {
+          "name": "creature_snout_family_test",
+          "passed": true,
+          "seconds": 22.881
+        },
+        {
+          "name": "creature_v5_smoke_test",
+          "passed": true,
+          "seconds": 3.627
+        },
+        {
+          "name": "distant_forest_test",
+          "passed": true,
+          "seconds": 3.727
+        },
+        {
+          "name": "domestic_fauna_runtime_test",
+          "passed": true,
+          "seconds": 16.006
+        },
+        {
+          "name": "domestic_surface_runtime_test",
+          "passed": true,
+          "seconds": 72.355
+        },
+        {
+          "name": "domestication_lab_test",
+          "passed": true,
+          "seconds": 22.419
+        },
+        {
+          "name": "editor_localization_test",
+          "passed": true,
+          "seconds": 41.871
+        },
+        {
+          "name": "egg_species_contract_test",
+          "passed": true,
+          "seconds": 6.232
+        },
+        {
+          "name": "environment_production_test",
+          "passed": true,
+          "seconds": 4.678
+        },
+        {
+          "name": "frontend_test",
+          "passed": true,
+          "seconds": 166.416
+        },
+        {
+          "name": "gameplay_acceptance_test",
+          "passed": true,
+          "seconds": 3.276
+        },
+        {
+          "name": "home_group_world_test",
+          "passed": true,
+          "seconds": 28.288
+        },
+        {
+          "name": "interface_task7_test",
+          "passed": true,
+          "seconds": 10.545
+        },
+        {
+          "name": "large_planet_geometry_test",
+          "passed": true,
+          "seconds": 48.197
+        },
+        {
+          "name": "living_creature_ai_test",
+          "passed": true,
+          "seconds": 12.246
+        },
+        {
+          "name": "living_planet_entry_test",
+          "passed": true,
+          "seconds": 75.248
+        },
+        {
+          "name": "localization_test",
+          "passed": true,
+          "seconds": 2.222
+        },
+        {
+          "name": "minimap_test",
+          "passed": true,
+          "seconds": 3.525
+        },
+        {
+          "name": "onboarding_guidance_world_test",
+          "passed": true,
+          "seconds": 71.383
+        },
+        {
+          "name": "pause_menu_test",
+          "passed": true,
+          "seconds": 69.671
+        },
+        {
+          "name": "planet_diversity_v9_test",
+          "passed": true,
+          "seconds": 1.971
+        },
+        {
+          "name": "planet_sphere_runtime_test",
+          "passed": true,
+          "seconds": 53.187
+        },
+        {
+          "name": "player_recovery_world_test",
+          "passed": true,
+          "seconds": 105.676
+        },
+        {
+          "name": "regional_transport_test",
+          "passed": true,
+          "seconds": 5.581
+        },
+        {
+          "name": "resource_visuals_test",
+          "passed": true,
+          "seconds": 5.03
+        },
+        {
+          "name": "save_slots_test",
+          "passed": true,
+          "seconds": 2.073
+        },
+        {
+          "name": "settlement_save_test",
+          "passed": true,
+          "seconds": 4.029
+        },
+        {
+          "name": "skills_localization_test",
+          "passed": true,
+          "seconds": 25.679
+        },
+        {
+          "name": "spherical_campaign_runtime_test",
+          "passed": true,
+          "seconds": 156.401
+        },
+        {
+          "name": "spherical_gameplay_test",
+          "passed": true,
+          "seconds": 644.322
+        },
+        {
+          "name": "surface_adapter_entry_test",
+          "passed": true,
+          "seconds": 26.226
+        },
+        {
+          "name": "surface_population_budget_test",
+          "passed": true,
+          "seconds": 2.723
+        },
+        {
+          "name": "terrain_transition_test",
+          "passed": true,
+          "seconds": 3.926
+        },
+        {
+          "name": "tribal_age_growth_test",
+          "passed": true,
+          "seconds": 196.347
+        },
+        {
+          "name": "tribal_age_supply_test",
+          "passed": true,
+          "seconds": 38.665
+        },
+        {
+          "name": "tribal_building_preview_world_test",
+          "passed": true,
+          "seconds": 52.647
+        },
+        {
+          "name": "tribal_economy_progress_test",
+          "passed": true,
+          "seconds": 2.072
+        },
+        {
+          "name": "tribal_neighbors_contract_test",
+          "passed": true,
+          "seconds": 1.972
+        },
+        {
+          "name": "tribal_playtest_test",
+          "passed": true,
+          "seconds": 151.893
+        },
+        {
+          "name": "tribal_stockpile_grounding_test",
+          "passed": true,
+          "seconds": 1.87
+        },
+        {
+          "name": "ui_visual_refresh_test",
+          "passed": true,
+          "seconds": 12.495
+        },
+        {
+          "name": "village_work_snapshot_test",
+          "passed": true,
+          "seconds": 4.927
+        },
+        {
+          "name": "weather_forecast_ui_test",
+          "passed": true,
+          "seconds": 2.121
+        },
+        {
+          "name": "wildlife_ai_test",
+          "passed": true,
+          "seconds": 27.177
+        },
+        {
+          "name": "wildlife_drinking_world_test",
+          "passed": true,
+          "seconds": 34.54
+        },
+        {
+          "name": "wildlife_hunting_world_test",
+          "passed": true,
+          "seconds": 93.758
+        },
+        {
+          "name": "workplace_runtime_test",
+          "passed": true,
+          "seconds": 80.011
+        },
+        {
+          "name": "world_map_test",
+          "passed": true,
+          "seconds": 5.681
+        },
+        {
+          "name": "source_integrity",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "artifact_id": 11126420990,
+      "artifact_zip_sha256": "7fba162de6ec9ed52c55d5ba45c407908013937cd24f50e22dfd29374d4d7bd9",
+      "passed": true,
+      "source_commit": "c9f443c777b58033e6df3cf79d4835dccc19ef9f",
+      "source_tree": "fe3f30637549991df2eefe99defef184a7fbf285",
+      "source_sha256": "dc59b9486aedbb6dc9af573ca565d94428aae22603df073415c799d355d8aa8e",
+      "reusable": true,
+      "selected_count": 61,
+      "execution": "headless_source_project",
+      "test_names": [
+        "atlas_places_test",
+        "audio/audio_runtime_test",
+        "audio/creature_audio_budget_test",
+        "audio/music_runtime_test",
+        "behavior_skill_tree_test",
+        "campaign_atmosphere_test",
+        "community_catalog_client_test",
+        "creature_animal_feet_test",
+        "creature_body_fit_test",
+        "creature_editor_v7_runtime_test",
+        "creature_foot_provider_test",
+        "creature_library_ui_test",
+        "creature_part_articulation_test",
+        "creature_seat_fit_test",
+        "creature_trunk_provider_test",
+        "discovery_journal_test",
+        "domestic_fauna_journal_test",
+        "domestic_surface_catalog_test",
+        "domestication_d1_adapter_test",
+        "drainage_network_test",
+        "egg_species_campaign_test",
+        "environment_playtest_test",
+        "fleet_runtime_test",
+        "galaxy_visits_test",
+        "home_group_test",
+        "input_preferences_test",
+        "journal_preview_rotation_test",
+        "living_companion_test",
+        "living_lake_water_test",
+        "living_surface_materials_test",
+        "meta_runtime_test",
+        "nest_discovery_test",
+        "owned_animal_register_test",
+        "planet_climate_test",
+        "planet_sphere_contract_test",
+        "player_recovery_test",
+        "region_store_test",
+        "resource_production_contract_test",
+        "save_participants_test",
+        "settlement_runtime_test",
+        "site_transport_test",
+        "spherical_campaign_contract_test",
+        "spherical_egg_production_test",
+        "surface_adapter_contract_test",
+        "surface_distance_world_test",
+        "terrain_lookahead_test",
+        "tribal_age_growth_contract_test",
+        "tribal_age_husbandry_test",
+        "tribal_building_preview_test",
+        "tribal_camera_world_test",
+        "tribal_guidance_world_test",
+        "tribal_order_latency_test",
+        "tribal_shelter_labels_test",
+        "tribe_localization_test",
+        "village_work_observation_test",
+        "water_flow_visual_test",
+        "weather_storm_test",
+        "wildlife_drinking_test",
+        "wildlife_hunting_test",
+        "workplace_instances_test",
+        "world_map_localization_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "seconds": 0.817
+        },
+        {
+          "name": "import",
+          "passed": true,
+          "seconds": 8.651
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "seconds": 2.771
+        },
+        {
+          "name": "atlas_places_test",
+          "passed": true,
+          "seconds": 22.985
+        },
+        {
+          "name": "audio/audio_runtime_test",
+          "passed": true,
+          "seconds": 15.354
+        },
+        {
+          "name": "audio/creature_audio_budget_test",
+          "passed": true,
+          "seconds": 9.039
+        },
+        {
+          "name": "audio/music_runtime_test",
+          "passed": true,
+          "seconds": 29.991
+        },
+        {
+          "name": "behavior_skill_tree_test",
+          "passed": true,
+          "seconds": 5.23
+        },
+        {
+          "name": "campaign_atmosphere_test",
+          "passed": true,
+          "seconds": 3.826
+        },
+        {
+          "name": "community_catalog_client_test",
+          "passed": true,
+          "seconds": 17.112
+        },
+        {
+          "name": "creature_animal_feet_test",
+          "passed": true,
+          "seconds": 13.046
+        },
+        {
+          "name": "creature_body_fit_test",
+          "passed": true,
+          "seconds": 12.095
+        },
+        {
+          "name": "creature_editor_v7_runtime_test",
+          "passed": true,
+          "seconds": 5.13
+        },
+        {
+          "name": "creature_foot_provider_test",
+          "passed": true,
+          "seconds": 3.625
+        },
+        {
+          "name": "creature_library_ui_test",
+          "passed": true,
+          "seconds": 58.496
+        },
+        {
+          "name": "creature_part_articulation_test",
+          "passed": true,
+          "seconds": 7.535
+        },
+        {
+          "name": "creature_seat_fit_test",
+          "passed": true,
+          "seconds": 17.106
+        },
+        {
+          "name": "creature_trunk_provider_test",
+          "passed": true,
+          "seconds": 10.242
+        },
+        {
+          "name": "discovery_journal_test",
+          "passed": true,
+          "seconds": 7.335
+        },
+        {
+          "name": "domestic_fauna_journal_test",
+          "passed": true,
+          "seconds": 15.802
+        },
+        {
+          "name": "domestic_surface_catalog_test",
+          "passed": true,
+          "seconds": 14.7
+        },
+        {
+          "name": "domestication_d1_adapter_test",
+          "passed": true,
+          "seconds": 1.771
+        },
+        {
+          "name": "drainage_network_test",
+          "passed": true,
+          "seconds": 4.277
+        },
+        {
+          "name": "egg_species_campaign_test",
+          "passed": true,
+          "seconds": 133.768
+        },
+        {
+          "name": "environment_playtest_test",
+          "passed": true,
+          "seconds": 22.119
+        },
+        {
+          "name": "fleet_runtime_test",
+          "passed": true,
+          "seconds": 5.03
+        },
+        {
+          "name": "galaxy_visits_test",
+          "passed": true,
+          "seconds": 32.642
+        },
+        {
+          "name": "home_group_test",
+          "passed": true,
+          "seconds": 16.358
+        },
+        {
+          "name": "input_preferences_test",
+          "passed": true,
+          "seconds": 1.871
+        },
+        {
+          "name": "journal_preview_rotation_test",
+          "passed": true,
+          "seconds": 2.221
+        },
+        {
+          "name": "living_companion_test",
+          "passed": true,
+          "seconds": 19.411
+        },
+        {
+          "name": "living_lake_water_test",
+          "passed": true,
+          "seconds": 3.374
+        },
+        {
+          "name": "living_surface_materials_test",
+          "passed": true,
+          "seconds": 2.723
+        },
+        {
+          "name": "meta_runtime_test",
+          "passed": true,
+          "seconds": 3.375
+        },
+        {
+          "name": "nest_discovery_test",
+          "passed": true,
+          "seconds": 5.029
+        },
+        {
+          "name": "owned_animal_register_test",
+          "passed": true,
+          "seconds": 2.723
+        },
+        {
+          "name": "planet_climate_test",
+          "passed": true,
+          "seconds": 5.931
+        },
+        {
+          "name": "planet_sphere_contract_test",
+          "passed": true,
+          "seconds": 3.174
+        },
+        {
+          "name": "player_recovery_test",
+          "passed": true,
+          "seconds": 5.43
+        },
+        {
+          "name": "region_store_test",
+          "passed": true,
+          "seconds": 4.463
+        },
+        {
+          "name": "resource_production_contract_test",
+          "passed": true,
+          "seconds": 3.826
+        },
+        {
+          "name": "save_participants_test",
+          "passed": true,
+          "seconds": 4.078
+        },
+        {
+          "name": "settlement_runtime_test",
+          "passed": true,
+          "seconds": 291.244
+        },
+        {
+          "name": "site_transport_test",
+          "passed": true,
+          "seconds": 4.929
+        },
+        {
+          "name": "spherical_campaign_contract_test",
+          "passed": true,
+          "seconds": 2.423
+        },
+        {
+          "name": "spherical_egg_production_test",
+          "passed": true,
+          "seconds": 653.377
+        },
+        {
+          "name": "surface_adapter_contract_test",
+          "passed": true,
+          "seconds": 1.971
+        },
+        {
+          "name": "surface_distance_world_test",
+          "passed": true,
+          "seconds": 57.352
+        },
+        {
+          "name": "terrain_lookahead_test",
+          "passed": true,
+          "seconds": 85.014
+        },
+        {
+          "name": "tribal_age_growth_contract_test",
+          "passed": true,
+          "seconds": 1.871
+        },
+        {
+          "name": "tribal_age_husbandry_test",
+          "passed": true,
+          "seconds": 142.927
+        },
+        {
+          "name": "tribal_building_preview_test",
+          "passed": true,
+          "seconds": 11.597
+        },
+        {
+          "name": "tribal_camera_world_test",
+          "passed": true,
+          "seconds": 73.822
+        },
+        {
+          "name": "tribal_guidance_world_test",
+          "passed": true,
+          "seconds": 97.054
+        },
+        {
+          "name": "tribal_order_latency_test",
+          "passed": true,
+          "seconds": 8.991
+        },
+        {
+          "name": "tribal_shelter_labels_test",
+          "passed": true,
+          "seconds": 2.775
+        },
+        {
+          "name": "tribe_localization_test",
+          "passed": true,
+          "seconds": 29.046
+        },
+        {
+          "name": "village_work_observation_test",
+          "passed": true,
+          "seconds": 2.423
+        },
+        {
+          "name": "water_flow_visual_test",
+          "passed": true,
+          "seconds": 1.871
+        },
+        {
+          "name": "weather_storm_test",
+          "passed": true,
+          "seconds": 4.078
+        },
+        {
+          "name": "wildlife_drinking_test",
+          "passed": true,
+          "seconds": 41.274
+        },
+        {
+          "name": "wildlife_hunting_test",
+          "passed": true,
+          "seconds": 19.514
+        },
+        {
+          "name": "workplace_instances_test",
+          "passed": true,
+          "seconds": 3.929
+        },
+        {
+          "name": "world_map_localization_test",
+          "passed": true,
+          "seconds": 10.264
+        },
+        {
+          "name": "source_integrity",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "artifact_id": 11124968264,
+      "artifact_zip_sha256": "6f31161a6ffadcb92b61466ca9051140b26638276f0d7252ce275d87e379f452",
+      "passed": true,
+      "source_commit": "c9f443c777b58033e6df3cf79d4835dccc19ef9f",
+      "source_tree": "fe3f30637549991df2eefe99defef184a7fbf285",
+      "source_sha256": "dc59b9486aedbb6dc9af573ca565d94428aae22603df073415c799d355d8aa8e",
+      "reusable": true,
+      "selected_count": 62,
+      "execution": "headless_source_project",
+      "test_names": [
+        "asset_pipeline_test",
+        "audio/animal_action_feedback_test",
+        "audio/audio_settings_test",
+        "audio/foley_runtime_test",
+        "audio/spherical_water_audio_test",
+        "body_identity_test",
+        "campaign_scaling_test",
+        "construction_runtime_test",
+        "creature_behavior_gameplay_test",
+        "creature_design_library_test",
+        "creature_eye_expression_test",
+        "creature_joint_studio_test",
+        "creature_mouth_refresh_test",
+        "creature_parts_studio_test",
+        "creature_studio_test",
+        "creature_wing_family_test",
+        "domestic_body_evidence_test",
+        "domestic_habitat_recovery_test",
+        "domestication_campaign_test",
+        "domestication_state_test",
+        "egg_husbandry_ui_test",
+        "encounter_archive_test",
+        "expedition_contract_test",
+        "frozen_body_serialization_test",
+        "graphics_settings_test",
+        "hud_layout_test",
+        "journal_localization_test",
+        "large_planet_lab_test",
+        "living_creatures_world_test",
+        "living_planet_map_test",
+        "menu_input_test",
+        "modular_assembly_framework_test",
+        "onboarding_test",
+        "performance_measurement_test",
+        "planet_generation_acceptance_test",
+        "planet_streaming_test",
+        "population_register_test",
+        "regional_weather_test",
+        "runtime_geometry_batch_test",
+        "scan_circle_test",
+        "shipyard_test",
+        "slot_scan_test",
+        "spherical_creature_test",
+        "startup_trace_test",
+        "surface_adapter_test",
+        "surface_scale_contract_test",
+        "tribal_age_economy_contract_test",
+        "tribal_age_housing_recovery_test",
+        "tribal_age_test",
+        "tribal_camera_preferences_test",
+        "tribal_economy_progress_world_test",
+        "tribal_neighbors_generated_test",
+        "tribal_progression_test",
+        "tribal_stockpile_test",
+        "underwater_view_test",
+        "water_continuity_test",
+        "weather_model_test",
+        "wildlife_ai_world_test",
+        "wildlife_foraging_test",
+        "wildlife_social_play_test",
+        "world_evolution_v2_ci_test",
+        "world_motion_visual_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "seconds": 0.817
+        },
+        {
+          "name": "import",
+          "passed": true,
+          "seconds": 10.954
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "seconds": 2.823
+        },
+        {
+          "name": "asset_pipeline_test",
+          "passed": true,
+          "seconds": 1.972
+        },
+        {
+          "name": "audio/animal_action_feedback_test",
+          "passed": true,
+          "seconds": 5.682
+        },
+        {
+          "name": "audio/audio_settings_test",
+          "passed": true,
+          "seconds": 19.018
+        },
+        {
+          "name": "audio/foley_runtime_test",
+          "passed": true,
+          "seconds": 13.05
+        },
+        {
+          "name": "audio/spherical_water_audio_test",
+          "passed": true,
+          "seconds": 1.971
+        },
+        {
+          "name": "body_identity_test",
+          "passed": true,
+          "seconds": 4.077
+        },
+        {
+          "name": "campaign_scaling_test",
+          "passed": true,
+          "seconds": 8.089
+        },
+        {
+          "name": "construction_runtime_test",
+          "passed": true,
+          "seconds": 86.679
+        },
+        {
+          "name": "creature_behavior_gameplay_test",
+          "passed": true,
+          "seconds": 9.892
+        },
+        {
+          "name": "creature_design_library_test",
+          "passed": true,
+          "seconds": 7.839
+        },
+        {
+          "name": "creature_eye_expression_test",
+          "passed": true,
+          "seconds": 3.426
+        },
+        {
+          "name": "creature_joint_studio_test",
+          "passed": true,
+          "seconds": 10.799
+        },
+        {
+          "name": "creature_mouth_refresh_test",
+          "passed": true,
+          "seconds": 112.023
+        },
+        {
+          "name": "creature_parts_studio_test",
+          "passed": true,
+          "seconds": 20.568
+        },
+        {
+          "name": "creature_studio_test",
+          "passed": true,
+          "seconds": 10.346
+        },
+        {
+          "name": "creature_wing_family_test",
+          "passed": true,
+          "seconds": 29.342
+        },
+        {
+          "name": "domestic_body_evidence_test",
+          "passed": true,
+          "seconds": 55.821
+        },
+        {
+          "name": "domestic_habitat_recovery_test",
+          "passed": true,
+          "seconds": 4.829
+        },
+        {
+          "name": "domestication_campaign_test",
+          "passed": true,
+          "seconds": 37.915
+        },
+        {
+          "name": "domestication_state_test",
+          "passed": true,
+          "seconds": 3.526
+        },
+        {
+          "name": "egg_husbandry_ui_test",
+          "passed": true,
+          "seconds": 21.224
+        },
+        {
+          "name": "encounter_archive_test",
+          "passed": true,
+          "seconds": 6.98
+        },
+        {
+          "name": "expedition_contract_test",
+          "passed": true,
+          "seconds": 5.783
+        },
+        {
+          "name": "frozen_body_serialization_test",
+          "passed": true,
+          "seconds": 7.637
+        },
+        {
+          "name": "graphics_settings_test",
+          "passed": true,
+          "seconds": 119.327
+        },
+        {
+          "name": "hud_layout_test",
+          "passed": true,
+          "seconds": 51.551
+        },
+        {
+          "name": "journal_localization_test",
+          "passed": true,
+          "seconds": 38.531
+        },
+        {
+          "name": "large_planet_lab_test",
+          "passed": true,
+          "seconds": 30.342
+        },
+        {
+          "name": "living_creatures_world_test",
+          "passed": true,
+          "seconds": 91.222
+        },
+        {
+          "name": "living_planet_map_test",
+          "passed": true,
+          "seconds": 44.778
+        },
+        {
+          "name": "menu_input_test",
+          "passed": true,
+          "seconds": 37.511
+        },
+        {
+          "name": "modular_assembly_framework_test",
+          "passed": true,
+          "seconds": 2.121
+        },
+        {
+          "name": "onboarding_test",
+          "passed": true,
+          "seconds": 2.122
+        },
+        {
+          "name": "performance_measurement_test",
+          "passed": true,
+          "seconds": 1.771
+        },
+        {
+          "name": "planet_generation_acceptance_test",
+          "passed": true,
+          "seconds": 9.492
+        },
+        {
+          "name": "planet_streaming_test",
+          "passed": true,
+          "seconds": 10.592
+        },
+        {
+          "name": "population_register_test",
+          "passed": true,
+          "seconds": 7.452
+        },
+        {
+          "name": "regional_weather_test",
+          "passed": true,
+          "seconds": 3.827
+        },
+        {
+          "name": "runtime_geometry_batch_test",
+          "passed": true,
+          "seconds": 2.122
+        },
+        {
+          "name": "scan_circle_test",
+          "passed": true,
+          "seconds": 4.278
+        },
+        {
+          "name": "shipyard_test",
+          "passed": true,
+          "seconds": 4.831
+        },
+        {
+          "name": "slot_scan_test",
+          "passed": true,
+          "seconds": 2.877
+        },
+        {
+          "name": "spherical_creature_test",
+          "passed": true,
+          "seconds": 97.925
+        },
+        {
+          "name": "startup_trace_test",
+          "passed": true,
+          "seconds": 1.772
+        },
+        {
+          "name": "surface_adapter_test",
+          "passed": true,
+          "seconds": 53.051
+        },
+        {
+          "name": "surface_scale_contract_test",
+          "passed": true,
+          "seconds": 9.692
+        },
+        {
+          "name": "tribal_age_economy_contract_test",
+          "passed": true,
+          "seconds": 2.222
+        },
+        {
+          "name": "tribal_age_housing_recovery_test",
+          "passed": true,
+          "seconds": 10.545
+        },
+        {
+          "name": "tribal_age_test",
+          "passed": true,
+          "seconds": 79.541
+        },
+        {
+          "name": "tribal_camera_preferences_test",
+          "passed": true,
+          "seconds": 1.971
+        },
+        {
+          "name": "tribal_economy_progress_world_test",
+          "passed": true,
+          "seconds": 111.804
+        },
+        {
+          "name": "tribal_neighbors_generated_test",
+          "passed": true,
+          "seconds": 54.552
+        },
+        {
+          "name": "tribal_progression_test",
+          "passed": true,
+          "seconds": 1.971
+        },
+        {
+          "name": "tribal_stockpile_test",
+          "passed": true,
+          "seconds": 15.209
+        },
+        {
+          "name": "underwater_view_test",
+          "passed": true,
+          "seconds": 1.871
+        },
+        {
+          "name": "water_continuity_test",
+          "passed": true,
+          "seconds": 29.441
+        },
+        {
+          "name": "weather_model_test",
+          "passed": true,
+          "seconds": 4.077
+        },
+        {
+          "name": "wildlife_ai_world_test",
+          "passed": true,
+          "seconds": 17.61
+        },
+        {
+          "name": "wildlife_foraging_test",
+          "passed": true,
+          "seconds": 22.024
+        },
+        {
+          "name": "wildlife_social_play_test",
+          "passed": true,
+          "seconds": 17.762
+        },
+        {
+          "name": "world_evolution_v2_ci_test",
+          "passed": true,
+          "seconds": 4.178
+        },
+        {
+          "name": "world_motion_visual_test",
+          "passed": true,
+          "seconds": 1.971
+        },
+        {
+          "name": "source_integrity",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "artifact_id": 11124169761,
+      "artifact_zip_sha256": "0a2d69a570df6036bc9560b324fd9eb5fb6fe087aececa97916bb2e6b99a75c4",
+      "passed": true,
+      "source_commit": "c9f443c777b58033e6df3cf79d4835dccc19ef9f",
+      "source_tree": "fe3f30637549991df2eefe99defef184a7fbf285",
+      "source_sha256": "dc59b9486aedbb6dc9af573ca565d94428aae22603df073415c799d355d8aa8e",
+      "reusable": true,
+      "selected_count": 0,
+      "execution": "headless_source_project",
+      "test_names": [],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "seconds": 0.716
+        },
+        {
+          "name": "import",
+          "passed": true,
+          "seconds": 10.294
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "seconds": 2.119
+        },
+        {
+          "name": "planet_lab_entry",
+          "passed": true,
+          "seconds": 7.531
+        },
+        {
+          "name": "main_shutdown_45",
+          "passed": true,
+          "seconds": 10.889
+        },
+        {
+          "name": "main_shutdown_150",
+          "passed": true,
+          "seconds": 11.441
+        },
+        {
+          "name": "main",
+          "passed": true,
+          "seconds": 11.843
+        },
+        {
+          "name": "shutdown_15838_terrain",
+          "passed": true,
+          "seconds": 3.174
+        },
+        {
+          "name": "shutdown_15838_placement",
+          "passed": true,
+          "seconds": 10.689
+        },
+        {
+          "name": "shutdown_15838_resources",
+          "passed": true,
+          "seconds": 10.588
+        },
+        {
+          "name": "shutdown_15838_complete",
+          "passed": true,
+          "seconds": 11.09
+        },
+        {
+          "name": "shutdown_15838_cluster_build",
+          "passed": true,
+          "seconds": 18.705
+        },
+        {
+          "name": "shutdown_15838_cluster_complete",
+          "passed": true,
+          "seconds": 18.704
+        },
+        {
+          "name": "shutdown_63352_terrain",
+          "passed": true,
+          "seconds": 3.173
+        },
+        {
+          "name": "shutdown_63352_placement",
+          "passed": true,
+          "seconds": 10.788
+        },
+        {
+          "name": "shutdown_63352_resources",
+          "passed": true,
+          "seconds": 10.789
+        },
+        {
+          "name": "shutdown_63352_complete",
+          "passed": true,
+          "seconds": 11.14
+        },
+        {
+          "name": "shutdown_63352_cluster_build",
+          "passed": true,
+          "seconds": 18.506
+        },
+        {
+          "name": "shutdown_63352_cluster_complete",
+          "passed": true,
+          "seconds": 18.404
+        },
+        {
+          "name": "shutdown_23757_terrain",
+          "passed": true,
+          "seconds": 3.173
+        },
+        {
+          "name": "shutdown_23757_placement",
+          "passed": true,
+          "seconds": 11.341
+        },
+        {
+          "name": "shutdown_23757_resources",
+          "passed": true,
+          "seconds": 11.24
+        },
+        {
+          "name": "shutdown_23757_complete",
+          "passed": true,
+          "seconds": 11.641
+        },
+        {
+          "name": "shutdown_23757_cluster_build",
+          "passed": true,
+          "seconds": 20.256
+        },
+        {
+          "name": "shutdown_23757_cluster_complete",
+          "passed": true,
+          "seconds": 20.358
+        },
+        {
+          "name": "streaming_cpu",
+          "passed": true,
+          "seconds": 4.926
+        },
+        {
+          "name": "source_integrity",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "artifact_id": 11124974962,
+      "artifact_zip_sha256": "35f2c26a2bc1f9500b76908111ff4d6ae980e53505e069a27bc7a459028d612d",
+      "passed": true,
+      "source_commit": "c9f443c777b58033e6df3cf79d4835dccc19ef9f",
+      "source_tree": "fe3f30637549991df2eefe99defef184a7fbf285",
+      "source_sha256": "dc59b9486aedbb6dc9af573ca565d94428aae22603df073415c799d355d8aa8e",
+      "reusable": true,
+      "selected_count": 62,
+      "execution": "headless_source_project",
+      "test_names": [
+        "atlas_paging_test",
+        "audio/audio_expansion_test",
+        "audio/audio_shutdown_test",
+        "audio/interface_audio_test",
+        "behavior_progression_test",
+        "body_travel_test",
+        "community_blueprint_package_test",
+        "coordinate_persistence_test",
+        "creature_body_contract_test",
+        "creature_ear_family_test",
+        "creature_fin_family_test",
+        "creature_library_favorites_test",
+        "creature_ornament_families_test",
+        "creature_scan_test",
+        "creature_tail_family_test",
+        "development_path_test",
+        "domestic_fauna_catalog_test",
+        "domestic_habitat_runtime_test",
+        "domestication_contract_test",
+        "domestication_world_test",
+        "egg_production_contract_test",
+        "environment_cluster_test",
+        "far_simulation_test",
+        "galaxy_catalog_test",
+        "home_group_localization_test",
+        "husbandry_localization_test",
+        "journal_paging_test",
+        "large_planet_runtime_test",
+        "living_fauna_archive_test",
+        "living_planet_test",
+        "menu_rebinding_test",
+        "neighbor_localization_test",
+        "owned_animal_localization_test",
+        "phase_handoff_test",
+        "planet_scale_migration_test",
+        "planet_transition_runtime_test",
+        "radial_step_test",
+        "research_goals_test",
+        "save_browser_search_test",
+        "settlement_collection_test",
+        "site_transport_runtime_test",
+        "species_comparison_test",
+        "spherical_developed_migration_test",
+        "step_camera_test",
+        "surface_distance_test",
+        "surface_support_test",
+        "tribal_age_economy_test",
+        "tribal_age_husbandry_contract_test",
+        "tribal_age_world_test",
+        "tribal_camera_test",
+        "tribal_guidance_test",
+        "tribal_neighbors_world_test",
+        "tribal_progression_world_test",
+        "tribal_stockpile_world_test",
+        "village_navigation_budget_test",
+        "water_depth_test",
+        "weather_runtime_test",
+        "wildlife_colony_test",
+        "wildlife_foraging_world_test",
+        "wildlife_spawn_budget_test",
+        "world_layered_v7_test",
+        "world_runtime_continuity_test"
+      ],
+      "checks": [
+        {
+          "name": "source_contracts",
+          "passed": true,
+          "seconds": 0.817
+        },
+        {
+          "name": "import",
+          "passed": true,
+          "seconds": 10.055
+        },
+        {
+          "name": "art_sources",
+          "passed": true,
+          "seconds": 2.773
+        },
+        {
+          "name": "atlas_paging_test",
+          "passed": true,
+          "seconds": 30.496
+        },
+        {
+          "name": "audio/audio_expansion_test",
+          "passed": true,
+          "seconds": 33.267
+        },
+        {
+          "name": "audio/audio_shutdown_test",
+          "passed": true,
+          "seconds": 2.424
+        },
+        {
+          "name": "audio/interface_audio_test",
+          "passed": true,
+          "seconds": 10.248
+        },
+        {
+          "name": "behavior_progression_test",
+          "passed": true,
+          "seconds": 4.28
+        },
+        {
+          "name": "body_travel_test",
+          "passed": true,
+          "seconds": 266.329
+        },
+        {
+          "name": "community_blueprint_package_test",
+          "passed": true,
+          "seconds": 11.348
+        },
+        {
+          "name": "coordinate_persistence_test",
+          "passed": true,
+          "seconds": 4.042
+        },
+        {
+          "name": "creature_body_contract_test",
+          "passed": true,
+          "seconds": 10.798
+        },
+        {
+          "name": "creature_ear_family_test",
+          "passed": true,
+          "seconds": 36.61
+        },
+        {
+          "name": "creature_fin_family_test",
+          "passed": true,
+          "seconds": 40.582
+        },
+        {
+          "name": "creature_library_favorites_test",
+          "passed": true,
+          "seconds": 25.132
+        },
+        {
+          "name": "creature_ornament_families_test",
+          "passed": true,
+          "seconds": 48.653
+        },
+        {
+          "name": "creature_scan_test",
+          "passed": true,
+          "seconds": 3.727
+        },
+        {
+          "name": "creature_tail_family_test",
+          "passed": true,
+          "seconds": 21.126
+        },
+        {
+          "name": "development_path_test",
+          "passed": true,
+          "seconds": 6.135
+        },
+        {
+          "name": "domestic_fauna_catalog_test",
+          "passed": true,
+          "seconds": 70.043
+        },
+        {
+          "name": "domestic_habitat_runtime_test",
+          "passed": true,
+          "seconds": 19.114
+        },
+        {
+          "name": "domestication_contract_test",
+          "passed": true,
+          "seconds": 1.771
+        },
+        {
+          "name": "domestication_world_test",
+          "passed": true,
+          "seconds": 62.525
+        },
+        {
+          "name": "egg_production_contract_test",
+          "passed": true,
+          "seconds": 4.028
+        },
+        {
+          "name": "environment_cluster_test",
+          "passed": true,
+          "seconds": 4.277
+        },
+        {
+          "name": "far_simulation_test",
+          "passed": true,
+          "seconds": 4.278
+        },
+        {
+          "name": "galaxy_catalog_test",
+          "passed": true,
+          "seconds": 4.58
+        },
+        {
+          "name": "home_group_localization_test",
+          "passed": true,
+          "seconds": 25.786
+        },
+        {
+          "name": "husbandry_localization_test",
+          "passed": true,
+          "seconds": 52.157
+        },
+        {
+          "name": "journal_paging_test",
+          "passed": true,
+          "seconds": 12.696
+        },
+        {
+          "name": "large_planet_runtime_test",
+          "passed": true,
+          "seconds": 59.441
+        },
+        {
+          "name": "living_fauna_archive_test",
+          "passed": true,
+          "seconds": 85.616
+        },
+        {
+          "name": "living_planet_test",
+          "passed": true,
+          "seconds": 66.215
+        },
+        {
+          "name": "menu_rebinding_test",
+          "passed": true,
+          "seconds": 5.88
+        },
+        {
+          "name": "neighbor_localization_test",
+          "passed": true,
+          "seconds": 3.927
+        },
+        {
+          "name": "owned_animal_localization_test",
+          "passed": true,
+          "seconds": 7.335
+        },
+        {
+          "name": "phase_handoff_test",
+          "passed": true,
+          "seconds": 10.543
+        },
+        {
+          "name": "planet_scale_migration_test",
+          "passed": true,
+          "seconds": 18.158
+        },
+        {
+          "name": "planet_transition_runtime_test",
+          "passed": true,
+          "seconds": 36.598
+        },
+        {
+          "name": "radial_step_test",
+          "passed": true,
+          "seconds": 27.628
+        },
+        {
+          "name": "research_goals_test",
+          "passed": true,
+          "seconds": 8.035
+        },
+        {
+          "name": "save_browser_search_test",
+          "passed": true,
+          "seconds": 6.538
+        },
+        {
+          "name": "settlement_collection_test",
+          "passed": true,
+          "seconds": 4.027
+        },
+        {
+          "name": "site_transport_runtime_test",
+          "passed": true,
+          "seconds": 138.308
+        },
+        {
+          "name": "species_comparison_test",
+          "passed": true,
+          "seconds": 8.894
+        },
+        {
+          "name": "spherical_developed_migration_test",
+          "passed": true,
+          "seconds": 123.793
+        },
+        {
+          "name": "step_camera_test",
+          "passed": true,
+          "seconds": 4.882
+        },
+        {
+          "name": "surface_distance_test",
+          "passed": true,
+          "seconds": 16.116
+        },
+        {
+          "name": "surface_support_test",
+          "passed": true,
+          "seconds": 138.341
+        },
+        {
+          "name": "tribal_age_economy_test",
+          "passed": true,
+          "seconds": 109.681
+        },
+        {
+          "name": "tribal_age_husbandry_contract_test",
+          "passed": true,
+          "seconds": 2.074
+        },
+        {
+          "name": "tribal_age_world_test",
+          "passed": true,
+          "seconds": 38.734
+        },
+        {
+          "name": "tribal_camera_test",
+          "passed": true,
+          "seconds": 7.289
+        },
+        {
+          "name": "tribal_guidance_test",
+          "passed": true,
+          "seconds": 4.482
+        },
+        {
+          "name": "tribal_neighbors_world_test",
+          "passed": true,
+          "seconds": 46.911
+        },
+        {
+          "name": "tribal_progression_world_test",
+          "passed": true,
+          "seconds": 88.487
+        },
+        {
+          "name": "tribal_stockpile_world_test",
+          "passed": true,
+          "seconds": 53.086
+        },
+        {
+          "name": "village_navigation_budget_test",
+          "passed": true,
+          "seconds": 2.324
+        },
+        {
+          "name": "water_depth_test",
+          "passed": true,
+          "seconds": 6.437
+        },
+        {
+          "name": "weather_runtime_test",
+          "passed": true,
+          "seconds": 157.916
+        },
+        {
+          "name": "wildlife_colony_test",
+          "passed": true,
+          "seconds": 4.683
+        },
+        {
+          "name": "wildlife_foraging_world_test",
+          "passed": true,
+          "seconds": 16.566
+        },
+        {
+          "name": "wildlife_spawn_budget_test",
+          "passed": true,
+          "seconds": 2.525
+        },
+        {
+          "name": "world_layered_v7_test",
+          "passed": true,
+          "seconds": 3.527
+        },
+        {
+          "name": "world_runtime_continuity_test",
+          "passed": true,
+          "seconds": 3.83
+        },
+        {
+          "name": "source_integrity",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "product_file_hashes_confirmed": {
+    "assets/catalog/planet_foliage.gdshader": "bcd3b81596542b4fd8090c4f794d4f29f474e7d267585b5e05eb9e4b8835d634",
+    "assets/catalog/planet_surface_detail.gdshaderinc": "3505b444dead1733d99141e3051c399d349c5b5b5eacef647d8c96257c696b4f",
+    "world/surface/visuals/surface_scenery.gdshader": "b5d9ba4f142941573797aa1e5f4093203c3a5dbc0beaf75418c55e87ed80472c"
+  }
+}
