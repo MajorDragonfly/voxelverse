@@ -205,12 +205,12 @@ func _layout() -> void:
 	_stages.vertical = width < 780 * scale
 	_future.vertical = width < 780 * scale
 	for button: Button in _chapter_buttons.values():
-		button.add_theme_font_size_override("font_size", maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
-		button.custom_minimum_size.y = maxf(36 * scale, 30.0 / pixel_scale)
+		_set_font_size(button, maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
+		_set_minimum_height(button, maxf(36 * scale, 30.0 / pixel_scale))
 	for epoch: Dictionary in _epochs.values():
 		var action: Button = epoch["action"]
-		action.add_theme_font_size_override("font_size", maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
-		action.custom_minimum_size.y = maxf(38 * scale, 30.0 / pixel_scale)
+		_set_font_size(action, maxi(roundi(13 * scale), ceili(MIN_CHAPTER_PIXELS / pixel_scale)))
+		_set_minimum_height(action, maxf(38 * scale, 30.0 / pixel_scale))
 	_scale_labels(self, scale, ceili(MIN_TEXT_PIXELS / pixel_scale))
 
 
@@ -218,9 +218,21 @@ func _scale_labels(node: Node, scale: float, minimum_font: int) -> void:
 	if node is Label:
 		if not node.has_meta("path_font_size"):
 			node.set_meta("path_font_size", node.get_theme_font_size("font_size"))
-		node.add_theme_font_size_override("font_size", maxi(roundi(int(node.get_meta("path_font_size")) * scale), minimum_font))
+		_set_font_size(node, maxi(roundi(int(node.get_meta("path_font_size")) * scale), minimum_font))
 	for child: Node in node.get_children():
 		_scale_labels(child, scale, minimum_font)
+
+
+func _set_font_size(control: Control, value: int) -> void:
+	# Font overrides invalidate container minimums. Repeated refresh/layout
+	# calls must not keep queuing identical minimum-size notifications.
+	if control.get_theme_font_size("font_size") != value:
+		control.add_theme_font_size_override("font_size", value)
+
+
+func _set_minimum_height(control: Control, value: float) -> void:
+	if not is_equal_approx(control.custom_minimum_size.y, value):
+		control.custom_minimum_size.y = value
 
 
 func _notification(what: int) -> void:
