@@ -2,6 +2,7 @@ extends Node3D
 class_name BuildingBuilder
 
 const Text = preload("res://civilization/buildings/building_editor_text.gd")
+const TransformField = preload("res://civilization/buildings/building_transform_field.gd")
 const UiText = preload("res://core/localization/ui_text.gd")
 
 const Assembly = preload("res://assembly/core/modular_assembly.gd")
@@ -199,6 +200,7 @@ func _build_ui() -> void:
 
 	_left_panel = PanelContainer.new()
 	_left_panel.name = "PalettePanel"
+	_style_panel(_left_panel)
 	_left_panel.anchor_bottom = 1.0
 	_ui_canvas.add_child(_left_panel)
 	var left_scroll := ScrollContainer.new()
@@ -245,6 +247,7 @@ func _build_ui() -> void:
 
 	_right_panel = PanelContainer.new()
 	_right_panel.name = "InspectorPanel"
+	_style_panel(_right_panel)
 	_right_panel.anchor_left = 1.0
 	_right_panel.anchor_right = 1.0
 	_right_panel.anchor_bottom = 1.0
@@ -343,20 +346,26 @@ func _add_transform_row(field: String) -> void:
 		var label := Label.new()
 		label.text = ["X", "Y", "Z"][axis]
 		column.add_child(label)
-		var spin := SpinBox.new()
+		var spin := TransformField.new()
 		spin.name = field.capitalize() + ["X", "Y", "Z"][axis]
 		spin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		spin.custom_minimum_size.x = 88.0
-		spin.min_value = 0.05 if field == "scale" else -10000.0
-		spin.max_value = 20.0 if field == "scale" else 10000.0
-		spin.allow_greater = field != "scale"
-		spin.allow_lesser = field != "scale"
-		spin.step = 0.000001
-		# Displaying unsnapped legacy placements must never quantize the draft.
-		spin.rounded = false
+		spin.custom_minimum_size.x = 84.0
+		spin.limit_value = field == "scale"
+		spin.invalid_value.connect(Callable(self, "_set_status").bind("BEDITOR_TRANSFORM_INVALID"))
 		spin.value_changed.connect(Callable(self, "_on_transform_value").bind(field, axis))
 		column.add_child(spin)
 		_transform_fields[field + "_%d" % axis] = spin
+
+
+func _style_panel(panel: PanelContainer) -> void:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.065, 0.08, 0.09, 1.0)
+	style.content_margin_left = 8.0
+	style.content_margin_right = 8.0
+	style.content_margin_top = 8.0
+	style.content_margin_bottom = 8.0
+	style.set_corner_radius_all(5)
+	panel.add_theme_stylebox_override("panel", style)
 
 
 func _layout_ui() -> void:
@@ -364,7 +373,7 @@ func _layout_ui() -> void:
 		return
 	var width: float = get_viewport().get_visible_rect().size.x
 	var left_width: float = clampf(width * 0.24, 200.0, 305.0)
-	var right_width: float = clampf(width * 0.29, 296.0, 350.0)
+	var right_width: float = clampf(width * 0.29, 316.0, 360.0)
 	_left_panel.offset_left = 16.0
 	_left_panel.offset_right = 16.0 + left_width
 	_left_panel.offset_top = 102.0
@@ -373,8 +382,8 @@ func _layout_ui() -> void:
 	_right_panel.offset_right = -16.0
 	_right_panel.offset_top = 102.0
 	_right_panel.offset_bottom = -80.0
-	_left_content.custom_minimum_size.x = left_width - 18.0
-	_right_content.custom_minimum_size.x = right_width - 18.0
+	_left_content.custom_minimum_size.x = left_width - 32.0
+	_right_content.custom_minimum_size.x = right_width - 32.0
 	_title.position = Vector2(20.0, 16.0)
 	_title.size = Vector2(maxf(width - 225.0, 100.0), 32.0)
 	_title.add_theme_font_size_override("font_size", 18 if width < 1000.0 else 24)
@@ -416,7 +425,8 @@ func _refresh_inspector() -> void:
 	for field: String in ["position", "rotation", "scale"]:
 		var value: Vector3 = placement.get(field, Vector3.ONE if field == "scale" else Vector3.ZERO)
 		for axis in range(3):
-			var spin: SpinBox = _transform_fields[field + "_%d" % axis]
+			var spin: TransformField = _transform_fields[field + "_%d" % axis]
+			spin.nudge_step = float(blueprint.get("grid_size", Assembly.DEFAULT_GRID_SIZE)) if field == "position" and blueprint.get("grid_snap", true) else (0.01 if field == "position" else 15.0 if field == "rotation" else 0.05)
 			spin.editable = enabled
 			spin.get_line_edit().focus_mode = Control.FOCUS_ALL if enabled else Control.FOCUS_NONE
 			spin.set_value_no_signal(value[axis])

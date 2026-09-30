@@ -2,6 +2,7 @@ extends SceneTree
 ## Real scene, GUI mouse/key dispatch, canonical persistence and fresh process.
 const Blueprint = preload("res://civilization/buildings/building_blueprint.gd")
 const Assembly = preload("res://assembly/core/modular_assembly.gd")
+const TransformField = preload("res://civilization/buildings/building_transform_field.gd")
 const Text = preload("res://civilization/buildings/building_editor_text.gd")
 var editor: Node
 var failures: Array[String] = []
@@ -19,7 +20,7 @@ func _expect(value: bool, message: String) -> void:
 	if not value:
 		failures.append(message)
 
-func _frames(count: int = 8) -> void:
+func _frames(count: int = 4) -> void:
 	for frame in range(count):
 		await process_frame
 
@@ -68,7 +69,7 @@ func _type(line: LineEdit, value: String, submit: bool = true) -> void:
 	await _frames()
 
 func _field(field: String, axis: int, value: String) -> void:
-	var spin: SpinBox = editor._transform_fields[field + "_%d" % axis]
+	var spin: TransformField = editor._transform_fields[field + "_%d" % axis]
 	await _type(spin.get_line_edit(), value)
 
 func _action(name: String) -> void:
@@ -95,6 +96,11 @@ func _run() -> void:
 	await _select(3)
 	var uid: String = editor.blueprint.parts[3].uid
 	_expect(uid in editor._identity_label.text and "Kleines Fenster" in editor._selection_label.text, "Selection does not identify the exact repeated part")
+	var nudge_before: Vector3 = editor.blueprint.parts[3].position
+	await _click(editor._transform_fields.position_0.find_child("Increase", true, false))
+	_expect(editor.blueprint.parts[3].position.x > nudge_before.x and editor.blueprint.parts[3].position.y == nudge_before.y, "Position nudge did not move by the grid or relocated Y")
+	await _click(editor._undo_button)
+	_expect(editor.blueprint.parts[3].position == nudge_before, "Nudge undo lost the original precise placement")
 	var old_position: Vector3 = editor.blueprint.parts[3].position
 	await _field("rotation", 1, "35")
 	_expect(editor.blueprint.parts[3].rotation.y == 35 and editor.blueprint.parts[3].position == old_position, "Rotation relocated an unsnapped legacy window")
@@ -207,10 +213,20 @@ func _layouts() -> void:
 			await _frames()
 			_expect(not editor._left_panel.get_global_rect().intersects(editor._right_panel.get_global_rect()), "Palette overlaps inspector at " + str(dimensions))
 			for field: String in editor._transform_fields:
-				var spin: SpinBox = editor._transform_fields[field]
+				var spin: TransformField = editor._transform_fields[field]
 				_expect(spin.get_global_rect().end.x <= editor._right_panel.get_global_rect().end.x + 1, "Numeric field clipped: " + field + str(dimensions))
+			_check_translated(editor.get_node("BuildingBuilderUI"))
 			_expect("BEDITOR_" not in editor._stats_label.text and "BEDITOR_" not in editor._selection_label.text, "Untranslated keys remain on screen")
 			await _capture("building-%s-%dx%d" % [locale, dimensions.x, dimensions.y])
+
+func _check_translated(node: Node) -> void:
+	for property: String in ["text", "tooltip_text", "placeholder_text"]:
+		if node.has_meta("building_copy_" + property):
+			var copy: Variant = node.get_meta("building_copy_" + property)
+			var key: String = copy if copy is String else str(copy.key)
+			_expect(key.is_empty() or Text.render(copy) != key, "Untranslated UI copy: " + key)
+	for child in node.get_children():
+		_check_translated(child)
 
 func _capture(name: String) -> void:
 	if capture_dir.is_empty():

@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/.github/workflows/building-editor-review.yml
-@@ -0,0 +1,45 @@
+@@ -0,0 +1,46 @@
 +name: Building editor review
 +
 +on:
@@ -8,6 +8,7 @@
 +    paths:
 +      - "civilization/buildings/building_builder.gd"
 +      - "civilization/buildings/building_editor_text.gd"
++      - "civilization/buildings/building_transform_field.gd"
 +      - "tests/building_editor_input_test.gd"
 +      - "tools/review_building_editor.py"
 +      - "localization/**"

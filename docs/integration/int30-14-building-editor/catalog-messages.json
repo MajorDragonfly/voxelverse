@@ -679,6 +679,21 @@
       "key": "BEDITOR_PART_LIMIT",
       "de": "Kein weiteres Bauteil möglich. Der Entwurf bleibt erhalten.",
       "en": "No further part can be added. The design is preserved."
+    },
+    {
+      "key": "BEDITOR_PALETTE_PART",
+      "de": "{name}\n{stats}",
+      "en": "{name}\n{stats}"
+    },
+    {
+      "key": "BEDITOR_INCREASE",
+      "de": "Wert erhöhen",
+      "en": "Increase value"
+    },
+    {
+      "key": "BEDITOR_DECREASE",
+      "de": "Wert verringern",
+      "en": "Decrease value"
     }
   ]
 }

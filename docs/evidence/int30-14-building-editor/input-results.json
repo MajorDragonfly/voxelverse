@@ -1,0 +1,360 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+    "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+    "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+    "complete": true,
+    "file_count": 3967,
+    "bytes": 125378190,
+    "bytes_hashed": 125378190,
+    "seconds": 0.4653
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "building_editor_input_test",
+    "modular_assembly_framework_test",
+    "blueprint_contract_test",
+    "campaign_foundation_test",
+    "coordinate_persistence_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+      "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+      "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+      "complete": true,
+      "file_count": 3967,
+      "bytes": 125378190,
+      "bytes_hashed": 125378190,
+      "seconds": 0.4653
+    },
+    "end": {
+      "available": true,
+      "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+      "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+      "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+      "complete": true,
+      "file_count": 3967,
+      "bytes": 125378190,
+      "bytes_hashed": 125378190,
+      "seconds": 0.4006
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "ae1ed2fc1878766b38b1923fd066a7d4bd1ea38309cf7fc291c4da8ff8d56c78"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "ae1ed2fc1878766b38b1923fd066a7d4bd1ea38309cf7fc291c4da8ff8d56c78"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+          "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+          "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+          "complete": true,
+          "file_count": 3967,
+          "bytes": 125378190,
+          "bytes_hashed": 0,
+          "seconds": 0.2351
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+          "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+          "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+          "complete": true,
+          "file_count": 3967,
+          "bytes": 125378190,
+          "bytes_hashed": 0,
+          "seconds": 0.2059
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "building_editor_input_test",
+        "source": {
+          "available": true,
+          "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+          "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+          "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+          "complete": true,
+          "file_count": 3967,
+          "bytes": 125378190,
+          "bytes_hashed": 0,
+          "seconds": 0.2118
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "modular_assembly_framework_test",
+        "source": {
+          "available": true,
+          "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+          "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+          "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+          "complete": true,
+          "file_count": 3967,
+          "bytes": 125378190,
+          "bytes_hashed": 0,
+          "seconds": 0.1935
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "blueprint_contract_test",
+        "source": {
+          "available": true,
+          "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+          "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+          "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+          "complete": true,
+          "file_count": 3967,
+          "bytes": 125378190,
+          "bytes_hashed": 0,
+          "seconds": 0.2575
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "campaign_foundation_test",
+        "source": {
+          "available": true,
+          "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+          "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+          "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+          "complete": true,
+          "file_count": 3967,
+          "bytes": 125378190,
+          "bytes_hashed": 0,
+          "seconds": 0.2721
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "coordinate_persistence_test",
+        "source": {
+          "available": true,
+          "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+          "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+          "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+          "complete": true,
+          "file_count": 3967,
+          "bytes": 125378190,
+          "bytes_hashed": 0,
+          "seconds": 0.2264
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+          "tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "2eee1c81bae0b3c1c890d265b406ff64b7b4a4e316494fb10f8a9671b17967cf",
+          "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+          "complete": true,
+          "file_count": 3967,
+          "bytes": 125378190,
+          "bytes_hashed": 125378190,
+          "seconds": 0.4006
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.169,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/97c30571e0a7/editor-validation-overlay/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/97c30571e0a7/editor-validation-overlay",
+        "--output",
+        "/workspace/scratch/97c30571e0a7/editor-final-checks-v7/contracts.json"
+      ],
+      "log_sha256": "70254ec45a32ec695624f146a044514d24172bad4508aa9b2a777281cc7185eb",
+      "process_passed": true,
+      "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "building_editor_input_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 10.111,
+      "command": [
+        "/dev/shm/int30-14-godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/97c30571e0a7/editor-validation-overlay",
+        "--script",
+        "res://tests/building_editor_input_test.gd"
+      ],
+      "log_sha256": "984395c35a1f1030e2e1b03b9f21264924eadf2a132ada7f2e070f40c904f65c",
+      "contract": "blueprints",
+      "process_passed": true,
+      "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.648,
+      "command": [
+        "/dev/shm/int30-14-godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/97c30571e0a7/editor-validation-overlay",
+        "--script",
+        "res://tests/modular_assembly_framework_test.gd"
+      ],
+      "log_sha256": "f226344c8fbca0c2ad1cee6a6283f866ee093c8949c3b742470990c65b79bd4b",
+      "contract": "blueprints",
+      "process_passed": true,
+      "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.322,
+      "command": [
+        "/dev/shm/int30-14-godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/97c30571e0a7/editor-validation-overlay",
+        "--script",
+        "res://tests/blueprint_contract_test.gd"
+      ],
+      "log_sha256": "5b9d88baa816aa687d1894dc112a6ff98efe76e29fcea19869ebca953f5f3bfc",
+      "contract": "blueprints",
+      "process_passed": true,
+      "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "campaign_foundation_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 5.989,
+      "command": [
+        "/dev/shm/int30-14-godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/97c30571e0a7/editor-validation-overlay",
+        "--script",
+        "res://tests/campaign_foundation_test.gd"
+      ],
+      "log_sha256": "b593a952d03f345794dddf354dbf8c72951d5a76006086faa85a615363da3bd8",
+      "contract": "campaign",
+      "process_passed": true,
+      "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "coordinate_persistence_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.733,
+      "command": [
+        "/dev/shm/int30-14-godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/97c30571e0a7/editor-validation-overlay",
+        "--script",
+        "res://tests/coordinate_persistence_test.gd"
+      ],
+      "log_sha256": "ff627973a3f34719f4411448f9d233b15d282950befb6e175ff87098ed40392b",
+      "contract": "campaign",
+      "process_passed": true,
+      "source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": true
+    }
+  ]
+}

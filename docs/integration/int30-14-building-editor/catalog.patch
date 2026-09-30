@@ -1,6 +1,6 @@
 --- a/localization/catalog.json
 +++ b/localization/catalog.json
-@@ -9706,6 +9706,686 @@
+@@ -9706,6 +9706,701 @@
        "key": "LIVING_NEST_AIMED",
        "de": "Entdecktes Nest",
        "en": "Discovered nest"
@@ -684,6 +684,21 @@
 +      "key": "BEDITOR_PART_LIMIT",
 +      "de": "Kein weiteres Bauteil möglich. Der Entwurf bleibt erhalten.",
 +      "en": "No further part can be added. The design is preserved."
++    },
++    {
++      "key": "BEDITOR_PALETTE_PART",
++      "de": "{name}\n{stats}",
++      "en": "{name}\n{stats}"
++    },
++    {
++      "key": "BEDITOR_INCREASE",
++      "de": "Wert erhöhen",
++      "en": "Increase value"
++    },
++    {
++      "key": "BEDITOR_DECREASE",
++      "de": "Wert verringern",
++      "en": "Decrease value"
      }
    ]
  }
