@@ -590,7 +590,9 @@ func refresh() -> void:
 func _update_hud_visibility() -> void:
 	entry.visible = not confirmation_open and int(get_node("/root/GameState").current_phase) == 0 and Layout.gameplay_entries_visible(self, controller.player)
 	_hud.visible = controller._active and (not get_tree().paused or _owns_pause)
-	_top_bar.visible = _hud.visible
+	# A nearby building can project behind the resource strip. Keep the world
+	# available for the placement click until the order commits or is cancelled.
+	_top_bar.visible = _hud.visible and controller.placement.is_empty()
 
 func _refresh_speed_controls() -> void:
 	_speed_pause.text = Text.text("TRIBE_RESUME_TIME" if _owns_pause and get_tree().paused else "TRIBE_PAUSE_TIME")

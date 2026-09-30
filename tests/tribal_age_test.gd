@@ -341,6 +341,10 @@ func _physical_rect(control: Control) -> Rect2:
 	return Rect2(canvas.origin * factor, control.size * canvas.get_scale() * factor)
 
 func _world_click(position: Vector2, button: int, shift: bool = false) -> void:
+	# A world click follows an actual pointer move. Without the motion event,
+	# Godot still reports the previously hovered HUD control and drops the click.
+	_move_mouse(position)
+	await process_frame
 	for pressed_value in [true, false]:
 		var event := InputEventMouseButton.new()
 		event.position = position
@@ -349,6 +353,11 @@ func _world_click(position: Vector2, button: int, shift: bool = false) -> void:
 		event.shift_pressed = shift
 		root.push_input(event, true)
 	await process_frame
+
+func _move_mouse(position: Vector2) -> void:
+	var motion := InputEventMouseMotion.new()
+	motion.position = position
+	root.push_input(motion, true)
 
 func _world_drag(start: Vector2, end: Vector2) -> void:
 	var press := InputEventMouseButton.new()
@@ -451,24 +460,23 @@ func _click(button: Button) -> void:
 		var tabs: TabContainer = tribe.panel._tabs
 		for index in range(tabs.get_tab_count()):
 			if tabs.get_tab_control(index).is_ancestor_of(button) and tabs.current_tab != index:
-				tribe.panel._scroll.ensure_control_visible(tabs.get_tab_bar())
-				await _frames(3)
 				var bar: TabBar = tabs.get_tab_bar()
+				await _show_in_scroll(tribe.panel._scroll, bar)
 				bar.ensure_tab_visible(index)
+				await _frames(2)
 				await _world_click(bar.get_global_transform_with_canvas() * bar.get_tab_rect(index).get_center(), MOUSE_BUTTON_LEFT)
 				await _frames(3)
 				_expect(tabs.current_tab == index, "Cannot open the action's tab.")
 	if tribe != null and tribe.panel._scroll.is_ancestor_of(button):
-		tribe.panel._scroll.ensure_control_visible(button)
-		await _frames(3)
+		await _show_in_scroll(tribe.panel._scroll, button)
 	_expect(button != null and button.is_visible_in_tree(), "Required button is absent: " + (str(button.name) if button != null else "null"))
 	if button == null:
 		return
-	if tribe != null and tribe.panel._hud_scroll.is_ancestor_of(button):
-		tribe.panel._hud_scroll.ensure_control_visible(button)
 	await process_frame
 	var event := InputEventMouseButton.new()
 	event.position = button.get_global_transform_with_canvas() * (button.size * 0.5)
+	_move_mouse(event.position)
+	await process_frame
 	event.button_index = MOUSE_BUTTON_LEFT
 	event.pressed = true
 	root.push_input(event, true)
@@ -476,6 +484,22 @@ func _click(button: Button) -> void:
 	event.pressed = false
 	root.push_input(event, true)
 	await process_frame
+
+func _show_in_scroll(scroll: ScrollContainer, control: Control) -> void:
+	scroll.ensure_control_visible(control)
+	await _frames(3)
+	# ensure_control_visible can leave descendants of a TabContainer below the
+	# viewport after a page or resident-detail layout change. Scroll the actual
+	# clipped distance and verify that a mouse click can reach the whole control.
+	var window: Rect2 = _physical_rect(scroll)
+	var target: Rect2 = _physical_rect(control)
+	var scale: float = window.size.y / maxf(scroll.size.y, 1.0)
+	if target.position.y < window.position.y:
+		scroll.scroll_vertical -= ceili((window.position.y - target.position.y + 4.0) / scale)
+	elif target.end.y > window.end.y:
+		scroll.scroll_vertical += ceili((target.end.y - window.end.y + 4.0) / scale)
+	await _frames(3)
+	_expect(_physical_rect(scroll).grow(1.0).encloses(_physical_rect(control)), "Action remains clipped in village HUD: " + control.name)
 
 func _frames(count: int) -> void:
 	for i in range(count):
