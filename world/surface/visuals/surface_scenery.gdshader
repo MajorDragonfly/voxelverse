@@ -12,7 +12,9 @@ varying float nearby_coverage;
 varying vec3 surface_position;
 
 void vertex() {
-	surface_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	// The same authored coordinates as the settled near material: no grain
+	// jump when the origin recenters or the complementary LOD mask changes.
+	surface_position = VERTEX;
 	vec3 root = MODEL_MATRIX[3].xyz;
 	distance_to_observer = distance(root, CAMERA_POSITION_WORLD);
 	shade = INSTANCE_CUSTOM.r > 0.0 ? INSTANCE_CUSTOM.r : 1.0;

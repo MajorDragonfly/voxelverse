@@ -11,7 +11,9 @@ varying float individual_shade;
 varying vec3 surface_position;
 
 void vertex() {
-	surface_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	// Authored coordinates survive origin rebases and both scenery shaders.
+	// Sample before wind bending so the grain follows the moving leaf blocks.
+	surface_position = VERTEX;
 	float slot = floor(UV.x * 32.0);
 	bool leaf = slot < 4.0 || (slot >= 20.0 && slot <= 22.0);
 	individual_shade = INSTANCE_CUSTOM.r > 0.0 ? INSTANCE_CUSTOM.r : 1.0;
