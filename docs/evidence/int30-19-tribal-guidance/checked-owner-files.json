@@ -1,0 +1,9 @@
+[
+  "localization/catalog.json",
+  "localization/de.po",
+  "localization/en.po",
+  "tools/validate_godot.py",
+  "tools/validation/contracts.json",
+  "ui/frontend/first_steps.gd",
+  "ui/tribe/tribe_panel.gd"
+]
