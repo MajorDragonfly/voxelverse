@@ -84,7 +84,14 @@ func _run() -> void:
 	report.passed = report.failures.is_empty()
 	FileAccess.open(output.path_join("capture.json"), FileAccess.WRITE).store_string(JSON.stringify(report, "\t"))
 	print("SURFACE_TRANSITIONS_CAPTURE ", JSON.stringify(report))
+	# All measurements are complete. Let the world's exit handlers join workers
+	# and release queued render resources before terminating the SceneTree.
+	scene.process_mode = Node.PROCESS_MODE_DISABLED
+	scene.queue_free()
+	scene = null
+	camera = null
 	paused = false
+	for frame in range(4): await process_frame
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if report.passed else 1)
 
 func _settle() -> void:

@@ -24,7 +24,7 @@ def capture(project, godot, renderer, output):
         env = isolated_env(Path(temporary))
         commands = [
             [str(godot), '--headless', '--path', str(project), '--import'],
-            [str(godot), '--path', str(project), '--rendering-method', renderer,
+            [str(godot), '--verbose', '--path', str(project), '--rendering-method', renderer,
              '--audio-driver', 'Dummy', '--script', 'res://tools/capture_surface_transitions.gd', '--', str(output)],
         ]
         for label, command in zip(['import', 'render'], commands):
