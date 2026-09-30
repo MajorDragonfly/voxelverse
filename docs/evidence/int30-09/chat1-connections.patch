@@ -30,7 +30,7 @@
 +      - "tests/fixtures/int30_menu_audio_book_probe.gd"
        - ".github/workflows/frontend-validate.yml"
    workflow_dispatch:
- 
+
 @@ -80,6 +84,13 @@
          run: |
            GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
