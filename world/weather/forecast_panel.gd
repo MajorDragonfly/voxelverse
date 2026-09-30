@@ -49,6 +49,7 @@ func _ready() -> void:
 	_day_bar = ProgressBar.new()
 	_day_bar.name = "DayProgress"
 	_day_bar.show_percentage = false
+	_day_bar.step = 0.0
 	_day_bar.custom_minimum_size.y = 9
 	_day_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var night := StyleBoxFlat.new()
@@ -89,10 +90,16 @@ func _ready() -> void:
 
 
 func present(snapshot: Dictionary, forecast: Array, player: Node) -> void:
-	_snapshot = snapshot.duplicate(true)
 	_forecast.clear()
 	for entry in forecast:
 		if entry is Dictionary: _forecast.append(entry.duplicate(true))
+	present_current(snapshot, player)
+
+
+func present_current(snapshot: Dictionary, player: Node) -> void:
+	# The inexpensive current/day port follows every campaign sample. Future
+	# regional samples keep their independent one-second refresh budget.
+	_snapshot = snapshot.duplicate(true)
 	_player = player
 	_refresh()
 
@@ -125,7 +132,7 @@ func _refresh() -> void:
 		var forecast: Dictionary = _forecast[index]
 		var condition: String = str(forecast.get("condition", ""))
 		_segments[index + 1].color = _condition_color(condition)
-		if storm_minutes == 0 and (condition.ends_with("storm") or condition == "blizzard" or str(forecast.get("hazard_kind", "none")) != "none"):
+		if storm_minutes == 0 and _is_upcoming_storm(forecast):
 			storm_minutes = roundi(float(forecast.get("in_seconds", 0.0)) / 60.0)
 		var key: String = "WEATHER_FORECAST_" + condition.to_upper()
 		if condition not in ["clear", "breeze", "overcast", "drizzle", "rain", "snow", "sleet", "sandstorm", "ashstorm", "firestorm", "blizzard"]:
@@ -139,6 +146,16 @@ func _refresh() -> void:
 	var screen: Vector2 = Layout.screen_size(self)
 	var width: float = minf(292.0 if screen.x >= 1000.0 else 280.0, screen.x - 32.0)
 	Layout.place(_panel, Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 164.0 if _warning.visible else 143.0)))
+
+
+static func _is_upcoming_storm(entry: Dictionary) -> bool:
+	# Diagnostics cannot manufacture a campaign warning, even if a future
+	# consumer accidentally passes their entries alongside a normal snapshot.
+	if bool(entry.get("preview", false)) or entry.has("storm_preview_schema"): return false
+	var horizon: float = float(entry.get("in_seconds", 0.0))
+	if not is_finite(horizon) or horizon <= 0.0: return false
+	var storms: Array[String] = ["sandstorm", "ashstorm", "firestorm", "blizzard"]
+	return str(entry.get("condition", "")) in storms or str(entry.get("hazard_kind", "none")) in storms
 
 func _condition_color(condition: String) -> Color:
 	match condition:

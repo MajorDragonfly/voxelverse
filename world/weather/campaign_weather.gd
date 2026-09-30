@@ -133,6 +133,8 @@ func _process(delta: float) -> void:
 	if _forecast_elapsed >= 1.0 or _forecast_panel._player != player:
 		_forecast_elapsed = 0.0
 		_forecast_panel.present(_snapshot, forecast(), player)
+	else:
+		_forecast_panel.present_current(_snapshot, player)
 	_notice_elapsed += delta
 	if previous_condition != str(_snapshot.condition) or _notice_elapsed >= 0.25:
 		_notice_elapsed = 0.0

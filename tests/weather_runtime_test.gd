@@ -107,6 +107,24 @@ func _campaign_contract() -> void:
 		and weather._forecast_panel._snapshot.body_id == state.active_body_id
 		and weather._forecast_panel._forecast[0].in_seconds == 60.0,
 		"Live forecast UI did not show this body's local forecast windows.")
+	# Advance less than the expensive forecast refresh interval: the day clock
+	# must still match the current atmosphere sample, including rewinding a save.
+	var air: Node = current_scene._atmosphere
+	var initial_clock: float = state.campaign.data.elapsed_seconds
+	for clock: float in [initial_clock + 0.25, initial_clock + 0.75, initial_clock]:
+		state.campaign.data.elapsed_seconds = clock
+		weather._forecast_elapsed = 0.0
+		weather._process(0.01)
+		air.update_view(0.0, true)
+		_expect(is_equal_approx(float(weather._forecast_panel._snapshot.elapsed_seconds), air._elapsed),
+			"Day UI and sky read different campaign clocks between forecast refreshes.")
+		_expect(absf(weather._forecast_panel._day_bar.value - air.day_progress(clock) * 100.0) < 0.001,
+			"The live day bar retained a previous campaign time.")
+	weather._forecast_elapsed = 1.0
+	weather._process(0.0)
+	expected = weather.snapshot()
+	var saved_sun: Vector3 = air._sun_direction
+	var saved_clouds: Vector3 = air.sky_material.get_shader_parameter("cloud_offset")
 	var copy: Dictionary = weather.snapshot()
 	copy.condition = "firestorm"
 	_expect(weather.snapshot().condition != "firestorm", "Snapshot exposes mutable weather state.")
@@ -116,6 +134,8 @@ func _campaign_contract() -> void:
 	flow.toggle_pause()
 	for i in range(5): await process_frame
 	_expect(weather.snapshot() == expected, "Paused weather advanced.")
+	_expect(air._sun_direction == saved_sun and air.sky_material.get_shader_parameter("cloud_offset") == saved_clouds,
+		"Pause advanced the sun or clouds.")
 	_expect(not weather._forecast_panel._panel.visible, "Paused forecast covered the menu.")
 	_expect(saves.save_now(), "Weather pause save failed.")
 	flow.resume()
@@ -145,6 +165,10 @@ func _campaign_contract() -> void:
 	for i in range(3): await process_frame
 	if current_scene.scene_file_path == Surface.SCENE:
 		var restored: Dictionary = current_scene.get_node("Weather").snapshot()
+		current_scene._atmosphere.update_view(0.0, true)
+		_expect(current_scene._atmosphere._sun_direction.is_equal_approx(saved_sun)
+			and current_scene._atmosphere.sky_material.get_shader_parameter("cloud_offset").is_equal_approx(saved_clouds),
+			"Actual slot reload changed the saved sun/cloud phase.")
 		_expect(restored.body_id == expected.body_id and restored.front_index == expected.front_index and restored.elapsed_seconds == expected.elapsed_seconds, "Save/load rerolled the regional front or clock.")
 		# Camera settling and saved player placement can differ by millimetres;
 		# regional values must stay continuous. Exact location is covered by the
