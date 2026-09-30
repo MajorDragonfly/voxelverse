@@ -28,6 +28,7 @@ def main():
     parser.add_argument("--xvfb", type=Path)
     parser.add_argument("--display-number", type=int, default=214)
     parser.add_argument("--editor", action="store_true", help="Run existing real editor/new-game consumer, too")
+    parser.add_argument("--editor-only", action="store_true", help="Exercise only the unchanged editor/new-game consumer")
     parser.add_argument("--timeout", type=int, choices=[300, 600], default=300, help="Bound each unchanged case; 600 is for an explicitly recorded loaded-host diagnosis")
     args = parser.parse_args()
     output = args.output.resolve()
@@ -46,12 +47,14 @@ def main():
         records = []
         try:
             cases = [("picker", "int30_design_library_picker_test", "INT30_DESIGN_LIBRARY_RESULT ", 9)]
-            if args.editor:
-                cases.append(("editor", "creature_library_ui_test", "CREATURE_LIBRARY_UI_PASSED", 9))
+            if args.editor_only: cases.clear()
+            if args.editor or args.editor_only:
+                cases.append(("editor", "creature_library_ui_test", "CREATURE_LIBRARY_UI_PASSED", 8))
             for name, script, marker, count in cases:
                 directory = output / name
                 directory.mkdir()
-                command = [str(godot), "--path", str(args.project.resolve()), "--rendering-method", args.renderer, "--audio-driver", "Dummy", "--script", f"res://tests/{script}.gd", "--", "--capture", str(directory)]
+                capture_arg = "--capture-dir" if name == "editor" else "--capture"
+                command = [str(godot), "--path", str(args.project.resolve()), "--rendering-method", args.renderer, "--audio-driver", "Dummy", "--script", f"res://tests/{script}.gd", "--", capture_arg, str(directory)]
                 start = time.monotonic()
                 with (directory / "render.log").open("w") as log:
                     try:

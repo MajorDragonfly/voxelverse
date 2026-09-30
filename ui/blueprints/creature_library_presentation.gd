@@ -33,6 +33,7 @@ static func compare(current: Dictionary, candidate: Dictionary) -> String:
 		return Text.text("BP_COMPARE_UNAVAILABLE")
 	var before: Dictionary = Package.Creature.serialize_snapshot(current)
 	var after: Dictionary = Package.Creature.serialize_snapshot(candidate)
+	if before.is_empty() or after.is_empty(): return Text.text("BP_COMPARE_UNAVAILABLE")
 	Package.Creature.Contract.PartRevisions.pin_legacy(before)
 	Package.Creature.Contract.PartRevisions.pin_legacy(after)
 	var lines: Array[String] = []

@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "source_commit": "7af301a26b4a0ed49fb097a85ca14d6c45f6a5ed",
+  "source_tree": "c0ec0934fe8a05206e572051070a978a45e4f48b",
+  "records": [
+    {
+      "case": "picker",
+      "passed": true,
+      "exit_code": 0,
+      "budget_seconds": 600,
+      "seconds": 311.996,
+      "command": [
+        "/workspace/scratch/27890ce47205/engine/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/0a48d9269033/verification",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/int30_design_library_picker_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/0a48d9269033/final-render-gl/picker"
+      ],
+      "renderer": "gl_compatibility",
+      "screenshots": [
+        "picker/empty-local-de.png",
+        "picker/invalid-import-de.png",
+        "picker/locked-template-de.png",
+        "picker/small-detail-de-150.png",
+        "picker/small-detail-en-150.png",
+        "picker/small-list-de-150.png",
+        "picker/small-list-en-150.png",
+        "picker/starter-comparison-de.png",
+        "picker/variant-origin-de.png"
+      ]
+    },
+    {
+      "case": "editor",
+      "passed": true,
+      "exit_code": 0,
+      "budget_seconds": 600,
+      "seconds": 174.617,
+      "command": [
+        "/workspace/scratch/27890ce47205/engine/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/0a48d9269033/verification",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/creature_library_ui_test.gd",
+        "--",
+        "--capture-dir",
+        "/workspace/scratch/0a48d9269033/final-editor-render-gl/editor"
+      ],
+      "renderer": "gl_compatibility",
+      "screenshots": [
+        "editor/desktop-1920-de.png",
+        "editor/desktop-2560-de.png",
+        "editor/editor-templates-de.png",
+        "editor/invalid-import-de.png",
+        "editor/local-variant-en.png",
+        "editor/narrow-detail-en-150.png",
+        "editor/narrow-list-en-150.png",
+        "editor/new-game-selected-de.png"
+      ]
+    }
+  ]
+}
