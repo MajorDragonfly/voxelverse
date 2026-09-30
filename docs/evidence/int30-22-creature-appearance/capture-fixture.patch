@@ -1,0 +1,16 @@
+diff --git a/tests/int30_creature_appearance_test.gd b/tests/int30_creature_appearance_test.gd
+index 42c4dd7..b06982c 100644
+--- a/tests/int30_creature_appearance_test.gd
++++ b/tests/int30_creature_appearance_test.gd
+@@ -252,6 +252,11 @@ func _restart() -> void:
+ 
+ func _capture(label: String) -> void:
+ 	if capture_dir.is_empty(): return
++	# A neutral pointer removes transient hover tooltips from comparison images.
++	root.warp_mouse(Vector2(400, 35))
++	var motion := InputEventMouseMotion.new()
++	motion.position = Vector2(400, 35)
++	root.push_input(motion, true)
+ 	await _settle()
+ 	await RenderingServer.frame_post_draw
+ 	root.get_texture().get_image().save_png(capture_dir.path_join(label + ".png"))
