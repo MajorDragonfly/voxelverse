@@ -14,17 +14,26 @@ var player: CharacterBody3D
 var home: Node
 var tribe: Node
 var capture_dir: String = ""
+var capture_on_demand: bool = false
 
 func _initialize() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
+	# The action assertions below use German captions. Keep this fixture
+	# deterministic on native Windows too; _check_minimap covers DE/EN layouts.
+	root.get_node("LocaleManager")._apply("de")
 	state = root.get_node("GameState")
 	saves = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
 	saves._loaded_once = true
 	saves.save_path = SAVE
 	var args: PackedStringArray = OS.get_cmdline_user_args()
+	capture_on_demand = "--controls-only" in args and "--capture-on-demand" in args and "--capture" in args
+	if capture_on_demand:
+		# Keep input/layout and physics live; software diagnostics only need to
+		# paint the comparable views, as in the existing tribal world probe.
+		RenderingServer.render_loop_enabled = false
 	if "--capture" in args:
 		capture_dir = args[args.find("--capture") + 1]
 		DirAccess.make_dir_recursive_absolute(capture_dir)
@@ -70,6 +79,11 @@ func _run() -> void:
 	await _until(func() -> bool: return tribe.is_active(), 600)
 	_expect(state.current_phase == 1 and tribe.is_active(), "Confirmation did not activate the playable tribe: " + saves.last_error)
 	if not tribe.is_active():
+		await _cleanup()
+		_finish()
+		return
+	if "--controls-only" in args:
+		await _check_controls_matrix()
 		await _cleanup()
 		_finish()
 		return
@@ -506,7 +520,12 @@ func _show_in_scroll(scroll: ScrollContainer, control: Control) -> void:
 	elif target.end.y > window.end.y:
 		scroll.scroll_vertical += ceili((target.end.y - window.end.y + 4.0) / scale)
 	await _frames(3)
-	_expect(_physical_rect(scroll).grow(1.0).encloses(_physical_rect(control)), "Action remains clipped in village HUD: " + control.name)
+	var visible_rect: Rect2 = _physical_rect(scroll).grow(1.0)
+	var control_rect: Rect2 = _physical_rect(control)
+	# A wrapping prose label can be taller than the scroll viewport. Its text
+	# is read in successive scroll positions; buttons must still fit completely.
+	var readable_label: bool = control is Label and control_rect.size.y > visible_rect.size.y and visible_rect.intersects(control_rect)
+	_expect(visible_rect.encloses(control_rect) or readable_label, "Action remains clipped in village HUD: " + control.name)
 
 func _frames(count: int) -> void:
 	for i in range(count):
@@ -517,11 +536,13 @@ func _capture(label: String) -> void:
 	print("TRIBAL_STAGE: " + label)
 	if capture_dir.is_empty():
 		return
+	if capture_on_demand: RenderingServer.render_loop_enabled = true
 	await process_frame
 	await RenderingServer.frame_post_draw
 	var image: Image = root.get_texture().get_image()
 	_expect(not image.is_empty(), "Empty viewport capture.")
 	image.save_png(capture_dir.path_join(label + ".png"))
+	if capture_on_demand: RenderingServer.render_loop_enabled = false
 
 func _cleanup() -> void:
 	scene.queue_free()
@@ -534,6 +555,7 @@ func _expect(condition: bool, message: String) -> void:
 		printerr("TRIBAL_CHECK_FAILED: " + message)
 
 func _finish() -> void:
+	RenderingServer.render_loop_enabled = true
 	print(JSON.stringify({"test": "tribal_age", "passed": failures.is_empty(), "failures": failures}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
 
@@ -553,3 +575,230 @@ func _check_scrolled_actions() -> void:
 		var scroll_rect: Rect2 = tribe.panel._scroll.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, tribe.panel._scroll.size)
 		# Integer scrolling and canvas scaling can round an edge by less than one viewport pixel.
 		_expect(button.is_visible_in_tree() and root.get_visible_rect().encloses(rect) and scroll_rect.grow(1.0).encloses(rect), "Action outside viewport or clipped: %s rect=%s scroll=%s" % [button.name, rect, scroll_rect])
+
+## Supplemental rendered acceptance. Keep the ordinary lifecycle test's
+## existing budgets; run this full mouse matrix with --controls-only.
+func _check_controls_matrix() -> void:
+	var panel: CanvasLayer = tribe.panel
+	var settings: Node = root.get_node("DisplaySettings")
+	var locale: Node = root.get_node("LocaleManager")
+	var rows: Array[Dictionary] = []
+	var initial_village: Dictionary = tribe.village().duplicate(true)
+	# Keep the game's configured canvas stretch, not an unscaled replacement.
+	for dimensions: Vector2i in [Vector2i(800, 600), Vector2i(1280, 720), Vector2i(1920, 1080)]:
+		for scale: float in [1.0, 1.25, 1.5]:
+			for language: String in ["de", "en"]:
+				if "--matrix-one" in OS.get_cmdline_user_args() and not rows.is_empty(): continue
+				var first_failure: int = failures.size()
+				# Each layout case starts from the same valid idle fixture. Do not let
+				# a previous case's cancelled builder or resumed carrier bias picking.
+				tribe.set_physics_process(false)
+				tribe.replace_village(initial_village.duplicate(true))
+				tribe.placement = ""
+				tribe.building_preview.clear_preview()
+				for member: Dictionary in tribe.village().members:
+					tribe.actors[member.id].global_position = GameplaySpace.resolve(tribe, member.position)
+					tribe.actors[member.id].velocity = Vector3.ZERO
+				tribe.camera_rig.focus_home()
+				tribe.select_all()
+				# This is a static layout fixture. Build the real collision-tested
+				# graph through its diagnostic adapter instead of rendering hundreds
+				# of idle frames after the previous case's cancelled construction.
+				# Production streaming/navigation remains in the ordinary age test.
+				tribe.navigation.rebuild(home, tribe.anchor(), tribe.village(), tribe.navigation_extent())
+				tribe.set_physics_process(true)
+				_expect(tribe.navigation.is_ready(), "Prior build's navigation did not settle between layout cases.")
+				root.size = dimensions
+				settings.ui_scale = scale
+				root.content_scale_factor = scale
+				locale._apply(language)
+				await _frames(6)
+				var context: String = "%dx%d_%d_%s" % [dimensions.x, dimensions.y, roundi(scale * 100), language]
+				for speed: int in [1, 2, 3, 1]:
+					await _mouse_speed(speed - 1)
+					_expect(is_equal_approx(Engine.time_scale, float(speed)), "Mouse speed failed: " + context + "/" + str(speed))
+				await _click(panel._speed_pause)
+				_expect(paused and panel._owns_pause and panel._speed_pause.text == preload("res://core/localization/ui_text.gd").text("TRIBE_RESUME_TIME"), "Mouse pause failed: " + context)
+				var frozen: Dictionary = tribe.village().duplicate(true)
+				await _frames(6)
+				_expect(tribe.village() == frozen, "Mouse pause advanced village: " + context)
+				await _capture("matrix_" + context + "_pause")
+				await _click(panel._speed_pause)
+				_expect(not paused and not panel._owns_pause, "Mouse resume failed: " + context)
+				# Freeze resident physics only for repeatable layout/picking fixtures.
+				# The actual pause check above runs with production physics enabled.
+				tribe.set_physics_process(false)
+				if not panel._collapsed: await _click(panel._collapse)
+				var identity: String = str(tribe.village().members[0].id)
+				var actor_point: Vector2 = tribe.camera.unproject_position(tribe.actors[identity].global_position + Vector3.UP)
+				await _world_click(actor_point, MOUSE_BUTTON_LEFT)
+				_expect(tribe.selected == [identity], "Resident world click failed: " + context)
+				await _click(panel._collapse)
+				await _show_in_scroll(panel._scroll, panel._resident_name)
+				_expect(panel._resident_detail.is_visible_in_tree() and panel._resident_name.text == tribe.member_record(identity).name, "Resident detail failed: " + context)
+				_expect(preload("res://core/localization/ui_text.gd").text("TRIBE_RESIDENT_DETAIL_CLOTHING") in panel._resident_equipment.text, "Personal equipment limitation disappeared: " + context)
+				await _capture("matrix_" + context + "_resident")
+				await _show_in_scroll(panel._scroll, panel._resident_equipment)
+				await _capture("matrix_" + context + "_resident_needs")
+				await _click(panel._collapse)
+				var companion: String = str(tribe.village().members[1].id)
+				await _world_click(tribe.camera.unproject_position(tribe.actors[companion].global_position + Vector3.UP), MOUSE_BUTTON_LEFT, true)
+				_expect(tribe.selected.size() == 2 and not panel._resident_detail.visible, "Shift multi-selection failed: " + context)
+				var source: Dictionary = tribe.village().deposits.wood
+				var location: Vector3 = GameplaySpace.resolve(tribe, source.position)
+				tribe._focus = location
+				tribe.camera_rig.update_camera()
+				await _frames(2)
+				var source_point: Vector2 = _exposed_world_point(location, 2.3)
+				await _world_click(source_point, MOUSE_BUTTON_LEFT)
+				await _frames(6)
+				_expect(panel._resource_area.source_id == source.id and panel._resource_area.is_visible_in_tree(), "Source world click failed: " + context)
+				_expect(str(source.remaining) in panel._resource_area._amount.text, "Source amount does not match live state: " + context)
+				_expect(_physical_rect(panel._scroll).grow(1.0).encloses(_physical_rect(panel._resource_area._title)), "Source heading not scrolled into view: " + context + " title=" + str(_physical_rect(panel._resource_area._title)) + " scroll=" + str(_physical_rect(panel._scroll)))
+				await _capture("matrix_" + context + "_source_open")
+				await _click(panel._resource_area._add)
+				_expect(tribe.resource_details(source.id).assigned == 1, "Add gatherer failed: " + context)
+				await _capture("matrix_" + context + "_source")
+				print("CONTROLS_ACTION: remove " + context)
+				await _click(panel._resource_area._remove)
+				print("CONTROLS_ACTION: removed " + context)
+				_expect(tribe.resource_details(source.id).assigned == 0, "Remove gatherer failed: " + context + " " + JSON.stringify({"navigation_ready": tribe.navigation.is_ready(), "status": tribe.status, "metrics": tribe.last_order_metrics}))
+				# A pure HUD/scroll click must never become a world order or selection.
+				var before_ui: Dictionary = tribe.village().duplicate(true)
+				var selection: Array = tribe.selected.duplicate()
+				var zoom: float = tribe._zoom
+				await _show_in_scroll(panel._scroll, panel._resource_area._amount)
+				var point: Vector2 = panel._resource_area._amount.get_global_transform_with_canvas() * (panel._resource_area._amount.size * 0.5)
+				await _world_click(point, MOUSE_BUTTON_RIGHT)
+				var before_scroll: int = panel._scroll.scroll_vertical
+				await _world_click(point, MOUSE_BUTTON_WHEEL_DOWN)
+				var after_scroll_down: int = panel._scroll.scroll_vertical
+				await _world_click(point, MOUSE_BUTTON_WHEEL_UP)
+				_expect(before_scroll != after_scroll_down or panel._scroll.scroll_vertical != after_scroll_down, "Mouse wheel did not move the detail scroll: " + context)
+				print("CONTROLS_ACTION: HUD checked " + context)
+				_expect(tribe.village() == before_ui and tribe.selected == selection and tribe._zoom == zoom, "HUD click/wheel leaked into world: " + context)
+				# Supply the focused build fixture like the existing preview test.
+				# These goods are setup, not claimed production or transport evidence.
+				tribe.village().tools = 1
+				tribe.village().deposits.wood.remaining = 0
+				tribe.village().deposits.stone.remaining = 0
+				tribe.village().stock.wood = 16
+				tribe.village().stock.stone = 16
+				_expect(Model.validate(tribe.village(), tribe.body(), state.campaign.data).is_empty(), "Invalid focused build fixture: " + context)
+				tribe.camera_rig.focus_home()
+				await _click(panel._residents.get_child(0))
+				print("CONTROLS_ACTION: builder selected " + context)
+				await _click(panel._buttons.hut)
+				print("CONTROLS_ACTION: placing " + context)
+				_expect(panel._top_bar.visible == false and tribe.placement == "hut", "Placement did not release the resource bar: " + context)
+				var site: Vector3 = Vector3(5, 100.06, 5)
+				tribe._focus = site
+				tribe.camera_rig.update_camera()
+				await _frames(3)
+				await _world_click(tribe.camera.unproject_position(site), MOUSE_BUTTON_RIGHT)
+				var project: Dictionary = tribe.village().project.duplicate(true)
+				_expect(not project.is_empty() and tribe.placement.is_empty() and panel._top_bar.visible, "Mouse placement failed: " + context)
+				if not project.is_empty():
+					var picked: Vector3 = GameplaySpace.resolve(tribe, project.position)
+					if not panel._collapsed: await _click(panel._collapse)
+					await _world_click(_exposed_world_point(picked, 2.8), MOUSE_BUTTON_LEFT)
+					await _frames(6)
+					_expect(panel._tabs.get_current_tab_control() == panel._build_page and panel._construction.is_visible_in_tree(), "Construction world click failed: " + context)
+					_expect(_physical_rect(panel._scroll).grow(1.0).encloses(_physical_rect(panel._construction._title)), "Construction heading not scrolled into view: " + context)
+					_expect(tribe.village().project == project, "Inspecting construction mutated project: " + context)
+					await _show_in_scroll(panel._scroll, panel._construction._details)
+					_expect("6" in panel._construction._details.text and "3" in panel._construction._details.text, "Construction material readout failed: " + context)
+					await _capture("matrix_" + context + "_construction")
+					await _click(panel._construction._cancel)
+					await _click(panel._construction._keep)
+					_expect(tribe.village().project == project, "Keeping construction cancelled it: " + context)
+					await _click(panel._construction._cancel)
+					await _click(panel._construction._cancel)
+					_expect(tribe.village().project.is_empty(), "Unstarted construction did not cancel: " + context)
+				await _click(panel._buttons.wait)
+				var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
+				_expect(screen.encloses(_physical_rect(panel._hud)) and screen.encloses(_physical_rect(panel._top_bar)), "HUD outside screen: " + context)
+				rows.append({"case": context, "passed": failures.size() == first_failure})
+				tribe.set_physics_process(true)
+				tribe.camera_rig.focus_home()
+	if not "--matrix-one" in OS.get_cmdline_user_args():
+		await _check_resource_transport()
+	if not capture_dir.is_empty():
+		var report := FileAccess.open(capture_dir.path_join("controls-matrix.json"), FileAccess.WRITE)
+		report.store_string(JSON.stringify({"cases": rows, "passed": failures.is_empty(), "failures": failures}, "\t"))
+	print("TRIBAL_CONTROLS_MATRIX: " + JSON.stringify(rows))
+
+func _check_resource_transport() -> void:
+	root.size = Vector2i(1280, 720)
+	root.get_node("DisplaySettings").ui_scale = 1.0
+	root.content_scale_factor = 1.0
+	root.get_node("LocaleManager")._apply("en")
+	Engine.time_scale = 3.0
+	tribe.village().deposits.wood.remaining = 24
+	tribe.village().stock.wood = 0
+	tribe.select_all()
+	await _frames(3)
+	# The last layout case cancelled a construction and requested production
+	# navigation rebuilding. A gather click must wait until that rebuild ends.
+	await _until(func() -> bool: return tribe.navigation.is_ready(), 600)
+	_expect(tribe.navigation.is_ready(), "Transport fixture navigation did not become ready.")
+	if not tribe.navigation.is_ready(): return
+	await _click(tribe.panel._buttons.wood)
+	await _until(func() -> bool: return _has_cargo(), 350)
+	_expect(_has_cargo(), "Resource UI fixture never picked up real transport cargo.")
+	# Hold genuine in-flight cargo while clicking +/-. This makes the command
+	# safety check deterministic without replacing pickup/delivery by fake cargo.
+	tribe.set_physics_process(false)
+	var carriers: Array[Dictionary] = []
+	for member: Dictionary in tribe.village().members:
+		if not member.cargo.is_empty(): carriers.append(member.duplicate(true))
+	tribe.panel.open_resource_area(tribe.village().deposits.wood.id)
+	await _frames(6)
+	await _click(tribe.panel._resource_area._remove)
+	await _click(tribe.panel._resource_area._add)
+	for member: Dictionary in carriers:
+		var after: Dictionary = tribe.member_record(member.id)
+		_expect(after.cargo == member.cargo and after.order == member.order and after.stage == member.stage
+			and after.get("workplace_id", "") == member.get("workplace_id", "") and after.construction_id == member.construction_id,
+			"Work-area +/- interrupted a real freight carrier: " + member.id)
+	await _capture("transport_resource_assignment")
+	tribe.set_physics_process(true)
+	await _click(tribe.panel._speed_pause)
+	var snapshot: Dictionary = tribe.village().duplicate(true)
+	await _frames(8)
+	_expect(paused and tribe.village() == snapshot, "Pause advanced an actual running transport.")
+	await _capture("transport_paused")
+	await _click(tribe.panel._speed_pause)
+	await _until(func() -> bool: return int(tribe.village().stock.wood) > 0, 700)
+	_expect(int(tribe.village().stock.wood) > 0, "Paused transport did not resume its real delivery.")
+	_expect(Model.validate(tribe.village(), tribe.body(), state.campaign.data).is_empty(), "Resource UI damaged transport accounting.")
+	await _capture("transport_resumed")
+
+func _mouse_speed(index: int) -> void:
+	await _click(tribe.panel._speed_selector)
+	var popup: PopupMenu = tribe.panel._speed_selector.get_popup()
+	await _frames(2)
+	_expect(popup.visible, "Speed popup did not open with the mouse.")
+	if not popup.visible: return
+	var box: StyleBox = popup.get_theme_stylebox("panel")
+	var top: float = box.get_content_margin(SIDE_TOP)
+	var bottom: float = box.get_content_margin(SIDE_BOTTOM)
+	var item_height: float = (float(popup.size.y) - top - bottom) / popup.item_count
+	var point := Vector2(float(popup.size.x) * 0.5, top + (index + 0.5) * item_height)
+	# Embedded popups receive pointer routing from their owning viewport.
+	# Pushing directly into the popup skips that routing and cannot hover rows.
+	await _world_click(Vector2(popup.position) + point, MOUSE_BUTTON_LEFT)
+	await _frames(2)
+	_expect(not popup.visible, "Mouse choice left the speed popup open.")
+
+func _exposed_world_point(location: Vector3, height: float) -> Vector2:
+	var panel: CanvasLayer = tribe.panel
+	var map: CanvasLayer = get_first_node_in_group(&"minimap_hud")
+	for fraction: float in [1.0, 0.75, 0.5, 0.25, 0.0]:
+		var point: Vector2 = tribe.camera.unproject_position(location + GameplaySpace.up(tribe, location) * height * fraction)
+		var factor: float = float(root.size.x) / root.get_visible_rect().size.x
+		var physical: Vector2 = point * factor
+		if not _physical_rect(panel._hud).has_point(physical) and not _physical_rect(panel._top_bar).has_point(physical) and not _physical_rect(map._panel).has_point(physical):
+			return point
+	_expect(false, "Fixture object has no exposed screen point: " + str(location))
+	return tribe.camera.unproject_position(location)

@@ -707,7 +707,7 @@ func open_construction() -> void:
 
 func _scroll_to_construction() -> void:
 	if _construction.is_visible_in_tree():
-		_scroll.ensure_control_visible(_construction.get_child(0) as Control)
+		_scroll_to_detail(_construction.get_child(0) as Control)
 
 func open_resource_area(identity: String) -> void:
 	_resource_area.select_source(identity)
@@ -718,7 +718,27 @@ func open_resource_area(identity: String) -> void:
 
 func _scroll_to_resource_area() -> void:
 	if _resource_area.is_visible_in_tree():
-		_scroll.ensure_control_visible(_resource_area.get_child(0) as Control)
+		_scroll_to_detail(_resource_area.get_child(0) as Control)
+
+func _scroll_to_detail(control: Control) -> void:
+	# Opening a world detail expands the HUD and changes the tab/minimum size.
+	# Wait for those container passes before using the target's actual position.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not is_instance_valid(control) or not control.is_visible_in_tree(): return
+	_scroll.ensure_control_visible(control)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not is_instance_valid(control) or not control.is_visible_in_tree(): return
+	# Nested TabContainer descendants can still be outside the clipped viewport
+	# after ensure_control_visible. Correct the displayed distance in scroll units.
+	var window: Rect2 = _scroll.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, _scroll.size)
+	var target: Rect2 = control.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, control.size)
+	var scale: float = maxf(_scroll.get_global_transform_with_canvas().get_scale().y, 0.001)
+	if target.position.y < window.position.y:
+		_scroll.scroll_vertical -= ceili((window.position.y - target.position.y + 4.0) / scale)
+	elif target.end.y > window.end.y:
+		_scroll.scroll_vertical += ceili((target.end.y - window.end.y + 4.0) / scale)
 
 func _exit_tree() -> void:
 	if _owns_pause:
