@@ -1,0 +1,6 @@
+{
+  "contract": "blueprints",
+  "tests": [
+    "int30_community_gallery_test"
+  ]
+}

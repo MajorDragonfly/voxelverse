@@ -1,0 +1,21 @@
+--- a/ui/blueprints/creature_library_panel.gd
++++ b/ui/blueprints/creature_library_panel.gd
+@@ -13,6 +13,8 @@
+ var capture_current: Callable
+ var library_path: String = Library.PATH
+ var start_mode: bool = false
++# INT30-16: opt-in configured service, no default endpoint or startup polling.
++var community_catalog_endpoint: String = str(ProjectSettings.get_setting("community/catalog_endpoint", ""))
+ var _entries: Array[Dictionary] = []
+ var _selected: String = ""
+ var _show_detail: bool = false
+@@ -79,6 +81,9 @@
+ 	_button(tools, "BP_IMPORT", _open_import, "ImportBlueprint")
+ 	_export = _button(tools, "BP_EXPORT", _open_export, "ExportBlueprint")
+ 	_remove = _button(tools, "BP_REMOVE", _confirm_remove, "RemoveBlueprint")
++	var community_launcher := preload("res://ui/blueprints/community_gallery_launcher.gd").new()
++	add_child(community_launcher)
++	community_launcher.attach(self, tools, community_catalog_endpoint)
+ 	_status = Style.paragraph(content, "", 18)
+ 	_status.name = "LibraryStatus"
+ 	_status.visible = false
