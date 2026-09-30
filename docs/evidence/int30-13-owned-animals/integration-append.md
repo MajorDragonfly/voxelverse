@@ -9,4 +9,4 @@ Basis: `2b1ac023db4074c2ce6b7db8fbab09ab929a8435`.
 - Der vorhandene `review_owned_animal_localization.py` behält seinen Vertrag von 20 Bildern. Nur der neue Helfer aktiviert `--browser-capture` und erwartet die sieben Zusatzansichten.
 - D2-Host, Scanner (Chat 5), Verhalten (Chat 7), Dorfwirtschaft und SaveService (Chat 10) benötigen keinen Schreibanschluss. Dieselbe Host-Aktualisierung nach Laden bleibt maßgeblich.
 
-Der gesonderte Journalanschluss liegt in `journal-register.patch` (11 Zeilen im Produktdiff). Die Fachbranch enthält denselben Anschluss für ausführbare Fach-/Grafikprüfung; Übernahme in die gemeinsame Integration ausschließlich durch Chat 1. Dateizuordnung in #137, Kommentar 5918892397, bestätigt.
+Der gesonderte Journalanschluss liegt in `journal-register.patch` (11 Zeilen im Produktdiff, ohne Kontextzeilen); anwenden mit `git apply --unidiff-zero journal-register.patch`. Die Fachbranch enthält denselben Anschluss für ausführbare Fach-/Grafikprüfung; Übernahme in die gemeinsame Integration ausschließlich durch Chat 1. Dateizuordnung in #137, Kommentar 5918892397, bestätigt.
