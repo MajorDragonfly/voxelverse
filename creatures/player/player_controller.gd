@@ -10,6 +10,7 @@ signal guidance_action(action: String, value: float)
 const STARVATION_DAMAGE_INTERVAL: float = 1.0
 const DEHYDRATION_DAMAGE_INTERVAL: float = 1.0
 const STEP_CAMERA_FOLLOW_RATE: float = 9.0
+const STEP_CAMERA_MAX_FRAME_TIME: float = 1.0 / 30.0
 const Space = preload("res://world/surface/gameplay_space.gd")
 
 @export_category("Movement")
@@ -102,7 +103,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# A successful physical step moves the capsule immediately. Let the view
 	# catch up over a few frames without changing collision or input response.
-	_camera_step_offset *= exp(-STEP_CAMERA_FOLLOW_RATE * maxf(delta, 0.0))
+	# A delayed render frame must not erase the smoothing in a single jump.
+	# Normal 30/60/120 Hz following keeps its time-based decay.
+	_camera_step_offset *= exp(-STEP_CAMERA_FOLLOW_RATE * clampf(delta, 0.0, STEP_CAMERA_MAX_FRAME_TIME))
 	if absf(_camera_step_offset) < 0.002: _camera_step_offset = 0.0
 	_apply_step_camera()
 	var recovering: bool = is_dead
@@ -272,6 +275,9 @@ func _try_primary_action() -> void:
 	if not interaction_ray.is_colliding():
 		return
 	var collision_point: Vector3 = interaction_ray.get_collision_point()
+	if not reachable_drink_source(collision_point).is_empty():
+		_try_drink_water(collision_point)
+		return
 	if global_position.distance_to(collision_point) > interaction_range:
 		return
 	if Space.sample(self, collision_point).water:

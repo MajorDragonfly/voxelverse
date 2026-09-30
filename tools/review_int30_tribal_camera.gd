@@ -55,6 +55,18 @@ func _run() -> void:
 	await physics_frame
 	for i in range(20): rig.advance(1.0 / 60.0)
 	_expect(tribe.camera.global_position.distance_to(old_eye) < 0.1, "Camera retained the removed building collision.")
+	# Real pointer/ray selection must still work with the shallow perspective lens.
+	var resident_id: String = tribe.actors.keys()[0]
+	var actor: Node3D = tribe.actors[resident_id]
+	var pixel: Vector2 = tribe.camera.unproject_position(actor.global_position + Vector3.UP * 0.8)
+	await _world_click(pixel, MOUSE_BUTTON_LEFT)
+	_expect(resident_id in tribe.selected, "Low-view perspective broke resident mouse selection.")
+	var map: CanvasLayer = get_first_node_in_group(&"minimap_hud")
+	if map != null:
+		map._update_snapshot()
+		var yaw_before: float = rig.yaw
+		await _click(map._camera_controls.get_node("TRIBE_MAP_TURN_RIGHT"))
+		_expect(rig.yaw != yaw_before, "Real minimap mouse button did not rotate shallow view.")
 	await _cleanup()
 	if failures.is_empty(): print("INT30_TRIBE_CAMERA_PASSED")
 	await _finish()

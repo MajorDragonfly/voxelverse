@@ -81,6 +81,11 @@ func _try_primary_action() -> void:
 	if not interaction_ray.is_colliding():
 		return
 	var collision_point: Vector3 = interaction_ray.get_collision_point()
+	# A ray may hit submerged terrain beyond reach while the water surface
+	# itself is reachable. Use the same source/reach contract as the HUD.
+	if not reachable_drink_source(collision_point).is_empty():
+		_try_drink_water(collision_point)
+		return
 	if global_position.distance_to(collision_point) > interaction_range:
 		return
 	if Space.sample(self, collision_point).water:

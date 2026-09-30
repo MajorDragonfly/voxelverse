@@ -17,6 +17,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--case', action='append', default=[],
+                        help='Select e.g. 60hz-0.65-straight; omitted runs all twelve cases.')
+    parser.add_argument('--capture-timeout', type=int, default=600,
+                        help='Wall time for rendering a replay, independent of gameplay/test budgets.')
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
@@ -26,6 +30,8 @@ def main():
         for size in [0.65, 1.5]:
             for approach in ['straight', 'diagonal']:
                 case = f'{fps}hz-{size}-{approach}'
+                if args.case and case not in args.case:
+                    continue
                 pair = []
                 for mode in ['before', 'after']:
                     directory = output / f'{case}-{mode}'
@@ -40,7 +46,7 @@ def main():
                             env = isolated_env(Path(temporary))
                             env['LP_NUM_THREADS'] = '2'
                             result = subprocess.run(command, env=env,
-                                                    stdout=log, stderr=subprocess.STDOUT, timeout=240)
+                                                    stdout=log, stderr=subprocess.STDOUT, timeout=args.capture_timeout)
                     log_text = log_path.read_text()
                     report = json.loads((directory / 'trace.json').read_text())
                     rows = report['rows']
@@ -78,7 +84,7 @@ def main():
                         raise RuntimeError(f'Camera evidence failed: {entry}')
                 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', str(pair[0]/'film.mp4'),
                                 '-i', str(pair[1]/'film.mp4'), '-filter_complex', 'hstack=inputs=2',
-                                '-c:v', 'libx264', '-crf', '24', '-pix_fmt', 'yuv420p',
+                                '-c:v', 'libx264', '-threads', '2', '-crf', '24', '-pix_fmt', 'yuv420p',
                                 '-movflags', '+faststart', str(output/f'{case}-comparison.mp4')], check=True)
     report = {'passed': all(e['passed'] for e in evidence), 'checks': evidence,
               'engine': 'Godot 4.6.3', 'renderer': 'OpenGL / llvmpipe',
