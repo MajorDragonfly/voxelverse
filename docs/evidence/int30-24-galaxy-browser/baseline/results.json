@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "seconds": 49.395,
+  "renderer": "gl_compatibility",
+  "command": [
+    "/workspace/scratch/2656e69ac218/godot",
+    "--path",
+    "/workspace/scratch/4d8c50c330d2/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/int30_galaxy_browser_baseline.gd",
+    "--",
+    "--capture",
+    "--baseline-path",
+    "/workspace/scratch/4d8c50c330d2/baseline-panel.gd"
+  ],
+  "screenshots": [
+    {
+      "name": "galaxy-1280x720-baseline.png",
+      "sha256": "15545a6baf4d68bde5720f69315e9ee01978c493d8a1c15acb4ea3da9fd7afb6"
+    },
+    {
+      "name": "galaxy-800x600-baseline.png",
+      "sha256": "875fd64f1ac997ef3fc829398e0047c831ba51708ca4d75b9b2003fc49b444bf"
+    }
+  ],
+  "scope": "Actual standalone catalogue UI; software Mesa rendering; no campaign/FPS acceptance"
+}
