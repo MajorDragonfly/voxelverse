@@ -1,0 +1,12 @@
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -153,7 +153,8 @@
+         "creature_design_library_test",
+         "creature_library_favorites_test",
+         "creature_library_ui_test",
+-        "modular_assembly_framework_test"
++        "modular_assembly_framework_test",
++        "int30_design_library_picker_test"
+       ]
+     },
+     {

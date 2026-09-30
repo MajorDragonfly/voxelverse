@@ -9,8 +9,11 @@ const Package = preload("res://assembly/exchange/creature_blueprint_package.gd")
 const Preview = preload("res://ui/discovery/journal_preview.gd")
 const Style = preload("res://ui/frontend/menu_style.gd")
 const Text = preload("res://core/localization/ui_text.gd")
+const Presentation = preload("res://ui/blueprints/creature_library_presentation.gd")
 var prepare_template: Callable
 var capture_current: Callable
+## Optional read-only baseline; the frontend may supply its already chosen form.
+var compare_current: Callable
 var library_path: String = Library.PATH
 var start_mode: bool = false
 var _entries: Array[Dictionary] = []
@@ -26,6 +29,16 @@ var _preview: Preview
 var _name: Label
 var _origin: Label
 var _requirements: Label
+var _comparison: Label
+var _selection_notice: Label
+var _sort: OptionButton
+var _visible_keys: Array[String] = []
+var _reviewed_current: Dictionary = {}
+var _can_use: bool = false
+var _start_baseline: Dictionary = {}
+var _preview_blueprint: Dictionary = {}
+var _availability: Dictionary = {}
+var _availability_context: Dictionary = {}
 var _status: Label
 var _search: LineEdit
 var _filter: OptionButton
@@ -112,6 +125,13 @@ func _ready() -> void:
 		_clear_success()
 		_build_list())
 	list_content.add_child(_filter)
+	_sort = OptionButton.new()
+	_sort.name = "TemplateSort"
+	_sort.custom_minimum_size.y = 48
+	_sort.item_selected.connect(func(_index: int):
+		_clear_success()
+		_build_list())
+	list_content.add_child(_sort)
 	_favorites_only = CheckButton.new()
 	_favorites_only.name = "FavoriteTemplatesOnly"
 	_favorites_only.custom_minimum_size.y = 48
@@ -153,8 +173,17 @@ func _ready() -> void:
 	_preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	details.add_child(_preview)
 	_origin = Style.paragraph(details, "", 18)
+	_origin.name = "TemplateOrigin"
 	_requirements = Style.paragraph(details, "", 20)
 	_requirements.name = "TemplateRequirements"
+	_comparison = Style.paragraph(details, "", 18)
+	_comparison.name = "TemplateComparison"
+	# Restrictions and changes are visible before the large preview/provenance.
+	details.move_child(_requirements, 1)
+	details.move_child(_comparison, 2)
+	_selection_notice = Style.paragraph(_detail, "", 18)
+	_selection_notice.name = "TemplateSelectionNotice"
+	_selection_notice.hide()
 	_favorite = _button(_detail, "BP_FAVORITE_ADD", _toggle_favorite, "ToggleTemplateFavorite")
 	_favorite.toggle_mode = true
 	_use = _button(_detail, "BP_USE", _choose, "UseBlueprint", true)
@@ -177,6 +206,7 @@ func _ready() -> void:
 
 func reload(preferred_key: String = "") -> void:
 	_entries.clear()
+	_availability.clear()
 	for package in Starter.packages():
 		_entries.append({"key": "builtin/" + Library.key_of(package), "builtin": true, "package": package})
 	var stored: Dictionary = Library.read(library_path)
@@ -209,25 +239,73 @@ func _build_list() -> void:
 	for child in _list.get_children():
 		_list.remove_child(child)
 		child.queue_free()
-	var count: int = 0
+	_visible_keys.clear()
+	var context: Dictionary = _preparation_context()
+	if context != _availability_context:
+		_availability.clear()
+		_availability_context = context
+	var visible_entries: Array[Dictionary] = []
 	for entry: Dictionary in _entries:
 		if _filter.selected == 1 and not entry.builtin: continue
 		if _filter.selected == 2 and entry.builtin: continue
 		if _favorites_only.button_pressed and not entry.key in _favorites: continue
-		var searchable: String = _title(entry) + " " + str(entry.package.author) + " " + str(entry.package.description) + " " + " ".join(entry.package.tags)
+		var searchable: String = _title(entry) + " " + str(entry.package.design_id) + " " + str(entry.package.author) + " " + str(entry.package.description) + " " + " ".join(entry.package.tags)
 		if not _search.text.strip_edges().is_empty() and not searchable.to_lower().contains(_search.text.strip_edges().to_lower()): continue
+		# Existing preparation is pure and remains the authority for usability.
+		if not _availability.has(entry.key):
+			_availability[entry.key] = prepare_template.is_valid() and bool(prepare_template.call(entry.package).get("ok", false))
+		entry["available"] = _availability[entry.key]
+		visible_entries.append(entry)
+	if _sort.selected > 0: visible_entries.sort_custom(_entry_before)
+	var count: int = 0
+	for entry: Dictionary in visible_entries:
 		count += 1
+		_visible_keys.append(entry.key)
 		var button: Button = _button(_list, "", _select.bind(str(entry.key)), "Template_" + str(count))
-		button.text = ("★ " if entry.key in _favorites else "") + _title(entry) + "\n" + Text.text("BP_BUILTIN" if entry.builtin else "BP_LOCAL")
+		button.text = ("★ " if entry.key in _favorites else "") + _title(entry) + "\n" + Text.text("BP_BUILTIN" if entry.builtin else "BP_LOCAL") + " · " + Text.format_text("BP_REVISION", {"revision": int(entry.package.revision)}) + " · " + Text.text("BP_USABLE" if entry.available else "BP_RESTRICTED") + "\n" + str(entry.package.design_id)
+		button.tooltip_text = Presentation.identity(entry.package) + "\n" + str(entry.package.author)
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		button.toggle_mode = true
 		button.set_pressed_no_signal(entry.key == _selected)
 		button.set_meta("template_key", entry.key)
 	if count == 0: Style.paragraph(_list, Text.text("BP_NO_FAVORITES" if _favorites_only.button_pressed else "BP_NO_RESULTS"), 18)
+	if _use != null:
+		if _availability.has(_selected) and _can_use != bool(_availability[_selected]): _refresh_details()
+		_selection_notice.visible = not _entry().is_empty() and not _selected in _visible_keys
+		_selection_notice.text = Text.text("BP_SELECTION_FILTERED")
+		_use.disabled = not _can_use or not _selected in _visible_keys
+
+
+func _entry_before(a: Dictionary, b: Dictionary) -> bool:
+	if _sort.selected == 3 and a.available != b.available: return a.available
+	if _sort.selected == 2 and a.package.revision != b.package.revision: return a.package.revision > b.package.revision
+	var title_order: int = _title(a).to_lower().naturalnocasecmp_to(_title(b).to_lower())
+	if title_order != 0: return title_order < 0
+	return str(a.key) < str(b.key)
+
+
+func _current_for_comparison() -> Dictionary:
+	if compare_current.is_valid(): return compare_current.call().duplicate(true)
+	if capture_current.is_valid(): return capture_current.call().duplicate(true)
+	if start_mode and _start_baseline.is_empty(): _start_baseline = Package.Creature.create_default()
+	return _start_baseline.duplicate(true) if start_mode else {}
+
+
+func _preparation_context() -> Dictionary:
+	# Reuse pure list checks only while the receiving form and actual unlock/phase
+	# context match. Selection and adoption still call the authoritative preparer.
+	var state: Node = get_node_or_null("/root/GameState")
+	var progression: Node = get_node_or_null("/root/ProgressionService")
+	var saves: Node = get_node_or_null("/root/SaveGameService")
+	return {"current": _current_for_comparison(), "phase": state.get("current_phase") if state != null else -1,
+		"unlocked": progression.call("get_unlocked_part_ids") if progression != null else [],
+		"session": saves.get("session_active") if saves != null else false,
+		"transition": saves.call("is_phase_transition_active") if saves != null else false}
 
 
 func _select(key: String) -> void:
-	_clear_success()
+	_last_result.clear()
+	_status.hide()
 	_selected = key
 	_show_detail = true
 	_build_list()
@@ -240,29 +318,42 @@ func _select(key: String) -> void:
 func _refresh_details() -> void:
 	var entry: Dictionary = _entry()
 	_refresh_favorite()
+	_can_use = false
 	_use.disabled = true
 	_export.disabled = entry.is_empty()
 	_remove.disabled = entry.is_empty() or entry.get("builtin", true)
+	_selection_notice.visible = not entry.is_empty() and not _selected in _visible_keys
+	_selection_notice.text = Text.text("BP_SELECTION_FILTERED")
 	if entry.is_empty():
+		_name.text = ""
+		_origin.text = ""
+		_requirements.text = Text.text("BP_NO_RESULTS")
+		_comparison.text = ""
 		_preview.clear()
+		_preview_blueprint.clear()
 		return
+	_name.text = _title(entry)
+	_origin.text = ""
+	_comparison.text = ""
 	var checked: Dictionary = Package.inspect(entry.package)
 	if not checked.ok:
 		_requirements.text = error_text(checked)
 		_preview.clear()
+		_preview_blueprint.clear()
 		return
-	_name.text = _title(entry)
-	var author: String = str(entry.package.author)
-	_origin.text = Text.format_text("BP_AUTHOR", {"author": author}) if not author.is_empty() else Text.text("BP_AUTHOR_UNKNOWN")
-	if not str(entry.package.description).is_empty(): _origin.text += "\n" + str(entry.package.description)
-	if not entry.package.provenance.is_empty():
-		_origin.text += "\n" + Text.format_text("BP_SOURCES", {"count": entry.package.provenance.size()})
-	_preview.show_blueprint(checked.preview)
-	_preview._angle = -2.55
-	_preview._frame_camera()
+	_origin.text = Presentation.origin(entry)
+	if _preview_blueprint != checked.preview:
+		_preview_blueprint = checked.preview.duplicate(true)
+		_preview.show_blueprint(checked.preview)
+		_preview._angle = -2.55
+		_preview._frame_camera()
 	var result: Dictionary = prepare_template.call(entry.package) if prepare_template.is_valid() else {"ok": false, "code": "no_campaign"}
 	_requirements.text = Text.format_text("BP_COMPLEXITY", {"count": checked.stats.complexity, "limit": checked.stats.complexity_limit}) + "\n" + (Text.text("BP_AVAILABLE_START" if start_mode else "BP_AVAILABLE") if result.ok else error_text(result))
-	_use.disabled = not result.ok
+	_reviewed_current = _current_for_comparison()
+	_comparison.text = Presentation.compare(_reviewed_current, checked.preview) + "\n\n" + Text.text("BP_START_LIMITS" if start_mode else "BP_ADOPT_LIMITS")
+	_can_use = result.ok
+	_availability[entry.key] = _can_use
+	_use.disabled = not _can_use or not _selected in _visible_keys
 
 
 func _refresh_favorite() -> void:
@@ -288,14 +379,23 @@ func _toggle_favorite() -> void:
 
 func _choose() -> void:
 	var entry: Dictionary = _entry()
-	if entry.is_empty(): return
+	if entry.is_empty() or _use.disabled or not prepare_template.is_valid() or not _selected in _visible_keys: return
 	var package: Dictionary = entry.package
 	if not entry.builtin:
 		var latest: Dictionary = Library.get_package(_selected, library_path)
 		if not latest.ok:
 			show_result(latest)
+			_use.disabled = true
+			return
+		if not Package.same_content(package, latest.package):
+			reload(_selected)
+			show_result({"ok": false, "code": "selection_changed"})
 			return
 		package = latest.package
+	if _reviewed_current != _current_for_comparison():
+		_refresh_details()
+		show_result({"ok": false, "code": "selection_changed"})
+		return
 	var result: Dictionary = prepare_template.call(package)
 	if not result.ok:
 		show_result(result)
@@ -372,10 +472,12 @@ static func error_text(result: Dictionary) -> String:
 	if code == "locked_parts":
 		var names: Array[String] = []
 		for id in result.get("missing_parts", []):
-			var part: Dictionary = Package.Parts.get_part(str(id))
-			names.append(Text.text(str(part.get("name", ""))))
+			names.append(Presentation.part_name(str(id)))
 		return Text.format_text("BP_LOCKED", {"parts": ", ".join(names)})
+	if code == "unknown_part" or code == "missing_part":
+		return Text.format_text("BP_ERROR_PART_MISSING", {"part": result.get("item", "")})
 	var key: String = {"library_unreadable": "BP_ERROR_LIBRARY", "library_full": "BP_ERROR_FULL",
+		"selection_changed": "BP_SELECTION_CHANGED", "unsupported_catalog": "BP_ERROR_CATALOG",
 		"favorites_full": "BP_ERROR_FAVORITES_FULL",
 		"editor_incompatible": "BP_ERROR_EDITOR",
 		"revision_conflict": "BP_ERROR_CONFLICT", "destination_conflict": "BP_ERROR_DESTINATION",
@@ -435,6 +537,10 @@ func _language_changed(_locale: String) -> void:
 	_filter.clear()
 	for key in ["BP_ALL", "BP_BUILTINS", "BP_LOCALS"]: _filter.add_item(Text.text(key))
 	_filter.select(selected)
+	var sort_selected: int = maxi(_sort.selected, 0)
+	_sort.clear()
+	for key in ["BP_SORT_DEFAULT", "BP_SORT_NAME", "BP_SORT_REVISION", "BP_SORT_USABLE"]: _sort.add_item(Text.text(key))
+	_sort.select(sort_selected)
 	_use.text = Text.text("BP_SELECT_START" if start_mode else "BP_USE")
 	_delete.title = Text.text("BP_REMOVE")
 	_delete.ok_button_text = Text.text("BP_REMOVE")
