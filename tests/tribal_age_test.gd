@@ -19,6 +19,9 @@ func _initialize() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
+	# The action assertions below use German captions. Keep this fixture
+	# deterministic on native Windows too; _check_minimap covers DE/EN layouts.
+	root.get_node("LocaleManager")._apply("de")
 	state = root.get_node("GameState")
 	saves = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
