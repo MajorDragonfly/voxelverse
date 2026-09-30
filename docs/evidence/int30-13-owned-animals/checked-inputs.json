@@ -1,0 +1,87 @@
+{
+  "local_code_commit": "ac06b16f78e6fc6df799b90da59d05e3c1ae4a08",
+  "published_code_commit": "672be5ccacdd05cd7609c48b2b0158a9516cd26b",
+  "code_tree": "722f03727f1038fe372fd960f56a2c29159121b9",
+  "all_godot_inputs_identical": true,
+  "files": [
+    {
+      "path": "docs/evidence/int30-13-owned-animals/integration-append.md",
+      "headless_input_sha256": "a7a48ba02b801973e46f64c07b790dd323420997735228873b21f5334ffb8c8e",
+      "code_commit_file_sha256": "a7a48ba02b801973e46f64c07b790dd323420997735228873b21f5334ffb8c8e",
+      "same": true
+    },
+    {
+      "path": "docs/evidence/int30-13-owned-animals/localization-append.json",
+      "headless_input_sha256": "36bbbc5131987474457cf77bd75d71b901d8e1501e2d18ca56091292c1f6e8d0",
+      "code_commit_file_sha256": "36bbbc5131987474457cf77bd75d71b901d8e1501e2d18ca56091292c1f6e8d0",
+      "same": true
+    },
+    {
+      "path": "tests/fixtures/owned_animal_browsing_checks.gd",
+      "headless_input_sha256": "0d010b72a865134fd4ce396ca266d404040bb28472f9aeb681b478f95de286cc",
+      "code_commit_file_sha256": "0d010b72a865134fd4ce396ca266d404040bb28472f9aeb681b478f95de286cc",
+      "same": true
+    },
+    {
+      "path": "tests/fixtures/owned_animal_browsing_checks.gd.uid",
+      "headless_input_sha256": "43743e84131dd05345db1eafb096ca36e3d7f89fc3ca9fafba282fca43692794",
+      "code_commit_file_sha256": "43743e84131dd05345db1eafb096ca36e3d7f89fc3ca9fafba282fca43692794",
+      "same": true
+    },
+    {
+      "path": "tests/owned_animal_localization_test.gd",
+      "headless_input_sha256": "62e6fd98b9984833916d673eed73b1906317d0746ea28841560489aea783a14f",
+      "code_commit_file_sha256": "62e6fd98b9984833916d673eed73b1906317d0746ea28841560489aea783a14f",
+      "same": true
+    },
+    {
+      "path": "tools/review_int30_owned_animals.py",
+      "headless_input_sha256": "f085a993932ce5cb5b714b518d3f3bcab047f9d7a136ccd4c6974e612860cfd2",
+      "code_commit_file_sha256": "e5f4d61c340bf4520168ac1b80237977b52ccf845317c86e13e5d0d2393e23c9",
+      "same": false
+    },
+    {
+      "path": "ui/discovery/discovery_journal.gd",
+      "headless_input_sha256": "252904ddc7544f3c454f8df0798ae2512d4a50ff6fba93f3829a0b52041adffb",
+      "code_commit_file_sha256": "252904ddc7544f3c454f8df0798ae2512d4a50ff6fba93f3829a0b52041adffb",
+      "same": true
+    },
+    {
+      "path": "ui/discovery/owned_animal_controls.gd",
+      "headless_input_sha256": "4333f3251f6a4b80397650a2eef33e7acd9c85f70f38042dcb14397be301f35b",
+      "code_commit_file_sha256": "4333f3251f6a4b80397650a2eef33e7acd9c85f70f38042dcb14397be301f35b",
+      "same": true
+    },
+    {
+      "path": "ui/discovery/owned_animal_controls.gd.uid",
+      "headless_input_sha256": "1eba73326cef47427f3dd4ef896bdf4b0acd4ba28efc08880537e335a39a0c09",
+      "code_commit_file_sha256": "1eba73326cef47427f3dd4ef896bdf4b0acd4ba28efc08880537e335a39a0c09",
+      "same": true
+    },
+    {
+      "path": "ui/discovery/owned_animal_labels.gd",
+      "headless_input_sha256": "78c1aba6324ee70ebe7a792512a13df8708e6b15d138d70838325086c062004c",
+      "code_commit_file_sha256": "78c1aba6324ee70ebe7a792512a13df8708e6b15d138d70838325086c062004c",
+      "same": true
+    },
+    {
+      "path": "ui/discovery/owned_animal_labels.gd.uid",
+      "headless_input_sha256": "d841404f6ab406b7ab5da3d97f1eac81f6b26be96bbea0fc5ca5e1e795474197",
+      "code_commit_file_sha256": "d841404f6ab406b7ab5da3d97f1eac81f6b26be96bbea0fc5ca5e1e795474197",
+      "same": true
+    },
+    {
+      "path": "ui/discovery/owned_animal_presentation.gd",
+      "headless_input_sha256": "ce416864da2e4d4769ded8d4f181b40ecb24fa32aa6e0e4fc03819d4be3cb1ea",
+      "code_commit_file_sha256": "ce416864da2e4d4769ded8d4f181b40ecb24fa32aa6e0e4fc03819d4be3cb1ea",
+      "same": true
+    },
+    {
+      "path": "ui/discovery/owned_animal_reader.gd",
+      "headless_input_sha256": "0ef48c69331cd719815f5fe6de0a18b5ce9db4f0383fd68f7696fb40199cd20a",
+      "code_commit_file_sha256": "0ef48c69331cd719815f5fe6de0a18b5ce9db4f0383fd68f7696fb40199cd20a",
+      "same": true
+    }
+  ],
+  "note": "The Python render helper added provenance recording after the first headless run; all Godot code/fixtures/UIDs and localization append inputs are byte-identical. The clean code commit was then checked by the two recovery tests and the complete graphic run with stable provenance."
+}

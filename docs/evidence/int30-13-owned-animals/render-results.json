@@ -1,0 +1,198 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "screenshots": [
+    {
+      "name": "owned-browser-de-800x600-150-follow.png",
+      "sha256": "401a9ea53959d1469f550eea868315f39dbcbad491a125807f3225ca048be880"
+    },
+    {
+      "name": "owned-browser-de-empty.png",
+      "sha256": "f05d5fba2b242f5347a911e08dde593232dafcec6241580bbc034f85a1509189"
+    },
+    {
+      "name": "owned-browser-de-known-role.png",
+      "sha256": "fa8cfeb3220167bb78132725648e293a43319143e2c31ff5ea322f29ef3fa297"
+    },
+    {
+      "name": "owned-browser-de-role-detail.png",
+      "sha256": "9c8d663fbecfce1cc3df521fb57511949d1dc69ce93e92dbb8414cf75773cf55"
+    },
+    {
+      "name": "owned-browser-en-800x600-150-follow.png",
+      "sha256": "951f5c68606acc6c944b13eae1aa976ddd457799d6f570d309e20e81324f63b3"
+    },
+    {
+      "name": "owned-browser-en-known-role.png",
+      "sha256": "f1c4ba1a2db62a6108ccccbe388193bbd13723b9051b2b80605ece092651457c"
+    },
+    {
+      "name": "owned-browser-en-role-detail.png",
+      "sha256": "f1c4ba1a2db62a6108ccccbe388193bbd13723b9051b2b80605ece092651457c"
+    },
+    {
+      "name": "owned-de-1280x720-100.png",
+      "sha256": "e35f0cba17fa73978926d8f260f028ae02b57f16f085965810777df46a0c4124"
+    },
+    {
+      "name": "owned-de-1280x720-150.png",
+      "sha256": "bb42d69822a2a804f28039b029e4195e8cccb9ddad43a097246c615b62525827"
+    },
+    {
+      "name": "owned-de-1920x1080-100.png",
+      "sha256": "5edc1229378cad8f8c1da05d99b91a5a24657e5e71cd79f46114cf0598772a87"
+    },
+    {
+      "name": "owned-de-1920x1080-150.png",
+      "sha256": "a354ef86ef28bf16a35187c8eaa64396af9ac8591468520b95ae4187cae30417"
+    },
+    {
+      "name": "owned-de-800x600-100.png",
+      "sha256": "d655641d83a87571ebc54b46c116d9a26bd61aa86efd3cbb96992039a967defa"
+    },
+    {
+      "name": "owned-de-800x600-150-dead.png",
+      "sha256": "efd8e831f055209db1b353c6fde2ec8df30ea8c43c953eac5563ffe5adce901a"
+    },
+    {
+      "name": "owned-de-800x600-150-detail.png",
+      "sha256": "1fe92fb374fa2570acb4567d07fc6c2bb9592c5c4388df9e16f28cb632a487f9"
+    },
+    {
+      "name": "owned-de-800x600-150-empty.png",
+      "sha256": "986e36e2df0b2de3c4ef94e15a0a2adfbe0811c3261d0936c9c04467ac4135cb"
+    },
+    {
+      "name": "owned-de-800x600-150-invalid.png",
+      "sha256": "c8536713fc8a4216996662c0dd06fbf59586aa93f26c49fa2f41fd018181d4e7"
+    },
+    {
+      "name": "owned-de-800x600-150.png",
+      "sha256": "85dc27ce05485522a6082fc7acfc3622e28b08ebf812289c6b370b9365a2640b"
+    },
+    {
+      "name": "owned-en-1280x720-100.png",
+      "sha256": "0c0127681b44e6055dd12091d7b6b59e09c14806d5c0561e36d4c2d4e5ae0f93"
+    },
+    {
+      "name": "owned-en-1280x720-150.png",
+      "sha256": "11c4150e046526411f22f2cae3d19e53f84696af342def586d94a330d8787cb7"
+    },
+    {
+      "name": "owned-en-1920x1080-100.png",
+      "sha256": "b2f99e1a8befe328a92a7625f6e520830a62f550a3f23f083a236a15b192e5fa"
+    },
+    {
+      "name": "owned-en-1920x1080-150.png",
+      "sha256": "8353d5ad32f16d727b2a7dd93cf9bb8d6e799c980a869f29f69aadfdea2050df"
+    },
+    {
+      "name": "owned-en-800x600-100.png",
+      "sha256": "2bd2f4e49b932abdb985d08728cb293a0bd1dc3eb35011476056559da2d6a832"
+    },
+    {
+      "name": "owned-en-800x600-150-dead.png",
+      "sha256": "5ac60c08e5e31a42f98785e3f22223b5b186801227e1d6cc9ecb29b6a6785106"
+    },
+    {
+      "name": "owned-en-800x600-150-detail.png",
+      "sha256": "6625bbd32b0a66f1810d7b204ab4da1b8d9352f9e918a79fb14b6b9fb4684e81"
+    },
+    {
+      "name": "owned-en-800x600-150-empty.png",
+      "sha256": "4997c7fafdbafc3707434b81d26f706630ca80e65c61bbefc21a257c24ce8e8e"
+    },
+    {
+      "name": "owned-en-800x600-150-invalid.png",
+      "sha256": "7012d31da014c38b1e687ad7dae791b358ff7bdad1cd145cebabf672cc2910ea"
+    },
+    {
+      "name": "owned-en-800x600-150.png",
+      "sha256": "4f1504a46764ed179e52e138964e61148a12d3ea51eb78d20bf1f823ec964621"
+    }
+  ],
+  "renderer": "gl_compatibility",
+  "command": [
+    "/workspace/scratch/130061fc1770/render-runtime/godot",
+    "--path",
+    "/workspace/scratch/b4c338665d94/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/owned_animal_localization_test.gd",
+    "--",
+    "--browser-capture",
+    "--capture",
+    "/tmp/int30-owned-review-hfrlvxy_"
+  ],
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "ac06b16f78e6fc6df799b90da59d05e3c1ae4a08",
+      "tree": "722f03727f1038fe372fd960f56a2c29159121b9",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "0f88ced30ab7bab46ff01fc3796c9902f846edbb6f43380209d4d5a61f49e285",
+      "source_sha256": "961f6d3cc0af7b44b221ce624bd477823866d01354531c2af0f9c45b759f0dc9",
+      "complete": true,
+      "file_count": 3964,
+      "bytes": 125293511,
+      "bytes_hashed": 125293511,
+      "seconds": 27.8344
+    },
+    "end": {
+      "available": true,
+      "commit": "ac06b16f78e6fc6df799b90da59d05e3c1ae4a08",
+      "tree": "722f03727f1038fe372fd960f56a2c29159121b9",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "0f88ced30ab7bab46ff01fc3796c9902f846edbb6f43380209d4d5a61f49e285",
+      "source_sha256": "961f6d3cc0af7b44b221ce624bd477823866d01354531c2af0f9c45b759f0dc9",
+      "complete": true,
+      "file_count": 3964,
+      "bytes": 125293511,
+      "bytes_hashed": 125293511,
+      "seconds": 2.4486
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "da18fbb8eda2d9944c189dfa861686a37765ca711e953f875cec4ac05854be33"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "da18fbb8eda2d9944c189dfa861686a37765ca711e953f875cec4ac05854be33"
+      }
+    },
+    "observations": [
+      {
+        "after": "render",
+        "source": {
+          "available": true,
+          "commit": "ac06b16f78e6fc6df799b90da59d05e3c1ae4a08",
+          "tree": "722f03727f1038fe372fd960f56a2c29159121b9",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "0f88ced30ab7bab46ff01fc3796c9902f846edbb6f43380209d4d5a61f49e285",
+          "source_sha256": "961f6d3cc0af7b44b221ce624bd477823866d01354531c2af0f9c45b759f0dc9",
+          "complete": true,
+          "file_count": 3964,
+          "bytes": 125293511,
+          "bytes_hashed": 125293511,
+          "seconds": 2.4486
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "environment": {
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NUM_THREADS": "2"
+  },
+  "scope": "Real shared book and D2 transactions/restart; 127 copied D2 records for layouts and 6 copied records with observed D1 test profiles for browser assertions. Mouse opening and keyboard selection of actual dropdowns."
+}
