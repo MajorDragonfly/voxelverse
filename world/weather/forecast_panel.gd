@@ -145,7 +145,25 @@ func _refresh() -> void:
 		_warning.text = Text.format_text("WEATHER_STORM_APPROACHES", {"minutes": storm_minutes})
 	var screen: Vector2 = Layout.screen_size(self)
 	var width: float = minf(292.0 if screen.x >= 1000.0 else 280.0, screen.x - 32.0)
-	Layout.place(_panel, Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 164.0 if _warning.visible else 143.0)))
+	var placement := Rect2(Vector2(screen.x - width - 16.0, 16.0), Vector2(width, 164.0 if _warning.visible else 143.0))
+	Layout.place(_panel, _avoid_tribe_controls(placement))
+
+
+func _avoid_tribe_controls(placement: Rect2) -> Rect2:
+	# Read the existing HUD's actual bounds; its owner remains free to relayout.
+	var controller: Node = get_tree().get_first_node_in_group(&"tribe_controller")
+	if controller == null: return placement
+	var canvas: Node = controller.get("panel")
+	if not is_instance_valid(canvas): return placement
+	var factor: float = Layout.canvas_scale(self)
+	for node_name: String in ["TribalAgeEntry", "TribeResourceBar"]:
+		var control := canvas.get_node_or_null(node_name) as Control
+		if control == null or not control.is_visible_in_tree(): continue
+		var bounds: Rect2 = control.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, control.size)
+		bounds.position /= factor
+		bounds.size /= factor
+		if bounds.intersects(placement): placement.position.y = bounds.end.y + Layout.GAP
+	return placement
 
 
 static func _is_upcoming_storm(entry: Dictionary) -> bool:

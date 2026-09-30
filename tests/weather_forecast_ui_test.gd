@@ -10,6 +10,9 @@ var captures: String = ""
 class PlayerStub extends Node:
 	var inspection_mode_enabled: bool = false
 
+class TribeStub extends Node:
+	var panel: CanvasLayer
+	func is_active() -> bool: return false
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -131,6 +134,7 @@ func _run() -> void:
 	panel.present(other, other_values, player)
 	_expect(panel._panel.visible and panel._forecast == other_values and panel._snapshot.body_id == "forecast-b",
 		"Body/time change kept stale forecast rows.")
+	await _tribe_overlap_contract(stage, panel, player, weather, values)
 	root.get_node("LocaleManager")._apply(language_before)
 	stage.queue_free()
 	await process_frame
@@ -142,6 +146,48 @@ func _run() -> void:
 	for failure in failures: push_error(failure)
 	print("WEATHER_FORECAST_UI: three local windows, DE/EN, 800x600/1280x720/1920x1080, preview, pause and body isolation: ", failures.is_empty())
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+
+func _tribe_overlap_contract(stage: Node, panel: Node, player: Node, weather: Dictionary, values: Array) -> void:
+	var controller := TribeStub.new()
+	stage.add_child(controller)
+	controller.add_to_group(&"tribe_controller")
+	var hud := CanvasLayer.new()
+	hud.layer = 40
+	stage.add_child(hud)
+	controller.panel = hud
+	var entry := Button.new()
+	entry.name = "TribalAgeEntry"
+	hud.add_child(entry)
+	var resource_bar := PanelContainer.new()
+	resource_bar.name = "TribeResourceBar"
+	hud.add_child(resource_bar)
+	resource_bar.hide()
+	for language: String in ["de", "en"]:
+		root.get_node("LocaleManager")._apply(language)
+		entry.text = TranslationServer.translate("TRIBE_AGE_ENTRY")
+		for size: Vector2i in [Vector2i(800, 600), Vector2i(1280, 720), Vector2i(1920, 1080)]:
+			root.size = size
+			entry.position = Vector2(size.x - 282, 76)
+			entry.size = Vector2(260, 46)
+			panel.present(weather, values, player)
+			for frame in range(3): await process_frame
+			_expect(not panel._panel.get_global_rect().intersects(entry.get_global_rect()),
+				"Tribal age entry covers the weather forecast at " + str(size))
+			_expect(root.get_visible_rect().encloses(panel._panel.get_global_rect()), "Reserved forecast left the viewport.")
+			if not captures.is_empty(): await _capture("forecast-entry-%dx%d-%s.png" % [size.x, size.y, language])
+	entry.hide()
+	resource_bar.show()
+	resource_bar.position = Vector2(root.size.x - 360, 18)
+	resource_bar.size = Vector2(344, 134)
+	for frame in range(3): await process_frame
+	_expect(not panel._panel.get_global_rect().intersects(resource_bar.get_global_rect()), "Tribal resource bar covers the forecast.")
+	resource_bar.hide()
+	for frame in range(3): await process_frame
+	_expect(absf(panel._panel.position.y - 16.0) < 0.1, "Forecast retained a removed HUD reservation.")
+	controller.queue_free()
+	hud.queue_free()
+	await process_frame
 
 
 func _capture(filename: String) -> void:

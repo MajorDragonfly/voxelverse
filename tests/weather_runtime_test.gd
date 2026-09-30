@@ -119,19 +119,25 @@ func _campaign_contract() -> void:
 		and weather._forecast_panel._snapshot.body_id == state.active_body_id
 		and weather._forecast_panel._forecast[0].in_seconds == 60.0,
 		"Live forecast UI did not show this body's local forecast windows.")
+	var tribe: Node = get_first_node_in_group(&"tribe_controller")
+	_expect(tribe != null and not weather._forecast_panel._panel.get_global_rect().intersects(tribe.panel.entry.get_global_rect()),
+		"Actual campaign tribal age entry covers the weather forecast.")
 	# Advance less than the expensive forecast refresh interval: the day clock
 	# must still match the current atmosphere sample, including rewinding a save.
 	var air: Node = current_scene._atmosphere
 	var initial_clock: float = state.campaign.data.elapsed_seconds
-	for clock: float in [initial_clock + 0.25, initial_clock + 0.75, initial_clock]:
-		state.campaign.data.elapsed_seconds = clock
-		weather._forecast_elapsed = 0.0
-		weather._process(0.01)
-		air.update_view(0.0, true)
-		_expect(is_equal_approx(float(weather._forecast_panel._snapshot.elapsed_seconds), air._elapsed),
-			"Day UI and sky read different campaign clocks between forecast refreshes.")
-		_expect(absf(weather._forecast_panel._day_bar.value - air.day_progress(clock) * 100.0) < 0.001,
-			"The live day bar retained a previous campaign time.")
+	# Invoke the actual live clock owner with a known frame delta. This checks
+	# normal progression and all allowed tempos independently of host frame time.
+	for speed: float in [1.0, 2.0, 4.0, 0.0]:
+		var before: float = state.campaign.data.elapsed_seconds
+		state.set_simulation_speed(speed)
+		state._process(0.25)
+		_expect(is_equal_approx(state.campaign.data.elapsed_seconds, before + 0.25 * speed),
+			"Campaign weather clock did not respect simulation speed " + str(speed))
+		_assert_day_clock(weather, air)
+	# A loaded/reviewed clock can rewind within the one-second forecast cadence.
+	state.campaign.data.elapsed_seconds = initial_clock
+	_assert_day_clock(weather, air)
 	weather._forecast_elapsed = 1.0
 	weather._process(0.0)
 	if not captures.is_empty(): await _capture_campaign_days(weather, air)
@@ -203,6 +209,15 @@ func _campaign_contract() -> void:
 		await scene_changed
 	else: _expect(false, "Weather reload failed.")
 	_expect(get_nodes_in_group(&"campaign_weather").is_empty(), "Weather leaked into main menu.")
+
+func _assert_day_clock(weather: Node, air: Node) -> void:
+	weather._forecast_elapsed = 0.0
+	weather._process(0.01)
+	air.update_view(0.0, true)
+	_expect(is_equal_approx(float(weather._forecast_panel._snapshot.elapsed_seconds), air._elapsed),
+		"Day UI and sky read different campaign clocks between forecast refreshes.")
+	_expect(absf(weather._forecast_panel._day_bar.value - air.day_progress(air._elapsed) * 100.0) < 0.001,
+		"The live day bar retained a previous campaign time.")
 
 func _travel_climates() -> void:
 	var state: Node = root.get_node("GameState")
