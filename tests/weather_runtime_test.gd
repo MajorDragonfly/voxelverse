@@ -182,8 +182,11 @@ func _campaign_contract() -> void:
 	await scene_changed
 	await _open(path)
 	for i in range(3): await process_frame
-	if current_scene.scene_file_path == Surface.SCENE:
+	_expect(not flow.loading, "Weather reload exceeded the normal campaign load budget.")
+	if current_scene.scene_file_path == Surface.SCENE and not flow.loading:
 		var restored: Dictionary = current_scene.get_node("Weather").snapshot()
+		_expect(not restored.is_empty(), "Reload did not publish campaign weather.")
+		if restored.is_empty(): return
 		current_scene._atmosphere.update_view(0.0, true)
 		_expect(current_scene._atmosphere._sun_direction.is_equal_approx(saved_sun)
 			and current_scene._atmosphere.sky_material.get_shader_parameter("cloud_offset").is_equal_approx(saved_clouds),
