@@ -8,6 +8,7 @@ const MIN_TILT: float = 3.0
 const MAX_TILT: float = 80.0
 const PAN_METRES_PER_SECOND: float = 32.0
 const FAST_FACTOR: float = 2.0
+const CLEARANCE_REFRESH_SECONDS: float = 0.2
 const MOTION := ["move_forward", "move_back", "move_left", "move_right",
 	"tribe_turn_left", "tribe_turn_right", "tribe_tilt_up", "tribe_tilt_down"]
 var controller: Node
@@ -21,6 +22,7 @@ var fast_pan: bool = false
 var _preferences: RefCounted
 var _default_tilt: float = 55.0
 var _last_pose: Array = []
+var _clearance_refresh_remaining: float = 0.0
 
 func setup(owner: Node) -> void:
 	controller = owner
@@ -95,6 +97,7 @@ func advance(delta: float) -> void:
 		cancel_input()
 		return
 	var dt: float = minf(delta, 0.1)
+	_clearance_refresh_remaining = maxf(_clearance_refresh_remaining - dt, 0.0)
 	yaw = wrapf(yaw + (_axis("tribe_turn_right", "tribe_turn_left") * 75.0 * dt), -180.0, 180.0)
 	tilt = clampf(tilt + _axis("tribe_tilt_up", "tribe_tilt_down") * 45.0 * dt, MIN_TILT, MAX_TILT)
 	var motion := Vector2(_axis("move_right", "move_left"), _axis("move_back", "move_forward")).limit_length(1.0)
@@ -175,9 +178,12 @@ func reset_view() -> void:
 func update_camera() -> void:
 	var camera: Camera3D = controller.camera
 	if not is_instance_valid(camera): return
-	var pose: Array = [controller._focus, yaw, tilt, current_zoom]
-	if pose == _last_pose: return
+	# Streaming/construction can change collisions while the view stays still.
+	# Resize also changes the orthographic near plane without changing its pose.
+	var pose: Array = [controller._focus, yaw, tilt, current_zoom, camera.get_viewport().get_visible_rect().size]
+	if pose == _last_pose and _clearance_refresh_remaining > 0.0: return
 	_last_pose = pose
+	_clearance_refresh_remaining = CLEARANCE_REFRESH_SECONDS
 	var frame: Basis = view_frame()
 	var angle: float = deg_to_rad(tilt)
 	var low_view: float = 1.0 - smoothstep(MIN_TILT, 25.0, tilt)
