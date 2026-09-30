@@ -39,11 +39,15 @@ func _run() -> void:
 	_check(player.last_scan_rays <= 2, "Edge scan used too many physics rays")
 	var edge_rays: int = player.last_scan_rays
 	var initial_ring: Dictionary = ring.duplicate()
+	# The assertions above retain the legacy physical broad-phase API. Actual
+	# production progress must be tested on visible meshes, not an empty capsule.
+	_move_to_screen(creature, creature.get_node("CollisionShape3D"), camera, ring.center)
+	await _frames()
 	for tick in range(12): scanner._physics_process(0.1)
-	_check(scanner.ratio() > 0.4, "Edge overlap did not accumulate scan progress")
+	_check(scanner.ratio() > 0.4, "Visible animal did not accumulate scan progress")
 	await _frames()
 	var reticle: Control = player.get_node("HUD/CreatureScanReticle")
-	_check(reticle.has_target and (reticle.get_global_transform_with_canvas() * reticle.target_pixel).distance_to(player.get_scan_target_pixel()) < 1.0, "Selected animal was not marked at its visible pixel")
+	_check(reticle.has_target and (reticle.get_global_transform_with_canvas() * reticle.target_pixel).distance_to(scanner.target_pixel) < 1.0, "Selected animal was not marked at its visible pixel")
 	var wall := StaticBody3D.new()
 	var collider := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
@@ -56,6 +60,8 @@ func _run() -> void:
 	scanner._physics_process(0.1)
 	_check(scanner.target == null and scanner.ratio() == 0.0, "Wall did not interrupt the edge scan")
 	wall.queue_free()
+	await _frames()
+	_move_to_screen(creature, creature.get_node("CollisionShape3D"), camera, initial_ring.center + Vector2(float(initial_ring.radius) + radius - 0.7, 0))
 	await _frames()
 	var second: Node3D = _creature(player.global_position + Vector3(0, 0, -5), 922)
 	await _frames()
@@ -109,12 +115,18 @@ func _run() -> void:
 	scanner._physics_process(0.1)
 	_check(scanner.ratio() == 0.0, "Pause retained scan progress")
 	paused = false
-	print("SCAN_CIRCLE_EVIDENCE ", JSON.stringify({"edge_screen": projected, "edge_overlap": edge_overlap, "edge_rays": edge_rays, "initial_ring": initial_ring, "resized_ring": ring}))
-	for failure: String in failures: push_error(failure)
-	if failures.is_empty(): print("SCAN_CIRCLE_PASSED")
 	nest.queue_free()
 	creature.queue_free()
 	second.queue_free()
+	await _frames()
+	reticle.scale = Vector2.ONE
+	var visibility: RefCounted = load("res://tools/scanner_visibility_cases.gd").new()
+	var evidence: Dictionary = await visibility.run(self, player)
+	for failure: String in evidence.failures: failures.append(failure)
+	print("SCAN_VISIBLE_MOTION_EVIDENCE ", JSON.stringify(evidence))
+	print("SCAN_CIRCLE_EVIDENCE ", JSON.stringify({"edge_screen": projected, "edge_overlap": edge_overlap, "edge_rays": edge_rays, "initial_ring": initial_ring, "resized_ring": ring}))
+	for failure: String in failures: push_error(failure)
+	if failures.is_empty(): print("SCAN_CIRCLE_PASSED")
 	player.queue_free()
 	await process_frame
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
