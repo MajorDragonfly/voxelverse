@@ -5,11 +5,23 @@ const View = preload("res://world/weather/weather_view.gd")
 const Surface = preload("res://core/campaign/surface_context.gd")
 const Space = preload("res://world/surface/gameplay_space.gd")
 var failures: Array[String] = []
+var captures: String = ""
 
 func _initialize() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
+	var args: PackedStringArray = OS.get_cmdline_user_args()
+	if "--capture" in args:
+		captures = args[args.find("--capture") + 1]
+		DirAccess.make_dir_recursive_absolute(captures)
+		_expect(DisplayServer.get_name() != "headless", "Campaign captures need a real renderer.")
+		var settings: Node = root.get_node("DisplaySettings")
+		settings.display_mode = 0
+		settings.resolution = Vector2i(960, 540)
+		settings.vsync_enabled = false
+		settings._apply_settings(false)
+		root.size = Vector2i(960, 540)
 	var saves: Node = root.get_node("SaveGameService")
 	saves.autosave_enabled = false
 	await _view_contract()
@@ -122,6 +134,13 @@ func _campaign_contract() -> void:
 			"The live day bar retained a previous campaign time.")
 	weather._forecast_elapsed = 1.0
 	weather._process(0.0)
+	if not captures.is_empty(): await _capture_campaign_days(weather, air)
+	# Native day evidence is a bounded cold campaign plus fixed-clock views.
+	# The default contract still executes pause, actual slot reload and travel.
+	if not captures.is_empty() and "--capture-days-only" in OS.get_cmdline_user_args():
+		flow.return_to_title()
+		await scene_changed
+		return
 	expected = weather.snapshot()
 	var saved_sun: Vector3 = air._sun_direction
 	var saved_clouds: Vector3 = air.sky_material.get_shader_parameter("cloud_offset")
@@ -277,10 +296,49 @@ func _open(path: String) -> void:
 	var flow: Node = root.get_node("SessionFlow")
 	change_scene_to_file(flow.TITLE_SCENE)
 	await scene_changed
+	if not captures.is_empty(): RenderingServer.render_loop_enabled = false
 	flow.load_game(path)
 	var started: int = Time.get_ticks_msec()
 	while flow.loading and Time.get_ticks_msec() - started < 90000: await process_frame
 	root.get_node("SaveGameService").autosave_enabled = false
+	if not captures.is_empty(): RenderingServer.render_loop_enabled = true
+
+func _capture_campaign_days(weather: Node, air: Node) -> void:
+	var state: Node = root.get_node("GameState")
+	var previous: float = state.campaign.data.elapsed_seconds
+	var player: Node = current_scene.player
+	player.set_physics_process(false)
+	var camera: Camera3D = get_root().get_camera_3d()
+	var pose: Transform3D = camera.global_transform
+	var report: Array[Dictionary] = []
+	for phase: Dictionary in [{"id": "dawn", "seconds": 900.0}, {"id": "noon", "seconds": 1260.0},
+			{"id": "dusk", "seconds": 180.0}, {"id": "night", "seconds": 540.0}]:
+		state.campaign.data.elapsed_seconds = phase.seconds
+		weather._forecast_elapsed = 1.0
+		weather._process(0.0)
+		air.update_view(0.0, true)
+		for frame in range(8): await process_frame
+		await RenderingServer.frame_post_draw
+		_expect(camera.global_transform.is_equal_approx(pose), "Campaign comparison camera moved.")
+		_expect(root.get_texture().get_image().save_png(captures.path_join("campaign-" + str(phase.id) + ".png")) == OK,
+			"Cannot save actual campaign day capture.")
+		report.append({"phase": phase.id, "campaign_seconds": air._elapsed,
+			"ui_seconds": weather._forecast_panel._snapshot.elapsed_seconds,
+			"sun_direction": [air._sun_direction.x, air._sun_direction.y, air._sun_direction.z],
+			"sun_energy": air.sun.light_energy, "cloud_cover": weather.snapshot().cloud_cover,
+			"body_id": state.active_body_id, "camera": str(camera.global_transform),
+			"water_shader_time": current_scene.terrain.presentation.time,
+			"draw_calls": Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
+			"primitives": Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)})
+	state.campaign.data.elapsed_seconds = previous
+	weather._forecast_elapsed = 1.0
+	weather._process(0.0)
+	air.update_view(0.0, true)
+	player.set_physics_process(true)
+	FileAccess.open(captures.path_join("campaign-days.json"), FileAccess.WRITE).store_string(JSON.stringify({
+		"renderer": RenderingServer.get_current_rendering_method(), "engine": Engine.get_version_info().string,
+		"adapter": RenderingServer.get_video_adapter_name(), "scope": "Actual fixed-camera spherical campaign; simulation speed zero, canonical clock explicitly advanced. Water clock discrepancy remains a shared integration proposal.",
+		"samples": report}, "\t") + "\n")
 
 func _expect(condition: bool, message: String) -> void:
 	if not condition and not failures.has(message): failures.append(message)

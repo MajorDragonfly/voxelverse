@@ -134,8 +134,10 @@ func _run() -> void:
 	root.get_node("LocaleManager")._apply(language_before)
 	stage.queue_free()
 	await process_frame
+	var review := preload("res://world/weather/checks/weather_water_capture.gd").new()
+	var actual_sites: Dictionary = review.procedural_sites()
+	_expect(not actual_sites.sea.is_empty() and not actual_sites.lake.is_empty(), "Procedural native water views have no valid locations.")
 	if not captures.is_empty():
-		var review := preload("res://world/weather/checks/weather_water_capture.gd").new()
 		failures.append_array(await review.run(self, captures))
 	for failure in failures: push_error(failure)
 	print("WEATHER_FORECAST_UI: three local windows, DE/EN, 800x600/1280x720/1920x1080, preview, pause and body isolation: ", failures.is_empty())
