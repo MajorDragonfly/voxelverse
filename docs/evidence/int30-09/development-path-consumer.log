@@ -1,0 +1,12 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+WARNING: The gameplay and handoff for this phase are not implemented yet.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1149)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:837)
+         [2] _run (res://tests/development_path_test.gd:85)
+         [3] _choose_phase (res://tests/development_path_test.gd:205)
+         [4] _key (res://tests/development_path_test.gd:240)
+         [5] _frames (res://tests/development_path_test.gd:261)
+DEVELOPMENT_PATH_OK: published home contract, real GUI phase wallets, earned legacy, read-only navigation, load and new campaign

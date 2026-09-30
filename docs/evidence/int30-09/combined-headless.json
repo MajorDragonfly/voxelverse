@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "98be4bbc913445d23ce4b598fb32390df8594006",
+      "tree": "f6bc85dd88b163a50098fbd82d90637684ccb6ff",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "39589539c5d97999323cde4ce13940521fc957f31277f642cd486d3e5e5f7bc2",
+      "source_sha256": "9f2a6e5c8a2e62a1058def9269a16b69974eec8346b7b74a06546854d4f71ac1",
+      "complete": true,
+      "file_count": 3958,
+      "bytes": 125284485,
+      "bytes_hashed": 125284485,
+      "seconds": 2.4709
+    },
+    "end": {
+      "available": true,
+      "commit": "98be4bbc913445d23ce4b598fb32390df8594006",
+      "tree": "f6bc85dd88b163a50098fbd82d90637684ccb6ff",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "39589539c5d97999323cde4ce13940521fc957f31277f642cd486d3e5e5f7bc2",
+      "source_sha256": "9f2a6e5c8a2e62a1058def9269a16b69974eec8346b7b74a06546854d4f71ac1",
+      "complete": true,
+      "file_count": 3958,
+      "bytes": 125284485,
+      "bytes_hashed": 125284485,
+      "seconds": 2.5602
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "0754641610e7b2df55e9b353c21bf93bd08f28f7e286dcbab6ef37ba418632f3"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "0754641610e7b2df55e9b353c21bf93bd08f28f7e286dcbab6ef37ba418632f3"
+      }
+    },
+    "observations": [
+      {
+        "after": "combined route",
+        "source": {
+          "available": true,
+          "commit": "98be4bbc913445d23ce4b598fb32390df8594006",
+          "tree": "f6bc85dd88b163a50098fbd82d90637684ccb6ff",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "39589539c5d97999323cde4ce13940521fc957f31277f642cd486d3e5e5f7bc2",
+          "source_sha256": "9f2a6e5c8a2e62a1058def9269a16b69974eec8346b7b74a06546854d4f71ac1",
+          "complete": true,
+          "file_count": 3958,
+          "bytes": 125284485,
+          "bytes_hashed": 125284485,
+          "seconds": 2.5602
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "command": [
+    "/workspace/scratch/2656e69ac218/godot",
+    "--path",
+    "/workspace/scratch/2656e69ac218/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--headless",
+    "--script",
+    "res://tests/int30_menu_audio_book_test.gd"
+  ],
+  "headless": true,
+  "images": {},
+  "capture_on_demand": false,
+  "log_sha256": "46990d519af4870294238d6efcc87d10626692c10d798b794ff7791ecb74fc6b",
+  "scope": "Public spherical campaign; ordinary confirmed tribal transition; real mouse/keyboard routes, all six read-only book chapters DE/EN at actual 130% viewport scale, combined preview/mute/reset, paused time, fresh settings process. Each capture is real GL; redundant rendering of the paused world is disabled between captures. Full inherited sixteen-case menu matrix separately headless. No continuous footage, target-PC listening or native Windows acceptance."
+}

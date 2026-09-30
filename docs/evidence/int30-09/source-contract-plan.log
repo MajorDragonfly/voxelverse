@@ -1,0 +1,6 @@
+usage: validate_godot.py [-h] [--godot GODOT] [--project PROJECT]
+                         [--output OUTPUT] [--tests [TESTS ...] | --contracts
+                         CONTRACTS [CONTRACTS ...] | --changed-since REF]
+                         [--plan] [--summary] [--list-tests] [--skip-import]
+                         [--skip-main]
+validate_godot.py: error: Unregistered test: int30_menu_audio_book_test
