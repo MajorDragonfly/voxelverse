@@ -1,0 +1,16 @@
+diff --git a/tests/tribal_age_test.gd b/tests/tribal_age_test.gd
+index 1b531fc..4379e15 100644
+--- a/tests/tribal_age_test.gd
++++ b/tests/tribal_age_test.gd
+@@ -738,6 +738,11 @@ func _check_resource_transport() -> void:
+ 	tribe.village().stock.wood = 0
+ 	tribe.select_all()
+ 	await _frames(3)
++	# The last layout case cancelled a construction and requested production
++	# navigation rebuilding. A gather click must wait until that rebuild ends.
++	await _until(func() -> bool: return tribe.navigation.is_ready(), 600)
++	_expect(tribe.navigation.is_ready(), "Transport fixture navigation did not become ready.")
++	if not tribe.navigation.is_ready(): return
+ 	await _click(tribe.panel._buttons.wood)
+ 	await _until(func() -> bool: return _has_cargo(), 350)
+ 	_expect(_has_cargo(), "Resource UI fixture never picked up real transport cargo.")
