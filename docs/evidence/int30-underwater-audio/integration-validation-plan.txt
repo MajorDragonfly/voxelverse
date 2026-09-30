@@ -1,0 +1,13 @@
+VALIDATION PLAN — no tests executed
+Base: 2b1ac023db4074c2ce6b7db8fbab09ab929a8435
+HEAD: 2b1ac023db4074c2ce6b7db8fbab09ab929a8435
+Committed tree: 5f815f478ceeabefcfc50a6388e3e4b0daa2ac45 (checkout changes included below)
+Changed paths: 16
+Scope: full
+Selected tests: 248/248
+Main/runtime checks required: yes
+Contracts: audio, blueprints, campaign, creature_body, discovery_map, domestic_fauna, domestication, expedition_design (+10 more; see full JSON plan)
+Reasons: changed_registered_test=3, domain_and_direct_consumers=12, shared_infrastructure_requires_full=1
+Remove --summary to inspect the complete JSON plan and per-file hashes.
+Remove --plan and --summary to run this selection against the then-current checkout.
+Integration CI, native exports, graphics and target-PC acceptance remain separate.
