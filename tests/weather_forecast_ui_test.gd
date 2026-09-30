@@ -134,7 +134,7 @@ func _run() -> void:
 	panel.present(other, other_values, player)
 	_expect(panel._panel.visible and panel._forecast == other_values and panel._snapshot.body_id == "forecast-b",
 		"Body/time change kept stale forecast rows.")
-	await _tribe_overlap_contract(stage, panel, player, weather, values)
+	await _tribe_overlap_contract(stage, panel, notice, player, weather, values)
 	root.get_node("LocaleManager")._apply(language_before)
 	stage.queue_free()
 	await process_frame
@@ -148,7 +148,7 @@ func _run() -> void:
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
 
 
-func _tribe_overlap_contract(stage: Node, panel: Node, player: Node, weather: Dictionary, values: Array) -> void:
+func _tribe_overlap_contract(stage: Node, panel: Node, notice: Node, player: Node, weather: Dictionary, values: Array) -> void:
 	var controller := TribeStub.new()
 	stage.add_child(controller)
 	controller.add_to_group(&"tribe_controller")
@@ -176,6 +176,19 @@ func _tribe_overlap_contract(stage: Node, panel: Node, player: Node, weather: Di
 				"Tribal age entry covers the weather forecast at " + str(size))
 			_expect(root.get_visible_rect().encloses(panel._panel.get_global_rect()), "Reserved forecast left the viewport.")
 			if not captures.is_empty(): await _capture("forecast-entry-%dx%d-%s.png" % [size.x, size.y, language])
+			var preview := weather.duplicate(true)
+			preview.merge({"preview": true, "storm_preview_schema": 1, "storm_kind": "sandstorm",
+				"storm_phase": "warning", "storm_phase_remaining": 23.0}, true)
+			panel.present(preview, values, player)
+			notice.present(preview, player)
+			for frame in range(3): await process_frame
+			_expect(not panel._panel.visible and notice._panel.visible,
+				"Diagnostic banner no longer owns preview messaging.")
+			_expect(not notice._panel.get_global_rect().intersects(entry.get_global_rect()),
+				"Tribal age entry covers the diagnostic storm banner.")
+			if not captures.is_empty() and size.x == 800: await _capture("warning-entry-800x600-%s.png" % language)
+			panel.present(weather, values, player)
+			notice.present({}, null)
 	entry.hide()
 	resource_bar.show()
 	resource_bar.position = Vector2(root.size.x - 360, 18)
