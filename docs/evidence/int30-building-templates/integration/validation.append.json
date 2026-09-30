@@ -1,0 +1,8 @@
+{
+  "contract": "blueprints",
+  "add_tests": [
+    "int30_building_templates_test"
+  ],
+  "render_command": "python3 tools/review_int30_building_templates.py --godot GODOT --output OUTPUT",
+  "note": "Register once via Chat 1. Keep existing tests and CI gates."
+}

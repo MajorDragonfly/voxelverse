@@ -1,0 +1,267 @@
+{
+  "schema": 1,
+  "design_id": "design_31e599036c70e0d473a3435466f8964d",
+  "assembly_type": "building",
+  "name": "Stone Workshop",
+  "revision": 1,
+  "grid_snap": true,
+  "grid_size": 0.25,
+  "parts": [
+    {
+      "part_id": "mass_workshop",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_618fc1695f9d0af441856f08a64a83ec"
+    },
+    {
+      "part_id": "roof_gable_dark",
+      "position": [
+        0,
+        3.25,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1.35,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_8716a8c2bbfd5f7e639c8dc22bf9cadb"
+    },
+    {
+      "part_id": "utility_chimney",
+      "position": [
+        1.75,
+        1.5,
+        0.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_00e31f8ba36e27f3d097f7361d3c6e93"
+    },
+    {
+      "part_id": "opening_door_wood",
+      "position": [
+        -1.75,
+        0.25,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_3dccb8292695f860ba8734ee48b23137"
+    },
+    {
+      "part_id": "opening_window_wide",
+      "position": [
+        0.75,
+        1.75,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_2593f1f953d142d89ee94e7e39101b66"
+    },
+    {
+      "part_id": "decor_sign",
+      "position": [
+        -1.75,
+        1.5,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_b9b2a97d249b71e3a3b3571b6a74cde2"
+    },
+    {
+      "part_id": "opening_window_wide",
+      "position": [
+        -2.75,
+        1.75,
+        0
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_290934c57b09a3cc56ea7cb7c6e7d11d"
+    },
+    {
+      "part_id": "opening_window_wide",
+      "position": [
+        2.75,
+        1.75,
+        0
+      ],
+      "rotation": [
+        0,
+        270,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_beda47314e1ddd7af2dee781c13225f3"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        0,
+        1.75,
+        2
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_d1ae260cfc8241857d879d4e3e17becf"
+    },
+    {
+      "part_id": "support_column_stone",
+      "position": [
+        -2.5,
+        0,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.6,
+        1.05,
+        0.6
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_c9c6319ed0f5cc4bd7f8c39710cf3390"
+    },
+    {
+      "part_id": "support_column_stone",
+      "position": [
+        2.5,
+        0,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.6,
+        1.05,
+        0.6
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_610674baecf5af3a87814e99708188a1"
+    }
+  ],
+  "metadata": {
+    "template": {
+      "id": "building.template.workshop",
+      "revision": 1,
+      "source": "voxelverse-built-in",
+      "author": "Voxelverse",
+      "change_note": "Initial catalog-parts design; reviewed in INT30-25"
+    }
+  },
+  "building": {
+    "schema": 1,
+    "type": "industrial",
+    "style_name": "Voxel Foundations"
+  }
+}

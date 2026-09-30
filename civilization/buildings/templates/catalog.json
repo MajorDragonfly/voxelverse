@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "templates": [
+    {
+      "id": "building.template.residence",
+      "design_id": "design_de08d1782db2680af2729922c768c6c1",
+      "revision": 1,
+      "path": "designs/residence.json",
+      "title_key": "BUILDING_TEMPLATE_RESIDENCE",
+      "description_key": "BUILDING_TEMPLATE_RESIDENCE_DETAIL"
+    },
+    {
+      "id": "building.template.warehouse",
+      "design_id": "design_1ce79eed3b2cc20989fbf7b1d54ee6d2",
+      "revision": 1,
+      "path": "designs/warehouse.json",
+      "title_key": "BUILDING_TEMPLATE_WAREHOUSE",
+      "description_key": "BUILDING_TEMPLATE_WAREHOUSE_DETAIL"
+    },
+    {
+      "id": "building.template.workshop",
+      "design_id": "design_31e599036c70e0d473a3435466f8964d",
+      "revision": 1,
+      "path": "designs/workshop.json",
+      "title_key": "BUILDING_TEMPLATE_WORKSHOP",
+      "description_key": "BUILDING_TEMPLATE_WORKSHOP_DETAIL"
+    }
+  ]
+}

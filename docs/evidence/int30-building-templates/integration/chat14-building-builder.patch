@@ -1,0 +1,10 @@
+--- a/civilization/buildings/building_builder.gd
++++ b/civilization/buildings/building_builder.gd
+@@ -250,0 +251,7 @@
++	# INT30-25: optional built-in templates; editor retains history/persistence.
++	var templates := preload("res://civilization/buildings/templates/building_template_picker.gd").new()
++	templates.template_chosen.connect(func(copy: Dictionary):
++		preload("res://civilization/buildings/templates/building_template_selection.gd").apply_to_editor(self, copy)
++	)
++	right_content.add_child(templates)
++
