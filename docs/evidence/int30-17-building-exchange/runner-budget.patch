@@ -1,0 +1,12 @@
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -34,6 +34,9 @@
+ # observes real colony streaming and reload. CI reached the second load at
+ # the old 120 s aggregate cutoff; use the existing bounded world-test budget.
+ LONG_TESTS.add("living_creatures_world_test")
++# Building exchange verifies source, isolated receiver and offline restart in
++# three fresh engine processes. Preserve the existing bounded persistence budget.
++LONG_TESTS.add("building_design_exchange_test")
+ # These also include a second campaign load (editor or fresh process).
+ # Their current short-budget CI measurements reached 98.8/106.7 seconds;
+ # the two 90 s load watchdogs plus real work must fit the aggregate budget.
