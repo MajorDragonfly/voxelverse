@@ -40,10 +40,12 @@ func _exit_tree() -> void:
 
 
 func _process(delta: float) -> void:
-	attention_remaining = maxf(attention_remaining - delta, 0.0)
-	help_cooldown = maxf(help_cooldown - delta, 0.0)
-	greet_cooldown = maxf(greet_cooldown - delta, 0.0)
-	response_remaining = maxf(response_remaining - get_node("/root/GameState").simulation_delta(delta), 0.0)
+	var dt: float = get_node("/root/GameState").simulation_delta(delta)
+	if get_tree().paused or dt <= 0.0: return
+	attention_remaining = maxf(attention_remaining - dt, 0.0)
+	help_cooldown = maxf(help_cooldown - dt, 0.0)
+	greet_cooldown = maxf(greet_cooldown - dt, 0.0)
+	response_remaining = maxf(response_remaining - dt, 0.0)
 
 
 func entry() -> Dictionary:
@@ -70,7 +72,7 @@ func _restore() -> void:
 
 
 func can_reach(actor: Node, reach: float = FRIEND_RANGE) -> bool:
-	if not actor is Node3D or not actor.is_in_group(&"player") or actor.is_dead or creature.is_dead:
+	if not is_instance_valid(actor) or not actor is Node3D or not actor.is_inside_tree() or actor.is_queued_for_deletion() or not actor.is_in_group(&"player") or actor.is_dead or creature.is_dead:
 		return false
 	if get_tree().paused or not actor.is_physics_processing() or get_node("/root/GameState").current_phase != 0:
 		return false
@@ -255,6 +257,11 @@ func receive_player_attack(damage: float, actor: Node) -> bool:
 func controls_movement() -> bool:
 	if get_node("/root/GameState").current_phase != 0:
 		return false
+	# A real attack interrupts attention immediately, before the next AI sense.
+	# Keep saved trust/relationships; only the transient movement lock is released.
+	if attention_remaining > 0.0 and (creature._threat_timer > 0.0 or (attention_actor != null and not can_reach(attention_actor))):
+		attention_remaining = 0.0
+		attention_actor = null
 	if attention_remaining > 0.0:
 		creature._wander_direction = Vector3.ZERO
 		return true

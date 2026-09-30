@@ -37,7 +37,12 @@ func react(event: String) -> void:
 
 func _process(delta: float) -> void:
 	if not is_instance_valid(_preview): return
-	var dt: float = get_node("/root/GameState").simulation_delta(delta)
+	var state: Node = get_node("/root/GameState")
+	# The existing preview speed port covers gait, breathing and jaw actions.
+	# Only wildlife has this driver; workshop/player preview clocks stay owned
+	# by their callers. Run before the early return so zero speed freezes all.
+	_preview.motion_speed_scale = state.simulation_delta(1.0)
+	var dt: float = state.simulation_delta(delta)
 	if dt <= 0.0: return
 	_sample_remaining -= dt
 	_pose_remaining -= dt

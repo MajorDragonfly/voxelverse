@@ -315,9 +315,9 @@ func _refresh_label(delta: float = 0.0) -> void:
 	var state: String = str(driver.emotion.state) if driver != null else "calm"
 	# Sensing runs on a physics tick while the pose driver samples on idle ticks.
 	# Show danger as soon as the actual AI intent changes, even before its pose catches up.
-	if _intent in ["alert", "chase"]:
+	if state != "hurt" and _intent in ["alert", "chase"]:
 		state = "angry"
-	elif _intent == "flee":
+	elif state != "hurt" and _intent == "flee":
 		state = "afraid"
 	var cue: Dictionary = _emotion_cue.advance(delta, state)
 	var distance: float = global_position.distance_to(_player.global_position)

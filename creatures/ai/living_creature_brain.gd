@@ -51,7 +51,8 @@ func _physics_process(delta: float) -> void:
 		_visual_root.rotation.y = lerp_angle(_visual_root.rotation.y, atan2(-facing.x, -facing.z), minf(dt * 7.0, 1.0))
 
 func _sense() -> void:
-	if is_instance_valid(_target) and _target.has_method("is_combat_target") and not _target.is_combat_target():
+	if is_instance_valid(_target) and (not _target.is_inside_tree() or _target.is_queued_for_deletion()
+		or _target.get("is_dead") == true or (_target.has_method("is_combat_target") and not _target.is_combat_target())):
 		if _threat == _target:
 			_threat = null
 			_threat_timer = 0.0
@@ -82,7 +83,10 @@ func _try_predator_attack(target: Node) -> void:
 
 func _can_bite(target: Node) -> bool:
 	if not is_instance_valid(target) or not target is Node3D or not target.is_inside_tree() or target.is_queued_for_deletion(): return false
-	if is_dead or bool(target.get("is_dead")) or _intent != "chase" or _warning > 0.0 or _recovering: return false
+	# Wind-up belongs to one selected target; a new attacker cannot leave an
+	# otherwise reachable old victim eligible for a delayed hit.
+	if is_instance_valid(_target) and target != _target: return false
+	if is_dead or target.get("is_dead") == true or _intent != "chase" or _warning > 0.0 or _recovering: return false
 	if target.has_method("is_combat_target") and not target.is_combat_target(): return false
 	var social: Node = get_node("SocialBehavior")
 	if float(social.get("attention_remaining")) > 0.0: return false
@@ -111,7 +115,7 @@ func _call_nest(attacker: Node3D) -> void:
 
 func receive_nest_alarm(caller: Node3D, attacker: Node3D) -> void:
 	if is_dead or colony_id.is_empty() or caller.colony_id != colony_id or _recovering: return
-	if not is_instance_valid(attacker) or bool(attacker.get("is_dead")): return
+	if not is_instance_valid(attacker) or attacker.get("is_dead") == true: return
 	if get_node("SocialBehavior").entry().get("relation") == "ally" and attacker.is_in_group(&"player"): return
 	if _memory > 0.0: return
 	_stop_play("alarm")

@@ -32,6 +32,8 @@ func _run() -> void:
 	_expect(predator._intent not in ["alert", "chase", "search"], "Lost target caused an endless pursuit")
 	predator.queue_free()
 	await _frames(4)
+	await _target_switch()
+	await _optional_attacker()
 	var first: CharacterBody3D = _animal("grazer", Vector3(-2, 100.05, 0), 711)
 	var second: CharacterBody3D = _animal("grazer", Vector3(2, 100.05, 0), 711)
 	var outsider: CharacterBody3D = _animal("grazer", Vector3(5, 100.05, 0), 711)
@@ -60,3 +62,56 @@ func _run() -> void:
 	await _frames(4)
 	print(JSON.stringify({"test": "living_creature_ai", "passed": failures.is_empty(), "failures": failures}))
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+func _target_switch() -> void:
+	player.health = 100.0
+	player.position = Vector3(1.25, 100.05, 0)
+	var predator: CharacterBody3D = _animal("predator", Vector3(0, 100.05, 0), 411)
+	predator._ambient_heading = Vector3.ZERO
+	predator._decision_timer = 1000.0
+	await _frames(65)
+	predator._cancel_bite()
+	predator._attack_timer = 0.0
+	predator._try_predator_attack(player)
+	_expect(predator._bite_target != null, "Cannot begin target-switch wind-up")
+	var replacement := Observer.new()
+	scene.add_child(replacement)
+	replacement.position = Vector3(-1.25, 100.05, 0)
+	var previous_health: float = player.health
+	predator.receive_creature_attack(1.0, replacement)
+	predator._sense()
+	await _frames(1)
+	_expect(predator._target == replacement and predator._bite_target == null and player.health == previous_health,
+		"Accepted new attacker did not cancel old target's pending bite")
+	var lowest_contact: float = INF
+	for frame in range(12):
+		await _frames(1)
+		for leg: Dictionary in predator._preview._motion._legs:
+			lowest_contact = minf(lowest_contact, leg.foot.global_position.y - 100.0)
+	_expect(lowest_contact >= -0.025, "Pain reaction pushed a live foot through the floor: " + str(lowest_contact))
+	print("INT30_LIVE_HIT_CONTACT " + str(lowest_contact))
+	await _frames(80)
+	_expect(replacement.health < 100.0 and player.health == previous_health,
+		"Predator damaged a stale target after switching attacker")
+	_expect(not predator._can_bite(player), "Wind-up eligibility still accepts a stale combat target")
+	replacement.is_dead = true
+	player.position = Vector3(30, 100.05, 30)
+	await _frames(220)
+	_expect(predator._target != replacement and predator._bite_target == null and predator._intent not in ["alert", "chase", "search"],
+		"Dead combat target prevented return to normal behavior")
+	replacement.free()
+	predator.free()
+	await _frames(3)
+
+func _optional_attacker() -> void:
+	player.position = Vector3(30, 100.05, 30)
+	var animal: CharacterBody3D = _animal("grazer", Vector3(0, 100.05, 0), 711)
+	var attacker := Node3D.new()
+	scene.add_child(attacker)
+	attacker.position = Vector3(1, 100.05, 0)
+	animal.receive_creature_attack(1.0, attacker)
+	await _frames(12)
+	_expect(animal._target == attacker and animal._intent == "flee", "Optional attacker contract without is_dead lost the danger reaction")
+	attacker.free()
+	animal.free()
+	await _frames(3)
