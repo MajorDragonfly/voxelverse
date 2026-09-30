@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "issue": 137,
+  "source_pr": 219,
+  "failing_head": "862dbed90a23df903f7589f6001fd9dbeee4edf3",
+  "run_id": 36607399055,
+  "job_id": 109543225224,
+  "artifact_id": 11054453297,
+  "artifact_sha256": "f380b583a63e33bb299cc7e71589a3ac97cac923c2116fcfd6abfe89bd9cea27",
+  "test": "living_creatures_world_test",
+  "observed_failure": "No nest had three physical residents: four groups with two residents each",
+  "test_exit_code": 1,
+  "fixture_identical_between_heads": true,
+  "existing_runtime_fix_commit": "76920f58cda28e1ea51db9579f416a5a33f2a1d9",
+  "existing_fix": "Prioritize completing visible non-catalog colony families; reset animal cursor after successful spawn. Preserve catalog role priority and bounded actor budgets.",
+  "inference": "The older main population scheduling is the likely failure source, not the dashboard-only code. Targeted common-base confirmation remains with Chat 2.",
+  "draft_220_is_not_full_gate_evidence": true,
+  "required_confirmation": "Run living_creatures_world_test plus population/colony budget and save/reload cases on exact delivered source; retain three-resident assertion."
+}

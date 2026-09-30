@@ -1,0 +1,329 @@
+{
+  "schema": 1,
+  "observed_on": "2026-09-30",
+  "coordination_issue": 137,
+  "integration_pr": 221,
+  "source_sha": "e217ba6fadc29722d37b9be0691981ccac03b4c1",
+  "source_tree": "4967ca14be41cd886c6d936b1087ebfe5fd37dc3",
+  "common_specialist_base": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "common_base_tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+  "main_sha": "0e0a1cda0d645f872cecd42881b3f6e53b3ba34e",
+  "scope": "Dated input/containment observation. Live ownership only in Issue #137. No merge or target-PC acceptance.",
+  "commands": [
+    "git merge-base --is-ancestor HEAD_SHA SOURCE_SHA",
+    "git merge-tree --write-tree SOURCE_SHA HEAD_SHA"
+  ],
+  "inputs": [
+    {
+      "number": 220,
+      "head": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "branch": "agent/pt18-ui-ci-followup-20260930",
+      "draft": true,
+      "base": "agent/pt18-resource-work-20260929",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 218,
+      "head": "01099946a66e82ba15ee20ba822998c25116d1c4",
+      "branch": "agent/pt18-resource-work-20260929",
+      "draft": true,
+      "base": "agent/pt18-material-detail-20260929",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 217,
+      "head": "65b1995119492a7240b65ad7f79ec0e4c6a18df4",
+      "branch": "agent/pt18-material-detail-20260929",
+      "draft": true,
+      "base": "agent/pt18-population-streaming-20260929",
+      "ancestor": false,
+      "merge_tree": "242779e4364d0c84f0b50655b29cc6f0105b0bcc",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 216,
+      "head": "e724bbe59b0d58b6f65126a64acb124695011eaf",
+      "branch": "agent/pt18-population-streaming-20260929",
+      "draft": true,
+      "base": "agent/pt18-tribe-hud-speed-20260929",
+      "ancestor": false,
+      "merge_tree": "11357c60ca5bd9229f5b832dad596fa21b8f28fc",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 215,
+      "head": "1e4f95bb6d503030d61fad335d5200bfc9163e3e",
+      "branch": "agent/pt18-tribe-hud-speed-20260929",
+      "draft": true,
+      "base": "agent/pt18-construction-click-20260929",
+      "ancestor": false,
+      "merge_tree": "b2244aef2e74497a2e5d8b8217d5021f6ddcd61c",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 214,
+      "head": "582be07e4d3cd8bd93d24e096c6caaa7b1dff710",
+      "branch": "agent/pt18-construction-click-20260929",
+      "draft": true,
+      "base": "agent/pt18-resident-detail-20260929",
+      "ancestor": false,
+      "merge_tree": "98fdbd19ba5246abf11b83a0f4ae4af413d45a19",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 213,
+      "head": "0a4e8a5efe6b4cfdc6b814dce4545e84b879cc3c",
+      "branch": "agent/pt18-resident-detail-20260929",
+      "draft": true,
+      "base": "agent/pt18-weather-timeline-20260929",
+      "ancestor": false,
+      "merge_tree": "2e3417ed7d6b36d86c63ace678b4998ab52f6fe5",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 219,
+      "head": "862dbed90a23df903f7589f6001fd9dbeee4edf3",
+      "branch": "agent/dashboard-refresh-20260929",
+      "draft": false,
+      "base": "main",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 212,
+      "head": "026a05cc611667048135c0a7a653da17a3057ab0",
+      "branch": "agent/pt18-weather-timeline-20260929",
+      "draft": true,
+      "base": "agent/pt18-playtest-critical-20260929",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 211,
+      "head": "6cdba84450de3ee036fe6c2d5111b5bad29d9fd5",
+      "branch": "agent/pt18-playtest-critical-20260929",
+      "draft": false,
+      "base": "agent/pt17-integration-preview-20260929",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 199,
+      "head": "52989bf76c6b881fbdad6ebd466b32969ef96ed4",
+      "branch": "agent/pt17-integration-preview-20260929",
+      "draft": false,
+      "base": "main",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 202,
+      "head": "7c6c747c45f5f1b9ef91e36c9486b0267ceb5509",
+      "branch": "agent/pt17-01-motion-stutter-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 201,
+      "head": "446093ee8ebb155b5a33d1db31fc9cbfe0d468cf",
+      "branch": "agent/m6-planet-shelter-labels-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 200,
+      "head": "15c2d1d44fd576fa085b00127e70e8390ff2b7f5",
+      "branch": "agent/m6-planet-stockpile-ground-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 198,
+      "head": "d1f11efa7c24245cb1767c98df808dd22bb03fc2",
+      "branch": "agent/m6-order-latency-followup-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": true,
+      "containment": "ancestor"
+    },
+    {
+      "number": 197,
+      "head": "14ef15c316f1a886a723d8ae49d939c3541f42ba",
+      "branch": "agent/water-flow-visual-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "4967ca14be41cd886c6d936b1087ebfe5fd37dc3",
+      "merge_exit": 0,
+      "containment": "no_change_merge_tree"
+    },
+    {
+      "number": 195,
+      "head": "3eb3084bb1b3040c04c534160e2d34291f51a324",
+      "branch": "agent/weather-05-forecast-ui-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "ae93ab357857ca9ec90bfba939bf5cf9d157c507",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 196,
+      "head": "049b32a043d82956282c587bcbefb01da5e8d74a",
+      "branch": "agent/pt17-16-world-motion-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "4967ca14be41cd886c6d936b1087ebfe5fd37dc3",
+      "merge_exit": 0,
+      "containment": "no_change_merge_tree"
+    },
+    {
+      "number": 194,
+      "head": "9c6ef686543ce6150311dd51a6bdab0c39fb83cd",
+      "branch": "agent/pt17-10-creature-animation-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "f066ce84f87184183adb9b2a4f266f28b79d5879",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 193,
+      "head": "51a176476f7c33477b4eadf9a6723d0ae4b12ea7",
+      "branch": "agent/pt17-04-ground-materials-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "4967ca14be41cd886c6d936b1087ebfe5fd37dc3",
+      "merge_exit": 0,
+      "containment": "no_change_merge_tree"
+    },
+    {
+      "number": 191,
+      "head": "d5b44aa898e68dd0e48046cf063320606e19ed3f",
+      "branch": "agent/pt17-09-befriending-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "4967ca14be41cd886c6d936b1087ebfe5fd37dc3",
+      "merge_exit": 0,
+      "containment": "no_change_merge_tree"
+    },
+    {
+      "number": 192,
+      "head": "1d2d4969ff3e3145c02437836b6189a009560029",
+      "branch": "agent/pt17-07-nest-discovery-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "292699c512a8296f5861555e9098d844e076f0e6",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 189,
+      "head": "ed68295fce162e2495920edd61afcf38717bf5e0",
+      "branch": "agent/pt17-13-tribe-camera-minimap-20260929",
+      "draft": false,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "d1603d5c00fea2ac0442771a9743425c717fedf2",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 190,
+      "head": "8c877b21e3c58f92f2392471a1a6b92153559aed",
+      "branch": "agent/pt17-08-creature-expressions-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "066e2ab4f61d146b1090d3039fbb815067e1a80e",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 187,
+      "head": "1200e37a945bf7a91b1f125ca2cc1680fc63d625",
+      "branch": "agent/pt17-11-development-book-20260929",
+      "draft": false,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "4967ca14be41cd886c6d936b1087ebfe5fd37dc3",
+      "merge_exit": 0,
+      "containment": "no_change_merge_tree"
+    },
+    {
+      "number": 188,
+      "head": "ea1a77b8cbac0c94fddf6e3e88e8387e92c465e6",
+      "branch": "agent/pt17-12-hud-20260929",
+      "draft": true,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "ea98273537b5679fed766f9604b2c04dc0e4ab3f",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 186,
+      "head": "61473315b626bb877452e04b533fd9852d2b1f75",
+      "branch": "agent/pt17-14-pause-menu-20260920",
+      "draft": false,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "17539ede88b5b50f40ddc06661d7d5d481a41ab2",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 185,
+      "head": "e2cdc45656acebdeec43498aee94721d1b2c5dfb",
+      "branch": "agent/pt17-15-audio-settings-20260920",
+      "draft": false,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "af46475f7c334368e20c8e708e7ca68675008c4b",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 184,
+      "head": "0903215ddbd5f605a65894bcaa0b42d26884fc77",
+      "branch": "agent/pt17-03-distant-transitions-20260920",
+      "draft": false,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "eb5b6d9e8cbdb1c825a7461c38d15458f89e1a8f",
+      "merge_exit": 1,
+      "containment": "review_required"
+    },
+    {
+      "number": 183,
+      "head": "3327beb2b86c30711050a322c4b18a3085bd8a11",
+      "branch": "agent/pt17-02-light-balance-20260920",
+      "draft": false,
+      "base": "main",
+      "ancestor": false,
+      "merge_tree": "ad02b792fd74fb33e915fa9c4775ebbfb5efd301",
+      "merge_exit": 1,
+      "containment": "review_required"
+    }
+  ],
+  "cleanup": "Deferred: explicit visual locks and main integration remain pending. Preserve all source branches."
+}
