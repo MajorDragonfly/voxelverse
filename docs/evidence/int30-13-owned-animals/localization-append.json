@@ -1,0 +1,64 @@
+{
+  "messages": [
+    {
+      "key": "OWNED_ORDERS_ALL",
+      "de": "Alle Aufträge",
+      "en": "All commands"
+    },
+    {
+      "key": "OWNED_ORDER_FILTER",
+      "de": "Nach Auftrag filtern",
+      "en": "Filter by command"
+    },
+    {
+      "key": "OWNED_SORT",
+      "de": "Sortierung wählen",
+      "en": "Choose sorting"
+    },
+    {
+      "key": "OWNED_SORT_NAME",
+      "de": "Name · A–Z",
+      "en": "Name · A–Z"
+    },
+    {
+      "key": "OWNED_SORT_SPECIES",
+      "de": "Art · A–Z",
+      "en": "Species · A–Z"
+    },
+    {
+      "key": "OWNED_SORT_TRUST",
+      "de": "Vertrauen · höchstes zuerst",
+      "en": "Trust · highest first"
+    },
+    {
+      "key": "OWNED_SORT_ORDER",
+      "de": "Auftrag · gruppiert",
+      "en": "Command · grouped"
+    },
+    {
+      "key": "OWNED_RECORDED_ROLE",
+      "de": "Belegte Art-Eignung: {roles}",
+      "en": "Recorded species suitability: {roles}"
+    },
+    {
+      "key": "OWNED_ROLE_UNOBSERVED",
+      "de": "Art-Eignung nicht bekannt. Ein vollständiger, unterstützter Art-Scan fehlt.",
+      "en": "Species suitability unknown. A complete, supported species scan is missing."
+    },
+    {
+      "key": "OWNED_ROLE_NOTICE",
+      "de": "Art-Eignung ist keine laufende Produktion. Tierplatz, Versorgung und tatsächliche Erträge werden hier nicht beobachtet.",
+      "en": "Species suitability does not show active production. Animal housing, care and actual yields are not observed here."
+    },
+    {
+      "key": "OWNED_LOCATION_NOTICE",
+      "de": "Ort aus dem Tierbestand; Aktualität und Ankunft sind nicht beobachtbar. Das Auftragsziel ist kein Ankunftsnachweis.",
+      "en": "Location from the animal register; freshness and arrival are not observable. A command target does not prove arrival."
+    },
+    {
+      "key": "OWNED_ORDER_DETAIL",
+      "de": "Aktueller Auftrag: {order}",
+      "en": "Current command: {order}"
+    }
+  ]
+}
