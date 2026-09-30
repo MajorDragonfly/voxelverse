@@ -5,13 +5,6 @@ var evidence: String = ""
 var cases: Array[Dictionary] = []
 var preview_started: Dictionary = {}
 
-func _ready() -> void:
-	# Input, scene loading and simulation still run normally. Native evidence
-	# renders exactly the requested frames rather than continuous world footage.
-	if OS.get_environment("VOXELVERSE_INT30_CAPTURE_ON_DEMAND") == "1":
-		RenderingServer.render_loop_enabled = false
-	super._ready()
-
 func _phase_route(phase: String) -> void:
 	# The established fixture covers the 16-case pause/settings matrix once.
 	if not "--int30-focused" in OS.get_cmdline_user_args():
@@ -168,9 +161,9 @@ func _picture(filename: String, dimensions: Vector2i) -> void:
 
 func _frames(count: int) -> void:
 	# Real GUI input and container layout continue; each evidence frame is
-	# explicitly rendered. World loading also does not need redundant GL frames.
+	# explicitly rendered. Do not redraw the paused world for every input wait.
 	if OS.get_environment("VOXELVERSE_INT30_CAPTURE_ON_DEMAND") == "1":
-		RenderingServer.render_loop_enabled = false
+		RenderingServer.render_loop_enabled = not get_tree().paused
 	await super._frames(count)
 
 func _finish() -> void:

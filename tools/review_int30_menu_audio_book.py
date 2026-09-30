@@ -21,7 +21,10 @@ def main():
     parser.add_argument("--godot", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--headless", action="store_true")
+    parser.add_argument("--book-frames", action="store_true", help="Render the isolated original book host; not the public campaign gate")
     args = parser.parse_args()
+    if args.book_frames and args.headless:
+        parser.error("Book frames require the native renderer")
     project = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
     if output.is_relative_to(project):
@@ -38,7 +41,8 @@ def main():
             env["VOXELVERSE_INT30_CAPTURE_ON_DEMAND"] = "1"
         command = [str(editor), "--path", str(project), "--audio-driver", "Dummy"]
         command += ["--headless"] if args.headless else ["--rendering-method", "gl_compatibility"]
-        command += ["--script", "res://tests/int30_menu_audio_book_test.gd"]
+        script = "res://tools/review_int30_book_frames.gd" if args.book_frames else "res://tests/int30_menu_audio_book_test.gd"
+        command += ["--script", script]
         if not args.headless:
             # The full inherited 16-case matrix runs headless. Native captures
             # exercise eight additional small-window cases in both real phases.
@@ -57,11 +61,11 @@ def main():
     images = {}
     expected = {}
     if not args.headless:
-        for phase in ["creature", "tribe"]:
+        for phase in (["creature-fixture", "tribe-fixture"] if args.book_frames else ["creature", "tribe"]):
             for language in ["de", "en"]:
                 for width, height in [(800, 600), (1280, 720)]:
                     prefix = f"{phase}-{language}-{width}x{height}"
-                    for suffix in ["pause", "graphics", "audio"] + ["book-" + chapter for chapter in ["creature", "nest_group", "tribe", "medieval", "modern", "space"]]:
+                    for suffix in ([] if args.book_frames else ["pause", "graphics", "audio"]) + ["book-" + chapter for chapter in ["creature", "nest_group", "tribe", "medieval", "modern", "space"]]:
                         expected[f"{prefix}-{suffix}.png"] = [width, height]
                     for chapter in ["tribe", "medieval", "modern"]:
                         expected[f"{prefix}-book-{chapter}-top.png"] = [width, height]
@@ -72,16 +76,17 @@ def main():
                 if len(data) >= 24 and data.startswith(b"\x89PNG\r\n\x1a\n"):
                     images[filename] = {"size": list(struct.unpack(">II", data[16:24])),
                                         "sha256": hashlib.sha256(data).hexdigest()}
+    markers = ["INT30_BOOK_FRAMES_PASSED"] if args.book_frames else ["INT30_MENU_AUDIO_BOOK_PASSED", "PAUSE_MENU_PASSED"]
     passed = (exit_code == 0 and not timed_out and not ERROR.search(log)
-              and "INT30_MENU_AUDIO_BOOK_PASSED" in log and "PAUSE_MENU_PASSED" in log
+              and all(marker in log for marker in markers)
               and provenance["reusable"]
               and all(images.get(name, {}).get("size") == size for name, size in expected.items()))
     report = {"passed": passed, "exit_code": exit_code, "timed_out": timed_out,
               "source": provenance, "engine": subprocess.check_output([args.godot, "--version"], text=True).strip(),
-              "command": command, "headless": args.headless, "images": images,
+              "command": command, "headless": args.headless, "book_frames": args.book_frames, "images": images,
               "capture_on_demand": not args.headless,
               "log_sha256": hashlib.sha256((output / "run.log").read_bytes()).hexdigest(),
-              "scope": "Public spherical campaign; ordinary confirmed tribal transition; real mouse/keyboard routes, all six read-only book chapters DE/EN at actual 130% viewport scale, combined preview/mute/reset, paused time, fresh settings process. Each capture is real GL; continuous rendering is disabled during loading and between captures. Full inherited sixteen-case menu matrix separately headless. No continuous footage, target-PC listening or native Windows acceptance."}
+              "scope": ("Isolated original book host with declared creature/tribe phase fixtures, all six chapters DE/EN, mouse/keyboard, actual 130% scale; not a public spherical campaign or ordinary phase confirmation proof." if args.book_frames else "Public spherical campaign; ordinary confirmed tribal transition; real mouse/keyboard routes, all six read-only book chapters DE/EN at actual 130% viewport scale, combined preview/mute/reset, paused time, fresh settings process. Each capture is real GL; redundant rendering of the paused world is disabled between captures. Full inherited sixteen-case menu matrix separately headless. No continuous footage, target-PC listening or native Windows acceptance.")}
     (output / "results.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps({"passed": passed, "exit_code": exit_code, "images": len(images), "log_sha256": report["log_sha256"]}))
     if not passed:
