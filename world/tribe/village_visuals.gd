@@ -8,6 +8,24 @@ const WorkMotion = preload("res://world/tribe/village_work_motion.gd")
 var _drawn_state: Dictionary = {}
 var rebuild_count: int = 0
 var stockpiles: Node3D
+const LABEL_HIDE_DISTANCE: float = 70.0
+const LABEL_SHOW_DISTANCE: float = 60.0
+var _captions: Array[Label3D] = []
+var _caption_clock: float = 0.0
+
+func _ready() -> void:
+	set_process(false)
+
+func _process(delta: float) -> void:
+	_caption_clock -= delta
+	if _caption_clock > 0.0: return
+	_caption_clock = 0.25
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if camera == null: return
+	for label: Label3D in _captions:
+		var distance: float = camera.global_position.distance_to(label.global_position)
+		if label.visible and distance > LABEL_HIDE_DISTANCE: label.hide()
+		elif not label.visible and distance < LABEL_SHOW_DISTANCE: label.show()
 
 func show_work(actor: Node3D, kind: String) -> void:
 	if not is_instance_valid(actor): return
@@ -45,6 +63,7 @@ func rebuild(data: Dictionary) -> void:
 	if Space.adapter(self) != null:
 		data = Space.visual_data(self, data)
 
+	_captions.clear()
 	for child: Node in get_children():
 		if child == stockpiles: continue
 		remove_child(child)
@@ -138,6 +157,9 @@ func rebuild(data: Dictionary) -> void:
 	if int(data["tools"]) == 1:
 		_box(center + Vector3(0, 0.6, -1.3), Vector3(0.18, 0.7, 0.18), Color("b08451"))
 		_box(center + Vector3(0.14, 0.9, -1.3), Vector3(0.5, 0.3, 0.22), Color("b2c0c2"))
+	_caption_clock = 0.0
+	set_process(not _captions.is_empty())
+	_process(0.0)
 
 # Decorative neighbor shelter; own homes use village_shelters with collision.
 func _hut(location: Vector3) -> void:
@@ -176,6 +198,7 @@ func _label(location: Vector3, text: String, color: Color) -> void:
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(label)
 	label.position = location
+	_captions.append(label)
 
 func _construction_title(project: Dictionary) -> String:
 	var text = preload("res://core/localization/ui_text.gd")
