@@ -91,7 +91,7 @@ func _run() -> void:
 	scene = null
 	camera = null
 	paused = false
-	for frame in range(4): await process_frame
+	for _cleanup_frame in range(4): await process_frame
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if report.passed else 1)
 
 func _settle() -> void:
