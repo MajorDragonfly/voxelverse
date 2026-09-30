@@ -1,0 +1,867 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Missing radial collision: ancient_oak_v2/0 size 0.8 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 0.8 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 0.8 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 0.8 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 0.8 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 0.8 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 0.8 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 0.8 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 0.8 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 0.8 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 0.8 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 0.8 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.0 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.0 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.0 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.0 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.0 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.0 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.0 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.0 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.0 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.0 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.0 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.0 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.2 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.2 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.2 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.2 up (0.0, 1.0, 0.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.2 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.2 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.2 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.2 up (1.0, 0.0, 0.0) point (0.4, 4.6, 0.05) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.2 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.2 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.2 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.2 up (0.0, 0.0, -1.0) point (0.4, 4.6, 0.05) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/0 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/0 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.4, 4.6, 0.05) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 0.8 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 0.8 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 0.8 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 0.8 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 0.8 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 0.8 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 0.8 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 0.8 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 0.8 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 0.8 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 0.8 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 0.8 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.0 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.0 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.0 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.0 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.0 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.0 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.0 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.0 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.0 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.0 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.0 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.0 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.2 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.2 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.2 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.2 up (0.0, 1.0, 0.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.2 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.2 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.2 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.2 up (1.0, 0.0, 0.0) point (0.3, 3.8, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.2 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.2 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.2 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.2 up (0.0, 0.0, -1.0) point (0.3, 3.8, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: ancient_oak_v2/2 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: ancient_oak_v2/2 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.3, 3.8, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 0.8 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 0.8 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 0.8 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 0.8 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 0.8 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 0.8 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 0.8 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 0.8 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 0.8 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 0.8 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 0.8 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 0.8 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.0 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.0 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.0 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.0 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.0 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.0 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.0 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.0 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.0 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.0 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.0 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.0 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.2 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.2 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.2 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.2 up (0.0, 1.0, 0.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.2 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.2 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.2 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.2 up (1.0, 0.0, 0.0) point (0.04, 6.0, 0.04) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.2 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.2 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.2 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.2 up (0.0, 0.0, -1.0) point (0.04, 6.0, 0.04) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/0 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/0 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.04, 6.0, 0.04) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 0.8 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 0.8 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 0.8 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 0.8 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 0.8 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 0.8 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 0.8 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 0.8 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 0.8 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 0.8 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 0.8 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 0.8 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.0 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.0 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.0 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.0 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.0 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.0 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.0 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.0 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.0 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.0 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.0 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.0 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.2 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.2 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.932327, 0.0, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.2 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.2 up (0.0, 1.0, 0.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.2 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.2 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.932327, -0.361615)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.2 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.2 up (1.0, 0.0, 0.0) point (0.0, 6.0, 0.08) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.2 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.2 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (0.361615, 0.932327, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.2 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.2 up (0.0, 0.0, -1.0) point (0.0, 6.0, 0.08) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (0.806884, -0.511626, -0.295258)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/1 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/1 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.0, 6.0, 0.08) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 0.8 up (0.0, 1.0, 0.0) point (0.78, 4.0, 0.06) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 0.8 up (0.0, 1.0, 0.0) point (0.78, 4.0, 0.06) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 0.8 up (1.0, 0.0, 0.0) point (0.78, 4.0, 0.06) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 0.8 up (1.0, 0.0, 0.0) point (0.78, 4.0, 0.06) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 0.8 up (0.0, 0.0, -1.0) point (0.78, 4.0, 0.06) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 0.8 up (0.0, 0.0, -1.0) point (0.78, 4.0, 0.06) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.78, 4.0, 0.06) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 0.8 up (0.57735, 0.57735, 0.57735) point (0.78, 4.0, 0.06) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 1.0 up (0.0, 1.0, 0.0) point (0.78, 4.0, 0.06) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 1.0 up (0.0, 1.0, 0.0) point (0.78, 4.0, 0.06) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 1.0 up (1.0, 0.0, 0.0) point (0.78, 4.0, 0.06) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 1.0 up (1.0, 0.0, 0.0) point (0.78, 4.0, 0.06) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 1.0 up (0.0, 0.0, -1.0) point (0.78, 4.0, 0.06) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 1.0 up (0.0, 0.0, -1.0) point (0.78, 4.0, 0.06) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.78, 4.0, 0.06) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 1.0 up (0.57735, 0.57735, 0.57735) point (0.78, 4.0, 0.06) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 1.2 up (0.0, 1.0, 0.0) point (0.78, 4.0, 0.06) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 1.2 up (0.0, 1.0, 0.0) point (0.78, 4.0, 0.06) axis (0.361615, 0.0, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 1.2 up (1.0, 0.0, 0.0) point (0.78, 4.0, 0.06) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 1.2 up (1.0, 0.0, 0.0) point (0.78, 4.0, 0.06) axis (0.0, -0.361615, 0.932327)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 1.2 up (0.0, 0.0, -1.0) point (0.78, 4.0, 0.06) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 1.2 up (0.0, 0.0, -1.0) point (0.78, 4.0, 0.06) axis (-0.932327, 0.361615, 0.0)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Missing radial collision: tall_pine_v2/2 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.78, 4.0, 0.06) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+ERROR: Motion passed through bark/core: tall_pine_v2/2 size 1.2 up (0.57735, 0.57735, 0.57735) point (0.78, 4.0, 0.06) axis (-0.12492, -0.636322, 0.761242)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/int30_scenery_collision_test.gd:71)
+INT30_SCENERY_COLLISION {"cases":144,"failures":216,"passed":false}
