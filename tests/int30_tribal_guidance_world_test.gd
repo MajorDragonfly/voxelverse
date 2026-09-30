@@ -180,7 +180,9 @@ func _run() -> void:
 		return
 	tribe.set_physics_process(false)
 	card = tribe.panel.find_child("TribalContextHelp", true, false)
-	_expect(saves.guidance.export_state() == progress and tribe.village().stock == village.stock and tribe.village().project == village.project,
+	# JSON number representations may change from int to float. Compare the
+	# exact serialized meaning, not Variant dictionary storage types.
+	_expect(_json_equal(saves.guidance.export_state(), progress) and _json_equal(tribe.village().stock, village.stock) and _json_equal(tribe.village().project, village.project),
 		"Load fabricated tutorial/material progress")
 	await _expect_card("build_paused", "12-resumed-help-de")
 	if not capture_dir.is_empty():
@@ -291,3 +293,8 @@ func _capture(label: String) -> void:
 	var rendered: Image = root.get_texture().get_image()
 	_expect(rendered.save_png(capture_dir.path_join(label + ".png")) == OK, "Actual world capture failed: " + label)
 	root.disable_3d = true
+
+func _json_equal(left: Dictionary, right: Dictionary) -> bool:
+	var restored_left: Dictionary = JSON.parse_string(JSON.stringify(left))
+	var restored_right: Dictionary = JSON.parse_string(JSON.stringify(right))
+	return restored_left == restored_right

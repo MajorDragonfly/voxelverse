@@ -13,7 +13,10 @@ static func resolve(progress: RefCounted, context: Dictionary) -> Dictionary:
 	var step: String = progress.tribal_step()
 	if step.is_empty() or not context.get("active", false): return {}
 	var data: Dictionary = context.get("village", {})
-	if data.get("schema") not in [Model.SCHEMA, Model.LEGACY_SCHEMA] or not data.get("members") is Array or not data.get("stock") is Dictionary or not data.get("project") is Dictionary:
+	# JSON restores integral values as floats; scalar comparison supports both
+	# without rounding fractional/future versions into a known contract.
+	var version: Variant = data.get("schema")
+	if (version != Model.SCHEMA and version != Model.LEGACY_SCHEMA) or not data.get("members") is Array or not data.get("stock") is Dictionary or not data.get("project") is Dictionary:
 		return {}
 	if data.get("economy", {}).get("schema") != Economy.SCHEMA: return {}
 	var selection: Array = context.get("selected", [])

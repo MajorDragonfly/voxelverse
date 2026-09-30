@@ -73,6 +73,13 @@ func _run() -> void:
 	_code(context, "blocked", "Known blocked flag without invented obstacle")
 	context.village.members[0].blocked = false
 	_code(context, "gather", "Real order next step")
+	var restored: Dictionary = JSON.parse_string(JSON.stringify(context))
+	_code(restored, "gather", "JSON restored integral schema and inventory")
+	restored.village.schema = 6.5
+	_expect(Advice.resolve(progress, restored).is_empty(), "Fractional village schema was rounded into supported advice")
+	restored.village.schema = Model.SCHEMA
+	restored.village.economy.schema = 4.5
+	_expect(Advice.resolve(progress, restored).is_empty(), "Fractional economy schema was accepted")
 	context.rejection = {"reason": "Speichern fehlgeschlagen. Der bisherige Auftrag bleibt erhalten."}
 	_code(context, "order_rejected", "Actual rejected receipt")
 	context.erase("rejection")
