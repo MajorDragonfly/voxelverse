@@ -1,0 +1,10 @@
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -358,6 +358,7 @@
+       "tests": [
+         "expedition_contract_test",
+         "shipyard_test",
++        "ship_design_exchange_test",
+         "fleet_runtime_test"
+       ]
+     },
