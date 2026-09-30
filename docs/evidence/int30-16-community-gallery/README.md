@@ -96,3 +96,29 @@ the actual native images and their manifest/digests. Technical scope is limited 
 feature and its direct consumers. Full integration gates, exports and Lars' target-PC
 acceptance belong to the integration owner. Public service operation and accounts remain
 follow-up work.
+
+## Recorded result and limits
+
+Final scoped native run: **200 checks and 45 actual OpenGL PNGs passed**, followed by
+a separate fresh-engine offline reopen with two checks. Headless focused run: 110
+checks plus the same separate offline reopen passed. Engine 4.6.3, Linux/Mesa llvmpipe;
+software rendering is only a UI verification environment, not a target-PC performance claim.
+The final native report records local source commit `3c64004580e02a55c234edf82e5a00407a839763`,
+tree `464909fd92147992cc3e8fa308bd73a26f58aa7c`, clean/stable source observations.
+Published code commit `d51e89c48a81a8d046b02a6fb7a128af7169918c` has exactly that same tree.
+Later delivery commits append only evidence/docs; gameplay source bytes are preserved.
+
+The baseline community client check passed (88 checks). The first isolated QA overlay
+passed source contracts, import, design-library and favorite-library checks but timed out
+in the gallery, existing client and existing package tests at their unchanged 120-s limits.
+A later retry timed out at the unchanged 180-s import limit before executing tests.
+These failed reports and full failing logs are retained in `checks/`; the QA overlay is
+**not** presented as a green integration result. The fresh-process check is now launched
+by the Python review runner after the first engine fully exits, with the same isolated data.
+Its successful result proves this feature's offline restart, not a diagnosis or dismissal
+of the unchanged client/package/import timeouts. Shared integration gates must still run.
+
+Representative reviewed states: `results-and-origin-de.png`, `imported-requirements-de.png`,
+`download-pending-de.png`, `download-cancelled-de.png`, `offline-de.png`, `empty-de.png`,
+`list-de-800x600-150.png`, `detail-en-800x600-150.png`, and `library-opening-en.png`.
+All matrix PNGs are included without synthesized or headless substitute images.

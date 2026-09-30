@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "seconds": 44.154,
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "command": [
+    "/workspace/scratch/ac81dac7c60f/runtime/godot",
+    "--path",
+    "/workspace/scratch/ac81dac7c60f/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--headless",
+    "--script",
+    "res://tests/int30_community_gallery_test.gd",
+    "--",
+    "--translation-appendix"
+  ],
+  "source_sha256": {
+    "docs/evidence/int30-16-community-gallery/translations.json": "8dbefdcec94fb34f4d82b1b7f1ef6990351ab9f590bfa5354cc261a752e0285c",
+    "tests/int30_community_gallery_test.gd": "837632f96da4598ffccd91ef281a2dd24f7fe7fd7d676561bf30620880044a16",
+    "ui/blueprints/community_gallery_launcher.gd": "1de4579c83f3c663eb08928d123730b80df412293985ae52fdfe4bee2f193805",
+    "ui/blueprints/community_gallery_panel.gd": "fe3373e604b60279c8ea5664071ab3b39a414244deb1e3863504367a18971ec5",
+    "ui/blueprints/community_gallery_presentation.gd": "19174fc66b42a0bc5c7cd9674dc54e6c768e56a8d9b37e81b54583db1bdd2983"
+  },
+  "source_unchanged": true,
+  "log_sha256": "61ba6b8508fcfe951ffd145773d4b8e204eddf46114b795e64168cafd19abc54",
+  "images": {},
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "a1774a45455b799803c99eaf5f177c4794abbac78673f8453bc13e51c7852622",
+      "complete": true,
+      "file_count": 3968,
+      "bytes": 125321405,
+      "bytes_hashed": 125321405,
+      "seconds": 3.2411
+    },
+    "end": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "a1774a45455b799803c99eaf5f177c4794abbac78673f8453bc13e51c7852622",
+      "complete": true,
+      "file_count": 3968,
+      "bytes": 125321405,
+      "bytes_hashed": 125321405,
+      "seconds": 2.6311
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "b2057c93cbc046be29a78974ceea096db9bac2ae5b266bf9e094b30a6556980c"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "b2057c93cbc046be29a78974ceea096db9bac2ae5b266bf9e094b30a6556980c"
+      }
+    },
+    "observations": [
+      {
+        "after": "gallery_complete",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "a1774a45455b799803c99eaf5f177c4794abbac78673f8453bc13e51c7852622",
+          "complete": true,
+          "file_count": 3968,
+          "bytes": 125321405,
+          "bytes_hashed": 125321405,
+          "seconds": 2.6311
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "platform": "linux",
+  "scope": "INT30-16 focused checks; not full integration/export/target-PC acceptance"
+}

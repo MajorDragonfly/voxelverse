@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+GALLERY_CHECK: start
+GALLERY_CHECK: translation appendix
+GALLERY_CHECK: configured test viewport
+GALLERY_CHECK: search/paging
+GALLERY_CHECK: errors
+GALLERY_CHECK: downloads
+GALLERY_CHECK: responsive
+INT30_COMMUNITY_GALLERY_PASSED: 200 checks
