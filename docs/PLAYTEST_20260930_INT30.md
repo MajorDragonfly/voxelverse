@@ -31,7 +31,7 @@ Godot 4.6.3; Referenz-PC Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s. Grafik
 
 ## Abnahme und PR-Bereinigung
 
-Vollständige aktuelle Gates sind Godot validation gate, Desktop export gate, Environment render gate und Project dashboard gate. Fach-/Grafikläufe und aufgelöste Reviewthreads kommen hinzu. Ein grüner Entwurfsplan oder einzelne Fachtests ersetzen diese Gates nicht.
+Vollständige aktuelle Gates sind Godot validation gate, Desktop export gate, Environment render gate und Project dashboard gate. Fach-/Grafikläufe und aufgelöste Reviewthreads kommen hinzu. Ein grüner Entwurfsplan oder einzelne Fachtests ersetzen diese Gates nicht. Die Jobdetails müssen tatsächliche native Windows-/Linux-Exporte und beide Renderläufe zeigen; `Desktop draft plan` oder `Render draft plan` mit übersprungenen Export-/Capture-Jobs zählen ausdrücklich nicht. Beim Wechsel zur technischen Review muss der CI-Ereignisstand den PR als bereit erkennen.
 
 Die ausdrücklichen Sichtabnahme-Sperren aus #199/#220 gelten weiter. Dieser Windows-Kandidat macht ihre Prüfung möglich; er bestätigt sie nicht. Ziel-PC-Leistung und persönliche Produktabnahme bleiben getrennte Nachweise. #171, #172, #167 und die übrigen offenen Produktissues werden nicht durch Erzeugen des Builds geschlossen.
 
