@@ -1,0 +1,146 @@
+{
+	"failures": [],
+	"observations": [
+		{
+			"camera_distance": 32.557640075683594,
+			"capture": "01_finished_village_near",
+			"huts": 1.0,
+			"labels": [
+				{
+					"text": "Dorfplatz · Lager & Werkbank",
+					"visible": true
+				},
+				{
+					"text": "Essbare Wurzeln · 48",
+					"visible": true
+				},
+				{
+					"text": "Lose Steine · 42",
+					"visible": true
+				},
+				{
+					"text": "Leseholz · 36",
+					"visible": true
+				}
+			],
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			},
+			"terrain": "public spherical campaign"
+		},
+		{
+			"camera_distance": 118.10588073730469,
+			"capture": "02_finished_village_far",
+			"huts": 1.0,
+			"labels": [
+				{
+					"text": "Dorfplatz · Lager & Werkbank",
+					"visible": false
+				},
+				{
+					"text": "Essbare Wurzeln · 48",
+					"visible": false
+				},
+				{
+					"text": "Lose Steine · 42",
+					"visible": false
+				},
+				{
+					"text": "Leseholz · 36",
+					"visible": false
+				}
+			],
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			},
+			"terrain": "public spherical campaign"
+		},
+		{
+			"camera_distance": 32.557640075683594,
+			"capture": "03_finished_village_near_return",
+			"huts": 1.0,
+			"labels": [
+				{
+					"text": "Dorfplatz · Lager & Werkbank",
+					"visible": true
+				},
+				{
+					"text": "Essbare Wurzeln · 48",
+					"visible": true
+				},
+				{
+					"text": "Lose Steine · 42",
+					"visible": true
+				},
+				{
+					"text": "Leseholz · 36",
+					"visible": true
+				}
+			],
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			},
+			"terrain": "public spherical campaign"
+		},
+		{
+			"camera_distance": 32.557640075683594,
+			"capture": "04_finished_village_actual_work",
+			"huts": 1.0,
+			"labels": [
+				{
+					"text": "Dorfplatz · Lager & Werkbank",
+					"visible": true
+				},
+				{
+					"text": "Essbare Wurzeln · 48",
+					"visible": true
+				},
+				{
+					"text": "Lose Steine · 42",
+					"visible": true
+				},
+				{
+					"text": "Leseholz · 36",
+					"visible": true
+				}
+			],
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			},
+			"terrain": "public spherical campaign"
+		},
+		{
+			"actual_worker": "object_839f34f9dcd5e6a1e5b47153d6702d8b",
+			"cargo": "",
+			"tool_visible": true,
+			"work": 0.16666666666666666
+		}
+	],
+	"passed": true,
+	"saw_actual_work_tool": true,
+	"test": "int30_village_resume"
+}
