@@ -1,0 +1,37 @@
+[
+  {
+    "filename": "120hz-1.5-diagonal-comparison.mp4",
+    "bytes": 1227004,
+    "sha256": "7816d4db0b830c7dabca861367b6afa3423783596dd7082a5cfd0656fb6d6b45"
+  },
+  {
+    "filename": "30hz-0.65-diagonal-comparison.mp4",
+    "bytes": 583656,
+    "sha256": "49c7967117f61b951c13de71c8b9ed2bb1e3bf8ba09a74364025401858053e46"
+  },
+  {
+    "filename": "30hz-0.65-straight-comparison.mp4",
+    "bytes": 465123,
+    "sha256": "162b6f24cdd85fd9e5383dd920b2563ebad186cd486aaaf373f2cd7b61b77cf2"
+  },
+  {
+    "filename": "30hz-1.5-diagonal-comparison.mp4",
+    "bytes": 799603,
+    "sha256": "a50c6dac534124953cc5e4c465fdbd0209473d90919af51e582a59bf82f4931f"
+  },
+  {
+    "filename": "30hz-1.5-straight-comparison.mp4",
+    "bytes": 734825,
+    "sha256": "7f93514a12ceb1b931d51d826895f5fa154cd469afc54383a28deee796923f1a"
+  },
+  {
+    "filename": "60hz-0.65-straight-comparison.mp4",
+    "bytes": 590584,
+    "sha256": "ea9a560bfdb8593c1bd3bdb4c9a5c3cedaddc6525eb1332fe54098159865ad07"
+  },
+  {
+    "filename": "INT30-04-camera-drink-evidence.zip",
+    "bytes": 24934560,
+    "sha256": "8bad5cfc61fc3697a5d08d045c3ddafe0b2937796dc49c285ee60c7427706771"
+  }
+]

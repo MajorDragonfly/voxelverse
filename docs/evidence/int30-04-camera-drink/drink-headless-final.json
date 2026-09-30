@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "seconds": 6.854594393000298,
+  "command": [
+    "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/c1670f9d18e7/voxelverse",
+    "--script",
+    "res://tools/review_int30_drink_contract.gd"
+  ],
+  "scope": "real sampler, source, primary action; native HUD visibility assertions excluded",
+  "source_commit": "a8ea5bbb7347aa34fd443d7a01af2bdee6b19406"
+}

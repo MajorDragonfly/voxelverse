@@ -1,0 +1,176 @@
+{
+	"failures": [],
+	"native_capture": false,
+	"passed": true,
+	"source": "real living planet seed 15838; production terrain + tribe camera, diagnostic owner only",
+	"views": [
+		{
+			"bottom_clearance_m": 1.97588071006931,
+			"effective_tilt_deg": 9.43503657070674,
+			"eye_clearance_m": 2.00000073000742,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-800x600-0"
+		},
+		{
+			"bottom_clearance_m": 2.61445155932948,
+			"effective_tilt_deg": 4.59258999843012,
+			"eye_clearance_m": 2.64180665792425,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-800x600-90"
+		},
+		{
+			"bottom_clearance_m": 2.72987098541041,
+			"effective_tilt_deg": 3.00013886893288,
+			"eye_clearance_m": 2.7562870128102,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-800x600-180"
+		},
+		{
+			"bottom_clearance_m": 3.29553929064973,
+			"effective_tilt_deg": 3.00014186124189,
+			"eye_clearance_m": 3.31688065082385,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-800x600-270"
+		},
+		{
+			"bottom_clearance_m": 1.97751985430028,
+			"effective_tilt_deg": 3.5791591073403,
+			"eye_clearance_m": 1.99999876352971,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-800x600-0"
+		},
+		{
+			"bottom_clearance_m": 3.70003498053684,
+			"effective_tilt_deg": 3.00014292992367,
+			"eye_clearance_m": 3.72776613691166,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-800x600-90"
+		},
+		{
+			"bottom_clearance_m": 3.52200267176799,
+			"effective_tilt_deg": 3.00014057882374,
+			"eye_clearance_m": 3.54960486652336,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-800x600-180"
+		},
+		{
+			"bottom_clearance_m": 1.97951204131477,
+			"effective_tilt_deg": 4.39773781583755,
+			"eye_clearance_m": 2.00000056339414,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-800x600-270"
+		},
+		{
+			"bottom_clearance_m": 1.97544027120541,
+			"effective_tilt_deg": 9.43503657070674,
+			"eye_clearance_m": 2.00000073000742,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-1280x720-0"
+		},
+		{
+			"bottom_clearance_m": 2.61397374218869,
+			"effective_tilt_deg": 4.59258999843012,
+			"eye_clearance_m": 2.64180665792425,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-1280x720-90"
+		},
+		{
+			"bottom_clearance_m": 2.72979390085183,
+			"effective_tilt_deg": 3.00013886893288,
+			"eye_clearance_m": 2.7562870128102,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-1280x720-180"
+		},
+		{
+			"bottom_clearance_m": 3.29553929064973,
+			"effective_tilt_deg": 3.00014186124189,
+			"eye_clearance_m": 3.31688065082385,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-1280x720-270"
+		},
+		{
+			"bottom_clearance_m": 1.97722428288734,
+			"effective_tilt_deg": 3.5791591073403,
+			"eye_clearance_m": 1.99999876352971,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-1280x720-0"
+		},
+		{
+			"bottom_clearance_m": 3.69930702336118,
+			"effective_tilt_deg": 3.00014292992367,
+			"eye_clearance_m": 3.72776613691166,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-1280x720-90"
+		},
+		{
+			"bottom_clearance_m": 3.52126183122619,
+			"effective_tilt_deg": 3.00014057882374,
+			"eye_clearance_m": 3.54960486652336,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-1280x720-180"
+		},
+		{
+			"bottom_clearance_m": 1.97920839073383,
+			"effective_tilt_deg": 4.39773781583755,
+			"eye_clearance_m": 2.00000056339414,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-1280x720-270"
+		},
+		{
+			"bottom_clearance_m": 1.97544027120541,
+			"effective_tilt_deg": 9.43503657070674,
+			"eye_clearance_m": 2.00000073000742,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-1920x1080-0"
+		},
+		{
+			"bottom_clearance_m": 2.61397374218869,
+			"effective_tilt_deg": 4.59258999843012,
+			"eye_clearance_m": 2.64180665792425,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-1920x1080-90"
+		},
+		{
+			"bottom_clearance_m": 2.72979390085183,
+			"effective_tilt_deg": 3.00013886893288,
+			"eye_clearance_m": 2.7562870128102,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-1920x1080-180"
+		},
+		{
+			"bottom_clearance_m": 3.29553929064973,
+			"effective_tilt_deg": 3.00014186124189,
+			"eye_clearance_m": 3.31688065082385,
+			"requested_tilt_deg": 3.0,
+			"view": "shore-1920x1080-270"
+		},
+		{
+			"bottom_clearance_m": 1.97722428288734,
+			"effective_tilt_deg": 3.5791591073403,
+			"eye_clearance_m": 1.99999876352971,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-1920x1080-0"
+		},
+		{
+			"bottom_clearance_m": 3.69930702336118,
+			"effective_tilt_deg": 3.00014292992367,
+			"eye_clearance_m": 3.72776613691166,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-1920x1080-90"
+		},
+		{
+			"bottom_clearance_m": 3.52126183122619,
+			"effective_tilt_deg": 3.00014057882374,
+			"eye_clearance_m": 3.54960486652336,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-1920x1080-180"
+		},
+		{
+			"bottom_clearance_m": 1.97920839073383,
+			"effective_tilt_deg": 4.39773781583755,
+			"eye_clearance_m": 2.00000056339414,
+			"requested_tilt_deg": 3.0,
+			"view": "slope-1920x1080-270"
+		}
+	]
+}

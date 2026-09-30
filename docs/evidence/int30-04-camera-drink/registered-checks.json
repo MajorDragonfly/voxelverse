@@ -1,0 +1,395 @@
+[
+  {
+    "run": "checks-stable",
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "source": {
+      "available": true,
+      "commit": "1dba530283fd9b5875fdf8e7d0d5f1986e376adc",
+      "tree": "1fa73c67e91f0bc8b3e6481efc22f56e1e2b8d3b",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "8dd542d75acdd5e897a2375b394980757976b7ab2d65bcd8346f519ae0c84c61",
+      "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+      "complete": true,
+      "file_count": 3960,
+      "bytes": 125297533,
+      "bytes_hashed": 125297533,
+      "seconds": 3.5485
+    },
+    "passed": false,
+    "source_integrity": "stable",
+    "checks": [
+      {
+        "name": "source_contracts",
+        "kind": "source_contract",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.437,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/scratch/c1670f9d18e7/voxelverse/tools/check_validation_contracts.py",
+          "--project",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--output",
+          "/workspace/scratch/c1670f9d18e7/checks-stable/contracts.json"
+        ],
+        "log_sha256": "69b6a8f8335c909f968e0a2af582cefce0056872a8e3be5ce3afd8679e8adfd2",
+        "process_passed": true,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "step_camera_test",
+        "kind": "headless_godot",
+        "passed": false,
+        "exit_code": 1,
+        "seconds": 12.175,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/step_camera_test.gd"
+        ],
+        "log_sha256": "4a390c6660b1b9d7336cfb174a3afa569b59bd65f6a52bf3d1a33d6f2b99ef5d",
+        "contract": "surface",
+        "process_passed": false,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "radial_step_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 31.207,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/radial_step_test.gd"
+        ],
+        "log_sha256": "0e7eca55bd3f3713844e66de0af0c2280b525671fe8f98b44869cd15691b9287",
+        "contract": "surface",
+        "process_passed": true,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "player_recovery_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 11.348,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/player_recovery_test.gd"
+        ],
+        "log_sha256": "00c7809ad76fe1a802eab08d9cb303b2ed0850ebbe285143740b9e6cf1884794",
+        "contract": "spherical_gameplay",
+        "process_passed": true,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "input_preferences_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 7.147,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/input_preferences_test.gd"
+        ],
+        "log_sha256": "e9ab8cd8398f672ff5c0a1e65c84cf7e5b7c84d395af49bfaa853980c223a747",
+        "contract": "frontend_locale",
+        "process_passed": true,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "tribal_camera_preferences_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.454,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/tribal_camera_preferences_test.gd"
+        ],
+        "log_sha256": "7cb1d75b541bdcab73a568b963d569521be7685a96cfa1b02106df62d8dfd326",
+        "contract": "frontend_locale",
+        "process_passed": true,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "tribal_camera_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 15.587,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/tribal_camera_test.gd"
+        ],
+        "log_sha256": "666c2ab63727b06ca5a8416d1b2f5ef2efda1817dbe452ec90ca65da4e1d3ba6",
+        "contract": "village",
+        "process_passed": true,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "minimap_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 8.413,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/minimap_test.gd"
+        ],
+        "log_sha256": "bf6f0f7a4ab584e3a88693f2ae0d230af60b29d7812993aab30100cc402ed664",
+        "contract": "discovery_map",
+        "process_passed": true,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "tribal_camera_world_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 96.681,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/tribal_camera_world_test.gd"
+        ],
+        "log_sha256": "263bf8af3cdc02e5b62d6bdbd0d1e31842985135dbeb1d6ce51b3f469424f9b6",
+        "contract": "village",
+        "process_passed": true,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "onboarding_guidance_world_test",
+        "kind": "headless_godot",
+        "passed": false,
+        "exit_code": 1,
+        "seconds": 69.168,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/onboarding_guidance_world_test.gd"
+        ],
+        "log_sha256": "2159bb9cbdd208082644468253833d2208b3c4023c888bfb82615b8a32e65e82",
+        "contract": "frontend_locale",
+        "process_passed": false,
+        "source_sha256": "f9f361e67e9cee587f5a47dbc287ece362f2279dd59757b1bc02714d8f2f61a7",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "source_integrity",
+        "kind": "source_provenance",
+        "passed": true,
+        "status": "stable",
+        "reusable_source": false
+      }
+    ]
+  },
+  {
+    "run": "checks-stall-final",
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "source": {
+      "available": true,
+      "commit": "a0cb124048f9db40772c7469f612fed6028c4cb2",
+      "tree": "6fe0c4c88425310bdc5adfafb42161d2d44d143f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "f942980f12600d416c0f4d41a48426dd539d6f6890e79f00be7fd12644222dbb",
+      "source_sha256": "506224e7dd6310ea4a376f25c595b0ac60948015f50332e96745015bd84fd30d",
+      "complete": true,
+      "file_count": 3960,
+      "bytes": 125299424,
+      "bytes_hashed": 125299424,
+      "seconds": 32.1328
+    },
+    "passed": true,
+    "source_integrity": "stable",
+    "checks": [
+      {
+        "name": "source_contracts",
+        "kind": "source_contract",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.536,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/scratch/c1670f9d18e7/voxelverse/tools/check_validation_contracts.py",
+          "--project",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--output",
+          "/workspace/scratch/c1670f9d18e7/checks-stall-final/contracts.json"
+        ],
+        "log_sha256": "69b6a8f8335c909f968e0a2af582cefce0056872a8e3be5ce3afd8679e8adfd2",
+        "process_passed": true,
+        "source_sha256": "506224e7dd6310ea4a376f25c595b0ac60948015f50332e96745015bd84fd30d",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "step_camera_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 17.79,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/step_camera_test.gd"
+        ],
+        "log_sha256": "221958d5b61f20a54d8dd98a9bb954f2cd8101db824681b6d0f58f0d9996bffb",
+        "contract": "surface",
+        "process_passed": true,
+        "source_sha256": "506224e7dd6310ea4a376f25c595b0ac60948015f50332e96745015bd84fd30d",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "player_recovery_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 15.061,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/player_recovery_test.gd"
+        ],
+        "log_sha256": "00c7809ad76fe1a802eab08d9cb303b2ed0850ebbe285143740b9e6cf1884794",
+        "contract": "spherical_gameplay",
+        "process_passed": true,
+        "source_sha256": "506224e7dd6310ea4a376f25c595b0ac60948015f50332e96745015bd84fd30d",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "source_integrity",
+        "kind": "source_provenance",
+        "passed": true,
+        "status": "stable",
+        "reusable_source": true
+      }
+    ]
+  },
+  {
+    "run": "checks-onboarding-repeat",
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "source": {
+      "available": true,
+      "commit": "a8ea5bbb7347aa34fd443d7a01af2bdee6b19406",
+      "tree": "e6548c77d1a669265b7d63f33c31b407f16392db",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ecb76574eebc1f9bac95910b9cadb103691c2e3c7b0ecce97b615465bc19d0f0",
+      "source_sha256": "6d13aec87589f6df46d1376e389c29772d7e6790daf3548180d7871ff4729829",
+      "complete": true,
+      "file_count": 3964,
+      "bytes": 125319274,
+      "bytes_hashed": 125319274,
+      "seconds": 5.2381
+    },
+    "passed": false,
+    "source_integrity": "stable",
+    "checks": [
+      {
+        "name": "source_contracts",
+        "kind": "source_contract",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 0.374,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/scratch/c1670f9d18e7/voxelverse/tools/check_validation_contracts.py",
+          "--project",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--output",
+          "/workspace/scratch/c1670f9d18e7/checks-onboarding-repeat/contracts.json"
+        ],
+        "log_sha256": "69b6a8f8335c909f968e0a2af582cefce0056872a8e3be5ce3afd8679e8adfd2",
+        "process_passed": true,
+        "source_sha256": "6d13aec87589f6df46d1376e389c29772d7e6790daf3548180d7871ff4729829",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "onboarding_guidance_world_test",
+        "kind": "headless_godot",
+        "passed": false,
+        "exit_code": 1,
+        "seconds": 66.753,
+        "command": [
+          "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/c1670f9d18e7/voxelverse",
+          "--script",
+          "res://tests/onboarding_guidance_world_test.gd"
+        ],
+        "log_sha256": "1a69bc57a99786042e68f0da7fb21c819df402c8929f8f320d9ae2850e10e43f",
+        "contract": "frontend_locale",
+        "process_passed": false,
+        "source_sha256": "6d13aec87589f6df46d1376e389c29772d7e6790daf3548180d7871ff4729829",
+        "source_status": "unchanged"
+      },
+      {
+        "name": "source_integrity",
+        "kind": "source_provenance",
+        "passed": true,
+        "status": "stable",
+        "reusable_source": false
+      }
+    ]
+  }
+]
