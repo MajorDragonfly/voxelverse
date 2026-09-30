@@ -9,6 +9,7 @@ var _scanner: Node
 var _capture: String
 var _frame: int = 0
 var _title: Label
+var _edge_vertices: Dictionary = {}
 
 func run(tree: SceneTree, player: Node3D, capture: String = "") -> Dictionary:
 	_tree = tree
@@ -46,6 +47,9 @@ func run(tree: SceneTree, player: Node3D, capture: String = "") -> Dictionary:
 				_align_edge(animal, circle.center + Vector2(-float(circle.radius) + 0.7 / physical_factor, 0))
 				await _settle()
 				_scanner.reset()
+				_scanner.silhouette = load("res://core/discovery/scan_silhouette.gd").new()
+				_scanner.get_scan_target()
+				var cold_query_ms: float = _scanner.last_query_usec / 1000.0
 				var times: Array[float] = []
 				var legacy_times: Array[float] = []
 				var legacy_misses: int = 0
@@ -55,9 +59,10 @@ func run(tree: SceneTree, player: Node3D, capture: String = "") -> Dictionary:
 					# procedural runtime animation stays active throughout this case.
 					var wanted: float = float(circle.center.x) - float(circle.radius) + (0.7 + sin(tick * 0.32) * 0.18) / physical_factor
 					await _settle(1)
+					animal._preview._process(1.0 / 30.0)
 					_align_edge(animal, Vector2(wanted, circle.center.y))
 					var legacy_start: int = Time.get_ticks_usec()
-					if player.get_scan_target() != animal: legacy_misses += 1
+					if not _legacy_visible(animal): legacy_misses += 1
 					legacy_times.append((Time.get_ticks_usec() - legacy_start) / 1000.0)
 					_scanner._physics_process(1.0 / 30.0)
 					times.append(_scanner.last_query_usec / 1000.0)
@@ -69,7 +74,7 @@ func run(tree: SceneTree, player: Node3D, capture: String = "") -> Dictionary:
 				_check(_scanner.ratio() > 0.38, "Motion restarted progress for the same visible animal")
 				measurements.append({"case": "moving_edge", "size": [size.x, size.y], "ui_scale": scaling, "body_scale": body_scale,
 					"viewport": [_tree.root.get_visible_rect().size.x, _tree.root.get_visible_rect().size.y], "circle": {"center": circle.center, "radius": circle.radius},
-					"minimum_overlap_px": minimum_overlap, "query_ms": _stats(times), "legacy_query_ms": _stats(legacy_times), "legacy_misses": legacy_misses, "progress": _scanner.ratio()})
+					"minimum_overlap_px": minimum_overlap, "cold_query_ms": cold_query_ms, "query_ms": _stats(times), "legacy_query_ms": _stats(legacy_times), "legacy_misses": legacy_misses, "progress": _scanner.ratio()})
 				print("SCAN_MATRIX_CASE ", JSON.stringify(measurements.back()))
 				animal.queue_free()
 				await _settle()
@@ -89,6 +94,8 @@ func run(tree: SceneTree, player: Node3D, capture: String = "") -> Dictionary:
 		first.position.x = player.position.x - 0.45 + sin(tick * 0.3) * 0.025
 		second.position.x = player.position.x + 0.45 - sin(tick * 0.3) * 0.025
 		await _settle(1)
+		first._preview._process(1.0 / 30.0)
+		second._preview._process(1.0 / 30.0)
 		_scanner._physics_process(1.0 / 30.0)
 		if last != null and _scanner.target != last: switches += 1
 		last = _scanner.target
@@ -125,15 +132,30 @@ func run(tree: SceneTree, player: Node3D, capture: String = "") -> Dictionary:
 	await _settle()
 	_scanner._physics_process(1.0 / 30.0)
 	_check(_scanner.target == null and _scanner.ratio() == 0.0, "Completely occluded visual animal was scanned")
+	measurements.append({"case": "full_occlusion", "query_ms": _scanner.last_query_usec / 1000.0, "rays": _scanner.last_scan_rays})
 	await _record("Full wall occlusion / scan is blocked")
+	shape.size = Vector3(0.05, 6, 0.4)
+	box.size = shape.size
+	await _settle()
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == other, "Partial narrow wall hid every actually exposed animal surface")
+	measurements.append({"case": "partial_occlusion", "target_visible": _scanner.target == other, "query_ms": _scanner.last_query_usec / 1000.0, "rays": _scanner.last_scan_rays})
+	await _record("Partial narrow wall / exposed surface remains scannable")
 	wall.queue_free()
 	await _settle()
 	other.get_node("SpeciesVisual").hide()
-	var legacy_hidden_hit: bool = player.get_scan_target() == other
+	var legacy_hidden_hit: bool = _legacy_visible(other)
 	_scanner._physics_process(1.0 / 30.0)
 	_check(_scanner.target == null, "Invisible movement capsule invented a visible animal")
 	await _record("Hidden mesh / capsule cannot be scanned")
 	other.get_node("SpeciesVisual").show()
+	original.global_position = other.global_position + _camera.global_basis.z * 0.5
+	original.get_node("SpeciesVisual").hide()
+	await _settle()
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == other, "A foreign invisible capsule hid an actually visible animal")
+	await _record("Foreign hidden capsule / visible animal behind remains scannable")
+	original.global_position.x += 30.0
 	other.global_position = player.global_position + Vector3(0, 0, -float(player.inspection_radius) - 0.5)
 	_camera.look_at(other.global_position + Vector3.UP * 0.56)
 	await _settle()
@@ -153,10 +175,43 @@ func run(tree: SceneTree, player: Node3D, capture: String = "") -> Dictionary:
 	_tree.paused = true
 	_scanner._physics_process(1.0 / 30.0)
 	_check(_scanner.target == null and _scanner.ratio() == 0.0, "Pause retained visual scan progress")
+	await _record("Pause / target and progress reset")
 	_tree.paused = false
 	measurements.append({"case": "two_targets", "switches": switches, "short_loss": "reset", "full_occlusion": "blocked", "invisible_capsule": "blocked", "legacy_hidden_hit": legacy_hidden_hit, "range": "blocked", "fov": [42, 88], "pause": "reset"})
 	first.queue_free()
 	second.queue_free()
+	await _settle()
+	# Warm native frame sample without alignment work or screenshot writes.
+	# Twelve loaded animals exercise selection cost; this is an isolated scene,
+	# not a whole-campaign/target-PC FPS claim.
+	var crowd: Array[Node3D] = []
+	_camera.fov = original_fov
+	for index in range(12):
+		var animal: Node3D = _animal(2771337, 950 + index)
+		animal.global_position = player.global_position + Vector3((index % 3 - 1) * 0.4, 0, -5.0 - index * 0.15)
+		crowd.append(animal)
+	_camera.look_at(player.global_position + Vector3(0, 0.6, -5))
+	await _settle()
+	_scanner.reset()
+	var crowd_queries: Array[float] = []
+	var frame_intervals: Array[float] = []
+	var started: int = Time.get_ticks_usec()
+	var cold_crowd_ms: float = 0
+	for tick in range(60):
+		await _tree.process_frame
+		for animal: Node3D in crowd: animal._preview._process(1.0 / 60.0)
+		_scanner._physics_process(1.0 / 60.0)
+		if not _capture.is_empty(): await RenderingServer.frame_post_draw
+		var now: int = Time.get_ticks_usec()
+		if tick == 0: cold_crowd_ms = _scanner.last_query_usec / 1000.0
+		if tick >= 10:
+			crowd_queries.append(_scanner.last_query_usec / 1000.0)
+			frame_intervals.append((now - started) / 1000.0)
+		started = now
+	_check(_scanner.target != null, "Twelve nearby rendered animals lost every scan target")
+	measurements.append({"case": "twelve_animals", "cold_query_ms": cold_crowd_ms, "query_ms": _stats(crowd_queries), "frame_interval_ms": _stats(frame_intervals), "process_ms": Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0, "physics_ms": Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0, "draw_calls": Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME), "note": "Warm isolated scene; frame intervals include software renderer and shared-host contention, no PNG writes."})
+	await _record("Twelve nearby animals / warm frame sample")
+	for animal: Node3D in crowd: animal.queue_free()
 	if _title != null: _title.queue_free()
 	_scanner.reset()
 	_tree.root.size = original_size
@@ -171,7 +226,16 @@ func _animal(species: int, individual: int) -> Node3D:
 	_tree.root.add_child(animal)
 	animal.set_physics_process(false)
 	animal._preview.set_motion("walk")
+	animal._preview.set_process(false)
 	return animal
+
+func _legacy_visible(animal: Node3D) -> bool:
+	# Unchanged #199 physical candidate predicate, retained as a read-only
+	# baseline when Chat 4 routes the public player getter to the scanner API.
+	if _player.global_position.distance_to(animal.global_position) > _player.inspection_radius: return false
+	var circle: Dictionary = _player._scan_circle()
+	var contact: Dictionary = _player._scan_contact(animal, circle)
+	return not contact.is_empty() and _player._scan_visible(animal, contact.pixel, circle) != null
 
 func _settle(count: int = 3) -> void:
 	for tick in range(count):
@@ -180,6 +244,7 @@ func _settle(count: int = 3) -> void:
 
 func _right_edge(animal: Node3D) -> Vector2:
 	var right := Vector2(-INF, 0)
+	_scanner.silhouette.prepare_projection(_camera)
 	for reference: WeakRef in _scanner.silhouette._visual_nodes(animal):
 		var node: Node3D = reference.get_ref()
 		if not node.is_visible_in_tree(): continue
@@ -189,10 +254,19 @@ func _right_edge(animal: Node3D) -> Vector2:
 		if node is MultiMeshInstance3D: transforms = _scanner.silhouette._batch_transforms(node, count)
 		for index in range(count):
 			var transform: Transform3D = node.global_transform * transforms[index] if node is MultiMeshInstance3D else node.global_transform
-			for point: Vector3 in _scanner.silhouette._mesh_faces(mesh):
-				var pixel: Vector2 = _camera.unproject_position(transform * point)
+			for point: Vector3 in _unique_vertices(mesh):
+				var pixel: Vector2 = _scanner.silhouette.project(transform * point)
 				if pixel.x > right.x: right = pixel
 	return right
+
+func _unique_vertices(mesh: Mesh) -> PackedVector3Array:
+	var identity: int = mesh.get_instance_id()
+	if _edge_vertices.has(identity): return _edge_vertices[identity]
+	var unique: Dictionary = {}
+	for vertex: Vector3 in _scanner.silhouette._mesh_faces(mesh): unique[vertex] = true
+	var vertices := PackedVector3Array(unique.keys())
+	_edge_vertices[identity] = vertices
+	return vertices
 
 func _align_edge(animal: Node3D, wanted: Vector2) -> void:
 	for iteration in range(3): _move_pixels(animal, wanted - _right_edge(animal))

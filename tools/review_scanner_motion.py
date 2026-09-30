@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import subprocess
 import tempfile
+from validation_provenance import SourceRun
 
 
 def main():
@@ -15,9 +16,12 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--renderer", choices=["gl_compatibility", "forward_plus"], default="gl_compatibility")
     parser.add_argument("--languages", nargs="+", choices=["de", "en"], default=["de", "en"])
+    parser.add_argument("--include-nests", action="store_true")
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
     args.output.mkdir(parents=True, exist_ok=True)
+    source = SourceRun(project)
+    source.begin_report(args.output)
     records = []
     for language in args.languages:
         output = args.output.resolve() / language
@@ -42,6 +46,32 @@ def main():
         records.append({"language": language, "renderer": args.renderer, "command": command,
                         "frames": measurements["captured_frames"], "video_sha256": hashlib.sha256(video.read_bytes()).hexdigest()})
         print(json.dumps(records[-1]), flush=True)
+        if args.include_nests:
+            nest_output = output / "nests"
+            nest_output.mkdir()
+            nest_command = command.copy()
+            nest_command[nest_command.index("res://tools/capture_scanner_motion.gd")] = "res://tools/capture_nest_discovery.gd"
+            nest_command[-2] = str(nest_output)
+            with tempfile.TemporaryDirectory(prefix="nest-render-") as userdata:
+                env = os.environ.copy()
+                for name in ["XDG_DATA_HOME", "XDG_CONFIG_HOME", "XDG_CACHE_HOME"]:
+                    env[name] = str(Path(userdata) / name)
+                with (nest_output / "render.log").open("wb") as log:
+                    result = subprocess.run(nest_command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=180)
+            log = (nest_output / "render.log").read_text()
+            report = json.loads((nest_output / "measurements.json").read_text())
+            if result.returncode or report["failures"] or report["frames"] != 130 or any(token in log for token in ["SCRIPT ERROR", "ERROR:", "ObjectDB instances leaked"]):
+                raise RuntimeError(f"Nest render failed: {nest_output}")
+            nest_video = nest_output / "nest-discovery.mp4"
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", "30", "-i", str(nest_output / "frame-%05d.png"),
+                            "-c:v", "libx264", "-threads", "2", "-crf", "20", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(nest_video)], check=True)
+            records.append({"case": "nests", "language": language, "command": nest_command, "frames": report["frames"], "video_sha256": hashlib.sha256(nest_video.read_bytes()).hexdigest()})
+            print(json.dumps(records[-1]), flush=True)
+    source.observe("render_complete", force=True)
+    provenance = source.write_report(args.output)
+    (args.output / "source.json").write_text(json.dumps(provenance, indent=2) + "\n")
+    if not provenance["reusable"]:
+        raise RuntimeError("Source changed during rendered capture")
     (args.output / "results.json").write_text(json.dumps(records, indent=2) + "\n")
 
 

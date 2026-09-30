@@ -1,0 +1,57 @@
+--- a/creatures/player/player_controller_v2.gd
++++ b/creatures/player/player_controller_v2.gd
+@@ -160,47 +160,16 @@
+ 
+ 
+ func get_scan_target() -> Node3D:
+-	last_scan_rays = 0
+-	_scan_target_pixel = Vector2.ZERO
+-	if _gameplay_camera == null or not is_inside_tree(): return null
+-	var circle: Dictionary = _scan_circle()
+-	var old_target: Variant = get_node("CreatureScanner").target
+-	var previous: Node3D = old_target as Node3D if is_instance_valid(old_target) else null
+-	var retained: Node3D
+-	var retained_score: float = INF
+-	var retained_pixel: Vector2
+-	var best: Node3D
+-	var best_score: float = INF
+-	var best_pixel: Vector2
+-	# The bounded physical population has at most twelve animals and six nests.
+-	# Reject by projected collision silhouette before asking physics for a ray.
+-	for group_name: StringName in [&"wildlife", &"wildlife_nest"]:
+-		for value: Node in get_tree().get_nodes_in_group(group_name):
+-			var candidate := value as Node3D
+-			if candidate == null or not is_instance_valid(candidate): continue
+-			if candidate.is_in_group(&"wildlife") and (not candidate.has_method("get_inspection_data") or bool(candidate.get("is_dead"))): continue
+-			if global_position.distance_to(candidate.global_position) > inspection_radius: continue
+-			var contact: Dictionary = _scan_contact(candidate, circle)
+-			if contact.is_empty(): continue
+-			var visible_pixel: Variant = _scan_visible(candidate, contact.pixel, circle)
+-			if visible_pixel == null: continue
+-			var score: float = float(contact.score) + global_position.distance_to(candidate.global_position) * 0.001
+-			if candidate == previous:
+-				retained = candidate
+-				retained_score = score
+-				retained_pixel = visible_pixel
+-			if score < best_score:
+-				best = candidate
+-				best_score = score
+-				best_pixel = visible_pixel
+-	# A small preference for the still-visible individual prevents two moving
+-	# animals at the ring edge from swapping every physics frame.
+-	var chosen: Node3D = retained if retained != null and retained_score <= best_score + 0.12 else best
+-	if chosen != null: _scan_target_pixel = retained_pixel if chosen == retained else best_pixel
++	var scanner := get_node_or_null("CreatureScanner")
++	if scanner == null: return null
++	var chosen: Node3D = scanner.get_scan_target()
++	last_scan_rays = scanner.last_scan_rays
++	_scan_target_pixel = scanner.target_pixel
+ 	return chosen
+ 
+ func get_scan_target_pixel() -> Vector2:
+-	return _scan_target_pixel
++	var scanner := get_node_or_null("CreatureScanner")
++	return scanner.target_pixel if scanner != null else Vector2.ZERO
+ 
+ func _scan_circle() -> Dictionary:
+ 	var hud := get_node_or_null("CreatureInspectionHUD")

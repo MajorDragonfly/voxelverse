@@ -5,33 +5,86 @@ var _nodes: Dictionary = {}
 var _faces: Dictionary = {}
 var _mesh_order: Array[int] = []
 var _static_batches: Dictionary = {}
-const MESH_CACHE_LIMIT := 32
+var _batch_layouts: Dictionary = {}
+var _projection := Projection()
+var _view_size := Vector2.ONE
+var _accepted: Dictionary = {}
+const MESH_CACHE_LIMIT := 512
 
-func contacts(camera: Camera3D, candidate: Node3D, circle: Dictionary) -> Array[Dictionary]:
+func contacts(camera: Camera3D, candidate: Node3D, circle: Dictionary, accept: Callable = Callable()) -> Array[Dictionary]:
+	prepare_projection(camera)
+	_accepted = {}
 	var result: Array[Dictionary] = []
 	var pixels: Dictionary = {}
 	for reference: WeakRef in _visual_nodes(candidate):
 		var node: Node3D = reference.get_ref()
 		if not is_instance_valid(node) or not node.is_visible_in_tree(): continue
 		if node is MeshInstance3D and node.mesh != null:
-			_mesh_contacts(camera, node.mesh, node.global_transform, circle, result, pixels)
+			if _mesh_contacts(camera, node.mesh, node.global_transform, circle, result, pixels, accept): return _accepted_contacts()
 		elif node is MultiMeshInstance3D and node.multimesh != null and node.multimesh.mesh != null:
 			var batch: MultiMesh = node.multimesh
+			var mesh: Mesh = batch.mesh
 			# Runtime pose changes individual transforms. Its static custom_aabb
 			# is a renderer bound, not proof that an animated foot/lid is absent.
 			var count: int = batch.instance_count if batch.visible_instance_count < 0 else batch.visible_instance_count
-			var transforms: Array[Transform3D] = _batch_transforms(node, count)
-			var bounds: AABB
-			for index in range(count):
-				var instance: Transform3D = transforms[index]
-				var part_bounds: AABB = instance * batch.mesh.get_aabb()
-				bounds = part_bounds if index == 0 else bounds.merge(part_bounds)
-			if count == 0 or not _overlaps(camera, node.global_transform * bounds, circle): continue
-			for index in range(count):
-				_mesh_contacts(camera, batch.mesh, node.global_transform * transforms[index], circle, result, pixels)
+			if count == 0: continue
+			var layout: Dictionary = _batch_layout(node, count, mesh)
+			if not _overlaps(camera, node.global_transform * layout.bounds, circle): continue
+			if layout.tree.is_empty():
+				for index in range(count):
+					if _mesh_contacts(camera, mesh, node.global_transform * layout.transforms[index], circle, result, pixels, accept): return _accepted_contacts()
+			else:
+				if _batch_tree_contacts(camera, mesh, layout, layout.tree.size() - 1, node.global_transform, circle, result, pixels, accept): return _accepted_contacts()
+	if accept.is_valid(): return []
 	result.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		return a.depth < b.depth if is_equal_approx(a.score, b.score) else a.score < b.score)
 	return result
+
+func _accepted_contacts() -> Array[Dictionary]:
+	var selected: Array[Dictionary] = []
+	if not _accepted.is_empty(): selected.append(_accepted)
+	return selected
+
+func _batch_layout(node: MultiMeshInstance3D, count: int, mesh: Mesh) -> Dictionary:
+	var identity: int = node.multimesh.get_instance_id()
+	if node.name == "RuntimeVoxelBatch" and _batch_layouts.has(identity) and _batch_layouts[identity].count == count: return _batch_layouts[identity]
+	var transforms: Array[Transform3D] = _batch_transforms(node, count)
+	var mesh_bounds: AABB = _mesh_bounds(mesh)
+	var bounds: AABB
+	var boxes := PackedVector3Array()
+	if count > 128: boxes.resize(count * 3)
+	for index in range(count):
+		var part_bounds: AABB = transforms[index] * mesh_bounds
+		bounds = part_bounds if index == 0 else bounds.merge(part_bounds)
+		if count > 128:
+			boxes[index * 3] = part_bounds.position
+			boxes[index * 3 + 1] = part_bounds.end
+			boxes[index * 3 + 2] = part_bounds.get_center()
+	var layout := {"transforms": transforms, "bounds": bounds, "tree": _build_tree(boxes, bounds), "count": count}
+	if node.name == "RuntimeVoxelBatch": _batch_layouts[identity] = layout
+	return layout
+
+func _batch_tree_contacts(camera: Camera3D, mesh: Mesh, layout: Dictionary, index: int, transform: Transform3D,
+		circle: Dictionary, result: Array[Dictionary], pixels: Dictionary, accept: Callable = Callable()) -> bool:
+	var node: Dictionary = layout.tree[index]
+	if not _overlaps(camera, transform * node.bounds, circle): return false
+	if node.has("triangles"):
+		for instance: int in node.triangles:
+			if _mesh_contacts(camera, mesh, transform * layout.transforms[instance], circle, result, pixels, accept): return true
+	else:
+		if _batch_tree_contacts(camera, mesh, layout, node.left, transform, circle, result, pixels, accept): return true
+		if _batch_tree_contacts(camera, mesh, layout, node.right, transform, circle, result, pixels, accept): return true
+	return false
+
+func prepare_projection(camera: Camera3D) -> void:
+	_projection = camera.get_camera_projection() * Projection(camera.get_camera_transform().affine_inverse())
+	_view_size = camera.get_viewport().get_visible_rect().size
+
+func project(point: Vector3) -> Vector2:
+	# Freeze the camera/viewport matrix once per query. Calling unproject_position
+	# for every triangle repeatedly re-reads native viewport/projection state.
+	var clip: Vector4 = _projection * Vector4(point.x, point.y, point.z, 1.0)
+	return Vector2((clip.x / clip.w + 1.0) * _view_size.x * 0.5, (1.0 - clip.y / clip.w) * _view_size.y * 0.5)
 
 func _batch_transforms(node: MultiMeshInstance3D, count: int) -> Array[Transform3D]:
 	var batch: MultiMesh = node.multimesh
@@ -39,11 +92,17 @@ func _batch_transforms(node: MultiMeshInstance3D, count: int) -> Array[Transform
 	# RuntimeVoxelBatch is authored once in creature_runtime_preview.rebuild;
 	# locomotion moves its parent nodes. Lids have changing per-instance poses.
 	for key: int in _static_batches.keys():
-		if not is_instance_valid(_static_batches[key].owner.get_ref()): _static_batches.erase(key)
-	if node.name == "RuntimeVoxelBatch" and _static_batches.has(identity): return _static_batches[identity].transforms
+		if not is_instance_valid(_static_batches[key].owner.get_ref()): _static_batches.erase(key); _batch_layouts.erase(key)
+	if node.name == "RuntimeVoxelBatch" and _static_batches.has(identity) and _static_batches[identity].count == count: return _static_batches[identity].transforms
 	# One bulk read per changing batch, rather than a RenderingServer round trip
 	# for every voxel. Godot stores three matrix rows then color/custom payloads.
-	var buffer: PackedFloat32Array = batch.buffer
+	var buffer := PackedFloat32Array()
+	# EyeExpression already retains the exact CPU pose uploaded this frame.
+	# Read that existing contract rather than forcing a GPU buffer readback.
+	for eye: Dictionary in node.get_parent().get_meta("eye_expression_sockets", []):
+		if eye.upper == node: buffer = eye.upper_buffer; break
+		if eye.lower == node: buffer = eye.lower_buffer; break
+	if buffer.is_empty(): buffer = batch.buffer
 	var stride: int = 12 + (4 if batch.use_colors else 0) + (4 if batch.use_custom_data else 0)
 	var result: Array[Transform3D] = []
 	for index in range(count):
@@ -51,7 +110,7 @@ func _batch_transforms(node: MultiMeshInstance3D, count: int) -> Array[Transform
 		result.append(Transform3D(Basis(Vector3(buffer[offset], buffer[offset + 4], buffer[offset + 8]),
 			Vector3(buffer[offset + 1], buffer[offset + 5], buffer[offset + 9]), Vector3(buffer[offset + 2], buffer[offset + 6], buffer[offset + 10])),
 			Vector3(buffer[offset + 3], buffer[offset + 7], buffer[offset + 11])))
-	if node.name == "RuntimeVoxelBatch": _static_batches[identity] = {"owner": weakref(batch), "transforms": result}
+	if node.name == "RuntimeVoxelBatch": _static_batches[identity] = {"owner": weakref(batch), "transforms": result, "count": count}
 	return result
 
 func _visual_nodes(candidate: Node3D) -> Array[WeakRef]:
@@ -76,51 +135,153 @@ func _collect(node: Node, nodes: Array[WeakRef]) -> void:
 	for child: Node in node.get_children(): _collect(child, nodes)
 
 func _mesh_contacts(camera: Camera3D, mesh: Mesh, transform: Transform3D, circle: Dictionary,
-		result: Array[Dictionary], pixels: Dictionary) -> void:
-	if not _overlaps(camera, transform * mesh.get_aabb(), circle): return
-	var faces: PackedVector3Array = _mesh_faces(mesh)
-	for index in range(0, faces.size(), 3):
-		var a: Vector3 = transform * faces[index]
-		var b: Vector3 = transform * faces[index + 1]
-		var c: Vector3 = transform * faces[index + 2]
-		if camera.is_position_behind(a) or camera.is_position_behind(b) or camera.is_position_behind(c): continue
-		var screen_a: Vector2 = camera.unproject_position(a)
-		var screen_b: Vector2 = camera.unproject_position(b)
-		var screen_c: Vector2 = camera.unproject_position(c)
-		var pixel: Vector2 = _closest_triangle(circle.center, screen_a, screen_b, screen_c)
-		var distance: float = pixel.distance_to(circle.center)
-		if distance > float(circle.radius): continue
-		# Move off a triangle edge while staying inside the actual disc, so the
-		# physics visibility probe is robust even for less than one pixel overlap.
-		var centroid: Vector2 = (screen_a + screen_b + screen_c) / 3.0
-		var inset: float = minf(0.15, maxf(float(circle.radius) - distance, 0.0) * 0.25)
-		if pixel.distance_to(centroid) > 0.001: pixel = pixel.move_toward(centroid, inset)
-		var point: Variant = Geometry3D.ray_intersects_triangle(camera.project_ray_origin(pixel), camera.project_ray_normal(pixel), a, b, c)
-		if point == null: continue
-		var key := Vector2i(roundi(pixel.x * 4), roundi(pixel.y * 4))
-		var depth: float = camera.global_position.distance_to(point)
-		if pixels.has(key):
-			var existing: Dictionary = pixels[key]
-			if depth < float(existing.depth): existing.point = point; existing.depth = depth
-			continue
-		var contact := {"pixel": pixel, "point": point, "depth": depth, "score": pixel.distance_to(circle.center) / float(circle.radius)}
-		pixels[key] = contact
-		result.append(contact)
+		result: Array[Dictionary], pixels: Dictionary, accept: Callable = Callable()) -> bool:
+	var geometry: Dictionary = _mesh_geometry(mesh)
+	if not _overlaps(camera, transform * geometry.bounds, circle): return false
+	var faces: PackedVector3Array = geometry.faces
+	var tree: Array[Dictionary] = geometry.tree
+	if tree.is_empty():
+		for index in range(0, faces.size(), 3):
+			if _triangle_contact(camera, faces, index, transform, circle, result, pixels, accept): return true
+	else:
+		return _tree_contacts(camera, faces, tree, tree.size() - 1, transform, circle, result, pixels, accept)
+	return false
+
+func _tree_contacts(camera: Camera3D, faces: PackedVector3Array, tree: Array[Dictionary], index: int,
+		transform: Transform3D, circle: Dictionary, result: Array[Dictionary], pixels: Dictionary, accept: Callable = Callable()) -> bool:
+	var node: Dictionary = tree[index]
+	if not _overlaps(camera, transform * node.bounds, circle): return false
+	if node.has("triangles"):
+		for triangle: int in node.triangles:
+			if _triangle_contact(camera, faces, triangle * 3, transform, circle, result, pixels, accept): return true
+	else:
+		if _tree_contacts(camera, faces, tree, node.left, transform, circle, result, pixels, accept): return true
+		if _tree_contacts(camera, faces, tree, node.right, transform, circle, result, pixels, accept): return true
+	return false
+
+func _triangle_contact(camera: Camera3D, faces: PackedVector3Array, index: int, transform: Transform3D,
+		circle: Dictionary, result: Array[Dictionary], pixels: Dictionary, accept: Callable = Callable()) -> bool:
+	var a: Vector3 = transform * faces[index]
+	var b: Vector3 = transform * faces[index + 1]
+	var c: Vector3 = transform * faces[index + 2]
+	if camera.is_position_behind(a) or camera.is_position_behind(b) or camera.is_position_behind(c): return false
+	var screen_a: Vector2 = project(a)
+	var screen_b: Vector2 = project(b)
+	var screen_c: Vector2 = project(c)
+	var pixel: Vector2 = _closest_triangle(circle.center, screen_a, screen_b, screen_c)
+	var distance: float = pixel.distance_to(circle.center)
+	if distance > float(circle.radius): return false
+	# Move off a triangle edge while staying inside the actual disc, so the
+	# physics visibility probe is robust even for less than one pixel overlap.
+	var centroid: Vector2 = (screen_a + screen_b + screen_c) / 3.0
+	var inset: float = minf(0.15, maxf(float(circle.radius) - distance, 0.0) * 0.25)
+	if pixel.distance_to(centroid) > 0.001: pixel = pixel.move_toward(centroid, inset)
+	var point: Variant = Geometry3D.ray_intersects_triangle(camera.project_ray_origin(pixel), camera.project_ray_normal(pixel), a, b, c)
+	if point == null: return false
+	var key := Vector2i(roundi(pixel.x * 4), roundi(pixel.y * 4))
+	var depth: float = camera.global_position.distance_to(point)
+	if pixels.has(key):
+		var existing: Dictionary = pixels[key]
+		if depth < float(existing.depth):
+			existing.point = point
+			existing.depth = depth
+			if _accept_contact(existing, accept): return true
+		return false
+	var contact := {"pixel": pixel, "point": point, "depth": depth, "score": pixel.distance_to(circle.center) / float(circle.radius)}
+	pixels[key] = contact
+	result.append(contact)
+	return _accept_contact(contact, accept)
+
+func _accept_contact(contact: Dictionary, accept: Callable) -> bool:
+	if not accept.is_valid(): return false
+	# -1 aborts a proven fully occluded candidate; 0 tries another surface;
+	# 1 accepts a visible point. Boolean callbacks retain the same 0/1 meaning.
+	var state: int = int(accept.call(contact))
+	if state > 0: _accepted = contact
+	return state != 0
+
+func world_bounds(candidate: Node3D) -> AABB:
+	var bounds: AABB
+	var first: bool = true
+	for reference: WeakRef in _visual_nodes(candidate):
+		var node: Node3D = reference.get_ref()
+		if not is_instance_valid(node) or not node.is_visible_in_tree(): continue
+		var local: AABB
+		if node is MeshInstance3D and node.mesh != null: local = node.mesh.get_aabb()
+		elif node is MultiMeshInstance3D and node.multimesh != null and node.multimesh.mesh != null:
+			var count: int = node.multimesh.instance_count if node.multimesh.visible_instance_count < 0 else node.multimesh.visible_instance_count
+			if count == 0: continue
+			local = _batch_layout(node, count, node.multimesh.mesh).bounds
+		else: continue
+		var world: AABB = node.global_transform * local
+		bounds = world if first else bounds.merge(world)
+		first = false
+	return bounds
 
 func _mesh_faces(mesh: Mesh) -> PackedVector3Array:
+	return _mesh_geometry(mesh).faces
+
+func _mesh_bounds(mesh: Mesh) -> AABB:
+	return _mesh_geometry(mesh).bounds
+
+func _build_tree(faces: PackedVector3Array, bounds: AABB) -> Array[Dictionary]:
+	var tree: Array[Dictionary] = []
+	var count: int = faces.size() / 3
+	if count <= 128: return tree
+	# Morton sorting is one native integer-array sort. Nearby triangles share
+	# leaves; a ring edge visits only nearby leaves instead of a whole skin.
+	var keys := PackedInt64Array()
+	keys.resize(count)
+	var extent := Vector3(maxf(bounds.size.x, 0.00001), maxf(bounds.size.y, 0.00001), maxf(bounds.size.z, 0.00001))
+	for index in range(count):
+		var center: Vector3 = (faces[index * 3] + faces[index * 3 + 1] + faces[index * 3 + 2]) / 3.0
+		var cell: Vector3 = (center - bounds.position) / extent * 1023.0
+		var morton: int = _spread(clampi(int(cell.x), 0, 1023)) | (_spread(clampi(int(cell.y), 0, 1023)) << 1) | (_spread(clampi(int(cell.z), 0, 1023)) << 2)
+		keys[index] = (morton << 32) | index
+	keys.sort()
+	var level: Array[int] = []
+	for start in range(0, count, 32):
+		var indices := PackedInt32Array()
+		var leaf_bounds: AABB
+		for position in range(start, mini(count, start + 32)):
+			var triangle: int = keys[position] & 0xffffffff
+			indices.append(triangle)
+			var triangle_bounds := AABB(faces[triangle * 3], Vector3.ZERO).expand(faces[triangle * 3 + 1]).expand(faces[triangle * 3 + 2])
+			leaf_bounds = triangle_bounds if position == start else leaf_bounds.merge(triangle_bounds)
+		level.append(tree.size())
+		tree.append({"bounds": leaf_bounds, "triangles": indices})
+	while level.size() > 1:
+		var next: Array[int] = []
+		for index in range(0, level.size(), 2):
+			if index + 1 == level.size(): next.append(level[index]); continue
+			var left: int = level[index]
+			var right: int = level[index + 1]
+			next.append(tree.size())
+			tree.append({"bounds": tree[left].bounds.merge(tree[right].bounds), "left": left, "right": right})
+		level = next
+	return tree
+
+static func _spread(value: int) -> int:
+	value = (value | (value << 16)) & 0x030000ff
+	value = (value | (value << 8)) & 0x0300f00f
+	value = (value | (value << 4)) & 0x030c30c3
+	return (value | (value << 2)) & 0x09249249
+
+func _mesh_geometry(mesh: Mesh) -> Dictionary:
 	var identity: int = mesh.get_instance_id()
 	if not _faces.has(identity):
-		_faces[identity] = {"mesh": mesh, "faces": mesh.get_faces()}
+		_faces[identity] = {"mesh": weakref(mesh), "faces": mesh.get_faces(), "bounds": mesh.get_aabb()}
+		_faces[identity]["tree"] = _build_tree(_faces[identity].faces, _faces[identity].bounds)
 		_mesh_order.append(identity)
 		if _mesh_order.size() > MESH_CACHE_LIMIT: _faces.erase(_mesh_order.pop_front())
-	return _faces[identity].faces
+	return _faces[identity]
 
 func _overlaps(camera: Camera3D, bounds: AABB, circle: Dictionary) -> bool:
 	var rect: Rect2
 	for index in range(8):
 		var corner: Vector3 = bounds.get_endpoint(index)
 		if camera.is_position_behind(corner): return true
-		var pixel: Vector2 = camera.unproject_position(corner)
+		var pixel: Vector2 = project(corner)
 		rect = Rect2(pixel, Vector2.ZERO) if index == 0 else rect.expand(pixel)
 	var nearest := Vector2(clampf(circle.center.x, rect.position.x, rect.end.x), clampf(circle.center.y, rect.position.y, rect.end.y))
 	return nearest.distance_squared_to(circle.center) <= float(circle.radius) * float(circle.radius)
