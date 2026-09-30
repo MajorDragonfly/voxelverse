@@ -14,6 +14,7 @@ func _run() -> void:
 	flow = root.get_node("SessionFlow")
 	saves = root.get_node("SaveGameService")
 	state = root.get_node("GameState")
+	flow.menu_error.connect(func(message: String) -> void: print("INT30_PUBLIC_LOAD_ERROR:", message))
 	saves.autosave_enabled = false
 	root.get_node("LocaleManager")._apply("de")
 	root.content_scale_size = Vector2i.ZERO
@@ -26,62 +27,87 @@ func _run() -> void:
 		RenderingServer.render_loop_enabled = false
 	change_scene_to_file(flow.TITLE_SCENE)
 	await scene_changed
+	if "--capture-snapshots" in args:
+		await _render_saved_village(args[args.find("--capture-snapshots") + 1])
+		await _done()
+		return
 	if "--int30-restart" in args:
 		await _cold_resume()
 		await _done()
 		return
-	_expect(Playtest.start(flow), "Public spherical test entry rejected.")
-	await _until(func() -> bool:
-		var t: Node = current_scene.get_node_or_null("Nest/Tribe")
-		return t != null and t.panel.confirmation_open, 90000)
-	var tribe: Node = current_scene.get_node_or_null("Nest/Tribe")
-	if tribe == null or not tribe.panel.confirmation_open:
-		_expect(false, "Public sphere did not prepare tribal confirmation.")
-		await _done()
-		return
-	tribe.panel.confirm.pressed.emit()
-	await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(), 30000)
-	if not tribe.is_active():
-		_expect(false, "Explicit handoff did not activate village: " + tribe.status)
-		await _done()
-		return
-	print("INT30_STAGE: real gathering")
-	tribe.select_all()
-	_expect(tribe.issue_order("wood"), "Wood order failed.")
-	await _work_until(tribe, func() -> bool: return int(tribe.village().stock.wood) >= 12, 45000)
-	_expect(int(tribe.village().stock.wood) >= 12, "Real wood transport did not reach warehouse.")
-	_expect(tribe.issue_order("stone"), "Stone order failed.")
-	await _work_until(tribe, func() -> bool: return int(tribe.village().stock.stone) >= 6, 45000)
-	_expect(int(tribe.village().stock.stone) >= 6 and saw_work, "Real stone/work tool not observed.")
-	_expect(tribe.issue_order("tool"), "Tool construction failed: " + tribe.status)
-	await _work_until(tribe, func() -> bool: return int(tribe.village().tools) == 1, 20000)
-	_expect(int(tribe.village().tools) == 1, "Tool was not built from delivered resources.")
-	await _until(func() -> bool: return tribe.navigation.is_ready(), 20000)
-	var site: Vector3 = Vector3.INF
-	for place: Variant in tribe.village().sites:
-		var point: Vector3 = Space.resolve(tribe, place)
-		if tribe.placement_check("hut", point).ok:
-			site = point
-			break
-	_expect(site.is_finite(), "No valid hut site on real spherical terrain.")
-	if not site.is_finite(): await _done(); return
-	_expect(tribe.issue_order("hut", site), "Hut order failed: " + tribe.status)
-	# Terrain certification uses the same setup budget as the public sphere entry.
-	# Durable command latency is measured independently below.
-	var certification_started: int = Time.get_ticks_msec()
-	await _until(func() -> bool: return tribe.navigation.is_ready(), 90000)
-	observations.append({"physical_graph_setup_ms": Time.get_ticks_msec() - certification_started})
-	_expect(tribe.navigation.is_ready(), "Building footprint recertification did not finish.")
-	if not tribe.navigation.is_ready(): await _done(); return
-	await _work_until(tribe, func() -> bool:
+	var tribe: Node
+	if "--start-from-checkpoint" in args:
+		var checkpoint: String = args[args.find("--start-from-checkpoint") + 1]
+		flow.world_started.connect(func() -> void: state.set_simulation_speed(0.0), CONNECT_ONE_SHOT)
+		await flow.load_game(_import_recorded_slot(checkpoint))
+		tribe = await _active_village()
+		if tribe == null: await _done(); return
+		_expect(tribe.village().huts == 0 and tribe.village().project.get("kind") == "hut", "Checkpoint is not an unfinished actual hut.")
+		var carried: bool = false
 		for member: Dictionary in tribe.village().members:
-			if not member.construction_id.is_empty(): return true
-		return false, 20000)
-	var construction_cargo: bool = false
-	for member: Dictionary in tribe.village().members:
-		construction_cargo = construction_cargo or not member.construction_id.is_empty()
-	_expect(construction_cargo, "No physically carried building material was observed.")
-	if not construction_cargo: await _done(); return
+			carried = carried or not member.construction_id.is_empty()
+		_expect(carried, "Retry source has no held physical construction material.")
+		observations.append({"real_checkpoint_source": checkpoint, "campaign_id": state.campaign.data.id, "clock": state.campaign.data.elapsed_seconds})
+		state.set_simulation_speed(1.0)
+	else:
+		_expect(Playtest.start(flow), "Public spherical test entry rejected.")
+		await _until(func() -> bool:
+			var t: Node = current_scene.get_node_or_null("Nest/Tribe")
+			return t != null and t.panel.confirmation_open, 90000)
+		tribe = current_scene.get_node_or_null("Nest/Tribe")
+		if tribe == null or not tribe.panel.confirmation_open:
+			_expect(false, "Public sphere did not prepare tribal confirmation.")
+			await _done()
+			return
+		tribe.panel.confirm.pressed.emit()
+		await _until(func() -> bool: return tribe.is_active() and tribe.navigation.is_ready(), 90000)
+		if not tribe.is_active():
+			_expect(false, "Explicit handoff did not activate village: " + tribe.status)
+			await _done()
+			return
+		print("INT30_STAGE: real gathering")
+		tribe.select_all()
+		_expect(tribe.issue_order("wood"), "Wood order failed.")
+		await _work_until(tribe, func() -> bool: return int(tribe.village().stock.wood) >= 12, 45000)
+		_expect(int(tribe.village().stock.wood) >= 12, "Real wood transport did not reach warehouse.")
+		if not failures.is_empty(): await _done(); return
+		print("INT30_STAGE: wood delivered, gather stone")
+		_expect(tribe.issue_order("stone"), "Stone order failed.")
+		await _work_until(tribe, func() -> bool: return int(tribe.village().stock.stone) >= 6, 45000)
+		_expect(int(tribe.village().stock.stone) >= 6 and saw_work, "Real stone/work tool not observed.")
+		if not failures.is_empty(): await _done(); return
+		print("INT30_STAGE: stone delivered, build tool")
+		_expect(tribe.issue_order("tool"), "Tool construction failed: " + tribe.status)
+		await _work_until(tribe, func() -> bool: return int(tribe.village().tools) == 1, 20000)
+		_expect(int(tribe.village().tools) == 1, "Tool was not built from delivered resources.")
+		if not failures.is_empty(): await _done(); return
+		print("INT30_STAGE: tool built, place hut")
+		await _until(func() -> bool: return tribe.navigation.is_ready(), 90000)
+		var site: Vector3 = Vector3.INF
+		for place: Variant in tribe.village().sites:
+			var point: Vector3 = Space.resolve(tribe, place)
+			if tribe.placement_check("hut", point).ok:
+				site = point
+				break
+		_expect(site.is_finite(), "No valid hut site on real spherical terrain.")
+		if not site.is_finite(): await _done(); return
+		_expect(tribe.issue_order("hut", site), "Hut order failed: " + tribe.status)
+		# Terrain certification uses the same setup budget as the public sphere entry.
+		# Durable command latency is measured independently below.
+		var certification_started: int = Time.get_ticks_msec()
+		await _until(func() -> bool: return tribe.navigation.is_ready(), 90000)
+		observations.append({"physical_graph_setup_ms": Time.get_ticks_msec() - certification_started})
+		_expect(tribe.navigation.is_ready(), "Building footprint recertification did not finish.")
+		if not tribe.navigation.is_ready(): await _done(); return
+		await _work_until(tribe, func() -> bool:
+			for member: Dictionary in tribe.village().members:
+				if not member.construction_id.is_empty(): return true
+			return false, 20000)
+		var construction_cargo: bool = false
+		for member: Dictionary in tribe.village().members:
+			construction_cargo = construction_cargo or not member.construction_id.is_empty()
+		_expect(construction_cargo, "No physically carried building material was observed.")
+		if not construction_cargo: await _done(); return
 	tribe.select_all()
 	_expect(tribe.issue_order("wait"), "Cannot hold building freight.")
 	await _checkpoint_restart(tribe, "construction_cargo")
@@ -136,8 +162,11 @@ func _run() -> void:
 	await _done()
 
 func _work_until(tribe: Node, predicate: Callable, milliseconds: int) -> void:
-	var deadline: int = Time.get_ticks_msec() + milliseconds
-	while not predicate.call() and Time.get_ticks_msec() < deadline:
+	# Physics progress is measured in campaign time. Software rendering may run
+	# fewer physics ticks per wall second; retain a separate bounded wall guard.
+	var deadline: int = Time.get_ticks_msec() + maxi(milliseconds * 20, 120000)
+	var campaign_deadline: float = state.campaign.data.elapsed_seconds + milliseconds / 1000.0
+	while not predicate.call() and Time.get_ticks_msec() < deadline and state.campaign.data.elapsed_seconds < campaign_deadline:
 		await physics_frame
 		await process_frame
 		for member: Dictionary in tribe.village().members:
@@ -159,10 +188,20 @@ func _checkpoint_restart(tribe: Node, kind: String) -> void:
 		"clock": state.campaign.data.elapsed_seconds, "campaign_id": state.campaign.data.id,
 		"transitions": state.campaign.data.completed_transitions.duplicate(true)}
 	_expect(Atomic.write(SNAPSHOT, expected, false) == OK, "Could not record cold expectation.")
+	if not capture_directory.is_empty():
+		_expect(Atomic.write(capture_directory.path_join(kind + "-expected.json"), expected, false) == OK, "Could not preserve cold expectation.")
+		_copy_checkpoint(kind + ".save.json")
 	var frozen: String = Atomic.stringify(tribe.village(), "")
 	var clock: float = state.campaign.data.elapsed_seconds
 	for frame in range(20): await process_frame
 	_expect(Atomic.stringify(tribe.village(), "") == frozen and state.campaign.data.elapsed_seconds == clock, "Pause advanced work, inventory or cursor.")
+	# Publish a rendered frame before unloading a software-rendered sky.
+	# Pure setup frames use on-demand rendering; its texture work must drain.
+	if DisplayServer.get_name() != "headless":
+		RenderingServer.render_loop_enabled = true
+		await process_frame
+		await RenderingServer.frame_post_draw
+		if capture_on_demand: RenderingServer.render_loop_enabled = false
 	# Retire the old writer before the fresh process commits a resumed result.
 	# Returning afterward would save the stale held state over that result.
 	flow.return_to_title()
@@ -172,6 +211,9 @@ func _checkpoint_restart(tribe: Node, kind: String) -> void:
 		"--script", get_script().resource_path, "--", "--int30-restart"])
 	var code: int = OS.execute(OS.get_executable_path(), arguments, output, true)
 	var log: String = "\n".join(output)
+	if not capture_directory.is_empty():
+		var file := FileAccess.open(capture_directory.path_join(kind + "-restart.log"), FileAccess.WRITE)
+		if file != null: file.store_string(log)
 	print("INT30_COLD_CASE:", kind, " exit=", code, "\n", log)
 	_expect(code == 0 and log.contains("INT30_RESTART_PASSED:" + kind) and not log.contains("SCRIPT ERROR") and not log.contains("ERROR:"), "Cold case failed: " + kind)
 	observations.append({"case": kind, "exit_code": code, "held_cargo": expected.village.members.map(func(m: Dictionary) -> String: return m.cargo),
@@ -194,6 +236,9 @@ func _cold_resume() -> void:
 	_expect(saves.load_now(expected.path), "Repeated load failed.")
 	_expect(_fingerprint(state.export_state()) == frozen, "Repeated load paid out cargo a second time.")
 	if expected.case == "far_cargo":
+		# Loading for inspection is read-only. Resume the selected managed slot
+		# explicitly before committing a far result without a physics scene.
+		_expect(saves.select_slot(expected.path), "Far session could not select its saved slot: " + saves.last_error)
 		var view: Dictionary = villages.view(state.get_current_body_record())
 		var worker: Dictionary = view.tribe.members[1]
 		var stock_before: int = int(view.tribe.stock.wood)
@@ -255,10 +300,13 @@ func _cold_resume() -> void:
 func _active_village() -> Node:
 	await _until(func() -> bool:
 		var t: Node = current_scene.get_node_or_null("Nest/Tribe")
-		return not flow.loading and t != null and t.is_active() and t.navigation.is_ready(), 90000)
+		return not flow.loading and t != null and t.is_active() and t.navigation.is_ready(), 150000)
 	var tribe: Node = current_scene.get_node_or_null("Nest/Tribe")
 	if tribe == null or not tribe.is_active():
-		_expect(false, "Saved village did not regain real group/terrain ownership.")
+		_expect(false, "Saved village did not regain real group/terrain ownership: " + JSON.stringify({
+			"save_error": saves.last_error, "scene": current_scene.scene_file_path,
+			"loading": flow.loading, "phase": state.current_phase,
+			"tribe_status": tribe.status if tribe != null else "absent"}))
 		return null
 	return tribe
 
@@ -272,10 +320,14 @@ func _capture_village(tribe: Node, name: String, far: bool) -> void:
 	tribe.camera.size = 82.0 if far else 29.0
 	tribe._visuals._process(0.3)
 	tribe._shelters._process(0.3)
-	RenderingServer.render_loop_enabled = true
-	for tick in range(3): await process_frame
-	await RenderingServer.frame_post_draw
-	_expect(root.get_texture().get_image().save_png(capture_directory.path_join(name + ".png")) == OK, "Capture failed: " + name)
+	if DisplayServer.get_name() == "headless":
+		_expect(saves.save_now(), "Actual village snapshot failed: " + saves.last_error)
+		_copy_checkpoint(name + ".save.json")
+	else:
+		RenderingServer.render_loop_enabled = true
+		for tick in range(3): await process_frame
+		await RenderingServer.frame_post_draw
+		_expect(root.get_texture().get_image().save_png(capture_directory.path_join(name + ".png")) == OK, "Capture failed: " + name)
 	var labels: Array = []
 	for node: Node in tribe._visuals.get_children():
 		if node is Label3D:
@@ -287,8 +339,59 @@ func _capture_village(tribe: Node, name: String, far: bool) -> void:
 		"camera_distance": tribe.camera.global_position.distance_to(center), "terrain": "public spherical campaign"})
 	if capture_on_demand: RenderingServer.render_loop_enabled = false
 
+func _copy_checkpoint(name: String) -> void:
+	var file := FileAccess.open(capture_directory.path_join(name), FileAccess.WRITE)
+	_expect(file != null, "Checkpoint copy failed: " + name)
+	if file != null: file.store_string(FileAccess.get_file_as_string(saves.save_path))
+
+func _import_recorded_slot(path: String) -> String:
+	# Public loading deliberately accepts managed slots only. Copy the exact
+	# bytes of our genuine checkpoint into this isolated test's slot directory.
+	var target: String = "user://saves/slot_int30_" + path.get_file().sha256_text().left(16) + ".json"
+	_expect(DirAccess.make_dir_recursive_absolute("user://saves") == OK, "Cannot prepare isolated recorded slot.")
+	var file := FileAccess.open(target, FileAccess.WRITE)
+	_expect(file != null, "Cannot import recorded slot.")
+	if file != null:
+		file.store_string(FileAccess.get_file_as_string(path))
+		file.close()
+	return target
+
+func _render_saved_village(directory: String) -> void:
+	# These snapshots were produced by actual work in the headless functional
+	# run. Freeze the simulation before reconstructing its completed village.
+	flow.world_started.connect(func() -> void: state.set_simulation_speed(0.0), CONNECT_ONE_SHOT)
+	await flow.load_game(_import_recorded_slot(directory.path_join("01_finished_village_near.save.json")))
+	var tribe: Node = await _active_village()
+	if tribe == null: return
+	_expect(tribe.village().huts == 1 and tribe.village().project.is_empty(), "Rendered snapshot lacks its completed physical hut.")
+	failures.append_array(await preload("res://core/diagnostics/stockpile_checks.gd").verify(tribe))
+	paused = true
+	await _capture_village(tribe, "01_finished_village_near", false)
+	await _capture_village(tribe, "02_finished_village_far", true)
+	await _capture_village(tribe, "03_finished_village_near_return", false)
+	RenderingServer.render_loop_enabled = true
+	await process_frame
+	await RenderingServer.frame_post_draw
+	RenderingServer.render_loop_enabled = false
+	flow.return_to_title()
+	await scene_changed
+	flow.world_started.connect(func() -> void: state.set_simulation_speed(0.0), CONNECT_ONE_SHOT)
+	await flow.load_game(_import_recorded_slot(directory.path_join("04_finished_village_actual_work.save.json")))
+	tribe = await _active_village()
+	if tribe == null: return
+	# A tool pulse is emitted by the real work path; reconstructing an order
+	# alone must never manufacture the visible work evidence.
+	state.set_simulation_speed(1.0)
+	capture_work_requested = true
+	await _work_until(tribe, func() -> bool: return not capture_work_requested, 15000)
+	_expect(not capture_work_requested and saw_work, "Rendered resumed source did not visibly advance real work.")
+
 func _done() -> void:
 	RenderingServer.render_loop_enabled = true
+	paused = true
+	if DisplayServer.get_name() != "headless":
+		await process_frame
+		await RenderingServer.frame_post_draw
 	paused = false
 	if current_scene != null:
 		var scene: Node = current_scene
