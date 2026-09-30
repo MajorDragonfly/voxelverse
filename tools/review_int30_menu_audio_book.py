@@ -81,7 +81,7 @@ def main():
               "command": command, "headless": args.headless, "images": images,
               "capture_on_demand": not args.headless,
               "log_sha256": hashlib.sha256((output / "run.log").read_bytes()).hexdigest(),
-              "scope": "Public spherical campaign; ordinary confirmed tribal transition; real mouse/keyboard routes, all six read-only book chapters DE/EN at actual 130% viewport scale, combined preview/mute/reset, paused time, fresh settings process. Each capture is real GL; redundant rendering of the paused world is disabled between captures. Full inherited sixteen-case menu matrix separately headless. No continuous footage, target-PC listening or native Windows acceptance."}
+              "scope": "Public spherical campaign; ordinary confirmed tribal transition; real mouse/keyboard routes, all six read-only book chapters DE/EN at actual 130% viewport scale, combined preview/mute/reset, paused time, fresh settings process. Each capture is real GL; continuous rendering is disabled during loading and between captures. Full inherited sixteen-case menu matrix separately headless. No continuous footage, target-PC listening or native Windows acceptance."}
     (output / "results.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps({"passed": passed, "exit_code": exit_code, "images": len(images), "log_sha256": report["log_sha256"]}))
     if not passed:
