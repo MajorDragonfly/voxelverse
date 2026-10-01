@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "basis_commit": "4610418ec9fe4465f6dfeec6037e58900f57a2cb",
+  "basis_tree": "18e8d85a0c0468f3b0e3f86f02eac7e6e1e1e444",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "cause": "A test can call runtime_shutdown.finish from SceneTree._initialize before SessionFlow enters the tree. The new unconditional get_tree() in prepare_shutdown emits a null-tree error even with no active loader.",
+  "correction": "Set all existing shutdown flags, then return if the loader is inactive, before calling get_tree(). Active retirement still advances main frames and joins the real world load.",
+  "scope": "One product line and separate evidence only. Existing narrow results are unchanged. Partial source-project checks; no frontend/body-travel repetition, full suite or export. Evidence added after positive checks; product source unchanged.",
+  "negative": {
+    "artifact_id": 11157827451,
+    "candidate": "fe8808",
+    "retained_log": "early-shutdown-original-fe8808.log.gz",
+    "source": {
+      "available": true,
+      "commit": "3c7e7c03ac159754c1fdd4b6fede749963811e41",
+      "tree": "3c9183f930f45b9d148ffb881157fe55b90635e3",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "34274de8114de9f2aed0e999ab6e84cd4db10fe89687d18444aabc2899c39f08",
+      "source_sha256": "f066fd3406f04d53238c18fa99860c67701418f25e8d438f7e36a71c0bf2376b",
+      "complete": true,
+      "file_count": 5500,
+      "bytes": 264538868,
+      "bytes_hashed": 264538868,
+      "seconds": 2.2595
+    },
+    "provenance_status": "prepared",
+    "check": {
+      "name": "asset_pipeline_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 0,
+      "seconds": 1.971,
+      "command": [
+        "/tmp/voxelverse-validation-editor-2cucxley/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--script",
+        "res://tests/asset_pipeline_test.gd"
+      ],
+      "log_sha256": "2e4b53ad823dcbee1759e6967458ea2a6c168b771a817b4a8ac6a5bfdd72903c",
+      "contract": "terrain_art",
+      "process_passed": false,
+      "source_sha256": "f066fd3406f04d53238c18fa99860c67701418f25e8d438f7e36a71c0bf2376b",
+      "source_status": "unchanged"
+    },
+    "exact_error": "ERROR: Parameter \"data.tree\" is null.",
+    "stack": [
+      "prepare_shutdown (res://autoload/session_flow.gd:573)",
+      "finish (res://core/runtime_shutdown.gd:10)",
+      "_finish (res://tests/asset_pipeline_test.gd:130)",
+      "_initialize (res://tests/asset_pipeline_test.gd:15)"
+    ]
+  },
+  "positive": {
+    "runner_output": "/workspace/scratch/86cf85b0abf1/early-shutdown-final",
+    "source": {
+      "available": true,
+      "commit": "4610418ec9fe4465f6dfeec6037e58900f57a2cb",
+      "tree": "18e8d85a0c0468f3b0e3f86f02eac7e6e1e1e444",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "215d005e7a94c3ecd021c8eba1c30963f430b1e225eac550da85863651c928ea",
+      "source_sha256": "27e603d7cd5fc673368ca591ba72ba0905cc5d64c817061d3b3bc2d2be506f97",
+      "complete": true,
+      "file_count": 5500,
+      "bytes": 264546540,
+      "bytes_hashed": 264546540,
+      "seconds": 1.1372
+    },
+    "provenance_status": "stable",
+    "source_reusable": true,
+    "checks": [
+      {
+        "name": "asset_pipeline_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.183,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/leak-work",
+          "--script",
+          "res://tests/asset_pipeline_test.gd"
+        ],
+        "log_sha256": "ed921ba840e0c02aa33ba17c0d1a29b33318f41fd4291b563ce800009aa6dbc0",
+        "contract": "terrain_art",
+        "process_passed": true,
+        "source_sha256": "27e603d7cd5fc673368ca591ba72ba0905cc5d64c817061d3b3bc2d2be506f97",
+        "source_status": "unchanged",
+        "retained_log": "early-shutdown-asset_pipeline_test.log.gz"
+      },
+      {
+        "name": "owned_scene_load_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 5.695,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/leak-work",
+          "--script",
+          "res://tests/owned_scene_load_test.gd"
+        ],
+        "log_sha256": "d237b882717f1122e456888e28976307d4a60c8028abaaba492bca9f68bf944c",
+        "contract": "frontend_locale",
+        "process_passed": true,
+        "source_sha256": "27e603d7cd5fc673368ca591ba72ba0905cc5d64c817061d3b3bc2d2be506f97",
+        "source_status": "unchanged",
+        "retained_log": "early-shutdown-owned_scene_load_test.log.gz"
+      }
+    ],
+    "supporting_checks": [
+      {
+        "name": "source_contracts",
+        "passed": true,
+        "exit_code": 0,
+        "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd"
+      },
+      {
+        "name": "import",
+        "passed": true,
+        "exit_code": 0,
+        "log_sha256": "c1fb846a86dab324613bf7d4b544c0a71adca12e517bf7c1a41e3b4d8334993f"
+      },
+      {
+        "name": "art_sources",
+        "passed": true,
+        "exit_code": 0,
+        "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108"
+      }
+    ]
+  }
+}

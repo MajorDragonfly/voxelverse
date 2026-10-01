@@ -570,6 +570,7 @@ func prepare_shutdown() -> void:
 	_shutting_down = true
 	_loading_scene = false
 	_preparing_world = true
+	if not _scene_load.is_active(): return
 	await _scene_load.discard(get_tree())
 
 func _exit_tree() -> void:

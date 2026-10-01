@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "basis_commit": "4610418ec9fe4465f6dfeec6037e58900f57a2cb",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "correction": "Same one-line inactive-loader return as early-shutdown-followup.json; no additional product changes.",
+  "scope": "Two additional exact early-initialize CI failures checked narrowly. Source differs from the first positive pair only by added/staged evidence. Evidence appended after these checks; no full or consumer repetition.",
+  "product_file_sha256": "7e023cffa09fb69817033d87495210261687e3a7e6cdf0abc787208e1f5fc7af",
+  "negative_checks": [
+    {
+      "source": {
+        "available": true,
+        "commit": "3c7e7c03ac159754c1fdd4b6fede749963811e41",
+        "tree": "3c9183f930f45b9d148ffb881157fe55b90635e3",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "34274de8114de9f2aed0e999ab6e84cd4db10fe89687d18444aabc2899c39f08",
+        "source_sha256": "f066fd3406f04d53238c18fa99860c67701418f25e8d438f7e36a71c0bf2376b",
+        "complete": true,
+        "file_count": 5500,
+        "bytes": 264538868,
+        "bytes_hashed": 264538868,
+        "seconds": 1.9809
+      },
+      "provenance_status": "prepared",
+      "check": {
+        "name": "creature_builder_v7_test",
+        "kind": "headless_godot",
+        "passed": false,
+        "exit_code": 0,
+        "seconds": 2.874,
+        "command": [
+          "/tmp/creature-godot/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/home/runner/work/voxelverse/voxelverse",
+          "--script",
+          "res://tests/creature_builder_v7_test.gd"
+        ],
+        "log_sha256": "c31997dc53b4291ca2ce2fc5f55f8ef9478428a7e211412197af9c55d1e53267",
+        "contract": "creature_body",
+        "process_passed": false,
+        "source_sha256": "f066fd3406f04d53238c18fa99860c67701418f25e8d438f7e36a71c0bf2376b",
+        "source_status": "unchanged"
+      },
+      "retained_log": "early-shutdown-original-fe8808-creature_builder_v7_test.log.gz",
+      "error_stack": [
+        "ERROR: Parameter \"data.tree\" is null.",
+        "[0] prepare_shutdown (res://autoload/session_flow.gd:573)",
+        "[1] finish (res://core/runtime_shutdown.gd:10)",
+        "[2] _finish (res://tests/creature_builder_v7_test.gd:180)",
+        "[3] _initialize (res://tests/creature_builder_v7_test.gd:41)"
+      ]
+    },
+    {
+      "source": {
+        "available": true,
+        "commit": "3c7e7c03ac159754c1fdd4b6fede749963811e41",
+        "tree": "3c9183f930f45b9d148ffb881157fe55b90635e3",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "34274de8114de9f2aed0e999ab6e84cd4db10fe89687d18444aabc2899c39f08",
+        "source_sha256": "f066fd3406f04d53238c18fa99860c67701418f25e8d438f7e36a71c0bf2376b",
+        "complete": true,
+        "file_count": 5500,
+        "bytes": 264538868,
+        "bytes_hashed": 264538868,
+        "seconds": 1.4455
+      },
+      "provenance_status": "prepared",
+      "check": {
+        "name": "planet_diversity_v9_test",
+        "kind": "headless_godot",
+        "passed": false,
+        "exit_code": 0,
+        "seconds": 1.367,
+        "command": [
+          "/tmp/voxelverse-validation-editor-dmekilxe/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/home/runner/work/voxelverse/voxelverse",
+          "--script",
+          "res://tests/planet_diversity_v9_test.gd"
+        ],
+        "log_sha256": "0a67264a8e8b94f83dce8329e0839a7376460627a839674d662f37db38ea9050",
+        "contract": "terrain_art",
+        "process_passed": false,
+        "source_sha256": "f066fd3406f04d53238c18fa99860c67701418f25e8d438f7e36a71c0bf2376b",
+        "source_status": "unchanged"
+      },
+      "retained_log": "early-shutdown-original-fe8808-planet_diversity_v9_test.log.gz",
+      "error_stack": [
+        "ERROR: Parameter \"data.tree\" is null.",
+        "[0] prepare_shutdown (res://autoload/session_flow.gd:573)",
+        "[1] finish (res://core/runtime_shutdown.gd:10)",
+        "[2] _finish (res://tests/planet_diversity_v9_test.gd:165)",
+        "[3] _initialize (res://tests/planet_diversity_v9_test.gd:17)"
+      ]
+    }
+  ],
+  "positive": {
+    "source": {
+      "available": true,
+      "commit": "4610418ec9fe4465f6dfeec6037e58900f57a2cb",
+      "tree": "18e8d85a0c0468f3b0e3f86f02eac7e6e1e1e444",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "3348a43239a61d6a98782897226fe558ea48de73ea90c8a13b44bf87c457df7a",
+      "source_sha256": "ac6a3c9c6855d3bf3d8f7dae796112d750152a9c8c130e4ecfaf67a75266a94f",
+      "complete": true,
+      "file_count": 5504,
+      "bytes": 264565427,
+      "bytes_hashed": 264565427,
+      "seconds": 0.849
+    },
+    "provenance_status": "stable",
+    "source_reusable": true,
+    "runner_output": "/workspace/scratch/86cf85b0abf1/early-shutdown-extra-final",
+    "checks": [
+      {
+        "name": "creature_builder_v7_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 3.837,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/leak-work",
+          "--script",
+          "res://tests/creature_builder_v7_test.gd"
+        ],
+        "log_sha256": "1bab59ff31c4eb30bdec2ffa25fd42176f7cc18425c50c9298875434f2c48718",
+        "contract": "creature_body",
+        "process_passed": true,
+        "source_sha256": "ac6a3c9c6855d3bf3d8f7dae796112d750152a9c8c130e4ecfaf67a75266a94f",
+        "source_status": "unchanged",
+        "retained_log": "early-shutdown-creature_builder_v7_test.log.gz"
+      },
+      {
+        "name": "planet_diversity_v9_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 2.925,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/leak-work",
+          "--script",
+          "res://tests/planet_diversity_v9_test.gd"
+        ],
+        "log_sha256": "9ed2b12ea190183211cbed6e3c887711a1539d39432dabfd8dfcbd9460e6d202",
+        "contract": "terrain_art",
+        "process_passed": true,
+        "source_sha256": "ac6a3c9c6855d3bf3d8f7dae796112d750152a9c8c130e4ecfaf67a75266a94f",
+        "source_status": "unchanged",
+        "retained_log": "early-shutdown-planet_diversity_v9_test.log.gz"
+      }
+    ]
+  }
+}
