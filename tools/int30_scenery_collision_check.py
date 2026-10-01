@@ -15,6 +15,39 @@ from validation_support import isolated_env, validation_editor
 from validation_provenance import SourceRun
 from validate_godot import ERROR
 
+
+def world_evidence_report(output):
+    """Describe retained bytes; a checkpoint can never substitute completion."""
+    report = {}
+    for kind, name in [('final', 'int30-collision-world.json'),
+                       ('checkpoint', 'int30-collision-progress.json')]:
+        path = output / name
+        entry = {'path': name, 'present': path.is_file(), 'valid': False,
+                 'complete': False, 'passed': False}
+        if entry['present']:
+            try:
+                contents = path.read_bytes()
+                entry['sha256'] = hashlib.sha256(contents).hexdigest()
+                value = json.loads(contents)
+                if not isinstance(value, dict):
+                    raise ValueError('Evidence must be a JSON object')
+                if value.get('schema') != 2 or not isinstance(value.get('failures'), list):
+                    raise ValueError('Expected diagnostic schema 2 with a failures array')
+                entry.update(valid=True, complete=value.get('complete') is True,
+                             passed=value.get('passed') is True,
+                             status=value.get('status'), phase=value.get('phase'),
+                             failure_count=len(value['failures']))
+            except (OSError, ValueError, UnicodeError) as error:
+                # Keep malformed bytes and still write results/provenance.
+                entry['error'] = str(error)
+        report[kind] = entry
+    final = report['final']
+    report['complete'] = final['valid'] and final['complete']
+    report['successful_final'] = (report['complete'] and final['passed']
+                                  and final['failure_count'] == 0)
+    return report
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
@@ -87,6 +120,9 @@ def main():
     source_run.observe('finish', force=True)
     provenance = source_run.write_report(output)
     passed = run.returncode == 0 and not ERROR.search(log) and marker in log and not source_run.blocked
+    diagnostics = world_evidence_report(output) if args.world else None
+    if diagnostics:
+        passed = passed and diagnostics['successful_final']
     videos = []
     if args.world and args.renderer != 'headless':
         for family in ['ancient_oak_v2', 'tall_pine_v2', 'dense_bush_v2', 'layered_rock_v2']:
@@ -110,6 +146,10 @@ def main():
               'source': source, 'provenance': provenance, 'videos': videos,
               'video_note': '30 explicitly rendered physical states per sweep played at 10 fps; automatic loading renders disabled, simulation unchanged; not a live-FPS measurement.',
               'log_sha256': hashlib.sha256((output / 'run.log').read_bytes()).hexdigest()}
+    if diagnostics:
+        report['world_evidence'] = diagnostics
+        report['incomplete'] = run.returncode == 124 or not diagnostics['complete']
+        report['status'] = 'passed' if passed else ('failed_incomplete' if report['incomplete'] else 'failed')
     (output / 'results.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report), flush=True)
     if not passed: print(log[-16000:])
