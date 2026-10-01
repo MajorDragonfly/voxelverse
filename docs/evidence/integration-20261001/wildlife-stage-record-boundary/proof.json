@@ -1,0 +1,819 @@
+{
+  "schema": 1,
+  "scope": "One wildlife hunting world fixture; no production/storage/cache/timing/filter change.",
+  "basis": {
+    "local_commit": "8084ba3e7e7a15804696b9e487cc18321978f2ff",
+    "tree": "2b9fbad25cd79a8dafab64564bab2dd9f4135eba"
+  },
+  "delivered_code": {
+    "commit": "1206b8a3329fcb9b1b91e3c89638cf9a243aa961",
+    "tree": "3b1b1a52cb9c6b361e3327a1a8a9bd3be3e95355",
+    "parent": "8084ba3e7e7a15804696b9e487cc18321978f2ff",
+    "file": "core/diagnostics/wildlife_hunting_world_probe.gd",
+    "insertions": 8,
+    "deletions": 1,
+    "file_sha256": "5fe7c2c58952e96d4ae794c7812de0c21496e2342c93e02b58ca3dc5bd167faa",
+    "patch": "fixture-fix.patch.gz",
+    "patch_decoded_sha256": "8499ce48017be2857d6415451664d016e917493c6a2b5f856011b23a9edc7f8f"
+  },
+  "original_ci": {
+    "head": "9866ca99ae5d47701a6c131725ca7b5dea25df59",
+    "run_id": 36862081747,
+    "job_id": 110371445506,
+    "artifact_id": 11163582399,
+    "zip_sha256": "14a4cad9bccd076fac9f844570d96c503cd13be1b50f570ca5dee9ad9987c3cd",
+    "source": {
+      "available": true,
+      "commit": "59e4ef065c655bb3d59fa19dba6d88568ee40772",
+      "tree": "2b9fbad25cd79a8dafab64564bab2dd9f4135eba",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "ab502a70e6c62df5eb331d62b532cefb83acc06f185665c0e3d5dae4003c2337",
+      "source_sha256": "b66c40f2920e39d04b6f52dbf58f179d68e90cee382666ac179cebcfcc4ed611",
+      "complete": true,
+      "file_count": 5528,
+      "bytes": 264695737,
+      "bytes_hashed": 264695737,
+      "seconds": 1.5771
+    },
+    "manifest_sha256": "5b1dd8f05a600c2db6f201a80ca6bea9363f3ee2ae8c2c612819102b9268c5f9",
+    "manifest_byte_equal_root_golden": true,
+    "actual_source_count": 67,
+    "actual_source_passed": 66,
+    "failure_json_line": 320,
+    "strict_error_or_leak_hits": 0,
+    "ci_merge": "59e4ef065c655bb3d59fa19dba6d88568ee40772",
+    "environment": {
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+      "user_data": "isolated_per_check"
+    },
+    "engine": "4.6.3.stable.official.7d41c59c4",
+    "check": {
+      "name": "wildlife_hunting_world_test",
+      "kind": "headless_godot",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 34.911,
+      "command": [
+        "/tmp/voxelverse-validation-editor-krnttyfx/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/home/runner/work/voxelverse/voxelverse",
+        "--script",
+        "res://tests/wildlife_hunting_world_test.gd"
+      ],
+      "log_sha256": "efb06e3f7c952e7197fcb4ef03b1a784b9656e5eb2760ca4a1b80f339921a701",
+      "contract": "wildlife",
+      "process_passed": false,
+      "source_sha256": "b66c40f2920e39d04b6f52dbf58f179d68e90cee382666ac179cebcfcc4ed611",
+      "source_status": "unchanged"
+    },
+    "log": "original-ci.log.gz",
+    "results": "original-ci.results.json.gz",
+    "final_payload": {
+      "failures": [
+        "Generated identity could not spawn on loaded radial terrain: { \"id\": \"object_756cd585a7c8861370f412eab8cd2ca7\", \"location\": { \"mode\": \"cube_sphere_m1_v1\", \"body_id\": \"body_d28e2b290d3cf5b3f44c93eb99e25aab\", \"face\": 0, \"u\": 0.00000381469727, \"v\": -0.88004684448242, \"height\": 26.6414174648055, \"radius\": 6371000.0 }, \"encounter\": {  }, \"retry\": 1 }",
+        "Generated identity could not spawn on loaded radial terrain: { \"id\": \"object_bbf064677e9854a2e92e8fc75d1fba4f\", \"location\": { \"mode\": \"cube_sphere_m1_v1\", \"body_id\": \"body_d28e2b290d3cf5b3f44c93eb99e25aab\", \"face\": 0, \"u\": 0.0000114440918, \"v\": -0.8800163269043, \"height\": 27.0320068994489, \"radius\": 6371000.0 }, \"encounter\": {  }, \"retry\": 1 }"
+      ],
+      "observations": {},
+      "passed": false,
+      "test": "wildlife_hunting_world"
+    },
+    "native_move_observation": false
+  },
+  "local_runs": [
+    {
+      "name": "original-random-observed",
+      "qualification": "Original fixture call sequence plus a read-only move observer. Random body ID; positive only.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "8084ba3e7e7a15804696b9e487cc18321978f2ff",
+        "tree": "2b9fbad25cd79a8dafab64564bab2dd9f4135eba",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "ab502a70e6c62df5eb331d62b532cefb83acc06f185665c0e3d5dae4003c2337",
+        "source_sha256": "08232c9bfad1648be934f790783fc0dd735ce0ff7b879feca90db212f3ff7a99",
+        "complete": true,
+        "file_count": 5528,
+        "bytes": 264696823,
+        "bytes_hashed": 264696823,
+        "seconds": 0.8466
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "source_status": "stable",
+      "source_reusable": true,
+      "source_manifest_payloads_verified_byte_equal": true,
+      "manifests": {
+        "start": {
+          "sha256": "e2697f5ed3b4d018ab222138a079e70e8011029ea69d1105ef7b9294f31cc7c1",
+          "bytes": 1123853
+        },
+        "end": {
+          "sha256": "e2697f5ed3b4d018ab222138a079e70e8011029ea69d1105ef7b9294f31cc7c1",
+          "bytes": 1123853
+        }
+      },
+      "check": {
+        "name": "wildlife_hunting_world_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 92.381,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd"
+        ],
+        "log_sha256": "60cd79d8f475b11ef8d3d5df2ad15df062aaeef0414d46570a97c3caf4677201",
+        "contract": "wildlife",
+        "process_passed": true,
+        "source_sha256": "08232c9bfad1648be934f790783fc0dd735ce0ff7b879feca90db212f3ff7a99",
+        "source_status": "unchanged"
+      },
+      "support_checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.167,
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-work/tools/check_validation_contracts.py",
+            "--project",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+            "--output",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-evidence/original-observed-run/contracts.json"
+          ],
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "process_passed": true,
+          "source_sha256": "08232c9bfad1648be934f790783fc0dd735ce0ff7b879feca90db212f3ff7a99",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "source_integrity",
+          "kind": "source_provenance",
+          "passed": true,
+          "status": "stable",
+          "reusable_source": true
+        }
+      ],
+      "final_payload": {
+        "failures": [],
+        "observations": {
+          "meal": {
+            "food": 25.0,
+            "moved": 2.48709940910339,
+            "satiety": 39.8000000000001,
+            "up": "(0.750713, -0.660629, -0.0)"
+          },
+          "restart_exit": 0
+        },
+        "passed": true,
+        "test": "wildlife_hunting_world"
+      },
+      "trace_count": 2,
+      "strict_error_or_leak_hits": 0,
+      "log": "original-random-observed.log.gz",
+      "results": "original-random-observed.results.json.gz",
+      "timeout_seconds": 420,
+      "import": "Reused an isolated physical copy of the already imported unchanged resource inputs.",
+      "child_process": {
+        "launched": true,
+        "command_arguments": [
+          "--headless",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd",
+          "--",
+          "--hunting-world-restart"
+        ],
+        "source": "Exactly the same checkout/content as this parent check, inherited isolated user-data environment."
+      },
+      "source_and_destination_pin_flags": "Not recorded; no claim of a measured pin requirement. The final delivery contains no extra pin.",
+      "trace": "original-random-observed.trace.json.gz",
+      "diagnostic_patch": "original-move-observer.patch.gz"
+    },
+    {
+      "name": "ci-body-original-observed",
+      "qualification": "Original fixture plus observer and diagnostic-only original CI body ID. Reproduces both original failure payloads.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "8084ba3e7e7a15804696b9e487cc18321978f2ff",
+        "tree": "2b9fbad25cd79a8dafab64564bab2dd9f4135eba",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "ab502a70e6c62df5eb331d62b532cefb83acc06f185665c0e3d5dae4003c2337",
+        "source_sha256": "e870f171342496da2c86575a38f3341c95d4d255104387e1670fa2b33d54deb5",
+        "complete": true,
+        "file_count": 5528,
+        "bytes": 264696891,
+        "bytes_hashed": 264696891,
+        "seconds": 0.9561
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "source_status": "stable",
+      "source_reusable": false,
+      "source_manifest_payloads_verified_byte_equal": true,
+      "manifests": {
+        "start": {
+          "sha256": "918e86e3b9957ad3c82a75837d08c9ff938075a0949aeb6c15934a3c23441e29",
+          "bytes": 1123853
+        },
+        "end": {
+          "sha256": "918e86e3b9957ad3c82a75837d08c9ff938075a0949aeb6c15934a3c23441e29",
+          "bytes": 1123853
+        }
+      },
+      "check": {
+        "name": "wildlife_hunting_world_test",
+        "kind": "headless_godot",
+        "passed": false,
+        "exit_code": 1,
+        "seconds": 51.505,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd"
+        ],
+        "log_sha256": "89d5e3ded9dfad1fd40e11852349296a4d5170401e762b65f9e37f7ff06463fc",
+        "contract": "wildlife",
+        "process_passed": false,
+        "source_sha256": "e870f171342496da2c86575a38f3341c95d4d255104387e1670fa2b33d54deb5",
+        "source_status": "unchanged"
+      },
+      "support_checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.218,
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-work/tools/check_validation_contracts.py",
+            "--project",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+            "--output",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-evidence/ci-body-original-observed-run/contracts.json"
+          ],
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "process_passed": true,
+          "source_sha256": "e870f171342496da2c86575a38f3341c95d4d255104387e1670fa2b33d54deb5",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "source_integrity",
+          "kind": "source_provenance",
+          "passed": true,
+          "status": "stable",
+          "reusable_source": false
+        }
+      ],
+      "final_payload": {
+        "failures": [
+          "Generated identity could not spawn on loaded radial terrain: { \"id\": \"object_756cd585a7c8861370f412eab8cd2ca7\", \"location\": { \"mode\": \"cube_sphere_m1_v1\", \"body_id\": \"body_d28e2b290d3cf5b3f44c93eb99e25aab\", \"face\": 0, \"u\": 0.00000381469727, \"v\": -0.88004684448242, \"height\": 26.6414174648055, \"radius\": 6371000.0 }, \"encounter\": {  }, \"retry\": 1 }",
+          "Generated identity could not spawn on loaded radial terrain: { \"id\": \"object_bbf064677e9854a2e92e8fc75d1fba4f\", \"location\": { \"mode\": \"cube_sphere_m1_v1\", \"body_id\": \"body_d28e2b290d3cf5b3f44c93eb99e25aab\", \"face\": 0, \"u\": 0.0000114440918, \"v\": -0.8800163269043, \"height\": 27.0320068994489, \"radius\": 6371000.0 }, \"encounter\": {  }, \"retry\": 1 }"
+        ],
+        "observations": {},
+        "passed": false,
+        "test": "wildlife_hunting_world"
+      },
+      "trace_count": 2,
+      "strict_error_or_leak_hits": 0,
+      "log": "ci-body-original-observed.log.gz",
+      "results": "ci-body-original-observed.results.json.gz",
+      "timeout_seconds": 420,
+      "import": "Reused an isolated physical copy of the already imported unchanged resource inputs.",
+      "child_process": {
+        "launched": false,
+        "command_arguments": [
+          "--headless",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd",
+          "--",
+          "--hunting-world-restart"
+        ],
+        "source": "Exactly the same checkout/content as this parent check, inherited isolated user-data environment."
+      },
+      "source_and_destination_pin_flags": "Not recorded; no claim of a measured pin requirement. The final delivery contains no extra pin.",
+      "trace": "ci-body-original-observed.trace.json.gz",
+      "diagnostic_patch": "ci-body-original-observer.patch.gz"
+    },
+    {
+      "name": "pinned-draft-clean",
+      "qualification": "Superseded draft d2ba; extra fixture pin was later removed. Not the final delivered source.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "d2ba145485c02823b20a5f922e8c07afb097bd49",
+        "tree": "41c8a3f590456b2778cb032ee0e90b7183bd4aad",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "c54164d7cce0e1c69bb14c152d5e1cf59b57cf4171ec1556a2bed4a0b14800fc",
+        "source_sha256": "bfd669e6a560ed34e20c267f1058d03e08898711b684de70d0c5de65afbc5f34",
+        "complete": true,
+        "file_count": 5528,
+        "bytes": 264696409,
+        "bytes_hashed": 264696409,
+        "seconds": 0.9279
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "source_status": "stable",
+      "source_reusable": true,
+      "source_manifest_payloads_verified_byte_equal": true,
+      "manifests": {
+        "start": {
+          "sha256": "973c233792bc357f4da438bf8811934b53551554fbff079e4b99be226118416d",
+          "bytes": 1123853
+        },
+        "end": {
+          "sha256": "973c233792bc357f4da438bf8811934b53551554fbff079e4b99be226118416d",
+          "bytes": 1123853
+        }
+      },
+      "check": {
+        "name": "wildlife_hunting_world_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 99.515,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd"
+        ],
+        "log_sha256": "dfbc523a8be2958804049316e2f190ecc811f793e7e6dec892a032adfd101eab",
+        "contract": "wildlife",
+        "process_passed": true,
+        "source_sha256": "bfd669e6a560ed34e20c267f1058d03e08898711b684de70d0c5de65afbc5f34",
+        "source_status": "unchanged"
+      },
+      "support_checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.218,
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-work/tools/check_validation_contracts.py",
+            "--project",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+            "--output",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-evidence/fixed-clean-run/contracts.json"
+          ],
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "process_passed": true,
+          "source_sha256": "bfd669e6a560ed34e20c267f1058d03e08898711b684de70d0c5de65afbc5f34",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "source_integrity",
+          "kind": "source_provenance",
+          "passed": true,
+          "status": "stable",
+          "reusable_source": true
+        }
+      ],
+      "final_payload": {
+        "failures": [],
+        "observations": {
+          "meal": {
+            "food": 25.0,
+            "moved": 2.59621858596802,
+            "satiety": 39.7740000000001,
+            "up": "(0.750713, -0.660629, -0.0)"
+          },
+          "restart_exit": 0
+        },
+        "passed": true,
+        "test": "wildlife_hunting_world"
+      },
+      "trace_count": 0,
+      "strict_error_or_leak_hits": 0,
+      "log": "pinned-draft-clean.log.gz",
+      "results": "pinned-draft-clean.results.json.gz",
+      "timeout_seconds": 420,
+      "import": "Reused an isolated physical copy of the already imported unchanged resource inputs.",
+      "child_process": {
+        "launched": true,
+        "command_arguments": [
+          "--headless",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd",
+          "--",
+          "--hunting-world-restart"
+        ],
+        "source": "Exactly the same checkout/content as this parent check, inherited isolated user-data environment."
+      },
+      "source_and_destination_pin_flags": "Not recorded; no claim of a measured pin requirement. The final delivery contains no extra pin."
+    },
+    {
+      "name": "ci-body-pinned-draft-observed",
+      "qualification": "Superseded pinned draft plus original CI body ID and observer. Not the final delivered source.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "d2ba145485c02823b20a5f922e8c07afb097bd49",
+        "tree": "41c8a3f590456b2778cb032ee0e90b7183bd4aad",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "c54164d7cce0e1c69bb14c152d5e1cf59b57cf4171ec1556a2bed4a0b14800fc",
+        "source_sha256": "a18bc5053253866973fbb0c6ef94701570422bb8cc078f853d81af6aeb0d7856",
+        "complete": true,
+        "file_count": 5528,
+        "bytes": 264697252,
+        "bytes_hashed": 264697252,
+        "seconds": 2.3806
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "source_status": "stable",
+      "source_reusable": true,
+      "source_manifest_payloads_verified_byte_equal": true,
+      "manifests": {
+        "start": {
+          "sha256": "982433dc4728e7972907abecd89fa9be0e9a80113799435b9c5569baa67bbe4c",
+          "bytes": 1123853
+        },
+        "end": {
+          "sha256": "982433dc4728e7972907abecd89fa9be0e9a80113799435b9c5569baa67bbe4c",
+          "bytes": 1123853
+        }
+      },
+      "check": {
+        "name": "wildlife_hunting_world_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 99.72,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-controlled-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd"
+        ],
+        "log_sha256": "6d5b2dfb4a37453b6ecb4e4b8f16ffa8eed14dca22dc51202f73f9a31113a2dd",
+        "contract": "wildlife",
+        "process_passed": true,
+        "source_sha256": "a18bc5053253866973fbb0c6ef94701570422bb8cc078f853d81af6aeb0d7856",
+        "source_status": "unchanged"
+      },
+      "support_checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.179,
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-controlled-work/tools/check_validation_contracts.py",
+            "--project",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-controlled-work",
+            "--output",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-evidence/ci-body-fixed-observed-run/contracts.json"
+          ],
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "process_passed": true,
+          "source_sha256": "a18bc5053253866973fbb0c6ef94701570422bb8cc078f853d81af6aeb0d7856",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "source_integrity",
+          "kind": "source_provenance",
+          "passed": true,
+          "status": "stable",
+          "reusable_source": true
+        }
+      ],
+      "final_payload": {
+        "failures": [],
+        "observations": {
+          "meal": {
+            "food": 25.0,
+            "moved": 2.78167939186096,
+            "satiety": 39.7740000000001,
+            "up": "(0.750713, -0.660629, -0.0)"
+          },
+          "restart_exit": 0
+        },
+        "passed": true,
+        "test": "wildlife_hunting_world"
+      },
+      "trace_count": 2,
+      "strict_error_or_leak_hits": 0,
+      "log": "ci-body-pinned-draft-observed.log.gz",
+      "results": "ci-body-pinned-draft-observed.results.json.gz",
+      "timeout_seconds": 420,
+      "import": "Reused an isolated physical copy of the already imported unchanged resource inputs.",
+      "child_process": {
+        "launched": true,
+        "command_arguments": [
+          "--headless",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-controlled-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd",
+          "--",
+          "--hunting-world-restart"
+        ],
+        "source": "Exactly the same checkout/content as this parent check, inherited isolated user-data environment."
+      },
+      "source_and_destination_pin_flags": "Not recorded; no claim of a measured pin requirement. The final delivery contains no extra pin.",
+      "trace": "ci-body-pinned-draft-observed.trace.json.gz",
+      "diagnostic_patch": "ci-body-fixed-observer.patch.gz"
+    },
+    {
+      "name": "ci-body-reload-only-observed",
+      "qualification": "Final reload-only patch plus diagnostic-only original CI body ID and read-only observer.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "1206b8a3329fcb9b1b91e3c89638cf9a243aa961",
+        "tree": "3b1b1a52cb9c6b361e3327a1a8a9bd3be3e95355",
+        "tracked_worktree_dirty": true,
+        "index_sha256": "92f6fb67fe8e3613cb00b3dfc670e4398e434de2dd9e15c645109a9070b4ebfc",
+        "source_sha256": "0bf50e7e62acee079c6f92be7c9a9c06134f1a1440475bb2dddbdcbad13971f0",
+        "complete": true,
+        "file_count": 5528,
+        "bytes": 264697068,
+        "bytes_hashed": 264697068,
+        "seconds": 0.8594
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "source_status": "stable",
+      "source_reusable": true,
+      "source_manifest_payloads_verified_byte_equal": true,
+      "manifests": {
+        "start": {
+          "sha256": "0b63cb2ecc3da8e677bf9adadcc71015fd09e8b6dfee0903311023173dc41e79",
+          "bytes": 1123853
+        },
+        "end": {
+          "sha256": "0b63cb2ecc3da8e677bf9adadcc71015fd09e8b6dfee0903311023173dc41e79",
+          "bytes": 1123853
+        }
+      },
+      "check": {
+        "name": "wildlife_hunting_world_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 122.388,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-controlled-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd"
+        ],
+        "log_sha256": "2caa278ca13541acc8183910a514de71782990b78fc45620b7e7e1d91b197f2d",
+        "contract": "wildlife",
+        "process_passed": true,
+        "source_sha256": "0bf50e7e62acee079c6f92be7c9a9c06134f1a1440475bb2dddbdcbad13971f0",
+        "source_status": "unchanged"
+      },
+      "support_checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.267,
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-controlled-work/tools/check_validation_contracts.py",
+            "--project",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-controlled-work",
+            "--output",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-evidence/ci-body-reload-only-observed-run/contracts.json"
+          ],
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "process_passed": true,
+          "source_sha256": "0bf50e7e62acee079c6f92be7c9a9c06134f1a1440475bb2dddbdcbad13971f0",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "source_integrity",
+          "kind": "source_provenance",
+          "passed": true,
+          "status": "stable",
+          "reusable_source": true
+        }
+      ],
+      "final_payload": {
+        "failures": [],
+        "observations": {
+          "meal": {
+            "food": 25.0,
+            "moved": 2.78167915344238,
+            "satiety": 39.7740000000001,
+            "up": "(0.750713, -0.660629, -0.0)"
+          },
+          "restart_exit": 0
+        },
+        "passed": true,
+        "test": "wildlife_hunting_world"
+      },
+      "trace_count": 2,
+      "strict_error_or_leak_hits": 0,
+      "log": "ci-body-reload-only-observed.log.gz",
+      "results": "ci-body-reload-only-observed.results.json.gz",
+      "timeout_seconds": 420,
+      "import": "Reused an isolated physical copy of the already imported unchanged resource inputs.",
+      "child_process": {
+        "launched": true,
+        "command_arguments": [
+          "--headless",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-controlled-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd",
+          "--",
+          "--hunting-world-restart"
+        ],
+        "source": "Exactly the same checkout/content as this parent check, inherited isolated user-data environment."
+      },
+      "source_and_destination_pin_flags": "Not recorded; no claim of a measured pin requirement. The final delivery contains no extra pin.",
+      "trace": "ci-body-reload-only-observed.trace.json.gz",
+      "diagnostic_patch": "ci-body-reload-only-observer.patch.gz"
+    },
+    {
+      "name": "reload-only-clean",
+      "qualification": "Exact clean committed final minimal reload-only patch; normal random campaign/body identities.",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "source": {
+        "available": true,
+        "commit": "1206b8a3329fcb9b1b91e3c89638cf9a243aa961",
+        "tree": "3b1b1a52cb9c6b361e3327a1a8a9bd3be3e95355",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "92f6fb67fe8e3613cb00b3dfc670e4398e434de2dd9e15c645109a9070b4ebfc",
+        "source_sha256": "81af1abc55bbcdab19250484a22d24afc9cea99740b2bcb1239292d8f39c0983",
+        "complete": true,
+        "file_count": 5528,
+        "bytes": 264696225,
+        "bytes_hashed": 264696225,
+        "seconds": 0.905
+      },
+      "environment": {
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "user_data": "isolated_per_check"
+      },
+      "source_status": "stable",
+      "source_reusable": true,
+      "source_manifest_payloads_verified_byte_equal": true,
+      "manifests": {
+        "start": {
+          "sha256": "4331cfa809f8bad54d67b9e70afd515b109b27064747aecb75131c7501a084ec",
+          "bytes": 1123853
+        },
+        "end": {
+          "sha256": "4331cfa809f8bad54d67b9e70afd515b109b27064747aecb75131c7501a084ec",
+          "bytes": 1123853
+        }
+      },
+      "check": {
+        "name": "wildlife_hunting_world_test",
+        "kind": "headless_godot",
+        "passed": true,
+        "exit_code": 0,
+        "seconds": 126.796,
+        "command": [
+          "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+          "--headless",
+          "--verbose",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd"
+        ],
+        "log_sha256": "01357681a0a70d956569a19d141ebd46a05372adf328f3e88d9afe0e5bce702f",
+        "contract": "wildlife",
+        "process_passed": true,
+        "source_sha256": "81af1abc55bbcdab19250484a22d24afc9cea99740b2bcb1239292d8f39c0983",
+        "source_status": "unchanged"
+      },
+      "support_checks": [
+        {
+          "name": "source_contracts",
+          "kind": "source_contract",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.167,
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-work/tools/check_validation_contracts.py",
+            "--project",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+            "--output",
+            "/workspace/scratch/86cf85b0abf1/wildlife-stage-evidence/reload-only-clean-run/contracts.json"
+          ],
+          "log_sha256": "dada6c270fda3580b5eb3c8b9430d127fceb0c789b656510ad4394d39c23fafd",
+          "process_passed": true,
+          "source_sha256": "81af1abc55bbcdab19250484a22d24afc9cea99740b2bcb1239292d8f39c0983",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "source_integrity",
+          "kind": "source_provenance",
+          "passed": true,
+          "status": "stable",
+          "reusable_source": true
+        }
+      ],
+      "final_payload": {
+        "failures": [],
+        "observations": {
+          "meal": {
+            "food": 25.0,
+            "moved": 2.76624727249146,
+            "satiety": 39.7740000000001,
+            "up": "(0.750713, -0.660629, -0.0)"
+          },
+          "restart_exit": 0
+        },
+        "passed": true,
+        "test": "wildlife_hunting_world"
+      },
+      "trace_count": 0,
+      "strict_error_or_leak_hits": 0,
+      "log": "reload-only-clean.log.gz",
+      "results": "reload-only-clean.results.json.gz",
+      "timeout_seconds": 420,
+      "import": "Reused an isolated physical copy of the already imported unchanged resource inputs.",
+      "child_process": {
+        "launched": true,
+        "command_arguments": [
+          "--headless",
+          "--path",
+          "/workspace/scratch/86cf85b0abf1/wildlife-stage-work",
+          "--script",
+          "res://tests/wildlife_hunting_world_test.gd",
+          "--",
+          "--hunting-world-restart"
+        ],
+        "source": "Exactly the same checkout/content as this parent check, inherited isolated user-data environment."
+      },
+      "source_and_destination_pin_flags": "Not recorded; no claim of a measured pin requirement. The final delivery contains no extra pin."
+    }
+  ],
+  "strict_error_regex": "SCRIPT ERROR|(?:^|\\n)ERROR:|Shader compilation failed|Parse Error|ObjectDB instances leaked at exit",
+  "guard_preservation": [
+    "Original 420-second aggregate world budget.",
+    "Dry loaded staging and production collision clearance.",
+    "Actual generated IDs/role/frozen body.",
+    "Physical meal movement/floor/nutrition/food decrement.",
+    "Failed-save rollback and shared live needs reference.",
+    "Save/unload/respawn/fresh process identity and hunger/carcass persistence."
+  ],
+  "limitations": [
+    "Historical CI did not instrument move itself. Causality is demonstrated by controlled local reconstruction with its original body and exact matching IDs/locations/failure messages, not by invented historical native observations.",
+    "Superseded pinned draft evidence is retained but is not a final candidate or a claim that added pins are necessary.",
+    "Diagnostic body override and observer do not enter the delivered code.",
+    "Scoped source checks are not whole-suite, native export, FPS, target-PC or main approval. Root owns new full gates on its eventual common tree."
+  ]
+}

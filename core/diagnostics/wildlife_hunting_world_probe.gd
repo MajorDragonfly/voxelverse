@@ -125,7 +125,14 @@ func _stage(scene: Node3D, record: Dictionary, offset: float) -> CharacterBody3D
 	if not found:
 		_expect(false, "No clear dry staging point on loaded radial terrain")
 		return null
-	population.storage.move(record, point)
+	# Generation and terrain waits may evict the selected record's page.
+	# Resolve its stable ID only after the staging queries have finished.
+	record = population.storage.record(record.id)
+	_expect(not record.is_empty(), "Generated staging identity could not reload: " + population.storage.store.last_error)
+	if record.is_empty(): return null
+	var moved: bool = population.storage.move(record, point)
+	_expect(moved, "Generated staging identity could not move: " + population.storage.store.last_error)
+	if not moved: return null
 	record.home = point.duplicate(true)
 	_expect(population._spawn_animal(record), "Generated identity could not spawn on loaded radial terrain: " + str({"id": record.id,
 		"location": record.location, "encounter": record.get("encounter", {}), "retry": population._spawn_offsets.get(record.id, 0)}))
