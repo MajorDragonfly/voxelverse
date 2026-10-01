@@ -170,16 +170,26 @@ func _run() -> void:
 	tribe.select_all()
 	await _frames(3)
 	await _click(tribe.panel._buttons["wood"])
-	# Put the stop control in view before the first pickup. The delivery can
-	# complete while a long HUD scroll is still animating on a rendered runner.
-	await _show_in_scroll(tribe.panel._scroll, tribe.panel._buttons["wait"])
-	await _until(func() -> bool: return _has_cargo(), 350)
-	_expect(_has_cargo(), "Gatherers did not pick up material at a real deposit.")
-	await _capture("03_transport")
-	var stock_before_stop: Dictionary = tribe.village()["stock"].duplicate(true)
-	await _click(tribe.panel._buttons["wait"])
+	# Prepare the real pointer/scroll first, then observe cargo immediately
+	# before press/release. Rendering or HUD layout can otherwise let a valid
+	# delivery finish between the pickup observation and the Stop click.
+	var before_stop: Dictionary = {}
+	await _click(tribe.panel._buttons["wait"], func() -> void:
+		await _until(func() -> bool: return _has_cargo(), 350)
+		_expect(_has_cargo(), "Gatherers did not pick up material at a real deposit before Stop.")
+		before_stop["stock"] = tribe.village()["stock"].duplicate(true)
+		before_stop["cargo"] = _cargo_by_member()
+		before_stop["delivered"] = int(tribe.village()["delivered"])
+	)
 	await _frames(10)
-	_expect(_has_cargo() and tribe.village()["stock"] == stock_before_stop, "Stop discarded cargo or credited it without a delivery.")
+	_expect(tribe.village()["members"].all(func(member: Dictionary) -> bool: return member["order"] == "wait"), "Stop click did not stop all selected gatherers.")
+	_expect(_has_cargo() and _cargo_by_member() == before_stop.get("cargo", {})
+		and tribe.village()["stock"] == before_stop.get("stock", {})
+		and int(tribe.village()["delivered"]) == before_stop.get("delivered", -1),
+		"Stop discarded cargo or credited it without a delivery: " + JSON.stringify({"before": before_stop, "after": {"stock": tribe.village()["stock"], "cargo": _cargo_by_member(), "delivered": tribe.village()["delivered"]}}))
+	# A stopped carrier still shows the real acquired material, without a
+	# screenshot's frame_post_draw advancing the pre-click simulation.
+	await _capture("03_transport")
 	await _click(tribe.panel._buttons["wood"])
 	var at_save: Dictionary = tribe.village().duplicate(true)
 	_expect(saves.save_now() and saves.load_now(), "Could not reload a running delivery.")
@@ -399,6 +409,12 @@ func _has_cargo() -> bool:
 			return true
 	return false
 
+func _cargo_by_member() -> Dictionary:
+	var carried: Dictionary = {}
+	for member: Dictionary in tribe.village().get("members", []):
+		carried[member["id"]] = {"resource": member["cargo"], "source_id": member.get("cargo_source_id", ""), "construction_id": member["construction_id"]}
+	return carried
+
 func _until(condition: Callable, frames: int) -> void:
 	for frame in range(frames):
 		if condition.call():
@@ -472,7 +488,7 @@ func _key(code: int) -> void:
 	event.pressed = false
 	root.push_input(event, true)
 
-func _click(button: Button) -> void:
+func _click(button: Button, before_press: Callable = Callable()) -> void:
 	# World selection, help return and observed work can resize the HUD before
 	# tab navigation. Scroll only after its containers have arranged the page.
 	await _frames(3)
@@ -520,6 +536,10 @@ func _click(button: Button) -> void:
 	event.position = button.get_global_transform_with_canvas() * (button.size * 0.5)
 	_move_mouse(event.position)
 	await process_frame
+	# Optional running-world preconditions are observed after every yielding
+	# preparation step. No physics/render await separates them from the click.
+	if before_press.is_valid():
+		await before_press.call()
 	# Re-read after pointer delivery; do not click a stale button rectangle.
 	event.position = button.get_global_transform_with_canvas() * (button.size * 0.5)
 	_move_mouse(event.position)

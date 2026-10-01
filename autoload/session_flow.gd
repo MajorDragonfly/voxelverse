@@ -11,7 +11,9 @@ const SPHERE_SCENE: String = "res://main/spherical_campaign.tscn"
 const WORLD_SCENE: String = SPHERE_SCENE
 # Retained only for historical regression scenes; public entry never selects it.
 const LEGACY_TEST_SCENE: String = "res://core/diagnostics/legacy_world.tscn"
+var _scene_load := preload("res://core/owned_scene_load.gd").new()
 var _world_scene: String = WORLD_SCENE
+var _shutting_down: bool = false
 var managed: bool = false
 var loading: bool = false
 var pause_open: bool = false
@@ -68,13 +70,14 @@ func latest_slot() -> Dictionary:
 	return {}
 
 func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_sphere_m1_v1", creature_template: Dictionary = {}) -> void:
-	if loading or not _at_title():
+	if _shutting_down or loading or not _at_title():
 		return
 	if surface_mode != "cube_sphere_m1_v1":
 		menu_error.emit("Neue Abenteuer beginnen auf einem Kugelplaneten.")
 		return
 	_show_loading("Dein Abenteuer wird vorbereitet …")
 	await get_tree().process_frame
+	if _shutting_down: return
 	var saves := get_node("/root/SaveGameService")
 	if str(saves.create_slot(title, seed_value, surface_mode, creature_template)).is_empty():
 		_fail_loading("Neues Spiel konnte nicht gespeichert werden. " + str(saves.last_error))
@@ -82,10 +85,11 @@ func new_game(title: String, seed_value: int = 0, surface_mode: String = "cube_s
 	await _request_world()
 
 func load_game(path: String) -> void:
-	if loading or not _at_title():
+	if _shutting_down or loading or not _at_title():
 		return
 	_show_loading("Spielstand wird geladen …")
 	await get_tree().process_frame
+	if _shutting_down: return
 	var saves := get_node("/root/SaveGameService")
 	var playable: String = saves.prepare_playable_slot(path)
 	if playable.is_empty() or not bool(saves.select_slot(playable)):
@@ -103,7 +107,7 @@ func load_game(path: String) -> void:
 
 func return_from_editor() -> Error:
 	var scene := get_tree().current_scene
-	if loading or scene == null or not (scene.scene_file_path.begins_with("res://creatures/editor/") or scene.scene_file_path.begins_with("res://civilization/buildings/")):
+	if _shutting_down or loading or scene == null or not (scene.scene_file_path.begins_with("res://creatures/editor/") or scene.scene_file_path.begins_with("res://civilization/buildings/")):
 		return ERR_BUSY
 	var saves := get_node("/root/SaveGameService")
 	if not saves.session_active or get_node("/root/GameState").campaign_scene() != SPHERE_SCENE:
@@ -115,7 +119,7 @@ func return_from_editor() -> Error:
 	return OK
 
 func return_from_planet_lab() -> void:
-	if loading: return
+	if _shutting_down or loading: return
 	var saves := get_node("/root/SaveGameService")
 	# Diagnostic worlds never write their player pose into the campaign.
 	if not saves.session_active or get_node("/root/GameState").campaign_scene() != SPHERE_SCENE:
@@ -129,7 +133,7 @@ func return_from_planet_lab() -> void:
 
 func travel_to_planet(system_seed: int, planet_index: int, world_seed: int, body_id: String = "") -> bool:
 	var scene := get_tree().current_scene
-	if loading or scene == null or scene.scene_file_path != SPHERE_SCENE: return false
+	if _shutting_down or loading or scene == null or scene.scene_file_path != SPHERE_SCENE: return false
 	var state: Node = get_node("/root/GameState")
 	if body_id == state.active_body_id or (body_id.is_empty() and system_seed == state.system_seed and world_seed == state.world_seed): return false
 	managed = true
@@ -179,9 +183,11 @@ func _release_world() -> void:
 	await get_tree().process_frame
 
 func _request_world() -> void:
+	if _shutting_down or _scene_load.is_active(): return
 	# GameState defers its generator rebuild. Finish it before scene _ready.
 	_startup_phase("state_settle")
 	await get_tree().process_frame
+	if _shutting_down or _scene_load.is_active(): return
 	_loading_label.text = "Welt wird geladen …"
 	_world_scene = get_node("/root/GameState").campaign_scene()
 	if _world_scene != SPHERE_SCENE:
@@ -191,29 +197,27 @@ func _request_world() -> void:
 	_startup_trace.set_context({"scene": _world_scene, "seed": state.world_seed,
 		"body_id": state.active_body_id, "resource_cached": ResourceLoader.has_cached(_world_scene)})
 	_startup_phase("threaded_load")
-	var error: Error = ResourceLoader.load_threaded_request(_world_scene, "PackedScene")
+	var error: Error = _scene_load.begin(_world_scene)
 	if error != OK:
 		_fail_loading("Die Spielwelt konnte nicht geladen werden: " + error_string(error))
 		return
+	_loading_bar.indeterminate = true
 	_loading_scene = true
 	_preparing_world = false
 
 func _process(_delta: float) -> void:
-	if not loading:
+	if _shutting_down or not loading:
 		return
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if _preparing_world: return
 	if _loading_scene:
-		var progress: Array = []
-		var status: int = ResourceLoader.load_threaded_get_status(_world_scene, progress)
-		if not progress.is_empty():
-			_loading_bar.value = float(progress[0]) * 100.0
-		if status == ResourceLoader.THREAD_LOAD_FAILED or status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+		if not _scene_load.is_active():
 			_loading_scene = false
 			_fail_loading("Die Spielwelt konnte nicht gelesen werden. Dein Spielstand bleibt erhalten.")
-		elif status == ResourceLoader.THREAD_LOAD_LOADED:
+		elif _scene_load.is_ready():
 			_loading_scene = false
-			var scene := ResourceLoader.load_threaded_get(_world_scene) as PackedScene
+			var scene: PackedScene = _scene_load.take()
+			_loading_bar.indeterminate = false
 			if scene == null:
 				_fail_loading("Die Spielwelt ist nicht verfügbar.")
 				return
@@ -272,6 +276,10 @@ func _finish_loading() -> void:
 	world_started.emit()
 
 func _fail_loading(message: String) -> void:
+	_loading_scene = false
+	await _scene_load.discard(get_tree())
+	if _shutting_down: return
+	if is_instance_valid(_loading_bar): _loading_bar.indeterminate = false
 	_finish_startup_trace("failed", message)
 	var saves: Node = get_node("/root/SaveGameService")
 	if not saves._body_transfer.is_empty():
@@ -554,3 +562,17 @@ func _smoke_exit(frames: int) -> void:
 	for index in clampi(frames, 1, 3600):
 		await get_tree().process_frame
 	await preload("res://core/runtime_shutdown.gd").finish(get_tree())
+
+
+func prepare_shutdown() -> void:
+	# Stop scene publication and retire the loader while its main-thread
+	# callbacks can still run. Normal window-close already rejects loading.
+	_shutting_down = true
+	_loading_scene = false
+	_preparing_world = true
+	await _scene_load.discard(get_tree())
+
+func _exit_tree() -> void:
+	# A scene reset can remove this owner while the tree keeps running. The
+	# helper retains itself until its worker finishes; no active blocking join.
+	_scene_load.discard(get_tree())

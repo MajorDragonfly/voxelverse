@@ -322,6 +322,7 @@
       "work": "L1/M10 / ARCH-25",
       "tests": [
         "frontend_test",
+        "owned_scene_load_test",
         "input_preferences_test",
         "localization_test",
         "menu_input_test",

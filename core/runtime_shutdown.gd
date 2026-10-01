@@ -5,6 +5,9 @@ static func finish(tree: SceneTree, code: int = 0) -> void:
 	if tree.has_meta(&"runtime_finishing"):
 		return
 	tree.set_meta(&"runtime_finishing", true)
+	var flow := tree.root.get_node_or_null("SessionFlow")
+	if flow != null:
+		await flow.prepare_shutdown()
 	var audio := tree.root.get_node_or_null("AudioManager")
 	if audio != null:
 		audio.prepare_shutdown()

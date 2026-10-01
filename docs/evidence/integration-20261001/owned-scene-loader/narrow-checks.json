@@ -1,0 +1,220 @@
+{
+  "schema": 1,
+  "basis_commit": "f57b7fe9b6be7b699b23c51230ef9fb690bb3a4d",
+  "basis_tree": "a03aac092a5e6993a9aa635d3bf9ce06c1142f5f",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "scope": "Partial headless source checks only. No full suite, native export or target-PC acceptance. Evidence files added after the last run; product/test sources unchanged.",
+  "runs": [
+    {
+      "name": "consumers",
+      "runner_output": "/workspace/scratch/86cf85b0abf1/scene-loader-consumers",
+      "run_passed": true,
+      "selected_positive_checks": [
+        "frontend_test",
+        "body_travel_test"
+      ],
+      "source_sha256": "1b526f093637330e2a59977233c1cb0fbe905461c30be3550087dd529275264b",
+      "source_commit": "f57b7fe9b6be7b699b23c51230ef9fb690bb3a4d",
+      "source_tree": "a03aac092a5e6993a9aa635d3bf9ce06c1142f5f",
+      "source_status": "stable",
+      "source_reusable": true,
+      "checks": [
+        {
+          "name": "frontend_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 156.555,
+          "command": [
+            "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/86cf85b0abf1/leak-work",
+            "--script",
+            "res://tests/frontend_test.gd"
+          ],
+          "log_sha256": "8d95e9bfea0b1ae22d4de4600b61f22e916b7477e07a2a6a38263d5d51d0a310",
+          "source_sha256": "1b526f093637330e2a59977233c1cb0fbe905461c30be3550087dd529275264b",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "body_travel_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 284.376,
+          "command": [
+            "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/86cf85b0abf1/leak-work",
+            "--script",
+            "res://tests/body_travel_test.gd"
+          ],
+          "log_sha256": "4a773d4eaeeae704aedf672b3aea7ed2dc669a5a21860f80377165cd8dd80771",
+          "source_sha256": "1b526f093637330e2a59977233c1cb0fbe905461c30be3550087dd529275264b",
+          "source_status": "unchanged"
+        }
+      ]
+    },
+    {
+      "name": "close_adapters",
+      "runner_output": "/workspace/scratch/86cf85b0abf1/scene-loader-final-valid",
+      "run_passed": false,
+      "selected_positive_checks": [
+        "startup_trace_test",
+        "shipyard_presentation_test",
+        "int30_medieval_technology_test"
+      ],
+      "source_sha256": "55943b1b092a51c00d3b8df7352206726d2e501e0ac46395550c896f08c6d906",
+      "source_commit": "f57b7fe9b6be7b699b23c51230ef9fb690bb3a4d",
+      "source_tree": "a03aac092a5e6993a9aa635d3bf9ce06c1142f5f",
+      "source_status": "stable",
+      "source_reusable": false,
+      "checks": [
+        {
+          "name": "startup_trace_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 2.526,
+          "command": [
+            "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/86cf85b0abf1/leak-work",
+            "--script",
+            "res://tests/startup_trace_test.gd"
+          ],
+          "log_sha256": "ff51b5d6f740d333bdb7e441341656d4cf2c1c01229af889233afe5754e3345e",
+          "source_sha256": "55943b1b092a51c00d3b8df7352206726d2e501e0ac46395550c896f08c6d906",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "shipyard_presentation_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 7.29,
+          "command": [
+            "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/86cf85b0abf1/leak-work",
+            "--script",
+            "res://tests/shipyard_presentation_test.gd"
+          ],
+          "log_sha256": "ec645b4f5aa44f7f3954811c7282032cbcb70371265658f102ec27a19e984eb0",
+          "source_sha256": "55943b1b092a51c00d3b8df7352206726d2e501e0ac46395550c896f08c6d906",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "int30_medieval_technology_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 8.757,
+          "command": [
+            "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/86cf85b0abf1/leak-work",
+            "--script",
+            "res://tests/int30_medieval_technology_test.gd"
+          ],
+          "log_sha256": "ebb53668312a6bbd394bcfdd0d9a656e75c4c7312c4e84aca6f2f971271e6b92",
+          "source_sha256": "55943b1b092a51c00d3b8df7352206726d2e501e0ac46395550c896f08c6d906",
+          "source_status": "unchanged"
+        }
+      ]
+    },
+    {
+      "name": "final_affected",
+      "runner_output": "/workspace/scratch/86cf85b0abf1/scene-loader-terminal-final",
+      "run_passed": true,
+      "selected_positive_checks": [
+        "owned_scene_load_test",
+        "domestication_lab_test"
+      ],
+      "source_sha256": "985353b2af1ee1325c5d903d1f9a26a66f288e3efd64ea4142d055a1996a1d9d",
+      "source_commit": "f57b7fe9b6be7b699b23c51230ef9fb690bb3a4d",
+      "source_tree": "a03aac092a5e6993a9aa635d3bf9ce06c1142f5f",
+      "source_status": "stable",
+      "source_reusable": true,
+      "checks": [
+        {
+          "name": "owned_scene_load_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 5.334,
+          "command": [
+            "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/86cf85b0abf1/leak-work",
+            "--script",
+            "res://tests/owned_scene_load_test.gd"
+          ],
+          "log_sha256": "b6b232850681673ec5952c4b05b58bf3c88312272fb57247c94a9a52952c1b94",
+          "source_sha256": "985353b2af1ee1325c5d903d1f9a26a66f288e3efd64ea4142d055a1996a1d9d",
+          "source_status": "unchanged"
+        },
+        {
+          "name": "domestication_lab_test",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 23.91,
+          "command": [
+            "/tmp/voxelverse-validation-editor-4s9imqpw/Godot_v4.6.3-stable_linux.x86_64",
+            "--headless",
+            "--verbose",
+            "--path",
+            "/workspace/scratch/86cf85b0abf1/leak-work",
+            "--script",
+            "res://tests/domestication_lab_test.gd"
+          ],
+          "log_sha256": "b42d64bd0ebaa23e445d97495b95284bf4f508b9f5ca7d164ae43ad4a7660985",
+          "source_sha256": "985353b2af1ee1325c5d903d1f9a26a66f288e3efd64ea4142d055a1996a1d9d",
+          "source_status": "unchanged"
+        }
+      ]
+    }
+  ],
+  "superseded_negative_checks": [
+    {
+      "name": "owned_scene_load_test",
+      "passed": false,
+      "exit_code": 1,
+      "seconds": 0.217,
+      "log_sha256": "fbf9c34799756b61cd5fc8f4926fd1532555e5218f163cbed91b34c5a41f7fb1",
+      "source_sha256": "55943b1b092a51c00d3b8df7352206726d2e501e0ac46395550c896f08c6d906",
+      "reason": "Test parse failure from unqualified Node notification constant; corrected before final affected run."
+    },
+    {
+      "name": "domestication_lab_test",
+      "passed": false,
+      "exit_code": 0,
+      "seconds": 23.251,
+      "log_sha256": "4dfca94f4e21bdff75b94c5cabe6e3f7717ee448b99d6cce0abbacbbd8b70ae1",
+      "source_sha256": "55943b1b092a51c00d3b8df7352206726d2e501e0ac46395550c896f08c6d906",
+      "reason": "Real close started async coordinator, then test freed notification owner and raw-quit before completion. Payload pass, leaked GDScriptFunctionState refcount 1."
+    },
+    {
+      "name": "domestication_lab_test",
+      "passed": false,
+      "exit_code": 0,
+      "seconds": 23.479,
+      "log_sha256": "5200cce6427f420a30eebcaf7b71067ca10d81631c59b645f6212f4275b017b0",
+      "source_sha256": "26d5ffc97bb149eb81f767317f4536c51628e6aeedd0910e81d116602f79192c",
+      "reason": "Raw success quit removed but notification owner still freed while awaiting coordinator. Payload pass, leaked GDScriptFunctionState refcount 1. Final test keeps owner alive.",
+      "retained_log": "negative-lab-owner-freed.log.gz"
+    }
+  ],
+  "unsupported_direct_quit_probe": {
+    "script": "negative-direct-quit.gd",
+    "log": "negative-direct-quit.log.gz",
+    "uncompressed_log_sha256": "f45113d63affee3f850b5d42961f9b91ba92e3bafd3a8ee663155e2343e52f94",
+    "scope": "Diagnostic only: immediate bare SceneTree.quit after starting real spherical campaign load. Thread/resources leaked and script compilation continued during teardown. Does not use the supported coordinator."
+  }
+}

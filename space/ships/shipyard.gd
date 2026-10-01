@@ -101,7 +101,7 @@ func _process(_delta: float) -> void:
 	if _library_page.done: _finish_library_page()
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST: _guard(func() -> void: get_tree().quit())
+	if what == NOTIFICATION_WM_CLOSE_REQUEST: _guard(func() -> void: preload("res://core/runtime_shutdown.gd").finish(get_tree()))
 	if what == NOTIFICATION_TRANSLATION_CHANGED and _status != null: _retranslate()
 
 func _build_ui() -> void:

@@ -301,7 +301,7 @@ func _notification(what: int) -> void:
 		if booted and not load_failed and not controller.checkpoint():
 			message_text = "Speichern fehlgeschlagen. Szene bleibt offen; bitte Speicherort prüfen."
 			return
-		get_tree().quit()
+		await preload("res://core/runtime_shutdown.gd").finish(get_tree())
 
 func box_mesh(parent: Node3D, size: Vector3, at: Vector3, color: Color) -> MeshInstance3D:
 	var node := MeshInstance3D.new()
