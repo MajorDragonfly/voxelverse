@@ -4,6 +4,69 @@ extends Node
 var failures: Array[String] = []
 var captures: bool = false
 
+class JumpObserver:
+	extends Node
+	const Space = preload("res://world/surface/gameplay_space.gd")
+	var player: Node
+	var saves: Node
+	var flow: Node
+	var samples: Array[Dictionary] = []
+	var last_physics_position: Vector3
+	var press_position: Vector3
+	var press_up: Vector3
+	var phase: String = "before_press"
+	var jump_events: Array[Dictionary] = []
+
+	func begin(subject: Node, save_service: Node, session_flow: Node) -> void:
+		player = subject
+		saves = save_service
+		flow = session_flow
+		last_physics_position = player.global_position
+		press_position = last_physics_position
+		press_up = player.up_direction
+		process_mode = Node.PROCESS_MODE_ALWAYS
+		process_physics_priority = player.process_physics_priority + 1
+		player.guidance_action.connect(_guidance)
+
+	func _guidance(action: String, value: float) -> void:
+		if action == "jump":
+			jump_events.append({"physics_frame": Engine.get_physics_frames(), "value": value})
+
+	func _physics_process(_delta: float) -> void:
+		observe("physics_post")
+		last_physics_position = player.global_position
+
+	func observe(label: String) -> void:
+		var position: Vector3 = player.global_position
+		var up: Vector3 = player.up_direction
+		samples.append({"label": label, "phase": phase,
+			"physics_frame": Engine.get_physics_frames(), "process_frame": Engine.get_process_frames(),
+			"in_physics_frame": Engine.is_in_physics_frame(), "floor": player.is_on_floor(),
+			"floor_normal_up": player.get_floor_normal().dot(up),
+			"waiting_for_terrain": player.waiting_for_terrain, "ground_ready": Space.ground_ready(player, position),
+			"swimming": player.is_swimming, "dead": player.is_dead,
+			"loading": flow.loading, "world_initialized": player.get_parent().world_initialized,
+			"paused": get_tree().paused, "can_process": player.can_process(),
+			"jump_pressed": Input.is_action_pressed("jump"), "jump_just_pressed": Input.is_action_just_pressed("jump"),
+			"velocity_up": player.velocity.dot(up),
+			"rise_since_press": (position - press_position).dot(press_up),
+			"rise_since_last_physics": (position - last_physics_position).dot(up),
+			"position": [position.x, position.y, position.z],
+			"jump_amount": saves.guidance.amount("jump"), "jump_done": saves.guidance.done("jump")})
+		# Retain the immediate approach, then every sample of the critical edge.
+		if phase == "before_press" and samples.size() > 24:
+			samples.pop_front()
+
+	func finish() -> void:
+		set_physics_process(false)
+		player.guidance_action.disconnect(_guidance)
+		print("FRONTEND_JUMP_DIAGNOSTIC: " + JSON.stringify({"engine": Engine.get_version_info().string,
+			"os": OS.get_name(), "display": DisplayServer.get_name(), "max_fps": Engine.max_fps,
+			"physics_ticks_per_second": Engine.physics_ticks_per_second,
+			"player_physics_priority": player.process_physics_priority,
+			"observer_physics_priority": process_physics_priority, "jump_events": jump_events, "samples": samples}))
+		queue_free()
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	captures = "--frontend-capture" in OS.get_cmdline_user_args()
@@ -242,17 +305,33 @@ func _exercise_first_steps(player: Node) -> void:
 			break
 	_hold_key(KEY_UP, false)
 	_expect(saves.guidance.done("move"), "Real movement on the remapped key did not complete walking.")
+	# Observe only; retain the original floor guard, input and two-signal limit.
+	var jump_observer := JumpObserver.new()
+	jump_observer.begin(player, saves, flow)
+	add_child(jump_observer)
+	jump_observer.observe("movement_released")
 	for frame in range(180):
 		if player.is_on_floor():
 			break
 		await get_tree().physics_frame
 	await _frames(2)
 	await _capture("first_steps_jump")
+	jump_observer.press_position = player.global_position
+	jump_observer.press_up = player.up_direction
+	jump_observer.phase = "press"
+	jump_observer.observe("before_press")
 	_hold_key(KEY_SPACE, true)
+	jump_observer.observe("after_press")
 	await get_tree().physics_frame
+	jump_observer.observe("first_physics_signal")
 	await get_tree().physics_frame
+	jump_observer.observe("second_physics_signal")
 	_hold_key(KEY_SPACE, false)
+	jump_observer.phase = "release"
+	jump_observer.observe("after_release")
 	_expect(saves.guidance.done("jump"), "A real grounded jump did not complete the jump task.")
+	jump_observer.observe("original_assertion")
+	jump_observer.finish()
 	var radius: float = player.inspection_radius
 	player.inspection_radius = 0.01
 	_key(KEY_R)

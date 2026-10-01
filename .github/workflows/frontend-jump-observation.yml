@@ -1,0 +1,56 @@
+name: Frontend jump observation (DIAGNOSTIC ONLY)
+
+on:
+  push:
+    branches: ["agent/int30-frontend-jump-observation-20261001"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frontend-jump-observation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows-diagnostic:
+    name: Windows release frontend observation (DIAGNOSTIC ONLY)
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Cache pinned Godot downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ runner.temp }}/godot-export-toolchain/*.zip
+            ${{ runner.temp }}/godot-export-toolchain/*.tpz
+          key: godot-desktop-archives-${{ runner.os }}-${{ hashFiles('tools/install_godot.py') }}
+      - name: Install verified editor and templates
+        run: >-
+          python tools/install_godot.py
+          --directory "${{ runner.temp }}/godot-export-toolchain"
+          --platform windows
+      - name: Observe existing frontend smoke in an external release export
+        run: >-
+          python tools/diagnose_frontend_export.py
+          --godot "${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_win64_console.exe"
+          --output "${{ runner.temp }}/voxelverse-frontend-jump-diagnostic"
+      - name: Upload diagnostic evidence (no release approval)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: DIAGNOSTIC-ONLY-frontend-jump-windows-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/voxelverse-frontend-jump-diagnostic/logs
+            ${{ runner.temp }}/voxelverse-frontend-jump-diagnostic/results.json
+            ${{ runner.temp }}/voxelverse-frontend-jump-diagnostic/export-files.json
+            ${{ runner.temp }}/voxelverse-frontend-jump-diagnostic/source-files-*.jsonl
+            ${{ runner.temp }}/voxelverse-frontend-jump-diagnostic/run-*.json
+          if-no-files-found: error
+          retention-days: 7
