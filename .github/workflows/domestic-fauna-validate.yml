@@ -11,27 +11,27 @@ on:
       - "tests/domestic*"
       - "tools/*domestic_fauna*"
       - ".github/workflows/domestic-fauna-validate.yml"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   fauna:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Install pinned engine
-        run: python tools/install_godot.py --directory "${{ runner.temp }}/godot" --platform linux
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
       - name: Import and verify species, habitats and live spawning
         run: >-
           python tools/validate_godot.py
-          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --godot "${{ steps.engine.outputs.godot }}"
           --tests domestication_contract_test domestic_fauna_catalog_test domestic_fauna_runtime_test
           --skip-main --output "${{ runner.temp }}/d1-checks"
       - name: Restart in a separate process and verify migration guards
         run: >-
           python tools/validate_domestic_fauna.py
-          --godot "${{ runner.temp }}/godot/editor/Godot_v4.6.3-stable_linux.x86_64"
+          --godot "${{ steps.engine.outputs.godot }}"
           --output "${{ runner.temp }}/d1-restart"
       - uses: actions/upload-artifact@v4
         if: always()

@@ -88,6 +88,19 @@ class ProjectDashboardTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                     dashboard.read_project(self.root)
 
+    def test_merged_candidate_reports_reviewed_main_without_target_acceptance(self):
+        self.data["candidate"]["merged_into"] = self.data["main"]["sha"]
+        self.save(self.data)
+        data = dashboard.read_project(self.root)
+        rendered = dashboard.render_status(data)
+        self.assertIn("In main übernommene Integration", rendered)
+        self.assertNotIn("Kandidat und main sind getrennte Stände", rendered)
+        self.assertEqual(data["acceptance"]["status"], "pending")
+        self.data["candidate"]["merged_into"] = "a" * 40
+        self.save(self.data)
+        with self.assertRaisesRegex(ValueError, "reviewed main commit"):
+            dashboard.read_project(self.root)
+
     def test_target_acceptance_requires_and_displays_exact_evidence(self):
         self.data["acceptance"]["status"] = "accepted"
         self.save(self.data)

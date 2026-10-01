@@ -1,0 +1,29 @@
+{
+  "platform": "linux",
+  "baseline": {
+    "bytes": 9889556,
+    "sha256": "c85b0a2d81990b6d136401c2f5d3e408b82f7a0caf7c43d8f6c6a6ee9261212e"
+  },
+  "candidate": {
+    "bytes": 9862436,
+    "sha256": "49474f929f97ae63624c718442c23f4472cf3e4abd43d18906110b45dbe1c5f8"
+  },
+  "saved_bytes": 27120,
+  "baseline_resources": 1427,
+  "candidate_resources": 1417,
+  "removed": [
+    ".godot/exported/133200997/export-27b3771a67083c478e023f56bc6740a3-int30_underwater_exit.scn",
+    "audio/fixtures/int30_underwater_exit.tscn.remap",
+    "civilization/technology/tests/technology_catalog_test.gd.remap",
+    "civilization/technology/tests/technology_catalog_test.gdc",
+    "civilization/technology/tests/technology_preview_ui_test.gd.remap",
+    "civilization/technology/tests/technology_preview_ui_test.gdc",
+    "creatures/behavior/review/int30_creature_review.gd.remap",
+    "creatures/behavior/review/int30_creature_review.gdc",
+    "creatures/behavior/review/int30_creature_shapes.gd.remap",
+    "creatures/behavior/review/int30_creature_shapes.gdc"
+  ],
+  "added": [],
+  "changed": [],
+  "unchanged_resources": 1417
+}

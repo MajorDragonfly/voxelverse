@@ -14,7 +14,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 BENCHMARK = "assets/packs/temperate_forest_v1/environment/benchmark_v2/"
-DEV_DIRS = ("art", "tools", "tests", "docs", "validation", "evidence")
+DEV_DIRS = ("art", "tools", "tests", "docs", "validation", "evidence",
+            "civilization/technology/tests", "creatures/behavior/review", "audio/fixtures")
 IGNORED_TREES = ("art/source", "art/review", "docs", "validation", "evidence")
 
 

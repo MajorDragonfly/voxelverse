@@ -75,6 +75,14 @@ class ProjectHygieneTest(unittest.TestCase):
         self.assertTrue(any("Missing import boundary: evidence" in error for error in errors))
         self.assertTrue(any("preset.1 can package development resources: validation" in error for error in errors))
 
+    def test_top_level_exclusions_do_not_cover_nested_development_resources(self):
+        nested = ("civilization/technology/tests", "creatures/behavior/review", "audio/fixtures")
+        top_level = [directory for directory in hygiene.DEV_DIRS if "/" not in directory]
+        self.write("export_presets.cfg", '[preset.0]\nexclude_filter="' +
+                   ",".join(f"{directory}/*" for directory in top_level) + '"\n')
+        self.assertEqual(hygiene.check(self.project), [
+            f"preset.0 can package development resources: {directory}/" for directory in nested])
+
 
 if __name__ == "__main__":
     unittest.main()

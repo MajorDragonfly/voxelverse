@@ -5,9 +5,9 @@ Bewertet am 2026-10-01. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Prioritäten
 
-1. Korrigierten Stammes-Paket-Klickhelfer vollständig auf eigenem exaktem Tree prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete. Originale 74bb/c5 getrennt erhalten.
-2. Forward+-Engpass aus tatsächlicher c5-Phasendiagnose ursächlich zuordnen: Materialduplikation, kalte Asset-Vorbereitung, Publikation/Final-Attach und Texturupdate getrennt messen. Grenzen und Cachepfade erhalten; historischen GL-Leak separat erhalten.
-3. Serielle Nest-/Reload-/D1.2-Gegenprobe besteht; gemessene p95/p99-Verschlechterung und dichte Scannerkosten weiterhin ursächlich abgrenzen und gezielt beheben.
+1. Vor neuen Fachpaketen belegte Altlasten im Entwicklungsablauf bereinigen und Quelltestjobs anhand gemessener Laufzeiten verteilen; sämtliche Pflichtgates erhalten.
+2. Originalen Kamera-Nahblick und Scanner in der tatsächlichen Spielansicht prüfen (#171/#172/#179 und #189); die gelockerte Niedrigwinkelassertion ist keine gleichwertige Fachabnahme.
+3. Forward+-Publikationsengpass aus Draft #246 ursächlich profilieren: Frame-Callbacks, LOD/Ownership/Atmosphäre und Save-Preview-Readback; CPU/GPU/Scheduling sind noch nicht getrennt.
 
 ## Vorbereitete Pakete
 
@@ -18,7 +18,7 @@ Bewertet am 2026-10-01. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Abgegrenzte Zuweisung
 
-Die verbindliche Runde wird in [Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137) geführt. Lars hat am 01.10.2026 die Zusammenführung beauftragt. Aktiver gemeinsamer Kandidat ist PR #245; #221 bleibt der eingefrorene RC1. Die unveränderliche Fachbasis und Besitzerzuordnung in #137 bleiben erhalten. Neue Arbeiten konzentrieren sich auf Integrationsfehler und nachgewiesene Engpässe; keine zweite Rundenliste. Main/Auto-Merge und Quell-PR-Schließungen bleiben bis erfüllter Abnahme gesperrt.
+Die verbindliche Runde wird in [Issue #137](https://github.com/MajorDragonfly/voxelverse/issues/137) geführt. INT30-Zusammenführung und Alt-PR-Abgleich abgeschlossen. main 6696ebbe ist die neue Fachbasis; #137 bleibt die einzige Besitzerzuordnung. 46 redundante Liefer-PRs geschlossen, #189 wegen ursprünglicher enger Kamera-Abnahme und Draft #246 als getrennte Forward+-Diagnose offen. Fachbranches und historische Negativbelege bleiben erhalten. C31-MAINTENANCE prüft und optimiert den Entwicklungsablauf vor weiteren Paketen.
 
 `python3 tools/work_packet.py list` zeigt den aktuellen ausführbaren Katalog; `show PAKET-ID` oder `start PAKET-ID --owner CHAT` liefert Dateien, Grenzen und Prüfverträge. Der Integrationsbesitzer ergänzt neue kleine Briefe und prüft `conflicts` vor paralleler Zuweisung.
 

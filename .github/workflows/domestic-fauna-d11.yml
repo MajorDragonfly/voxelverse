@@ -13,6 +13,10 @@ on:
       - "tests/fixtures/domestic_recovery_terrain*"
       - "tools/*domestic_fauna*"
       - ".github/workflows/domestic-fauna-d11.yml"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   evidence-and-recovery:
     runs-on: ubuntu-latest

@@ -8,7 +8,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
-from ci_plan import plan
+from ci_plan import plan, read_timings, source_shards, TIMING_PROFILE, UNKNOWN_TEST_SECONDS
 
 
 class CIPlanTest(unittest.TestCase):
@@ -26,6 +26,12 @@ class CIPlanTest(unittest.TestCase):
         self.write("tools/validation/selection_rules.json", json.dumps({"schema": 1,
             "documentation": ["docs/*.md"], "full": ["tools/*"],
             "rules": [{"id": "audio", "paths": ["audio/*"], "contracts": ["audio"]}]}))
+        self.timings = {"schema": 1, "source": {
+            "commit": "a" * 40, "tree": "b" * 40, "workflow_run_id": 123,
+            "runner": "ubuntu-latest", "godot": "4.6.3.stable.fixture",
+            "artifacts": [{"path": "measured/source.zip", "sha256": "c" * 64}]},
+            "seconds": {"audio_test": 2.0, "other_test": 3.0}}
+        self.write(str(TIMING_PROFILE), json.dumps(self.timings))
         for name in ("audio", "other"):
             self.write(f"tests/{name}_test.gd", "extends SceneTree\n")
         self.write("audio/sound.gd", "# before\n")
@@ -81,6 +87,51 @@ class CIPlanTest(unittest.TestCase):
             result = plan(self.root, event, self.event(True))
             self.assertEqual(result["mode"], "full")
             self.assertTrue(result["source"] and result["runtime"] and result["acceptance"])
+
+    def test_balanced_schedule_preserves_every_test_once_and_is_deterministic(self):
+        timings = {f"test_{i}_test": float(i + 1) for i in range(23)}
+        selected = list(timings)
+        shards, loads = source_shards(selected, timings)
+        actual = [name for shard in shards for name in shard["tests"]]
+        self.assertEqual(sorted(actual), sorted(selected))
+        self.assertEqual(len(actual), len(set(actual)))
+        self.assertEqual(len(shards), 4)
+        self.assertTrue(all(shard["tests"] for shard in shards))
+        self.assertEqual((shards, loads), source_shards(list(reversed(selected)), timings))
+        self.assertAlmostEqual(sum(loads), sum(timings.values()))
+        with self.assertRaisesRegex(ValueError, "duplicates"):
+            source_shards(selected + selected[:1], timings)
+
+    def test_measured_long_checks_no_longer_share_an_alphabetical_shard(self):
+        selected = [f"test_{i:02}_test" for i in range(12)]
+        timings = {name: (600.0 if i % 4 == 0 else 10.0) for i, name in enumerate(selected)}
+        _, loads = source_shards(selected, timings)
+        old = [sum(timings[name] for name in selected[i::4]) for i in range(4)]
+        self.assertLess(max(loads), max(old) / 2)
+
+    def test_new_tests_keep_a_conservative_weight_and_small_selections_have_no_empty_jobs(self):
+        shards, loads = source_shards(["new_test", "audio_test"], {"audio_test": 2.0})
+        self.assertEqual(len(shards), 2)
+        self.assertEqual(shards[0]["tests"], ["new_test"])
+        self.assertEqual(loads, [UNKNOWN_TEST_SECONDS, 2.0])
+        self.assertEqual(source_shards([], {}), ([], []))
+
+    def test_bad_timing_configuration_never_becomes_a_green_plan(self):
+        for value in (0, -1, True, float("nan"), float("inf"), "3", 86401):
+            with self.subTest(value=value):
+                data = dict(self.timings, seconds={"audio_test": value})
+                self.write(str(TIMING_PROFILE), json.dumps(data))
+                with self.assertRaisesRegex(ValueError, "source timing profile"):
+                    plan(self.root, "workflow_dispatch", {})
+        self.write(str(TIMING_PROFILE), json.dumps(dict(self.timings, source={})))
+        with self.assertRaises(ValueError):
+            read_timings(self.root)
+        self.write(str(TIMING_PROFILE), '{"schema":1,"schema":1}')
+        with self.assertRaisesRegex(ValueError, "Duplicate"):
+            read_timings(self.root)
+        (self.root / TIMING_PROFILE).unlink()
+        with self.assertRaises(ValueError):
+            read_timings(self.root)
 
     def test_missing_base_and_head_only_checkout_fail_closed(self):
         event = self.event(True)
