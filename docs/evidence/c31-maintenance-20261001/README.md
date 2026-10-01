@@ -29,6 +29,15 @@ Entwicklungs-/Prüfzeiten verbessern.
   Fortschrittsbeobachtung und Spielereignisse werden unverändert verarbeitet.
 - Dashboardquelle und erzeugte Ansichten nennen die tatsächlich abgeschlossene
   main-Übernahme von #245. Sie lassen fachliche Sicht-/Ziel-PC-Abnahmen offen.
+- Ein echter Fehler der ersten CI-Runde wurde behoben: Der Bodenmaterial-Wrapper
+  verlangte eine sichtbare Änderung auch bei byteidentischen Shaderquellen.
+  Unveränderte Quellen müssen nun in allen 15 Fällen identische RGB-Messwerte und
+  PNG-Paare liefern. Bei geänderten Quellen bleibt die ursprüngliche sichtbare
+  Delta-Grenze von 0,004 erforderlich. Alle 30 Bilder, Renderer-, Draw-Call-,
+  Fehler-/Leak- und Zeitgrenzen bleiben erhalten; Quellhashes werden vor/nach dem
+  Capture geprüft. Die sechs gezielten Fehler-/Gleichheitsfälle scheiterten vor
+  der Korrektur und bestehen danach. `ground-review-negative.json` hält den
+  ursprünglichen negativen Workflow samt seinen positiven nativen Captures fest.
 
 ## Lokale Vorprüfungen
 

@@ -1,0 +1,68 @@
+{
+  "source_commit": "063cb4e82c6a6dfb1441f63ba12c394353129e36",
+  "tree": "9508fdcdbbab2433980a143d2224fde017626db4",
+  "ci_merge": "bac0d12b39d2993cbeb35ff93a5c34fabd364e11",
+  "run_id": 36910757901,
+  "baseline_shader_sha256": "c8201f60ef713b068054094508d6f3d3200969573966107c4ba5bb4c0b24c125",
+  "candidate_shader_sha256": "c8201f60ef713b068054094508d6f3d3200969573966107c4ba5bb4c0b24c125",
+  "identical_shader_bytes": true,
+  "failure": "Python wrapper demanded visible shader difference despite identical shader bytes; native render captures and their strict assertions passed.",
+  "renderers": [
+    {
+      "name": "forward_plus",
+      "job_id": 110532522889,
+      "artifact_id": 11186537186,
+      "artifact_zip_sha256": "f1f5a1c7be3f7671e583dbd7d8fa276c3f67ab03fd32d9cb1accea71b9d6b529",
+      "native_passed": true,
+      "samples": 15,
+      "png_count": 30,
+      "mean_rgb_change": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "capture_json_sha256": "136692712c1f5c99808892a647fe293f9a849a964f51120c67f1c3d4f61ae27c",
+      "runtime_log_sha256": "3544a625f8d581c70058a9437dafe2752957194d4b3e9c59b4e911b19dd150ad"
+    },
+    {
+      "name": "gl_compatibility",
+      "job_id": 110532523129,
+      "artifact_id": 11187385157,
+      "artifact_zip_sha256": "0a600d63af4c504006c71c33da9e197abdfeafe3f61ff007d5e6e82833ff37b6",
+      "native_passed": true,
+      "samples": 15,
+      "png_count": 30,
+      "mean_rgb_change": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "capture_json_sha256": "ad3127b1f7aa4c56e3484cc083f64d372b888e6167d32cd9017f1407681e745e",
+      "runtime_log_sha256": "8c986c2f9f510bfc51c12cfc3864974b0727138b51fd1fb8e02c5c125b7f155e"
+    }
+  ]
+}
