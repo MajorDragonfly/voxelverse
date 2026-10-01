@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "source": {
+    "commit": "c987b14684baa41ff08063c0116e915bad18de5e",
+    "tree": "83c1b608292abe5cbed58b6e418255d96c782cc5",
+    "dirty": false,
+    "file_count": 5391
+  },
+  "source_unchanged": true,
+  "command": [
+    "/tmp/voxelverse-validation-editor-62rs_gou/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/home/runner/work/voxelverse/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/building_editor_input_test.gd",
+    "--",
+    "--capture",
+    "/tmp/building-editor-review",
+    "--external-restart"
+  ],
+  "renderer": "gl_compatibility",
+  "images": {
+    "building-de-800x600.png": {
+      "passed": true,
+      "dimensions": [
+        800,
+        600
+      ],
+      "sha256": "71e38ce3b3c15bbb537bc4220a2ca973585191824d6c9dd69ec24ff470de528c"
+    },
+    "building-de-1280x720.png": {
+      "passed": true,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "2507bff96e05bcf8486dc69a0d540ab0686a1f9fcb015cdedc4cd4a0d4d31b34"
+    },
+    "building-de-1920x1080.png": {
+      "passed": true,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "fc7a4536b150c4cce0ccf5b86a89bd765fbdcc6468abe89e11791c3378176846"
+    },
+    "building-en-800x600.png": {
+      "passed": true,
+      "dimensions": [
+        800,
+        600
+      ],
+      "sha256": "a0e0898acc11c719025f25cad833c251cb03f1387b2d4687abf4ab97938a8055"
+    },
+    "building-en-1280x720.png": {
+      "passed": true,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "87f3be6b7207aa49dfccf9c4c1dfd2a4e23fd32078fb35401cc3bb64f4d5e628"
+    },
+    "building-en-1920x1080.png": {
+      "passed": true,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "37be0ba012223fb3290a3eb12adec802c27dc963df1ba1addff81cc664c590a6"
+    },
+    "building-empty.png": {
+      "passed": true,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "5fcf9dd73216cfd07f0aa03b595fbd843934978100d60313bfc5377c26fe74d7"
+    }
+  },
+  "test_results": [
+    {
+      "checks": 569,
+      "display": "X11",
+      "failures": [],
+      "passed": true,
+      "renderer": "gl_compatibility"
+    },
+    {
+      "checks": 2,
+      "display": "headless",
+      "failures": [],
+      "passed": true,
+      "renderer": "forward_plus"
+    }
+  ],
+  "scope": "Real scene/GUI input, transforms/grid/history, DE/EN drafts/focus/scroll, IDs, save/load/fresh process, empty design, three native sizes.",
+  "original_result_file": "building-native-recheck-fa94.json.gz",
+  "original_result_sha256": "9dcbd1f105107907dbb557b7865676844d58300a87f077243675ddb59dcfcce2",
+  "artifact_id": 11145195203,
+  "artifact_zip_sha256": "b581b5aeb52a2777b6de3f487a8be34015db2fc46606aa28d10986fd86ae9a3e"
+}
