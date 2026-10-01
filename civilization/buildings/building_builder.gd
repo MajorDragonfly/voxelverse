@@ -893,6 +893,9 @@ func _show_exchange_dialog(exporting: bool) -> void:
 
 func _exchange_file_selected(path: String) -> void:
 	var exporting: bool = _exchange_dialog.file_mode == FileDialog.FILE_MODE_SAVE_FILE
+	# FileDialog emits before its own close completes. Release exclusivity before
+	# the import confirmation becomes the editor's next modal child window.
+	_exchange_dialog.hide()
 	var result: Dictionary = export_exchange_file(path) if exporting else import_exchange_file(path)
 	if not result.ok:
 		_set_status(Text.message("BEDITOR_EXCHANGE_FAILED", {"code": result.code}))
