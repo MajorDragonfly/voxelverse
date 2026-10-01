@@ -31,6 +31,7 @@ def main():
     parser.add_argument("--production", choices=["milk", "eggs"], default="milk", help="Developed profile's real production chain")
     parser.add_argument("--compare", type=Path, help="Compare a route or developed report with the same recipe/hardware")
     parser.add_argument("--replay", type=Path, help="Prior route/startup report directory: reuse its exact initial save and immutable region blobs")
+    parser.add_argument("--route-from", type=Path, help="Route capture directory: follow its first outward breadcrumbs in both cycles, instead of time-based headings")
     parser.add_argument("--walk-seconds", type=float, default=600.0, help="Outward walking with heading changes, followed by a separate physical return; 10 minutes outward by default")
     parser.add_argument("--frame-cap", type=int, default=60)
     parser.add_argument("--settle-frames", type=int, default=60)
@@ -47,6 +48,8 @@ def main():
         parser.error("Developed profiles use the existing seed 15838 scenario; --replay belongs to route mode")
     if args.compare and args.mode not in ("route", "developed"):
         parser.error("--compare requires --mode route or developed")
+    if args.route_from and (args.mode != "route" or not args.replay):
+        parser.error("--route-from requires route mode and an exact --replay fixture")
     if args.compare and args.mode == "route" and (args.replay is None or args.replay.expanduser().resolve() != args.compare.expanduser().resolve()):
         parser.error("Route comparison requires --replay from the same baseline report")
     if not 1 <= args.seed <= 2147483647:
@@ -78,6 +81,14 @@ def main():
         from performance_startup_report import run_startup
         return run_startup(args, project, output, source, lambda: source_version(project))
     config = {"output": str(output), "recipe": recipe, "source": source}
+    if args.route_from:
+        route_capture = json.loads((args.route_from.expanduser().resolve() / "capture.json").read_text(encoding="utf-8"))
+        routes = [s for s in route_capture["segments"] if s["stage"] == "route_outcome"]
+        if not routes or len(routes[0]["breadcrumbs"]) < 2:
+            parser.error("Route capture needs a completed physical outward route")
+        config["fixed_route"] = routes[0]["breadcrumbs"]
+        recipe["steering"] = "fixed_breadcrumbs_v1"
+        recipe["route_sha256"] = hashlib.sha256(json.dumps(config["fixed_route"], sort_keys=True).encode()).hexdigest()
     print(f"Performance output: {output}", flush=True)
     summary = {"passed": False, "recipe": recipe, "host": {"system": platform.system(),
                "machine": platform.machine(), "processor": platform.processor()}, "target_pc_acceptance": False}

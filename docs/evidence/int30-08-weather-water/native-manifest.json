@@ -1,0 +1,652 @@
+{
+  "schema": 2,
+  "base_commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "source_head": "cc70a42b48a10ea2d2164915f3a1508c40e68ea6",
+  "source": {
+    "available": true,
+    "commit": "90720d43c79424b766ba6c9b12c979f55127c6b7",
+    "tree": "7da5f1ad83c97a97b3343cd799b82a9e10aaa46f",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "7827751ccb294cdb2c548dfd253735c06790ff0b10fa68e0c1b9b99760e71acc",
+    "source_sha256": "17510e27edc25dd69694b325b0b2aa5c4488539633893b9bb2679983140e0432",
+    "complete": true,
+    "file_count": 3958,
+    "bytes": 125297595,
+    "bytes_hashed": 125297595,
+    "seconds": 0.3468
+  },
+  "source_verification": "Clean equal tree checked before and after native runs. These native UI launchers do not monitor SourceRun boundaries; the separate complete-final and campaign reviews do. No production edits between these runs.",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "environment": {
+    "platform": "Linux x86_64",
+    "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "display": "portable Xvfb, independent loopback displays",
+    "software": true,
+    "LP_NUM_THREADS": "4",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "user_data": "isolated_per_renderer"
+  },
+  "passed": true,
+  "renderers": {
+    "forward_plus": {
+      "command": [
+        "/workspace/scratch/7644ddc06b68/godot-validation/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse-hudfix",
+        "--rendering-method",
+        "forward_plus",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/weather_forecast_ui_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/7644ddc06b68/v30-08-ultimate-native-forward_plus"
+      ],
+      "exit_code": 0,
+      "images": {
+        "cover-clear.png": {
+          "sha256": "46920daefcc21b1ec154b0ae8a2a36d431612446da5df424bccc6b231fe547ca",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 107906,
+          "passed": true
+        },
+        "cover-overcast.png": {
+          "sha256": "ca72c0030091230e70831b4945f13d0ec9ad9b495026085dada83f91680da0b7",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 154417,
+          "passed": true
+        },
+        "day-dawn.png": {
+          "sha256": "35ed31b006e6413a4410523b3502936471f94300b07dbab60b1c12043efa5aed",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 171232,
+          "passed": true
+        },
+        "day-dusk.png": {
+          "sha256": "62ee5c89ff67e4b153a597cd7f80cb04d54fac8c313b96c1127b038dafa6d1f9",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 89802,
+          "passed": true
+        },
+        "day-night.png": {
+          "sha256": "8150c1923d7f6204c9a2fd3c942e62000fee77938d76e60cdd28ba25d14b3a27",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 108336,
+          "passed": true
+        },
+        "day-noon.png": {
+          "sha256": "8e6c4116ab7c4852c7351c1e47c369e9c6c66b138eba930752d0c2183854f6ab",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 130421,
+          "passed": true
+        },
+        "forecast-1280x720-de.png": {
+          "sha256": "ffa4729fa99c820da01b9353bf67cf0bd6b81cf2530d62af62044c3751e6b99b",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 30021,
+          "passed": true
+        },
+        "forecast-1280x720-en.png": {
+          "sha256": "bd22f246f05edd501bd200a39487560ffb0540e7bebcfd1b7afa8225da288fe7",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 26880,
+          "passed": true
+        },
+        "forecast-1920x1080-de.png": {
+          "sha256": "a642bdaa2af5c402c1f3f75cff385a367eb18645353e0078e04f63a51d69bd66",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "bytes": 24079,
+          "passed": true
+        },
+        "forecast-1920x1080-en.png": {
+          "sha256": "d978ce61ef5795a5ea199b33178c0b4b6c203ab55677d0af2110f7045de36e43",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "bytes": 22118,
+          "passed": true
+        },
+        "forecast-800x600-de.png": {
+          "sha256": "a1f9ca2b986d05258d703c23e15f62bbb5721d20fd988140a00c71007e01987e",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 26293,
+          "passed": true
+        },
+        "forecast-800x600-en.png": {
+          "sha256": "f299e0046e38977bfa0de686e4da1d82df5df899ab0a5336b123f3a97b4c4ada",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 23401,
+          "passed": true
+        },
+        "forecast-entry-1280x720-de.png": {
+          "sha256": "7bb53569873c7e8e8a296c13f3e23b4ea0b08d5337c07193305d7dba7251e69c",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 31768,
+          "passed": true
+        },
+        "forecast-entry-1280x720-en.png": {
+          "sha256": "3eabedd926269541b86ce89356ba70c8dad61707662ff08c3318e9b2ec93258f",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 28318,
+          "passed": true
+        },
+        "forecast-entry-1920x1080-de.png": {
+          "sha256": "2a57b766ce5a95e33abf9e23c3397876ebd01ab1a46840df287a1d9e60365692",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "bytes": 27911,
+          "passed": true
+        },
+        "forecast-entry-1920x1080-en.png": {
+          "sha256": "2753251cd1a41fc170e42adbe1083cf69d9e280e1ced1535acfafd30edb28ff9",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "bytes": 24383,
+          "passed": true
+        },
+        "forecast-entry-800x600-de.png": {
+          "sha256": "c7dbf759551ac1498d86efc6c890337c47c842c9a831baa91a3666295a312ab9",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 27452,
+          "passed": true
+        },
+        "forecast-entry-800x600-en.png": {
+          "sha256": "97777713e0f2468543069fd6d0a88d4e734489a1c1086a5b579d6971a565dea1",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 24204,
+          "passed": true
+        },
+        "procedural-lake.png": {
+          "sha256": "4c5bb2334182e5f73347fc8c9fe9047703e1dc8e82adbafd33d7edcd9e9d0125",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 245432,
+          "passed": true
+        },
+        "procedural-sea.png": {
+          "sha256": "d1006235c7868883ab34b66e95cd739e8dc575691b50d2db9ff7910498144ffb",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 221050,
+          "passed": true
+        },
+        "shadow-off.png": {
+          "sha256": "9f70547c5fdc02fb498418f5fe8493ecb0e0c3edb45bbac3269cc6415783198e",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 123196,
+          "passed": true
+        },
+        "shadow-on.png": {
+          "sha256": "8e6c4116ab7c4852c7351c1e47c369e9c6c66b138eba930752d0c2183854f6ab",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 130421,
+          "passed": true
+        },
+        "warning-1280x720-de.png": {
+          "sha256": "79913d25a51849e3713efa750440e5d72934aa86c43c57f285437cd1c69cadb2",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 14402,
+          "passed": true
+        },
+        "warning-1280x720-en.png": {
+          "sha256": "8d854d67fe57f2793fdc6303ff662f016a072d3153da95dd1cb4241453a02ad2",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 14268,
+          "passed": true
+        },
+        "warning-800x600-de.png": {
+          "sha256": "50ebb2b0ba76ceb8de1db976d4c52640d17e85f155acaccfc7a794a5566d8091",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 12951,
+          "passed": true
+        },
+        "warning-800x600-en.png": {
+          "sha256": "f840f5cd3bad2f4084940407127b1158968153cf53a2fc35bee715b2bbc74ac2",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 13085,
+          "passed": true
+        },
+        "warning-entry-800x600-de.png": {
+          "sha256": "945735d14ac34e334ec9b09598576ed6401f2f6dc82c6bcf57c620cc554744ac",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 13930,
+          "passed": true
+        },
+        "warning-entry-800x600-en.png": {
+          "sha256": "1b5504999751d75c4a3d2fc852e2229606a62593c2bfe10f416fb1eb4dcc946f",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 13769,
+          "passed": true
+        },
+        "water-current-off.png": {
+          "sha256": "3968fe69d2ac77307c31b1af5ed4a2ebba3414d20ae72c886f59ef930b79e482",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 108417,
+          "passed": true
+        },
+        "water-current-on.png": {
+          "sha256": "af50b30695f6bd5954330cab6b29d34b1d9bf982eaa5dde4ac6136f7bc96e9e0",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 110783,
+          "passed": true
+        },
+        "water-later.png": {
+          "sha256": "56f0d91efd92a0e82317c3fbf42bfaed4b73d13d93514a57f4092d5017439667",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 110909,
+          "passed": true
+        },
+        "water-paused.png": {
+          "sha256": "56f0d91efd92a0e82317c3fbf42bfaed4b73d13d93514a57f4092d5017439667",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 110909,
+          "passed": true
+        }
+      },
+      "log_sha256": "3bc261ec4e4d792560c4f28f34c697d025418700cf21662357e6a1e3f893e11d",
+      "review_sha256": "02284668078e58852aeb35dd3a12805af3e9fc10499e6a576e7bcb218c4bb104",
+      "weather_water_sha256": "008b889613fc825a449136977e7a0627daa087dfa443764a8255693b34cd7e48"
+    },
+    "gl_compatibility": {
+      "command": [
+        "/workspace/scratch/7644ddc06b68/godot-validation/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse-hudfix",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/weather_forecast_ui_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/7644ddc06b68/v30-08-ultimate-native-gl_compatibility"
+      ],
+      "exit_code": 0,
+      "images": {
+        "cover-clear.png": {
+          "sha256": "044522dad0a31a01442f8702d9c11c9531505744e0c415a1e4c0cbf2e9178b5d",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 122539,
+          "passed": true
+        },
+        "cover-overcast.png": {
+          "sha256": "a66a8fc08ea6a3c3d85795a713ce6dc2151d4c2568e2607af728fa4b2c918342",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 179788,
+          "passed": true
+        },
+        "day-dawn.png": {
+          "sha256": "9bdeb302a1576dbcb0289ac9c807cb495fdf5f72ea01eb9f6785de24590602fd",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 183545,
+          "passed": true
+        },
+        "day-dusk.png": {
+          "sha256": "15ba29bb9917c054e09cb729904a371bacce96aff135cffe7a4b7214170f11c9",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 87938,
+          "passed": true
+        },
+        "day-night.png": {
+          "sha256": "c42176d4da65f2cf0e3b2c07b906968e1a8066c7d0b1ab27b3fdfbe34e6b71e9",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 91394,
+          "passed": true
+        },
+        "day-noon.png": {
+          "sha256": "94b8894457c2284690ae7de19c97247db80db17660389d0d9387eecc3cba69ea",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 147218,
+          "passed": true
+        },
+        "forecast-1280x720-de.png": {
+          "sha256": "4e757f8012619772dc9cbc305c92936192844deb574a6d5226aff2a7c4c88874",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 32557,
+          "passed": true
+        },
+        "forecast-1280x720-en.png": {
+          "sha256": "dbbf2f41e2ed1eaeb93ef682da90156e11204ead03603ade4445e4584942746b",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 30087,
+          "passed": true
+        },
+        "forecast-1920x1080-de.png": {
+          "sha256": "4f862d207c3305381e97b91bf911c6389ef709fa947df746015578c536974521",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "bytes": 28057,
+          "passed": true
+        },
+        "forecast-1920x1080-en.png": {
+          "sha256": "8ae82fa27f8f944da8b17d90fbc6076c9785acfbff21beaf4bade38d7b3ec978",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "bytes": 25505,
+          "passed": true
+        },
+        "forecast-800x600-de.png": {
+          "sha256": "1b1ba5716d5336a96e759ccf2de16c4c60855977fe1f37b6acd2e6ecd72a5df3",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 28614,
+          "passed": true
+        },
+        "forecast-800x600-en.png": {
+          "sha256": "e614b92d88b4e7aa1cdbdc1c1986933630c1e080f2091105f9e0100afeb72015",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 25937,
+          "passed": true
+        },
+        "forecast-entry-1280x720-de.png": {
+          "sha256": "1889db0482486590005381b7020729f65e307b9e4bd7342c38d400db13645442",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 35154,
+          "passed": true
+        },
+        "forecast-entry-1280x720-en.png": {
+          "sha256": "fc1abf708b554bba45186c0d28fd8b408e551efd4240861796b4b2accf31b420",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 31286,
+          "passed": true
+        },
+        "forecast-entry-1920x1080-de.png": {
+          "sha256": "bf9376cc8d0f103ecdea675a68e089b5c347473b066a14ab4c93ad53c2604db1",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "bytes": 31809,
+          "passed": true
+        },
+        "forecast-entry-1920x1080-en.png": {
+          "sha256": "d3e4d64aa17847d09fa8406f4a99f221a70883fe2bdf7686323fdb2c00cefba0",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "bytes": 27893,
+          "passed": true
+        },
+        "forecast-entry-800x600-de.png": {
+          "sha256": "862ebb245f8eec20c592ee012e8ce4cdaab3fa314569e03b70750ab102478ef3",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 29641,
+          "passed": true
+        },
+        "forecast-entry-800x600-en.png": {
+          "sha256": "b75fe9078cfd2951c137cde722b15b92aaba1bad539e64b5860b10593e97e7bb",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 26790,
+          "passed": true
+        },
+        "procedural-lake.png": {
+          "sha256": "423cd0e523a10bfa7afff1988e367ff9621b0bb9a6811e338d2542957c19e199",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 313996,
+          "passed": true
+        },
+        "procedural-sea.png": {
+          "sha256": "f3a14fd168ef165745bec786fe129f1c22e2682a6bb66240b93319e1ea280bba",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 287192,
+          "passed": true
+        },
+        "shadow-off.png": {
+          "sha256": "a7af6852bf9ee0995b2aa12bb218846d45dc37a2bd0872739886d547144e4733",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 135669,
+          "passed": true
+        },
+        "shadow-on.png": {
+          "sha256": "94b8894457c2284690ae7de19c97247db80db17660389d0d9387eecc3cba69ea",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 147218,
+          "passed": true
+        },
+        "warning-1280x720-de.png": {
+          "sha256": "6fa98f5101b368849e6ab6ac2842f00cf64a67955f8d39762b0e4ef4597848be",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 16205,
+          "passed": true
+        },
+        "warning-1280x720-en.png": {
+          "sha256": "97d8798fc5509ff586f684c13cc76394586917591cb2ca544002770ca4a85c01",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bytes": 16084,
+          "passed": true
+        },
+        "warning-800x600-de.png": {
+          "sha256": "7c5ccda4c80f4dc21135edb3709fa425f02df4b844b2129a46dc5e65b1544779",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 13905,
+          "passed": true
+        },
+        "warning-800x600-en.png": {
+          "sha256": "e404e1bc734de52afcd27f7245834601929c1655d2929a5e5393c29c8b5a5a71",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 14016,
+          "passed": true
+        },
+        "warning-entry-800x600-de.png": {
+          "sha256": "50dfd52f99f4eb7f0d1c73a8c76c05db8e74be1ab751cdc84294716f3e4970ad",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 14923,
+          "passed": true
+        },
+        "warning-entry-800x600-en.png": {
+          "sha256": "ca56f311faeccc8a3b70b7dfda26159ade9c02f4b7a50e80c8e50a1f63cad1a8",
+          "dimensions": [
+            800,
+            600
+          ],
+          "bytes": 14687,
+          "passed": true
+        },
+        "water-current-off.png": {
+          "sha256": "af055e5c019379a7f514af1e48e48a64c293f72ac0fff3c402377d005205af1c",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 122437,
+          "passed": true
+        },
+        "water-current-on.png": {
+          "sha256": "f0c783a8b94e6cc5176bd3f10190fc58bcba31ead52875279c912f408ce41000",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 125276,
+          "passed": true
+        },
+        "water-later.png": {
+          "sha256": "90bc32e7696e67cf344e753e3622e629414e1a106ecfa03856ecaad6b4744356",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 125274,
+          "passed": true
+        },
+        "water-paused.png": {
+          "sha256": "90bc32e7696e67cf344e753e3622e629414e1a106ecfa03856ecaad6b4744356",
+          "dimensions": [
+            960,
+            540
+          ],
+          "bytes": 125274,
+          "passed": true
+        }
+      },
+      "log_sha256": "8d0458223dde0849433b93a93f3d983cdec2bb7b432c8fa009c565ba31f830ae",
+      "review_sha256": "43ce87c4113c7d3e7728122d16489d73117751c11719b8626d3062e01366c33a",
+      "weather_water_sha256": "100f765aa636f7c2aeb6fb2437caee69232caa36803447cfe23632bf74b1bec8"
+    }
+  }
+}

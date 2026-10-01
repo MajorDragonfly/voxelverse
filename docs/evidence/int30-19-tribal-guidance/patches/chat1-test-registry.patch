@@ -1,0 +1,8 @@
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -331 +331,4 @@
+-        "tribal_guidance_world_test"
++        "tribal_guidance_world_test",
++        "int30_tribal_guidance_test",
++        "int30_tribal_guidance_world_test",
++        "int30_tribal_guidance_ui_test"

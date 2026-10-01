@@ -197,6 +197,11 @@ func _choose_start_template() -> void:
 	if is_instance_valid(_library_panel): return
 	_library_panel = BlueprintLibraryPanel.new()
 	_library_panel.start_mode = true
+	var comparison_start: Dictionary = BlueprintLibraryPanel.Package.Creature.create_default()
+	if not _creature_template.is_empty():
+		var prior: Dictionary = BlueprintLibraryPanel.Starter.prepare(_creature_template, comparison_start)
+		if prior.ok: comparison_start = prior.blueprint
+	_library_panel.compare_current = func() -> Dictionary: return comparison_start.duplicate(true)
 	_library_panel.prepare_template = func(package: Dictionary) -> Dictionary:
 		return BlueprintLibraryPanel.Starter.prepare(package, BlueprintLibraryPanel.Package.Creature.create_default())
 	_library_panel.template_chosen.connect(func(package: Dictionary):

@@ -34,6 +34,11 @@ LONG_TESTS.add("pause_menu_test")  # One cold sphere plus ordinary tribal handof
 # observes real colony streaming and reload. CI reached the second load at
 # the old 120 s aggregate cutoff; use the existing bounded world-test budget.
 LONG_TESTS.add("living_creatures_world_test")
+# INT30 acceptance checks include real campaign/input matrices, three-process
+# exchange persistence, or near/far/near collision and physical guidance flows.
+# Their owner evidence requests only these existing bounded world-test budgets.
+LONG_TESTS.update({"int30_menu_audio_book_test", "building_design_exchange_test",
+                   "int30_tribal_guidance_world_test", "int30_scenery_collision_world_test"})
 # These also include a second campaign load (editor or fresh process).
 # Their current short-budget CI measurements reached 98.8/106.7 seconds;
 # the two 90 s load watchdogs plus real work must fit the aggregate budget.
@@ -153,8 +158,10 @@ def validate(args):
     # animal, cold terrain loads and fresh processes on both sides of the trip.
     # The complete mouth matrix/editor/save/restart check measured 158.8 s on
     # the integrated catalog. Bound that test at 240 s; keep other short limits.
+    # Village resume observes real production and three fresh processes. Appearance
+    # acceptance checks the UI/history matrix and a second cold editor process.
     commands += [(name, ["--script", f"res://tests/{name}.gd"],
-                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test"} else 120) for name in tests]
+                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test", "int30_village_resume_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test", "int30_creature_appearance_test"} else 120) for name in tests]
     if not args.skip_main and not source_only:
         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
         for frames in [45, 150, 300]:

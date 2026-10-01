@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "seconds": 7.683886512000754,
+  "native": false,
+  "command": [
+    "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/c1670f9d18e7/voxelverse",
+    "--script",
+    "res://tools/capture_int30_low_view.gd",
+    "--",
+    "/workspace/scratch/c1670f9d18e7/low-view-geometry-repeat"
+  ],
+  "source_commit": "a8ea5bbb7347aa34fd443d7a01af2bdee6b19406"
+}

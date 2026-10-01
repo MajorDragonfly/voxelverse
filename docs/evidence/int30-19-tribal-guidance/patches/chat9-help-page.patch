@@ -1,0 +1,13 @@
+--- a/ui/frontend/first_steps.gd
++++ b/ui/frontend/first_steps.gd
+@@ -187,0 +188,10 @@
++	else:
++		var context_source := preload("res://ui/tutorial/tribal_context_source.gd").new()
++		context_source.bind(get_tree().get_first_node_in_group(&"tribe_controller"))
++		var advice = preload("res://ui/tutorial/tribal_context_guidance.gd")
++		var context: Dictionary = advice.render(advice.resolve(_saves.guidance, context_source.read(true)))
++		context_source.bind(null)
++		if not context.is_empty():
++			Style.paragraph(list, context.title, 20)
++			Style.paragraph(list, context.reason, 18)
++			Style.paragraph(list, context.next, 18)

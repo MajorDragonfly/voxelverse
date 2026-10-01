@@ -1,0 +1,17 @@
+{
+  "base": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "code_commit": "c028fa3932f69bb4572c4f2a0b0e8555f45cc26e",
+  "code_tree": "561a2c5cfcbe35ef7a6f272566bd1ada85853f56",
+  "code_plus_chat1_overlay_tree": "ffa794ee58df2377dc4a9d4f1dce90b62a597d9d",
+  "files_sha256": {
+    "space/ships/shipyard.gd": "a9135aff6287bf8577bd309a39e97401c3a5562b2d67b646d1ca110d835162c6",
+    "space/ships/shipyard_presentation.gd": "a2b1f34b7067f744cfba956ba40c21814bfdc54f09a3ee48152531d0b221b060",
+    "tests/shipyard_presentation_test.gd": "a81a884f90fef3ece4cc4ee11002206bfa99779e9ec5d368e22be7edc62a31a5",
+    "tools/review_shipyard_presentation.py": "77135892e06e064b1f902fcc9e9d21527715921bed168f8512a1ea1e17ec2c10",
+    "project.godot": "dda0df2930ca140bba596306149859d1382b67157777a8af4b8f9accefaec3cd",
+    "localization/catalog.json": "43ac61ce1483fc9a32d88a4304a14ca0daa834a751e8e568ac0b0f90b820db10",
+    "localization/de.po": "80d57145eb1d5db8f32a3b2d5e7ebd4beca1119cd5d3a30dbb85f8d8d06a3023",
+    "localization/en.po": "3ca3274f76383c5efc2dcb0f1022e8d849748ee8aae91d014ec4a71726b15cfe",
+    "tools/validation/contracts.json": "0d2bba1cdb256f26313f5943f76c4d0f22c84896de707d663705a2317d9ea5e7"
+  }
+}

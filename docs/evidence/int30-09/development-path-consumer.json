@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "command": [
+    "/workspace/scratch/2656e69ac218/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/2656e69ac218/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/development_path_test.gd"
+  ],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+      "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+      "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+      "complete": true,
+      "file_count": 3959,
+      "bytes": 125287789,
+      "bytes_hashed": 125287789,
+      "seconds": 1.2307
+    },
+    "end": {
+      "available": true,
+      "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+      "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+      "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+      "complete": true,
+      "file_count": 3959,
+      "bytes": 125287789,
+      "bytes_hashed": 125287789,
+      "seconds": 0.6478
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "f0add62b4583dcce4cb315aa1e8efa8e8c8e7cd5c6e4c4319340d1143a5f478b"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "f0add62b4583dcce4cb315aa1e8efa8e8c8e7cd5c6e4c4319340d1143a5f478b"
+      }
+    },
+    "observations": [
+      {
+        "after": "isolated development_path_test consumer; no shared gate approval",
+        "source": {
+          "available": true,
+          "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+          "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+          "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+          "complete": true,
+          "file_count": 3959,
+          "bytes": 125287789,
+          "bytes_hashed": 125287789,
+          "seconds": 0.6478
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "log_sha256": "73c443e3e3a39faaa2120b3086b76f6cca4a9a54e36d883bfda302b47f8fac36",
+  "scope": "Isolated runtime consumer only; shared source-contract gate is blocked until Chat 1 registers the new INT30 test."
+}

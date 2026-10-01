@@ -41,6 +41,9 @@ func _ready() -> void:
 	terrain = Terrain.new()
 	add_child(terrain)
 	terrain.configure(Surface.descriptor(body))
+	if terrain.presentation != null:
+		terrain.presentation.clock_source = func() -> float: return float(state.campaign.data.elapsed_seconds)
+		terrain.presentation.advance(0.0)
 	adapter = Adapter.new(terrain)
 	set_meta("campaign_surface", adapter)
 	adapter.origin_shifted.connect(get_node("/root/AudioManager").director.surface_origin_shifted)

@@ -7,6 +7,7 @@ var ground: Array[ShaderMaterial] = []
 var water: Array[ShaderMaterial] = []
 var time: float = 0.0
 var frozen: bool = false
+var clock_source: Callable
 var radius: float
 
 
@@ -50,6 +51,9 @@ func rebase(origin: Array) -> void:
 
 func advance(delta: float) -> void:
 	if not frozen:
-		time += delta
+		if clock_source.is_valid():
+			time = maxf(float(clock_source.call()), 0.0)
+		else:
+			time += delta
 	for material in water:
 		material.set_shader_parameter("surface_time", time)

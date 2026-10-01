@@ -1,0 +1,326 @@
+diff --git a/creatures/editor/creature_editor_studio.gd b/creatures/editor/creature_editor_studio.gd
+index f696386..f106ebf 100644
+--- a/creatures/editor/creature_editor_studio.gd
++++ b/creatures/editor/creature_editor_studio.gd
+@@ -6,6 +6,8 @@ const Surface = preload("res://creatures/editor/creature_sculpt_surface.gd")
+ const Voxels = preload("res://creatures/editor/creature_voxel_mesh.gd")
+ const PartCard = preload("res://creatures/editor/creature_part_card.gd")
+ const Canvas = preload("res://creatures/editor/creature_editor_canvas.gd")
++const AppearancePanel = preload("res://creatures/editor/creature_appearance_panel.gd")
++const AppearanceEdits = preload("res://creatures/editor/creature_appearance_edits.gd")
+ const SkinStyle = preload("res://creatures/editor/creature_skin_style.gd")
+ const CATEGORY_NAMES: Dictionary = {"body": "EDITOR_CATEGORY_BODY", "mouth": "EDITOR_CATEGORY_MOUTH", "head": "EDITOR_CATEGORY_HEAD", "eyes": "EDITOR_CATEGORY_EYES", "legs": "EDITOR_CATEGORY_LEGS", "arms": "EDITOR_CATEGORY_ARMS", "feet": "EDITOR_CATEGORY_FEET", "hands": "EDITOR_CATEGORY_HANDS", "tail": "EDITOR_CATEGORY_TAIL", "horns": "EDITOR_CATEGORY_HORNS", "plates": "EDITOR_CATEGORY_PLATES", "spikes": "EDITOR_CATEGORY_SPIKES", "decor": "EDITOR_CATEGORY_DECOR", "fins": "EDITOR_CATEGORY_FINS", "ears": "EDITOR_CATEGORY_EARS", "wings": "EDITOR_CATEGORY_WINGS", "paint": "EDITOR_CATEGORY_PAINT"}
+ const EditorText = preload("res://creatures/editor/creature_editor_text.gd")
+@@ -41,6 +43,7 @@ var _part_target: OptionButton
+ var _editing_terminal: bool = false
+ var _placement_buttons: Dictionary = {}
+ var _paint_controls: VBoxContainer
++var _appearance_panel: VBoxContainer
+ var _skin_choice: OptionButton
+ var _paint_fields: Dictionary = {}
+ var _extra_pickers: Dictionary = {}
+@@ -349,6 +352,9 @@ func _build_inspector() -> void:
+ 	_button(transforms, "↶", _rotate_negative).name = "PartRotateLeft"
+ 	_button(transforms, "↷", _rotate_positive).name = "PartRotateRight"
+ 	_build_part_controls()
++	_appearance_panel = AppearancePanel.new()
++	_appearance_panel.submit_edit = _submit_appearance_edit
++	_inspector.add_child(_appearance_panel)
+ 	_button(_inspector, "EDITOR_FRAME", _frame_creature)
+ 
+ 
+@@ -951,6 +957,15 @@ func _refresh_stats_panel() -> void:
+ 		picker.get_parent().visible = _studio_mode == "paint"
+ 		picker.color = SkinStyle.color(blueprint, key, palette[0].lightened(0.26) if key == "belly_color" else (palette[1].lightened(0.15) if key == "eye_color" else Color("e3d5b0")))
+ 	_refresh_design_controls()
++	# The new panel owns cosmetic presentation; legacy controls remain for
++	# existing consumers/tests and are hidden to prevent duplicate editors.
++	_paint_controls.visible = false
++	_base_picker.get_parent().visible = false
++	_accent_picker.get_parent().visible = false
++	for picker: ColorPickerButton in _extra_pickers.values():
++		picker.get_parent().visible = false
++	_appearance_panel.visible = _studio_mode == "paint"
++	_appearance_panel.sync(blueprint)
+ 	_part_list.visible = _studio_mode != "paint"
+ 	_inspector.get_node("AttachedPartsTitle").visible = _studio_mode != "paint"
+ 	_inspector.get_node("PartActions").visible = _studio_mode == "parts"
+@@ -1644,3 +1659,16 @@ func _set_formatted_status(message: Dictionary) -> void:
+ 	if _builder_status_label != null:
+ 		_builder_status_label.text = EditorText.render(_status_message)
+ 		_queue_workshop_layout()
++
++
++func _submit_appearance_edit(command: Dictionary, first_in_gesture: bool) -> bool:
++	var result: Dictionary = AppearanceEdits.apply(blueprint, command)
++	if result.is_empty(): return false
++	if first_in_gesture:
++		_end_gesture()
++		_record_before_edit("Cosmetic appearance", true)
++	blueprint["appearance"] = result.appearance
++	blueprint["paint"] = result.paint
++	_refresh_preview()
++	_refresh_stats_panel()
++	return true
+diff --git a/localization/catalog.json b/localization/catalog.json
+index 3e5d620..8634ea5 100644
+--- a/localization/catalog.json
++++ b/localization/catalog.json
+@@ -9706,6 +9706,96 @@
+       "key": "LIVING_NEST_AIMED",
+       "de": "Entdecktes Nest",
+       "en": "Discovered nest"
++    },
++    {
++      "key": "APPEARANCE_TITLE",
++      "de": "Farben & Haut",
++      "en": "Colors & skin"
++    },
++    {
++      "key": "APPEARANCE_COSMETIC",
++      "de": "Nur das Aussehen ändert sich.",
++      "en": "Changes appearance only."
++    },
++    {
++      "key": "APPEARANCE_RESET",
++      "de": "Farben & Haut zurücksetzen",
++      "en": "Reset colors & skin"
++    },
++    {
++      "key": "APPEARANCE_APPLY_PALETTE",
++      "de": "Diese fünf Farben übernehmen",
++      "en": "Apply these five colors"
++    },
++    {
++      "key": "APPEARANCE_CUSTOM",
++      "de": "Aktuell: eigene Farben",
++      "en": "Current: custom colors"
++    },
++    {
++      "key": "APPEARANCE_CURRENT_PALETTE",
++      "de": "Aktuell: %s",
++      "en": "Current: %s"
++    },
++    {
++      "key": "APPEARANCE_HEX_HINT",
++      "de": "Hexfarbe (#RRGGBB) eingeben, mit Enter übernehmen.",
++      "en": "Enter a hex color (#RRGGBB), then press Enter to apply."
++    },
++    {
++      "key": "APPEARANCE_HEX_INVALID",
++      "de": "Bitte sechs Hexziffern eingeben, z. B. #73B696.",
++      "en": "Enter six hex digits, e.g. #73B696."
++    },
++    {
++      "key": "APPEARANCE_SWATCH_TARGET",
++      "de": "Farbfeld ändern für:",
++      "en": "Change swatch color for:"
++    },
++    {
++      "key": "APPEARANCE_STRENGTH",
++      "de": "Hautstruktur",
++      "en": "Skin texture strength"
++    },
++    {
++      "key": "APPEARANCE_PATTERN_SIZE",
++      "de": "Mustergröße",
++      "en": "Pattern size"
++    },
++    {
++      "key": "APPEARANCE_SIZE_HINT",
++      "de": "Höher = größere Struktur. 1 × entspricht der Standardgröße.",
++      "en": "Higher = larger texture. 1 × is the default size."
++    },
++    {
++      "key": "APPEARANCE_SMOOTH_HINT",
++      "de": "Glatte Haut hat keine Struktur. Stärke und Mustergröße wirken bei den anderen Hauttypen.",
++      "en": "Smooth skin has no texture. Strength and pattern size apply to other skin types."
++    },
++    {
++      "key": "APPEARANCE_COLOR_BASE",
++      "de": "Grundfarbe",
++      "en": "Base color"
++    },
++    {
++      "key": "APPEARANCE_COLOR_ACCENT",
++      "de": "Akzentfarbe",
++      "en": "Accent color"
++    },
++    {
++      "key": "APPEARANCE_COLOR_BELLY",
++      "de": "Bauchfarbe",
++      "en": "Belly color"
++    },
++    {
++      "key": "APPEARANCE_COLOR_EYE",
++      "de": "Augenfarbe",
++      "en": "Eye color"
++    },
++    {
++      "key": "APPEARANCE_COLOR_HORN",
++      "de": "Hornfarbe",
++      "en": "Horn color"
+     }
+   ]
+ }
+diff --git a/localization/de.po b/localization/de.po
+index 5b3a309..4c043e4 100644
+--- a/localization/de.po
++++ b/localization/de.po
+@@ -5822,3 +5822,57 @@ msgstr "Unbekanntes Nest · Scannen %d %%"
+ 
+ msgid "LIVING_NEST_AIMED"
+ msgstr "Entdecktes Nest"
++
++msgid "APPEARANCE_TITLE"
++msgstr "Farben & Haut"
++
++msgid "APPEARANCE_COSMETIC"
++msgstr "Nur das Aussehen ändert sich."
++
++msgid "APPEARANCE_RESET"
++msgstr "Farben & Haut zurücksetzen"
++
++msgid "APPEARANCE_APPLY_PALETTE"
++msgstr "Diese fünf Farben übernehmen"
++
++msgid "APPEARANCE_CUSTOM"
++msgstr "Aktuell: eigene Farben"
++
++msgid "APPEARANCE_CURRENT_PALETTE"
++msgstr "Aktuell: %s"
++
++msgid "APPEARANCE_HEX_HINT"
++msgstr "Hexfarbe (#RRGGBB) eingeben, mit Enter übernehmen."
++
++msgid "APPEARANCE_HEX_INVALID"
++msgstr "Bitte sechs Hexziffern eingeben, z. B. #73B696."
++
++msgid "APPEARANCE_SWATCH_TARGET"
++msgstr "Farbfeld ändern für:"
++
++msgid "APPEARANCE_STRENGTH"
++msgstr "Hautstruktur"
++
++msgid "APPEARANCE_PATTERN_SIZE"
++msgstr "Mustergröße"
++
++msgid "APPEARANCE_SIZE_HINT"
++msgstr "Höher = größere Struktur. 1 × entspricht der Standardgröße."
++
++msgid "APPEARANCE_SMOOTH_HINT"
++msgstr "Glatte Haut hat keine Struktur. Stärke und Mustergröße wirken bei den anderen Hauttypen."
++
++msgid "APPEARANCE_COLOR_BASE"
++msgstr "Grundfarbe"
++
++msgid "APPEARANCE_COLOR_ACCENT"
++msgstr "Akzentfarbe"
++
++msgid "APPEARANCE_COLOR_BELLY"
++msgstr "Bauchfarbe"
++
++msgid "APPEARANCE_COLOR_EYE"
++msgstr "Augenfarbe"
++
++msgid "APPEARANCE_COLOR_HORN"
++msgstr "Hornfarbe"
+diff --git a/localization/en.po b/localization/en.po
+index f31655e..89d675c 100644
+--- a/localization/en.po
++++ b/localization/en.po
+@@ -5822,3 +5822,57 @@ msgstr "Unknown nest · Scanning %d %%"
+ 
+ msgid "LIVING_NEST_AIMED"
+ msgstr "Discovered nest"
++
++msgid "APPEARANCE_TITLE"
++msgstr "Colors & skin"
++
++msgid "APPEARANCE_COSMETIC"
++msgstr "Changes appearance only."
++
++msgid "APPEARANCE_RESET"
++msgstr "Reset colors & skin"
++
++msgid "APPEARANCE_APPLY_PALETTE"
++msgstr "Apply these five colors"
++
++msgid "APPEARANCE_CUSTOM"
++msgstr "Current: custom colors"
++
++msgid "APPEARANCE_CURRENT_PALETTE"
++msgstr "Current: %s"
++
++msgid "APPEARANCE_HEX_HINT"
++msgstr "Enter a hex color (#RRGGBB), then press Enter to apply."
++
++msgid "APPEARANCE_HEX_INVALID"
++msgstr "Enter six hex digits, e.g. #73B696."
++
++msgid "APPEARANCE_SWATCH_TARGET"
++msgstr "Change swatch color for:"
++
++msgid "APPEARANCE_STRENGTH"
++msgstr "Skin texture strength"
++
++msgid "APPEARANCE_PATTERN_SIZE"
++msgstr "Pattern size"
++
++msgid "APPEARANCE_SIZE_HINT"
++msgstr "Higher = larger texture. 1 × is the default size."
++
++msgid "APPEARANCE_SMOOTH_HINT"
++msgstr "Smooth skin has no texture. Strength and pattern size apply to other skin types."
++
++msgid "APPEARANCE_COLOR_BASE"
++msgstr "Base color"
++
++msgid "APPEARANCE_COLOR_ACCENT"
++msgstr "Accent color"
++
++msgid "APPEARANCE_COLOR_BELLY"
++msgstr "Belly color"
++
++msgid "APPEARANCE_COLOR_EYE"
++msgstr "Eye color"
++
++msgid "APPEARANCE_COLOR_HORN"
++msgstr "Horn color"
+diff --git a/override.cfg b/override.cfg
+new file mode 100644
+index 0000000..683680d
+--- /dev/null
++++ b/override.cfg
+@@ -0,0 +1,2 @@
++[threading]
++worker_pool/max_threads=2
+diff --git a/tools/validate_godot.py b/tools/validate_godot.py
+index 3d890ec..86f32fd 100644
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -153,8 +153,9 @@ def validate(args):
+     # animal, cold terrain loads and fresh processes on both sides of the trip.
+     # The complete mouth matrix/editor/save/restart check measured 158.8 s on
+     # the integrated catalog. Bound that test at 240 s; keep other short limits.
++    # Appearance acceptance includes the UI/history matrix and a second cold editor process.
+     commands += [(name, ["--script", f"res://tests/{name}.gd"],
+-                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test"} else 120) for name in tests]
++                  900 if name in {"spherical_gameplay_test", "spherical_egg_production_test"} else 420 if name in LONG_TESTS else 240 if name in {"creature_mouth_refresh_test", "frontend_test", "int30_creature_appearance_test"} else 120) for name in tests]
+     if not args.skip_main and not source_only:
+         commands.append(("planet_lab_entry", ["--", "--planet-lab", "--runtime-exit-frames", "600"], 120))
+         for frames in [45, 150, 300]:
+diff --git a/tools/validation/contracts.json b/tools/validation/contracts.json
+index 8d2f54b..a3d61c1 100644
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -139,7 +139,8 @@
+         "creature_fin_family_test",
+         "creature_ear_family_test",
+         "creature_mouth_refresh_test",
+-        "creature_ornament_families_test"
++        "creature_ornament_families_test",
++        "int30_creature_appearance_test"
+       ]
+     },
+     {

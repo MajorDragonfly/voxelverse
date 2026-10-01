@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "command": [
+    "/tmp/voxelverse-validation-editor-5os0puwn/Godot_v4.6.3-stable_linux.x86_64",
+    "--path",
+    "/workspace/scratch/e1ae9db2424d/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--headless",
+    "--script",
+    "res://tests/int30_scenery_collision_test.gd"
+  ],
+  "renderer": "headless",
+  "source": {
+    "after": "start",
+    "source": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "397554b416cec59990ee87e3ba497ddda75d9feb0c3e0455ae7212b35920e2c0",
+      "complete": true,
+      "file_count": 3959,
+      "bytes": 125286861,
+      "bytes_hashed": 0,
+      "seconds": 1.0192
+    },
+    "changes": [],
+    "git_changes": [],
+    "status": "unchanged"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "397554b416cec59990ee87e3ba497ddda75d9feb0c3e0455ae7212b35920e2c0",
+      "complete": true,
+      "file_count": 3959,
+      "bytes": 125286861,
+      "bytes_hashed": 125286861,
+      "seconds": 3.5698
+    },
+    "end": {
+      "available": true,
+      "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+      "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+      "source_sha256": "397554b416cec59990ee87e3ba497ddda75d9feb0c3e0455ae7212b35920e2c0",
+      "complete": true,
+      "file_count": 3959,
+      "bytes": 125286861,
+      "bytes_hashed": 125286861,
+      "seconds": 4.2361
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "d2177f3b57f617196199c7fa4a23e092612a7b7f837c11685b36681b600c6b11"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "d2177f3b57f617196199c7fa4a23e092612a7b7f837c11685b36681b600c6b11"
+      }
+    },
+    "observations": [
+      {
+        "after": "start",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "397554b416cec59990ee87e3ba497ddda75d9feb0c3e0455ae7212b35920e2c0",
+          "complete": true,
+          "file_count": 3959,
+          "bytes": 125286861,
+          "bytes_hashed": 0,
+          "seconds": 1.0192
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+          "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+          "source_sha256": "397554b416cec59990ee87e3ba497ddda75d9feb0c3e0455ae7212b35920e2c0",
+          "complete": true,
+          "file_count": 3959,
+          "bytes": 125286861,
+          "bytes_hashed": 125286861,
+          "seconds": 4.2361
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "log_sha256": "f193283d608ef1c59b228a88998c0e98872724ca5faf1111a0a9c4cd7604ca2a"
+}

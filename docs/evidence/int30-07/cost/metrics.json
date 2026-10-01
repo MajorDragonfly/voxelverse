@@ -1,0 +1,136 @@
+{
+	"clock_ticks_per_second": 100,
+	"method": "8 paired batches, alternating order, 1500 updates of three actors; Linux main-thread CPU ticks; excludes renderer, spawn and cache construction",
+	"results": [
+		{
+			"actors": 3,
+			"expression": false,
+			"main_thread_cpu_ticks": 30,
+			"pair": 0,
+			"updates": 1500,
+			"wall_us": 384910
+		},
+		{
+			"actors": 3,
+			"expression": true,
+			"main_thread_cpu_ticks": 59,
+			"pair": 0,
+			"updates": 1500,
+			"wall_us": 718130
+		},
+		{
+			"actors": 3,
+			"expression": true,
+			"main_thread_cpu_ticks": 53,
+			"pair": 1,
+			"updates": 1500,
+			"wall_us": 587565
+		},
+		{
+			"actors": 3,
+			"expression": false,
+			"main_thread_cpu_ticks": 29,
+			"pair": 1,
+			"updates": 1500,
+			"wall_us": 311568
+		},
+		{
+			"actors": 3,
+			"expression": false,
+			"main_thread_cpu_ticks": 27,
+			"pair": 2,
+			"updates": 1500,
+			"wall_us": 279355
+		},
+		{
+			"actors": 3,
+			"expression": true,
+			"main_thread_cpu_ticks": 64,
+			"pair": 2,
+			"updates": 1500,
+			"wall_us": 672457
+		},
+		{
+			"actors": 3,
+			"expression": true,
+			"main_thread_cpu_ticks": 71,
+			"pair": 3,
+			"updates": 1500,
+			"wall_us": 717882
+		},
+		{
+			"actors": 3,
+			"expression": false,
+			"main_thread_cpu_ticks": 35,
+			"pair": 3,
+			"updates": 1500,
+			"wall_us": 384144
+		},
+		{
+			"actors": 3,
+			"expression": false,
+			"main_thread_cpu_ticks": 48,
+			"pair": 4,
+			"updates": 1500,
+			"wall_us": 518644
+		},
+		{
+			"actors": 3,
+			"expression": true,
+			"main_thread_cpu_ticks": 73,
+			"pair": 4,
+			"updates": 1500,
+			"wall_us": 798897
+		},
+		{
+			"actors": 3,
+			"expression": true,
+			"main_thread_cpu_ticks": 72,
+			"pair": 5,
+			"updates": 1500,
+			"wall_us": 842275
+		},
+		{
+			"actors": 3,
+			"expression": false,
+			"main_thread_cpu_ticks": 36,
+			"pair": 5,
+			"updates": 1500,
+			"wall_us": 644956
+		},
+		{
+			"actors": 3,
+			"expression": false,
+			"main_thread_cpu_ticks": 38,
+			"pair": 6,
+			"updates": 1500,
+			"wall_us": 398616
+		},
+		{
+			"actors": 3,
+			"expression": true,
+			"main_thread_cpu_ticks": 64,
+			"pair": 6,
+			"updates": 1500,
+			"wall_us": 680455
+		},
+		{
+			"actors": 3,
+			"expression": true,
+			"main_thread_cpu_ticks": 66,
+			"pair": 7,
+			"updates": 1500,
+			"wall_us": 713854
+		},
+		{
+			"actors": 3,
+			"expression": false,
+			"main_thread_cpu_ticks": 24,
+			"pair": 7,
+			"updates": 1500,
+			"wall_us": 299235
+		}
+	],
+	"schema": 1,
+	"source": "8e51ed0b5b8f3e53f3d5e4a6965831820f7898f4"
+}

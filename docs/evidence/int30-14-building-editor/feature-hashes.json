@@ -1,0 +1,23 @@
+{
+  "feature_source_commit": "47a236ac7c975699567aeb6de7794b15835ac13a",
+  "feature_source_tree": "856b1a51fca1f69279a56e562fe8335da32e9f9a",
+  "validation_overlay_commit": "9a405605b6092d0d42e345962c33f7f86480768e",
+  "validation_overlay_tree": "54741aed70f6bdb33dfa7c150803f8e725193977",
+  "overlay_source_sha256": "fc116ec13c20942168ee5437209d482abf5cbc323c00e787b8fb6bad56247d6f",
+  "owned_file_sha256": {
+    "civilization/buildings/building_builder.gd": "23c5a4e33f3dffc5b9e0dbbd6c4829e0a2695c193c567a575f8da2779414eb9a",
+    "civilization/buildings/building_editor_text.gd": "fe712bd48aa4c0c5808d72cfddb38795cc2d78e443020e139520b984c72b3b8f",
+    "civilization/buildings/building_editor_text.gd.uid": "5e3ed997277c5285e818714062175f41e8beefed4e3104d6d92b915ef1e86057",
+    "civilization/buildings/building_transform_field.gd": "8b2ec7ff71fbee530d24467aeb42d01e5a29a83b30c9c09c44f9944d9b513f2a",
+    "civilization/buildings/building_transform_field.gd.uid": "c6add25beef5e74605c12d922eb2cf24c564905cdb5989b4ea4b81fc3215bed6",
+    "docs/integration/int30-14-building-editor/README.md": "9dbfb0f4a626be0cebafa16f4dde262015411f9a8b58c9387fdc1c0403079ed0",
+    "docs/integration/int30-14-building-editor/catalog-messages.json": "a1fe270b73f23515dcfe227ed838eb2e9770ed25ac40ae276b3759c01e0f27b6",
+    "docs/integration/int30-14-building-editor/catalog.patch": "97d5fe563f1558222c9f3e5c7592dd20e0f3474623d43981bd8bee05ede15f0c",
+    "docs/integration/int30-14-building-editor/ci.patch": "ed90c58ceba2b4649ef6ae3958e630679732b391c70cb28f332fc44bf8de646e",
+    "docs/integration/int30-14-building-editor/registry.patch": "eb8c87b90c77867204c4c5f3944dc8374e900d0c275a2d81eaba0a85b7f12463",
+    "tests/building_editor_input_test.gd": "c1462bcc75efd3ffe1de09fc0810625207a051f57c0d300269c7ded5715ccf8b",
+    "tests/building_editor_input_test.gd.uid": "a318f7341b98ae9b9dc2aef8a821a63767d34ffb65781f4e3f84a4ea24fdb560",
+    "tools/review_building_editor.py": "99bbb1100145fbee966593ce466c109362e7fd3916ca5f45645c78b0307225eb"
+  },
+  "feature_equals_tested_overlay": true
+}

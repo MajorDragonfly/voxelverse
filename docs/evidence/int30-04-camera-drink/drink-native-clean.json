@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "seconds": 17.31860067100206,
+  "native": true,
+  "command": [
+    "/workspace/scratch/c1670f9d18e7/godot-run/godot",
+    "--path",
+    "/workspace/scratch/c1670f9d18e7/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tools/review_int30_drink_contract.gd"
+  ],
+  "source_commit": "a8ea5bbb7347aa34fd443d7a01af2bdee6b19406"
+}

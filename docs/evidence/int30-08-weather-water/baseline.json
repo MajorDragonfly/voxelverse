@@ -1,0 +1,302 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+    "tree": "5f815f478ceeabefcfc50a6388e3e4b0daa2ac45",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "de0c7cb403cbd2d553cf0f1a969185a1c6a96c3ab823d9509d26ec006af370ce",
+    "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+    "complete": true,
+    "file_count": 3955,
+    "bytes": 125266448,
+    "bytes_hashed": 125266448,
+    "seconds": 0.3752
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "campaign_atmosphere_test",
+    "weather_forecast_ui_test",
+    "weather_runtime_test",
+    "weather_storm_test",
+    "regional_weather_test",
+    "weather_model_test",
+    "living_lake_water_test",
+    "water_flow_visual_test",
+    "living_surface_materials_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/7644ddc06b68/voxelverse/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--output",
+        "/workspace/scratch/7644ddc06b68/v30-08-baseline/contracts.json"
+      ],
+      "log_sha256": "69b6a8f8335c909f968e0a2af582cefce0056872a8e3be5ce3afd8679e8adfd2",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.903,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--import"
+      ],
+      "log_sha256": "560193ed3691f13d06ffea180629604361f75af83fa1e7596e6ba064b059f009",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "import_preparation"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.821,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/7644ddc06b68/voxelverse/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "campaign_atmosphere_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.635,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/campaign_atmosphere_test.gd"
+      ],
+      "log_sha256": "621ecde1f1fe23036c416e433e462d029139f6975de41ed1ff8af098b0ad8157",
+      "contract": "terrain_art",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_forecast_ui_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.075,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/weather_forecast_ui_test.gd"
+      ],
+      "log_sha256": "5ae1c9ae7890e05f33e3e9ef0fae0bd11ad96b3b8410ae8d8a53991a577c9844",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_runtime_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 93.128,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/weather_runtime_test.gd"
+      ],
+      "log_sha256": "2a68722679034d18d05d4bbbf0e6a66913a6895556e4c7527e8dacdb9f44dcdd",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_storm_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.082,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/weather_storm_test.gd"
+      ],
+      "log_sha256": "b1accd1629779a730cdbb8c3e747305b496a7745cf08f390f59e55e6f82970c6",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "regional_weather_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.846,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/regional_weather_test.gd"
+      ],
+      "log_sha256": "294b10190fd7d60ff766aa0f8ef7ea35f4ca0505dd4ed6aee6895dbefb592301",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "weather_model_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.481,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/weather_model_test.gd"
+      ],
+      "log_sha256": "b64675f0030e1eb820f15f6f17b05546f63925c7220c4e765a23936404111c96",
+      "contract": "weather",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "living_lake_water_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.079,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/living_lake_water_test.gd"
+      ],
+      "log_sha256": "a5d34aebd35965682722608d491a1cfb233e246eb27e89602d56e49a31f4c2ac",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "water_flow_visual_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.174,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/water_flow_visual_test.gd"
+      ],
+      "log_sha256": "0287071050a53b77647bdff1397aa0ba0eaa9099e73ac2e96303eb8d1ce48e79",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "living_surface_materials_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.496,
+      "command": [
+        "/tmp/voxelverse-validation-editor-z71ljbul/Godot_v4.6.3-stable_linux.x86_64",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/7644ddc06b68/voxelverse",
+        "--script",
+        "res://tests/living_surface_materials_test.gd"
+      ],
+      "log_sha256": "fce33a48789d7c8a0c23b9103b1b1ea5ffc4f8c749e98c3d67cf4d3750d0d21e",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "f7aa780f5695e1ef57d4023e988e6a816542f8681927c4a85b511b78dee0a75d",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "prepared",
+      "reusable_source": true
+    }
+  ],
+  "provenance": {
+    "status": "prepared",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "b94f9525fdc28ea383d471f0b99da09cbbe9d1676ebc6d8b566b68aab2d21076"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "b94f9525fdc28ea383d471f0b99da09cbbe9d1676ebc6d8b566b68aab2d21076"
+      }
+    },
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "original_results_sha256": "51d128e9aa99987584f5c58e86d663539c9b6aa4f47008d28ad2dc725c5af1ad"
+}

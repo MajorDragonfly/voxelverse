@@ -1,0 +1,18 @@
+{
+  "basis": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "previous_public_commit": "d84eb616e17c7cf4288e9e4f6efaf34b11fb6edc",
+  "previous_public_tree": "ef12ebffa921ae3cbe8f981926339aa8d7a4d21c",
+  "final_owned_source_sha256": {
+    "ui/blueprints/creature_library_panel.gd": "d2976c557330bb4e62535cefe7e332e5c41c4fdf8c134832bc46891c2450a63e",
+    "ui/blueprints/creature_library_presentation.gd": "437187d0a913ed6bd82e74e42834e2703a816ff36de117abd02e957b3dceecbe",
+    "tests/int30_design_library_picker_test.gd": "35b845653950daab185954bf7562bc0b8da8bb758e010c9e573e8da9c5b170dc"
+  },
+  "rendered_consumer_commit": "7af301a26b4a0ed49fb097a85ca14d6c45f6a5ed",
+  "rendered_consumer_tree": "c0ec0934fe8a05206e572051070a978a45e4f48b",
+  "consumer_patches": [
+    "catalog.patch",
+    "registry.patch",
+    "frontend-chat9.patch"
+  ],
+  "render_scope_note": "Native picker/editor source precedes the final empty-serialization guard. Valid body layouts are unchanged. Final protected receiver passes the 118-expectation headless check; supplementary native protected-only capture timed out without images, retained explicitly. Capture-tool argument fix does not modify production source."
+}

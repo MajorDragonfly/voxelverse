@@ -1,0 +1,49 @@
+name: INT30 community gallery review
+on:
+  pull_request:
+    paths:
+      - "ui/blueprints/community_gallery_*"
+      - "tests/int30_community_gallery*"
+      - "assembly/exchange/community_catalog_*"
+      - "docs/evidence/int30-16-community-gallery/**"
+      - ".github/workflows/community-gallery-review.yml"
+  workflow_dispatch:
+concurrency:
+  group: gallery-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  gallery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/godot-export-toolchain
+          key: godot-4.6.3-desktop-v1-${{ runner.os }}
+      - name: Install graphics and Godot
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+          python tools/install_godot.py --directory "${{ runner.temp }}/godot-export-toolchain" --platform linux
+      - name: Check registered gallery and direct exchange consumers
+        run: |
+          GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
+          python tools/validate_godot.py --godot "$GODOT" --tests int30_community_gallery_test community_catalog_client_test community_blueprint_package_test creature_design_library_test creature_library_favorites_test --skip-main --output "${{ runner.temp }}/gallery-headless"
+      - name: Render actual gallery inputs
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          GODOT="${{ runner.temp }}/godot-export-toolchain/editor/Godot_v4.6.3-stable_linux.x86_64"
+          xvfb-run -a -s '-screen 0 1920x1080x24' python docs/evidence/int30-16-community-gallery/review.py --godot "$GODOT" --render --output "${{ runner.temp }}/gallery-render"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: int30-community-gallery-review
+          path: |
+            ${{ runner.temp }}/gallery-headless
+            ${{ runner.temp }}/gallery-render
+          retention-days: 14

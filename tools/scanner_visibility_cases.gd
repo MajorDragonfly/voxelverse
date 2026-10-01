@@ -1,0 +1,301 @@
+extends RefCounted
+## The same moving, real animal cases run headless and in the render driver.
+var failures: Array[String] = []
+var measurements: Array[Dictionary] = []
+var _tree: SceneTree
+var _player: Node3D
+var _camera: Camera3D
+var _scanner: Node
+var _capture: String
+var _frame: int = 0
+var _title: Label
+var _edge_vertices: Dictionary = {}
+
+func run(tree: SceneTree, player: Node3D, capture: String = "") -> Dictionary:
+	_tree = tree
+	_player = player
+	_camera = player._gameplay_camera
+	_scanner = player.get_node("CreatureScanner")
+	_capture = capture
+	if not capture.is_empty():
+		DirAccess.make_dir_recursive_absolute(capture)
+		_title = Label.new()
+		_title.position = Vector2(16, 200)
+		_title.add_theme_font_size_override("font_size", 18)
+		_title.add_theme_color_override("font_shadow_color", Color.BLACK)
+		_title.add_theme_constant_override("shadow_offset_x", 2)
+		_tree.root.add_child(_title)
+	var reticle: Control = player.get_node("HUD/CreatureScanReticle")
+	var sizes: Array[Vector2i] = [Vector2i(800, 600), Vector2i(1280, 720), Vector2i(1920, 1080)]
+	var original_size: Vector2i = _tree.root.size
+	var original_scale: float = _tree.root.content_scale_factor
+	var original_fov: float = _camera.fov
+	for size: Vector2i in sizes:
+		_tree.root.size = size
+		for scaling: float in [1.0, 1.25, 1.5]:
+			_tree.root.content_scale_factor = scaling
+			await _settle()
+			for body_scale: float in [0.65, 1.35]:
+				var animal: Node3D = _animal(2771337, 923)
+				animal.scale = Vector3.ONE * body_scale
+				animal.global_position = player.global_position + Vector3(0, 0, -5)
+				await _settle()
+				_camera.look_at(animal.global_position + Vector3.UP * 0.56 * body_scale)
+				await _settle()
+				var circle: Dictionary = player._scan_circle()
+				var physical_factor: float = float(size.x) / _tree.root.get_visible_rect().size.x
+				_align_edge(animal, circle.center + Vector2(-float(circle.radius) + 0.7 / physical_factor, 0))
+				await _settle()
+				_scanner.reset()
+				_scanner.silhouette = load("res://core/discovery/scan_silhouette.gd").new()
+				_scanner.get_scan_target()
+				var cold_query_ms: float = _scanner.last_query_usec / 1000.0
+				var times: Array[float] = []
+				var legacy_times: Array[float] = []
+				var legacy_misses: int = 0
+				var minimum_overlap: float = INF
+				for tick in range(30):
+					# Motion remains below one screen pixel of visible overlap. The
+					# procedural runtime animation stays active throughout this case.
+					var wanted: float = float(circle.center.x) - float(circle.radius) + (0.7 + sin(tick * 0.32) * 0.18) / physical_factor
+					await _settle(1)
+					animal._preview._process(1.0 / 30.0)
+					_align_edge(animal, Vector2(wanted, circle.center.y))
+					var legacy_start: int = Time.get_ticks_usec()
+					if not _legacy_visible(animal): legacy_misses += 1
+					legacy_times.append((Time.get_ticks_usec() - legacy_start) / 1000.0)
+					_scanner._physics_process(1.0 / 30.0)
+					times.append(_scanner.last_query_usec / 1000.0)
+					_check(_scanner.target == animal, "Moving visible edge lost target at %s scale %.2f body %.2f tick %d" % [size, scaling, body_scale, tick])
+					if _scanner.target != null:
+						_check(_scanner.target_pixel.distance_to(circle.center) <= float(circle.radius) + 0.01, "Marker escaped the drawn scan disc")
+					minimum_overlap = minf(minimum_overlap, (_right_edge(animal).x - (float(circle.center.x) - float(circle.radius))) * physical_factor)
+					await _record("Moving mesh edge / %s / UI %.0f%% / body %.2f" % [size, scaling * 100, body_scale])
+				_check(_scanner.ratio() > 0.38, "Motion restarted progress for the same visible animal")
+				measurements.append({"case": "moving_edge", "size": [size.x, size.y], "ui_scale": scaling, "body_scale": body_scale,
+					"viewport": [_tree.root.get_visible_rect().size.x, _tree.root.get_visible_rect().size.y], "circle": {"center": circle.center, "radius": circle.radius},
+					"minimum_overlap_px": minimum_overlap, "cold_query_ms": cold_query_ms, "query_ms": _stats(times), "legacy_query_ms": _stats(legacy_times), "legacy_misses": legacy_misses, "progress": _scanner.ratio()})
+				print("SCAN_MATRIX_CASE ", JSON.stringify(measurements.back()))
+				animal.queue_free()
+				await _settle()
+	_tree.root.size = Vector2i(1280, 720)
+	_tree.root.content_scale_factor = 1.0
+	await _settle()
+	var first: Node3D = _animal(2771337, 925)
+	var second: Node3D = _animal(2871448, 926)
+	first.global_position = player.global_position + Vector3(-0.45, 0, -5)
+	second.global_position = player.global_position + Vector3(0.45, 0, -5)
+	_camera.look_at(player.global_position + Vector3(0, 0.6, -5))
+	await _settle()
+	_scanner.reset()
+	var switches: int = 0
+	var last: Node3D
+	for tick in range(40):
+		first.position.x = player.position.x - 0.45 + sin(tick * 0.3) * 0.025
+		second.position.x = player.position.x + 0.45 - sin(tick * 0.3) * 0.025
+		await _settle(1)
+		first._preview._process(1.0 / 30.0)
+		second._preview._process(1.0 / 30.0)
+		_scanner._physics_process(1.0 / 30.0)
+		if last != null and _scanner.target != last: switches += 1
+		last = _scanner.target
+		await _record("Two moving competitors / stable visible selection")
+	_check(last != null and switches == 0, "Two similarly placed moving animals flickered selection: %d" % switches)
+	var original: Node3D = last
+	var other: Node3D = second if original == first else first
+	original.global_position.x += 30.0
+	_camera.look_at(other.global_position + Vector3.UP * 0.56)
+	await _settle()
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == other and _scanner.ratio() < 0.02, "Individual switch inherited scan progress")
+	await _record("Target switch / progress starts from zero")
+	_camera.rotate_y(0.8)
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == null and _scanner.ratio() == 0.0, "One-frame sight loss retained progress")
+	await _record("Brief sight loss / no target and zero progress")
+	_camera.look_at(other.global_position + Vector3.UP * 0.56)
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == other and _scanner.ratio() < 0.02, "Reacquisition inherited old progress")
+	var wall := StaticBody3D.new()
+	var collision := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(6, 6, 0.4)
+	collision.shape = shape
+	wall.add_child(collision)
+	var mesh := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = shape.size
+	mesh.mesh = box
+	wall.add_child(mesh)
+	_tree.root.add_child(wall)
+	wall.global_position = _camera.global_position.lerp(other.global_position + Vector3.UP * 0.56, 0.7)
+	await _settle()
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == null and _scanner.ratio() == 0.0, "Completely occluded visual animal was scanned")
+	measurements.append({"case": "full_occlusion", "query_ms": _scanner.last_query_usec / 1000.0, "rays": _scanner.last_scan_rays})
+	await _record("Full wall occlusion / scan is blocked")
+	shape.size = Vector3(0.05, 6, 0.4)
+	box.size = shape.size
+	await _settle()
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == other, "Partial narrow wall hid every actually exposed animal surface")
+	measurements.append({"case": "partial_occlusion", "target_visible": _scanner.target == other, "query_ms": _scanner.last_query_usec / 1000.0, "rays": _scanner.last_scan_rays})
+	await _record("Partial narrow wall / exposed surface remains scannable")
+	wall.queue_free()
+	await _settle()
+	other.get_node("SpeciesVisual").hide()
+	var legacy_hidden_hit: bool = _legacy_visible(other)
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == null, "Invisible movement capsule invented a visible animal")
+	await _record("Hidden mesh / capsule cannot be scanned")
+	other.get_node("SpeciesVisual").show()
+	original.global_position = other.global_position + _camera.global_basis.z * 0.5
+	original.get_node("SpeciesVisual").hide()
+	await _settle()
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == other, "A foreign invisible capsule hid an actually visible animal")
+	await _record("Foreign hidden capsule / visible animal behind remains scannable")
+	original.global_position.x += 30.0
+	other.global_position = player.global_position + Vector3(0, 0, -float(player.inspection_radius) - 0.5)
+	_camera.look_at(other.global_position + Vector3.UP * 0.56)
+	await _settle()
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == null, "Rendered animal outside player inspection range was scanned")
+	await _record("Outside inspection range / scan is blocked")
+	other.global_position = player.global_position + Vector3(0, 0, -5)
+	_camera.look_at(other.global_position + Vector3.UP * 0.56)
+	for fov: float in [42.0, 88.0]:
+		_camera.fov = fov
+		await _settle()
+		var fov_circle: Dictionary = player._scan_circle()
+		_align_edge(other, fov_circle.center + Vector2(-float(fov_circle.radius) + 0.7, 0))
+		_scanner._physics_process(1.0 / 30.0)
+		_check(_scanner.target == other, "Visible mesh lost edge target at FOV %.0f" % fov)
+		await _record("FOV %.0f / visible edge target" % fov)
+	_tree.paused = true
+	_scanner._physics_process(1.0 / 30.0)
+	_check(_scanner.target == null and _scanner.ratio() == 0.0, "Pause retained visual scan progress")
+	await _record("Pause / target and progress reset")
+	_tree.paused = false
+	measurements.append({"case": "two_targets", "switches": switches, "short_loss": "reset", "full_occlusion": "blocked", "invisible_capsule": "blocked", "legacy_hidden_hit": legacy_hidden_hit, "range": "blocked", "fov": [42, 88], "pause": "reset"})
+	first.queue_free()
+	second.queue_free()
+	await _settle()
+	# Warm native frame sample without alignment work or screenshot writes.
+	# Twelve loaded animals exercise selection cost; this is an isolated scene,
+	# not a whole-campaign/target-PC FPS claim.
+	var crowd: Array[Node3D] = []
+	_camera.fov = original_fov
+	for index in range(12):
+		var animal: Node3D = _animal(2771337, 950 + index)
+		animal.global_position = player.global_position + Vector3((index % 3 - 1) * 0.4, 0, -5.0 - index * 0.15)
+		crowd.append(animal)
+	_camera.look_at(player.global_position + Vector3(0, 0.6, -5))
+	await _settle()
+	_scanner.reset()
+	var crowd_queries: Array[float] = []
+	var frame_intervals: Array[float] = []
+	var started: int = Time.get_ticks_usec()
+	var cold_crowd_ms: float = 0
+	for tick in range(60):
+		await _tree.process_frame
+		for animal: Node3D in crowd: animal._preview._process(1.0 / 60.0)
+		_scanner._physics_process(1.0 / 60.0)
+		if not _capture.is_empty(): await RenderingServer.frame_post_draw
+		var now: int = Time.get_ticks_usec()
+		if tick == 0: cold_crowd_ms = _scanner.last_query_usec / 1000.0
+		if tick >= 10:
+			crowd_queries.append(_scanner.last_query_usec / 1000.0)
+			frame_intervals.append((now - started) / 1000.0)
+		started = now
+	_check(_scanner.target != null, "Twelve nearby rendered animals lost every scan target")
+	measurements.append({"case": "twelve_animals", "cold_query_ms": cold_crowd_ms, "query_ms": _stats(crowd_queries), "frame_interval_ms": _stats(frame_intervals), "process_ms": Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0, "physics_ms": Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0, "draw_calls": Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME), "note": "Warm isolated scene; frame intervals include software renderer and shared-host contention, no PNG writes."})
+	await _record("Twelve nearby animals / warm frame sample")
+	for animal: Node3D in crowd: animal.queue_free()
+	if _title != null: _title.queue_free()
+	_scanner.reset()
+	_tree.root.size = original_size
+	_tree.root.content_scale_factor = original_scale
+	_camera.fov = original_fov
+	await _settle()
+	return {"failures": failures, "measurements": measurements, "captured_frames": _frame, "rendered": not _capture.is_empty()}
+
+func _animal(species: int, individual: int) -> Node3D:
+	var animal: Node3D = load("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
+	animal.configure(species, individual, Vector2i.ZERO, "forager")
+	_tree.root.add_child(animal)
+	animal.set_physics_process(false)
+	animal._preview.set_motion("walk")
+	animal._preview.set_process(false)
+	return animal
+
+func _legacy_visible(animal: Node3D) -> bool:
+	# Unchanged #199 physical candidate predicate, retained as a read-only
+	# baseline when Chat 4 routes the public player getter to the scanner API.
+	if _player.global_position.distance_to(animal.global_position) > _player.inspection_radius: return false
+	var circle: Dictionary = _player._scan_circle()
+	var contact: Dictionary = _player._scan_contact(animal, circle)
+	return not contact.is_empty() and _player._scan_visible(animal, contact.pixel, circle) != null
+
+func _settle(count: int = 3) -> void:
+	for tick in range(count):
+		await _tree.physics_frame
+		await _tree.process_frame
+
+func _right_edge(animal: Node3D) -> Vector2:
+	var right := Vector2(-INF, 0)
+	_scanner.silhouette.prepare_projection(_camera)
+	for reference: WeakRef in _scanner.silhouette._visual_nodes(animal):
+		var node: Node3D = reference.get_ref()
+		if not node.is_visible_in_tree(): continue
+		var mesh: Mesh = node.mesh if node is MeshInstance3D else node.multimesh.mesh
+		var count: int = node.multimesh.instance_count if node is MultiMeshInstance3D else 1
+		var transforms: Array[Transform3D] = []
+		if node is MultiMeshInstance3D: transforms = _scanner.silhouette._batch_transforms(node, count)
+		for index in range(count):
+			var transform: Transform3D = node.global_transform * transforms[index] if node is MultiMeshInstance3D else node.global_transform
+			for point: Vector3 in _unique_vertices(mesh):
+				var pixel: Vector2 = _scanner.silhouette.project(transform * point)
+				if pixel.x > right.x: right = pixel
+	return right
+
+func _unique_vertices(mesh: Mesh) -> PackedVector3Array:
+	var identity: int = mesh.get_instance_id()
+	if _edge_vertices.has(identity): return _edge_vertices[identity]
+	var unique: Dictionary = {}
+	for vertex: Vector3 in _scanner.silhouette._mesh_faces(mesh): unique[vertex] = true
+	var vertices := PackedVector3Array(unique.keys())
+	_edge_vertices[identity] = vertices
+	return vertices
+
+func _align_edge(animal: Node3D, wanted: Vector2) -> void:
+	for iteration in range(3): _move_pixels(animal, wanted - _right_edge(animal))
+
+func _move_pixels(animal: Node3D, offset: Vector2) -> void:
+	var center: Vector3 = animal.global_position
+	var pixel: Vector2 = _camera.unproject_position(center)
+	var horizontal: float = _camera.unproject_position(center + _camera.global_basis.x).x - pixel.x
+	var vertical: float = _camera.unproject_position(center + _camera.global_basis.y).y - pixel.y
+	animal.global_position += _camera.global_basis.x * (offset.x / horizontal) + _camera.global_basis.y * (offset.y / vertical)
+
+func _record(text: String) -> void:
+	if _capture.is_empty(): return
+	_title.text = "INT30-05 / " + text + "\nQuery: %.3f ms / scan: %.0f%%" % [_scanner.last_query_usec / 1000.0, _scanner.ratio() * 100.0]
+	await _tree.process_frame
+	await RenderingServer.frame_post_draw
+	var image: Image = _tree.root.get_texture().get_image()
+	if _frame % 30 == 0:
+		var native: String = _capture.path_join("native")
+		DirAccess.make_dir_recursive_absolute(native)
+		_check(image.save_png(native.path_join("frame-%05d.png" % _frame)) == OK, "Native capture frame could not be saved")
+	# A fixed output canvas avoids mixing video dimensions across the matrix.
+	image.resize(1920, 1080)
+	_check(image.save_png(_capture.path_join("frame-%05d.png" % _frame)) == OK, "Capture frame could not be saved")
+	_frame += 1
+
+func _stats(values: Array[float]) -> Dictionary:
+	values.sort()
+	return {"median": values[values.size() / 2], "p95": values[mini(values.size() - 1, ceili(values.size() * 0.95) - 1)], "max": values.back()}
+
+func _check(condition: bool, message: String) -> void:
+	if not condition: failures.append(message)

@@ -1,0 +1,10 @@
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -348,6 +348,7 @@
+         "audio/spherical_water_audio_test",
+         "audio/creature_audio_budget_test",
+         "audio/foley_runtime_test",
++        "audio/int30_underwater_audio_test",
+         "audio/audio_settings_test"
+       ]
+     },

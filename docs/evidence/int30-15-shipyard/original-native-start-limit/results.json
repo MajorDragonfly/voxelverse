@@ -1,0 +1,48 @@
+{
+  "passed": false,
+  "source": {
+    "commit": "05e47b603d167be2294cbcba2a721039d06f9457",
+    "tracked_worktree_dirty": true,
+    "files_sha256": {
+      "space/ships/shipyard.gd": "a9135aff6287bf8577bd309a39e97401c3a5562b2d67b646d1ca110d835162c6",
+      "space/ships/shipyard_presentation.gd": "a2b1f34b7067f744cfba956ba40c21814bfdc54f09a3ee48152531d0b221b060",
+      "tests/shipyard_presentation_test.gd": "211b8f600a8f8dc6a7ed0a02e7ac0be7945ce19a6daacc812f26235b8191c9e5",
+      "localization/catalog.json": "43ac61ce1483fc9a32d88a4304a14ca0daa834a751e8e568ac0b0f90b820db10",
+      "localization/de.po": "80d57145eb1d5db8f32a3b2d5e7ebd4beca1119cd5d3a30dbb85f8d8d06a3023",
+      "localization/en.po": "3ca3274f76383c5efc2dcb0f1022e8d849748ee8aae91d014ec4a71726b15cfe",
+      "tools/validation/contracts.json": "0d2bba1cdb256f26313f5943f76c4d0f22c84896de707d663705a2317d9ea5e7"
+    }
+  },
+  "results": [
+    {
+      "name": "input",
+      "passed": false,
+      "command": [
+        "/tmp/voxelverse-validation-editor-sly1shwf/Godot_v4.6.3-stable_linux.x86_64",
+        "--path",
+        "/workspace/scratch/4e2380e5d0b8/voxelverse",
+        "--audio-driver",
+        "Dummy",
+        "--verbose",
+        "--rendering-method",
+        "gl_compatibility",
+        "--script",
+        "res://tests/shipyard_presentation_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/4e2380e5d0b8/shipyard-final-native"
+      ],
+      "summary": [],
+      "exit_code": 124,
+      "timed_out": true,
+      "log_sha256": "d58fc9950f91dcd3e1bd02862855505587e58876fd5606df7f2a94c7d865002e"
+    }
+  ],
+  "screenshots": [],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility",
+  "autoload_profile": "original project",
+  "software_rendering": "1",
+  "llvmpipe_threads": "2",
+  "scope": "Standalone expedition and lander editing; real pointer/key input, DE/EN, copy protection, fresh process; no campaign or target-PC acceptance"
+}

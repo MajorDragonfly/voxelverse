@@ -53,6 +53,23 @@ class RouteReportTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "same recipe"):
                 write_route_summary(new, capture, old)
 
+    def test_replay_float_roundtrip_and_actual_address_change(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            old, new = root / "old", root / "new"
+            old.mkdir(); new.mkdir()
+            previous = self._capture(old)
+            previous["initial_address"]["v"] = -0.88
+            (old / "capture.json").write_text(json.dumps(previous), encoding="utf-8")
+            capture = self._capture(new)
+            capture["initial_address"]["v"] = -0.880000000000001
+            result = write_route_summary(new, capture, old)
+            self.assertEqual(result["comparison"][0]["current_p99_ms"], 101.0)
+            self.assertEqual(result["comparison"][0]["current_max_ms"], 101.0)
+            capture["initial_address"]["v"] = -0.8800001
+            with self.assertRaisesRegex(ValueError, "same recipe"):
+                write_route_summary(new, capture, old)
+
 
 if __name__ == "__main__":
     unittest.main()

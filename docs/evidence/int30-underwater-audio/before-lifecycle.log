@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INT30_UNDERWATER {"checks":42,"engine":"4.6.3-stable (official)","events":["water_dive","water_surface","water_dive","water_surface","water_dive","water_surface","water_dive","water_surface","water_dive","water_surface","water_dive","water_surface","water_dive","swim","swim","swim","swim","underwater_bubbles","swim"],"failures":["Underwater noise lingered after surfacing","Repeated waterline crossings overlapped transition voices"],"measurements":{"ambience_muted_rms":0.0,"master_muted_rms":0.0,"paused_rms":0.0,"submerged_rms":0.0154643553168435},"passed":false,"peak_transition_voices":2,"timeline":[{"action":"dive","seconds":0.0},{"action":"steady bed, includes loop wrap","seconds":2.147},{"action":"pause","seconds":9.149},{"action":"resume","seconds":9.475},{"action":"ambience muted","seconds":9.678},{"action":"master muted","seconds":10.214},{"action":"surface","seconds":10.743},{"action":"repeated surface crossing, 0.67 s intervals","seconds":11.812},{"action":"moving underwater","seconds":19.653},{"action":"scene removal and reset","seconds":25.254}]}
+ERROR: Underwater noise lingered after surfacing
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tests/audio/int30_underwater_audio_test.gd:230)
+       [1] _run (res://tests/audio/int30_underwater_audio_test.gd:166)
+ERROR: Repeated waterline crossings overlapped transition voices
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tests/audio/int30_underwater_audio_test.gd:230)
+       [1] _run (res://tests/audio/int30_underwater_audio_test.gd:166)

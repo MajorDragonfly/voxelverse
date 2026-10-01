@@ -10,6 +10,9 @@ var captures: String = ""
 class PlayerStub extends Node:
 	var inspection_mode_enabled: bool = false
 
+class TribeStub extends Node:
+	var panel: CanvasLayer
+	func is_active() -> bool: return false
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -44,6 +47,9 @@ func _run() -> void:
 	_expect(panel._segments.size() == 4 and absf(panel._day_bar.value - Atmosphere.day_progress(580.0) * 100.0) < 0.05,
 		"Day/weather timeline does not read the supplied campaign snapshot.")
 	_expect(not panel._warning.visible, "Normal forecast displayed a storm warning.")
+	for entry: Dictionary in values:
+		_expect(not entry.get("preview", true) and entry.get("hazard_kind", "missing") == "none",
+			"The normal forecast lost its source/benign hazard metadata.")
 	var later: Dictionary = weather.duplicate(true)
 	later.elapsed_seconds += 360.0
 	panel.present(later, values, player)
@@ -71,11 +77,29 @@ func _run() -> void:
 				_expect(label.get_line_count() == label.get_visible_line_count(), "Forecast text clipped.")
 			if not captures.is_empty(): await _capture("forecast-%dx%d-%s.png" % [size.x, size.y, language])
 		_expect(values == original, "Presentation changed the model's read-only forecast.")
+		# This is only the future-source presentation port. Normal revision-1
+		# climates do not schedule storms; the live source is checked separately.
 		var coming: Array[Dictionary] = values.duplicate(true)
 		coming[1].condition = "sandstorm"
 		panel.present(weather, coming, player)
 		_expect(panel._warning.visible and ("Sturm naht" if language == "de" else "Storm approaching") in panel._warning.text,
-			"A genuine upcoming storm has no visible warning.")
+			"The future-source storm presentation port has no visible warning.")
+		coming[1].preview = true
+		panel.present(weather, coming, player)
+		_expect(not panel._warning.visible, "A diagnostic forecast entry manufactured a normal storm warning.")
+		coming[1].preview = false
+		coming[1].storm_preview_schema = 1
+		panel.present(weather, coming, player)
+		_expect(not panel._warning.visible, "A tagged diagnostic storm manufactured a normal warning.")
+		coming[1].erase("storm_preview_schema")
+		coming[1].in_seconds = 0.0
+		panel.present(weather, coming, player)
+		_expect(not panel._warning.visible, "A current storm was presented as approaching.")
+		coming[1].in_seconds = 120.0
+		coming[1].condition = "clear"
+		coming[1].hazard_kind = "toxic_air"
+		panel.present(weather, coming, player)
+		_expect(not panel._warning.visible, "A non-storm hazard manufactured a storm warning.")
 		panel.present(weather, values, player)
 		var preview := weather.duplicate(true)
 		preview.merge({"preview": true, "storm_preview_schema": 1, "storm_kind": "sandstorm",
@@ -110,12 +134,73 @@ func _run() -> void:
 	panel.present(other, other_values, player)
 	_expect(panel._panel.visible and panel._forecast == other_values and panel._snapshot.body_id == "forecast-b",
 		"Body/time change kept stale forecast rows.")
+	await _tribe_overlap_contract(stage, panel, notice, player, weather, values)
 	root.get_node("LocaleManager")._apply(language_before)
 	stage.queue_free()
 	await process_frame
+	var review := preload("res://world/weather/checks/weather_water_capture.gd").new()
+	var actual_sites: Dictionary = review.procedural_sites()
+	_expect(not actual_sites.sea.is_empty() and not actual_sites.lake.is_empty(), "Procedural native water views have no valid locations.")
+	if not captures.is_empty():
+		failures.append_array(await review.run(self, captures))
 	for failure in failures: push_error(failure)
 	print("WEATHER_FORECAST_UI: three local windows, DE/EN, 800x600/1280x720/1920x1080, preview, pause and body isolation: ", failures.is_empty())
 	await preload("res://core/runtime_shutdown.gd").finish(self, 0 if failures.is_empty() else 1)
+
+
+func _tribe_overlap_contract(stage: Node, panel: Node, notice: Node, player: Node, weather: Dictionary, values: Array) -> void:
+	var controller := TribeStub.new()
+	stage.add_child(controller)
+	controller.add_to_group(&"tribe_controller")
+	var hud := CanvasLayer.new()
+	hud.layer = 40
+	stage.add_child(hud)
+	controller.panel = hud
+	var entry := Button.new()
+	entry.name = "TribalAgeEntry"
+	hud.add_child(entry)
+	var resource_bar := PanelContainer.new()
+	resource_bar.name = "TribeResourceBar"
+	hud.add_child(resource_bar)
+	resource_bar.hide()
+	for language: String in ["de", "en"]:
+		root.get_node("LocaleManager")._apply(language)
+		entry.text = TranslationServer.translate("TRIBE_AGE_ENTRY")
+		for size: Vector2i in [Vector2i(800, 600), Vector2i(1280, 720), Vector2i(1920, 1080)]:
+			root.size = size
+			entry.position = Vector2(size.x - 282, 76)
+			entry.size = Vector2(260, 46)
+			panel.present(weather, values, player)
+			for frame in range(3): await process_frame
+			_expect(not panel._panel.get_global_rect().intersects(entry.get_global_rect()),
+				"Tribal age entry covers the weather forecast at " + str(size))
+			_expect(root.get_visible_rect().encloses(panel._panel.get_global_rect()), "Reserved forecast left the viewport.")
+			if not captures.is_empty(): await _capture("forecast-entry-%dx%d-%s.png" % [size.x, size.y, language])
+			var preview := weather.duplicate(true)
+			preview.merge({"preview": true, "storm_preview_schema": 1, "storm_kind": "sandstorm",
+				"storm_phase": "warning", "storm_phase_remaining": 23.0}, true)
+			panel.present(preview, values, player)
+			notice.present(preview, player)
+			for frame in range(3): await process_frame
+			_expect(not panel._panel.visible and notice._panel.visible,
+				"Diagnostic banner no longer owns preview messaging.")
+			_expect(not notice._panel.get_global_rect().intersects(entry.get_global_rect()),
+				"Tribal age entry covers the diagnostic storm banner.")
+			if not captures.is_empty() and size.x == 800: await _capture("warning-entry-800x600-%s.png" % language)
+			panel.present(weather, values, player)
+			notice.present({}, null)
+	entry.hide()
+	resource_bar.show()
+	resource_bar.position = Vector2(root.size.x - 360, 18)
+	resource_bar.size = Vector2(344, 134)
+	for frame in range(3): await process_frame
+	_expect(not panel._panel.get_global_rect().intersects(resource_bar.get_global_rect()), "Tribal resource bar covers the forecast.")
+	resource_bar.hide()
+	for frame in range(3): await process_frame
+	_expect(absf(panel._panel.position.y - 16.0) < 0.1, "Forecast retained a removed HUD reservation.")
+	controller.queue_free()
+	hud.queue_free()
+	await process_frame
 
 
 func _capture(filename: String) -> void:

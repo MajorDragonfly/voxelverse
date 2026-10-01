@@ -1,0 +1,27 @@
+diff --git a/tests/galaxy_visits_test.gd b/tests/galaxy_visits_test.gd
+--- a/tests/galaxy_visits_test.gd
++++ b/tests/galaxy_visits_test.gd
+@@ -36,7 +36,7 @@
+ 		for index in range(panel.body_list.item_count):
+ 			var body: Dictionary = lab.catalog.body(panel.body_list.get_item_metadata(index))
+ 			_expect(panel.body_list.is_item_disabled(index) == not body.landable, "Non-landable catalog body was offered as a surface destination.")
+-		_click(panel.visit_button)
++		await _click(panel.visit_button)
+ 		for frame in range(8):
+ 			await process_frame
+ 			if not is_instance_valid(lab.galaxy_panel):
+@@ -135,7 +135,13 @@
+ 
+ 
+ func _click(control: Control) -> void:
+-	var point: Vector2 = control.get_global_rect().get_center()
++	var ancestor: Node = control.get_parent()
++	while ancestor != null and not ancestor is ScrollContainer:
++		ancestor = ancestor.get_parent()
++	if ancestor is ScrollContainer:
++		ancestor.ensure_control_visible(control)
++		for frame in range(3): await process_frame
++	var point: Vector2 = control.get_global_transform_with_canvas() * (control.size * 0.5)
+ 	var motion := InputEventMouseMotion.new()
+ 	motion.position = point
+ 	root.push_input(motion, true)

@@ -22,8 +22,16 @@ func _run() -> void:
 			if not actor.colony_id.is_empty(): members[actor.colony_id] = int(members.get(actor.colony_id, 0)) + 1
 		return members.values().any(func(count: int) -> bool: return count >= 3), 25000)
 	_expect(members.values().any(func(count: int) -> bool: return count >= 3), "No nest had three physical residents: " + str(members))
+	print("LIVING_CREATURES_RESIDENTS ", JSON.stringify({"members":members, "animals":population.animals.size(),
+		"plants":population.plants.size(), "nests":population.nests.size(), "peak_attempts":population.peak_spawn_attempts}))
 	_stage("living_creatures_colonies")
 	_expect(population.animals.size() <= population.MAX_ANIMALS and population.nests.size() <= population.MAX_NESTS, "Family generation exceeded live simulation budgets")
+	_expect(population.peak_spawn_attempts <= population.MAX_SPAWN_ATTEMPTS, "Population exceeded the bounded spawn-attempt budget")
+	var paused_counts: Array = [population.animals.keys(), population.plants.keys(), population.nests.keys(), population._generation_cursor]
+	flow.toggle_pause()
+	for frame in range(20): await tree.process_frame
+	_expect(paused_counts == [population.animals.keys(), population.plants.keys(), population.nests.keys(), population._generation_cursor], "Paused population generated or published objects")
+	flow.toggle_pause()
 	for nest: Node3D in population.nests.values():
 		_expect(not nest.is_in_group(&"player_nest") and not nest.has_node("HomeGroup"), "Wild nest claimed player respawn/group ownership")
 		_expect(nest.global_basis.y.dot(Space.up(self, nest.global_position)) > 0.99, "Nest is not aligned to the spherical surface")
@@ -47,6 +55,13 @@ func _run() -> void:
 	if _expect_world():
 		population = tree.current_scene.population
 		await _until(func() -> bool: return not population.nests.is_empty(), 20000)
+		await _until(func() -> bool:
+			members.clear()
+			for actor: Node3D in population.animals.values():
+				if not actor.colony_id.is_empty(): members[actor.colony_id] = int(members.get(actor.colony_id, 0)) + 1
+			return members.values().any(func(count: int) -> bool: return count >= 3), 25000)
+		_expect(members.values().any(func(count: int) -> bool: return count >= 3), "Reload did not restore three physical nest residents: " + str(members))
+		print("LIVING_CREATURES_RELOADED_RESIDENTS ", JSON.stringify(members))
 		for nest: Node3D in population.nests.values():
 			if counts.has(nest.colony.id): _expect(counts[nest.colony.id] == nest.colony.members, "World reload changed nest identities")
 		flow.return_to_title()

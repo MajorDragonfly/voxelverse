@@ -1,0 +1,182 @@
+[
+  {
+    "key": "BP_DESIGN_REVISION",
+    "de": "Entwurf: {id} · Revision {revision}",
+    "en": "Design: {id} · revision {revision}"
+  },
+  {
+    "key": "BP_REVISION",
+    "de": "Revision {revision}",
+    "en": "Revision {revision}"
+  },
+  {
+    "key": "BP_TAGS",
+    "de": "Tags: {tags}",
+    "en": "Tags: {tags}"
+  },
+  {
+    "key": "BP_USABLE",
+    "de": "Verwendbar",
+    "en": "Usable"
+  },
+  {
+    "key": "BP_RESTRICTED",
+    "de": "Eingeschränkt – Details prüfen",
+    "en": "Restricted – check details"
+  },
+  {
+    "key": "BP_SORT_DEFAULT",
+    "de": "Sortierung: Vorhandene Reihenfolge",
+    "en": "Sort: Existing order"
+  },
+  {
+    "key": "BP_SORT_NAME",
+    "de": "Sortierung: Name A–Z",
+    "en": "Sort: Name A–Z"
+  },
+  {
+    "key": "BP_SORT_REVISION",
+    "de": "Sortierung: Höchste Revision zuerst",
+    "en": "Sort: Highest revision first"
+  },
+  {
+    "key": "BP_SORT_USABLE",
+    "de": "Sortierung: Verwendbare zuerst",
+    "en": "Sort: Usable first"
+  },
+  {
+    "key": "BP_COMPARE_CURRENT",
+    "de": "Unterschiede zum aktuellen Entwurf",
+    "en": "Differences from the current design"
+  },
+  {
+    "key": "BP_COMPARE_UNAVAILABLE",
+    "de": "Kein aktueller Entwurf für einen Vergleich verfügbar.",
+    "en": "No current design is available for comparison."
+  },
+  {
+    "key": "BP_CHANGE_BODY",
+    "de": "Körperform, Größe oder Körperteil geändert.",
+    "en": "Body shape, size or body part changed."
+  },
+  {
+    "key": "BP_CHANGE_PART",
+    "de": "{part}: {before} → {after}",
+    "en": "{part}: {before} → {after}"
+  },
+  {
+    "key": "BP_CHANGE_PLACEMENT",
+    "de": "Teilanordnung oder Anschlüsse geändert.",
+    "en": "Part layout or attachments changed."
+  },
+  {
+    "key": "BP_CHANGE_APPEARANCE",
+    "de": "Farben, Haut oder Bemalung geändert.",
+    "en": "Colours, skin or paint changed."
+  },
+  {
+    "key": "BP_CHANGE_STAT",
+    "de": "{stat}: {before} → {after}",
+    "en": "{stat}: {before} → {after}"
+  },
+  {
+    "key": "BP_CHANGE_NONE",
+    "de": "Gleiche Körperform, Teile und Erscheinung.",
+    "en": "Same body shape, parts and appearance."
+  },
+  {
+    "key": "BP_START_LIMITS",
+    "de": "Verglichen wird die Startform. Die Vorlage überträgt nur den Körper; eine neue Spezies beginnt mit den normalen Startfreischaltungen.",
+    "en": "Compared with the starting form. The template transfers only the body; a new species begins with normal starter unlocks."
+  },
+  {
+    "key": "BP_ADOPT_LIMITS",
+    "de": "Die Übernahme ersetzt Körperform, Teile und Aussehen. Deine Entwurfsidentität und dein Fortschritt bleiben erhalten. Im Editor kannst du die Übernahme rückgängig machen.",
+    "en": "Applying replaces body shape, parts and appearance. Your design identity and progress are preserved. You can undo the adoption in the editor."
+  },
+  {
+    "key": "BP_SELECTION_FILTERED",
+    "de": "Die ausgewählte Vorlage ist durch die Suche oder Filter ausgeblendet. Ändere die Filter oder wähle ein sichtbares Ergebnis.",
+    "en": "The selected template is hidden by search or filters. Change the filters or select a visible result."
+  },
+  {
+    "key": "BP_SELECTION_CHANGED",
+    "de": "Entwurf oder Vorlage haben sich geändert. Prüfe die aktualisierten Details vor der Übernahme.",
+    "en": "The design or template has changed. Review the updated details before applying."
+  },
+  {
+    "key": "BP_ERROR_PART_MISSING",
+    "de": "Benötigtes Teil nicht verfügbar: {part}. Die Originaldatei bleibt erhalten.",
+    "en": "Required part unavailable: {part}. The original file is preserved."
+  },
+  {
+    "key": "BP_ERROR_CATALOG",
+    "de": "Diese Vorlage benötigt eine nicht unterstützte Teilekatalog-Version oder Teilrevision. Die Originaldatei bleibt erhalten.",
+    "en": "This template needs an unsupported part catalog version or part revision. The original file is preserved."
+  },
+  {
+    "key": "BP_METRIC_HEALTH",
+    "de": "Leben",
+    "en": "Health"
+  },
+  {
+    "key": "BP_METRIC_SPEED",
+    "de": "Tempo",
+    "en": "Speed"
+  },
+  {
+    "key": "BP_METRIC_ATTACK",
+    "de": "Angriff",
+    "en": "Attack"
+  },
+  {
+    "key": "BP_METRIC_DEFENSE",
+    "de": "Verteidigung",
+    "en": "Defense"
+  },
+  {
+    "key": "BP_METRIC_PERCEPTION",
+    "de": "Wahrnehmung",
+    "en": "Perception"
+  },
+  {
+    "key": "BP_METRIC_GRIP",
+    "de": "Greifen",
+    "en": "Grip"
+  },
+  {
+    "key": "BP_METRIC_DIET_PLANT",
+    "de": "Pflanzennahrung",
+    "en": "Plant diet"
+  },
+  {
+    "key": "BP_METRIC_DIET_MEAT",
+    "de": "Fleischnahrung",
+    "en": "Meat diet"
+  },
+  {
+    "key": "BP_METRIC_SWIM",
+    "de": "Schwimmen",
+    "en": "Swimming"
+  },
+  {
+    "key": "BP_METRIC_FLIGHT",
+    "de": "Fliegen",
+    "en": "Flight"
+  },
+  {
+    "key": "BP_METRIC_HUNGER_DRAIN",
+    "de": "Nahrungsverbrauch",
+    "en": "Hunger drain"
+  },
+  {
+    "key": "BP_METRIC_COMPLEXITY",
+    "de": "Formpunkte",
+    "en": "Form points"
+  },
+  {
+    "key": "BP_BODY_DIMENSIONS",
+    "de": "Körpermaße (Breite/Höhe/Länge): {before} → {after}",
+    "en": "Body dimensions (width/height/length): {before} → {after}"
+  }
+]

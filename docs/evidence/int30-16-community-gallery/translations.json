@@ -1,0 +1,169 @@
+{
+  "messages": [
+    {
+      "key": "CG_TITLE",
+      "de": "Community-Galerie",
+      "en": "Community gallery"
+    },
+    {
+      "key": "CG_SEARCH",
+      "de": "Suchen",
+      "en": "Search"
+    },
+    {
+      "key": "CG_QUERY",
+      "de": "Titel oder Autor suchen (max. 120 UTF-8-Bytes)",
+      "en": "Search title or author (max. 120 UTF-8 bytes)"
+    },
+    {
+      "key": "CG_IDLE",
+      "de": "Suche ausdrücklich starten. Der Dienst wird erst dann kontaktiert.",
+      "en": "Start a search to contact the configured service."
+    },
+    {
+      "key": "CG_UNAVAILABLE",
+      "de": "Kein gültiger Community-Dienst konfiguriert.",
+      "en": "No valid community service is configured."
+    },
+    {
+      "key": "CG_LOADING",
+      "de": "Ergebnisse werden geladen …",
+      "en": "Loading results …"
+    },
+    {
+      "key": "CG_RESULTS",
+      "de": "Ergebnisse auf dieser Seite: {count}.",
+      "en": "Results on this page: {count}."
+    },
+    {
+      "key": "CG_EMPTY",
+      "de": "Keine Ergebnisse auf dieser Seite.",
+      "en": "No results on this page."
+    },
+    {
+      "key": "CG_SELECT",
+      "de": "Wähle einen Entwurf für Details.",
+      "en": "Select a design for details."
+    },
+    {
+      "key": "CG_PREVIOUS",
+      "de": "Zurück",
+      "en": "Previous"
+    },
+    {
+      "key": "CG_NEXT",
+      "de": "Weiter",
+      "en": "Next"
+    },
+    {
+      "key": "CG_PAGE",
+      "de": "Seite {page}",
+      "en": "Page {page}"
+    },
+    {
+      "key": "CG_ORIGIN",
+      "de": "Autor: {author}\nDienst: {service}",
+      "en": "Author: {author}\nService: {service}"
+    },
+    {
+      "key": "CG_REVISION",
+      "de": "Entwurf: {id}\nRevision {revision} · {bytes} Bytes",
+      "en": "Design: {id}\nRevision {revision} · {bytes} bytes"
+    },
+    {
+      "key": "CG_SHORT_REVISION",
+      "de": "Revision {revision}",
+      "en": "Revision {revision}"
+    },
+    {
+      "key": "CG_REQUIREMENTS_UNKNOWN",
+      "de": "Anforderungen noch unbekannt: Der Katalog liefert keine Teileliste. Das geprüfte Paket zeigt sie nach der Übernahme.",
+      "en": "Requirements unknown: the catalogue has no part list. They appear after the validated package is imported."
+    },
+    {
+      "key": "CG_REQUIREMENTS",
+      "de": "Benötigte Teile: {parts}",
+      "en": "Required parts: {parts}"
+    },
+    {
+      "key": "CG_USE_LOCAL",
+      "de": "Verwendbarkeit in der lokalen Bibliothek prüfen.",
+      "en": "Check usability in your local library."
+    },
+    {
+      "key": "CG_DOWNLOAD",
+      "de": "In lokale Bibliothek übernehmen",
+      "en": "Import into local library"
+    },
+    {
+      "key": "CG_DOWNLOADING",
+      "de": "Wird heruntergeladen und geprüft …",
+      "en": "Downloading and validating …"
+    },
+    {
+      "key": "CG_NOT_DOWNLOADED",
+      "de": "Noch nicht heruntergeladen.",
+      "en": "Not downloaded yet."
+    },
+    {
+      "key": "CG_LOCAL_UNVERIFIED",
+      "de": "Diese Identität ist lokal vorhanden; der Dienstinhalt wurde noch nicht abgeglichen.",
+      "en": "This identity exists locally; its service content has not been verified yet."
+    },
+    {
+      "key": "CG_IMPORTED",
+      "de": "Geprüft in der lokalen Bibliothek vorhanden.",
+      "en": "Validated and available in your local library."
+    },
+    {
+      "key": "CG_CANCELLED",
+      "de": "Abgebrochen. Die lokale Bibliothek blieb unverändert.",
+      "en": "Cancelled. Your local library is unchanged."
+    },
+    {
+      "key": "CG_OFFLINE",
+      "de": "Dienst nicht erreichbar. Erneut suchen oder später versuchen.",
+      "en": "Service unavailable. Search again or try later."
+    },
+    {
+      "key": "CG_TIMEOUT",
+      "de": "Der Dienst hat nicht rechtzeitig geantwortet. Erneut versuchen.",
+      "en": "The service did not respond in time. Try again."
+    },
+    {
+      "key": "CG_QUERY_LIMIT",
+      "de": "Die Suche darf höchstens 120 UTF-8-Bytes enthalten.",
+      "en": "The search must not exceed 120 UTF-8 bytes."
+    },
+    {
+      "key": "CG_BUSY",
+      "de": "Eine Anfrage läuft bereits.",
+      "en": "A request is already running."
+    },
+    {
+      "key": "CG_HTTP_ERROR",
+      "de": "Dienst antwortet mit HTTP {status}. Erneut versuchen.",
+      "en": "Service returned HTTP {status}. Try again."
+    },
+    {
+      "key": "CG_INVALID_RESPONSE",
+      "de": "Antwort ungültig oder Paketprüfung fehlgeschlagen. Es wurde nichts übernommen.",
+      "en": "Invalid response or failed package validation. Nothing was imported."
+    },
+    {
+      "key": "CG_SERVICE_VERSION",
+      "de": "Die Dienstversion wird nicht unterstützt.",
+      "en": "The service version is not supported."
+    },
+    {
+      "key": "CG_PAGE_BUDGET",
+      "de": "Das Seitenlimit ist erreicht. Grenze die Suche ein.",
+      "en": "Page limit reached. Refine your search."
+    },
+    {
+      "key": "CG_END",
+      "de": "Keine weitere Seite verfügbar.",
+      "en": "No further page available."
+    }
+  ]
+}

@@ -1,0 +1,317 @@
+{
+  "evidence": {
+    "adapter": "",
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "engine": "4.6.3-stable (official)",
+    "passed": false,
+    "physics_monitor_ms": {
+      "count": 180,
+      "max": 30.011,
+      "median": 27.99,
+      "p95": 30.011,
+      "p99": 30.011
+    },
+    "physics_note": "Godot's coarse TIME_PHYSICS_PROCESS monitor, repeated between refreshes. Linux container measurement, not target-PC FPS.",
+    "renderer": "forward_plus",
+    "seed": 15838,
+    "snapshots": [
+      {
+        "bodies": 15,
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 53.858,
+          "max_publish_units": 1,
+          "patches": 15,
+          "prepared": 0,
+          "publication_steps": 238,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "meshes": 73,
+        "shapes": 63,
+        "stage": "near"
+      },
+      {
+        "bodies": 16,
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 53.858,
+          "max_publish_units": 1,
+          "patches": 16,
+          "prepared": 0,
+          "publication_steps": 240,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "meshes": 78,
+        "shapes": 68,
+        "stage": "after-rebase"
+      },
+      {
+        "bodies": 16,
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 53.858,
+          "max_publish_units": 1,
+          "patches": 16,
+          "prepared": 0,
+          "publication_steps": 243,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "meshes": 78,
+        "shapes": 68,
+        "stage": "after-rebase"
+      },
+      {
+        "bodies": 14,
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 53.858,
+          "max_publish_units": 1,
+          "patches": 14,
+          "prepared": 0,
+          "publication_steps": 244,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "meshes": 67,
+        "shapes": 59,
+        "stage": "after-rebase"
+      },
+      {
+        "bodies": 12,
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 53.858,
+          "max_publish_units": 1,
+          "patches": 12,
+          "prepared": 0,
+          "publication_steps": 244,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "meshes": 57,
+        "shapes": 50,
+        "stage": "after-rebase"
+      },
+      {
+        "bodies": 25,
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 3,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 53.858,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 695,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "meshes": 142,
+        "shapes": 142,
+        "stage": "far"
+      },
+      {
+        "bodies": 19,
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 6,
+          "generation": 6,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 53.858,
+          "max_publish_units": 1,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 1051,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "meshes": 89,
+        "shapes": 77,
+        "stage": "returned"
+      }
+    ],
+    "targets": [
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.02477745720164,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.02477745720164,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.02477745720164,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.80684220790863,
+        "slope_degrees": 3.25888568319807,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.80684220790863,
+        "slope_degrees": 3.25888568319807,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.80684220790863,
+        "slope_degrees": 3.25888568319807,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.18008959293365,
+        "slope_degrees": 2.63945271793305,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.18008959293365,
+        "slope_degrees": 2.63945271793305,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.18008959293365,
+        "slope_degrees": 2.63945271793305,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "ancient_oak_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15727",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.830828487873077,
+        "slope_degrees": 3.21375795545119,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "ancient_oak_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15727",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.830828487873077,
+        "slope_degrees": 3.21375795545119,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "ancient_oak_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15727",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.830828487873077,
+        "slope_degrees": 3.21375795545119,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.02477745720164,
+        "stage": "returned",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.80684220790863,
+        "slope_degrees": 3.25888568319807,
+        "stage": "returned",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.18008959293365,
+        "slope_degrees": 2.63945271793305,
+        "stage": "returned",
+        "variant": 0
+      },
+      {
+        "asset": "ancient_oak_v2",
+        "cell": "body_372728f0c737c1de48f4eb82664eacfe:land1:18:0:131072:15727",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.830828487873077,
+        "slope_degrees": 3.21375795545119,
+        "stage": "returned",
+        "variant": 0
+      }
+    ]
+  },
+  "failures": 1,
+  "passed": false
+}

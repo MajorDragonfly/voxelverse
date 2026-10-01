@@ -17,6 +17,7 @@ func _run() -> void:
 	_model()
 	_cues()
 	await _poses()
+	await _scaled_poses()
 	state.start_world_with_seed(12345)
 	await process_frame
 	player = load("res://creatures/player/player.tscn").instantiate()
@@ -35,6 +36,8 @@ func _run() -> void:
 		_expect(social.greet(player).ok, "Fresh process greeting unavailable")
 	else:
 		await _interactions()
+		await _interruption_and_clock()
+		await _marker_anchors()
 	await _dispose_wildlife()
 	player.free()
 	await process_frame
@@ -171,6 +174,50 @@ func _poses() -> void:
 		frame.free()
 		await process_frame
 
+func _scaled_poses() -> void:
+	var specimens = preload("res://creatures/behavior/review/int30_creature_shapes.gd")
+	var results: Array[Dictionary] = []
+	for index in range(3):
+		var frame := Node3D.new()
+		root.add_child(frame)
+		frame.transform = Transform3D(Basis.from_euler(Vector3(0.9, -0.7, 0.4)), Vector3(1500, -700, 2300))
+		var preview := Preview.new()
+		preview.scale = Vector3.ONE * specimens.SIZES[index]
+		frame.add_child(preview)
+		preview.set_editor_state(specimens.design(index), -1, -1, false)
+		preview.set_motion("idle")
+		preview.set_process(false)
+		var authored: String = var_to_str(preview.blueprint)
+		var count: int = preview.find_children("*", "", true, false).size()
+		var model := Emotion.new()
+		model.configure(42)
+		var socket: Dictionary = preview.body_socket("saddle.primary")
+		_expect(not socket.is_empty(), "Scaled form has no stable saddle socket")
+		var maximum: float = 0.0
+		for intent: String in ["rest", "social", "flee", "alert", "eat", "drink", "play_play"]:
+			var pose: Dictionary
+			for tick in range(60): pose = model.advance(1.0 / 60, {"intent": intent})
+			for mode: String in ["idle", "walk", "run"]:
+				preview.set_motion(mode)
+				preview.set_process(false)
+				preview.set_expression_pose({})
+				preview._motion.sample(mode, 1.0)
+				var contacts: Array[Vector3] = []
+				for leg: Dictionary in preview._motion._legs: contacts.append(leg.foot.global_position)
+				preview.set_expression_pose(pose)
+				preview._motion.sample(mode, 1.0)
+				for leg in range(contacts.size()):
+					maximum = maxf(maximum, contacts[leg].distance_to(preview._motion._legs[leg].foot.global_position))
+				_expect(preview.body_socket("saddle.primary").body_transform.is_equal_approx(socket.body_transform),
+					"Expression moved authored body socket on a scaled form")
+		_expect(maximum < 0.025, "Expression displaced scaled foot contact by more than 25 mm")
+		_expect(preview.find_children("*", "", true, false).size() == count and var_to_str(preview.blueprint) == authored,
+			"Scaled expression allocated scene nodes or changed authored anatomy")
+		results.append({"legs": (index + 1) * 2, "visual_scale": specimens.SIZES[index], "max_contact_delta": maximum})
+		frame.free()
+		await process_frame
+	print("INT30_SCALED_CONTACTS " + JSON.stringify(results))
+
 func _interactions() -> void:
 	var social: Node = await _spawn(11)
 	var driver: Node = wildlife.get_node("ExpressionBehavior")
@@ -250,6 +297,104 @@ func _interactions() -> void:
 	wildlife.is_dead = true
 	driver._process(0.1)
 	_expect(driver.emotion._reaction == "" and wildlife._preview._motion.expression_pose.is_empty(), "Death retained gesture")
+
+func _interruption_and_clock() -> void:
+	var social: Node = await _spawn(81)
+	var driver: Node = wildlife.get_node("ExpressionBehavior")
+	driver.set_process(false)
+	_expect(social.befriend(player).ok, "Cannot begin interrupted encounter")
+	var before: Dictionary = social.entry().duplicate(true)
+	var attention: float = social.attention_remaining
+	var response: float = social.response_remaining
+	social.help_cooldown = 0.8
+	social.greet_cooldown = 3.0
+	state.set_simulation_speed(0.0)
+	social._process(10.0)
+	_expect(social.attention_remaining == attention and social.response_remaining == response
+		and social.help_cooldown == 0.8 and social.greet_cooldown == 3.0,
+		"Stopped simulation advanced social attention or cooldowns")
+	driver.set_process(true)
+	await process_frame
+	var motion_time: float = wildlife._preview._motion_time
+	var expression_time: float = driver.emotion.clock
+	for frame in range(6): await process_frame
+	_expect(wildlife._preview._motion_time == motion_time and driver.emotion.clock == expression_time,
+		"Stopped simulation advanced live body animation")
+	state.set_simulation_speed(1.0)
+	for frame in range(6): await process_frame
+	_expect(wildlife._preview._motion_time > motion_time, "Body animation did not resume")
+	driver.set_process(false)
+	player.position.x = 40.0
+	_expect(not social.controls_movement() and social.attention_remaining == 0.0,
+		"Out-of-range player retained social movement ownership")
+	_expect(social.entry() == before, "Interrupted attention changed saved trust")
+	player.position.x = 0.0
+	social._process(response + 0.01)
+	_expect(social.befriend(player).ok, "Interrupted encounter cannot resume its next action")
+	var attacker := Node3D.new()
+	root.add_child(attacker)
+	attacker.position = wildlife.position + Vector3.RIGHT
+	wildlife.receive_creature_attack(1.0, attacker)
+	_expect(not social.controls_movement() and social.attention_remaining == 0.0,
+		"Social attention suppressed a real external attack")
+	driver._process(0.1)
+	_expect(driver.emotion.state == "hurt", "External attack did not interrupt positive reaction")
+	wildlife._intent = "flee"
+	wildlife.ai_state = "flee"
+	wildlife._refresh_label(0.1)
+	_expect(wildlife._label.visible and wildlife._label.text == "✚",
+		"Fear marker concealed the current pain reaction")
+	driver._process(0.7)
+	wildlife._refresh_label(0.1)
+	_expect(driver.emotion.state == "afraid" and wildlife._label.text == "!!",
+		"Pain marker did not return to the real escape state")
+	var trust: float = social.entry().trust
+	attacker.free()
+	wildlife._threat_timer = 0.0
+	wildlife._threat = null
+	wildlife._intent = "rest"
+	wildlife.ai_state = "rest"
+	social._process(social.response_remaining + 0.01)
+	_expect(social.befriend(player, 0.1, social.social_status().playful).get("completed", false)
+		and trust == 70.0, "Attack interruption lost partial progress or prevented calm retry")
+	# Successful friendship does not prevent flight from another creature.
+	attacker = Node3D.new()
+	root.add_child(attacker)
+	attacker.position = wildlife.position + Vector3.RIGHT
+	wildlife.receive_creature_attack(1.0, attacker)
+	_expect(not social.controls_movement() and social.entry().relation == "ally",
+		"Ally ignored an external attack during its completion gesture")
+	attacker.free()
+	wildlife._threat_timer = 0.0
+	wildlife._threat = null
+	driver._process(3.0)
+	_expect(driver.emotion.state != "playful", "Interrupted gesture resumed after danger")
+
+func _marker_anchors() -> void:
+	var specimens = preload("res://creatures/behavior/review/int30_creature_shapes.gd")
+	var anchors: Array[Dictionary] = []
+	for index in range(3):
+		await _dispose_wildlife()
+		wildlife = load("res://creatures/wildlife/procedural_wildlife_v7.tscn").instantiate()
+		wildlife.frozen_blueprint = specimens.design(index)
+		wildlife.visual_scale_min = specimens.SIZES[index]
+		wildlife.visual_scale_max = specimens.SIZES[index]
+		wildlife.configure(2771400 + index, 91 + index, Vector2i.ZERO, "grazer")
+		root.add_child(wildlife)
+		wildlife.position = player.position + Vector3(0, 0, -2.2)
+		wildlife.set_physics_process(false)
+		wildlife.get_node("SocialBehavior").set_process(false)
+		var driver: Node = wildlife.get_node("ExpressionBehavior")
+		driver.set_process(false)
+		driver.react("friend")
+		driver._process(0.1)
+		wildlife._refresh_label(0.1)
+		var skin: MeshInstance3D = wildlife._preview.get_node("BodyV4/SculptedSkin")
+		var body: AABB = wildlife._visual_root.transform * wildlife._preview.transform * skin.transform * skin.get_aabb()
+		_expect(wildlife._label.visible and wildlife._label.position.y > body.end.y + 0.2,
+			"Scaled creature concealed its cue inside the body: " + str(specimens.SIZES[index]))
+		anchors.append({"scale": specimens.SIZES[index], "body_top": body.end.y, "marker_y": wildlife._label.position.y})
+	print("INT30_MARKER_ANCHORS " + JSON.stringify(anchors))
 
 func _expect(condition: bool, message: String) -> void:
 	checks += 1

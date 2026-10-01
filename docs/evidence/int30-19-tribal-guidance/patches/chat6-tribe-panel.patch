@@ -1,0 +1,6 @@
+--- a/ui/tribe/tribe_panel.gd
++++ b/ui/tribe/tribe_panel.gd
+@@ -190,0 +191,3 @@
++	var context_help := preload("res://ui/tutorial/tribal_guidance_card.gd").new()
++	context_help.controller = controller
++	column.add_child(context_help)

@@ -1,0 +1,76 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"engine": "4.6.3-stable (official)",
+	"renderer": "forward_plus",
+	"samples": [
+		{
+			"body_id": "body_fd5be49699c93e92750311a96a88770f",
+			"camera": "[X: (-0.660627, -0.750714, 0.0), Y: (0.738585, -0.649954, -0.17903), Z: (0.1344, -0.118272, 0.983844), O: (1.42766, -1.256341, 7.083674)]",
+			"campaign_seconds": 900.0,
+			"cloud_cover": 0.236804057513205,
+			"draw_calls": 1155.0,
+			"phase": "dawn",
+			"primitives": 2001046.0,
+			"sun_direction": [
+				-0.141331702470779,
+				-0.343021214008331,
+				-0.928634405136108
+			],
+			"sun_energy": 0.597251653671265,
+			"ui_seconds": 900.0,
+			"water_shader_time": 3.11666666666667
+		},
+		{
+			"body_id": "body_fd5be49699c93e92750311a96a88770f",
+			"camera": "[X: (-0.660627, -0.750714, 0.0), Y: (0.738586, -0.649954, -0.17903), Z: (0.1344, -0.118272, 0.983844), O: (1.42766, -1.256341, 7.083674)]",
+			"campaign_seconds": 1260.0,
+			"cloud_cover": 0.21770228554715,
+			"draw_calls": 1277.0,
+			"phase": "noon",
+			"primitives": 2573170.0,
+			"sun_direction": [
+				0.465338408946991,
+				-0.876890957355499,
+				0.120509654283524
+			],
+			"sun_energy": 1.33793103694916,
+			"ui_seconds": 1260.0,
+			"water_shader_time": 4.18333333333333
+		},
+		{
+			"body_id": "body_fd5be49699c93e92750311a96a88770f",
+			"camera": "[X: (-0.660627, -0.750714, 0.0), Y: (0.738586, -0.649954, -0.17903), Z: (0.134401, -0.118272, 0.983844), O: (1.42766, -1.256341, 7.083674)]",
+			"campaign_seconds": 180.0,
+			"cloud_cover": 0.194309252881277,
+			"draw_calls": 2917.0,
+			"phase": "dusk",
+			"primitives": 4844214.0,
+			"sun_direction": [
+				-0.32226836681366,
+				-0.183796972036362,
+				0.928634405136108
+			],
+			"sun_energy": 0.0,
+			"ui_seconds": 180.0,
+			"water_shader_time": 5.25
+		},
+		{
+			"body_id": "body_fd5be49699c93e92750311a96a88770f",
+			"camera": "[X: (-0.660627, -0.750714, 0.0), Y: (0.738586, -0.649954, -0.17903), Z: (0.134401, -0.118272, 0.983844), O: (1.42766, -1.256341, 7.083674)]",
+			"campaign_seconds": 540.0,
+			"cloud_cover": 0.525121092277092,
+			"draw_calls": 1520.0,
+			"phase": "night",
+			"primitives": 2816336.0,
+			"sun_direction": [
+				-0.928938388824463,
+				0.350072681903839,
+				-0.120509773492813
+			],
+			"sun_energy": 0.0,
+			"ui_seconds": 540.0,
+			"water_shader_time": 6.317832
+		}
+	],
+	"scope": "Actual fixed-camera spherical campaign; simulation speed zero, canonical clock explicitly advanced. Water clock discrepancy remains a shared integration proposal."
+}

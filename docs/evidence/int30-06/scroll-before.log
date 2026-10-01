@@ -1,0 +1,58 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+WARNING: Lege mit N einen Heimatplatz für deine Nestgruppe fest.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1149)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:837)
+         [2] _run (res://tests/tribal_age_test.gd:41)
+         [3] _frames (res://tests/tribal_age_test.gd:522)
+TRIBAL_STAGE: 01_confirmation
+WARNING: Bestätige den Wechsel im Fenster für das Stammeszeitalter erneut.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1149)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:837)
+         [2] _run (res://tests/tribal_age_test.gd:57)
+         [3] _click (res://tests/tribal_age_test.gd:499)
+WARNING: Bestätige den Wechsel im Fenster für das Stammeszeitalter erneut.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1149)
+         [1] request_phase_transition (res://autoload/save_game_service.gd:837)
+         [2] _run (res://tests/tribal_age_test.gd:60)
+         [3] _click (res://tests/tribal_age_test.gd:499)
+WARNING: Could not commit save: user://blocked-parent/campaign.json (Can't open file)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1149)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:199)
+         [2] save_now (res://autoload/save_game_service.gd:128)
+         [3] request_phase_transition (res://autoload/save_game_service.gd:849)
+         [4] _run (res://tests/tribal_age_test.gd:66)
+         [5] _click (res://tests/tribal_age_test.gd:499)
+TRIBAL_STAGE: matrix_800x600_100_de_pause
+TRIBAL_STAGE: matrix_800x600_100_de_resident
+TRIBAL_STAGE: matrix_800x600_100_de_resident_needs
+TRIBAL_CHECK_FAILED: Source heading not scrolled into view: 800x600_100_de title=[P: (28.0, -49.0), S: (476.0, 24.0)] scroll=[P: (28.0, 245.0), S: (484.0, 216.0)]
+TRIBAL_STAGE: matrix_800x600_100_de_source_open
+TRIBAL_STAGE: matrix_800x600_100_de_source
+WARNING: Serialized save failed validation; previous snapshot retained: Material wurde vervielfacht.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report_failure (res://autoload/save_game_service.gd:1149)
+         [1] _save_snapshot (res://autoload/save_game_service.gd:173)
+         [2] save_now (res://autoload/save_game_service.gd:128)
+         [3] _commit_order (res://world/tribe/tribe_controller.gd:740)
+         [4] issue_order (res://world/tribe/tribe_controller.gd:539)
+         [5] screen_command (res://world/tribe/tribe_controller.gd:505)
+         [6] _unhandled_input (res://ui/tribe/tribe_panel.gd:682)
+         [7] _world_click (res://tests/tribal_age_test.gd:367)
+TRIBAL_CHECK_FAILED: Mouse placement failed: 800x600_100_de
+TRIBAL_CHECK_FAILED: Cannot open the action's tab.
+TRIBAL_CHECK_FAILED: Action remains clipped in village HUD: Order_wait
+TRIBAL_CHECK_FAILED: Required button is absent: Order_wait
+{"failures":["Source heading not scrolled into view: 800x600_100_de title=[P: (28.0, -49.0), S: (476.0, 24.0)] scroll=[P: (28.0, 245.0), S: (484.0, 216.0)]","Mouse placement failed: 800x600_100_de","Cannot open the action's tab.","Action remains clipped in village HUD: Order_wait","Required button is absent: Order_wait"],"passed":false,"test":"tribal_age"}

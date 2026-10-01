@@ -1,0 +1,37 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+INT30_STAGE start
+INT30_STAGE template building.template.residence
+INT30_STAGE use-copy
+INT30_STAGE capture residence-editor-open
+INT30_STAGE editing
+INT30_STAGE save
+INT30_STAGE reload
+INT30_STAGE capture residence-editor-edited-reload-de
+INT30_STAGE capture residence-front
+INT30_STAGE capture residence-rear
+INT30_STAGE capture residence-top
+INT30_STAGE template building.template.warehouse
+INT30_STAGE use-copy
+INT30_STAGE capture warehouse-editor-open
+INT30_STAGE editing
+INT30_STAGE save
+INT30_STAGE reload
+INT30_STAGE capture warehouse-editor-edited-reload-de
+INT30_STAGE capture warehouse-front
+INT30_STAGE capture warehouse-rear
+INT30_STAGE capture warehouse-top
+INT30_STAGE template building.template.workshop
+INT30_STAGE use-copy
+INT30_STAGE capture workshop-editor-open
+INT30_STAGE editing
+INT30_STAGE save
+INT30_STAGE reload
+INT30_STAGE capture workshop-editor-edited-reload-de
+INT30_STAGE capture workshop-front
+INT30_STAGE capture workshop-rear
+INT30_STAGE capture workshop-top
+{"checks":479,"designs":[{"design_id":"design_de08d1782db2680af2729922c768c6c1","id":"building.template.residence","parts":12,"revision":1,"source_sha256":"7e3db479f8f0f469fd399b10a106fb1fa4bd911676532e83f4695ae309d4409b","stats":{"commerce":0.0,"cost":54.0,"defense":6.0,"energy":0.0,"housing":15.0,"industry":3.0,"pollution":2.0,"prestige":11.0}},{"design_id":"design_1ce79eed3b2cc20989fbf7b1d54ee6d2","id":"building.template.warehouse","parts":13,"revision":1,"source_sha256":"3c6f17dfbb8c59feae619267b1d24b264dc1304ab01db1cf2f60ff837fa98ed7","stats":{"commerce":2.0,"cost":77.0,"defense":14.0,"energy":0.0,"housing":18.0,"industry":0.0,"pollution":0.0,"prestige":14.0}},{"design_id":"design_31e599036c70e0d473a3435466f8964d","id":"building.template.workshop","parts":11,"revision":1,"source_sha256":"392f2fa6aa4a42eea33022c80d3edae7457973ed1e22b09445b466a47fc20ea3","stats":{"commerce":8.0,"cost":68.0,"defense":5.0,"energy":-2.0,"housing":2.0,"industry":12.0,"pollution":4.0,"prestige":9.0}}],"failures":[],"passed":true,"restart":false,"test":"int30_building_templates"}

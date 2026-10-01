@@ -1,0 +1,78 @@
+{
+  "BUILDING_TEMPLATES_TITLE": {
+    "de": "GEBÄUDEVORLAGEN",
+    "en": "BUILDING TEMPLATES"
+  },
+  "BUILDING_TEMPLATE_USE_COPY": {
+    "de": "Als eigene Kopie verwenden",
+    "en": "Use as your own copy"
+  },
+  "BUILDING_TEMPLATE_UNAVAILABLE": {
+    "de": "Keine gültige Vorlage verfügbar.",
+    "en": "No valid template available."
+  },
+  "BUILDING_TEMPLATE_SOURCE": {
+    "de": "Vorlage {id} · Revision {revision} · {count} Teile",
+    "en": "Template {id} · Revision {revision} · {count} parts"
+  },
+  "BUILDING_TEMPLATE_RESIDENCE": {
+    "de": "Wohnhaus",
+    "en": "Residence"
+  },
+  "BUILDING_TEMPLATE_RESIDENCE_DETAIL": {
+    "de": "Kompaktes Putzhaus mit rotem Stufendach, Fenstern und Schornstein.",
+    "en": "Compact plaster house with a red stepped roof, windows and a chimney."
+  },
+  "BUILDING_TEMPLATE_WAREHOUSE": {
+    "de": "Lagergebäude",
+    "en": "Warehouse"
+  },
+  "BUILDING_TEMPLATE_WAREHOUSE_DETAIL": {
+    "de": "Breite Halle mit dunklem Dach und Doppeltor. Der Teilekatalog definiert keine Lagerkapazität.",
+    "en": "Wide hall with a dark roof and double entrance. The part catalog defines no storage capacity."
+  },
+  "BUILDING_TEMPLATE_WORKSHOP": {
+    "de": "Werkstatt",
+    "en": "Workshop"
+  },
+  "BUILDING_TEMPLATE_WORKSHOP_DETAIL": {
+    "de": "Steinwerkstatt mit breiten Fenstern, Schild und erhöhtem Schornstein.",
+    "en": "Stone workshop with wide windows, a sign and a raised chimney."
+  },
+  "BUILDING_TEMPLATE_VALUES_NOTE": {
+    "de": "Werte aus dem Teilekatalog; Größe skaliert sie nicht. Dies ist ein Entwurf, kein gebautes Gebäude.",
+    "en": "Values from the part catalog; size does not scale them. This is a design, not a constructed building."
+  },
+  "BUILDING_TEMPLATE_STAT_COST": {
+    "de": "Kosten",
+    "en": "Cost"
+  },
+  "BUILDING_TEMPLATE_STAT_HOUSING": {
+    "de": "Wohnen",
+    "en": "Housing"
+  },
+  "BUILDING_TEMPLATE_STAT_COMMERCE": {
+    "de": "Handel",
+    "en": "Commerce"
+  },
+  "BUILDING_TEMPLATE_STAT_INDUSTRY": {
+    "de": "Industrie",
+    "en": "Industry"
+  },
+  "BUILDING_TEMPLATE_STAT_DEFENSE": {
+    "de": "Verteidigung",
+    "en": "Defense"
+  },
+  "BUILDING_TEMPLATE_STAT_PRESTIGE": {
+    "de": "Ansehen",
+    "en": "Prestige"
+  },
+  "BUILDING_TEMPLATE_STAT_ENERGY": {
+    "de": "Energie",
+    "en": "Energy"
+  },
+  "BUILDING_TEMPLATE_STAT_POLLUTION": {
+    "de": "Verschmutzung",
+    "en": "Pollution"
+  }
+}

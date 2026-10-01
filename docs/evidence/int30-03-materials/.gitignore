@@ -1,0 +1,10 @@
+motion/*/before_*.png
+motion/*/after_*.png
+campaign/forward/before-first-failure/*.png
+comparisons/**/*.png
+!comparisons/*/forest_day_12m.png
+!comparisons/*/stone_day_12m.png
+!comparisons/*/ground_day_12m.png
+!comparisons/*/forest_night_12m.png
+!comparisons/*/forest_day_110m.png
+!comparisons/*/campaign_day-route-3-200m.png

@@ -113,7 +113,7 @@ func _process(_delta: float) -> void:
 	_reticle.known = _scanner.known
 	_reticle.has_target = target != null
 	if target != null:
-		_reticle.target_pixel = _reticle.get_global_transform_with_canvas().affine_inverse() * _player.get_scan_target_pixel()
+		_reticle.target_pixel = _reticle.get_global_transform_with_canvas().affine_inverse() * _scanner.target_pixel
 	_reticle.queue_redraw()
 	if target == null:
 		_scan_label.text = tr("HUD_SCAN_AIM")

@@ -1,0 +1,79 @@
+{
+  "messages": [
+    {
+      "key": "VILLAGE_WORLD_CENTER",
+      "de": "Dorfplatz · Lager & Werkbank",
+      "en": "Village square · Storage & workbench"
+    },
+    {
+      "key": "VILLAGE_WORLD_WOOD",
+      "de": "Leseholz",
+      "en": "Fallen wood"
+    },
+    {
+      "key": "VILLAGE_WORLD_STONE",
+      "de": "Lose Steine",
+      "en": "Loose stones"
+    },
+    {
+      "key": "VILLAGE_WORLD_ROOTS",
+      "de": "Essbare Wurzeln",
+      "en": "Edible roots"
+    },
+    {
+      "key": "VILLAGE_WORLD_WELL",
+      "de": "Brunnen",
+      "en": "Well"
+    },
+    {
+      "key": "VILLAGE_WORLD_GARDEN_READY",
+      "de": "Wurzelgarten · erntereif",
+      "en": "Root garden · Ready to harvest"
+    },
+    {
+      "key": "VILLAGE_WORLD_STATION",
+      "de": "{name} {number}",
+      "en": "{name} {number}"
+    },
+    {
+      "key": "VILLAGE_WORLD_COUNT",
+      "de": "{name} · {count}",
+      "en": "{name} · {count}"
+    },
+    {
+      "key": "VILLAGE_WORLD_PICKUP",
+      "de": "{resource} zur Abholung · {count}",
+      "en": "{resource} for collection · {count}"
+    },
+    {
+      "key": "VILLAGE_WORLD_MATERIALS",
+      "de": "{name} · {delivered} / {required}",
+      "en": "{name} · {delivered} / {required}"
+    },
+    {
+      "key": "VILLAGE_WORLD_SITE",
+      "de": "{name} · {status}",
+      "en": "{name} · {status}"
+    },
+    {
+      "key": "VILLAGE_WORLD_LAYING_SITE",
+      "de": "Legestelle",
+      "en": "Laying site"
+    },
+    {
+      "key": "VILLAGE_WORLD_DAIRY_PEN",
+      "de": "Milchtierplatz",
+      "en": "Dairy pen"
+    },
+    {
+      "key": "VILLAGE_WORLD_FREE",
+      "de": "frei",
+      "en": "free"
+    },
+    {
+      "key": "VILLAGE_WORLD_OCCUPIED",
+      "de": "belegt",
+      "en": "occupied"
+    }
+  ]
+}

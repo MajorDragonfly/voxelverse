@@ -1,0 +1,311 @@
+{
+  "schema": 1,
+  "design_id": "design_1ce79eed3b2cc20989fbf7b1d54ee6d2",
+  "assembly_type": "building",
+  "name": "Goods Hall",
+  "revision": 1,
+  "grid_snap": true,
+  "grid_size": 0.25,
+  "parts": [
+    {
+      "part_id": "mass_long_hall",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_4d708501ea3bbbbac28bf137407a0f28"
+    },
+    {
+      "part_id": "roof_gable_dark",
+      "position": [
+        0,
+        3.25,
+        0
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1.75
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_b76c1a90f1a55942f34e7d2fb988e96a"
+    },
+    {
+      "part_id": "opening_gate",
+      "position": [
+        0,
+        0,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        0.8,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_fa01b42a7a79f12ef0d8187f5ede3016"
+    },
+    {
+      "part_id": "opening_door_wood",
+      "position": [
+        -0.5,
+        0.25,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.8,
+        1.2,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_86f9da9180f78a4a564062c76029e8ca"
+    },
+    {
+      "part_id": "opening_door_wood",
+      "position": [
+        0.5,
+        0.25,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.8,
+        1.2,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_b31a33ce8b34e41e169eca430feba7cf"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        -3.5,
+        1.75,
+        0
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_466aed6c89c5d5be75fbd8bd84c2d605"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        3.5,
+        1.75,
+        0
+      ],
+      "rotation": [
+        0,
+        270,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_38fcc08746589325458e6ddfbce60199"
+    },
+    {
+      "part_id": "support_column_stone",
+      "position": [
+        -2.75,
+        0,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.75,
+        1.05,
+        0.75
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_cb67583803d9e6585087af7d16a3735b"
+    },
+    {
+      "part_id": "support_column_stone",
+      "position": [
+        -2.75,
+        0,
+        1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.75,
+        1.05,
+        0.75
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_7866c307fe9d0c76e90a1755f34f9889"
+    },
+    {
+      "part_id": "support_column_stone",
+      "position": [
+        2.75,
+        0,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.75,
+        1.05,
+        0.75
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_9612502d7968f11b004820acc60ff84b"
+    },
+    {
+      "part_id": "support_column_stone",
+      "position": [
+        2.75,
+        0,
+        1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.75,
+        1.05,
+        0.75
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_40388930b4f2edb2b730597e92d682a3"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        -2,
+        1.75,
+        1.75
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_080623f3492b7a8c7fa08cd73c3cb6f1"
+    },
+    {
+      "part_id": "opening_window_small",
+      "position": [
+        2,
+        1.75,
+        1.75
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mirror_group": "",
+      "socket_id": "",
+      "tags": [],
+      "uid": "part_cf951b905c61625c06a58151a893089f"
+    }
+  ],
+  "metadata": {
+    "template": {
+      "id": "building.template.warehouse",
+      "revision": 1,
+      "source": "voxelverse-built-in",
+      "author": "Voxelverse",
+      "change_note": "Initial catalog-parts design; reviewed in INT30-25"
+    }
+  },
+  "building": {
+    "schema": 1,
+    "type": "commercial",
+    "style_name": "Voxel Foundations"
+  }
+}

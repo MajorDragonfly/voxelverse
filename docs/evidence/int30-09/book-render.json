@@ -1,0 +1,593 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "source": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+      "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+      "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+      "complete": true,
+      "file_count": 3959,
+      "bytes": 125287789,
+      "bytes_hashed": 125287789,
+      "seconds": 3.1426
+    },
+    "end": {
+      "available": true,
+      "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+      "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+      "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+      "complete": true,
+      "file_count": 3959,
+      "bytes": 125287789,
+      "bytes_hashed": 125287789,
+      "seconds": 1.9361
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "f0add62b4583dcce4cb315aa1e8efa8e8c8e7cd5c6e4c4319340d1143a5f478b"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "f0add62b4583dcce4cb315aa1e8efa8e8c8e7cd5c6e4c4319340d1143a5f478b"
+      }
+    },
+    "observations": [
+      {
+        "after": "combined route",
+        "source": {
+          "available": true,
+          "commit": "243d6b9a45de01fc2d3db350c8f243cf201c01a9",
+          "tree": "fcc2d654799ff3c31e5adee18411523ff5879e7e",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "484401af6526500701d9167b24ad4c9afdc0b373551778f2527a37d9b18a3e52",
+          "source_sha256": "29f8183c7d1ae786cd82337375fbb0d221ad824982dd7e5d186d3310564734e6",
+          "complete": true,
+          "file_count": 3959,
+          "bytes": 125287789,
+          "bytes_hashed": 125287789,
+          "seconds": 1.9361
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "command": [
+    "/workspace/scratch/2656e69ac218/godot",
+    "--path",
+    "/workspace/scratch/2656e69ac218/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "res://tools/review_int30_book_frames.gd",
+    "--",
+    "--int30-focused"
+  ],
+  "headless": false,
+  "book_frames": true,
+  "images": {
+    "creature-fixture-de-800x600-book-creature.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "cdef19b1515dca32944730942722134050a475ee0c7c65f7091149c9fa8a269f"
+    },
+    "creature-fixture-de-800x600-book-nest_group.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "d3e914028500744c8ed41466d9dffdb9a6528e5413ed6fd417033563b176b924"
+    },
+    "creature-fixture-de-800x600-book-tribe.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "5e78610789038891dda9f6a7ed067c43080edfe63c2d441f54618bb310b68fa1"
+    },
+    "creature-fixture-de-800x600-book-medieval.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "10240708066cc4aa1cbc571d545b8e6d70620c09adf1b6619f6da98c8d0c4da6"
+    },
+    "creature-fixture-de-800x600-book-modern.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "083bf60be594b2aadee874eb70fff9e1b49f2257f7b8e3b452aa9a159c9702ef"
+    },
+    "creature-fixture-de-800x600-book-space.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "60c145f318691d37731517451f84a438c89e7a948fbfc4fa7ba9922d1dc5b1be"
+    },
+    "creature-fixture-de-800x600-book-tribe-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "993c12358b93b09ecdda33feafa7325e33b134208e39620c5d324f4c542fd7fd"
+    },
+    "creature-fixture-de-800x600-book-medieval-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "5b7a3ac66ccb6bbe04f5d09c32b018bb446cf303bb554bce780ff0fb58e88acc"
+    },
+    "creature-fixture-de-800x600-book-modern-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "7e89cf9482a79338a89f0f42ac721012a6dc35d8c6d1187fc0d4aea05f85586f"
+    },
+    "creature-fixture-de-1280x720-book-creature.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "ad986b7fb5c9bb99f947fcb41ea7484ebe61b0d8e0bab8622de62251a18a3aa8"
+    },
+    "creature-fixture-de-1280x720-book-nest_group.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "d1440344654cce90776a22a81d280e6e2c1ea451378ea438a7c106b981c0862d"
+    },
+    "creature-fixture-de-1280x720-book-tribe.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "ce47c29f5021b5b0972059359ce12066c8f51b990787e69f8b33b2259576fed7"
+    },
+    "creature-fixture-de-1280x720-book-medieval.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "4bdb0537be288107185aa14ffbc334cb9598b1e9ae84dfbd2f57bcd39ca09597"
+    },
+    "creature-fixture-de-1280x720-book-modern.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "30de877da462bdc9850fe5e72572f850dfec53d189502f0a75b83d670332398a"
+    },
+    "creature-fixture-de-1280x720-book-space.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "b398b0b17b914da32634f48214e350898ebd560348058f4e5b70a2e2a6322310"
+    },
+    "creature-fixture-de-1280x720-book-tribe-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "340a78f64d36bf9d682134705f489471c876b06e79c49e75ebefaa5d9a0ebb8c"
+    },
+    "creature-fixture-de-1280x720-book-medieval-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "6693d684dba866b9d545cb861425600adbacb2e14173788984ab0983503d44e9"
+    },
+    "creature-fixture-de-1280x720-book-modern-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "30de877da462bdc9850fe5e72572f850dfec53d189502f0a75b83d670332398a"
+    },
+    "creature-fixture-en-800x600-book-creature.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "cd26d7bdeed15230d2eafd27e8779748d7101371ca6edccbb7bac018b14a474b"
+    },
+    "creature-fixture-en-800x600-book-nest_group.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "7bdef6318912f35cc794e671be6f58e2719e765522ca2b6cad65c4006282a2ea"
+    },
+    "creature-fixture-en-800x600-book-tribe.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "cf9126e0f9a8ff083b32958fb0a05586500f6a0076783852e134167515f08ff6"
+    },
+    "creature-fixture-en-800x600-book-medieval.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "7fad3c4d8554423f5b8ceff0135dd11404f9dcb64ca11100c6001d5b2af4fd90"
+    },
+    "creature-fixture-en-800x600-book-modern.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "d12a146e66c9b79d2dfd3bdd8412d36eefc08994cd5febdd6435200e59dda834"
+    },
+    "creature-fixture-en-800x600-book-space.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "5752de609403363c13d98f7e560c63c51fd3b8b8f227fbee979738ef9cebcb0c"
+    },
+    "creature-fixture-en-800x600-book-tribe-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "546042b3c8cc1e5c35b5fed6301004e9e917fe4e623f5c940f1dfd7305b4b908"
+    },
+    "creature-fixture-en-800x600-book-medieval-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "742f637b1165cc7228b32dcd338bb2a545938777ff40f160fbcefd336ca95042"
+    },
+    "creature-fixture-en-800x600-book-modern-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "04d76c53b60786647be12a8434ffbd2d0a3c78d9a11cad1c8ec106ecd2abe961"
+    },
+    "creature-fixture-en-1280x720-book-creature.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "3f8606346f322916544055e90b4749e7c9edc720ddcbe4a9f5bffce09379275e"
+    },
+    "creature-fixture-en-1280x720-book-nest_group.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "ad6a3f93c9b4af823abac73c90063d1743f7aee1a4a9ad18d865d06cc8fbd68d"
+    },
+    "creature-fixture-en-1280x720-book-tribe.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "b06c4ae379e5d3af9f55755d79731c480865b876cee692ff3907693d1e5da52b"
+    },
+    "creature-fixture-en-1280x720-book-medieval.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "1e706debec645f341ae34234b5b464053347743328fc3781a605c53d4f38598f"
+    },
+    "creature-fixture-en-1280x720-book-modern.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "b6a247d65ce8cd98dba928fb2e8a9a1057a9b7c7d9c421fc1e983a81cd76ca8f"
+    },
+    "creature-fixture-en-1280x720-book-space.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "97afa647a02f87202aacea7efb2020ddec2b8e508c79477a43ec038dadd18fd5"
+    },
+    "creature-fixture-en-1280x720-book-tribe-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "2c435a49050b6267dbb046119afa6d62a52b036c510b0a2162f0eec9470734d6"
+    },
+    "creature-fixture-en-1280x720-book-medieval-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "9e05a98b698c87e4cd9d9b708c85dc2f19fff865662e8c709e27b69960d474cc"
+    },
+    "creature-fixture-en-1280x720-book-modern-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "b6a247d65ce8cd98dba928fb2e8a9a1057a9b7c7d9c421fc1e983a81cd76ca8f"
+    },
+    "tribe-fixture-de-800x600-book-creature.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "f04e2327bb07947476a72629b2548970fd18fd9f0236d69527dd4065fca34224"
+    },
+    "tribe-fixture-de-800x600-book-nest_group.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "f080c055689daf9f60c7e7eda1333aa3bd923b6c3c584efe1589dd13d0deff7e"
+    },
+    "tribe-fixture-de-800x600-book-tribe.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "65c41f644aaba27a1357acc5ccd65d4b88df24e6e39bb9425c93181aaf6acdf1"
+    },
+    "tribe-fixture-de-800x600-book-medieval.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "5b5ab0af3c9d1f007d72ae1c9379d0efc156bef39c92831e08356489be2f1e40"
+    },
+    "tribe-fixture-de-800x600-book-modern.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "7338d123b8993b7ab521d9c3ab031a308e6078fcd3991bd1fba6bb0b970c351f"
+    },
+    "tribe-fixture-de-800x600-book-space.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "8bafc395f4642f9818fe44505762fc29b92a4957a66620d352b760c3853c9796"
+    },
+    "tribe-fixture-de-800x600-book-tribe-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "e3a921efa95d63d419d633d74b89885e7719a9f7db454efa8abc084407a9df2a"
+    },
+    "tribe-fixture-de-800x600-book-medieval-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "2f80343b66fb2ef3bfbd62438fa5c575186a89f73eb2213830e8294724dc0487"
+    },
+    "tribe-fixture-de-800x600-book-modern-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "d248af995ece265db6eb3dd00c573a9cacb9bb9373c81b5c3bbefc21813ab46e"
+    },
+    "tribe-fixture-de-1280x720-book-creature.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "3513e582b68f2c8c1f3cb78e1579cf27d74cdffb8f5e325b4a0a137c3c665716"
+    },
+    "tribe-fixture-de-1280x720-book-nest_group.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "1e3f3218098d84712c7c6a6bde59cacf80bdf862730507325654f4cf9314f400"
+    },
+    "tribe-fixture-de-1280x720-book-tribe.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "f6934f1934bd21e2dc8d9749f82b754c38ef871e4e771297f5cdc6b4f1167a0b"
+    },
+    "tribe-fixture-de-1280x720-book-medieval.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "cf70c675485f290324ec81d3e2f61e4656d80b89c3480f6011fd94146c9f3126"
+    },
+    "tribe-fixture-de-1280x720-book-modern.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e7799c57889cb5b77f7b3c9c61837de83d19d39f0a7814ef1eb389a0706ec231"
+    },
+    "tribe-fixture-de-1280x720-book-space.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "a8baa88bc03381e524cdd181bc0c1159a1afb6367fe987fa8462a99a12eacd89"
+    },
+    "tribe-fixture-de-1280x720-book-tribe-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "caf1315b8acde1efbc1936e7a8bcd38a6e1528a39fab5d223c04671c498cfc0c"
+    },
+    "tribe-fixture-de-1280x720-book-medieval-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "53b081ddcbb77a8734212e7e97ff83b113dfd23d3acbe0f6bc1c9bc0adfa6959"
+    },
+    "tribe-fixture-de-1280x720-book-modern-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e7799c57889cb5b77f7b3c9c61837de83d19d39f0a7814ef1eb389a0706ec231"
+    },
+    "tribe-fixture-en-800x600-book-creature.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "7ede437778cc402c6a58068dbfaf9537f5a56246a5405f7d9f13b910f762c7e5"
+    },
+    "tribe-fixture-en-800x600-book-nest_group.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "8b518dab07a9aa98d66cae129486d126dd0ddfa4ec5dc53e8bd5f0b03eb37602"
+    },
+    "tribe-fixture-en-800x600-book-tribe.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "dddfb2af4a2e5b662ef77be4680c6de245cb67b12c8192dbe9c779ffae5648cc"
+    },
+    "tribe-fixture-en-800x600-book-medieval.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "36f39e36f78c4a1327f282cd639d02e8f7f70756df22446872f0938bfb57bae3"
+    },
+    "tribe-fixture-en-800x600-book-modern.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "ba40c4bea50b3836b3b362f138c25da61d0e519cfb7d737d8a1fba2d7c3e19c7"
+    },
+    "tribe-fixture-en-800x600-book-space.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "643594c323db9df0909b92b4dbf164359c58fab79fba56a9d0b2a3584e243f42"
+    },
+    "tribe-fixture-en-800x600-book-tribe-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "18f3e833f550579abd2b2b80c6efe29e98f90261653f6e5656970cf3f21757d4"
+    },
+    "tribe-fixture-en-800x600-book-medieval-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "ba111ec1031655a586266c49bf2bd9ae5ca9326aca27e9b50de745a27a7520d1"
+    },
+    "tribe-fixture-en-800x600-book-modern-top.png": {
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "92b7d5a2b1cc3312e747f6dca852f5f4771040dcf735dabb4deaaab4c23fd2a9"
+    },
+    "tribe-fixture-en-1280x720-book-creature.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e24b6d8efd96b40db443598f140f8bc4cf9e78c2260d9b1ee72d45222a806c3c"
+    },
+    "tribe-fixture-en-1280x720-book-nest_group.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "bfb1b8557014128b0e3c42d1d088c8d2aafcef0d9827849cacbd5cdf3e5cfd95"
+    },
+    "tribe-fixture-en-1280x720-book-tribe.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "7b3803f723c2d11ef84939b9df0b773548b9a11f38e89294e2442b010de60a0f"
+    },
+    "tribe-fixture-en-1280x720-book-medieval.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "427675db7d1d32fbb1118c5ff6b12bdd343cd233479e5efadcebe28555222660"
+    },
+    "tribe-fixture-en-1280x720-book-modern.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "29365b7c173840baa591780807f32d4c1da7856c0623fb9faa3589e8cc399d30"
+    },
+    "tribe-fixture-en-1280x720-book-space.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "bdca7105e6daccf0282bd7ad2f280b8d578918dc34a51b6a91a7c28b82e0e0ab"
+    },
+    "tribe-fixture-en-1280x720-book-tribe-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "4c55b76c402c9e49a96bc744b4870429cd587e39f037293327d5318ea68f4330"
+    },
+    "tribe-fixture-en-1280x720-book-medieval-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "cc3444b2288c6b8a2f2905039e049f2985c6dc89a4304ce6a4951a895eb6335e"
+    },
+    "tribe-fixture-en-1280x720-book-modern-top.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "29365b7c173840baa591780807f32d4c1da7856c0623fb9faa3589e8cc399d30"
+    }
+  },
+  "capture_on_demand": true,
+  "log_sha256": "e91f878070de531e64a70e48e9d415041401e4b8c9a0e67d52e9e9959c92bedc",
+  "scope": "Isolated original book host with declared creature/tribe phase fixtures, all six chapters DE/EN, mouse/keyboard, actual 130% scale; not a public spherical campaign or ordinary phase confirmation proof."
+}

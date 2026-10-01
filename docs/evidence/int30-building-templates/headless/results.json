@@ -1,0 +1,351 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+    "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+    "tracked_worktree_dirty": true,
+    "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+    "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+    "complete": true,
+    "file_count": 3973,
+    "bytes": 125322640,
+    "bytes_hashed": 125322640,
+    "seconds": 3.2391
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "int30_building_templates_test",
+    "modular_assembly_framework_test",
+    "blueprint_contract_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+      "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+      "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+      "complete": true,
+      "file_count": 3973,
+      "bytes": 125322640,
+      "bytes_hashed": 125322640,
+      "seconds": 3.2391
+    },
+    "end": {
+      "available": true,
+      "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+      "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+      "tracked_worktree_dirty": true,
+      "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+      "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+      "complete": true,
+      "file_count": 3973,
+      "bytes": 125322640,
+      "bytes_hashed": 125322640,
+      "seconds": 2.0894
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "75539866f21621f87cffe9086b3659c0c85a2767cd27a168c71ac1925f46819b"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "75539866f21621f87cffe9086b3659c0c85a2767cd27a168c71ac1925f46819b"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+          "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+          "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+          "complete": true,
+          "file_count": 3973,
+          "bytes": 125322640,
+          "bytes_hashed": 0,
+          "seconds": 0.4474
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+          "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+          "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+          "complete": true,
+          "file_count": 3973,
+          "bytes": 125322640,
+          "bytes_hashed": 0,
+          "seconds": 0.7885
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "import",
+        "source": {
+          "available": true,
+          "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+          "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+          "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+          "complete": true,
+          "file_count": 3973,
+          "bytes": 125322640,
+          "bytes_hashed": 0,
+          "seconds": 1.2099
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "art_sources",
+        "source": {
+          "available": true,
+          "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+          "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+          "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+          "complete": true,
+          "file_count": 3973,
+          "bytes": 125322640,
+          "bytes_hashed": 0,
+          "seconds": 0.9161
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "int30_building_templates_test",
+        "source": {
+          "available": true,
+          "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+          "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+          "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+          "complete": true,
+          "file_count": 3973,
+          "bytes": 125322640,
+          "bytes_hashed": 0,
+          "seconds": 0.5173
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "modular_assembly_framework_test",
+        "source": {
+          "available": true,
+          "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+          "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+          "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+          "complete": true,
+          "file_count": 3973,
+          "bytes": 125322640,
+          "bytes_hashed": 0,
+          "seconds": 0.5313
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "blueprint_contract_test",
+        "source": {
+          "available": true,
+          "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+          "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+          "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+          "complete": true,
+          "file_count": 3973,
+          "bytes": 125322640,
+          "bytes_hashed": 0,
+          "seconds": 0.6024
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+          "tree": "9cf3c8a4eb8fc198353267342ab7aa769c0032bf",
+          "tracked_worktree_dirty": true,
+          "index_sha256": "94e759f4eb7f8a15f9a6faeb7edd8c1ab3dde179df80013b06c6fca7d4b28259",
+          "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+          "complete": true,
+          "file_count": 3973,
+          "bytes": 125322640,
+          "bytes_hashed": 125322640,
+          "seconds": 2.0894
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.433,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/9632bd8c125f/validation-worktree/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/9632bd8c125f/validation-worktree",
+        "--output",
+        "/workspace/scratch/9632bd8c125f/final-scoped-validation/contracts.json"
+      ],
+      "log_sha256": "8259c86beff787b5e592fc1e6b7dc7b4bae6335120c4aebacc83963bf8b73bcd",
+      "process_passed": true,
+      "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 21.773,
+      "command": [
+        "/workspace/scratch/9632bd8c125f/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/9632bd8c125f/validation-worktree",
+        "--import"
+      ],
+      "log_sha256": "bfb8266d79403e5ea40181a99fb0fd4601a4e6b51b7b86df39cd376867c911b1",
+      "process_passed": true,
+      "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.123,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/9632bd8c125f/validation-worktree/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "int30_building_templates_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 11.071,
+      "command": [
+        "/workspace/scratch/9632bd8c125f/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/9632bd8c125f/validation-worktree",
+        "--script",
+        "res://tests/int30_building_templates_test.gd"
+      ],
+      "log_sha256": "d613de59fcfefea94610f6564893482463a337a40c6773f65f17c816b679dbb7",
+      "contract": "blueprints",
+      "process_passed": true,
+      "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "modular_assembly_framework_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 7.417,
+      "command": [
+        "/workspace/scratch/9632bd8c125f/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/9632bd8c125f/validation-worktree",
+        "--script",
+        "res://tests/modular_assembly_framework_test.gd"
+      ],
+      "log_sha256": "f226344c8fbca0c2ad1cee6a6283f866ee093c8949c3b742470990c65b79bd4b",
+      "contract": "blueprints",
+      "process_passed": true,
+      "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "blueprint_contract_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 14.48,
+      "command": [
+        "/workspace/scratch/9632bd8c125f/runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/9632bd8c125f/validation-worktree",
+        "--script",
+        "res://tests/blueprint_contract_test.gd"
+      ],
+      "log_sha256": "5b9d88baa816aa687d1894dc112a6ff98efe76e29fcea19869ebca953f5f3bfc",
+      "contract": "blueprints",
+      "process_passed": true,
+      "source_sha256": "45dc45d1b02760087a5171d7dd44ffd199048b1529ef8c6171a3f61059ef4987",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": true
+    }
+  ]
+}

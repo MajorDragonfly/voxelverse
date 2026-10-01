@@ -1,0 +1,10 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SPHERE_LOAD {"error":"","loading":true,"milliseconds":225093,"scene":"res://main/spherical_campaign.tscn","startup":{"context":{"body_id":"body_16be1196e5297bf0cc2286807ae8bedb","resource_cached":false,"scene":"res://main/spherical_campaign.tscn","seed":15838},"error":"","last_phase":"start_terrain","schema":1,"segments":[{"completed":true,"duration_ms":103.263,"phase":"prepare_state","start_ms":0.0},{"completed":true,"duration_ms":2.206,"phase":"state_settle","start_ms":103.263},{"completed":true,"duration_ms":3032.992,"phase":"threaded_load","start_ms":105.469},{"completed":true,"duration_ms":0.523,"phase":"scene_instantiation","start_ms":3138.461},{"completed":true,"duration_ms":180678.816,"phase":"scene_ready","start_ms":3138.984},{"completed":false,"duration_ms":41286.517,"phase":"start_terrain","start_ms":183817.8}],"sequence":1,"status":"loading","total_ms":225104.317}}
+ERROR: Sphere campaign did not finish loading in phase start_terrain: 
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tools/int30_scenery_collision_probe.gd:235)
+       [1] _run (res://tools/int30_scenery_collision_probe.gd:22)
+       [2] _open (res://core/diagnostics/spherical_campaign_probe.gd:176)
+INT30_SCENERY_WORLD {"evidence":{},"failures":1,"passed":false}

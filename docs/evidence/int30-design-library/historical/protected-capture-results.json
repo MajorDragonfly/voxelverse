@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "status": "timed_out",
+  "budget_seconds": 180,
+  "attempts": 2,
+  "screenshots": [],
+  "first_attempt": "frame_post_draw wait",
+  "second_attempt": "force_draw + sync",
+  "scope": "Supplementary final protected-receiver native capture. Headless protected-receiver assertions pass; no screenshot success is claimed."
+}

@@ -1,0 +1,31 @@
+--- a/civilization/buildings/building_builder.gd
++++ b/civilization/buildings/building_builder.gd
+@@ -643,3 +643,28 @@
+ func _commit_campaign() -> bool:
+ 	var saves := get_node_or_null("/root/SaveGameService")
+ 	return saves == null or bool(saves.call("save_now"))
++
++
++## INT30-17: callable bridge for Chat 14's reviewed file-dialog/preview UI.
++## Inbox import is device-local; adoption and normal editor saving are separate.
++func export_exchange_file(destination: String, metadata: Dictionary = {}) -> Dictionary:
++	return preload("res://assembly/exchange/building_design_exchange.gd").export_file(blueprint, destination, metadata)
++
++
++func import_exchange_file(source: String) -> Dictionary:
++	return preload("res://assembly/exchange/building_design_exchange.gd").import_file(source)
++
++
++## Returns a proposed independent draft, without changing editor history,
++## saving, placing a building or granting campaign progress.
++func prepare_exchange_editor_copy(package: Dictionary) -> Dictionary:
++	var state := get_node_or_null("/root/GameState")
++	var saves := get_node_or_null("/root/SaveGameService")
++	if state == null or saves == null or not saves.session_active:
++		return {"ok": false, "code": "no_campaign"}
++	if saves.is_phase_transition_active(): return {"ok": false, "code": "transition_active"}
++	if int(state.current_phase) < state.Phase.ANCIENT_MEDIEVAL:
++		return {"ok": false, "code": "phase_not_editable"}
++	if blueprint.has("_protected_design_source") or not Blueprint.Contract.inspect(blueprint, "building").ok:
++		return {"ok": false, "code": "protected_target"}
++	return preload("res://assembly/exchange/building_blueprint_package.gd").prepare_working_copy(package)

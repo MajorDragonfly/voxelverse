@@ -5822,3 +5822,1977 @@ msgstr "Unbekanntes Nest · Scannen %d %%"
 
 msgid "LIVING_NEST_AIMED"
 msgstr "Entdecktes Nest"
+
+msgid "BP_DESIGN_REVISION"
+msgstr "Entwurf: {id} · Revision {revision}"
+
+msgid "BP_REVISION"
+msgstr "Revision {revision}"
+
+msgid "BP_TAGS"
+msgstr "Tags: {tags}"
+
+msgid "BP_USABLE"
+msgstr "Verwendbar"
+
+msgid "BP_RESTRICTED"
+msgstr "Eingeschränkt – Details prüfen"
+
+msgid "BP_SORT_DEFAULT"
+msgstr "Sortierung: Vorhandene Reihenfolge"
+
+msgid "BP_SORT_NAME"
+msgstr "Sortierung: Name A–Z"
+
+msgid "BP_SORT_REVISION"
+msgstr "Sortierung: Höchste Revision zuerst"
+
+msgid "BP_SORT_USABLE"
+msgstr "Sortierung: Verwendbare zuerst"
+
+msgid "BP_COMPARE_CURRENT"
+msgstr "Unterschiede zum aktuellen Entwurf"
+
+msgid "BP_COMPARE_UNAVAILABLE"
+msgstr "Kein aktueller Entwurf für einen Vergleich verfügbar."
+
+msgid "BP_CHANGE_BODY"
+msgstr "Körperform, Größe oder Körperteil geändert."
+
+msgid "BP_CHANGE_PART"
+msgstr "{part}: {before} → {after}"
+
+msgid "BP_CHANGE_PLACEMENT"
+msgstr "Teilanordnung oder Anschlüsse geändert."
+
+msgid "BP_CHANGE_APPEARANCE"
+msgstr "Farben, Haut oder Bemalung geändert."
+
+msgid "BP_CHANGE_STAT"
+msgstr "{stat}: {before} → {after}"
+
+msgid "BP_CHANGE_NONE"
+msgstr "Gleiche Körperform, Teile und Erscheinung."
+
+msgid "BP_START_LIMITS"
+msgstr "Verglichen wird die Startform. Die Vorlage überträgt nur den Körper; eine neue Spezies beginnt mit den normalen Startfreischaltungen."
+
+msgid "BP_ADOPT_LIMITS"
+msgstr "Die Übernahme ersetzt Körperform, Teile und Aussehen. Deine Entwurfsidentität und dein Fortschritt bleiben erhalten. Im Editor kannst du die Übernahme rückgängig machen."
+
+msgid "BP_SELECTION_FILTERED"
+msgstr "Die ausgewählte Vorlage ist durch die Suche oder Filter ausgeblendet. Ändere die Filter oder wähle ein sichtbares Ergebnis."
+
+msgid "BP_SELECTION_CHANGED"
+msgstr "Entwurf oder Vorlage haben sich geändert. Prüfe die aktualisierten Details vor der Übernahme."
+
+msgid "BP_ERROR_PART_MISSING"
+msgstr "Benötigtes Teil nicht verfügbar: {part}. Die Originaldatei bleibt erhalten."
+
+msgid "BP_ERROR_CATALOG"
+msgstr "Diese Vorlage benötigt eine nicht unterstützte Teilekatalog-Version oder Teilrevision. Die Originaldatei bleibt erhalten."
+
+msgid "BP_METRIC_HEALTH"
+msgstr "Leben"
+
+msgid "BP_METRIC_SPEED"
+msgstr "Tempo"
+
+msgid "BP_METRIC_ATTACK"
+msgstr "Angriff"
+
+msgid "BP_METRIC_DEFENSE"
+msgstr "Verteidigung"
+
+msgid "BP_METRIC_PERCEPTION"
+msgstr "Wahrnehmung"
+
+msgid "BP_METRIC_GRIP"
+msgstr "Greifen"
+
+msgid "BP_METRIC_DIET_PLANT"
+msgstr "Pflanzennahrung"
+
+msgid "BP_METRIC_DIET_MEAT"
+msgstr "Fleischnahrung"
+
+msgid "BP_METRIC_SWIM"
+msgstr "Schwimmen"
+
+msgid "BP_METRIC_FLIGHT"
+msgstr "Fliegen"
+
+msgid "BP_METRIC_HUNGER_DRAIN"
+msgstr "Nahrungsverbrauch"
+
+msgid "BP_METRIC_COMPLEXITY"
+msgstr "Formpunkte"
+
+msgid "BP_BODY_DIMENSIONS"
+msgstr "Körpermaße (Breite/Höhe/Länge): {before} → {after}"
+
+msgid "OWNED_ORDERS_ALL"
+msgstr "Alle Aufträge"
+
+msgid "OWNED_ORDER_FILTER"
+msgstr "Nach Auftrag filtern"
+
+msgid "OWNED_SORT"
+msgstr "Sortierung wählen"
+
+msgid "OWNED_SORT_NAME"
+msgstr "Name · A–Z"
+
+msgid "OWNED_SORT_SPECIES"
+msgstr "Art · A–Z"
+
+msgid "OWNED_SORT_TRUST"
+msgstr "Vertrauen · höchstes zuerst"
+
+msgid "OWNED_SORT_ORDER"
+msgstr "Auftrag · gruppiert"
+
+msgid "OWNED_RECORDED_ROLE"
+msgstr "Belegte Art-Eignung: {roles}"
+
+msgid "OWNED_ROLE_UNOBSERVED"
+msgstr "Art-Eignung nicht bekannt. Ein vollständiger, unterstützter Art-Scan fehlt."
+
+msgid "OWNED_ROLE_NOTICE"
+msgstr "Art-Eignung ist keine laufende Produktion. Tierplatz, Versorgung und tatsächliche Erträge werden hier nicht beobachtet."
+
+msgid "OWNED_LOCATION_NOTICE"
+msgstr "Ort aus dem Tierbestand; Aktualität und Ankunft sind nicht beobachtbar. Das Auftragsziel ist kein Ankunftsnachweis."
+
+msgid "OWNED_ORDER_DETAIL"
+msgstr "Aktueller Auftrag: {order}"
+
+msgid "SY_TITLE"
+msgstr "VOXELVERSE  /  SCHIFFSWERFT"
+
+msgid "SY_CENTER"
+msgstr "Ansicht zentrieren"
+
+msgid "SY_NEW_EXPEDITION"
+msgstr "Neue Expedition"
+
+msgid "SY_NEW_LANDER"
+msgstr "Neues Beiboot"
+
+msgid "SY_SAVE"
+msgstr "Speichern"
+
+msgid "SY_COPY"
+msgstr "Als Kopie"
+
+msgid "SY_OPEN"
+msgstr "Entwürfe öffnen"
+
+msgid "SY_UNDO"
+msgstr "Rückgängig"
+
+msgid "SY_REDO"
+msgstr "Wiederholen"
+
+msgid "SY_MODULES"
+msgstr "MODULE"
+
+msgid "SY_SEARCH"
+msgstr "Modul suchen …"
+
+msgid "SY_SYMMETRY"
+msgstr "Symmetrisch anbauen"
+
+msgid "SY_PREVIEW"
+msgstr "Bauvorschau"
+
+msgid "SY_ADD"
+msgstr "Modul hinzufügen"
+
+msgid "SY_INSTALLED"
+msgstr "VERBAUT"
+
+msgid "SY_NAME"
+msgstr "Name des Entwurfs"
+
+msgid "SY_CONTROLS"
+msgstr "Klick: Auswahl · Rechts: drehen · Mitte: verschieben · Rad: Zoom · R: drehen"
+
+msgid "SY_ROTATE"
+msgstr "90° drehen"
+
+msgid "SY_MIRROR"
+msgstr "Spiegelkopie"
+
+msgid "SY_REMOVE"
+msgstr "Entfernen"
+
+msgid "SY_EQUIPMENT"
+msgstr "AUSSTATTUNG"
+
+msgid "SY_VALIDATION"
+msgstr "ENTWURFSPRÜFUNG"
+
+msgid "SY_CHECK_FIT"
+msgstr "Hangar mit Entwurf prüfen"
+
+msgid "SY_NOTICE"
+msgstr "Entwurfswerkstatt · Module verändern die berechneten Werte. Flug, Forschung und Baukosten werden später an die Kampagne angeschlossen."
+
+msgid "SY_UNSAVED"
+msgstr "Ungespeicherter Entwurf"
+
+msgid "SY_DISCARD_QUESTION"
+msgstr "Änderungen verwerfen und fortfahren?"
+
+msgid "SY_DISCARD"
+msgstr "Verwerfen"
+
+msgid "SY_BACK"
+msgstr "Zurück"
+
+msgid "SY_SAVE_CONTINUE"
+msgstr "Speichern & weiter"
+
+msgid "SY_KEEP_OPEN"
+msgstr "Der Entwurf bleibt geöffnet."
+
+msgid "SY_LIBRARY"
+msgstr "Gespeicherte Schiffsentwürfe"
+
+msgid "SY_LIBRARY_SEARCH"
+msgstr "Entwürfe nach Name filtern …"
+
+msgid "SY_PREVIOUS"
+msgstr "Vorherige Seite"
+
+msgid "SY_NEXT"
+msgstr "Weitere Entwürfe"
+
+msgid "SY_USE"
+msgstr "Ausgewählten Entwurf verwenden"
+
+msgid "SY_CLOSE"
+msgstr "Schließen"
+
+msgid "SY_NONE"
+msgstr "Keine Auswahl"
+
+msgid "SY_NO_MODULES"
+msgstr "Keine passenden Module."
+
+msgid "SY_FIT_PICKER"
+msgstr "Hangarprüfung · Gegenstück auswählen"
+
+msgid "SY_LIBRARY_LOADING"
+msgstr "Entwürfe werden gelesen …"
+
+msgid "SY_LIBRARY_EMPTY"
+msgstr "Keine weiteren passenden Entwürfe gefunden."
+
+msgid "SY_SAVE_QUESTION"
+msgstr "Entwurf speichern oder Änderungen verwerfen?"
+
+msgid "SY_FIT_HINT"
+msgstr "Hangarprüfung verwendet die tatsächlichen Abmessungen beider Entwürfe."
+
+msgid "SY_VALID"
+msgstr "✓ Entwurf vollständig"
+
+msgid "SY_EDIT_PAIR"
+msgstr "Modulpaar anbauen"
+
+msgid "SY_EDIT_MOVE"
+msgstr "Modul verschieben"
+
+msgid "SY_EDIT_ROTATE"
+msgstr "Modul drehen"
+
+msgid "SY_EDIT_REMOVE"
+msgstr "Modul entfernen"
+
+msgid "SY_EDIT_RENAME"
+msgstr "Umbenennen"
+
+msgid "SY_NAME_REQUIRED"
+msgstr "Bitte einen Namen eingeben."
+
+msgid "SY_NAME_PENDING"
+msgstr "Name geändert · noch nicht gespeichert"
+
+msgid "SY_TEMPLATE_OPEN"
+msgstr "Vorlage geöffnet. Bearbeite sie frei und speichere deinen eigenen Entwurf."
+
+msgid "SY_ROLE_LANDER"
+msgstr "Beiboot"
+
+msgid "SY_ROLE_EXPEDITION"
+msgstr "Expedition"
+
+msgid "SY_ROLE_BOTH"
+msgstr "Expedition und Beiboot"
+
+msgid "SY_MODULE_HULL_S"
+msgstr "Rumpf · Beiboot"
+
+msgid "SY_MODULE_COCKPIT"
+msgstr "Cockpit"
+
+msgid "SY_MODULE_DRIVE_S"
+msgstr "Landungsantrieb"
+
+msgid "SY_MODULE_REACTOR_S"
+msgstr "Kompaktreaktor"
+
+msgid "SY_MODULE_BATTERY_S"
+msgstr "Batteriemodul"
+
+msgid "SY_MODULE_CARGO_S"
+msgstr "Frachtmodul · klein"
+
+msgid "SY_MODULE_LANDING_GEAR"
+msgstr "Landegestell"
+
+msgid "SY_MODULE_HULL_L"
+msgstr "Expeditionsrumpf"
+
+msgid "SY_MODULE_BRIDGE"
+msgstr "Kommandobrücke"
+
+msgid "SY_MODULE_DRIVE_L"
+msgstr "Expeditionsantrieb"
+
+msgid "SY_MODULE_REACTOR_L"
+msgstr "Hauptreaktor"
+
+msgid "SY_MODULE_CARGO_L"
+msgstr "Frachtsektion"
+
+msgid "SY_MODULE_HANGAR"
+msgstr "Beiboot-Hangar"
+
+msgid "SY_MODULE_LABORATORY"
+msgstr "Forschungslabor"
+
+msgid "SY_MODULE_HABITAT"
+msgstr "Besatzungsquartier"
+
+msgid "SY_CATEGORY_ALL"
+msgstr "Alle Bereiche"
+
+msgid "SY_CATEGORY_HULL"
+msgstr "Rumpf"
+
+msgid "SY_CATEGORY_DRIVE"
+msgstr "Antrieb"
+
+msgid "SY_CATEGORY_POWER"
+msgstr "Energie"
+
+msgid "SY_CATEGORY_CARGO"
+msgstr "Fracht"
+
+msgid "SY_CATEGORY_HANGAR"
+msgstr "Hangar"
+
+msgid "SY_CATEGORY_RESEARCH"
+msgstr "Forschung"
+
+msgid "SY_CATEGORY_CREW"
+msgstr "Besatzung"
+
+msgid "SY_SIDE_0"
+msgstr "Rechts (+X)"
+
+msgid "SY_SIDE_1"
+msgstr "Links (−X)"
+
+msgid "SY_SIDE_2"
+msgstr "Oben (+Y)"
+
+msgid "SY_SIDE_3"
+msgstr "Unten (−Y)"
+
+msgid "SY_SIDE_4"
+msgstr "Vorne (−Z)"
+
+msgid "SY_SIDE_5"
+msgstr "Hinten (+Z)"
+
+msgid "SY_YAW"
+msgstr "Drehung: {yaw}°"
+
+msgid "SY_VIEW_PERSPECTIVE"
+msgstr "Perspektive"
+
+msgid "SY_VIEW_TOP"
+msgstr "Oben"
+
+msgid "SY_VIEW_FRONT"
+msgstr "Vorne"
+
+msgid "SY_VIEW_SIDE"
+msgstr "Seite"
+
+msgid "SY_MODULE_DETAILS"
+msgstr "Geeignet: {role}\nAbmessungen X × Y × Z: {size} m"
+
+msgid "SY_MODULE_ROTATION"
+msgstr "Drehung um Y: {yaw}°"
+
+msgid "SY_BAY_INTERIOR"
+msgstr "Hangar innen X × Y × Z: {size} m"
+
+msgid "SY_STAT_MASS"
+msgstr "Masse: {value} t"
+
+msgid "SY_STAT_THRUST"
+msgstr "Schub: {value}"
+
+msgid "SY_STAT_POWER"
+msgstr "Stromerzeugung: {value}"
+
+msgid "SY_STAT_DRAW"
+msgstr "Strombedarf: {value}"
+
+msgid "SY_STAT_ENERGY"
+msgstr "Energiespeicher: {value}"
+
+msgid "SY_STAT_CARGO"
+msgstr "Frachtkapazität: {value}"
+
+msgid "SY_STAT_SEATS"
+msgstr "Sitze: {value}"
+
+msgid "SY_STAT_RESEARCH"
+msgstr "Labore: {value}"
+
+msgid "SY_STAT_STRUCTURE"
+msgstr "Rumpfmodule: {value}"
+
+msgid "SY_STAT_COMMAND"
+msgstr "Kommandostellen: {value}"
+
+msgid "SY_STAT_LANDING"
+msgstr "Landegestelle: {value}"
+
+msgid "SY_STAT_COST"
+msgstr "Baukosten (Planwert): {value}"
+
+msgid "SY_CATALOG_SELECTED"
+msgstr "{module} ausgewählt · Anschluss und Vorschau prüfen"
+
+msgid "SY_ACTION_PENDING"
+msgstr "{action} · noch nicht gespeichert"
+
+msgid "SY_SAVED"
+msgstr "{name} · Revision {revision} gespeichert"
+
+msgid "SY_SAVED_DRAFT"
+msgstr "{name} · Revision {revision} gespeichert (unvollständiger Entwurf)"
+
+msgid "SY_COPY_SAVED"
+msgstr "Eigene Kopie gespeichert: {name}"
+
+msgid "SY_OPENED"
+msgstr "{name} · Revision {revision} geöffnet"
+
+msgid "SY_LIBRARY_PROGRESS"
+msgstr "Entwürfe werden gelesen … {count} gefunden"
+
+msgid "SY_LIBRARY_ENTRY"
+msgstr "{name} · Rev. {revision}"
+
+msgid "SY_LIBRARY_UNREADABLE"
+msgstr "{name} · nicht lesbar"
+
+msgid "SY_LIBRARY_PAGE"
+msgstr "Seite {page} · {count} Entwürfe"
+
+msgid "SY_STATS"
+msgstr "{role} · {modules} / {limit} Module\nGröße X × Y × Z: {size} m\nMasse: {mass} t · Schub: {thrust}\nStrom: {power} / {draw} Bedarf\nEnergiespeicher: {energy}\nFracht: {cargo} · Sitze: {seats}\nLabore: {research} · Hangars: {bays}\nBaukosten (Planwert): {cost}"
+
+msgid "SY_ISSUE_HINT"
+msgstr "Fehler anklicken: betroffene Module und Hinweise anzeigen. Unvollständige Entwürfe können gespeichert werden."
+
+msgid "SY_ISSUE_COUNT"
+msgstr "{count} offene Entwurfsfehler"
+
+msgid "SY_WHOLE_DESIGN"
+msgstr "Gesamter Entwurf"
+
+msgid "SY_MORE_MODULES"
+msgstr "{modules} und {count} weitere"
+
+msgid "SY_FIX_GENERIC"
+msgstr "Module und Ausstattung prüfen. Änderungen lassen sich rückgängig machen."
+
+msgid "SY_PLACEMENT_FREE"
+msgstr "Bauplatz frei · {count} Modul(e)"
+
+msgid "SY_PLACEMENT_BLOCKED"
+msgstr "Anbau: {error}"
+
+msgid "SY_FIT_PAIR"
+msgstr "Hangarprüfung: {guest} (Rev. {guest_revision}) → {host} (Rev. {host_revision})"
+
+msgid "SY_FIT_INVALID"
+msgstr "{name}: {count} Entwurfsfehler – zuerst beheben."
+
+msgid "SY_FIT_GUEST"
+msgstr "Beiboot außen X × Y × Z: {size} m"
+
+msgid "SY_FIT_BAY"
+msgstr "Hangar #{number} innen X × Y × Z: {size} m"
+
+msgid "SY_FIT_ORIENTATION_OK"
+msgstr "{yaw}°: {size} m – passt. Freiraum je Seite X/Y/Z: {space} m"
+
+msgid "SY_FIT_ORIENTATION_FAIL"
+msgstr "{yaw}°: {size} m – zu groß. Überschreitung X/Y/Z: {excess} m"
+
+msgid "SY_FIT_SUCCESS"
+msgstr "{guest} passt in {host} ({yaw}°)."
+
+msgid "SY_FIT_SCOPE"
+msgstr "Geometrische Passprüfung, mittig ohne Versatz. 180°/270° haben die Maße von 0°/90°. Einflug, Flugverhalten und Kampagnenfreischaltung werden hier nicht geprüft."
+
+msgid "SY_ERROR_OVERLAP"
+msgstr "Module überlappen sich."
+
+msgid "SY_ERROR_DISCONNECTED"
+msgstr "Modul hat keine Verbindung zum Rumpf."
+
+msgid "SY_ERROR_NO_HULL"
+msgstr "Ein Rumpfmodul fehlt."
+
+msgid "SY_ERROR_COMMAND_COUNT"
+msgstr "Genau eine Brücke / ein Cockpit erforderlich."
+
+msgid "SY_ERROR_POWER_DEFICIT"
+msgstr "Die Stromerzeugung reicht nicht für alle Module."
+
+msgid "SY_ERROR_NO_ENERGY"
+msgstr "Ein Energiespeicher fehlt."
+
+msgid "SY_ERROR_THRUST_DEFICIT"
+msgstr "Der Antrieb ist für die Masse zu schwach."
+
+msgid "SY_ERROR_NO_CARGO"
+msgstr "Ein Frachtmodul fehlt."
+
+msgid "SY_ERROR_NO_LANDING"
+msgstr "Ein Landegestell fehlt."
+
+msgid "SY_ERROR_NO_HANGAR"
+msgstr "Ein Beiboot-Hangar fehlt."
+
+msgid "SY_ERROR_SIZE_LIMIT"
+msgstr "Der Entwurf überschreitet den Baubereich."
+
+msgid "SY_ERROR_MODULE_ROLE"
+msgstr "Modul passt nicht zu diesem Schiffstyp."
+
+msgid "SY_ERROR_MODULE_LIMIT"
+msgstr "Maximal 128 Module je Entwurf."
+
+msgid "SY_ERROR_HANGAR_SMALL"
+msgstr "Das Beiboot passt nicht in den Hangar."
+
+msgid "SY_ERROR_INVALID_DESIGN"
+msgstr "Zuerst die Entwurfsfehler beheben."
+
+msgid "SY_ERROR_WRITE"
+msgstr "Speichern fehlgeschlagen. Der Entwurf bleibt geöffnet."
+
+msgid "SY_ERROR_PROTECTED"
+msgstr "Die Originaldatei ist beschädigt oder neuer und bleibt geschützt."
+
+msgid "SY_ERROR_DIFFERENT"
+msgstr "Die Zieldatei gehört zu einem anderen Entwurf."
+
+msgid "SY_ERROR_VERSION"
+msgstr "Die Schiffversion wird noch nicht unterstützt."
+
+msgid "SY_ERROR_MODULE_VERSION"
+msgstr "Die Modulversion wird noch nicht unterstützt."
+
+msgid "SY_ERROR_UNKNOWN_MODULE"
+msgstr "Ein benötigtes Modul ist nicht installiert."
+
+msgid "SY_ERROR_MISSING"
+msgstr "Die Datei wurde nicht gefunden."
+
+msgid "SY_ERROR_FUTURE"
+msgstr "Der Bauplan benötigt eine neuere Version."
+
+msgid "SY_ERROR_ANCHOR"
+msgstr "Wähle zuerst ein Modul als Anschluss."
+
+msgid "SY_ERROR_MIRROR_CENTER"
+msgstr "Das Modul liegt bereits auf der Mittelachse."
+
+msgid "SY_ERROR_PLACEMENT"
+msgstr "Diese Platzierung wird nicht unterstützt."
+
+msgid "SY_ERROR_IDENTITY"
+msgstr "Bitte einen Namen für den Entwurf eingeben."
+
+msgid "SY_ERROR_READ"
+msgstr "Die Datei konnte nicht gelesen werden. Der Entwurf bleibt geöffnet."
+
+msgid "SY_ERROR_REVISION"
+msgstr "Die maximale Entwurfsrevision ist erreicht. Als Kopie speichern."
+
+msgid "SY_ERROR_FILE_SIZE"
+msgstr "Die Entwurfsdatei überschreitet die unterstützte Dateigröße."
+
+msgid "SY_ERROR_OTHER"
+msgstr "Der Entwurf konnte nicht verarbeitet werden ({code})."
+
+msgid "SY_FIX_OVERLAP"
+msgstr "Betroffene Module mit X/Y/Z auseinander bewegen oder eines entfernen."
+
+msgid "SY_FIX_DISCONNECTED"
+msgstr "Modul an eine freie Fläche eines mit dem Rumpf verbundenen Moduls setzen. Kantenkontakt reicht nicht."
+
+msgid "SY_FIX_NO_HULL"
+msgstr "Ein Rumpfmodul aus dem Modulbereich hinzufügen."
+
+msgid "SY_FIX_COMMAND_COUNT"
+msgstr "Genau eine passende Kommandobrücke oder ein Cockpit verbauen."
+
+msgid "SY_FIX_POWER_DEFICIT"
+msgstr "Stromerzeugung und Bedarf unter Ausstattung vergleichen; einen Reaktor hinzufügen oder Verbraucher entfernen."
+
+msgid "SY_FIX_NO_ENERGY"
+msgstr "Ein Batterie- oder Reaktormodul mit Energiespeicher hinzufügen."
+
+msgid "SY_FIX_THRUST_DEFICIT"
+msgstr "Schub und Masse unter Ausstattung vergleichen; Antrieb ergänzen oder Masse reduzieren."
+
+msgid "SY_FIX_NO_CARGO"
+msgstr "Ein passendes Frachtmodul hinzufügen."
+
+msgid "SY_FIX_NO_LANDING_GEAR"
+msgstr "Ein Landegestell für das Beiboot hinzufügen."
+
+msgid "SY_FIX_NO_HANGAR"
+msgstr "Einen Beiboot-Hangar an die Expedition anbauen."
+
+msgid "SY_FIX_SIZE_LIMIT"
+msgstr "Module näher zusammen anordnen oder überstehende Module entfernen."
+
+msgid "SY_FIX_MODULE_ROLE"
+msgstr "Das betroffene Modul entfernen und eines für diesen Schiffstyp wählen."
+
+msgid "SY_ISSUE_OVERLAP"
+msgstr "Module überlappen"
+
+msgid "SY_ISSUE_DISCONNECTED"
+msgstr "Anschluss fehlt"
+
+msgid "SY_ISSUE_NO_HULL"
+msgstr "Rumpf fehlt"
+
+msgid "SY_ISSUE_COMMAND_COUNT"
+msgstr "Kommandostelle prüfen"
+
+msgid "SY_ISSUE_POWER_DEFICIT"
+msgstr "Strom reicht nicht"
+
+msgid "SY_ISSUE_NO_ENERGY"
+msgstr "Energiespeicher fehlt"
+
+msgid "SY_ISSUE_THRUST_DEFICIT"
+msgstr "Schub reicht nicht"
+
+msgid "SY_ISSUE_NO_CARGO"
+msgstr "Frachtmodul fehlt"
+
+msgid "SY_ISSUE_NO_LANDING_GEAR"
+msgstr "Landegestell fehlt"
+
+msgid "SY_ISSUE_NO_HANGAR"
+msgstr "Beiboot-Hangar fehlt"
+
+msgid "SY_ISSUE_SIZE_LIMIT"
+msgstr "Baubereich überschritten"
+
+msgid "SY_ISSUE_MODULE_ROLE"
+msgstr "Falscher Modultyp"
+
+msgid "CG_TITLE"
+msgstr "Community-Galerie"
+
+msgid "CG_SEARCH"
+msgstr "Suchen"
+
+msgid "CG_QUERY"
+msgstr "Titel oder Autor suchen (max. 120 UTF-8-Bytes)"
+
+msgid "CG_IDLE"
+msgstr "Suche ausdrücklich starten. Der Dienst wird erst dann kontaktiert."
+
+msgid "CG_UNAVAILABLE"
+msgstr "Kein gültiger Community-Dienst konfiguriert."
+
+msgid "CG_LOADING"
+msgstr "Ergebnisse werden geladen …"
+
+msgid "CG_RESULTS"
+msgstr "Ergebnisse auf dieser Seite: {count}."
+
+msgid "CG_EMPTY"
+msgstr "Keine Ergebnisse auf dieser Seite."
+
+msgid "CG_SELECT"
+msgstr "Wähle einen Entwurf für Details."
+
+msgid "CG_PREVIOUS"
+msgstr "Zurück"
+
+msgid "CG_NEXT"
+msgstr "Weiter"
+
+msgid "CG_PAGE"
+msgstr "Seite {page}"
+
+msgid "CG_ORIGIN"
+msgstr "Autor: {author}\nDienst: {service}"
+
+msgid "CG_REVISION"
+msgstr "Entwurf: {id}\nRevision {revision} · {bytes} Bytes"
+
+msgid "CG_SHORT_REVISION"
+msgstr "Revision {revision}"
+
+msgid "CG_REQUIREMENTS_UNKNOWN"
+msgstr "Anforderungen noch unbekannt: Der Katalog liefert keine Teileliste. Das geprüfte Paket zeigt sie nach der Übernahme."
+
+msgid "CG_REQUIREMENTS"
+msgstr "Benötigte Teile: {parts}"
+
+msgid "CG_USE_LOCAL"
+msgstr "Verwendbarkeit in der lokalen Bibliothek prüfen."
+
+msgid "CG_DOWNLOAD"
+msgstr "In lokale Bibliothek übernehmen"
+
+msgid "CG_DOWNLOADING"
+msgstr "Wird heruntergeladen und geprüft …"
+
+msgid "CG_NOT_DOWNLOADED"
+msgstr "Noch nicht heruntergeladen."
+
+msgid "CG_LOCAL_UNVERIFIED"
+msgstr "Diese Identität ist lokal vorhanden; der Dienstinhalt wurde noch nicht abgeglichen."
+
+msgid "CG_IMPORTED"
+msgstr "Geprüft in der lokalen Bibliothek vorhanden."
+
+msgid "CG_CANCELLED"
+msgstr "Abgebrochen. Die lokale Bibliothek blieb unverändert."
+
+msgid "CG_OFFLINE"
+msgstr "Dienst nicht erreichbar. Erneut suchen oder später versuchen."
+
+msgid "CG_TIMEOUT"
+msgstr "Der Dienst hat nicht rechtzeitig geantwortet. Erneut versuchen."
+
+msgid "CG_QUERY_LIMIT"
+msgstr "Die Suche darf höchstens 120 UTF-8-Bytes enthalten."
+
+msgid "CG_BUSY"
+msgstr "Eine Anfrage läuft bereits."
+
+msgid "CG_HTTP_ERROR"
+msgstr "Dienst antwortet mit HTTP {status}. Erneut versuchen."
+
+msgid "CG_INVALID_RESPONSE"
+msgstr "Antwort ungültig oder Paketprüfung fehlgeschlagen. Es wurde nichts übernommen."
+
+msgid "CG_SERVICE_VERSION"
+msgstr "Die Dienstversion wird nicht unterstützt."
+
+msgid "CG_PAGE_BUDGET"
+msgstr "Das Seitenlimit ist erreicht. Grenze die Suche ein."
+
+msgid "CG_END"
+msgstr "Keine weitere Seite verfügbar."
+
+msgid "SHIP_EXCHANGE_IMPORT"
+msgstr "Schiffsentwurf importieren"
+
+msgid "SHIP_EXCHANGE_EXPORT"
+msgstr "Schiffsentwurf exportieren"
+
+msgid "SHIP_EXCHANGE_IMPORTED"
+msgstr "Entwurf lokal gespeichert. Zum Bearbeiten zuerst als Kopie speichern. Es wurde kein Schiff gebaut."
+
+msgid "SHIP_EXCHANGE_EXPORTED"
+msgstr "Gespeicherte Entwurfsrevision exportiert."
+
+msgid "SHIP_EXCHANGE_ALREADY_PRESENT"
+msgstr "Diese Entwurfsrevision ist bereits vorhanden."
+
+msgid "SHIP_EXCHANGE_UNSAVED_DESIGN"
+msgstr "Entwurf zuerst speichern; ungespeicherte Änderungen können nicht als gespeicherte Revision exportiert werden."
+
+msgid "SHIP_EXCHANGE_INVALID_METADATA"
+msgstr "Titel, Autor oder Tags sind ungültig oder zu lang."
+
+msgid "SHIP_EXCHANGE_INVALID_PROVENANCE"
+msgstr "Die Herkunftsdaten sind ungültig oder enthalten zu viele Quellen."
+
+msgid "SHIP_EXCHANGE_MISSING_MODULE"
+msgstr "Ein ursprüngliches Modul fehlt. Der Ersatz kann nicht als Original exportiert werden."
+
+msgid "SHIP_EXCHANGE_UNSUPPORTED_VERSION"
+msgstr "Diese Paket- oder Katalogversion wird nicht unterstützt. Die Originaldatei bleibt erhalten."
+
+msgid "SHIP_EXCHANGE_INVALID_PACKAGE"
+msgstr "Das Paket enthält ungültige oder unbekannte Felder."
+
+msgid "SHIP_EXCHANGE_PACKAGE_TOO_LARGE"
+msgstr "Das Paket überschreitet die zulässige Dateigröße."
+
+msgid "SHIP_EXCHANGE_INVALID_IDENTITY"
+msgstr "Die Entwurfskennung oder der Titel fehlt."
+
+msgid "SHIP_EXCHANGE_IDENTITY_MISMATCH"
+msgstr "Kennung oder Revision im Paket passt nicht zum enthaltenen Entwurf."
+
+msgid "SHIP_EXCHANGE_REQUIREMENTS_MISMATCH"
+msgstr "Die Modulanforderungen passen nicht zum Entwurf."
+
+msgid "SHIP_EXCHANGE_INVALID_JSON"
+msgstr "Die Datei enthält kein gültiges Entwurfspaket."
+
+msgid "SHIP_EXCHANGE_READ_FAILED"
+msgstr "Die Datei konnte nicht gelesen werden."
+
+msgid "SHIP_EXCHANGE_PROTECTED_DESTINATION"
+msgstr "Die vorhandene Zieldatei kann nicht sicher gelesen werden und bleibt erhalten."
+
+msgid "SHIP_EXCHANGE_DESTINATION_CONFLICT"
+msgstr "Am Ziel liegt bereits ein anderer Inhalt. Bitte einen neuen Dateinamen wählen."
+
+msgid "SHIP_EXCHANGE_WRITE_FAILED"
+msgstr "Schreiben fehlgeschlagen. Es wurde kein Entwurf veröffentlicht."
+
+msgid "SHIP_EXCHANGE_LIBRARY_LIMIT"
+msgstr "Der lokale Entwurfsordner überschreitet das Austauschlimit."
+
+msgid "SHIP_EXCHANGE_PROTECTED_LIBRARY"
+msgstr "Ein Entwurf im Zielordner kann nicht sicher geprüft werden. Vorhandene Originale bleiben erhalten."
+
+msgid "SHIP_EXCHANGE_REVISION_CONFLICT"
+msgstr "Dieselbe Kennung und Revision ist mit anderem Inhalt vorhanden. Das Original bleibt erhalten."
+
+msgid "SHIP_EXCHANGE_DRAFT"
+msgstr "Bearbeitbarer Entwurf; noch nicht flugbereit."
+
+msgid "TG_EXPLAIN"
+msgstr "Schritt erklären"
+
+msgid "TG_CAMERA_REASON"
+msgstr "Die Kameraübung ist noch offen."
+
+msgid "TG_CAMERA_NEXT"
+msgstr "Bewege die Stammeskamera mit den Tasten aus dem Hinweis oben."
+
+msgid "TG_SINGLE_REASON"
+msgstr "Einzelauswahl ist noch offen. Aktuell ausgewählt: {count}."
+
+msgid "TG_SINGLE_NEXT"
+msgstr "Klicke auf genau eine Bewohnerkarte."
+
+msgid "TG_GROUP_REASON"
+msgstr "Gruppenauswahl ist noch offen. Aktuell ausgewählt: {count}."
+
+msgid "TG_GROUP_NEXT"
+msgstr "Wähle mehrere Bewohner über die Bewohnerkarten oder „Alle“."
+
+msgid "TG_SELECTION_REASON"
+msgstr "Kein vorhandener Bewohner ist ausgewählt."
+
+msgid "TG_SELECTION_NEXT"
+msgstr "Wähle zuerst eine Bewohnerkarte; erteile danach den echten Auftrag."
+
+msgid "TG_STALE_SELECTION_REASON"
+msgstr "Ein Teil der Auswahl gehört nicht mehr zur aktuellen Bewohnerliste."
+
+msgid "TG_STALE_SELECTION_NEXT"
+msgstr "Wähle die Bewohner erneut in der aktuellen Liste."
+
+msgid "TG_PATHS_REASON"
+msgstr "Die Dorfwege werden noch geprüft."
+
+msgid "TG_PATHS_NEXT"
+msgstr "Warte auf die Wegeprüfung. Der bestehende Auftrag bleibt erhalten."
+
+msgid "TG_BLOCKED_REASON"
+msgstr "{name} meldet einen blockierten Weg. Das genaue Hindernis ist nicht belegt."
+
+msgid "TG_BLOCKED_NEXT"
+msgstr "Lass die Wegeprüfung laufen. Prüfe den Zielort, bevor du den Auftrag änderst."
+
+msgid "TG_BUILD_PAUSED_REASON"
+msgstr "Die laufende Baustelle ist angehalten."
+
+msgid "TG_BUILD_PAUSED_NEXT"
+msgstr "Öffne die Baustelle und wähle „Fortsetzen“."
+
+msgid "TG_BUILD_RECOVERING_REASON"
+msgstr "Material der abgebrochenen Baustelle wird zurückgebracht."
+
+msgid "TG_BUILD_RECOVERING_NEXT"
+msgstr "Lass die Rücklieferung abschließen, bevor du erneut baust."
+
+msgid "TG_BUILD_WORKERS_REASON"
+msgstr "Der laufenden Baustelle sind keine Bewohner zugeteilt."
+
+msgid "TG_BUILD_WORKERS_NEXT"
+msgstr "Wähle Bewohner und weise sie der laufenden Arbeit „{order}“ zu."
+
+msgid "TG_BUILD_MATERIALS_REASON"
+msgstr "Baustelle: {delivered}/{required} {resource} angekommen; {carried} unterwegs; {reserved} am Lager reserviert."
+
+msgid "TG_BUILD_MATERIALS_NEXT"
+msgstr "Lass die zugeteilten Bewohner das reservierte Material zur Baustelle tragen."
+
+msgid "TG_BUILD_WORKING_REASON"
+msgstr "Die Baustelle hat Material und zugeteilte Bewohner; der Abschluss ist noch offen."
+
+msgid "TG_BUILD_WORKING_NEXT"
+msgstr "Lass die echte Bauarbeit weiterlaufen. Ein Hilfeklick beendet sie nicht."
+
+msgid "TG_PLACEMENT_REJECTED_REASON"
+msgstr "Bauvorschau: {reason}"
+
+msgid "TG_PLACEMENT_REJECTED_NEXT"
+msgstr "Prüfe Auswahl und Bauplatz. Wähle einen geladenen, freien und erreichbaren Ort."
+
+msgid "TG_PLACE_REASON"
+msgstr "Die aktuelle Bauvorschau ist zulässig; sie ist noch keine Baustelle."
+
+msgid "TG_PLACE_NEXT"
+msgstr "Bestätige den Bauplatz mit Rechtsklick oder brich mit Esc ab."
+
+msgid "TG_MATERIALS_REASON"
+msgstr "Im Lager fehlen noch {count} {resource}. Getragen, aber nicht eingelagert: {carried}."
+
+msgid "TG_MATERIALS_NEXT"
+msgstr "Erteile „{order}“ und warte auf die Lieferung ins Lager; starte danach den Bau erneut."
+
+msgid "TG_TOOL_REASON"
+msgstr "Das Werkzeug fehlt; seine Materialien sind eingelagert."
+
+msgid "TG_TOOL_NEXT"
+msgstr "Erteile den Werkzeugauftrag und warte auf die echte Fertigstellung."
+
+msgid "TG_CHOOSE_BUILD_REASON"
+msgstr "Werkzeug und Material für den nächsten Arbeitsplatzausbau sind vorhanden."
+
+msgid "TG_CHOOSE_BUILD_NEXT"
+msgstr "Wähle einen Ausbau und prüfe die Bauvorschau vor dem Bestätigen."
+
+msgid "TG_CARGO_REASON"
+msgstr "{name} trägt {resource}; diese Ware ist noch nicht im Lager."
+
+msgid "TG_CARGO_NEXT"
+msgstr "Lass den Bewohner zum Lager zurückkehren. Erst die Ankunft zählt als Lieferung."
+
+msgid "TG_ORDER_REASON"
+msgstr "Eine tatsächliche Lieferung ist noch nicht beobachtet."
+
+msgid "TG_ORDER_NEXT"
+msgstr "Wähle einen Bewohner, erteile einen Sammelauftrag und warte auf die Rückkehr."
+
+msgid "TG_FEED_REASON"
+msgstr "Ein ausgewählter Bewohner braucht Nahrung; essbare Ware ist im Lager."
+
+msgid "TG_FEED_NEXT"
+msgstr "Erteile „Essen“. Erst tatsächlicher Verzehr zählt als Versorgung."
+
+msgid "TG_DRINK_REASON"
+msgstr "Ein ausgewählter Bewohner braucht Wasser; Wasser ist eingelagert."
+
+msgid "TG_DRINK_NEXT"
+msgstr "Erteile „Trinken“. Erst tatsächlicher Verbrauch zählt als Versorgung."
+
+msgid "TG_SATISFIED_REASON"
+msgstr "Die ausgewählten Bewohner sind bereits satt und ausreichend versorgt."
+
+msgid "TG_SATISFIED_NEXT"
+msgstr "Wähle einen Bewohner mit tatsächlichem Bedarf oder warte auf normalen Verbrauch."
+
+msgid "TG_ORDER_REJECTED_REASON"
+msgstr "Der echte Auftrag wurde abgelehnt: {reason}"
+
+msgid "TG_ORDER_REJECTED_NEXT"
+msgstr "Behebe den angezeigten Grund und erteile den Auftrag anschließend erneut."
+
+msgid "TG_GATHERING_REASON"
+msgstr "Ein Sammelauftrag läuft; eine Lieferung ist noch nicht angekommen."
+
+msgid "TG_GATHERING_NEXT"
+msgstr "Lass Sammlung und Rückweg weiterlaufen und prüfe den Lagerbestand."
+
+msgid "TG_SOURCE_REQUIRED_REASON"
+msgstr "Für {resource} fehlt ein gebauter Quellarbeitsplatz."
+
+msgid "TG_SOURCE_REQUIRED_NEXT"
+msgstr "Baue zuerst „{order}“ mit echten Materialien und sammle danach die Ware."
+
+msgid "TG_SOURCE_EMPTY_REASON"
+msgstr "Die vorhandenen Quellen für {resource} haben aktuell keinen Bestand."
+
+msgid "TG_SOURCE_EMPTY_NEXT"
+msgstr "Prüfe die Quellanzeige und vorhandene Produktionsausbauten; ein Auftrag erzeugt keine Ware aus leerem Bestand."
+
+msgid "TG_GATHER_REASON"
+msgstr "Für den nächsten Schritt wird eingelagerte Ware benötigt: {resource}."
+
+msgid "TG_GATHER_NEXT"
+msgstr "Erteile „{order}“ und warte auf die tatsächliche Ablieferung."
+
+msgid "TG_PROFESSION_REASON"
+msgstr "Die Berufszuweisung ist noch offen."
+
+msgid "TG_PROFESSION_NEXT"
+msgstr "Wähle Bewohner, wähle einen vorhandenen Beruf und bestätige die Zuweisung."
+
+msgid "TG_WORKPLACE_REASON"
+msgstr "Ein gebauter Arbeitsplatz ist vorhanden; die Zuweisung ist noch offen."
+
+msgid "TG_WORKPLACE_NEXT"
+msgstr "Wähle Bewohner und den erreichbaren Arbeitsplatz in der Arbeitsplatzliste."
+
+msgid "TG_NO_WORKPLACE_REASON"
+msgstr "Es ist noch kein fertiger Quellarbeitsplatz vorhanden."
+
+msgid "TG_NO_WORKPLACE_NEXT"
+msgstr "Baue zuerst einen Arbeitsplatz und warte auf dessen Fertigstellung."
+
+msgid "TG_MATERIALS_IN_TRANSIT_REASON"
+msgstr "Es fehlen {count} eingelagerte {resource}; ausreichend Ware ist bereits unterwegs."
+
+msgid "TG_MATERIALS_IN_TRANSIT_NEXT"
+msgstr "Lass die Lieferung am Lager ankommen und starte danach den Bau erneut."
+
+msgid "TG_ASSIGNED_SOURCE_EMPTY_REASON"
+msgstr "Die dem Sammler zugeordnete Quelle für {resource} ist aktuell leer."
+
+msgid "TG_ASSIGNED_SOURCE_EMPTY_NEXT"
+msgstr "Prüfe diese Quelle. Wähle einen vorhandenen Arbeitsplatz mit Bestand oder warte auf dessen echte Erneuerung."
+
+msgid "TG_PLACE_TARGET_REASON"
+msgstr "Die Platzierung ist offen; aktuell ist keine Bauvorschau am Boden vorhanden."
+
+msgid "TG_PLACE_TARGET_NEXT"
+msgstr "Bewege den Mauszeiger auf geladenen Boden außerhalb der Bedienfelder und prüfe die Bauvorschau."
+
+msgid "APPEARANCE_TITLE"
+msgstr "Farben & Haut"
+
+msgid "APPEARANCE_COSMETIC"
+msgstr "Nur das Aussehen ändert sich."
+
+msgid "APPEARANCE_RESET"
+msgstr "Farben & Haut zurücksetzen"
+
+msgid "APPEARANCE_APPLY_PALETTE"
+msgstr "Diese fünf Farben übernehmen"
+
+msgid "APPEARANCE_CUSTOM"
+msgstr "Aktuell: eigene Farben"
+
+msgid "APPEARANCE_CURRENT_PALETTE"
+msgstr "Aktuell: %s"
+
+msgid "APPEARANCE_HEX_HINT"
+msgstr "Hexfarbe (#RRGGBB) eingeben, mit Enter übernehmen."
+
+msgid "APPEARANCE_HEX_INVALID"
+msgstr "Bitte sechs Hexziffern eingeben, z. B. #73B696."
+
+msgid "APPEARANCE_SWATCH_TARGET"
+msgstr "Farbfeld ändern für:"
+
+msgid "APPEARANCE_STRENGTH"
+msgstr "Hautstruktur"
+
+msgid "APPEARANCE_PATTERN_SIZE"
+msgstr "Mustergröße"
+
+msgid "APPEARANCE_SIZE_HINT"
+msgstr "Höher = größere Struktur. 1 × entspricht der Standardgröße."
+
+msgid "APPEARANCE_SMOOTH_HINT"
+msgstr "Glatte Haut hat keine Struktur. Stärke und Mustergröße wirken bei den anderen Hauttypen."
+
+msgid "APPEARANCE_COLOR_BASE"
+msgstr "Grundfarbe"
+
+msgid "APPEARANCE_COLOR_ACCENT"
+msgstr "Akzentfarbe"
+
+msgid "APPEARANCE_COLOR_BELLY"
+msgstr "Bauchfarbe"
+
+msgid "APPEARANCE_COLOR_EYE"
+msgstr "Augenfarbe"
+
+msgid "APPEARANCE_COLOR_HORN"
+msgstr "Hornfarbe"
+
+msgid "MEDTECH_TITLE"
+msgstr "Mittelalter · Technikskizze"
+
+msgid "MEDTECH_SUBTITLE"
+msgstr "Eigenständige Vorschau für Siedlung und Fraktion"
+
+msgid "MEDTECH_NOTICE"
+msgstr "Nur Vorschau. Keine Punkte, Technologien oder Bauwerke werden vergeben."
+
+msgid "MEDTECH_EPOCH"
+msgstr "Epochenwechsel gesperrt · Mittelalter-Spielablauf und sichere Speicherübergabe fehlen."
+
+msgid "MEDTECH_SCENARIO"
+msgstr "Beispielszenario"
+
+msgid "MEDTECH_EMPTY"
+msgstr "Ohne Stammesnachweise"
+
+msgid "MEDTECH_READY"
+msgstr "Versorgtes Stammesdorf"
+
+msgid "MEDTECH_PLANNED"
+msgstr "Vollständiger Vorschauplan"
+
+msgid "MEDTECH_RESET"
+msgstr "Vorschau zurücksetzen"
+
+msgid "MEDTECH_EXIT"
+msgstr "Vorschau schließen"
+
+msgid "MEDTECH_FOUNDATIONS"
+msgstr "Grundlagen"
+
+msgid "MEDTECH_DEPENDENCIES"
+msgstr "Abhängigkeiten im Vorschauplan"
+
+msgid "MEDTECH_CONTRACT"
+msgstr "Voraussetzungen aus dem Produktvertrag"
+
+msgid "MEDTECH_NO_DEPS"
+msgstr "Keine Technikabhängigkeit."
+
+msgid "MEDTECH_LINKS"
+msgstr "Vorhandene Begriffe und Bauteile"
+
+msgid "MEDTECH_RESOURCES"
+msgstr "Ressourcen: {items}"
+
+msgid "MEDTECH_PARTS"
+msgstr "Bauteile: {items}"
+
+msgid "MEDTECH_NO_PARTS"
+msgstr "Kein eigenes Bauteil im vorhandenen Katalog."
+
+msgid "MEDTECH_PART_NOTICE"
+msgstr "Bauteilbezüge sind Entwurfshinweise; sie schalten keinen Editor und kein Gebäude frei."
+
+msgid "MEDTECH_EFFECT"
+msgstr "Geplante Wirkung · noch nicht implementiert"
+
+msgid "MEDTECH_BALANCE"
+msgstr "Balance vorläufig. Kosten, Forschungsdauer und Boni sind noch nicht festgelegt. Ressourcen sind Bezüge, keine Baukosten."
+
+msgid "MEDTECH_ORDER_NOTICE"
+msgstr "Die Technikreihenfolge ist ein vorläufiger Entwurf. Die Stammesnachweise stammen aus dem bestehenden Produktvertrag."
+
+msgid "MEDTECH_MARK"
+msgstr "Nur im Vorschauplan vormerken"
+
+msgid "MEDTECH_UNMARK"
+msgstr "Vormerkung entfernen"
+
+msgid "MEDTECH_MARKED"
+msgstr "Im Vorschauplan vorgemerkt"
+
+msgid "MEDTECH_READY_STATUS"
+msgstr "Im Beispiel vormerkbar"
+
+msgid "MEDTECH_LOCKED"
+msgstr "Beispielvoraussetzungen fehlen"
+
+msgid "MEDTECH_BLOCKERS"
+msgstr "Sperrgründe"
+
+msgid "MEDTECH_DEP_MISSING"
+msgstr "Im Vorschauplan fehlt: {title}."
+
+msgid "MEDTECH_CONTRACT_MISSING"
+msgstr "Stammesnachweis fehlt: {text}"
+
+msgid "MEDTECH_PREVIEW_ONLY"
+msgstr "Die Mittelalterwirkung fehlt. Diese Technik ist im Spiel nicht freischaltbar."
+
+msgid "MEDTECH_FOOTER"
+msgstr "Beispielbedingungen und Vormerkungen gelten nur bis zum Schließen."
+
+msgid "MEDTECH_INVALID"
+msgstr "Der Technikkatalog ist ungültig. Die Vorschau bleibt gesperrt."
+
+msgid "MEDTECH_HOUSING"
+msgstr "Wohnbau"
+
+msgid "MEDTECH_HOUSING_DESCRIPTION"
+msgstr "Vom gemeinsamen Hüttenbau zu geplanten Wohngebäuden für die eigene Siedlung."
+
+msgid "MEDTECH_HOUSING_EFFECT"
+msgstr "Geplant: Wohngebäude über den Mittelalter-Gebäudeeditor entwerfen und in einer versorgten Siedlung errichten. Noch keine Bauplatz-, Kapazitäts- oder Bewohnerwirkung."
+
+msgid "MEDTECH_STORAGE"
+msgstr "Lagerung"
+
+msgid "MEDTECH_STORAGE_DESCRIPTION"
+msgstr "Gemeinsame Vorräte und ankommende Lieferungen bilden die Grundlage eines Siedlungslagers."
+
+msgid "MEDTECH_STORAGE_EFFECT"
+msgstr "Geplant: Siedlungslager mit bilanzierten Lieferungen und Entnahmen. Keine zusätzlichen Vorräte, Lagerplätze oder Kapazitätsboni."
+
+msgid "MEDTECH_CRAFTING"
+msgstr "Handwerk"
+
+msgid "MEDTECH_CRAFTING_DESCRIPTION"
+msgstr "Nachgewiesene Werkzeugherstellung und verlässliche Berufe werden zum Ausgangspunkt für Werkstätten."
+
+msgid "MEDTECH_CRAFTING_EFFECT"
+msgstr "Geplant: Werkstattaufträge mit Rohstoffverbrauch, Arbeit und Lieferung. Der Werkstattbauteilbezug aktiviert keine Industrie oder Energieproduktion."
+
+msgid "MEDTECH_ROADS"
+msgstr "Wege"
+
+msgid "MEDTECH_ROADS_DESCRIPTION"
+msgstr "Siedlungen sollen durch tatsächlich begehbare Wege verbunden werden."
+
+msgid "MEDTECH_ROADS_EFFECT"
+msgstr "Geplant: geprüfte begehbare Siedlungsverbindungen. Noch kein Wegebauteil, Navigationsanschluss oder Bewegungsgeschwindigkeitsbonus."
+
+msgid "MEDTECH_TRADE"
+msgstr "Handel"
+
+msgid "MEDTECH_TRADE_DESCRIPTION"
+msgstr "Erfüllte Nachbarhilfe wird zur Grundlage von Handel zwischen Fraktionen der eigenen Spezies."
+
+msgid "MEDTECH_TRADE_EFFECT"
+msgstr "Geplant: Waren vom Ausgangslager über einen begehbaren Weg bis ins Ziellager transportieren. Keine Abkommen, Einnahmen oder kostenlosen Waren."
+
+msgid "MEDTECH_REQ_HOUSING"
+msgstr "Zwei fertige Hütten für die ursprünglichen drei Bewohner"
+
+msgid "MEDTECH_REQ_CRAFT"
+msgstr "Ein fertig hergestelltes Steinwerkzeug"
+
+msgid "MEDTECH_REQ_FARMING"
+msgstr "Ein angelegter Wurzelgarten mit tatsächlich nachgewachsener Nahrung"
+
+msgid "MEDTECH_REQ_SUPPLY"
+msgstr "Alle Bewohner 180 Spielsekunden mit erneuerbarer Nahrung und Wasser versorgen; jeder hat gegessen und getrunken; am Ende mindestens 12 Nahrung und 6 Wasser im Lager"
+
+msgid "MEDTECH_REQ_PROFESSIONS"
+msgstr "Mindestens zwei Bewohner erledigen in zwei Berufen jeweils drei erneuerbare Arbeits- und Lieferzyklen"
+
+msgid "MEDTECH_REQ_NEIGHBORS"
+msgstr "Mit mindestens zwei Bewohnern 6 Nahrung und 4 Holz an eine Nachbarfraktion deiner Spezies liefern und deren Unterkunft fertigstellen lassen; später alternativ das Dorf in einem abgeschlossenen Gruppenkonflikt verteidigen"
+
+msgid "MEDTECH_REQ_RUNTIME"
+msgstr "Spielbares Mittelalter mit Siedlungsverwaltung, Handwerk, Wegen und Handel sowie geprüftem Speichern/Laden"
+
+msgid "MEDTECH_PART_HOUSE"
+msgstr "Hauskern"
+
+msgid "MEDTECH_PART_DOOR"
+msgstr "Holztür"
+
+msgid "MEDTECH_PART_WORKSHOP"
+msgstr "Werkstatt"
+
+msgid "MEDTECH_PART_MARKET"
+msgstr "Marktflügel"
+
+msgid "MEDTECH_PART_AWNING"
+msgstr "Marktdach"
+
+msgid "GALAXY_TITLE"
+msgstr "VOXELVERSE  /  GALAXIEKATALOG"
+
+msgid "GALAXY_SUBTITLE"
+msgstr "Referenzgalaxie · 100.000 Lichtjahre Durchmesser · Sektorkante 16 Lichtjahre"
+
+msgid "GALAXY_SEARCH"
+msgstr "Name im Sektor oder vollständige Sektor-/System-/Körperkennung"
+
+msgid "GALAXY_SEARCH_HELP"
+msgstr "Namen filtern nur diesen Sektor. Vollständige vx1-Kennungen öffnen vorhandene Katalogeinträge."
+
+msgid "GALAXY_UNITS"
+msgstr "km = Kilometer · AU = astronomische Einheit · 1 AU ≈ 149,6 Mio. km"
+
+msgid "GALAXY_DESTINATION"
+msgstr "Begehbares Reiseziel"
+
+msgid "GALAXY_SECTOR"
+msgstr "Sektor: {id} · {count} Systeme"
+
+msgid "GALAXY_BROWSE_HELP"
+msgstr "Kennungen lassen sich kopieren. Besuchsdaten werden nur gelesen; eine Suche startet keine Reise."
+
+msgid "GALAXY_EMPTY_SECTOR"
+msgstr "In diesem Sektor sind keine Sterne verzeichnet."
+
+msgid "GALAXY_BINARY"
+msgstr "Doppelstern"
+
+msgid "GALAXY_SINGLE"
+msgstr "Einzelstern"
+
+msgid "GALAXY_PAGE"
+msgstr "Seite {page}/{pages} · {count} Treffer"
+
+msgid "GALAXY_SEARCH_INVALID"
+msgstr "Diese Kennung ist ungültig, gehört zu einer anderen Galaxie oder ist nicht im Katalog vorhanden."
+
+msgid "GALAXY_NO_RESULTS"
+msgstr "Keine Treffer in diesem Sektor. Eine vollständige Kennung öffnet einen anderen Sektor."
+
+msgid "GALAXY_POSITION"
+msgstr "Position innerhalb des Sektors: {x} / {y} / {z} Lichtjahre"
+
+msgid "GALAXY_DISTANCE"
+msgstr "Entfernung zum Ausgangssystem: {value}"
+
+msgid "GALAXY_STAR"
+msgstr "Stern"
+
+msgid "GALAXY_PLANET"
+msgstr "Gesteinsplanet"
+
+msgid "GALAXY_GAS_GIANT"
+msgstr "Gasriese"
+
+msgid "GALAXY_MOON"
+msgstr "Mond"
+
+msgid "GALAXY_DAYS_UNIT"
+msgstr " Tage"
+
+msgid "GALAXY_LY_UNIT"
+msgstr " Lichtjahre"
+
+msgid "GALAXY_DIAMETER"
+msgstr "Durchmesser: {value}"
+
+msgid "GALAXY_RADIUS"
+msgstr "Radius: {value}"
+
+msgid "GALAXY_GRAVITY"
+msgstr "Oberflächengravitation: {value} m/s²"
+
+msgid "GALAXY_SPECTRAL"
+msgstr "Spektralklasse: {value}"
+
+msgid "GALAXY_BARYCENTRE"
+msgstr "Gemeinsamer Schwerpunkt"
+
+msgid "GALAXY_ORBIT_PARENT"
+msgstr "Umlauf um: {parent}"
+
+msgid "GALAXY_ORBIT_DISTANCE"
+msgstr "Abstand zum Bahnzentrum: {value}"
+
+msgid "GALAXY_ORBIT_PERIOD"
+msgstr "Umlaufzeit: {value}"
+
+msgid "GALAXY_ROTATION"
+msgstr "Rotationsdauer: {value}"
+
+msgid "GALAXY_LANDABLE"
+msgstr "Begehbare Oberfläche"
+
+msgid "GALAXY_NOT_LANDABLE"
+msgstr "Keine begehbare Oberfläche"
+
+msgid "GALAXY_VISIT_UNKNOWN"
+msgstr "Besuchsdaten nicht verfügbar"
+
+msgid "GALAXY_VISITED"
+msgstr "Bereits besucht · Rückkehrpunkt gespeichert"
+
+msgid "GALAXY_NOT_VISITED"
+msgstr "Kein gespeicherter Besuch"
+
+msgid "BUILDING_TEMPLATES_TITLE"
+msgstr "GEBÄUDEVORLAGEN"
+
+msgid "BUILDING_TEMPLATE_USE_COPY"
+msgstr "Als eigene Kopie verwenden"
+
+msgid "BUILDING_TEMPLATE_UNAVAILABLE"
+msgstr "Keine gültige Vorlage verfügbar."
+
+msgid "BUILDING_TEMPLATE_SOURCE"
+msgstr "Vorlage {id} · Revision {revision} · {count} Teile"
+
+msgid "BUILDING_TEMPLATE_RESIDENCE"
+msgstr "Wohnhaus"
+
+msgid "BUILDING_TEMPLATE_RESIDENCE_DETAIL"
+msgstr "Kompaktes Putzhaus mit rotem Stufendach, Fenstern und Schornstein."
+
+msgid "BUILDING_TEMPLATE_WAREHOUSE"
+msgstr "Lagergebäude"
+
+msgid "BUILDING_TEMPLATE_WAREHOUSE_DETAIL"
+msgstr "Breite Halle mit dunklem Dach und Doppeltor. Der Teilekatalog definiert keine Lagerkapazität."
+
+msgid "BUILDING_TEMPLATE_WORKSHOP"
+msgstr "Werkstatt"
+
+msgid "BUILDING_TEMPLATE_WORKSHOP_DETAIL"
+msgstr "Steinwerkstatt mit breiten Fenstern, Schild und erhöhtem Schornstein."
+
+msgid "BUILDING_TEMPLATE_VALUES_NOTE"
+msgstr "Werte aus dem Teilekatalog; Größe skaliert sie nicht. Dies ist ein Entwurf, kein gebautes Gebäude."
+
+msgid "BUILDING_TEMPLATE_STAT_COST"
+msgstr "Kosten"
+
+msgid "BUILDING_TEMPLATE_STAT_HOUSING"
+msgstr "Wohnen"
+
+msgid "BUILDING_TEMPLATE_STAT_COMMERCE"
+msgstr "Handel"
+
+msgid "BUILDING_TEMPLATE_STAT_INDUSTRY"
+msgstr "Industrie"
+
+msgid "BUILDING_TEMPLATE_STAT_DEFENSE"
+msgstr "Verteidigung"
+
+msgid "BUILDING_TEMPLATE_STAT_PRESTIGE"
+msgstr "Ansehen"
+
+msgid "BUILDING_TEMPLATE_STAT_ENERGY"
+msgstr "Energie"
+
+msgid "BUILDING_TEMPLATE_STAT_POLLUTION"
+msgstr "Verschmutzung"
+
+msgid "BEDITOR_TITLE"
+msgstr "VOXELVERSE · GEBÄUDEEDITOR"
+
+msgid "BEDITOR_SUBTITLE"
+msgstr "Eigene Architektur entwerfen · Gebäudeeditor ab der Mittelalterphase"
+
+msgid "BEDITOR_NAME"
+msgstr "Name des Gebäudeentwurfs"
+
+msgid "BEDITOR_CATEGORIES"
+msgstr "BAUTEILKATEGORIEN"
+
+msgid "BEDITOR_PARTS"
+msgstr "BAUTEILE"
+
+msgid "BEDITOR_SELECTED"
+msgstr "AUSGEWÄHLTES BAUTEIL"
+
+msgid "BEDITOR_SELECTION"
+msgstr "{index}/{count} · {name}"
+
+msgid "BEDITOR_IDENTITY"
+msgstr "Bauteil: {id}\nInstanz: {uid}"
+
+msgid "BEDITOR_NO_SELECTION"
+msgstr "Kein Bauteil ausgewählt"
+
+msgid "BEDITOR_SELECT_HINT"
+msgstr "Wähle ein Bauteil aus der Liste."
+
+msgid "BEDITOR_POSITION"
+msgstr "Position (m)"
+
+msgid "BEDITOR_ROTATION"
+msgstr "Drehung (°)"
+
+msgid "BEDITOR_SCALE"
+msgstr "Größe (Faktor)"
+
+msgid "BEDITOR_SNAP"
+msgstr "Raster"
+
+msgid "BEDITOR_SNAP_STATE"
+msgstr "Raster: {state} · {step} m"
+
+msgid "BEDITOR_ON"
+msgstr "AN"
+
+msgid "BEDITOR_OFF"
+msgstr "AUS"
+
+msgid "BEDITOR_DUPLICATE"
+msgstr "Duplizieren"
+
+msgid "BEDITOR_DELETE"
+msgstr "Löschen"
+
+msgid "BEDITOR_ASSEMBLY"
+msgstr "BAUTEILLISTE"
+
+msgid "BEDITOR_LIST_PART"
+msgstr "{index} · {name}"
+
+msgid "BEDITOR_UNDO"
+msgstr "Rückgängig"
+
+msgid "BEDITOR_REDO"
+msgstr "Wiederholen"
+
+msgid "BEDITOR_SHORTCUTS"
+msgstr "Pfeile: X/Z · Bild↑/↓: Y · Q/E: Y-Drehung\nZ/X: X-Drehung · [ / ]: Größe · D: Duplizieren\nEntf: Löschen · G: Raster · Strg+Z/Y: Historie\nMittlere Maustaste: Kamera · Mausrad: Zoom"
+
+msgid "BEDITOR_DESIGNS"
+msgstr "GESPEICHERTE ENTWÜRFE"
+
+msgid "BEDITOR_LOAD"
+msgstr "Entwurf laden"
+
+msgid "BEDITOR_SAVE"
+msgstr "Entwurf speichern"
+
+msgid "BEDITOR_NEW"
+msgstr "Neuer Entwurf"
+
+msgid "BEDITOR_AUTOSAVE"
+msgstr "Zwischenstand"
+
+msgid "BEDITOR_STATS"
+msgstr "ENTWURFSWERTE"
+
+msgid "BEDITOR_BACK"
+msgstr "Zurück zur Welt"
+
+msgid "BEDITOR_STATS_HEADER"
+msgstr "Typ: {type}\nRevision: {revision} · Bauteile: {count}"
+
+msgid "BEDITOR_VALIDATION"
+msgstr "VALIDIERUNG"
+
+msgid "BEDITOR_VISUAL"
+msgstr "Optisches Bauteil"
+
+msgid "BEDITOR_EMPTY"
+msgstr "Das Gebäude enthält keine Bauteile."
+
+msgid "BEDITOR_NEEDS_STRUCTURE"
+msgstr "Das Gebäude benötigt mindestens einen Baukörper."
+
+msgid "BEDITOR_TYPE_MISSING"
+msgstr "Der Bauplantyp fehlt."
+
+msgid "BEDITOR_UNKNOWN_PART"
+msgstr "Unbekanntes Bauteil „{id}“."
+
+msgid "BEDITOR_DUPLICATE_UID"
+msgstr "Doppelte Bauteilkennung „{id}“."
+
+msgid "BEDITOR_INVALID_PART"
+msgstr "Bauteil {index} ist ungültig."
+
+msgid "BEDITOR_VALIDATION_CODE"
+msgstr "Bauplanprüfung: {code}"
+
+msgid "BEDITOR_COMPATIBILITY"
+msgstr "Kompatibilitätshinweise: {codes}"
+
+msgid "BEDITOR_TRANSFORM_INVALID"
+msgstr "Der eingegebene Bauteilwert ist ungültig."
+
+msgid "BEDITOR_TRANSFORM_APPLIED"
+msgstr "Bauteilwert übernommen."
+
+msgid "BEDITOR_ADDED"
+msgstr "{name} hinzugefügt."
+
+msgid "BEDITOR_UNDO_APPLIED"
+msgstr "Änderung rückgängig gemacht."
+
+msgid "BEDITOR_REDO_APPLIED"
+msgstr "Änderung wiederholt."
+
+msgid "BEDITOR_NEW_STARTED"
+msgstr "Neuer Gebäudeentwurf begonnen."
+
+msgid "BEDITOR_SAVE_FAILED"
+msgstr "Der Gebäudeentwurf konnte nicht gespeichert werden."
+
+msgid "BEDITOR_CAMPAIGN_SAVE_FAILED"
+msgstr "Entwurf geschrieben, aber der Kampagnenspielstand konnte nicht gespeichert werden."
+
+msgid "BEDITOR_SAVED"
+msgstr "Entwurf gespeichert: {file}"
+
+msgid "BEDITOR_AUTOSAVED"
+msgstr "Zwischenstand gespeichert."
+
+msgid "BEDITOR_AUTOSAVE_FAILED"
+msgstr "Zwischenstand fehlgeschlagen: {error}"
+
+msgid "BEDITOR_LOAD_NONE"
+msgstr "Kein gespeicherter Entwurf ausgewählt."
+
+msgid "BEDITOR_LOAD_FAILED"
+msgstr "Der ausgewählte Entwurf konnte nicht geladen werden."
+
+msgid "BEDITOR_LOADED"
+msgstr "{file} geladen."
+
+msgid "BEDITOR_TYPE_CHANGE"
+msgstr "Gebäudetyp ändern"
+
+msgid "BEDITOR_TYPE_RESIDENTIAL"
+msgstr "Wohnen"
+
+msgid "BEDITOR_TYPE_COMMERCIAL"
+msgstr "Handel"
+
+msgid "BEDITOR_TYPE_INDUSTRIAL"
+msgstr "Industrie"
+
+msgid "BEDITOR_TYPE_CIVIC"
+msgstr "Öffentlich"
+
+msgid "BEDITOR_TYPE_MILITARY"
+msgstr "Militär"
+
+msgid "BEDITOR_TYPE_HARBOR"
+msgstr "Hafen"
+
+msgid "BEDITOR_CATEGORY_MASS"
+msgstr "Baukörper"
+
+msgid "BEDITOR_CATEGORY_ROOF"
+msgstr "Dächer"
+
+msgid "BEDITOR_CATEGORY_TOWER"
+msgstr "Türme"
+
+msgid "BEDITOR_CATEGORY_OPENING"
+msgstr "Türen / Fenster"
+
+msgid "BEDITOR_CATEGORY_BALCONY"
+msgstr "Balkone"
+
+msgid "BEDITOR_CATEGORY_SUPPORT"
+msgstr "Stützen"
+
+msgid "BEDITOR_CATEGORY_UTILITY"
+msgstr "Versorgung"
+
+msgid "BEDITOR_CATEGORY_DECOR"
+msgstr "Dekoration"
+
+msgid "BEDITOR_STAT_HOUSING"
+msgstr "Wohnraum"
+
+msgid "BEDITOR_STAT_COMMERCE"
+msgstr "Handel"
+
+msgid "BEDITOR_STAT_INDUSTRY"
+msgstr "Industrie"
+
+msgid "BEDITOR_STAT_DEFENSE"
+msgstr "Verteidigung"
+
+msgid "BEDITOR_STAT_PRESTIGE"
+msgstr "Prestige"
+
+msgid "BEDITOR_STAT_ENERGY"
+msgstr "Energie"
+
+msgid "BEDITOR_STAT_POLLUTION"
+msgstr "Verschmutzung"
+
+msgid "BEDITOR_STAT_COST"
+msgstr "Kosten"
+
+msgid "BEDITOR_PART_MASS_HOUSE_CORE_NAME"
+msgstr "Hauskörper"
+
+msgid "BEDITOR_PART_MASS_HOUSE_CORE_DESCRIPTION"
+msgstr "Ausgewogener Baukörper für Wohngebäude."
+
+msgid "BEDITOR_PART_MASS_LONG_HALL_NAME"
+msgstr "Lange Halle"
+
+msgid "BEDITOR_PART_MASS_LONG_HALL_DESCRIPTION"
+msgstr "Breite Halle für Wohn- oder öffentliche Gebäude."
+
+msgid "BEDITOR_PART_MASS_TALL_BLOCK_NAME"
+msgstr "Hoher Baukörper"
+
+msgid "BEDITOR_PART_MASS_TALL_BLOCK_DESCRIPTION"
+msgstr "Vertikaler städtischer Baukörper."
+
+msgid "BEDITOR_PART_MASS_MARKET_WING_NAME"
+msgstr "Marktflügel"
+
+msgid "BEDITOR_PART_MASS_MARKET_WING_DESCRIPTION"
+msgstr "Offener Seitenflügel für Handelsgebäude."
+
+msgid "BEDITOR_PART_MASS_WORKSHOP_NAME"
+msgstr "Werkstatt"
+
+msgid "BEDITOR_PART_MASS_WORKSHOP_DESCRIPTION"
+msgstr "Baukörper für industrielle Produktion."
+
+msgid "BEDITOR_PART_ROOF_GABLE_RED_NAME"
+msgstr "Rotes Satteldach"
+
+msgid "BEDITOR_PART_ROOF_GABLE_RED_DESCRIPTION"
+msgstr "Gestuftes Dach aus warmen Ziegelfarben."
+
+msgid "BEDITOR_PART_ROOF_GABLE_DARK_NAME"
+msgstr "Dunkles Satteldach"
+
+msgid "BEDITOR_PART_ROOF_GABLE_DARK_DESCRIPTION"
+msgstr "Gestuftes Dach in Schieferfarben."
+
+msgid "BEDITOR_PART_ROOF_FLAT_GARDEN_NAME"
+msgstr "Gartendach"
+
+msgid "BEDITOR_PART_ROOF_FLAT_GARDEN_DESCRIPTION"
+msgstr "Flache, bepflanzte Dachplattform."
+
+msgid "BEDITOR_PART_ROOF_PYRAMID_NAME"
+msgstr "Pyramidendach"
+
+msgid "BEDITOR_PART_ROOF_PYRAMID_DESCRIPTION"
+msgstr "Vierseitiges gestuftes Dach."
+
+msgid "BEDITOR_PART_ROOF_DOME_NAME"
+msgstr "Voxelkuppel"
+
+msgid "BEDITOR_PART_ROOF_DOME_DESCRIPTION"
+msgstr "Rundes Dach für repräsentative Gebäude."
+
+msgid "BEDITOR_PART_TOWER_SQUARE_NAME"
+msgstr "Viereckiger Turm"
+
+msgid "BEDITOR_PART_TOWER_SQUARE_DESCRIPTION"
+msgstr "Hoher Verteidigungsturm."
+
+msgid "BEDITOR_PART_TOWER_TIMBER_NAME"
+msgstr "Hölzerner Ausguck"
+
+msgid "BEDITOR_PART_TOWER_TIMBER_DESCRIPTION"
+msgstr "Leichter hölzerner Aussichtsturm."
+
+msgid "BEDITOR_PART_TOWER_ROUNDISH_NAME"
+msgstr "Achteckiger Turm"
+
+msgid "BEDITOR_PART_TOWER_ROUNDISH_DESCRIPTION"
+msgstr "Voxelannäherung an einen runden Turm."
+
+msgid "BEDITOR_PART_OPENING_DOOR_WOOD_NAME"
+msgstr "Holztür"
+
+msgid "BEDITOR_PART_OPENING_DOOR_WOOD_DESCRIPTION"
+msgstr "Schwerer hölzerner Eingang."
+
+msgid "BEDITOR_PART_OPENING_GATE_NAME"
+msgstr "Stadttor"
+
+msgid "BEDITOR_PART_OPENING_GATE_DESCRIPTION"
+msgstr "Großes verstärktes Tor."
+
+msgid "BEDITOR_PART_OPENING_WINDOW_SMALL_NAME"
+msgstr "Kleines Fenster"
+
+msgid "BEDITOR_PART_OPENING_WINDOW_SMALL_DESCRIPTION"
+msgstr "Einfaches Glasfenster."
+
+msgid "BEDITOR_PART_OPENING_WINDOW_WIDE_NAME"
+msgstr "Breites Fenster"
+
+msgid "BEDITOR_PART_OPENING_WINDOW_WIDE_DESCRIPTION"
+msgstr "Glasöffnung für Handelsgebäude."
+
+msgid "BEDITOR_PART_BALCONY_WOOD_NAME"
+msgstr "Holzbalkon"
+
+msgid "BEDITOR_PART_BALCONY_WOOD_DESCRIPTION"
+msgstr "Vorgezogener hölzerner Balkon."
+
+msgid "BEDITOR_PART_BALCONY_STONE_NAME"
+msgstr "Steinbalkon"
+
+msgid "BEDITOR_PART_BALCONY_STONE_DESCRIPTION"
+msgstr "Schwerer Balkon für öffentliche Gebäude."
+
+msgid "BEDITOR_PART_SUPPORT_COLUMN_STONE_NAME"
+msgstr "Steinsäule"
+
+msgid "BEDITOR_PART_SUPPORT_COLUMN_STONE_DESCRIPTION"
+msgstr "Vertikale Stütze aus Stein."
+
+msgid "BEDITOR_PART_SUPPORT_BUTTRESS_NAME"
+msgstr "Strebepfeiler"
+
+msgid "BEDITOR_PART_SUPPORT_BUTTRESS_DESCRIPTION"
+msgstr "Gestufte äußere Stütze."
+
+msgid "BEDITOR_PART_SUPPORT_ARCH_NAME"
+msgstr "Bogen"
+
+msgid "BEDITOR_PART_SUPPORT_ARCH_DESCRIPTION"
+msgstr "Voxelbogen für Arkaden."
+
+msgid "BEDITOR_PART_UTILITY_CHIMNEY_NAME"
+msgstr "Schornstein"
+
+msgid "BEDITOR_PART_UTILITY_CHIMNEY_DESCRIPTION"
+msgstr "Schornstein für Produktionsgebäude."
+
+msgid "BEDITOR_PART_UTILITY_WATER_TANK_NAME"
+msgstr "Wassertank"
+
+msgid "BEDITOR_PART_UTILITY_WATER_TANK_DESCRIPTION"
+msgstr "Erhöhter Versorgungstank."
+
+msgid "BEDITOR_PART_UTILITY_ANTENNA_NAME"
+msgstr "Antenne"
+
+msgid "BEDITOR_PART_UTILITY_ANTENNA_DESCRIPTION"
+msgstr "Kommunikationsmast für spätere Phasen."
+
+msgid "BEDITOR_PART_DECOR_SIGN_NAME"
+msgstr "Hängeschild"
+
+msgid "BEDITOR_PART_DECOR_SIGN_DESCRIPTION"
+msgstr "Hängendes Schild für Handelsgebäude."
+
+msgid "BEDITOR_PART_DECOR_AWNING_NAME"
+msgstr "Marktmarkise"
+
+msgid "BEDITOR_PART_DECOR_AWNING_DESCRIPTION"
+msgstr "Helles Vordach für Marktgebäude."
+
+msgid "BEDITOR_PART_DECOR_BANNER_NAME"
+msgstr "Banner"
+
+msgid "BEDITOR_PART_DECOR_BANNER_DESCRIPTION"
+msgstr "Farbiges Banner für öffentliche Gebäude."
+
+msgid "BEDITOR_PART_LIMIT"
+msgstr "Kein weiteres Bauteil möglich. Der Entwurf bleibt erhalten."
+
+msgid "BEDITOR_PALETTE_PART"
+msgstr "{name}\n{stats}"
+
+msgid "BEDITOR_INCREASE"
+msgstr "Wert erhöhen"
+
+msgid "BEDITOR_DECREASE"
+msgstr "Wert verringern"
+
+msgid "MINIMAP_PROFILE_SURROUNDINGS"
+msgstr "Umgebung"
+
+msgid "MINIMAP_PROFILE_TRIBAL_TERRITORY"
+msgstr "Stammesgebiet"
+
+msgid "MINIMAP_PROFILE_REGION"
+msgstr "Region"
+
+msgid "MINIMAP_PROFILE_COUNTRY"
+msgstr "Land"
+
+msgid "MINIMAP_PROFILE_PLANET_SURFACE"
+msgstr "Planetenoberfläche"
+
+msgid "VILLAGE_WORLD_CENTER"
+msgstr "Dorfplatz · Lager & Werkbank"
+
+msgid "VILLAGE_WORLD_WOOD"
+msgstr "Leseholz"
+
+msgid "VILLAGE_WORLD_STONE"
+msgstr "Lose Steine"
+
+msgid "VILLAGE_WORLD_ROOTS"
+msgstr "Essbare Wurzeln"
+
+msgid "VILLAGE_WORLD_WELL"
+msgstr "Brunnen"
+
+msgid "VILLAGE_WORLD_GARDEN_READY"
+msgstr "Wurzelgarten · erntereif"
+
+msgid "VILLAGE_WORLD_STATION"
+msgstr "{name} {number}"
+
+msgid "VILLAGE_WORLD_COUNT"
+msgstr "{name} · {count}"
+
+msgid "VILLAGE_WORLD_PICKUP"
+msgstr "{resource} zur Abholung · {count}"
+
+msgid "VILLAGE_WORLD_MATERIALS"
+msgstr "{name} · {delivered} / {required}"
+
+msgid "VILLAGE_WORLD_SITE"
+msgstr "{name} · {status}"
+
+msgid "VILLAGE_WORLD_LAYING_SITE"
+msgstr "Legestelle"
+
+msgid "VILLAGE_WORLD_DAIRY_PEN"
+msgstr "Milchtierplatz"
+
+msgid "VILLAGE_WORLD_FREE"
+msgstr "frei"
+
+msgid "VILLAGE_WORLD_OCCUPIED"
+msgstr "belegt"
+
+msgid "BEDITOR_EXCHANGE_IMPORT"
+msgstr "Gebäudeentwurf importieren"
+
+msgid "BEDITOR_EXCHANGE_EXPORT"
+msgstr "Gebäudeentwurf exportieren"
+
+msgid "BEDITOR_EXCHANGE_FAILED"
+msgstr "Austausch fehlgeschlagen ({code}). Der bisherige Entwurf bleibt erhalten."
+
+msgid "BEDITOR_EXCHANGE_EXPORTED"
+msgstr "Gebäudeentwurf exportiert."
+
+msgid "BEDITOR_EXCHANGE_COPY_CONFIRM"
+msgstr "{name} · Revision {revision} · {parts} benötigte Teiletypen\n\nAls eigene Kopie im Editor öffnen? Die Inbox-Revision bleibt unverändert. Der aktuelle Entwurf bleibt über Rückgängig erreichbar."
+
+msgid "BEDITOR_EXCHANGE_ADOPTED"
+msgstr "Eigene Entwurfskopie geöffnet. Speichern übernimmt sie in deine Bibliothek. Es wurde kein Gebäude gebaut."
+
+msgid "BEDITOR_EXCHANGE_COPY_COLLISION"
+msgstr "Der Name gehört bereits zu einem anderen Entwurf. Wähle einen neuen Namen für deine Kopie."
+
+msgid "SHIP_EXCHANGE_COPY_REQUIRED"
+msgstr "Dieser importierte Originalentwurf bleibt erhalten. Zum Bearbeiten als Kopie speichern."
+
+msgid "SHIP_EXCHANGE_FAILED"
+msgstr "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten."

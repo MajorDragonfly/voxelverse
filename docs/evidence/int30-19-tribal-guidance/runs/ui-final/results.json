@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "fixture": "ui",
+  "renderer": "gl_compatibility",
+  "command": [
+    "/workspace/scratch/37c4a86fcaae/runtime/godot",
+    "--path",
+    "/workspace/scratch/37c4a86fcaae/guidance-qa",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/int30_tribal_guidance_ui_test.gd",
+    "--",
+    "--capture",
+    "/workspace/scratch/37c4a86fcaae/native-guidance-ui-final"
+  ],
+  "exit_code": 0,
+  "screenshots": {
+    "03-blocked-state-de.png": "d9243d9ecbd4218b58d4c0d0d00efee03299f7c501a9810abdeead8811a663de",
+    "layout-en-800-150.png": "24be8fdb12a9b3cf16880584b992ef88fdfd9c415b298d2dce62b11d75510f00",
+    "layout-en-1920-150.png": "c10366e1c63f1878d60e3651816ec8b120360130b4f345b93792daa7d7c8f6a6",
+    "05-empty-pantry-de.png": "4108fbcc372e2b789f8c8282164f81364a89b07caa743e2d3f9a3f7d0ed117b8",
+    "01-no-selection-de.png": "35cd4795f9c9d3f43ce516fa946b4f96944a4b382128c08b18c6d241a983158f",
+    "07-reserved-site-materials-de.png": "2bcef3097f38b2f2bcede886e57ff4425983d0eb8733315dcdab63a4f0fa8b61",
+    "layout-de-1920-150.png": "6cd3545eb67a7e7c109d7035cd763f6fa8534f8eb17efa50f72204e6d281032a",
+    "06-missing-materials-de.png": "fee6a9fe751a4ef5ac321199fcfe15789211832f11a842555e0179891092e2a2",
+    "04-cargo-in-transit-de.png": "88d50575c83e5de99f24bce22f46bb94d014fd45442cb236dc0b101492b98705",
+    "layout-de-1280-150.png": "142735f607182e3ed037f8c72a8e744e08deb66f839db8d21fa0b5184dab4c22",
+    "02-gathering-de.png": "a580b6fa030b9c9b9cbb178f1ca5c935a3d59456225b99921d3a494fbce82a03",
+    "layout-en-1280-150.png": "714b1e570aa320a76c65137db239a70e569b16f38210e1fa33357fe232c00248",
+    "layout-de-800-150.png": "140eca2d5abba16e428b82d541a21841a53e629c0c5655e603a090383fd047fa",
+    "08-paused-construction-de.png": "5c217807871d22ca42ec994d7614b3f1394e99fd249679a81945dbb44d22df3d"
+  },
+  "missing": [],
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "log_sha256": "22ef5628d3a6e115f91ae2d7379838469f9d5cfcdd331ee27828d744e0a747a4",
+  "source_provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+      "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "complete": true,
+      "file_count": 3974,
+      "bytes": 125361603,
+      "bytes_hashed": 125361603,
+      "seconds": 74.6056
+    },
+    "end": {
+      "available": true,
+      "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+      "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+      "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+      "complete": true,
+      "file_count": 3974,
+      "bytes": 125361603,
+      "bytes_hashed": 125361603,
+      "seconds": 3.7863
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "be5cdb791981ec4a4b4e45682caf24a770eb8da88253b06712c8c960b02e09f9"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "be5cdb791981ec4a4b4e45682caf24a770eb8da88253b06712c8c960b02e09f9"
+      }
+    },
+    "observations": [
+      {
+        "after": "render",
+        "source": {
+          "available": true,
+          "commit": "64340b11cc8fe4bbd6139a02a9bc26dd73cf3b20",
+          "tree": "832899bd57454597ca93131216f1650c7bc5060f",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "7a1e535b61e5815df1fd3e81123d2a4af1f5833c0dea3584b7a2fc3cdce6ec86",
+          "source_sha256": "df71aa3ef147643facb9190063208d5f11e6d3b48b5248f362b26cf8a49cf782",
+          "complete": true,
+          "file_count": 3974,
+          "bytes": 125361603,
+          "bytes_hashed": 125361603,
+          "seconds": 3.7863
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  }
+}

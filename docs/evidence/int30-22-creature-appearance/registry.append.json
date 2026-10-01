@@ -1,0 +1,6 @@
+{
+  "contract": "creature_body",
+  "tests": [
+    "int30_creature_appearance_test"
+  ]
+}

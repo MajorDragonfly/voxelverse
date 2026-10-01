@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "revision": 1,
+  "phase": 2,
+  "scope": "preview_only",
+  "nodes": [
+    {
+      "id": "medieval.housing",
+      "title_key": "MEDTECH_HOUSING",
+      "description_key": "MEDTECH_HOUSING_DESCRIPTION",
+      "effect_key": "MEDTECH_HOUSING_EFFECT",
+      "requires": [],
+      "contract_requirements": [
+        "housing"
+      ],
+      "resources": [
+        "wood",
+        "stone",
+        "fiber"
+      ],
+      "building_parts": [
+        "mass_house_core",
+        "opening_door_wood"
+      ],
+      "implemented": false,
+      "balance": "provisional"
+    },
+    {
+      "id": "medieval.storage",
+      "title_key": "MEDTECH_STORAGE",
+      "description_key": "MEDTECH_STORAGE_DESCRIPTION",
+      "effect_key": "MEDTECH_STORAGE_EFFECT",
+      "requires": [
+        "medieval.housing"
+      ],
+      "contract_requirements": [
+        "supply"
+      ],
+      "resources": [
+        "wood",
+        "food",
+        "water"
+      ],
+      "building_parts": [],
+      "implemented": false,
+      "balance": "provisional"
+    },
+    {
+      "id": "medieval.crafting",
+      "title_key": "MEDTECH_CRAFTING",
+      "description_key": "MEDTECH_CRAFTING_DESCRIPTION",
+      "effect_key": "MEDTECH_CRAFTING_EFFECT",
+      "requires": [
+        "medieval.storage"
+      ],
+      "contract_requirements": [
+        "craft",
+        "professions"
+      ],
+      "resources": [
+        "wood",
+        "stone",
+        "fiber"
+      ],
+      "building_parts": [
+        "mass_workshop"
+      ],
+      "implemented": false,
+      "balance": "provisional"
+    },
+    {
+      "id": "medieval.roads",
+      "title_key": "MEDTECH_ROADS",
+      "description_key": "MEDTECH_ROADS_DESCRIPTION",
+      "effect_key": "MEDTECH_ROADS_EFFECT",
+      "requires": [
+        "medieval.housing"
+      ],
+      "contract_requirements": [
+        "professions"
+      ],
+      "resources": [
+        "wood",
+        "stone"
+      ],
+      "building_parts": [],
+      "implemented": false,
+      "balance": "provisional"
+    },
+    {
+      "id": "medieval.trade",
+      "title_key": "MEDTECH_TRADE",
+      "description_key": "MEDTECH_TRADE_DESCRIPTION",
+      "effect_key": "MEDTECH_TRADE_EFFECT",
+      "requires": [
+        "medieval.storage",
+        "medieval.crafting",
+        "medieval.roads"
+      ],
+      "contract_requirements": [
+        "neighbors",
+        "supply"
+      ],
+      "resources": [
+        "food",
+        "wood",
+        "water"
+      ],
+      "building_parts": [
+        "mass_market_wing",
+        "decor_awning"
+      ],
+      "implemented": false,
+      "balance": "provisional"
+    }
+  ]
+}

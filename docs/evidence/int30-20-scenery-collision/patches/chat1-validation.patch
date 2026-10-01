@@ -1,0 +1,29 @@
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -73,6 +73,7 @@
+         "surface_adapter_entry_test",
+         "surface_adapter_test",
+         "surface_population_budget_test",
++        "int30_scenery_collision_world_test",
+         "surface_distance_test",
+         "surface_distance_world_test",
+         "surface_scale_contract_test",
+@@ -94,6 +95,7 @@
+         "drainage_network_test",
+         "environment_cluster_test",
+         "environment_playtest_test",
++        "int30_scenery_collision_test",
+         "environment_production_test",
+         "planet_diversity_v9_test",
+         "planet_generation_acceptance_test",
+--- a/tools/validate_godot.py
++++ b/tools/validate_godot.py
+@@ -34,6 +34,8 @@
+ # observes real colony streaming and reload. CI reached the second load at
+ # the old 120 s aggregate cutoff; use the existing bounded world-test budget.
+ LONG_TESTS.add("living_creatures_world_test")
++# Public spherical entry plus near/far/near collision lifecycle.
++LONG_TESTS.add("int30_scenery_collision_world_test")
+ # These also include a second campaign load (editor or fresh process).
+ # Their current short-budget CI measurements reached 98.8/106.7 seconds;
+ # the two 90 s load watchdogs plus real work must fit the aggregate budget.

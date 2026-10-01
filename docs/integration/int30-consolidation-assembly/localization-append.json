@@ -1,0 +1,49 @@
+{
+  "messages": [
+    {
+      "key": "BEDITOR_EXCHANGE_IMPORT",
+      "de": "Gebäudeentwurf importieren",
+      "en": "Import building design"
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_EXPORT",
+      "de": "Gebäudeentwurf exportieren",
+      "en": "Export building design"
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_FAILED",
+      "de": "Austausch fehlgeschlagen ({code}). Der bisherige Entwurf bleibt erhalten.",
+      "en": "Exchange failed ({code}). The existing design is preserved."
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_EXPORTED",
+      "de": "Gebäudeentwurf exportiert.",
+      "en": "Building design exported."
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_COPY_CONFIRM",
+      "de": "{name} · Revision {revision} · {parts} benötigte Teiletypen\n\nAls eigene Kopie im Editor öffnen? Die Inbox-Revision bleibt unverändert. Der aktuelle Entwurf bleibt über Rückgängig erreichbar.",
+      "en": "{name} · Revision {revision} · {parts} required part types\n\nOpen as your own copy in the editor? The inbox revision is preserved. Undo restores the current design."
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_ADOPTED",
+      "de": "Eigene Entwurfskopie geöffnet. Speichern übernimmt sie in deine Bibliothek. Es wurde kein Gebäude gebaut.",
+      "en": "Opened your own design copy. Save it to add it to your library. No building was constructed."
+    },
+    {
+      "key": "BEDITOR_EXCHANGE_COPY_COLLISION",
+      "de": "Der Name gehört bereits zu einem anderen Entwurf. Wähle einen neuen Namen für deine Kopie.",
+      "en": "This name already belongs to another design. Choose a new name for your copy."
+    },
+    {
+      "key": "SHIP_EXCHANGE_COPY_REQUIRED",
+      "de": "Dieser importierte Originalentwurf bleibt erhalten. Zum Bearbeiten als Kopie speichern.",
+      "en": "This imported original design is preserved. Save a copy to edit it."
+    },
+    {
+      "key": "SHIP_EXCHANGE_FAILED",
+      "de": "Austausch fehlgeschlagen ({code}). Vorhandene Entwürfe bleiben erhalten.",
+      "en": "Exchange failed ({code}). Existing designs are preserved."
+    }
+  ]
+}

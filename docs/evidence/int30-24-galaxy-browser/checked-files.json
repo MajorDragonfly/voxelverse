@@ -1,0 +1,13 @@
+{
+  "fixed_basis": "2b1ac023db4074c2ce6b7db8fbab09ab929a8435",
+  "validation_parent_commit": "6b6fdccb521ae93657fc80e2cdc20c484aa40615",
+  "final_source_sha256": "0758648d6b617e3cc37cc7d160ede93320681e6db3f2825ca5b14554ebc61d01",
+  "note": "Validation copy adds only the documented owner patches; final owned file hashes match the published branch. Render capture helper was checked separately in Compatibility.",
+  "files": {
+    "world/planet_lab/galaxy_catalog_panel.gd": "cd429b6bca20416585a385e8df6b6eec98d0fa04f8aa3815cb8d20b478e4636b",
+    "world/planet_lab/galaxy_browser_presentation.gd": "7b98f43439f5b177e19e132bd3591321ab0b8a74e0637559ca5c45da145eb9aa",
+    "tests/int30_galaxy_browser_test.gd": "dad308cce9d15850a388542f9bbec775c356e476e29eeb3d0418a4e70e601883",
+    "tests/int30_galaxy_browser_capture.gd": "f7edf31d3804511a77f98b36d5a403659d030df9cc8a9cb2cc335cda3b1f4ad6",
+    "tests/int30_galaxy_browser_baseline.gd": "a04fa826943416f7b045415ecccd5d73317daaeb2cf3202fe812b06a06d8f106"
+  }
+}

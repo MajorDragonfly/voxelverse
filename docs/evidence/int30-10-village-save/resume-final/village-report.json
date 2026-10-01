@@ -1,0 +1,1221 @@
+{
+	"failures": [],
+	"observations": [
+		{
+			"campaign_id": "campaign_f570762d28cee4810889a08c905541fd",
+			"clock": 80.75797833333341,
+			"real_checkpoint_source": "/workspace/scratch/27890ce47205/resume-final/physical-construction-source.save.json"
+		},
+		{
+			"case": "construction_cargo",
+			"clock": 80.75797833333341,
+			"exit_code": 0,
+			"held_cargo": [
+				"wood",
+				"wood",
+				"wood"
+			],
+			"owner": "near",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			}
+		},
+		{
+			"camera_distance": 32.557640075683594,
+			"capture": "01_finished_village_near",
+			"huts": 1.0,
+			"labels": [
+				{
+					"text": "Dorfplatz · Lager & Werkbank",
+					"visible": true
+				},
+				{
+					"text": "Essbare Wurzeln · 48",
+					"visible": true
+				},
+				{
+					"text": "Lose Steine · 42",
+					"visible": true
+				},
+				{
+					"text": "Leseholz · 36",
+					"visible": true
+				}
+			],
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			},
+			"terrain": "public spherical campaign"
+		},
+		{
+			"camera_distance": 118.10588073730469,
+			"capture": "02_finished_village_far",
+			"huts": 1.0,
+			"labels": [
+				{
+					"text": "Dorfplatz · Lager & Werkbank",
+					"visible": false
+				},
+				{
+					"text": "Essbare Wurzeln · 48",
+					"visible": false
+				},
+				{
+					"text": "Lose Steine · 42",
+					"visible": false
+				},
+				{
+					"text": "Leseholz · 36",
+					"visible": false
+				}
+			],
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			},
+			"terrain": "public spherical campaign"
+		},
+		{
+			"camera_distance": 32.557640075683594,
+			"capture": "03_finished_village_near_return",
+			"huts": 1.0,
+			"labels": [
+				{
+					"text": "Dorfplatz · Lager & Werkbank",
+					"visible": true
+				},
+				{
+					"text": "Essbare Wurzeln · 48",
+					"visible": true
+				},
+				{
+					"text": "Lose Steine · 42",
+					"visible": true
+				},
+				{
+					"text": "Leseholz · 36",
+					"visible": true
+				}
+			],
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			},
+			"terrain": "public spherical campaign"
+		},
+		{
+			"max_ms": 334.11,
+			"orders": 100,
+			"p50_ms": 158.083,
+			"p95_ms": 210.168,
+			"samples": [
+				{
+					"committed": true,
+					"feedback_ms": 1.095,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.205,
+					"save_ms": 123.676,
+					"total_ms": 125.678,
+					"visuals_ms": 0.378
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.197,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.136,
+					"save_ms": 126.049,
+					"total_ms": 129.238,
+					"visuals_ms": 0.525
+				},
+				{
+					"committed": true,
+					"feedback_ms": 121.317,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.224,
+					"save_ms": 136.719,
+					"total_ms": 268.149,
+					"visuals_ms": 5.521
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.863,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.305,
+					"save_ms": 154.875,
+					"total_ms": 159.005,
+					"visuals_ms": 0.822
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.006,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.187,
+					"save_ms": 137.989,
+					"total_ms": 140.77,
+					"visuals_ms": 0.399
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.999,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.164,
+					"save_ms": 161.43,
+					"total_ms": 165.285,
+					"visuals_ms": 0.575
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.27,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.172,
+					"save_ms": 162.689,
+					"total_ms": 167.268,
+					"visuals_ms": 0.477
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.048,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.19,
+					"save_ms": 157.555,
+					"total_ms": 161.915,
+					"visuals_ms": 0.638
+				},
+				{
+					"committed": true,
+					"feedback_ms": 1.87,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.184,
+					"save_ms": 108.32,
+					"total_ms": 110.932,
+					"visuals_ms": 0.353
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.182,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.126,
+					"save_ms": 107.847,
+					"total_ms": 110.79,
+					"visuals_ms": 0.315
+				},
+				{
+					"committed": true,
+					"feedback_ms": 1.852,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.126,
+					"save_ms": 107.69,
+					"total_ms": 110.165,
+					"visuals_ms": 0.394
+				},
+				{
+					"committed": true,
+					"feedback_ms": 1.78,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.127,
+					"save_ms": 101.094,
+					"total_ms": 103.482,
+					"visuals_ms": 0.388
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.292,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.139,
+					"save_ms": 109.176,
+					"total_ms": 112.583,
+					"visuals_ms": 0.533
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.234,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.148,
+					"save_ms": 133.219,
+					"total_ms": 137.459,
+					"visuals_ms": 0.522
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.002,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.195,
+					"save_ms": 182.749,
+					"total_ms": 186.677,
+					"visuals_ms": 0.561
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.819,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.247,
+					"save_ms": 190.265,
+					"total_ms": 193.992,
+					"visuals_ms": 0.534
+				},
+				{
+					"committed": true,
+					"feedback_ms": 12.739,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.21,
+					"save_ms": 136.052,
+					"total_ms": 149.662,
+					"visuals_ms": 0.543
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.127,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.231,
+					"save_ms": 126.908,
+					"total_ms": 130.039,
+					"visuals_ms": 0.41
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.091,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.135,
+					"save_ms": 122.911,
+					"total_ms": 125.649,
+					"visuals_ms": 0.426
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.711,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.41,
+					"save_ms": 176.631,
+					"total_ms": 180.403,
+					"visuals_ms": 0.525
+				},
+				{
+					"committed": true,
+					"feedback_ms": 1.943,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.178,
+					"save_ms": 163.541,
+					"total_ms": 166.453,
+					"visuals_ms": 0.376
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.484,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.138,
+					"save_ms": 115.456,
+					"total_ms": 119.135,
+					"visuals_ms": 0.393
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.755,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.141,
+					"save_ms": 144.585,
+					"total_ms": 148.29,
+					"visuals_ms": 0.43
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.289,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.196,
+					"save_ms": 166.54,
+					"total_ms": 171.022,
+					"visuals_ms": 0.407
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.063,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.177,
+					"save_ms": 184.798,
+					"total_ms": 188.839,
+					"visuals_ms": 0.511
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.416,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.195,
+					"save_ms": 190.005,
+					"total_ms": 194.245,
+					"visuals_ms": 0.508
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.859,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.239,
+					"save_ms": 184.637,
+					"total_ms": 189.756,
+					"visuals_ms": 0.586
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.739,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.224,
+					"save_ms": 206.274,
+					"total_ms": 210.168,
+					"visuals_ms": 0.467
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.147,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.206,
+					"save_ms": 128.499,
+					"total_ms": 131.323,
+					"visuals_ms": 0.359
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.642,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.173,
+					"save_ms": 119.168,
+					"total_ms": 122.615,
+					"visuals_ms": 0.386
+				},
+				{
+					"committed": true,
+					"feedback_ms": 6.83,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.191,
+					"save_ms": 246.071,
+					"total_ms": 254.061,
+					"visuals_ms": 0.536
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.821,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.192,
+					"save_ms": 251.214,
+					"total_ms": 254.743,
+					"visuals_ms": 0.385
+				},
+				{
+					"committed": true,
+					"feedback_ms": 7.364,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.136,
+					"save_ms": 325.676,
+					"total_ms": 334.11,
+					"visuals_ms": 0.517
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.923,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.242,
+					"save_ms": 287.218,
+					"total_ms": 292.636,
+					"visuals_ms": 0.464
+				},
+				{
+					"committed": true,
+					"feedback_ms": 15.466,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.212,
+					"save_ms": 166.875,
+					"total_ms": 183.613,
+					"visuals_ms": 0.578
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.641,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.282,
+					"save_ms": 164.846,
+					"total_ms": 169.366,
+					"visuals_ms": 0.466
+				},
+				{
+					"committed": true,
+					"feedback_ms": 4.755,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.201,
+					"save_ms": 137.973,
+					"total_ms": 143.524,
+					"visuals_ms": 0.495
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.235,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.176,
+					"save_ms": 146.282,
+					"total_ms": 150.538,
+					"visuals_ms": 0.51
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.604,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.198,
+					"save_ms": 170.772,
+					"total_ms": 174.399,
+					"visuals_ms": 0.534
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.7,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.234,
+					"save_ms": 157.261,
+					"total_ms": 161.952,
+					"visuals_ms": 0.636
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.551,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.193,
+					"save_ms": 173.668,
+					"total_ms": 177.304,
+					"visuals_ms": 0.543
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.228,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.162,
+					"save_ms": 147.491,
+					"total_ms": 150.31,
+					"visuals_ms": 0.342
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.344,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.163,
+					"save_ms": 117.607,
+					"total_ms": 120.747,
+					"visuals_ms": 0.543
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.389,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.136,
+					"save_ms": 134.733,
+					"total_ms": 138.685,
+					"visuals_ms": 1.325
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.021,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.131,
+					"save_ms": 138.177,
+					"total_ms": 140.895,
+					"visuals_ms": 0.481
+				},
+				{
+					"committed": true,
+					"feedback_ms": 1.882,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.307,
+					"save_ms": 125.763,
+					"total_ms": 128.611,
+					"visuals_ms": 0.333
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.225,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.148,
+					"save_ms": 116.622,
+					"total_ms": 119.799,
+					"visuals_ms": 0.38
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.631,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.152,
+					"save_ms": 164.796,
+					"total_ms": 168.237,
+					"visuals_ms": 0.533
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.619,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.18,
+					"save_ms": 162.552,
+					"total_ms": 165.993,
+					"visuals_ms": 0.506
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.956,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.18,
+					"save_ms": 153.997,
+					"total_ms": 158.083,
+					"visuals_ms": 0.459
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.485,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.19,
+					"save_ms": 190.397,
+					"total_ms": 195.144,
+					"visuals_ms": 0.935
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.317,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.228,
+					"save_ms": 197.112,
+					"total_ms": 201.721,
+					"visuals_ms": 0.502
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.911,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.213,
+					"save_ms": 189.403,
+					"total_ms": 193.456,
+					"visuals_ms": 0.505
+				},
+				{
+					"committed": true,
+					"feedback_ms": 4.277,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.192,
+					"save_ms": 196.371,
+					"total_ms": 201.917,
+					"visuals_ms": 0.495
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.892,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.243,
+					"save_ms": 189.087,
+					"total_ms": 193.17,
+					"visuals_ms": 0.504
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.935,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.179,
+					"save_ms": 176.68,
+					"total_ms": 180.782,
+					"visuals_ms": 0.499
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.594,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.196,
+					"save_ms": 168.728,
+					"total_ms": 173.152,
+					"visuals_ms": 0.506
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.722,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.25,
+					"save_ms": 171.218,
+					"total_ms": 175.11,
+					"visuals_ms": 0.455
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.65,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.201,
+					"save_ms": 182.183,
+					"total_ms": 185.983,
+					"visuals_ms": 0.82
+				},
+				{
+					"committed": true,
+					"feedback_ms": 1.82,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.211,
+					"save_ms": 168.124,
+					"total_ms": 170.877,
+					"visuals_ms": 0.41
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.016,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.129,
+					"save_ms": 137.046,
+					"total_ms": 141.148,
+					"visuals_ms": 0.491
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.364,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.201,
+					"save_ms": 174.146,
+					"total_ms": 177.517,
+					"visuals_ms": 0.411
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.345,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.17,
+					"save_ms": 178.356,
+					"total_ms": 182.525,
+					"visuals_ms": 0.543
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.125,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.219,
+					"save_ms": 162.494,
+					"total_ms": 165.409,
+					"visuals_ms": 0.384
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.668,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.153,
+					"save_ms": 118.39,
+					"total_ms": 122.138,
+					"visuals_ms": 0.484
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.342,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.167,
+					"save_ms": 152.724,
+					"total_ms": 156.033,
+					"visuals_ms": 0.428
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.289,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.151,
+					"save_ms": 128.732,
+					"total_ms": 131.919,
+					"visuals_ms": 0.415
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.462,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.131,
+					"save_ms": 133.696,
+					"total_ms": 136.755,
+					"visuals_ms": 0.356
+				},
+				{
+					"committed": true,
+					"feedback_ms": 8.682,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.133,
+					"save_ms": 189.962,
+					"total_ms": 199.455,
+					"visuals_ms": 0.565
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.708,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.25,
+					"save_ms": 203.017,
+					"total_ms": 206.88,
+					"visuals_ms": 0.457
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.356,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.208,
+					"save_ms": 161.249,
+					"total_ms": 164.676,
+					"visuals_ms": 0.416
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.319,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.157,
+					"save_ms": 151.243,
+					"total_ms": 154.244,
+					"visuals_ms": 0.438
+				},
+				{
+					"committed": true,
+					"feedback_ms": 4.092,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.36,
+					"save_ms": 122.811,
+					"total_ms": 129.173,
+					"visuals_ms": 0.375
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.886,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.184,
+					"save_ms": 128.722,
+					"total_ms": 132.363,
+					"visuals_ms": 0.477
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.687,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.154,
+					"save_ms": 114.569,
+					"total_ms": 117.825,
+					"visuals_ms": 0.331
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.626,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.175,
+					"save_ms": 176.039,
+					"total_ms": 179.742,
+					"visuals_ms": 0.482
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.04,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.219,
+					"save_ms": 177.807,
+					"total_ms": 181.597,
+					"visuals_ms": 0.428
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.542,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.163,
+					"save_ms": 116.999,
+					"total_ms": 120.255,
+					"visuals_ms": 0.458
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.179,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.136,
+					"save_ms": 136.605,
+					"total_ms": 140.613,
+					"visuals_ms": 0.596
+				},
+				{
+					"committed": true,
+					"feedback_ms": 4.538,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.218,
+					"save_ms": 131.571,
+					"total_ms": 137.017,
+					"visuals_ms": 0.59
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.128,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.157,
+					"save_ms": 110.81,
+					"total_ms": 113.512,
+					"visuals_ms": 0.334
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.168,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.115,
+					"save_ms": 126.535,
+					"total_ms": 129.766,
+					"visuals_ms": 0.485
+				},
+				{
+					"committed": true,
+					"feedback_ms": 15.381,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.425,
+					"save_ms": 122.779,
+					"total_ms": 139.127,
+					"visuals_ms": 0.443
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.839,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.156,
+					"save_ms": 116.078,
+					"total_ms": 119.553,
+					"visuals_ms": 0.394
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.34,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.166,
+					"save_ms": 130.321,
+					"total_ms": 133.25,
+					"visuals_ms": 0.339
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.638,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.126,
+					"save_ms": 153.276,
+					"total_ms": 156.503,
+					"visuals_ms": 0.376
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.799,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.137,
+					"save_ms": 111.717,
+					"total_ms": 115.113,
+					"visuals_ms": 0.376
+				},
+				{
+					"committed": true,
+					"feedback_ms": 1.856,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.148,
+					"save_ms": 115.723,
+					"total_ms": 118.412,
+					"visuals_ms": 0.371
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.154,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.122,
+					"save_ms": 130.577,
+					"total_ms": 134.441,
+					"visuals_ms": 0.48
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.078,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.183,
+					"save_ms": 172.232,
+					"total_ms": 174.992,
+					"visuals_ms": 0.412
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.284,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.131,
+					"save_ms": 119.761,
+					"total_ms": 122.652,
+					"visuals_ms": 0.359
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.485,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.126,
+					"save_ms": 138.155,
+					"total_ms": 142.373,
+					"visuals_ms": 0.501
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.233,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.226,
+					"save_ms": 139.692,
+					"total_ms": 143.769,
+					"visuals_ms": 0.5
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.165,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.196,
+					"save_ms": 171.693,
+					"total_ms": 175.676,
+					"visuals_ms": 0.501
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.316,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.268,
+					"save_ms": 129.931,
+					"total_ms": 134.117,
+					"visuals_ms": 0.483
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.133,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.186,
+					"save_ms": 173.072,
+					"total_ms": 176.995,
+					"visuals_ms": 0.493
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.335,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.183,
+					"save_ms": 183.593,
+					"total_ms": 187.665,
+					"visuals_ms": 0.447
+				},
+				{
+					"committed": true,
+					"feedback_ms": 2.836,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.201,
+					"save_ms": 199.205,
+					"total_ms": 202.725,
+					"visuals_ms": 0.362
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.03,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.241,
+					"save_ms": 159.024,
+					"total_ms": 162.887,
+					"visuals_ms": 0.481
+				},
+				{
+					"committed": true,
+					"feedback_ms": 3.772,
+					"ok": true,
+					"order": "wait",
+					"prepare_ms": 0.2,
+					"save_ms": 163.705,
+					"total_ms": 168.336,
+					"visuals_ms": 0.535
+				}
+			],
+			"scene": "public sphere with completed hut",
+			"scope": "container observations; target-PC frame-time acceptance remains separate"
+		},
+		{
+			"camera_distance": 32.557640075683594,
+			"capture": "04_finished_village_actual_work",
+			"huts": 1.0,
+			"labels": [
+				{
+					"text": "Dorfplatz · Lager & Werkbank",
+					"visible": true
+				},
+				{
+					"text": "Essbare Wurzeln · 48",
+					"visible": true
+				},
+				{
+					"text": "Lose Steine · 42",
+					"visible": true
+				},
+				{
+					"text": "Leseholz · 36",
+					"visible": true
+				}
+			],
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			},
+			"terrain": "public spherical campaign"
+		},
+		{
+			"actual_worker": "object_839f34f9dcd5e6a1e5b47153d6702d8b",
+			"cargo": "",
+			"tool_visible": true,
+			"work": 0.03333333333333333
+		},
+		{
+			"case": "gathered_cargo",
+			"clock": 110.38317544444472,
+			"exit_code": 0,
+			"held_cargo": [
+				"",
+				"wood",
+				""
+			],
+			"owner": "near",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 3.0
+			}
+		},
+		{
+			"case": "far_cargo",
+			"clock": 119.79965900000029,
+			"exit_code": 0,
+			"held_cargo": [
+				"",
+				"wood",
+				""
+			],
+			"owner": "far",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 1.0,
+				"water": 0.0,
+				"wood": 4.0
+			}
+		}
+	],
+	"passed": true,
+	"saw_actual_work_tool": true,
+	"test": "int30_village_resume"
+}

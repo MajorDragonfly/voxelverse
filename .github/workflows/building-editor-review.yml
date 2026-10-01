@@ -1,0 +1,46 @@
+name: Building editor review
+
+on:
+  pull_request:
+    paths:
+      - "civilization/buildings/building_builder.gd"
+      - "civilization/buildings/building_editor_text.gd"
+      - "civilization/buildings/building_transform_field.gd"
+      - "tests/building_editor_input_test.gd"
+      - "tools/review_building_editor.py"
+      - "localization/**"
+      - ".github/workflows/building-editor-review.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: building-editor-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  building-editor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software graphics
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Import and capture building editor
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          "$GODOT_BINARY" --headless --path . --import > /tmp/building-editor-import.log 2>&1
+          xvfb-run -a -s '-screen 0 1920x1080x24' python3 tools/review_building_editor.py --godot "$GODOT_BINARY" --output /tmp/building-editor-review
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: building-editor-review
+          path: |
+            /tmp/building-editor-review
+            /tmp/building-editor-import.log
+          retention-days: 14

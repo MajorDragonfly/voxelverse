@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "seconds": 80.103,
+  "renderer": "gl_compatibility",
+  "command": [
+    "/workspace/scratch/2656e69ac218/godot",
+    "--path",
+    "/workspace/scratch/4d8c50c330d2/voxelverse",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://tests/int30_galaxy_browser_capture.gd",
+    "--",
+    "--capture"
+  ],
+  "screenshots": [
+    {
+      "name": "galaxy-1280x720-body.png",
+      "sha256": "d0f7d8f4a3f917a7d1b6289980b5fa230465089b7e05159c86b905ca5d31e202"
+    },
+    {
+      "name": "galaxy-1280x720-empty.png",
+      "sha256": "193415aab62bb3b03ab4a2482a26473ea0a2ff97794d0af64b2c0481e8756799"
+    },
+    {
+      "name": "galaxy-1280x720-gas_giant.png",
+      "sha256": "f1628af5b988feb719641f37d44cde033ffb72b0e29d1d578f8abecd650aaca4"
+    },
+    {
+      "name": "galaxy-1280x720-invalid-id.png",
+      "sha256": "17aaa3b12744c8538414fe34f3d69cc113f3db65dd7c4f2c67570fc70556e95f"
+    },
+    {
+      "name": "galaxy-1280x720-moon.png",
+      "sha256": "4e115964f436c3bf604972505b18e20095d926c5bfe4a8b5289293138f2b6daf"
+    },
+    {
+      "name": "galaxy-1280x720-navigation.png",
+      "sha256": "0cc895735160718e5a24e07bd3c3498186918a3e5d3ffe636783e1866b8b06f6"
+    },
+    {
+      "name": "galaxy-1280x720-single.png",
+      "sha256": "f931c68a1587399aafbfb2d7db4037dacc82929414c8c8e9ff05cd22e822ba5e"
+    },
+    {
+      "name": "galaxy-1280x720-star.png",
+      "sha256": "daab5927a29fa51c1bbf888b0cf5db9ff0ca8608cb723cb26c43f552bd98c718"
+    },
+    {
+      "name": "galaxy-800x600-body.png",
+      "sha256": "2b86866909b1204b8b53e30a5841957fc2dae25bc4556c9866bb5b9f5b4c6268"
+    },
+    {
+      "name": "galaxy-800x600-navigation.png",
+      "sha256": "f5ed7beea4473818b825f3341dd717306120836df390c91db63389b096a32093"
+    },
+    {
+      "name": "galaxy-800x600-scale150-body.png",
+      "sha256": "f080dd05c5b19a55bda9a9aa8f5cf2db398442378f5ce29a01fbb685a9a97d34"
+    },
+    {
+      "name": "galaxy-800x600-scale150-navigation.png",
+      "sha256": "7d172842e8cfd34d29a8d3b52e21f494a67754e8e051a95de4fd6517878faa62"
+    }
+  ],
+  "scope": "Actual standalone catalogue UI; software Mesa rendering; no campaign/FPS acceptance"
+}

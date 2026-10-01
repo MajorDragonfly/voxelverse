@@ -1,0 +1,14 @@
+--- a/tests/audio/foley_runtime_test.gd
++++ b/tests/audio/foley_runtime_test.gd
+@@ -96,6 +96,11 @@
+ 	expect(heard.size() == before and director._water_foley._bubble_clock == cadence, "Pause advanced water foley")
+ 	paused = false
+ 	await tick(3)
++	# The fixture advances 60 Hz simulation on faster process frames. The mixer
++	# remains on wall time; a held crossing must wait for the real previous cue.
++	var cue_deadline := Time.get_ticks_msec() + 1200
++	while heard.count(&"water_dive") < 2 and Time.get_ticks_msec() < cue_deadline:
++		await tick(1)
+ 	expect(heard.count(&"water_dive") == 2, "Unpaused eye crossing was lost")
+ 	# Water-body departure differs from entering; settle and eye changes stay separate.
+ 	camera.position.x = water_x + 0.2

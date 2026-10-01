@@ -1,0 +1,152 @@
+{
+  "passed": true,
+  "source": {
+    "commit": "24a48366e3ef880a5d47313083776e2d226eb35f",
+    "tracked_worktree_dirty": false
+  },
+  "source_files_sha256": {
+    "civilization/buildings/templates/README.md": "0e6f5da6b76ffbfb53632104c4a2f79b0cb7641d6e2ff4d35c18b3a0fadb8fbf",
+    "civilization/buildings/templates/building_template_picker.gd": "7e973e9be1f156f9c4b2375e862347dae353a54dbd7b60188e73306882df50dc",
+    "civilization/buildings/templates/building_template_selection.gd": "c2c060ca31902210607bf73352c38561716f68c9b9fa6a7fd43cb6224f3b704e",
+    "civilization/buildings/templates/building_templates.gd": "6e4680ad50d554d43023f1a5d226775b31f5488d6edb8cc1a05f743e4cbc2be5",
+    "civilization/buildings/templates/catalog.json": "6ae14ad32136f057f8c28581957c42ccb8e0942285ac7bfe177eba74200b7806",
+    "civilization/buildings/templates/designs/residence.json": "7e3db479f8f0f469fd399b10a106fb1fa4bd911676532e83f4695ae309d4409b",
+    "civilization/buildings/templates/designs/warehouse.json": "3c6f17dfbb8c59feae619267b1d24b264dc1304ab01db1cf2f60ff837fa98ed7",
+    "civilization/buildings/templates/designs/workshop.json": "392f2fa6aa4a42eea33022c80d3edae7457973ed1e22b09445b466a47fc20ea3",
+    "tests/int30_building_templates_test.gd": "647e7728a4a3521955b8a6b965911cc4205108cd488d36f0c14d064ae48dcf14",
+    "tools/review_int30_building_templates.py": "8a4b14529c2b7de75fccd10b394d92e8a57a070b5c5a9ac7085dafaa1529c7ed",
+    "docs/evidence/int30-building-templates/integration/localization.append.json": "932b2b04bb3b0ad12d1592b3b0fee61fe6fdf5a4e5fdf7c9ad16bbde6cd47789"
+  },
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility",
+  "commands": [
+    [
+      "/workspace/scratch/9632bd8c125f/runtime/godot",
+      "--path",
+      "/workspace/scratch/9632bd8c125f/voxelverse",
+      "--audio-driver",
+      "Dummy",
+      "--rendering-method",
+      "gl_compatibility",
+      "--script",
+      "res://tests/int30_building_templates_test.gd",
+      "--",
+      "--capture",
+      "/workspace/scratch/9632bd8c125f/voxelverse/docs/evidence/int30-building-templates/render"
+    ],
+    [
+      "/workspace/scratch/9632bd8c125f/runtime/godot",
+      "--path",
+      "/workspace/scratch/9632bd8c125f/voxelverse",
+      "--audio-driver",
+      "Dummy",
+      "--headless",
+      "--script",
+      "res://tests/int30_building_templates_test.gd",
+      "--",
+      "--restart"
+    ]
+  ],
+  "results": [
+    {
+      "name": "editor-and-designs",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "1a2476c8af287d3e8c1aa5c95f9ddcd284f5d690cd816451ad4af0a2d3134933",
+      "result": {
+        "checks": 479,
+        "designs": [
+          {
+            "design_id": "design_de08d1782db2680af2729922c768c6c1",
+            "id": "building.template.residence",
+            "parts": 12,
+            "revision": 1,
+            "source_sha256": "7e3db479f8f0f469fd399b10a106fb1fa4bd911676532e83f4695ae309d4409b",
+            "stats": {
+              "commerce": 0.0,
+              "cost": 54.0,
+              "defense": 6.0,
+              "energy": 0.0,
+              "housing": 15.0,
+              "industry": 3.0,
+              "pollution": 2.0,
+              "prestige": 11.0
+            }
+          },
+          {
+            "design_id": "design_1ce79eed3b2cc20989fbf7b1d54ee6d2",
+            "id": "building.template.warehouse",
+            "parts": 13,
+            "revision": 1,
+            "source_sha256": "3c6f17dfbb8c59feae619267b1d24b264dc1304ab01db1cf2f60ff837fa98ed7",
+            "stats": {
+              "commerce": 2.0,
+              "cost": 77.0,
+              "defense": 14.0,
+              "energy": 0.0,
+              "housing": 18.0,
+              "industry": 0.0,
+              "pollution": 0.0,
+              "prestige": 14.0
+            }
+          },
+          {
+            "design_id": "design_31e599036c70e0d473a3435466f8964d",
+            "id": "building.template.workshop",
+            "parts": 11,
+            "revision": 1,
+            "source_sha256": "392f2fa6aa4a42eea33022c80d3edae7457973ed1e22b09445b466a47fc20ea3",
+            "stats": {
+              "commerce": 8.0,
+              "cost": 68.0,
+              "defense": 5.0,
+              "energy": -2.0,
+              "housing": 2.0,
+              "industry": 12.0,
+              "pollution": 4.0,
+              "prestige": 9.0
+            }
+          }
+        ],
+        "failures": [],
+        "passed": true,
+        "restart": false,
+        "test": "int30_building_templates"
+      }
+    },
+    {
+      "name": "fresh-process-reload",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "log_sha256": "41fe170d112212de15105abc74ce30acb11a123a71be19efc91034647cc42424",
+      "result": {
+        "checks": 10,
+        "designs": [],
+        "failures": [],
+        "passed": true,
+        "restart": true,
+        "test": "int30_building_templates"
+      }
+    }
+  ],
+  "screenshots": [
+    "residence-editor-edited-reload-de.png",
+    "residence-editor-open.png",
+    "residence-front.png",
+    "residence-rear.png",
+    "residence-top.png",
+    "warehouse-editor-edited-reload-de.png",
+    "warehouse-editor-open.png",
+    "warehouse-front.png",
+    "warehouse-rear.png",
+    "warehouse-top.png",
+    "workshop-editor-edited-reload-de.png",
+    "workshop-editor-open.png",
+    "workshop-front.png",
+    "workshop-rear.png",
+    "workshop-top.png"
+  ],
+  "scope": "Built-in designs, real catalog meshes, optional picker/editor bridge, isolated explicit copy saves and fresh process reload; no campaign construction"
+}

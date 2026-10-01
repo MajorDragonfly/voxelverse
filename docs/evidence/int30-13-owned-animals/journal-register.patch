@@ -1,0 +1,20 @@
+diff --git a/ui/discovery/discovery_journal.gd b/ui/discovery/discovery_journal.gd
+index f0ca914..0f9cebf 100644
+--- a/ui/discovery/discovery_journal.gd
++++ b/ui/discovery/discovery_journal.gd
+@@ -14,0 +15 @@ const OwnedReader = preload("res://ui/discovery/owned_animal_reader.gd")
++const OwnedControls = preload("res://ui/discovery/owned_animal_controls.gd")
+@@ -71,0 +73 @@ var _owned_reader = OwnedReader.new()
++var _owned_controls: HBoxContainer
+@@ -348,0 +351,6 @@ func _build() -> void:
++	_owned_controls = OwnedControls.new()
++	_owned_controls.name = "OwnedAnimalControls"
++	_owned_controls.size_flags_horizontal = Control.SIZE_EXPAND_FILL
++	choices.add_child(_owned_controls)
++	_owned_controls.changed.connect(func() -> void: _page = 0; _apply_filters())
++	_owned_controls.hide()
+@@ -595,0 +604 @@ func _apply_filters() -> void:
++	_owned_controls.visible = _tabs.current_tab == ANIMALS_TAB
+@@ -623 +632 @@ func _apply_filters() -> void:
+-			animals = _owned_reader.read(_search.text, filter_value)
++			animals = _owned_controls.read(_owned_reader, _search.text, filter_value, _progression.discovered_species)

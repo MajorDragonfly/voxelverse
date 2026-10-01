@@ -1,0 +1,148 @@
+name: INT30 feature review
+
+on:
+  pull_request:
+    paths:
+      - "ui/blueprints/**"
+      - "ui/discovery/owned_animal*"
+      - "ui/discovery/discovery_journal.gd"
+      - "ui/tutorial/tribal_*"
+      - "ui/tribe/**"
+      - "creatures/editor/**"
+      - "civilization/buildings/**"
+      - "civilization/technology/**"
+      - "space/ships/**"
+      - "world/planet_lab/galaxy_*"
+      - "tests/*int30*"
+      - "tests/owned_animal*"
+      - "tests/shipyard_presentation*"
+      - "tests/creature_library*"
+      - "tools/review_int30_*"
+      - "tools/review_shipyard_presentation.py"
+      - "tools/validate_godot.py"
+      - "tools/validation_provenance.py"
+      - "tools/validation_support.py"
+      - "tools/validation/contracts.json"
+      - "localization/**"
+      - "project.godot"
+      - "docs/evidence/int30-design-library/review_picker.py"
+      - "docs/evidence/int30-24-galaxy-browser/review.py"
+      - ".github/workflows/int30-feature-review.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: int30-feature-review-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: INT30 ${{ matrix.feature }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        feature: [design-library, owned-animals, shipyard, tribal-guidance, appearance, medieval-preview, galaxy-browser, building-templates]
+    env:
+      FEATURE: ${{ matrix.feature }}
+      REPORT: ${{ runner.temp }}/int30-feature-${{ matrix.feature }}
+      LIBGL_ALWAYS_SOFTWARE: "1"
+      LP_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup-godot-editor
+        id: engine
+      - name: Install native software graphics
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri
+      - name: Check source contracts and import exact candidate
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          python3 tools/validate_godot.py --godot "$GODOT_BINARY" --tests --skip-main --output "$REPORT/preparation"
+      - name: Capture supplied native flow with unchanged helper budgets
+        env:
+          GODOT_BINARY: ${{ steps.engine.outputs.godot }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path('tools').resolve()))
+          from validation_provenance import SourceRun
+
+          project = Path.cwd()
+          report = Path(os.environ['REPORT'])
+          feature = os.environ['FEATURE']
+          godot = os.environ['GODOT_BINARY']
+          source_dir = report / 'combined-source'
+          source_dir.mkdir()
+          source = SourceRun(project)
+          source.begin_report(source_dir)
+          if source.blocked or source.start['tracked_worktree_dirty']:
+              raise SystemExit('Capture requires an available clean combined source')
+          out = lambda name: str(report / name)
+          python = ['python3']
+          graphic = ['xvfb-run', '-a', '-s', '-screen 0 1920x1080x24']
+          commands = {
+              'design-library': [python + ['docs/evidence/int30-design-library/review_picker.py', '--project', str(project), '--godot', godot, '--editor', '--output', out('native')]],
+              'owned-animals': [python + ['tools/review_int30_owned_animals.py', '--godot', godot, '--output', out('native')]],
+              'shipyard': [python + ['tools/review_shipyard_presentation.py', '--godot', godot, '--capture', '--authoring-profile', '--output', out('native')]],
+              'tribal-guidance': [python + ['tools/review_int30_tribal_guidance.py', '--godot', godot, '--mode', mode, '--output', out(mode)] for mode in ('ui', 'world')],
+              'medieval-preview': [python + ['civilization/technology/run_preview.py', '--godot', godot, '--verify', '--capture', '--renderer', 'gl_compatibility', '--output', out('native')]],
+              'galaxy-browser': [python + ['docs/evidence/int30-24-galaxy-browser/review.py', '--project', str(project), '--godot', godot, '--output', out('native')]],
+              'building-templates': [python + ['tools/review_int30_building_templates.py', '--godot', godot, '--output', out('native')]],
+          }
+          records, worktrees = [], []
+          candidate = baseline = None
+          try:
+              if feature == 'appearance':
+                  # The shipped helper supports already integrated QA sources. Keep
+                  # its original five-image before/after contract without applying
+                  # specialist owner patches a second time or touching this checkout.
+                  baseline_sha = '0ab9d20b0f448864c6e104c093b3ce97532e95e5'
+                  baseline = Path(os.environ['RUNNER_TEMP']) / 'appearance-baseline'
+                  candidate = Path(os.environ['RUNNER_TEMP']) / 'appearance-candidate'
+                  for directory, ref in ((baseline, baseline_sha), (candidate, source.start['commit'])):
+                      subprocess.run(['git', 'worktree', 'add', '--detach', str(directory), ref], check=True)
+                      worktrees.append(directory)
+                  commands[feature] = [python + ['tools/review_int30_creature_appearance.py', '--project', str(baseline), '--checkout', str(candidate), '--reuse-checkout', '--godot', godot, '--render', '--output', out('native')]]
+              for number, command in enumerate(commands[feature]):
+                  with (report / f'helper-{number}.log').open('w') as stream:
+                      code = subprocess.run(graphic + command, stdout=stream, stderr=subprocess.STDOUT).returncode
+                  records.append({'command': graphic + command, 'exit_code': code})
+              if candidate is not None:
+                  restored = subprocess.run(['git', '-C', str(candidate), 'status', '--porcelain', '--untracked-files=all'], text=True, capture_output=True, check=True).stdout
+                  tree = subprocess.check_output(['git', '-C', str(candidate), 'rev-parse', 'HEAD^{tree}'], text=True).strip()
+                  if restored or tree != source.start['tree']:
+                      records.append({'candidate_restored': False, 'status': restored, 'tree': tree, 'exit_code': 1})
+          except Exception as error:
+              records.append({'error': str(error), 'exit_code': 1})
+          finally:
+              for directory in reversed(worktrees):
+                  cleanup = subprocess.run(['git', 'worktree', 'remove', '--force', str(directory)], text=True, capture_output=True)
+                  if cleanup.returncode:
+                      records.append({'cleanup': str(directory), 'error': cleanup.stderr, 'exit_code': cleanup.returncode})
+              source.observe('native_helpers', force=True)
+              provenance = source.write_report(source_dir)
+              passed = bool(records) and all(row['exit_code'] == 0 for row in records) and provenance['reusable']
+              result = {'feature': feature, 'passed': passed, 'records': records, 'combined_source': provenance,
+                        'renderer': 'gl_compatibility', 'scope': 'Supplied native input and capture flows; software rendering, no target-PC or full-gate acceptance'}
+              (report / 'results.json').write_text(json.dumps(result, indent=2) + '\n')
+              print(json.dumps({'feature': feature, 'passed': passed, 'records': records}), flush=True)
+          raise SystemExit(0 if passed else 1)
+          PY
+      - name: Upload original frames, logs and combined source manifests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: int30-feature-${{ matrix.feature }}
+          path: ${{ env.REPORT }}
+          if-no-files-found: error
+          retention-days: 14

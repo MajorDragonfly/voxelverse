@@ -1,0 +1,27 @@
+[
+  {
+    "file": "civilization/buildings/building_builder.gd",
+    "exit": 0,
+    "output": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\n"
+  },
+  {
+    "file": "space/ships/shipyard.gd",
+    "exit": 0,
+    "output": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\n"
+  },
+  {
+    "file": "tests/building_editor_input_test.gd",
+    "exit": 0,
+    "output": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\n"
+  },
+  {
+    "file": "tests/shipyard_presentation_test.gd",
+    "exit": 0,
+    "output": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\n"
+  },
+  {
+    "file": "tests/int30_medieval_technology_test.gd",
+    "exit": 0,
+    "output": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\n"
+  }
+]

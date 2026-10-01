@@ -1,0 +1,40 @@
+{
+  "note": "Production and both test scripts match final geometry and campaign evidence; capture runner/probe match the final campaign. Documentation/evidence assembled afterward. Registry/long-test patch only applied on isolated registered-test review copy.",
+  "files": [
+    {
+      "path": "world/visuals/scenery/environment_obstacles.gd",
+      "sha256_delivered": "228bb80e18b458fc783e7f757ab0d6b4aad21b10953c54aeeb8e306f96d1f045",
+      "sha256_campaign_gl": "228bb80e18b458fc783e7f757ab0d6b4aad21b10953c54aeeb8e306f96d1f045",
+      "sha256_final_geometry": "228bb80e18b458fc783e7f757ab0d6b4aad21b10953c54aeeb8e306f96d1f045"
+    },
+    {
+      "path": "tests/int30_scenery_collision_test.gd",
+      "sha256_delivered": "9f453f2109ba706d3d9b60da45bb58ff181db369b165595fb7b02e3ddde7e540",
+      "sha256_campaign_gl": "9f453f2109ba706d3d9b60da45bb58ff181db369b165595fb7b02e3ddde7e540",
+      "sha256_final_geometry": "9f453f2109ba706d3d9b60da45bb58ff181db369b165595fb7b02e3ddde7e540"
+    },
+    {
+      "path": "tests/int30_scenery_collision_world_test.gd",
+      "sha256_delivered": "a61073606c4a27a557d90c658d44208f3005a55f308af78b667999230d20dd28",
+      "sha256_campaign_gl": "a61073606c4a27a557d90c658d44208f3005a55f308af78b667999230d20dd28",
+      "sha256_final_geometry": "a61073606c4a27a557d90c658d44208f3005a55f308af78b667999230d20dd28"
+    },
+    {
+      "path": "tools/int30_scenery_collision_probe.gd",
+      "sha256_delivered": "aaca0f72ee02610088c061c9ffa07130789919280dbc7de0d2b5f688ad84f073",
+      "sha256_campaign_gl": "aaca0f72ee02610088c061c9ffa07130789919280dbc7de0d2b5f688ad84f073",
+      "sha256_final_geometry": "9f497c418f6bd4c911648bcb9e5cea7edb0476ec26e39340c337210246bbfee6"
+    },
+    {
+      "path": "tools/int30_scenery_collision_check.py",
+      "sha256_delivered": "3eb1dc768bec4b7a56ea2e1467a440c2e62a2ea1a202677b13c995855736c8c4",
+      "sha256_campaign_gl": "3eb1dc768bec4b7a56ea2e1467a440c2e62a2ea1a202677b13c995855736c8c4",
+      "sha256_final_geometry": "78755e4dcdf9d7569c4f410fce6802820df320bcc3ae4582b35cf43216904b90"
+    }
+  ],
+  "baseline_production": {
+    "path": "world/visuals/scenery/environment_obstacles.gd",
+    "sha256": "101169f4dc373263e55c3bef5c0164a36e56fc3fba7eae79faa2a0f22c25812f",
+    "matches_fixed_INT30_basis": true
+  }
+}

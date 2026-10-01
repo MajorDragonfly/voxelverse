@@ -90,8 +90,8 @@ func configure(profile: Dictionary, seed_value: int, anchor_up: Vector3, sampler
 		_previous_weather_clouds = weather.clouds_enabled
 		weather.clouds_enabled = false # One sky owner; weather retains precipitation.
 	var frame: Basis = Cube.frame(anchor_up.normalized())
-	# Fixed body-space star; travel changes the solar elevation. No invented clock
-	# or day/night persistence contract. The home hemisphere starts in warm daylight.
+	# The saved spawn fixes the body's solar frame; camera travel changes local
+	# elevation. Rotation below reads the existing persisted campaign clock.
 	_sun_direction = (frame.y * 0.57 + frame.z * 0.74 + frame.x * 0.35).normalized()
 	_base_sun_direction = _sun_direction
 	_day_axis = frame.x

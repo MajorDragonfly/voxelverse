@@ -87,7 +87,8 @@ static func forecast(body_id: String, seed_value: int, clock: float, address: Di
 		var next: Dictionary = sample(body_id, seed_value, clock + horizon, address, radius, climate)
 		if next.is_empty(): return []
 		result.append({"in_seconds": horizon, "condition": next.condition, "precipitation": next.precipitation,
-			"rain_intensity": next.rain_intensity, "snow_intensity": next.snow_intensity, "wind_mps": next.wind_mps})
+			"rain_intensity": next.rain_intensity, "snow_intensity": next.snow_intensity, "wind_mps": next.wind_mps,
+			"hazard_kind": next.hazard_kind, "hazard_intensity": next.hazard_intensity, "preview": next.preview})
 	return result
 
 static func preview(snapshot: Dictionary, condition: String) -> Dictionary:

@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/workspace/scratch/dc65fa43e5e7/godot/Godot_v4.6.3-stable_linux.x86_64",
+    "--headless",
+    "--path",
+    "/workspace/scratch/dc65fa43e5e7/voxelverse",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "/workspace/scratch/dc65fa43e5e7/animation_cost.gd",
+    "--",
+    "/workspace/scratch/dc65fa43e5e7/final-animation-cost/metrics.json"
+  ],
+  "source": {
+    "commit": "8e51ed0b5b8f3e53f3d5e4a6965831820f7898f4",
+    "tree": "fc615eb3798ba6280f95d3387f526065ba3fa6c2",
+    "source_sha256": "137919003be9c565b1a3218918206521747738c95897e984dc12784320326983",
+    "tracked_worktree_dirty": false
+  },
+  "script_sha256": "8fbc5f10abb950e023b9e0b0c1a279f0d3c71d8771c2e3e0baedb9dabbe8533c",
+  "clock_ticks_per_second": 100,
+  "exit": 0,
+  "seconds": 13.456,
+  "log_sha256": "e6f6501538bda968b8f28109bd946c1dc81a0946bc8e4240fbab70472b27166b",
+  "environment": {
+    "XDG_DATA_HOME": "/workspace/scratch/dc65fa43e5e7/final-animation-cost/userdata/data",
+    "XDG_CONFIG_HOME": "/workspace/scratch/dc65fa43e5e7/final-animation-cost/userdata/config",
+    "XDG_CACHE_HOME": "/workspace/scratch/dc65fa43e5e7/final-animation-cost/userdata/cache"
+  }
+}

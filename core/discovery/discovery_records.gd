@@ -163,7 +163,7 @@ static func next_step(state: Dictionary, health: float = 1.0, thirst: float = 1.
 	if hunger < 0.3:
 		return "Nahrung suchen · nutze Linksklick an Nahrung, die zu deiner Kreatur passt."
 	if as_dictionary(state.get("discovered_species", {})).is_empty():
-		return "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Fadenkreuz, bis der Kreis voll ist." % KeyHints.binding_label("inspection_mode")
+		return "Deine erste Art · %s öffnet den Scanmodus. Halte ein Tier im Scankreis, bis der Kreis voll ist." % KeyHints.binding_label("inspection_mode")
 	return "Weiter entdecken · scanne mit %s unbekannte Arten. Neue Teile findest du im Editor mit F2." % KeyHints.binding_label("inspection_mode")
 
 

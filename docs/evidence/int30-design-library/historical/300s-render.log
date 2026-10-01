@@ -1,0 +1,29 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+INT30_SORT_DIAGNOSTIC {"actual":1,"expected":1,"popup":false}
+INT30_SORT_DIAGNOSTIC {"actual":2,"expected":2,"popup":false}
+INT30_SORT_DIAGNOSTIC {"actual":3,"expected":3,"popup":false}
+INT30_LOCKED_DIAGNOSTIC {"disabled":true,"requirements":"Formpunkte: 32 / 100\nNoch nicht freigeschaltet: Laufbeine","result":{"code":"locked_parts","missing_parts":["legs_walker"],"ok":false}}
+INT30_CLICK_DIAGNOSTIC {"rect":"[P: (24.0, 644.0), S: (442.0, 52.0)]","viewport":"[P: (0.0, 0.0), S: (1280.0, 720.0)]","visible":true}
+INT30_VARIANT_DIAGNOSTIC {"current_id":"design_0aeba3f9db95289671e6621487741ea3","key":"design_c429387a3e21f3d0eac1b3a312116f18@1","origin":"Lokal gespeichert\nEntwurf: design_c429387a3e21f3d0eac1b3a312116f18 · Revision 1\nOhne Autorenangabe\nAuf 1 früheren Entwürfen aufgebaut.\n• Entwurf: design_0aeba3f9db95289671e6621487741ea3 · Revision 0 · Ohne Autorenangabe","result":{"code":"","key":"design_c429387a3e21f3d0eac1b3a312116f18@1","ok":true}}
+INT30_LAYOUT {"locale":"de","scale":1.0,"size":"(800, 600)"}
+INT30_LAYOUT {"locale":"en","scale":1.0,"size":"(800, 600)"}
+INT30_LAYOUT {"locale":"de","scale":1.25,"size":"(800, 600)"}
+INT30_LAYOUT {"locale":"en","scale":1.25,"size":"(800, 600)"}
+INT30_LAYOUT {"locale":"de","scale":1.5,"size":"(800, 600)"}
+INT30_LAYOUT {"locale":"en","scale":1.5,"size":"(800, 600)"}
+INT30_LAYOUT {"locale":"de","scale":1.0,"size":"(1280, 720)"}
+INT30_LAYOUT {"locale":"en","scale":1.0,"size":"(1280, 720)"}
+INT30_LAYOUT {"locale":"de","scale":1.25,"size":"(1280, 720)"}
+INT30_LAYOUT {"locale":"en","scale":1.25,"size":"(1280, 720)"}
+INT30_LAYOUT {"locale":"de","scale":1.5,"size":"(1280, 720)"}
+INT30_LAYOUT {"locale":"en","scale":1.5,"size":"(1280, 720)"}
+INT30_LAYOUT {"locale":"de","scale":1.0,"size":"(1920, 1080)"}
+INT30_LAYOUT {"locale":"en","scale":1.0,"size":"(1920, 1080)"}
+INT30_LAYOUT {"locale":"de","scale":1.25,"size":"(1920, 1080)"}
+INT30_LAYOUT {"locale":"en","scale":1.25,"size":"(1920, 1080)"}
+INT30_LAYOUT {"locale":"de","scale":1.5,"size":"(1920, 1080)"}
+INT30_LAYOUT {"locale":"en","scale":1.5,"size":"(1920, 1080)"}

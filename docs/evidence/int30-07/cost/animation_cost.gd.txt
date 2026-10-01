@@ -1,0 +1,65 @@
+extends SceneTree
+## Linux diagnostic only: paired animation batches, thread CPU avoids scheduler wait.
+const Preview = preload("res://creatures/runtime/creature_runtime_preview.gd")
+const Shapes = preload("res://creatures/behavior/review/int30_creature_shapes.gd")
+const Emotion = preload("res://creatures/behavior/creature_emotion.gd")
+const TICKS: int = 1500
+var actors: Array[Preview] = []
+var models: Array[RefCounted] = []
+
+func _initialize() -> void: call_deferred("_run")
+
+func _cpu_ticks() -> int:
+	var f := FileAccess.open("/proc/thread-self/stat", FileAccess.READ)
+	assert(f != null, "Linux main-thread accounting unavailable")
+	var line: String = f.get_line()
+	f.close()
+	var fields: PackedStringArray = line.substr(line.rfind(")") + 2).split(" ", false)
+	# fields start at proc stat field 3: utime/stime are fields 14/15.
+	return int(fields[11]) + int(fields[12])
+
+func _tick(frame: int, enabled: bool) -> void:
+	var mode: String = ["idle", "walk", "run"][frame / 50 % 3]
+	var intent: String = {"idle":"rest", "walk":"social", "run":"flee"}[mode]
+	for index in range(actors.size()):
+		var actor: Preview = actors[index]
+		actor.set_motion(mode)
+		actor.set_process(false)
+		if enabled: actor.set_expression_pose(models[index].advance(1.0 / 30.0, {"intent":intent}))
+		actor._process(1.0 / 30.0)
+
+func _run() -> void:
+	root.get_node("SaveGameService").autosave_enabled = false
+	root.get_node("SaveGameService")._loaded_once = true
+	for index in range(3):
+		var actor := Preview.new()
+		actor.scale = Vector3.ONE * Shapes.SIZES[index]
+		root.add_child(actor)
+		actor.set_editor_state(Shapes.design(index), -1, -1, false)
+		actor.set_motion("idle")
+		actor.set_process(false)
+		actors.append(actor)
+		var model := Emotion.new()
+		model.configure(40 + index)
+		models.append(model)
+	for frame in range(300): _tick(frame, frame % 2 == 0)
+	var results: Array[Dictionary] = []
+	for pair in range(8):
+		for enabled: bool in ([false, true] if pair % 2 == 0 else [true, false]):
+			for actor in actors: actor.set_expression_pose({})
+			var cpu: int = _cpu_ticks()
+			var wall: int = Time.get_ticks_usec()
+			for frame in range(TICKS): _tick(frame, enabled)
+			var elapsed_wall: int = Time.get_ticks_usec() - wall
+			var elapsed_cpu: int = _cpu_ticks() - cpu
+			results.append({"pair":pair, "expression":enabled, "updates":TICKS, "actors":3,
+				"main_thread_cpu_ticks":elapsed_cpu, "wall_us":elapsed_wall})
+	var path: String = OS.get_cmdline_user_args()[0]
+	var out := FileAccess.open(path, FileAccess.WRITE)
+	out.store_string(JSON.stringify({"schema":1, "clock_ticks_per_second":100, "source":"8e51ed0b5b8f3e53f3d5e4a6965831820f7898f4",
+		"method":"8 paired batches, alternating order, 1500 updates of three actors; Linux main-thread CPU ticks; excludes renderer, spawn and cache construction",
+		"results":results}, "\t"))
+	out.close()
+	for actor in actors: actor.free()
+	print("INT30_ANIMATION_COST_PASSED")
+	await preload("res://core/runtime_shutdown.gd").finish(self, 0)

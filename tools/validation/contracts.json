@@ -20,7 +20,8 @@
         "spherical_campaign_runtime_test",
         "startup_trace_test",
         "spherical_developed_migration_test",
-        "frozen_body_serialization_test"
+        "frozen_body_serialization_test",
+        "int30_galaxy_browser_test"
       ]
     },
     {
@@ -81,7 +82,8 @@
         "step_camera_test",
         "terrain_lookahead_test",
         "terrain_transition_test",
-        "living_fauna_archive_test"
+        "living_fauna_archive_test",
+        "int30_scenery_collision_world_test"
       ]
     },
     {
@@ -106,7 +108,8 @@
         "resource_visuals_test",
         "campaign_atmosphere_test",
         "graphics_settings_test",
-        "world_motion_visual_test"
+        "world_motion_visual_test",
+        "int30_scenery_collision_test"
       ]
     },
     {
@@ -139,7 +142,8 @@
         "creature_fin_family_test",
         "creature_ear_family_test",
         "creature_mouth_refresh_test",
-        "creature_ornament_families_test"
+        "creature_ornament_families_test",
+        "int30_creature_appearance_test"
       ]
     },
     {
@@ -153,7 +157,12 @@
         "creature_design_library_test",
         "creature_library_favorites_test",
         "creature_library_ui_test",
-        "modular_assembly_framework_test"
+        "modular_assembly_framework_test",
+        "int30_design_library_picker_test",
+        "building_editor_input_test",
+        "int30_community_gallery_test",
+        "building_design_exchange_test",
+        "int30_building_templates_test"
       ]
     },
     {
@@ -225,7 +234,8 @@
         "tribal_progression_test",
         "tribal_progression_world_test",
         "skills_localization_test",
-        "living_companion_test"
+        "living_companion_test",
+        "int30_medieval_technology_test"
       ]
     },
     {
@@ -265,7 +275,9 @@
         "tribal_stockpile_world_test",
         "tribal_shelter_labels_test",
         "tribal_camera_test",
-        "tribal_camera_world_test"
+        "tribal_camera_world_test",
+        "int30_village_view_test",
+        "int30_village_resume_test"
       ]
     },
     {
@@ -328,7 +340,11 @@
         "slot_scan_test",
         "tribal_camera_preferences_test",
         "tribal_guidance_test",
-        "tribal_guidance_world_test"
+        "tribal_guidance_world_test",
+        "int30_menu_audio_book_test",
+        "int30_tribal_guidance_test",
+        "int30_tribal_guidance_world_test",
+        "int30_tribal_guidance_ui_test"
       ]
     },
     {
@@ -348,7 +364,8 @@
         "audio/spherical_water_audio_test",
         "audio/creature_audio_budget_test",
         "audio/foley_runtime_test",
-        "audio/audio_settings_test"
+        "audio/audio_settings_test",
+        "audio/int30_underwater_audio_test"
       ]
     },
     {
@@ -358,7 +375,9 @@
       "tests": [
         "expedition_contract_test",
         "shipyard_test",
-        "fleet_runtime_test"
+        "fleet_runtime_test",
+        "shipyard_presentation_test",
+        "ship_design_exchange_test"
       ]
     },
     {

@@ -40,6 +40,7 @@ var _progress_time: float = 0.0
 var _progress_position := Vector3.ZERO
 var _label: Label3D
 var _emotion_cue := EmotionCue.new()
+var _cue_height: float = 0.0
 var _sensed_neighbors: Array[Node3D] = []
 var _sensed_carcasses: Array[Node3D] = []
 
@@ -315,9 +316,9 @@ func _refresh_label(delta: float = 0.0) -> void:
 	var state: String = str(driver.emotion.state) if driver != null else "calm"
 	# Sensing runs on a physics tick while the pose driver samples on idle ticks.
 	# Show danger as soon as the actual AI intent changes, even before its pose catches up.
-	if _intent in ["alert", "chase"]:
+	if state != "hurt" and _intent in ["alert", "chase"]:
 		state = "angry"
-	elif _intent == "flee":
+	elif state != "hurt" and _intent == "flee":
 		state = "afraid"
 	var cue: Dictionary = _emotion_cue.advance(delta, state)
 	var distance: float = global_position.distance_to(_player.global_position)
@@ -330,11 +331,25 @@ func _refresh_label(delta: float = 0.0) -> void:
 			_hide_emotion_cue()
 			return
 		_label.add_to_group(&"wildlife_emotion_marker")
+	if _cue_height == 0.0:
+		# Frozen anatomy: read existing visual bounds once, on the first cue.
+		# Include batched eyes/horns, without rebuilding or changing the preview.
+		_cue_height = maxf(1.9, _visual_cue_top(_visual_root, _visual_root.transform) + 0.35)
+		_label.position.y = _cue_height
 	_label.text = str(cue.symbol)
 	var color: Color = cue.color
 	color.a = float(cue.alpha) * clampf((18.0 - distance) / 6.0, 0.0, 1.0)
 	_label.modulate = color
 	_label.show()
+
+func _visual_cue_top(node: Node3D, transform: Transform3D) -> float:
+	var top: float = 0.0
+	if node is MeshInstance3D or node is MultiMeshInstance3D:
+		top = (transform * node.get_aabb()).end.y
+	for child in node.get_children():
+		if child is Node3D and not child is CollisionObject3D and not child.get_meta("editor_guide", false):
+			top = maxf(top, _visual_cue_top(child, transform * child.transform))
+	return top
 
 func get_ai_debug_state() -> Dictionary:
 	return {"state": ai_state, "intent": _intent, "anchor": _anchor, "last_seen": _last_seen, "memory": _memory, "goal": _goal, "chase_time": _chase_time, "returning": _returning, "ignore_player": _ignore_player}

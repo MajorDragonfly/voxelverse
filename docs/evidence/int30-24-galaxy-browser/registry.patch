@@ -1,0 +1,11 @@
+diff --git a/tools/validation/contracts.json b/tools/validation/contracts.json
+--- a/tools/validation/contracts.json
++++ b/tools/validation/contracts.json
+@@ -12,6 +12,7 @@
+         "coordinate_persistence_test",
+         "galaxy_catalog_test",
+         "galaxy_visits_test",
++        "int30_galaxy_browser_test",
+         "meta_runtime_test",
+         "phase_handoff_test",
+         "save_participants_test",

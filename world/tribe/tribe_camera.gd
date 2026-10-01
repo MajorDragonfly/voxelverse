@@ -8,6 +8,7 @@ const MIN_TILT: float = 3.0
 const MAX_TILT: float = 80.0
 const PAN_METRES_PER_SECOND: float = 32.0
 const FAST_FACTOR: float = 2.0
+const CLEARANCE_REFRESH_SECONDS: float = 0.2
 const MOTION := ["move_forward", "move_back", "move_left", "move_right",
 	"tribe_turn_left", "tribe_turn_right", "tribe_tilt_up", "tribe_tilt_down"]
 var controller: Node
@@ -21,6 +22,7 @@ var fast_pan: bool = false
 var _preferences: RefCounted
 var _default_tilt: float = 55.0
 var _last_pose: Array = []
+var _clearance_refresh_remaining: float = 0.0
 
 func setup(owner: Node) -> void:
 	controller = owner
@@ -95,6 +97,7 @@ func advance(delta: float) -> void:
 		cancel_input()
 		return
 	var dt: float = minf(delta, 0.1)
+	_clearance_refresh_remaining = maxf(_clearance_refresh_remaining - dt, 0.0)
 	yaw = wrapf(yaw + (_axis("tribe_turn_right", "tribe_turn_left") * 75.0 * dt), -180.0, 180.0)
 	tilt = clampf(tilt + _axis("tribe_tilt_up", "tribe_tilt_down") * 45.0 * dt, MIN_TILT, MAX_TILT)
 	var motion := Vector2(_axis("move_right", "move_left"), _axis("move_back", "move_forward")).limit_length(1.0)
@@ -175,9 +178,12 @@ func reset_view() -> void:
 func update_camera() -> void:
 	var camera: Camera3D = controller.camera
 	if not is_instance_valid(camera): return
-	var pose: Array = [controller._focus, yaw, tilt, current_zoom]
-	if pose == _last_pose: return
+	# Streaming/construction can change collisions while the view stays still.
+	# Resize also changes the orthographic near plane without changing its pose.
+	var pose: Array = [controller._focus, yaw, tilt, current_zoom, camera.get_viewport().get_visible_rect().size]
+	if pose == _last_pose and _clearance_refresh_remaining > 0.0: return
 	_last_pose = pose
+	_clearance_refresh_remaining = CLEARANCE_REFRESH_SECONDS
 	var frame: Basis = view_frame()
 	var angle: float = deg_to_rad(tilt)
 	var low_view: float = 1.0 - smoothstep(MIN_TILT, 25.0, tilt)
@@ -205,22 +211,28 @@ func update_camera() -> void:
 		if not hit.is_empty() and aim.distance_to(hit.position) > 1.5:
 			eye = hit.position - (eye - aim).normalized() * 0.5
 	camera.size = current_zoom
-	camera.v_offset = -current_zoom * 0.16
+	# A tall orthographic near plane cannot stay at eye level at 3 degrees:
+	# clearing its lower edge raises and pitches the whole view. Use a matching
+	# perspective lens for the low orbit; overhead planning keeps orthography.
+	var perspective: bool = tilt < 25.0
+	camera.projection = Camera3D.PROJECTION_PERSPECTIVE if perspective else Camera3D.PROJECTION_ORTHOGONAL
+	if perspective:
+		camera.fov = rad_to_deg(2.0 * atan(current_zoom * 0.5 / maxf(aim.distance_to(eye), 1.0)))
+	camera.v_offset = 0.0 if perspective else -current_zoom * 0.16
 	camera.global_position = eye
 	camera.look_at(aim, frame.y)
 	if low_view > 0.01:
 		_clear_near_plane(camera, aim, frame.y)
 
 func _clear_near_plane(camera: Camera3D, aim: Vector3, up: Vector3) -> void:
-	# Orthographic rays begin across a tall screen plane, not at the eye node.
-	# At a shallow angle its lower edge can sit below the planet even while the
-	# eye itself passes the terrain check above (especially with v_offset).
+	# Sample the actual near plane for both lenses. Perspective ray origins
+	# alone would only sample the eye and miss the screen corners.
 	var size: Vector2 = camera.get_viewport().get_visible_rect().size
 	if size.x <= 0.0 or size.y <= 0.0: return
 	for iteration in range(2):
 		var deficit: float = 0.0
 		for portion in [0.1, 0.5, 0.9]:
-			var origin: Vector3 = camera.project_ray_origin(Vector2(size.x * portion, size.y * 0.95))
+			var origin: Vector3 = camera.project_position(Vector2(size.x * portion, size.y * 0.95), camera.near)
 			var sample: Dictionary = Space.sample(controller, origin)
 			deficit = maxf(deficit, maxf(float(sample.height), float(sample.water_level)) + 1.0 - float(sample.altitude))
 		if deficit <= 0.0: return

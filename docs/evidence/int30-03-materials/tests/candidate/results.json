@@ -1,0 +1,556 @@
+{
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "source": {
+    "available": true,
+    "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+    "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+    "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+    "complete": true,
+    "file_count": 3961,
+    "bytes": 125295731,
+    "bytes_hashed": 125295731,
+    "seconds": 0.3358
+  },
+  "passed": true,
+  "execution": "headless_source_project",
+  "selected_tests": [
+    "environment_production_test",
+    "environment_cluster_test",
+    "environment_playtest_test",
+    "living_surface_materials_test",
+    "surface_distance_test",
+    "surface_distance_world_test",
+    "large_planet_geometry_test",
+    "world_motion_visual_test"
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "user_data": "isolated_per_check"
+  },
+  "provenance": {
+    "schema": 1,
+    "start": {
+      "available": true,
+      "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+      "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "complete": true,
+      "file_count": 3961,
+      "bytes": 125295731,
+      "bytes_hashed": 125295731,
+      "seconds": 0.3358
+    },
+    "end": {
+      "available": true,
+      "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+      "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+      "tracked_worktree_dirty": false,
+      "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "complete": true,
+      "file_count": 3961,
+      "bytes": 125295731,
+      "bytes_hashed": 125295731,
+      "seconds": 0.3304
+    },
+    "status": "stable",
+    "reusable": true,
+    "manifests": {
+      "start": {
+        "path": "source-files-start.jsonl",
+        "sha256": "eec5d00043aaf6e6ad529f4ba1e9988451df14078728691bfb1fee814d763c47"
+      },
+      "end": {
+        "path": "source-files-end.jsonl",
+        "sha256": "eec5d00043aaf6e6ad529f4ba1e9988451df14078728691bfb1fee814d763c47"
+      }
+    },
+    "observations": [
+      {
+        "after": "selection",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1556
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "source_contracts",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1605
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "import",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1514
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "art_sources",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1842
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "environment_production_test",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1924
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "environment_cluster_test",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1733
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "environment_playtest_test",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1566
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "living_surface_materials_test",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1883
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "surface_distance_test",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1595
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "surface_distance_world_test",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1543
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "large_planet_geometry_test",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.1685
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "world_motion_visual_test",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 0,
+          "seconds": 0.2068
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      },
+      {
+        "after": "finish",
+        "source": {
+          "available": true,
+          "commit": "f7151adae43ce6e64d09333ba5d5662418db39c2",
+          "tree": "5105f57dee0b67abacf2d99435092f896b5b6d79",
+          "tracked_worktree_dirty": false,
+          "index_sha256": "c8d6b4336537b13038300b1c4762eb53e31497a3ba4e8eefbf58a1ebf15c1002",
+          "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+          "complete": true,
+          "file_count": 3961,
+          "bytes": 125295731,
+          "bytes_hashed": 125295731,
+          "seconds": 0.3304
+        },
+        "changes": [],
+        "git_changes": [],
+        "status": "unchanged"
+      }
+    ],
+    "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+  },
+  "change_plan": null,
+  "checks": [
+    {
+      "name": "source_contracts",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 0.115,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/130061fc1770/candidate-validation/tools/check_validation_contracts.py",
+        "--project",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--output",
+        "/workspace/scratch/130061fc1770/candidate-tests-isolated/contracts.json"
+      ],
+      "log_sha256": "69b6a8f8335c909f968e0a2af582cefce0056872a8e3be5ce3afd8679e8adfd2",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "import",
+      "kind": "editor_import",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 6.938,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--import"
+      ],
+      "log_sha256": "2a38bd26f185a08d4d2305d537f9cc61fe9d350a8908444cca81854331b907aa",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "art_sources",
+      "kind": "source_contract",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.023,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/130061fc1770/candidate-validation/tools/art/export_benchmark_source.py",
+        "--check"
+      ],
+      "log_sha256": "ad517d737b20d92ed3f15926472501e1a08f957b983211b589962a8442b66108",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "environment_production_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 4.378,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--script",
+        "res://tests/environment_production_test.gd"
+      ],
+      "log_sha256": "00334d76bfe94760e6614b1a6c6c3027e078eedde8b4a3abc9817224903dedb8",
+      "contract": "terrain_art",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "environment_cluster_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 3.935,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--script",
+        "res://tests/environment_cluster_test.gd"
+      ],
+      "log_sha256": "d8a33bc703c08296c5ac43af5d896e7255041628350d7511b1886a6ec2faab83",
+      "contract": "terrain_art",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "environment_playtest_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.574,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--script",
+        "res://tests/environment_playtest_test.gd"
+      ],
+      "log_sha256": "7abb17317827381c926f79064dc2d2a00fdb2754832c8071703e69caffad1199",
+      "contract": "terrain_art",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "living_surface_materials_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 2.524,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--script",
+        "res://tests/living_surface_materials_test.gd"
+      ],
+      "log_sha256": "948faff0f2c87ef040a0ac896964fa7802245f27073da0448a9095e3653efac6",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "surface_distance_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 13.003,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--script",
+        "res://tests/surface_distance_test.gd"
+      ],
+      "log_sha256": "76f2495f5ece250f2da450e9b7e1849892da25eccfdddb5f50df6a5cda6d7045",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "surface_distance_world_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 35.84,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--script",
+        "res://tests/surface_distance_world_test.gd"
+      ],
+      "log_sha256": "45299d54fcd5130cbdf24cb6d86b568fd45fc19c3ac59572d114691656531184",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "large_planet_geometry_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 44.402,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--script",
+        "res://tests/large_planet_geometry_test.gd"
+      ],
+      "log_sha256": "89b8bc1fe9fc19c6393313b893740b9544b19e3e2d7d2f459b58aca30af728b2",
+      "contract": "surface",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "world_motion_visual_test",
+      "kind": "headless_godot",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.973,
+      "command": [
+        "/workspace/scratch/130061fc1770/render-runtime/godot",
+        "--headless",
+        "--verbose",
+        "--path",
+        "/workspace/scratch/130061fc1770/candidate-validation",
+        "--script",
+        "res://tests/world_motion_visual_test.gd"
+      ],
+      "log_sha256": "12a033101099a7697119aa4f916fbef24c82992f11247f41a9f44c9d7d56a912",
+      "contract": "terrain_art",
+      "process_passed": true,
+      "source_sha256": "9086ba2ec5e799ada53c372f0ec2f0f859fa0b80ec18c22f5300ed5007a13082",
+      "source_status": "unchanged"
+    },
+    {
+      "name": "source_integrity",
+      "kind": "source_provenance",
+      "passed": true,
+      "status": "stable",
+      "reusable_source": true
+    }
+  ]
+}

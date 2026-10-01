@@ -1,0 +1,927 @@
+[
+  {
+    "key": "SY_TITLE",
+    "de": "VOXELVERSE  /  SCHIFFSWERFT",
+    "en": "VOXELVERSE  /  SHIPYARD"
+  },
+  {
+    "key": "SY_CENTER",
+    "de": "Ansicht zentrieren",
+    "en": "Frame design"
+  },
+  {
+    "key": "SY_NEW_EXPEDITION",
+    "de": "Neue Expedition",
+    "en": "New expedition"
+  },
+  {
+    "key": "SY_NEW_LANDER",
+    "de": "Neues Beiboot",
+    "en": "New lander"
+  },
+  {
+    "key": "SY_SAVE",
+    "de": "Speichern",
+    "en": "Save"
+  },
+  {
+    "key": "SY_COPY",
+    "de": "Als Kopie",
+    "en": "Save as copy"
+  },
+  {
+    "key": "SY_OPEN",
+    "de": "Entwürfe öffnen",
+    "en": "Open designs"
+  },
+  {
+    "key": "SY_UNDO",
+    "de": "Rückgängig",
+    "en": "Undo"
+  },
+  {
+    "key": "SY_REDO",
+    "de": "Wiederholen",
+    "en": "Redo"
+  },
+  {
+    "key": "SY_MODULES",
+    "de": "MODULE",
+    "en": "MODULES"
+  },
+  {
+    "key": "SY_SEARCH",
+    "de": "Modul suchen …",
+    "en": "Search modules …"
+  },
+  {
+    "key": "SY_SYMMETRY",
+    "de": "Symmetrisch anbauen",
+    "en": "Attach symmetrically"
+  },
+  {
+    "key": "SY_PREVIEW",
+    "de": "Bauvorschau",
+    "en": "Build preview"
+  },
+  {
+    "key": "SY_ADD",
+    "de": "Modul hinzufügen",
+    "en": "Add module"
+  },
+  {
+    "key": "SY_INSTALLED",
+    "de": "VERBAUT",
+    "en": "INSTALLED"
+  },
+  {
+    "key": "SY_NAME",
+    "de": "Name des Entwurfs",
+    "en": "Design name"
+  },
+  {
+    "key": "SY_CONTROLS",
+    "de": "Klick: Auswahl · Rechts: drehen · Mitte: verschieben · Rad: Zoom · R: drehen",
+    "en": "Click: select · Right drag: orbit · Middle drag: pan · Wheel: zoom · R: rotate"
+  },
+  {
+    "key": "SY_ROTATE",
+    "de": "90° drehen",
+    "en": "Rotate 90°"
+  },
+  {
+    "key": "SY_MIRROR",
+    "de": "Spiegelkopie",
+    "en": "Mirror copy"
+  },
+  {
+    "key": "SY_REMOVE",
+    "de": "Entfernen",
+    "en": "Remove"
+  },
+  {
+    "key": "SY_EQUIPMENT",
+    "de": "AUSSTATTUNG",
+    "en": "CAPABILITIES"
+  },
+  {
+    "key": "SY_VALIDATION",
+    "de": "ENTWURFSPRÜFUNG",
+    "en": "DESIGN CHECK"
+  },
+  {
+    "key": "SY_CHECK_FIT",
+    "de": "Hangar mit Entwurf prüfen",
+    "en": "Check hangar against design"
+  },
+  {
+    "key": "SY_NOTICE",
+    "de": "Entwurfswerkstatt · Module verändern die berechneten Werte. Flug, Forschung und Baukosten werden später an die Kampagne angeschlossen.",
+    "en": "Design workshop · Modules change the calculated values. Flight, research and construction costs will connect to the campaign later."
+  },
+  {
+    "key": "SY_UNSAVED",
+    "de": "Ungespeicherter Entwurf",
+    "en": "Unsaved design"
+  },
+  {
+    "key": "SY_DISCARD_QUESTION",
+    "de": "Änderungen verwerfen und fortfahren?",
+    "en": "Discard changes and continue?"
+  },
+  {
+    "key": "SY_DISCARD",
+    "de": "Verwerfen",
+    "en": "Discard"
+  },
+  {
+    "key": "SY_BACK",
+    "de": "Zurück",
+    "en": "Back"
+  },
+  {
+    "key": "SY_SAVE_CONTINUE",
+    "de": "Speichern & weiter",
+    "en": "Save & continue"
+  },
+  {
+    "key": "SY_KEEP_OPEN",
+    "de": "Der Entwurf bleibt geöffnet.",
+    "en": "The design stays open."
+  },
+  {
+    "key": "SY_LIBRARY",
+    "de": "Gespeicherte Schiffsentwürfe",
+    "en": "Saved ship designs"
+  },
+  {
+    "key": "SY_LIBRARY_SEARCH",
+    "de": "Entwürfe nach Name filtern …",
+    "en": "Filter designs by name …"
+  },
+  {
+    "key": "SY_PREVIOUS",
+    "de": "Vorherige Seite",
+    "en": "Previous page"
+  },
+  {
+    "key": "SY_NEXT",
+    "de": "Weitere Entwürfe",
+    "en": "More designs"
+  },
+  {
+    "key": "SY_USE",
+    "de": "Ausgewählten Entwurf verwenden",
+    "en": "Use selected design"
+  },
+  {
+    "key": "SY_CLOSE",
+    "de": "Schließen",
+    "en": "Close"
+  },
+  {
+    "key": "SY_NONE",
+    "de": "Keine Auswahl",
+    "en": "No selection"
+  },
+  {
+    "key": "SY_NO_MODULES",
+    "de": "Keine passenden Module.",
+    "en": "No matching modules."
+  },
+  {
+    "key": "SY_FIT_PICKER",
+    "de": "Hangarprüfung · Gegenstück auswählen",
+    "en": "Hangar check · Choose counterpart"
+  },
+  {
+    "key": "SY_LIBRARY_LOADING",
+    "de": "Entwürfe werden gelesen …",
+    "en": "Reading designs …"
+  },
+  {
+    "key": "SY_LIBRARY_EMPTY",
+    "de": "Keine weiteren passenden Entwürfe gefunden.",
+    "en": "No more matching designs found."
+  },
+  {
+    "key": "SY_SAVE_QUESTION",
+    "de": "Entwurf speichern oder Änderungen verwerfen?",
+    "en": "Save the design or discard changes?"
+  },
+  {
+    "key": "SY_FIT_HINT",
+    "de": "Hangarprüfung verwendet die tatsächlichen Abmessungen beider Entwürfe.",
+    "en": "The hangar check uses the actual dimensions of both designs."
+  },
+  {
+    "key": "SY_VALID",
+    "de": "✓ Entwurf vollständig",
+    "en": "✓ Design complete"
+  },
+  {
+    "key": "SY_EDIT_PAIR",
+    "de": "Modulpaar anbauen",
+    "en": "Attach module pair"
+  },
+  {
+    "key": "SY_EDIT_MOVE",
+    "de": "Modul verschieben",
+    "en": "Move module"
+  },
+  {
+    "key": "SY_EDIT_ROTATE",
+    "de": "Modul drehen",
+    "en": "Rotate module"
+  },
+  {
+    "key": "SY_EDIT_REMOVE",
+    "de": "Modul entfernen",
+    "en": "Remove module"
+  },
+  {
+    "key": "SY_EDIT_RENAME",
+    "de": "Umbenennen",
+    "en": "Rename"
+  },
+  {
+    "key": "SY_NAME_REQUIRED",
+    "de": "Bitte einen Namen eingeben.",
+    "en": "Please enter a design name."
+  },
+  {
+    "key": "SY_NAME_PENDING",
+    "de": "Name geändert · noch nicht gespeichert",
+    "en": "Name changed · not saved yet"
+  },
+  {
+    "key": "SY_TEMPLATE_OPEN",
+    "de": "Vorlage geöffnet. Bearbeite sie frei und speichere deinen eigenen Entwurf.",
+    "en": "Template opened. Edit it freely and save your own design."
+  },
+  {
+    "key": "SY_ROLE_LANDER",
+    "de": "Beiboot",
+    "en": "Lander"
+  },
+  {
+    "key": "SY_ROLE_EXPEDITION",
+    "de": "Expedition",
+    "en": "Expedition"
+  },
+  {
+    "key": "SY_ROLE_BOTH",
+    "de": "Expedition und Beiboot",
+    "en": "Expedition and lander"
+  },
+  {
+    "key": "SY_MODULE_HULL_S",
+    "de": "Rumpf · Beiboot",
+    "en": "Lander hull"
+  },
+  {
+    "key": "SY_MODULE_COCKPIT",
+    "de": "Cockpit",
+    "en": "Cockpit"
+  },
+  {
+    "key": "SY_MODULE_DRIVE_S",
+    "de": "Landungsantrieb",
+    "en": "Landing drive"
+  },
+  {
+    "key": "SY_MODULE_REACTOR_S",
+    "de": "Kompaktreaktor",
+    "en": "Compact reactor"
+  },
+  {
+    "key": "SY_MODULE_BATTERY_S",
+    "de": "Batteriemodul",
+    "en": "Battery module"
+  },
+  {
+    "key": "SY_MODULE_CARGO_S",
+    "de": "Frachtmodul · klein",
+    "en": "Small cargo module"
+  },
+  {
+    "key": "SY_MODULE_LANDING_GEAR",
+    "de": "Landegestell",
+    "en": "Landing gear"
+  },
+  {
+    "key": "SY_MODULE_HULL_L",
+    "de": "Expeditionsrumpf",
+    "en": "Expedition hull"
+  },
+  {
+    "key": "SY_MODULE_BRIDGE",
+    "de": "Kommandobrücke",
+    "en": "Command bridge"
+  },
+  {
+    "key": "SY_MODULE_DRIVE_L",
+    "de": "Expeditionsantrieb",
+    "en": "Expedition drive"
+  },
+  {
+    "key": "SY_MODULE_REACTOR_L",
+    "de": "Hauptreaktor",
+    "en": "Main reactor"
+  },
+  {
+    "key": "SY_MODULE_CARGO_L",
+    "de": "Frachtsektion",
+    "en": "Cargo section"
+  },
+  {
+    "key": "SY_MODULE_HANGAR",
+    "de": "Beiboot-Hangar",
+    "en": "Lander hangar"
+  },
+  {
+    "key": "SY_MODULE_LABORATORY",
+    "de": "Forschungslabor",
+    "en": "Research laboratory"
+  },
+  {
+    "key": "SY_MODULE_HABITAT",
+    "de": "Besatzungsquartier",
+    "en": "Crew quarters"
+  },
+  {
+    "key": "SY_CATEGORY_ALL",
+    "de": "Alle Bereiche",
+    "en": "All categories"
+  },
+  {
+    "key": "SY_CATEGORY_HULL",
+    "de": "Rumpf",
+    "en": "Hull"
+  },
+  {
+    "key": "SY_CATEGORY_DRIVE",
+    "de": "Antrieb",
+    "en": "Drive"
+  },
+  {
+    "key": "SY_CATEGORY_POWER",
+    "de": "Energie",
+    "en": "Power"
+  },
+  {
+    "key": "SY_CATEGORY_CARGO",
+    "de": "Fracht",
+    "en": "Cargo"
+  },
+  {
+    "key": "SY_CATEGORY_HANGAR",
+    "de": "Hangar",
+    "en": "Hangar"
+  },
+  {
+    "key": "SY_CATEGORY_RESEARCH",
+    "de": "Forschung",
+    "en": "Research"
+  },
+  {
+    "key": "SY_CATEGORY_CREW",
+    "de": "Besatzung",
+    "en": "Crew"
+  },
+  {
+    "key": "SY_SIDE_0",
+    "de": "Rechts (+X)",
+    "en": "Right (+X)"
+  },
+  {
+    "key": "SY_SIDE_1",
+    "de": "Links (−X)",
+    "en": "Left (−X)"
+  },
+  {
+    "key": "SY_SIDE_2",
+    "de": "Oben (+Y)",
+    "en": "Above (+Y)"
+  },
+  {
+    "key": "SY_SIDE_3",
+    "de": "Unten (−Y)",
+    "en": "Below (−Y)"
+  },
+  {
+    "key": "SY_SIDE_4",
+    "de": "Vorne (−Z)",
+    "en": "Front (−Z)"
+  },
+  {
+    "key": "SY_SIDE_5",
+    "de": "Hinten (+Z)",
+    "en": "Rear (+Z)"
+  },
+  {
+    "key": "SY_YAW",
+    "de": "Drehung: {yaw}°",
+    "en": "Rotation: {yaw}°"
+  },
+  {
+    "key": "SY_VIEW_PERSPECTIVE",
+    "de": "Perspektive",
+    "en": "Perspective"
+  },
+  {
+    "key": "SY_VIEW_TOP",
+    "de": "Oben",
+    "en": "Top"
+  },
+  {
+    "key": "SY_VIEW_FRONT",
+    "de": "Vorne",
+    "en": "Front"
+  },
+  {
+    "key": "SY_VIEW_SIDE",
+    "de": "Seite",
+    "en": "Side"
+  },
+  {
+    "key": "SY_MODULE_DETAILS",
+    "de": "Geeignet: {role}\nAbmessungen X × Y × Z: {size} m",
+    "en": "Suitable for: {role}\nDimensions X × Y × Z: {size} m"
+  },
+  {
+    "key": "SY_MODULE_ROTATION",
+    "de": "Drehung um Y: {yaw}°",
+    "en": "Rotation around Y: {yaw}°"
+  },
+  {
+    "key": "SY_BAY_INTERIOR",
+    "de": "Hangar innen X × Y × Z: {size} m",
+    "en": "Hangar interior X × Y × Z: {size} m"
+  },
+  {
+    "key": "SY_STAT_MASS",
+    "de": "Masse: {value} t",
+    "en": "Mass: {value} t"
+  },
+  {
+    "key": "SY_STAT_THRUST",
+    "de": "Schub: {value}",
+    "en": "Thrust: {value}"
+  },
+  {
+    "key": "SY_STAT_POWER",
+    "de": "Stromerzeugung: {value}",
+    "en": "Power generated: {value}"
+  },
+  {
+    "key": "SY_STAT_DRAW",
+    "de": "Strombedarf: {value}",
+    "en": "Power required: {value}"
+  },
+  {
+    "key": "SY_STAT_ENERGY",
+    "de": "Energiespeicher: {value}",
+    "en": "Energy storage: {value}"
+  },
+  {
+    "key": "SY_STAT_CARGO",
+    "de": "Frachtkapazität: {value}",
+    "en": "Cargo capacity: {value}"
+  },
+  {
+    "key": "SY_STAT_SEATS",
+    "de": "Sitze: {value}",
+    "en": "Seats: {value}"
+  },
+  {
+    "key": "SY_STAT_RESEARCH",
+    "de": "Labore: {value}",
+    "en": "Laboratories: {value}"
+  },
+  {
+    "key": "SY_STAT_STRUCTURE",
+    "de": "Rumpfmodule: {value}",
+    "en": "Hull modules: {value}"
+  },
+  {
+    "key": "SY_STAT_COMMAND",
+    "de": "Kommandostellen: {value}",
+    "en": "Command stations: {value}"
+  },
+  {
+    "key": "SY_STAT_LANDING",
+    "de": "Landegestelle: {value}",
+    "en": "Landing gear: {value}"
+  },
+  {
+    "key": "SY_STAT_COST",
+    "de": "Baukosten (Planwert): {value}",
+    "en": "Construction cost (planned): {value}"
+  },
+  {
+    "key": "SY_CATALOG_SELECTED",
+    "de": "{module} ausgewählt · Anschluss und Vorschau prüfen",
+    "en": "{module} selected · Check attachment and preview"
+  },
+  {
+    "key": "SY_ACTION_PENDING",
+    "de": "{action} · noch nicht gespeichert",
+    "en": "{action} · not saved yet"
+  },
+  {
+    "key": "SY_SAVED",
+    "de": "{name} · Revision {revision} gespeichert",
+    "en": "{name} · Revision {revision} saved"
+  },
+  {
+    "key": "SY_SAVED_DRAFT",
+    "de": "{name} · Revision {revision} gespeichert (unvollständiger Entwurf)",
+    "en": "{name} · Revision {revision} saved (incomplete draft)"
+  },
+  {
+    "key": "SY_COPY_SAVED",
+    "de": "Eigene Kopie gespeichert: {name}",
+    "en": "Separate copy saved: {name}"
+  },
+  {
+    "key": "SY_OPENED",
+    "de": "{name} · Revision {revision} geöffnet",
+    "en": "{name} · Revision {revision} opened"
+  },
+  {
+    "key": "SY_LIBRARY_PROGRESS",
+    "de": "Entwürfe werden gelesen … {count} gefunden",
+    "en": "Reading designs … {count} found"
+  },
+  {
+    "key": "SY_LIBRARY_ENTRY",
+    "de": "{name} · Rev. {revision}",
+    "en": "{name} · Rev. {revision}"
+  },
+  {
+    "key": "SY_LIBRARY_UNREADABLE",
+    "de": "{name} · nicht lesbar",
+    "en": "{name} · unreadable"
+  },
+  {
+    "key": "SY_LIBRARY_PAGE",
+    "de": "Seite {page} · {count} Entwürfe",
+    "en": "Page {page} · {count} designs"
+  },
+  {
+    "key": "SY_STATS",
+    "de": "{role} · {modules} / {limit} Module\nGröße X × Y × Z: {size} m\nMasse: {mass} t · Schub: {thrust}\nStrom: {power} / {draw} Bedarf\nEnergiespeicher: {energy}\nFracht: {cargo} · Sitze: {seats}\nLabore: {research} · Hangars: {bays}\nBaukosten (Planwert): {cost}",
+    "en": "{role} · {modules} / {limit} modules\nSize X × Y × Z: {size} m\nMass: {mass} t · Thrust: {thrust}\nPower: {power} / {draw} required\nEnergy storage: {energy}\nCargo: {cargo} · Seats: {seats}\nLaboratories: {research} · Hangars: {bays}\nConstruction cost (planned): {cost}"
+  },
+  {
+    "key": "SY_ISSUE_HINT",
+    "de": "Fehler anklicken: betroffene Module und Hinweise anzeigen. Unvollständige Entwürfe können gespeichert werden.",
+    "en": "Click an issue to see affected modules and guidance. Incomplete drafts can be saved."
+  },
+  {
+    "key": "SY_ISSUE_COUNT",
+    "de": "{count} offene Entwurfsfehler",
+    "en": "{count} unresolved design issues"
+  },
+  {
+    "key": "SY_WHOLE_DESIGN",
+    "de": "Gesamter Entwurf",
+    "en": "Whole design"
+  },
+  {
+    "key": "SY_MORE_MODULES",
+    "de": "{modules} und {count} weitere",
+    "en": "{modules} and {count} more"
+  },
+  {
+    "key": "SY_FIX_GENERIC",
+    "de": "Module und Ausstattung prüfen. Änderungen lassen sich rückgängig machen.",
+    "en": "Check modules and capabilities. Changes can be undone."
+  },
+  {
+    "key": "SY_PLACEMENT_FREE",
+    "de": "Bauplatz frei · {count} Modul(e)",
+    "en": "Attachment clear · {count} module(s)"
+  },
+  {
+    "key": "SY_PLACEMENT_BLOCKED",
+    "de": "Anbau: {error}",
+    "en": "Attachment: {error}"
+  },
+  {
+    "key": "SY_FIT_PAIR",
+    "de": "Hangarprüfung: {guest} (Rev. {guest_revision}) → {host} (Rev. {host_revision})",
+    "en": "Hangar check: {guest} (Rev. {guest_revision}) → {host} (Rev. {host_revision})"
+  },
+  {
+    "key": "SY_FIT_INVALID",
+    "de": "{name}: {count} Entwurfsfehler – zuerst beheben.",
+    "en": "{name}: {count} design issues – resolve these first."
+  },
+  {
+    "key": "SY_FIT_GUEST",
+    "de": "Beiboot außen X × Y × Z: {size} m",
+    "en": "Lander exterior X × Y × Z: {size} m"
+  },
+  {
+    "key": "SY_FIT_BAY",
+    "de": "Hangar #{number} innen X × Y × Z: {size} m",
+    "en": "Hangar #{number} interior X × Y × Z: {size} m"
+  },
+  {
+    "key": "SY_FIT_ORIENTATION_OK",
+    "de": "{yaw}°: {size} m – passt. Freiraum je Seite X/Y/Z: {space} m",
+    "en": "{yaw}°: {size} m – fits. Clearance per side X/Y/Z: {space} m"
+  },
+  {
+    "key": "SY_FIT_ORIENTATION_FAIL",
+    "de": "{yaw}°: {size} m – zu groß. Überschreitung X/Y/Z: {excess} m",
+    "en": "{yaw}°: {size} m – too large. Excess X/Y/Z: {excess} m"
+  },
+  {
+    "key": "SY_FIT_SUCCESS",
+    "de": "{guest} passt in {host} ({yaw}°).",
+    "en": "{guest} fits in {host} ({yaw}°)."
+  },
+  {
+    "key": "SY_FIT_SCOPE",
+    "de": "Geometrische Passprüfung, mittig ohne Versatz. 180°/270° haben die Maße von 0°/90°. Einflug, Flugverhalten und Kampagnenfreischaltung werden hier nicht geprüft.",
+    "en": "Geometric fit check, centred with no offset. 180°/270° share the dimensions of 0°/90°. Entry path, flight behaviour and campaign unlocks are not checked here."
+  },
+  {
+    "key": "SY_ERROR_OVERLAP",
+    "de": "Module überlappen sich.",
+    "en": "Modules overlap."
+  },
+  {
+    "key": "SY_ERROR_DISCONNECTED",
+    "de": "Modul hat keine Verbindung zum Rumpf.",
+    "en": "Module is not connected to the hull."
+  },
+  {
+    "key": "SY_ERROR_NO_HULL",
+    "de": "Ein Rumpfmodul fehlt.",
+    "en": "A hull module is missing."
+  },
+  {
+    "key": "SY_ERROR_COMMAND_COUNT",
+    "de": "Genau eine Brücke / ein Cockpit erforderlich.",
+    "en": "Exactly one bridge or cockpit is required."
+  },
+  {
+    "key": "SY_ERROR_POWER_DEFICIT",
+    "de": "Die Stromerzeugung reicht nicht für alle Module.",
+    "en": "Power generation does not cover all modules."
+  },
+  {
+    "key": "SY_ERROR_NO_ENERGY",
+    "de": "Ein Energiespeicher fehlt.",
+    "en": "Energy storage is missing."
+  },
+  {
+    "key": "SY_ERROR_THRUST_DEFICIT",
+    "de": "Der Antrieb ist für die Masse zu schwach.",
+    "en": "Thrust is too low for the ship mass."
+  },
+  {
+    "key": "SY_ERROR_NO_CARGO",
+    "de": "Ein Frachtmodul fehlt.",
+    "en": "A cargo module is missing."
+  },
+  {
+    "key": "SY_ERROR_NO_LANDING",
+    "de": "Ein Landegestell fehlt.",
+    "en": "Landing gear is missing."
+  },
+  {
+    "key": "SY_ERROR_NO_HANGAR",
+    "de": "Ein Beiboot-Hangar fehlt.",
+    "en": "A lander hangar is missing."
+  },
+  {
+    "key": "SY_ERROR_SIZE_LIMIT",
+    "de": "Der Entwurf überschreitet den Baubereich.",
+    "en": "The design exceeds the build area."
+  },
+  {
+    "key": "SY_ERROR_MODULE_ROLE",
+    "de": "Modul passt nicht zu diesem Schiffstyp.",
+    "en": "Module is incompatible with this ship type."
+  },
+  {
+    "key": "SY_ERROR_MODULE_LIMIT",
+    "de": "Maximal 128 Module je Entwurf.",
+    "en": "A design may contain at most 128 modules."
+  },
+  {
+    "key": "SY_ERROR_HANGAR_SMALL",
+    "de": "Das Beiboot passt nicht in den Hangar.",
+    "en": "The lander does not fit in the hangar."
+  },
+  {
+    "key": "SY_ERROR_INVALID_DESIGN",
+    "de": "Zuerst die Entwurfsfehler beheben.",
+    "en": "Resolve the design issues first."
+  },
+  {
+    "key": "SY_ERROR_WRITE",
+    "de": "Speichern fehlgeschlagen. Der Entwurf bleibt geöffnet.",
+    "en": "Save failed. The design stays open."
+  },
+  {
+    "key": "SY_ERROR_PROTECTED",
+    "de": "Die Originaldatei ist beschädigt oder neuer und bleibt geschützt.",
+    "en": "The original file is damaged or newer and remains protected."
+  },
+  {
+    "key": "SY_ERROR_DIFFERENT",
+    "de": "Die Zieldatei gehört zu einem anderen Entwurf.",
+    "en": "The destination file belongs to a different design."
+  },
+  {
+    "key": "SY_ERROR_VERSION",
+    "de": "Die Schiffversion wird noch nicht unterstützt.",
+    "en": "The ship version is not supported yet."
+  },
+  {
+    "key": "SY_ERROR_MODULE_VERSION",
+    "de": "Die Modulversion wird noch nicht unterstützt.",
+    "en": "The module version is not supported yet."
+  },
+  {
+    "key": "SY_ERROR_UNKNOWN_MODULE",
+    "de": "Ein benötigtes Modul ist nicht installiert.",
+    "en": "A required module is not installed."
+  },
+  {
+    "key": "SY_ERROR_MISSING",
+    "de": "Die Datei wurde nicht gefunden.",
+    "en": "The file was not found."
+  },
+  {
+    "key": "SY_ERROR_FUTURE",
+    "de": "Der Bauplan benötigt eine neuere Version.",
+    "en": "The blueprint requires a newer version."
+  },
+  {
+    "key": "SY_ERROR_ANCHOR",
+    "de": "Wähle zuerst ein Modul als Anschluss.",
+    "en": "Select a module as the attachment anchor first."
+  },
+  {
+    "key": "SY_ERROR_MIRROR_CENTER",
+    "de": "Das Modul liegt bereits auf der Mittelachse.",
+    "en": "The module is already on the centreline."
+  },
+  {
+    "key": "SY_ERROR_PLACEMENT",
+    "de": "Diese Platzierung wird nicht unterstützt.",
+    "en": "This placement is not supported."
+  },
+  {
+    "key": "SY_ERROR_IDENTITY",
+    "de": "Bitte einen Namen für den Entwurf eingeben.",
+    "en": "Please enter a design name."
+  },
+  {
+    "key": "SY_ERROR_READ",
+    "de": "Die Datei konnte nicht gelesen werden. Der Entwurf bleibt geöffnet.",
+    "en": "The file could not be read. The design stays open."
+  },
+  {
+    "key": "SY_ERROR_REVISION",
+    "de": "Die maximale Entwurfsrevision ist erreicht. Als Kopie speichern.",
+    "en": "The maximum design revision has been reached. Save as a copy."
+  },
+  {
+    "key": "SY_ERROR_FILE_SIZE",
+    "de": "Die Entwurfsdatei überschreitet die unterstützte Dateigröße.",
+    "en": "The design file exceeds the supported file size."
+  },
+  {
+    "key": "SY_ERROR_OTHER",
+    "de": "Der Entwurf konnte nicht verarbeitet werden ({code}).",
+    "en": "The design could not be processed ({code})."
+  },
+  {
+    "key": "SY_FIX_OVERLAP",
+    "de": "Betroffene Module mit X/Y/Z auseinander bewegen oder eines entfernen.",
+    "en": "Move the affected modules apart using X/Y/Z, or remove one."
+  },
+  {
+    "key": "SY_FIX_DISCONNECTED",
+    "de": "Modul an eine freie Fläche eines mit dem Rumpf verbundenen Moduls setzen. Kantenkontakt reicht nicht.",
+    "en": "Attach to a free face of a module connected to the hull. Edge contact is insufficient."
+  },
+  {
+    "key": "SY_FIX_NO_HULL",
+    "de": "Ein Rumpfmodul aus dem Modulbereich hinzufügen.",
+    "en": "Add a hull from the module catalogue."
+  },
+  {
+    "key": "SY_FIX_COMMAND_COUNT",
+    "de": "Genau eine passende Kommandobrücke oder ein Cockpit verbauen.",
+    "en": "Install exactly one compatible command bridge or cockpit."
+  },
+  {
+    "key": "SY_FIX_POWER_DEFICIT",
+    "de": "Stromerzeugung und Bedarf unter Ausstattung vergleichen; einen Reaktor hinzufügen oder Verbraucher entfernen.",
+    "en": "Compare generated and required power under Capabilities; add a reactor or remove consumers."
+  },
+  {
+    "key": "SY_FIX_NO_ENERGY",
+    "de": "Ein Batterie- oder Reaktormodul mit Energiespeicher hinzufügen.",
+    "en": "Add a battery or reactor module with energy storage."
+  },
+  {
+    "key": "SY_FIX_THRUST_DEFICIT",
+    "de": "Schub und Masse unter Ausstattung vergleichen; Antrieb ergänzen oder Masse reduzieren.",
+    "en": "Compare thrust and mass under Capabilities; add a drive or reduce mass."
+  },
+  {
+    "key": "SY_FIX_NO_CARGO",
+    "de": "Ein passendes Frachtmodul hinzufügen.",
+    "en": "Add a compatible cargo module."
+  },
+  {
+    "key": "SY_FIX_NO_LANDING_GEAR",
+    "de": "Ein Landegestell für das Beiboot hinzufügen.",
+    "en": "Add landing gear for the lander."
+  },
+  {
+    "key": "SY_FIX_NO_HANGAR",
+    "de": "Einen Beiboot-Hangar an die Expedition anbauen.",
+    "en": "Attach a lander hangar to the expedition."
+  },
+  {
+    "key": "SY_FIX_SIZE_LIMIT",
+    "de": "Module näher zusammen anordnen oder überstehende Module entfernen.",
+    "en": "Place modules closer together or remove protruding modules."
+  },
+  {
+    "key": "SY_FIX_MODULE_ROLE",
+    "de": "Das betroffene Modul entfernen und eines für diesen Schiffstyp wählen.",
+    "en": "Remove the affected module and choose one compatible with this ship type."
+  },
+  {
+    "key": "SY_ISSUE_OVERLAP",
+    "de": "Module überlappen",
+    "en": "Module overlap"
+  },
+  {
+    "key": "SY_ISSUE_DISCONNECTED",
+    "de": "Anschluss fehlt",
+    "en": "Disconnected module"
+  },
+  {
+    "key": "SY_ISSUE_NO_HULL",
+    "de": "Rumpf fehlt",
+    "en": "Hull missing"
+  },
+  {
+    "key": "SY_ISSUE_COMMAND_COUNT",
+    "de": "Kommandostelle prüfen",
+    "en": "Check command count"
+  },
+  {
+    "key": "SY_ISSUE_POWER_DEFICIT",
+    "de": "Strom reicht nicht",
+    "en": "Insufficient power"
+  },
+  {
+    "key": "SY_ISSUE_NO_ENERGY",
+    "de": "Energiespeicher fehlt",
+    "en": "Energy storage missing"
+  },
+  {
+    "key": "SY_ISSUE_THRUST_DEFICIT",
+    "de": "Schub reicht nicht",
+    "en": "Insufficient thrust"
+  },
+  {
+    "key": "SY_ISSUE_NO_CARGO",
+    "de": "Frachtmodul fehlt",
+    "en": "Cargo missing"
+  },
+  {
+    "key": "SY_ISSUE_NO_LANDING_GEAR",
+    "de": "Landegestell fehlt",
+    "en": "Landing gear missing"
+  },
+  {
+    "key": "SY_ISSUE_NO_HANGAR",
+    "de": "Beiboot-Hangar fehlt",
+    "en": "Lander hangar missing"
+  },
+  {
+    "key": "SY_ISSUE_SIZE_LIMIT",
+    "de": "Baubereich überschritten",
+    "en": "Build limits exceeded"
+  },
+  {
+    "key": "SY_ISSUE_MODULE_ROLE",
+    "de": "Falscher Modultyp",
+    "en": "Wrong module type"
+  }
+]

@@ -43,6 +43,7 @@ func _capture(label: String) -> void:
 	journal._heading.get_child(0).text = "Entdeckungsbuch"
 	await _language_checks(saved)
 	await _layouts()
+	await preload("res://tests/fixtures/owned_animal_browsing_checks.gd").run(self)
 	await _empty_and_dead(saved)
 	d2.registry = original
 	journal.bind_owned_animals(d2, fixture._context, fixture._names)

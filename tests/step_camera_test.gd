@@ -9,6 +9,7 @@ func _run() -> void:
 	root.get_node("SaveGameService").autosave_enabled = false
 	await _case(Vector3.UP)
 	await _case(Vector3(1, 2, 3).normalized())
+	await _stalled_frame_case()
 	for failure: String in failures: push_error(failure)
 	print("STEP_CAMERA_EVIDENCE ", JSON.stringify(observations))
 	if failures.is_empty(): print("STEP_CAMERA_PASSED")
@@ -63,6 +64,24 @@ func _box(parent: Node3D, size: Vector3, position: Vector3) -> void:
 	collider.shape = shape
 	body.add_child(collider)
 	parent.add_child(body)
+
+func _stalled_frame_case() -> void:
+	var player: CharacterBody3D = load("res://creatures/player/player.tscn").instantiate()
+	root.add_child(player)
+	player.set_process(false)
+	player.set_physics_process(false)
+	var body_before: Vector3 = player.global_position
+	player._camera_step_offset = -player.maximum_step_height
+	player._apply_step_camera()
+	var before: float = player.camera_pivot.position.y
+	player._process(0.25)
+	var camera_rise: float = player.camera_pivot.position.y - before
+	_check(camera_rise < 0.22, "A stalled render frame erased step smoothing: " + str(camera_rise))
+	_check(player.global_position == body_before, "Camera catch-up moved the collision body.")
+	for tick in range(40): player._process(1.0 / 60.0)
+	_check(absf(player.camera_pivot.position.y - 1.7) < 0.03, "Stalled-frame smoothing did not settle.")
+	observations.append({"render_delta": 0.25, "camera_peak": camera_rise, "body_moved": player.global_position != body_before})
+	player.free()
 
 func _check(ok: bool, message: String) -> void:
 	if not ok: failures.append(message)

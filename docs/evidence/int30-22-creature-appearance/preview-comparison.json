@@ -1,0 +1,12 @@
+{
+  "crop_box_xyxy": [
+    214,
+    99,
+    1030,
+    640
+  ],
+  "pixels": 441456,
+  "different_pixels": 0,
+  "identical": true,
+  "scope": "Identical initial Ocean/scales creature and camera through existing preview; comparison excludes changed inspector UI."
+}

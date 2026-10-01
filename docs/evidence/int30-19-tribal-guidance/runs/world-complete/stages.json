@@ -1,0 +1,209 @@
+{
+	"failures": [],
+	"stages": [
+		{
+			"code": "selection",
+			"next": "Wähle zuerst eine Bewohnerkarte; erteile danach den echten Auftrag.",
+			"progress": 0,
+			"reason": "Kein vorhandener Bewohner ist ausgewählt.",
+			"stage": "01-no-selection-de",
+			"step": "tribe_order",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "gather",
+			"next": "Erteile „Holz sammeln“ und warte auf die tatsächliche Ablieferung.",
+			"progress": 1,
+			"reason": "Für den nächsten Schritt wird eingelagerte Ware benötigt: Holz.",
+			"stage": "02-selected-de",
+			"step": "tribe_order",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "order_rejected",
+			"next": "Behebe den angezeigten Grund und erteile den Auftrag anschließend erneut.",
+			"progress": 1,
+			"reason": "Der echte Auftrag wurde abgelehnt: Zuerst ein Steinwerkzeug herstellen.",
+			"stage": "03-rejected-order-de",
+			"step": "tribe_order",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "blocked",
+			"next": "Lass die Wegeprüfung laufen. Prüfe den Zielort, bevor du den Auftrag änderst.",
+			"progress": 2,
+			"reason": "Deine Kreatur meldet einen blockierten Weg. Das genaue Hindernis ist nicht belegt.",
+			"stage": "04-blocked-route-de",
+			"step": "tribe_delivery",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "cargo",
+			"next": "Lass den Bewohner zum Lager zurückkehren. Erst die Ankunft zählt als Lieferung.",
+			"progress": 2,
+			"reason": "Deine Kreatur trägt Holz; diese Ware ist noch nicht im Lager.",
+			"stage": "05-cargo-in-transit-de",
+			"step": "tribe_delivery",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 0
+			}
+		},
+		{
+			"code": "gather",
+			"next": "Erteile „Nahrung sammeln“ und warte auf die tatsächliche Ablieferung.",
+			"progress": 3,
+			"reason": "Für den nächsten Schritt wird eingelagerte Ware benötigt: Nahrung.",
+			"stage": "06-empty-pantry-de",
+			"step": "tribe_supply",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 1
+			}
+		},
+		{
+			"code": "feed",
+			"next": "Erteile „Essen“. Erst tatsächlicher Verzehr zählt als Versorgung.",
+			"progress": 3,
+			"reason": "Ein ausgewählter Bewohner braucht Nahrung; essbare Ware ist im Lager.",
+			"stage": "07-food-ready-de",
+			"step": "tribe_supply",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 1,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 1
+			}
+		},
+		{
+			"code": "materials",
+			"next": "Erteile „Holz sammeln“ und warte auf die Lieferung ins Lager; starte danach den Bau erneut.",
+			"progress": 5,
+			"reason": "Im Lager fehlen noch 2 Holz. Getragen, aber nicht eingelagert: 0.",
+			"stage": "08-missing-materials-de",
+			"step": "tribe_tool",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 0,
+				"water": 0,
+				"wood": 1
+			}
+		},
+		{
+			"code": "place",
+			"next": "Bestätige den Bauplatz mit Rechtsklick oder brich mit Esc ab.",
+			"progress": 6,
+			"reason": "Die aktuelle Bauvorschau ist zulässig; sie ist noch keine Baustelle.",
+			"stage": "09-valid-preview-de",
+			"step": "tribe_place",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 10,
+				"water": 0,
+				"wood": 10
+			}
+		},
+		{
+			"code": "build_materials",
+			"next": "Lass die zugeteilten Bewohner das reservierte Material zur Baustelle tragen.",
+			"progress": 7,
+			"reason": "Baustelle: 0/4 Holz angekommen; 0 unterwegs; 4 am Lager reserviert.",
+			"stage": "10-reserved-site-materials-de",
+			"step": "tribe_finish",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 9,
+				"water": 0,
+				"wood": 6
+			}
+		},
+		{
+			"code": "build_paused",
+			"next": "Öffne die Baustelle und wähle „Fortsetzen“.",
+			"progress": 7,
+			"reason": "Die laufende Baustelle ist angehalten.",
+			"stage": "11-paused-construction-de",
+			"step": "tribe_finish",
+			"stock": {
+				"eggs": 0,
+				"fiber": 0,
+				"food": 0,
+				"milk": 0,
+				"stone": 9,
+				"water": 0,
+				"wood": 6
+			}
+		},
+		{
+			"code": "build_paused",
+			"next": "Öffne die Baustelle und wähle „Fortsetzen“.",
+			"progress": 7,
+			"reason": "Die laufende Baustelle ist angehalten.",
+			"stage": "12-resumed-help-de",
+			"step": "tribe_finish",
+			"stock": {
+				"eggs": 0.0,
+				"fiber": 0.0,
+				"food": 0.0,
+				"milk": 0.0,
+				"stone": 9.0,
+				"water": 0.0,
+				"wood": 6.0
+			}
+		}
+	]
+}

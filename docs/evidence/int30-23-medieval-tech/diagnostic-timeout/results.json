@@ -1,0 +1,191 @@
+{
+  "passed": false,
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "renderer": "gl_compatibility",
+  "source": {
+    "available": true,
+    "commit": "b1adad6471371ba415e44bbc1ec4f454779ca9cd",
+    "tree": "c62c50f2f013c34eeb800ee362f2fcec87bfc67e",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "48de9fa800a471bd71ae11ba7f66d5cac4a77b69bc4dd7e181ccf6ed337df926",
+    "source_sha256": "606c4cf346217ecbc0b65a3a67efb5c29a11d029a67b6ce103fb8f54b6c70c38",
+    "complete": true,
+    "file_count": 3976,
+    "bytes": 125331428,
+    "bytes_hashed": 125331428,
+    "seconds": 24.9595
+  },
+  "source_unchanged": true,
+  "results": [
+    {
+      "test": "technology_catalog_test",
+      "passed": false,
+      "exit_code": 124,
+      "seconds": 120.069,
+      "command": [
+        "/workspace/scratch/6a280be8b0c9/runtime/godot",
+        "--path",
+        "/tmp/int30-medieval-preview-dgnlxxqc/project",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--headless",
+        "--script",
+        "res://civilization/technology/tests/technology_catalog_test.gd"
+      ]
+    },
+    {
+      "test": "technology_preview_ui_test",
+      "passed": false,
+      "exit_code": 124,
+      "seconds": 120.116,
+      "command": [
+        "/workspace/scratch/6a280be8b0c9/runtime/godot",
+        "--path",
+        "/tmp/int30-medieval-preview-dgnlxxqc/project",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://civilization/technology/tests/technology_preview_ui_test.gd",
+        "--",
+        "--capture",
+        "/workspace/scratch/6a280be8b0c9/tech-gl-final"
+      ]
+    },
+    {
+      "test": "preview_entry",
+      "passed": true,
+      "exit_code": 0,
+      "seconds": 1.825,
+      "command": [
+        "/workspace/scratch/6a280be8b0c9/runtime/godot",
+        "--path",
+        "/tmp/int30-medieval-preview-dgnlxxqc/project",
+        "--rendering-method",
+        "gl_compatibility",
+        "--audio-driver",
+        "Dummy",
+        "--headless",
+        "--quit-after",
+        "5"
+      ]
+    }
+  ],
+  "userdata_files": [
+    "userdata/xdg_cache_home/mesa_shader_cache/marker",
+    "userdata/xdg_cache_home/mesa_shader_cache/index",
+    "userdata/xdg_cache_home/mesa_shader_cache/6f/31d99ce2db7585d9b6fe005ebd988f1d91346b",
+    "userdata/xdg_cache_home/mesa_shader_cache/13/afd00ad553e84ad84627f7bff0a0cd7cddaf35",
+    "userdata/xdg_cache_home/mesa_shader_cache/05/b9b55f7f7b101a542417fa3ead7c631fc08396",
+    "userdata/xdg_cache_home/mesa_shader_cache/a4/5404302f888bb22021a14de457b5ce81477c97",
+    "userdata/xdg_cache_home/mesa_shader_cache/e3/1d20eeb8b7215a94d19e4451ac2566fad07127",
+    "userdata/xdg_cache_home/mesa_shader_cache/30/df6ce1b5efc2671fc272ae7737837aad5f59af",
+    "userdata/xdg_cache_home/mesa_shader_cache/14/24df808851eef539faa1cd0a7edaa30b294ec3",
+    "userdata/xdg_cache_home/mesa_shader_cache/67/0644177c696d6e1f6bd42b6be4ba015c53a23c",
+    "userdata/xdg_cache_home/mesa_shader_cache/52/5246a2c8c414928e8c7c67f59f2808d7876608",
+    "userdata/xdg_cache_home/mesa_shader_cache/f0/ae90f41639c71fe9dde25f2d5d8e547e277547",
+    "userdata/xdg_cache_home/mesa_shader_cache/b2/c11349752d3e893b45f44152b5fdca81c42982",
+    "userdata/xdg_cache_home/mesa_shader_cache/8f/a0e2597b4dc169f59d6d302282be155b1427bd",
+    "userdata/xdg_cache_home/mesa_shader_cache/c2/9de5465df132b37e35d4e582a7d0386da3dc7d",
+    "userdata/xdg_cache_home/mesa_shader_cache/c7/9f7742561b79ab16762cdf9029d55268801d98",
+    "userdata/xdg_cache_home/mesa_shader_cache/44/c0f6734dab93975965985c208d4fbcadfd32ea",
+    "userdata/xdg_cache_home/mesa_shader_cache/a7/d9f87fa556728088ae68b293638934ef6efca8",
+    "userdata/xdg_cache_home/mesa_shader_cache/a7/a8ee3c71d9d97384ea6c14933b8a18389ddf7b",
+    "userdata/xdg_cache_home/mesa_shader_cache/1d/8c8eb0c051867dcdaffb1cd6079b0a3f2eb6a7",
+    "userdata/xdg_cache_home/mesa_shader_cache/e9/037eec5ed3b995a3bc9ddc3643e4337c11448a",
+    "userdata/xdg_cache_home/mesa_shader_cache/f3/4ccac84c30d533a92f3ee482df6fd717a56dc8",
+    "userdata/xdg_cache_home/mesa_shader_cache/81/cc566dd6bd5c8b3861ddb8de7d237e048ecb65",
+    "userdata/xdg_cache_home/mesa_shader_cache/fa/5d9a956550f8fd083eb4d251efaf474cc1e2f5",
+    "userdata/xdg_cache_home/mesa_shader_cache/c9/48956543d4967033ee17df3cc4cde1812b34bb",
+    "userdata/xdg_cache_home/mesa_shader_cache/1c/1baeac7602e27633a490ee738f02d54d7d5c0e",
+    "userdata/xdg_cache_home/mesa_shader_cache/37/7f58aa791692e52083785bbd2b07043d7a1518",
+    "userdata/xdg_cache_home/mesa_shader_cache/75/d1d9376908892b30a130d7af9a108487e856d4",
+    "userdata/xdg_cache_home/mesa_shader_cache/74/01d160f632c7c07e6414c6e6e12e6740dcc142",
+    "userdata/xdg_cache_home/mesa_shader_cache/c6/8c07f52c77d5a47e3159b37b5e821480c5bca4",
+    "userdata/xdg_cache_home/mesa_shader_cache/80/4b723ac4b42314bd6cabb8aa2b572f6e5fc949",
+    "userdata/xdg_cache_home/mesa_shader_cache/5f/4d63f36f3f0fce44c3451238e6690da01a207b",
+    "userdata/xdg_cache_home/mesa_shader_cache/94/ee2d2303b6f90b36b3bbbffa5d17e5cc3341d6",
+    "userdata/xdg_cache_home/mesa_shader_cache/a0/c08619c0c72c1f6c4d9770dce1a30cfc8c3f0b",
+    "userdata/xdg_cache_home/mesa_shader_cache/54/7041fa8faed0a8e4819fe75a5e21c7fe86a295",
+    "userdata/xdg_cache_home/mesa_shader_cache/28/ef7e146c2c558fbec610344e5418c084b535f0",
+    "userdata/xdg_cache_home/mesa_shader_cache/04/856cc744ebf0edfc253bc88843342d16bbe6c9",
+    "userdata/xdg_cache_home/mesa_shader_cache/77/254fea681dcd87396f4333cb4595a3f23b8089",
+    "userdata/xdg_cache_home/mesa_shader_cache/41/104cc9949c07bc6cb370a435e9f00789d1a306",
+    "userdata/xdg_cache_home/mesa_shader_cache/82/11117d9712271de99ccb7981114af158ce1146",
+    "userdata/xdg_data_home/godot/app_userdata/Voxelverse Medieval Technology Preview/shader_cache/FeedShaderGLES3/91c6c80fb626be963e0d35c9015450afdb94c21a9a5a724e204bb741159a3006/6bb7c9a2fd1c4a8fa77cb96555b9b4a720209981.cache",
+    "userdata/xdg_data_home/godot/app_userdata/Voxelverse Medieval Technology Preview/shader_cache/PostShaderGLES3/7742908c7849de57f2890e9f86c2ac8c97d94363657f7d1bbaa6f7b7de5c6e61/6bb7c9a2fd1c4a8fa77cb96555b9b4a720209981.cache",
+    "userdata/xdg_data_home/godot/app_userdata/Voxelverse Medieval Technology Preview/shader_cache/SceneShaderGLES3/efd6af08dfb0f121d8a2aa462b91ea4835b488e45fe2584bbd52caf3056192ac/6bb7c9a2fd1c4a8fa77cb96555b9b4a720209981.cache",
+    "userdata/xdg_data_home/godot/app_userdata/Voxelverse Medieval Technology Preview/shader_cache/CopyShaderGLES3/0862bf67ea5885a24e12d07034ad0c47acc5cc1b0be179194cd3f115d810ade6/6bb7c9a2fd1c4a8fa77cb96555b9b4a720209981.cache",
+    "userdata/xdg_data_home/godot/app_userdata/Voxelverse Medieval Technology Preview/shader_cache/CanvasShaderGLES3/50e14a659485d647a4c471ff8cdd8c47a4c9f524840fd40fea402971ed8505c1/6bb7c9a2fd1c4a8fa77cb96555b9b4a720209981.cache"
+  ],
+  "persistent_userdata_files": [],
+  "images": {
+    "complete-plan-1280x720-de.png": {
+      "sha256": "4beaa6d031b92a483a6a0458b7aead9106d85bf3b246a3ea8a2e1b490d6c84b4",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    "details-bottom-800x600-en.png": {
+      "sha256": "5cda7f4d7f4e8d08257e054e9967f2b4669664bda24736262562eb11ba16813f",
+      "dimensions": [
+        800,
+        600
+      ]
+    },
+    "locks-800x600-en.png": {
+      "sha256": "d668d20e360094eaca20750eb8b417f2ad1e3f5639a68784b26842ac5be074b0",
+      "dimensions": [
+        800,
+        600
+      ]
+    },
+    "locks-1280x720-de.png": {
+      "sha256": "5fd5baedec65f440ed8f2f458488fdd9ec5a1ea9a14151d736b19bab20ff946a",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    "locks-1920x1080-de.png": {
+      "sha256": "5965a5bb21b85126fc4d8107bd50c152eb748a8c0934ffe8e931f6296e84b067",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    "locks-1280x720-en.png": {
+      "sha256": "68a4291e65121e9e2c40903e4e650882d6fee948f3d2d35ccf9155a30990e091",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    "locks-1920x1080-en.png": {
+      "sha256": "34240dee750186cc896127d1619aee5adbbdf238c2b4ce04ab12d5c1c934ec27",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    "details-bottom-800x600-de.png": {
+      "sha256": "0c67eff05c91167a46e9d60e9447a5d9a43fb4831be49a3eb6bd932eb4c4048e",
+      "dimensions": [
+        800,
+        600
+      ]
+    },
+    "locks-800x600-de.png": {
+      "sha256": "9b725a65fff7b6efa68b28cea68d4d3546b5e86ad02da503340d3bd2561bde5f",
+      "dimensions": [
+        800,
+        600
+      ]
+    }
+  },
+  "scope": "Isolated prototype only; campaign autoloads absent, no production or save integration"
+}

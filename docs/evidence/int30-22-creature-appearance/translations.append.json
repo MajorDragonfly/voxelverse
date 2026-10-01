@@ -1,0 +1,92 @@
+[
+  {
+    "key": "APPEARANCE_TITLE",
+    "de": "Farben & Haut",
+    "en": "Colors & skin"
+  },
+  {
+    "key": "APPEARANCE_COSMETIC",
+    "de": "Nur das Aussehen ändert sich.",
+    "en": "Changes appearance only."
+  },
+  {
+    "key": "APPEARANCE_RESET",
+    "de": "Farben & Haut zurücksetzen",
+    "en": "Reset colors & skin"
+  },
+  {
+    "key": "APPEARANCE_APPLY_PALETTE",
+    "de": "Diese fünf Farben übernehmen",
+    "en": "Apply these five colors"
+  },
+  {
+    "key": "APPEARANCE_CUSTOM",
+    "de": "Aktuell: eigene Farben",
+    "en": "Current: custom colors"
+  },
+  {
+    "key": "APPEARANCE_CURRENT_PALETTE",
+    "de": "Aktuell: %s",
+    "en": "Current: %s"
+  },
+  {
+    "key": "APPEARANCE_HEX_HINT",
+    "de": "Hexfarbe (#RRGGBB) eingeben, mit Enter übernehmen.",
+    "en": "Enter a hex color (#RRGGBB), then press Enter to apply."
+  },
+  {
+    "key": "APPEARANCE_HEX_INVALID",
+    "de": "Bitte sechs Hexziffern eingeben, z. B. #73B696.",
+    "en": "Enter six hex digits, e.g. #73B696."
+  },
+  {
+    "key": "APPEARANCE_SWATCH_TARGET",
+    "de": "Farbfeld ändern für:",
+    "en": "Change swatch color for:"
+  },
+  {
+    "key": "APPEARANCE_STRENGTH",
+    "de": "Hautstruktur",
+    "en": "Skin texture strength"
+  },
+  {
+    "key": "APPEARANCE_PATTERN_SIZE",
+    "de": "Mustergröße",
+    "en": "Pattern size"
+  },
+  {
+    "key": "APPEARANCE_SIZE_HINT",
+    "de": "Höher = größere Struktur. 1 × entspricht der Standardgröße.",
+    "en": "Higher = larger texture. 1 × is the default size."
+  },
+  {
+    "key": "APPEARANCE_SMOOTH_HINT",
+    "de": "Glatte Haut hat keine Struktur. Stärke und Mustergröße wirken bei den anderen Hauttypen.",
+    "en": "Smooth skin has no texture. Strength and pattern size apply to other skin types."
+  },
+  {
+    "key": "APPEARANCE_COLOR_BASE",
+    "de": "Grundfarbe",
+    "en": "Base color"
+  },
+  {
+    "key": "APPEARANCE_COLOR_ACCENT",
+    "de": "Akzentfarbe",
+    "en": "Accent color"
+  },
+  {
+    "key": "APPEARANCE_COLOR_BELLY",
+    "de": "Bauchfarbe",
+    "en": "Belly color"
+  },
+  {
+    "key": "APPEARANCE_COLOR_EYE",
+    "de": "Augenfarbe",
+    "en": "Eye color"
+  },
+  {
+    "key": "APPEARANCE_COLOR_HORN",
+    "de": "Hornfarbe",
+    "en": "Horn color"
+  }
+]

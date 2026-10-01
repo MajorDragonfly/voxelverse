@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "start": {
+    "available": true,
+    "commit": "6c57d5ded52d850ef637fac28b52e2e344680e62",
+    "tree": "49c6f6c01d427f3133a4c6c87c66d4d60e0bccce",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "4be3d324d1b6949d4d6c1bfc6ca8bb9a4c4c60a8e997baef5f254878b579a8a4",
+    "source_sha256": "fbf54fb4f5c43e6bd05af5ab23b11b7eb919d4f09302be2e7578c8c7e659f0a1",
+    "complete": true,
+    "file_count": 3955,
+    "bytes": 125283516,
+    "bytes_hashed": 125283516,
+    "seconds": 0.5579
+  },
+  "end": {
+    "available": true,
+    "commit": "6c57d5ded52d850ef637fac28b52e2e344680e62",
+    "tree": "49c6f6c01d427f3133a4c6c87c66d4d60e0bccce",
+    "tracked_worktree_dirty": false,
+    "index_sha256": "4be3d324d1b6949d4d6c1bfc6ca8bb9a4c4c60a8e997baef5f254878b579a8a4",
+    "source_sha256": "fbf54fb4f5c43e6bd05af5ab23b11b7eb919d4f09302be2e7578c8c7e659f0a1",
+    "complete": true,
+    "file_count": 3955,
+    "bytes": 125283516,
+    "bytes_hashed": 0,
+    "seconds": 0.2419
+  },
+  "status": "stable",
+  "reusable": true,
+  "manifests": {
+    "start": {
+      "path": "source-files-start.jsonl",
+      "sha256": "10ba1ca51d031a4358a2886e800b34965514df85ce0b79daca913e966e15b0f9"
+    },
+    "end": {
+      "path": "source-files-end.jsonl",
+      "sha256": "10ba1ca51d031a4358a2886e800b34965514df85ce0b79daca913e966e15b0f9"
+    }
+  },
+  "observations": [
+    {
+      "after": "render_complete",
+      "source": {
+        "available": true,
+        "commit": "6c57d5ded52d850ef637fac28b52e2e344680e62",
+        "tree": "49c6f6c01d427f3133a4c6c87c66d4d60e0bccce",
+        "tracked_worktree_dirty": false,
+        "index_sha256": "4be3d324d1b6949d4d6c1bfc6ca8bb9a4c4c60a8e997baef5f254878b579a8a4",
+        "source_sha256": "fbf54fb4f5c43e6bd05af5ab23b11b7eb919d4f09302be2e7578c8c7e659f0a1",
+        "complete": true,
+        "file_count": 3955,
+        "bytes": 125283516,
+        "bytes_hashed": 0,
+        "seconds": 0.2419
+      },
+      "changes": [],
+      "git_changes": [],
+      "status": "unchanged"
+    }
+  ],
+  "scope": "Tracked and nonignored untracked repository entries; symlink targets, submodules and ignored/generated caches are not monitored. Boundary observations are not a source lock."
+}
