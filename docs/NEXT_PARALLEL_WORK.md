@@ -5,8 +5,8 @@ Bewertet am 2026-10-01. Basis und veröffentlichte Lieferungen: [Projektübersic
 
 ## Prioritäten
 
-1. Neue gemeinsame Prüfrevision vollständig prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete. Den bisherigen exakt belegten 74bb-Stand separat erhalten.
-2. Forward+-Kollisionsaufnahme mit neuer enger Phasen-/Publikations-/Drawdiagnose auswerten; fehlende Eiche und zweimaliger 360-s-Abbruch bleiben offen. Danach nur belegte Ursache korrigieren, Grenzen erhalten. Baseline-GL-Leak getrennt am bestehenden Surface-Messpfad zuordnen.
+1. Korrigierten Stammes-Paket-Klickhelfer vollständig auf eigenem exaktem Tree prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete. Originale 74bb/c5 getrennt erhalten.
+2. Forward+-Engpass aus tatsächlicher c5-Phasendiagnose ursächlich zuordnen: Materialduplikation, kalte Asset-Vorbereitung, Publikation/Final-Attach und Texturupdate getrennt messen. Grenzen und Cachepfade erhalten; historischen GL-Leak separat erhalten.
 3. Serielle Nest-/Reload-/D1.2-Gegenprobe besteht; gemessene p95/p99-Verschlechterung und dichte Scannerkosten weiterhin ursächlich abgrenzen und gezielt beheben.
 
 ## Vorbereitete Pakete

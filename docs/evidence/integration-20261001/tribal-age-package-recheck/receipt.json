@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "scope": "One Linux Desktop PCK export plus external packaged_tribal_age_test; editor loads the actual production PCK outside the source directory. This is not Windows native acceptance.",
+  "cause": "The old age fixture could use layout geometry from before a yielded process_frame. It differed from the already corrected tutorial fixture. Original Windows failure had no geometry/hover receipts, so a specific Windows overlap is not claimed.",
+  "fix": "Settle existing layout before tab scrolling; re-read tab/button canvas click point after pointer delivery, move to the current point, check visible root/scroll and matching hovered control, then normal mouse press/release with no intervening await. Abort a failed click guard. Existing physical/gameplay assertions and budgets remain.",
+  "code_commit": "ec54d6d86381e03a765cbfe4185b46db06ee17d3",
+  "code_tree": "25221d0be46f5e6b9f4ddaf3512e2a55814d9a28",
+  "code_files": [
+    "tests/tribal_age_test.gd"
+  ],
+  "tested_source_base_commit": "ca9358fdad938528c759f3a0c3cff42af1120b83",
+  "tested_source_base_tree": "667d4c8963137da3b8c2703f33868e120080b850",
+  "tested_worktree_dirty": true,
+  "tested_worktree_changed_files": [
+    "tests/tribal_age_test.gd"
+  ],
+  "godot_version": "4.6.3.stable.official.7d41c59c4",
+  "qa_sha256": "003bed46b353f43a2aa9c358ceeb0407ba2bc33cb5a3bf399948988f67ab7a03",
+  "external_qa_equals_tested_source_and_committed_blob": true,
+  "pack_sha256": "84179942207857db777f6432163f024d30c6e5e1bf70cb6683111e54484b6c10",
+  "no_pack_binary_in_receipt": true,
+  "isolated_user_data": true,
+  "strict_error_filter": "Unmodified tools.validate_godot.ERROR; any exit !=0 or regex match fails.",
+  "runs": [
+    {
+      "name": "import",
+      "timeout_seconds": 240,
+      "seconds": 10.563,
+      "exit_code": 0,
+      "timed_out": false,
+      "failed": false,
+      "log_sha256": "2eb2601ecce8aed9307be753996571237e389823a0a7d6c636986db4d00f0e2a"
+    },
+    {
+      "name": "export_pack",
+      "timeout_seconds": 240,
+      "seconds": 13.319,
+      "exit_code": 0,
+      "timed_out": false,
+      "failed": false,
+      "log_sha256": "3803444fa94d0d1c497105fbc989647d79a0cd086f3752782f2cbd869e776c56"
+    },
+    {
+      "name": "packaged_tribal_age_test",
+      "timeout_seconds": 120,
+      "seconds": 85.158,
+      "exit_code": 0,
+      "timed_out": false,
+      "failed": false,
+      "log_sha256": "435592f1009b3b87d767b07a4dc280a454eaf98672267299ebe26f0d33389294"
+    }
+  ],
+  "completion": {
+    "test": "tribal_age",
+    "passed": true,
+    "failures": []
+  },
+  "source_integrity": {
+    "status": "stable",
+    "reusable": true,
+    "start_sha256": "1c59cbe5b06a7a8e98c65cb01668b73ff17dc04b94d7f541dfe03e21613ebfff",
+    "end_sha256": "1c59cbe5b06a7a8e98c65cb01668b73ff17dc04b94d7f541dfe03e21613ebfff",
+    "observations": [
+      {
+        "after": "export_pack",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": []
+      },
+      {
+        "after": "packaged_tribal_age_test",
+        "status": "unchanged",
+        "changes": 0,
+        "git_changes": []
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "import.log",
+      "sha256": "2eb2601ecce8aed9307be753996571237e389823a0a7d6c636986db4d00f0e2a",
+      "bytes": 65652
+    },
+    {
+      "path": "export_pack.log",
+      "sha256": "3803444fa94d0d1c497105fbc989647d79a0cd086f3752782f2cbd869e776c56",
+      "bytes": 160971
+    },
+    {
+      "path": "packaged_tribal_age_test.log",
+      "sha256": "435592f1009b3b87d767b07a4dc280a454eaf98672267299ebe26f0d33389294",
+      "bytes": 4822
+    },
+    {
+      "path": "validation/source-files-start.jsonl",
+      "sha256": "f485b4ef487c3be9be154eb20375e15edca70d5364af27300fba27cb98f299d4",
+      "bytes": 1105480
+    },
+    {
+      "path": "validation/source-files-end.jsonl",
+      "sha256": "f485b4ef487c3be9be154eb20375e15edca70d5364af27300fba27cb98f299d4",
+      "bytes": 1105480
+    },
+    {
+      "path": "validation/source-integrity.json",
+      "sha256": "522aaa00fdf6cd33a7e1b2f606560f38fe45ff980d1e5d5f579b678196cad5bb",
+      "bytes": 2888
+    },
+    {
+      "path": "validation/run-start.json",
+      "sha256": "2c71d1bf4e953b118e44f3fe0393f356199784495c64a1aa5ea96431b53703d9",
+      "bytes": 679
+    }
+  ]
+}

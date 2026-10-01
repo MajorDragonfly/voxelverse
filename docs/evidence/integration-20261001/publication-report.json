@@ -41,7 +41,8 @@
     "e21b347ca4fe85fb4becafaa9feb0d780f5be183": "fa94ef2229ec16e8e378df9538c0a83124ad61e6",
     "141bf7fbe4fbc1f53a24b9ba0f88c86efac2567c": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
     "8e5347a22ac398665cda5a28d6481b3cb632fc9b": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
-    "e71a29de0cf072b3bb21d6b585bf6a2487570fa8": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038"
+    "e71a29de0cf072b3bb21d6b585bf6a2487570fa8": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+    "ca9358fdad938528c759f3a0c3cff42af1120b83": "c5c22efde7d220169190710037da4f4f12666f02"
   },
   "original_local_only_commits": 38,
   "blob_checks": [
@@ -928,6 +929,324 @@
       "sha": "cb97ed1f632d82a0a62f02daca3bb7d5e5ed910e",
       "expected": "cb97ed1f632d82a0a62f02daca3bb7d5e5ed910e",
       "verified": true
+    },
+    {
+      "path": "docs/NEXT_PARALLEL_WORK.md",
+      "sha": "813a2b41876a427ab0280aead97177488b728a9b",
+      "expected": "813a2b41876a427ab0280aead97177488b728a9b",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_DASHBOARD.md",
+      "sha": "1ee95d90a70c12dbac92d9e69cf02fa392e94b7c",
+      "expected": "1ee95d90a70c12dbac92d9e69cf02fa392e94b7c",
+      "verified": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "sha": "f41ad8d37976d729e8ea0b338dc2472b78fecdd4",
+      "expected": "f41ad8d37976d729e8ea0b338dc2472b78fecdd4",
+      "verified": true
+    },
+    {
+      "path": "docs/WORK_INT30_INTEGRATION_20261001.md",
+      "sha": "561749b451df2afb82fa9c2595c8c7db7ce7c6c5",
+      "expected": "561749b451df2afb82fa9c2595c8c7db7ce7c6c5",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/corrected-source.json",
+      "sha": "e36852c24c675d6a1df1ab41c6a62620c3515f61",
+      "expected": "e36852c24c675d6a1df1ab41c6a62620c3515f61",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/publication-report.json",
+      "sha": "e1339f2463fbd0d981db0e8801fa0746d473c2ba",
+      "expected": "e1339f2463fbd0d981db0e8801fa0746d473c2ba",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/source-heads-20261001.json",
+      "sha": "a5ff90196094be57227afd9076c6d0835f312d0d",
+      "expected": "a5ff90196094be57227afd9076c6d0835f312d0d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/README.md",
+      "sha": "3f1980e7e1767fca4f25f7cf70acc7d86f4fb706",
+      "expected": "3f1980e7e1767fca4f25f7cf70acc7d86f4fb706",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/baseline-gl-capture.json",
+      "sha": "6e9c19ea704fc3215412eb11f7236face8bef9f8",
+      "expected": "6e9c19ea704fc3215412eb11f7236face8bef9f8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/baseline-gl-import.log.gz",
+      "sha": "7c04377278f20220af500b34ed9dd771030b9ada",
+      "expected": "7c04377278f20220af500b34ed9dd771030b9ada",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/baseline-gl-job.log.gz",
+      "sha": "ba75227e7bb873bb300189f93d199ba8e3a8be48",
+      "expected": "ba75227e7bb873bb300189f93d199ba8e3a8be48",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/baseline-gl-render.log",
+      "sha": "2a04ae7a2b9f4766206842384e921679af65cb78",
+      "expected": "2a04ae7a2b9f4766206842384e921679af65cb78",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/diagnosis.json",
+      "sha": "0f34b1fd9f376c2a4f40824597e7db7c8aab7b98",
+      "expected": "0f34b1fd9f376c2a4f40824597e7db7c8aab7b98",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/engine-source-identities.json",
+      "sha": "8341aeb97e5062805d647f852784c331c16b7e85",
+      "expected": "8341aeb97e5062805d647f852784c331c16b7e85",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/forward-comparison.json",
+      "sha": "31f8f0f9db7629b2ee5ebeca94222000c060fe9b",
+      "expected": "31f8f0f9db7629b2ee5ebeca94222000c060fe9b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-capture.json",
+      "sha": "beebfc43a2e8d3ba13b7a9a42aa31b902ebd9ff2",
+      "expected": "beebfc43a2e8d3ba13b7a9a42aa31b902ebd9ff2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-instrumentation-first.json",
+      "sha": "0d475c685b11359ced415c03960adc86bc75b313",
+      "expected": "0d475c685b11359ced415c03960adc86bc75b313",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-instrumentation-first.log.gz",
+      "sha": "81202575c216fdf9728e0855d25ae5c6d307fd22",
+      "expected": "81202575c216fdf9728e0855d25ae5c6d307fd22",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-lifecycle.log.gz",
+      "sha": "cc51cef93daec4a0e2278e3c11798921122371f5",
+      "expected": "cc51cef93daec4a0e2278e3c11798921122371f5",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/headless-provenance.json",
+      "sha": "2e00e7bc9a9979c2492c1bf0fb90e6d1777163b6",
+      "expected": "2e00e7bc9a9979c2492c1bf0fb90e6d1777163b6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/consume.log",
+      "sha": "1fe883acd071d7a3be758f39def102be451c682a",
+      "expected": "1fe883acd071d7a3be758f39def102be451c682a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/empty.tscn",
+      "sha": "0bf26d7463fd8b6fb127348f650bec4b449bd536",
+      "expected": "0bf26d7463fd8b6fb127348f650bec4b449bd536",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/omit.log",
+      "sha": "89b84de2ecd24ac7741b35abfe4a66b55b8af786",
+      "expected": "89b84de2ecd24ac7741b35abfe4a66b55b8af786",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/probe.gd",
+      "sha": "74c7d2f5948de8d093c1416561474a9b78dd07b2",
+      "expected": "74c7d2f5948de8d093c1416561474a9b78dd07b2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/project.godot",
+      "sha": "c5b66fca20dfbf31c607f93386e0435ca22725d6",
+      "expected": "c5b66fca20dfbf31c607f93386e0435ca22725d6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal/results.json",
+      "sha": "6cbb6a9b135a359139c2d28945051e3e0bd58a1e",
+      "expected": "6cbb6a9b135a359139c2d28945051e3e0bd58a1e",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/observe-threaded-status.patch",
+      "sha": "7d814a59e8c2afcc8c7780aa7d9247b4182771fa",
+      "expected": "7d814a59e8c2afcc8c7780aa7d9247b4182771fa",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/observer-parser.json",
+      "sha": "471b6b3db5828e05f95b1b9a3cc8fda865a3c126",
+      "expected": "471b6b3db5828e05f95b1b9a3cc8fda865a3c126",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/probe_surface_lifecycle.gd",
+      "sha": "a4dd680a35f30a33ccd7ec960a1b9f09c05284a3",
+      "expected": "a4dd680a35f30a33ccd7ec960a1b9f09c05284a3",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tooling-diagnostic-batch.json",
+      "sha": "edb5ac1fa1aef4bc18f0922e19d44a2f0fbc473c",
+      "expected": "edb5ac1fa1aef4bc18f0922e19d44a2f0fbc473c",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tribal-tab-recheck/raw-evidence.tar.gz",
+      "sha": "ddc80187c119e2445f3e35d18daf074c85a9e002",
+      "expected": "ddc80187c119e2445f3e35d18daf074c85a9e002",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tribal-tab-recheck/summary.json",
+      "sha": "d37a5ff449b6f89c9755d85ffd214bba853ef386",
+      "expected": "d37a5ff449b6f89c9755d85ffd214bba853ef386",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/README.md",
+      "sha": "213a55ba56315b7144a72ead7faf6fa9319ff2c1",
+      "expected": "213a55ba56315b7144a72ead7faf6fa9319ff2c1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/SHA256SUMS",
+      "sha": "34db00dc976c4d6a883a5572e2a912d062882f7d",
+      "expected": "34db00dc976c4d6a883a5572e2a912d062882f7d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/linux.zip",
+      "sha": "d1b3d106820d651491ac97861b1d1ec1e1684de6",
+      "expected": "d1b3d106820d651491ac97861b1d1ec1e1684de6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/plan.zip",
+      "sha": "cfa18064865931cc5a6fbae96f72765760da4f85",
+      "expected": "cfa18064865931cc5a6fbae96f72765760da4f85",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/runtime.zip",
+      "sha": "89b3891746a87de4610b7a6424c3daac9ce83eb1",
+      "expected": "89b3891746a87de4610b7a6424c3daac9ce83eb1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/source0.zip",
+      "sha": "617c91958fddc92c723569dbba01e1e436b13fd6",
+      "expected": "617c91958fddc92c723569dbba01e1e436b13fd6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/source1.zip",
+      "sha": "d51233c1ce339d8f93e8945711fc5c6eb06ab8c1",
+      "expected": "d51233c1ce339d8f93e8945711fc5c6eb06ab8c1",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/source2.zip",
+      "sha": "ce6b9a4d5e2c96cfcfe7531aed8cd6891993a33d",
+      "expected": "ce6b9a4d5e2c96cfcfe7531aed8cd6891993a33d",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/source3.zip",
+      "sha": "f5550d011da3a46335ef87ee73a1b1e90f52bfed",
+      "expected": "f5550d011da3a46335ef87ee73a1b1e90f52bfed",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts/windows.zip",
+      "sha": "492a2ac42421187bf8a4ef335dae24e3b84204be",
+      "expected": "492a2ac42421187bf8a4ef335dae24e3b84204be",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/exact-head-query.json",
+      "sha": "b784bce1c1d4230c82947ae2f50e64f850da7038",
+      "expected": "b784bce1c1d4230c82947ae2f50e64f850da7038",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/manifest.json",
+      "sha": "6221e98c1f0e2f8bcd268170f24a4d14d34a3c64",
+      "expected": "6221e98c1f0e2f8bcd268170f24a4d14d34a3c64",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/verification.json",
+      "sha": "064af61ddc8d7915c3bb76b6a7f6968d23d2c2cf",
+      "expected": "064af61ddc8d7915c3bb76b6a7f6968d23d2c2cf",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/verify.py",
+      "sha": "febb227003c0fedb44fdbaa16cdc4dc7290b75fd",
+      "expected": "febb227003c0fedb44fdbaa16cdc4dc7290b75fd",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/README.md",
+      "sha": "1decb21c6c6e6f390e486e5364291c6d1a3e73ca",
+      "expected": "1decb21c6c6e6f390e486e5364291c6d1a3e73ca",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/evidence.json",
+      "sha": "1484b40583b9db3babd7c23686f0cb679aa7ba29",
+      "expected": "1484b40583b9db3babd7c23686f0cb679aa7ba29",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/latest-74bb/all-native-verification.json",
+      "sha": "7fae4ad093ca444ce33bff95623affbf32d3b776",
+      "expected": "7fae4ad093ca444ce33bff95623affbf32d3b776",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/raw-results.tar.gz",
+      "sha": "5ad4de37b72bd0f0d3812d273166cd2af8e15ea8",
+      "expected": "5ad4de37b72bd0f0d3812d273166cd2af8e15ea8",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/verify.py",
+      "sha": "70df1285ab49227840e9c0f18cbf8541dc71cebe",
+      "expected": "70df1285ab49227840e9c0f18cbf8541dc71cebe",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow/project.json",
+      "sha": "b711057b32f639b5982eb8ac69648b1c0147219c",
+      "expected": "b711057b32f639b5982eb8ac69648b1c0147219c",
+      "verified": true
+    },
+    {
+      "path": "tests/tribal_age_test.gd",
+      "sha": "3fea082d44f66e39b1b6871f0903e5c6c4a52ad9",
+      "expected": "3fea082d44f66e39b1b6871f0903e5c6c4a52ad9",
+      "verified": true
     }
   ],
   "tree_checks": [
@@ -1405,6 +1724,81 @@
       "path": "",
       "sha": "75bbcb92da9a51c8a885066a18b691871f268245",
       "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown/loadtoken-minimal",
+      "sha": "197562f10a6cd90deea9bdba4a1c82e45dc63be2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full/artifacts",
+      "sha": "a65da57519de5f7f4b81d7db954ee3d9da195386",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb/latest-74bb",
+      "sha": "607489098722775611337202e78b27df3352811b",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/surface-teardown",
+      "sha": "d50b51cc51514efcb7cc6508e2bc0df397957761",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/tribal-tab-recheck",
+      "sha": "84e3fc6f09f15c55e4e33ee641215bc0bc508ad2",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb-full",
+      "sha": "50fee17f7ec3b12a478b2f2865cabbc59675e557",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001/verified-74bb",
+      "sha": "5662beb4adbb511db12d38186c282e5b10d9dbb6",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/integration-20261001",
+      "sha": "0c72824a56c66a5a2a89c828f3d37a74ffab4e8a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence",
+      "sha": "fefd73d9f9117cd68c370f8c8b65d74ab6ce66ed",
+      "verified": true
+    },
+    {
+      "path": "tools/workflow",
+      "sha": "53b4c3f054ac1254352a306399984e51e30a913e",
+      "verified": true
+    },
+    {
+      "path": "docs",
+      "sha": "f0c69f14650d422562d3868c59dab79a4a0418a1",
+      "verified": true
+    },
+    {
+      "path": "tools",
+      "sha": "bf2e1aa7e7b67bbca4255780cd40e90c7bbf1431",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "667d4c8963137da3b8c2703f33868e120080b850",
+      "verified": true
+    },
+    {
+      "path": "tests",
+      "sha": "4f028fbe51b839f3365ab28a510a86f72314059d",
+      "verified": true
+    },
+    {
+      "path": "",
+      "sha": "25221d0be46f5e6b9f4ddaf3512e2a55814d9a28",
+      "verified": true
     }
   ],
   "readback": {
@@ -1416,8 +1810,8 @@
     "Original delivery commits remain parents unchanged; local-only bookkeeping merge commits were consolidated into the explicit manual integration commit.",
     "No source/main refs changed, no force update and no PR/status changes performed."
   ],
-  "current_remote_commit": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
-  "current_tree": "a1a53c20730b1000e703ff1add4dd854fcdb069a",
+  "current_remote_commit": "c5c22efde7d220169190710037da4f4f12666f02",
+  "current_tree": "667d4c8963137da3b8c2703f33868e120080b850",
   "followups": [
     {
       "local_source": "b9efa13e61a414e75313e08cb7c0c157e2bd0448",
@@ -1511,10 +1905,32 @@
       "commit_readback": true,
       "remote_compare_exact_local_file_set": true,
       "files": 6
+    },
+    {
+      "local_source": "ca9358fdad938528c759f3a0c3cff42af1120b83",
+      "remote_commit": "c5c22efde7d220169190710037da4f4f12666f02",
+      "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+      "parent": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+      "previous_branch": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+      "one_fast_forward": true,
+      "force": false,
+      "commit_and_branch_readback": true,
+      "remote_compare_exact_local_file_set": true,
+      "tracking_only_files": 52,
+      "original_23_ancestors_verified": true,
+      "pr": 245,
+      "pr_head_readback": "c5c22efde7d220169190710037da4f4f12666f02"
+    },
+    {
+      "local_source_commit": "3c5990da2af6e05b46e6dc9914a1c06e3214ff13",
+      "remote_source_commit": "d80bf929a52ec0eab33b0eb58824a9627ed92afb",
+      "source_tree": "25221d0be46f5e6b9f4ddaf3512e2a55814d9a28",
+      "remote_parent": "c5c22efde7d220169190710037da4f4f12666f02",
+      "scope": "Only tribal age fixture geometry; original negative c5 and strict Linux PCK recheck retained",
+      "readback": "Public fetch verified exact tree and c5 parent; local Git rehydrated to this immutable source commit after prior scratch shared Git directory expired",
+      "ref_mutation": false
     }
   ],
-  "source_anchor": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
-  "source_anchor_tree": "45b93c7a7eb3ef65785afc6f0dac86472d9f8529",
-  "pending_source_commit": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
-  "pending_source_tree": "75bbcb92da9a51c8a885066a18b691871f268245"
+  "source_anchor": "d80bf929a52ec0eab33b0eb58824a9627ed92afb",
+  "source_anchor_tree": "25221d0be46f5e6b9f4ddaf3512e2a55814d9a28"
 }

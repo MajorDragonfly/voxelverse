@@ -3,10 +3,10 @@
   "original_source_anchor": "c14a407859b7e655f8229c894111f35b0e451a44",
   "first_full_head": "4513216a61cbab8d660b8a8405eb4a9c879b8ff3",
   "first_full_merge": "913671c4e5e724df28101c14a111b735dc7708a4",
-  "source_anchor": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
-  "source_tree": "75bbcb92da9a51c8a885066a18b691871f268245",
-  "local_equivalent": "e71a29de0cf072b3bb21d6b585bf6a2487570fa8",
-  "source_parent": "74bbcbcf9854cd35eb0c816f95a65ad17d2e2dfe",
+  "source_anchor": "d80bf929a52ec0eab33b0eb58824a9627ed92afb",
+  "source_tree": "25221d0be46f5e6b9f4ddaf3512e2a55814d9a28",
+  "local_equivalent": "d80bf929a52ec0eab33b0eb58824a9627ed92afb",
+  "source_parent": "c5c22efde7d220169190710037da4f4f12666f02",
   "source_fix_files": [
     "tests/building_editor_input_test.gd",
     "tests/tribal_guidance_world_test.gd",
@@ -14,7 +14,8 @@
     "tests/egg_species_contract_test.gd",
     "tools/int30_scenery_collision_probe.gd",
     "tools/int30_scenery_collision_check.py",
-    "tests/tooling/collision_capture_diagnostics_test.py"
+    "tests/tooling/collision_capture_diagnostics_test.py",
+    "tests/tribal_age_test.gd"
   ],
   "unchanged_original_heads": 23,
   "first_full_snapshot": {
@@ -25,7 +26,7 @@
     "dashboard": "passed",
     "new_native_modules": "8/8 passed,138 original PNGs"
   },
-  "final_full_acceptance": "pending actual exact-tree checks after publication of the next diagnostic revision",
+  "final_full_acceptance": "pending own exact-tree FULL checks after age-fixture fix publication",
   "previous_corrected_source": "4e562c2344fcf8e770df1d2f07a4167d804d89d6",
   "previous_corrected_tree": "45b93c7a7eb3ef65785afc6f0dac86472d9f8529",
   "latest_focused_checks": {
@@ -38,12 +39,22 @@
       "compile": "passed",
       "physical_subset_seconds": 5.044,
       "lifecycle": "complete/incomplete final evidence exits verified",
-      "native_acceptance": "pending; original and single unchanged repeat failed"
+      "native_acceptance": "c5 GL passed4families16physicalcases;Forward still incomplete124 with phase/publication/readback evidence"
     },
     "tooling": {
       "total": 222,
       "passed": 215,
       "intended_skips": 7
+    },
+    "tribal_age_package": {
+      "passed": true,
+      "seconds": 85.158,
+      "timeout_seconds": 120,
+      "platform": "Linux Desktop PCK, external editor QA",
+      "source_sha256": "1c59cbe5b06a7a8e98c65cb01668b73ff17dc04b94d7f541dfe03e21613ebfff",
+      "source_stable": true,
+      "qa_byte_equal": true,
+      "windows_acceptance": false
     }
   },
   "completed_full_snapshot_74bb": {
@@ -58,5 +69,23 @@
     "mandatory_gates": "all four passed",
     "native_modules": "11/11 flows,202 verified PNGs",
     "separate_blockers": "Forward collision capture twice timed out124/missing oak; baseline GL surface comparison RefCounted leak; target-PC/visual gates remain open"
+  },
+  "previous_diagnostic_source": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+  "previous_diagnostic_tree": "75bbcb92da9a51c8a885066a18b691871f268245",
+  "completed_full_snapshot_c5": {
+    "head": "c5c22efde7d220169190710037da4f4f12666f02",
+    "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+    "merge": "33dcc46fa0b2ae7ab6e8dbe4fa1c9a10c2f43cd5",
+    "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+    "source_tests": "266/266 actual disjoint cases passed",
+    "runtime": "27/27 passed",
+    "environment": "8/8 and gate passed",
+    "dashboard": "gate passed",
+    "native": "11/11 workflows,202 PNG identities",
+    "linux": "41/41 checks,3 release probes and accepted package",
+    "windows": "failed packaged_tribal_age_test;25/26 checks,0 probes,no accepted package",
+    "log_hashes_verified": 369,
+    "evidence_verified": true,
+    "full_technical_acceptance": false
   }
 }

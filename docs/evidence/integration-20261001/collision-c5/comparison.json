@@ -1,0 +1,2265 @@
+{
+  "gl": {
+    "head": "c5c22efde7d220169190710037da4f4f12666f02",
+    "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+    "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+    "log_sha256": "81dc07f4a465475f5743f70c4500ce71c94c472f88050874338845b5b520d06b",
+    "passed": true,
+    "exit_code": 0,
+    "status": "passed",
+    "incomplete": false,
+    "provenance_status": "stable",
+    "reusable": true,
+    "wrapper_world_evidence": {
+      "final": {
+        "path": "int30-collision-world.json",
+        "present": true,
+        "valid": true,
+        "complete": true,
+        "passed": true,
+        "sha256": "1ea5d100e0f495c85eba3d4d149c7bf546fbcc6161aa7bd945da9839b36c3e43",
+        "status": "passed",
+        "phase": "finished",
+        "failure_count": 0
+      },
+      "checkpoint": {
+        "path": "int30-collision-progress.json",
+        "present": true,
+        "valid": true,
+        "complete": false,
+        "passed": false,
+        "sha256": "43ad2a0ee560adae731c2e1e3c5640252ccb34e15a1124c99c1f1a9d9b9fcecc",
+        "status": "incomplete",
+        "phase": "finished",
+        "failure_count": 0
+      },
+      "complete": true,
+      "successful_final": true
+    },
+    "evidence_complete": true,
+    "evidence_passed": true,
+    "failures": [],
+    "target_count": 16,
+    "target_cases": [
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131071:15728",
+        "contacts": 19,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.0247774572016426,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.0247774572016426,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.0247774572016426,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15728",
+        "contacts": 21,
+        "ray": true,
+        "scale": 0.8068422079086304,
+        "slope_degrees": 3.2588856831980735,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.8068422079086304,
+        "slope_degrees": 3.2588856831980735,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.8068422079086304,
+        "slope_degrees": 3.2588856831980735,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15729",
+        "contacts": 18,
+        "ray": true,
+        "scale": 1.1800895929336548,
+        "slope_degrees": 2.6394527179330525,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.1800895929336548,
+        "slope_degrees": 2.6394527179330525,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.1800895929336548,
+        "slope_degrees": 2.6394527179330525,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "ancient_oak_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15727",
+        "contacts": 18,
+        "ray": true,
+        "scale": 0.8308284878730774,
+        "slope_degrees": 3.2137579554511855,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "ancient_oak_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15727",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.8308284878730774,
+        "slope_degrees": 3.2137579554511855,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "ancient_oak_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15727",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.8308284878730774,
+        "slope_degrees": 3.2137579554511855,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.0247774572016426,
+        "stage": "returned",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.8068422079086304,
+        "slope_degrees": 3.2588856831980735,
+        "stage": "returned",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.1800895929336548,
+        "slope_degrees": 2.6394527179330525,
+        "stage": "returned",
+        "variant": 0
+      },
+      {
+        "asset": "ancient_oak_v2",
+        "cell": "body_09ae33bdbaf119ed3516caee4884d8ff:land1:18:0:131072:15727",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.8308284878730774,
+        "slope_degrees": 3.2137579554511855,
+        "stage": "returned",
+        "variant": 0
+      }
+    ],
+    "videos": [
+      "ancient_oak_v2.mp4",
+      "tall_pine_v2.mp4",
+      "dense_bush_v2.mp4",
+      "layered_rock_v2.mp4"
+    ],
+    "publication_waits": [
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 49410.149,
+          "physics_frames": 481,
+          "process_frames": 9835,
+          "wall_ms": 55546.241
+        },
+        "milliseconds": 4730,
+        "stage": "near",
+        "start": {
+          "elapsed_ms": 44680.739,
+          "physics_frames": 197,
+          "process_frames": 9331,
+          "wall_ms": 50816.83
+        }
+      },
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 912,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 135795.339,
+          "physics_frames": 2587,
+          "process_frames": 15062,
+          "wall_ms": 141931.431
+        },
+        "milliseconds": 18112,
+        "stage": "far",
+        "start": {
+          "elapsed_ms": 117683.666,
+          "physics_frames": 1499,
+          "process_frames": 9976,
+          "wall_ms": 123819.757
+        }
+      },
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 141130.625,
+          "physics_frames": 2907,
+          "process_frames": 16192,
+          "wall_ms": 147266.717
+        },
+        "milliseconds": 5289,
+        "stage": "return",
+        "start": {
+          "elapsed_ms": 135841.157,
+          "physics_frames": 2587,
+          "process_frames": 15062,
+          "wall_ms": 141977.248
+        }
+      },
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 7,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_publish_units": 1,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 144484.455,
+          "physics_frames": 3104,
+          "process_frames": 16513,
+          "wall_ms": 150620.547
+        },
+        "milliseconds": 2917,
+        "stage": "final",
+        "start": {
+          "elapsed_ms": 141567.63,
+          "physics_frames": 2921,
+          "process_frames": 16197,
+          "wall_ms": 147703.722
+        }
+      }
+    ],
+    "capture_metrics": {
+      "force_draw_ms": {
+        "count": 120,
+        "sum_ms": 48442.789,
+        "median_ms": 331.6965,
+        "p95_ms": 404.66,
+        "max_ms": 7181.525
+      },
+      "readback_ms": {
+        "count": 120,
+        "sum_ms": 296.642,
+        "median_ms": 2.4284999999999997,
+        "p95_ms": 2.992,
+        "max_ms": 3.236
+      },
+      "png_ms": {
+        "count": 120,
+        "sum_ms": 9542.987,
+        "median_ms": 82.041,
+        "p95_ms": 104.023,
+        "max_ms": 105.655
+      },
+      "physics_wait_ms": {
+        "count": 120,
+        "sum_ms": 3357.532,
+        "median_ms": 12.9285,
+        "p95_ms": 82.942,
+        "max_ms": 123.172
+      },
+      "process_wait_ms": {
+        "count": 120,
+        "sum_ms": 5446.104,
+        "median_ms": 47.348,
+        "p95_ms": 53.166,
+        "max_ms": 56.192
+      }
+    },
+    "phases": [
+      {
+        "phase": "publication-near-start",
+        "time": {
+          "elapsed_ms": 44680.744,
+          "physics_frames": 197,
+          "process_frames": 9331,
+          "wall_ms": 50816.836
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 0.038,
+          "max_frame_work_ms": 5.463,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 4.467,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 3,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1050.97,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 6,
+          "dirty": 6,
+          "max_io_ms": 0.0,
+          "pages": 0,
+          "peak_cache": 6,
+          "pinned": 25,
+          "reads": 0,
+          "writes": 0
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.285962972790003,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.8800000000000001
+        },
+        "generation_cursor": 0,
+        "resident_generated_regions": 1,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-near-finished",
+        "time": {
+          "elapsed_ms": 49410.166,
+          "physics_frames": 481,
+          "process_frames": 9835,
+          "wall_ms": 55546.258
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 5.463,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1050.97,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 90,
+          "dirty": 90,
+          "max_io_ms": 0.0,
+          "pages": 0,
+          "peak_cache": 90,
+          "pinned": 25,
+          "reads": 0,
+          "writes": 0
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 25.321312460117042,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.880000000000024
+        },
+        "generation_cursor": 0,
+        "resident_generated_regions": 15,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "targets-near-start",
+        "time": {
+          "elapsed_ms": 49411.941,
+          "physics_frames": 481,
+          "process_frames": 9835,
+          "wall_ms": 55548.033
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 5.463,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1050.97,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 90,
+          "dirty": 90,
+          "max_io_ms": 0.0,
+          "pages": 0,
+          "peak_cache": 90,
+          "pinned": 25,
+          "reads": 0,
+          "writes": 0
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 25.321312460117042,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.880000000000024
+        },
+        "generation_cursor": 0,
+        "resident_generated_regions": 15,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "targets-near-ready",
+        "time": {
+          "elapsed_ms": 49414.568,
+          "physics_frames": 481,
+          "process_frames": 9835,
+          "wall_ms": 55550.66
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 5.463,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 356,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1050.97,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 90,
+          "dirty": 90,
+          "max_io_ms": 0.0,
+          "pages": 0,
+          "peak_cache": 90,
+          "pinned": 25,
+          "reads": 0,
+          "writes": 0
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 25.321312460117042,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.880000000000024
+        },
+        "generation_cursor": 0,
+        "resident_generated_regions": 15,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "move-far",
+        "time": {
+          "elapsed_ms": 117361.052,
+          "physics_frames": 1479,
+          "process_frames": 9968,
+          "wall_ms": 123497.144
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 5.463,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 15,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 357,
+          "discarded": 0,
+          "instances": 1125,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1050.97,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 89,
+          "max_io_ms": 2.255,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 8,
+          "writes": 380
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.742865449748933,
+          "mode": "cube_sphere_m1_v1",
+          "u": 5.417382114830835e-06,
+          "v": -0.8800088697065912
+        },
+        "generation_cursor": 25,
+        "resident_generated_regions": 35,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "retirement-start",
+        "time": {
+          "elapsed_ms": 117382.743,
+          "physics_frames": 1479,
+          "process_frames": 9968,
+          "wall_ms": 123518.835
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 2,
+          "generation": 1,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 5.463,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 357,
+          "discarded": 0,
+          "instances": 1125,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1050.97,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 89,
+          "max_io_ms": 2.255,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 8,
+          "writes": 380
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 34.74495569989085,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417697663e-13,
+          "v": -0.8801002688976306
+        },
+        "generation_cursor": 25,
+        "resident_generated_regions": 35,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "retirement-finished",
+        "time": {
+          "elapsed_ms": 117670.639,
+          "physics_frames": 1499,
+          "process_frames": 9976,
+          "wall_ms": 123806.731
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 5.463,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 357,
+          "discarded": 0,
+          "instances": 1125,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1050.97,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 1
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 89,
+          "max_io_ms": 2.255,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 8,
+          "writes": 398
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 34.74495569989085,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417697663e-13,
+          "v": -0.8801002688976306
+        },
+        "generation_cursor": 25,
+        "resident_generated_regions": 30,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-far-start",
+        "time": {
+          "elapsed_ms": 117683.672,
+          "physics_frames": 1499,
+          "process_frames": 9976,
+          "wall_ms": 123819.764
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 5.463,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 461,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 357,
+          "discarded": 0,
+          "instances": 1125,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1050.97,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 1
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 89,
+          "max_io_ms": 2.255,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 8,
+          "writes": 398
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 34.74495569989085,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417697663e-13,
+          "v": -0.8801002688976306
+        },
+        "generation_cursor": 25,
+        "resident_generated_regions": 30,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-far-finished",
+        "time": {
+          "elapsed_ms": 135795.355,
+          "physics_frames": 2587,
+          "process_frames": 15062,
+          "wall_ms": 141931.447
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 912,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 12,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1251,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 77,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 29,
+          "writes": 821
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 34.74495569989085,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417697663e-13,
+          "v": -0.8801002688976306
+        },
+        "generation_cursor": 16,
+        "resident_generated_regions": 28,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "move-return",
+        "time": {
+          "elapsed_ms": 135818.345,
+          "physics_frames": 2587,
+          "process_frames": 15062,
+          "wall_ms": 141954.437
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 912,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 12,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1251,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 77,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 29,
+          "writes": 821
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 34.74495569989085,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417697663e-13,
+          "v": -0.8801002688976306
+        },
+        "generation_cursor": 16,
+        "resident_generated_regions": 28,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-return-start",
+        "time": {
+          "elapsed_ms": 135841.162,
+          "physics_frames": 2587,
+          "process_frames": 15062,
+          "wall_ms": 141977.254
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 912,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 12,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1251,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 77,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 29,
+          "writes": 821
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.285965685732663,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.8800000000017767
+        },
+        "generation_cursor": 16,
+        "resident_generated_regions": 28,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-return-finished",
+        "time": {
+          "elapsed_ms": 141130.64,
+          "physics_frames": 2907,
+          "process_frames": 16192,
+          "wall_ms": 147266.732
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 56,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 72,
+          "writes": 950
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.285965685732663,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.8800000000017767
+        },
+        "generation_cursor": 12,
+        "resident_generated_regions": 50,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "targets-return-start",
+        "time": {
+          "elapsed_ms": 141142.566,
+          "physics_frames": 2907,
+          "process_frames": 16192,
+          "wall_ms": 147278.657
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 56,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 72,
+          "writes": 950
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.285965685732663,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.8800000000017767
+        },
+        "generation_cursor": 12,
+        "resident_generated_regions": 50,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "targets-return-ready",
+        "time": {
+          "elapsed_ms": 141155.48,
+          "physics_frames": 2907,
+          "process_frames": 16192,
+          "wall_ms": 147291.572
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 2,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 56,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 72,
+          "writes": 950
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.285965685732663,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.8800000000017767
+        },
+        "generation_cursor": 12,
+        "resident_generated_regions": 50,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-final-start",
+        "time": {
+          "elapsed_ms": 141567.636,
+          "physics_frames": 2921,
+          "process_frames": 16197,
+          "wall_ms": 147703.727
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 3,
+          "generation": 5,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 19,
+          "prepared": 0,
+          "publication_steps": 1268,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 1
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 59,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 82,
+          "writes": 986
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.742867935448885,
+          "mode": "cube_sphere_m1_v1",
+          "u": 5.417382413925595e-06,
+          "v": -0.8800088697071737
+        },
+        "generation_cursor": 13,
+        "resident_generated_regions": 55,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-final-finished",
+        "time": {
+          "elapsed_ms": 144484.471,
+          "physics_frames": 3104,
+          "process_frames": 16513,
+          "wall_ms": 150620.563
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 7,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 357,
+          "discarded": 0,
+          "instances": 1125,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 50,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 91,
+          "writes": 1013
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.742867935448885,
+          "mode": "cube_sphere_m1_v1",
+          "u": 5.417382413925595e-06,
+          "v": -0.8800088697071737
+        },
+        "generation_cursor": 24,
+        "resident_generated_regions": 46,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "physics-monitor-start",
+        "time": {
+          "elapsed_ms": 144498.185,
+          "physics_frames": 3104,
+          "process_frames": 16513,
+          "wall_ms": 150634.276
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 7,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 357,
+          "discarded": 0,
+          "instances": 1125,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 50,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 91,
+          "writes": 1013
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.742867935448885,
+          "mode": "cube_sphere_m1_v1",
+          "u": 5.417382413925595e-06,
+          "v": -0.8800088697071737
+        },
+        "generation_cursor": 24,
+        "resident_generated_regions": 46,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "physics-monitor-finished",
+        "time": {
+          "elapsed_ms": 147484.684,
+          "physics_frames": 3284,
+          "process_frames": 16892,
+          "wall_ms": 153620.776
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 4,
+          "generation": 7,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 2.643,
+          "max_frame_work_ms": 6.73,
+          "max_publish_ms": 1.509,
+          "max_publish_units": 1,
+          "max_worker_ms": 46.744,
+          "patches": 25,
+          "prepared": 0,
+          "publication_steps": 1353,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 357,
+          "discarded": 0,
+          "instances": 1125,
+          "last_publish_units": 0,
+          "max_publish_ms": 1.462,
+          "max_worker_ms": 1146.192,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 47,
+          "max_io_ms": 2.375,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 95,
+          "writes": 1022
+        },
+        "player_address": {
+          "body_id": "body_09ae33bdbaf119ed3516caee4884d8ff",
+          "face": 0,
+          "height": 26.742867935448885,
+          "mode": "cube_sphere_m1_v1",
+          "u": 5.417382413925595e-06,
+          "v": -0.8800088697071737
+        },
+        "generation_cursor": 11,
+        "resident_generated_regions": 43,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "shutdown-start",
+        "time": {
+          "elapsed_ms": 147825.256,
+          "physics_frames": 3284,
+          "process_frames": 16892,
+          "wall_ms": 153961.347
+        },
+        "flora": {},
+        "scenery": {},
+        "store": {},
+        "player_address": null,
+        "generation_cursor": null,
+        "resident_generated_regions": null,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "finished",
+        "time": {
+          "elapsed_ms": 147992.006,
+          "physics_frames": 3301,
+          "process_frames": 18091,
+          "wall_ms": 154128.097
+        },
+        "flora": {},
+        "scenery": {},
+        "store": {},
+        "player_address": null,
+        "generation_cursor": null,
+        "resident_generated_regions": null,
+        "checkpoint_write_ms_previous": null
+      }
+    ],
+    "last_checkpoint": {
+      "context": {},
+      "details": {},
+      "event": "phase",
+      "phase": "finished",
+      "time": {
+        "elapsed_ms": 147992.006,
+        "physics_frames": 3301,
+        "process_frames": 18091,
+        "wall_ms": 154128.097
+      }
+    },
+    "last_checkpoint_write_ms": 12.185,
+    "physics_monitor_ms": {
+      "count": 180,
+      "max": 8.53,
+      "median": 7.496,
+      "p95": 8.53,
+      "p99": 8.53
+    },
+    "dropped_phase_records": 0
+  },
+  "forward": {
+    "head": "c5c22efde7d220169190710037da4f4f12666f02",
+    "tree": "667d4c8963137da3b8c2703f33868e120080b850",
+    "source_sha256": "93f1ff89616f442b042f343dee55b42b0dd5293f980dae89585e0197831b0bec",
+    "log_sha256": "18008403e06c1a7b767ee1d3729efc5114cac94680500dcc7bd804e21757b6a2",
+    "passed": false,
+    "exit_code": 124,
+    "status": "failed_incomplete",
+    "incomplete": true,
+    "provenance_status": "stable",
+    "reusable": false,
+    "wrapper_world_evidence": {
+      "final": {
+        "path": "int30-collision-world.json",
+        "present": false,
+        "valid": false,
+        "complete": false,
+        "passed": false
+      },
+      "checkpoint": {
+        "path": "int30-collision-progress.json",
+        "present": true,
+        "valid": true,
+        "complete": false,
+        "passed": false,
+        "sha256": "dc662e64aa2335fdd18f1f11df439a9295bcbebb271cdc491ac6f04cda3066c5",
+        "status": "failed_incomplete",
+        "phase": "publication-far-start",
+        "failure_count": 2
+      },
+      "complete": false,
+      "successful_final": false
+    },
+    "evidence_complete": false,
+    "evidence_passed": false,
+    "failures": [
+      "Normal flora publication exceeded 90 s: { \"workers\": 0, \"prepared\": 0, \"staged_patches\": 1, \"patches\": 4, \"last_publish_units\": 1, \"max_publish_units\": 1, \"publication_steps\": 54, \"generation\": 0, \"discarded_results\": 0, \"max_asset_prepare_ms\": 819.249, \"closed\": false }",
+      "Canonical seed did not publish all four solid families"
+    ],
+    "target_count": 9,
+    "target_cases": [
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15728",
+        "contacts": 19,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.0247774572016426,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.0247774572016426,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "dense_bush_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.19009530544281,
+        "slope_degrees": 2.0247774572016426,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15728",
+        "contacts": 21,
+        "ray": true,
+        "scale": 0.8068422079086304,
+        "slope_degrees": 3.2588856831980735,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.8068422079086304,
+        "slope_degrees": 3.2588856831980735,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "layered_rock_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15728",
+        "contacts": 1,
+        "ray": true,
+        "scale": 0.8068422079086304,
+        "slope_degrees": 3.2588856831980735,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15729",
+        "contacts": 18,
+        "ray": true,
+        "scale": 1.1800895929336548,
+        "slope_degrees": 2.6394527179330525,
+        "stage": "near",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.1800895929336548,
+        "slope_degrees": 2.6394527179330525,
+        "stage": "rebase",
+        "variant": 0
+      },
+      {
+        "asset": "tall_pine_v2",
+        "cell": "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15729",
+        "contacts": 1,
+        "ray": true,
+        "scale": 1.1800895929336548,
+        "slope_degrees": 2.6394527179330525,
+        "stage": "rebase",
+        "variant": 0
+      }
+    ],
+    "videos": [
+      "tall_pine_v2.mp4",
+      "dense_bush_v2.mp4",
+      "layered_rock_v2.mp4"
+    ],
+    "publication_waits": [
+      {
+        "diagnostics": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 819.249,
+          "max_publish_units": 1,
+          "patches": 4,
+          "prepared": 0,
+          "publication_steps": 54,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "end": {
+          "elapsed_ms": 156274.13,
+          "physics_frames": 1004,
+          "process_frames": 14286,
+          "wall_ms": 165867.345
+        },
+        "milliseconds": 90957,
+        "stage": "near",
+        "start": {
+          "elapsed_ms": 65316.923,
+          "physics_frames": 372,
+          "process_frames": 14207,
+          "wall_ms": 74910.138
+        },
+        "timed_out": true
+      }
+    ],
+    "capture_metrics": {
+      "force_draw_ms": {
+        "count": 90,
+        "sum_ms": 52927.915,
+        "median_ms": 616.5754999999999,
+        "p95_ms": 652.927,
+        "max_ms": 891.892
+      },
+      "readback_ms": {
+        "count": 90,
+        "sum_ms": 45742.883,
+        "median_ms": 532.8,
+        "p95_ms": 574.074,
+        "max_ms": 656.486
+      },
+      "png_ms": {
+        "count": 90,
+        "sum_ms": 5465.575,
+        "median_ms": 50.564,
+        "p95_ms": 84.653,
+        "max_ms": 85.219
+      },
+      "physics_wait_ms": {
+        "count": 90,
+        "sum_ms": 4461.135,
+        "median_ms": 17.9255,
+        "p95_ms": 78.449,
+        "max_ms": 1123.591
+      },
+      "process_wait_ms": {
+        "count": 90,
+        "sum_ms": 4938.701,
+        "median_ms": 47.0775,
+        "p95_ms": 61.127,
+        "max_ms": 694.637
+      }
+    },
+    "phases": [
+      {
+        "phase": "publication-near-start",
+        "time": {
+          "elapsed_ms": 65316.935,
+          "physics_frames": 372,
+          "process_frames": 14207,
+          "wall_ms": 74910.15
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 0.054,
+          "max_frame_work_ms": 6.582,
+          "max_publish_ms": 2.005,
+          "max_publish_units": 1,
+          "max_worker_ms": 3.859,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 1,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 5.464,
+          "max_worker_ms": 888.535,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 5,
+          "dirty": 5,
+          "max_io_ms": 0.0,
+          "pages": 0,
+          "peak_cache": 5,
+          "pinned": 25,
+          "reads": 0,
+          "writes": 0
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 26.1606129379943,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.8799999999999969
+        },
+        "generation_cursor": 0,
+        "resident_generated_regions": 1,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-near-timed-out",
+        "time": {
+          "elapsed_ms": 156277.739,
+          "physics_frames": 1004,
+          "process_frames": 14286,
+          "wall_ms": 165870.954
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 819.249,
+          "max_frame_work_ms": 1083.488,
+          "max_publish_ms": 1079.572,
+          "max_publish_units": 1,
+          "max_worker_ms": 50.966,
+          "patches": 4,
+          "prepared": 0,
+          "publication_steps": 54,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 5.464,
+          "max_worker_ms": 888.535,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 96,
+          "max_io_ms": 0.694,
+          "pages": 80,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 0,
+          "writes": 129
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 25.321312460117042,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.880000000000024
+        },
+        "generation_cursor": 4,
+        "resident_generated_regions": 25,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "targets-near-start",
+        "time": {
+          "elapsed_ms": 156280.737,
+          "physics_frames": 1004,
+          "process_frames": 14286,
+          "wall_ms": 165873.951
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 819.249,
+          "max_frame_work_ms": 1083.488,
+          "max_publish_ms": 1079.572,
+          "max_publish_units": 1,
+          "max_worker_ms": 50.966,
+          "patches": 4,
+          "prepared": 0,
+          "publication_steps": 54,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 5.464,
+          "max_worker_ms": 888.535,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 96,
+          "max_io_ms": 0.694,
+          "pages": 80,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 0,
+          "writes": 129
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 25.321312460117042,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.880000000000024
+        },
+        "generation_cursor": 4,
+        "resident_generated_regions": 25,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "targets-near-ready",
+        "time": {
+          "elapsed_ms": 157343.8,
+          "physics_frames": 1004,
+          "process_frames": 14286,
+          "wall_ms": 166937.014
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 819.249,
+          "max_frame_work_ms": 1083.488,
+          "max_publish_ms": 1079.572,
+          "max_publish_units": 1,
+          "max_worker_ms": 50.966,
+          "patches": 4,
+          "prepared": 0,
+          "publication_steps": 54,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 5.464,
+          "max_worker_ms": 888.535,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 96,
+          "max_io_ms": 0.694,
+          "pages": 80,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 0,
+          "writes": 129
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 25.321312460117042,
+          "mode": "cube_sphere_m1_v1",
+          "u": 0.0,
+          "v": -0.880000000000024
+        },
+        "generation_cursor": 4,
+        "resident_generated_regions": 25,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "move-far",
+        "time": {
+          "elapsed_ms": 275004.765,
+          "physics_frames": 1797,
+          "process_frames": 14386,
+          "wall_ms": 284597.98
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 0,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 819.249,
+          "max_frame_work_ms": 1083.488,
+          "max_publish_ms": 1079.572,
+          "max_publish_units": 1,
+          "max_worker_ms": 50.966,
+          "patches": 8,
+          "prepared": 0,
+          "publication_steps": 144,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 5.464,
+          "max_worker_ms": 888.535,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 92,
+          "max_io_ms": 0.694,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 4,
+          "writes": 309
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 26.250018212012947,
+          "mode": "cube_sphere_m1_v1",
+          "u": 2.7787281086527952e-06,
+          "v": -0.8799947133990987
+        },
+        "generation_cursor": 14,
+        "resident_generated_regions": 35,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "retirement-start",
+        "time": {
+          "elapsed_ms": 275025.778,
+          "physics_frames": 1797,
+          "process_frames": 14386,
+          "wall_ms": 284618.993
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 819.249,
+          "max_frame_work_ms": 1083.488,
+          "max_publish_ms": 1079.572,
+          "max_publish_units": 1,
+          "max_worker_ms": 50.966,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 144,
+          "staged_patches": 0,
+          "workers": 0
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 5.464,
+          "max_worker_ms": 888.535,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 92,
+          "max_io_ms": 0.694,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 4,
+          "writes": 309
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 34.74494782462716,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417708597e-13,
+          "v": -0.8801002688995611
+        },
+        "generation_cursor": 14,
+        "resident_generated_regions": 35,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "retirement-finished",
+        "time": {
+          "elapsed_ms": 276687.349,
+          "physics_frames": 1828,
+          "process_frames": 14389,
+          "wall_ms": 286280.563
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 819.249,
+          "max_frame_work_ms": 1083.488,
+          "max_publish_ms": 1079.572,
+          "max_publish_units": 1,
+          "max_worker_ms": 50.966,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 144,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 5.464,
+          "max_worker_ms": 888.535,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 1
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 92,
+          "max_io_ms": 3.39,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 4,
+          "writes": 327
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 34.74494782462716,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417708597e-13,
+          "v": -0.8801002688995611
+        },
+        "generation_cursor": 14,
+        "resident_generated_regions": 31,
+        "checkpoint_write_ms_previous": null
+      },
+      {
+        "phase": "publication-far-start",
+        "time": {
+          "elapsed_ms": 276701.56,
+          "physics_frames": 1828,
+          "process_frames": 14389,
+          "wall_ms": 286294.775
+        },
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 0,
+          "max_asset_prepare_ms": 819.249,
+          "max_frame_work_ms": 1083.488,
+          "max_publish_ms": 1079.572,
+          "max_publish_units": 1,
+          "max_worker_ms": 50.966,
+          "patches": 0,
+          "prepared": 0,
+          "publication_steps": 144,
+          "staged_patches": 0,
+          "workers": 1
+        },
+        "scenery": {
+          "batches": 8,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1135,
+          "last_publish_units": 0,
+          "max_publish_ms": 5.464,
+          "max_worker_ms": 888.535,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 1
+        },
+        "store": {
+          "cache": 96,
+          "dirty": 92,
+          "max_io_ms": 3.39,
+          "pages": 128,
+          "peak_cache": 96,
+          "pinned": 25,
+          "reads": 4,
+          "writes": 327
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 34.74494782462716,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417708597e-13,
+          "v": -0.8801002688995611
+        },
+        "generation_cursor": 14,
+        "resident_generated_regions": 31,
+        "checkpoint_write_ms_previous": null
+      }
+    ],
+    "last_checkpoint": {
+      "context": {
+        "flora": {
+          "closed": false,
+          "discarded_results": 1,
+          "generation": 0,
+          "last_publish_units": 1,
+          "max_asset_prepare_ms": 819.249,
+          "max_frame_work_ms": 1083.488,
+          "max_publish_ms": 1079.572,
+          "max_publish_units": 1,
+          "max_worker_ms": 50.966,
+          "patches": 7,
+          "prepared": 0,
+          "publication_steps": 273,
+          "staged_patches": 1,
+          "workers": 0
+        },
+        "player_address": {
+          "body_id": "body_dbd1036c082eb893319c4bdc332e253b",
+          "face": 0,
+          "height": 34.74494782462716,
+          "mode": "cube_sphere_m1_v1",
+          "u": 4.985141417708597e-13,
+          "v": -0.8801002688995611
+        },
+        "population": {
+          "animals": 0,
+          "generation_cursor": 21,
+          "last_spawn_attempts": 2,
+          "max_frame_work_ms": 808.299,
+          "max_spawn_stage_ms": {
+            "actor_ready": 801.74,
+            "configure": 0.534,
+            "position": 0.495,
+            "post_ready": 4.509
+          },
+          "max_tick_stage_ms": {
+            "candidates": 2.762,
+            "generation": 123.919,
+            "nests": 32.775,
+            "pin_habitats": 0.799,
+            "prioritize": 1.053,
+            "retire": 3.278,
+            "spawn": 805.376
+          },
+          "nests": 0,
+          "plants": 0,
+          "resident_generated_regions": 28,
+          "spawn_after_generation": false,
+          "store": {
+            "cache": 96,
+            "dirty": 96,
+            "max_io_ms": 3.715,
+            "pages": 128,
+            "peak_cache": 96,
+            "pinned": 25,
+            "reads": 5,
+            "writes": 705
+          }
+        },
+        "published_cell_ids": [
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15715",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15715",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15714",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15714",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15716",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15716",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131073:15715"
+        ],
+        "scenery": {
+          "batches": 12,
+          "cells": 354,
+          "discarded": 0,
+          "instances": 1251,
+          "last_publish_units": 0,
+          "max_publish_ms": 265.691,
+          "max_worker_ms": 1299.875,
+          "ready": true,
+          "staged_sets": 0,
+          "workers": 0
+        },
+        "wanted_cell_ids": [
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15715",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15715",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15714",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15714",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15716",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15716",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131073:15715",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131070:15715",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15713",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15713",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131072:15717",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131071:15717",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131073:15714",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131070:15714",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131073:15716",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131070:15716",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131073:15713",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131070:15713",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131073:15717",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131070:15717",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131074:15715",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131074:15714",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131074:15716",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131074:15713",
+          "body_dbd1036c082eb893319c4bdc332e253b:land1:18:0:131074:15717"
+        ]
+      },
+      "details": {
+        "stage": "far",
+        "wait_ms": 72905
+      },
+      "event": "publication-progress",
+      "phase": "publication-far-start",
+      "time": {
+        "elapsed_ms": 349606.181,
+        "physics_frames": 3323,
+        "process_frames": 14577,
+        "wall_ms": 359199.396
+      }
+    },
+    "last_checkpoint_write_ms": 9.851,
+    "physics_monitor_ms": null,
+    "dropped_phase_records": 0
+  }
+}

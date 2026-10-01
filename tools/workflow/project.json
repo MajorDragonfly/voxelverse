@@ -12,7 +12,7 @@
   },
   "candidate": {
     "branch": "agent/integration-int30-20261001",
-    "sha": "1ce1313e03d3aabaf9a76610d6e7a57e85db3038",
+    "sha": "d80bf929a52ec0eab33b0eb58824a9627ed92afb",
     "pr": 245,
     "evidence": "https://github.com/MajorDragonfly/voxelverse/pull/245"
   },
@@ -1335,8 +1335,8 @@
     }
   ],
   "priorities": [
-    "Neue gemeinsame Prüfrevision vollständig prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete. Den bisherigen exakt belegten 74bb-Stand separat erhalten.",
-    "Forward+-Kollisionsaufnahme mit neuer enger Phasen-/Publikations-/Drawdiagnose auswerten; fehlende Eiche und zweimaliger 360-s-Abbruch bleiben offen. Danach nur belegte Ursache korrigieren, Grenzen erhalten. Baseline-GL-Leak getrennt am bestehenden Surface-Messpfad zuordnen.",
+    "Korrigierten Stammes-Paket-Klickhelfer vollständig auf eigenem exaktem Tree prüfen: 266 Quelltests, 27 Runtime-Fälle, beide Renderer und echte Windows/Linux-Pakete. Originale 74bb/c5 getrennt erhalten.",
+    "Forward+-Engpass aus tatsächlicher c5-Phasendiagnose ursächlich zuordnen: Materialduplikation, kalte Asset-Vorbereitung, Publikation/Final-Attach und Texturupdate getrennt messen. Grenzen und Cachepfade erhalten; historischen GL-Leak separat erhalten.",
     "Serielle Nest-/Reload-/D1.2-Gegenprobe besteht; gemessene p95/p99-Verschlechterung und dichte Scannerkosten weiterhin ursächlich abgrenzen und gezielt beheben.",
     "Den eindeutig bezeichneten neuen Windows-Build am Ziel-PC prüfen: bewegte Treppe/Scanner, kombinierte Dorfbedienung, Material/Wetter/Wasser und zehnminütige 1080p-Route.",
     "Chat 11 besitzt weiterhin die noch nicht gelieferte Weltkarte; kleine Fenster, lange Ortsdetails, Trefferfläche und Kugelnaht nach belegter Analyse korrigieren.",
@@ -1344,8 +1344,8 @@
     "Nach zulässigem main-Merge unveränderte Quell-PR-Köpfe und vollständige Enthaltenheit nachweisen, dann redundante PRs bereinigen; Fachbranches erhalten."
   ],
   "blockers": [
-    "Bestätigte Eingabe- und Kapazitätsfixtures korrigiert. Auf exakt 74bb bestehen alle 266 Quelltests, Runtime 27/27, beide vollständigen Desktop-Pakete, alle acht Environment-Captures und 11 native Abläufe mit 202 Bildern; alle vier Pflichtgates grün. Die neue eng begrenzte Prüfrevision benötigt eigene unveränderte FULL-Gates.",
-    "Separate Forward+-Kollisionsaufnahme scheitert zweimal auf exakt 74bb: Eiche fehlt und 360-s-Prozessguard greift. GL besteht alle vier Familien/16 Kontrollen. Neue Diagnose erhält unvollständige Phasen-/Zählernachweise; Ursache und native Forward+-Abnahme bleiben offen.",
+    "c5: 266/266 Quelltests, Runtime 27, Environment 8, Dashboard, elf native Abläufe/202 Bilder und Linux 41+3 Probes bestanden. Windows-Tabwahl im age-Fixture gescheitert: 25/26, kein Paket. Neuer enger Klickfix besteht tatsächliche Linux-PCK-Gegenprobe in 85,158 s; eigener vollständiger Prüfstand und Windowsbeleg erforderlich.",
+    "Forward+-Kollisionsaufnahme auf c5 erneut unvollständig mit Exit 124: Eichenzelle wanted/unpublished, Near 4/25 nach 90,957 s, Far 7/25 am Gesamtguard. GL mit vier Familien/16 physischen Fällen grün. Getrennte Messung des verantwortlichen Pfads vorbereitet; kein pauschaler IO-/FPS-Befund.",
     "Surface-Vergleich GL scheitert nach acht erfolgreichen Baseline-Bildern an einem einzelnen RefCounted-Leak im alten main 0e-Referenzlauf; Kandidat nicht gestartet. Headless nicht reproduziert, konkrete native Instanz noch nicht zugeordnet. Strikter Leakfilter und gleicher Messscript-Digest bleiben erforderlich.",
     "Population #226: frühere Reload-/D1.2-Fehler bestehen in der seriellen Integrationsgegenprobe nicht; Ursache unter Last weiter offen. Gemessener Rückweg p95 195,2→548,0 ms und p99 322,1→730,0 ms bleiben ohne Leistungskorrektur.",
     "Scanner #229: kalte Abfrage bis 188,6 ms und dichte Zwölf-Tier-Abfrage p95 etwa 40 ms; echte Kampagne und Ziel-PC-Abnahme offen.",
@@ -1355,13 +1355,13 @@
     "PR #9, ARCH-24-Körperteile, unbekannte ARCH-13-/ARCH-27-Folgen und Musikproduktion bleiben beim bisherigen Besitzer.",
     "Mittelalter-Technik, Gebäudeeditor und Galaxie/Schiffseditor sind separate geprüfte Werkzeuge/Prototypen; Mittelalter, Neuzeit und Weltraum bleiben ohne vollständige Spielschleife."
   ],
-  "campaign_summary": "23 veröffentlichte INT30-Fachlieferungen aus Chats 2–25 sind mit ihren originalen Git-Vorfahren gemeinsam integriert; Chat 11 ist noch nicht geliefert. Wasserzeit, Scanner, Stammeshilfe, Sprachwechsel, Designbibliothek/Galerie, Kreaturenauftritt und Gebäude-/Schiffsaustausch sind verbunden. Der tatsächliche 74bb-Prüfstand besteht alle 266 Quelltests, Runtime 27/27, beide vollständigen Desktop-Pakete, acht Environment-Captures und 11 native Abläufe / 202 Bilder; alle vier technischen Pflichtgates sind grün. Der Windows-Build ist ein eindeutig bezeichneter technischer Vergleich, ohne Sicht-/Ziel-PC-Freigabe. Die nächste eng begrenzte Revision korrigiert den belegten Tutorial-Tab-Fixture und macht den reproduzierbaren Forward+-Timeout auswertbar. Bestehende Abnahmen und Fachbesitzer bleiben erhalten.",
+  "campaign_summary": "23 ursprüngliche INT30-Fachlieferungen gemeinsam integriert und als Git-Vorfahren erhalten; Chat 11 noch ungeliefert. Wasserzeit, Scanner, Stammeshilfe/Sprachwechsel, Designbibliothek/Galerie, Kreaturenauftritt und Gebäude-/Schiffsaustausch verbunden. Vollständige 74bb-Referenz grün; auf c5 alle 266 Quelltests, Runtime 27, Environment 8, Dashboard, elf native Abläufe/202 Bilder und Linux 41+3 Probes grün, Windows-Tab-Fixture konkret rot. Enger Testfix besteht tatsächlichen Linux-PCK-Fall in 85,158 s; neue FULL-Gates erforderlich. Forward-Publikationsengpass lokalisiert; Fachbesitzer sowie Ziel-PC-/Sichtabnahmen erhalten.",
   "coordination_note": "Lars hat am 01.10.2026 die Zusammenführung beauftragt. Aktiver gemeinsamer Kandidat ist PR #245; #221 bleibt der eingefrorene RC1. Die unveränderliche Fachbasis und Besitzerzuordnung in #137 bleiben erhalten. Neue Arbeiten konzentrieren sich auf Integrationsfehler und nachgewiesene Engpässe; keine zweite Rundenliste. Main/Auto-Merge und Quell-PR-Schließungen bleiben bis erfüllter Abnahme gesperrt.",
   "target_hardware": "Ryzen 7 9800X3D, RTX 4070 Ti, 32 GB / 5200 MT/s",
   "target_goal": "Vorläufiges Ziel: 1920 × 1080 bei 60 FPS. Preset, Treiber und Messwerte gehören in die Abnahme; keine Mindesthardwarefestlegung.",
   "acceptance": {
     "status": "pending",
-    "summary": "INT30 / #245: 23 Fachlieferungen integriert. Alle vier Pflichtgates auf exakt 74bb bestanden: 266 Quelltests, 27 Runtime-Fälle, beide 41-Check-Pakete und acht Rendercaptures. Diese Originalnachweise getrennt von der nächsten Prüfrevision führen. Tab-Fixture vollständig geprüft; eng begrenzte Timeoutdiagnose geprüft, 222 Werkzeugtests (sieben bestehende Skips) bestanden. Neue exakte FULL-Gates sowie die offenen Grafik-/Performance-/Sicht-/Ziel-PC-Abnahmen erforderlich. Kein main-/Auto-Merge oder Quell-PR-Schließen."
+    "summary": "INT30/#245: 23 Lieferungen integriert. Vollständige technische 74bb-Referenz getrennt erhalten. c5-Originalnachweis: 266 Source/27 Runtime/acht Rendercaptures/elf native Abläufe grün, Linux 41+3 grün, Windows 25/26 rot ohne Paket; 369 Loghashes verifiziert. Neuer enger age-Klickfix besteht Linux-PCK-Fall in 85,158 s. Eigener FULL-/Windowsnachweis und Forward-Performance-/Sicht-/Ziel-PC-Abnahmen offen. Kein main-/Auto-Merge oder Quell-PR-Schließen."
   },
   "remaining_summary": "Mittelalter, Neuzeit und die vollständige Weltraumschleife bleiben Entwicklungsziele.",
   "integration_inputs": [
